@@ -10719,13 +10719,251 @@ var DuduQBubblePop = (() => {
   };
 
   function BubblePopUniversalApp() {
+    const embedded = Boolean(window.parent && window.parent !== window);
+    const [externalRuntime, setExternalRuntime] = React.useState(
+      embedded ? { status: "waiting" } : null
+    );
+
+    function prepareExternalRuntime(payload, context = {}, options = {}) {
+      if (!payload) return null;
+
+      const source =
+        payload.catalog ??
+        payload.questions ??
+        payload.items ??
+        payload.entries ??
+        payload;
+
+      const list = Array.isArray(source) ? source : [source];
+
+      const catalog = list
+        .filter(Boolean)
+        .map((entry, index) => {
+          const nestedPayload =
+            entry && typeof entry.payload === "object" && entry.payload !== null
+              ? entry.payload
+              : {};
+
+          const normalized = {
+            ...entry,
+            mode: entry.mode ?? nestedPayload.mode,
+            bubbles: entry.bubbles ?? nestedPayload.bubbles,
+            targetIds: entry.targetIds ?? nestedPayload.targetIds,
+            behavior: entry.behavior ?? nestedPayload.behavior
+          };
+
+          return {
+            ...normalized,
+            id: normalized.id || `external-bubble-${index + 1}`,
+            title: normalized.title || `Questão ${index + 1}`,
+            instruction:
+              normalized.instruction ||
+              normalized.prompt ||
+              "Estoure a bolha correta.",
+            learningObjective:
+              normalized.learningObjective ||
+              normalized.objective ||
+              "Reconhecer e selecionar a resposta correta.",
+            tags: Array.isArray(normalized.tags) ? normalized.tags : ["external"],
+            targetIds: Array.isArray(normalized.targetIds) ? normalized.targetIds : [],
+            bubbles: Array.isArray(normalized.bubbles) ? normalized.bubbles : []
+          };
+        })
+        .filter((entry) => entry.bubbles.length > 0 && entry.targetIds.length > 0);
+
+      if (!catalog.length) return null;
+
+      const contents = Object.fromEntries(
+        catalog.map((entry) => {
+          const definition = bubbleContent(entry);
+          return [definition.id, definition];
+        })
+      );
+
+      const externalId =
+        payload.lessonId ||
+        payload.id ||
+        `bubble-pop-external-${Date.now()}`;
+
+      const lesson = {
+        ...BUBBLE_POP_LESSON,
+        id: externalId,
+        version: String(payload.version || "1.0.0"),
+        title:
+          payload.lessonTitle ||
+          payload.title ||
+          options.title ||
+          BUBBLE_POP_LESSON.title,
+        description:
+          payload.description ||
+          "Conteúdo externo carregado pelo DuduQ Engine.",
+        grade:
+          context.year ??
+          payload.grade ??
+          payload.year ??
+          BUBBLE_POP_LESSON.grade,
+        unitId:
+          context.moduleId ||
+          payload.unitId ||
+          BUBBLE_POP_LESSON.unitId,
+        totalStages: catalog.length,
+        steps: catalog.map((entry, index) => ({
+          id: `step-${entry.id}`,
+          order: index + 1,
+          mechanicId: "bubble-pop",
+          mechanicVersion: "1.1.1",
+          masterMechanic: "bubble-pop",
+          contentId: entry.id,
+          contentVersion: "1.1.1",
+          enabled: true,
+          optional: false
+        })),
+        progressPolicy: {
+          ...BUBBLE_POP_LESSON.progressPolicy,
+          storage: "none",
+          resumeMode: "none",
+          resetCompletedLesson: true
+        }
+      };
+
+      return { status: "ready", lesson, contents };
+    }
+
+    React.useEffect(() => {
+      if (!embedded) return void 0;
+
+      function handleMessage(event) {
+        if (event.source !== window.parent) return;
+
+        const data = event.data;
+
+        if (
+          !data ||
+          typeof data !== "object" ||
+          data.type !== "DUDUQ_LOAD_CONTENT" ||
+          data.mechanic !== "bubble-pop"
+        ) {
+          return;
+        }
+
+        const runtime = prepareExternalRuntime(
+          data.payload,
+          data.context || {},
+          data.options || {}
+        );
+
+        if (!runtime) {
+          setExternalRuntime({
+            status: "error",
+            message:
+              "O conteúdo recebido não possui bubbles e targetIds válidos para Bubble Pop."
+          });
+
+          window.parent.postMessage(
+            {
+              type: "DUDUQ_MECHANIC_ERROR",
+              mechanic: "bubble-pop",
+              version: "1.0.0",
+              error: "INVALID_BUBBLE_POP_PAYLOAD"
+            },
+            "*"
+          );
+
+          return;
+        }
+
+        setExternalRuntime(runtime);
+      }
+
+      window.addEventListener("message", handleMessage);
+
+      window.parent.postMessage(
+        {
+          type: "DUDUQ_MECHANIC_READY",
+          mechanic: "bubble-pop",
+          version: "1.0.0"
+        },
+        "*"
+      );
+
+      return () => {
+        window.removeEventListener("message", handleMessage);
+      };
+    }, [embedded]);
+
+    const handleLessonComplete = React.useCallback(
+      (lesson) => {
+        if (!embedded) return;
+
+        window.parent.postMessage(
+          {
+            type: "DUDUQ_MECHANIC_COMPLETE",
+            mechanic: "bubble-pop",
+            version: "1.0.0",
+            result: {
+              completed: true,
+              lessonId: lesson?.id || null,
+              totalStages: lesson?.totalStages || 0
+            }
+          },
+          "*"
+        );
+      },
+      [embedded]
+    );
+
+    if (embedded && externalRuntime?.status === "waiting") {
+      return React.createElement(
+        "section",
+        {
+          style: {
+            minHeight: "100vh",
+            display: "grid",
+            placeItems: "center",
+            padding: "24px",
+            color: "#164274",
+            fontFamily: "Nunito, ui-rounded, system-ui, sans-serif",
+            fontWeight: 800,
+            textAlign: "center"
+          }
+        },
+        "Carregando atividade DuduQ…"
+      );
+    }
+
+    if (embedded && externalRuntime?.status === "error") {
+      return React.createElement(
+        "section",
+        {
+          role: "alert",
+          style: {
+            minHeight: "100vh",
+            display: "grid",
+            placeItems: "center",
+            padding: "24px",
+            color: "#8b1e1e",
+            fontFamily: "Nunito, ui-rounded, system-ui, sans-serif",
+            fontWeight: 800,
+            textAlign: "center"
+          }
+        },
+        externalRuntime.message
+      );
+    }
+
+    const activeLesson = externalRuntime?.lesson || BUBBLE_POP_LESSON;
+    const activeContents = externalRuntime?.contents || BUBBLE_POP_CONTENTS;
+    const renderKey = `${activeLesson.id}@${activeLesson.version}`;
+
     return React.createElement(DuduQLessonEnginePreviewHost, {
-      lesson: BUBBLE_POP_LESSON,
-      contents: BUBBLE_POP_CONTENTS,
+      key: renderKey,
+      lesson: activeLesson,
+      contents: activeContents,
       mechanics: BUBBLE_POP_REGISTRY,
       assets: BUBBLE_POP_ASSETS,
       mascotAssets: DUDUQ_DEMO_MASCOT_ASSETS,
       autoPlayInstruction: true,
+      onLessonComplete: handleLessonComplete,
       gamificationPolicy: {
         progressStyle: "duolingo",
         showProgressLabel: true,
