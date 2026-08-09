@@ -11,9 +11,19 @@
 
   <title>DuduQ Engine — Teste Router Inteligente</title>
 
+  <!-- =====================================================
+       ESTILOS CORE
+       ===================================================== -->
+
   <link
     rel="stylesheet"
     href="./core/duduq-theme.css?v=110"
+  >
+
+  <!-- Tela final premium centralizada -->
+  <link
+    rel="stylesheet"
+    href="./core/duduq-completion.css?v=100"
   >
 </head>
 
@@ -33,13 +43,17 @@
 
   <script src="./core/duduq-schema.js?v=100"></script>
 
-  <script src="./core/duduq-host.js?v=110"></script>
+  <!-- Componente central de conclusão -->
+  <script src="./core/duduq-completion.js?v=100"></script>
+
+  <!-- Host com contrato global de progresso -->
+  <script src="./core/duduq-host.js?v=120"></script>
 
   <!-- =====================================================
        MECÂNICAS DISPONÍVEIS
        ===================================================== -->
 
-  <script src="./mechanics/bubble-pop.js?v=110"></script>
+  <script src="./mechanics/bubble-pop.js?v=120"></script>
 
   <script src="./mechanics/drag-drop.js?v=100"></script>
 
@@ -66,13 +80,21 @@
           );
 
         /* ===============================================
-           VERIFICAÇÕES
+           VERIFICAÇÕES DO CORE
            =============================================== */
 
         if (!window.DuduQSchema) {
 
           root.innerHTML =
             "Erro: DuduQ Schema não foi carregado.";
+
+          return;
+        }
+
+        if (!window.DuduQCompletion) {
+
+          root.innerHTML =
+            "Erro: DuduQ Completion não foi carregado.";
 
           return;
         }
@@ -92,6 +114,10 @@
 
           return;
         }
+
+        /* ===============================================
+           VERIFICAÇÕES DAS MECÂNICAS
+           =============================================== */
 
         if (
           !window.DuduQ.hasMechanic(
@@ -117,9 +143,40 @@
           return;
         }
 
+        console.info(
+          "[DuduQ Core Test]",
+          {
+            schema:
+              window.DuduQSchema.version,
+
+            completion:
+              window.DuduQCompletion.version,
+
+            host:
+              window.DuduQ.version,
+
+            bubblePop:
+              window.DuduQ
+                .getMechanic(
+                  "bubble-pop"
+                )
+                ?.version,
+
+            dragDrop:
+              window.DuduQ
+                .getMechanic(
+                  "drag-drop"
+                )
+                ?.version,
+
+            router:
+              window.DuduQRouter.version
+          }
+        );
+
         /* ===============================================
            QUESTÃO 1
-           O Router deverá escolher Bubble Pop.
+           Router deverá escolher Bubble Pop.
            =============================================== */
 
         const questionBlue = {
@@ -166,6 +223,7 @@
           alternatives: [
 
             {
+
               id:
                 "blue",
 
@@ -173,12 +231,15 @@
                 "Blue",
 
               metadata: {
+
                 tone:
                   "blue"
               }
+
             },
 
             {
+
               id:
                 "red",
 
@@ -186,12 +247,15 @@
                 "Red",
 
               metadata: {
+
                 tone:
                   "pink"
               }
+
             },
 
             {
+
               id:
                 "green",
 
@@ -199,12 +263,15 @@
                 "Green",
 
               metadata: {
+
                 tone:
                   "green"
               }
+
             },
 
             {
+
               id:
                 "yellow",
 
@@ -212,9 +279,11 @@
                 "Yellow",
 
               metadata: {
+
                 tone:
                   "yellow"
               }
+
             }
 
           ],
@@ -256,7 +325,7 @@
 
         /* ===============================================
            QUESTÃO 2
-           O Router deverá escolher Drag & Drop.
+           Router deverá escolher Drag & Drop.
            =============================================== */
 
         const questionCategories = {
@@ -303,35 +372,43 @@
           alternatives: [
 
             {
+
               id:
                 "dog",
 
               text:
                 "DOG"
+
             },
 
             {
+
               id:
                 "apple",
 
               text:
                 "APPLE"
+
             },
 
             {
+
               id:
                 "cat",
 
               text:
                 "CAT"
+
             },
 
             {
+
               id:
                 "banana",
 
               text:
                 "BANANA"
+
             }
 
           ],
@@ -344,6 +421,7 @@
             value: [
 
               {
+
                 source:
                   "dog",
 
@@ -352,6 +430,7 @@
               },
 
               {
+
                 source:
                   "cat",
 
@@ -360,6 +439,7 @@
               },
 
               {
+
                 source:
                   "apple",
 
@@ -368,6 +448,7 @@
               },
 
               {
+
                 source:
                   "banana",
 
@@ -423,6 +504,7 @@
             targets: [
 
               {
+
                 id:
                   "animals",
 
@@ -431,6 +513,7 @@
               },
 
               {
+
                 id:
                   "fruits",
 
@@ -459,17 +542,17 @@
           );
 
         console.info(
-          "[DuduQ Router Test] Decisão questão Blue:",
+          "[DuduQ Router Test] Blue:",
           blueDecision
         );
 
         console.info(
-          "[DuduQ Router Test] Decisão questão Categories:",
+          "[DuduQ Router Test] Categories:",
           categoriesDecision
         );
 
         /* ===============================================
-           CONFIRMA SE EXISTE UMA ESCOLHA
+           SEGURANÇA DO TESTE
            =============================================== */
 
         if (
@@ -477,7 +560,7 @@
         ) {
 
           root.innerHTML =
-            "Erro: o Router não encontrou mecânica para a questão Blue.";
+            "Erro: Router não encontrou mecânica para Blue.";
 
           return;
         }
@@ -487,17 +570,10 @@
         ) {
 
           root.innerHTML =
-            "Erro: o Router não encontrou mecânica para a questão de categorias.";
+            "Erro: Router não encontrou mecânica para Categories.";
 
           return;
         }
-
-        /* ===============================================
-           TESTE DE SEGURANÇA
-
-           Neste primeiro teste queremos provar duas
-           decisões específicas.
-           =============================================== */
 
         if (
           blueDecision
@@ -507,7 +583,7 @@
         ) {
 
           root.innerHTML =
-            "Erro: o Router deveria escolher Bubble Pop para a questão Blue.";
+            "Erro: Router deveria selecionar Bubble Pop para Blue.";
 
           console.error(
             "[DuduQ Router Test] Seleção inesperada:",
@@ -525,7 +601,7 @@
         ) {
 
           root.innerHTML =
-            "Erro: o Router deveria escolher Drag & Drop para a questão de categorias.";
+            "Erro: Router deveria selecionar Drag & Drop para Categories.";
 
           console.error(
             "[DuduQ Router Test] Seleção inesperada:",
@@ -536,14 +612,14 @@
         }
 
         console.info(
-          "[DuduQ Router Test] SUCESSO:",
+          "[DuduQ Router Test] SUCESSO",
           {
-            blue:
+            etapa1:
               blueDecision
                 .selected
                 .mechanicId,
 
-            categories:
+            etapa2:
               categoriesDecision
                 .selected
                 .mechanicId
@@ -551,7 +627,7 @@
         );
 
         /* ===============================================
-           HOST RECEBE AS ESCOLHAS DO ROUTER
+           HOST
            =============================================== */
 
         window.DuduQ.start({
@@ -573,14 +649,9 @@
 
           steps: [
 
-            /* -------------------------------------------
+            /* ===========================================
                ETAPA 1
-
-               mechanic NÃO está escrito manualmente
-               como bubble-pop.
-
-               Ele vem da decisão do Router.
-               ------------------------------------------- */
+               =========================================== */
 
             {
 
@@ -617,11 +688,9 @@
 
             },
 
-            /* -------------------------------------------
+            /* ===========================================
                ETAPA 2
-
-               Novamente, mechanic vem do Router.
-               ------------------------------------------- */
+               =========================================== */
 
             {
 
