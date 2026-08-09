@@ -281,6 +281,217 @@
 })();
 </script>
 
+<script id="duduq-drag-drop-bridge-v1">
+/* ========================================================================
+   DUDUQ DRAG & DROP — BRIDGE 1.0.0
+   Ponte não-invasiva para integração externa:
+   DuduQ Engine -> schema universal -> mechanics/drag-drop.js -> este HTML
+   -> resultado/etapa/conclusão -> Host.
+
+   A mecânica visual e comportamental permanece no bundle original. Esta
+   camada apenas recebe configuração externa e devolve eventos de runtime.
+   ======================================================================== */
+(function () {
+  if (window.DuduQDragDropBridge && window.DuduQDragDropBridge.version === "1.0.0") return;
+
+  var BRIDGE_VERSION = "1.0.0";
+  var MECHANIC_ID = "drag-drop";
+  var RUNTIME_VERSION = "1.2.0";
+  var CHANNEL = "duduq-mechanic";
+  var schema = window.DUDUQ_DRAG_DROP_SCHEMA || window.DUDUQ_MECHANIC_SCHEMA || null;
+  var requestId = null;
+  var sessionId = null;
+  var parentOrigin = "*";
+  var parentWindow = window.parent !== window ? window.parent : null;
+  var sequence = 0;
+  var readySent = false;
+  var subscribers = new Set();
+
+  function isRecord(value) {
+    return typeof value === "object" && value !== null && !Array.isArray(value);
+  }
+
+  function nowIso() {
+    try { return new Date().toISOString(); } catch (_) { return ""; }
+  }
+
+  function safeClone(value) {
+    if (value == null) return value;
+    try {
+      if (typeof structuredClone === "function") return structuredClone(value);
+    } catch (_) {}
+    try { return JSON.parse(JSON.stringify(value)); } catch (_) { return value; }
+  }
+
+  function buildEnvelope(type, payload) {
+    sequence += 1;
+    return {
+      channel: CHANNEL,
+      type: type,
+      bridgeVersion: BRIDGE_VERSION,
+      mechanicId: MECHANIC_ID,
+      mechanicVersion: RUNTIME_VERSION,
+      requestId: requestId,
+      sessionId: sessionId,
+      sequence: sequence,
+      timestamp: nowIso(),
+      payload: safeClone(payload == null ? {} : payload)
+    };
+  }
+
+  function emit(type, payload) {
+    var message = buildEnvelope(type, payload);
+    if (parentWindow && typeof parentWindow.postMessage === "function") {
+      try { parentWindow.postMessage(message, parentOrigin || "*"); } catch (_) {
+        try { parentWindow.postMessage(message, "*"); } catch (_) {}
+      }
+    }
+    try {
+      window.dispatchEvent(new CustomEvent(type, { detail: message }));
+      window.dispatchEvent(new CustomEvent("duduq:mechanic:event", { detail: message }));
+    } catch (_) {}
+    return message;
+  }
+
+  function notifySubscribers() {
+    subscribers.forEach(function (listener) {
+      try { listener(schema); } catch (error) {
+        console.error("[DuduQ DragDrop Bridge] subscriber error", error);
+      }
+    });
+  }
+
+  function setSchema(nextSchema, meta) {
+    if (!isRecord(nextSchema)) {
+      emit("duduq:mechanic:error", {
+        code: "INVALID_SCHEMA",
+        message: "O schema recebido para drag-drop precisa ser um objeto."
+      });
+      return false;
+    }
+    schema = nextSchema;
+    window.DUDUQ_DRAG_DROP_SCHEMA = nextSchema;
+    if (isRecord(meta)) {
+      if (meta.requestId != null) requestId = String(meta.requestId);
+      if (meta.sessionId != null) sessionId = String(meta.sessionId);
+    }
+    notifySubscribers();
+    emit("duduq:mechanic:schema-accepted", {
+      schemaVersion: nextSchema.schemaVersion == null ? null : nextSchema.schemaVersion
+    });
+    return true;
+  }
+
+  function extractSchema(message) {
+    if (!isRecord(message)) return null;
+    if (isRecord(message.schema)) return message.schema;
+    if (isRecord(message.runtime)) return message.runtime;
+    if (isRecord(message.config)) return message.config;
+    if (isRecord(message.payload)) {
+      if (isRecord(message.payload.schema)) return message.payload.schema;
+      if (isRecord(message.payload.runtime)) return message.payload.runtime;
+      return message.payload;
+    }
+    return null;
+  }
+
+  function isInitMessage(message) {
+    if (!isRecord(message)) return false;
+    var type = String(message.type || message.event || "").toLowerCase();
+    return type === "duduq:mechanic:init" ||
+      type === "duduq:drag-drop:init" ||
+      type === "duduq:dragdrop:init" ||
+      type === "duduq_mechanic_init" ||
+      type === "init" && (message.mechanicId === MECHANIC_ID || message.mechanic === MECHANIC_ID);
+  }
+
+  function handleMessage(event) {
+    if (window.parent !== window && event.source !== window.parent) return;
+    var message = event.data;
+    if (!isInitMessage(message)) return;
+    var incomingMechanic = message.mechanicId || message.mechanic || message.payload?.mechanicId || message.payload?.mechanic;
+    if (incomingMechanic && incomingMechanic !== MECHANIC_ID) return;
+
+    parentWindow = event.source || parentWindow;
+    if (event.origin && event.origin !== "null") parentOrigin = event.origin;
+    if (message.requestId != null) requestId = String(message.requestId);
+    if (message.sessionId != null) sessionId = String(message.sessionId);
+
+    var nextSchema = extractSchema(message);
+    if (!nextSchema) {
+      emit("duduq:mechanic:error", {
+        code: "MISSING_SCHEMA",
+        message: "A mensagem de inicialização não contém schema/runtime/payload válido."
+      });
+      return;
+    }
+    setSchema(nextSchema, message);
+  }
+
+  function handleLocalInit(event) {
+    var detail = event && event.detail;
+    if (!isRecord(detail)) return;
+    var nextSchema = extractSchema(detail) || detail;
+    setSchema(nextSchema, detail);
+  }
+
+  function subscribe(listener) {
+    if (typeof listener !== "function") return function () {};
+    subscribers.add(listener);
+    return function () { subscribers.delete(listener); };
+  }
+
+  function announceReady(extra) {
+    if (readySent) return;
+    readySent = true;
+    emit("duduq:mechanic:ready", Object.assign({
+      accepts: ["postMessage", "CustomEvent", "window.DUDUQ_DRAG_DROP_SCHEMA"],
+      inputTypes: ["duduq:mechanic:init", "duduq:drag-drop:init"],
+      outputTypes: [
+        "duduq:mechanic:schema-accepted",
+        "duduq:mechanic:step",
+        "duduq:mechanic:result",
+        "duduq:mechanic:complete",
+        "duduq:mechanic:error"
+      ]
+    }, isRecord(extra) ? extra : {}));
+  }
+
+  function reportError(error, code) {
+    var message = error instanceof Error ? error.message : String(error || "Erro desconhecido");
+    return emit("duduq:mechanic:error", {
+      code: code || "RUNTIME_ERROR",
+      message: message
+    });
+  }
+
+  window.addEventListener("message", handleMessage);
+  window.addEventListener("duduq:drag-drop:init", handleLocalInit);
+  window.addEventListener("duduq:mechanic:init", handleLocalInit);
+
+  window.DuduQDragDropBridge = Object.freeze({
+    version: BRIDGE_VERSION,
+    mechanicId: MECHANIC_ID,
+    mechanicVersion: RUNTIME_VERSION,
+    channel: CHANNEL,
+    getSchema: function () { return schema; },
+    setSchema: setSchema,
+    subscribe: subscribe,
+    emit: emit,
+    announceReady: announceReady,
+    reportError: reportError,
+    getContext: function () {
+      return {
+        requestId: requestId,
+        sessionId: sessionId,
+        parentOrigin: parentOrigin,
+        hasExternalSchema: Boolean(schema)
+      };
+    }
+  });
+})();
+</script>
+
   <div id="duduq-boot">Preparando o Smart Drag & Drop…</div>
   <div id="root"></div>
   <script>
@@ -10869,24 +11080,347 @@ var DuduQMatching = (() => {
       maximumAutomaticReplays: 1
     }
   };
+  function normalizeExternalDragDropContent(rawContent, fallbackId, fallbackTitle, fallbackInstruction) {
+    if (!rawContent || typeof rawContent !== "object" || Array.isArray(rawContent)) {
+      throw new Error(`Conteúdo drag-drop inválido: ${fallbackId}.`);
+    }
+    const id = String(rawContent.id || fallbackId || "drag-drop-content");
+    const rawPayload = rawContent.payload && typeof rawContent.payload === "object" && !Array.isArray(rawContent.payload) ? rawContent.payload : rawContent;
+    const items = rawPayload.items;
+    const targets = rawPayload.targets;
+    if (!Array.isArray(items) || !Array.isArray(targets)) {
+      throw new Error(`Conteúdo ${id} precisa fornecer arrays items e targets.`);
+    }
+    const sourceVersion = rawContent.mechanicVersion || rawContent.rendererVersion || rawContent.versionOfMechanic || null;
+    return {
+      ...rawContent,
+      id,
+      version: String(rawContent.version || "1.0.0"),
+      schemaVersion: rawContent.schemaVersion ?? 1,
+      enabled: rawContent.enabled !== false,
+      editorialStatus: rawContent.editorialStatus || "approved",
+      title: rawContent.title || fallbackTitle || "Drag & Drop",
+      instruction: rawContent.instruction || fallbackInstruction || "Arraste cada item até o destino correto.",
+      audioText: rawContent.audioText ?? rawContent.instruction ?? fallbackInstruction,
+      learningObjective: rawContent.learningObjective || "Relacionar itens aos destinos corretos.",
+      difficulty: Number.isFinite(rawContent.difficulty) ? rawContent.difficulty : 1,
+      cognitivePhase: rawContent.cognitivePhase || "association",
+      gradeRange: rawContent.gradeRange || { minimum: 1, maximum: 5 },
+      estimatedSeconds: Number.isFinite(rawContent.estimatedSeconds) ? rawContent.estimatedSeconds : 55,
+      masterMechanic: rawContent.masterMechanic || "smart-drag-drop",
+      renderer: "drag-drop",
+      mechanicVersion: "1.2.0",
+      sourceMechanicVersion: sourceVersion,
+      payload: {
+        items,
+        targets,
+        behavior: {
+          ...DEFAULT_DRAG_DROP_BEHAVIOR,
+          ...(rawPayload.behavior && typeof rawPayload.behavior === "object" && !Array.isArray(rawPayload.behavior) ? rawPayload.behavior : {})
+        }
+      },
+      feedback: {
+        success: rawContent.feedback?.success || "Excelente! Todos os encaixes estão corretos.",
+        retry: rawContent.feedback?.retry || "Observe as pistas visuais e tente novamente.",
+        ...(rawContent.feedback && typeof rawContent.feedback === "object" && !Array.isArray(rawContent.feedback) ? rawContent.feedback : {})
+      }
+    };
+  }
+  function normalizeExternalDragDropRuntime(externalSchema) {
+    if (!externalSchema || typeof externalSchema !== "object" || Array.isArray(externalSchema)) {
+      throw new Error("O schema externo do Drag & Drop precisa ser um objeto.");
+    }
+    const schema = externalSchema.schema && typeof externalSchema.schema === "object" && !Array.isArray(externalSchema.schema) ? externalSchema.schema : externalSchema;
+    const declaredMechanic = schema.mechanicId || schema.mechanic?.id || schema.mechanic;
+    if (declaredMechanic && declaredMechanic !== "drag-drop") {
+      throw new Error(`Mecânica incompatível recebida pelo Drag & Drop: ${declaredMechanic}.`);
+    }
+
+    let rawContents = schema.contents;
+    let rawLesson = schema.lesson;
+    const contents = {};
+
+    if (rawContents && typeof rawContents === "object" && !Array.isArray(rawContents)) {
+      Object.entries(rawContents).forEach(([key, value]) => {
+        const content = normalizeExternalDragDropContent(value, key, schema.title, schema.instruction);
+        contents[content.id] = content;
+      });
+    } else if (Array.isArray(rawContents)) {
+      rawContents.forEach((value, index) => {
+        const content = normalizeExternalDragDropContent(value, value?.id || `drag-drop-${index + 1}`, schema.title, schema.instruction);
+        contents[content.id] = content;
+      });
+    } else if (Array.isArray(schema.stages)) {
+      schema.stages.forEach((stage, index) => {
+        const content = normalizeExternalDragDropContent(stage, stage?.id || `drag-drop-${index + 1}`, stage?.title || schema.title, stage?.instruction || schema.instruction);
+        contents[content.id] = content;
+      });
+    } else {
+      const rawContent = schema.content && typeof schema.content === "object" && !Array.isArray(schema.content) ? schema.content : schema;
+      const content = normalizeExternalDragDropContent(rawContent, rawContent.id || schema.id || "drag-drop-external", rawContent.title || schema.title, rawContent.instruction || schema.instruction);
+      contents[content.id] = content;
+    }
+
+    const contentList = Object.values(contents);
+    if (contentList.length === 0) throw new Error("O schema externo não contém conteúdo Drag & Drop.");
+
+    const defaultLanguage = {
+      interfaceLocale: "pt-BR",
+      learningLanguage: "pt-BR",
+      speechLocale: "pt-BR"
+    };
+    const suppliedLanguage = schema.language || rawLesson?.language || {};
+    const defaultProgressPolicy = {
+      enabled: false,
+      storage: "local",
+      resumeMode: "restart",
+      saveWhen: "step-completed",
+      resetCompletedLesson: true
+    };
+    const defaultFeedbackPolicy = {
+      allowRetry: true,
+      advanceAfterCorrectMs: 1450,
+      retryFeedbackDurationMs: 1000,
+      showHintAfterErrors: 2,
+      revealAnswerAfterErrors: 4,
+      playSuccessSound: true,
+      playRetrySound: true,
+      celebrateLessonCompletion: true
+    };
+    const defaultNavigationPolicy = {
+      allowPreviousStep: false,
+      allowStepSkipping: false,
+      advanceMode: "automatic",
+      showStepCounter: contentList.length > 1
+    };
+    const defaultInactivityPolicy = {
+      enabled: true,
+      delayMs: 10000,
+      action: "replay-instruction",
+      maximumAutomaticReplays: 1
+    };
+
+    let lesson;
+    if (rawLesson && typeof rawLesson === "object" && !Array.isArray(rawLesson)) {
+      const sourceSteps = Array.isArray(rawLesson.steps) && rawLesson.steps.length > 0 ? rawLesson.steps : contentList.map((content, index) => ({
+        id: `step-${content.id}`,
+        order: index + 1,
+        mechanicId: "drag-drop",
+        mechanicVersion: "1.2.0",
+        masterMechanic: content.masterMechanic || "smart-drag-drop",
+        contentId: content.id,
+        contentVersion: content.version,
+        enabled: true,
+        optional: false
+      }));
+      const steps = sourceSteps.map((step, index) => {
+        const sourceMechanic = step.mechanicId || step.mechanic || "drag-drop";
+        if (sourceMechanic !== "drag-drop") {
+          throw new Error(`Etapa ${step.id || index + 1} declara mecânica ${sourceMechanic}; este HTML aceita apenas drag-drop.`);
+        }
+        const contentId = String(step.contentId || contentList[index]?.id || contentList[0].id);
+        const content = contents[contentId] || contentList[index] || contentList[0];
+        return {
+          ...step,
+          id: String(step.id || `step-${content.id}`),
+          order: Number.isFinite(step.order) ? step.order : index + 1,
+          mechanicId: "drag-drop",
+          mechanicVersion: "1.2.0",
+          masterMechanic: step.masterMechanic || content.masterMechanic || "smart-drag-drop",
+          contentId: content.id,
+          contentVersion: content.version,
+          enabled: step.enabled !== false,
+          optional: Boolean(step.optional)
+        };
+      });
+      lesson = {
+        ...rawLesson,
+        schemaVersion: rawLesson.schemaVersion ?? schema.schemaVersion ?? 1,
+        id: String(rawLesson.id || schema.id || "duduq-external-drag-drop"),
+        version: String(rawLesson.version || schema.version || "1.0.0"),
+        title: rawLesson.title || schema.title || "Drag & Drop",
+        description: rawLesson.description || schema.description || "Atividade Drag & Drop carregada pelo DuduQ Engine.",
+        grade: rawLesson.grade ?? schema.grade ?? 1,
+        gradeBand: rawLesson.gradeBand || schema.gradeBand || "universal",
+        unitId: rawLesson.unitId || schema.unitId || "drag-drop-external",
+        themeId: rawLesson.themeId || schema.themeId || "duduq-default",
+        themeVersion: rawLesson.themeVersion || schema.themeVersion || "1.0.0",
+        language: { ...defaultLanguage, ...suppliedLanguage },
+        learningObjectives: Array.isArray(rawLesson.learningObjectives) ? rawLesson.learningObjectives : [contentList[0].learningObjective],
+        totalStages: steps.length,
+        steps,
+        progressPolicy: { ...defaultProgressPolicy, ...(rawLesson.progressPolicy || {}) },
+        feedbackPolicy: { ...defaultFeedbackPolicy, ...(rawLesson.feedbackPolicy || {}) },
+        navigationPolicy: { ...defaultNavigationPolicy, ...(rawLesson.navigationPolicy || {}) },
+        inactivityPolicy: { ...defaultInactivityPolicy, ...(rawLesson.inactivityPolicy || {}) }
+      };
+    } else {
+      const steps = contentList.map((content, index) => ({
+        id: `step-${content.id}`,
+        order: index + 1,
+        mechanicId: "drag-drop",
+        mechanicVersion: "1.2.0",
+        masterMechanic: content.masterMechanic || "smart-drag-drop",
+        contentId: content.id,
+        contentVersion: content.version,
+        enabled: true,
+        optional: false
+      }));
+      lesson = {
+        schemaVersion: schema.schemaVersion ?? 1,
+        id: String(schema.lessonId || schema.id || "duduq-external-drag-drop"),
+        version: String(schema.lessonVersion || schema.version || "1.0.0"),
+        title: schema.title || "Drag & Drop",
+        description: schema.description || "Atividade Drag & Drop carregada pelo DuduQ Engine.",
+        grade: schema.grade ?? 1,
+        gradeBand: schema.gradeBand || "universal",
+        unitId: schema.unitId || "drag-drop-external",
+        themeId: schema.themeId || "duduq-default",
+        themeVersion: schema.themeVersion || "1.0.0",
+        language: { ...defaultLanguage, ...suppliedLanguage },
+        learningObjectives: Array.isArray(schema.learningObjectives) ? schema.learningObjectives : [contentList[0].learningObjective],
+        totalStages: steps.length,
+        steps,
+        progressPolicy: { ...defaultProgressPolicy, ...(schema.progressPolicy || {}) },
+        feedbackPolicy: { ...defaultFeedbackPolicy, ...(schema.feedbackPolicy || {}) },
+        navigationPolicy: { ...defaultNavigationPolicy, ...(schema.navigationPolicy || {}) },
+        inactivityPolicy: { ...defaultInactivityPolicy, ...(schema.inactivityPolicy || {}) }
+      };
+    }
+
+    return {
+      lesson,
+      contents,
+      mechanics: MATCHING_RUNTIME_REGISTRY,
+      assets: { ...SMART_DRAG_DROP_ASSETS, ...(schema.assets || {}) },
+      mascotAssets: { ...DUDUQ_DEMO_MASCOT_ASSETS, ...(schema.mascotAssets || {}) },
+      autoPlayInstruction: schema.autoPlayInstruction !== false,
+      gamificationPolicy: {
+        progressStyle: "duolingo",
+        showProgressLabel: true,
+        showTransition: true,
+        transitionDurationMs: 760,
+        showMascotDuringTransition: true,
+        completionBurst: "subtle",
+        ...(schema.gamificationPolicy || {})
+      }
+    };
+  }
+  function summarizeBridgeStep(step) {
+    if (!step) return null;
+    return {
+      id: step.id,
+      order: step.order,
+      mechanicId: step.mechanicId,
+      mechanicVersion: step.mechanicVersion,
+      contentId: step.contentId,
+      contentVersion: step.contentVersion
+    };
+  }
+  function summarizeBridgeContent(content) {
+    if (!content) return null;
+    return {
+      id: content.id,
+      version: content.version,
+      title: content.title,
+      renderer: content.renderer,
+      mechanicVersion: content.mechanicVersion,
+      sourceMechanicVersion: content.sourceMechanicVersion || null
+    };
+  }
   function MatchingUniversalApp() {
+    const bridge = typeof window !== "undefined" ? window.DuduQDragDropBridge : null;
+    const [externalSchema, setExternalSchema] = useState(() => bridge?.getSchema?.() ?? null);
+    const [schemaRevision, setSchemaRevision] = useState(0);
+    useEffect(() => bridge?.subscribe?.((nextSchema) => {
+      setExternalSchema(nextSchema);
+      setSchemaRevision((value) => value + 1);
+    }), [bridge]);
+    const runtime = useMemo(() => {
+      if (!externalSchema) {
+        return {
+          lesson: SMART_DRAG_DROP_LESSON,
+          contents: SMART_DRAG_DROP_CONTENTS,
+          mechanics: MATCHING_RUNTIME_REGISTRY,
+          assets: SMART_DRAG_DROP_ASSETS,
+          mascotAssets: DUDUQ_DEMO_MASCOT_ASSETS,
+          autoPlayInstruction: true,
+          gamificationPolicy: {
+            progressStyle: "duolingo",
+            showProgressLabel: true,
+            showTransition: true,
+            transitionDurationMs: 760,
+            showMascotDuringTransition: true,
+            completionBurst: "subtle"
+          },
+          external: false,
+          error: null
+        };
+      }
+      try {
+        return { ...normalizeExternalDragDropRuntime(externalSchema), external: true, error: null };
+      } catch (error) {
+        bridge?.reportError?.(error, "SCHEMA_ADAPTER_ERROR");
+        return { error: error instanceof Error ? error.message : "Falha ao adaptar o schema Drag & Drop.", external: true };
+      }
+    }, [bridge, externalSchema]);
+
+    if (runtime.error) {
+      return /* @__PURE__ */ react_global_shim_default.createElement(
+        "main",
+        { className: "duduq-engine-root" },
+        /* @__PURE__ */ react_global_shim_default.createElement(
+          "section",
+          { className: "duduq-engine-error", role: "alert" },
+          /* @__PURE__ */ react_global_shim_default.createElement("strong", null, "Falha ao carregar a atividade Drag & Drop."),
+          /* @__PURE__ */ react_global_shim_default.createElement("span", null, runtime.error)
+        )
+      );
+    }
+
+    const handleBridgeResult = (result, step, content) => {
+      bridge?.emit?.("duduq:mechanic:result", {
+        result,
+        step: summarizeBridgeStep(step),
+        content: summarizeBridgeContent(content),
+        lessonId: runtime.lesson.id,
+        lessonVersion: runtime.lesson.version
+      });
+    };
+    const handleBridgeStepChange = (step, index, total) => {
+      bridge?.emit?.("duduq:mechanic:step", {
+        step: summarizeBridgeStep(step),
+        index,
+        total,
+        lessonId: runtime.lesson.id,
+        lessonVersion: runtime.lesson.version
+      });
+    };
+    const handleBridgeLessonComplete = (lesson) => {
+      bridge?.emit?.("duduq:mechanic:complete", {
+        lesson: {
+          id: lesson.id,
+          version: lesson.version,
+          title: lesson.title,
+          totalStages: lesson.totalStages
+        }
+      });
+    };
+
     return /* @__PURE__ */ react_global_shim_default.createElement(
       DuduQLessonEnginePreviewHost,
       {
-        lesson: SMART_DRAG_DROP_LESSON,
-        contents: SMART_DRAG_DROP_CONTENTS,
-        mechanics: MATCHING_RUNTIME_REGISTRY,
-        assets: SMART_DRAG_DROP_ASSETS,
-        mascotAssets: DUDUQ_DEMO_MASCOT_ASSETS,
-        autoPlayInstruction: true,
-        gamificationPolicy: {
-          progressStyle: "duolingo",
-          showProgressLabel: true,
-          showTransition: true,
-          transitionDurationMs: 760,
-          showMascotDuringTransition: true,
-          completionBurst: "subtle"
-        }
+        key: `${runtime.lesson.id}:${runtime.lesson.version}:${schemaRevision}`,
+        lesson: runtime.lesson,
+        contents: runtime.contents,
+        mechanics: runtime.mechanics,
+        assets: runtime.assets,
+        mascotAssets: runtime.mascotAssets,
+        autoPlayInstruction: runtime.autoPlayInstruction,
+        gamificationPolicy: runtime.gamificationPolicy,
+        onMechanicResult: handleBridgeResult,
+        onStepChange: handleBridgeStepChange,
+        onLessonComplete: handleBridgeLessonComplete
       }
     );
   }
@@ -10901,6 +11435,9 @@ var DuduQMatching = (() => {
       else ReactDOM.render(app, host);
       var boot = document.getElementById('duduq-boot');
       if (boot) boot.hidden = true;
+      if (window.DuduQDragDropBridge) {
+        window.DuduQDragDropBridge.announceReady({ mounted: true });
+      }
     })();
   </script>
 <style id="duduq-matching-visual-base-v1">
