@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — HOST
    Orquestrador central das mecânicas e módulos DuduQ.
-   Versão 1.0.0
+   Versão 1.1.0
    ========================================================= */
 
 (function () {
@@ -9,12 +9,12 @@
 
   if (
     window.DuduQ &&
-    window.DuduQ.version === "1.0.0"
+    window.DuduQ.version === "1.1.0"
   ) {
     return;
   }
 
-  const VERSION = "1.0.0";
+  const VERSION = "1.1.0";
 
   const mechanics = new Map();
 
@@ -74,6 +74,21 @@
     }
   }
 
+  function createElement(
+    tag,
+    styles = {}
+  ) {
+    const element =
+      document.createElement(tag);
+
+    Object.assign(
+      element.style,
+      styles
+    );
+
+    return element;
+  }
+
   /* =======================================================
      REGISTRO DE MECÂNICAS
      ======================================================= */
@@ -105,31 +120,34 @@
       );
     }
 
-    const mechanic = Object.freeze({
-      id,
+    const mechanic =
+      Object.freeze({
+        id,
 
-      version:
-        String(
-          definition.version ||
-          "1.0.0"
-        ),
+        version:
+          String(
+            definition.version ||
+            "1.0.0"
+          ),
 
-      mount:
-        definition.mount,
+        mount:
+          definition.mount,
 
-      validate:
-        typeof definition.validate ===
-        "function"
-          ? definition.validate
-          : null,
+        validate:
+          typeof definition.validate ===
+          "function"
+            ? definition.validate
+            : null,
 
-      metadata:
-        isObject(definition.metadata)
-          ? Object.freeze({
-              ...definition.metadata
-            })
-          : Object.freeze({})
-    });
+        metadata:
+          isObject(
+            definition.metadata
+          )
+            ? Object.freeze({
+                ...definition.metadata
+              })
+            : Object.freeze({})
+      });
 
     mechanics.set(
       id,
@@ -343,6 +361,353 @@
     session.cleanup = null;
   }
 
+  /* =======================================================
+     TELA DE CONCLUSÃO
+     ======================================================= */
+
+  function renderCompletionScreen(
+    session
+  ) {
+    const container =
+      session.container;
+
+    clearContainer(
+      container
+    );
+
+    const screen =
+      createElement(
+        "section",
+        {
+          width: "100%",
+          minHeight: "100vh",
+          display: "grid",
+          placeItems: "center",
+          padding:
+            "clamp(20px, 4vw, 48px)",
+          boxSizing: "border-box"
+        }
+      );
+
+    screen.className =
+      "duduq-host-completion";
+
+    const card =
+      createElement(
+        "div",
+        {
+          width:
+            "min(620px, 100%)",
+
+          display: "flex",
+          flexDirection:
+            "column",
+
+          alignItems:
+            "center",
+
+          gap:
+            "18px",
+
+          padding:
+            "clamp(26px, 5vw, 46px)",
+
+          boxSizing:
+            "border-box",
+
+          border:
+            "2px solid #d8e0e8",
+
+          borderRadius:
+            "30px",
+
+          background:
+            "rgba(255,255,255,0.96)",
+
+          boxShadow:
+            "0 6px 0 #b8c5d6, 0 18px 42px rgba(31,65,99,.14)",
+
+          textAlign:
+            "center",
+
+          color:
+            "#16375b"
+        }
+      );
+
+    /* -----------------------------------------------------
+       MASCOTE
+       ----------------------------------------------------- */
+
+    let mascotSrc = null;
+
+    try {
+      mascotSrc =
+        window.DuduQAssets?.assets
+          ?.mascots?.complete ||
+        window.DUDUQ_ASSETS
+          ?.mascots?.complete ||
+        null;
+    } catch (_) {}
+
+    if (mascotSrc) {
+      const mascot =
+        document.createElement(
+          "img"
+        );
+
+      mascot.src =
+        mascotSrc;
+
+      mascot.alt =
+        "DuduQ celebrando a conclusão.";
+
+      Object.assign(
+        mascot.style,
+        {
+          width:
+            "clamp(130px, 24vw, 190px)",
+
+          height:
+            "clamp(130px, 24vw, 190px)",
+
+          objectFit:
+            "contain",
+
+          display:
+            "block",
+
+          filter:
+            "drop-shadow(0 10px 14px rgba(31,65,99,.13))"
+        }
+      );
+
+      card.appendChild(
+        mascot
+      );
+    }
+
+    /* -----------------------------------------------------
+       TÍTULO
+       ----------------------------------------------------- */
+
+    const title =
+      createElement(
+        "h1",
+        {
+          margin:
+            "0",
+
+          color:
+            "#0056b3",
+
+          fontFamily:
+            "Fredoka, Nunito, ui-rounded, system-ui, sans-serif",
+
+          fontSize:
+            "clamp(30px, 6vw, 46px)",
+
+          lineHeight:
+            "1.05",
+
+          fontWeight:
+            "800"
+        }
+      );
+
+    title.textContent =
+      "Missão concluída!";
+
+    card.appendChild(
+      title
+    );
+
+    /* -----------------------------------------------------
+       TEXTO
+       ----------------------------------------------------- */
+
+    const message =
+      createElement(
+        "p",
+        {
+          margin:
+            "0",
+
+          color:
+            "#52606d",
+
+          fontFamily:
+            "Nunito, ui-rounded, system-ui, sans-serif",
+
+          fontSize:
+            "clamp(17px, 2.5vw, 22px)",
+
+          lineHeight:
+            "1.45",
+
+          fontWeight:
+            "800"
+        }
+      );
+
+    const moduleLabel =
+      session.module.module != null
+        ? `Módulo ${session.module.module}`
+        : "Atividade";
+
+    const subjectLabel =
+      session.module.subject
+        ? ` de ${session.module.subject}`
+        : "";
+
+    message.textContent =
+      `${moduleLabel}${subjectLabel} concluído com sucesso.`;
+
+    card.appendChild(
+      message
+    );
+
+    /* -----------------------------------------------------
+       PROGRESSO
+       ----------------------------------------------------- */
+
+    const progress =
+      createElement(
+        "div",
+        {
+          display:
+            "inline-flex",
+
+          alignItems:
+            "center",
+
+          justifyContent:
+            "center",
+
+          minHeight:
+            "44px",
+
+          padding:
+            "9px 18px",
+
+          border:
+            "2px solid #b9d8f7",
+
+          borderRadius:
+            "999px",
+
+          background:
+            "#eff6ff",
+
+          color:
+            "#0056b3",
+
+          fontFamily:
+            "Nunito, ui-rounded, system-ui, sans-serif",
+
+          fontSize:
+            "16px",
+
+          fontWeight:
+            "900"
+        }
+      );
+
+    progress.textContent =
+      `${session.module.steps.length} de ${session.module.steps.length} etapas concluídas`;
+
+    card.appendChild(
+      progress
+    );
+
+    /* -----------------------------------------------------
+       BOTÃO REINICIAR
+       ----------------------------------------------------- */
+
+    const restartButton =
+      document.createElement(
+        "button"
+      );
+
+    restartButton.type =
+      "button";
+
+    restartButton.textContent =
+      "JOGAR NOVAMENTE";
+
+    restartButton.setAttribute(
+      "aria-label",
+      "Jogar módulo novamente"
+    );
+
+    Object.assign(
+      restartButton.style,
+      {
+        marginTop:
+          "6px",
+
+        minWidth:
+          "220px",
+
+        minHeight:
+          "58px",
+
+        padding:
+          "12px 24px",
+
+        border:
+          "2px solid #003a7a",
+
+        borderRadius:
+          "18px",
+
+        background:
+          "linear-gradient(180deg,#1471cf 0%,#0056b3 100%)",
+
+        color:
+          "#ffffff",
+
+        boxShadow:
+          "0 5px 0 #003a7a, 0 10px 20px rgba(0,86,179,.18)",
+
+        fontFamily:
+          "Nunito, ui-rounded, system-ui, sans-serif",
+
+        fontSize:
+          "16px",
+
+        fontWeight:
+          "900",
+
+        cursor:
+          "pointer"
+      }
+    );
+
+    restartButton.addEventListener(
+      "click",
+      function () {
+        restart();
+      }
+    );
+
+    card.appendChild(
+      restartButton
+    );
+
+    screen.appendChild(
+      card
+    );
+
+    container.appendChild(
+      screen
+    );
+  }
+
+  /* =======================================================
+     RENDERIZAÇÃO DE ETAPA
+     ======================================================= */
+
   function renderCurrentStep(
     session
   ) {
@@ -352,7 +717,10 @@
       ];
 
     if (!step) {
-      finishModule(session);
+      finishModule(
+        session
+      );
+
       return;
     }
 
@@ -494,6 +862,10 @@
     );
   }
 
+  /* =======================================================
+     PRÓXIMA ETAPA
+     ======================================================= */
+
   function nextStep(result) {
     if (!activeSession) {
       return;
@@ -503,6 +875,20 @@
       activeSession.module.steps[
         activeSession.currentStepIndex
       ];
+
+    activeSession.results.push({
+      stepId:
+        completedStep?.id ||
+        null,
+
+      mechanic:
+        completedStep
+          ?.mechanicId ||
+        null,
+
+      result:
+        result ?? null
+    });
 
     window.dispatchEvent(
       new CustomEvent(
@@ -542,8 +928,26 @@
     );
   }
 
+  /* =======================================================
+     CONCLUSÃO DO MÓDULO
+     ======================================================= */
+
   function finishModule(session) {
+    if (
+      !session ||
+      session.completed
+    ) {
+      return;
+    }
+
     destroyActiveMechanic(
+      session
+    );
+
+    session.completed =
+      true;
+
+    renderCompletionScreen(
       session
     );
 
@@ -562,7 +966,13 @@
               session.module.subject,
 
             module:
-              session.module.module
+              session.module.module,
+
+            totalSteps:
+              session.module.steps.length,
+
+            results:
+              session.results.slice()
           }
         }
       )
@@ -572,12 +982,16 @@
       window.DuduQSound
     ) {
       window.DuduQSound.play(
-        "win"
+        "win",
+        {
+          volume:
+            0.64,
+
+          minGapMs:
+            1800
+        }
       );
     }
-
-    session.completed =
-      true;
   }
 
   /* =======================================================
@@ -614,10 +1028,20 @@
 
     activeSession = {
       module,
+
       container,
-      currentStepIndex: 0,
-      cleanup: null,
-      completed: false
+
+      currentStepIndex:
+        0,
+
+      cleanup:
+        null,
+
+      completed:
+        false,
+
+      results:
+        []
     };
 
     renderCurrentStep(
@@ -651,6 +1075,10 @@
     return activeSession;
   }
 
+  /* =======================================================
+     REINÍCIO
+     ======================================================= */
+
   function restart() {
     if (!activeSession) {
       return false;
@@ -666,12 +1094,39 @@
     activeSession.completed =
       false;
 
+    activeSession.results =
+      [];
+
+    if (
+      window.DuduQSound
+    ) {
+      window.DuduQSound.stop(
+        "win"
+      );
+    }
+
     renderCurrentStep(
       activeSession
     );
 
+    window.dispatchEvent(
+      new CustomEvent(
+        "duduq:module-restart",
+        {
+          detail: {
+            moduleId:
+              activeSession.module.id
+          }
+        }
+      )
+    );
+
     return true;
   }
+
+  /* =======================================================
+     DESTRUIÇÃO
+     ======================================================= */
 
   function destroy() {
     if (!activeSession) {
@@ -686,7 +1141,8 @@
       activeSession.container
     );
 
-    activeSession = null;
+    activeSession =
+      null;
   }
 
   function getSession() {
