@@ -20,6 +20,12 @@
     href="./core/duduq-theme.css?v=110"
   >
 
+  <!-- Intro cinematográfica -->
+  <link
+    rel="stylesheet"
+    href="./core/duduq-intro.css?v=100"
+  >
+
   <!-- Tela final premium centralizada -->
   <link
     rel="stylesheet"
@@ -40,6 +46,9 @@
   <script src="./core/duduq-assets.js?v=100"></script>
 
   <script src="./core/duduq-sound.js?v=100"></script>
+
+  <!-- Intro universal -->
+  <script src="./core/duduq-intro.js?v=100"></script>
 
   <script src="./core/duduq-schema.js?v=100"></script>
 
@@ -68,7 +77,7 @@
   <script src="./core/duduq-router.js?v=100"></script>
 
   <!-- =====================================================
-       TESTE DE ROTEAMENTO
+       TESTE DE ROTEAMENTO + INTRO
        ===================================================== -->
 
   <script>
@@ -82,9 +91,19 @@
             "root"
           );
 
+
         /* ===============================================
            VERIFICAÇÕES DO CORE
            =============================================== */
+
+        if (!window.DuduQIntro) {
+
+          root.innerHTML =
+            "Erro: DuduQ Intro não foi carregado.";
+
+          return;
+        }
+
 
         if (!window.DuduQSchema) {
 
@@ -94,6 +113,7 @@
           return;
         }
 
+
         if (!window.DuduQCompletion) {
 
           root.innerHTML =
@@ -101,6 +121,7 @@
 
           return;
         }
+
 
         if (!window.DuduQ) {
 
@@ -110,6 +131,7 @@
           return;
         }
 
+
         if (!window.DuduQProgressUI) {
 
           root.innerHTML =
@@ -118,6 +140,7 @@
           return;
         }
 
+
         if (!window.DuduQRouter) {
 
           root.innerHTML =
@@ -125,6 +148,7 @@
 
           return;
         }
+
 
         /* ===============================================
            VERIFICAÇÕES DAS MECÂNICAS
@@ -142,6 +166,7 @@
           return;
         }
 
+
         if (
           !window.DuduQ.hasMechanic(
             "drag-drop"
@@ -154,9 +179,13 @@
           return;
         }
 
+
         console.info(
           "[DuduQ Core Test]",
           {
+            intro:
+              window.DuduQIntro.version,
+
             schema:
               window.DuduQSchema.version,
 
@@ -187,6 +216,7 @@
               window.DuduQRouter.version
           }
         );
+
 
         /* ===============================================
            QUESTÃO 1
@@ -324,6 +354,7 @@
           }
 
         };
+
 
         /* ===============================================
            QUESTÃO 2
@@ -515,6 +546,7 @@
 
         };
 
+
         /* ===============================================
            ROUTER DECIDE
            =============================================== */
@@ -524,20 +556,24 @@
             questionBlue
           );
 
+
         const categoriesDecision =
           window.DuduQRouter.select(
             questionCategories
           );
+
 
         console.info(
           "[DuduQ Router Test] Blue:",
           blueDecision
         );
 
+
         console.info(
           "[DuduQ Router Test] Categories:",
           categoriesDecision
         );
+
 
         /* ===============================================
            SEGURANÇA DO TESTE
@@ -553,6 +589,7 @@
           return;
         }
 
+
         if (
           !categoriesDecision.selected
         ) {
@@ -562,6 +599,7 @@
 
           return;
         }
+
 
         if (
           blueDecision
@@ -581,6 +619,7 @@
           return;
         }
 
+
         if (
           categoriesDecision
             .selected
@@ -599,6 +638,7 @@
           return;
         }
 
+
         console.info(
           "[DuduQ Router Test] SUCESSO",
           {
@@ -614,14 +654,176 @@
           }
         );
 
+
         /* ===============================================
-           HOST
+           FUNÇÃO QUE INICIA O MÓDULO
+
+           Ela NÃO é executada imediatamente.
+           Só roda quando o estudante clicar em
+           INICIAR MISSÃO na intro.
            =============================================== */
 
-        window.DuduQ.start({
+        function startModule() {
 
-          id:
-            "teste-router-inteligente-1ano",
+          window.DuduQ.start({
+
+            id:
+              "teste-router-inteligente-1ano",
+
+            year:
+              1,
+
+            subject:
+              "Língua Inglesa",
+
+            module:
+              1,
+
+            container:
+              "#root",
+
+            steps: [
+
+              /* =========================================
+                 ETAPA 1
+                 ========================================= */
+
+              {
+
+                id:
+                  "router-step-blue",
+
+                mechanic:
+                  blueDecision
+                    .selected
+                    .mechanicId,
+
+                payload: {
+
+                  id:
+                    "router-blue-activity",
+
+                  title:
+                    "Colors",
+
+                  subject:
+                    "Língua Inglesa",
+
+                  year:
+                    1,
+
+                  module:
+                    1,
+
+                  questions: [
+                    questionBlue
+                  ]
+
+                }
+
+              },
+
+
+              /* =========================================
+                 ETAPA 2
+                 ========================================= */
+
+              {
+
+                id:
+                  "router-step-categories",
+
+                mechanic:
+                  categoriesDecision
+                    .selected
+                    .mechanicId,
+
+                payload: {
+
+                  id:
+                    "router-categories-activity",
+
+                  title:
+                    "Animals and Fruits",
+
+                  subject:
+                    "Língua Inglesa",
+
+                  year:
+                    1,
+
+                  module:
+                    1,
+
+                  questions: [
+                    questionCategories
+                  ]
+
+                }
+
+              }
+
+            ]
+
+          });
+
+        }
+
+
+        /* ===============================================
+           LIMPA O TEXTO DE CARREGAMENTO DO ROOT
+
+           O jogo ainda NÃO começa.
+           A intro ficará por cima da tela.
+           =============================================== */
+
+        root.innerHTML =
+          "";
+
+
+        /* ===============================================
+           INTRO CINEMATOGRÁFICA
+           =============================================== */
+
+        window.DuduQIntro.show({
+
+          /*
+           * A logo da EMPRESA já possui
+           * um padrão interno no duduq-intro.js.
+           *
+           * Portanto não precisamos repetir
+           * a URL aqui.
+           */
+
+
+          /*
+           * LOGO DA COLEÇÃO
+           *
+           * Temporariamente vazia.
+           *
+           * Assim que tivermos o endereço da
+           * logo oficial da coleção, colocaremos
+           * aqui e ela substituirá automaticamente
+           * o texto DuduQ.
+           */
+
+          collectionLogo:
+            "",
+
+
+          /*
+           * Fallback enquanto não ligamos
+           * a logo oficial da coleção.
+           */
+
+          collectionName:
+            "DuduQ",
+
+
+          /*
+           * Estes dados são DINÂMICOS.
+           * No produto final virão do módulo.
+           */
 
           year:
             1,
@@ -632,90 +834,56 @@
           module:
             1,
 
-          container:
-            "#root",
 
-          steps: [
+          /*
+           * Experiência de abertura.
+           */
 
-            /* ===========================================
-               ETAPA 1
-               =========================================== */
+          loadingLabel:
+            "PREPARANDO SUA MISSÃO",
 
-            {
+          readyLabel:
+            "MISSÃO PRONTA",
 
-              id:
-                "router-step-blue",
+          startLabel:
+            "INICIAR MISSÃO",
 
-              mechanic:
-                blueDecision
-                  .selected
-                  .mechanicId,
+          hint:
+            "Tudo pronto para começar!",
 
-              payload: {
 
-                id:
-                  "router-blue-activity",
+          /*
+           * Tempo mínimo para a sequência
+           * cinematográfica fazer sentido.
+           */
 
-                title:
-                  "Colors",
+          minDurationMs:
+            1850,
 
-                subject:
-                  "Língua Inglesa",
 
-                year:
-                  1,
+          /*
+           * Partículas discretas.
+           */
 
-                module:
-                  1,
+          sparkCount:
+            14,
 
-                questions: [
-                  questionBlue
-                ]
 
-              }
+          /*
+           * Quando o usuário clicar em
+           * INICIAR MISSÃO, montamos o jogo
+           * imediatamente por baixo da intro.
+           *
+           * A intro continua sua animação
+           * de saída por alguns milissegundos.
+           */
 
-            },
+          onStart:
+            function () {
 
-            /* ===========================================
-               ETAPA 2
-               =========================================== */
-
-            {
-
-              id:
-                "router-step-categories",
-
-              mechanic:
-                categoriesDecision
-                  .selected
-                  .mechanicId,
-
-              payload: {
-
-                id:
-                  "router-categories-activity",
-
-                title:
-                  "Animals and Fruits",
-
-                subject:
-                  "Língua Inglesa",
-
-                year:
-                  1,
-
-                module:
-                  1,
-
-                questions: [
-                  questionCategories
-                ]
-
-              }
+              startModule();
 
             }
-
-          ]
 
         });
 
