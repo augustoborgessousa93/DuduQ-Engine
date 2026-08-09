@@ -9,7 +9,7 @@
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
 
-  <title>DuduQ Engine — Teste Drag & Drop Universal</title>
+  <title>DuduQ Engine — Teste Router Inteligente</title>
 
   <link
     rel="stylesheet"
@@ -36,13 +36,22 @@
   <script src="./core/duduq-host.js?v=110"></script>
 
   <!-- =====================================================
-       MECÂNICA
+       MECÂNICAS DISPONÍVEIS
        ===================================================== -->
+
+  <script src="./mechanics/bubble-pop.js?v=110"></script>
 
   <script src="./mechanics/drag-drop.js?v=100"></script>
 
   <!-- =====================================================
-       TESTE — SCHEMA UNIVERSAL
+       ROUTER
+       Carregado depois das mecânicas.
+       ===================================================== -->
+
+  <script src="./core/duduq-router.js?v=100"></script>
+
+  <!-- =====================================================
+       TESTE DE ROTEAMENTO
        ===================================================== -->
 
   <script>
@@ -57,7 +66,7 @@
           );
 
         /* ===============================================
-           VERIFICAÇÃO DO SCHEMA
+           VERIFICAÇÕES
            =============================================== */
 
         if (!window.DuduQSchema) {
@@ -68,21 +77,33 @@
           return;
         }
 
-        /* ===============================================
-           VERIFICAÇÃO DO HOST
-           =============================================== */
-
         if (!window.DuduQ) {
 
           root.innerHTML =
-            "Erro: DuduQ Engine não foi carregado.";
+            "Erro: DuduQ Host não foi carregado.";
 
           return;
         }
 
-        /* ===============================================
-           VERIFICAÇÃO DA MECÂNICA
-           =============================================== */
+        if (!window.DuduQRouter) {
+
+          root.innerHTML =
+            "Erro: DuduQ Router não foi carregado.";
+
+          return;
+        }
+
+        if (
+          !window.DuduQ.hasMechanic(
+            "bubble-pop"
+          )
+        ) {
+
+          root.innerHTML =
+            "Erro: Bubble Pop não foi registrado.";
+
+          return;
+        }
 
         if (
           !window.DuduQ.hasMechanic(
@@ -97,13 +118,446 @@
         }
 
         /* ===============================================
-           MÓDULO DE TESTE
+           QUESTÃO 1
+           O Router deverá escolher Bubble Pop.
+           =============================================== */
+
+        const questionBlue = {
+
+          id:
+            "router-blue-01",
+
+          subject:
+            "Língua Inglesa",
+
+          year:
+            1,
+
+          module:
+            1,
+
+          skill: {
+
+            code:
+              "COLOR-RECOGNITION-01",
+
+            description:
+              "Reconhecer vocabulário básico de cores em língua inglesa."
+          },
+
+          difficulty:
+            "easy",
+
+          statement:
+            "Blue",
+
+          instruction:
+            "Escolha Blue.",
+
+          contentLanguage:
+            "en",
+
+          instructionLanguage:
+            "pt-BR",
+
+          feedbackLanguage:
+            "pt-BR",
+
+          alternatives: [
+
+            {
+              id:
+                "blue",
+
+              text:
+                "Blue",
+
+              metadata: {
+                tone:
+                  "blue"
+              }
+            },
+
+            {
+              id:
+                "red",
+
+              text:
+                "Red",
+
+              metadata: {
+                tone:
+                  "pink"
+              }
+            },
+
+            {
+              id:
+                "green",
+
+              text:
+                "Green",
+
+              metadata: {
+                tone:
+                  "green"
+              }
+            },
+
+            {
+              id:
+                "yellow",
+
+              text:
+                "Yellow",
+
+              metadata: {
+                tone:
+                  "yellow"
+              }
+            }
+
+          ],
+
+          answer: {
+
+            type:
+              "single",
+
+            value:
+              "blue"
+          },
+
+          feedback: {
+
+            correct:
+              "Muito bem! Blue está correto.",
+
+            incorrect:
+              "Observe novamente e tente outra opção.",
+
+            language:
+              "pt-BR"
+          },
+
+          delivery: {
+
+            mechanic:
+              "auto",
+
+            allowImage:
+              true,
+
+            allowAudio:
+              true
+          }
+
+        };
+
+        /* ===============================================
+           QUESTÃO 2
+           O Router deverá escolher Drag & Drop.
+           =============================================== */
+
+        const questionCategories = {
+
+          id:
+            "router-categories-02",
+
+          subject:
+            "Língua Inglesa",
+
+          year:
+            1,
+
+          module:
+            1,
+
+          skill: {
+
+            code:
+              "VOCAB-CATEGORIES-01",
+
+            description:
+              "Classificar vocabulário básico em língua inglesa por categoria semântica."
+          },
+
+          difficulty:
+            "easy",
+
+          statement:
+            "Animals and Fruits",
+
+          instruction:
+            "Arraste cada palavra para a categoria correta.",
+
+          contentLanguage:
+            "en",
+
+          instructionLanguage:
+            "pt-BR",
+
+          feedbackLanguage:
+            "pt-BR",
+
+          alternatives: [
+
+            {
+              id:
+                "dog",
+
+              text:
+                "DOG"
+            },
+
+            {
+              id:
+                "apple",
+
+              text:
+                "APPLE"
+            },
+
+            {
+              id:
+                "cat",
+
+              text:
+                "CAT"
+            },
+
+            {
+              id:
+                "banana",
+
+              text:
+                "BANANA"
+            }
+
+          ],
+
+          answer: {
+
+            type:
+              "pairs",
+
+            value: [
+
+              {
+                source:
+                  "dog",
+
+                target:
+                  "animals"
+              },
+
+              {
+                source:
+                  "cat",
+
+                target:
+                  "animals"
+              },
+
+              {
+                source:
+                  "apple",
+
+                target:
+                  "fruits"
+              },
+
+              {
+                source:
+                  "banana",
+
+                target:
+                  "fruits"
+              }
+
+            ]
+
+          },
+
+          feedback: {
+
+            correct:
+              "Excelente! Todos os itens estão na categoria correta.",
+
+            incorrect:
+              "Observe as categorias e tente novamente.",
+
+            language:
+              "pt-BR"
+          },
+
+          delivery: {
+
+            mechanic:
+              "auto",
+
+            allowImage:
+              true,
+
+            allowAudio:
+              true
+          },
+
+          metadata: {
+
+            title:
+              "Animals and Fruits",
+
+            layout:
+              "categories",
+
+            shuffleItems:
+              true,
+
+            shuffleTargets:
+              false,
+
+            estimatedSeconds:
+              45,
+
+            targets: [
+
+              {
+                id:
+                  "animals",
+
+                label:
+                  "ANIMALS"
+              },
+
+              {
+                id:
+                  "fruits",
+
+                label:
+                  "FRUITS"
+              }
+
+            ]
+
+          }
+
+        };
+
+        /* ===============================================
+           ROUTER DECIDE
+           =============================================== */
+
+        const blueDecision =
+          window.DuduQRouter.select(
+            questionBlue
+          );
+
+        const categoriesDecision =
+          window.DuduQRouter.select(
+            questionCategories
+          );
+
+        console.info(
+          "[DuduQ Router Test] Decisão questão Blue:",
+          blueDecision
+        );
+
+        console.info(
+          "[DuduQ Router Test] Decisão questão Categories:",
+          categoriesDecision
+        );
+
+        /* ===============================================
+           CONFIRMA SE EXISTE UMA ESCOLHA
+           =============================================== */
+
+        if (
+          !blueDecision.selected
+        ) {
+
+          root.innerHTML =
+            "Erro: o Router não encontrou mecânica para a questão Blue.";
+
+          return;
+        }
+
+        if (
+          !categoriesDecision.selected
+        ) {
+
+          root.innerHTML =
+            "Erro: o Router não encontrou mecânica para a questão de categorias.";
+
+          return;
+        }
+
+        /* ===============================================
+           TESTE DE SEGURANÇA
+
+           Neste primeiro teste queremos provar duas
+           decisões específicas.
+           =============================================== */
+
+        if (
+          blueDecision
+            .selected
+            .mechanicId !==
+          "bubble-pop"
+        ) {
+
+          root.innerHTML =
+            "Erro: o Router deveria escolher Bubble Pop para a questão Blue.";
+
+          console.error(
+            "[DuduQ Router Test] Seleção inesperada:",
+            blueDecision
+          );
+
+          return;
+        }
+
+        if (
+          categoriesDecision
+            .selected
+            .mechanicId !==
+          "drag-drop"
+        ) {
+
+          root.innerHTML =
+            "Erro: o Router deveria escolher Drag & Drop para a questão de categorias.";
+
+          console.error(
+            "[DuduQ Router Test] Seleção inesperada:",
+            categoriesDecision
+          );
+
+          return;
+        }
+
+        console.info(
+          "[DuduQ Router Test] SUCESSO:",
+          {
+            blue:
+              blueDecision
+                .selected
+                .mechanicId,
+
+            categories:
+              categoriesDecision
+                .selected
+                .mechanicId
+          }
+        );
+
+        /* ===============================================
+           HOST RECEBE AS ESCOLHAS DO ROUTER
            =============================================== */
 
         window.DuduQ.start({
 
           id:
-            "teste-drag-drop-schema-1ano",
+            "teste-router-inteligente-1ano",
 
           year:
             1,
@@ -119,24 +573,32 @@
 
           steps: [
 
+            /* -------------------------------------------
+               ETAPA 1
+
+               mechanic NÃO está escrito manualmente
+               como bubble-pop.
+
+               Ele vem da decisão do Router.
+               ------------------------------------------- */
+
             {
 
               id:
-                "classificacao-animais-frutas",
+                "router-step-blue",
 
               mechanic:
-                "drag-drop",
+                blueDecision
+                  .selected
+                  .mechanicId,
 
               payload: {
 
                 id:
-                  "drag-drop-categories-test",
+                  "router-blue-activity",
 
                 title:
-                  "Animals and Fruits",
-
-                description:
-                  "Teste do Drag & Drop usando o Schema universal DuduQ.",
+                  "Colors",
 
                 subject:
                   "Língua Inglesa",
@@ -147,226 +609,49 @@
                 module:
                   1,
 
-                contentLanguage:
-                  "en",
+                questions: [
+                  questionBlue
+                ]
 
-                instructionLanguage:
-                  "pt-BR",
+              }
 
-                feedbackLanguage:
-                  "pt-BR",
+            },
+
+            /* -------------------------------------------
+               ETAPA 2
+
+               Novamente, mechanic vem do Router.
+               ------------------------------------------- */
+
+            {
+
+              id:
+                "router-step-categories",
+
+              mechanic:
+                categoriesDecision
+                  .selected
+                  .mechanicId,
+
+              payload: {
+
+                id:
+                  "router-categories-activity",
+
+                title:
+                  "Animals and Fruits",
+
+                subject:
+                  "Língua Inglesa",
+
+                year:
+                  1,
+
+                module:
+                  1,
 
                 questions: [
-
-                  {
-
-                    id:
-                      "animals-fruits-01",
-
-                    skill: {
-
-                      code:
-                        "VOCAB-CATEGORIES-01",
-
-                      description:
-                        "Classificar vocabulário básico em língua inglesa por categoria semântica."
-                    },
-
-                    difficulty:
-                      "easy",
-
-                    statement:
-                      "Animals and Fruits",
-
-                    instruction:
-                      "Arraste cada palavra para a categoria correta.",
-
-                    contentLanguage:
-                      "en",
-
-                    instructionLanguage:
-                      "pt-BR",
-
-                    feedbackLanguage:
-                      "pt-BR",
-
-                    audio: {
-
-                      enabled:
-                        true,
-
-                      text:
-                        "Arraste cada palavra para a categoria correta.",
-
-                      language:
-                        "pt-BR",
-
-                      role:
-                        "instruction"
-                    },
-
-                    alternatives: [
-
-                      {
-
-                        id:
-                          "dog",
-
-                        text:
-                          "DOG"
-
-                      },
-
-                      {
-
-                        id:
-                          "apple",
-
-                        text:
-                          "APPLE"
-
-                      },
-
-                      {
-
-                        id:
-                          "cat",
-
-                        text:
-                          "CAT"
-
-                      },
-
-                      {
-
-                        id:
-                          "banana",
-
-                        text:
-                          "BANANA"
-
-                      }
-
-                    ],
-
-                    answer: {
-
-                      type:
-                        "pairs",
-
-                      value: [
-
-                        {
-                          source:
-                            "dog",
-
-                          target:
-                            "animals"
-                        },
-
-                        {
-                          source:
-                            "cat",
-
-                          target:
-                            "animals"
-                        },
-
-                        {
-                          source:
-                            "apple",
-
-                          target:
-                            "fruits"
-                        },
-
-                        {
-                          source:
-                            "banana",
-
-                          target:
-                            "fruits"
-                        }
-
-                      ]
-
-                    },
-
-                    feedback: {
-
-                      correct:
-                        "Excelente! Todos os itens estão na categoria correta.",
-
-                      incorrect:
-                        "Observe as categorias e tente novamente.",
-
-                      language:
-                        "pt-BR"
-
-                    },
-
-                    delivery: {
-
-                      mechanic:
-                        "auto",
-
-                      preferred: [
-                        "drag-drop"
-                      ],
-
-                      allowImage:
-                        true,
-
-                      allowAudio:
-                        true
-
-                    },
-
-                    metadata: {
-
-                      title:
-                        "Animals and Fruits",
-
-                      layout:
-                        "categories",
-
-                      shuffleItems:
-                        true,
-
-                      shuffleTargets:
-                        false,
-
-                      estimatedSeconds:
-                        45,
-
-                      targets: [
-
-                        {
-
-                          id:
-                            "animals",
-
-                          label:
-                            "ANIMALS"
-
-                        },
-
-                        {
-
-                          id:
-                            "fruits",
-
-                          label:
-                            "FRUITS"
-
-                        }
-
-                      ]
-
-                    }
-
-                  }
-
+                  questionCategories
                 ]
 
               }
