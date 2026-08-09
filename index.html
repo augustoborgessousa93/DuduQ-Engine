@@ -46,8 +46,11 @@
   <!-- Componente central de conclusão -->
   <script src="./core/duduq-completion.js?v=100"></script>
 
-  <!-- Host com contrato global de progresso -->
+  <!-- Host: fonte oficial do progresso global -->
   <script src="./core/duduq-host.js?v=130"></script>
+
+  <!-- Sincronizador visual do progresso entre mecânicas -->
+  <script src="./core/duduq-progress-ui.js?v=100"></script>
 
   <!-- =====================================================
        MECÂNICAS DISPONÍVEIS
@@ -107,6 +110,14 @@
           return;
         }
 
+        if (!window.DuduQProgressUI) {
+
+          root.innerHTML =
+            "Erro: DuduQ Progress UI não foi carregado.";
+
+          return;
+        }
+
         if (!window.DuduQRouter) {
 
           root.innerHTML =
@@ -154,6 +165,9 @@
 
             host:
               window.DuduQ.version,
+
+            progressUI:
+              window.DuduQProgressUI.version,
 
             bubblePop:
               window.DuduQ
