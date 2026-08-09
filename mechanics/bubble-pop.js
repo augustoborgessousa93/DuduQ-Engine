@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ MECHANIC — BUBBLE POP
    Adaptador central da mecânica Bubble Pop.
-   Versão 1.0.1
+   Versão 1.0.2
    ========================================================= */
 
 (function () {
@@ -15,7 +15,11 @@
   }
 
   const MECHANIC_ID = "bubble-pop";
-  const VERSION = "1.0.1";
+  const VERSION = "1.0.2";
+
+  /* =======================================================
+     CAMINHO DO ENGINE
+     ======================================================= */
 
   function getEngineBase() {
     if (window.DUDUQ_ENGINE_BASE) {
@@ -31,6 +35,85 @@
     return ".";
   }
 
+  /* =======================================================
+     SERIALIZAÇÃO SEGURA
+     ======================================================= */
+
+  function makeSerializable(value) {
+    if (value == null) {
+      return value;
+    }
+
+    try {
+      if (
+        typeof structuredClone ===
+        "function"
+      ) {
+        return structuredClone(value);
+      }
+    } catch (_) {}
+
+    try {
+      return JSON.parse(
+        JSON.stringify(value)
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function createSafeContext(
+    context = {}
+  ) {
+    /*
+     * NÃO enviamos:
+     *
+     * context.assets
+     * context.sound
+     *
+     * porque esses objetos possuem funções
+     * que não podem atravessar postMessage.
+     */
+
+    return {
+      engineVersion:
+        context.engineVersion ??
+        null,
+
+      moduleId:
+        context.moduleId ??
+        null,
+
+      year:
+        context.year ??
+        null,
+
+      subject:
+        context.subject ??
+        null,
+
+      module:
+        context.module ??
+        null,
+
+      stepId:
+        context.stepId ??
+        null,
+
+      stepIndex:
+        context.stepIndex ??
+        null,
+
+      totalSteps:
+        context.totalSteps ??
+        null
+    };
+  }
+
+  /* =======================================================
+     VALIDAÇÃO
+     ======================================================= */
+
   function validate(payload) {
     if (payload == null) {
       return false;
@@ -40,14 +123,21 @@
       return payload.length > 0;
     }
 
-    return typeof payload === "object";
+    return (
+      typeof payload ===
+      "object"
+    );
   }
+
+  /* =======================================================
+     MONTAGEM DA MECÂNICA
+     ======================================================= */
 
   function mount({
     container,
     payload,
     options = {},
-    context,
+    context = {},
     onComplete
   }) {
     if (!container) {
@@ -59,17 +149,30 @@
     container.innerHTML = "";
 
     const wrapper =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
     wrapper.className =
       "duduq-mechanic-frame";
 
-    wrapper.style.width = "100%";
-    wrapper.style.minHeight = "100vh";
-    wrapper.style.position = "relative";
+    wrapper.style.width =
+      "100%";
+
+    wrapper.style.minHeight =
+      "100vh";
+
+    wrapper.style.position =
+      "relative";
+
+    /* =====================================================
+       IFRAME
+       ===================================================== */
 
     const iframe =
-      document.createElement("iframe");
+      document.createElement(
+        "iframe"
+      );
 
     iframe.title =
       "DuduQ — Bubble Pop";
@@ -84,12 +187,24 @@
       ""
     );
 
-    iframe.style.width = "100%";
-    iframe.style.height = "100vh";
-    iframe.style.border = "0";
-    iframe.style.display = "block";
+    iframe.style.width =
+      "100%";
+
+    iframe.style.height =
+      "100vh";
+
+    iframe.style.border =
+      "0";
+
+    iframe.style.display =
+      "block";
+
     iframe.style.background =
       "transparent";
+
+    /* =====================================================
+       URL DA MECÂNICA
+       ===================================================== */
 
     const engineBase =
       getEngineBase();
@@ -97,23 +212,19 @@
     const params =
       new URLSearchParams();
 
-    if (
-      context &&
-      context.year
-    ) {
+    if (context.year) {
       params.set(
         "ano",
         String(context.year)
       );
     }
 
-    if (
-      context &&
-      context.moduleId
-    ) {
+    if (context.moduleId) {
       params.set(
         "module",
-        String(context.moduleId)
+        String(
+          context.moduleId
+        )
       );
     }
 
@@ -123,7 +234,27 @@
     iframe.src =
       engineBase +
       "/DUDUQ_BUBBLE_POP.html" +
-      (query ? "?" + query : "");
+      (
+        query
+          ? "?" + query
+          : ""
+      );
+
+    /* =====================================================
+       PACOTE ENVIADO AO BUBBLE POP
+       ===================================================== */
+
+    const messagePayload =
+      makeSerializable(payload);
+
+    const messageOptions =
+      makeSerializable(options) ||
+      {};
+
+    const messageContext =
+      createSafeContext(
+        context
+      );
 
     function sendContent() {
       if (
@@ -132,26 +263,44 @@
         return;
       }
 
-      iframe.contentWindow.postMessage(
-        {
-          type:
-            "DUDUQ_LOAD_CONTENT",
+      try {
+        iframe.contentWindow.postMessage(
+          {
+            type:
+              "DUDUQ_LOAD_CONTENT",
 
-          mechanic:
-            MECHANIC_ID,
+            mechanic:
+              MECHANIC_ID,
 
-          version:
-            VERSION,
+            version:
+              VERSION,
 
-          payload,
+            payload:
+              messagePayload,
 
-          options,
+            options:
+              messageOptions,
 
-          context
-        },
-        "*"
-      );
+            context:
+              messageContext
+          },
+          "*"
+        );
+
+        console.info(
+          "[DuduQ Bubble Pop] Conteúdo enviado para a mecânica."
+        );
+      } catch (error) {
+        console.error(
+          "[DuduQ Bubble Pop] Falha ao enviar conteúdo:",
+          error
+        );
+      }
     }
+
+    /* =====================================================
+       MENSAGENS RECEBIDAS DA MECÂNICA
+       ===================================================== */
 
     function handleMessage(
       event
@@ -168,31 +317,58 @@
 
       if (
         !data ||
-        typeof data !== "object"
+        typeof data !==
+          "object"
       ) {
         return;
       }
+
+      /* ---------------------------------------------------
+         MECÂNICA PRONTA
+         --------------------------------------------------- */
 
       if (
         data.type ===
         "DUDUQ_MECHANIC_READY"
       ) {
+        console.info(
+          "[DuduQ Bubble Pop] Mecânica pronta."
+        );
+
         sendContent();
+
+        return;
       }
+
+      /* ---------------------------------------------------
+         MECÂNICA CONCLUÍDA
+         --------------------------------------------------- */
 
       if (
         data.type ===
         "DUDUQ_MECHANIC_COMPLETE"
       ) {
+        console.info(
+          "[DuduQ Bubble Pop] Mecânica concluída.",
+          data.result
+        );
+
         if (
           typeof onComplete ===
           "function"
         ) {
           onComplete(
-            data.result || null
+            data.result ||
+            null
           );
         }
+
+        return;
       }
+
+      /* ---------------------------------------------------
+         ERRO DA MECÂNICA
+         --------------------------------------------------- */
 
       if (
         data.type ===
@@ -210,15 +386,30 @@
       handleMessage
     );
 
+    /* =====================================================
+       FALLBACK DE ENVIO
+       ===================================================== */
+
     iframe.addEventListener(
       "load",
       function () {
+        /*
+         * O envio principal acontece quando
+         * recebemos DUDUQ_MECHANIC_READY.
+         *
+         * Este envio adicional serve apenas
+         * como fallback.
+         */
         window.setTimeout(
           sendContent,
-          100
+          250
         );
       }
     );
+
+    /* =====================================================
+       INSERÇÃO
+       ===================================================== */
 
     wrapper.appendChild(
       iframe
@@ -228,6 +419,10 @@
       wrapper
     );
 
+    /* =====================================================
+       DESTRUIÇÃO
+       ===================================================== */
+
     return function destroy() {
       window.removeEventListener(
         "message",
@@ -235,9 +430,14 @@
       );
 
       iframe.remove();
+
       wrapper.remove();
     };
   }
+
+  /* =======================================================
+     REGISTRO NO DUDUQ HOST
+     ======================================================= */
 
   window.DuduQ.registerMechanic({
     id:
