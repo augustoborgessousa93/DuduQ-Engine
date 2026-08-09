@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <title>DuduQ Engine — Teste Bubble Pop</title>
+
+  <link
+    rel="stylesheet"
+    href="./core/duduq-theme.css"
+  >
+</head>
+
+<body>
+
+  <div id="root">
+    Carregando DuduQ Engine...
+  </div>
+
+  <!-- ==========================================
+       DUDUQ CORE
+       A ordem destes arquivos é importante.
+       ========================================== -->
+
+  <script src="./core/duduq-assets.js"></script>
+
+  <script src="./core/duduq-sound.js"></script>
+
+  <script src="./core/duduq-host.js"></script>
+
+  <!-- ==========================================
+       MECÂNICAS
+       ========================================== -->
+
+  <script src="./mechanics/bubble-pop.js"></script>
+
+  <!-- ==========================================
+       TESTE DE INTEGRAÇÃO
+       ========================================== -->
+
+  <script>
+    window.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        if (!window.DuduQ) {
+          document.getElementById(
+            "root"
+          ).innerHTML =
+            "Erro: DuduQ Engine não foi carregado.";
+
+          return;
+        }
+
+        if (
+          !window.DuduQ.hasMechanic(
+            "bubble-pop"
+          )
+        ) {
+          document.getElementById(
+            "root"
+          ).innerHTML =
+            "Erro: Bubble Pop não foi registrado.";
+
+          return;
+        }
+
+        window.DuduQ.start({
+          id:
+            "teste-bubble-pop-1ano",
+
+          year:
+            1,
+
+          subject:
+            "Língua Inglesa",
+
+          module:
+            1,
+
+          container:
+            "#root",
+
+          steps: [
+            {
+              id:
+                "questao-cores-01",
+
+              mechanic:
+                "bubble-pop",
+
+              payload: {
+                lessonId:
+                  "teste-cores-1ano",
+
+                lessonTitle:
+                  "Colors",
+
+                grade:
+                  1,
+
+                questions: [
+                  {
+                    id:
+                      "blue-test-01",
+
+                    title:
+                      "Blue",
+
+                    instruction:
+                      "Estoure a bolha com Blue.",
+
+                    learningObjective:
+                      "Reconhecer a palavra Blue entre diferentes cores.",
+
+                    difficulty:
+                      1,
+
+                    tags: [
+                      "colors",
+                      "recognition"
+                    ],
+
+                    targetIds: [
+                      "blue"
+                    ],
+
+                    bubbles: [
+                      {
+                        id:
+                          "blue",
+
+                        label:
+                          "Blue",
+
+                        tone:
+                          "blue"
+                      },
+
+                      {
+                        id:
+                          "red",
+
+                        label:
+                          "Red",
+
+                        tone:
+                          "pink"
+                      },
+
+                      {
+                        id:
+                          "green",
+
+                        label:
+                          "Green",
+
+                        tone:
+                          "green"
+                      },
+
+                      {
+                        id:
+                          "yellow",
+
+                        label:
+                          "Yellow",
+
+                        tone:
+                          "yellow"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        });
+      }
+    );
+  </script>
+
+</body>
+</html>
