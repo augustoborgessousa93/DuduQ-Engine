@@ -1399,3 +1399,102 @@
     display: none !important;
   }
 }
+/* =========================================================
+   DUDUQ COMPLETION — REFINAMENTO VISUAL
+   Versão 1.2.2
+   Espaçamento + CTA + confete
+   ========================================================= */
+
+
+/* =========================================================
+   DESKTOP
+   Aproxima o conteúdo do mascote.
+   ========================================================= */
+
+@media (min-width: 700px) {
+
+  .duduq-completion-card {
+    justify-content: flex-start;
+
+    padding-top: 104px;
+  }
+
+}
+
+
+/* =========================================================
+   NOTEBOOK / TELA DE BAIXA ALTURA
+   Este é o caso do print atual.
+   ========================================================= */
+
+@media (max-height: 720px) and (min-width: 700px) {
+
+  .duduq-completion-card {
+    justify-content: flex-start;
+
+    padding-top: 78px;
+
+    padding-bottom: 27px;
+
+    gap: 9px;
+  }
+
+  .duduq-completion-title {
+    margin-top: 0;
+  }
+
+  .duduq-completion-actions {
+    margin-top: 21px;
+  }
+
+}
+
+
+/* =========================================================
+   MAIS RESPIRO ANTES DO CTA
+   ========================================================= */
+
+.duduq-completion-actions {
+  margin-top: 22px;
+}
+
+
+/* =========================================================
+   REMOVE O ANEL AZUL EXTERNO DO BOTÃO
+   O próprio botão continua com profundidade e borda.
+   ========================================================= */
+
+.duduq-completion-button:focus,
+.duduq-completion-button:focus-visible {
+  outline: none !important;
+
+  outline-offset: 0 !important;
+}
+
+
+/* =========================================================
+   CONFETE
+   Um pouco mais prolongado sem ficar cansativo.
+   ========================================================= */
+
+.duduq-completion-star {
+  animation-duration: 3300ms !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   Mantém proporções mais compactas.
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+  .duduq-completion-actions {
+    margin-top: 16px;
+  }
+
+  .duduq-completion-star {
+    animation-duration: 3000ms !important;
+  }
+
+}
