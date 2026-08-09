@@ -20,10 +20,10 @@
     href="./core/duduq-theme.css?v=110"
   >
 
-  <!-- Intro cinematográfica -->
+  <!-- Intro cinematográfica AAA+ -->
   <link
     rel="stylesheet"
-    href="./core/duduq-intro.css?v=100"
+    href="./core/duduq-intro.css?v=110"
   >
 
   <!-- Tela final premium centralizada -->
@@ -47,8 +47,8 @@
 
   <script src="./core/duduq-sound.js?v=100"></script>
 
-  <!-- Intro universal -->
-  <script src="./core/duduq-intro.js?v=100"></script>
+  <!-- Intro cinematográfica universal -->
+  <script src="./core/duduq-intro.js?v=110"></script>
 
   <script src="./core/duduq-schema.js?v=100"></script>
 
@@ -77,7 +77,7 @@
   <script src="./core/duduq-router.js?v=100"></script>
 
   <!-- =====================================================
-       TESTE DE ROTEAMENTO + INTRO
+       TESTE DE ROTEAMENTO + INTRO CINEMATOGRÁFICA
        ===================================================== -->
 
   <script>
@@ -183,6 +183,7 @@
         console.info(
           "[DuduQ Core Test]",
           {
+
             intro:
               window.DuduQIntro.version,
 
@@ -267,6 +268,7 @@
           alternatives: [
 
             {
+
               id:
                 "blue",
 
@@ -274,12 +276,16 @@
                 "Blue",
 
               metadata: {
+
                 tone:
                   "blue"
+
               }
+
             },
 
             {
+
               id:
                 "red",
 
@@ -287,12 +293,16 @@
                 "Red",
 
               metadata: {
+
                 tone:
                   "pink"
+
               }
+
             },
 
             {
+
               id:
                 "green",
 
@@ -300,12 +310,16 @@
                 "Green",
 
               metadata: {
+
                 tone:
                   "green"
+
               }
+
             },
 
             {
+
               id:
                 "yellow",
 
@@ -313,9 +327,12 @@
                 "Yellow",
 
               metadata: {
+
                 tone:
                   "yellow"
+
               }
+
             }
 
           ],
@@ -327,6 +344,7 @@
 
             value:
               "blue"
+
           },
 
           feedback: {
@@ -339,6 +357,7 @@
 
             language:
               "pt-BR"
+
           },
 
           delivery: {
@@ -351,6 +370,7 @@
 
             allowAudio:
               true
+
           }
 
         };
@@ -382,6 +402,7 @@
 
             description:
               "Classificar vocabulário básico em língua inglesa por categoria semântica."
+
           },
 
           difficulty:
@@ -405,35 +426,43 @@
           alternatives: [
 
             {
+
               id:
                 "dog",
 
               text:
                 "DOG"
+
             },
 
             {
+
               id:
                 "apple",
 
               text:
                 "APPLE"
+
             },
 
             {
+
               id:
                 "cat",
 
               text:
                 "CAT"
+
             },
 
             {
+
               id:
                 "banana",
 
               text:
                 "BANANA"
+
             }
 
           ],
@@ -446,35 +475,43 @@
             value: [
 
               {
+
                 source:
                   "dog",
 
                 target:
                   "animals"
+
               },
 
               {
+
                 source:
                   "cat",
 
                 target:
                   "animals"
+
               },
 
               {
+
                 source:
                   "apple",
 
                 target:
                   "fruits"
+
               },
 
               {
+
                 source:
                   "banana",
 
                 target:
                   "fruits"
+
               }
 
             ]
@@ -491,6 +528,7 @@
 
             language:
               "pt-BR"
+
           },
 
           delivery: {
@@ -503,6 +541,7 @@
 
             allowAudio:
               true
+
           },
 
           metadata: {
@@ -525,19 +564,23 @@
             targets: [
 
               {
+
                 id:
                   "animals",
 
                 label:
                   "ANIMALS"
+
               },
 
               {
+
                 id:
                   "fruits",
 
                 label:
                   "FRUITS"
+
               }
 
             ]
@@ -642,6 +685,7 @@
         console.info(
           "[DuduQ Router Test] SUCESSO",
           {
+
             etapa1:
               blueDecision
                 .selected
@@ -651,12 +695,16 @@
               categoriesDecision
                 .selected
                 .mechanicId
+
           }
         );
 
 
         /* ===============================================
            FUNÇÃO QUE INICIA O MÓDULO
+
+           O Host continua intacto.
+           Só inicia depois do clique no CTA.
            =============================================== */
 
         function startModule() {
@@ -712,7 +760,9 @@
                     1,
 
                   questions: [
+
                     questionBlue
+
                   ]
 
                 }
@@ -752,7 +802,9 @@
                     1,
 
                   questions: [
+
                     questionCategories
+
                   ]
 
                 }
@@ -768,7 +820,9 @@
 
         /* ===============================================
            LIMPA O ROOT
-           O jogo ainda não começa.
+
+           O módulo ainda NÃO começa.
+           A intro controla a abertura.
            =============================================== */
 
         root.innerHTML =
@@ -776,100 +830,146 @@
 
 
         /* ===============================================
-           INTRO CINEMATOGRÁFICA
+           INTRO CINEMATOGRÁFICA AAA+
+
+           ATO 1
+           Empresa em tela cheia.
+
+           ATO 2
+           TV light collapse / feixe cinematográfico.
+
+           ATO 3
+           EduQ Play + ano + disciplina + módulo.
+
+           ATO 4
+           Loading completo + CTA.
            =============================================== */
 
         window.DuduQIntro.show({
 
-          /*
-           * LOGO DA EMPRESA
-           * Já configurada globalmente no
-           * duduq-intro.js.
-           */
+          /* =============================================
+             MARCA DA EMPRESA
+
+             A URL padrão está centralizada dentro
+             do duduq-intro.js.
+             ============================================= */
+
+          companyKicker:
+            "UMA CRIAÇÃO DE",
 
 
           /*
-           * LOGO OFICIAL DA COLEÇÃO
-           * EDUQ PLAY
+           * Tamanho hero da logo da empresa.
            */
+
+          companyWidth:
+            620,
+
+
+          /* =============================================
+             LOGO OFICIAL DA COLEÇÃO
+             EDUQ PLAY
+             ============================================= */
 
           collectionLogo:
             "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Logo%20EduQ%20Play.png",
 
 
-          /*
-           * Fallback caso a imagem não carregue.
-           */
-
           collectionName:
             "EduQ Play",
+
 
           collectionAlt:
             "EduQ Play",
 
 
           /*
-           * DADOS DINÂMICOS DO MÓDULO
+           * Coleção bem evidente no segundo ato.
            */
+
+          collectionWidth:
+            650,
+
+
+          /* =============================================
+             DADOS DINÂMICOS DO MÓDULO
+             ============================================= */
 
           year:
             1,
 
+
           subject:
             "Língua Inglesa",
+
 
           module:
             1,
 
 
-          /*
-           * EXPERIÊNCIA DE ABERTURA
-           */
+          /* =============================================
+             TEXTOS DA EXPERIÊNCIA
+             ============================================= */
 
           loadingLabel:
             "PREPARANDO SUA MISSÃO",
 
+
           readyLabel:
             "MISSÃO PRONTA",
 
+
           startLabel:
             "INICIAR MISSÃO",
+
 
           hint:
             "Tudo pronto para começar!",
 
 
-          /*
-           * TEMPO CINEMATOGRÁFICO MÍNIMO
-           */
+          /* =============================================
+             TIMING CINEMATOGRÁFICO
+
+             Empresa:
+             aproximadamente 1,8 s
+
+             Transição:
+             aproximadamente 0,62 s
+
+             Coleção antes do CTA:
+             aproximadamente 1 s
+             ============================================= */
 
           minDurationMs:
             1850,
 
 
-          /*
-           * ATMOSFERA VISUAL
-           */
+          brandingDurationMs:
+            1800,
+
+
+          switchingDurationMs:
+            620,
+
+
+          missionMinDurationMs:
+            1000,
+
+
+          /* =============================================
+             ATMOSFERA
+             ============================================= */
 
           sparkCount:
             14,
 
 
-          /*
-           * PROPORÇÕES DAS MARCAS
-           */
+          /* =============================================
+             AO CLICAR EM INICIAR MISSÃO
 
-          companyWidth:
-            220,
-
-          collectionWidth:
-            590,
-
-
-          /*
-           * O JOGO É MONTADO POR BAIXO
-           * DA INTRO NO CLIQUE.
-           */
+             O jogo nasce por baixo enquanto a
+             intro executa seu fade cinematográfico.
+             ============================================= */
 
           onStart:
             function () {
