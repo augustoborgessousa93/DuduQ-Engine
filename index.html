@@ -657,10 +657,6 @@
 
         /* ===============================================
            FUNÇÃO QUE INICIA O MÓDULO
-
-           Ela NÃO é executada imediatamente.
-           Só roda quando o estudante clicar em
-           INICIAR MISSÃO na intro.
            =============================================== */
 
         function startModule() {
@@ -771,10 +767,8 @@
 
 
         /* ===============================================
-           LIMPA O TEXTO DE CARREGAMENTO DO ROOT
-
-           O jogo ainda NÃO começa.
-           A intro ficará por cima da tela.
+           LIMPA O ROOT
+           O jogo ainda não começa.
            =============================================== */
 
         root.innerHTML =
@@ -788,41 +782,34 @@
         window.DuduQIntro.show({
 
           /*
-           * A logo da EMPRESA já possui
-           * um padrão interno no duduq-intro.js.
-           *
-           * Portanto não precisamos repetir
-           * a URL aqui.
+           * LOGO DA EMPRESA
+           * Já configurada globalmente no
+           * duduq-intro.js.
            */
 
 
           /*
-           * LOGO DA COLEÇÃO
-           *
-           * Temporariamente vazia.
-           *
-           * Assim que tivermos o endereço da
-           * logo oficial da coleção, colocaremos
-           * aqui e ela substituirá automaticamente
-           * o texto DuduQ.
+           * LOGO OFICIAL DA COLEÇÃO
+           * EDUQ PLAY
            */
 
           collectionLogo:
-            "",
+            "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Logo%20EduQ%20Play.png",
 
 
           /*
-           * Fallback enquanto não ligamos
-           * a logo oficial da coleção.
+           * Fallback caso a imagem não carregue.
            */
 
           collectionName:
-            "DuduQ",
+            "EduQ Play",
+
+          collectionAlt:
+            "EduQ Play",
 
 
           /*
-           * Estes dados são DINÂMICOS.
-           * No produto final virão do módulo.
+           * DADOS DINÂMICOS DO MÓDULO
            */
 
           year:
@@ -836,7 +823,7 @@
 
 
           /*
-           * Experiência de abertura.
+           * EXPERIÊNCIA DE ABERTURA
            */
 
           loadingLabel:
@@ -853,8 +840,7 @@
 
 
           /*
-           * Tempo mínimo para a sequência
-           * cinematográfica fazer sentido.
+           * TEMPO CINEMATOGRÁFICO MÍNIMO
            */
 
           minDurationMs:
@@ -862,7 +848,7 @@
 
 
           /*
-           * Partículas discretas.
+           * ATMOSFERA VISUAL
            */
 
           sparkCount:
@@ -870,12 +856,19 @@
 
 
           /*
-           * Quando o usuário clicar em
-           * INICIAR MISSÃO, montamos o jogo
-           * imediatamente por baixo da intro.
-           *
-           * A intro continua sua animação
-           * de saída por alguns milissegundos.
+           * PROPORÇÕES DAS MARCAS
+           */
+
+          companyWidth:
+            220,
+
+          collectionWidth:
+            590,
+
+
+          /*
+           * O JOGO É MONTADO POR BAIXO
+           * DA INTRO NO CLIQUE.
            */
 
           onStart:
