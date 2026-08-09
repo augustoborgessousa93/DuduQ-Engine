@@ -9,7 +9,7 @@
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
 
-  <title>DuduQ Engine — Teste Bubble Pop 3 Questões</title>
+  <title>DuduQ Engine — Teste Schema Universal</title>
 
   <link
     rel="stylesheet"
@@ -31,16 +31,19 @@
 
   <script src="./core/duduq-sound.js?v=100"></script>
 
+  <!-- Schema precisa estar disponível antes das mecânicas -->
+  <script src="./core/duduq-schema.js?v=100"></script>
+
   <script src="./core/duduq-host.js?v=110"></script>
 
   <!-- =====================================================
        MECÂNICAS
        ===================================================== -->
 
-  <script src="./mechanics/bubble-pop.js?v=102"></script>
+  <script src="./mechanics/bubble-pop.js?v=110"></script>
 
   <!-- =====================================================
-       TESTE — BUBBLE POP COM 3 QUESTÕES
+       TESTE — SCHEMA UNIVERSAL
        ===================================================== -->
 
   <script>
@@ -49,15 +52,38 @@
       "DOMContentLoaded",
       function () {
 
-        if (!window.DuduQ) {
-
+        const root =
           document.getElementById(
             "root"
-          ).innerHTML =
+          );
+
+        /* ===============================================
+           VERIFICAÇÃO DO SCHEMA
+           =============================================== */
+
+        if (!window.DuduQSchema) {
+
+          root.innerHTML =
+            "Erro: DuduQ Schema não foi carregado.";
+
+          return;
+        }
+
+        /* ===============================================
+           VERIFICAÇÃO DO HOST
+           =============================================== */
+
+        if (!window.DuduQ) {
+
+          root.innerHTML =
             "Erro: DuduQ Engine não foi carregado.";
 
           return;
         }
+
+        /* ===============================================
+           VERIFICAÇÃO DA MECÂNICA
+           =============================================== */
 
         if (
           !window.DuduQ.hasMechanic(
@@ -65,18 +91,20 @@
           )
         ) {
 
-          document.getElementById(
-            "root"
-          ).innerHTML =
+          root.innerHTML =
             "Erro: Bubble Pop não foi registrado.";
 
           return;
         }
 
+        /* ===============================================
+           MÓDULO DE TESTE
+           =============================================== */
+
         window.DuduQ.start({
 
           id:
-            "teste-bubble-pop-3-questoes",
+            "teste-schema-universal-1ano",
 
           year:
             1,
@@ -95,67 +123,108 @@
             {
 
               id:
-                "bloco-cores-bubble-pop",
+                "cores-schema-universal",
 
               mechanic:
                 "bubble-pop",
 
               payload: {
 
-                lessonId:
-                  "teste-colors-3-questoes",
+                id:
+                  "modulo-1-colors",
 
-                lessonTitle:
+                title:
                   "Colors",
 
-                grade:
+                description:
+                  "Teste do conteúdo universal do DuduQ.",
+
+                subject:
+                  "Língua Inglesa",
+
+                year:
                   1,
+
+                module:
+                  1,
+
+                contentLanguage:
+                  "en",
+
+                instructionLanguage:
+                  "pt-BR",
+
+                feedbackLanguage:
+                  "pt-BR",
 
                 questions: [
 
-                  /* =========================================
+                  /* =====================================
                      QUESTÃO 1 — BLUE
-                     ========================================= */
+                     ===================================== */
 
                   {
 
                     id:
                       "color-blue-01",
 
-                    title:
+                    skill: {
+
+                      code:
+                        "COLOR-RECOGNITION-01",
+
+                      description:
+                        "Reconhecer vocabulário básico de cores em língua inglesa."
+                    },
+
+                    difficulty:
+                      "easy",
+
+                    statement:
                       "Blue",
 
                     instruction:
                       "Estoure a bolha com Blue.",
 
-                    learningObjective:
-                      "Reconhecer a palavra Blue entre diferentes cores.",
+                    contentLanguage:
+                      "en",
 
-                    difficulty:
-                      1,
+                    instructionLanguage:
+                      "pt-BR",
 
-                    tags: [
-                      "colors",
-                      "recognition",
-                      "blue"
-                    ],
+                    feedbackLanguage:
+                      "pt-BR",
 
-                    targetIds: [
-                      "blue"
-                    ],
+                    audio: {
 
-                    bubbles: [
+                      enabled:
+                        true,
+
+                      text:
+                        "Blue",
+
+                      language:
+                        "en",
+
+                      role:
+                        "instruction"
+                    },
+
+                    alternatives: [
 
                       {
 
                         id:
                           "blue",
 
-                        label:
+                        text:
                           "Blue",
 
-                        tone:
-                          "blue"
+                        metadata: {
+                          tone:
+                            "blue"
+                        }
+
                       },
 
                       {
@@ -163,11 +232,14 @@
                         id:
                           "red",
 
-                        label:
+                        text:
                           "Red",
 
-                        tone:
-                          "pink"
+                        metadata: {
+                          tone:
+                            "pink"
+                        }
+
                       },
 
                       {
@@ -175,11 +247,14 @@
                         id:
                           "green",
 
-                        label:
+                        text:
                           "Green",
 
-                        tone:
-                          "green"
+                        metadata: {
+                          tone:
+                            "green"
+                        }
+
                       },
 
                       {
@@ -187,60 +262,126 @@
                         id:
                           "yellow",
 
-                        label:
+                        text:
                           "Yellow",
 
-                        tone:
-                          "yellow"
+                        metadata: {
+                          tone:
+                            "yellow"
+                        }
+
                       }
 
-                    ]
+                    ],
+
+                    answer: {
+
+                      type:
+                        "single",
+
+                      value:
+                        "blue"
+
+                    },
+
+                    feedback: {
+
+                      correct:
+                        "Muito bem! Blue está correto.",
+
+                      incorrect:
+                        "Observe novamente e tente outra bolha.",
+
+                      language:
+                        "pt-BR"
+
+                    },
+
+                    delivery: {
+
+                      mechanic:
+                        "auto",
+
+                      preferred: [
+                        "bubble-pop"
+                      ],
+
+                      allowImage:
+                        true,
+
+                      allowAudio:
+                        true
+
+                    }
 
                   },
 
-                  /* =========================================
+                  /* =====================================
                      QUESTÃO 2 — RED
-                     ========================================= */
+                     ===================================== */
 
                   {
 
                     id:
                       "color-red-02",
 
-                    title:
+                    skill: {
+
+                      code:
+                        "COLOR-RECOGNITION-01",
+
+                      description:
+                        "Reconhecer vocabulário básico de cores em língua inglesa."
+                    },
+
+                    difficulty:
+                      "easy",
+
+                    statement:
                       "Red",
 
                     instruction:
                       "Estoure a bolha com Red.",
 
-                    learningObjective:
-                      "Reconhecer a palavra Red entre diferentes cores.",
+                    contentLanguage:
+                      "en",
 
-                    difficulty:
-                      1,
+                    instructionLanguage:
+                      "pt-BR",
 
-                    tags: [
-                      "colors",
-                      "recognition",
-                      "red"
-                    ],
+                    feedbackLanguage:
+                      "pt-BR",
 
-                    targetIds: [
-                      "red"
-                    ],
+                    audio: {
 
-                    bubbles: [
+                      enabled:
+                        true,
+
+                      text:
+                        "Red",
+
+                      language:
+                        "en",
+
+                      role:
+                        "instruction"
+                    },
+
+                    alternatives: [
 
                       {
 
                         id:
                           "yellow",
 
-                        label:
+                        text:
                           "Yellow",
 
-                        tone:
-                          "yellow"
+                        metadata: {
+                          tone:
+                            "yellow"
+                        }
+
                       },
 
                       {
@@ -248,11 +389,14 @@
                         id:
                           "red",
 
-                        label:
+                        text:
                           "Red",
 
-                        tone:
-                          "pink"
+                        metadata: {
+                          tone:
+                            "pink"
+                        }
+
                       },
 
                       {
@@ -260,11 +404,14 @@
                         id:
                           "blue",
 
-                        label:
+                        text:
                           "Blue",
 
-                        tone:
-                          "blue"
+                        metadata: {
+                          tone:
+                            "blue"
+                        }
+
                       },
 
                       {
@@ -272,60 +419,126 @@
                         id:
                           "green",
 
-                        label:
+                        text:
                           "Green",
 
-                        tone:
-                          "green"
+                        metadata: {
+                          tone:
+                            "green"
+                        }
+
                       }
 
-                    ]
+                    ],
+
+                    answer: {
+
+                      type:
+                        "single",
+
+                      value:
+                        "red"
+
+                    },
+
+                    feedback: {
+
+                      correct:
+                        "Muito bem! Red está correto.",
+
+                      incorrect:
+                        "Observe novamente e tente outra bolha.",
+
+                      language:
+                        "pt-BR"
+
+                    },
+
+                    delivery: {
+
+                      mechanic:
+                        "auto",
+
+                      preferred: [
+                        "bubble-pop"
+                      ],
+
+                      allowImage:
+                        true,
+
+                      allowAudio:
+                        true
+
+                    }
 
                   },
 
-                  /* =========================================
+                  /* =====================================
                      QUESTÃO 3 — GREEN
-                     ========================================= */
+                     ===================================== */
 
                   {
 
                     id:
                       "color-green-03",
 
-                    title:
+                    skill: {
+
+                      code:
+                        "COLOR-RECOGNITION-01",
+
+                      description:
+                        "Reconhecer vocabulário básico de cores em língua inglesa."
+                    },
+
+                    difficulty:
+                      "easy",
+
+                    statement:
                       "Green",
 
                     instruction:
                       "Estoure a bolha com Green.",
 
-                    learningObjective:
-                      "Reconhecer a palavra Green entre diferentes cores.",
+                    contentLanguage:
+                      "en",
 
-                    difficulty:
-                      1,
+                    instructionLanguage:
+                      "pt-BR",
 
-                    tags: [
-                      "colors",
-                      "recognition",
-                      "green"
-                    ],
+                    feedbackLanguage:
+                      "pt-BR",
 
-                    targetIds: [
-                      "green"
-                    ],
+                    audio: {
 
-                    bubbles: [
+                      enabled:
+                        true,
+
+                      text:
+                        "Green",
+
+                      language:
+                        "en",
+
+                      role:
+                        "instruction"
+                    },
+
+                    alternatives: [
 
                       {
 
                         id:
                           "red",
 
-                        label:
+                        text:
                           "Red",
 
-                        tone:
-                          "pink"
+                        metadata: {
+                          tone:
+                            "pink"
+                        }
+
                       },
 
                       {
@@ -333,11 +546,14 @@
                         id:
                           "green",
 
-                        label:
+                        text:
                           "Green",
 
-                        tone:
-                          "green"
+                        metadata: {
+                          tone:
+                            "green"
+                        }
+
                       },
 
                       {
@@ -345,11 +561,14 @@
                         id:
                           "yellow",
 
-                        label:
+                        text:
                           "Yellow",
 
-                        tone:
-                          "yellow"
+                        metadata: {
+                          tone:
+                            "yellow"
+                        }
+
                       },
 
                       {
@@ -357,14 +576,57 @@
                         id:
                           "blue",
 
-                        label:
+                        text:
                           "Blue",
 
-                        tone:
-                          "blue"
+                        metadata: {
+                          tone:
+                            "blue"
+                        }
+
                       }
 
-                    ]
+                    ],
+
+                    answer: {
+
+                      type:
+                        "single",
+
+                      value:
+                        "green"
+
+                    },
+
+                    feedback: {
+
+                      correct:
+                        "Muito bem! Green está correto.",
+
+                      incorrect:
+                        "Observe novamente e tente outra bolha.",
+
+                      language:
+                        "pt-BR"
+
+                    },
+
+                    delivery: {
+
+                      mechanic:
+                        "auto",
+
+                      preferred: [
+                        "bubble-pop"
+                      ],
+
+                      allowImage:
+                        true,
+
+                      allowAudio:
+                        true
+
+                    }
 
                   }
 
