@@ -1,16 +1,14 @@
 /* =========================================================
-   DUDUQ CORE — INTRO
+   DUDUQ CORE — INTRO CINEMATOGRÁFICA
    Launch Screen universal premium AAA+
-   Versão 1.0.0
+   Versão 1.1.0
 
-   Responsabilidades:
-   - abertura cinematográfica dos módulos
-   - marca da empresa
-   - marca / coleção
-   - ano, disciplina e módulo
-   - loading gamer
-   - CTA "INICIAR MISSÃO"
-   - transição elegante para a primeira mecânica
+   ATOS:
+   1. BRANDING  — logo da empresa grande e protagonista
+   2. SWITCHING — transição cinematográfica / TV light collapse
+   3. MISSION   — coleção + ano + disciplina + módulo + CTA
+
+   Compatível com o DOM do duduq-intro.js 1.0.0.
    ========================================================= */
 
 
@@ -22,22 +20,19 @@
   --duduq-intro-blue: #0874d8;
   --duduq-intro-blue-light: #39a4f4;
   --duduq-intro-blue-dark: #0054aa;
-  --duduq-intro-blue-deep: #083f79;
+  --duduq-intro-blue-deep: #073f7c;
 
-  --duduq-intro-cyan: #67d4ff;
+  --duduq-intro-cyan: #6dd9ff;
 
   --duduq-intro-green: #58cc02;
-  --duduq-intro-green-dark: #389800;
+  --duduq-intro-green-dark: #379800;
 
   --duduq-intro-gold: #ffc928;
-  --duduq-intro-gold-soft: #ffe78a;
+  --duduq-intro-gold-soft: #ffe789;
 
-  --duduq-intro-ink: #173a5e;
-  --duduq-intro-text: #587089;
-  --duduq-intro-muted: #8aa0b4;
-
-  --duduq-intro-border: #d4e3f0;
-  --duduq-intro-border-strong: #b9d4e9;
+  --duduq-intro-ink: #153d66;
+  --duduq-intro-text: #55738e;
+  --duduq-intro-muted: #8ba1b5;
 
   --duduq-intro-white: #ffffff;
 
@@ -65,7 +60,7 @@
 
 
 /* =========================================================
-   TELA
+   ROOT
    ========================================================= */
 
 .duduq-intro {
@@ -84,49 +79,52 @@
   place-items: center;
 
   padding:
-    clamp(22px, 4vh, 46px)
-    clamp(16px, 4vw, 56px);
+    clamp(18px, 3vh, 34px)
+    clamp(14px, 3vw, 44px);
 
-  color: var(--duduq-intro-ink);
+  font-family:
+    var(--duduq-intro-font);
 
-  font-family: var(--duduq-intro-font);
+  color:
+    var(--duduq-intro-ink);
 
   background:
     radial-gradient(
-      circle at 14% 14%,
-      rgba(95, 197, 255, .10),
+      circle at 13% 14%,
+      rgba(74, 187, 255, .11),
       transparent 27%
     ),
     radial-gradient(
-      circle at 87% 82%,
-      rgba(8, 116, 216, .08),
-      transparent 30%
+      circle at 88% 80%,
+      rgba(39, 151, 237, .085),
+      transparent 29%
     ),
     radial-gradient(
-      circle at 86% 15%,
-      rgba(255, 201, 40, .055),
-      transparent 22%
+      circle at 85% 14%,
+      rgba(255, 201, 40, .045),
+      transparent 21%
     ),
     linear-gradient(
       180deg,
       #ffffff 0%,
-      #fcfeff 54%,
-      #f5faff 100%
+      #ffffff 48%,
+      #f6fbff 100%
     );
 
   opacity: 0;
 
+  isolation: isolate;
+
   animation:
     duduqIntroScreenIn
-    420ms
-    cubic-bezier(.18, .78, .24, 1)
+    500ms
+    cubic-bezier(.16, .82, .24, 1)
     forwards;
 }
 
 
 /* =========================================================
-   BACKGROUND CINEMATOGRÁFICO
-   Sem poluição visual.
+   FUNDO CINEMATOGRÁFICO
    ========================================================= */
 
 .duduq-intro::before {
@@ -135,105 +133,101 @@
   position: absolute;
   z-index: 0;
 
-  inset: -18%;
+  inset: -16%;
 
   pointer-events: none;
 
-  opacity: .74;
-
-  background-image:
-    linear-gradient(
-      rgba(8, 116, 216, .022) 1px,
-      transparent 1px
+  background:
+    radial-gradient(
+      circle at 50% 48%,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 48%,
+      rgba(4, 75, 137, .025) 100%
     ),
-    linear-gradient(
-      90deg,
-      rgba(8, 116, 216, .022) 1px,
-      transparent 1px
+    repeating-linear-gradient(
+      0deg,
+      rgba(21, 105, 171, .017) 0px,
+      rgba(21, 105, 171, .017) 1px,
+      transparent 1px,
+      transparent 5px
     );
 
-  background-size:
-    58px 58px;
+  opacity: .58;
 
   transform:
-    perspective(900px)
-    rotateX(68deg)
-    translateY(21%);
+    scale(1.04);
 
-  transform-origin:
-    center bottom;
-
-  mask-image:
-    linear-gradient(
-      to bottom,
-      transparent,
-      rgba(0, 0, 0, .42),
-      rgba(0, 0, 0, .04)
-    );
-
-  -webkit-mask-image:
-    linear-gradient(
-      to bottom,
-      transparent,
-      rgba(0, 0, 0, .42),
-      rgba(0, 0, 0, .04)
-    );
+  animation:
+    duduqIntroBackdropBreath
+    8s
+    ease-in-out
+    infinite;
 }
 
+
+/*
+ * Este pseudo-elemento vira a "linha de energia"
+ * durante a troca Empresa → Coleção.
+ */
 
 .duduq-intro::after {
   content: "";
 
   position: absolute;
-  z-index: 1;
+  z-index: 50;
 
-  top: -30%;
-  left: -48%;
+  left: -10%;
+  top: 50%;
 
-  width: 54%;
-  height: 160%;
+  width: 120%;
+  height: 3px;
 
   pointer-events: none;
 
   opacity: 0;
 
+  border-radius: 999px;
+
   background:
     linear-gradient(
-      110deg,
+      90deg,
       transparent 0%,
-      rgba(255, 255, 255, .10) 30%,
-      rgba(255, 255, 255, .92) 49%,
-      rgba(173, 225, 255, .22) 54%,
-      transparent 72%
+      rgba(97, 200, 255, .10) 17%,
+      rgba(255, 255, 255, .98) 43%,
+      #ffffff 50%,
+      rgba(118, 211, 255, .92) 57%,
+      rgba(8, 116, 216, .14) 83%,
+      transparent 100%
     );
 
-  filter: blur(6px);
+  box-shadow:
+    0 0 8px rgba(255, 255, 255, .95),
+    0 0 18px rgba(71, 184, 247, .60),
+    0 0 42px rgba(18, 126, 215, .28);
 
   transform:
-    skewX(-10deg);
-
-  animation:
-    duduqIntroScreenSweep
-    1200ms
-    900ms
-    cubic-bezier(.18, .74, .25, 1)
-    both;
+    translateY(-50%)
+    scaleX(.04);
 }
 
 
 /* =========================================================
-   ELEMENTOS ATMOSFÉRICOS
+   ATMOSFERA
    ========================================================= */
 
 .duduq-intro-atmosphere {
   position: absolute;
-  z-index: 2;
+  z-index: 1;
 
   inset: 0;
 
   overflow: hidden;
 
   pointer-events: none;
+
+  transition:
+    opacity 420ms ease,
+    filter 420ms ease;
 }
 
 
@@ -242,18 +236,19 @@
 
   border-radius: 50%;
 
-  opacity: .14;
-
-  filter: blur(1px);
+  opacity: .11;
 
   background:
     radial-gradient(
-      circle at 35% 30%,
+      circle at 34% 30%,
       rgba(255, 255, 255, .96),
-      rgba(118, 210, 255, .50) 35%,
-      rgba(8, 116, 216, .12) 72%,
-      transparent 76%
+      rgba(121, 211, 255, .42) 38%,
+      rgba(8, 116, 216, .08) 69%,
+      transparent 74%
     );
+
+  filter:
+    blur(1px);
 
   animation:
     duduqIntroOrbFloat
@@ -264,54 +259,53 @@
 
 
 .duduq-intro-orb:nth-child(1) {
-  width: 170px;
-  height: 170px;
+  width: 190px;
+  height: 190px;
 
-  top: 8%;
-  left: 6%;
+  top: 6%;
+  left: 5%;
 
   animation-delay: -2s;
 }
 
 
 .duduq-intro-orb:nth-child(2) {
-  width: 120px;
-  height: 120px;
+  width: 145px;
+  height: 145px;
 
-  right: 7%;
-  bottom: 11%;
+  right: 6%;
+  bottom: 7%;
 
   animation-delay: -5s;
 }
 
 
 .duduq-intro-orb:nth-child(3) {
-  width: 70px;
-  height: 70px;
+  width: 90px;
+  height: 90px;
 
-  right: 13%;
-  top: 15%;
+  right: 11%;
+  top: 12%;
 
   animation-delay: -3s;
 }
 
 
 /* =========================================================
-   PARTÍCULAS / ESTRELAS
-   JS poderá criar spans com esta classe.
+   ESTRELAS
    ========================================================= */
 
 .duduq-intro-spark {
   position: absolute;
-
-  display: grid;
-  place-items: center;
 
   width:
     var(--duduq-intro-spark-size, 16px);
 
   height:
     var(--duduq-intro-spark-size, 16px);
+
+  display: grid;
+  place-items: center;
 
   color:
     var(--duduq-intro-spark-color, #ffc928);
@@ -323,14 +317,20 @@
 
   opacity: 0;
 
+  filter:
+    drop-shadow(
+      0 3px 5px
+      rgba(42, 105, 159, .08)
+    );
+
   transform:
     translate3d(0, 12px, 0)
-    scale(.4)
+    scale(.40)
     rotate(-25deg);
 
   animation:
     duduqIntroSparkIn
-    760ms
+    800ms
     var(--duduq-intro-spark-delay, 0ms)
     cubic-bezier(.16, .82, .24, 1.14)
     forwards,
@@ -339,7 +339,7 @@
     var(--duduq-intro-spark-duration, 4600ms)
     calc(
       var(--duduq-intro-spark-delay, 0ms)
-      + 760ms
+      + 800ms
     )
     ease-in-out
     infinite;
@@ -347,9 +347,7 @@
 
 
 /* =========================================================
-   STAGE CENTRAL
-   A tela inteira é a composição.
-   Sem "card dentro de card".
+   STAGE
    ========================================================= */
 
 .duduq-intro-stage {
@@ -357,7 +355,13 @@
   z-index: 10;
 
   width:
-    min(940px, 96vw);
+    min(1000px, 96vw);
+
+  min-height:
+    min(
+      720px,
+      calc(100dvh - 40px)
+    );
 
   display: flex;
   flex-direction: column;
@@ -368,36 +372,41 @@
   text-align: center;
 
   padding:
-    clamp(12px, 2vh, 24px)
-    clamp(10px, 3vw, 30px);
+    clamp(10px, 2vh, 20px)
+    clamp(8px, 3vw, 28px);
 }
 
 
 /* =========================================================
-   MARCA DA EMPRESA
+   =========================================================
+   ATO 1 — MARCA DA EMPRESA
+   =========================================================
    ========================================================= */
 
 .duduq-intro-company {
   position: relative;
+  z-index: 20;
 
   display: flex;
   flex-direction: column;
 
   align-items: center;
+  justify-content: center;
 
-  gap: 7px;
+  gap:
+    clamp(16px, 2.1vh, 24px);
 
-  margin-bottom:
-    clamp(8px, 1.5vh, 15px);
+  margin:
+    0 auto
+    clamp(10px, 1.6vh, 18px);
 
-  opacity: 0;
+  transform-origin:
+    center center;
 
-  animation:
-    duduqIntroCompanyIn
-    620ms
-    220ms
-    cubic-bezier(.18, .76, .24, 1)
-    forwards;
+  transition:
+    opacity 360ms ease,
+    transform 480ms cubic-bezier(.16, .82, .24, 1),
+    filter 360ms ease;
 }
 
 
@@ -405,19 +414,19 @@
   margin: 0;
 
   color:
-    var(--duduq-intro-muted);
+    #7992aa;
 
   font-family:
     var(--duduq-intro-font);
 
   font-size:
-    clamp(10px, .82vw, 12px);
+    clamp(11px, .9vw, 14px);
 
-  font-weight: 900;
+  font-weight: 1000;
 
   line-height: 1;
 
-  letter-spacing: .18em;
+  letter-spacing: .22em;
 
   text-transform: uppercase;
 }
@@ -429,43 +438,229 @@
   width:
     min(
       var(--duduq-intro-company-width, 220px),
-      45vw
+      46vw
     );
 
   max-height:
-    78px;
+    90px;
 
   object-fit: contain;
 
+  transform-origin:
+    center center;
+
   filter:
     drop-shadow(
-      0 7px 10px
-      rgba(24, 70, 112, .10)
+      0 12px 20px
+      rgba(17, 70, 113, .10)
     );
 }
 
 
 /* =========================================================
-   COLEÇÃO — HERO PRINCIPAL
+   ATO 1 ATIVO
+   ========================================================= */
+
+.duduq-intro.is-branding
+.duduq-intro-company {
+  position: absolute;
+
+  inset: 0;
+
+  margin: auto;
+
+  gap:
+    clamp(22px, 3vh, 34px);
+
+  animation:
+    duduqIntroBrandBlockIn
+    720ms
+    100ms
+    cubic-bezier(.16, .82, .24, 1)
+    both;
+}
+
+
+.duduq-intro.is-branding
+.duduq-intro-kicker {
+  font-size:
+    clamp(13px, 1.2vw, 17px);
+
+  letter-spacing:
+    .25em;
+
+  opacity: 0;
+
+  animation:
+    duduqIntroBrandKickerIn
+    700ms
+    200ms
+    ease-out
+    forwards;
+}
+
+
+.duduq-intro.is-branding
+.duduq-intro-company-logo {
+  width:
+    min(
+      var(--duduq-intro-company-width, 460px),
+      60vw
+    );
+
+  max-height:
+    clamp(150px, 26vh, 250px);
+
+  opacity: 0;
+
+  filter:
+    blur(10px)
+    drop-shadow(
+      0 22px 38px
+      rgba(20, 77, 124, .12)
+    );
+
+  animation:
+    duduqIntroBrandLogoReveal
+    1100ms
+    280ms
+    cubic-bezier(.14, .76, .20, 1)
+    forwards;
+}
+
+
+/*
+ * Enquanto a empresa é protagonista,
+ * a missão ainda não aparece.
+ */
+
+.duduq-intro.is-branding
+.duduq-intro-collection,
+
+.duduq-intro.is-branding
+.duduq-intro-meta,
+
+.duduq-intro.is-branding
+.duduq-intro-loading,
+
+.duduq-intro.is-branding
+.duduq-intro-actions {
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform:
+    translateY(16px)
+    scale(.98);
+}
+
+
+/* =========================================================
+   =========================================================
+   ATO 2 — TRANSIÇÃO CINEMATOGRÁFICA
+   =========================================================
+   ========================================================= */
+
+.duduq-intro.is-switching
+.duduq-intro-company {
+  position: absolute;
+
+  inset: 0;
+
+  margin: auto;
+
+  animation:
+    duduqIntroBrandTVOff
+    480ms
+    cubic-bezier(.50, 0, .76, .30)
+    forwards;
+}
+
+
+.duduq-intro.is-switching
+.duduq-intro-company-logo {
+  width:
+    min(
+      var(--duduq-intro-company-width, 460px),
+      60vw
+    );
+
+  max-height:
+    clamp(150px, 26vh, 250px);
+}
+
+
+.duduq-intro.is-switching::after {
+  animation:
+    duduqIntroTVLine
+    600ms
+    120ms
+    cubic-bezier(.20, .72, .22, 1)
+    both;
+}
+
+
+.duduq-intro.is-switching
+.duduq-intro-atmosphere {
+  opacity: .23;
+
+  filter:
+    blur(2px);
+}
+
+
+.duduq-intro.is-switching
+.duduq-intro-collection,
+
+.duduq-intro.is-switching
+.duduq-intro-meta,
+
+.duduq-intro.is-switching
+.duduq-intro-loading,
+
+.duduq-intro.is-switching
+.duduq-intro-actions {
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   =========================================================
+   ATO 3 — COLEÇÃO / MISSÃO
+   =========================================================
+   ========================================================= */
+
+
+/* =========================================================
+   HERO DA COLEÇÃO
    ========================================================= */
 
 .duduq-intro-collection {
   position: relative;
 
   width:
-    min(700px, 88vw);
+    min(760px, 90vw);
 
   min-height:
-    clamp(150px, 24vh, 245px);
+    clamp(190px, 29vh, 290px);
 
   display: grid;
   place-items: center;
 
   margin:
     0 auto
-    clamp(12px, 2vh, 22px);
+    clamp(7px, 1vh, 13px);
 
   pointer-events: none;
+
+  transform-origin:
+    center center;
 }
 
 
@@ -473,37 +668,32 @@
   content: "";
 
   position: absolute;
+  z-index: 0;
 
   left: 50%;
-  bottom: 3%;
+  bottom: 1%;
 
-  width: 46%;
-  height: 26px;
+  width: 50%;
+  height: 28px;
 
   border-radius: 50%;
 
   background:
     radial-gradient(
       ellipse,
-      rgba(25, 72, 115, .16) 0%,
-      rgba(25, 72, 115, .065) 48%,
+      rgba(23, 75, 120, .15) 0%,
+      rgba(23, 75, 120, .055) 50%,
       transparent 76%
     );
 
-  filter: blur(9px);
+  filter:
+    blur(10px);
 
   transform:
     translateX(-50%)
-    scaleX(.82);
+    scaleX(.84);
 
-  opacity: 0;
-
-  animation:
-    duduqIntroHeroShadowIn
-    700ms
-    760ms
-    ease-out
-    forwards;
+  opacity: .74;
 }
 
 
@@ -516,69 +706,48 @@
   width:
     min(
       var(--duduq-intro-collection-width, 590px),
-      84vw
+      87vw
     );
 
   max-height:
-    clamp(170px, 28vh, 270px);
+    clamp(210px, 34vh, 330px);
 
   object-fit: contain;
-
-  opacity: 0;
-
-  transform:
-    translate3d(0, 34px, 0)
-    scale(.64);
 
   transform-origin:
     center center;
 
   filter:
     drop-shadow(
-      0 16px 20px
-      rgba(15, 64, 109, .15)
+      0 19px 23px
+      rgba(14, 65, 108, .15)
     )
     drop-shadow(
-      0 5px 6px
-      rgba(15, 64, 109, .08)
+      0 5px 7px
+      rgba(14, 65, 108, .07)
     );
-
-  animation:
-    duduqIntroCollectionSpring
-    940ms
-    520ms
-    cubic-bezier(.16, .82, .21, 1.11)
-    forwards;
 }
 
 
-/* brilho atravessando a logo */
+/* =========================================================
+   BRILHO NA COLEÇÃO
+   ========================================================= */
 
 .duduq-intro-collection-shine {
   position: absolute;
-  z-index: 3;
+  z-index: 4;
 
-  inset: 5% 8%;
+  inset:
+    4%
+    7%;
 
   overflow: hidden;
 
-  border-radius: 32px;
+  border-radius: 42px;
+
+  opacity: .62;
 
   pointer-events: none;
-
-  opacity: .52;
-
-  mask-image:
-    linear-gradient(
-      #000,
-      #000
-    );
-
-  -webkit-mask-image:
-    linear-gradient(
-      #000,
-      #000
-    );
 }
 
 
@@ -587,11 +756,11 @@
 
   position: absolute;
 
-  top: -25%;
-  left: -35%;
+  top: -28%;
+  left: -38%;
 
-  width: 18%;
-  height: 150%;
+  width: 16%;
+  height: 158%;
 
   opacity: 0;
 
@@ -599,25 +768,22 @@
     linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, .75),
+      rgba(255, 255, 255, .82),
+      rgba(181, 232, 255, .38),
       transparent
     );
 
-  filter: blur(8px);
+  filter:
+    blur(7px);
 
   transform:
-    rotate(15deg);
-
-  animation:
-    duduqIntroLogoShine
-    720ms
-    1350ms
-    ease-out
-    both;
+    rotate(14deg);
 }
 
 
-/* fallback quando só existe nome */
+/* =========================================================
+   FALLBACK NOME DA COLEÇÃO
+   ========================================================= */
 
 .duduq-intro-collection-name {
   position: relative;
@@ -634,43 +800,30 @@
     var(--duduq-intro-font);
 
   font-size:
-    clamp(44px, 7.2vw, 82px);
+    clamp(52px, 8vw, 94px);
 
   font-weight: 1000;
 
-  line-height: .94;
+  line-height: .92;
 
   letter-spacing: -.045em;
 
   text-wrap: balance;
 
-  opacity: 0;
-
   text-shadow:
     0 3px 0 #ffffff,
-    0 12px 26px rgba(8, 84, 163, .10);
-
-  transform:
-    translateY(28px)
-    scale(.74);
-
-  animation:
-    duduqIntroCollectionSpring
-    940ms
-    520ms
-    cubic-bezier(.16, .82, .21, 1.11)
-    forwards;
+    0 16px 29px rgba(8, 84, 163, .10);
 }
 
 
 /* =========================================================
-   META — ANO / DISCIPLINA / MÓDULO
+   META
    ========================================================= */
 
 .duduq-intro-meta {
   position: relative;
 
-  max-width: 820px;
+  max-width: 850px;
 
   display: flex;
 
@@ -685,21 +838,12 @@
 
   margin:
     0 auto
-    clamp(17px, 2.6vh, 28px);
-
-  opacity: 0;
-
-  animation:
-    duduqIntroMetaIn
-    540ms
-    1050ms
-    cubic-bezier(.18, .72, .24, 1)
-    forwards;
+    clamp(18px, 2.3vh, 26px);
 }
 
 
 .duduq-intro-meta-chip {
-  min-height: 36px;
+  min-height: 38px;
 
   display: inline-flex;
 
@@ -708,30 +852,31 @@
 
   padding:
     7px
-    16px;
+    17px;
 
   color:
     var(--duduq-intro-blue-deep);
 
   border:
     1.5px solid
-    rgba(173, 207, 233, .86);
+    rgba(171, 207, 234, .92);
 
-  border-radius: 999px;
+  border-radius:
+    999px;
 
   background:
     linear-gradient(
       180deg,
-      rgba(255, 255, 255, .98),
-      rgba(244, 250, 255, .96)
+      rgba(255, 255, 255, .99),
+      rgba(244, 250, 255, .98)
     );
 
   box-shadow:
     0 3px 0
-    rgba(177, 204, 226, .40),
+    rgba(174, 203, 226, .40),
 
-    0 8px 20px
-    rgba(25, 77, 122, .055),
+    0 9px 19px
+    rgba(25, 77, 122, .05),
 
     inset 0 1px 0
     rgba(255, 255, 255, 1);
@@ -740,41 +885,44 @@
     var(--duduq-intro-font);
 
   font-size:
-    clamp(13px, 1.25vw, 16px);
+    clamp(13px, 1.15vw, 16px);
 
-  font-weight: 900;
+  font-weight: 1000;
 
   line-height: 1;
 
-  letter-spacing: .02em;
+  letter-spacing:
+    .018em;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 }
 
 
 .duduq-intro-meta-chip--primary {
-  color: #ffffff;
+  color:
+    #ffffff;
 
   border-color:
-    var(--duduq-intro-blue-dark);
+    #0062bc;
 
   background:
     linear-gradient(
       180deg,
-      #2b99ef 0%,
-      var(--duduq-intro-blue) 62%,
-      #0564c3 100%
+      #3ca6f5 0%,
+      #1085e5 42%,
+      #0871d2 100%
     );
 
   box-shadow:
     0 4px 0
-    var(--duduq-intro-blue-dark),
+    #0055aa,
 
-    0 9px 18px
+    0 10px 20px
     rgba(0, 83, 168, .12),
 
     inset 0 1px 0
-    rgba(255, 255, 255, .26);
+    rgba(255, 255, 255, .31);
 }
 
 
@@ -786,24 +934,16 @@
   position: relative;
 
   width:
-    min(520px, 88vw);
+    min(560px, 88vw);
 
   display: flex;
   flex-direction: column;
 
-  gap: 9px;
+  gap:
+    9px;
 
   margin:
     0 auto;
-
-  opacity: 0;
-
-  animation:
-    duduqIntroLoadingIn
-    500ms
-    1250ms
-    ease-out
-    forwards;
 }
 
 
@@ -815,7 +955,7 @@
   align-items: center;
   justify-content: space-between;
 
-  gap: 12px;
+  gap: 14px;
 
   padding:
     0 3px;
@@ -832,20 +972,22 @@
     var(--duduq-intro-font);
 
   font-size:
-    clamp(11px, 1vw, 13px);
+    clamp(12px, 1vw, 14px);
 
-  font-weight: 900;
+  font-weight: 1000;
 
   line-height: 1;
 
-  letter-spacing: .10em;
+  letter-spacing:
+    .10em;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 }
 
 
 .duduq-intro-loading-percent {
-  min-width: 38px;
+  min-width: 42px;
 
   color:
     var(--duduq-intro-blue);
@@ -860,7 +1002,8 @@
 
   line-height: 1;
 
-  text-align: right;
+  text-align:
+    right;
 }
 
 
@@ -868,7 +1011,7 @@
   position: relative;
 
   width: 100%;
-  height: 14px;
+  height: 15px;
 
   overflow: hidden;
 
@@ -876,15 +1019,16 @@
 
   border:
     1.5px solid
-    #c5dbed;
+    #c4dced;
 
-  border-radius: 999px;
+  border-radius:
+    999px;
 
   background:
     linear-gradient(
       180deg,
-      #e7f0f7 0%,
-      #f7fbfe 100%
+      #e3eef6 0%,
+      #f8fbfe 100%
     );
 
   box-shadow:
@@ -892,7 +1036,7 @@
     rgba(31, 78, 119, .09),
 
     0 3px 8px
-    rgba(22, 70, 112, .045);
+    rgba(22, 70, 112, .04);
 }
 
 
@@ -906,23 +1050,24 @@
 
   overflow: hidden;
 
-  border-radius: 999px;
+  border-radius:
+    999px;
 
   background:
     linear-gradient(
       90deg,
-      #0065c5 0%,
-      #0d82e5 32%,
-      #46b8f4 72%,
-      #7cddff 100%
+      #005ebd 0%,
+      #0c83e7 34%,
+      #42b7f4 72%,
+      #7edfff 100%
     );
 
   box-shadow:
-    0 0 12px
+    0 0 13px
     rgba(34, 157, 236, .30),
 
     inset 0 1px 0
-    rgba(255, 255, 255, .42);
+    rgba(255, 255, 255, .45);
 
   transition:
     width
@@ -943,16 +1088,13 @@
       125deg,
       transparent 0,
       transparent 12px,
-      rgba(255, 255, 255, .19) 12px,
-      rgba(255, 255, 255, .19) 21px
+      rgba(255, 255, 255, .20) 12px,
+      rgba(255, 255, 255, .20) 21px
     );
-
-  transform:
-    translateX(-24px);
 
   animation:
     duduqIntroLoadingStripe
-    780ms
+    760ms
     linear
     infinite;
 }
@@ -966,25 +1108,23 @@
   top: 0;
   right: 0;
 
-  width: 44px;
+  width: 46px;
   height: 100%;
 
   background:
     linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, .92)
+      rgba(255, 255, 255, .94)
     );
 
   filter:
     blur(3px);
-
-  opacity: .82;
 }
 
 
 /* =========================================================
-   ESTADO LOADING FINALIZADO
+   READY
    ========================================================= */
 
 .duduq-intro.is-ready
@@ -992,17 +1132,17 @@
   background:
     linear-gradient(
       90deg,
-      #35aa00 0%,
+      #35a900 0%,
       #58cc02 48%,
-      #8ce82d 100%
+      #8ce92e 100%
     );
 
   box-shadow:
-    0 0 14px
+    0 0 15px
     rgba(88, 204, 2, .30),
 
     inset 0 1px 0
-    rgba(255, 255, 255, .45);
+    rgba(255, 255, 255, .48);
 }
 
 
@@ -1024,30 +1164,27 @@
 
 
 /* =========================================================
-   ÁREA DO CTA
+   CTA
    ========================================================= */
 
 .duduq-intro-actions {
   position: relative;
 
   width:
-    min(400px, 88vw);
+    min(410px, 88vw);
 
-  min-height: 74px;
+  min-height:
+    78px;
 
   display: grid;
   place-items: center;
 
   margin:
-    clamp(16px, 2.2vh, 24px)
+    clamp(17px, 2.2vh, 25px)
     auto
     0;
 }
 
-
-/* =========================================================
-   BOTÃO INICIAR
-   ========================================================= */
 
 .duduq-intro-start-button {
   position: relative;
@@ -1056,8 +1193,7 @@
   -webkit-appearance: none;
 
   width: 100%;
-
-  min-height: 62px;
+  min-height: 63px;
 
   display: inline-flex;
 
@@ -1074,31 +1210,34 @@
 
   cursor: pointer;
 
-  color: #ffffff;
+  color:
+    #ffffff;
 
   border:
     2px solid
-    var(--duduq-intro-blue-dark);
+    #0055aa;
 
-  border-radius: 19px;
+  border-radius:
+    20px;
 
   background:
     linear-gradient(
       180deg,
-      #2d9bef 0%,
-      #0877db 55%,
-      #005dbb 100%
+      #34a3f3 0%,
+      #1488e7 37%,
+      #0876da 63%,
+      #0061bd 100%
     );
 
   box-shadow:
     0 7px 0
-    var(--duduq-intro-blue-dark),
+    #0053a5,
 
-    0 15px 29px
+    0 16px 30px
     rgba(0, 84, 170, .20),
 
     inset 0 2px 0
-    rgba(255, 255, 255, .31);
+    rgba(255, 255, 255, .34);
 
   font-family:
     var(--duduq-intro-font);
@@ -1110,17 +1249,20 @@
 
   line-height: 1;
 
-  letter-spacing: .025em;
+  letter-spacing:
+    .025em;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 
   opacity: 0;
 
-  visibility: hidden;
+  visibility:
+    hidden;
 
   transform:
-    translateY(16px)
-    scale(.92);
+    translateY(15px)
+    scale(.93);
 
   transition:
     transform 150ms ease,
@@ -1140,12 +1282,11 @@
   width: 70%;
   height: 2px;
 
-  border-radius: 999px;
+  border-radius:
+    999px;
 
   background:
-    rgba(255, 255, 255, .42);
-
-  pointer-events: none;
+    rgba(255, 255, 255, .46);
 }
 
 
@@ -1164,28 +1305,46 @@
     linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, .72),
+      rgba(255, 255, 255, .73),
       transparent
     );
 
-  filter: blur(3px);
+  filter:
+    blur(3px);
 
   transform:
     rotate(16deg);
 
-  pointer-events: none;
+  pointer-events:
+    none;
 }
 
 
 .duduq-intro.is-ready
 .duduq-intro-start-button {
-  visibility: visible;
+  visibility:
+    visible;
 
   animation:
     duduqIntroStartReady
-    620ms
+    630ms
     cubic-bezier(.15, .80, .22, 1.16)
     forwards;
+}
+
+
+.duduq-intro.is-branding
+.duduq-intro-start-button,
+
+.duduq-intro.is-switching
+.duduq-intro-start-button {
+  opacity: 0 !important;
+
+  visibility:
+    hidden !important;
+
+  pointer-events:
+    none !important;
 }
 
 
@@ -1193,7 +1352,7 @@
 .duduq-intro-start-button::after {
   animation:
     duduqIntroButtonShine
-    920ms
+    930ms
     420ms
     ease-out
     both;
@@ -1211,13 +1370,13 @@
 
   box-shadow:
     0 9px 0
-    var(--duduq-intro-blue-dark),
+    #0053a5,
 
-    0 20px 32px
+    0 21px 34px
     rgba(0, 84, 170, .23),
 
     inset 0 2px 0
-    rgba(255, 255, 255, .34);
+    rgba(255, 255, 255, .36);
 }
 
 
@@ -1228,57 +1387,49 @@
 
   box-shadow:
     0 3px 0
-    var(--duduq-intro-blue-dark),
+    #0053a5,
 
     0 8px 15px
     rgba(0, 84, 170, .15),
 
     inset 0 2px 0
-    rgba(255, 255, 255, .25);
+    rgba(255, 255, 255, .26);
 }
 
 
-.duduq-intro-start-button:focus,
-.duduq-intro-start-button:focus-visible {
+.duduq-intro-start-button:focus {
   outline: none;
 }
 
 
 .duduq-intro-start-button:focus-visible {
+  outline: none;
+
   box-shadow:
     0 7px 0
-    var(--duduq-intro-blue-dark),
+    #0053a5,
 
-    0 15px 29px
+    0 16px 30px
     rgba(0, 84, 170, .20),
 
     0 0 0 5px
-    rgba(8, 116, 216, .10),
+    rgba(8, 116, 216, .11),
 
     inset 0 2px 0
-    rgba(255, 255, 255, .31);
-}
-
-
-.duduq-intro-start-button:disabled {
-  cursor: default;
-
-  filter:
-    saturate(.75);
-
-  opacity: .72;
+    rgba(255, 255, 255, .34);
 }
 
 
 /* =========================================================
-   ÍCONE DO BOTÃO
+   PLAY ICON
    ========================================================= */
 
 .duduq-intro-start-icon {
-  width: 26px;
-  height: 26px;
+  width: 27px;
+  height: 27px;
 
-  flex: 0 0 26px;
+  flex:
+    0 0 27px;
 
   display: grid;
   place-items: center;
@@ -1298,16 +1449,15 @@
     inset 0 1px 0
     rgba(255, 255, 255, 1);
 
-  font-size: 14px;
+  font-size:
+    14px;
 
   font-weight: 1000;
 
   line-height: 1;
 
   transition:
-    transform
-    170ms
-    ease;
+    transform 170ms ease;
 }
 
 
@@ -1315,22 +1465,22 @@
 .duduq-intro-start-icon {
   transform:
     translateX(2px)
-    scale(1.04);
+    scale(1.05);
 }
 
 
 /* =========================================================
-   TEXTO AUXILIAR OPCIONAL
+   HINT
    ========================================================= */
 
 .duduq-intro-hint {
   margin:
-    11px
+    12px
     0
     0;
 
   color:
-    #94a7b8;
+    #93a8bb;
 
   font-family:
     var(--duduq-intro-font);
@@ -1338,18 +1488,18 @@
   font-size:
     clamp(10px, .9vw, 12px);
 
-  font-weight: 800;
+  font-weight: 900;
 
-  line-height: 1.25;
+  line-height:
+    1.25;
 
-  letter-spacing: .02em;
+  letter-spacing:
+    .015em;
 
   opacity: 0;
 
   transition:
-    opacity
-    300ms
-    ease;
+    opacity 300ms ease;
 }
 
 
@@ -1360,16 +1510,199 @@
 
 
 /* =========================================================
-   SAÍDA CINEMATOGRÁFICA
+   ENTRADA DO ATO 3
+   ========================================================= */
+
+.duduq-intro.is-mission
+.duduq-intro-company {
+  position: absolute;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform:
+    scale(.96);
+}
+
+
+.duduq-intro.is-mission
+.duduq-intro-collection {
+  opacity: 0;
+
+  animation:
+    duduqIntroMissionHeroIn
+    1000ms
+    30ms
+    cubic-bezier(.15, .80, .20, 1.12)
+    forwards;
+}
+
+
+.duduq-intro.is-mission
+.duduq-intro-collection-logo {
+  animation:
+    duduqIntroCollectionSpringAAA
+    1050ms
+    20ms
+    cubic-bezier(.15, .80, .20, 1.12)
+    both;
+}
+
+
+.duduq-intro.is-mission
+.duduq-intro-collection-name {
+  animation:
+    duduqIntroCollectionSpringAAA
+    1050ms
+    20ms
+    cubic-bezier(.15, .80, .20, 1.12)
+    both;
+}
+
+
+.duduq-intro.is-mission
+.duduq-intro-collection-shine::before {
+  animation:
+    duduqIntroLogoShine
+    800ms
+    820ms
+    ease-out
+    both;
+}
+
+
+.duduq-intro.is-mission
+.duduq-intro-meta {
+  opacity: 0;
+
+  animation:
+    duduqIntroMissionMetaIn
+    560ms
+    520ms
+    cubic-bezier(.17, .78, .24, 1)
+    forwards;
+}
+
+
+.duduq-intro.is-mission
+.duduq-intro-meta-chip:nth-child(1) {
+  animation:
+    duduqIntroChipPop
+    500ms
+    560ms
+    cubic-bezier(.15, .80, .22, 1.15)
+    both;
+}
+
+
+.duduq-intro.is-mission
+.duduq-intro-meta-chip:nth-child(2) {
+  animation:
+    duduqIntroChipPop
+    500ms
+    650ms
+    cubic-bezier(.15, .80, .22, 1.15)
+    both;
+}
+
+
+.duduq-intro.is-mission
+.duduq-intro-meta-chip:nth-child(3) {
+  animation:
+    duduqIntroChipPop
+    500ms
+    740ms
+    cubic-bezier(.15, .80, .22, 1.15)
+    both;
+}
+
+
+.duduq-intro.is-mission
+.duduq-intro-loading {
+  opacity: 0;
+
+  animation:
+    duduqIntroMissionLoadingIn
+    550ms
+    760ms
+    ease-out
+    forwards;
+}
+
+
+.duduq-intro.is-mission
+.duduq-intro-actions {
+  opacity: 1;
+
+  visibility: visible;
+}
+
+
+/* =========================================================
+   BACKWARD COMPATIBILITY
+   Enquanto JS 1.0 estiver carregado,
+   a tela antiga continua funcional.
+   ========================================================= */
+
+.duduq-intro:not(.is-branding):not(.is-switching):not(.is-mission)
+.duduq-intro-company {
+  animation:
+    duduqIntroLegacyCompanyIn
+    620ms
+    160ms
+    ease-out
+    both;
+}
+
+
+.duduq-intro:not(.is-branding):not(.is-switching):not(.is-mission)
+.duduq-intro-collection {
+  animation:
+    duduqIntroMissionHeroIn
+    850ms
+    350ms
+    cubic-bezier(.16, .82, .21, 1.08)
+    both;
+}
+
+
+.duduq-intro:not(.is-branding):not(.is-switching):not(.is-mission)
+.duduq-intro-meta {
+  animation:
+    duduqIntroMissionMetaIn
+    500ms
+    620ms
+    ease-out
+    both;
+}
+
+
+.duduq-intro:not(.is-branding):not(.is-switching):not(.is-mission)
+.duduq-intro-loading {
+  animation:
+    duduqIntroMissionLoadingIn
+    500ms
+    760ms
+    ease-out
+    both;
+}
+
+
+/* =========================================================
+   SAÍDA PARA O JOGO
    ========================================================= */
 
 .duduq-intro.is-leaving {
-  pointer-events: none;
+  pointer-events:
+    none;
 
   animation:
     duduqIntroScreenOut
-    460ms
-    cubic-bezier(.44, 0, .68, .34)
+    470ms
+    cubic-bezier(.40, 0, .65, .28)
     forwards;
 }
 
@@ -1378,8 +1711,8 @@
 .duduq-intro-stage {
   animation:
     duduqIntroStageOut
-    430ms
-    cubic-bezier(.44, 0, .68, .34)
+    450ms
+    cubic-bezier(.40, 0, .65, .28)
     forwards;
 }
 
@@ -1388,14 +1721,14 @@
 .duduq-intro-collection {
   animation:
     duduqIntroHeroOut
-    430ms
+    440ms
     ease-in
     forwards;
 }
 
 
 /* =========================================================
-   ANIMAÇÕES — ENTRADA
+   KEYFRAMES — ROOT
    ========================================================= */
 
 @keyframes duduqIntroScreenIn {
@@ -1411,19 +1744,58 @@
 }
 
 
-@keyframes duduqIntroCompanyIn {
+@keyframes duduqIntroBackdropBreath {
+
+  0%,
+  100% {
+    transform:
+      scale(1.04);
+  }
+
+  50% {
+    transform:
+      scale(1.075);
+  }
+
+}
+
+
+/* =========================================================
+   KEYFRAMES — BRANDING
+   ========================================================= */
+
+@keyframes duduqIntroBrandBlockIn {
 
   0% {
     opacity: 0;
 
     transform:
-      translateY(-13px);
-
-    filter:
-      blur(5px);
+      scale(.96);
   }
 
   100% {
+    opacity: 1;
+
+    transform:
+      scale(1);
+  }
+
+}
+
+
+@keyframes duduqIntroBrandKickerIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-9px);
+
+    filter:
+      blur(3px);
+  }
+
+  to {
     opacity: 1;
 
     transform:
@@ -1436,77 +1808,366 @@
 }
 
 
-@keyframes duduqIntroCollectionSpring {
+@keyframes duduqIntroBrandLogoReveal {
 
   0% {
     opacity: 0;
 
     transform:
-      translate3d(0, 36px, 0)
-      scale(.64);
+      scale(.76)
+      translateY(14px);
 
     filter:
-      blur(7px)
+      blur(12px)
       drop-shadow(
-        0 16px 20px
-        rgba(15, 64, 109, .10)
+        0 18px 30px
+        rgba(20, 77, 124, .06)
       );
   }
 
-  58% {
+  45% {
+    opacity: .96;
+
+    filter:
+      blur(2px)
+      drop-shadow(
+        0 22px 36px
+        rgba(20, 77, 124, .10)
+      );
+  }
+
+  74% {
     opacity: 1;
 
     transform:
-      translate3d(0, -7px, 0)
-      scale(1.055);
+      scale(1.035)
+      translateY(-2px);
 
     filter:
       blur(0)
       drop-shadow(
-        0 18px 24px
-        rgba(15, 64, 109, .17)
+        0 24px 38px
+        rgba(20, 77, 124, .12)
       );
-  }
-
-  78% {
-    transform:
-      translate3d(0, 3px, 0)
-      scale(.982);
   }
 
   100% {
     opacity: 1;
 
     transform:
-      translate3d(0, 0, 0)
+      scale(1)
+      translateY(0);
+
+    filter:
+      blur(0)
+      drop-shadow(
+        0 20px 34px
+        rgba(20, 77, 124, .11)
+      );
+  }
+
+}
+
+
+/* =========================================================
+   KEYFRAMES — TV SWITCH
+   ========================================================= */
+
+@keyframes duduqIntroBrandTVOff {
+
+  0% {
+    opacity: 1;
+
+    transform:
+      scaleX(1)
+      scaleY(1);
+
+    filter:
+      blur(0)
+      brightness(1);
+  }
+
+  42% {
+    opacity: 1;
+
+    transform:
+      scaleX(1.025)
+      scaleY(.08);
+
+    filter:
+      blur(1px)
+      brightness(1.20);
+  }
+
+  64% {
+    opacity: .95;
+
+    transform:
+      scaleX(.68)
+      scaleY(.022);
+
+    filter:
+      blur(3px)
+      brightness(1.65);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      scaleX(.05)
+      scaleY(.01);
+
+    filter:
+      blur(8px)
+      brightness(2);
+  }
+
+}
+
+
+@keyframes duduqIntroTVLine {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translateY(-50%)
+      scaleX(.02);
+
+    filter:
+      blur(0);
+  }
+
+  24% {
+    opacity: 1;
+
+    transform:
+      translateY(-50%)
+      scaleX(.70);
+  }
+
+  48% {
+    opacity: 1;
+
+    transform:
+      translateY(-50%)
+      scaleX(1);
+
+    height: 4px;
+
+    filter:
+      blur(.2px);
+  }
+
+  70% {
+    opacity: .95;
+
+    height: 2px;
+
+    transform:
+      translateY(-50%)
+      scaleX(.52);
+  }
+
+  100% {
+    opacity: 0;
+
+    height: 1px;
+
+    transform:
+      translateY(-50%)
+      scaleX(.04);
+
+    filter:
+      blur(6px);
+  }
+
+}
+
+
+/* =========================================================
+   KEYFRAMES — COLEÇÃO
+   ========================================================= */
+
+@keyframes duduqIntroMissionHeroIn {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translateY(26px)
+      scale(.92);
+
+    filter:
+      blur(8px);
+  }
+
+  58% {
+    opacity: 1;
+
+    transform:
+      translateY(-4px)
+      scale(1.025);
+
+    filter:
+      blur(0);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+    filter:
+      blur(0);
+  }
+
+}
+
+
+@keyframes duduqIntroCollectionSpringAAA {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translateY(30px)
+      scale(.62);
+
+    filter:
+      blur(10px)
+      drop-shadow(
+        0 10px 18px
+        rgba(14, 65, 108, .06)
+      );
+  }
+
+  52% {
+    opacity: 1;
+
+    transform:
+      translateY(-7px)
+      scale(1.07);
+
+    filter:
+      blur(0)
+      drop-shadow(
+        0 22px 29px
+        rgba(14, 65, 108, .17)
+      );
+  }
+
+  73% {
+    transform:
+      translateY(3px)
+      scale(.978);
+  }
+
+  86% {
+    transform:
+      translateY(-1px)
+      scale(1.012);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+    filter:
+      blur(0)
+      drop-shadow(
+        0 19px 23px
+        rgba(14, 65, 108, .15)
+      );
+  }
+
+}
+
+
+@keyframes duduqIntroLogoShine {
+
+  0% {
+    left: -35%;
+
+    opacity: 0;
+  }
+
+  20% {
+    opacity: .72;
+  }
+
+  100% {
+    left: 126%;
+
+    opacity: 0;
+  }
+
+}
+
+
+/* =========================================================
+   KEYFRAMES — META
+   ========================================================= */
+
+@keyframes duduqIntroMissionMetaIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+@keyframes duduqIntroChipPop {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translateY(12px)
+      scale(.84);
+  }
+
+  65% {
+    opacity: 1;
+
+    transform:
+      translateY(-2px)
+      scale(1.04);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      translateY(0)
       scale(1);
   }
 
 }
 
 
-@keyframes duduqIntroHeroShadowIn {
+/* =========================================================
+   KEYFRAMES — LOADING
+   ========================================================= */
 
-  from {
-    opacity: 0;
-
-    transform:
-      translateX(-50%)
-      scaleX(.40);
-  }
-
-  to {
-    opacity: .75;
-
-    transform:
-      translateX(-50%)
-      scaleX(.82);
-  }
-
-}
-
-
-@keyframes duduqIntroMetaIn {
+@keyframes duduqIntroMissionLoadingIn {
 
   from {
     opacity: 0;
@@ -1520,75 +2181,6 @@
 
     transform:
       translateY(0);
-  }
-
-}
-
-
-@keyframes duduqIntroLoadingIn {
-
-  from {
-    opacity: 0;
-
-    transform:
-      translateY(9px);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateY(0);
-  }
-
-}
-
-
-/* =========================================================
-   ANIMAÇÕES — EFEITOS
-   ========================================================= */
-
-@keyframes duduqIntroScreenSweep {
-
-  0% {
-    opacity: 0;
-
-    left: -48%;
-  }
-
-  20% {
-    opacity: .46;
-  }
-
-  70% {
-    opacity: .18;
-  }
-
-  100% {
-    opacity: 0;
-
-    left: 132%;
-  }
-
-}
-
-
-@keyframes duduqIntroLogoShine {
-
-  0% {
-    left: -32%;
-
-    opacity: 0;
-  }
-
-  20% {
-    opacity: .72;
-  }
-
-  100% {
-    left: 124%;
-
-    opacity: 0;
   }
 
 }
@@ -1635,6 +2227,10 @@
 
 }
 
+
+/* =========================================================
+   KEYFRAMES — CTA
+   ========================================================= */
 
 @keyframes duduqIntroStartReady {
 
@@ -1693,7 +2289,7 @@
 
 
 /* =========================================================
-   ANIMAÇÕES — ATMOSFERA
+   KEYFRAMES — ATMOSFERA
    ========================================================= */
 
 @keyframes duduqIntroOrbFloat {
@@ -1707,8 +2303,8 @@
 
   50% {
     transform:
-      translate3d(0, -17px, 0)
-      scale(1.05);
+      translate3d(0, -18px, 0)
+      scale(1.055);
   }
 
 }
@@ -1735,7 +2331,7 @@
   }
 
   100% {
-    opacity: .58;
+    opacity: .60;
 
     transform:
       translate3d(0, 0, 0)
@@ -1767,7 +2363,30 @@
 
 
 /* =========================================================
-   ANIMAÇÕES — SAÍDA
+   LEGACY
+   ========================================================= */
+
+@keyframes duduqIntroLegacyCompanyIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   SAÍDA
    ========================================================= */
 
 @keyframes duduqIntroStageOut {
@@ -1787,7 +2406,7 @@
     opacity: 0;
 
     transform:
-      translateY(-14px)
+      translateY(-13px)
       scale(1.018);
 
     filter:
@@ -1818,16 +2437,10 @@
 
   0% {
     opacity: 1;
-
-    backdrop-filter:
-      blur(0);
   }
 
   100% {
     opacity: 0;
-
-    backdrop-filter:
-      blur(7px);
 
     visibility: hidden;
   }
@@ -1836,83 +2449,90 @@
 
 
 /* =========================================================
-   NOTEBOOK / BAIXA ALTURA
+   NOTEBOOK / ALTURA REDUZIDA
    ========================================================= */
 
 @media (max-height: 760px) and (min-width: 700px) {
 
   .duduq-intro {
     padding:
-      13px
-      28px;
+      8px
+      25px;
   }
 
   .duduq-intro-stage {
+    min-height:
+      calc(100dvh - 18px);
+
     padding:
-      4px
-      24px;
+      2px
+      18px;
   }
 
-  .duduq-intro-company {
-    gap: 5px;
+  .duduq-intro.is-branding
+  .duduq-intro-company-logo,
 
-    margin-bottom: 3px;
-  }
-
+  .duduq-intro.is-switching
   .duduq-intro-company-logo {
-    max-height: 53px;
-
-    width:
-      min(
-        var(--duduq-intro-company-width, 190px),
-        36vw
-      );
+    max-height:
+      190px;
   }
 
   .duduq-intro-collection {
-    min-height: 155px;
+    min-height:
+      175px;
 
-    margin-bottom: 6px;
+    margin-bottom:
+      2px;
   }
 
   .duduq-intro-collection-logo {
-    max-height: 185px;
+    max-height:
+      205px;
 
     width:
       min(
-        var(--duduq-intro-collection-width, 500px),
-        77vw
+        var(--duduq-intro-collection-width, 520px),
+        76vw
       );
   }
 
   .duduq-intro-meta {
-    margin-bottom: 15px;
+    margin-bottom:
+      14px;
   }
 
   .duduq-intro-meta-chip {
-    min-height: 31px;
+    min-height:
+      31px;
 
     padding:
       5px
       13px;
 
-    font-size: 12px;
+    font-size:
+      12px;
   }
 
   .duduq-intro-loading {
-    gap: 6px;
+    gap:
+      6px;
   }
 
   .duduq-intro-actions {
-    min-height: 62px;
+    min-height:
+      61px;
 
-    margin-top: 12px;
+    margin-top:
+      10px;
   }
 
   .duduq-intro-start-button {
-    min-height: 53px;
+    min-height:
+      52px;
 
-    font-size: 16px;
+    font-size:
+      16px;
   }
 
 }
@@ -1926,20 +2546,24 @@
 
   .duduq-intro-stage {
     width:
-      min(720px, 96vw);
+      min(720px, 97vw);
   }
 
+  .duduq-intro.is-branding
+  .duduq-intro-company-logo,
+
+  .duduq-intro.is-switching
   .duduq-intro-company-logo {
-    max-height: 67px;
+    width:
+      min(
+        var(--duduq-intro-company-width, 400px),
+        70vw
+      );
   }
 
   .duduq-intro-collection {
     width:
-      min(620px, 91vw);
-  }
-
-  .duduq-intro-meta {
-    max-width: 650px;
+      min(650px, 92vw);
   }
 
 }
@@ -1953,117 +2577,145 @@
 
   .duduq-intro {
     padding:
-      17px
-      10px
-      24px;
+      13px
+      8px
+      20px;
   }
 
   .duduq-intro-stage {
     width: 100%;
 
+    min-height:
+      calc(100dvh - 28px);
+
     padding:
-      4px
-      8px;
+      3px
+      6px;
   }
 
+  .duduq-intro.is-branding
   .duduq-intro-company {
-    margin-bottom: 7px;
+    gap:
+      20px;
   }
 
+  .duduq-intro.is-branding
   .duduq-intro-kicker {
-    font-size: 9px;
+    font-size:
+      11px;
 
-    letter-spacing: .15em;
+    letter-spacing:
+      .18em;
   }
 
+  .duduq-intro.is-branding
+  .duduq-intro-company-logo,
+
+  .duduq-intro.is-switching
   .duduq-intro-company-logo {
     width:
       min(
-        var(--duduq-intro-company-width, 185px),
-        52vw
+        var(--duduq-intro-company-width, 340px),
+        76vw
       );
 
-    max-height: 58px;
+    max-height:
+      180px;
   }
 
   .duduq-intro-collection {
     width: 100%;
 
-    min-height: 145px;
+    min-height:
+      170px;
 
-    margin-bottom: 7px;
+    margin-bottom:
+      5px;
   }
 
   .duduq-intro-collection-logo {
     width:
       min(
-        var(--duduq-intro-collection-width, 420px),
-        89vw
+        var(--duduq-intro-collection-width, 440px),
+        90vw
       );
 
-    max-height: 185px;
+    max-height:
+      215px;
   }
 
   .duduq-intro-collection-name {
     font-size:
       clamp(
-        39px,
+        42px,
         13vw,
-        62px
+        64px
       );
   }
 
   .duduq-intro-meta {
-    gap: 7px;
+    gap:
+      7px;
 
-    margin-bottom: 20px;
+    margin-bottom:
+      18px;
   }
 
   .duduq-intro-meta-chip {
-    min-height: 32px;
+    min-height:
+      32px;
 
     padding:
       6px
-      12px;
+      11px;
 
-    font-size: 11px;
+    font-size:
+      11px;
   }
 
   .duduq-intro-loading {
-    width: 91vw;
+    width:
+      91vw;
   }
 
   .duduq-intro-loading-track {
-    height: 13px;
+    height:
+      13px;
   }
 
   .duduq-intro-actions {
     width:
       min(360px, 91vw);
 
-    margin-top: 18px;
+    margin-top:
+      16px;
   }
 
   .duduq-intro-start-button {
-    min-height: 56px;
+    min-height:
+      56px;
 
-    border-radius: 17px;
+    border-radius:
+      17px;
 
-    font-size: 16px;
+    font-size:
+      16px;
   }
 
   .duduq-intro-start-icon {
     width: 24px;
     height: 24px;
 
-    flex-basis: 24px;
+    flex-basis:
+      24px;
 
-    font-size: 13px;
+    font-size:
+      13px;
   }
 
   .duduq-intro-orb:nth-child(1) {
-    width: 105px;
-    height: 105px;
+    width: 110px;
+    height: 110px;
   }
 
   .duduq-intro-orb:nth-child(2) {
@@ -2082,17 +2734,20 @@
 
   .duduq-intro-meta-chip {
     padding-inline:
-      10px;
+      9px;
 
-    font-size: 10px;
+    font-size:
+      10px;
   }
 
   .duduq-intro-loading-label {
-    font-size: 10px;
+    font-size:
+      10px;
   }
 
   .duduq-intro-start-button {
-    font-size: 15px;
+    font-size:
+      15px;
   }
 
 }
@@ -2105,13 +2760,17 @@
 @media (prefers-reduced-motion: reduce) {
 
   .duduq-intro,
+  .duduq-intro::before,
   .duduq-intro::after,
   .duduq-intro-company,
+  .duduq-intro-kicker,
+  .duduq-intro-company-logo,
+  .duduq-intro-collection,
   .duduq-intro-collection-logo,
   .duduq-intro-collection-name,
-  .duduq-intro-collection::before,
   .duduq-intro-collection-shine::before,
   .duduq-intro-meta,
+  .duduq-intro-meta-chip,
   .duduq-intro-loading,
   .duduq-intro-loading-fill::before,
   .duduq-intro-start-button,
@@ -2119,23 +2778,51 @@
   .duduq-intro-orb,
   .duduq-intro-spark,
   .duduq-intro-stage {
-    animation: none !important;
+    animation:
+      none !important;
 
-    transition-duration: 0.01ms !important;
+    transition-duration:
+      0.01ms !important;
   }
 
   .duduq-intro {
     opacity: 1;
   }
 
+  .duduq-intro.is-branding
   .duduq-intro-company,
+
+  .duduq-intro.is-branding
+  .duduq-intro-company-logo,
+
+  .duduq-intro.is-branding
+  .duduq-intro-kicker {
+    opacity: 1;
+
+    transform: none;
+
+    filter: none;
+  }
+
+  .duduq-intro.is-mission
+  .duduq-intro-collection,
+
+  .duduq-intro.is-mission
   .duduq-intro-collection-logo,
+
+  .duduq-intro.is-mission
   .duduq-intro-collection-name,
+
+  .duduq-intro.is-mission
   .duduq-intro-meta,
+
+  .duduq-intro.is-mission
   .duduq-intro-loading {
     opacity: 1;
 
     transform: none;
+
+    filter: none;
   }
 
   .duduq-intro.is-ready
