@@ -9,7 +9,7 @@
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
 
-  <title>DuduQ Engine — Teste Schema Universal</title>
+  <title>DuduQ Engine — Teste Drag & Drop Universal</title>
 
   <link
     rel="stylesheet"
@@ -31,16 +31,15 @@
 
   <script src="./core/duduq-sound.js?v=100"></script>
 
-  <!-- Schema precisa estar disponível antes das mecânicas -->
   <script src="./core/duduq-schema.js?v=100"></script>
 
   <script src="./core/duduq-host.js?v=110"></script>
 
   <!-- =====================================================
-       MECÂNICAS
+       MECÂNICA
        ===================================================== -->
 
-  <script src="./mechanics/bubble-pop.js?v=110"></script>
+  <script src="./mechanics/drag-drop.js?v=100"></script>
 
   <!-- =====================================================
        TESTE — SCHEMA UNIVERSAL
@@ -87,12 +86,12 @@
 
         if (
           !window.DuduQ.hasMechanic(
-            "bubble-pop"
+            "drag-drop"
           )
         ) {
 
           root.innerHTML =
-            "Erro: Bubble Pop não foi registrado.";
+            "Erro: Drag & Drop não foi registrado.";
 
           return;
         }
@@ -104,7 +103,7 @@
         window.DuduQ.start({
 
           id:
-            "teste-schema-universal-1ano",
+            "teste-drag-drop-schema-1ano",
 
           year:
             1,
@@ -123,21 +122,21 @@
             {
 
               id:
-                "cores-schema-universal",
+                "classificacao-animais-frutas",
 
               mechanic:
-                "bubble-pop",
+                "drag-drop",
 
               payload: {
 
                 id:
-                  "modulo-1-colors",
+                  "drag-drop-categories-test",
 
                 title:
-                  "Colors",
+                  "Animals and Fruits",
 
                 description:
-                  "Teste do conteúdo universal do DuduQ.",
+                  "Teste do Drag & Drop usando o Schema universal DuduQ.",
 
                 subject:
                   "Língua Inglesa",
@@ -159,32 +158,28 @@
 
                 questions: [
 
-                  /* =====================================
-                     QUESTÃO 1 — BLUE
-                     ===================================== */
-
                   {
 
                     id:
-                      "color-blue-01",
+                      "animals-fruits-01",
 
                     skill: {
 
                       code:
-                        "COLOR-RECOGNITION-01",
+                        "VOCAB-CATEGORIES-01",
 
                       description:
-                        "Reconhecer vocabulário básico de cores em língua inglesa."
+                        "Classificar vocabulário básico em língua inglesa por categoria semântica."
                     },
 
                     difficulty:
                       "easy",
 
                     statement:
-                      "Blue",
+                      "Animals and Fruits",
 
                     instruction:
-                      "Estoure a bolha com Blue.",
+                      "Arraste cada palavra para a categoria correta.",
 
                     contentLanguage:
                       "en",
@@ -201,10 +196,10 @@
                         true,
 
                       text:
-                        "Blue",
+                        "Arraste cada palavra para a categoria correta.",
 
                       language:
-                        "en",
+                        "pt-BR",
 
                       role:
                         "instruction"
@@ -215,60 +210,40 @@
                       {
 
                         id:
-                          "blue",
+                          "dog",
 
                         text:
-                          "Blue",
-
-                        metadata: {
-                          tone:
-                            "blue"
-                        }
+                          "DOG"
 
                       },
 
                       {
 
                         id:
-                          "red",
+                          "apple",
 
                         text:
-                          "Red",
-
-                        metadata: {
-                          tone:
-                            "pink"
-                        }
+                          "APPLE"
 
                       },
 
                       {
 
                         id:
-                          "green",
+                          "cat",
 
                         text:
-                          "Green",
-
-                        metadata: {
-                          tone:
-                            "green"
-                        }
+                          "CAT"
 
                       },
 
                       {
 
                         id:
-                          "yellow",
+                          "banana",
 
                         text:
-                          "Yellow",
-
-                        metadata: {
-                          tone:
-                            "yellow"
-                        }
+                          "BANANA"
 
                       }
 
@@ -277,20 +252,53 @@
                     answer: {
 
                       type:
-                        "single",
+                        "pairs",
 
-                      value:
-                        "blue"
+                      value: [
+
+                        {
+                          source:
+                            "dog",
+
+                          target:
+                            "animals"
+                        },
+
+                        {
+                          source:
+                            "cat",
+
+                          target:
+                            "animals"
+                        },
+
+                        {
+                          source:
+                            "apple",
+
+                          target:
+                            "fruits"
+                        },
+
+                        {
+                          source:
+                            "banana",
+
+                          target:
+                            "fruits"
+                        }
+
+                      ]
 
                     },
 
                     feedback: {
 
                       correct:
-                        "Muito bem! Blue está correto.",
+                        "Excelente! Todos os itens estão na categoria correta.",
 
                       incorrect:
-                        "Observe novamente e tente outra bolha.",
+                        "Observe as categorias e tente novamente.",
 
                       language:
                         "pt-BR"
@@ -303,7 +311,7 @@
                         "auto",
 
                       preferred: [
-                        "bubble-pop"
+                        "drag-drop"
                       ],
 
                       allowImage:
@@ -312,319 +320,48 @@
                       allowAudio:
                         true
 
-                    }
-
-                  },
-
-                  /* =====================================
-                     QUESTÃO 2 — RED
-                     ===================================== */
-
-                  {
-
-                    id:
-                      "color-red-02",
-
-                    skill: {
-
-                      code:
-                        "COLOR-RECOGNITION-01",
-
-                      description:
-                        "Reconhecer vocabulário básico de cores em língua inglesa."
                     },
 
-                    difficulty:
-                      "easy",
+                    metadata: {
 
-                    statement:
-                      "Red",
+                      title:
+                        "Animals and Fruits",
 
-                    instruction:
-                      "Estoure a bolha com Red.",
+                      layout:
+                        "categories",
 
-                    contentLanguage:
-                      "en",
-
-                    instructionLanguage:
-                      "pt-BR",
-
-                    feedbackLanguage:
-                      "pt-BR",
-
-                    audio: {
-
-                      enabled:
+                      shuffleItems:
                         true,
 
-                      text:
-                        "Red",
+                      shuffleTargets:
+                        false,
 
-                      language:
-                        "en",
+                      estimatedSeconds:
+                        45,
 
-                      role:
-                        "instruction"
-                    },
+                      targets: [
 
-                    alternatives: [
+                        {
 
-                      {
+                          id:
+                            "animals",
 
-                        id:
-                          "yellow",
+                          label:
+                            "ANIMALS"
 
-                        text:
-                          "Yellow",
+                        },
 
-                        metadata: {
-                          tone:
-                            "yellow"
+                        {
+
+                          id:
+                            "fruits",
+
+                          label:
+                            "FRUITS"
+
                         }
 
-                      },
-
-                      {
-
-                        id:
-                          "red",
-
-                        text:
-                          "Red",
-
-                        metadata: {
-                          tone:
-                            "pink"
-                        }
-
-                      },
-
-                      {
-
-                        id:
-                          "blue",
-
-                        text:
-                          "Blue",
-
-                        metadata: {
-                          tone:
-                            "blue"
-                        }
-
-                      },
-
-                      {
-
-                        id:
-                          "green",
-
-                        text:
-                          "Green",
-
-                        metadata: {
-                          tone:
-                            "green"
-                        }
-
-                      }
-
-                    ],
-
-                    answer: {
-
-                      type:
-                        "single",
-
-                      value:
-                        "red"
-
-                    },
-
-                    feedback: {
-
-                      correct:
-                        "Muito bem! Red está correto.",
-
-                      incorrect:
-                        "Observe novamente e tente outra bolha.",
-
-                      language:
-                        "pt-BR"
-
-                    },
-
-                    delivery: {
-
-                      mechanic:
-                        "auto",
-
-                      preferred: [
-                        "bubble-pop"
-                      ],
-
-                      allowImage:
-                        true,
-
-                      allowAudio:
-                        true
-
-                    }
-
-                  },
-
-                  /* =====================================
-                     QUESTÃO 3 — GREEN
-                     ===================================== */
-
-                  {
-
-                    id:
-                      "color-green-03",
-
-                    skill: {
-
-                      code:
-                        "COLOR-RECOGNITION-01",
-
-                      description:
-                        "Reconhecer vocabulário básico de cores em língua inglesa."
-                    },
-
-                    difficulty:
-                      "easy",
-
-                    statement:
-                      "Green",
-
-                    instruction:
-                      "Estoure a bolha com Green.",
-
-                    contentLanguage:
-                      "en",
-
-                    instructionLanguage:
-                      "pt-BR",
-
-                    feedbackLanguage:
-                      "pt-BR",
-
-                    audio: {
-
-                      enabled:
-                        true,
-
-                      text:
-                        "Green",
-
-                      language:
-                        "en",
-
-                      role:
-                        "instruction"
-                    },
-
-                    alternatives: [
-
-                      {
-
-                        id:
-                          "red",
-
-                        text:
-                          "Red",
-
-                        metadata: {
-                          tone:
-                            "pink"
-                        }
-
-                      },
-
-                      {
-
-                        id:
-                          "green",
-
-                        text:
-                          "Green",
-
-                        metadata: {
-                          tone:
-                            "green"
-                        }
-
-                      },
-
-                      {
-
-                        id:
-                          "yellow",
-
-                        text:
-                          "Yellow",
-
-                        metadata: {
-                          tone:
-                            "yellow"
-                        }
-
-                      },
-
-                      {
-
-                        id:
-                          "blue",
-
-                        text:
-                          "Blue",
-
-                        metadata: {
-                          tone:
-                            "blue"
-                        }
-
-                      }
-
-                    ],
-
-                    answer: {
-
-                      type:
-                        "single",
-
-                      value:
-                        "green"
-
-                    },
-
-                    feedback: {
-
-                      correct:
-                        "Muito bem! Green está correto.",
-
-                      incorrect:
-                        "Observe novamente e tente outra bolha.",
-
-                      language:
-                        "pt-BR"
-
-                    },
-
-                    delivery: {
-
-                      mechanic:
-                        "auto",
-
-                      preferred: [
-                        "bubble-pop"
-                      ],
-
-                      allowImage:
-                        true,
-
-                      allowAudio:
-                        true
+                      ]
 
                     }
 
