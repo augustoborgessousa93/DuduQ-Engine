@@ -1,23 +1,16 @@
 /* =========================================================
    DUDUQ CORE — HOST
    Orquestrador central das mecânicas e módulos DuduQ.
-   Versão 1.1.0
+   Versão 1.2.0
    ========================================================= */
 
 (function () {
   "use strict";
 
-  if (
-    window.DuduQ &&
-    window.DuduQ.version === "1.1.0"
-  ) {
-    return;
-  }
+  if (window.DuduQ?.version === "1.2.0") return;
 
-  const VERSION = "1.1.0";
-
+  const VERSION = "1.2.0";
   const mechanics = new Map();
-
   let activeSession = null;
 
   /* =======================================================
@@ -25,33 +18,21 @@
      ======================================================= */
 
   function isObject(value) {
-    return (
-      value !== null &&
-      typeof value === "object" &&
-      !Array.isArray(value)
-    );
+    return value !== null && typeof value === "object" && !Array.isArray(value);
   }
 
   function resolveContainer(value) {
-    if (value instanceof Element) {
-      return value;
-    }
+    if (value instanceof Element) return value;
 
     if (typeof value === "string") {
-      const element =
-        document.querySelector(value);
+      const element = document.querySelector(value);
 
-      if (element) {
-        return element;
-      }
+      if (element) return element;
     }
 
-    const root =
-      document.getElementById("root");
+    const root = document.getElementById("root");
 
-    if (root) {
-      return root;
-    }
+    if (root) return root;
 
     throw new Error(
       "[DuduQ Host] Container da atividade não encontrado."
@@ -74,12 +55,8 @@
     }
   }
 
-  function createElement(
-    tag,
-    styles = {}
-  ) {
-    const element =
-      document.createElement(tag);
+  function createElement(tag, styles = {}) {
+    const element = document.createElement(tag);
 
     Object.assign(
       element.style,
@@ -87,6 +64,20 @@
     );
 
     return element;
+  }
+
+  function clamp(
+    value,
+    minimum,
+    maximum
+  ) {
+    return Math.min(
+      maximum,
+      Math.max(
+        minimum,
+        value
+      )
+    );
   }
 
   /* =======================================================
@@ -180,16 +171,18 @@
   function listMechanics() {
     return Array.from(
       mechanics.values()
-    ).map((mechanic) => ({
-      id:
-        mechanic.id,
+    ).map(
+      (mechanic) => ({
+        id:
+          mechanic.id,
 
-      version:
-        mechanic.version,
+        version:
+          mechanic.version,
 
-      metadata:
-        mechanic.metadata
-    }));
+        metadata:
+          mechanic.metadata
+      })
+    );
   }
 
   /* =======================================================
@@ -235,12 +228,16 @@
         {},
 
       options:
-        isObject(step.options)
+        isObject(
+          step.options
+        )
           ? step.options
           : {},
 
       metadata:
-        isObject(step.metadata)
+        isObject(
+          step.metadata
+        )
           ? step.metadata
           : {}
     };
@@ -254,7 +251,9 @@
     }
 
     const steps =
-      Array.isArray(config.steps)
+      Array.isArray(
+        config.steps
+      )
         ? config.steps.map(
             normalizeStep
           )
@@ -293,7 +292,9 @@
       );
     }
 
-    if (steps.length === 0) {
+    if (
+      steps.length === 0
+    ) {
       throw new Error(
         "[DuduQ Host] O módulo não possui etapas."
       );
@@ -318,8 +319,8 @@
         null,
 
       module:
-        config.module ||
-        config.modulo ||
+        config.module ??
+        config.modulo ??
         null,
 
       container:
@@ -329,10 +330,132 @@
       steps,
 
       metadata:
-        isObject(config.metadata)
+        isObject(
+          config.metadata
+        )
           ? config.metadata
           : {}
     };
+  }
+
+  /* =======================================================
+     PROGRESSO GLOBAL DO MÓDULO
+     ======================================================= */
+
+  function buildProgress(
+    session,
+    options = {}
+  ) {
+    if (!session) {
+      return null;
+    }
+
+    const totalSteps =
+      session.module.steps.length;
+
+    const completed =
+      options.completed ===
+        true ||
+      session.completed ===
+        true;
+
+    const rawIndex =
+      Number.isFinite(
+        options.stepIndex
+      )
+        ? options.stepIndex
+        : session.currentStepIndex;
+
+    const currentStepIndex =
+      totalSteps > 0
+        ? clamp(
+            rawIndex,
+            0,
+            totalSteps - 1
+          )
+        : 0;
+
+    const completedSteps =
+      completed
+        ? totalSteps
+        : clamp(
+            Number.isFinite(
+              options.completedSteps
+            )
+              ? options.completedSteps
+              : currentStepIndex,
+            0,
+            totalSteps
+          );
+
+    const currentStep =
+      completed
+        ? totalSteps
+        : totalSteps > 0
+          ? currentStepIndex + 1
+          : 0;
+
+    const fraction =
+      totalSteps > 0
+        ? completedSteps /
+          totalSteps
+        : 0;
+
+    const percent =
+      Math.round(
+        fraction * 10000
+      ) / 100;
+
+    return Object.freeze({
+      source:
+        "duduq-host",
+
+      scope:
+        "module",
+
+      moduleId:
+        session.module.id,
+
+      currentStepIndex:
+        completed
+          ? Math.max(
+              0,
+              totalSteps - 1
+            )
+          : currentStepIndex,
+
+      currentStep,
+
+      totalSteps,
+
+      completedSteps,
+
+      remainingSteps:
+        Math.max(
+          0,
+          totalSteps -
+          completedSteps
+        ),
+
+      fraction,
+
+      percent,
+
+      completed,
+
+      label:
+        totalSteps > 0
+          ? completed
+            ? `${totalSteps} de ${totalSteps} etapas concluídas`
+            : `Etapa ${currentStep} de ${totalSteps}`
+          : "Sem etapas"
+    });
+  }
+
+  function getProgress() {
+    return buildProgress(
+      activeSession
+    );
   }
 
   /* =======================================================
@@ -343,8 +466,7 @@
     session
   ) {
     if (
-      !session ||
-      !session.cleanup
+      !session?.cleanup
     ) {
       return;
     }
@@ -358,7 +480,8 @@
       );
     }
 
-    session.cleanup = null;
+    session.cleanup =
+      null;
   }
 
   /* =======================================================
@@ -379,13 +502,23 @@
       createElement(
         "section",
         {
-          width: "100%",
-          minHeight: "100vh",
-          display: "grid",
-          placeItems: "center",
+          width:
+            "100%",
+
+          minHeight:
+            "100vh",
+
+          display:
+            "grid",
+
+          placeItems:
+            "center",
+
           padding:
             "clamp(20px, 4vw, 48px)",
-          boxSizing: "border-box"
+
+          boxSizing:
+            "border-box"
         }
       );
 
@@ -399,7 +532,9 @@
           width:
             "min(620px, 100%)",
 
-          display: "flex",
+          display:
+            "flex",
+
           flexDirection:
             "column",
 
@@ -435,22 +570,24 @@
         }
       );
 
-    /* -----------------------------------------------------
-       MASCOTE
-       ----------------------------------------------------- */
-
-    let mascotSrc = null;
+    let mascotSrc =
+      null;
 
     try {
       mascotSrc =
-        window.DuduQAssets?.assets
-          ?.mascots?.complete ||
+        window.DuduQAssets
+          ?.assets
+          ?.mascots
+          ?.complete ||
         window.DUDUQ_ASSETS
-          ?.mascots?.complete ||
+          ?.mascots
+          ?.complete ||
         null;
     } catch (_) {}
 
-    if (mascotSrc) {
+    if (
+      mascotSrc
+    ) {
       const mascot =
         document.createElement(
           "img"
@@ -487,10 +624,6 @@
       );
     }
 
-    /* -----------------------------------------------------
-       TÍTULO
-       ----------------------------------------------------- */
-
     const title =
       createElement(
         "h1",
@@ -522,10 +655,6 @@
       title
     );
 
-    /* -----------------------------------------------------
-       TEXTO
-       ----------------------------------------------------- */
-
     const message =
       createElement(
         "p",
@@ -551,7 +680,8 @@
       );
 
     const moduleLabel =
-      session.module.module != null
+      session.module.module !=
+      null
         ? `Módulo ${session.module.module}`
         : "Atividade";
 
@@ -567,9 +697,14 @@
       message
     );
 
-    /* -----------------------------------------------------
-       PROGRESSO
-       ----------------------------------------------------- */
+    const globalProgress =
+      buildProgress(
+        session,
+        {
+          completed:
+            true
+        }
+      );
 
     const progress =
       createElement(
@@ -614,15 +749,11 @@
       );
 
     progress.textContent =
-      `${session.module.steps.length} de ${session.module.steps.length} etapas concluídas`;
+      globalProgress.label;
 
     card.appendChild(
       progress
     );
-
-    /* -----------------------------------------------------
-       BOTÃO REINICIAR
-       ----------------------------------------------------- */
 
     const restartButton =
       document.createElement(
@@ -686,9 +817,7 @@
 
     restartButton.addEventListener(
       "click",
-      function () {
-        restart();
-      }
+      restart
     );
 
     card.appendChild(
@@ -702,6 +831,66 @@
     container.appendChild(
       screen
     );
+  }
+
+  /* =======================================================
+     CONTEXTO DE UMA ETAPA
+     ======================================================= */
+
+  function buildStepContext(
+    session,
+    step
+  ) {
+    const globalProgress =
+      buildProgress(
+        session
+      );
+
+    return {
+      engineVersion:
+        VERSION,
+
+      moduleId:
+        session.module.id,
+
+      year:
+        session.module.year,
+
+      subject:
+        session.module.subject,
+
+      module:
+        session.module.module,
+
+      stepId:
+        step.id,
+
+      stepIndex:
+        session.currentStepIndex,
+
+      totalSteps:
+        session.module.steps.length,
+
+      /*
+       * Contrato canônico de progresso.
+       *
+       * "progress" é o nome principal.
+       * "globalProgress" permanece como alias
+       * durante a integração das mecânicas.
+       */
+      progress:
+        globalProgress,
+
+      globalProgress,
+
+      assets:
+        window.DuduQAssets ||
+        null,
+
+      sound:
+        window.DuduQSound ||
+        null
+    };
   }
 
   /* =======================================================
@@ -738,13 +927,16 @@
     if (
       mechanic.validate
     ) {
-      const result =
+      const validation =
         mechanic.validate(
           step.payload,
           step
         );
 
-      if (result === false) {
+      if (
+        validation ===
+        false
+      ) {
         throw new Error(
           `[DuduQ Host] Conteúdo incompatível com a mecânica "${step.mechanicId}".`
         );
@@ -759,39 +951,11 @@
       session.container
     );
 
-    const context = {
-      engineVersion:
-        VERSION,
-
-      moduleId:
-        session.module.id,
-
-      year:
-        session.module.year,
-
-      subject:
-        session.module.subject,
-
-      module:
-        session.module.module,
-
-      stepId:
-        step.id,
-
-      stepIndex:
-        session.currentStepIndex,
-
-      totalSteps:
-        session.module.steps.length,
-
-      assets:
-        window.DuduQAssets ||
-        null,
-
-      sound:
-        window.DuduQSound ||
-        null
-    };
+    const context =
+      buildStepContext(
+        session,
+        step
+      );
 
     const result =
       mechanic.mount({
@@ -823,6 +987,7 @@
     ) {
       session.cleanup =
         result;
+
     } else if (
       result &&
       typeof result.destroy ===
@@ -832,6 +997,7 @@
         function () {
           result.destroy();
         };
+
     } else {
       session.cleanup =
         null;
@@ -855,7 +1021,10 @@
               session.currentStepIndex,
 
             totalSteps:
-              session.module.steps.length
+              session.module.steps.length,
+
+            progress:
+              context.progress
           }
         }
       )
@@ -867,28 +1036,52 @@
      ======================================================= */
 
   function nextStep(result) {
-    if (!activeSession) {
+    if (
+      !activeSession
+    ) {
       return;
     }
 
+    const completedIndex =
+      activeSession
+        .currentStepIndex;
+
     const completedStep =
-      activeSession.module.steps[
-        activeSession.currentStepIndex
-      ];
+      activeSession
+        .module
+        .steps[
+          completedIndex
+        ];
 
-    activeSession.results.push({
-      stepId:
-        completedStep?.id ||
-        null,
+    activeSession
+      .results
+      .push({
+        stepId:
+          completedStep?.id ||
+          null,
 
-      mechanic:
-        completedStep
-          ?.mechanicId ||
-        null,
+        mechanic:
+          completedStep
+            ?.mechanicId ||
+          null,
 
-      result:
-        result ?? null
-    });
+        result:
+          result ??
+          null
+      });
+
+    const completedProgress =
+      buildProgress(
+        activeSession,
+        {
+          stepIndex:
+            completedIndex,
+
+          completedSteps:
+            completedIndex +
+            1
+        }
+      );
 
     window.dispatchEvent(
       new CustomEvent(
@@ -896,25 +1089,36 @@
         {
           detail: {
             moduleId:
-              activeSession.module.id,
+              activeSession
+                .module
+                .id,
 
             stepId:
               completedStep?.id ||
               null,
 
             result:
-              result ?? null
+              result ??
+              null,
+
+            progress:
+              completedProgress
           }
         }
       )
     );
 
-    activeSession.currentStepIndex +=
+    activeSession
+      .currentStepIndex +=
       1;
 
     if (
-      activeSession.currentStepIndex >=
-      activeSession.module.steps.length
+      activeSession
+        .currentStepIndex >=
+      activeSession
+        .module
+        .steps
+        .length
     ) {
       finishModule(
         activeSession
@@ -947,6 +1151,15 @@
     session.completed =
       true;
 
+    const finalProgress =
+      buildProgress(
+        session,
+        {
+          completed:
+            true
+        }
+      );
+
     renderCompletionScreen(
       session
     );
@@ -970,6 +1183,9 @@
 
             totalSteps:
               session.module.steps.length,
+
+            progress:
+              finalProgress,
 
             results:
               session.results.slice()
@@ -1044,6 +1260,11 @@
         []
     };
 
+    const initialProgress =
+      buildProgress(
+        activeSession
+      );
+
     renderCurrentStep(
       activeSession
     );
@@ -1066,7 +1287,10 @@
               module.module,
 
             totalSteps:
-              module.steps.length
+              module.steps.length,
+
+            progress:
+              initialProgress
           }
         }
       )
@@ -1080,7 +1304,9 @@
      ======================================================= */
 
   function restart() {
-    if (!activeSession) {
+    if (
+      !activeSession
+    ) {
       return false;
     }
 
@@ -1088,7 +1314,8 @@
       activeSession
     );
 
-    activeSession.currentStepIndex =
+    activeSession
+      .currentStepIndex =
       0;
 
     activeSession.completed =
@@ -1105,6 +1332,11 @@
       );
     }
 
+    const restartProgress =
+      buildProgress(
+        activeSession
+      );
+
     renderCurrentStep(
       activeSession
     );
@@ -1115,7 +1347,12 @@
         {
           detail: {
             moduleId:
-              activeSession.module.id
+              activeSession
+                .module
+                .id,
+
+            progress:
+              restartProgress
           }
         }
       )
@@ -1129,7 +1366,9 @@
      ======================================================= */
 
   function destroy() {
-    if (!activeSession) {
+    if (
+      !activeSession
+    ) {
       return;
     }
 
@@ -1177,7 +1416,9 @@
 
       destroy,
 
-      getSession
+      getSession,
+
+      getProgress
     });
 
   window.dispatchEvent(
@@ -1190,5 +1431,10 @@
         }
       }
     )
+  );
+
+  console.info(
+    "[DuduQ] Host carregado:",
+    VERSION
   );
 })();
