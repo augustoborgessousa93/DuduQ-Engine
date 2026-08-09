@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ MECHANIC — BUBBLE POP
-   Adaptador central da mecânica Bubble Pop.
-   Versão 1.0.2
+   Adaptador da mecânica Bubble Pop para o Schema DuduQ.
+   Versão 1.1.0
    ========================================================= */
 
 (function () {
@@ -11,15 +11,51 @@
     console.error(
       "[DuduQ Bubble Pop] duduq-host.js precisa ser carregado antes."
     );
+
     return;
   }
 
   const MECHANIC_ID = "bubble-pop";
-  const VERSION = "1.0.2";
+  const VERSION = "1.1.0";
+
+  const TONES = [
+    "blue",
+    "pink",
+    "green",
+    "yellow",
+    "purple",
+    "orange",
+    "aqua"
+  ];
 
   /* =======================================================
-     CAMINHO DO ENGINE
+     UTILITÁRIOS
      ======================================================= */
+
+  function isObject(value) {
+    return (
+      value !== null &&
+      typeof value === "object" &&
+      !Array.isArray(value)
+    );
+  }
+
+  function asString(
+    value,
+    fallback = ""
+  ) {
+    if (
+      value === null ||
+      value === undefined
+    ) {
+      return fallback;
+    }
+
+    const result =
+      String(value).trim();
+
+    return result || fallback;
+  }
 
   function getEngineBase() {
     if (window.DUDUQ_ENGINE_BASE) {
@@ -28,16 +64,8 @@
       ).replace(/\/$/, "");
     }
 
-    /*
-     * index.html e DUDUQ_BUBBLE_POP.html
-     * ficam na raiz do DuduQ-Engine.
-     */
     return ".";
   }
-
-  /* =======================================================
-     SERIALIZAÇÃO SEGURA
-     ======================================================= */
 
   function makeSerializable(value) {
     if (value == null) {
@@ -49,7 +77,9 @@
         typeof structuredClone ===
         "function"
       ) {
-        return structuredClone(value);
+        return structuredClone(
+          value
+        );
       }
     } catch (_) {}
 
@@ -62,19 +92,13 @@
     }
   }
 
+  /* =======================================================
+     CONTEXTO SEGURO PARA POSTMESSAGE
+     ======================================================= */
+
   function createSafeContext(
     context = {}
   ) {
-    /*
-     * NÃO enviamos:
-     *
-     * context.assets
-     * context.sound
-     *
-     * porque esses objetos possuem funções
-     * que não podem atravessar postMessage.
-     */
-
     return {
       engineVersion:
         context.engineVersion ??
@@ -111,7 +135,688 @@
   }
 
   /* =======================================================
-     VALIDAÇÃO
+     LEITURA DO PAYLOAD
+     ======================================================= */
+
+  function extractQuestionList(
+    payload
+  ) {
+    if (Array.isArray(payload)) {
+      return payload;
+    }
+
+    if (!isObject(payload)) {
+      return [];
+    }
+
+    if (
+      Array.isArray(
+        payload.questions
+      )
+    ) {
+      return payload.questions;
+    }
+
+    if (
+      Array.isArray(
+        payload.items
+      )
+    ) {
+      return payload.items;
+    }
+
+    if (
+      Array.isArray(
+        payload.catalog
+      )
+    ) {
+      return payload.catalog;
+    }
+
+    if (
+      Array.isArray(
+        payload.entries
+      )
+    ) {
+      return payload.entries;
+    }
+
+    return [payload];
+  }
+
+  /* =======================================================
+     DETECÇÃO DO FORMATO ANTIGO
+     ======================================================= */
+
+  function isLegacyBubbleQuestion(
+    question
+  ) {
+    if (!isObject(question)) {
+      return false;
+    }
+
+    const nested =
+      isObject(question.payload)
+        ? question.payload
+        : {};
+
+    const bubbles =
+      question.bubbles ??
+      nested.bubbles;
+
+    const targetIds =
+      question.targetIds ??
+      nested.targetIds;
+
+    return (
+      Array.isArray(bubbles) &&
+      bubbles.length > 0 &&
+      Array.isArray(targetIds) &&
+      targetIds.length > 0
+    );
+  }
+
+  function normalizeLegacyQuestion(
+    question,
+    index
+  ) {
+    const nested =
+      isObject(question.payload)
+        ? question.payload
+        : {};
+
+    return {
+      ...question,
+
+      id:
+        asString(
+          question.id,
+          `legacy-bubble-${index + 1}`
+        ),
+
+      title:
+        asString(
+          question.title,
+          `Questão ${index + 1}`
+        ),
+
+      instruction:
+        asString(
+          question.instruction ||
+          question.prompt,
+          "Estoure a bolha correta."
+        ),
+
+      learningObjective:
+        asString(
+          question.learningObjective ||
+          question.objective,
+          "Reconhecer e selecionar a resposta correta."
+        ),
+
+      mode:
+        question.mode ??
+        nested.mode ??
+        "single-target",
+
+      bubbles:
+        question.bubbles ??
+        nested.bubbles ??
+        [],
+
+      targetIds:
+        question.targetIds ??
+        nested.targetIds ??
+        [],
+
+      behavior:
+        question.behavior ??
+        nested.behavior ??
+        {},
+
+      tags:
+        Array.isArray(
+          question.tags
+        )
+          ? question.tags
+          : ["legacy"]
+    };
+  }
+
+  /* =======================================================
+     DIFICULDADE
+     ======================================================= */
+
+  function difficultyToNumber(
+    value
+  ) {
+    if (
+      typeof value === "number"
+    ) {
+      return Math.max(
+        1,
+        Math.min(
+          3,
+          Math.round(value)
+        )
+      );
+    }
+
+    switch (
+      String(value || "")
+        .toLowerCase()
+    ) {
+      case "medium":
+        return 2;
+
+      case "hard":
+        return 3;
+
+      case "easy":
+      default:
+        return 1;
+    }
+  }
+
+  /* =======================================================
+     GABARITO UNIVERSAL → TARGET IDS
+     ======================================================= */
+
+  function resolveAnswerIds(
+    question
+  ) {
+    const alternatives =
+      Array.isArray(
+        question.alternatives
+      )
+        ? question.alternatives
+        : [];
+
+    const answer =
+      question.answer || {};
+
+    let values =
+      answer.value;
+
+    if (
+      values === null ||
+      values === undefined
+    ) {
+      return [];
+    }
+
+    if (!Array.isArray(values)) {
+      values = [values];
+    }
+
+    const result = [];
+
+    values.forEach(
+      (rawValue) => {
+        const value =
+          String(rawValue);
+
+        let match =
+          alternatives.find(
+            (alternative) =>
+              String(
+                alternative.id
+              ) === value
+          );
+
+        if (!match) {
+          const normalizedValue =
+            value
+              .trim()
+              .toLowerCase();
+
+          match =
+            alternatives.find(
+              (alternative) =>
+                String(
+                  alternative.text || ""
+                )
+                  .trim()
+                  .toLowerCase() ===
+                normalizedValue
+            );
+        }
+
+        if (
+          match &&
+          !result.includes(
+            match.id
+          )
+        ) {
+          result.push(
+            match.id
+          );
+        }
+      }
+    );
+
+    return result;
+  }
+
+  /* =======================================================
+     ALTERNATIVA UNIVERSAL → BOLHA
+     ======================================================= */
+
+  function alternativeToBubble(
+    alternative,
+    index
+  ) {
+    const metadata =
+      isObject(
+        alternative.metadata
+      )
+        ? alternative.metadata
+        : {};
+
+    const image =
+      isObject(
+        alternative.image
+      )
+        ? alternative.image
+        : {};
+
+    const label =
+      asString(
+        alternative.text ||
+        image.alt ||
+        alternative.id,
+        `Opção ${index + 1}`
+      );
+
+    const bubble = {
+      id:
+        asString(
+          alternative.id,
+          `option-${index + 1}`
+        ),
+
+      label,
+
+      alt:
+        asString(
+          image.alt,
+          label
+        ),
+
+      tone:
+        asString(
+          metadata.tone,
+          TONES[
+            index %
+            TONES.length
+          ]
+        )
+    };
+
+    /*
+     * Quando uma alternativa já indicar uma
+     * chave de asset do catálogo DuduQ,
+     * preservamos essa informação.
+     *
+     * URLs externas de imagem serão tratadas
+     * em uma evolução posterior do renderer.
+     */
+    if (
+      metadata.imageAssetKey
+    ) {
+      bubble.imageAssetKey =
+        metadata.imageAssetKey;
+    }
+
+    return bubble;
+  }
+
+  /* =======================================================
+     QUESTÃO UNIVERSAL → BUBBLE POP
+     ======================================================= */
+
+  function adaptUniversalQuestion(
+    rawQuestion,
+    index,
+    context = {}
+  ) {
+    if (!window.DuduQSchema) {
+      console.error(
+        "[DuduQ Bubble Pop] DuduQSchema não está carregado."
+      );
+
+      return null;
+    }
+
+    const question =
+      window.DuduQSchema
+        .normalizeQuestion(
+          rawQuestion,
+          index,
+          {
+            subject:
+              context.subject,
+
+            year:
+              context.year,
+
+            module:
+              context.module
+          }
+        );
+
+    const validation =
+      window.DuduQSchema
+        .validateQuestion(
+          question
+        );
+
+    if (!validation.valid) {
+      console.error(
+        "[DuduQ Bubble Pop] Questão inválida:",
+        question.id,
+        validation.errors
+      );
+
+      return null;
+    }
+
+    if (
+      validation.warnings &&
+      validation.warnings.length
+    ) {
+      console.warn(
+        "[DuduQ Bubble Pop] Avisos da questão:",
+        question.id,
+        validation.warnings
+      );
+    }
+
+    const alternatives =
+      Array.isArray(
+        question.alternatives
+      )
+        ? question.alternatives
+        : [];
+
+    if (
+      alternatives.length < 2
+    ) {
+      console.error(
+        "[DuduQ Bubble Pop] Bubble Pop precisa de pelo menos duas alternativas:",
+        question.id
+      );
+
+      return null;
+    }
+
+    const targetIds =
+      resolveAnswerIds(
+        question
+      );
+
+    if (
+      targetIds.length === 0
+    ) {
+      console.error(
+        "[DuduQ Bubble Pop] Não foi possível localizar o gabarito entre as alternativas:",
+        question.id
+      );
+
+      return null;
+    }
+
+    const bubbles =
+      alternatives.map(
+        alternativeToBubble
+      );
+
+    const metadata =
+      isObject(
+        question.metadata
+      )
+        ? question.metadata
+        : {};
+
+    const skillDescription =
+      question.skill &&
+      question.skill.description
+        ? question.skill.description
+        : "";
+
+    const tags = [];
+
+    if (question.subject) {
+      tags.push(
+        String(
+          question.subject
+        )
+      );
+    }
+
+    if (
+      question.skill &&
+      question.skill.code
+    ) {
+      tags.push(
+        String(
+          question.skill.code
+        )
+      );
+    }
+
+    if (
+      Array.isArray(
+        metadata.tags
+      )
+    ) {
+      metadata.tags.forEach(
+        (tag) => {
+          if (
+            tag &&
+            !tags.includes(
+              String(tag)
+            )
+          ) {
+            tags.push(
+              String(tag)
+            );
+          }
+        }
+      );
+    }
+
+    const instruction =
+      asString(
+        question.instruction ||
+        question.statement,
+        "Estoure a bolha correta."
+      );
+
+    const audioText =
+      question.media &&
+      question.media.audio &&
+      question.media.audio.enabled &&
+      question.media.audio.text
+        ? question.media.audio.text
+        : instruction;
+
+    const multipleTargets =
+      targetIds.length > 1 ||
+      question.answer.type ===
+        "multiple";
+
+    return {
+      id:
+        question.id,
+
+      title:
+        asString(
+          metadata.title ||
+          question.statement,
+          `Questão ${index + 1}`
+        ),
+
+      instruction,
+
+      audioText,
+
+      learningObjective:
+        asString(
+          skillDescription ||
+          metadata.learningObjective,
+          "Reconhecer e selecionar a resposta correta."
+        ),
+
+      difficulty:
+        difficultyToNumber(
+          question.difficulty
+        ),
+
+      mode:
+        multipleTargets
+          ? "multiple-targets"
+          : "single-target",
+
+      tags,
+
+      targetIds,
+
+      bubbles,
+
+      behavior:
+        isObject(
+          metadata.behavior
+        )
+          ? {
+              ...metadata.behavior
+            }
+          : {},
+
+      success:
+        question.feedback &&
+        question.feedback.correct
+          ? question.feedback.correct
+          : "Muito bem! Resposta correta.",
+
+      retry:
+        question.feedback &&
+        question.feedback.incorrect
+          ? question.feedback.incorrect
+          : "Observe com atenção e tente novamente.",
+
+      schemaQuestionId:
+        question.id,
+
+      schemaVersion:
+        question.schemaVersion
+    };
+  }
+
+  /* =======================================================
+     ADAPTAÇÃO DO PAYLOAD COMPLETO
+     ======================================================= */
+
+  function adaptPayload(
+    payload,
+    context = {}
+  ) {
+    const source =
+      isObject(payload)
+        ? payload
+        : {};
+
+    const list =
+      extractQuestionList(
+        payload
+      );
+
+    if (
+      list.length === 0
+    ) {
+      return null;
+    }
+
+    const questions =
+      list
+        .map(
+          (
+            question,
+            index
+          ) => {
+            if (
+              isLegacyBubbleQuestion(
+                question
+              )
+            ) {
+              return normalizeLegacyQuestion(
+                question,
+                index
+              );
+            }
+
+            return adaptUniversalQuestion(
+              question,
+              index,
+              context
+            );
+          }
+        )
+        .filter(Boolean);
+
+    if (
+      questions.length === 0
+    ) {
+      return null;
+    }
+
+    return {
+      lessonId:
+        source.lessonId ||
+        source.id ||
+        `bubble-pop-${Date.now()}`,
+
+      lessonTitle:
+        source.lessonTitle ||
+        source.title ||
+        "Bubble Pop",
+
+      title:
+        source.title ||
+        source.lessonTitle ||
+        "Bubble Pop",
+
+      description:
+        source.description ||
+        "Conteúdo carregado pelo DuduQ Engine.",
+
+      version:
+        source.version ||
+        "1.0.0",
+
+      grade:
+        context.year ??
+        source.grade ??
+        source.year ??
+        null,
+
+      year:
+        context.year ??
+        source.year ??
+        source.grade ??
+        null,
+
+      unitId:
+        context.moduleId ??
+        source.unitId ??
+        null,
+
+      questions
+    };
+  }
+
+  /* =======================================================
+     VALIDAÇÃO DA MECÂNICA
      ======================================================= */
 
   function validate(payload) {
@@ -119,18 +824,43 @@
       return false;
     }
 
-    if (Array.isArray(payload)) {
-      return payload.length > 0;
+    const list =
+      extractQuestionList(
+        payload
+      );
+
+    if (
+      list.length === 0
+    ) {
+      return false;
     }
 
-    return (
-      typeof payload ===
-      "object"
-    );
+    /*
+     * Payload antigo continua aceito mesmo
+     * quando o Schema ainda não estiver
+     * carregado.
+     */
+    if (
+      list.every(
+        isLegacyBubbleQuestion
+      )
+    ) {
+      return true;
+    }
+
+    if (!window.DuduQSchema) {
+      console.error(
+        "[DuduQ Bubble Pop] Questões universais exigem core/duduq-schema.js."
+      );
+
+      return false;
+    }
+
+    return true;
   }
 
   /* =======================================================
-     MONTAGEM DA MECÂNICA
+     MONTAGEM
      ======================================================= */
 
   function mount({
@@ -143,6 +873,18 @@
     if (!container) {
       throw new Error(
         "[DuduQ Bubble Pop] Container não informado."
+      );
+    }
+
+    const adaptedPayload =
+      adaptPayload(
+        payload,
+        context
+      );
+
+    if (!adaptedPayload) {
+      throw new Error(
+        "[DuduQ Bubble Pop] Nenhuma questão válida pôde ser adaptada."
       );
     }
 
@@ -164,10 +906,6 @@
 
     wrapper.style.position =
       "relative";
-
-    /* =====================================================
-       IFRAME
-       ===================================================== */
 
     const iframe =
       document.createElement(
@@ -203,7 +941,7 @@
       "transparent";
 
     /* =====================================================
-       URL DA MECÂNICA
+       URL
        ===================================================== */
 
     const engineBase =
@@ -215,11 +953,15 @@
     if (context.year) {
       params.set(
         "ano",
-        String(context.year)
+        String(
+          context.year
+        )
       );
     }
 
-    if (context.moduleId) {
+    if (
+      context.moduleId
+    ) {
       params.set(
         "module",
         String(
@@ -228,33 +970,42 @@
       );
     }
 
-    const query =
-      params.toString();
+    /*
+     * Ajuda a evitar cache de versões
+     * antigas durante a evolução do Engine.
+     */
+    params.set(
+      "engineAdapter",
+      VERSION
+    );
 
     iframe.src =
       engineBase +
-      "/DUDUQ_BUBBLE_POP.html" +
-      (
-        query
-          ? "?" + query
-          : ""
-      );
+      "/DUDUQ_BUBBLE_POP.html?" +
+      params.toString();
 
     /* =====================================================
-       PACOTE ENVIADO AO BUBBLE POP
+       DADOS SERIALIZÁVEIS
        ===================================================== */
 
     const messagePayload =
-      makeSerializable(payload);
+      makeSerializable(
+        adaptedPayload
+      );
 
     const messageOptions =
-      makeSerializable(options) ||
-      {};
+      makeSerializable(
+        options
+      ) || {};
 
     const messageContext =
       createSafeContext(
         context
       );
+
+    /* =====================================================
+       ENVIO
+       ===================================================== */
 
     function sendContent() {
       if (
@@ -288,7 +1039,16 @@
         );
 
         console.info(
-          "[DuduQ Bubble Pop] Conteúdo enviado para a mecânica."
+          "[DuduQ Bubble Pop] Conteúdo adaptado e enviado.",
+          {
+            adapterVersion:
+              VERSION,
+
+            questions:
+              adaptedPayload
+                .questions
+                .length
+          }
         );
       } catch (error) {
         console.error(
@@ -299,7 +1059,7 @@
     }
 
     /* =====================================================
-       MENSAGENS RECEBIDAS DA MECÂNICA
+       MENSAGENS DA MECÂNICA
        ===================================================== */
 
     function handleMessage(
@@ -323,10 +1083,6 @@
         return;
       }
 
-      /* ---------------------------------------------------
-         MECÂNICA PRONTA
-         --------------------------------------------------- */
-
       if (
         data.type ===
         "DUDUQ_MECHANIC_READY"
@@ -339,10 +1095,6 @@
 
         return;
       }
-
-      /* ---------------------------------------------------
-         MECÂNICA CONCLUÍDA
-         --------------------------------------------------- */
 
       if (
         data.type ===
@@ -366,10 +1118,6 @@
         return;
       }
 
-      /* ---------------------------------------------------
-         ERRO DA MECÂNICA
-         --------------------------------------------------- */
-
       if (
         data.type ===
         "DUDUQ_MECHANIC_ERROR"
@@ -386,30 +1134,19 @@
       handleMessage
     );
 
-    /* =====================================================
-       FALLBACK DE ENVIO
-       ===================================================== */
-
+    /*
+     * O READY é o envio principal.
+     * Este load é somente fallback.
+     */
     iframe.addEventListener(
       "load",
       function () {
-        /*
-         * O envio principal acontece quando
-         * recebemos DUDUQ_MECHANIC_READY.
-         *
-         * Este envio adicional serve apenas
-         * como fallback.
-         */
         window.setTimeout(
           sendContent,
           250
         );
       }
     );
-
-    /* =====================================================
-       INSERÇÃO
-       ===================================================== */
 
     wrapper.appendChild(
       iframe
@@ -436,7 +1173,7 @@
   }
 
   /* =======================================================
-     REGISTRO NO DUDUQ HOST
+     REGISTRO
      ======================================================= */
 
   window.DuduQ.registerMechanic({
@@ -458,6 +1195,12 @@
         "reconhecimento-rapido",
 
       active:
+        true,
+
+      acceptsSchema:
+        "1.0.0",
+
+      legacyPayload:
         true
     }
   });
