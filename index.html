@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
 
@@ -8,11 +9,11 @@
     content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
 
-  <title>DuduQ Engine — Teste Bubble Pop</title>
+  <title>DuduQ Engine — Teste Bubble Pop 3 Questões</title>
 
   <link
     rel="stylesheet"
-    href="./core/duduq-theme.css"
+    href="./core/duduq-theme.css?v=110"
   >
 </head>
 
@@ -22,33 +23,34 @@
     Carregando DuduQ Engine...
   </div>
 
-  <!-- ==========================================
+  <!-- =====================================================
        DUDUQ CORE
-       A ordem destes arquivos é importante.
-       ========================================== -->
+       ===================================================== -->
 
-  <script src="./core/duduq-assets.js"></script>
+  <script src="./core/duduq-assets.js?v=100"></script>
 
-  <script src="./core/duduq-sound.js"></script>
+  <script src="./core/duduq-sound.js?v=100"></script>
 
-  <script src="./core/duduq-host.js"></script>
+  <script src="./core/duduq-host.js?v=110"></script>
 
-  <!-- ==========================================
+  <!-- =====================================================
        MECÂNICAS
-       ========================================== -->
+       ===================================================== -->
 
-  <script src="./mechanics/bubble-pop.js"></script>
+  <script src="./mechanics/bubble-pop.js?v=102"></script>
 
-  <!-- ==========================================
-       TESTE DE INTEGRAÇÃO
-       ========================================== -->
+  <!-- =====================================================
+       TESTE — BUBBLE POP COM 3 QUESTÕES
+       ===================================================== -->
 
   <script>
+
     window.addEventListener(
       "DOMContentLoaded",
       function () {
 
         if (!window.DuduQ) {
+
           document.getElementById(
             "root"
           ).innerHTML =
@@ -62,6 +64,7 @@
             "bubble-pop"
           )
         ) {
+
           document.getElementById(
             "root"
           ).innerHTML =
@@ -71,8 +74,9 @@
         }
 
         window.DuduQ.start({
+
           id:
-            "teste-bubble-pop-1ano",
+            "teste-bubble-pop-3-questoes",
 
           year:
             1,
@@ -87,16 +91,19 @@
             "#root",
 
           steps: [
+
             {
+
               id:
-                "questao-cores-01",
+                "bloco-cores-bubble-pop",
 
               mechanic:
                 "bubble-pop",
 
               payload: {
+
                 lessonId:
-                  "teste-cores-1ano",
+                  "teste-colors-3-questoes",
 
                 lessonTitle:
                   "Colors",
@@ -105,9 +112,15 @@
                   1,
 
                 questions: [
+
+                  /* =========================================
+                     QUESTÃO 1 — BLUE
+                     ========================================= */
+
                   {
+
                     id:
-                      "blue-test-01",
+                      "color-blue-01",
 
                     title:
                       "Blue",
@@ -123,7 +136,8 @@
 
                     tags: [
                       "colors",
-                      "recognition"
+                      "recognition",
+                      "blue"
                     ],
 
                     targetIds: [
@@ -131,7 +145,9 @@
                     ],
 
                     bubbles: [
+
                       {
+
                         id:
                           "blue",
 
@@ -143,6 +159,7 @@
                       },
 
                       {
+
                         id:
                           "red",
 
@@ -154,6 +171,7 @@
                       },
 
                       {
+
                         id:
                           "green",
 
@@ -165,6 +183,7 @@
                       },
 
                       {
+
                         id:
                           "yellow",
 
@@ -174,16 +193,196 @@
                         tone:
                           "yellow"
                       }
+
                     ]
+
+                  },
+
+                  /* =========================================
+                     QUESTÃO 2 — RED
+                     ========================================= */
+
+                  {
+
+                    id:
+                      "color-red-02",
+
+                    title:
+                      "Red",
+
+                    instruction:
+                      "Estoure a bolha com Red.",
+
+                    learningObjective:
+                      "Reconhecer a palavra Red entre diferentes cores.",
+
+                    difficulty:
+                      1,
+
+                    tags: [
+                      "colors",
+                      "recognition",
+                      "red"
+                    ],
+
+                    targetIds: [
+                      "red"
+                    ],
+
+                    bubbles: [
+
+                      {
+
+                        id:
+                          "yellow",
+
+                        label:
+                          "Yellow",
+
+                        tone:
+                          "yellow"
+                      },
+
+                      {
+
+                        id:
+                          "red",
+
+                        label:
+                          "Red",
+
+                        tone:
+                          "pink"
+                      },
+
+                      {
+
+                        id:
+                          "blue",
+
+                        label:
+                          "Blue",
+
+                        tone:
+                          "blue"
+                      },
+
+                      {
+
+                        id:
+                          "green",
+
+                        label:
+                          "Green",
+
+                        tone:
+                          "green"
+                      }
+
+                    ]
+
+                  },
+
+                  /* =========================================
+                     QUESTÃO 3 — GREEN
+                     ========================================= */
+
+                  {
+
+                    id:
+                      "color-green-03",
+
+                    title:
+                      "Green",
+
+                    instruction:
+                      "Estoure a bolha com Green.",
+
+                    learningObjective:
+                      "Reconhecer a palavra Green entre diferentes cores.",
+
+                    difficulty:
+                      1,
+
+                    tags: [
+                      "colors",
+                      "recognition",
+                      "green"
+                    ],
+
+                    targetIds: [
+                      "green"
+                    ],
+
+                    bubbles: [
+
+                      {
+
+                        id:
+                          "red",
+
+                        label:
+                          "Red",
+
+                        tone:
+                          "pink"
+                      },
+
+                      {
+
+                        id:
+                          "green",
+
+                        label:
+                          "Green",
+
+                        tone:
+                          "green"
+                      },
+
+                      {
+
+                        id:
+                          "yellow",
+
+                        label:
+                          "Yellow",
+
+                        tone:
+                          "yellow"
+                      },
+
+                      {
+
+                        id:
+                          "blue",
+
+                        label:
+                          "Blue",
+
+                        tone:
+                          "blue"
+                      }
+
+                    ]
+
                   }
+
                 ]
+
               }
+
             }
+
           ]
+
         });
+
       }
     );
+
   </script>
 
 </body>
+
 </html>
