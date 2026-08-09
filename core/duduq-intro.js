@@ -1,2608 +1,945 @@
 /* =========================================================
-   DUDUQ CORE — INTRO
+   DUDUQ CORE — INTRO CINEMATOGRÁFICA
    Launch Screen universal premium AAA+
-   Versão 1.0.0
+   Versão 1.1.0
 
-   Responsabilidades:
-   - abertura cinematográfica
-   - logo da empresa
-   - logo / nome da coleção
-   - ano, disciplina e módulo
-   - loading gamer
-   - CTA "INICIAR MISSÃO"
-   - sincronização opcional com carregamento real
-   - transição elegante para o jogo
+   Sequência:
+   1. BRANDING  — empresa grande, reveal gradual
+   2. SWITCHING — transição cinematográfica / TV light collapse
+   3. MISSION   — coleção + ano + disciplina + módulo + loading
+   4. READY     — CTA "INICIAR MISSÃO"
+
+   API pública preservada:
+   show, hide, destroy, setProgress, markReady,
+   getInstance, isActive
    ========================================================= */
 
 (function () {
   "use strict";
 
+  const VERSION = "1.1.0";
 
-  /* =======================================================
-     VERSÃO
-     ======================================================= */
-
-  const VERSION =
-    "1.0.0";
-
-
-  if (
-    window.DuduQIntro &&
-    window.DuduQIntro.version === VERSION
-  ) {
+  if (window.DuduQIntro && window.DuduQIntro.version === VERSION) {
     return;
   }
-
-
-  /* =======================================================
-     ASSETS PADRÃO
-     ======================================================= */
 
   const DEFAULT_COMPANY_LOGO =
     "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/LOGO%20DA%20EMPRESA_COLORIDO.png";
 
-
-  /* =======================================================
-     CONFIGURAÇÃO PADRÃO
-     ======================================================= */
-
   const DEFAULTS = Object.freeze({
+    companyKicker: "UMA CRIAÇÃO DE",
+    companyLogo: DEFAULT_COMPANY_LOGO,
+    companyAlt: "Logo da empresa",
+    companyName: "",
 
-    companyKicker:
-      "UMA CRIAÇÃO DE",
+    collectionLogo: "",
+    collectionAlt: "Logo da coleção",
+    collectionName: "DuduQ",
 
-    companyLogo:
-      DEFAULT_COMPANY_LOGO,
+    year: "",
+    subject: "",
+    module: "",
 
-    companyAlt:
-      "Logo da empresa",
+    loadingLabel: "PREPARANDO SUA MISSÃO",
+    readyLabel: "MISSÃO PRONTA",
+    startLabel: "INICIAR MISSÃO",
+    hint: "Tudo pronto para começar!",
 
-    companyName:
-      "",
+    minDurationMs: 1850,
+    brandingDurationMs: 1800,
+    switchingDurationMs: 620,
+    missionMinDurationMs: 1000,
+    exitDurationMs: 470,
 
-    collectionLogo:
-      "",
+    autoReady: true,
+    sparkCount: 14,
 
-    collectionAlt:
-      "Logo da coleção",
+    companyWidth: 620,
+    collectionWidth: 590,
 
-    collectionName:
-      "DuduQ",
+    container: null,
+    readyPromise: null,
 
-    year:
-      "",
-
-    subject:
-      "",
-
-    module:
-      "",
-
-    loadingLabel:
-      "PREPARANDO SUA MISSÃO",
-
-    readyLabel:
-      "MISSÃO PRONTA",
-
-    startLabel:
-      "INICIAR MISSÃO",
-
-    hint:
-      "Tudo pronto para começar!",
-
-    minDurationMs:
-      1850,
-
-    exitDurationMs:
-      470,
-
-    autoReady:
-      true,
-
-    sparkCount:
-      14,
-
-    companyWidth:
-      220,
-
-    collectionWidth:
-      590,
-
-    container:
-      null,
-
-    readyPromise:
-      null,
-
-    onReady:
-      null,
-
-    onStart:
-      null,
-
-    onClose:
-      null
-
+    onPhase: null,
+    onReady: null,
+    onStart: null,
+    onClose: null
   });
 
+  let activeInstance = null;
+  let instanceCounter = 0;
 
-  /* =======================================================
-     ESTADO
-     ======================================================= */
-
-  let activeInstance =
-    null;
-
-  let instanceCounter =
-    0;
-
-
-  /* =======================================================
-     UTILITÁRIOS
-     ======================================================= */
-
-  function clamp(
-    value,
-    min,
-    max
-  ) {
-
-    return Math.min(
-      max,
-      Math.max(
-        min,
-        value
-      )
-    );
-
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
   }
-
 
   function wait(ms) {
-
-    return new Promise(
-      function (resolve) {
-
-        window.setTimeout(
-          resolve,
-          Math.max(
-            0,
-            Number(ms) || 0
-          )
-        );
-
-      }
-    );
-
+    return new Promise(function (resolve) {
+      window.setTimeout(resolve, Math.max(0, Number(ms) || 0));
+    });
   }
-
 
   function safeText(value) {
-
-    if (
-      value === null ||
-      value === undefined
-    ) {
+    if (value === null || value === undefined) {
       return "";
     }
-
     return String(value).trim();
-
   }
 
-
-  function createElement(
-    tagName,
-    className,
-    text
-  ) {
-
-    const element =
-      document.createElement(
-        tagName
-      );
-
-    if (className) {
-      element.className =
-        className;
+  function createElement(tagName, className, text) {
+    const element = document.createElement(tagName);
+    if (className) element.className = className;
+    if (text !== undefined && text !== null) {
+      element.textContent = String(text);
     }
-
-    if (
-      text !== undefined &&
-      text !== null
-    ) {
-      element.textContent =
-        String(text);
-    }
-
     return element;
-
   }
-
 
   function resolveContainer(value) {
+    if (value instanceof Element) return value;
 
-    if (
-      value instanceof Element
-    ) {
-      return value;
+    if (typeof value === "string" && value.trim()) {
+      const found = document.querySelector(value);
+      if (found) return found;
     }
 
-    if (
-      typeof value === "string" &&
-      value.trim()
-    ) {
-
-      const found =
-        document.querySelector(
-          value
-        );
-
-      if (found) {
-        return found;
-      }
-
-    }
-
-    return (
-      document.body ||
-      document.documentElement
-    );
-
+    return document.body || document.documentElement;
   }
-
 
   function now() {
-
-    if (
-      window.performance &&
-      typeof window.performance.now ===
-        "function"
-    ) {
-
+    if (window.performance && typeof window.performance.now === "function") {
       return window.performance.now();
-
     }
-
     return Date.now();
-
   }
 
-
-  /* =======================================================
-     NORMALIZAÇÃO — ANO
-     ======================================================= */
+  function prefersReducedMotion() {
+    try {
+      return Boolean(
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      );
+    } catch (_) {
+      return false;
+    }
+  }
 
   function formatYear(value) {
+    const raw = safeText(value);
+    if (!raw) return "";
 
-    const raw =
-      safeText(value);
-
-    if (!raw) {
-      return "";
-    }
-
-    const numericMatch =
-      raw.match(
-        /^\s*(\d+)\s*$/
-      );
-
-    if (numericMatch) {
-
-      return (
-        numericMatch[1] +
-        "º ANO"
-      );
-
-    }
-
-    if (
-      /ano/i.test(raw)
-    ) {
-      return raw.toUpperCase();
-    }
+    const numericMatch = raw.match(/^\s*(\d+)\s*$/);
+    if (numericMatch) return numericMatch[1] + "º ANO";
 
     return raw.toUpperCase();
-
   }
-
-
-  /* =======================================================
-     NORMALIZAÇÃO — MÓDULO
-     ======================================================= */
 
   function formatModule(value) {
+    const raw = safeText(value);
+    if (!raw) return "";
 
-    const raw =
-      safeText(value);
-
-    if (!raw) {
-      return "";
-    }
-
-    const numericMatch =
-      raw.match(
-        /^\s*(\d+)\s*$/
-      );
-
-    if (numericMatch) {
-
-      return (
-        "MÓDULO " +
-        numericMatch[1]
-      );
-
-    }
-
-    if (
-      /m[oó]dulo/i.test(raw)
-    ) {
-      return raw.toUpperCase();
-    }
+    const numericMatch = raw.match(/^\s*(\d+)\s*$/);
+    if (numericMatch) return "MÓDULO " + numericMatch[1];
 
     return raw.toUpperCase();
-
   }
-
-
-  /* =======================================================
-     NORMALIZAÇÃO — DISCIPLINA
-     ======================================================= */
 
   function formatSubject(value) {
-
-    const raw =
-      safeText(value);
-
-    return raw
-      ? raw.toUpperCase()
-      : "";
-
+    const raw = safeText(value);
+    return raw ? raw.toUpperCase() : "";
   }
-
-
-  /* =======================================================
-     PRELOAD DE IMAGEM
-     Não bloqueia para sempre caso o asset falhe.
-     ======================================================= */
 
   function preloadImage(src) {
-
-    return new Promise(
-      function (resolve) {
-
-        if (!src) {
-
-          resolve({
-            ok: false,
-            src: ""
-          });
-
-          return;
-
-        }
-
-
-        let finished =
-          false;
-
-
-        const finish =
-          function (ok) {
-
-            if (finished) {
-              return;
-            }
-
-            finished =
-              true;
-
-            resolve({
-              ok: ok,
-              src: src
-            });
-
-          };
-
-
-        try {
-
-          const image =
-            new Image();
-
-
-          image.onload =
-            function () {
-
-              finish(true);
-
-            };
-
-
-          image.onerror =
-            function () {
-
-              finish(false);
-
-            };
-
-
-          image.src =
-            src;
-
-
-          if (image.complete) {
-
-            window.setTimeout(
-              function () {
-
-                finish(
-                  image.naturalWidth > 0
-                );
-
-              },
-              0
-            );
-
-          }
-
-
-          window.setTimeout(
-            function () {
-
-              finish(
-                image.complete &&
-                image.naturalWidth > 0
-              );
-
-            },
-            4500
-          );
-
-        } catch (_) {
-
-          finish(false);
-
-        }
-
+    return new Promise(function (resolve) {
+      if (!src) {
+        resolve({ ok: false, src: "" });
+        return;
       }
-    );
 
+      let finished = false;
+
+      function finish(ok) {
+        if (finished) return;
+        finished = true;
+        resolve({ ok: Boolean(ok), src: src });
+      }
+
+      try {
+        const image = new Image();
+        image.onload = function () { finish(true); };
+        image.onerror = function () { finish(false); };
+        image.src = src;
+
+        if (image.complete) {
+          window.setTimeout(function () {
+            finish(image.naturalWidth > 0);
+          }, 0);
+        }
+
+        window.setTimeout(function () {
+          finish(image.complete && image.naturalWidth > 0);
+        }, 4500);
+      } catch (_) {
+        finish(false);
+      }
+    });
   }
 
-
-  /* =======================================================
-     EVENTOS GLOBAIS
-     ======================================================= */
-
-  function emit(
-    name,
-    detail
-  ) {
-
+  function emit(name, detail) {
     try {
-
       document.dispatchEvent(
-        new CustomEvent(
-          name,
-          {
-            detail:
-              detail || {}
-          }
-        )
+        new CustomEvent(name, { detail: detail || {} })
       );
-
     } catch (_) {}
-
   }
-
-
-  /* =======================================================
-     SPARK / PARTÍCULA
-     ======================================================= */
 
   function createSpark(index) {
+    const spark = createElement("span", "duduq-intro-spark", "★");
+    const colors = ["#ffc928", "#42a7f5", "#ffe67a", "#73caff"];
+    const side = index % 2 === 0 ? "left" : "right";
+    const horizontal = 3 + Math.random() * 22;
+    const vertical = 7 + Math.random() * 80;
+    const size = 10 + Math.random() * 17;
+    const delay = 300 + Math.random() * 1600;
+    const duration = 3800 + Math.random() * 2100;
 
-    const spark =
-      createElement(
-        "span",
-        "duduq-intro-spark",
-        "★"
-      );
-
-
-    const colors = [
-      "#ffc928",
-      "#42a7f5",
-      "#ffe67a",
-      "#73caff"
-    ];
-
-
-    /*
-     * Distribuição nas bordas para não
-     * competir com as logos no centro.
-     */
-
-    const side =
-      index % 2 === 0
-        ? "left"
-        : "right";
-
-
-    const horizontal =
-      3 +
-      Math.random() * 22;
-
-
-    const vertical =
-      7 +
-      Math.random() * 80;
-
-
-    const size =
-      10 +
-      Math.random() * 17;
-
-
-    const delay =
-      300 +
-      Math.random() * 1600;
-
-
-    const duration =
-      3800 +
-      Math.random() * 2100;
-
-
-    spark.style[side] =
-      horizontal + "%";
-
-
-    spark.style.top =
-      vertical + "%";
-
-
-    spark.style.setProperty(
-      "--duduq-intro-spark-size",
-      size.toFixed(1) + "px"
-    );
-
-
-    spark.style.setProperty(
-      "--duduq-intro-spark-delay",
-      delay.toFixed(0) + "ms"
-    );
-
-
-    spark.style.setProperty(
-      "--duduq-intro-spark-duration",
-      duration.toFixed(0) + "ms"
-    );
-
-
-    spark.style.setProperty(
-      "--duduq-intro-spark-color",
-      colors[
-        index % colors.length
-      ]
-    );
-
+    spark.style[side] = horizontal + "%";
+    spark.style.top = vertical + "%";
+    spark.style.setProperty("--duduq-intro-spark-size", size.toFixed(1) + "px");
+    spark.style.setProperty("--duduq-intro-spark-delay", delay.toFixed(0) + "ms");
+    spark.style.setProperty("--duduq-intro-spark-duration", duration.toFixed(0) + "ms");
+    spark.style.setProperty("--duduq-intro-spark-color", colors[index % colors.length]);
 
     return spark;
-
   }
 
+  function buildAtmosphere(root, options) {
+    const atmosphere = createElement("div", "duduq-intro-atmosphere");
+    atmosphere.setAttribute("aria-hidden", "true");
 
-  /* =======================================================
-     ATMOSFERA
-     ======================================================= */
-
-  function buildAtmosphere(
-    root,
-    options
-  ) {
-
-    const atmosphere =
-      createElement(
-        "div",
-        "duduq-intro-atmosphere"
-      );
-
-
-    atmosphere.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
-
-    for (
-      let index = 0;
-      index < 3;
-      index += 1
-    ) {
-
-      atmosphere.appendChild(
-        createElement(
-          "span",
-          "duduq-intro-orb"
-        )
-      );
-
+    for (let index = 0; index < 3; index += 1) {
+      atmosphere.appendChild(createElement("span", "duduq-intro-orb"));
     }
 
+    const sparkCount = clamp(Number(options.sparkCount) || 0, 0, 28);
 
-    const sparkCount =
-      clamp(
-        Number(
-          options.sparkCount
-        ) || 0,
-        0,
-        28
-      );
-
-
-    for (
-      let index = 0;
-      index < sparkCount;
-      index += 1
-    ) {
-
-      atmosphere.appendChild(
-        createSpark(index)
-      );
-
+    for (let index = 0; index < sparkCount; index += 1) {
+      atmosphere.appendChild(createSpark(index));
     }
 
-
-    root.appendChild(
-      atmosphere
-    );
-
-
+    root.appendChild(atmosphere);
     return atmosphere;
-
   }
 
+  function buildCompany(stage, options) {
+    const wrapper = createElement("div", "duduq-intro-company");
 
-  /* =======================================================
-     MARCA DA EMPRESA
-     ======================================================= */
-
-  function buildCompany(
-    stage,
-    options
-  ) {
-
-    const wrapper =
-      createElement(
-        "div",
-        "duduq-intro-company"
-      );
-
-
-    if (
-      options.companyKicker
-    ) {
-
+    if (options.companyKicker) {
       wrapper.appendChild(
-        createElement(
-          "p",
-          "duduq-intro-kicker",
-          options.companyKicker
-        )
+        createElement("p", "duduq-intro-kicker", options.companyKicker)
       );
-
     }
 
-
-    if (
-      options.companyLogo
-    ) {
-
-      const logo =
-        createElement(
-          "img",
-          "duduq-intro-company-logo"
-        );
-
-
-      logo.src =
-        options.companyLogo;
-
-
-      logo.alt =
-        options.companyAlt ||
-        options.companyName ||
-        "Logo da empresa";
-
-
-      logo.decoding =
-        "async";
-
-
-      logo.draggable =
-        false;
-
+    if (options.companyLogo) {
+      const logo = createElement("img", "duduq-intro-company-logo");
+      logo.src = options.companyLogo;
+      logo.alt = options.companyAlt || options.companyName || "Logo da empresa";
+      logo.decoding = "async";
+      logo.draggable = false;
 
       logo.addEventListener(
         "error",
         function () {
-
           logo.remove();
-
+          if (options.companyName) {
+            wrapper.appendChild(
+              createElement("strong", "duduq-intro-company-name", options.companyName)
+            );
+          }
         },
-        {
-          once: true
-        }
+        { once: true }
       );
 
-
+      wrapper.appendChild(logo);
+    } else if (options.companyName) {
       wrapper.appendChild(
-        logo
+        createElement("strong", "duduq-intro-company-name", options.companyName)
       );
-
     }
 
-
-    stage.appendChild(
-      wrapper
-    );
-
-
+    stage.appendChild(wrapper);
     return wrapper;
-
   }
 
+  function buildCollection(stage, options) {
+    const wrapper = createElement("div", "duduq-intro-collection");
+    const fallbackName = createElement(
+      "h1",
+      "duduq-intro-collection-name",
+      options.collectionName || "DuduQ"
+    );
 
-  /* =======================================================
-     HERO DA COLEÇÃO
-     ======================================================= */
+    let logo = null;
 
-  function buildCollection(
-    stage,
-    options
-  ) {
-
-    const wrapper =
-      createElement(
-        "div",
-        "duduq-intro-collection"
-      );
-
-
-    const fallbackName =
-      createElement(
-        "h1",
-        "duduq-intro-collection-name",
-        options.collectionName ||
-        "DuduQ"
-      );
-
-
-    let logo =
-      null;
-
-
-    if (
-      options.collectionLogo
-    ) {
-
-      logo =
-        createElement(
-          "img",
-          "duduq-intro-collection-logo"
-        );
-
-
-      logo.src =
-        options.collectionLogo;
-
-
-      logo.alt =
-        options.collectionAlt ||
-        options.collectionName ||
-        "Logo da coleção";
-
-
-      logo.decoding =
-        "async";
-
-
-      logo.draggable =
-        false;
-
-
-      fallbackName.hidden =
-        true;
-
+    if (options.collectionLogo) {
+      logo = createElement("img", "duduq-intro-collection-logo");
+      logo.src = options.collectionLogo;
+      logo.alt = options.collectionAlt || options.collectionName || "Logo da coleção";
+      logo.decoding = "async";
+      logo.draggable = false;
+      fallbackName.hidden = true;
 
       logo.addEventListener(
         "error",
         function () {
-
           logo.remove();
-
-          fallbackName.hidden =
-            false;
-
+          fallbackName.hidden = false;
         },
-        {
-          once: true
-        }
+        { once: true }
       );
 
-
-      wrapper.appendChild(
-        logo
-      );
-
+      wrapper.appendChild(logo);
     }
 
-
-    wrapper.appendChild(
-      fallbackName
-    );
-
-
-    wrapper.appendChild(
-      createElement(
-        "span",
-        "duduq-intro-collection-shine"
-      )
-    );
-
-
-    stage.appendChild(
-      wrapper
-    );
-
+    wrapper.appendChild(fallbackName);
+    wrapper.appendChild(createElement("span", "duduq-intro-collection-shine"));
+    stage.appendChild(wrapper);
 
     return {
-      wrapper:
-        wrapper,
-
-      logo:
-        logo,
-
-      fallbackName:
-        fallbackName
+      wrapper: wrapper,
+      logo: logo,
+      fallbackName: fallbackName
     };
-
   }
 
-
-  /* =======================================================
-     CHIP DE METADADO
-     ======================================================= */
-
-  function createMetaChip(
-    text,
-    primary
-  ) {
-
-    const chip =
-      createElement(
-        "span",
-        "duduq-intro-meta-chip" +
-        (
-          primary
-            ? " duduq-intro-meta-chip--primary"
-            : ""
-        ),
-        text
-      );
-
-
-    return chip;
-
-  }
-
-
-  /* =======================================================
-     META — ANO / DISCIPLINA / MÓDULO
-     ======================================================= */
-
-  function buildMeta(
-    stage,
-    options
-  ) {
-
-    const wrapper =
-      createElement(
-        "div",
-        "duduq-intro-meta"
-      );
-
-
-    const year =
-      formatYear(
-        options.year
-      );
-
-
-    const subject =
-      formatSubject(
-        options.subject
-      );
-
-
-    const module =
-      formatModule(
-        options.module
-      );
-
-
-    if (year) {
-
-      wrapper.appendChild(
-        createMetaChip(
-          year,
-          true
-        )
-      );
-
-    }
-
-
-    if (subject) {
-
-      wrapper.appendChild(
-        createMetaChip(
-          subject,
-          false
-        )
-      );
-
-    }
-
-
-    if (module) {
-
-      wrapper.appendChild(
-        createMetaChip(
-          module,
-          false
-        )
-      );
-
-    }
-
-
-    /*
-     * Mantemos o espaço estrutural apenas
-     * quando existe algum metadado.
-     */
-
-    if (
-      !year &&
-      !subject &&
-      !module
-    ) {
-
-      wrapper.style.display =
-        "none";
-
-    }
-
-
-    stage.appendChild(
-      wrapper
+  function createMetaChip(text, primary) {
+    return createElement(
+      "span",
+      "duduq-intro-meta-chip" +
+        (primary ? " duduq-intro-meta-chip--primary" : ""),
+      text
     );
+  }
 
+  function buildMeta(stage, options) {
+    const wrapper = createElement("div", "duduq-intro-meta");
+    const year = formatYear(options.year);
+    const subject = formatSubject(options.subject);
+    const module = formatModule(options.module);
 
+    if (year) wrapper.appendChild(createMetaChip(year, true));
+    if (subject) wrapper.appendChild(createMetaChip(subject, false));
+    if (module) wrapper.appendChild(createMetaChip(module, false));
+
+    if (!year && !subject && !module) {
+      wrapper.style.display = "none";
+    }
+
+    stage.appendChild(wrapper);
     return wrapper;
-
   }
 
+  function buildLoading(stage, options) {
+    const wrapper = createElement("div", "duduq-intro-loading");
+    const head = createElement("div", "duduq-intro-loading-head");
+    const label = createElement("p", "duduq-intro-loading-label", options.loadingLabel);
+    const percent = createElement("span", "duduq-intro-loading-percent", "0%");
 
-  /* =======================================================
-     LOADING
-     ======================================================= */
+    head.appendChild(label);
+    head.appendChild(percent);
 
-  function buildLoading(
-    stage,
-    options
-  ) {
+    const track = createElement("div", "duduq-intro-loading-track");
+    track.setAttribute("role", "progressbar");
+    track.setAttribute("aria-label", options.loadingLabel);
+    track.setAttribute("aria-valuemin", "0");
+    track.setAttribute("aria-valuemax", "100");
+    track.setAttribute("aria-valuenow", "0");
 
-    const wrapper =
-      createElement(
-        "div",
-        "duduq-intro-loading"
-      );
+    const fill = createElement("div", "duduq-intro-loading-fill");
+    track.appendChild(fill);
+    wrapper.appendChild(head);
+    wrapper.appendChild(track);
+    stage.appendChild(wrapper);
 
-
-    const head =
-      createElement(
-        "div",
-        "duduq-intro-loading-head"
-      );
-
-
-    const label =
-      createElement(
-        "p",
-        "duduq-intro-loading-label",
-        options.loadingLabel
-      );
-
-
-    const percent =
-      createElement(
-        "span",
-        "duduq-intro-loading-percent",
-        "0%"
-      );
-
-
-    head.appendChild(
-      label
-    );
-
-
-    head.appendChild(
-      percent
-    );
-
-
-    const track =
-      createElement(
-        "div",
-        "duduq-intro-loading-track"
-      );
-
-
-    track.setAttribute(
-      "role",
-      "progressbar"
-    );
-
-
-    track.setAttribute(
-      "aria-label",
-      options.loadingLabel
-    );
-
-
-    track.setAttribute(
-      "aria-valuemin",
-      "0"
-    );
-
-
-    track.setAttribute(
-      "aria-valuemax",
-      "100"
-    );
-
-
-    track.setAttribute(
-      "aria-valuenow",
-      "0"
-    );
-
-
-    const fill =
-      createElement(
-        "div",
-        "duduq-intro-loading-fill"
-      );
-
-
-    track.appendChild(
-      fill
-    );
-
-
-    wrapper.appendChild(
-      head
-    );
-
-
-    wrapper.appendChild(
-      track
-    );
-
-
-    stage.appendChild(
-      wrapper
-    );
-
-
-    return {
-      wrapper:
-        wrapper,
-
-      label:
-        label,
-
-      percent:
-        percent,
-
-      track:
-        track,
-
-      fill:
-        fill
-    };
-
+    return { wrapper, label, percent, track, fill };
   }
 
+  function buildActions(stage, options) {
+    const wrapper = createElement("div", "duduq-intro-actions");
+    const button = createElement("button", "duduq-intro-start-button");
+    button.type = "button";
+    button.setAttribute("aria-label", options.startLabel);
 
-  /* =======================================================
-     CTA
-     ======================================================= */
+    const icon = createElement("span", "duduq-intro-start-icon", "▶");
+    icon.setAttribute("aria-hidden", "true");
 
-  function buildActions(
-    stage,
-    options
-  ) {
+    const label = createElement("span", "", options.startLabel);
+    button.appendChild(icon);
+    button.appendChild(label);
+    wrapper.appendChild(button);
 
-    const wrapper =
-      createElement(
-        "div",
-        "duduq-intro-actions"
-      );
+    let hint = null;
 
-
-    const button =
-      createElement(
-        "button",
-        "duduq-intro-start-button"
-      );
-
-
-    button.type =
-      "button";
-
-
-    button.setAttribute(
-      "aria-label",
-      options.startLabel
-    );
-
-
-    /*
-     * O botão é uma interação real.
-     * Isso também permite ao navegador
-     * liberar áudio a partir do gesto.
-     */
-
-
-    const icon =
-      createElement(
-        "span",
-        "duduq-intro-start-icon",
-        "▶"
-      );
-
-
-    icon.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
-
-    const label =
-      createElement(
-        "span",
-        "",
-        options.startLabel
-      );
-
-
-    button.appendChild(
-      icon
-    );
-
-
-    button.appendChild(
-      label
-    );
-
-
-    wrapper.appendChild(
-      button
-    );
-
-
-    let hint =
-      null;
-
-
-    if (
-      options.hint
-    ) {
-
-      hint =
-        createElement(
-          "p",
-          "duduq-intro-hint",
-          options.hint
-        );
-
-
-      wrapper.appendChild(
-        hint
-      );
-
+    if (options.hint) {
+      hint = createElement("p", "duduq-intro-hint", options.hint);
+      wrapper.appendChild(hint);
     }
 
-
-    stage.appendChild(
-      wrapper
-    );
-
-
-    return {
-      wrapper:
-        wrapper,
-
-      button:
-        button,
-
-      label:
-        label,
-
-      icon:
-        icon,
-
-      hint:
-        hint
-    };
-
+    stage.appendChild(wrapper);
+    return { wrapper, button, label, icon, hint };
   }
-
-
-  /* =======================================================
-     MONTA A INTRO
-     ======================================================= */
 
   function render(options) {
+    /*
+     * is-branding já nasce no DOM para impedir flash
+     * da segunda cena antes do JS iniciar a timeline.
+     */
+    const root = createElement("section", "duduq-intro is-branding");
 
-    const root =
-      createElement(
-        "section",
-        "duduq-intro"
-      );
-
-
-    root.id =
-      "duduq-intro-" +
-      (++instanceCounter);
-
-
-    root.setAttribute(
-      "role",
-      "dialog"
-    );
-
-
-    root.setAttribute(
-      "aria-modal",
-      "true"
-    );
-
-
-    root.setAttribute(
-      "aria-label",
-      "Abertura da missão"
-    );
-
+    root.id = "duduq-intro-" + (++instanceCounter);
+    root.setAttribute("role", "dialog");
+    root.setAttribute("aria-modal", "true");
+    root.setAttribute("aria-label", "Abertura da missão");
+    root.setAttribute("data-duduq-intro-phase", "branding");
 
     root.style.setProperty(
       "--duduq-intro-company-width",
-      Number(
-        options.companyWidth
-      ) +
-      "px"
+      Number(options.companyWidth) + "px"
     );
-
 
     root.style.setProperty(
       "--duduq-intro-collection-width",
-      Number(
-        options.collectionWidth
-      ) +
-      "px"
+      Number(options.collectionWidth) + "px"
     );
 
+    const atmosphere = buildAtmosphere(root, options);
+    const stage = createElement("div", "duduq-intro-stage");
+    const company = buildCompany(stage, options);
+    const collection = buildCollection(stage, options);
+    const meta = buildMeta(stage, options);
+    const loading = buildLoading(stage, options);
+    const actions = buildActions(stage, options);
 
-    const atmosphere =
-      buildAtmosphere(
-        root,
-        options
-      );
+    root.appendChild(stage);
 
-
-    const stage =
-      createElement(
-        "div",
-        "duduq-intro-stage"
-      );
-
-
-    const company =
-      buildCompany(
-        stage,
-        options
-      );
-
-
-    const collection =
-      buildCollection(
-        stage,
-        options
-      );
-
-
-    const meta =
-      buildMeta(
-        stage,
-        options
-      );
-
-
-    const loading =
-      buildLoading(
-        stage,
-        options
-      );
-
-
-    const actions =
-      buildActions(
-        stage,
-        options
-      );
-
-
-    root.appendChild(
-      stage
-    );
-
-
-    return {
-
-      root:
-        root,
-
-      atmosphere:
-        atmosphere,
-
-      stage:
-        stage,
-
-      company:
-        company,
-
-      collection:
-        collection,
-
-      meta:
-        meta,
-
-      loading:
-        loading,
-
-      actions:
-        actions
-
-    };
-
+    return { root, atmosphere, stage, company, collection, meta, loading, actions };
   }
 
+  function setInstanceProgress(instance, value) {
+    if (!instance || instance.destroyed) return;
 
-  /* =======================================================
-     PROGRESSO
-     ======================================================= */
+    const normalized = clamp(Number(value) || 0, 0, 100);
+    instance.progress = normalized;
 
-  function setInstanceProgress(
-    instance,
-    value
-  ) {
-
-    if (
-      !instance ||
-      instance.destroyed
-    ) {
-      return;
-    }
-
-
-    const normalized =
-      clamp(
-        Number(value) || 0,
-        0,
-        100
-      );
-
-
-    instance.progress =
-      normalized;
-
-
-    const visualValue =
-      normalized.toFixed(1) + "%";
-
+    const visualValue = normalized.toFixed(1) + "%";
 
     instance.refs.loading.fill.style.setProperty(
       "--duduq-intro-progress",
       visualValue
     );
-
-
-    /*
-     * A variável precisa ficar no próprio
-     * fill porque é onde o CSS lê o valor.
-     */
-
-    instance.refs.loading.fill.style.width =
-      visualValue;
-
-
-    instance.refs.loading.percent.textContent =
-      Math.round(
-        normalized
-      ) + "%";
-
-
+    instance.refs.loading.fill.style.width = visualValue;
+    instance.refs.loading.percent.textContent = Math.round(normalized) + "%";
     instance.refs.loading.track.setAttribute(
       "aria-valuenow",
-      String(
-        Math.round(
-          normalized
-        )
-      )
+      String(Math.round(normalized))
     );
-
   }
 
-
-  /* =======================================================
-     LOADING GAMER AUTOMÁTICO
-     Caminha rápido no começo e desacelera perto de 90%.
-     ======================================================= */
-
-  function startFakeProgress(
-    instance
-  ) {
-
-    const startTime =
-      now();
-
-
-    setInstanceProgress(
-      instance,
-      4
-    );
-
-
-    instance.progressTimer =
-      window.setInterval(
-        function () {
-
-          if (
-            instance.destroyed ||
-            instance.ready
-          ) {
-
-            window.clearInterval(
-              instance.progressTimer
-            );
-
-            return;
-          }
-
-
-          const elapsed =
-            now() -
-            startTime;
-
-
-          let target;
-
-
-          if (
-            elapsed < 420
-          ) {
-
-            target =
-              36;
-
-          } else if (
-            elapsed < 850
-          ) {
-
-            target =
-              61;
-
-          } else if (
-            elapsed < 1350
-          ) {
-
-            target =
-              78;
-
-          } else {
-
-            target =
-              91.5;
-
-          }
-
-
-          const difference =
-            target -
-            instance.progress;
-
-
-          let increment =
-            Math.max(
-              0.35,
-              difference * 0.14
-            );
-
-
-          increment +=
-            Math.random() *
-            0.55;
-
-
-          const next =
-            Math.min(
-              target,
-              instance.progress +
-              increment
-            );
-
-
-          setInstanceProgress(
-            instance,
-            next
-          );
-
-        },
-        95
-      );
-
+  function stopFakeProgress(instance) {
+    if (instance && instance.progressTimer) {
+      window.clearInterval(instance.progressTimer);
+      instance.progressTimer = null;
+    }
   }
 
+  function startFakeProgress(instance) {
+    if (!instance || instance.destroyed || instance.progressStarted) return;
 
-  /* =======================================================
-     READY
-     ======================================================= */
+    instance.progressStarted = true;
+    const startTime = now();
 
-  function markInstanceReady(
-    instance
-  ) {
+    setInstanceProgress(instance, Math.max(instance.progress, 4));
 
-    if (
-      !instance ||
-      instance.destroyed ||
-      instance.ready
-    ) {
-      return false;
-    }
-
-
-    instance.ready =
-      true;
-
-
-    if (
-      instance.progressTimer
-    ) {
-
-      window.clearInterval(
-        instance.progressTimer
-      );
-
-      instance.progressTimer =
-        null;
-
-    }
-
-
-    setInstanceProgress(
-      instance,
-      100
-    );
-
-
-    instance.refs.loading.label.textContent =
-      instance.options.readyLabel;
-
-
-    instance.refs.loading.track.setAttribute(
-      "aria-label",
-      instance.options.readyLabel
-    );
-
-
-    /*
-     * Pequeno intervalo para o usuário
-     * ver a barra completar antes do CTA.
-     */
-
-    instance.readyTimer =
-      window.setTimeout(
-        function () {
-
-          if (
-            instance.destroyed
-          ) {
-            return;
-          }
-
-
-          instance.refs.root.classList.add(
-            "is-ready"
-          );
-
-
-          emit(
-            "duduq:intro-ready",
-            {
-              id:
-                instance.id,
-
-              version:
-                VERSION,
-
-              options:
-                instance.options
-            }
-          );
-
-
-          if (
-            typeof instance.options.onReady ===
-            "function"
-          ) {
-
-            try {
-
-              instance.options.onReady({
-                id:
-                  instance.id,
-
-                intro:
-                  window.DuduQIntro
-              });
-
-            } catch (error) {
-
-              console.error(
-                "[DuduQ Intro] Erro em onReady:",
-                error
-              );
-
-            }
-
-          }
-
-        },
-        310
-      );
-
-
-    return true;
-
-  }
-
-
-  /* =======================================================
-     RESTAURA BODY
-     ======================================================= */
-
-  function restoreBody(
-    instance
-  ) {
-
-    if (
-      !instance ||
-      !document.body
-    ) {
-      return;
-    }
-
-
-    document.body.style.overflow =
-      instance.previousBodyOverflow;
-
-  }
-
-
-  /* =======================================================
-     LIMPEZA DE TIMERS
-     ======================================================= */
-
-  function clearTimers(
-    instance
-  ) {
-
-    if (!instance) {
-      return;
-    }
-
-
-    if (
-      instance.progressTimer
-    ) {
-
-      window.clearInterval(
-        instance.progressTimer
-      );
-
-      instance.progressTimer =
-        null;
-
-    }
-
-
-    if (
-      instance.readyTimer
-    ) {
-
-      window.clearTimeout(
-        instance.readyTimer
-      );
-
-      instance.readyTimer =
-        null;
-
-    }
-
-
-    if (
-      instance.exitTimer
-    ) {
-
-      window.clearTimeout(
-        instance.exitTimer
-      );
-
-      instance.exitTimer =
-        null;
-
-    }
-
-  }
-
-
-  /* =======================================================
-     FINALIZA INSTÂNCIA
-     ======================================================= */
-
-  function finalizeInstance(
-    instance,
-    reason
-  ) {
-
-    if (
-      !instance ||
-      instance.destroyed
-    ) {
-      return;
-    }
-
-
-    instance.destroyed =
-      true;
-
-
-    clearTimers(
-      instance
-    );
-
-
-    restoreBody(
-      instance
-    );
-
-
-    if (
-      instance.refs.root &&
-      instance.refs.root.parentNode
-    ) {
-
-      instance.refs.root.parentNode.removeChild(
-        instance.refs.root
-      );
-
-    }
-
-
-    const result = {
-
-      id:
-        instance.id,
-
-      reason:
-        reason || "closed",
-
-      version:
-        VERSION
-
-    };
-
-
-    if (
-      typeof instance.options.onClose ===
-      "function"
-    ) {
-
-      try {
-
-        instance.options.onClose(
-          result
-        );
-
-      } catch (error) {
-
-        console.error(
-          "[DuduQ Intro] Erro em onClose:",
-          error
-        );
-
+    instance.progressTimer = window.setInterval(function () {
+      if (instance.destroyed || instance.ready) {
+        stopFakeProgress(instance);
+        return;
       }
 
-    }
+      const elapsed = now() - startTime;
+      let target;
 
+      if (elapsed < 260) target = 28;
+      else if (elapsed < 620) target = 53;
+      else if (elapsed < 980) target = 72;
+      else if (elapsed < 1450) target = 84;
+      else target = 92;
 
-    emit(
-      "duduq:intro-hidden",
-      result
-    );
+      const difference = target - instance.progress;
+      let increment = Math.max(0.30, difference * 0.14);
+      increment += Math.random() * 0.45;
 
-
-    if (
-      typeof instance.resolve ===
-      "function"
-    ) {
-
-      instance.resolve(
-        result
+      setInstanceProgress(
+        instance,
+        Math.min(target, instance.progress + increment)
       );
-
-      instance.resolve =
-        null;
-
-    }
-
-
-    if (
-      activeInstance === instance
-    ) {
-
-      activeInstance =
-        null;
-
-    }
-
+    }, 92);
   }
 
+  function setPhase(instance, phase) {
+    if (!instance || instance.destroyed) return false;
 
-  /* =======================================================
-     CLIQUE EM INICIAR
-     ======================================================= */
+    const allowed = ["branding", "switching", "mission"];
+    if (!allowed.includes(phase)) return false;
 
-  function startMission(
-    instance
-  ) {
+    const root = instance.refs.root;
 
+    root.classList.remove("is-branding", "is-switching", "is-mission");
+    root.classList.add("is-" + phase);
+    root.setAttribute("data-duduq-intro-phase", phase);
+
+    instance.phase = phase;
+
+    const detail = {
+      id: instance.id,
+      version: VERSION,
+      phase: phase,
+      options: instance.options
+    };
+
+    emit("duduq:intro-phase", detail);
+
+    if (typeof instance.options.onPhase === "function") {
+      try {
+        instance.options.onPhase(detail);
+      } catch (error) {
+        console.error("[DuduQ Intro] Erro em onPhase:", error);
+      }
+    }
+
+    return true;
+  }
+
+  function finishSequence(instance, resolve) {
+    instance.sequenceResolve = null;
+    resolve();
+  }
+
+  function runCinematicSequence(instance) {
+    return new Promise(function (resolve) {
+      instance.sequenceResolve = resolve;
+
+      if (instance.destroyed) {
+        finishSequence(instance, resolve);
+        return;
+      }
+
+      /* Acessibilidade: não força a sequência completa. */
+      if (prefersReducedMotion()) {
+        setPhase(instance, "mission");
+        instance.missionStartedAt = now();
+        startFakeProgress(instance);
+        finishSequence(instance, resolve);
+        return;
+      }
+
+      setPhase(instance, "branding");
+
+      const brandingTimer = window.setTimeout(function () {
+        if (instance.destroyed) {
+          finishSequence(instance, resolve);
+          return;
+        }
+
+        setPhase(instance, "switching");
+
+        const switchingTimer = window.setTimeout(function () {
+          if (instance.destroyed) {
+            finishSequence(instance, resolve);
+            return;
+          }
+
+          setPhase(instance, "mission");
+          instance.missionStartedAt = now();
+          startFakeProgress(instance);
+          finishSequence(instance, resolve);
+        }, instance.options.switchingDurationMs);
+
+        instance.phaseTimers.push(switchingTimer);
+      }, instance.options.brandingDurationMs);
+
+      instance.phaseTimers.push(brandingTimer);
+    });
+  }
+
+  function markInstanceReady(instance) {
+    if (!instance || instance.destroyed || instance.ready) return false;
+
+    /* O CTA só nasce no terceiro ato. */
+    if (instance.phase !== "mission") {
+      instance.pendingReady = true;
+      return true;
+    }
+
+    instance.pendingReady = false;
+    instance.ready = true;
+
+    stopFakeProgress(instance);
+    setInstanceProgress(instance, 100);
+
+    instance.refs.loading.label.textContent = instance.options.readyLabel;
+    instance.refs.loading.track.setAttribute("aria-label", instance.options.readyLabel);
+
+    instance.readyTimer = window.setTimeout(function () {
+      if (instance.destroyed) return;
+
+      instance.refs.root.classList.add("is-ready");
+
+      emit("duduq:intro-ready", {
+        id: instance.id,
+        version: VERSION,
+        phase: instance.phase,
+        options: instance.options
+      });
+
+      if (typeof instance.options.onReady === "function") {
+        try {
+          instance.options.onReady({
+            id: instance.id,
+            intro: window.DuduQIntro
+          });
+        } catch (error) {
+          console.error("[DuduQ Intro] Erro em onReady:", error);
+        }
+      }
+    }, 310);
+
+    return true;
+  }
+
+  function restoreBody(instance) {
+    if (!instance || !document.body) return;
+    document.body.style.overflow = instance.previousBodyOverflow;
+  }
+
+  function clearTimers(instance) {
+    if (!instance) return;
+
+    stopFakeProgress(instance);
+
+    if (instance.readyTimer) {
+      window.clearTimeout(instance.readyTimer);
+      instance.readyTimer = null;
+    }
+
+    if (instance.exitTimer) {
+      window.clearTimeout(instance.exitTimer);
+      instance.exitTimer = null;
+    }
+
+    if (instance.phaseTimers) {
+      instance.phaseTimers.forEach(function (timerId) {
+        window.clearTimeout(timerId);
+      });
+      instance.phaseTimers.length = 0;
+    }
+
+    if (instance.sequenceResolve) {
+      const finish = instance.sequenceResolve;
+      instance.sequenceResolve = null;
+      finish();
+    }
+  }
+
+  function finalizeInstance(instance, reason) {
+    if (!instance || instance.destroyed) return;
+
+    instance.destroyed = true;
+    clearTimers(instance);
+    restoreBody(instance);
+
+    if (instance.refs.root && instance.refs.root.parentNode) {
+      instance.refs.root.parentNode.removeChild(instance.refs.root);
+    }
+
+    const result = {
+      id: instance.id,
+      reason: reason || "closed",
+      version: VERSION
+    };
+
+    if (typeof instance.options.onClose === "function") {
+      try {
+        instance.options.onClose(result);
+      } catch (error) {
+        console.error("[DuduQ Intro] Erro em onClose:", error);
+      }
+    }
+
+    emit("duduq:intro-hidden", result);
+
+    if (typeof instance.resolve === "function") {
+      instance.resolve(result);
+      instance.resolve = null;
+    }
+
+    if (activeInstance === instance) {
+      activeInstance = null;
+    }
+  }
+
+  function startMission(instance) {
     if (
       !instance ||
       instance.destroyed ||
       !instance.ready ||
-      instance.leaving
+      instance.leaving ||
+      instance.phase !== "mission"
     ) {
       return;
     }
 
+    instance.leaving = true;
+    instance.refs.actions.button.disabled = true;
+    instance.refs.root.classList.add("is-leaving");
 
-    instance.leaving =
-      true;
-
-
-    instance.refs.actions.button.disabled =
-      true;
-
-
-    instance.refs.root.classList.add(
-      "is-leaving"
-    );
-
-
-    emit(
-      "duduq:intro-start",
-      {
-        id:
-          instance.id,
-
-        version:
-          VERSION,
-
-        options:
-          instance.options
-      }
-    );
-
+    emit("duduq:intro-start", {
+      id: instance.id,
+      version: VERSION,
+      options: instance.options
+    });
 
     /*
-     * O callback roda imediatamente após
-     * o clique para permitir que a primeira
-     * mecânica seja montada POR BAIXO da intro
-     * enquanto a saída cinematográfica acontece.
+     * O Host nasce por baixo da intro durante o fade cinematográfico.
      */
-
-    if (
-      typeof instance.options.onStart ===
-      "function"
-    ) {
-
+    if (typeof instance.options.onStart === "function") {
       try {
-
         instance.options.onStart({
-          id:
-            instance.id,
-
-          intro:
-            window.DuduQIntro
+          id: instance.id,
+          intro: window.DuduQIntro
         });
-
       } catch (error) {
-
-        console.error(
-          "[DuduQ Intro] Erro em onStart:",
-          error
-        );
-
+        console.error("[DuduQ Intro] Erro em onStart:", error);
       }
-
     }
 
-
-    instance.exitTimer =
-      window.setTimeout(
-        function () {
-
-          finalizeInstance(
-            instance,
-            "start"
-          );
-
-        },
-        Math.max(
-          350,
-          Number(
-            instance.options.exitDurationMs
-          ) || 470
-        )
-      );
-
+    instance.exitTimer = window.setTimeout(function () {
+      finalizeInstance(instance, "start");
+    }, Math.max(350, Number(instance.options.exitDurationMs) || 470));
   }
 
+  function prepareReadiness(instance, sequencePromise) {
+    const options = instance.options;
 
-  /* =======================================================
-     GATES DE CARREGAMENTO
-     ======================================================= */
-
-  function prepareReadiness(
-    instance
-  ) {
-
-    const options =
-      instance.options;
-
-
-    const minimumGate =
-      wait(
-        options.minDurationMs
-      );
-
+    /* Compatibilidade: tempo mínimo global desde o show(). */
+    const overallMinimumGate = wait(options.minDurationMs);
 
     const imageGates = [];
+    if (options.companyLogo) imageGates.push(preloadImage(options.companyLogo));
+    if (options.collectionLogo) imageGates.push(preloadImage(options.collectionLogo));
 
+    const assetsGate = Promise.all(imageGates);
 
-    if (
-      options.companyLogo
-    ) {
+    let externalGate = Promise.resolve();
 
-      imageGates.push(
-        preloadImage(
-          options.companyLogo
-        )
-      );
-
+    if (options.readyPromise && typeof options.readyPromise.then === "function") {
+      externalGate = Promise.resolve(options.readyPromise).catch(function (error) {
+        console.warn("[DuduQ Intro] readyPromise rejeitada:", error);
+        return null;
+      });
     }
 
+    /*
+     * Mesmo que tudo carregue instantaneamente, a coleção precisa
+     * respirar na tela antes de liberar o botão.
+     */
+    const missionGate = Promise.resolve(sequencePromise).then(function () {
+      if (instance.destroyed) return null;
 
-    if (
-      options.collectionLogo
-    ) {
-
-      imageGates.push(
-        preloadImage(
-          options.collectionLogo
-        )
+      return wait(
+        prefersReducedMotion()
+          ? 250
+          : options.missionMinDurationMs
       );
-
-    }
-
-
-    const assetsGate =
-      Promise.all(
-        imageGates
-      );
-
-
-    let externalGate =
-      Promise.resolve();
-
-
-    if (
-      options.readyPromise &&
-      typeof options.readyPromise.then ===
-        "function"
-    ) {
-
-      externalGate =
-        Promise.resolve(
-          options.readyPromise
-        )
-        .catch(
-          function (error) {
-
-            /*
-             * Não deixamos a intro congelada
-             * eternamente por causa de uma Promise
-             * externa rejeitada.
-             */
-
-            console.warn(
-              "[DuduQ Intro] readyPromise rejeitada:",
-              error
-            );
-
-            return null;
-
-          }
-        );
-
-    }
-
+    });
 
     Promise.all([
-      minimumGate,
+      overallMinimumGate,
+      missionGate,
       assetsGate,
       externalGate
-    ])
-    .then(
-      function () {
+    ]).then(function () {
+      if (instance.destroyed) return;
 
-        if (
-          instance.destroyed
-        ) {
-          return;
-        }
-
-
-        /*
-         * readyPromise, quando fornecida,
-         * é considerada autorização explícita.
-         */
-
-        if (
-          options.autoReady !== false ||
-          options.readyPromise
-        ) {
-
-          markInstanceReady(
-            instance
-          );
-
-        }
-
+      if (options.autoReady !== false || options.readyPromise) {
+        markInstanceReady(instance);
       }
-    );
-
+    });
   }
 
+  function show(options = {}) {
+    if (activeInstance) {
+      finalizeInstance(activeInstance, "replaced");
+    }
 
-  /* =======================================================
-     SHOW
-     Retorna Promise que resolve quando a intro termina.
-     ======================================================= */
+    const merged = Object.assign({}, DEFAULTS, options || {});
 
-  function show(
-    options = {}
-  ) {
+    merged.companyLogo = safeText(merged.companyLogo);
+    merged.collectionLogo = safeText(merged.collectionLogo);
+    merged.collectionName = safeText(merged.collectionName) || "DuduQ";
+    merged.companyKicker = safeText(merged.companyKicker);
+    merged.loadingLabel = safeText(merged.loadingLabel) || "PREPARANDO SUA MISSÃO";
+    merged.readyLabel = safeText(merged.readyLabel) || "MISSÃO PRONTA";
+    merged.startLabel = safeText(merged.startLabel) || "INICIAR MISSÃO";
+
+    merged.minDurationMs = clamp(Number(merged.minDurationMs) || 1850, 600, 10000);
+    merged.brandingDurationMs = clamp(Number(merged.brandingDurationMs) || 1800, 700, 5000);
+    merged.switchingDurationMs = clamp(Number(merged.switchingDurationMs) || 620, 250, 1800);
+    merged.missionMinDurationMs = clamp(Number(merged.missionMinDurationMs) || 1000, 350, 5000);
+    merged.exitDurationMs = clamp(Number(merged.exitDurationMs) || 470, 250, 1500);
+    merged.sparkCount = clamp(Number(merged.sparkCount) || 14, 0, 28);
 
     /*
-     * Só pode existir uma intro global por vez.
+     * A antiga integração passa companyWidth: 220.
+     * A versão cinematográfica força presença de hero real.
      */
+    merged.companyWidth = clamp(Number(merged.companyWidth) || 620, 560, 820);
+    merged.collectionWidth = clamp(Number(merged.collectionWidth) || 590, 280, 900);
 
-    if (
-      activeInstance
-    ) {
+    const container = resolveContainer(merged.container);
+    const refs = render(merged);
 
-      finalizeInstance(
-        activeInstance,
-        "replaced"
-      );
+    const instance = {
+      id: refs.root.id,
+      options: merged,
+      refs: refs,
+      container: container,
 
+      phase: "branding",
+      missionStartedAt: null,
+
+      progress: 0,
+      progressStarted: false,
+
+      ready: false,
+      pendingReady: false,
+      leaving: false,
+      destroyed: false,
+
+      progressTimer: null,
+      readyTimer: null,
+      exitTimer: null,
+      phaseTimers: [],
+      sequenceResolve: null,
+
+      resolve: null,
+
+      previousBodyOverflow:
+        document.body ? document.body.style.overflow : ""
+    };
+
+    activeInstance = instance;
+
+    if (document.body) {
+      document.body.style.overflow = "hidden";
     }
 
-
-    const merged =
-      Object.assign(
-        {},
-        DEFAULTS,
-        options || {}
-      );
-
-
-    merged.companyLogo =
-      safeText(
-        merged.companyLogo
-      );
-
-
-    merged.collectionLogo =
-      safeText(
-        merged.collectionLogo
-      );
-
-
-    merged.collectionName =
-      safeText(
-        merged.collectionName
-      ) ||
-      "DuduQ";
-
-
-    merged.companyKicker =
-      safeText(
-        merged.companyKicker
-      );
-
-
-    merged.loadingLabel =
-      safeText(
-        merged.loadingLabel
-      ) ||
-      "PREPARANDO SUA MISSÃO";
-
-
-    merged.readyLabel =
-      safeText(
-        merged.readyLabel
-      ) ||
-      "MISSÃO PRONTA";
-
-
-    merged.startLabel =
-      safeText(
-        merged.startLabel
-      ) ||
-      "INICIAR MISSÃO";
-
-
-    merged.minDurationMs =
-      clamp(
-        Number(
-          merged.minDurationMs
-        ) || 1850,
-        600,
-        10000
-      );
-
-
-    merged.exitDurationMs =
-      clamp(
-        Number(
-          merged.exitDurationMs
-        ) || 470,
-        250,
-        1500
-      );
-
-
-    merged.sparkCount =
-      clamp(
-        Number(
-          merged.sparkCount
-        ) || 14,
-        0,
-        28
-      );
-
-
-    merged.companyWidth =
-      clamp(
-        Number(
-          merged.companyWidth
-        ) || 220,
-        90,
-        500
-      );
-
-
-    merged.collectionWidth =
-      clamp(
-        Number(
-          merged.collectionWidth
-        ) || 590,
-        180,
-        900
-      );
-
-
-    const container =
-      resolveContainer(
-        merged.container
-      );
-
-
-    const refs =
-      render(
-        merged
-      );
-
-
-    const instance =
-      {
-
-        id:
-          refs.root.id,
-
-        options:
-          merged,
-
-        refs:
-          refs,
-
-        container:
-          container,
-
-        progress:
-          0,
-
-        ready:
-          false,
-
-        leaving:
-          false,
-
-        destroyed:
-          false,
-
-        progressTimer:
-          null,
-
-        readyTimer:
-          null,
-
-        exitTimer:
-          null,
-
-        resolve:
-          null,
-
-        previousBodyOverflow:
-          document.body
-            ? document.body.style.overflow
-            : ""
-
-      };
-
-
-    activeInstance =
-      instance;
-
-
-    if (
-      document.body
-    ) {
-
-      document.body.style.overflow =
-        "hidden";
-
-    }
-
-
-    container.appendChild(
-      refs.root
-    );
-
-
-    refs.actions.button.addEventListener(
-      "click",
-      function () {
-
-        startMission(
-          instance
-        );
-
-      }
-    );
-
-
-    startFakeProgress(
-      instance
-    );
-
-
-    prepareReadiness(
-      instance
-    );
-
-
-    emit(
-      "duduq:intro-shown",
-      {
-        id:
-          instance.id,
-
-        version:
-          VERSION,
-
-        options:
-          merged
-      }
-    );
-
-
-    return new Promise(
-      function (resolve) {
-
-        instance.resolve =
-          resolve;
-
-      }
-    );
-
+    container.appendChild(refs.root);
+
+    refs.actions.button.addEventListener("click", function () {
+      startMission(instance);
+    });
+
+    setInstanceProgress(instance, 0);
+
+    const sequencePromise = runCinematicSequence(instance);
+    prepareReadiness(instance, sequencePromise);
+
+    emit("duduq:intro-shown", {
+      id: instance.id,
+      version: VERSION,
+      phase: instance.phase,
+      options: merged
+    });
+
+    return new Promise(function (resolve) {
+      instance.resolve = resolve;
+    });
   }
-
-
-  /* =======================================================
-     API — SET PROGRESS
-     Permite integração futura com preload real.
-     ======================================================= */
 
   function setProgress(value) {
+    if (!activeInstance || activeInstance.destroyed) return false;
 
-    if (
-      !activeInstance ||
-      activeInstance.destroyed
-    ) {
-      return false;
-    }
-
-
-    /*
-     * Antes de READY, reservamos os 100%
-     * para markReady().
-     */
-
-    const maximum =
-      activeInstance.ready
-        ? 100
-        : 96;
-
+    const maximum = activeInstance.ready ? 100 : 96;
 
     setInstanceProgress(
       activeInstance,
-      clamp(
-        Number(value) || 0,
-        0,
-        maximum
-      )
+      clamp(Number(value) || 0, 0, maximum)
     );
 
-
     return true;
-
   }
-
-
-  /* =======================================================
-     API — MARK READY
-     ======================================================= */
 
   function markReady() {
-
-    if (
-      !activeInstance
-    ) {
-      return false;
-    }
-
-
-    return markInstanceReady(
-      activeInstance
-    );
-
+    if (!activeInstance) return false;
+    return markInstanceReady(activeInstance);
   }
 
+  function hide(options = {}) {
+    if (!activeInstance) return false;
 
-  /* =======================================================
-     API — HIDE
-     ======================================================= */
-
-  function hide(
-    options = {}
-  ) {
-
-    if (
-      !activeInstance
-    ) {
-      return false;
-    }
-
-
-    const instance =
-      activeInstance;
-
-
-    const immediate =
-      options &&
-      options.immediate === true;
-
-
-    const reason =
-      safeText(
-        options.reason
-      ) ||
-      "hidden";
-
+    const instance = activeInstance;
+    const immediate = options && options.immediate === true;
+    const reason = safeText(options.reason) || "hidden";
 
     if (immediate) {
-
-      finalizeInstance(
-        instance,
-        reason
-      );
-
-      return true;
-
-    }
-
-
-    if (
-      instance.leaving
-    ) {
+      finalizeInstance(instance, reason);
       return true;
     }
 
+    if (instance.leaving) return true;
 
-    instance.leaving =
-      true;
+    instance.leaving = true;
+    instance.refs.root.classList.add("is-leaving");
 
-
-    instance.refs.root.classList.add(
-      "is-leaving"
-    );
-
-
-    instance.exitTimer =
-      window.setTimeout(
-        function () {
-
-          finalizeInstance(
-            instance,
-            reason
-          );
-
-        },
-        instance.options.exitDurationMs
-      );
-
+    instance.exitTimer = window.setTimeout(function () {
+      finalizeInstance(instance, reason);
+    }, instance.options.exitDurationMs);
 
     return true;
-
   }
-
-
-  /* =======================================================
-     API — GET INSTANCE
-     ======================================================= */
 
   function getInstance() {
-
-    if (
-      !activeInstance
-    ) {
-      return null;
-    }
-
+    if (!activeInstance) return null;
 
     return Object.freeze({
-
-      id:
-        activeInstance.id,
-
-      version:
-        VERSION,
-
-      progress:
-        activeInstance.progress,
-
-      ready:
-        activeInstance.ready,
-
-      leaving:
-        activeInstance.leaving,
-
-      options:
-        activeInstance.options,
-
-      element:
-        activeInstance.refs.root
-
+      id: activeInstance.id,
+      version: VERSION,
+      phase: activeInstance.phase,
+      progress: activeInstance.progress,
+      ready: activeInstance.ready,
+      leaving: activeInstance.leaving,
+      options: activeInstance.options,
+      element: activeInstance.refs.root
     });
-
   }
-
-
-  /* =======================================================
-     API — IS ACTIVE
-     ======================================================= */
 
   function isActive() {
-
-    return Boolean(
-      activeInstance &&
-      !activeInstance.destroyed
-    );
-
+    return Boolean(activeInstance && !activeInstance.destroyed);
   }
 
-
-  /* =======================================================
-     API PÚBLICA
-     ======================================================= */
-
-  window.DuduQIntro =
-    Object.freeze({
-
-      version:
-        VERSION,
-
-      show:
-        show,
-
-      hide:
-        hide,
-
-      destroy:
-        hide,
-
-      setProgress:
-        setProgress,
-
-      markReady:
-        markReady,
-
-      getInstance:
-        getInstance,
-
-      isActive:
-        isActive
-
-    });
-
-
-  /* =======================================================
-     LOG
-     ======================================================= */
+  window.DuduQIntro = Object.freeze({
+    version: VERSION,
+    show: show,
+    hide: hide,
+    destroy: hide,
+    setProgress: setProgress,
+    markReady: markReady,
+    getInstance: getInstance,
+    isActive: isActive
+  });
 
   console.info(
-    "[DuduQ Intro] v" +
-    VERSION +
-    " carregado."
+    "[DuduQ Intro] v" + VERSION + " cinematográfico carregado."
   );
-
 })();
