@@ -1,15 +1,15 @@
 /* =========================================================
    DUDUQ CORE — INTRO CINEMATOGRÁFICA
-   Launch Screen universal premium AAA+
-   Versão 1.1.0
+   Premium AAA+ Brand Launch
+   Versão 1.2.0
 
-   Sequência:
-   1. BRANDING  — empresa grande, reveal gradual
-   2. SWITCHING — transição cinematográfica / TV light collapse
-   3. MISSION   — coleção + ano + disciplina + módulo + loading
-   4. READY     — CTA "INICIAR MISSÃO"
+   Sequência padrão:
+   1. BRANDING  — marca da empresa em escala outdoor
+   2. SWITCHING — TV light collapse / feixe cinematográfico
+   3. MISSION   — EduQ Play + ano + disciplina + módulo
+   4. READY     — loading finalizado + CTA "INICIAR MISSÃO"
 
-   API pública preservada:
+   API pública:
    show, hide, destroy, setProgress, markReady,
    getInstance, isActive
    ========================================================= */
@@ -17,7 +17,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.1.0";
+  const VERSION = "1.2.0";
 
   if (window.DuduQIntro && window.DuduQIntro.version === VERSION) {
     return;
@@ -45,17 +45,23 @@
     startLabel: "INICIAR MISSÃO",
     hint: "Tudo pronto para começar!",
 
-    minDurationMs: 1850,
-    brandingDurationMs: 1800,
-    switchingDurationMs: 620,
-    missionMinDurationMs: 1000,
+    /*
+     * O branding agora respira de verdade.
+     * A logo entra por ~1,45 s e permanece legível
+     * antes da transição cinematográfica.
+     */
+    minDurationMs: 2200,
+    brandingDurationMs: 3000,
+    switchingDurationMs: 760,
+    missionMinDurationMs: 1200,
     exitDurationMs: 470,
 
     autoReady: true,
     sparkCount: 14,
 
-    companyWidth: 620,
-    collectionWidth: 590,
+    /* Escala outdoor centralizada no Core. */
+    companyWidth: 820,
+    collectionWidth: 760,
 
     container: null,
     readyPromise: null,
@@ -80,18 +86,21 @@
   }
 
   function safeText(value) {
-    if (value === null || value === undefined) {
-      return "";
-    }
+    if (value === null || value === undefined) return "";
     return String(value).trim();
   }
 
   function createElement(tagName, className, text) {
     const element = document.createElement(tagName);
-    if (className) element.className = className;
+
+    if (className) {
+      element.className = className;
+    }
+
     if (text !== undefined && text !== null) {
       element.textContent = String(text);
     }
+
     return element;
   }
 
@@ -107,9 +116,13 @@
   }
 
   function now() {
-    if (window.performance && typeof window.performance.now === "function") {
+    if (
+      window.performance &&
+      typeof window.performance.now === "function"
+    ) {
       return window.performance.now();
     }
+
     return Date.now();
   }
 
@@ -166,8 +179,15 @@
 
       try {
         const image = new Image();
-        image.onload = function () { finish(true); };
-        image.onerror = function () { finish(false); };
+
+        image.onload = function () {
+          finish(true);
+        };
+
+        image.onerror = function () {
+          finish(false);
+        };
+
         image.src = src;
 
         if (image.complete) {
@@ -188,40 +208,75 @@
   function emit(name, detail) {
     try {
       document.dispatchEvent(
-        new CustomEvent(name, { detail: detail || {} })
+        new CustomEvent(name, {
+          detail: detail || {}
+        })
       );
     } catch (_) {}
   }
 
   function createSpark(index) {
     const spark = createElement("span", "duduq-intro-spark", "★");
-    const colors = ["#ffc928", "#42a7f5", "#ffe67a", "#73caff"];
+
+    const colors = [
+      "#ffc928",
+      "#42a7f5",
+      "#ffe67a",
+      "#73caff"
+    ];
+
     const side = index % 2 === 0 ? "left" : "right";
     const horizontal = 3 + Math.random() * 22;
     const vertical = 7 + Math.random() * 80;
     const size = 10 + Math.random() * 17;
     const delay = 300 + Math.random() * 1600;
-    const duration = 3800 + Math.random() * 2100;
+    const duration = 3900 + Math.random() * 2200;
 
     spark.style[side] = horizontal + "%";
     spark.style.top = vertical + "%";
-    spark.style.setProperty("--duduq-intro-spark-size", size.toFixed(1) + "px");
-    spark.style.setProperty("--duduq-intro-spark-delay", delay.toFixed(0) + "ms");
-    spark.style.setProperty("--duduq-intro-spark-duration", duration.toFixed(0) + "ms");
-    spark.style.setProperty("--duduq-intro-spark-color", colors[index % colors.length]);
+
+    spark.style.setProperty(
+      "--duduq-intro-spark-size",
+      size.toFixed(1) + "px"
+    );
+
+    spark.style.setProperty(
+      "--duduq-intro-spark-delay",
+      delay.toFixed(0) + "ms"
+    );
+
+    spark.style.setProperty(
+      "--duduq-intro-spark-duration",
+      duration.toFixed(0) + "ms"
+    );
+
+    spark.style.setProperty(
+      "--duduq-intro-spark-color",
+      colors[index % colors.length]
+    );
 
     return spark;
   }
 
   function buildAtmosphere(root, options) {
-    const atmosphere = createElement("div", "duduq-intro-atmosphere");
+    const atmosphere = createElement(
+      "div",
+      "duduq-intro-atmosphere"
+    );
+
     atmosphere.setAttribute("aria-hidden", "true");
 
     for (let index = 0; index < 3; index += 1) {
-      atmosphere.appendChild(createElement("span", "duduq-intro-orb"));
+      atmosphere.appendChild(
+        createElement("span", "duduq-intro-orb")
+      );
     }
 
-    const sparkCount = clamp(Number(options.sparkCount) || 0, 0, 28);
+    const sparkCount = clamp(
+      Number(options.sparkCount) || 0,
+      0,
+      28
+    );
 
     for (let index = 0; index < sparkCount; index += 1) {
       atmosphere.appendChild(createSpark(index));
@@ -232,18 +287,32 @@
   }
 
   function buildCompany(stage, options) {
-    const wrapper = createElement("div", "duduq-intro-company");
+    const wrapper = createElement(
+      "div",
+      "duduq-intro-company"
+    );
 
     if (options.companyKicker) {
       wrapper.appendChild(
-        createElement("p", "duduq-intro-kicker", options.companyKicker)
+        createElement(
+          "p",
+          "duduq-intro-kicker",
+          options.companyKicker
+        )
       );
     }
 
     if (options.companyLogo) {
-      const logo = createElement("img", "duduq-intro-company-logo");
+      const logo = createElement(
+        "img",
+        "duduq-intro-company-logo"
+      );
+
       logo.src = options.companyLogo;
-      logo.alt = options.companyAlt || options.companyName || "Logo da empresa";
+      logo.alt =
+        options.companyAlt ||
+        options.companyName ||
+        "Logo da empresa";
       logo.decoding = "async";
       logo.draggable = false;
 
@@ -251,9 +320,14 @@
         "error",
         function () {
           logo.remove();
+
           if (options.companyName) {
             wrapper.appendChild(
-              createElement("strong", "duduq-intro-company-name", options.companyName)
+              createElement(
+                "strong",
+                "duduq-intro-company-name",
+                options.companyName
+              )
             );
           }
         },
@@ -263,7 +337,11 @@
       wrapper.appendChild(logo);
     } else if (options.companyName) {
       wrapper.appendChild(
-        createElement("strong", "duduq-intro-company-name", options.companyName)
+        createElement(
+          "strong",
+          "duduq-intro-company-name",
+          options.companyName
+        )
       );
     }
 
@@ -272,7 +350,11 @@
   }
 
   function buildCollection(stage, options) {
-    const wrapper = createElement("div", "duduq-intro-collection");
+    const wrapper = createElement(
+      "div",
+      "duduq-intro-collection"
+    );
+
     const fallbackName = createElement(
       "h1",
       "duduq-intro-collection-name",
@@ -282,11 +364,19 @@
     let logo = null;
 
     if (options.collectionLogo) {
-      logo = createElement("img", "duduq-intro-collection-logo");
+      logo = createElement(
+        "img",
+        "duduq-intro-collection-logo"
+      );
+
       logo.src = options.collectionLogo;
-      logo.alt = options.collectionAlt || options.collectionName || "Logo da coleção";
+      logo.alt =
+        options.collectionAlt ||
+        options.collectionName ||
+        "Logo da coleção";
       logo.decoding = "async";
       logo.draggable = false;
+
       fallbackName.hidden = true;
 
       logo.addEventListener(
@@ -302,7 +392,14 @@
     }
 
     wrapper.appendChild(fallbackName);
-    wrapper.appendChild(createElement("span", "duduq-intro-collection-shine"));
+
+    wrapper.appendChild(
+      createElement(
+        "span",
+        "duduq-intro-collection-shine"
+      )
+    );
+
     stage.appendChild(wrapper);
 
     return {
@@ -316,20 +413,34 @@
     return createElement(
       "span",
       "duduq-intro-meta-chip" +
-        (primary ? " duduq-intro-meta-chip--primary" : ""),
+        (primary
+          ? " duduq-intro-meta-chip--primary"
+          : ""),
       text
     );
   }
 
   function buildMeta(stage, options) {
-    const wrapper = createElement("div", "duduq-intro-meta");
+    const wrapper = createElement(
+      "div",
+      "duduq-intro-meta"
+    );
+
     const year = formatYear(options.year);
     const subject = formatSubject(options.subject);
     const module = formatModule(options.module);
 
-    if (year) wrapper.appendChild(createMetaChip(year, true));
-    if (subject) wrapper.appendChild(createMetaChip(subject, false));
-    if (module) wrapper.appendChild(createMetaChip(module, false));
+    if (year) {
+      wrapper.appendChild(createMetaChip(year, true));
+    }
+
+    if (subject) {
+      wrapper.appendChild(createMetaChip(subject, false));
+    }
+
+    if (module) {
+      wrapper.appendChild(createMetaChip(module, false));
+    }
 
     if (!year && !subject && !module) {
       wrapper.style.display = "none";
@@ -340,40 +451,89 @@
   }
 
   function buildLoading(stage, options) {
-    const wrapper = createElement("div", "duduq-intro-loading");
-    const head = createElement("div", "duduq-intro-loading-head");
-    const label = createElement("p", "duduq-intro-loading-label", options.loadingLabel);
-    const percent = createElement("span", "duduq-intro-loading-percent", "0%");
+    const wrapper = createElement(
+      "div",
+      "duduq-intro-loading"
+    );
+
+    const head = createElement(
+      "div",
+      "duduq-intro-loading-head"
+    );
+
+    const label = createElement(
+      "p",
+      "duduq-intro-loading-label",
+      options.loadingLabel
+    );
+
+    const percent = createElement(
+      "span",
+      "duduq-intro-loading-percent",
+      "0%"
+    );
 
     head.appendChild(label);
     head.appendChild(percent);
 
-    const track = createElement("div", "duduq-intro-loading-track");
+    const track = createElement(
+      "div",
+      "duduq-intro-loading-track"
+    );
+
     track.setAttribute("role", "progressbar");
     track.setAttribute("aria-label", options.loadingLabel);
     track.setAttribute("aria-valuemin", "0");
     track.setAttribute("aria-valuemax", "100");
     track.setAttribute("aria-valuenow", "0");
 
-    const fill = createElement("div", "duduq-intro-loading-fill");
+    const fill = createElement(
+      "div",
+      "duduq-intro-loading-fill"
+    );
+
     track.appendChild(fill);
     wrapper.appendChild(head);
     wrapper.appendChild(track);
     stage.appendChild(wrapper);
 
-    return { wrapper, label, percent, track, fill };
+    return {
+      wrapper: wrapper,
+      label: label,
+      percent: percent,
+      track: track,
+      fill: fill
+    };
   }
 
   function buildActions(stage, options) {
-    const wrapper = createElement("div", "duduq-intro-actions");
-    const button = createElement("button", "duduq-intro-start-button");
+    const wrapper = createElement(
+      "div",
+      "duduq-intro-actions"
+    );
+
+    const button = createElement(
+      "button",
+      "duduq-intro-start-button"
+    );
+
     button.type = "button";
     button.setAttribute("aria-label", options.startLabel);
 
-    const icon = createElement("span", "duduq-intro-start-icon", "▶");
+    const icon = createElement(
+      "span",
+      "duduq-intro-start-icon",
+      "▶"
+    );
+
     icon.setAttribute("aria-hidden", "true");
 
-    const label = createElement("span", "", options.startLabel);
+    const label = createElement(
+      "span",
+      "",
+      options.startLabel
+    );
+
     button.appendChild(icon);
     button.appendChild(label);
     wrapper.appendChild(button);
@@ -381,20 +541,35 @@
     let hint = null;
 
     if (options.hint) {
-      hint = createElement("p", "duduq-intro-hint", options.hint);
+      hint = createElement(
+        "p",
+        "duduq-intro-hint",
+        options.hint
+      );
+
       wrapper.appendChild(hint);
     }
 
     stage.appendChild(wrapper);
-    return { wrapper, button, label, icon, hint };
+
+    return {
+      wrapper: wrapper,
+      button: button,
+      label: label,
+      icon: icon,
+      hint: hint
+    };
   }
 
   function render(options) {
     /*
-     * is-branding já nasce no DOM para impedir flash
-     * da segunda cena antes do JS iniciar a timeline.
+     * A primeira cena já nasce ativa para impedir
+     * flash visual da coleção antes da timeline iniciar.
      */
-    const root = createElement("section", "duduq-intro is-branding");
+    const root = createElement(
+      "section",
+      "duduq-intro is-branding"
+    );
 
     root.id = "duduq-intro-" + (++instanceCounter);
     root.setAttribute("role", "dialog");
@@ -422,13 +597,27 @@
 
     root.appendChild(stage);
 
-    return { root, atmosphere, stage, company, collection, meta, loading, actions };
+    return {
+      root: root,
+      atmosphere: atmosphere,
+      stage: stage,
+      company: company,
+      collection: collection,
+      meta: meta,
+      loading: loading,
+      actions: actions
+    };
   }
 
   function setInstanceProgress(instance, value) {
     if (!instance || instance.destroyed) return;
 
-    const normalized = clamp(Number(value) || 0, 0, 100);
+    const normalized = clamp(
+      Number(value) || 0,
+      0,
+      100
+    );
+
     instance.progress = normalized;
 
     const visualValue = normalized.toFixed(1) + "%";
@@ -437,8 +626,12 @@
       "--duduq-intro-progress",
       visualValue
     );
+
     instance.refs.loading.fill.style.width = visualValue;
-    instance.refs.loading.percent.textContent = Math.round(normalized) + "%";
+
+    instance.refs.loading.percent.textContent =
+      Math.round(normalized) + "%";
+
     instance.refs.loading.track.setAttribute(
       "aria-valuenow",
       String(Math.round(normalized))
@@ -453,48 +646,79 @@
   }
 
   function startFakeProgress(instance) {
-    if (!instance || instance.destroyed || instance.progressStarted) return;
+    if (
+      !instance ||
+      instance.destroyed ||
+      instance.progressStarted
+    ) {
+      return;
+    }
 
     instance.progressStarted = true;
+
     const startTime = now();
 
-    setInstanceProgress(instance, Math.max(instance.progress, 4));
+    setInstanceProgress(
+      instance,
+      Math.max(instance.progress, 4)
+    );
 
-    instance.progressTimer = window.setInterval(function () {
-      if (instance.destroyed || instance.ready) {
-        stopFakeProgress(instance);
-        return;
-      }
+    instance.progressTimer = window.setInterval(
+      function () {
+        if (instance.destroyed || instance.ready) {
+          stopFakeProgress(instance);
+          return;
+        }
 
-      const elapsed = now() - startTime;
-      let target;
+        const elapsed = now() - startTime;
+        let target;
 
-      if (elapsed < 260) target = 28;
-      else if (elapsed < 620) target = 53;
-      else if (elapsed < 980) target = 72;
-      else if (elapsed < 1450) target = 84;
-      else target = 92;
+        if (elapsed < 280) target = 28;
+        else if (elapsed < 650) target = 53;
+        else if (elapsed < 1050) target = 72;
+        else if (elapsed < 1550) target = 84;
+        else target = 92;
 
-      const difference = target - instance.progress;
-      let increment = Math.max(0.30, difference * 0.14);
-      increment += Math.random() * 0.45;
+        const difference = target - instance.progress;
 
-      setInstanceProgress(
-        instance,
-        Math.min(target, instance.progress + increment)
-      );
-    }, 92);
+        let increment = Math.max(
+          0.30,
+          difference * 0.14
+        );
+
+        increment += Math.random() * 0.45;
+
+        setInstanceProgress(
+          instance,
+          Math.min(
+            target,
+            instance.progress + increment
+          )
+        );
+      },
+      92
+    );
   }
 
   function setPhase(instance, phase) {
     if (!instance || instance.destroyed) return false;
 
-    const allowed = ["branding", "switching", "mission"];
+    const allowed = [
+      "branding",
+      "switching",
+      "mission"
+    ];
+
     if (!allowed.includes(phase)) return false;
 
     const root = instance.refs.root;
 
-    root.classList.remove("is-branding", "is-switching", "is-mission");
+    root.classList.remove(
+      "is-branding",
+      "is-switching",
+      "is-mission"
+    );
+
     root.classList.add("is-" + phase);
     root.setAttribute("data-duduq-intro-phase", phase);
 
@@ -513,8 +737,21 @@
       try {
         instance.options.onPhase(detail);
       } catch (error) {
-        console.error("[DuduQ Intro] Erro em onPhase:", error);
+        console.error(
+          "[DuduQ Intro] Erro em onPhase:",
+          error
+        );
       }
+    }
+
+    /*
+     * Caso markReady() seja chamado cedo por uma integração
+     * externa, só liberamos o CTA quando a cena Mission existir.
+     */
+    if (phase === "mission" && instance.pendingReady) {
+      window.setTimeout(function () {
+        markInstanceReady(instance);
+      }, 0);
     }
 
     return true;
@@ -534,7 +771,6 @@
         return;
       }
 
-      /* Acessibilidade: não força a sequência completa. */
       if (prefersReducedMotion()) {
         setPhase(instance, "mission");
         instance.missionStartedAt = now();
@@ -545,37 +781,48 @@
 
       setPhase(instance, "branding");
 
-      const brandingTimer = window.setTimeout(function () {
-        if (instance.destroyed) {
-          finishSequence(instance, resolve);
-          return;
-        }
-
-        setPhase(instance, "switching");
-
-        const switchingTimer = window.setTimeout(function () {
+      const brandingTimer = window.setTimeout(
+        function () {
           if (instance.destroyed) {
             finishSequence(instance, resolve);
             return;
           }
 
-          setPhase(instance, "mission");
-          instance.missionStartedAt = now();
-          startFakeProgress(instance);
-          finishSequence(instance, resolve);
-        }, instance.options.switchingDurationMs);
+          setPhase(instance, "switching");
 
-        instance.phaseTimers.push(switchingTimer);
-      }, instance.options.brandingDurationMs);
+          const switchingTimer = window.setTimeout(
+            function () {
+              if (instance.destroyed) {
+                finishSequence(instance, resolve);
+                return;
+              }
+
+              setPhase(instance, "mission");
+              instance.missionStartedAt = now();
+              startFakeProgress(instance);
+              finishSequence(instance, resolve);
+            },
+            instance.options.switchingDurationMs
+          );
+
+          instance.phaseTimers.push(switchingTimer);
+        },
+        instance.options.brandingDurationMs
+      );
 
       instance.phaseTimers.push(brandingTimer);
     });
   }
 
   function markInstanceReady(instance) {
-    if (!instance || instance.destroyed || instance.ready) return false;
+    if (
+      !instance ||
+      instance.destroyed ||
+      instance.ready
+    ) {
+      return false;
+    }
 
-    /* O CTA só nasce no terceiro ato. */
     if (instance.phase !== "mission") {
       instance.pendingReady = true;
       return true;
@@ -587,39 +834,52 @@
     stopFakeProgress(instance);
     setInstanceProgress(instance, 100);
 
-    instance.refs.loading.label.textContent = instance.options.readyLabel;
-    instance.refs.loading.track.setAttribute("aria-label", instance.options.readyLabel);
+    instance.refs.loading.label.textContent =
+      instance.options.readyLabel;
 
-    instance.readyTimer = window.setTimeout(function () {
-      if (instance.destroyed) return;
+    instance.refs.loading.track.setAttribute(
+      "aria-label",
+      instance.options.readyLabel
+    );
 
-      instance.refs.root.classList.add("is-ready");
+    instance.readyTimer = window.setTimeout(
+      function () {
+        if (instance.destroyed) return;
 
-      emit("duduq:intro-ready", {
-        id: instance.id,
-        version: VERSION,
-        phase: instance.phase,
-        options: instance.options
-      });
+        instance.refs.root.classList.add("is-ready");
 
-      if (typeof instance.options.onReady === "function") {
-        try {
-          instance.options.onReady({
-            id: instance.id,
-            intro: window.DuduQIntro
-          });
-        } catch (error) {
-          console.error("[DuduQ Intro] Erro em onReady:", error);
+        emit("duduq:intro-ready", {
+          id: instance.id,
+          version: VERSION,
+          phase: instance.phase,
+          options: instance.options
+        });
+
+        if (typeof instance.options.onReady === "function") {
+          try {
+            instance.options.onReady({
+              id: instance.id,
+              intro: window.DuduQIntro
+            });
+          } catch (error) {
+            console.error(
+              "[DuduQ Intro] Erro em onReady:",
+              error
+            );
+          }
         }
-      }
-    }, 310);
+      },
+      310
+    );
 
     return true;
   }
 
   function restoreBody(instance) {
     if (!instance || !document.body) return;
-    document.body.style.overflow = instance.previousBodyOverflow;
+
+    document.body.style.overflow =
+      instance.previousBodyOverflow;
   }
 
   function clearTimers(instance) {
@@ -641,6 +901,7 @@
       instance.phaseTimers.forEach(function (timerId) {
         window.clearTimeout(timerId);
       });
+
       instance.phaseTimers.length = 0;
     }
 
@@ -655,11 +916,17 @@
     if (!instance || instance.destroyed) return;
 
     instance.destroyed = true;
+
     clearTimers(instance);
     restoreBody(instance);
 
-    if (instance.refs.root && instance.refs.root.parentNode) {
-      instance.refs.root.parentNode.removeChild(instance.refs.root);
+    if (
+      instance.refs.root &&
+      instance.refs.root.parentNode
+    ) {
+      instance.refs.root.parentNode.removeChild(
+        instance.refs.root
+      );
     }
 
     const result = {
@@ -672,7 +939,10 @@
       try {
         instance.options.onClose(result);
       } catch (error) {
-        console.error("[DuduQ Intro] Erro em onClose:", error);
+        console.error(
+          "[DuduQ Intro] Erro em onClose:",
+          error
+        );
       }
     }
 
@@ -710,7 +980,8 @@
     });
 
     /*
-     * O Host nasce por baixo da intro durante o fade cinematográfico.
+     * O clique é intencionalmente preservado como gesto real
+     * do usuário: isso também ajuda o navegador a liberar áudio.
      */
     if (typeof instance.options.onStart === "function") {
       try {
@@ -719,49 +990,68 @@
           intro: window.DuduQIntro
         });
       } catch (error) {
-        console.error("[DuduQ Intro] Erro em onStart:", error);
+        console.error(
+          "[DuduQ Intro] Erro em onStart:",
+          error
+        );
       }
     }
 
-    instance.exitTimer = window.setTimeout(function () {
-      finalizeInstance(instance, "start");
-    }, Math.max(350, Number(instance.options.exitDurationMs) || 470));
+    instance.exitTimer = window.setTimeout(
+      function () {
+        finalizeInstance(instance, "start");
+      },
+      Math.max(
+        350,
+        Number(instance.options.exitDurationMs) || 470
+      )
+    );
   }
 
   function prepareReadiness(instance, sequencePromise) {
     const options = instance.options;
 
-    /* Compatibilidade: tempo mínimo global desde o show(). */
     const overallMinimumGate = wait(options.minDurationMs);
 
     const imageGates = [];
-    if (options.companyLogo) imageGates.push(preloadImage(options.companyLogo));
-    if (options.collectionLogo) imageGates.push(preloadImage(options.collectionLogo));
+
+    if (options.companyLogo) {
+      imageGates.push(preloadImage(options.companyLogo));
+    }
+
+    if (options.collectionLogo) {
+      imageGates.push(preloadImage(options.collectionLogo));
+    }
 
     const assetsGate = Promise.all(imageGates);
 
     let externalGate = Promise.resolve();
 
-    if (options.readyPromise && typeof options.readyPromise.then === "function") {
-      externalGate = Promise.resolve(options.readyPromise).catch(function (error) {
-        console.warn("[DuduQ Intro] readyPromise rejeitada:", error);
-        return null;
-      });
+    if (
+      options.readyPromise &&
+      typeof options.readyPromise.then === "function"
+    ) {
+      externalGate = Promise.resolve(options.readyPromise)
+        .catch(function (error) {
+          console.warn(
+            "[DuduQ Intro] readyPromise rejeitada:",
+            error
+          );
+
+          return null;
+        });
     }
 
-    /*
-     * Mesmo que tudo carregue instantaneamente, a coleção precisa
-     * respirar na tela antes de liberar o botão.
-     */
-    const missionGate = Promise.resolve(sequencePromise).then(function () {
-      if (instance.destroyed) return null;
+    const missionGate = Promise.resolve(sequencePromise)
+      .then(function () {
+        if (instance.destroyed) return null;
 
-      return wait(
-        prefersReducedMotion()
-          ? 250
-          : options.missionMinDurationMs
-      );
-    });
+        return wait(
+          prefersReducedMotion()
+            ? 250
+            : options.missionMinDurationMs
+        );
+      });
 
     Promise.all([
       overallMinimumGate,
@@ -771,7 +1061,10 @@
     ]).then(function () {
       if (instance.destroyed) return;
 
-      if (options.autoReady !== false || options.readyPromise) {
+      if (
+        options.autoReady !== false ||
+        options.readyPromise
+      ) {
         markInstanceReady(instance);
       }
     });
@@ -782,29 +1075,86 @@
       finalizeInstance(activeInstance, "replaced");
     }
 
-    const merged = Object.assign({}, DEFAULTS, options || {});
+    const merged = Object.assign(
+      {},
+      DEFAULTS,
+      options || {}
+    );
 
     merged.companyLogo = safeText(merged.companyLogo);
     merged.collectionLogo = safeText(merged.collectionLogo);
-    merged.collectionName = safeText(merged.collectionName) || "DuduQ";
+    merged.collectionName =
+      safeText(merged.collectionName) || "DuduQ";
     merged.companyKicker = safeText(merged.companyKicker);
-    merged.loadingLabel = safeText(merged.loadingLabel) || "PREPARANDO SUA MISSÃO";
-    merged.readyLabel = safeText(merged.readyLabel) || "MISSÃO PRONTA";
-    merged.startLabel = safeText(merged.startLabel) || "INICIAR MISSÃO";
 
-    merged.minDurationMs = clamp(Number(merged.minDurationMs) || 1850, 600, 10000);
-    merged.brandingDurationMs = clamp(Number(merged.brandingDurationMs) || 1800, 700, 5000);
-    merged.switchingDurationMs = clamp(Number(merged.switchingDurationMs) || 620, 250, 1800);
-    merged.missionMinDurationMs = clamp(Number(merged.missionMinDurationMs) || 1000, 350, 5000);
-    merged.exitDurationMs = clamp(Number(merged.exitDurationMs) || 470, 250, 1500);
-    merged.sparkCount = clamp(Number(merged.sparkCount) || 14, 0, 28);
+    merged.loadingLabel =
+      safeText(merged.loadingLabel) ||
+      "PREPARANDO SUA MISSÃO";
+
+    merged.readyLabel =
+      safeText(merged.readyLabel) ||
+      "MISSÃO PRONTA";
+
+    merged.startLabel =
+      safeText(merged.startLabel) ||
+      "INICIAR MISSÃO";
 
     /*
-     * A antiga integração passa companyWidth: 220.
-     * A versão cinematográfica força presença de hero real.
+     * Guardrails de marca:
+     * mesmo integrações antigas que ainda enviem 1800 ms
+     * não conseguem acelerar demais a exposição da empresa.
      */
-    merged.companyWidth = clamp(Number(merged.companyWidth) || 620, 560, 820);
-    merged.collectionWidth = clamp(Number(merged.collectionWidth) || 590, 280, 900);
+    merged.minDurationMs = clamp(
+      Number(merged.minDurationMs) || 2200,
+      1000,
+      12000
+    );
+
+    merged.brandingDurationMs = clamp(
+      Number(merged.brandingDurationMs) || 3000,
+      2700,
+      6000
+    );
+
+    merged.switchingDurationMs = clamp(
+      Number(merged.switchingDurationMs) || 760,
+      680,
+      1800
+    );
+
+    merged.missionMinDurationMs = clamp(
+      Number(merged.missionMinDurationMs) || 1200,
+      1100,
+      5000
+    );
+
+    merged.exitDurationMs = clamp(
+      Number(merged.exitDurationMs) || 470,
+      250,
+      1500
+    );
+
+    merged.sparkCount = clamp(
+      Number(merged.sparkCount) || 14,
+      0,
+      28
+    );
+
+    /*
+     * Guardrails de escala:
+     * o Core protege as marcas contra configurações pequenas.
+     */
+    merged.companyWidth = clamp(
+      Number(merged.companyWidth) || 820,
+      760,
+      980
+    );
+
+    merged.collectionWidth = clamp(
+      Number(merged.collectionWidth) || 760,
+      650,
+      980
+    );
 
     const container = resolveContainer(merged.container);
     const refs = render(merged);
@@ -835,7 +1185,9 @@
       resolve: null,
 
       previousBodyOverflow:
-        document.body ? document.body.style.overflow : ""
+        document.body
+          ? document.body.style.overflow
+          : ""
     };
 
     activeInstance = instance;
@@ -846,14 +1198,22 @@
 
     container.appendChild(refs.root);
 
-    refs.actions.button.addEventListener("click", function () {
-      startMission(instance);
-    });
+    refs.actions.button.addEventListener(
+      "click",
+      function () {
+        startMission(instance);
+      }
+    );
 
     setInstanceProgress(instance, 0);
 
-    const sequencePromise = runCinematicSequence(instance);
-    prepareReadiness(instance, sequencePromise);
+    const sequencePromise =
+      runCinematicSequence(instance);
+
+    prepareReadiness(
+      instance,
+      sequencePromise
+    );
 
     emit("duduq:intro-shown", {
       id: instance.id,
@@ -868,13 +1228,25 @@
   }
 
   function setProgress(value) {
-    if (!activeInstance || activeInstance.destroyed) return false;
+    if (
+      !activeInstance ||
+      activeInstance.destroyed
+    ) {
+      return false;
+    }
 
-    const maximum = activeInstance.ready ? 100 : 96;
+    const maximum =
+      activeInstance.ready
+        ? 100
+        : 96;
 
     setInstanceProgress(
       activeInstance,
-      clamp(Number(value) || 0, 0, maximum)
+      clamp(
+        Number(value) || 0,
+        0,
+        maximum
+      )
     );
 
     return true;
@@ -882,6 +1254,7 @@
 
   function markReady() {
     if (!activeInstance) return false;
+
     return markInstanceReady(activeInstance);
   }
 
@@ -889,8 +1262,13 @@
     if (!activeInstance) return false;
 
     const instance = activeInstance;
-    const immediate = options && options.immediate === true;
-    const reason = safeText(options.reason) || "hidden";
+
+    const immediate =
+      options &&
+      options.immediate === true;
+
+    const reason =
+      safeText(options.reason) || "hidden";
 
     if (immediate) {
       finalizeInstance(instance, reason);
@@ -902,9 +1280,12 @@
     instance.leaving = true;
     instance.refs.root.classList.add("is-leaving");
 
-    instance.exitTimer = window.setTimeout(function () {
-      finalizeInstance(instance, reason);
-    }, instance.options.exitDurationMs);
+    instance.exitTimer = window.setTimeout(
+      function () {
+        finalizeInstance(instance, reason);
+      },
+      instance.options.exitDurationMs
+    );
 
     return true;
   }
@@ -925,7 +1306,10 @@
   }
 
   function isActive() {
-    return Boolean(activeInstance && !activeInstance.destroyed);
+    return Boolean(
+      activeInstance &&
+      !activeInstance.destroyed
+    );
   }
 
   window.DuduQIntro = Object.freeze({
@@ -940,6 +1324,8 @@
   });
 
   console.info(
-    "[DuduQ Intro] v" + VERSION + " cinematográfico carregado."
+    "[DuduQ Intro] v" +
+      VERSION +
+      " — Brand Launch AAA+ carregado."
   );
 })();
