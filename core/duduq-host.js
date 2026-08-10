@@ -1,20 +1,22 @@
 /* =========================================================
    DUDUQ CORE — HOST
    Orquestrador central das mecânicas e módulos DuduQ.
-   Versão 1.4.0
+   Versão 1.5.0
  
-   NOVIDADES 1.4.0
-   - transição centralizada entre mecânicas
-   - troca protegida por DuduQTransition
-   - espera de iframe/READY antes do reveal
-   - transição também para conclusão e reinício
+   NOVIDADES 1.5.0
+   - sincroniza o Host com o slide horizontal do Transition 1.2
+   - remove pausa artificial entre mecânicas
+   - prontidão de iframe mais rápida, sem espera longa
+   - transition-swoosh toca somente entre mecânicas
+   - silencia o win interno durante trocas intermediárias
+   - win final toca somente depois da transição de conclusão
    - mantém o Host como fonte oficial do progresso
    ========================================================= */
  
 (function () {
   "use strict";
  
-  const VERSION = "1.4.0";
+  const VERSION = "1.5.0";
  
   if (
     window.DuduQ &&
@@ -28,13 +30,14 @@
   let activeSession = null;
  
   const TRANSITION_OPTIONS = Object.freeze({
-    coverDurationMs: 500,
-    revealDurationMs: 700,
-    coveredHoldMs: 120,
-    paintFrames: 2
+    coverDurationMs: 340,
+    revealDurationMs: 360,
+    paintFrames: 1,
+    soundEnabled: false
   });
  
-  const VIEW_READY_TIMEOUT_MS = 1800;
+  const VIEW_READY_TIMEOUT_MS = 520;
+  const POST_LOAD_SETTLE_MS = 40;
  
  
   /* =======================================================
@@ -226,6 +229,74 @@
  
     return null;
   }
+
+ 
+  /* =======================================================
+     SILÊNCIO DE VITÓRIA ENTRE MECÂNICAS
+ 
+     A comemoração "win" pertence somente à conclusão real
+     do módulo. Algumas mecânicas legadas possuem um canal
+     sonoro próprio dentro do iframe; por isso o Host corta
+     o win tanto no Core quanto no runtime montado.
+     ======================================================= */
+ 
+  function silenceIntermediateVictory(session) {
+    try {
+      window.DuduQSound
+        ?.stop
+        ?.("win");
+    } catch (_) {}
+ 
+    const iframe = session
+      ?.container
+      ?.querySelector
+      ? session.container.querySelector("iframe")
+      : null;
+ 
+    if (!iframe) {
+      return true;
+    }
+ 
+    try {
+      iframe.contentWindow
+        ?.DuduQSound
+        ?.stop
+        ?.("win");
+    } catch (_) {}
+ 
+    try {
+      const audios = iframe.contentDocument
+        ?.querySelectorAll
+        ?.("audio");
+ 
+      if (audios) {
+        audios.forEach(function (audio) {
+          const src = String(
+            audio.currentSrc ||
+            audio.src ||
+            ""
+          ).toLowerCase();
+ 
+          const isWin =
+            src.includes("you%20win") ||
+            src.includes("you win") ||
+            src.includes("you_win") ||
+            /(^|\/)win(?:[-_.]|$)/.test(src);
+ 
+          if (!isWin) {
+            return;
+          }
+ 
+          try {
+            audio.pause();
+            audio.currentTime = 0;
+          } catch (_) {}
+        });
+      }
+    } catch (_) {}
+ 
+    return true;
+  }
  
  
   /* =======================================================
@@ -251,7 +322,7 @@
     }
  
     await waitPaintFrames(
-      options.paintFrames || 2
+      options.paintFrames || 1
     );
  
     if (
@@ -266,9 +337,37 @@
       : null;
  
     if (!iframe) {
-      await waitPaintFrames(1);
       return true;
     }
+ 
+    /*
+     * Atalho seguro: se o iframe real já terminou de carregar
+     * antes de registrarmos os listeners, não esperamos o
+     * timeout. Evitamos apenas o about:blank inicial.
+     */
+    try {
+      const declaredSrc = String(
+        iframe.getAttribute("src") ||
+        ""
+      ).trim();
+ 
+      const readyState =
+        iframe.contentDocument
+          ?.readyState ||
+        "";
+ 
+      if (
+        declaredSrc &&
+        !/^about:blank(?:$|[?#])/i.test(declaredSrc) &&
+        (
+          readyState === "interactive" ||
+          readyState === "complete"
+        )
+      ) {
+        await waitPaintFrames(1);
+        return true;
+      }
+    } catch (_) {}
  
     return new Promise(
       function (resolve) {
@@ -324,22 +423,18 @@
             typeof data === "object" &&
             data.type === "DUDUQ_MECHANIC_READY"
           ) {
-            window.requestAnimationFrame(
-              function () {
-                window.requestAnimationFrame(finish);
-              }
-            );
+            window.requestAnimationFrame(finish);
           }
         }
  
         function handleLoad() {
           /*
-           * Alguns runtimes disparam READY logo depois do load.
-           * Damos um pequeno espaço para o primeiro render.
+           * Apenas um respiro curtíssimo para o primeiro paint.
+           * A troca não deve parecer uma tela de loading.
            */
           postLoadTimer = window.setTimeout(
             finish,
-            260
+            POST_LOAD_SETTLE_MS
           );
         }
  
@@ -358,21 +453,13 @@
           finish,
           clamp(
             Number(options.timeoutMs) || VIEW_READY_TIMEOUT_MS,
-            500,
-            4000
+            180,
+            900
           )
         );
- 
-        /*
-         * Não usamos contentDocument.readyState como atalho aqui.
-         * Um iframe recém-criado pode expor o about:blank como
-         * "complete" antes de a mecânica real carregar, o que
-         * faria o reveal acontecer cedo demais.
-         */
       }
     );
   }
- 
  
   function runTransitionSwap(
     session,
@@ -992,11 +1079,27 @@
       return false;
     }
  
+    const hasNextMechanic =
+      session.stepIndex + 1 <
+      session.module.steps.length;
+ 
+    const isFinalStep =
+      !hasNextMechanic;
+ 
     /*
      * Travamos a conclusão imediatamente para impedir
      * duplo clique / dupla mensagem do iframe.
      */
     session.stepCompleted = true;
+ 
+    /*
+     * Entre mecânicas não existe som de vitória.
+     * Se um runtime interno iniciou o win, cortamos agora,
+     * antes do slide começar.
+     */
+    if (hasNextMechanic) {
+      silenceIntermediateVictory(session);
+    }
  
     session.results.push({
       stepId: step.id,
@@ -1032,9 +1135,14 @@
     /* =====================================================
        TROCA PROTEGIDA
  
-       A mecânica atual permanece visível enquanto a camada
-       cobre a tela. Só dentro do callback (já coberto) ela é
-       destruída e a próxima é montada.
+       Mecânica -> mecânica:
+       - slide contínuo
+       - transition-swoosh
+       - sem win
+ 
+       Mecânica final -> conclusão:
+       - slide visual sem swoosh
+       - win somente depois que a conclusão apareceu
        ===================================================== */
  
     runTransitionSwap(
@@ -1055,11 +1163,14 @@
           session.stepIndex >=
           session.module.steps.length
         ) {
-          finishModule(session);
+          finishModule(
+            session,
+            { playSound: false }
+          );
  
           await waitForMountedView(
             session,
-            { paintFrames: 2 }
+            { paintFrames: 1 }
           );
  
           return true;
@@ -1070,32 +1181,61 @@
         await waitForMountedView(
           session,
           {
-            paintFrames: 2,
+            paintFrames: 1,
             timeoutMs: VIEW_READY_TIMEOUT_MS
           }
         );
  
         return true;
+      },
+      {
+        soundEnabled: hasNextMechanic,
+        soundName: "transition-swoosh",
+        soundVolume: 0.42,
+        soundMinGapMs: 260
       }
-    ).catch(
-      function (error) {
-        console.error(
-          "[DuduQ Host] Falha na transição entre etapas:",
-          error
-        );
- 
-        if (
-          session === activeSession &&
-          !session.completed
-        ) {
-          session.transitioning = false;
+    )
+      .then(
+        function () {
+          if (
+            isFinalStep &&
+            session === activeSession &&
+            session.completed
+          ) {
+            playCompletionSound();
+          }
         }
-      }
-    );
+      )
+      .catch(
+        function (error) {
+          console.error(
+            "[DuduQ Host] Falha na transição entre etapas:",
+            error
+          );
+ 
+          if (
+            session === activeSession &&
+            !session.completed
+          ) {
+            session.transitioning = false;
+          }
+ 
+          /*
+           * Se a tela final já foi criada mas a animação falhou,
+           * ainda preservamos a comemoração final.
+           */
+          if (
+            isFinalStep &&
+            session === activeSession &&
+            session.completed
+          ) {
+            playCompletionSound();
+          }
+        }
+      );
  
     return true;
   }
- 
  
   function next(result = null) {
     if (!activeSession) {
@@ -1303,7 +1443,10 @@
      Normalmente chamada já sob a camada de transição.
      ======================================================= */
  
-  function finishModule(session) {
+  function finishModule(
+    session,
+    options = {}
+  ) {
     if (
       !session ||
       session !== activeSession ||
@@ -1380,7 +1523,9 @@
       );
     }
  
-    playCompletionSound();
+    if (options.playSound !== false) {
+      playCompletionSound();
+    }
  
     dispatch(
       "duduq:module-complete",
@@ -1511,12 +1656,15 @@
         await waitForMountedView(
           session,
           {
-            paintFrames: 2,
+            paintFrames: 1,
             timeoutMs: VIEW_READY_TIMEOUT_MS
           }
         );
  
         return true;
+      },
+      {
+        soundEnabled: false
       }
     ).catch(
       function (error) {
