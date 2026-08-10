@@ -23,7 +23,7 @@
   <!-- Intro cinematográfica AAA+ -->
   <link
     rel="stylesheet"
-    href="./core/duduq-intro.css?v=110"
+    href="./core/duduq-intro.css?v=120"
   >
 
   <!-- Tela final premium centralizada -->
@@ -48,7 +48,7 @@
   <script src="./core/duduq-sound.js?v=100"></script>
 
   <!-- Intro cinematográfica universal -->
-  <script src="./core/duduq-intro.js?v=110"></script>
+  <script src="./core/duduq-intro.js?v=120"></script>
 
   <script src="./core/duduq-schema.js?v=100"></script>
 
@@ -702,9 +702,6 @@
 
         /* ===============================================
            FUNÇÃO QUE INICIA O MÓDULO
-
-           O Host continua intacto.
-           Só inicia depois do clique no CTA.
            =============================================== */
 
         function startModule() {
@@ -833,25 +830,22 @@
            INTRO CINEMATOGRÁFICA AAA+
 
            ATO 1
-           Empresa em tela cheia.
+           Empresa em escala outdoor.
 
            ATO 2
            TV light collapse / feixe cinematográfico.
 
            ATO 3
-           EduQ Play + ano + disciplina + módulo.
+           EduQ Play em escala de marca principal.
 
            ATO 4
-           Loading completo + CTA.
+           Dados + loading + CTA.
            =============================================== */
 
         window.DuduQIntro.show({
 
           /* =============================================
              MARCA DA EMPRESA
-
-             A URL padrão está centralizada dentro
-             do duduq-intro.js.
              ============================================= */
 
           companyKicker:
@@ -859,11 +853,11 @@
 
 
           /*
-           * Tamanho hero da logo da empresa.
+           * Escala OUTDOOR.
            */
 
           companyWidth:
-            620,
+            820,
 
 
           /* =============================================
@@ -884,11 +878,11 @@
 
 
           /*
-           * Coleção bem evidente no segundo ato.
+           * Marca da coleção também protagonista.
            */
 
           collectionWidth:
-            650,
+            760,
 
 
           /* =============================================
@@ -908,7 +902,7 @@
 
 
           /* =============================================
-             TEXTOS DA EXPERIÊNCIA
+             TEXTOS
              ============================================= */
 
           loadingLabel:
@@ -928,32 +922,31 @@
 
 
           /* =============================================
-             TIMING CINEMATOGRÁFICO
+             TIMING CINEMATOGRÁFICO 1.2
 
-             Empresa:
-             aproximadamente 1,8 s
+             A marca da empresa permanece
+             aproximadamente 3 segundos.
 
-             Transição:
-             aproximadamente 0,62 s
+             Depois entra a transição de 760 ms.
 
-             Coleção antes do CTA:
-             aproximadamente 1 s
+             A coleção respira por pelo menos
+             1,2 segundo antes do READY.
              ============================================= */
 
           minDurationMs:
-            1850,
+            2200,
 
 
           brandingDurationMs:
-            1800,
+            3000,
 
 
           switchingDurationMs:
-            620,
+            760,
 
 
           missionMinDurationMs:
-            1000,
+            1200,
 
 
           /* =============================================
@@ -965,10 +958,7 @@
 
 
           /* =============================================
-             AO CLICAR EM INICIAR MISSÃO
-
-             O jogo nasce por baixo enquanto a
-             intro executa seu fade cinematográfico.
+             INICIAR MISSÃO
              ============================================= */
 
           onStart:
