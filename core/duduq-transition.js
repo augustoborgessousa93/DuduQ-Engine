@@ -3,14 +3,15 @@
    Orquestrador universal de transições entre telas
    e mecânicas DuduQ.
 
-   Versão 1.3.0
+   Versão 1.4.0
 
    CONCEITO
-   - Fade / Dissolve real do conteúdo da mecânica
-   - a mecânica atual desaparece antes do destroy/mount
-   - a próxima mecânica permanece invisível até estar pronta
-   - nenhuma tela branca entre iframes
-   - backdrop suave preserva o universo visual do ano
+   - Dissolve em duas fases: saída completa, troca, entrada
+   - nunca existe crossfade entre a tela antiga e a nova
+   - a mecânica atual chega a opacity:0 antes do destroy/mount
+   - a próxima tela permanece em opacity:0 até estar pronta
+   - nenhuma camada branca participa da transição
+   - o background do mundo funciona como ponte visual
    - som opcional centralizado via DuduQSound
    - sem mensagem
    - sem tela de loading
@@ -19,7 +20,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.3.0";
+  const VERSION = "1.4.0";
 
   if (
     window.DuduQTransition &&
@@ -36,12 +37,13 @@
     coverDurationMs: 340,
     revealDurationMs: 360,
     paintFrames: 1,
+    bridgeHoldMs: 90,
     fallbackExtraMs: 140,
 
     targetSelector: "#root",
-    targetBlurPx: 3,
+    targetBlurPx: 2,
 
-    visualReadyTimeoutMs: 1300,
+    visualReadyTimeoutMs: 1600,
     visualReadyPollMs: 45,
 
     soundEnabled: false,
@@ -204,6 +206,18 @@
           1,
           3
         ),
+
+      bridgeHoldMs:
+        reduced
+          ? 0
+          : clamp(
+              safeNumber(
+                options.bridgeHoldMs,
+                DEFAULTS.bridgeHoldMs
+              ),
+              0,
+              240
+            ),
 
       fallbackExtraMs:
         DEFAULTS.fallbackExtraMs,
@@ -376,6 +390,37 @@
       document.body?.classList.remove(
         "duduq-transition-lock"
       );
+    } catch (_) {}
+  }
+
+  /* =======================================================
+     PONTE VISUAL DO MUNDO
+
+     Durante os poucos milissegundos em que #root está
+     completamente invisível, o que deve permanecer na tela
+     é o background do próprio ano - nunca branco puro.
+
+     Este reforço apenas reaplica o ano já ativo no Core.
+     Não cria asset novo e não altera a identidade do módulo.
+     ======================================================= */
+
+  function ensureWorldBridge() {
+    try {
+      const year =
+        window.DuduQAssets
+          ?.getYear
+          ?.() ||
+        document.documentElement.getAttribute(
+          "data-duduq-ano-ativo"
+        );
+
+      if (
+        year &&
+        window.DuduQAssets
+          ?.setYear
+      ) {
+        window.DuduQAssets.setYear(year);
+      }
     } catch (_) {}
   }
 
@@ -628,77 +673,6 @@
   }
 
   /* =======================================================
-     SINCRONIZAÇÃO DA CAMADA CSS
-     ======================================================= */
-
-  function waitForRootTransition(
-    expectedDurationMs
-  ) {
-    ensureRoot();
-
-    return new Promise(function (resolve) {
-      let finished = false;
-
-      const fallbackMs = Math.max(
-        120,
-        safeNumber(
-          expectedDurationMs,
-          360
-        ) + DEFAULTS.fallbackExtraMs
-      );
-
-      let timeoutId = null;
-
-      function cleanup() {
-        if (root) {
-          try {
-            root.removeEventListener(
-              "transitionend",
-              handleTransitionEnd
-            );
-          } catch (_) {}
-        }
-
-        if (timeoutId !== null) {
-          window.clearTimeout(timeoutId);
-          timeoutId = null;
-        }
-      }
-
-      function finish() {
-        if (finished) return;
-
-        finished = true;
-        cleanup();
-        resolve(true);
-      }
-
-      function handleTransitionEnd(event) {
-        if (event.target !== root) return;
-
-        if (
-          event.propertyName !== "transform" &&
-          event.propertyName !== "opacity"
-        ) {
-          return;
-        }
-
-        finish();
-      }
-
-      root.addEventListener(
-        "transitionend",
-        handleTransitionEnd
-      );
-
-      timeoutId = window.setTimeout(
-        finish,
-        fallbackMs
-      );
-    });
-  }
-
-  /* =======================================================
      PRONTIDÃO VISUAL DO NOVO IFRAME
 
      Mesmo que o HTML do iframe já tenha terminado de
@@ -881,6 +855,7 @@
 
     ensureRoot();
     lockPage();
+    ensureWorldBridge();
 
     state = "preparing";
 
@@ -898,22 +873,17 @@
       "duduq:transition-cover-start"
     );
 
+    /*
+     * O swoosh começa junto com o fade-out real.
+     * Não existe placa ou overlay visual sobre a viewport.
+     */
     playTransitionSound(config);
 
-    root.classList.add(
-      "is-covering"
+    await animateTarget(
+      activeTarget,
+      "cover",
+      config
     );
-
-    await Promise.all([
-      waitForRootTransition(
-        config.coverDurationMs
-      ),
-      animateTarget(
-        activeTarget,
-        "cover",
-        config
-      )
-    ]);
 
     if (
       currentOperation !== operationId
@@ -921,17 +891,13 @@
       return false;
     }
 
+    /*
+     * Ponto de corte verdadeiro: a tela antiga já está 100%
+     * invisível antes de o Host destruir ou montar qualquer coisa.
+     */
     setTargetCovered(
       activeTarget,
       config.targetBlurPx
-    );
-
-    root.classList.remove(
-      "is-covering"
-    );
-
-    root.classList.add(
-      "is-covered"
     );
 
     state = "covered";
@@ -952,10 +918,11 @@
     const currentOperation = operationId;
 
     ensureRoot();
+    ensureWorldBridge();
 
     /*
-     * A nova tela continua opacity:0 enquanto o runtime
-     * termina o primeiro paint e esconde o boot interno.
+     * A nova tela continua totalmente invisível enquanto o
+     * iframe termina o primeiro paint e remove o boot interno.
      */
     await waitForVisualReady(
       activeTarget,
@@ -972,14 +939,20 @@
       return false;
     }
 
-    root.classList.remove(
-      "is-covering",
-      "is-covered"
-    );
+    /*
+     * Pequeno respiro intencional entre as duas fases.
+     * Ele impede o efeito de "tela nova aparecendo por baixo"
+     * e deixa o mundo do ano funcionar como ponte visual.
+     */
+    if (config.bridgeHoldMs > 0) {
+      await wait(config.bridgeHoldMs);
+    }
 
-    root.classList.add(
-      "is-revealing"
-    );
+    if (
+      currentOperation !== operationId
+    ) {
+      return false;
+    }
 
     state = "revealing";
 
@@ -987,16 +960,15 @@
       "duduq:transition-reveal-start"
     );
 
-    await Promise.all([
-      waitForRootTransition(
-        config.revealDurationMs
-      ),
-      animateTarget(
-        activeTarget,
-        "reveal",
-        config
-      )
-    ]);
+    /*
+     * Só agora a nova tela começa a aparecer.
+     * Não há crossfade com a anterior e não há overlay branco.
+     */
+    await animateTarget(
+      activeTarget,
+      "reveal",
+      config
+    );
 
     if (
       currentOperation !== operationId
@@ -1054,6 +1026,7 @@
           /*
            * Destroy + mount acontecem somente depois que
            * o conteúdo anterior chegou a opacity:0.
+           * A tela nova também nasce escondida pelo mesmo #root.
            */
           const result = await callback();
 
