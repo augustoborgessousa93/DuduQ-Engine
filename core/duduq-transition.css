@@ -1,21 +1,25 @@
 /* =========================================================
    DUDUQ CORE — TRANSITION
    Transição universal entre telas e mecânicas
-   Versão 1.1.0
+   Versão 1.2.0
 
    CONCEITO
-   - deslize horizontal contínuo
-   - nenhuma tela branca parada
+   - Fade / Dissolve premium
+   - nenhuma faixa branca atravessando a tela
+   - nenhuma tela de loading
    - nenhum glow central
-   - nenhum feixe
    - nenhuma mensagem
    - nenhuma comemoração
-   - protege destroy/mount sem parecer loading
+   - troca protegida durante destroy/mount
+   - mantém transitionend real pelo transform do ROOT
    ========================================================= */
 
 
 /* =========================================================
    ROOT
+
+   A própria camada faz o dissolve.
+   Não existe mais painel branco lateral.
    ========================================================= */
 
 .duduq-transition {
@@ -37,13 +41,35 @@
 
   pointer-events: none;
 
-  opacity: 1;
+  opacity: 0;
 
-  background: transparent;
+  background-color:
+    rgba(15, 42, 68, 0);
+
+  -webkit-backdrop-filter:
+    blur(0px)
+    saturate(1)
+    brightness(1);
+
+  backdrop-filter:
+    blur(0px)
+    saturate(1)
+    brightness(1);
+
+  transform:
+    translateZ(0)
+    scale(1.012);
+
+  transform-origin:
+    center center;
 
   isolation: isolate;
 
-  transform: translateZ(0);
+  will-change:
+    opacity,
+    transform,
+    backdrop-filter,
+    background-color;
 
   contain:
     layout
@@ -53,131 +79,26 @@
 
 
 /* =========================================================
-   PAINEL DESLIZANTE
+   REMOVE COMPLETAMENTE O PAINEL ANTIGO
 
-   O painel começa completamente fora da tela,
-   à direita.
+   As versões anteriores usavam ::before e ::after
+   para empurrar uma grande superfície branca pela tela.
 
-   COVER:
-   atravessa a tela até cobri-la por completo.
-
-   REVEAL:
-   continua na MESMA direção e sai pela esquerda.
-
-   Não existe movimento de volta.
+   Nesta versão eles deixam de existir visualmente.
    ========================================================= */
 
-.duduq-transition::before {
-  content: "";
-
-  position: absolute;
-
-  z-index: 1;
-
-  top: 0;
-  bottom: 0;
-
-  left: 100vw;
-
-  width: 145vw;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      110deg,
-
-      #edf8ff 0%,
-
-      #f7fcff 18%,
-
-      #ffffff 38%,
-
-      #f5fbff 58%,
-
-      #e8f6ff 78%,
-
-      #dcefff 100%
-    );
-
-  box-shadow:
-    -18px 0 45px rgba(21, 105, 173, .08),
-    18px 0 45px rgba(21, 105, 173, .08);
-
-  transform:
-    translate3d(
-      0,
-      0,
-      0
-    );
-
-  will-change:
-    transform;
-}
-
-
-/* =========================================================
-   ACENTO DE MOVIMENTO
-
-   Uma faixa extremamente discreta acompanha o painel.
-   Não é brilho de loading.
-   Serve apenas para dar sensação de velocidade.
-   ========================================================= */
-
+.duduq-transition::before,
 .duduq-transition::after {
-  content: "";
-
-  position: absolute;
-
-  z-index: 2;
-
-  top: 0;
-  bottom: 0;
-
-  left: 100vw;
-
-  width: 145vw;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      90deg,
-
-      transparent 0%,
-
-      transparent 70%,
-
-      rgba(115, 199, 246, .015) 76%,
-
-      rgba(68, 171, 232, .045) 83%,
-
-      rgba(255, 255, 255, .22) 88%,
-
-      rgba(83, 181, 238, .09) 93%,
-
-      rgba(255, 255, 255, .30) 97%,
-
-      rgba(116, 202, 248, .08) 100%
-    );
-
-  transform:
-    translate3d(
-      0,
-      0,
-      0
-    );
-
-  will-change:
-    transform;
+  content: none !important;
+  display: none !important;
 }
 
 
 /* =========================================================
-   ESTRUTURA ANTIGA
+   ESTRUTURA LEGADA
 
-   Mantemos compatibilidade com duduq-transition.js 1.0,
-   mas estes elementos deixam de participar visualmente.
+   Mantida somente para compatibilidade com o JS.
+   Não participa da animação.
    ========================================================= */
 
 .duduq-transition-stage,
@@ -187,123 +108,166 @@
 
 
 /* =========================================================
-   COVERING
+   COVERING — FADE OUT / DISSOLVE
 
-   A tela atual continua intacta.
+   A mecânica atual permanece no lugar.
 
-   O painel entra pela direita e termina cobrindo
-   100% da viewport.
+   Em vez de uma placa branca entrar pela direita,
+   a imagem perde definição e contraste de forma suave.
 
-   A transformação usa a própria largura de 145vw:
-   100vw - 145vw = -45vw.
-
-   Portanto o painel ocupa de -45vw até 100vw
-   e não deixa frestas.
+   O pequeno scale é proposital:
+   - quase imperceptível visualmente;
+   - garante um transitionend de transform confiável;
+   - mantém sincronização com duduq-transition.js.
    ========================================================= */
 
 .duduq-transition.is-covering {
   visibility: visible;
 
   pointer-events: auto;
-}
 
+  opacity: 1;
 
-.duduq-transition.is-covering::before,
-.duduq-transition.is-covering::after {
+  background-color:
+    rgba(15, 42, 68, 0.12);
+
+  -webkit-backdrop-filter:
+    blur(14px)
+    saturate(0.82)
+    brightness(0.94);
+
+  backdrop-filter:
+    blur(14px)
+    saturate(0.82)
+    brightness(0.94);
+
   transform:
-    translate3d(
-      -100%,
-      0,
-      0
-    );
+    translateZ(0)
+    scale(1);
 
   transition:
+    opacity
+      220ms
+      cubic-bezier(.22, .72, .22, 1),
+
     transform
-    340ms
-    cubic-bezier(
-      .30,
-      .72,
-      .24,
-      1
-    );
+      220ms
+      cubic-bezier(.22, .72, .22, 1),
+
+    background-color
+      220ms
+      cubic-bezier(.22, .72, .22, 1),
+
+    backdrop-filter
+      220ms
+      cubic-bezier(.22, .72, .22, 1),
+
+    -webkit-backdrop-filter
+      220ms
+      cubic-bezier(.22, .72, .22, 1);
 }
 
 
 /* =========================================================
-   COVERED
+   COVERED — PONTO DE TROCA
 
-   Estado técnico.
+   Estado técnico muito curto.
 
-   A tela está totalmente protegida enquanto
-   o Host remove a mecânica anterior e monta a próxima.
+   Aqui o Host pode destruir a mecânica anterior e montar
+   a próxima sem que o usuário veja um corte seco.
 
-   Visualmente não existe animação adicional.
+   Não existe branco puro em nenhum momento.
    ========================================================= */
 
 .duduq-transition.is-covered {
   visibility: visible;
 
   pointer-events: auto;
-}
 
+  opacity: 1;
 
-.duduq-transition.is-covered::before,
-.duduq-transition.is-covered::after {
+  background-color:
+    rgba(15, 42, 68, 0.12);
+
+  -webkit-backdrop-filter:
+    blur(14px)
+    saturate(0.82)
+    brightness(0.94);
+
+  backdrop-filter:
+    blur(14px)
+    saturate(0.82)
+    brightness(0.94);
+
   transform:
-    translate3d(
-      -100%,
-      0,
-      0
-    );
+    translateZ(0)
+    scale(1);
 
   transition: none;
 }
 
 
 /* =========================================================
-   REVEAL
+   REVEAL — FADE IN / DISSOLVE
 
-   O painel NÃO volta.
+   A nova mecânica já está montada por baixo.
 
-   Ele continua o mesmo movimento,
-   saindo totalmente pela esquerda.
-
-   Isso cria a sensação de uma tela empurrando a outra.
+   A camada perde o blur e desaparece suavemente,
+   revelando a próxima tela sem flash.
    ========================================================= */
 
 .duduq-transition.is-revealing {
   visibility: visible;
 
   pointer-events: auto;
-}
 
+  opacity: 0;
 
-.duduq-transition.is-revealing::before,
-.duduq-transition.is-revealing::after {
+  background-color:
+    rgba(15, 42, 68, 0);
+
+  -webkit-backdrop-filter:
+    blur(0px)
+    saturate(1)
+    brightness(1);
+
+  backdrop-filter:
+    blur(0px)
+    saturate(1)
+    brightness(1);
+
   transform:
-    translate3d(
-      -200%,
-      0,
-      0
-    );
+    translateZ(0)
+    scale(0.994);
 
   transition:
+    opacity
+      280ms
+      cubic-bezier(.20, .02, .18, 1),
+
     transform
-    360ms
-    cubic-bezier(
-      .34,
-      0,
-      .20,
-      1
-    );
+      280ms
+      cubic-bezier(.20, .02, .18, 1),
+
+    background-color
+      280ms
+      cubic-bezier(.20, .02, .18, 1),
+
+    backdrop-filter
+      280ms
+      cubic-bezier(.20, .02, .18, 1),
+
+    -webkit-backdrop-filter
+      280ms
+      cubic-bezier(.20, .02, .18, 1);
 }
 
 
 /* =========================================================
    BLOQUEIO DE INTERAÇÃO
 
-   Apenas durante os poucos milissegundos
-   da troca de tela.
+   Impede cliques somente durante os poucos milissegundos
+   em que ocorre a troca.
    ========================================================= */
 
 html.duduq-transition-lock,
@@ -323,9 +287,7 @@ body.duduq-transition-lock {
    ACELERAÇÃO GRÁFICA
    ========================================================= */
 
-.duduq-transition,
-.duduq-transition::before,
-.duduq-transition::after {
+.duduq-transition {
   -webkit-backface-visibility: hidden;
 
   backface-visibility: hidden;
@@ -335,7 +297,8 @@ body.duduq-transition-lock {
 /* =========================================================
    REDUCED MOTION
 
-   Mantém apenas uma troca curta e funcional.
+   Mantém a proteção da troca, mas reduz bastante
+   o tempo e a intensidade do efeito.
    ========================================================= */
 
 @media (
@@ -343,12 +306,42 @@ body.duduq-transition-lock {
   reduce
 ) {
 
-  .duduq-transition.is-covering::before,
-  .duduq-transition.is-covering::after,
-  .duduq-transition.is-revealing::before,
-  .duduq-transition.is-revealing::after {
+  .duduq-transition.is-covering {
+    -webkit-backdrop-filter:
+      blur(4px)
+      saturate(.96)
+      brightness(.98);
+
+    backdrop-filter:
+      blur(4px)
+      saturate(.96)
+      brightness(.98);
+
+    background-color:
+      rgba(15, 42, 68, 0.05);
+  }
+
+
+  .duduq-transition.is-covered {
+    -webkit-backdrop-filter:
+      blur(4px)
+      saturate(.96)
+      brightness(.98);
+
+    backdrop-filter:
+      blur(4px)
+      saturate(.96)
+      brightness(.98);
+
+    background-color:
+      rgba(15, 42, 68, 0.05);
+  }
+
+
+  .duduq-transition.is-covering,
+  .duduq-transition.is-revealing {
     transition-duration:
-      100ms !important;
+      90ms !important;
 
     transition-timing-function:
       linear !important;
@@ -360,8 +353,8 @@ body.duduq-transition-lock {
 /* =========================================================
    MOBILE
 
-   Mantém exatamente o mesmo comportamento.
-   Nenhuma versão visual diferente.
+   Blur um pouco menor para manter leveza gráfica
+   em aparelhos mais modestos.
    ========================================================= */
 
 @media (
@@ -369,10 +362,18 @@ body.duduq-transition-lock {
   560px
 ) {
 
-  .duduq-transition::before {
-    box-shadow:
-      -10px 0 28px rgba(21, 105, 173, .07),
-      10px 0 28px rgba(21, 105, 173, .07);
+  .duduq-transition.is-covering,
+  .duduq-transition.is-covered {
+    -webkit-backdrop-filter:
+      blur(10px)
+      saturate(.86)
+      brightness(.95);
+
+    backdrop-filter:
+      blur(10px)
+      saturate(.86)
+      brightness(.95);
   }
 
 }
+
