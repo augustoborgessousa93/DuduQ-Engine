@@ -3,20 +3,24 @@
    Orquestrador universal de transições entre telas
    e mecânicas DuduQ.
 
-   Versão 1.0.0
+   Versão 1.1.0
 
-   Responsabilidades:
-   - cobrir completamente a tela atual
-   - impedir flashes durante destroy/mount
-   - aguardar a nova tela estabilizar
-   - revelar a próxima tela suavemente
-   - centralizar transições para todo o ecossistema
+   CONCEITO
+   - movimento horizontal contínuo
+   - sincronização pelo transitionend real do CSS
+   - sem pausa artificial entre cover e reveal
+   - sem som
+   - sem mensagem
+   - sem tela de loading
+   - proteção contra flashes durante destroy/mount
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0";
+  const VERSION =
+    "1.1.0";
+
 
   if (
     window.DuduQTransition &&
@@ -28,23 +32,29 @@
 
   /* =======================================================
      CONFIGURAÇÃO
+
+     Os tempos abaixo servem principalmente como fallback.
+
+     O fluxo normal é sincronizado pelo transitionend
+     disparado pelo próprio CSS.
      ======================================================= */
 
-  const DEFAULTS = Object.freeze({
+  const DEFAULTS =
+    Object.freeze({
 
-    coverDurationMs:
-      500,
+      coverDurationMs:
+        340,
 
-    revealDurationMs:
-      700,
+      revealDurationMs:
+        360,
 
-    coveredHoldMs:
-      120,
+      paintFrames:
+        1,
 
-    paintFrames:
-      2
+      fallbackExtraMs:
+        140
 
-  });
+    });
 
 
   /* =======================================================
@@ -52,12 +62,6 @@
      ======================================================= */
 
   let root =
-    null;
-
-  let stage =
-    null;
-
-  let glow =
     null;
 
   let state =
@@ -91,25 +95,19 @@
   }
 
 
-  function wait(
-    milliseconds
+  function safeNumber(
+    value,
+    fallback
   ) {
 
-    return new Promise(
-      function (resolve) {
+    const number =
+      Number(value);
 
-        window.setTimeout(
-          resolve,
-          Math.max(
-            0,
-            Number(
-              milliseconds
-            ) || 0
-          )
-        );
-
-      }
-    );
+    return Number.isFinite(
+      number
+    )
+      ? number
+      : fallback;
 
   }
 
@@ -118,11 +116,13 @@
 
     try {
 
-      return window
-        .matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        )
-        .matches === true;
+      return (
+        window
+          .matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          )
+          .matches === true
+      );
 
     } catch (_) {
 
@@ -167,11 +167,7 @@
       function (resolve) {
 
         window.requestAnimationFrame(
-          function () {
-
-            resolve();
-
-          }
+          resolve
         );
 
       }
@@ -181,20 +177,21 @@
 
 
   async function nextPaint(
-    frameCount = DEFAULTS.paintFrames
+    frameCount = 1
   ) {
 
     const count =
       clamp(
         Math.round(
-          Number(
-            frameCount
-          ) ||
-          DEFAULTS.paintFrames
+          safeNumber(
+            frameCount,
+            1
+          )
         ),
         1,
-        6
+        4
       );
+
 
     for (
       let index = 0;
@@ -213,56 +210,63 @@
     options = {}
   ) {
 
-    const reducedMotion =
+    const reduced =
       isReducedMotion();
+
 
     return {
 
+      /*
+       * Esses tempos são apenas fallback.
+       * A duração visual real vem do CSS.
+       */
+
       coverDurationMs:
-        reducedMotion
-          ? 120
+        reduced
+          ? 100
           : clamp(
-              Number(
-                options.coverDurationMs
-              ) ||
-              DEFAULTS.coverDurationMs,
-              120,
-              1800
+              safeNumber(
+                options.coverDurationMs,
+                DEFAULTS.coverDurationMs
+              ),
+              180,
+              900
             ),
 
       revealDurationMs:
-        reducedMotion
-          ? 120
+        reduced
+          ? 100
           : clamp(
-              Number(
-                options.revealDurationMs
-              ) ||
-              DEFAULTS.revealDurationMs,
-              120,
-              2200
+              safeNumber(
+                options.revealDurationMs,
+                DEFAULTS.revealDurationMs
+              ),
+              180,
+              900
             ),
 
-      coveredHoldMs:
-        reducedMotion
-          ? 30
-          : clamp(
-              Number(
-                options.coveredHoldMs
-              ) ??
-              DEFAULTS.coveredHoldMs,
-              0,
-              1200
-            ),
+      /*
+       * Não existe mais coveredHoldMs.
+       *
+       * A versão anterior criava uma parada visual
+       * entre a entrada e a saída.
+       */
 
       paintFrames:
         clamp(
-          Number(
-            options.paintFrames
-          ) ||
-          DEFAULTS.paintFrames,
+          Math.round(
+            safeNumber(
+              options.paintFrames,
+              DEFAULTS.paintFrames
+            )
+          ),
           1,
-          6
-        )
+          3
+        ),
+
+      fallbackExtraMs:
+        DEFAULTS
+          .fallbackExtraMs
 
     };
 
@@ -290,8 +294,10 @@
         "div"
       );
 
+
     root.className =
       "duduq-transition";
+
 
     root.setAttribute(
       "aria-hidden",
@@ -299,19 +305,28 @@
     );
 
 
-    stage =
+    /*
+     * Mantemos a estrutura anterior apenas por
+     * compatibilidade.
+
+     * O CSS 1.1.0 esconde esses elementos.
+     */
+
+    const stage =
       document.createElement(
         "div"
       );
+
 
     stage.className =
       "duduq-transition-stage";
 
 
-    glow =
+    const glow =
       document.createElement(
         "div"
       );
+
 
     glow.className =
       "duduq-transition-glow";
@@ -320,6 +335,7 @@
     stage.appendChild(
       glow
     );
+
 
     root.appendChild(
       stage
@@ -350,6 +366,7 @@
           "duduq-transition-lock"
         );
 
+
       document
         .body
         ?.classList
@@ -373,6 +390,7 @@
           "duduq-transition-lock"
         );
 
+
       document
         .body
         ?.classList
@@ -391,6 +409,7 @@
       return;
     }
 
+
     root.classList.remove(
       "is-covering",
       "is-covered",
@@ -401,11 +420,199 @@
 
 
   /* =======================================================
+     ESPERA PELO MOVIMENTO REAL DO CSS
+
+     Em vez de adivinhar o tempo com setTimeout,
+     esperamos o transitionend do painel.
+
+     Existe timeout somente como segurança.
+     ======================================================= */
+
+  function waitForTransformTransition(
+    expectedDurationMs
+  ) {
+
+    ensureRoot();
+
+
+    return new Promise(
+      function (resolve) {
+
+        let finished =
+          false;
+
+
+        const fallbackMs =
+          Math.max(
+            120,
+            safeNumber(
+              expectedDurationMs,
+              360
+            ) +
+            DEFAULTS.fallbackExtraMs
+          );
+
+
+        let timeoutId =
+          null;
+
+
+        function cleanup() {
+
+          if (!root) {
+            return;
+          }
+
+
+          try {
+
+            root.removeEventListener(
+              "transitionend",
+              handleTransitionEnd
+            );
+
+          } catch (_) {}
+
+
+          if (
+            timeoutId !==
+            null
+          ) {
+
+            window.clearTimeout(
+              timeoutId
+            );
+
+            timeoutId =
+              null;
+
+          }
+
+        }
+
+
+        function finish() {
+
+          if (finished) {
+            return;
+          }
+
+
+          finished =
+            true;
+
+
+          cleanup();
+
+
+          resolve(
+            true
+          );
+
+        }
+
+
+        function handleTransitionEnd(
+          event
+        ) {
+
+          if (
+            event.target !==
+            root
+          ) {
+
+            return;
+
+          }
+
+
+          if (
+            event.propertyName !==
+            "transform"
+          ) {
+
+            return;
+
+          }
+
+
+          /*
+           * O painel principal é ::before.
+           *
+           * Alguns navegadores não informam pseudoElement,
+           * então aceitamos também valor vazio.
+           */
+
+          if (
+            event.pseudoElement &&
+            event.pseudoElement !==
+              "::before"
+          ) {
+
+            return;
+
+          }
+
+
+          finish();
+
+        }
+
+
+        root.addEventListener(
+          "transitionend",
+          handleTransitionEnd
+        );
+
+
+        timeoutId =
+          window.setTimeout(
+            finish,
+            fallbackMs
+          );
+
+      }
+    );
+
+  }
+
+
+  /* =======================================================
+     PREPARAÇÃO
+
+     Recoloca o painel invisível fora da tela à direita.
+     ======================================================= */
+
+  async function prepare() {
+
+    ensureRoot();
+
+
+    clearClasses();
+
+
+    /*
+     * Força o navegador a aplicar o estado inicial.
+     */
+
+    root.getBoundingClientRect();
+
+
+    await nextFrame();
+
+
+    return true;
+
+  }
+
+
+  /* =======================================================
      COVER
 
-     Primeiro cobrimos totalmente a tela.
-     A mecânica antiga NÃO deve ser destruída antes
-     desta Promise terminar.
+     O painel desliza da direita até cobrir toda a viewport.
+
+     Somente depois disso o callback pode destruir
+     a mecânica anterior.
      ======================================================= */
 
   async function cover(
@@ -417,6 +624,7 @@
         options
       );
 
+
     const currentOperation =
       ++operationId;
 
@@ -425,27 +633,12 @@
 
     lockPage();
 
-    clearClasses();
-
 
     state =
-      "covering";
+      "preparing";
 
 
-    dispatch(
-      "duduq:transition-cover-start"
-    );
-
-
-    /*
-     * Garante que o browser processe o estado invisível
-     * antes de iniciar a animação.
-     */
-
-    root.getBoundingClientRect();
-
-
-    await nextFrame();
+    await prepare();
 
 
     if (
@@ -458,12 +651,21 @@
     }
 
 
+    state =
+      "covering";
+
+
+    dispatch(
+      "duduq:transition-cover-start"
+    );
+
+
     root.classList.add(
       "is-covering"
     );
 
 
-    await wait(
+    await waitForTransformTransition(
       config.coverDurationMs
     );
 
@@ -481,6 +683,7 @@
     root.classList.remove(
       "is-covering"
     );
+
 
     root.classList.add(
       "is-covered"
@@ -504,8 +707,13 @@
   /* =======================================================
      REVEAL
 
-     Só deve ser executado quando a nova mecânica
-     já estiver montada por baixo da camada.
+     A próxima tela já está por baixo.
+
+     Não há pausa de loading.
+
+     Recebemos apenas um frame de pintura para evitar
+     composição incompleta e o painel continua saindo
+     imediatamente para a esquerda.
      ======================================================= */
 
   async function reveal(
@@ -517,17 +725,13 @@
         options
       );
 
+
     const currentOperation =
       operationId;
 
 
     ensureRoot();
 
-
-    /*
-     * A nova tela precisa receber pelo menos alguns
-     * frames de pintura antes de aparecer.
-     */
 
     await nextPaint(
       config.paintFrames
@@ -544,32 +748,18 @@
     }
 
 
-    if (
-      config.coveredHoldMs >
-      0
-    ) {
-
-      await wait(
-        config.coveredHoldMs
-      );
-
-    }
-
-
-    if (
-      currentOperation !==
-      operationId
-    ) {
-
-      return false;
-
-    }
-
+    /*
+     * IMPORTANTE:
+     *
+     * Não existe coveredHold.
+     * O movimento continua imediatamente.
+     */
 
     root.classList.remove(
       "is-covering",
       "is-covered"
     );
+
 
     root.classList.add(
       "is-revealing"
@@ -585,7 +775,7 @@
     );
 
 
-    await wait(
+    await waitForTransformTransition(
       config.revealDurationMs
     );
 
@@ -601,6 +791,7 @@
 
 
     clearClasses();
+
 
     unlockPage();
 
@@ -622,14 +813,24 @@
   /* =======================================================
      SWAP
 
-     Fluxo oficial:
+     FLUXO OFICIAL
 
-     1. cobre a mecânica atual
-     2. executa destroy/mount escondido
-     3. aguarda pintura da nova mecânica
-     4. revela suavemente
+     tela A
+       ↓
+     slide entra
+       ↓
+     tela fica protegida
+       ↓
+     callback troca A por B
+       ↓
+     1 frame de pintura
+       ↓
+     slide continua para esquerda
+       ↓
+     tela B
 
-     callback pode ser síncrono ou async.
+     Não existe animação de volta.
+     Não existe pausa intermediária.
      ======================================================= */
 
   function swap(
@@ -652,7 +853,7 @@
 
 
     /*
-     * Evita duas trocas simultâneas.
+     * Impede duas transições concorrentes.
      */
 
     if (
@@ -670,15 +871,28 @@
 
           try {
 
-            await cover(
-              options
-            );
+            const covered =
+              await cover(
+                options
+              );
+
+
+            if (!covered) {
+
+              return false;
+
+            }
 
 
             dispatch(
               "duduq:transition-swap"
             );
 
+
+            /*
+             * Destroy + mount acontecem somente agora,
+             * com a viewport protegida.
+             */
 
             const result =
               await callback();
@@ -693,34 +907,18 @@
 
           } catch (error) {
 
-            /*
-             * Nunca podemos deixar a aplicação
-             * permanentemente coberta em caso de erro.
-             */
-
             console.error(
               "[DuduQ Transition] Erro durante troca:",
               error
             );
 
 
-            try {
+            /*
+             * Nunca deixamos a aplicação escondida
+             * por causa de uma exceção.
+             */
 
-              await reveal({
-                ...options,
-
-                coveredHoldMs:
-                  0,
-
-                paintFrames:
-                  1
-              });
-
-            } catch (_) {
-
-              hideImmediate();
-
-            }
+            hideImmediate();
 
 
             throw error;
@@ -742,9 +940,7 @@
 
 
   /* =======================================================
-     HIDE IMMEDIATE
-
-     Segurança para recuperação de erro.
+     RESET IMEDIATO
      ======================================================= */
 
   function hideImmediate() {
@@ -753,9 +949,7 @@
       1;
 
 
-    if (
-      root
-    ) {
+    if (root) {
 
       clearClasses();
 
@@ -788,6 +982,7 @@
     operationId +=
       1;
 
+
     activeSwapPromise =
       null;
 
@@ -810,11 +1005,6 @@
     root =
       null;
 
-    stage =
-      null;
-
-    glow =
-      null;
 
     state =
       "idle";
