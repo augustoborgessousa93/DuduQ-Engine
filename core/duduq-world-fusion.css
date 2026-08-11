@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Conteúdo nítido sobre fundo cinematográfico suavizado.
-   Versão 1.2.7
+   Versão 1.2.8
    ========================================================= */
 
 html.duduq-world-fusion {
@@ -11,7 +11,7 @@ html.duduq-world-fusion {
   --duduq-glass-depth: rgba(53, 90, 121, .16);
   --duduq-ink: #143454;
   --duduq-blue: #0867c9;
-  background: #16425f;
+  background: #1b4866;
 }
 
 html.duduq-world-fusion body {
@@ -33,12 +33,12 @@ html.duduq-world-fusion body::after {
 html.duduq-world-fusion body::before {
   z-index: 0;
   inset: -3.5%;
-  background-color: #16425f;
+  background-color: #1b4866;
   background-image: var(--duduq-world-image, none);
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
-  filter: blur(5px) saturate(.72) brightness(.95) contrast(.92);
+  filter: blur(5px) saturate(.74) brightness(.99) contrast(.93);
   transform: scale(1.025);
   transform-origin: center;
 }
@@ -49,13 +49,13 @@ html.duduq-world-fusion body::after {
   background:
     linear-gradient(
       180deg,
-      rgba(9, 34, 55, .02),
-      rgba(9, 34, 55, .06)
+      rgba(9, 34, 55, .015),
+      rgba(9, 34, 55, .045)
     ),
     radial-gradient(
       circle at 50% 32%,
-      rgba(241, 251, 255, .15),
-      rgba(235, 249, 255, .07) 34%,
+      rgba(241, 251, 255, .18),
+      rgba(235, 249, 255, .09) 34%,
       transparent 58%
     );
 }
