@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — COMPLETION
    Componente central de conclusão de módulos e atividades.
-   Versão 1.0.0
+   Versão 1.1.0
    ========================================================= */
 
 (function () {
@@ -9,13 +9,13 @@
 
   if (
     window.DuduQCompletion?.version ===
-    "1.0.0"
+    "1.1.0"
   ) {
     return;
   }
 
   const VERSION =
-    "1.0.0";
+    "1.1.0";
 
   let activeInstance =
     null;
@@ -477,11 +477,9 @@
        CONFETE
        ----------------------------------------------------- */
 
-    const confetti =
-      createStarConfetti(
-        screen,
-        options
-      );
+    let confetti = null;
+    let confettiTimer = null;
+    let transitionCompleteHandler = null;
 
     /* -----------------------------------------------------
        CARD
@@ -782,6 +780,64 @@
     );
 
     /* -----------------------------------------------------
+       CONFETE APÓS A REVELAÇÃO
+
+       A tela final é montada sob a ponte opaca. Criar e
+       animar todas as estrelas nesse mesmo frame concorria
+       com a revelação. Agora a celebração começa logo depois,
+       quando o compositor já terminou a troca de tela.
+       ----------------------------------------------------- */
+
+    function startConfetti() {
+      if (
+        confetti ||
+        !screen.isConnected
+      ) {
+        return;
+      }
+
+      confettiTimer = window.setTimeout(
+        function () {
+          confettiTimer = null;
+
+          if (
+            confetti ||
+            !screen.isConnected
+          ) {
+            return;
+          }
+
+          confetti = createStarConfetti(
+            screen,
+            options
+          );
+
+          if (activeInstance?.screen === screen) {
+            activeInstance.confetti = confetti;
+          }
+        },
+        90
+      );
+    }
+
+    if (
+      window.DuduQTransition?.isActive?.()
+    ) {
+      transitionCompleteHandler = function () {
+        transitionCompleteHandler = null;
+        startConfetti();
+      };
+
+      window.addEventListener(
+        "duduq:transition-complete",
+        transitionCompleteHandler,
+        { once: true }
+      );
+    } else {
+      window.requestAnimationFrame(startConfetti);
+    }
+
+    /* -----------------------------------------------------
        FOCO
        ----------------------------------------------------- */
 
@@ -811,6 +867,19 @@
 
       destroy:
         function () {
+          if (confettiTimer !== null) {
+            window.clearTimeout(confettiTimer);
+            confettiTimer = null;
+          }
+
+          if (transitionCompleteHandler) {
+            window.removeEventListener(
+              "duduq:transition-complete",
+              transitionCompleteHandler
+            );
+            transitionCompleteHandler = null;
+          }
+
           if (
             screen.parentNode
           ) {
