@@ -1,7 +1,13 @@
 /* =========================================================
    DUDUQ CORE — HOST
    Orquestrador central das mecânicas e módulos DuduQ.
-   Versão 1.5.5
+   Versão 1.5.6
+
+   NOVIDADES 1.5.6
+   - sincroniza cache com World Fusion 1.2.6 / JS 1.2.5
+   - encurta a ponte visual para reduzir o instante de cenário sozinho
+   - mantém espera de prontidão do iframe para não revelar conteúdo incompleto
+   - preserva shell/background e a conclusão em uma única transição curta
 
    NOVIDADES 1.5.5
    - sincroniza cache com World Fusion 1.2.5 / JS 1.2.4
@@ -31,7 +37,7 @@
     document.currentScript?.src ||
     new URL("./duduq-host.js", window.location.href).href;
 
-  const VERSION = "1.5.5";
+  const VERSION = "1.5.6";
 
   if (
     window.DuduQ &&
@@ -136,15 +142,15 @@
   );
 
   const TRANSITION_OPTIONS = Object.freeze({
-    coverDurationMs: 160,
-    revealDurationMs: 190,
+    coverDurationMs: 145,
+    revealDurationMs: 170,
     paintFrames: 1,
     bridgeHoldMs: 0,
     soundEnabled: false
   });
 
-  const VIEW_READY_TIMEOUT_MS = 650;
-  const POST_LOAD_SETTLE_MS = 30;
+  const VIEW_READY_TIMEOUT_MS = 600;
+  const POST_LOAD_SETTLE_MS = 24;
 
 
   /* =======================================================
@@ -162,7 +168,7 @@
       link.id = "duduq-world-fusion-core-style";
       link.rel = "stylesheet";
       link.href = new URL(
-        "duduq-world-fusion.css?v=125",
+        "duduq-world-fusion.css?v=126",
         coreBase
       ).href;
       (document.head || document.documentElement).appendChild(link);
@@ -175,7 +181,7 @@
       const script = document.createElement("script");
       script.id = "duduq-world-fusion-core-script";
       script.src = new URL(
-        "duduq-world-fusion.js?v=124",
+        "duduq-world-fusion.js?v=125",
         coreBase
       ).href;
       script.async = true;
@@ -1419,11 +1425,11 @@
       },
       {
         coverDurationMs: isFinalStep
-          ? 150
+          ? 140
           : TRANSITION_OPTIONS.coverDurationMs,
 
         revealDurationMs: isFinalStep
-          ? 180
+          ? 160
           : TRANSITION_OPTIONS.revealDurationMs,
 
         paintFrames: 1,
