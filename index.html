@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>DuduQ Engine — Teste Router Inteligente</title>
+  <title>DuduQ Engine — English — Year 1 — Module 01</title>
 
   <!-- =====================================================
        ESTILOS CORE.
@@ -46,279 +46,392 @@
   <!-- Router carregado depois das mecânicas -->
   <script src="./core/duduq-router.js?v=100"></script>
 
+  <!-- Conteúdo oficial: Inglês — 1º ano — Módulo 01 -->
+  <script src="./content/english/year-1/module-01/module-01.js?v=100"></script>
+
   <script>
-    window.addEventListener("DOMContentLoaded", function () {
-      const root = document.getElementById("root");
+    window.addEventListener(
+      "DOMContentLoaded",
+      function () {
+        const root =
+          document.getElementById("root");
 
-      /* ===============================================
-         VERIFICAÇÕES DO CORE
-         =============================================== */
-      if (!window.DuduQIntro) {
-        root.innerHTML = "Erro: DuduQ Intro não foi carregado.";
-        return;
-      }
+        /* ===============================================
+           VERIFICAÇÕES DO CORE
+           =============================================== */
 
-      if (!window.DuduQWorldFusion) {
-        root.innerHTML = "Erro: DuduQ World Fusion não foi carregado.";
-        return;
-      }
+        const requiredGlobals = [
+          ["DuduQIntro", "DuduQ Intro"],
+          ["DuduQWorldFusion", "DuduQ World Fusion"],
+          ["DuduQSchema", "DuduQ Schema"],
+          ["DuduQCompletion", "DuduQ Completion"],
+          ["DuduQTransition", "DuduQ Transition"],
+          ["DuduQ", "DuduQ Host"],
+          ["DuduQProgressUI", "DuduQ Progress UI"],
+          ["DuduQRouter", "DuduQ Router"]
+        ];
 
-      if (!window.DuduQSchema) {
-        root.innerHTML = "Erro: DuduQ Schema não foi carregado.";
-        return;
-      }
+        for (
+          const [
+            globalName,
+            label
+          ] of requiredGlobals
+        ) {
+          if (!window[globalName]) {
+            root.textContent =
+              `Erro: ${label} não foi carregado.`;
 
-      if (!window.DuduQCompletion) {
-        root.innerHTML = "Erro: DuduQ Completion não foi carregado.";
-        return;
-      }
-
-      if (!window.DuduQTransition) {
-        root.innerHTML = "Erro: DuduQ Transition não foi carregado.";
-        return;
-      }
-
-      if (!window.DuduQ) {
-        root.innerHTML = "Erro: DuduQ Host não foi carregado.";
-        return;
-      }
-
-      if (!window.DuduQProgressUI) {
-        root.innerHTML = "Erro: DuduQ Progress UI não foi carregado.";
-        return;
-      }
-
-      if (!window.DuduQRouter) {
-        root.innerHTML = "Erro: DuduQ Router não foi carregado.";
-        return;
-      }
-
-      /* ===============================================
-         VERIFICAÇÕES DAS MECÂNICAS
-         =============================================== */
-      if (!window.DuduQ.hasMechanic("bubble-pop")) {
-        root.innerHTML = "Erro: Bubble Pop não foi registrado.";
-        return;
-      }
-
-      if (!window.DuduQ.hasMechanic("drag-drop")) {
-        root.innerHTML = "Erro: Drag & Drop não foi registrado.";
-        return;
-      }
-
-      console.info("[DuduQ Core Test]", {
-        intro: window.DuduQIntro.version,
-        worldFusion: window.DuduQWorldFusion.version,
-        transition: window.DuduQTransition.version,
-        schema: window.DuduQSchema.version,
-        completion: window.DuduQCompletion.version,
-        host: window.DuduQ.version,
-        progressUI: window.DuduQProgressUI.version,
-        bubblePop: window.DuduQ.getMechanic("bubble-pop")?.version,
-        dragDrop: window.DuduQ.getMechanic("drag-drop")?.version,
-        router: window.DuduQRouter.version
-      });
-
-      /* ===============================================
-         QUESTÃO 1 — Bubble Pop
-         =============================================== */
-      const questionBlue = {
-        id: "router-blue-01",
-        subject: "Língua Inglesa",
-        year: 1,
-        module: 1,
-        skill: {
-          code: "COLOR-RECOGNITION-01",
-          description: "Reconhecer vocabulário básico de cores em língua inglesa."
-        },
-        difficulty: "easy",
-        statement: "Blue",
-        instruction: "Escolha Blue.",
-        contentLanguage: "en",
-        instructionLanguage: "pt-BR",
-        feedbackLanguage: "pt-BR",
-        alternatives: [
-          { id: "blue", text: "Blue", metadata: { tone: "blue" } },
-          { id: "red", text: "Red", metadata: { tone: "pink" } },
-          { id: "green", text: "Green", metadata: { tone: "green" } },
-          { id: "yellow", text: "Yellow", metadata: { tone: "yellow" } }
-        ],
-        answer: {
-          type: "single",
-          value: "blue"
-        },
-        feedback: {
-          correct: "Muito bem! Blue está correto.",
-          incorrect: "Observe novamente e tente outra opção.",
-          language: "pt-BR"
-        },
-        delivery: {
-          mechanic: "auto",
-          allowImage: true,
-          allowAudio: true
+            return;
+          }
         }
-      };
 
-      /* ===============================================
-         QUESTÃO 2 — Drag & Drop
-         =============================================== */
-      const questionCategories = {
-        id: "router-categories-02",
-        subject: "Língua Inglesa",
-        year: 1,
-        module: 1,
-        skill: {
-          code: "VOCAB-CATEGORIES-01",
-          description: "Classificar vocabulário básico em língua inglesa por categoria semântica."
-        },
-        difficulty: "easy",
-        statement: "Animals and Fruits",
-        instruction: "Arraste cada palavra para a categoria correta.",
-        contentLanguage: "en",
-        instructionLanguage: "pt-BR",
-        feedbackLanguage: "pt-BR",
-        alternatives: [
-          { id: "dog", text: "DOG" },
-          { id: "apple", text: "APPLE" },
-          { id: "cat", text: "CAT" },
-          { id: "banana", text: "BANANA" }
-        ],
-        answer: {
-          type: "pairs",
-          value: [
-            { source: "dog", target: "animals" },
-            { source: "cat", target: "animals" },
-            { source: "apple", target: "fruits" },
-            { source: "banana", target: "fruits" }
-          ]
-        },
-        feedback: {
-          correct: "Excelente! Todos os itens estão na categoria correta.",
-          incorrect: "Observe as categorias e tente novamente.",
-          language: "pt-BR"
-        },
-        delivery: {
-          mechanic: "auto",
-          allowImage: true,
-          allowAudio: true
-        },
-        metadata: {
-          title: "Animals and Fruits",
-          layout: "categories",
-          shuffleItems: true,
-          shuffleTargets: false,
-          estimatedSeconds: 45,
-          targets: [
-            { id: "animals", label: "ANIMALS" },
-            { id: "fruits", label: "FRUITS" }
-          ]
+        /* ===============================================
+           VERIFICAÇÕES DAS MECÂNICAS PUBLICADAS
+           =============================================== */
+
+        const requiredMechanics = [
+          "bubble-pop",
+          "drag-drop"
+        ];
+
+        for (
+          const mechanicId
+          of requiredMechanics
+        ) {
+          if (
+            !window.DuduQ
+              .hasMechanic(
+                mechanicId
+              )
+          ) {
+            root.textContent =
+              `Erro: a mecânica "${mechanicId}" não foi registrada.`;
+
+            return;
+          }
         }
-      };
 
-      /* ===============================================
-         ROUTER DECIDE
-         =============================================== */
-      const blueDecision = window.DuduQRouter.select(questionBlue);
-      const categoriesDecision = window.DuduQRouter.select(questionCategories);
+        /* ===============================================
+           CONTEÚDO OFICIAL
+           =============================================== */
 
-      console.info("[DuduQ Router Test] Blue:", blueDecision);
-      console.info("[DuduQ Router Test] Categories:", categoriesDecision);
+        const moduleDefinition =
+          window.DUDUQ_CONTENT
+            ?.english
+            ?.year1
+            ?.module01;
 
-      if (!blueDecision.selected) {
-        root.innerHTML = "Erro: Router não encontrou mecânica para Blue.";
-        return;
-      }
+        if (!moduleDefinition) {
+          root.textContent =
+            "Erro: o conteúdo English Year 1 Module 01 não foi carregado.";
 
-      if (!categoriesDecision.selected) {
-        root.innerHTML = "Erro: Router não encontrou mecânica para Categories.";
-        return;
-      }
+          return;
+        }
 
-      if (blueDecision.selected.mechanicId !== "bubble-pop") {
-        root.innerHTML = "Erro: Router deveria selecionar Bubble Pop para Blue.";
-        console.error("[DuduQ Router Test] Seleção inesperada:", blueDecision);
-        return;
-      }
+        if (
+          !Array.isArray(
+            moduleDefinition.activities
+          ) ||
+          moduleDefinition
+            .activities
+            .length === 0
+        ) {
+          root.textContent =
+            "Erro: o Módulo 01 não possui atividades.";
 
-      if (categoriesDecision.selected.mechanicId !== "drag-drop") {
-        root.innerHTML = "Erro: Router deveria selecionar Drag & Drop para Categories.";
-        console.error("[DuduQ Router Test] Seleção inesperada:", categoriesDecision);
-        return;
-      }
+          return;
+        }
 
-      console.info("[DuduQ Router Test] SUCESSO", {
-        etapa1: blueDecision.selected.mechanicId,
-        etapa2: categoriesDecision.selected.mechanicId
-      });
+        /* ===============================================
+           CONTEÚDO -> STEPS DO HOST
 
-      /* ===============================================
-         INICIA O MÓDULO
-         =============================================== */
-      function startModule() {
-        window.DuduQ.start({
-          id: "teste-router-inteligente-1ano",
-          year: 1,
-          subject: "Língua Inglesa",
-          module: 1,
-          container: "#root",
-          steps: [
-            {
-              id: "router-step-blue",
-              mechanic: blueDecision.selected.mechanicId,
-              payload: {
-                id: "router-blue-activity",
-                title: "Colors",
-                subject: "Língua Inglesa",
-                year: 1,
-                module: 1,
-                questions: [questionBlue]
+           O conteúdo publicado declara a mecânica desejada.
+           O Router continua sendo usado como VALIDADOR:
+           todas as questões precisam ser compatíveis com
+           a mecânica declarada antes de iniciar a missão.
+           =============================================== */
+
+        const steps = [];
+
+        for (
+          let activityIndex = 0;
+          activityIndex <
+            moduleDefinition
+              .activities
+              .length;
+          activityIndex += 1
+        ) {
+          const activity =
+            moduleDefinition
+              .activities[
+                activityIndex
+              ];
+
+          const questions =
+            Array.isArray(
+              activity.questions
+            )
+              ? activity.questions
+              : [];
+
+          if (
+            !activity.id ||
+            !activity.title ||
+            !activity.mechanic ||
+            questions.length === 0
+          ) {
+            root.textContent =
+              `Erro: atividade ${activityIndex + 1} incompleta no Módulo 01.`;
+
+            return;
+          }
+
+          const decisions =
+            questions.map(
+              function (
+                question,
+                questionIndex
+              ) {
+                const decision =
+                  window.DuduQRouter
+                    .select(
+                      question,
+                      questionIndex,
+                      {
+                        subject:
+                          moduleDefinition
+                            .subject,
+
+                        year:
+                          moduleDefinition
+                            .year,
+
+                        module:
+                          moduleDefinition
+                            .module
+                      }
+                    );
+
+                return {
+                  question,
+                  decision
+                };
               }
+            );
+
+          const invalidDecision =
+            decisions.find(
+              function (entry) {
+                return (
+                  !entry
+                    .decision
+                    ?.selected ||
+                  entry
+                    .decision
+                    .selected
+                    .mechanicId !==
+                    activity.mechanic
+                );
+              }
+            );
+
+          if (invalidDecision) {
+            console.error(
+              "[DuduQ Content] Atividade incompatível com a mecânica declarada:",
+              {
+                activity,
+                decision:
+                  invalidDecision
+                    .decision,
+                question:
+                  invalidDecision
+                    .question
+              }
+            );
+
+            root.textContent =
+              `Erro: "${activity.title}" não é compatível com "${activity.mechanic}".`;
+
+            return;
+          }
+
+          steps.push({
+            id: activity.id,
+            mechanic:
+              activity.mechanic,
+
+            payload: {
+              id:
+                `${activity.id}-payload`,
+
+              title:
+                activity.title,
+
+              subject:
+                moduleDefinition
+                  .subject,
+
+              year:
+                moduleDefinition
+                  .year,
+
+              module:
+                moduleDefinition
+                  .module,
+
+              questions
             },
-            {
-              id: "router-step-categories",
-              mechanic: categoriesDecision.selected.mechanicId,
-              payload: {
-                id: "router-categories-activity",
-                title: "Animals and Fruits",
-                subject: "Língua Inglesa",
-                year: 1,
-                module: 1,
-                questions: [questionCategories]
-              }
+
+            options: {
+              contentVersion:
+                moduleDefinition
+                  .version,
+
+              skill:
+                activity.skill ||
+                null
             }
-          ]
+          });
+        }
+
+        console.info(
+          "[DuduQ Content Production]",
+          {
+            module:
+              moduleDefinition.id,
+
+            version:
+              moduleDefinition.version,
+
+            activities:
+              steps.length,
+
+            mechanics:
+              steps.map(
+                function (step) {
+                  return step.mechanic;
+                }
+              )
+          }
+        );
+
+        /* ===============================================
+           INICIA O MÓDULO
+           =============================================== */
+
+        function startModule() {
+          window.DuduQ.start({
+            id:
+              moduleDefinition.id,
+
+            title:
+              moduleDefinition.title,
+
+            year:
+              moduleDefinition.year,
+
+            subject:
+              moduleDefinition
+                .subject,
+
+            module:
+              moduleDefinition
+                .module,
+
+            container:
+              "#root",
+
+            steps
+          });
+        }
+
+        /* ===============================================
+           INTRO CINEMATOGRÁFICA
+           =============================================== */
+
+        root.innerHTML = "";
+
+        const intro =
+          moduleDefinition.intro ||
+          {};
+
+        window.DuduQIntro.show({
+          companyKicker:
+            intro.companyKicker ||
+            "UMA CRIAÇÃO DE",
+
+          companyWidth:
+            intro.companyWidth ||
+            820,
+
+          collectionLogo:
+            intro.collectionLogo ||
+            "",
+
+          collectionName:
+            intro.collectionName ||
+            "EduQ Play",
+
+          collectionAlt:
+            intro.collectionAlt ||
+            "EduQ Play",
+
+          collectionWidth:
+            intro.collectionWidth ||
+            760,
+
+          year:
+            moduleDefinition.year,
+
+          subject:
+            moduleDefinition
+              .subject,
+
+          module:
+            moduleDefinition
+              .module,
+
+          loadingLabel:
+            intro.loadingLabel ||
+            "PREPARANDO SUA MISSÃO",
+
+          readyLabel:
+            intro.readyLabel ||
+            "MISSÃO PRONTA",
+
+          startLabel:
+            intro.startLabel ||
+            "INICIAR MISSÃO",
+
+          hint:
+            intro.hint ||
+            "Tudo pronto para começar!",
+
+          minDurationMs:
+            intro.minDurationMs ??
+            2200,
+
+          brandingDurationMs:
+            intro.brandingDurationMs ??
+            3000,
+
+          switchingDurationMs:
+            intro.switchingDurationMs ??
+            760,
+
+          missionMinDurationMs:
+            intro.missionMinDurationMs ??
+            1200,
+
+          sparkCount:
+            intro.sparkCount ??
+            14,
+
+          onStart:
+            startModule
         });
       }
-
-      /* ===============================================
-         INTRO CINEMATOGRÁFICA AAA+
-         =============================================== */
-      root.innerHTML = "";
-
-      window.DuduQIntro.show({
-        companyKicker: "UMA CRIAÇÃO DE",
-        companyWidth: 820,
-        collectionLogo: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Logo%20EduQ%20Play.png",
-        collectionName: "EduQ Play",
-        collectionAlt: "EduQ Play",
-        collectionWidth: 760,
-        year: 1,
-        subject: "Língua Inglesa",
-        module: 1,
-        loadingLabel: "PREPARANDO SUA MISSÃO",
-        readyLabel: "MISSÃO PRONTA",
-        startLabel: "INICIAR MISSÃO",
-        hint: "Tudo pronto para começar!",
-        minDurationMs: 2200,
-        brandingDurationMs: 3000,
-        switchingDurationMs: 760,
-        missionMinDurationMs: 1200,
-        sparkCount: 14,
-        onStart: function () {
-          startModule();
-        }
-      });
-    });
+    );
   </script>
 </body>
 </html>
