@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ MECHANIC — BUBBLE POP
    Adaptador da mecânica Bubble Pop para o Schema DuduQ.
-   Versão 1.2.0
+   Versão 1.2.1
    ========================================================= */
 
 (function () {
@@ -13,7 +13,7 @@
   }
 
   const MECHANIC_ID = "bubble-pop";
-  const VERSION = "1.2.0";
+  const VERSION = "1.2.1";
   const TONES = ["blue", "pink", "green", "yellow", "purple", "orange", "aqua"];
 
   /* =======================================================
