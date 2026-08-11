@@ -1,22 +1,22 @@
 /* =========================================================
    DUDUQ CORE — TRANSITION
    Ponte visual opaca entre telas e mecânicas.
-   Versão 1.6.1
+   Versão 1.6.2
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.6.1";
+  const VERSION = "1.6.2";
   if (window.DuduQTransition?.version === VERSION) return;
 
   const DEFAULTS = Object.freeze({
-    coverDurationMs: 160,
-    revealDurationMs: 190,
+    coverDurationMs: 145,
+    revealDurationMs: 170,
     paintFrames: 1,
     bridgeHoldMs: 0,
-    visualReadyTimeoutMs: 650,
-    visualReadyPollMs: 32,
+    visualReadyTimeoutMs: 600,
+    visualReadyPollMs: 28,
     targetSelector: "#root",
     soundEnabled: false,
     soundName: "transition-swoosh",
