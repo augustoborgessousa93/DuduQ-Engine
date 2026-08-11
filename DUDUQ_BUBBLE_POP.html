@@ -2111,7 +2111,7 @@ var DuduQBubblePop = (() => {
           },
           selectedItemIsPlaced ? "Devolver item selecionado" : "Op\xE7\xF5es"
         ),
-        /* @__PURE__ */ react_global_shim_default.createElement("div", { className: "duduq-dd-pool-items" }, unplacedItems.map((item) => renderItem(item, false)), unplacedItems.length === 0 ? /* @__PURE__ */ react_global_shim_default.createElement("span", { className: "duduq-dd-empty-note" }, "Pronto para confirmar.") : null)
+        /* @__PURE__ */ react_global_shim_default.createElement("div", { className: "duduq-dd-pool-items" }, unplacedItems.map((item) => renderItem(item, false)), unplacedItems.length === 0 && feedbackState === "idle" ? /* @__PURE__ */ react_global_shim_default.createElement("span", { className: "duduq-dd-empty-note" }, "Pronto para confirmar.") : null)
       )),
       /* @__PURE__ */ react_global_shim_default.createElement(
         "div",
@@ -3196,6 +3196,18 @@ var DuduQBubblePop = (() => {
     const currentStep = enabledSteps[currentStepIndex];
     const currentContent = currentStep ? contents[currentStep.contentId] : void 0;
     const runtimePhase = lessonComplete ? "complete" : paused ? "paused" : transitionState ? "transitioning" : feedbackState === "success" ? "success" : feedbackState === "retry" ? "retry" : "playing";
+    const hostedByDuduQ = typeof window !== "undefined" && Boolean(window.DuduQBubblePopBridge);
+    useEffect(() => {
+      if (typeof Image === "undefined") return;
+      Object.values(mascotAssets || {}).forEach((asset) => {
+        const source = typeof asset === "string" ? asset : asset?.src;
+        if (!source) return;
+        const image = new Image();
+        image.decoding = "async";
+        image.src = source;
+        image.decode?.().catch(() => {});
+      });
+    }, [mascotAssets]);
     const displayStepIndex = transitionState?.targetIndex ?? currentStepIndex;
     const visualCompletedStepIds = useMemo(() => {
       if (lessonComplete) return enabledSteps.map((step) => step.id);
@@ -3270,18 +3282,30 @@ var DuduQBubblePop = (() => {
     );
     useEffect(() => {
       if (typeof document === "undefined") return void 0;
-      const syncFullscreenState = () => setFullscreenActive(Boolean(document.fullscreenElement));
-      document.addEventListener("fullscreenchange", syncFullscreenState);
+      let fullscreenDocument = document;
+      try {
+        if (window.parent !== window && window.parent.document) {
+          fullscreenDocument = window.parent.document;
+        }
+      } catch (_) {}
+      const syncFullscreenState = () => setFullscreenActive(Boolean(fullscreenDocument.fullscreenElement));
+      fullscreenDocument.addEventListener("fullscreenchange", syncFullscreenState);
       syncFullscreenState();
-      return () => document.removeEventListener("fullscreenchange", syncFullscreenState);
+      return () => fullscreenDocument.removeEventListener("fullscreenchange", syncFullscreenState);
     }, []);
     const toggleFullscreen = useCallback(async () => {
       if (typeof document === "undefined") return;
+      let fullscreenDocument = document;
       try {
-        if (document.fullscreenElement) {
-          await document.exitFullscreen?.();
+        if (window.parent !== window && window.parent.document) {
+          fullscreenDocument = window.parent.document;
+        }
+      } catch (_) {}
+      try {
+        if (fullscreenDocument.fullscreenElement) {
+          await fullscreenDocument.exitFullscreen?.();
         } else {
-          await document.documentElement.requestFullscreen?.({ navigationUI: "hide" });
+          await fullscreenDocument.documentElement.requestFullscreen?.({ navigationUI: "hide" });
         }
       } catch (error) {
         console.warn("Não foi possível alternar o modo de tela cheia.", error);
@@ -3495,20 +3519,6 @@ var DuduQBubblePop = (() => {
       lesson.navigationPolicy.advanceMode
     ]);
     useEffect(() => {
-      if (feedbackState === "idle" || paused || transitionState) return;
-      if (feedbackState === "retry" && currentContent?.renderer === "bubble-pop") return;
-      feedbackRef.current?.scrollIntoView({
-        behavior: effectiveReducedMotion ? "auto" : "smooth",
-        block: "nearest"
-      });
-    }, [
-      currentContent,
-      effectiveReducedMotion,
-      feedbackState,
-      paused,
-      transitionState
-    ]);
-    useEffect(() => {
       if (transitionState || lessonComplete || !currentStep) return;
       stageRef.current?.focus({ preventScroll: true });
     }, [currentStep, lessonComplete, transitionState]);
@@ -3580,10 +3590,10 @@ var DuduQBubblePop = (() => {
         "div",
         {
           className: "duduq-engine-header-mascot-slot",
-          "data-visible": runtimePhase === "playing",
-          "aria-hidden": runtimePhase !== "playing"
+          "data-visible": runtimePhase !== "complete" || hostedByDuduQ,
+          "aria-hidden": runtimePhase === "complete" && !hostedByDuduQ
         },
-        runtimePhase === "playing" ? /* @__PURE__ */ react_global_shim_default.createElement(
+        runtimePhase !== "complete" || hostedByDuduQ ? /* @__PURE__ */ react_global_shim_default.createElement(
           DuduQMascot,
           {
             state: "idle",
@@ -3622,7 +3632,7 @@ var DuduQBubblePop = (() => {
           showLabel: gamification.showProgressLabel,
           reducedMotion: effectiveReducedMotion
         }
-      ) : null), lessonComplete ? /* @__PURE__ */ react_global_shim_default.createElement("section", { className: "duduq-engine-complete", role: "status" }, /* @__PURE__ */ react_global_shim_default.createElement("div", { className: "duduq-engine-complete-hero" }, /* @__PURE__ */ react_global_shim_default.createElement(
+      ) : null), lessonComplete && !hostedByDuduQ ? /* @__PURE__ */ react_global_shim_default.createElement("section", { className: "duduq-engine-complete", role: "status" }, /* @__PURE__ */ react_global_shim_default.createElement("div", { className: "duduq-engine-complete-hero" }, /* @__PURE__ */ react_global_shim_default.createElement(
         DuduQMascot,
         {
           state: "complete",
@@ -12842,6 +12852,208 @@ var DuduQBubblePop = (() => {
   .duduq-engine-stage .duduq-ts-instruction h2 {
     font-size: clamp(18px, 5vw, 22px) !important;
     font-weight: 800 !important;
+  }
+}
+</style>
+
+ 
+<style id="duduq-premium-stability-v2">
+/* =====================================================================
+   DUDUQ PREMIUM STABILITY V2
+   Grade 100dvh, feedback reservado e superfícies com maior legibilidade.
+   ===================================================================== */
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  min-height: 100dvh;
+  overflow: hidden !important;
+}
+
+.duduq-engine-root {
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  overflow: hidden !important;
+  padding:
+    clamp(8px, 1.8vh, 18px)
+    clamp(12px, 2.4vw, 24px)
+    8px !important;
+}
+
+.duduq-engine-shell {
+  height: 100% !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) 104px !important;
+  align-content: stretch !important;
+  row-gap: 16px !important;
+  overflow: hidden !important;
+}
+
+.duduq-engine-header {
+  margin-bottom: 0 !important;
+}
+
+.duduq-engine-stage {
+  width: 100%;
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.duduq-engine-feedback {
+  align-self: end;
+  width: min(840px, calc(100% - 24px)) !important;
+  height: 104px !important;
+  min-height: 104px !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  place-items: center;
+  overflow: visible;
+  scroll-margin: 0 !important;
+}
+
+.duduq-engine-feedback[data-state="idle"] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.duduq-engine-feedback-card,
+.duduq-engine-feedback[data-state="success"] .duduq-engine-feedback-card,
+.duduq-engine-feedback[data-state="retry"] .duduq-engine-feedback-card {
+  width: 100% !important;
+  min-height: 88px !important;
+  max-height: 100px;
+  grid-template-columns: 68px minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 8px 16px !important;
+  border-radius: 22px !important;
+}
+
+.duduq-engine-feedback .duduq-mascot[data-size="feedback"] {
+  width: 68px !important;
+  height: 68px !important;
+}
+
+.duduq-engine-feedback-copy {
+  align-self: center;
+  gap: 2px !important;
+}
+
+.duduq-engine-advancing {
+  justify-self: end;
+  align-self: center;
+  min-width: max-content;
+}
+
+.duduq-engine-stage
+  :is(.duduq-dd-target, .duduq-udd-target) {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(247, 253, 255, .70),
+      rgba(236, 248, 252, .54)
+    ) !important;
+  -webkit-backdrop-filter: blur(4px) saturate(1.02);
+  backdrop-filter: blur(4px) saturate(1.02);
+}
+
+.duduq-engine-stage
+  :is(.duduq-dd-target, .duduq-udd-target):nth-child(even) {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 250, 237, .72),
+      rgba(252, 241, 216, .56)
+    ) !important;
+}
+
+.duduq-engine-stage
+  :is(.duduq-dd-pool, .duduq-udd-pool) {
+  background: rgba(248, 252, 255, .68) !important;
+  -webkit-backdrop-filter: blur(5px) saturate(1.02);
+  backdrop-filter: blur(5px) saturate(1.02);
+}
+
+.duduq-engine-stage .duduq-bp-arena {
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(247, 253, 255, .30),
+      rgba(232, 247, 253, .18) 64%
+    ) !important;
+}
+
+@media (max-height: 760px) and (min-width: 721px) {
+  .duduq-engine-root {
+    padding-top: 8px !important;
+  }
+
+  .duduq-engine-shell {
+    grid-template-rows: auto minmax(0, 1fr) 96px !important;
+    row-gap: 12px !important;
+  }
+
+  .duduq-engine-header {
+    min-height: 72px !important;
+    padding-block: 8px !important;
+  }
+
+  .duduq-engine-feedback {
+    height: 96px !important;
+    min-height: 96px !important;
+  }
+
+  .duduq-engine-feedback-card,
+  .duduq-engine-feedback[data-state="success"] .duduq-engine-feedback-card,
+  .duduq-engine-feedback[data-state="retry"] .duduq-engine-feedback-card {
+    min-height: 82px !important;
+    max-height: 92px;
+  }
+}
+
+@media (max-width: 720px) {
+  .duduq-engine-root {
+    padding: 8px !important;
+  }
+
+  .duduq-engine-shell {
+    grid-template-rows: auto minmax(0, 1fr) 92px !important;
+    row-gap: 10px !important;
+  }
+
+  .duduq-engine-feedback {
+    width: calc(100% - 8px) !important;
+    height: 92px !important;
+    min-height: 92px !important;
+  }
+
+  .duduq-engine-feedback-card,
+  .duduq-engine-feedback[data-state="success"] .duduq-engine-feedback-card,
+  .duduq-engine-feedback[data-state="retry"] .duduq-engine-feedback-card {
+    min-height: 80px !important;
+    max-height: 88px;
+    grid-template-columns: 56px minmax(0, 1fr) !important;
+    padding: 7px 12px !important;
+  }
+
+  .duduq-engine-feedback .duduq-mascot[data-size="feedback"] {
+    width: 56px !important;
+    height: 56px !important;
+  }
+
+  .duduq-engine-advancing,
+  .duduq-engine-feedback-action {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .duduq-engine-feedback,
+  .duduq-engine-feedback-card {
+    scroll-behavior: auto !important;
   }
 }
 </style>
