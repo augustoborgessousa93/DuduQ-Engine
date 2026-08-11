@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — TRANSITION
    Ponte visual opaca entre telas e mecânicas.
-   Versão 1.5.0
+   Versão 1.6.0
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.5.0";
+  const VERSION = "1.6.0";
   if (window.DuduQTransition?.version === VERSION) return;
 
   const DEFAULTS = Object.freeze({
@@ -214,18 +214,16 @@
 
   async function animateOverlay(from, to, duration, direction) {
     const node = ensureRoot();
-    const fromScale = direction === "cover" ? 1.01 : 1.035;
-    const toScale = direction === "cover" ? 1.035 : 1.01;
 
     node.style.opacity = String(from);
-    node.style.transform = `translateZ(0) scale(${fromScale})`;
+    node.style.transform = "translateZ(0)";
 
     if (typeof node.animate === "function") {
       try {
         const animation = node.animate(
           [
-            { opacity: from, transform: `translateZ(0) scale(${fromScale})` },
-            { opacity: to, transform: `translateZ(0) scale(${toScale})` }
+            { opacity: from },
+            { opacity: to }
           ],
           {
             duration,
@@ -239,17 +237,14 @@
 
         await animation.finished.catch(() => true);
         node.style.opacity = String(to);
-        node.style.transform = `translateZ(0) scale(${toScale})`;
         animation.cancel();
         return;
       } catch (_) {}
     }
 
-    node.style.transition =
-      `opacity ${duration}ms ease, transform ${duration}ms ease`;
+    node.style.transition = `opacity ${duration}ms ease`;
     node.getBoundingClientRect();
     node.style.opacity = String(to);
-    node.style.transform = `translateZ(0) scale(${toScale})`;
     await wait(duration + 40);
     node.style.transition = "";
   }
@@ -445,4 +440,3 @@
   window.addEventListener("duduq:assets-ready", primeWorldBridge);
   dispatch("duduq:transition-ready", { ready: true });
 })();
-
