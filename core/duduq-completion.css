@@ -2,7 +2,7 @@
    DUDUQ CORE — COMPLETION
    Tela final premium DuduQ
    Compatível com duduq-completion.js 1.0.0
-   Versão 1.2.5
+   Versão 1.2.7
    ========================================================= */
 
 
@@ -147,7 +147,7 @@
   position: relative;
   z-index: 4;
 
-  width: min(680px, 94vw);
+  width: min(740px, 94vw);
   min-height: 0;
 
   display: flex;
@@ -161,8 +161,8 @@
 
   padding:
     68px
-    clamp(26px, 5vw, 52px)
-    24px;
+    clamp(30px, 5vw, 58px)
+    34px;
 
   overflow: visible;
 
@@ -370,7 +370,7 @@
   max-width: 620px;
 
   margin:
-    0 0 7px;
+    0 0 16px;
 
   color:
     var(--duduq-completion-blue);
@@ -461,7 +461,7 @@
 
   margin:
     0 0
-    13px;
+    20px;
 
   padding:
     7px
@@ -561,7 +561,7 @@
   position: relative;
   z-index: 5;
 
-  width: min(390px, 100%);
+  width: min(410px, 100%);
 
   display: flex;
   flex-direction: column;
@@ -592,7 +592,7 @@
   -webkit-appearance: none;
 
   width: 100%;
-  min-height: 56px;
+  min-height: 58px;
 
   display: inline-flex;
   align-items: center;
@@ -1046,15 +1046,15 @@
 
   .duduq-completion-card {
     width:
-      min(650px, 95vw);
+      min(690px, 95vw);
 
     margin-top:
       58px;
 
     padding:
-      62px
-      27px
-      24px;
+      64px
+      30px
+      30px;
 
     border-radius:
       30px;
@@ -1111,9 +1111,9 @@
       0;
 
     padding:
-      60px
+      62px
       18px
-      22px;
+      26px;
 
     border-radius:
       28px;
@@ -1224,9 +1224,9 @@
     gap: 0;
 
     padding:
-      50px
-      40px
-      20px;
+      58px
+      44px
+      28px;
   }
 
   .duduq-completion-hero {
@@ -1267,7 +1267,7 @@
   }
 
   .duduq-completion-button {
-    min-height: 50px;
+    min-height: 54px;
   }
 }
 
