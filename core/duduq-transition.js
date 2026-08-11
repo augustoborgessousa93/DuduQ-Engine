@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — TRANSITION
    Ponte visual opaca entre telas e mecânicas.
-   Versão 1.6.2
+   Versão 1.6.3
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.6.2";
+  const VERSION = "1.6.3";
   if (window.DuduQTransition?.version === VERSION) return;
 
   const DEFAULTS = Object.freeze({
@@ -459,6 +459,81 @@
     node.style.transition = "";
   }
 
+
+  const DUDUQ_MECHANIC_SELECTOR = [
+    ".duduq-bp-root",
+    ".duduq-dd-root",
+    ".duduq-udd-root",
+    ".duduq-mq-root",
+    ".duduq-matching-root",
+    ".duduq-fc-root",
+    ".duduq-cf-root",
+    ".duduq-ws-root",
+    ".duduq-ts-root"
+  ].join(", ");
+
+  function isWorldFusionReady(
+    frameDocument
+  ) {
+    if (!frameDocument?.documentElement) {
+      return false;
+    }
+
+    /*
+     * A ponte só exige World Fusion quando o iframe já
+     * contém uma mecânica DuduQ. Isso evita transformar
+     * a checagem em uma dependência genérica para qualquer iframe.
+     */
+    const mechanicRoot =
+      frameDocument.querySelector(
+        DUDUQ_MECHANIC_SELECTOR
+      );
+
+    if (!mechanicRoot) {
+      return true;
+    }
+
+    const html =
+      frameDocument.documentElement;
+
+    const styleLink =
+      frameDocument.getElementById(
+        "duduq-world-fusion-style"
+      );
+
+    if (
+      !html.classList.contains(
+        "duduq-world-fusion"
+      ) ||
+      !html.getAttribute(
+        "data-duduq-world-fusion-version"
+      ) ||
+      !styleLink ||
+      !styleLink.sheet
+    ) {
+      return false;
+    }
+
+    /*
+     * link.sheet confirma o carregamento do arquivo.
+     * O token calculado confirma que o CSS já entrou no
+     * cascade antes de revelar o iframe.
+     */
+    try {
+      const fusionToken =
+        frameDocument.defaultView
+          ?.getComputedStyle(html)
+          .getPropertyValue(
+            "--duduq-glass-pearl"
+          )
+          .trim();
+
+      return Boolean(fusionToken);
+    } catch (_) {
+      return false;
+    }
+  }
+
   function isIframeVisuallyReady(
     iframe
   ) {
@@ -523,6 +598,14 @@
         if (visible) {
           return false;
         }
+      }
+
+      if (
+        !isWorldFusionReady(
+          frameDocument
+        )
+      ) {
+        return false;
       }
 
       const runtimeRoot =
