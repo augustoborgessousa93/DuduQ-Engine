@@ -1,7 +1,17 @@
 /* =========================================================
    DUDUQ CORE — HOST
    Orquestrador central das mecânicas e módulos DuduQ.
-   Versão 1.5.7
+   Versão 1.5.9
+
+   NOVIDADES 1.5.9
+   - clareia suavemente o cenário sob o desfoque sem roubar contraste das informações
+   - sincroniza cache com World Fusion 1.2.8 / JS 1.2.7 e Transition 1.4.6
+   - rodada exclusivamente visual, sem alterar a lógica do jogo
+
+   NOVIDADES 1.5.8
+   - remove a espera duplicada no restart; a prontidão visual volta a ter um único dono: o Transition
+   - sincroniza cache com Completion 1.2.6, Transition 1.4.5 e Transition JS 1.6.4
+   - melhora a fluidez do caminho JOGAR NOVAMENTE -> primeira mecânica
 
    NOVIDADES 1.5.7
    - sincroniza cache com World Fusion 1.2.7 / JS 1.2.6
@@ -42,7 +52,7 @@
     document.currentScript?.src ||
     new URL("./duduq-host.js", window.location.href).href;
 
-  const VERSION = "1.5.7";
+  const VERSION = "1.5.9";
 
   if (
     window.DuduQ &&
@@ -173,7 +183,7 @@
       link.id = "duduq-world-fusion-core-style";
       link.rel = "stylesheet";
       link.href = new URL(
-        "duduq-world-fusion.css?v=127",
+        "duduq-world-fusion.css?v=128",
         coreBase
       ).href;
       (document.head || document.documentElement).appendChild(link);
@@ -186,7 +196,7 @@
       const script = document.createElement("script");
       script.id = "duduq-world-fusion-core-script";
       script.src = new URL(
-        "duduq-world-fusion.js?v=126",
+        "duduq-world-fusion.js?v=127",
         coreBase
       ).href;
       script.async = true;
@@ -1906,17 +1916,12 @@
 
         renderCurrentStep(session);
 
-        await waitForMountedView(
-          session,
-          {
-            paintFrames: 1,
-            timeoutMs: VIEW_READY_TIMEOUT_MS
-          }
-        );
-
         return true;
       },
       {
+        revealDurationMs: 220,
+        stablePaintFrames: 2,
+        revealHoldFraction: .18,
         soundEnabled: false
       }
     ).catch(
