@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Conteúdo nítido sobre fundo cinematográfico suavizado.
-   Versão 1.2.2
+   Versão 1.2.3
    ========================================================= */
 
 html.duduq-world-fusion {
@@ -130,6 +130,47 @@ html.duduq-world-fusion .duduq-engine-feedback-mascot {
   width: 68px !important;
   height: 68px !important;
   flex: 0 0 68px !important;
+}
+
+/* Estados vazios não devem parecer outro card. A confirmação já comunica a
+   próxima ação; a faixa "pronto" fica apenas como microfeedback compacto. */
+html.duduq-world-fusion .duduq-engine-stage
+  .duduq-dd-pool:has(.duduq-dd-pool-items > .duduq-dd-empty-note) {
+  width: min(520px, 100%) !important;
+  min-height: 44px !important;
+  margin-block: 0 !important;
+  padding: 7px 14px !important;
+  border-radius: 999px !important;
+}
+
+html.duduq-world-fusion .duduq-engine-stage
+  .duduq-dd-pool:has(.duduq-dd-pool-items > .duduq-dd-empty-note)
+  .duduq-dd-pool-head {
+  display: none !important;
+}
+
+html.duduq-world-fusion .duduq-engine-stage
+  .duduq-dd-pool:has(.duduq-dd-pool-items > .duduq-dd-empty-note)
+  .duduq-dd-pool-items {
+  min-height: 28px !important;
+  padding: 0 !important;
+}
+
+html.duduq-world-fusion .duduq-engine-stage
+  .duduq-dd-pool:has(.duduq-dd-pool-items > .duduq-dd-empty-note)
+  .duduq-dd-empty-note {
+  font-size: .84rem !important;
+}
+
+/* Após confirmar, não há razão para manter a bandeja vazia. O feedback
+   reservado é a única mensagem exibida abaixo do tabuleiro. */
+html.duduq-world-fusion .duduq-engine-shell:has(
+  .duduq-engine-feedback[data-state="success"]
+) .duduq-engine-stage :is(
+  .duduq-dd-pool,
+  .duduq-udd-pool[data-empty="true"]
+) {
+  display: none !important;
 }
 
 /* Conteúdo principal: superfícies leves, sem placas coladas. */
