@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — TRANSITION
    Ponte visual World Fusion
-   Versão 1.4.2
+   Versão 1.4.3
    ========================================================= */
 
 .duduq-transition {
@@ -20,7 +20,7 @@
   contain: strict;
   transform: translateZ(0);
   transform-origin: center;
-  background: #244d61;
+  background: #16425f;
   will-change: opacity;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -36,12 +36,12 @@
 .duduq-transition::before {
   z-index: 0;
   inset: -3.5%;
-  background-color: #315f71;
+  background-color: #16425f;
   background-image: var(--duduq-transition-world-image, none);
   background-position: var(--duduq-transition-world-position, center top);
   background-size: var(--duduq-transition-world-size, cover);
   background-repeat: no-repeat;
-  filter: blur(4px) saturate(.74) brightness(.74) contrast(.93);
+  filter: blur(5px) saturate(.72) brightness(.90) contrast(.92);
   transform: translateZ(0) scale(1.025);
   will-change: auto;
 }
@@ -50,21 +50,23 @@
   z-index: 1;
   inset: 0;
   background:
-    radial-gradient(circle at 50% 42%, rgba(239, 251, 255, .16), transparent 50%),
-    linear-gradient(180deg, rgba(18, 47, 61, .08), rgba(18, 47, 61, .18));
+    linear-gradient(
+      180deg,
+      rgba(9, 34, 55, .035),
+      rgba(9, 34, 55, .09)
+    ),
+    radial-gradient(
+      circle at 50% 34%,
+      rgba(235, 249, 255, .12),
+      transparent 50%
+    );
 }
 
 .duduq-transition-stage {
   position: absolute;
   z-index: 2;
   inset: 0;
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, .035) 45%,
-      transparent 70%
-    );
+  background: transparent;
 }
 
 .duduq-transition.is-covering,
@@ -88,8 +90,16 @@ body.duduq-transition-lock {
   -webkit-user-select: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (max-width: 720px) {
   .duduq-transition::before {
-    filter: blur(4px) saturate(.74) brightness(.74) contrast(.93);
+    inset: -2.5%;
+    filter: blur(4px) saturate(.74) brightness(.86) contrast(.92);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .duduq-transition::before {
+    filter: blur(5px) saturate(.72) brightness(.90) contrast(.92);
+  }
+}
+
