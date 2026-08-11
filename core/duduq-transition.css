@@ -1,7 +1,7 @@
 /* =========================================================
-   DUDUQ CORE â€” TRANSITION
+   DUDUQ CORE — TRANSITION
    Ponte visual World Fusion
-   VersÃ£o 1.3.0
+   Versão 1.4.0
    ========================================================= */
 
 .duduq-transition {
@@ -17,11 +17,11 @@
   pointer-events: none;
   opacity: 0;
   isolation: isolate;
-  contain: layout paint style;
-  transform: translateZ(0) scale(1.01);
+  contain: strict;
+  transform: translateZ(0);
   transform-origin: center;
   background: #123650;
-  will-change: opacity, transform;
+  will-change: opacity;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
@@ -41,8 +41,9 @@
   background-position: var(--duduq-transition-world-position, center top);
   background-size: var(--duduq-transition-world-size, cover);
   background-repeat: no-repeat;
-  filter: blur(9px) saturate(.76) brightness(.72) contrast(.92);
-  transform: scale(1.04);
+  filter: blur(3px) saturate(.74) brightness(.68) contrast(.92);
+  transform: translateZ(0) scale(1.025);
+  will-change: auto;
 }
 
 .duduq-transition::after {
