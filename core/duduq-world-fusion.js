@@ -1,13 +1,13 @@
 /* =========================================================
-   DUDUQ CORE â€” WORLD FUSION
-   Integra o fundo do ano Ã s mecÃ¢nicas sem perder nitidez.
-   VersÃ£o 1.0.0
+   DUDUQ CORE — WORLD FUSION
+   Integra o fundo do ano às mecânicas sem perder nitidez.
+   Versão 1.1.0
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0";
+  const VERSION = "1.1.0";
   if (window.DuduQWorldFusion?.version === VERSION) return;
 
   const scriptUrl =
@@ -15,12 +15,121 @@
     new URL("./duduq-world-fusion.js", window.location.href).href;
 
   const stylesheetUrl = new URL(
-    "./duduq-world-fusion.css?v=100",
+    "./duduq-world-fusion.css?v=110",
     scriptUrl
   ).href;
 
   const managedDocuments = new WeakSet();
   const managedFrames = new WeakSet();
+  const fullscreenBridgeDocuments = new WeakSet();
+
+  function getStableFullscreenDocument(doc) {
+    let currentWindow = doc?.defaultView;
+    let stableDocument = doc;
+
+    try {
+      while (currentWindow?.parent && currentWindow.parent !== currentWindow) {
+        currentWindow = currentWindow.parent;
+        stableDocument = currentWindow.document;
+      }
+    } catch (_) {
+      /* Em origem diferente, preserva o documento mais alto acessível. */
+    }
+
+    return stableDocument || doc;
+  }
+
+  function isFullscreen(doc) {
+    return Boolean(doc?.fullscreenElement || doc?.webkitFullscreenElement);
+  }
+
+  function syncFullscreenControls(doc) {
+    if (!doc?.documentElement) return;
+
+    const hostDocument = getStableFullscreenDocument(doc);
+    const active = isFullscreen(hostDocument);
+
+    doc.documentElement.toggleAttribute(
+      "data-duduq-parent-fullscreen",
+      active
+    );
+
+    doc.querySelectorAll(".duduq-engine-fullscreen-button").forEach(
+      function (button) {
+        button.setAttribute("aria-pressed", String(active));
+        button.setAttribute(
+          "aria-label",
+          active ? "Sair da tela cheia" : "Abrir em tela cheia"
+        );
+
+        const label = button.querySelector(".duduq-engine-fullscreen-label");
+        const icon = button.querySelector(".duduq-engine-fullscreen-icon");
+
+        const nextLabel = active ? "Sair" : "Tela cheia";
+        const nextIcon = active ? "🗗" : "⛶";
+
+        if (label && label.textContent !== nextLabel) {
+          label.textContent = nextLabel;
+        }
+
+        if (icon && icon.textContent !== nextIcon) {
+          icon.textContent = nextIcon;
+        }
+      }
+    );
+  }
+
+  function installFullscreenBridge(doc) {
+    if (!doc || fullscreenBridgeDocuments.has(doc)) {
+      syncFullscreenControls(doc);
+      return;
+    }
+
+    fullscreenBridgeDocuments.add(doc);
+
+    const hostDocument = getStableFullscreenDocument(doc);
+
+    doc.addEventListener(
+      "click",
+      function (event) {
+        const button = event.target?.closest?.(
+          ".duduq-engine-fullscreen-button"
+        );
+
+        if (!button) return;
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        try {
+          const operation = isFullscreen(hostDocument)
+            ? (hostDocument.exitFullscreen?.() ||
+              hostDocument.webkitExitFullscreen?.())
+            : (hostDocument.documentElement.requestFullscreen?.({
+                navigationUI: "hide"
+              }) || hostDocument.documentElement.webkitRequestFullscreen?.());
+
+          Promise.resolve(operation)
+            .catch(function () {})
+            .finally(function () {
+              syncFullscreenControls(doc);
+            });
+        } catch (_) {
+          syncFullscreenControls(doc);
+        }
+      },
+      true
+    );
+
+    const refresh = function () {
+      syncFullscreenControls(doc);
+      if (hostDocument !== doc) syncFullscreenControls(hostDocument);
+    };
+
+    hostDocument.addEventListener("fullscreenchange", refresh);
+    hostDocument.addEventListener("webkitfullscreenchange", refresh);
+    syncFullscreenControls(doc);
+  }
 
   function getInlineWorldImage(doc) {
     const body = doc.body;
@@ -79,6 +188,8 @@
       detectMechanic(doc, frame)
     );
 
+    syncFullscreenControls(doc);
+
     return true;
   }
 
@@ -99,6 +210,7 @@
 
     ensureStylesheet(doc);
     syncDocument(doc, frame);
+    installFullscreenBridge(doc);
 
     if (managedDocuments.has(doc)) return true;
     managedDocuments.add(doc);
