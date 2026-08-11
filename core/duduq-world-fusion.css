@@ -5,24 +5,40 @@
    ========================================================= */
 
 html.duduq-world-fusion {
-  --duduq-glass-pearl: rgba(249, 253, 255, .92);
-  --duduq-glass-soft: rgba(247, 252, 255, .80);
-  --duduq-glass-line: rgba(206, 225, 239, .82);
-  --duduq-glass-depth: rgba(53, 90, 121, .18);
+  --duduq-glass-pearl: rgba(249, 253, 255, .90);
+  --duduq-glass-soft: rgba(247, 252, 255, .78);
+  --duduq-glass-line: rgba(206, 225, 239, .80);
+  --duduq-glass-depth: rgba(53, 90, 121, .16);
   --duduq-ink: #143454;
   --duduq-blue: #0867c9;
-  background: #285a70;
+  background: #16425f;
+}
+
+html.duduq-world-fusion body {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+html.duduq-world-fusion body::before,
+html.duduq-world-fusion body::after {
+  content: "";
+  position: fixed;
+  pointer-events: none;
 }
 
 html.duduq-world-fusion body::before {
   z-index: 0;
   inset: -3.5%;
-  background-color: #285a70;
+  background-color: #16425f;
   background-image: var(--duduq-world-image, none);
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
-  filter: blur(5px) saturate(.78) brightness(.90) contrast(.94);
+  filter: blur(5px) saturate(.72) brightness(.90) contrast(.92);
   transform: scale(1.025);
   transform-origin: center;
 }
@@ -31,12 +47,61 @@ html.duduq-world-fusion body::after {
   z-index: 0;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(9, 34, 55, .035), rgba(9, 34, 55, .10)),
-    radial-gradient(circle at 50% 34%, rgba(244, 252, 255, .13), transparent 50%);
+    linear-gradient(
+      180deg,
+      rgba(9, 34, 55, .035),
+      rgba(9, 34, 55, .09)
+    ),
+    radial-gradient(
+      circle at 50% 34%,
+      rgba(235, 249, 255, .12),
+      transparent 50%
+    );
 }
 
-2. Shell + faixa de feedback
-SUBSTITUIR os blocos de shell/feedback existentes e ADICIONAR regra de advancing
+html.duduq-world-fusion body > #root {
+  position: relative;
+  z-index: 1;
+}
+
+/* Em modo normal o iframe pode ser menor que 100dvh.
+   Não recortamos o conteúdo: a prioridade é impedir
+   regressão de clipping fora da tela cheia. */
+html.duduq-world-fusion:not(:fullscreen) body {
+  height: auto !important;
+  min-height: 100dvh !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+html.duduq-world-fusion:not(:fullscreen) body > #root,
+html.duduq-world-fusion:not(:fullscreen) .duduq-engine-root,
+html.duduq-world-fusion:not(:fullscreen) .duduq-engine-shell,
+html.duduq-world-fusion:not(:fullscreen) .duduq-engine-stage {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+html.duduq-world-fusion:not(:fullscreen) body > #root,
+html.duduq-world-fusion:not(:fullscreen) .duduq-engine-root,
+html.duduq-world-fusion:not(:fullscreen) .duduq-engine-shell {
+  min-height: 100dvh !important;
+}
+
+html.duduq-world-fusion .duduq-engine-root {
+  background: transparent !important;
+}
+
+/* Grade compartilhada.
+   A faixa de feedback existe desde o começo para impedir
+   deslocamento do cabeçalho ou do tabuleiro após confirmar. */
+html.duduq-world-fusion,
+html.duduq-world-fusion body,
+html.duduq-world-fusion body > #root {
+  min-height: 100dvh;
+}
+
 html.duduq-world-fusion .duduq-engine-root {
   box-sizing: border-box;
   height: 100dvh;
@@ -50,9 +115,19 @@ html.duduq-world-fusion .duduq-engine-shell {
   height: 100%;
   min-height: 0;
   display: grid;
-  grid-template-rows: auto minmax(0, auto) 96px;
+  grid-template-rows: auto minmax(0, auto) 108px;
   align-content: start;
   row-gap: 12px;
+  overflow: hidden;
+}
+
+html.duduq-world-fusion .duduq-engine-header {
+  margin-bottom: 0 !important;
+}
+
+html.duduq-world-fusion .duduq-engine-stage {
+  width: 100%;
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -60,210 +135,359 @@ html.duduq-world-fusion .duduq-engine-feedback {
   box-sizing: border-box;
   align-self: start;
   width: min(840px, calc(100% - 24px));
-  min-height: 96px;
-  height: 96px;
+  min-height: 108px;
+  height: 108px;
   margin: 0 auto !important;
+  padding-top: 4px;
   display: grid;
   place-items: start center;
   overflow: visible;
 }
 
+html.duduq-world-fusion .duduq-engine-feedback[data-state="idle"] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 html.duduq-world-fusion .duduq-engine-feedback-card {
   box-sizing: border-box;
   width: 100%;
-  min-height: 82px !important;
-  max-height: 92px;
+  min-height: 84px !important;
+  max-height: 96px;
   margin: 0 !important;
-  padding: 8px 16px !important;
-  gap: 10px !important;
+  padding: 10px 14px !important;
+  gap: 10px 12px !important;
   border-radius: 18px !important;
 }
 
-html.duduq-world-fusion .duduq-engine-feedback-mascot {
-  width: 60px !important;
-  height: 60px !important;
-  flex: 0 0 60px !important;
+html.duduq-world-fusion .duduq-engine-feedback-mascot,
+html.duduq-world-fusion .duduq-mascot[data-size="feedback"] {
+  width: 62px !important;
+  height: 62px !important;
+  flex: 0 0 62px !important;
 }
 
-/* Não exibir a mensagem solta abaixo do feedback. */
+/* O avanço automático já é comunicado pela própria transição.
+   Evita texto solto e periférico abaixo do feedback. */
 html.duduq-world-fusion .duduq-engine-advancing {
   display: none !important;
 }
 
-3. Drag & Drop — separação e bandeja estável
-SUBSTITUIR TODAS as regras antigas de :has(...empty-note...) por este bloco único
-/* Separação visual mais confortável entre categorias. */
-html.duduq-world-fusion .duduq-engine-stage .duduq-dd-target-grid {
-  gap: clamp(14px, 1.35vw, 18px) !important;
-}
-
+/* Ritmo entre enunciado e tabuleiro. */
 html.duduq-world-fusion
-  :is(.duduq-dd-target, .duduq-udd-target) {
-  border: 1px solid rgba(116, 207, 216, .72) !important;
-  background:
-    linear-gradient(180deg, rgba(248, 253, 253, .84), rgba(232, 246, 245, .76))
-    !important;
-  -webkit-backdrop-filter: blur(8px) saturate(.98) !important;
-  backdrop-filter: blur(8px) saturate(.98) !important;
+  :is(
+    .duduq-dd-instruction,
+    .duduq-udd-instruction,
+    .duduq-bp-instruction,
+    .duduq-mq-instruction,
+    .duduq-matching-instruction,
+    .duduq-fc-instruction,
+    .duduq-cf-instruction,
+    .duduq-ws-instruction,
+    .duduq-ts-instruction
+  ) {
+  margin-bottom: 12px !important;
 }
 
+/* Bandeja vazia: mantém um microestado compacto até a confirmação,
+   sem deixar um card horizontal desproporcional. */
 html.duduq-world-fusion
-  :is(.duduq-dd-target, .duduq-udd-target):nth-child(even) {
-  border-color: rgba(232, 183, 94, .72) !important;
-  background:
-    linear-gradient(180deg, rgba(255, 252, 242, .84), rgba(250, 239, 216, .76))
-    !important;
-}
-
-/* IMPORTANTE: o container externo mantém a mesma altura no último drop.
-   Só o conteúdo interno vira a cápsula "Pronto para confirmar". */
-html.duduq-world-fusion .duduq-engine-stage
+  .duduq-engine-stage
   :is(.duduq-dd-pool, .duduq-udd-pool):has(
     .duduq-dd-pool-items > .duduq-dd-empty-note,
     .duduq-udd-pool-items > .duduq-udd-empty-note
   ) {
-  width: 100% !important;
-  min-height: 96px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  display: grid !important;
-  place-items: center !important;
-  border-color: transparent !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
+  width: min(520px, 100%) !important;
+  min-height: 48px !important;
+  margin-block: 0 !important;
+  margin-inline: auto !important;
+  padding: 5px 14px !important;
+  gap: 0 !important;
+  border-radius: 999px !important;
 }
 
-html.duduq-world-fusion .duduq-engine-stage
+html.duduq-world-fusion
+  .duduq-engine-stage
   :is(.duduq-dd-pool, .duduq-udd-pool):has(
     .duduq-dd-pool-items > .duduq-dd-empty-note,
     .duduq-udd-pool-items > .duduq-udd-empty-note
-  ) :is(.duduq-dd-pool-head, .duduq-udd-pool-head) {
+  )
+  :is(.duduq-dd-pool-head, .duduq-udd-pool-head) {
   display: none !important;
 }
 
-html.duduq-world-fusion .duduq-engine-stage
+html.duduq-world-fusion
+  .duduq-engine-stage
   :is(.duduq-dd-pool, .duduq-udd-pool):has(
     .duduq-dd-pool-items > .duduq-dd-empty-note,
     .duduq-udd-pool-items > .duduq-udd-empty-note
-  ) :is(.duduq-dd-pool-items, .duduq-udd-pool-items) {
-  width: min(520px, 100%) !important;
-  min-height: 44px !important;
-  padding: 0 14px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border: 1px solid rgba(206, 225, 239, .72) !important;
-  border-radius: 999px !important;
-  background: rgba(249, 253, 255, .84) !important;
-  box-shadow:
-    0 3px 0 rgba(145, 175, 199, .40),
-    0 8px 18px rgba(15, 55, 86, .08) !important;
+  )
+  :is(.duduq-dd-pool-items, .duduq-udd-pool-items) {
+  min-height: 28px !important;
+  padding: 0 !important;
 }
 
-html.duduq-world-fusion .duduq-engine-stage
+html.duduq-world-fusion
+  .duduq-engine-stage
   :is(.duduq-dd-empty-note, .duduq-udd-empty-note) {
-  font-size: .84rem !important;
-  line-height: 1.15 !important;
+  color: #566f84 !important;
+  font-size: .88rem !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
 }
 
-4. Nitidez + responsivo
-AJUSTAR media queries existentes; não duplicar blocos equivalentes
+/* Após confirmar corretamente, a bandeja vazia deixa de competir
+   com o feedback reservado. */
+html.duduq-world-fusion .duduq-engine-shell:has(
+  .duduq-engine-feedback[data-state="success"]
+) .duduq-engine-stage :is(
+  .duduq-dd-pool,
+  .duduq-udd-pool[data-empty="true"]
+) {
+  display: none !important;
+}
+
+/* Superfícies compartilhadas. */
+html.duduq-world-fusion .duduq-engine-header,
+html.duduq-world-fusion
+  :is(
+    .duduq-dd-instruction,
+    .duduq-udd-instruction,
+    .duduq-bp-instruction,
+    .duduq-mq-instruction,
+    .duduq-matching-instruction,
+    .duduq-fc-instruction,
+    .duduq-cf-instruction,
+    .duduq-ws-instruction,
+    .duduq-ts-instruction
+  ) {
+  border: 1px solid var(--duduq-glass-line) !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, .93),
+      rgba(246, 251, 255, .87)
+    )
+    !important;
+  -webkit-backdrop-filter: blur(12px) saturate(1.04);
+  backdrop-filter: blur(12px) saturate(1.04);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, .88) inset,
+    0 4px 0 rgba(151, 178, 201, .38),
+    0 14px 34px rgba(18, 54, 83, .11)
+    !important;
+}
+
+html.duduq-world-fusion .duduq-engine-header {
+  border-radius: 24px !important;
+}
+
+html.duduq-world-fusion
+  :is(
+    .duduq-dd-instruction,
+    .duduq-udd-instruction,
+    .duduq-bp-instruction,
+    .duduq-mq-instruction,
+    .duduq-matching-instruction,
+    .duduq-fc-instruction,
+    .duduq-cf-instruction,
+    .duduq-ws-instruction,
+    .duduq-ts-instruction
+  ) {
+  border-radius: 999px !important;
+}
+
+html.duduq-world-fusion
+  :is(
+    .duduq-dd-instruction,
+    .duduq-udd-instruction,
+    .duduq-bp-instruction,
+    .duduq-mq-instruction,
+    .duduq-matching-instruction,
+    .duduq-fc-instruction,
+    .duduq-cf-instruction,
+    .duduq-ws-instruction,
+    .duduq-ts-instruction
+  )
+  h2 {
+  color: var(--duduq-blue) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .7);
+}
+
+/* Drag & Drop. */
+html.duduq-world-fusion
+  :is(.duduq-dd-board, .duduq-udd-board) {
+  background: transparent !important;
+}
+
+html.duduq-world-fusion
+  :is(.duduq-dd-target, .duduq-udd-target) {
+  border: 1px solid rgba(116, 207, 216, .68) !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(248, 253, 253, .80),
+      rgba(232, 246, 245, .71)
+    )
+    !important;
+  -webkit-backdrop-filter: blur(7px) saturate(.98) !important;
+  backdrop-filter: blur(7px) saturate(.98) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, .50) inset,
+    0 10px 24px rgba(16, 63, 79, .065)
+    !important;
+}
+
+html.duduq-world-fusion
+  :is(.duduq-dd-target, .duduq-udd-target):nth-child(even) {
+  border-color: rgba(232, 183, 94, .68) !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 252, 242, .80),
+      rgba(250, 239, 216, .71)
+    )
+    !important;
+}
+
+html.duduq-world-fusion
+  :is(.duduq-dd-target, .duduq-udd-target)[data-active-target="true"] {
+  border-color: #55b7e8 !important;
+  background: rgba(230, 248, 255, .92) !important;
+  box-shadow:
+    0 0 0 4px rgba(80, 181, 232, .16),
+    0 14px 34px rgba(11, 74, 108, .13)
+    !important;
+}
+
+html.duduq-world-fusion
+  :is(.duduq-dd-pool, .duduq-udd-pool) {
+  border: 1px solid rgba(206, 225, 239, .58) !important;
+  background: rgba(248, 252, 255, .72) !important;
+  -webkit-backdrop-filter: blur(7px) saturate(.98) !important;
+  backdrop-filter: blur(7px) saturate(.98) !important;
+  box-shadow: 0 8px 20px rgba(15, 55, 86, .06) !important;
+}
+
+html.duduq-world-fusion
+  :is(.duduq-dd-target-items, .duduq-udd-target-items)
+  :is(.duduq-dd-item, .duduq-udd-item) {
+  min-width: 68px;
+  padding: 8px 12px;
+}
+
+html.duduq-world-fusion
+  :is(.duduq-dd-item, .duduq-udd-item) {
+  border-color: rgba(150, 182, 208, .82) !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, .97),
+      rgba(245, 250, 255, .91)
+    )
+    !important;
+  color: var(--duduq-ink) !important;
+  box-shadow:
+    0 4px 0 rgba(130, 165, 193, .68),
+    0 10px 22px rgba(17, 58, 90, .14),
+    0 1px 0 #fff inset
+    !important;
+}
+
+html.duduq-world-fusion
+  :is(.duduq-dd-capacity-badge, .duduq-udd-capacity-badge) {
+  color: #536c82 !important;
+  font-size: 12.5px !important;
+  font-weight: 850 !important;
+  opacity: 1 !important;
+}
+
+/* Nitidez de mídia: dimensões são controladas pelas mecânicas,
+   sem scale permanente no estado de repouso. */
 html.duduq-world-fusion
   :is(
     .duduq-dd-media,
     .duduq-dd-target-media,
     .duduq-udd-media,
     .duduq-udd-target-media,
-    .duduq-completion-mascot
+    .duduq-bp-bubble img,
+    .duduq-matching-card img
   ) {
-  image-rendering: auto;
-  -webkit-backface-visibility: hidden;
+  image-rendering: auto !important;
+  object-fit: contain;
   backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
-@media (max-height: 760px) and (min-width: 721px) {
-  html.duduq-world-fusion .duduq-engine-shell {
-    grid-template-rows: auto minmax(0, auto) 92px;
-    row-gap: 8px;
-  }
-
-  html.duduq-world-fusion .duduq-engine-feedback {
-    min-height: 92px;
-    height: 92px;
-  }
-}
-
-@media (max-width: 720px) {
-  html.duduq-world-fusion .duduq-engine-shell {
-    grid-template-rows: auto minmax(0, auto) 92px;
-    row-gap: 8px;
-  }
-
-  html.duduq-world-fusion .duduq-engine-feedback {
-    min-height: 92px;
-    height: 92px;
-  }
-
-  html.duduq-world-fusion .duduq-engine-feedback-card {
-    min-height: 76px !important;
-    max-height: 86px;
-  }
-
-  html.duduq-world-fusion .duduq-engine-feedback-mascot {
-    width: 52px !important;
-    height: 52px !important;
-    flex-basis: 52px !important;
-  }
-
-  html.duduq-world-fusion body::before {
-    inset: -2.5%;
-    filter: blur(4px) saturate(.80) brightness(.88) contrast(.94);
-    transform: scale(1.025);
-  }
-}
-
-B. Bubble Pop — incluir neste MESMO arquivo
-2. Ajuste visual da arena no World Fusion
-Usar no arquivo 01, dentro da seção Bubble Pop, substituindo o bloco atual equivalente.
+/* Bubble Pop — arena atmosférica, sem um bloco branco dominante. */
 html.duduq-world-fusion .duduq-bp-arena {
-  border: 1px solid rgba(199, 226, 239, .48) !important;
+  border: 1px solid rgba(199, 226, 239, .40) !important;
   background:
     radial-gradient(
       circle at 50% 42%,
-      rgba(246, 253, 255, .36),
+      rgba(238, 250, 255, .30),
       transparent 64%
     ),
-    rgba(238, 249, 255, .28)
+    rgba(232, 248, 255, .20)
     !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
   box-shadow:
-    0 1px 0 rgba(255,255,255,.32) inset,
-    0 16px 38px rgba(11, 52, 79, .07)
+    0 1px 0 rgba(255, 255, 255, .24) inset,
+    0 18px 46px rgba(11, 52, 79, .075)
     !important;
+}
+
+html.duduq-world-fusion .duduq-bp-arena[data-mode="dynamic-stream"] {
+  height: clamp(310px, 40dvh, 400px) !important;
+  min-height: 310px !important;
+}
+
+html.duduq-world-fusion .duduq-bp-arena::before,
+html.duduq-world-fusion .duduq-bp-arena::after {
+  display: none !important;
 }
 
 html.duduq-world-fusion
   :is(.duduq-bp-chip, .duduq-bp-status) {
-  border: 1px solid rgba(205, 226, 240, .80) !important;
-  background: rgba(249, 253, 255, .86) !important;
+  border: 1px solid rgba(205, 226, 240, .76) !important;
+  background: rgba(249, 253, 255, .84) !important;
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
+  box-shadow:
+    0 3px 0 rgba(145, 175, 199, .50),
+    0 9px 20px rgba(15, 55, 86, .09)
+    !important;
 }
 
-@media (max-height: 720px) {
-  html.duduq-world-fusion
-    .duduq-bp-arena[data-mode="dynamic-stream"] {
-    height: clamp(280px, 38dvh, 340px) !important;
-    min-height: 280px !important;
-  }
+/* Feedback pertence à etapa. */
+html.duduq-world-fusion
+  .duduq-engine-feedback:not([data-state="idle"]) {
+  width: min(840px, calc(100% - 24px)) !important;
+  margin: 0 auto !important;
+  scroll-margin-block: 12px;
 }
-C. Completion — World Fusion deve apenas aplicar a skin
-2. World Fusion — retirar override de dimensão
-SUBSTITUIR o bloco atual que também força width/min-height/margin/padding.
-/* World Fusion deve SKINAR a conclusão, não redefinir sua geometria. */
+
+/* Demais mecânicas. */
+html.duduq-world-fusion
+  :is(
+    .duduq-mq-board,
+    .duduq-matching-board,
+    .duduq-fc-board,
+    .duduq-cf-board,
+    .duduq-ws-arena,
+    .duduq-ts-arena
+  ) {
+  border-color: rgba(202, 226, 240, .62) !important;
+  background-color: rgba(241, 250, 255, .38) !important;
+  -webkit-backdrop-filter: blur(6px) saturate(1.01) !important;
+  backdrop-filter: blur(6px) saturate(1.01) !important;
+  box-shadow: 0 18px 42px rgba(12, 52, 78, .08) !important;
+}
+
+/* Conclusão:
+   World Fusion aplica somente a pele visual.
+   A geometria fica exclusivamente em duduq-completion.css. */
 html.duduq-world-fusion .duduq-completion {
   background: transparent !important;
   -webkit-backdrop-filter: none !important;
@@ -276,19 +500,194 @@ html.duduq-world-fusion .duduq-completion-card {
   background:
     linear-gradient(
       180deg,
-      rgba(255,255,255,.94),
-      rgba(244,250,255,.88)
-    ) !important;
+      rgba(255, 255, 255, .93),
+      rgba(244, 250, 255, .86)
+    )
+    !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
   box-shadow:
-    0 1px 0 rgba(255,255,255,.94) inset,
+    0 1px 0 rgba(255, 255, 255, .94) inset,
     0 5px 0 rgba(133, 164, 190, .48),
-    0 24px 58px rgba(15, 52, 82, .16)
+    0 24px 58px rgba(15, 52, 82, .17)
     !important;
   animation: none !important;
 }
-Não alterar neste passo
-•	core/duduq-world-fusion.js
-•	mechanics/bubble-pop.js
-•	mechanics/drag-drop.js
+
+html.duduq-world-fusion
+  :is(
+    .duduq-completion-achievement,
+    .duduq-completion-title,
+    .duduq-completion-message,
+    .duduq-completion-progress,
+    .duduq-completion-actions
+  ) {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+html.duduq-world-fusion .duduq-completion-mascot {
+  opacity: 1;
+  will-change: transform;
+}
+
+html.duduq-world-fusion .duduq-completion-hero::before {
+  animation-play-state: running;
+}
+
+html.duduq-world-fusion .duduq-completion-confetti {
+  z-index: 2 !important;
+}
+
+html.duduq-world-fusion.duduq-transition-lock .duduq-completion-star {
+  animation-play-state: paused !important;
+}
+
+html.duduq-world-fusion:fullscreen,
+html.duduq-world-fusion:fullscreen body,
+html.duduq-world-fusion:fullscreen body > #root {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+html.duduq-world-fusion:fullscreen body {
+  overflow: hidden;
+}
+
+/* O boot usa a mesma família tonal do cenário e nunca abre branco
+   durante uma troca protegida. */
+html.duduq-world-fusion #duduq-boot {
+  color: #eaf7ff !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(18, 58, 84, .96),
+      rgba(12, 42, 65, .98)
+    )
+    !important;
+}
+
+@media (max-height: 760px) and (min-width: 721px) {
+  html.duduq-world-fusion .duduq-engine-root {
+    padding-top: 8px;
+    padding-bottom: 6px;
+  }
+
+  html.duduq-world-fusion .duduq-engine-shell {
+    grid-template-rows: auto minmax(0, auto) 102px;
+    row-gap: 10px;
+  }
+
+  html.duduq-world-fusion .duduq-engine-header {
+    min-height: 72px !important;
+    padding-block: 8px !important;
+  }
+
+  html.duduq-world-fusion .duduq-engine-feedback {
+    min-height: 102px;
+    height: 102px;
+    padding-top: 2px;
+  }
+
+  html.duduq-world-fusion
+    :is(
+      .duduq-dd-instruction,
+      .duduq-udd-instruction,
+      .duduq-bp-instruction,
+      .duduq-mq-instruction,
+      .duduq-matching-instruction,
+      .duduq-fc-instruction,
+      .duduq-cf-instruction,
+      .duduq-ws-instruction,
+      .duduq-ts-instruction
+    ) {
+    margin-bottom: 10px !important;
+  }
+}
+
+@media (max-width: 720px) {
+  html.duduq-world-fusion .duduq-engine-root {
+    padding: 8px 8px 6px;
+  }
+
+  html.duduq-world-fusion .duduq-engine-shell {
+    grid-template-rows: auto minmax(0, auto) 100px;
+    row-gap: 10px;
+  }
+
+  html.duduq-world-fusion .duduq-engine-feedback {
+    width: min(840px, calc(100% - 12px));
+    min-height: 100px;
+    height: 100px;
+    padding-top: 2px;
+  }
+
+  html.duduq-world-fusion .duduq-engine-feedback-card {
+    min-height: 80px !important;
+    max-height: 92px;
+    padding: 8px 12px !important;
+  }
+
+  html.duduq-world-fusion .duduq-engine-feedback-mascot,
+  html.duduq-world-fusion .duduq-mascot[data-size="feedback"] {
+    width: 56px !important;
+    height: 56px !important;
+    flex-basis: 56px !important;
+  }
+
+  html.duduq-world-fusion body::before {
+    inset: -2.5%;
+    filter: blur(4px) saturate(.74) brightness(.86) contrast(.92);
+    transform: scale(1.025);
+  }
+
+  html.duduq-world-fusion
+    :is(.duduq-dd-target, .duduq-udd-target) {
+    -webkit-backdrop-filter: blur(6px) saturate(1.01);
+    backdrop-filter: blur(6px) saturate(1.01);
+  }
+
+  html.duduq-world-fusion
+    :is(
+      .duduq-dd-instruction,
+      .duduq-udd-instruction,
+      .duduq-bp-instruction,
+      .duduq-mq-instruction,
+      .duduq-matching-instruction,
+      .duduq-fc-instruction,
+      .duduq-cf-instruction,
+      .duduq-ws-instruction,
+      .duduq-ts-instruction
+    ) {
+    margin-bottom: 10px !important;
+  }
+}
+
+@media (max-height: 720px) {
+  html.duduq-world-fusion .duduq-bp-arena[data-mode="dynamic-stream"] {
+    height: clamp(275px, 37dvh, 330px) !important;
+    min-height: 275px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.duduq-world-fusion .duduq-completion-star {
+    animation: none !important;
+  }
+
+  html.duduq-world-fusion .duduq-completion-mascot,
+  html.duduq-world-fusion .duduq-completion-hero::before {
+    animation: none !important;
+  }
+
+  html.duduq-world-fusion .duduq-completion-mascot {
+    transform: scale(2.05) !important;
+  }
+
+  html.duduq-world-fusion .duduq-completion-hero::before {
+    transform: translateX(-50%) scaleX(.9) !important;
+  }
+}
+
