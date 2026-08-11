@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ MECHANIC — DRAG & DROP
    Adaptador da mecânica Drag & Drop para o Schema DuduQ.
-   Versão 1.0.0
+   Versão 1.0.1
    ========================================================= */
 
 (function () {
@@ -13,7 +13,7 @@
   }
 
   const MECHANIC_ID = "drag-drop";
-  const VERSION = "1.0.0";
+  const VERSION = "1.0.1";
   const RUNTIME_VERSION = "1.2.0";
   const BRIDGE_VERSION = "1.0.0";
 
