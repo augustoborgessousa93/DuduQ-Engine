@@ -2,7 +2,7 @@
    DUDUQ CORE — COMPLETION
    Tela final premium DuduQ
    Compatível com duduq-completion.js 1.0.0
-   Versão 1.2.4
+   Versão 1.2.5
    ========================================================= */
 
 
@@ -155,14 +155,14 @@
   align-items: center;
   justify-content: flex-start;
 
-  gap: 9px;
+  gap: 0;
 
   margin-top: 62px;
 
   padding:
-    84px
+    68px
     clamp(26px, 5vw, 52px)
-    28px;
+    24px;
 
   overflow: visible;
 
@@ -249,7 +249,7 @@
   position: absolute;
   z-index: 9;
 
-  top: -126px;
+  top: -120px;
   left: 50%;
 
   width: 320px;
@@ -341,7 +341,7 @@
       both,
 
     duduqCompletionMascotFloat
-      3.1s
+      3.4s
       ease-in-out
       760ms
       infinite;
@@ -369,7 +369,8 @@
   width: 100%;
   max-width: 620px;
 
-  margin: 0;
+  margin:
+    0 0 7px;
 
   color:
     var(--duduq-completion-blue);
@@ -410,7 +411,8 @@
 
   width: min(560px, 100%);
 
-  margin: 0;
+  margin:
+    0 0 10px;
 
   color:
     var(--duduq-completion-text);
@@ -458,8 +460,8 @@
   min-height: 48px;
 
   margin:
-    6px 0
-    1px;
+    0 0
+    13px;
 
   padding:
     7px
@@ -568,7 +570,7 @@
 
   gap: 10px;
 
-  margin-top: 12px;
+  margin-top: 0;
 
   animation:
     duduqCompletionContentIn
@@ -937,7 +939,7 @@
 
   50% {
     transform:
-      translateY(-12px)
+      translateY(-9px)
       scale(2.12);
   }
 }
@@ -1050,9 +1052,9 @@
       58px;
 
     padding:
-      78px
+      62px
       27px
-      26px;
+      24px;
 
     border-radius:
       30px;
@@ -1065,7 +1067,7 @@
 
   .duduq-completion-hero {
     top:
-      -118px;
+      -113px;
 
     width:
       302px;
@@ -1106,12 +1108,12 @@
       54px;
 
     gap:
-      8px;
+      0;
 
     padding:
-      76px
+      60px
       18px
-      23px;
+      22px;
 
     border-radius:
       28px;
@@ -1130,7 +1132,7 @@
 
   .duduq-completion-hero {
     top:
-      -101px;
+      -96px;
 
     width:
       264px;
@@ -1181,7 +1183,7 @@
   }
 
   .duduq-completion-actions {
-    margin-top: 10px;
+    margin-top: 0;
   }
 
   .duduq-completion-button {
@@ -1219,16 +1221,16 @@
   .duduq-completion-card {
     margin-top: 58px;
 
-    gap: 8px;
+    gap: 0;
 
     padding:
-      64px
+      50px
       40px
-      22px;
+      20px;
   }
 
   .duduq-completion-hero {
-    top: -108px;
+    top: -103px;
 
     width: 276px;
 
@@ -1250,8 +1252,6 @@
 
   .duduq-completion-progress {
     min-height: 44px;
-
-    margin-top: 3px;
   }
 
   .duduq-completion-progress-icon {
@@ -1263,7 +1263,7 @@
   }
 
   .duduq-completion-actions {
-    margin-top: 10px;
+    margin-top: 0;
   }
 
   .duduq-completion-button {
