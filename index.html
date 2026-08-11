@@ -4,52 +4,52 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>DuduQ Engine — Teste Router Inteligente</title>
- 
+
   <!-- =====================================================
        ESTILOS CORE.
        ===================================================== -->
   <link rel="stylesheet" href="./core/duduq-theme.css?v=110">
   <link rel="stylesheet" href="./core/duduq-intro.css?v=130">
-  <link rel="stylesheet" href="./core/duduq-transition.css?v=142">
-  <link rel="stylesheet" href="./core/duduq-completion.css?v=123">
-  <link id="duduq-world-fusion-core-style" rel="stylesheet" href="./core/duduq-world-fusion.css?v=124">
+  <link rel="stylesheet" href="./core/duduq-transition.css?v=144">
+  <link rel="stylesheet" href="./core/duduq-completion.css?v=124">
+  <link id="duduq-world-fusion-core-style" rel="stylesheet" href="./core/duduq-world-fusion.css?v=127">
 </head>
- 
+
 <body>
   <div id="root">Carregando DuduQ Engine...</div>
- 
+
   <!-- =====================================================
        DUDUQ CORE
        ===================================================== -->
   <script src="./core/duduq-assets.js?v=110"></script>
-  <script id="duduq-world-fusion-core-script" src="./core/duduq-world-fusion.js?v=123"></script>
+  <script id="duduq-world-fusion-core-script" src="./core/duduq-world-fusion.js?v=126"></script>
   <script src="./core/duduq-sound.js?v=110"></script>
   <script src="./core/duduq-intro.js?v=120"></script>
   <script src="./core/duduq-schema.js?v=100"></script>
   <script src="./core/duduq-completion.js?v=110"></script>
- 
+
   <!-- Transição universal deve carregar ANTES do Host -->
-  <script src="./core/duduq-transition.js?v=160"></script>
- 
-  <!-- Host 1.5.4: tela cheia pertence ao documento principal -->
-  <script src="./core/duduq-host.js?v=155"></script>
- 
+  <script src="./core/duduq-transition.js?v=162"></script>
+
+  <!-- Host 1.5.7: tela cheia pertence ao documento principal -->
+  <script src="./core/duduq-host.js?v=157"></script>
+
   <!-- Progresso global -->
   <script src="./core/duduq-progress-ui.js?v=100"></script>
- 
+
   <!-- =====================================================
        MECÂNICAS DISPONÍVEIS
        ===================================================== -->
   <script src="./mechanics/bubble-pop.js?v=122"></script>
   <script src="./mechanics/drag-drop.js?v=102"></script>
- 
+
   <!-- Router carregado depois das mecânicas -->
   <script src="./core/duduq-router.js?v=100"></script>
- 
+
   <script>
     window.addEventListener("DOMContentLoaded", function () {
       const root = document.getElementById("root");
- 
+
       /* ===============================================
          VERIFICAÇÕES DO CORE
          =============================================== */
@@ -62,37 +62,37 @@
         root.innerHTML = "Erro: DuduQ World Fusion não foi carregado.";
         return;
       }
- 
+
       if (!window.DuduQSchema) {
         root.innerHTML = "Erro: DuduQ Schema não foi carregado.";
         return;
       }
- 
+
       if (!window.DuduQCompletion) {
         root.innerHTML = "Erro: DuduQ Completion não foi carregado.";
         return;
       }
- 
+
       if (!window.DuduQTransition) {
         root.innerHTML = "Erro: DuduQ Transition não foi carregado.";
         return;
       }
- 
+
       if (!window.DuduQ) {
         root.innerHTML = "Erro: DuduQ Host não foi carregado.";
         return;
       }
- 
+
       if (!window.DuduQProgressUI) {
         root.innerHTML = "Erro: DuduQ Progress UI não foi carregado.";
         return;
       }
- 
+
       if (!window.DuduQRouter) {
         root.innerHTML = "Erro: DuduQ Router não foi carregado.";
         return;
       }
- 
+
       /* ===============================================
          VERIFICAÇÕES DAS MECÂNICAS
          =============================================== */
@@ -100,12 +100,12 @@
         root.innerHTML = "Erro: Bubble Pop não foi registrado.";
         return;
       }
- 
+
       if (!window.DuduQ.hasMechanic("drag-drop")) {
         root.innerHTML = "Erro: Drag & Drop não foi registrado.";
         return;
       }
- 
+
       console.info("[DuduQ Core Test]", {
         intro: window.DuduQIntro.version,
         worldFusion: window.DuduQWorldFusion.version,
@@ -118,7 +118,7 @@
         dragDrop: window.DuduQ.getMechanic("drag-drop")?.version,
         router: window.DuduQRouter.version
       });
- 
+
       /* ===============================================
          QUESTÃO 1 — Bubble Pop
          =============================================== */
@@ -158,7 +158,7 @@
           allowAudio: true
         }
       };
- 
+
       /* ===============================================
          QUESTÃO 2 — Drag & Drop
          =============================================== */
@@ -214,43 +214,43 @@
           ]
         }
       };
- 
+
       /* ===============================================
          ROUTER DECIDE
          =============================================== */
       const blueDecision = window.DuduQRouter.select(questionBlue);
       const categoriesDecision = window.DuduQRouter.select(questionCategories);
- 
+
       console.info("[DuduQ Router Test] Blue:", blueDecision);
       console.info("[DuduQ Router Test] Categories:", categoriesDecision);
- 
+
       if (!blueDecision.selected) {
         root.innerHTML = "Erro: Router não encontrou mecânica para Blue.";
         return;
       }
- 
+
       if (!categoriesDecision.selected) {
         root.innerHTML = "Erro: Router não encontrou mecânica para Categories.";
         return;
       }
- 
+
       if (blueDecision.selected.mechanicId !== "bubble-pop") {
         root.innerHTML = "Erro: Router deveria selecionar Bubble Pop para Blue.";
         console.error("[DuduQ Router Test] Seleção inesperada:", blueDecision);
         return;
       }
- 
+
       if (categoriesDecision.selected.mechanicId !== "drag-drop") {
         root.innerHTML = "Erro: Router deveria selecionar Drag & Drop para Categories.";
         console.error("[DuduQ Router Test] Seleção inesperada:", categoriesDecision);
         return;
       }
- 
+
       console.info("[DuduQ Router Test] SUCESSO", {
         etapa1: blueDecision.selected.mechanicId,
         etapa2: categoriesDecision.selected.mechanicId
       });
- 
+
       /* ===============================================
          INICIA O MÓDULO
          =============================================== */
@@ -289,12 +289,12 @@
           ]
         });
       }
- 
+
       /* ===============================================
          INTRO CINEMATOGRÁFICA AAA+
          =============================================== */
       root.innerHTML = "";
- 
+
       window.DuduQIntro.show({
         companyKicker: "UMA CRIAÇÃO DE",
         companyWidth: 820,
@@ -322,3 +322,4 @@
   </script>
 </body>
 </html>
+
