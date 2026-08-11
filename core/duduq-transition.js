@@ -1,1145 +1,198 @@
 /* =========================================================
-   DUDUQ CORE — TRANSITION
-   Orquestrador universal de transições entre telas
-   e mecânicas DuduQ.
-
-   Versão 1.4.0
-
-   CONCEITO
-   - Dissolve em duas fases: saída completa, troca, entrada
-   - nunca existe crossfade entre a tela antiga e a nova
-   - a mecânica atual chega a opacity:0 antes do destroy/mount
-   - a próxima tela permanece em opacity:0 até estar pronta
-   - nenhuma camada branca participa da transição
-   - o background do mundo funciona como ponte visual
-   - som opcional centralizado via DuduQSound
-   - sem mensagem
-   - sem tela de loading
+   DUDUQ CORE WORLD FUSION
+   Integra o fundo do ano Ã s mecÃ¢nicas sem perder nitidez.
+   VersÃ£o 1.0.0
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.4.0";
+  const VERSION = "1.0.0";
+  if (window.DuduQWorldFusion?.version === VERSION) return;
 
-  if (
-    window.DuduQTransition &&
-    window.DuduQTransition.version === VERSION
-  ) {
-    return;
-  }
+  const scriptUrl =
+    document.currentScript?.src ||
+    new URL("./duduq-world-fusion.js", window.location.href).href;
 
-  /* =======================================================
-     CONFIGURAÇÃO
-     ======================================================= */
+  const stylesheetUrl = new URL(
+    "./duduq-world-fusion.css?v=100",
+    scriptUrl
+  ).href;
 
-  const DEFAULTS = Object.freeze({
-    coverDurationMs: 340,
-    revealDurationMs: 360,
-    paintFrames: 1,
-    bridgeHoldMs: 90,
-    fallbackExtraMs: 140,
+  const managedDocuments = new WeakSet();
+  const managedFrames = new WeakSet();
 
-    targetSelector: "#root",
-    targetBlurPx: 2,
+  function getInlineWorldImage(doc) {
+    const body = doc.body;
+    if (!body) return "";
 
-    visualReadyTimeoutMs: 1600,
-    visualReadyPollMs: 45,
+    const inline = String(body.style.backgroundImage || "").trim();
+    if (inline && inline !== "none") return inline;
 
-    soundEnabled: false,
-    soundName: "transition-swoosh",
-    soundVolume: 0.42,
-    soundMinGapMs: 260
-  });
-
-  /* =======================================================
-     ESTADO
-     ======================================================= */
-
-  let root = null;
-  let state = "idle";
-  let operationId = 0;
-  let activeSwapPromise = null;
-
-  let activeTarget = null;
-  let activeTargetStyle = null;
-
-  /* =======================================================
-     UTILITÁRIOS
-     ======================================================= */
-
-  function clamp(value, minimum, maximum) {
-    return Math.min(
-      maximum,
-      Math.max(minimum, value)
-    );
-  }
-
-  function safeNumber(value, fallback) {
-    const number = Number(value);
-
-    return Number.isFinite(number)
-      ? number
-      : fallback;
-  }
-
-  function safeText(value, fallback) {
-    const text = String(
-      value === null || value === undefined
-        ? ""
-        : value
-    ).trim();
-
-    return text || fallback;
-  }
-
-  function now() {
     try {
-      if (
-        window.performance &&
-        typeof window.performance.now === "function"
-      ) {
-        return window.performance.now();
-      }
-    } catch (_) {}
+      const current =
+        doc.documentElement.style.getPropertyValue("--duduq-world-image").trim() ||
+        doc.defaultView?.getComputedStyle(body).backgroundImage ||
+        "";
 
-    return Date.now();
-  }
-
-  function wait(ms) {
-    return new Promise(function (resolve) {
-      window.setTimeout(
-        resolve,
-        Math.max(0, safeNumber(ms, 0))
-      );
-    });
-  }
-
-  function isReducedMotion() {
-    try {
-      return (
-        window
-          .matchMedia(
-            "(prefers-reduced-motion: reduce)"
-          )
-          .matches === true
-      );
+      return current !== "none" ? current : "";
     } catch (_) {
-      return false;
+      return "";
     }
   }
 
-  function dispatch(name, detail = {}) {
-    try {
-      window.dispatchEvent(
-        new CustomEvent(name, {
-          detail: {
-            version: VERSION,
-            state,
-            ...detail
-          }
-        })
-      );
-    } catch (_) {}
+  function detectMechanic(doc, frame) {
+    const source = String(frame?.getAttribute("src") || "").toLowerCase();
+    const matches = [
+      ["bubble-pop", ".duduq-bp-root"],
+      ["drag-drop", ".duduq-dd-root, .duduq-udd-root"],
+      ["memory-quest", ".duduq-mq-root"],
+      ["matching", ".duduq-matching-root"],
+      ["flash-cards", ".duduq-fc-root"],
+      ["color-fusion", ".duduq-cf-root"],
+      ["word-search", ".duduq-ws-root"],
+      ["target-shooter", ".duduq-ts-root"]
+    ];
+
+    for (const [name, selector] of matches) {
+      if (source.includes(name) || doc.querySelector(selector)) return name;
+    }
+
+    return "universal";
   }
 
-  function nextFrame() {
-    return new Promise(function (resolve) {
-      window.requestAnimationFrame(resolve);
-    });
-  }
+  function syncDocument(doc, frame) {
+    if (!doc?.documentElement || !doc.body) return false;
 
-  async function nextPaint(frameCount = 1) {
-    const count = clamp(
-      Math.round(
-        safeNumber(frameCount, 1)
-      ),
-      1,
-      4
+    const image = getInlineWorldImage(doc);
+    if (image) {
+      doc.documentElement.style.setProperty("--duduq-world-image", image);
+    }
+
+    doc.documentElement.classList.add("duduq-world-fusion");
+    doc.documentElement.setAttribute(
+      "data-duduq-world-fusion-version",
+      VERSION
+    );
+    doc.documentElement.setAttribute(
+      "data-duduq-mechanic",
+      detectMechanic(doc, frame)
     );
 
-    for (
-      let index = 0;
-      index < count;
-      index += 1
-    ) {
-      await nextFrame();
-    }
+    return true;
   }
 
-  function normalizeOptions(options = {}) {
-    const reduced = isReducedMotion();
-
-    return {
-      coverDurationMs:
-        reduced
-          ? 90
-          : clamp(
-              safeNumber(
-                options.coverDurationMs,
-                DEFAULTS.coverDurationMs
-              ),
-              180,
-              900
-            ),
-
-      revealDurationMs:
-        reduced
-          ? 90
-          : clamp(
-              safeNumber(
-                options.revealDurationMs,
-                DEFAULTS.revealDurationMs
-              ),
-              180,
-              900
-            ),
-
-      paintFrames:
-        clamp(
-          Math.round(
-            safeNumber(
-              options.paintFrames,
-              DEFAULTS.paintFrames
-            )
-          ),
-          1,
-          3
-        ),
-
-      bridgeHoldMs:
-        reduced
-          ? 0
-          : clamp(
-              safeNumber(
-                options.bridgeHoldMs,
-                DEFAULTS.bridgeHoldMs
-              ),
-              0,
-              240
-            ),
-
-      fallbackExtraMs:
-        DEFAULTS.fallbackExtraMs,
-
-      target:
-        options.target ||
-        options.container ||
-        null,
-
-      targetSelector:
-        safeText(
-          options.targetSelector,
-          DEFAULTS.targetSelector
-        ),
-
-      targetBlurPx:
-        reduced
-          ? 0
-          : clamp(
-              safeNumber(
-                options.targetBlurPx,
-                DEFAULTS.targetBlurPx
-              ),
-              0,
-              8
-            ),
-
-      visualReadyTimeoutMs:
-        clamp(
-          safeNumber(
-            options.visualReadyTimeoutMs,
-            DEFAULTS.visualReadyTimeoutMs
-          ),
-          300,
-          3000
-        ),
-
-      visualReadyPollMs:
-        clamp(
-          safeNumber(
-            options.visualReadyPollMs,
-            DEFAULTS.visualReadyPollMs
-          ),
-          20,
-          120
-        ),
-
-      soundEnabled:
-        options.soundEnabled === true,
-
-      soundName:
-        safeText(
-          options.soundName,
-          DEFAULTS.soundName
-        ),
-
-      soundVolume:
-        clamp(
-          safeNumber(
-            options.soundVolume,
-            DEFAULTS.soundVolume
-          ),
-          0,
-          1
-        ),
-
-      soundMinGapMs:
-        Math.max(
-          0,
-          safeNumber(
-            options.soundMinGapMs,
-            DEFAULTS.soundMinGapMs
-          )
-        )
-    };
-  }
-
-  /* =======================================================
-     SOM DA TRANSIÇÃO
-     ======================================================= */
-
-  function playTransitionSound(config) {
-    if (
-      !config ||
-      config.soundEnabled !== true
-    ) {
-      return false;
-    }
-
-    try {
-      if (
-        !window.DuduQSound ||
-        typeof window.DuduQSound.play !== "function"
-      ) {
-        return false;
-      }
-
-      window.DuduQSound.play(
-        config.soundName,
-        {
-          volume: config.soundVolume,
-          minGapMs: config.soundMinGapMs
-        }
-      );
-
-      dispatch(
-        "duduq:transition-sound",
-        {
-          name: config.soundName
-        }
-      );
-
-      return true;
-    } catch (_) {
-      return false;
-    }
-  }
-
-  /* =======================================================
-     DOM DA CAMADA DE TRANSIÇÃO
-     ======================================================= */
-
-  function ensureRoot() {
-    if (
-      root &&
-      root.isConnected
-    ) {
-      return root;
-    }
-
-    root = document.createElement("div");
-    root.className = "duduq-transition";
-    root.setAttribute("aria-hidden", "true");
-
-    const stage = document.createElement("div");
-    stage.className = "duduq-transition-stage";
-
-    const glow = document.createElement("div");
-    glow.className = "duduq-transition-glow";
-
-    stage.appendChild(glow);
-    root.appendChild(stage);
-
-    (
-      document.body ||
-      document.documentElement
-    ).appendChild(root);
-
-    return root;
-  }
-
-  function lockPage() {
-    try {
-      document.documentElement.classList.add(
-        "duduq-transition-lock"
-      );
-
-      document.body?.classList.add(
-        "duduq-transition-lock"
-      );
-    } catch (_) {}
-  }
-
-  function unlockPage() {
-    try {
-      document.documentElement.classList.remove(
-        "duduq-transition-lock"
-      );
-
-      document.body?.classList.remove(
-        "duduq-transition-lock"
-      );
-    } catch (_) {}
-  }
-
-  /* =======================================================
-     PONTE VISUAL DO MUNDO
-
-     Durante os poucos milissegundos em que #root está
-     completamente invisível, o que deve permanecer na tela
-     é o background do próprio ano - nunca branco puro.
-
-     Este reforço apenas reaplica o ano já ativo no Core.
-     Não cria asset novo e não altera a identidade do módulo.
-     ======================================================= */
-
-  function ensureWorldBridge() {
-    try {
-      const year =
-        window.DuduQAssets
-          ?.getYear
-          ?.() ||
-        document.documentElement.getAttribute(
-          "data-duduq-ano-ativo"
-        );
-
-      if (
-        year &&
-        window.DuduQAssets
-          ?.setYear
-      ) {
-        window.DuduQAssets.setYear(year);
-      }
-    } catch (_) {}
-  }
-
-  function clearClasses() {
-    if (!root) return;
-
-    root.classList.remove(
-      "is-covering",
-      "is-covered",
-      "is-revealing"
-    );
-  }
-
-  /* =======================================================
-     ALVO VISUAL
-
-     O Fade/Dissolve acontece no conteúdo real (#root),
-     não em uma placa branca por cima da viewport.
-     ======================================================= */
-
-  function resolveTarget(config) {
-    const candidate = config?.target;
-
-    if (candidate instanceof Element) {
-      return candidate;
-    }
-
-    if (
-      typeof candidate === "string" &&
-      candidate.trim()
-    ) {
-      try {
-        const found = document.querySelector(
-          candidate.trim()
-        );
-
-        if (found) return found;
-      } catch (_) {}
-    }
-
-    if (
-      config?.targetSelector
-    ) {
-      try {
-        const found = document.querySelector(
-          config.targetSelector
-        );
-
-        if (found) return found;
-      } catch (_) {}
-    }
-
-    return (
-      document.getElementById("root") ||
-      null
-    );
-  }
-
-  function rememberTargetStyle(target) {
-    if (!target) return null;
-
-    return {
-      opacity: target.style.opacity,
-      filter: target.style.filter,
-      transition: target.style.transition,
-      willChange: target.style.willChange,
-      pointerEvents: target.style.pointerEvents
-    };
-  }
-
-  function restoreTargetStyle() {
-    if (
-      !activeTarget ||
-      !activeTargetStyle
-    ) {
-      activeTarget = null;
-      activeTargetStyle = null;
+  function ensureStylesheet(doc) {
+    if (doc === document || doc.getElementById("duduq-world-fusion-style")) {
       return;
     }
 
-    try {
-      activeTarget.style.opacity =
-        activeTargetStyle.opacity;
-
-      activeTarget.style.filter =
-        activeTargetStyle.filter;
-
-      activeTarget.style.transition =
-        activeTargetStyle.transition;
-
-      activeTarget.style.willChange =
-        activeTargetStyle.willChange;
-
-      activeTarget.style.pointerEvents =
-        activeTargetStyle.pointerEvents;
-    } catch (_) {}
-
-    activeTarget = null;
-    activeTargetStyle = null;
+    const link = doc.createElement("link");
+    link.id = "duduq-world-fusion-style";
+    link.rel = "stylesheet";
+    link.href = stylesheetUrl;
+    (doc.head || doc.documentElement).appendChild(link);
   }
 
-  function setTargetCovered(target, blurPx) {
-    if (!target) return;
+  function manageDocument(doc, frame) {
+    if (!doc) return false;
 
-    try {
-      target.style.transition = "none";
-      target.style.opacity = "0";
-      target.style.filter =
-        blurPx > 0
-          ? `blur(${blurPx}px)`
-          : "none";
-      target.style.willChange =
-        "opacity, filter";
-      target.style.pointerEvents = "none";
-    } catch (_) {}
+    ensureStylesheet(doc);
+    syncDocument(doc, frame);
+
+    if (managedDocuments.has(doc)) return true;
+    managedDocuments.add(doc);
+
+    let refreshQueued = false;
+    function queueRefresh() {
+      if (refreshQueued) return;
+      refreshQueued = true;
+      window.requestAnimationFrame(function () {
+        refreshQueued = false;
+        syncDocument(doc, frame);
+      });
+    }
+
+    const contentObserver = new MutationObserver(queueRefresh);
+    const worldObserver = new MutationObserver(queueRefresh);
+
+    if (doc.body) {
+      contentObserver.observe(doc.body, {
+        childList: true,
+        subtree: true
+      });
+
+      worldObserver.observe(doc.body, {
+        attributes: true,
+        attributeFilter: ["style"],
+        subtree: false
+      });
+    }
+
+    return true;
   }
 
-  function animateTarget(
-    target,
-    direction,
-    config
-  ) {
-    if (!target) {
-      return Promise.resolve(true);
+  function manageFrame(frame) {
+    if (!(frame instanceof HTMLIFrameElement)) return;
+
+    function connect() {
+      try {
+        manageDocument(frame.contentDocument, frame);
+      } catch (_) {
+        /* Iframes externos continuam funcionando sem a camada visual. */
+      }
     }
 
-    const isCover =
-      direction === "cover";
-
-    const duration =
-      isCover
-        ? config.coverDurationMs
-        : config.revealDurationMs;
-
-    const easing =
-      isCover
-        ? "cubic-bezier(.22,.72,.22,1)"
-        : "cubic-bezier(.20,.02,.18,1)";
-
-    const blur =
-      Math.max(
-        0,
-        config.targetBlurPx
-      );
-
-    const fromOpacity =
-      isCover ? 1 : 0;
-
-    const toOpacity =
-      isCover ? 0 : 1;
-
-    const fromFilter =
-      isCover
-        ? "blur(0px)"
-        : blur > 0
-          ? `blur(${blur}px)`
-          : "none";
-
-    const toFilter =
-      isCover
-        ? blur > 0
-          ? `blur(${blur}px)`
-          : "none"
-        : "blur(0px)";
-
-    try {
-      target.style.willChange =
-        "opacity, filter";
-
-      target.style.pointerEvents =
-        "none";
-    } catch (_) {}
-
-    if (
-      typeof target.animate === "function"
-    ) {
-      try {
-        const animation = target.animate(
-          [
-            {
-              opacity: fromOpacity,
-              filter: fromFilter
-            },
-            {
-              opacity: toOpacity,
-              filter: toFilter
-            }
-          ],
-          {
-            duration,
-            easing,
-            fill: "forwards"
-          }
-        );
-
-        return Promise.resolve(
-          animation.finished
-        )
-          .catch(function () {
-            return true;
-          })
-          .then(function () {
-            try {
-              target.style.opacity =
-                String(toOpacity);
-
-              target.style.filter =
-                toFilter;
-
-              animation.cancel();
-            } catch (_) {}
-
-            return true;
-          });
-      } catch (_) {}
+    if (!managedFrames.has(frame)) {
+      managedFrames.add(frame);
+      frame.addEventListener("load", connect);
     }
 
-    return new Promise(function (resolve) {
-      try {
-        target.style.transition =
-          `opacity ${duration}ms ${easing}, ` +
-          `filter ${duration}ms ${easing}`;
+    connect();
+  }
 
-        target.style.opacity =
-          String(fromOpacity);
+  function scanFrames() {
+    document.querySelectorAll("iframe").forEach(manageFrame);
+  }
 
-        target.style.filter =
-          fromFilter;
+  function start() {
+    manageDocument(document, null);
+    scanFrames();
 
-        target.getBoundingClientRect();
+    const observer = new MutationObserver(function (records) {
+      for (const record of records) {
+        for (const node of record.addedNodes) {
+          if (!(node instanceof Element)) continue;
+          if (node instanceof HTMLIFrameElement) manageFrame(node);
+          node.querySelectorAll?.("iframe").forEach(manageFrame);
+        }
+      }
 
-        window.requestAnimationFrame(function () {
-          try {
-            target.style.opacity =
-              String(toOpacity);
+      syncDocument(document, null);
+    });
 
-            target.style.filter =
-              toFilter;
-          } catch (_) {}
-        });
-      } catch (_) {}
-
-      window.setTimeout(
-        function () {
-          resolve(true);
-        },
-        duration + 60
-      );
+    observer.observe(document.body || document.documentElement, {
+      childList: true,
+      subtree: true
     });
   }
 
-  /* =======================================================
-     PRONTIDÃO VISUAL DO NOVO IFRAME
-
-     Mesmo que o HTML do iframe já tenha terminado de
-     carregar, alguns runtimes ainda exibem #duduq-boot.
-
-     O reveal só começa quando esse boot deixou de estar
-     visível, evitando o clarão branco entre mecânicas.
-     ======================================================= */
-
-  function isIframeVisuallyReady(iframe) {
-    if (!iframe) return true;
-
-    try {
-      const declaredSrc = String(
-        iframe.getAttribute("src") ||
-        ""
-      ).trim();
-
-      if (
-        !declaredSrc ||
-        /^about:blank(?:$|[?#])/i.test(
-          declaredSrc
-        )
-      ) {
-        return false;
-      }
-
-      const doc = iframe.contentDocument;
-
-      if (!doc) {
-        return false;
-      }
-
-      if (
-        doc.readyState !== "interactive" &&
-        doc.readyState !== "complete"
-      ) {
-        return false;
-      }
-
-      const boot =
-        doc.getElementById("duduq-boot");
-
-      if (boot) {
-        const bootStyle =
-          iframe.contentWindow
-            ?.getComputedStyle
-            ?.(boot);
-
-        const bootVisible =
-          boot.hidden !== true &&
-          bootStyle?.display !== "none" &&
-          bootStyle?.visibility !== "hidden" &&
-          Number(bootStyle?.opacity ?? 1) > 0.01;
-
-        if (bootVisible) {
-          return false;
-        }
-      }
-
-      const runtimeRoot =
-        doc.getElementById("root");
-
-      if (
-        runtimeRoot &&
-        runtimeRoot.childElementCount > 0
-      ) {
-        return true;
-      }
-
-      if (
-        boot &&
-        boot.hidden === true
-      ) {
-        return true;
-      }
-
-      return Boolean(
-        doc.body &&
-        doc.body.children.length > 0
-      );
-    } catch (_) {
-      /*
-       * Em um iframe cross-origin não podemos inspecionar o
-       * DOM. Nesse caso não bloqueamos a transição.
-       */
-      return true;
-    }
-  }
-
-  async function waitForVisualReady(
-    target,
-    config
-  ) {
-    if (!target) {
-      await nextPaint(1);
-      return true;
-    }
-
-    const iframe =
-      target.querySelector
-        ? target.querySelector("iframe")
-        : null;
-
-    if (!iframe) {
-      await nextPaint(
-        config.paintFrames
-      );
-      return true;
-    }
-
-    const deadline =
-      now() +
-      config.visualReadyTimeoutMs;
-
-    while (
-      now() < deadline
-    ) {
-      if (
-        isIframeVisuallyReady(iframe)
-      ) {
-        await nextPaint(1);
-        return true;
-      }
-
-      await wait(
-        config.visualReadyPollMs
-      );
-    }
-
-    /*
-     * Timeout de segurança: nunca travamos o módulo.
-     * O conteúdo continua invisível até este ponto.
-     */
-    await nextPaint(1);
-    return true;
-  }
-
-  /* =======================================================
-     PREPARAÇÃO
-     ======================================================= */
-
-  async function prepare(config) {
-    ensureRoot();
-    clearClasses();
-
-    const target =
-      resolveTarget(config);
-
-    if (
-      activeTarget &&
-      activeTarget !== target
-    ) {
-      restoreTargetStyle();
-    }
-
-    if (
-      target &&
-      activeTarget !== target
-    ) {
-      activeTarget = target;
-      activeTargetStyle =
-        rememberTargetStyle(target);
-    }
-
-    root.getBoundingClientRect();
-
-    await nextFrame();
-
-    return true;
-  }
-
-  /* =======================================================
-     COVER — FADE OUT REAL
-     ======================================================= */
-
-  async function cover(options = {}) {
-    const config = normalizeOptions(options);
-    const currentOperation = ++operationId;
-
-    ensureRoot();
-    lockPage();
-    ensureWorldBridge();
-
-    state = "preparing";
-
-    await prepare(config);
-
-    if (
-      currentOperation !== operationId
-    ) {
-      return false;
-    }
-
-    state = "covering";
-
-    dispatch(
-      "duduq:transition-cover-start"
-    );
-
-    /*
-     * O swoosh começa junto com o fade-out real.
-     * Não existe placa ou overlay visual sobre a viewport.
-     */
-    playTransitionSound(config);
-
-    await animateTarget(
-      activeTarget,
-      "cover",
-      config
-    );
-
-    if (
-      currentOperation !== operationId
-    ) {
-      return false;
-    }
-
-    /*
-     * Ponto de corte verdadeiro: a tela antiga já está 100%
-     * invisível antes de o Host destruir ou montar qualquer coisa.
-     */
-    setTargetCovered(
-      activeTarget,
-      config.targetBlurPx
-    );
-
-    state = "covered";
-
-    dispatch(
-      "duduq:transition-covered"
-    );
-
-    return true;
-  }
-
-  /* =======================================================
-     REVEAL — FADE IN REAL
-     ======================================================= */
-
-  async function reveal(options = {}) {
-    const config = normalizeOptions(options);
-    const currentOperation = operationId;
-
-    ensureRoot();
-    ensureWorldBridge();
-
-    /*
-     * A nova tela continua totalmente invisível enquanto o
-     * iframe termina o primeiro paint e remove o boot interno.
-     */
-    await waitForVisualReady(
-      activeTarget,
-      config
-    );
-
-    await nextPaint(
-      config.paintFrames
-    );
-
-    if (
-      currentOperation !== operationId
-    ) {
-      return false;
-    }
-
-    /*
-     * Pequeno respiro intencional entre as duas fases.
-     * Ele impede o efeito de "tela nova aparecendo por baixo"
-     * e deixa o mundo do ano funcionar como ponte visual.
-     */
-    if (config.bridgeHoldMs > 0) {
-      await wait(config.bridgeHoldMs);
-    }
-
-    if (
-      currentOperation !== operationId
-    ) {
-      return false;
-    }
-
-    state = "revealing";
-
-    dispatch(
-      "duduq:transition-reveal-start"
-    );
-
-    /*
-     * Só agora a nova tela começa a aparecer.
-     * Não há crossfade com a anterior e não há overlay branco.
-     */
-    await animateTarget(
-      activeTarget,
-      "reveal",
-      config
-    );
-
-    if (
-      currentOperation !== operationId
-    ) {
-      return false;
-    }
-
-    clearClasses();
-    restoreTargetStyle();
-    unlockPage();
-
-    state = "idle";
-
-    dispatch(
-      "duduq:transition-complete"
-    );
-
-    return true;
-  }
-
-  /* =======================================================
-     SWAP
-     ======================================================= */
-
-  function swap(callback, options = {}) {
-    if (
-      typeof callback !== "function"
-    ) {
-      return Promise.reject(
-        new Error(
-          "[DuduQ Transition] swap() precisa receber uma função."
-        )
-      );
-    }
-
-    if (activeSwapPromise) {
-      return activeSwapPromise;
-    }
-
-    activeSwapPromise = (
-      async function () {
-        try {
-          const covered = await cover(
-            options
-          );
-
-          if (!covered) {
-            return false;
-          }
-
-          dispatch(
-            "duduq:transition-swap"
-          );
-
-          /*
-           * Destroy + mount acontecem somente depois que
-           * o conteúdo anterior chegou a opacity:0.
-           * A tela nova também nasce escondida pelo mesmo #root.
-           */
-          const result = await callback();
-
-          await reveal(options);
-
-          return result;
-        } catch (error) {
-          console.error(
-            "[DuduQ Transition] Erro durante troca:",
-            error
-          );
-
-          hideImmediate();
-
-          throw error;
-        } finally {
-          activeSwapPromise = null;
-        }
-      }
-    )();
-
-    return activeSwapPromise;
-  }
-
-  /* =======================================================
-     RESET IMEDIATO
-     ======================================================= */
-
-  function hideImmediate() {
-    operationId += 1;
-
-    if (root) {
-      clearClasses();
-    }
-
-    restoreTargetStyle();
-    unlockPage();
-    state = "idle";
-
-    dispatch(
-      "duduq:transition-reset"
-    );
-
-    return true;
-  }
-
-  /* =======================================================
-     DESTROY
-     ======================================================= */
-
-  function destroy() {
-    operationId += 1;
-    activeSwapPromise = null;
-
-    restoreTargetStyle();
-    unlockPage();
-
-    if (
-      root &&
-      root.parentNode
-    ) {
-      root.parentNode.removeChild(root);
-    }
-
-    root = null;
-    state = "idle";
-
-    return true;
-  }
-
-  /* =======================================================
-     STATUS
-     ======================================================= */
-
-  function getState() {
-    return state;
-  }
-
-  function isActive() {
-    return state !== "idle";
-  }
-
-  function isCovered() {
-    return state === "covered";
-  }
-
-  /* =======================================================
-     API PÚBLICA
-     ======================================================= */
-
-  window.DuduQTransition = Object.freeze({
+  window.DuduQWorldFusion = Object.freeze({
     version: VERSION,
-    cover,
-    reveal,
-    swap,
-    hideImmediate,
-    destroy,
-    getState,
-    isActive,
-    isCovered,
-    ensureRoot
+    refresh: function () {
+      syncDocument(document, null);
+      scanFrames();
+      return true;
+    }
   });
 
-  /* =======================================================
-     READY
-     ======================================================= */
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, { once: true });
+  } else {
+    start();
+  }
 
-  dispatch(
-    "duduq:transition-ready",
-    {
-      ready: true
-    }
-  );
-
+  window.addEventListener("duduq:assets-ready", function () {
+    window.DuduQWorldFusion.refresh();
+  });
 })();
-
