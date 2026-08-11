@@ -2,7 +2,7 @@
    DUDUQ CORE — COMPLETION
    Tela final premium DuduQ
    Compatível com duduq-completion.js 1.0.0
-   Versão 1.2.3
+   Versão 1.2.4
    ========================================================= */
 
 
@@ -155,14 +155,14 @@
   align-items: center;
   justify-content: flex-start;
 
-  gap: 11px;
+  gap: 9px;
 
-  margin-top: 58px;
+  margin-top: 62px;
 
   padding:
-    118px
+    84px
     clamp(26px, 5vw, 52px)
-    30px;
+    28px;
 
   overflow: visible;
 
@@ -249,11 +249,11 @@
   position: absolute;
   z-index: 9;
 
-  top: -118px;
+  top: -126px;
   left: 50%;
 
-  width: 300px;
-  height: 260px;
+  width: 320px;
+  height: 278px;
 
   display: grid;
   place-items: center;
@@ -369,7 +369,7 @@
   width: 100%;
   max-width: 620px;
 
-  margin: 4px 0 0;
+  margin: 0;
 
   color:
     var(--duduq-completion-blue);
@@ -458,7 +458,7 @@
   min-height: 48px;
 
   margin:
-    8px 0
+    6px 0
     1px;
 
   padding:
@@ -568,7 +568,7 @@
 
   gap: 10px;
 
-  margin-top: 14px;
+  margin-top: 12px;
 
   animation:
     duduqCompletionContentIn
@@ -903,18 +903,16 @@
     opacity: 0;
 
     transform:
-      translateY(24px)
-      scale(1.65)
-      rotate(-2deg);
+      translateY(22px)
+      scale(1.86);
   }
 
-  68% {
+  70% {
     opacity: 1;
 
     transform:
-      translateY(-5px)
-      scale(2.13)
-      rotate(.8deg);
+      translateY(-4px)
+      scale(2.12);
   }
 
   100% {
@@ -922,40 +920,25 @@
 
     transform:
       translateY(0)
-      scale(2.05)
-      rotate(0deg);
+      scale(2.12);
   }
 }
 
 
+/* Levitação pura: a escala permanece constante.
+   Não há mais efeito de respiração nem rotação contínua. */
 @keyframes duduqCompletionMascotFloat {
   0%,
   100% {
     transform:
       translateY(0)
-      scale(2.05, 2.05)
-      rotate(-.3deg);
-  }
-
-  24% {
-    transform:
-      translateY(-7px)
-      scale(2.06, 2.03)
-      rotate(.15deg);
+      scale(2.12);
   }
 
   50% {
     transform:
-      translateY(-13px)
-      scale(2.09, 2.01)
-      rotate(.45deg);
-  }
-
-  76% {
-    transform:
-      translateY(-7px)
-      scale(2.06, 2.04)
-      rotate(0deg);
+      translateY(-12px)
+      scale(2.12);
   }
 }
 
@@ -1064,12 +1047,12 @@
       min(650px, 95vw);
 
     margin-top:
-      54px;
+      58px;
 
     padding:
-      112px
+      78px
       27px
-      28px;
+      26px;
 
     border-radius:
       30px;
@@ -1082,13 +1065,13 @@
 
   .duduq-completion-hero {
     top:
-      -112px;
+      -118px;
 
     width:
-      286px;
+      302px;
 
     height:
-      248px;
+      260px;
   }
 
   .duduq-completion-title {
@@ -1120,15 +1103,15 @@
     min-height: 0;
 
     margin-top:
-      52px;
+      54px;
 
     gap:
-      9px;
+      8px;
 
     padding:
-      102px
+      76px
       18px
-      24px;
+      23px;
 
     border-radius:
       28px;
@@ -1147,13 +1130,13 @@
 
   .duduq-completion-hero {
     top:
-      -100px;
+      -101px;
 
     width:
-      254px;
+      264px;
 
     height:
-      222px;
+      228px;
   }
 
   .duduq-completion-title {
@@ -1198,7 +1181,7 @@
   }
 
   .duduq-completion-actions {
-    margin-top: 12px;
+    margin-top: 10px;
   }
 
   .duduq-completion-button {
@@ -1234,22 +1217,22 @@
   }
 
   .duduq-completion-card {
-    margin-top: 50px;
+    margin-top: 58px;
 
-    gap: 9px;
+    gap: 8px;
 
     padding:
-      88px
+      64px
       40px
       22px;
   }
 
   .duduq-completion-hero {
-    top: -96px;
+    top: -108px;
 
-    width: 248px;
+    width: 276px;
 
-    height: 212px;
+    height: 232px;
   }
 
   .duduq-completion-title {
@@ -1268,7 +1251,7 @@
   .duduq-completion-progress {
     min-height: 44px;
 
-    margin-top: 2px;
+    margin-top: 3px;
   }
 
   .duduq-completion-progress-icon {
@@ -1280,7 +1263,7 @@
   }
 
   .duduq-completion-actions {
-    margin-top: 12px;
+    margin-top: 10px;
   }
 
   .duduq-completion-button {
@@ -1310,7 +1293,7 @@
 
   .duduq-completion-mascot {
     transform:
-      scale(2.05)
+      scale(2.12)
       !important;
   }
 
