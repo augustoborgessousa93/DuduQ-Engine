@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — TRANSITION
    Ponte visual World Fusion
-   Versão 1.4.4
+   Versão 1.4.6
    ========================================================= */
 
 .duduq-transition {
@@ -20,7 +20,7 @@
   contain: strict;
   transform: translateZ(0);
   transform-origin: center;
-  background: #16425f;
+  background: #1b4866;
   will-change: opacity;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -36,12 +36,12 @@
 .duduq-transition::before {
   z-index: 0;
   inset: -3.5%;
-  background-color: #16425f;
+  background-color: #1b4866;
   background-image: var(--duduq-transition-world-image, none);
   background-position: var(--duduq-transition-world-position, center top);
   background-size: var(--duduq-transition-world-size, cover);
   background-repeat: no-repeat;
-  filter: blur(5px) saturate(.72) brightness(.95) contrast(.92);
+  filter: blur(5px) saturate(.74) brightness(.99) contrast(.93);
   transform: translateZ(0) scale(1.025);
   will-change: auto;
 }
@@ -52,13 +52,13 @@
   background:
     linear-gradient(
       180deg,
-      rgba(9, 34, 55, .02),
-      rgba(9, 34, 55, .06)
+      rgba(9, 34, 55, .03),
+      rgba(9, 34, 55, .07)
     ),
     radial-gradient(
       circle at 50% 32%,
-      rgba(241, 251, 255, .15),
-      rgba(235, 249, 255, .07) 34%,
+      rgba(241, 251, 255, .20),
+      rgba(235, 249, 255, .10) 34%,
       transparent 58%
     );
 }
@@ -70,8 +70,8 @@
   background:
     linear-gradient(
       180deg,
-      rgba(249, 253, 255, .025),
-      rgba(243, 250, 255, .012)
+      rgba(249, 253, 255, .055),
+      rgba(243, 250, 255, .030)
     );
 }
 
