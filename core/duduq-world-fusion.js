@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.2.0
+   Versão 1.2.1
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.2.0";
+  const VERSION = "1.2.1";
   if (window.DuduQWorldFusion?.version === VERSION) return;
 
   const scriptUrl =
@@ -15,7 +15,7 @@
     new URL("./duduq-world-fusion.js", window.location.href).href;
 
   const stylesheetUrl = new URL(
-    "./duduq-world-fusion.css?v=120",
+    "./duduq-world-fusion.css?v=122",
     scriptUrl
   ).href;
 
@@ -102,12 +102,15 @@
         event.stopImmediatePropagation();
 
         try {
-          const operation = isFullscreen(hostDocument)
-            ? (hostDocument.exitFullscreen?.() ||
-              hostDocument.webkitExitFullscreen?.())
-            : (hostDocument.documentElement.requestFullscreen?.({
-                navigationUI: "hide"
-              }) || hostDocument.documentElement.webkitRequestFullscreen?.());
+          const hostApi = doc.defaultView?.parent?.DuduQFullscreen;
+          const operation = hostApi?.toggle
+            ? hostApi.toggle()
+            : isFullscreen(hostDocument)
+              ? (hostDocument.exitFullscreen?.() ||
+                hostDocument.webkitExitFullscreen?.())
+              : (hostDocument.documentElement.requestFullscreen?.({
+                  navigationUI: "hide"
+                }) || hostDocument.documentElement.webkitRequestFullscreen?.());
 
           Promise.resolve(operation)
             .catch(function () {})
