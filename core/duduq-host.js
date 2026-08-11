@@ -1,16 +1,21 @@
 /* =========================================================
-   DUDUQ CORE â€” HOST
-   Orquestrador central das mecÃ¢nicas e mÃ³dulos DuduQ.
-   VersÃ£o 1.5.1
+   DUDUQ CORE — HOST
+   Orquestrador central das mecânicas e módulos DuduQ.
+   Versão 1.5.2
  
+   NOVIDADES 1.5.2
+   - mantém tela cheia no documento principal entre mecânicas
+   - conclusão usa uma única transição, sem espera ou entrada duplicada
+   - atualiza a integração visual para World Fusion 1.1
+
    NOVIDADES 1.5.1
    - sincroniza o Host com a ponte visual opaca do Transition 1.5
-   - reduz a duraÃ§Ã£o percebida da troca e da conclusÃ£o
-   - a camada de transiÃ§Ã£o protege todo o destroy/mount
-   - transition-swoosh toca somente entre mecÃ¢nicas
-   - silencia o win interno durante trocas intermediÃ¡rias
-   - win final toca somente depois da transiÃ§Ã£o de conclusÃ£o
-   - mantÃ©m o Host como fonte oficial do progresso
+   - reduz a duração percebida da troca e da conclusão
+   - a camada de transição protege todo o destroy/mount
+   - transition-swoosh toca somente entre mecânicas
+   - silencia o win interno durante trocas intermediárias
+   - win final toca somente depois da transição de conclusão
+   - mantém o Host como fonte oficial do progresso
    ========================================================= */
  
 (function () {
@@ -20,7 +25,7 @@
     document.currentScript?.src ||
     new URL("./duduq-host.js", window.location.href).href;
  
-  const VERSION = "1.5.1";
+  const VERSION = "1.5.2";
  
   if (
     window.DuduQ &&
@@ -48,7 +53,7 @@
   /* =======================================================
      WORLD FUSION
 
-     Qualquer pÃ¡gina que carregue o Host recebe a camada
+     Qualquer página que carregue o Host recebe a camada
      visual compartilhada, mesmo sem usar o index de teste.
      ======================================================= */
 
@@ -59,7 +64,7 @@
       const link = document.createElement("link");
       link.id = "duduq-world-fusion-core-style";
       link.rel = "stylesheet";
-      link.href = new URL("duduq-world-fusion.css?v=100", coreBase).href;
+      link.href = new URL("duduq-world-fusion.css?v=110", coreBase).href;
       (document.head || document.documentElement).appendChild(link);
     }
 
@@ -69,7 +74,7 @@
     ) {
       const script = document.createElement("script");
       script.id = "duduq-world-fusion-core-script";
-      script.src = new URL("duduq-world-fusion.js?v=100", coreBase).href;
+      script.src = new URL("duduq-world-fusion.js?v=110", coreBase).href;
       script.async = true;
       (document.head || document.documentElement).appendChild(script);
     }
@@ -79,7 +84,7 @@
  
  
   /* =======================================================
-     UTILITÃRIOS
+     UTILITÁRIOS
      ======================================================= */
  
   function isObject(value) {
@@ -139,7 +144,7 @@
     }
  
     throw new Error(
-      "[DuduQ Host] Container da atividade nÃ£o encontrado."
+      "[DuduQ Host] Container da atividade não encontrado."
     );
   }
  
@@ -222,7 +227,7 @@
       destroy();
     } catch (error) {
       console.warn(
-        "[DuduQ Host] Erro durante destroy() da mecÃ¢nica:",
+        "[DuduQ Host] Erro durante destroy() da mecânica:",
         error
       );
     }
@@ -270,11 +275,11 @@
 
  
   /* =======================================================
-     SILÃŠNCIO DE VITÃ“RIA ENTRE MECÃ‚NICAS
+     SILÊNCIO DE VITÓRIA ENTRE MECÂNICAS
  
-     A comemoraÃ§Ã£o "win" pertence somente Ã  conclusÃ£o real
-     do mÃ³dulo. Algumas mecÃ¢nicas legadas possuem um canal
-     sonoro prÃ³prio dentro do iframe; por isso o Host corta
+     A comemoração "win" pertence somente à conclusão real
+     do módulo. Algumas mecânicas legadas possuem um canal
+     sonoro próprio dentro do iframe; por isso o Host corta
      o win tanto no Core quanto no runtime montado.
      ======================================================= */
  
@@ -338,12 +343,12 @@
  
  
   /* =======================================================
-     PRONTIDÃƒO DA NOVA TELA
+     PRONTIDÃO DA NOVA TELA
  
-     As mecÃ¢nicas atuais usam iframe. O Host aguarda:
+     As mecânicas atuais usam iframe. O Host aguarda:
      1. DUDUQ_MECHANIC_READY do iframe, OU
-     2. load do iframe + pequena estabilizaÃ§Ã£o, OU
-     3. timeout de seguranÃ§a.
+     2. load do iframe + pequena estabilização, OU
+     3. timeout de segurança.
  
      Para telas sem iframe, aguardamos frames de pintura.
      ======================================================= */
@@ -379,8 +384,8 @@
     }
  
     /*
-     * Atalho seguro: se o iframe real jÃ¡ terminou de carregar
-     * antes de registrarmos os listeners, nÃ£o esperamos o
+     * Atalho seguro: se o iframe real já terminou de carregar
+     * antes de registrarmos os listeners, não esperamos o
      * timeout. Evitamos apenas o about:blank inicial.
      */
     try {
@@ -467,8 +472,8 @@
  
         function handleLoad() {
           /*
-           * Apenas um respiro curtÃ­ssimo para o primeiro paint.
-           * A troca nÃ£o deve parecer uma tela de loading.
+           * Apenas um respiro curtíssimo para o primeiro paint.
+           * A troca não deve parecer uma tela de loading.
            */
           postLoadTimer = window.setTimeout(
             finish,
@@ -552,13 +557,13 @@
  
  
   /* =======================================================
-     REGISTRO DE MECÃ‚NICAS
+     REGISTRO DE MECÂNICAS
      ======================================================= */
  
   function registerMechanic(definition) {
     if (!isObject(definition)) {
       throw new Error(
-        "[DuduQ Host] A definiÃ§Ã£o da mecÃ¢nica precisa ser um objeto."
+        "[DuduQ Host] A definição da mecânica precisa ser um objeto."
       );
     }
  
@@ -566,7 +571,7 @@
  
     if (!id) {
       throw new Error(
-        "[DuduQ Host] A mecÃ¢nica precisa possuir um id."
+        "[DuduQ Host] A mecânica precisa possuir um id."
       );
     }
  
@@ -574,7 +579,7 @@
       typeof definition.mount !== "function"
     ) {
       throw new Error(
-        `[DuduQ Host] A mecÃ¢nica "${id}" precisa fornecer uma funÃ§Ã£o mount().`
+        `[DuduQ Host] A mecânica "${id}" precisa fornecer uma função mount().`
       );
     }
  
@@ -645,7 +650,7 @@
  
  
   /* =======================================================
-     NORMALIZAÃ‡ÃƒO DO MÃ“DULO
+     NORMALIZAÇÃO DO MÓDULO
      ======================================================= */
  
   function normalizeStep(step, index) {
@@ -663,7 +668,7 @@
  
     if (!mechanic) {
       throw new Error(
-        `[DuduQ Host] A etapa ${index + 1} nÃ£o possui uma mecÃ¢nica.`
+        `[DuduQ Host] A etapa ${index + 1} não possui uma mecânica.`
       );
     }
  
@@ -695,7 +700,7 @@
   function normalizeModule(input) {
     if (!isObject(input)) {
       throw new Error(
-        "[DuduQ Host] O mÃ³dulo precisa ser um objeto."
+        "[DuduQ Host] O módulo precisa ser um objeto."
       );
     }
  
@@ -705,7 +710,7 @@
  
     if (steps.length === 0) {
       throw new Error(
-        "[DuduQ Host] O mÃ³dulo precisa possuir pelo menos uma etapa."
+        "[DuduQ Host] O módulo precisa possuir pelo menos uma etapa."
       );
     }
  
@@ -748,7 +753,7 @@
  
   /* =======================================================
      PROGRESSO GLOBAL
-     O HOST Ã‰ A FONTE OFICIAL DO PROGRESSO.
+     O HOST É A FONTE OFICIAL DO PROGRESSO.
      ======================================================= */
  
   function buildProgress(
@@ -836,7 +841,7 @@
       completed,
  
       label: completed
-        ? `${completedSteps} de ${totalSteps} etapas concluÃ­das`
+        ? `${completedSteps} de ${totalSteps} etapas concluídas`
         : `Etapa ${currentStep} de ${totalSteps}`
     });
   }
@@ -872,7 +877,7 @@
  
       progress,
  
-      /* Alias temporÃ¡rio durante a migraÃ§Ã£o das mecÃ¢nicas. */
+      /* Alias temporário durante a migração das mecânicas. */
       globalProgress: progress,
  
       assets:
@@ -888,7 +893,7 @@
  
  
   /* =======================================================
-     ERROS DE EXECUÃ‡ÃƒO
+     ERROS DE EXECUÇÃO
      ======================================================= */
  
   function renderRuntimeError(
@@ -926,7 +931,7 @@
     );
  
     title.textContent =
-      "NÃ£o foi possÃ­vel abrir esta etapa";
+      "Não foi possível abrir esta etapa";
  
     const text = createElement(
       "p",
@@ -964,7 +969,7 @@
  
  
   /* =======================================================
-     EXECUÃ‡ÃƒO DAS ETAPAS
+     EXECUÇÃO DAS ETAPAS
      ======================================================= */
  
   function renderCurrentStep(session) {
@@ -986,9 +991,9 @@
     hideCompletion();
  
     /*
-     * Este destroy continua aqui por seguranÃ§a.
+     * Este destroy continua aqui por segurança.
      * Durante uma troca normal ele ocorre somente quando
-     * DuduQTransition jÃ¡ cobriu a tela.
+     * DuduQTransition já cobriu a tela.
      */
     destroyMountedMechanic(session);
     clearContainer(session.container);
@@ -1006,7 +1011,7 @@
     if (!mechanic) {
       renderRuntimeError(
         session,
-        `A mecÃ¢nica "${step.mechanic}" nÃ£o estÃ¡ registrada.`
+        `A mecânica "${step.mechanic}" não está registrada.`
       );
  
       return false;
@@ -1023,7 +1028,7 @@
       } catch (error) {
         renderRuntimeError(
           session,
-          `A validaÃ§Ã£o da mecÃ¢nica "${step.mechanic}" apresentou um erro.`,
+          `A validação da mecânica "${step.mechanic}" apresentou um erro.`,
           error
         );
  
@@ -1033,7 +1038,7 @@
       if (!valid) {
         renderRuntimeError(
           session,
-          `O conteÃºdo da etapa "${step.id}" nÃ£o Ã© compatÃ­vel com a mecÃ¢nica "${step.mechanic}".`
+          `O conteúdo da etapa "${step.id}" não é compatível com a mecânica "${step.mechanic}".`
         );
  
         return false;
@@ -1081,7 +1086,7 @@
     } catch (error) {
       renderRuntimeError(
         session,
-        `NÃ£o foi possÃ­vel iniciar a mecÃ¢nica "${step.mechanic}".`,
+        `Não foi possível iniciar a mecânica "${step.mechanic}".`,
         error
       );
  
@@ -1125,15 +1130,15 @@
       !hasNextMechanic;
  
     /*
-     * Travamos a conclusÃ£o imediatamente para impedir
+     * Travamos a conclusão imediatamente para impedir
      * duplo clique / dupla mensagem do iframe.
      */
     session.stepCompleted = true;
  
     /*
-     * Entre mecÃ¢nicas nÃ£o existe som de vitÃ³ria.
+     * Entre mecânicas não existe som de vitória.
      * Se um runtime interno iniciou o win, cortamos agora,
-     * antes do slide comeÃ§ar.
+     * antes do slide começar.
      */
     if (hasNextMechanic) {
       silenceIntermediateVictory(session);
@@ -1173,14 +1178,14 @@
     /* =====================================================
        TROCA PROTEGIDA
  
-       MecÃ¢nica -> mecÃ¢nica:
-       - slide contÃ­nuo
+       Mecânica -> mecânica:
+       - slide contínuo
        - transition-swoosh
        - sem win
  
-       MecÃ¢nica final -> conclusÃ£o:
+       Mecânica final -> conclusão:
        - slide visual sem swoosh
-       - win somente depois que a conclusÃ£o apareceu
+       - win somente depois que a conclusão apareceu
        ===================================================== */
  
     runTransitionSwap(
@@ -1206,11 +1211,6 @@
             { playSound: false }
           );
  
-          await waitForMountedView(
-            session,
-            { paintFrames: 1 }
-          );
- 
           return true;
         }
  
@@ -1227,6 +1227,16 @@
         return true;
       },
       {
+        coverDurationMs: isFinalStep
+          ? 180
+          : TRANSITION_OPTIONS.coverDurationMs,
+        revealDurationMs: isFinalStep
+          ? 220
+          : TRANSITION_OPTIONS.revealDurationMs,
+        paintFrames: isFinalStep
+          ? 1
+          : TRANSITION_OPTIONS.paintFrames,
+        bridgeHoldMs: 0,
         soundEnabled: hasNextMechanic,
         soundName: "transition-swoosh",
         soundVolume: 0.42,
@@ -1247,7 +1257,7 @@
       .catch(
         function (error) {
           console.error(
-            "[DuduQ Host] Falha na transiÃ§Ã£o entre etapas:",
+            "[DuduQ Host] Falha na transição entre etapas:",
             error
           );
  
@@ -1259,8 +1269,8 @@
           }
  
           /*
-           * Se a tela final jÃ¡ foi criada mas a animaÃ§Ã£o falhou,
-           * ainda preservamos a comemoraÃ§Ã£o final.
+           * Se a tela final já foi criada mas a animação falhou,
+           * ainda preservamos a comemoração final.
            */
           if (
             isFinalStep &&
@@ -1288,7 +1298,7 @@
  
  
   /* =======================================================
-     CONCLUSÃƒO PREMIUM CENTRALIZADA
+     CONCLUSÃO PREMIUM CENTRALIZADA
      ======================================================= */
  
   function buildCompletionMessage(module) {
@@ -1303,17 +1313,17 @@
       String(module.module).trim() !== ""
     ) {
       return (
-        `MÃ³dulo ${module.module} de ${subject} concluÃ­do com sucesso.`
+        `Módulo ${module.module} de ${subject} concluído com sucesso.`
       );
     }
  
     if (module.title) {
       return (
-        `${module.title} concluÃ­do com sucesso.`
+        `${module.title} concluído com sucesso.`
       );
     }
  
-    return `${subject} concluÃ­do com sucesso.`;
+    return `${subject} concluído com sucesso.`;
   }
  
  
@@ -1333,7 +1343,7 @@
  
  
   /* =======================================================
-     FALLBACK DE CONCLUSÃƒO
+     FALLBACK DE CONCLUSÃO
      ======================================================= */
  
   function renderCompletionFallback(
@@ -1380,7 +1390,7 @@
  
       mascot.src = mascotSrc;
       mascot.alt =
-        "DuduQ celebrando a conclusÃ£o.";
+        "DuduQ celebrando a conclusão.";
  
       Object.assign(
         mascot.style,
@@ -1407,7 +1417,7 @@
     );
  
     title.textContent =
-      "MissÃ£o concluÃ­da!";
+      "Missão concluída!";
  
     const message = createElement(
       "p",
@@ -1476,9 +1486,9 @@
  
  
   /* =======================================================
-     FINALIZAÃ‡ÃƒO DO MÃ“DULO
+     FINALIZAÇÃO DO MÓDULO
  
-     Normalmente chamada jÃ¡ sob a camada de transiÃ§Ã£o.
+     Normalmente chamada já sob a camada de transição.
      ======================================================= */
  
   function finishModule(
@@ -1507,7 +1517,7 @@
  
     const completionOptions = {
       container: session.container,
-      title: "MissÃ£o concluÃ­da!",
+      title: "Missão concluída!",
       message: buildCompletionMessage(
         session.module
       ),
@@ -1521,7 +1531,7 @@
         null,
  
       mascotAlt:
-        "DuduQ celebrando a conclusÃ£o.",
+        "DuduQ celebrando a conclusão.",
  
       confetti: true,
       starCount: 28,
@@ -1530,7 +1540,7 @@
       primaryAction: {
         label: "JOGAR NOVAMENTE",
         ariaLabel:
-          "Jogar o mÃ³dulo novamente",
+          "Jogar o módulo novamente",
         onClick: restart
       }
     };
@@ -1583,7 +1593,7 @@
  
  
   /* =======================================================
-     INÃCIO
+     INÍCIO
      ======================================================= */
  
   function start(input) {
@@ -1635,7 +1645,7 @@
  
   /* =======================================================
      REINICIAR
-     ConclusÃ£o -> primeira mecÃ¢nica tambÃ©m usa transiÃ§Ã£o.
+     Conclusão -> primeira mecânica também usa transição.
      ======================================================= */
  
   function restart() {
@@ -1707,7 +1717,7 @@
     ).catch(
       function (error) {
         console.error(
-          "[DuduQ Host] Falha ao reiniciar com transiÃ§Ã£o:",
+          "[DuduQ Host] Falha ao reiniciar com transição:",
           error
         );
       }
@@ -1745,7 +1755,7 @@
  
  
   /* =======================================================
-     SESSÃƒO PÃšBLICA
+     SESSÃO PÚBLICA
      ======================================================= */
  
   function getSession() {
@@ -1770,7 +1780,7 @@
  
  
   /* =======================================================
-     API PÃšBLICA
+     API PÚBLICA
      ======================================================= */
  
   window.DuduQ = Object.freeze({
