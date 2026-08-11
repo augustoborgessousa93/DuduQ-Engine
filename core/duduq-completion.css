@@ -1,8 +1,8 @@
 /* =========================================================
    DUDUQ CORE — COMPLETION
-   Tela final premium AAA+
+   Tela final premium DuduQ
    Compatível com duduq-completion.js 1.0.0
-   Versão 1.2.1
+   Versão 1.2.3
    ========================================================= */
 
 
@@ -68,7 +68,7 @@
   overflow: hidden;
 
   padding:
-    clamp(26px, 4vh, 48px)
+    clamp(18px, 3vh, 34px)
     clamp(14px, 3vw, 36px);
 
   color: var(--duduq-completion-ink);
@@ -92,22 +92,19 @@
 
   animation:
     duduqCompletionScreenIn
-    320ms
+    280ms
     ease-out
     both;
 }
 
 
-/* Iluminação natural bem discreta.
-   Sem halo/neon atrás do mascote. */
+/* Iluminação discreta, sem halo neon. */
 
 .duduq-completion::before {
   content: "";
 
   position: absolute;
-
   z-index: -2;
-
   inset: 0;
 
   pointer-events: none;
@@ -115,22 +112,20 @@
   background:
     radial-gradient(
       ellipse at 50% 35%,
-      rgba(255, 255, 255, .34) 0%,
-      rgba(255, 255, 255, .13) 36%,
+      rgba(255, 255, 255, .30) 0%,
+      rgba(255, 255, 255, .11) 36%,
       transparent 67%
     );
 }
 
 
-/* Vinheta quase imperceptível para concentrar o olhar. */
+/* Vinheta quase imperceptível. */
 
 .duduq-completion::after {
   content: "";
 
   position: absolute;
-
   z-index: -1;
-
   inset: 0;
 
   pointer-events: none;
@@ -150,29 +145,24 @@
 
 .duduq-completion-card {
   position: relative;
-
   z-index: 4;
 
-  width: min(720px, 94vw);
-
-  min-height: 390px;
+  width: min(680px, 94vw);
+  min-height: 0;
 
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
+  justify-content: flex-start;
 
-  justify-content: center;
+  gap: 11px;
 
-  gap: 13px;
-
-  margin-top: 76px;
+  margin-top: 58px;
 
   padding:
-    142px
-    clamp(26px, 5vw, 56px)
-    38px;
+    118px
+    clamp(26px, 5vw, 52px)
+    30px;
 
   overflow: visible;
 
@@ -182,7 +172,7 @@
     2px solid
     var(--duduq-completion-border);
 
-  border-radius: 36px;
+  border-radius: 32px;
 
   background:
     linear-gradient(
@@ -193,42 +183,38 @@
     );
 
   box-shadow:
-    0 7px 0 rgba(137, 162, 188, .58),
-
-    0 26px 60px rgba(27, 65, 105, .19),
-
-    0 10px 22px rgba(27, 65, 105, .09),
-
+    0 6px 0 rgba(137, 162, 188, .54),
+    0 22px 52px rgba(27, 65, 105, .17),
+    0 8px 18px rgba(27, 65, 105, .08),
     inset 0 1px 0 rgba(255, 255, 255, 1);
 
   animation:
     duduqCompletionCardIn
-    560ms
+    500ms
     cubic-bezier(.18, .82, .26, 1.05)
     both;
 }
 
 
-/* Linha interna premium */
+/* Linha interna premium. */
 
 .duduq-completion-card::before {
   content: "";
 
   position: absolute;
-
   inset: 4px;
 
   border:
     1px solid
     rgba(255, 255, 255, .94);
 
-  border-radius: 31px;
+  border-radius: 27px;
 
   pointer-events: none;
 }
 
 
-/* Reflexo muito sutil no topo do card */
+/* Reflexo sutil. */
 
 .duduq-completion-card::after {
   content: "";
@@ -236,11 +222,9 @@
   position: absolute;
 
   top: 0;
-
   left: 18%;
 
   width: 64%;
-
   height: 2px;
 
   border-radius: 999px;
@@ -263,19 +247,15 @@
 
 .duduq-completion-hero {
   position: absolute;
-
   z-index: 9;
 
-  top: -136px;
-
+  top: -118px;
   left: 50%;
 
-  width: 340px;
-
-  height: 292px;
+  width: 300px;
+  height: 260px;
 
   display: grid;
-
   place-items: center;
 
   overflow: visible;
@@ -286,34 +266,27 @@
 }
 
 
-/*
-   Não usamos mais halo neon.
-   ::before agora funciona apenas como sombra atmosférica,
-   praticamente invisível.
-*/
+/* Sombra atmosférica do mascote. */
 
 .duduq-completion-hero::before {
   content: "";
 
   position: absolute;
-
   z-index: 0;
 
   left: 50%;
+  bottom: 22px;
 
-  bottom: 24px;
-
-  width: 144px;
-
-  height: 28px;
+  width: 132px;
+  height: 25px;
 
   border-radius: 50%;
 
   background:
     radial-gradient(
       ellipse,
-      rgba(27, 68, 108, .20) 0%,
-      rgba(27, 68, 108, .09) 45%,
+      rgba(27, 68, 108, .18) 0%,
+      rgba(27, 68, 108, .08) 45%,
       transparent 75%
     );
 
@@ -331,27 +304,20 @@
 }
 
 
-/* Remove completamente o antigo blush/halo. */
-
 .duduq-completion-hero::after {
   content: none;
   display: none;
 }
 
 
-/*
-   O arquivo de imagem do DuduQ possui área transparente.
-   Por isso ampliamos o canvas inteiro em ~2x para que
-   o personagem VISÍVEL realmente tenha protagonismo.
-*/
+/* O PNG possui área transparente; a escala visual preserva
+   o protagonismo sem ampliar o container do modal. */
 
 .duduq-completion-mascot {
   position: relative;
-
   z-index: 3;
 
   width: 100%;
-
   height: 100%;
 
   display: block;
@@ -362,34 +328,31 @@
 
   filter:
     drop-shadow(
-      0 15px 15px rgba(20, 56, 94, .20)
+      0 14px 14px rgba(20, 56, 94, .18)
     )
     drop-shadow(
-      0 5px 7px rgba(20, 56, 94, .10)
+      0 5px 7px rgba(20, 56, 94, .09)
     );
 
   animation:
     duduqCompletionMascotEnter
-      760ms
+      700ms
       cubic-bezier(.16, .84, .24, 1.16)
       both,
 
     duduqCompletionMascotFloat
       3.1s
       ease-in-out
-      800ms
+      760ms
       infinite;
 }
 
 
 /* =========================================================
-   REMOVE A MEDALHA / ESTRELA CENTRAL
+   ACHIEVEMENT
    ========================================================= */
 
-.duduq-completion-achievement {
-  display: none !important;
-}
-
+.duduq-completion-achievement,
 .duduq-completion-achievement-star {
   display: none !important;
 }
@@ -397,19 +360,16 @@
 
 /* =========================================================
    TÍTULO
-   Mesma família tipográfica das mecânicas.
    ========================================================= */
 
 .duduq-completion-title {
   position: relative;
-
   z-index: 5;
 
   width: 100%;
+  max-width: 620px;
 
-  max-width: 630px;
-
-  margin: 0;
+  margin: 4px 0 0;
 
   color:
     var(--duduq-completion-blue);
@@ -418,7 +378,7 @@
     var(--duduq-completion-font);
 
   font-size:
-    clamp(38px, 4.7vw, 54px);
+    clamp(36px, 4.3vw, 50px);
 
   font-weight: 900;
 
@@ -433,8 +393,8 @@
 
   animation:
     duduqCompletionContentIn
-    470ms
-    130ms
+    430ms
+    110ms
     ease-out
     both;
 }
@@ -446,7 +406,6 @@
 
 .duduq-completion-message {
   position: relative;
-
   z-index: 5;
 
   width: min(560px, 100%);
@@ -460,11 +419,11 @@
     var(--duduq-completion-font);
 
   font-size:
-    clamp(16px, 1.6vw, 19px);
+    clamp(16px, 1.5vw, 18px);
 
   font-weight: 800;
 
-  line-height: 1.42;
+  line-height: 1.38;
 
   letter-spacing: 0;
 
@@ -472,8 +431,8 @@
 
   animation:
     duduqCompletionContentIn
-    470ms
-    190ms
+    430ms
+    170ms
     ease-out
     both;
 }
@@ -485,37 +444,35 @@
 
 .duduq-completion-progress {
   position: relative;
-
   z-index: 5;
 
   display: inline-flex;
 
   align-items: center;
-
   justify-content: center;
 
-  gap: 11px;
+  gap: 10px;
 
   max-width: 100%;
 
-  min-height: 52px;
+  min-height: 48px;
 
   margin:
-    7px 0
-    3px;
+    8px 0
+    1px;
 
   padding:
-    8px
-    20px
-    8px
-    9px;
+    7px
+    18px
+    7px
+    8px;
 
   color:
     #0757a5;
 
   border:
     2px solid
-    rgba(134, 187, 235, .68);
+    rgba(134, 187, 235, .66);
 
   border-radius: 999px;
 
@@ -527,30 +484,26 @@
     );
 
   box-shadow:
-    0 4px 0 rgba(159, 192, 221, .46),
-
-    0 8px 17px rgba(34, 96, 154, .08),
-
+    0 4px 0 rgba(159, 192, 221, .43),
+    0 8px 17px rgba(34, 96, 154, .07),
     inset 0 1px 0 #ffffff;
 
   animation:
     duduqCompletionContentIn
-    470ms
-    250ms
+    430ms
+    230ms
     ease-out
     both;
 }
 
 
 .duduq-completion-progress-icon {
-  width: 34px;
+  width: 32px;
+  height: 32px;
 
-  height: 34px;
-
-  flex: 0 0 34px;
+  flex: 0 0 32px;
 
   display: grid;
-
   place-items: center;
 
   border-radius: 50%;
@@ -575,7 +528,7 @@
   font-family:
     var(--duduq-completion-font);
 
-  font-size: 20px;
+  font-size: 18px;
 
   font-weight: 900;
 
@@ -588,7 +541,7 @@
     var(--duduq-completion-font);
 
   font-size:
-    clamp(15px, 1.5vw, 17px);
+    clamp(15px, 1.45vw, 17px);
 
   font-weight: 900;
 
@@ -604,27 +557,23 @@
 
 .duduq-completion-actions {
   position: relative;
-
   z-index: 5;
 
   width: min(390px, 100%);
 
   display: flex;
-
   flex-direction: column;
-
   align-items: stretch;
-
   justify-content: center;
 
   gap: 10px;
 
-  margin-top: 12px;
+  margin-top: 14px;
 
   animation:
     duduqCompletionContentIn
-    470ms
-    310ms
+    430ms
+    290ms
     ease-out
     both;
 }
@@ -641,13 +590,10 @@
   -webkit-appearance: none;
 
   width: 100%;
-
-  min-height: 58px;
+  min-height: 56px;
 
   display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
 
   padding:
@@ -679,7 +625,7 @@
 }
 
 
-/* Primary */
+/* Primary. */
 
 .duduq-completion-button--primary {
   border:
@@ -714,11 +660,9 @@
   position: absolute;
 
   top: 5px;
-
   left: 14%;
 
   width: 72%;
-
   height: 2px;
 
   border-radius: 999px;
@@ -766,7 +710,7 @@
 }
 
 
-/* Secondary */
+/* Secondary. */
 
 .duduq-completion-button--secondary {
   border:
@@ -797,14 +741,18 @@
 }
 
 
-/* Foco */
+/* Foco acessível sem anel visual permanente. */
+
+.duduq-completion-button:focus {
+  outline: none;
+}
 
 .duduq-completion-button:focus-visible {
   outline:
-    4px solid
-    rgba(0, 101, 202, .22);
+    3px solid
+    rgba(0, 101, 202, .20);
 
-  outline-offset: 5px;
+  outline-offset: 4px;
 }
 
 
@@ -814,7 +762,6 @@
 
 .duduq-completion-footer {
   position: relative;
-
   z-index: 5;
 
   max-width: 520px;
@@ -838,15 +785,11 @@
 
 /* =========================================================
    CONFETE DE ESTRELAS
-   O JS atual cria os elementos e fornece tamanho/posição.
-   Aqui elevamos o acabamento visual.
    ========================================================= */
 
 .duduq-completion-confetti {
   position: absolute;
-
   z-index: 7;
-
   inset: 0;
 
   overflow: hidden;
@@ -859,25 +802,19 @@
   position: absolute;
 
   top: -46px;
-
   left:
     var(--duduq-star-x, 50%);
 
   display: block;
-
-  /*
-     O JS gera 12–28px.
-     Multiplicamos para obter estrelas realmente visíveis.
-  */
 
   font-size:
     clamp(
       24px,
       calc(
         var(--duduq-star-size, 18px)
-        * 1.48
+        * 1.42
       ),
-      42px
+      40px
     );
 
   line-height: 1;
@@ -901,28 +838,22 @@
 
   animation:
     duduqCompletionStarFall
-    var(--duduq-star-duration, 2100ms)
+    2900ms
     cubic-bezier(.15, .70, .25, 1)
     var(--duduq-star-delay, 0ms)
     both;
 }
 
 
-/* dourado principal */
-
 .duduq-completion-star[data-variant="1"] {
   color: #ffca32;
 }
 
 
-/* azul DuduQ */
-
 .duduq-completion-star[data-variant="2"] {
   color: #42a7f5;
 }
 
-
-/* amarelo claro */
 
 .duduq-completion-star[data-variant="3"] {
   color: #ffe67a;
@@ -949,8 +880,8 @@
     opacity: 0;
 
     transform:
-      translateY(18px)
-      scale(.972);
+      translateY(14px)
+      scale(.978);
   }
 
   to {
@@ -965,8 +896,6 @@
 
 /* =========================================================
    ANIMAÇÕES — MASCOTE
-   Escala alta propositalmente por causa da área transparente
-   presente no PNG atual.
    ========================================================= */
 
 @keyframes duduqCompletionMascotEnter {
@@ -974,7 +903,7 @@
     opacity: 0;
 
     transform:
-      translateY(28px)
+      translateY(24px)
       scale(1.65)
       rotate(-2deg);
   }
@@ -1017,7 +946,7 @@
 
   50% {
     transform:
-      translateY(-14px)
+      translateY(-13px)
       scale(2.09, 2.01)
       rotate(.45deg);
   }
@@ -1030,8 +959,6 @@
   }
 }
 
-
-/* Sombra acompanha a levitação */
 
 @keyframes duduqCompletionMascotShadow {
   0%,
@@ -1062,7 +989,7 @@
     opacity: 0;
 
     transform:
-      translateY(9px);
+      translateY(7px);
   }
 
   to {
@@ -1126,10 +1053,9 @@
    ========================================================= */
 
 @media (max-width: 820px) {
-
   .duduq-completion {
     padding:
-      26px
+      22px
       16px;
   }
 
@@ -1137,43 +1063,40 @@
     width:
       min(650px, 95vw);
 
-    min-height:
-      380px;
-
     margin-top:
-      72px;
+      54px;
 
     padding:
-      132px
+      112px
       27px
-      34px;
+      28px;
 
     border-radius:
-      32px;
+      30px;
   }
 
   .duduq-completion-card::before {
     border-radius:
-      27px;
+      25px;
   }
 
   .duduq-completion-hero {
     top:
-      -127px;
+      -112px;
 
     width:
-      315px;
+      286px;
 
     height:
-      275px;
+      248px;
   }
 
   .duduq-completion-title {
     font-size:
       clamp(
-        36px,
+        35px,
         7vw,
-        48px
+        47px
       );
   }
 }
@@ -1184,12 +1107,11 @@
    ========================================================= */
 
 @media (max-width: 560px) {
-
   .duduq-completion {
     padding:
-      20px
+      18px
       10px
-      26px;
+      22px;
   }
 
   .duduq-completion-card {
@@ -1198,15 +1120,15 @@
     min-height: 0;
 
     margin-top:
-      66px;
+      52px;
 
     gap:
-      11px;
+      9px;
 
     padding:
-      116px
+      102px
       18px
-      27px;
+      24px;
 
     border-radius:
       28px;
@@ -1225,32 +1147,32 @@
 
   .duduq-completion-hero {
     top:
-      -110px;
+      -100px;
 
     width:
-      270px;
+      254px;
 
     height:
-      240px;
+      222px;
   }
 
   .duduq-completion-title {
     font-size:
       clamp(
-        33px,
+        32px,
         9vw,
-        42px
+        41px
       );
   }
 
   .duduq-completion-message {
     font-size: 15px;
 
-    line-height: 1.4;
+    line-height: 1.38;
   }
 
   .duduq-completion-progress {
-    min-height: 48px;
+    min-height: 46px;
 
     gap: 9px;
 
@@ -1276,7 +1198,7 @@
   }
 
   .duduq-completion-actions {
-    margin-top: 8px;
+    margin-top: 12px;
   }
 
   .duduq-completion-button {
@@ -1291,53 +1213,51 @@
         20px,
         calc(
           var(--duduq-star-size, 18px)
-          * 1.30
+          * 1.28
         ),
         34px
       );
+
+    animation-duration: 2700ms;
   }
 }
 
 
 /* =========================================================
    TELAS DE BAIXA ALTURA
-   Muito importante para notebooks.
    ========================================================= */
 
 @media (max-height: 720px) and (min-width: 700px) {
-
   .duduq-completion {
     padding-block:
-      14px;
+      12px;
   }
 
   .duduq-completion-card {
-    min-height: 350px;
-
-    margin-top: 58px;
+    margin-top: 50px;
 
     gap: 9px;
 
     padding:
-      105px
-      42px
-      23px;
+      88px
+      40px
+      22px;
   }
 
   .duduq-completion-hero {
-    top: -102px;
+    top: -96px;
 
-    width: 265px;
+    width: 248px;
 
-    height: 225px;
+    height: 212px;
   }
 
   .duduq-completion-title {
     font-size:
       clamp(
-        34px,
-        4.4vw,
-        44px
+        33px,
+        4.2vw,
+        43px
       );
   }
 
@@ -1346,7 +1266,7 @@
   }
 
   .duduq-completion-progress {
-    min-height: 46px;
+    min-height: 44px;
 
     margin-top: 2px;
   }
@@ -1360,7 +1280,7 @@
   }
 
   .duduq-completion-actions {
-    margin-top: 6px;
+    margin-top: 12px;
   }
 
   .duduq-completion-button {
@@ -1374,7 +1294,6 @@
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
   .duduq-completion,
   .duduq-completion-card,
   .duduq-completion-mascot,
@@ -1399,102 +1318,4 @@
     display: none !important;
   }
 }
-/* =========================================================
-   DUDUQ COMPLETION — REFINAMENTO VISUAL
-   Versão 1.2.2
-   Espaçamento + CTA + confete
-   ========================================================= */
 
-
-/* =========================================================
-   DESKTOP
-   Aproxima o conteúdo do mascote.
-   ========================================================= */
-
-@media (min-width: 700px) {
-
-  .duduq-completion-card {
-    justify-content: flex-start;
-
-    padding-top: 104px;
-  }
-
-}
-
-
-/* =========================================================
-   NOTEBOOK / TELA DE BAIXA ALTURA
-   Este é o caso do print atual.
-   ========================================================= */
-
-@media (max-height: 720px) and (min-width: 700px) {
-
-  .duduq-completion-card {
-    justify-content: flex-start;
-
-    padding-top: 78px;
-
-    padding-bottom: 27px;
-
-    gap: 9px;
-  }
-
-  .duduq-completion-title {
-    margin-top: 0;
-  }
-
-  .duduq-completion-actions {
-    margin-top: 21px;
-  }
-
-}
-
-
-/* =========================================================
-   MAIS RESPIRO ANTES DO CTA
-   ========================================================= */
-
-.duduq-completion-actions {
-  margin-top: 22px;
-}
-
-
-/* =========================================================
-   REMOVE O ANEL AZUL EXTERNO DO BOTÃO
-   O próprio botão continua com profundidade e borda.
-   ========================================================= */
-
-.duduq-completion-button:focus,
-.duduq-completion-button:focus-visible {
-  outline: none !important;
-
-  outline-offset: 0 !important;
-}
-
-
-/* =========================================================
-   CONFETE
-   Um pouco mais prolongado sem ficar cansativo.
-   ========================================================= */
-
-.duduq-completion-star {
-  animation-duration: 3300ms !important;
-}
-
-
-/* =========================================================
-   MOBILE
-   Mantém proporções mais compactas.
-   ========================================================= */
-
-@media (max-width: 560px) {
-
-  .duduq-completion-actions {
-    margin-top: 16px;
-  }
-
-  .duduq-completion-star {
-    animation-duration: 3000ms !important;
-  }
-
-}
