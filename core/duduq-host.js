@@ -155,7 +155,7 @@
       const link = document.createElement("link");
       link.id = "duduq-world-fusion-core-style";
       link.rel = "stylesheet";
-      link.href = new URL("duduq-world-fusion.css?v=122", coreBase).href;
+      link.href = new URL("duduq-world-fusion.css?v=123", coreBase).href;
       (document.head || document.documentElement).appendChild(link);
     }
 
@@ -165,7 +165,7 @@
     ) {
       const script = document.createElement("script");
       script.id = "duduq-world-fusion-core-script";
-      script.src = new URL("duduq-world-fusion.js?v=121", coreBase).href;
+      script.src = new URL("duduq-world-fusion.js?v=122", coreBase).href;
       script.async = true;
       (document.head || document.documentElement).appendChild(script);
     }
