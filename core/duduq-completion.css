@@ -375,7 +375,7 @@
       both,
 
     duduqCompletionMascotFloat
-      3.4s
+      3.1s
       ease-in-out
       800ms
       infinite;
@@ -1010,21 +1010,21 @@
 
   24% {
     transform:
-      translateY(-5px)
+      translateY(-7px)
       scale(2.06, 2.03)
       rotate(.15deg);
   }
 
   50% {
     transform:
-      translateY(-11px)
-      scale(2.08, 2.02)
+      translateY(-14px)
+      scale(2.09, 2.01)
       rotate(.45deg);
   }
 
   76% {
     transform:
-      translateY(-5px)
+      translateY(-7px)
       scale(2.06, 2.04)
       rotate(0deg);
   }
@@ -1044,11 +1044,11 @@
   }
 
   50% {
-    opacity: .11;
+    opacity: .09;
 
     transform:
       translateX(-50%)
-      scaleX(.80);
+      scaleX(.76);
   }
 }
 
