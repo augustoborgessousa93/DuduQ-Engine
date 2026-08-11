@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Conteúdo nítido sobre fundo cinematográfico suavizado.
-   Versão 1.2.3
+   Versão 1.2.4
    ========================================================= */
 
 html.duduq-world-fusion {
@@ -38,7 +38,7 @@ html.duduq-world-fusion body::before {
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
-  filter: blur(4px) saturate(.74) brightness(.74) contrast(.93);
+  filter: blur(6px) saturate(.68) brightness(.82) contrast(.90);
   transform: scale(1.025);
   transform-origin: center;
 }
@@ -47,13 +47,38 @@ html.duduq-world-fusion body::after {
   z-index: 0;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(9, 34, 55, .15), rgba(9, 34, 55, .29)),
-    radial-gradient(circle at 50% 34%, rgba(235, 249, 255, .12), transparent 48%);
+    linear-gradient(180deg, rgba(9, 34, 55, .08), rgba(9, 34, 55, .18)),
+    radial-gradient(circle at 50% 34%, rgba(235, 249, 255, .10), transparent 48%);
 }
 
 html.duduq-world-fusion body > #root {
   position: relative;
   z-index: 1;
+}
+
+/* Em modo normal o iframe pode ser menor que 100dvh. Não o recortamos: o
+   conteúdo deve permanecer acessível; o bloqueio de rolagem fica exclusivo
+   da tela cheia. */
+html.duduq-world-fusion:not(:fullscreen) body {
+  height: auto !important;
+  min-height: 100dvh !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+html.duduq-world-fusion:not(:fullscreen) body > #root,
+html.duduq-world-fusion:not(:fullscreen) .duduq-engine-root,
+html.duduq-world-fusion:not(:fullscreen) .duduq-engine-shell,
+html.duduq-world-fusion:not(:fullscreen) .duduq-engine-stage {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+html.duduq-world-fusion:not(:fullscreen) body > #root,
+html.duduq-world-fusion:not(:fullscreen) .duduq-engine-root,
+html.duduq-world-fusion:not(:fullscreen) .duduq-engine-shell {
+  min-height: 100dvh !important;
 }
 
 html.duduq-world-fusion .duduq-engine-root {
@@ -244,23 +269,23 @@ html.duduq-world-fusion
 
 html.duduq-world-fusion
   :is(.duduq-dd-target, .duduq-udd-target) {
-  border: 1.5px solid rgba(116, 207, 216, .72) !important;
+  border: 1px solid rgba(116, 207, 216, .68) !important;
   background:
-    linear-gradient(180deg, rgba(238, 253, 253, .86), rgba(224, 247, 248, .78))
+    linear-gradient(180deg, rgba(248, 253, 253, .78), rgba(232, 246, 245, .69))
     !important;
-  -webkit-backdrop-filter: blur(8px) saturate(1.01) !important;
-  backdrop-filter: blur(8px) saturate(1.01) !important;
+  -webkit-backdrop-filter: blur(7px) saturate(.96) !important;
+  backdrop-filter: blur(7px) saturate(.96) !important;
   box-shadow:
-    0 1px 0 rgba(255,255,255,.38) inset,
-    0 12px 30px rgba(16, 63, 79, .09)
+    0 1px 0 rgba(255,255,255,.48) inset,
+    0 10px 24px rgba(16, 63, 79, .07)
     !important;
 }
 
 html.duduq-world-fusion
   :is(.duduq-dd-target, .duduq-udd-target):nth-child(even) {
-  border-color: rgba(232, 183, 94, .74) !important;
+  border-color: rgba(232, 183, 94, .68) !important;
   background:
-    linear-gradient(180deg, rgba(255, 249, 234, .87), rgba(252, 239, 209, .78))
+    linear-gradient(180deg, rgba(255, 252, 242, .78), rgba(250, 239, 216, .69))
     !important;
 }
 
@@ -276,11 +301,11 @@ html.duduq-world-fusion
 
 html.duduq-world-fusion
   :is(.duduq-dd-pool, .duduq-udd-pool) {
-  border-color: transparent !important;
-  background: rgba(248, 252, 255, .82) !important;
-  -webkit-backdrop-filter: blur(8px) saturate(1.01) !important;
-  backdrop-filter: blur(8px) saturate(1.01) !important;
-  box-shadow: 0 10px 26px rgba(15, 55, 86, .08) !important;
+  border: 1px solid rgba(206, 225, 239, .58) !important;
+  background: rgba(248, 252, 255, .72) !important;
+  -webkit-backdrop-filter: blur(7px) saturate(.96) !important;
+  backdrop-filter: blur(7px) saturate(.96) !important;
+  box-shadow: 0 8px 20px rgba(15, 55, 86, .06) !important;
 }
 
 html.duduq-world-fusion
