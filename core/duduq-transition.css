@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — TRANSITION
    Ponte visual World Fusion
-   Versão 1.4.3
+   Versão 1.4.4
    ========================================================= */
 
 .duduq-transition {
@@ -41,7 +41,7 @@
   background-position: var(--duduq-transition-world-position, center top);
   background-size: var(--duduq-transition-world-size, cover);
   background-repeat: no-repeat;
-  filter: blur(5px) saturate(.72) brightness(.90) contrast(.92);
+  filter: blur(5px) saturate(.72) brightness(.95) contrast(.92);
   transform: translateZ(0) scale(1.025);
   will-change: auto;
 }
@@ -52,13 +52,14 @@
   background:
     linear-gradient(
       180deg,
-      rgba(9, 34, 55, .035),
-      rgba(9, 34, 55, .09)
+      rgba(9, 34, 55, .02),
+      rgba(9, 34, 55, .06)
     ),
     radial-gradient(
-      circle at 50% 34%,
-      rgba(235, 249, 255, .12),
-      transparent 50%
+      circle at 50% 32%,
+      rgba(241, 251, 255, .15),
+      rgba(235, 249, 255, .07) 34%,
+      transparent 58%
     );
 }
 
@@ -66,7 +67,12 @@
   position: absolute;
   z-index: 2;
   inset: 0;
-  background: transparent;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(249, 253, 255, .025),
+      rgba(243, 250, 255, .012)
+    );
 }
 
 .duduq-transition.is-covering,
@@ -93,13 +99,13 @@ body.duduq-transition-lock {
 @media (max-width: 720px) {
   .duduq-transition::before {
     inset: -2.5%;
-    filter: blur(4px) saturate(.74) brightness(.86) contrast(.92);
+    filter: blur(4px) saturate(.74) brightness(.92) contrast(.92);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .duduq-transition::before {
-    filter: blur(5px) saturate(.72) brightness(.90) contrast(.92);
+    filter: blur(5px) saturate(.72) brightness(.95) contrast(.92);
   }
 }
 
