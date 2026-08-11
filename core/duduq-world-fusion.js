@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.2.3
+   Versão 1.2.4
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.2.3";
+  const VERSION = "1.2.4";
   if (window.DuduQWorldFusion?.version === VERSION) return;
 
   const scriptUrl =
@@ -15,7 +15,7 @@
     new URL("./duduq-world-fusion.js", window.location.href).href;
 
   const stylesheetUrl = new URL(
-    "./duduq-world-fusion.css?v=124",
+    "./duduq-world-fusion.css?v=125",
     scriptUrl
   ).href;
 
@@ -106,11 +106,16 @@
           const operation = hostApi?.toggle
             ? hostApi.toggle()
             : isFullscreen(hostDocument)
-              ? (hostDocument.exitFullscreen?.() ||
-                hostDocument.webkitExitFullscreen?.())
-              : (hostDocument.documentElement.requestFullscreen?.({
-                  navigationUI: "hide"
-                }) || hostDocument.documentElement.webkitRequestFullscreen?.());
+              ? (
+                  hostDocument.exitFullscreen?.() ||
+                  hostDocument.webkitExitFullscreen?.()
+                )
+              : (
+                  hostDocument.documentElement.requestFullscreen?.({
+                    navigationUI: "hide"
+                  }) ||
+                  hostDocument.documentElement.webkitRequestFullscreen?.()
+                );
 
           Promise.resolve(operation)
             .catch(function () {})
@@ -143,7 +148,9 @@
 
     try {
       const current =
-        doc.documentElement.style.getPropertyValue("--duduq-world-image").trim() ||
+        doc.documentElement.style
+          .getPropertyValue("--duduq-world-image")
+          .trim() ||
         doc.defaultView?.getComputedStyle(body).backgroundImage ||
         "";
 
@@ -154,7 +161,10 @@
   }
 
   function detectMechanic(doc, frame) {
-    const source = String(frame?.getAttribute("src") || "").toLowerCase();
+    const source = String(
+      frame?.getAttribute("src") || ""
+    ).toLowerCase();
+
     const matches = [
       ["bubble-pop", ".duduq-bp-root"],
       ["drag-drop", ".duduq-dd-root, .duduq-udd-root"],
@@ -167,7 +177,9 @@
     ];
 
     for (const [name, selector] of matches) {
-      if (source.includes(name) || doc.querySelector(selector)) return name;
+      if (source.includes(name) || doc.querySelector(selector)) {
+        return name;
+      }
     }
 
     return "universal";
@@ -177,15 +189,21 @@
     if (!doc?.documentElement || !doc.body) return false;
 
     const image = getInlineWorldImage(doc);
+
     if (image) {
-      doc.documentElement.style.setProperty("--duduq-world-image", image);
+      doc.documentElement.style.setProperty(
+        "--duduq-world-image",
+        image
+      );
     }
 
     doc.documentElement.classList.add("duduq-world-fusion");
+
     doc.documentElement.setAttribute(
       "data-duduq-world-fusion-version",
       VERSION
     );
+
     doc.documentElement.setAttribute(
       "data-duduq-mechanic",
       detectMechanic(doc, frame)
@@ -197,7 +215,16 @@
   }
 
   function ensureStylesheet(doc) {
-    if (doc === document || doc.getElementById("duduq-world-fusion-style")) {
+    if (doc === document) {
+      return;
+    }
+
+    const existing = doc.getElementById("duduq-world-fusion-style");
+
+    if (existing) {
+      if (existing.getAttribute("href") !== stylesheetUrl) {
+        existing.setAttribute("href", stylesheetUrl);
+      }
       return;
     }
 
@@ -219,9 +246,12 @@
     managedDocuments.add(doc);
 
     let refreshQueued = false;
+
     function queueRefresh() {
       if (refreshQueued) return;
+
       refreshQueued = true;
+
       window.requestAnimationFrame(function () {
         refreshQueued = false;
         syncDocument(doc, frame);
@@ -278,7 +308,11 @@
       for (const record of records) {
         for (const node of record.addedNodes) {
           if (!(node instanceof Element)) continue;
-          if (node instanceof HTMLIFrameElement) manageFrame(node);
+
+          if (node instanceof HTMLIFrameElement) {
+            manageFrame(node);
+          }
+
           node.querySelectorAll?.("iframe").forEach(manageFrame);
         }
       }
@@ -286,14 +320,18 @@
       syncDocument(document, null);
     });
 
-    observer.observe(document.body || document.documentElement, {
-      childList: true,
-      subtree: true
-    });
+    observer.observe(
+      document.body || document.documentElement,
+      {
+        childList: true,
+        subtree: true
+      }
+    );
   }
 
   window.DuduQWorldFusion = Object.freeze({
     version: VERSION,
+
     refresh: function () {
       syncDocument(document, null);
       scanFrames();
@@ -302,12 +340,20 @@
   });
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", start, { once: true });
+    document.addEventListener(
+      "DOMContentLoaded",
+      start,
+      { once: true }
+    );
   } else {
     start();
   }
 
-  window.addEventListener("duduq:assets-ready", function () {
-    window.DuduQWorldFusion.refresh();
-  });
+  window.addEventListener(
+    "duduq:assets-ready",
+    function () {
+      window.DuduQWorldFusion.refresh();
+    }
+  );
 })();
+
