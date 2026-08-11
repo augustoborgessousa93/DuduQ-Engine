@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — TRANSITION
    Ponte visual World Fusion
-   Versão 1.4.0
+   Versão 1.4.1
    ========================================================= */
 
 .duduq-transition {
@@ -20,7 +20,7 @@
   contain: strict;
   transform: translateZ(0);
   transform-origin: center;
-  background: #123650;
+  background: #244d61;
   will-change: opacity;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -35,13 +35,13 @@
 
 .duduq-transition::before {
   z-index: 0;
-  inset: -7%;
-  background-color: #174663;
+  inset: -3.5%;
+  background-color: #315f71;
   background-image: var(--duduq-transition-world-image, none);
   background-position: var(--duduq-transition-world-position, center top);
   background-size: var(--duduq-transition-world-size, cover);
   background-repeat: no-repeat;
-  filter: blur(3px) saturate(.74) brightness(.68) contrast(.92);
+  filter: blur(4px) saturate(.78) brightness(.78) contrast(.93);
   transform: translateZ(0) scale(1.025);
   will-change: auto;
 }
@@ -50,8 +50,8 @@
   z-index: 1;
   inset: 0;
   background:
-    radial-gradient(circle at 50% 42%, rgba(232, 249, 255, .12), transparent 48%),
-    linear-gradient(180deg, rgba(8, 35, 57, .14), rgba(8, 35, 57, .26));
+    radial-gradient(circle at 50% 42%, rgba(239, 251, 255, .16), transparent 50%),
+    linear-gradient(180deg, rgba(18, 47, 61, .08), rgba(18, 47, 61, .18));
 }
 
 .duduq-transition-stage {
@@ -90,6 +90,6 @@ body.duduq-transition-lock {
 
 @media (prefers-reduced-motion: reduce) {
   .duduq-transition::before {
-    filter: blur(4px) saturate(.86) brightness(.78);
+    filter: blur(4px) saturate(.78) brightness(.78) contrast(.93);
   }
 }
