@@ -1,21 +1,23 @@
 /* =========================================================
    DUDUQ CORE — TRANSITION
    Ponte visual opaca entre telas e mecânicas.
-   Versão 1.6.3
+   Versão 1.6.4
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.6.3";
+  const VERSION = "1.6.4";
   if (window.DuduQTransition?.version === VERSION) return;
 
   const DEFAULTS = Object.freeze({
     coverDurationMs: 145,
     revealDurationMs: 170,
     paintFrames: 1,
+    stablePaintFrames: 1,
     bridgeHoldMs: 0,
-    visualReadyTimeoutMs: 600,
+    revealHoldFraction: 0,
+    visualReadyTimeoutMs: 900,
     visualReadyPollMs: 28,
     targetSelector: "#root",
     soundEnabled: false,
@@ -90,6 +92,17 @@
         4
       ),
 
+      stablePaintFrames: clamp(
+        Math.round(
+          number(
+            options.stablePaintFrames,
+            DEFAULTS.stablePaintFrames
+          )
+        ),
+        1,
+        4
+      ),
+
       bridgeHoldMs: reduced
         ? 0
         : clamp(
@@ -99,6 +112,17 @@
             ),
             0,
             120
+          ),
+
+      revealHoldFraction: reduced
+        ? 0
+        : clamp(
+            number(
+              options.revealHoldFraction,
+              DEFAULTS.revealHoldFraction
+            ),
+            0,
+            .35
           ),
 
       visualReadyTimeoutMs: clamp(
@@ -403,7 +427,8 @@
     from,
     to,
     duration,
-    direction
+    direction,
+    holdFraction = 0
   ) {
     const node = ensureRoot();
 
@@ -413,23 +438,37 @@
     node.style.transform =
       "translateZ(0)";
 
+    const safeHold =
+      direction === "reveal"
+        ? clamp(holdFraction, 0, .35)
+        : 0;
+
     if (
       typeof node.animate ===
       "function"
     ) {
       try {
+        const keyframes =
+          safeHold > 0
+            ? [
+                { opacity: from, offset: 0 },
+                { opacity: from, offset: safeHold },
+                { opacity: to, offset: 1 }
+              ]
+            : [
+                { opacity: from, offset: 0 },
+                { opacity: to, offset: 1 }
+              ];
+
         const animation =
           node.animate(
-            [
-              { opacity: from },
-              { opacity: to }
-            ],
+            keyframes,
             {
               duration,
               easing:
                 direction === "cover"
                   ? "cubic-bezier(.22,.72,.22,1)"
-                  : "cubic-bezier(.20,.02,.18,1)",
+                  : "cubic-bezier(.18,.22,.18,1)",
               fill: "forwards"
             }
           );
@@ -446,8 +485,35 @@
       } catch (_) {}
     }
 
+    /* Fallback para navegadores sem Web Animations API.
+       Mantém o véu opaco durante a fração inicial do reveal
+       e só depois inicia a dissolução. */
+    if (safeHold > 0) {
+      const holdMs =
+        Math.round(duration * safeHold);
+
+      await wait(holdMs);
+
+      const fadeMs =
+        Math.max(1, duration - holdMs);
+
+      node.style.transition =
+        `opacity ${fadeMs}ms cubic-bezier(.18,.22,.18,1)`;
+
+      node.getBoundingClientRect();
+      node.style.opacity = String(to);
+
+      await wait(fadeMs + 40);
+      node.style.transition = "";
+      return;
+    }
+
     node.style.transition =
-      `opacity ${duration}ms ease`;
+      `opacity ${duration}ms ${
+        direction === "cover"
+          ? "cubic-bezier(.22,.72,.22,1)"
+          : "cubic-bezier(.18,.22,.18,1)"
+      }`;
 
     node.getBoundingClientRect();
 
@@ -666,7 +732,7 @@
         )
       ) {
         await nextPaint(
-          config.paintFrames
+          config.stablePaintFrames
         );
         return true;
       }
@@ -676,7 +742,56 @@
       );
     }
 
-    await nextPaint(1);
+    /* Em hardware mais lento, o iframe pode terminar o DOM antes
+       de a folha World Fusion entrar no primeiro paint. Como o
+       objetivo é justamente nunca expor o background cru, damos
+       uma pequena janela de graça SOMENTE se o iframe já for uma
+       mecânica DuduQ e ainda estiver sem a camada visual pronta. */
+    try {
+      const frameDocument =
+        iframe.contentDocument;
+
+      const isDuduQFrame =
+        Boolean(
+          frameDocument?.querySelector(
+            DUDUQ_MECHANIC_SELECTOR
+          )
+        );
+
+      if (
+        isDuduQFrame &&
+        !isWorldFusionReady(
+          frameDocument
+        )
+      ) {
+        const graceDeadline =
+          performance.now() + 500;
+
+        while (
+          performance.now() <
+          graceDeadline
+        ) {
+          if (
+            isIframeVisuallyReady(
+              iframe
+            )
+          ) {
+            await nextPaint(
+              config.stablePaintFrames
+            );
+            return true;
+          }
+
+          await wait(
+            config.visualReadyPollMs
+          );
+        }
+      }
+    } catch (_) {}
+
+    await nextPaint(
+      config.stablePaintFrames
+    );
 
     return true;
   }
@@ -797,7 +912,8 @@
       1,
       0,
       config.revealDurationMs,
-      "reveal"
+      "reveal",
+      config.revealHoldFraction
     );
 
     if (
