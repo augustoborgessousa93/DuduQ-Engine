@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — HOST
    Orquestrador central das mecânicas e módulos DuduQ.
-   Versão 1.5.3
+   Versão 1.5.4
  
    NOVIDADES 1.5.2
    - mantém tela cheia no documento principal entre mecânicas
@@ -25,7 +25,7 @@
     document.currentScript?.src ||
     new URL("./duduq-host.js", window.location.href).href;
  
-  const VERSION = "1.5.3";
+  const VERSION = "1.5.4";
  
   if (
     window.DuduQ &&
@@ -37,6 +37,97 @@
   const mechanics = new Map();
  
   let activeSession = null;
+
+  /* =======================================================
+     TELA CHEIA CENTRALIZADA
+
+     O documento principal é o proprietário da tela cheia.
+     Assim, destruir o iframe durante uma troca de mecânica
+     não encerra o modo solicitado pelo estudante.
+     ======================================================= */
+
+  function isFullscreenActive() {
+    return Boolean(document.fullscreenElement);
+  }
+
+  function broadcastFullscreenState() {
+    const message = {
+      type: "DUDUQ_FULLSCREEN_STATE",
+      active: isFullscreenActive(),
+      engineVersion: VERSION
+    };
+
+    document.querySelectorAll("iframe").forEach(
+      function (iframe) {
+        try {
+          iframe.contentWindow?.postMessage(message, "*");
+        } catch (_) {}
+      }
+    );
+  }
+
+  async function toggleFullscreen() {
+    try {
+      if (isFullscreenActive()) {
+        await document.exitFullscreen?.();
+      } else {
+        await document.documentElement.requestFullscreen?.({
+          navigationUI: "hide"
+        });
+      }
+    } catch (error) {
+      console.warn(
+        "[DuduQ Host] Não foi possível alternar a tela cheia.",
+        error
+      );
+    }
+
+    broadcastFullscreenState();
+    return isFullscreenActive();
+  }
+
+  window.DuduQFullscreen = Object.freeze({
+    version: "1.0.0",
+    toggle: toggleFullscreen,
+    isActive: isFullscreenActive
+  });
+
+  document.addEventListener(
+    "fullscreenchange",
+    broadcastFullscreenState
+  );
+
+  window.addEventListener(
+    "message",
+    function (event) {
+      const data = event.data;
+
+      if (!data || typeof data !== "object") {
+        return;
+      }
+
+      const sourceBelongsToMountedFrame = Array.from(
+        document.querySelectorAll("iframe")
+      ).some(
+        function (iframe) {
+          return iframe.contentWindow === event.source;
+        }
+      );
+
+      if (!sourceBelongsToMountedFrame) {
+        return;
+      }
+
+      if (data.type === "DUDUQ_FULLSCREEN_QUERY") {
+        broadcastFullscreenState();
+        return;
+      }
+
+      if (data.type === "DUDUQ_FULLSCREEN_TOGGLE") {
+        toggleFullscreen();
+      }
+    }
+  );
  
   const TRANSITION_OPTIONS = Object.freeze({
     coverDurationMs: 220,
@@ -64,7 +155,7 @@
       const link = document.createElement("link");
       link.id = "duduq-world-fusion-core-style";
       link.rel = "stylesheet";
-      link.href = new URL("duduq-world-fusion.css?v=120", coreBase).href;
+      link.href = new URL("duduq-world-fusion.css?v=122", coreBase).href;
       (document.head || document.documentElement).appendChild(link);
     }
 
@@ -74,7 +165,7 @@
     ) {
       const script = document.createElement("script");
       script.id = "duduq-world-fusion-core-script";
-      script.src = new URL("duduq-world-fusion.js?v=120", coreBase).href;
+      script.src = new URL("duduq-world-fusion.js?v=121", coreBase).href;
       script.async = true;
       (document.head || document.documentElement).appendChild(script);
     }
