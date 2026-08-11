@@ -1,8 +1,14 @@
 /* =========================================================
    DUDUQ CORE — HOST
    Orquestrador central das mecânicas e módulos DuduQ.
-   Versão 1.5.4
- 
+   Versão 1.5.5
+
+   NOVIDADES 1.5.5
+   - sincroniza cache com World Fusion 1.2.5 / JS 1.2.4
+   - reduz o tempo visual da ponte sem revelar iframe incompleto
+   - preserva shell/background durante destroy/mount protegido
+   - conclusão usa uma única transição curta
+
    NOVIDADES 1.5.2
    - mantém tela cheia no documento principal entre mecânicas
    - conclusão usa uma única transição, sem espera ou entrada duplicada
@@ -17,25 +23,25 @@
    - win final toca somente depois da transição de conclusão
    - mantém o Host como fonte oficial do progresso
    ========================================================= */
- 
+
 (function () {
   "use strict";
 
   const HOST_SCRIPT_URL =
     document.currentScript?.src ||
     new URL("./duduq-host.js", window.location.href).href;
- 
-  const VERSION = "1.5.4";
- 
+
+  const VERSION = "1.5.5";
+
   if (
     window.DuduQ &&
     window.DuduQ.version === VERSION
   ) {
     return;
   }
- 
+
   const mechanics = new Map();
- 
+
   let activeSession = null;
 
   /* =======================================================
@@ -128,17 +134,17 @@
       }
     }
   );
- 
+
   const TRANSITION_OPTIONS = Object.freeze({
-    coverDurationMs: 220,
-    revealDurationMs: 260,
-    paintFrames: 2,
+    coverDurationMs: 160,
+    revealDurationMs: 190,
+    paintFrames: 1,
     bridgeHoldMs: 0,
     soundEnabled: false
   });
- 
-  const VIEW_READY_TIMEOUT_MS = 520;
-  const POST_LOAD_SETTLE_MS = 40;
+
+  const VIEW_READY_TIMEOUT_MS = 650;
+  const POST_LOAD_SETTLE_MS = 30;
 
 
   /* =======================================================
@@ -155,7 +161,10 @@
       const link = document.createElement("link");
       link.id = "duduq-world-fusion-core-style";
       link.rel = "stylesheet";
-      link.href = new URL("duduq-world-fusion.css?v=124", coreBase).href;
+      link.href = new URL(
+        "duduq-world-fusion.css?v=125",
+        coreBase
+      ).href;
       (document.head || document.documentElement).appendChild(link);
     }
 
@@ -165,7 +174,10 @@
     ) {
       const script = document.createElement("script");
       script.id = "duduq-world-fusion-core-script";
-      script.src = new URL("duduq-world-fusion.js?v=123", coreBase).href;
+      script.src = new URL(
+        "duduq-world-fusion.js?v=124",
+        coreBase
+      ).href;
       script.async = true;
       (document.head || document.documentElement).appendChild(script);
     }
@@ -199,6 +211,7 @@
     }
 
     completionMascotSource = source;
+
     completionMascotReadyPromise = new Promise(
       function (resolve) {
         const image = new Image();
@@ -212,20 +225,33 @@
 
         image.decoding = "async";
         image.fetchPriority = "high";
+
         image.onload = function () {
           if (typeof image.decode === "function") {
             image.decode().then(
-              function () { finish(true); },
-              function () { finish(true); }
+              function () {
+                finish(true);
+              },
+              function () {
+                finish(true);
+              }
             );
             return;
           }
+
           finish(true);
         };
-        image.onerror = function () { finish(false); };
+
+        image.onerror = function () {
+          finish(false);
+        };
+
         image.src = source;
 
-        if (image.complete && image.naturalWidth > 0) {
+        if (
+          image.complete &&
+          image.naturalWidth > 0
+        ) {
           image.onload();
         }
       }
@@ -235,13 +261,17 @@
   }
 
   primeCompletionMascot();
-  window.addEventListener("duduq:assets-ready", primeCompletionMascot);
- 
- 
+
+  window.addEventListener(
+    "duduq:assets-ready",
+    primeCompletionMascot
+  );
+
+
   /* =======================================================
      UTILITÁRIOS
      ======================================================= */
- 
+
   function isObject(value) {
     return (
       value !== null &&
@@ -249,8 +279,8 @@
       !Array.isArray(value)
     );
   }
- 
- 
+
+
   function asString(value, fallback = "") {
     if (
       value === null ||
@@ -258,13 +288,13 @@
     ) {
       return fallback;
     }
- 
+
     const text = String(value).trim();
- 
+
     return text || fallback;
   }
- 
- 
+
+
   function clamp(value, minimum, maximum) {
     return Math.min(
       maximum,
@@ -274,59 +304,59 @@
       )
     );
   }
- 
- 
+
+
   function resolveContainer(value) {
     if (value instanceof Element) {
       return value;
     }
- 
+
     if (
       typeof value === "string" &&
       value.trim()
     ) {
       const element = document.querySelector(value);
- 
+
       if (element) {
         return element;
       }
     }
- 
+
     const root = document.getElementById("root");
- 
+
     if (root) {
       return root;
     }
- 
+
     throw new Error(
       "[DuduQ Host] Container da atividade não encontrado."
     );
   }
- 
- 
+
+
   function clearContainer(container) {
     if (!container) {
       return;
     }
- 
+
     while (container.firstChild) {
       container.removeChild(container.firstChild);
     }
   }
- 
- 
+
+
   function createElement(tag, styles = {}) {
     const element = document.createElement(tag);
- 
+
     Object.assign(
       element.style,
       styles
     );
- 
+
     return element;
   }
- 
- 
+
+
   function normalizeMechanicId(value) {
     return String(value || "")
       .trim()
@@ -334,8 +364,8 @@
       .replace(/_/g, "-")
       .replace(/\s+/g, "-");
   }
- 
- 
+
+
   function dispatch(name, detail = {}) {
     try {
       window.dispatchEvent(
@@ -346,8 +376,8 @@
       );
     } catch (_) {}
   }
- 
- 
+
+
   function applyYearBackground(year) {
     try {
       window.DuduQAssets
@@ -355,8 +385,8 @@
         ?.(year);
     } catch (_) {}
   }
- 
- 
+
+
   function hideCompletion() {
     try {
       window.DuduQCompletion
@@ -364,8 +394,8 @@
         ?.();
     } catch (_) {}
   }
- 
- 
+
+
   function destroyMountedMechanic(session) {
     if (
       !session ||
@@ -373,11 +403,11 @@
     ) {
       return;
     }
- 
+
     const destroy = session.destroyCurrent;
- 
+
     session.destroyCurrent = null;
- 
+
     try {
       destroy();
     } catch (error) {
@@ -387,8 +417,8 @@
       );
     }
   }
- 
- 
+
+
   function nextFrame() {
     return new Promise(
       function (resolve) {
@@ -396,15 +426,15 @@
       }
     );
   }
- 
- 
+
+
   async function waitPaintFrames(count = 2) {
     const total = clamp(
       Math.round(Number(count) || 2),
       1,
       6
     );
- 
+
     for (
       let index = 0;
       index < total;
@@ -413,60 +443,60 @@
       await nextFrame();
     }
   }
- 
- 
+
+
   function getTransition() {
     const transition = window.DuduQTransition;
- 
+
     if (
       transition &&
       typeof transition.swap === "function"
     ) {
       return transition;
     }
- 
+
     return null;
   }
 
- 
+
   /* =======================================================
      SILÊNCIO DE VITÓRIA ENTRE MECÂNICAS
- 
+
      A comemoração "win" pertence somente à conclusão real
      do módulo. Algumas mecânicas legadas possuem um canal
      sonoro próprio dentro do iframe; por isso o Host corta
      o win tanto no Core quanto no runtime montado.
      ======================================================= */
- 
+
   function silenceIntermediateVictory(session) {
     try {
       window.DuduQSound
         ?.stop
         ?.("win");
     } catch (_) {}
- 
+
     const iframe = session
       ?.container
       ?.querySelector
       ? session.container.querySelector("iframe")
       : null;
- 
+
     if (!iframe) {
       return true;
     }
- 
+
     try {
       iframe.contentWindow
         ?.DuduQSound
         ?.stop
         ?.("win");
     } catch (_) {}
- 
+
     try {
       const audios = iframe.contentDocument
         ?.querySelectorAll
         ?.("audio");
- 
+
       if (audios) {
         audios.forEach(function (audio) {
           const src = String(
@@ -474,17 +504,17 @@
             audio.src ||
             ""
           ).toLowerCase();
- 
+
           const isWin =
             src.includes("you%20win") ||
             src.includes("you win") ||
             src.includes("you_win") ||
             /(^|\/)win(?:[-_.]|$)/.test(src);
- 
+
           if (!isWin) {
             return;
           }
- 
+
           try {
             audio.pause();
             audio.currentTime = 0;
@@ -492,22 +522,22 @@
         });
       }
     } catch (_) {}
- 
+
     return true;
   }
- 
- 
+
+
   /* =======================================================
      PRONTIDÃO DA NOVA TELA
- 
+
      As mecânicas atuais usam iframe. O Host aguarda:
      1. DUDUQ_MECHANIC_READY do iframe, OU
      2. load do iframe + pequena estabilização, OU
      3. timeout de segurança.
- 
+
      Para telas sem iframe, aguardamos frames de pintura.
      ======================================================= */
- 
+
   async function waitForMountedView(
     session,
     options = {}
@@ -518,26 +548,26 @@
     ) {
       return false;
     }
- 
+
     await waitPaintFrames(
       options.paintFrames || 1
     );
- 
+
     if (
       session !== activeSession
     ) {
       return false;
     }
- 
+
     const iframe = session.container
       ?.querySelector
       ? session.container.querySelector("iframe")
       : null;
- 
+
     if (!iframe) {
       return true;
     }
- 
+
     /*
      * Atalho seguro: se o iframe real já terminou de carregar
      * antes de registrarmos os listeners, não esperamos o
@@ -548,12 +578,12 @@
         iframe.getAttribute("src") ||
         ""
       ).trim();
- 
+
       const readyState =
         iframe.contentDocument
           ?.readyState ||
         "";
- 
+
       if (
         declaredSrc &&
         !/^about:blank(?:$|[?#])/i.test(declaredSrc) &&
@@ -566,13 +596,13 @@
         return true;
       }
     } catch (_) {}
- 
+
     return new Promise(
       function (resolve) {
         let settled = false;
         let timeoutId = null;
         let postLoadTimer = null;
- 
+
         function cleanup() {
           try {
             window.removeEventListener(
@@ -580,42 +610,42 @@
               handleMessage
             );
           } catch (_) {}
- 
+
           try {
             iframe.removeEventListener(
               "load",
               handleLoad
             );
           } catch (_) {}
- 
+
           if (timeoutId !== null) {
             window.clearTimeout(timeoutId);
           }
- 
+
           if (postLoadTimer !== null) {
             window.clearTimeout(postLoadTimer);
           }
         }
- 
+
         function finish() {
           if (settled) {
             return;
           }
- 
+
           settled = true;
           cleanup();
           resolve(true);
         }
- 
+
         function handleMessage(event) {
           if (
             event.source !== iframe.contentWindow
           ) {
             return;
           }
- 
+
           const data = event.data;
- 
+
           if (
             data &&
             typeof data === "object" &&
@@ -624,7 +654,7 @@
             window.requestAnimationFrame(finish);
           }
         }
- 
+
         function handleLoad() {
           /*
            * Apenas um respiro curtíssimo para o primeiro paint.
@@ -635,22 +665,23 @@
             POST_LOAD_SETTLE_MS
           );
         }
- 
+
         window.addEventListener(
           "message",
           handleMessage
         );
- 
+
         iframe.addEventListener(
           "load",
           handleLoad,
           { once: true }
         );
- 
+
         timeoutId = window.setTimeout(
           finish,
           clamp(
-            Number(options.timeoutMs) || VIEW_READY_TIMEOUT_MS,
+            Number(options.timeoutMs) ||
+              VIEW_READY_TIMEOUT_MS,
             180,
             900
           )
@@ -658,7 +689,8 @@
       }
     );
   }
- 
+
+
   function runTransitionSwap(
     session,
     callback,
@@ -671,11 +703,11 @@
     ) {
       return Promise.resolve(false);
     }
- 
+
     const transition = getTransition();
- 
+
     session.transitioning = true;
- 
+
     const finishTransitionState = function () {
       if (
         session === activeSession
@@ -683,22 +715,22 @@
         session.transitioning = false;
       }
     };
- 
+
     if (!transition) {
       let result;
- 
+
       try {
         result = callback();
       } catch (error) {
         finishTransitionState();
         return Promise.reject(error);
       }
- 
+
       return Promise
         .resolve(result)
         .finally(finishTransitionState);
     }
- 
+
     return transition
       .swap(
         callback,
@@ -709,27 +741,27 @@
       )
       .finally(finishTransitionState);
   }
- 
- 
+
+
   /* =======================================================
      REGISTRO DE MECÂNICAS
      ======================================================= */
- 
+
   function registerMechanic(definition) {
     if (!isObject(definition)) {
       throw new Error(
         "[DuduQ Host] A definição da mecânica precisa ser um objeto."
       );
     }
- 
+
     const id = normalizeMechanicId(definition.id);
- 
+
     if (!id) {
       throw new Error(
         "[DuduQ Host] A mecânica precisa possuir um id."
       );
     }
- 
+
     if (
       typeof definition.mount !== "function"
     ) {
@@ -737,21 +769,21 @@
         `[DuduQ Host] A mecânica "${id}" precisa fornecer uma função mount().`
       );
     }
- 
+
     const mechanic = Object.freeze({
       id,
- 
+
       version: String(
         definition.version || "1.0.0"
       ),
- 
+
       mount: definition.mount,
- 
+
       validate:
         typeof definition.validate === "function"
           ? definition.validate
           : null,
- 
+
       metadata:
         isObject(definition.metadata)
           ? Object.freeze({
@@ -759,20 +791,20 @@
             })
           : Object.freeze({})
     });
- 
+
     mechanics.set(id, mechanic);
- 
+
     return mechanic;
   }
- 
- 
+
+
   function unregisterMechanic(id) {
     return mechanics.delete(
       normalizeMechanicId(id)
     );
   }
- 
- 
+
+
   function getMechanic(id) {
     return (
       mechanics.get(
@@ -780,15 +812,15 @@
       ) || null
     );
   }
- 
- 
+
+
   function hasMechanic(id) {
     return mechanics.has(
       normalizeMechanicId(id)
     );
   }
- 
- 
+
+
   function listMechanics() {
     return Array
       .from(mechanics.values())
@@ -802,115 +834,115 @@
         }
       );
   }
- 
- 
+
+
   /* =======================================================
      NORMALIZAÇÃO DO MÓDULO
      ======================================================= */
- 
+
   function normalizeStep(step, index) {
     if (!isObject(step)) {
       throw new Error(
         `[DuduQ Host] A etapa ${index + 1} precisa ser um objeto.`
       );
     }
- 
+
     const mechanic = normalizeMechanicId(
       step.mechanic ||
       step.mechanicId ||
       step.type
     );
- 
+
     if (!mechanic) {
       throw new Error(
         `[DuduQ Host] A etapa ${index + 1} não possui uma mecânica.`
       );
     }
- 
+
     return {
       ...step,
- 
+
       id: asString(
         step.id,
         `step-${index + 1}`
       ),
- 
+
       mechanic,
- 
+
       payload:
         step.payload !== undefined
           ? step.payload
           : step.content !== undefined
             ? step.content
             : {},
- 
+
       options:
         isObject(step.options)
           ? { ...step.options }
           : {}
     };
   }
- 
- 
+
+
   function normalizeModule(input) {
     if (!isObject(input)) {
       throw new Error(
         "[DuduQ Host] O módulo precisa ser um objeto."
       );
     }
- 
+
     const steps = Array.isArray(input.steps)
       ? input.steps.map(normalizeStep)
       : [];
- 
+
     if (steps.length === 0) {
       throw new Error(
         "[DuduQ Host] O módulo precisa possuir pelo menos uma etapa."
       );
     }
- 
+
     return {
       ...input,
- 
+
       id: asString(
         input.id,
         `module-${Date.now()}`
       ),
- 
+
       year:
         input.year ??
         input.grade ??
         null,
- 
+
       subject: asString(
         input.subject,
         ""
       ),
- 
+
       module:
         input.module ??
         input.unit ??
         null,
- 
+
       title: asString(
         input.title,
         ""
       ),
- 
+
       steps,
- 
+
       container:
         input.container ??
         "#root"
     };
   }
- 
- 
+
+
   /* =======================================================
      PROGRESSO GLOBAL
      O HOST É A FONTE OFICIAL DO PROGRESSO.
      ======================================================= */
- 
+
   function buildProgress(
     session,
     options = {}
@@ -918,19 +950,19 @@
     if (!session) {
       return null;
     }
- 
+
     const totalSteps = session.module.steps.length;
- 
+
     const completed =
       options.completed === true ||
       session.completed === true;
- 
+
     let currentStepIndex = Number.isFinite(
       options.currentStepIndex
     )
       ? options.currentStepIndex
       : session.stepIndex;
- 
+
     if (totalSteps > 0) {
       currentStepIndex = clamp(
         currentStepIndex,
@@ -940,9 +972,9 @@
     } else {
       currentStepIndex = 0;
     }
- 
+
     let completedSteps;
- 
+
     if (completed) {
       completedSteps = totalSteps;
     } else if (
@@ -960,7 +992,7 @@
         totalSteps
       );
     }
- 
+
     const fraction = totalSteps > 0
       ? clamp(
           completedSteps / totalSteps,
@@ -968,20 +1000,20 @@
           1
         )
       : 0;
- 
+
     const percent = Math.round(
       fraction * 100
     );
- 
+
     const currentStep = totalSteps > 0
       ? currentStepIndex + 1
       : 0;
- 
+
     const remainingSteps = Math.max(
       0,
       totalSteps - completedSteps
     );
- 
+
     return Object.freeze({
       source: "duduq-host",
       scope: "module",
@@ -994,19 +1026,19 @@
       fraction,
       percent,
       completed,
- 
+
       label: completed
         ? `${completedSteps} de ${totalSteps} etapas concluídas`
         : `Etapa ${currentStep} de ${totalSteps}`
     });
   }
- 
- 
+
+
   function getProgress() {
     if (!activeSession) {
       return null;
     }
- 
+
     return buildProgress(
       activeSession,
       {
@@ -1015,11 +1047,11 @@
       }
     );
   }
- 
- 
+
+
   function buildStepContext(session, step) {
     const progress = buildProgress(session);
- 
+
     return {
       engineVersion: VERSION,
       moduleId: session.module.id,
@@ -1029,28 +1061,28 @@
       stepId: step.id,
       stepIndex: session.stepIndex,
       totalSteps: session.module.steps.length,
- 
+
       progress,
- 
+
       /* Alias temporário durante a migração das mecânicas. */
       globalProgress: progress,
- 
+
       assets:
         window.DuduQAssets ||
         window.DUDUQ_ASSETS ||
         null,
- 
+
       sound:
         window.DuduQSound ||
         null
     };
   }
- 
- 
+
+
   /* =======================================================
      ERROS DE EXECUÇÃO
      ======================================================= */
- 
+
   function renderRuntimeError(
     session,
     message,
@@ -1059,7 +1091,7 @@
     destroyMountedMechanic(session);
     hideCompletion();
     clearContainer(session.container);
- 
+
     const box = createElement(
       "div",
       {
@@ -1075,7 +1107,7 @@
         textAlign: "center"
       }
     );
- 
+
     const title = createElement(
       "h2",
       {
@@ -1084,10 +1116,10 @@
         fontSize: "28px"
       }
     );
- 
+
     title.textContent =
       "Não foi possível abrir esta etapa";
- 
+
     const text = createElement(
       "p",
       {
@@ -1096,20 +1128,20 @@
         lineHeight: "1.45"
       }
     );
- 
+
     text.textContent = message;
- 
+
     box.appendChild(title);
     box.appendChild(text);
- 
+
     session.container.appendChild(box);
- 
+
     console.error(
       "[DuduQ Host]",
       message,
       error || ""
     );
- 
+
     dispatch(
       "duduq:error",
       {
@@ -1121,12 +1153,12 @@
       }
     );
   }
- 
- 
+
+
   /* =======================================================
      EXECUÇÃO DAS ETAPAS
      ======================================================= */
- 
+
   function renderCurrentStep(session) {
     if (
       !session ||
@@ -1134,7 +1166,7 @@
     ) {
       return false;
     }
- 
+
     if (
       session.stepIndex >=
       session.module.steps.length
@@ -1142,9 +1174,9 @@
       finishModule(session);
       return true;
     }
- 
+
     hideCompletion();
- 
+
     /*
      * Este destroy continua aqui por segurança.
      * Durante uma troca normal ele ocorre somente quando
@@ -1152,29 +1184,29 @@
      */
     destroyMountedMechanic(session);
     clearContainer(session.container);
- 
+
     const step = session.module.steps[
       session.stepIndex
     ];
- 
+
     const mechanic = getMechanic(
       step.mechanic
     );
- 
+
     session.stepCompleted = false;
- 
+
     if (!mechanic) {
       renderRuntimeError(
         session,
         `A mecânica "${step.mechanic}" não está registrada.`
       );
- 
+
       return false;
     }
- 
+
     if (mechanic.validate) {
       let valid = false;
- 
+
       try {
         valid = mechanic.validate(
           step.payload,
@@ -1186,25 +1218,25 @@
           `A validação da mecânica "${step.mechanic}" apresentou um erro.`,
           error
         );
- 
+
         return false;
       }
- 
+
       if (!valid) {
         renderRuntimeError(
           session,
           `O conteúdo da etapa "${step.id}" não é compatível com a mecânica "${step.mechanic}".`
         );
- 
+
         return false;
       }
     }
- 
+
     const context = buildStepContext(
       session,
       step
     );
- 
+
     dispatch(
       "duduq:step-start",
       {
@@ -1216,14 +1248,14 @@
         progress: context.progress
       }
     );
- 
+
     try {
       const destroy = mechanic.mount({
         container: session.container,
         payload: step.payload,
         options: step.options,
         context,
- 
+
         onComplete(result) {
           completeCurrentStep(
             session,
@@ -1231,12 +1263,12 @@
           );
         }
       });
- 
+
       session.destroyCurrent =
         typeof destroy === "function"
           ? destroy
           : null;
- 
+
       return true;
     } catch (error) {
       renderRuntimeError(
@@ -1244,12 +1276,12 @@
         `Não foi possível iniciar a mecânica "${step.mechanic}".`,
         error
       );
- 
+
       return false;
     }
   }
- 
- 
+
+
   function completeCurrentStep(
     session,
     result = null
@@ -1261,35 +1293,35 @@
     ) {
       return false;
     }
- 
+
     if (
       session.stepCompleted ||
       session.transitioning
     ) {
       return false;
     }
- 
+
     const step = session.module.steps[
       session.stepIndex
     ];
- 
+
     if (!step) {
       return false;
     }
- 
+
     const hasNextMechanic =
       session.stepIndex + 1 <
       session.module.steps.length;
- 
+
     const isFinalStep =
       !hasNextMechanic;
- 
+
     /*
      * Travamos a conclusão imediatamente para impedir
      * duplo clique / dupla mensagem do iframe.
      */
     session.stepCompleted = true;
- 
+
     /*
      * Entre mecânicas não existe som de vitória.
      * Se um runtime interno iniciou o win, cortamos agora,
@@ -1298,25 +1330,25 @@
     if (hasNextMechanic) {
       silenceIntermediateVictory(session);
     }
- 
+
     session.results.push({
       stepId: step.id,
       mechanicId: step.mechanic,
       stepIndex: session.stepIndex,
       result: result ?? null
     });
- 
+
     const completedSteps = clamp(
       session.stepIndex + 1,
       0,
       session.module.steps.length
     );
- 
+
     const progressAfterStep = buildProgress(
       session,
       { completedSteps }
     );
- 
+
     dispatch(
       "duduq:step-complete",
       {
@@ -1329,20 +1361,20 @@
         progress: progressAfterStep
       }
     );
- 
+
     /* =====================================================
        TROCA PROTEGIDA
- 
+
        Mecânica -> mecânica:
-       - slide contínuo
+       - ponte contínua
        - transition-swoosh
        - sem win
- 
+
        Mecânica final -> conclusão:
-       - slide visual sem swoosh
+       - ponte visual curta sem swoosh
        - win somente depois que a conclusão apareceu
        ===================================================== */
- 
+
     runTransitionSwap(
       session,
       async function () {
@@ -1351,16 +1383,16 @@
         ) {
           return false;
         }
- 
+
         if (isFinalStep) {
           await primeCompletionMascot();
         }
 
         destroyMountedMechanic(session);
- 
+
         session.stepIndex += 1;
         session.stepCompleted = false;
- 
+
         if (
           session.stepIndex >=
           session.module.steps.length
@@ -1369,12 +1401,12 @@
             session,
             { playSound: false }
           );
- 
+
           return true;
         }
- 
+
         renderCurrentStep(session);
- 
+
         await waitForMountedView(
           session,
           {
@@ -1382,20 +1414,21 @@
             timeoutMs: VIEW_READY_TIMEOUT_MS
           }
         );
- 
+
         return true;
       },
       {
         coverDurationMs: isFinalStep
-          ? 170
+          ? 150
           : TRANSITION_OPTIONS.coverDurationMs,
+
         revealDurationMs: isFinalStep
-          ? 210
+          ? 180
           : TRANSITION_OPTIONS.revealDurationMs,
-        paintFrames: isFinalStep
-          ? 1
-          : TRANSITION_OPTIONS.paintFrames,
+
+        paintFrames: 1,
         bridgeHoldMs: 0,
+
         soundEnabled: hasNextMechanic,
         soundName: "transition-swoosh",
         soundVolume: 0.42,
@@ -1419,14 +1452,14 @@
             "[DuduQ Host] Falha na transição entre etapas:",
             error
           );
- 
+
           if (
             session === activeSession &&
             !session.completed
           ) {
             session.transitioning = false;
           }
- 
+
           /*
            * Se a tela final já foi criada mas a animação falhou,
            * ainda preservamos a comemoração final.
@@ -1440,32 +1473,33 @@
           }
         }
       );
- 
+
     return true;
   }
- 
+
+
   function next(result = null) {
     if (!activeSession) {
       return false;
     }
- 
+
     return completeCurrentStep(
       activeSession,
       result
     );
   }
- 
- 
+
+
   /* =======================================================
      CONCLUSÃO PREMIUM CENTRALIZADA
      ======================================================= */
- 
+
   function buildCompletionMessage(module) {
     const subject = asString(
       module.subject,
       "atividade"
     );
- 
+
     if (
       module.module !== null &&
       module.module !== undefined &&
@@ -1475,17 +1509,17 @@
         `Módulo ${module.module} de ${subject} concluído com sucesso.`
       );
     }
- 
+
     if (module.title) {
       return (
         `${module.title} concluído com sucesso.`
       );
     }
- 
+
     return `${subject} concluído com sucesso.`;
   }
- 
- 
+
+
   function playCompletionSound() {
     try {
       window.DuduQSound
@@ -1499,18 +1533,18 @@
         );
     } catch (_) {}
   }
- 
- 
+
+
   /* =======================================================
      FALLBACK DE CONCLUSÃO
      ======================================================= */
- 
+
   function renderCompletionFallback(
     session,
     progress
   ) {
     clearContainer(session.container);
- 
+
     const wrap = createElement(
       "section",
       {
@@ -1522,7 +1556,7 @@
         padding: "28px"
       }
     );
- 
+
     const card = createElement(
       "div",
       {
@@ -1531,26 +1565,26 @@
         padding: "40px 32px",
         borderRadius: "30px",
         background: "rgba(255,255,255,0.97)",
+        color: "#17375e",
         border: "2px solid rgba(193,213,232,0.92)",
         boxShadow: "0 22px 52px rgba(26,67,105,0.20)",
         textAlign: "center",
-        fontFamily: "system-ui, sans-serif",
-        color: "#17375e"
+        fontFamily: "system-ui, sans-serif"
       }
     );
- 
+
     const mascotSrc = window
       .DUDUQ_ASSETS
       ?.mascots
       ?.complete;
- 
+
     if (mascotSrc) {
       const mascot = document.createElement("img");
- 
+
       mascot.src = mascotSrc;
       mascot.alt =
         "DuduQ celebrando a conclusão.";
- 
+
       Object.assign(
         mascot.style,
         {
@@ -1561,10 +1595,10 @@
           margin: "0 auto 8px"
         }
       );
- 
+
       card.appendChild(mascot);
     }
- 
+
     const title = createElement(
       "h1",
       {
@@ -1574,11 +1608,11 @@
         lineHeight: "1.05"
       }
     );
- 
+
     title.textContent =
       "Missão concluída!";
- 
-    const message = createElement(
+
+    const text = createElement(
       "p",
       {
         margin: "0 0 18px",
@@ -1588,11 +1622,12 @@
         lineHeight: "1.4"
       }
     );
- 
-    message.textContent = buildCompletionMessage(
-      session.module
-    );
- 
+
+    text.textContent =
+      buildCompletionMessage(
+        session.module
+      );
+
     const badge = createElement(
       "div",
       {
@@ -1605,9 +1640,9 @@
         fontWeight: "800"
       }
     );
- 
+
     badge.textContent = progress.label;
- 
+
     const button = createElement(
       "button",
       {
@@ -1625,31 +1660,32 @@
         cursor: "pointer"
       }
     );
- 
+
     button.type = "button";
-    button.textContent = "JOGAR NOVAMENTE";
- 
+    button.textContent =
+      "JOGAR NOVAMENTE";
+
     button.addEventListener(
       "click",
       restart
     );
- 
+
     card.appendChild(title);
-    card.appendChild(message);
+    card.appendChild(text);
     card.appendChild(badge);
     card.appendChild(button);
     wrap.appendChild(card);
- 
+
     session.container.appendChild(wrap);
   }
- 
- 
+
+
   /* =======================================================
      FINALIZAÇÃO DO MÓDULO
- 
+
      Normalmente chamada já sob a camada de transição.
      ======================================================= */
- 
+
   function finishModule(
     session,
     options = {}
@@ -1661,19 +1697,19 @@
     ) {
       return false;
     }
- 
+
     destroyMountedMechanic(session);
- 
+
     session.completed = true;
     session.stepCompleted = false;
- 
+
     const progress = buildProgress(
       session,
       { completed: true }
     );
- 
+
     clearContainer(session.container);
- 
+
     const completionOptions = {
       container: session.container,
       title: "Missão concluída!",
@@ -1681,18 +1717,18 @@
         session.module
       ),
       progress,
- 
+
       mascotSrc:
         resolveCompletionMascotSource() ||
         null,
- 
+
       mascotAlt:
         "DuduQ celebrando a conclusão.",
- 
+
       confetti: true,
       starCount: 20,
       showAchievement: true,
- 
+
       primaryAction: {
         label: "JOGAR NOVAMENTE",
         ariaLabel:
@@ -1700,7 +1736,7 @@
         onClick: restart
       }
     };
- 
+
     if (
       window.DuduQCompletion
         ?.show
@@ -1714,7 +1750,7 @@
           "[DuduQ Host] Falha ao abrir DuduQCompletion. Usando fallback.",
           error
         );
- 
+
         renderCompletionFallback(
           session,
           progress
@@ -1726,11 +1762,11 @@
         progress
       );
     }
- 
+
     if (options.playSound !== false) {
       playCompletionSound();
     }
- 
+
     dispatch(
       "duduq:module-complete",
       {
@@ -1743,27 +1779,28 @@
         progress
       }
     );
- 
+
     return true;
   }
- 
- 
+
+
   /* =======================================================
      INÍCIO
      ======================================================= */
- 
+
   function start(input) {
     destroy();
- 
+
     const module = normalizeModule(input);
+
     const container = resolveContainer(
       module.container
     );
- 
+
     applyYearBackground(module.year);
     hideCompletion();
     clearContainer(container);
- 
+
     const session = {
       module,
       container,
@@ -1775,11 +1812,11 @@
       destroyCurrent: null,
       startedAt: Date.now()
     };
- 
+
     activeSession = session;
- 
+
     const progress = buildProgress(session);
- 
+
     dispatch(
       "duduq:module-start",
       {
@@ -1792,29 +1829,29 @@
         progress
       }
     );
- 
+
     renderCurrentStep(session);
- 
+
     return getSession();
   }
- 
- 
+
+
   /* =======================================================
      REINICIAR
      Conclusão -> primeira mecânica também usa transição.
      ======================================================= */
- 
+
   function restart() {
     if (!activeSession) {
       return false;
     }
- 
+
     const session = activeSession;
- 
+
     if (session.transitioning) {
       return false;
     }
- 
+
     runTransitionSwap(
       session,
       async function () {
@@ -1823,26 +1860,27 @@
         ) {
           return false;
         }
- 
+
         destroyMountedMechanic(session);
         hideCompletion();
- 
+
         session.stepIndex = 0;
         session.stepCompleted = false;
         session.completed = false;
         session.results = [];
         session.startedAt = Date.now();
- 
+
         applyYearBackground(
           session.module.year
         );
- 
+
         clearContainer(
           session.container
         );
- 
-        const progress = buildProgress(session);
- 
+
+        const progress =
+          buildProgress(session);
+
         dispatch(
           "duduq:module-restart",
           {
@@ -1854,9 +1892,9 @@
             progress
           }
         );
- 
+
         renderCurrentStep(session);
- 
+
         await waitForMountedView(
           session,
           {
@@ -1864,7 +1902,7 @@
             timeoutMs: VIEW_READY_TIMEOUT_MS
           }
         );
- 
+
         return true;
       },
       {
@@ -1878,47 +1916,47 @@
         );
       }
     );
- 
+
     return true;
   }
- 
- 
+
+
   /* =======================================================
      DESTRUIR
      ======================================================= */
- 
+
   function destroy() {
     try {
       window.DuduQTransition
         ?.hideImmediate
         ?.();
     } catch (_) {}
- 
+
     if (!activeSession) {
       hideCompletion();
       return false;
     }
- 
+
     const session = activeSession;
- 
+
     destroyMountedMechanic(session);
     hideCompletion();
- 
+
     activeSession = null;
- 
+
     return true;
   }
- 
- 
+
+
   /* =======================================================
      SESSÃO PÚBLICA
      ======================================================= */
- 
+
   function getSession() {
     if (!activeSession) {
       return null;
     }
- 
+
     return {
       engineVersion: VERSION,
       moduleId: activeSession.module.id,
@@ -1928,46 +1966,49 @@
       stepIndex: activeSession.stepIndex,
       totalSteps: activeSession.module.steps.length,
       completed: activeSession.completed,
-      transitioning: activeSession.transitioning === true,
-      results: activeSession.results.slice(),
+      transitioning:
+        activeSession.transitioning === true,
+      results:
+        activeSession.results.slice(),
       progress: getProgress()
     };
   }
- 
- 
+
+
   /* =======================================================
      API PÚBLICA
      ======================================================= */
- 
+
   window.DuduQ = Object.freeze({
     version: VERSION,
- 
+
     registerMechanic,
     unregisterMechanic,
     getMechanic,
     hasMechanic,
     listMechanics,
- 
+
     start,
     next,
     restart,
     destroy,
- 
+
     getSession,
     getProgress
   });
- 
- 
+
+
   dispatch(
     "duduq:host-ready",
     {
       version: VERSION
     }
   );
- 
- 
+
+
   console.info(
     "[DuduQ] Host carregado:",
     VERSION
   );
 })();
+
