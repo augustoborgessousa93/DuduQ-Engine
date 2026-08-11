@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Conteúdo nítido sobre fundo cinematográfico suavizado.
-   Versão 1.2.5
+   Versão 1.2.6
    ========================================================= */
 
 html.duduq-world-fusion {
@@ -38,7 +38,7 @@ html.duduq-world-fusion body::before {
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
-  filter: blur(5px) saturate(.72) brightness(.90) contrast(.92);
+  filter: blur(5px) saturate(.72) brightness(.95) contrast(.92);
   transform: scale(1.025);
   transform-origin: center;
 }
@@ -49,13 +49,14 @@ html.duduq-world-fusion body::after {
   background:
     linear-gradient(
       180deg,
-      rgba(9, 34, 55, .035),
-      rgba(9, 34, 55, .09)
+      rgba(9, 34, 55, .02),
+      rgba(9, 34, 55, .06)
     ),
     radial-gradient(
-      circle at 50% 34%,
-      rgba(235, 249, 255, .12),
-      transparent 50%
+      circle at 50% 32%,
+      rgba(241, 251, 255, .15),
+      rgba(235, 249, 255, .07) 34%,
+      transparent 58%
     );
 }
 
@@ -197,11 +198,11 @@ html.duduq-world-fusion
     .duduq-dd-pool-items > .duduq-dd-empty-note,
     .duduq-udd-pool-items > .duduq-udd-empty-note
   ) {
-  width: min(520px, 100%) !important;
-  min-height: 48px !important;
+  width: min(390px, calc(100% - 24px)) !important;
+  min-height: 42px !important;
   margin-block: 0 !important;
   margin-inline: auto !important;
-  padding: 5px 14px !important;
+  padding: 4px 12px !important;
   gap: 0 !important;
   border-radius: 999px !important;
 }
@@ -223,7 +224,7 @@ html.duduq-world-fusion
     .duduq-udd-pool-items > .duduq-udd-empty-note
   )
   :is(.duduq-dd-pool-items, .duduq-udd-pool-items) {
-  min-height: 28px !important;
+  min-height: 26px !important;
   padding: 0 !important;
 }
 
@@ -231,8 +232,8 @@ html.duduq-world-fusion
   .duduq-engine-stage
   :is(.duduq-dd-empty-note, .duduq-udd-empty-note) {
   color: #566f84 !important;
-  font-size: .88rem !important;
-  font-weight: 800 !important;
+  font-size: .90rem !important;
+  font-weight: 850 !important;
   opacity: 1 !important;
 }
 
@@ -244,6 +245,63 @@ html.duduq-world-fusion .duduq-engine-shell:has(
   .duduq-dd-pool,
   .duduq-udd-pool[data-empty="true"]
 ) {
+  display: none !important;
+}
+
+
+/* Drag & Drop — ao entrar em feedback, o tabuleiro deve terminar onde
+   terminam as categorias. Remove a altura residual do runtime e aproxima
+   o feedback para a faixa compartilhada (aprox. 16–24px). */
+html.duduq-world-fusion
+  .duduq-engine-shell:has(.duduq-dd-root):has(
+    .duduq-engine-feedback[data-state="success"]
+  )
+  .duduq-engine-stage,
+html.duduq-world-fusion
+  .duduq-engine-shell:has(.duduq-dd-root):has(
+    .duduq-engine-feedback[data-state="retry"]
+  )
+  .duduq-engine-stage {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+html.duduq-world-fusion
+  .duduq-engine-shell:has(.duduq-dd-root):has(
+    .duduq-engine-feedback[data-state="success"]
+  )
+  .duduq-dd-root,
+html.duduq-world-fusion
+  .duduq-engine-shell:has(.duduq-dd-root):has(
+    .duduq-engine-feedback[data-state="retry"]
+  )
+  .duduq-dd-root {
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+html.duduq-world-fusion
+  .duduq-engine-shell:has(.duduq-dd-root):has(
+    .duduq-engine-feedback[data-state="success"]
+  )
+  .duduq-dd-action-slot,
+html.duduq-world-fusion
+  .duduq-engine-shell:has(.duduq-dd-root):has(
+    .duduq-engine-feedback[data-state="retry"]
+  )
+  .duduq-dd-action-slot {
+  display: none !important;
+}
+
+/* Bubble Pop — o status "Todos os alvos foram encontrados!" é redundante
+   quando o feedback final de sucesso já está visível. Ocultá-lo libera a
+   altura necessária para o card verde permanecer inteiro no navegador normal. */
+html.duduq-world-fusion
+  .duduq-engine-shell:has(.duduq-bp-root):has(
+    .duduq-engine-feedback[data-state="success"]
+  )
+  .duduq-bp-status {
   display: none !important;
 }
 
@@ -639,7 +697,7 @@ html.duduq-world-fusion #duduq-boot {
 
   html.duduq-world-fusion body::before {
     inset: -2.5%;
-    filter: blur(4px) saturate(.74) brightness(.86) contrast(.92);
+    filter: blur(4px) saturate(.74) brightness(.92) contrast(.92);
     transform: scale(1.025);
   }
 
