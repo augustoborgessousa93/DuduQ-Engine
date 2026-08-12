@@ -10,7 +10,7 @@
        ===================================================== -->
   <link rel="stylesheet" href="./core/duduq-theme.css?v=110">
   <link rel="stylesheet" href="./core/duduq-intro.css?v=130">
-  <link rel="stylesheet" href="./core/duduq-transition.css?v=149">
+  <link rel="stylesheet" href="./core/duduq-transition.css?v=150">
   <link rel="stylesheet" href="./core/duduq-completion.css?v=127">
   <link id="duduq-world-fusion-core-style" rel="stylesheet" href="./core/duduq-world-fusion.css?v=129">
 </head>
@@ -141,6 +141,192 @@
 
           return;
         }
+
+        /* ===============================================
+           FIRST LOAD — PREPARAÇÃO DO CENÁRIO
+
+           O problema da tela azul só acontece no primeiro
+           acesso porque o background remoto ainda não está
+           no cache. A Transition universal possui uma cor
+           azul-base segura para trocas normais, mas esse
+           fallback não combina com a saída branca da Intro.
+
+           Aqui o cenário do ano é carregado e decodificado
+           enquanto a Intro ainda está em exibição.
+           =============================================== */
+
+        const moduleYearKey =
+          String(
+            moduleDefinition.year ?? ""
+          ).match(/[1-5]/)?.[0] || "";
+
+        const moduleBackgroundSrc =
+          (
+            window.DuduQAssets
+              ?.assets
+              ?.backgrounds
+              ?.[moduleYearKey]
+          ) ||
+          (
+            window.DUDUQ_ASSETS
+              ?.backgrounds
+              ?.[moduleYearKey]
+          ) ||
+          "";
+
+        function prepareFirstWorldBackground() {
+          if (
+            !moduleYearKey ||
+            !moduleBackgroundSrc
+          ) {
+            return Promise.resolve(false);
+          }
+
+          /*
+           * Aplicamos o URL imediatamente ao documento principal.
+           * A Intro cobre a tela, então essa preparação não aparece
+           * para o aluno.
+           */
+          try {
+            window.DuduQAssets
+              ?.setYear
+              ?.(moduleYearKey);
+          } catch (_) {}
+
+          try {
+            document.documentElement
+              .style
+              .setProperty(
+                "--duduq-world-image",
+                `url("${moduleBackgroundSrc}")`
+              );
+          } catch (_) {}
+
+          /*
+           * A ponte recebe o mesmo URL antes do download terminar.
+           * Assim ela não depende de descobrir a imagem somente
+           * depois do DuduQ.start().
+           */
+          try {
+            const transitionRoot =
+              window.DuduQTransition
+                ?.ensureRoot
+                ?.();
+
+            transitionRoot
+              ?.style
+              ?.setProperty(
+                "--duduq-transition-world-image",
+                `url("${moduleBackgroundSrc}")`
+              );
+          } catch (_) {}
+
+          return new Promise(
+            function (resolve) {
+              let settled = false;
+              let timeoutId = null;
+
+              const image =
+                new Image();
+
+              image.decoding =
+                "async";
+
+              function finish(ok) {
+                if (settled) return;
+
+                settled = true;
+
+                if (timeoutId !== null) {
+                  window.clearTimeout(
+                    timeoutId
+                  );
+                }
+
+                try {
+                  window.DuduQWorldFusion
+                    ?.refresh
+                    ?.();
+                } catch (_) {}
+
+                try {
+                  window.DuduQTransition
+                    ?.primeWorldBridge
+                    ?.();
+                } catch (_) {}
+
+                /*
+                 * Dois paints estáveis antes de liberar a Intro.
+                 */
+                window.requestAnimationFrame(
+                  function () {
+                    window.requestAnimationFrame(
+                      function () {
+                        resolve(Boolean(ok));
+                      }
+                    );
+                  }
+                );
+              }
+
+              image.onload =
+                function () {
+                  const decoded =
+                    typeof image.decode ===
+                    "function"
+                      ? image
+                          .decode()
+                          .catch(
+                            function () {}
+                          )
+                      : Promise.resolve();
+
+                  Promise.resolve(decoded)
+                    .finally(
+                      function () {
+                        finish(true);
+                      }
+                    );
+                };
+
+              image.onerror =
+                function () {
+                  finish(false);
+                };
+
+              image.src =
+                moduleBackgroundSrc;
+
+              if (
+                image.complete &&
+                image.naturalWidth > 0
+              ) {
+                window.setTimeout(
+                  function () {
+                    image.onload?.();
+                  },
+                  0
+                );
+              }
+
+              /*
+               * Segurança: a Intro não fica presa se houver
+               * falha real de rede. Nesse caso, o CSS 1.5.0
+               * mantém um fallback claro, nunca azul escuro.
+               */
+              timeoutId =
+                window.setTimeout(
+                  function () {
+                    finish(false);
+                  },
+                  6000
+                );
+            }
+          );
+        }
+
+        const firstWorldReady =
+          prepareFirstWorldBackground();
 
         /* ===============================================
            CONTEÚDO -> STEPS DO HOST
@@ -549,6 +735,14 @@
           missionMinDurationMs:
             intro.missionMinDurationMs ??
             1200,
+
+          /*
+           * A Intro só libera MISSÃO PRONTA depois que o
+           * primeiro cenário foi preparado (ou caiu no
+           * timeout seguro com fallback claro).
+           */
+          readyPromise:
+            firstWorldReady,
 
           sparkCount:
             intro.sparkCount ??
