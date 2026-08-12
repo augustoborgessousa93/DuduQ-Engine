@@ -1,8 +1,7 @@
-────────────────────────────────────────────────────────────────────────────────
 /* =========================================================
    DUDUQ MECHANIC — MATCHING
    Adaptador do Smart Matching 1.2.0 para o Host DuduQ.
-   Versão 1.0.2
+   Versão 1.0.3
  
    OBJETIVO
    - Integrar Matching ao Host sem alterar o runtime HTML.
@@ -19,7 +18,7 @@
   }
  
   const MECHANIC_ID = "matching";
-  const VERSION = "1.0.2";
+  const VERSION = "1.0.3";
   const RUNTIME_VERSION = "1.2.0";
  
   function isObject(value) {
