@@ -10,9 +10,9 @@
        ===================================================== -->
   <link rel="stylesheet" href="./core/duduq-theme.css?v=110">
   <link rel="stylesheet" href="./core/duduq-intro.css?v=130">
-  <link rel="stylesheet" href="./core/duduq-transition.css?v=146">
+  <link rel="stylesheet" href="./core/duduq-transition.css?v=147">
   <link rel="stylesheet" href="./core/duduq-completion.css?v=127">
-  <link id="duduq-world-fusion-core-style" rel="stylesheet" href="./core/duduq-world-fusion.css?v=128">
+  <link id="duduq-world-fusion-core-style" rel="stylesheet" href="./core/duduq-world-fusion.css?v=129">
 </head>
 
 <body>
@@ -22,7 +22,7 @@
        DUDUQ CORE
        ===================================================== -->
   <script src="./core/duduq-assets.js?v=110"></script>
-  <script id="duduq-world-fusion-core-script" src="./core/duduq-world-fusion.js?v=127"></script>
+  <script id="duduq-world-fusion-core-script" src="./core/duduq-world-fusion.js?v=128"></script>
   <script src="./core/duduq-sound.js?v=110"></script>
   <script src="./core/duduq-intro.js?v=120"></script>
   <script src="./core/duduq-schema.js?v=100"></script>
@@ -31,8 +31,8 @@
   <!-- Transição universal deve carregar ANTES do Host -->
   <script src="./core/duduq-transition.js?v=164"></script>
 
-  <!-- Host 1.5.9: tela cheia pertence ao documento principal -->
-  <script src="./core/duduq-host.js?v=159"></script>
+  <!-- Host 1.6.0: tela cheia pertence ao documento principal -->
+  <script src="./core/duduq-host.js?v=160"></script>
 
   <!-- Progresso global -->
   <script src="./core/duduq-progress-ui.js?v=100"></script>
@@ -346,6 +346,98 @@
         }
 
         /* ===============================================
+           HANDOFF INTRO -> PRIMEIRA ATIVIDADE
+
+           A primeira mecânica é montada atrás da Intro.
+           Logo em seguida, a ponte visual oficial cobre
+           a Intro, que só então é removida. O reveal
+           aguarda o iframe + World Fusion + paints
+           estáveis antes de mostrar o conteúdo.
+           =============================================== */
+
+        async function startModuleWithIntroHandoff() {
+          const introApi =
+            window.DuduQIntro;
+
+          const transition =
+            window.DuduQTransition;
+
+          const introElement =
+            introApi
+              ?.getInstance
+              ?.()
+              ?.element;
+
+          introElement
+            ?.classList
+            ?.add(
+              "is-transition-handoff"
+            );
+
+          /*
+           * DuduQ.start() é chamado primeiro porque o Host
+           * limpa qualquer Transition anterior durante start().
+           * Como a Intro está acima do #root, a mecânica nasce
+           * escondida atrás dela no mesmo task.
+           */
+          startModule();
+
+          if (
+            !transition?.cover ||
+            !transition?.reveal
+          ) {
+            return;
+          }
+
+          try {
+            const covered =
+              await transition.cover({
+                coverDurationMs: 210,
+                soundEnabled: false
+              });
+
+            if (!covered) {
+              return;
+            }
+
+            /*
+             * A ponte já está totalmente opaca.
+             * Agora a Intro pode sair sem expor o frame
+             * intermediário da primeira atividade.
+             */
+            introApi
+              ?.hide
+              ?.({
+                immediate: true,
+                reason: "start-handoff"
+              });
+
+            await transition.reveal({
+              revealDurationMs: 230,
+              stablePaintFrames: 2,
+              revealHoldFraction: .08,
+              soundEnabled: false
+            });
+          } catch (error) {
+            console.error(
+              "[DuduQ Intro Handoff] Falha na transição:",
+              error
+            );
+
+            introApi
+              ?.hide
+              ?.({
+                immediate: true,
+                reason: "start-handoff-fallback"
+              });
+
+            transition
+              ?.hideImmediate
+              ?.();
+          }
+        }
+
+        /* ===============================================
            INTRO CINEMATOGRÁFICA
            =============================================== */
 
@@ -428,7 +520,7 @@
             14,
 
           onStart:
-            startModule
+            startModuleWithIntroHandoff
         });
       }
     );
