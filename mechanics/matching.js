@@ -1,7 +1,8 @@
+
 /* =========================================================
    DUDUQ MECHANIC — MATCHING
    Adaptador do Smart Matching 1.2.0 para o Host DuduQ.
-   Versão 1.0.0
+   Versão 1.0.1
 
    OBJETIVO
    - Integrar Matching ao Host sem alterar o runtime HTML.
@@ -18,7 +19,7 @@
   }
 
   const MECHANIC_ID = "matching";
-  const VERSION = "1.0.0";
+  const VERSION = "1.0.1";
   const RUNTIME_VERSION = "1.2.0";
 
   function isObject(value) {
@@ -93,6 +94,27 @@
     return config;
   }
 
+  function normalizeInteractionMode(value) {
+    const normalized = asString(value, "smart").toLowerCase();
+
+    // O runtime Matching 1.2.0 aceita somente:
+    // "click", "touch" ou "smart".
+    // "tap" era usado no conteúdo editorial, mas não é um valor válido
+    // para o runtime. Para manter compatibilidade com módulos já criados,
+    // tratamos "tap" como "smart".
+    if (normalized === "tap") return "smart";
+
+    if (
+      normalized === "click" ||
+      normalized === "touch" ||
+      normalized === "smart"
+    ) {
+      return normalized;
+    }
+
+    return "smart";
+  }
+
   function contentFromQuestion(question, index) {
     const config = normalizeMatchingConfig(question);
 
@@ -133,19 +155,18 @@
         rightItems: config.rightItems,
         pairs: config.pairs,
         behavior: {
+          ...config.behavior,
           shuffleLeft: config.behavior?.shuffleLeft !== false,
           shuffleRight: config.behavior?.shuffleRight !== false,
           connectionMode: asString(
             config.behavior?.connectionMode,
             "1x1"
           ),
-          interactionMode: asString(
-            config.behavior?.interactionMode,
-            "tap"
+          interactionMode: normalizeInteractionMode(
+            config.behavior?.interactionMode
           ),
           lockCorrectPairsOnRetry:
-            config.behavior?.lockCorrectPairsOnRetry !== false,
-          ...config.behavior
+            config.behavior?.lockCorrectPairsOnRetry !== false
         }
       },
       feedback: {
@@ -617,3 +638,4 @@
 
   console.info("[DuduQ] Matching registrado:", VERSION);
 })();
+
