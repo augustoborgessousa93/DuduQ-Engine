@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.3.3
+   Versão 1.3.4
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.3.3";
+  const VERSION = "1.3.4";
   if (window.DuduQWorldFusion?.version === VERSION) return;
 
   const scriptUrl =
@@ -15,7 +15,7 @@
     new URL("./duduq-world-fusion.js", window.location.href).href;
 
   const stylesheetUrl = new URL(
-    "./duduq-world-fusion.css?v=133",
+    "./duduq-world-fusion.css?v=134",
     scriptUrl
   ).href;
 
@@ -461,12 +461,83 @@
     );
   }
 
+  /* =======================================================
+     BUBBLE POP — FIT DINÂMICO PARA FRASES CURTAS
+
+     Frases continuam podendo quebrar SOMENTE entre palavras.
+     O ajuste mede overflow horizontal e vertical e reduz
+     apenas a frase específica até o mínimo pedagógico de 18px.
+     Assim GOOD AFTERNOON não perde letras nem obriga a reduzir
+     HELLO, BOY, GIRL e demais alvos curtos.
+     ======================================================= */
+
+  function fitEarlyLiteracyBubblePhrases(doc) {
+    if (
+      !doc?.documentElement ||
+      doc.documentElement.getAttribute(
+        "data-duduq-literacy-early"
+      ) !== "true"
+    ) {
+      return;
+    }
+
+    const view = doc.defaultView;
+    if (!view) return;
+
+    view.requestAnimationFrame(
+      function () {
+        doc
+          .querySelectorAll(
+            '.duduq-bp-label[data-duduq-label-kind="phrase"]'
+          )
+          .forEach(
+            function (label) {
+              const bubble = label.closest(".duduq-bp-bubble");
+              if (!bubble) return;
+
+              let size = 25;
+              const minSize = 18;
+
+              label.style.setProperty(
+                "--duduq-bp-phrase-fit-size",
+                `${size}px`
+              );
+
+              const fits = function () {
+                const horizontal =
+                  label.scrollWidth <= label.clientWidth + 1;
+
+                const maxHeight = Math.max(
+                  58,
+                  bubble.clientHeight * .72
+                );
+
+                const vertical =
+                  label.scrollHeight <= maxHeight + 1;
+
+                return horizontal && vertical;
+              };
+
+              while (!fits() && size > minSize) {
+                size -= 1;
+                label.style.setProperty(
+                  "--duduq-bp-phrase-fit-size",
+                  `${size}px`
+                );
+              }
+            }
+          );
+      }
+    );
+  }
+
   function installEarlyLiteracyFit(doc) {
     if (
       !doc ||
       literacyFitDocuments.has(doc)
     ) {
       fitEarlyLiteracyBubbleWords(doc);
+      fitEarlyLiteracyBubblePhrases(doc);
       return;
     }
 
@@ -479,11 +550,13 @@
       "resize",
       function () {
         fitEarlyLiteracyBubbleWords(doc);
+        fitEarlyLiteracyBubblePhrases(doc);
       },
       { passive: true }
     );
 
     fitEarlyLiteracyBubbleWords(doc);
+    fitEarlyLiteracyBubblePhrases(doc);
   }
 
   function resolveBubbleSpeechLocale(doc) {
@@ -727,6 +800,7 @@
     syncLiteracyProfile(doc);
     syncBubbleLabelSemantics(doc);
     fitEarlyLiteracyBubbleWords(doc);
+    fitEarlyLiteracyBubblePhrases(doc);
 
     doc.documentElement.setAttribute(
       "data-duduq-world-fusion-version",
