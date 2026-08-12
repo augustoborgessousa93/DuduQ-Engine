@@ -1,7 +1,18 @@
 /* =========================================================
    DUDUQ CORE — HOST
    Orquestrador central das mecânicas e módulos DuduQ.
-   Versão 1.5.9
+   Versão 1.6.1
+
+   NOVIDADES 1.6.1
+   - sincroniza cache com World Fusion 1.3.0 / JS 1.2.9
+   - remove visualmente a transcrição "Áudio de ..." dos cards do Drag & Drop
+   - mantém somente um ícone compacto de alto-falante ao lado da palavra
+   - não altera spokenText, acessibilidade, clique no card, drag, drop, feedback ou transições
+
+   NOVIDADES 1.6.0
+   - sincroniza cache com World Fusion 1.2.9 / JS 1.2.8
+   - corrige apenas a apresentação do indicador de áudio do Drag & Drop
+   - não altera áudio, drag, drop, validação, feedback ou transições
 
    NOVIDADES 1.5.9
    - clareia suavemente o cenário sob o desfoque sem roubar contraste das informações
@@ -52,7 +63,7 @@
     document.currentScript?.src ||
     new URL("./duduq-host.js", window.location.href).href;
 
-  const VERSION = "1.5.9";
+  const VERSION = "1.6.1";
 
   if (
     window.DuduQ &&
@@ -183,7 +194,7 @@
       link.id = "duduq-world-fusion-core-style";
       link.rel = "stylesheet";
       link.href = new URL(
-        "duduq-world-fusion.css?v=128",
+        "duduq-world-fusion.css?v=130",
         coreBase
       ).href;
       (document.head || document.documentElement).appendChild(link);
@@ -196,7 +207,7 @@
       const script = document.createElement("script");
       script.id = "duduq-world-fusion-core-script";
       script.src = new URL(
-        "duduq-world-fusion.js?v=127",
+        "duduq-world-fusion.js?v=129",
         coreBase
       ).href;
       script.async = true;
