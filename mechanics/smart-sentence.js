@@ -1,43 +1,43 @@
 /* =========================================================
    DUDUQ MECHANIC — SMART SENTENCE
    Adaptador do Smart Sentence 1.0.1 para o Host DuduQ.
-   Versão 1.0.0
-
+   Versão 1.0.1
+ 
    PERFIL PARA 1º ANO
    - uma única lacuna;
    - somente duas opções;
    - imagem de contexto;
    - toque nas opções também pronuncia a palavra em inglês.
    ========================================================= */
-
+ 
 (function () {
   "use strict";
-
+ 
   if (!window.DuduQ) {
     console.error("[DuduQ Smart Sentence] duduq-host.js precisa ser carregado antes.");
     return;
   }
-
+ 
   const MECHANIC_ID = "smart-sentence";
-  const VERSION = "1.0.0";
-
+  const VERSION = "1.0.1";
+ 
   function isObject(value) {
     return value !== null && typeof value === "object" && !Array.isArray(value);
   }
-
+ 
   function asString(value, fallback = "") {
     if (value === null || value === undefined) return fallback;
     const text = String(value).trim();
     return text || fallback;
   }
-
+ 
   function getEngineBase() {
     if (window.DUDUQ_ENGINE_BASE) {
       return String(window.DUDUQ_ENGINE_BASE).replace(/\/$/, "");
     }
     return ".";
   }
-
+ 
   function extractQuestions(payload) {
     if (Array.isArray(payload)) return payload;
     if (!isObject(payload)) return [];
@@ -45,29 +45,29 @@
     if (Array.isArray(payload.items)) return payload.items;
     return [payload];
   }
-
+ 
   function normalizeQuestion(raw, index) {
     if (window.DuduQSchema?.normalizeQuestion) {
       return window.DuduQSchema.normalizeQuestion(raw, index, {});
     }
     return raw;
   }
-
+ 
   function normalizeSentenceConfig(question) {
     const config = question?.metadata?.smartSentence;
-
+ 
     if (!isObject(config)) {
       throw new Error(
         `[DuduQ Smart Sentence] Questão ${question?.id || "sem-id"} não possui metadata.smartSentence.`
       );
     }
-
+ 
     if (!asString(config.answer)) {
       throw new Error(
         `[DuduQ Smart Sentence] Questão ${question.id}: answer é obrigatório.`
       );
     }
-
+ 
     if (
       !Array.isArray(config.options) ||
       config.options.length < 2
@@ -76,16 +76,16 @@
         `[DuduQ Smart Sentence] Questão ${question.id}: informe ao menos duas opções.`
       );
     }
-
+ 
     return config;
   }
-
+ 
   function stageFromQuestion(question, index) {
     const config = normalizeSentenceConfig(question);
     const gapId = `gap-${index + 1}`;
-
+ 
     const segments = [];
-
+ 
     if (config.imageKey) {
       segments.push({
         type: "image",
@@ -96,7 +96,7 @@
         )
       });
     }
-
+ 
     segments.push(
       {
         type: "text",
@@ -111,7 +111,7 @@
         text: asString(config.suffix, ".")
       }
     );
-
+ 
     return {
       id: asString(question.id, `sentence-stage-${index + 1}`),
       mode: config.imageKey ? "complete-image" : "complete",
@@ -158,13 +158,13 @@
       }
     };
   }
-
+ 
   function collectMedia(questions) {
     const media = {};
-
+ 
     questions.forEach((question) => {
       const config = normalizeSentenceConfig(question);
-
+ 
       if (
         config.imageKey &&
         asString(config.imageSrc)
@@ -173,10 +173,10 @@
           asString(config.imageSrc);
       }
     });
-
+ 
     return media;
   }
-
+ 
   function buildRuntimeConfig(payload, questions) {
     return {
       schemaVersion: 1,
@@ -195,33 +195,33 @@
       stages: questions.map(stageFromQuestion)
     };
   }
-
+ 
   function replaceConfig(html, config) {
     const startTag =
       '<script type="application/json" id="duduq-smart-sentence-config">';
     const start = html.indexOf(startTag);
-
+ 
     if (start < 0) {
       throw new Error(
         "[DuduQ Smart Sentence] JSON de configuração não encontrado."
       );
     }
-
+ 
     const contentStart =
       start + startTag.length;
     const end =
       html.indexOf("</script>", contentStart);
-
+ 
     if (end < 0) {
       throw new Error(
         "[DuduQ Smart Sentence] Fechamento do JSON não encontrado."
       );
     }
-
+ 
     const json =
       JSON.stringify(config, null, 2)
         .replace(/</g, "\\u003c");
-
+ 
     return (
       html.slice(0, contentStart) +
       "\n" +
@@ -230,38 +230,38 @@
       html.slice(end)
     );
   }
-
+ 
   function injectMedia(html, media) {
     const entries = Object.entries(media);
     if (!entries.length) return html;
-
+ 
     const assetsStart =
       html.indexOf("const Assets = {");
-
+ 
     if (assetsStart < 0) {
       throw new Error(
         "[DuduQ Smart Sentence] Objeto Assets não encontrado."
       );
     }
-
+ 
     const mediaStart =
       html.indexOf("media: {", assetsStart);
-
+ 
     if (mediaStart < 0) {
       throw new Error(
         "[DuduQ Smart Sentence] Assets.media não encontrado."
       );
     }
-
+ 
     const mediaEnd =
       html.indexOf("\n    }\n  };", mediaStart);
-
+ 
     if (mediaEnd < 0) {
       throw new Error(
         "[DuduQ Smart Sentence] Final de Assets.media não encontrado."
       );
     }
-
+ 
     const addition =
       entries
         .map(
@@ -269,17 +269,17 @@
             `,\n      ${JSON.stringify(key)}: ${JSON.stringify(value)}`
         )
         .join("");
-
+ 
     return (
       html.slice(0, mediaEnd) +
       addition +
       html.slice(mediaEnd)
     );
   }
-
+ 
   function stampYear(html, year) {
     if (year == null) return html;
-
+ 
     return html.replace(
       /<html([^>]*)>/i,
       function (_, attrs) {
@@ -290,10 +290,10 @@
       }
     );
   }
-
+ 
   function syncGlobalChrome(doc, context, title) {
     if (!doc?.documentElement) return;
-
+ 
     if (context?.year != null) {
       doc.documentElement.setAttribute(
         "data-duduq-ano-ativo",
@@ -304,12 +304,12 @@
         String(context.year)
       );
     }
-
+ 
     const heading = doc.querySelector(".duduq-engine-heading h1");
     if (heading && heading.textContent !== title) {
       heading.textContent = title;
     }
-
+ 
     const stepIndex = Number.isFinite(context?.stepIndex)
       ? context.stepIndex
       : 0;
@@ -318,12 +318,12 @@
       : 1;
     const current = Math.min(stepIndex + 1, totalSteps);
     const label = `Etapa ${current} de ${totalSteps}`;
-
+ 
     const strong = doc.querySelector(".duduq-progress-copy strong");
     if (strong && strong.textContent !== label) {
       strong.textContent = label;
     }
-
+ 
     const trail = doc.querySelector(".duduq-progress-trail");
     if (trail) {
       const completedBefore = Math.max(
@@ -342,14 +342,14 @@
       );
     }
   }
-
+ 
   function installChromeSync(doc, context, title) {
     syncGlobalChrome(doc, context, title);
-
+ 
     const observer = new MutationObserver(() => {
       syncGlobalChrome(doc, context, title);
     });
-
+ 
     if (doc.body) {
       observer.observe(doc.body, {
         childList: true,
@@ -357,10 +357,10 @@
         characterData: true
       });
     }
-
+ 
     return () => observer.disconnect();
   }
-
+ 
   function installOptionSpeech(doc) {
     function speak(value) {
       const text = asString(value);
@@ -371,42 +371,42 @@
       ) {
         return;
       }
-
+ 
       try {
         const synth = doc.defaultView.speechSynthesis;
         synth.cancel();
-
+ 
         const utterance =
           new doc.defaultView.SpeechSynthesisUtterance(text);
-
+ 
         utterance.lang = "en-US";
         utterance.rate = 0.86;
         utterance.pitch = 1.02;
         synth.speak(utterance);
       } catch (_) {}
     }
-
+ 
     function handlePointer(event) {
       const element =
         event.target instanceof doc.defaultView.Element
           ? event.target.closest(".duduq-ss-token")
           : null;
-
+ 
       if (!element || element.disabled) return;
-
+ 
       const word =
         element.dataset.word ||
         element.textContent;
-
+ 
       speak(word);
     }
-
+ 
     doc.addEventListener(
       "pointerdown",
       handlePointer,
       true
     );
-
+ 
     return () => {
       doc.removeEventListener(
         "pointerdown",
@@ -415,11 +415,11 @@
       );
     };
   }
-
+ 
   function validate(payload) {
     const list = extractQuestions(payload);
     if (!list.length) return false;
-
+ 
     try {
       list
         .map(normalizeQuestion)
@@ -430,7 +430,7 @@
       return false;
     }
   }
-
+ 
   function mount({
     container,
     payload,
@@ -440,22 +440,22 @@
     if (!container) {
       throw new Error("[DuduQ Smart Sentence] Container não informado.");
     }
-
+ 
     const questions = extractQuestions(payload).map(normalizeQuestion);
     if (!questions.length) {
       throw new Error("[DuduQ Smart Sentence] Nenhuma questão recebida.");
     }
-
+ 
     questions.forEach(normalizeSentenceConfig);
-
+ 
     container.innerHTML = "";
-
+ 
     const wrapper = document.createElement("div");
     wrapper.className = "duduq-mechanic-frame";
     wrapper.style.width = "100%";
     wrapper.style.minHeight = "100vh";
     wrapper.style.position = "relative";
-
+ 
     const iframe = document.createElement("iframe");
     iframe.title = "DuduQ — Smart Sentence";
     iframe.setAttribute("allow", "autoplay; fullscreen");
@@ -465,10 +465,10 @@
     iframe.style.border = "0";
     iframe.style.display = "block";
     iframe.style.background = "transparent";
-
+ 
     wrapper.appendChild(iframe);
     container.appendChild(wrapper);
-
+ 
     let destroyed = false;
     let completed = false;
     let stopChromeSync = null;
@@ -476,15 +476,17 @@
     let answerHandler = null;
     let answerEvents = null;
     let completionTimer = null;
-
+    let runtimePrepared = false;
+    let runtimeConnected = false;
+ 
     const title = asString(payload?.title, "I'm a...");
     const lastStageId =
       asString(questions[questions.length - 1]?.id);
-
+ 
     function finish() {
       if (destroyed || completed) return;
       completed = true;
-
+ 
       if (typeof onComplete === "function") {
         onComplete({
           type: "complete",
@@ -493,35 +495,37 @@
         });
       }
     }
-
+ 
     iframe.addEventListener("load", function () {
-      if (destroyed) return;
-
+      // O iframe dispara um primeiro load para about:blank assim que é anexado.
+      // Só conectamos quando o srcdoc real do Smart Sentence já foi preparado.
+      if (destroyed || !runtimePrepared || runtimeConnected) return;
+ 
       try {
         const doc = iframe.contentDocument;
         const api =
           iframe.contentWindow?.DUDUQ_SMART_SENTENCE;
-
+ 
         if (!api?.Events) {
           throw new Error(
             "Runtime Smart Sentence não expôs DUDUQ_SMART_SENTENCE.Events."
           );
         }
-
+ 
         stopChromeSync = installChromeSync(
           doc,
           context,
           title
         );
-
+ 
         stopOptionSpeech =
           installOptionSpeech(doc);
-
+ 
         answerEvents = api.Events;
-
+ 
         answerHandler = function (event) {
           const result = event?.detail || {};
-
+ 
           if (
             result.isCorrect === true &&
             asString(result.stageId) === lastStageId
@@ -529,36 +533,45 @@
             if (completionTimer !== null) {
               window.clearTimeout(completionTimer);
             }
-
+ 
             completionTimer = window.setTimeout(
               finish,
               920
             );
           }
         };
-
+ 
         answerEvents.addEventListener(
           "answer",
           answerHandler
         );
-
+ 
+        runtimeConnected = true;
         syncGlobalChrome(doc, context, title);
       } catch (error) {
         console.error(
           "[DuduQ Smart Sentence] Falha ao conectar runtime:",
           error
         );
-
-        container.textContent =
-          "Erro ao iniciar a atividade Smart Sentence.";
+ 
+        const detail = asString(
+          error?.message,
+          "Erro desconhecido no runtime Smart Sentence."
+        );
+ 
+        if (!destroyed) {
+          container.textContent =
+            "Erro ao iniciar a atividade Smart Sentence: " +
+            detail;
+        }
       }
     });
-
+ 
     const runtimeUrl =
       getEngineBase() +
       "/DUDUQ_SMART_SENTENCE.html?engineAdapter=" +
       encodeURIComponent(VERSION);
-
+ 
     fetch(runtimeUrl)
       .then((response) => {
         if (!response.ok) {
@@ -570,21 +583,22 @@
       })
       .then((html) => {
         if (destroyed) return;
-
+ 
         const config =
           buildRuntimeConfig(payload, questions);
         const media =
           collectMedia(questions);
-
+ 
         let prepared =
           replaceConfig(html, config);
-
+ 
         prepared =
           injectMedia(prepared, media);
-
+ 
         prepared =
           stampYear(prepared, context.year);
-
+ 
+        runtimePrepared = true;
         iframe.srcdoc = prepared;
       })
       .catch((error) => {
@@ -592,18 +606,20 @@
           "[DuduQ Smart Sentence] Falha ao preparar runtime:",
           error
         );
-
+ 
         if (!destroyed) {
           container.textContent =
             "Erro ao preparar a atividade Smart Sentence.";
         }
       });
-
+ 
     return function destroy() {
       destroyed = true;
+      runtimePrepared = false;
+      runtimeConnected = false;
       stopChromeSync?.();
       stopOptionSpeech?.();
-
+ 
       if (
         answerEvents &&
         answerHandler
@@ -613,16 +629,16 @@
           answerHandler
         );
       }
-
+ 
       if (completionTimer !== null) {
         window.clearTimeout(completionTimer);
       }
-
+ 
       iframe.remove();
       wrapper.remove();
     };
   }
-
+ 
   window.DuduQ.registerMechanic({
     id: MECHANIC_ID,
     version: VERSION,
@@ -660,7 +676,6 @@
       }
     }
   });
-
+ 
   console.info("[DuduQ] Smart Sentence registrado:", VERSION);
 })();
-
