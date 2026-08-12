@@ -40,14 +40,19 @@
   <!-- =====================================================
        MECÂNICAS DISPONÍVEIS
        ===================================================== -->
+  <!-- Mecânicas compartilhadas do Engine -->
   <script src="./mechanics/bubble-pop.js?v=122"></script>
   <script src="./mechanics/drag-drop.js?v=102"></script>
+  <script src="./mechanics/matching.js?v=100"></script>
+  <script src="./mechanics/memory-quest.js?v=100"></script>
+  <script src="./mechanics/smart-sentence.js?v=100"></script>
+  <script src="./mechanics/target-shooter.js?v=100"></script>
 
-  <!-- Router carregado depois das mecânicas -->
+  <!-- Router carregado depois de TODAS as mecânicas -->
   <script src="./core/duduq-router.js?v=100"></script>
 
   <!-- Conteúdo oficial: Inglês — 1º ano — Módulo 01 -->
-  <script src="./content/english/year-1/module-01/module-01.js?v=141"></script>
+  <script src="./content/english/year-1/module-01/module-01.js?v=150"></script>
 
   <script>
     window.addEventListener(
@@ -90,8 +95,11 @@
            =============================================== */
 
         const requiredMechanics = [
-          "bubble-pop",
-          "drag-drop"
+          "target-shooter",
+          "matching",
+          "drag-drop",
+          "smart-sentence",
+          "memory-quest"
         ];
 
         for (
@@ -756,4 +764,3 @@
   </script>
 </body>
 </html>
-
