@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.3.1
+   Versão 1.3.2
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.3.1";
+  const VERSION = "1.3.2";
   if (window.DuduQWorldFusion?.version === VERSION) return;
 
   const scriptUrl =
@@ -15,7 +15,7 @@
     new URL("./duduq-world-fusion.js", window.location.href).href;
 
   const stylesheetUrl = new URL(
-    "./duduq-world-fusion.css?v=132",
+    "./duduq-world-fusion.css?v=133",
     scriptUrl
   ).href;
 
@@ -23,6 +23,7 @@
   const managedFrames = new WeakSet();
   const fullscreenBridgeDocuments = new WeakSet();
   const literacySpeechDocuments = new WeakSet();
+  const literacyFitDocuments = new WeakSet();
 
   function getStableFullscreenDocument(doc) {
     let currentWindow = doc?.defaultView;
@@ -286,6 +287,101 @@
       );
   }
 
+  /* =======================================================
+     BUBBLE POP — FIT DINÂMICO PARA PALAVRA ÚNICA
+
+     O tamanho base permanece confortável. Só reduzimos a
+     palavra específica que realmente ultrapassa a largura
+     útil da bolha. O limite inferior de 20px evita texto
+     pequeno demais para alfabetização.
+     ======================================================= */
+
+  function fitEarlyLiteracyBubbleWords(doc) {
+    if (
+      !doc?.documentElement ||
+      doc.documentElement.getAttribute(
+        "data-duduq-literacy-early"
+      ) !== "true"
+    ) {
+      return;
+    }
+
+    const view =
+      doc.defaultView;
+
+    if (!view) return;
+
+    view.requestAnimationFrame(
+      function () {
+        doc
+          .querySelectorAll(
+            '.duduq-bp-label[data-duduq-label-kind="word"]'
+          )
+          .forEach(
+            function (label) {
+              const bubble =
+                label.closest(
+                  ".duduq-bp-bubble"
+                );
+
+              if (!bubble) return;
+
+              let size = 27;
+
+              label.style.setProperty(
+                "--duduq-bp-word-fit-size",
+                `${size}px`
+              );
+
+              const fits = function () {
+                return (
+                  label.scrollWidth <=
+                  label.clientWidth + 1
+                );
+              };
+
+              while (
+                !fits() &&
+                size > 20
+              ) {
+                size -= 1;
+
+                label.style.setProperty(
+                  "--duduq-bp-word-fit-size",
+                  `${size}px`
+                );
+              }
+            }
+          );
+      }
+    );
+  }
+
+  function installEarlyLiteracyFit(doc) {
+    if (
+      !doc ||
+      literacyFitDocuments.has(doc)
+    ) {
+      fitEarlyLiteracyBubbleWords(doc);
+      return;
+    }
+
+    literacyFitDocuments.add(doc);
+
+    const view =
+      doc.defaultView;
+
+    view?.addEventListener?.(
+      "resize",
+      function () {
+        fitEarlyLiteracyBubbleWords(doc);
+      },
+      { passive: true }
+    );
+
+    fitEarlyLiteracyBubbleWords(doc);
+  }
+
   function resolveBubbleSpeechLocale(doc) {
     const params =
       getDocumentParams(doc);
@@ -458,6 +554,7 @@
     doc.documentElement.classList.add("duduq-world-fusion");
     syncLiteracyProfile(doc);
     syncBubbleLabelSemantics(doc);
+    fitEarlyLiteracyBubbleWords(doc);
 
     doc.documentElement.setAttribute(
       "data-duduq-world-fusion-version",
@@ -502,6 +599,7 @@
     syncDocument(doc, frame);
     installFullscreenBridge(doc);
     installEarlyLiteracySpeech(doc);
+    installEarlyLiteracyFit(doc);
 
     if (managedDocuments.has(doc)) return true;
     managedDocuments.add(doc);
