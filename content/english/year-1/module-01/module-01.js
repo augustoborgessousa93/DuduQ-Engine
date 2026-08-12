@@ -1,7 +1,8 @@
+
 /* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 01
    Hello! Greetings & Introductions
-   Versão 1.5.0 — FINAL PEDAGÓGICO PARA ALFABETIZAÇÃO
+   Versão 1.5.1 — CORREÇÃO DE INTEGRAÇÃO MATCHING
 
    FONTES EDITORIAIS
    - DUDUQ Conteúdo Oficial — Língua Inglesa v1.0
@@ -23,7 +24,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.5.0";
+  const VERSION = "1.5.1";
 
   window.DUDUQ_CONTENT = window.DUDUQ_CONTENT || {};
   window.DUDUQ_CONTENT.english = window.DUDUQ_CONTENT.english || {};
@@ -309,7 +310,7 @@
                   { leftId: "audio-morning", rightId: "picture-morning" },
                   { leftId: "audio-afternoon", rightId: "picture-afternoon" }
                 ],
-                behavior: { shuffleLeft: true, shuffleRight: true, connectionMode: "1x1", interactionMode: "tap" }
+                behavior: { shuffleLeft: true, shuffleRight: true, connectionMode: "1x1", interactionMode: "smart" }
               },
               tags: ["official", "matching", "listening", "EN1-M1-02"]
             }
@@ -368,7 +369,7 @@
                   { leftId: "audio-im", rightId: "picture-selfintro" },
                   { leftId: "audio-goodbye", rightId: "picture-goodbye" }
                 ],
-                behavior: { shuffleLeft: true, shuffleRight: true, connectionMode: "1x1", interactionMode: "tap" }
+                behavior: { shuffleLeft: true, shuffleRight: true, connectionMode: "1x1", interactionMode: "smart" }
               },
               tags: ["official", "matching", "introduction", "EN1-M1-05"]
             }
@@ -413,7 +414,7 @@
                   { leftId: "audio-boy", rightId: "picture-boy" },
                   { leftId: "audio-girl", rightId: "picture-girl" }
                 ],
-                behavior: { shuffleLeft: true, shuffleRight: true, connectionMode: "1x1", interactionMode: "tap" }
+                behavior: { shuffleLeft: true, shuffleRight: true, connectionMode: "1x1", interactionMode: "smart" }
               },
               tags: ["official", "matching", "visual-vocabulary", "EN1-M1-06"]
             }
@@ -458,7 +459,7 @@
                   { leftId: "picture-boy", rightId: "word-boy" },
                   { leftId: "picture-girl", rightId: "word-girl" }
                 ],
-                behavior: { shuffleLeft: true, shuffleRight: true, connectionMode: "1x1", interactionMode: "tap" }
+                behavior: { shuffleLeft: true, shuffleRight: true, connectionMode: "1x1", interactionMode: "smart" }
               },
               tags: ["official", "matching", "retrieval", "EN1-M1-07"]
             }
@@ -502,7 +503,7 @@
                   { leftId: "audio-hello", rightId: "word-hi" },
                   { leftId: "audio-goodbye", rightId: "word-goodbye" }
                 ],
-                behavior: { shuffleLeft: false, shuffleRight: true, connectionMode: "1x1", interactionMode: "tap" }
+                behavior: { shuffleLeft: false, shuffleRight: true, connectionMode: "1x1", interactionMode: "smart" }
               },
               tags: ["official", "matching", "greeting-response", "EN1-M1-08"]
             }
@@ -720,3 +721,5 @@
 
   window.DUDUQ_CONTENT.english.year1.module01 = Object.freeze(moduleDefinition);
 })();
+
+
