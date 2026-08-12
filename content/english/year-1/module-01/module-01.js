@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 01
    Hello! Greetings & Introductions
-   Versão 1.4.0 — PRODUÇÃO PEDAGÓGICA PARA ALFABETIZAÇÃO
+   Versão 1.4.1 — CORREÇÃO DE ISOLAMENTO DE MECÂNICAS
 
    FONTES
    - DUDUQ Conteúdo Oficial — Língua Inglesa v1.0
@@ -18,7 +18,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.4.0";
+  const VERSION = "1.4.1";
 
   window.DUDUQ_CONTENT = window.DUDUQ_CONTENT || {};
   window.DUDUQ_CONTENT.english = window.DUDUQ_CONTENT.english || {};
@@ -103,6 +103,8 @@
         "Bubble Pop é reservado a reconhecimento/discriminação de alvos curtos. Drag & Drop é usado como associação real áudio/palavra → cena, e não como arraste decorativo.",
       futureMechanics:
         "Matching permanece a preferência de catálogo para várias associações 1×1; Smart Sentence permanece a preferência de catálogo para EN1-M1-10/11. A migração pode ocorrer sem mudar os IDs quando esses adaptadores estiverem integrados ao Host.",
+      activityMechanicIsolation:
+        "Cada atividade usa uma única mecânica compatível com todas as questões que contém. EN1-M1-05 e EN1-M1-09 foram separados porque Bubble Pop e Drag & Drop não podem coexistir dentro da mesma atividade do Host.",
       noInventedCurriculumCode:
         "Nenhum código BNCC é inventado; as habilidades permanecem descritivas."
     },
@@ -388,7 +390,9 @@
 
       /* =====================================================
          ETAPA 4 — I'M...
-         Reconhecimento da estrutura e compreensão oral: 05 e 09
+         Reconhecimento da estrutura: EN1-M1-05
+
+         Regra do Host: uma atividade usa uma única mecânica.
          ===================================================== */
       {
         id: "en1-m1-step-04-im",
@@ -423,7 +427,22 @@
               sourceMedia: "Sem mídia obrigatória.",
               tags: ["official", "introductions", "EN1-M1-05"]
             }
-          },
+          }
+        ]
+      },
+
+      /* =====================================================
+         ETAPA 5 — I'M ANA.
+         Compreensão oral por associação áudio → cena: EN1-M1-09
+
+         A questão foi isolada porque sua entrega usa Drag & Drop.
+         ===================================================== */
+      {
+        id: "en1-m1-step-05-im-ana",
+        title: "I'm Ana.",
+        mechanic: "drag-drop",
+        skill: SKILLS.personalPresentation,
+        questions: [
           {
             id: "EN1-M1-09",
             subject: "Língua Inglesa", year: 1, module: 1,
@@ -470,11 +489,11 @@
       },
 
       /* =====================================================
-         ETAPA 5 — I'M A...
+         ETAPA 6 — I'M A...
          Completar estrutura curta: EN1-M1-10 e EN1-M1-11
          ===================================================== */
       {
-        id: "en1-m1-step-05-im-a",
+        id: "en1-m1-step-06-im-a",
         title: "I'm a...",
         mechanic: "bubble-pop",
         skill: SKILLS.boyGirlSentence,
@@ -539,11 +558,11 @@
       },
 
       /* =====================================================
-         ETAPA 6 — GREETING CHALLENGE
+         ETAPA 7 — GREETING CHALLENGE
          Consolidação: EN1-M1-08 e EN1-M1-12
          ===================================================== */
       {
-        id: "en1-m1-step-06-challenge",
+        id: "en1-m1-step-07-challenge",
         title: "Greeting Challenge",
         mechanic: "bubble-pop",
         skill: SKILLS.greetingResponse,
