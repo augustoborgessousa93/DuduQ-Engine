@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Conteúdo nítido sobre fundo cinematográfico suavizado.
-   Versão 1.3.1
+   Versão 1.3.2
    ========================================================= */
 
 html.duduq-world-fusion {
@@ -427,11 +427,18 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
 
 html.duduq-world-fusion[data-duduq-literacy-early="true"]
   .duduq-bp-label {
-  max-width: 94% !important;
-  font-size: clamp(22px, 2.45vw, 30px) !important;
+  /*
+   * Refinamento 1.3.2:
+   * reduzimos apenas um passo de tamanho no perfil de
+   * alfabetização e aumentamos levemente a área útil.
+   * O objetivo é evitar cortes como YELLOW sem deixar
+   * a palavra pequena para a criança.
+   */
+  max-width: 96% !important;
+  font-size: clamp(21px, 2.35vw, 29px) !important;
   font-weight: 900 !important;
   line-height: 1.04 !important;
-  letter-spacing: .005em !important;
+  letter-spacing: 0 !important;
   overflow-wrap: normal !important;
   word-break: normal !important;
   hyphens: none !important;
@@ -440,7 +447,29 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
 
 html.duduq-world-fusion[data-duduq-literacy-early="true"]
   .duduq-bp-label[data-small="true"] {
-  font-size: clamp(21px, 2.25vw, 28px) !important;
+  font-size: clamp(20px, 2.15vw, 27px) !important;
+}
+
+/* Palavra única: deve permanecer inteira e na mesma linha.
+   Frases continuam podendo quebrar somente ENTRE palavras. */
+html.duduq-world-fusion[data-duduq-literacy-early="true"]
+  .duduq-bp-label[data-duduq-label-kind="word"] {
+  white-space: nowrap !important;
+}
+
+html.duduq-world-fusion[data-duduq-literacy-early="true"]
+  .duduq-bp-label[data-duduq-label-kind="phrase"] {
+  white-space: normal !important;
+}
+
+/* O enunciado em CAIXA ALTA também desce um único passo,
+   mantendo a hierarquia visual e liberando um pouco mais de largura. */
+html.duduq-world-fusion[data-duduq-literacy-early="true"]
+  :is(
+    .duduq-bp-instruction h2,
+    .duduq-dd-instruction h2
+  ) {
+  font-size: clamp(17px, 1.9vw, 27px) !important;
 }
 
 /* Mantém palavras dos cards nítidas e sem quebra interna. */
@@ -459,12 +488,20 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
 @media (max-width: 520px) {
   html.duduq-world-fusion[data-duduq-literacy-early="true"]
     .duduq-bp-label {
-    font-size: clamp(21px, 6.4vw, 27px) !important;
+    font-size: clamp(20px, 6.1vw, 26px) !important;
   }
 
   html.duduq-world-fusion[data-duduq-literacy-early="true"]
     .duduq-bp-label[data-small="true"] {
-    font-size: clamp(20px, 5.9vw, 25px) !important;
+    font-size: clamp(19px, 5.6vw, 24px) !important;
+  }
+
+  html.duduq-world-fusion[data-duduq-literacy-early="true"]
+    :is(
+      .duduq-bp-instruction h2,
+      .duduq-dd-instruction h2
+    ) {
+    font-size: clamp(17px, 5.5vw, 25px) !important;
   }
 }
 
