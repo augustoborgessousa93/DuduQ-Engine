@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.3.2
+   Versão 1.3.3
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.3.2";
+  const VERSION = "1.3.3";
   if (window.DuduQWorldFusion?.version === VERSION) return;
 
   const scriptUrl =
@@ -24,6 +24,7 @@
   const fullscreenBridgeDocuments = new WeakSet();
   const literacySpeechDocuments = new WeakSet();
   const literacyFitDocuments = new WeakSet();
+  const speechWarmDocuments = new WeakSet();
 
   function getStableFullscreenDocument(doc) {
     let currentWindow = doc?.defaultView;
@@ -194,6 +195,109 @@
      adaptadores das mecânicas. Não alteramos conteúdo:
      apenas adicionamos um atributo semântico ao <html>.
      ======================================================= */
+
+  /* =======================================================
+     SPEECH SYNTHESIS — PRÉ-AQUECIMENTO
+
+     O autoplay das mecânicas usa Web Speech API. Em alguns
+     navegadores, a primeira chamada a speechSynthesis.speak()
+     pode esperar o carregamento das vozes do sistema.
+
+     Como o World Fusion é carregado ainda durante a Intro,
+     preparamos as vozes antes de a primeira atividade nascer.
+     Também repetimos a preparação dentro de cada iframe.
+     ======================================================= */
+
+  function touchSpeechEngine(doc) {
+    const view =
+      doc?.defaultView;
+
+    const synth =
+      view?.speechSynthesis;
+
+    if (!synth) {
+      return [];
+    }
+
+    try {
+      synth.resume?.();
+    } catch (_) {}
+
+    try {
+      return Array.from(
+        synth.getVoices?.() || []
+      );
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function installSpeechWarmup(doc) {
+    if (!doc) return;
+
+    touchSpeechEngine(doc);
+
+    if (
+      speechWarmDocuments.has(doc)
+    ) {
+      return;
+    }
+
+    speechWarmDocuments.add(doc);
+
+    const view =
+      doc.defaultView;
+
+    const synth =
+      view?.speechSynthesis;
+
+    if (!synth) return;
+
+    const refresh =
+      function () {
+        touchSpeechEngine(doc);
+      };
+
+    /*
+     * Chrome/Edge podem popular a lista de vozes alguns
+     * milissegundos depois do carregamento do documento.
+     */
+    try {
+      synth.addEventListener?.(
+        "voiceschanged",
+        refresh
+      );
+    } catch (_) {}
+
+    view?.setTimeout?.(
+      refresh,
+      40
+    );
+
+    view?.setTimeout?.(
+      refresh,
+      140
+    );
+
+    /*
+     * A primeira interação do aluno também reabre/resume
+     * o mecanismo de fala. Não produz som.
+     */
+    doc.addEventListener(
+      "pointerdown",
+      refresh,
+      {
+        capture: true,
+        passive: true
+      }
+    );
+
+    doc.addEventListener(
+      "keydown",
+      refresh,
+      true
+    );
+  }
 
   function normalizeProfileText(value) {
     return String(value ?? "")
@@ -448,31 +552,99 @@
     }
 
     try {
-      synth.cancel();
+      const locale =
+        resolveBubbleSpeechLocale(doc);
+
+      installSpeechWarmup(doc);
+
+      const hadActiveSpeech =
+        Boolean(
+          synth.speaking ||
+          synth.pending
+        );
+
+      if (hadActiveSpeech) {
+        synth.cancel();
+      }
 
       const utterance =
         new Utterance(value);
 
       utterance.lang =
-        resolveBubbleSpeechLocale(doc);
+        locale;
 
-      utterance.rate = .84;
+      /*
+       * Se as vozes já estiverem disponíveis, fixamos uma
+       * voz do mesmo idioma para reduzir o tempo de seleção
+       * automática do navegador.
+       */
+      const voices =
+        touchSpeechEngine(doc);
+
+      const exactVoice =
+        voices.find(
+          function (voice) {
+            return (
+              String(
+                voice.lang || ""
+              ).toLowerCase() ===
+              String(locale)
+                .toLowerCase()
+            );
+          }
+        );
+
+      const languageRoot =
+        String(locale)
+          .toLowerCase()
+          .split("-")[0];
+
+      const languageVoice =
+        voices.find(
+          function (voice) {
+            return String(
+              voice.lang || ""
+            )
+              .toLowerCase()
+              .startsWith(
+                languageRoot
+              );
+          }
+        );
+
+      utterance.voice =
+        exactVoice ||
+        languageVoice ||
+        null;
+
+      utterance.rate = .88;
       utterance.pitch = 1.02;
       utterance.volume = 1;
 
-      /*
-       * Pequeno atraso evita que o efeito de estouro cubra
-       * o início da palavra, mas mantém a relação direta
-       * clique -> nome da bolha.
-       */
-      view?.setTimeout?.(
+      const speak =
         function () {
           try {
-            synth.speak(utterance);
+            synth.resume?.();
+            synth.speak(
+              utterance
+            );
           } catch (_) {}
-        },
-        90
-      );
+        };
+
+      /*
+       * Só esperamos alguns milissegundos quando realmente
+       * houve uma fala anterior a ser cancelada. O atraso
+       * fixo de 90ms foi removido para não competir com a
+       * transição para o próximo enunciado.
+       */
+      if (hadActiveSpeech) {
+        view?.setTimeout?.(
+          speak,
+          28
+        );
+      } else {
+        speak();
+      }
     } catch (_) {}
   }
 
@@ -596,6 +768,7 @@
     if (!doc) return false;
 
     ensureStylesheet(doc);
+    installSpeechWarmup(doc);
     syncDocument(doc, frame);
     installFullscreenBridge(doc);
     installEarlyLiteracySpeech(doc);
@@ -711,6 +884,7 @@
   window.addEventListener(
     "duduq:assets-ready",
     function () {
+      installSpeechWarmup(document);
       window.DuduQWorldFusion.refresh();
     }
   );
