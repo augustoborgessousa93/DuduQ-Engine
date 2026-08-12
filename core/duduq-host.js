@@ -1,7 +1,13 @@
 /* =========================================================
    DUDUQ CORE — HOST
    Orquestrador central das mecânicas e módulos DuduQ.
-   Versão 1.6.1
+   Versão 1.6.2
+
+   NOVIDADES 1.6.2
+   - sincroniza cache com World Fusion 1.3.1 / JS 1.3.0
+   - elimina "Áudio de ..." também durante o arraste e retorno do Drag & Drop
+   - ativa perfil de alfabetização para Educação Infantil, 1º e 2º ano
+   - Bubble Pop preserva palavras inteiras, usa fonte maior e pronuncia a bolha selecionada
 
    NOVIDADES 1.6.1
    - sincroniza cache com World Fusion 1.3.0 / JS 1.2.9
@@ -63,7 +69,7 @@
     document.currentScript?.src ||
     new URL("./duduq-host.js", window.location.href).href;
 
-  const VERSION = "1.6.1";
+  const VERSION = "1.6.2";
 
   if (
     window.DuduQ &&
@@ -194,7 +200,7 @@
       link.id = "duduq-world-fusion-core-style";
       link.rel = "stylesheet";
       link.href = new URL(
-        "duduq-world-fusion.css?v=130",
+        "duduq-world-fusion.css?v=131",
         coreBase
       ).href;
       (document.head || document.documentElement).appendChild(link);
@@ -207,7 +213,7 @@
       const script = document.createElement("script");
       script.id = "duduq-world-fusion-core-script";
       script.src = new URL(
-        "duduq-world-fusion.js?v=129",
+        "duduq-world-fusion.js?v=130",
         coreBase
       ).href;
       script.async = true;
