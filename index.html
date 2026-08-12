@@ -10,7 +10,7 @@
        ===================================================== -->
   <link rel="stylesheet" href="./core/duduq-theme.css?v=110">
   <link rel="stylesheet" href="./core/duduq-intro.css?v=130">
-  <link rel="stylesheet" href="./core/duduq-transition.css?v=147">
+  <link rel="stylesheet" href="./core/duduq-transition.css?v=148">
   <link rel="stylesheet" href="./core/duduq-completion.css?v=127">
   <link id="duduq-world-fusion-core-style" rel="stylesheet" href="./core/duduq-world-fusion.css?v=129">
 </head>
@@ -374,6 +374,17 @@
               "is-transition-handoff"
             );
 
+          const transitionRoot =
+            transition
+              ?.ensureRoot
+              ?.();
+
+          transitionRoot
+            ?.classList
+            ?.add(
+              "is-intro-portal"
+            );
+
           /*
            * DuduQ.start() é chamado primeiro porque o Host
            * limpa qualquer Transition anterior durante start().
@@ -386,13 +397,25 @@
             !transition?.cover ||
             !transition?.reveal
           ) {
+            transitionRoot
+              ?.classList
+              ?.remove(
+                "is-intro-portal"
+              );
+
+            introElement
+              ?.classList
+              ?.remove(
+                "is-transition-handoff"
+              );
+
             return;
           }
 
           try {
             const covered =
               await transition.cover({
-                coverDurationMs: 210,
+                coverDurationMs: 300,
                 soundEnabled: false
               });
 
@@ -413,14 +436,14 @@
               });
 
             await transition.reveal({
-              revealDurationMs: 230,
+              revealDurationMs: 300,
               stablePaintFrames: 2,
-              revealHoldFraction: .08,
+              revealHoldFraction: .14,
               soundEnabled: false
             });
           } catch (error) {
             console.error(
-              "[DuduQ Intro Handoff] Falha na transição:",
+              "[DuduQ Intro Portal] Falha na transição:",
               error
             );
 
@@ -434,6 +457,18 @@
             transition
               ?.hideImmediate
               ?.();
+          } finally {
+            transitionRoot
+              ?.classList
+              ?.remove(
+                "is-intro-portal"
+              );
+
+            introElement
+              ?.classList
+              ?.remove(
+                "is-transition-handoff"
+              );
           }
         }
 
