@@ -1,7 +1,13 @@
 /* =========================================================
    DUDUQ CORE — HOST
    Orquestrador central das mecânicas e módulos DuduQ.
-   Versão 1.6.4
+   Versão 1.6.5
+
+   NOVIDADES 1.6.5
+   - sincroniza cache com World Fusion JS 1.3.3
+   - pré-aquece speechSynthesis durante a Intro e dentro dos iframes
+   - reduz disputa entre a fala da bolha e o autoplay do próximo enunciado
+   - não altera mecânica, layout, transição ou conteúdo
 
    NOVIDADES 1.6.4
    - sincroniza cache com World Fusion 1.3.3 / JS 1.3.2
@@ -81,7 +87,7 @@
     document.currentScript?.src ||
     new URL("./duduq-host.js", window.location.href).href;
 
-  const VERSION = "1.6.4";
+  const VERSION = "1.6.5";
 
   if (
     window.DuduQ &&
@@ -225,7 +231,7 @@
       const script = document.createElement("script");
       script.id = "duduq-world-fusion-core-script";
       script.src = new URL(
-        "duduq-world-fusion.js?v=132",
+        "duduq-world-fusion.js?v=133",
         coreBase
       ).href;
       script.async = true;
