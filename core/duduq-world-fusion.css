@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Conteúdo nítido sobre fundo cinematográfico suavizado.
-   Versão 1.3.0
+   Versão 1.3.1
    ========================================================= */
 
 html.duduq-world-fusion {
@@ -296,29 +296,29 @@ html.duduq-world-fusion
 
 
 /* =========================================================
-   DRAG & DROP — ÍCONE DE ÁUDIO SEM TRANSCRIÇÃO VISUAL
+   DRAG & DROP — ÁUDIO SEM TRANSCRIÇÃO EM TODOS OS ESTADOS
 
    O runtime mantém audioDescription internamente para
-   acessibilidade e mensagens de status. O texto "Áudio de ..."
-   NÃO deve aparecer visualmente dentro do card.
+   acessibilidade e mensagens. Visualmente, nunca exibimos
+   "Áudio de ...": nem no card parado, nem durante o drag,
+   nem no ghost de retorno.
 
    A apresentação fica:
-   [ícone de alto-falante] + PALAVRA
-
-   O card inteiro continua acionando a pronúncia ao clique.
-   Não alteramos spokenText, speechSynthesis, drag, drop,
-   validação nem feedback.
+   [ícone] + PALAVRA
    ========================================================= */
 
 html.duduq-world-fusion
-  .duduq-dd-item[data-has-audio="true"]
+  .duduq-dd-root
   .duduq-dd-audio-token {
   flex: 0 0 26px !important;
 
   width: 26px !important;
   min-width: 26px !important;
+  max-width: 26px !important;
+
   height: 26px !important;
   min-height: 26px !important;
+  max-height: 26px !important;
 
   padding: 0 !important;
   margin: 0 !important;
@@ -342,21 +342,23 @@ html.duduq-world-fusion
     !important;
 
   line-height: 1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+
   pointer-events: none !important;
 }
 
-/* Oculta somente a descrição visual "Áudio de ...".
-   O dado continua existindo internamente no runtime. */
+/* Remove a descrição visível "Áudio de ...", inclusive nos ghosts. */
 html.duduq-world-fusion
-  .duduq-dd-item[data-has-audio="true"]
+  .duduq-dd-root
   .duduq-dd-audio-token
   > span:last-child {
   display: none !important;
 }
 
-/* Alto-falante compacto e proporcional ao texto do card. */
+/* Alto-falante compacto e consistente em todos os estados. */
 html.duduq-world-fusion
-  .duduq-dd-item[data-has-audio="true"]
+  .duduq-dd-root
   .duduq-dd-audio-token
   svg {
   width: 16px !important;
@@ -364,17 +366,108 @@ html.duduq-world-fusion
   display: block !important;
 }
 
-/* Cards com imagem continuam em coluna; o ícone fica compacto
-   entre a mídia e a palavra, sem aumentar a largura do card. */
+/* Blindagem específica para ghost ativo e ghost de retorno. */
 html.duduq-world-fusion
-  .duduq-dd-item[data-has-audio="true"][data-has-media="true"]
+  .duduq-dd-drag-ghost
+  .duduq-dd-audio-token,
+html.duduq-world-fusion
+  .duduq-dd-return-ghost
   .duduq-dd-audio-token {
-  flex-basis: 24px !important;
-  width: 24px !important;
-  min-width: 24px !important;
-  height: 24px !important;
-  min-height: 24px !important;
+  flex-basis: 26px !important;
+  width: 26px !important;
+  min-width: 26px !important;
+  max-width: 26px !important;
+  height: 26px !important;
+  min-height: 26px !important;
+  max-height: 26px !important;
+  padding: 0 !important;
 }
+
+/* =========================================================
+   BUBBLE POP — INTEGRIDADE DA PALAVRA
+
+   Uma palavra nunca pode ser quebrada no meio.
+   Frases podem quebrar somente ENTRE palavras.
+   Essa regra vale para todos os anos.
+   ========================================================= */
+
+html.duduq-world-fusion
+  .duduq-bp-label {
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+  white-space: normal !important;
+}
+
+/* =========================================================
+   PERFIL DE ALFABETIZAÇÃO — EI / 1º / 2º ANO
+
+   Aplicado pelo World Fusion JS através do atributo
+   data-duduq-literacy-early="true".
+
+   Objetivos:
+   - conteúdo pedagógico em CAIXA ALTA;
+   - palavras sem quebra silábica/artificial;
+   - fonte das bolhas com tamanho confortável;
+   - frase curta pode ocupar 2 linhas, mas somente nos espaços.
+   ========================================================= */
+
+html.duduq-world-fusion[data-duduq-literacy-early="true"]
+  :is(
+    .duduq-engine-heading h1,
+    .duduq-bp-instruction h2,
+    .duduq-dd-instruction h2,
+    .duduq-bp-label,
+    .duduq-dd-word,
+    .duduq-dd-phrase,
+    .duduq-dd-target-head > span
+  ) {
+  text-transform: uppercase !important;
+}
+
+html.duduq-world-fusion[data-duduq-literacy-early="true"]
+  .duduq-bp-label {
+  max-width: 94% !important;
+  font-size: clamp(22px, 2.45vw, 30px) !important;
+  font-weight: 900 !important;
+  line-height: 1.04 !important;
+  letter-spacing: .005em !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+  white-space: normal !important;
+}
+
+html.duduq-world-fusion[data-duduq-literacy-early="true"]
+  .duduq-bp-label[data-small="true"] {
+  font-size: clamp(21px, 2.25vw, 28px) !important;
+}
+
+/* Mantém palavras dos cards nítidas e sem quebra interna. */
+html.duduq-world-fusion[data-duduq-literacy-early="true"]
+  :is(
+    .duduq-dd-word,
+    .duduq-dd-phrase
+  ) {
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
+}
+
+/* Em telas menores, não reduzimos a palavra da bolha a um tamanho
+   inadequado para alfabetização. */
+@media (max-width: 520px) {
+  html.duduq-world-fusion[data-duduq-literacy-early="true"]
+    .duduq-bp-label {
+    font-size: clamp(21px, 6.4vw, 27px) !important;
+  }
+
+  html.duduq-world-fusion[data-duduq-literacy-early="true"]
+    .duduq-bp-label[data-small="true"] {
+    font-size: clamp(20px, 5.9vw, 25px) !important;
+  }
+}
+
 
 /* Bubble Pop — o status "Todos os alvos foram encontrados!" é redundante
    quando o feedback final de sucesso já está visível. Ocultá-lo libera a
