@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.3.0
+   Versão 1.3.1
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.3.0";
+  const VERSION = "1.3.1";
   if (window.DuduQWorldFusion?.version === VERSION) return;
 
   const scriptUrl =
@@ -15,7 +15,7 @@
     new URL("./duduq-world-fusion.js", window.location.href).href;
 
   const stylesheetUrl = new URL(
-    "./duduq-world-fusion.css?v=131",
+    "./duduq-world-fusion.css?v=132",
     scriptUrl
   ).href;
 
@@ -255,6 +255,37 @@
     return early;
   }
 
+  function syncBubbleLabelSemantics(doc) {
+    if (!doc?.querySelectorAll) return;
+
+    doc
+      .querySelectorAll(
+        ".duduq-bp-label"
+      )
+      .forEach(
+        function (label) {
+          const text =
+            String(
+              label.textContent || ""
+            ).trim();
+
+          if (!text) {
+            label.removeAttribute(
+              "data-duduq-label-kind"
+            );
+            return;
+          }
+
+          label.setAttribute(
+            "data-duduq-label-kind",
+            /\s/.test(text)
+              ? "phrase"
+              : "word"
+          );
+        }
+      );
+  }
+
   function resolveBubbleSpeechLocale(doc) {
     const params =
       getDocumentParams(doc);
@@ -426,6 +457,7 @@
 
     doc.documentElement.classList.add("duduq-world-fusion");
     syncLiteracyProfile(doc);
+    syncBubbleLabelSemantics(doc);
 
     doc.documentElement.setAttribute(
       "data-duduq-world-fusion-version",
