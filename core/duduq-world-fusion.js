@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.2.7
+   Versão 1.2.9
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.2.7";
+  const VERSION = "1.2.9";
   if (window.DuduQWorldFusion?.version === VERSION) return;
 
   const scriptUrl =
@@ -15,7 +15,7 @@
     new URL("./duduq-world-fusion.js", window.location.href).href;
 
   const stylesheetUrl = new URL(
-    "./duduq-world-fusion.css?v=128",
+    "./duduq-world-fusion.css?v=130",
     scriptUrl
   ).href;
 
