@@ -1,32 +1,44 @@
 /* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 01
-   My First English Words
-   Versão 1.2.1 — MÓDULO COMPLETO · IMAGENS VETORIAIS
-
-   STATUS DE PRODUÇÃO
-   - Módulo 01 completo para validação final.
-   - Utiliza somente Bubble Pop e Drag & Drop, já estabilizados.
-   - Não altera Core, Shell, World Fusion, Intro, Transition ou Completion.
-
-   CÓDIGOS PEDAGÓGICOS
-   - ENG1-M01-* são identificadores internos DuduQ.
-   - Não representam, por si só, códigos oficiais da BNCC.
+   Hello! Greetings & Introductions
+   Versão 1.3.0 — CONTEÚDO OFICIAL
+ 
+   FONTES PEDAGÓGICAS
+   - DUDUQ Conteúdo Oficial — Língua Inglesa v1.0
+   - DUDUQ Documento Mestre — Conteúdo & Orquestração v1.0
+ 
+   PRINCÍPIOS DESTA VERSÃO
+   - Conteúdo primeiro, mecânica depois.
+   - Preserva os 12 IDs oficiais EN1-M1-01 a EN1-M1-12.
+   - Não inventa códigos BNCC.
+   - Mantém as alternativas e respostas do banco oficial.
+   - Reordena apenas a apresentação pedagógica para criar progressão.
+   - Não altera Core, World Fusion, Host, Intro, Transition ou Completion.
+ 
+   ORQUESTRAÇÃO ATUAL
+   - O repositório possui Bubble Pop e Drag & Drop registrados no Host.
+   - Os 12 itens oficiais deste módulo são de resposta única.
+   - Bubble Pop é a mecânica registrada que preserva esse formato sem
+     deformar os itens em arrastes artificiais.
+   - Matching e Smart Sentence ficam registrados em metadata como
+     mecânicas preferidas de catálogo para itens específicos, para futura
+     migração quando seus adaptadores estiverem prontos para produção.
    ========================================================= */
-
+ 
 (function () {
   "use strict";
-
-  const VERSION = "1.2.1";
-
+ 
+  const VERSION = "1.3.0";
+ 
   window.DUDUQ_CONTENT =
     window.DUDUQ_CONTENT || {};
-
+ 
   window.DUDUQ_CONTENT.english =
     window.DUDUQ_CONTENT.english || {};
-
+ 
   window.DUDUQ_CONTENT.english.year1 =
     window.DUDUQ_CONTENT.english.year1 || {};
-
+ 
   if (
     window.DUDUQ_CONTENT
       .english
@@ -36,1260 +48,947 @@
   ) {
     return;
   }
-
-  const SKILLS = Object.freeze({
-    greetings: Object.freeze({
-      code: "ENG1-M01-S01",
-      description:
-        "Reconhecer oralmente e visualmente cumprimentos simples em língua inglesa, associando som e forma escrita."
-    }),
-
-    animals: Object.freeze({
-      code: "ENG1-M01-S02",
-      description:
-        "Associar palavras de animais em língua inglesa a representações pictográficas familiares."
-    }),
-
-    colors: Object.freeze({
-      code: "ENG1-M01-S03",
-      description:
-        "Reconhecer oralmente e visualmente nomes de cores básicas em língua inglesa."
-    }),
-
-    school: Object.freeze({
-      code: "ENG1-M01-S04",
-      description:
-        "Associar palavras de objetos escolares em língua inglesa a representações pictográficas familiares."
-    }),
-
-    toys: Object.freeze({
-      code: "ENG1-M01-S05",
-      description:
-        "Reconhecer oralmente e visualmente palavras de brinquedos familiares em língua inglesa."
-    }),
-
-    review: Object.freeze({
-      code: "ENG1-M01-S06",
-      description:
-        "Mobilizar o vocabulário aprendido para reconhecer e organizar palavras de diferentes campos semânticos."
-    })
-  });
-
-
-  /* =======================================================
-     ILUSTRAÇÕES VETORIAIS — ALVOS DO DRAG & DROP
-
-     Por decisão pedagógica, os alvos visuais não usam mais emoji.
-     As imagens abaixo são SVGs vetoriais simples, grandes e nítidos,
-     incorporados ao próprio conteúdo para manter consistência entre
-     Windows, tablets e navegadores sem depender de arquivos externos.
-     ======================================================= */
-
-  function svgData(svg) {
-    return (
-      "data:image/svg+xml;charset=UTF-8," +
-      encodeURIComponent(
-        String(svg || "")
-          .replace(/\s+/g, " ")
-          .trim()
-      )
-    );
+ 
+  function skill(description) {
+    return Object.freeze({
+      code: null,
+      description
+    });
   }
-
-  const PICTOGRAMS = Object.freeze({
-    dog: svgData(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-        <circle cx="80" cy="80" r="72" fill="#EAF6FF"/>
-        <ellipse cx="45" cy="60" rx="24" ry="34" fill="#8B5A3C" transform="rotate(-24 45 60)"/>
-        <ellipse cx="115" cy="60" rx="24" ry="34" fill="#8B5A3C" transform="rotate(24 115 60)"/>
-        <circle cx="80" cy="80" r="49" fill="#D79A65"/>
-        <ellipse cx="80" cy="101" rx="28" ry="22" fill="#F7D7B6"/>
-        <circle cx="62" cy="72" r="6" fill="#17324D"/>
-        <circle cx="98" cy="72" r="6" fill="#17324D"/>
-        <ellipse cx="80" cy="93" rx="9" ry="7" fill="#17324D"/>
-        <path d="M68 106 Q80 118 92 106" fill="none" stroke="#17324D" stroke-width="5" stroke-linecap="round"/>
-        <path d="M76 111 Q80 126 85 111" fill="#F27B8A"/>
-      </svg>
-    `),
-    cat: svgData(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-        <circle cx="80" cy="80" r="72" fill="#FFF7E8"/>
-        <path d="M40 58 L49 25 L72 49 Z" fill="#F2A64A" stroke="#C87424" stroke-width="4"/>
-        <path d="M120 58 L111 25 L88 49 Z" fill="#F2A64A" stroke="#C87424" stroke-width="4"/>
-        <circle cx="80" cy="82" r="51" fill="#F6B455"/>
-        <path d="M50 55 L51 38 L65 51 Z" fill="#F6C5C8"/>
-        <path d="M110 55 L109 38 L95 51 Z" fill="#F6C5C8"/>
-        <ellipse cx="61" cy="77" rx="6" ry="8" fill="#17324D"/>
-        <ellipse cx="99" cy="77" rx="6" ry="8" fill="#17324D"/>
-        <path d="M80 91 l-8 7 h16 z" fill="#E77C8C"/>
-        <path d="M80 99 Q70 110 61 101 M80 99 Q90 110 99 101" fill="none" stroke="#17324D" stroke-width="4" stroke-linecap="round"/>
-        <path d="M54 95 L25 89 M54 102 L23 104 M106 95 L135 89 M106 102 L137 104" stroke="#6B5A46" stroke-width="3.5" stroke-linecap="round"/>
-      </svg>
-    `),
-    bird: svgData(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-        <circle cx="80" cy="80" r="72" fill="#EEFBEF"/>
-        <ellipse cx="78" cy="89" rx="45" ry="39" fill="#7CCB70"/>
-        <circle cx="104" cy="61" r="30" fill="#79C9E8"/>
-        <path d="M128 61 L151 72 L128 78 Z" fill="#F6A623"/>
-        <circle cx="111" cy="56" r="5.5" fill="#17324D"/>
-        <path d="M45 89 Q74 53 98 92 Q69 116 45 89 Z" fill="#43A95D"/>
-        <path d="M47 113 L35 135 M69 117 L61 138" stroke="#B7772C" stroke-width="5" stroke-linecap="round"/>
-        <path d="M31 137 H48 M56 140 H73" stroke="#B7772C" stroke-width="4" stroke-linecap="round"/>
-      </svg>
-    `),
-    fish: svgData(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-        <circle cx="80" cy="80" r="72" fill="#E8FAFF"/>
-        <ellipse cx="78" cy="82" rx="48" ry="31" fill="#54BFE8"/>
-        <path d="M32 82 L9 52 L9 112 Z" fill="#368FD4"/>
-        <path d="M72 51 L91 30 L100 58 Z" fill="#79D6F4"/>
-        <path d="M72 113 L91 134 L100 106 Z" fill="#79D6F4"/>
-        <circle cx="103" cy="72" r="6" fill="#17324D"/>
-        <circle cx="105" cy="70" r="2" fill="#FFFFFF"/>
-        <path d="M113 91 Q126 83 132 91" fill="none" stroke="#1979B5" stroke-width="4" stroke-linecap="round"/>
-        <circle cx="135" cy="48" r="8" fill="none" stroke="#79D6F4" stroke-width="4"/>
-        <circle cx="146" cy="28" r="5" fill="none" stroke="#79D6F4" stroke-width="3"/>
-      </svg>
-    `),
-    book: svgData(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-        <circle cx="80" cy="80" r="72" fill="#EEF4FF"/>
-        <path d="M22 41 Q54 35 80 51 V126 Q52 111 22 119 Z" fill="#3D8BEA" stroke="#205EA8" stroke-width="5"/>
-        <path d="M138 41 Q106 35 80 51 V126 Q108 111 138 119 Z" fill="#62A8F4" stroke="#205EA8" stroke-width="5"/>
-        <path d="M80 52 V126" stroke="#FFFFFF" stroke-width="5"/>
-        <path d="M35 58 Q56 54 70 62 M35 75 Q56 70 70 78 M35 92 Q56 87 70 95" stroke="#DCEBFF" stroke-width="4" stroke-linecap="round"/>
-        <path d="M125 58 Q104 54 90 62 M125 75 Q104 70 90 78 M125 92 Q104 87 90 95" stroke="#EAF3FF" stroke-width="4" stroke-linecap="round"/>
-      </svg>
-    `),
-    pencil: svgData(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-        <circle cx="80" cy="80" r="72" fill="#FFF8E6"/>
-        <g transform="rotate(-38 80 80)">
-          <rect x="65" y="24" width="30" height="92" rx="8" fill="#F5C340" stroke="#D6931C" stroke-width="5"/>
-          <rect x="65" y="24" width="30" height="18" rx="7" fill="#F4869A"/>
-          <rect x="68" y="44" width="7" height="67" fill="#FFE986" opacity=".9"/>
-          <path d="M65 116 L80 143 L95 116 Z" fill="#E8C39D" stroke="#B9855C" stroke-width="4"/>
-          <path d="M75 134 L80 143 L85 134 Z" fill="#17324D"/>
-        </g>
-      </svg>
-    `),
-    ruler: svgData(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-        <circle cx="80" cy="80" r="72" fill="#EEFBFA"/>
-        <g transform="rotate(-28 80 80)">
-          <rect x="24" y="58" width="112" height="44" rx="10" fill="#69D0C4" stroke="#2E8F87" stroke-width="5"/>
-          <path d="M40 58 V78 M54 58 V70 M68 58 V78 M82 58 V70 M96 58 V78 M110 58 V70 M124 58 V78" stroke="#FFFFFF" stroke-width="4"/>
-          <circle cx="38" cy="91" r="5" fill="#2E8F87"/>
-        </g>
-      </svg>
-    `),
-    bag: svgData(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-        <circle cx="80" cy="80" r="72" fill="#FFF0F6"/>
-        <path d="M55 49 Q55 24 80 24 Q105 24 105 49" fill="none" stroke="#754A8D" stroke-width="10" stroke-linecap="round"/>
-        <rect x="38" y="43" width="84" height="90" rx="24" fill="#D65AA3" stroke="#943B7A" stroke-width="5"/>
-        <rect x="49" y="78" width="62" height="42" rx="15" fill="#F58BC1" stroke="#B3478A" stroke-width="4"/>
-        <path d="M54 60 H106" stroke="#FFE3F1" stroke-width="6" stroke-linecap="round"/>
-        <circle cx="80" cy="98" r="7" fill="#FFFFFF"/>
-        <path d="M37 65 Q20 75 28 105 M123 65 Q140 75 132 105" fill="none" stroke="#754A8D" stroke-width="8" stroke-linecap="round"/>
-      </svg>
-    `),
-    greeting: svgData(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-        <circle cx="80" cy="80" r="72" fill="#FFF8E8"/>
-        <path d="M52 92 V48 Q52 38 60 38 Q68 38 68 48 V71 V34 Q68 24 76 24 Q84 24 84 34 V70 V39 Q84 29 92 29 Q100 29 100 39 V75 V50 Q100 40 108 40 Q116 40 116 50 V91 Q116 128 82 132 Q55 132 45 110 L34 87 Q29 78 37 73 Q45 69 51 79 Z" fill="#F2B06A" stroke="#B87333" stroke-width="5" stroke-linejoin="round"/>
-        <path d="M23 54 Q34 42 47 37 M119 34 Q134 43 140 58" fill="none" stroke="#F2C94C" stroke-width="6" stroke-linecap="round"/>
-      </svg>
-    `),
-    paw: svgData(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-        <circle cx="80" cy="80" r="72" fill="#F2FAEE"/>
-        <ellipse cx="80" cy="101" rx="40" ry="31" fill="#6A9D54"/>
-        <ellipse cx="43" cy="67" rx="15" ry="21" fill="#6A9D54" transform="rotate(-22 43 67)"/>
-        <ellipse cx="69" cy="49" rx="15" ry="21" fill="#6A9D54" transform="rotate(-7 69 49)"/>
-        <ellipse cx="96" cy="49" rx="15" ry="21" fill="#6A9D54" transform="rotate(7 96 49)"/>
-        <ellipse cx="121" cy="68" rx="15" ry="21" fill="#6A9D54" transform="rotate(22 121 68)"/>
-      </svg>
-    `),
-    palette: svgData(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-        <circle cx="80" cy="80" r="72" fill="#F7F0FF"/>
-        <path d="M82 24 C45 24 20 47 20 80 C20 111 45 136 78 136 C94 136 101 126 94 114 C89 105 93 96 105 96 H118 C134 96 142 86 140 72 C136 43 111 24 82 24 Z" fill="#D8C0EA" stroke="#8C69A6" stroke-width="5"/>
-        <circle cx="53" cy="58" r="10" fill="#E85D75"/>
-        <circle cx="82" cy="48" r="10" fill="#F2C94C"/>
-        <circle cx="109" cy="60" r="10" fill="#56CCF2"/>
-        <circle cx="55" cy="91" r="10" fill="#6FCF97"/>
-        <circle cx="83" cy="86" r="10" fill="#F2994A"/>
-      </svg>
-    `),
-    teddy: svgData(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
-        <circle cx="80" cy="80" r="72" fill="#FFF5EC"/>
-        <circle cx="48" cy="50" r="21" fill="#B87845"/>
-        <circle cx="112" cy="50" r="21" fill="#B87845"/>
-        <circle cx="80" cy="78" r="50" fill="#C98A55"/>
-        <ellipse cx="80" cy="98" rx="27" ry="22" fill="#EBC7A4"/>
-        <circle cx="63" cy="73" r="6" fill="#17324D"/>
-        <circle cx="97" cy="73" r="6" fill="#17324D"/>
-        <ellipse cx="80" cy="92" rx="8" ry="6" fill="#17324D"/>
-        <path d="M70 105 Q80 114 90 105" fill="none" stroke="#17324D" stroke-width="4" stroke-linecap="round"/>
-        <path d="M53 117 Q35 131 39 145 M107 117 Q125 131 121 145" fill="none" stroke="#C98A55" stroke-width="15" stroke-linecap="round"/>
-      </svg>
-    `)
+ 
+  const SKILLS = Object.freeze({
+    greetingBasic: skill(
+      "Identificar cumprimentos básicos usados no dia a dia."
+    ),
+ 
+    greetingSituation: skill(
+      "Relacionar cumprimentos a situações cotidianas."
+    ),
+ 
+    farewell: skill(
+      "Identificar expressão de despedida."
+    ),
+ 
+    identifySelf: skill(
+      "Identificar-se utilizando a estrutura ‘I’m...’."
+    ),
+ 
+    boyGirl: skill(
+      "Compreender e empregar as palavras boy e girl."
+    ),
+ 
+    greetingResponse: skill(
+      "Responder a um cumprimento simples."
+    ),
+ 
+    personalPresentation: skill(
+      "Identificar apresentação pessoal simples."
+    ),
+ 
+    boyGirlSentence: skill(
+      "Empregar a estrutura ‘I’m a boy/girl’."
+    ),
+ 
+    distinguishGreetingFarewell: skill(
+      "Distinguir cumprimento e despedida."
+    )
   });
-
+ 
   const moduleDefinition = {
     id: "english-year-1-module-01",
     version: VERSION,
-
+ 
     subject: "Língua Inglesa",
     year: 1,
     module: 1,
-
-    title: "My First English Words",
-
+ 
+    title: "Hello! Greetings & Introductions",
+ 
     description:
-      "Primeira missão de contato com vocabulário muito frequente da língua inglesa, com prioridade para escuta, reconhecimento visual, associação entre som e escrita e construção inicial de campos semânticos.",
-
-    estimatedMinutes: 12,
-
+      "Missão inicial do 1º ano para reconhecer e usar cumprimentos básicos, compreender a estrutura I’M... e identificar BOY/GIRL com baixa carga de leitura e forte apoio oral.",
+ 
+    estimatedMinutes: 4,
+ 
     learningGoals: [
-      "Ouvir e reconhecer palavras e expressões muito frequentes em língua inglesa.",
-      "Associar palavras ouvidas às suas formas escritas em caixa alta.",
-      "Relacionar palavras de animais e objetos escolares a representações pictográficas.",
-      "Reconhecer nomes de cores e brinquedos familiares em língua inglesa.",
-      "Organizar palavras conhecidas por significado em um desafio final de revisão."
+      "Reconhecer HI, HELLO, GOODBYE, GOOD MORNING e GOOD AFTERNOON em situações simples.",
+      "Identificar I’M... como estrutura inicial de apresentação pessoal.",
+      "Reconhecer e empregar BOY e GIRL em estruturas muito curtas.",
+      "Responder a HELLO com outro cumprimento adequado.",
+      "Distinguir cumprimento de despedida."
     ],
-
+ 
     pedagogicalNotes: {
-      literacyProfile:
-        "Para o 1º ano, o conteúdo pedagógico é apresentado em caixa alta pelo perfil de alfabetização do DuduQ.",
-
-      oralPriority:
-        "A oralidade vem antes da tradução: o estudante escuta, compara e reconhece a palavra ou expressão em inglês.",
-
-      semanticFields:
-        "Os campos semânticos são apresentados separadamente durante a aquisição: GREETINGS, ANIMALS, COLORS, SCHOOL OBJECTS e TOYS. A mistura ocorre somente no FINAL CHALLENGE, quando o vocabulário já foi trabalhado.",
-
-      translationDecision:
-        "A tradução não é usada como alternativa de resposta. O português aparece nas instruções funcionais e em feedbacks breves quando ajuda a compreensão do uso.",
-
-      colorCueDecision:
-        "Nas questões de COLORS, a tonalidade visual das bolhas não corresponde intencionalmente ao significado da palavra, evitando que a criança responda apenas pela cor da bolha.",
-
-      pictogramDecision:
-        "Nos pareamentos de ANIMALS, SCHOOL OBJECTS e FINAL CHALLENGE, ilustrações vetoriais grandes e nítidas dão apoio visual sem acrescentar tradução escrita. Evitamos emojis como referência principal para garantir leitura consistente em diferentes dispositivos.",
-
-      finalReviewDecision:
-        "O desafio final não apresenta vocabulário novo. Ele pede que a criança organize palavras já estudadas por significado."
+      officialSource:
+        "Módulo construído a partir dos 12 itens oficiais EN1-M1-01 a EN1-M1-12 do banco de conteúdo de Língua Inglesa.",
+ 
+      ids:
+        "Os IDs oficiais identificam as questões e são preservados independentemente da mecânica escolhida.",
+ 
+      noInventedCurriculumCode:
+        "Nenhum código BNCC é criado. As habilidades permanecem em linguagem descritiva, conforme as fontes editoriais.",
+ 
+      yearProfile:
+        "Para o 1º ano, priorizamos alta objetividade, pouca leitura, instruções curtas em português e apoio sonoro quando útil.",
+ 
+      mechanics:
+        "A melhor mecânica de catálogo é registrada por item em metadata. No build atual, Bubble Pop é usado nos 12 itens porque é a mecânica de resposta única registrada no Host; Drag & Drop exigiria converter questões de escolha em pairs/sequence, o que deformaria o item.",
+ 
+      futureMechanics:
+        "Quando Matching e Smart Sentence estiverem registrados em produção, EN1-M1-02/03/06/07 poderão migrar para Matching e EN1-M1-10/11 para Smart Sentence sem alterar seus IDs.",
+ 
+      audioSafety:
+        "Áudio em inglês é usado quando constitui o estímulo do item. Quando pronunciar a resposta antes da interação anteciparia o gabarito, o autoplay usa somente instrução em português. A pronúncia do alvo pode ocorrer após a seleção.",
+ 
+      sequence:
+        "Os itens foram organizados em cinco etapas: entrada por cumprimentos, contexto manhã/tarde, BOY/GIRL, apresentação com I’M..., e consolidação. O conteúdo e o gabarito de cada ID permanecem inalterados."
     },
-
+ 
     intro: {
       companyKicker: "UMA CRIAÇÃO DE",
       companyWidth: 820,
-
+ 
       collectionLogo:
         "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Logo%20EduQ%20Play.png",
-
+ 
       collectionName: "EduQ Play",
       collectionAlt: "EduQ Play",
       collectionWidth: 760,
-
+ 
       loadingLabel: "PREPARANDO SUA MISSÃO",
       readyLabel: "MISSÃO PRONTA",
       startLabel: "INICIAR MISSÃO",
       hint: "Tudo pronto para começar!",
-
+ 
       minDurationMs: 2200,
       brandingDurationMs: 3000,
       switchingDurationMs: 760,
       missionMinDurationMs: 1200,
       sparkCount: 14
     },
-
+ 
     activities: [
       /* =====================================================
-         ETAPA 1 — GREETINGS — BUBBLE POP
-         Repertório: HELLO, HI, GOOD MORNING, BYE
+         ETAPA 1 — HELLO!
+         EN1-M1-01 e EN1-M1-04
          ===================================================== */
       {
-        id: "eng1-m01-step-01-greetings",
-        title: "Greetings",
+        id: "en1-m1-step-01-hello",
+        title: "Hello!",
         mechanic: "bubble-pop",
-        skill: SKILLS.greetings,
-
+        skill: SKILLS.greetingBasic,
+ 
         questions: [
           {
-            id: "eng1-m01-greetings-01-hello",
+            id: "EN1-M1-01",
             subject: "Língua Inglesa",
             year: 1,
             module: 1,
-            skill: SKILLS.greetings,
+            skill: SKILLS.greetingBasic,
             difficulty: "easy",
-            statement: "Greetings",
+ 
+            statement: "Hello!",
             instruction:
-              "Ouça e escolha a palavra que você ouviu.",
+              "Ouça a saudação e escolha o que foi dito.",
+ 
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
+ 
             audio: {
               enabled: true,
               text: "Hello",
               language: "en-US",
               role: "instruction"
             },
+ 
             alternatives: [
+              { id: "goodbye", text: "GOODBYE", metadata: { tone: "pink" } },
               { id: "hello", text: "HELLO", metadata: { tone: "blue" } },
-              { id: "bye", text: "BYE", metadata: { tone: "pink" } },
-              { id: "hi", text: "HI", metadata: { tone: "green" } }
+              { id: "good-morning", text: "GOOD MORNING", metadata: { tone: "green" } }
             ],
-            answer: { type: "single", value: "hello" },
+ 
+            answer: {
+              type: "single",
+              value: "hello"
+            },
+ 
             feedback: {
               correct:
-                "Muito bem! HELLO é uma forma de cumprimentar alguém.",
+                "Muito bem! Você reconheceu HELLO.",
               incorrect:
-                "Escute novamente e escolha a palavra que corresponde ao som.",
+                "Ouça novamente e compare com as palavras nas bolhas.",
               language: "pt-BR"
             },
+ 
             delivery: {
               mechanic: "bubble-pop",
+              preferred: ["bubble-pop"],
               allowImage: false,
               allowAudio: true
             },
+ 
             metadata: {
-              title: "Greetings",
-              estimatedSeconds: 25,
-              tags: ["greetings", "hello", "listening", "word-recognition"]
+              title: "Hello!",
+              sourceDifficulty: "Fácil",
+              preferredCatalogMechanic: "bubble-pop",
+              mechanicReason:
+                "Reconhecimento auditivo rápido entre três alvos curtos.",
+              sourceMedia:
+                "Áudio EN obrigatório: Hello.",
+              tags: ["official", "greetings", "listening", "EN1-M1-01"]
             }
           },
-
+ 
           {
-            id: "eng1-m01-greetings-02-hi",
+            id: "EN1-M1-04",
             subject: "Língua Inglesa",
             year: 1,
             module: 1,
-            skill: SKILLS.greetings,
+            skill: SKILLS.farewell,
             difficulty: "easy",
-            statement: "Greetings",
+ 
+            statement: "Goodbye!",
             instruction:
-              "Ouça e escolha a palavra que você ouviu.",
+              "Qual palavra usamos para nos despedir?",
+ 
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
+ 
+            /*
+             * A fonte recomenda áudio de GOODBYE. Como o áudio antes da
+             * escolha revelaria o gabarito, o autoplay lê somente a pergunta
+             * em português. A bolha selecionada continua pronunciando o alvo.
+             */
             audio: {
               enabled: true,
-              text: "Hi",
-              language: "en-US",
+              text: "Qual palavra usamos para nos despedir?",
+              language: "pt-BR",
               role: "instruction"
             },
+ 
             alternatives: [
-              { id: "bye", text: "BYE", metadata: { tone: "yellow" } },
-              { id: "hi", text: "HI", metadata: { tone: "blue" } },
+              { id: "hello", text: "HELLO", metadata: { tone: "green" } },
+              { id: "goodbye", text: "GOODBYE", metadata: { tone: "blue" } },
+              { id: "good-morning", text: "GOOD MORNING", metadata: { tone: "yellow" } }
+            ],
+ 
+            answer: {
+              type: "single",
+              value: "goodbye"
+            },
+ 
+            feedback: {
+              correct:
+                "Isso! GOODBYE é usado para se despedir.",
+              incorrect:
+                "Pense no momento em que alguém vai embora e tente novamente.",
+              language: "pt-BR"
+            },
+ 
+            delivery: {
+              mechanic: "bubble-pop",
+              preferred: ["bubble-pop"],
+              allowImage: false,
+              allowAudio: true
+            },
+ 
+            metadata: {
+              title: "Goodbye!",
+              sourceDifficulty: "Fácil",
+              preferredCatalogMechanic: "bubble-pop",
+              mechanicReason:
+                "Discriminação lexical direta entre cumprimento e despedida.",
+              sourceMedia:
+                "Áudio EN recomendado: Goodbye. Não é usado no autoplay para não antecipar a resposta.",
+              tags: ["official", "greetings", "farewell", "EN1-M1-04"]
+            }
+          }
+        ]
+      },
+ 
+      /* =====================================================
+         ETAPA 2 — MORNING & AFTERNOON
+         EN1-M1-02 e EN1-M1-03
+         ===================================================== */
+      {
+        id: "en1-m1-step-02-time-greetings",
+        title: "Morning & Afternoon",
+        mechanic: "bubble-pop",
+        skill: SKILLS.greetingSituation,
+ 
+        questions: [
+          {
+            id: "EN1-M1-02",
+            subject: "Língua Inglesa",
+            year: 1,
+            module: 1,
+            skill: SKILLS.greetingSituation,
+            difficulty: "easy",
+ 
+            statement: "Morning",
+            instruction:
+              "É de manhã. Qual saudação combina com esse momento?",
+ 
+            contentLanguage: "en",
+            instructionLanguage: "pt-BR",
+            feedbackLanguage: "pt-BR",
+ 
+            audio: {
+              enabled: true,
+              text: "É de manhã. Qual saudação combina com esse momento?",
+              language: "pt-BR",
+              role: "instruction"
+            },
+ 
+            alternatives: [
+              { id: "good-afternoon", text: "GOOD AFTERNOON", metadata: { tone: "purple" } },
+              { id: "goodbye", text: "GOODBYE", metadata: { tone: "pink" } },
+              { id: "good-morning", text: "GOOD MORNING", metadata: { tone: "blue" } }
+            ],
+ 
+            answer: {
+              type: "single",
+              value: "good-morning"
+            },
+ 
+            feedback: {
+              correct:
+                "Muito bem! GOOD MORNING combina com o período da manhã.",
+              incorrect:
+                "Observe o momento do dia e compare as saudações.",
+              language: "pt-BR"
+            },
+ 
+            delivery: {
+              mechanic: "bubble-pop",
+              preferred: ["bubble-pop"],
+              allowImage: false,
+              allowAudio: true
+            },
+ 
+            metadata: {
+              title: "Morning",
+              sourceDifficulty: "Fácil",
+              preferredCatalogMechanic: "matching",
+              productionMechanic: "bubble-pop",
+              mechanicReason:
+                "No catálogo completo, Matching cena-palavra é preferível. No build atual, Bubble Pop preserva a escolha única sem converter o item em arraste artificial.",
+              sourceMedia:
+                "Imagem recomendada: manhã/sol nascendo.",
+              futureImageDescription:
+                "Cena simples de manhã com sol nascendo; sem texto que entregue a resposta.",
+              tags: ["official", "greetings", "morning", "EN1-M1-02"]
+            }
+          },
+ 
+          {
+            id: "EN1-M1-03",
+            subject: "Língua Inglesa",
+            year: 1,
+            module: 1,
+            skill: SKILLS.greetingSituation,
+            difficulty: "easy",
+ 
+            statement: "Afternoon",
+            instruction:
+              "É de tarde. Qual saudação combina com esse momento?",
+ 
+            contentLanguage: "en",
+            instructionLanguage: "pt-BR",
+            feedbackLanguage: "pt-BR",
+ 
+            audio: {
+              enabled: true,
+              text: "É de tarde. Qual saudação combina com esse momento?",
+              language: "pt-BR",
+              role: "instruction"
+            },
+ 
+            alternatives: [
+              { id: "good-afternoon", text: "GOOD AFTERNOON", metadata: { tone: "orange" } },
+              { id: "good-morning", text: "GOOD MORNING", metadata: { tone: "green" } },
+              { id: "goodbye", text: "GOODBYE", metadata: { tone: "blue" } }
+            ],
+ 
+            answer: {
+              type: "single",
+              value: "good-afternoon"
+            },
+ 
+            feedback: {
+              correct:
+                "Excelente! GOOD AFTERNOON combina com o período da tarde.",
+              incorrect:
+                "Pense no período da tarde e tente outra vez.",
+              language: "pt-BR"
+            },
+ 
+            delivery: {
+              mechanic: "bubble-pop",
+              preferred: ["bubble-pop"],
+              allowImage: false,
+              allowAudio: true
+            },
+ 
+            metadata: {
+              title: "Afternoon",
+              sourceDifficulty: "Fácil",
+              preferredCatalogMechanic: "matching",
+              productionMechanic: "bubble-pop",
+              mechanicReason:
+                "No catálogo completo, Matching cena-palavra é preferível. Bubble Pop é o fallback registrado que mantém a escolha simples.",
+              sourceMedia:
+                "Imagem recomendada: período da tarde.",
+              futureImageDescription:
+                "Cena clara de tarde, com luz diurna; sem texto que entregue a resposta.",
+              tags: ["official", "greetings", "afternoon", "EN1-M1-03"]
+            }
+          }
+        ]
+      },
+ 
+      /* =====================================================
+         ETAPA 3 — BOY & GIRL
+         EN1-M1-06 e EN1-M1-07
+         ===================================================== */
+      {
+        id: "en1-m1-step-03-boy-girl",
+        title: "Boy & Girl",
+        mechanic: "bubble-pop",
+        skill: SKILLS.boyGirl,
+ 
+        questions: [
+          {
+            id: "EN1-M1-06",
+            subject: "Língua Inglesa",
+            year: 1,
+            module: 1,
+            skill: SKILLS.boyGirl,
+            difficulty: "easy",
+ 
+            statement: "Boy & Girl",
+            instruction:
+              "Selecione a palavra em inglês correspondente a menino.",
+ 
+            contentLanguage: "en",
+            instructionLanguage: "pt-BR",
+            feedbackLanguage: "pt-BR",
+ 
+            audio: {
+              enabled: true,
+              text: "Selecione a palavra em inglês correspondente a menino.",
+              language: "pt-BR",
+              role: "instruction"
+            },
+ 
+            alternatives: [
+              { id: "boy", text: "BOY", metadata: { tone: "blue" } },
+              { id: "girl", text: "GIRL", metadata: { tone: "pink" } },
               { id: "hello", text: "HELLO", metadata: { tone: "green" } }
             ],
-            answer: { type: "single", value: "hi" },
+ 
+            answer: {
+              type: "single",
+              value: "boy"
+            },
+ 
             feedback: {
               correct:
-                "Muito bem! HI também é usado para cumprimentar alguém.",
+                "Muito bem! BOY corresponde a menino.",
               incorrect:
-                "Ouça com atenção mais uma vez e tente novamente.",
+                "Compare as palavras e tente novamente.",
               language: "pt-BR"
             },
+ 
             delivery: {
               mechanic: "bubble-pop",
+              preferred: ["bubble-pop"],
               allowImage: false,
               allowAudio: true
             },
+ 
             metadata: {
-              title: "Greetings",
-              estimatedSeconds: 25,
-              tags: ["greetings", "hi", "listening", "word-recognition"]
+              title: "Boy",
+              sourceDifficulty: "Fácil",
+              preferredCatalogMechanic: "matching",
+              productionMechanic: "bubble-pop",
+              mechanicReason:
+                "Matching palavra-imagem seria a preferência de catálogo por ser vocabulário concreto. Bubble Pop preserva o item oficial de escolha única no build atual.",
+              sourceMedia:
+                "Imagem recomendada: menino.",
+              futureImageDescription:
+                "Ilustração simples de uma criança menino, sem estereótipos visuais desnecessários.",
+              tags: ["official", "identity", "boy", "EN1-M1-06"]
             }
           },
-
+ 
           {
-            id: "eng1-m01-greetings-03-good-morning",
+            id: "EN1-M1-07",
             subject: "Língua Inglesa",
             year: 1,
             module: 1,
-            skill: SKILLS.greetings,
+            skill: SKILLS.boyGirl,
             difficulty: "easy",
-            statement: "Greetings",
+ 
+            statement: "Boy & Girl",
             instruction:
-              "Ouça e escolha a expressão que você ouviu.",
+              "Selecione a palavra em inglês correspondente a menina.",
+ 
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
+ 
             audio: {
               enabled: true,
-              text: "Good morning",
-              language: "en-US",
+              text: "Selecione a palavra em inglês correspondente a menina.",
+              language: "pt-BR",
               role: "instruction"
             },
+ 
             alternatives: [
-              { id: "hi", text: "HI", metadata: { tone: "green" } },
-              { id: "good-morning", text: "GOOD MORNING", metadata: { tone: "yellow" } },
-              { id: "bye", text: "BYE", metadata: { tone: "pink" } },
-              { id: "hello", text: "HELLO", metadata: { tone: "blue" } }
+              { id: "boy", text: "BOY", metadata: { tone: "green" } },
+              { id: "girl", text: "GIRL", metadata: { tone: "blue" } },
+              { id: "goodbye", text: "GOODBYE", metadata: { tone: "pink" } }
             ],
-            answer: { type: "single", value: "good-morning" },
+ 
+            answer: {
+              type: "single",
+              value: "girl"
+            },
+ 
             feedback: {
               correct:
-                "Excelente! GOOD MORNING é um cumprimento usado pela manhã.",
+                "Muito bem! GIRL corresponde a menina.",
               incorrect:
-                "Escute a expressão novamente e observe as palavras com calma.",
+                "Observe as palavras e tente outra vez.",
               language: "pt-BR"
             },
+ 
             delivery: {
               mechanic: "bubble-pop",
+              preferred: ["bubble-pop"],
               allowImage: false,
               allowAudio: true
             },
+ 
             metadata: {
-              title: "Greetings",
-              estimatedSeconds: 30,
-              tags: ["greetings", "good-morning", "listening", "phrase-recognition"]
+              title: "Girl",
+              sourceDifficulty: "Fácil",
+              preferredCatalogMechanic: "matching",
+              productionMechanic: "bubble-pop",
+              mechanicReason:
+                "Matching palavra-imagem seria a preferência de catálogo. Bubble Pop é o fallback fiel ao formato atual do item.",
+              sourceMedia:
+                "Imagem recomendada: menina.",
+              futureImageDescription:
+                "Ilustração simples de uma criança menina, sem estereótipos visuais desnecessários.",
+              tags: ["official", "identity", "girl", "EN1-M1-07"]
             }
-          },
-
+          }
+        ]
+      },
+ 
+      /* =====================================================
+         ETAPA 4 — I'M...
+         EN1-M1-05, EN1-M1-09, EN1-M1-10 e EN1-M1-11
+         ===================================================== */
+      {
+        id: "en1-m1-step-04-im",
+        title: "I'm...",
+        mechanic: "bubble-pop",
+        skill: SKILLS.identifySelf,
+ 
+        questions: [
           {
-            id: "eng1-m01-greetings-04-bye",
+            id: "EN1-M1-05",
             subject: "Língua Inglesa",
             year: 1,
             module: 1,
-            skill: SKILLS.greetings,
+            skill: SKILLS.identifySelf,
             difficulty: "easy",
-            statement: "Greetings",
+ 
+            statement: "I'm...",
             instruction:
-              "Ouça e escolha a palavra que você ouviu.",
+              "Qual estrutura pode ser usada para dizer o próprio nome?",
+ 
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
+ 
             audio: {
               enabled: true,
-              text: "Bye",
+              text: "Qual estrutura pode ser usada para dizer o próprio nome?",
+              language: "pt-BR",
+              role: "instruction"
+            },
+ 
+            alternatives: [
+              { id: "goodbye", text: "GOODBYE", metadata: { tone: "pink" } },
+              { id: "good-afternoon", text: "GOOD AFTERNOON", metadata: { tone: "green" } },
+              { id: "im", text: "I'M...", metadata: { tone: "blue" } }
+            ],
+ 
+            answer: {
+              type: "single",
+              value: "im"
+            },
+ 
+            feedback: {
+              correct:
+                "Certo! I'M... pode iniciar uma apresentação com o próprio nome.",
+              incorrect:
+                "Pense em como alguém começa a dizer o próprio nome em inglês.",
+              language: "pt-BR"
+            },
+ 
+            delivery: {
+              mechanic: "bubble-pop",
+              preferred: ["bubble-pop"],
+              allowImage: false,
+              allowAudio: true
+            },
+ 
+            metadata: {
+              title: "I'm...",
+              sourceDifficulty: "Fácil",
+              preferredCatalogMechanic: "bubble-pop",
+              mechanicReason:
+                "Escolha direta entre três estruturas curtas; não é necessário construir a frase neste item.",
+              sourceMedia:
+                "Sem mídia obrigatória.",
+              tags: ["official", "introductions", "im", "EN1-M1-05"]
+            }
+          },
+ 
+          {
+            id: "EN1-M1-09",
+            subject: "Língua Inglesa",
+            year: 1,
+            module: 1,
+            skill: SKILLS.personalPresentation,
+            difficulty: "medium",
+ 
+            statement: "I'm Ana.",
+            instruction:
+              "Ouça e escolha o que a pessoa está fazendo.",
+ 
+            contentLanguage: "en",
+            instructionLanguage: "pt-BR",
+            feedbackLanguage: "pt-BR",
+ 
+            audio: {
+              enabled: true,
+              text: "I'm Ana.",
               language: "en-US",
               role: "instruction"
             },
+ 
             alternatives: [
-              { id: "good-morning", text: "GOOD MORNING", metadata: { tone: "yellow" } },
+              { id: "saying-name", text: "DIZENDO O PRÓPRIO NOME", metadata: { tone: "blue" } },
+              { id: "saying-goodbye", text: "DESPEDINDO-SE", metadata: { tone: "pink" } },
+              { id: "saying-afternoon", text: "DIZENDO BOA TARDE", metadata: { tone: "green" } }
+            ],
+ 
+            answer: {
+              type: "single",
+              value: "saying-name"
+            },
+ 
+            feedback: {
+              correct:
+                "Muito bem! I'M ANA. apresenta o próprio nome.",
+              incorrect:
+                "Ouça novamente. A pessoa está se apresentando, despedindo-se ou dizendo boa tarde?",
+              language: "pt-BR"
+            },
+ 
+            delivery: {
+              mechanic: "bubble-pop",
+              preferred: ["bubble-pop"],
+              allowImage: false,
+              allowAudio: true
+            },
+ 
+            metadata: {
+              title: "I'm Ana.",
+              sourceDifficulty: "Média",
+              preferredCatalogMechanic: "bubble-pop",
+              mechanicReason:
+                "Compreensão oral com três significados possíveis; a decisão é categórica e não exige construção de frase.",
+              sourceMedia:
+                "Áudio EN obrigatório: I'm Ana.",
+              tags: ["official", "introductions", "listening", "EN1-M1-09"]
+            }
+          },
+ 
+          {
+            id: "EN1-M1-10",
+            subject: "Língua Inglesa",
+            year: 1,
+            module: 1,
+            skill: SKILLS.boyGirlSentence,
+            difficulty: "medium",
+ 
+            statement: "I'm a ___.",
+            instruction:
+              "Complete I'M A ___. para um menino.",
+ 
+            contentLanguage: "en",
+            instructionLanguage: "pt-BR",
+            feedbackLanguage: "pt-BR",
+ 
+            audio: {
+              enabled: true,
+              text: "Complete I'm a blank para um menino.",
+              language: "pt-BR",
+              role: "instruction"
+            },
+ 
+            alternatives: [
+              { id: "girl", text: "GIRL", metadata: { tone: "pink" } },
+              { id: "boy", text: "BOY", metadata: { tone: "blue" } },
+              { id: "goodbye", text: "GOODBYE", metadata: { tone: "green" } }
+            ],
+ 
+            answer: {
+              type: "single",
+              value: "boy"
+            },
+ 
+            feedback: {
+              correct:
+                "Perfeito! I'M A BOY. é a frase completa para um menino.",
+              incorrect:
+                "Observe a estrutura I'M A ___. e escolha a palavra adequada.",
+              language: "pt-BR"
+            },
+ 
+            delivery: {
+              mechanic: "bubble-pop",
+              preferred: ["bubble-pop"],
+              allowImage: false,
+              allowAudio: true
+            },
+ 
+            metadata: {
+              title: "I'm a boy.",
+              sourceDifficulty: "Média",
+              preferredCatalogMechanic: "smart-sentence",
+              productionMechanic: "bubble-pop",
+              mechanicReason:
+                "Smart Sentence é a preferência de catálogo para completar estrutura. Enquanto o adaptador não está em produção, Bubble Pop mantém as três alternativas oficiais e o gabarito.",
+              sourceMedia:
+                "Imagem recomendada: menino.",
+              futureImageDescription:
+                "Ilustração simples de um menino como apoio contextual, sem texto.",
+              tags: ["official", "introductions", "boy", "EN1-M1-10"]
+            }
+          },
+ 
+          {
+            id: "EN1-M1-11",
+            subject: "Língua Inglesa",
+            year: 1,
+            module: 1,
+            skill: SKILLS.boyGirlSentence,
+            difficulty: "medium",
+ 
+            statement: "I'm a ___.",
+            instruction:
+              "Complete I'M A ___. para uma menina.",
+ 
+            contentLanguage: "en",
+            instructionLanguage: "pt-BR",
+            feedbackLanguage: "pt-BR",
+ 
+            audio: {
+              enabled: true,
+              text: "Complete I'm a blank para uma menina.",
+              language: "pt-BR",
+              role: "instruction"
+            },
+ 
+            alternatives: [
+              { id: "boy", text: "BOY", metadata: { tone: "green" } },
+              { id: "hello", text: "HELLO", metadata: { tone: "blue" } },
+              { id: "girl", text: "GIRL", metadata: { tone: "pink" } }
+            ],
+ 
+            answer: {
+              type: "single",
+              value: "girl"
+            },
+ 
+            feedback: {
+              correct:
+                "Perfeito! I'M A GIRL. é a frase completa para uma menina.",
+              incorrect:
+                "Observe a estrutura I'M A ___. e tente novamente.",
+              language: "pt-BR"
+            },
+ 
+            delivery: {
+              mechanic: "bubble-pop",
+              preferred: ["bubble-pop"],
+              allowImage: false,
+              allowAudio: true
+            },
+ 
+            metadata: {
+              title: "I'm a girl.",
+              sourceDifficulty: "Média",
+              preferredCatalogMechanic: "smart-sentence",
+              productionMechanic: "bubble-pop",
+              mechanicReason:
+                "Smart Sentence é a preferência de catálogo para completar estrutura. Bubble Pop preserva as alternativas oficiais até a mecânica estar registrada.",
+              sourceMedia:
+                "Imagem recomendada: menina.",
+              futureImageDescription:
+                "Ilustração simples de uma menina como apoio contextual, sem texto.",
+              tags: ["official", "introductions", "girl", "EN1-M1-11"]
+            }
+          }
+        ]
+      },
+ 
+      /* =====================================================
+         ETAPA 5 — GREETING CHALLENGE
+         EN1-M1-08 e EN1-M1-12
+         ===================================================== */
+      {
+        id: "en1-m1-step-05-challenge",
+        title: "Greeting Challenge",
+        mechanic: "bubble-pop",
+        skill: SKILLS.distinguishGreetingFarewell,
+ 
+        questions: [
+          {
+            id: "EN1-M1-08",
+            subject: "Língua Inglesa",
+            year: 1,
+            module: 1,
+            skill: SKILLS.greetingResponse,
+            difficulty: "medium",
+ 
+            statement: "Hello!",
+            instruction:
+              "Ouça e escolha uma resposta que também seja um cumprimento.",
+ 
+            contentLanguage: "en",
+            instructionLanguage: "pt-BR",
+            feedbackLanguage: "pt-BR",
+ 
+            audio: {
+              enabled: true,
+              text: "Hello!",
+              language: "en-US",
+              role: "instruction"
+            },
+ 
+            alternatives: [
+              { id: "goodbye", text: "GOODBYE!", metadata: { tone: "pink" } },
+              { id: "im-a-boy", text: "I'M A BOY.", metadata: { tone: "green" } },
+              { id: "hi", text: "HI!", metadata: { tone: "blue" } }
+            ],
+ 
+            answer: {
+              type: "single",
+              value: "hi"
+            },
+ 
+            feedback: {
+              correct:
+                "Muito bem! HI! também é um cumprimento.",
+              incorrect:
+                "Ouça HELLO! novamente e escolha outra forma de cumprimentar.",
+              language: "pt-BR"
+            },
+ 
+            delivery: {
+              mechanic: "bubble-pop",
+              preferred: ["bubble-pop"],
+              allowImage: false,
+              allowAudio: true
+            },
+ 
+            metadata: {
+              title: "Hello!",
+              sourceDifficulty: "Média",
+              preferredCatalogMechanic: "bubble-pop",
+              mechanicReason:
+                "Resposta rápida a estímulo oral curto, com três alternativas inequívocas.",
+              sourceMedia:
+                "Áudio EN recomendado: Hello!",
+              tags: ["official", "greetings", "response", "EN1-M1-08"]
+            }
+          },
+ 
+          {
+            id: "EN1-M1-12",
+            subject: "Língua Inglesa",
+            year: 1,
+            module: 1,
+            skill: SKILLS.distinguishGreetingFarewell,
+            difficulty: "hard",
+ 
+            statement: "Final Challenge",
+            instruction:
+              "Qual alternativa é uma despedida, e não um cumprimento?",
+ 
+            contentLanguage: "en",
+            instructionLanguage: "pt-BR",
+            feedbackLanguage: "pt-BR",
+ 
+            audio: {
+              enabled: true,
+              text: "Qual alternativa é uma despedida, e não um cumprimento?",
+              language: "pt-BR",
+              role: "instruction"
+            },
+ 
+            alternatives: [
+              { id: "goodbye", text: "GOODBYE", metadata: { tone: "blue" } },
               { id: "hello", text: "HELLO", metadata: { tone: "green" } },
-              { id: "bye", text: "BYE", metadata: { tone: "blue" } },
-              { id: "hi", text: "HI", metadata: { tone: "pink" } }
+              { id: "good-morning", text: "GOOD MORNING", metadata: { tone: "yellow" } }
             ],
-            answer: { type: "single", value: "bye" },
-            feedback: {
-              correct:
-                "Muito bem! BYE é uma palavra usada para se despedir.",
-              incorrect:
-                "Escute novamente. Qual palavra corresponde ao som que você ouviu?",
-              language: "pt-BR"
-            },
-            delivery: {
-              mechanic: "bubble-pop",
-              allowImage: false,
-              allowAudio: true
-            },
-            metadata: {
-              title: "Greetings",
-              estimatedSeconds: 30,
-              tags: ["greetings", "bye", "listening", "word-recognition"]
-            }
-          }
-        ]
-      },
-
-      /* =====================================================
-         ETAPA 2 — ANIMALS — DRAG & DROP
-         Repertório: DOG, CAT, BIRD, FISH
-         Associação palavra + áudio -> símbolo pictográfico
-         ===================================================== */
-      {
-        id: "eng1-m01-step-02-animals",
-        title: "Animals",
-        mechanic: "drag-drop",
-        skill: SKILLS.animals,
-
-        questions: [
-          {
-            id: "eng1-m01-animals-01",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-            skill: SKILLS.animals,
-            difficulty: "easy",
-            statement: "Animals",
-            instruction:
-              "Arraste cada palavra para a figura correspondente.",
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-            audio: {
-              enabled: true,
-              text: "Arraste cada palavra para a figura correspondente.",
-              language: "pt-BR",
-              role: "instruction"
-            },
-            alternatives: [
-              {
-                id: "dog",
-                text: "DOG",
-                audio: {
-                  enabled: true,
-                  text: "Dog",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "cat",
-                text: "CAT",
-                audio: {
-                  enabled: true,
-                  text: "Cat",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "bird",
-                text: "BIRD",
-                audio: {
-                  enabled: true,
-                  text: "Bird",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "fish",
-                text: "FISH",
-                audio: {
-                  enabled: true,
-                  text: "Fish",
-                  language: "en-US",
-                  role: "option"
-                }
-              }
-            ],
+ 
             answer: {
-              type: "pairs",
-              value: [
-                { source: "dog", target: "dog-picture" },
-                { source: "cat", target: "cat-picture" },
-                { source: "bird", target: "bird-picture" },
-                { source: "fish", target: "fish-picture" }
-              ]
+              type: "single",
+              value: "goodbye"
             },
+ 
             feedback: {
               correct:
-                "Excelente! Você relacionou cada animal à figura correta.",
+                "Missão concluída! GOODBYE é despedida; HELLO e GOOD MORNING são cumprimentos.",
               incorrect:
-                "Ouça as palavras novamente e observe as figuras antes de tentar outra vez.",
+                "Compare o uso das três expressões e tente mais uma vez.",
               language: "pt-BR"
             },
-            delivery: {
-              mechanic: "drag-drop",
-              allowImage: true,
-              allowAudio: true
-            },
-            metadata: {
-              title: "Animals",
-              layout: "grid",
-              shuffleItems: true,
-              shuffleTargets: false,
-              estimatedSeconds: 65,
-              targets: [
-                { id: "dog-picture", image: { src: PICTOGRAMS.dog, alt: "Ilustração de cachorro" } },
-                { id: "cat-picture", image: { src: PICTOGRAMS.cat, alt: "Ilustração de gato" } },
-                { id: "bird-picture", image: { src: PICTOGRAMS.bird, alt: "Ilustração de pássaro" } },
-                { id: "fish-picture", image: { src: PICTOGRAMS.fish, alt: "Ilustração de peixe" } }
-              ],
-              tags: ["animals", "association", "listening", "vector-illustration"]
-            }
-          }
-        ]
-      },
-
-      /* =====================================================
-         ETAPA 3 — COLORS — BUBBLE POP
-         Repertório: BLUE, RED, GREEN, YELLOW
-         Tons das bolhas NÃO indicam a resposta.
-         ===================================================== */
-      {
-        id: "eng1-m01-step-03-colors",
-        title: "Colors",
-        mechanic: "bubble-pop",
-        skill: SKILLS.colors,
-
-        questions: [
-          {
-            id: "eng1-m01-colors-01-blue",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-            skill: SKILLS.colors,
-            difficulty: "easy",
-            statement: "Colors",
-            instruction:
-              "Ouça e escolha a palavra que você ouviu.",
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-            audio: {
-              enabled: true,
-              text: "Blue",
-              language: "en-US",
-              role: "instruction"
-            },
-            alternatives: [
-              { id: "blue", text: "BLUE", metadata: { tone: "yellow" } },
-              { id: "red", text: "RED", metadata: { tone: "green" } },
-              { id: "green", text: "GREEN", metadata: { tone: "pink" } }
-            ],
-            answer: { type: "single", value: "blue" },
-            feedback: {
-              correct: "Muito bem! Você reconheceu BLUE.",
-              incorrect: "Escute novamente e compare as palavras.",
-              language: "pt-BR"
-            },
+ 
             delivery: {
               mechanic: "bubble-pop",
+              preferred: ["bubble-pop"],
               allowImage: false,
               allowAudio: true
             },
-            metadata: {
-              title: "Colors",
-              estimatedSeconds: 25,
-              tags: ["colors", "blue", "listening", "word-recognition"]
-            }
-          },
-
-          {
-            id: "eng1-m01-colors-02-red",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-            skill: SKILLS.colors,
-            difficulty: "easy",
-            statement: "Colors",
-            instruction:
-              "Ouça e escolha a palavra que você ouviu.",
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-            audio: {
-              enabled: true,
-              text: "Red",
-              language: "en-US",
-              role: "instruction"
-            },
-            alternatives: [
-              { id: "yellow", text: "YELLOW", metadata: { tone: "purple" } },
-              { id: "red", text: "RED", metadata: { tone: "aqua" } },
-              { id: "blue", text: "BLUE", metadata: { tone: "orange" } }
-            ],
-            answer: { type: "single", value: "red" },
-            feedback: {
-              correct: "Muito bem! Você reconheceu RED.",
-              incorrect: "Ouça mais uma vez e tente outra opção.",
-              language: "pt-BR"
-            },
-            delivery: {
-              mechanic: "bubble-pop",
-              allowImage: false,
-              allowAudio: true
-            },
-            metadata: {
-              title: "Colors",
-              estimatedSeconds: 25,
-              tags: ["colors", "red", "listening", "word-recognition"]
-            }
-          },
-
-          {
-            id: "eng1-m01-colors-03-green",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-            skill: SKILLS.colors,
-            difficulty: "easy",
-            statement: "Colors",
-            instruction:
-              "Ouça e escolha a palavra que você ouviu.",
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-            audio: {
-              enabled: true,
-              text: "Green",
-              language: "en-US",
-              role: "instruction"
-            },
-            alternatives: [
-              { id: "green", text: "GREEN", metadata: { tone: "pink" } },
-              { id: "yellow", text: "YELLOW", metadata: { tone: "blue" } },
-              { id: "red", text: "RED", metadata: { tone: "purple" } },
-              { id: "blue", text: "BLUE", metadata: { tone: "orange" } }
-            ],
-            answer: { type: "single", value: "green" },
-            feedback: {
-              correct: "Excelente! Você reconheceu GREEN.",
-              incorrect: "Escute novamente. Qual palavra combina com o som?",
-              language: "pt-BR"
-            },
-            delivery: {
-              mechanic: "bubble-pop",
-              allowImage: false,
-              allowAudio: true
-            },
-            metadata: {
-              title: "Colors",
-              estimatedSeconds: 30,
-              tags: ["colors", "green", "listening", "word-recognition"]
-            }
-          },
-
-          {
-            id: "eng1-m01-colors-04-yellow",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-            skill: SKILLS.colors,
-            difficulty: "easy",
-            statement: "Colors",
-            instruction:
-              "Ouça e escolha a palavra que você ouviu.",
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-            audio: {
-              enabled: true,
-              text: "Yellow",
-              language: "en-US",
-              role: "instruction"
-            },
-            alternatives: [
-              { id: "blue", text: "BLUE", metadata: { tone: "orange" } },
-              { id: "green", text: "GREEN", metadata: { tone: "pink" } },
-              { id: "yellow", text: "YELLOW", metadata: { tone: "blue" } },
-              { id: "red", text: "RED", metadata: { tone: "green" } }
-            ],
-            answer: { type: "single", value: "yellow" },
-            feedback: {
-              correct: "Muito bem! Você reconheceu YELLOW.",
-              incorrect: "Escute novamente e observe todas as palavras.",
-              language: "pt-BR"
-            },
-            delivery: {
-              mechanic: "bubble-pop",
-              allowImage: false,
-              allowAudio: true
-            },
-            metadata: {
-              title: "Colors",
-              estimatedSeconds: 30,
-              tags: ["colors", "yellow", "listening", "word-recognition"]
-            }
-          }
-        ]
-      },
-
-      /* =====================================================
-         ETAPA 4 — SCHOOL OBJECTS — DRAG & DROP
-         Repertório: BOOK, PENCIL, RULER, BAG
-         ===================================================== */
-      {
-        id: "eng1-m01-step-04-school-objects",
-        title: "School Objects",
-        mechanic: "drag-drop",
-        skill: SKILLS.school,
-
-        questions: [
-          {
-            id: "eng1-m01-school-objects-01",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-            skill: SKILLS.school,
-            difficulty: "easy",
-            statement: "School Objects",
-            instruction:
-              "Arraste cada palavra para a figura correspondente.",
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-            audio: {
-              enabled: true,
-              text: "Arraste cada palavra para a figura correspondente.",
-              language: "pt-BR",
-              role: "instruction"
-            },
-            alternatives: [
-              {
-                id: "book",
-                text: "BOOK",
-                audio: {
-                  enabled: true,
-                  text: "Book",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "pencil",
-                text: "PENCIL",
-                audio: {
-                  enabled: true,
-                  text: "Pencil",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "ruler",
-                text: "RULER",
-                audio: {
-                  enabled: true,
-                  text: "Ruler",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "bag",
-                text: "BAG",
-                audio: {
-                  enabled: true,
-                  text: "Bag",
-                  language: "en-US",
-                  role: "option"
-                }
-              }
-            ],
-            answer: {
-              type: "pairs",
-              value: [
-                { source: "book", target: "book-picture" },
-                { source: "pencil", target: "pencil-picture" },
-                { source: "ruler", target: "ruler-picture" },
-                { source: "bag", target: "bag-picture" }
-              ]
-            },
-            feedback: {
-              correct:
-                "Muito bem! Você relacionou cada objeto escolar à figura correta.",
-              incorrect:
-                "Ouça as palavras novamente e observe as figuras antes de tentar outra vez.",
-              language: "pt-BR"
-            },
-            delivery: {
-              mechanic: "drag-drop",
-              allowImage: true,
-              allowAudio: true
-            },
-            metadata: {
-              title: "School Objects",
-              layout: "grid",
-              shuffleItems: true,
-              shuffleTargets: false,
-              estimatedSeconds: 65,
-              targets: [
-                { id: "book-picture", image: { src: PICTOGRAMS.book, alt: "Ilustração de livro" } },
-                { id: "pencil-picture", image: { src: PICTOGRAMS.pencil, alt: "Ilustração de lápis" } },
-                { id: "ruler-picture", image: { src: PICTOGRAMS.ruler, alt: "Ilustração de régua" } },
-                { id: "bag-picture", image: { src: PICTOGRAMS.bag, alt: "Ilustração de mochila" } }
-              ],
-              tags: ["school-objects", "association", "listening", "vector-illustration"]
-            }
-          }
-        ]
-      },
-
-      /* =====================================================
-         ETAPA 5 — TOYS — BUBBLE POP
-         Repertório: BALL, KITE, CAR, TEDDY BEAR
-         ===================================================== */
-      {
-        id: "eng1-m01-step-05-toys",
-        title: "Toys",
-        mechanic: "bubble-pop",
-        skill: SKILLS.toys,
-
-        questions: [
-          {
-            id: "eng1-m01-toys-01-ball",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-            skill: SKILLS.toys,
-            difficulty: "easy",
-            statement: "Toys",
-            instruction:
-              "Ouça e escolha a palavra que você ouviu.",
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-            audio: {
-              enabled: true,
-              text: "Ball",
-              language: "en-US",
-              role: "instruction"
-            },
-            alternatives: [
-              { id: "ball", text: "BALL", metadata: { tone: "blue" } },
-              { id: "car", text: "CAR", metadata: { tone: "green" } },
-              { id: "kite", text: "KITE", metadata: { tone: "yellow" } }
-            ],
-            answer: { type: "single", value: "ball" },
-            feedback: {
-              correct: "Muito bem! Você reconheceu BALL.",
-              incorrect: "Escute novamente e compare as palavras.",
-              language: "pt-BR"
-            },
-            delivery: {
-              mechanic: "bubble-pop",
-              allowImage: false,
-              allowAudio: true
-            },
-            metadata: {
-              title: "Toys",
-              estimatedSeconds: 25,
-              tags: ["toys", "ball", "listening", "word-recognition"]
-            }
-          },
-
-          {
-            id: "eng1-m01-toys-02-kite",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-            skill: SKILLS.toys,
-            difficulty: "easy",
-            statement: "Toys",
-            instruction:
-              "Ouça e escolha a palavra que você ouviu.",
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-            audio: {
-              enabled: true,
-              text: "Kite",
-              language: "en-US",
-              role: "instruction"
-            },
-            alternatives: [
-              { id: "car", text: "CAR", metadata: { tone: "pink" } },
-              { id: "kite", text: "KITE", metadata: { tone: "blue" } },
-              { id: "teddy-bear", text: "TEDDY BEAR", metadata: { tone: "yellow" } }
-            ],
-            answer: { type: "single", value: "kite" },
-            feedback: {
-              correct: "Muito bem! Você reconheceu KITE.",
-              incorrect: "Ouça mais uma vez e tente outra opção.",
-              language: "pt-BR"
-            },
-            delivery: {
-              mechanic: "bubble-pop",
-              allowImage: false,
-              allowAudio: true
-            },
-            metadata: {
-              title: "Toys",
-              estimatedSeconds: 25,
-              tags: ["toys", "kite", "listening", "word-recognition"]
-            }
-          },
-
-          {
-            id: "eng1-m01-toys-03-car",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-            skill: SKILLS.toys,
-            difficulty: "easy",
-            statement: "Toys",
-            instruction:
-              "Ouça e escolha a palavra que você ouviu.",
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-            audio: {
-              enabled: true,
-              text: "Car",
-              language: "en-US",
-              role: "instruction"
-            },
-            alternatives: [
-              { id: "teddy-bear", text: "TEDDY BEAR", metadata: { tone: "yellow" } },
-              { id: "ball", text: "BALL", metadata: { tone: "green" } },
-              { id: "car", text: "CAR", metadata: { tone: "blue" } },
-              { id: "kite", text: "KITE", metadata: { tone: "pink" } }
-            ],
-            answer: { type: "single", value: "car" },
-            feedback: {
-              correct: "Excelente! Você reconheceu CAR.",
-              incorrect: "Escute novamente. Qual palavra corresponde ao som?",
-              language: "pt-BR"
-            },
-            delivery: {
-              mechanic: "bubble-pop",
-              allowImage: false,
-              allowAudio: true
-            },
-            metadata: {
-              title: "Toys",
-              estimatedSeconds: 30,
-              tags: ["toys", "car", "listening", "word-recognition"]
-            }
-          },
-
-          {
-            id: "eng1-m01-toys-04-teddy-bear",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-            skill: SKILLS.toys,
-            difficulty: "easy",
-            statement: "Toys",
-            instruction:
-              "Ouça e escolha a expressão que você ouviu.",
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-            audio: {
-              enabled: true,
-              text: "Teddy bear",
-              language: "en-US",
-              role: "instruction"
-            },
-            alternatives: [
-              { id: "ball", text: "BALL", metadata: { tone: "green" } },
-              { id: "teddy-bear", text: "TEDDY BEAR", metadata: { tone: "yellow" } },
-              { id: "kite", text: "KITE", metadata: { tone: "pink" } },
-              { id: "car", text: "CAR", metadata: { tone: "blue" } }
-            ],
-            answer: { type: "single", value: "teddy-bear" },
-            feedback: {
-              correct: "Muito bem! Você reconheceu TEDDY BEAR.",
-              incorrect: "Escute a expressão novamente e observe as opções com calma.",
-              language: "pt-BR"
-            },
-            delivery: {
-              mechanic: "bubble-pop",
-              allowImage: false,
-              allowAudio: true
-            },
-            metadata: {
-              title: "Toys",
-              estimatedSeconds: 30,
-              tags: ["toys", "teddy-bear", "listening", "phrase-recognition"]
-            }
-          }
-        ]
-      },
-
-      /* =====================================================
-         ETAPA 6 — FINAL CHALLENGE — DRAG & DROP
-         Sem vocabulário novo.
-         A criança organiza palavras já estudadas por significado.
-         ===================================================== */
-      {
-        id: "eng1-m01-step-06-final-challenge",
-        title: "Final Challenge",
-        mechanic: "drag-drop",
-        skill: SKILLS.review,
-
-        questions: [
-          {
-            id: "eng1-m01-final-01",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-            skill: SKILLS.review,
-            difficulty: "easy",
-            statement: "Final Challenge",
-            instruction:
-              "Arraste cada palavra para o símbolo do grupo ao qual ela pertence.",
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-            audio: {
-              enabled: true,
-              text: "Arraste cada palavra para o símbolo do grupo ao qual ela pertence.",
-              language: "pt-BR",
-              role: "instruction"
-            },
-            alternatives: [
-              {
-                id: "review-hello",
-                text: "HELLO",
-                audio: {
-                  enabled: true,
-                  text: "Hello",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "review-dog",
-                text: "DOG",
-                audio: {
-                  enabled: true,
-                  text: "Dog",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "review-blue",
-                text: "BLUE",
-                audio: {
-                  enabled: true,
-                  text: "Blue",
-                  language: "en-US",
-                  role: "option"
-                }
-              }
-            ],
-            answer: {
-              type: "pairs",
-              value: [
-                { source: "review-hello", target: "group-greeting" },
-                { source: "review-dog", target: "group-animal" },
-                { source: "review-blue", target: "group-color" }
-              ]
-            },
-            feedback: {
-              correct:
-                "Muito bem! Você organizou as palavras pelos seus significados.",
-              incorrect:
-                "Pense no significado de cada palavra e tente novamente.",
-              language: "pt-BR"
-            },
-            delivery: {
-              mechanic: "drag-drop",
-              allowImage: true,
-              allowAudio: true
-            },
+ 
             metadata: {
               title: "Final Challenge",
-              layout: "grid",
-              shuffleItems: true,
-              shuffleTargets: false,
-              estimatedSeconds: 50,
-              targets: [
-                { id: "group-greeting", image: { src: PICTOGRAMS.greeting, alt: "Grupo de cumprimentos" } },
-                { id: "group-animal", image: { src: PICTOGRAMS.paw, alt: "Grupo de animais" } },
-                { id: "group-color", image: { src: PICTOGRAMS.palette, alt: "Grupo de cores" } }
-              ],
-              tags: ["review", "classification", "semantic-fields"]
-            }
-          },
-
-          {
-            id: "eng1-m01-final-02",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-            skill: SKILLS.review,
-            difficulty: "easy",
-            statement: "Final Challenge",
-            instruction:
-              "Arraste cada palavra para o símbolo do grupo ao qual ela pertence.",
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-            audio: {
-              enabled: true,
-              text: "Arraste cada palavra para o símbolo do grupo ao qual ela pertence.",
-              language: "pt-BR",
-              role: "instruction"
-            },
-            alternatives: [
-              {
-                id: "review-book",
-                text: "BOOK",
-                audio: {
-                  enabled: true,
-                  text: "Book",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "review-ball",
-                text: "BALL",
-                audio: {
-                  enabled: true,
-                  text: "Ball",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "review-cat",
-                text: "CAT",
-                audio: {
-                  enabled: true,
-                  text: "Cat",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "review-red",
-                text: "RED",
-                audio: {
-                  enabled: true,
-                  text: "Red",
-                  language: "en-US",
-                  role: "option"
-                }
-              }
-            ],
-            answer: {
-              type: "pairs",
-              value: [
-                { source: "review-book", target: "group-school" },
-                { source: "review-ball", target: "group-toy" },
-                { source: "review-cat", target: "group-animal" },
-                { source: "review-red", target: "group-color" }
-              ]
-            },
-            feedback: {
-              correct:
-                "Excelente! Você completou o desafio final usando palavras de toda a missão.",
-              incorrect:
-                "Ouça as palavras e pense em qual grupo cada uma pertence.",
-              language: "pt-BR"
-            },
-            delivery: {
-              mechanic: "drag-drop",
-              allowImage: true,
-              allowAudio: true
-            },
-            metadata: {
-              title: "Final Challenge",
-              layout: "grid",
-              shuffleItems: true,
-              shuffleTargets: false,
-              estimatedSeconds: 60,
-              targets: [
-                { id: "group-school", image: { src: PICTOGRAMS.bag, alt: "Grupo de objetos escolares" } },
-                { id: "group-toy", image: { src: PICTOGRAMS.teddy, alt: "Grupo de brinquedos" } },
-                { id: "group-animal", image: { src: PICTOGRAMS.paw, alt: "Grupo de animais" } },
-                { id: "group-color", image: { src: PICTOGRAMS.palette, alt: "Grupo de cores" } }
-              ],
-              tags: ["review", "classification", "semantic-fields"]
+              sourceDifficulty: "Difícil",
+              preferredCatalogMechanic: "bubble-pop",
+              mechanicReason:
+                "Discriminação final entre três expressões curtas já trabalhadas no módulo.",
+              sourceMedia:
+                "Sem mídia obrigatória.",
+              tags: ["official", "greetings", "review", "EN1-M1-12"]
             }
           }
         ]
       }
     ]
   };
-
+ 
   window.DUDUQ_CONTENT
     .english
     .year1
@@ -1298,4 +997,3 @@
         moduleDefinition
       );
 })();
-
