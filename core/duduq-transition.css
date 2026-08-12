@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — TRANSITION
    Ponte visual World Fusion
-   Versão 1.4.8
+   Versão 1.4.9
    ========================================================= */
 
 .duduq-transition {
@@ -126,195 +126,49 @@ body.duduq-transition-lock {
 
 
 
-/* =========================================================
-   PORTAL MÁGICO — INTRO -> PRIMEIRA ATIVIDADE
 
-   Aplicado somente quando o index adiciona a classe
-   .is-intro-portal ao overlay da Transition durante o
-   handoff da Intro. Não altera as transições normais
-   entre atividades.
+
+/* =========================================================
+   INTRO -> PRIMEIRA ATIVIDADE — SUAVIZAÇÃO
+
+   A Intro permanece estável até a ponte assumir a tela.
+   A ponte recebe apenas uma suavização de duração via JS;
+   visualmente, esta rodada evita o portal e volta para uma
+   linguagem limpa, com esmaecimento mais gradual.
    ========================================================= */
 
-.duduq-transition.is-intro-portal::before {
-  inset: -5% !important;
+.duduq-transition.is-intro-soft::before {
   filter:
-    blur(7px)
-    saturate(.88)
-    brightness(1.03)
-    contrast(.95) !important;
-  transform: translateZ(0) scale(1.045) !important;
+    blur(5px)
+    saturate(.78)
+    brightness(.96)
+    contrast(.94) !important;
+  transform: translateZ(0) scale(1.02) !important;
 }
 
-.duduq-transition.is-intro-portal::after {
+.duduq-transition.is-intro-soft::after {
   background:
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(255, 255, 255, .08) 0 6%,
-      rgba(173, 231, 255, .12) 10%,
-      rgba(103, 187, 255, .22) 16%,
-      rgba(39, 107, 173, .28) 24%,
-      rgba(10, 31, 56, .52) 40%,
-      rgba(6, 18, 34, .76) 63%,
-      rgba(4, 12, 24, .90) 100%
-    ),
     linear-gradient(
       180deg,
-      rgba(10, 34, 56, .12),
-      rgba(7, 22, 38, .22)
-    ) !important;
-}
-
-.duduq-transition.is-intro-portal
-  .duduq-transition-stage {
-  background:
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(255, 255, 255, .10) 0 8%,
-      rgba(170, 227, 255, .10) 12%,
-      rgba(120, 196, 255, .06) 18%,
-      rgba(120, 196, 255, 0) 34%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, .01),
+      rgba(255, 255, 255, .02),
       rgba(255, 255, 255, 0)
     ) !important;
 }
 
-.duduq-transition.is-intro-portal
-  .duduq-transition-stage::before,
-.duduq-transition.is-intro-portal
-  .duduq-transition-stage::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-}
-
-.duduq-transition.is-intro-portal
-  .duduq-transition-stage::before {
-  z-index: 2;
-  left: 50%;
-  top: 50%;
-  width: min(44vmin, 420px);
-  height: min(44vmin, 420px);
-  border-radius: 999px;
-  transform: translate(-50%, -50%) scale(.88);
-
+.duduq-transition.is-intro-soft
+  .duduq-transition-stage {
   background:
-    radial-gradient(
-      circle,
-      rgba(255, 255, 255, .36) 0 10%,
-      rgba(225, 247, 255, .18) 14%,
-      rgba(147, 214, 255, .22) 20%,
-      rgba(79, 163, 255, .34) 31%,
-      rgba(43, 118, 214, .20) 41%,
-      rgba(43, 118, 214, 0) 63%
-    );
-
-  box-shadow:
-    0 0 0 2px rgba(214, 243, 255, .22) inset,
-    0 0 18px rgba(199, 241, 255, .18),
-    0 0 48px rgba(84, 169, 255, .20),
-    0 0 110px rgba(42, 123, 214, .14);
-
-  opacity: .96;
-  animation: duduqPortalPulse 1.35s ease-in-out infinite;
-}
-
-.duduq-transition.is-intro-portal
-  .duduq-transition-stage::after {
-  z-index: 1;
-  inset: -8%;
-
-  background:
-    radial-gradient(
-      ellipse at 50% 50%,
-      rgba(255, 255, 255, .12) 0 8%,
-      rgba(255, 255, 255, 0) 26%
-    ),
-    radial-gradient(
-      ellipse at 34% 50%,
-      rgba(190, 233, 255, .14) 0 10%,
-      rgba(190, 233, 255, 0) 32%
-    ),
-    radial-gradient(
-      ellipse at 66% 50%,
-      rgba(121, 199, 255, .12) 0 10%,
-      rgba(121, 199, 255, 0) 30%
-    ),
-    radial-gradient(
-      ellipse at 50% 31%,
-      rgba(255, 255, 255, .10) 0 8%,
-      rgba(255, 255, 255, 0) 28%
-    ),
-    radial-gradient(
-      ellipse at 50% 72%,
-      rgba(127, 194, 255, .10) 0 9%,
-      rgba(127, 194, 255, 0) 29%
-    );
-
-  filter: blur(18px);
-  opacity: .84;
-  transform: scale(1.02);
-  animation: duduqPortalSmoke 1.85s linear infinite;
-}
-
-.duduq-transition.is-intro-portal.is-covering
-  .duduq-transition-stage::before {
-  animation-duration: 1.15s;
-}
-
-.duduq-transition.is-intro-portal.is-covered
-  .duduq-transition-stage::before {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.duduq-transition.is-intro-portal.is-revealing
-  .duduq-transition-stage::before {
-  opacity: .78;
-}
-
-.duduq-transition.is-intro-portal.is-revealing
-  .duduq-transition-stage::after {
-  opacity: .56;
-}
-
-@keyframes duduqPortalPulse {
-  0%, 100% {
-    transform: translate(-50%, -50%) scale(.88);
-    opacity: .88;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.02);
-    opacity: 1;
-  }
-}
-
-@keyframes duduqPortalSmoke {
-  0% {
-    transform: scale(1.00) rotate(0deg);
-    opacity: .74;
-  }
-  50% {
-    transform: scale(1.04) rotate(2deg);
-    opacity: .88;
-  }
-  100% {
-    transform: scale(1.00) rotate(0deg);
-    opacity: .74;
-  }
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, .015),
+      rgba(255, 255, 255, 0)
+    ) !important;
 }
 
 @media (max-width: 720px) {
   .duduq-transition::before {
     inset: -2.5%;
     filter: blur(4px) saturate(.74) brightness(.92) contrast(.92);
-  }
-
-  .duduq-transition.is-intro-portal
-    .duduq-transition-stage::before {
-    width: min(56vmin, 320px);
-    height: min(56vmin, 320px);
   }
 }
 
