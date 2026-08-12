@@ -10,7 +10,7 @@
        ===================================================== -->
   <link rel="stylesheet" href="./core/duduq-theme.css?v=110">
   <link rel="stylesheet" href="./core/duduq-intro.css?v=130">
-  <link rel="stylesheet" href="./core/duduq-transition.css?v=148">
+  <link rel="stylesheet" href="./core/duduq-transition.css?v=149">
   <link rel="stylesheet" href="./core/duduq-completion.css?v=127">
   <link id="duduq-world-fusion-core-style" rel="stylesheet" href="./core/duduq-world-fusion.css?v=129">
 </head>
@@ -382,7 +382,7 @@
           transitionRoot
             ?.classList
             ?.add(
-              "is-intro-portal"
+              "is-intro-soft"
             );
 
           /*
@@ -400,7 +400,7 @@
             transitionRoot
               ?.classList
               ?.remove(
-                "is-intro-portal"
+                "is-intro-soft"
               );
 
             introElement
@@ -415,7 +415,7 @@
           try {
             const covered =
               await transition.cover({
-                coverDurationMs: 300,
+                coverDurationMs: 340,
                 soundEnabled: false
               });
 
@@ -424,9 +424,9 @@
             }
 
             /*
-             * A ponte já está totalmente opaca.
-             * Agora a Intro pode sair sem expor o frame
-             * intermediário da primeira atividade.
+             * A ponte já está completamente estabelecida.
+             * A Intro sai protegida e a primeira atividade
+             * entra com reveal mais lento e mais suave.
              */
             introApi
               ?.hide
@@ -436,14 +436,14 @@
               });
 
             await transition.reveal({
-              revealDurationMs: 300,
+              revealDurationMs: 520,
               stablePaintFrames: 2,
-              revealHoldFraction: .14,
+              revealHoldFraction: .20,
               soundEnabled: false
             });
           } catch (error) {
             console.error(
-              "[DuduQ Intro Portal] Falha na transição:",
+              "[DuduQ Intro Soft] Falha na transição:",
               error
             );
 
@@ -461,7 +461,7 @@
             transitionRoot
               ?.classList
               ?.remove(
-                "is-intro-portal"
+                "is-intro-soft"
               );
 
             introElement
