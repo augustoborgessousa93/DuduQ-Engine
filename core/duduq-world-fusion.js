@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.2.9
+   Versão 1.3.0
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.2.9";
+  const VERSION = "1.3.0";
   if (window.DuduQWorldFusion?.version === VERSION) return;
 
   const scriptUrl =
@@ -15,13 +15,14 @@
     new URL("./duduq-world-fusion.js", window.location.href).href;
 
   const stylesheetUrl = new URL(
-    "./duduq-world-fusion.css?v=130",
+    "./duduq-world-fusion.css?v=131",
     scriptUrl
   ).href;
 
   const managedDocuments = new WeakSet();
   const managedFrames = new WeakSet();
   const fullscreenBridgeDocuments = new WeakSet();
+  const literacySpeechDocuments = new WeakSet();
 
   function getStableFullscreenDocument(doc) {
     let currentWindow = doc?.defaultView;
@@ -185,6 +186,232 @@
     return "universal";
   }
 
+  /* =======================================================
+     PERFIL DE ALFABETIZAÇÃO — EI / 1º / 2º ANO
+
+     A faixa é detectada pela query ?ano= enviada pelos
+     adaptadores das mecânicas. Não alteramos conteúdo:
+     apenas adicionamos um atributo semântico ao <html>.
+     ======================================================= */
+
+  function normalizeProfileText(value) {
+    return String(value ?? "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim()
+      .toLowerCase();
+  }
+
+  function getDocumentParams(doc) {
+    try {
+      return new URLSearchParams(
+        doc?.defaultView?.location?.search || ""
+      );
+    } catch (_) {
+      return new URLSearchParams();
+    }
+  }
+
+  function isEarlyLiteracyProfile(doc) {
+    const params =
+      getDocumentParams(doc);
+
+    const rawYear =
+      params.get("ano") ||
+      params.get("year") ||
+      params.get("serie") ||
+      params.get("série") ||
+      doc?.documentElement?.getAttribute(
+        "data-duduq-ano-ativo"
+      ) ||
+      "";
+
+    const normalized =
+      normalizeProfileText(rawYear);
+
+    if (
+      /(^|[^0-9])1([^0-9]|$)/.test(normalized) ||
+      /(^|[^0-9])2([^0-9]|$)/.test(normalized)
+    ) {
+      return true;
+    }
+
+    return /educacao infantil|infantil|maternal|creche|pre[- ]?escola|pre[- ]?i|pre[- ]?ii/.test(
+      normalized
+    );
+  }
+
+  function syncLiteracyProfile(doc) {
+    if (!doc?.documentElement) return false;
+
+    const early =
+      isEarlyLiteracyProfile(doc);
+
+    doc.documentElement.setAttribute(
+      "data-duduq-literacy-early",
+      early ? "true" : "false"
+    );
+
+    return early;
+  }
+
+  function resolveBubbleSpeechLocale(doc) {
+    const params =
+      getDocumentParams(doc);
+
+    const explicit =
+      params.get("speechLocale") ||
+      params.get("speechLang") ||
+      params.get("contentLanguage");
+
+    if (explicit) {
+      return String(explicit);
+    }
+
+    const moduleId =
+      normalizeProfileText(
+        params.get("module") || ""
+      );
+
+    const source =
+      [
+        moduleId,
+        normalizeProfileText(
+          doc?.title || ""
+        )
+      ].join(" ");
+
+    if (
+      /english|ingles/.test(source)
+    ) {
+      return "en-US";
+    }
+
+    if (
+      /spanish|espanhol/.test(source)
+    ) {
+      return "es-ES";
+    }
+
+    return "pt-BR";
+  }
+
+  function speakBubbleLabel(doc, text) {
+    const value =
+      String(text || "").trim();
+
+    if (!value) return;
+
+    const view =
+      doc?.defaultView;
+
+    const synth =
+      view?.speechSynthesis ||
+      window.speechSynthesis;
+
+    const Utterance =
+      view?.SpeechSynthesisUtterance ||
+      window.SpeechSynthesisUtterance;
+
+    if (
+      !synth ||
+      !Utterance
+    ) {
+      return;
+    }
+
+    try {
+      synth.cancel();
+
+      const utterance =
+        new Utterance(value);
+
+      utterance.lang =
+        resolveBubbleSpeechLocale(doc);
+
+      utterance.rate = .84;
+      utterance.pitch = 1.02;
+      utterance.volume = 1;
+
+      /*
+       * Pequeno atraso evita que o efeito de estouro cubra
+       * o início da palavra, mas mantém a relação direta
+       * clique -> nome da bolha.
+       */
+      view?.setTimeout?.(
+        function () {
+          try {
+            synth.speak(utterance);
+          } catch (_) {}
+        },
+        90
+      );
+    } catch (_) {}
+  }
+
+  function installEarlyLiteracySpeech(doc) {
+    if (
+      !doc ||
+      literacySpeechDocuments.has(doc)
+    ) {
+      return;
+    }
+
+    literacySpeechDocuments.add(doc);
+
+    doc.addEventListener(
+      "click",
+      function (event) {
+        if (
+          doc.documentElement
+            ?.getAttribute(
+              "data-duduq-literacy-early"
+            ) !== "true"
+        ) {
+          return;
+        }
+
+        const target =
+          event.target instanceof
+          doc.defaultView.Element
+            ? event.target
+            : null;
+
+        const bubble =
+          target
+            ?.closest
+            ?.(".duduq-bp-bubble");
+
+        if (
+          !bubble ||
+          bubble.disabled ||
+          bubble.getAttribute(
+            "aria-disabled"
+          ) === "true"
+        ) {
+          return;
+        }
+
+        const label =
+          bubble
+            .querySelector(
+              ".duduq-bp-label"
+            )
+            ?.textContent
+            ?.trim();
+
+        if (!label) return;
+
+        speakBubbleLabel(
+          doc,
+          label
+        );
+      },
+      true
+    );
+  }
+
+
   function syncDocument(doc, frame) {
     if (!doc?.documentElement || !doc.body) return false;
 
@@ -198,6 +425,7 @@
     }
 
     doc.documentElement.classList.add("duduq-world-fusion");
+    syncLiteracyProfile(doc);
 
     doc.documentElement.setAttribute(
       "data-duduq-world-fusion-version",
@@ -241,6 +469,7 @@
     ensureStylesheet(doc);
     syncDocument(doc, frame);
     installFullscreenBridge(doc);
+    installEarlyLiteracySpeech(doc);
 
     if (managedDocuments.has(doc)) return true;
     managedDocuments.add(doc);
