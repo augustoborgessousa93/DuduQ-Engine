@@ -1,18 +1,23 @@
 /* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 01
    My First English Words
-   Versão 1.0.0
+   Versão 1.1.0 — BLOCO 01: GREETINGS
 
-   IMPORTANTE
-   - Este arquivo contém SOMENTE conteúdo e metadados pedagógicos.
+   STATUS DE PRODUÇÃO
+   - Este build contém somente a ETAPA 1, já em formato oficial.
+   - As próximas etapas serão acrescentadas após validação pedagógica
+     e funcional desta etapa.
    - Não altera Core, Shell, World Fusion ou mecânicas.
-   - Os códigos de habilidade ENG1-M01-* são códigos internos DuduQ.
+
+   CÓDIGOS PEDAGÓGICOS
+   - ENG1-M01-* são identificadores internos DuduQ.
+   - Não representam, por si só, códigos oficiais da BNCC.
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0";
+  const VERSION = "1.1.0";
 
   window.DUDUQ_CONTENT =
     window.DUDUQ_CONTENT || {};
@@ -33,6 +38,12 @@
     return;
   }
 
+  const GREETINGS_SKILL = Object.freeze({
+    code: "ENG1-M01-S01",
+    description:
+      "Reconhecer oralmente e visualmente cumprimentos simples em língua inglesa, associando som e forma escrita."
+  });
+
   const moduleDefinition = {
     id: "english-year-1-module-01",
     version: VERSION,
@@ -44,16 +55,35 @@
     title: "My First English Words",
 
     description:
-      "Primeira missão de vocabulário em língua inglesa, com reconhecimento auditivo e visual de cumprimentos, cores e palavras familiares.",
+      "Primeira missão de contato com palavras muito frequentes da língua inglesa, com prioridade para escuta, reconhecimento visual e associação entre som e escrita.",
 
-    estimatedMinutes: 10,
+    estimatedMinutes: 3,
 
     learningGoals: [
-      "Reconhecer cumprimentos e expressões simples em língua inglesa.",
-      "Identificar cores básicas em língua inglesa.",
-      "Classificar palavras familiares em categorias semânticas.",
-      "Associar som, palavra e significado em atividades curtas e lúdicas."
+      "Ouvir e reconhecer cumprimentos simples em língua inglesa.",
+      "Associar a palavra ouvida à sua forma escrita.",
+      "Diferenciar HELLO, HI, GOOD MORNING e BYE em situações de reconhecimento."
     ],
+
+    pedagogicalNotes: {
+      stage:
+        "Bloco 01 de produção do Módulo 01.",
+
+      literacyProfile:
+        "Para o 1º ano, o conteúdo pedagógico é apresentado em caixa alta pelo perfil de alfabetização do DuduQ.",
+
+      oralPriority:
+        "O áudio apresenta a palavra-alvo em inglês; o enunciado em português orienta apenas a ação da criança.",
+
+      semanticDecision:
+        "THANK YOU e PLEASE não entram nesta etapa porque são expressões de cortesia, não cumprimentos. Serão trabalhadas em momento semanticamente adequado.",
+
+      translationDecision:
+        "A tradução não aparece como alternativa. Quando útil, o feedback correto oferece uma explicação breve em português, evitando transformar a atividade em pareamento tradução-tradução.",
+
+      distractorDecision:
+        "As alternativas são palavras reais do mesmo repertório. A criança precisa discriminar o som ouvido e localizar a grafia correspondente."
+    },
 
     intro: {
       companyKicker: "UMA CRIAÇÃO DE",
@@ -79,36 +109,31 @@
     },
 
     activities: [
-      /* =====================================================
-         ETAPA 1 — GREETINGS — BUBBLE POP
-         ===================================================== */
       {
         id: "eng1-m01-step-01-greetings",
         title: "Greetings",
         mechanic: "bubble-pop",
 
-        skill: {
-          code: "ENG1-M01-S01",
-          description:
-            "Reconhecer cumprimentos e expressões sociais simples em língua inglesa."
-        },
+        skill: GREETINGS_SKILL,
 
         questions: [
+          /* -------------------------------------------------
+             QUESTÃO 1 — HELLO
+             Primeira exposição: 3 alternativas.
+             ------------------------------------------------- */
           {
-            id: "eng1-m01-greetings-01",
+            id: "eng1-m01-greetings-01-hello",
             subject: "Língua Inglesa",
             year: 1,
             module: 1,
 
-            skill: {
-              code: "ENG1-M01-S01",
-              description:
-                "Reconhecer cumprimentos e expressões sociais simples em língua inglesa."
-            },
+            skill: GREETINGS_SKILL,
 
             difficulty: "easy",
-            statement: "Hello",
-            instruction: "Escolha Hello.",
+
+            statement: "Greetings",
+            instruction:
+              "Ouça e escolha a palavra que você ouviu.",
 
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
@@ -124,23 +149,24 @@
             alternatives: [
               {
                 id: "hello",
-                text: "Hello",
-                metadata: { tone: "blue" }
+                text: "HELLO",
+                metadata: {
+                  tone: "blue"
+                }
               },
               {
                 id: "bye",
-                text: "Bye",
-                metadata: { tone: "pink" }
+                text: "BYE",
+                metadata: {
+                  tone: "pink"
+                }
               },
               {
-                id: "please",
-                text: "Please",
-                metadata: { tone: "green" }
-              },
-              {
-                id: "thank-you",
-                text: "Thank you",
-                metadata: { tone: "yellow" }
+                id: "hi",
+                text: "HI",
+                metadata: {
+                  tone: "green"
+                }
               }
             ],
 
@@ -150,14 +176,16 @@
             },
 
             feedback: {
-              correct: "Muito bem! Hello significa Olá.",
-              incorrect: "Escute novamente e tente outra opção.",
+              correct:
+                "Muito bem! HELLO é uma forma de cumprimentar alguém.",
+              incorrect:
+                "Escute novamente e escolha a palavra que corresponde ao som.",
               language: "pt-BR"
             },
 
             delivery: {
               mechanic: "bubble-pop",
-              allowImage: true,
+              allowImage: false,
               allowAudio: true
             },
 
@@ -167,26 +195,204 @@
               tags: [
                 "greetings",
                 "hello",
-                "oralidade"
+                "listening",
+                "word-recognition"
               ]
             }
           },
 
+          /* -------------------------------------------------
+             QUESTÃO 2 — HI
+             Mantém 3 alternativas, trocando a posição-alvo.
+             ------------------------------------------------- */
           {
-            id: "eng1-m01-greetings-02",
+            id: "eng1-m01-greetings-02-hi",
             subject: "Língua Inglesa",
             year: 1,
             module: 1,
 
-            skill: {
-              code: "ENG1-M01-S01",
-              description:
-                "Reconhecer cumprimentos e expressões sociais simples em língua inglesa."
-            },
+            skill: GREETINGS_SKILL,
 
             difficulty: "easy",
-            statement: "Bye",
-            instruction: "Escolha Bye.",
+
+            statement: "Greetings",
+            instruction:
+              "Ouça e escolha a palavra que você ouviu.",
+
+            contentLanguage: "en",
+            instructionLanguage: "pt-BR",
+            feedbackLanguage: "pt-BR",
+
+            audio: {
+              enabled: true,
+              text: "Hi",
+              language: "en-US",
+              role: "instruction"
+            },
+
+            alternatives: [
+              {
+                id: "bye",
+                text: "BYE",
+                metadata: {
+                  tone: "yellow"
+                }
+              },
+              {
+                id: "hi",
+                text: "HI",
+                metadata: {
+                  tone: "blue"
+                }
+              },
+              {
+                id: "hello",
+                text: "HELLO",
+                metadata: {
+                  tone: "green"
+                }
+              }
+            ],
+
+            answer: {
+              type: "single",
+              value: "hi"
+            },
+
+            feedback: {
+              correct:
+                "Muito bem! HI também é usado para cumprimentar alguém.",
+              incorrect:
+                "Ouça com atenção mais uma vez e tente novamente.",
+              language: "pt-BR"
+            },
+
+            delivery: {
+              mechanic: "bubble-pop",
+              allowImage: false,
+              allowAudio: true
+            },
+
+            metadata: {
+              title: "Greetings",
+              estimatedSeconds: 25,
+              tags: [
+                "greetings",
+                "hi",
+                "listening",
+                "word-recognition"
+              ]
+            }
+          },
+
+          /* -------------------------------------------------
+             QUESTÃO 3 — GOOD MORNING
+             Introduz frase curta. Agora 4 alternativas.
+             ------------------------------------------------- */
+          {
+            id: "eng1-m01-greetings-03-good-morning",
+            subject: "Língua Inglesa",
+            year: 1,
+            module: 1,
+
+            skill: GREETINGS_SKILL,
+
+            difficulty: "easy",
+
+            statement: "Greetings",
+            instruction:
+              "Ouça e escolha a expressão que você ouviu.",
+
+            contentLanguage: "en",
+            instructionLanguage: "pt-BR",
+            feedbackLanguage: "pt-BR",
+
+            audio: {
+              enabled: true,
+              text: "Good morning",
+              language: "en-US",
+              role: "instruction"
+            },
+
+            alternatives: [
+              {
+                id: "hi",
+                text: "HI",
+                metadata: {
+                  tone: "green"
+                }
+              },
+              {
+                id: "good-morning",
+                text: "GOOD MORNING",
+                metadata: {
+                  tone: "yellow"
+                }
+              },
+              {
+                id: "bye",
+                text: "BYE",
+                metadata: {
+                  tone: "pink"
+                }
+              },
+              {
+                id: "hello",
+                text: "HELLO",
+                metadata: {
+                  tone: "blue"
+                }
+              }
+            ],
+
+            answer: {
+              type: "single",
+              value: "good-morning"
+            },
+
+            feedback: {
+              correct:
+                "Excelente! GOOD MORNING é um cumprimento usado pela manhã.",
+              incorrect:
+                "Escute a expressão novamente e observe as palavras com calma.",
+              language: "pt-BR"
+            },
+
+            delivery: {
+              mechanic: "bubble-pop",
+              allowImage: false,
+              allowAudio: true
+            },
+
+            metadata: {
+              title: "Greetings",
+              estimatedSeconds: 30,
+              tags: [
+                "greetings",
+                "good-morning",
+                "listening",
+                "phrase-recognition"
+              ]
+            }
+          },
+
+          /* -------------------------------------------------
+             QUESTÃO 4 — BYE
+             Fechamento: 4 alternativas e revisão do repertório.
+             ------------------------------------------------- */
+          {
+            id: "eng1-m01-greetings-04-bye",
+            subject: "Língua Inglesa",
+            year: 1,
+            module: 1,
+
+            skill: GREETINGS_SKILL,
+
+            difficulty: "easy",
+
+            statement: "Greetings",
+            instruction:
+              "Ouça e escolha a palavra que você ouviu.",
 
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
@@ -202,23 +408,31 @@
             alternatives: [
               {
                 id: "good-morning",
-                text: "Good morning",
-                metadata: { tone: "yellow" }
-              },
-              {
-                id: "bye",
-                text: "Bye",
-                metadata: { tone: "blue" }
+                text: "GOOD MORNING",
+                metadata: {
+                  tone: "yellow"
+                }
               },
               {
                 id: "hello",
-                text: "Hello",
-                metadata: { tone: "green" }
+                text: "HELLO",
+                metadata: {
+                  tone: "green"
+                }
               },
               {
-                id: "please",
-                text: "Please",
-                metadata: { tone: "pink" }
+                id: "bye",
+                text: "BYE",
+                metadata: {
+                  tone: "blue"
+                }
+              },
+              {
+                id: "hi",
+                text: "HI",
+                metadata: {
+                  tone: "pink"
+                }
               }
             ],
 
@@ -228,747 +442,27 @@
             },
 
             feedback: {
-              correct: "Muito bem! Bye é usado para se despedir.",
-              incorrect: "Ouça a palavra mais uma vez e tente novamente.",
+              correct:
+                "Muito bem! BYE é uma palavra usada para se despedir.",
+              incorrect:
+                "Escute novamente. Qual palavra corresponde ao som que você ouviu?",
               language: "pt-BR"
             },
 
             delivery: {
               mechanic: "bubble-pop",
-              allowImage: true,
+              allowImage: false,
               allowAudio: true
             },
 
             metadata: {
               title: "Greetings",
-              estimatedSeconds: 25,
+              estimatedSeconds: 30,
               tags: [
                 "greetings",
                 "bye",
-                "oralidade"
-              ]
-            }
-          },
-
-          {
-            id: "eng1-m01-greetings-03",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-
-            skill: {
-              code: "ENG1-M01-S01",
-              description:
-                "Reconhecer cumprimentos e expressões sociais simples em língua inglesa."
-            },
-
-            difficulty: "easy",
-            statement: "Thank you",
-            instruction: "Escolha Thank you.",
-
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-
-            audio: {
-              enabled: true,
-              text: "Thank you",
-              language: "en-US",
-              role: "instruction"
-            },
-
-            alternatives: [
-              {
-                id: "thank-you",
-                text: "Thank you",
-                metadata: { tone: "blue" }
-              },
-              {
-                id: "hello",
-                text: "Hello",
-                metadata: { tone: "green" }
-              },
-              {
-                id: "bye",
-                text: "Bye",
-                metadata: { tone: "pink" }
-              },
-              {
-                id: "please",
-                text: "Please",
-                metadata: { tone: "yellow" }
-              }
-            ],
-
-            answer: {
-              type: "single",
-              value: "thank-you"
-            },
-
-            feedback: {
-              correct: "Excelente! Thank you significa Obrigado ou Obrigada.",
-              incorrect: "Escute novamente e observe as opções.",
-              language: "pt-BR"
-            },
-
-            delivery: {
-              mechanic: "bubble-pop",
-              allowImage: true,
-              allowAudio: true
-            },
-
-            metadata: {
-              title: "Greetings",
-              estimatedSeconds: 25,
-              tags: [
-                "greetings",
-                "thank-you",
-                "oralidade"
-              ]
-            }
-          }
-        ]
-      },
-
-      /* =====================================================
-         ETAPA 2 — ANIMALS AND FRUITS — DRAG & DROP
-         ===================================================== */
-      {
-        id: "eng1-m01-step-02-animals-fruits",
-        title: "Animals and Fruits",
-        mechanic: "drag-drop",
-
-        skill: {
-          code: "ENG1-M01-S02",
-          description:
-            "Classificar vocabulário familiar em categorias semânticas simples."
-        },
-
-        questions: [
-          {
-            id: "eng1-m01-categories-01",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-
-            skill: {
-              code: "ENG1-M01-S02",
-              description:
-                "Classificar vocabulário familiar em categorias semânticas simples."
-            },
-
-            difficulty: "easy",
-            statement: "Animals and Fruits",
-            instruction:
-              "Arraste cada palavra para a categoria correta.",
-
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-
-            audio: {
-              enabled: true,
-              text: "Animals and fruits",
-              language: "en-US",
-              role: "instruction"
-            },
-
-            alternatives: [
-              {
-                id: "dog",
-                text: "DOG",
-                audio: {
-                  enabled: true,
-                  text: "Dog",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "cat",
-                text: "CAT",
-                audio: {
-                  enabled: true,
-                  text: "Cat",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "bird",
-                text: "BIRD",
-                audio: {
-                  enabled: true,
-                  text: "Bird",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "apple",
-                text: "APPLE",
-                audio: {
-                  enabled: true,
-                  text: "Apple",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "banana",
-                text: "BANANA",
-                audio: {
-                  enabled: true,
-                  text: "Banana",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "orange",
-                text: "ORANGE",
-                audio: {
-                  enabled: true,
-                  text: "Orange",
-                  language: "en-US",
-                  role: "option"
-                }
-              }
-            ],
-
-            answer: {
-              type: "pairs",
-              value: [
-                { source: "dog", target: "animals" },
-                { source: "cat", target: "animals" },
-                { source: "bird", target: "animals" },
-                { source: "apple", target: "fruits" },
-                { source: "banana", target: "fruits" },
-                { source: "orange", target: "fruits" }
-              ]
-            },
-
-            feedback: {
-              correct:
-                "Excelente! Você separou os animais e as frutas corretamente.",
-              incorrect:
-                "Observe as categorias e tente organizar as palavras novamente.",
-              language: "pt-BR"
-            },
-
-            delivery: {
-              mechanic: "drag-drop",
-              allowImage: true,
-              allowAudio: true
-            },
-
-            metadata: {
-              title: "Animals and Fruits",
-              layout: "categories",
-              shuffleItems: true,
-              shuffleTargets: false,
-              estimatedSeconds: 60,
-
-              targets: [
-                {
-                  id: "animals",
-                  label: "ANIMALS"
-                },
-                {
-                  id: "fruits",
-                  label: "FRUITS"
-                }
-              ],
-
-              tags: [
-                "animals",
-                "fruits",
-                "classification"
-              ]
-            }
-          }
-        ]
-      },
-
-      /* =====================================================
-         ETAPA 3 — COLORS — BUBBLE POP
-         ===================================================== */
-      {
-        id: "eng1-m01-step-03-colors",
-        title: "Colors",
-        mechanic: "bubble-pop",
-
-        skill: {
-          code: "ENG1-M01-S03",
-          description:
-            "Reconhecer e nomear cores básicas em língua inglesa."
-        },
-
-        questions: [
-          {
-            id: "eng1-m01-colors-blue",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-
-            skill: {
-              code: "ENG1-M01-S03",
-              description:
-                "Reconhecer e nomear cores básicas em língua inglesa."
-            },
-
-            difficulty: "easy",
-            statement: "Blue",
-            instruction: "Escolha Blue.",
-
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-
-            audio: {
-              enabled: true,
-              text: "Blue",
-              language: "en-US",
-              role: "instruction"
-            },
-
-            alternatives: [
-              {
-                id: "blue",
-                text: "Blue",
-                metadata: { tone: "blue" }
-              },
-              {
-                id: "red",
-                text: "Red",
-                metadata: { tone: "pink" }
-              },
-              {
-                id: "green",
-                text: "Green",
-                metadata: { tone: "green" }
-              },
-              {
-                id: "yellow",
-                text: "Yellow",
-                metadata: { tone: "yellow" }
-              }
-            ],
-
-            answer: {
-              type: "single",
-              value: "blue"
-            },
-
-            feedback: {
-              correct: "Muito bem! Blue está correto.",
-              incorrect: "Observe novamente e tente outra cor.",
-              language: "pt-BR"
-            },
-
-            delivery: {
-              mechanic: "bubble-pop",
-              allowImage: true,
-              allowAudio: true
-            },
-
-            metadata: {
-              title: "Colors",
-              estimatedSeconds: 20,
-              tags: [
-                "colors",
-                "blue"
-              ]
-            }
-          },
-
-          {
-            id: "eng1-m01-colors-red",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-
-            skill: {
-              code: "ENG1-M01-S03",
-              description:
-                "Reconhecer e nomear cores básicas em língua inglesa."
-            },
-
-            difficulty: "easy",
-            statement: "Red",
-            instruction: "Escolha Red.",
-
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-
-            audio: {
-              enabled: true,
-              text: "Red",
-              language: "en-US",
-              role: "instruction"
-            },
-
-            alternatives: [
-              {
-                id: "blue",
-                text: "Blue",
-                metadata: { tone: "blue" }
-              },
-              {
-                id: "red",
-                text: "Red",
-                metadata: { tone: "pink" }
-              },
-              {
-                id: "green",
-                text: "Green",
-                metadata: { tone: "green" }
-              },
-              {
-                id: "yellow",
-                text: "Yellow",
-                metadata: { tone: "yellow" }
-              }
-            ],
-
-            answer: {
-              type: "single",
-              value: "red"
-            },
-
-            feedback: {
-              correct: "Muito bem! Red está correto.",
-              incorrect: "Escute novamente e tente outra cor.",
-              language: "pt-BR"
-            },
-
-            delivery: {
-              mechanic: "bubble-pop",
-              allowImage: true,
-              allowAudio: true
-            },
-
-            metadata: {
-              title: "Colors",
-              estimatedSeconds: 20,
-              tags: [
-                "colors",
-                "red"
-              ]
-            }
-          },
-
-          {
-            id: "eng1-m01-colors-green",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-
-            skill: {
-              code: "ENG1-M01-S03",
-              description:
-                "Reconhecer e nomear cores básicas em língua inglesa."
-            },
-
-            difficulty: "easy",
-            statement: "Green",
-            instruction: "Escolha Green.",
-
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-
-            audio: {
-              enabled: true,
-              text: "Green",
-              language: "en-US",
-              role: "instruction"
-            },
-
-            alternatives: [
-              {
-                id: "blue",
-                text: "Blue",
-                metadata: { tone: "blue" }
-              },
-              {
-                id: "red",
-                text: "Red",
-                metadata: { tone: "pink" }
-              },
-              {
-                id: "green",
-                text: "Green",
-                metadata: { tone: "green" }
-              },
-              {
-                id: "yellow",
-                text: "Yellow",
-                metadata: { tone: "yellow" }
-              }
-            ],
-
-            answer: {
-              type: "single",
-              value: "green"
-            },
-
-            feedback: {
-              correct: "Muito bem! Green está correto.",
-              incorrect: "Observe as opções e tente novamente.",
-              language: "pt-BR"
-            },
-
-            delivery: {
-              mechanic: "bubble-pop",
-              allowImage: true,
-              allowAudio: true
-            },
-
-            metadata: {
-              title: "Colors",
-              estimatedSeconds: 20,
-              tags: [
-                "colors",
-                "green"
-              ]
-            }
-          },
-
-          {
-            id: "eng1-m01-colors-yellow",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-
-            skill: {
-              code: "ENG1-M01-S03",
-              description:
-                "Reconhecer e nomear cores básicas em língua inglesa."
-            },
-
-            difficulty: "easy",
-            statement: "Yellow",
-            instruction: "Escolha Yellow.",
-
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-
-            audio: {
-              enabled: true,
-              text: "Yellow",
-              language: "en-US",
-              role: "instruction"
-            },
-
-            alternatives: [
-              {
-                id: "blue",
-                text: "Blue",
-                metadata: { tone: "blue" }
-              },
-              {
-                id: "red",
-                text: "Red",
-                metadata: { tone: "pink" }
-              },
-              {
-                id: "green",
-                text: "Green",
-                metadata: { tone: "green" }
-              },
-              {
-                id: "yellow",
-                text: "Yellow",
-                metadata: { tone: "yellow" }
-              }
-            ],
-
-            answer: {
-              type: "single",
-              value: "yellow"
-            },
-
-            feedback: {
-              correct: "Muito bem! Yellow está correto.",
-              incorrect: "Escute novamente e encontre Yellow.",
-              language: "pt-BR"
-            },
-
-            delivery: {
-              mechanic: "bubble-pop",
-              allowImage: true,
-              allowAudio: true
-            },
-
-            metadata: {
-              title: "Colors",
-              estimatedSeconds: 20,
-              tags: [
-                "colors",
-                "yellow"
-              ]
-            }
-          }
-        ]
-      },
-
-      /* =====================================================
-         ETAPA 4 — SCHOOL AND TOYS — DRAG & DROP
-         ===================================================== */
-      {
-        id: "eng1-m01-step-04-school-toys",
-        title: "School and Toys",
-        mechanic: "drag-drop",
-
-        skill: {
-          code: "ENG1-M01-S04",
-          description:
-            "Classificar palavras de objetos escolares e brinquedos em língua inglesa."
-        },
-
-        questions: [
-          {
-            id: "eng1-m01-categories-02",
-            subject: "Língua Inglesa",
-            year: 1,
-            module: 1,
-
-            skill: {
-              code: "ENG1-M01-S04",
-              description:
-                "Classificar palavras de objetos escolares e brinquedos em língua inglesa."
-            },
-
-            difficulty: "easy",
-            statement: "School and Toys",
-            instruction:
-              "Arraste cada palavra para a categoria correta.",
-
-            contentLanguage: "en",
-            instructionLanguage: "pt-BR",
-            feedbackLanguage: "pt-BR",
-
-            audio: {
-              enabled: true,
-              text: "School and toys",
-              language: "en-US",
-              role: "instruction"
-            },
-
-            alternatives: [
-              {
-                id: "book",
-                text: "BOOK",
-                audio: {
-                  enabled: true,
-                  text: "Book",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "pencil",
-                text: "PENCIL",
-                audio: {
-                  enabled: true,
-                  text: "Pencil",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "eraser",
-                text: "ERASER",
-                audio: {
-                  enabled: true,
-                  text: "Eraser",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "ball",
-                text: "BALL",
-                audio: {
-                  enabled: true,
-                  text: "Ball",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "doll",
-                text: "DOLL",
-                audio: {
-                  enabled: true,
-                  text: "Doll",
-                  language: "en-US",
-                  role: "option"
-                }
-              },
-              {
-                id: "kite",
-                text: "KITE",
-                audio: {
-                  enabled: true,
-                  text: "Kite",
-                  language: "en-US",
-                  role: "option"
-                }
-              }
-            ],
-
-            answer: {
-              type: "pairs",
-              value: [
-                { source: "book", target: "school" },
-                { source: "pencil", target: "school" },
-                { source: "eraser", target: "school" },
-                { source: "ball", target: "toys" },
-                { source: "doll", target: "toys" },
-                { source: "kite", target: "toys" }
-              ]
-            },
-
-            feedback: {
-              correct:
-                "Excelente! Você organizou os objetos escolares e os brinquedos corretamente.",
-              incorrect:
-                "Observe as categorias e tente organizar as palavras novamente.",
-              language: "pt-BR"
-            },
-
-            delivery: {
-              mechanic: "drag-drop",
-              allowImage: true,
-              allowAudio: true
-            },
-
-            metadata: {
-              title: "School and Toys",
-              layout: "categories",
-              shuffleItems: true,
-              shuffleTargets: false,
-              estimatedSeconds: 60,
-
-              targets: [
-                {
-                  id: "school",
-                  label: "SCHOOL"
-                },
-                {
-                  id: "toys",
-                  label: "TOYS"
-                }
-              ],
-
-              tags: [
-                "school-objects",
-                "toys",
-                "classification"
+                "listening",
+                "word-recognition"
               ]
             }
           }
@@ -984,26 +478,5 @@
       Object.freeze(
         moduleDefinition
       );
-
-  window.dispatchEvent(
-    new CustomEvent(
-      "duduq:content-ready",
-      {
-        detail: {
-          subject: "english",
-          year: 1,
-          module: 1,
-          id: moduleDefinition.id,
-          version: VERSION
-        }
-      }
-    )
-  );
-
-  console.info(
-    "[DuduQ Content] English Year 1 Module 01 carregado:",
-    VERSION
-  );
 })();
-
 
