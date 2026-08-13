@@ -1,24 +1,24 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.4.3
+   Versão 1.4.5
    ========================================================= */
- 
+
 (function () {
   "use strict";
- 
-  const VERSION = "1.4.3";
+
+  const VERSION = "1.4.5";
   if (window.DuduQWorldFusion?.version === VERSION) return;
- 
+
   const scriptUrl =
     document.currentScript?.src ||
     new URL("./duduq-world-fusion.js", window.location.href).href;
- 
+
   const stylesheetUrl = new URL(
-    "./duduq-world-fusion.css?v=143",
+    "./duduq-world-fusion.css?v=145",
     scriptUrl
   ).href;
- 
+
   const managedDocuments = new WeakSet();
   const managedFrames = new WeakSet();
   const fullscreenBridgeDocuments = new WeakSet();
@@ -27,14 +27,15 @@
   const speechWarmDocuments = new WeakSet();
   const feedbackScrollGuardDocuments = new WeakSet();
   const initialSpeechGateDocuments = new WeakSet();
+  const audioVisualStateDocuments = new WeakSet();
   const headerMascotSnapshots = new WeakMap();
   const mascotTrimPromises = new Map();
   const mascotTrimSources = new Map();
- 
+
   function getStableFullscreenDocument(doc) {
     let currentWindow = doc?.defaultView;
     let stableDocument = doc;
- 
+
     try {
       while (currentWindow?.parent && currentWindow.parent !== currentWindow) {
         currentWindow = currentWindow.parent;
@@ -43,25 +44,25 @@
     } catch (_) {
       /* Em origem diferente, preserva o documento mais alto acessível. */
     }
- 
+
     return stableDocument || doc;
   }
- 
+
   function isFullscreen(doc) {
     return Boolean(doc?.fullscreenElement || doc?.webkitFullscreenElement);
   }
- 
+
   function syncFullscreenControls(doc) {
     if (!doc?.documentElement) return;
- 
+
     const hostDocument = getStableFullscreenDocument(doc);
     const active = isFullscreen(hostDocument);
- 
+
     doc.documentElement.toggleAttribute(
       "data-duduq-parent-fullscreen",
       active
     );
- 
+
     doc.querySelectorAll(".duduq-engine-fullscreen-button").forEach(
       function (button) {
         button.setAttribute("aria-pressed", String(active));
@@ -69,46 +70,46 @@
           "aria-label",
           active ? "Sair da tela cheia" : "Abrir em tela cheia"
         );
- 
+
         const label = button.querySelector(".duduq-engine-fullscreen-label");
         const icon = button.querySelector(".duduq-engine-fullscreen-icon");
- 
+
         const nextLabel = active ? "Sair" : "Tela cheia";
         const nextIcon = active ? "🗗" : "⛶";
- 
+
         if (label && label.textContent !== nextLabel) {
           label.textContent = nextLabel;
         }
- 
+
         if (icon && icon.textContent !== nextIcon) {
           icon.textContent = nextIcon;
         }
       }
     );
   }
- 
+
   function installFullscreenBridge(doc) {
     if (!doc || fullscreenBridgeDocuments.has(doc)) {
       syncFullscreenControls(doc);
       return;
     }
- 
+
     fullscreenBridgeDocuments.add(doc);
- 
+
     const hostDocument = getStableFullscreenDocument(doc);
- 
+
     doc.addEventListener(
       "click",
       function (event) {
         const button = event.target?.closest?.(
           ".duduq-engine-fullscreen-button"
         );
- 
+
         if (!button) return;
- 
+
         event.preventDefault();
         event.stopImmediatePropagation();
- 
+
         try {
           const hostApi = doc.defaultView?.parent?.DuduQFullscreen;
           const operation = hostApi?.toggle
@@ -124,7 +125,7 @@
                   }) ||
                   hostDocument.documentElement.webkitRequestFullscreen?.()
                 );
- 
+
           Promise.resolve(operation)
             .catch(function () {})
             .finally(function () {
@@ -136,24 +137,24 @@
       },
       true
     );
- 
+
     const refresh = function () {
       syncFullscreenControls(doc);
       if (hostDocument !== doc) syncFullscreenControls(hostDocument);
     };
- 
+
     hostDocument.addEventListener("fullscreenchange", refresh);
     hostDocument.addEventListener("webkitfullscreenchange", refresh);
     syncFullscreenControls(doc);
   }
- 
+
   function getInlineWorldImage(doc) {
     const body = doc.body;
     if (!body) return "";
- 
+
     const inline = String(body.style.backgroundImage || "").trim();
     if (inline && inline !== "none") return inline;
- 
+
     try {
       const current =
         doc.documentElement.style
@@ -161,18 +162,18 @@
           .trim() ||
         doc.defaultView?.getComputedStyle(body).backgroundImage ||
         "";
- 
+
       return current !== "none" ? current : "";
     } catch (_) {
       return "";
     }
   }
- 
+
   function detectMechanic(doc, frame) {
     const source = String(
       frame?.getAttribute("src") || ""
     ).toLowerCase();
- 
+
     const matches = [
       ["bubble-pop", ".duduq-bp-root"],
       ["drag-drop", ".duduq-dd-root, .duduq-udd-root"],
@@ -183,51 +184,51 @@
       ["word-search", ".duduq-ws-root"],
       ["target-shooter", ".duduq-ts-root"]
     ];
- 
+
     for (const [name, selector] of matches) {
       if (source.includes(name) || doc.querySelector(selector)) {
         return name;
       }
     }
- 
+
     return "universal";
   }
- 
+
   /* =======================================================
      PERFIL DE ALFABETIZAÇÃO — EI / 1º / 2º ANO
- 
+
      A faixa é detectada pela query ?ano= enviada pelos
      adaptadores das mecânicas. Não alteramos conteúdo:
      apenas adicionamos um atributo semântico ao <html>.
      ======================================================= */
- 
+
   /* =======================================================
      SPEECH SYNTHESIS — PRÉ-AQUECIMENTO
- 
+
      O autoplay das mecânicas usa Web Speech API. Em alguns
      navegadores, a primeira chamada a speechSynthesis.speak()
      pode esperar o carregamento das vozes do sistema.
- 
+
      Como o World Fusion é carregado ainda durante a Intro,
      preparamos as vozes antes de a primeira atividade nascer.
      Também repetimos a preparação dentro de cada iframe.
      ======================================================= */
- 
+
   function touchSpeechEngine(doc) {
     const view =
       doc?.defaultView;
- 
+
     const synth =
       view?.speechSynthesis;
- 
+
     if (!synth) {
       return [];
     }
- 
+
     try {
       synth.resume?.();
     } catch (_) {}
- 
+
     try {
       return Array.from(
         synth.getVoices?.() || []
@@ -236,33 +237,33 @@
       return [];
     }
   }
- 
+
   function installSpeechWarmup(doc) {
     if (!doc) return;
- 
+
     touchSpeechEngine(doc);
- 
+
     if (
       speechWarmDocuments.has(doc)
     ) {
       return;
     }
- 
+
     speechWarmDocuments.add(doc);
- 
+
     const view =
       doc.defaultView;
- 
+
     const synth =
       view?.speechSynthesis;
- 
+
     if (!synth) return;
- 
+
     const refresh =
       function () {
         touchSpeechEngine(doc);
       };
- 
+
     /*
      * Chrome/Edge podem popular a lista de vozes alguns
      * milissegundos depois do carregamento do documento.
@@ -273,17 +274,17 @@
         refresh
       );
     } catch (_) {}
- 
+
     view?.setTimeout?.(
       refresh,
       40
     );
- 
+
     view?.setTimeout?.(
       refresh,
       140
     );
- 
+
     /*
      * A primeira interação do aluno também reabre/resume
      * o mecanismo de fala. Não produz som.
@@ -296,14 +297,14 @@
         passive: true
       }
     );
- 
+
     doc.addEventListener(
       "keydown",
       refresh,
       true
     );
   }
- 
+
   function normalizeProfileText(value) {
     return String(value ?? "")
       .normalize("NFD")
@@ -311,7 +312,7 @@
       .trim()
       .toLowerCase();
   }
- 
+
   function getDocumentParams(doc) {
     try {
       return new URLSearchParams(
@@ -321,11 +322,11 @@
       return new URLSearchParams();
     }
   }
- 
+
   function isEarlyLiteracyProfile(doc) {
     const params =
       getDocumentParams(doc);
- 
+
     const rawYear =
       params.get("ano") ||
       params.get("year") ||
@@ -335,10 +336,10 @@
         "data-duduq-ano-ativo"
       ) ||
       "";
- 
+
     const normalized =
       normalizeProfileText(rawYear);
- 
+
     if (
       /(^|[^0-9])1([^0-9]|$)/.test(normalized) ||
       /(^|[^0-9])2([^0-9]|$)/.test(normalized) ||
@@ -346,29 +347,29 @@
     ) {
       return true;
     }
- 
+
     return /educacao infantil|infantil|maternal|creche|pre[- ]?escola|pre[- ]?i|pre[- ]?ii/.test(
       normalized
     );
   }
- 
+
   function syncLiteracyProfile(doc) {
     if (!doc?.documentElement) return false;
- 
+
     const early =
       isEarlyLiteracyProfile(doc);
- 
+
     doc.documentElement.setAttribute(
       "data-duduq-literacy-early",
       early ? "true" : "false"
     );
- 
+
     return early;
   }
- 
+
   function syncBubbleLabelSemantics(doc) {
     if (!doc?.querySelectorAll) return;
- 
+
     doc
       .querySelectorAll(
         ".duduq-bp-label"
@@ -379,14 +380,14 @@
             String(
               label.textContent || ""
             ).trim();
- 
+
           if (!text) {
             label.removeAttribute(
               "data-duduq-label-kind"
             );
             return;
           }
- 
+
           label.setAttribute(
             "data-duduq-label-kind",
             /\s/.test(text)
@@ -396,16 +397,16 @@
         }
       );
   }
- 
+
   /* =======================================================
      BUBBLE POP — FIT DINÂMICO PARA PALAVRA ÚNICA
- 
+
      O tamanho base permanece confortável. Só reduzimos a
      palavra específica que realmente ultrapassa a largura
      útil da bolha. O limite inferior de 20px evita texto
      pequeno demais para alfabetização.
      ======================================================= */
- 
+
   function fitEarlyLiteracyBubbleWords(doc) {
     if (
       !doc?.documentElement ||
@@ -415,12 +416,12 @@
     ) {
       return;
     }
- 
+
     const view =
       doc.defaultView;
- 
+
     if (!view) return;
- 
+
     view.requestAnimationFrame(
       function () {
         doc
@@ -433,29 +434,29 @@
                 label.closest(
                   ".duduq-bp-bubble"
                 );
- 
+
               if (!bubble) return;
- 
+
               let size = 27;
- 
+
               label.style.setProperty(
                 "--duduq-bp-word-fit-size",
                 `${size}px`
               );
- 
+
               const fits = function () {
                 return (
                   label.scrollWidth <=
                   label.clientWidth + 1
                 );
               };
- 
+
               while (
                 !fits() &&
                 size > 20
               ) {
                 size -= 1;
- 
+
                 label.style.setProperty(
                   "--duduq-bp-word-fit-size",
                   `${size}px`
@@ -466,17 +467,17 @@
       }
     );
   }
- 
+
   /* =======================================================
      BUBBLE POP — FIT DINÂMICO PARA FRASES CURTAS
- 
+
      Frases continuam podendo quebrar SOMENTE entre palavras.
      O ajuste mede overflow horizontal e vertical e reduz
      apenas a frase específica até o mínimo pedagógico de 18px.
      Assim GOOD AFTERNOON não perde letras nem obriga a reduzir
      HELLO, BOY, GIRL e demais alvos curtos.
      ======================================================= */
- 
+
   function fitEarlyLiteracyBubblePhrases(doc) {
     if (
       !doc?.documentElement ||
@@ -486,10 +487,10 @@
     ) {
       return;
     }
- 
+
     const view = doc.defaultView;
     if (!view) return;
- 
+
     view.requestAnimationFrame(
       function () {
         doc
@@ -500,30 +501,30 @@
             function (label) {
               const bubble = label.closest(".duduq-bp-bubble");
               if (!bubble) return;
- 
+
               let size = 25;
               const minSize = 18;
- 
+
               label.style.setProperty(
                 "--duduq-bp-phrase-fit-size",
                 `${size}px`
               );
- 
+
               const fits = function () {
                 const horizontal =
                   label.scrollWidth <= label.clientWidth + 1;
- 
+
                 const maxHeight = Math.max(
                   58,
                   bubble.clientHeight * .72
                 );
- 
+
                 const vertical =
                   label.scrollHeight <= maxHeight + 1;
- 
+
                 return horizontal && vertical;
               };
- 
+
               while (!fits() && size > minSize) {
                 size -= 1;
                 label.style.setProperty(
@@ -536,7 +537,7 @@
       }
     );
   }
- 
+
   function installEarlyLiteracyFit(doc) {
     if (
       !doc ||
@@ -546,12 +547,12 @@
       fitEarlyLiteracyBubblePhrases(doc);
       return;
     }
- 
+
     literacyFitDocuments.add(doc);
- 
+
     const view =
       doc.defaultView;
- 
+
     view?.addEventListener?.(
       "resize",
       function () {
@@ -560,29 +561,29 @@
       },
       { passive: true }
     );
- 
+
     fitEarlyLiteracyBubbleWords(doc);
     fitEarlyLiteracyBubblePhrases(doc);
   }
- 
+
   function resolveBubbleSpeechLocale(doc) {
     const params =
       getDocumentParams(doc);
- 
+
     const explicit =
       params.get("speechLocale") ||
       params.get("speechLang") ||
       params.get("contentLanguage");
- 
+
     if (explicit) {
       return String(explicit);
     }
- 
+
     const moduleId =
       normalizeProfileText(
         params.get("module") || ""
       );
- 
+
     const source =
       [
         moduleId,
@@ -590,68 +591,68 @@
           doc?.title || ""
         )
       ].join(" ");
- 
+
     if (
       /english|ingles/.test(source)
     ) {
       return "en-US";
     }
- 
+
     if (
       /spanish|espanhol/.test(source)
     ) {
       return "es-ES";
     }
- 
+
     return "pt-BR";
   }
- 
+
   function speakBubbleLabel(doc, text) {
     const value =
       String(text || "").trim();
- 
+
     if (!value) return;
- 
+
     const view =
       doc?.defaultView;
- 
+
     const synth =
       view?.speechSynthesis ||
       window.speechSynthesis;
- 
+
     const Utterance =
       view?.SpeechSynthesisUtterance ||
       window.SpeechSynthesisUtterance;
- 
+
     if (
       !synth ||
       !Utterance
     ) {
       return;
     }
- 
+
     try {
       const locale =
         resolveBubbleSpeechLocale(doc);
- 
+
       installSpeechWarmup(doc);
- 
+
       const hadActiveSpeech =
         Boolean(
           synth.speaking ||
           synth.pending
         );
- 
+
       if (hadActiveSpeech) {
         synth.cancel();
       }
- 
+
       const utterance =
         new Utterance(value);
- 
+
       utterance.lang =
         locale;
- 
+
       /*
        * Se as vozes já estiverem disponíveis, fixamos uma
        * voz do mesmo idioma para reduzir o tempo de seleção
@@ -659,7 +660,7 @@
        */
       const voices =
         touchSpeechEngine(doc);
- 
+
       const exactVoice =
         voices.find(
           function (voice) {
@@ -672,12 +673,12 @@
             );
           }
         );
- 
+
       const languageRoot =
         String(locale)
           .toLowerCase()
           .split("-")[0];
- 
+
       const languageVoice =
         voices.find(
           function (voice) {
@@ -690,16 +691,16 @@
               );
           }
         );
- 
+
       utterance.voice =
         exactVoice ||
         languageVoice ||
         null;
- 
+
       utterance.rate = .88;
       utterance.pitch = 1.02;
       utterance.volume = 1;
- 
+
       const speak =
         function () {
           try {
@@ -709,7 +710,7 @@
             );
           } catch (_) {}
         };
- 
+
       /*
        * Só esperamos alguns milissegundos quando realmente
        * houve uma fala anterior a ser cancelada. O atraso
@@ -726,7 +727,7 @@
       }
     } catch (_) {}
   }
- 
+
   function installEarlyLiteracySpeech(doc) {
     if (
       !doc ||
@@ -734,9 +735,9 @@
     ) {
       return;
     }
- 
+
     literacySpeechDocuments.add(doc);
- 
+
     doc.addEventListener(
       "click",
       function (event) {
@@ -748,18 +749,18 @@
         ) {
           return;
         }
- 
+
         const target =
           event.target instanceof
           doc.defaultView.Element
             ? event.target
             : null;
- 
+
         const bubble =
           target
             ?.closest
             ?.(".duduq-bp-bubble");
- 
+
         if (
           !bubble ||
           bubble.disabled ||
@@ -769,7 +770,7 @@
         ) {
           return;
         }
- 
+
         const label =
           bubble
             .querySelector(
@@ -777,9 +778,9 @@
             )
             ?.textContent
             ?.trim();
- 
+
         if (!label) return;
- 
+
         speakBubbleLabel(
           doc,
           label
@@ -788,26 +789,26 @@
       true
     );
   }
- 
- 
+
+
   /* =======================================================
      TARGET SHOOTER — CENTRALIZAÇÃO GEOMÉTRICA
- 
+
      Mede o conjunto visível uma vez por largura de arena e
      calcula o deslocamento horizontal necessário para que o
      grupo fique centralizado, sem alterar os slots pedagógicos
      nem as animações próprias da mecânica.
      ======================================================= */
- 
+
   function syncTargetShooterCentering(doc) {
     const arena =
       doc?.querySelector?.(".duduq-ts-arena");
- 
+
     if (!arena) return;
- 
+
     const view = doc.defaultView;
     if (!view) return;
- 
+
     view.requestAnimationFrame(function () {
       const targets = Array.from(
         arena.querySelectorAll(".duduq-ts-target")
@@ -819,7 +820,7 @@
           target.getClientRects().length > 0
         );
       });
- 
+
       if (!targets.length) {
         arena.style.removeProperty(
           "--duduq-ts-center-offset"
@@ -829,12 +830,12 @@
         );
         return;
       }
- 
+
       const arenaRect = arena.getBoundingClientRect();
       const widthKey = String(
         Math.round(arenaRect.width)
       );
- 
+
       if (
         arena.getAttribute(
           "data-duduq-center-width"
@@ -845,45 +846,45 @@
       ) {
         return;
       }
- 
+
       /* Mede a geometria original, sem acumular offsets. */
       arena.style.setProperty(
         "--duduq-ts-center-offset",
         "0px"
       );
- 
+
       const boxes = targets.map(function (target) {
         return target.getBoundingClientRect();
       });
- 
+
       const minLeft = Math.min(
         ...boxes.map((box) => box.left)
       );
       const maxRight = Math.max(
         ...boxes.map((box) => box.right)
       );
- 
+
       const groupCenter =
         (minLeft + maxRight) / 2;
       const arenaCenter =
         arenaRect.left + arenaRect.width / 2;
- 
+
       const desired =
         arenaCenter - groupCenter;
- 
+
       const safeInset = 18;
       const minAllowed =
         arenaRect.left + safeInset - minLeft;
       const maxAllowed =
         arenaRect.right - safeInset - maxRight;
- 
+
       const delta = Math.round(
         Math.max(
           minAllowed,
           Math.min(maxAllowed, desired)
         )
       );
- 
+
       arena.style.setProperty(
         "--duduq-ts-center-offset",
         `${delta}px`
@@ -894,21 +895,21 @@
       );
     });
   }
- 
+
   /* =======================================================
      FEEDBACK SEM SALTO DE VIEWPORT
- 
+
      O Lesson Engine embutido nas mecânicas chama
      feedbackRef.current.scrollIntoView() quando feedbackState
      muda. Em um módulo encaixado na viewport, essa rolagem é
      indesejada: o feedback já possui uma faixa reservada e o
      movimento acaba cortando o topo do cabeçalho.
- 
+
      Interceptamos SOMENTE scrollIntoView chamado no bloco
      .duduq-engine-feedback. Qualquer outro scrollIntoView do
      documento continua funcionando normalmente.
      ======================================================= */
- 
+
   function installFeedbackScrollGuard(doc) {
     if (
       !doc?.defaultView ||
@@ -916,21 +917,21 @@
     ) {
       return;
     }
- 
+
     const ElementCtor = doc.defaultView.Element;
     const prototype = ElementCtor?.prototype;
     const original = prototype?.scrollIntoView;
- 
+
     if (
       !prototype ||
       typeof original !== "function"
     ) {
       return;
     }
- 
+
     try {
       const guardFlag = "__duduqFeedbackScrollGuard140";
- 
+
       if (!prototype[guardFlag]) {
         Object.defineProperty(
           prototype,
@@ -948,12 +949,12 @@
                   return;
                 }
               } catch (_) {}
- 
+
               return original.apply(this, args);
             }
           }
         );
- 
+
         Object.defineProperty(
           prototype,
           guardFlag,
@@ -963,18 +964,18 @@
           }
         );
       }
- 
+
       feedbackScrollGuardDocuments.add(doc);
     } catch (_) {
       /* Navegadores que bloqueiem patch de prototype seguem sem falhar. */
     }
   }
- 
- 
- 
+
+
+
   /* =======================================================
      MASCOTE PERSISTENTE — CLONE DO COMPONENTE NATIVO
- 
+
      O Lesson Engine remove o DuduQ React durante retry/success.
      Em vez de tentar reconstruir o enquadramento do PNG manualmente,
      guardamos uma cópia do próprio componente nativo enquanto ele
@@ -982,10 +983,10 @@
      vazio. Assim tamanho, crop, animação e proporção permanecem
      idênticos em todas as mecânicas que usam o Lesson Engine.
      ======================================================= */
- 
+
   function resolveHeaderMascotSource(doc) {
     const view = doc?.defaultView;
- 
+
     try {
       return (
         view?.DUDUQ_ASSETS?.mascots?.idle ||
@@ -1003,31 +1004,31 @@
       );
     }
   }
- 
+
   function sanitizeMascotSnapshot(node) {
     const clone = node?.cloneNode?.(true);
     if (!clone) return null;
- 
+
     clone.setAttribute("aria-hidden", "true");
     clone.removeAttribute("aria-label");
     clone.classList.add("duduq-world-header-mascot-clone");
- 
+
     clone.querySelectorAll?.("[id]").forEach(
       function (element) {
         element.removeAttribute("id");
       }
     );
- 
+
     clone.querySelectorAll?.("img").forEach(
       function (image) {
         image.alt = "";
         image.draggable = false;
       }
     );
- 
+
     return clone;
   }
- 
+
   function createEmergencyHeaderMascot(doc, source) {
     const figure = doc.createElement("figure");
     figure.className =
@@ -1037,20 +1038,20 @@
     figure.setAttribute("data-placeholder", "false");
     figure.setAttribute("data-reduced-motion", "false");
     figure.setAttribute("aria-hidden", "true");
- 
+
     const body = doc.createElement("div");
     body.className = "duduq-mascot-body";
- 
+
     const image = doc.createElement("img");
     image.src = source;
     image.alt = "";
     image.draggable = false;
- 
+
     body.appendChild(image);
     figure.appendChild(body);
     return figure;
   }
- 
+
   function findDirectNativeMascot(slot) {
     return Array.from(slot?.children || []).find(
       function (child) {
@@ -1058,18 +1059,18 @@
       }
     ) || null;
   }
- 
+
   function syncHeaderMascotFallback(doc) {
     if (!doc?.querySelectorAll) return;
- 
+
     const source = resolveHeaderMascotSource(doc);
- 
+
     doc.querySelectorAll(
       ".duduq-engine-header-mascot-slot"
     ).forEach(function (slot) {
       const nativeMascot =
         findDirectNativeMascot(slot);
- 
+
       let fallback = Array.from(slot.children).find(
         function (child) {
           return child?.classList?.contains(
@@ -1077,23 +1078,23 @@
           );
         }
       ) || null;
- 
+
       const nativeVisible =
         slot.getAttribute("data-visible") === "true" &&
         Boolean(nativeMascot);
- 
+
       if (nativeVisible) {
         const snapshot =
           sanitizeMascotSnapshot(nativeMascot);
- 
+
         if (snapshot) {
           headerMascotSnapshots.set(slot, snapshot);
         }
- 
+
         fallback?.remove();
         return;
       }
- 
+
       if (!fallback) {
         fallback = doc.createElement("div");
         fallback.className =
@@ -1101,67 +1102,67 @@
         fallback.setAttribute("aria-hidden", "true");
         slot.appendChild(fallback);
       }
- 
+
       if (!fallback.firstElementChild) {
         const stored = headerMascotSnapshots.get(slot);
         const visual = stored
           ? stored.cloneNode(true)
           : createEmergencyHeaderMascot(doc, source);
- 
+
         fallback.replaceChildren(visual);
       }
     });
   }
- 
- 
+
+
   /* =======================================================
      MASCOTE — RECORTE AUTOMÁTICO DE TRANSPARÊNCIA
- 
+
      O asset DUDUQ_IDLE.png possui uma tela transparente bem maior
      que o personagem. Para superfícies que não contam com o CSS
      interno do componente React (ex.: ponte global entre mecânicas),
      geramos uma cópia em memória recortada pela área alfa real.
- 
+
      A leitura é feita em canvas reduzido para ser leve e é cacheada
      por URL. Se CORS/canvas não estiver disponível, a interface usa
      o asset original com um fallback de escala via CSS.
      ======================================================= */
- 
+
   function trimTransparentMascotSource(source) {
     if (!source) return Promise.resolve("");
- 
+
     if (mascotTrimSources.has(source)) {
       return Promise.resolve(
         mascotTrimSources.get(source)
       );
     }
- 
+
     if (mascotTrimPromises.has(source)) {
       return mascotTrimPromises.get(source);
     }
- 
+
     const promise = new Promise(function (resolve) {
       const image = new Image();
       image.crossOrigin = "anonymous";
       image.decoding = "async";
- 
+
       function fallback() {
         mascotTrimSources.set(source, source);
         resolve(source);
       }
- 
+
       image.onerror = fallback;
- 
+
       image.onload = function () {
         try {
           const naturalWidth = image.naturalWidth || image.width;
           const naturalHeight = image.naturalHeight || image.height;
- 
+
           if (!naturalWidth || !naturalHeight) {
             fallback();
             return;
           }
- 
+
           const maxSampleSide = 512;
           const sampleScale = Math.min(
             1,
@@ -1175,21 +1176,21 @@
             1,
             Math.round(naturalHeight * sampleScale)
           );
- 
+
           const sample = document.createElement("canvas");
           sample.width = sampleWidth;
           sample.height = sampleHeight;
- 
+
           const sampleContext = sample.getContext(
             "2d",
             { willReadFrequently: true }
           );
- 
+
           if (!sampleContext) {
             fallback();
             return;
           }
- 
+
           sampleContext.clearRect(
             0,
             0,
@@ -1203,39 +1204,39 @@
             sampleWidth,
             sampleHeight
           );
- 
+
           const pixels = sampleContext.getImageData(
             0,
             0,
             sampleWidth,
             sampleHeight
           ).data;
- 
+
           let minX = sampleWidth;
           let minY = sampleHeight;
           let maxX = -1;
           let maxY = -1;
- 
+
           for (let y = 0; y < sampleHeight; y += 1) {
             for (let x = 0; x < sampleWidth; x += 1) {
               const alpha = pixels[
                 (y * sampleWidth + x) * 4 + 3
               ];
- 
+
               if (alpha <= 6) continue;
- 
+
               if (x < minX) minX = x;
               if (x > maxX) maxX = x;
               if (y < minY) minY = y;
               if (y > maxY) maxY = y;
             }
           }
- 
+
           if (maxX < minX || maxY < minY) {
             fallback();
             return;
           }
- 
+
           const invScale = 1 / sampleScale;
           let sourceX = Math.floor(minX * invScale);
           let sourceY = Math.floor(minY * invScale);
@@ -1245,14 +1246,14 @@
           let sourceHeight = Math.ceil(
             (maxY - minY + 1) * invScale
           );
- 
+
           const padding = Math.max(
             4,
             Math.round(
               Math.max(sourceWidth, sourceHeight) * .045
             )
           );
- 
+
           sourceX = Math.max(0, sourceX - padding);
           sourceY = Math.max(0, sourceY - padding);
           sourceWidth = Math.min(
@@ -1263,17 +1264,17 @@
             naturalHeight - sourceY,
             sourceHeight + padding * 2
           );
- 
+
           const crop = document.createElement("canvas");
           crop.width = sourceWidth;
           crop.height = sourceHeight;
- 
+
           const cropContext = crop.getContext("2d");
           if (!cropContext) {
             fallback();
             return;
           }
- 
+
           cropContext.clearRect(
             0,
             0,
@@ -1291,7 +1292,7 @@
             sourceWidth,
             sourceHeight
           );
- 
+
           const cropped = crop.toDataURL("image/png");
           mascotTrimSources.set(source, cropped);
           resolve(cropped);
@@ -1299,28 +1300,28 @@
           fallback();
         }
       };
- 
+
       image.src = source;
     });
- 
+
     mascotTrimPromises.set(source, promise);
     promise.finally(function () {
       mascotTrimPromises.delete(source);
     });
- 
+
     return promise;
   }
- 
+
   /* =======================================================
      PRIMEIRO ÁUDIO — GATE DE ENTRADA APÓS A INTRO
- 
+
      O Lesson Engine agenda o autoplay do enunciado muito cedo.
      O index bloqueia a fala apenas no primeiro handoff. Enquanto o
      atributo data-duduq-initial-speech-gate="locked" existir no
      documento principal, guardamos a última fala solicitada e a
      liberamos assim que a tela terminar de abrir.
      ======================================================= */
- 
+
   function installInitialSpeechGate(doc) {
     if (
       !doc?.defaultView ||
@@ -1328,10 +1329,10 @@
     ) {
       return;
     }
- 
+
     const view = doc.defaultView;
     const synth = view.speechSynthesis;
- 
+
     if (
       !synth ||
       typeof synth.speak !== "function" ||
@@ -1340,17 +1341,17 @@
       initialSpeechGateDocuments.add(doc);
       return;
     }
- 
+
     const originalSpeak = synth.speak.bind(synth);
     const originalCancel = synth.cancel.bind(synth);
     let pendingUtterance = null;
     let releaseTimer = null;
- 
+
     function gateIsLocked() {
       try {
         const hostDocument =
           getStableFullscreenDocument(doc);
- 
+
         return (
           hostDocument?.documentElement?.getAttribute(
             "data-duduq-initial-speech-gate"
@@ -1360,19 +1361,19 @@
         return false;
       }
     }
- 
+
     function clearReleaseTimer() {
       if (releaseTimer !== null) {
         view.clearTimeout(releaseTimer);
         releaseTimer = null;
       }
     }
- 
+
     function releaseWhenReady() {
       clearReleaseTimer();
- 
+
       if (!pendingUtterance) return;
- 
+
       if (gateIsLocked()) {
         releaseTimer = view.setTimeout(
           releaseWhenReady,
@@ -1380,31 +1381,31 @@
         );
         return;
       }
- 
+
       const utterance = pendingUtterance;
       pendingUtterance = null;
- 
+
       try {
         originalSpeak(utterance);
       } catch (_) {}
     }
- 
+
     const guardedSpeak = function (utterance) {
       if (gateIsLocked()) {
         pendingUtterance = utterance || null;
         releaseWhenReady();
         return;
       }
- 
+
       return originalSpeak(utterance);
     };
- 
+
     const guardedCancel = function () {
       pendingUtterance = null;
       clearReleaseTimer();
       return originalCancel();
     };
- 
+
     try {
       synth.speak = guardedSpeak;
       synth.cancel = guardedCancel;
@@ -1420,44 +1421,44 @@
         });
       } catch (_) {}
     }
- 
+
     initialSpeechGateDocuments.add(doc);
   }
- 
- 
+
+
   /* =======================================================
      PRÓXIMA MISSÃO — PONTE ENTRE MECÂNICAS DO HOST
- 
+
      Questão -> questão já possui StepTransition no runtime.
      Mecânica -> mecânica usa o DuduQTransition do Host, que não
      possuía o cartão central. Escutamos os eventos oficiais do Host
      e adicionamos o cartão somente quando existe uma próxima etapa.
      ======================================================= */
- 
+
   let missionBridgeElement = null;
   let missionBridgePending = null;
   let missionBridgeShownAt = 0;
   let missionBridgeHideTimer = null;
   let missionBridgeInstalled = false;
- 
+
   function ensureMissionBridge() {
     if (missionBridgeElement?.isConnected) {
       return missionBridgeElement;
     }
- 
+
     const bridge = document.createElement("div");
     bridge.className = "duduq-world-mission-bridge";
     bridge.setAttribute("role", "status");
     bridge.setAttribute("aria-live", "polite");
     bridge.setAttribute("aria-atomic", "true");
- 
+
     const mascot =
       window.DUDUQ_ASSETS?.mascots?.transition ||
       window.DUDUQ_ASSETS?.mascots?.idle ||
       window.DuduQAssets?.assets?.mascots?.transition ||
       window.DuduQAssets?.assets?.mascots?.idle ||
       "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/DUDUQ_IDLE.png";
- 
+
     bridge.innerHTML = [
       '<section class="duduq-world-mission-card">',
       '  <div class="duduq-world-mission-mascot-frame" aria-hidden="true">',
@@ -1471,15 +1472,15 @@
       '  </div>',
       '</section>'
     ].join("");
- 
+
     const mascotImage = bridge.querySelector(
       ".duduq-world-mission-mascot"
     );
- 
+
     if (mascotImage) {
       mascotImage.setAttribute("src", mascot);
       mascotImage.setAttribute("data-cropped", "false");
- 
+
       trimTransparentMascotSource(mascot).then(
         function (cropped) {
           if (!mascotImage.isConnected) return;
@@ -1491,49 +1492,49 @@
         }
       );
     }
- 
+
     (document.body || document.documentElement)
       .appendChild(bridge);
- 
+
     missionBridgeElement = bridge;
     return bridge;
   }
- 
+
   function clearMissionBridgeTimer() {
     if (missionBridgeHideTimer !== null) {
       window.clearTimeout(missionBridgeHideTimer);
       missionBridgeHideTimer = null;
     }
   }
- 
+
   function showMissionBridge(meta) {
     if (!meta) return;
- 
+
     const bridge = ensureMissionBridge();
     const copy = bridge.querySelector(
       ".duduq-world-mission-copy"
     );
- 
+
     if (copy) {
       copy.textContent =
         `Preparando a etapa ${meta.nextStep} de ${meta.totalSteps}…`;
     }
- 
+
     clearMissionBridgeTimer();
     bridge.classList.remove("is-visible");
- 
+
     /* Reinicia a animação da barra mesmo em trocas consecutivas. */
     void bridge.offsetWidth;
- 
+
     missionBridgeShownAt = performance.now();
     bridge.classList.add("is-visible");
   }
- 
+
   function hideMissionBridge(options = {}) {
     if (!missionBridgeElement) return;
- 
+
     clearMissionBridgeTimer();
- 
+
     const immediate = options.immediate === true;
     const minimumVisibleMs = 1050;
     const elapsed =
@@ -1541,7 +1542,7 @@
     const delay = immediate
       ? 0
       : Math.max(0, minimumVisibleMs - elapsed);
- 
+
     missionBridgeHideTimer = window.setTimeout(
       function () {
         missionBridgeElement?.classList.remove(
@@ -1552,23 +1553,23 @@
       delay
     );
   }
- 
+
   function installMissionBridge() {
     if (missionBridgeInstalled) return;
     missionBridgeInstalled = true;
- 
+
     const missionMascotSource =
       window.DUDUQ_ASSETS?.mascots?.transition ||
       window.DUDUQ_ASSETS?.mascots?.idle ||
       window.DuduQAssets?.assets?.mascots?.transition ||
       window.DuduQAssets?.assets?.mascots?.idle ||
       "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/DUDUQ_IDLE.png";
- 
+
     /* Prepara o recorte antes da primeira troca de mecânica. */
     trimTransparentMascotSource(missionMascotSource).catch(
       function () {}
     );
- 
+
     window.addEventListener(
       "duduq:step-complete",
       function (event) {
@@ -1578,7 +1579,7 @@
         );
         const currentIndex = Number(detail.stepIndex);
         const nextStep = currentIndex + 2;
- 
+
         missionBridgePending =
           Number.isFinite(totalSteps) &&
           Number.isFinite(currentIndex) &&
@@ -1587,7 +1588,7 @@
             : null;
       }
     );
- 
+
     window.addEventListener(
       "duduq:transition-cover-start",
       function () {
@@ -1596,7 +1597,7 @@
         }
       }
     );
- 
+
     window.addEventListener(
       "duduq:transition-complete",
       function () {
@@ -1606,7 +1607,7 @@
         }
       }
     );
- 
+
     window.addEventListener(
       "duduq:module-complete",
       function () {
@@ -1614,7 +1615,7 @@
         hideMissionBridge({ immediate: true });
       }
     );
- 
+
     window.addEventListener(
       "duduq:module-restart",
       function () {
@@ -1623,19 +1624,473 @@
       }
     );
   }
- 
+
+
+  /* =======================================================
+     ÁUDIO — ESTADO VISUAL UNIVERSAL
+
+     Algumas mecânicas já possuíam estado visual próprio e outras
+     apenas reproduziam o som. A partir da 1.4.4, o World Fusion
+     observa tanto speechSynthesis quanto HTMLMediaElement e marca
+     somente o controle associado à reprodução atual.
+
+     Contrato visual (CSS):
+       data-duduq-audio-playing="true"
+         -> verde + ondas
+       fim / pause / erro / cancel
+         -> atributo removido e aparência azul nativa restaurada
+     ======================================================= */
+
+  const UNIVERSAL_AUDIO_CONTROL_SELECTOR = [
+    'button[class*="audio" i]',
+    '[role="button"][class*="audio" i]',
+    'button[class*="sound" i]',
+    '[role="button"][class*="sound" i]',
+    'button[class*="speaker" i]',
+    '[role="button"][class*="speaker" i]',
+    'button[aria-label*="áudio" i]',
+    'button[aria-label*="audio" i]',
+    'button[aria-label*="ouvir" i]',
+    'button[aria-label*="escutar" i]',
+    'button[aria-label*="som" i]',
+    '[role="button"][aria-label*="áudio" i]',
+    '[role="button"][aria-label*="audio" i]',
+    '[role="button"][aria-label*="ouvir" i]',
+    '[role="button"][aria-label*="escutar" i]',
+    '[role="button"][aria-label*="som" i]',
+    '[data-audio]',
+    '[data-sound]'
+  ].join(",");
+
+  const UNIVERSAL_INSTRUCTION_SELECTOR = [
+    ".duduq-dd-instruction",
+    ".duduq-udd-instruction",
+    ".duduq-bp-instruction",
+    ".duduq-mq-instruction",
+    ".duduq-matching-instruction",
+    ".duduq-fc-instruction",
+    ".duduq-cf-instruction",
+    ".duduq-ws-instruction",
+    ".duduq-ts-instruction",
+    ".duduq-ss-instruction"
+  ].join(",");
+
+  function ensureAudioWaveDecoration(control) {
+    if (!control?.querySelector) return;
+
+    if (
+      control.querySelector(
+        ":scope > .duduq-world-audio-waves"
+      )
+    ) {
+      return;
+    }
+
+    const waves = control.ownerDocument.createElement("span");
+    waves.className = "duduq-world-audio-waves";
+    waves.setAttribute("aria-hidden", "true");
+
+    for (let index = 0; index < 3; index += 1) {
+      waves.appendChild(
+        control.ownerDocument.createElement("span")
+      );
+    }
+
+    control.appendChild(waves);
+  }
+
+  function setAudioControlPlaying(control, playing) {
+    if (!control?.setAttribute) return;
+
+    if (playing) {
+      ensureAudioWaveDecoration(control);
+      control.setAttribute(
+        "data-duduq-audio-playing",
+        "true"
+      );
+      return;
+    }
+
+    control.removeAttribute(
+      "data-duduq-audio-playing"
+    );
+  }
+
+  function clearAudioPlayingState(doc, except = null) {
+    if (!doc?.querySelectorAll) return;
+
+    doc
+      .querySelectorAll(
+        '[data-duduq-audio-playing="true"]'
+      )
+      .forEach(function (control) {
+        if (control !== except) {
+          setAudioControlPlaying(control, false);
+        }
+      });
+  }
+
+  function isLikelyAudioControl(element) {
+    if (!element?.matches) return false;
+
+    try {
+      return element.matches(
+        UNIVERSAL_AUDIO_CONTROL_SELECTOR
+      );
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function resolveAudioTriggerFromEventTarget(target) {
+    const element =
+      target?.nodeType === 1
+        ? target
+        : target?.parentElement;
+
+    if (!element?.closest) return null;
+
+    const direct =
+      element.closest(
+        UNIVERSAL_AUDIO_CONTROL_SELECTOR
+      );
+
+    if (direct) return direct;
+
+    const clickable =
+      element.closest(
+        'button, [role="button"]'
+      );
+
+    if (
+      clickable &&
+      clickable.closest(
+        UNIVERSAL_INSTRUCTION_SELECTOR
+      )
+    ) {
+      return clickable;
+    }
+
+    return null;
+  }
+
+  function findPrimaryInstructionAudioControl(doc) {
+    const instruction =
+      doc?.querySelector?.(
+        UNIVERSAL_INSTRUCTION_SELECTOR
+      );
+
+    if (!instruction) return null;
+
+    const explicit =
+      instruction.querySelector(
+        UNIVERSAL_AUDIO_CONTROL_SELECTOR
+      );
+
+    if (explicit) return explicit;
+
+    /*
+     * Nos cards de enunciado existe um único CTA circular. Mesmo
+     * quando a classe interna muda entre runtimes, ele continua
+     * sendo o único button/role=button dentro do instruction.
+     */
+    const controls = Array.from(
+      instruction.querySelectorAll(
+        'button, [role="button"]'
+      )
+    ).filter(function (candidate) {
+      return (
+        !candidate.disabled &&
+        candidate.getAttribute(
+          "aria-disabled"
+        ) !== "true"
+      );
+    });
+
+    return controls.length === 1
+      ? controls[0]
+      : controls.find(isLikelyAudioControl) || null;
+  }
+
+  function installUniversalAudioVisualState(doc) {
+    if (
+      !doc?.defaultView ||
+      audioVisualStateDocuments.has(doc)
+    ) {
+      return;
+    }
+
+    audioVisualStateDocuments.add(doc);
+
+    const view = doc.defaultView;
+    let lastTrigger = null;
+    let lastTriggerAt = 0;
+    let activeControl = null;
+
+    function rememberTrigger(event) {
+      const trigger =
+        resolveAudioTriggerFromEventTarget(
+          event.target
+        );
+
+      if (!trigger) return;
+
+      lastTrigger = trigger;
+      lastTriggerAt =
+        view.performance?.now?.() ||
+        Date.now();
+    }
+
+    function chooseControl() {
+      const now =
+        view.performance?.now?.() ||
+        Date.now();
+
+      const recent =
+        lastTrigger?.isConnected &&
+        now - lastTriggerAt <= 1800
+          ? lastTrigger
+          : null;
+
+      return (
+        recent ||
+        findPrimaryInstructionAudioControl(doc)
+      );
+    }
+
+    function begin(control) {
+      const next = control || chooseControl();
+
+      if (!next) return;
+
+      clearAudioPlayingState(doc, next);
+
+      if (
+        activeControl &&
+        activeControl !== next
+      ) {
+        setAudioControlPlaying(
+          activeControl,
+          false
+        );
+      }
+
+      activeControl = next;
+      setAudioControlPlaying(next, true);
+    }
+
+    function finish(control = null) {
+      const target = control || activeControl;
+
+      if (target) {
+        setAudioControlPlaying(target, false);
+      }
+
+      if (
+        !control ||
+        control === activeControl
+      ) {
+        activeControl = null;
+      }
+    }
+
+    doc.addEventListener(
+      "pointerdown",
+      rememberTrigger,
+      true
+    );
+
+    doc.addEventListener(
+      "click",
+      rememberTrigger,
+      true
+    );
+
+    /* SPEECH SYNTHESIS ----------------------------------- */
+    const synth = view.speechSynthesis;
+
+    if (
+      synth &&
+      typeof synth.speak === "function"
+    ) {
+      const previousSpeak =
+        synth.speak.bind(synth);
+      const previousCancel =
+        typeof synth.cancel === "function"
+          ? synth.cancel.bind(synth)
+          : null;
+
+      const visualSpeak = function (utterance) {
+        const control = chooseControl();
+        let settled = false;
+
+        function startVisual() {
+          if (settled) return;
+          begin(control);
+        }
+
+        function stopVisual() {
+          if (settled) return;
+          settled = true;
+          finish(control);
+        }
+
+        try {
+          utterance?.addEventListener?.(
+            "start",
+            startVisual,
+            { once: true }
+          );
+          utterance?.addEventListener?.(
+            "end",
+            stopVisual,
+            { once: true }
+          );
+          utterance?.addEventListener?.(
+            "error",
+            stopVisual,
+            { once: true }
+          );
+        } catch (_) {}
+
+        const result = previousSpeak(utterance);
+
+        /*
+         * Safari/WebKit nem sempre dispara start de modo uniforme.
+         * Se a síntese já estiver efetivamente falando no paint
+         * seguinte, iniciamos o estado sem antecipar o primeiro áudio.
+         */
+        view.requestAnimationFrame(function () {
+          if (
+            !settled &&
+            synth.speaking
+          ) {
+            startVisual();
+          }
+        });
+
+        return result;
+      };
+
+      try {
+        synth.speak = visualSpeak;
+      } catch (_) {
+        try {
+          Object.defineProperty(
+            synth,
+            "speak",
+            {
+              configurable: true,
+              value: visualSpeak
+            }
+          );
+        } catch (_) {}
+      }
+
+      if (previousCancel) {
+        const visualCancel = function () {
+          finish();
+          clearAudioPlayingState(doc);
+          return previousCancel();
+        };
+
+        try {
+          synth.cancel = visualCancel;
+        } catch (_) {
+          try {
+            Object.defineProperty(
+              synth,
+              "cancel",
+              {
+                configurable: true,
+                value: visualCancel
+              }
+            );
+          } catch (_) {}
+        }
+      }
+    }
+
+    /* HTML AUDIO / MEDIA -------------------------------- */
+    const mediaControls = new WeakMap();
+
+    doc.addEventListener(
+      "play",
+      function (event) {
+        const media = event.target;
+
+        if (
+          !(
+            media instanceof
+            view.HTMLMediaElement
+          )
+        ) {
+          return;
+        }
+
+        const control = chooseControl();
+        mediaControls.set(media, control || null);
+        begin(control);
+      },
+      true
+    );
+
+    [
+      "pause",
+      "ended",
+      "error",
+      "emptied",
+      "abort"
+    ].forEach(function (eventName) {
+      doc.addEventListener(
+        eventName,
+        function (event) {
+          const media = event.target;
+
+          if (
+            !(
+              media instanceof
+              view.HTMLMediaElement
+            )
+          ) {
+            return;
+          }
+
+          const control =
+            mediaControls.get(media) ||
+            null;
+
+          finish(control);
+          mediaControls.delete(media);
+        },
+        true
+      );
+    });
+
+    /* Segurança: quando a aba perde contexto, nenhum botão fica verde. */
+    doc.addEventListener(
+      "visibilitychange",
+      function () {
+        if (doc.hidden) {
+          finish();
+          clearAudioPlayingState(doc);
+        }
+      }
+    );
+  }
+
   function syncDocument(doc, frame) {
     if (!doc?.documentElement || !doc.body) return false;
- 
+
     const image = getInlineWorldImage(doc);
- 
+
     if (image) {
       doc.documentElement.style.setProperty(
         "--duduq-world-image",
         image
       );
     }
- 
+
     doc.documentElement.classList.add("duduq-world-fusion");
     syncLiteracyProfile(doc);
     syncBubbleLabelSemantics(doc);
@@ -1643,93 +2098,94 @@
     fitEarlyLiteracyBubblePhrases(doc);
     syncTargetShooterCentering(doc);
     syncHeaderMascotFallback(doc);
- 
+
     doc.documentElement.setAttribute(
       "data-duduq-world-fusion-version",
       VERSION
     );
- 
+
     doc.documentElement.setAttribute(
       "data-duduq-mechanic",
       detectMechanic(doc, frame)
     );
- 
+
     syncFullscreenControls(doc);
- 
+
     return true;
   }
- 
+
   function ensureStylesheet(doc) {
     if (doc === document) {
       return;
     }
- 
+
     const existing = doc.getElementById("duduq-world-fusion-style");
- 
+
     if (existing) {
       if (existing.getAttribute("href") !== stylesheetUrl) {
         existing.setAttribute("href", stylesheetUrl);
       }
       return;
     }
- 
+
     const link = doc.createElement("link");
     link.id = "duduq-world-fusion-style";
     link.rel = "stylesheet";
     link.href = stylesheetUrl;
     (doc.head || doc.documentElement).appendChild(link);
   }
- 
+
   function manageDocument(doc, frame) {
     if (!doc) return false;
- 
+
     ensureStylesheet(doc);
     installSpeechWarmup(doc);
     installFeedbackScrollGuard(doc);
     installInitialSpeechGate(doc);
+    installUniversalAudioVisualState(doc);
     syncDocument(doc, frame);
     installFullscreenBridge(doc);
     installEarlyLiteracySpeech(doc);
     installEarlyLiteracyFit(doc);
- 
+
     if (managedDocuments.has(doc)) return true;
     managedDocuments.add(doc);
- 
+
     let refreshQueued = false;
- 
+
     function queueRefresh() {
       if (refreshQueued) return;
- 
+
       refreshQueued = true;
- 
+
       window.requestAnimationFrame(function () {
         refreshQueued = false;
         syncDocument(doc, frame);
       });
     }
- 
+
     const contentObserver = new MutationObserver(queueRefresh);
     const worldObserver = new MutationObserver(queueRefresh);
- 
+
     if (doc.body) {
       contentObserver.observe(doc.body, {
         childList: true,
         subtree: true
       });
- 
+
       worldObserver.observe(doc.body, {
         attributes: true,
         attributeFilter: ["style"],
         subtree: false
       });
     }
- 
+
     return true;
   }
- 
+
   function manageFrame(frame) {
     if (!(frame instanceof HTMLIFrameElement)) return;
- 
+
     function connect() {
       try {
         manageDocument(frame.contentDocument, frame);
@@ -1737,40 +2193,40 @@
         /* Iframes externos continuam funcionando sem a camada visual. */
       }
     }
- 
+
     if (!managedFrames.has(frame)) {
       managedFrames.add(frame);
       frame.addEventListener("load", connect);
     }
- 
+
     connect();
   }
- 
+
   function scanFrames() {
     document.querySelectorAll("iframe").forEach(manageFrame);
   }
- 
+
   function start() {
     installMissionBridge();
     manageDocument(document, null);
     scanFrames();
- 
+
     const observer = new MutationObserver(function (records) {
       for (const record of records) {
         for (const node of record.addedNodes) {
           if (!(node instanceof Element)) continue;
- 
+
           if (node instanceof HTMLIFrameElement) {
             manageFrame(node);
           }
- 
+
           node.querySelectorAll?.("iframe").forEach(manageFrame);
         }
       }
- 
+
       syncDocument(document, null);
     });
- 
+
     observer.observe(
       document.body || document.documentElement,
       {
@@ -1779,17 +2235,17 @@
       }
     );
   }
- 
+
   window.DuduQWorldFusion = Object.freeze({
     version: VERSION,
- 
+
     refresh: function () {
       syncDocument(document, null);
       scanFrames();
       return true;
     }
   });
- 
+
   if (document.readyState === "loading") {
     document.addEventListener(
       "DOMContentLoaded",
@@ -1799,7 +2255,7 @@
   } else {
     start();
   }
- 
+
   window.addEventListener(
     "duduq:assets-ready",
     function () {
