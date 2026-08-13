@@ -1,12 +1,12 @@
 /* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 01
    Hello! Greetings & Introductions
-   Versão 1.6.0 — ASSETS OFICIAIS PERSONALIZADOS
- 
+   Versão 1.6.1 — MEMORY QUEST PEDAGÓGICO
+
    FONTES EDITORIAIS
    - DUDUQ Conteúdo Oficial — Língua Inglesa v1.0
    - DUDUQ Documento Mestre — Conteúdo & Orquestração v1.0
- 
+
    REGRAS DESTA VERSÃO
    - Preserva os 12 IDs oficiais EN1-M1-01 a EN1-M1-12.
    - Não usa Bubble Pop no 1º ano.
@@ -14,21 +14,21 @@
    - Áudio e imagem assumem papel pedagógico central.
    - Todas as cenas usam os PNGs oficiais do Assets-DuduQ.
    ========================================================= */
- 
+
 (function () {
   "use strict";
- 
-  const VERSION = "1.6.0";
- 
+
+  const VERSION = "1.6.1";
+
   window.DUDUQ_CONTENT =
     window.DUDUQ_CONTENT || {};
- 
+
   window.DUDUQ_CONTENT.english =
     window.DUDUQ_CONTENT.english || {};
- 
+
   window.DUDUQ_CONTENT.english.year1 =
     window.DUDUQ_CONTENT.english.year1 || {};
- 
+
   if (
     window.DUDUQ_CONTENT
       .english
@@ -38,10 +38,10 @@
   ) {
     return;
   }
- 
+
   const BASE =
     "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/";
- 
+
   const CONTENT =
     window.DuduQAssets
       ?.assets
@@ -49,126 +49,126 @@
       ?.english
       ?.year1
       ?.module01 || {};
- 
+
   const VISUALS =
     Object.freeze({
       greeting:
         CONTENT.greeting ||
         BASE + "Hello.png",
- 
+
       goodbye:
         CONTENT.goodbye ||
         BASE + "Bye.png",
- 
+
       morning:
         CONTENT.morning ||
         BASE + "Good%20Morning.png",
- 
+
       afternoon:
         CONTENT.afternoon ||
         BASE + "Good%20Afternoon.png",
- 
+
       night:
         CONTENT.night ||
         BASE + "Good%20Night.png",
- 
+
       boy:
         CONTENT.boy ||
         BASE + "Boy.png",
- 
+
       girl:
         CONTENT.girl ||
         BASE + "Girl.png",
- 
+
       selfintro:
         CONTENT.selfintro ||
         BASE + "My%20name.png"
     });
- 
+
   function skill(description) {
     return Object.freeze({
       code: null,
       description
     });
   }
- 
+
   function sourceOption(id, text) {
     return { id, text };
   }
- 
+
   const SKILLS =
     Object.freeze({
       greetingBasic:
         skill(
           "Identificar cumprimentos básicos usados no dia a dia."
         ),
- 
+
       greetingSituation:
         skill(
           "Relacionar cumprimentos a situações cotidianas."
         ),
- 
+
       farewell:
         skill(
           "Identificar expressão de despedida."
         ),
- 
+
       identifySelf:
         skill(
           "Identificar-se utilizando a estrutura ‘I’m...’."
         ),
- 
+
       boyGirl:
         skill(
           "Compreender e empregar as palavras boy e girl."
         ),
- 
+
       greetingResponse:
         skill(
           "Responder a um cumprimento simples."
         ),
- 
+
       personalPresentation:
         skill(
           "Identificar apresentação pessoal simples."
         ),
- 
+
       boyGirlSentence:
         skill(
           "Empregar a estrutura ‘I’m a boy/girl’."
         ),
- 
+
       distinguishGreetingFarewell:
         skill(
           "Distinguir cumprimento e despedida."
         )
     });
- 
+
   const moduleDefinition = {
     id:
       "english-year-1-module-01",
- 
+
     version:
       VERSION,
- 
+
     subject:
       "Língua Inglesa",
- 
+
     year:
       1,
- 
+
     module:
       1,
- 
+
     title:
       "Hello! Greetings & Introductions",
- 
+
     description:
       "Missão inicial de Língua Inglesa do 1º ano, organizada para crianças em processo de alfabetização, com prioridade para escuta, imagens e associações significativas.",
- 
+
     estimatedMinutes:
       5,
- 
+
     learningGoals: [
       "Reconhecer HI, HELLO, GOODBYE, GOOD MORNING e GOOD AFTERNOON em situações simples.",
       "Relacionar cumprimentos a cenas de encontro, despedida, manhã e tarde.",
@@ -177,84 +177,84 @@
       "Completar I’M A BOY/GIRL em uma estrutura curta e contextualizada.",
       "Revisar cumprimentos por associação entre áudio e imagem."
     ],
- 
+
     pedagogicalNotes: {
       officialSource:
         "Módulo construído a partir dos 12 itens oficiais EN1-M1-01 a EN1-M1-12.",
- 
+
       literacy:
         "No 1º ano, a leitura de palavras em inglês não é tratada como pré-requisito. Áudio e imagem oferecem o caminho principal de compreensão.",
- 
+
       contentAssetPolicy:
         "As cenas desta versão usam imagens oficiais do repositório Assets-DuduQ."
     },
- 
+
     intro: {
       companyKicker:
         "UMA CRIAÇÃO DE",
- 
+
       companyWidth:
         820,
- 
+
       collectionLogo:
         BASE +
         "Logo%20EduQ%20Play.png",
- 
+
       collectionName:
         "EduQ Play",
- 
+
       collectionAlt:
         "EduQ Play",
- 
+
       collectionWidth:
         760,
- 
+
       loadingLabel:
         "PREPARANDO SUA MISSÃO",
- 
+
       readyLabel:
         "MISSÃO PRONTA",
- 
+
       startLabel:
         "INICIAR MISSÃO",
- 
+
       hint:
         "Tudo pronto para começar!",
- 
+
       minDurationMs:
         2200,
- 
+
       brandingDurationMs:
         3000,
- 
+
       switchingDurationMs:
         760,
- 
+
       missionMinDurationMs:
         1200,
- 
+
       sparkCount:
         14
     },
- 
+
     activities: [
- 
+
       /* =====================================================
          ETAPA 1 — LISTEN & CHOOSE
          ===================================================== */
       {
         id:
           "en1-m1-step-01-listen-choose",
- 
+
         title:
           "Listen & Choose",
- 
+
         mechanic:
           "target-shooter",
- 
+
         skill:
           SKILLS.greetingBasic,
- 
+
         questions: [
           {
             id: "EN1-M1-01",
@@ -266,18 +266,18 @@
             statement: "Hello!",
             instruction:
               "Ouça e acerte a cena que combina com a saudação.",
- 
+
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
- 
+
             audio: {
               enabled: true,
               text: "Hello",
               language: "en-US",
               role: "instruction"
             },
- 
+
             alternatives: [
               sourceOption(
                 "goodbye",
@@ -292,61 +292,61 @@
                 "GOOD MORNING"
               )
             ],
- 
+
             answer: {
               type: "single",
               value: "hello"
             },
- 
+
             feedback: {
               correct:
                 "Muito bem! HELLO é uma saudação de encontro.",
- 
+
               incorrect:
                 "Ouça HELLO novamente e observe as cenas.",
- 
+
               language:
                 "pt-BR"
             },
- 
+
             delivery: {
               mechanic:
                 "target-shooter",
- 
+
               allowImage:
                 true,
- 
+
               allowAudio:
                 true
             },
- 
+
             metadata: {
               title:
                 "Hello!",
- 
+
               screenTitle:
                 "Hello!",
- 
+
               sourceDifficulty:
                 "Fácil",
- 
+
               sourceCorrectAnswer:
                 "HELLO",
- 
+
               targetShooter: {
                 audioText:
                   "Hello",
- 
+
                 mode:
                   "audio-to-image",
- 
+
                 shape:
                   "balloon",
- 
+
                 correctIds: [
                   "scene-greeting"
                 ],
- 
+
                 difficulty: {
                   speed: 0.42,
                   objectCount: 3,
@@ -354,7 +354,7 @@
                   requiredCorrect: 1,
                   targetSize: 150
                 },
- 
+
                 items: [
                   {
                     id:
@@ -390,7 +390,7 @@
               }
             }
           },
- 
+
           {
             id: "EN1-M1-03",
             subject: "Língua Inglesa",
@@ -401,18 +401,18 @@
             statement: "Good afternoon",
             instruction:
               "Ouça e acerte a cena do período correspondente.",
- 
+
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
- 
+
             audio: {
               enabled: true,
               text: "Good afternoon",
               language: "en-US",
               role: "instruction"
             },
- 
+
             alternatives: [
               sourceOption(
                 "good-afternoon",
@@ -427,61 +427,61 @@
                 "GOODBYE"
               )
             ],
- 
+
             answer: {
               type: "single",
               value: "good-afternoon"
             },
- 
+
             feedback: {
               correct:
                 "Excelente! GOOD AFTERNOON combina com a tarde.",
- 
+
               incorrect:
                 "Ouça novamente e procure a cena da tarde.",
- 
+
               language:
                 "pt-BR"
             },
- 
+
             delivery: {
               mechanic:
                 "target-shooter",
- 
+
               allowImage:
                 true,
- 
+
               allowAudio:
                 true
             },
- 
+
             metadata: {
               title:
                 "Good afternoon",
- 
+
               screenTitle:
                 "Afternoon",
- 
+
               sourceDifficulty:
                 "Fácil",
- 
+
               sourceCorrectAnswer:
                 "GOOD AFTERNOON",
- 
+
               targetShooter: {
                 audioText:
                   "Good afternoon",
- 
+
                 mode:
                   "audio-to-image",
- 
+
                 shape:
                   "cloud",
- 
+
                 correctIds: [
                   "scene-afternoon"
                 ],
- 
+
                 difficulty: {
                   speed: 0.42,
                   objectCount: 3,
@@ -489,7 +489,7 @@
                   requiredCorrect: 1,
                   targetSize: 150
                 },
- 
+
                 items: [
                   {
                     id:
@@ -525,7 +525,7 @@
               }
             }
           },
- 
+
           {
             id: "EN1-M1-04",
             subject: "Língua Inglesa",
@@ -536,18 +536,18 @@
             statement: "Goodbye!",
             instruction:
               "Ouça e acerte a cena de despedida.",
- 
+
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
- 
+
             audio: {
               enabled: true,
               text: "Goodbye",
               language: "en-US",
               role: "instruction"
             },
- 
+
             alternatives: [
               sourceOption(
                 "hello",
@@ -562,61 +562,61 @@
                 "GOOD MORNING"
               )
             ],
- 
+
             answer: {
               type: "single",
               value: "goodbye"
             },
- 
+
             feedback: {
               correct:
                 "Isso! GOODBYE é usado para se despedir.",
- 
+
               incorrect:
                 "Ouça GOODBYE novamente e observe quem está indo embora.",
- 
+
               language:
                 "pt-BR"
             },
- 
+
             delivery: {
               mechanic:
                 "target-shooter",
- 
+
               allowImage:
                 true,
- 
+
               allowAudio:
                 true
             },
- 
+
             metadata: {
               title:
                 "Goodbye!",
- 
+
               screenTitle:
                 "Goodbye!",
- 
+
               sourceDifficulty:
                 "Fácil",
- 
+
               sourceCorrectAnswer:
                 "GOODBYE",
- 
+
               targetShooter: {
                 audioText:
                   "Goodbye",
- 
+
                 mode:
                   "audio-to-image",
- 
+
                 shape:
                   "balloon",
- 
+
                 correctIds: [
                   "scene-goodbye"
                 ],
- 
+
                 difficulty: {
                   speed: 0.40,
                   objectCount: 3,
@@ -624,7 +624,7 @@
                   requiredCorrect: 1,
                   targetSize: 150
                 },
- 
+
                 items: [
                   {
                     id:
@@ -662,23 +662,23 @@
           }
         ]
       },
- 
+
       /* =====================================================
          ETAPA 2 — MORNING & AFTERNOON
          ===================================================== */
       {
         id:
           "en1-m1-step-02-morning-afternoon",
- 
+
         title:
           "Morning & Afternoon",
- 
+
         mechanic:
           "matching",
- 
+
         skill:
           SKILLS.greetingSituation,
- 
+
         questions: [
           {
             id: "EN1-M1-02",
@@ -690,11 +690,11 @@
             statement: "Good morning",
             instruction:
               "Ouça e ligue cada saudação à cena correta.",
- 
+
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
- 
+
             audio: {
               enabled: true,
               text:
@@ -702,7 +702,7 @@
               language: "pt-BR",
               role: "instruction"
             },
- 
+
             alternatives: [
               sourceOption(
                 "good-afternoon",
@@ -717,25 +717,25 @@
                 "GOOD MORNING"
               )
             ],
- 
+
             answer: {
               type:
                 "single",
               value:
                 "good-morning"
             },
- 
+
             feedback: {
               correct:
                 "Muito bem! GOOD MORNING combina com a manhã.",
- 
+
               incorrect:
                 "Ouça cada áudio novamente e compare manhã e tarde.",
- 
+
               language:
                 "pt-BR"
             },
- 
+
             delivery: {
               mechanic:
                 "matching",
@@ -744,25 +744,25 @@
               allowAudio:
                 true
             },
- 
+
             metadata: {
               matching: {
                 mode:
                   "audio-image",
- 
+
                 leftTitle:
                   "Ouça",
- 
+
                 rightTitle:
                   "Cenas",
- 
+
                 assets: {
                   morning:
                     VISUALS.morning,
                   afternoon:
                     VISUALS.afternoon
                 },
- 
+
                 leftItems: [
                   {
                     id:
@@ -785,7 +785,7 @@
                       "Ouvir Good afternoon"
                   }
                 ],
- 
+
                 rightItems: [
                   {
                     id:
@@ -804,7 +804,7 @@
                       "Cena de tarde"
                   }
                 ],
- 
+
                 pairs: [
                   {
                     leftId:
@@ -819,7 +819,7 @@
                       "picture-afternoon"
                   }
                 ],
- 
+
                 behavior: {
                   shuffleLeft:
                     true,
@@ -835,25 +835,25 @@
           }
         ]
       },
- 
+
       /* =====================================================
          ETAPA 3 — WHO AM I?
          ===================================================== */
       {
         id:
           "en1-m1-step-03-who-am-i",
- 
+
         title:
           "Who Am I?",
- 
+
         mechanic:
           "matching",
- 
+
         skill:
           SKILLS.boyGirl,
- 
+
         questions: [
- 
+
           {
             id: "EN1-M1-05",
             subject: "Língua Inglesa",
@@ -864,11 +864,11 @@
             statement: "I'm...",
             instruction:
               "Ouça e ligue cada fala à cena correspondente.",
- 
+
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
- 
+
             audio: {
               enabled: true,
               text:
@@ -876,7 +876,7 @@
               language: "pt-BR",
               role: "instruction"
             },
- 
+
             alternatives: [
               sourceOption(
                 "goodbye",
@@ -891,14 +891,14 @@
                 "I'M..."
               )
             ],
- 
+
             answer: {
               type:
                 "single",
               value:
                 "im"
             },
- 
+
             feedback: {
               correct:
                 "Certo! I'M... pode iniciar uma apresentação com o próprio nome.",
@@ -907,7 +907,7 @@
               language:
                 "pt-BR"
             },
- 
+
             delivery: {
               mechanic:
                 "matching",
@@ -916,25 +916,25 @@
               allowAudio:
                 true
             },
- 
+
             metadata: {
               matching: {
                 mode:
                   "audio-image",
- 
+
                 leftTitle:
                   "Ouça",
- 
+
                 rightTitle:
                   "Cenas",
- 
+
                 assets: {
                   selfintro:
                     VISUALS.selfintro,
                   goodbye:
                     VISUALS.goodbye
                 },
- 
+
                 leftItems: [
                   {
                     id:
@@ -957,7 +957,7 @@
                       "Ouvir uma despedida"
                   }
                 ],
- 
+
                 rightItems: [
                   {
                     id:
@@ -976,7 +976,7 @@
                       "Cena de despedida"
                   }
                 ],
- 
+
                 pairs: [
                   {
                     leftId:
@@ -991,7 +991,7 @@
                       "picture-goodbye"
                   }
                 ],
- 
+
                 behavior: {
                   shuffleLeft:
                     true,
@@ -1005,7 +1005,7 @@
               }
             }
           },
- 
+
           {
             id: "EN1-M1-06",
             subject: "Língua Inglesa",
@@ -1016,11 +1016,11 @@
             statement: "Boy",
             instruction:
               "Ouça e ligue cada palavra à imagem correta.",
- 
+
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
- 
+
             audio: {
               enabled: true,
               text:
@@ -1028,7 +1028,7 @@
               language: "pt-BR",
               role: "instruction"
             },
- 
+
             alternatives: [
               sourceOption(
                 "boy",
@@ -1043,14 +1043,14 @@
                 "HELLO"
               )
             ],
- 
+
             answer: {
               type:
                 "single",
               value:
                 "boy"
             },
- 
+
             feedback: {
               correct:
                 "Muito bem! BOY foi relacionado à figura de menino.",
@@ -1059,7 +1059,7 @@
               language:
                 "pt-BR"
             },
- 
+
             delivery: {
               mechanic:
                 "matching",
@@ -1068,25 +1068,25 @@
               allowAudio:
                 true
             },
- 
+
             metadata: {
               matching: {
                 mode:
                   "audio-image",
- 
+
                 leftTitle:
                   "Ouça",
- 
+
                 rightTitle:
                   "Imagens",
- 
+
                 assets: {
                   boy:
                     VISUALS.boy,
                   girl:
                     VISUALS.girl
                 },
- 
+
                 leftItems: [
                   {
                     id:
@@ -1109,7 +1109,7 @@
                       "Ouvir Girl"
                   }
                 ],
- 
+
                 rightItems: [
                   {
                     id:
@@ -1128,7 +1128,7 @@
                       "Ilustração de menina"
                   }
                 ],
- 
+
                 pairs: [
                   {
                     leftId:
@@ -1143,7 +1143,7 @@
                       "picture-girl"
                   }
                 ],
- 
+
                 behavior: {
                   shuffleLeft:
                     true,
@@ -1157,7 +1157,7 @@
               }
             }
           },
- 
+
           {
             id: "EN1-M1-07",
             subject: "Língua Inglesa",
@@ -1168,11 +1168,11 @@
             statement: "Girl",
             instruction:
               "Observe as imagens e ligue cada uma à palavra correspondente.",
- 
+
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
- 
+
             audio: {
               enabled: true,
               text:
@@ -1180,7 +1180,7 @@
               language: "pt-BR",
               role: "instruction"
             },
- 
+
             alternatives: [
               sourceOption(
                 "boy",
@@ -1195,14 +1195,14 @@
                 "GOODBYE"
               )
             ],
- 
+
             answer: {
               type:
                 "single",
               value:
                 "girl"
             },
- 
+
             feedback: {
               correct:
                 "Muito bem! GIRL corresponde à figura de menina.",
@@ -1211,7 +1211,7 @@
               language:
                 "pt-BR"
             },
- 
+
             delivery: {
               mechanic:
                 "matching",
@@ -1220,25 +1220,25 @@
               allowAudio:
                 true
             },
- 
+
             metadata: {
               matching: {
                 mode:
                   "image-word",
- 
+
                 leftTitle:
                   "Imagens",
- 
+
                 rightTitle:
                   "Ouça e ligue",
- 
+
                 assets: {
                   boy:
                     VISUALS.boy,
                   girl:
                     VISUALS.girl
                 },
- 
+
                 leftItems: [
                   {
                     id:
@@ -1257,7 +1257,7 @@
                       "Ilustração de menina"
                   }
                 ],
- 
+
                 rightItems: [
                   {
                     id:
@@ -1284,7 +1284,7 @@
                       "Ouvir Girl"
                   }
                 ],
- 
+
                 pairs: [
                   {
                     leftId:
@@ -1299,7 +1299,7 @@
                       "word-girl"
                   }
                 ],
- 
+
                 behavior: {
                   shuffleLeft:
                     true,
@@ -1313,7 +1313,7 @@
               }
             }
           },
- 
+
           {
             id: "EN1-M1-08",
             subject: "Língua Inglesa",
@@ -1324,11 +1324,11 @@
             statement: "Hello → Hi",
             instruction:
               "Ouça e ligue cada fala à resposta que combina.",
- 
+
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
- 
+
             audio: {
               enabled: true,
               text:
@@ -1336,7 +1336,7 @@
               language: "pt-BR",
               role: "instruction"
             },
- 
+
             alternatives: [
               sourceOption(
                 "goodbye",
@@ -1351,14 +1351,14 @@
                 "HI!"
               )
             ],
- 
+
             answer: {
               type:
                 "single",
               value:
                 "hi"
             },
- 
+
             feedback: {
               correct:
                 "Isso! HI! pode responder a HELLO!.",
@@ -1367,7 +1367,7 @@
               language:
                 "pt-BR"
             },
- 
+
             delivery: {
               mechanic:
                 "matching",
@@ -1376,18 +1376,18 @@
               allowAudio:
                 true
             },
- 
+
             metadata: {
               matching: {
                 mode:
                   "audio-word",
- 
+
                 leftTitle:
                   "Ouça",
- 
+
                 rightTitle:
                   "Respostas",
- 
+
                 leftItems: [
                   {
                     id:
@@ -1410,7 +1410,7 @@
                       "Ouvir Goodbye"
                   }
                 ],
- 
+
                 rightItems: [
                   {
                     id:
@@ -1437,7 +1437,7 @@
                       "Ouvir Goodbye"
                   }
                 ],
- 
+
                 pairs: [
                   {
                     leftId:
@@ -1452,7 +1452,7 @@
                       "word-goodbye"
                   }
                 ],
- 
+
                 behavior: {
                   shuffleLeft:
                     false,
@@ -1468,23 +1468,23 @@
           }
         ]
       },
- 
+
       /* =====================================================
          ETAPA 4 — I'M ANA.
          ===================================================== */
       {
         id:
           "en1-m1-step-04-im-ana",
- 
+
         title:
           "I'm Ana.",
- 
+
         mechanic:
           "drag-drop",
- 
+
         skill:
           SKILLS.personalPresentation,
- 
+
         questions: [
           {
             id: "EN1-M1-09",
@@ -1496,11 +1496,11 @@
             statement: "I'm Ana.",
             instruction:
               "Toque para ouvir e arraste cada áudio para a cena correspondente.",
- 
+
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
- 
+
             audio: {
               enabled: true,
               text:
@@ -1508,7 +1508,7 @@
               language: "pt-BR",
               role: "instruction"
             },
- 
+
             alternatives: [
               {
                 id:
@@ -1559,11 +1559,11 @@
                 }
               }
             ],
- 
+
             answer: {
               type:
                 "pairs",
- 
+
               value: [
                 {
                   source:
@@ -1585,7 +1585,7 @@
                 }
               ]
             },
- 
+
             feedback: {
               correct:
                 "Muito bem! I'M ANA. corresponde à cena de apresentação pessoal.",
@@ -1594,7 +1594,7 @@
               language:
                 "pt-BR"
             },
- 
+
             delivery: {
               mechanic:
                 "drag-drop",
@@ -1603,13 +1603,13 @@
               allowAudio:
                 true
             },
- 
+
             metadata: {
               targets: [
                 {
                   id:
                     "scene-selfintro",
- 
+
                   image: {
                     src:
                       VISUALS.selfintro,
@@ -1620,7 +1620,7 @@
                 {
                   id:
                     "scene-goodbye",
- 
+
                   image: {
                     src:
                       VISUALS.goodbye,
@@ -1631,7 +1631,7 @@
                 {
                   id:
                     "scene-afternoon",
- 
+
                   image: {
                     src:
                       VISUALS.afternoon,
@@ -1644,23 +1644,23 @@
           }
         ]
       },
- 
+
       /* =====================================================
          ETAPA 5 — I'M A...
          ===================================================== */
       {
         id:
           "en1-m1-step-05-im-a",
- 
+
         title:
           "I'm a...",
- 
+
         mechanic:
           "smart-sentence",
- 
+
         skill:
           SKILLS.boyGirlSentence,
- 
+
         questions: [
           {
             id: "EN1-M1-10",
@@ -1672,11 +1672,11 @@
             statement: "I'm a ___.",
             instruction:
               "Observe a imagem e complete a frase.",
- 
+
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
- 
+
             audio: {
               enabled:
                 true,
@@ -1687,7 +1687,7 @@
               role:
                 "instruction"
             },
- 
+
             alternatives: [
               sourceOption(
                 "girl",
@@ -1702,14 +1702,14 @@
                 "GOODBYE"
               )
             ],
- 
+
             answer: {
               type:
                 "single",
               value:
                 "boy"
             },
- 
+
             feedback: {
               correct:
                 "Perfeito! I'M A BOY.",
@@ -1718,7 +1718,7 @@
               language:
                 "pt-BR"
             },
- 
+
             delivery: {
               mechanic:
                 "smart-sentence",
@@ -1727,41 +1727,41 @@
               allowAudio:
                 true
             },
- 
+
             metadata: {
               smartSentence: {
                 prefix:
                   "I'M A",
- 
+
                 suffix:
                   ".",
- 
+
                 answer:
                   "BOY",
- 
+
                 options: [
                   "BOY",
                   "GIRL"
                 ],
- 
+
                 imageKey:
                   "boy",
- 
+
                 imageSrc:
                   VISUALS.boy,
- 
+
                 imageAlt:
                   "Ilustração de menino",
- 
+
                 instruction:
                   "Observe a imagem e complete a frase.",
- 
+
                 instructionSpoken:
                   "Observe a imagem e complete a frase para o menino."
               }
             }
           },
- 
+
           {
             id: "EN1-M1-11",
             subject: "Língua Inglesa",
@@ -1772,11 +1772,11 @@
             statement: "I'm a ___.",
             instruction:
               "Observe a imagem e complete a frase.",
- 
+
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
- 
+
             audio: {
               enabled:
                 true,
@@ -1787,7 +1787,7 @@
               role:
                 "instruction"
             },
- 
+
             alternatives: [
               sourceOption(
                 "boy",
@@ -1802,14 +1802,14 @@
                 "GIRL"
               )
             ],
- 
+
             answer: {
               type:
                 "single",
               value:
                 "girl"
             },
- 
+
             feedback: {
               correct:
                 "Perfeito! I'M A GIRL.",
@@ -1818,7 +1818,7 @@
               language:
                 "pt-BR"
             },
- 
+
             delivery: {
               mechanic:
                 "smart-sentence",
@@ -1827,35 +1827,35 @@
               allowAudio:
                 true
             },
- 
+
             metadata: {
               smartSentence: {
                 prefix:
                   "I'M A",
- 
+
                 suffix:
                   ".",
- 
+
                 answer:
                   "GIRL",
- 
+
                 options: [
                   "BOY",
                   "GIRL"
                 ],
- 
+
                 imageKey:
                   "girl",
- 
+
                 imageSrc:
                   VISUALS.girl,
- 
+
                 imageAlt:
                   "Ilustração de menina",
- 
+
                 instruction:
                   "Observe a imagem e complete a frase.",
- 
+
                 instructionSpoken:
                   "Observe a imagem e complete a frase para a menina."
               }
@@ -1863,23 +1863,23 @@
           }
         ]
       },
- 
+
       /* =====================================================
          ETAPA 6 — GREETING MEMORY
          ===================================================== */
       {
         id:
           "en1-m1-step-06-greeting-memory",
- 
+
         title:
           "Greeting Memory",
- 
+
         mechanic:
           "memory-quest",
- 
+
         skill:
           SKILLS.distinguishGreetingFarewell,
- 
+
         questions: [
           {
             id: "EN1-M1-12",
@@ -1891,11 +1891,11 @@
             statement: "Greeting or Goodbye?",
             instruction:
               "Vire as cartas, ouça os áudios e encontre cada cena correspondente.",
- 
+
             contentLanguage: "en",
             instructionLanguage: "pt-BR",
             feedbackLanguage: "pt-BR",
- 
+
             audio: {
               enabled:
                 true,
@@ -1906,7 +1906,7 @@
               role:
                 "instruction"
             },
- 
+
             alternatives: [
               sourceOption(
                 "goodbye",
@@ -1921,14 +1921,14 @@
                 "GOOD MORNING"
               )
             ],
- 
+
             answer: {
               type:
                 "single",
               value:
                 "goodbye"
             },
- 
+
             feedback: {
               correct:
                 "Muito bem! Você revisou HELLO, GOOD MORNING e GOODBYE.",
@@ -1937,7 +1937,7 @@
               language:
                 "pt-BR"
             },
- 
+
             delivery: {
               mechanic:
                 "memory-quest",
@@ -1946,7 +1946,7 @@
               allowAudio:
                 true
             },
- 
+
             metadata: {
               memoryQuest: {
                 assets: {
@@ -1957,7 +1957,7 @@
                   goodbye:
                     VISUALS.goodbye
                 },
- 
+
                 cards: [
                   {
                     id:
@@ -2020,14 +2020,14 @@
                       "Cena de despedida"
                   }
                 ],
- 
+
                 behavior: {
                   shuffleCards:
                     true,
                   matchDelayMs:
                     420,
                   mismatchDelayMs:
-                    720
+                    1800
                 }
               }
             }
@@ -2036,7 +2036,7 @@
       }
     ]
   };
- 
+
   window.DUDUQ_CONTENT
     .english
     .year1
@@ -2044,5 +2044,5 @@
       Object.freeze(
         moduleDefinition
       );
- 
+
 })();
