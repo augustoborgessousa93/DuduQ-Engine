@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
@@ -33,7 +34,7 @@
   <script src="../../../../core/duduq-sound.js?v=110"></script>
   <script src="../../../../core/duduq-intro.js?v=120"></script>
   <script src="../../../../core/duduq-schema.js?v=100"></script>
-  <script src="../../../../core/duduq-content-audio.js?v=101"></script>
+  <script src="../../../../core/duduq-content-audio.js?v=102"></script>
   <script src="../../../../core/duduq-completion.js?v=110"></script>
 
   <!-- Transição universal deve carregar ANTES do Host -->
@@ -60,7 +61,7 @@
   <script src="../../../../core/duduq-router.js?v=100"></script>
 
   <!-- Conteúdo oficial: Inglês — 1º ano — Módulo 01 -->
-  <script src="./module-01.js?v=171"></script>
+  <script src="./module-01.js?v=172"></script>
 
   <script>
     window.addEventListener(
@@ -79,7 +80,6 @@
           ["DuduQSchema", "DuduQ Schema"],
           ["DuduQContentAudio", "DuduQ Content Audio"],
           ["DuduQCompletion", "DuduQ Completion"],
-
           ["DuduQTransition", "DuduQ Transition"],
           ["DuduQ", "DuduQ Host"],
           ["DuduQProgressUI", "DuduQ Progress UI"],
@@ -162,7 +162,6 @@
 
         /* ===============================================
            FIRST LOAD — PREPARAÇÃO DO CENÁRIO
-
 
            O problema da tela azul só acontece no primeiro
            acesso porque o background remoto ainda não está
@@ -328,7 +327,6 @@
                 );
               }
 
-
               /*
                * Segurança: a Intro não fica presa se houver
                * falha real de rede. Nesse caso, o CSS 1.5.0
@@ -410,7 +408,6 @@
 
                         year:
                           moduleDefinition
-
                             .year,
 
                         module:
@@ -494,7 +491,6 @@
                 moduleDefinition
                   .version,
 
-
               skill:
                 activity.skill ||
                 null
@@ -576,7 +572,6 @@
         let initialSpeechReleaseTimer = null;
 
         function lockInitialInstructionSpeech() {
-
           if (initialSpeechReleaseTimer !== null) {
             window.clearTimeout(initialSpeechReleaseTimer);
             initialSpeechReleaseTimer = null;
@@ -659,7 +654,6 @@
             !transition?.reveal
           ) {
             transitionRoot
-
               ?.classList
               ?.remove(
                 "is-intro-soft"
@@ -742,7 +736,6 @@
         }
 
         /* ===============================================
-
            INTRO CINEMATOGRÁFICA
            =============================================== */
 
@@ -825,7 +818,6 @@
            * primeiro cenário foi preparado (ou caiu no
            * timeout seguro com fallback claro).
            */
-
           readyPromise:
             firstWorldReady,
 
