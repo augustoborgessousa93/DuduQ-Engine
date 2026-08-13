@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.3.9
+   Versão 1.4.0
    ========================================================= */
  
 (function () {
   "use strict";
  
-  const VERSION = "1.3.9";
+  const VERSION = "1.4.0";
   if (window.DuduQWorldFusion?.version === VERSION) return;
  
   const scriptUrl =
@@ -15,7 +15,7 @@
     new URL("./duduq-world-fusion.js", window.location.href).href;
  
   const stylesheetUrl = new URL(
-    "./duduq-world-fusion.css?v=139",
+    "./duduq-world-fusion.css?v=140",
     scriptUrl
   ).href;
  
@@ -25,6 +25,7 @@
   const literacySpeechDocuments = new WeakSet();
   const literacyFitDocuments = new WeakSet();
   const speechWarmDocuments = new WeakSet();
+  const feedbackScrollGuardDocuments = new WeakSet();
  
   function getStableFullscreenDocument(doc) {
     let currentWindow = doc?.defaultView;
@@ -890,6 +891,81 @@
     });
   }
  
+  /* =======================================================
+     FEEDBACK SEM SALTO DE VIEWPORT
+ 
+     O Lesson Engine embutido nas mecânicas chama
+     feedbackRef.current.scrollIntoView() quando feedbackState
+     muda. Em um módulo encaixado na viewport, essa rolagem é
+     indesejada: o feedback já possui uma faixa reservada e o
+     movimento acaba cortando o topo do cabeçalho.
+ 
+     Interceptamos SOMENTE scrollIntoView chamado no bloco
+     .duduq-engine-feedback. Qualquer outro scrollIntoView do
+     documento continua funcionando normalmente.
+     ======================================================= */
+ 
+  function installFeedbackScrollGuard(doc) {
+    if (
+      !doc?.defaultView ||
+      feedbackScrollGuardDocuments.has(doc)
+    ) {
+      return;
+    }
+ 
+    const ElementCtor = doc.defaultView.Element;
+    const prototype = ElementCtor?.prototype;
+    const original = prototype?.scrollIntoView;
+ 
+    if (
+      !prototype ||
+      typeof original !== "function"
+    ) {
+      return;
+    }
+ 
+    try {
+      const guardFlag = "__duduqFeedbackScrollGuard140";
+ 
+      if (!prototype[guardFlag]) {
+        Object.defineProperty(
+          prototype,
+          "scrollIntoView",
+          {
+            configurable: true,
+            writable: true,
+            value: function (...args) {
+              try {
+                if (
+                  this?.classList?.contains(
+                    "duduq-engine-feedback"
+                  )
+                ) {
+                  return;
+                }
+              } catch (_) {}
+ 
+              return original.apply(this, args);
+            }
+          }
+        );
+ 
+        Object.defineProperty(
+          prototype,
+          guardFlag,
+          {
+            configurable: true,
+            value: true
+          }
+        );
+      }
+ 
+      feedbackScrollGuardDocuments.add(doc);
+    } catch (_) {
+      /* Navegadores que bloqueiem patch de prototype seguem sem falhar. */
+    }
+  }
+ 
   function syncDocument(doc, frame) {
     if (!doc?.documentElement || !doc.body) return false;
  
@@ -950,6 +1026,7 @@
  
     ensureStylesheet(doc);
     installSpeechWarmup(doc);
+    installFeedbackScrollGuard(doc);
     syncDocument(doc, frame);
     installFullscreenBridge(doc);
     installEarlyLiteracySpeech(doc);
