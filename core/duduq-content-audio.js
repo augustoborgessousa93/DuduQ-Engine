@@ -1,7 +1,6 @@
-/* =========================================================
-   DUDUQ CORE — CONTENT AUDIO
+ DUDUQ CORE — CONTENT AUDIO
    MP3 editorial como fonte prioritária + TTS como fallback.
-   Versão 1.0.0
+   Versão 1.0.1
 
    CONTRATO
    - Cada módulo pode expor moduleDefinition.audioCatalog.
@@ -17,7 +16,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0";
+  const VERSION = "1.0.1";
 
   if (
     window.DuduQContentAudio &&
@@ -80,6 +79,7 @@
   function runtimeMechanic(url) {
     const pathname =
       asString(url?.pathname)
+
         .split("/")
         .pop()
         ?.toLowerCase() || "";
@@ -162,6 +162,7 @@
       function (entry) {
         return (
           entry.id &&
+
           entry.mechanic &&
           (
             entry.instruction.src ||
@@ -175,7 +176,7 @@
   function runtimeInstaller(payload) {
     "use strict";
 
-    const VERSION = "1.0.0";
+    const VERSION = "1.0.1";
 
     if (
       window.DuduQOfficialAudioRuntime &&
@@ -244,6 +245,7 @@
       if (!audio) return;
 
       try {
+
         audio.pause();
         audio.currentTime = 0;
       } catch (_) {}
@@ -326,6 +328,7 @@
 
           function finish(ok) {
             if (settled) return;
+
             settled = true;
             cleanup();
 
@@ -490,6 +493,7 @@
 
       if (active) {
         const item =
+
           active.stimuli?.find(
             function (stimulus) {
               return normalize(stimulus.text) === normalized;
@@ -655,6 +659,7 @@
       const resolved =
         findStimulus(text);
 
+
       if (!resolved?.stimulus?.src) {
         nativeFallback(utterance);
         return;
@@ -784,6 +789,50 @@
           synth.cancel = wrappedCancel;
         } catch (_) {}
       }
+
+      /*
+       * Fallback adicional para navegadores que não permitem
+       * sombrear os métodos diretamente na instância nativa.
+       * O prototype pertence somente ao documento do runtime.
+       */
+      try {
+        if (synth.speak !== wrappedSpeak) {
+          const prototype =
+            Object.getPrototypeOf(synth);
+
+          if (prototype) {
+            Object.defineProperty(
+              prototype,
+              "speak",
+              {
+                configurable: true,
+                writable: true,
+                value: wrappedSpeak
+              }
+            );
+          }
+        }
+      } catch (_) {}
+
+      try {
+        if (synth.cancel !== wrappedCancel) {
+          const prototype =
+            Object.getPrototypeOf(synth);
+
+          if (prototype) {
+            Object.defineProperty(
+              prototype,
+              "cancel",
+
+              {
+                configurable: true,
+                writable: true,
+                value: wrappedCancel
+              }
+            );
+          }
+        }
+      } catch (_) {}
     }
 
     window.addEventListener(
@@ -792,6 +841,279 @@
       { once: true }
     );
   }
+
+  /* =======================================================
+     IFRAMES DIRETOS
+
+     Algumas mecânicas, como o Drag & Drop, carregam o runtime
+     diretamente em iframe.src em vez de passar pelo fetch()
+     do documento principal. Nesses casos instalamos a mesma
+     ponte de MP3 dentro do iframe antes do schema externo ser
+     enviado para a mecânica.
+     ======================================================= */
+
+  const preparedFrames = new WeakMap();
+
+  function findFrameBySource(sourceWindow) {
+    if (!sourceWindow) return null;
+
+    return Array.from(
+      document.querySelectorAll("iframe")
+    ).find(
+      function (iframe) {
+        try {
+          return iframe.contentWindow === sourceWindow;
+        } catch (_) {
+          return false;
+        }
+      }
+    ) || null;
+  }
+
+  function frameMechanic(iframe, hint = "") {
+    const explicit = asString(hint);
+    if (explicit) return explicit;
+
+    try {
+      return runtimeMechanic(
+        getRequestUrl(iframe?.src)
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function makeRuntimeBootstrap(mechanic, catalog) {
+    const safePayload =
+      JSON.stringify({
+        mechanic,
+        catalog
+      })
+        .replace(/</g, "\\u003c")
+        .replace(/>/g, "\\u003e")
+        .replace(/&/g, "\\u0026");
+
+    return (
+      `(${runtimeInstaller.toString()})(${safePayload});`
+    );
+  }
+
+  function installIntoFrame(iframe, mechanicHint = "") {
+    if (!iframe) return false;
+
+    const mechanic =
+      frameMechanic(
+        iframe,
+        mechanicHint
+      );
+
+
+    if (!mechanic) return false;
+
+    const catalog =
+      collectModuleAudioCatalogs();
+
+    if (
+      !catalog.some(
+        function (entry) {
+          return entry.mechanic === mechanic;
+        }
+      )
+    ) {
+      return false;
+    }
+
+    let frameWindow = null;
+    let frameDocument = null;
+
+    try {
+      frameWindow = iframe.contentWindow;
+      frameDocument = iframe.contentDocument;
+    } catch (_) {
+      return false;
+    }
+
+    if (!frameWindow || !frameDocument) {
+      return false;
+    }
+
+    try {
+      const current =
+        frameWindow.DuduQOfficialAudioRuntime;
+
+      if (
+        current?.version === VERSION &&
+        current?.mechanic === mechanic
+      ) {
+        preparedFrames.set(
+          iframe,
+          mechanic
+        );
+        return true;
+      }
+    } catch (_) {}
+
+    const previous =
+      preparedFrames.get(iframe);
+
+    if (previous === mechanic) {
+      try {
+        return Boolean(
+          frameWindow.DuduQOfficialAudioRuntime
+        );
+      } catch (_) {
+        return false;
+      }
+    }
+
+    try {
+      const existing =
+        frameDocument.getElementById(
+          "duduq-official-content-audio-runtime"
+        );
+
+      existing?.remove?.();
+
+      const script =
+        frameDocument.createElement("script");
+
+      script.id =
+        "duduq-official-content-audio-runtime";
+
+      script.textContent =
+        makeRuntimeBootstrap(
+          mechanic,
+          catalog
+        );
+
+      (
+        frameDocument.head ||
+        frameDocument.documentElement ||
+
+        frameDocument.body
+      )?.appendChild(script);
+
+      /* O código já foi executado; removemos apenas a tag. */
+      script.remove();
+
+      const installed =
+        Boolean(
+          frameWindow.DuduQOfficialAudioRuntime
+        );
+
+      if (installed) {
+        preparedFrames.set(
+          iframe,
+          mechanic
+        );
+      }
+
+      return installed;
+    } catch (error) {
+      console.warn(
+        "[DuduQ Content Audio] Não foi possível instalar MP3 oficial no iframe direto; o runtime seguirá com TTS.",
+        error
+      );
+
+      return false;
+    }
+  }
+
+  /*
+   * O Drag & Drop anuncia duduq:mechanic:ready antes de receber
+   * o schema. O listener de captura do Core é registrado antes
+   * dos adaptadores e instala a ponte de áudio sincronamente,
+   * garantindo que enunciado e estímulos já usem MP3 quando o
+   * adaptador responder ao mesmo evento com o conteúdo.
+   */
+  window.addEventListener(
+    "message",
+    function (event) {
+      const data = event.data;
+
+      if (
+        !data ||
+        typeof data !== "object" ||
+        data.type !== "duduq:mechanic:ready"
+      ) {
+        return;
+      }
+
+      const iframe =
+        findFrameBySource(event.source);
+
+      if (!iframe) return;
+
+      installIntoFrame(
+        iframe,
+        asString(data.mechanicId)
+      );
+    },
+    true
+  );
+
+  /* Fallback para iframes diretos que não emitam ready. */
+  function watchDirectFrame(iframe) {
+    if (!iframe || iframe.dataset.duduqContentAudioWatch === "1") {
+      return;
+    }
+
+    iframe.dataset.duduqContentAudioWatch = "1";
+
+    iframe.addEventListener(
+      "load",
+      function () {
+        const mechanic =
+          frameMechanic(iframe);
+
+        if (!mechanic) return;
+
+        installIntoFrame(
+          iframe,
+          mechanic
+        );
+
+      },
+      true
+    );
+  }
+
+  const frameObserver =
+    new MutationObserver(
+      function (mutations) {
+        mutations.forEach(
+          function (mutation) {
+            mutation.addedNodes.forEach(
+              function (node) {
+                if (!(node instanceof Element)) {
+                  return;
+                }
+
+                if (node.tagName === "IFRAME") {
+                  watchDirectFrame(node);
+                }
+
+                node.querySelectorAll?.("iframe")
+                  ?.forEach(watchDirectFrame);
+              }
+            );
+          }
+        );
+      }
+    );
+
+  if (document.documentElement) {
+    frameObserver.observe(
+      document.documentElement,
+      {
+        childList: true,
+        subtree: true
+      }
+    );
+  }
+
+  document.querySelectorAll("iframe")
+    .forEach(watchDirectFrame);
 
   function patchSpeechCalls(html) {
     let result = html;
@@ -915,6 +1237,7 @@
         );
 
       const headers =
+
         new Headers(response.headers);
 
       headers.delete("content-length");
@@ -947,8 +1270,9 @@
       version: VERSION,
       collectCatalog:
         collectModuleAudioCatalogs,
-      patchRuntimeHTML
+      patchRuntimeHTML,
+      installFrame:
+        installIntoFrame
     });
 
 })();
-
