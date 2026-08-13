@@ -1,437 +1,227 @@
 /* =========================================================
    DUDUQ CORE — ASSETS
-   Fonte central de mascotes, sons e backgrounds.
-
-   Versão 1.1.0
-
-   Novos sons:
-   - intro-company-swoosh
-   - intro-mission-music
-   - transition-swoosh
+   Fonte central de mascotes, sons, backgrounds e conteúdo.
+ 
+   Versão 1.2.0
+ 
+   Conteúdo oficial adicionado:
+   - English — Year 1 — Module 01
+   - HELLO / GOODBYE / GOOD MORNING / GOOD AFTERNOON
+   - GOOD NIGHT / BOY / GIRL / MY NAME
    ========================================================= */
-
+ 
 (function () {
   "use strict";
-
-  const VERSION =
-    "1.1.0";
-
-
+ 
+  const VERSION = "1.2.0";
+ 
   if (
     window.DuduQAssets &&
     window.DuduQAssets.version === VERSION
   ) {
     return;
   }
-
-
-  /* =======================================================
-     REPOSITÓRIO CENTRAL DE ASSETS
-     ======================================================= */
-
+ 
   const BASE =
     "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/";
-
-
-  /* =======================================================
-     CATÁLOGO
-     ======================================================= */
-
+ 
   const ASSETS =
     Object.freeze({
-
-      version:
-        VERSION,
-
+ 
+      version: VERSION,
+ 
       repository:
         "augustoborgessousa93/Assets-DuduQ",
-
-
-      /* ===================================================
-         MASCOTES
-         =================================================== */
-
+ 
       mascots:
         Object.freeze({
-
-          idle:
-            BASE +
-            "DUDUQ_IDLE.png",
-
-          correct:
-            BASE +
-            "DUDUQ_ACERTO.png",
-
-          error:
-            BASE +
-            "DUDUQ_ERRO.png",
-
-          transition:
-            BASE +
-            "DUDUQ_IDLE.png",
-
-          complete:
-            BASE +
-            "Duduq_Li%C3%A7%C3%A3o%20concluida.png"
-
+          idle: BASE + "DUDUQ_IDLE.png",
+          correct: BASE + "DUDUQ_ACERTO.png",
+          error: BASE + "DUDUQ_ERRO.png",
+          transition: BASE + "DUDUQ_IDLE.png",
+          complete: BASE + "Duduq_Li%C3%A7%C3%A3o%20concluida.png"
         }),
-
-
-      /* ===================================================
-         SONS
-
-         Convenção:
-         - interação da mecânica
-         - feedback
-         - interface
-         - intro
-         - transição
-         - conclusão
-         =================================================== */
-
+ 
       sounds:
         Object.freeze({
-
-          /* -----------------------------------------------
-             INTERAÇÕES
-             ----------------------------------------------- */
-
-          "bubble-pop":
-            BASE +
-            "bubble-pop.mp3",
-
-          click:
-            BASE +
-            "click.mp3",
-
-          pop:
-            BASE +
-            "pop.mp3",
-
-
-          /* -----------------------------------------------
-             FEEDBACK
-             ----------------------------------------------- */
-
-          correct:
-            BASE +
-            "correct.mp3",
-
-          ding:
-            BASE +
-            "ding.mp3",
-
-          error:
-            BASE +
-            "error.mp3",
-
-
-          /* -----------------------------------------------
-             INTRO — LOGO DA EMPRESA
-
-             Swoosh curto na apresentação inicial
-             da marca da empresa.
-             ----------------------------------------------- */
-
-          "intro-company-swoosh":
-            BASE +
-            "swoosh.mp3",
-
-
-          /* -----------------------------------------------
-             INTRO — EDUQ PLAY
-
-             Música leve da cena principal da coleção,
-             durante Mission / Ready.
-             ----------------------------------------------- */
-
-          "intro-mission-music":
-            BASE +
-            "happy-fun-EduQ_Play.mp3",
-
-
-          /* -----------------------------------------------
-             TRANSIÇÃO ENTRE MECÂNICAS
-
-             Swoosh sincronizado com o slide horizontal.
-             Não representa vitória nem conclusão.
-             ----------------------------------------------- */
-
-          "transition-swoosh":
-            BASE +
-            "swoosh-sound-effect--transitions.mp3",
-
-
-          /* -----------------------------------------------
-             CONCLUSÃO REAL DO MÓDULO
-             ----------------------------------------------- */
-
-          win:
-            BASE +
-            "you%20win.mp3"
-
+          "bubble-pop": BASE + "bubble-pop.mp3",
+          click: BASE + "click.mp3",
+          pop: BASE + "pop.mp3",
+          correct: BASE + "correct.mp3",
+          ding: BASE + "ding.mp3",
+          error: BASE + "error.mp3",
+          "intro-company-swoosh": BASE + "swoosh.mp3",
+          "intro-mission-music": BASE + "happy-fun-EduQ_Play.mp3",
+          "transition-swoosh": BASE + "swoosh-sound-effect--transitions.mp3",
+          win: BASE + "you%20win.mp3"
         }),
-
-
-      /* ===================================================
-         BACKGROUNDS POR ANO
-         =================================================== */
-
+ 
       backgrounds:
         Object.freeze({
-
-          "1":
-            BASE +
-            "1%C2%BA%20ano%20-whispering-woods.png",
-
-          "2":
-            BASE +
-            "2%C2%BA%20ano%20-chroma-canyons.png",
-
-          "3":
-            BASE +
-            "3%C2%BA%20ano%20-clockwork-valley.png",
-
-          "4":
-            BASE +
-            "4%C2%BA%20ano%20-papercraft-campus.png",
-
-          "5":
-            BASE +
-            "5%C2%BA%20ano%20-sky-lab.png"
-
+          "1": BASE + "1%C2%BA%20ano%20-whispering-woods.png",
+          "2": BASE + "2%C2%BA%20ano%20-chroma-canyons.png",
+          "3": BASE + "3%C2%BA%20ano%20-clockwork-valley.png",
+          "4": BASE + "4%C2%BA%20ano%20-papercraft-campus.png",
+          "5": BASE + "5%C2%BA%20ano%20-sky-lab.png"
+        }),
+ 
+      content:
+        Object.freeze({
+          english:
+            Object.freeze({
+              year1:
+                Object.freeze({
+                  module01:
+                    Object.freeze({
+                      greeting: BASE + "Hello.png",
+                      goodbye: BASE + "Bye.png",
+                      morning: BASE + "Good%20Morning.png",
+                      afternoon: BASE + "Good%20Afternoon.png",
+                      night: BASE + "Good%20Night.png",
+                      boy: BASE + "Boy.png",
+                      girl: BASE + "Girl.png",
+                      selfintro: BASE + "My%20name.png"
+                    })
+                })
+            })
         })
-
     });
-
-
-  /* =======================================================
-     ANO
-     ======================================================= */
-
-  function normalizeYear(
-    value
-  ) {
-
+ 
+  function normalizeYear(value) {
     const match =
-      String(
-        value == null
-          ? ""
-          : value
-      ).match(
-        /[1-5]/
-      );
-
-
-    return match
-      ? match[0]
-      : "";
-
+      String(value == null ? "" : value)
+        .match(/[1-5]/);
+ 
+    return match ? match[0] : "";
   }
-
-
-  function applyYear(
-    value
-  ) {
-
-    const year =
-      normalizeYear(
-        value
-      );
-
-
+ 
+  function applyYear(value) {
+    const year = normalizeYear(value);
+ 
     if (
       !year ||
       !ASSETS.backgrounds[year] ||
       !document.body
     ) {
-
       return false;
-
     }
-
-
-    document
-      .documentElement
+ 
+    document.documentElement
       .setAttribute(
         "data-duduq-ano-ativo",
         year
       );
-
-
+ 
     document.body.style.backgroundImage =
-      'url("' +
-      ASSETS.backgrounds[year] +
-      '")';
-
-
+      'url("' + ASSETS.backgrounds[year] + '")';
+ 
     document.body.style.backgroundPosition =
       "center top";
-
-
+ 
     document.body.style.backgroundSize =
       "cover";
-
-
+ 
     document.body.style.backgroundRepeat =
       "no-repeat";
-
-
+ 
     document.body.style.backgroundAttachment =
       "fixed";
-
-
+ 
     return true;
-
   }
-
-
+ 
   function getYear() {
-
     return (
-      document
-        .documentElement
-        .getAttribute(
-          "data-duduq-ano-ativo"
-        ) ||
+      document.documentElement
+        .getAttribute("data-duduq-ano-ativo") ||
       null
     );
-
   }
-
-
-  /* =======================================================
-     BUSCA GENÉRICA DE ASSET
-     ======================================================= */
-
-  function getAsset(
-    type,
+ 
+  function getAsset(type, name) {
+    if (!ASSETS[type]) return null;
+ 
+    return ASSETS[type][name] || null;
+  }
+ 
+  function getSound(name) {
+    return ASSETS.sounds[name] || null;
+  }
+ 
+  function getContentAsset(
+    subject,
+    year,
+    module,
     name
   ) {
-
-    if (
-      !ASSETS[type]
-    ) {
-
-      return null;
-
-    }
-
-
+    const subjectKey =
+      String(subject || "")
+        .trim()
+        .toLowerCase();
+ 
+    const yearKey =
+      "year" +
+      String(year || "")
+        .replace(/\D/g, "");
+ 
+    const moduleKey =
+      "module" +
+      String(module || "")
+        .replace(/\D/g, "")
+        .padStart(2, "0");
+ 
     return (
-      ASSETS[type][name] ||
+      ASSETS.content
+        ?.[subjectKey]
+        ?.[yearKey]
+        ?.[moduleKey]
+        ?.[name] ||
       null
     );
-
   }
-
-
-  /* =======================================================
-     BUSCA DIRETA DE SOM
-     ======================================================= */
-
-  function getSound(
-    name
-  ) {
-
-    return (
-      ASSETS
-        .sounds
-        [name] ||
-      null
-    );
-
-  }
-
-
-  /* =======================================================
-     API GLOBAL LEGADA
-     ======================================================= */
-
-  window.DUDUQ_ASSETS =
-    ASSETS;
-
-
-  /* =======================================================
-     API PÚBLICA
-     ======================================================= */
-
+ 
+  window.DUDUQ_ASSETS = ASSETS;
+ 
   window.DuduQAssets =
     Object.freeze({
-
-      version:
-        VERSION,
-
-      assets:
-        ASSETS,
-
-      setYear:
-        applyYear,
-
-      getYear:
-        getYear,
-
-      get:
-        getAsset,
-
-      getSound:
-        getSound
-
+      version: VERSION,
+      assets: ASSETS,
+      setYear: applyYear,
+      getYear: getYear,
+      get: getAsset,
+      getSound: getSound,
+      getContent: getContentAsset
     });
-
-
-  /* =======================================================
-     APLICAÇÃO AUTOMÁTICA DO ANO
-     ======================================================= */
-
+ 
   const params =
     new URLSearchParams(
       window.location.search
     );
-
-
+ 
   const requestedYear =
     params.get("ano") ||
     params.get("year") ||
     params.get("serie") ||
     params.get("série") ||
-    document
-      .documentElement
-      .getAttribute(
-        "data-duduq-ano"
-      ) ||
+    document.documentElement
+      .getAttribute("data-duduq-ano") ||
     window.DUDUQ_ANO;
-
-
-  if (
-    requestedYear
-  ) {
-
-    applyYear(
-      requestedYear
-    );
-
+ 
+  if (requestedYear) {
+    applyYear(requestedYear);
   }
-
-
-  /* =======================================================
-     READY
-     ======================================================= */
-
+ 
   try {
-
     window.dispatchEvent(
       new CustomEvent(
         "duduq:assets-ready",
         {
           detail: {
-            version:
-              VERSION
+            version: VERSION
           }
         }
       )
     );
-
   } catch (_) {}
-
+ 
 })();
