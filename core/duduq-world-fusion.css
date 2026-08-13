@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Conteúdo nítido sobre fundo cinematográfico suavizado.
-   Versão 1.4.2
+   Versão 1.4.3
    ========================================================= */
  
 html.duduq-world-fusion {
@@ -3565,7 +3565,7 @@ html.duduq-world-fusion
   .duduq-world-mission-fill {
   animation:
     duduq-world-mission-progress
-    680ms
+    1050ms
     cubic-bezier(.18,.74,.24,1)
     forwards;
 }
@@ -3787,3 +3787,14 @@ html.duduq-world-fusion
   visibility: visible !important;
   opacity: 1 !important;
 }
+ 
+ 
+/* =========================================================
+   DUDUQ CORE — WORLD FUSION
+   ROUND 9 — TIMING FINAL DA TRANSIÇÃO GLOBAL
+   Patch visual 1.4.3
+ 
+   A transição “Próxima missão” ENTRE etapas/mecânicas passa a
+   permanecer visível por aproximadamente 1,05s. As transições
+   internas das mecânicas permanecem inalteradas.
+   ========================================================= */
