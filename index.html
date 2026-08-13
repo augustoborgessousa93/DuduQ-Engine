@@ -30,10 +30,10 @@
   <script src="./core/duduq-completion.js?v=110"></script>
 
   <!-- Transição universal deve carregar ANTES do Host -->
-  <script src="./core/duduq-transition.js?v=164"></script>
+  <script src="./core/duduq-transition.js?v=165"></script>
 
-  <!-- Host 1.6.5: tela cheia pertence ao documento principal -->
-  <script src="./core/duduq-host.js?v=165"></script>
+  <!-- Host 1.6.6: proteção síncrona entre missões -->
+  <script src="./core/duduq-host.js?v=166"></script>
 
   <!-- Progresso global -->
   <script src="./core/duduq-progress-ui.js?v=100"></script>
@@ -108,6 +108,7 @@
           const mechanicId
           of requiredMechanics
         ) {
+
           if (
             !window.DuduQ
               .hasMechanic(
@@ -218,6 +219,7 @@
            * depois do DuduQ.start().
            */
           try {
+
             const transitionRoot =
               window.DuduQTransition
                 ?.ensureRoot
@@ -328,6 +330,7 @@
                 window.setTimeout(
                   function () {
                     finish(false);
+
                   },
                   6000
                 );
@@ -438,6 +441,7 @@
                 activity,
                 decision:
                   invalidDecision
+
                     .decision,
                 question:
                   invalidDecision
@@ -548,6 +552,7 @@
            Logo em seguida, a ponte visual oficial cobre
            a Intro, que só então é removida. O reveal
            aguarda o iframe + World Fusion + paints
+
            estáveis antes de mostrar o conteúdo.
            =============================================== */
 
@@ -658,6 +663,7 @@
               );
 
             return;
+
           }
 
           try {
@@ -768,6 +774,7 @@
               }
             );
           }
+
 
           function replayMissionIfNeeded() {
             if (
