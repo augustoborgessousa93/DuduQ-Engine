@@ -26,6 +26,7 @@
   <script src="./core/duduq-sound.js?v=110"></script>
   <script src="./core/duduq-intro.js?v=120"></script>
   <script src="./core/duduq-schema.js?v=100"></script>
+  <script src="./core/duduq-content-audio.js?v=100"></script>
   <script src="./core/duduq-completion.js?v=110"></script>
 
   <!-- Transição universal deve carregar ANTES do Host -->
@@ -52,7 +53,7 @@
   <script src="./core/duduq-router.js?v=100"></script>
 
   <!-- Conteúdo oficial: Inglês — 1º ano — Módulo 01 -->
-  <script src="./content/english/year-1/module-01/module-01.js?v=161"></script>
+  <script src="./content/english/year-1/module-01/module-01.js?v=170"></script>
 
   <script>
     window.addEventListener(
@@ -69,6 +70,7 @@
           ["DuduQIntro", "DuduQ Intro"],
           ["DuduQWorldFusion", "DuduQ World Fusion"],
           ["DuduQSchema", "DuduQ Schema"],
+          ["DuduQContentAudio", "DuduQ Content Audio"],
           ["DuduQCompletion", "DuduQ Completion"],
           ["DuduQTransition", "DuduQ Transition"],
           ["DuduQ", "DuduQ Host"],
@@ -78,6 +80,7 @@
 
         for (
           const [
+
             globalName,
             label
           ] of requiredGlobals
@@ -160,6 +163,7 @@
            fallback não combina com a saída branca da Intro.
 
            Aqui o cenário do ano é carregado e decodificado
+
            enquanto a Intro ainda está em exibição.
            =============================================== */
 
@@ -243,6 +247,7 @@
               function finish(ok) {
                 if (settled) return;
 
+
                 settled = true;
 
                 if (timeoutId !== null) {
@@ -324,6 +329,7 @@
                */
               timeoutId =
                 window.setTimeout(
+
                   function () {
                     finish(false);
                   },
@@ -570,6 +576,7 @@
           document.documentElement.setAttribute(
             "data-duduq-initial-speech-gate",
             "locked"
+
           );
         }
 
@@ -652,6 +659,7 @@
             introElement
               ?.classList
               ?.remove(
+
                 "is-transition-handoff"
               );
 
@@ -735,6 +743,7 @@
           moduleDefinition.intro ||
           {};
 
+
         window.DuduQIntro.show({
           companyKicker:
             intro.companyKicker ||
@@ -816,6 +825,7 @@
             14,
 
           onStart:
+
             startModuleWithIntroHandoff
         });
       }
@@ -823,4 +833,3 @@
   </script>
 </body>
 </html>
- 
