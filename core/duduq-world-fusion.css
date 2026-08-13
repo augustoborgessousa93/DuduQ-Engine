@@ -1,9 +1,9 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Conteúdo nítido sobre fundo cinematográfico suavizado.
-   Versão 1.4.3
+   Versão 1.4.5
    ========================================================= */
- 
+
 html.duduq-world-fusion {
   --duduq-glass-pearl: rgba(249, 253, 255, .90);
   --duduq-glass-soft: rgba(247, 252, 255, .78);
@@ -13,7 +13,7 @@ html.duduq-world-fusion {
   --duduq-blue: #0867c9;
   background: #1b4866;
 }
- 
+
 html.duduq-world-fusion body {
   position: relative;
   isolation: isolate;
@@ -22,14 +22,14 @@ html.duduq-world-fusion body {
   background-color: transparent !important;
   background-image: none !important;
 }
- 
+
 html.duduq-world-fusion body::before,
 html.duduq-world-fusion body::after {
   content: "";
   position: fixed;
   pointer-events: none;
 }
- 
+
 html.duduq-world-fusion body::before {
   z-index: 0;
   inset: -3.5%;
@@ -42,7 +42,7 @@ html.duduq-world-fusion body::before {
   transform: scale(1.025);
   transform-origin: center;
 }
- 
+
 html.duduq-world-fusion body::after {
   z-index: 0;
   inset: 0;
@@ -59,12 +59,12 @@ html.duduq-world-fusion body::after {
       transparent 58%
     );
 }
- 
+
 html.duduq-world-fusion body > #root {
   position: relative;
   z-index: 1;
 }
- 
+
 /* Em modo normal o iframe pode ser menor que 100dvh.
    Não recortamos o conteúdo: a prioridade é impedir
    regressão de clipping fora da tela cheia. */
@@ -74,7 +74,7 @@ html.duduq-world-fusion:not(:fullscreen) body {
   overflow-x: hidden !important;
   overflow-y: auto !important;
 }
- 
+
 html.duduq-world-fusion:not(:fullscreen) body > #root,
 html.duduq-world-fusion:not(:fullscreen) .duduq-engine-root,
 html.duduq-world-fusion:not(:fullscreen) .duduq-engine-shell,
@@ -83,17 +83,17 @@ html.duduq-world-fusion:not(:fullscreen) .duduq-engine-stage {
   min-height: 0 !important;
   overflow: visible !important;
 }
- 
+
 html.duduq-world-fusion:not(:fullscreen) body > #root,
 html.duduq-world-fusion:not(:fullscreen) .duduq-engine-root,
 html.duduq-world-fusion:not(:fullscreen) .duduq-engine-shell {
   min-height: 100dvh !important;
 }
- 
+
 html.duduq-world-fusion .duduq-engine-root {
   background: transparent !important;
 }
- 
+
 /* Grade compartilhada.
    A faixa de feedback existe desde o começo para impedir
    deslocamento do cabeçalho ou do tabuleiro após confirmar. */
@@ -102,7 +102,7 @@ html.duduq-world-fusion body,
 html.duduq-world-fusion body > #root {
   min-height: 100dvh;
 }
- 
+
 html.duduq-world-fusion .duduq-engine-root {
   box-sizing: border-box;
   height: 100dvh;
@@ -110,7 +110,7 @@ html.duduq-world-fusion .duduq-engine-root {
   overflow: hidden;
   padding: 12px 12px 8px;
 }
- 
+
 html.duduq-world-fusion .duduq-engine-shell {
   box-sizing: border-box;
   height: 100%;
@@ -121,17 +121,17 @@ html.duduq-world-fusion .duduq-engine-shell {
   row-gap: 12px;
   overflow: hidden;
 }
- 
+
 html.duduq-world-fusion .duduq-engine-header {
   margin-bottom: 0 !important;
 }
- 
+
 html.duduq-world-fusion .duduq-engine-stage {
   width: 100%;
   min-height: 0;
   overflow: hidden;
 }
- 
+
 html.duduq-world-fusion .duduq-engine-feedback {
   box-sizing: border-box;
   align-self: start;
@@ -144,12 +144,12 @@ html.duduq-world-fusion .duduq-engine-feedback {
   place-items: start center;
   overflow: visible;
 }
- 
+
 html.duduq-world-fusion .duduq-engine-feedback[data-state="idle"] {
   visibility: hidden;
   pointer-events: none;
 }
- 
+
 html.duduq-world-fusion .duduq-engine-feedback-card {
   box-sizing: border-box;
   width: 100%;
@@ -160,20 +160,20 @@ html.duduq-world-fusion .duduq-engine-feedback-card {
   gap: 10px 12px !important;
   border-radius: 18px !important;
 }
- 
+
 html.duduq-world-fusion .duduq-engine-feedback-mascot,
 html.duduq-world-fusion .duduq-mascot[data-size="feedback"] {
   width: 62px !important;
   height: 62px !important;
   flex: 0 0 62px !important;
 }
- 
+
 /* O avanço automático já é comunicado pela própria transição.
    Evita texto solto e periférico abaixo do feedback. */
 html.duduq-world-fusion .duduq-engine-advancing {
   display: none !important;
 }
- 
+
 /* Ritmo entre enunciado e tabuleiro. */
 html.duduq-world-fusion
   :is(
@@ -189,7 +189,7 @@ html.duduq-world-fusion
   ) {
   margin-bottom: 12px !important;
 }
- 
+
 /* Bandeja vazia: mantém um microestado compacto até a confirmação,
    sem deixar um card horizontal desproporcional. */
 html.duduq-world-fusion
@@ -206,7 +206,7 @@ html.duduq-world-fusion
   gap: 0 !important;
   border-radius: 999px !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage
   :is(.duduq-dd-pool, .duduq-udd-pool):has(
@@ -216,7 +216,7 @@ html.duduq-world-fusion
   :is(.duduq-dd-pool-head, .duduq-udd-pool-head) {
   display: none !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage
   :is(.duduq-dd-pool, .duduq-udd-pool):has(
@@ -227,7 +227,7 @@ html.duduq-world-fusion
   min-height: 26px !important;
   padding: 0 !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage
   :is(.duduq-dd-empty-note, .duduq-udd-empty-note) {
@@ -236,7 +236,7 @@ html.duduq-world-fusion
   font-weight: 850 !important;
   opacity: 1 !important;
 }
- 
+
 /* Após confirmar corretamente, a bandeja vazia deixa de competir
    com o feedback reservado. */
 html.duduq-world-fusion .duduq-engine-shell:has(
@@ -247,8 +247,8 @@ html.duduq-world-fusion .duduq-engine-shell:has(
 ) {
   display: none !important;
 }
- 
- 
+
+
 /* Drag & Drop — ao entrar em feedback, o tabuleiro deve terminar onde
    terminam as categorias. Remove a altura residual do runtime e aproxima
    o feedback para a faixa compartilhada (aprox. 16–24px). */
@@ -266,7 +266,7 @@ html.duduq-world-fusion
   min-height: 0 !important;
   overflow: visible !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-shell:has(.duduq-dd-root):has(
     .duduq-engine-feedback[data-state="success"]
@@ -280,7 +280,7 @@ html.duduq-world-fusion
   height: auto !important;
   min-height: 0 !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-shell:has(.duduq-dd-root):has(
     .duduq-engine-feedback[data-state="success"]
@@ -293,61 +293,61 @@ html.duduq-world-fusion
   .duduq-dd-action-slot {
   display: none !important;
 }
- 
- 
+
+
 /* =========================================================
    DRAG & DROP — ÁUDIO SEM TRANSCRIÇÃO EM TODOS OS ESTADOS
- 
+
    O runtime mantém audioDescription internamente para
    acessibilidade e mensagens. Visualmente, nunca exibimos
    "Áudio de ...": nem no card parado, nem durante o drag,
    nem no ghost de retorno.
- 
+
    A apresentação fica:
    [ícone] + PALAVRA
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-dd-root
   .duduq-dd-audio-token {
   flex: 0 0 26px !important;
- 
+
   width: 26px !important;
   min-width: 26px !important;
   max-width: 26px !important;
- 
+
   height: 26px !important;
   min-height: 26px !important;
   max-height: 26px !important;
- 
+
   padding: 0 !important;
   margin: 0 !important;
   gap: 0 !important;
- 
+
   display: inline-grid !important;
   place-items: center !important;
- 
+
   border: 1px solid rgba(118, 183, 235, .42) !important;
   border-radius: 999px !important;
- 
+
   background:
     rgba(234, 246, 255, .94)
     !important;
- 
+
   color: #0b6cc4 !important;
- 
+
   box-shadow:
     0 1px 0 rgba(255, 255, 255, .90) inset,
     0 1px 4px rgba(22, 79, 122, .07)
     !important;
- 
+
   line-height: 1 !important;
   white-space: nowrap !important;
   overflow: hidden !important;
- 
+
   pointer-events: none !important;
 }
- 
+
 /* Remove a descrição visível "Áudio de ...", inclusive nos ghosts. */
 html.duduq-world-fusion
   .duduq-dd-root
@@ -355,7 +355,7 @@ html.duduq-world-fusion
   > span:last-child {
   display: none !important;
 }
- 
+
 /* Alto-falante compacto e consistente em todos os estados. */
 html.duduq-world-fusion
   .duduq-dd-root
@@ -365,7 +365,7 @@ html.duduq-world-fusion
   height: 16px !important;
   display: block !important;
 }
- 
+
 /* Blindagem específica para ghost ativo e ghost de retorno. */
 html.duduq-world-fusion
   .duduq-dd-drag-ghost
@@ -382,15 +382,15 @@ html.duduq-world-fusion
   max-height: 26px !important;
   padding: 0 !important;
 }
- 
+
 /* =========================================================
    BUBBLE POP — INTEGRIDADE DA PALAVRA
- 
+
    Uma palavra nunca pode ser quebrada no meio.
    Frases podem quebrar somente ENTRE palavras.
    Essa regra vale para todos os anos.
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-bp-label {
   overflow-wrap: normal !important;
@@ -398,20 +398,20 @@ html.duduq-world-fusion
   hyphens: none !important;
   white-space: normal !important;
 }
- 
+
 /* =========================================================
    PERFIL DE ALFABETIZAÇÃO — EI / 1º / 2º / 3º ANO
- 
+
    Aplicado pelo World Fusion JS através do atributo
    data-duduq-literacy-early="true".
- 
+
    Objetivos:
    - conteúdo pedagógico em CAIXA ALTA;
    - palavras sem quebra silábica/artificial;
    - fonte das bolhas com tamanho confortável;
    - frase curta pode ocupar 2 linhas, mas somente nos espaços.
    ========================================================= */
- 
+
 html.duduq-world-fusion[data-duduq-literacy-early="true"]
   :is(
     .duduq-engine-heading h1,
@@ -432,7 +432,7 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
   ) {
   text-transform: uppercase !important;
 }
- 
+
 html.duduq-world-fusion[data-duduq-literacy-early="true"]
   .duduq-bp-label {
   /*
@@ -452,26 +452,26 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
   hyphens: none !important;
   white-space: normal !important;
 }
- 
+
 html.duduq-world-fusion[data-duduq-literacy-early="true"]
   .duduq-bp-label[data-small="true"] {
   font-size: clamp(20px, 2.15vw, 27px) !important;
 }
- 
+
 /* =========================================================
    BUBBLE POP — CENTRALIZAÇÃO + FIT DINÂMICO DA PALAVRA
- 
+
    Palavra única:
    - sempre fica em uma linha;
    - ocupa uma área útil centralizada da bolha;
    - recebe tamanho calculado pelo World Fusion JS quando
      necessário, sem reduzir todas as palavras.
- 
+
    Frases:
    - continuam centralizadas;
    - podem quebrar somente ENTRE palavras.
    ========================================================= */
- 
+
 html.duduq-world-fusion[data-duduq-literacy-early="true"]
   .duduq-bp-label[data-duduq-label-kind="word"] {
   box-sizing: border-box !important;
@@ -480,27 +480,27 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
   min-width: 0 !important;
   padding-inline: 8px !important;
   margin: 0 !important;
- 
+
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
- 
+
   text-align: center !important;
   white-space: nowrap !important;
- 
+
   overflow: hidden !important;
   text-overflow: clip !important;
- 
+
   font-size:
     var(
       --duduq-bp-word-fit-size,
       clamp(20px, 2.15vw, 27px)
     )
     !important;
- 
+
   line-height: 1 !important;
 }
- 
+
 html.duduq-world-fusion[data-duduq-literacy-early="true"]
   .duduq-bp-label[data-duduq-label-kind="phrase"] {
   box-sizing: border-box !important;
@@ -509,16 +509,16 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
   min-width: 0 !important;
   padding-inline: 7px !important;
   margin: 0 !important;
- 
+
   display: grid !important;
   place-items: center !important;
   text-align: center !important;
   white-space: normal !important;
- 
+
   overflow-wrap: normal !important;
   word-break: normal !important;
   hyphens: none !important;
- 
+
   /* 1.3.4 — frases também recebem fit individual.
      O tamanho só cai quando a frase específica não cabe. */
   font-size:
@@ -529,14 +529,14 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
     !important;
   line-height: 1.02 !important;
 }
- 
+
 /* Centralização geométrica dentro da bolha. */
 html.duduq-world-fusion[data-duduq-literacy-early="true"]
   .duduq-bp-bubble {
   display: grid !important;
   place-items: center !important;
 }
- 
+
 /* Evita bolhas dinâmicas pequenas demais no perfil de alfabetização. */
 html.duduq-world-fusion[data-duduq-literacy-early="true"]
   .duduq-bp-bubble-shell--dynamic {
@@ -548,7 +548,7 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
     )
     !important;
 }
- 
+
 /* O enunciado em CAIXA ALTA também desce um único passo,
    mantendo a hierarquia visual e liberando um pouco mais de largura. */
 html.duduq-world-fusion[data-duduq-literacy-early="true"]
@@ -558,7 +558,7 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
   ) {
   font-size: clamp(17px, 1.9vw, 27px) !important;
 }
- 
+
 /* Mantém palavras dos cards nítidas e sem quebra interna. */
 html.duduq-world-fusion[data-duduq-literacy-early="true"]
   :is(
@@ -569,7 +569,7 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
   word-break: normal !important;
   hyphens: none !important;
 }
- 
+
 /* Em telas menores, não reduzimos a palavra da bolha a um tamanho
    inadequado para alfabetização. */
 @media (max-width: 520px) {
@@ -583,24 +583,24 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
       )
       !important;
   }
- 
+
   html.duduq-world-fusion[data-duduq-literacy-early="true"]
     .duduq-bp-label[data-duduq-label-kind="word"] {
     padding-inline: 6px !important;
   }
 }
- 
+
 @media (max-width: 520px) {
   html.duduq-world-fusion[data-duduq-literacy-early="true"]
     .duduq-bp-label {
     font-size: clamp(20px, 6.1vw, 26px) !important;
   }
- 
+
   html.duduq-world-fusion[data-duduq-literacy-early="true"]
     .duduq-bp-label[data-small="true"] {
     font-size: clamp(19px, 5.6vw, 24px) !important;
   }
- 
+
   html.duduq-world-fusion[data-duduq-literacy-early="true"]
     :is(
       .duduq-bp-instruction h2,
@@ -609,8 +609,8 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
     font-size: clamp(17px, 5.5vw, 25px) !important;
   }
 }
- 
- 
+
+
 /* Bubble Pop — o status "Todos os alvos foram encontrados!" é redundante
    quando o feedback final de sucesso já está visível. Ocultá-lo libera a
    altura necessária para o card verde permanecer inteiro no navegador normal. */
@@ -621,7 +621,7 @@ html.duduq-world-fusion
   .duduq-bp-status {
   display: none !important;
 }
- 
+
 /* Superfícies compartilhadas. */
 html.duduq-world-fusion .duduq-engine-header,
 html.duduq-world-fusion
@@ -652,11 +652,11 @@ html.duduq-world-fusion
     0 14px 34px rgba(18, 54, 83, .11)
     !important;
 }
- 
+
 html.duduq-world-fusion .duduq-engine-header {
   border-radius: 24px !important;
 }
- 
+
 html.duduq-world-fusion
   :is(
     .duduq-dd-instruction,
@@ -671,7 +671,7 @@ html.duduq-world-fusion
   ) {
   border-radius: 999px !important;
 }
- 
+
 html.duduq-world-fusion
   :is(
     .duduq-dd-instruction,
@@ -688,13 +688,13 @@ html.duduq-world-fusion
   color: var(--duduq-blue) !important;
   text-shadow: 0 1px 0 rgba(255, 255, 255, .7);
 }
- 
+
 /* Drag & Drop. */
 html.duduq-world-fusion
   :is(.duduq-dd-board, .duduq-udd-board) {
   background: transparent !important;
 }
- 
+
 html.duduq-world-fusion
   :is(.duduq-dd-target, .duduq-udd-target) {
   border: 1px solid rgba(116, 190, 199, .54) !important;
@@ -712,7 +712,7 @@ html.duduq-world-fusion
     0 9px 22px rgba(16, 63, 79, .052)
     !important;
 }
- 
+
 html.duduq-world-fusion
   :is(.duduq-dd-target, .duduq-udd-target):nth-child(even) {
   border-color: rgba(222, 177, 96, .55) !important;
@@ -724,7 +724,7 @@ html.duduq-world-fusion
     )
     !important;
 }
- 
+
 html.duduq-world-fusion
   :is(.duduq-dd-target, .duduq-udd-target)[data-active-target="true"] {
   border-color: #55b7e8 !important;
@@ -734,7 +734,7 @@ html.duduq-world-fusion
     0 14px 34px rgba(11, 74, 108, .13)
     !important;
 }
- 
+
 html.duduq-world-fusion
   :is(.duduq-dd-pool, .duduq-udd-pool) {
   border: 1px solid rgba(206, 225, 239, .52) !important;
@@ -743,14 +743,14 @@ html.duduq-world-fusion
   backdrop-filter: blur(8px) saturate(.96) !important;
   box-shadow: 0 7px 18px rgba(15, 55, 86, .05) !important;
 }
- 
+
 html.duduq-world-fusion
   :is(.duduq-dd-target-items, .duduq-udd-target-items)
   :is(.duduq-dd-item, .duduq-udd-item) {
   min-width: 68px;
   padding: 8px 12px;
 }
- 
+
 html.duduq-world-fusion
   :is(.duduq-dd-item, .duduq-udd-item) {
   border-color: rgba(150, 182, 208, .72) !important;
@@ -768,7 +768,7 @@ html.duduq-world-fusion
     0 1px 0 rgba(255, 255, 255, .92) inset
     !important;
 }
- 
+
 html.duduq-world-fusion
   :is(.duduq-dd-capacity-badge, .duduq-udd-capacity-badge) {
   color: #536c82 !important;
@@ -776,7 +776,7 @@ html.duduq-world-fusion
   font-weight: 850 !important;
   opacity: 1 !important;
 }
- 
+
 /* Nitidez de mídia: dimensões são controladas pelas mecânicas,
    sem scale permanente no estado de repouso. */
 html.duduq-world-fusion
@@ -793,7 +793,7 @@ html.duduq-world-fusion
   backface-visibility: hidden;
   transform: translateZ(0);
 }
- 
+
 /* Bubble Pop — vidro com contraste suficiente para os balões,
    preservando a leitura do cenário como atmosfera. */
 html.duduq-world-fusion .duduq-bp-arena {
@@ -818,17 +818,17 @@ html.duduq-world-fusion .duduq-bp-arena {
     0 16px 40px rgba(11, 52, 79, .065)
     !important;
 }
- 
+
 html.duduq-world-fusion .duduq-bp-arena[data-mode="dynamic-stream"] {
   height: clamp(310px, 40dvh, 400px) !important;
   min-height: 310px !important;
 }
- 
+
 html.duduq-world-fusion .duduq-bp-arena::before,
 html.duduq-world-fusion .duduq-bp-arena::after {
   display: none !important;
 }
- 
+
 html.duduq-world-fusion
   :is(.duduq-bp-chip, .duduq-bp-status) {
   border: 1px solid rgba(205, 226, 240, .76) !important;
@@ -840,7 +840,7 @@ html.duduq-world-fusion
     0 9px 20px rgba(15, 55, 86, .09)
     !important;
 }
- 
+
 /* Feedback pertence à etapa. */
 html.duduq-world-fusion
   .duduq-engine-feedback:not([data-state="idle"]) {
@@ -848,7 +848,7 @@ html.duduq-world-fusion
   margin: 0 auto !important;
   scroll-margin-block: 12px;
 }
- 
+
 /* Demais mecânicas. */
 html.duduq-world-fusion
   :is(
@@ -865,7 +865,7 @@ html.duduq-world-fusion
   backdrop-filter: blur(6px) saturate(1.01) !important;
   box-shadow: 0 18px 42px rgba(12, 52, 78, .08) !important;
 }
- 
+
 /* Conclusão:
    World Fusion aplica somente a pele visual.
    A geometria fica exclusivamente em duduq-completion.css. */
@@ -875,7 +875,7 @@ html.duduq-world-fusion .duduq-completion {
   backdrop-filter: none !important;
   animation: none !important;
 }
- 
+
 html.duduq-world-fusion .duduq-completion-card {
   border: 1px solid rgba(209, 228, 241, .88) !important;
   background:
@@ -894,7 +894,7 @@ html.duduq-world-fusion .duduq-completion-card {
     !important;
   animation: none !important;
 }
- 
+
 html.duduq-world-fusion
   :is(
     .duduq-completion-achievement,
@@ -907,24 +907,24 @@ html.duduq-world-fusion
   transform: none !important;
   animation: none !important;
 }
- 
+
 html.duduq-world-fusion .duduq-completion-mascot {
   opacity: 1;
   will-change: transform;
 }
- 
+
 html.duduq-world-fusion .duduq-completion-hero::before {
   animation-play-state: running;
 }
- 
+
 html.duduq-world-fusion .duduq-completion-confetti {
   z-index: 2 !important;
 }
- 
+
 html.duduq-world-fusion.duduq-transition-lock .duduq-completion-star {
   animation-play-state: paused !important;
 }
- 
+
 html.duduq-world-fusion:fullscreen,
 html.duduq-world-fusion:fullscreen body,
 html.duduq-world-fusion:fullscreen body > #root {
@@ -932,11 +932,11 @@ html.duduq-world-fusion:fullscreen body > #root {
   height: 100%;
   min-height: 100%;
 }
- 
+
 html.duduq-world-fusion:fullscreen body {
   overflow: hidden;
 }
- 
+
 /* O boot usa a mesma família tonal do cenário e nunca abre branco
    durante uma troca protegida. */
 html.duduq-world-fusion #duduq-boot {
@@ -949,29 +949,29 @@ html.duduq-world-fusion #duduq-boot {
     )
     !important;
 }
- 
+
 @media (max-height: 760px) and (min-width: 721px) {
   html.duduq-world-fusion .duduq-engine-root {
     padding-top: 8px;
     padding-bottom: 6px;
   }
- 
+
   html.duduq-world-fusion .duduq-engine-shell {
     grid-template-rows: auto minmax(0, auto) 102px;
     row-gap: 10px;
   }
- 
+
   html.duduq-world-fusion .duduq-engine-header {
     min-height: 72px !important;
     padding-block: 8px !important;
   }
- 
+
   html.duduq-world-fusion .duduq-engine-feedback {
     min-height: 102px;
     height: 102px;
     padding-top: 2px;
   }
- 
+
   html.duduq-world-fusion
     :is(
       .duduq-dd-instruction,
@@ -987,49 +987,49 @@ html.duduq-world-fusion #duduq-boot {
     margin-bottom: 10px !important;
   }
 }
- 
+
 @media (max-width: 720px) {
   html.duduq-world-fusion .duduq-engine-root {
     padding: 8px 8px 6px;
   }
- 
+
   html.duduq-world-fusion .duduq-engine-shell {
     grid-template-rows: auto minmax(0, auto) 100px;
     row-gap: 10px;
   }
- 
+
   html.duduq-world-fusion .duduq-engine-feedback {
     width: min(840px, calc(100% - 12px));
     min-height: 100px;
     height: 100px;
     padding-top: 2px;
   }
- 
+
   html.duduq-world-fusion .duduq-engine-feedback-card {
     min-height: 80px !important;
     max-height: 92px;
     padding: 8px 12px !important;
   }
- 
+
   html.duduq-world-fusion .duduq-engine-feedback-mascot,
   html.duduq-world-fusion .duduq-mascot[data-size="feedback"] {
     width: 56px !important;
     height: 56px !important;
     flex-basis: 56px !important;
   }
- 
+
   html.duduq-world-fusion body::before {
     inset: -2.5%;
     filter: blur(4px) saturate(.74) brightness(.92) contrast(.92);
     transform: scale(1.025);
   }
- 
+
   html.duduq-world-fusion
     :is(.duduq-dd-target, .duduq-udd-target) {
     -webkit-backdrop-filter: blur(6px) saturate(1.01);
     backdrop-filter: blur(6px) saturate(1.01);
   }
- 
+
   html.duduq-world-fusion
     :is(
       .duduq-dd-instruction,
@@ -1045,38 +1045,38 @@ html.duduq-world-fusion #duduq-boot {
     margin-bottom: 10px !important;
   }
 }
- 
+
 @media (max-height: 720px) {
   html.duduq-world-fusion .duduq-bp-arena[data-mode="dynamic-stream"] {
     height: clamp(275px, 37dvh, 330px) !important;
     min-height: 275px !important;
   }
 }
- 
+
 @media (prefers-reduced-motion: reduce) {
   html.duduq-world-fusion .duduq-completion-star {
     animation: none !important;
   }
- 
+
   html.duduq-world-fusion .duduq-completion-mascot,
   html.duduq-world-fusion .duduq-completion-hero::before {
     animation: none !important;
   }
- 
+
   html.duduq-world-fusion .duduq-completion-mascot {
     transform: scale(2.12) !important;
   }
- 
+
   html.duduq-world-fusion .duduq-completion-hero::before {
     transform: translateX(-50%) scaleX(.9) !important;
   }
 }
- 
+
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    LAYOUT STABILITY / VIEWPORT FIT
    Patch visual 1.3.5
- 
+
    OBJETIVOS
    - mascote do cabeçalho nunca desaparece;
    - preservar espaço do feedback sem salto de layout;
@@ -1086,22 +1086,22 @@ html.duduq-world-fusion #duduq-boot {
    - Target Shooter, Memory Quest e Smart Sentence adaptativos;
    - manter fallback com scroll em telas realmente pequenas.
    ========================================================= */
- 
+
 /* =========================================================
    TOKENS DA NOVA COMPOSIÇÃO
    ========================================================= */
- 
+
 html.duduq-world-fusion {
   --duduq-fit-gap: clamp(7px, 1.05dvh, 11px);
   --duduq-fit-feedback-height: clamp(78px, 10.5dvh, 92px);
   --duduq-fit-stage-radius: clamp(22px, 2vw, 30px);
   --duduq-fit-stage-padding: clamp(7px, 1dvh, 11px);
 }
- 
+
 /* =========================================================
    1. MASCOTE PERSISTENTE NO CABEÇALHO
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-header-mascot-slot {
   position: relative !important;
@@ -1109,7 +1109,7 @@ html.duduq-world-fusion
   overflow: visible !important;
   isolation: isolate;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-header-mascot-slot[data-visible="false"]::before {
   content: "";
@@ -1132,35 +1132,35 @@ html.duduq-world-fusion
     ease-in-out
     infinite;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-header-mascot-slot[data-visible="true"]::before {
   content: none !important;
   display: none !important;
 }
- 
+
 @keyframes duduq-header-mascot-stable-breathe {
   0%,
   100% {
     transform: translateY(0) scale(1);
   }
- 
+
   50% {
     transform: translateY(-2px) scale(1.018);
   }
 }
- 
+
 @media (prefers-reduced-motion: reduce) {
   html.duduq-world-fusion
     .duduq-engine-header-mascot-slot::before {
     animation: none !important;
   }
 }
- 
+
 /* =========================================================
    2. STAGE PRINCIPAL
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage {
   box-sizing: border-box !important;
@@ -1188,7 +1188,7 @@ html.duduq-world-fusion
     blur(11px)
     saturate(1.04);
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage::before {
   content: "";
@@ -1209,15 +1209,15 @@ html.duduq-world-fusion
       transparent 28%
     );
 }
- 
+
 /* =========================================================
    3. VIEWPORT FIT — DESKTOP / NOTEBOOK
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion:not([data-duduq-parent-fullscreen]),
   html.duduq-world-fusion:not([data-duduq-parent-fullscreen]) body,
   html.duduq-world-fusion:not([data-duduq-parent-fullscreen]) body > #root {
@@ -1228,7 +1228,7 @@ html.duduq-world-fusion
     max-height: 100dvh !important;
     overflow: hidden !important;
   }
- 
+
   html.duduq-world-fusion:not([data-duduq-parent-fullscreen])
     .duduq-engine-root {
     box-sizing: border-box !important;
@@ -1242,7 +1242,7 @@ html.duduq-world-fusion
       clamp(10px, 1.4vw, 18px)
       6px !important;
   }
- 
+
   html.duduq-world-fusion:not([data-duduq-parent-fullscreen])
     .duduq-engine-shell {
     box-sizing: border-box !important;
@@ -1260,7 +1260,7 @@ html.duduq-world-fusion
       var(--duduq-fit-gap) !important;
     overflow: hidden !important;
   }
- 
+
   html.duduq-world-fusion:not([data-duduq-parent-fullscreen])
     .duduq-engine-stage {
     width: 100% !important;
@@ -1271,7 +1271,7 @@ html.duduq-world-fusion
     padding:
       var(--duduq-fit-stage-padding) !important;
   }
- 
+
   html.duduq-world-fusion:not([data-duduq-parent-fullscreen])
     .duduq-engine-feedback {
     box-sizing: border-box !important;
@@ -1292,7 +1292,7 @@ html.duduq-world-fusion
       2px 0 0 !important;
     overflow: visible !important;
   }
- 
+
   html.duduq-world-fusion:not([data-duduq-parent-fullscreen])
     .duduq-engine-feedback-card {
     width: 100% !important;
@@ -1308,7 +1308,7 @@ html.duduq-world-fusion
     border-radius:
       17px !important;
   }
- 
+
   html.duduq-world-fusion:not([data-duduq-parent-fullscreen])
     .duduq-engine-feedback
     .duduq-mascot[data-size="feedback"] {
@@ -1318,21 +1318,21 @@ html.duduq-world-fusion
       0 0 54px !important;
   }
 }
- 
+
 /* =========================================================
    4. HEADER MAIS EFICIENTE EM NOTEBOOK
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (max-height: 780px) {
- 
+
   html.duduq-world-fusion {
     --duduq-fit-gap: 7px;
     --duduq-fit-feedback-height: 78px;
     --duduq-fit-stage-padding: 7px;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-header {
     min-height: 62px !important;
@@ -1342,7 +1342,7 @@ html.duduq-world-fusion
     border-radius:
       21px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-header-mascot-slot {
     width: 56px !important;
@@ -1350,14 +1350,14 @@ html.duduq-world-fusion
     height: 52px !important;
     flex-basis: 56px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-header-mascot-slot
     .duduq-mascot[data-size="idle"] {
     width: 52px !important;
     height: 52px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-button {
     min-height: 40px !important;
@@ -1365,13 +1365,13 @@ html.duduq-world-fusion
       7px
       12px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-progress-track {
     height: 13px !important;
     min-height: 13px !important;
   }
- 
+
   html.duduq-world-fusion
     :is(
       .duduq-dd-instruction,
@@ -1391,15 +1391,15 @@ html.duduq-world-fusion
     padding-bottom: 8px !important;
   }
 }
- 
+
 /* =========================================================
    5. TARGET SHOOTER — FIT REAL
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ts-root {
@@ -1408,7 +1408,7 @@ html.duduq-world-fusion
     min-height: 0 !important;
     max-height: 100% !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ts-surface {
@@ -1426,13 +1426,13 @@ html.duduq-world-fusion
     padding:
       0 !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ts-status {
     margin: 0 !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ts-arena {
@@ -1444,16 +1444,16 @@ html.duduq-world-fusion
     margin: 0 !important;
   }
 }
- 
+
 @media
   (min-width: 820px)
   and (max-height: 700px) {
- 
+
   html.duduq-world-fusion
     .duduq-ts-instruction {
     min-height: 52px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-ts-status {
     transform:
@@ -1461,7 +1461,7 @@ html.duduq-world-fusion
     transform-origin:
       top center;
   }
- 
+
   html.duduq-world-fusion
     .duduq-ts-hint {
     font-size:
@@ -1472,15 +1472,15 @@ html.duduq-world-fusion
       ) !important;
   }
 }
- 
+
 /* =========================================================
    6. MEMORY QUEST — GRADE QUE SE AJUSTA À ALTURA
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-mq-root {
@@ -1489,7 +1489,7 @@ html.duduq-world-fusion
     min-height: 0 !important;
     max-height: 100% !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-mq-surface {
@@ -1505,7 +1505,7 @@ html.duduq-world-fusion
     gap: 7px !important;
     padding: 0 !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-mq-board {
     width:
@@ -1520,7 +1520,7 @@ html.duduq-world-fusion
     flex-direction: column !important;
     overflow: hidden !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-mq-grid {
     flex:
@@ -1530,7 +1530,7 @@ html.duduq-world-fusion
     grid-auto-rows:
       minmax(0, 1fr) !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-mq-card {
     height: 100% !important;
@@ -1538,26 +1538,26 @@ html.duduq-world-fusion
     max-height: 100% !important;
   }
 }
- 
+
 @media
   (min-width: 820px)
   and (max-height: 760px) {
- 
+
   html.duduq-world-fusion
     .duduq-mq-grid {
     gap: 8px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-mq-board {
     gap: 7px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-mq-card {
     border-radius: 17px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-mq-question {
     width:
@@ -1574,15 +1574,15 @@ html.duduq-world-fusion
       ) !important;
   }
 }
- 
+
 /* =========================================================
    7. SMART SENTENCE — COMPACTAÇÃO RESPONSIVA
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ss-root {
@@ -1591,7 +1591,7 @@ html.duduq-world-fusion
     min-height: 0 !important;
     max-height: 100% !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ss-surface {
@@ -1607,7 +1607,7 @@ html.duduq-world-fusion
     gap: 8px !important;
     padding-top: 0 !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-ss-board {
     box-sizing: border-box !important;
@@ -1627,7 +1627,7 @@ html.duduq-world-fusion
         20px
       ) !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-ss-context {
     margin-bottom:
@@ -1637,7 +1637,7 @@ html.duduq-world-fusion
         12px
       ) !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-ss-context img {
     width:
@@ -1653,7 +1653,7 @@ html.duduq-world-fusion
         108px
       ) !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-ss-sentence-card {
     min-height:
@@ -1669,7 +1669,7 @@ html.duduq-world-fusion
         22px
       ) !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-ss-sentence {
     font-size:
@@ -1680,15 +1680,15 @@ html.duduq-world-fusion
       ) !important;
   }
 }
- 
+
 /* =========================================================
    8. REDUÇÃO DE "ESPAÇO MORTO"
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     > :is(
@@ -1708,11 +1708,11 @@ html.duduq-world-fusion
     max-height: 100% !important;
   }
 }
- 
+
 /* =========================================================
    9. FEEDBACK VISUALMENTE LIGADO À ATIVIDADE
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-feedback-card {
   border-width:
@@ -1722,7 +1722,7 @@ html.duduq-world-fusion
     0 12px 24px rgba(31, 65, 99, .10),
     inset 0 1px 0 rgba(255, 255, 255, .95) !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-feedback[data-state="retry"],
 html.duduq-world-fusion
@@ -1730,20 +1730,20 @@ html.duduq-world-fusion
   transform:
     translateY(-1px);
 }
- 
+
 /* =========================================================
    10. FALLBACK
    ========================================================= */
- 
+
 @media
   (max-width: 819px),
   (max-height: 599px) {
- 
+
   html.duduq-world-fusion body {
     overflow-y:
       auto !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-root,
   html.duduq-world-fusion
@@ -1758,12 +1758,12 @@ html.duduq-world-fusion
       visible !important;
   }
 }
- 
+
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    ROUND 2 — VIEWPORT / CHROME / MECHANIC POLISH
    Patch visual 1.3.6
- 
+
    OBJETIVOS
    - corrigir o tamanho do mascote fallback no cabeçalho;
    - manter a mesma largura útil em modo normal e tela cheia;
@@ -1774,36 +1774,36 @@ html.duduq-world-fusion
    - suavizar o painel do Memory Quest;
    - tornar a bandeja de opções do Drag & Drop proporcional.
    ========================================================= */
- 
+
 /* =========================================================
    11. MASCOTE PERSISTENTE — ESCALA VISUAL CORRETA
- 
+
    O PNG oficial possui uma área transparente ampla e o runtime
    o amplia aproximadamente 4x quando renderiza o mascote nativo.
    O fallback criado na 1.3.5 usava contain e, por isso, mostrava
    somente um DuduQ minúsculo durante feedback/transição.
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-header-mascot-slot[data-visible="false"]::before {
   background-size: 410% auto !important;
   background-position: 50% 52% !important;
 }
- 
- 
+
+
 /* =========================================================
    12. VIEWPORT ÚNICA — NORMAL E TELA CHEIA
- 
+
    A versão 1.3.5 aplicava o fit principal somente fora do
    fullscreen. Alguns runtimes então retomavam max-width interno
    (ex.: 1180px) ao entrar em tela cheia. A partir daqui o mesmo
    contrato visual vale nos dois modos.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion,
   html.duduq-world-fusion body,
   html.duduq-world-fusion body > #root {
@@ -1814,7 +1814,7 @@ html.duduq-world-fusion
     max-height: 100dvh !important;
     overflow: hidden !important;
   }
- 
+
   html.duduq-world-fusion .duduq-engine-root {
     box-sizing: border-box !important;
     width: 100% !important;
@@ -1827,7 +1827,7 @@ html.duduq-world-fusion
       clamp(10px, 1.4vw, 18px)
       6px !important;
   }
- 
+
   html.duduq-world-fusion .duduq-engine-shell {
     box-sizing: border-box !important;
     width: 100% !important;
@@ -1845,7 +1845,7 @@ html.duduq-world-fusion
     overflow: hidden !important;
     margin-inline: auto !important;
   }
- 
+
   html.duduq-world-fusion .duduq-engine-stage {
     box-sizing: border-box !important;
     width: 100% !important;
@@ -1856,26 +1856,26 @@ html.duduq-world-fusion
     padding: var(--duduq-fit-stage-padding) !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    13. TARGET SHOOTER — CENTRALIZAÇÃO
- 
+
    O grid de fit da 1.3.5 preservou a largura do enunciado,
    porém deixou o item alinhado ao início da grade. Mantemos
    arena em largura total e recentralizamos os blocos menores.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ts-surface {
     justify-items: center !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ts-instruction,
@@ -1885,28 +1885,28 @@ html.duduq-world-fusion
     justify-self: center !important;
     margin-inline: auto !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ts-arena {
     justify-self: stretch !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    14. MATCHING — BOTÃO CONFIRMAR SEM RECORTE
- 
+
    O action-slot original reserva 82–88px e usa padding superior
    elevado. Com a stage limitada à viewport, parte do botão ficava
    para fora do painel. O botão agora possui um slot compacto e
    explícito dentro da própria grade da mecânica.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-root {
@@ -1916,7 +1916,7 @@ html.duduq-world-fusion
     min-height: 0 !important;
     max-height: 100% !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-surface {
@@ -1936,7 +1936,7 @@ html.duduq-world-fusion
     padding: 0 !important;
     overflow: visible !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-instruction {
@@ -1945,7 +1945,7 @@ html.duduq-world-fusion
       auto
       4px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-board {
@@ -1959,7 +1959,7 @@ html.duduq-world-fusion
     padding-bottom: clamp(8px, 1.3dvh, 13px) !important;
     overflow: visible !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-action-slot {
@@ -1973,7 +1973,7 @@ html.duduq-world-fusion
     place-items: center !important;
     overflow: visible !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-primary {
@@ -1982,11 +1982,11 @@ html.duduq-world-fusion
     margin: 0 !important;
   }
 }
- 
+
 @media
   (min-width: 820px)
   and (max-height: 720px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-surface {
@@ -1996,7 +1996,7 @@ html.duduq-world-fusion
       56px !important;
     gap: 4px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-action-slot {
@@ -2004,7 +2004,7 @@ html.duduq-world-fusion
     height: 56px !important;
     padding: 2px 0 !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-primary {
@@ -2012,21 +2012,21 @@ html.duduq-world-fusion
     height: 48px !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    15. SMART SENTENCE — CENTRALIZAÇÃO E ALTURA NATURAL
- 
+
    O fit anterior transformou a surface em grid com duas linhas.
    Como a mecânica possui instruction + meta + board + action-slot,
    itens extras entraram em linhas implícitas e ficaram alinhados
    à esquerda. Voltamos ao fluxo flex nativo, mantendo o fit.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ss-root {
@@ -2036,7 +2036,7 @@ html.duduq-world-fusion
     min-height: 0 !important;
     max-height: 100% !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ss-surface {
@@ -2054,7 +2054,7 @@ html.duduq-world-fusion
     padding-top: 0 !important;
     overflow: visible !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     :is(
@@ -2065,7 +2065,7 @@ html.duduq-world-fusion
     ) {
     margin-inline: auto !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ss-board {
@@ -2080,14 +2080,14 @@ html.duduq-world-fusion
       clamp(10px, 1.55dvh, 17px) !important;
     overflow: visible !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ss-context {
     margin-bottom:
       clamp(6px, .9dvh, 10px) !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ss-context img {
@@ -2096,7 +2096,7 @@ html.duduq-world-fusion
     height:
       clamp(70px, 9.5dvh, 94px) !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ss-sentence-card {
@@ -2105,7 +2105,7 @@ html.duduq-world-fusion
     padding:
       clamp(11px, 1.7dvh, 18px) !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ss-action-slot {
@@ -2118,7 +2118,7 @@ html.duduq-world-fusion
     display: grid !important;
     place-items: center !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-ss-primary {
@@ -2127,19 +2127,19 @@ html.duduq-world-fusion
     margin: 0 !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    16. SMART SENTENCE — FEEDBACK DA QUESTÃO CORRETA
- 
+
    A própria mecânica marca o sentence-card atual com
    data-success="true" enquanto o feedback pertence à questão.
    Ao avançar internamente, o novo card volta para false, porém
    o feedback externo podia permanecer por alguns frames.
- 
+
    O mesmo princípio é aplicado ao retry usando o estado do gap.
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-shell:has(.duduq-ss-root):not(:has(
     .duduq-ss-sentence-card[data-success="true"]
@@ -2148,7 +2148,7 @@ html.duduq-world-fusion
   visibility: hidden !important;
   pointer-events: none !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-shell:has(.duduq-ss-root):not(:has(
     .duduq-ss-gap[data-retry="true"]
@@ -2157,12 +2157,12 @@ html.duduq-world-fusion
   visibility: hidden !important;
   pointer-events: none !important;
 }
- 
- 
+
+
 /* =========================================================
    17. MEMORY QUEST — PAINEL PREMIUM, SEM BLOCO RETANGULAR
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage
   .duduq-mq-board {
@@ -2194,22 +2194,22 @@ html.duduq-world-fusion
     0 16px 34px rgba(22, 60, 91, .10),
     inset 0 1px 0 rgba(255, 255, 255, .96) !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage
   .duduq-mq-grid {
   margin-inline: auto !important;
 }
- 
- 
+
+
 /* =========================================================
    18. DRAG & DROP — BANDEJA PROPORCIONAL À QUANTIDADE
- 
+
    Com três opções a bandeja não precisa atravessar quase toda
    a stage. Ela cresce apenas quando existe realmente uma quarta
    ou sexta opção disponível.
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage
   :is(.duduq-dd-pool, .duduq-udd-pool):has(
@@ -2221,7 +2221,7 @@ html.duduq-world-fusion
   width: min(720px, calc(100% - 24px)) !important;
   margin-inline: auto !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage
   :is(.duduq-dd-pool, .duduq-udd-pool):has(
@@ -2232,7 +2232,7 @@ html.duduq-world-fusion
   )) {
   width: min(920px, calc(100% - 24px)) !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage
   :is(.duduq-dd-pool, .duduq-udd-pool):has(
@@ -2243,12 +2243,12 @@ html.duduq-world-fusion
   )) {
   width: min(1080px, calc(100% - 24px)) !important;
 }
- 
+
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    ROUND 3 — FINAL VIEWPORT / MATCHING POLISH
    Patch visual 1.3.7
- 
+
    OBJETIVOS
    - corrigir o enquadramento do mascote fallback no cabeçalho;
    - impedir que o feedback encoste/corte no limite inferior;
@@ -2257,46 +2257,46 @@ html.duduq-world-fusion
    - manter a mesma composição no modo normal e em tela cheia;
    - preservar Memory Quest e demais mecânicas já estabilizadas.
    ========================================================= */
- 
+
 /* =========================================================
    19. MASCOTE FALLBACK — ENQUADRAMENTO FINAL
- 
+
    Na 1.3.6 o fallback foi ampliado para reproduzir o recorte do
    mascote nativo. Em viewports de notebook, porém, a escala de
    410% ficou agressiva e aproximou demais o rosto do DuduQ.
- 
+
    Mantemos a presença visual do mascote sem cortar a cabeça,
    antena ou base do personagem.
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-header-mascot-slot[data-visible="false"]::before {
   background-size: 315% auto !important;
   background-position: 50% 54% !important;
 }
- 
- 
+
+
 /* =========================================================
    20. FEEDBACK — SAFE AREA PARA NOTEBOOK / FULLSCREEN
- 
+
    A faixa de feedback deve terminar dentro da viewport mesmo em
    1366x768, inclusive quando o navegador entra em tela cheia.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (max-height: 820px) {
- 
+
   html.duduq-world-fusion {
     --duduq-fit-gap: 6px;
     --duduq-fit-feedback-height: 76px;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-root {
     padding-bottom: 7px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-feedback {
     height: 76px !important;
@@ -2304,7 +2304,7 @@ html.duduq-world-fusion
     max-height: 76px !important;
     padding-top: 1px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-feedback-card {
     min-height: 68px !important;
@@ -2312,7 +2312,7 @@ html.duduq-world-fusion
     padding: 7px 12px !important;
     border-radius: 17px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-feedback-mascot,
   html.duduq-world-fusion
@@ -2322,27 +2322,27 @@ html.duduq-world-fusion
     flex: 0 0 50px !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    21. MATCHING — ENUNCIADO E CABEÇALHOS SEM CONFLITO
- 
+
    O enunciado deve ser percebido como um bloco próprio e os
    títulos das colunas precisam iniciar claramente abaixo dele.
    O board recebe uma faixa superior mínima e os títulos ganham
    altura estável, evitando sensação de sobreposição.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-surface {
     gap: 8px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-instruction {
@@ -2350,7 +2350,7 @@ html.duduq-world-fusion
     z-index: 3 !important;
     margin: 0 auto 8px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-board {
@@ -2359,7 +2359,7 @@ html.duduq-world-fusion
     padding-top: clamp(16px, 2dvh, 20px) !important;
     padding-bottom: clamp(8px, 1.2dvh, 12px) !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-column-title {
@@ -2372,21 +2372,21 @@ html.duduq-world-fusion
     z-index: 2 !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    22. MATCHING — SLOT DE AÇÃO SOME DURANTE FEEDBACK
- 
+
    Depois de confirmar, o runtime deixa o action-slot vazio,
    mas a grade da 1.3.6 ainda reservava 56–62px para ele.
    Essa área não agrega informação e empurra o feedback para o
    limite inferior em tela cheia.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-surface:has(
@@ -2403,7 +2403,7 @@ html.duduq-world-fusion
       0 !important;
     gap: 5px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-action-slot[data-feedback-state="retry"],
@@ -2418,33 +2418,33 @@ html.duduq-world-fusion
     overflow: hidden !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    23. MATCHING — COMPACTAÇÃO LEVE EM ALTURA BAIXA
- 
+
    Preserva leitura e tamanho dos cards, mas recupera alguns
    pixels verticais quando a viewport possui cerca de 768px.
    ========================================================= */
- 
+
 @media
   (min-width: 900px)
   and (max-height: 790px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-instruction {
     min-height: 52px !important;
     margin-bottom: 6px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-board {
     padding-top: 14px !important;
     padding-bottom: 8px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-column-title {
@@ -2452,19 +2452,19 @@ html.duduq-world-fusion
     font-size: 11px !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    24. MEMORY QUEST — PRESERVAÇÃO DA COMPOSIÇÃO APROVADA
- 
+
    Evita que regras futuras de compactação genérica alterem a
    proporção do painel já estabilizado na Rodada 2.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-mq-board {
@@ -2472,14 +2472,14 @@ html.duduq-world-fusion
     margin-bottom: 0 !important;
   }
 }
- 
- 
- 
+
+
+
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    ROUND 4 — MASTER VISUAL STANDARDIZATION
    Patch visual 1.3.8
- 
+
    OBJETIVOS
    - ampliar levemente o respiro entre cabeçalho e card principal;
    - padronizar a largura dos enunciados entre as mecânicas;
@@ -2490,54 +2490,54 @@ html.duduq-world-fusion
    - retirar altura branca sem função do Matching com poucas linhas;
    - preservar feedback, Drag & Drop e Smart Sentence já estabilizados.
    ========================================================= */
- 
+
 /* =========================================================
    25. RITMO VERTICAL MESTRE — CABEÇALHO → CARD PRINCIPAL
- 
+
    A stage não deve parecer colada ao header. Recuperamos alguns
    pixels dentro das próprias mecânicas e usamos esse espaço para
    criar uma separação visual mais confortável no shell.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion {
     --duduq-fit-gap: 10px;
     --duduq-instruction-max-width: 1040px;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-root {
     padding-top: 10px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-shell {
     row-gap: var(--duduq-fit-gap) !important;
   }
 }
- 
+
 @media
   (min-width: 820px)
   and (max-height: 780px) {
- 
+
   html.duduq-world-fusion {
     --duduq-fit-gap: 9px;
   }
 }
- 
- 
+
+
 /* =========================================================
    26. ENUNCIADO MESTRE — MESMA LARGURA E HIERARQUIA
- 
+
    Todos os runtimes passam a compartilhar uma largura visual.
    O texto continua podendo quebrar quando necessário, mas recebe
    área útil suficiente para permanecer em uma linha na maioria
    dos enunciados curtos e médios.
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage
   :is(
@@ -2567,7 +2567,7 @@ html.duduq-world-fusion
   padding-top: 7px !important;
   padding-bottom: 9px !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage
   :is(
@@ -2594,7 +2594,7 @@ html.duduq-world-fusion
   word-break: normal !important;
   hyphens: none !important;
 }
- 
+
 /* Perfil de alfabetização: caixa alta + leve redução tipográfica
    para aproveitar a largura horizontal antes de criar uma 2ª linha. */
 html.duduq-world-fusion[data-duduq-literacy-early="true"]
@@ -2616,16 +2616,16 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
   font-size: clamp(20px, 1.85vw, 25px) !important;
   line-height: 1.08 !important;
 }
- 
+
 @media
   (min-width: 1180px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion {
     --duduq-instruction-max-width: 1060px;
   }
 }
- 
+
 @media (max-width: 819px) {
   html.duduq-world-fusion
     .duduq-engine-stage
@@ -2645,33 +2645,33 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
     max-width: none !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    27. MASCOTE FALLBACK — ENQUADRAMENTO SEM CORTE
- 
+
    Durante feedback/transição o Host pode ocultar o componente
    React e o World Fusion assume o slot. A escala anterior ainda
    aproximava demais o personagem; este enquadramento preserva
    antena, rosto e base dentro da mesma presença visual.
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-header-mascot-slot[data-visible="false"]::before {
   background-size: 275% auto !important;
   background-position: 50% 55% !important;
 }
- 
- 
+
+
 /* =========================================================
    28. TARGET SHOOTER — CENTRALIZAÇÃO GEOMÉTRICA DOS ALVOS
- 
+
    O World Fusion JS mede o conjunto real de alvos e grava em
    --duduq-ts-center-offset o deslocamento necessário. Usamos a
    propriedade translate separada de transform para não interferir
    nas animações próprias da mecânica.
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage
   .duduq-ts-arena
@@ -2680,27 +2680,27 @@ html.duduq-world-fusion
     var(--duduq-ts-center-offset, 0px)
     0 !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage
   .duduq-ts-status {
   justify-self: center !important;
   margin-inline: auto !important;
 }
- 
- 
+
+
 /* =========================================================
    29. MATCHING — BOARD NA ALTURA DO CONTEÚDO
- 
+
    Com duas linhas de pares, o painel interno não precisa preencher
    toda a stage. Isso elimina o grande bloco branco vazio observado
    após acerto/erro e mantém a stage principal estável para feedback.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-surface {
@@ -2710,7 +2710,7 @@ html.duduq-world-fusion
       62px !important;
     align-content: start !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-board {
@@ -2719,7 +2719,7 @@ html.duduq-world-fusion
     max-height: none !important;
     align-self: start !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-surface:has(
@@ -2736,23 +2736,23 @@ html.duduq-world-fusion
       0 !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    30. MEMORY QUEST — MESMA ESCALA EM NORMAL E FULLSCREEN
- 
+
    A grade anterior usava 1fr e crescia com a altura disponível.
    Em fullscreen isso aumentava excessivamente as seis cartas e
    podia empurrar a ajuda inferior para fora da viewport.
- 
+
    A regra abaixo atua apenas no layout clássico de seis cartas.
    Outros tamanhos continuam usando o comportamento nativo.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-mq-board:has(
@@ -2765,7 +2765,7 @@ html.duduq-world-fusion
     max-height: 100% !important;
     align-self: start !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-mq-grid:has(
@@ -2780,7 +2780,7 @@ html.duduq-world-fusion
     grid-auto-rows:
       clamp(112px, 17dvh, 138px) !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-mq-grid:has(
@@ -2794,15 +2794,15 @@ html.duduq-world-fusion
     max-height: 138px !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    31. CONSISTÊNCIA VISUAL DOS TÍTULOS DE COLUNA
- 
+
    Matching mantém seus títulos secundários discretos, mas com
    contraste e espaçamento uniformes nos diferentes estados.
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-stage
   .duduq-matching-column-title {
@@ -2810,13 +2810,13 @@ html.duduq-world-fusion
   font-weight: 900 !important;
   letter-spacing: .045em !important;
 }
- 
- 
+
+
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    ROUND 5 — MICRO POLISH / FINAL COMFORT PASS
    Patch visual 1.3.9
- 
+
    OBJETIVOS
    - impedir que a tela “suba” quando o feedback aparecer;
    - aproveitar melhor a largura do enunciado sem perder harmonia;
@@ -2824,39 +2824,39 @@ html.duduq-world-fusion
    - devolver proporção ao Memory Quest de 6 cartas;
    - preservar caixa alta, centralização do Target Shooter e fit já aprovados.
    ========================================================= */
- 
+
 /* =========================================================
    32. SCROLL ANCHOR — ESTABILIDADE NA ENTRADA DO FEEDBACK
- 
+
    Em alguns navegadores, a âncora de rolagem tenta manter o ponto
    previamente visível quando a área de feedback muda de estado.
    Isso gera a sensação de que a tela “sobe” no exato momento do
    acerto/erro. Desativamos essa ancoragem no shell principal.
    ========================================================= */
- 
+
 html.duduq-world-fusion .duduq-engine-root,
 html.duduq-world-fusion .duduq-engine-stage,
 html.duduq-world-fusion .duduq-engine-feedback {
   overflow-anchor: none !important;
 }
- 
- 
+
+
 /* =========================================================
    33. ENUNCIADO — MAIS ÁREA ÚTIL, AINDA COM RESPIRO
- 
+
    O card do enunciado pode crescer um pouco mais em desktop. A nova
    largura favorece frases em uma linha, mas mantém margens laterais
    claras para não parecer um bloco “esticado” demais.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion {
     --duduq-instruction-max-width: 1110px;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     :is(
@@ -2882,7 +2882,7 @@ html.duduq-world-fusion .duduq-engine-feedback {
     padding-top: 8px !important;
     padding-bottom: 10px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     :is(
@@ -2901,7 +2901,7 @@ html.duduq-world-fusion .duduq-engine-feedback {
     font-size: clamp(20px, 1.9vw, 28px) !important;
     line-height: 1.08 !important;
   }
- 
+
   html.duduq-world-fusion[data-duduq-literacy-early="true"]
     .duduq-engine-stage
     :is(
@@ -2921,21 +2921,21 @@ html.duduq-world-fusion .duduq-engine-feedback {
     letter-spacing: .01em !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    34. MATCHING — SUBTÍTULOS E AÇÃO MAIS RESPIRADOS
- 
+
    Os títulos de coluna ficam um pouco mais soltos dos cards e o
    bloco de ação deixa de parecer “grudado” na base do painel.
    Mantemos a compactação geral, mas sem colapsar o slot quando
    surge feedback — isso evita o salto visual na tela.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-surface {
@@ -2946,7 +2946,7 @@ html.duduq-world-fusion .duduq-engine-feedback {
     gap: 8px !important;
     align-content: start !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-board {
@@ -2954,14 +2954,14 @@ html.duduq-world-fusion .duduq-engine-feedback {
     padding-top: clamp(18px, 2.2dvh, 24px) !important;
     padding-bottom: clamp(8px, 1.2dvh, 12px) !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-column-title {
     min-height: 24px !important;
     margin: 0 0 9px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-action-slot {
@@ -2969,14 +2969,14 @@ html.duduq-world-fusion .duduq-engine-feedback {
     height: 58px !important;
     padding: 6px 0 0 !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-primary {
     min-height: 50px !important;
     height: 50px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-surface:has(
@@ -2993,7 +2993,7 @@ html.duduq-world-fusion .duduq-engine-feedback {
       58px !important;
     gap: 8px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-action-slot[data-feedback-state="retry"],
@@ -3006,7 +3006,7 @@ html.duduq-world-fusion .duduq-engine-feedback {
     padding: 0 !important;
     overflow: hidden !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-action-slot[data-feedback-state="retry"] > *,
@@ -3017,17 +3017,17 @@ html.duduq-world-fusion .duduq-engine-feedback {
     pointer-events: none !important;
   }
 }
- 
+
 @media
   (min-width: 900px)
   and (max-height: 790px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-column-title {
     margin-bottom: 8px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-action-slot {
@@ -3035,20 +3035,20 @@ html.duduq-world-fusion .duduq-engine-feedback {
     height: 56px !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    35. MEMORY QUEST — CARTAS MAIS SAUDÁVEIS NO GRID 3x2
- 
+
    A rodada anterior segurou bem a explosão em fullscreen, mas a
    limitação máxima ficou severa demais e “achatou” as cartas. O
    grid de seis cartas volta a respirar sem perder o encaixe geral.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-mq-board:has(
@@ -3060,7 +3060,7 @@ html.duduq-world-fusion .duduq-engine-feedback {
     padding-top: clamp(11px, 1.5dvh, 15px) !important;
     padding-bottom: clamp(11px, 1.5dvh, 15px) !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-mq-grid:has(
@@ -3073,7 +3073,7 @@ html.duduq-world-fusion .duduq-engine-feedback {
     grid-auto-rows:
       clamp(126px, 19dvh, 150px) !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-mq-grid:has(
@@ -3086,11 +3086,11 @@ html.duduq-world-fusion .duduq-engine-feedback {
     min-height: 126px !important;
   }
 }
- 
+
 @media
   (min-width: 820px)
   and (max-height: 760px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-mq-grid:has(
@@ -3102,13 +3102,13 @@ html.duduq-world-fusion .duduq-engine-feedback {
       clamp(122px, 18dvh, 144px) !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    ROUND 6 — SHARED SHELL FINALIZATION
    Patch visual 1.4.0
- 
+
    OBJETIVOS
    - manter a posição da viewport quando entra feedback;
    - deixar o Matching com altura natural em normal/fullscreen;
@@ -3117,22 +3117,22 @@ html.duduq-world-fusion .duduq-engine-feedback {
    - preservar Target Shooter, Smart Sentence, Drag & Drop e
      Memory Quest já refinados nas rodadas anteriores.
    ========================================================= */
- 
+
 /* =========================================================
    36. MATCHING — SHELL NA ALTURA DO CONTEÚDO
- 
+
    O Matching possui somente instruction + board + action. Não há
    motivo para a stage ocupar todo o 1fr do shell. Em fullscreen
    isso produzia um grande bloco translúcido vazio abaixo do CTA.
- 
+
    A faixa de feedback continua reservada desde o início, portanto
    a composição não muda de altura quando a resposta é confirmada.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-shell:has(.duduq-matching-root) {
     grid-template-rows:
@@ -3141,7 +3141,7 @@ html.duduq-world-fusion .duduq-engine-feedback {
       var(--duduq-fit-feedback-height) !important;
     align-content: start !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-shell:has(.duduq-matching-root)
     .duduq-engine-stage {
@@ -3153,7 +3153,7 @@ html.duduq-world-fusion .duduq-engine-feedback {
     overflow: visible !important;
     padding-bottom: 10px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-root,
@@ -3166,20 +3166,20 @@ html.duduq-world-fusion .duduq-engine-feedback {
     overflow: visible !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    37. MATCHING — RESPIRO DO PAINEL INTERNO
- 
+
    O painel não deve parecer uma moldura apertada ao redor dos
    cards. Aumentamos principalmente as áreas laterais/inferior e
    mantemos o título de cada coluna com distância consistente.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-board {
@@ -3190,31 +3190,31 @@ html.duduq-world-fusion .duduq-engine-feedback {
       clamp(22px, 2.4dvh, 28px) !important;
     border-radius: 24px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-column {
     gap: clamp(16px, 2dvh, 20px) !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-column-title {
     min-height: 24px !important;
     margin: 0 0 4px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-action-slot {
     margin-top: 2px !important;
   }
 }
- 
+
 @media
   (min-width: 900px)
   and (max-height: 720px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-board {
@@ -3223,27 +3223,27 @@ html.duduq-world-fusion .duduq-engine-feedback {
       clamp(22px, 2vw, 28px)
       20px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-column {
     gap: 14px !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    38. MATCHING — SLOT DO CTA 100% ESTÁVEL
- 
+
    O botão pode desaparecer visualmente quando entra feedback,
    mas seu espaço físico permanece. Isso elimina reflow entre
    idle -> retry/success e mantém o feedback no mesmo lugar.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-surface,
@@ -3263,7 +3263,7 @@ html.duduq-world-fusion .duduq-engine-feedback {
       60px !important;
     gap: 9px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-action-slot,
@@ -3280,7 +3280,7 @@ html.duduq-world-fusion .duduq-engine-feedback {
     padding: 5px 0 0 !important;
     overflow: hidden !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-action-slot[data-feedback-state="retry"] > *,
@@ -3292,29 +3292,29 @@ html.duduq-world-fusion .duduq-engine-feedback {
     pointer-events: none !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    39. FEEDBACK — POSIÇÃO VISUAL CONSISTENTE
- 
+
    O JS 1.4.0 bloqueia apenas o scrollIntoView do próprio bloco de
    feedback. O CSS mantém a faixa na mesma posição e sem margem que
    possa ser reinterpretada como âncora de rolagem pelo navegador.
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-feedback {
   scroll-margin: 0 !important;
   scroll-padding: 0 !important;
   overflow-anchor: none !important;
 }
- 
- 
+
+
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    ROUND 7 — RELEASE CANDIDATE / OFFICIAL MODULE READY
    Patch visual 1.4.1
- 
+
    OBJETIVOS
    - manter o DuduQ inteiro no cabeçalho durante feedback/transição;
    - garantir área segura para CONFIRMAR e sua sombra física;
@@ -3323,15 +3323,15 @@ html.duduq-world-fusion
    - não alterar Target Shooter, Memory Quest e demais composições
      já aprovadas nas rodadas anteriores.
    ========================================================= */
- 
+
 /* =========================================================
    40. MASCOTE DO CABEÇALHO — FALLBACK REAL, SEM RECORTE
- 
+
    O Lesson Engine remove o mascote React durante retry/success.
    O JS 1.4.1 injeta uma imagem visual no slot vazio. Desligamos o
    pseudo-elemento antigo para evitar zoom/corte e duplicidade.
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-header,
 html.duduq-world-fusion
@@ -3340,14 +3340,14 @@ html.duduq-world-fusion
   .duduq-engine-header-mascot-slot {
   overflow: visible !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-header-mascot-slot[data-visible="false"]::before {
   content: none !important;
   display: none !important;
   background-image: none !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-world-header-mascot-fallback {
   position: absolute !important;
@@ -3370,7 +3370,7 @@ html.duduq-world-fusion
   -webkit-user-drag: none !important;
   filter: none !important;
 }
- 
+
 @media
   (min-width: 820px)
   and (max-height: 720px) {
@@ -3381,19 +3381,19 @@ html.duduq-world-fusion
       scale(2.28) !important;
   }
 }
- 
+
 /* =========================================================
    41. AÇÕES — SAFE AREA PARA BOTÃO E SOMBRA
- 
+
    A sombra física do botão usa pixels abaixo do próprio botão.
    O slot não pode usar overflow:hidden nem encostar no limite da
    stage. A regra vale para Matching, Drag & Drop e Smart Sentence.
    ========================================================= */
- 
+
 @media
   (min-width: 820px)
   and (min-height: 600px) {
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     :is(
@@ -3405,7 +3405,7 @@ html.duduq-world-fusion
     overflow: visible !important;
     padding-bottom: 9px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-surface,
@@ -3424,7 +3424,7 @@ html.duduq-world-fusion
       auto
       70px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-stage
     .duduq-matching-action-slot,
@@ -3440,22 +3440,22 @@ html.duduq-world-fusion
     padding: 7px 0 11px !important;
     overflow: visible !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-engine-shell:has(.duduq-matching-root)
     .duduq-engine-stage {
     padding-bottom: 16px !important;
   }
 }
- 
+
 /* =========================================================
    42. PONTE “PRÓXIMA MISSÃO” ENTRE MECÂNICAS
- 
+
    As transições internas de uma mesma mecânica já possuem cartão
    próprio. O JS 1.4.1 cria esta ponte apenas quando o Host troca
    uma mecânica completa pela próxima, eliminando a inconsistência.
    ========================================================= */
- 
+
 .duduq-world-mission-bridge {
   position: fixed;
   z-index: 100080;
@@ -3474,13 +3474,13 @@ html.duduq-world-fusion
     opacity 150ms ease,
     visibility 150ms linear;
 }
- 
+
 .duduq-world-mission-bridge.is-visible {
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
 }
- 
+
 .duduq-world-mission-card {
   box-sizing: border-box;
   width: min(520px, calc(100vw - 34px));
@@ -3505,7 +3505,7 @@ html.duduq-world-fusion
   text-align: center;
   font-family: Nunito, ui-rounded, system-ui, sans-serif;
 }
- 
+
 .duduq-world-mission-mascot {
   width: 100px;
   height: 100px;
@@ -3515,7 +3515,7 @@ html.duduq-world-fusion
   user-select: none;
   pointer-events: none;
 }
- 
+
 .duduq-world-mission-kicker {
   color: #0870d2;
   font-size: 12px;
@@ -3524,14 +3524,14 @@ html.duduq-world-fusion
   letter-spacing: .10em;
   text-transform: uppercase;
 }
- 
+
 .duduq-world-mission-copy {
   color: #163555;
   font-size: clamp(17px, 1.55vw, 21px);
   font-weight: 900;
   line-height: 1.18;
 }
- 
+
 .duduq-world-mission-track {
   position: relative;
   width: min(360px, 100%);
@@ -3545,7 +3545,7 @@ html.duduq-world-fusion
     inset 0 1px 3px rgba(47, 87, 120, .18),
     0 1px 0 #fff;
 }
- 
+
 .duduq-world-mission-fill {
   position: absolute;
   inset: 1px auto 1px 1px;
@@ -3560,7 +3560,7 @@ html.duduq-world-fusion
   transform: scaleX(.05);
   transform-origin: left center;
 }
- 
+
 .duduq-world-mission-bridge.is-visible
   .duduq-world-mission-fill {
   animation:
@@ -3569,7 +3569,7 @@ html.duduq-world-fusion
     cubic-bezier(.18,.74,.24,1)
     forwards;
 }
- 
+
 .duduq-world-mission-star {
   position: absolute;
   z-index: 2;
@@ -3581,12 +3581,12 @@ html.duduq-world-fusion
   line-height: 1;
   text-shadow: 0 1px 0 #b98700;
 }
- 
+
 @keyframes duduq-world-mission-progress {
   from { transform: scaleX(.05); }
   to { transform: scaleX(1); }
 }
- 
+
 @media (prefers-reduced-motion: reduce) {
   .duduq-world-mission-bridge,
   .duduq-world-mission-fill {
@@ -3597,7 +3597,7 @@ html.duduq-world-fusion
     transform: scaleX(1) !important;
   }
 }
- 
+
 @media (max-width: 640px) {
   .duduq-world-mission-card {
     min-height: 220px;
@@ -3609,28 +3609,28 @@ html.duduq-world-fusion
     height: 86px;
   }
 }
- 
- 
+
+
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    ROUND 8 — DEFINITIVE MASCOT / TRANSITION LOCK
    Patch visual 1.4.2
- 
+
    OBJETIVOS
    - cabeçalho usa clone do DuduQ nativo durante feedback;
    - transição global usa o PNG recortado pela transparência real;
    - tamanho do mascote fica consistente em qualquer troca;
    - mantém todas as regras de viewport, CTA e áudio já homologadas.
    ========================================================= */
- 
+
 /* =========================================================
    43. CABEÇALHO — FALLBACK HERDA O COMPONENTE NATIVO
- 
+
    A classe agora é um wrapper, não mais um <img>. Neutralizamos
    as regras antigas de scale aplicadas na R7 e deixamos o clone
    interno receber exatamente as mesmas regras do mascote original.
    ========================================================= */
- 
+
 html.duduq-world-fusion
   .duduq-engine-header-mascot-slot
   > .duduq-world-header-mascot-fallback {
@@ -3654,7 +3654,7 @@ html.duduq-world-fusion
   pointer-events: none !important;
   user-select: none !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-header-mascot-slot
   > .duduq-world-header-mascot-fallback
@@ -3664,7 +3664,7 @@ html.duduq-world-fusion
   opacity: 1 !important;
   pointer-events: none !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-header-mascot-slot[data-visible="false"]
   > .duduq-world-header-mascot-fallback
@@ -3676,23 +3676,23 @@ html.duduq-world-fusion
   visibility: visible !important;
   opacity: 1 !important;
 }
- 
+
 /* O emergency fallback usa a mesma árvore DOM do componente nativo. */
 html.duduq-world-fusion
   .duduq-world-header-emergency-mascot {
   margin: 0 !important;
 }
- 
- 
+
+
 /* =========================================================
    44. TRANSIÇÃO GLOBAL — MASCOTE COM TAMANHO VISUAL REAL
- 
+
    O JS 1.4.2 remove automaticamente a borda transparente do asset.
    Depois do trim, 108px correspondem ao personagem — não à tela
    invisível do PNG. Em eventual falha de canvas/CORS, o fallback
    escala o PNG original para manter um tamanho próximo do padrão.
    ========================================================= */
- 
+
 .duduq-world-mission-mascot-frame {
   width: 108px;
   height: 108px;
@@ -3702,7 +3702,7 @@ html.duduq-world-fusion
   overflow: visible;
   pointer-events: none;
 }
- 
+
 .duduq-world-mission-mascot {
   width: 108px !important;
   height: 108px !important;
@@ -3718,25 +3718,25 @@ html.duduq-world-fusion
   pointer-events: none !important;
   -webkit-user-drag: none !important;
 }
- 
+
 .duduq-world-mission-mascot[data-cropped="false"] {
   transform: scale(3.05) !important;
 }
- 
+
 .duduq-world-mission-mascot[data-cropped="pending"] {
   transform: scale(3.05) !important;
 }
- 
+
 .duduq-world-mission-mascot[data-cropped="true"] {
   transform: none !important;
 }
- 
+
 .duduq-world-mission-card {
   min-height: 250px !important;
   gap: 7px !important;
   padding-top: 19px !important;
 }
- 
+
 /* Mantém o componente nativo de transição no mesmo envelope visual. */
 html.duduq-world-fusion
   .duduq-step-transition-card
@@ -3747,14 +3747,14 @@ html.duduq-world-fusion
   min-height: 108px !important;
   margin: 0 auto 2px !important;
 }
- 
+
 @media (max-width: 640px) {
   .duduq-world-mission-mascot-frame,
   .duduq-world-mission-mascot {
     width: 94px !important;
     height: 94px !important;
   }
- 
+
   html.duduq-world-fusion
     .duduq-step-transition-card
     .duduq-mascot[data-size="transition"] {
@@ -3764,15 +3764,15 @@ html.duduq-world-fusion
     min-height: 94px !important;
   }
 }
- 
- 
+
+
 /* =========================================================
    45. PROTEÇÃO FINAL DO CABEÇALHO / FEEDBACK
- 
+
    Durante feedback nenhum ancestral do mascote pode criar um novo
    recorte. A faixa do feedback permanece independente do header.
    ========================================================= */
- 
+
 html.duduq-world-fusion
   :is(
     .duduq-engine-header,
@@ -3781,20 +3781,337 @@ html.duduq-world-fusion
   ) {
   overflow: visible !important;
 }
- 
+
 html.duduq-world-fusion
   .duduq-engine-header-mascot-slot[data-visible="false"] {
   visibility: visible !important;
   opacity: 1 !important;
 }
- 
- 
+
+
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    ROUND 9 — TIMING FINAL DA TRANSIÇÃO GLOBAL
    Patch visual 1.4.3
- 
+
    A transição “Próxima missão” ENTRE etapas/mecânicas passa a
    permanecer visível por aproximadamente 1,05s. As transições
    internas das mecânicas permanecem inalteradas.
    ========================================================= */
+
+
+/* =========================================================
+   DUDUQ CORE — WORLD FUSION
+   ROUND 10 — ESTADO UNIVERSAL DE ÁUDIO
+   Patch visual 1.4.4
+
+   PADRÃO OFICIAL
+   - tocou áudio: controle fica VERDE;
+   - durante a reprodução: ondas/pulsos visuais ativos;
+   - terminou, pausou, cancelou ou falhou: volta ao AZUL nativo;
+   - funciona para autoplay de enunciado, speechSynthesis e mídia;
+   - não altera a lógica pedagógica nem o conteúdo das mecânicas.
+   ========================================================= */
+
+/* O JS marca exclusivamente o controle que corresponde ao áudio ativo. */
+html.duduq-world-fusion
+  [data-duduq-audio-playing="true"] {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: visible !important;
+  color: #ffffff !important;
+  border-color: #2b9d12 !important;
+  background:
+    linear-gradient(
+      180deg,
+      #79e533 0%,
+      #49c91d 52%,
+      #2eae13 100%
+    ) !important;
+  box-shadow:
+    0 3px 0 #177909,
+    0 0 0 3px rgba(120, 229, 50, .22),
+    0 0 18px rgba(83, 210, 27, .36),
+    inset 0 1px 0 rgba(255, 255, 255, .72)
+    !important;
+  filter:
+    saturate(1.04)
+    brightness(1.01)
+    !important;
+}
+
+/* Mantém ícones SVG/paths claros sobre o verde. */
+html.duduq-world-fusion
+  [data-duduq-audio-playing="true"]
+  :is(svg, path) {
+  color: #ffffff !important;
+  fill: currentColor;
+}
+
+/* Envelope inserido pelo JS; não participa do layout nem do clique. */
+html.duduq-world-fusion
+  .duduq-world-audio-waves {
+  position: absolute !important;
+  z-index: -1 !important;
+  inset: -9px !important;
+  display: block !important;
+  border-radius: inherit !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+html.duduq-world-fusion
+  [data-duduq-audio-playing="true"]
+  > .duduq-world-audio-waves {
+  opacity: 1 !important;
+}
+
+html.duduq-world-fusion
+  .duduq-world-audio-waves
+  > span {
+  position: absolute !important;
+  inset: 0 !important;
+  border:
+    2px solid
+    rgba(101, 222, 47, .72) !important;
+  border-radius: inherit !important;
+  opacity: 0 !important;
+  transform: scale(.82);
+  animation:
+    duduq-world-audio-wave
+    1.16s
+    ease-out
+    infinite;
+}
+
+html.duduq-world-fusion
+  .duduq-world-audio-waves
+  > span:nth-child(2) {
+  animation-delay: .28s;
+}
+
+html.duduq-world-fusion
+  .duduq-world-audio-waves
+  > span:nth-child(3) {
+  animation-delay: .56s;
+}
+
+@keyframes duduq-world-audio-wave {
+  0% {
+    opacity: .78;
+    transform: scale(.78);
+  }
+
+  72%,
+  100% {
+    opacity: 0;
+    transform: scale(1.34);
+  }
+}
+
+/* O efeito precisa respirar além do círculo do botão de áudio. */
+html.duduq-world-fusion
+  :is(
+    .duduq-dd-instruction,
+    .duduq-udd-instruction,
+    .duduq-bp-instruction,
+    .duduq-mq-instruction,
+    .duduq-matching-instruction,
+    .duduq-fc-instruction,
+    .duduq-cf-instruction,
+    .duduq-ws-instruction,
+    .duduq-ts-instruction,
+    .duduq-ss-instruction
+  ) {
+  overflow: visible !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.duduq-world-fusion
+    .duduq-world-audio-waves
+    > span {
+    animation: none !important;
+    opacity: .34 !important;
+    transform: scale(1.12) !important;
+  }
+}
+
+
+/* =========================================================
+   DUDUQ CORE — WORLD FUSION
+   ROUND 11 — TARGET SHOOTER: LEGIBILIDADE VISUAL PREMIUM
+   Patch visual 1.4.5
+
+   OBJETIVO PEDAGÓGICO
+   - aproveitar a área real do alvo para a imagem de referência;
+   - manter a hit-area, o movimento e a lógica da mecânica intactos;
+   - dar ganho extra de leitura no hover, foco e toque;
+   - preservar alvos de palavra e alvos mistos sem distorção.
+
+   O runtime nativo limita <img.duduq-ts-emoji> a 72px mesmo
+   quando o alvo possui 120–150px. Aqui removemos esse gargalo
+   SOMENTE quando data-display="image".
+   ========================================================= */
+
+/* Em alvo exclusivamente visual, a cena passa a ocupar a área útil. */
+html.duduq-world-fusion
+  .duduq-ts-target[data-display="image"]
+  .duduq-ts-target-shell {
+  padding: 6px !important;
+}
+
+/* O content deixa de herdar o teto de 92% criado para palavra + imagem. */
+html.duduq-world-fusion
+  .duduq-ts-target[data-display="image"]
+  .duduq-ts-content {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  display: grid !important;
+  place-items: center !important;
+  gap: 0 !important;
+  overflow: visible !important;
+}
+
+/*
+ * Imagem principal:
+ * - usa praticamente toda a área interna;
+ * - mantém proporção;
+ * - ganha presença sem corte agressivo;
+ * - melhora contraste local, importante para cenas pequenas.
+ */
+html.duduq-world-fusion
+  .duduq-ts-target[data-display="image"]
+  .duduq-ts-emoji:is(img) {
+  width: 94% !important;
+  height: 94% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: 50% 50% !important;
+  transform: scale(1.08);
+  transform-origin: 50% 50%;
+  filter:
+    saturate(1.055)
+    contrast(1.035)
+    drop-shadow(0 3px 5px rgba(31, 65, 99, .11))
+    !important;
+  image-rendering: auto;
+  backface-visibility: hidden;
+  will-change: transform, filter;
+  transition:
+    transform 170ms cubic-bezier(.2,.8,.2,1),
+    filter 170ms ease;
+}
+
+/*
+ * Foco inteligente:
+ * não aumenta a área clicável nem muda a posição do alvo.
+ * Apenas a arte dentro do alvo cresce para inspeção.
+ */
+html.duduq-world-fusion
+  .duduq-ts-target[data-display="image"]:is(
+    :hover,
+    :focus-visible,
+    :active
+  )
+  .duduq-ts-emoji:is(img) {
+  transform: scale(1.18);
+  filter:
+    saturate(1.08)
+    contrast(1.05)
+    brightness(1.015)
+    drop-shadow(0 4px 7px rgba(31, 65, 99, .14))
+    !important;
+}
+
+/*
+ * A moldura reage discretamente junto com a imagem.
+ * O ganho fica visual, sem mexer no deslocamento/slot calculado pelo jogo.
+ */
+html.duduq-world-fusion
+  .duduq-ts-target[data-display="image"]:is(
+    :hover,
+    :focus-visible,
+    :active
+  )
+  .duduq-ts-target-shell {
+  transform: translateY(-3px) scale(1.045);
+  filter: brightness(1.035) saturate(1.025);
+}
+
+/*
+ * Em telas menores, o runtime reduz o alvo para 92/82px.
+ * Compensamos aumentando a ocupação interna, não o alvo.
+ */
+@media (max-width: 640px) {
+  html.duduq-world-fusion
+    .duduq-ts-target[data-display="image"]
+    .duduq-ts-target-shell {
+    padding: 4px !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-ts-target[data-display="image"]
+    .duduq-ts-emoji:is(img) {
+    width: 98% !important;
+    height: 98% !important;
+    transform: scale(1.10);
+  }
+
+  html.duduq-world-fusion
+    .duduq-ts-target[data-display="image"]:is(
+      :hover,
+      :focus-visible,
+      :active
+    )
+    .duduq-ts-emoji:is(img) {
+    transform: scale(1.20);
+  }
+}
+
+/*
+ * Alvos mistos (imagem + palavra) ganham apenas um ajuste moderado.
+ * A palavra continua com espaço reservado e nunca é coberta.
+ */
+html.duduq-world-fusion
+  .duduq-ts-target[data-display="both"]
+  .duduq-ts-emoji:is(img) {
+  width: clamp(54px, 58%, 84px) !important;
+  height: clamp(54px, 58%, 84px) !important;
+  max-width: 84px !important;
+  max-height: 84px !important;
+  object-fit: contain !important;
+}
+
+/* Estados de acerto/erro continuam pertencendo ao runtime nativo. */
+html.duduq-world-fusion
+  .duduq-ts-target[data-state="hit"]
+  .duduq-ts-emoji:is(img),
+html.duduq-world-fusion
+  .duduq-ts-target[data-state="miss"]
+  .duduq-ts-emoji:is(img) {
+  transition-duration: 90ms;
+}
+
+/* Acessibilidade: mantém o ganho de tamanho, mas remove animação. */
+@media (prefers-reduced-motion: reduce) {
+  html.duduq-world-fusion
+    .duduq-ts-target[data-display="image"]
+    .duduq-ts-emoji:is(img) {
+    transition: none !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-ts-target[data-display="image"]:is(
+      :hover,
+      :focus-visible,
+      :active
+    )
+    .duduq-ts-emoji:is(img) {
+    transform: scale(1.12);
+  }
+}
