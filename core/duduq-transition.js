@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — TRANSITION
    Ponte visual opaca entre telas e mecânicas.
-   Versão 1.6.5
+   Versão 1.6.6
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.6.5";
+  const VERSION = "1.6.6";
   if (window.DuduQTransition?.version === VERSION) return;
 
   const DEFAULTS = Object.freeze({
@@ -841,6 +841,21 @@
     overlay.style.opacity =
       "1";
 
+    /*
+     * Compatibilidade com a ponte universal "PRÓXIMA MISSÃO".
+     * O World Fusion já escuta este evento para exibir o cartão
+     * central entre mecânicas. Na R18.2, coverImmediate() passou
+     * a pular esse evento; por isso algumas trocas ficaram sem
+     * a transição visual. Disparamos aqui, ainda no mesmo task,
+     * antes do covered, preservando também o anti-lampejo.
+     */
+    dispatch(
+      "duduq:transition-cover-start",
+      {
+        immediate: true
+      }
+    );
+
     playTransitionSound(config);
 
     dispatch(
@@ -884,7 +899,6 @@
     if (
       currentOperation !==
       operationId
-
     ) {
       return false;
     }
@@ -980,6 +994,7 @@
       operationId
     ) {
       return false;
+
     }
 
     setOverlayState("");
@@ -995,7 +1010,6 @@
     unlockPage();
 
     state = "idle";
-
 
     dispatch(
       "duduq:transition-complete"
@@ -1106,7 +1120,6 @@
 
   window.DuduQTransition =
     Object.freeze({
-
       version: VERSION,
 
       cover,
