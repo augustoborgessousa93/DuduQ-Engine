@@ -1,38 +1,38 @@
 /* =========================================================
    DUDUQ CORE — ASSETS
    Fonte central de mascotes, sons, backgrounds e conteúdo.
- 
-   Versão 1.2.0
- 
+
+   Versão 1.2.1
+
    Conteúdo oficial adicionado:
    - English — Year 1 — Module 01
    - HELLO / GOODBYE / GOOD MORNING / GOOD AFTERNOON
    - GOOD NIGHT / BOY / GIRL / MY NAME
    ========================================================= */
- 
+
 (function () {
   "use strict";
- 
-  const VERSION = "1.2.0";
- 
+
+  const VERSION = "1.2.1";
+
   if (
     window.DuduQAssets &&
     window.DuduQAssets.version === VERSION
   ) {
     return;
   }
- 
+
   const BASE =
     "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/";
- 
+
   const ASSETS =
     Object.freeze({
- 
+
       version: VERSION,
- 
+
       repository:
         "augustoborgessousa93/Assets-DuduQ",
- 
+
       mascots:
         Object.freeze({
           idle: BASE + "DUDUQ_IDLE.png",
@@ -41,7 +41,7 @@
           transition: BASE + "DUDUQ_IDLE.png",
           complete: BASE + "Duduq_Li%C3%A7%C3%A3o%20concluida.png"
         }),
- 
+
       sounds:
         Object.freeze({
           "bubble-pop": BASE + "bubble-pop.mp3",
@@ -50,12 +50,14 @@
           correct: BASE + "correct.mp3",
           ding: BASE + "ding.mp3",
           error: BASE + "error.mp3",
+          "feedback-correct-voice": BASE + "feedback_correto.mp3",
+          "feedback-error-voice": BASE + "Ops_feedback_erro.mp3",
           "intro-company-swoosh": BASE + "swoosh.mp3",
           "intro-mission-music": BASE + "happy-fun-EduQ_Play.mp3",
           "transition-swoosh": BASE + "swoosh-sound-effect--transitions.mp3",
           win: BASE + "you%20win.mp3"
         }),
- 
+
       backgrounds:
         Object.freeze({
           "1": BASE + "1%C2%BA%20ano%20-whispering-woods.png",
@@ -64,7 +66,7 @@
           "4": BASE + "4%C2%BA%20ano%20-papercraft-campus.png",
           "5": BASE + "5%C2%BA%20ano%20-sky-lab.png"
         }),
- 
+
       content:
         Object.freeze({
           english:
@@ -86,18 +88,18 @@
             })
         })
     });
- 
+
   function normalizeYear(value) {
     const match =
       String(value == null ? "" : value)
         .match(/[1-5]/);
- 
+
     return match ? match[0] : "";
   }
- 
+
   function applyYear(value) {
     const year = normalizeYear(value);
- 
+
     if (
       !year ||
       !ASSETS.backgrounds[year] ||
@@ -105,31 +107,32 @@
     ) {
       return false;
     }
- 
+
     document.documentElement
       .setAttribute(
         "data-duduq-ano-ativo",
         year
       );
- 
+
+
     document.body.style.backgroundImage =
       'url("' + ASSETS.backgrounds[year] + '")';
- 
+
     document.body.style.backgroundPosition =
       "center top";
- 
+
     document.body.style.backgroundSize =
       "cover";
- 
+
     document.body.style.backgroundRepeat =
       "no-repeat";
- 
+
     document.body.style.backgroundAttachment =
       "fixed";
- 
+
     return true;
   }
- 
+
   function getYear() {
     return (
       document.documentElement
@@ -137,17 +140,17 @@
       null
     );
   }
- 
+
   function getAsset(type, name) {
     if (!ASSETS[type]) return null;
- 
+
     return ASSETS[type][name] || null;
   }
- 
+
   function getSound(name) {
     return ASSETS.sounds[name] || null;
   }
- 
+
   function getContentAsset(
     subject,
     year,
@@ -158,18 +161,18 @@
       String(subject || "")
         .trim()
         .toLowerCase();
- 
+
     const yearKey =
       "year" +
       String(year || "")
         .replace(/\D/g, "");
- 
+
     const moduleKey =
       "module" +
       String(module || "")
         .replace(/\D/g, "")
         .padStart(2, "0");
- 
+
     return (
       ASSETS.content
         ?.[subjectKey]
@@ -179,9 +182,9 @@
       null
     );
   }
- 
+
   window.DUDUQ_ASSETS = ASSETS;
- 
+
   window.DuduQAssets =
     Object.freeze({
       version: VERSION,
@@ -192,12 +195,12 @@
       getSound: getSound,
       getContent: getContentAsset
     });
- 
+
   const params =
     new URLSearchParams(
       window.location.search
     );
- 
+
   const requestedYear =
     params.get("ano") ||
     params.get("year") ||
@@ -206,11 +209,11 @@
     document.documentElement
       .getAttribute("data-duduq-ano") ||
     window.DUDUQ_ANO;
- 
+
   if (requestedYear) {
     applyYear(requestedYear);
   }
- 
+
   try {
     window.dispatchEvent(
       new CustomEvent(
@@ -223,5 +226,5 @@
       )
     );
   } catch (_) {}
- 
+
 })();
