@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.4.7
+   Versão 1.4.8
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.4.7";
+  const VERSION = "1.4.8";
   if (window.DuduQWorldFusion?.version === VERSION) return;
 
   const scriptUrl =
@@ -29,6 +29,8 @@
   const initialSpeechGateDocuments = new WeakSet();
   const audioVisualStateDocuments = new WeakSet();
   const memoryQuestPedagogyDocuments = new WeakSet();
+  const dragDropDropAudioDocuments = new WeakSet();
+  const feedbackVoiceDocuments = new WeakSet();
   const headerMascotSnapshots = new WeakMap();
   const mascotTrimPromises = new Map();
   const mascotTrimSources = new Map();
@@ -456,6 +458,7 @@
                 !fits() &&
                 size > 20
               ) {
+
                 size -= 1;
 
                 label.style.setProperty(
@@ -686,6 +689,7 @@
             return String(
               voice.lang || ""
             )
+
               .toLowerCase()
               .startsWith(
                 languageRoot
@@ -916,6 +920,7 @@
       !doc?.defaultView ||
       feedbackScrollGuardDocuments.has(doc)
     ) {
+
       return;
     }
 
@@ -1031,6 +1036,7 @@
   }
 
   function createEmergencyHeaderMascot(doc, source) {
+
     const figure = doc.createElement("figure");
     figure.className =
       "duduq-mascot duduq-world-header-emergency-mascot";
@@ -1147,6 +1153,7 @@
       image.crossOrigin = "anonymous";
       image.decoding = "async";
 
+
       function fallback() {
         mascotTrimSources.set(source, source);
         resolve(source);
@@ -1261,6 +1268,7 @@
             naturalWidth - sourceX,
             sourceWidth + padding * 2
           );
+
           sourceHeight = Math.min(
             naturalHeight - sourceY,
             sourceHeight + padding * 2
@@ -1376,6 +1384,7 @@
       if (!pendingUtterance) return;
 
       if (gateIsLocked()) {
+
         releaseTimer = view.setTimeout(
           releaseWhenReady,
           36
@@ -1491,6 +1500,7 @@
             cropped && cropped !== mascot ? "true" : "false"
           );
         }
+
       );
     }
 
@@ -1606,6 +1616,7 @@
           hideMissionBridge();
           missionBridgePending = null;
         }
+
       }
     );
 
@@ -1721,6 +1732,7 @@
     if (!doc?.querySelectorAll) return;
 
     doc
+
       .querySelectorAll(
         '[data-duduq-audio-playing="true"]'
       )
@@ -1836,6 +1848,7 @@
     );
 
     /*
+
      * Não descartamos o CTA apenas porque ele ficou disabled durante
      * a reprodução. Drag & Drop (e outros runtimes) desabilitam o
      * próprio botão enquanto o autoplay está falando; ele continua
@@ -1951,6 +1964,7 @@
         !control ||
         target === activeControl
       ) {
+
         activeControl = null;
       }
     }
@@ -2066,6 +2080,7 @@
               configurable: true,
               value: visualSpeak
             }
+
           );
         } catch (_) {}
       }
@@ -2181,6 +2196,7 @@
     function syncDragDropInstructionAudioState() {
       const control =
         findPrimaryInstructionAudioControl(
+
           doc
         );
 
@@ -2498,6 +2514,17 @@
         "false"
       );
 
+      card.style.pointerEvents =
+        "auto";
+
+      if (
+        !card.hasAttribute(
+          "tabindex"
+        )
+      ) {
+        card.tabIndex = 0;
+      }
+
       const currentLabel =
         String(
           card.getAttribute(
@@ -2515,6 +2542,7 @@
           (
             currentLabel +
             " Toque para ouvir novamente."
+
           ).trim()
         );
       }
@@ -2630,6 +2658,7 @@
             visual
           );
           setAudioControlPlaying(
+
             visual,
             true
           );
@@ -2735,13 +2764,381 @@
           attributeFilter: [
             "data-matched",
             "disabled",
-            "aria-label"
+            "aria-label",
+            "data-duduq-mq-media",
+            "data-duduq-mq-spoken"
           ]
         }
       );
     }
 
     decorate();
+  }
+
+
+
+  /* =======================================================
+     DRAG & DROP — ÁUDIO NO DROP
+
+     Se o item possui áudio, concluir um arraste até uma zona
+     válida também reproduz o estímulo. O clique é feito no
+     próprio controle nativo do runtime, portanto Content Audio
+     continua escolhendo MP3 oficial e TTS apenas como fallback.
+     ======================================================= */
+
+  function installDragDropDropAudio(doc) {
+    if (
+      !doc?.defaultView ||
+      dragDropDropAudioDocuments.has(doc)
+    ) {
+      return;
+    }
+
+    dragDropDropAudioDocuments.add(doc);
+
+    const view = doc.defaultView;
+    let dragState = null;
+
+    function findItem(target) {
+      return target?.closest?.(
+        ".duduq-udd-item, .duduq-dd-item"
+      ) || null;
+    }
+
+    function itemId(item) {
+      return String(
+        item?.dataset?.ddItemId ||
+        item?.dataset?.itemId ||
+        ""
+      ).trim();
+    }
+
+    function containingTarget(item) {
+      return (
+        item
+          ?.closest?.(
+            "[data-dd-target-id]"
+          )
+          ?.getAttribute?.(
+            "data-dd-target-id"
+          ) ||
+        ""
+      );
+    }
+
+    function begin(event) {
+      if (
+        event.button !== undefined &&
+        event.button !== 0
+      ) {
+        return;
+      }
+
+      const item = findItem(
+        event.target
+      );
+
+      if (!item) return;
+
+      const id = itemId(item);
+
+      if (!id) return;
+
+      dragState = {
+        id,
+        x: Number(event.clientX) || 0,
+        y: Number(event.clientY) || 0,
+        initialTarget:
+          containingTarget(item)
+      };
+    }
+
+    function finish(event) {
+      const state = dragState;
+      dragState = null;
+
+      if (!state) return;
+
+      const dx =
+        (Number(event.clientX) || 0) -
+        state.x;
+
+      const dy =
+        (Number(event.clientY) || 0) -
+        state.y;
+
+      if (
+        Math.hypot(dx, dy) < 7
+      ) {
+        return;
+      }
+
+      view.setTimeout(
+        function () {
+          const escaped =
+            typeof CSS !== "undefined" &&
+            CSS.escape
+              ? CSS.escape(state.id)
+              : state.id.replace(
+                  /["\\]/g,
+                  "\\$&"
+                );
+
+          const item =
+            doc.querySelector(
+              `[data-dd-item-id="${escaped}"],` +
+              `[data-item-id="${escaped}"]`
+            );
+
+          if (!item) return;
+
+          const finalTarget =
+            containingTarget(item);
+
+          if (
+            !finalTarget ||
+            finalTarget ===
+              state.initialTarget
+          ) {
+            return;
+          }
+
+          const shell =
+            item.closest(
+              ".duduq-udd-item-shell, .duduq-dd-item-shell"
+            ) ||
+            item.parentElement;
+
+          const audioControl =
+            shell?.querySelector?.(
+              ".duduq-udd-item-audio, .duduq-dd-item-audio"
+            );
+
+          if (
+            !audioControl ||
+            audioControl.disabled
+          ) {
+            return;
+          }
+
+          try {
+            audioControl.click();
+          } catch (_) {}
+        },
+        90
+      );
+    }
+
+    doc.addEventListener(
+      "pointerdown",
+      begin,
+      true
+    );
+
+    doc.addEventListener(
+      "pointerup",
+      finish,
+      true
+    );
+
+    doc.addEventListener(
+      "pointercancel",
+      function () {
+        dragState = null;
+      },
+      true
+    );
+  }
+
+
+  /* =======================================================
+     FEEDBACK DE VOZ — PADRÃO UNIVERSAL
+
+     Mantém os SFX existentes e acrescenta uma voz breve,
+     simpática e consistente em todas as mecânicas:
+       success -> feedback_correto.mp3
+       retry   -> Ops_feedback_erro.mp3
+
+     A voz dispara somente na transição de estado, evitando
+     repetição causada por re-render ou MutationObserver.
+     ======================================================= */
+
+  function installFeedbackVoice(doc) {
+    if (
+      !doc?.defaultView ||
+      feedbackVoiceDocuments.has(doc)
+    ) {
+      return;
+    }
+
+    feedbackVoiceDocuments.add(doc);
+
+    const view = doc.defaultView;
+    let lastState = "";
+    let lastFeedback = null;
+
+    function topView() {
+      let current = view;
+
+      try {
+        while (
+          current.parent &&
+          current.parent !== current
+        ) {
+          current = current.parent;
+        }
+      } catch (_) {}
+
+      return current || view;
+    }
+
+    function sourceFor(state) {
+      const rootView = topView();
+
+      const sounds =
+        rootView.DuduQAssets
+          ?.assets
+          ?.sounds ||
+        rootView.DUDUQ_ASSETS
+          ?.sounds ||
+        {};
+
+      if (state === "success") {
+        return (
+
+          sounds[
+            "feedback-correct-voice"
+          ] ||
+          "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/feedback_correto.mp3"
+        );
+      }
+
+      return (
+        sounds[
+          "feedback-error-voice"
+        ] ||
+        "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Ops_feedback_erro.mp3"
+      );
+    }
+
+    function playVoice(state) {
+      const rootView = topView();
+
+      const now =
+        rootView.performance
+          ?.now?.() ||
+        Date.now();
+
+      const previous =
+        rootView.__DUDUQ_FEEDBACK_VOICE_LAST ||
+        {
+          state: "",
+          at: 0
+        };
+
+      if (
+        previous.state === state &&
+        now - previous.at < 420
+      ) {
+        return;
+      }
+
+      rootView.__DUDUQ_FEEDBACK_VOICE_LAST = {
+        state,
+        at: now
+      };
+
+      try {
+        rootView
+          .__DUDUQ_FEEDBACK_VOICE_AUDIO
+          ?.pause?.();
+      } catch (_) {}
+
+      try {
+        const audio =
+          new rootView.Audio(
+            sourceFor(state)
+          );
+
+        audio.preload = "auto";
+        audio.volume = 0.82;
+
+        rootView
+          .__DUDUQ_FEEDBACK_VOICE_AUDIO =
+          audio;
+
+        audio.play()
+          ?.catch?.(
+            function () {}
+          );
+      } catch (_) {}
+    }
+
+    function sync() {
+      const feedback =
+        doc.querySelector(
+          ".duduq-engine-feedback[data-state]"
+        );
+
+      if (!feedback) {
+        lastFeedback = null;
+        lastState = "";
+        return;
+      }
+
+      const state =
+        String(
+          feedback.dataset.state || ""
+        ).toLowerCase();
+
+      const changedElement =
+        feedback !== lastFeedback;
+
+      const changedState =
+        state !== lastState;
+
+      if (
+        (
+          changedElement ||
+          changedState
+        ) &&
+        (
+          state === "success" ||
+          state === "retry"
+        )
+      ) {
+        playVoice(state);
+      }
+
+      lastFeedback = feedback;
+      lastState = state;
+    }
+
+    const observer =
+      new view.MutationObserver(
+        sync
+      );
+
+    const root =
+      doc.body ||
+
+      doc.documentElement;
+
+    if (root) {
+      observer.observe(
+        root,
+        {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: [
+            "data-state"
+          ]
+        }
+      );
+    }
+
+    sync();
   }
 
 
@@ -2775,6 +3172,8 @@
     installInitialSpeechGate(doc);
     installUniversalAudioVisualState(doc);
     installMemoryQuestPedagogy(doc);
+    installDragDropDropAudio(doc);
+    installFeedbackVoice(doc);
     syncDocument(doc, frame);
     installFullscreenBridge(doc);
     installEarlyLiteracySpeech(doc);
