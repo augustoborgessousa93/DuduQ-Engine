@@ -1,7 +1,6 @@
-/* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 01
    Hello! Greetings & Introductions
-   Versão 1.7.0 — OFICIAL DUDUQ · ÁUDIO PERSONALIZADO + GOOD NIGHT
+   Versão 1.7.1 — OFICIAL DUDUQ · DIVERSIDADE VISUAL + ÁUDIO PERSONALIZADO
 
    FONTES EDITORIAIS
    - DUDUQ Conteúdo Oficial — Língua Inglesa v1.0
@@ -20,7 +19,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.7.0";
+  const VERSION = "1.7.1";
 
   window.DUDUQ_CONTENT =
     window.DUDUQ_CONTENT || {};
@@ -80,11 +79,24 @@
 
       girl:
         CONTENT.girl ||
+
         BASE + "Girl.png",
 
       selfintro:
         CONTENT.selfintro ||
-        BASE + "My%20name.png"
+        BASE + "My%20name.png",
+
+      rain:
+        BASE + "Rain.png",
+
+      nervous:
+        BASE + "nervous.png",
+
+      fishGirl:
+        BASE + "Fish_Girl.png",
+
+      wheelchairBoy:
+        BASE + "wheelchair_boy.png"
     });
 
   const AUDIO_BASE =
@@ -150,6 +162,7 @@
           },
           {
             text: "Good afternoon",
+
             file:
               "ING_1ANO_M01_EN1-M1-02_MATCHING_ESTIMULO02_GOOD-AFTERNOON_ENUS.mp3"
           }
@@ -232,6 +245,7 @@
             text: "Girl",
             file:
               "ING_1ANO_M01_EN1-M1-07_MATCHING_ESTIMULO02_GIRL_ENUS.mp3"
+
           }
         ]
       ),
@@ -314,6 +328,7 @@
             text: "Girl",
             file:
               "ING_1ANO_M01_EN1-M1-11_SMART-SENTENCE_ESTIMULO02_GIRL_ENUS.mp3"
+
           }
         ]
       ),
@@ -396,6 +411,7 @@
       greetingResponse:
         skill(
           "Responder a um cumprimento simples."
+
         ),
 
       personalPresentation:
@@ -560,6 +576,7 @@
               enabled: true,
               text: "Hello",
               language: "en-US",
+
               role: "instruction"
             },
 
@@ -642,6 +659,7 @@
 
                 items: [
                   {
+
                     id:
                       "scene-greeting",
                     label:
@@ -653,21 +671,21 @@
                   },
                   {
                     id:
-                      "scene-goodbye",
+                      "scene-wheelchair-boy",
                     label:
                       "",
                     image:
-                      VISUALS.goodbye,
+                      VISUALS.wheelchairBoy,
                     display:
                       "image"
                   },
                   {
                     id:
-                      "scene-afternoon",
+                      "scene-fish-girl",
                     label:
                       "",
                     image:
-                      VISUALS.afternoon,
+                      VISUALS.fishGirl,
                     display:
                       "image"
                   }
@@ -724,6 +742,7 @@
 
               incorrect:
                 "Ouça novamente e procure a cena da tarde.",
+
 
               language:
                 "pt-BR"
@@ -798,14 +817,15 @@
                   },
                   {
                     id:
-                      "scene-goodbye",
+                      "scene-rain",
                     label:
                       "",
                     image:
-                      VISUALS.goodbye,
+                      VISUALS.rain,
                     display:
                       "image"
                   }
+
                 ]
               }
             }
@@ -913,11 +933,11 @@
                 items: [
                   {
                     id:
-                      "scene-greeting",
+                      "scene-nervous",
                     label:
                       "",
                     image:
-                      VISUALS.greeting,
+                      VISUALS.nervous,
                     display:
                       "image"
                   },
@@ -933,11 +953,11 @@
                   },
                   {
                     id:
-                      "scene-morning",
+                      "scene-wheelchair-boy",
                     label:
                       "",
                     image:
-                      VISUALS.morning,
+                      VISUALS.wheelchairBoy,
                     display:
                       "image"
                   }
@@ -970,6 +990,7 @@
 
             alternatives: [
               sourceOption(
+
                 "good-night",
                 "GOOD NIGHT"
               ),
@@ -1052,6 +1073,7 @@
                   {
                     id:
                       "scene-morning",
+
                     label:
                       "",
                     image:
@@ -1134,6 +1156,7 @@
               sourceOption(
                 "goodbye",
                 "GOODBYE"
+
               ),
               sourceOption(
                 "good-morning",
@@ -1216,6 +1239,7 @@
                     imageAssetKey:
                       "morning",
                     alt:
+
                       "Cena de manhã"
                   },
                   {
@@ -1298,6 +1322,7 @@
                 "Ouça e ligue cada fala à cena correspondente.",
               language: "pt-BR",
               role: "instruction"
+
             },
 
             alternatives: [
@@ -1381,6 +1406,7 @@
                   }
                 ],
 
+
                 rightItems: [
                   {
                     id:
@@ -1462,6 +1488,7 @@
                 "GIRL"
               ),
               sourceOption(
+
                 "hello",
                 "HELLO"
               )
@@ -1544,6 +1571,7 @@
                   },
                   {
                     id:
+
                       "picture-girl",
                     imageAssetKey:
                       "girl",
@@ -1791,6 +1819,7 @@
                 "pt-BR"
             },
 
+
             delivery: {
               mechanic:
                 "matching",
@@ -1872,6 +1901,7 @@
                     leftId:
                       "audio-goodbye",
                     rightId:
+
                       "word-goodbye"
                   }
                 ],
@@ -1954,6 +1984,7 @@
                   "audio-2",
                 text:
                   "2",
+
                 audio: {
                   enabled:
                     true,
@@ -2036,6 +2067,7 @@
                   image: {
                     src:
                       VISUALS.selfintro,
+
                     alt:
                       "Criança dizendo o próprio nome"
                   }
@@ -2118,6 +2150,7 @@
               ),
               sourceOption(
                 "boy",
+
                 "BOY"
               ),
               sourceOption(
@@ -2282,6 +2315,7 @@
                 instructionSpoken:
                   "Observe a imagem e complete a frase para a menina."
               }
+
             }
           }
         ]
@@ -2364,6 +2398,7 @@
             delivery: {
               mechanic:
                 "memory-quest",
+
               allowImage:
                 true,
               allowAudio:
@@ -2446,6 +2481,7 @@
 
                 behavior: {
                   shuffleCards:
+
                     true,
                   matchDelayMs:
                     420,
