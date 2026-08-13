@@ -26,7 +26,7 @@
   <script src="./core/duduq-sound.js?v=110"></script>
   <script src="./core/duduq-intro.js?v=120"></script>
   <script src="./core/duduq-schema.js?v=100"></script>
-  <script src="./core/duduq-content-audio.js?v=102"></script>
+  <script src="./core/duduq-content-audio.js?v=103"></script>
   <script src="./core/duduq-completion.js?v=110"></script>
 
   <!-- Transição universal deve carregar ANTES do Host -->
@@ -103,6 +103,7 @@
           "smart-sentence",
           "memory-quest"
         ];
+
 
         for (
           const mechanicId
@@ -208,6 +209,7 @@
               .style
               .setProperty(
                 "--duduq-world-image",
+
                 `url("${moduleBackgroundSrc}")`
               );
           } catch (_) {}
@@ -313,6 +315,7 @@
               ) {
                 window.setTimeout(
                   function () {
+
                     image.onload?.();
                   },
                   0
@@ -418,6 +421,7 @@
           const invalidDecision =
             decisions.find(
               function (entry) {
+
                 return (
                   !entry
                     .decision
@@ -628,6 +632,7 @@
             ?.classList
             ?.add(
               "is-intro-soft"
+
             );
 
           /*
@@ -727,6 +732,143 @@
           }
         }
 
+
+        /* ===============================================
+           INTRO — RECUPERAÇÃO SONORA R17
+
+           O Core Sound já tenta tocar o swoosh na fase de
+           branding e a música na fase mission. Este reforço:
+
+           - repete a tentativa após o asset estar pronto;
+           - reforça a música quando MISSÃO PRONTA aparece;
+           - no clique INICIAR MISSÃO, usa a ativação real do
+             usuário para tocar o swoosh de transição.
+
+           Observação: navegadores podem bloquear qualquer
+           áudio audível antes do primeiro gesto do usuário.
+           =============================================== */
+
+        function installIntroSoundRecovery() {
+          const sound =
+            window.DuduQSound;
+
+          if (!sound) return;
+
+          let retryBrandingTimer = null;
+          let retryMissionTimer = null;
+
+          function replayBrandingIfNeeded() {
+            if (
+              sound.isPlaying(
+                "intro-company-swoosh"
+              )
+            ) {
+              return;
+            }
+
+            sound.play(
+              "intro-company-swoosh",
+              {
+                volume: 0.58,
+                minGapMs: 0
+              }
+            );
+          }
+
+          function replayMissionIfNeeded() {
+            if (
+              sound.isPlaying(
+                "intro-mission-music"
+              )
+            ) {
+              return;
+            }
+
+            sound.playLoop(
+              "intro-mission-music",
+              {
+                volume: 0.24,
+                fadeInMs: 520,
+                minGapMs: 0
+              }
+            );
+          }
+
+          document.addEventListener(
+            "duduq:intro-phase",
+            function (event) {
+              const phase =
+                event?.detail?.phase || "";
+
+              if (phase === "branding") {
+                if (retryBrandingTimer !== null) {
+                  window.clearTimeout(
+                    retryBrandingTimer
+                  );
+                }
+
+                retryBrandingTimer =
+                  window.setTimeout(
+                    replayBrandingIfNeeded,
+                    220
+                  );
+
+                return;
+              }
+
+              if (phase === "mission") {
+                if (retryMissionTimer !== null) {
+                  window.clearTimeout(
+                    retryMissionTimer
+                  );
+                }
+
+                retryMissionTimer =
+                  window.setTimeout(
+                    replayMissionIfNeeded,
+                    260
+                  );
+              }
+            }
+          );
+
+          document.addEventListener(
+            "duduq:intro-ready",
+            function () {
+              window.setTimeout(
+                replayMissionIfNeeded,
+                100
+              );
+            }
+          );
+
+          document.addEventListener(
+            "duduq:intro-start",
+
+            function () {
+              /*
+               * Este evento nasce diretamente do clique no
+               * botão INICIAR MISSÃO. Portanto é o ponto mais
+               * confiável para áudio audível em navegadores
+               * com política restrita de autoplay.
+               */
+              sound.stop(
+                "click"
+              );
+
+              sound.play(
+                "transition-swoosh",
+                {
+                  volume: 0.48,
+                  minGapMs: 0
+                }
+              );
+            }
+          );
+        }
+
+        installIntroSoundRecovery();
+
         /* ===============================================
            INTRO CINEMATOGRÁFICA
            =============================================== */
@@ -808,6 +950,7 @@
           /*
            * A Intro só libera MISSÃO PRONTA depois que o
            * primeiro cenário foi preparado (ou caiu no
+
            * timeout seguro com fallback claro).
            */
           readyPromise:
