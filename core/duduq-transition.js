@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — TRANSITION
    Ponte visual opaca entre telas e mecânicas.
-   Versão 1.6.4
+   Versão 1.6.5
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.6.4";
+  const VERSION = "1.6.5";
   if (window.DuduQTransition?.version === VERSION) return;
 
   const DEFAULTS = Object.freeze({
@@ -108,6 +108,7 @@
         : clamp(
             number(
               options.bridgeHoldMs,
+
               DEFAULTS.bridgeHoldMs
             ),
             0,
@@ -218,6 +219,7 @@
       index += 1
     ) {
       await nextFrame();
+
     }
   }
 
@@ -328,6 +330,7 @@
 
       position =
         computed.backgroundPosition ||
+
         position;
 
       size =
@@ -548,6 +551,7 @@
     /*
      * A ponte só exige World Fusion quando o iframe já
      * contém uma mecânica DuduQ. Isso evita transformar
+
      * a checagem em uma dependência genérica para qualquer iframe.
      */
     const mechanicRoot =
@@ -658,6 +662,7 @@
           style?.visibility !==
             "hidden" &&
           Number(
+
             style?.opacity ?? 1
           ) > 0.01;
 
@@ -768,6 +773,7 @@
           performance.now() + 500;
 
         while (
+
           performance.now() <
           graceDeadline
         ) {
@@ -795,6 +801,58 @@
 
     return true;
   }
+
+  /* =======================================================
+     COBERTURA IMEDIATA
+
+     Usada pelo Host no instante em que uma etapa termina.
+     A camada fica opaca no MESMO task do callback da mecânica,
+     antes que o navegador tenha oportunidade de pintar uma
+     eventual tela final interna do runtime.
+
+     A próxima missão é montada por baixo da ponte e continua
+     usando o reveal visual normal.
+     ======================================================= */
+
+  function coverImmediate(
+    options = {}
+  ) {
+    const config =
+      normalize(options);
+
+    operationId += 1;
+
+    ensureRoot();
+    syncWorldBridge();
+    lockPage();
+
+    state = "covered";
+
+    setOverlayState(
+      "is-covered"
+    );
+
+    overlay.style.visibility =
+      "visible";
+
+    overlay.style.pointerEvents =
+      "auto";
+
+    overlay.style.opacity =
+      "1";
+
+    playTransitionSound(config);
+
+    dispatch(
+      "duduq:transition-covered",
+      {
+        immediate: true
+      }
+    );
+
+    return true;
+  }
+
 
   async function cover(
     options = {}
@@ -826,6 +884,7 @@
     if (
       currentOperation !==
       operationId
+
     ) {
       return false;
     }
@@ -937,6 +996,7 @@
 
     state = "idle";
 
+
     dispatch(
       "duduq:transition-complete"
     );
@@ -966,8 +1026,14 @@
     activeSwapPromise =
       (async function () {
         try {
+          const alreadyCovered =
+            options.precovered === true &&
+            state === "covered";
+
           const covered =
-            await cover(options);
+            alreadyCovered
+              ? true
+              : await cover(options);
 
           if (!covered) {
             return false;
@@ -1040,9 +1106,11 @@
 
   window.DuduQTransition =
     Object.freeze({
+
       version: VERSION,
 
       cover,
+      coverImmediate,
       reveal,
       swap,
       hideImmediate,
@@ -1086,4 +1154,3 @@
     { ready: true }
   );
 })();
-
