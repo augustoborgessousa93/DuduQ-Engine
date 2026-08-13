@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — CONTENT AUDIO
    MP3 editorial como fonte prioritária + TTS como fallback.
-   Versão 1.0.2
+   Versão 1.0.3
 
    CONTRATO
    - Cada módulo pode expor moduleDefinition.audioCatalog.
@@ -17,7 +17,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.2";
+  const VERSION = "1.0.3";
 
   if (
     window.DuduQContentAudio &&
@@ -103,6 +103,7 @@
         Object.entries(value.audioCatalog)
           .forEach(
             function ([questionId, entry]) {
+
               if (!isObject(entry)) return;
 
               const instruction =
@@ -150,7 +151,6 @@
               });
             }
           );
-
       }
 
       Object.values(value)
@@ -176,7 +176,7 @@
   function runtimeInstaller(payload) {
     "use strict";
 
-    const VERSION = "1.0.2";
+    const VERSION = "1.0.3";
 
     if (
       window.DuduQOfficialAudioRuntime &&
@@ -210,6 +210,7 @@
         ? synth.speak.bind(synth)
         : null;
 
+
     const nativeCancel =
       synth &&
       typeof synth.cancel === "function"
@@ -227,7 +228,6 @@
 
     function normalize(value) {
       return String(value ?? "")
-
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[’‘`´]/g, "'")
@@ -305,7 +305,6 @@
             return;
           }
 
-
           const audio =
             new Audio(src);
 
@@ -316,6 +315,7 @@
           let settled = false;
 
           function cleanup() {
+
             audio.removeEventListener(
               "ended",
               handleEnded
@@ -422,6 +422,7 @@
           return;
         }
 
+
         try {
           await playSingleSource(
             list[index],
@@ -457,7 +458,6 @@
       }
 
       if (
-
         token === currentToken &&
         playedAnything
       ) {
@@ -528,13 +528,13 @@
         }
       );
 
+
       if (!candidates.length) return null;
 
       /*
        * No Target Shooter o próprio estímulo identifica a
        * questão. Nas demais mecânicas o autoplay do enunciado
        * normalmente já definiu activeQuestionId.
-
        */
       return candidates[0];
     }
@@ -611,7 +611,6 @@
       /* Segurança em ambientes onde o evento externo falhe. */
       window.setTimeout(
         function () {
-
           if (
             gateListenerInstalled &&
             pendingUtterance
@@ -634,6 +633,7 @@
         gateLocked()
       ) {
         pendingUtterance = utterance;
+
         installGateListener();
         return;
       }
@@ -688,7 +688,6 @@
           resolved.question
             ?.instruction
             ?.src
-
         ) {
           sequence.push(
             resolved.question
@@ -765,7 +764,6 @@
           synth,
           "speak",
           {
-
             configurable: true,
             writable: true,
             value: wrappedSpeak
@@ -842,11 +840,11 @@
       cancel,
       { once: true }
     );
-
   }
 
   /* =======================================================
      IFRAMES DIRETOS
+
 
      Algumas mecânicas, como o Drag & Drop, carregam o runtime
      diretamente em iframe.src em vez de passar pelo fetch()
@@ -919,7 +917,6 @@
       !catalog.some(
         function (entry) {
           return entry.mechanic === mechanic;
-
         }
       )
     ) {
@@ -953,6 +950,7 @@
           mechanic
         );
         return true;
+
       }
     } catch (_) {}
 
@@ -996,7 +994,6 @@
       )?.appendChild(script);
 
       /* O código já foi executado; removemos apenas a tag. */
-
       script.remove();
 
       const installed =
@@ -1059,6 +1056,7 @@
   function watchDirectFrame(iframe) {
     if (!iframe || iframe.dataset.duduqContentAudioWatch === "1") {
       return;
+
     }
 
     iframe.dataset.duduqContentAudioWatch = "1";
@@ -1073,7 +1071,6 @@
 
         installIntoFrame(
           iframe,
-
           mechanic
         );
       },
@@ -1144,13 +1141,45 @@
     return result;
   }
 
+  /* =======================================================
+     SMART SENTENCE — AUTOPLAY DE ENUNCIADO
+
+     O runtime já possui autoplay nativo, porém o adaptador
+     atual entrega instructionSpoken sem criar listening.autoPlay.
+     Aqui preservamos o contrato do runtime e consideramos
+     autoplay ativo por padrão quando existe fala de instrução.
+
+     Resultado:
+     - primeira tela BOY: autoplay;
+     - segunda tela GIRL: autoplay após o avanço;
+     - botão manual continua funcionando;
+     - Content Audio continua resolvendo MP3 oficial primeiro.
+     ======================================================= */
+
+  function patchSmartSentenceAutoplay(html) {
+    const original =
+      'if (stage.listening?.autoPlay) setTimeout(() => ListeningEngine.play(stage), 420);';
+
+    const replacement =
+      'if (stage.listening?.autoPlay !== false && (stage.listening?.text || stage.instructionSpoken || stage.instruction)) setTimeout(() => ListeningEngine.play(stage), 420);';
+
+
+    if (!html.includes(original)) {
+      return html;
+    }
+
+    return html.replace(
+      original,
+      replacement
+    );
+  }
+
   function injectRuntimeHelper(
     html,
     mechanic,
     catalog
   ) {
     const safePayload =
-
       JSON.stringify({
         mechanic,
         catalog
@@ -1190,8 +1219,21 @@
       return html;
     }
 
+    let prepared =
+      patchSpeechCalls(html);
+
+    if (
+      mechanic ===
+      "smart-sentence"
+    ) {
+      prepared =
+        patchSmartSentenceAutoplay(
+          prepared
+        );
+    }
+
     return injectRuntimeHelper(
-      patchSpeechCalls(html),
+      prepared,
       mechanic,
       relevant
     );
@@ -1226,8 +1268,8 @@
             return entry.mechanic === mechanic;
           }
         )
-      ) {
 
+      ) {
         return response;
       }
 
