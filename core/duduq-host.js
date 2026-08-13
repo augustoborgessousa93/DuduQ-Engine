@@ -1,7 +1,13 @@
 /* =========================================================
    DUDUQ CORE — HOST
    Orquestrador central das mecânicas e módulos DuduQ.
-   Versão 1.6.5
+   Versão 1.6.6
+
+   NOVIDADES 1.6.6
+   - cobre a viewport de forma síncrona quando uma etapa termina
+   - impede lampejo de telas finais internas entre missões
+   - preserva o reveal suave da próxima missão
+   - sincroniza fallback do World Fusion com CSS 147 / JS 148
 
    NOVIDADES 1.6.5
    - sincroniza cache com World Fusion JS 1.3.3
@@ -87,7 +93,7 @@
     document.currentScript?.src ||
     new URL("./duduq-host.js", window.location.href).href;
 
-  const VERSION = "1.6.5";
+  const VERSION = "1.6.6";
 
   if (
     window.DuduQ &&
@@ -102,6 +108,7 @@
 
   /* =======================================================
      TELA CHEIA CENTRALIZADA
+
 
      O documento principal é o proprietário da tela cheia.
      Assim, destruir o iframe durante uma troca de mecânica
@@ -213,12 +220,13 @@
   function ensureWorldFusion() {
     const coreBase = new URL("./", HOST_SCRIPT_URL);
 
+
     if (!document.getElementById("duduq-world-fusion-core-style")) {
       const link = document.createElement("link");
       link.id = "duduq-world-fusion-core-style";
       link.rel = "stylesheet";
       link.href = new URL(
-        "duduq-world-fusion.css?v=133",
+        "duduq-world-fusion.css?v=147",
         coreBase
       ).href;
       (document.head || document.documentElement).appendChild(link);
@@ -231,7 +239,7 @@
       const script = document.createElement("script");
       script.id = "duduq-world-fusion-core-script";
       script.src = new URL(
-        "duduq-world-fusion.js?v=133",
+        "duduq-world-fusion.js?v=148",
         coreBase
       ).href;
       script.async = true;
@@ -322,6 +330,7 @@
     "duduq:assets-ready",
     primeCompletionMascot
   );
+
 
 
   /* =======================================================
@@ -434,6 +443,7 @@
   }
 
 
+
   function applyYearBackground(year) {
     try {
       window.DuduQAssets
@@ -512,6 +522,49 @@
     }
 
     return null;
+  }
+
+
+  function protectStepCompletion(
+    session,
+    options = {}
+  ) {
+    if (
+      !session ||
+      session !== activeSession
+    ) {
+      return false;
+    }
+
+    const transition =
+      getTransition();
+
+    if (
+      !transition ||
+      typeof transition.coverImmediate !==
+        "function"
+    ) {
+      return false;
+    }
+
+    try {
+      return (
+        transition.coverImmediate(
+          {
+            ...TRANSITION_OPTIONS,
+
+            ...options
+          }
+        ) === true
+      );
+    } catch (error) {
+      console.warn(
+        "[DuduQ Host] Não foi possível aplicar a cobertura imediata da etapa.",
+        error
+      );
+
+      return false;
+    }
   }
 
 
@@ -610,6 +663,7 @@
     );
 
     if (
+
       session !== activeSession
     ) {
       return false;
@@ -720,6 +774,7 @@
             finish,
             POST_LOAD_SETTLE_MS
           );
+
         }
 
         window.addEventListener(
@@ -830,6 +885,7 @@
       id,
 
       version: String(
+
         definition.version || "1.0.0"
       ),
 
@@ -1050,6 +1106,7 @@
     }
 
     const fraction = totalSteps > 0
+
       ? clamp(
           completedSteps / totalSteps,
           0,
@@ -1160,6 +1217,7 @@
         color: "#17375e",
         fontFamily: "system-ui, sans-serif",
         boxShadow: "0 18px 44px rgba(25,61,96,0.18)",
+
         textAlign: "center"
       }
     );
@@ -1270,6 +1328,7 @@
         ) !== false;
       } catch (error) {
         renderRuntimeError(
+
           session,
           `A validação da mecânica "${step.mechanic}" apresentou um erro.`,
           error
@@ -1380,6 +1439,7 @@
 
     /*
      * Entre mecânicas não existe som de vitória.
+
      * Se um runtime interno iniciou o win, cortamos agora,
      * antes do slide começar.
      */
@@ -1431,6 +1491,28 @@
        - win somente depois que a conclusão apareceu
        ===================================================== */
 
+    /*
+     * PROTEÇÃO SÍNCRONA
+     *
+     * Alguns runtimes desenham sua própria tela final no mesmo
+     * ciclo em que notificam onComplete(). A ponte anterior só
+     * começava a cobrir no próximo frame, permitindo um lampejo.
+     *
+     * A R18.2 cobre a viewport imediatamente. O callback abaixo
+     * monta a próxima tela por baixo da ponte e o reveal continua
+     * suave, sem expor a conclusão interna da mecânica.
+     */
+    const precovered =
+      protectStepCompletion(
+        session,
+        {
+          soundEnabled: hasNextMechanic,
+          soundName: "transition-swoosh",
+          soundVolume: 0.42,
+          soundMinGapMs: 260
+        }
+      );
+
     runTransitionSwap(
       session,
       async function () {
@@ -1468,6 +1550,7 @@
           {
             paintFrames: 1,
             timeoutMs: VIEW_READY_TIMEOUT_MS
+
           }
         );
 
@@ -1485,7 +1568,12 @@
         paintFrames: 1,
         bridgeHoldMs: 0,
 
-        soundEnabled: hasNextMechanic,
+        precovered,
+
+        soundEnabled:
+          precovered
+            ? false
+            : hasNextMechanic,
         soundName: "transition-swoosh",
         soundVolume: 0.42,
         soundMinGapMs: 260
@@ -1573,6 +1661,7 @@
     }
 
     return `${subject} concluído com sucesso.`;
+
   }
 
 
@@ -1683,6 +1772,7 @@
       buildCompletionMessage(
         session.module
       );
+
 
     const badge = createElement(
       "div",
@@ -1904,6 +1994,7 @@
 
     const session = activeSession;
 
+
     if (session.transitioning) {
       return false;
     }
@@ -2013,6 +2104,7 @@
       moduleId: activeSession.module.id,
       year: activeSession.module.year,
       subject: activeSession.module.subject,
+
       module: activeSession.module.module,
       stepIndex: activeSession.stepIndex,
       totalSteps: activeSession.module.steps.length,
@@ -2062,4 +2154,3 @@
     VERSION
   );
 })();
-
