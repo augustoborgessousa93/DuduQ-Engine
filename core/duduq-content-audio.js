@@ -1,3 +1,4 @@
+/* =========================================================
    DUDUQ CORE — CONTENT AUDIO
    MP3 editorial como fonte prioritária + TTS como fallback.
    Versão 1.0.2
