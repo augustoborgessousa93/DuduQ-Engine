@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Conteúdo nítido sobre fundo cinematográfico suavizado.
-   Versão 1.4.0
+   Versão 1.4.1
    ========================================================= */
  
 html.duduq-world-fusion {
@@ -3307,4 +3307,305 @@ html.duduq-world-fusion
   scroll-margin: 0 !important;
   scroll-padding: 0 !important;
   overflow-anchor: none !important;
+}
+ 
+ 
+/* =========================================================
+   DUDUQ CORE — WORLD FUSION
+   ROUND 7 — RELEASE CANDIDATE / OFFICIAL MODULE READY
+   Patch visual 1.4.1
+ 
+   OBJETIVOS
+   - manter o DuduQ inteiro no cabeçalho durante feedback/transição;
+   - garantir área segura para CONFIRMAR e sua sombra física;
+   - exibir “Próxima missão” também nas trocas entre mecânicas;
+   - preservar o atraso controlado do primeiro áudio após a Intro;
+   - não alterar Target Shooter, Memory Quest e demais composições
+     já aprovadas nas rodadas anteriores.
+   ========================================================= */
+ 
+/* =========================================================
+   40. MASCOTE DO CABEÇALHO — FALLBACK REAL, SEM RECORTE
+ 
+   O Lesson Engine remove o mascote React durante retry/success.
+   O JS 1.4.1 injeta uma imagem visual no slot vazio. Desligamos o
+   pseudo-elemento antigo para evitar zoom/corte e duplicidade.
+   ========================================================= */
+ 
+html.duduq-world-fusion
+  .duduq-engine-header,
+html.duduq-world-fusion
+  .duduq-engine-header-main,
+html.duduq-world-fusion
+  .duduq-engine-header-mascot-slot {
+  overflow: visible !important;
+}
+ 
+html.duduq-world-fusion
+  .duduq-engine-header-mascot-slot[data-visible="false"]::before {
+  content: none !important;
+  display: none !important;
+  background-image: none !important;
+}
+ 
+html.duduq-world-fusion
+  .duduq-world-header-mascot-fallback {
+  position: absolute !important;
+  z-index: 4 !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  display: block !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform:
+    translate(-50%, -50%)
+    scale(2.42) !important;
+  transform-origin: 50% 50% !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  filter: none !important;
+}
+ 
+@media
+  (min-width: 820px)
+  and (max-height: 720px) {
+  html.duduq-world-fusion
+    .duduq-world-header-mascot-fallback {
+    transform:
+      translate(-50%, -50%)
+      scale(2.28) !important;
+  }
+}
+ 
+/* =========================================================
+   41. AÇÕES — SAFE AREA PARA BOTÃO E SOMBRA
+ 
+   A sombra física do botão usa pixels abaixo do próprio botão.
+   O slot não pode usar overflow:hidden nem encostar no limite da
+   stage. A regra vale para Matching, Drag & Drop e Smart Sentence.
+   ========================================================= */
+ 
+@media
+  (min-width: 820px)
+  and (min-height: 600px) {
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    :is(
+      .duduq-matching-action-slot,
+      .duduq-dd-action-slot,
+      .duduq-ss-action-slot
+    ) {
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    padding-bottom: 9px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-surface,
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-surface:has(
+      .duduq-matching-action-slot[data-feedback-state="retry"]
+    ),
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-surface:has(
+      .duduq-matching-action-slot[data-feedback-state="success"]
+    ) {
+    grid-template-rows:
+      auto
+      auto
+      70px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-action-slot,
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-action-slot[data-feedback-state="retry"],
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-action-slot[data-feedback-state="success"] {
+    min-height: 70px !important;
+    height: 70px !important;
+    max-height: 70px !important;
+    padding: 7px 0 11px !important;
+    overflow: visible !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-shell:has(.duduq-matching-root)
+    .duduq-engine-stage {
+    padding-bottom: 16px !important;
+  }
+}
+ 
+/* =========================================================
+   42. PONTE “PRÓXIMA MISSÃO” ENTRE MECÂNICAS
+ 
+   As transições internas de uma mesma mecânica já possuem cartão
+   próprio. O JS 1.4.1 cria esta ponte apenas quando o Host troca
+   uma mecânica completa pela próxima, eliminando a inconsistência.
+   ========================================================= */
+ 
+.duduq-world-mission-bridge {
+  position: fixed;
+  z-index: 100080;
+  inset: 0;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(17, 39, 57, .20);
+  -webkit-backdrop-filter: blur(5px) saturate(.82);
+  backdrop-filter: blur(5px) saturate(.82);
+  transition:
+    opacity 150ms ease,
+    visibility 150ms linear;
+}
+ 
+.duduq-world-mission-bridge.is-visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+ 
+.duduq-world-mission-card {
+  box-sizing: border-box;
+  width: min(520px, calc(100vw - 34px));
+  min-height: 244px;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 7px;
+  padding: 20px 30px 24px;
+  border: 2px solid rgba(167, 197, 221, .92);
+  border-radius: 30px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(252, 254, 255, .98),
+      rgba(242, 250, 255, .98)
+    );
+  box-shadow:
+    0 8px 0 rgba(139, 176, 204, .66),
+    0 26px 64px rgba(15, 43, 68, .24),
+    inset 0 1px 0 #fff;
+  text-align: center;
+  font-family: Nunito, ui-rounded, system-ui, sans-serif;
+}
+ 
+.duduq-world-mission-mascot {
+  width: 100px;
+  height: 100px;
+  display: block;
+  object-fit: contain;
+  margin: -4px auto 1px;
+  user-select: none;
+  pointer-events: none;
+}
+ 
+.duduq-world-mission-kicker {
+  color: #0870d2;
+  font-size: 12px;
+  font-weight: 1000;
+  line-height: 1;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+}
+ 
+.duduq-world-mission-copy {
+  color: #163555;
+  font-size: clamp(17px, 1.55vw, 21px);
+  font-weight: 900;
+  line-height: 1.18;
+}
+ 
+.duduq-world-mission-track {
+  position: relative;
+  width: min(360px, 100%);
+  height: 18px;
+  margin-top: 8px;
+  overflow: hidden;
+  border: 2px solid #9bb9d2;
+  border-radius: 999px;
+  background: #e3edf5;
+  box-shadow:
+    inset 0 1px 3px rgba(47, 87, 120, .18),
+    0 1px 0 #fff;
+}
+ 
+.duduq-world-mission-fill {
+  position: absolute;
+  inset: 1px auto 1px 1px;
+  width: calc(100% - 2px);
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      180deg,
+      #43b7ff,
+      #0a84e8
+    );
+  transform: scaleX(.05);
+  transform-origin: left center;
+}
+ 
+.duduq-world-mission-bridge.is-visible
+  .duduq-world-mission-fill {
+  animation:
+    duduq-world-mission-progress
+    680ms
+    cubic-bezier(.18,.74,.24,1)
+    forwards;
+}
+ 
+.duduq-world-mission-star {
+  position: absolute;
+  z-index: 2;
+  right: 3px;
+  top: 50%;
+  transform: translateY(-52%);
+  color: #ffd21c;
+  font-size: 14px;
+  line-height: 1;
+  text-shadow: 0 1px 0 #b98700;
+}
+ 
+@keyframes duduq-world-mission-progress {
+  from { transform: scaleX(.05); }
+  to { transform: scaleX(1); }
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+  .duduq-world-mission-bridge,
+  .duduq-world-mission-fill {
+    transition: none !important;
+    animation: none !important;
+  }
+  .duduq-world-mission-fill {
+    transform: scaleX(1) !important;
+  }
+}
+ 
+@media (max-width: 640px) {
+  .duduq-world-mission-card {
+    min-height: 220px;
+    padding: 18px 22px 22px;
+    border-radius: 25px;
+  }
+  .duduq-world-mission-mascot {
+    width: 86px;
+    height: 86px;
+  }
 }
