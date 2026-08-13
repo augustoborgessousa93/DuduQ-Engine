@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.3.7
+   Versão 1.3.8
    ========================================================= */
  
 (function () {
   "use strict";
  
-  const VERSION = "1.3.7";
+  const VERSION = "1.3.8";
   if (window.DuduQWorldFusion?.version === VERSION) return;
  
   const scriptUrl =
@@ -15,7 +15,7 @@
     new URL("./duduq-world-fusion.js", window.location.href).href;
  
   const stylesheetUrl = new URL(
-    "./duduq-world-fusion.css?v=137",
+    "./duduq-world-fusion.css?v=138",
     scriptUrl
   ).href;
  
@@ -336,7 +336,8 @@
  
     if (
       /(^|[^0-9])1([^0-9]|$)/.test(normalized) ||
-      /(^|[^0-9])2([^0-9]|$)/.test(normalized)
+      /(^|[^0-9])2([^0-9]|$)/.test(normalized) ||
+      /(^|[^0-9])3([^0-9]|$)/.test(normalized)
     ) {
       return true;
     }
@@ -784,6 +785,111 @@
   }
  
  
+  /* =======================================================
+     TARGET SHOOTER — CENTRALIZAÇÃO GEOMÉTRICA
+ 
+     Mede o conjunto visível uma vez por largura de arena e
+     calcula o deslocamento horizontal necessário para que o
+     grupo fique centralizado, sem alterar os slots pedagógicos
+     nem as animações próprias da mecânica.
+     ======================================================= */
+ 
+  function syncTargetShooterCentering(doc) {
+    const arena =
+      doc?.querySelector?.(".duduq-ts-arena");
+ 
+    if (!arena) return;
+ 
+    const view = doc.defaultView;
+    if (!view) return;
+ 
+    view.requestAnimationFrame(function () {
+      const targets = Array.from(
+        arena.querySelectorAll(".duduq-ts-target")
+      ).filter(function (target) {
+        const style = view.getComputedStyle(target);
+        return (
+          style.display !== "none" &&
+          style.visibility !== "hidden" &&
+          target.getClientRects().length > 0
+        );
+      });
+ 
+      if (!targets.length) {
+        arena.style.removeProperty(
+          "--duduq-ts-center-offset"
+        );
+        arena.removeAttribute(
+          "data-duduq-center-width"
+        );
+        return;
+      }
+ 
+      const arenaRect = arena.getBoundingClientRect();
+      const widthKey = String(
+        Math.round(arenaRect.width)
+      );
+ 
+      if (
+        arena.getAttribute(
+          "data-duduq-center-width"
+        ) === widthKey &&
+        arena.style.getPropertyValue(
+          "--duduq-ts-center-offset"
+        )
+      ) {
+        return;
+      }
+ 
+      /* Mede a geometria original, sem acumular offsets. */
+      arena.style.setProperty(
+        "--duduq-ts-center-offset",
+        "0px"
+      );
+ 
+      const boxes = targets.map(function (target) {
+        return target.getBoundingClientRect();
+      });
+ 
+      const minLeft = Math.min(
+        ...boxes.map((box) => box.left)
+      );
+      const maxRight = Math.max(
+        ...boxes.map((box) => box.right)
+      );
+ 
+      const groupCenter =
+        (minLeft + maxRight) / 2;
+      const arenaCenter =
+        arenaRect.left + arenaRect.width / 2;
+ 
+      const desired =
+        arenaCenter - groupCenter;
+ 
+      const safeInset = 18;
+      const minAllowed =
+        arenaRect.left + safeInset - minLeft;
+      const maxAllowed =
+        arenaRect.right - safeInset - maxRight;
+ 
+      const delta = Math.round(
+        Math.max(
+          minAllowed,
+          Math.min(maxAllowed, desired)
+        )
+      );
+ 
+      arena.style.setProperty(
+        "--duduq-ts-center-offset",
+        `${delta}px`
+      );
+      arena.setAttribute(
+        "data-duduq-center-width",
+        widthKey
+      );
+    });
+  }
+ 
   function syncDocument(doc, frame) {
     if (!doc?.documentElement || !doc.body) return false;
  
@@ -801,6 +907,7 @@
     syncBubbleLabelSemantics(doc);
     fitEarlyLiteracyBubbleWords(doc);
     fitEarlyLiteracyBubblePhrases(doc);
+    syncTargetShooterCentering(doc);
  
     doc.documentElement.setAttribute(
       "data-duduq-world-fusion-version",
