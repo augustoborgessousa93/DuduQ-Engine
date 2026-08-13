@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Conteúdo nítido sobre fundo cinematográfico suavizado.
-   Versão 1.4.6
+   Versão 1.4.7
    ========================================================= */
 
 html.duduq-world-fusion {
@@ -4351,3 +4351,54 @@ html.duduq-world-fusion
   }
 }
 
+
+
+/* =========================================================
+   DUDUQ CORE — WORLD FUSION
+   ROUND 13 — DRAG & DROP: ÁUDIO DO ENUNCIADO À PROVA DE BROWSER
+   Patch visual 1.4.7
+
+   O JavaScript 1.4.7 observa o estado real de speechSynthesis e
+   marca o CTA do enunciado com data-duduq-audio-playing="true".
+   Estas regras reforçam a especificidade apenas para os dois
+   runtimes Drag & Drop, preservando o padrão verde + ondas.
+   ========================================================= */
+
+html.duduq-world-fusion
+  :is(
+    .duduq-dd-instruction,
+    .duduq-udd-instruction
+  )
+  :is(button, [role="button"])
+  [data-duduq-audio-playing="true"] {
+  color: #ffffff !important;
+}
+
+/*
+ * Quando o próprio button recebe o atributo (caso normal).
+ * A regra genérica da R10 já define o gradiente completo; esta
+ * repetição curta apenas garante prioridade sobre CSS inline
+ * produzido pelo runtime React do Drag & Drop.
+ */
+html.duduq-world-fusion
+  :is(
+    .duduq-dd-instruction,
+    .duduq-udd-instruction
+  )
+  :is(button, [role="button"])[data-duduq-audio-playing="true"] {
+  color: #ffffff !important;
+  border-color: #2b9d12 !important;
+  background:
+    linear-gradient(
+      180deg,
+      #79e533 0%,
+      #49c91d 52%,
+      #2eae13 100%
+    ) !important;
+  box-shadow:
+    0 3px 0 #177909,
+    0 0 0 3px rgba(120, 229, 50, .22),
+    0 0 18px rgba(83, 210, 27, .36),
+    inset 0 1px 0 rgba(255, 255, 255, .72)
+    !important;
+}
