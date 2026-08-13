@@ -21,12 +21,12 @@
   <!-- =====================================================
        DUDUQ CORE
        ===================================================== -->
-  <script src="./core/duduq-assets.js?v=120"></script>
-  <script id="duduq-world-fusion-core-script" src="./core/duduq-world-fusion.js?v=147"></script>
+  <script src="./core/duduq-assets.js?v=121"></script>
+  <script id="duduq-world-fusion-core-script" src="./core/duduq-world-fusion.js?v=148"></script>
   <script src="./core/duduq-sound.js?v=110"></script>
   <script src="./core/duduq-intro.js?v=120"></script>
   <script src="./core/duduq-schema.js?v=100"></script>
-  <script src="./core/duduq-content-audio.js?v=103"></script>
+  <script src="./core/duduq-content-audio.js?v=104"></script>
   <script src="./core/duduq-completion.js?v=110"></script>
 
   <!-- Transição universal deve carregar ANTES do Host -->
@@ -104,7 +104,6 @@
           "memory-quest"
         ];
 
-
         for (
           const mechanicId
           of requiredMechanics
@@ -114,6 +113,7 @@
               .hasMechanic(
                 mechanicId
               )
+
           ) {
             root.textContent =
               `Erro: a mecânica "${mechanicId}" não foi registrada.`;
@@ -209,7 +209,6 @@
               .style
               .setProperty(
                 "--duduq-world-image",
-
                 `url("${moduleBackgroundSrc}")`
               );
           } catch (_) {}
@@ -230,6 +229,7 @@
               ?.setProperty(
                 "--duduq-transition-world-image",
                 `url("${moduleBackgroundSrc}")`
+
               );
           } catch (_) {}
 
@@ -315,7 +315,6 @@
               ) {
                 window.setTimeout(
                   function () {
-
                     image.onload?.();
                   },
                   0
@@ -346,6 +345,7 @@
 
            O conteúdo publicado declara a mecânica desejada.
            O Router continua sendo usado como VALIDADOR:
+
            todas as questões precisam ser compatíveis com
            a mecânica declarada antes de iniciar a missão.
            =============================================== */
@@ -421,7 +421,6 @@
           const invalidDecision =
             decisions.find(
               function (entry) {
-
                 return (
                   !entry
                     .decision
@@ -462,6 +461,7 @@
 
             payload: {
               id:
+
                 `${activity.id}-payload`,
 
               title:
@@ -577,6 +577,7 @@
             "data-duduq-initial-speech-gate",
             "locked"
           );
+
         }
 
         function releaseInitialInstructionSpeech(delayMs = 420) {
@@ -632,7 +633,6 @@
             ?.classList
             ?.add(
               "is-intro-soft"
-
             );
 
           /*
@@ -693,6 +693,7 @@
               revealDurationMs: 520,
               stablePaintFrames: 2,
               revealHoldFraction: .20,
+
               soundEnabled: false
             });
 
@@ -738,7 +739,6 @@
 
            O Core Sound já tenta tocar o swoosh na fase de
            branding e a música na fase mission. Este reforço:
-
            - repete a tentativa após o asset estar pronto;
            - reforça a música quando MISSÃO PRONTA aparece;
            - no clique INICIAR MISSÃO, usa a ativação real do
@@ -809,6 +809,7 @@
 
                 retryBrandingTimer =
                   window.setTimeout(
+
                     replayBrandingIfNeeded,
                     220
                   );
@@ -844,7 +845,6 @@
 
           document.addEventListener(
             "duduq:intro-start",
-
             function () {
               /*
                * Este evento nasce diretamente do clique no
@@ -869,6 +869,241 @@
 
         installIntroSoundRecovery();
 
+
+        /* ===============================================
+           ATIVAÇÃO SONORA — PRIMEIRO GESTO REAL
+
+           Chrome/Edge/Safari bloqueiam áudio audível antes
+           de uma interação explícita. Por isso a Intro agora
+           começa somente depois de um único toque/clique.
+           Depois dessa ativação, toda a sequência cinematográfica
+           mantém o fluxo normal.
+           =============================================== */
+
+        function requestIntroAudioActivation(
+          onActivated
+        ) {
+          root.innerHTML = "";
+
+          const gate =
+            document.createElement(
+              "section"
+            );
+
+          gate.setAttribute(
+            "aria-label",
+            "Ativar som e iniciar"
+          );
+
+          Object.assign(
+            gate.style,
+            {
+              position: "fixed",
+              inset: "0",
+              zIndex: "2147483600",
+              display: "grid",
+              placeItems: "center",
+              padding: "24px",
+              boxSizing: "border-box",
+              background:
+                "radial-gradient(circle at 14% 16%, rgba(181,225,255,.32), transparent 24%)," +
+                "radial-gradient(circle at 86% 18%, rgba(255,231,170,.24), transparent 23%)," +
+                "linear-gradient(180deg,#ffffff 0%,#f5fbff 100%)",
+              fontFamily:
+                "Nunito, ui-rounded, system-ui, sans-serif"
+            }
+          );
+
+          const card =
+            document.createElement(
+              "div"
+            );
+
+          Object.assign(
+            card.style,
+            {
+              width: "min(520px,92vw)",
+              display: "grid",
+              justifyItems: "center",
+
+              gap: "15px",
+              padding: "28px 28px 26px",
+              border: "2px solid #cbdced",
+              borderRadius: "30px",
+              background:
+                "rgba(255,255,255,.96)",
+              boxShadow:
+                "0 8px 0 #b9cee2, 0 26px 60px rgba(38,82,123,.16)",
+              textAlign: "center"
+            }
+          );
+
+          const icon =
+            document.createElement(
+              "div"
+            );
+
+          icon.textContent = "🔊";
+          icon.setAttribute(
+            "aria-hidden",
+            "true"
+          );
+
+          Object.assign(
+            icon.style,
+            {
+              fontSize: "48px",
+              lineHeight: "1"
+            }
+          );
+
+          const title =
+            document.createElement(
+              "strong"
+            );
+
+          title.textContent =
+            "PRONTO PARA COMEÇAR?";
+
+          Object.assign(
+            title.style,
+            {
+              color: "#163f68",
+              fontSize:
+                "clamp(20px,3vw,28px)",
+              fontWeight: "1000",
+              letterSpacing: ".02em"
+            }
+          );
+
+          const copy =
+            document.createElement(
+              "span"
+            );
+
+          copy.textContent =
+            "Ative o som para iniciar a experiência.";
+
+          Object.assign(
+            copy.style,
+            {
+              color: "#66819c",
+              fontSize:
+                "clamp(14px,1.8vw,17px)",
+              fontWeight: "800"
+            }
+          );
+
+          const button =
+            document.createElement(
+              "button"
+            );
+
+          button.type = "button";
+          button.textContent =
+            "ATIVAR SOM E INICIAR";
+
+          Object.assign(
+            button.style,
+            {
+              width: "min(360px,100%)",
+              minHeight: "58px",
+              border: "2px solid #0062b9",
+              borderRadius: "18px",
+              background:
+                "linear-gradient(180deg,#2fa9ff 0%,#0877d8 100%)",
+              color: "#fff",
+              boxShadow:
+                "0 6px 0 #00529e, 0 12px 24px rgba(0,98,185,.20)",
+              font: "1000 16px/1 Nunito,ui-rounded,system-ui,sans-serif",
+              letterSpacing: ".025em",
+              cursor: "pointer"
+            }
+          );
+
+          card.append(
+            icon,
+            title,
+            copy,
+            button
+          );
+
+          gate.appendChild(
+            card
+          );
+
+          document.body.appendChild(
+            gate
+          );
+
+          let activated = false;
+
+          function begin() {
+            if (activated) return;
+            activated = true;
+
+
+            /*
+             * A primeira reprodução acontece dentro do clique.
+             * Isso desbloqueia a sessão de áudio e garante que o
+             * swoosh da marca seja audível desde a Intro.
+             */
+            try {
+              window.DuduQSound
+                ?.stop
+                ?.(
+                  "intro-company-swoosh"
+                );
+
+              window.DuduQSound
+                ?.play
+                ?.(
+                  "intro-company-swoosh",
+                  {
+                    volume: 0.58,
+                    minGapMs: 700
+                  }
+                );
+            } catch (_) {}
+
+            gate.remove();
+
+            if (
+              typeof onActivated ===
+              "function"
+            ) {
+              onActivated();
+            }
+          }
+
+          button.addEventListener(
+            "click",
+            begin,
+            { once: true }
+          );
+
+          button.addEventListener(
+            "keydown",
+            function (event) {
+              if (
+                event.key === "Enter" ||
+                event.key === " "
+              ) {
+                event.preventDefault();
+                begin();
+              }
+            }
+          );
+
+          window.requestAnimationFrame(
+            function () {
+              button.focus({
+                preventScroll: true
+              });
+            }
+          );
+        }
+
         /* ===============================================
            INTRO CINEMATOGRÁFICA
            =============================================== */
@@ -879,7 +1114,8 @@
           moduleDefinition.intro ||
           {};
 
-        window.DuduQIntro.show({
+        function launchCinematicIntro() {
+          window.DuduQIntro.show({
           companyKicker:
             intro.companyKicker ||
             "UMA CRIAÇÃO DE",
@@ -921,6 +1157,7 @@
 
           readyLabel:
             intro.readyLabel ||
+
             "MISSÃO PRONTA",
 
           startLabel:
@@ -950,7 +1187,6 @@
           /*
            * A Intro só libera MISSÃO PRONTA depois que o
            * primeiro cenário foi preparado (ou caiu no
-
            * timeout seguro com fallback claro).
            */
           readyPromise:
@@ -962,7 +1198,12 @@
 
           onStart:
             startModuleWithIntroHandoff
-        });
+          });
+        }
+
+        requestIntroAudioActivation(
+          launchCinematicIntro
+        );
       }
     );
   </script>
