@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Conteúdo nítido sobre fundo cinematográfico suavizado.
-   Versão 1.3.9
+   Versão 1.4.0
    ========================================================= */
  
 html.duduq-world-fusion {
@@ -3101,4 +3101,210 @@ html.duduq-world-fusion .duduq-engine-feedback {
     grid-auto-rows:
       clamp(122px, 18dvh, 144px) !important;
   }
+}
+ 
+ 
+/* =========================================================
+   DUDUQ CORE — WORLD FUSION
+   ROUND 6 — SHARED SHELL FINALIZATION
+   Patch visual 1.4.0
+ 
+   OBJETIVOS
+   - manter a posição da viewport quando entra feedback;
+   - deixar o Matching com altura natural em normal/fullscreen;
+   - criar respiro real entre o painel do Matching e seus cards;
+   - manter o espaço do Confirmar estável entre idle/retry/success;
+   - preservar Target Shooter, Smart Sentence, Drag & Drop e
+     Memory Quest já refinados nas rodadas anteriores.
+   ========================================================= */
+ 
+/* =========================================================
+   36. MATCHING — SHELL NA ALTURA DO CONTEÚDO
+ 
+   O Matching possui somente instruction + board + action. Não há
+   motivo para a stage ocupar todo o 1fr do shell. Em fullscreen
+   isso produzia um grande bloco translúcido vazio abaixo do CTA.
+ 
+   A faixa de feedback continua reservada desde o início, portanto
+   a composição não muda de altura quando a resposta é confirmada.
+   ========================================================= */
+ 
+@media
+  (min-width: 820px)
+  and (min-height: 600px) {
+ 
+  html.duduq-world-fusion
+    .duduq-engine-shell:has(.duduq-matching-root) {
+    grid-template-rows:
+      auto
+      auto
+      var(--duduq-fit-feedback-height) !important;
+    align-content: start !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-shell:has(.duduq-matching-root)
+    .duduq-engine-stage {
+    box-sizing: border-box !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    align-self: start !important;
+    overflow: visible !important;
+    padding-bottom: 10px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-root,
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-surface {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
+ 
+ 
+/* =========================================================
+   37. MATCHING — RESPIRO DO PAINEL INTERNO
+ 
+   O painel não deve parecer uma moldura apertada ao redor dos
+   cards. Aumentamos principalmente as áreas laterais/inferior e
+   mantemos o título de cada coluna com distância consistente.
+   ========================================================= */
+ 
+@media
+  (min-width: 820px)
+  and (min-height: 600px) {
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-board {
+    width: min(1020px, calc(100% - 18px)) !important;
+    padding:
+      clamp(22px, 2.5dvh, 28px)
+      clamp(24px, 2.2vw, 32px)
+      clamp(22px, 2.4dvh, 28px) !important;
+    border-radius: 24px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-column {
+    gap: clamp(16px, 2dvh, 20px) !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-column-title {
+    min-height: 24px !important;
+    margin: 0 0 4px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-action-slot {
+    margin-top: 2px !important;
+  }
+}
+ 
+@media
+  (min-width: 900px)
+  and (max-height: 720px) {
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-board {
+    padding:
+      18px
+      clamp(22px, 2vw, 28px)
+      20px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-column {
+    gap: 14px !important;
+  }
+}
+ 
+ 
+/* =========================================================
+   38. MATCHING — SLOT DO CTA 100% ESTÁVEL
+ 
+   O botão pode desaparecer visualmente quando entra feedback,
+   mas seu espaço físico permanece. Isso elimina reflow entre
+   idle -> retry/success e mantém o feedback no mesmo lugar.
+   ========================================================= */
+ 
+@media
+  (min-width: 820px)
+  and (min-height: 600px) {
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-surface,
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-surface:has(
+      .duduq-matching-action-slot[data-feedback-state="retry"]
+    ),
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-surface:has(
+      .duduq-matching-action-slot[data-feedback-state="success"]
+    ) {
+    grid-template-rows:
+      auto
+      auto
+      60px !important;
+    gap: 9px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-action-slot,
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-action-slot[data-feedback-state="retry"],
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-action-slot[data-feedback-state="success"] {
+    min-height: 60px !important;
+    height: 60px !important;
+    max-height: 60px !important;
+    margin: 0 !important;
+    padding: 5px 0 0 !important;
+    overflow: hidden !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-action-slot[data-feedback-state="retry"] > *,
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-action-slot[data-feedback-state="success"] > * {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}
+ 
+ 
+/* =========================================================
+   39. FEEDBACK — POSIÇÃO VISUAL CONSISTENTE
+ 
+   O JS 1.4.0 bloqueia apenas o scrollIntoView do próprio bloco de
+   feedback. O CSS mantém a faixa na mesma posição e sem margem que
+   possa ser reinterpretada como âncora de rolagem pelo navegador.
+   ========================================================= */
+ 
+html.duduq-world-fusion
+  .duduq-engine-feedback {
+  scroll-margin: 0 !important;
+  scroll-padding: 0 !important;
+  overflow-anchor: none !important;
 }
