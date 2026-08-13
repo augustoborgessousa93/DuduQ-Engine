@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Conteúdo nítido sobre fundo cinematográfico suavizado.
-   Versão 1.4.5
+   Versão 1.4.6
    ========================================================= */
 
 html.duduq-world-fusion {
@@ -4115,3 +4115,239 @@ html.duduq-world-fusion
     transform: scale(1.12);
   }
 }
+
+
+/* =========================================================
+   DUDUQ CORE — WORLD FUSION
+   ROUND 12 — MEMORY QUEST PEDAGÓGICO + ÁUDIO CONSISTENTE
+   Patch visual/comportamental 1.4.6
+
+   PRINCÍPIOS
+   - a informação visual ocupa o card, não fica perdida no centro;
+   - áudio é apoio, portanto seu ícone não domina a composição;
+   - pares corretos recebem identidade cromática somente após o acerto;
+   - cada par conserva sua própria cor para apoiar recuperação da memória;
+   - cartas sonoras corretas continuam consultáveis sem alterar a jogada;
+   - Drag & Drop segue o padrão azul -> verde + ondas -> azul.
+   ========================================================= */
+
+
+/* =========================================================
+   MEMORY QUEST — IMAGEM MAIOR E MAIS LEGÍVEL
+   ========================================================= */
+
+html.duduq-world-fusion
+  .duduq-mq-card
+  .duduq-mq-reveal-content {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+}
+
+html.duduq-world-fusion
+  .duduq-mq-card
+  .duduq-mq-media {
+  width: 96% !important;
+  height: 86% !important;
+  max-width: none !important;
+  max-height: none !important;
+  flex: 1 1 auto !important;
+  object-fit: contain !important;
+  object-position: 50% 50% !important;
+  transform: scale(1.16);
+  transform-origin: 50% 50%;
+  filter:
+    saturate(1.045)
+    contrast(1.025)
+    drop-shadow(0 4px 6px rgba(31,65,99,.11))
+    !important;
+  transition:
+    transform 170ms cubic-bezier(.2,.8,.2,1),
+    filter 170ms ease;
+}
+
+html.duduq-world-fusion
+  .duduq-mq-card[data-face-up="true"]:not([data-matched="true"]):hover
+  .duduq-mq-media {
+  transform: scale(1.21);
+}
+
+
+/* =========================================================
+   MEMORY QUEST — ÁUDIO COMO APOIO, NÃO COMO PROTAGONISTA
+   ========================================================= */
+
+html.duduq-world-fusion
+  .duduq-mq-audio-main {
+  width: clamp(44px, 4.8vw, 52px) !important;
+  height: clamp(44px, 4.8vw, 52px) !important;
+  font-size: clamp(20px, 2.2vw, 26px) !important;
+  border-width: 2px !important;
+  box-shadow:
+    0 3px 0 var(--dq-primary-depth, #003A7A),
+    0 7px 12px rgba(0,86,179,.12)
+    !important;
+}
+
+html.duduq-world-fusion
+  .duduq-mq-audio-caption {
+  font-size: clamp(12px, 1.2vw, 14px) !important;
+  line-height: 1 !important;
+}
+
+html.duduq-world-fusion
+  .duduq-mq-card[data-duduq-mq-replayable="true"] {
+  cursor: pointer !important;
+}
+
+html.duduq-world-fusion
+  .duduq-mq-card[data-duduq-mq-replayable="true"]
+  .duduq-mq-audio-main {
+  transition:
+    transform 140ms ease,
+    filter 140ms ease,
+    box-shadow 140ms ease;
+}
+
+html.duduq-world-fusion
+  .duduq-mq-card[data-duduq-mq-replayable="true"]:hover
+  .duduq-mq-audio-main {
+  transform: scale(1.055);
+  filter: brightness(1.035);
+}
+
+
+/* =========================================================
+   MEMORY QUEST — IDENTIDADE VISUAL DE CADA PAR CORRETO
+
+   A cor aparece apenas após o acerto. Estrela continua presente,
+   portanto a informação não depende exclusivamente da cor.
+   ========================================================= */
+
+html.duduq-world-fusion
+  .duduq-mq-card[data-duduq-mq-pair-tone] {
+  --duduq-mq-pair-border: #4fbd72;
+  --duduq-mq-pair-depth: #2d8e4d;
+  --duduq-mq-pair-bg: #effbf2;
+  --duduq-mq-pair-ink: #176234;
+  --duduq-mq-pair-glow: rgba(79,189,114,.18);
+}
+
+html.duduq-world-fusion
+  .duduq-mq-card[data-duduq-mq-pair-tone="2"] {
+  --duduq-mq-pair-border: #45a8e8;
+  --duduq-mq-pair-depth: #2478b3;
+  --duduq-mq-pair-bg: #eef8ff;
+  --duduq-mq-pair-ink: #155f91;
+  --duduq-mq-pair-glow: rgba(69,168,232,.18);
+}
+
+html.duduq-world-fusion
+  .duduq-mq-card[data-duduq-mq-pair-tone="3"] {
+  --duduq-mq-pair-border: #9b7de7;
+  --duduq-mq-pair-depth: #6d50bb;
+  --duduq-mq-pair-bg: #f6f1ff;
+  --duduq-mq-pair-ink: #5d419f;
+  --duduq-mq-pair-glow: rgba(155,125,231,.18);
+}
+
+html.duduq-world-fusion
+  .duduq-mq-card[data-duduq-mq-pair-tone="4"] {
+  --duduq-mq-pair-border: #e0a62f;
+  --duduq-mq-pair-depth: #ad7714;
+  --duduq-mq-pair-bg: #fff9e8;
+  --duduq-mq-pair-ink: #7b560f;
+  --duduq-mq-pair-glow: rgba(224,166,47,.18);
+}
+
+html.duduq-world-fusion
+  .duduq-mq-card[data-duduq-mq-pair-tone="5"] {
+  --duduq-mq-pair-border: #e47c70;
+  --duduq-mq-pair-depth: #b45349;
+  --duduq-mq-pair-bg: #fff2f0;
+  --duduq-mq-pair-ink: #93443b;
+  --duduq-mq-pair-glow: rgba(228,124,112,.17);
+}
+
+html.duduq-world-fusion
+  .duduq-mq-card[data-duduq-mq-pair-tone="6"] {
+  --duduq-mq-pair-border: #34b7a7;
+  --duduq-mq-pair-depth: #218779;
+  --duduq-mq-pair-bg: #ecfbf8;
+  --duduq-mq-pair-ink: #176c61;
+  --duduq-mq-pair-glow: rgba(52,183,167,.18);
+}
+
+html.duduq-world-fusion
+  .duduq-mq-card[data-matched="true"][data-duduq-mq-pair-tone]
+  .duduq-mq-back {
+  border-color:
+    var(--duduq-mq-pair-border) !important;
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      var(--duduq-mq-pair-bg) 100%
+    ) !important;
+  color:
+    var(--duduq-mq-pair-ink) !important;
+  box-shadow:
+    0 6px 0 var(--duduq-mq-pair-depth),
+    0 0 0 4px var(--duduq-mq-pair-glow),
+    0 15px 25px rgba(31,65,99,.10),
+    inset 0 2px 0 rgba(255,255,255,.92)
+    !important;
+}
+
+html.duduq-world-fusion
+  .duduq-mq-card[data-matched="true"][data-duduq-mq-pair-tone]
+  .duduq-mq-match-badge {
+  border-color: #ffffff !important;
+  background:
+    var(--duduq-mq-pair-border) !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 3px 0 var(--duduq-mq-pair-depth),
+    0 5px 10px var(--duduq-mq-pair-glow)
+    !important;
+}
+
+
+/* =========================================================
+   MEMORY QUEST — RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 720px) {
+  html.duduq-world-fusion
+    .duduq-mq-card
+    .duduq-mq-media {
+    width: 98% !important;
+    height: 88% !important;
+    transform: scale(1.18);
+  }
+
+  html.duduq-world-fusion
+    .duduq-mq-audio-main {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 21px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.duduq-world-fusion
+    .duduq-mq-card
+    .duduq-mq-media,
+  html.duduq-world-fusion
+    .duduq-mq-card[data-duduq-mq-replayable="true"]
+    .duduq-mq-audio-main {
+    transition: none !important;
+  }
+}
+
