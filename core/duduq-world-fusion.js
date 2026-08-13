@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.4.6
+   Versão 1.4.7
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.4.6";
+  const VERSION = "1.4.7";
   if (window.DuduQWorldFusion?.version === VERSION) return;
 
   const scriptUrl =
@@ -15,7 +15,7 @@
     new URL("./duduq-world-fusion.js", window.location.href).href;
 
   const stylesheetUrl = new URL(
-    "./duduq-world-fusion.css?v=146",
+    "./duduq-world-fusion.css?v=147",
     scriptUrl
   ).href;
 
@@ -1772,6 +1772,26 @@
 
     if (direct) return direct;
 
+    /*
+     * Drag & Drop permite reproduzir áudio tocando no card inteiro,
+     * não apenas no pequeno ícone. Registramos também o próprio card
+     * para que um áudio de opção nunca faça o botão do ENUNCIADO
+     * parecer ativo por engano.
+     */
+    const multimodalDragDropCard =
+      element.closest(
+        [
+          '.duduq-dd-item[data-has-audio="true"]',
+          '.duduq-udd-item[data-has-audio="true"]',
+          '.duduq-dd-target[data-has-audio="true"]',
+          '.duduq-udd-target[data-has-audio="true"]'
+        ].join(",")
+      );
+
+    if (multimodalDragDropCard) {
+      return multimodalDragDropCard;
+    }
+
     const clickable =
       element.closest(
         'button, [role="button"]'
@@ -2073,6 +2093,200 @@
         }
       }
     }
+
+    /* =====================================================
+       DRAG & DROP — FALLBACK DE ESTADO VISUAL DO ENUNCIADO
+
+       Alguns browsers mantêm speechSynthesis como objeto nativo
+       não substituível. Nesses casos o áudio toca normalmente,
+       porém a interceptação de speak() pode não receber o evento.
+
+       Esta camada NÃO dispara áudio. Ela apenas observa:
+       - speechSynthesis.speaking;
+       - aria-label/data-playing/disabled do CTA de enunciado;
+       - o último controle de áudio realmente acionado.
+
+       Resultado:
+       autoplay do Drag & Drop -> verde + ondas -> azul ao terminar,
+       mesmo quando o navegador impede monkey-patch de speechSynthesis.
+       ===================================================== */
+
+    function isDragDropInstructionControl(control) {
+      return Boolean(
+        control?.closest?.(
+          ".duduq-dd-instruction, .duduq-udd-instruction"
+        )
+      );
+    }
+
+    function hasRecentNonInstructionAudioTrigger() {
+      const now =
+        view.performance?.now?.() ||
+        Date.now();
+
+      if (
+        !lastTrigger?.isConnected ||
+        now - lastTriggerAt > 1900
+      ) {
+        return false;
+      }
+
+      return !isDragDropInstructionControl(
+        lastTrigger
+      );
+    }
+
+    function nativeInstructionStateSaysPlaying(control) {
+      if (!control) return false;
+
+      const aria =
+        String(
+          control.getAttribute?.(
+            "aria-label"
+          ) || ""
+        )
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase();
+
+      const dataPlaying =
+        String(
+          control.getAttribute?.(
+            "data-playing"
+          ) || ""
+        ).toLowerCase() === "true";
+
+      /*
+       * Os runtimes Drag & Drop desabilitam o CTA enquanto
+       * audio.isPlaying=true. O aria-label também muda para
+       * "Instruction is playing" / "A instrução está sendo reproduzida".
+       */
+      const semanticPlaying =
+        /instruction is playing|instrucao esta sendo reproduzida|reproduzindo|ouvindo|playing/.test(
+          aria
+        );
+
+      return (
+        dataPlaying ||
+        semanticPlaying ||
+        (
+          control.disabled === true &&
+          Boolean(
+            synth?.speaking
+          )
+        )
+      );
+    }
+
+    function syncDragDropInstructionAudioState() {
+      const control =
+        findPrimaryInstructionAudioControl(
+          doc
+        );
+
+      if (
+        !control ||
+        !isDragDropInstructionControl(
+          control
+        )
+      ) {
+        return;
+      }
+
+      const speechPlaying =
+        Boolean(
+          synth?.speaking
+        );
+
+      const nativePlaying =
+        nativeInstructionStateSaysPlaying(
+          control
+        );
+
+      const otherAudioWasChosen =
+        hasRecentNonInstructionAudioTrigger();
+
+      if (
+        (speechPlaying || nativePlaying) &&
+        !otherAudioWasChosen
+      ) {
+        begin(control);
+        return;
+      }
+
+      if (
+        activeControl ===
+          resolveVisualControl(control) &&
+        !speechPlaying &&
+        !nativePlaying
+      ) {
+        finish(control);
+      }
+    }
+
+    /*
+     * Poll curto e barato. O estado speechSynthesis.speaking não
+     * emite evento DOM universal, portanto MutationObserver sozinho
+     * não cobre Chrome/Edge/Safari de forma homogênea.
+     */
+    const dragDropSpeechStateTimer =
+      view.setInterval(
+        syncDragDropInstructionAudioState,
+        80
+      );
+
+    const instructionStateObserver =
+      typeof view.MutationObserver === "function"
+        ? new view.MutationObserver(
+            syncDragDropInstructionAudioState
+          )
+        : null;
+
+    const dragDropInstruction =
+      doc.querySelector(
+        ".duduq-dd-instruction, .duduq-udd-instruction"
+      );
+
+    if (
+      instructionStateObserver &&
+      dragDropInstruction
+    ) {
+      instructionStateObserver.observe(
+        dragDropInstruction,
+        {
+          subtree: true,
+          childList: true,
+          attributes: true,
+          attributeFilter: [
+            "disabled",
+            "aria-label",
+            "data-playing",
+            "data-highlight"
+          ]
+        }
+      );
+    }
+
+    const stopDragDropSpeechStateMonitor =
+      function () {
+        try {
+          view.clearInterval(
+            dragDropSpeechStateTimer
+          );
+        } catch (_) {}
+
+        try {
+          instructionStateObserver?.disconnect?.();
+        } catch (_) {}
+      };
+
+    view.addEventListener?.(
+      "pagehide",
+      stopDragDropSpeechStateMonitor,
+      { once: true }
+    );
+
+    syncDragDropInstructionAudioState();
 
     /* HTML AUDIO / MEDIA -------------------------------- */
     const mediaControls = new WeakMap();
