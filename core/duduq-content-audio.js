@@ -1,6 +1,6 @@
- DUDUQ CORE — CONTENT AUDIO
+   DUDUQ CORE — CONTENT AUDIO
    MP3 editorial como fonte prioritária + TTS como fallback.
-   Versão 1.0.1
+   Versão 1.0.2
 
    CONTRATO
    - Cada módulo pode expor moduleDefinition.audioCatalog.
@@ -16,7 +16,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.1";
+  const VERSION = "1.0.2";
 
   if (
     window.DuduQContentAudio &&
@@ -79,7 +79,6 @@
   function runtimeMechanic(url) {
     const pathname =
       asString(url?.pathname)
-
         .split("/")
         .pop()
         ?.toLowerCase() || "";
@@ -150,6 +149,7 @@
               });
             }
           );
+
       }
 
       Object.values(value)
@@ -162,7 +162,6 @@
       function (entry) {
         return (
           entry.id &&
-
           entry.mechanic &&
           (
             entry.instruction.src ||
@@ -176,7 +175,7 @@
   function runtimeInstaller(payload) {
     "use strict";
 
-    const VERSION = "1.0.1";
+    const VERSION = "1.0.2";
 
     if (
       window.DuduQOfficialAudioRuntime &&
@@ -227,6 +226,7 @@
 
     function normalize(value) {
       return String(value ?? "")
+
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[’‘`´]/g, "'")
@@ -245,7 +245,6 @@
       if (!audio) return;
 
       try {
-
         audio.pause();
         audio.currentTime = 0;
       } catch (_) {}
@@ -305,6 +304,7 @@
             return;
           }
 
+
           const audio =
             new Audio(src);
 
@@ -328,7 +328,6 @@
 
           function finish(ok) {
             if (settled) return;
-
             settled = true;
             cleanup();
 
@@ -457,6 +456,7 @@
       }
 
       if (
+
         token === currentToken &&
         playedAnything
       ) {
@@ -493,7 +493,6 @@
 
       if (active) {
         const item =
-
           active.stimuli?.find(
             function (stimulus) {
               return normalize(stimulus.text) === normalized;
@@ -534,6 +533,7 @@
        * No Target Shooter o próprio estímulo identifica a
        * questão. Nas demais mecânicas o autoplay do enunciado
        * normalmente já definiu activeQuestionId.
+
        */
       return candidates[0];
     }
@@ -610,6 +610,7 @@
       /* Segurança em ambientes onde o evento externo falhe. */
       window.setTimeout(
         function () {
+
           if (
             gateListenerInstalled &&
             pendingUtterance
@@ -659,7 +660,6 @@
       const resolved =
         findStimulus(text);
 
-
       if (!resolved?.stimulus?.src) {
         nativeFallback(utterance);
         return;
@@ -687,6 +687,7 @@
           resolved.question
             ?.instruction
             ?.src
+
         ) {
           sequence.push(
             resolved.question
@@ -763,6 +764,7 @@
           synth,
           "speak",
           {
+
             configurable: true,
             writable: true,
             value: wrappedSpeak
@@ -823,7 +825,6 @@
             Object.defineProperty(
               prototype,
               "cancel",
-
               {
                 configurable: true,
                 writable: true,
@@ -840,6 +841,7 @@
       cancel,
       { once: true }
     );
+
   }
 
   /* =======================================================
@@ -907,7 +909,6 @@
         mechanicHint
       );
 
-
     if (!mechanic) return false;
 
     const catalog =
@@ -917,6 +918,7 @@
       !catalog.some(
         function (entry) {
           return entry.mechanic === mechanic;
+
         }
       )
     ) {
@@ -989,11 +991,11 @@
       (
         frameDocument.head ||
         frameDocument.documentElement ||
-
         frameDocument.body
       )?.appendChild(script);
 
       /* O código já foi executado; removemos apenas a tag. */
+
       script.remove();
 
       const installed =
@@ -1070,9 +1072,9 @@
 
         installIntoFrame(
           iframe,
+
           mechanic
         );
-
       },
       true
     );
@@ -1147,6 +1149,7 @@
     catalog
   ) {
     const safePayload =
+
       JSON.stringify({
         mechanic,
         catalog
@@ -1223,6 +1226,7 @@
           }
         )
       ) {
+
         return response;
       }
 
@@ -1237,7 +1241,6 @@
         );
 
       const headers =
-
         new Headers(response.headers);
 
       headers.delete("content-length");
