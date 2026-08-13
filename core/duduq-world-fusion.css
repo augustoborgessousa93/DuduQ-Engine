@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Conteúdo nítido sobre fundo cinematográfico suavizado.
-   Versão 1.3.4
+   Versão 1.3.5
    ========================================================= */
 
 html.duduq-world-fusion {
@@ -498,6 +498,7 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"]
   box-sizing: border-box !important;
   width: 100% !important;
   max-width: 100% !important;
+  min-width: 0 !important;
   padding-inline: 7px !important;
   margin: 0 !important;
 
@@ -1062,4 +1063,692 @@ html.duduq-world-fusion #duduq-boot {
     transform: translateX(-50%) scaleX(.9) !important;
   }
 }
+
+/* =========================================================
+   DUDUQ CORE — WORLD FUSION
+   LAYOUT STABILITY / VIEWPORT FIT
+   Patch visual 1.3.5
+
+   OBJETIVOS
+   - mascote do cabeçalho nunca desaparece;
+   - preservar espaço do feedback sem salto de layout;
+   - stage principal destacado do background;
+   - priorizar atividade inteira dentro da viewport;
+   - reduzir scroll desnecessário em notebooks;
+   - Target Shooter, Memory Quest e Smart Sentence adaptativos;
+   - manter fallback com scroll em telas realmente pequenas.
+   ========================================================= */
+
+/* =========================================================
+   TOKENS DA NOVA COMPOSIÇÃO
+   ========================================================= */
+
+html.duduq-world-fusion {
+  --duduq-fit-gap: clamp(7px, 1.05dvh, 11px);
+  --duduq-fit-feedback-height: clamp(78px, 10.5dvh, 92px);
+  --duduq-fit-stage-radius: clamp(22px, 2vw, 30px);
+  --duduq-fit-stage-padding: clamp(7px, 1dvh, 11px);
+}
+
+/* =========================================================
+   1. MASCOTE PERSISTENTE NO CABEÇALHO
+   ========================================================= */
+
+html.duduq-world-fusion
+  .duduq-engine-header-mascot-slot {
+  position: relative !important;
+  visibility: visible !important;
+  overflow: visible !important;
+  isolation: isolate;
+}
+
+html.duduq-world-fusion
+  .duduq-engine-header-mascot-slot[data-visible="false"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image:
+    url("https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/DUDUQ_IDLE.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  pointer-events: none;
+  transform-origin: 50% 84%;
+  animation:
+    duduq-header-mascot-stable-breathe
+    3.8s
+    ease-in-out
+    infinite;
+}
+
+html.duduq-world-fusion
+  .duduq-engine-header-mascot-slot[data-visible="true"]::before {
+  content: none !important;
+  display: none !important;
+}
+
+@keyframes duduq-header-mascot-stable-breathe {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-2px) scale(1.018);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.duduq-world-fusion
+    .duduq-engine-header-mascot-slot::before {
+    animation: none !important;
+  }
+}
+
+/* =========================================================
+   2. STAGE PRINCIPAL
+   ========================================================= */
+
+html.duduq-world-fusion
+  .duduq-engine-stage {
+  box-sizing: border-box !important;
+  position: relative !important;
+  isolation: isolate;
+  border:
+    1px solid
+    rgba(196, 218, 235, .88) !important;
+  border-radius:
+    var(--duduq-fit-stage-radius) !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(250, 253, 255, .82) 0%,
+      rgba(245, 251, 255, .70) 100%
+    ) !important;
+  box-shadow:
+    0 3px 0 rgba(169, 194, 213, .55),
+    0 18px 42px rgba(30, 66, 96, .12),
+    inset 0 1px 0 rgba(255, 255, 255, .98) !important;
+  -webkit-backdrop-filter:
+    blur(11px)
+    saturate(1.04);
+  backdrop-filter:
+    blur(11px)
+    saturate(1.04);
+}
+
+html.duduq-world-fusion
+  .duduq-engine-stage::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 18% 6%,
+      rgba(255, 255, 255, .40),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 82% 92%,
+      rgba(221, 241, 255, .18),
+      transparent 28%
+    );
+}
+
+/* =========================================================
+   3. VIEWPORT FIT — DESKTOP / NOTEBOOK
+   ========================================================= */
+
+@media
+  (min-width: 820px)
+  and (min-height: 600px) {
+
+  html.duduq-world-fusion:not([data-duduq-parent-fullscreen]),
+  html.duduq-world-fusion:not([data-duduq-parent-fullscreen]) body,
+  html.duduq-world-fusion:not([data-duduq-parent-fullscreen]) body > #root {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+  }
+
+  html.duduq-world-fusion:not([data-duduq-parent-fullscreen])
+    .duduq-engine-root {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+    padding:
+      8px
+      clamp(10px, 1.4vw, 18px)
+      6px !important;
+  }
+
+  html.duduq-world-fusion:not([data-duduq-parent-fullscreen])
+    .duduq-engine-shell {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    display: grid !important;
+    grid-template-rows:
+      auto
+      minmax(0, 1fr)
+      var(--duduq-fit-feedback-height) !important;
+    align-content: stretch !important;
+    row-gap:
+      var(--duduq-fit-gap) !important;
+    overflow: hidden !important;
+  }
+
+  html.duduq-world-fusion:not([data-duduq-parent-fullscreen])
+    .duduq-engine-stage {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    overflow: hidden !important;
+    padding:
+      var(--duduq-fit-stage-padding) !important;
+  }
+
+  html.duduq-world-fusion:not([data-duduq-parent-fullscreen])
+    .duduq-engine-feedback {
+    box-sizing: border-box !important;
+    width:
+      min(
+        840px,
+        calc(100% - 24px)
+      ) !important;
+    height:
+      var(--duduq-fit-feedback-height) !important;
+    min-height:
+      var(--duduq-fit-feedback-height) !important;
+    max-height:
+      var(--duduq-fit-feedback-height) !important;
+    margin:
+      0 auto !important;
+    padding:
+      2px 0 0 !important;
+    overflow: visible !important;
+  }
+
+  html.duduq-world-fusion:not([data-duduq-parent-fullscreen])
+    .duduq-engine-feedback-card {
+    width: 100% !important;
+    min-height: 68px !important;
+    max-height:
+      calc(
+        var(--duduq-fit-feedback-height) - 4px
+      ) !important;
+    padding:
+      9px 13px !important;
+    gap:
+      9px 12px !important;
+    border-radius:
+      17px !important;
+  }
+
+  html.duduq-world-fusion:not([data-duduq-parent-fullscreen])
+    .duduq-engine-feedback
+    .duduq-mascot[data-size="feedback"] {
+    width: 54px !important;
+    height: 54px !important;
+    flex:
+      0 0 54px !important;
+  }
+}
+
+/* =========================================================
+   4. HEADER MAIS EFICIENTE EM NOTEBOOK
+   ========================================================= */
+
+@media
+  (min-width: 820px)
+  and (max-height: 780px) {
+
+  html.duduq-world-fusion {
+    --duduq-fit-gap: 7px;
+    --duduq-fit-feedback-height: 78px;
+    --duduq-fit-stage-padding: 7px;
+  }
+
+  html.duduq-world-fusion
+    .duduq-engine-header {
+    min-height: 62px !important;
+    padding:
+      6px
+      11px !important;
+    border-radius:
+      21px !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-engine-header-mascot-slot {
+    width: 56px !important;
+    min-width: 56px !important;
+    height: 52px !important;
+    flex-basis: 56px !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-engine-header-mascot-slot
+    .duduq-mascot[data-size="idle"] {
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-engine-button {
+    min-height: 40px !important;
+    padding:
+      7px
+      12px !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-progress-track {
+    height: 13px !important;
+    min-height: 13px !important;
+  }
+
+  html.duduq-world-fusion
+    :is(
+      .duduq-dd-instruction,
+      .duduq-udd-instruction,
+      .duduq-bp-instruction,
+      .duduq-mq-instruction,
+      .duduq-matching-instruction,
+      .duduq-fc-instruction,
+      .duduq-cf-instruction,
+      .duduq-ws-instruction,
+      .duduq-ts-instruction,
+      .duduq-ss-instruction
+    ) {
+    min-height: 56px !important;
+    margin-bottom: 7px !important;
+    padding-top: 6px !important;
+    padding-bottom: 8px !important;
+  }
+}
+
+/* =========================================================
+   5. TARGET SHOOTER — FIT REAL
+   ========================================================= */
+
+@media
+  (min-width: 820px)
+  and (min-height: 600px) {
+
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-ts-root {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-ts-surface {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    display: grid !important;
+    grid-template-rows:
+      auto
+      auto
+      minmax(0, 1fr) !important;
+    align-content: stretch !important;
+    gap: 7px !important;
+    padding:
+      0 !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-ts-status {
+    margin: 0 !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-ts-arena {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+  }
+}
+
+@media
+  (min-width: 820px)
+  and (max-height: 700px) {
+
+  html.duduq-world-fusion
+    .duduq-ts-instruction {
+    min-height: 52px !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-ts-status {
+    transform:
+      scale(.94);
+    transform-origin:
+      top center;
+  }
+
+  html.duduq-world-fusion
+    .duduq-ts-hint {
+    font-size:
+      clamp(
+        10px,
+        1.15vw,
+        12px
+      ) !important;
+  }
+}
+
+/* =========================================================
+   6. MEMORY QUEST — GRADE QUE SE AJUSTA À ALTURA
+   ========================================================= */
+
+@media
+  (min-width: 820px)
+  and (min-height: 600px) {
+
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-mq-root {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-mq-surface {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    display: grid !important;
+    grid-template-rows:
+      auto
+      minmax(0, 1fr) !important;
+    align-content: stretch !important;
+    gap: 7px !important;
+    padding: 0 !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-mq-board {
+    width:
+      min(
+        900px,
+        100%
+      ) !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-mq-grid {
+    flex:
+      1 1 auto !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    grid-auto-rows:
+      minmax(0, 1fr) !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-mq-card {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+  }
+}
+
+@media
+  (min-width: 820px)
+  and (max-height: 760px) {
+
+  html.duduq-world-fusion
+    .duduq-mq-grid {
+    gap: 8px !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-mq-board {
+    gap: 7px !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-mq-card {
+    border-radius: 17px !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-mq-question {
+    width:
+      clamp(
+        42px,
+        6dvh,
+        58px
+      ) !important;
+    height:
+      clamp(
+        42px,
+        6dvh,
+        58px
+      ) !important;
+  }
+}
+
+/* =========================================================
+   7. SMART SENTENCE — COMPACTAÇÃO RESPONSIVA
+   ========================================================= */
+
+@media
+  (min-width: 820px)
+  and (min-height: 600px) {
+
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-ss-root {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-ss-surface {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    display: grid !important;
+    grid-template-rows:
+      auto
+      minmax(0, 1fr) !important;
+    align-content: stretch !important;
+    gap: 8px !important;
+    padding-top: 0 !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-ss-board {
+    box-sizing: border-box !important;
+    width:
+      min(
+        920px,
+        100%
+      ) !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    overflow: hidden !important;
+    padding:
+      clamp(
+        11px,
+        1.7dvh,
+        20px
+      ) !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-ss-context {
+    margin-bottom:
+      clamp(
+        7px,
+        1.1dvh,
+        12px
+      ) !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-ss-context img {
+    width:
+      clamp(
+        72px,
+        10dvh,
+        108px
+      ) !important;
+    height:
+      clamp(
+        72px,
+        10dvh,
+        108px
+      ) !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-ss-sentence-card {
+    min-height:
+      clamp(
+        88px,
+        15dvh,
+        124px
+      ) !important;
+    padding:
+      clamp(
+        12px,
+        2dvh,
+        22px
+      ) !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-ss-sentence {
+    font-size:
+      clamp(
+        23px,
+        3vw,
+        38px
+      ) !important;
+  }
+}
+
+/* =========================================================
+   8. REDUÇÃO DE "ESPAÇO MORTO"
+   ========================================================= */
+
+@media
+  (min-width: 820px)
+  and (min-height: 600px) {
+
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    > :is(
+      .duduq-dd-root,
+      .duduq-udd-root,
+      .duduq-bp-root,
+      .duduq-mq-root,
+      .duduq-matching-root,
+      .duduq-fc-root,
+      .duduq-cf-root,
+      .duduq-ws-root,
+      .duduq-ts-root,
+      .duduq-ss-root
+    ) {
+    box-sizing: border-box !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+  }
+}
+
+/* =========================================================
+   9. FEEDBACK VISUALMENTE LIGADO À ATIVIDADE
+   ========================================================= */
+
+html.duduq-world-fusion
+  .duduq-engine-feedback-card {
+  border-width:
+    1px !important;
+  box-shadow:
+    0 3px 0 rgba(169, 194, 213, .60),
+    0 12px 24px rgba(31, 65, 99, .10),
+    inset 0 1px 0 rgba(255, 255, 255, .95) !important;
+}
+
+html.duduq-world-fusion
+  .duduq-engine-feedback[data-state="retry"],
+html.duduq-world-fusion
+  .duduq-engine-feedback[data-state="success"] {
+  transform:
+    translateY(-1px);
+}
+
+/* =========================================================
+   10. FALLBACK
+   ========================================================= */
+
+@media
+  (max-width: 819px),
+  (max-height: 599px) {
+
+  html.duduq-world-fusion body {
+    overflow-y:
+      auto !important;
+  }
+
+  html.duduq-world-fusion
+    .duduq-engine-root,
+  html.duduq-world-fusion
+    .duduq-engine-shell,
+  html.duduq-world-fusion
+    .duduq-engine-stage {
+    height:
+      auto !important;
+    max-height:
+      none !important;
+    overflow:
+      visible !important;
+  }
+}
+
 
