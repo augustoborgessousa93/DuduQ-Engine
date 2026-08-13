@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Conteúdo nítido sobre fundo cinematográfico suavizado.
-   Versão 1.3.6
+   Versão 1.3.7
    ========================================================= */
  
 html.duduq-world-fusion {
@@ -2235,3 +2235,233 @@ html.duduq-world-fusion
   )) {
   width: min(1080px, calc(100% - 24px)) !important;
 }
+ 
+/* =========================================================
+   DUDUQ CORE — WORLD FUSION
+   ROUND 3 — FINAL VIEWPORT / MATCHING POLISH
+   Patch visual 1.3.7
+ 
+   OBJETIVOS
+   - corrigir o enquadramento do mascote fallback no cabeçalho;
+   - impedir que o feedback encoste/corte no limite inferior;
+   - separar visualmente enunciado e cabeçalhos do Matching;
+   - recolher o slot de CONFIRMAR durante feedback no Matching;
+   - manter a mesma composição no modo normal e em tela cheia;
+   - preservar Memory Quest e demais mecânicas já estabilizadas.
+   ========================================================= */
+ 
+/* =========================================================
+   19. MASCOTE FALLBACK — ENQUADRAMENTO FINAL
+ 
+   Na 1.3.6 o fallback foi ampliado para reproduzir o recorte do
+   mascote nativo. Em viewports de notebook, porém, a escala de
+   410% ficou agressiva e aproximou demais o rosto do DuduQ.
+ 
+   Mantemos a presença visual do mascote sem cortar a cabeça,
+   antena ou base do personagem.
+   ========================================================= */
+ 
+html.duduq-world-fusion
+  .duduq-engine-header-mascot-slot[data-visible="false"]::before {
+  background-size: 315% auto !important;
+  background-position: 50% 54% !important;
+}
+ 
+ 
+/* =========================================================
+   20. FEEDBACK — SAFE AREA PARA NOTEBOOK / FULLSCREEN
+ 
+   A faixa de feedback deve terminar dentro da viewport mesmo em
+   1366x768, inclusive quando o navegador entra em tela cheia.
+   ========================================================= */
+ 
+@media
+  (min-width: 820px)
+  and (max-height: 820px) {
+ 
+  html.duduq-world-fusion {
+    --duduq-fit-gap: 6px;
+    --duduq-fit-feedback-height: 76px;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-root {
+    padding-bottom: 7px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-feedback {
+    height: 76px !important;
+    min-height: 76px !important;
+    max-height: 76px !important;
+    padding-top: 1px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-feedback-card {
+    min-height: 68px !important;
+    max-height: 72px !important;
+    padding: 7px 12px !important;
+    border-radius: 17px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-feedback-mascot,
+  html.duduq-world-fusion
+    .duduq-mascot[data-size="feedback"] {
+    width: 50px !important;
+    height: 50px !important;
+    flex: 0 0 50px !important;
+  }
+}
+ 
+ 
+/* =========================================================
+   21. MATCHING — ENUNCIADO E CABEÇALHOS SEM CONFLITO
+ 
+   O enunciado deve ser percebido como um bloco próprio e os
+   títulos das colunas precisam iniciar claramente abaixo dele.
+   O board recebe uma faixa superior mínima e os títulos ganham
+   altura estável, evitando sensação de sobreposição.
+   ========================================================= */
+ 
+@media
+  (min-width: 820px)
+  and (min-height: 600px) {
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-surface {
+    gap: 8px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-instruction {
+    position: relative !important;
+    z-index: 3 !important;
+    margin: 0 auto 8px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-board {
+    position: relative !important;
+    z-index: 1 !important;
+    padding-top: clamp(16px, 2dvh, 20px) !important;
+    padding-bottom: clamp(8px, 1.2dvh, 12px) !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-column-title {
+    min-height: 22px !important;
+    margin: 0 0 3px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+}
+ 
+ 
+/* =========================================================
+   22. MATCHING — SLOT DE AÇÃO SOME DURANTE FEEDBACK
+ 
+   Depois de confirmar, o runtime deixa o action-slot vazio,
+   mas a grade da 1.3.6 ainda reservava 56–62px para ele.
+   Essa área não agrega informação e empurra o feedback para o
+   limite inferior em tela cheia.
+   ========================================================= */
+ 
+@media
+  (min-width: 820px)
+  and (min-height: 600px) {
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-surface:has(
+      .duduq-matching-action-slot[data-feedback-state="retry"]
+    ),
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-surface:has(
+      .duduq-matching-action-slot[data-feedback-state="success"]
+    ) {
+    grid-template-rows:
+      auto
+      minmax(0, 1fr)
+      0 !important;
+    gap: 5px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-action-slot[data-feedback-state="retry"],
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-action-slot[data-feedback-state="success"] {
+    min-height: 0 !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
+}
+ 
+ 
+/* =========================================================
+   23. MATCHING — COMPACTAÇÃO LEVE EM ALTURA BAIXA
+ 
+   Preserva leitura e tamanho dos cards, mas recupera alguns
+   pixels verticais quando a viewport possui cerca de 768px.
+   ========================================================= */
+ 
+@media
+  (min-width: 900px)
+  and (max-height: 790px) {
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-instruction {
+    min-height: 52px !important;
+    margin-bottom: 6px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-board {
+    padding-top: 14px !important;
+    padding-bottom: 8px !important;
+  }
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-matching-column-title {
+    min-height: 20px !important;
+    font-size: 11px !important;
+  }
+}
+ 
+ 
+/* =========================================================
+   24. MEMORY QUEST — PRESERVAÇÃO DA COMPOSIÇÃO APROVADA
+ 
+   Evita que regras futuras de compactação genérica alterem a
+   proporção do painel já estabilizado na Rodada 2.
+   ========================================================= */
+ 
+@media
+  (min-width: 820px)
+  and (min-height: 600px) {
+ 
+  html.duduq-world-fusion
+    .duduq-engine-stage
+    .duduq-mq-board {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+ 
