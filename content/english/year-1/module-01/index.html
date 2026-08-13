@@ -113,7 +113,6 @@
         ];
 
         for (
-
           const mechanicId
           of requiredMechanics
         ) {
@@ -229,7 +228,6 @@
           try {
             const transitionRoot =
               window.DuduQTransition
-
                 ?.ensureRoot
                 ?.();
 
@@ -461,7 +459,6 @@
             return;
           }
 
-
           steps.push({
             id: activity.id,
             mechanic:
@@ -576,7 +573,6 @@
 
         function lockInitialInstructionSpeech() {
           if (initialSpeechReleaseTimer !== null) {
-
             window.clearTimeout(initialSpeechReleaseTimer);
             initialSpeechReleaseTimer = null;
           }
@@ -692,7 +688,6 @@
             introApi
               ?.hide
               ?.({
-
                 immediate: true,
                 reason: "start-handoff"
               });
@@ -808,7 +803,6 @@
                 event?.detail?.phase || "";
 
               if (phase === "branding") {
-
                 if (retryBrandingTimer !== null) {
                   window.clearTimeout(
                     retryBrandingTimer
@@ -878,238 +872,13 @@
 
 
         /* ===============================================
-           ATIVAÇÃO SONORA — PRIMEIRO GESTO REAL
+           INTRO — INÍCIO DIRETO
 
-           Chrome/Edge/Safari bloqueiam áudio audível antes
-           de uma interação explícita. Por isso a Intro agora
-           começa somente depois de um único toque/clique.
-           Depois dessa ativação, toda a sequência cinematográfica
-           mantém o fluxo normal.
+           A experiência visual começa imediatamente.
+           O Core Sound continua tentando reproduzir o áudio
+           de branding automaticamente, sem inserir tela, botão
+           ou etapa intermediária antes da Intro.
            =============================================== */
-
-        function requestIntroAudioActivation(
-          onActivated
-        ) {
-          root.innerHTML = "";
-
-          const gate =
-            document.createElement(
-              "section"
-            );
-
-          gate.setAttribute(
-            "aria-label",
-            "Ativar som e iniciar"
-          );
-
-          Object.assign(
-            gate.style,
-            {
-              position: "fixed",
-              inset: "0",
-              zIndex: "2147483600",
-              display: "grid",
-              placeItems: "center",
-              padding: "24px",
-              boxSizing: "border-box",
-              background:
-                "radial-gradient(circle at 14% 16%, rgba(181,225,255,.32), transparent 24%)," +
-                "radial-gradient(circle at 86% 18%, rgba(255,231,170,.24), transparent 23%)," +
-                "linear-gradient(180deg,#ffffff 0%,#f5fbff 100%)",
-              fontFamily:
-                "Nunito, ui-rounded, system-ui, sans-serif"
-            }
-          );
-
-          const card =
-            document.createElement(
-              "div"
-
-            );
-
-          Object.assign(
-            card.style,
-            {
-              width: "min(520px,92vw)",
-              display: "grid",
-              justifyItems: "center",
-              gap: "15px",
-              padding: "28px 28px 26px",
-              border: "2px solid #cbdced",
-              borderRadius: "30px",
-              background:
-                "rgba(255,255,255,.96)",
-              boxShadow:
-                "0 8px 0 #b9cee2, 0 26px 60px rgba(38,82,123,.16)",
-              textAlign: "center"
-            }
-          );
-
-          const icon =
-            document.createElement(
-              "div"
-            );
-
-          icon.textContent = "🔊";
-          icon.setAttribute(
-            "aria-hidden",
-            "true"
-          );
-
-          Object.assign(
-            icon.style,
-            {
-              fontSize: "48px",
-              lineHeight: "1"
-            }
-          );
-
-          const title =
-            document.createElement(
-              "strong"
-            );
-
-          title.textContent =
-            "PRONTO PARA COMEÇAR?";
-
-          Object.assign(
-            title.style,
-            {
-              color: "#163f68",
-              fontSize:
-                "clamp(20px,3vw,28px)",
-              fontWeight: "1000",
-              letterSpacing: ".02em"
-            }
-          );
-
-          const copy =
-            document.createElement(
-              "span"
-            );
-
-          copy.textContent =
-            "Ative o som para iniciar a experiência.";
-
-          Object.assign(
-            copy.style,
-            {
-              color: "#66819c",
-              fontSize:
-                "clamp(14px,1.8vw,17px)",
-              fontWeight: "800"
-            }
-          );
-
-          const button =
-            document.createElement(
-              "button"
-            );
-
-          button.type = "button";
-          button.textContent =
-            "ATIVAR SOM E INICIAR";
-
-          Object.assign(
-            button.style,
-            {
-              width: "min(360px,100%)",
-              minHeight: "58px",
-              border: "2px solid #0062b9",
-              borderRadius: "18px",
-              background:
-                "linear-gradient(180deg,#2fa9ff 0%,#0877d8 100%)",
-              color: "#fff",
-              boxShadow:
-                "0 6px 0 #00529e, 0 12px 24px rgba(0,98,185,.20)",
-              font: "1000 16px/1 Nunito,ui-rounded,system-ui,sans-serif",
-              letterSpacing: ".025em",
-              cursor: "pointer"
-            }
-          );
-
-          card.append(
-            icon,
-            title,
-            copy,
-            button
-          );
-
-          gate.appendChild(
-            card
-          );
-
-          document.body.appendChild(
-
-            gate
-          );
-
-          let activated = false;
-
-          function begin() {
-            if (activated) return;
-            activated = true;
-
-            /*
-             * A primeira reprodução acontece dentro do clique.
-             * Isso desbloqueia a sessão de áudio e garante que o
-             * swoosh da marca seja audível desde a Intro.
-             */
-            try {
-              window.DuduQSound
-                ?.stop
-                ?.(
-                  "intro-company-swoosh"
-                );
-
-              window.DuduQSound
-                ?.play
-                ?.(
-                  "intro-company-swoosh",
-                  {
-                    volume: 0.58,
-                    minGapMs: 700
-                  }
-                );
-            } catch (_) {}
-
-            gate.remove();
-
-            if (
-              typeof onActivated ===
-              "function"
-            ) {
-              onActivated();
-            }
-          }
-
-          button.addEventListener(
-            "click",
-            begin,
-            { once: true }
-          );
-
-          button.addEventListener(
-            "keydown",
-            function (event) {
-              if (
-                event.key === "Enter" ||
-                event.key === " "
-              ) {
-                event.preventDefault();
-                begin();
-              }
-            }
-          );
-
-          window.requestAnimationFrame(
-            function () {
-              button.focus({
-                preventScroll: true
-              });
-            }
-          );
-        }
 
         /* ===============================================
            INTRO CINEMATOGRÁFICA
@@ -1156,7 +925,6 @@
 
           module:
             moduleDefinition
-
               .module,
 
           loadingLabel:
@@ -1208,9 +976,7 @@
           });
         }
 
-        requestIntroAudioActivation(
-          launchCinematicIntro
-        );
+        launchCinematicIntro();
       }
     );
   </script>
