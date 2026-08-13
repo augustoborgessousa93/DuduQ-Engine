@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — CONTENT AUDIO
    MP3 editorial como fonte prioritária + TTS como fallback.
-   Versão 1.0.3
+   Versão 1.0.4
 
    CONTRATO
    - Cada módulo pode expor moduleDefinition.audioCatalog.
@@ -17,7 +17,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.3";
+  const VERSION = "1.0.4";
 
   if (
     window.DuduQContentAudio &&
@@ -103,7 +103,6 @@
         Object.entries(value.audioCatalog)
           .forEach(
             function ([questionId, entry]) {
-
               if (!isObject(entry)) return;
 
               const instruction =
@@ -114,6 +113,7 @@
               const stimuli =
                 Array.isArray(entry.stimuli)
                   ? entry.stimuli
+
                   : [];
 
               result.push({
@@ -176,7 +176,7 @@
   function runtimeInstaller(payload) {
     "use strict";
 
-    const VERSION = "1.0.3";
+    const VERSION = "1.0.4";
 
     if (
       window.DuduQOfficialAudioRuntime &&
@@ -210,7 +210,6 @@
         ? synth.speak.bind(synth)
         : null;
 
-
     const nativeCancel =
       synth &&
       typeof synth.cancel === "function"
@@ -222,6 +221,45 @@
     let activeQuestionId = "";
     let pendingUtterance = null;
     let gateListenerInstalled = false;
+    let lastMemoryCard = null;
+
+    /*
+     * Memory Quest: guardamos a última carta acionada para que,
+     * quando o Content Audio resolver o MP3 oficial, a própria carta
+     * receba a URL de replay. Isso permite ouvir novamente uma carta
+     * sonora depois que o par foi concluído.
+     */
+
+    if (mechanic === "memory-quest") {
+      const rememberMemoryCard =
+        function (event) {
+          const target =
+            event.target?.nodeType === 1
+              ? event.target
+              : event.target?.parentElement;
+
+          const card =
+            target?.closest?.(
+              ".duduq-mq-card"
+            );
+
+          if (card) {
+            lastMemoryCard = card;
+          }
+        };
+
+      document.addEventListener(
+        "pointerdown",
+        rememberMemoryCard,
+        true
+      );
+
+      document.addEventListener(
+        "click",
+        rememberMemoryCard,
+        true
+      );
+    }
 
     const introducedTargets =
       new Set();
@@ -308,6 +346,7 @@
           const audio =
             new Audio(src);
 
+
           currentAudio = audio;
           audio.preload = "auto";
           audio.volume = 1;
@@ -315,7 +354,6 @@
           let settled = false;
 
           function cleanup() {
-
             audio.removeEventListener(
               "ended",
               handleEnded
@@ -422,8 +460,8 @@
           return;
         }
 
-
         try {
+
           await playSingleSource(
             list[index],
             token
@@ -528,7 +566,6 @@
         }
       );
 
-
       if (!candidates.length) return null;
 
       /*
@@ -540,6 +577,7 @@
     }
 
     function gateLocked() {
+
       try {
         return (
           window.parent &&
@@ -633,7 +671,6 @@
         gateLocked()
       ) {
         pendingUtterance = utterance;
-
         installGateListener();
         return;
       }
@@ -656,6 +693,7 @@
         );
 
         return;
+
       }
 
       const resolved =
@@ -668,6 +706,23 @@
 
       activeQuestionId =
         resolved.question.id;
+
+      if (
+        mechanic === "memory-quest" &&
+        lastMemoryCard?.dataset
+      ) {
+        lastMemoryCard.dataset.duduqMqMedia =
+          resolved.stimulus.src;
+
+        lastMemoryCard.dataset.duduqMqSpoken =
+          text;
+
+        lastMemoryCard.dataset.duduqMqLocale =
+          String(
+            resolved.stimulus.language ||
+            "en-US"
+          );
+      }
 
       if (
         mechanic === "target-shooter"
@@ -845,7 +900,6 @@
   /* =======================================================
      IFRAMES DIRETOS
 
-
      Algumas mecânicas, como o Drag & Drop, carregam o runtime
      diretamente em iframe.src em vez de passar pelo fetch()
      do documento principal. Nesses casos instalamos a mesma
@@ -870,6 +924,7 @@
       }
     ) || null;
   }
+
 
   function frameMechanic(iframe, hint = "") {
     const explicit = asString(hint);
@@ -950,7 +1005,6 @@
           mechanic
         );
         return true;
-
       }
     } catch (_) {}
 
@@ -986,6 +1040,7 @@
           mechanic,
           catalog
         );
+
 
       (
         frameDocument.head ||
@@ -1056,7 +1111,6 @@
   function watchDirectFrame(iframe) {
     if (!iframe || iframe.dataset.duduqContentAudioWatch === "1") {
       return;
-
     }
 
     iframe.dataset.duduqContentAudioWatch = "1";
@@ -1161,8 +1215,33 @@
       'if (stage.listening?.autoPlay) setTimeout(() => ListeningEngine.play(stage), 420);';
 
     const replacement =
-      'if (stage.listening?.autoPlay !== false && (stage.listening?.text || stage.instructionSpoken || stage.instruction)) setTimeout(() => ListeningEngine.play(stage), 420);';
+      'window.__DUDUQ_SS_AUTOPLAYED_STAGES=window.__DUDUQ_SS_AUTOPLAYED_STAGES||new Set();const __duduqSsAutoKey=String(stage.id||"");if(stage.listening?.autoPlay!==false&&(stage.listening?.text||stage.instructionSpoken||stage.instruction)&&!window.__DUDUQ_SS_AUTOPLAYED_STAGES.has(__duduqSsAutoKey)){window.__DUDUQ_SS_AUTOPLAYED_STAGES.add(__duduqSsAutoKey);setTimeout(()=>ListeningEngine.play(stage),420);}';
 
+    if (!html.includes(original)) {
+      return html;
+    }
+
+    return html.replace(
+      original,
+      replacement
+    );
+  }
+
+  /* =======================================================
+     MEMORY QUEST — UM ÚNICO DONO DO AUTOPLAY
+
+     O Lesson Host e a mecânica interna possuíam autoplay próprio,
+     disparando o mesmo enunciado com poucos milissegundos de
+     diferença. O Host permanece como fonte única do autoplay.
+     O botão manual da mecânica continua intacto.
+     ======================================================= */
+
+  function patchMemoryQuestAutoplayOwner(html) {
+    const original =
+      'if (typeof window === "undefined" || disabled || feedbackState === "success") return;';
+
+    const replacement =
+      'if (typeof window === "undefined" || disabled || feedbackState === "success" || window.__DUDUQ_MEMORY_HOST_OWNS_AUTOPLAY !== false) return;';
 
     if (!html.includes(original)) {
       return html;
@@ -1192,6 +1271,7 @@
       `<script id="duduq-official-content-audio-runtime">(${runtimeInstaller.toString()})(${safePayload});<\/script>`;
 
     if (/<body[^>]*>/i.test(html)) {
+
       return html.replace(
         /<body([^>]*)>/i,
         function (match) {
@@ -1232,6 +1312,16 @@
         );
     }
 
+    if (
+      mechanic ===
+      "memory-quest"
+    ) {
+      prepared =
+        patchMemoryQuestAutoplayOwner(
+          prepared
+        );
+    }
+
     return injectRuntimeHelper(
       prepared,
       mechanic,
@@ -1268,7 +1358,6 @@
             return entry.mechanic === mechanic;
           }
         )
-
       ) {
         return response;
       }
@@ -1298,6 +1387,7 @@
         }
       );
     } catch (error) {
+
       console.warn(
         "[DuduQ Content Audio] Não foi possível preparar o MP3 oficial; o runtime seguirá com TTS.",
         error
