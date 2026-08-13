@@ -1,24 +1,26 @@
 /* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 01
    Hello! Greetings & Introductions
-   Versão 1.6.1 — MEMORY QUEST PEDAGÓGICO
+   Versão 1.7.0 — OFICIAL DUDUQ · ÁUDIO PERSONALIZADO + GOOD NIGHT
 
    FONTES EDITORIAIS
    - DUDUQ Conteúdo Oficial — Língua Inglesa v1.0
    - DUDUQ Documento Mestre — Conteúdo & Orquestração v1.0
 
    REGRAS DESTA VERSÃO
-   - Preserva os 12 IDs oficiais EN1-M1-01 a EN1-M1-12.
+   - Preserva integralmente os 12 itens editoriais EN1-M1-01 a EN1-M1-12.
+   - Incorpora EN1-M1-13 (GOOD NIGHT) como adição editorial DuduQ autorizada.
    - Não usa Bubble Pop no 1º ano.
    - Leitura em inglês NÃO é pré-requisito para jogar.
    - Áudio e imagem assumem papel pedagógico central.
+   - MP3s oficiais são prioridade; Speech Synthesis permanece como fallback.
    - Todas as cenas usam os PNGs oficiais do Assets-DuduQ.
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.6.1";
+  const VERSION = "1.7.0";
 
   window.DUDUQ_CONTENT =
     window.DUDUQ_CONTENT || {};
@@ -83,6 +85,274 @@
       selfintro:
         CONTENT.selfintro ||
         BASE + "My%20name.png"
+    });
+
+  const AUDIO_BASE =
+    BASE + "Audios/";
+
+  function audioFile(name) {
+    return AUDIO_BASE + name;
+  }
+
+  function audioEntry(
+    mechanic,
+    instructionText,
+    instructionFile,
+    stimuli
+  ) {
+    return Object.freeze({
+      mechanic,
+
+      instruction: Object.freeze({
+        text: instructionText,
+        language: "pt-BR",
+        src: audioFile(instructionFile)
+      }),
+
+      stimuli: Object.freeze(
+        stimuli.map(
+          function (item) {
+            return Object.freeze({
+              text: item.text,
+              language: "en-US",
+              src: audioFile(item.file)
+            });
+          }
+        )
+      )
+    });
+  }
+
+  const AUDIO_CATALOG =
+    Object.freeze({
+      "EN1-M1-01": audioEntry(
+        "target-shooter",
+        "Ouça e acerte a cena que combina com a saudação.",
+        "ING_1ANO_M01_EN1-M1-01_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        [
+          {
+            text: "Hello",
+            file:
+              "ING_1ANO_M01_EN1-M1-01_TARGET-SHOOTER_ESTIMULO01_HELLO_ENUS.mp3"
+          }
+        ]
+      ),
+
+      "EN1-M1-02": audioEntry(
+        "matching",
+        "Ouça e ligue cada saudação à cena correta.",
+        "ING_1ANO_M01_EN1-M1-02_MATCHING_ENUNCIADO_PTBR.mp3",
+        [
+          {
+            text: "Good morning",
+            file:
+              "ING_1ANO_M01_EN1-M1-02_MATCHING_ESTIMULO01_GOOD-MORNING_ENUS.mp3"
+          },
+          {
+            text: "Good afternoon",
+            file:
+              "ING_1ANO_M01_EN1-M1-02_MATCHING_ESTIMULO02_GOOD-AFTERNOON_ENUS.mp3"
+          }
+        ]
+      ),
+
+      "EN1-M1-03": audioEntry(
+        "target-shooter",
+        "Ouça e acerte a cena do período correspondente.",
+        "ING_1ANO_M01_EN1-M1-03_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        [
+          {
+            text: "Good afternoon",
+            file:
+              "ING_1ANO_M01_EN1-M1-03_TARGET-SHOOTER_ESTIMULO01_GOOD-AFTERNOON_ENUS.mp3"
+          }
+        ]
+      ),
+
+      "EN1-M1-04": audioEntry(
+        "target-shooter",
+        "Ouça e acerte a cena de despedida.",
+        "ING_1ANO_M01_EN1-M1-04_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        [
+          {
+            text: "Goodbye",
+            file:
+              "ING_1ANO_M01_EN1-M1-04_TARGET-SHOOTER_ESTIMULO01_GOODBYE_ENUS.mp3"
+          }
+        ]
+      ),
+
+      "EN1-M1-05": audioEntry(
+        "matching",
+        "Ouça e ligue cada fala à cena correspondente.",
+        "ING_1ANO_M01_EN1-M1-05_MATCHING_ENUNCIADO_PTBR.mp3",
+        [
+          {
+            text: "I'm Ana",
+            file:
+              "ING_1ANO_M01_EN1-M1-05_MATCHING_ESTIMULO01_IM-ANA_ENUS.mp3"
+          },
+          {
+            text: "Goodbye",
+            file:
+              "ING_1ANO_M01_EN1-M1-05_MATCHING_ESTIMULO02_GOODBYE_ENUS.mp3"
+          }
+        ]
+      ),
+
+      "EN1-M1-06": audioEntry(
+        "matching",
+        "Ouça e ligue cada palavra à imagem correta.",
+        "ING_1ANO_M01_EN1-M1-06_MATCHING_ENUNCIADO_PTBR.mp3",
+        [
+          {
+            text: "Boy",
+            file:
+              "ING_1ANO_M01_EN1-M1-06_MATCHING_ESTIMULO01_BOY_ENUS.mp3"
+          },
+          {
+            text: "Girl",
+            file:
+              "ING_1ANO_M01_EN1-M1-06_MATCHING_ESTIMULO02_GIRL_ENUS.mp3"
+          }
+        ]
+      ),
+
+      "EN1-M1-07": audioEntry(
+        "matching",
+        "Observe as imagens e ligue cada uma à palavra correspondente. Toque nas palavras para ouvi-las.",
+        "ING_1ANO_M01_EN1-M1-07_MATCHING_ENUNCIADO_PTBR.mp3",
+        [
+          {
+            text: "Boy",
+            file:
+              "ING_1ANO_M01_EN1-M1-07_MATCHING_ESTIMULO01_BOY_ENUS.mp3"
+          },
+          {
+            text: "Girl",
+            file:
+              "ING_1ANO_M01_EN1-M1-07_MATCHING_ESTIMULO02_GIRL_ENUS.mp3"
+          }
+        ]
+      ),
+
+      "EN1-M1-08": audioEntry(
+        "matching",
+        "Ouça e ligue cada fala à resposta que combina.",
+        "ING_1ANO_M01_EN1-M1-08_MATCHING_ENUNCIADO_PTBR.mp3",
+        [
+          {
+            text: "Hello",
+            file:
+              "ING_1ANO_M01_EN1-M1-08_MATCHING_ESTIMULO01_HELLO_ENUS.mp3"
+          },
+          {
+            text: "Goodbye",
+            file:
+              "ING_1ANO_M01_EN1-M1-08_MATCHING_ESTIMULO02_GOODBYE_ENUS.mp3"
+          },
+          {
+            text: "Hi",
+            file:
+              "ING_1ANO_M01_EN1-M1-08_MATCHING_ESTIMULO03_HI_ENUS.mp3"
+          }
+        ]
+      ),
+
+      "EN1-M1-09": audioEntry(
+        "drag-drop",
+        "Toque para ouvir e arraste cada áudio para a cena correspondente.",
+        "ING_1ANO_M01_EN1-M1-09_DRAG-DROP_ENUNCIADO_PTBR.mp3",
+        [
+          {
+            text: "I'm Ana.",
+            file:
+              "ING_1ANO_M01_EN1-M1-09_DRAG-DROP_ESTIMULO01_IM-ANA_ENUS.mp3"
+          },
+          {
+            text: "Goodbye",
+            file:
+              "ING_1ANO_M01_EN1-M1-09_DRAG-DROP_ESTIMULO02_GOODBYE_ENUS.mp3"
+          },
+          {
+            text: "Good afternoon",
+            file:
+              "ING_1ANO_M01_EN1-M1-09_DRAG-DROP_ESTIMULO03_GOOD-AFTERNOON_ENUS.mp3"
+          }
+        ]
+      ),
+
+      "EN1-M1-10": audioEntry(
+        "smart-sentence",
+        "Observe a imagem e complete a frase para o menino.",
+        "ING_1ANO_M01_EN1-M1-10_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        [
+          {
+            text: "Boy",
+            file:
+              "ING_1ANO_M01_EN1-M1-10_SMART-SENTENCE_ESTIMULO01_BOY_ENUS.mp3"
+          },
+          {
+            text: "Girl",
+            file:
+              "ING_1ANO_M01_EN1-M1-10_SMART-SENTENCE_ESTIMULO02_GIRL_ENUS.mp3"
+          }
+        ]
+      ),
+
+      "EN1-M1-11": audioEntry(
+        "smart-sentence",
+        "Observe a imagem e complete a frase para a menina.",
+        "ING_1ANO_M01_EN1-M1-11_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        [
+          {
+            text: "Boy",
+            file:
+              "ING_1ANO_M01_EN1-M1-11_SMART-SENTENCE_ESTIMULO01_BOY_ENUS.mp3"
+          },
+          {
+            text: "Girl",
+            file:
+              "ING_1ANO_M01_EN1-M1-11_SMART-SENTENCE_ESTIMULO02_GIRL_ENUS.mp3"
+          }
+        ]
+      ),
+
+      "EN1-M1-12": audioEntry(
+        "memory-quest",
+        "Vire as cartas, ouça os áudios e encontre cada cena correspondente.",
+        "ING_1ANO_M01_EN1-M1-12_MEMORY-QUEST_ENUNCIADO_PTBR.mp3",
+        [
+          {
+            text: "Hello",
+            file:
+              "ING_1ANO_M01_EN1-M1-12_MEMORY-QUEST_ESTIMULO01_HELLO_ENUS.mp3"
+          },
+          {
+            text: "Good morning",
+            file:
+              "ING_1ANO_M01_EN1-M1-12_MEMORY-QUEST_ESTIMULO02_GOOD-MORNING_ENUS.mp3"
+          },
+          {
+            text: "Goodbye",
+            file:
+              "ING_1ANO_M01_EN1-M1-12_MEMORY-QUEST_ESTIMULO03_GOODBYE_ENUS.mp3"
+          }
+        ]
+      ),
+
+      "EN1-M1-13": audioEntry(
+        "target-shooter",
+        "Ouça e acerte a cena do período correspondente.",
+        "ING_1ANO_M01_EN1-M1-13_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        [
+          {
+            text: "Good night",
+            file:
+              "ING_1ANO_M01_EN1-M1-13_TARGET-SHOOTER_ESTIMULO01_GOOD-NIGHT_ENUS.mp3"
+          }
+        ]
+      )
     });
 
   function skill(description) {
@@ -169,9 +439,21 @@
     estimatedMinutes:
       5,
 
+    audioPolicy: {
+      primary: "recorded-media",
+      fallback: "speech-synthesis",
+      base: AUDIO_BASE,
+      totalFiles: 38,
+      instructionLanguage: "pt-BR",
+      contentLanguage: "en-US"
+    },
+
+    audioCatalog:
+      AUDIO_CATALOG,
+
     learningGoals: [
-      "Reconhecer HI, HELLO, GOODBYE, GOOD MORNING e GOOD AFTERNOON em situações simples.",
-      "Relacionar cumprimentos a cenas de encontro, despedida, manhã e tarde.",
+      "Reconhecer HI, HELLO, GOODBYE, GOOD MORNING, GOOD AFTERNOON e GOOD NIGHT em situações simples.",
+      "Relacionar cumprimentos e despedidas a cenas de encontro, manhã, tarde e noite.",
       "Reconhecer BOY e GIRL com apoio visual e sonoro.",
       "Compreender I’M... como estrutura inicial de apresentação pessoal.",
       "Completar I’M A BOY/GIRL em uma estrutura curta e contextualizada.",
@@ -180,13 +462,16 @@
 
     pedagogicalNotes: {
       officialSource:
-        "Módulo construído a partir dos 12 itens oficiais EN1-M1-01 a EN1-M1-12.",
+        "Módulo preserva os 12 itens da fonte editorial EN1-M1-01 a EN1-M1-12 e incorpora EN1-M1-13 (GOOD NIGHT) como adição editorial DuduQ autorizada para a versão oficial.",
 
       literacy:
         "No 1º ano, a leitura de palavras em inglês não é tratada como pré-requisito. Áudio e imagem oferecem o caminho principal de compreensão.",
 
       contentAssetPolicy:
-        "As cenas desta versão usam imagens oficiais do repositório Assets-DuduQ."
+        "As cenas desta versão usam imagens oficiais do repositório Assets-DuduQ.",
+
+      audioPolicy:
+        "Os 38 MP3s de Audios/ são a fonte sonora prioritária. O TTS permanece apenas como fallback técnico de segurança."
     },
 
     intro: {
@@ -653,6 +938,144 @@
                       "",
                     image:
                       VISUALS.morning,
+                    display:
+                      "image"
+                  }
+                ]
+              }
+            }
+          },
+
+          {
+            id: "EN1-M1-13",
+            subject: "Língua Inglesa",
+            year: 1,
+            module: 1,
+            skill: SKILLS.greetingSituation,
+            difficulty: "easy",
+            statement: "Good night",
+            instruction:
+              "Ouça e acerte a cena do período correspondente.",
+
+            contentLanguage: "en",
+            instructionLanguage: "pt-BR",
+            feedbackLanguage: "pt-BR",
+
+            audio: {
+              enabled: true,
+              text: "Good night",
+              language: "en-US",
+              role: "instruction"
+            },
+
+            alternatives: [
+              sourceOption(
+                "good-night",
+                "GOOD NIGHT"
+              ),
+              sourceOption(
+                "good-morning",
+                "GOOD MORNING"
+              ),
+              sourceOption(
+                "good-afternoon",
+                "GOOD AFTERNOON"
+              )
+            ],
+
+            answer: {
+              type: "single",
+              value: "good-night"
+            },
+
+            feedback: {
+              correct:
+                "Muito bem! GOOD NIGHT é usado para desejar boa noite, geralmente ao se despedir.",
+
+              incorrect:
+                "Ouça GOOD NIGHT novamente e procure a cena noturna.",
+
+              language:
+                "pt-BR"
+            },
+
+            delivery: {
+              mechanic:
+                "target-shooter",
+
+              allowImage:
+                true,
+
+              allowAudio:
+                true
+            },
+
+            metadata: {
+              title:
+                "Good night",
+
+              screenTitle:
+                "Good night",
+
+              sourceDifficulty:
+                "Fácil",
+
+              sourceCorrectAnswer:
+                "GOOD NIGHT",
+
+              editorialOrigin:
+                "Adição editorial DuduQ autorizada após os 12 itens da fonte original.",
+
+              targetShooter: {
+                audioText:
+                  "Good night",
+
+                mode:
+                  "audio-to-image",
+
+                shape:
+                  "cloud",
+
+                correctIds: [
+                  "scene-night"
+                ],
+
+                difficulty: {
+                  speed: 0.40,
+                  objectCount: 3,
+                  spawnIntervalMs: 195,
+                  requiredCorrect: 1,
+                  targetSize: 150
+                },
+
+                items: [
+                  {
+                    id:
+                      "scene-morning",
+                    label:
+                      "",
+                    image:
+                      VISUALS.morning,
+                    display:
+                      "image"
+                  },
+                  {
+                    id:
+                      "scene-afternoon",
+                    label:
+                      "",
+                    image:
+                      VISUALS.afternoon,
+                    display:
+                      "image"
+                  },
+                  {
+                    id:
+                      "scene-night",
+                    label:
+                      "",
+                    image:
+                      VISUALS.night,
                     display:
                       "image"
                   }
