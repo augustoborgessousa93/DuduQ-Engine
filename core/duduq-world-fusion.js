@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.4.1
+   Versão 1.4.2
    ========================================================= */
  
 (function () {
   "use strict";
  
-  const VERSION = "1.4.1";
+  const VERSION = "1.4.2";
   if (window.DuduQWorldFusion?.version === VERSION) return;
  
   const scriptUrl =
@@ -15,7 +15,7 @@
     new URL("./duduq-world-fusion.js", window.location.href).href;
  
   const stylesheetUrl = new URL(
-    "./duduq-world-fusion.css?v=141",
+    "./duduq-world-fusion.css?v=142",
     scriptUrl
   ).href;
  
@@ -27,6 +27,9 @@
   const speechWarmDocuments = new WeakSet();
   const feedbackScrollGuardDocuments = new WeakSet();
   const initialSpeechGateDocuments = new WeakSet();
+  const headerMascotSnapshots = new WeakMap();
+  const mascotTrimPromises = new Map();
+  const mascotTrimSources = new Map();
  
   function getStableFullscreenDocument(doc) {
     let currentWindow = doc?.defaultView;
@@ -970,12 +973,14 @@
  
  
   /* =======================================================
-     MASCOTE PERSISTENTE — FALLBACK COMO IMAGEM REAL
+     MASCOTE PERSISTENTE — CLONE DO COMPONENTE NATIVO
  
-     Durante retry/success/transition o Lesson Engine mantém o slot,
-     mas remove o componente React do mascote. O fallback antigo era
-     um background recortado pelo box. Agora inserimos um <img> real
-     com overflow livre, preservando antena, rosto e base.
+     O Lesson Engine remove o DuduQ React durante retry/success.
+     Em vez de tentar reconstruir o enquadramento do PNG manualmente,
+     guardamos uma cópia do próprio componente nativo enquanto ele
+     está visível e reutilizamos a mesma estrutura quando o slot fica
+     vazio. Assim tamanho, crop, animação e proporção permanecem
+     idênticos em todas as mecânicas que usam o Lesson Engine.
      ======================================================= */
  
   function resolveHeaderMascotSource(doc) {
@@ -999,6 +1004,61 @@
     }
   }
  
+  function sanitizeMascotSnapshot(node) {
+    const clone = node?.cloneNode?.(true);
+    if (!clone) return null;
+ 
+    clone.setAttribute("aria-hidden", "true");
+    clone.removeAttribute("aria-label");
+    clone.classList.add("duduq-world-header-mascot-clone");
+ 
+    clone.querySelectorAll?.("[id]").forEach(
+      function (element) {
+        element.removeAttribute("id");
+      }
+    );
+ 
+    clone.querySelectorAll?.("img").forEach(
+      function (image) {
+        image.alt = "";
+        image.draggable = false;
+      }
+    );
+ 
+    return clone;
+  }
+ 
+  function createEmergencyHeaderMascot(doc, source) {
+    const figure = doc.createElement("figure");
+    figure.className =
+      "duduq-mascot duduq-world-header-emergency-mascot";
+    figure.setAttribute("data-state", "idle");
+    figure.setAttribute("data-size", "idle");
+    figure.setAttribute("data-placeholder", "false");
+    figure.setAttribute("data-reduced-motion", "false");
+    figure.setAttribute("aria-hidden", "true");
+ 
+    const body = doc.createElement("div");
+    body.className = "duduq-mascot-body";
+ 
+    const image = doc.createElement("img");
+    image.src = source;
+    image.alt = "";
+    image.draggable = false;
+ 
+    body.appendChild(image);
+    figure.appendChild(body);
+    return figure;
+  }
+ 
+  function findDirectNativeMascot(slot) {
+    return Array.from(slot?.children || []).find(
+      function (child) {
+        return child?.classList?.contains("duduq-mascot");
+      }
+    ) || null;
+  }
+ 
   function syncHeaderMascotFallback(doc) {
     if (!doc?.querySelectorAll) return;
  
@@ -1008,41 +1068,248 @@
       ".duduq-engine-header-mascot-slot"
     ).forEach(function (slot) {
       const nativeMascot =
-        slot.querySelector(".duduq-mascot");
+        findDirectNativeMascot(slot);
  
-      let fallback =
-        slot.querySelector(
-          ".duduq-world-header-mascot-fallback"
-        );
+      let fallback = Array.from(slot.children).find(
+        function (child) {
+          return child?.classList?.contains(
+            "duduq-world-header-mascot-fallback"
+          );
+        }
+      ) || null;
  
       const nativeVisible =
         slot.getAttribute("data-visible") === "true" &&
         Boolean(nativeMascot);
  
       if (nativeVisible) {
+        const snapshot =
+          sanitizeMascotSnapshot(nativeMascot);
+ 
+        if (snapshot) {
+          headerMascotSnapshots.set(slot, snapshot);
+        }
+ 
         fallback?.remove();
         return;
       }
  
       if (!fallback) {
-        fallback = doc.createElement("img");
+        fallback = doc.createElement("div");
         fallback.className =
           "duduq-world-header-mascot-fallback";
-        fallback.alt = "";
-        fallback.draggable = false;
         fallback.setAttribute("aria-hidden", "true");
         slot.appendChild(fallback);
       }
  
-      if (
-        source &&
-        fallback.getAttribute("src") !== source
-      ) {
-        fallback.setAttribute("src", source);
+      if (!fallback.firstElementChild) {
+        const stored = headerMascotSnapshots.get(slot);
+        const visual = stored
+          ? stored.cloneNode(true)
+          : createEmergencyHeaderMascot(doc, source);
+ 
+        fallback.replaceChildren(visual);
       }
     });
   }
  
+ 
+  /* =======================================================
+     MASCOTE — RECORTE AUTOMÁTICO DE TRANSPARÊNCIA
+ 
+     O asset DUDUQ_IDLE.png possui uma tela transparente bem maior
+     que o personagem. Para superfícies que não contam com o CSS
+     interno do componente React (ex.: ponte global entre mecânicas),
+     geramos uma cópia em memória recortada pela área alfa real.
+ 
+     A leitura é feita em canvas reduzido para ser leve e é cacheada
+     por URL. Se CORS/canvas não estiver disponível, a interface usa
+     o asset original com um fallback de escala via CSS.
+     ======================================================= */
+ 
+  function trimTransparentMascotSource(source) {
+    if (!source) return Promise.resolve("");
+ 
+    if (mascotTrimSources.has(source)) {
+      return Promise.resolve(
+        mascotTrimSources.get(source)
+      );
+    }
+ 
+    if (mascotTrimPromises.has(source)) {
+      return mascotTrimPromises.get(source);
+    }
+ 
+    const promise = new Promise(function (resolve) {
+      const image = new Image();
+      image.crossOrigin = "anonymous";
+      image.decoding = "async";
+ 
+      function fallback() {
+        mascotTrimSources.set(source, source);
+        resolve(source);
+      }
+ 
+      image.onerror = fallback;
+ 
+      image.onload = function () {
+        try {
+          const naturalWidth = image.naturalWidth || image.width;
+          const naturalHeight = image.naturalHeight || image.height;
+ 
+          if (!naturalWidth || !naturalHeight) {
+            fallback();
+            return;
+          }
+ 
+          const maxSampleSide = 512;
+          const sampleScale = Math.min(
+            1,
+            maxSampleSide / Math.max(naturalWidth, naturalHeight)
+          );
+          const sampleWidth = Math.max(
+            1,
+            Math.round(naturalWidth * sampleScale)
+          );
+          const sampleHeight = Math.max(
+            1,
+            Math.round(naturalHeight * sampleScale)
+          );
+ 
+          const sample = document.createElement("canvas");
+          sample.width = sampleWidth;
+          sample.height = sampleHeight;
+ 
+          const sampleContext = sample.getContext(
+            "2d",
+            { willReadFrequently: true }
+          );
+ 
+          if (!sampleContext) {
+            fallback();
+            return;
+          }
+ 
+          sampleContext.clearRect(
+            0,
+            0,
+            sampleWidth,
+            sampleHeight
+          );
+          sampleContext.drawImage(
+            image,
+            0,
+            0,
+            sampleWidth,
+            sampleHeight
+          );
+ 
+          const pixels = sampleContext.getImageData(
+            0,
+            0,
+            sampleWidth,
+            sampleHeight
+          ).data;
+ 
+          let minX = sampleWidth;
+          let minY = sampleHeight;
+          let maxX = -1;
+          let maxY = -1;
+ 
+          for (let y = 0; y < sampleHeight; y += 1) {
+            for (let x = 0; x < sampleWidth; x += 1) {
+              const alpha = pixels[
+                (y * sampleWidth + x) * 4 + 3
+              ];
+ 
+              if (alpha <= 6) continue;
+ 
+              if (x < minX) minX = x;
+              if (x > maxX) maxX = x;
+              if (y < minY) minY = y;
+              if (y > maxY) maxY = y;
+            }
+          }
+ 
+          if (maxX < minX || maxY < minY) {
+            fallback();
+            return;
+          }
+ 
+          const invScale = 1 / sampleScale;
+          let sourceX = Math.floor(minX * invScale);
+          let sourceY = Math.floor(minY * invScale);
+          let sourceWidth = Math.ceil(
+            (maxX - minX + 1) * invScale
+          );
+          let sourceHeight = Math.ceil(
+            (maxY - minY + 1) * invScale
+          );
+ 
+          const padding = Math.max(
+            4,
+            Math.round(
+              Math.max(sourceWidth, sourceHeight) * .045
+            )
+          );
+ 
+          sourceX = Math.max(0, sourceX - padding);
+          sourceY = Math.max(0, sourceY - padding);
+          sourceWidth = Math.min(
+            naturalWidth - sourceX,
+            sourceWidth + padding * 2
+          );
+          sourceHeight = Math.min(
+            naturalHeight - sourceY,
+            sourceHeight + padding * 2
+          );
+ 
+          const crop = document.createElement("canvas");
+          crop.width = sourceWidth;
+          crop.height = sourceHeight;
+ 
+          const cropContext = crop.getContext("2d");
+          if (!cropContext) {
+            fallback();
+            return;
+          }
+ 
+          cropContext.clearRect(
+            0,
+            0,
+            sourceWidth,
+            sourceHeight
+          );
+          cropContext.drawImage(
+            image,
+            sourceX,
+            sourceY,
+            sourceWidth,
+            sourceHeight,
+            0,
+            0,
+            sourceWidth,
+            sourceHeight
+          );
+ 
+          const cropped = crop.toDataURL("image/png");
+          mascotTrimSources.set(source, cropped);
+          resolve(cropped);
+        } catch (_) {
+          fallback();
+        }
+      };
+ 
+      image.src = source;
+    });
+ 
+    mascotTrimPromises.set(source, promise);
+    promise.finally(function () {
+      mascotTrimPromises.delete(source);
+    });
+ 
+    return promise;
+  }
  
   /* =======================================================
      PRIMEIRO ÁUDIO — GATE DE ENTRADA APÓS A INTRO
@@ -1193,9 +1460,11 @@
  
     bridge.innerHTML = [
       '<section class="duduq-world-mission-card">',
-      '  <img class="duduq-world-mission-mascot" alt="" aria-hidden="true">',
+      '  <div class="duduq-world-mission-mascot-frame" aria-hidden="true">',
+      '    <img class="duduq-world-mission-mascot" alt="" draggable="false" data-cropped="pending">',
+      '  </div>',
       '  <span class="duduq-world-mission-kicker">PRÓXIMA MISSÃO</span>',
-      '  <strong class="duduq-world-mission-copy">Preparando a próxima atividade…</strong>',
+      '  <strong class="duduq-world-mission-copy">Preparando a próxima etapa…</strong>',
       '  <div class="duduq-world-mission-track" aria-hidden="true">',
       '    <span class="duduq-world-mission-fill"></span>',
       '    <span class="duduq-world-mission-star">★</span>',
@@ -1203,9 +1472,25 @@
       '</section>'
     ].join("");
  
-    bridge.querySelector(
+    const mascotImage = bridge.querySelector(
       ".duduq-world-mission-mascot"
-    )?.setAttribute("src", mascot);
+    );
+ 
+    if (mascotImage) {
+      mascotImage.setAttribute("src", mascot);
+      mascotImage.setAttribute("data-cropped", "false");
+ 
+      trimTransparentMascotSource(mascot).then(
+        function (cropped) {
+          if (!mascotImage.isConnected) return;
+          mascotImage.setAttribute("src", cropped || mascot);
+          mascotImage.setAttribute(
+            "data-cropped",
+            cropped && cropped !== mascot ? "true" : "false"
+          );
+        }
+      );
+    }
  
     (document.body || document.documentElement)
       .appendChild(bridge);
@@ -1231,7 +1516,7 @@
  
     if (copy) {
       copy.textContent =
-        `Preparando a atividade ${meta.nextStep} de ${meta.totalSteps}…`;
+        `Preparando a etapa ${meta.nextStep} de ${meta.totalSteps}…`;
     }
  
     clearMissionBridgeTimer();
@@ -1271,6 +1556,18 @@
   function installMissionBridge() {
     if (missionBridgeInstalled) return;
     missionBridgeInstalled = true;
+ 
+    const missionMascotSource =
+      window.DUDUQ_ASSETS?.mascots?.transition ||
+      window.DUDUQ_ASSETS?.mascots?.idle ||
+      window.DuduQAssets?.assets?.mascots?.transition ||
+      window.DuduQAssets?.assets?.mascots?.idle ||
+      "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/DUDUQ_IDLE.png";
+ 
+    /* Prepara o recorte antes da primeira troca de mecânica. */
+    trimTransparentMascotSource(missionMascotSource).catch(
+      function () {}
+    );
  
     window.addEventListener(
       "duduq:step-complete",
