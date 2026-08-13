@@ -1,6 +1,6 @@
    DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 01
    Hello! Greetings & Introductions
-   Versão 1.7.1 — OFICIAL DUDUQ · DIVERSIDADE VISUAL + ÁUDIO PERSONALIZADO
+   Versão 1.7.2 — OFICIAL DUDUQ · REPARO DE PUBLICAÇÃO R16.1
 
    FONTES EDITORIAIS
    - DUDUQ Conteúdo Oficial — Língua Inglesa v1.0
@@ -19,7 +19,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.7.1";
+  const VERSION = "1.7.2";
 
   window.DUDUQ_CONTENT =
     window.DUDUQ_CONTENT || {};
@@ -79,7 +79,6 @@
 
       girl:
         CONTENT.girl ||
-
         BASE + "Girl.png",
 
       selfintro:
@@ -162,7 +161,6 @@
           },
           {
             text: "Good afternoon",
-
             file:
               "ING_1ANO_M01_EN1-M1-02_MATCHING_ESTIMULO02_GOOD-AFTERNOON_ENUS.mp3"
           }
@@ -227,6 +225,7 @@
             text: "Girl",
             file:
               "ING_1ANO_M01_EN1-M1-06_MATCHING_ESTIMULO02_GIRL_ENUS.mp3"
+
           }
         ]
       ),
@@ -245,7 +244,6 @@
             text: "Girl",
             file:
               "ING_1ANO_M01_EN1-M1-07_MATCHING_ESTIMULO02_GIRL_ENUS.mp3"
-
           }
         ]
       ),
@@ -304,6 +302,7 @@
           {
             text: "Boy",
             file:
+
               "ING_1ANO_M01_EN1-M1-10_SMART-SENTENCE_ESTIMULO01_BOY_ENUS.mp3"
           },
           {
@@ -328,7 +327,6 @@
             text: "Girl",
             file:
               "ING_1ANO_M01_EN1-M1-11_SMART-SENTENCE_ESTIMULO02_GIRL_ENUS.mp3"
-
           }
         ]
       ),
@@ -411,7 +409,6 @@
       greetingResponse:
         skill(
           "Responder a um cumprimento simples."
-
         ),
 
       personalPresentation:
@@ -458,6 +455,7 @@
     audioPolicy: {
       primary: "recorded-media",
       fallback: "speech-synthesis",
+
       base: AUDIO_BASE,
       totalFiles: 38,
       instructionLanguage: "pt-BR",
@@ -576,7 +574,6 @@
               enabled: true,
               text: "Hello",
               language: "en-US",
-
               role: "instruction"
             },
 
@@ -659,7 +656,6 @@
 
                 items: [
                   {
-
                     id:
                       "scene-greeting",
                     label:
@@ -688,6 +684,7 @@
                       VISUALS.fishGirl,
                     display:
                       "image"
+
                   }
                 ]
               }
@@ -743,7 +740,6 @@
               incorrect:
                 "Ouça novamente e procure a cena da tarde.",
 
-
               language:
                 "pt-BR"
             },
@@ -765,6 +761,7 @@
 
               screenTitle:
                 "Afternoon",
+
 
               sourceDifficulty:
                 "Fácil",
@@ -825,7 +822,6 @@
                     display:
                       "image"
                   }
-
                 ]
               }
             }
@@ -990,11 +986,11 @@
 
             alternatives: [
               sourceOption(
-
                 "good-night",
                 "GOOD NIGHT"
               ),
               sourceOption(
+
                 "good-morning",
                 "GOOD MORNING"
               ),
@@ -1071,9 +1067,9 @@
 
                 items: [
                   {
+
                     id:
                       "scene-morning",
-
                     label:
                       "",
                     image:
@@ -1156,7 +1152,6 @@
               sourceOption(
                 "goodbye",
                 "GOODBYE"
-
               ),
               sourceOption(
                 "good-morning",
@@ -1225,6 +1220,7 @@
                       "audio-afternoon",
                     spokenText:
                       "Good afternoon",
+
                     speechLocale:
                       "en-US",
                     audioDescription:
@@ -1239,7 +1235,6 @@
                     imageAssetKey:
                       "morning",
                     alt:
-
                       "Cena de manhã"
                   },
                   {
@@ -1302,6 +1297,7 @@
         questions: [
 
           {
+
             id: "EN1-M1-05",
             subject: "Língua Inglesa",
             year: 1,
@@ -1322,7 +1318,6 @@
                 "Ouça e ligue cada fala à cena correspondente.",
               language: "pt-BR",
               role: "instruction"
-
             },
 
             alternatives: [
@@ -1379,6 +1374,7 @@
                 assets: {
                   selfintro:
                     VISUALS.selfintro,
+
                   goodbye:
                     VISUALS.goodbye
                 },
@@ -1405,7 +1401,6 @@
                       "Ouvir uma despedida"
                   }
                 ],
-
 
                 rightItems: [
                   {
@@ -1456,6 +1451,7 @@
           },
 
           {
+
             id: "EN1-M1-06",
             subject: "Língua Inglesa",
             year: 1,
@@ -1488,7 +1484,6 @@
                 "GIRL"
               ),
               sourceOption(
-
                 "hello",
                 "HELLO"
               )
@@ -1533,6 +1528,7 @@
                 assets: {
                   boy:
                     VISUALS.boy,
+
                   girl:
                     VISUALS.girl
                 },
@@ -1571,7 +1567,6 @@
                   },
                   {
                     id:
-
                       "picture-girl",
                     imageAssetKey:
                       "girl",
@@ -1610,6 +1605,7 @@
           },
 
           {
+
             id: "EN1-M1-07",
             subject: "Língua Inglesa",
             year: 1,
@@ -1686,6 +1682,7 @@
                 assets: {
                   boy:
                     VISUALS.boy,
+
                   girl:
                     VISUALS.girl
                 },
@@ -1762,6 +1759,7 @@
                     "smart"
                 }
               }
+
             }
           },
 
@@ -1819,7 +1817,6 @@
                 "pt-BR"
             },
 
-
             delivery: {
               mechanic:
                 "matching",
@@ -1839,6 +1836,7 @@
 
                 rightTitle:
                   "Respostas",
+
 
                 leftItems: [
                   {
@@ -1901,7 +1899,6 @@
                     leftId:
                       "audio-goodbye",
                     rightId:
-
                       "word-goodbye"
                   }
                 ],
@@ -1916,6 +1913,7 @@
                   interactionMode:
                     "smart"
                 }
+
               }
             }
           }
@@ -1984,7 +1982,6 @@
                   "audio-2",
                 text:
                   "2",
-
                 audio: {
                   enabled:
                     true,
@@ -1993,6 +1990,7 @@
                   language:
                     "en-US",
                   role:
+
                     "option"
                 }
               },
@@ -2067,9 +2065,9 @@
                   image: {
                     src:
                       VISUALS.selfintro,
-
                     alt:
                       "Criança dizendo o próprio nome"
+
                   }
                 },
                 {
@@ -2146,11 +2144,11 @@
             alternatives: [
               sourceOption(
                 "girl",
+
                 "GIRL"
               ),
               sourceOption(
                 "boy",
-
                 "BOY"
               ),
               sourceOption(
@@ -2223,6 +2221,7 @@
             subject: "Língua Inglesa",
             year: 1,
             module: 1,
+
             skill: SKILLS.boyGirlSentence,
             difficulty: "medium",
             statement: "I'm a ___.",
@@ -2300,6 +2299,7 @@
                   "GIRL"
                 ],
 
+
                 imageKey:
                   "girl",
 
@@ -2315,7 +2315,6 @@
                 instructionSpoken:
                   "Observe a imagem e complete a frase para a menina."
               }
-
             }
           }
         ]
@@ -2376,6 +2375,7 @@
               sourceOption(
                 "good-morning",
                 "GOOD MORNING"
+
               )
             ],
 
@@ -2398,7 +2398,6 @@
             delivery: {
               mechanic:
                 "memory-quest",
-
               allowImage:
                 true,
               allowAudio:
@@ -2453,6 +2452,7 @@
                     pairId:
                       "morning",
                     imageAssetKey:
+
                       "morning",
                     alt:
                       "Cena de manhã"
@@ -2481,7 +2481,6 @@
 
                 behavior: {
                   shuffleCards:
-
                     true,
                   matchDelayMs:
                     420,
