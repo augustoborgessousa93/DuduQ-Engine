@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.4.5
+   Versão 1.4.6
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.4.5";
+  const VERSION = "1.4.6";
   if (window.DuduQWorldFusion?.version === VERSION) return;
 
   const scriptUrl =
@@ -15,7 +15,7 @@
     new URL("./duduq-world-fusion.js", window.location.href).href;
 
   const stylesheetUrl = new URL(
-    "./duduq-world-fusion.css?v=145",
+    "./duduq-world-fusion.css?v=146",
     scriptUrl
   ).href;
 
@@ -28,6 +28,7 @@
   const feedbackScrollGuardDocuments = new WeakSet();
   const initialSpeechGateDocuments = new WeakSet();
   const audioVisualStateDocuments = new WeakSet();
+  const memoryQuestPedagogyDocuments = new WeakSet();
   const headerMascotSnapshots = new WeakMap();
   const mascotTrimPromises = new Map();
   const mascotTrimSources = new Map();
@@ -1750,6 +1751,20 @@
 
     if (!element?.closest) return null;
 
+    const memoryAudioCard =
+      element.closest(
+        ".duduq-mq-card"
+      );
+
+    if (
+      memoryAudioCard &&
+      memoryAudioCard.querySelector(
+        ".duduq-mq-audio-main, .duduq-mq-sound-badge"
+      )
+    ) {
+      return memoryAudioCard;
+    }
+
     const direct =
       element.closest(
         UNIVERSAL_AUDIO_CONTROL_SELECTOR
@@ -1798,15 +1813,14 @@
       instruction.querySelectorAll(
         'button, [role="button"]'
       )
-    ).filter(function (candidate) {
-      return (
-        !candidate.disabled &&
-        candidate.getAttribute(
-          "aria-disabled"
-        ) !== "true"
-      );
-    });
+    );
 
+    /*
+     * Não descartamos o CTA apenas porque ele ficou disabled durante
+     * a reprodução. Drag & Drop (e outros runtimes) desabilitam o
+     * próprio botão enquanto o autoplay está falando; ele continua
+     * sendo o controle visual correto e deve ficar verde nesse período.
+     */
     return controls.length === 1
       ? controls[0]
       : controls.find(isLikelyAudioControl) || null;
@@ -1858,8 +1872,32 @@
       );
     }
 
+    function resolveVisualControl(control) {
+      if (!control?.matches) return control;
+
+      if (
+        control.matches(
+          ".duduq-mq-card"
+        )
+      ) {
+        return (
+          control.querySelector(
+            ".duduq-mq-audio-main, .duduq-mq-sound-badge"
+          ) ||
+          control
+        );
+      }
+
+      return control;
+    }
+
     function begin(control) {
-      const next = control || chooseControl();
+      const logicalControl =
+        control || chooseControl();
+      const next =
+        resolveVisualControl(
+          logicalControl
+        );
 
       if (!next) return;
 
@@ -1880,7 +1918,10 @@
     }
 
     function finish(control = null) {
-      const target = control || activeControl;
+      const target =
+        control
+          ? resolveVisualControl(control)
+          : activeControl;
 
       if (target) {
         setAudioControlPlaying(target, false);
@@ -1888,7 +1929,7 @@
 
       if (
         !control ||
-        control === activeControl
+        target === activeControl
       ) {
         activeControl = null;
       }
@@ -1922,6 +1963,28 @@
 
       const visualSpeak = function (utterance) {
         const control = chooseControl();
+
+        if (
+          control?.matches?.(
+            ".duduq-mq-card"
+          )
+        ) {
+          const spoken =
+            String(
+              utterance?.text || ""
+            ).trim();
+
+          if (spoken) {
+            control.dataset.duduqMqSpoken =
+              spoken;
+            control.dataset.duduqMqLocale =
+              String(
+                utterance?.lang ||
+                "en-US"
+              );
+          }
+        }
+
         let settled = false;
 
         function startVisual() {
@@ -2029,6 +2092,25 @@
         }
 
         const control = chooseControl();
+
+        if (
+          control?.matches?.(
+            ".duduq-mq-card"
+          )
+        ) {
+          const source =
+            String(
+              media.currentSrc ||
+              media.src ||
+              ""
+            ).trim();
+
+          if (source) {
+            control.dataset.duduqMqMedia =
+              source;
+          }
+        }
+
         mediaControls.set(media, control || null);
         begin(control);
       },
@@ -2114,6 +2196,341 @@
     return true;
   }
 
+
+  /* =======================================================
+     MEMORY QUEST — CONSOLIDAÇÃO PEDAGÓGICA
+
+     Regras universais:
+     - cada par correto recebe a mesma identidade cromática;
+     - pares diferentes recebem identidades diferentes;
+     - a cor só aparece DEPOIS do acerto, nunca vira pista prévia;
+     - cartas de áudio já acertadas podem ser ouvidas novamente;
+     - a repetição sonora não altera contagem, estado nem avaliação.
+     ======================================================= */
+
+  function installMemoryQuestPedagogy(doc) {
+    if (
+      !doc?.defaultView ||
+      memoryQuestPedagogyDocuments.has(doc)
+    ) {
+      return;
+    }
+
+    memoryQuestPedagogyDocuments.add(doc);
+
+    const view = doc.defaultView;
+    let pairTone = 0;
+    let refreshQueued = false;
+    let pendingMatchedCard = null;
+
+    function queueRefresh() {
+      if (refreshQueued) return;
+
+      refreshQueued = true;
+
+      view.requestAnimationFrame(function () {
+        refreshQueued = false;
+        decorate();
+      });
+    }
+
+    function makeReplayable(card) {
+      if (
+        !card?.matches?.(
+          '.duduq-mq-card[data-matched="true"]'
+        )
+      ) {
+        return;
+      }
+
+      const hasAudioVisual =
+        Boolean(
+          card.querySelector(
+            ".duduq-mq-audio-main, .duduq-mq-sound-badge"
+          )
+        );
+
+      const hasReplaySource =
+        Boolean(
+          String(
+            card.dataset.duduqMqSpoken || ""
+          ).trim() ||
+          String(
+            card.dataset.duduqMqMedia || ""
+          ).trim()
+        );
+
+      if (
+        !hasAudioVisual ||
+        !hasReplaySource
+      ) {
+        return;
+      }
+
+      card.dataset.duduqMqReplayable =
+        "true";
+
+      /*
+       * O runtime desabilita todo par concluído. Para a carta sonora
+       * removemos o disabled SOMENTE para permitir a revisão auditiva.
+       * O clique é capturado abaixo e não volta à lógica de jogo.
+       */
+      if (card.disabled) {
+        card.disabled = false;
+      }
+
+      card.setAttribute(
+        "aria-disabled",
+        "false"
+      );
+
+      const currentLabel =
+        String(
+          card.getAttribute(
+            "aria-label"
+          ) || ""
+        );
+
+      if (
+        !/ouvir novamente/i.test(
+          currentLabel
+        )
+      ) {
+        card.setAttribute(
+          "aria-label",
+          (
+            currentLabel +
+            " Toque para ouvir novamente."
+          ).trim()
+        );
+      }
+    }
+
+    function decorate() {
+      const freshMatched =
+        Array.from(
+          doc.querySelectorAll(
+            '.duduq-mq-card[data-matched="true"]:not([data-duduq-mq-pair-tone])'
+          )
+        );
+
+      /*
+       * O Memory Quest conclui exatamente duas cartas por acerto.
+       * Normalmente o React publica as duas no mesmo commit. Ainda assim,
+       * guardamos uma carta pendente para suportar commits fracionados sem
+       * deixar um par correto sem identidade cromática.
+       */
+      const queue = [];
+
+      if (
+        pendingMatchedCard?.isConnected &&
+        pendingMatchedCard.matches(
+          '.duduq-mq-card[data-matched="true"]:not([data-duduq-mq-pair-tone])'
+        )
+      ) {
+        queue.push(
+          pendingMatchedCard
+        );
+      }
+
+      pendingMatchedCard = null;
+
+      freshMatched.forEach(function (card) {
+        if (!queue.includes(card)) {
+          queue.push(card);
+        }
+      });
+
+      for (
+        let index = 0;
+        index + 1 < queue.length;
+        index += 2
+      ) {
+        pairTone =
+          (pairTone % 6) + 1;
+
+        const tone =
+          String(pairTone);
+
+        queue[index].setAttribute(
+          "data-duduq-mq-pair-tone",
+          tone
+        );
+
+        queue[index + 1].setAttribute(
+          "data-duduq-mq-pair-tone",
+          tone
+        );
+      }
+
+      if (queue.length % 2 === 1) {
+        pendingMatchedCard =
+          queue[queue.length - 1];
+      }
+
+      doc
+        .querySelectorAll(
+          '.duduq-mq-card[data-matched="true"]'
+        )
+        .forEach(
+          makeReplayable
+        );
+    }
+
+    function replayMatchedAudio(event) {
+      const target =
+        event.target?.nodeType === 1
+          ? event.target
+          : event.target?.parentElement;
+
+      const card =
+        target?.closest?.(
+          '.duduq-mq-card[data-matched="true"][data-duduq-mq-replayable="true"]'
+        );
+
+      if (!card) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation?.();
+
+      const mediaSource =
+        String(
+          card.dataset.duduqMqMedia || ""
+        ).trim();
+
+      const spoken =
+        String(
+          card.dataset.duduqMqSpoken || ""
+        ).trim();
+
+      if (mediaSource) {
+        const visual =
+          card.querySelector(
+            ".duduq-mq-audio-main, .duduq-mq-sound-badge"
+          );
+
+        try {
+          clearAudioPlayingState(
+            doc,
+            visual
+          );
+          setAudioControlPlaying(
+            visual,
+            true
+          );
+
+          const media =
+            new view.Audio(
+              mediaSource
+            );
+
+          const settle = function () {
+            setAudioControlPlaying(
+              visual,
+              false
+            );
+          };
+
+          media.addEventListener(
+            "ended",
+            settle,
+            { once: true }
+          );
+          media.addEventListener(
+            "error",
+            settle,
+            { once: true }
+          );
+          media.addEventListener(
+            "abort",
+            settle,
+            { once: true }
+          );
+
+          const playback =
+            media.play();
+
+          playback?.catch?.(
+            settle
+          );
+        } catch (_) {
+          setAudioControlPlaying(
+            visual,
+            false
+          );
+        }
+
+        return;
+      }
+
+      if (
+        !spoken ||
+        !view.speechSynthesis ||
+        typeof view.SpeechSynthesisUtterance ===
+          "undefined"
+      ) {
+        return;
+      }
+
+      try {
+        view.speechSynthesis.cancel();
+
+        const utterance =
+          new view.SpeechSynthesisUtterance(
+            spoken
+          );
+
+        utterance.lang =
+          String(
+            card.dataset.duduqMqLocale ||
+            "en-US"
+          );
+
+        utterance.rate = .92;
+        utterance.pitch = 1;
+
+        view.speechSynthesis.speak(
+          utterance
+        );
+      } catch (_) {}
+    }
+
+    doc.addEventListener(
+      "click",
+      replayMatchedAudio,
+      true
+    );
+
+    const observer =
+      new view.MutationObserver(
+        queueRefresh
+      );
+
+    const root =
+      doc.body ||
+      doc.documentElement;
+
+    if (root) {
+      observer.observe(
+        root,
+        {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: [
+            "data-matched",
+            "disabled",
+            "aria-label"
+          ]
+        }
+      );
+    }
+
+    decorate();
+  }
+
+
   function ensureStylesheet(doc) {
     if (doc === document) {
       return;
@@ -2143,6 +2560,7 @@
     installFeedbackScrollGuard(doc);
     installInitialSpeechGate(doc);
     installUniversalAudioVisualState(doc);
+    installMemoryQuestPedagogy(doc);
     syncDocument(doc, frame);
     installFullscreenBridge(doc);
     installEarlyLiteracySpeech(doc);
