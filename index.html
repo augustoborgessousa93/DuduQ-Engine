@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>DuduQ Engine — English — Year 1 — Module 01</title>
- 
+
   <!-- =====================================================
        ESTILOS CORE.
        ===================================================== -->
@@ -12,31 +12,31 @@
   <link rel="stylesheet" href="./core/duduq-intro.css?v=130">
   <link rel="stylesheet" href="./core/duduq-transition.css?v=150">
   <link rel="stylesheet" href="./core/duduq-completion.css?v=127">
-  <link id="duduq-world-fusion-core-style" rel="stylesheet" href="./core/duduq-world-fusion.css?v=134">
+  <link id="duduq-world-fusion-core-style" rel="stylesheet" href="./core/duduq-world-fusion.css?v=135">
 </head>
- 
+
 <body>
   <div id="root">Carregando DuduQ Engine...</div>
- 
+
   <!-- =====================================================
        DUDUQ CORE
        ===================================================== -->
   <script src="./core/duduq-assets.js?v=110"></script>
-  <script id="duduq-world-fusion-core-script" src="./core/duduq-world-fusion.js?v=134"></script>
+  <script id="duduq-world-fusion-core-script" src="./core/duduq-world-fusion.js?v=135"></script>
   <script src="./core/duduq-sound.js?v=110"></script>
   <script src="./core/duduq-intro.js?v=120"></script>
   <script src="./core/duduq-schema.js?v=100"></script>
   <script src="./core/duduq-completion.js?v=110"></script>
- 
+
   <!-- Transição universal deve carregar ANTES do Host -->
   <script src="./core/duduq-transition.js?v=164"></script>
- 
+
   <!-- Host 1.6.5: tela cheia pertence ao documento principal -->
   <script src="./core/duduq-host.js?v=165"></script>
- 
+
   <!-- Progresso global -->
   <script src="./core/duduq-progress-ui.js?v=100"></script>
- 
+
   <!-- =====================================================
        MECÂNICAS DISPONÍVEIS
        ===================================================== -->
@@ -47,24 +47,24 @@
   <script src="./mechanics/memory-quest.js?v=101"></script>
   <script src="./mechanics/smart-sentence.js?v=101"></script>
   <script src="./mechanics/target-shooter.js?v=100"></script>
- 
+
   <!-- Router carregado depois de TODAS as mecânicas -->
   <script src="./core/duduq-router.js?v=100"></script>
- 
+
   <!-- Conteúdo oficial: Inglês — 1º ano — Módulo 01 -->
   <script src="./content/english/year-1/module-01/module-01.js?v=151"></script>
- 
+
   <script>
     window.addEventListener(
       "DOMContentLoaded",
       function () {
         const root =
           document.getElementById("root");
- 
+
         /* ===============================================
            VERIFICAÇÕES DO CORE
            =============================================== */
- 
+
         const requiredGlobals = [
           ["DuduQIntro", "DuduQ Intro"],
           ["DuduQWorldFusion", "DuduQ World Fusion"],
@@ -75,7 +75,7 @@
           ["DuduQProgressUI", "DuduQ Progress UI"],
           ["DuduQRouter", "DuduQ Router"]
         ];
- 
+
         for (
           const [
             globalName,
@@ -85,15 +85,15 @@
           if (!window[globalName]) {
             root.textContent =
               `Erro: ${label} não foi carregado.`;
- 
+
             return;
           }
         }
- 
+
         /* ===============================================
            VERIFICAÇÕES DAS MECÂNICAS PUBLICADAS
            =============================================== */
- 
+
         const requiredMechanics = [
           "target-shooter",
           "matching",
@@ -101,7 +101,7 @@
           "smart-sentence",
           "memory-quest"
         ];
- 
+
         for (
           const mechanicId
           of requiredMechanics
@@ -114,28 +114,28 @@
           ) {
             root.textContent =
               `Erro: a mecânica "${mechanicId}" não foi registrada.`;
- 
+
             return;
           }
         }
- 
+
         /* ===============================================
            CONTEÚDO OFICIAL
            =============================================== */
- 
+
         const moduleDefinition =
           window.DUDUQ_CONTENT
             ?.english
             ?.year1
             ?.module01;
- 
+
         if (!moduleDefinition) {
           root.textContent =
             "Erro: o conteúdo English Year 1 Module 01 não foi carregado.";
- 
+
           return;
         }
- 
+
         if (
           !Array.isArray(
             moduleDefinition.activities
@@ -146,28 +146,28 @@
         ) {
           root.textContent =
             "Erro: o Módulo 01 não possui atividades.";
- 
+
           return;
         }
- 
+
         /* ===============================================
            FIRST LOAD — PREPARAÇÃO DO CENÁRIO
- 
+
            O problema da tela azul só acontece no primeiro
            acesso porque o background remoto ainda não está
            no cache. A Transition universal possui uma cor
            azul-base segura para trocas normais, mas esse
            fallback não combina com a saída branca da Intro.
- 
+
            Aqui o cenário do ano é carregado e decodificado
            enquanto a Intro ainda está em exibição.
            =============================================== */
- 
+
         const moduleYearKey =
           String(
             moduleDefinition.year ?? ""
           ).match(/[1-5]/)?.[0] || "";
- 
+
         const moduleBackgroundSrc =
           (
             window.DuduQAssets
@@ -181,7 +181,7 @@
               ?.[moduleYearKey]
           ) ||
           "";
- 
+
         function prepareFirstWorldBackground() {
           if (
             !moduleYearKey ||
@@ -189,7 +189,7 @@
           ) {
             return Promise.resolve(false);
           }
- 
+
           /*
            * Aplicamos o URL imediatamente ao documento principal.
            * A Intro cobre a tela, então essa preparação não aparece
@@ -200,7 +200,7 @@
               ?.setYear
               ?.(moduleYearKey);
           } catch (_) {}
- 
+
           try {
             document.documentElement
               .style
@@ -209,7 +209,7 @@
                 `url("${moduleBackgroundSrc}")`
               );
           } catch (_) {}
- 
+
           /*
            * A ponte recebe o mesmo URL antes do download terminar.
            * Assim ela não depende de descobrir a imagem somente
@@ -220,7 +220,7 @@
               window.DuduQTransition
                 ?.ensureRoot
                 ?.();
- 
+
             transitionRoot
               ?.style
               ?.setProperty(
@@ -228,41 +228,41 @@
                 `url("${moduleBackgroundSrc}")`
               );
           } catch (_) {}
- 
+
           return new Promise(
             function (resolve) {
               let settled = false;
               let timeoutId = null;
- 
+
               const image =
                 new Image();
- 
+
               image.decoding =
                 "async";
- 
+
               function finish(ok) {
                 if (settled) return;
- 
+
                 settled = true;
- 
+
                 if (timeoutId !== null) {
                   window.clearTimeout(
                     timeoutId
                   );
                 }
- 
+
                 try {
                   window.DuduQWorldFusion
                     ?.refresh
                     ?.();
                 } catch (_) {}
- 
+
                 try {
                   window.DuduQTransition
                     ?.primeWorldBridge
                     ?.();
                 } catch (_) {}
- 
+
                 /*
                  * Dois paints estáveis antes de liberar a Intro.
                  */
@@ -276,7 +276,7 @@
                   }
                 );
               }
- 
+
               image.onload =
                 function () {
                   const decoded =
@@ -288,7 +288,7 @@
                             function () {}
                           )
                       : Promise.resolve();
- 
+
                   Promise.resolve(decoded)
                     .finally(
                       function () {
@@ -296,15 +296,15 @@
                       }
                     );
                 };
- 
+
               image.onerror =
                 function () {
                   finish(false);
                 };
- 
+
               image.src =
                 moduleBackgroundSrc;
- 
+
               if (
                 image.complete &&
                 image.naturalWidth > 0
@@ -316,7 +316,7 @@
                   0
                 );
               }
- 
+
               /*
                * Segurança: a Intro não fica presa se houver
                * falha real de rede. Nesse caso, o CSS 1.5.0
@@ -332,21 +332,21 @@
             }
           );
         }
- 
+
         const firstWorldReady =
           prepareFirstWorldBackground();
- 
+
         /* ===============================================
            CONTEÚDO -> STEPS DO HOST
- 
+
            O conteúdo publicado declara a mecânica desejada.
            O Router continua sendo usado como VALIDADOR:
            todas as questões precisam ser compatíveis com
            a mecânica declarada antes de iniciar a missão.
            =============================================== */
- 
+
         const steps = [];
- 
+
         for (
           let activityIndex = 0;
           activityIndex <
@@ -360,14 +360,14 @@
               .activities[
                 activityIndex
               ];
- 
+
           const questions =
             Array.isArray(
               activity.questions
             )
               ? activity.questions
               : [];
- 
+
           if (
             !activity.id ||
             !activity.title ||
@@ -376,10 +376,10 @@
           ) {
             root.textContent =
               `Erro: atividade ${activityIndex + 1} incompleta no Módulo 01.`;
- 
+
             return;
           }
- 
+
           const decisions =
             questions.map(
               function (
@@ -395,24 +395,24 @@
                         subject:
                           moduleDefinition
                             .subject,
- 
+
                         year:
                           moduleDefinition
                             .year,
- 
+
                         module:
                           moduleDefinition
                             .module
                       }
                     );
- 
+
                 return {
                   question,
                   decision
                 };
               }
             );
- 
+
           const invalidDecision =
             decisions.find(
               function (entry) {
@@ -428,7 +428,7 @@
                 );
               }
             );
- 
+
           if (invalidDecision) {
             console.error(
               "[DuduQ Content] Atividade incompatível com a mecânica declarada:",
@@ -442,64 +442,64 @@
                     .question
               }
             );
- 
+
             root.textContent =
               `Erro: "${activity.title}" não é compatível com "${activity.mechanic}".`;
- 
+
             return;
           }
- 
+
           steps.push({
             id: activity.id,
             mechanic:
               activity.mechanic,
- 
+
             payload: {
               id:
                 `${activity.id}-payload`,
- 
+
               title:
                 activity.title,
- 
+
               subject:
                 moduleDefinition
                   .subject,
- 
+
               year:
                 moduleDefinition
                   .year,
- 
+
               module:
                 moduleDefinition
                   .module,
- 
+
               questions
             },
- 
+
             options: {
               contentVersion:
                 moduleDefinition
                   .version,
- 
+
               skill:
                 activity.skill ||
                 null
             }
           });
         }
- 
+
         console.info(
           "[DuduQ Content Production]",
           {
             module:
               moduleDefinition.id,
- 
+
             version:
               moduleDefinition.version,
- 
+
             activities:
               steps.length,
- 
+
             mechanics:
               steps.map(
                 function (step) {
@@ -508,77 +508,77 @@
               )
           }
         );
- 
+
         /* ===============================================
            INICIA O MÓDULO
            =============================================== */
- 
+
         function startModule() {
           window.DuduQ.start({
             id:
               moduleDefinition.id,
- 
+
             title:
               moduleDefinition.title,
- 
+
             year:
               moduleDefinition.year,
- 
+
             subject:
               moduleDefinition
                 .subject,
- 
+
             module:
               moduleDefinition
                 .module,
- 
+
             container:
               "#root",
- 
+
             steps
           });
         }
- 
+
         /* ===============================================
            HANDOFF INTRO -> PRIMEIRA ATIVIDADE
- 
+
            A primeira mecânica é montada atrás da Intro.
            Logo em seguida, a ponte visual oficial cobre
            a Intro, que só então é removida. O reveal
            aguarda o iframe + World Fusion + paints
            estáveis antes de mostrar o conteúdo.
            =============================================== */
- 
+
         async function startModuleWithIntroHandoff() {
           const introApi =
             window.DuduQIntro;
- 
+
           const transition =
             window.DuduQTransition;
- 
+
           const introElement =
             introApi
               ?.getInstance
               ?.()
               ?.element;
- 
+
           introElement
             ?.classList
             ?.add(
               "is-transition-handoff"
             );
- 
+
           const transitionRoot =
             transition
               ?.ensureRoot
               ?.();
- 
+
           transitionRoot
             ?.classList
             ?.add(
               "is-intro-soft"
             );
- 
+
           /*
            * DuduQ.start() é chamado primeiro porque o Host
            * limpa qualquer Transition anterior durante start().
@@ -586,7 +586,7 @@
            * escondida atrás dela no mesmo task.
            */
           startModule();
- 
+
           if (
             !transition?.cover ||
             !transition?.reveal
@@ -596,27 +596,27 @@
               ?.remove(
                 "is-intro-soft"
               );
- 
+
             introElement
               ?.classList
               ?.remove(
                 "is-transition-handoff"
               );
- 
+
             return;
           }
- 
+
           try {
             const covered =
               await transition.cover({
                 coverDurationMs: 340,
                 soundEnabled: false
               });
- 
+
             if (!covered) {
               return;
             }
- 
+
             /*
              * A ponte já está completamente estabelecida.
              * A Intro sai protegida e a primeira atividade
@@ -628,7 +628,7 @@
                 immediate: true,
                 reason: "start-handoff"
               });
- 
+
             await transition.reveal({
               revealDurationMs: 520,
               stablePaintFrames: 2,
@@ -640,14 +640,14 @@
               "[DuduQ Intro Soft] Falha na transição:",
               error
             );
- 
+
             introApi
               ?.hide
               ?.({
                 immediate: true,
                 reason: "start-handoff-fallback"
               });
- 
+
             transition
               ?.hideImmediate
               ?.();
@@ -657,7 +657,7 @@
               ?.remove(
                 "is-intro-soft"
               );
- 
+
             introElement
               ?.classList
               ?.remove(
@@ -665,85 +665,85 @@
               );
           }
         }
- 
+
         /* ===============================================
            INTRO CINEMATOGRÁFICA
            =============================================== */
- 
+
         root.innerHTML = "";
- 
+
         const intro =
           moduleDefinition.intro ||
           {};
- 
+
         window.DuduQIntro.show({
           companyKicker:
             intro.companyKicker ||
             "UMA CRIAÇÃO DE",
- 
+
           companyWidth:
             intro.companyWidth ||
             820,
- 
+
           collectionLogo:
             intro.collectionLogo ||
             "",
- 
+
           collectionName:
             intro.collectionName ||
             "EduQ Play",
- 
+
           collectionAlt:
             intro.collectionAlt ||
             "EduQ Play",
- 
+
           collectionWidth:
             intro.collectionWidth ||
             760,
- 
+
           year:
             moduleDefinition.year,
- 
+
           subject:
             moduleDefinition
               .subject,
- 
+
           module:
             moduleDefinition
               .module,
- 
+
           loadingLabel:
             intro.loadingLabel ||
             "PREPARANDO SUA MISSÃO",
- 
+
           readyLabel:
             intro.readyLabel ||
             "MISSÃO PRONTA",
- 
+
           startLabel:
             intro.startLabel ||
             "INICIAR MISSÃO",
- 
+
           hint:
             intro.hint ||
             "Tudo pronto para começar!",
- 
+
           minDurationMs:
             intro.minDurationMs ??
             2200,
- 
+
           brandingDurationMs:
             intro.brandingDurationMs ??
             3000,
- 
+
           switchingDurationMs:
             intro.switchingDurationMs ??
             760,
- 
+
           missionMinDurationMs:
             intro.missionMinDurationMs ??
             1200,
- 
+
           /*
            * A Intro só libera MISSÃO PRONTA depois que o
            * primeiro cenário foi preparado (ou caiu no
@@ -751,11 +751,11 @@
            */
           readyPromise:
             firstWorldReady,
- 
+
           sparkCount:
             intro.sparkCount ??
             14,
- 
+
           onStart:
             startModuleWithIntroHandoff
         });
