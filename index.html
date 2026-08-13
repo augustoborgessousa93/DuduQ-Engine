@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="./core/duduq-intro.css?v=130">
   <link rel="stylesheet" href="./core/duduq-transition.css?v=150">
   <link rel="stylesheet" href="./core/duduq-completion.css?v=127">
-  <link id="duduq-world-fusion-core-style" rel="stylesheet" href="./core/duduq-world-fusion.css?v=140">
+  <link id="duduq-world-fusion-core-style" rel="stylesheet" href="./core/duduq-world-fusion.css?v=141">
 </head>
  
 <body>
@@ -22,7 +22,7 @@
        DUDUQ CORE
        ===================================================== -->
   <script src="./core/duduq-assets.js?v=110"></script>
-  <script id="duduq-world-fusion-core-script" src="./core/duduq-world-fusion.js?v=140"></script>
+  <script id="duduq-world-fusion-core-script" src="./core/duduq-world-fusion.js?v=141"></script>
   <script src="./core/duduq-sound.js?v=110"></script>
   <script src="./core/duduq-intro.js?v=120"></script>
   <script src="./core/duduq-schema.js?v=100"></script>
@@ -549,6 +549,55 @@
            estáveis antes de mostrar o conteúdo.
            =============================================== */
  
+ 
+        /* ===============================================
+           PRIMEIRO ÁUDIO — RESPIRO APÓS A INTRO
+ 
+           O runtime pode solicitar o autoplay poucos milissegundos
+           depois de montar a primeira questão. Travamos somente essa
+           primeira fala e a liberamos após o reveal + um pequeno
+           tempo de leitura visual da tela.
+           =============================================== */
+ 
+        let initialSpeechReleaseTimer = null;
+ 
+        function lockInitialInstructionSpeech() {
+          if (initialSpeechReleaseTimer !== null) {
+            window.clearTimeout(initialSpeechReleaseTimer);
+            initialSpeechReleaseTimer = null;
+          }
+ 
+          document.documentElement.setAttribute(
+            "data-duduq-initial-speech-gate",
+            "locked"
+          );
+        }
+ 
+        function releaseInitialInstructionSpeech(delayMs = 420) {
+          if (initialSpeechReleaseTimer !== null) {
+            window.clearTimeout(initialSpeechReleaseTimer);
+          }
+ 
+          initialSpeechReleaseTimer = window.setTimeout(
+            function () {
+              document.documentElement.removeAttribute(
+                "data-duduq-initial-speech-gate"
+              );
+ 
+              try {
+                window.dispatchEvent(
+                  new CustomEvent(
+                    "duduq:initial-speech-release"
+                  )
+                );
+              } catch (_) {}
+ 
+              initialSpeechReleaseTimer = null;
+            },
+            Math.max(0, Number(delayMs) || 0)
+          );
+        }
+ 
         async function startModuleWithIntroHandoff() {
           const introApi =
             window.DuduQIntro;
@@ -584,7 +633,10 @@
            * limpa qualquer Transition anterior durante start().
            * Como a Intro está acima do #root, a mecânica nasce
            * escondida atrás dela no mesmo task.
+           *
+           * Antes de montar, travamos somente o primeiro autoplay.
            */
+          lockInitialInstructionSpeech();
           startModule();
  
           if (
@@ -614,6 +666,7 @@
               });
  
             if (!covered) {
+              releaseInitialInstructionSpeech(320);
               return;
             }
  
@@ -635,6 +688,10 @@
               revealHoldFraction: .20,
               soundEnabled: false
             });
+ 
+            /* A tela já está aberta. Damos um respiro curto para
+               a criança localizar visualmente o enunciado antes da fala. */
+            releaseInitialInstructionSpeech(420);
           } catch (error) {
             console.error(
               "[DuduQ Intro Soft] Falha na transição:",
@@ -651,6 +708,8 @@
             transition
               ?.hideImmediate
               ?.();
+ 
+            releaseInitialInstructionSpeech(280);
           } finally {
             transitionRoot
               ?.classList
