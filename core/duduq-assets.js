@@ -2,341 +2,1159 @@
    DUDUQ CORE — ASSETS
    Fonte central de mascotes, sons, backgrounds e conteúdo.
 
-   Versão 1.2.1
+   Versão 1.3.0 — ASSET PATH RESOLVER
 
-   Conteúdo oficial adicionado:
-   - English — Year 1 — Module 01
-   - HELLO / GOODBYE / GOOD MORNING / GOOD AFTERNOON
-   - GOOD NIGHT / BOY / GIRL / MY NAME
+   Estrutura oficial do Assets-DuduQ:
+   - Imagens Ilustrativa/
+   - Efeitos sonoros/
+   - Templates/
+   - Audios/<ANO>_ANO/M<MODULO>/
+
+   Compatibilidade:
+   - Corrige URLs legadas ainda presentes nos módulos.
+   - Corrige URLs legadas embutidas nos runtimes DUDUQ_*.html
+     quando carregados pelos adapters do Engine.
+   - Mantém os nomes originais dos arquivos.
    ========================================================= */
-param(
-    [string]$RepoPath = "."
-)
 
-$ErrorActionPreference = "Stop"
+(function () {
+  "use strict";
 
-$repo = (Resolve-Path $RepoPath).Path
+  const VERSION = "1.3.0";
 
-$required = @(
-    "core\duduq-assets.js",
-    "core\duduq-intro.js",
-    "content\english\year-1\module-01\module-01.js",
-    "content\english\year-1\module-01\index.html",
-    "content\english\year-2\module-01\module-01.js",
-    "content\english\year-2\module-01\index.html"
-)
+  if (
+    window.DuduQAssets &&
+    window.DuduQAssets.version === VERSION
+  ) {
+    return;
+  }
 
-foreach ($rel in $required) {
-    $full = Join-Path $repo $rel
-    if (-not (Test-Path $full)) {
-        throw "Arquivo obrigatório não encontrado: $rel`nExecute este script na raiz do DuduQ-Engine ou informe -RepoPath."
-    }
-}
+  const BASE =
+    "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/";
 
-$base = "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/"
+  const IMAGE_BASE =
+    BASE + "Imagens%20Ilustrativa/";
 
-# Arquivos que agora vivem em Imagens Ilustrativa/
-$imageFiles = @(
-    "Boy.png",
-    "Bye.png",
-    "DUDUQ_ACERTO.png",
-    "DUDUQ_ERRO.png",
-    "DUDUQ_IDLE.png",
-    "Duduq_Li%C3%A7%C3%A3o%20concluida.png",
-    "Duduq_Lição concluida.png",
-    "Fish_Girl.png",
-    "Girl.png",
-    "Good%20Afternoon.png",
-    "Good Afternoon.png",
-    "Good%20Morning.png",
-    "Good Morning.png",
-    "Good%20Night.png",
-    "Good Night.png",
-    "Hello.png",
-    "LOGO%20DA%20EMPRESA_COLORIDO.png",
-    "LOGO DA EMPRESA_COLORIDO.png",
-    "LOGO%20DUDUQ.png",
-    "LOGO DUDUQ.png",
-    "Logo%20EduQ%20Play.png",
-    "Logo EduQ Play.png",
-    "My%20name.png",
-    "My name.png",
-    "Rain.png",
-    "nervous.png",
-    "wheelchair_boy.png"
-)
+  const SOUND_BASE =
+    BASE + "Efeitos%20sonoros/";
 
-# Arquivos que agora vivem em Efeitos sonoros/
-$soundFiles = @(
-    "Ops_feedback_erro.mp3",
-    "bubble-pop.mp3",
-    "click.mp3",
-    "correct.mp3",
-    "ding.mp3",
-    "error.mp3",
-    "feedback_correto.mp3",
-    "happy-fun-EduQ_Play.mp3",
-    "pop.mp3",
-    "swoosh-sound-effect--transitions.mp3",
-    "swoosh.mp3",
-    "you%20win.mp3",
-    "you win.mp3"
-)
+  const TEMPLATE_BASE =
+    BASE + "Templates/";
 
-# Arquivos que agora vivem em Templates/
-$templateFiles = @(
-    "1%C2%BA%20ano%20-whispering-woods.png",
-    "2%C2%BA%20ano%20-chroma-canyons.png",
-    "3%C2%BA%20ano%20-clockwork-valley.png",
-    "4%C2%BA%20ano%20-papercraft-campus.png",
-    "5%C2%BA%20ano%20-sky-lab.png",
-    "1º ano -whispering-woods.png",
-    "2º ano -chroma-canyons.png",
-    "3º ano -clockwork-valley.png",
-    "4º ano -papercraft-campus.png",
-    "5º ano -sky-lab.png"
-)
+  const AUDIO_ROOT =
+    BASE + "Audios/";
 
-function Encode-Folder([string]$folder) {
-    return $folder.Replace(" ", "%20")
-}
+  const IMAGE_FILES =
+    new Set([
+      "Boy.png",
+      "Bye.png",
+      "DUDUQ_ACERTO.png",
+      "DUDUQ_ERRO.png",
+      "DUDUQ_IDLE.png",
+      "Duduq_Li%C3%A7%C3%A3o%20concluida.png",
+      "Fish_Girl.png",
+      "Girl.png",
+      "Good%20Afternoon.png",
+      "Good%20Morning.png",
+      "Good%20Night.png",
+      "Hello.png",
+      "LOGO%20DA%20EMPRESA_COLORIDO.png",
+      "LOGO%20DUDUQ.png",
+      "Logo%20EduQ%20Play.png",
+      "My%20name.png",
+      "Rain.png",
+      "nervous.png",
+      "wheelchair_boy.png"
+    ]);
 
-function Replace-AssetPaths([string]$text) {
-    $result = $text
+  const SOUND_FILES =
+    new Set([
+      "Ops_feedback_erro.mp3",
+      "bubble-pop.mp3",
+      "click.mp3",
+      "correct.mp3",
+      "ding.mp3",
+      "error.mp3",
+      "feedback_correto.mp3",
+      "happy-fun-EduQ_Play.mp3",
+      "pop.mp3",
+      "swoosh-sound-effect--transitions.mp3",
+      "swoosh.mp3",
+      "you%20win.mp3"
+    ]);
 
-    foreach ($name in $imageFiles) {
-        $encodedName = $name.Replace(" ", "%20")
-        $result = $result.Replace(
-            $base + $name,
-            $base + "Imagens%20Ilustrativa/" + $encodedName
-        )
+  const TEMPLATE_FILES =
+    new Set([
+      "1%C2%BA%20ano%20-whispering-woods.png",
+      "2%C2%BA%20ano%20-chroma-canyons.png",
+      "3%C2%BA%20ano%20-clockwork-valley.png",
+      "4%C2%BA%20ano%20-papercraft-campus.png",
+      "5%C2%BA%20ano%20-sky-lab.png"
+    ]);
 
-        # BASE + "arquivo" / BASE + 'arquivo'
-        $result = $result.Replace(
-            'BASE + "' + $name + '"',
-            'BASE + "Imagens%20Ilustrativa/' + $encodedName + '"'
-        )
-        $result = $result.Replace(
-            "BASE + '" + $name + "'",
-            "BASE + 'Imagens%20Ilustrativa/" + $encodedName + "'"
-        )
+  function normalizeAssetFileName(value) {
+    return String(value || "")
+      .replace(/ /g, "%20")
+      .replace(/%C3%A7/gi, "%C3%A7")
+      .replace(/%C3%A3/gi, "%C3%A3");
+  }
+
+  function audioFolderFromFile(fileName) {
+    const file =
+      String(fileName || "");
+
+    const match =
+      file.match(
+        /^ING_(\d+)ANO_M(\d+)_/i
+      );
+
+    if (!match) {
+      return "";
     }
 
-    foreach ($name in $soundFiles) {
-        $encodedName = $name.Replace(" ", "%20")
-        $result = $result.Replace(
-            $base + $name,
-            $base + "Efeitos%20sonoros/" + $encodedName
-        )
+    const year =
+      String(
+        Number(match[1])
+      );
 
-        $result = $result.Replace(
-            'BASE + "' + $name + '"',
-            'BASE + "Efeitos%20sonoros/' + $encodedName + '"'
-        )
-        $result = $result.Replace(
-            "BASE + '" + $name + "'",
-            "BASE + 'Efeitos%20sonoros/" + $encodedName + "'"
-        )
+    const module =
+      String(
+        Number(match[2])
+      )
+        .padStart(2, "0");
+
+    return (
+      year +
+      "_ANO/M" +
+      module +
+      "/"
+    );
+  }
+
+  function rewriteLegacyAssetUrl(value) {
+    if (
+      typeof value !== "string" ||
+      !value.startsWith(BASE)
+    ) {
+      return value;
     }
 
-    foreach ($name in $templateFiles) {
-        $encodedName = $name.Replace(" ", "%20")
-        $result = $result.Replace(
-            $base + $name,
-            $base + "Templates/" + $encodedName
-        )
+    const relative =
+      value.slice(BASE.length);
 
-        $result = $result.Replace(
-            'BASE + "' + $name + '"',
-            'BASE + "Templates/' + $encodedName + '"'
-        )
-        $result = $result.Replace(
-            "BASE + '" + $name + "'",
-            "BASE + 'Templates/" + $encodedName + "'"
-        )
-    }
+    /*
+     * Se já existe uma pasta no caminho, a URL é tratada
+     * como nova e não é alterada.
+     */
+    if (
+      relative.startsWith("Imagens%20Ilustrativa/") ||
+      relative.startsWith("Efeitos%20sonoros/") ||
+      relative.startsWith("Templates/") ||
+      relative.startsWith("Audios/")
+    ) {
+      /*
+       * Audios/arquivo.mp3 é uma exceção: era a estrutura
+       * anterior e precisa receber ano/módulo.
+       */
+      if (
+        relative.startsWith("Audios/") &&
+        relative.split("/").length === 2
+      ) {
+        const fileName =
+          relative.slice("Audios/".length);
 
-    return $result
-}
+        const folder =
+          audioFolderFromFile(fileName);
 
-function Update-File([string]$path, [scriptblock]$transform) {
-    $full = Join-Path $repo $path
-    $before = [System.IO.File]::ReadAllText($full)
-    $after = & $transform $before
-
-    if ($after -ne $before) {
-        [System.IO.File]::WriteAllText(
-            $full,
-            $after,
-            (New-Object System.Text.UTF8Encoding($false))
-        )
-        Write-Host "[ALTERADO] $path" -ForegroundColor Green
-        return $true
-    }
-
-    Write-Host "[SEM ALTERAÇÃO] $path" -ForegroundColor DarkGray
-    return $false
-}
-
-$changed = 0
-
-# 1) Corrige referências literais espalhadas pelo Engine.
-# Inclui os runtimes DUDUQ_*.html, necessários para mascote, fundo e efeitos
-# continuarem funcionando dentro dos iframes.
-$files = Get-ChildItem -Path $repo -Recurse -File |
-    Where-Object {
-        $_.Extension -in @(".js", ".html", ".css") -and
-        $_.FullName -notmatch '[\\/]\.git[\\/]'
-    }
-
-foreach ($file in $files) {
-    $rel = $file.FullName.Substring($repo.Length).TrimStart([char[]]@('\','/'))
-    $did = Update-File $rel {
-        param($text)
-        Replace-AssetPaths $text
-    }
-    if ($did) { $changed++ }
-}
-
-# 2) Áudios do Módulo 01 — 1º ano.
-$year1Module = "content\english\year-1\module-01\module-01.js"
-if (Update-File $year1Module {
-    param($text)
-    $text = $text.Replace('BASE + "Audios/";', 'BASE + "Audios/1_ANO/M01/";')
-    $text = $text.Replace("BASE + 'Audios/';", "BASE + 'Audios/1_ANO/M01/';")
-    $text = $text.Replace('Versão 1.7.2', 'Versão 1.7.3')
-    $text = $text.Replace('const VERSION = "1.7.2";', 'const VERSION = "1.7.3";')
-    return $text
-}) { $changed++ }
-
-# 3) Áudios do Módulo 01 — 2º ano.
-# O repositório Assets-DuduQ ainda não contém esta pasta em 14/08/2026.
-# O caminho fica preparado para a mesma convenção do 1º ano; o fallback
-# Speech Synthesis continua sendo usado enquanto os MP3s não forem publicados.
-$year2Module = "content\english\year-2\module-01\module-01.js"
-if (Update-File $year2Module {
-    param($text)
-    $text = $text.Replace('BASE + "Audios/";', 'BASE + "Audios/2_ANO/M01/";')
-    $text = $text.Replace("BASE + 'Audios/';", "BASE + 'Audios/2_ANO/M01/';")
-    $text = $text.Replace('Versão 1.1.0', 'Versão 1.1.1')
-    $text = $text.Replace('const VERSION = "1.1.0";', 'const VERSION = "1.1.1";')
-    return $text
-}) { $changed++ }
-
-# 4) Bump de versão dos assets centrais.
-$coreAssets = "core\duduq-assets.js"
-if (Update-File $coreAssets {
-    param($text)
-    $text = $text.Replace('Versão 1.2.1', 'Versão 1.2.2')
-    $text = $text.Replace('const VERSION = "1.2.1";', 'const VERSION = "1.2.2";')
-    return $text
-}) { $changed++ }
-
-# 5) Bump do Intro porque o logo padrão mudou de pasta.
-$coreIntro = "core\duduq-intro.js"
-if (Update-File $coreIntro {
-    param($text)
-    $text = $text.Replace('Versão 1.2.0', 'Versão 1.2.1')
-    $text = $text.Replace('const VERSION = "1.2.0";', 'const VERSION = "1.2.1";')
-    return $text
-}) { $changed++ }
-
-# 6) Cache-busting dos dois players.
-$year1Index = "content\english\year-1\module-01\index.html"
-if (Update-File $year1Index {
-    param($text)
-    $text = $text.Replace('duduq-assets.js?v=121', 'duduq-assets.js?v=122')
-    $text = $text.Replace('duduq-intro.js?v=120', 'duduq-intro.js?v=121')
-    $text = $text.Replace('./module-01.js?v=172', './module-01.js?v=173')
-    return $text
-}) { $changed++ }
-
-$year2Index = "content\english\year-2\module-01\index.html"
-if (Update-File $year2Index {
-    param($text)
-    $text = $text.Replace('duduq-assets.js?v=121', 'duduq-assets.js?v=122')
-    $text = $text.Replace('duduq-intro.js?v=120', 'duduq-intro.js?v=121')
-    $text = $text.Replace('./module-01.js?v=100', './module-01.js?v=111')
-    $text = $text.Replace('./module-01.js?v=110', './module-01.js?v=111')
-    return $text
-}) { $changed++ }
-
-Write-Host ""
-Write-Host "==============================================" -ForegroundColor Cyan
-Write-Host "AJUSTE DE ASSETS CONCLUÍDO" -ForegroundColor Cyan
-Write-Host "Arquivos alterados: $changed"
-Write-Host "==============================================" -ForegroundColor Cyan
-Write-Host ""
-
-# Validação básica de sintaxe JavaScript, se Node estiver instalado.
-$node = Get-Command node -ErrorAction SilentlyContinue
-if ($node) {
-    $jsChecks = @(
-        "core\duduq-assets.js",
-        "core\duduq-intro.js",
-        "content\english\year-1\module-01\module-01.js",
-        "content\english\year-2\module-01\module-01.js"
-    )
-
-    foreach ($rel in $jsChecks) {
-        & node --check (Join-Path $repo $rel)
-        if ($LASTEXITCODE -ne 0) {
-            throw "Falha de sintaxe JavaScript em: $rel"
+        if (folder) {
+          return (
+            AUDIO_ROOT +
+            folder +
+            fileName
+          );
         }
+      }
+
+      return value;
     }
 
-    Write-Host "Node --check: OK" -ForegroundColor Green
-}
-else {
-    Write-Host "Node não encontrado; validação JS automática foi ignorada." -ForegroundColor Yellow
-}
+    const fileName =
+      normalizeAssetFileName(
+        relative
+      );
 
-# Verifica os caminhos principais que precisam estar presentes.
-$checks = @(
-    @{ File = $coreAssets; Text = "Imagens%20Ilustrativa/DUDUQ_IDLE.png" },
-    @{ File = $coreAssets; Text = "Efeitos%20sonoros/correct.mp3" },
-    @{ File = $coreAssets; Text = "Templates/1%C2%BA%20ano%20-whispering-woods.png" },
-    @{ File = $year1Module; Text = "Audios/1_ANO/M01/" },
-    @{ File = $year2Module; Text = "Audios/2_ANO/M01/" },
-    @{ File = $year1Index; Text = "./module-01.js?v=173" },
-    @{ File = $year2Index; Text = "./module-01.js?v=111" }
-)
-
-foreach ($check in $checks) {
-    $full = Join-Path $repo $check.File
-    $text = [System.IO.File]::ReadAllText($full)
-    if (-not $text.Contains($check.Text)) {
-        throw "Validação falhou: '$($check.Text)' não encontrado em $($check.File)"
+    if (
+      IMAGE_FILES.has(
+        fileName
+      )
+    ) {
+      return (
+        IMAGE_BASE +
+        fileName
+      );
     }
-}
 
-Write-Host "Validação dos novos caminhos: OK" -ForegroundColor Green
-Write-Host ""
+    if (
+      SOUND_FILES.has(
+        fileName
+      )
+    ) {
+      return (
+        SOUND_BASE +
+        fileName
+      );
+    }
 
-# Mostra o que será enviado ao GitHub.
-$git = Get-Command git -ErrorAction SilentlyContinue
-if ($git -and (Test-Path (Join-Path $repo ".git"))) {
-    Push-Location $repo
-    try {
-        git diff --check
-        if ($LASTEXITCODE -ne 0) {
-            throw "git diff --check encontrou um problema."
+    if (
+      TEMPLATE_FILES.has(
+        fileName
+      )
+    ) {
+      return (
+        TEMPLATE_BASE +
+        fileName
+      );
+    }
+
+    return value;
+  }
+
+  function rewriteText(text) {
+    if (
+      typeof text !== "string" ||
+      !text.includes(BASE)
+    ) {
+      return text;
+    }
+
+    /*
+     * Reescreve somente URLs completas do Assets-DuduQ.
+     * Não toca em outros links ou conteúdo do HTML.
+     */
+    return text.replace(
+      /https:\/\/raw\.githubusercontent\.com\/augustoborgessousa93\/Assets-DuduQ\/main\/[^\s"'<>\\)]+/g,
+      function (url) {
+        return rewriteLegacyAssetUrl(
+          url
+        );
+      }
+    );
+  }
+
+  function normalizeYear(value) {
+    const match =
+      String(
+        value == null
+          ? ""
+          : value
+      ).match(/[1-5]/);
+
+    return (
+      match
+        ? match[0]
+        : ""
+    );
+  }
+
+  function moduleAudioBase(
+    year,
+    module
+  ) {
+    const normalizedYear =
+      normalizeYear(year);
+
+    const normalizedModule =
+      String(
+        Number(module) || 1
+      )
+        .padStart(2, "0");
+
+    if (!normalizedYear) {
+      return AUDIO_ROOT;
+    }
+
+    return (
+      AUDIO_ROOT +
+      normalizedYear +
+      "_ANO/M" +
+      normalizedModule +
+      "/"
+    );
+  }
+
+  const ASSETS =
+    Object.freeze({
+
+      version:
+        VERSION,
+
+      repository:
+        "augustoborgessousa93/Assets-DuduQ",
+
+      paths:
+        Object.freeze({
+          base:
+            BASE,
+          images:
+            IMAGE_BASE,
+          sounds:
+            SOUND_BASE,
+          templates:
+            TEMPLATE_BASE,
+          audios:
+            AUDIO_ROOT
+        }),
+
+      branding:
+        Object.freeze({
+          companyLogo:
+            IMAGE_BASE +
+            "LOGO%20DA%20EMPRESA_COLORIDO.png",
+
+          duduqLogo:
+            IMAGE_BASE +
+            "LOGO%20DUDUQ.png",
+
+          eduqPlayLogo:
+            IMAGE_BASE +
+            "Logo%20EduQ%20Play.png"
+        }),
+
+      mascots:
+        Object.freeze({
+          idle:
+            IMAGE_BASE +
+            "DUDUQ_IDLE.png",
+
+          correct:
+            IMAGE_BASE +
+            "DUDUQ_ACERTO.png",
+
+          error:
+            IMAGE_BASE +
+            "DUDUQ_ERRO.png",
+
+          transition:
+            IMAGE_BASE +
+            "DUDUQ_IDLE.png",
+
+          complete:
+            IMAGE_BASE +
+            "Duduq_Li%C3%A7%C3%A3o%20concluida.png"
+        }),
+
+      sounds:
+        Object.freeze({
+          "bubble-pop":
+            SOUND_BASE +
+            "bubble-pop.mp3",
+
+          click:
+            SOUND_BASE +
+            "click.mp3",
+
+          pop:
+            SOUND_BASE +
+            "pop.mp3",
+
+          correct:
+            SOUND_BASE +
+            "correct.mp3",
+
+          ding:
+            SOUND_BASE +
+            "ding.mp3",
+
+          error:
+            SOUND_BASE +
+            "error.mp3",
+
+          "feedback-correct-voice":
+            SOUND_BASE +
+            "feedback_correto.mp3",
+
+          "feedback-error-voice":
+            SOUND_BASE +
+            "Ops_feedback_erro.mp3",
+
+          "intro-company-swoosh":
+            SOUND_BASE +
+            "swoosh.mp3",
+
+          "intro-mission-music":
+            SOUND_BASE +
+            "happy-fun-EduQ_Play.mp3",
+
+          "transition-swoosh":
+            SOUND_BASE +
+            "swoosh-sound-effect--transitions.mp3",
+
+          win:
+            SOUND_BASE +
+            "you%20win.mp3"
+        }),
+
+      backgrounds:
+        Object.freeze({
+          "1":
+            TEMPLATE_BASE +
+            "1%C2%BA%20ano%20-whispering-woods.png",
+
+          "2":
+            TEMPLATE_BASE +
+            "2%C2%BA%20ano%20-chroma-canyons.png",
+
+          "3":
+            TEMPLATE_BASE +
+            "3%C2%BA%20ano%20-clockwork-valley.png",
+
+          "4":
+            TEMPLATE_BASE +
+            "4%C2%BA%20ano%20-papercraft-campus.png",
+
+          "5":
+            TEMPLATE_BASE +
+            "5%C2%BA%20ano%20-sky-lab.png"
+        }),
+
+      content:
+        Object.freeze({
+          english:
+            Object.freeze({
+
+              year1:
+                Object.freeze({
+                  module01:
+                    Object.freeze({
+                      greeting:
+                        IMAGE_BASE +
+                        "Hello.png",
+
+                      goodbye:
+                        IMAGE_BASE +
+                        "Bye.png",
+
+                      morning:
+                        IMAGE_BASE +
+                        "Good%20Morning.png",
+
+                      afternoon:
+                        IMAGE_BASE +
+                        "Good%20Afternoon.png",
+
+                      night:
+                        IMAGE_BASE +
+                        "Good%20Night.png",
+
+                      boy:
+                        IMAGE_BASE +
+                        "Boy.png",
+
+                      girl:
+                        IMAGE_BASE +
+                        "Girl.png",
+
+                      selfintro:
+                        IMAGE_BASE +
+                        "My%20name.png",
+
+                      rain:
+                        IMAGE_BASE +
+                        "Rain.png",
+
+                      nervous:
+                        IMAGE_BASE +
+                        "nervous.png",
+
+                      fishGirl:
+                        IMAGE_BASE +
+                        "Fish_Girl.png",
+
+                      wheelchairBoy:
+                        IMAGE_BASE +
+                        "wheelchair_boy.png"
+                    })
+                }),
+
+              year2:
+                Object.freeze({
+                  module01:
+                    Object.freeze({
+                      greeting:
+                        IMAGE_BASE +
+                        "Hello.png",
+
+                      goodbye:
+                        IMAGE_BASE +
+                        "Bye.png",
+
+                      morning:
+                        IMAGE_BASE +
+                        "Good%20Morning.png",
+
+                      afternoon:
+                        IMAGE_BASE +
+                        "Good%20Afternoon.png",
+
+                      night:
+                        IMAGE_BASE +
+                        "Good%20Night.png",
+
+                      rain:
+                        IMAGE_BASE +
+                        "Rain.png",
+
+                      nervous:
+                        IMAGE_BASE +
+                        "nervous.png",
+
+                      fishGirl:
+                        IMAGE_BASE +
+                        "Fish_Girl.png",
+
+                      wheelchairBoy:
+                        IMAGE_BASE +
+                        "wheelchair_boy.png"
+                    })
+                })
+            })
+        })
+    });
+
+  function applyYear(value) {
+    const year =
+      normalizeYear(value);
+
+    if (
+      !year ||
+      !ASSETS.backgrounds[year] ||
+      !document.body
+    ) {
+      return false;
+    }
+
+    document.documentElement
+      .setAttribute(
+        "data-duduq-ano-ativo",
+        year
+      );
+
+    document.body.style.backgroundImage =
+      'url("' +
+      ASSETS.backgrounds[year] +
+      '")';
+
+    document.body.style.backgroundPosition =
+      "center top";
+
+    document.body.style.backgroundSize =
+      "cover";
+
+    document.body.style.backgroundRepeat =
+      "no-repeat";
+
+    document.body.style.backgroundAttachment =
+      "fixed";
+
+    return true;
+  }
+
+  function getYear() {
+    return (
+      document.documentElement
+        .getAttribute(
+          "data-duduq-ano-ativo"
+        ) ||
+      null
+    );
+  }
+
+  function getAsset(
+    type,
+    name
+  ) {
+    if (!ASSETS[type]) {
+      return null;
+    }
+
+    return (
+      ASSETS[type][name] ||
+      null
+    );
+  }
+
+  function getSound(name) {
+    return (
+      ASSETS.sounds[name] ||
+      null
+    );
+  }
+
+  function getContentAsset(
+    subject,
+    year,
+    module,
+    name
+  ) {
+    const subjectKey =
+      String(
+        subject || ""
+      )
+        .trim()
+        .toLowerCase();
+
+    const yearKey =
+      "year" +
+      String(
+        year || ""
+      )
+        .replace(
+          /\D/g,
+          ""
+        );
+
+    const moduleKey =
+      "module" +
+      String(
+        module || ""
+      )
+        .replace(
+          /\D/g,
+          ""
+        )
+        .padStart(
+          2,
+          "0"
+        );
+
+    return (
+      ASSETS.content
+        ?.[subjectKey]
+        ?.[yearKey]
+        ?.[moduleKey]
+        ?.[name] ||
+      null
+    );
+  }
+
+  /*
+   * =======================================================
+   * NORMALIZAÇÃO DO CONTEÚDO JÁ PUBLICADO
+   * =======================================================
+   *
+   * Os módulos antigos são clonados porque moduleDefinition
+   * pode estar congelado com Object.freeze().
+   */
+
+  function cloneAndRewrite(
+    value,
+    seen
+  ) {
+    if (
+      typeof value === "string"
+    ) {
+      return rewriteLegacyAssetUrl(
+        value
+      );
+    }
+
+    if (
+      value === null ||
+      typeof value !== "object"
+    ) {
+      return value;
+    }
+
+    if (
+      value instanceof Date
+    ) {
+      return new Date(
+        value.getTime()
+      );
+    }
+
+    const cache =
+      seen ||
+      new WeakMap();
+
+    if (
+      cache.has(value)
+    ) {
+      return cache.get(
+        value
+      );
+    }
+
+    if (
+      Array.isArray(value)
+    ) {
+      const result = [];
+      cache.set(
+        value,
+        result
+      );
+
+      value.forEach(
+        function (item) {
+          result.push(
+            cloneAndRewrite(
+              item,
+              cache
+            )
+          );
+        }
+      );
+
+      return result;
+    }
+
+    const result = {};
+    cache.set(
+      value,
+      result
+    );
+
+    Object.keys(value)
+      .forEach(
+        function (key) {
+          result[key] =
+            cloneAndRewrite(
+              value[key],
+              cache
+            );
+        }
+      );
+
+    return result;
+  }
+
+  function normalizeModule(
+    moduleDefinition
+  ) {
+    if (
+      !moduleDefinition ||
+      typeof moduleDefinition !==
+        "object"
+    ) {
+      return moduleDefinition;
+    }
+
+    const normalized =
+      cloneAndRewrite(
+        moduleDefinition
+      );
+
+    const year =
+      normalized.year;
+
+    const module =
+      normalized.module;
+
+    if (
+      normalized.audioPolicy &&
+      typeof normalized.audioPolicy ===
+        "object"
+    ) {
+      normalized.audioPolicy.base =
+        moduleAudioBase(
+          year,
+          module
+        );
+    }
+
+    if (
+      normalized.intro &&
+      typeof normalized.intro ===
+        "object"
+    ) {
+      normalized.intro.companyLogo =
+        ASSETS.branding
+          .companyLogo;
+
+      if (
+        !normalized.intro
+          .collectionLogo ||
+        normalized.intro
+          .collectionLogo
+          .includes(
+            "Logo%20EduQ%20Play.png"
+          )
+      ) {
+        normalized.intro.collectionLogo =
+          ASSETS.branding
+            .eduqPlayLogo;
+      }
+    }
+
+    return Object.freeze(
+      normalized
+    );
+  }
+
+  function normalizeLoadedContent() {
+    const content =
+      window.DUDUQ_CONTENT;
+
+    if (
+      !content ||
+      typeof content !==
+        "object"
+    ) {
+      return false;
+    }
+
+    let changed =
+      false;
+
+    Object.keys(content)
+      .forEach(
+        function (subjectKey) {
+          const subject =
+            content[subjectKey];
+
+          if (
+            !subject ||
+            typeof subject !==
+              "object"
+          ) {
+            return;
+          }
+
+          Object.keys(subject)
+            .forEach(
+              function (yearKey) {
+                const yearObject =
+                  subject[yearKey];
+
+                if (
+                  !yearObject ||
+                  typeof yearObject !==
+                    "object"
+                ) {
+                  return;
+                }
+
+                Object.keys(
+                  yearObject
+                )
+                  .forEach(
+                    function (
+                      moduleKey
+                    ) {
+                      const current =
+                        yearObject[
+                          moduleKey
+                        ];
+
+                      if (
+                        !current ||
+                        typeof current !==
+                          "object"
+                      ) {
+                        return;
+                      }
+
+                      try {
+                        yearObject[
+                          moduleKey
+                        ] =
+                          normalizeModule(
+                            current
+                          );
+
+                        changed =
+                          true;
+                      } catch (
+                        error
+                      ) {
+                        console.warn(
+                          "[DuduQ Assets] Não foi possível normalizar " +
+                            subjectKey +
+                            "/" +
+                            yearKey +
+                            "/" +
+                            moduleKey +
+                            ".",
+                          error
+                        );
+                      }
+                    }
+                  );
+              }
+            );
+        }
+      );
+
+    return changed;
+  }
+
+  /*
+   * =======================================================
+   * COMPATIBILIDADE DOS RUNTIMES EMBUTIDOS
+   * =======================================================
+   *
+   * Os adapters carregam DUDUQ_*.html via fetch().
+   * Alguns runtimes ainda contêm a antiga árvore de assets.
+   * Somente essas respostas HTML são reescritas.
+   */
+
+  const RUNTIME_PATTERN =
+    /(?:^|\/)DUDUQ_(?:BUBBLE_POP|DRAG_DROP|MATCHING|MEMORY_QUEST|SMART_SENTENCE|TARGET_SHOOTER|WORD_SLASH)\.html(?:[?#]|$)/i;
+
+  function getRequestUrl(
+    input
+  ) {
+    if (
+      typeof input ===
+        "string"
+    ) {
+      return input;
+    }
+
+    if (
+      input &&
+      typeof input.url ===
+        "string"
+    ) {
+      return input.url;
+    }
+
+    return "";
+  }
+
+  function installRuntimeFetchBridge() {
+    if (
+      typeof window.fetch !==
+        "function" ||
+      window.fetch
+        .__duduqAssetPathBridge
+    ) {
+      return false;
+    }
+
+    const nativeFetch =
+      window.fetch.bind(
+        window
+      );
+
+    const bridgedFetch =
+      function (
+        input,
+        init
+      ) {
+        const requestUrl =
+          getRequestUrl(
+            input
+          );
+
+        const request =
+          nativeFetch(
+            input,
+            init
+          );
+
+        if (
+          !RUNTIME_PATTERN.test(
+            requestUrl
+          )
+        ) {
+          return request;
         }
 
-        Write-Host ""
-        Write-Host "Arquivos modificados:" -ForegroundColor Cyan
-        git status --short
+        return request.then(
+          function (
+            response
+          ) {
+            if (
+              !response ||
+              !response.ok
+            ) {
+              return response;
+            }
 
-        Write-Host ""
-        Write-Host "Próximos comandos:" -ForegroundColor Cyan
-        Write-Host 'git add .'
-        Write-Host 'git commit -m "Atualiza caminhos após reorganização do Assets-DuduQ"'
-        Write-Host 'git push origin main'
+            return response
+              .text()
+              .then(
+                function (
+                  originalHtml
+                ) {
+                  const updatedHtml =
+                    rewriteText(
+                      originalHtml
+                    );
+
+                  const headers =
+                    new Headers(
+                      response.headers
+                    );
+
+                  headers.delete(
+                    "content-length"
+                  );
+
+                  headers.delete(
+                    "content-encoding"
+                  );
+
+                  return new Response(
+                    updatedHtml,
+                    {
+                      status:
+                        response.status,
+                      statusText:
+                        response.statusText,
+                      headers:
+                        headers
+                    }
+                  );
+                }
+              );
+          }
+        );
+      };
+
+    Object.defineProperty(
+      bridgedFetch,
+      "__duduqAssetPathBridge",
+      {
+        value:
+          true,
+        enumerable:
+          false
+      }
+    );
+
+    Object.defineProperty(
+      bridgedFetch,
+      "__duduqNativeFetch",
+      {
+        value:
+          nativeFetch,
+        enumerable:
+          false
+      }
+    );
+
+    window.fetch =
+      bridgedFetch;
+
+    return true;
+  }
+
+  window.DUDUQ_ASSETS =
+    ASSETS;
+
+  window.DuduQAssets =
+    Object.freeze({
+      version:
+        VERSION,
+
+      assets:
+        ASSETS,
+
+      setYear:
+        applyYear,
+
+      getYear:
+        getYear,
+
+      get:
+        getAsset,
+
+      getSound:
+        getSound,
+
+      getContent:
+        getContentAsset,
+
+      rewriteUrl:
+        rewriteLegacyAssetUrl,
+
+      rewriteText:
+        rewriteText,
+
+      normalizeContent:
+        normalizeLoadedContent,
+
+      getAudioBase:
+        moduleAudioBase
+    });
+
+  installRuntimeFetchBridge();
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const requestedYear =
+    params.get(
+      "ano"
+    ) ||
+    params.get(
+      "year"
+    ) ||
+    params.get(
+      "serie"
+    ) ||
+    params.get(
+      "série"
+    ) ||
+    document.documentElement
+      .getAttribute(
+        "data-duduq-ano"
+      ) ||
+    window.DUDUQ_ANO;
+
+  if (
+    requestedYear
+  ) {
+    applyYear(
+      requestedYear
+    );
+  }
+
+  /*
+   * Este listener é registrado antes do Host e antes do
+   * listener final dos players. Quando DOMContentLoaded
+   * ocorrer, module-01.js já terá sido executado.
+   */
+  window.addEventListener(
+    "DOMContentLoaded",
+    function () {
+      normalizeLoadedContent();
     }
-    finally {
-        Pop-Location
+  );
+
+  /*
+   * Segurança adicional para integrações que carreguem o
+   * conteúdo muito próximo do evento DOMContentLoaded.
+   */
+  window.addEventListener(
+    "load",
+    function () {
+      normalizeLoadedContent();
     }
-}
-else {
-    Write-Host "Git não encontrado ou a pasta não é um clone Git." -ForegroundColor Yellow
-}
+  );
+
+  try {
+    window.dispatchEvent(
+      new CustomEvent(
+        "duduq:assets-ready",
+        {
+          detail: {
+            version:
+              VERSION
+          }
+        }
+      )
+    );
+  } catch (_) {}
+
+  console.info(
+    "[DuduQ Assets] v" +
+      VERSION +
+      " — nova árvore de assets + compatibilidade legada carregadas."
+  );
+
+})();
