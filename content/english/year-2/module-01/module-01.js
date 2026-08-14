@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 2 — MODULE 01
    Greetings & The Alphabet
-   Versão 1.2.1 — CORREÇÃO DO MATCHING EN2-M1-13
+   Versão 1.3.0 — REVISÃO PREMIUM PEDAGÓGICA E UX
 
    FONTES EDITORIAIS
    - DUDUQ Conteúdo Oficial — Língua Inglesa v1.0
@@ -14,14 +14,16 @@
    - Prioriza áudio gravado; Speech Synthesis permanece como fallback.
    - Reutiliza somente assets já existentes no Assets-DuduQ.
    - Usa a interface compartilhada do Engine sem criar UI específica por conteúdo.
-   - Retira Memory Quest deste módulo e utiliza cada mecânica com função cognitiva clara:
-     reconhecer, associar, completar, ordenar e soletrar.
+   - Retira Memory Quest deste módulo e utiliza cada mecânica com função cognitiva clara.
+   - Prioriza áudio + imagem nas associações para reduzir dependência de leitura.
+   - Usa a escrita somente depois de significado, som e contexto já estarem estabelecidos.
+   - Elimina tarefas genéricas sem função comunicativa em inglês.
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.2.1";
+  const VERSION = "1.3.0";
 
   window.DUDUQ_CONTENT =
     window.DUDUQ_CONTENT || {};
@@ -63,6 +65,9 @@
 
     night:
       BASE + "Imagens%20Ilustrativa/Good%20Night.png",
+
+    selfintro:
+      BASE + "Imagens%20Ilustrativa/My%20name.png",
 
     rain:
       BASE + "Imagens%20Ilustrativa/Rain.png",
@@ -150,7 +155,7 @@
 
     "EN2-M1-04": audioEntry(
       "matching",
-      "Ouça e ligue cada expressão à palavra correspondente.",
+      "Ouça cada expressão e ligue à cena correspondente.",
       "ING_2ANO_M01_EN2-M1-04_MATCHING_ENUNCIADO_PTBR.mp3",
       [
         {
@@ -159,16 +164,16 @@
             "ING_2ANO_M01_EN2-M1-04_MATCHING_ESTIMULO01_GOODBYE_ENUS.mp3"
         },
         {
-          text: "Hi",
+          text: "Hello",
           file:
-            "ING_2ANO_M01_EN2-M1-04_MATCHING_ESTIMULO02_HI_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-04_MATCHING_ESTIMULO02_HELLO_ENUS.mp3"
         }
       ]
     ),
 
     "EN2-M1-05": audioEntry(
       "matching",
-      "Ouça e ligue cada expressão à palavra correspondente.",
+      "Ouça cada expressão e ligue à cena correspondente.",
       "ING_2ANO_M01_EN2-M1-05_MATCHING_ENUNCIADO_PTBR.mp3",
       [
         {
@@ -177,9 +182,9 @@
             "ING_2ANO_M01_EN2-M1-05_MATCHING_ESTIMULO01_SEE-YOU_ENUS.mp3"
         },
         {
-          text: "Hello",
+          text: "Good morning",
           file:
-            "ING_2ANO_M01_EN2-M1-05_MATCHING_ESTIMULO02_HELLO_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-05_MATCHING_ESTIMULO02_GOOD-MORNING_ENUS.mp3"
         }
       ]
     ),
@@ -252,95 +257,70 @@
             "ING_2ANO_M01_EN2-M1-10_DRAG-DROP_ESTIMULO02_B_ENUS.mp3"
         },
         {
-          text: "S",
-          file:
-            "ING_2ANO_M01_EN2-M1-10_DRAG-DROP_ESTIMULO03_S_ENUS.mp3"
-        },
-        {
           text: "C",
           file:
-            "ING_2ANO_M01_EN2-M1-10_DRAG-DROP_ESTIMULO04_C_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-10_DRAG-DROP_ESTIMULO03_C_ENUS.mp3"
         }
       ]
     ),
 
     "EN2-M1-11": audioEntry(
       "smart-sentence",
-      "Complete a pergunta usada para pedir uma soletração.",
-      "ING_2ANO_M01_EN2-M1-11_DRAG-DROP_ENUNCIADO_PTBR.mp3",
+      "Observe a imagem e complete a pergunta.",
+      "ING_2ANO_M01_EN2-M1-11_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
       [
         {
-          text: "How old are you?",
+          text: "Spell",
           file:
-            "ING_2ANO_M01_EN2-M1-11_DRAG-DROP_ESTIMULO01_HOW-OLD-ARE-YOU_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-11_SMART-SENTENCE_ESTIMULO01_SPELL_ENUS.mp3"
         },
         {
-          text: "What's this?",
+          text: "Say",
           file:
-            "ING_2ANO_M01_EN2-M1-11_DRAG-DROP_ESTIMULO02_WHATS-THIS_ENUS.mp3"
-        },
-        {
-          text: "Good afternoon.",
-          file:
-            "ING_2ANO_M01_EN2-M1-11_DRAG-DROP_ESTIMULO03_GOOD-AFTERNOON_ENUS.mp3"
-        },
-        {
-          text: "How do you spell...?",
-          file:
-            "ING_2ANO_M01_EN2-M1-11_DRAG-DROP_ESTIMULO04_HOW-DO-YOU-SPELL_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-11_SMART-SENTENCE_ESTIMULO02_SAY_ENUS.mp3"
         }
       ]
     ),
 
     "EN2-M1-12": audioEntry(
       "drag-drop",
-      "Arraste as letras para formar o nome ANA.",
+      "Organize as palavras para formar GOOD MORNING.",
       "ING_2ANO_M01_EN2-M1-12_DRAG-DROP_ENUNCIADO_PTBR.mp3",
       [
         {
-          text: "A",
+          text: "Good",
           file:
-            "ING_2ANO_M01_EN2-M1-12_DRAG-DROP_ESTIMULO01_A_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-12_DRAG-DROP_ESTIMULO01_GOOD_ENUS.mp3"
         },
         {
-          text: "N",
+          text: "Morning",
           file:
-            "ING_2ANO_M01_EN2-M1-12_DRAG-DROP_ESTIMULO02_N_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-12_DRAG-DROP_ESTIMULO02_MORNING_ENUS.mp3"
         }
       ]
     ),
 
     "EN2-M1-13": audioEntry(
       "matching",
-      "Ligue cada expressão ao uso correto.",
-      "ING_2ANO_M01_EN2-M1-13_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+      "Ouça cada expressão e ligue à cena correspondente.",
+      "ING_2ANO_M01_EN2-M1-13_MATCHING_ENUNCIADO_PTBR.mp3",
       [
         {
-          text: "You",
+          text: "Good afternoon",
           file:
-            "ING_2ANO_M01_EN2-M1-13_SMART-SENTENCE_ESTIMULO01_YOU_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-13_MATCHING_ESTIMULO01_GOOD-AFTERNOON_ENUS.mp3"
         },
         {
-          text: "Hello",
+          text: "Goodbye",
           file:
-            "ING_2ANO_M01_EN2-M1-13_SMART-SENTENCE_ESTIMULO02_HELLO_ENUS.mp3"
-        },
-        {
-          text: "Morning",
-          file:
-            "ING_2ANO_M01_EN2-M1-13_SMART-SENTENCE_ESTIMULO03_MORNING_ENUS.mp3"
-        },
-        {
-          text: "Hi",
-          file:
-            "ING_2ANO_M01_EN2-M1-13_SMART-SENTENCE_ESTIMULO04_HI_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-13_MATCHING_ESTIMULO02_GOODBYE_ENUS.mp3"
         }
       ]
     ),
 
     "EN2-M1-14": audioEntry(
       "smart-sentence",
-      "Complete a pergunta usada para pedir a soletração do nome.",
+      "Observe a imagem e complete a pergunta sobre o nome.",
       "ING_2ANO_M01_EN2-M1-14_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
       [
         {
@@ -349,50 +329,31 @@
             "ING_2ANO_M01_EN2-M1-14_SMART-SENTENCE_ESTIMULO01_SPELL_ENUS.mp3"
         },
         {
-          text: "See",
+          text: "Say",
           file:
-            "ING_2ANO_M01_EN2-M1-14_SMART-SENTENCE_ESTIMULO02_SEE_ENUS.mp3"
-        },
-        {
-          text: "Good",
-          file:
-            "ING_2ANO_M01_EN2-M1-14_SMART-SENTENCE_ESTIMULO03_GOOD_ENUS.mp3"
-        },
-        {
-          text: "Morning",
-          file:
-            "ING_2ANO_M01_EN2-M1-14_SMART-SENTENCE_ESTIMULO04_MORNING_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-14_SMART-SENTENCE_ESTIMULO02_SAY_ENUS.mp3"
         }
       ]
     ),
 
     "EN2-M1-15": audioEntry(
       "drag-drop",
-      "Arraste as letras para formar a sequência alfabética correta.",
+      "Organize as palavras para formar SEE YOU.",
       "ING_2ANO_M01_EN2-M1-15_DRAG-DROP_ENUNCIADO_PTBR.mp3",
       [
         {
-          text: "A",
+          text: "See",
           file:
-            "ING_2ANO_M01_EN2-M1-15_DRAG-DROP_ESTIMULO01_A_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-15_DRAG-DROP_ESTIMULO01_SEE_ENUS.mp3"
         },
         {
-          text: "B",
+          text: "You",
           file:
-            "ING_2ANO_M01_EN2-M1-15_DRAG-DROP_ESTIMULO02_B_ENUS.mp3"
-        },
-        {
-          text: "C",
-          file:
-            "ING_2ANO_M01_EN2-M1-15_DRAG-DROP_ESTIMULO03_C_ENUS.mp3"
-        },
-        {
-          text: "D",
-          file:
-            "ING_2ANO_M01_EN2-M1-15_DRAG-DROP_ESTIMULO04_D_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-15_DRAG-DROP_ESTIMULO02_YOU_ENUS.mp3"
         }
       ]
     )
+
   });
 
   function skill(description) {
@@ -478,39 +439,29 @@
   }
 
   const SKILLS = Object.freeze({
-    greetings:
+    greetingsContext:
       skill(
-        "Identificar e compreender cumprimentos básicos."
+        "Compreender cumprimentos e despedidas em situações cotidianas com apoio de áudio e imagem."
+      ),
+
+    greetingFarewellAssociation:
+      skill(
+        "Associar expressões orais de cumprimento e despedida às cenas correspondentes."
       ),
 
     alphabetListening:
       skill(
-        "Ouvir e identificar letras do alfabeto em inglês."
+        "Ouvir e identificar nomes de letras pronunciados em inglês."
       ),
 
     spellingQuestion:
       skill(
-        "Perguntar como uma palavra é soletrada."
+        "Compreender e completar a estrutura HOW DO YOU SPELL...? com apoio visual."
       ),
 
-    spellingSequence:
+    phraseBuilding:
       skill(
-        "Relacionar soletração ao alfabeto."
-      ),
-
-    farewell:
-      skill(
-        "Distinguir cumprimentos de despedidas."
-      ),
-
-    presentationAlphabet:
-      skill(
-        "Integrar apresentação e alfabeto."
-      ),
-
-    alphabetSequence:
-      skill(
-        "Reconhecer sequência alfabética."
+        "Organizar palavras conhecidas para formar expressões curtas em inglês."
       )
   });
 
@@ -534,7 +485,7 @@
       "Greetings & The Alphabet",
 
     description:
-      "Missão de Língua Inglesa do 2º ano organizada em progressão: retomada de cumprimentos e despedidas, reconhecimento auditivo das letras, uso de HOW DO YOU SPELL...? e manipulação de letras para soletrar e ordenar.",
+      "Missão de Língua Inglesa do 2º ano com progressão oral, visual e escrita: cumprimentos e despedidas em contexto, discriminação auditiva de letras em inglês, uso de HOW DO YOU SPELL...? e construção de expressões curtas já estudadas.",
 
     estimatedMinutes:
       10,
@@ -543,7 +494,7 @@
       primary: "recorded-media",
       fallback: "speech-synthesis",
       base: AUDIO_BASE,
-      totalFiles: 48,
+      totalFiles: 39,
       instructionLanguage: "pt-BR",
       contentLanguage: "en-US"
     },
@@ -552,12 +503,12 @@
       AUDIO_CATALOG,
 
     learningGoals: [
-      "Retomar HELLO, GOOD MORNING e GOOD NIGHT em situações de uso.",
-      "Distinguir cumprimentos de despedidas, reconhecendo GOODBYE e SEE YOU.",
-      "Ouvir e identificar letras do alfabeto em inglês, com foco em A, B, C, M e S.",
-      "Compreender HOW DO YOU SPELL...? como pergunta usada para pedir uma soletração.",
-      "Aplicar HOW DO YOU SPELL YOUR NAME? em uma situação inicial de apresentação.",
-      "Manipular letras para formar ANA e organizar a sequência A-B-C-D."
+      "Reconhecer HELLO, GOOD MORNING, GOOD AFTERNOON, GOOD NIGHT, GOODBYE e SEE YOU com apoio de áudio e cenas.",
+      "Distinguir cumprimentos e despedidas sem depender da leitura de palavras longas.",
+      "Ouvir e identificar nomes de letras em inglês, consolidando A, B, C e ampliando para M.",
+      "Compreender HOW DO YOU SPELL...? em situações significativas, com imagem e apenas duas opções de resposta.",
+      "Completar HOW DO YOU SPELL HELLO? e HOW DO YOU SPELL YOUR NAME? com apoio visual.",
+      "Organizar palavras conhecidas para formar GOOD MORNING e SEE YOU, relacionando forma escrita, som e uso comunicativo."
     ],
 
     pedagogicalNotes: {
@@ -565,10 +516,10 @@
         "Módulo baseado nos 15 itens oficiais EN2-M1-01 a EN2-M1-15 do documento DuduQ Conteúdo Oficial — Língua Inglesa v1.0.",
 
       literacy:
-        "No 2º ano, áudio continua central, mas a leitura de letras e palavras curtas passa a integrar a própria interação.",
+        "No 2º ano, áudio e imagem continuam centrais. A leitura aparece de forma gradual, em letras e expressões curtas já contextualizadas, sem transformar decodificação textual em pré-requisito para compreender a tarefa.",
 
       adaptation:
-        "A sequência parte de linguagem social já conhecida, avança para discriminação auditiva de letras e só depois introduz a linguagem de soletração e a ordenação de letras. Cada mecânica é usada quando acrescenta uma ação cognitiva clara.",
+        "A progressão vai do significado para a forma: primeiro a criança reconhece situações comunicativas por áudio e imagem; depois discrimina nomes de letras em inglês; em seguida usa HOW DO YOU SPELL...? com apoio visual; por fim reorganiza palavras de expressões já conhecidas. Não há atividades de nomes próprios ou ordenação alfabética genérica sem função linguística.",
 
       audioPolicy:
         "Os MP3s nomeados no catálogo são prioritários. Enquanto os arquivos do 2º ano não estiverem publicados em Audios/2_ANO/M01/, o Engine utiliza Speech Synthesis como fallback técnico."
@@ -624,12 +575,12 @@
           "target-shooter",
 
         skill:
-          SKILLS.greetings,
+          SKILLS.greetingsContext,
 
         questions: [
           baseQuestion({
                       id: "EN2-M1-01",
-                      skill: SKILLS.greetings,
+                      skill: SKILLS.greetingsContext,
                       difficulty: "easy",
                       statement: "Hello",
                       instruction:
@@ -699,7 +650,7 @@
 
           baseQuestion({
                       id: "EN2-M1-02",
-                      skill: SKILLS.greetings,
+                      skill: SKILLS.greetingsContext,
                       difficulty: "easy",
                       statement: "Good morning",
                       instruction:
@@ -769,7 +720,7 @@
 
           baseQuestion({
                       id: "EN2-M1-03",
-                      skill: SKILLS.greetings,
+                      skill: SKILLS.greetingsContext,
                       difficulty: "easy",
                       statement: "Good night",
                       instruction:
@@ -840,252 +791,258 @@
       },
 
       /* =====================================================
-         ETAPA 2 — HELLO OR GOODBYE
+         ETAPA 2 — GREETINGS & GOODBYES
          EN2-M1-04 / EN2-M1-05 / EN2-M1-13
+         Apoio visual prioritário: áudio -> cena.
          ===================================================== */
       {
         id:
-          "en2-m1-step-02-hello-or-goodbye",
+          "en2-m1-step-02-greetings-goodbyes",
 
         title:
-          "Hello or Goodbye?",
+          "Greetings & Goodbyes",
 
         mechanic:
           "matching",
 
         skill:
-          SKILLS.farewell,
+          SKILLS.greetingFarewellAssociation,
 
         questions: [
           baseQuestion({
-                      id: "EN2-M1-04",
-                      skill: SKILLS.greetings,
-                      difficulty: "easy",
-                      statement: "Goodbye",
-                      instruction:
-                        "Ouça e ligue cada expressão à palavra correspondente.",
-                      alternatives: [
-                        sourceOption("goodbye", "GOODBYE"),
-                        sourceOption("hi", "HI"),
-                        sourceOption("hello", "HELLO"),
-                        sourceOption("good-morning", "GOOD MORNING")
-                      ],
-                      answer: {
-                        type: "single",
-                        value: "goodbye"
-                      },
-                      correct:
-                        "Muito bem! GOODBYE é uma despedida.",
-                      incorrect:
-                        "Ouça novamente e compare GOODBYE e HI.",
-                      mechanic: "matching",
-                      metadata: {
-                        sourceDifficulty: "Fácil",
-                        sourceCorrectAnswer: "GOODBYE",
-                        matching: {
-                          mode: "audio-word",
-                          leftTitle: "Ouça",
-                          rightTitle: "Palavras",
-                          leftItems: [
-                            {
-                              id: "audio-goodbye",
-                              spokenText: "Goodbye",
-                              speechLocale: "en-US",
-                              audioDescription: "Ouvir Goodbye"
-                            },
-                            {
-                              id: "audio-hi",
-                              spokenText: "Hi",
-                              speechLocale: "en-US",
-                              audioDescription: "Ouvir Hi"
-                            }
-                          ],
-                          rightItems: [
-                            {
-                              id: "word-goodbye",
-                              label: "GOODBYE",
-                              spokenText: "Goodbye",
-                              speechLocale: "en-US",
-                              audioDescription: "Ouvir Goodbye"
-                            },
-                            {
-                              id: "word-hi",
-                              label: "HI",
-                              spokenText: "Hi",
-                              speechLocale: "en-US",
-                              audioDescription: "Ouvir Hi"
-                            }
-                          ],
-                          pairs: [
-                            {
-                              leftId: "audio-goodbye",
-                              rightId: "word-goodbye"
-                            },
-                            {
-                              leftId: "audio-hi",
-                              rightId: "word-hi"
-                            }
-                          ],
-                          behavior: {
-                            shuffleLeft: true,
-                            shuffleRight: true,
-                            connectionMode: "1x1",
-                            interactionMode: "smart"
-                          }
-                        }
-                      }
-                    }),
+            id: "EN2-M1-04",
+            skill: SKILLS.greetingFarewellAssociation,
+            difficulty: "easy",
+            statement: "Hello or Goodbye?",
+            instruction:
+              "Ouça e ligue cada expressão à cena correspondente.",
+            alternatives: [
+              sourceOption("goodbye", "GOODBYE"),
+              sourceOption("hello", "HELLO")
+            ],
+            answer: {
+              type: "single",
+              value: "goodbye"
+            },
+            correct:
+              "Muito bem! Você reconheceu HELLO e GOODBYE pelas situações.",
+            incorrect:
+              "Ouça novamente e observe: uma cena mostra encontro e a outra mostra despedida.",
+            mechanic: "matching",
+            allowImage: true,
+            metadata: {
+              sourceDifficulty: "Fácil",
+              sourceCorrectAnswer: "GOODBYE",
+              matching: {
+                mode: "audio-image",
+                leftTitle: "Ouça",
+                rightTitle: "Cenas",
+                assets: {
+                  greeting: VISUALS.greeting,
+                  goodbye: VISUALS.goodbye
+                },
+                leftItems: [
+                  {
+                    id: "audio-goodbye",
+                    spokenText: "Goodbye",
+                    speechLocale: "en-US",
+                    audioDescription: "Ouvir Goodbye"
+                  },
+                  {
+                    id: "audio-hello",
+                    spokenText: "Hello",
+                    speechLocale: "en-US",
+                    audioDescription: "Ouvir Hello"
+                  }
+                ],
+                rightItems: [
+                  {
+                    id: "picture-goodbye",
+                    imageAssetKey: "goodbye",
+                    alt: "Cena de despedida"
+                  },
+                  {
+                    id: "picture-hello",
+                    imageAssetKey: "greeting",
+                    alt: "Cena de cumprimento"
+                  }
+                ],
+                pairs: [
+                  {
+                    leftId: "audio-goodbye",
+                    rightId: "picture-goodbye"
+                  },
+                  {
+                    leftId: "audio-hello",
+                    rightId: "picture-hello"
+                  }
+                ],
+                behavior: {
+                  shuffleLeft: true,
+                  shuffleRight: true,
+                  connectionMode: "1x1",
+                  interactionMode: "smart"
+                }
+              }
+            }
+          }),
 
           baseQuestion({
-                      id: "EN2-M1-05",
-                      skill: SKILLS.greetings,
-                      difficulty: "easy",
-                      statement: "See you",
-                      instruction:
-                        "Ouça e ligue cada expressão à palavra correspondente.",
-                      alternatives: [
-                        sourceOption("hi", "HI"),
-                        sourceOption("see-you", "SEE YOU"),
-                        sourceOption("hello", "HELLO"),
-                        sourceOption("good-morning", "GOOD MORNING")
-                      ],
-                      answer: {
-                        type: "single",
-                        value: "see-you"
-                      },
-                      correct:
-                        "Isso! SEE YOU também pode ser usado na despedida.",
-                      incorrect:
-                        "Ouça novamente e compare SEE YOU e HELLO.",
-                      mechanic: "matching",
-                      metadata: {
-                        sourceDifficulty: "Fácil",
-                        sourceCorrectAnswer: "SEE YOU",
-                        matching: {
-                          mode: "audio-word",
-                          leftTitle: "Ouça",
-                          rightTitle: "Palavras",
-                          leftItems: [
-                            {
-                              id: "audio-see-you",
-                              spokenText: "See you",
-                              speechLocale: "en-US",
-                              audioDescription: "Ouvir See you"
-                            },
-                            {
-                              id: "audio-hello",
-                              spokenText: "Hello",
-                              speechLocale: "en-US",
-                              audioDescription: "Ouvir Hello"
-                            }
-                          ],
-                          rightItems: [
-                            {
-                              id: "word-see-you",
-                              label: "SEE YOU",
-                              spokenText: "See you",
-                              speechLocale: "en-US",
-                              audioDescription: "Ouvir See you"
-                            },
-                            {
-                              id: "word-hello",
-                              label: "HELLO",
-                              spokenText: "Hello",
-                              speechLocale: "en-US",
-                              audioDescription: "Ouvir Hello"
-                            }
-                          ],
-                          pairs: [
-                            {
-                              leftId: "audio-see-you",
-                              rightId: "word-see-you"
-                            },
-                            {
-                              leftId: "audio-hello",
-                              rightId: "word-hello"
-                            }
-                          ],
-                          behavior: {
-                            shuffleLeft: true,
-                            shuffleRight: true,
-                            connectionMode: "1x1",
-                            interactionMode: "smart"
-                          }
-                        }
-                      }
-                    }),
+            id: "EN2-M1-05",
+            skill: SKILLS.greetingFarewellAssociation,
+            difficulty: "easy",
+            statement: "See you or Good morning?",
+            instruction:
+              "Ouça e ligue cada expressão à cena correspondente.",
+            alternatives: [
+              sourceOption("see-you", "SEE YOU"),
+              sourceOption("good-morning", "GOOD MORNING")
+            ],
+            answer: {
+              type: "single",
+              value: "see-you"
+            },
+            correct:
+              "Isso! SEE YOU combina com despedida e GOOD MORNING com a cena da manhã.",
+            incorrect:
+              "Ouça novamente e use as imagens como pista para encontrar cada expressão.",
+            mechanic: "matching",
+            allowImage: true,
+            metadata: {
+              sourceDifficulty: "Fácil",
+              sourceCorrectAnswer: "SEE YOU",
+              matching: {
+                mode: "audio-image",
+                leftTitle: "Ouça",
+                rightTitle: "Cenas",
+                assets: {
+                  goodbye: VISUALS.goodbye,
+                  morning: VISUALS.morning
+                },
+                leftItems: [
+                  {
+                    id: "audio-see-you",
+                    spokenText: "See you",
+                    speechLocale: "en-US",
+                    audioDescription: "Ouvir See you"
+                  },
+                  {
+                    id: "audio-good-morning",
+                    spokenText: "Good morning",
+                    speechLocale: "en-US",
+                    audioDescription: "Ouvir Good morning"
+                  }
+                ],
+                rightItems: [
+                  {
+                    id: "picture-goodbye",
+                    imageAssetKey: "goodbye",
+                    alt: "Cena de despedida"
+                  },
+                  {
+                    id: "picture-morning",
+                    imageAssetKey: "morning",
+                    alt: "Cena de manhã"
+                  }
+                ],
+                pairs: [
+                  {
+                    leftId: "audio-see-you",
+                    rightId: "picture-goodbye"
+                  },
+                  {
+                    leftId: "audio-good-morning",
+                    rightId: "picture-morning"
+                  }
+                ],
+                behavior: {
+                  shuffleLeft: true,
+                  shuffleRight: true,
+                  connectionMode: "1x1",
+                  interactionMode: "smart"
+                }
+              }
+            }
+          }),
 
           baseQuestion({
-                      id: "EN2-M1-13",
-                      skill: SKILLS.farewell,
-                      difficulty: "medium",
-                      statement: "Greeting or Farewell?",
-                      instruction:
-                        "Ouça e ligue cada expressão ao uso correto.",
-                      alternatives: [
-                        sourceOption("hello", "HELLO"),
-                        sourceOption("see-you", "SEE YOU")
-                      ],
-                      answer: {
-                        type: "single",
-                        value: "see-you"
-                      },
-                      correct:
-                        "Muito bem! HELLO é um cumprimento e SEE YOU é uma despedida.",
-                      incorrect:
-                        "Ouça as expressões novamente e pense: estamos chegando ou nos despedindo?",
-                      mechanic: "matching",
-                      metadata: {
-                        title: "HELLO OR GOODBYE?",
-                        sourceDifficulty: "Média",
-                        sourceCorrectAnswer: "SEE YOU",
-                        matching: {
-                          mode: "audio-word",
-                          leftTitle: "Ouça",
-                          rightTitle: "Uso",
-                          leftItems: [
-                            {
-                              id: "audio-hello",
-                              spokenText: "Hello",
-                              speechLocale: "en-US",
-                              audioDescription: "Ouvir Hello"
-                            },
-                            {
-                              id: "audio-see-you",
-                              spokenText: "See you",
-                              speechLocale: "en-US",
-                              audioDescription: "Ouvir See you"
-                            }
-                          ],
-                          rightItems: [
-                            {
-                              id: "use-greeting",
-                              label: "CUMPRIMENTO"
-                            },
-                            {
-                              id: "use-farewell",
-                              label: "DESPEDIDA"
-                            }
-                          ],
-                          pairs: [
-                            {
-                              leftId: "audio-hello",
-                              rightId: "use-greeting"
-                            },
-                            {
-                              leftId: "audio-see-you",
-                              rightId: "use-farewell"
-                            }
-                          ],
-                          behavior: {
-                            shuffleLeft: true,
-                            shuffleRight: true,
-                            connectionMode: "1x1",
-                            interactionMode: "smart"
-                          }
-                        }
-                      }
-                    })
+            id: "EN2-M1-13",
+            skill: SKILLS.greetingFarewellAssociation,
+            difficulty: "medium",
+            statement: "Good afternoon or Goodbye?",
+            instruction:
+              "Ouça e ligue cada expressão à cena correspondente.",
+            alternatives: [
+              sourceOption("good-afternoon", "GOOD AFTERNOON"),
+              sourceOption("goodbye", "GOODBYE")
+            ],
+            answer: {
+              type: "single",
+              value: "good-afternoon"
+            },
+            correct:
+              "Excelente! Você usou o som e a cena para distinguir GOOD AFTERNOON de GOODBYE.",
+            incorrect:
+              "Ouça outra vez e observe qual imagem representa a tarde e qual representa uma despedida.",
+            mechanic: "matching",
+            allowImage: true,
+            metadata: {
+              title: "GREETINGS & GOODBYES",
+              sourceDifficulty: "Média",
+              sourceCorrectAnswer: "GOOD AFTERNOON",
+              matching: {
+                mode: "audio-image",
+                leftTitle: "Ouça",
+                rightTitle: "Cenas",
+                assets: {
+                  afternoon: VISUALS.afternoon,
+                  goodbye: VISUALS.goodbye
+                },
+                leftItems: [
+                  {
+                    id: "audio-good-afternoon",
+                    spokenText: "Good afternoon",
+                    speechLocale: "en-US",
+                    audioDescription: "Ouvir Good afternoon"
+                  },
+                  {
+                    id: "audio-goodbye",
+                    spokenText: "Goodbye",
+                    speechLocale: "en-US",
+                    audioDescription: "Ouvir Goodbye"
+                  }
+                ],
+                rightItems: [
+                  {
+                    id: "picture-afternoon",
+                    imageAssetKey: "afternoon",
+                    alt: "Cena de tarde"
+                  },
+                  {
+                    id: "picture-goodbye",
+                    imageAssetKey: "goodbye",
+                    alt: "Cena de despedida"
+                  }
+                ],
+                pairs: [
+                  {
+                    leftId: "audio-good-afternoon",
+                    rightId: "picture-afternoon"
+                  },
+                  {
+                    leftId: "audio-goodbye",
+                    rightId: "picture-goodbye"
+                  }
+                ],
+                behavior: {
+                  shuffleLeft: true,
+                  shuffleRight: true,
+                  connectionMode: "1x1",
+                  interactionMode: "smart"
+                }
+              }
+            }
+          })
         ]
       },
 
@@ -1217,7 +1174,7 @@
           "en2-m1-step-04-listen-for-the-letter",
 
         title:
-          "Listen for the Letter",
+          "Listen & Find the Letter",
 
         mechanic:
           "target-shooter",
@@ -1256,10 +1213,10 @@
                         targetShooter: {
                           audioText: "M",
                           mode: "audio-to-word",
-                          shape: "crystal",
+                          shape: "balloon",
                           correctIds: ["letter-m"],
                           difficulty: {
-                            speed: 0.42,
+                            speed: 0.36,
                             objectCount: 3,
                             spawnIntervalMs: 190,
                             requiredCorrect: 1,
@@ -1291,6 +1248,7 @@
       /* =====================================================
          ETAPA 5 — LISTEN & MATCH
          EN2-M1-10
+         Consolidação auditiva das letras já trabalhadas.
          ===================================================== */
       {
         id:
@@ -1307,71 +1265,72 @@
 
         questions: [
           baseQuestion({
-                      id: "EN2-M1-10",
-                      skill: SKILLS.alphabetListening,
-                      difficulty: "easy",
-                      statement: "Listen and Match",
-                      instruction:
-                        "Ouça cada card e arraste-o para a letra correspondente.",
-                      alternatives: [
-                        audioOnlyOption("a", "A"),
-                        audioOnlyOption("s", "S"),
-                        audioOnlyOption("c", "C")
-                      ],
-                      answer: {
-                        type: "pairs",
-                        value: [
-                          {
-                            source: "a",
-                            target: "letter-a"
-                          },
-                          {
-                            source: "s",
-                            target: "letter-s"
-                          },
-                          {
-                            source: "c",
-                            target: "letter-c"
-                          }
-                        ]
-                      },
-                      correct:
-                        "Excelente! Você relacionou os sons de A, S e C às letras corretas.",
-                      incorrect:
-                        "Toque nos cards para ouvir novamente e arraste cada som para a letra correspondente.",
-                      mechanic: "drag-drop",
-                      metadata: {
-                        title: "LISTEN & MATCH",
-                        sourceDifficulty: "Fácil",
-                        sourceCorrectAnswer: "S",
-                        targets: [
-                          {
-                            id: "letter-a",
-                            label: "A",
-                            capacity: 1
-                          },
-                          {
-                            id: "letter-s",
-                            label: "S",
-                            capacity: 1
-                          },
-                          {
-                            id: "letter-c",
-                            label: "C",
-                            capacity: 1
-                          }
-                        ],
-                        layout: "grid",
-                        shuffleItems: true,
-                        shuffleTargets: false
-                      }
-                    })
+            id: "EN2-M1-10",
+            skill: SKILLS.alphabetListening,
+            difficulty: "easy",
+            statement: "A, B, C",
+            instruction:
+              "Ouça cada card e arraste-o para a letra correspondente.",
+            alternatives: [
+              audioOnlyOption("sound-a", "A"),
+              audioOnlyOption("sound-b", "B"),
+              audioOnlyOption("sound-c", "C")
+            ],
+            answer: {
+              type: "pairs",
+              value: [
+                {
+                  source: "sound-a",
+                  target: "letter-a"
+                },
+                {
+                  source: "sound-b",
+                  target: "letter-b"
+                },
+                {
+                  source: "sound-c",
+                  target: "letter-c"
+                }
+              ]
+            },
+            correct:
+              "Excelente! Você relacionou os sons de A, B e C às letras corretas.",
+            incorrect:
+              "Toque nos cards para ouvir novamente e compare com A, B e C.",
+            mechanic: "drag-drop",
+            metadata: {
+              title: "LISTEN & MATCH",
+              sourceDifficulty: "Fácil",
+              sourceCorrectAnswer: "A-B-C",
+              targets: [
+                {
+                  id: "letter-a",
+                  label: "A",
+                  capacity: 1
+                },
+                {
+                  id: "letter-b",
+                  label: "B",
+                  capacity: 1
+                },
+                {
+                  id: "letter-c",
+                  label: "C",
+                  capacity: 1
+                }
+              ],
+              layout: "grid",
+              shuffleItems: true,
+              shuffleTargets: false
+            }
+          })
         ]
       },
 
       /* =====================================================
-         ETAPA 6 — HOW DO YOU SPELL
+         ETAPA 6 — HOW DO YOU SPELL?
          EN2-M1-11 / EN2-M1-14
+         Mesmo andaime do 1º ano: imagem + uma lacuna + 2 opções.
          ===================================================== */
       {
         id:
@@ -1388,211 +1347,190 @@
 
         questions: [
           baseQuestion({
-                      id: "EN2-M1-11",
-                      skill: SKILLS.spellingQuestion,
-                      difficulty: "medium",
-                      statement: "How do you spell...?",
-                      instruction:
-                        "Complete a pergunta usada para pedir uma soletração.",
-                      alternatives: [
-                        sourceOption("spell", "SPELL"),
-                        sourceOption("say", "SAY"),
-                        sourceOption("see", "SEE"),
-                        sourceOption("like", "LIKE")
-                      ],
-                      answer: {
-                        type: "single",
-                        value: "spell"
-                      },
-                      correct:
-                        "Muito bem! HOW DO YOU SPELL...? é a pergunta usada para pedir uma soletração.",
-                      incorrect:
-                        "Ouça a pergunta novamente e procure a palavra SPELL.",
-                      mechanic: "smart-sentence",
-                      metadata: {
-                        title: "HOW DO YOU SPELL...?",
-                        sourceDifficulty: "Média",
-                        sourceCorrectAnswer: "HOW DO YOU SPELL...?",
-                        smartSentence: {
-                          prefix: "HOW DO YOU",
-                          suffix: "...?",
-                          answer: "SPELL",
-                          options: [
-                            "SPELL",
-                            "SAY",
-                            "SEE",
-                            "LIKE"
-                          ],
-                          instruction:
-                            "Complete a pergunta usada para pedir uma soletração.",
-                          instructionSpoken:
-                            "Complete a pergunta usada para pedir uma soletração."
-                        }
-                      }
-                    }),
+            id: "EN2-M1-11",
+            skill: SKILLS.spellingQuestion,
+            difficulty: "medium",
+            statement: "How do you spell hello?",
+            instruction:
+              "Observe a imagem e complete a pergunta.",
+            alternatives: [
+              sourceOption("spell", "SPELL"),
+              sourceOption("say", "SAY")
+            ],
+            answer: {
+              type: "single",
+              value: "spell"
+            },
+            correct:
+              "Muito bem! HOW DO YOU SPELL HELLO? pergunta como HELLO é soletrado.",
+            incorrect:
+              "Observe a cena, ouça novamente e escolha entre SPELL e SAY.",
+            mechanic: "smart-sentence",
+            allowImage: true,
+            metadata: {
+              title: "HOW DO YOU SPELL HELLO?",
+              sourceDifficulty: "Média",
+              sourceCorrectAnswer: "SPELL",
+              smartSentence: {
+                prefix: "HOW DO YOU",
+                suffix: "HELLO?",
+                answer: "SPELL",
+                options: [
+                  "SPELL",
+                  "SAY"
+                ],
+                imageKey: "hello-context",
+                imageSrc: VISUALS.greeting,
+                imageAlt: "Cena de pessoas se cumprimentando",
+                instruction:
+                  "Observe a imagem e complete a pergunta.",
+                instructionSpoken:
+                  "Observe a imagem e complete a pergunta."
+              }
+            }
+          }),
 
           baseQuestion({
-                      id: "EN2-M1-14",
-                      skill: SKILLS.presentationAlphabet,
-                      difficulty: "medium",
-                      statement:
-                        "How do you spell your name?",
-                      instruction:
-                        "Complete a pergunta usada para pedir a soletração do nome.",
-                      alternatives: [
-                        sourceOption("good-night", "GOOD NIGHT!"),
-                        sourceOption("how-many", "HOW MANY?"),
-                        sourceOption(
-                          "spell-name",
-                          "HOW DO YOU SPELL YOUR NAME?"
-                        ),
-                        sourceOption("where-is-my", "WHERE IS MY...?")
-                      ],
-                      answer: {
-                        type: "single",
-                        value: "spell-name"
-                      },
-                      correct:
-                        "Excelente! HOW DO YOU SPELL YOUR NAME? pede a soletração do nome.",
-                      incorrect:
-                        "Ouça as opções e complete a pergunta com SPELL.",
-                      mechanic: "smart-sentence",
-                      metadata: {
-                        sourceDifficulty: "Média",
-                        sourceCorrectAnswer:
-                          "HOW DO YOU SPELL YOUR NAME?",
-                        smartSentence: {
-                          prefix: "HOW DO YOU",
-                          suffix: "YOUR NAME?",
-                          answer: "SPELL",
-                          options: [
-                            "SPELL",
-                            "SEE",
-                            "GOOD",
-                            "MORNING"
-                          ],
-                          instruction:
-                            "Complete a pergunta usada para pedir a soletração do nome.",
-                          instructionSpoken:
-                            "Complete a pergunta usada para pedir a soletração do nome."
-                        }
-                      }
-                    })
+            id: "EN2-M1-14",
+            skill: SKILLS.spellingQuestion,
+            difficulty: "medium",
+            statement:
+              "How do you spell your name?",
+            instruction:
+              "Observe a imagem e complete a pergunta sobre o nome.",
+            alternatives: [
+              sourceOption("spell", "SPELL"),
+              sourceOption("say", "SAY")
+            ],
+            answer: {
+              type: "single",
+              value: "spell"
+            },
+            correct:
+              "Excelente! HOW DO YOU SPELL YOUR NAME? pede a soletração do nome.",
+            incorrect:
+              "Use a imagem como pista e escolha entre SPELL e SAY.",
+            mechanic: "smart-sentence",
+            allowImage: true,
+            metadata: {
+              title: "HOW DO YOU SPELL YOUR NAME?",
+              sourceDifficulty: "Média",
+              sourceCorrectAnswer:
+                "SPELL",
+              smartSentence: {
+                prefix: "HOW DO YOU",
+                suffix: "YOUR NAME?",
+                answer: "SPELL",
+                options: [
+                  "SPELL",
+                  "SAY"
+                ],
+                imageKey: "name-context",
+                imageSrc: VISUALS.selfintro,
+                imageAlt: "Criança se apresentando pelo nome",
+                instruction:
+                  "Observe a imagem e complete a pergunta sobre o nome.",
+                instructionSpoken:
+                  "Observe a imagem e complete a pergunta sobre o nome."
+              }
+            }
+          })
         ]
       },
 
       /* =====================================================
-         ETAPA 7 — BUILD & ORDER
+         ETAPA 7 — BUILD THE PHRASE
          EN2-M1-12 / EN2-M1-15
+         Síntese: organizar palavras de expressões inglesas já conhecidas.
          ===================================================== */
       {
         id:
-          "en2-m1-step-07-build-order",
+          "en2-m1-step-07-build-the-phrase",
 
         title:
-          "Build & Order",
+          "Build the Phrase",
 
         mechanic:
           "drag-drop",
 
         skill:
-          SKILLS.spellingSequence,
+          SKILLS.phraseBuilding,
 
         questions: [
           baseQuestion({
-                      id: "EN2-M1-12",
-                      skill: SKILLS.spellingSequence,
-                      difficulty: "medium",
-                      statement: "ANA",
-                      instruction:
-                        "Arraste as letras para formar o nome ANA.",
-                      alternatives: [
-                        audioOption("a-first", "A", "A"),
-                        audioOption("n", "N", "N"),
-                        audioOption("a-last", "A", "A")
-                      ],
-                      answer: {
-                        type: "sequence",
-                        value: [
-                          "a-first",
-                          "n",
-                          "a-last"
-                        ]
-                      },
-                      correct:
-                        "Excelente! A-N-A forma o nome ANA.",
-                      incorrect:
-                        "Ouça as letras e organize novamente: A, N, A.",
-                      mechanic: "drag-drop",
-                      metadata: {
-                        sourceDifficulty: "Média",
-                        sourceCorrectAnswer: "A-N-A",
-                        sourceAlternatives: [
-                          "A-N-A",
-                          "A-M-A",
-                          "E-N-A",
-                          "A-N-E"
-                        ],
-                        sequenceLabels: [
-                          "1",
-                          "2",
-                          "3"
-                        ],
-                        layout: "sequence",
-                        shuffleItems: true
-                      }
-                    }),
+            id: "EN2-M1-12",
+            skill: SKILLS.phraseBuilding,
+            difficulty: "medium",
+            statement: "GOOD MORNING",
+            instruction:
+              "Organize as palavras para formar GOOD MORNING.",
+            alternatives: [
+              audioOption("word-good", "GOOD", "Good"),
+              audioOption("word-morning", "MORNING", "Morning")
+            ],
+            answer: {
+              type: "sequence",
+              value: [
+                "word-good",
+                "word-morning"
+              ]
+            },
+            correct:
+              "Muito bem! GOOD + MORNING forma GOOD MORNING.",
+            incorrect:
+              "Toque nas palavras para ouvir e organize novamente a expressão GOOD MORNING.",
+            mechanic: "drag-drop",
+            metadata: {
+              sourceDifficulty: "Média",
+              sourceCorrectAnswer: "GOOD MORNING",
+              sequenceLabels: [
+                "1",
+                "2"
+              ],
+              layout: "sequence",
+              shuffleItems: true
+            }
+          }),
 
           baseQuestion({
-                      id: "EN2-M1-15",
-                      skill: SKILLS.alphabetSequence,
-                      difficulty: "hard",
-                      statement:
-                        "A - B - C - D",
-                      instruction:
-                        "Arraste as letras para formar a sequência alfabética correta.",
-                      alternatives: [
-                        audioOption("seq-a", "A", "A"),
-                        audioOption("seq-b", "B", "B"),
-                        audioOption("seq-c", "C", "C"),
-                        audioOption("seq-d", "D", "D")
-                      ],
-                      answer: {
-                        type: "sequence",
-                        value: [
-                          "seq-a",
-                          "seq-b",
-                          "seq-c",
-                          "seq-d"
-                        ]
-                      },
-                      correct:
-                        "Parabéns! Você organizou A-B-C-D na ordem correta.",
-                      incorrect:
-                        "Ouça as letras e organize novamente na ordem A, B, C, D.",
-                      mechanic: "drag-drop",
-                      metadata: {
-                        sourceDifficulty: "Difícil",
-                        sourceCorrectAnswer:
-                          "A - B - C - D",
-                        sourceAlternatives: [
-                          "A - C - B - D",
-                          "B - A - C - D",
-                          "A - B - D - C",
-                          "A - B - C - D"
-                        ],
-                        sequenceLabels: [
-                          "1",
-                          "2",
-                          "3",
-                          "4"
-                        ],
-                        layout: "sequence",
-                        shuffleItems: true
-                      }
-                    })
+            id: "EN2-M1-15",
+            skill: SKILLS.phraseBuilding,
+            difficulty: "medium",
+            statement:
+              "SEE YOU",
+            instruction:
+              "Organize as palavras para formar SEE YOU.",
+            alternatives: [
+              audioOption("word-see", "SEE", "See"),
+              audioOption("word-you", "YOU", "You")
+            ],
+            answer: {
+              type: "sequence",
+              value: [
+                "word-see",
+                "word-you"
+              ]
+            },
+            correct:
+              "Parabéns! SEE + YOU forma SEE YOU, uma expressão usada na despedida.",
+            incorrect:
+              "Toque nas palavras para ouvir e organize novamente: SEE YOU.",
+            mechanic: "drag-drop",
+            metadata: {
+              sourceDifficulty: "Média",
+              sourceCorrectAnswer:
+                "SEE YOU",
+              sequenceLabels: [
+                "1",
+                "2"
+              ],
+              layout: "sequence",
+              shuffleItems: true
+            }
+          })
         ]
       }
+
     ]
   };
 
