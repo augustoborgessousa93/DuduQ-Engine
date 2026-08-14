@@ -1,10 +1,14 @@
 /* =========================================================
    DUDUQ CORE — HOST
    Orquestrador central das mecânicas e módulos DuduQ.
-   Versão 1.6.7
+   Versão 1.6.8
+
+   NOVIDADES 1.6.8
+   - sincroniza World Fusion 1.4.10 / cache 150 após reparo de publicação
+   - não altera progresso, mecânicas, áudio ou transições
 
    NOVIDADES 1.6.7
-   - sincroniza fallback do World Fusion com JS 1.4.9 / cache 149
+   - sincroniza fallback do World Fusion com JS 1.4.10 / cache 150
    - não altera lógica de progresso, conclusão ou mecânicas
 
    NOVIDADES 1.6.6
@@ -97,13 +101,14 @@
     document.currentScript?.src ||
     new URL("./duduq-host.js", window.location.href).href;
 
-  const VERSION = "1.6.7";
+  const VERSION = "1.6.8";
 
   if (
     window.DuduQ &&
     window.DuduQ.version === VERSION
   ) {
     return;
+
   }
 
   const mechanics = new Map();
@@ -133,7 +138,6 @@
       function (iframe) {
         try {
           iframe.contentWindow?.postMessage(message, "*");
-
         } catch (_) {}
       }
     );
@@ -215,6 +219,7 @@
 
 
   /* =======================================================
+
      WORLD FUSION
 
      Qualquer página que carregue o Host recebe a camada
@@ -242,7 +247,7 @@
       const script = document.createElement("script");
       script.id = "duduq-world-fusion-core-script";
       script.src = new URL(
-        "duduq-world-fusion.js?v=149",
+        "duduq-world-fusion.js?v=150",
         coreBase
       ).href;
       script.async = true;
@@ -269,7 +274,6 @@
     if (!source) {
       return Promise.resolve(false);
     }
-
 
     if (
       source === completionMascotSource &&
@@ -326,6 +330,7 @@
     );
 
     return completionMascotReadyPromise;
+
   }
 
   primeCompletionMascot();
@@ -405,7 +410,6 @@
   function clearContainer(container) {
     if (!container) {
       return;
-
     }
 
     while (container.firstChild) {
@@ -437,6 +441,7 @@
 
   function dispatch(name, detail = {}) {
     try {
+
       window.dispatchEvent(
         new CustomEvent(
           name,
@@ -542,12 +547,12 @@
     const transition =
       getTransition();
 
-
     if (
       !transition ||
       typeof transition.coverImmediate !==
         "function"
     ) {
+
       return false;
     }
 
@@ -658,6 +663,7 @@
       !session ||
       session !== activeSession
     ) {
+
       return false;
     }
 
@@ -677,7 +683,6 @@
       : null;
 
     if (!iframe) {
-
       return true;
     }
 
@@ -769,6 +774,7 @@
         }
 
         function handleLoad() {
+
           /*
            * Apenas um respiro curtíssimo para o primeiro paint.
            * A troca não deve parecer uma tela de loading.
@@ -813,7 +819,6 @@
       !session ||
       session !== activeSession ||
       typeof callback !== "function"
-
     ) {
       return Promise.resolve(false);
     }
@@ -880,6 +885,7 @@
       typeof definition.mount !== "function"
     ) {
       throw new Error(
+
         `[DuduQ Host] A mecânica "${id}" precisa fornecer uma função mount().`
       );
     }
@@ -1084,7 +1090,6 @@
         totalSteps - 1
       );
     } else {
-
       currentStepIndex = 0;
     }
 
@@ -1101,6 +1106,7 @@
         totalSteps
       );
     } else {
+
       completedSteps = clamp(
         currentStepIndex,
         0,
@@ -1211,6 +1217,7 @@
       "div",
       {
         width: "min(720px, 92vw)",
+
         margin: "48px auto",
         boxSizing: "border-box",
         padding: "28px",
@@ -1220,7 +1227,6 @@
         fontFamily: "system-ui, sans-serif",
         boxShadow: "0 18px 44px rgba(25,61,96,0.18)",
         textAlign: "center"
-
       }
     );
 
@@ -1323,6 +1329,7 @@
     if (mechanic.validate) {
       let valid = false;
 
+
       try {
         valid = mechanic.validate(
           step.payload,
@@ -1356,7 +1363,6 @@
     dispatch(
       "duduq:step-start",
       {
-
         engineVersion: VERSION,
         moduleId: session.module.id,
         stepId: step.id,
@@ -1544,6 +1550,7 @@
           return true;
         }
 
+
         renderCurrentStep(session);
 
         await waitForMountedView(
@@ -1654,6 +1661,7 @@
       );
     }
 
+
     if (module.title) {
       return (
         `${module.title} concluído com sucesso.`
@@ -1762,8 +1770,8 @@
         margin: "0 0 18px",
         color: "#52677e",
         fontSize: "19px",
-
         fontWeight: "700",
+
         lineHeight: "1.4"
       }
     );
@@ -1898,7 +1906,6 @@
 
         renderCompletionFallback(
           session,
-
           progress
         );
       }
@@ -1985,6 +1992,7 @@
   /* =======================================================
      REINICIAR
      Conclusão -> primeira mecânica também usa transição.
+
      ======================================================= */
 
   function restart() {
@@ -2034,7 +2042,6 @@
             moduleId: session.module.id,
             year: session.module.year,
             subject: session.module.subject,
-
             module: session.module.module,
             progress
           }
@@ -2096,6 +2103,7 @@
 
   function getSession() {
     if (!activeSession) {
+
       return null;
     }
 
