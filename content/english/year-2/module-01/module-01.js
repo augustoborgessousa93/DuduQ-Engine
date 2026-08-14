@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 2 — MODULE 01
    Greetings & The Alphabet
-   Versão 1.2.0 — REVISÃO PEDAGÓGICA E UX
+   Versão 1.2.1 — CORREÇÃO DO MATCHING EN2-M1-13
 
    FONTES EDITORIAIS
    - DUDUQ Conteúdo Oficial — Língua Inglesa v1.0
@@ -21,7 +21,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.2.0";
+  const VERSION = "1.2.1";
 
   window.DUDUQ_CONTENT =
     window.DUDUQ_CONTENT || {};
@@ -1021,7 +1021,7 @@
                       difficulty: "medium",
                       statement: "Greeting or Farewell?",
                       instruction:
-                        "Ligue cada expressão ao uso correto.",
+                        "Ouça e ligue cada expressão ao uso correto.",
                       alternatives: [
                         sourceOption("hello", "HELLO"),
                         sourceOption("see-you", "SEE YOU")
@@ -1040,20 +1040,18 @@
                         sourceDifficulty: "Média",
                         sourceCorrectAnswer: "SEE YOU",
                         matching: {
-                          mode: "word-word",
-                          leftTitle: "Expressões",
+                          mode: "audio-word",
+                          leftTitle: "Ouça",
                           rightTitle: "Uso",
                           leftItems: [
                             {
-                              id: "word-hello",
-                              label: "HELLO",
+                              id: "audio-hello",
                               spokenText: "Hello",
                               speechLocale: "en-US",
                               audioDescription: "Ouvir Hello"
                             },
                             {
-                              id: "word-see-you",
-                              label: "SEE YOU",
+                              id: "audio-see-you",
                               spokenText: "See you",
                               speechLocale: "en-US",
                               audioDescription: "Ouvir See you"
@@ -1071,11 +1069,11 @@
                           ],
                           pairs: [
                             {
-                              leftId: "word-hello",
+                              leftId: "audio-hello",
                               rightId: "use-greeting"
                             },
                             {
-                              leftId: "word-see-you",
+                              leftId: "audio-see-you",
                               rightId: "use-farewell"
                             }
                           ],
