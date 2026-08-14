@@ -1,24 +1,24 @@
 /* =========================================================
    DUDUQ CORE — TRANSITION
    Ponte visual opaca entre telas e mecânicas.
-   Versão 1.6.6
+   Versão 1.6.7
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.6.6";
+  const VERSION = "1.6.7";
   if (window.DuduQTransition?.version === VERSION) return;
 
   const DEFAULTS = Object.freeze({
     coverDurationMs: 145,
     revealDurationMs: 170,
     paintFrames: 1,
-    stablePaintFrames: 1,
+    stablePaintFrames: 2,
     bridgeHoldMs: 0,
     revealHoldFraction: 0,
-    visualReadyTimeoutMs: 900,
-    visualReadyPollMs: 28,
+    visualReadyTimeoutMs: 1400,
+    visualReadyPollMs: 24,
     targetSelector: "#root",
     soundEnabled: false,
     soundName: "transition-swoosh",
@@ -108,7 +108,6 @@
         : clamp(
             number(
               options.bridgeHoldMs,
-
               DEFAULTS.bridgeHoldMs
             ),
             0,
@@ -134,6 +133,7 @@
         300,
         3000
       ),
+
 
       visualReadyPollMs: clamp(
         number(
@@ -219,7 +219,6 @@
       index += 1
     ) {
       await nextFrame();
-
     }
   }
 
@@ -270,6 +269,7 @@
     overlay.setAttribute(
       "aria-hidden",
       "true"
+
     );
 
     overlay.innerHTML =
@@ -330,7 +330,6 @@
 
       position =
         computed.backgroundPosition ||
-
         position;
 
       size =
@@ -406,6 +405,7 @@
           minGapMs:
             config.soundMinGapMs
         }
+
       );
     } catch (_) {}
   }
@@ -535,11 +535,13 @@
     ".duduq-udd-root",
     ".duduq-mq-root",
     ".duduq-matching-root",
+    ".duduq-ss-root",
     ".duduq-fc-root",
     ".duduq-cf-root",
     ".duduq-ws-root",
     ".duduq-ts-root"
   ].join(", ");
+
 
   function isWorldFusionReady(
     frameDocument
@@ -551,7 +553,6 @@
     /*
      * A ponte só exige World Fusion quando o iframe já
      * contém uma mecânica DuduQ. Isso evita transformar
-
      * a checagem em uma dependência genérica para qualquer iframe.
      */
     const mechanicRoot =
@@ -604,6 +605,51 @@
     }
   }
 
+  function isKnownDuduQRuntimeSource(source) {
+    const normalized =
+      String(source || "")
+        .split("?")[0]
+        .split("#")[0]
+        .toLowerCase();
+
+    return /(?:^|\/)duduq_[a-z0-9_\-]+\.html$/.test(
+      normalized
+    );
+  }
+
+  function isMechanicRootPainted(
+    frameDocument,
+    mechanicRoot
+  ) {
+    if (!mechanicRoot) return false;
+
+    try {
+      const view =
+        frameDocument.defaultView;
+
+      const style =
+        view?.getComputedStyle
+          ?.(mechanicRoot);
+
+      const rect =
+        mechanicRoot.getBoundingClientRect();
+
+      if (
+        style?.display === "none" ||
+        style?.visibility === "hidden" ||
+        Number(style?.opacity ?? 1) <= .01 ||
+        rect.width < 4 ||
+        rect.height < 4
+      ) {
+        return false;
+      }
+
+      return true;
+    } catch (_) {
+      return Boolean(mechanicRoot);
+    }
+  }
+
   function isIframeVisuallyReady(
     iframe
   ) {
@@ -631,6 +677,7 @@
 
       if (!frameDocument) {
         return false;
+
       }
 
       if (
@@ -662,13 +709,37 @@
           style?.visibility !==
             "hidden" &&
           Number(
-
             style?.opacity ?? 1
           ) > 0.01;
 
         if (visible) {
           return false;
         }
+      }
+
+      const mechanicRoot =
+        frameDocument.querySelector(
+          DUDUQ_MECHANIC_SELECTOR
+        );
+
+      const knownRuntime =
+        isKnownDuduQRuntimeSource(
+          source
+        );
+
+      /*
+       * Para um runtime DuduQ conhecido, scripts no <body> não
+       * significam tela pronta. Só liberamos o reveal depois de
+       * a raiz da mecânica existir e possuir geometria real.
+       */
+      if (
+        knownRuntime &&
+        !isMechanicRootPainted(
+          frameDocument,
+          mechanicRoot
+        )
+      ) {
+        return false;
       }
 
       if (
@@ -679,22 +750,24 @@
         return false;
       }
 
+      if (mechanicRoot) {
+        return isMechanicRootPainted(
+          frameDocument,
+          mechanicRoot
+        );
+      }
+
+      /*
+       * Fallback somente para iframes que não são runtimes DuduQ.
+       * Evita o antigo falso positivo body.children.length.
+       */
       const runtimeRoot =
         frameDocument
           .getElementById("root");
 
       return Boolean(
-        (
-          runtimeRoot &&
-          runtimeRoot
-            .childElementCount > 0
-        ) ||
-        (
-          boot &&
-          boot.hidden
-        ) ||
-        frameDocument.body
-          ?.children.length
+        runtimeRoot &&
+        runtimeRoot.childElementCount > 0
       );
     } catch (_) {
       return true;
@@ -740,6 +813,7 @@
           config.stablePaintFrames
         );
         return true;
+
       }
 
       await wait(
@@ -756,7 +830,16 @@
       const frameDocument =
         iframe.contentDocument;
 
+      const declaredSource =
+        String(
+          iframe.getAttribute("src") ||
+          ""
+        );
+
       const isDuduQFrame =
+        isKnownDuduQRuntimeSource(
+          declaredSource
+        ) ||
         Boolean(
           frameDocument?.querySelector(
             DUDUQ_MECHANIC_SELECTOR
@@ -770,10 +853,9 @@
         )
       ) {
         const graceDeadline =
-          performance.now() + 500;
+          performance.now() + 900;
 
         while (
-
           performance.now() <
           graceDeadline
         ) {
@@ -867,6 +949,7 @@
 
     return true;
   }
+
 
 
   async function cover(
@@ -994,7 +1077,6 @@
       operationId
     ) {
       return false;
-
     }
 
     setOverlayState("");
@@ -1003,6 +1085,7 @@
       "hidden";
 
     overlay.style.pointerEvents =
+
       "none";
 
     overlay.style.opacity = "0";
@@ -1138,6 +1221,7 @@
 
       isCovered:
         () =>
+
           state === "covered",
 
       ensureRoot,
