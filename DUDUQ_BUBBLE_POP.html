@@ -9502,7 +9502,7 @@ var DuduQBubblePop = (() => {
   .duduq-bp-audio-button:focus-visible { outline: 4px solid var(--dq-focus, #111827); outline-offset: 4px; }
 
   .duduq-bp-board {
-    width: min(940px, 100%);
+    width: min(1120px, 100%);
     min-width: 0;
     display: flex;
     flex-direction: column;
@@ -9761,8 +9761,8 @@ var DuduQBubblePop = (() => {
   .duduq-bp-media {
     position: relative;
     z-index: 1;
-    width: clamp(48px, 7vw, 66px);
-    height: clamp(48px, 7vw, 66px);
+    width: clamp(62px, 8vw, 84px);
+    height: clamp(62px, 8vw, 84px);
     display: block;
     object-fit: contain;
     object-position: center;
@@ -9974,7 +9974,7 @@ var DuduQBubblePop = (() => {
 
   .duduq-bp-bubble-shell--dynamic {
     position: absolute;
-    top: 100%;
+    top: calc(100% - var(--bp-stream-size, 132px) - 18px);
     left: var(--bp-stream-x, 50%);
     width: min(var(--bp-stream-size, 132px), 22vw);
     max-width: none;
@@ -10021,21 +10021,21 @@ var DuduQBubblePop = (() => {
 
   @keyframes duduq-bp-stream-rise {
     0% {
-      opacity: 0;
-      transform: translate3d(-50%, 24px, 0) scale(.82) rotate(-2deg);
+      opacity: .22;
+      transform: translate3d(-50%, 0, 0) scale(.90) rotate(-2deg);
     }
-    7% { opacity: 1; }
+    4% { opacity: 1; }
     30% {
-      transform: translate3d(calc(-50% + var(--bp-drift, 18px)), -175px, 0) scale(.96) rotate(1deg);
+      transform: translate3d(calc(-50% + var(--bp-drift, 18px)), -20vh, 0) scale(.97) rotate(1deg);
     }
     62% {
       opacity: 1;
-      transform: translate3d(calc(-50% + var(--bp-drift-back, -12px)), -390px, 0) scale(1.02) rotate(-1deg);
+      transform: translate3d(calc(-50% + var(--bp-drift-back, -12px)), -45vh, 0) scale(1.02) rotate(-1deg);
     }
     93% { opacity: 1; }
     100% {
       opacity: 0;
-      transform: translate3d(calc(-50% + var(--bp-drift-end, 8px)), -640px, 0) scale(.92) rotate(2deg);
+      transform: translate3d(calc(-50% + var(--bp-drift-end, 8px)), -72vh, 0) scale(.94) rotate(2deg);
     }
   }
 
@@ -10447,7 +10447,14 @@ var DuduQBubblePop = (() => {
     book: emojiTile("📘", "#EDF4FF"),
     moon: emojiTile("🌙", "#EEF0FF"),
     star: emojiTile("⭐", "#FFF7CF"),
-    bird: emojiTile("🐦", "#EAF8FF")
+    bird: emojiTile("🐦", "#EAF8FF"),
+    letterA: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Letra%20A.png",
+    letterB: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Letra%20B.png",
+    letterC: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Letra%20C.png",
+    letterD: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Letra%20D.png",
+    letterE: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Letra%20E.png",
+    letterM: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Letra%20M.png",
+    letterS: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Letra%20S.png"
   };
 
   var BUBBLE_POP_REGISTRY = {
