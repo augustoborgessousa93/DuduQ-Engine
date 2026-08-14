@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 2 — MODULE 01
    Greetings & The Alphabet
-   Versão 1.0.0 — PRIMEIRA VERSÃO FUNCIONAL
+   Versão 1.1.0 — REVISÃO PEDAGÓGICA
 
    FONTES EDITORIAIS
    - DUDUQ Conteúdo Oficial — Língua Inglesa v1.0
@@ -9,17 +9,19 @@
 
    REGRAS DESTA VERSÃO
    - Preserva os 15 IDs oficiais EN2-M1-01 a EN2-M1-15.
-   - Organiza o módulo em 6 etapas globais.
+   - Organiza o módulo em 7 etapas globais.
    - Mantém CAIXA ALTA nos elementos de alfabetização.
    - Prioriza áudio gravado; Speech Synthesis permanece como fallback.
    - Reutiliza somente assets já existentes no Assets-DuduQ.
    - Não altera Core, runtimes ou mecânicas homologadas.
+   - Retira Memory Quest deste módulo e amplia o uso pedagógico
+     de Target Shooter e Drag & Drop.
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0";
+  const VERSION = "1.1.0";
 
   window.DUDUQ_CONTENT =
     window.DUDUQ_CONTENT || {};
@@ -123,7 +125,6 @@
     "EN2-M1-02": audioEntry(
       "target-shooter",
       "Ouça e acerte a cena que combina com a expressão.",
-
       "ING_2ANO_M01_EN2-M1-02_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
       [
         {
@@ -223,38 +224,42 @@
     ),
 
     "EN2-M1-09": audioEntry(
-      "memory-quest",
-      "Vire as cartas, ouça os áudios e encontre os pares de letras.",
-      "ING_2ANO_M01_EN2-M1-09_MEMORY-QUEST_ENUNCIADO_PTBR.mp3",
+      "target-shooter",
+      "Ouça a letra e acerte o alvo correto.",
+      "ING_2ANO_M01_EN2-M1-09_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
       [
         {
           text: "M",
           file:
-            "ING_2ANO_M01_EN2-M1-09_MEMORY-QUEST_ESTIMULO01_M_ENUS.mp3"
-        },
-        {
-          text: "B",
-          file:
-            "ING_2ANO_M01_EN2-M1-09_MEMORY-QUEST_ESTIMULO02_B_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-09_TARGET-SHOOTER_ESTIMULO01_M_ENUS.mp3"
         }
       ]
     ),
 
     "EN2-M1-10": audioEntry(
-      "memory-quest",
-      "Vire as cartas, ouça os áudios e encontre os pares de letras.",
-      "ING_2ANO_M01_EN2-M1-10_MEMORY-QUEST_ENUNCIADO_PTBR.mp3",
+      "drag-drop",
+      "Ouça cada letra e arraste o áudio para a letra correspondente.",
+      "ING_2ANO_M01_EN2-M1-10_DRAG-DROP_ENUNCIADO_PTBR.mp3",
       [
+        {
+          text: "A",
+          file:
+            "ING_2ANO_M01_EN2-M1-10_DRAG-DROP_ESTIMULO01_A_ENUS.mp3"
+        },
+        {
+          text: "B",
+          file:
+            "ING_2ANO_M01_EN2-M1-10_DRAG-DROP_ESTIMULO02_B_ENUS.mp3"
+        },
         {
           text: "S",
           file:
-            "ING_2ANO_M01_EN2-M1-10_MEMORY-QUEST_ESTIMULO01_S_ENUS.mp3"
-
+            "ING_2ANO_M01_EN2-M1-10_DRAG-DROP_ESTIMULO03_S_ENUS.mp3"
         },
         {
           text: "C",
           file:
-            "ING_2ANO_M01_EN2-M1-10_MEMORY-QUEST_ESTIMULO02_C_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-10_DRAG-DROP_ESTIMULO04_C_ENUS.mp3"
         }
       ]
     ),
@@ -362,30 +367,29 @@
     ),
 
     "EN2-M1-15": audioEntry(
-      "smart-sentence",
-      "Complete a sequência alfabética.",
-      "ING_2ANO_M01_EN2-M1-15_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+      "drag-drop",
+      "Arraste as letras para formar a sequência alfabética correta.",
+      "ING_2ANO_M01_EN2-M1-15_DRAG-DROP_ENUNCIADO_PTBR.mp3",
       [
-        {
-          text: "D",
-          file:
-            "ING_2ANO_M01_EN2-M1-15_SMART-SENTENCE_ESTIMULO01_D_ENUS.mp3"
-        },
         {
           text: "A",
           file:
-            "ING_2ANO_M01_EN2-M1-15_SMART-SENTENCE_ESTIMULO02_A_ENUS.mp3"
-
+            "ING_2ANO_M01_EN2-M1-15_DRAG-DROP_ESTIMULO01_A_ENUS.mp3"
         },
         {
-          text: "M",
+          text: "B",
           file:
-            "ING_2ANO_M01_EN2-M1-15_SMART-SENTENCE_ESTIMULO03_M_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-15_DRAG-DROP_ESTIMULO02_B_ENUS.mp3"
         },
         {
-          text: "S",
+          text: "C",
           file:
-            "ING_2ANO_M01_EN2-M1-15_SMART-SENTENCE_ESTIMULO04_S_ENUS.mp3"
+            "ING_2ANO_M01_EN2-M1-15_DRAG-DROP_ESTIMULO03_C_ENUS.mp3"
+        },
+        {
+          text: "D",
+          file:
+            "ING_2ANO_M01_EN2-M1-15_DRAG-DROP_ESTIMULO04_D_ENUS.mp3"
         }
       ]
     )
@@ -411,6 +415,23 @@
         text: spokenText,
         language: "en-US",
         role: "option"
+      }
+    };
+  }
+
+  function audioOnlyOption(id, spokenText) {
+    return {
+      id,
+      text: "",
+      audio: {
+        enabled: true,
+        text: spokenText,
+        language: "en-US",
+        role: "option"
+      },
+      metadata: {
+        audioDescription:
+          "Ouvir " + spokenText
       }
     };
   }
@@ -501,7 +522,6 @@
       VERSION,
 
     subject:
-
       "Língua Inglesa",
 
     year:
@@ -517,13 +537,13 @@
       "Missão de Língua Inglesa do 2º ano para retomada de cumprimentos e desenvolvimento do reconhecimento auditivo e visual do alfabeto, incluindo situações iniciais de soletração.",
 
     estimatedMinutes:
-      7,
+      8,
 
     audioPolicy: {
       primary: "recorded-media",
       fallback: "speech-synthesis",
       base: AUDIO_BASE,
-      totalFiles: 47,
+      totalFiles: 48,
       instructionLanguage: "pt-BR",
       contentLanguage: "en-US"
     },
@@ -537,7 +557,7 @@
       "Ouvir e identificar as letras A, B, C, M e S em inglês.",
       "Usar HOW DO YOU SPELL...? como pergunta inicial de soletração.",
       "Organizar letras para formar o nome ANA.",
-      "Reconhecer a sequência alfabética A-B-C-D."
+      "Reconhecer e organizar a sequência alfabética A-B-C-D."
     ],
 
     pedagogicalNotes: {
@@ -548,7 +568,7 @@
         "No 2º ano, áudio continua central, mas a leitura de letras e palavras curtas passa a integrar a própria interação.",
 
       adaptation:
-        "Itens de múltipla escolha podem ser apresentados por mecânicas de associação, memória, ordenação ou completar frase, preservando o ID e a habilidade editorial.",
+        "Itens de múltipla escolha podem ser apresentados por reconhecimento rápido, associação auditiva, classificação, ordenação ou completar frase, preservando o ID e a habilidade editorial.",
 
       audioPolicy:
         "Os MP3s nomeados no catálogo são prioritários. Enquanto não estiverem publicados em Audios/, o Engine pode usar Speech Synthesis como fallback técnico."
@@ -627,7 +647,6 @@
               value: "hello"
             },
             correct:
-
               "Muito bem! HELLO foi identificado corretamente.",
             incorrect:
               "Ouça HELLO novamente e compare as cenas.",
@@ -753,7 +772,6 @@
             skill: SKILLS.greetings,
             difficulty: "easy",
             statement: "Good night",
-
             instruction:
               "Ouça e acerte a cena que combina com a expressão.",
             audioText: "Good night",
@@ -879,7 +897,6 @@
                     id: "audio-hi",
                     spokenText: "Hi",
                     speechLocale: "en-US",
-
                     audioDescription: "Ouvir Hi"
                   }
                 ],
@@ -1005,7 +1022,6 @@
          EN2-M1-06 / 07 / 08
          ===================================================== */
       {
-
         id:
           "en2-m1-step-03-alphabet-pop",
 
@@ -1124,18 +1140,18 @@
       },
 
       /* =====================================================
-         ETAPA 4 — ALPHABET MEMORY
-         EN2-M1-09 / 10
+         ETAPA 4 — ALPHABET SHOOTER
+         EN2-M1-09
          ===================================================== */
       {
         id:
-          "en2-m1-step-04-alphabet-memory",
+          "en2-m1-step-04-alphabet-shooter",
 
         title:
-          "Alphabet Memory",
+          "Alphabet Shooter",
 
         mechanic:
-          "memory-quest",
+          "target-shooter",
 
         skill:
           SKILLS.alphabetListening,
@@ -1147,7 +1163,9 @@
             difficulty: "easy",
             statement: "Letter M",
             instruction:
-              "Vire as cartas, ouça os áudios e encontre os pares de letras.",
+              "Ouça a letra e acerte o alvo correto.",
+            audioText: "M",
+            audioLanguage: "en-US",
             alternatives: [
               sourceOption("a", "A"),
               sourceOption("m", "M"),
@@ -1159,127 +1177,140 @@
               value: "m"
             },
             correct:
-              "Muito bem! Você encontrou a letra M e revisou a letra B.",
+              "Muito bem! Você reconheceu a letra M pelo som.",
             incorrect:
-              "Ouça as letras novamente e procure os pares iguais.",
-            mechanic: "memory-quest",
+              "Ouça a letra M novamente e procure o alvo com M.",
+            mechanic: "target-shooter",
             metadata: {
+              screenTitle: "LETTER M",
               sourceDifficulty: "Fácil",
               sourceCorrectAnswer: "M",
-              memoryQuest: {
-                cards: [
+              targetShooter: {
+                audioText: "M",
+                mode: "audio-to-word",
+                shape: "crystal",
+                correctIds: ["letter-m"],
+                difficulty: {
+                  speed: 0.42,
+                  objectCount: 4,
+                  spawnIntervalMs: 190,
+                  requiredCorrect: 1,
+                  targetSize: 150
+                },
+                items: [
                   {
-                    id: "audio-m",
-                    pairId: "m",
-                    spokenText: "M",
-                    audioDescription: "Ouvir M"
+                    id: "letter-a",
+                    label: "A",
+                    display: "word"
                   },
                   {
                     id: "letter-m",
-                    pairId: "m",
-                    label: "M"
-                  },
-                  {
-                    id: "audio-b",
-                    pairId: "b",
-                    spokenText: "B",
-                    audioDescription: "Ouvir B"
+                    label: "M",
+                    display: "word"
                   },
                   {
                     id: "letter-b",
-                    pairId: "b",
-                    label: "B"
-                  }
-                ],
-                behavior: {
-                  shuffleCards: true,
-                  matchDelayMs: 420,
-                  mismatchDelayMs: 1800
-                }
-              }
-            }
-          }),
-
-          baseQuestion({
-            id: "EN2-M1-10",
-            skill: SKILLS.alphabetListening,
-            difficulty: "easy",
-            statement: "Letter S",
-            instruction:
-              "Vire as cartas, ouça os áudios e encontre os pares de letras.",
-            alternatives: [
-              sourceOption("a", "A"),
-              sourceOption("b", "B"),
-              sourceOption("s", "S"),
-              sourceOption("c", "C")
-            ],
-            answer: {
-              type: "single",
-              value: "s"
-            },
-            correct:
-              "Muito bem! Você encontrou a letra S e revisou a letra C.",
-            incorrect:
-              "Ouça as letras novamente e procure os pares iguais.",
-            mechanic: "memory-quest",
-            metadata: {
-              sourceDifficulty: "Fácil",
-              sourceCorrectAnswer: "S",
-              memoryQuest: {
-                cards: [
-                  {
-                    id: "audio-s",
-                    pairId: "s",
-                    spokenText: "S",
-                    audioDescription: "Ouvir S"
-                  },
-                  {
-                    id: "letter-s",
-                    pairId: "s",
-                    label: "S"
-                  },
-                  {
-                    id: "audio-c",
-                    pairId: "c",
-                    spokenText: "C",
-                    audioDescription: "Ouvir C"
+                    label: "B",
+                    display: "word"
                   },
                   {
                     id: "letter-c",
-                    pairId: "c",
-                    label: "C"
+                    label: "C",
+                    display: "word"
                   }
-                ],
-                behavior: {
-                  shuffleCards: true,
-                  matchDelayMs: 420,
-                  mismatchDelayMs: 1800
-                }
+                ]
               }
-
             }
           })
         ]
       },
 
       /* =====================================================
-         ETAPA 5 — SPELL IT!
-         EN2-M1-11 / 12
+         ETAPA 5 — LISTEN & SPELL
+         EN2-M1-10 / 11 / 12
          ===================================================== */
       {
         id:
-          "en2-m1-step-05-spell-it",
+          "en2-m1-step-05-listen-spell",
 
         title:
-          "Spell It!",
+          "Listen & Spell",
 
         mechanic:
           "drag-drop",
 
-        skill:
-          SKILLS.spellingSequence,
-
         questions: [
+          baseQuestion({
+            id: "EN2-M1-10",
+            skill: SKILLS.alphabetListening,
+            difficulty: "easy",
+            statement: "Letter S",
+            instruction:
+              "Ouça cada áudio e arraste para a letra correspondente.",
+            alternatives: [
+              audioOnlyOption("a", "A"),
+              audioOnlyOption("b", "B"),
+              audioOnlyOption("s", "S"),
+              audioOnlyOption("c", "C")
+            ],
+            answer: {
+              type: "pairs",
+              value: [
+                {
+                  source: "a",
+                  target: "letter-a"
+                },
+                {
+                  source: "b",
+                  target: "letter-b"
+                },
+                {
+                  source: "s",
+                  target: "letter-s"
+                },
+                {
+                  source: "c",
+                  target: "letter-c"
+                }
+              ]
+            },
+            correct:
+              "Excelente! Você relacionou cada som à letra correta.",
+            incorrect:
+              "Toque nos cards para ouvir novamente e arraste cada som para a letra correspondente.",
+            mechanic: "drag-drop",
+            metadata: {
+              title: "LISTEN & MATCH",
+              sourceDifficulty: "Fácil",
+              sourceCorrectAnswer: "S",
+              targets: [
+                {
+                  id: "letter-a",
+                  label: "A",
+                  capacity: 1
+                },
+                {
+                  id: "letter-b",
+                  label: "B",
+                  capacity: 1
+                },
+                {
+                  id: "letter-s",
+                  label: "S",
+                  capacity: 1
+                },
+                {
+                  id: "letter-c",
+                  label: "C",
+                  capacity: 1
+                }
+              ],
+              layout: "grid",
+              shuffleItems: true,
+              shuffleTargets: false
+            }
+          }),
+
           baseQuestion({
             id: "EN2-M1-11",
             skill: SKILLS.spellingQuestion,
@@ -1382,7 +1413,6 @@
             mechanic: "drag-drop",
             metadata: {
               sourceDifficulty: "Média",
-
               sourceCorrectAnswer: "A-N-A",
               sourceAlternatives: [
                 "A-N-A",
@@ -1403,21 +1433,21 @@
       },
 
       /* =====================================================
-         ETAPA 6 — FINAL CHALLENGE
-         EN2-M1-13 / 14 / 15
+         ETAPA 6 — LANGUAGE CHALLENGE
+         EN2-M1-13 / 14
          ===================================================== */
       {
         id:
-          "en2-m1-step-06-final-challenge",
+          "en2-m1-step-06-language-challenge",
 
         title:
-          "Final Challenge",
+          "Language Challenge",
 
         mechanic:
           "smart-sentence",
 
         skill:
-          SKILLS.alphabetSequence,
+          SKILLS.presentationAlphabet,
 
         questions: [
           baseQuestion({
@@ -1478,7 +1508,7 @@
                 "spell-name",
                 "HOW DO YOU SPELL YOUR NAME?"
               ),
-              sourceOption("where-is-my", "WHERE IS MY...?" )
+              sourceOption("where-is-my", "WHERE IS MY...?")
             ],
             answer: {
               type: "single",
@@ -1508,10 +1538,29 @@
                 instructionSpoken:
                   "Complete a pergunta usada para pedir a soletração do nome."
               }
-
             }
-          }),
+          })
+        ]
+      },
 
+      /* =====================================================
+         ETAPA 7 — FINAL ALPHABET CHALLENGE
+         EN2-M1-15
+         ===================================================== */
+      {
+        id:
+          "en2-m1-step-07-final-alphabet",
+
+        title:
+          "Final Alphabet Challenge",
+
+        mechanic:
+          "drag-drop",
+
+        skill:
+          SKILLS.alphabetSequence,
+
+        questions: [
           baseQuestion({
             id: "EN2-M1-15",
             skill: SKILLS.alphabetSequence,
@@ -1519,41 +1568,45 @@
             statement:
               "A - B - C - D",
             instruction:
-              "Complete a sequência alfabética.",
+              "Arraste as letras para formar a sequência alfabética correta.",
             alternatives: [
-              sourceOption("acbd", "A - C - B - D"),
-              sourceOption("bacd", "B - A - C - D"),
-              sourceOption("abdc", "A - B - D - C"),
-              sourceOption("abcd", "A - B - C - D")
+              audioOption("seq-a", "A", "A"),
+              audioOption("seq-b", "B", "B"),
+              audioOption("seq-c", "C", "C"),
+              audioOption("seq-d", "D", "D")
             ],
             answer: {
-              type: "single",
-              value: "abcd"
+              type: "sequence",
+              value: [
+                "seq-a",
+                "seq-b",
+                "seq-c",
+                "seq-d"
+              ]
             },
             correct:
               "Parabéns! A-B-C-D está na ordem alfabética correta.",
             incorrect:
-              "Observe a sequência e complete com a próxima letra.",
-            mechanic: "smart-sentence",
+              "Ouça as letras e organize novamente na ordem A, B, C, D.",
+            mechanic: "drag-drop",
             metadata: {
               sourceDifficulty: "Difícil",
               sourceCorrectAnswer:
                 "A - B - C - D",
-              smartSentence: {
-                prefix: "A - B - C -",
-                suffix: "",
-                answer: "D",
-                options: [
-                  "D",
-                  "A",
-                  "M",
-                  "S"
-                ],
-                instruction:
-                  "Complete a sequência alfabética.",
-                instructionSpoken:
-                  "Complete a sequência alfabética."
-              }
+              sourceAlternatives: [
+                "A - C - B - D",
+                "B - A - C - D",
+                "A - B - D - C",
+                "A - B - C - D"
+              ],
+              sequenceLabels: [
+                "1",
+                "2",
+                "3",
+                "4"
+              ],
+              layout: "sequence",
+              shuffleItems: true
             }
           })
         ]
