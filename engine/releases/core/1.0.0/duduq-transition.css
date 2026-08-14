@@ -1,0 +1,198 @@
+/* =========================================================
+   DUDUQ CORE — TRANSITION
+   Ponte visual World Fusion
+   Versão 1.5.0
+   ========================================================= */
+
+.duduq-transition {
+  position: fixed;
+  z-index: 100050;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  isolation: isolate;
+  contain: strict;
+  transform: translateZ(0);
+  transform-origin: center;
+  background: #1b4866;
+  will-change: opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.duduq-transition::before,
+.duduq-transition::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.duduq-transition::before {
+  z-index: 0;
+  inset: -3.5%;
+  background-color: #1b4866;
+  background-image: var(--duduq-transition-world-image, none);
+  background-position: var(--duduq-transition-world-position, center top);
+  background-size: var(--duduq-transition-world-size, cover);
+  background-repeat: no-repeat;
+  filter: blur(5px) saturate(.74) brightness(.99) contrast(.93);
+  transform: translateZ(0) scale(1.025);
+  will-change: auto;
+}
+
+.duduq-transition::after {
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(9, 34, 55, .03),
+      rgba(9, 34, 55, .07)
+    ),
+    radial-gradient(
+      circle at 50% 32%,
+      rgba(241, 251, 255, .20),
+      rgba(235, 249, 255, .10) 34%,
+      transparent 58%
+    );
+}
+
+.duduq-transition-stage {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(249, 253, 255, .055),
+      rgba(243, 250, 255, .030)
+    );
+}
+
+.duduq-transition.is-covering,
+.duduq-transition.is-covered,
+.duduq-transition.is-revealing {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.duduq-transition.is-covered {
+  opacity: 1;
+}
+
+html.duduq-transition-lock,
+body.duduq-transition-lock {
+  overflow: hidden !important;
+}
+
+body.duduq-transition-lock {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+
+
+/* =========================================================
+   INTRO -> PRIMEIRA ATIVIDADE
+
+   Durante o clique em "INICIAR MISSÃO", a Intro permanece
+   visualmente estável enquanto a ponte oficial cobre a tela.
+   Isso impede que o fade da Intro e a montagem da primeira
+   mecânica disputem o mesmo frame.
+
+   A classe is-transition-handoff é aplicada somente pelo
+   index durante esse handoff específico.
+   ========================================================= */
+
+.duduq-intro.is-leaving.is-transition-handoff {
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: none !important;
+}
+
+.duduq-intro.is-leaving.is-transition-handoff
+  .duduq-intro-stage {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  animation: none !important;
+}
+
+
+
+
+
+/* =========================================================
+   INTRO -> PRIMEIRA ATIVIDADE — SUAVIZAÇÃO
+
+   A Intro permanece estável até a ponte assumir a tela.
+   A ponte recebe apenas uma suavização de duração via JS;
+   visualmente, esta rodada evita o portal e volta para uma
+   linguagem limpa, com esmaecimento mais gradual.
+   ========================================================= */
+
+.duduq-transition.is-intro-soft {
+  /*
+   * Fallback do primeiro carregamento.
+   * Se a imagem do cenário ainda não tiver chegado, a ponte
+   * permanece clara, acompanhando a linguagem branca da Intro,
+   * em vez de expor o azul-base universal da Transition.
+   */
+  background: #f7fbff !important;
+}
+
+.duduq-transition.is-intro-soft::before {
+  /*
+   * A imagem continua sendo usada normalmente quando já está
+   * disponível. Só trocamos a cor de fundo do pseudo-elemento
+   * para que a ausência temporária do background não gere flash.
+   */
+  background-color: #f7fbff !important;
+
+  filter:
+    blur(5px)
+    saturate(.78)
+    brightness(.96)
+    contrast(.94) !important;
+
+  transform: translateZ(0) scale(1.02) !important;
+}
+
+.duduq-transition.is-intro-soft::after {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, .02),
+      rgba(255, 255, 255, 0)
+    ) !important;
+}
+
+.duduq-transition.is-intro-soft
+  .duduq-transition-stage {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, .015),
+      rgba(255, 255, 255, 0)
+    ) !important;
+}
+
+@media (max-width: 720px) {
+  .duduq-transition::before {
+    inset: -2.5%;
+    filter: blur(4px) saturate(.74) brightness(.92) contrast(.92);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .duduq-transition::before {
+    filter: blur(5px) saturate(.72) brightness(.95) contrast(.92);
+  }
+}
+
