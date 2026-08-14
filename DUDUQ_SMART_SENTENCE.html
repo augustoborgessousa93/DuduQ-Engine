@@ -151,7 +151,7 @@
   box-shadow:0 4px 0 var(--dq-depth),0 14px 30px rgba(31,65,99,.075),inset 0 1px 0 #fff
 }
 .duduq-ss-context{display:flex;justify-content:center;margin-bottom:14px}
-.duduq-ss-context img{display:block;width:clamp(92px,13vw,128px);height:clamp(92px,13vw,128px);object-fit:contain}
+.duduq-ss-context img{display:block;width:clamp(104px,13vw,136px);height:clamp(104px,13vw,136px);object-fit:contain}
 .duduq-ss-sentence-card{
   position:relative;width:100%;min-height:128px;display:flex;align-items:center;justify-content:center;padding:clamp(18px,3vw,30px);
   border:2px solid #C8D7E7;border-radius:22px;background:rgba(255,255,255,.94);
@@ -202,8 +202,8 @@
 .duduq-ss-token:active:not(:disabled){transform:translateY(4px) scale(.985);box-shadow:none}
 .duduq-ss-token[data-used="true"]{opacity:.28;transform:scale(.94);pointer-events:none}
 .duduq-ss-token[data-selected="true"]{border-color:var(--dq-primary);background:#EFF6FF;box-shadow:0 4px 0 var(--dq-primary-depth),0 0 0 4px rgba(0,86,179,.12)}
-.duduq-ss-helper{margin:12px 0 0;color:var(--dq-muted);font-size:13px;font-weight:800;text-align:center}
-.duduq-ss-action-slot{width:min(920px,100%);min-height:78px;display:grid;place-items:start center;padding:8px 0 4px}
+.duduq-ss-helper{min-height:18px;margin:16px 0 2px;color:var(--dq-muted);font-size:13px;font-weight:800;line-height:1.35;text-align:center}
+.duduq-ss-action-slot{width:min(920px,100%);min-height:88px;display:grid;place-items:start center;margin-top:8px;padding:14px 0 6px}
 .duduq-ss-primary{
   width:min(220px,100%);min-height:56px;padding:0 28px;border:2px solid var(--dq-primary-depth);border-radius:18px;
   background:linear-gradient(180deg,#1471CF 0%,var(--dq-primary) 72%,#004892 100%);color:#fff;
@@ -5895,7 +5895,7 @@
           ? (GameState.movingGapId
               ? "Agora toque em outro espaço para mover ou trocar a palavra. Toque novamente na palavra selecionada para devolvê-la ao banco."
               : "Monte a frase. Para reorganizar, toque em uma palavra preenchida e depois em outro espaço.")
-          : "Escolha uma opção para a lacuna destacada."}</p>`;
+          : "Toque em uma opção para completar."}</p>`;
     },
     board(stage) {
       const separateContext = stage.segments.some(s => s.type === "image") && stage.mode === "complete-image";
