@@ -1385,7 +1385,7 @@
                     id:
                       "audio-im",
                     spokenText:
-                      "I'm Ana",
+                      "I'm Augusto",
                     speechLocale:
                       "en-US",
                     audioDescription:
@@ -1879,7 +1879,7 @@
                     id:
                       "word-goodbye",
                     label:
-                      "GOODBYE!",
+                      "BYE!",
                     spokenText:
                       "Goodbye",
                     speechLocale:
@@ -1929,7 +1929,7 @@
           "en1-m1-step-04-im-ana",
 
         title:
-          "I'm Ana.",
+          "I'm Augusto.",
 
         mechanic:
           "drag-drop",
@@ -1945,7 +1945,7 @@
             module: 1,
             skill: SKILLS.personalPresentation,
             difficulty: "medium",
-            statement: "I'm Ana.",
+            statement: "I'm Augusto.",
             instruction:
               "Toque para ouvir e arraste cada áudio para a cena correspondente.",
 
@@ -2041,7 +2041,7 @@
 
             feedback: {
               correct:
-                "Muito bem! I'M ANA. corresponde à cena de apresentação pessoal.",
+                "Muito bem! I'M AUGUSTO. corresponde à cena de apresentação pessoal.",
               incorrect:
                 "Toque nos três cards novamente e compare as cenas.",
               language:
