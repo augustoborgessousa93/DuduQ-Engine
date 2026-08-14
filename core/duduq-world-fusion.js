@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.4.8
+   Versão 1.4.9
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.4.8";
+  const VERSION = "1.4.9";
   if (window.DuduQWorldFusion?.version === VERSION) return;
 
   const scriptUrl =
@@ -133,6 +133,7 @@
             .catch(function () {})
             .finally(function () {
               syncFullscreenControls(doc);
+
             });
         } catch (_) {
           syncFullscreenControls(doc);
@@ -175,7 +176,9 @@
   function detectMechanic(doc, frame) {
     const source = String(
       frame?.getAttribute("src") || ""
-    ).toLowerCase();
+    )
+      .toLowerCase()
+      .replace(/_/g, "-");
 
     const matches = [
       ["bubble-pop", ".duduq-bp-root"],
@@ -266,6 +269,7 @@
       function () {
         touchSpeechEngine(doc);
       };
+
 
     /*
      * Chrome/Edge podem popular a lista de vozes alguns
@@ -458,7 +462,6 @@
                 !fits() &&
                 size > 20
               ) {
-
                 size -= 1;
 
                 label.style.setProperty(
@@ -537,6 +540,7 @@
                 );
               }
             }
+
           );
       }
     );
@@ -672,6 +676,7 @@
               String(
                 voice.lang || ""
               ).toLowerCase() ===
+
               String(locale)
                 .toLowerCase()
             );
@@ -689,7 +694,6 @@
             return String(
               voice.lang || ""
             )
-
               .toLowerCase()
               .startsWith(
                 languageRoot
@@ -809,6 +813,7 @@
     const arena =
       doc?.querySelector?.(".duduq-ts-arena");
 
+
     if (!arena) return;
 
     const view = doc.defaultView;
@@ -920,7 +925,6 @@
       !doc?.defaultView ||
       feedbackScrollGuardDocuments.has(doc)
     ) {
-
       return;
     }
 
@@ -944,6 +948,7 @@
           "scrollIntoView",
           {
             configurable: true,
+
             writable: true,
             value: function (...args) {
               try {
@@ -1036,7 +1041,6 @@
   }
 
   function createEmergencyHeaderMascot(doc, source) {
-
     const figure = doc.createElement("figure");
     figure.className =
       "duduq-mascot duduq-world-header-emergency-mascot";
@@ -1080,6 +1084,7 @@
 
       let fallback = Array.from(slot.children).find(
         function (child) {
+
           return child?.classList?.contains(
             "duduq-world-header-mascot-fallback"
           );
@@ -1153,7 +1158,6 @@
       image.crossOrigin = "anonymous";
       image.decoding = "async";
 
-
       function fallback() {
         mascotTrimSources.set(source, source);
         resolve(source);
@@ -1216,6 +1220,7 @@
           const pixels = sampleContext.getImageData(
             0,
             0,
+
             sampleWidth,
             sampleHeight
           ).data;
@@ -1268,7 +1273,6 @@
             naturalWidth - sourceX,
             sourceWidth + padding * 2
           );
-
           sourceHeight = Math.min(
             naturalHeight - sourceY,
             sourceHeight + padding * 2
@@ -1352,6 +1356,7 @@
     }
 
     const originalSpeak = synth.speak.bind(synth);
+
     const originalCancel = synth.cancel.bind(synth);
     let pendingUtterance = null;
     let releaseTimer = null;
@@ -1384,7 +1389,6 @@
       if (!pendingUtterance) return;
 
       if (gateIsLocked()) {
-
         releaseTimer = view.setTimeout(
           releaseWhenReady,
           36
@@ -1488,6 +1492,7 @@
     );
 
     if (mascotImage) {
+
       mascotImage.setAttribute("src", mascot);
       mascotImage.setAttribute("data-cropped", "false");
 
@@ -1500,7 +1505,6 @@
             cropped && cropped !== mascot ? "true" : "false"
           );
         }
-
       );
     }
 
@@ -1616,7 +1620,6 @@
           hideMissionBridge();
           missionBridgePending = null;
         }
-
       }
     );
 
@@ -1625,6 +1628,7 @@
       function () {
         missionBridgePending = null;
         hideMissionBridge({ immediate: true });
+
       }
     );
 
@@ -1732,7 +1736,6 @@
     if (!doc?.querySelectorAll) return;
 
     doc
-
       .querySelectorAll(
         '[data-duduq-audio-playing="true"]'
       )
@@ -1848,7 +1851,6 @@
     );
 
     /*
-
      * Não descartamos o CTA apenas porque ele ficou disabled durante
      * a reprodução. Drag & Drop (e outros runtimes) desabilitam o
      * próprio botão enquanto o autoplay está falando; ele continua
@@ -1897,6 +1899,7 @@
         lastTrigger?.isConnected &&
         now - lastTriggerAt <= 1800
           ? lastTrigger
+
           : null;
 
       return (
@@ -1964,7 +1967,6 @@
         !control ||
         target === activeControl
       ) {
-
         activeControl = null;
       }
     }
@@ -2033,6 +2035,7 @@
         }
 
         try {
+
           utterance?.addEventListener?.(
             "start",
             startVisual,
@@ -2080,7 +2083,6 @@
               configurable: true,
               value: visualSpeak
             }
-
           );
         } catch (_) {}
       }
@@ -2169,6 +2171,7 @@
           control.getAttribute?.(
             "data-playing"
           ) || ""
+
         ).toLowerCase() === "true";
 
       /*
@@ -2196,7 +2199,6 @@
     function syncDragDropInstructionAudioState() {
       const control =
         findPrimaryInstructionAudioControl(
-
           doc
         );
 
@@ -2305,6 +2307,7 @@
     syncDragDropInstructionAudioState();
 
     /* HTML AUDIO / MEDIA -------------------------------- */
+
     const mediaControls = new WeakMap();
 
     doc.addEventListener(
@@ -2440,6 +2443,7 @@
 
   function installMemoryQuestPedagogy(doc) {
     if (
+
       !doc?.defaultView ||
       memoryQuestPedagogyDocuments.has(doc)
     ) {
@@ -2542,7 +2546,6 @@
           (
             currentLabel +
             " Toque para ouvir novamente."
-
           ).trim()
         );
       }
@@ -2576,6 +2579,7 @@
       }
 
       pendingMatchedCard = null;
+
 
       freshMatched.forEach(function (card) {
         if (!queue.includes(card)) {
@@ -2658,7 +2662,6 @@
             visual
           );
           setAudioControlPlaying(
-
             visual,
             true
           );
@@ -2712,6 +2715,7 @@
         !view.speechSynthesis ||
         typeof view.SpeechSynthesisUtterance ===
           "undefined"
+
       ) {
         return;
       }
@@ -2776,7 +2780,6 @@
   }
 
 
-
   /* =======================================================
      DRAG & DROP — ÁUDIO NO DROP
 
@@ -2799,31 +2802,292 @@
     const view = doc.defaultView;
     let dragState = null;
 
+    function normalize(value) {
+      return String(value ?? "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[’‘`´]/g, "'")
+        .replace(/\s+/g, " ")
+        .trim()
+        .toLowerCase();
+    }
+
+    function ensureOfficialRuntime() {
+      if (
+        view.DuduQOfficialAudioRuntime
+          ?.mechanic === "drag-drop"
+      ) {
+        return true;
+      }
+
+      try {
+        const parentView = view.parent;
+        const frame = view.frameElement;
+
+        if (
+          parentView &&
+          parentView !== view &&
+          frame &&
+          typeof parentView
+            .DuduQContentAudio
+            ?.installFrame === "function"
+        ) {
+          parentView
+            .DuduQContentAudio
+            .installFrame(
+              frame,
+              "drag-drop"
+            );
+        }
+      } catch (_) {}
+
+      return Boolean(
+        view.DuduQOfficialAudioRuntime
+          ?.mechanic === "drag-drop"
+      );
+    }
+
+    function schemaItems() {
+      const schema =
+        view.DUDUQ_DRAG_DROP_SCHEMA ||
+        view.DUDUQ_MECHANIC_SCHEMA ||
+
+        null;
+
+      const stages =
+        Array.isArray(schema?.stages)
+          ? schema.stages
+          : [];
+
+      const items = [];
+
+      stages.forEach(function (stage) {
+        const stageItems =
+          Array.isArray(stage?.payload?.items)
+            ? stage.payload.items
+            : [];
+
+        stageItems.forEach(function (item) {
+          if (item?.spokenText) {
+            items.push(item);
+          }
+        });
+      });
+
+      return items;
+    }
+
     function findItem(target) {
       return target?.closest?.(
         ".duduq-udd-item, .duduq-dd-item"
       ) || null;
     }
 
-    function itemId(item) {
-      return String(
-        item?.dataset?.ddItemId ||
-        item?.dataset?.itemId ||
-        ""
-      ).trim();
+    function itemLabel(card) {
+      const explicit =
+        card?.querySelector?.(
+          ".duduq-dd-word, .duduq-dd-phrase, .duduq-udd-word, .duduq-udd-phrase"
+        )?.textContent ||
+        "";
+
+      return String(explicit).trim();
     }
 
-    function containingTarget(item) {
+    function resolveItemPayload(card) {
+      if (!card) return null;
+
+      const items = schemaItems();
+      if (!items.length) return null;
+
+      const label = normalize(
+        itemLabel(card)
+      );
+
+      if (label) {
+        const exact =
+          items.filter(
+            function (item) {
+              return normalize(item.label) === label;
+            }
+          );
+
+        if (exact.length === 1) {
+          return exact[0];
+        }
+      }
+
+      const aria = normalize(
+        card.getAttribute?.("aria-label")
+      );
+
+      if (aria) {
+        const matches =
+          items.filter(
+            function (item) {
+              const itemName = normalize(
+                item.label ||
+                item.audioDescription ||
+                item.spokenText
+              );
+
+              return (
+                itemName &&
+                aria.startsWith(itemName)
+              );
+            }
+          );
+
+        if (matches.length === 1) {
+          return matches[0];
+        }
+      }
+
+      return null;
+    }
+
+    function samePayload(left, right) {
+      if (!left || !right) return false;
+
+      if (
+        left.id &&
+        right.id &&
+        String(left.id) === String(right.id)
+      ) {
+        return true;
+      }
+
       return (
-        item
+        normalize(left.label) ===
+          normalize(right.label) &&
+        normalize(left.spokenText) ===
+          normalize(right.spokenText)
+      );
+    }
+
+    function findRenderedCard(payload) {
+      if (!payload) return null;
+
+      return Array.from(
+        doc.querySelectorAll(
+          ".duduq-udd-item, .duduq-dd-item"
+        )
+      ).find(
+        function (card) {
+          return samePayload(
+            resolveItemPayload(card),
+            payload
+          );
+        }
+      ) || null;
+    }
+
+    function containingTarget(card) {
+      return (
+        card
           ?.closest?.(
-            "[data-dd-target-id]"
+            "[data-duduq-target-id], [data-dd-target-id]"
+          )
+
+          ?.getAttribute?.(
+            "data-duduq-target-id"
+          ) ||
+        card
+          ?.closest?.(
+            "[data-duduq-target-id], [data-dd-target-id]"
           )
           ?.getAttribute?.(
             "data-dd-target-id"
           ) ||
         ""
       );
+    }
+
+    function playPayload(payload, visualCard) {
+      const spoken =
+        String(
+          payload?.spokenText || ""
+        ).trim();
+
+      if (!spoken) return false;
+
+      ensureOfficialRuntime();
+
+      if (
+        typeof view
+          .SpeechSynthesisUtterance ===
+          "undefined"
+      ) {
+        return false;
+      }
+
+      let utterance = null;
+
+      try {
+        utterance =
+          new view.SpeechSynthesisUtterance(
+            spoken
+          );
+
+        utterance.lang =
+          String(
+            payload?.speechLocale ||
+            "en-US"
+          );
+
+        utterance.rate = .86;
+        utterance.pitch = 1.03;
+
+        const settle = function () {
+          setAudioControlPlaying(
+            visualCard,
+            false
+          );
+        };
+
+        utterance.onstart = function () {
+          clearAudioPlayingState(
+            doc,
+            visualCard
+          );
+          setAudioControlPlaying(
+            visualCard,
+            true
+          );
+        };
+
+        utterance.onend = settle;
+        utterance.onerror = settle;
+      } catch (_) {
+        return false;
+      }
+
+      try {
+        const official =
+          view.DuduQOfficialAudioRuntime;
+
+        if (
+          official &&
+          typeof official.handleUtterance ===
+            "function"
+        ) {
+          official.handleUtterance(
+            utterance
+          );
+          return true;
+        }
+
+        view.speechSynthesis
+          ?.cancel?.();
+        view.speechSynthesis
+          ?.speak?.(utterance);
+        return true;
+      } catch (_) {
+        setAudioControlPlaying(
+          visualCard,
+          false
+        );
+        return false;
+      }
     }
 
     function begin(event) {
@@ -2834,22 +3098,34 @@
         return;
       }
 
-      const item = findItem(
+      const card = findItem(
         event.target
       );
 
-      if (!item) return;
+      if (!card) return;
 
-      const id = itemId(item);
+      const payload =
+        resolveItemPayload(card);
 
-      if (!id) return;
+      if (!payload?.spokenText) {
+        return;
+      }
+
+      /*
+       * Reforça a ponte MP3 antes do clique nativo do runtime.
+       * O clique continua pertencendo ao React; não bloqueamos
+       * seleção, drag ou acessibilidade.
+       */
+      ensureOfficialRuntime();
 
       dragState = {
-        id,
+        card,
+        payload,
         x: Number(event.clientX) || 0,
         y: Number(event.clientY) || 0,
+
         initialTarget:
-          containingTarget(item)
+          containingTarget(card)
       };
     }
 
@@ -2873,27 +3149,25 @@
         return;
       }
 
+      /*
+       * O runtime atual bloqueia o click sintético por 280 ms
+       * depois de um drag. Não simulamos click. Aguardamos apenas
+       * o React concluir a nova posição e chamamos a ponte oficial
+       * de áudio diretamente, sem alterar o estado de seleção.
+       */
       view.setTimeout(
         function () {
-          const escaped =
-            typeof CSS !== "undefined" &&
-            CSS.escape
-              ? CSS.escape(state.id)
-              : state.id.replace(
-                  /["\\]/g,
-                  "\\$&"
+          const card =
+            state.card?.isConnected
+              ? state.card
+              : findRenderedCard(
+                  state.payload
                 );
 
-          const item =
-            doc.querySelector(
-              `[data-dd-item-id="${escaped}"],` +
-              `[data-item-id="${escaped}"]`
-            );
-
-          if (!item) return;
+          if (!card) return;
 
           const finalTarget =
-            containingTarget(item);
+            containingTarget(card);
 
           if (
             !finalTarget ||
@@ -2903,29 +3177,12 @@
             return;
           }
 
-          const shell =
-            item.closest(
-              ".duduq-udd-item-shell, .duduq-dd-item-shell"
-            ) ||
-            item.parentElement;
-
-          const audioControl =
-            shell?.querySelector?.(
-              ".duduq-udd-item-audio, .duduq-dd-item-audio"
-            );
-
-          if (
-            !audioControl ||
-            audioControl.disabled
-          ) {
-            return;
-          }
-
-          try {
-            audioControl.click();
-          } catch (_) {}
+          playPayload(
+            state.payload,
+            card
+          );
         },
-        90
+        150
       );
     }
 
@@ -2949,7 +3206,6 @@
       true
     );
   }
-
 
   /* =======================================================
      FEEDBACK DE VOZ — PADRÃO UNIVERSAL
@@ -3005,7 +3261,6 @@
 
       if (state === "success") {
         return (
-
           sounds[
             "feedback-correct-voice"
           ] ||
@@ -3121,7 +3376,6 @@
 
     const root =
       doc.body ||
-
       doc.documentElement;
 
     if (root) {
@@ -3140,6 +3394,7 @@
 
     sync();
   }
+
 
 
   function ensureStylesheet(doc) {
@@ -3219,7 +3474,33 @@
 
     function connect() {
       try {
-        manageDocument(frame.contentDocument, frame);
+        const frameDocument =
+          frame.contentDocument;
+
+        /*
+         * Áudio editorial primeiro, decoração visual depois.
+         * Assim o World Fusion sempre envolve a ponte MP3 oficial
+         * em vez de deixar o runtime voltar ao TTS por ordem de carga.
+         */
+        try {
+          const mechanic =
+            detectMechanic(
+              frameDocument,
+              frame
+            );
+
+          window.DuduQContentAudio
+            ?.installFrame
+            ?.(
+              frame,
+              mechanic
+            );
+        } catch (_) {}
+
+        manageDocument(
+          frameDocument,
+          frame
+        );
       } catch (_) {
         /* Iframes externos continuam funcionando sem a camada visual. */
       }
@@ -3249,6 +3530,7 @@
 
           if (node instanceof HTMLIFrameElement) {
             manageFrame(node);
+
           }
 
           node.querySelectorAll?.("iframe").forEach(manageFrame);
@@ -3294,4 +3576,3 @@
       window.DuduQWorldFusion.refresh();
     }
   );
-})();
