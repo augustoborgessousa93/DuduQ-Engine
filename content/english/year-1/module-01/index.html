@@ -30,7 +30,7 @@
        DUDUQ CORE
        ===================================================== -->
   <script src="../../../../core/duduq-assets.js?v=121"></script>
-  <script id="duduq-world-fusion-core-script" src="../../../../core/duduq-world-fusion.js?v=148"></script>
+  <script id="duduq-world-fusion-core-script" src="../../../../core/duduq-world-fusion.js?v=149"></script>
   <script src="../../../../core/duduq-sound.js?v=110"></script>
   <script src="../../../../core/duduq-intro.js?v=120"></script>
   <script src="../../../../core/duduq-schema.js?v=100"></script>
@@ -38,10 +38,10 @@
   <script src="../../../../core/duduq-completion.js?v=110"></script>
 
   <!-- Transição universal deve carregar ANTES do Host -->
-  <script src="../../../../core/duduq-transition.js?v=166"></script>
+  <script src="../../../../core/duduq-transition.js?v=167"></script>
 
-  <!-- Host 1.6.6: proteção síncrona entre missões -->
-  <script src="../../../../core/duduq-host.js?v=166"></script>
+  <!-- Host 1.6.7: proteção síncrona + fallback World Fusion 149 -->
+  <script src="../../../../core/duduq-host.js?v=167"></script>
 
   <!-- Progresso global -->
   <script src="../../../../core/duduq-progress-ui.js?v=100"></script>
@@ -108,7 +108,6 @@
           "target-shooter",
           "matching",
           "drag-drop",
-
           "smart-sentence",
           "memory-quest"
         ];
@@ -219,7 +218,6 @@
                 "--duduq-world-image",
                 `url("${moduleBackgroundSrc}")`
               );
-
           } catch (_) {}
 
           /*
@@ -270,6 +268,7 @@
                 } catch (_) {}
 
                 try {
+
                   window.DuduQTransition
                     ?.primeWorldBridge
                     ?.();
@@ -330,7 +329,6 @@
               }
 
               /*
-
                * Segurança: a Intro não fica presa se houver
                * falha real de rede. Nesse caso, o CSS 1.5.0
                * mantém um fallback claro, nunca azul escuro.
@@ -406,6 +404,7 @@
                       questionIndex,
                       {
                         subject:
+
                           moduleDefinition
                             .subject,
 
@@ -441,7 +440,6 @@
                 );
               }
             );
-
 
           if (invalidDecision) {
             console.error(
@@ -553,7 +551,6 @@
           });
         }
 
-
         /* ===============================================
            HANDOFF INTRO -> PRIMEIRA ATIVIDADE
 
@@ -664,7 +661,6 @@
                 "is-intro-soft"
               );
 
-
             introElement
               ?.classList
               ?.remove(
@@ -679,6 +675,7 @@
               await transition.cover({
                 coverDurationMs: 340,
                 soundEnabled: false
+
               });
 
             if (!covered) {
@@ -815,6 +812,7 @@
                   );
                 }
 
+
                 retryBrandingTimer =
                   window.setTimeout(
                     replayBrandingIfNeeded,
@@ -884,7 +882,6 @@
            O Core Sound continua tentando reproduzir o áudio
            de branding automaticamente, sem inserir tela, botão
            ou etapa intermediária antes da Intro.
-
            =============================================== */
 
         /* ===============================================
