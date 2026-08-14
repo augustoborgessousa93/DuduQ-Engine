@@ -1,12 +1,12 @@
 /* =========================================================
-   DUDUQ CHANNEL LOADER v1.0.0
+   DUDUQ CHANNEL LOADER v1.0.1
    Stable/Canary + releases imutáveis + hotfix central
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0";
+  const VERSION = "1.0.1";
 
   if (window.DuduQChannelLoader?.version === VERSION) {
     return;
@@ -280,6 +280,22 @@
         release:
           config.contentVersion || ""
       });
+
+      /*
+       * O conteúdo é carregado dinamicamente depois dos eventos
+       * DOMContentLoaded/load. Por isso a normalização central de
+       * assets precisa acontecer explicitamente aqui.
+       *
+       * Isso corrige caminhos legados e padroniza branding/intro
+       * antes de o player iniciar qualquer módulo.
+       */
+      if (
+        typeof window.DuduQAssets
+          ?.normalizeContent === "function"
+      ) {
+        window.DuduQAssets
+          .normalizeContent();
+      }
 
       window.DUDUQ_ENGINE_READY = true;
 
