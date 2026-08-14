@@ -29,10 +29,10 @@
   <!-- =====================================================
        DUDUQ CORE
        ===================================================== -->
-  <script src="../../../../core/duduq-assets.js?v=121"></script>
+  <script src="../../../../core/duduq-assets.js?v=130"></script>
   <script id="duduq-world-fusion-core-script" src="../../../../core/duduq-world-fusion.js?v=150"></script>
   <script src="../../../../core/duduq-sound.js?v=110"></script>
-  <script src="../../../../core/duduq-intro.js?v=120"></script>
+  <script src="../../../../core/duduq-intro.js?v=121"></script>
   <script src="../../../../core/duduq-schema.js?v=100"></script>
   <script src="../../../../core/duduq-content-audio.js?v=104"></script>
   <script src="../../../../core/duduq-completion.js?v=110"></script>
@@ -50,10 +50,9 @@
        MECÂNICAS DISPONÍVEIS
        ===================================================== -->
   <!-- Mecânicas compartilhadas do Engine -->
-  <script src="../../../../mechanics/bubble-pop.js?v=122"></script>
-  <script src="../../../../mechanics/drag-drop.js?v=102"></script>
+  <script src="../../../../mechanics/bubble-pop.js?v=123"></script>
+  <script src="../../../../mechanics/drag-drop.js?v=103"></script>
   <script src="../../../../mechanics/matching.js?v=103"></script>
-  <script src="../../../../mechanics/memory-quest.js?v=101"></script>
   <script src="../../../../mechanics/smart-sentence.js?v=101"></script>
   <script src="../../../../mechanics/target-shooter.js?v=100"></script>
 
@@ -61,7 +60,7 @@
   <script src="../../../../core/duduq-router.js?v=100"></script>
 
   <!-- Conteúdo oficial: Inglês — 2º ano — Módulo 01 -->
-  <script src="./module-01.js?v=100"></script>
+  <script src="./module-01.js?v=120"></script>
 
   <script>
     window.addEventListener(
@@ -108,7 +107,6 @@
           "target-shooter",
           "matching",
           "bubble-pop",
-          "memory-quest",
           "drag-drop",
           "smart-sentence"
         ];
@@ -123,7 +121,6 @@
                 mechanicId
               )
           ) {
-
             root.textContent =
               `Erro: a mecânica "${mechanicId}" não foi registrada.`;
 
@@ -374,7 +371,6 @@
               ];
 
           const questions =
-
             Array.isArray(
               activity.questions
             )
@@ -501,7 +497,6 @@
           });
         }
 
-
         console.info(
           "[DuduQ Content Production]",
           {
@@ -626,7 +621,6 @@
               ?.element;
 
           introElement
-
             ?.classList
             ?.add(
               "is-transition-handoff"
@@ -752,7 +746,6 @@
              usuário para tocar o swoosh de transição.
 
            Observação: navegadores podem bloquear qualquer
-
            áudio audível antes do primeiro gesto do usuário.
            =============================================== */
 
@@ -878,7 +871,6 @@
 
 
         /* ===============================================
-
            INTRO — INÍCIO DIRETO
 
            A experiência visual começa imediatamente.
