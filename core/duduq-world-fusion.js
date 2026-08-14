@@ -1,13 +1,13 @@
 /* =========================================================
    DUDUQ CORE — WORLD FUSION
    Integra o fundo do ano às mecânicas sem perder nitidez.
-   Versão 1.4.9
+   Versão 1.4.10
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.4.9";
+  const VERSION = "1.4.10";
   if (window.DuduQWorldFusion?.version === VERSION) return;
 
   const scriptUrl =
@@ -133,7 +133,6 @@
             .catch(function () {})
             .finally(function () {
               syncFullscreenControls(doc);
-
             });
         } catch (_) {
           syncFullscreenControls(doc);
@@ -220,6 +219,7 @@
      Também repetimos a preparação dentro de cada iframe.
      ======================================================= */
 
+
   function touchSpeechEngine(doc) {
     const view =
       doc?.defaultView;
@@ -269,7 +269,6 @@
       function () {
         touchSpeechEngine(doc);
       };
-
 
     /*
      * Chrome/Edge podem popular a lista de vozes alguns
@@ -440,6 +439,7 @@
               const bubble =
                 label.closest(
                   ".duduq-bp-bubble"
+
                 );
 
               if (!bubble) return;
@@ -540,7 +540,6 @@
                 );
               }
             }
-
           );
       }
     );
@@ -551,6 +550,7 @@
       !doc ||
       literacyFitDocuments.has(doc)
     ) {
+
       fitEarlyLiteracyBubbleWords(doc);
       fitEarlyLiteracyBubblePhrases(doc);
       return;
@@ -676,7 +676,6 @@
               String(
                 voice.lang || ""
               ).toLowerCase() ===
-
               String(locale)
                 .toLowerCase()
             );
@@ -772,6 +771,7 @@
 
         if (
           !bubble ||
+
           bubble.disabled ||
           bubble.getAttribute(
             "aria-disabled"
@@ -812,7 +812,6 @@
   function syncTargetShooterCentering(doc) {
     const arena =
       doc?.querySelector?.(".duduq-ts-arena");
-
 
     if (!arena) return;
 
@@ -883,6 +882,7 @@
         arenaCenter - groupCenter;
 
       const safeInset = 18;
+
       const minAllowed =
         arenaRect.left + safeInset - minLeft;
       const maxAllowed =
@@ -948,7 +948,6 @@
           "scrollIntoView",
           {
             configurable: true,
-
             writable: true,
             value: function (...args) {
               try {
@@ -994,6 +993,7 @@
      vazio. Assim tamanho, crop, animação e proporção permanecem
      idênticos em todas as mecânicas que usam o Lesson Engine.
      ======================================================= */
+
 
   function resolveHeaderMascotSource(doc) {
     const view = doc?.defaultView;
@@ -1084,7 +1084,6 @@
 
       let fallback = Array.from(slot.children).find(
         function (child) {
-
           return child?.classList?.contains(
             "duduq-world-header-mascot-fallback"
           );
@@ -1105,6 +1104,7 @@
 
         fallback?.remove();
         return;
+
       }
 
       if (!fallback) {
@@ -1215,12 +1215,12 @@
             0,
             sampleWidth,
             sampleHeight
+
           );
 
           const pixels = sampleContext.getImageData(
             0,
             0,
-
             sampleWidth,
             sampleHeight
           ).data;
@@ -1326,6 +1326,7 @@
   }
 
   /* =======================================================
+
      PRIMEIRO ÁUDIO — GATE DE ENTRADA APÓS A INTRO
 
      O Lesson Engine agenda o autoplay do enunciado muito cedo.
@@ -1356,7 +1357,6 @@
     }
 
     const originalSpeak = synth.speak.bind(synth);
-
     const originalCancel = synth.cancel.bind(synth);
     let pendingUtterance = null;
     let releaseTimer = null;
@@ -1437,6 +1437,7 @@
     }
 
     initialSpeechGateDocuments.add(doc);
+
   }
 
 
@@ -1492,7 +1493,6 @@
     );
 
     if (mascotImage) {
-
       mascotImage.setAttribute("src", mascot);
       mascotImage.setAttribute("data-cropped", "false");
 
@@ -1628,7 +1628,6 @@
       function () {
         missionBridgePending = null;
         hideMissionBridge({ immediate: true });
-
       }
     );
 
@@ -1659,6 +1658,7 @@
 
   const UNIVERSAL_AUDIO_CONTROL_SELECTOR = [
     'button[class*="audio" i]',
+
     '[role="button"][class*="audio" i]',
     'button[class*="sound" i]',
     '[role="button"][class*="sound" i]',
@@ -1769,6 +1769,7 @@
     const memoryAudioCard =
       element.closest(
         ".duduq-mq-card"
+
       );
 
     if (
@@ -1879,6 +1880,7 @@
     function rememberTrigger(event) {
       const trigger =
         resolveAudioTriggerFromEventTarget(
+
           event.target
         );
 
@@ -1899,7 +1901,6 @@
         lastTrigger?.isConnected &&
         now - lastTriggerAt <= 1800
           ? lastTrigger
-
           : null;
 
       return (
@@ -1990,6 +1991,7 @@
       synth &&
       typeof synth.speak === "function"
     ) {
+
       const previousSpeak =
         synth.speak.bind(synth);
       const previousCancel =
@@ -2035,7 +2037,6 @@
         }
 
         try {
-
           utterance?.addEventListener?.(
             "start",
             startVisual,
@@ -2101,6 +2102,7 @@
             Object.defineProperty(
               synth,
               "cancel",
+
               {
                 configurable: true,
                 value: visualCancel
@@ -2171,7 +2173,6 @@
           control.getAttribute?.(
             "data-playing"
           ) || ""
-
         ).toLowerCase() === "true";
 
       /*
@@ -2212,6 +2213,7 @@
       }
 
       const speechPlaying =
+
         Boolean(
           synth?.speaking
         );
@@ -2307,7 +2309,6 @@
     syncDragDropInstructionAudioState();
 
     /* HTML AUDIO / MEDIA -------------------------------- */
-
     const mediaControls = new WeakMap();
 
     doc.addEventListener(
@@ -2323,6 +2324,7 @@
         ) {
           return;
         }
+
 
         const control = chooseControl();
 
@@ -2443,7 +2445,6 @@
 
   function installMemoryQuestPedagogy(doc) {
     if (
-
       !doc?.defaultView ||
       memoryQuestPedagogyDocuments.has(doc)
     ) {
@@ -2544,6 +2545,7 @@
         card.setAttribute(
           "aria-label",
           (
+
             currentLabel +
             " Toque para ouvir novamente."
           ).trim()
@@ -2579,7 +2581,6 @@
       }
 
       pendingMatchedCard = null;
-
 
       freshMatched.forEach(function (card) {
         if (!queue.includes(card)) {
@@ -2656,6 +2657,7 @@
             ".duduq-mq-audio-main, .duduq-mq-sound-badge"
           );
 
+
         try {
           clearAudioPlayingState(
             doc,
@@ -2715,7 +2717,6 @@
         !view.speechSynthesis ||
         typeof view.SpeechSynthesisUtterance ===
           "undefined"
-
       ) {
         return;
       }
@@ -2766,6 +2767,7 @@
           subtree: true,
           attributes: true,
           attributeFilter: [
+
             "data-matched",
             "disabled",
             "aria-label",
@@ -2851,7 +2853,6 @@
       const schema =
         view.DUDUQ_DRAG_DROP_SCHEMA ||
         view.DUDUQ_MECHANIC_SCHEMA ||
-
         null;
 
       const stages =
@@ -3123,7 +3124,6 @@
         payload,
         x: Number(event.clientX) || 0,
         y: Number(event.clientY) || 0,
-
         initialTarget:
           containingTarget(card)
       };
@@ -3209,6 +3209,7 @@
 
   /* =======================================================
      FEEDBACK DE VOZ — PADRÃO UNIVERSAL
+
 
      Mantém os SFX existentes e acrescenta uma voz breve,
      simpática e consistente em todas as mecânicas:
@@ -3319,6 +3320,7 @@
         audio.volume = 0.82;
 
         rootView
+
           .__DUDUQ_FEEDBACK_VOICE_AUDIO =
           audio;
 
@@ -3396,7 +3398,6 @@
   }
 
 
-
   function ensureStylesheet(doc) {
     if (doc === document) {
       return;
@@ -3430,6 +3431,7 @@
     installDragDropDropAudio(doc);
     installFeedbackVoice(doc);
     syncDocument(doc, frame);
+
     installFullscreenBridge(doc);
     installEarlyLiteracySpeech(doc);
     installEarlyLiteracyFit(doc);
@@ -3530,7 +3532,6 @@
 
           if (node instanceof HTMLIFrameElement) {
             manageFrame(node);
-
           }
 
           node.querySelectorAll?.("iframe").forEach(manageFrame);
@@ -3541,6 +3542,7 @@
     });
 
     observer.observe(
+
       document.body || document.documentElement,
       {
         childList: true,
@@ -3576,3 +3578,4 @@
       window.DuduQWorldFusion.refresh();
     }
   );
+})();
