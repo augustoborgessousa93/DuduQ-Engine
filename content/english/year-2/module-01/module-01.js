@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 2 — MODULE 01
    Greetings & The Alphabet
-   Versão 1.3.0 — REVISÃO PREMIUM PEDAGÓGICA E UX
+   Versão 1.3.1 — LETRAS VISUAIS + POLIMENTO PREMIUM
 
    FONTES EDITORIAIS
    - DUDUQ Conteúdo Oficial — Língua Inglesa v1.0
@@ -23,7 +23,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.3.0";
+  const VERSION = "1.3.1";
 
   window.DUDUQ_CONTENT =
     window.DUDUQ_CONTENT || {};
@@ -79,7 +79,28 @@
       BASE + "Imagens%20Ilustrativa/Fish_Girl.png",
 
     wheelchairBoy:
-      BASE + "Imagens%20Ilustrativa/wheelchair_boy.png"
+      BASE + "Imagens%20Ilustrativa/wheelchair_boy.png",
+
+    letterA:
+      BASE + "Imagens%20Ilustrativa/Letra%20A.png",
+
+    letterB:
+      BASE + "Imagens%20Ilustrativa/Letra%20B.png",
+
+    letterC:
+      BASE + "Imagens%20Ilustrativa/Letra%20C.png",
+
+    letterD:
+      BASE + "Imagens%20Ilustrativa/Letra%20D.png",
+
+    letterE:
+      BASE + "Imagens%20Ilustrativa/Letra%20E.png",
+
+    letterM:
+      BASE + "Imagens%20Ilustrativa/Letra%20M.png",
+
+    letterS:
+      BASE + "Imagens%20Ilustrativa/Letra%20S.png"
   });
 
   function audioFile(name) {
@@ -365,6 +386,19 @@
 
   function sourceOption(id, text) {
     return { id, text };
+  }
+
+  function letterVisualOption(id, text, imageAssetKey) {
+    return {
+      id,
+      text,
+      image: {
+        alt: "Letra " + text
+      },
+      metadata: {
+        imageAssetKey
+      }
+    };
   }
 
   function audioOption(id, text, spokenText) {
@@ -1074,9 +1108,9 @@
                       audioText: "A",
                       audioLanguage: "en-US",
                       alternatives: [
-                        sourceOption("b", "B"),
-                        sourceOption("c", "C"),
-                        sourceOption("a", "A"),
+                        letterVisualOption("b", "B", "letterB"),
+                        letterVisualOption("c", "C", "letterC"),
+                        letterVisualOption("a", "A", "letterA")
                       ],
                       answer: {
                         type: "single",
@@ -1107,9 +1141,9 @@
                       audioText: "B",
                       audioLanguage: "en-US",
                       alternatives: [
-                        sourceOption("a", "A"),
-                        sourceOption("c", "C"),
-                        sourceOption("b", "B")
+                        letterVisualOption("a", "A", "letterA"),
+                        letterVisualOption("c", "C", "letterC"),
+                        letterVisualOption("b", "B", "letterB")
                       ],
                       answer: {
                         type: "single",
@@ -1140,9 +1174,9 @@
                       audioText: "C",
                       audioLanguage: "en-US",
                       alternatives: [
-                        sourceOption("c", "C"),
-                        sourceOption("a", "A"),
-                        sourceOption("b", "B"),
+                        letterVisualOption("c", "C", "letterC"),
+                        letterVisualOption("a", "A", "letterA"),
+                        letterVisualOption("b", "B", "letterB")
                       ],
                       answer: {
                         type: "single",
@@ -1226,17 +1260,20 @@
                             {
                               id: "letter-a",
                               label: "A",
-                              display: "word"
+                              image: VISUALS.letterA,
+                              display: "image"
                             },
                             {
                               id: "letter-m",
                               label: "M",
-                              display: "word"
+                              image: VISUALS.letterM,
+                              display: "image"
                             },
                             {
                               id: "letter-b",
                               label: "B",
-                              display: "word"
+                              image: VISUALS.letterB,
+                              display: "image"
                             }
                           ]
                         }
@@ -1306,16 +1343,22 @@
                 {
                   id: "letter-a",
                   label: "A",
+                  imageSrc: VISUALS.letterA,
+                  alt: "Letra A",
                   capacity: 1
                 },
                 {
                   id: "letter-b",
                   label: "B",
+                  imageSrc: VISUALS.letterB,
+                  alt: "Letra B",
                   capacity: 1
                 },
                 {
                   id: "letter-c",
                   label: "C",
+                  imageSrc: VISUALS.letterC,
+                  alt: "Letra C",
                   capacity: 1
                 }
               ],
