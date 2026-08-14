@@ -24,7 +24,7 @@
   }
 
   const DEFAULT_COMPANY_LOGO =
-    "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/LOGO%20DA%20EMPRESA_COLORIDO.png";
+    "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/LOGO%20DA%20EMPRESA_COLORIDO.png";
 
   const DEFAULTS = Object.freeze({
     companyKicker: "UMA CRIAÇÃO DE",
