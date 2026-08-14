@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CORE — INTRO CINEMATOGRÁFICA
    Premium AAA+ Brand Launch
-   Versão 1.2.0
+   Versão 1.2.1
 
    Sequência padrão:
    1. BRANDING  — marca da empresa em escala outdoor
@@ -17,13 +17,14 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.2.0";
+  const VERSION = "1.2.1";
 
   if (window.DuduQIntro && window.DuduQIntro.version === VERSION) {
     return;
   }
 
   const DEFAULT_COMPANY_LOGO =
+    window.DuduQAssets?.assets?.branding?.companyLogo ||
     "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/LOGO%20DA%20EMPRESA_COLORIDO.png";
 
   const DEFAULTS = Object.freeze({
@@ -562,10 +563,6 @@
   }
 
   function render(options) {
-    /*
-     * A primeira cena já nasce ativa para impedir
-     * flash visual da coleção antes da timeline iniciar.
-     */
     const root = createElement(
       "section",
       "duduq-intro is-branding"
@@ -744,10 +741,6 @@
       }
     }
 
-    /*
-     * Caso markReady() seja chamado cedo por uma integração
-     * externa, só liberamos o CTA quando a cena Mission existir.
-     */
     if (phase === "mission" && instance.pendingReady) {
       window.setTimeout(function () {
         markInstanceReady(instance);
@@ -979,10 +972,6 @@
       options: instance.options
     });
 
-    /*
-     * O clique é intencionalmente preservado como gesto real
-     * do usuário: isso também ajuda o navegador a liberar áudio.
-     */
     if (typeof instance.options.onStart === "function") {
       try {
         instance.options.onStart({
@@ -1099,11 +1088,6 @@
       safeText(merged.startLabel) ||
       "INICIAR MISSÃO";
 
-    /*
-     * Guardrails de marca:
-     * mesmo integrações antigas que ainda enviem 1800 ms
-     * não conseguem acelerar demais a exposição da empresa.
-     */
     merged.minDurationMs = clamp(
       Number(merged.minDurationMs) || 2200,
       1000,
@@ -1140,10 +1124,6 @@
       28
     );
 
-    /*
-     * Guardrails de escala:
-     * o Core protege as marcas contra configurações pequenas.
-     */
     merged.companyWidth = clamp(
       Number(merged.companyWidth) || 820,
       760,
@@ -1329,4 +1309,3 @@
       " — Brand Launch AAA+ carregado."
   );
 })();
-
