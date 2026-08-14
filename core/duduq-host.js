@@ -1,7 +1,11 @@
 /* =========================================================
    DUDUQ CORE — HOST
    Orquestrador central das mecânicas e módulos DuduQ.
-   Versão 1.6.6
+   Versão 1.6.7
+
+   NOVIDADES 1.6.7
+   - sincroniza fallback do World Fusion com JS 1.4.9 / cache 149
+   - não altera lógica de progresso, conclusão ou mecânicas
 
    NOVIDADES 1.6.6
    - cobre a viewport de forma síncrona quando uma etapa termina
@@ -93,7 +97,7 @@
     document.currentScript?.src ||
     new URL("./duduq-host.js", window.location.href).href;
 
-  const VERSION = "1.6.6";
+  const VERSION = "1.6.7";
 
   if (
     window.DuduQ &&
@@ -108,7 +112,6 @@
 
   /* =======================================================
      TELA CHEIA CENTRALIZADA
-
 
      O documento principal é o proprietário da tela cheia.
      Assim, destruir o iframe durante uma troca de mecânica
@@ -130,6 +133,7 @@
       function (iframe) {
         try {
           iframe.contentWindow?.postMessage(message, "*");
+
         } catch (_) {}
       }
     );
@@ -220,7 +224,6 @@
   function ensureWorldFusion() {
     const coreBase = new URL("./", HOST_SCRIPT_URL);
 
-
     if (!document.getElementById("duduq-world-fusion-core-style")) {
       const link = document.createElement("link");
       link.id = "duduq-world-fusion-core-style";
@@ -239,7 +242,7 @@
       const script = document.createElement("script");
       script.id = "duduq-world-fusion-core-script";
       script.src = new URL(
-        "duduq-world-fusion.js?v=148",
+        "duduq-world-fusion.js?v=149",
         coreBase
       ).href;
       script.async = true;
@@ -266,6 +269,7 @@
     if (!source) {
       return Promise.resolve(false);
     }
+
 
     if (
       source === completionMascotSource &&
@@ -330,7 +334,6 @@
     "duduq:assets-ready",
     primeCompletionMascot
   );
-
 
 
   /* =======================================================
@@ -402,6 +405,7 @@
   function clearContainer(container) {
     if (!container) {
       return;
+
     }
 
     while (container.firstChild) {
@@ -441,7 +445,6 @@
       );
     } catch (_) {}
   }
-
 
 
   function applyYearBackground(year) {
@@ -539,6 +542,7 @@
     const transition =
       getTransition();
 
+
     if (
       !transition ||
       typeof transition.coverImmediate !==
@@ -552,7 +556,6 @@
         transition.coverImmediate(
           {
             ...TRANSITION_OPTIONS,
-
             ...options
           }
         ) === true
@@ -663,7 +666,6 @@
     );
 
     if (
-
       session !== activeSession
     ) {
       return false;
@@ -675,6 +677,7 @@
       : null;
 
     if (!iframe) {
+
       return true;
     }
 
@@ -774,7 +777,6 @@
             finish,
             POST_LOAD_SETTLE_MS
           );
-
         }
 
         window.addEventListener(
@@ -811,6 +813,7 @@
       !session ||
       session !== activeSession ||
       typeof callback !== "function"
+
     ) {
       return Promise.resolve(false);
     }
@@ -885,7 +888,6 @@
       id,
 
       version: String(
-
         definition.version || "1.0.0"
       ),
 
@@ -1082,6 +1084,7 @@
         totalSteps - 1
       );
     } else {
+
       currentStepIndex = 0;
     }
 
@@ -1106,7 +1109,6 @@
     }
 
     const fraction = totalSteps > 0
-
       ? clamp(
           completedSteps / totalSteps,
           0,
@@ -1217,8 +1219,8 @@
         color: "#17375e",
         fontFamily: "system-ui, sans-serif",
         boxShadow: "0 18px 44px rgba(25,61,96,0.18)",
-
         textAlign: "center"
+
       }
     );
 
@@ -1328,7 +1330,6 @@
         ) !== false;
       } catch (error) {
         renderRuntimeError(
-
           session,
           `A validação da mecânica "${step.mechanic}" apresentou um erro.`,
           error
@@ -1355,6 +1356,7 @@
     dispatch(
       "duduq:step-start",
       {
+
         engineVersion: VERSION,
         moduleId: session.module.id,
         stepId: step.id,
@@ -1439,7 +1441,6 @@
 
     /*
      * Entre mecânicas não existe som de vitória.
-
      * Se um runtime interno iniciou o win, cortamos agora,
      * antes do slide começar.
      */
@@ -1550,7 +1551,6 @@
           {
             paintFrames: 1,
             timeoutMs: VIEW_READY_TIMEOUT_MS
-
           }
         );
 
@@ -1661,7 +1661,6 @@
     }
 
     return `${subject} concluído com sucesso.`;
-
   }
 
 
@@ -1763,6 +1762,7 @@
         margin: "0 0 18px",
         color: "#52677e",
         fontSize: "19px",
+
         fontWeight: "700",
         lineHeight: "1.4"
       }
@@ -1772,7 +1772,6 @@
       buildCompletionMessage(
         session.module
       );
-
 
     const badge = createElement(
       "div",
@@ -1899,6 +1898,7 @@
 
         renderCompletionFallback(
           session,
+
           progress
         );
       }
@@ -1994,7 +1994,6 @@
 
     const session = activeSession;
 
-
     if (session.transitioning) {
       return false;
     }
@@ -2035,6 +2034,7 @@
             moduleId: session.module.id,
             year: session.module.year,
             subject: session.module.subject,
+
             module: session.module.module,
             progress
           }
@@ -2104,7 +2104,6 @@
       moduleId: activeSession.module.id,
       year: activeSession.module.year,
       subject: activeSession.module.subject,
-
       module: activeSession.module.module,
       stepIndex: activeSession.stepIndex,
       totalSteps: activeSession.module.steps.length,
