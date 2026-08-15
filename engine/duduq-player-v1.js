@@ -822,6 +822,385 @@
 
         installIntroSoundRecovery();
 
+        /* ===============================================
+           DUDUQ GOLDEN RUNTIME POLICY 003
+
+           Politica central aplicada dentro de qualquer iframe
+           de mecanica do Golden Master:
+           - feedback possui linha propria e nunca e cortado;
+           - fullscreen recalcula o runtime;
+           - resize e fullscreen reenviam resize para React;
+           - uma unica regra global para todas as mecanicas.
+           =============================================== */
+
+        function installGoldenRuntimePolicy003() {
+          const observedFrames =
+            new WeakSet();
+
+          const runtimeCss = `
+html,
+body,
+#root {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100dvh !important;
+}
+
+body {
+  overflow: hidden !important;
+}
+
+.duduq-engine-root {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  overflow: hidden !important;
+}
+
+.duduq-engine-shell {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-rows:
+    auto
+    minmax(0, 1fr)
+    auto !important;
+  align-content: stretch !important;
+  row-gap: clamp(8px, 1.25dvh, 14px) !important;
+  overflow: hidden !important;
+}
+
+.duduq-engine-stage {
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: hidden !important;
+}
+
+.duduq-engine-feedback {
+  box-sizing: border-box !important;
+  position: relative !important;
+  z-index: 60 !important;
+  width: min(920px, calc(100% - 24px)) !important;
+  height: auto !important;
+  min-height: clamp(88px, 10.5dvh, 116px) !important;
+  max-height: none !important;
+  margin: 0 auto !important;
+  padding:
+    4px
+    0
+    max(8px, env(safe-area-inset-bottom)) !important;
+  overflow: visible !important;
+}
+
+.duduq-engine-feedback-card,
+.duduq-engine-feedback[data-state="success"]
+  .duduq-engine-feedback-card,
+.duduq-engine-feedback[data-state="retry"]
+  .duduq-engine-feedback-card {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 78px !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+@media (min-height: 820px) and (min-width: 900px) {
+  .duduq-engine-shell {
+    row-gap: clamp(12px, 1.5dvh, 18px) !important;
+  }
+
+  .duduq-engine-feedback {
+    min-height: 108px !important;
+  }
+
+  .duduq-engine-feedback-card,
+  .duduq-engine-feedback[data-state="success"]
+    .duduq-engine-feedback-card,
+  .duduq-engine-feedback[data-state="retry"]
+    .duduq-engine-feedback-card {
+    min-height: 88px !important;
+  }
+}
+
+@media (max-height: 700px) and (min-width: 721px) {
+  .duduq-engine-shell {
+    row-gap: 8px !important;
+  }
+
+  .duduq-engine-feedback {
+    min-height: 82px !important;
+    padding-bottom: 6px !important;
+  }
+
+  .duduq-engine-feedback-card,
+  .duduq-engine-feedback[data-state="success"]
+    .duduq-engine-feedback-card,
+  .duduq-engine-feedback[data-state="retry"]
+    .duduq-engine-feedback-card {
+    min-height: 70px !important;
+  }
+}
+`;
+
+          function apply(frame) {
+            if (
+              !frame ||
+              frame.tagName !== "IFRAME"
+            ) {
+              return;
+            }
+
+            try {
+              const doc =
+                frame.contentDocument;
+
+              if (!doc?.head) {
+                return;
+              }
+
+              let style =
+                doc.getElementById(
+                  "duduq-golden-runtime-policy-003"
+                );
+
+              if (!style) {
+                style =
+                  doc.createElement("style");
+
+                style.id =
+                  "duduq-golden-runtime-policy-003";
+
+                style.textContent =
+                  runtimeCss;
+
+                doc.head.appendChild(style);
+              }
+
+              doc.documentElement
+                .setAttribute(
+                  "data-duduq-golden-runtime",
+                  "003"
+                );
+
+              try {
+                frame.contentWindow
+                  ?.dispatchEvent(
+                    new Event("resize")
+                  );
+              } catch (_) {}
+            } catch (_) {
+              /*
+               * A mecanica oficial e same-origin.
+               * Se algum iframe externo aparecer, ignoramos.
+               */
+            }
+          }
+
+          function watchFrame(frame) {
+            if (
+              !frame ||
+              observedFrames.has(frame)
+            ) {
+              return;
+            }
+
+            observedFrames.add(frame);
+
+            frame.addEventListener(
+              "load",
+              function () {
+                window.requestAnimationFrame(
+                  function () {
+                    apply(frame);
+                  }
+                );
+              }
+            );
+
+            apply(frame);
+          }
+
+          function refreshAll() {
+            root
+              ?.querySelectorAll("iframe")
+              ?.forEach(watchFrame);
+
+            root
+              ?.querySelectorAll("iframe")
+              ?.forEach(apply);
+          }
+
+          const observer =
+            new MutationObserver(
+              function (records) {
+                records.forEach(
+                  function (record) {
+                    record.addedNodes
+                      ?.forEach(
+                        function (node) {
+                          if (
+                            node?.nodeType !== 1
+                          ) {
+                            return;
+                          }
+
+                          if (
+                            node.tagName === "IFRAME"
+                          ) {
+                            watchFrame(node);
+                          }
+
+                          node
+                            .querySelectorAll
+                            ?.("iframe")
+                            ?.forEach(watchFrame);
+                        }
+                      );
+                  }
+                );
+              }
+            );
+
+          observer.observe(
+            root,
+            {
+              childList: true,
+              subtree: true
+            }
+          );
+
+          window.addEventListener(
+            "resize",
+            function () {
+              window.requestAnimationFrame(
+                refreshAll
+              );
+            },
+            { passive: true }
+          );
+
+          document.addEventListener(
+            "fullscreenchange",
+            function () {
+              window.setTimeout(
+                refreshAll,
+                40
+              );
+            }
+          );
+
+          refreshAll();
+        }
+
+
+        /* ===============================================
+           INTRO SOUND RECOVERY 003
+
+           Autoplay audivel pode ser bloqueado pelo navegador.
+           Quando isso ocorrer, guardamos a fase e usamos o
+           primeiro gesto real do usuario para recuperar o som
+           SEM reproduzir efeitos fora de contexto.
+           =============================================== */
+
+        function installIntroSoundRecovery003() {
+          const sound =
+            window.DuduQSound;
+
+          if (!sound) return;
+
+          let phase =
+            "branding";
+
+          let blocked =
+            false;
+
+          document.addEventListener(
+            "duduq:intro-phase",
+            function (event) {
+              phase =
+                event?.detail?.phase ||
+                phase;
+            }
+          );
+
+          window.addEventListener(
+            "duduq:sound-blocked",
+            function (event) {
+              const name =
+                event?.detail?.name ||
+                "";
+
+              if (
+                name ===
+                  "intro-company-swoosh" ||
+                name ===
+                  "intro-mission-music"
+              ) {
+                blocked = true;
+              }
+            }
+          );
+
+          function recover() {
+            if (!blocked) return;
+
+            const instance =
+              window.DuduQIntro
+                ?.getInstance
+                ?.();
+
+            if (
+              !instance ||
+              !instance.element
+            ) {
+              return;
+            }
+
+            blocked = false;
+
+            if (
+              phase === "mission" ||
+              phase === "ready"
+            ) {
+              sound.playLoop(
+                "intro-mission-music",
+                {
+                  volume: 0.24,
+                  fadeInMs: 260,
+                  minGapMs: 0
+                }
+              );
+            } else {
+              sound.play(
+                "intro-company-swoosh",
+                {
+                  volume: 0.58,
+                  minGapMs: 0
+                }
+              );
+            }
+          }
+
+          document.addEventListener(
+            "pointerdown",
+            recover,
+            true
+          );
+
+          document.addEventListener(
+            "keydown",
+            recover,
+            true
+          );
+        }
+
+        installGoldenRuntimePolicy003();
+        installIntroSoundRecovery003();
+
 
         /* ===============================================
            INTRO — INÍCIO DIRETO
