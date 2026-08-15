@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "contractMajor": 1,
-  "revision": 22,
+  "revision": 23,
   "core": {
     "release": "1.0.0",
     "styles": [
@@ -77,9 +77,9 @@
   },
   "mechanics": {
     "bubble-pop": {
-      "release": "1.0.5",
-      "adapter": "/engine/releases/mechanics/bubble-pop/1.0.5/bubble-pop.js",
-      "runtime": "/engine/releases/mechanics/bubble-pop/1.0.5/DUDUQ_BUBBLE_POP.html"
+      "release": "1.0.6",
+      "adapter": "/engine/releases/mechanics/bubble-pop/1.0.6/bubble-pop.js",
+      "runtime": "/engine/releases/mechanics/bubble-pop/1.0.6/DUDUQ_BUBBLE_POP.html"
     },
     "drag-drop": {
       "release": "1.1.14",
@@ -97,9 +97,9 @@
       "runtime": "/engine/releases/mechanics/memory-quest/1.0.2/DUDUQ_MEMORY_QUEST.html"
     },
     "smart-sentence": {
-      "release": "1.0.8",
-      "adapter": "/engine/releases/mechanics/smart-sentence/1.0.8/smart-sentence.js",
-      "runtime": "/engine/releases/mechanics/smart-sentence/1.0.8/DUDUQ_SMART_SENTENCE.html"
+      "release": "1.0.9",
+      "adapter": "/engine/releases/mechanics/smart-sentence/1.0.9/smart-sentence.js",
+      "runtime": "/engine/releases/mechanics/smart-sentence/1.0.9/DUDUQ_SMART_SENTENCE.html"
     },
     "target-shooter": {
       "release": "1.0.1",
