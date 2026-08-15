@@ -1314,30 +1314,32 @@ body {
 
 })();
 
-/* DUDUQ GOLDEN RUNTIME POLICY 006 — CANONICAL LAYOUT */
+/* DUDUQ GOLDEN RUNTIME POLICY 007 — VIEWPORT FIT */
 (function () {
   "use strict";
 
-  if (window.__DUDUQ_GOLDEN_POLICY_006__) return;
-  window.__DUDUQ_GOLDEN_POLICY_006__ = true;
+  if (window.__DUDUQ_GOLDEN_POLICY_007__) return;
+  window.__DUDUQ_GOLDEN_POLICY_007__ = true;
 
-  const STYLE_ID = "duduq-golden-runtime-policy-006";
-  const OLD_STYLE_IDS = [
+  const STYLE_ID = "duduq-golden-runtime-policy-007";
+  const OLD_IDS = [
     "duduq-golden-runtime-policy-003",
-    "duduq-golden-runtime-policy-004"
+    "duduq-golden-runtime-policy-004",
+    "duduq-golden-runtime-policy-006"
   ];
 
   const CSS = `
 html,
 body,
 #root {
+  box-sizing: border-box !important;
   width: 100% !important;
   height: 100% !important;
-  min-height: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
 }
 
 body {
-  margin: 0 !important;
   overflow: hidden !important;
 }
 
@@ -1345,15 +1347,21 @@ body {
   box-sizing: border-box !important;
   width: 100% !important;
   height: 100dvh !important;
-  min-height: 100dvh !important;
+  min-height: 0 !important;
+  max-height: 100dvh !important;
+  padding:
+    7px
+    8px
+    max(7px, env(safe-area-inset-bottom)) !important;
   overflow: hidden !important;
 }
 
 .duduq-engine-shell {
   box-sizing: border-box !important;
-  width: min(1280px, calc(100% - 12px)) !important;
+  width: min(1320px, 100%) !important;
   height: 100% !important;
   min-height: 0 !important;
+  max-height: 100% !important;
   margin: 0 auto !important;
   display: grid !important;
   grid-template-rows:
@@ -1361,23 +1369,33 @@ body {
     minmax(0, 1fr)
     auto !important;
   align-content: stretch !important;
-  row-gap: 8px !important;
+  align-items: stretch !important;
+  row-gap: 6px !important;
   overflow: hidden !important;
+}
+
+.duduq-engine-header {
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
 }
 
 .duduq-engine-stage {
   box-sizing: border-box !important;
   width: 100% !important;
-  min-width: 0 !important;
+  height: auto !important;
   min-height: 0 !important;
-  max-height: none !important;
+  max-height: 100% !important;
+  margin: 0 !important;
+  align-self: stretch !important;
   overflow: hidden !important;
 }
 
-/* Feedback ocioso não reserva área. */
+/* O feedback ocioso não consome layout. */
 .duduq-engine-feedback[data-state="idle"],
 .duduq-engine-feedback:empty {
   box-sizing: border-box !important;
+  position: static !important;
   width: 0 !important;
   height: 0 !important;
   min-height: 0 !important;
@@ -1388,44 +1406,52 @@ body {
   overflow: hidden !important;
 }
 
-/* Feedback ativo é SEMPRE a terceira linha da grade. */
+/* Feedback ativo ocupa a terceira linha e sempre cabe no iframe. */
 .duduq-engine-feedback:not([data-state="idle"]):not(:empty) {
   box-sizing: border-box !important;
   position: static !important;
   inset: auto !important;
   z-index: 90 !important;
-  width: min(900px, calc(100% - 24px)) !important;
-  height: auto !important;
-  min-height: 76px !important;
-  max-height: 90px !important;
+  width: min(900px, calc(100% - 28px)) !important;
+  height: 74px !important;
+  min-height: 74px !important;
+  max-height: 74px !important;
   margin: 0 auto !important;
-  padding: 4px 0 max(6px, env(safe-area-inset-bottom)) !important;
+  padding:
+    3px
+    0
+    max(4px, env(safe-area-inset-bottom)) !important;
   transform: none !important;
-  overflow: visible !important;
+  overflow: hidden !important;
 }
 
 .duduq-engine-feedback:not([data-state="idle"]):not(:empty)
   .duduq-engine-feedback-card {
   box-sizing: border-box !important;
   width: 100% !important;
-  height: auto !important;
-  min-height: 68px !important;
-  max-height: 80px !important;
+  height: 66px !important;
+  min-height: 66px !important;
+  max-height: 66px !important;
   margin: 0 !important;
   overflow: hidden !important;
 }
 
-.duduq-engine-feedback:not([data-state="idle"]):not(:empty)
-  .duduq-engine-feedback-copy {
-  min-width: 0 !important;
-  overflow: hidden !important;
+/* Quando o feedback entra, a stage encolhe de verdade. */
+.duduq-engine-shell:has(
+  .duduq-engine-feedback:not([data-state="idle"]):not(:empty)
+) {
+  grid-template-rows:
+    auto
+    minmax(0, 1fr)
+    74px !important;
 }
 
-/* Quando feedback aparece, a stage pode ceder altura. */
 .duduq-engine-shell:has(
   .duduq-engine-feedback:not([data-state="idle"]):not(:empty)
 ) .duduq-engine-stage {
+  height: auto !important;
   min-height: 0 !important;
+  max-height: 100% !important;
   overflow: hidden !important;
 }
 
@@ -1436,34 +1462,40 @@ html[data-duduq-fullscreen="true"] .duduq-engine-root {
     max(8px, env(safe-area-inset-bottom)) !important;
 }
 
-html[data-duduq-fullscreen="true"] .duduq-engine-shell {
-  width: min(1320px, calc(100% - 8px)) !important;
-  row-gap: 8px !important;
-}
-
 html[data-duduq-fullscreen="true"]
   .duduq-engine-feedback:not([data-state="idle"]):not(:empty) {
-  width: min(940px, calc(100% - 28px)) !important;
-  min-height: 78px !important;
-  max-height: 88px !important;
-  padding-bottom: max(8px, env(safe-area-inset-bottom)) !important;
+  width: min(940px, calc(100% - 32px)) !important;
 }
 
 @media (min-width: 900px) and (max-height: 700px) {
+  .duduq-engine-root {
+    padding-top: 5px !important;
+  }
+
   .duduq-engine-shell {
-    row-gap: 6px !important;
+    row-gap: 5px !important;
   }
 
   .duduq-engine-feedback:not([data-state="idle"]):not(:empty) {
-    min-height: 70px !important;
-    max-height: 82px !important;
-    padding-block: 3px 5px !important;
+    height: 68px !important;
+    min-height: 68px !important;
+    max-height: 68px !important;
   }
 
   .duduq-engine-feedback:not([data-state="idle"]):not(:empty)
     .duduq-engine-feedback-card {
-    min-height: 64px !important;
-    max-height: 74px !important;
+    height: 61px !important;
+    min-height: 61px !important;
+    max-height: 61px !important;
+  }
+
+  .duduq-engine-shell:has(
+    .duduq-engine-feedback:not([data-state="idle"]):not(:empty)
+  ) {
+    grid-template-rows:
+      auto
+      minmax(0, 1fr)
+      68px !important;
   }
 }
 `;
@@ -1481,12 +1513,11 @@ html[data-duduq-fullscreen="true"]
       const doc = frame.contentDocument;
       if (!doc?.head || !doc.documentElement) return;
 
-      OLD_STYLE_IDS.forEach(function (id) {
+      OLD_IDS.forEach(function (id) {
         doc.getElementById(id)?.remove?.();
       });
 
       let style = doc.getElementById(STYLE_ID);
-
       if (!style) {
         style = doc.createElement("style");
         style.id = STYLE_ID;
@@ -1533,11 +1564,7 @@ html[data-duduq-fullscreen="true"]
     records.forEach(function (record) {
       record.addedNodes.forEach(function (node) {
         if (!(node instanceof Element)) return;
-
-        if (node.tagName === "IFRAME") {
-          watch(node);
-        }
-
+        if (node.tagName === "IFRAME") watch(node);
         node.querySelectorAll?.("iframe").forEach(watch);
       });
     });
