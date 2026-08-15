@@ -1,7 +1,7 @@
 {
     "schemaVersion":  1,
     "contractMajor":  1,
-    "revision":  3,
+    "revision":  4,
     "core":  {
                  "release":  "1.0.0",
                  "styles":  [
@@ -82,14 +82,14 @@
                                          "runtime":  "/engine/releases/mechanics/bubble-pop/1.0.1/DUDUQ_BUBBLE_POP.html"
                                      },
                       "drag-drop":  {
-                                        "release":  "1.0.2",
-                                        "adapter":  "/engine/releases/mechanics/drag-drop/1.0.2/drag-drop.js",
-                                        "runtime":  "/engine/releases/mechanics/drag-drop/1.0.2/DUDUQ_DRAG_DROP.html"
+                                        "release":  "1.0.3",
+                                        "adapter":  "/engine/releases/mechanics/drag-drop/1.0.3/drag-drop.js",
+                                        "runtime":  "/engine/releases/mechanics/drag-drop/1.0.3/DUDUQ_DRAG_DROP.html"
                                     },
                       "matching":  {
-                                       "release":  "1.0.2",
-                                       "adapter":  "/engine/releases/mechanics/matching/1.0.2/matching.js",
-                                       "runtime":  "/engine/releases/mechanics/matching/1.0.2/DUDUQ_MATCHING.html"
+                                       "release":  "1.0.3",
+                                       "adapter":  "/engine/releases/mechanics/matching/1.0.3/matching.js",
+                                       "runtime":  "/engine/releases/mechanics/matching/1.0.3/DUDUQ_MATCHING.html"
                                    },
                       "memory-quest":  {
                                            "release":  "1.0.0",
