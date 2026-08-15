@@ -1314,85 +1314,270 @@ body {
 
 })();
 
-
-/* DUDUQ GOLDEN RUNTIME POLICY 004 */
+/* DUDUQ GOLDEN RUNTIME POLICY 006 — CANONICAL LAYOUT */
 (function () {
   "use strict";
-  if (window.__DUDUQ_GOLDEN_POLICY_004__) return;
-  window.__DUDUQ_GOLDEN_POLICY_004__ = true;
 
-  const STYLE_ID = "duduq-golden-runtime-policy-004";
-  const RUNTIME_CSS = `
-html,body,#root{width:100%!important;height:100%!important;min-height:100%!important}
-body{margin:0!important;overflow:hidden!important}
-.duduq-engine-root{box-sizing:border-box!important;width:100%!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important}
-.duduq-engine-shell{box-sizing:border-box!important;width:100%!important;height:100%!important;min-height:0!important;display:grid!important;grid-template-rows:auto minmax(0,1fr) auto!important;align-content:stretch!important;row-gap:clamp(7px,1.1dvh,12px)!important;overflow:hidden!important}
-.duduq-engine-stage{box-sizing:border-box!important;min-height:0!important;max-height:none!important;overflow:hidden!important}
-.duduq-engine-feedback[data-state="idle"],.duduq-engine-feedback:empty{box-sizing:border-box!important;width:0!important;height:0!important;min-height:0!important;max-height:0!important;margin:0 auto!important;padding:0!important;overflow:hidden!important;border:0!important}
-.duduq-engine-feedback:not([data-state="idle"]):not(:empty){box-sizing:border-box!important;position:relative!important;inset:auto!important;z-index:80!important;width:min(900px,calc(100% - 24px))!important;height:auto!important;min-height:78px!important;max-height:108px!important;margin:4px auto 0!important;padding:4px 0 max(6px,env(safe-area-inset-bottom))!important;overflow:visible!important;transform:none!important}
-.duduq-engine-feedback:not([data-state="idle"]):not(:empty) .duduq-engine-feedback-card{box-sizing:border-box!important;width:100%!important;height:auto!important;min-height:70px!important;max-height:96px!important;margin:0!important;overflow:visible!important}
-html[data-duduq-fullscreen="true"] .duduq-engine-root{padding:clamp(8px,1.2dvh,14px) clamp(12px,1.25vw,20px) max(8px,env(safe-area-inset-bottom))!important}
-html[data-duduq-fullscreen="true"] .duduq-engine-shell{row-gap:clamp(8px,1.15dvh,13px)!important}
-html[data-duduq-fullscreen="true"] .duduq-engine-feedback:not([data-state="idle"]):not(:empty){width:min(940px,calc(100% - 32px))!important;min-height:82px!important;max-height:104px!important;margin-top:5px!important}
-html[data-duduq-fullscreen="true"] .duduq-engine-feedback:not([data-state="idle"]):not(:empty) .duduq-engine-feedback-card{min-height:74px!important;max-height:94px!important}
-@media(max-height:700px) and (min-width:721px){.duduq-engine-shell{row-gap:6px!important}.duduq-engine-feedback:not([data-state="idle"]):not(:empty){min-height:72px!important;max-height:90px!important;margin-top:2px!important;padding-bottom:4px!important}.duduq-engine-feedback:not([data-state="idle"]):not(:empty) .duduq-engine-feedback-card{min-height:64px!important;max-height:82px!important}}
+  if (window.__DUDUQ_GOLDEN_POLICY_006__) return;
+  window.__DUDUQ_GOLDEN_POLICY_006__ = true;
+
+  const STYLE_ID = "duduq-golden-runtime-policy-006";
+  const OLD_STYLE_IDS = [
+    "duduq-golden-runtime-policy-003",
+    "duduq-golden-runtime-policy-004"
+  ];
+
+  const CSS = `
+html,
+body,
+#root {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+}
+
+body {
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+.duduq-engine-root {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  overflow: hidden !important;
+}
+
+.duduq-engine-shell {
+  box-sizing: border-box !important;
+  width: min(1280px, calc(100% - 12px)) !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  grid-template-rows:
+    auto
+    minmax(0, 1fr)
+    auto !important;
+  align-content: stretch !important;
+  row-gap: 8px !important;
+  overflow: hidden !important;
+}
+
+.duduq-engine-stage {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: hidden !important;
+}
+
+/* Feedback ocioso não reserva área. */
+.duduq-engine-feedback[data-state="idle"],
+.duduq-engine-feedback:empty {
+  box-sizing: border-box !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Feedback ativo é SEMPRE a terceira linha da grade. */
+.duduq-engine-feedback:not([data-state="idle"]):not(:empty) {
+  box-sizing: border-box !important;
+  position: static !important;
+  inset: auto !important;
+  z-index: 90 !important;
+  width: min(900px, calc(100% - 24px)) !important;
+  height: auto !important;
+  min-height: 76px !important;
+  max-height: 90px !important;
+  margin: 0 auto !important;
+  padding: 4px 0 max(6px, env(safe-area-inset-bottom)) !important;
+  transform: none !important;
+  overflow: visible !important;
+}
+
+.duduq-engine-feedback:not([data-state="idle"]):not(:empty)
+  .duduq-engine-feedback-card {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 68px !important;
+  max-height: 80px !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+.duduq-engine-feedback:not([data-state="idle"]):not(:empty)
+  .duduq-engine-feedback-copy {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Quando feedback aparece, a stage pode ceder altura. */
+.duduq-engine-shell:has(
+  .duduq-engine-feedback:not([data-state="idle"]):not(:empty)
+) .duduq-engine-stage {
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+html[data-duduq-fullscreen="true"] .duduq-engine-root {
+  padding:
+    6px
+    8px
+    max(8px, env(safe-area-inset-bottom)) !important;
+}
+
+html[data-duduq-fullscreen="true"] .duduq-engine-shell {
+  width: min(1320px, calc(100% - 8px)) !important;
+  row-gap: 8px !important;
+}
+
+html[data-duduq-fullscreen="true"]
+  .duduq-engine-feedback:not([data-state="idle"]):not(:empty) {
+  width: min(940px, calc(100% - 28px)) !important;
+  min-height: 78px !important;
+  max-height: 88px !important;
+  padding-bottom: max(8px, env(safe-area-inset-bottom)) !important;
+}
+
+@media (min-width: 900px) and (max-height: 700px) {
+  .duduq-engine-shell {
+    row-gap: 6px !important;
+  }
+
+  .duduq-engine-feedback:not([data-state="idle"]):not(:empty) {
+    min-height: 70px !important;
+    max-height: 82px !important;
+    padding-block: 3px 5px !important;
+  }
+
+  .duduq-engine-feedback:not([data-state="idle"]):not(:empty)
+    .duduq-engine-feedback-card {
+    min-height: 64px !important;
+    max-height: 74px !important;
+  }
+}
 `;
 
-  const seenFrames = new WeakSet();
-  function isFullscreen(){ return Boolean(document.fullscreenElement); }
+  const seen = new WeakSet();
 
-  function syncFrame(frame){
-    if(!frame || frame.tagName!=="IFRAME") return;
-    try{
-      const doc=frame.contentDocument;
-      if(!doc?.documentElement || !doc?.head) return;
-      let style=doc.getElementById(STYLE_ID);
-      if(!style){
-        style=doc.createElement("style");
-        style.id=STYLE_ID;
+  function fullscreenActive() {
+    return Boolean(document.fullscreenElement);
+  }
+
+  function sync(frame) {
+    if (!frame || frame.tagName !== "IFRAME") return;
+
+    try {
+      const doc = frame.contentDocument;
+      if (!doc?.head || !doc.documentElement) return;
+
+      OLD_STYLE_IDS.forEach(function (id) {
+        doc.getElementById(id)?.remove?.();
+      });
+
+      let style = doc.getElementById(STYLE_ID);
+
+      if (!style) {
+        style = doc.createElement("style");
+        style.id = STYLE_ID;
         doc.head.appendChild(style);
       }
-      style.textContent=RUNTIME_CSS;
-      doc.documentElement.setAttribute("data-duduq-fullscreen",isFullscreen()?"true":"false");
-      try{ frame.contentWindow?.dispatchEvent(new Event("resize")); }catch(_){}
-    }catch(_){}
+
+      if (style.textContent !== CSS) {
+        style.textContent = CSS;
+      }
+
+      doc.documentElement.setAttribute(
+        "data-duduq-fullscreen",
+        fullscreenActive() ? "true" : "false"
+      );
+
+      try {
+        frame.contentWindow?.dispatchEvent(new Event("resize"));
+      } catch (_) {}
+    } catch (_) {}
   }
 
-  function watchFrame(frame){
-    if(!frame || seenFrames.has(frame)) return;
-    seenFrames.add(frame);
-    frame.addEventListener("load",()=>requestAnimationFrame(()=>syncFrame(frame)));
-    syncFrame(frame);
+  function watch(frame) {
+    if (!frame || seen.has(frame)) return;
+    seen.add(frame);
+
+    frame.addEventListener("load", function () {
+      requestAnimationFrame(function () {
+        sync(frame);
+      });
+    });
+
+    sync(frame);
   }
 
-  function refreshAll(){
-    const root=document.getElementById("root");
-    if(!root) return;
-    root.querySelectorAll("iframe").forEach(watchFrame);
-    root.querySelectorAll("iframe").forEach(syncFrame);
+  function refresh() {
+    const root = document.getElementById("root");
+    if (!root) return;
+
+    root.querySelectorAll("iframe").forEach(watch);
+    root.querySelectorAll("iframe").forEach(sync);
   }
 
-  const observer=new MutationObserver(records=>{
-    records.forEach(record=>{
-      record.addedNodes.forEach(node=>{
-        if(!(node instanceof Element)) return;
-        if(node.tagName==="IFRAME") watchFrame(node);
-        node.querySelectorAll?.("iframe").forEach(watchFrame);
+  const observer = new MutationObserver(function (records) {
+    records.forEach(function (record) {
+      record.addedNodes.forEach(function (node) {
+        if (!(node instanceof Element)) return;
+
+        if (node.tagName === "IFRAME") {
+          watch(node);
+        }
+
+        node.querySelectorAll?.("iframe").forEach(watch);
       });
     });
   });
 
-  function install(){
-    const root=document.getElementById("root");
-    if(!root) return;
-    observer.observe(root,{childList:true,subtree:true});
-    refreshAll();
+  function install() {
+    const root = document.getElementById("root");
+    if (!root) return;
+
+    observer.observe(root, {
+      childList: true,
+      subtree: true
+    });
+
+    refresh();
   }
 
-  document.addEventListener("fullscreenchange",()=>requestAnimationFrame(()=>requestAnimationFrame(refreshAll)));
-  window.addEventListener("resize",()=>requestAnimationFrame(refreshAll),{passive:true});
-  window.addEventListener("duduq:engine-ready",install);
-  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",install,{once:true});
-  else install();
-})();
+  document.addEventListener("fullscreenchange", function () {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(refresh);
+    });
+  });
 
+  window.addEventListener(
+    "resize",
+    function () {
+      requestAnimationFrame(refresh);
+    },
+    { passive: true }
+  );
+
+  window.addEventListener("duduq:engine-ready", install);
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      install,
+      { once: true }
+    );
+  } else {
+    install();
+  }
+})();
