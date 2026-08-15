@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "contractMajor": 1,
-  "revision": 18,
+  "revision": 19,
   "core": {
     "release": "1.0.0",
     "styles": [
@@ -82,9 +82,9 @@
       "runtime": "/engine/releases/mechanics/bubble-pop/1.0.2/DUDUQ_BUBBLE_POP.html"
     },
     "drag-drop": {
-      "release": "1.1.10",
-      "adapter": "/engine/releases/mechanics/drag-drop/1.1.10/drag-drop.js",
-      "runtime": "/engine/releases/mechanics/drag-drop/1.1.10/DUDUQ_DRAG_DROP.html"
+      "release": "1.1.11",
+      "adapter": "/engine/releases/mechanics/drag-drop/1.1.11/drag-drop.js",
+      "runtime": "/engine/releases/mechanics/drag-drop/1.1.11/DUDUQ_DRAG_DROP.html"
     },
     "matching": {
       "release": "1.0.5",
