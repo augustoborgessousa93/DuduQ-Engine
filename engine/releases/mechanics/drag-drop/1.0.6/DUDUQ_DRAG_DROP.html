@@ -12744,337 +12744,124 @@ body,
 
 
 
-<style id="duduq-golden-drag-layout-v7">
+
+<style id="duduq-golden-drag-layout-v8">
 /* =====================================================================
-   DUDUQ DRAG & DROP 1.0.6 — CANONICAL LAYOUT V7
-   Um único contrato final de geometria do Drag.
-   Neutraliza regras históricas de tamanho sem alterar conteúdo.
+   DUDUQ DRAG & DROP 1.0.6 — CANONICAL LAYOUT V8
+   A geometria final e responsiva é aplicada também via inline !important
+   pelo script V8 para neutralizar definitivamente CSS histórico.
    ===================================================================== */
 
 .duduq-engine-stage .duduq-dd-root,
 .duduq-engine-stage .duduq-dd-surface {
-  box-sizing: border-box !important;
   width: 100% !important;
   max-width: none !important;
-  height: 100% !important;
+  height: auto !important;
   min-height: 0 !important;
+  box-sizing: border-box !important;
 }
 
 .duduq-engine-stage .duduq-dd-surface {
-  display: grid !important;
-  grid-template-rows:
-    auto
-    minmax(0, 1fr)
-    94px
-    64px !important;
-  align-content: stretch !important;
-  align-items: stretch !important;
-  justify-items: stretch !important;
-  gap: 8px !important;
-  padding: 2px 8px 6px !important;
-  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  align-content: center !important;
+  gap: 9px !important;
+  padding: 2px 8px 8px !important;
+  overflow: visible !important;
 }
 
-/* ---------- ENUNCIADO ---------- */
-.duduq-engine-stage .duduq-dd-instruction {
-  grid-row: 1 !important;
-  box-sizing: border-box !important;
-  width: min(1100px, calc(100% - 20px)) !important;
-  min-height: 54px !important;
-  margin: 0 auto !important;
-  flex: 0 0 auto !important;
+.duduq-engine-stage .duduq-dd-instruction,
+.duduq-engine-stage .duduq-dd-board,
+.duduq-engine-stage .duduq-dd-pool,
+.duduq-engine-stage .duduq-dd-action-slot {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
-/* ---------- BOARD ---------- */
 .duduq-engine-stage .duduq-dd-board {
-  grid-row: 2 !important;
-  box-sizing: border-box !important;
-  width: min(1080px, calc(100% - 16px)) !important;
-  max-width: 1080px !important;
-  height: 100% !important;
-  min-height: 0 !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  overflow: hidden !important;
+  min-height: 0 !important;
+  overflow: visible !important;
 }
 
-/* O grid nunca fica ancorado à esquerda. */
 .duduq-engine-stage .duduq-dd-target-grid {
-  box-sizing: border-box !important;
-  width: 100% !important;
-  max-width: 1040px !important;
-  height: min(196px, 100%) !important;
-  min-height: 0 !important;
-  max-height: 196px !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
   display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
+  flex-flow: row nowrap !important;
   align-items: stretch !important;
   justify-content: center !important;
   align-content: center !important;
-  gap: 12px !important;
-  overflow: hidden !important;
+  margin: 0 auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
 }
 
-/* Largura inteligente por quantidade. */
-.duduq-engine-stage
-  .duduq-dd-root[data-target-count="1"]
-  .duduq-dd-target-grid {
-  max-width: 560px !important;
-}
-
-.duduq-engine-stage
-  .duduq-dd-root[data-target-count="2"]
-  .duduq-dd-target-grid {
-  max-width: 760px !important;
-}
-
-.duduq-engine-stage
-  .duduq-dd-root[data-target-count="3"]
-  .duduq-dd-target-grid {
-  max-width: 1040px !important;
-}
-
-.duduq-engine-stage
-  .duduq-dd-root[data-target-count="4"]
-  .duduq-dd-target-grid {
-  max-width: 1120px !important;
-  gap: 9px !important;
-}
-
-/* Sem imagem, como BUILD THE PHRASE, cards mais baixos. */
-.duduq-engine-stage
-  .duduq-dd-root[data-has-target-media="false"]
-  .duduq-dd-target-grid {
-  height: min(142px, 100%) !important;
-  max-height: 142px !important;
-}
-
-/* ---------- TARGETS ---------- */
-/* Este bloco neutraliza:
-   - clamp(132px,22vh,190px)
-   - 164/178/198px históricos
-   - crescimento do target após receber item.
-*/
 .duduq-engine-stage .duduq-dd-target,
 .duduq-engine-stage .duduq-dd-target[data-valid-target="true"],
 .duduq-engine-stage
   .duduq-dd-root[data-smart-drag="true"]
   .duduq-dd-target[data-occupied="true"] {
-  box-sizing: border-box !important;
-  position: relative !important;
   flex: 1 1 0 !important;
-  width: auto !important;
   min-width: 0 !important;
-  max-width: 340px !important;
-  height: 100% !important;
   min-height: 0 !important;
-  max-height: 100% !important;
   margin: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: stretch !important;
-  justify-content: flex-start !important;
   overflow: hidden !important;
   transform: none !important;
-}
-
-.duduq-engine-stage
-  .duduq-dd-root[data-target-count="2"]
-  .duduq-dd-target {
-  max-width: 365px !important;
-}
-
-.duduq-engine-stage
-  .duduq-dd-root[data-target-count="4"]
-  .duduq-dd-target {
-  max-width: 270px !important;
-}
-
-/* Cabeçalho do target com imagem. */
-.duduq-engine-stage
-  .duduq-dd-target[data-has-media="true"]
-  .duduq-dd-target-head,
-.duduq-engine-stage
-  .duduq-dd-root[data-smart-drag="true"]
-  .duduq-dd-target[data-has-media="true"][data-occupied="true"]
-  .duduq-dd-target-head {
   box-sizing: border-box !important;
-  flex: 1 1 auto !important;
-  width: 100% !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  padding: 4px 8px 2px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  overflow: hidden !important;
 }
 
-/* Imagem usa o espaço disponível, mas não rouba a área de drop. */
 .duduq-engine-stage .duduq-dd-target-media {
-  box-sizing: border-box !important;
-  width: clamp(88px, 9.5vw, 126px) !important;
-  height: clamp(88px, 9.5vw, 126px) !important;
-  max-width: 42% !important;
-  max-height: 126px !important;
   object-fit: contain !important;
   object-position: center !important;
-  flex: 0 1 auto !important;
 }
 
-/* Cabeçalho sem imagem. */
-.duduq-engine-stage
-  .duduq-dd-target:not([data-has-media="true"])
-  .duduq-dd-target-head {
-  box-sizing: border-box !important;
-  flex: 0 0 48px !important;
-  min-height: 48px !important;
-  max-height: 48px !important;
-  padding: 4px 10px !important;
-}
-
-/* Área de soltar: geometria idêntica vazia/ocupada. */
 .duduq-engine-stage .duduq-dd-target-items,
 .duduq-engine-stage
   .duduq-dd-root[data-smart-drag="true"]
   .duduq-dd-target[data-occupied="true"]
   .duduq-dd-target-items {
   box-sizing: border-box !important;
-  width: calc(100% - 18px) !important;
-  height: 56px !important;
-  min-height: 56px !important;
-  max-height: 56px !important;
-  flex: 0 0 56px !important;
-  margin: 0 auto 9px !important;
-  padding: 4px 8px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   align-content: center !important;
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
-/* Card já colocado não pode aumentar o target. */
-.duduq-engine-stage
-  .duduq-dd-target
-  .duduq-dd-target-items
-  > .duduq-dd-item {
-  box-sizing: border-box !important;
-  width: auto !important;
-  max-width: calc(100% - 8px) !important;
-  height: 48px !important;
-  min-height: 48px !important;
-  max-height: 48px !important;
-  margin: 0 !important;
-  padding: 5px 12px !important;
-  transform: none !important;
-}
-
-/* ---------- BANDEJA DE OPÇÕES ---------- */
 .duduq-engine-stage .duduq-dd-pool {
-  grid-row: 3 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: center !important;
   box-sizing: border-box !important;
-  position: static !important;
-  inset: auto !important;
-  z-index: 4 !important;
-  width: min(760px, calc(100% - 20px)) !important;
-  max-width: 760px !important;
-  height: 94px !important;
-  min-height: 94px !important;
-  max-height: 94px !important;
-  margin: 0 auto !important;
-  padding: 5px 14px 8px !important;
-  display: grid !important;
-  grid-template-rows: 22px 56px !important;
-  align-items: center !important;
-  justify-items: stretch !important;
-  gap: 0 !important;
-  overflow: hidden !important;
-}
-
-.duduq-engine-stage .duduq-dd-pool-head {
-  box-sizing: border-box !important;
-  min-height: 22px !important;
-  max-height: 22px !important;
-  margin: 0 !important;
-  padding: 0 8px !important;
-  line-height: 22px !important;
+  overflow: visible !important;
 }
 
 .duduq-engine-stage .duduq-dd-pool-items {
-  box-sizing: border-box !important;
-  width: 100% !important;
-  height: 56px !important;
-  min-height: 56px !important;
-  max-height: 56px !important;
-  margin: 0 auto !important;
-  padding: 2px 4px !important;
   display: flex !important;
-  flex-wrap: nowrap !important;
+  flex-flow: row nowrap !important;
   align-items: center !important;
   justify-content: center !important;
   align-content: center !important;
-  gap: 10px !important;
-  overflow: hidden !important;
-}
-
-/* 1/2/3 opções mantêm o mesmo card; nenhuma estica a bandeja. */
-.duduq-engine-stage
-  .duduq-dd-pool-items
-  > .duduq-dd-item {
   box-sizing: border-box !important;
-  position: relative !important;
-  inset: auto !important;
-  flex: 0 1 170px !important;
-  width: 170px !important;
-  min-width: 0 !important;
-  max-width: 170px !important;
-  height: 50px !important;
-  min-height: 50px !important;
-  max-height: 50px !important;
-  margin: 0 !important;
-  padding-block: 4px !important;
-  transform: none !important;
+  overflow: visible !important;
 }
 
-/* Bandeja vazia continua ocupando sua linha.
-   Não sobe o Confirmar. */
-.duduq-engine-stage
-  .duduq-dd-root[data-pool-count="0"]
-  .duduq-dd-pool {
-  width: min(430px, calc(100% - 24px)) !important;
-  height: 46px !important;
-  min-height: 46px !important;
-  max-height: 46px !important;
-  padding: 4px 12px !important;
-  grid-template-rows: 38px !important;
-  border-radius: 999px !important;
-  align-self: center !important;
+.duduq-engine-stage .duduq-dd-action-slot {
+  display: grid !important;
+  place-items: center !important;
+  box-sizing: border-box !important;
+  background: transparent !important;
+  overflow: visible !important;
 }
 
-.duduq-engine-stage
-  .duduq-dd-root[data-pool-count="0"]
-  .duduq-dd-pool-head {
-  display: none !important;
-}
-
-.duduq-engine-stage
-  .duduq-dd-root[data-pool-count="0"]
-  .duduq-dd-pool-items {
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  padding: 0 !important;
-}
-
-/* Devolução oficial */
+/* Devolução clara e acessível */
 .duduq-engine-stage .duduq-dd-pool-head:not(:disabled) {
   border: 1px solid #9FC7EE !important;
   border-radius: 999px !important;
@@ -13084,223 +12871,521 @@ body,
   cursor: pointer !important;
 }
 
-/* ---------- CONFIRMAR ---------- */
-.duduq-engine-stage .duduq-dd-action-slot {
-  grid-row: 4 !important;
-  box-sizing: border-box !important;
-  position: static !important;
-  inset: auto !important;
-  z-index: 3 !important;
-  width: min(760px, calc(100% - 20px)) !important;
-  height: 64px !important;
-  min-height: 64px !important;
-  max-height: 64px !important;
-  margin: 0 auto !important;
-  padding: 4px 0 6px !important;
-  display: grid !important;
-  place-items: center !important;
-  background: transparent !important;
-  overflow: visible !important;
-  transform: none !important;
-}
-
-.duduq-engine-stage
-  .duduq-dd-action-slot
-  .duduq-dd-primary {
-  position: static !important;
-  inset: auto !important;
-  margin: 0 !important;
-  transform: none !important;
-}
-
-/* ---------- FULLSCREEN ---------- */
-html[data-duduq-fullscreen="true"]
-  .duduq-engine-stage .duduq-dd-board {
-  width: min(1160px, calc(100% - 20px)) !important;
-  max-width: 1160px !important;
-}
-
-html[data-duduq-fullscreen="true"]
-  .duduq-engine-stage
-  .duduq-dd-root[data-has-target-media="true"]
-  .duduq-dd-target-grid {
-  height: min(218px, 100%) !important;
-  max-height: 218px !important;
-}
-
-html[data-duduq-fullscreen="true"]
-  .duduq-engine-stage
-  .duduq-dd-root[data-has-target-media="false"]
-  .duduq-dd-target-grid {
-  height: min(158px, 100%) !important;
-  max-height: 158px !important;
-}
-
-html[data-duduq-fullscreen="true"]
-  .duduq-engine-stage .duduq-dd-target-media {
-  width: clamp(104px, 10vw, 142px) !important;
-  height: clamp(104px, 10vw, 142px) !important;
-  max-height: 142px !important;
-}
-
-html[data-duduq-fullscreen="true"]
-  .duduq-engine-stage .duduq-dd-pool,
-html[data-duduq-fullscreen="true"]
-  .duduq-engine-stage .duduq-dd-action-slot {
-  width: min(820px, calc(100% - 28px)) !important;
-  max-width: 820px !important;
-}
-
-/* Notebook/desktop com pouca altura útil */
-@media (min-width: 900px) and (max-height: 700px) {
-  .duduq-engine-stage .duduq-dd-surface {
-    grid-template-rows:
-      auto
-      minmax(0, 1fr)
-      82px
-      58px !important;
-    gap: 6px !important;
-    padding-bottom: 4px !important;
-  }
-
-  .duduq-engine-stage
-    .duduq-dd-root[data-has-target-media="true"]
-    .duduq-dd-target-grid {
-    height: min(172px, 100%) !important;
-    max-height: 172px !important;
-  }
-
-  .duduq-engine-stage
-    .duduq-dd-root[data-has-target-media="false"]
-    .duduq-dd-target-grid {
-    height: min(128px, 100%) !important;
-    max-height: 128px !important;
-  }
-
-  .duduq-engine-stage .duduq-dd-target-media {
-    width: clamp(82px, 9vw, 110px) !important;
-    height: clamp(82px, 9vw, 110px) !important;
-    max-height: 110px !important;
-  }
-
-  .duduq-engine-stage .duduq-dd-target-items,
-  .duduq-engine-stage
-    .duduq-dd-root[data-smart-drag="true"]
-    .duduq-dd-target[data-occupied="true"]
-    .duduq-dd-target-items {
-    height: 50px !important;
-    min-height: 50px !important;
-    max-height: 50px !important;
-    flex-basis: 50px !important;
-    margin-bottom: 7px !important;
-  }
-
-  .duduq-engine-stage .duduq-dd-pool {
-    height: 82px !important;
-    min-height: 82px !important;
-    max-height: 82px !important;
-    grid-template-rows: 18px 54px !important;
-    padding: 4px 12px 6px !important;
-  }
-
-  .duduq-engine-stage .duduq-dd-pool-head {
-    min-height: 18px !important;
-    max-height: 18px !important;
-    line-height: 18px !important;
-  }
-
-  .duduq-engine-stage .duduq-dd-pool-items {
-    height: 54px !important;
-    min-height: 54px !important;
-    max-height: 54px !important;
-  }
-
-  .duduq-engine-stage
-    .duduq-dd-pool-items
-    > .duduq-dd-item {
-    height: 48px !important;
-    min-height: 48px !important;
-    max-height: 48px !important;
-  }
-
-  .duduq-engine-stage .duduq-dd-action-slot {
-    height: 58px !important;
-    min-height: 58px !important;
-    max-height: 58px !important;
-  }
-
-  .duduq-engine-stage
-    .duduq-dd-root[data-pool-count="0"]
-    .duduq-dd-pool {
-    height: 42px !important;
-    min-height: 42px !important;
-    max-height: 42px !important;
-    grid-template-rows: 34px !important;
-  }
-}
-
-/* Mobile conserva coluna quando o próprio runtime pede layout vertical. */
+/* Em telas estreitas, respeita o layout vertical do runtime. */
 @media (max-width: 720px) {
   .duduq-engine-stage
     .duduq-dd-root[data-layout="vertical"]
     .duduq-dd-target-grid {
     flex-direction: column !important;
-    height: auto !important;
-    max-height: none !important;
-    overflow-y: auto !important;
   }
 }
 </style>
 
-<script id="duduq-golden-drag-state-v7">
+<script id="duduq-golden-drag-state-v8">
 (function () {
   "use strict";
 
-  let scheduled = false;
+  const IMPORTANT = "important";
+  let raf = 0;
 
-  function annotate() {
-    scheduled = false;
+  function set(el, prop, value) {
+    if (!el) return;
+    el.style.setProperty(prop, value, IMPORTANT);
+  }
+
+  function setMany(el, values) {
+    if (!el) return;
+    Object.entries(values).forEach(function (entry) {
+      set(el, entry[0], entry[1]);
+    });
+  }
+
+  function px(value) {
+    return Math.max(0, Math.round(value)) + "px";
+  }
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function applyRoot(root) {
+    const surface =
+      root.querySelector(".duduq-dd-surface") || root;
+
+    const instruction =
+      root.querySelector(".duduq-dd-instruction");
+
+    const board =
+      root.querySelector(".duduq-dd-board");
+
+    const grid =
+      root.querySelector(".duduq-dd-target-grid");
+
+    const targets =
+      Array.from(
+        root.querySelectorAll(
+          ".duduq-dd-target-grid > .duduq-dd-target"
+        )
+      );
+
+    const pool =
+      root.querySelector(".duduq-dd-pool");
+
+    const poolHead =
+      root.querySelector(".duduq-dd-pool-head");
+
+    const poolItems =
+      root.querySelector(".duduq-dd-pool-items");
+
+    const options =
+      Array.from(
+        root.querySelectorAll(
+          ".duduq-dd-pool-items > .duduq-dd-item"
+        )
+      );
+
+    const action =
+      root.querySelector(".duduq-dd-action-slot");
+
+    if (!board || !grid || targets.length === 0) {
+      return;
+    }
+
+    const count = targets.length;
+
+    const hasMedia =
+      targets.some(function (target) {
+        return (
+          target.matches('[data-has-media="true"]') ||
+          Boolean(
+            target.querySelector(
+              ".duduq-dd-target-media"
+            )
+          )
+        );
+      });
+
+    root.dataset.targetCount = String(count);
+    root.dataset.poolCount = String(options.length);
+    root.dataset.hasTargetMedia =
+      hasMedia ? "true" : "false";
+
+    const fullscreen =
+      Boolean(document.fullscreenElement) ||
+      document.documentElement
+        .getAttribute("data-duduq-fullscreen") === "true";
+
+    const viewportH =
+      window.visualViewport
+        ? window.visualViewport.height
+        : window.innerHeight;
+
+    const viewportW =
+      window.visualViewport
+        ? window.visualViewport.width
+        : window.innerWidth;
+
+    const lowHeight = viewportH <= 700;
+
+    /* ==========================================================
+       STACK
+       Não existe mais linha elástica empurrando o Confirmar.
+       ========================================================== */
+    setMany(surface, {
+      "display": "flex",
+      "flex-direction": "column",
+      "align-items": "center",
+      "justify-content": "flex-start",
+      "gap": lowHeight ? "7px" : "9px",
+      "height": "auto",
+      "min-height": "0",
+      "overflow": "visible",
+      "padding": lowHeight
+        ? "2px 8px 5px"
+        : "2px 8px 8px"
+    });
+
+    if (instruction) {
+      setMany(instruction, {
+        "width": "min(1100px, calc(100% - 20px))",
+        "min-height": lowHeight ? "52px" : "56px",
+        "height": "auto",
+        "margin": "0 auto",
+        "flex": "0 0 auto"
+      });
+    }
+
+    /* ==========================================================
+       TARGET HEIGHT
+       Dimensão calculada pelo tipo de conteúdo.
+       ========================================================== */
+    let targetHeight;
+
+    if (hasMedia) {
+      targetHeight =
+        fullscreen
+          ? clamp(viewportH * 0.265, 188, 224)
+          : lowHeight
+            ? clamp(viewportH * 0.255, 166, 182)
+            : clamp(viewportH * 0.245, 176, 206);
+    } else {
+      targetHeight =
+        fullscreen
+          ? clamp(viewportH * 0.19, 132, 160)
+          : lowHeight
+            ? clamp(viewportH * 0.18, 118, 132)
+            : clamp(viewportH * 0.18, 124, 146);
+    }
+
+    let gridWidth;
+
+    if (count <= 1) {
+      gridWidth = 560;
+    } else if (count === 2) {
+      gridWidth = fullscreen ? 820 : 760;
+    } else if (count === 3) {
+      gridWidth = fullscreen ? 1120 : 1010;
+    } else {
+      gridWidth = fullscreen ? 1180 : 1080;
+    }
+
+    const availableW =
+      Math.max(300, viewportW - 80);
+
+    gridWidth =
+      Math.min(gridWidth, availableW);
+
+    const gap =
+      count >= 4 ? 9 : 12;
+
+    setMany(board, {
+      "width": px(gridWidth),
+      "max-width": "calc(100% - 16px)",
+      "height": px(targetHeight),
+      "min-height": px(targetHeight),
+      "max-height": px(targetHeight),
+      "margin": "0 auto",
+      "padding": "0",
+      "display": "flex",
+      "align-items": "stretch",
+      "justify-content": "center",
+      "overflow": "visible"
+    });
+
+    setMany(grid, {
+      "width": "100%",
+      "max-width": px(gridWidth),
+      "height": px(targetHeight),
+      "min-height": px(targetHeight),
+      "max-height": px(targetHeight),
+      "margin": "0 auto",
+      "padding": "0",
+      "display": "flex",
+      "flex-direction": "row",
+      "flex-wrap": "nowrap",
+      "align-items": "stretch",
+      "justify-content": "center",
+      "gap": px(gap),
+      "overflow": "visible"
+    });
+
+    const targetMaxWidth =
+      count <= 1
+        ? 560
+        : count === 2
+          ? 390
+          : count === 3
+            ? 330
+            : 275;
+
+    const dropHeight =
+      hasMedia
+        ? (lowHeight ? 50 : 54)
+        : 54;
+
+    targets.forEach(function (target) {
+      setMany(target, {
+        "flex": "1 1 0",
+        "width": "auto",
+        "min-width": "0",
+        "max-width": px(targetMaxWidth),
+        "height": px(targetHeight),
+        "min-height": px(targetHeight),
+        "max-height": px(targetHeight),
+        "margin": "0",
+        "display": "flex",
+        "flex-direction": "column",
+        "align-items": "stretch",
+        "justify-content": "flex-start",
+        "overflow": "hidden",
+        "transform": "none"
+      });
+
+      const head =
+        target.querySelector(
+          ".duduq-dd-target-head"
+        );
+
+      const media =
+        target.querySelector(
+          ".duduq-dd-target-media"
+        );
+
+      const items =
+        target.querySelector(
+          ".duduq-dd-target-items"
+        );
+
+      if (hasMedia && media) {
+        const imageSize =
+          clamp(
+            targetHeight - dropHeight - 22,
+            lowHeight ? 92 : 102,
+            fullscreen ? 148 : 132
+          );
+
+        setMany(head, {
+          "flex": "1 1 auto",
+          "width": "100%",
+          "height": "auto",
+          "min-height": "0",
+          "max-height": "none",
+          "padding": "3px 8px 2px",
+          "display": "flex",
+          "align-items": "center",
+          "justify-content": "center",
+          "gap": "8px",
+          "overflow": "hidden"
+        });
+
+        setMany(media, {
+          "width": px(imageSize),
+          "height": px(imageSize),
+          "max-width": "52%",
+          "max-height": px(imageSize),
+          "object-fit": "contain",
+          "object-position": "center",
+          "flex": "0 1 auto"
+        });
+      } else if (head) {
+        setMany(head, {
+          "flex": "0 0 46px",
+          "height": "46px",
+          "min-height": "46px",
+          "max-height": "46px",
+          "padding": "4px 10px"
+        });
+      }
+
+      if (items) {
+        setMany(items, {
+          "width": "calc(100% - 18px)",
+          "height": px(dropHeight),
+          "min-height": px(dropHeight),
+          "max-height": px(dropHeight),
+          "flex": "0 0 " + px(dropHeight),
+          "margin": "0 auto 8px",
+          "padding": "3px 7px",
+          "display": "flex",
+          "align-items": "center",
+          "justify-content": "center",
+          "overflow": "visible"
+        });
+
+        Array.from(
+          items.children
+        ).forEach(function (child) {
+          if (
+            child.classList.contains(
+              "duduq-dd-item"
+            )
+          ) {
+            const itemH =
+              Math.max(44, dropHeight - 6);
+
+            setMany(child, {
+              "width": "auto",
+              "max-width": "calc(100% - 6px)",
+              "height": px(itemH),
+              "min-height": px(itemH),
+              "max-height": px(itemH),
+              "margin": "0",
+              "padding": "4px 11px",
+              "transform": "none"
+            });
+          }
+        });
+      }
+    });
+
+    /* ==========================================================
+       POOL
+       Sempre imediatamente abaixo do board.
+       ========================================================== */
+    const poolEmpty =
+      options.length === 0;
+
+    const poolHeight =
+      poolEmpty
+        ? (lowHeight ? 42 : 46)
+        : (lowHeight ? 76 : 82);
+
+    if (pool) {
+      const poolWidth =
+        poolEmpty
+          ? 430
+          : Math.min(
+              fullscreen ? 820 : 760,
+              availableW
+            );
+
+      setMany(pool, {
+        "width": px(poolWidth),
+        "max-width": "calc(100% - 20px)",
+        "height": px(poolHeight),
+        "min-height": px(poolHeight),
+        "max-height": px(poolHeight),
+        "margin": "0 auto",
+        "padding": poolEmpty
+          ? "3px 10px"
+          : "4px 12px 6px",
+        "position": "static",
+        "display": "flex",
+        "flex-direction": "column",
+        "align-items": "stretch",
+        "justify-content": "center",
+        "overflow": "visible"
+      });
+
+      if (poolEmpty) {
+        setMany(poolHead, {
+          "display": "none"
+        });
+
+        setMany(poolItems, {
+          "height": px(poolHeight - 6),
+          "min-height": px(poolHeight - 6),
+          "max-height": px(poolHeight - 6),
+          "padding": "0"
+        });
+      } else {
+        setMany(poolHead, {
+          "display": "",
+          "height": "20px",
+          "min-height": "20px",
+          "max-height": "20px",
+          "line-height": "20px",
+          "margin": "0",
+          "padding": "0 8px"
+        });
+
+        const poolItemsH =
+          poolHeight - 26;
+
+        setMany(poolItems, {
+          "width": "100%",
+          "height": px(poolItemsH),
+          "min-height": px(poolItemsH),
+          "max-height": px(poolItemsH),
+          "margin": "0 auto",
+          "padding": "2px 4px",
+          "display": "flex",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "center",
+          "justify-content": "center",
+          "gap": "10px",
+          "overflow": "visible"
+        });
+
+        options.forEach(function (item) {
+          const itemH =
+            Math.max(46, poolItemsH - 4);
+
+          setMany(item, {
+            "position": "relative",
+            "inset": "auto",
+            "flex": "0 1 170px",
+            "width": "170px",
+            "min-width": "0",
+            "max-width": "170px",
+            "height": px(itemH),
+            "min-height": px(itemH),
+            "max-height": px(itemH),
+            "margin": "0",
+            "padding-top": "4px",
+            "padding-bottom": "4px",
+            "transform": "none"
+          });
+        });
+      }
+    }
+
+    /* ==========================================================
+       CONFIRMAR
+       Sempre 7–9px depois do pool. Nunca vai para o rodapé.
+       ========================================================== */
+    if (action) {
+      const actionH =
+        lowHeight ? 56 : 60;
+
+      setMany(action, {
+        "width": px(
+          Math.min(
+            fullscreen ? 820 : 760,
+            availableW
+          )
+        ),
+        "max-width": "calc(100% - 20px)",
+        "height": px(actionH),
+        "min-height": px(actionH),
+        "max-height": px(actionH),
+        "margin": "0 auto",
+        "padding": "3px 0 5px",
+        "position": "static",
+        "display": "grid",
+        "place-items": "center",
+        "background": "transparent",
+        "overflow": "visible",
+        "transform": "none"
+      });
+
+      const primary =
+        action.querySelector(
+          ".duduq-dd-primary"
+        );
+
+      setMany(primary, {
+        "position": "static",
+        "inset": "auto",
+        "margin": "0",
+        "transform": "none"
+      });
+    }
+  }
+
+  function applyAll() {
+    raf = 0;
 
     document
       .querySelectorAll(".duduq-dd-root")
-      .forEach(function (root) {
-        const targets =
-          root.querySelectorAll(
-            ".duduq-dd-target-grid > .duduq-dd-target"
-          );
-
-        const poolItems =
-          root.querySelectorAll(
-            ".duduq-dd-pool-items > .duduq-dd-item"
-          );
-
-        const hasMedia =
-          root.querySelector(
-            ".duduq-dd-target[data-has-media='true']"
-          ) !== null;
-
-        root.dataset.targetCount =
-          String(targets.length);
-
-        root.dataset.poolCount =
-          String(poolItems.length);
-
-        root.dataset.hasTargetMedia =
-          hasMedia ? "true" : "false";
-      });
+      .forEach(applyRoot);
   }
 
   function schedule() {
-    if (scheduled) return;
-    scheduled = true;
-    requestAnimationFrame(annotate);
+    if (raf) {
+      cancelAnimationFrame(raf);
+    }
+
+    raf =
+      requestAnimationFrame(applyAll);
   }
 
   const observer =
     new MutationObserver(schedule);
 
   function start() {
-    annotate();
+    schedule();
 
     observer.observe(
       document.body,
@@ -13310,9 +13395,30 @@ html[data-duduq-fullscreen="true"]
         attributes: true,
         attributeFilter: [
           "data-occupied",
-          "data-has-media"
+          "data-has-media",
+          "class",
+          "style"
         ]
       }
+    );
+
+    window.addEventListener(
+      "resize",
+      schedule,
+      { passive: true }
+    );
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener(
+        "resize",
+        schedule,
+        { passive: true }
+      );
+    }
+
+    document.addEventListener(
+      "fullscreenchange",
+      schedule
     );
   }
 
@@ -13328,7 +13434,7 @@ html[data-duduq-fullscreen="true"]
 })();
 </script>
 
-<script id="duduq-golden-drag-return-v7">
+<script id="duduq-golden-drag-return-v8">
 (function () {
   "use strict";
 
