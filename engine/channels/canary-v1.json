@@ -1,7 +1,7 @@
 {
     "schemaVersion":  1,
     "contractMajor":  1,
-    "revision":  61,
+    "revision":  62,
     "core":  {
                  "release":  "1.0.0",
                  "styles":  [
@@ -82,19 +82,19 @@
                                          "runtime":  "/engine/releases/mechanics/bubble-pop/1.0.21/DUDUQ_BUBBLE_POP.html"
                                      },
                       "drag-drop":  {
-                                        "release":  "1.1.43",
-                                        "adapter":  "/engine/releases/mechanics/drag-drop/1.1.43/drag-drop.js",
-                                        "runtime":  "/engine/releases/mechanics/drag-drop/1.1.43/DUDUQ_DRAG_DROP.html"
+                                        "release":  "1.1.44",
+                                        "adapter":  "/engine/releases/mechanics/drag-drop/1.1.44/drag-drop.js",
+                                        "runtime":  "/engine/releases/mechanics/drag-drop/1.1.44/DUDUQ_DRAG_DROP.html"
                                     },
                       "matching":  {
-                                       "release":  "1.0.20",
-                                       "adapter":  "/engine/releases/mechanics/matching/1.0.20/matching.js",
-                                       "runtime":  "/engine/releases/mechanics/matching/1.0.20/DUDUQ_MATCHING.html"
+                                       "release":  "1.0.21",
+                                       "adapter":  "/engine/releases/mechanics/matching/1.0.21/matching.js",
+                                       "runtime":  "/engine/releases/mechanics/matching/1.0.21/DUDUQ_MATCHING.html"
                                    },
                       "memory-quest":  {
-                                           "release":  "1.0.22",
-                                           "adapter":  "/engine/releases/mechanics/memory-quest/1.0.22/memory-quest.js",
-                                           "runtime":  "/engine/releases/mechanics/memory-quest/1.0.22/DUDUQ_MEMORY_QUEST.html"
+                                           "release":  "1.0.23",
+                                           "adapter":  "/engine/releases/mechanics/memory-quest/1.0.23/memory-quest.js",
+                                           "runtime":  "/engine/releases/mechanics/memory-quest/1.0.23/DUDUQ_MEMORY_QUEST.html"
                                        },
                       "smart-sentence":  {
                                              "release":  "1.0.37",
