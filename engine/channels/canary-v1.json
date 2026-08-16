@@ -1,7 +1,7 @@
 {
     "schemaVersion":  1,
     "contractMajor":  1,
-    "revision":  30,
+    "revision":  31,
     "core":  {
                  "release":  "1.0.0",
                  "styles":  [
@@ -92,9 +92,9 @@
                                        "runtime":  "/engine/releases/mechanics/matching/1.0.11/DUDUQ_MATCHING.html"
                                    },
                       "memory-quest":  {
-                                           "release":  "1.0.6",
-                                           "adapter":  "/engine/releases/mechanics/memory-quest/1.0.6/memory-quest.js",
-                                           "runtime":  "/engine/releases/mechanics/memory-quest/1.0.6/DUDUQ_MEMORY_QUEST.html"
+                                           "release":  "1.0.7",
+                                           "adapter":  "/engine/releases/mechanics/memory-quest/1.0.7/memory-quest.js",
+                                           "runtime":  "/engine/releases/mechanics/memory-quest/1.0.7/DUDUQ_MEMORY_QUEST.html"
                                        },
                       "smart-sentence":  {
                                              "release":  "1.0.16",
