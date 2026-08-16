@@ -1,7 +1,7 @@
 {
     "schemaVersion":  1,
     "contractMajor":  1,
-    "revision":  64,
+    "revision":  65,
     "core":  {
                  "release":  "1.0.0",
                  "styles":  [
@@ -92,14 +92,14 @@
                                        "runtime":  "/engine/releases/mechanics/matching/1.0.23/DUDUQ_MATCHING.html"
                                    },
                       "memory-quest":  {
-                                           "release":  "1.0.24",
-                                           "adapter":  "/engine/releases/mechanics/memory-quest/1.0.24/memory-quest.js",
-                                           "runtime":  "/engine/releases/mechanics/memory-quest/1.0.24/DUDUQ_MEMORY_QUEST.html"
+                                           "release":  "1.0.25",
+                                           "adapter":  "/engine/releases/mechanics/memory-quest/1.0.25/memory-quest.js",
+                                           "runtime":  "/engine/releases/mechanics/memory-quest/1.0.25/DUDUQ_MEMORY_QUEST.html"
                                        },
                       "smart-sentence":  {
-                                             "release":  "1.0.37",
-                                             "adapter":  "/engine/releases/mechanics/smart-sentence/1.0.37/smart-sentence.js",
-                                             "runtime":  "/engine/releases/mechanics/smart-sentence/1.0.37/DUDUQ_SMART_SENTENCE.html"
+                                             "release":  "1.0.38",
+                                             "adapter":  "/engine/releases/mechanics/smart-sentence/1.0.38/smart-sentence.js",
+                                             "runtime":  "/engine/releases/mechanics/smart-sentence/1.0.38/DUDUQ_SMART_SENTENCE.html"
                                          },
                       "target-shooter":  {
                                              "release":  "1.0.16",
