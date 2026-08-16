@@ -1,7 +1,7 @@
 {
     "schemaVersion":  1,
     "contractMajor":  1,
-    "revision":  58,
+    "revision":  59,
     "core":  {
                  "release":  "1.0.0",
                  "styles":  [
@@ -82,9 +82,9 @@
                                          "runtime":  "/engine/releases/mechanics/bubble-pop/1.0.21/DUDUQ_BUBBLE_POP.html"
                                      },
                       "drag-drop":  {
-                                        "release":  "1.1.40",
-                                        "adapter":  "/engine/releases/mechanics/drag-drop/1.1.40/drag-drop.js",
-                                        "runtime":  "/engine/releases/mechanics/drag-drop/1.1.40/DUDUQ_DRAG_DROP.html"
+                                        "release":  "1.1.41",
+                                        "adapter":  "/engine/releases/mechanics/drag-drop/1.1.41/drag-drop.js",
+                                        "runtime":  "/engine/releases/mechanics/drag-drop/1.1.41/DUDUQ_DRAG_DROP.html"
                                     },
                       "matching":  {
                                        "release":  "1.0.20",
@@ -97,9 +97,9 @@
                                            "runtime":  "/engine/releases/mechanics/memory-quest/1.0.21/DUDUQ_MEMORY_QUEST.html"
                                        },
                       "smart-sentence":  {
-                                             "release":  "1.0.34",
-                                             "adapter":  "/engine/releases/mechanics/smart-sentence/1.0.34/smart-sentence.js",
-                                             "runtime":  "/engine/releases/mechanics/smart-sentence/1.0.34/DUDUQ_SMART_SENTENCE.html"
+                                             "release":  "1.0.35",
+                                             "adapter":  "/engine/releases/mechanics/smart-sentence/1.0.35/smart-sentence.js",
+                                             "runtime":  "/engine/releases/mechanics/smart-sentence/1.0.35/DUDUQ_SMART_SENTENCE.html"
                                          },
                       "target-shooter":  {
                                              "release":  "1.0.16",
