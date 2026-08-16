@@ -1,7 +1,7 @@
 {
     "schemaVersion":  1,
     "contractMajor":  1,
-    "revision":  42,
+    "revision":  43,
     "core":  {
                  "release":  "1.0.0",
                  "styles":  [
@@ -77,34 +77,34 @@
              },
     "mechanics":  {
                       "bubble-pop":  {
-                                         "release":  "1.0.18",
-                                         "adapter":  "/engine/releases/mechanics/bubble-pop/1.0.18/bubble-pop.js",
-                                         "runtime":  "/engine/releases/mechanics/bubble-pop/1.0.18/DUDUQ_BUBBLE_POP.html"
+                                         "release":  "1.0.19",
+                                         "adapter":  "/engine/releases/mechanics/bubble-pop/1.0.19/bubble-pop.js",
+                                         "runtime":  "/engine/releases/mechanics/bubble-pop/1.0.19/DUDUQ_BUBBLE_POP.html"
                                      },
                       "drag-drop":  {
-                                        "release":  "1.1.28",
-                                        "adapter":  "/engine/releases/mechanics/drag-drop/1.1.28/drag-drop.js",
-                                        "runtime":  "/engine/releases/mechanics/drag-drop/1.1.28/DUDUQ_DRAG_DROP.html"
+                                        "release":  "1.1.29",
+                                        "adapter":  "/engine/releases/mechanics/drag-drop/1.1.29/drag-drop.js",
+                                        "runtime":  "/engine/releases/mechanics/drag-drop/1.1.29/DUDUQ_DRAG_DROP.html"
                                     },
                       "matching":  {
-                                       "release":  "1.0.17",
-                                       "adapter":  "/engine/releases/mechanics/matching/1.0.17/matching.js",
-                                       "runtime":  "/engine/releases/mechanics/matching/1.0.17/DUDUQ_MATCHING.html"
+                                       "release":  "1.0.18",
+                                       "adapter":  "/engine/releases/mechanics/matching/1.0.18/matching.js",
+                                       "runtime":  "/engine/releases/mechanics/matching/1.0.18/DUDUQ_MATCHING.html"
                                    },
                       "memory-quest":  {
-                                           "release":  "1.0.18",
-                                           "adapter":  "/engine/releases/mechanics/memory-quest/1.0.18/memory-quest.js",
-                                           "runtime":  "/engine/releases/mechanics/memory-quest/1.0.18/DUDUQ_MEMORY_QUEST.html"
+                                           "release":  "1.0.19",
+                                           "adapter":  "/engine/releases/mechanics/memory-quest/1.0.19/memory-quest.js",
+                                           "runtime":  "/engine/releases/mechanics/memory-quest/1.0.19/DUDUQ_MEMORY_QUEST.html"
                                        },
                       "smart-sentence":  {
-                                             "release":  "1.0.23",
-                                             "adapter":  "/engine/releases/mechanics/smart-sentence/1.0.23/smart-sentence.js",
-                                             "runtime":  "/engine/releases/mechanics/smart-sentence/1.0.23/DUDUQ_SMART_SENTENCE.html"
+                                             "release":  "1.0.24",
+                                             "adapter":  "/engine/releases/mechanics/smart-sentence/1.0.24/smart-sentence.js",
+                                             "runtime":  "/engine/releases/mechanics/smart-sentence/1.0.24/DUDUQ_SMART_SENTENCE.html"
                                          },
                       "target-shooter":  {
-                                             "release":  "1.0.14",
-                                             "adapter":  "/engine/releases/mechanics/target-shooter/1.0.14/target-shooter.js",
-                                             "runtime":  "/engine/releases/mechanics/target-shooter/1.0.14/DUDUQ_TARGET_SHOOTER.html"
+                                             "release":  "1.0.15",
+                                             "adapter":  "/engine/releases/mechanics/target-shooter/1.0.15/target-shooter.js",
+                                             "runtime":  "/engine/releases/mechanics/target-shooter/1.0.15/DUDUQ_TARGET_SHOOTER.html"
                                          }
                   },
     "policy":  {
