@@ -1,7 +1,7 @@
 {
     "schemaVersion":  1,
     "contractMajor":  1,
-    "revision":  32,
+    "revision":  33,
     "core":  {
                  "release":  "1.0.0",
                  "styles":  [
@@ -82,9 +82,9 @@
                                          "runtime":  "/engine/releases/mechanics/bubble-pop/1.0.12/DUDUQ_BUBBLE_POP.html"
                                      },
                       "drag-drop":  {
-                                        "release":  "1.1.21",
-                                        "adapter":  "/engine/releases/mechanics/drag-drop/1.1.21/drag-drop.js",
-                                        "runtime":  "/engine/releases/mechanics/drag-drop/1.1.21/DUDUQ_DRAG_DROP.html"
+                                        "release":  "1.1.22",
+                                        "adapter":  "/engine/releases/mechanics/drag-drop/1.1.22/drag-drop.js",
+                                        "runtime":  "/engine/releases/mechanics/drag-drop/1.1.22/DUDUQ_DRAG_DROP.html"
                                     },
                       "matching":  {
                                        "release":  "1.0.11",
@@ -92,9 +92,9 @@
                                        "runtime":  "/engine/releases/mechanics/matching/1.0.11/DUDUQ_MATCHING.html"
                                    },
                       "memory-quest":  {
-                                           "release":  "1.0.8",
-                                           "adapter":  "/engine/releases/mechanics/memory-quest/1.0.8/memory-quest.js",
-                                           "runtime":  "/engine/releases/mechanics/memory-quest/1.0.8/DUDUQ_MEMORY_QUEST.html"
+                                           "release":  "1.0.9",
+                                           "adapter":  "/engine/releases/mechanics/memory-quest/1.0.9/memory-quest.js",
+                                           "runtime":  "/engine/releases/mechanics/memory-quest/1.0.9/DUDUQ_MEMORY_QUEST.html"
                                        },
                       "smart-sentence":  {
                                              "release":  "1.0.16",
