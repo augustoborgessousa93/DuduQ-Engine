@@ -1,7 +1,7 @@
 {
     "schemaVersion":  1,
     "contractMajor":  1,
-    "revision":  60,
+    "revision":  61,
     "core":  {
                  "release":  "1.0.0",
                  "styles":  [
@@ -82,9 +82,9 @@
                                          "runtime":  "/engine/releases/mechanics/bubble-pop/1.0.21/DUDUQ_BUBBLE_POP.html"
                                      },
                       "drag-drop":  {
-                                        "release":  "1.1.42",
-                                        "adapter":  "/engine/releases/mechanics/drag-drop/1.1.42/drag-drop.js",
-                                        "runtime":  "/engine/releases/mechanics/drag-drop/1.1.42/DUDUQ_DRAG_DROP.html"
+                                        "release":  "1.1.43",
+                                        "adapter":  "/engine/releases/mechanics/drag-drop/1.1.43/drag-drop.js",
+                                        "runtime":  "/engine/releases/mechanics/drag-drop/1.1.43/DUDUQ_DRAG_DROP.html"
                                     },
                       "matching":  {
                                        "release":  "1.0.20",
@@ -92,14 +92,14 @@
                                        "runtime":  "/engine/releases/mechanics/matching/1.0.20/DUDUQ_MATCHING.html"
                                    },
                       "memory-quest":  {
-                                           "release":  "1.0.21",
-                                           "adapter":  "/engine/releases/mechanics/memory-quest/1.0.21/memory-quest.js",
-                                           "runtime":  "/engine/releases/mechanics/memory-quest/1.0.21/DUDUQ_MEMORY_QUEST.html"
+                                           "release":  "1.0.22",
+                                           "adapter":  "/engine/releases/mechanics/memory-quest/1.0.22/memory-quest.js",
+                                           "runtime":  "/engine/releases/mechanics/memory-quest/1.0.22/DUDUQ_MEMORY_QUEST.html"
                                        },
                       "smart-sentence":  {
-                                             "release":  "1.0.36",
-                                             "adapter":  "/engine/releases/mechanics/smart-sentence/1.0.36/smart-sentence.js",
-                                             "runtime":  "/engine/releases/mechanics/smart-sentence/1.0.36/DUDUQ_SMART_SENTENCE.html"
+                                             "release":  "1.0.37",
+                                             "adapter":  "/engine/releases/mechanics/smart-sentence/1.0.37/smart-sentence.js",
+                                             "runtime":  "/engine/releases/mechanics/smart-sentence/1.0.37/DUDUQ_SMART_SENTENCE.html"
                                          },
                       "target-shooter":  {
                                              "release":  "1.0.16",
