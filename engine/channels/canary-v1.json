@@ -1,7 +1,7 @@
 {
     "schemaVersion":  1,
     "contractMajor":  1,
-    "revision":  44,
+    "revision":  45,
     "core":  {
                  "release":  "1.0.0",
                  "styles":  [
@@ -87,9 +87,9 @@
                                         "runtime":  "/engine/releases/mechanics/drag-drop/1.1.30/DUDUQ_DRAG_DROP.html"
                                     },
                       "matching":  {
-                                       "release":  "1.0.19",
-                                       "adapter":  "/engine/releases/mechanics/matching/1.0.19/matching.js",
-                                       "runtime":  "/engine/releases/mechanics/matching/1.0.19/DUDUQ_MATCHING.html"
+                                       "release":  "1.0.20",
+                                       "adapter":  "/engine/releases/mechanics/matching/1.0.20/matching.js",
+                                       "runtime":  "/engine/releases/mechanics/matching/1.0.20/DUDUQ_MATCHING.html"
                                    },
                       "memory-quest":  {
                                            "release":  "1.0.20",
