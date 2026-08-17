@@ -1,7 +1,7 @@
 {
     "schemaVersion":  1,
     "contractMajor":  1,
-    "revision":  91,
+    "revision":  92,
     "core":  {
                  "release":  "1.0.1",
                  "styles":  [
@@ -97,9 +97,9 @@
                                            "runtime":  "/engine/releases/mechanics/memory-quest/1.0.27/DUDUQ_MEMORY_QUEST.html"
                                        },
                       "smart-sentence":  {
-                                             "release":  "4.0.5",
-                                             "adapter":  "/engine/releases/mechanics/smart-sentence/4.0.5/smart-sentence.js",
-                                             "runtime":  "/engine/releases/mechanics/smart-sentence/4.0.5/DUDUQ_SMART_SENTENCE.html"
+                                             "release":  "4.0.7",
+                                             "adapter":  "/engine/releases/mechanics/smart-sentence/4.0.7/smart-sentence.js",
+                                             "runtime":  "/engine/releases/mechanics/smart-sentence/4.0.7/DUDUQ_SMART_SENTENCE.html"
                                          },
                       "target-shooter":  {
                                              "release":  "1.0.16",
