@@ -1,0 +1,2996 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <title>DuduQ — Smart Sentence 1.0.1</title>
+
+  
+
+  
+
+<!-- DUDUQ CANARY 026 — RESPONSIVE CONTENT SCALE -->
+
+
+<!-- DUDUQ CANARY 027 â€” PRESENTATION ORDER V4 -->
+<script id="duduq-presentation-v4">
+(function () {
+  "use strict";
+  if (window.DuduQPresentationV4) return;
+
+  const SESSION_SLOT = "__DUDUQ_PRESENTATION_SESSION_V4__";
+  const MEMORY_SLOT = "__DUDUQ_PRESENTATION_STATE_V4__";
+
+  function sessionId() {
+    if (window[SESSION_SLOT]) return window[SESSION_SLOT];
+    let value = "";
+    try {
+      if (globalThis.crypto?.getRandomValues) {
+        const data = new Uint32Array(2);
+        globalThis.crypto.getRandomValues(data);
+        value = data[0].toString(36) + "-" + data[1].toString(36);
+      }
+    } catch (_) {}
+    if (!value) {
+      value = Date.now().toString(36) + "-" + Math.random().toString(36).slice(2);
+    }
+    try {
+      Object.defineProperty(window, SESSION_SLOT, {
+        value,
+        configurable: true
+      });
+    } catch (_) {
+      window[SESSION_SLOT] = value;
+    }
+    return value;
+  }
+
+  function memoryStore() {
+    if (window[MEMORY_SLOT]) return window[MEMORY_SLOT];
+    const store = Object.create(null);
+    try {
+      Object.defineProperty(window, MEMORY_SLOT, {
+        value: store,
+        configurable: true
+      });
+    } catch (_) {
+      window[MEMORY_SLOT] = store;
+    }
+    return store;
+  }
+
+  function sameMembers(a, b) {
+    if (!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) return false;
+    const left = a.map(String).sort();
+    const right = b.map(String).sort();
+    return left.every((value, index) => value === right[index]);
+  }
+
+  function safeRandom(random) {
+    try {
+      const value = Number(random());
+      if (Number.isFinite(value) && value >= 0 && value < 1) return value;
+    } catch (_) {}
+    return Math.random();
+  }
+
+  function shuffle(values, random) {
+    const out = [...values];
+    for (let index = out.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(safeRandom(random) * (index + 1));
+      [out[index], out[swapIndex]] = [out[swapIndex], out[index]];
+    }
+    return out;
+  }
+
+  function score(candidate, baseline) {
+    return candidate.reduce(
+      (total, value, index) => total + (String(value) !== String(baseline[index]) ? 1 : 0),
+      0
+    );
+  }
+
+  function signature(values) {
+    return values.map(String).join("\u0001");
+  }
+
+  function readState(storageKey, source) {
+    const memory = memoryStore();
+    const cached = memory[storageKey];
+    if (cached && sameMembers(cached.order, source)) return cached;
+    try {
+      const parsed = JSON.parse(localStorage.getItem(storageKey) || "null");
+      if (parsed && sameMembers(parsed.order, source)) {
+        memory[storageKey] = parsed;
+        return parsed;
+      }
+    } catch (_) {}
+    return null;
+  }
+
+  function writeState(storageKey, state) {
+    memoryStore()[storageKey] = state;
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(state));
+    } catch (_) {}
+  }
+
+  function order(values, key, random = Math.random, epochToken = null) {
+    const source = [...values];
+    if (source.length < 2) return source;
+
+    const storageKey = "duduq:presentation:v4:" + String(key);
+    const previousState = readState(storageKey, source);
+
+    let sample = 0;
+    if (epochToken === null || epochToken === undefined) {
+      sample = Math.floor(safeRandom(random) * 4294967296) >>> 0;
+    }
+
+    const marker =
+      sessionId() + ":" +
+      (epochToken === null || epochToken === undefined
+        ? sample.toString(36)
+        : String(epochToken));
+
+    if (
+      previousState &&
+      previousState.marker === marker &&
+      sameMembers(previousState.order, source)
+    ) {
+      return [...previousState.order];
+    }
+
+    const baseline =
+      previousState && sameMembers(previousState.order, source)
+        ? [...previousState.order]
+        : [...source];
+
+    const recentHistory = Array.isArray(previousState?.history)
+      ? previousState.history.slice(0, 8)
+      : previousState?.order
+        ? [signature(previousState.order)]
+        : [];
+    const recent = new Set(recentHistory);
+
+    let best = [...source];
+    let bestScore = score(best, baseline);
+    let bestNovel = recent.has(signature(best)) ? 0 : 1;
+
+    for (let attempt = 0; attempt < 64; attempt += 1) {
+      const candidate = shuffle(source, random);
+      const candidateScore = score(candidate, baseline);
+      const candidateNovel = recent.has(signature(candidate)) ? 0 : 1;
+      if (
+        candidateScore > bestScore ||
+        (candidateScore === bestScore && candidateNovel > bestNovel)
+      ) {
+        best = candidate;
+        bestScore = candidateScore;
+        bestNovel = candidateNovel;
+      }
+      if (candidateScore === source.length && candidateNovel === 1) break;
+    }
+
+    /*
+      Para alternativas unicas sempre existe uma rotacao sem posicoes fixas.
+      Ela funciona como fallback deterministico e tambem amplia a diversidade
+      quando a amostragem aleatoria cai em uma ordem usada recentemente.
+      Com duas alternativas, a troca e obrigatoria por limitacao combinatoria.
+    */
+    for (let shift = 1; shift < source.length; shift += 1) {
+      const rotated = baseline.map(
+        (_, index) => baseline[(index + shift) % baseline.length]
+      );
+      const rotatedScore = score(rotated, baseline);
+      const rotatedNovel = recent.has(signature(rotated)) ? 0 : 1;
+      if (
+        rotatedScore > bestScore ||
+        (rotatedScore === bestScore && rotatedNovel > bestNovel)
+      ) {
+        best = rotated;
+        bestScore = rotatedScore;
+        bestNovel = rotatedNovel;
+      }
+      if (bestScore === source.length && bestNovel === 1) break;
+    }
+
+    const bestSignature = signature(best);
+    const history = [
+      bestSignature,
+      ...recentHistory.filter((entry) => entry !== bestSignature)
+    ].slice(0, 8);
+
+    const state = {
+      marker,
+      order: [...best],
+      history,
+      savedAt: Date.now()
+    };
+    writeState(storageKey, state);
+    return [...best];
+  }
+
+  window.DuduQPresentationV4 = Object.freeze({
+    version: "4.0.0",
+    order,
+    sessionId
+  });
+})();
+</script>
+
+
+
+<!-- DUDUQ CANARY 028 â€” HEADER + FULLSCREEN FEEDBACK SAFETY -->
+
+<script id="duduq-canary-028-feedback-viewport-guard">
+(function () {
+  "use strict";
+  if (window.__DUDUQ_FEEDBACK_VIEWPORT_GUARD_028__) return;
+  window.__DUDUQ_FEEDBACK_VIEWPORT_GUARD_028__ = true;
+
+  let scheduled = false;
+  function feedbackVisible(node) {
+    if (!node || node.hidden) return false;
+    const style = window.getComputedStyle(node);
+    return style.display !== "none" && style.visibility !== "hidden";
+  }
+  function ensureVisible() {
+    scheduled = false;
+    const node = document.querySelector(".duduq-engine-feedback");
+    if (!feedbackVisible(node)) return;
+    requestAnimationFrame(function () {
+      const rect = node.getBoundingClientRect();
+      const margin = 16;
+      if (rect.bottom > window.innerHeight - margin) {
+        window.scrollBy({
+          top: Math.ceil(rect.bottom - window.innerHeight + margin),
+          left: 0,
+          behavior: "smooth"
+        });
+      } else if (rect.top < margin) {
+        node.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    });
+  }
+  function schedule() {
+    if (scheduled) return;
+    scheduled = true;
+    setTimeout(ensureVisible, 30);
+  }
+
+  const observer = new MutationObserver(schedule);
+  observer.observe(document.documentElement, {
+    subtree: true,
+    childList: true,
+    attributes: true,
+    attributeFilter: ["hidden", "data-state"]
+  });
+  document.addEventListener("fullscreenchange", function () { setTimeout(schedule, 80); });
+  window.addEventListener("resize", schedule, { passive: true });
+  window.addEventListener("orientationchange", schedule, { passive: true });
+})();
+</script>
+
+<!-- DUDUQ CANARY 029 — FINAL REFINEMENT: NATURAL FEEDBACK FLOW -->
+
+<script id="duduq-canary-029-feedback-flow-guard">
+(function () {
+  "use strict";
+  if (window.__DUDUQ_FEEDBACK_FLOW_029__) return;
+  window.__DUDUQ_FEEDBACK_FLOW_029__ = true;
+
+  let timer = null;
+  function visible(node) {
+    if (!node || node.hidden) return false;
+    const style = getComputedStyle(node);
+    return style.display !== "none" && style.visibility !== "hidden" && node.querySelector(".duduq-engine-feedback-card");
+  }
+  function keepInView() {
+    timer = null;
+    const feedback = document.querySelector(".duduq-engine-feedback");
+    if (!visible(feedback)) return;
+    requestAnimationFrame(function () {
+      const rect = feedback.getBoundingClientRect();
+      const bottomSafe = window.innerHeight - 14;
+      if (rect.bottom > bottomSafe) {
+        feedback.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+      }
+    });
+  }
+  function schedule() {
+    if (timer !== null) clearTimeout(timer);
+    timer = setTimeout(keepInView, 60);
+  }
+  new MutationObserver(schedule).observe(document.documentElement, {
+    subtree: true,
+    childList: true,
+    attributes: true,
+    attributeFilter: ["data-state", "hidden"]
+  });
+  document.addEventListener("fullscreenchange", schedule);
+  window.addEventListener("resize", schedule, { passive: true });
+})();
+</script>
+
+<!-- DUDUQ CANARY 077 V4 â€” SMART SENTENCE TYPOGRAPHY LOCK -->
+
+  <link id="duduq-smart-sentence-ui" rel="stylesheet" href="./smart-sentence-ui.css?v=1.0.57" />
+  <link id="duduq-instruction-card-component" rel="stylesheet" href="/engine/releases/components/instruction-card/1.0.0/duduq-instruction-card.css?v=1.0.0" />
+  <!-- DUDUQ CANARY 082 - SMART CLEAN UI: instruction-card@1.0.0 -->
+</head>
+
+<body>
+<script id="duduq-assets-v1">
+/* DUDUQ ASSETS V1 — fonte compartilhada para mascote, sons e fundos por ano. */
+(function () {
+  if (window.DuduQAssets && window.DuduQAssets.version === "1.0.0") return;
+
+  const ASSETS = Object.freeze({
+    version: "1.0.0",
+    repository: "augustoborgessousa93/Assets-DuduQ",
+    mascots: Object.freeze({
+      idle: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/DUDUQ_IDLE.png",
+      correct: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/DUDUQ_ACERTO.png",
+      error: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/DUDUQ_ERRO.png",
+      transition: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/DUDUQ_IDLE.png",
+      complete: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Duduq_Li%C3%A7%C3%A3o%20concluida.png"
+    }),
+    sounds: Object.freeze({
+      "bubble-pop": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/bubble-pop.mp3",
+      click: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/click.mp3",
+      correct: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/correct.mp3",
+      ding: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/ding.mp3",
+      error: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/error.mp3",
+      pop: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/pop.mp3",
+      win: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/you%20win.mp3"
+    }),
+    backgrounds: Object.freeze({
+      "1": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/1%C2%BA%20ano%20-whispering-woods.png",
+      "2": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/2%C2%BA%20ano%20-chroma-canyons.png",
+      "3": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/3%C2%BA%20ano%20-clockwork-valley.png",
+      "4": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/4%C2%BA%20ano%20-papercraft-campus.png",
+      "5": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/5%C2%BA%20ano%20-sky-lab.png"
+    })
+  });
+
+  function normalizeYear(value) {
+    const match = String(value == null ? "" : value).match(/[1-5]/);
+    return match ? match[0] : "";
+  }
+
+  function applyYear(value) {
+    const year = normalizeYear(value);
+    if (!year || !ASSETS.backgrounds[year] || !document.body) return false;
+    document.documentElement.setAttribute("data-duduq-ano-ativo", year);
+    document.body.style.backgroundImage = 'url("' + ASSETS.backgrounds[year] + '")';
+    document.body.style.backgroundPosition = "center top";
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundRepeat = "no-repeat";
+    return true;
+  }
+
+  window.DUDUQ_ASSETS = ASSETS;
+  window.DuduQAssets = Object.freeze({
+    version: "1.0.0",
+    assets: ASSETS,
+    setYear: applyYear,
+    getYear: function () {
+      return document.documentElement.getAttribute("data-duduq-ano-ativo") || null;
+    }
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const requestedYear =
+    params.get("ano") || params.get("year") || params.get("serie") || params.get("série") ||
+    document.documentElement.getAttribute("data-duduq-ano") || window.DUDUQ_ANO;
+  applyYear(requestedYear);
+})();
+</script>
+<script id="duduq-sound-system-v1">
+/* DUDUQ SOUND SYSTEM V1 — camada sonora padronizada, sem alteração visual/mecânica. */
+(function () {
+  if (window.DuduQSound && window.DuduQSound.version === "1.0.0") return;
+
+  const SOURCES = window.DUDUQ_ASSETS.sounds;
+  const DEFAULT_VOLUME = {"click":0.22,"pop":0.30,"bubble-pop":0.46,"ding":0.40,"correct":0.56,"error":0.48,"win":0.64};
+  const DEFAULT_GAP = {"click":55,"pop":70,"bubble-pop":110,"ding":100,"correct":1200,"error":520,"win":1800};
+  const channels = new Map();
+  const lastPlay = new Map();
+  let gestureUnlocked = false;
+
+  Object.entries(SOURCES).forEach(([name, src]) => {
+    try {
+      const audio = new Audio(src);
+      audio.preload = "auto";
+      audio.volume = DEFAULT_VOLUME[name] || 0.5;
+      channels.set(name, audio);
+    } catch (_) {}
+  });
+
+  function stop(name) {
+    const audio = channels.get(name);
+    if (!audio) return;
+    try { audio.pause(); audio.currentTime = 0; } catch (_) {}
+  }
+
+  function stopAll() { channels.forEach((_, name) => stop(name)); }
+
+  function unlockAllFromGesture() {
+    if (gestureUnlocked) return;
+    gestureUnlocked = true;
+    channels.forEach((audio) => {
+      const oldMuted = audio.muted;
+      const oldVolume = audio.volume;
+      try {
+        audio.muted = true;
+        audio.currentTime = 0;
+        const result = audio.play();
+        const finish = () => {
+          try { audio.pause(); audio.currentTime = 0; } catch (_) {}
+          audio.muted = oldMuted;
+          audio.volume = oldVolume;
+        };
+        if (result && typeof result.then === "function") result.then(() => window.setTimeout(finish, 0)).catch(() => finish());
+        else finish();
+      } catch (_) {
+        audio.muted = oldMuted;
+        audio.volume = oldVolume;
+      }
+    });
+    document.removeEventListener("pointerdown", unlockAllFromGesture, true);
+    document.removeEventListener("keydown", unlockAllFromGesture, true);
+  }
+
+  document.addEventListener("pointerdown", unlockAllFromGesture, true);
+  document.addEventListener("keydown", unlockAllFromGesture, true);
+
+  function start(name, options = {}) {
+    const audio = channels.get(name);
+    if (!audio) return null;
+    const now = (window.performance && performance.now) ? performance.now() : Date.now();
+    const minGapMs = Number.isFinite(options.minGapMs) ? options.minGapMs : (DEFAULT_GAP[name] || 0);
+    const previous = lastPlay.get(name) || -Infinity;
+    if (now - previous < minGapMs) return null;
+    lastPlay.set(name, now);
+
+    try {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.muted = false;
+      audio.volume = Math.max(0, Math.min(1, Number.isFinite(options.volume) ? options.volume : (DEFAULT_VOLUME[name] || 0.5)));
+      if (Number.isFinite(options.playbackRate)) audio.playbackRate = options.playbackRate;
+      else audio.playbackRate = 1;
+      const promise = audio.play();
+      if (promise && typeof promise.catch === "function") promise.catch(() => {});
+    } catch (_) {}
+    return audio;
+  }
+
+  function play(name, options = {}) {
+    const aliases = {"you win":"win","you-win":"win","bubblePop":"bubble-pop"};
+    const normalized = aliases[name] || name;
+    const delayMs = Number(options.delayMs) || 0;
+    if (delayMs > 0) { window.setTimeout(() => start(normalized, options), delayMs); return null; }
+    return start(normalized, options);
+  }
+
+  function isRestartControl(button) {
+    const text = `${button.id || ""} ${button.className || ""} ${button.getAttribute?.("aria-label") || ""} ${button.textContent || ""}`.toLowerCase();
+    return /restart|recome|reinici|jogar novamente|play again/.test(text);
+  }
+
+  window.DuduQSound = Object.freeze({version:"1.0.0",play,stop,stopAll,sources:Object.freeze({...SOURCES})});
+
+  document.addEventListener("click", function (event) {
+    const target = event.target instanceof Element ? event.target : null;
+    const button = target?.closest?.("button, [role='button']");
+    if (!button) return;
+    if (button.disabled || button.getAttribute("aria-disabled") === "true" || button.dataset.duduqSound === "none") return;
+    if (isRestartControl(button)) stop("win");
+    if (button.matches(".duduq-bp-bubble, .duduq-ts-target, .duduq-mq-card, .duduq-ws-object")) return;
+    play("click", {volume:0.22,minGapMs:55});
+  }, true);
+})();
+</script>
+
+  <div id="root">
+    <main class="duduq-engine-root">
+      
+
+      <section class="duduq-engine-shell" aria-label="Smart Sentence">
+        <header class="duduq-engine-header">
+  <div class="duduq-engine-header-main">
+    <div class="duduq-engine-header-mascot-slot" data-visible="true" aria-hidden="false">
+      <figure class="duduq-mascot" data-state="idle" data-size="idle" data-placeholder="false" data-reduced-motion="false">
+        <div class="duduq-mascot-body">
+          <img src="https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/DUDUQ_IDLE.png" alt="Mascote DuduQ aguardando e pronto para ajudar." draggable="false">
+        </div>
+      </figure>
+    </div>
+    <div class="duduq-engine-heading">
+      <h1>Smart Sentence</h1>
+    </div>
+  </div>
+
+  <div class="duduq-engine-toolbar">
+    <button
+      type="button"
+      id="fullscreenButton"
+      class="duduq-engine-button duduq-engine-button-secondary duduq-engine-fullscreen-button"
+      aria-label="Abrir em tela cheia"
+      aria-pressed="false"
+    >
+      <span class="duduq-engine-fullscreen-icon" aria-hidden="true">⛶</span>
+      <span class="duduq-engine-fullscreen-label">Tela cheia</span>
+    </button>
+
+    <button
+      type="button"
+      id="restartButton"
+      class="duduq-engine-button duduq-engine-button-secondary duduq-engine-button-quiet"
+    >
+      Reiniciar
+    </button>
+  </div>
+
+  <div
+    class="duduq-progress-trail"
+    data-style="duolingo"
+    data-density="dense"
+    data-complete="false"
+    data-reduced-motion="false"
+    role="progressbar"
+    aria-label="Progresso da lição"
+    aria-valuemin="0"
+    aria-valuemax="8"
+    aria-valuenow="0"
+    aria-valuetext="0 de 8 etapas concluídas"
+    style="--lesson-progress: 0"
+  >
+    <div class="duduq-progress-copy">
+      <span>Progresso</span>
+      <strong>Etapa 1 de 8</strong>
+    </div>
+    <div class="duduq-progress-track" aria-hidden="true">
+      <span class="duduq-progress-fill"></span>
+    </div>
+  </div>
+</header>
+
+        <section
+          class="duduq-engine-stage"
+          aria-label="Atividade Smart Sentence"
+          tabindex="-1"
+        ></section>
+
+        <section
+          class="duduq-engine-feedback"
+          data-state="idle"
+          aria-live="polite"
+          aria-atomic="true"
+          hidden
+        ></section>
+      </section>
+    </main>
+  </div>
+
+  <script type="application/json" id="duduq-smart-sentence-config">
+{
+  "schemaVersion": 1,
+  "id": "duduq-smart-sentence-001",
+  "version": "1.0.0",
+  "title": "Smart Sentence",
+  "language": "en-US",
+  "uiLanguage": "pt-BR",
+  "autoAdvanceAfterCorrectMs": 1450,
+  "retryFeedbackDurationMs": 900,
+  "inactivityAttentionMs": 8000,
+  "progress": {
+    "show": true,
+    "continuous": true
+  },
+  "stages": [
+    {
+      "id": "complete-basic",
+      "mode": "complete",
+      "instruction": "Complete the sentence.",
+      "instructionSpoken": "Complete the sentence.",
+      "segments": [
+        {
+          "type": "text",
+          "text": "I"
+        },
+        {
+          "type": "gap",
+          "id": "g1"
+        },
+        {
+          "type": "text",
+          "text": "soccer every day."
+        }
+      ],
+      "gaps": [
+        {
+          "id": "g1",
+          "answer": "play",
+          "alternatives": [
+            "play"
+          ],
+          "options": [
+            "play",
+            "plays",
+            "playing"
+          ],
+          "validation": {
+            "caseSensitive": false,
+            "punctuationSensitive": false,
+            "trimSpaces": true
+          }
+        }
+      ],
+      "interaction": {
+        "type": "tap",
+        "allowRemove": true,
+        "shuffleOptions": false
+      },
+      "feedback": {
+        "success": "Great! “I play soccer every day.”",
+        "retry": "Try another word. Read the whole sentence again."
+      }
+    },
+    {
+      "id": "complete-image",
+      "mode": "complete-image",
+      "instruction": "Look at the image and complete the sentence.",
+      "segments": [
+        {
+          "type": "image",
+          "assetKey": "dog",
+          "alt": "A dog"
+        },
+        {
+          "type": "text",
+          "text": "The"
+        },
+        {
+          "type": "gap",
+          "id": "g1"
+        },
+        {
+          "type": "text",
+          "text": "is running."
+        }
+      ],
+      "gaps": [
+        {
+          "id": "g1",
+          "answer": "dog",
+          "alternatives": [
+            "dog"
+          ],
+          "options": [
+            "dog",
+            "cat",
+            "bird"
+          ],
+          "validation": {
+            "caseSensitive": false,
+            "punctuationSensitive": false,
+            "trimSpaces": true
+          }
+        }
+      ],
+      "interaction": {
+        "type": "tap",
+        "allowRemove": true,
+        "shuffleOptions": false
+      },
+      "feedback": {
+        "success": "Exactly! The dog is running.",
+        "retry": "Look at the picture and choose again."
+      }
+    },
+    {
+      "id": "complete-audio",
+      "mode": "complete-audio",
+      "instruction": "Listen and complete the sentence.",
+      "listening": {
+        "text": "I like pizza.",
+        "locale": "en-US",
+        "autoPlay": false,
+        "replayAfterSuccess": true
+      },
+      "segments": [
+        {
+          "type": "text",
+          "text": "I like"
+        },
+        {
+          "type": "gap",
+          "id": "g1"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ],
+      "gaps": [
+        {
+          "id": "g1",
+          "answer": "pizza",
+          "alternatives": [
+            "pizza"
+          ],
+          "options": [
+            "pizza",
+            "pasta",
+            "salad"
+          ],
+          "validation": {
+            "caseSensitive": false,
+            "punctuationSensitive": false,
+            "trimSpaces": true
+          }
+        }
+      ],
+      "interaction": {
+        "type": "tap",
+        "allowRemove": true,
+        "shuffleOptions": false
+      },
+      "feedback": {
+        "success": "Nice listening!",
+        "retry": "Listen once more and compare the sounds."
+      }
+    },
+    {
+      "id": "word-bank",
+      "mode": "word-bank",
+      "instruction": "Build the sentence using the words.",
+      "segments": [
+        {
+          "type": "gap",
+          "id": "s1"
+        },
+        {
+          "type": "gap",
+          "id": "s2"
+        },
+        {
+          "type": "gap",
+          "id": "s3"
+        },
+        {
+          "type": "gap",
+          "id": "s4"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ],
+      "expectedSequence": [
+        "I",
+        "am",
+        "happy",
+        "today"
+      ],
+      "wordBank": [
+        "I",
+        "am",
+        "happy",
+        "today",
+        "very"
+      ],
+      "interaction": {
+        "type": "tap",
+        "allowRemove": true,
+        "shuffleOptions": false
+      },
+      "feedback": {
+        "success": "Perfect sentence!",
+        "retry": "Check the order of the words."
+      }
+    },
+    {
+      "id": "unscramble",
+      "mode": "unscramble",
+      "instruction": "Put the words in the correct order.",
+      "segments": [
+        {
+          "type": "gap",
+          "id": "s1"
+        },
+        {
+          "type": "gap",
+          "id": "s2"
+        },
+        {
+          "type": "gap",
+          "id": "s3"
+        },
+        {
+          "type": "gap",
+          "id": "s4"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ],
+      "expectedSequence": [
+        "I",
+        "play",
+        "soccer",
+        "every day"
+      ],
+      "wordBank": [
+        "every day",
+        "play",
+        "I",
+        "soccer"
+      ],
+      "interaction": {
+        "type": "tap",
+        "allowRemove": true,
+        "shuffleOptions": false,
+        "dragEngine": {
+          "provider": "DuduQSmartDragEngine",
+          "enabledWhenAvailable": true
+        }
+      },
+      "feedback": {
+        "success": "Excellent! The sentence is in the right order.",
+        "retry": "Think about who comes first, then the verb."
+      }
+    },
+    {
+      "id": "multiple-gaps",
+      "mode": "multiple-gaps",
+      "instruction": "Complete both parts of the sentence.",
+      "segments": [
+        {
+          "type": "text",
+          "text": "I"
+        },
+        {
+          "type": "gap",
+          "id": "g1"
+        },
+        {
+          "type": "text",
+          "text": "soccer"
+        },
+        {
+          "type": "gap",
+          "id": "g2"
+        },
+        {
+          "type": "text",
+          "text": "Saturday."
+        }
+      ],
+      "gaps": [
+        {
+          "id": "g1",
+          "answer": "play",
+          "alternatives": [
+            "play"
+          ],
+          "options": [
+            "play",
+            "plays",
+            "playing"
+          ],
+          "validation": {
+            "caseSensitive": false,
+            "punctuationSensitive": false,
+            "trimSpaces": true
+          }
+        },
+        {
+          "id": "g2",
+          "answer": "on",
+          "alternatives": [
+            "on"
+          ],
+          "options": [
+            "on",
+            "in",
+            "at"
+          ],
+          "validation": {
+            "caseSensitive": false,
+            "punctuationSensitive": false,
+            "trimSpaces": true
+          }
+        }
+      ],
+      "interaction": {
+        "type": "tap",
+        "allowRemove": true,
+        "shuffleOptions": false
+      },
+      "feedback": {
+        "success": "Great grammar!",
+        "retry": "Review the verb and the preposition."
+      }
+    },
+    {
+      "id": "typing",
+      "mode": "typing",
+      "instruction": "Type the missing word.",
+      "segments": [
+        {
+          "type": "text",
+          "text": "She"
+        },
+        {
+          "type": "gap",
+          "id": "g1"
+        },
+        {
+          "type": "text",
+          "text": "to school every day."
+        }
+      ],
+      "gaps": [
+        {
+          "id": "g1",
+          "answer": "goes",
+          "alternatives": [
+            "goes"
+          ],
+          "validation": {
+            "caseSensitive": false,
+            "punctuationSensitive": false,
+            "trimSpaces": true,
+            "collapseSpaces": true
+          }
+        }
+      ],
+      "interaction": {
+        "type": "typing",
+        "allowRemove": true
+      },
+      "feedback": {
+        "success": "Well done! “She goes…” is correct.",
+        "retry": "Check the verb form for “she”."
+      }
+    },
+    {
+      "id": "listening",
+      "mode": "listening",
+      "responseMode": "typing",
+      "instruction": "Listen and write what you hear.",
+      "listening": {
+        "text": "They are reading a book.",
+        "locale": "en-US",
+        "autoPlay": false,
+        "replayAfterSuccess": true
+      },
+      "segments": [
+        {
+          "type": "gap",
+          "id": "full"
+        }
+      ],
+      "gaps": [
+        {
+          "id": "full",
+          "answer": "They are reading a book.",
+          "alternatives": [
+            "They are reading a book",
+            "they are reading a book"
+          ],
+          "validation": {
+            "caseSensitive": false,
+            "punctuationSensitive": false,
+            "trimSpaces": true,
+            "collapseSpaces": true
+          }
+        }
+      ],
+      "interaction": {
+        "type": "typing",
+        "allowRemove": true
+      },
+      "feedback": {
+        "success": "Excellent listening and writing!",
+        "retry": "Listen again. Focus on the complete sentence."
+      }
+    }
+  ]
+}
+  </script>
+
+  <script>
+
+(() => {
+  "use strict";
+  const $ = (sel, root=document) => root.querySelector(sel);
+  const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+  const root = $("#root");
+  const configEl = $("#duduq-smart-sentence-config");
+
+  const Assets = {
+    mascots: {
+      idle: window.DUDUQ_ASSETS.mascots.idle,
+      success: window.DUDUQ_ASSETS.mascots.correct,
+      retry: window.DUDUQ_ASSETS.mascots.error,
+      transition: window.DUDUQ_ASSETS.mascots.transition,
+      complete: window.DUDUQ_ASSETS.mascots.complete
+    },
+    media: {
+      dog: "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20120%20120%22%3E%0A%20%20%20%20%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2230%22%20fill%3D%22%23FFF0E8%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2260%22%20y%3D%2283%22%20text-anchor%3D%22middle%22%20font-size%3D%2270%22%3E%F0%9F%90%B6%3C/text%3E%0A%20%20%20%20%3C/svg%3E",
+      pizza: "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20120%20120%22%3E%0A%20%20%20%20%3Crect%20width%3D%22120%22%20height%3D%22120%22%20rx%3D%2230%22%20fill%3D%22%23FFF0E8%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2260%22%20y%3D%2283%22%20text-anchor%3D%22middle%22%20font-size%3D%2270%22%3E%F0%9F%8D%95%3C/text%3E%0A%20%20%20%20%3C/svg%3E"
+    }
+  };
+
+  const Events = new EventTarget();
+
+  const Utilities = {
+    normalize(value, rules={}) {
+      let text = String(value ?? "");
+      if (rules.trimSpaces !== false) text = text.trim();
+      if (rules.collapseSpaces) text = text.replace(/\s+/g, " ");
+      if (!rules.punctuationSensitive) text = text.replace(/[.,!?;:'"“”‘’()[\]{}]/g, "");
+      if (!rules.caseSensitive) text = text.toLocaleLowerCase("en-US");
+      return text;
+    },
+    liveRandom() {
+      try {
+        const cryptoApi =
+          globalThis.crypto &&
+          typeof globalThis.crypto.getRandomValues === "function"
+            ? globalThis.crypto
+            : null;
+
+        if (cryptoApi) {
+          const buffer = new Uint32Array(1);
+          cryptoApi.getRandomValues(buffer);
+          return buffer[0] / 4294967296;
+        }
+      } catch (_) {}
+
+      return Math.random();
+    },
+    shuffle(values) {
+      const out = [...values];
+      for (let i=out.length-1;i>0;i--) {
+        const j = Math.floor(this.liveRandom()*(i+1));
+        [out[i],out[j]]=[out[j],out[i]];
+      }
+      return out;
+    },
+    sameOrder(a, b) {
+      return (
+        Array.isArray(a) &&
+        Array.isArray(b) &&
+        a.length === b.length &&
+        a.every((value, index) => value === b[index])
+      );
+    },
+    presentationStore() {
+      const candidates = [];
+
+      try {
+        if (window.parent && window.parent !== window) {
+          candidates.push(window.parent);
+        }
+      } catch (_) {}
+
+      candidates.push(window);
+
+      for (const host of candidates) {
+        try {
+          if (!host.__DUDUQ_PRESENTATION_ORDERS_V2__) {
+            Object.defineProperty(
+              host,
+              "__DUDUQ_PRESENTATION_ORDERS_V2__",
+              {
+                value: Object.create(null),
+                configurable: true
+              }
+            );
+          }
+
+          return host.__DUDUQ_PRESENTATION_ORDERS_V2__;
+        } catch (_) {}
+      }
+
+      return null;
+    },
+    readOrder(key, source) {
+      const shared = this.presentationStore();
+
+      try {
+        const stored = shared?.[key];
+        if (
+          Array.isArray(stored) &&
+          stored.length === source.length &&
+          [...stored].sort().join("\u0001") ===
+            [...source].sort().join("\u0001")
+        ) {
+          return [...stored];
+        }
+      } catch (_) {}
+
+      const storages = [];
+      try { storages.push(localStorage); } catch (_) {}
+      try { storages.push(sessionStorage); } catch (_) {}
+
+      for (const storage of storages) {
+        try {
+          const raw = storage.getItem(key);
+          if (!raw) continue;
+
+          const parsed = JSON.parse(raw);
+
+          if (
+            Array.isArray(parsed) &&
+            parsed.length === source.length &&
+            [...parsed].sort().join("\u0001") ===
+              [...source].sort().join("\u0001")
+          ) {
+            return parsed;
+          }
+        } catch (_) {}
+      }
+
+      return null;
+    },
+    writeOrder(key, order) {
+      const shared = this.presentationStore();
+
+      try {
+        if (shared) shared[key] = [...order];
+      } catch (_) {}
+
+      try {
+        localStorage.setItem(key, JSON.stringify(order));
+      } catch (_) {}
+
+      try {
+        sessionStorage.setItem(key, JSON.stringify(order));
+      } catch (_) {}
+    },
+    antiRepeatShuffle(values, key) {
+      return window.DuduQPresentationV4.order(
+        values,
+        "smart-sentence:" + key,
+        () => this.liveRandom(),
+        `${GameState.presentationEpoch}:${key}`
+      );
+    },
+    escape(text) {
+      const div = document.createElement("div");
+      div.textContent = String(text ?? "");
+      return div.innerHTML;
+    }
+  };
+
+  const Config = {
+    parse() {
+      if (!configEl) throw new Error("Config JSON não encontrado.");
+      const parsed = JSON.parse(configEl.textContent);
+      this.validate(parsed);
+      return parsed;
+    },
+    validate(cfg) {
+      if (!cfg || cfg.schemaVersion !== 1) throw new Error("schemaVersion inválida.");
+      if (!Array.isArray(cfg.stages) || !cfg.stages.length) throw new Error("A Smart Sentence precisa de etapas.");
+      const ids = new Set();
+      cfg.stages.forEach((stage, index) => {
+        if (!stage.id || ids.has(stage.id)) throw new Error(`ID de etapa inválido/duplicado em ${index}.`);
+        ids.add(stage.id);
+        if (!stage.mode || !stage.instruction) throw new Error(`Etapa ${stage.id}: modo e instrução são obrigatórios.`);
+        if (!Array.isArray(stage.segments)) throw new Error(`Etapa ${stage.id}: segments deve ser array.`);
+      });
+    }
+  };
+
+  const GameState = {
+    stageIndex: 0,
+    completed: new Set(),
+    answers: {},
+    activeGapId: null,
+    movingGapId: null,
+    feedback: "idle",
+    attempts: 0,
+    audioPlaying: false,
+    attention: false,
+    successAnimation: false,
+    optionOrder: {},
+    presentationEpoch: 0,
+    lessonComplete: false
+  };
+
+  const ValidationEngine = {
+    accepted(gap, value) {
+      const accepted = [gap.answer, ...(gap.alternatives || [])];
+      const rules = gap.validation || {};
+      const normalized = Utilities.normalize(value, rules);
+      return accepted.some(answer => Utilities.normalize(answer, rules) === normalized);
+    },
+    validateStage(stage, answers) {
+      if (stage.expectedSequence) {
+        const actual = stage.segments.filter(s => s.type === "gap").map(s => answers[s.id] || "");
+        const expected = stage.expectedSequence;
+        const ok = actual.length === expected.length && actual.every((v,i) => Utilities.normalize(v,{trimSpaces:true,collapseSpaces:true,punctuationSensitive:false,caseSensitive:false}) === Utilities.normalize(expected[i],{trimSpaces:true,collapseSpaces:true,punctuationSensitive:false,caseSensitive:false}));
+        return { isCorrect: ok, detail: { actual, expected } };
+      }
+      const gaps = stage.gaps || [];
+      const gapResults = gaps.map(gap => ({ id: gap.id, correct: this.accepted(gap, answers[gap.id] || "") }));
+      return { isCorrect: gapResults.every(x => x.correct), detail: { gaps: gapResults } };
+    }
+  };
+
+  const GapEngine = {
+    gapIds(stage) { return stage.segments.filter(s => s.type === "gap").map(s => s.id); },
+    firstEmpty(stage) { return this.gapIds(stage).find(id => !GameState.answers[id]) || null; },
+    select(stage, gapId) {
+      GameState.activeGapId = gapId;
+      InteractionManager.touch();
+      SentenceEngine.render();
+    },
+    set(stage, gapId, value) {
+      GameState.movingGapId = null;
+      GameState.answers[gapId] = value;
+      GameState.activeGapId = this.firstEmpty(stage) || gapId;
+      InteractionManager.touch();
+      Events.dispatchEvent(new CustomEvent("gap-filled",{detail:{gapId,value}}));
+      SentenceEngine.render();
+    },
+    remove(stage, gapId) {
+      if (!stage.interaction?.allowRemove) return;
+      delete GameState.answers[gapId];
+      GameState.activeGapId = gapId;
+      InteractionManager.touch();
+      SentenceEngine.render();
+    }
+  };
+
+  const ReorderEngine = {
+    enabled(stage) {
+      return Boolean(stage.wordBank || stage.expectedSequence);
+    },
+    select(stage, gapId) {
+      if (!this.enabled(stage) || !GameState.answers[gapId]) return false;
+
+      if (GameState.movingGapId === gapId) {
+        delete GameState.answers[gapId];
+        GameState.movingGapId = null;
+        GameState.activeGapId = gapId;
+        InteractionManager.touch(false);
+        SentenceEngine.render();
+        return true;
+      }
+
+      GameState.movingGapId = gapId;
+      GameState.activeGapId = gapId;
+      InteractionManager.touch(false);
+      SentenceEngine.render();
+      return true;
+    },
+    move(stage, targetGapId) {
+      const sourceGapId = GameState.movingGapId;
+      if (!sourceGapId || sourceGapId === targetGapId) return false;
+
+      const sourceValue = GameState.answers[sourceGapId];
+      if (!sourceValue) {
+        GameState.movingGapId = null;
+        return false;
+      }
+
+      const targetValue = GameState.answers[targetGapId];
+      GameState.answers[targetGapId] = sourceValue;
+
+      if (targetValue) {
+        GameState.answers[sourceGapId] = targetValue;
+      } else {
+        delete GameState.answers[sourceGapId];
+      }
+
+      GameState.movingGapId = null;
+      GameState.activeGapId = GapEngine.firstEmpty(stage) || targetGapId;
+      InteractionManager.touch(false);
+
+      Events.dispatchEvent(new CustomEvent("sentence-reordered", {
+        detail: {
+          sourceGapId,
+          targetGapId,
+          swapped: Boolean(targetValue)
+        }
+      }));
+
+      SentenceEngine.render();
+      return true;
+    },
+    handleGap(stage, gapId) {
+      if (!this.enabled(stage)) return false;
+
+      const filled = Boolean(GameState.answers[gapId]);
+
+      if (GameState.movingGapId) {
+        if (GameState.movingGapId === gapId) {
+          return this.select(stage, gapId);
+        }
+        return this.move(stage, gapId);
+      }
+
+      if (filled) {
+        return this.select(stage, gapId);
+      }
+
+      GameState.activeGapId = gapId;
+      InteractionManager.touch(false);
+      SentenceEngine.render();
+      return true;
+    }
+  };
+
+  const WordEngine = {
+    bank(stage) {
+      const values = stage.wordBank || [];
+      if (stage.interaction?.lockOptionOrder === true) {
+        return [...values];
+      }
+
+      const key = `${stage.id}::word-bank::${values.join("\u0001")}`;
+
+      if (!Array.isArray(GameState.optionOrder[key])) {
+        GameState.optionOrder[key] =
+          Utilities.antiRepeatShuffle(values, key);
+      }
+
+      return [...GameState.optionOrder[key]];
+    },
+    use(stage, word) {
+      const activeTarget = GameState.activeGapId && !GameState.answers[GameState.activeGapId]
+        ? GameState.activeGapId
+        : null;
+      const target = activeTarget || GapEngine.firstEmpty(stage);
+      if (!target) return;
+      GapEngine.set(stage, target, word);
+    },
+    isUsed(stage, word, occurrenceIndex) {
+      const used = Object.values(GameState.answers);
+      let count = 0;
+      for (const value of used) if (value === word) count++;
+      return occurrenceIndex < count;
+    }
+  };
+
+  const AnswerEngine = {
+    choose(stage, value) {
+      const gapId = GameState.activeGapId || GapEngine.firstEmpty(stage) || stage.gaps?.[0]?.id;
+      if (!gapId) return;
+      GapEngine.set(stage, gapId, value);
+    },
+    input(stage, gapId, value) {
+      GameState.answers[gapId] = value;
+      InteractionManager.touch(false);
+      ProgressManager.updateConfirmState();
+    },
+    ready(stage) {
+      return GapEngine.gapIds(stage).every(id => String(GameState.answers[id] ?? "").trim().length > 0);
+    },
+    submit(stage) {
+      if (!this.ready(stage) || GameState.feedback === "success") return;
+      const result = ValidationEngine.validateStage(stage, GameState.answers);
+      GameState.attempts += 1;
+      if (result.isCorrect) FeedbackManager.success(stage, result);
+      else FeedbackManager.retry(stage, result);
+    }
+  };
+
+  const AudioManager = {
+    cancel() {
+      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      GameState.audioPlaying = false;
+      this.sync();
+    },
+    play(text, locale="en-US") {
+      if (!text || !("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") return;
+      this.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = locale; u.rate = .92; u.pitch = 1;
+      GameState.audioPlaying = true; GameState.attention = false; this.sync();
+      u.onend = u.onerror = () => { GameState.audioPlaying = false; this.sync(); };
+      speechSynthesis.speak(u);
+    },
+    sync() {
+      const shell = $(".duduq-ts-audio-shell");
+      const button = $(".duduq-ts-audio-button");
+      if (shell) {
+        shell.dataset.playing = GameState.audioPlaying ? "true" : "false";
+        shell.dataset.attention = GameState.attention ? "true" : "false";
+      }
+      if (button) button.dataset.playing = GameState.audioPlaying ? "true" : "false";
+    }
+  };
+
+  const ListeningEngine = {
+    text(stage) { return stage.listening?.text || stage.instructionSpoken || stage.instruction; },
+    play(stage) { AudioManager.play(this.text(stage), stage.listening?.locale || SentenceEngine.config.language || "en-US"); }
+  };
+
+  const SmartDragAdapter = {
+    available() {
+      const provider = window.DuduQSmartDragEngine;
+      return !!(provider && typeof provider.mountSentenceOrder === "function");
+    },
+    attach(stage) {
+      if (stage.interaction?.type !== "drag") return false;
+      if (!this.available()) {
+        console.info("[Smart Sentence] Smart Drag engine não exposto no host; mantendo fallback de toque/teclado.");
+        return false;
+      }
+      window.DuduQSmartDragEngine.mountSentenceOrder({
+        root: $(".duduq-ss-board"),
+        words: stage.wordBank || [],
+        slots: GapEngine.gapIds(stage),
+        onChange(sequence) {
+          GapEngine.gapIds(stage).forEach((id,i) => {
+            if (sequence[i]) GameState.answers[id] = sequence[i];
+            else delete GameState.answers[id];
+          });
+          SentenceEngine.render();
+        }
+      });
+      return true;
+    }
+  };
+
+  const InteractionManager = {
+    timer: null,
+    touch(render=true) {
+      GameState.feedback = GameState.feedback === "retry" ? "idle" : GameState.feedback;
+      GameState.attention = false;
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        if (!GameState.lessonComplete && GameState.feedback === "idle") {
+          GameState.attention = true;
+          AudioManager.sync();
+        }
+      }, SentenceEngine.config.inactivityAttentionMs || 8000);
+      FeedbackManager.hideRetryIfNeeded();
+    }
+  };
+
+  const AnimationEngine = {
+    markSuccess() {
+      GameState.successAnimation = true;
+
+      // Confirma visualmente a resposta correta sem depender de um novo render.
+      // Assim o card preenchido muda para verde no mesmo frame do feedback.
+      $$(".duduq-ss-gap[data-filled=\"true\"]").forEach((gap) => {
+        gap.dataset.correct = "true";
+        gap.dataset.active = "false";
+      });
+
+      // Mantém também a palavra de origem identificada como correta durante o feedback.
+      $$(".duduq-ss-token[data-used=\"true\"]").forEach((token) => {
+        token.dataset.correct = "true";
+      });
+
+      const card = $(".duduq-ss-sentence-card");
+      if (card) {
+        // Reinicia a animação para que o confete seja disparado em todo acerto.
+        card.dataset.success = "false";
+        void card.offsetWidth;
+        card.dataset.success = "true";
+      }
+    }
+  };
+
+  const ProgressManager = {
+    update() {
+      const total = SentenceEngine.config.stages.length;
+      const safeCurrentIndex = total > 0 ? Math.min(Math.max(GameState.stageIndex, 0), total - 1) : 0;
+      const completedCount = GameState.lessonComplete ? total : GameState.completed.size;
+      const visualProgressCount = GameState.lessonComplete
+        ? total
+        : Math.max(completedCount, safeCurrentIndex);
+      const ratio = total > 0 ? visualProgressCount / total : 0;
+
+      const trail = $(".duduq-progress-trail");
+      const copy = $(".duduq-progress-copy strong");
+
+      if (copy) {
+        copy.textContent = GameState.lessonComplete
+          ? `${total} de ${total} etapas`
+          : `Etapa ${Math.min(safeCurrentIndex + 1, total)} de ${total}`;
+      }
+
+      if (trail) {
+        trail.style.setProperty("--lesson-progress", String(Math.max(0, Math.min(ratio, 1))));
+        trail.dataset.style = "duolingo";
+        trail.dataset.density = total > 6 ? "dense" : "normal";
+        trail.dataset.complete = GameState.lessonComplete ? "true" : "false";
+        trail.dataset.reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ? "true" : "false";
+        trail.setAttribute("aria-valuemin", "0");
+        trail.setAttribute("aria-valuemax", String(total));
+        trail.setAttribute("aria-valuenow", String(completedCount));
+        trail.setAttribute("aria-valuetext", `${completedCount} de ${total} etapas concluídas`);
+      }
+    },
+    updateConfirmState() {
+      const btn = $(".duduq-matching-primary");
+      if (!btn) return;
+      btn.disabled = !AnswerEngine.ready(SentenceEngine.stage());
+    }
+  };
+
+  const SentenceSpeech = {
+    activeTimer: null,
+    text(stage) {
+      const pieces = (stage?.segments || []).map((segment) => {
+        if (segment?.type === "text") return String(segment.text || "");
+        if (segment?.type === "gap") return String(GameState.answers?.[segment.id] || "");
+        return "";
+      });
+
+      const composed = pieces
+        .filter(Boolean)
+        .join(" ")
+        .replace(/\s+([.,!?;:])/g, "$1")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      if (composed) return composed;
+
+      /* CANARY 048: todos os formatos do Smart Sentence leem a frase correta.
+         Se um formato nao expuser segments, usa a frase visivel ja preenchida. */
+      const visibleSentence =
+        document.querySelector(".duduq-ss-sentence")?.textContent
+          ?.replace(/\s+([.,!?;:])/g, "$1")
+          ?.replace(/\s+/g, " ")
+          ?.trim();
+
+      return visibleSentence || "";
+    },
+    synths() {
+      const list = [];
+      try {
+        if (window.speechSynthesis) list.push(window.speechSynthesis);
+      } catch (_) {}
+      try {
+        if (
+          window.parent &&
+          window.parent !== window &&
+          window.parent.speechSynthesis &&
+          !list.includes(window.parent.speechSynthesis)
+        ) {
+          list.push(window.parent.speechSynthesis);
+        }
+      } catch (_) {}
+      return list;
+    },
+    busy() {
+      return this.synths().some((synth) => {
+        try { return Boolean(synth.speaking || synth.pending); }
+        catch (_) { return false; }
+      });
+    },
+    cancelPendingTimer() {
+      if (this.activeTimer !== null) {
+        clearTimeout(this.activeTimer);
+        this.activeTimer = null;
+      }
+    },
+    playWhenClear(stage, onDone) {
+      const text = this.text(stage);
+      if (!text) {
+        if (typeof onDone === "function") onDone();
+        return false;
+      }
+
+      this.cancelPendingTimer();
+      try { window.DuduQSound?.stop?.("correct"); } catch (_) {}
+      const startedAt = Date.now();
+      let quietSince = null;
+      const maxWaitMs = 4800;
+      const quietWindowMs = 260;
+
+      const finish = () => {
+        GameState.audioPlaying = false;
+        AudioManager.sync();
+        if (typeof onDone === "function") onDone();
+      };
+
+      const tryStart = () => {
+        const now = Date.now();
+        if (this.busy() && now - startedAt < maxWaitMs) {
+          quietSince = null;
+          this.activeTimer = setTimeout(tryStart, 120);
+          return;
+        }
+
+        if (quietSince === null) quietSince = now;
+        if (now - quietSince < quietWindowMs && now - startedAt < maxWaitMs) {
+          this.activeTimer = setTimeout(tryStart, 90);
+          return;
+        }
+
+        this.activeTimer = null;
+
+        /* A frase correta tem prioridade total: nenhum feedback padrao pode entrar depois. */
+        try { window.DuduQSound?.stop?.("correct"); } catch (_) {}
+        /* Limpa qualquer fala residual imediatamente antes da frase correta. */
+        this.synths().forEach((synth) => {
+          try { synth.cancel(); } catch (_) {}
+        });
+
+        if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
+          finish();
+          return;
+        }
+
+        try {
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "en-US";
+          utterance.rate = .90;
+          utterance.pitch = 1;
+          GameState.audioPlaying = true;
+          GameState.attention = false;
+          AudioManager.sync();
+          utterance.onend = finish;
+          utterance.onerror = finish;
+          window.speechSynthesis.speak(utterance);
+        } catch (_) {
+          finish();
+        }
+      };
+
+      /* O feedback visual e o som curto de acerto entram primeiro. */
+      this.activeTimer = setTimeout(tryStart, 320);
+      return true;
+    }
+  };
+
+  const FeedbackManager = {
+    node() { return $(".duduq-engine-feedback"); },
+    hideRetryIfNeeded() {
+      if (GameState.feedback !== "idle") return;
+      const node = this.node();
+      if (node) node.hidden = true;
+    },
+    show(kind, title, message) {
+      const node = this.node();
+      node.hidden = false;
+      node.dataset.state = kind;
+      const asset = Assets.mascots[kind === "success" ? "success" : "retry"];
+      node.innerHTML = `
+        <div class="duduq-engine-feedback-card" role="status">
+          ${SentenceRenderer.mascot(kind, "feedback", asset)}
+          <div class="duduq-engine-feedback-copy"><strong>${Utilities.escape(title)}</strong><span>${Utilities.escape(message)}</span></div>
+        </div>`;
+    },
+    success(stage, result) {
+      GameState.feedback = "success";
+      window.DuduQSound?.stop?.("correct");
+      window.DuduQSound?.play("ding", { volume: 0.30, minGapMs: 700 });
+      GameState.completed.add(stage.id);
+      AnimationEngine.markSuccess();
+      this.show("success","Correto!",stage.feedback?.success || "Muito bem!");
+      ProgressManager.update();
+      const completedSpeech = SentenceSpeech.text(stage);
+      let successCompletionSent = false;
+      const completeSuccess = () => {
+        if (successCompletionSent) return;
+        successCompletionSent = true;
+
+        /* CANARY 050:
+           Em modo hospedado, o Player recebe a conclusao uma unica vez.
+           O runtime nao troca de etapa internamente e o Confirmar nao volta. */
+        Events.dispatchEvent(new CustomEvent("answer",{detail:{stageId:stage.id,...result}}));
+
+        /* CANARY 051:
+           Contrato explicito Runtime -> Adapter, igual ao padrao robusto
+           usado pelas mecanicas que transitam corretamente no Host. */
+        if (
+          SentenceEngine.config?.hostedByDuduQ &&
+          window.parent &&
+          window.parent !== window
+        ) {
+          try {
+            window.parent.postMessage(
+              {
+                type: "DUDUQ_SMART_SENTENCE_COMPLETE",
+                stageId: stage.id,
+                isCorrect: true
+              },
+              "*"
+            );
+          } catch (_) {}
+        }
+
+        if (!SentenceEngine.config?.hostedByDuduQ) {
+          setTimeout(() => SentenceEngine.advance(), 260);
+        }
+      };
+
+      if (completedSpeech) {
+        SentenceSpeech.playWhenClear(stage, completeSuccess);
+
+        /* Watchdog: alguns navegadores podem deixar speechSynthesis sem onend.
+           A frase continua tendo prioridade; este timer so impede a atividade
+           de ficar presa para sempre sem chegar a Proxima missao. */
+        if (SentenceEngine.config?.hostedByDuduQ) {
+          const watchdogMs = Math.max(
+            6200,
+            Number(SentenceEngine.config?.autoAdvanceAfterCorrectMs || 5200) + 1000
+          );
+          setTimeout(completeSuccess, watchdogMs);
+        }
+      } else if (stage.listening?.replayAfterSuccess) {
+        setTimeout(() => ListeningEngine.play(stage), 280);
+        setTimeout(completeSuccess, 1550);
+      } else {
+        setTimeout(completeSuccess, 850);
+      }
+    },
+    retry(stage, result) {
+      GameState.feedback = "retry";
+      window.DuduQSound?.play("error", { volume: 0.48, minGapMs: 520 });
+      this.show("retry","Tente novamente",stage.feedback?.retry || "Revise a frase e tente outra vez.");
+
+      $$('.duduq-ss-gap[data-filled="true"]').forEach((gap) => {
+        gap.dataset.retry = "true";
+        gap.dataset.active = "false";
+      });
+
+      $$('.duduq-ss-token[data-used="true"]').forEach((token) => {
+        token.dataset.retry = "true";
+      });
+
+      const retryDuration = SentenceEngine.config.retryFeedbackDurationMs || 900;
+      setTimeout(() => {
+        $$('.duduq-ss-gap[data-retry="true"]').forEach((gap) => delete gap.dataset.retry);
+        $$('.duduq-ss-token[data-retry="true"]').forEach((token) => delete token.dataset.retry);
+      }, retryDuration);
+
+      Events.dispatchEvent(new CustomEvent("answer",{detail:{stageId:stage.id,...result}}));
+    }
+  };
+
+  const SentenceRenderer = {
+    speakerIcon() {
+      return `<svg viewBox="0 0 24 24" width="23" height="23" fill="none" aria-hidden="true"><path d="M11 5 6.5 9H3v6h3.5L11 19V5Z" fill="currentColor"/><path d="M15 8.5c1.3 1.8 1.3 5.2 0 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18 6c2.7 3.4 2.7 8.6 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+    },
+    mascot(state,size,src) {
+      return `<figure class="duduq-mascot" data-state="${state}" data-size="${size}" data-reduced-motion="false">
+        <div class="duduq-mascot-body"><img src="${src}" alt="Mascote DuduQ" draggable="false"></div>
+      </figure>`;
+    },
+    instruction(stage) {
+      const hasAudio = Boolean(stage.listening?.text || stage.instructionSpoken);
+      return `<section class="duduq-matching-instruction" data-has-image="false" aria-label="InstruÃ§Ã£o">
+        <h2 class="duduq-matching-display">${Utilities.escape(stage.instruction)}</h2>
+        ${hasAudio ? `<span class="duduq-ts-audio-shell" data-playing="false" data-attention="${GameState.attention}">
+          <span class="duduq-ts-audio-waves" aria-hidden="true"><span class="duduq-ts-audio-wave"></span><span class="duduq-ts-audio-wave"></span></span>
+          <button type="button" class="duduq-ts-audio-button" data-playing="false" aria-label="Ouvir instruÃ§Ã£o">${this.speakerIcon()}</button>
+        </span>` : `<span class="duduq-ts-audio-shell" aria-hidden="true"></span>`}
+      </section>`;
+    },
+    meta(stage) {
+      const chips = [];
+      if (stage.timeLimitSeconds) chips.push(`<span class="duduq-ss-chip">Tempo <strong>${stage.timeLimitSeconds}s</strong></span>`);
+      if (stage.maxAttempts) chips.push(`<span class="duduq-ss-chip">Tentativas <strong>${GameState.attempts}/${stage.maxAttempts}</strong></span>`);
+      if (stage.category) chips.push(`<span class="duduq-ss-chip">${Utilities.escape(stage.category)}</span>`);
+      return chips.length ? `<div class="duduq-ss-meta">${chips.join("")}</div>` : "";
+    },
+    segment(stage, seg) {
+      if (seg.type === "text") return `<span class="duduq-ss-text">${Utilities.escape(seg.text)}</span>`;
+      if (seg.type === "highlight") return `<span class="duduq-ss-highlight">${Utilities.escape(seg.text)}</span>`;
+      if (seg.type === "image") {
+        const src = seg.src || Assets.media[seg.assetKey] || "";
+        return `<img class="duduq-ss-inline-image" src="${src}" alt="${Utilities.escape(seg.alt || "")}">`;
+      }
+      if (seg.type === "gap") {
+        const value = GameState.answers[seg.id] || "";
+        const active = GameState.activeGapId === seg.id || (!GameState.activeGapId && GapEngine.firstEmpty(stage) === seg.id);
+        const typing = stage.interaction?.type === "typing" || stage.mode === "typing" || (stage.mode === "listening" && stage.responseMode === "typing");
+        if (typing) {
+          const safe = Utilities.escape(value);
+          return `<input class="duduq-ss-input" data-gap-id="${Utilities.escape(seg.id)}" value="${safe}" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Digite a resposta">`;
+        }
+        const reorderable = ReorderEngine.enabled(stage);
+        const moving = GameState.movingGapId === seg.id;
+        const reorderTarget = Boolean(GameState.movingGapId && GameState.movingGapId !== seg.id);
+        const label = value
+          ? (reorderable
+              ? `Palavra ${Utilities.escape(value)}. Toque para selecionar e reorganizar.`
+              : `Lacuna preenchida com ${Utilities.escape(value)}. Toque para remover.`)
+          : (reorderable && GameState.movingGapId
+              ? "Espaço de destino. Toque para mover a palavra selecionada."
+              : "Lacuna vazia");
+
+        return `<button type="button" class="duduq-ss-gap" data-gap-id="${Utilities.escape(seg.id)}" data-active="${active}" data-filled="${Boolean(value)}" data-correct="${GameState.feedback === "success"}" data-moving="${moving}" data-reorder-target="${reorderTarget}" aria-pressed="${moving}" aria-label="${label}"><span class="duduq-ss-gap-text">${value ? Utilities.escape(value) : "&nbsp;"}</span></button>`;
+      }
+      return "";
+    },
+    bank(stage) {
+      if (
+        stage.interaction?.type === "typing" ||
+        stage.mode === "typing" ||
+        (stage.mode === "listening" && stage.responseMode === "typing")
+      ) return "";
+
+      let values = [];
+
+      if (stage.wordBank) {
+        values = WordEngine.bank(stage);
+      } else {
+        const activeId =
+          GameState.activeGapId ||
+          GapEngine.firstEmpty(stage) ||
+          stage.gaps?.[0]?.id;
+
+        const gap =
+          (stage.gaps || []).find(g => g.id === activeId) ||
+          stage.gaps?.[0];
+
+        values = Array.isArray(gap?.options)
+          ? [...gap.options]
+          : [];
+
+        if (
+          stage.interaction?.lockOptionOrder !== true &&
+          values.length > 1
+        ) {
+          const key =
+            `${stage.id}::${activeId || "gap"}::${values.join("\u0001")}`;
+
+          if (!Array.isArray(GameState.optionOrder[key])) {
+            GameState.optionOrder[key] =
+              Utilities.antiRepeatShuffle(values, key);
+          }
+
+          values = [...GameState.optionOrder[key]];
+        }
+      }
+
+      const occurrenceMap = {};
+      const tokens = values.map(word => {
+        const idx = occurrenceMap[word] || 0;
+        occurrenceMap[word] = idx + 1;
+
+        const used = stage.wordBank
+          ? WordEngine.isUsed(stage, word, idx)
+          : Object.values(GameState.answers).includes(word);
+
+        const correctUsed =
+          used && GameState.feedback === "success";
+
+        return `<button type="button" class="duduq-ss-token" data-word="${Utilities.escape(word)}" data-used="${used}" data-correct="${correctUsed}" ${used ? "disabled" : ""}>${Utilities.escape(word)}</button>`;
+      }).join("");
+
+      return `<div class="duduq-ss-options-panel" data-count="${values.length}">
+        <div class="duduq-ss-bank" role="group" aria-label="Escolha uma resposta">${tokens}</div>
+      </div>`;
+    },
+    helper(stage) {
+      if (
+        stage.interaction?.type === "typing" ||
+        stage.mode === "typing" ||
+        (stage.mode === "listening" && stage.responseMode === "typing")
+      ) return "";
+
+      const text = stage.wordBank
+        ? (
+            GameState.movingGapId
+              ? "Escolha o novo espaço."
+              : "Toque nas palavras na ordem correta."
+          )
+        : "Escolha uma palavra.";
+
+      return `<p class="duduq-ss-helper">${Utilities.escape(text)}</p>`;
+    },
+    board(stage) {
+      const separateContext = stage.segments.some(s => s.type === "image") && stage.mode === "complete-image";
+      const sentenceSegments = separateContext ? stage.segments.filter(s => s.type !== "image") : stage.segments;
+      const context = separateContext ? `<div class="duduq-ss-context">${stage.segments.filter(s=>s.type==="image").map(s=>`<img src="${s.src || Assets.media[s.assetKey] || ""}" alt="${Utilities.escape(s.alt || "")}">`).join("")}</div>` : "";
+      return `<div class="duduq-ss-board" data-mode="${stage.mode}">
+        ${context}
+        <div class="duduq-ss-sentence-card" data-success="${GameState.successAnimation}">
+          <i class="duduq-ss-spark"></i><i class="duduq-ss-spark"></i><i class="duduq-ss-spark"></i>
+          <i class="duduq-ss-confetti"></i><i class="duduq-ss-confetti"></i><i class="duduq-ss-confetti"></i><i class="duduq-ss-confetti"></i><i class="duduq-ss-confetti"></i><i class="duduq-ss-confetti"></i><i class="duduq-ss-confetti"></i>
+          <div class="duduq-ss-sentence">${sentenceSegments.map(seg => this.segment(stage,seg)).join("")}</div>
+        </div>
+        ${this.bank(stage)}
+      </div>`;
+    }
+  };
+
+  const SentenceEngine = {
+    config: null,
+    stage() { return this.config.stages[GameState.stageIndex]; },
+    init() {
+      this.config = Config.parse();
+      this.bindHeader();
+      this.resetStageState();
+      this.render();
+      InteractionManager.touch(false);
+    },
+    resetStageState() {
+      GameState.answers = {};
+      GameState.activeGapId = null;
+      GameState.movingGapId = null;
+      GameState.feedback = "idle";
+      GameState.attempts = 0;
+      GameState.successAnimation = false;
+      GameState.attention = false;
+      GameState.optionOrder = {};
+      AudioManager.cancel();
+    },
+    bindHeader() {
+      $("#restartButton").addEventListener("click", () => this.restart());
+      $("#fullscreenButton").addEventListener("click", () => this.toggleFullscreen());
+      document.addEventListener("fullscreenchange", () => this.syncFullscreen());
+    },
+    syncFullscreen() {
+      const btn = $("#fullscreenButton");
+      const active = Boolean(document.fullscreenElement);
+      btn.setAttribute("aria-pressed", String(active));
+      $(".duduq-engine-fullscreen-icon", btn).textContent = active ? "🗗" : "⛶";
+      btn.setAttribute("aria-label", active ? "Sair da tela cheia" : "Abrir em tela cheia");
+    },
+    async toggleFullscreen() {
+      try {
+        if (document.fullscreenElement) await document.exitFullscreen?.();
+        else await document.documentElement.requestFullscreen?.({navigationUI:"hide"});
+      } catch (err) { console.warn("Fullscreen indisponível:", err); }
+    },
+    restart() {
+      GameState.presentationEpoch += 1;
+      GameState.stageIndex = 0; GameState.completed = new Set(); GameState.lessonComplete = false;
+      this.resetStageState(); FeedbackManager.node().hidden = true; this.render(); ProgressManager.update();
+    },
+    advance() {
+      const total = this.config.stages.length;
+      if (GameState.stageIndex >= total - 1) {
+        if (this.config.hostedByDuduQ === true) {
+          return;
+        }
+        GameState.lessonComplete = true;
+        window.DuduQSound?.play("win", { volume: 0.64, minGapMs: 1800, exclusive: true });
+        this.renderComplete();
+        return;
+      }
+      GameState.stageIndex += 1;
+      this.resetStageState();
+      FeedbackManager.node().hidden = true;
+      this.render();
+      ProgressManager.update();
+      InteractionManager.touch(false);
+    },
+    render() {
+      if (GameState.lessonComplete) return this.renderComplete();
+      const stage = this.stage();
+      if (!GameState.activeGapId) GameState.activeGapId = GapEngine.firstEmpty(stage);
+      const stageEl = $(".duduq-engine-stage");
+      stageEl.innerHTML = `<div class="duduq-ss-root" data-mode="${stage.mode}">
+        <div class="duduq-ss-surface">
+          ${SentenceRenderer.instruction(stage)}
+          ${SentenceRenderer.meta(stage)}
+          ${SentenceRenderer.board(stage)}
+          ${SentenceRenderer.helper(stage)}
+          <div class="duduq-ss-action-slot duduq-matching-action-slot" data-feedback-state="${GameState.feedback}">
+            <button type="button" class="duduq-matching-primary" ${AnswerEngine.ready(stage) ? "" : "disabled"}>CONFIRMAR</button>
+          </div>
+          <output class="duduq-ss-live" aria-live="polite" aria-atomic="true"></output>
+        </div>
+      </div>`;
+      this.bindStage(stage);
+      ProgressManager.update();
+      AudioManager.sync();
+      if (stage.listening?.autoPlay) setTimeout(() => ListeningEngine.play(stage), 420);
+      SmartDragAdapter.attach(stage);
+    },
+    bindStage(stage) {
+      const audioBtn = $(".duduq-ts-audio-button");
+      if (audioBtn) audioBtn.addEventListener("click", () => { InteractionManager.touch(); ListeningEngine.play(stage); });
+      $$(".duduq-ss-gap").forEach(gap => gap.addEventListener("click", () => {
+        const id = gap.dataset.gapId;
+
+        if (ReorderEngine.handleGap(stage, id)) {
+          return;
+        }
+
+        if (GameState.answers[id]) {
+          GapEngine.remove(stage,id);
+        } else {
+          GapEngine.select(stage,id);
+        }
+      }));
+      $$(".duduq-ss-token").forEach(token => token.addEventListener("click", () => {
+        const word = token.dataset.word;
+        if (stage.wordBank) WordEngine.use(stage,word);
+        else AnswerEngine.choose(stage,word);
+      }));
+      $$(".duduq-ss-input").forEach(input => {
+        input.addEventListener("input", () => AnswerEngine.input(stage,input.dataset.gapId,input.value));
+        input.addEventListener("keydown", e => { if (e.key === "Enter") AnswerEngine.submit(stage); });
+      });
+      $(".duduq-matching-primary")?.addEventListener("click", () => AnswerEngine.submit(stage));
+    },
+    renderComplete() {
+      ProgressManager.update();
+      $(".duduq-engine-stage").innerHTML = `<section class="duduq-engine-complete" role="status">
+        ${SentenceRenderer.mascot("complete","complete",Assets.mascots.complete)}
+        <h2>Parabéns! Lição concluída</h2>
+        <p>Você completou ${this.config.stages.length} de ${this.config.stages.length} etapas da Smart Sentence.</p>
+        <button type="button" class="duduq-engine-button" id="playAgainButton">Jogar novamente</button>
+      </section>`;
+      FeedbackManager.node().hidden = true;
+      $("#playAgainButton").addEventListener("click", () => this.restart());
+      const trail = $(".duduq-progress-trail");
+      if (trail) {
+        trail.style.setProperty("--lesson-progress", "1");
+        trail.dataset.complete = "true";
+        trail.setAttribute("aria-valuenow", String(this.config.stages.length));
+        trail.setAttribute("aria-valuetext", `${this.config.stages.length} de ${this.config.stages.length} etapas concluídas`);
+      }
+      $(".duduq-progress-copy strong").textContent = `${this.config.stages.length} de ${this.config.stages.length} etapas`;
+    }
+  };
+
+  const PublicAPI = {
+    SentenceEngine, SentenceRenderer, GapEngine, ReorderEngine, WordEngine, AnswerEngine, ValidationEngine,
+    ListeningEngine, AudioManager, InteractionManager, AnimationEngine, FeedbackManager,
+    ProgressManager, GameState, Config, Events, Utilities, SmartDragAdapter,
+    ready: false,
+    initError: null
+  };
+
+  window.DUDUQ_SMART_SENTENCE = PublicAPI;
+
+  try {
+    SentenceEngine.init();
+    PublicAPI.ready = true;
+  } catch (error) {
+    PublicAPI.initError =
+      error instanceof Error
+        ? error.message
+        : String(error);
+
+    console.error(error);
+
+    root.innerHTML = `<div style="max-width:760px;margin:40px auto;padding:20px;border:2px solid #ef9a9a;border-radius:18px;background:#fff;color:#8b1e1e;font-weight:800">
+      Não foi possível iniciar a Smart Sentence.<br><br>${Utilities.escape(PublicAPI.initError)}
+    </div>`;
+  }
+})();
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="duduq-golden-smart-submit-v5">
+(function () {
+  "use strict";
+
+  document.addEventListener(
+    "click",
+    function (event) {
+      const target =
+        event.target instanceof Element
+          ? event.target
+          : null;
+
+      const button =
+        target?.closest?.(".duduq-matching-primary");
+
+      if (!button || button.disabled) return;
+
+      const slot =
+        button.closest(".duduq-ss-action-slot");
+
+      if (!slot) return;
+
+      slot.setAttribute(
+        "data-duduq-submitted",
+        "true"
+      );
+
+      window.setTimeout(
+        function () {
+          if (!slot.isConnected) return;
+          slot.removeAttribute(
+            "data-duduq-submitted"
+          );
+        },
+        1050
+      );
+    },
+    true
+  );
+})();
+</script>
+
+
+
+
+
+
+
+
+<script id="duduq-smart-release-1-0-11">window.__DUDUQ_SMART_SENTENCE_RELEASE__="1.0.11";</script>
+
+
+<script id="duduq-canary-035-adaptive-space-script">
+(function () {
+  "use strict";
+  let attempts = 0;
+  let observer = null;
+
+  function classify(stage) {
+    const height = Math.round(stage.getBoundingClientRect().height || stage.clientHeight || 0);
+    const width = Math.round(stage.getBoundingClientRect().width || stage.clientWidth || 0);
+    let mode = "balanced";
+    if (height > 0 && (height < 370 || width < 700)) mode = "compact";
+    else if (height >= 455 && width >= 900) mode = "roomy";
+    stage.setAttribute("data-duduq-fit", mode);
+    stage.style.setProperty("--duduq-available-height", height + "px");
+    stage.style.setProperty("--duduq-available-width", width + "px");
+  }
+
+  function bind() {
+    const stage = document.querySelector(".duduq-engine-stage");
+    if (!stage) {
+      attempts += 1;
+      if (attempts < 240) window.requestAnimationFrame(bind);
+      return;
+    }
+    classify(stage);
+    if (typeof ResizeObserver === "function") {
+      observer = new ResizeObserver(function () { classify(stage); });
+      observer.observe(stage);
+    } else {
+      window.addEventListener("resize", function () { classify(stage); }, { passive: true });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bind, { once: true });
+  } else {
+    bind();
+  }
+})();
+</script>
+
+
+
+
+
+<script id="duduq-canary-040-audio-playing-controller">
+(() => {
+  if (window.__DUDUQ_AUDIO_STANDARD_040__) return;
+  window.__DUDUQ_AUDIO_STANDARD_040__ = true;
+
+  const selector = [
+    'button[class*="audio" i]',
+    '[role="button"][class*="audio" i]',
+    'button[class*="speaker" i]',
+    '[role="button"][class*="speaker" i]',
+    'button[class*="sound" i]',
+    '[role="button"][class*="sound" i]',
+    'button[class*="listen" i]',
+    '[role="button"][class*="listen" i]',
+    'button[data-role*="audio" i]',
+    '[role="button"][data-role*="audio" i]',
+    'button[data-action*="audio" i]',
+    '[role="button"][data-action*="audio" i]',
+    'button[aria-label*="Ã¡udio" i]',
+    'button[aria-label*="audio" i]',
+    'button[aria-label*="ouvir" i]',
+    'button[aria-label*="escutar" i]',
+    'button[aria-label*="som" i]',
+    'button[aria-label*="listen" i]',
+    'button[title*="Ã¡udio" i]',
+    'button[title*="audio" i]',
+    'button[title*="ouvir" i]',
+    'button[title*="listen" i]'
+  ].join(',');
+
+  let lastControl = null;
+  let lastControlAt = 0;
+  let fallbackTimer = 0;
+  const active = new Set();
+
+  const controlFrom = (target) => {
+    if (!(target instanceof Element)) return null;
+    const direct = target.closest(selector);
+    if (direct) return direct;
+    const button = target.closest('button,[role="button"]');
+    if (!button) return null;
+    const text = [button.className, button.id, button.getAttribute('aria-label'), button.getAttribute('title'), button.dataset?.role, button.dataset?.action]
+      .filter(Boolean).join(' ').toLowerCase();
+    return /(audio|Ã¡udio|speaker|sound|listen|ouvir|escutar|som)/i.test(text) ? button : null;
+  };
+
+  const mark = (control) => {
+    if (!control || !(control instanceof Element)) return null;
+    control.classList.add('duduq-audio-standard');
+    return control;
+  };
+
+  const scan = (root = document) => {
+    try { root.querySelectorAll?.(selector).forEach(mark); } catch (_) {}
+  };
+
+  const deactivate = (control) => {
+    if (!control) return;
+    control.dataset.duduqAudioPlaying = 'false';
+    active.delete(control);
+  };
+
+  const deactivateAllExcept = (keep) => {
+    [...active].forEach(control => {
+      if (control !== keep) deactivate(control);
+    });
+  };
+
+  const activate = (control, fallbackMs = 5200) => {
+    control = mark(control);
+    if (!control) return;
+    deactivateAllExcept(control);
+    control.dataset.duduqAudioPlaying = 'true';
+    active.add(control);
+    window.clearTimeout(fallbackTimer);
+    fallbackTimer = window.setTimeout(() => {
+      if (control.dataset.playing !== 'true') deactivate(control);
+    }, fallbackMs);
+  };
+
+  const recentControl = () => {
+    if (!lastControl) return null;
+    if (performance.now() - lastControlAt > 900) return null;
+    return document.contains(lastControl) ? lastControl : null;
+  };
+
+  const syncNativePlayingState = () => {
+    document.querySelectorAll('.duduq-audio-standard').forEach(control => {
+      const shell = control.closest('[data-playing]') || control.parentElement?.closest?.('[data-playing]');
+      const nativePlaying = control.dataset.playing === 'true' || shell?.dataset?.playing === 'true';
+      if (nativePlaying) activate(control, 12000);
+      else if ((control.dataset.playing === 'false' || shell?.dataset?.playing === 'false') && active.has(control)) deactivate(control);
+    });
+  };
+
+  document.addEventListener('click', event => {
+    const control = controlFrom(event.target);
+    if (!control) return;
+    lastControl = mark(control);
+    lastControlAt = performance.now();
+    activate(lastControl, 5200);
+  }, true);
+
+  if (window.HTMLMediaElement?.prototype?.play && !window.HTMLMediaElement.prototype.__duduq040Patched) {
+    const originalPlay = window.HTMLMediaElement.prototype.play;
+    const originalPause = window.HTMLMediaElement.prototype.pause;
+
+    window.HTMLMediaElement.prototype.play = function(...args) {
+      const control = recentControl();
+      if (control) {
+        activate(control, 20000);
+        const stop = () => deactivate(control);
+        this.addEventListener('ended', stop, { once: true });
+        this.addEventListener('error', stop, { once: true });
+        this.addEventListener('abort', stop, { once: true });
+        this.addEventListener('pause', () => { if (this.ended || this.paused) stop(); }, { once: true });
+      }
+      return originalPlay.apply(this, args);
+    };
+    window.HTMLMediaElement.prototype.play.__duduq040Patched = true;
+
+    window.HTMLMediaElement.prototype.pause = function(...args) {
+      const result = originalPause.apply(this, args);
+      [...active].forEach(deactivate);
+      return result;
+    };
+  }
+
+  if (window.speechSynthesis && typeof window.speechSynthesis.speak === 'function' && !window.speechSynthesis.__duduq040Patched) {
+    const originalSpeak = window.speechSynthesis.speak.bind(window.speechSynthesis);
+    const originalCancel = typeof window.speechSynthesis.cancel === 'function'
+      ? window.speechSynthesis.cancel.bind(window.speechSynthesis)
+      : null;
+
+    window.speechSynthesis.speak = utterance => {
+      const control = recentControl();
+      if (control && utterance) {
+        activate(control, 20000);
+        const oldEnd = utterance.onend;
+        const oldError = utterance.onerror;
+        utterance.onend = event => {
+          deactivate(control);
+          if (typeof oldEnd === 'function') oldEnd.call(utterance, event);
+        };
+        utterance.onerror = event => {
+          deactivate(control);
+          if (typeof oldError === 'function') oldError.call(utterance, event);
+        };
+      }
+      return originalSpeak(utterance);
+    };
+
+    if (originalCancel) {
+      window.speechSynthesis.cancel = () => {
+        const result = originalCancel();
+        [...active].forEach(deactivate);
+        return result;
+      };
+    }
+    window.speechSynthesis.__duduq040Patched = true;
+  }
+
+  const observer = new MutationObserver(mutations => {
+    let rescan = false;
+    let stateChanged = false;
+    for (const mutation of mutations) {
+      if (mutation.type === 'childList') rescan = true;
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-playing') stateChanged = true;
+    }
+    if (rescan) scan(document);
+    if (rescan || stateChanged) syncNativePlayingState();
+  });
+  observer.observe(document.documentElement, {
+    subtree: true,
+    childList: true,
+    attributes: true,
+    attributeFilter: ['data-playing']
+  });
+
+  scan(document);
+  syncNativePlayingState();
+})();
+</script>
+
+<script id="duduq-canary-041-native-audio-observer">
+(() => {
+  if (window.__DUDUQ_NATIVE_AUDIO_041__) return;
+  window.__DUDUQ_NATIVE_AUDIO_041__ = true;
+
+  /* O observer NAO decide quando o audio toca.
+     Ele apenas espelha o data-playing nativo para acessibilidade e diagnostico. */
+  const sync = (root = document) => {
+    root.querySelectorAll?.('[data-playing]').forEach(node => {
+      const playing = node.getAttribute('data-playing') === 'true';
+      node.setAttribute('data-duduq-native-audio', playing ? 'playing' : 'idle');
+      if (playing) node.setAttribute('aria-busy', 'true');
+      else node.removeAttribute('aria-busy');
+    });
+  };
+
+  const observer = new MutationObserver(mutations => {
+    let shouldSync = false;
+    for (const mutation of mutations) {
+      if (mutation.type === 'childList') shouldSync = true;
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-playing') shouldSync = true;
+    }
+    if (shouldSync) sync(document);
+  });
+
+  observer.observe(document.documentElement, {
+    subtree: true,
+    childList: true,
+    attributes: true,
+    attributeFilter: ['data-playing']
+  });
+
+  sync(document);
+})();
+</script>
+
+<script id="duduq-canary-042-audio-wave-controller">
+(() => {
+  if (window.__DUDUQ_AUDIO_WAVE_042__) return;
+  window.__DUDUQ_AUDIO_WAVE_042__ = true;
+
+  const halos = new Map();
+  let rafId = 0;
+  let syncQueued = false;
+
+  const instructionSelectors = [
+    '.duduq-udd-audio',
+    '.duduq-dd-audio',
+    '.duduq-ss-audio',
+    '.duduq-ts-audio-button',
+    '.duduq-matching-audio',
+    '.duduq-bp-audio-button',
+    '[data-role="instruction-audio"]'
+  ].join(',');
+
+  const audioWords = /audio|sound|ouvir|reprodu|parar|interromper|instru|enunci/i;
+
+  function looksLikeAudio(node) {
+    if (!(node instanceof Element)) return false;
+    const cls = String(node.className || '');
+    const aria = node.getAttribute('aria-label') || '';
+    const role = node.getAttribute('role') || '';
+    return audioWords.test(cls + ' ' + aria) || (role === 'button' && node.hasAttribute('data-playing'));
+  }
+
+  function isPlayingAudio(node) {
+    return node instanceof Element &&
+      node.isConnected &&
+      node.getAttribute('data-playing') === 'true' &&
+      looksLikeAudio(node);
+  }
+
+  function markInstructionAudio() {
+    document.querySelectorAll(instructionSelectors).forEach(button => {
+      if (!(button instanceof Element)) return;
+      const card = button.closest('[class*="instruction"], [class*="prompt"], [class*="enunciado"], [data-role="instruction"]');
+      if (!card) return;
+
+      card.setAttribute('data-duduq-instruction-card', 'true');
+
+      const shell = button.closest('[class*="audio-shell"]');
+      const anchor = shell && card.contains(shell) ? shell : button;
+      anchor.setAttribute('data-duduq-instruction-audio-anchor', 'true');
+    });
+  }
+
+  function createHalo(node) {
+    const halo = document.createElement('span');
+    halo.className = 'duduq-audio-halo-042';
+    halo.setAttribute('aria-hidden', 'true');
+
+    const ringA = document.createElement('span');
+    ringA.className = 'duduq-audio-ring-042';
+    const ringB = document.createElement('span');
+    ringB.className = 'duduq-audio-ring-042';
+    halo.append(ringA, ringB);
+    document.body.appendChild(halo);
+    halos.set(node, halo);
+    return halo;
+  }
+
+  function removeHalo(node) {
+    const halo = halos.get(node);
+    if (halo) halo.remove();
+    halos.delete(node);
+  }
+
+  function positionHalo(node, halo) {
+    if (!isPlayingAudio(node)) {
+      removeHalo(node);
+      return;
+    }
+    const rect = node.getBoundingClientRect();
+    if (!rect.width || !rect.height) {
+      halo.style.display = 'none';
+      return;
+    }
+    halo.style.display = 'block';
+    halo.style.left = `${rect.left}px`;
+    halo.style.top = `${rect.top}px`;
+    halo.style.width = `${rect.width}px`;
+    halo.style.height = `${rect.height}px`;
+  }
+
+  function updatePositions() {
+    rafId = 0;
+    if (!halos.size) return;
+    for (const [node, halo] of [...halos.entries()]) {
+      positionHalo(node, halo);
+    }
+    if (halos.size) rafId = requestAnimationFrame(updatePositions);
+  }
+
+  function ensureLoop() {
+    if (!rafId && halos.size) rafId = requestAnimationFrame(updatePositions);
+  }
+
+  function sync() {
+    syncQueued = false;
+    markInstructionAudio();
+
+    const playing = new Set();
+    document.querySelectorAll('[data-playing="true"]').forEach(node => {
+      if (!isPlayingAudio(node)) return;
+      playing.add(node);
+      const halo = halos.get(node) || createHalo(node);
+      positionHalo(node, halo);
+    });
+
+    for (const node of [...halos.keys()]) {
+      if (!playing.has(node)) removeHalo(node);
+    }
+    ensureLoop();
+  }
+
+  function queueSync() {
+    if (syncQueued) return;
+    syncQueued = true;
+    requestAnimationFrame(sync);
+  }
+
+  const observer = new MutationObserver(mutations => {
+    for (const mutation of mutations) {
+      if (mutation.type === 'childList' ||
+          (mutation.type === 'attributes' && mutation.attributeName === 'data-playing')) {
+        queueSync();
+        return;
+      }
+    }
+  });
+
+  observer.observe(document.documentElement, {
+    subtree: true,
+    childList: true,
+    attributes: true,
+    attributeFilter: ['data-playing']
+  });
+
+  window.addEventListener('resize', queueSync, { passive: true });
+  window.addEventListener('scroll', queueSync, { passive: true, capture: true });
+  document.addEventListener('fullscreenchange', queueSync);
+
+  queueSync();
+})();
+</script>
+
+<script id="duduq-canary-043-audio-wave-controller">
+(() => {
+  if (window.__DUDUQ_AUDIO_WAVE_043__) return;
+  window.__DUDUQ_AUDIO_WAVE_043__ = true;
+
+  document.querySelectorAll('.duduq-audio-halo-042').forEach(el => el.remove());
+
+  const layer = document.createElement('div');
+  layer.className = 'duduq-audio-wave-layer-043';
+  layer.setAttribute('aria-hidden','true');
+  document.documentElement.appendChild(layer);
+
+  const halos = new Map();
+  let raf = 0;
+  let queued = false;
+  const audioWords = /audio|sound|speaker|ouvir|reprodu|parar|interromper|instru|enunci/i;
+
+  function rectOf(el) {
+    if (!(el instanceof Element) || !el.isConnected) return null;
+    const r = el.getBoundingClientRect();
+    if (!r || r.width < 2 || r.height < 2) return null;
+    return r;
+  }
+
+  function nearlySquare(r) {
+    if (!r) return false;
+    const ratio = r.width / r.height;
+    return ratio >= .72 && ratio <= 1.38;
+  }
+
+  function candidateScore(el, r, original) {
+    if (!r) return -Infinity;
+    let score = 0;
+    const cls = String(el.className || '').toLowerCase();
+    const aria = (el.getAttribute('aria-label') || '').toLowerCase();
+    const tag = el.tagName.toLowerCase();
+    if (nearlySquare(r)) score += 90;
+    if (r.width >= 34 && r.width <= 84 && r.height >= 34 && r.height <= 84) score += 90;
+    if (tag === 'button' || el.getAttribute('role') === 'button') score += 55;
+    if (audioWords.test(cls + ' ' + aria)) score += 45;
+    if (/audio-button|audio-btn|sound-button|speaker/.test(cls)) score += 40;
+    if (el === original) score += 18;
+    score -= Math.abs(r.width-r.height) * 1.6;
+    score -= Math.max(0, Math.max(r.width,r.height)-92) * 2;
+    return score;
+  }
+
+  function resolveVisualAnchor(node) {
+    const candidates = new Set([node]);
+
+    if (node instanceof Element) {
+      node.querySelectorAll('button,[role="button"],[class*="audio"],[class*="sound"],[class*="speaker"]').forEach(el => candidates.add(el));
+      const shell = node.closest('[class*="audio-shell"],[class*="sound-shell"],[class*="audio-wrap"],[class*="audio-control"]');
+      if (shell) {
+        candidates.add(shell);
+        shell.querySelectorAll('button,[role="button"],[class*="audio-button"],[class*="sound-button"]').forEach(el => candidates.add(el));
+      }
+    }
+
+    let best = node;
+    let bestRect = rectOf(node);
+    let bestScore = candidateScore(node,bestRect,node);
+
+    for (const el of candidates) {
+      const r = rectOf(el);
+      const score = candidateScore(el,r,node);
+      if (score > bestScore) {
+        best = el;
+        bestRect = r;
+        bestScore = score;
+      }
+    }
+
+    return { element: best, rect: bestRect || rectOf(node) };
+  }
+
+  function isPlaying(node) {
+    return node instanceof Element && node.isConnected && node.getAttribute('data-playing') === 'true';
+  }
+
+  function createHalo(node) {
+    const halo = document.createElement('span');
+    halo.className = 'duduq-audio-halo-043';
+    halo.append(document.createElement('span'),document.createElement('span'));
+    layer.appendChild(halo);
+    halos.set(node,halo);
+    return halo;
+  }
+
+  function removeHalo(node) {
+    const halo = halos.get(node);
+    if (halo) halo.remove();
+    halos.delete(node);
+  }
+
+  function position(node, halo) {
+    if (!isPlaying(node)) { removeHalo(node); return; }
+    const anchor = resolveVisualAnchor(node);
+    const r = anchor.rect;
+    if (!r) { halo.style.display='none'; return; }
+
+    const cx = r.left + r.width / 2;
+    const cy = r.top + r.height / 2;
+    const diameter = Math.max(30, Math.min(r.width, r.height));
+
+    halo.style.display='block';
+    halo.style.left = `${cx}px`;
+    halo.style.top = `${cy}px`;
+    halo.style.width = `${diameter}px`;
+    halo.style.height = `${diameter}px`;
+  }
+
+  function loop() {
+    raf = 0;
+    for (const [node,halo] of [...halos.entries()]) position(node,halo);
+    if (halos.size) raf = requestAnimationFrame(loop);
+  }
+
+  function sync() {
+    queued = false;
+    const active = new Set();
+    document.querySelectorAll('[data-playing="true"]').forEach(node => {
+      if (!(node instanceof Element)) return;
+      active.add(node);
+      const halo = halos.get(node) || createHalo(node);
+      position(node,halo);
+    });
+    for (const node of [...halos.keys()]) if (!active.has(node)) removeHalo(node);
+    if (halos.size && !raf) raf = requestAnimationFrame(loop);
+  }
+
+  function queue() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(sync);
+  }
+
+  const observer = new MutationObserver(records => {
+    for (const record of records) {
+      if (record.type === 'childList' || (record.type === 'attributes' && record.attributeName === 'data-playing')) { queue(); return; }
+    }
+  });
+  observer.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['data-playing']});
+  window.addEventListener('resize',queue,{passive:true});
+  window.addEventListener('scroll',queue,{passive:true,capture:true});
+  document.addEventListener('fullscreenchange',queue);
+  queue();
+})();
+</script>
+
+<script id="duduq-canary-044-audio-wave-controller">
+(() => {
+  if(window.__DUDUQ_AUDIO_WAVE_044__)return;
+  window.__DUDUQ_AUDIO_WAVE_044__=true;
+
+  document.querySelectorAll('.duduq-audio-wave-layer-043,.duduq-audio-halo-043,.duduq-audio-wave-layer-042,.duduq-audio-halo-042').forEach(el=>el.remove());
+
+  const activeAnchors=new Set();
+  let queued=false;
+  const audioWords=/audio|sound|speaker|ouvir|reprodu|parar|interromper|instru|enunci/i;
+
+  function rect(el){if(!(el instanceof Element)||!el.isConnected)return null;const r=el.getBoundingClientRect();return r.width>=2&&r.height>=2?r:null}
+  function squareScore(r){if(!r)return-Infinity;const ratio=r.width/r.height;let s=0;if(ratio>=.70&&ratio<=1.42)s+=100;if(r.width>=32&&r.width<=90&&r.height>=32&&r.height<=90)s+=100;s-=Math.abs(r.width-r.height)*2;return s}
+  function audioScore(el,r,source){if(!r)return-Infinity;const cls=String(el.className||'').toLowerCase();const aria=(el.getAttribute('aria-label')||'').toLowerCase();let s=squareScore(r);if(el.tagName==='BUTTON'||el.getAttribute('role')==='button')s+=60;if(audioWords.test(cls+' '+aria))s+=60;if(el===source)s+=15;return s}
+
+  function resolveAnchor(source){
+    const candidates=new Set([source]);
+    if(source instanceof Element){
+      source.querySelectorAll('button,[role="button"],[class*="audio"],[class*="sound"]').forEach(el=>candidates.add(el));
+      const shell=source.closest('[class*="audio-shell"],[class*="audio-wrap"],[class*="audio-control"],[class*="sound-shell"]');
+      if(shell){candidates.add(shell);shell.querySelectorAll('button,[role="button"],[class*="audio"],[class*="sound"]').forEach(el=>candidates.add(el))}
+    }
+    let best=source,bestR=rect(source),bestS=audioScore(source,bestR,source);
+    for(const el of candidates){const r=rect(el),s=audioScore(el,r,source);if(s>bestS){best=el;bestR=r;bestS=s}}
+    return {el:best,r:bestR};
+  }
+
+  function clearAnchor(anchor){
+    if(!(anchor instanceof Element))return;
+    anchor.querySelectorAll(':scope > .duduq-wave-044').forEach(el=>el.remove());
+    anchor.removeAttribute('data-duduq-wave-active');
+    anchor.style.removeProperty('--duduq-wave-size-044');
+    const host=anchor.closest('[class*="audio-shell"],[class*="audio-wrap"],[class*="audio-control"],[class*="instruction"],[class*="prompt"]');
+    if(host)host.removeAttribute('data-duduq-wave-host');
+  }
+
+  function activate(source){
+    const a=resolveAnchor(source),anchor=a.el,r=a.r;
+    if(!(anchor instanceof Element)||!r)return null;
+    anchor.setAttribute('data-duduq-wave-active','true');
+    const diameter=Math.max(44,Math.min(86,Math.min(r.width,r.height)+14));
+    anchor.style.setProperty('--duduq-wave-size-044',`${diameter}px`);
+    const host=anchor.closest('[class*="audio-shell"],[class*="audio-wrap"],[class*="audio-control"],[class*="instruction"],[class*="prompt"]');
+    if(host)host.setAttribute('data-duduq-wave-host','true');
+    if(!anchor.querySelector(':scope > .duduq-wave-044-a')){
+      const a=document.createElement('span');a.className='duduq-wave-044 duduq-wave-044-a';a.setAttribute('aria-hidden','true');
+      const b=document.createElement('span');b.className='duduq-wave-044 duduq-wave-044-b';b.setAttribute('aria-hidden','true');
+      anchor.append(a,b);
+    }
+    return anchor;
+  }
+
+  function sync(){
+    queued=false;
+    const next=new Set();
+    document.querySelectorAll('[data-playing="true"]').forEach(source=>{
+      if(!(source instanceof Element))return;
+      const anchor=activate(source);if(anchor)next.add(anchor);
+    });
+    for(const anchor of [...activeAnchors])if(!next.has(anchor))clearAnchor(anchor);
+    activeAnchors.clear();next.forEach(x=>activeAnchors.add(x));
+  }
+  function queue(){if(queued)return;queued=true;requestAnimationFrame(sync)}
+  const obs=new MutationObserver(records=>{for(const r of records){if(r.type==='childList'||(r.type==='attributes'&&r.attributeName==='data-playing')){queue();return}}});
+  obs.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['data-playing']});
+  window.addEventListener('resize',queue,{passive:true});
+  document.addEventListener('fullscreenchange',queue);
+  queue();
+})();
+</script>
+
+
+<script id="duduq-canary-061-smart-restore-align-script">
+(function(){
+  "use strict";
+  if(window.__DUDUQ_SMART_061__) return;
+  window.__DUDUQ_SMART_061__=true;
+
+  const NS="http://www.w3.org/2000/svg";
+  const html=document.documentElement;
+  let currentQuestionSignature="";
+  let retryTimer=0;
+
+  function makeIcon(){
+    const svg=document.createElementNS(NS,"svg");
+    svg.setAttribute("data-duduq-real-audio-061","true");
+    svg.setAttribute("viewBox","0 0 24 24");
+    svg.setAttribute("fill","none");
+    svg.setAttribute("aria-hidden","true");
+    svg.setAttribute("focusable","false");
+
+    const speaker=document.createElementNS(NS,"path");
+    speaker.setAttribute("d","M11 5 6.5 9H3v6h3.5L11 19V5Z");
+    speaker.setAttribute("fill","currentColor");
+
+    const wave1=document.createElementNS(NS,"path");
+    wave1.setAttribute("d","M15 8.5c1.3 1.8 1.3 5.2 0 7");
+    wave1.setAttribute("fill","none");
+    wave1.setAttribute("stroke","currentColor");
+    wave1.setAttribute("stroke-width","2");
+    wave1.setAttribute("stroke-linecap","round");
+
+    const wave2=document.createElementNS(NS,"path");
+    wave2.setAttribute("d","M18 6c2.7 3.4 2.7 8.6 0 12");
+    wave2.setAttribute("fill","none");
+    wave2.setAttribute("stroke","currentColor");
+    wave2.setAttribute("stroke-width","2");
+    wave2.setAttribute("stroke-linecap","round");
+
+    svg.append(speaker,wave1,wave2);
+    return svg;
+  }
+
+  function ensureIcon(){
+    document.querySelectorAll(".duduq-ss-audio").forEach(function(button){
+      let svg=button.querySelector(':scope > svg[data-duduq-real-audio-061="true"]');
+      if(!svg){
+        Array.from(button.children).forEach(function(child){
+          if(child.matches?.("svg")) child.remove();
+        });
+        button.prepend(makeIcon());
+        svg=button.querySelector(':scope > svg[data-duduq-real-audio-061="true"]');
+      }
+      if(svg){
+        svg.style.margin='auto';
+        svg.style.transform='none';
+      }
+    });
+  }
+
+  function getQuestionSignature(){
+    const heading=document.querySelector(".duduq-ss-instruction h2")?.textContent?.trim() || "";
+    const prompt=document.querySelector(".duduq-ss-gap, .duduq-ss-sentence, .duduq-ss-main")?.textContent?.replace(/\s+/g," ").trim() || "";
+    const img=document.querySelector(".duduq-ss-character img, .duduq-ss-card img")?.getAttribute("src") || "";
+    const options=Array.from(document.querySelectorAll(".duduq-ss-option, .duduq-ss-choice, button"))
+      .slice(0,6)
+      .map(function(el){ return (el.textContent || "").replace(/\s+/g," ").trim(); })
+      .filter(Boolean)
+      .join("|");
+    return [heading,prompt,img,options].join("Â§");
+  }
+
+  function setLock(value){
+    if(value) html.setAttribute("data-duduq-ss-061-lock",value);
+    else html.removeAttribute("data-duduq-ss-061-lock");
+  }
+
+  function feedbackText(){
+    return Array.from(document.querySelectorAll(
+      ".duduq-engine-feedback, .duduq-ss-feedback, [role='status'], [aria-live='polite'], [aria-live='assertive']"
+    )).map(function(el){
+      return el.textContent || "";
+    }).join(" ").replace(/\s+/g," ").trim().toLowerCase();
+  }
+
+  function feedbackState(){
+    const txt=feedbackText();
+    if(/\bcorreto\b|\bcorrect\b|\bexcelente\b|\bperfeito\b/.test(txt)) return "success";
+    if(/tente novamente|boa tentativa|incorreto|errado|try again/.test(txt)) return "retry";
+    return "idle";
+  }
+
+  function syncState(){
+    ensureIcon();
+
+    const newSig=getQuestionSignature();
+    if(newSig && currentQuestionSignature && newSig !== currentQuestionSignature){
+      clearTimeout(retryTimer);
+      setLock(null);
+    }
+    if(newSig) currentQuestionSignature=newSig;
+
+    const state=feedbackState();
+    if(state==="success"){
+      setLock("success");
+    }else if(state==="retry"){
+      if(html.getAttribute("data-duduq-ss-061-lock") !== "success"){
+        setLock("retry-wait");
+        clearTimeout(retryTimer);
+        retryTimer=setTimeout(function(){
+          if(feedbackState()!=="success"){
+            setLock(null);
+          }
+        },850);
+      }
+    }
+  }
+
+  document.addEventListener("click",function(ev){
+    const target=ev.target instanceof Element ? ev.target : null;
+    const confirm=target && target.closest(".duduq-matching-primary");
+    if(confirm && !confirm.disabled){
+      setLock("pending");
+    }
+  },true);
+
+  function boot(){
+    currentQuestionSignature=getQuestionSignature();
+    ensureIcon();
+    syncState();
+
+    const observer=new MutationObserver(function(mutations){
+      mutations.forEach(function(mutation){
+        mutation.addedNodes.forEach(function(node){
+          if(node.nodeType===1){
+            ensureIcon();
+          }
+        });
+      });
+      syncState();
+    });
+
+    observer.observe(document.body,{
+      subtree:true,
+      childList:true,
+      characterData:true,
+      attributes:true,
+      attributeFilter:["src","class","data-state","data-feedback","data-correct","data-retry"]
+    });
+  }
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",boot,{once:true});
+  }else{
+    boot();
+  }
+})();
+</script>
+
+
+
+
+<!-- DUDUQ CANARY 078 â€” SMART SENTENCE INSTRUCTION SINGLE SOURCE -->
+
+<!-- DUDUQ CANARY 079 â€” SMART SENTENCE VISUAL CALIBRATION -->
+
+
+<script id="duduq-canary-079-smart-instruction-diagnostic">
+(function () {
+  "use strict";
+
+  function report() {
+    var title = document.querySelector(
+      ".duduq-matching-instruction h2, .duduq-ss-instruction h2"
+    );
+
+    var card = document.querySelector(
+      ".duduq-matching-instruction, .duduq-ss-instruction"
+    );
+
+    if (!title || !card) return;
+
+    var textStyle = getComputedStyle(title);
+    var cardStyle = getComputedStyle(card);
+
+    var fredoka800 = false;
+    var fredoka900 = false;
+
+    try {
+      if (document.fonts && document.fonts.check) {
+        fredoka800 = document.fonts.check('800 24px Fredoka');
+        fredoka900 = document.fonts.check('900 24px Fredoka');
+      }
+    } catch (_) {}
+
+    console.info("[DuduQ Canary 079] Smart visual calibration", {
+      fontFamily: textStyle.fontFamily,
+      fontSize: textStyle.fontSize,
+      fontWeight: textStyle.fontWeight,
+      lineHeight: textStyle.lineHeight,
+      textShadow: textStyle.textShadow,
+      fredoka800Available: fredoka800,
+      fredoka900Available: fredoka900,
+      cardWidth: cardStyle.width,
+      cardMinHeight: cardStyle.minHeight
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      report,
+      { once: true }
+    );
+  } else {
+    report();
+  }
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(report).catch(function () {});
+  }
+
+  setTimeout(report, 700);
+})();
+</script>
+</body>
+</html>

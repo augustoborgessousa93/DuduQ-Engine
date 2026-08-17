@@ -1,0 +1,120 @@
+/* =====================================================================
+   DUDUQ SHARED COMPONENT - INSTRUCTION CARD 1.0.0
+   Visual reference: Matching 1.0.23.
+
+   SCOPE
+   - Single source for instruction card geometry and title typography.
+   - Preserves the existing Smart Sentence audio behavior and wave stack.
+   - No JavaScript controls font, width, min-height or padding here.
+   - No !important is required in this component because legacy
+     instruction-card rules are removed from smart-sentence-ui.css.
+   ===================================================================== */
+
+:root {
+  --duduq-instruction-width: 760px;
+  --duduq-instruction-min-height: 60px;
+  --duduq-instruction-side: 48px;
+  --duduq-instruction-gap: 12px;
+  --duduq-instruction-padding: 8px 14px 10px;
+  --duduq-instruction-title-size: clamp(18px, 2vw, 28px);
+  --duduq-instruction-title-weight: 800;
+  --duduq-instruction-title-line: 1.16;
+}
+
+.duduq-instruction-card,
+.duduq-engine-stage .duduq-matching-instruction,
+.duduq-engine-stage .duduq-ss-instruction {
+  box-sizing: border-box;
+  width: min(var(--duduq-instruction-width), 100%);
+  max-width: 100%;
+  min-height: var(--duduq-instruction-min-height);
+  height: auto;
+  margin: 0 auto;
+  padding: var(--duduq-instruction-padding);
+  display: grid;
+  grid-template-columns:
+    var(--duduq-instruction-side)
+    minmax(0, 1fr)
+    var(--duduq-instruction-side);
+  align-items: center;
+  justify-items: center;
+  gap: var(--duduq-instruction-gap);
+  border: 2px solid var(--dq-border-strong, #C8D7E7);
+  border-radius: 999px;
+  background: rgba(255,255,255,.96);
+  box-shadow:
+    0 4px 0 var(--dq-depth, #B8C5D6),
+    0 12px 24px rgba(31,65,99,.07),
+    inset 0 1px 0 #fff;
+  position: relative;
+  left: auto;
+  right: auto;
+  transform: none;
+  overflow: visible;
+}
+
+/* Smart 1.0.56 renders no left spacer element. The pseudo-element restores
+   the same 48/text/48 balance used by Matching without touching the DOM. */
+.duduq-engine-stage .duduq-matching-instruction::before {
+  content: "";
+  display: block;
+  width: var(--duduq-instruction-side);
+  height: var(--duduq-instruction-side);
+  grid-column: 1;
+}
+
+.duduq-instruction-card__title,
+.duduq-engine-stage .duduq-matching-instruction h2,
+.duduq-engine-stage .duduq-matching-instruction .duduq-matching-display,
+.duduq-engine-stage .duduq-ss-instruction h2 {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  color: var(--dq-primary, #0056B3);
+  font-family: Fredoka, Nunito, ui-rounded, system-ui, sans-serif;
+  font-size: var(--duduq-instruction-title-size);
+  font-weight: var(--duduq-instruction-title-weight);
+  font-style: normal;
+  line-height: var(--duduq-instruction-title-line);
+  letter-spacing: 0;
+  text-align: center;
+  text-transform: none;
+  text-decoration: none;
+  text-shadow: none;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+/* Current Smart renderer: title in column 2, Target audio shell in column 3.
+   Audio appearance, green playing state and waves remain untouched. */
+.duduq-engine-stage .duduq-matching-instruction h2,
+.duduq-engine-stage .duduq-matching-instruction .duduq-matching-display {
+  grid-column: 2;
+}
+
+.duduq-engine-stage .duduq-matching-instruction > .duduq-ts-audio-shell {
+  grid-column: 3;
+  justify-self: center;
+  align-self: center;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --duduq-instruction-side: 44px;
+    --duduq-instruction-min-height: 56px;
+    --duduq-instruction-gap: 8px;
+    --duduq-instruction-padding: 7px 9px 9px;
+    --duduq-instruction-title-size: clamp(18px, 5vw, 22px);
+  }
+}
+
+@media (max-width: 520px) {
+  :root {
+    --duduq-instruction-side: 40px;
+    --duduq-instruction-min-height: 54px;
+    --duduq-instruction-padding: 6px 9px 8px;
+  }
+}
