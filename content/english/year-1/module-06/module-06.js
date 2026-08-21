@@ -1,6 +1,6 @@
 /* =========================================================
-   DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 03
-   Colors & School Objects
+   DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 06
+   My English World – Review
    Version 1.1.0 — PEDAGOGY v1.0 / FACTORY REPO PACKAGE
 
    SOURCE:
@@ -32,16 +32,16 @@
 
   const VERSION = "1.1.0";
   const YEAR = 1;
-  const MODULE = 3;
+  const MODULE = 6;
   const BASE = "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/";
   const IMAGE_BASE = BASE + "Imagens%20Ilustrativa/";
-  const AUDIO_BASE = BASE + "Audios/1_ANO/M03/";
+  const AUDIO_BASE = BASE + "Audios/1_ANO/M06/";
 
   window.DUDUQ_CONTENT = window.DUDUQ_CONTENT || {};
   window.DUDUQ_CONTENT.english = window.DUDUQ_CONTENT.english || {};
   window.DUDUQ_CONTENT.english.year1 = window.DUDUQ_CONTENT.english.year1 || {};
 
-  if (window.DUDUQ_CONTENT.english.year1.module03?.version === VERSION) {
+  if (window.DUDUQ_CONTENT.english.year1.module06?.version === VERSION) {
     return;
   }
 
@@ -186,86 +186,142 @@
   });
 
   const VISUAL_META = Object.freeze({
-    "backpack": {
-      "status": "resolved",
-      "imageAsset": "backpack",
-      "imageCategory": "school",
-      "file": "Mochila.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Mochila.png"
-    },
-    "blue pencil": {
-      "status": "resolved",
-      "imageAsset": "blue pencil",
-      "imageCategory": "school",
-      "file": "Lápis azul.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/L%C3%A1pis%20azul.png"
-    },
-    "color-blue": {
+    "big-brown-dog": {
       "status": "gap-preview",
-      "imageAsset": "color-blue",
+      "imageAsset": "big-brown-dog",
       "imageCategory": "unknown",
       "file": null,
       "url": null
     },
-    "color-green": {
+    "come-in-scene": {
       "status": "gap-preview",
-      "imageAsset": "color-green",
+      "imageAsset": "come-in-scene",
       "imageCategory": "unknown",
       "file": null,
       "url": null
     },
-    "color-red": {
+    "five-blue-pencils": {
       "status": "gap-preview",
-      "imageAsset": "color-red",
+      "imageAsset": "five-blue-pencils",
       "imageCategory": "unknown",
       "file": null,
       "url": null
     },
-    "color-yellow": {
+    "five-rulers": {
       "status": "gap-preview",
-      "imageAsset": "color-yellow",
+      "imageAsset": "five-rulers",
       "imageCategory": "unknown",
       "file": null,
       "url": null
     },
-    "eraser": {
-      "status": "resolved",
-      "imageAsset": "eraser",
-      "imageCategory": "school",
-      "file": "Borracha.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Borracha.png"
-    },
-    "orange crayon": {
-      "status": "resolved",
-      "imageAsset": "orange crayon",
-      "imageCategory": "school",
-      "file": "Giz de cera laranja.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Giz%20de%20cera%20laranja.png"
-    },
-    "pencil": {
-      "status": "resolved",
-      "imageAsset": "pencil",
-      "imageCategory": "school",
-      "file": "Lápis.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/L%C3%A1pis.png"
-    },
-    "pink pencil case": {
-      "status": "resolved",
-      "imageAsset": "pink pencil case",
-      "imageCategory": "school",
-      "file": "Estojo rosa.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Estojo%20rosa.png"
-    },
-    "ruler": {
-      "status": "resolved",
-      "imageAsset": "ruler",
-      "imageCategory": "school",
-      "file": "Régua.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/R%C3%A9gua.png"
-    },
-    "three-rulers": {
+    "four-rulers": {
       "status": "gap-preview",
-      "imageAsset": "three-rulers",
+      "imageAsset": "four-rulers",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "morning-leo": {
+      "status": "gap-preview",
+      "imageAsset": "morning-leo",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "red pencil": {
+      "status": "resolved",
+      "imageAsset": "red pencil",
+      "imageCategory": "school",
+      "file": "Lápis vermelho.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/L%C3%A1pis%20vermelho.png"
+    },
+    "red-backpack": {
+      "status": "gap-preview",
+      "imageAsset": "red-backpack",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "sit down": {
+      "status": "resolved",
+      "imageAsset": "sit down",
+      "imageCategory": "actions",
+      "file": "Sentada.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Sentada.png"
+    },
+    "six-blue-pencils": {
+      "status": "gap-preview",
+      "imageAsset": "six-blue-pencils",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "six-blue-rulers": {
+      "status": "gap-preview",
+      "imageAsset": "six-blue-rulers",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "six-rulers": {
+      "status": "gap-preview",
+      "imageAsset": "six-rulers",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "small-turtle": {
+      "status": "gap-preview",
+      "imageAsset": "small-turtle",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "stand up": {
+      "status": "resolved",
+      "imageAsset": "stand up",
+      "imageCategory": "actions",
+      "file": "Em pé.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Em%20p%C3%A9.png"
+    },
+    "three-orange-crayons": {
+      "status": "gap-preview",
+      "imageAsset": "three-orange-crayons",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "touch arms": {
+      "status": "resolved",
+      "imageAsset": "touch arms",
+      "imageCategory": "body",
+      "file": "Tocando os braços.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Tocando%20os%20bra%C3%A7os.png"
+    },
+    "touch feet": {
+      "status": "resolved",
+      "imageAsset": "touch feet",
+      "imageCategory": "body",
+      "file": "Tocando os pés.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Tocando%20os%20p%C3%A9s.png"
+    },
+    "touch hands": {
+      "status": "resolved",
+      "imageAsset": "touch hands",
+      "imageCategory": "body",
+      "file": "Tocando as mãos.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Tocando%20as%20m%C3%A3os.png"
+    },
+    "touch head": {
+      "status": "resolved",
+      "imageAsset": "touch head",
+      "imageCategory": "body",
+      "file": "Tocando na cabeça.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Tocando%20na%20cabe%C3%A7a.png"
+    },
+    "touch-legs": {
+      "status": "gap-preview",
+      "imageAsset": "touch-legs",
       "imageCategory": "unknown",
       "file": null,
       "url": null
@@ -310,137 +366,185 @@
   });
 
   const AUDIO_CATALOG = Object.freeze({
-    "EN1-M3-01": {
+    "EN1-M6-01": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Observe a cor da imagem e escolha seu nome em inglês.",
+        "text": "É de manhã e o cartão do personagem mostra “Leo”. Qual fala combina com a cena?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-01_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-01_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-01_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-01_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-02": {
-      "mechanic": "smart-sentence",
+    "EN1-M6-02": {
+      "mechanic": "target-shooter",
       "instruction": {
-        "text": "Qual palavra em inglês nomeia a cor mostrada?",
+        "text": "Ouça: “six blue pencils”. Qual imagem combina com a fala?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-02_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-02_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-02_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-02_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": [
+        {
+          "text": "six blue pencils",
+          "language": "en-US",
+          "src": "",
+          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-02_TARGET-SHOOTER_ESTIMULO01_SIX-BLUE-PENCILS_ENUS.mp3",
+          "file": "ING_1ANO_M06_EN1-M6-02_TARGET-SHOOTER_ESTIMULO01_SIX-BLUE-PENCILS_ENUS.mp3"
+        }
+      ]
+    },
+    "EN1-M6-03": {
+      "mechanic": "smart-sentence",
+      "instruction": {
+        "text": "Observe a mochila vermelha. Qual expressão descreve a imagem?",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-03": {
+    "EN1-M6-04": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Toque no cartão com o nome da cor da imagem.",
+        "text": "Observe 3 gizes de cera laranja. Qual expressão descreve a imagem?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-04_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-04_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-04": {
-      "mechanic": "smart-sentence",
+    "EN1-M6-05": {
+      "mechanic": "target-shooter",
       "instruction": {
-        "text": "A imagem destaca uma cor. Escolha a palavra correta em inglês.",
+        "text": "Ouça “Sit down”. Qual personagem está fazendo o que foi pedido?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-04_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-04_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-05_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-05_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": [
+        {
+          "text": "Sit down",
+          "language": "en-US",
+          "src": "",
+          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-05_TARGET-SHOOTER_ESTIMULO01_SIT-DOWN_ENUS.mp3",
+          "file": "ING_1ANO_M06_EN1-M6-05_TARGET-SHOOTER_ESTIMULO01_SIT-DOWN_ENUS.mp3"
+        }
+      ]
+    },
+    "EN1-M6-06": {
+      "mechanic": "target-shooter",
+      "instruction": {
+        "text": "Ouça “Touch your hands”. Qual imagem mostra a ação correta?",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-06_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-06_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": [
+        {
+          "text": "Touch your hands",
+          "language": "en-US",
+          "src": "",
+          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-06_TARGET-SHOOTER_ESTIMULO01_TOUCH-YOUR-HANDS_ENUS.mp3",
+          "file": "ING_1ANO_M06_EN1-M6-06_TARGET-SHOOTER_ESTIMULO01_TOUCH-YOUR-HANDS_ENUS.mp3"
+        }
+      ]
+    },
+    "EN1-M6-07": {
+      "mechanic": "smart-sentence",
+      "instruction": {
+        "text": "Observe a tartaruga pequena. Qual expressão descreve a imagem?",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-05": {
+    "EN1-M6-08": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Observe o objeto e escolha seu nome em inglês.",
+        "text": "Observe o lápis vermelho. Qual expressão descreve a imagem?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-05_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-05_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-08_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-08_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-06": {
-      "mechanic": "smart-sentence",
+    "EN1-M6-09": {
+      "mechanic": "target-shooter",
       "instruction": {
-        "text": "Qual palavra em inglês nomeia o objeto da imagem?",
+        "text": "Ouça: “five rulers”. Qual imagem combina com a fala?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-06_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-06_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-09_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-09_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": [
+        {
+          "text": "five rulers",
+          "language": "en-US",
+          "src": "",
+          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-09_TARGET-SHOOTER_ESTIMULO01_FIVE-RULERS_ENUS.mp3",
+          "file": "ING_1ANO_M06_EN1-M6-09_TARGET-SHOOTER_ESTIMULO01_FIVE-RULERS_ENUS.mp3"
+        }
+      ]
+    },
+    "EN1-M6-10": {
+      "mechanic": "target-shooter",
+      "instruction": {
+        "text": "Ouça “Touch your arms”. Qual imagem mostra a ação correta?",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-10_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-10_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": [
+        {
+          "text": "Touch your arms",
+          "language": "en-US",
+          "src": "",
+          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-10_TARGET-SHOOTER_ESTIMULO01_TOUCH-YOUR-ARMS_ENUS.mp3",
+          "file": "ING_1ANO_M06_EN1-M6-10_TARGET-SHOOTER_ESTIMULO01_TOUCH-YOUR-ARMS_ENUS.mp3"
+        }
+      ]
+    },
+    "EN1-M6-11": {
+      "mechanic": "smart-sentence",
+      "instruction": {
+        "text": "Observe o cachorro grande e marrom. Qual expressão descreve a imagem?",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-11_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-11_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-07": {
-      "mechanic": "smart-sentence",
+    "EN1-M6-12": {
+      "mechanic": "drag-drop",
       "instruction": {
-        "text": "Toque no cartão com o nome em inglês do objeto.",
+        "text": "Organize a sequência: chegar, dizer o nome e depois se despedir.",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-12_DRAG-DROP_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-12_DRAG-DROP_ENUNCIADO_PTBR.mp3"
       },
-      "stimuli": []
-    },
-    "EN1-M3-08": {
-      "mechanic": "smart-sentence",
-      "instruction": {
-        "text": "A imagem mostra um objeto escolar. Escolha o nome correto.",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-08_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-08_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": []
-    },
-    "EN1-M3-09": {
-      "mechanic": "smart-sentence",
-      "instruction": {
-        "text": "Uma imagem mostra um lápis azul. Qual expressão corresponde à imagem?",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-09_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-09_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": []
-    },
-    "EN1-M3-10": {
-      "mechanic": "smart-sentence",
-      "instruction": {
-        "text": "Observe a imagem com 3 réguas. Qual expressão descreve a quantidade?",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-10_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-10_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": []
-    },
-    "EN1-M3-11": {
-      "mechanic": "smart-sentence",
-      "instruction": {
-        "text": "Observe o giz de cera laranja. Qual expressão descreve o objeto?",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-11_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-11_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": []
-    },
-    "EN1-M3-12": {
-      "mechanic": "smart-sentence",
-      "instruction": {
-        "text": "Observe o estojo rosa. Qual expressão descreve o objeto?",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-12_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-12_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": []
+      "stimuli": [
+        {
+          "text": "Hello! I'm Mia. See you!",
+          "language": "en-US",
+          "src": "",
+          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-12_DRAG-DROP_ESTIMULO01_HELLO-I-M-MIA-SEE-YOU_ENUS.mp3",
+          "file": "ING_1ANO_M06_EN1-M6-12_DRAG-DROP_ESTIMULO01_HELLO-I-M-MIA-SEE-YOU_ENUS.mp3"
+        }
+      ]
     }
   });
 
@@ -797,260 +901,241 @@
 
   const BLUEPRINTS = Object.freeze([
     {
-      "id": "EN1-M3-01",
-      "status": "Ajustar",
+      "id": "EN1-M6-01",
+      "status": "Reescrever",
       "difficulty": "easy",
-      "skill": "Identificar cores em inglês.",
-      "statement": "Red",
-      "instruction": "Observe a cor da imagem e escolha seu nome em inglês.",
+      "skill": "Integrar período do dia e apresentação simples.",
+      "statement": "Good morning! I’m Leo.",
+      "instruction": "É de manhã e o cartão do personagem mostra “Leo”. Qual fala combina com a cena?",
       "options": [
         {
           "id": "o1",
-          "text": "green"
+          "text": "Good morning! I’m Leo."
         },
         {
           "id": "o2",
-          "text": "red"
+          "text": "Goodbye! I’m Leo."
         },
         {
           "id": "o3",
-          "text": "yellow"
-        }
-      ],
-      "correct": "o2",
-      "kind": "image-choice",
-      "audioText": null,
-      "visual": "color-red",
-      "visualAlt": "Bloco vermelho",
-      "imageOptions": null,
-      "sequence": null,
-      "sourceMedia": "Imagem obrigatória: bloco red.",
-      "note": ""
-    },
-    {
-      "id": "EN1-M3-02",
-      "status": "Ajustar",
-      "difficulty": "easy",
-      "skill": "Identificar cores em inglês.",
-      "statement": "Blue",
-      "instruction": "Qual palavra em inglês nomeia a cor mostrada?",
-      "options": [
-        {
-          "id": "o1",
-          "text": "red"
-        },
-        {
-          "id": "o2",
-          "text": "green"
-        },
-        {
-          "id": "o3",
-          "text": "blue"
-        }
-      ],
-      "correct": "o3",
-      "kind": "image-choice",
-      "audioText": null,
-      "visual": "color-blue",
-      "visualAlt": "Bloco azul",
-      "imageOptions": null,
-      "sequence": null,
-      "sourceMedia": "Imagem obrigatória: bloco blue.",
-      "note": ""
-    },
-    {
-      "id": "EN1-M3-03",
-      "status": "Ajustar",
-      "difficulty": "easy",
-      "skill": "Identificar cores em inglês.",
-      "statement": "Yellow",
-      "instruction": "Toque no cartão com o nome da cor da imagem.",
-      "options": [
-        {
-          "id": "o1",
-          "text": "yellow"
-        },
-        {
-          "id": "o2",
-          "text": "red"
-        },
-        {
-          "id": "o3",
-          "text": "green"
+          "text": "Good afternoon! I’m Leo."
         }
       ],
       "correct": "o1",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "color-yellow",
-      "visualAlt": "Bloco amarelo",
+      "visual": "morning-leo",
+      "visualAlt": "Cena de manhã com cartão Leo",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: bloco yellow.",
+      "sourceMedia": "Cena de manhã + cartão “Leo”; áudio EN das frases.",
       "note": ""
     },
     {
-      "id": "EN1-M3-04",
-      "status": "Ajustar",
+      "id": "EN1-M6-02",
+      "status": "Reescrever",
       "difficulty": "easy",
-      "skill": "Identificar cores em inglês.",
-      "statement": "Green",
-      "instruction": "A imagem destaca uma cor. Escolha a palavra correta em inglês.",
+      "skill": "Integrar número, cor e objeto escolar em uma compreensão oral.",
+      "statement": "Six blue pencils",
+      "instruction": "Ouça: “six blue pencils”. Qual imagem combina com a fala?",
       "options": [
         {
           "id": "o1",
-          "text": "red"
+          "text": "6 lápis azuis"
         },
         {
           "id": "o2",
-          "text": "green"
+          "text": "5 lápis azuis"
         },
         {
           "id": "o3",
-          "text": "yellow"
+          "text": "6 réguas azuis"
         }
       ],
-      "correct": "o2",
-      "kind": "image-choice",
-      "audioText": null,
-      "visual": "color-green",
-      "visualAlt": "Bloco verde",
-      "imageOptions": null,
-      "sequence": null,
-      "sourceMedia": "Imagem obrigatória: bloco green.",
-      "note": ""
-    },
-    {
-      "id": "EN1-M3-05",
-      "status": "Ajustar",
-      "difficulty": "easy",
-      "skill": "Identificar objetos escolares em inglês.",
-      "statement": "Pencil",
-      "instruction": "Observe o objeto e escolha seu nome em inglês.",
-      "options": [
-        {
-          "id": "o1",
-          "text": "eraser"
-        },
-        {
-          "id": "o2",
-          "text": "colored pencil"
-        },
-        {
-          "id": "o3",
-          "text": "pencil"
-        }
+      "correct": "o1",
+      "kind": "audio-image",
+      "audioText": "six blue pencils",
+      "visual": null,
+      "visualAlt": null,
+      "imageOptions": [
+        "six-blue-pencils",
+        "five-blue-pencils",
+        "six-blue-rulers"
       ],
-      "correct": "o3",
-      "kind": "image-choice",
-      "audioText": null,
-      "visual": "pencil",
-      "visualAlt": "Pencil",
-      "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: pencil.",
+      "sourceMedia": "Áudio EN obrigatório: “six blue pencils”; três imagens.",
       "note": ""
     },
     {
-      "id": "EN1-M3-06",
-      "status": "Ajustar",
+      "id": "EN1-M6-03",
+      "status": "Reescrever",
       "difficulty": "easy",
-      "skill": "Identificar objetos escolares em inglês.",
-      "statement": "Eraser",
-      "instruction": "Qual palavra em inglês nomeia o objeto da imagem?",
+      "skill": "Integrar cor e objeto escolar.",
+      "statement": "Red backpack",
+      "instruction": "Observe a mochila vermelha. Qual expressão descreve a imagem?",
       "options": [
         {
           "id": "o1",
-          "text": "eraser"
+          "text": "red backpack"
         },
         {
           "id": "o2",
-          "text": "pencil"
+          "text": "blue backpack"
         },
         {
           "id": "o3",
-          "text": "colored pencil"
+          "text": "red pencil"
         }
       ],
       "correct": "o1",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "eraser",
-      "visualAlt": "Eraser",
+      "visual": "red-backpack",
+      "visualAlt": "Red backpack",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: eraser.",
+      "sourceMedia": "Imagem obrigatória: red backpack.",
       "note": ""
     },
     {
-      "id": "EN1-M3-07",
-      "status": "Ajustar",
+      "id": "EN1-M6-04",
+      "status": "Reescrever",
       "difficulty": "easy",
-      "skill": "Identificar objetos escolares em inglês.",
-      "statement": "Ruler",
-      "instruction": "Toque no cartão com o nome em inglês do objeto.",
+      "skill": "Integrar quantidade, cor e objeto escolar.",
+      "statement": "Three orange crayons",
+      "instruction": "Observe 3 gizes de cera laranja. Qual expressão descreve a imagem?",
       "options": [
         {
           "id": "o1",
-          "text": "eraser"
+          "text": "three orange crayons"
         },
         {
           "id": "o2",
-          "text": "ruler"
+          "text": "two orange crayons"
         },
         {
           "id": "o3",
-          "text": "pencil"
+          "text": "three orange pencils"
         }
       ],
-      "correct": "o2",
+      "correct": "o1",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "ruler",
-      "visualAlt": "Ruler",
+      "visual": "three-orange-crayons",
+      "visualAlt": "Três gizes de cera laranja",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: ruler.",
+      "sourceMedia": "Imagem obrigatória: 3 orange crayons.",
       "note": ""
     },
     {
-      "id": "EN1-M3-08",
+      "id": "EN1-M6-05",
       "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Identificar objetos escolares em inglês.",
-      "statement": "Backpack",
-      "instruction": "A imagem mostra um objeto escolar. Escolha o nome correto.",
+      "skill": "Compreender um comando de sala em uma nova cena.",
+      "statement": "Sit down",
+      "instruction": "Ouça “Sit down”. Qual personagem está fazendo o que foi pedido?",
       "options": [
         {
           "id": "o1",
-          "text": "eraser"
+          "text": "personagem sentado"
         },
         {
           "id": "o2",
-          "text": "pencil"
+          "text": "personagem em pé"
         },
         {
           "id": "o3",
-          "text": "backpack"
+          "text": "personagem entrando"
         }
       ],
-      "correct": "o3",
-      "kind": "image-choice",
-      "audioText": null,
-      "visual": "backpack",
-      "visualAlt": "Backpack",
-      "imageOptions": null,
+      "correct": "o1",
+      "kind": "audio-image",
+      "audioText": "Sit down",
+      "visual": null,
+      "visualAlt": null,
+      "imageOptions": [
+        "sit down",
+        "stand up",
+        "come-in-scene"
+      ],
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: backpack.",
+      "sourceMedia": "Áudio EN obrigatório: “Sit down”; três imagens de ação.",
       "note": ""
     },
     {
-      "id": "EN1-M3-09",
-      "status": "Manter",
+      "id": "EN1-M6-06",
+      "status": "Reescrever",
+      "difficulty": "easy",
+      "skill": "Integrar comando e parte do corpo.",
+      "statement": "Touch your hands",
+      "instruction": "Ouça “Touch your hands”. Qual imagem mostra a ação correta?",
+      "options": [
+        {
+          "id": "o1",
+          "text": "mãos tocadas"
+        },
+        {
+          "id": "o2",
+          "text": "pés tocados"
+        },
+        {
+          "id": "o3",
+          "text": "cabeça tocada"
+        }
+      ],
+      "correct": "o1",
+      "kind": "audio-image",
+      "audioText": "Touch your hands",
+      "visual": null,
+      "visualAlt": null,
+      "imageOptions": [
+        "touch hands",
+        "touch feet",
+        "touch head"
+      ],
+      "sequence": null,
+      "sourceMedia": "Áudio EN obrigatório: “Touch your hands”.",
+      "note": ""
+    },
+    {
+      "id": "EN1-M6-07",
+      "status": "Reescrever",
+      "difficulty": "easy",
+      "skill": "Integrar pet e tamanho.",
+      "statement": "Small turtle",
+      "instruction": "Observe a tartaruga pequena. Qual expressão descreve a imagem?",
+      "options": [
+        {
+          "id": "o1",
+          "text": "small turtle"
+        },
+        {
+          "id": "o2",
+          "text": "big turtle"
+        },
+        {
+          "id": "o3",
+          "text": "small rabbit"
+        }
+      ],
+      "correct": "o1",
+      "kind": "image-choice",
+      "audioText": null,
+      "visual": "small-turtle",
+      "visualAlt": "Small turtle",
+      "imageOptions": null,
+      "sequence": null,
+      "sourceMedia": "Imagem obrigatória: small turtle.",
+      "note": ""
+    },
+    {
+      "id": "EN1-M6-08",
+      "status": "Ajustar",
       "difficulty": "medium",
-      "skill": "Relacionar cores e objetos escolares.",
-      "statement": "Blue pencil",
-      "instruction": "Uma imagem mostra um lápis azul. Qual expressão corresponde à imagem?",
+      "skill": "Integrar cor e objeto escolar.",
+      "statement": "Red pencil",
+      "instruction": "Observe o lápis vermelho. Qual expressão descreve a imagem?",
       "options": [
         {
           "id": "o1",
@@ -1058,114 +1143,152 @@
         },
         {
           "id": "o2",
-          "text": "red pencil"
+          "text": "red ruler"
         },
         {
           "id": "o3",
-          "text": "blue ruler"
+          "text": "red pencil"
         }
       ],
-      "correct": "o1",
+      "correct": "o3",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "blue pencil",
-      "visualAlt": "Blue pencil",
+      "visual": "red pencil",
+      "visualAlt": "Red pencil",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: lápis azul.",
+      "sourceMedia": "Imagem obrigatória: red pencil.",
       "note": ""
     },
     {
-      "id": "EN1-M3-10",
-      "status": "Ajustar",
+      "id": "EN1-M6-09",
+      "status": "Reescrever",
       "difficulty": "medium",
-      "skill": "Relacionar quantidade e objeto escolar em uma expressão curta.",
-      "statement": "Three rulers",
-      "instruction": "Observe a imagem com 3 réguas. Qual expressão descreve a quantidade?",
+      "skill": "Integrar número e objeto escolar.",
+      "statement": "Five rulers",
+      "instruction": "Ouça: “five rulers”. Qual imagem combina com a fala?",
       "options": [
         {
           "id": "o1",
-          "text": "two rulers"
+          "text": "4 réguas"
         },
         {
           "id": "o2",
-          "text": "three rulers"
+          "text": "5 réguas"
         },
         {
           "id": "o3",
-          "text": "four rulers"
+          "text": "6 réguas"
         }
       ],
       "correct": "o2",
-      "kind": "image-choice",
-      "audioText": null,
-      "visual": "three-rulers",
-      "visualAlt": "Três réguas bem separadas",
-      "imageOptions": null,
+      "kind": "audio-image",
+      "audioText": "five rulers",
+      "visual": null,
+      "visualAlt": null,
+      "imageOptions": [
+        "four-rulers",
+        "five-rulers",
+        "six-rulers"
+      ],
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: 3 réguas bem separadas.",
+      "sourceMedia": "Áudio EN obrigatório: “five rulers”; três imagens.",
       "note": ""
     },
     {
-      "id": "EN1-M3-11",
-      "status": "Reescrever",
+      "id": "EN1-M6-10",
+      "status": "Ajustar",
       "difficulty": "medium",
-      "skill": "Relacionar cor e objeto escolar em uma expressão curta.",
-      "statement": "Orange crayon",
-      "instruction": "Observe o giz de cera laranja. Qual expressão descreve o objeto?",
+      "skill": "Integrar comando e parte do corpo.",
+      "statement": "Touch your arms",
+      "instruction": "Ouça “Touch your arms”. Qual imagem mostra a ação correta?",
       "options": [
         {
           "id": "o1",
-          "text": "orange crayon"
+          "text": "pernas tocadas"
         },
         {
           "id": "o2",
-          "text": "pink crayon"
+          "text": "braços tocados"
         },
         {
           "id": "o3",
-          "text": "orange pencil"
+          "text": "cabeça tocada"
         }
       ],
-      "correct": "o1",
-      "kind": "image-choice",
-      "audioText": null,
-      "visual": "orange crayon",
-      "visualAlt": "Orange crayon",
-      "imageOptions": null,
+      "correct": "o2",
+      "kind": "audio-image",
+      "audioText": "Touch your arms",
+      "visual": null,
+      "visualAlt": null,
+      "imageOptions": [
+        "touch-legs",
+        "touch arms",
+        "touch head"
+      ],
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: orange crayon; palavras com áudio sob toque.",
+      "sourceMedia": "Áudio EN obrigatório: “Touch your arms”.",
       "note": ""
     },
     {
-      "id": "EN1-M3-12",
+      "id": "EN1-M6-11",
+      "status": "Ajustar",
+      "difficulty": "medium",
+      "skill": "Integrar pet, tamanho e cor.",
+      "statement": "Big brown dog",
+      "instruction": "Observe o cachorro grande e marrom. Qual expressão descreve a imagem?",
+      "options": [
+        {
+          "id": "o1",
+          "text": "small brown dog"
+        },
+        {
+          "id": "o2",
+          "text": "big brown cat"
+        },
+        {
+          "id": "o3",
+          "text": "big brown dog"
+        }
+      ],
+      "correct": "o3",
+      "kind": "image-choice",
+      "audioText": null,
+      "visual": "big-brown-dog",
+      "visualAlt": "Big brown dog",
+      "imageOptions": null,
+      "sequence": null,
+      "sourceMedia": "Imagem obrigatória: big brown dog.",
+      "note": ""
+    },
+    {
+      "id": "EN1-M6-12",
       "status": "Reescrever",
       "difficulty": "hard",
-      "skill": "Relacionar cor e objeto escolar em uma expressão curta.",
-      "statement": "Pink pencil case",
-      "instruction": "Observe o estojo rosa. Qual expressão descreve o objeto?",
+      "skill": "Integrar cumprimento e despedida em uma sequência curta.",
+      "statement": "Hello → See you",
+      "instruction": "Organize a sequência: chegar, dizer o nome e depois se despedir.",
       "options": [
         {
           "id": "o1",
-          "text": "pink pencil case"
+          "text": "Hello! I’m Mia."
         },
         {
           "id": "o2",
-          "text": "purple pencil case"
-        },
-        {
-          "id": "o3",
-          "text": "pink backpack"
+          "text": "See you!"
         }
       ],
       "correct": "o1",
-      "kind": "image-choice",
-      "audioText": null,
-      "visual": "pink pencil case",
-      "visualAlt": "Pink pencil case",
+      "kind": "sequence",
+      "audioText": "Hello! I'm Mia. See you!",
+      "visual": null,
+      "visualAlt": null,
       "imageOptions": null,
-      "sequence": null,
-      "sourceMedia": "Imagem obrigatória: pink pencil case; palavras com áudio sob toque.",
+      "sequence": [
+        "o1",
+        "o2"
+      ],
+      "sourceMedia": "Duas cenas sequenciais: chegada e despedida; áudio EN das sequências.",
       "note": ""
     }
   ]);
@@ -1178,7 +1301,7 @@
     const mechanic = question.delivery.mechanic;
     if (!current || current.mechanic !== mechanic || current.questions.length >= 4) {
       current = {
-        id: `en1-m03-step-${String(activityGroups.length + 1).padStart(2, "0")}`,
+        id: `en1-m06-step-${String(activityGroups.length + 1).padStart(2, "0")}`,
         title: mechanic === "drag-drop" ? "Coloque na ordem" : "Ouça e escolha",
         mechanic,
         skill: question.skill,
@@ -1191,7 +1314,7 @@
   });
 
   const moduleDefinition = {
-    id: "english-year-1-module-03",
+    id: "english-year-1-module-06",
     version: VERSION,
     sourceVersion: "DUDUQ English 1–5 v2.2",
     factoryVersion: "1.0-pedagogy-v1",
@@ -1199,8 +1322,8 @@
     subject: "Língua Inglesa",
     year: YEAR,
     module: MODULE,
-    title: "Colors & School Objects",
-    description: "Reconhecer cores e objetos escolares e combinar cor + objeto em descrições muito curtas, fazendo o acerto depender do inglês.",
+    title: "My English World – Review",
+    description: "Retomar os conteúdos do 1º ano em tarefas curtas de escuta, imagem, associação e descrição, sem recorrer predominantemente à tradução.",
     estimatedMinutes: 4,
     audioPolicy: {
       primary: "AUDIO_GAP",
@@ -1235,10 +1358,10 @@
       gates: ["PED-01", "PED-02", "PED-03", "PED-04", "PED-05", "PED-06", "PED-07", "PED-08", "PED-09", "PED-10", "PED-11", "PED-12"]
     },
     learningGoals: [
-      "Reconhecer cores e objetos escolares e combinar cor + objeto em descrições muito curtas, fazendo o acerto depender do inglês."
+      "Retomar os conteúdos do 1º ano em tarefas curtas de escuta, imagem, associação e descrição, sem recorrer predominantemente à tradução."
     ],
     pedagogicalNotes: {
-      officialSource: "DUDUQ English 1–5 v2.2 — Manual do Educador, 1º ano, Unidade 2, p. 22 e Unidade 3, p. 23",
+      officialSource: "DUDUQ English 1–5 v2.2 — síntese das Unidades 1 a 4 do Manual do Educador – 1º ano",
       literacy: "Y1_EARLY_LITERACY: R0 como padrão. Leitura nunca é requisito para acertar; texto é apenas apoio.",
       maintenance: "IDs editoriais permanecem estáveis. Troca de imagem usa imageAsset; troca de mecânica exige regenerar o payload.",
       qaStatus: "REVIEW_REQUIRED_MEDIA_GAPS"
@@ -1266,5 +1389,5 @@
     activities: activityGroups
   };
 
-  window.DUDUQ_CONTENT.english.year1.module03 = Object.freeze(moduleDefinition);
+  window.DUDUQ_CONTENT.english.year1.module06 = Object.freeze(moduleDefinition);
 })();

@@ -1,6 +1,6 @@
 /* =========================================================
-   DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 03
-   Colors & School Objects
+   DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 05
+   Pets, Colors & Size
    Version 1.1.0 — PEDAGOGY v1.0 / FACTORY REPO PACKAGE
 
    SOURCE:
@@ -32,16 +32,16 @@
 
   const VERSION = "1.1.0";
   const YEAR = 1;
-  const MODULE = 3;
+  const MODULE = 5;
   const BASE = "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/";
   const IMAGE_BASE = BASE + "Imagens%20Ilustrativa/";
-  const AUDIO_BASE = BASE + "Audios/1_ANO/M03/";
+  const AUDIO_BASE = BASE + "Audios/1_ANO/M05/";
 
   window.DUDUQ_CONTENT = window.DUDUQ_CONTENT || {};
   window.DUDUQ_CONTENT.english = window.DUDUQ_CONTENT.english || {};
   window.DUDUQ_CONTENT.english.year1 = window.DUDUQ_CONTENT.english.year1 || {};
 
-  if (window.DUDUQ_CONTENT.english.year1.module03?.version === VERSION) {
+  if (window.DUDUQ_CONTENT.english.year1.module05?.version === VERSION) {
     return;
   }
 
@@ -186,89 +186,103 @@
   });
 
   const VISUAL_META = Object.freeze({
-    "backpack": {
-      "status": "resolved",
-      "imageAsset": "backpack",
-      "imageCategory": "school",
-      "file": "Mochila.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Mochila.png"
-    },
-    "blue pencil": {
-      "status": "resolved",
-      "imageAsset": "blue pencil",
-      "imageCategory": "school",
-      "file": "Lápis azul.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/L%C3%A1pis%20azul.png"
-    },
-    "color-blue": {
+    "big-small-cats": {
       "status": "gap-preview",
-      "imageAsset": "color-blue",
+      "imageAsset": "big-small-cats",
       "imageCategory": "unknown",
       "file": null,
       "url": null
     },
-    "color-green": {
+    "big-small-dogs": {
       "status": "gap-preview",
-      "imageAsset": "color-green",
+      "imageAsset": "big-small-dogs",
       "imageCategory": "unknown",
       "file": null,
       "url": null
     },
-    "color-red": {
+    "bird": {
+      "status": "resolved",
+      "imageAsset": "bird",
+      "imageCategory": "animals",
+      "file": "Passáro.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Pass%C3%A1ro.png"
+    },
+    "brown-dog": {
       "status": "gap-preview",
-      "imageAsset": "color-red",
+      "imageAsset": "brown-dog",
       "imageCategory": "unknown",
       "file": null,
       "url": null
     },
-    "color-yellow": {
+    "cat": {
+      "status": "resolved",
+      "imageAsset": "cat",
+      "imageCategory": "animals",
+      "file": "Gato.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Gato.png"
+    },
+    "dog": {
+      "status": "resolved",
+      "imageAsset": "dog",
+      "imageCategory": "animals",
+      "file": "Cachorro.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Cachorro.png"
+    },
+    "fish": {
+      "status": "resolved",
+      "imageAsset": "fish",
+      "imageCategory": "animals",
+      "file": "Peixe.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Peixe.png"
+    },
+    "hamster": {
+      "status": "resolved",
+      "imageAsset": "hamster",
+      "imageCategory": "animals",
+      "file": "Hamister.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Hamister.png"
+    },
+    "person-cat": {
       "status": "gap-preview",
-      "imageAsset": "color-yellow",
+      "imageAsset": "person-cat",
       "imageCategory": "unknown",
       "file": null,
       "url": null
     },
-    "eraser": {
-      "status": "resolved",
-      "imageAsset": "eraser",
-      "imageCategory": "school",
-      "file": "Borracha.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Borracha.png"
-    },
-    "orange crayon": {
-      "status": "resolved",
-      "imageAsset": "orange crayon",
-      "imageCategory": "school",
-      "file": "Giz de cera laranja.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Giz%20de%20cera%20laranja.png"
-    },
-    "pencil": {
-      "status": "resolved",
-      "imageAsset": "pencil",
-      "imageCategory": "school",
-      "file": "Lápis.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/L%C3%A1pis.png"
-    },
-    "pink pencil case": {
-      "status": "resolved",
-      "imageAsset": "pink pencil case",
-      "imageCategory": "school",
-      "file": "Estojo rosa.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Estojo%20rosa.png"
-    },
-    "ruler": {
-      "status": "resolved",
-      "imageAsset": "ruler",
-      "imageCategory": "school",
-      "file": "Régua.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/R%C3%A9gua.png"
-    },
-    "three-rulers": {
+    "person-dog": {
       "status": "gap-preview",
-      "imageAsset": "three-rulers",
+      "imageAsset": "person-dog",
       "imageCategory": "unknown",
       "file": null,
       "url": null
+    },
+    "person-rabbit": {
+      "status": "gap-preview",
+      "imageAsset": "person-rabbit",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "rabbit": {
+      "status": "resolved",
+      "imageAsset": "rabbit",
+      "imageCategory": "animals",
+      "file": "Coelho.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Coelho.png"
+    },
+    "small-white-cat": {
+      "status": "gap-preview",
+      "imageAsset": "small-white-cat",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "turtle": {
+      "status": "resolved",
+      "imageAsset": "turtle",
+      "imageCategory": "animals",
+      "file": "Tartaruga.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Tartaruga.png"
     }
   });
 
@@ -310,135 +324,143 @@
   });
 
   const AUDIO_CATALOG = Object.freeze({
-    "EN1-M3-01": {
+    "EN1-M5-01": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Observe a cor da imagem e escolha seu nome em inglês.",
+        "text": "Observe o animal e escolha seu nome em inglês.",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-01_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-01_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-01_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-01_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-02": {
+    "EN1-M5-02": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Qual palavra em inglês nomeia a cor mostrada?",
+        "text": "Qual palavra em inglês nomeia o animal da imagem?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-02_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-02_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-02_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-02_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-03": {
+    "EN1-M5-03": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Toque no cartão com o nome da cor da imagem.",
+        "text": "Toque no cartão com o nome em inglês do animal.",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-04": {
+    "EN1-M5-04": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "A imagem destaca uma cor. Escolha a palavra correta em inglês.",
+        "text": "A imagem mostra um animal. Escolha o nome correto em inglês.",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-04_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-04_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-04_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-04_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-05": {
+    "EN1-M5-05": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Observe o objeto e escolha seu nome em inglês.",
+        "text": "Encontre o cartão que nomeia o animal mostrado.",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-05_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-05_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-05_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-05_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-06": {
+    "EN1-M5-06": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Qual palavra em inglês nomeia o objeto da imagem?",
+        "text": "Qual opção identifica corretamente o animal em inglês?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-06_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-06_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-06_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-06_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-07": {
+    "EN1-M5-07": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Toque no cartão com o nome em inglês do objeto.",
+        "text": "Observe os dois cachorros. Toque no cachorro big.",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-08": {
+    "EN1-M5-08": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "A imagem mostra um objeto escolar. Escolha o nome correto.",
+        "text": "Observe os dois gatos. Toque no gato small.",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-08_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-08_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-08_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-08_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-09": {
+    "EN1-M5-09": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Uma imagem mostra um lápis azul. Qual expressão corresponde à imagem?",
+        "text": "Observe o cachorro marrom. Qual expressão descreve a imagem?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-09_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-09_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-09_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-09_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-10": {
+    "EN1-M5-10": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Observe a imagem com 3 réguas. Qual expressão descreve a quantidade?",
+        "text": "Observe a tartaruga. Complete a fala: “It’s a ___.”",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-10_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-10_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-10_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-10_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M3-11": {
-      "mechanic": "smart-sentence",
+    "EN1-M5-11": {
+      "mechanic": "target-shooter",
       "instruction": {
-        "text": "Observe o giz de cera laranja. Qual expressão descreve o objeto?",
+        "text": "Observe o personagem com um gato. Ouça: “I have a cat.” Qual imagem combina com a fala?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-11_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-11_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-11_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-11_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
       },
-      "stimuli": []
+      "stimuli": [
+        {
+          "text": "I have a cat",
+          "language": "en-US",
+          "src": "",
+          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-11_TARGET-SHOOTER_ESTIMULO01_I-HAVE-A-CAT_ENUS.mp3",
+          "file": "ING_1ANO_M05_EN1-M5-11_TARGET-SHOOTER_ESTIMULO01_I-HAVE-A-CAT_ENUS.mp3"
+        }
+      ]
     },
-    "EN1-M3-12": {
+    "EN1-M5-12": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Observe o estojo rosa. Qual expressão descreve o objeto?",
+        "text": "Observe o gato branco e pequeno. Qual descrição combina com a imagem?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M03/ING_1ANO_M03_EN1-M3-12_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M03_EN1-M3-12_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-12_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-12_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     }
@@ -797,375 +819,379 @@
 
   const BLUEPRINTS = Object.freeze([
     {
-      "id": "EN1-M3-01",
+      "id": "EN1-M5-01",
       "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Identificar cores em inglês.",
-      "statement": "Red",
-      "instruction": "Observe a cor da imagem e escolha seu nome em inglês.",
+      "skill": "Identificar animais/bichos de estimação em inglês.",
+      "statement": "Dog",
+      "instruction": "Observe o animal e escolha seu nome em inglês.",
       "options": [
         {
           "id": "o1",
-          "text": "green"
+          "text": "cat"
         },
         {
           "id": "o2",
-          "text": "red"
+          "text": "dog"
         },
         {
           "id": "o3",
-          "text": "yellow"
+          "text": "fish"
         }
       ],
       "correct": "o2",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "color-red",
-      "visualAlt": "Bloco vermelho",
+      "visual": "dog",
+      "visualAlt": "Dog",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: bloco red.",
+      "sourceMedia": "Imagem obrigatória: dog.",
       "note": ""
     },
     {
-      "id": "EN1-M3-02",
+      "id": "EN1-M5-02",
       "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Identificar cores em inglês.",
-      "statement": "Blue",
-      "instruction": "Qual palavra em inglês nomeia a cor mostrada?",
+      "skill": "Identificar animais/bichos de estimação em inglês.",
+      "statement": "Cat",
+      "instruction": "Qual palavra em inglês nomeia o animal da imagem?",
       "options": [
         {
           "id": "o1",
-          "text": "red"
+          "text": "dog"
         },
         {
           "id": "o2",
-          "text": "green"
+          "text": "fish"
         },
         {
           "id": "o3",
-          "text": "blue"
+          "text": "cat"
         }
       ],
       "correct": "o3",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "color-blue",
-      "visualAlt": "Bloco azul",
+      "visual": "cat",
+      "visualAlt": "Cat",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: bloco blue.",
+      "sourceMedia": "Imagem obrigatória: cat.",
       "note": ""
     },
     {
-      "id": "EN1-M3-03",
+      "id": "EN1-M5-03",
       "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Identificar cores em inglês.",
-      "statement": "Yellow",
-      "instruction": "Toque no cartão com o nome da cor da imagem.",
+      "skill": "Identificar animais/bichos de estimação em inglês.",
+      "statement": "Fish",
+      "instruction": "Toque no cartão com o nome em inglês do animal.",
       "options": [
         {
           "id": "o1",
-          "text": "yellow"
+          "text": "fish"
         },
         {
           "id": "o2",
-          "text": "red"
+          "text": "dog"
         },
         {
           "id": "o3",
-          "text": "green"
+          "text": "cat"
         }
       ],
       "correct": "o1",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "color-yellow",
-      "visualAlt": "Bloco amarelo",
+      "visual": "fish",
+      "visualAlt": "Fish",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: bloco yellow.",
+      "sourceMedia": "Imagem obrigatória: fish.",
       "note": ""
     },
     {
-      "id": "EN1-M3-04",
+      "id": "EN1-M5-04",
       "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Identificar cores em inglês.",
-      "statement": "Green",
-      "instruction": "A imagem destaca uma cor. Escolha a palavra correta em inglês.",
+      "skill": "Identificar animais/bichos de estimação em inglês.",
+      "statement": "Rabbit",
+      "instruction": "A imagem mostra um animal. Escolha o nome correto em inglês.",
       "options": [
         {
           "id": "o1",
-          "text": "red"
+          "text": "dog"
         },
         {
           "id": "o2",
-          "text": "green"
+          "text": "rabbit"
         },
         {
           "id": "o3",
-          "text": "yellow"
+          "text": "cat"
         }
       ],
       "correct": "o2",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "color-green",
-      "visualAlt": "Bloco verde",
+      "visual": "rabbit",
+      "visualAlt": "Rabbit",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: bloco green.",
+      "sourceMedia": "Imagem obrigatória: rabbit.",
       "note": ""
     },
     {
-      "id": "EN1-M3-05",
+      "id": "EN1-M5-05",
       "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Identificar objetos escolares em inglês.",
-      "statement": "Pencil",
-      "instruction": "Observe o objeto e escolha seu nome em inglês.",
+      "skill": "Identificar animais/bichos de estimação em inglês.",
+      "statement": "Hamster",
+      "instruction": "Encontre o cartão que nomeia o animal mostrado.",
       "options": [
         {
           "id": "o1",
-          "text": "eraser"
+          "text": "dog"
         },
         {
           "id": "o2",
-          "text": "colored pencil"
+          "text": "cat"
         },
         {
           "id": "o3",
-          "text": "pencil"
+          "text": "hamster"
         }
       ],
       "correct": "o3",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "pencil",
-      "visualAlt": "Pencil",
+      "visual": "hamster",
+      "visualAlt": "Hamster",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: pencil.",
+      "sourceMedia": "Imagem obrigatória: hamster.",
       "note": ""
     },
     {
-      "id": "EN1-M3-06",
+      "id": "EN1-M5-06",
       "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Identificar objetos escolares em inglês.",
-      "statement": "Eraser",
-      "instruction": "Qual palavra em inglês nomeia o objeto da imagem?",
+      "skill": "Identificar animais/bichos de estimação em inglês.",
+      "statement": "Bird",
+      "instruction": "Qual opção identifica corretamente o animal em inglês?",
       "options": [
         {
           "id": "o1",
-          "text": "eraser"
+          "text": "bird"
         },
         {
           "id": "o2",
-          "text": "pencil"
+          "text": "dog"
         },
         {
           "id": "o3",
-          "text": "colored pencil"
+          "text": "cat"
         }
       ],
       "correct": "o1",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "eraser",
-      "visualAlt": "Eraser",
+      "visual": "bird",
+      "visualAlt": "Bird",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: eraser.",
+      "sourceMedia": "Imagem obrigatória: bird.",
       "note": ""
     },
     {
-      "id": "EN1-M3-07",
+      "id": "EN1-M5-07",
       "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Identificar objetos escolares em inglês.",
-      "statement": "Ruler",
-      "instruction": "Toque no cartão com o nome em inglês do objeto.",
+      "skill": "Compreender big em contraste visual com small.",
+      "statement": "Big dog",
+      "instruction": "Observe os dois cachorros. Toque no cachorro big.",
       "options": [
         {
           "id": "o1",
-          "text": "eraser"
+          "text": "small dog"
         },
         {
           "id": "o2",
-          "text": "ruler"
+          "text": "big dog"
         },
         {
           "id": "o3",
-          "text": "pencil"
+          "text": "brown cat"
         }
       ],
       "correct": "o2",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "ruler",
-      "visualAlt": "Ruler",
+      "visual": "big-small-dogs",
+      "visualAlt": "Dois cachorros iguais em tamanhos diferentes",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: ruler.",
+      "sourceMedia": "Imagem obrigatória: dois cachorros iguais em tamanhos claramente diferentes; áudio EN recomendado: “big”.",
       "note": ""
     },
     {
-      "id": "EN1-M3-08",
+      "id": "EN1-M5-08",
       "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Identificar objetos escolares em inglês.",
-      "statement": "Backpack",
-      "instruction": "A imagem mostra um objeto escolar. Escolha o nome correto.",
+      "skill": "Compreender small em contraste visual com big.",
+      "statement": "Small cat",
+      "instruction": "Observe os dois gatos. Toque no gato small.",
       "options": [
         {
           "id": "o1",
-          "text": "eraser"
+          "text": "big cat"
         },
         {
           "id": "o2",
-          "text": "pencil"
+          "text": "brown dog"
         },
         {
           "id": "o3",
-          "text": "backpack"
+          "text": "small cat"
         }
       ],
       "correct": "o3",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "backpack",
-      "visualAlt": "Backpack",
+      "visual": "big-small-cats",
+      "visualAlt": "Dois gatos iguais em tamanhos diferentes",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: backpack.",
+      "sourceMedia": "Imagem obrigatória: dois gatos iguais em tamanhos claramente diferentes; áudio EN recomendado: “small”.",
       "note": ""
     },
     {
-      "id": "EN1-M3-09",
-      "status": "Manter",
-      "difficulty": "medium",
-      "skill": "Relacionar cores e objetos escolares.",
-      "statement": "Blue pencil",
-      "instruction": "Uma imagem mostra um lápis azul. Qual expressão corresponde à imagem?",
-      "options": [
-        {
-          "id": "o1",
-          "text": "blue pencil"
-        },
-        {
-          "id": "o2",
-          "text": "red pencil"
-        },
-        {
-          "id": "o3",
-          "text": "blue ruler"
-        }
-      ],
-      "correct": "o1",
-      "kind": "image-choice",
-      "audioText": null,
-      "visual": "blue pencil",
-      "visualAlt": "Blue pencil",
-      "imageOptions": null,
-      "sequence": null,
-      "sourceMedia": "Imagem obrigatória: lápis azul.",
-      "note": ""
-    },
-    {
-      "id": "EN1-M3-10",
+      "id": "EN1-M5-09",
       "status": "Ajustar",
       "difficulty": "medium",
-      "skill": "Relacionar quantidade e objeto escolar em uma expressão curta.",
-      "statement": "Three rulers",
-      "instruction": "Observe a imagem com 3 réguas. Qual expressão descreve a quantidade?",
+      "skill": "Combinar cor + pet em uma expressão curta.",
+      "statement": "Brown dog",
+      "instruction": "Observe o cachorro marrom. Qual expressão descreve a imagem?",
       "options": [
         {
           "id": "o1",
-          "text": "two rulers"
+          "text": "brown dog"
         },
         {
           "id": "o2",
-          "text": "three rulers"
+          "text": "white dog"
         },
         {
           "id": "o3",
-          "text": "four rulers"
+          "text": "brown cat"
         }
       ],
-      "correct": "o2",
+      "correct": "o1",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "three-rulers",
-      "visualAlt": "Três réguas bem separadas",
+      "visual": "brown-dog",
+      "visualAlt": "Brown dog",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: 3 réguas bem separadas.",
+      "sourceMedia": "Imagem obrigatória: brown dog.",
       "note": ""
     },
     {
-      "id": "EN1-M3-11",
+      "id": "EN1-M5-10",
       "status": "Reescrever",
       "difficulty": "medium",
-      "skill": "Relacionar cor e objeto escolar em uma expressão curta.",
-      "statement": "Orange crayon",
-      "instruction": "Observe o giz de cera laranja. Qual expressão descreve o objeto?",
+      "skill": "Completar um chunk modelado com um pet.",
+      "statement": "It's a turtle",
+      "instruction": "Observe a tartaruga. Complete a fala: “It’s a ___.”",
       "options": [
         {
           "id": "o1",
-          "text": "orange crayon"
+          "text": "dog"
         },
         {
           "id": "o2",
-          "text": "pink crayon"
+          "text": "turtle"
         },
         {
           "id": "o3",
-          "text": "orange pencil"
+          "text": "fish"
         }
       ],
-      "correct": "o1",
+      "correct": "o2",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "orange crayon",
-      "visualAlt": "Orange crayon",
+      "visual": "turtle",
+      "visualAlt": "Turtle",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: orange crayon; palavras com áudio sob toque.",
+      "sourceMedia": "Imagem obrigatória: turtle.",
+      "note": "Smart Sentence usa o chunk IT’S A + lacuna."
+    },
+    {
+      "id": "EN1-M5-11",
+      "status": "Reescrever",
+      "difficulty": "medium",
+      "skill": "Compreender o chunk “I have a...” com apoio de imagem.",
+      "statement": "I have a cat",
+      "instruction": "Observe o personagem com um gato. Ouça: “I have a cat.” Qual imagem combina com a fala?",
+      "options": [
+        {
+          "id": "o1",
+          "text": "personagem com um cachorro"
+        },
+        {
+          "id": "o2",
+          "text": "personagem com um coelho"
+        },
+        {
+          "id": "o3",
+          "text": "personagem com um gato"
+        }
+      ],
+      "correct": "o3",
+      "kind": "audio-image",
+      "audioText": "I have a cat",
+      "visual": null,
+      "visualAlt": null,
+      "imageOptions": [
+        "person-dog",
+        "person-rabbit",
+        "person-cat"
+      ],
+      "sequence": null,
+      "sourceMedia": "Áudio EN obrigatório: “I have a cat.” + três imagens de personagens fictícios com pets diferentes.",
       "note": ""
     },
     {
-      "id": "EN1-M3-12",
-      "status": "Reescrever",
+      "id": "EN1-M5-12",
+      "status": "Ajustar",
       "difficulty": "hard",
-      "skill": "Relacionar cor e objeto escolar em uma expressão curta.",
-      "statement": "Pink pencil case",
-      "instruction": "Observe o estojo rosa. Qual expressão descreve o objeto?",
+      "skill": "Compreender uma descrição curta com tamanho + cor + animal.",
+      "statement": "Small white cat",
+      "instruction": "Observe o gato branco e pequeno. Qual descrição combina com a imagem?",
       "options": [
         {
           "id": "o1",
-          "text": "pink pencil case"
+          "text": "It’s a small white cat."
         },
         {
           "id": "o2",
-          "text": "purple pencil case"
+          "text": "It’s a big white cat."
         },
         {
           "id": "o3",
-          "text": "pink backpack"
+          "text": "It’s a small brown cat."
         }
       ],
       "correct": "o1",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "pink pencil case",
-      "visualAlt": "Pink pencil case",
+      "visual": "small-white-cat",
+      "visualAlt": "Small white cat",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: pink pencil case; palavras com áudio sob toque.",
+      "sourceMedia": "Imagem obrigatória: small white cat.",
       "note": ""
     }
   ]);
@@ -1178,7 +1204,7 @@
     const mechanic = question.delivery.mechanic;
     if (!current || current.mechanic !== mechanic || current.questions.length >= 4) {
       current = {
-        id: `en1-m03-step-${String(activityGroups.length + 1).padStart(2, "0")}`,
+        id: `en1-m05-step-${String(activityGroups.length + 1).padStart(2, "0")}`,
         title: mechanic === "drag-drop" ? "Coloque na ordem" : "Ouça e escolha",
         mechanic,
         skill: question.skill,
@@ -1191,7 +1217,7 @@
   });
 
   const moduleDefinition = {
-    id: "english-year-1-module-03",
+    id: "english-year-1-module-05",
     version: VERSION,
     sourceVersion: "DUDUQ English 1–5 v2.2",
     factoryVersion: "1.0-pedagogy-v1",
@@ -1199,8 +1225,8 @@
     subject: "Língua Inglesa",
     year: YEAR,
     module: MODULE,
-    title: "Colors & School Objects",
-    description: "Reconhecer cores e objetos escolares e combinar cor + objeto em descrições muito curtas, fazendo o acerto depender do inglês.",
+    title: "Pets, Colors & Size",
+    description: "Reconhecer pets e descrevê-los com cor e tamanho usando chunks modelados e forte apoio visual.",
     estimatedMinutes: 4,
     audioPolicy: {
       primary: "AUDIO_GAP",
@@ -1235,10 +1261,10 @@
       gates: ["PED-01", "PED-02", "PED-03", "PED-04", "PED-05", "PED-06", "PED-07", "PED-08", "PED-09", "PED-10", "PED-11", "PED-12"]
     },
     learningGoals: [
-      "Reconhecer cores e objetos escolares e combinar cor + objeto em descrições muito curtas, fazendo o acerto depender do inglês."
+      "Reconhecer pets e descrevê-los com cor e tamanho usando chunks modelados e forte apoio visual."
     ],
     pedagogicalNotes: {
-      officialSource: "DUDUQ English 1–5 v2.2 — Manual do Educador, 1º ano, Unidade 2, p. 22 e Unidade 3, p. 23",
+      officialSource: "DUDUQ English 1–5 v2.2 — Manual do Educador, 1º ano, Unidade 4, p. 24",
       literacy: "Y1_EARLY_LITERACY: R0 como padrão. Leitura nunca é requisito para acertar; texto é apenas apoio.",
       maintenance: "IDs editoriais permanecem estáveis. Troca de imagem usa imageAsset; troca de mecânica exige regenerar o payload.",
       qaStatus: "REVIEW_REQUIRED_MEDIA_GAPS"
@@ -1266,5 +1292,5 @@
     activities: activityGroups
   };
 
-  window.DUDUQ_CONTENT.english.year1.module03 = Object.freeze(moduleDefinition);
+  window.DUDUQ_CONTENT.english.year1.module05 = Object.freeze(moduleDefinition);
 })();

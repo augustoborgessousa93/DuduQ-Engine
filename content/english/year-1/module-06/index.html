@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>DuduQ Engine — English — Year 1 — Module 03</title>
+  <title>DuduQ Engine — English — Year 1 — Module 06</title>
 
   <link rel="stylesheet" href="../../../../core/duduq-theme.css?v=110">
   <link rel="stylesheet" href="../../../../core/duduq-intro.css?v=130">
@@ -38,7 +38,7 @@
 
   <!-- Router remains available after mechanics, but does not re-select a Factory-approved mechanic at runtime. -->
   <script src="../../../../core/duduq-router.js?v=100"></script>
-  <script src="./module-03.js?v=110"></script>
+  <script src="./module-06.js?v=110"></script>
 
   <script>
     window.addEventListener("DOMContentLoaded", function () {
@@ -63,10 +63,10 @@
       }
 
       const moduleDefinition =
-        window.DUDUQ_CONTENT?.english?.year1?.module03;
+        window.DUDUQ_CONTENT?.english?.year1?.module06;
 
       if (!moduleDefinition || !Array.isArray(moduleDefinition.activities) || !moduleDefinition.activities.length) {
-        root.textContent = "Erro: o conteúdo English Year 1 Module 03 não foi carregado.";
+        root.textContent = "Erro: o conteúdo English Year 1 Module 06 não foi carregado.";
         return;
       }
 
@@ -91,7 +91,7 @@
         const questions = Array.isArray(activity.questions) ? activity.questions : [];
 
         if (!activity.id || !activity.title || !activity.mechanic || questions.length === 0) {
-          root.textContent = `Erro: atividade ${activityIndex + 1} incompleta no Módulo 03.`;
+          root.textContent = `Erro: atividade ${activityIndex + 1} incompleta no Módulo 06.`;
           return;
         }
 

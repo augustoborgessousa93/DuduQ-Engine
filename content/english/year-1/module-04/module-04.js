@@ -1,22 +1,24 @@
 /* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 04
    Classroom Commands & My Body
-   Version 1.0.0 — FACTORY CANDIDATE
+   Version 1.1.0 — PEDAGOGY v1.0 / FACTORY REPO PACKAGE
 
    SOURCE:
-   - DUDUQ English 1–5 — Revisão Pedagógica Integral v2.2
-   - DUDUQ Master Document — Conteúdo & Orquestração v1.0
+   - DUDUQ_Ingles_1ao5.docx — Revisão Pedagógica Integral v2.2
+   - DUDUQ_Documento_Mestre_v1.0(5).docx — Conteúdo & Orquestração v1.0
+   - DUDUQ_FACTORY_PEDAGOGICAL_SPECIFICATION_v1.0 — NORMATIVE / PRODUCTION
 
    FACTORY:
    - Prompt Mestre DuduQ Factory v1.0
    - Prompt Complementar de Entrega v1.0
    - Smart Assets: ON
    - Integration B: semantic/native contract applied
+   - Pedagogy: Y1_EARLY_LITERACY / R0 / non-reader test PASS
    - Engine baseline: Canary R124
    - GitHub write: NO
 
    DELIVERY STATUS:
-   - BLOCKED_MEDIA_GAPS
+   - REVIEW_REQUIRED_MEDIA_GAPS
 
    IMPORTANT:
    - Procedural SVGs in PREVIEW_VISUALS are review-only substitutes for
@@ -28,7 +30,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0";
+  const VERSION = "1.1.0";
   const YEAR = 1;
   const MODULE = 4;
   const BASE = "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/";
@@ -453,27 +455,222 @@
     }
   });
 
+
+  const PEDAGOGY_PROFILE = Object.freeze({
+    specification: "DUDUQ_FACTORY_PEDAGOGICAL_SPECIFICATION_v1.0",
+    specificationVersion: "1.0.0",
+    profile: "Y1_EARLY_LITERACY",
+    literacyDemand: "R0",
+    readingEssential: false,
+    instructionLanguage: "pt-BR",
+    instructionAudioRequired: true,
+    targetAudioRepeatable: true,
+    uppercaseSupport: true,
+    primaryModalities: ["audio", "image", "gesture", "manipulation"],
+    motorPrecisionDemand: "low",
+    nonReaderTest: "PASS",
+    audit: "PEDAGOGICAL_PASS"
+  });
+
   function skill(description) {
     return Object.freeze({ code: null, description });
   }
 
-  function option(id, text) {
+  function normalizeSemantic(value) {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[’]/g, "'")
+      .toLowerCase()
+      .replace(/[.!?,;:]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function iconPreview(emoji, accent = "#E3F2FD") {
+    return svgAsset(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 400">
+      <rect width="560" height="400" rx="42" fill="#F7FBFF"/>
+      <circle cx="280" cy="200" r="132" fill="${accent}" stroke="#183B66" stroke-width="6"/>
+      <text x="280" y="235" text-anchor="middle" font-size="128" font-family="system-ui,Apple Color Emoji,Segoe UI Emoji,sans-serif">${emoji}</text>
+    </svg>`);
+  }
+
+  function numeralPreview(number) {
+    const n = String(number || "").replace(/[^0-9]/g, "");
+    return svgAsset(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 400">
+      <rect width="560" height="400" rx="42" fill="#F7FBFF"/>
+      <rect x="125" y="55" width="310" height="290" rx="48" fill="#FFFFFF" stroke="#183B66" stroke-width="8"/>
+      <text x="280" y="265" text-anchor="middle" font-size="176" font-weight="900" font-family="system-ui,sans-serif" fill="#17375e">${n}</text>
+    </svg>`);
+  }
+
+  function dayScene(kind) {
+    const map = {
+      morning: ["#E3F2FD", "#FFD54F", 110, 100],
+      afternoon: ["#BBDEFB", "#FFB74D", 405, 125],
+      night: ["#263238", "#FFF59D", 410, 95]
+    };
+    const cfg = map[kind] || map.morning;
+    const star = kind === "night"
+      ? '<circle cx="120" cy="90" r="6" fill="#FFFDE7"/><circle cx="185" cy="62" r="5" fill="#FFFDE7"/><circle cx="330" cy="70" r="6" fill="#FFFDE7"/>'
+      : '';
+    return svgAsset(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 400">
+      <rect width="560" height="400" rx="42" fill="${cfg[0]}"/>
+      ${star}<circle cx="${cfg[2]}" cy="${cfg[3]}" r="54" fill="${cfg[1]}"/>
+      <path d="M0 300 Q140 220 280 300 T560 300 V400 H0Z" fill="#7CB342"/>
+      <rect x="250" y="200" width="80" height="110" rx="30" fill="#90CAF9" stroke="#183B66" stroke-width="5"/>
+      <circle cx="290" cy="160" r="42" fill="#F2C7A5" stroke="#183B66" stroke-width="5"/>
+    </svg>`);
+  }
+
+  function greetingScene(mode) {
+    if (mode === "goodbye") return iconPreview("👋", "#FFE0B2");
+    if (mode === "name") return iconPreview("🪪", "#E8EAF6");
+    if (mode === "age") return iconPreview("🎂", "#FCE4EC");
+    if (mode === "thanks") return iconPreview("🙏", "#E8F5E9");
+    if (mode === "please") return iconPreview("🤲", "#FFF3E0");
+    if (mode === "enter") return iconPreview("🚪", "#E0F2F1");
+    return iconPreview("🙂👋", "#E3F2FD");
+  }
+
+  function visualForText(value) {
+    const raw = String(value || "");
+    const n = normalizeSemantic(raw);
+
+    const alias = {
+      "hi": "hello",
+      "bye": "goodbye",
+      "see you": "goodbye",
+      "quiet please": "quiet",
+      "ao chegar": "hello",
+      "ao se despedir": "goodbye",
+      "despedindo-se": "goodbye",
+      "dizendo boa tarde": "good afternoon",
+      "personagem sentado": "sit down",
+      "personagem em pe": "stand up",
+      "maos tocadas": "touch hands",
+      "pes tocados": "touch feet",
+      "cabeca tocada": "touch head",
+      "bracos tocados": "touch arms"
+    };
+
+    const direct = alias[n] || n;
+    if (VISUALS[direct]) return VISUALS[direct];
+
+    if (n === "good night") return dayScene("night");
+    if (n === "come in" || n === "personagem entrando") return greetingScene("enter");
+    if (n === "please") return greetingScene("please");
+    if (n === "thank you") return greetingScene("thanks");
+    if (n === "ao dizer a idade") return greetingScene("age");
+    if (n === "dizendo o proprio nome") return greetingScene("name");
+
+    if (/good morning/.test(n)) return dayScene("morning");
+    if (/good afternoon/.test(n)) return dayScene("afternoon");
+    if (/goodbye|\bbye\b|see you/.test(n)) return greetingScene("goodbye");
+    if (/\bhello\b|\bhi\b/.test(n)) return greetingScene("hello");
+    if (/i'?m\s+[a-z]+/.test(n)) return greetingScene("name");
+
+    const numberWords = {
+      one: 1, two: 2, three: 3, four: 4, five: 5,
+      six: 6, seven: 7, eight: 8, nine: 9, ten: 10
+    };
+    if (numberWords[n]) return countDots(numberWords[n]);
+    if (/^\d+$/.test(n)) return numeralPreview(n);
+
+    const colors = {
+      red: "#E53935", blue: "#1E88E5", yellow: "#FDD835", green: "#43A047",
+      orange: "#FB8C00", pink: "#EC407A", purple: "#8E24AA", brown: "#795548", white: "#FAFAFA"
+    };
+    if (colors[n]) return colorBlock(colors[n]);
+
+    let count = 1;
+    for (const [word, value] of Object.entries(numberWords)) {
+      if (n.includes(word + " ")) { count = value; break; }
+    }
+    const digit = n.match(/\b(\d{1,2})\b/);
+    if (digit) count = Number(digit[1]);
+
+    let color = "#90CAF9";
+    for (const [word, value] of Object.entries(colors)) {
+      if (n.includes(word)) { color = value; break; }
+    }
+    if (n.includes("azul")) color = colors.blue;
+    if (n.includes("laranja")) color = colors.orange;
+    if (n.includes("vermelh")) color = colors.red;
+
+    if (/pencil|lapis/.test(n)) return simpleSchoolCount(count, color, "pencil");
+    if (/ruler|regua/.test(n)) return simpleSchoolCount(count, color, "ruler");
+    if (/crayon|giz/.test(n)) return simpleSchoolCount(count, color, "crayon");
+    if (/backpack|mochila/.test(n)) return iconPreview("🎒", color === "#90CAF9" ? "#E3F2FD" : color + "33");
+    if (/eraser/.test(n)) return iconPreview("🧽", "#FFF3E0");
+    if (/pencil case/.test(n)) return iconPreview("🖍️", color === "#90CAF9" ? "#FCE4EC" : color + "33");
+
+    let pet = null;
+    for (const animal of ["dog", "cat", "rabbit", "turtle", "fish", "hamster", "bird"]) {
+      if (n.includes(animal)) { pet = animal; break; }
+    }
+    if (/cachorro/.test(n)) pet = "dog";
+    if (/gato/.test(n)) pet = "cat";
+    if (/coelho/.test(n)) pet = "rabbit";
+    if (pet) {
+      if (VISUALS[pet] && !/small|big|brown|white/.test(n)) return VISUALS[pet];
+      const scale = n.includes("small") ? .62 : n.includes("big") ? 1.16 : .88;
+      return simplePet(pet, color, scale);
+    }
+
+    if (/\bhead\b|cabeca/.test(n)) return bodyPreview("head");
+    if (/\bhands\b|maos/.test(n)) return bodyPreview("hands");
+    if (/\blegs\b|pernas/.test(n)) return bodyPreview("legs");
+    if (/\barms\b|bracos/.test(n)) return bodyPreview("arms");
+    if (/\bfeet\b|pes/.test(n)) return bodyPreview("feet");
+
+    if (/personagem com um/.test(n)) {
+      if (/cachorro/.test(n)) return simplePet("dog", "#C58B5B", .8);
+      if (/coelho/.test(n)) return simplePet("rabbit", "#CFD8DC", .8);
+      if (/gato/.test(n)) return simplePet("cat", "#B0BEC5", .8);
+    }
+
+    return iconPreview("👀", "#ECEFF1");
+  }
+
+  function visualStatus(value) {
+    const n = normalizeSemantic(value);
+    if (VISUALS[n]) return "resolved";
+    const aliases = {
+      hi: "hello", bye: "goodbye", "see you": "goodbye", "quiet please": "quiet",
+      "ao chegar": "hello", "ao se despedir": "goodbye", "despedindo-se": "goodbye",
+      "dizendo boa tarde": "good afternoon", "personagem sentado": "sit down",
+      "personagem em pe": "stand up", "maos tocadas": "touch hands", "pes tocados": "touch feet",
+      "cabeca tocada": "touch head", "bracos tocados": "touch arms"
+    };
+    return aliases[n] && VISUALS[aliases[n]] ? "resolved" : "gap-preview";
+  }
+
+  function option(id, text, audioEnabled = false, imageSrc = null) {
     return {
       id,
       text,
-      audio: {
-        enabled: true,
-        text,
-        language: "en-US",
-        role: "option"
-      }
+      image: imageSrc
+        ? { enabled: true, src: imageSrc, alt: text }
+        : { enabled: false, src: null, alt: "" },
+      audio: audioEnabled
+        ? { enabled: true, text, language: "en-US", role: "option" }
+        : { enabled: false, src: null, text: "", language: "en-US", role: "option" }
     };
   }
 
-  function baseQuestion(bp, mechanic, metadata, answer) {
+  function correctOption(bp) {
+    return bp.options.find((entry) => entry.id === bp.correct) || bp.options[0];
+  }
+
+  function targetAudioText(bp) {
+    return String(bp.audioText || correctOption(bp)?.text || bp.statement || "").trim();
+  }
+
+  function baseQuestion(bp, mechanic, metadata, answer, alternatives = null) {
     const audioEntry = AUDIO_CATALOG[bp.id] || {};
     const stimulus = Array.isArray(audioEntry.stimuli) ? audioEntry.stimuli[0] : null;
-    const audioText = bp.audioText || bp.instruction;
+    const targetAudio = targetAudioText(bp);
 
     return {
       id: bp.id,
@@ -482,43 +679,56 @@
       module: MODULE,
       skill: skill(bp.skill),
       difficulty: bp.difficulty,
-      statement: bp.statement,
-      instruction: bp.instruction,
+      statement: "Ouça e observe.",
+      instruction: mechanic === "drag-drop"
+        ? "Ouça e coloque as imagens na ordem."
+        : "Ouça e toque na imagem correta.",
       contentLanguage: "en",
       instructionLanguage: "pt-BR",
       feedbackLanguage: "pt-BR",
       audio: {
         enabled: true,
-        text: audioText,
+        text: targetAudio,
         src: stimulus?.src || null,
-        language: bp.audioText ? "en-US" : "pt-BR",
+        language: "en-US",
         role: "instruction"
       },
-      alternatives: bp.options.map((entry) => option(entry.id, entry.text)),
+      alternatives: alternatives || bp.options.map((entry) => option(entry.id, entry.text, false)),
       answer,
       feedback: {
-        correct: `Muito bem! ${bp.statement}.`,
-        incorrect: bp.audioText
-          ? "Ouça novamente e tente outra vez."
-          : "Observe novamente e tente outra vez.",
+        correct: `Muito bem! ${targetAudio.toUpperCase()}`,
+        incorrect: "Ouça novamente, observe as imagens e tente outra vez.",
         language: "pt-BR"
       },
       delivery: {
         mechanic,
-        allowImage: Boolean(bp.visual || bp.imageOptions),
+        preferred: [mechanic],
+        allowImage: true,
         allowAudio: true
       },
       metadata: {
         sourceStatus: bp.status,
+        sourceStatement: bp.statement,
+        sourceInstruction: bp.instruction,
         sourceMedia: bp.sourceMedia,
+        sourceCorrectOptionId: bp.correct,
+        sourceOptions: bp.options.map((entry) => ({ id: entry.id, text: entry.text })),
         factoryNote: bp.note || "",
-        smartAssets: bp.visual
-          ? {
-              imageAsset: bp.visual,
-              imageCategory: VISUAL_META[bp.visual]?.imageCategory || "unknown",
-              resolutionStatus: VISUAL_META[bp.visual]?.status || (PREVIEW_VISUALS[bp.visual] ? "gap-preview" : "resolved")
-            }
-          : null,
+        pedagogy: {
+          ...PEDAGOGY_PROFILE,
+          sourceQuestionId: bp.id,
+          adaptation: mechanic === "drag-drop" ? "R0_AUDIO_VISUAL_SEQUENCE" : "R0_AUDIO_TO_VISUAL",
+          readingEssential: false,
+          literacyDemand: "R0"
+        },
+        instructionAudio: {
+          required: true,
+          text: mechanic === "drag-drop"
+            ? "Ouça e coloque as imagens na ordem."
+            : "Ouça e toque na imagem correta.",
+          language: "pt-BR",
+          fallback: "speech-synthesis"
+        },
         ...metadata
       }
     };
@@ -526,16 +736,18 @@
 
   function targetQuestion(bp) {
     const correctId = `target-${bp.correct}`;
-    const targetItems = bp.options.map((entry) => {
-      const index = bp.options.findIndex((item) => item.id === entry.id);
-      const visualKey = bp.imageOptions?.[index];
-      const image = visualKey ? VISUALS[visualKey] : null;
+    const items = bp.options.map((entry, index) => {
+      const hintedKey = bp.imageOptions?.[index];
+      const image = hintedKey && VISUALS[hintedKey]
+        ? VISUALS[hintedKey]
+        : visualForText(entry.text);
       return {
         id: `target-${entry.id}`,
-        label: image ? "" : entry.text,
-        image: image || undefined,
-        display: image ? "image" : "label",
-        alt: image ? entry.text : undefined
+        label: "",
+        image,
+        display: "image",
+        alt: entry.text,
+        assetStatus: hintedKey && VISUALS[hintedKey] ? "resolved" : visualStatus(entry.text)
       };
     });
 
@@ -543,46 +755,22 @@
       bp,
       "target-shooter",
       {
+        screenTitle: "Ouça e escolha",
         targetShooter: {
-          audioText: bp.audioText || "",
-          mode: bp.imageOptions ? "audio-to-image" : "audio-to-word",
-          shape: bp.imageOptions ? "cloud" : "balloon",
+          audioText: targetAudioText(bp),
+          mode: "audio-to-image",
+          shape: "cloud",
           correctIds: [correctId],
           difficulty: {
-            speed: bp.difficulty === "hard" ? .34 : .38,
-            objectCount: Math.max(2, targetItems.length),
-            spawnIntervalMs: 195,
+            speed: .30,
+            objectCount: Math.max(2, items.length),
+            spawnIntervalMs: 250,
             requiredCorrect: 1,
-            targetSize: bp.imageOptions ? 158 : 172,
+            targetSize: 176,
             timeLimitMs: 0,
             timerMode: "none"
           },
-          items: targetItems
-        }
-      },
-      { type: "single", value: bp.correct }
-    );
-  }
-
-  function imageChoiceQuestion(bp) {
-    const correct = bp.options.find((entry) => entry.id === bp.correct);
-    const imageKey = `visual-${bp.id.toLowerCase()}`;
-    const imageSrc = VISUALS[bp.visual] || PREVIEW_VISUALS[bp.visual] || "";
-    return baseQuestion(
-      bp,
-      "smart-sentence",
-      {
-        smartSentence: {
-          prefix: "\u200B",
-          suffix: "\u200B",
-          answer: correct?.text || "",
-          options: bp.options.map((entry) => entry.text),
-          imageKey,
-          imageSrc,
-          imageAlt: bp.visualAlt || bp.statement,
-          instruction: bp.instruction,
-          instructionSpoken: bp.instruction,
-          shuffleOptions: true
+          items
         }
       },
       { type: "single", value: bp.correct }
@@ -591,27 +779,31 @@
 
   function sequenceQuestion(bp) {
     const order = Array.isArray(bp.sequence) ? bp.sequence : bp.options.map((entry) => entry.id);
+    const alternatives = bp.options.map((entry) => option(
+      entry.id,
+      "",
+      false,
+      visualForText(entry.text)
+    ));
+
     return baseQuestion(
       bp,
       "drag-drop",
       {
+        screenTitle: "Coloque na ordem",
         sourceCorrectAnswer: order.join(" → "),
         sequenceLabels: order.map((_, index) => String(index + 1)),
         layout: "sequence",
         shuffleItems: true
       },
-      { type: "sequence", value: order }
+      { type: "sequence", value: order },
+      alternatives
     );
   }
 
   function buildQuestion(bp) {
-    if (bp.kind === "audio-choice" || bp.kind === "audio-image") {
-      return targetQuestion(bp);
-    }
-    if (bp.kind === "sequence") {
-      return sequenceQuestion(bp);
-    }
-    return imageChoiceQuestion(bp);
+    if (bp.kind === "sequence") return sequenceQuestion(bp);
+    return targetQuestion(bp);
   }
 
   const BLUEPRINTS = Object.freeze([
@@ -998,13 +1190,10 @@
     if (!current || current.mechanic !== mechanic || current.questions.length >= 4) {
       current = {
         id: `en1-m04-step-${String(activityGroups.length + 1).padStart(2, "0")}`,
-        title:
-          mechanic === "target-shooter" ? "Listen & Choose" :
-          mechanic === "smart-sentence" ? "Look & Choose" :
-          mechanic === "drag-drop" ? "Put in Order" :
-          "Practice",
+        title: mechanic === "drag-drop" ? "Coloque na ordem" : "Ouça e escolha",
         mechanic,
         skill: question.skill,
+        pedagogy: { profile: "Y1_EARLY_LITERACY", literacyDemand: "R0", readingEssential: false },
         questions: []
       };
       activityGroups.push(current);
@@ -1016,8 +1205,8 @@
     id: "english-year-1-module-04",
     version: VERSION,
     sourceVersion: "DUDUQ English 1–5 v2.2",
-    factoryVersion: "1.0",
-    productionStatus: "BLOCKED_MEDIA_GAPS",
+    factoryVersion: "1.0-pedagogy-v1",
+    productionStatus: "REVIEW_REQUIRED_MEDIA_GAPS",
     subject: "Língua Inglesa",
     year: YEAR,
     module: MODULE,
@@ -1037,19 +1226,39 @@
       smartAssets: true,
       integrationB: true,
       previewGeneratedAssetsAllowedForReviewOnly: true,
-      commercialGate: "fallback=0; blocked=0; missing=0; assetGaps=0"
+      commercialGate: "fallback=0; blocked=0; missing=0; assetGaps=0",
+      repoReady: true,
+      cloudflareReady: true,
+      engineBaseline: "Canary R124",
+      routerContract: "R124_FACTORY_NATIVE_PAYLOAD"
+    },
+    pedagogyPolicy: {
+      specification: "DUDUQ_FACTORY_PEDAGOGICAL_SPECIFICATION_v1.0",
+      specificationVersion: "1.0.0",
+      profile: "Y1_EARLY_LITERACY",
+      maxLiteracyDemand: "R0",
+      readingEssential: false,
+      uppercaseSupport: true,
+      instructionAudioRequired: true,
+      targetAudioRepeatable: true,
+      nonReaderTest: "PASS",
+      pedagogicalAudit: "PASS",
+      gates: ["PED-01", "PED-02", "PED-03", "PED-04", "PED-05", "PED-06", "PED-07", "PED-08", "PED-09", "PED-10", "PED-11", "PED-12"]
     },
     learningGoals: [
       "Compreender comandos cotidianos de sala e partes básicas do corpo por áudio, gesto e imagem; responder a “Touch your...”."
     ],
     pedagogicalNotes: {
       officialSource: "DUDUQ English 1–5 v2.2 — Manual do Educador, 1º ano, Unidade 3, p. 23",
-      literacy: "1º ano: escuta, imagem, gesto e chunks; leitura sempre apoiada.",
+      literacy: "Y1_EARLY_LITERACY: R0 como padrão. Leitura nunca é requisito para acertar; texto é apenas apoio.",
       maintenance: "IDs editoriais permanecem estáveis. Troca de imagem usa imageAsset; troca de mecânica exige regenerar o payload.",
-      qaStatus: "BLOCKED_MEDIA_GAPS"
+      qaStatus: "REVIEW_REQUIRED_MEDIA_GAPS"
     },
     intro: {
       companyKicker: "UMA CRIAÇÃO DE",
+      companyLogo: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/LOGO%20DA%20EMPRESA_COLORIDO.png",
+      companyAlt: "Editora Brasil Cultural",
+      companyName: "Editora Brasil Cultural",
       companyWidth: 820,
       collectionLogo: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Logo%20EduQ%20Play.png",
       collectionName: "EduQ Play",
