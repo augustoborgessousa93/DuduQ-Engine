@@ -1,0 +1,3171 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DuduQ — Drag & Drop 2.5.0</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Nunito:wght@600;700;800;900&display=swap');
+
+:root {
+  color-scheme: light;
+  --ink: #17375e;
+  --blue: #0868c9;
+  --blue-dark: #004b98;
+  --line: #bed4e7;
+  --soft-line: #d7e7f3;
+  --panel: rgba(248, 252, 255, .92);
+  --panel-strong: rgba(255,255,255,.97);
+  --cyan: #eefaff;
+  --cream: #fffaf0;
+  --success: #2bbb08;
+  --success-bg: rgba(235,250,232,.97);
+  --retry: #d3282f;
+  --retry-bg: rgba(255,237,240,.98);
+  --shadow: 0 8px 22px rgba(18, 64, 103, .13);
+  --depth: 0 5px 0 rgba(88, 130, 166, .22);
+  --radius: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+}
+
+html,
+body {
+  overflow: hidden;
+  background-color: transparent;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+body {
+  font-family:
+    Nunito,
+    "Arial Rounded MT Bold",
+    ui-rounded,
+    system-ui,
+    sans-serif;
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button {
+  font: inherit;
+}
+
+.app {
+  width: 100%;
+  height: 100dvh;
+  min-height: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  align-content: start;
+  gap: 8px;
+  padding:
+    clamp(7px, 1vh, 10px)
+    clamp(20px, 2.35vw, 32px)
+    clamp(7px, 1vh, 10px);
+  overflow: hidden;
+}
+
+
+/* ================================================================
+   DUDUQ CANONICAL HEADER
+   Mesma geometria visual das mecânicas homologadas.
+   ================================================================ */
+.duduq-engine-header {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 76px;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(380px, 580px)
+    minmax(0, 1fr);
+  align-items: center;
+  gap: 12px 18px;
+  margin-bottom: 0;
+  padding: 10px 16px;
+  border: 2px solid #d8e0e8;
+  border-radius: 24px;
+  background: rgba(255,255,255,.96);
+  box-shadow:
+    0 4px 0 #b8c5d6,
+    0 12px 24px rgba(31,65,99,.07),
+    inset 0 1px 0 #fff;
+}
+
+.duduq-engine-header-main {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.duduq-engine-header-mascot-slot {
+  width: 72px;
+  min-width: 72px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+
+.duduq-mascot {
+  position: relative;
+  flex: 0 0 auto;
+  width: 64px;
+  height: 64px;
+  margin: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.duduq-mascot-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform-origin: 50% 78%;
+}
+
+.duduq-mascot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 50%;
+  transform-origin: 50% 50%;
+}
+
+/* Os PNGs oficiais possuem grande margem transparente.
+   Esta é a mesma estratégia usada pelo shell homologado. */
+.duduq-mascot[data-state="idle"] img {
+  transform: scale(3.45);
+  object-position: 50% 52%;
+}
+
+.duduq-mascot[data-state="success"] img,
+.duduq-mascot[data-state="retry"] img {
+  transform: scale(3.3);
+  object-position: 50% 52%;
+}
+
+.duduq-mascot[data-state="idle"] .duduq-mascot-body {
+  animation: duduq-mascot-breathe 3.8s ease-in-out infinite;
+}
+
+@keyframes duduq-mascot-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  48% { transform: translateY(-2px) scale(1.018, 1.028); }
+  56% { transform: translateY(-2px) scale(1.014, 1.022); }
+}
+
+.duduq-mascot-fallback {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  font-size: 32px;
+}
+
+.duduq-engine-heading {
+  min-width: 0;
+}
+
+.duduq-engine-heading h1 {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #16375b;
+  font-family:
+    Fredoka,
+    Nunito,
+    "Arial Rounded MT Bold",
+    ui-rounded,
+    system-ui,
+    sans-serif;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  line-height: 1.12;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.duduq-progress-trail {
+  width: 100%;
+  max-width: 580px;
+  min-height: 52px;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+}
+
+.duduq-progress-track {
+  position: relative;
+  grid-column: 1;
+  height: 16px;
+  min-height: 16px;
+  max-height: 16px;
+  margin: 0 18px;
+  overflow: hidden;
+  border: 2px solid #afc0d3;
+  border-radius: 999px;
+  background: #f5f7fa;
+  box-shadow:
+    inset 0 2px 4px rgba(31,65,99,.13),
+    0 2px 0 rgba(184,197,214,.8);
+}
+
+.duduq-progress-fill {
+  position: relative;
+  width: var(--progress, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      180deg,
+      #43b3ff 0%,
+      #1592ff 100%
+    );
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.35);
+  transition: width 220ms ease;
+}
+
+.duduq-progress-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    115deg,
+    transparent 18%,
+    rgba(255,255,255,.10) 32%,
+    rgba(255,255,255,.42) 46%,
+    rgba(255,255,255,.16) 58%,
+    transparent 72%
+  );
+  background-size: 180% 100%;
+  animation: duduq-progress-shine 4.6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes duduq-progress-shine {
+  from { background-position: 140% 0; }
+  to { background-position: -40% 0; }
+}
+
+.duduq-progress-copy {
+  grid-column: 2;
+  min-width: max-content;
+  color: #16375b;
+  font-size: clamp(15px, 1.3vw, 18px);
+  line-height: 1;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.duduq-progress-copy span {
+  display: none;
+}
+
+.duduq-progress-copy strong {
+  display: block;
+  color: #1d2b53;
+  font-family:
+    Fredoka,
+    Nunito,
+    ui-rounded,
+    system-ui,
+    sans-serif;
+  font-size: clamp(13px, 1.55vw, 18px);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.duduq-engine-toolbar {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.duduq-engine-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 2px solid #afc0d3;
+  border-radius: 14px;
+  background: #fff;
+  color: #16375b;
+  box-shadow: 0 3px 0 #b8c5d6;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.duduq-engine-fullscreen-button {
+  min-width: 137px;
+}
+
+.duduq-engine-fullscreen-icon {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.duduq-engine-fullscreen-label {
+  white-space: nowrap;
+}
+
+.duduq-engine-button-quiet {
+  min-width: 101px;
+}
+
+.duduq-engine-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.duduq-engine-button:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #b8c5d6;
+}
+
+.duduq-engine-button:focus-visible,
+.audio-main:focus-visible,
+.item-main:focus-visible,
+.target-head:focus-visible,
+.return-item:focus-visible,
+.confirm:focus-visible {
+  outline: 4px solid rgba(52,146,232,.26);
+  outline-offset: 2px;
+}
+
+.panel {
+  min-height: 473px;
+  width: calc(100% - 28px);
+  height: auto;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows:
+    auto
+    auto;
+  align-content: start;
+  gap: 12px;
+  align-self: start;
+  padding: 10px 10px 16px;
+  border: 2px solid rgba(216,224,232,.96);
+  border-radius: 32px;
+  background: rgba(255,255,255,.82);
+  box-shadow:
+    0 7px 0 rgba(184,197,214,.88),
+    0 20px 38px rgba(55,99,140,.12),
+    inset 0 2px 0 rgba(255,255,255,.96);
+  overflow: hidden;
+}
+
+.instruction {
+  width: min(1108px, calc(100% - 20px));
+  min-height: 66px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 48px minmax(0,1fr) 48px;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 14px 10px;
+  border: 2px solid #c9dae8;
+  border-radius: 999px;
+  background: rgba(255,255,255,.97);
+  box-shadow: 0 5px 0 rgba(125,158,185,.19);
+}
+
+.instruction-text {
+  grid-column: 2;
+  margin: 0;
+  padding: 0;
+  color: #0e65bf;
+  font-family:
+    Fredoka,
+    Nunito,
+    ui-rounded,
+    system-ui,
+    sans-serif;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.16;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.audio-main {
+  grid-column: 3;
+  width: 48px;
+  height: 48px;
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  border: 2px solid #004d9f;
+  border-radius: 50%;
+  background:
+    linear-gradient(#1687dc,#0869bf);
+  color: #fff;
+  font-size: 23px;
+  cursor: pointer;
+  box-shadow:
+    0 4px 0 #00488f,
+    0 0 0 5px rgba(40,139,220,.12);
+}
+
+.audio-main[data-playing="true"] {
+  background:
+    linear-gradient(#71dc3f,#34bd13);
+  border-color: #279e0c;
+  box-shadow:
+    0 4px 0 #218b09,
+    0 0 0 6px rgba(69,201,31,.16);
+}
+
+
+.activity-stack {
+  min-height: 0;
+  width: 100%;
+  display: grid;
+  grid-template-rows:
+    auto
+    auto
+    auto
+    auto;
+  align-content: start;
+  justify-items: center;
+  gap: 12px;
+  overflow: visible;
+}
+
+.board {
+  min-height: 0;
+  width: min(1020px, 100%);
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+
+.target-grid {
+  --target-count: 3;
+  width: min(1020px, 100%);
+  height: clamp(174px, 25vh, 224px);
+  min-height: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns:
+    repeat(
+      var(--target-count),
+      minmax(0,1fr)
+    );
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(10px, 1.1vw, 14px);
+}
+
+.target-grid[data-count="1"] {
+  width: min(520px, 100%);
+}
+
+.target-grid[data-count="2"] {
+  width: min(780px, 100%);
+}
+
+.target-grid[data-count="4"] {
+  width: min(1120px, 100%);
+}
+
+.target-grid[data-layout="sequence"] {
+  height: clamp(132px, 18vh, 154px);
+}
+
+.target {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(0,1fr) 60px;
+  overflow: hidden;
+  border: 1.5px solid #a7d9e9;
+  border-radius: 24px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(247,254,255,.96),
+      rgba(239,251,253,.91)
+    );
+  box-shadow: 0 7px 18px rgba(48,105,140,.08);
+  transition:
+    border-color 130ms ease,
+    transform 130ms ease,
+    background 130ms ease;
+}
+
+.target:nth-child(even) {
+  border-color: #efd29b;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,252,244,.97),
+      rgba(255,248,229,.92)
+    );
+}
+
+.target[data-drag-over="true"],
+.target[data-selected-target="true"] {
+  border-color: #1684db;
+  box-shadow:
+    0 0 0 4px rgba(31,139,221,.14),
+    0 8px 20px rgba(40,103,147,.11);
+}
+
+.target[data-correct="true"] {
+  border-color: #42c419;
+  background: rgba(239,252,237,.97);
+}
+
+.target-label-badge {
+  position: absolute;
+  top: 7px;
+  right: 9px;
+  min-width: 34px;
+  height: 23px;
+  padding: 0 7px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #d0e0ec;
+  border-radius: 999px;
+  background: rgba(250,253,255,.95);
+  color: #59718a;
+  font-size: 12px;
+  font-weight: 900;
+  z-index: 3;
+}
+
+.target-head {
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  padding: 8px 14px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.target-media {
+  width: clamp(92px, 10.3vw, 138px);
+  height: clamp(92px, 10.3vw, 138px);
+  max-width: 60%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  flex: 0 1 auto;
+}
+
+.target-text {
+  flex: 0 0 auto;
+  color: #111;
+  font-size: clamp(17px, 1.6vw, 22px);
+  font-weight: 800;
+  text-align: center;
+}
+
+.target-grid[data-layout="sequence"] .target {
+  grid-template-rows: 48px minmax(68px,1fr);
+}
+
+.target-grid[data-layout="sequence"] .target-head {
+  padding: 4px 10px;
+}
+
+.target-grid[data-layout="sequence"] .target-text {
+  font-size: 19px;
+}
+
+.dropzone {
+  width: calc(100% - 22px);
+  height: 52px;
+  margin: 0 auto 8px;
+  padding: 3px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #c1d9e8;
+  border-radius: 999px;
+  color: #526b82;
+  background: rgba(249,253,255,.72);
+  font-size: 15px;
+  font-weight: 900;
+  overflow: visible;
+}
+
+.dropzone[data-filled="true"] {
+  border-color: transparent;
+  background: transparent;
+}
+
+.pool {
+  width: min(620px, calc(100% - 20px));
+  min-height: 96px;
+  margin: 0 auto;
+  padding: 4px 13px 8px;
+  display: grid;
+  grid-template-rows: 24px 62px;
+  align-items: center;
+  overflow: visible;
+  border-radius: 22px;
+  background: rgba(249,253,255,.94);
+  box-shadow: var(--shadow);
+  transition:
+    min-height 160ms ease,
+    width 160ms ease;
+}
+
+.pool[data-count="1"] {
+  width: min(220px, calc(100% - 20px));
+}
+
+.pool[data-count="2"] {
+  width: min(410px, calc(100% - 20px));
+}
+
+.pool[data-count="3"] {
+  width: min(600px, calc(100% - 20px));
+}
+
+.pool[data-empty="true"] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.pool-title {
+  margin: 0;
+  color: #3b5874;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.pool-items {
+  min-width: 0;
+  height: 62px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  overflow: visible;
+}
+
+.item-wrap {
+  position: relative;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.item-main {
+  position: relative;
+  width: 184px;
+  max-width: 100%;
+  height: 58px;
+  min-height: 58px;
+  padding: 5px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  overflow: hidden;
+  border: 1.5px solid #9bc6e9;
+  border-radius: 16px;
+  background: rgba(255,255,255,.98);
+  color: #17375e;
+  box-shadow: 0 5px 0 rgba(92,139,177,.22);
+  font-size: 19px;
+  font-weight: 900;
+  cursor: grab;
+  touch-action: none;
+}
+
+.item-media {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  max-width: 46%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.item-main[data-has-media="true"] {
+  height: 62px;
+  min-height: 62px;
+}
+
+.item-main:active {
+  cursor: grabbing;
+}
+
+.item-main[data-selected="true"] {
+  border-color: #087bd5;
+  box-shadow:
+    0 0 0 4px rgba(8,123,213,.13),
+    0 5px 0 rgba(44,113,166,.25);
+}
+
+.item-main[data-compact="true"] {
+  width: auto;
+  min-width: 66px;
+  max-width: 190px;
+}
+
+.item-speaker {
+  flex: 0 0 auto;
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #b9dcf5;
+  border-radius: 50%;
+  background: #eef8ff;
+  color: #0371cb;
+  font-size: 14px;
+}
+
+.item-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.placed {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placed .item-main {
+  width: auto;
+  min-width: 82px;
+  max-width: min(200px, 100%);
+  height: 52px;
+  min-height: 52px;
+  padding-right: 34px;
+}
+
+.placed .item-media {
+  width: 38px;
+  height: 38px;
+}
+
+.return-item {
+  position: absolute;
+  right: -5px;
+  top: -9px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #0877ce;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(24,75,116,.24);
+  z-index: 3;
+}
+
+.status {
+  width: min(430px, calc(100% - 24px));
+  min-height: 34px;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  color: #567087;
+  font-size: 14px;
+  line-height: 1.1;
+  font-weight: 900;
+  text-align: center;
+}
+
+.status[data-ready="true"] {
+  color: #47647d;
+}
+
+
+.action {
+  min-height: 60px;
+  display: grid;
+  place-items: center;
+}
+
+.confirm {
+  width: 220px;
+  height: 56px;
+  border: 2px solid #0054a7;
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      180deg,
+      #2aa0ee,
+      #0875d2
+    );
+  color: #fff;
+  font-size: 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow:
+    0 5px 0 #004e97,
+    0 10px 20px rgba(12,92,157,.16);
+}
+
+.confirm:disabled {
+  border-color: #c1d1de;
+  background: #eef3f7;
+  color: #708497;
+  cursor: not-allowed;
+  box-shadow: 0 4px 0 #c6d3dd;
+}
+
+.feedback {
+  width: min(840px, calc(100% - 36px));
+  min-height: 0;
+  max-height: 0;
+  margin: 0 auto;
+  overflow: hidden;
+  transition:
+    max-height 180ms ease,
+    min-height 180ms ease;
+}
+
+.feedback[data-state="success"],
+.feedback[data-state="retry"] {
+  min-height: 82px;
+  max-height: 94px;
+}
+
+.feedback-card {
+  min-height: 78px;
+  display: grid;
+  grid-template-columns: 72px minmax(0,1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 7px 18px 7px 10px;
+  border: 1.5px solid;
+  border-radius: 19px;
+  box-shadow: var(--shadow);
+}
+
+.feedback[data-state="success"] .feedback-card {
+  border-color: #49c825;
+  background: var(--success-bg);
+  color: #24662b;
+}
+
+.feedback[data-state="retry"] .feedback-card {
+  border-color: #ff7f86;
+  background: var(--retry-bg);
+  color: #ba2027;
+}
+
+.feedback-mascot-shell {
+  width: 64px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+}
+
+.feedback-mascot-shell .duduq-mascot {
+  width: 58px;
+  height: 58px;
+}
+
+.feedback-fallback {
+  width: 64px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  font-size: 38px;
+}
+
+.feedback-copy {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.feedback-copy strong {
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.feedback-copy span {
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.drag-ghost {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 170px;
+  height: 48px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .92;
+  transform:
+    translate(
+      calc(var(--x) - 50%),
+      calc(var(--y) - 50%)
+    )
+    rotate(-1.5deg);
+  border: 2px solid #087bd5;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 18px 36px rgba(16,72,120,.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #17375e;
+  font-weight: 900;
+}
+
+.live {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (min-width: 1600px) and (min-height: 850px) {
+  .app {
+    padding-left: 34px;
+    padding-right: 34px;
+  }
+
+  .target-grid {
+    width: min(1120px, 100%);
+    height: clamp(214px, 24vh, 250px);
+  }
+
+  .target-grid[data-count="2"] {
+    width: min(840px, 100%);
+  }
+
+  .target-media {
+    width: clamp(112px, 9vw, 154px);
+    height: clamp(112px, 9vw, 154px);
+  }
+
+  .pool {
+    width: min(680px, calc(100% - 20px));
+  }
+}
+
+@media (max-height: 720px) and (min-width: 900px) {
+  .app {
+    gap: 8px;
+    padding-top: 8px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 6px;
+  }
+
+  .duduq-engine-header {
+    min-height: 78px;
+    padding: 10px 16px;
+  }
+
+  .duduq-engine-header-mascot-slot {
+    width: 72px;
+    min-width: 72px;
+    height: 64px;
+  }
+
+  .panel {
+    gap: 12px;
+    padding: 10px 10px 16px;
+  }
+
+  .instruction {
+    min-height: 54px;
+  }
+
+  .instruction-text {
+    font-size: clamp(17px, 1.85vw, 23px);
+  }
+
+  .audio-main {
+    width: 48px;
+    height: 48px;
+  }
+
+  .target-grid {
+    height: clamp(164px, 25vh, 184px);
+  }
+
+  .target-grid[data-layout="sequence"] {
+    height: 126px;
+  }
+
+  .target-media {
+    width: clamp(82px, 8.5vw, 118px);
+    height: clamp(82px, 8.5vw, 118px);
+  }
+
+  .target {
+    grid-template-rows: minmax(0,1fr) 54px;
+  }
+
+  .dropzone {
+    height: 47px;
+    margin-bottom: 6px;
+  }
+
+  .pool {
+    min-height: 70px;
+    grid-template-rows: 18px 46px;
+    padding-top: 3px;
+    padding-bottom: 5px;
+  }
+
+  .pool-title {
+    line-height: 20px;
+  }
+
+  .pool-items {
+    height: 46px;
+  }
+
+  .item-main {
+    height: 44px;
+    min-height: 44px;
+  }
+
+  .item-media {
+    width: 36px;
+    height: 36px;
+  }
+
+  .placed .item-main {
+    height: 42px;
+    min-height: 42px;
+  }
+
+  .status {
+    min-height: 26px;
+    font-size: 13px;
+  }
+
+  .action {
+    min-height: 52px;
+  }
+
+  .confirm {
+    height: 50px;
+  }
+
+  .feedback[data-state="success"],
+  .feedback[data-state="retry"] {
+    min-height: 68px;
+    max-height: 76px;
+  }
+
+  .feedback-card {
+    min-height: 64px;
+  }
+}
+
+@media (max-width: 820px) {
+  html,
+  body {
+    overflow-y: auto;
+  }
+
+  .app {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .duduq-engine-header {
+    width: 100%;
+    grid-template-columns: 1fr auto;
+  }
+
+  .duduq-progress-trail {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .duduq-engine-fullscreen-label,
+  .duduq-engine-button .wide-label {
+    display: none;
+  }
+
+  .duduq-engine-fullscreen-button,
+  .duduq-engine-button-quiet {
+    min-width: 44px;
+  }
+
+  .panel {
+    overflow: visible;
+    min-height: 0;
+    width: 100%;
+    grid-template-rows: auto auto;
+  }
+
+  .board {
+    overflow: visible;
+  }
+
+  .target-grid,
+  .target-grid[data-count="2"],
+  .target-grid[data-count="3"],
+  .target-grid[data-count="4"],
+  .target-grid[data-layout="sequence"] {
+    width: min(560px, 100%);
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .target {
+    min-height: 150px;
+  }
+
+  .pool-items {
+    flex-wrap: wrap;
+    height: auto;
+  }
+
+  .pool {
+    width: min(560px, calc(100% - 12px));
+    height: auto;
+    grid-template-rows: auto auto;
+  }
+
+  .pool[data-count="1"] { width: min(220px, calc(100% - 12px)); }
+  .pool[data-count="2"] { width: min(410px, calc(100% - 12px)); }
+}
+
+
+@media (max-width: 1119px) {
+  .duduq-engine-header {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(300px, 460px)
+      auto;
+  }
+
+  .duduq-engine-header-mascot-slot {
+    width: 62px;
+    min-width: 62px;
+    height: 56px;
+  }
+
+  .duduq-mascot[data-state="idle"] {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (min-width: 900px) and (max-height: 720px) {
+  .duduq-engine-header {
+    min-height: 68px;
+    padding: 7px 12px 8px;
+    gap: 8px 12px;
+  }
+
+  .duduq-engine-header-mascot-slot {
+    width: 52px;
+    min-width: 52px;
+    height: 48px;
+  }
+
+  .duduq-mascot[data-state="idle"] {
+    width: 46px;
+    height: 46px;
+  }
+
+  .duduq-progress-trail {
+    min-height: 44px;
+  }
+
+  .duduq-engine-button {
+    min-height: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .001ms !important;
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+(function () {
+  "use strict";
+
+  const MECHANIC_ID = "drag-drop";
+  const RUNTIME_VERSION = "2.5.0";
+  const BRIDGE_VERSION = "1.0.0";
+
+  const state = {
+    requestId: "",
+    sessionId: "",
+    schema: null,
+    context: {},
+    options: {},
+    stageIndex: 0,
+    placements: {},
+    selectedItemId: null,
+    suppressClickUntil: 0,
+    feedback: "idle",
+    feedbackText: "",
+    fullscreen: false,
+    audio: null,
+    drag: null,
+    attempts: 0
+  };
+
+  const root =
+    document.getElementById("root");
+
+  function asString(value, fallback = "") {
+    if (
+      value === null ||
+      value === undefined
+    ) {
+      return fallback;
+    }
+
+    const text =
+      String(value).trim();
+
+    return text || fallback;
+  }
+
+  function post(type, payload) {
+    try {
+      window.parent.postMessage(
+        {
+          channel: "duduq-mechanic",
+          type,
+          mechanicId: MECHANIC_ID,
+          runtimeVersion:
+            RUNTIME_VERSION,
+          bridgeVersion:
+            BRIDGE_VERSION,
+          requestId:
+            state.requestId || undefined,
+          sessionId:
+            state.sessionId || undefined,
+          payload:
+            payload || null
+        },
+        "*"
+      );
+    } catch (_) {}
+  }
+
+  function postReady() {
+    post(
+      "duduq:mechanic:ready",
+      {
+        runtimeVersion:
+          RUNTIME_VERSION
+      }
+    );
+
+    try {
+      window.parent.postMessage(
+        {
+          type:
+            "DUDUQ_MECHANIC_READY",
+          mechanicId:
+            MECHANIC_ID,
+          runtimeVersion:
+            RUNTIME_VERSION
+        },
+        "*"
+      );
+    } catch (_) {}
+  }
+
+  function asset(key) {
+    if (!key) return "";
+
+    return (
+      state.schema?.assets?.[key] ||
+      ""
+    );
+  }
+
+  function systemAsset(key) {
+    return (
+      state.schema
+        ?.systemAssets
+        ?.[key] ||
+      ""
+    );
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function shuffle(items) {
+    const copy = items.slice();
+
+    for (
+      let index = copy.length - 1;
+      index > 0;
+      index -= 1
+    ) {
+      const other =
+        Math.floor(
+          Math.random() *
+          (index + 1)
+        );
+
+      [
+        copy[index],
+        copy[other]
+      ] = [
+        copy[other],
+        copy[index]
+      ];
+    }
+
+    return copy;
+  }
+
+  function stage() {
+    return (
+      state.schema
+        ?.stages
+        ?.[state.stageIndex] ||
+      null
+    );
+  }
+
+  function items() {
+    return (
+      stage()
+        ?.payload
+        ?.items ||
+      []
+    );
+  }
+
+  function targets() {
+    return (
+      stage()
+        ?.payload
+        ?.targets ||
+      []
+    );
+  }
+
+  function behavior() {
+    return (
+      stage()
+        ?.payload
+        ?.behavior ||
+      {}
+    );
+  }
+
+  function resetStage() {
+    const current =
+      stage();
+
+    state.placements = {};
+    state.selectedItemId = null;
+    state.feedback = "idle";
+    state.feedbackText = "";
+    state.attempts = 0;
+
+    for (
+      const item
+      of current?.payload?.items || []
+    ) {
+      state.placements[item.id] =
+        null;
+    }
+
+    render();
+    scheduleInstruction();
+  }
+
+  function restartLesson() {
+    state.stageIndex = 0;
+    state._itemOrder = null;
+    state._targetOrder = null;
+    resetStage();
+  }
+
+  function findItem(itemId) {
+    return (
+      items().find(
+        function (item) {
+          return item.id === itemId;
+        }
+      ) || null
+    );
+  }
+
+  function findTarget(targetId) {
+    return (
+      targets().find(
+        function (target) {
+          return target.id === targetId;
+        }
+      ) || null
+    );
+  }
+
+  function occupants(targetId) {
+    return items().filter(
+      function (item) {
+        return (
+          state.placements[
+            item.id
+          ] === targetId
+        );
+      }
+    );
+  }
+
+  function canPlace(
+    itemId,
+    targetId
+  ) {
+    const target =
+      findTarget(targetId);
+
+    if (!target) return false;
+
+    const current =
+      state.placements[itemId];
+
+    const occupied =
+      occupants(targetId)
+        .filter(
+          function (item) {
+            return (
+              item.id !== itemId
+            );
+          }
+        );
+
+    return (
+      current === targetId ||
+      occupied.length <
+        Number(
+          target.capacity || 1
+        )
+    );
+  }
+
+  function clearFeedbackForInteraction() {
+    if (
+      state.feedback === "retry"
+    ) {
+      state.feedback = "idle";
+      state.feedbackText = "";
+
+      const feedback =
+        document.querySelector(
+          ".feedback"
+        );
+
+      if (feedback) {
+        feedback.dataset.state =
+          "idle";
+        feedback.innerHTML = "";
+      }
+    }
+  }
+
+  function placeItem(
+    itemId,
+    targetId
+  ) {
+    if (
+      !findItem(itemId) ||
+      !findTarget(targetId)
+    ) {
+      return;
+    }
+
+    clearFeedbackForInteraction();
+
+    const target =
+      findTarget(targetId);
+
+    const capacity =
+      Number(
+        target.capacity || 1
+      );
+
+    const existing =
+      occupants(targetId)
+        .filter(
+          function (item) {
+            return (
+              item.id !== itemId
+            );
+          }
+        );
+
+    if (
+      capacity === 1 &&
+      existing.length
+    ) {
+      state.placements[
+        existing[0].id
+      ] = null;
+    } else if (
+      existing.length >=
+      capacity
+    ) {
+      announce(
+        "Este destino já está completo."
+      );
+      return;
+    }
+
+    state.placements[
+      itemId
+    ] = targetId;
+
+    state.selectedItemId =
+      null;
+
+    playEffect("soundClick");
+    render();
+  }
+
+  function returnToPool(itemId) {
+    if (!findItem(itemId)) return;
+
+    clearFeedbackForInteraction();
+
+    state.placements[
+      itemId
+    ] = null;
+
+    if (
+      state.selectedItemId ===
+      itemId
+    ) {
+      state.selectedItemId =
+        null;
+    }
+
+    playEffect("soundClick");
+    render();
+  }
+
+  function allPlaced() {
+    return items().every(
+      function (item) {
+        return Boolean(
+          state.placements[
+            item.id
+          ]
+        );
+      }
+    );
+  }
+
+  function isCorrect() {
+    return items().every(
+      function (item) {
+        return (
+          state.placements[
+            item.id
+          ] === item.targetId
+        );
+      }
+    );
+  }
+
+  function instructionAudio() {
+    return (
+      stage()
+        ?.instructionAudio ||
+      {
+        text:
+          stage()?.instruction || "",
+        locale: "pt-BR",
+        src: ""
+      }
+    );
+  }
+
+  function stopAudio() {
+    if (
+      state.audio &&
+      typeof state.audio.pause ===
+        "function"
+    ) {
+      try {
+        state.audio.pause();
+        state.audio.currentTime = 0;
+      } catch (_) {}
+    }
+
+    state.audio = null;
+
+    try {
+      speechSynthesis?.cancel?.();
+    } catch (_) {}
+
+    const button =
+      document.querySelector(
+        ".audio-main"
+      );
+
+    if (button) {
+      button.dataset.playing =
+        "false";
+    }
+  }
+
+  function playVoice(
+    text,
+    locale,
+    src
+  ) {
+    const safeText =
+      asString(text);
+
+    const safeSrc =
+      asString(src);
+
+    stopAudio();
+
+    const button =
+      document.querySelector(
+        ".audio-main"
+      );
+
+    if (button) {
+      button.dataset.playing =
+        "true";
+    }
+
+    if (safeSrc) {
+      try {
+        const audio =
+          new Audio(safeSrc);
+
+        state.audio = audio;
+        audio.preload = "auto";
+
+        const finish =
+          function () {
+            if (
+              state.audio ===
+              audio
+            ) {
+              state.audio = null;
+            }
+
+            if (button) {
+              button.dataset.playing =
+                "false";
+            }
+          };
+
+        audio.onended = finish;
+        audio.onerror =
+          function () {
+            finish();
+
+            if (safeText) {
+              playSpeech(
+                safeText,
+                locale
+              );
+            }
+          };
+
+        const playback =
+          audio.play();
+
+        if (
+          playback &&
+          typeof playback.catch ===
+            "function"
+        ) {
+          playback.catch(
+            function () {
+              finish();
+
+              if (safeText) {
+                playSpeech(
+                  safeText,
+                  locale
+                );
+              }
+            }
+          );
+        }
+
+        return;
+      } catch (_) {}
+    }
+
+    if (safeText) {
+      playSpeech(
+        safeText,
+        locale
+      );
+    }
+  }
+
+  function playSpeech(
+    text,
+    locale
+  ) {
+    const safeText =
+      asString(text);
+
+    if (!safeText) {
+      return;
+    }
+
+    try {
+      if (
+        "speechSynthesis" in window &&
+        typeof SpeechSynthesisUtterance !==
+          "undefined"
+      ) {
+        const utterance =
+          new SpeechSynthesisUtterance(
+            safeText
+          );
+
+        utterance.lang =
+          normalizeSpeechLocale(
+            locale
+          );
+
+        utterance.rate = .92;
+        utterance.pitch = 1;
+
+        utterance.onend =
+          function () {
+            const button =
+              document.querySelector(
+                ".audio-main"
+              );
+
+            if (button) {
+              button.dataset.playing =
+                "false";
+            }
+          };
+
+        utterance.onerror =
+          utterance.onend;
+
+        speechSynthesis
+          .speak(utterance);
+      }
+    } catch (_) {}
+  }
+
+  function normalizeSpeechLocale(
+    value
+  ) {
+    const raw =
+      asString(
+        value,
+        "en-US"
+      );
+
+    if (
+      raw.toLowerCase() === "en"
+    ) {
+      return "en-US";
+    }
+
+    if (
+      raw.toLowerCase() === "pt"
+    ) {
+      return "pt-BR";
+    }
+
+    return raw;
+  }
+
+  function playInstruction() {
+    const audio =
+      instructionAudio();
+
+    playVoice(
+      audio.text ||
+      stage()?.instruction,
+      audio.locale ||
+      "pt-BR",
+      audio.src
+    );
+  }
+
+  function playItem(item) {
+    if (!item) return;
+
+    playVoice(
+      item.spokenText ||
+      item.label ||
+      item.alt ||
+      "",
+      item.speechLocale ||
+      "en-US",
+      item.audioSrc || ""
+    );
+  }
+
+  function playTarget(target) {
+    if (
+      !target ||
+      !(
+        target.spokenText ||
+        target.audioSrc
+      )
+    ) {
+      return;
+    }
+
+    playVoice(
+      target.spokenText || "",
+      target.speechLocale ||
+      "en-US",
+      target.audioSrc || ""
+    );
+  }
+
+  function playEffect(name) {
+    const src =
+      systemAsset(name);
+
+    if (!src) return;
+
+    try {
+      const audio =
+        new Audio(src);
+
+      audio.volume =
+        name === "soundClick"
+          ? .30
+          : .55;
+
+      audio.play()
+        ?.catch?.(
+          function () {}
+        );
+    } catch (_) {}
+  }
+
+  function scheduleInstruction() {
+    const started =
+      Date.now();
+
+    function attempt() {
+      let locked = false;
+
+      try {
+        locked =
+          Boolean(
+            window.parent
+              ?.document
+              ?.documentElement
+              ?.hasAttribute(
+                "data-duduq-initial-speech-gate"
+              )
+          );
+      } catch (_) {}
+
+      if (
+        locked &&
+        Date.now() - started <
+          6000
+      ) {
+        setTimeout(
+          attempt,
+          180
+        );
+
+        return;
+      }
+
+      setTimeout(
+        playInstruction,
+        260
+      );
+    }
+
+    setTimeout(
+      attempt,
+      180
+    );
+  }
+
+  function announce(text) {
+    const live =
+      document.getElementById(
+        "live"
+      );
+
+    if (!live) return;
+
+    live.textContent = "";
+
+    requestAnimationFrame(
+      function () {
+        live.textContent =
+          asString(text);
+      }
+    );
+  }
+
+  function progressData() {
+    const total =
+      Number(
+        state.context
+          ?.totalSteps ||
+        1
+      );
+
+    const index =
+      Number(
+        state.context
+          ?.stepIndex ||
+        0
+      );
+
+    return {
+      total:
+        Math.max(1, total),
+      current:
+        Math.min(
+          Math.max(
+            index + 1,
+            1
+          ),
+          Math.max(1, total)
+        )
+    };
+  }
+
+  function imageMarkup(
+    src,
+    alt,
+    className
+  ) {
+    if (!src) return "";
+
+    return (
+      `<img class="${className}" ` +
+      `src="${escapeHtml(src)}" ` +
+      `alt="${escapeHtml(alt || "")}">`
+    );
+  }
+
+  function itemMarkup(
+    item,
+    placed
+  ) {
+    const selected =
+      state.selectedItemId ===
+      item.id;
+
+    const hasAudio =
+      Boolean(
+        item.spokenText ||
+        item.audioSrc
+      );
+
+    const label =
+      asString(item.label);
+
+    const media =
+      item.imageAssetKey
+        ? imageMarkup(
+            asset(
+              item.imageAssetKey
+            ),
+            item.alt ||
+            label,
+            "item-media"
+          )
+        : "";
+
+    return (
+      `<div class="${placed ? "placed" : "item-wrap"}" ` +
+      `data-item-wrap="${escapeHtml(item.id)}">` +
+        `<button class="item-main" ` +
+          `type="button" ` +
+          `data-item="${escapeHtml(item.id)}" ` +
+          `data-selected="${selected}" ` +
+          `data-has-media="${Boolean(media)}" ` +
+          `data-compact="${!label}" ` +
+          `aria-pressed="${selected}" ` +
+          `aria-label="${escapeHtml(
+            item.audioDescription ||
+            label ||
+            item.alt ||
+            "Item de áudio"
+          )}">` +
+          media +
+          (
+            hasAudio
+              ? `<span class="item-speaker" aria-hidden="true">🔊</span>`
+              : ""
+          ) +
+          (
+            label
+              ? `<span class="item-label">${escapeHtml(label)}</span>`
+              : ""
+          ) +
+        `</button>` +
+        (
+          placed
+            ? `<button class="return-item" ` +
+              `type="button" ` +
+              `data-return="${escapeHtml(item.id)}" ` +
+              `aria-label="Voltar este item para as opções">↩</button>`
+            : ""
+        ) +
+      `</div>`
+    );
+  }
+
+  function targetMarkup(
+    target
+  ) {
+    const inside =
+      occupants(target.id);
+
+    const capacity =
+      Number(
+        target.capacity || 1
+      );
+
+    const image =
+      target.imageAssetKey
+        ? imageMarkup(
+            asset(
+              target.imageAssetKey
+            ),
+            target.alt ||
+            target.label ||
+            "",
+            "target-media"
+          )
+        : "";
+
+    const label =
+      asString(
+        target.label
+      );
+
+    const showTextLabel =
+      Boolean(label) &&
+      (
+        !image ||
+        target.showLabel === true
+      );
+
+    return (
+      `<section class="target" ` +
+        `data-target="${escapeHtml(target.id)}" ` +
+        `data-drag-over="false" ` +
+        `data-has-media="${Boolean(image)}" ` +
+        `data-correct="${state.feedback === "success"}">` +
+        `<span class="target-label-badge">${inside.length}/${capacity}</span>` +
+        `<button class="target-head" ` +
+          `type="button" ` +
+          `data-target-action="${escapeHtml(target.id)}" ` +
+          `aria-label="${escapeHtml(
+            label ||
+            target.alt ||
+            target.id
+          )}">` +
+          image +
+          (
+            showTextLabel
+              ? `<span class="target-text">${escapeHtml(label)}</span>`
+              : ""
+          ) +
+        `</button>` +
+        `<div class="dropzone" ` +
+          `data-dropzone="${escapeHtml(target.id)}" ` +
+          `data-filled="${inside.length > 0}">` +
+          (
+            inside.length
+              ? inside
+                  .map(
+                    function (item) {
+                      return itemMarkup(
+                        item,
+                        true
+                      );
+                    }
+                  )
+                  .join("")
+              : `<span>Solte aqui</span>`
+          ) +
+        `</div>` +
+      `</section>`
+    );
+  }
+
+  function render() {
+    const current =
+      stage();
+
+    if (!current) {
+      root.innerHTML =
+        `<div style="padding:30px;font-family:system-ui">Atividade indisponível.</div>`;
+      return;
+    }
+
+    const currentItems =
+      items();
+
+    const currentTargets =
+      targets();
+
+    const currentBehavior =
+      behavior();
+
+    const orderedItems =
+      currentBehavior
+        .shuffleItems &&
+      !state._itemOrder
+        ? shuffle(currentItems)
+        : state._itemOrder ||
+          currentItems;
+
+    if (!state._itemOrder) {
+      state._itemOrder =
+        orderedItems;
+    }
+
+    const orderedTargets =
+      currentBehavior
+        .shuffleTargets &&
+      !state._targetOrder
+        ? shuffle(
+            currentTargets
+          )
+        : state._targetOrder ||
+          currentTargets;
+
+    if (!state._targetOrder) {
+      state._targetOrder =
+        orderedTargets;
+    }
+
+    const unplaced =
+      orderedItems.filter(
+        function (item) {
+          return (
+            state.placements[
+              item.id
+            ] === null
+          );
+        }
+      );
+
+    const placed =
+      allPlaced();
+
+    const progress =
+      progressData();
+
+    const progressPercent =
+      (
+        progress.current /
+        progress.total
+      ) * 100;
+
+    const idleMascot =
+      systemAsset(
+        "mascotIdle"
+      );
+
+    const title =
+      asString(
+        state.schema?.title,
+        current.title ||
+        "Drag & Drop"
+      );
+
+    const layout =
+      asString(
+        currentBehavior.layout,
+        "grid"
+      );
+
+    const poolMarkup =
+      `<section class="pool" id="pool" ` +
+        `data-count="${unplaced.length}" ` +
+        `data-empty="${unplaced.length === 0}" ` +
+        `aria-hidden="${unplaced.length === 0}">` +
+        `<p class="pool-title">Opções</p>` +
+        `<div class="pool-items">` +
+          unplaced
+            .map(
+              function (item) {
+                return itemMarkup(
+                  item,
+                  false
+                );
+              }
+            )
+            .join("") +
+        `</div>` +
+      `</section>`;
+
+    root.innerHTML =
+      `<main class="app duduq-engine-root" data-fullscreen="${state.fullscreen}">` +
+        `<header class="duduq-engine-header">` +
+          `<div class="duduq-engine-header-main">` +
+            `<div class="duduq-engine-header-mascot-slot">` +
+              (
+                idleMascot
+                  ? (
+                      `<figure class="duduq-mascot" data-state="idle" data-size="idle">` +
+                        `<div class="duduq-mascot-body">` +
+                          `<img src="${escapeHtml(idleMascot)}" alt="Mascote DuduQ">` +
+                        `</div>` +
+                      `</figure>`
+                    )
+                  : `<span class="duduq-mascot-fallback" aria-hidden="true">🤖</span>`
+              ) +
+            `</div>` +
+            `<div class="duduq-engine-heading">` +
+              `<h1>${escapeHtml(title)}</h1>` +
+            `</div>` +
+          `</div>` +
+
+          `<div class="duduq-progress-trail">` +
+            `<div class="duduq-progress-track" aria-hidden="true">` +
+              `<div class="duduq-progress-fill" style="--progress:${progressPercent}%"></div>` +
+            `</div>` +
+            `<div class="duduq-progress-copy">` +
+              `<span>Progresso</span>` +
+              `<strong>Etapa ${progress.current} de ${progress.total}</strong>` +
+            `</div>` +
+          `</div>` +
+
+          `<div class="duduq-engine-toolbar">` +
+            `<button class="duduq-engine-button duduq-engine-button-secondary duduq-engine-fullscreen-button" type="button" id="fullscreenButton">` +
+              `<span class="duduq-engine-fullscreen-icon" aria-hidden="true">${state.fullscreen ? "🗗" : "⛶"}</span>` +
+              `<span class="duduq-engine-fullscreen-label">${state.fullscreen ? "SAIR" : "TELA CHEIA"}</span>` +
+            `</button>` +
+            `<button class="duduq-engine-button duduq-engine-button-secondary duduq-engine-button-quiet" type="button" id="restartButton">REINICIAR</button>` +
+          `</div>` +
+        `</header>` +
+
+        `<section class="panel">` +
+          `<div class="instruction">` +
+            `<p class="instruction-text">${escapeHtml(current.instruction)}</p>` +
+            `<button class="audio-main" id="instructionAudio" type="button" data-playing="false" aria-label="Ouvir enunciado">🔊</button>` +
+          `</div>` +
+
+          `<div class="activity-stack">` +
+            `<div class="board">` +
+              `<div class="target-grid" ` +
+                `data-count="${currentTargets.length}" ` +
+                `data-layout="${escapeHtml(layout)}" ` +
+                `style="--target-count:${Math.max(1,currentTargets.length)}">` +
+                orderedTargets
+                  .map(targetMarkup)
+                  .join("") +
+              `</div>` +
+            `</div>` +
+
+            poolMarkup +
+
+            `<div class="status" data-ready="${placed}">` +
+              (
+                placed
+                  ? "✓ Pronto para confirmar."
+                  : "Posicione todas as opções."
+              ) +
+            `</div>` +
+
+            `<div class="action">` +
+              `<button class="confirm" id="confirmButton" type="button" ${placed ? "" : "disabled"}>CONFIRMAR</button>` +
+            `</div>` +
+          `</div>` +
+        `</section>` +
+
+        `<section class="feedback" data-state="${state.feedback}" id="feedback">` +
+          feedbackMarkup() +
+        `</section>` +
+
+        `<div class="live" id="live" aria-live="polite" aria-atomic="true"></div>` +
+      `</main>`;
+
+    bind();
+  }
+
+  function feedbackMarkup() {
+    if (
+      state.feedback !== "success" &&
+      state.feedback !== "retry"
+    ) {
+      return "";
+    }
+
+    const success =
+      state.feedback ===
+      "success";
+
+    const mascot =
+      systemAsset(
+        success
+          ? "mascotCorrect"
+          : "mascotError"
+      );
+
+    return (
+      `<div class="feedback-card" role="status">` +
+        (
+          mascot
+            ? (
+                `<div class="feedback-mascot-shell">` +
+                  `<figure class="duduq-mascot" data-state="${success ? "success" : "retry"}" data-size="feedback">` +
+                    `<div class="duduq-mascot-body">` +
+                      `<img src="${escapeHtml(mascot)}" alt="">` +
+                    `</div>` +
+                  `</figure>` +
+                `</div>`
+              )
+            : `<span class="feedback-fallback" aria-hidden="true">${success ? "🤖✨" : "🤖"}</span>`
+        ) +
+        `<div class="feedback-copy">` +
+          `<strong>${success ? "Correto!" : "Tente novamente"}</strong>` +
+          `<span>${escapeHtml(state.feedbackText)}</span>` +
+        `</div>` +
+      `</div>`
+    );
+  }
+
+  function bind() {
+    document
+      .getElementById(
+        "instructionAudio"
+      )
+      ?.addEventListener(
+        "click",
+        playInstruction
+      );
+
+    document
+      .getElementById(
+        "restartButton"
+      )
+      ?.addEventListener(
+        "click",
+        restartLesson
+      );
+
+    document
+      .getElementById(
+        "fullscreenButton"
+      )
+      ?.addEventListener(
+        "click",
+        function () {
+          window.parent
+            .postMessage(
+              {
+                type:
+                  "DUDUQ_FULLSCREEN_TOGGLE"
+              },
+              "*"
+            );
+        }
+      );
+
+    document
+      .getElementById(
+        "confirmButton"
+      )
+      ?.addEventListener(
+        "click",
+        submit
+      );
+
+    document
+      .querySelectorAll(
+        "[data-item]"
+      )
+      .forEach(
+        function (button) {
+          button.addEventListener(
+            "click",
+            itemClick
+          );
+
+          button.addEventListener(
+            "pointerdown",
+            pointerDown
+          );
+        }
+      );
+
+    document
+      .querySelectorAll(
+        "[data-return]"
+      )
+      .forEach(
+        function (button) {
+          button.addEventListener(
+            "click",
+            function (event) {
+              event.stopPropagation();
+
+              returnToPool(
+                button.dataset.return
+              );
+            }
+          );
+        }
+      );
+
+    document
+      .querySelectorAll(
+        "[data-target-action]"
+      )
+      .forEach(
+        function (button) {
+          button.addEventListener(
+            "click",
+            function () {
+              const targetId =
+                button.dataset
+                  .targetAction;
+
+              if (
+                state.selectedItemId
+              ) {
+                placeItem(
+                  state.selectedItemId,
+                  targetId
+                );
+              } else {
+                playTarget(
+                  findTarget(
+                    targetId
+                  )
+                );
+              }
+            }
+          );
+        }
+      );
+
+    document
+      .getElementById("pool")
+      ?.addEventListener(
+        "click",
+        function (event) {
+          if (
+            event.target.closest(
+              "[data-item]"
+            )
+          ) {
+            return;
+          }
+
+          if (
+            state.selectedItemId
+          ) {
+            returnToPool(
+              state.selectedItemId
+            );
+          }
+        }
+      );
+  }
+
+  function itemClick(event) {
+    if (
+      Date.now() <
+      state.suppressClickUntil
+    ) {
+      event.preventDefault();
+      return;
+    }
+
+    const itemId =
+      event.currentTarget
+        .dataset.item;
+
+    const item =
+      findItem(itemId);
+
+    clearFeedbackForInteraction();
+    playItem(item);
+
+    state.selectedItemId =
+      state.selectedItemId ===
+      itemId
+        ? null
+        : itemId;
+
+    render();
+
+    announce(
+      state.selectedItemId
+        ? "Item selecionado. Escolha um destino."
+        : "Seleção cancelada."
+    );
+  }
+
+  function pointerDown(event) {
+    if (
+      event.button !== 0 &&
+      event.pointerType === "mouse"
+    ) {
+      return;
+    }
+
+    const itemId =
+      event.currentTarget
+        .dataset.item;
+
+    const item =
+      findItem(itemId);
+
+    if (!item) return;
+
+    state.drag = {
+      itemId,
+      startX:
+        event.clientX,
+      startY:
+        event.clientY,
+      x:
+        event.clientX,
+      y:
+        event.clientY,
+      active: false,
+      pointerId:
+        event.pointerId,
+      ghost: null
+    };
+
+    window.addEventListener(
+      "pointermove",
+      pointerMove,
+      {
+        passive: false
+      }
+    );
+
+    window.addEventListener(
+      "pointerup",
+      pointerUp,
+      {
+        once: true
+      }
+    );
+
+    window.addEventListener(
+      "pointercancel",
+      pointerCancel,
+      {
+        once: true
+      }
+    );
+  }
+
+  function pointerMove(event) {
+    const drag =
+      state.drag;
+
+    if (
+      !drag ||
+      event.pointerId !==
+        drag.pointerId
+    ) {
+      return;
+    }
+
+    const distance =
+      Math.hypot(
+        event.clientX -
+          drag.startX,
+        event.clientY -
+          drag.startY
+      );
+
+    if (
+      !drag.active &&
+      distance < 6
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (!drag.active) {
+      drag.active = true;
+
+      clearFeedbackForInteraction();
+
+      const item =
+        findItem(
+          drag.itemId
+        );
+
+      const ghost =
+        document.createElement(
+          "div"
+        );
+
+      ghost.className =
+        "drag-ghost";
+
+      ghost.innerHTML =
+        `${
+          item?.spokenText ||
+          item?.audioSrc
+            ? `<span class="item-speaker">🔊</span>`
+            : ""
+        }` +
+        `${
+          item?.label
+            ? `<span>${escapeHtml(item.label)}</span>`
+            : ""
+        }`;
+
+      document.body
+        .appendChild(
+          ghost
+        );
+
+      drag.ghost =
+        ghost;
+    }
+
+    drag.x =
+      event.clientX;
+
+    drag.y =
+      event.clientY;
+
+    drag.ghost
+      ?.style
+      .setProperty(
+        "--x",
+        `${drag.x}px`
+      );
+
+    drag.ghost
+      ?.style
+      .setProperty(
+        "--y",
+        `${drag.y}px`
+      );
+
+    document
+      .querySelectorAll(
+        ".target"
+      )
+      .forEach(
+        function (target) {
+          target.dataset.dragOver =
+            "false";
+        }
+      );
+
+    const element =
+      document.elementFromPoint(
+        event.clientX,
+        event.clientY
+      );
+
+    const target =
+      element?.closest?.(
+        "[data-target]"
+      );
+
+    if (
+      target &&
+      canPlace(
+        drag.itemId,
+        target.dataset.target
+      )
+    ) {
+      target.dataset.dragOver =
+        "true";
+    }
+  }
+
+  function finishPointer() {
+    window.removeEventListener(
+      "pointermove",
+      pointerMove
+    );
+
+    state.drag?.ghost?.remove?.();
+    state.drag = null;
+
+    document
+      .querySelectorAll(
+        ".target"
+      )
+      .forEach(
+        function (target) {
+          target.dataset.dragOver =
+            "false";
+        }
+      );
+  }
+
+  function pointerUp(event) {
+    const drag =
+      state.drag;
+
+    if (
+      !drag ||
+      event.pointerId !==
+        drag.pointerId
+    ) {
+      finishPointer();
+      return;
+    }
+
+    if (!drag.active) {
+      finishPointer();
+      return;
+    }
+
+    event.preventDefault();
+
+    state.suppressClickUntil =
+      Date.now() + 280;
+
+    const element =
+      document.elementFromPoint(
+        event.clientX,
+        event.clientY
+      );
+
+    const target =
+      element?.closest?.(
+        "[data-target]"
+      );
+
+    const pool =
+      element?.closest?.(
+        "#pool"
+      );
+
+    const itemId =
+      drag.itemId;
+
+    finishPointer();
+
+    if (target) {
+      placeItem(
+        itemId,
+        target.dataset.target
+      );
+
+      return;
+    }
+
+    if (pool) {
+      returnToPool(
+        itemId
+      );
+
+      return;
+    }
+
+    announce(
+      "Solte o item dentro de um destino ou na caixa de opções."
+    );
+  }
+
+  function pointerCancel() {
+    finishPointer();
+  }
+
+  function submit() {
+    if (!allPlaced()) {
+      return;
+    }
+
+    state.attempts += 1;
+
+    const current =
+      stage();
+
+    const answer = {
+      placements: {
+        ...state.placements
+      }
+    };
+
+    if (isCorrect()) {
+      state.feedback =
+        "success";
+
+      state.feedbackText =
+        current.feedback
+          ?.success ||
+        "Muito bem!";
+
+      playEffect(
+        "soundCorrect"
+      );
+
+      render();
+
+      post(
+        "duduq:mechanic:result",
+        {
+          stepId:
+            current.id,
+          stageIndex:
+            state.stageIndex,
+          isCorrect: true,
+          attempts:
+            state.attempts,
+          answer
+        }
+      );
+
+      setTimeout(
+        function () {
+          if (
+            state.stageIndex + 1 <
+            state.schema.stages.length
+          ) {
+            state.stageIndex += 1;
+            state._itemOrder = null;
+            state._targetOrder = null;
+            resetStage();
+
+            post(
+              "duduq:mechanic:step",
+              {
+                stageIndex:
+                  state.stageIndex,
+                stageId:
+                  stage()?.id
+              }
+            );
+
+            return;
+          }
+
+          post(
+            "duduq:mechanic:complete",
+            {
+              lesson: {
+                id:
+                  state.schema
+                    .lessonId ||
+                  state.schema.id,
+                version:
+                  state.schema.version,
+                totalStages:
+                  state.schema
+                    .stages.length
+              }
+            }
+          );
+        },
+        Math.max(
+          650,
+          Number(
+            state.schema
+              ?.feedbackPolicy
+              ?.advanceAfterCorrectMs
+          ) || 1050
+        )
+      );
+
+      return;
+    }
+
+    state.feedback =
+      "retry";
+
+    state.feedbackText =
+      current.feedback
+        ?.retry ||
+      "Revise os itens e tente novamente.";
+
+    playEffect(
+      "soundError"
+    );
+
+    const currentBehavior =
+      behavior();
+
+    const wrong =
+      items().filter(
+        function (item) {
+          return (
+            state.placements[
+              item.id
+            ] !==
+            item.targetId
+          );
+        }
+      );
+
+    if (
+      currentBehavior
+        .returnIncorrectItemsOnRetry !==
+      false
+    ) {
+      for (
+        const item
+        of wrong
+      ) {
+        state.placements[
+          item.id
+        ] = null;
+      }
+    }
+
+    render();
+
+    post(
+      "duduq:mechanic:result",
+      {
+        stepId:
+          current.id,
+        stageIndex:
+          state.stageIndex,
+        isCorrect: false,
+        attempts:
+          state.attempts,
+        answer,
+        incorrectItemIds:
+          wrong.map(
+            function (item) {
+              return item.id;
+            }
+          )
+      }
+    );
+  }
+
+  function acceptSchema(data) {
+    const schema =
+      data.schema;
+
+    if (
+      !schema ||
+      !Array.isArray(
+        schema.stages
+      ) ||
+      !schema.stages.length
+    ) {
+      post(
+        "duduq:mechanic:error",
+        {
+          message:
+            "Schema Drag & Drop sem etapas."
+        }
+      );
+
+      return;
+    }
+
+    state.requestId =
+      asString(
+        data.requestId
+      );
+
+    state.sessionId =
+      asString(
+        data.sessionId
+      );
+
+    state.schema =
+      schema;
+
+    state.context =
+      data.context || {};
+
+    state.options =
+      data.options || {};
+
+    state.stageIndex = 0;
+    state._itemOrder = null;
+    state._targetOrder = null;
+
+    const worldBackground =
+      systemAsset(
+        "worldBackground"
+      );
+
+    if (worldBackground) {
+      document.body.style.backgroundImage =
+        `linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)), url("${worldBackground}")`;
+    } else {
+      document.body.style.backgroundImage = "";
+    }
+
+    post(
+      "duduq:mechanic:schema-accepted",
+      {
+        stages:
+          schema.stages.length,
+        runtimeVersion:
+          RUNTIME_VERSION
+      }
+    );
+
+    resetStage();
+  }
+
+  window.addEventListener(
+    "message",
+    function (event) {
+      const data =
+        event.data;
+
+      if (
+        !data ||
+        typeof data !==
+          "object"
+      ) {
+        return;
+      }
+
+      if (
+        data.type ===
+        "DUDUQ_FULLSCREEN_STATE"
+      ) {
+        state.fullscreen =
+          Boolean(data.active);
+
+        document
+          .documentElement
+          .setAttribute(
+            "data-fullscreen",
+            state.fullscreen
+              ? "true"
+              : "false"
+          );
+
+        render();
+        return;
+      }
+
+      if (
+        data.type !==
+        "duduq:mechanic:init" ||
+        data.mechanicId !==
+        MECHANIC_ID
+      ) {
+        return;
+      }
+
+      acceptSchema(data);
+    }
+  );
+
+  window.addEventListener(
+    "beforeunload",
+    stopAudio
+  );
+
+  postReady();
+
+  try {
+    window.parent.postMessage(
+      {
+        type:
+          "DUDUQ_FULLSCREEN_QUERY"
+      },
+      "*"
+    );
+  } catch (_) {}
+})();
+</script>
+</body>
+</html>

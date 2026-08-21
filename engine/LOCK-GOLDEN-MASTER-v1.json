@@ -1,0 +1,120 @@
+{
+    "contract":  "v1",
+    "release":  "Golden Master 1.0.0",
+    "immutable":  true,
+    "generatedAt":  "2026-08-14T19:32:33.5489813-03:00",
+    "files":  [
+                  {
+                      "path":  "core/1.0.0/duduq-assets.js",
+                      "sha256":  "be17c35a9096ddcdd0d2bdcdcfd7762d3449612464aab3d3743fe183e481c6b3"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-completion.css",
+                      "sha256":  "45ccc4d6a6529b857f3a621ef05eb17537ae43806e5980cf8d5568ab9695e6ae"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-completion.js",
+                      "sha256":  "0b25bd1e97935cd5d7b0b1e09d005854b8a6f3ade529b51babd08d00a0d80472"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-content-audio.js",
+                      "sha256":  "151b76c013d564a86a74e4acae2b098496ca776dade8cf5dfc544519998cf483"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-host.js",
+                      "sha256":  "a527f814f54e7dad2f594e66d0f70f8d839fd33f24a35356110bf03ef4728a46"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-intro.css",
+                      "sha256":  "1e8ccbf4f0cb697b12816ff4f1c4a7180ba4fc14c341ad043ee584aa775bfd4d"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-intro.js",
+                      "sha256":  "2f8acd0439e9aa0ab5cc3d945b58719cdcb593356964e4b80243f170f6916f22"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-progress-ui.js",
+                      "sha256":  "73e75a83d917170e38eb506c4218812656702ed5e5e1f81e5c1f8cc8f82588d1"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-router.js",
+                      "sha256":  "19b58457b97d08477ed202c68b740600c373a22d3fab52a01af2237625c436fd"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-schema.js",
+                      "sha256":  "fbdf1aa2c31f5543c2caef162ff511dda58b28364d2f622c1aab2f0cea30c1b4"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-sound.js",
+                      "sha256":  "7325fcef6ff93264ffe1327afa42867930d7e08f1f850f13c87a1dcfec51b1e8"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-theme.css",
+                      "sha256":  "497b33ac850fee04383456940c4b27ef1353eed339ba7fceb67ceaed26ecf545"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-transition.css",
+                      "sha256":  "45ba003ec32539282be0ea13ae7dccac0c1c17caccf158e52af972aa7ddc9aac"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-transition.js",
+                      "sha256":  "43375c83c5e55a62b154cb4a6bdec2900c4729cf62b10159f9c0ac7638d64279"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-world-fusion.css",
+                      "sha256":  "a7e9a6c4d84f16fb72469f15bf752a5d888ef516752701c3149761f5361bb0ac"
+                  },
+                  {
+                      "path":  "core/1.0.0/duduq-world-fusion.js",
+                      "sha256":  "48180d52c37f371dd08bb4c96f60c0d219377a64a78d794b33bf7be72ca1a671"
+                  },
+                  {
+                      "path":  "mechanics/bubble-pop/1.0.0/bubble-pop.js",
+                      "sha256":  "111ff6369b61c724131f33fdfd9874a092cd7a3778173545add6b3ec158cecee"
+                  },
+                  {
+                      "path":  "mechanics/bubble-pop/1.0.0/DUDUQ_BUBBLE_POP.html",
+                      "sha256":  "c1cd9490d771c1c3e858d98228e9fadf68a048f51d587534f74bd0784e3f365d"
+                  },
+                  {
+                      "path":  "mechanics/drag-drop/1.0.0/drag-drop.js",
+                      "sha256":  "2dbc7a98c11690c3d3309514d11687ec3c3d7d21373e59af9939c40c860a8d95"
+                  },
+                  {
+                      "path":  "mechanics/drag-drop/1.0.0/DUDUQ_DRAG_DROP.html",
+                      "sha256":  "60b7939cc16fa14338e628be1763537fed4e2f3eee62e05627c66722fd3690b3"
+                  },
+                  {
+                      "path":  "mechanics/matching/1.0.0/DUDUQ_MATCHING.html",
+                      "sha256":  "cae2dcd139abed5e7b75a70fa54590b6ca8fce756cc53ea42fd1900e82802b9e"
+                  },
+                  {
+                      "path":  "mechanics/matching/1.0.0/matching.js",
+                      "sha256":  "f242cfa02c2b081926a8e2d954c04a609a948598f6aa202b625bc84531345825"
+                  },
+                  {
+                      "path":  "mechanics/memory-quest/1.0.0/DUDUQ_MEMORY_QUEST.html",
+                      "sha256":  "6d4824ccbc675cfb4271b1bb1ae014e672f7080f64d3725c0c2973eb01e15687"
+                  },
+                  {
+                      "path":  "mechanics/memory-quest/1.0.0/memory-quest.js",
+                      "sha256":  "acebfc1d4ab8af9ce1a2d2bb8dda37fb7e4460c5cde9eade156bbf7540573db2"
+                  },
+                  {
+                      "path":  "mechanics/smart-sentence/1.0.0/DUDUQ_SMART_SENTENCE.html",
+                      "sha256":  "721e5ad88e039ef362b0fa64ef4f887a7738201cf8103eacf2cbdde1ab90ccce"
+                  },
+                  {
+                      "path":  "mechanics/smart-sentence/1.0.0/smart-sentence.js",
+                      "sha256":  "3278695ceec5980f747661678381483e6b280f2b5e6fe150f3aa6022d84f0d7e"
+                  },
+                  {
+                      "path":  "mechanics/target-shooter/1.0.0/DUDUQ_TARGET_SHOOTER.html",
+                      "sha256":  "84c2c44fbabcbd2ac1e8cafe266b2aa02b6a70732af9f7d9ed1443202453f82f"
+                  },
+                  {
+                      "path":  "mechanics/target-shooter/1.0.0/target-shooter.js",
+                      "sha256":  "db2171a24d76ebe5df8e1fdbd9e8ec0d3ced35855f9b340091e83472564abfb1"
+                  }
+              ]
+}

@@ -1,0 +1,1563 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>DuduQ — Smart Sentence 2.0.0</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800;900&family=Nunito:wght@600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <style id="duduq-smart-sentence-2-style">
+    :root {
+      --dq-primary: #0867c9;
+      --dq-primary-strong: #075eb9;
+      --dq-primary-depth: #064a92;
+      --dq-text: #17233a;
+      --dq-heading: #16375b;
+      --dq-muted: #52606d;
+      --dq-surface: rgba(255, 255, 255, .96);
+      --dq-surface-soft: rgba(248, 251, 254, .94);
+      --dq-border: #d8e0e8;
+      --dq-border-strong: #afc0d3;
+      --dq-depth: #b8c5d6;
+      --dq-success: #58cc02;
+      --dq-success-depth: #359500;
+      --dq-success-bg: #efffe7;
+      --dq-success-text: #1b5e20;
+      --dq-retry: #e36b6b;
+      --dq-retry-depth: #b94f4f;
+      --dq-retry-bg: #fff0f2;
+      --dq-retry-text: #9d2525;
+      --dq-focus: #111827;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body,
+    #root {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      background: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--dq-text);
+      font-family: Nunito, ui-rounded, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    button:focus-visible {
+      outline: 4px solid var(--dq-focus);
+      outline-offset: 4px;
+    }
+
+    .duduq-engine-root {
+      width: 100%;
+      min-height: 100dvh;
+      padding: clamp(12px, 1.7vw, 22px);
+      background: transparent;
+    }
+
+    .duduq-engine-shell {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .duduq-engine-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(380px, 580px) minmax(0, 1fr);
+      align-items: center;
+      gap: 12px 18px;
+      min-height: 76px;
+      margin-bottom: clamp(18px, 2.4vh, 24px);
+      padding: 10px 16px;
+      border: 2px solid var(--dq-border);
+      border-radius: 24px;
+      background: var(--dq-surface);
+      box-shadow:
+        0 4px 0 var(--dq-depth),
+        0 12px 24px rgba(31, 65, 99, .07),
+        inset 0 1px 0 #fff;
+      backdrop-filter: blur(12px);
+    }
+
+    .duduq-engine-header-main {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .duduq-engine-header-mascot-slot {
+      width: 54px;
+      height: 54px;
+      flex: 0 0 54px;
+      display: grid;
+      place-items: center;
+    }
+
+    .duduq-engine-header-mascot-slot img {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 4px 5px rgba(31, 65, 99, .10));
+      animation: duduqSmartBreathe 4.4s ease-in-out infinite;
+    }
+
+    .duduq-engine-heading {
+      min-width: 0;
+    }
+
+    .duduq-engine-heading h1 {
+      margin: 0;
+      color: var(--dq-heading);
+      font-family: Fredoka, Nunito, ui-rounded, system-ui, sans-serif;
+      font-size: clamp(18px, 1.8vw, 24px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .duduq-progress-trail {
+      width: 100%;
+      min-width: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .duduq-progress-track {
+      position: relative;
+      height: 16px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #e6eef6 0%, #dce6f0 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .95),
+        inset 0 -1px 4px rgba(84, 114, 146, .15);
+    }
+
+    .duduq-progress-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(180deg, #43b3ff 0%, #1592ff 100%);
+      box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, .35),
+        0 1px 2px rgba(10, 108, 214, .16);
+      transition: width 280ms ease;
+    }
+
+    .duduq-progress-fill::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(
+        115deg,
+        transparent 18%,
+        rgba(255, 255, 255, .10) 32%,
+        rgba(255, 255, 255, .42) 46%,
+        rgba(255, 255, 255, .16) 58%,
+        transparent 72%
+      );
+      background-size: 180% 100%;
+      animation: duduqSmartProgress 2.6s linear infinite;
+    }
+
+    .duduq-progress-copy strong {
+      display: block;
+      min-width: max-content;
+      color: #1d2b53;
+      font-family: Fredoka, Nunito, sans-serif;
+      font-size: clamp(13px, 1.3vw, 17px);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .duduq-engine-toolbar {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .duduq-engine-button {
+      min-height: 44px;
+      padding: 8px 14px;
+      border: 2px solid var(--dq-border-strong);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--dq-heading);
+      box-shadow: 0 3px 0 var(--dq-depth);
+      font-family: Nunito, sans-serif;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform 90ms ease, box-shadow 90ms ease, filter 120ms ease;
+    }
+
+    .duduq-engine-button:hover {
+      filter: brightness(1.015);
+      transform: translateY(-1px);
+    }
+
+    .duduq-engine-button:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--dq-depth);
+    }
+
+    .duduq-engine-stage {
+      width: 100%;
+      min-height: 0;
+    }
+
+    .duduq-smart-surface {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .duduq-smart-instruction {
+      width: min(1100px, calc(100% - 24px));
+      min-height: 56px;
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) 48px;
+      align-items: center;
+      justify-items: center;
+      gap: 12px;
+      margin: 0;
+      padding: 8px 14px 10px;
+      border: 2px solid var(--dq-border-strong);
+      border-radius: 999px;
+      background: var(--dq-surface);
+      box-shadow:
+        0 4px 0 var(--dq-depth),
+        0 12px 24px rgba(31, 65, 99, .07),
+        inset 0 1px 0 #fff;
+    }
+
+    .duduq-smart-instruction-spacer {
+      width: 48px;
+      height: 48px;
+    }
+
+    .duduq-smart-instruction h2 {
+      min-width: 0;
+      width: 100%;
+      margin: 0;
+      color: var(--dq-primary);
+      font-family: Fredoka, Nunito, ui-rounded, system-ui, sans-serif;
+      font-size: clamp(18px, 2vw, 28px);
+      font-weight: 800;
+      line-height: 1.16;
+      letter-spacing: 0;
+      text-align: center;
+      text-wrap: balance;
+    }
+
+    .duduq-smart-audio-shell {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      overflow: visible;
+    }
+
+    .duduq-smart-audio {
+      position: relative;
+      z-index: 2;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border: 2px solid var(--dq-primary-depth);
+      border-radius: 999px;
+      background: linear-gradient(180deg, #218bea 0%, #0b70d5 70%, #0864bf 100%);
+      color: #fff;
+      box-shadow:
+        0 4px 0 var(--dq-primary-depth),
+        0 8px 15px rgba(9, 103, 201, .18),
+        inset 0 2px 0 rgba(255, 255, 255, .42);
+      cursor: pointer;
+      transition: transform 90ms ease, box-shadow 90ms ease, filter 120ms ease;
+    }
+
+    .duduq-smart-audio:hover {
+      filter: brightness(1.05);
+    }
+
+    .duduq-smart-audio:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 var(--dq-primary-depth);
+    }
+
+    .duduq-smart-audio[data-playing="true"] {
+      border-color: var(--dq-success-depth);
+      background: linear-gradient(180deg, #70e90e 0%, #58cc02 62%, #49b900 100%);
+      color: var(--dq-success-text);
+      box-shadow:
+        0 5px 0 #2f8a00,
+        0 10px 20px rgba(57, 156, 0, .22),
+        inset 0 2px 0 rgba(255, 255, 255, .36);
+    }
+
+    .duduq-smart-audio svg {
+      width: 23px;
+      height: 23px;
+      pointer-events: none;
+    }
+
+    .duduq-smart-audio-wave {
+      position: absolute;
+      inset: 4px;
+      z-index: 1;
+      border: 2px solid rgba(22, 130, 229, .34);
+      border-radius: 999px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .duduq-smart-audio-shell[data-playing="true"] .duduq-smart-audio-wave {
+      border-color: rgba(88, 204, 2, .55);
+      animation: duduqSmartAudioWave 1.35s ease-out infinite;
+    }
+
+    .duduq-smart-audio-shell[data-playing="true"] .duduq-smart-audio-wave:nth-child(2) {
+      animation-delay: .35s;
+    }
+
+    .duduq-smart-board {
+      width: min(1000px, calc(100% - 24px));
+      min-height: clamp(310px, 48vh, 500px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(16px, 2.2vh, 24px);
+      margin: 0;
+      padding: clamp(18px, 2.6vw, 30px);
+      border: 2px solid var(--dq-border);
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(239, 248, 255, .90), transparent 30%),
+        radial-gradient(circle at 86% 90%, rgba(255, 248, 225, .62), transparent 28%),
+        var(--dq-surface);
+      box-shadow:
+        0 4px 0 var(--dq-depth),
+        0 14px 30px rgba(31, 65, 99, .075),
+        inset 0 1px 0 #fff;
+    }
+
+    .duduq-smart-context {
+      min-height: 118px;
+      display: grid;
+      place-items: center;
+    }
+
+    .duduq-smart-context[hidden] {
+      display: none;
+    }
+
+    .duduq-smart-context img {
+      display: block;
+      width: clamp(118px, 13vw, 164px);
+      height: clamp(118px, 13vw, 164px);
+      object-fit: contain;
+      filter: drop-shadow(0 7px 10px rgba(31, 65, 99, .09));
+    }
+
+    .duduq-smart-sentence-card {
+      width: min(820px, 100%);
+      min-height: 116px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(16px, 2vw, 24px);
+      border: 2px solid #c8d7e7;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, .96);
+      box-shadow:
+        inset 0 1px 0 #fff,
+        0 3px 0 #c5d2e0,
+        0 10px 22px rgba(31, 65, 99, .055);
+    }
+
+    .duduq-smart-sentence {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(8px, 1vw, 12px);
+      color: var(--dq-heading);
+      font-family: Fredoka, Nunito, sans-serif;
+      font-size: clamp(28px, 3.4vw, 44px);
+      font-weight: 800;
+      line-height: 1.18;
+      text-align: center;
+    }
+
+    .duduq-smart-gap {
+      min-width: clamp(130px, 17vw, 190px);
+      min-height: 62px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 14px;
+      border: 2px dashed #7c8ca3;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #fbfdff, #f2f7fc);
+      color: var(--dq-primary);
+      box-shadow: inset 0 1px 0 #fff;
+      cursor: pointer;
+      transition: transform 120ms ease, border-color 140ms ease, background 140ms ease, box-shadow 140ms ease;
+    }
+
+    .duduq-smart-gap[data-filled="true"] {
+      border-style: solid;
+      border-color: var(--dq-primary);
+      background: #eff6ff;
+      box-shadow:
+        0 4px 0 #89add2,
+        0 0 0 4px rgba(0, 86, 179, .10);
+    }
+
+    .duduq-smart-gap[data-feedback="success"] {
+      border-color: var(--dq-success);
+      background: var(--dq-success-bg);
+      color: var(--dq-success-text);
+      box-shadow:
+        0 4px 0 var(--dq-success-depth),
+        0 0 0 4px rgba(88, 204, 2, .12);
+    }
+
+    .duduq-smart-gap[data-feedback="retry"] {
+      border-color: var(--dq-retry);
+      background: var(--dq-retry-bg);
+      color: var(--dq-retry-text);
+      box-shadow:
+        0 4px 0 var(--dq-retry-depth),
+        0 0 0 4px rgba(183, 28, 28, .08);
+      animation: duduqSmartShake 340ms ease;
+    }
+
+    .duduq-smart-options-block {
+      width: min(720px, 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .duduq-smart-helper {
+      margin: 0;
+      color: var(--dq-muted);
+      font-family: Nunito, sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .duduq-smart-options {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
+      gap: 14px;
+      justify-content: center;
+    }
+
+    .duduq-smart-option {
+      min-width: 0;
+      min-height: 62px;
+      padding: 10px 18px;
+      border: 2px solid var(--dq-border-strong);
+      border-radius: 17px;
+      background: linear-gradient(180deg, #fff 0%, #f9fbfd 100%);
+      color: var(--dq-text);
+      box-shadow:
+        0 4px 0 var(--dq-depth),
+        0 8px 16px rgba(18, 43, 70, .08),
+        inset 0 1px 0 #fff;
+      font-family: Fredoka, Nunito, sans-serif;
+      font-size: clamp(20px, 1.8vw, 24px);
+      font-weight: 800;
+      line-height: 1.1;
+      cursor: pointer;
+      transition: transform 100ms ease, border-color 140ms ease, box-shadow 120ms ease, background 140ms ease;
+    }
+
+    .duduq-smart-option:hover:not(:disabled) {
+      transform: translateY(-2px);
+      border-color: #91abc3;
+    }
+
+    .duduq-smart-option:active:not(:disabled) {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 var(--dq-depth);
+    }
+
+    .duduq-smart-option[data-selected="true"] {
+      border-color: var(--dq-primary);
+      background: #eff6ff;
+      color: #0c4f94;
+      box-shadow:
+        0 4px 0 var(--dq-primary-depth),
+        0 0 0 4px rgba(0, 86, 179, .12);
+    }
+
+    .duduq-smart-option[data-feedback="success"] {
+      border-color: var(--dq-success);
+      background: var(--dq-success-bg);
+      color: var(--dq-success-text);
+      box-shadow: 0 4px 0 var(--dq-success-depth);
+    }
+
+    .duduq-smart-option[data-feedback="retry"] {
+      border-color: var(--dq-retry);
+      background: var(--dq-retry-bg);
+      color: var(--dq-retry-text);
+      box-shadow: 0 4px 0 var(--dq-retry-depth);
+    }
+
+    .duduq-smart-action-slot {
+      min-height: 62px;
+      display: grid;
+      place-items: center;
+    }
+
+    .duduq-smart-confirm {
+      width: min(220px, 100%);
+      min-height: 56px;
+      padding: 0 28px;
+      border: 2px solid var(--dq-primary-depth);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #1984e8 0%, #0868cb 72%, #075eb9 100%);
+      color: #fff;
+      box-shadow:
+        0 6px 0 var(--dq-primary-depth),
+        0 12px 22px rgba(9, 103, 201, .20),
+        inset 0 2px 0 rgba(255, 255, 255, .38);
+      font-family: Fredoka, Nunito, sans-serif;
+      font-size: 19px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 90ms ease, box-shadow 90ms ease, filter 120ms ease;
+    }
+
+    .duduq-smart-confirm:hover:not(:disabled) {
+      filter: brightness(1.05) saturate(1.03);
+    }
+
+    .duduq-smart-confirm:active:not(:disabled) {
+      transform: translateY(5px);
+      box-shadow: 0 1px 0 var(--dq-primary-depth);
+    }
+
+    .duduq-smart-confirm:disabled {
+      border-color: #cfd9e4;
+      background: linear-gradient(180deg, #edf2f7 0%, #dfe7ef 100%);
+      color: #7a8797;
+      box-shadow: 0 5px 0 #c6d0dc;
+      cursor: default;
+    }
+
+    .duduq-engine-feedback {
+      width: min(1000px, calc(100% - 24px));
+      margin: 2px auto 0;
+    }
+
+    .duduq-engine-feedback[hidden] {
+      display: none;
+    }
+
+    .duduq-engine-feedback-card {
+      width: 100%;
+      min-height: 96px;
+      display: grid;
+      grid-template-columns: 94px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 14px 18px;
+      padding: 12px 18px;
+      border: 2px solid var(--dq-border);
+      border-radius: 24px;
+      background: var(--dq-surface);
+      box-shadow:
+        0 4px 0 var(--dq-depth),
+        0 12px 24px rgba(31, 65, 99, .07);
+    }
+
+    .duduq-engine-feedback[data-state="success"] .duduq-engine-feedback-card {
+      border-color: var(--dq-success);
+      background: var(--dq-success-bg);
+      color: var(--dq-success-text);
+      box-shadow:
+        0 4px 0 var(--dq-success-depth),
+        0 10px 20px rgba(70, 163, 2, .12);
+    }
+
+    .duduq-engine-feedback[data-state="retry"] .duduq-engine-feedback-card {
+      border-color: var(--dq-retry);
+      background: var(--dq-retry-bg);
+      color: var(--dq-retry-text);
+      box-shadow:
+        0 4px 0 var(--dq-retry-depth),
+        0 10px 20px rgba(183, 28, 28, .10);
+    }
+
+    .duduq-engine-feedback-mascot {
+      width: 84px;
+      height: 84px;
+      display: block;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 6px rgba(31, 65, 99, .10));
+    }
+
+    .duduq-engine-feedback-copy {
+      min-width: 0;
+    }
+
+    .duduq-engine-feedback-copy strong {
+      display: block;
+      margin-bottom: 3px;
+      font-family: Fredoka, Nunito, sans-serif;
+      font-size: clamp(18px, 1.8vw, 23px);
+      font-weight: 900;
+      line-height: 1.08;
+    }
+
+    .duduq-engine-feedback-copy span {
+      display: block;
+      font-size: clamp(14px, 1.3vw, 17px);
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .duduq-engine-feedback-action {
+      min-width: 190px;
+      min-height: 52px;
+      padding: 0 22px;
+      border: 2px solid #45ad00;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #70e90e 0%, #58cc02 58%, #4cba00 100%);
+      color: #fff;
+      box-shadow:
+        0 5px 0 #359500,
+        0 12px 20px rgba(57, 156, 0, .20),
+        inset 0 2px 0 rgba(255, 255, 255, .32);
+      font-family: Fredoka, Nunito, sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .duduq-engine-complete {
+      width: min(900px, calc(100% - 24px));
+      min-height: 410px;
+      margin: 0 auto;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 12px;
+      padding: 28px;
+      border: 2px solid var(--dq-success);
+      border-radius: 28px;
+      background: linear-gradient(180deg, #fff 0%, #f8fff6 100%);
+      box-shadow:
+        0 4px 0 var(--dq-success-depth),
+        0 14px 28px rgba(70, 163, 2, .10);
+      text-align: center;
+    }
+
+    .duduq-engine-complete img {
+      width: 154px;
+      height: 154px;
+      object-fit: contain;
+    }
+
+    .duduq-engine-complete h2 {
+      margin: 0;
+      color: var(--dq-success-text);
+      font-family: Fredoka, Nunito, sans-serif;
+      font-size: clamp(26px, 3vw, 38px);
+      font-weight: 900;
+    }
+
+    .duduq-engine-complete p {
+      margin: 0;
+      color: var(--dq-heading);
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    @keyframes duduqSmartProgress {
+      from { background-position: 140% 0; }
+      to { background-position: -40% 0; }
+    }
+
+    @keyframes duduqSmartAudioWave {
+      0% { transform: scale(.86); opacity: .48; }
+      75% { opacity: .10; }
+      100% { transform: scale(1.52); opacity: 0; }
+    }
+
+    @keyframes duduqSmartShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(4px); }
+      75% { transform: translateX(-2px); }
+    }
+
+    @keyframes duduqSmartBreathe {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-2px) scale(1.015); }
+    }
+
+    @media (max-width: 980px) {
+      .duduq-engine-header {
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+
+      .duduq-progress-trail {
+        grid-column: 1 / -1;
+        grid-row: 2;
+      }
+
+      .duduq-engine-toolbar {
+        grid-column: 2;
+        grid-row: 1;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .duduq-engine-root {
+        padding: 8px;
+      }
+
+      .duduq-engine-header {
+        min-height: 68px;
+        margin-bottom: 14px;
+        padding: 8px 10px;
+        border-radius: 20px;
+      }
+
+      .duduq-engine-header-mascot-slot,
+      .duduq-engine-header-mascot-slot img {
+        width: 46px;
+        height: 46px;
+      }
+
+      .duduq-engine-heading h1 {
+        font-size: 18px;
+      }
+
+      .duduq-engine-button {
+        min-height: 42px;
+        padding-inline: 11px;
+        font-size: 0;
+      }
+
+      .duduq-engine-button[data-short-label]::after {
+        content: attr(data-short-label);
+        font-size: 18px;
+      }
+
+      .duduq-smart-instruction {
+        width: calc(100% - 8px);
+        grid-template-columns: 44px minmax(0, 1fr) 44px;
+        gap: 8px;
+        min-height: 56px;
+        padding: 7px 9px 9px;
+      }
+
+      .duduq-smart-instruction-spacer,
+      .duduq-smart-audio-shell {
+        width: 44px;
+        height: 44px;
+      }
+
+      .duduq-smart-instruction h2 {
+        font-size: clamp(18px, 5vw, 22px);
+      }
+
+      .duduq-smart-board {
+        width: calc(100% - 8px);
+        min-height: 0;
+        padding: 16px 12px 18px;
+      }
+
+      .duduq-smart-context {
+        min-height: 96px;
+      }
+
+      .duduq-smart-context img {
+        width: clamp(96px, 28vw, 126px);
+        height: clamp(96px, 28vw, 126px);
+      }
+
+      .duduq-smart-sentence-card {
+        min-height: 100px;
+      }
+
+      .duduq-smart-sentence {
+        font-size: clamp(24px, 7vw, 34px);
+      }
+
+      .duduq-smart-gap {
+        min-height: 54px;
+        min-width: 116px;
+      }
+
+      .duduq-smart-options {
+        gap: 10px;
+      }
+
+      .duduq-smart-option {
+        min-height: 54px;
+        padding-inline: 12px;
+        font-size: clamp(18px, 5vw, 21px);
+      }
+
+      .duduq-engine-feedback-card {
+        grid-template-columns: 74px minmax(0, 1fr);
+        gap: 10px 12px;
+      }
+
+      .duduq-engine-feedback-mascot {
+        width: 68px;
+        height: 68px;
+      }
+
+      .duduq-engine-feedback-action {
+        grid-column: 1 / -1;
+        justify-self: center;
+        min-width: 180px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .duduq-smart-instruction {
+        grid-template-columns: 40px minmax(0, 1fr) 40px;
+      }
+
+      .duduq-smart-instruction-spacer,
+      .duduq-smart-audio-shell {
+        width: 40px;
+        height: 40px;
+      }
+
+      .duduq-smart-audio {
+        width: 40px;
+        height: 40px;
+      }
+
+      .duduq-smart-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 900px) and (max-height: 720px) {
+      .duduq-engine-root {
+        padding-top: 10px;
+      }
+
+      .duduq-engine-header {
+        min-height: 66px;
+        margin-bottom: 12px;
+      }
+
+      .duduq-smart-board {
+        min-height: 300px;
+        gap: 12px;
+        padding-block: 14px 18px;
+      }
+
+      .duduq-smart-context {
+        min-height: 92px;
+      }
+
+      .duduq-smart-context img {
+        width: 108px;
+        height: 108px;
+      }
+
+      .duduq-smart-sentence-card {
+        min-height: 94px;
+      }
+
+      .duduq-smart-option {
+        min-height: 54px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto;
+        animation-duration: .01ms;
+        animation-iteration-count: 1;
+        transition-duration: .01ms;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="application/json" id="duduq-smart-sentence-config">
+{
+  "schemaVersion": 2,
+  "mechanic": "smart-sentence",
+  "version": "2.0.0",
+  "title": "I'm a...",
+  "language": "en-US",
+  "uiLanguage": "pt-BR",
+  "hostedByDuduQ": false,
+  "hostProgress": {
+    "stepIndex": 0,
+    "totalSteps": 1
+  },
+  "autoAdvanceAfterCorrectMs": 5200,
+  "retryFeedbackDurationMs": 850,
+  "stages": [
+    {
+      "id": "demo",
+      "instruction": "Observe a imagem e complete a frase.",
+      "instructionSpoken": "Observe a imagem e complete a frase.",
+      "prefix": "I'M A",
+      "suffix": ".",
+      "answer": "BOY",
+      "options": ["BOY", "GIRL"],
+      "image": {
+        "src": "",
+        "alt": "Imagem de apoio."
+      },
+      "feedback": {
+        "success": "Muito bem!",
+        "retry": "Observe a imagem e tente novamente."
+      }
+    }
+  ]
+}
+  </script>
+
+  <script>
+  (function () {
+    "use strict";
+
+    const root = document.getElementById("root");
+    const configNode = document.getElementById("duduq-smart-sentence-config");
+    const Events = new EventTarget();
+
+    const Assets = Object.freeze({
+      mascotIdle: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/DUDUQ_IDLE.png",
+      mascotCorrect: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/DUDUQ_ACERTO.png",
+      mascotError: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/DUDUQ_ERRO.png",
+      mascotComplete: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Duduq_Li%C3%A7%C3%A3o%20concluida.png",
+      soundCorrect: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/correct.mp3",
+      soundError: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/error.mp3"
+    });
+
+    const state = {
+      stageIndex: 0,
+      selected: "",
+      feedback: "idle",
+      audioPlaying: false,
+      optionOrders: Object.create(null),
+      advanceTimer: 0,
+      retryTimer: 0,
+      complete: false
+    };
+
+    let config = null;
+    let initError = null;
+    let speechSerial = 0;
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function normalizeAnswer(value) {
+      return String(value ?? "")
+        .trim()
+        .replace(/\s+/g, " ")
+        .replace(/[.,!?;:'"“”‘’…()[\]{}]/g, "")
+        .toLocaleLowerCase("en-US");
+    }
+
+    function shuffle(values) {
+      const out = [...values];
+      for (let i = out.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [out[i], out[j]] = [out[j], out[i]];
+      }
+      return out;
+    }
+
+    function optionsFor(stage) {
+      if (!state.optionOrders[stage.id]) {
+        let order = shuffle(stage.options || []);
+        if (order.length > 1 && order.every((value, index) => value === stage.options[index])) {
+          order = [...order.slice(1), order[0]];
+        }
+        state.optionOrders[stage.id] = order;
+      }
+      return state.optionOrders[stage.id];
+    }
+
+    function currentStage() {
+      return config.stages[state.stageIndex];
+    }
+
+    function audioIcon() {
+      return `
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M11 5 6.5 9H3v6h3.5L11 19V5Z" fill="currentColor"></path>
+          <path d="M15 8.5c1.3 1.8 1.3 5.2 0 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          <path d="M18 6c2.7 3.4 2.7 8.6 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+        </svg>
+      `;
+    }
+
+    function progressData() {
+      if (config.hostedByDuduQ && config.hostProgress) {
+        const total = Math.max(1, Number(config.hostProgress.totalSteps) || 1);
+        const index = Math.max(0, Math.min(total - 1, Number(config.hostProgress.stepIndex) || 0));
+        return {
+          current: index + 1,
+          total,
+          fill: index / total
+        };
+      }
+
+      const total = Math.max(1, config.stages.length);
+      const current = Math.min(total, state.stageIndex + 1);
+      return {
+        current,
+        total,
+        fill: state.stageIndex / total
+      };
+    }
+
+    function sentenceText(stage, selected = state.selected) {
+      return [stage.prefix, selected || "", stage.suffix]
+        .join(" ")
+        .replace(/\s+([.,!?;:])/g, "$1")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function playSound(url, volume) {
+      try {
+        const audio = new Audio(url);
+        audio.volume = volume;
+        audio.play().catch(() => {});
+      } catch (_) {}
+    }
+
+    function speak(text, locale = config.language || "en-US", onDone) {
+      const synth = window.speechSynthesis;
+      if (!text || !synth || typeof SpeechSynthesisUtterance === "undefined") {
+        onDone?.();
+        return;
+      }
+
+      const serial = ++speechSerial;
+
+      try {
+        synth.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = locale;
+        utterance.rate = .90;
+        utterance.pitch = 1;
+
+        state.audioPlaying = true;
+        syncAudioState();
+
+        let ended = false;
+        function done() {
+          if (ended) return;
+          ended = true;
+          if (serial !== speechSerial) return;
+          state.audioPlaying = false;
+          syncAudioState();
+          onDone?.();
+        }
+
+        utterance.onend = done;
+        utterance.onerror = done;
+        synth.speak(utterance);
+
+        window.setTimeout(done, 12000);
+      } catch (_) {
+        state.audioPlaying = false;
+        syncAudioState();
+        onDone?.();
+      }
+    }
+
+    function syncAudioState() {
+      const shell = document.querySelector(".duduq-smart-audio-shell");
+      const button = document.querySelector(".duduq-smart-audio");
+
+      if (shell) shell.dataset.playing = state.audioPlaying ? "true" : "false";
+      if (button) {
+        button.dataset.playing = state.audioPlaying ? "true" : "false";
+        button.setAttribute(
+          "aria-label",
+          state.audioPlaying ? "Instrução em reprodução" : "Ouvir instrução"
+        );
+      }
+    }
+
+    function clearTimers() {
+      window.clearTimeout(state.advanceTimer);
+      window.clearTimeout(state.retryTimer);
+      state.advanceTimer = 0;
+      state.retryTimer = 0;
+    }
+
+    function renderHeader() {
+      const progress = progressData();
+
+      return `
+        <header class="duduq-engine-header">
+          <div class="duduq-engine-header-main">
+            <div class="duduq-engine-header-mascot-slot">
+              <img src="${Assets.mascotIdle}" alt="Mascote DuduQ" draggable="false">
+            </div>
+            <div class="duduq-engine-heading">
+              <h1>${escapeHtml(config.title || "Smart Sentence")}</h1>
+            </div>
+          </div>
+
+          <div class="duduq-progress-trail" aria-label="Progresso">
+            <div
+              class="duduq-progress-track"
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="${progress.total}"
+              aria-valuenow="${Math.max(0, progress.current - 1)}"
+            >
+              <div class="duduq-progress-fill" style="width:${Math.max(0, Math.min(1, progress.fill)) * 100}%"></div>
+            </div>
+            <div class="duduq-progress-copy">
+              <strong>Etapa ${progress.current} de ${progress.total}</strong>
+            </div>
+          </div>
+
+          <div class="duduq-engine-toolbar">
+            <button
+              type="button"
+              class="duduq-engine-button"
+              id="fullscreenButton"
+              data-short-label="⛶"
+            >⛶ Tela cheia</button>
+            <button
+              type="button"
+              class="duduq-engine-button"
+              id="restartButton"
+              data-short-label="↻"
+            >Reiniciar</button>
+          </div>
+        </header>
+      `;
+    }
+
+    function renderFeedback(stage) {
+      if (state.feedback === "idle") {
+        return `<section class="duduq-engine-feedback" hidden></section>`;
+      }
+
+      const success = state.feedback === "success";
+      const title = success ? "Muito bem!" : "Tente novamente";
+      const text = success
+        ? (stage.feedback?.success || "Resposta correta.")
+        : (stage.feedback?.retry || "Revise a frase e tente novamente.");
+      const mascot = success ? Assets.mascotCorrect : Assets.mascotError;
+
+      return `
+        <section class="duduq-engine-feedback" data-state="${state.feedback}">
+          <div class="duduq-engine-feedback-card" role="status" aria-live="polite">
+            <img class="duduq-engine-feedback-mascot" src="${mascot}" alt="" draggable="false">
+            <div class="duduq-engine-feedback-copy">
+              <strong>${escapeHtml(title)}</strong>
+              <span>${escapeHtml(text)}</span>
+            </div>
+            ${
+              success
+                ? `<button type="button" class="duduq-engine-feedback-action" id="continueButton">Continuar</button>`
+                : ""
+            }
+          </div>
+        </section>
+      `;
+    }
+
+    function renderStage() {
+      const stage = currentStage();
+      const options = optionsFor(stage);
+      const selected = state.selected;
+      const feedback = state.feedback;
+      const correct = normalizeAnswer(selected) === normalizeAnswer(stage.answer);
+      const imageSrc = stage.image?.src || "";
+
+      const optionButtons = options.map((option) => {
+        const selectedHere = option === selected;
+        let optionFeedback = "";
+
+        if (feedback === "success" && selectedHere) optionFeedback = "success";
+        if (feedback === "retry" && selectedHere) optionFeedback = "retry";
+
+        return `
+          <button
+            type="button"
+            class="duduq-smart-option"
+            data-value="${escapeHtml(option)}"
+            data-selected="${selectedHere ? "true" : "false"}"
+            ${optionFeedback ? `data-feedback="${optionFeedback}"` : ""}
+            ${feedback === "success" ? "disabled" : ""}
+          >${escapeHtml(option)}</button>
+        `;
+      }).join("");
+
+      return `
+        <section class="duduq-smart-surface">
+          <section class="duduq-smart-instruction" aria-label="Instrução">
+            <span class="duduq-smart-instruction-spacer" aria-hidden="true"></span>
+            <h2>${escapeHtml(stage.instruction)}</h2>
+            <span class="duduq-smart-audio-shell" data-playing="${state.audioPlaying ? "true" : "false"}">
+              <span class="duduq-smart-audio-wave" aria-hidden="true"></span>
+              <span class="duduq-smart-audio-wave" aria-hidden="true"></span>
+              <button
+                type="button"
+                class="duduq-smart-audio"
+                id="instructionAudio"
+                data-playing="${state.audioPlaying ? "true" : "false"}"
+                aria-label="${state.audioPlaying ? "Instrução em reprodução" : "Ouvir instrução"}"
+              >${audioIcon()}</button>
+            </span>
+          </section>
+
+          <section class="duduq-smart-board">
+            <div class="duduq-smart-context" ${imageSrc ? "" : "hidden"}>
+              ${imageSrc
+                ? `<img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(stage.image?.alt || "")}" draggable="false">`
+                : ""}
+            </div>
+
+            <div class="duduq-smart-sentence-card">
+              <div class="duduq-smart-sentence" aria-label="${escapeHtml(sentenceText(stage))}">
+                <span>${escapeHtml(stage.prefix)}</span>
+                <button
+                  type="button"
+                  class="duduq-smart-gap"
+                  id="sentenceGap"
+                  data-filled="${selected ? "true" : "false"}"
+                  ${feedback !== "idle" ? `data-feedback="${feedback}"` : ""}
+                  aria-label="${selected ? `Resposta selecionada: ${escapeHtml(selected)}. Toque para remover.` : "Lacuna vazia"}"
+                  ${feedback === "success" ? "disabled" : ""}
+                >${selected ? escapeHtml(selected) : "&nbsp;"}</button>
+                <span>${escapeHtml(stage.suffix)}</span>
+              </div>
+            </div>
+
+            <div class="duduq-smart-options-block">
+              <p class="duduq-smart-helper">Escolha uma palavra.</p>
+              <div class="duduq-smart-options" role="group" aria-label="Opções de resposta">
+                ${optionButtons}
+              </div>
+            </div>
+
+            <div class="duduq-smart-action-slot">
+              ${
+                feedback === "success"
+                  ? ""
+                  : `<button
+                      type="button"
+                      class="duduq-smart-confirm"
+                      id="confirmButton"
+                      ${selected ? "" : "disabled"}
+                    >Confirmar</button>`
+              }
+            </div>
+          </section>
+
+          ${renderFeedback(stage)}
+        </section>
+      `;
+    }
+
+    function renderComplete() {
+      return `
+        <section class="duduq-engine-complete" role="status">
+          <img src="${Assets.mascotComplete}" alt="Mascote DuduQ comemorando" draggable="false">
+          <h2>Parabéns! Lição concluída</h2>
+          <p>Você completou a atividade Smart Sentence.</p>
+          <button type="button" class="duduq-engine-feedback-action" id="playAgainButton">Jogar novamente</button>
+        </section>
+      `;
+    }
+
+    function render() {
+      root.innerHTML = `
+        <div class="duduq-engine-root">
+          <div class="duduq-engine-shell">
+            ${renderHeader()}
+            <main class="duduq-engine-stage">
+              ${state.complete ? renderComplete() : renderStage()}
+            </main>
+          </div>
+        </div>
+      `;
+
+      bind();
+      syncAudioState();
+    }
+
+    function dispatchAnswer(stage, isCorrect) {
+      Events.dispatchEvent(
+        new CustomEvent("answer", {
+          detail: {
+            stageId: stage.id,
+            isCorrect,
+            selected: state.selected,
+            answer: stage.answer
+          }
+        })
+      );
+    }
+
+    function moveForward() {
+      clearTimers();
+
+      if (state.stageIndex < config.stages.length - 1) {
+        state.stageIndex += 1;
+        state.selected = "";
+        state.feedback = "idle";
+        render();
+        return;
+      }
+
+      if (config.hostedByDuduQ && window.parent && window.parent !== window) {
+        window.parent.postMessage(
+          {
+            type: "DUDUQ_SMART_SENTENCE_COMPLETE",
+            stageId: currentStage()?.id || "",
+            isCorrect: true,
+            version: config.version
+          },
+          "*"
+        );
+        return;
+      }
+
+      state.complete = true;
+      render();
+    }
+
+    function submit() {
+      const stage = currentStage();
+      if (!state.selected || state.feedback === "success") return;
+
+      const isCorrect =
+        normalizeAnswer(state.selected) === normalizeAnswer(stage.answer);
+
+      dispatchAnswer(stage, isCorrect);
+
+      if (isCorrect) {
+        state.feedback = "success";
+        playSound(Assets.soundCorrect, .46);
+        render();
+
+        speak(sentenceText(stage), config.language, function () {
+          if (state.feedback !== "success") return;
+        });
+
+        state.advanceTimer = window.setTimeout(
+          moveForward,
+          Math.max(1200, Number(config.autoAdvanceAfterCorrectMs) || 5200)
+        );
+      } else {
+        state.feedback = "retry";
+        playSound(Assets.soundError, .42);
+        render();
+
+        state.retryTimer = window.setTimeout(function () {
+          if (state.feedback !== "retry") return;
+          state.feedback = "idle";
+          render();
+        }, Math.max(400, Number(config.retryFeedbackDurationMs) || 850));
+      }
+    }
+
+    function selectOption(value) {
+      if (state.feedback === "success") return;
+
+      state.feedback = "idle";
+      state.selected = state.selected === value ? "" : value;
+      render();
+
+      if (state.selected) {
+        speak(state.selected, config.language);
+      }
+    }
+
+    function restart() {
+      clearTimers();
+      speechSerial += 1;
+      try {
+        window.speechSynthesis?.cancel?.();
+      } catch (_) {}
+
+      state.stageIndex = 0;
+      state.selected = "";
+      state.feedback = "idle";
+      state.audioPlaying = false;
+      state.complete = false;
+      state.optionOrders = Object.create(null);
+      render();
+    }
+
+    async function toggleFullscreen() {
+      try {
+        if (document.fullscreenElement) {
+          await document.exitFullscreen?.();
+        } else {
+          await document.documentElement.requestFullscreen?.();
+        }
+      } catch (_) {}
+    }
+
+    function bind() {
+      document.getElementById("fullscreenButton")?.addEventListener("click", toggleFullscreen);
+      document.getElementById("restartButton")?.addEventListener("click", restart);
+      document.getElementById("confirmButton")?.addEventListener("click", submit);
+      document.getElementById("continueButton")?.addEventListener("click", moveForward);
+      document.getElementById("playAgainButton")?.addEventListener("click", restart);
+
+      document.getElementById("sentenceGap")?.addEventListener("click", function () {
+        if (state.feedback === "success") return;
+        state.selected = "";
+        state.feedback = "idle";
+        render();
+      });
+
+      document.getElementById("instructionAudio")?.addEventListener("click", function () {
+        const stage = currentStage();
+        speak(
+          stage.instructionSpoken || stage.instruction,
+          config.uiLanguage === "pt-BR" ? "pt-BR" : config.language
+        );
+      });
+
+      document.querySelectorAll(".duduq-smart-option").forEach((button) => {
+        button.addEventListener("click", function () {
+          selectOption(button.dataset.value || button.textContent || "");
+        });
+      });
+    }
+
+    function init() {
+      try {
+        config = JSON.parse(configNode.textContent || "{}");
+
+        if (!Array.isArray(config.stages) || !config.stages.length) {
+          throw new Error("Smart Sentence 2 recebeu configuração sem stages.");
+        }
+
+        for (const stage of config.stages) {
+          if (!stage || !stage.answer || !Array.isArray(stage.options) || stage.options.length < 2) {
+            throw new Error(`Stage inválido: ${stage?.id || "sem-id"}.`);
+          }
+        }
+
+        render();
+
+        window.DUDUQ_SMART_SENTENCE = {
+          version: "2.0.0",
+          ready: true,
+          initError: null,
+          Events,
+          restart,
+          getState: function () {
+            return {
+              stageIndex: state.stageIndex,
+              selected: state.selected,
+              feedback: state.feedback,
+              complete: state.complete
+            };
+          }
+        };
+      } catch (error) {
+        initError = error instanceof Error ? error.message : String(error);
+
+        root.innerHTML = `
+          <div style="
+            max-width:760px;
+            margin:40px auto;
+            padding:20px;
+            border:2px solid #ef9a9a;
+            border-radius:18px;
+            background:#fff;
+            color:#8b1e1e;
+            font:800 16px/1.45 Nunito,system-ui,sans-serif
+          ">
+            Não foi possível iniciar a Smart Sentence 2.<br><br>
+            ${escapeHtml(initError)}
+          </div>
+        `;
+
+        window.DUDUQ_SMART_SENTENCE = {
+          version: "2.0.0",
+          ready: false,
+          initError,
+          Events
+        };
+
+        console.error(error);
+      }
+    }
+
+    init();
+  })();
+  </script>
+</body>
+</html>
