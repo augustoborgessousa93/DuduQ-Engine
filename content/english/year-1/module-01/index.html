@@ -40,7 +40,7 @@
   <script src="../../../../mechanics/target-shooter.js?v=100"></script>
 
   <script src="../../../../core/duduq-router.js?v=100"></script>
-  <script src="./module-01.js?v=100"></script>
+  <script src="./module-01.js?v=101"></script>
 
   <script>
     window.addEventListener("DOMContentLoaded", function () {
@@ -72,6 +72,10 @@
         return;
       }
 
+      try { window.DuduQRouter.syncFromHost?.(); } catch (error) {
+        console.warn("[DuduQ Factory] Router profile sync warning:", error);
+      }
+
       const mechanicsUsed = Array.from(new Set(
         moduleDefinition.activities.map((activity) => activity.mechanic).filter(Boolean)
       ));
@@ -96,10 +100,13 @@
         const decisions = questions.map(function (question, questionIndex) {
           return {
             question,
-            decision: window.DuduQRouter.select(question, questionIndex, {
-              subject: moduleDefinition.subject,
-              year: moduleDefinition.year,
-              module: moduleDefinition.module
+            decision: window.DuduQRouter.select(question, {
+              index: questionIndex,
+              defaults: {
+                subject: moduleDefinition.subject,
+                year: moduleDefinition.year,
+                module: moduleDefinition.module
+              }
             })
           };
         });
@@ -231,6 +238,9 @@
       if (window.DuduQIntro?.show) {
         window.DuduQIntro.show({
           companyKicker: intro.companyKicker || "UMA CRIAÇÃO DE",
+          companyLogo: intro.companyLogo || "",
+          companyAlt: intro.companyAlt || "Editora Brasil Cultural",
+          companyName: intro.companyName || "Editora Brasil Cultural",
           companyWidth: intro.companyWidth || 820,
           collectionLogo: intro.collectionLogo || "",
           collectionName: intro.collectionName || "EduQ Play",
