@@ -4,62 +4,257 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>DuduQ Engine — English — Year 1 — Module 01</title>
+
+  <link rel="stylesheet" href="../../../../core/duduq-theme.css?v=110">
+  <link rel="stylesheet" href="../../../../core/duduq-intro.css?v=130">
+  <link rel="stylesheet" href="../../../../core/duduq-transition.css?v=150">
+  <link rel="stylesheet" href="../../../../core/duduq-completion.css?v=127">
+  <link id="duduq-world-fusion-core-style" rel="stylesheet" href="../../../../core/duduq-world-fusion.css?v=147">
 </head>
-
 <body>
-  <div id="root">Carregando DuduQ Engine...</div>
-
   <script>
     window.DUDUQ_ENGINE_BASE =
       new URL("../../../..", window.location.href)
         .href
         .replace(/\/$/, "");
-
-    window.DUDUQ_GAME_CONFIG = Object.freeze({
-      engineBase: window.DUDUQ_ENGINE_BASE,
-      channel: "canary-v1",
-      label: "DuduQ Engine — English — Year 1 — Module 01",
-      modulePath: ["english", "year1", "module01"],
-      contentScript: "./module-01.js?v=172"
-    });
   </script>
 
+  <div id="root">Carregando DuduQ Engine...</div>
+
+  <script src="../../../../core/duduq-assets.js?v=130"></script>
+  <script id="duduq-world-fusion-core-script" src="../../../../core/duduq-world-fusion.js?v=150"></script>
+  <script src="../../../../core/duduq-sound.js?v=110"></script>
+  <script src="../../../../core/duduq-intro.js?v=121"></script>
+  <script src="../../../../core/duduq-schema.js?v=100"></script>
+  <script src="../../../../core/duduq-content-audio.js?v=104"></script>
+  <script src="../../../../core/duduq-completion.js?v=110"></script>
+  <script src="../../../../core/duduq-transition.js?v=167"></script>
+  <script src="../../../../core/duduq-host.js?v=168"></script>
+  <script src="../../../../core/duduq-progress-ui.js?v=100"></script>
+
+  <!-- Active R124 production mechanics only. -->
+  <script src="../../../../mechanics/bubble-pop.js?v=123"></script>
+  <script src="../../../../mechanics/drag-drop.js?v=103"></script>
+  <script src="../../../../mechanics/matching.js?v=103"></script>
+  <script src="../../../../mechanics/smart-sentence.js?v=101"></script>
+  <script src="../../../../mechanics/target-shooter.js?v=100"></script>
+
+  <script src="../../../../core/duduq-router.js?v=100"></script>
+  <script src="./module-01.js?v=100"></script>
+
   <script>
-    (function () {
-      "use strict";
+    window.addEventListener("DOMContentLoaded", function () {
+      const root = document.getElementById("root");
+      const requiredGlobals = [
+        ["DuduQIntro", "DuduQ Intro"],
+        ["DuduQWorldFusion", "DuduQ World Fusion"],
+        ["DuduQSchema", "DuduQ Schema"],
+        ["DuduQContentAudio", "DuduQ Content Audio"],
+        ["DuduQCompletion", "DuduQ Completion"],
+        ["DuduQTransition", "DuduQ Transition"],
+        ["DuduQ", "DuduQ Host"],
+        ["DuduQProgressUI", "DuduQ Progress UI"],
+        ["DuduQRouter", "DuduQ Router"]
+      ];
 
-      const stamp = Date.now();
+      for (const [globalName, label] of requiredGlobals) {
+        if (!window[globalName]) {
+          root.textContent = `Erro: ${label} não foi carregado.`;
+          return;
+        }
+      }
 
-      function loadCentralScript(src) {
-        return new Promise(function (resolve, reject) {
-          const script = document.createElement("script");
-          script.src = src + "?t=" + stamp;
-          script.async = false;
-          script.onload = resolve;
-          script.onerror = function () {
-            reject(new Error("Falha ao carregar " + src));
+      const moduleDefinition =
+        window.DUDUQ_CONTENT?.english?.year1?.module01;
+
+      if (!moduleDefinition || !Array.isArray(moduleDefinition.activities) || !moduleDefinition.activities.length) {
+        root.textContent = "Erro: o conteúdo English Year 1 Module 01 não foi carregado.";
+        return;
+      }
+
+      const mechanicsUsed = Array.from(new Set(
+        moduleDefinition.activities.map((activity) => activity.mechanic).filter(Boolean)
+      ));
+
+      for (const mechanicId of mechanicsUsed) {
+        if (!window.DuduQ.hasMechanic(mechanicId)) {
+          root.textContent = `Erro: a mecânica "${mechanicId}" não foi registrada.`;
+          return;
+        }
+      }
+
+      const steps = [];
+      for (let activityIndex = 0; activityIndex < moduleDefinition.activities.length; activityIndex += 1) {
+        const activity = moduleDefinition.activities[activityIndex];
+        const questions = Array.isArray(activity.questions) ? activity.questions : [];
+
+        if (!activity.id || !activity.title || !activity.mechanic || questions.length === 0) {
+          root.textContent = `Erro: atividade ${activityIndex + 1} incompleta no Módulo 01.`;
+          return;
+        }
+
+        const decisions = questions.map(function (question, questionIndex) {
+          return {
+            question,
+            decision: window.DuduQRouter.select(question, questionIndex, {
+              subject: moduleDefinition.subject,
+              year: moduleDefinition.year,
+              module: moduleDefinition.module
+            })
           };
-          document.head.appendChild(script);
+        });
+
+        const invalid = decisions.find((entry) =>
+          !entry.decision?.selected ||
+          entry.decision.selected.mechanicId !== activity.mechanic
+        );
+
+        if (invalid) {
+          console.error("[DuduQ Factory] Incompatibilidade de Router:", {
+            activity,
+            question: invalid.question,
+            decision: invalid.decision
+          });
+          root.textContent = `Erro: "${activity.title}" não é compatível com "${activity.mechanic}".`;
+          return;
+        }
+
+        steps.push({
+          id: activity.id,
+          mechanic: activity.mechanic,
+          payload: {
+            id: `${activity.id}-payload`,
+            title: activity.title,
+            subject: moduleDefinition.subject,
+            year: moduleDefinition.year,
+            module: moduleDefinition.module,
+            questions
+          },
+          options: {
+            contentVersion: moduleDefinition.version,
+            skill: activity.skill || null
+          }
         });
       }
 
-      loadCentralScript(
-        "../../../../engine/duduq-player-v1.js"
-      )
-        .then(function () {
-          return loadCentralScript(
-            "../../../../engine/duduq-loader-v1.js"
-          );
-        })
-        .catch(function (error) {
-          console.error("[DuduQ Bootstrap]", error);
-          const root = document.getElementById("root");
-          if (root) {
-            root.textContent =
-              "Erro ao carregar o DuduQ Engine.";
-          }
+      const yearKey = String(moduleDefinition.year ?? "").match(/[1-5]/)?.[0] || "";
+      const background =
+        window.DuduQAssets?.assets?.backgrounds?.[yearKey] ||
+        window.DUDUQ_ASSETS?.backgrounds?.[yearKey] || "";
+
+      function prepareBackground() {
+        if (!yearKey || !background) return Promise.resolve(false);
+        try { window.DuduQAssets?.setYear?.(yearKey); } catch (_) {}
+        try {
+          document.documentElement.style.setProperty("--duduq-world-image", `url("${background}")`);
+        } catch (_) {}
+        return new Promise(function (resolve) {
+          const image = new Image();
+          let done = false;
+          const finish = (ok) => {
+            if (done) return;
+            done = true;
+            try { window.DuduQWorldFusion?.refresh?.(); } catch (_) {}
+            resolve(Boolean(ok));
+          };
+          image.onload = () => finish(true);
+          image.onerror = () => finish(false);
+          image.src = background;
+          window.setTimeout(() => finish(false), 6000);
         });
-    })();
+      }
+
+      const backgroundReady = prepareBackground();
+
+      function startModule() {
+        window.DuduQ.start({
+          id: moduleDefinition.id,
+          title: moduleDefinition.title,
+          year: moduleDefinition.year,
+          subject: moduleDefinition.subject,
+          module: moduleDefinition.module,
+          container: "#root",
+          steps
+        });
+      }
+
+      let speechGateTimer = null;
+      function lockInitialSpeech() {
+        document.documentElement.setAttribute("data-duduq-initial-speech-gate", "locked");
+      }
+      function releaseInitialSpeech(delayMs = 420) {
+        if (speechGateTimer !== null) window.clearTimeout(speechGateTimer);
+        speechGateTimer = window.setTimeout(function () {
+          document.documentElement.removeAttribute("data-duduq-initial-speech-gate");
+          try { window.dispatchEvent(new CustomEvent("duduq:initial-speech-release")); } catch (_) {}
+        }, Math.max(0, Number(delayMs) || 0));
+      }
+
+      async function startWithHandoff() {
+        const introApi = window.DuduQIntro;
+        const transition = window.DuduQTransition;
+        lockInitialSpeech();
+        startModule();
+
+        if (!transition?.cover || !transition?.reveal) {
+          introApi?.hide?.({ immediate: true, reason: "start-fallback" });
+          releaseInitialSpeech(300);
+          return;
+        }
+
+        try {
+          const covered = await transition.cover({
+            coverDurationMs: 340,
+            soundEnabled: false
+          });
+          if (covered) {
+            introApi?.hide?.({ immediate: true, reason: "start-handoff" });
+            await transition.reveal({
+              revealDurationMs: 520,
+              stablePaintFrames: 2,
+              revealHoldFraction: .20,
+              soundEnabled: false
+            });
+          }
+          releaseInitialSpeech(420);
+        } catch (error) {
+          console.error("[DuduQ Factory] Falha na transição inicial:", error);
+          introApi?.hide?.({ immediate: true, reason: "start-handoff-fallback" });
+          transition?.hideImmediate?.();
+          releaseInitialSpeech(280);
+        }
+      }
+
+      root.innerHTML = "";
+      const intro = moduleDefinition.intro || {};
+
+      if (window.DuduQIntro?.show) {
+        window.DuduQIntro.show({
+          companyKicker: intro.companyKicker || "UMA CRIAÇÃO DE",
+          companyWidth: intro.companyWidth || 820,
+          collectionLogo: intro.collectionLogo || "",
+          collectionName: intro.collectionName || "EduQ Play",
+          collectionAlt: intro.collectionAlt || "EduQ Play",
+          collectionWidth: intro.collectionWidth || 760,
+          year: moduleDefinition.year,
+          subject: moduleDefinition.subject,
+          module: moduleDefinition.module,
+          loadingLabel: intro.loadingLabel || "PREPARANDO SUA MISSÃO",
+          readyLabel: intro.readyLabel || "MISSÃO PRONTA",
+          startLabel: intro.startLabel || "INICIAR MISSÃO",
+          hint: intro.hint || "Tudo pronto para começar!",
+          minDurationMs: intro.minDurationMs ?? 2200,
+          brandingDurationMs: intro.brandingDurationMs ?? 3000,
+          switchingDurationMs: intro.switchingDurationMs ?? 760,
+          missionMinDurationMs: intro.missionMinDurationMs ?? 1200,
+          readyPromise: backgroundReady,
+          sparkCount: intro.sparkCount ?? 14,
+          onStart: startWithHandoff
+        });
+      } else {
+        backgroundReady.finally(startModule);
+      }
+    });
   </script>
 </body>
 </html>
