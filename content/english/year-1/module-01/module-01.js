@@ -1,11 +1,11 @@
 /* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 01
    Hello! Greetings & Introductions
-   Version 1.0.0 — FACTORY CANDIDATE
+   Version 1.0.1 — FACTORY REPO-READY
 
    SOURCE:
-   - DUDUQ English 1–5 — Revisão Pedagógica Integral v2.2
-   - DUDUQ Master Document — Conteúdo & Orquestração v1.0
+   - DUDUQ_Ingles_1ao5.docx — Revisão Pedagógica Integral v2.2
+   - DUDUQ_Documento_Mestre_v1.0(5).docx — Conteúdo & Orquestração v1.0
 
    FACTORY:
    - Prompt Mestre DuduQ Factory v1.0
@@ -16,7 +16,7 @@
    - GitHub write: NO
 
    DELIVERY STATUS:
-   - BLOCKED_SOURCE_CONFLICT
+   - BLOCKED_MEDIA_GAPS
 
    IMPORTANT:
    - Procedural SVGs in PREVIEW_VISUALS are review-only substitutes for
@@ -28,7 +28,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0";
+  const VERSION = "1.0.1";
   const YEAR = 1;
   const MODULE = 1;
   const BASE = "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/";
@@ -454,16 +454,24 @@
     return Object.freeze({ code: null, description });
   }
 
-  function option(id, text) {
+  function option(id, text, audioEnabled = true) {
     return {
       id,
       text,
-      audio: {
-        enabled: true,
-        text,
-        language: "en-US",
-        role: "option"
-      }
+      audio: audioEnabled
+        ? {
+            enabled: true,
+            text,
+            language: "en-US",
+            role: "option"
+          }
+        : {
+            enabled: false,
+            src: null,
+            text: "",
+            language: "en-US",
+            role: "option"
+          }
     };
   }
 
@@ -491,7 +499,7 @@
         language: bp.audioText ? "en-US" : "pt-BR",
         role: "instruction"
       },
-      alternatives: bp.options.map((entry) => option(entry.id, entry.text)),
+      alternatives: bp.options.map((entry) => option(entry.id, entry.text, mechanic !== "target-shooter")),
       answer,
       feedback: {
         correct: `Muito bem! ${bp.statement}.`,
@@ -1013,8 +1021,8 @@
     id: "english-year-1-module-01",
     version: VERSION,
     sourceVersion: "DUDUQ English 1–5 v2.2",
-    factoryVersion: "1.0",
-    productionStatus: "BLOCKED_SOURCE_CONFLICT",
+    factoryVersion: "1.1",
+    productionStatus: "BLOCKED_MEDIA_GAPS",
     subject: "Língua Inglesa",
     year: YEAR,
     module: MODULE,
@@ -1034,7 +1042,11 @@
       smartAssets: true,
       integrationB: true,
       previewGeneratedAssetsAllowedForReviewOnly: true,
-      commercialGate: "fallback=0; blocked=0; missing=0; assetGaps=0"
+      commercialGate: "fallback=0; blocked=0; missing=0; assetGaps=0",
+      repoReady: true,
+      cloudflareReady: true,
+      engineBaseline: "Canary R124",
+      routerContract: "R124_OPTION_AUDIO_SAFE"
     },
     learningGoals: [
       "Compreender e usar cumprimentos e despedidas frequentes em situações visuais e orais; reconhecer apresentação simples com “I’m + name”; identificar boy/girl como vocabulário receptivo."
@@ -1043,14 +1055,17 @@
       officialSource: "DUDUQ English 1–5 v2.2 — Manual do Educador, 1º ano, Unidade 1, p. 21",
       literacy: "1º ano: escuta, imagem, gesto e chunks; leitura sempre apoiada.",
       maintenance: "IDs editoriais permanecem estáveis. Troca de imagem usa imageAsset; troca de mecânica exige regenerar o payload.",
-      qaStatus: "BLOCKED_SOURCE_CONFLICT"
+      qaStatus: "BLOCKED_MEDIA_GAPS"
     },
     intro: {
       companyKicker: "UMA CRIAÇÃO DE",
+      companyLogo: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/LOGO%20DA%20EMPRESA_COLORIDO.png",
+      companyAlt: "Editora Brasil Cultural",
+      companyName: "Editora Brasil Cultural",
       companyWidth: 820,
-      collectionLogo: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Logo%20EduQ%20Play.png",
-      collectionName: "EduQ Play",
-      collectionAlt: "EduQ Play",
+      collectionLogo: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/LOGO%20DUDUQ.png",
+      collectionName: "DuduQ",
+      collectionAlt: "DuduQ",
       collectionWidth: 760,
       loadingLabel: "PREPARANDO SUA MISSÃO",
       readyLabel: "MISSÃO PRONTA",
