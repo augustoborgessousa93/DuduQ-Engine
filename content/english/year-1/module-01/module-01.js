@@ -1,7 +1,7 @@
 /* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 01
    Hello! Greetings & Introductions
-   Version 1.2.0 — PEDAGOGY v1.1 / FOCUS-4 FACTORY REPO PACKAGE
+   Version 1.3.0 — PEDAGOGY v1.1 / FOCUS-4 / INTEGRATION-B v1.2 FACTORY REPO PACKAGE
 
    SOURCE:
    - DUDUQ_Ingles_1ao5.docx — Revisão Pedagógica Integral v2.2
@@ -30,7 +30,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.2.0";
+  const VERSION = "1.3.0";
   const YEAR = 1;
   const MODULE = 1;
   const BASE = "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/";
@@ -470,6 +470,14 @@
     assetGovernance: "FAMILY_VARIANT_SEMANTIC_CONTRAST",
     visualVariation: true,
     semanticContrast: true,
+    integrationB: {
+      enabled: true,
+      package: "DUDUQ_SMART_ASSETS_ETAPA_B_V1_2_NATIVE_KEY_GUARD",
+      version: "1.2.0",
+      nativeKeyGuard: true,
+      semanticAuthoringField: "imageAsset",
+      preservedNativeField: "imageAssetKey"
+    },
     audit: "PEDAGOGICAL_PASS"
   });
 
@@ -1097,12 +1105,23 @@
 
     const items = bp.options.map((entry, index) => {
       const image = optionVisual(bp, entry, index);
+      const family = semanticFamily(entry.text);
       return {
         id: `target-${entry.id}`,
         label: "",
-        image,
         display: "image",
         alt: entry.text,
+        /* Integration B v1.2 authoring source + R124 native projection. */
+        imageAsset: entry.text,
+        imageCategory: family.category,
+        image,
+        smartAssetsResolvedUrl: image,
+        smartAssetsIntegration: {
+          package: "DUDUQ_SMART_ASSETS_ETAPA_B_V1_2_NATIVE_KEY_GUARD",
+          version: "1.2.0",
+          semanticField: "imageAsset",
+          nativeField: "image"
+        },
         assetStatus: String(image).startsWith("data:image/") ? "generated-review" : "resolved"
       };
     });
@@ -1134,6 +1153,7 @@
     const contrast = bp.options.find((entry) => entry.id !== bp.correct) || bp.options[0];
     const selected = [correct, contrast];
     const assets = {};
+    const assetSources = {};
     const leftItems = selected.map((entry) => ({
       id: `audio-${entry.id}`,
       spokenText: entry.text,
@@ -1143,6 +1163,16 @@
     const rightItems = selected.map((entry, index) => {
       const image = optionVisual(bp, entry, bp.options.findIndex((candidate) => candidate.id === entry.id));
       const key = `asset-${entry.id}`;
+      const family = semanticFamily(entry.text);
+      /*
+       * Integration B v1.2 Native Key Guard:
+       * imageAsset is semantic authoring; imageAssetKey remains the R124 technical key.
+       */
+      assetSources[key] = {
+        imageAsset: entry.text,
+        imageCategory: family.category,
+        smartAssetsResolvedUrl: image
+      };
       assets[key] = image;
       return { id: `image-${entry.id}`, imageAssetKey: key, alt: entry.text };
     });
@@ -1166,10 +1196,11 @@
           mode: "audio-image",
           leftTitle: "Ouça",
           rightTitle: "Relacione",
+          assetSources,
+          assets,
           leftItems,
           rightItems,
           pairs,
-          assets,
           behavior: {
             shuffleLeft: true,
             shuffleRight: true,
@@ -1214,6 +1245,15 @@
           highVisualPersistence: true,
           timerPunitive: false,
           readingRequired: false
+        },
+        smartAssetsIntegrationB: {
+          package: "DUDUQ_SMART_ASSETS_ETAPA_B_V1_2_NATIVE_KEY_GUARD",
+          version: "1.2.0",
+          nativeKeyGuard: true,
+          semanticImageRequested: false,
+          nativeImageAssetKeyEmitted: false,
+          status: "SAFE_PICTOGRAM_MODE",
+          reason: "Bubble Pop R124 accepts only explicit approved imageAssetKey bridges; generic Y1 semantic images are not projected to unsupported native keys."
         },
         behavior: {
           motionProfile: "very-slow",
@@ -1654,7 +1694,7 @@
     id: "english-year-1-module-01",
     version: VERSION,
     sourceVersion: "DUDUQ English 1–5 v2.2",
-    factoryVersion: "1.1-focus4-r124",
+    factoryVersion: "1.1-focus4-r124-intb1.2",
     productionStatus: "REVIEW_REQUIRED_MEDIA_GAPS",
     subject: "Língua Inglesa",
     year: YEAR,
