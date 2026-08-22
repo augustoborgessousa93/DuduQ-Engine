@@ -1,6 +1,6 @@
 /* =========================================================
-   DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 01
-   Hello! Greetings & Introductions
+   DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 05
+   Pets, Colors & Size
    Version 1.1.0 — PEDAGOGY v1.0 / FACTORY REPO PACKAGE
 
    SOURCE:
@@ -32,16 +32,16 @@
 
   const VERSION = "1.1.0";
   const YEAR = 1;
-  const MODULE = 1;
+  const MODULE = 5;
   const BASE = "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/";
   const IMAGE_BASE = BASE + "Imagens%20Ilustrativa/";
-  const AUDIO_BASE = BASE + "Audios/1_ANO/M01/";
+  const AUDIO_BASE = BASE + "Audios/1_ANO/M05/";
 
   window.DUDUQ_CONTENT = window.DUDUQ_CONTENT || {};
   window.DUDUQ_CONTENT.english = window.DUDUQ_CONTENT.english || {};
   window.DUDUQ_CONTENT.english.year1 = window.DUDUQ_CONTENT.english.year1 || {};
 
-  if (window.DUDUQ_CONTENT.english.year1.module01?.version === VERSION) {
+  if (window.DUDUQ_CONTENT.english.year1.module05?.version === VERSION) {
     return;
   }
 
@@ -186,33 +186,103 @@
   });
 
   const VISUAL_META = Object.freeze({
-    "boy": {
-      "status": "resolved",
-      "imageAsset": "boy",
-      "imageCategory": "people",
-      "file": "Boy.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Boy.png"
+    "big-small-cats": {
+      "status": "gap-preview",
+      "imageAsset": "big-small-cats",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
     },
-    "girl": {
-      "status": "resolved",
-      "imageAsset": "girl",
-      "imageCategory": "people",
-      "file": "Girl.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Girl.png"
+    "big-small-dogs": {
+      "status": "gap-preview",
+      "imageAsset": "big-small-dogs",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
     },
-    "good afternoon": {
+    "bird": {
       "status": "resolved",
-      "imageAsset": "good afternoon",
-      "imageCategory": "greetings",
-      "file": "Good Afternoon.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Good%20Afternoon.png"
+      "imageAsset": "bird",
+      "imageCategory": "animals",
+      "file": "Passáro.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Pass%C3%A1ro.png"
     },
-    "good morning": {
+    "brown-dog": {
+      "status": "gap-preview",
+      "imageAsset": "brown-dog",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "cat": {
       "status": "resolved",
-      "imageAsset": "good morning",
-      "imageCategory": "greetings",
-      "file": "Good Morning.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Good%20Morning.png"
+      "imageAsset": "cat",
+      "imageCategory": "animals",
+      "file": "Gato.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Gato.png"
+    },
+    "dog": {
+      "status": "resolved",
+      "imageAsset": "dog",
+      "imageCategory": "animals",
+      "file": "Cachorro.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Cachorro.png"
+    },
+    "fish": {
+      "status": "resolved",
+      "imageAsset": "fish",
+      "imageCategory": "animals",
+      "file": "Peixe.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Peixe.png"
+    },
+    "hamster": {
+      "status": "resolved",
+      "imageAsset": "hamster",
+      "imageCategory": "animals",
+      "file": "Hamister.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Hamister.png"
+    },
+    "person-cat": {
+      "status": "gap-preview",
+      "imageAsset": "person-cat",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "person-dog": {
+      "status": "gap-preview",
+      "imageAsset": "person-dog",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "person-rabbit": {
+      "status": "gap-preview",
+      "imageAsset": "person-rabbit",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "rabbit": {
+      "status": "resolved",
+      "imageAsset": "rabbit",
+      "imageCategory": "animals",
+      "file": "Coelho.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Coelho.png"
+    },
+    "small-white-cat": {
+      "status": "gap-preview",
+      "imageAsset": "small-white-cat",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "turtle": {
+      "status": "resolved",
+      "imageAsset": "turtle",
+      "imageCategory": "animals",
+      "file": "Tartaruga.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Tartaruga.png"
     }
   });
 
@@ -254,201 +324,145 @@
   });
 
   const AUDIO_CATALOG = Object.freeze({
-    "EN1-M1-01": {
-      "mechanic": "target-shooter",
-      "instruction": {
-        "text": "Ouça a saudação e escolha o que foi dito.",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-01_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-01_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": [
-        {
-          "text": "Hello",
-          "language": "en-US",
-          "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-01_TARGET-SHOOTER_ESTIMULO01_HELLO_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-01_TARGET-SHOOTER_ESTIMULO01_HELLO_ENUS.mp3"
-        }
-      ]
-    },
-    "EN1-M1-02": {
+    "EN1-M5-01": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "É de manhã. Qual saudação combina com esse momento?",
+        "text": "Observe o animal e escolha seu nome em inglês.",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-02_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-02_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-01_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-01_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M1-03": {
+    "EN1-M5-02": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "É de tarde. Qual saudação combina com esse momento?",
+        "text": "Qual palavra em inglês nomeia o animal da imagem?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-02_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-02_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M1-04": {
-      "mechanic": "target-shooter",
-      "instruction": {
-        "text": "Ouça “Goodbye”. Em qual situação essa palavra combina?",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-04_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-04_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": [
-        {
-          "text": "Goodbye",
-          "language": "en-US",
-          "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-04_TARGET-SHOOTER_ESTIMULO01_GOODBYE_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-04_TARGET-SHOOTER_ESTIMULO01_GOODBYE_ENUS.mp3"
-        }
-      ]
-    },
-    "EN1-M1-05": {
-      "mechanic": "target-shooter",
-      "instruction": {
-        "text": "Ouça: “I’m Leo.” Qual fala apresenta o nome do personagem?",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-05_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-05_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": [
-        {
-          "text": "I'm Leo",
-          "language": "en-US",
-          "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-05_TARGET-SHOOTER_ESTIMULO01_I-M-LEO_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-05_TARGET-SHOOTER_ESTIMULO01_I-M-LEO_ENUS.mp3"
-        }
-      ]
-    },
-    "EN1-M1-06": {
+    "EN1-M5-03": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Observe o personagem indicado como “boy”. Qual palavra você deve escolher?",
+        "text": "Toque no cartão com o nome em inglês do animal.",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-06_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-06_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M1-07": {
+    "EN1-M5-04": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Observe a personagem indicada como “girl”. Qual palavra você deve escolher?",
+        "text": "A imagem mostra um animal. Escolha o nome correto em inglês.",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-04_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-04_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M1-08": {
-      "mechanic": "target-shooter",
+    "EN1-M5-05": {
+      "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Ouça: “Hello!” Qual resposta também é um cumprimento?",
+        "text": "Encontre o cartão que nomeia o animal mostrado.",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-08_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-08_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-05_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-05_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": []
+    },
+    "EN1-M5-06": {
+      "mechanic": "smart-sentence",
+      "instruction": {
+        "text": "Qual opção identifica corretamente o animal em inglês?",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-06_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-06_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": []
+    },
+    "EN1-M5-07": {
+      "mechanic": "smart-sentence",
+      "instruction": {
+        "text": "Observe os dois cachorros. Toque no cachorro big.",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": []
+    },
+    "EN1-M5-08": {
+      "mechanic": "smart-sentence",
+      "instruction": {
+        "text": "Observe os dois gatos. Toque no gato small.",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-08_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-08_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": []
+    },
+    "EN1-M5-09": {
+      "mechanic": "smart-sentence",
+      "instruction": {
+        "text": "Observe o cachorro marrom. Qual expressão descreve a imagem?",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-09_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-09_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": []
+    },
+    "EN1-M5-10": {
+      "mechanic": "smart-sentence",
+      "instruction": {
+        "text": "Observe a tartaruga. Complete a fala: “It’s a ___.”",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-10_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-10_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": []
+    },
+    "EN1-M5-11": {
+      "mechanic": "target-shooter",
+      "instruction": {
+        "text": "Observe o personagem com um gato. Ouça: “I have a cat.” Qual imagem combina com a fala?",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-11_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-11_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": [
         {
-          "text": "Hello",
+          "text": "I have a cat",
           "language": "en-US",
           "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-08_TARGET-SHOOTER_ESTIMULO01_HELLO_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-08_TARGET-SHOOTER_ESTIMULO01_HELLO_ENUS.mp3"
+          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-11_TARGET-SHOOTER_ESTIMULO01_I-HAVE-A-CAT_ENUS.mp3",
+          "file": "ING_1ANO_M05_EN1-M5-11_TARGET-SHOOTER_ESTIMULO01_I-HAVE-A-CAT_ENUS.mp3"
         }
       ]
     },
-    "EN1-M1-09": {
-      "mechanic": "target-shooter",
+    "EN1-M5-12": {
+      "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Ouça: “I’m Ana.” O que a pessoa está fazendo?",
+        "text": "Observe o gato branco e pequeno. Qual descrição combina com a imagem?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-09_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-09_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M05/ING_1ANO_M05_EN1-M5-12_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M05_EN1-M5-12_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
-      "stimuli": [
-        {
-          "text": "I'm Ana",
-          "language": "en-US",
-          "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-09_TARGET-SHOOTER_ESTIMULO01_I-M-ANA_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-09_TARGET-SHOOTER_ESTIMULO01_I-M-ANA_ENUS.mp3"
-        }
-      ]
-    },
-    "EN1-M1-10": {
-      "mechanic": "target-shooter",
-      "instruction": {
-        "text": "A aula terminou. Ouça: “Bye!”. Qual cartão mostra a expressão ouvida?",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-10_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-10_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": [
-        {
-          "text": "Bye",
-          "language": "en-US",
-          "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-10_TARGET-SHOOTER_ESTIMULO01_BYE_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-10_TARGET-SHOOTER_ESTIMULO01_BYE_ENUS.mp3"
-        }
-      ]
-    },
-    "EN1-M1-11": {
-      "mechanic": "target-shooter",
-      "instruction": {
-        "text": "Leo está indo embora. Ouça: “See you!”. Qual expressão você ouviu?",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-11_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-11_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": [
-        {
-          "text": "See you",
-          "language": "en-US",
-          "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-11_TARGET-SHOOTER_ESTIMULO01_SEE-YOU_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-11_TARGET-SHOOTER_ESTIMULO01_SEE-YOU_ENUS.mp3"
-        }
-      ]
-    },
-    "EN1-M1-12": {
-      "mechanic": "target-shooter",
-      "instruction": {
-        "text": "Mia diz: “Hello! I’m Mia.” Qual resposta também é um cumprimento e mantém a conversa?",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-12_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-12_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": [
-        {
-          "text": "Hello! I'm Mia.",
-          "language": "en-US",
-          "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-12_TARGET-SHOOTER_ESTIMULO01_HELLO-I-M-MIA_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-12_TARGET-SHOOTER_ESTIMULO01_HELLO-I-M-MIA_ENUS.mp3"
-        }
-      ]
+      "stimuli": []
     }
   });
 
@@ -805,375 +819,379 @@
 
   const BLUEPRINTS = Object.freeze([
     {
-      "id": "EN1-M1-01",
-      "status": "Manter",
+      "id": "EN1-M5-01",
+      "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Identificar cumprimentos básicos usados no dia a dia.",
-      "statement": "Hello",
-      "instruction": "Ouça a saudação e escolha o que foi dito.",
+      "skill": "Identificar animais/bichos de estimação em inglês.",
+      "statement": "Dog",
+      "instruction": "Observe o animal e escolha seu nome em inglês.",
       "options": [
         {
           "id": "o1",
-          "text": "Goodbye"
+          "text": "cat"
         },
         {
           "id": "o2",
-          "text": "Hello"
+          "text": "dog"
         },
         {
           "id": "o3",
-          "text": "Good morning"
+          "text": "fish"
         }
       ],
       "correct": "o2",
-      "kind": "audio-choice",
-      "audioText": "Hello",
-      "visual": null,
-      "visualAlt": null,
+      "kind": "image-choice",
+      "audioText": null,
+      "visual": "dog",
+      "visualAlt": "Dog",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Áudio EN obrigatório: “Hello”.",
+      "sourceMedia": "Imagem obrigatória: dog.",
       "note": ""
     },
     {
-      "id": "EN1-M1-02",
-      "status": "Manter",
+      "id": "EN1-M5-02",
+      "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Relacionar cumprimentos a situações cotidianas.",
-      "statement": "Good morning",
-      "instruction": "É de manhã. Qual saudação combina com esse momento?",
+      "skill": "Identificar animais/bichos de estimação em inglês.",
+      "statement": "Cat",
+      "instruction": "Qual palavra em inglês nomeia o animal da imagem?",
       "options": [
         {
           "id": "o1",
-          "text": "Good afternoon"
+          "text": "dog"
         },
         {
           "id": "o2",
-          "text": "Goodbye"
+          "text": "fish"
         },
         {
           "id": "o3",
-          "text": "Good morning"
+          "text": "cat"
         }
       ],
       "correct": "o3",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "good morning",
-      "visualAlt": "Cena de manhã / Good morning",
+      "visual": "cat",
+      "visualAlt": "Cat",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem recomendada: manhã/sol nascendo.",
+      "sourceMedia": "Imagem obrigatória: cat.",
       "note": ""
     },
     {
-      "id": "EN1-M1-03",
-      "status": "Manter",
+      "id": "EN1-M5-03",
+      "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Relacionar cumprimentos a situações cotidianas.",
-      "statement": "Good afternoon",
-      "instruction": "É de tarde. Qual saudação combina com esse momento?",
+      "skill": "Identificar animais/bichos de estimação em inglês.",
+      "statement": "Fish",
+      "instruction": "Toque no cartão com o nome em inglês do animal.",
       "options": [
         {
           "id": "o1",
-          "text": "Good afternoon"
+          "text": "fish"
         },
         {
           "id": "o2",
-          "text": "Good morning"
+          "text": "dog"
         },
         {
           "id": "o3",
-          "text": "Goodbye"
+          "text": "cat"
         }
       ],
       "correct": "o1",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "good afternoon",
-      "visualAlt": "Cena do período da tarde",
+      "visual": "fish",
+      "visualAlt": "Fish",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem recomendada: período da tarde.",
+      "sourceMedia": "Imagem obrigatória: fish.",
       "note": ""
     },
     {
-      "id": "EN1-M1-04",
+      "id": "EN1-M5-04",
       "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Compreender uma expressão de despedida em contexto.",
-      "statement": "Goodbye",
-      "instruction": "Ouça “Goodbye”. Em qual situação essa palavra combina?",
+      "skill": "Identificar animais/bichos de estimação em inglês.",
+      "statement": "Rabbit",
+      "instruction": "A imagem mostra um animal. Escolha o nome correto em inglês.",
       "options": [
         {
           "id": "o1",
-          "text": "ao chegar"
+          "text": "dog"
         },
         {
           "id": "o2",
-          "text": "ao se despedir"
+          "text": "rabbit"
         },
         {
           "id": "o3",
-          "text": "ao dizer a idade"
+          "text": "cat"
         }
       ],
       "correct": "o2",
-      "kind": "audio-choice",
-      "audioText": "Goodbye",
-      "visual": null,
-      "visualAlt": null,
+      "kind": "image-choice",
+      "audioText": null,
+      "visual": "rabbit",
+      "visualAlt": "Rabbit",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Áudio EN obrigatório: “Goodbye”; três cenas simples como alternativas.",
-      "note": "Preview usa opções textuais; a fonte solicita cenas. Candidato bloqueado por SOURCE_CONFLICT de M1."
+      "sourceMedia": "Imagem obrigatória: rabbit.",
+      "note": ""
     },
     {
-      "id": "EN1-M1-05",
+      "id": "EN1-M5-05",
       "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Reconhecer uma apresentação pessoal muito simples com “I’m + name”.",
-      "statement": "I'm Leo",
-      "instruction": "Ouça: “I’m Leo.” Qual fala apresenta o nome do personagem?",
+      "skill": "Identificar animais/bichos de estimação em inglês.",
+      "statement": "Hamster",
+      "instruction": "Encontre o cartão que nomeia o animal mostrado.",
       "options": [
         {
           "id": "o1",
-          "text": "Goodbye!"
+          "text": "dog"
         },
         {
           "id": "o2",
-          "text": "Good afternoon!"
+          "text": "cat"
         },
         {
           "id": "o3",
-          "text": "I’m Leo."
+          "text": "hamster"
         }
       ],
       "correct": "o3",
-      "kind": "audio-choice",
-      "audioText": "I'm Leo",
-      "visual": null,
-      "visualAlt": null,
+      "kind": "image-choice",
+      "audioText": null,
+      "visual": "hamster",
+      "visualAlt": "Hamster",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Áudio EN obrigatório: “I’m Leo.” Personagem fictício.",
+      "sourceMedia": "Imagem obrigatória: hamster.",
       "note": ""
     },
     {
-      "id": "EN1-M1-06",
+      "id": "EN1-M5-06",
       "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Reconhecer o vocabulário boy/girl com apoio visual.",
-      "statement": "Boy",
-      "instruction": "Observe o personagem indicado como “boy”. Qual palavra você deve escolher?",
+      "skill": "Identificar animais/bichos de estimação em inglês.",
+      "statement": "Bird",
+      "instruction": "Qual opção identifica corretamente o animal em inglês?",
       "options": [
         {
           "id": "o1",
-          "text": "boy"
+          "text": "bird"
         },
         {
           "id": "o2",
-          "text": "girl"
+          "text": "dog"
         },
         {
           "id": "o3",
-          "text": "hello"
+          "text": "cat"
         }
       ],
       "correct": "o1",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "boy",
-      "visualAlt": "Personagem fictício representando boy",
+      "visual": "bird",
+      "visualAlt": "Bird",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: personagem fictício não estereotipado.",
+      "sourceMedia": "Imagem obrigatória: bird.",
       "note": ""
     },
     {
-      "id": "EN1-M1-07",
+      "id": "EN1-M5-07",
       "status": "Ajustar",
       "difficulty": "easy",
-      "skill": "Reconhecer o vocabulário boy/girl com apoio visual.",
-      "statement": "Girl",
-      "instruction": "Observe a personagem indicada como “girl”. Qual palavra você deve escolher?",
+      "skill": "Compreender big em contraste visual com small.",
+      "statement": "Big dog",
+      "instruction": "Observe os dois cachorros. Toque no cachorro big.",
       "options": [
         {
           "id": "o1",
-          "text": "boy"
+          "text": "small dog"
         },
         {
           "id": "o2",
-          "text": "girl"
+          "text": "big dog"
         },
         {
           "id": "o3",
-          "text": "goodbye"
+          "text": "brown cat"
         }
       ],
       "correct": "o2",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "girl",
-      "visualAlt": "Personagem fictícia representando girl",
+      "visual": "big-small-dogs",
+      "visualAlt": "Dois cachorros iguais em tamanhos diferentes",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: personagem fictícia não estereotipada.",
+      "sourceMedia": "Imagem obrigatória: dois cachorros iguais em tamanhos claramente diferentes; áudio EN recomendado: “big”.",
       "note": ""
     },
     {
-      "id": "EN1-M1-08",
+      "id": "EN1-M5-08",
       "status": "Ajustar",
-      "difficulty": "medium",
-      "skill": "Selecionar uma resposta adequada a um cumprimento simples.",
-      "statement": "Hello → Hi",
-      "instruction": "Ouça: “Hello!” Qual resposta também é um cumprimento?",
+      "difficulty": "easy",
+      "skill": "Compreender small em contraste visual com big.",
+      "statement": "Small cat",
+      "instruction": "Observe os dois gatos. Toque no gato small.",
       "options": [
         {
           "id": "o1",
-          "text": "Goodbye!"
+          "text": "big cat"
         },
         {
           "id": "o2",
-          "text": "Good night!"
+          "text": "brown dog"
         },
         {
           "id": "o3",
-          "text": "Hi!"
+          "text": "small cat"
         }
       ],
       "correct": "o3",
-      "kind": "audio-choice",
-      "audioText": "Hello",
-      "visual": null,
-      "visualAlt": null,
+      "kind": "image-choice",
+      "audioText": null,
+      "visual": "big-small-cats",
+      "visualAlt": "Dois gatos iguais em tamanhos diferentes",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Áudio EN obrigatório: “Hello!”.",
+      "sourceMedia": "Imagem obrigatória: dois gatos iguais em tamanhos claramente diferentes; áudio EN recomendado: “small”.",
       "note": ""
     },
     {
-      "id": "EN1-M1-09",
-      "status": "Manter",
+      "id": "EN1-M5-09",
+      "status": "Ajustar",
       "difficulty": "medium",
-      "skill": "Identificar apresentação pessoal simples.",
-      "statement": "I'm Ana",
-      "instruction": "Ouça: “I’m Ana.” O que a pessoa está fazendo?",
+      "skill": "Combinar cor + pet em uma expressão curta.",
+      "statement": "Brown dog",
+      "instruction": "Observe o cachorro marrom. Qual expressão descreve a imagem?",
       "options": [
         {
           "id": "o1",
-          "text": "Dizendo o próprio nome"
+          "text": "brown dog"
         },
         {
           "id": "o2",
-          "text": "Despedindo-se"
+          "text": "white dog"
         },
         {
           "id": "o3",
-          "text": "Dizendo boa tarde"
+          "text": "brown cat"
         }
       ],
       "correct": "o1",
-      "kind": "audio-choice",
-      "audioText": "I'm Ana",
-      "visual": null,
-      "visualAlt": null,
+      "kind": "image-choice",
+      "audioText": null,
+      "visual": "brown-dog",
+      "visualAlt": "Brown dog",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Áudio EN obrigatório: “I’m Ana.”",
+      "sourceMedia": "Imagem obrigatória: brown dog.",
       "note": ""
     },
     {
-      "id": "EN1-M1-10",
+      "id": "EN1-M5-10",
       "status": "Reescrever",
       "difficulty": "medium",
-      "skill": "Reconhecer uma despedida curta e frequente em contexto escolar.",
-      "statement": "Bye",
-      "instruction": "A aula terminou. Ouça: “Bye!”. Qual cartão mostra a expressão ouvida?",
+      "skill": "Completar um chunk modelado com um pet.",
+      "statement": "It's a turtle",
+      "instruction": "Observe a tartaruga. Complete a fala: “It’s a ___.”",
       "options": [
         {
           "id": "o1",
-          "text": "Hello!"
+          "text": "dog"
         },
         {
           "id": "o2",
-          "text": "Bye!"
+          "text": "turtle"
         },
         {
           "id": "o3",
-          "text": "Good morning!"
+          "text": "fish"
         }
       ],
       "correct": "o2",
-      "kind": "audio-choice",
-      "audioText": "Bye",
-      "visual": null,
-      "visualAlt": null,
+      "kind": "image-choice",
+      "audioText": null,
+      "visual": "turtle",
+      "visualAlt": "Turtle",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Áudio EN obrigatório: “Bye!”. Cena simples de fim da aula.",
-      "note": ""
+      "sourceMedia": "Imagem obrigatória: turtle.",
+      "note": "Smart Sentence usa o chunk IT’S A + lacuna."
     },
     {
-      "id": "EN1-M1-11",
+      "id": "EN1-M5-11",
       "status": "Reescrever",
       "difficulty": "medium",
-      "skill": "Reconhecer uma despedida frequente e amigável em contexto.",
-      "statement": "See you",
-      "instruction": "Leo está indo embora. Ouça: “See you!”. Qual expressão você ouviu?",
+      "skill": "Compreender o chunk “I have a...” com apoio de imagem.",
+      "statement": "I have a cat",
+      "instruction": "Observe o personagem com um gato. Ouça: “I have a cat.” Qual imagem combina com a fala?",
       "options": [
         {
           "id": "o1",
-          "text": "See you!"
+          "text": "personagem com um cachorro"
         },
         {
           "id": "o2",
-          "text": "Good afternoon!"
+          "text": "personagem com um coelho"
         },
         {
           "id": "o3",
-          "text": "Hi!"
+          "text": "personagem com um gato"
         }
       ],
-      "correct": "o1",
-      "kind": "audio-choice",
-      "audioText": "See you",
+      "correct": "o3",
+      "kind": "audio-image",
+      "audioText": "I have a cat",
       "visual": null,
       "visualAlt": null,
-      "imageOptions": null,
+      "imageOptions": [
+        "person-dog",
+        "person-rabbit",
+        "person-cat"
+      ],
       "sequence": null,
-      "sourceMedia": "Áudio EN obrigatório: “See you!”. Cena de despedida.",
+      "sourceMedia": "Áudio EN obrigatório: “I have a cat.” + três imagens de personagens fictícios com pets diferentes.",
       "note": ""
     },
     {
-      "id": "EN1-M1-12",
-      "status": "Reescrever",
+      "id": "EN1-M5-12",
+      "status": "Ajustar",
       "difficulty": "hard",
-      "skill": "Selecionar uma resposta simples que mantém uma interação de cumprimento.",
-      "statement": "Hi, Mia!",
-      "instruction": "Mia diz: “Hello! I’m Mia.” Qual resposta também é um cumprimento e mantém a conversa?",
+      "skill": "Compreender uma descrição curta com tamanho + cor + animal.",
+      "statement": "Small white cat",
+      "instruction": "Observe o gato branco e pequeno. Qual descrição combina com a imagem?",
       "options": [
         {
           "id": "o1",
-          "text": "Hi, Mia!"
+          "text": "It’s a small white cat."
         },
         {
           "id": "o2",
-          "text": "Bye, Mia!"
+          "text": "It’s a big white cat."
         },
         {
           "id": "o3",
-          "text": "See you, Mia!"
+          "text": "It’s a small brown cat."
         }
       ],
       "correct": "o1",
-      "kind": "audio-choice",
-      "audioText": "Hello! I'm Mia.",
-      "visual": null,
-      "visualAlt": null,
+      "kind": "image-choice",
+      "audioText": null,
+      "visual": "small-white-cat",
+      "visualAlt": "Small white cat",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Áudio EN recomendado do mini diálogo; personagens fictícios.",
+      "sourceMedia": "Imagem obrigatória: small white cat.",
       "note": ""
     }
   ]);
@@ -1186,7 +1204,7 @@
     const mechanic = question.delivery.mechanic;
     if (!current || current.mechanic !== mechanic || current.questions.length >= 4) {
       current = {
-        id: `en1-m01-step-${String(activityGroups.length + 1).padStart(2, "0")}`,
+        id: `en1-m05-step-${String(activityGroups.length + 1).padStart(2, "0")}`,
         title: mechanic === "drag-drop" ? "Coloque na ordem" : "Ouça e escolha",
         mechanic,
         skill: question.skill,
@@ -1199,7 +1217,7 @@
   });
 
   const moduleDefinition = {
-    id: "english-year-1-module-01",
+    id: "english-year-1-module-05",
     version: VERSION,
     sourceVersion: "DUDUQ English 1–5 v2.2",
     factoryVersion: "1.0-pedagogy-v1",
@@ -1207,11 +1225,11 @@
     subject: "Língua Inglesa",
     year: YEAR,
     module: MODULE,
-    title: "Hello! Greetings & Introductions",
-    description: "Compreender e usar cumprimentos e despedidas frequentes em situações visuais e orais; reconhecer apresentação simples com “I’m + name”; identificar boy/girl como vocabulário receptivo.",
+    title: "Pets, Colors & Size",
+    description: "Reconhecer pets e descrevê-los com cor e tamanho usando chunks modelados e forte apoio visual.",
     estimatedMinutes: 4,
     audioPolicy: {
-      primary: "RECONCILE_EXISTING_M01_AUDIO",
+      primary: "AUDIO_GAP",
       fallback: "speech-synthesis",
       base: AUDIO_BASE,
       instructionLanguage: "pt-BR",
@@ -1243,10 +1261,10 @@
       gates: ["PED-01", "PED-02", "PED-03", "PED-04", "PED-05", "PED-06", "PED-07", "PED-08", "PED-09", "PED-10", "PED-11", "PED-12"]
     },
     learningGoals: [
-      "Compreender e usar cumprimentos e despedidas frequentes em situações visuais e orais; reconhecer apresentação simples com “I’m + name”; identificar boy/girl como vocabulário receptivo."
+      "Reconhecer pets e descrevê-los com cor e tamanho usando chunks modelados e forte apoio visual."
     ],
     pedagogicalNotes: {
-      officialSource: "DUDUQ English 1–5 v2.2 — Manual do Educador, 1º ano, Unidade 1, p. 21",
+      officialSource: "DUDUQ English 1–5 v2.2 — Manual do Educador, 1º ano, Unidade 4, p. 24",
       literacy: "Y1_EARLY_LITERACY: R0 como padrão. Leitura nunca é requisito para acertar; texto é apenas apoio.",
       maintenance: "IDs editoriais permanecem estáveis. Troca de imagem usa imageAsset; troca de mecânica exige regenerar o payload.",
       qaStatus: "REVIEW_REQUIRED_MEDIA_GAPS"
@@ -1257,9 +1275,9 @@
       companyAlt: "Editora Brasil Cultural",
       companyName: "Editora Brasil Cultural",
       companyWidth: 820,
-      collectionLogo: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/LOGO%20DUDUQ.png",
-      collectionName: "DuduQ",
-      collectionAlt: "DuduQ",
+      collectionLogo: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Logo%20EduQ%20Play.png",
+      collectionName: "EduQ Play",
+      collectionAlt: "EduQ Play",
       collectionWidth: 760,
       loadingLabel: "PREPARANDO SUA MISSÃO",
       readyLabel: "MISSÃO PRONTA",
@@ -1274,5 +1292,5 @@
     activities: activityGroups
   };
 
-  window.DUDUQ_CONTENT.english.year1.module01 = Object.freeze(moduleDefinition);
+  window.DUDUQ_CONTENT.english.year1.module05 = Object.freeze(moduleDefinition);
 })();

@@ -1,6 +1,6 @@
 /* =========================================================
-   DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 01
-   Hello! Greetings & Introductions
+   DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 06
+   My English World – Review
    Version 1.1.0 — PEDAGOGY v1.0 / FACTORY REPO PACKAGE
 
    SOURCE:
@@ -32,16 +32,16 @@
 
   const VERSION = "1.1.0";
   const YEAR = 1;
-  const MODULE = 1;
+  const MODULE = 6;
   const BASE = "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/";
   const IMAGE_BASE = BASE + "Imagens%20Ilustrativa/";
-  const AUDIO_BASE = BASE + "Audios/1_ANO/M01/";
+  const AUDIO_BASE = BASE + "Audios/1_ANO/M06/";
 
   window.DUDUQ_CONTENT = window.DUDUQ_CONTENT || {};
   window.DUDUQ_CONTENT.english = window.DUDUQ_CONTENT.english || {};
   window.DUDUQ_CONTENT.english.year1 = window.DUDUQ_CONTENT.english.year1 || {};
 
-  if (window.DUDUQ_CONTENT.english.year1.module01?.version === VERSION) {
+  if (window.DUDUQ_CONTENT.english.year1.module06?.version === VERSION) {
     return;
   }
 
@@ -186,33 +186,145 @@
   });
 
   const VISUAL_META = Object.freeze({
-    "boy": {
-      "status": "resolved",
-      "imageAsset": "boy",
-      "imageCategory": "people",
-      "file": "Boy.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Boy.png"
+    "big-brown-dog": {
+      "status": "gap-preview",
+      "imageAsset": "big-brown-dog",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
     },
-    "girl": {
-      "status": "resolved",
-      "imageAsset": "girl",
-      "imageCategory": "people",
-      "file": "Girl.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Girl.png"
+    "come-in-scene": {
+      "status": "gap-preview",
+      "imageAsset": "come-in-scene",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
     },
-    "good afternoon": {
-      "status": "resolved",
-      "imageAsset": "good afternoon",
-      "imageCategory": "greetings",
-      "file": "Good Afternoon.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Good%20Afternoon.png"
+    "five-blue-pencils": {
+      "status": "gap-preview",
+      "imageAsset": "five-blue-pencils",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
     },
-    "good morning": {
+    "five-rulers": {
+      "status": "gap-preview",
+      "imageAsset": "five-rulers",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "four-rulers": {
+      "status": "gap-preview",
+      "imageAsset": "four-rulers",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "morning-leo": {
+      "status": "gap-preview",
+      "imageAsset": "morning-leo",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "red pencil": {
       "status": "resolved",
-      "imageAsset": "good morning",
-      "imageCategory": "greetings",
-      "file": "Good Morning.png",
-      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Good%20Morning.png"
+      "imageAsset": "red pencil",
+      "imageCategory": "school",
+      "file": "Lápis vermelho.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/L%C3%A1pis%20vermelho.png"
+    },
+    "red-backpack": {
+      "status": "gap-preview",
+      "imageAsset": "red-backpack",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "sit down": {
+      "status": "resolved",
+      "imageAsset": "sit down",
+      "imageCategory": "actions",
+      "file": "Sentada.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Sentada.png"
+    },
+    "six-blue-pencils": {
+      "status": "gap-preview",
+      "imageAsset": "six-blue-pencils",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "six-blue-rulers": {
+      "status": "gap-preview",
+      "imageAsset": "six-blue-rulers",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "six-rulers": {
+      "status": "gap-preview",
+      "imageAsset": "six-rulers",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "small-turtle": {
+      "status": "gap-preview",
+      "imageAsset": "small-turtle",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "stand up": {
+      "status": "resolved",
+      "imageAsset": "stand up",
+      "imageCategory": "actions",
+      "file": "Em pé.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Em%20p%C3%A9.png"
+    },
+    "three-orange-crayons": {
+      "status": "gap-preview",
+      "imageAsset": "three-orange-crayons",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
+    },
+    "touch arms": {
+      "status": "resolved",
+      "imageAsset": "touch arms",
+      "imageCategory": "body",
+      "file": "Tocando os braços.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Tocando%20os%20bra%C3%A7os.png"
+    },
+    "touch feet": {
+      "status": "resolved",
+      "imageAsset": "touch feet",
+      "imageCategory": "body",
+      "file": "Tocando os pés.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Tocando%20os%20p%C3%A9s.png"
+    },
+    "touch hands": {
+      "status": "resolved",
+      "imageAsset": "touch hands",
+      "imageCategory": "body",
+      "file": "Tocando as mãos.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Tocando%20as%20m%C3%A3os.png"
+    },
+    "touch head": {
+      "status": "resolved",
+      "imageAsset": "touch head",
+      "imageCategory": "body",
+      "file": "Tocando na cabeça.png",
+      "url": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Tocando%20na%20cabe%C3%A7a.png"
+    },
+    "touch-legs": {
+      "status": "gap-preview",
+      "imageAsset": "touch-legs",
+      "imageCategory": "unknown",
+      "file": null,
+      "url": null
     }
   });
 
@@ -254,199 +366,183 @@
   });
 
   const AUDIO_CATALOG = Object.freeze({
-    "EN1-M1-01": {
-      "mechanic": "target-shooter",
-      "instruction": {
-        "text": "Ouça a saudação e escolha o que foi dito.",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-01_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-01_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": [
-        {
-          "text": "Hello",
-          "language": "en-US",
-          "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-01_TARGET-SHOOTER_ESTIMULO01_HELLO_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-01_TARGET-SHOOTER_ESTIMULO01_HELLO_ENUS.mp3"
-        }
-      ]
-    },
-    "EN1-M1-02": {
+    "EN1-M6-01": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "É de manhã. Qual saudação combina com esse momento?",
+        "text": "É de manhã e o cartão do personagem mostra “Leo”. Qual fala combina com a cena?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-02_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-02_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-01_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-01_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M1-03": {
-      "mechanic": "smart-sentence",
+    "EN1-M6-02": {
+      "mechanic": "target-shooter",
       "instruction": {
-        "text": "É de tarde. Qual saudação combina com esse momento?",
+        "text": "Ouça: “six blue pencils”. Qual imagem combina com a fala?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-02_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-02_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": [
+        {
+          "text": "six blue pencils",
+          "language": "en-US",
+          "src": "",
+          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-02_TARGET-SHOOTER_ESTIMULO01_SIX-BLUE-PENCILS_ENUS.mp3",
+          "file": "ING_1ANO_M06_EN1-M6-02_TARGET-SHOOTER_ESTIMULO01_SIX-BLUE-PENCILS_ENUS.mp3"
+        }
+      ]
+    },
+    "EN1-M6-03": {
+      "mechanic": "smart-sentence",
+      "instruction": {
+        "text": "Observe a mochila vermelha. Qual expressão descreve a imagem?",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-03_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M1-04": {
-      "mechanic": "target-shooter",
-      "instruction": {
-        "text": "Ouça “Goodbye”. Em qual situação essa palavra combina?",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-04_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-04_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": [
-        {
-          "text": "Goodbye",
-          "language": "en-US",
-          "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-04_TARGET-SHOOTER_ESTIMULO01_GOODBYE_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-04_TARGET-SHOOTER_ESTIMULO01_GOODBYE_ENUS.mp3"
-        }
-      ]
-    },
-    "EN1-M1-05": {
-      "mechanic": "target-shooter",
-      "instruction": {
-        "text": "Ouça: “I’m Leo.” Qual fala apresenta o nome do personagem?",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-05_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-05_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": [
-        {
-          "text": "I'm Leo",
-          "language": "en-US",
-          "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-05_TARGET-SHOOTER_ESTIMULO01_I-M-LEO_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-05_TARGET-SHOOTER_ESTIMULO01_I-M-LEO_ENUS.mp3"
-        }
-      ]
-    },
-    "EN1-M1-06": {
+    "EN1-M6-04": {
       "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Observe o personagem indicado como “boy”. Qual palavra você deve escolher?",
+        "text": "Observe 3 gizes de cera laranja. Qual expressão descreve a imagem?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-06_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-06_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-04_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-04_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M1-07": {
-      "mechanic": "smart-sentence",
+    "EN1-M6-05": {
+      "mechanic": "target-shooter",
       "instruction": {
-        "text": "Observe a personagem indicada como “girl”. Qual palavra você deve escolher?",
+        "text": "Ouça “Sit down”. Qual personagem está fazendo o que foi pedido?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-05_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-05_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": [
+        {
+          "text": "Sit down",
+          "language": "en-US",
+          "src": "",
+          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-05_TARGET-SHOOTER_ESTIMULO01_SIT-DOWN_ENUS.mp3",
+          "file": "ING_1ANO_M06_EN1-M6-05_TARGET-SHOOTER_ESTIMULO01_SIT-DOWN_ENUS.mp3"
+        }
+      ]
+    },
+    "EN1-M6-06": {
+      "mechanic": "target-shooter",
+      "instruction": {
+        "text": "Ouça “Touch your hands”. Qual imagem mostra a ação correta?",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-06_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-06_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": [
+        {
+          "text": "Touch your hands",
+          "language": "en-US",
+          "src": "",
+          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-06_TARGET-SHOOTER_ESTIMULO01_TOUCH-YOUR-HANDS_ENUS.mp3",
+          "file": "ING_1ANO_M06_EN1-M6-06_TARGET-SHOOTER_ESTIMULO01_TOUCH-YOUR-HANDS_ENUS.mp3"
+        }
+      ]
+    },
+    "EN1-M6-07": {
+      "mechanic": "smart-sentence",
+      "instruction": {
+        "text": "Observe a tartaruga pequena. Qual expressão descreve a imagem?",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-07_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": []
     },
-    "EN1-M1-08": {
-      "mechanic": "target-shooter",
+    "EN1-M6-08": {
+      "mechanic": "smart-sentence",
       "instruction": {
-        "text": "Ouça: “Hello!” Qual resposta também é um cumprimento?",
+        "text": "Observe o lápis vermelho. Qual expressão descreve a imagem?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-08_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-08_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-08_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-08_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
+      },
+      "stimuli": []
+    },
+    "EN1-M6-09": {
+      "mechanic": "target-shooter",
+      "instruction": {
+        "text": "Ouça: “five rulers”. Qual imagem combina com a fala?",
+        "language": "pt-BR",
+        "src": "",
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-09_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-09_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": [
         {
-          "text": "Hello",
+          "text": "five rulers",
           "language": "en-US",
           "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-08_TARGET-SHOOTER_ESTIMULO01_HELLO_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-08_TARGET-SHOOTER_ESTIMULO01_HELLO_ENUS.mp3"
+          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-09_TARGET-SHOOTER_ESTIMULO01_FIVE-RULERS_ENUS.mp3",
+          "file": "ING_1ANO_M06_EN1-M6-09_TARGET-SHOOTER_ESTIMULO01_FIVE-RULERS_ENUS.mp3"
         }
       ]
     },
-    "EN1-M1-09": {
+    "EN1-M6-10": {
       "mechanic": "target-shooter",
       "instruction": {
-        "text": "Ouça: “I’m Ana.” O que a pessoa está fazendo?",
+        "text": "Ouça “Touch your arms”. Qual imagem mostra a ação correta?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-09_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-09_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-10_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-10_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": [
         {
-          "text": "I'm Ana",
+          "text": "Touch your arms",
           "language": "en-US",
           "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-09_TARGET-SHOOTER_ESTIMULO01_I-M-ANA_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-09_TARGET-SHOOTER_ESTIMULO01_I-M-ANA_ENUS.mp3"
+          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-10_TARGET-SHOOTER_ESTIMULO01_TOUCH-YOUR-ARMS_ENUS.mp3",
+          "file": "ING_1ANO_M06_EN1-M6-10_TARGET-SHOOTER_ESTIMULO01_TOUCH-YOUR-ARMS_ENUS.mp3"
         }
       ]
     },
-    "EN1-M1-10": {
-      "mechanic": "target-shooter",
+    "EN1-M6-11": {
+      "mechanic": "smart-sentence",
       "instruction": {
-        "text": "A aula terminou. Ouça: “Bye!”. Qual cartão mostra a expressão ouvida?",
+        "text": "Observe o cachorro grande e marrom. Qual expressão descreve a imagem?",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-10_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-10_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-11_SMART-SENTENCE_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-11_SMART-SENTENCE_ENUNCIADO_PTBR.mp3"
       },
-      "stimuli": [
-        {
-          "text": "Bye",
-          "language": "en-US",
-          "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-10_TARGET-SHOOTER_ESTIMULO01_BYE_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-10_TARGET-SHOOTER_ESTIMULO01_BYE_ENUS.mp3"
-        }
-      ]
+      "stimuli": []
     },
-    "EN1-M1-11": {
-      "mechanic": "target-shooter",
+    "EN1-M6-12": {
+      "mechanic": "drag-drop",
       "instruction": {
-        "text": "Leo está indo embora. Ouça: “See you!”. Qual expressão você ouviu?",
+        "text": "Organize a sequência: chegar, dizer o nome e depois se despedir.",
         "language": "pt-BR",
         "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-11_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-11_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
+        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-12_DRAG-DROP_ENUNCIADO_PTBR.mp3",
+        "file": "ING_1ANO_M06_EN1-M6-12_DRAG-DROP_ENUNCIADO_PTBR.mp3"
       },
       "stimuli": [
         {
-          "text": "See you",
+          "text": "Hello! I'm Mia. See you!",
           "language": "en-US",
           "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-11_TARGET-SHOOTER_ESTIMULO01_SEE-YOU_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-11_TARGET-SHOOTER_ESTIMULO01_SEE-YOU_ENUS.mp3"
-        }
-      ]
-    },
-    "EN1-M1-12": {
-      "mechanic": "target-shooter",
-      "instruction": {
-        "text": "Mia diz: “Hello! I’m Mia.” Qual resposta também é um cumprimento e mantém a conversa?",
-        "language": "pt-BR",
-        "src": "",
-        "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-12_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3",
-        "file": "ING_1ANO_M01_EN1-M1-12_TARGET-SHOOTER_ENUNCIADO_PTBR.mp3"
-      },
-      "stimuli": [
-        {
-          "text": "Hello! I'm Mia.",
-          "language": "en-US",
-          "src": "",
-          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M01/ING_1ANO_M01_EN1-M1-12_TARGET-SHOOTER_ESTIMULO01_HELLO-I-M-MIA_ENUS.mp3",
-          "file": "ING_1ANO_M01_EN1-M1-12_TARGET-SHOOTER_ESTIMULO01_HELLO-I-M-MIA_ENUS.mp3"
+          "plannedSrc": "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Audios/1_ANO/M06/ING_1ANO_M06_EN1-M6-12_DRAG-DROP_ESTIMULO01_HELLO-I-M-MIA-SEE-YOU_ENUS.mp3",
+          "file": "ING_1ANO_M06_EN1-M6-12_DRAG-DROP_ESTIMULO01_HELLO-I-M-MIA-SEE-YOU_ENUS.mp3"
         }
       ]
     }
@@ -805,375 +901,394 @@
 
   const BLUEPRINTS = Object.freeze([
     {
-      "id": "EN1-M1-01",
-      "status": "Manter",
+      "id": "EN1-M6-01",
+      "status": "Reescrever",
       "difficulty": "easy",
-      "skill": "Identificar cumprimentos básicos usados no dia a dia.",
-      "statement": "Hello",
-      "instruction": "Ouça a saudação e escolha o que foi dito.",
+      "skill": "Integrar período do dia e apresentação simples.",
+      "statement": "Good morning! I’m Leo.",
+      "instruction": "É de manhã e o cartão do personagem mostra “Leo”. Qual fala combina com a cena?",
       "options": [
         {
           "id": "o1",
-          "text": "Goodbye"
+          "text": "Good morning! I’m Leo."
         },
         {
           "id": "o2",
-          "text": "Hello"
+          "text": "Goodbye! I’m Leo."
         },
         {
           "id": "o3",
-          "text": "Good morning"
-        }
-      ],
-      "correct": "o2",
-      "kind": "audio-choice",
-      "audioText": "Hello",
-      "visual": null,
-      "visualAlt": null,
-      "imageOptions": null,
-      "sequence": null,
-      "sourceMedia": "Áudio EN obrigatório: “Hello”.",
-      "note": ""
-    },
-    {
-      "id": "EN1-M1-02",
-      "status": "Manter",
-      "difficulty": "easy",
-      "skill": "Relacionar cumprimentos a situações cotidianas.",
-      "statement": "Good morning",
-      "instruction": "É de manhã. Qual saudação combina com esse momento?",
-      "options": [
-        {
-          "id": "o1",
-          "text": "Good afternoon"
-        },
-        {
-          "id": "o2",
-          "text": "Goodbye"
-        },
-        {
-          "id": "o3",
-          "text": "Good morning"
-        }
-      ],
-      "correct": "o3",
-      "kind": "image-choice",
-      "audioText": null,
-      "visual": "good morning",
-      "visualAlt": "Cena de manhã / Good morning",
-      "imageOptions": null,
-      "sequence": null,
-      "sourceMedia": "Imagem recomendada: manhã/sol nascendo.",
-      "note": ""
-    },
-    {
-      "id": "EN1-M1-03",
-      "status": "Manter",
-      "difficulty": "easy",
-      "skill": "Relacionar cumprimentos a situações cotidianas.",
-      "statement": "Good afternoon",
-      "instruction": "É de tarde. Qual saudação combina com esse momento?",
-      "options": [
-        {
-          "id": "o1",
-          "text": "Good afternoon"
-        },
-        {
-          "id": "o2",
-          "text": "Good morning"
-        },
-        {
-          "id": "o3",
-          "text": "Goodbye"
+          "text": "Good afternoon! I’m Leo."
         }
       ],
       "correct": "o1",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "good afternoon",
-      "visualAlt": "Cena do período da tarde",
+      "visual": "morning-leo",
+      "visualAlt": "Cena de manhã com cartão Leo",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem recomendada: período da tarde.",
+      "sourceMedia": "Cena de manhã + cartão “Leo”; áudio EN das frases.",
       "note": ""
     },
     {
-      "id": "EN1-M1-04",
-      "status": "Ajustar",
+      "id": "EN1-M6-02",
+      "status": "Reescrever",
       "difficulty": "easy",
-      "skill": "Compreender uma expressão de despedida em contexto.",
-      "statement": "Goodbye",
-      "instruction": "Ouça “Goodbye”. Em qual situação essa palavra combina?",
+      "skill": "Integrar número, cor e objeto escolar em uma compreensão oral.",
+      "statement": "Six blue pencils",
+      "instruction": "Ouça: “six blue pencils”. Qual imagem combina com a fala?",
       "options": [
         {
           "id": "o1",
-          "text": "ao chegar"
+          "text": "6 lápis azuis"
         },
         {
           "id": "o2",
-          "text": "ao se despedir"
+          "text": "5 lápis azuis"
         },
         {
           "id": "o3",
-          "text": "ao dizer a idade"
+          "text": "6 réguas azuis"
         }
       ],
-      "correct": "o2",
-      "kind": "audio-choice",
-      "audioText": "Goodbye",
+      "correct": "o1",
+      "kind": "audio-image",
+      "audioText": "six blue pencils",
       "visual": null,
       "visualAlt": null,
-      "imageOptions": null,
-      "sequence": null,
-      "sourceMedia": "Áudio EN obrigatório: “Goodbye”; três cenas simples como alternativas.",
-      "note": "Preview usa opções textuais; a fonte solicita cenas. Candidato bloqueado por SOURCE_CONFLICT de M1."
-    },
-    {
-      "id": "EN1-M1-05",
-      "status": "Ajustar",
-      "difficulty": "easy",
-      "skill": "Reconhecer uma apresentação pessoal muito simples com “I’m + name”.",
-      "statement": "I'm Leo",
-      "instruction": "Ouça: “I’m Leo.” Qual fala apresenta o nome do personagem?",
-      "options": [
-        {
-          "id": "o1",
-          "text": "Goodbye!"
-        },
-        {
-          "id": "o2",
-          "text": "Good afternoon!"
-        },
-        {
-          "id": "o3",
-          "text": "I’m Leo."
-        }
+      "imageOptions": [
+        "six-blue-pencils",
+        "five-blue-pencils",
+        "six-blue-rulers"
       ],
-      "correct": "o3",
-      "kind": "audio-choice",
-      "audioText": "I'm Leo",
-      "visual": null,
-      "visualAlt": null,
-      "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Áudio EN obrigatório: “I’m Leo.” Personagem fictício.",
+      "sourceMedia": "Áudio EN obrigatório: “six blue pencils”; três imagens.",
       "note": ""
     },
     {
-      "id": "EN1-M1-06",
-      "status": "Ajustar",
+      "id": "EN1-M6-03",
+      "status": "Reescrever",
       "difficulty": "easy",
-      "skill": "Reconhecer o vocabulário boy/girl com apoio visual.",
-      "statement": "Boy",
-      "instruction": "Observe o personagem indicado como “boy”. Qual palavra você deve escolher?",
+      "skill": "Integrar cor e objeto escolar.",
+      "statement": "Red backpack",
+      "instruction": "Observe a mochila vermelha. Qual expressão descreve a imagem?",
       "options": [
         {
           "id": "o1",
-          "text": "boy"
+          "text": "red backpack"
         },
         {
           "id": "o2",
-          "text": "girl"
+          "text": "blue backpack"
         },
         {
           "id": "o3",
-          "text": "hello"
+          "text": "red pencil"
         }
       ],
       "correct": "o1",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "boy",
-      "visualAlt": "Personagem fictício representando boy",
+      "visual": "red-backpack",
+      "visualAlt": "Red backpack",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: personagem fictício não estereotipado.",
+      "sourceMedia": "Imagem obrigatória: red backpack.",
       "note": ""
     },
     {
-      "id": "EN1-M1-07",
-      "status": "Ajustar",
+      "id": "EN1-M6-04",
+      "status": "Reescrever",
       "difficulty": "easy",
-      "skill": "Reconhecer o vocabulário boy/girl com apoio visual.",
-      "statement": "Girl",
-      "instruction": "Observe a personagem indicada como “girl”. Qual palavra você deve escolher?",
+      "skill": "Integrar quantidade, cor e objeto escolar.",
+      "statement": "Three orange crayons",
+      "instruction": "Observe 3 gizes de cera laranja. Qual expressão descreve a imagem?",
       "options": [
         {
           "id": "o1",
-          "text": "boy"
+          "text": "three orange crayons"
         },
         {
           "id": "o2",
-          "text": "girl"
+          "text": "two orange crayons"
         },
         {
           "id": "o3",
-          "text": "goodbye"
+          "text": "three orange pencils"
         }
       ],
-      "correct": "o2",
+      "correct": "o1",
       "kind": "image-choice",
       "audioText": null,
-      "visual": "girl",
-      "visualAlt": "Personagem fictícia representando girl",
+      "visual": "three-orange-crayons",
+      "visualAlt": "Três gizes de cera laranja",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Imagem obrigatória: personagem fictícia não estereotipada.",
+      "sourceMedia": "Imagem obrigatória: 3 orange crayons.",
       "note": ""
     },
     {
-      "id": "EN1-M1-08",
+      "id": "EN1-M6-05",
+      "status": "Ajustar",
+      "difficulty": "easy",
+      "skill": "Compreender um comando de sala em uma nova cena.",
+      "statement": "Sit down",
+      "instruction": "Ouça “Sit down”. Qual personagem está fazendo o que foi pedido?",
+      "options": [
+        {
+          "id": "o1",
+          "text": "personagem sentado"
+        },
+        {
+          "id": "o2",
+          "text": "personagem em pé"
+        },
+        {
+          "id": "o3",
+          "text": "personagem entrando"
+        }
+      ],
+      "correct": "o1",
+      "kind": "audio-image",
+      "audioText": "Sit down",
+      "visual": null,
+      "visualAlt": null,
+      "imageOptions": [
+        "sit down",
+        "stand up",
+        "come-in-scene"
+      ],
+      "sequence": null,
+      "sourceMedia": "Áudio EN obrigatório: “Sit down”; três imagens de ação.",
+      "note": ""
+    },
+    {
+      "id": "EN1-M6-06",
+      "status": "Reescrever",
+      "difficulty": "easy",
+      "skill": "Integrar comando e parte do corpo.",
+      "statement": "Touch your hands",
+      "instruction": "Ouça “Touch your hands”. Qual imagem mostra a ação correta?",
+      "options": [
+        {
+          "id": "o1",
+          "text": "mãos tocadas"
+        },
+        {
+          "id": "o2",
+          "text": "pés tocados"
+        },
+        {
+          "id": "o3",
+          "text": "cabeça tocada"
+        }
+      ],
+      "correct": "o1",
+      "kind": "audio-image",
+      "audioText": "Touch your hands",
+      "visual": null,
+      "visualAlt": null,
+      "imageOptions": [
+        "touch hands",
+        "touch feet",
+        "touch head"
+      ],
+      "sequence": null,
+      "sourceMedia": "Áudio EN obrigatório: “Touch your hands”.",
+      "note": ""
+    },
+    {
+      "id": "EN1-M6-07",
+      "status": "Reescrever",
+      "difficulty": "easy",
+      "skill": "Integrar pet e tamanho.",
+      "statement": "Small turtle",
+      "instruction": "Observe a tartaruga pequena. Qual expressão descreve a imagem?",
+      "options": [
+        {
+          "id": "o1",
+          "text": "small turtle"
+        },
+        {
+          "id": "o2",
+          "text": "big turtle"
+        },
+        {
+          "id": "o3",
+          "text": "small rabbit"
+        }
+      ],
+      "correct": "o1",
+      "kind": "image-choice",
+      "audioText": null,
+      "visual": "small-turtle",
+      "visualAlt": "Small turtle",
+      "imageOptions": null,
+      "sequence": null,
+      "sourceMedia": "Imagem obrigatória: small turtle.",
+      "note": ""
+    },
+    {
+      "id": "EN1-M6-08",
       "status": "Ajustar",
       "difficulty": "medium",
-      "skill": "Selecionar uma resposta adequada a um cumprimento simples.",
-      "statement": "Hello → Hi",
-      "instruction": "Ouça: “Hello!” Qual resposta também é um cumprimento?",
+      "skill": "Integrar cor e objeto escolar.",
+      "statement": "Red pencil",
+      "instruction": "Observe o lápis vermelho. Qual expressão descreve a imagem?",
       "options": [
         {
           "id": "o1",
-          "text": "Goodbye!"
+          "text": "blue pencil"
         },
         {
           "id": "o2",
-          "text": "Good night!"
+          "text": "red ruler"
         },
         {
           "id": "o3",
-          "text": "Hi!"
+          "text": "red pencil"
         }
       ],
       "correct": "o3",
-      "kind": "audio-choice",
-      "audioText": "Hello",
-      "visual": null,
-      "visualAlt": null,
+      "kind": "image-choice",
+      "audioText": null,
+      "visual": "red pencil",
+      "visualAlt": "Red pencil",
       "imageOptions": null,
       "sequence": null,
-      "sourceMedia": "Áudio EN obrigatório: “Hello!”.",
+      "sourceMedia": "Imagem obrigatória: red pencil.",
       "note": ""
     },
     {
-      "id": "EN1-M1-09",
-      "status": "Manter",
-      "difficulty": "medium",
-      "skill": "Identificar apresentação pessoal simples.",
-      "statement": "I'm Ana",
-      "instruction": "Ouça: “I’m Ana.” O que a pessoa está fazendo?",
-      "options": [
-        {
-          "id": "o1",
-          "text": "Dizendo o próprio nome"
-        },
-        {
-          "id": "o2",
-          "text": "Despedindo-se"
-        },
-        {
-          "id": "o3",
-          "text": "Dizendo boa tarde"
-        }
-      ],
-      "correct": "o1",
-      "kind": "audio-choice",
-      "audioText": "I'm Ana",
-      "visual": null,
-      "visualAlt": null,
-      "imageOptions": null,
-      "sequence": null,
-      "sourceMedia": "Áudio EN obrigatório: “I’m Ana.”",
-      "note": ""
-    },
-    {
-      "id": "EN1-M1-10",
+      "id": "EN1-M6-09",
       "status": "Reescrever",
       "difficulty": "medium",
-      "skill": "Reconhecer uma despedida curta e frequente em contexto escolar.",
-      "statement": "Bye",
-      "instruction": "A aula terminou. Ouça: “Bye!”. Qual cartão mostra a expressão ouvida?",
+      "skill": "Integrar número e objeto escolar.",
+      "statement": "Five rulers",
+      "instruction": "Ouça: “five rulers”. Qual imagem combina com a fala?",
       "options": [
         {
           "id": "o1",
-          "text": "Hello!"
+          "text": "4 réguas"
         },
         {
           "id": "o2",
-          "text": "Bye!"
+          "text": "5 réguas"
         },
         {
           "id": "o3",
-          "text": "Good morning!"
+          "text": "6 réguas"
         }
       ],
       "correct": "o2",
-      "kind": "audio-choice",
-      "audioText": "Bye",
+      "kind": "audio-image",
+      "audioText": "five rulers",
       "visual": null,
       "visualAlt": null,
-      "imageOptions": null,
+      "imageOptions": [
+        "four-rulers",
+        "five-rulers",
+        "six-rulers"
+      ],
       "sequence": null,
-      "sourceMedia": "Áudio EN obrigatório: “Bye!”. Cena simples de fim da aula.",
+      "sourceMedia": "Áudio EN obrigatório: “five rulers”; três imagens.",
       "note": ""
     },
     {
-      "id": "EN1-M1-11",
-      "status": "Reescrever",
+      "id": "EN1-M6-10",
+      "status": "Ajustar",
       "difficulty": "medium",
-      "skill": "Reconhecer uma despedida frequente e amigável em contexto.",
-      "statement": "See you",
-      "instruction": "Leo está indo embora. Ouça: “See you!”. Qual expressão você ouviu?",
+      "skill": "Integrar comando e parte do corpo.",
+      "statement": "Touch your arms",
+      "instruction": "Ouça “Touch your arms”. Qual imagem mostra a ação correta?",
       "options": [
         {
           "id": "o1",
-          "text": "See you!"
+          "text": "pernas tocadas"
         },
         {
           "id": "o2",
-          "text": "Good afternoon!"
+          "text": "braços tocados"
         },
         {
           "id": "o3",
-          "text": "Hi!"
+          "text": "cabeça tocada"
         }
       ],
-      "correct": "o1",
-      "kind": "audio-choice",
-      "audioText": "See you",
+      "correct": "o2",
+      "kind": "audio-image",
+      "audioText": "Touch your arms",
       "visual": null,
       "visualAlt": null,
-      "imageOptions": null,
+      "imageOptions": [
+        "touch-legs",
+        "touch arms",
+        "touch head"
+      ],
       "sequence": null,
-      "sourceMedia": "Áudio EN obrigatório: “See you!”. Cena de despedida.",
+      "sourceMedia": "Áudio EN obrigatório: “Touch your arms”.",
       "note": ""
     },
     {
-      "id": "EN1-M1-12",
+      "id": "EN1-M6-11",
+      "status": "Ajustar",
+      "difficulty": "medium",
+      "skill": "Integrar pet, tamanho e cor.",
+      "statement": "Big brown dog",
+      "instruction": "Observe o cachorro grande e marrom. Qual expressão descreve a imagem?",
+      "options": [
+        {
+          "id": "o1",
+          "text": "small brown dog"
+        },
+        {
+          "id": "o2",
+          "text": "big brown cat"
+        },
+        {
+          "id": "o3",
+          "text": "big brown dog"
+        }
+      ],
+      "correct": "o3",
+      "kind": "image-choice",
+      "audioText": null,
+      "visual": "big-brown-dog",
+      "visualAlt": "Big brown dog",
+      "imageOptions": null,
+      "sequence": null,
+      "sourceMedia": "Imagem obrigatória: big brown dog.",
+      "note": ""
+    },
+    {
+      "id": "EN1-M6-12",
       "status": "Reescrever",
       "difficulty": "hard",
-      "skill": "Selecionar uma resposta simples que mantém uma interação de cumprimento.",
-      "statement": "Hi, Mia!",
-      "instruction": "Mia diz: “Hello! I’m Mia.” Qual resposta também é um cumprimento e mantém a conversa?",
+      "skill": "Integrar cumprimento e despedida em uma sequência curta.",
+      "statement": "Hello → See you",
+      "instruction": "Organize a sequência: chegar, dizer o nome e depois se despedir.",
       "options": [
         {
           "id": "o1",
-          "text": "Hi, Mia!"
+          "text": "Hello! I’m Mia."
         },
         {
           "id": "o2",
-          "text": "Bye, Mia!"
-        },
-        {
-          "id": "o3",
-          "text": "See you, Mia!"
+          "text": "See you!"
         }
       ],
       "correct": "o1",
-      "kind": "audio-choice",
-      "audioText": "Hello! I'm Mia.",
+      "kind": "sequence",
+      "audioText": "Hello! I'm Mia. See you!",
       "visual": null,
       "visualAlt": null,
       "imageOptions": null,
-      "sequence": null,
-      "sourceMedia": "Áudio EN recomendado do mini diálogo; personagens fictícios.",
+      "sequence": [
+        "o1",
+        "o2"
+      ],
+      "sourceMedia": "Duas cenas sequenciais: chegada e despedida; áudio EN das sequências.",
       "note": ""
     }
   ]);
@@ -1186,7 +1301,7 @@
     const mechanic = question.delivery.mechanic;
     if (!current || current.mechanic !== mechanic || current.questions.length >= 4) {
       current = {
-        id: `en1-m01-step-${String(activityGroups.length + 1).padStart(2, "0")}`,
+        id: `en1-m06-step-${String(activityGroups.length + 1).padStart(2, "0")}`,
         title: mechanic === "drag-drop" ? "Coloque na ordem" : "Ouça e escolha",
         mechanic,
         skill: question.skill,
@@ -1199,7 +1314,7 @@
   });
 
   const moduleDefinition = {
-    id: "english-year-1-module-01",
+    id: "english-year-1-module-06",
     version: VERSION,
     sourceVersion: "DUDUQ English 1–5 v2.2",
     factoryVersion: "1.0-pedagogy-v1",
@@ -1207,11 +1322,11 @@
     subject: "Língua Inglesa",
     year: YEAR,
     module: MODULE,
-    title: "Hello! Greetings & Introductions",
-    description: "Compreender e usar cumprimentos e despedidas frequentes em situações visuais e orais; reconhecer apresentação simples com “I’m + name”; identificar boy/girl como vocabulário receptivo.",
+    title: "My English World – Review",
+    description: "Retomar os conteúdos do 1º ano em tarefas curtas de escuta, imagem, associação e descrição, sem recorrer predominantemente à tradução.",
     estimatedMinutes: 4,
     audioPolicy: {
-      primary: "RECONCILE_EXISTING_M01_AUDIO",
+      primary: "AUDIO_GAP",
       fallback: "speech-synthesis",
       base: AUDIO_BASE,
       instructionLanguage: "pt-BR",
@@ -1243,10 +1358,10 @@
       gates: ["PED-01", "PED-02", "PED-03", "PED-04", "PED-05", "PED-06", "PED-07", "PED-08", "PED-09", "PED-10", "PED-11", "PED-12"]
     },
     learningGoals: [
-      "Compreender e usar cumprimentos e despedidas frequentes em situações visuais e orais; reconhecer apresentação simples com “I’m + name”; identificar boy/girl como vocabulário receptivo."
+      "Retomar os conteúdos do 1º ano em tarefas curtas de escuta, imagem, associação e descrição, sem recorrer predominantemente à tradução."
     ],
     pedagogicalNotes: {
-      officialSource: "DUDUQ English 1–5 v2.2 — Manual do Educador, 1º ano, Unidade 1, p. 21",
+      officialSource: "DUDUQ English 1–5 v2.2 — síntese das Unidades 1 a 4 do Manual do Educador – 1º ano",
       literacy: "Y1_EARLY_LITERACY: R0 como padrão. Leitura nunca é requisito para acertar; texto é apenas apoio.",
       maintenance: "IDs editoriais permanecem estáveis. Troca de imagem usa imageAsset; troca de mecânica exige regenerar o payload.",
       qaStatus: "REVIEW_REQUIRED_MEDIA_GAPS"
@@ -1257,9 +1372,9 @@
       companyAlt: "Editora Brasil Cultural",
       companyName: "Editora Brasil Cultural",
       companyWidth: 820,
-      collectionLogo: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/LOGO%20DUDUQ.png",
-      collectionName: "DuduQ",
-      collectionAlt: "DuduQ",
+      collectionLogo: "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Logo%20EduQ%20Play.png",
+      collectionName: "EduQ Play",
+      collectionAlt: "EduQ Play",
       collectionWidth: 760,
       loadingLabel: "PREPARANDO SUA MISSÃO",
       readyLabel: "MISSÃO PRONTA",
@@ -1274,5 +1389,5 @@
     activities: activityGroups
   };
 
-  window.DUDUQ_CONTENT.english.year1.module01 = Object.freeze(moduleDefinition);
+  window.DUDUQ_CONTENT.english.year1.module06 = Object.freeze(moduleDefinition);
 })();
