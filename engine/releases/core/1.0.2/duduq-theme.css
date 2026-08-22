@@ -1,0 +1,311 @@
+/* =========================================================
+   DUDUQ CORE — THEME
+   Estilos visuais compartilhados pelo ecossistema DuduQ.
+   Versão 1.0.0
+   ========================================================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  background: transparent;
+}
+
+body {
+  min-height: 100vh;
+  font-family:
+    Nunito,
+    ui-rounded,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+/* =========================================================
+   TELA DE CARREGAMENTO
+   ========================================================= */
+
+#duduq-boot {
+  position: fixed;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  padding: 24px;
+
+  color: #164274;
+
+  font:
+    800 17px/1.45
+    ui-rounded,
+    system-ui,
+    sans-serif;
+
+  text-align: center;
+
+  background: #f7fbff;
+
+  z-index: 99999;
+}
+
+#duduq-boot[hidden] {
+  display: none;
+}
+
+#duduq-runtime-error {
+  white-space: pre-wrap;
+
+  max-width: 760px;
+
+  padding: 20px;
+
+  border: 2px solid #ef9a9a;
+  border-radius: 18px;
+
+  background: #ffffff;
+  color: #8b1e1e;
+
+  box-shadow:
+    0 8px 28px
+    rgba(50, 70, 90, 0.12);
+}
+
+/* =========================================================
+   FULLSCREEN
+   ========================================================= */
+
+.duduq-engine-fullscreen-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-width: 0;
+}
+
+.duduq-engine-fullscreen-icon {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.duduq-engine-fullscreen-label {
+  white-space: nowrap;
+}
+
+/* =========================================================
+   BARRA DE PROGRESSO
+   ========================================================= */
+
+.duduq-progress-trail {
+  gap: 8px !important;
+
+  padding: 0 !important;
+
+  background: transparent !important;
+
+  border: none !important;
+
+  box-shadow: none !important;
+}
+
+.duduq-progress-trail::before {
+  display: none !important;
+}
+
+.duduq-progress-copy {
+  display: flex !important;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 8px;
+
+  margin:
+    0 0 6px !important;
+}
+
+.duduq-progress-copy span {
+  display: none !important;
+}
+
+.duduq-progress-copy strong {
+  color: #1d2b53 !important;
+
+  font-family:
+    Fredoka,
+    Nunito,
+    sans-serif !important;
+
+  font-size:
+    clamp(
+      13px,
+      1.55vw,
+      18px
+    ) !important;
+
+  font-weight: 700 !important;
+
+  letter-spacing: 0 !important;
+}
+
+.duduq-progress-track {
+  position: relative;
+
+  overflow: hidden !important;
+
+  min-height: 16px !important;
+  height: 16px !important;
+
+  border-radius:
+    999px !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #e6eef6 0%,
+      #dce6f0 100%
+    ) !important;
+
+  border: none !important;
+
+  box-shadow:
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.95),
+    inset 0 -1px 4px
+      rgba(84, 114, 146, 0.15)
+      !important;
+}
+
+.duduq-progress-track::after,
+.duduq-progress-marker,
+.duduq-progress-marker::after {
+  display: none !important;
+}
+
+.duduq-progress-fill {
+  position: relative;
+
+  border-radius:
+    inherit !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #43b3ff 0%,
+      #1592ff 100%
+    ) !important;
+
+  box-shadow:
+    inset 0 2px 0
+      rgba(255, 255, 255, 0.35),
+    0 1px 2px
+      rgba(10, 108, 214, 0.16)
+      !important;
+}
+
+.duduq-progress-fill::before {
+  content: "";
+
+  position: absolute;
+
+  left: 1px;
+  right: 1px;
+  top: 1px;
+
+  height: 42%;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.28);
+}
+
+.duduq-progress-fill::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      115deg,
+      transparent 18%,
+      rgba(255, 255, 255, 0.10) 32%,
+      rgba(255, 255, 255, 0.42) 46%,
+      rgba(255, 255, 255, 0.16) 58%,
+      transparent 72%
+    );
+
+  background-size:
+    180% 100%;
+
+  animation:
+    duduqProgressShine
+    2.6s
+    linear
+    infinite;
+
+  pointer-events: none;
+}
+
+@keyframes duduqProgressShine {
+
+  0% {
+    background-position:
+      140% 0;
+  }
+
+  100% {
+    background-position:
+      -40% 0;
+  }
+}
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+
+@media (max-width: 640px) {
+
+  .duduq-engine-fullscreen-label {
+    display: none;
+  }
+
+  .duduq-engine-fullscreen-button {
+    min-width: 44px;
+
+    padding-inline:
+      12px !important;
+  }
+
+  .duduq-progress-track {
+    min-height:
+      14px !important;
+
+    height:
+      14px !important;
+  }
+}
+
+/* =========================================================
+   ACESSIBILIDADE
+   ========================================================= */
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+
+  .duduq-progress-fill::after {
+    animation: none;
+  }
+}
