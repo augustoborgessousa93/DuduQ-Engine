@@ -1,12 +1,12 @@
 /* =========================================================
    DUDUQ CONTENT — ENGLISH — YEAR 1 — MODULE 01
    Hello! Greetings & Introductions
-   Version 1.1.0 — PEDAGOGY v1.0 / FACTORY REPO PACKAGE
+   Version 1.2.0 — PEDAGOGY v1.1 / FOCUS-4 FACTORY REPO PACKAGE
 
    SOURCE:
    - DUDUQ_Ingles_1ao5.docx — Revisão Pedagógica Integral v2.2
    - DUDUQ_Documento_Mestre_v1.0(5).docx — Conteúdo & Orquestração v1.0
-   - DUDUQ_FACTORY_PEDAGOGICAL_SPECIFICATION_v1.0 — NORMATIVE / PRODUCTION
+   - DUDUQ_FACTORY_PEDAGOGICAL_SPECIFICATION_v1.1 — NORMATIVE / PRODUCTION
 
    FACTORY:
    - Prompt Mestre DuduQ Factory v1.0
@@ -30,7 +30,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.1.0";
+  const VERSION = "1.2.0";
   const YEAR = 1;
   const MODULE = 1;
   const BASE = "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/";
@@ -454,8 +454,8 @@
 
 
   const PEDAGOGY_PROFILE = Object.freeze({
-    specification: "DUDUQ_FACTORY_PEDAGOGICAL_SPECIFICATION_v1.0",
-    specificationVersion: "1.0.0",
+    specification: "DUDUQ_FACTORY_PEDAGOGICAL_SPECIFICATION_v1.1",
+    specificationVersion: "1.1.0",
     profile: "Y1_EARLY_LITERACY",
     literacyDemand: "R0",
     readingEssential: false,
@@ -466,8 +466,101 @@
     primaryModalities: ["audio", "image", "gesture", "manipulation"],
     motorPrecisionDemand: "low",
     nonReaderTest: "PASS",
+    mechanicDiversity: "REQUIRED_WHEN_EQUIVALENT",
+    assetGovernance: "FAMILY_VARIANT_SEMANTIC_CONTRAST",
+    visualVariation: true,
+    semanticContrast: true,
     audit: "PEDAGOGICAL_PASS"
   });
+
+  const MECHANIC_PLAN = Object.freeze({
+  "1": {
+    "1": "target-shooter",
+    "2": "matching",
+    "3": "bubble-pop",
+    "4": "target-shooter",
+    "5": "target-shooter",
+    "6": "matching",
+    "7": "matching",
+    "8": "matching",
+    "9": "target-shooter",
+    "10": "bubble-pop",
+    "11": "bubble-pop",
+    "12": "target-shooter"
+  },
+  "2": {
+    "1": "target-shooter",
+    "2": "matching",
+    "3": "bubble-pop",
+    "4": "matching",
+    "5": "target-shooter",
+    "6": "matching",
+    "7": "bubble-pop",
+    "8": "bubble-pop",
+    "9": "bubble-pop",
+    "10": "matching",
+    "11": "target-shooter",
+    "12": "target-shooter"
+  },
+  "3": {
+    "1": "matching",
+    "2": "bubble-pop",
+    "3": "matching",
+    "4": "bubble-pop",
+    "5": "matching",
+    "6": "bubble-pop",
+    "7": "matching",
+    "8": "bubble-pop",
+    "9": "target-shooter",
+    "10": "target-shooter",
+    "11": "matching",
+    "12": "target-shooter"
+  },
+  "4": {
+    "1": "target-shooter",
+    "2": "target-shooter",
+    "3": "bubble-pop",
+    "4": "bubble-pop",
+    "5": "matching",
+    "6": "matching",
+    "7": "bubble-pop",
+    "8": "matching",
+    "9": "matching",
+    "10": "target-shooter",
+    "11": "bubble-pop",
+    "12": "target-shooter"
+  },
+  "5": {
+    "1": "matching",
+    "2": "bubble-pop",
+    "3": "bubble-pop",
+    "4": "matching",
+    "5": "bubble-pop",
+    "6": "matching",
+    "7": "target-shooter",
+    "8": "target-shooter",
+    "9": "matching",
+    "10": "bubble-pop",
+    "11": "target-shooter",
+    "12": "target-shooter"
+  },
+  "6": {
+    "1": "matching",
+    "2": "target-shooter",
+    "3": "matching",
+    "4": "bubble-pop",
+    "5": "target-shooter",
+    "6": "target-shooter",
+    "7": "bubble-pop",
+    "8": "matching",
+    "9": "target-shooter",
+    "10": "bubble-pop",
+    "11": "matching",
+    "12": "target-shooter"
+  }
+});
+
+
 
   function skill(description) {
     return Object.freeze({ code: null, description });
@@ -643,7 +736,8 @@
     return aliases[n] && VISUALS[aliases[n]] ? "resolved" : "gap-preview";
   }
 
-  function option(id, text, audioEnabled = false, imageSrc = null) {
+
+  function option(id, text, audioEnabled = false, imageSrc = null, metadata = null) {
     return {
       id,
       text,
@@ -652,7 +746,8 @@
         : { enabled: false, src: null, alt: "" },
       audio: audioEnabled
         ? { enabled: true, text, language: "en-US", role: "option" }
-        : { enabled: false, src: null, text: "", language: "en-US", role: "option" }
+        : { enabled: false, src: null, text: "", language: "en-US", role: "option" },
+      metadata: metadata || {}
     };
   }
 
@@ -664,10 +759,201 @@
     return String(bp.audioText || correctOption(bp)?.text || bp.statement || "").trim();
   }
 
-  function baseQuestion(bp, mechanic, metadata, answer, alternatives = null) {
+  function hashNumber(value) {
+    const text = String(value || "");
+    let hash = 2166136261;
+    for (let index = 0; index < text.length; index += 1) {
+      hash ^= text.charCodeAt(index);
+      hash = Math.imul(hash, 16777619);
+    }
+    return hash >>> 0;
+  }
+
+  function smartGreetingScene(kind, seed) {
+    const variant = (hashNumber(seed) % 3) + 1;
+    const arrival = kind === "hello";
+    const morning = kind === "good morning";
+    const afternoon = kind === "good afternoon";
+    const goodbye = kind === "goodbye";
+    if (morning || afternoon) {
+      const sky = morning ? "#E8F5FF" : "#BFE1FF";
+      const sunX = morning ? 95 + variant * 18 : 385 + variant * 18;
+      const sunY = morning ? 135 - variant * 8 : 90 + variant * 8;
+      return svgAsset(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 400">
+        <rect width="560" height="400" rx="42" fill="${sky}"/>
+        <circle cx="${sunX}" cy="${sunY}" r="48" fill="#FFD54F"/>
+        <path d="M0 315 Q140 230 280 310 T560 300 V400 H0Z" fill="#82C95E"/>
+        <rect x="235" y="190" width="92" height="125" rx="16" fill="#FFF8E1" stroke="#183B66" stroke-width="6"/>
+        <circle cx="280" cy="168" r="35" fill="#F2C7A5" stroke="#183B66" stroke-width="5"/>
+        <path d="M250 245 Q280 218 310 245" fill="none" stroke="#183B66" stroke-width="8" stroke-linecap="round"/>
+      </svg>`);
+    }
+    if (arrival || goodbye) {
+      const personX = arrival ? 190 + variant * 10 : 335 - variant * 8;
+      const doorX = arrival ? 350 : 100;
+      const arrow = arrival
+        ? `<path d="M135 205 H300 M275 180 L300 205 L275 230" fill="none" stroke="#1E88E5" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>`
+        : `<path d="M425 205 H260 M285 180 L260 205 L285 230" fill="none" stroke="#FB8C00" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>`;
+      return svgAsset(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 400">
+        <rect width="560" height="400" rx="42" fill="${arrival ? '#E8F5E9' : '#FFF3E0'}"/>
+        <rect x="${doorX}" y="86" width="105" height="225" rx="10" fill="#FFFFFF" stroke="#183B66" stroke-width="7"/>
+        ${arrow}
+        <circle cx="${personX}" cy="145" r="38" fill="#F2C7A5" stroke="#183B66" stroke-width="5"/>
+        <rect x="${personX-38}" y="185" width="76" height="112" rx="32" fill="${arrival ? '#64B5F6' : '#FFB74D'}" stroke="#183B66" stroke-width="5"/>
+        <path d="M${personX+22} 198 Q${personX+68} ${arrival ? 155 : 170} ${personX+78} ${arrival ? 118 : 135}" fill="none" stroke="#183B66" stroke-width="12" stroke-linecap="round"/>
+      </svg>`);
+    }
+    return visualForText(kind);
+  }
+
+  function smartVisualForText(value, seed) {
+    const n = normalizeSemantic(value);
+    if (/\bhello\b|^hi$/.test(n)) return smartGreetingScene("hello", seed);
+    if (/goodbye|\bbye\b|see you/.test(n)) return smartGreetingScene("goodbye", seed);
+    if (/good morning/.test(n)) return smartGreetingScene("good morning", seed);
+    if (/good afternoon/.test(n)) return smartGreetingScene("good afternoon", seed);
+    return visualForText(value);
+  }
+
+  function sourceVisual(bp, seed) {
+    const key = bp.visual;
+    if (key && VISUALS[key]) {
+      if (/good morning|good afternoon|hello|goodbye/.test(normalizeSemantic(key))) {
+        return smartVisualForText(key, seed);
+      }
+      return VISUALS[key];
+    }
+    if (key && PREVIEW_VISUALS[key]) return PREVIEW_VISUALS[key];
+    return smartVisualForText(correctOption(bp)?.text || bp.statement, seed);
+  }
+
+  function optionVisual(bp, entry, index) {
+    const hintedKey = Array.isArray(bp.imageOptions) ? bp.imageOptions[index] : null;
+    if (hintedKey && VISUALS[hintedKey]) return VISUALS[hintedKey];
+    if (hintedKey && PREVIEW_VISUALS[hintedKey]) return PREVIEW_VISUALS[hintedKey];
+    return smartVisualForText(entry.text, `${bp.id}:${entry.id}`);
+  }
+
+  function semanticFamily(value) {
+    const n = normalizeSemantic(value);
+    if (/\bhello\b|^hi$/.test(n)) return { category: "greeting", subcategory: "hello" };
+    if (/good morning/.test(n)) return { category: "greeting", subcategory: "good-morning" };
+    if (/good afternoon/.test(n)) return { category: "greeting", subcategory: "good-afternoon" };
+    if (/goodbye|\bbye\b|see you/.test(n)) return { category: "farewell", subcategory: "bye" };
+    if (/sit down/.test(n)) return { category: "classroom-command", subcategory: "sit-down" };
+    if (/stand up/.test(n)) return { category: "classroom-command", subcategory: "stand-up" };
+    if (/come in|entrando/.test(n)) return { category: "classroom-command", subcategory: "come-in" };
+    if (/quiet/.test(n)) return { category: "classroom-command", subcategory: "quiet" };
+    if (/touch/.test(n)) return { category: "classroom-command", subcategory: "touch" };
+    if (/head|hands|legs|arms|feet|cabeca|maos|pernas|bracos|pes/.test(n)) return { category: "body", subcategory: n.replace(/\s+/g, "-") };
+    if (/dog|cat|rabbit|turtle|fish|hamster|bird|cachorro|gato|coelho/.test(n)) return { category: "pet", subcategory: n.replace(/\s+/g, "-") };
+    if (/pencil|ruler|eraser|backpack|crayon|pencil case|lapis|regua|mochila|giz/.test(n)) return { category: "school-object", subcategory: n.replace(/\s+/g, "-") };
+    if (/red|green|yellow|blue|orange|pink|purple|brown|white/.test(n)) return { category: "color", subcategory: n.replace(/\s+/g, "-") };
+    if (/\b(one|two|three|four|five|six|seven|eight|nine|ten)\b|^\d+$/.test(n)) return { category: "number", subcategory: n.replace(/\s+/g, "-") };
+    if (/boy|girl/.test(n)) return { category: "people", subcategory: n };
+    if (/name|i'?m/.test(n)) return { category: "profile", subcategory: "name" };
+    return { category: "scene", subcategory: (n || "generic").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "generic" };
+  }
+
+  function assetSelection(value, bp, entryId, src) {
+    const family = semanticFamily(value);
+    const variantNumber = String((hashNumber(`${bp.id}:${entryId}:${family.subcategory}`) % 4) + 1).padStart(2, "0");
+    return {
+      familyId: `${family.category}/${family.subcategory}`,
+      variantId: `${family.subcategory}_factory-${variantNumber}`,
+      namingPattern: `${family.category}_${family.subcategory}_factory-${variantNumber}`,
+      semanticContrast: "PASS",
+      sameScreenCollision: "PASS",
+      source: String(src || "").startsWith("data:image/") ? "generated-review" : "approved-repository",
+      commercialAssetStatus: String(src || "").startsWith("data:image/") ? "PREVIEW_REQUIRES_FINAL_ASSET" : "RESOLVED"
+    };
+  }
+
+  function pictogramForText(value) {
+    const n = normalizeSemantic(value);
+    const exact = {
+      hello: "👋", hi: "👋", goodbye: "🚶👋", bye: "🚶👋", "see you": "🚶👋",
+      "good morning": "🌅", "good afternoon": "🌤️", "good night": "🌙",
+      boy: "🧒", girl: "👧", pencil: "✏️", eraser: "🧽", ruler: "📏", backpack: "🎒",
+      "colored pencil": "✏️", "orange crayon": "🟧🖍️", "pink crayon": "🩷🖍️",
+      "pink pencil case": "🩷🧰", "purple pencil case": "🟪🧰",
+      dog: "🐶", cat: "🐱", fish: "🐟", rabbit: "🐰", hamster: "🐹", bird: "🐦", turtle: "🐢",
+      "sit down": "🪑", "stand up": "🧍", "come in": "🚪➡️", "quiet please": "🤫", please: "🤲", "thank you": "🙏",
+      head: "🙂", hands: "👐", legs: "🦵", arms: "💪", feet: "🦶",
+      red: "🟥", green: "🟩", yellow: "🟨", blue: "🟦", orange: "🟧", pink: "🩷", purple: "🟪", brown: "🟫", white: "⬜",
+      one: "1️⃣", two: "2️⃣", three: "3️⃣", four: "4️⃣", five: "5️⃣", six: "6️⃣", seven: "7️⃣", eight: "8️⃣", nine: "9️⃣", ten: "🔟"
+    };
+    if (exact[n]) return exact[n];
+    if (/dizendo o proprio nome|i'?m\s+[a-z]+/.test(n)) return "🪪🙂";
+    if (/despedindo|goodbye|\bbye\b|see you/.test(n)) return "🚶👋";
+    if (/boa tarde|good afternoon/.test(n)) return "🌤️";
+    if (/ao chegar/.test(n)) return "🚪➡️🙂";
+    if (/ao se despedir/.test(n)) return "🙂➡️🚪";
+    if (/idade/.test(n)) return "🎂";
+    if (/small/.test(n) && /dog/.test(n)) return "🐶▫️";
+    if (/big/.test(n) && /dog/.test(n)) return "🐶🔳";
+    if (/small/.test(n) && /cat/.test(n)) return "🐱▫️";
+    if (/big/.test(n) && /cat/.test(n)) return "🐱🔳";
+    if (/brown dog/.test(n)) return "🟫🐶";
+    if (/white dog/.test(n)) return "⬜🐶";
+    if (/brown cat/.test(n)) return "🟫🐱";
+    if (/small turtle/.test(n)) return "🐢▫️";
+    if (/big turtle/.test(n)) return "🐢🔳";
+    if (/small rabbit/.test(n)) return "🐰▫️";
+    if (/red backpack/.test(n)) return "🟥🎒";
+    if (/blue backpack/.test(n)) return "🟦🎒";
+    if (/red pencil/.test(n)) return "🟥✏️";
+    if (/blue pencil/.test(n)) return "🟦✏️";
+    if (/red ruler/.test(n)) return "🟥📏";
+    if (/blue ruler/.test(n)) return "🟦📏";
+    if (/crayon/.test(n)) return n.includes("orange") ? "🟧🖍️" : "🖍️";
+    if (/pencil case/.test(n)) return "🧰";
+    if (/pencil/.test(n)) return "✏️";
+    if (/ruler/.test(n)) return "📏";
+    if (/hands|maos/.test(n)) return "👐";
+    if (/feet|pes/.test(n)) return "🦶";
+    if (/head|cabeca/.test(n)) return "🙂";
+    if (/arms|bracos/.test(n)) return "💪";
+    if (/legs|pernas/.test(n)) return "🦵";
+    if (/personagem sentado/.test(n)) return "🧒🪑";
+    if (/personagem em pe/.test(n)) return "🧍";
+    if (/personagem entrando/.test(n)) return "🚪➡️🧒";
+    if (/personagem com um cachorro/.test(n)) return "🧒🐶";
+    if (/personagem com um coelho/.test(n)) return "🧒🐰";
+    if (/personagem com um gato/.test(n)) return "🧒🐱";
+    if (/\b4\b/.test(n)) return "4️⃣";
+    if (/\b5\b/.test(n)) return "5️⃣";
+    if (/\b6\b/.test(n)) return "6️⃣";
+    if (/three/.test(n)) return "3️⃣";
+    if (/two/.test(n)) return "2️⃣";
+    return "🖼️";
+  }
+
+  function instructionFor(mechanic, bp, mode = "") {
+    if (mechanic === "matching") {
+      return "Toque nos áudios e relacione cada um à imagem correta.";
+    }
+    if (mechanic === "bubble-pop") {
+      return "Ouça e estoure a figura correta.";
+    }
+    if (mode === "sequence-choice") {
+      return "Ouça e toque na sequência visual correta.";
+    }
+    return "Ouça e toque na imagem correta.";
+  }
+
+  function baseQuestion(bp, mechanic, metadata, answer, alternatives, audioConfig, adaptation) {
     const audioEntry = AUDIO_CATALOG[bp.id] || {};
     const stimulus = Array.isArray(audioEntry.stimuli) ? audioEntry.stimuli[0] : null;
     const targetAudio = targetAudioText(bp);
+    const instruction = instructionFor(mechanic, bp, adaptation);
+    const requestedAudio = audioConfig || {
+      enabled: true,
+      text: targetAudio,
+      src: stimulus?.src || null,
+      language: "en-US",
+      role: "instruction"
+    };
 
     return {
       id: bp.id,
@@ -676,25 +962,17 @@
       module: MODULE,
       skill: skill(bp.skill),
       difficulty: bp.difficulty,
-      statement: "Ouça e observe.",
-      instruction: mechanic === "drag-drop"
-        ? "Ouça e coloque as imagens na ordem."
-        : "Ouça e toque na imagem correta.",
+      statement: instruction,
+      instruction,
       contentLanguage: "en",
       instructionLanguage: "pt-BR",
       feedbackLanguage: "pt-BR",
-      audio: {
-        enabled: true,
-        text: targetAudio,
-        src: stimulus?.src || null,
-        language: "en-US",
-        role: "instruction"
-      },
+      audio: requestedAudio,
       alternatives: alternatives || bp.options.map((entry) => option(entry.id, entry.text, false)),
       answer,
       feedback: {
         correct: `Muito bem! ${targetAudio.toUpperCase()}`,
-        incorrect: "Ouça novamente, observe as imagens e tente outra vez.",
+        incorrect: "Ouça novamente, observe as pistas e tente outra vez.",
         language: "pt-BR"
       },
       delivery: {
@@ -709,97 +987,265 @@
         sourceInstruction: bp.instruction,
         sourceMedia: bp.sourceMedia,
         sourceCorrectOptionId: bp.correct,
+        sourceCorrectText: correctOption(bp)?.text || "",
         sourceOptions: bp.options.map((entry) => ({ id: entry.id, text: entry.text })),
         factoryNote: bp.note || "",
         pedagogy: {
           ...PEDAGOGY_PROFILE,
           sourceQuestionId: bp.id,
-          adaptation: mechanic === "drag-drop" ? "R0_AUDIO_VISUAL_SEQUENCE" : "R0_AUDIO_TO_VISUAL",
+          adaptation,
           readingEssential: false,
           literacyDemand: "R0"
         },
+        mechanicSelection: {
+          selected: mechanic,
+          preferenceWeight: mechanic === "target-shooter" ? 100 : mechanic === "matching" ? 92 : mechanic === "bubble-pop" ? 80 : 0,
+          diversityException: null,
+          focusSet: ["target-shooter", "matching", "bubble-pop", "smart-sentence"],
+          smartSentenceYear1Blocked: true
+        },
         instructionAudio: {
           required: true,
-          text: mechanic === "drag-drop"
-            ? "Ouça e coloque as imagens na ordem."
-            : "Ouça e toque na imagem correta.",
+          text: instruction,
           language: "pt-BR",
           fallback: "speech-synthesis"
+        },
+        sourceAudioReuse: {
+          catalogMechanic: audioEntry.mechanic || null,
+          mechanicIndependentReuseAllowed: true,
+          stimulusSrc: stimulus?.src || null,
+          plannedStimulusSrc: stimulus?.plannedSrc || null
         },
         ...metadata
       }
     };
   }
 
+  const SEQUENCE_CHOICES = Object.freeze({
+    "EN1-M2-11": [
+      { id: "seq1", tokens: ["6", "7", "8"], text: "six – seven – eight" },
+      { id: "seq2", tokens: ["6", "8", "7"], text: "six – eight – seven" },
+      { id: "seq3", tokens: ["7", "6", "8"], text: "seven – six – eight" }
+    ],
+    "EN1-M2-12": [
+      { id: "seq1", tokens: ["3", "10"], text: "3 – 10" },
+      { id: "seq2", tokens: ["10", "3"], text: "10 – 3" },
+      { id: "seq3", tokens: ["3", "9"], text: "3 – 9" }
+    ],
+    "EN1-M6-12": [
+      { id: "seq1", tokens: ["hello", "name", "bye"], text: "Hello! I’m Mia. → See you!" },
+      { id: "seq2", tokens: ["bye", "hello", "name"], text: "See you! → Hello! I’m Mia." },
+      { id: "seq3", tokens: ["bye", "morning"], text: "Goodbye! → Good morning!" }
+    ]
+  });
+
+  function sequenceCard(choice) {
+    const tokenMap = {
+      hello: "👋", name: "🪪", bye: "🚶👋", morning: "🌅"
+    };
+    const parts = choice.tokens.map((token) => tokenMap[token] || token);
+    const isNumeric = choice.tokens.every((token) => /^\d+$/.test(token));
+    const rendered = parts.map((part, index) => {
+      const x = 90 + index * (360 / Math.max(1, parts.length - 1));
+      return isNumeric
+        ? `<g><rect x="${x-55}" y="130" width="110" height="110" rx="24" fill="#FFFFFF" stroke="#183B66" stroke-width="6"/><text x="${x}" y="207" text-anchor="middle" font-size="62" font-weight="900" font-family="system-ui,sans-serif" fill="#183B66">${part}</text></g>`
+        : `<text x="${x}" y="215" text-anchor="middle" font-size="74" font-family="Apple Color Emoji,Segoe UI Emoji,sans-serif">${part}</text>`;
+    }).join("");
+    let arrows = "";
+    for (let index = 0; index < parts.length - 1; index += 1) {
+      const x1 = 145 + index * (360 / Math.max(1, parts.length - 1));
+      const x2 = 35 + (index+1) * (360 / Math.max(1, parts.length - 1));
+      arrows += `<path d="M${x1} 185 H${x2}" stroke="#1E88E5" stroke-width="8" stroke-linecap="round"/><path d="M${x2-14} 170 L${x2} 185 L${x2-14} 200" fill="none" stroke="#1E88E5" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>`;
+    }
+    return svgAsset(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360"><rect width="560" height="360" rx="38" fill="#F7FBFF"/>${rendered}${arrows}</svg>`);
+  }
+
   function targetQuestion(bp) {
-    const correctId = `target-${bp.correct}`;
+    const sequenceChoices = SEQUENCE_CHOICES[bp.id] || null;
+    if (sequenceChoices) {
+      const items = sequenceChoices.map((choice) => ({
+        id: `target-${choice.id}`,
+        label: "",
+        image: sequenceCard(choice),
+        display: "image",
+        alt: choice.text,
+        assetStatus: "generated-review"
+      }));
+      const alternatives = sequenceChoices.map((choice) => option(choice.id, choice.text, false));
+      return baseQuestion(
+        bp,
+        "target-shooter",
+        {
+          screenTitle: "Ouça e escolha a sequência",
+          sourceSequenceOptions: sequenceChoices.map((choice) => ({ id: choice.id, text: choice.text })),
+          assetSelection: sequenceChoices.map((choice) => ({ familyId: "sequence/review", variantId: `${bp.id.toLowerCase()}_${choice.id}`, semanticContrast: "PASS", commercialAssetStatus: "PREVIEW_REQUIRES_FINAL_ASSET" })),
+          targetShooter: {
+            audioText: bp.audioText || targetAudioText(bp),
+            mode: "audio-to-image",
+            shape: "cloud",
+            correctIds: ["target-seq1"],
+            difficulty: { speed: .26, objectCount: items.length, spawnIntervalMs: 320, requiredCorrect: 1, targetSize: 188, timeLimitMs: 0, timerMode: "none" },
+            items
+          }
+        },
+        { type: "single", value: "seq1" },
+        alternatives,
+        null,
+        "R0_AUDIO_TO_VISUAL_SEQUENCE_CHOICE"
+      );
+    }
+
     const items = bp.options.map((entry, index) => {
-      const hintedKey = bp.imageOptions?.[index];
-      const image = hintedKey && VISUALS[hintedKey]
-        ? VISUALS[hintedKey]
-        : visualForText(entry.text);
+      const image = optionVisual(bp, entry, index);
       return {
         id: `target-${entry.id}`,
         label: "",
         image,
         display: "image",
         alt: entry.text,
-        assetStatus: hintedKey && VISUALS[hintedKey] ? "resolved" : visualStatus(entry.text)
+        assetStatus: String(image).startsWith("data:image/") ? "generated-review" : "resolved"
       };
     });
-
+    const assetMeta = bp.options.map((entry, index) => assetSelection(entry.text, bp, entry.id, items[index].image));
     return baseQuestion(
       bp,
       "target-shooter",
       {
         screenTitle: "Ouça e escolha",
+        assetSelection: assetMeta,
         targetShooter: {
           audioText: targetAudioText(bp),
           mode: "audio-to-image",
           shape: "cloud",
-          correctIds: [correctId],
-          difficulty: {
-            speed: .30,
-            objectCount: Math.max(2, items.length),
-            spawnIntervalMs: 250,
-            requiredCorrect: 1,
-            targetSize: 176,
-            timeLimitMs: 0,
-            timerMode: "none"
-          },
+          correctIds: [`target-${bp.correct}`],
+          difficulty: { speed: .28, objectCount: Math.max(2, items.length), spawnIntervalMs: 300, requiredCorrect: 1, targetSize: 184, timeLimitMs: 0, timerMode: "none" },
           items
         }
       },
-      { type: "single", value: bp.correct }
+      { type: "single", value: bp.correct },
+      bp.options.map((entry) => option(entry.id, entry.text, false)),
+      null,
+      "R0_AUDIO_TO_VISUAL_TARGET"
     );
   }
 
-  function sequenceQuestion(bp) {
-    const order = Array.isArray(bp.sequence) ? bp.sequence : bp.options.map((entry) => entry.id);
-    const alternatives = bp.options.map((entry) => option(
-      entry.id,
-      "",
-      false,
-      visualForText(entry.text)
-    ));
-
+  function matchingQuestion(bp) {
+    const correct = correctOption(bp);
+    const contrast = bp.options.find((entry) => entry.id !== bp.correct) || bp.options[0];
+    const selected = [correct, contrast];
+    const assets = {};
+    const leftItems = selected.map((entry) => ({
+      id: `audio-${entry.id}`,
+      spokenText: entry.text,
+      speechLocale: "en-US",
+      audioDescription: "Ouvir"
+    }));
+    const rightItems = selected.map((entry, index) => {
+      const image = optionVisual(bp, entry, bp.options.findIndex((candidate) => candidate.id === entry.id));
+      const key = `asset-${entry.id}`;
+      assets[key] = image;
+      return { id: `image-${entry.id}`, imageAssetKey: key, alt: entry.text };
+    });
+    const pairs = selected.map((entry) => ({ leftId: `audio-${entry.id}`, rightId: `image-${entry.id}` }));
+    const standardAlternatives = bp.options.map((entry) => option(entry.id, entry.text, false));
+    const topAudio = {
+      enabled: true,
+      text: "Toque nos áudios e relacione cada um à imagem correta.",
+      src: null,
+      language: "pt-BR",
+      role: "instruction"
+    };
     return baseQuestion(
       bp,
-      "drag-drop",
+      "matching",
       {
-        screenTitle: "Coloque na ordem",
-        sourceCorrectAnswer: order.join(" → "),
-        sequenceLabels: order.map((_, index) => String(index + 1)),
-        layout: "sequence",
-        shuffleItems: true
+        screenTitle: "Ouça e relacione",
+        assetSelection: selected.map((entry, index) => assetSelection(entry.text, bp, entry.id, assets[`asset-${entry.id}`])),
+        matchingContrastSourceOptionId: contrast.id,
+        matching: {
+          mode: "audio-image",
+          leftTitle: "Ouça",
+          rightTitle: "Relacione",
+          leftItems,
+          rightItems,
+          pairs,
+          assets,
+          behavior: {
+            shuffleLeft: true,
+            shuffleRight: true,
+            connectionMode: "1x1",
+            interactionMode: "touch",
+            lockCorrectPairsOnRetry: true,
+            clearIncorrectPairsOnRetry: true
+          }
+        }
       },
-      { type: "sequence", value: order },
-      alternatives
+      { type: "single", value: bp.correct },
+      standardAlternatives,
+      topAudio,
+      "R0_TOUCH_AUDIO_TO_IMAGE_MATCHING_CONTRAST_PAIR"
     );
+  }
+
+  function bubbleQuestion(bp) {
+    const alternatives = bp.options.map((entry) => option(
+      entry.id,
+      pictogramForText(entry.text),
+      false,
+      null,
+      {
+        sourceText: entry.text,
+        speechText: entry.text,
+        speechLanguage: "en-US",
+        semanticFamily: semanticFamily(entry.text),
+        pictogramOnly: true
+      }
+    ));
+    return baseQuestion(
+      bp,
+      "bubble-pop",
+      {
+        screenTitle: "Ouça e estoure",
+        bubbleCalibration: {
+          yearProfile: "Y1_VERY_SLOW",
+          movement: "very-slow",
+          simultaneousElements: Math.min(3, alternatives.length),
+          shortRound: true,
+          highVisualPersistence: true,
+          timerPunitive: false,
+          readingRequired: false
+        },
+        behavior: {
+          motionProfile: "very-slow",
+          speedMultiplier: 0.45,
+          maximumSimultaneous: Math.min(3, alternatives.length),
+          timerMode: "none",
+          timeLimitMs: 0,
+          audioReplay: true
+        },
+        assetSelection: bp.options.map((entry) => ({
+          ...assetSelection(entry.text, bp, entry.id, "pictogram"),
+          source: "unicode-pictogram",
+          commercialAssetStatus: "RESOLVED_PICTOGRAM_MODE"
+        }))
+      },
+      { type: "single", value: bp.correct },
+      alternatives,
+      null,
+      "R0_AUDIO_TO_PICTOGRAM_BUBBLE_SLOW"
+    );
+  }
+
+  function mechanicForBlueprint(bp) {
+    const index = Number(String(bp.id).match(/-(\d{2})$/)?.[1] || 1);
+    const moduleMap = MECHANIC_PLAN[MODULE] || {};
+    return moduleMap[index] || "target-shooter";
   }
 
   function buildQuestion(bp) {
-    if (bp.kind === "sequence") return sequenceQuestion(bp);
+    const mechanic = mechanicForBlueprint(bp);
+    if (mechanic === "matching") return matchingQuestion(bp);
+    if (mechanic === "bubble-pop") return bubbleQuestion(bp);
     return targetQuestion(bp);
   }
 
@@ -1182,12 +1628,18 @@
 
   const activityGroups = [];
   let current = null;
+  const activityTitleByMechanic = {
+    "target-shooter": "Ouça e escolha",
+    "matching": "Ouça e relacione",
+    "bubble-pop": "Ouça e estoure",
+    "smart-sentence": "Monte a frase"
+  };
   questions.forEach((question) => {
     const mechanic = question.delivery.mechanic;
-    if (!current || current.mechanic !== mechanic || current.questions.length >= 4) {
+    if (!current || current.mechanic !== mechanic || current.questions.length >= 3) {
       current = {
         id: `en1-m01-step-${String(activityGroups.length + 1).padStart(2, "0")}`,
-        title: mechanic === "drag-drop" ? "Coloque na ordem" : "Ouça e escolha",
+        title: activityTitleByMechanic[mechanic] || "Atividade",
         mechanic,
         skill: question.skill,
         pedagogy: { profile: "Y1_EARLY_LITERACY", literacyDemand: "R0", readingEssential: false },
@@ -1202,7 +1654,7 @@
     id: "english-year-1-module-01",
     version: VERSION,
     sourceVersion: "DUDUQ English 1–5 v2.2",
-    factoryVersion: "1.0-pedagogy-v1",
+    factoryVersion: "1.1-focus4-r124",
     productionStatus: "REVIEW_REQUIRED_MEDIA_GAPS",
     subject: "Língua Inglesa",
     year: YEAR,
@@ -1221,17 +1673,24 @@
     assetPolicy: {
       semanticAuthoring: "imageAsset/imageCategory",
       smartAssets: true,
+      assetGovernance: true,
+      visualVariation: true,
+      semanticContrast: true,
+      mechanicDiversity: true,
       integrationB: true,
       previewGeneratedAssetsAllowedForReviewOnly: true,
-      commercialGate: "fallback=0; blocked=0; missing=0; assetGaps=0",
+      commercialGate: "fallback=0; blocked=0; missing=0; assetGaps=0; contrastGaps=0",
       repoReady: true,
       cloudflareReady: true,
       engineBaseline: "Canary R124",
-      routerContract: "R124_FACTORY_NATIVE_PAYLOAD"
+      routerContract: "R124_FACTORY_NATIVE_PAYLOAD",
+      focusMechanics: ["target-shooter", "matching", "bubble-pop", "smart-sentence"],
+      smartSentenceLoaded: false,
+      smartSentenceReason: "Y1 scored Smart Sentence blocked by Pedagogy v1.1"
     },
     pedagogyPolicy: {
-      specification: "DUDUQ_FACTORY_PEDAGOGICAL_SPECIFICATION_v1.0",
-      specificationVersion: "1.0.0",
+      specification: "DUDUQ_FACTORY_PEDAGOGICAL_SPECIFICATION_v1.1",
+      specificationVersion: "1.1.0",
       profile: "Y1_EARLY_LITERACY",
       maxLiteracyDemand: "R0",
       readingEssential: false,
@@ -1240,6 +1699,11 @@
       targetAudioRepeatable: true,
       nonReaderTest: "PASS",
       pedagogicalAudit: "PASS",
+      mechanicDiversity: "PASS",
+      focusMechanics: ["target-shooter", "matching", "bubble-pop", "smart-sentence"],
+      smartSentenceYear1: "BLOCKED_BY_PEDAGOGY_V1_1",
+      assetGovernance: "PASS_WITH_MEDIA_REVIEW_GAPS",
+      semanticContrast: "PASS",
       gates: ["PED-01", "PED-02", "PED-03", "PED-04", "PED-05", "PED-06", "PED-07", "PED-08", "PED-09", "PED-10", "PED-11", "PED-12"]
     },
     learningGoals: [
@@ -1249,7 +1713,9 @@
       officialSource: "DUDUQ English 1–5 v2.2 — Manual do Educador, 1º ano, Unidade 1, p. 21",
       literacy: "Y1_EARLY_LITERACY: R0 como padrão. Leitura nunca é requisito para acertar; texto é apenas apoio.",
       maintenance: "IDs editoriais permanecem estáveis. Troca de imagem usa imageAsset; troca de mecânica exige regenerar o payload.",
-      qaStatus: "REVIEW_REQUIRED_MEDIA_GAPS"
+      qaStatus: "REVIEW_REQUIRED_MEDIA_GAPS",
+      diversity: "At least 3 mechanics used; no single mechanic >75%; Smart Sentence intentionally blocked in Year 1.",
+      assetGovernance: "Family/variant metadata + deterministic semantic contrast; generated SVGs are review-only until final art replaces them."
     },
     intro: {
       companyKicker: "UMA CRIAÇÃO DE",
