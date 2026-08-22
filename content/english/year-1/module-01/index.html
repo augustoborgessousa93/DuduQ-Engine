@@ -32,15 +32,13 @@
   <script src="../../../../core/duduq-host.js?v=168"></script>
   <script src="../../../../core/duduq-progress-ui.js?v=100"></script>
 
-  <!-- Active R124 production mechanics only. -->
-  <script src="../../../../mechanics/bubble-pop.js?v=123"></script>
+  <!-- Year 1 pedagogical profile: R0. Only mechanics actually used. -->
   <script src="../../../../mechanics/drag-drop.js?v=103"></script>
-  <script src="../../../../mechanics/matching.js?v=103"></script>
-  <script src="../../../../mechanics/smart-sentence.js?v=101"></script>
   <script src="../../../../mechanics/target-shooter.js?v=100"></script>
 
+  <!-- Router remains available after mechanics, but does not re-select a Factory-approved mechanic at runtime. -->
   <script src="../../../../core/duduq-router.js?v=100"></script>
-  <script src="./module-01.js?v=101"></script>
+  <script src="./module-01.js?v=110"></script>
 
   <script>
     window.addEventListener("DOMContentLoaded", function () {
@@ -97,35 +95,6 @@
           return;
         }
 
-        const decisions = questions.map(function (question, questionIndex) {
-          return {
-            question,
-            decision: window.DuduQRouter.select(question, {
-              index: questionIndex,
-              defaults: {
-                subject: moduleDefinition.subject,
-                year: moduleDefinition.year,
-                module: moduleDefinition.module
-              }
-            })
-          };
-        });
-
-        const invalid = decisions.find((entry) =>
-          !entry.decision?.selected ||
-          entry.decision.selected.mechanicId !== activity.mechanic
-        );
-
-        if (invalid) {
-          console.error("[DuduQ Factory] Incompatibilidade de Router:", {
-            activity,
-            question: invalid.question,
-            decision: invalid.decision
-          });
-          root.textContent = `Erro: "${activity.title}" não é compatível com "${activity.mechanic}".`;
-          return;
-        }
-
         steps.push({
           id: activity.id,
           mechanic: activity.mechanic,
@@ -139,7 +108,8 @@
           },
           options: {
             contentVersion: moduleDefinition.version,
-            skill: activity.skill || null
+            skill: activity.skill || null,
+            pedagogyProfile: moduleDefinition.pedagogyPolicy?.profile || null
           }
         });
       }
@@ -238,7 +208,7 @@
       if (window.DuduQIntro?.show) {
         window.DuduQIntro.show({
           companyKicker: intro.companyKicker || "UMA CRIAÇÃO DE",
-          companyLogo: intro.companyLogo || "",
+          companyLogo: intro.companyLogo || "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/LOGO%20DA%20EMPRESA_COLORIDO.png",
           companyAlt: intro.companyAlt || "Editora Brasil Cultural",
           companyName: intro.companyName || "Editora Brasil Cultural",
           companyWidth: intro.companyWidth || 820,
