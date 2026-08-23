@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "contractMajor": 1,
-  "revision": 140,
+  "revision": 139,
   "core": {
     "release": "1.0.9",
     "styles": [
@@ -27,7 +27,7 @@
   },
   "mechanics": {
     "bubble-pop": { "release": "1.0.25", "adapter": "/engine/releases/mechanics/bubble-pop/1.0.25/bubble-pop.js", "runtime": "/engine/releases/mechanics/bubble-pop/1.0.25/DUDUQ_BUBBLE_POP.html" },
-    "drag-drop": { "release": "2.0.21", "adapter": "/engine/releases/mechanics/drag-drop/2.0.21/drag-drop.js", "runtime": "/engine/releases/mechanics/drag-drop/2.0.21/DUDUQ_DRAG_DROP.html" },
+    "drag-drop": { "release": "2.0.18", "adapter": "/engine/releases/mechanics/drag-drop/2.0.18/drag-drop.js", "runtime": "/engine/releases/mechanics/drag-drop/2.0.18/DUDUQ_DRAG_DROP.html" },
     "matching": { "release": "1.0.23", "adapter": "/engine/releases/mechanics/matching/1.0.23/matching.js", "runtime": "/engine/releases/mechanics/matching/1.0.23/DUDUQ_MATCHING.html" },
     "memory-quest": { "release": "1.0.27", "adapter": "/engine/releases/mechanics/memory-quest/1.0.27/memory-quest.js", "runtime": "/engine/releases/mechanics/memory-quest/1.0.27/DUDUQ_MEMORY_QUEST.html" },
     "smart-sentence": { "release": "4.0.20", "adapter": "/engine/releases/mechanics/smart-sentence/4.0.20/smart-sentence.js", "runtime": "/engine/releases/mechanics/smart-sentence/4.0.20/DUDUQ_SMART_SENTENCE.html" },
@@ -41,5 +41,5 @@
     "wordSlashApproved": false
   },
   "channel": "canary-v1",
-  "status": "approved-r140-drag-drop-2.0.21-smart-sequence-feedback"
+  "status": "rollback-r139-drag-drop-2.0.18-after-r140-registration-failure"
 }
