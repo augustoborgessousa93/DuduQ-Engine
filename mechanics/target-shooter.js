@@ -1,10 +1,11 @@
 /* =========================================================
    DUDUQ MECHANIC — TARGET SHOOTER
-   Candidate Release 1.0.17
+   Candidate Release 1.0.20
    Runtime preservado: Target Shooter 2.0.2
 
-   AJUSTE 1.0.17
-   - imagens usam melhor a área interna disponível do alvo;
+   AJUSTE 1.0.20
+   - imagens preenchem a área interna disponível do alvo;
+   - rótulos visuais são ocultados quando há imagem;
    - proporção e enquadramento integral são preservados;
    - lógica, conteúdo e comportamento da 1.0.16 permanecem intactos.
    ========================================================= */
@@ -22,11 +23,11 @@
   const MECHANIC_ID =
     "target-shooter";
   const VERSION =
-    "1.0.17";
+    "1.0.20";
   const RUNTIME_VERSION =
     "2.0.2";
   const RELEASE_PATH =
-    "/engine/releases/mechanics/target-shooter/1.0.17/";
+    "/engine/releases/mechanics/target-shooter/1.0.20/";
 
   function isObject(value) {
     return (
