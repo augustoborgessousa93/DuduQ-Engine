@@ -1,7 +1,7 @@
 {
     "schemaVersion":  1,
     "contractMajor":  1,
-    "revision":  126,
+    "revision":  127,
     "core":  {
                  "release":  "1.0.2",
                  "styles":  [
@@ -102,9 +102,9 @@
                                              "runtime":  "/engine/releases/mechanics/smart-sentence/4.0.20/DUDUQ_SMART_SENTENCE.html"
                                          },
                       "target-shooter":  {
-                                             "release":  "1.0.17",
-                                             "adapter":  "/engine/releases/mechanics/target-shooter/1.0.17/target-shooter.js",
-                                             "runtime":  "/engine/releases/mechanics/target-shooter/1.0.17/DUDUQ_TARGET_SHOOTER.html"
+                                             "release":  "1.0.18",
+                                             "adapter":  "/engine/releases/mechanics/target-shooter/1.0.18/target-shooter.js",
+                                             "runtime":  "/engine/releases/mechanics/target-shooter/1.0.18/DUDUQ_TARGET_SHOOTER.html"
                                          }
                   },
     "policy":  {
@@ -115,5 +115,5 @@
                    "wordSlashApproved":  false
                },
     "channel":  "canary-v1",
-    "status":  "candidate-r126-target-shooter-1.0.17"
+    "status":  "candidate-r127-target-shooter-1.0.18"
 }
