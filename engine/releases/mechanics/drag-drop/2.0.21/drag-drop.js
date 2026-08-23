@@ -301,7 +301,7 @@
     `source = replaceRequired(
     source,
     "prepared = window.__DUDUQ_DD221_PATCH_RUNTIME__(prepared);",
-    "prepared = window.__DUDUQ_DD221_PATCH_RUNTIME__(prepared);\\n        prepared = window.__DUDUQ_DD221_SMART_FEEDBACK_RUNTIME__(prepared);",
+    "prepared = window.__DUDUQ_DD221_PATCH_RUNTIME__(prepared);\\\\n        prepared = window.__DUDUQ_DD221_SMART_FEEDBACK_RUNTIME__(prepared);",
     1
   );
 
