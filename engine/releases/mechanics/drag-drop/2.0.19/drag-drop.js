@@ -252,7 +252,7 @@
     ],
     [
       "prepared = stampContext(prepared, context);",
-      "prepared = stampContext(prepared, context);\\n        prepared = window.__DUDUQ_DD219_PATCH_RUNTIME__(prepared);"
+      "prepared = stampContext(prepared, context);\n        prepared = window.__DUDUQ_DD219_PATCH_RUNTIME__(prepared);"
     ]
   ];
 
