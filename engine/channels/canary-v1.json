@@ -1,78 +1,78 @@
 {
     "schemaVersion":  1,
     "contractMajor":  1,
-    "revision":  132,
+    "revision":  133,
     "core":  {
-                 "release":  "1.0.3",
+                 "release":  "1.0.4",
                  "styles":  [
                                 {
-                                    "href":  "/engine/releases/core/1.0.3/duduq-theme.css",
-                                    "release":  "1.0.3"
+                                    "href":  "/engine/releases/core/1.0.4/duduq-theme.css",
+                                    "release":  "1.0.4"
                                 },
                                 {
-                                    "href":  "/engine/releases/core/1.0.3/duduq-intro.css",
-                                    "release":  "1.0.3"
+                                    "href":  "/engine/releases/core/1.0.4/duduq-intro.css",
+                                    "release":  "1.0.4"
                                 },
                                 {
-                                    "href":  "/engine/releases/core/1.0.3/duduq-transition.css",
-                                    "release":  "1.0.3"
+                                    "href":  "/engine/releases/core/1.0.4/duduq-transition.css",
+                                    "release":  "1.0.4"
                                 },
                                 {
-                                    "href":  "/engine/releases/core/1.0.3/duduq-completion.css",
-                                    "release":  "1.0.3"
+                                    "href":  "/engine/releases/core/1.0.4/duduq-completion.css",
+                                    "release":  "1.0.4"
                                 },
                                 {
                                     "id":  "duduq-world-fusion-core-style",
-                                    "href":  "/engine/releases/core/1.0.3/duduq-world-fusion.css",
-                                    "release":  "1.0.3"
+                                    "href":  "/engine/releases/core/1.0.4/duduq-world-fusion.css",
+                                    "release":  "1.0.4"
                                 }
                             ],
                  "preMechanicScripts":  [
                                             {
-                                                "src":  "/engine/releases/core/1.0.3/duduq-assets.js",
-                                                "release":  "1.0.3"
+                                                "src":  "/engine/releases/core/1.0.4/duduq-assets.js",
+                                                "release":  "1.0.4"
                                             },
                                             {
                                                 "id":  "duduq-world-fusion-core-script",
-                                                "src":  "/engine/releases/core/1.0.3/duduq-world-fusion.js",
-                                                "release":  "1.0.3"
+                                                "src":  "/engine/releases/core/1.0.4/duduq-world-fusion.js",
+                                                "release":  "1.0.4"
                                             },
                                             {
-                                                "src":  "/engine/releases/core/1.0.3/duduq-sound.js",
-                                                "release":  "1.0.3"
+                                                "src":  "/engine/releases/core/1.0.4/duduq-sound.js",
+                                                "release":  "1.0.4"
                                             },
                                             {
-                                                "src":  "/engine/releases/core/1.0.3/duduq-intro.js",
-                                                "release":  "1.0.3"
+                                                "src":  "/engine/releases/core/1.0.4/duduq-intro.js",
+                                                "release":  "1.0.4"
                                             },
                                             {
-                                                "src":  "/engine/releases/core/1.0.3/duduq-schema.js",
-                                                "release":  "1.0.3"
+                                                "src":  "/engine/releases/core/1.0.4/duduq-schema.js",
+                                                "release":  "1.0.4"
                                             },
                                             {
-                                                "src":  "/engine/releases/core/1.0.3/duduq-content-audio.js",
-                                                "release":  "1.0.3"
+                                                "src":  "/engine/releases/core/1.0.4/duduq-content-audio.js",
+                                                "release":  "1.0.4"
                                             },
                                             {
-                                                "src":  "/engine/releases/core/1.0.3/duduq-completion.js",
-                                                "release":  "1.0.3"
+                                                "src":  "/engine/releases/core/1.0.4/duduq-completion.js",
+                                                "release":  "1.0.4"
                                             },
                                             {
-                                                "src":  "/engine/releases/core/1.0.3/duduq-transition.js",
-                                                "release":  "1.0.3"
+                                                "src":  "/engine/releases/core/1.0.4/duduq-transition.js",
+                                                "release":  "1.0.4"
                                             },
                                             {
-                                                "src":  "/engine/releases/core/1.0.3/duduq-host.js",
-                                                "release":  "1.0.3"
+                                                "src":  "/engine/releases/core/1.0.4/duduq-host.js",
+                                                "release":  "1.0.4"
                                             },
                                             {
-                                                "src":  "/engine/releases/core/1.0.3/duduq-progress-ui.js",
-                                                "release":  "1.0.3"
+                                                "src":  "/engine/releases/core/1.0.4/duduq-progress-ui.js",
+                                                "release":  "1.0.4"
                                             }
                                         ],
                  "router":  {
-                                "src":  "/engine/releases/core/1.0.3/duduq-router.js",
-                                "release":  "1.0.3"
+                                "src":  "/engine/releases/core/1.0.4/duduq-router.js",
+                                "release":  "1.0.4"
                             }
              },
     "mechanics":  {
@@ -115,5 +115,5 @@
                    "wordSlashApproved":  false
                },
     "channel":  "canary-v1",
-    "status":  "candidate-r132-core-1.0.3-intelligent-images"
+    "status":  "candidate-r133-core-1.0.4-number-three-hotfix"
 }
