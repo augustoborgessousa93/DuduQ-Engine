@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>DuduQ — Registro Direto Drag & Drop 2.0.22</title>
+  <style>
+    html,body{margin:0;min-height:100%;font-family:system-ui,sans-serif;background:#eef6fb;color:#17375e}
+    body{display:grid;place-items:center;min-height:100vh;padding:24px;box-sizing:border-box}
+    .card{width:min(680px,92vw);background:#fff;border:2px solid #c8d9e9;border-radius:24px;padding:32px;box-shadow:0 16px 42px rgba(31,65,99,.14);text-align:center}
+    .ok{color:#16723a}.fail{color:#b42318}.muted{color:#61758a;font-weight:650}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1 id="status">Verificando registro direto…</h1>
+    <p id="detail" class="muted">Este teste usa o mesmo tipo de carregamento por &lt;script&gt; dos módulos oficiais.</p>
+  </main>
+
+  <script>
+    window.DUDUQ_ENGINE_BASE = new URL("../../..", window.location.href).href.replace(/\/$/, "");
+  </script>
+  <script src="../../../engine/releases/core/1.0.9/duduq-host.js?t=dd222-direct"></script>
+  <script src="../../../engine/releases/mechanics/drag-drop/2.0.22/drag-drop.js?t=dd222-direct"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      const status = document.getElementById("status");
+      const detail = document.getElementById("detail");
+      const mechanic = window.DuduQ?.getMechanic?.("drag-drop");
+      if (mechanic && mechanic.version === "2.0.22") {
+        status.className = "ok";
+        status.textContent = "REGISTRO OK — Drag & Drop 2.0.22";
+        detail.textContent = "A mecânica foi registrada de forma síncrona antes do DOMContentLoaded, como exigem os módulos oficiais.";
+        return;
+      }
+      status.className = "fail";
+      status.textContent = "FALHA DE REGISTRO";
+      detail.textContent = mechanic ? ("Versão registrada: " + mechanic.version) : "A mecânica drag-drop não foi registrada.";
+    });
+  </script>
+</body>
+</html>
