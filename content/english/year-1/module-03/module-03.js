@@ -730,16 +730,23 @@
     const correctId = `target-${bp.correct}`;
     const items = bp.options.map((entry, index) => {
       const hintedKey = bp.imageOptions?.[index];
-      const image = hintedKey && VISUALS[hintedKey]
-        ? VISUALS[hintedKey]
-        : visualForText(entry.text);
+      const intelligentHint = hintedKey
+        ? window.DuduQAssets?.resolveImage?.(hintedKey)
+        : null;
+      const image = intelligentHint || (
+        hintedKey && VISUALS[hintedKey]
+          ? VISUALS[hintedKey]
+          : visualForText(entry.text)
+      );
       return {
         id: `target-${entry.id}`,
         label: "",
         image,
         display: "image",
         alt: entry.text,
-        assetStatus: hintedKey && VISUALS[hintedKey] ? "resolved" : visualStatus(entry.text)
+        assetStatus: intelligentHint || (hintedKey && VISUALS[hintedKey])
+          ? "resolved"
+          : visualStatus(entry.text)
       };
     });
 
