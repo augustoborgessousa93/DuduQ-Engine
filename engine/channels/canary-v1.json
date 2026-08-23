@@ -1,7 +1,7 @@
 {
     "schemaVersion":  1,
     "contractMajor":  1,
-    "revision":  138,
+    "revision":  139,
     "core":  {
                  "release":  "1.0.9",
                  "styles":  [
@@ -82,9 +82,9 @@
                                          "runtime":  "/engine/releases/mechanics/bubble-pop/1.0.25/DUDUQ_BUBBLE_POP.html"
                                      },
                       "drag-drop":  {
-                                        "release":  "2.0.17",
-                                        "adapter":  "/engine/releases/mechanics/drag-drop/2.0.17/drag-drop.js",
-                                        "runtime":  "/engine/releases/mechanics/drag-drop/2.0.17/DUDUQ_DRAG_DROP.html"
+                                        "release":  "2.0.18",
+                                        "adapter":  "/engine/releases/mechanics/drag-drop/2.0.18/drag-drop.js",
+                                        "runtime":  "/engine/releases/mechanics/drag-drop/2.0.18/DUDUQ_DRAG_DROP.html"
                                     },
                       "matching":  {
                                        "release":  "1.0.23",
@@ -115,5 +115,5 @@
                    "wordSlashApproved":  false
                },
     "channel":  "canary-v1",
-    "status":  "candidate-r138-core-1.0.9-module01-smart-urls"
+    "status":  "candidate-r139-drag-drop-2.0.18-image-card-containment"
 }
