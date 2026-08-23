@@ -524,6 +524,8 @@
 
   function visualForText(value) {
     const raw = String(value || "");
+    const intelligentImage = window.DuduQAssets?.resolveImage?.(raw);
+    if (intelligentImage) return intelligentImage;
     const n = normalizeSemantic(raw);
 
     const alias = {
@@ -623,6 +625,7 @@
   }
 
   function visualStatus(value) {
+    if (window.DuduQAssets?.resolveImage?.(value)) return "resolved";
     const n = normalizeSemantic(value);
     if (VISUALS[n]) return "resolved";
     const aliases = {
