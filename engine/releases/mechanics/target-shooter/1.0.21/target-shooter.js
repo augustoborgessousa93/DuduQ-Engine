@@ -6,6 +6,7 @@
    AJUSTE 1.0.21
    - upgrade exclusivamente visual do cenário da arena;
    - céu, nuvens, horizonte e grama mais ricos e discretos;
+   - pequenos matinhos e poucas florzinhas suaves na faixa inferior;
    - microanimações ambientais leves e respeitando reduced motion;
    - lógica, interação, física, hit areas, alvos, pontuação e progressão intactos.
    ========================================================= */
@@ -321,6 +322,23 @@
 }
 
 .duduq-ts-ambient { z-index: 1 !important; opacity: .72; }
+.duduq-ts-ambient::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 1.5%;
+  right: 1.5%;
+  bottom: 1.5%;
+  height: 31%;
+  pointer-events: none;
+  opacity: .72;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 170'%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cg stroke='%232f9844' stroke-width='5' opacity='.72'%3E%3Cpath d='M30 168 Q43 132 57 108 M45 168 Q56 125 76 91 M61 168 Q72 137 91 119 M118 168 Q128 133 144 112 M130 168 Q145 125 161 101 M145 168 Q156 139 176 122 M255 168 Q268 131 282 107 M270 168 Q282 118 302 92 M289 168 Q299 136 318 117 M350 168 Q361 132 378 108 M365 168 Q379 120 397 98 M382 168 Q393 139 411 121 M795 168 Q806 132 824 108 M811 168 Q824 120 844 96 M829 168 Q841 139 858 121 M900 168 Q913 129 930 104 M917 168 Q929 118 949 91 M936 168 Q948 137 966 119 M1062 168 Q1075 131 1091 106 M1079 168 Q1090 120 1110 96 M1097 168 Q1110 139 1127 121 M1147 168 Q1158 136 1174 116'%3E%3C/path%3E%3C/g%3E%3Cg stroke='%2357b85d' stroke-width='3.5' opacity='.78'%3E%3Cpath d='M74 168 Q84 145 96 130 M184 168 Q194 140 209 124 M225 168 Q236 144 249 129 M320 168 Q329 144 343 128 M430 168 Q441 140 454 126 M754 168 Q765 141 779 126 M866 168 Q876 145 891 129 M985 168 Q997 140 1012 124 M1132 168 Q1141 143 1155 128'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3Cg opacity='.86'%3E%3Cg transform='translate(157 144)'%3E%3Ccircle cx='-7' cy='0' r='4' fill='%23fffdf5'/%3E%3Ccircle cx='7' cy='0' r='4' fill='%23fffdf5'/%3E%3Ccircle cx='0' cy='-7' r='4' fill='%23fffdf5'/%3E%3Ccircle cx='0' cy='7' r='4' fill='%23fffdf5'/%3E%3Ccircle cx='0' cy='0' r='3' fill='%23f2c94c'/%3E%3C/g%3E%3Cg transform='translate(333 151)'%3E%3Ccircle cx='-6' cy='0' r='3.5' fill='%23f8d7df'/%3E%3Ccircle cx='6' cy='0' r='3.5' fill='%23f8d7df'/%3E%3Ccircle cx='0' cy='-6' r='3.5' fill='%23f8d7df'/%3E%3Ccircle cx='0' cy='6' r='3.5' fill='%23f8d7df'/%3E%3Ccircle cx='0' cy='0' r='2.6' fill='%23f4c95d'/%3E%3C/g%3E%3Cg transform='translate(846 148)'%3E%3Ccircle cx='-6' cy='0' r='3.5' fill='%23eee8ff'/%3E%3Ccircle cx='6' cy='0' r='3.5' fill='%23eee8ff'/%3E%3Ccircle cx='0' cy='-6' r='3.5' fill='%23eee8ff'/%3E%3Ccircle cx='0' cy='6' r='3.5' fill='%23eee8ff'/%3E%3Ccircle cx='0' cy='0' r='2.6' fill='%23f2cf58'/%3E%3C/g%3E%3Cg transform='translate(1051 142)'%3E%3Ccircle cx='-7' cy='0' r='4' fill='%23fffdf5'/%3E%3Ccircle cx='7' cy='0' r='4' fill='%23fffdf5'/%3E%3Ccircle cx='0' cy='-7' r='4' fill='%23fffdf5'/%3E%3Ccircle cx='0' cy='7' r='4' fill='%23fffdf5'/%3E%3Ccircle cx='0' cy='0' r='3' fill='%23efc54a'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 100% 100%;
+  transform-origin: 50% 100%;
+  animation: duduq-ts-meadow-breeze 7.6s ease-in-out infinite alternate;
+}
 .duduq-ts-cloud {
   background: rgba(255,255,255,.68) !important;
   box-shadow: 0 10px 24px rgba(53,133,181,.07) !important;
@@ -337,9 +355,14 @@
   from { transform: translate3d(0,0,0) scaleX(1.001); filter: saturate(.98); }
   to { transform: translate3d(.18%,0,0) scaleX(.999); filter: saturate(1.02); }
 }
+@keyframes duduq-ts-meadow-breeze {
+  from { transform: translate3d(-.08%,0,0) skewX(-.18deg); }
+  to { transform: translate3d(.08%,0,0) skewX(.18deg); }
+}
 
 .duduq-ts-root[data-reduced-motion="true"] .duduq-ts-arena::before,
-.duduq-ts-root[data-reduced-motion="true"] .duduq-ts-arena::after {
+.duduq-ts-root[data-reduced-motion="true"] .duduq-ts-arena::after,
+.duduq-ts-root[data-reduced-motion="true"] .duduq-ts-ambient::before {
   animation: none !important;
   transform: none !important;
 }
@@ -347,6 +370,7 @@
 @media (max-width: 640px) {
   .duduq-ts-arena::before { opacity: .68 !important; }
   .duduq-ts-arena::after { height: 39% !important; bottom: -12% !important; }
+  .duduq-ts-ambient::before { height: 27%; opacity: .60; }
 }
 </style>`;
 
