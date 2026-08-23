@@ -7,9 +7,10 @@
   <title>DuduQ — Registro Direto Drag & Drop 2.0.22</title>
   <style>
     html,body{margin:0;min-height:100%;font-family:system-ui,sans-serif;background:#eef6fb;color:#17375e}
-    body{display:grid;place-items:center;min-height:100vh;padding:24px;box-sizing:border-box}
-    .card{width:min(680px,92vw);background:#fff;border:2px solid #c8d9e9;border-radius:24px;padding:32px;box-shadow:0 16px 42px rgba(31,65,99,.14);text-align:center}
+    body{display:grid;place-items:center;min-height:100vh;padding:24px;box-sizing:border-box;isolation:isolate}
+    .card{position:relative;z-index:10;width:min(680px,92vw);background:#fff;border:2px solid #c8d9e9;border-radius:24px;padding:32px;box-shadow:0 16px 42px rgba(31,65,99,.14);text-align:center}
     .ok{color:#16723a}.fail{color:#b42318}.muted{color:#61758a;font-weight:650}
+    html.duduq-world-fusion body>.card{position:relative!important;z-index:10!important}
   </style>
 </head>
 <body>
@@ -20,6 +21,10 @@
 
   <script>
     window.DUDUQ_ENGINE_BASE = new URL("../../..", window.location.href).href.replace(/\/$/, "");
+    window.__DUDUQ_DIRECT_REGISTRATION_ERROR__ = "";
+    window.addEventListener("error", function (event) {
+      if (event && event.message) window.__DUDUQ_DIRECT_REGISTRATION_ERROR__ = String(event.message);
+    });
   </script>
   <script src="../../../engine/releases/core/1.0.9/duduq-host.js?t=dd222-direct"></script>
   <script src="../../../engine/releases/mechanics/drag-drop/2.0.22/drag-drop.js?t=dd222-direct"></script>
@@ -36,7 +41,10 @@
       }
       status.className = "fail";
       status.textContent = "FALHA DE REGISTRO";
-      detail.textContent = mechanic ? ("Versão registrada: " + mechanic.version) : "A mecânica drag-drop não foi registrada.";
+      const runtimeError = window.__DUDUQ_DIRECT_REGISTRATION_ERROR__;
+      detail.textContent = runtimeError
+        ? ("Erro capturado: " + runtimeError)
+        : (mechanic ? ("Versão registrada: " + mechanic.version) : "A mecânica drag-drop não foi registrada.");
     });
   </script>
 </body>
