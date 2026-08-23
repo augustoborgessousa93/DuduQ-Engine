@@ -1,7 +1,7 @@
 {
     "schemaVersion":  1,
     "contractMajor":  1,
-    "revision":  128,
+    "revision":  129,
     "core":  {
                  "release":  "1.0.2",
                  "styles":  [
@@ -77,9 +77,9 @@
              },
     "mechanics":  {
                       "bubble-pop":  {
-                                         "release":  "1.0.22",
-                                         "adapter":  "/engine/releases/mechanics/bubble-pop/1.0.22/bubble-pop.js",
-                                         "runtime":  "/engine/releases/mechanics/bubble-pop/1.0.22/DUDUQ_BUBBLE_POP.html"
+                                         "release":  "1.0.23",
+                                         "adapter":  "/engine/releases/mechanics/bubble-pop/1.0.23/bubble-pop.js",
+                                         "runtime":  "/engine/releases/mechanics/bubble-pop/1.0.23/DUDUQ_BUBBLE_POP.html"
                                      },
                       "drag-drop":  {
                                         "release":  "2.0.17",
@@ -115,5 +115,5 @@
                    "wordSlashApproved":  false
                },
     "channel":  "canary-v1",
-    "status":  "candidate-r128-target-shooter-1.0.20"
+    "status":  "candidate-r129-bubble-pop-1.0.23"
 }
