@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Word Slash 1.0.12 — Typography Probe</title>
+<style>html,body,#mount{margin:0;width:100%;height:100%;overflow:hidden}body{background:#eef6fb}</style>
+<link id="duduq-world-fusion-core-style" rel="stylesheet" href="../../../engine/releases/core/1.0.9/duduq-world-fusion.css?v=147">
+<script>window.DUDUQ_ENGINE_BASE=new URL("../../../..",location.href).href.replace(/\/$/,"");</script>
+<script id="duduq-world-fusion-core-script" src="../../../engine/releases/core/1.0.9/duduq-world-fusion.js?v=150"></script>
+<script src="../../../engine/releases/core/1.0.9/duduq-host.js"></script>
+<script src="../../../engine/releases/mechanics/word-slash/1.0.12/word-slash.js"></script>
+</head>
+<body>
+<div id="mount"></div>
+<script>
+(function(){
+  "use strict";
+  const q={
+    id:"PARITY-WS-1",year:1,statement:"WORD",instruction:"Corte somente a palavra APPLE.",
+    audio:{enabled:true,text:"Slice the word apple.",language:"en-US"},feedback:{correct:"Muito bem!",incorrect:"Tente novamente."},
+    metadata:{screenTitle:"WORDS",wordSlash:{mode:"correct-word",target:{label:"APPLE",value:"apple",spokenText:"apple"},goal:3,difficulty:{maxObjects:4,timeLimitSeconds:38,correctProbability:.5},objects:[{id:"apple-word",type:"word",label:"APPLE",value:"apple",category:"fruit",weight:3},{id:"table-word",type:"word",label:"TABLE",value:"table",category:"object"},{id:"house-word",type:"word",label:"HOUSE",value:"house",category:"place"},{id:"dog-word",type:"word",label:"DOG",value:"dog",category:"animal"}]}}
+  };
+  try{
+    const mechanic=window.DuduQ?.getMechanic?.("word-slash");
+    if(!mechanic)throw new Error("Word Slash 1.0.12 não registrada");
+    mechanic.mount({container:document.getElementById("mount"),payload:{title:"WORD SLASH",questions:[q]},context:{year:1,subject:"Língua Inglesa",module:0},onComplete:function(){}});
+    document.documentElement.dataset.probe="mounted";
+  }catch(error){
+    document.documentElement.dataset.probe="error";
+    document.documentElement.dataset.probeError=String(error?.message||error);
+    console.error(error);
+  }
+})();
+</script>
+</body>
+</html>
