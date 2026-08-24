@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>DuduQ — Shell Parity Word Slash 1.0.13</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,sans-serif;background:#eef6fb;color:#17375e}body{padding:20px}.report{width:min(1180px,100%);margin:auto;background:#fff;border:2px solid #c8d9e9;border-radius:22px;padding:20px;box-shadow:0 14px 34px rgba(31,65,99,.11)}h1{margin:0 0 8px;font-size:24px}.muted{color:#62778c;font-weight:650}.status{font-weight:900;font-size:20px;margin:12px 0}.pass{color:#16723a}.fail{color:#b42318}.wait{color:#805400}table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px}th,td{padding:8px 9px;border-bottom:1px solid #e1eaf2;text-align:left;vertical-align:top}th{background:#f5f9fc}.same{color:#16723a;font-weight:850}.different{color:#b42318;font-weight:850}.group td{font-weight:900;background:#f8fbfd;color:#24466b}.previews{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}.preview{height:355px;overflow:hidden;border:1px solid #c8d9e9;border-radius:16px;background:#dbe9f3;position:relative}.preview iframe{position:absolute;left:0;top:0;width:1039px;height:732px;border:0;transform:scale(.50);transform-origin:0 0}.label{position:absolute;z-index:3;left:10px;top:10px;background:rgba(255,255,255,.94);padding:5px 9px;border-radius:999px;font-size:12px;font-weight:900;box-shadow:0 2px 8px rgba(0,0,0,.08)}@media(max-width:900px){.previews{grid-template-columns:1fr}.preview{height:315px}.preview iframe{transform:scale(.43)}table{font-size:11px}}
+</style>
+</head>
+<body>
+<main class="report">
+<h1>Paridade exata do shell — Word Slash 1.0.13 × Target Shooter 1.0.21</h1>
+<p class="muted">Os dois runtimes usam viewport interno idêntico de 1039×732. O gate compara Computed Style do card principal/enunciado, ritmo da surface, chip de status e tipografia. Não há aprovação por aparência aproximada.</p>
+<div id="status" class="status wait">MONTANDO RUNTIMES…</div>
+<table><thead><tr><th>Propriedade</th><th>Target Shooter</th><th>Word Slash</th><th>Resultado</th></tr></thead><tbody id="rows"></tbody></table>
+<p id="diagnostic" class="muted"></p>
+<div class="previews">
+<div class="preview"><span class="label">Target Shooter 1.0.21</span><iframe id="target" src="../computed-parity-1.0.12/target-probe.html" title="Target Shooter direct probe"></iframe></div>
+<div class="preview"><span class="label">Word Slash 1.0.13</span><iframe id="word" src="./word-probe.html" title="Word Slash 1.0.13 direct probe"></iframe></div>
+</div>
+</main>
+<script>
+(function(){
+"use strict";
+const target=document.getElementById("target"),word=document.getElementById("word"),rows=document.getElementById("rows"),status=document.getElementById("status"),diagnostic=document.getElementById("diagnostic");
+const groups=[
+ {name:"CARD PRINCIPAL / ENUNCIADO",target:".duduq-ts-instruction",word:".duduq-ws-instruction",fields:["display","width","minHeight","gridTemplateColumns","alignItems","columnGap","rowGap","paddingTop","paddingRight","paddingBottom","paddingLeft","borderTopWidth","borderTopStyle","borderTopColor","borderTopLeftRadius","backgroundColor","boxShadow"]},
+ {name:"RITMO DA SURFACE",target:".duduq-ts-surface",word:".duduq-ws-surface",fields:["display","width","rowGap","columnGap","paddingTop","paddingRight","paddingBottom","paddingLeft","alignItems"]},
+ {name:"CHIP DE STATUS",target:".duduq-ts-chip",word:".duduq-ws-stat",fields:["display","minHeight","alignItems","justifyContent","columnGap","paddingTop","paddingRight","paddingBottom","paddingLeft","borderTopWidth","borderTopStyle","borderTopColor","borderTopLeftRadius","backgroundColor","boxShadow","fontFamily","fontWeight","lineHeight"]},
+ {name:"TIPOGRAFIA DO ENUNCIADO",target:".duduq-ts-instruction h2",word:".duduq-ws-instruction h2",fields:["fontFamily","fontSize","fontWeight","lineHeight","letterSpacing","textTransform","textAlign"]}
+];
+const label={display:"display",width:"width",minHeight:"min-height",gridTemplateColumns:"grid-template-columns",alignItems:"align-items",justifyContent:"justify-content",columnGap:"column-gap",rowGap:"row-gap",paddingTop:"padding-top",paddingRight:"padding-right",paddingBottom:"padding-bottom",paddingLeft:"padding-left",borderTopWidth:"border-width",borderTopStyle:"border-style",borderTopColor:"border-color",borderTopLeftRadius:"border-radius",backgroundColor:"background-color",boxShadow:"box-shadow",fontFamily:"font-family",fontSize:"font-size",fontWeight:"font-weight",lineHeight:"line-height",letterSpacing:"letter-spacing",textTransform:"text-transform",textAlign:"text-align"};
+function innerDoc(frame){try{const outer=frame.contentDocument;if(!outer)return null;const nested=outer.querySelector(".duduq-mechanic-frame iframe");return nested?.contentDocument||null}catch(_){return null}}
+function ready(doc){if(!doc?.documentElement)return false;const h=doc.documentElement;return h.classList.contains("duduq-world-fusion")&&h.getAttribute("data-duduq-literacy-early")!==null&&Boolean(h.getAttribute("data-duduq-world-fusion-version"))}
+function sample(doc,selector,fields){const node=doc?.querySelector(selector);if(!node)return null;const cs=doc.defaultView.getComputedStyle(node),out={};fields.forEach(k=>out[k]=cs[k]);const r=node.getBoundingClientRect();out.rectWidth=r.width.toFixed(2)+"px";out.rectHeight=r.height.toFixed(2)+"px";return out}
+function norm(v){return String(v??"").replace(/\s+/g," ").trim()}
+function render(td,wd){let all=true;rows.innerHTML="";for(const g of groups){const trh=document.createElement("tr");trh.className="group";trh.innerHTML="<td colspan='4'>"+g.name+"</td>";rows.appendChild(trh);const a=sample(td,g.target,g.fields),b=sample(wd,g.word,g.fields);if(!a||!b){all=false;const tr=document.createElement("tr");tr.innerHTML="<td>elemento</td><td>"+(a?"OK":"AUSENTE")+"</td><td>"+(b?"OK":"AUSENTE")+"</td><td class='different'>FAIL</td>";rows.appendChild(tr);continue}for(const k of g.fields){const same=norm(a[k])===norm(b[k]);all=all&&same;const tr=document.createElement("tr");tr.innerHTML="<td>"+(label[k]||k)+"</td><td>"+a[k]+"</td><td>"+b[k]+"</td><td class='"+(same?"same":"different")+"'>"+(same?"PASS":"FAIL")+"</td>";rows.appendChild(tr)}if(g.name==="CARD PRINCIPAL / ENUNCIADO"){for(const k of ["rectWidth","rectHeight"]){const same=norm(a[k])===norm(b[k]);all=all&&same;const tr=document.createElement("tr");tr.innerHTML="<td>bounding-"+(k==="rectWidth"?"width":"height")+"</td><td>"+a[k]+"</td><td>"+b[k]+"</td><td class='"+(same?"same":"different")+"'>"+(same?"PASS":"FAIL")+"</td>";rows.appendChild(tr)}}}
+status.className="status "+(all?"pass":"fail");status.textContent=all?"PASS — SHELL PRINCIPAL IDÊNTICO AO TARGET SHOOTER":"FAIL — AINDA EXISTE DIVERGÊNCIA ESTRUTURAL";document.documentElement.dataset.shellParity=all?"pass":"fail";diagnostic.textContent="World Fusion carregado nos dois runtimes. Gate baseado em valores computados reais, não em inspeção visual."}
+let attempts=0,stable=0,last="";const timer=setInterval(function(){attempts++;const td=innerDoc(target),wd=innerDoc(word);if(!td||!wd){status.textContent="AGUARDANDO OS DOIS RUNTIMES…";stable=0}else if(!ready(td)||!ready(wd)){status.textContent="AGUARDANDO WORLD FUSION…";stable=0}else{const ta=td.querySelector(".duduq-ts-instruction"),wa=wd.querySelector(".duduq-ws-instruction");if(!ta||!wa){status.textContent="AGUARDANDO CARDS PRINCIPAIS…";stable=0}else{const sig=[td.defaultView.getComputedStyle(ta).width,td.defaultView.getComputedStyle(ta).gridTemplateColumns,wd.defaultView.getComputedStyle(wa).width,wd.defaultView.getComputedStyle(wa).gridTemplateColumns].join("|");if(sig===last)stable++;else{last=sig;stable=1}status.textContent="ESTABILIZANDO SHELL… "+stable+"/4";if(stable>=4){clearInterval(timer);render(td,wd)}}}if(attempts>250){clearInterval(timer);status.className="status fail";status.textContent="FAIL — AUDITORIA NÃO ESTABILIZOU"}},200);
+})();
+</script>
+</body>
+</html>
