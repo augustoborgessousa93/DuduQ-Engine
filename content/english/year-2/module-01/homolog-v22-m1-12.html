@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>DuduQ — EN2-M1-12 — First Listen Gate QA</title>
+</head>
+<body>
+  <div id="root">Carregando EN2-M1-12 isolado...</div>
+
+  <script>
+    window.DUDUQ_ENGINE_BASE = new URL("../../../..", window.location.href).href.replace(/\/$/, "");
+    window.DUDUQ_GAME_CONFIG = Object.freeze({
+      engineBase: window.DUDUQ_ENGINE_BASE,
+      channel: "canary-v1",
+      label: "DuduQ — English — Year 2 — EN2-M1-12 — First Listen QA",
+      modulePath: ["english", "year2", "module01v22m112homolog"],
+      contentScript: "./module-01-v22-m1-12-homolog.js?v=1"
+    });
+    window.DUDUQ_HOMOLOGATION = Object.freeze({
+      id: "YEAR2_M01_12_FIRST_LISTEN_QA",
+      baseRevision: 143,
+      sourceVersion: "2.2",
+      factorySpec: "1.2",
+      sourceItems: 1,
+      runnableItems: 1,
+      targetItem: "EN2-M1-12",
+      qaOnly: true,
+      productionUntouched: true
+    });
+  </script>
+
+  <script src="../year2-v22-homolog-core.js?v=1"></script>
+  <script src="./module-01-v22-homolog.js?v=2"></script>
+  <script src="../year2-v22-homolog-layout.js?v=1"></script>
+  <script src="./m1-12-first-listen-gate.js?v=1"></script>
+  <script>
+    (function () {
+      "use strict";
+      const stamp = Date.now();
+      function loadCentralScript(src) {
+        return new Promise(function (resolve, reject) {
+          const script = document.createElement("script");
+          script.src = src + "?t=" + stamp;
+          script.async = false;
+          script.onload = resolve;
+          script.onerror = function () { reject(new Error("Falha ao carregar " + src)); };
+          document.head.appendChild(script);
+        });
+      }
+      loadCentralScript("../../../../engine/duduq-player-v1.js")
+        .then(function () { return loadCentralScript("../../../../engine/duduq-loader-v1.js"); })
+        .catch(function (error) {
+          console.error("[DuduQ M01-12 QA Bootstrap]", error);
+          const root = document.getElementById("root");
+          if (root) root.textContent = "Erro ao carregar EN2-M1-12 isolado.";
+        });
+    })();
+  </script>
+</body>
+</html>
