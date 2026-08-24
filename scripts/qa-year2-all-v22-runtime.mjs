@@ -45,7 +45,7 @@ const runtimePages = modules.map((_, i) => path.join(yearDir, `module-${String(i
 runtimePages.forEach((p, index) => {
   check(fs.existsSync(p), `Página de homologação ausente: M${String(index + 1).padStart(2, "0")}`);
   const html = fs.readFileSync(p, "utf8");
-  check(html.includes('channel:"canary-v1"'), `M${index + 1}: página deve permanecer no Canary 143`);
+  check(/channel\s*:\s*["']canary-v1["']/.test(html), `M${index + 1}: página deve permanecer no Canary 143`);
   check(html.includes(expectedKeys[index]), `M${index + 1}: modulePath de homologação incorreto`);
 });
 
