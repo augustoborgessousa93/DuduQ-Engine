@@ -13,6 +13,6 @@ Organização oficial do conteúdo do 2º ano:
 
 A reconstrução v2.2 + Factory v1.2 permanece na branch de homologação. Cada módulo possui `homolog-v22-runtime.html` validado em desktop/mobile.
 
-Os caminhos públicos `/content/english/year-2/module-02/` a `/module-06/` ainda **não são entrypoints de produção** no `main`: as pastas de produção foram organizadas, mas os `index.html` finais não devem ser promovidos antes dos gates de assets editoriais e áudio gravado.
+Os caminhos públicos `/content/english/year-2/module-02/` a `/module-06/` ainda **não são entrypoints de produção** no `main`: essas pastas possuem somente a organização documental, sem `index.html` final. Por isso uma URL de diretório no GitHub Pages não representa ainda o módulo homologado.
 
-Isso evita transformar uma candidata tecnicamente homologada em release comercial incompleta.
+Os `index.html` de produção só devem ser criados/promovidos após os gates de assets editoriais e áudio gravado, evitando transformar uma candidata tecnicamente homologada em release comercial incompleta.
