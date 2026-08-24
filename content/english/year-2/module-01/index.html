@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>DuduQ Engine — English — Year 2 — Module 01</title>
+  <title>DuduQ Engine — English — Year 2 — Module 01 — Homologação Word Slash</title>
 </head>
 
 <body>
@@ -18,11 +18,14 @@
     window.DUDUQ_GAME_CONFIG = Object.freeze({
       engineBase: window.DUDUQ_ENGINE_BASE,
       channel: "canary-v1",
-      label: "DuduQ Engine — English — Year 2 — Module 01",
+      label: "DuduQ Engine — English — Year 2 — Module 01 — Homologação Word Slash",
       modulePath: ["english", "year2", "module01"],
       contentScript: "./module-01.js?v=131"
     });
   </script>
+
+  <!-- Overlay local: intercepta somente module01 nesta branch de homologação. -->
+  <script src="./module-01-word-slash-homolog.js?v=1"></script>
 
   <script>
     (function () {
