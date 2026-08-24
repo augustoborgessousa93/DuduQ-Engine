@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Target Shooter 1.0.21 — Typography Probe</title>
+<style>html,body,#mount{margin:0;width:100%;height:100%;overflow:hidden}body{background:#eef6fb}</style>
+<link id="duduq-world-fusion-core-style" rel="stylesheet" href="../../../engine/releases/core/1.0.9/duduq-world-fusion.css?v=147">
+<script>window.DUDUQ_ENGINE_BASE=new URL("../../../..",location.href).href.replace(/\/$/,"");</script>
+<script id="duduq-world-fusion-core-script" src="../../../engine/releases/core/1.0.9/duduq-world-fusion.js?v=150"></script>
+<script src="../../../engine/releases/core/1.0.9/duduq-host.js"></script>
+<script src="../../../engine/releases/mechanics/target-shooter/1.0.21/target-shooter.js"></script>
+</head>
+<body>
+<div id="mount"></div>
+<script>
+(function(){
+  "use strict";
+  const q={
+    id:"PARITY-TS-1",year:1,statement:"NUMBERS",instruction:"Ouça e toque na imagem correta.",
+    audio:{enabled:true,text:"one",language:"en-US"},feedback:{correct:"Muito bem!",incorrect:"Tente novamente."},
+    metadata:{screenTitle:"NUMBERS",targetShooter:{audioText:"one",mode:"audio-to-image",shape:"cloud",correctIds:["n1"],difficulty:{speed:.48,objectCount:3,spawnIntervalMs:170,requiredCorrect:1,targetSize:150,timeLimitMs:0,timerMode:"none"},items:[{id:"n1",label:"ONE",display:"text",accent:"#FFD166"},{id:"n2",label:"TWO",display:"text",accent:"#4EB4FF"},{id:"n3",label:"THREE",display:"text",accent:"#7FD8C9"}]}}
+  };
+  try{
+    const mechanic=window.DuduQ?.getMechanic?.("target-shooter");
+    if(!mechanic)throw new Error("Target Shooter 1.0.21 não registrado");
+    mechanic.mount({container:document.getElementById("mount"),payload:{title:"NUMBERS",questions:[q]},context:{year:1,subject:"Língua Inglesa",module:2},onComplete:function(){}});
+    document.documentElement.dataset.probe="mounted";
+  }catch(error){
+    document.documentElement.dataset.probe="error";
+    document.documentElement.dataset.probeError=String(error?.message||error);
+    console.error(error);
+  }
+})();
+</script>
+</body>
+</html>
