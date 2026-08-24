@@ -37,7 +37,7 @@ vm.runInContext(source, sandbox, { filename: runtimePath });
 
 const moduleDefinition = sandbox.window.DUDUQ_CONTENT?.english?.year2?.module01v22homolog;
 check(moduleDefinition, "Runtime v2.2 não registrou module01v22homolog");
-check(moduleDefinition.version === "2.2.0-v12-homolog-d", `Versão inesperada: ${moduleDefinition.version}`);
+check(moduleDefinition.version === "2.2.0-v12-homolog-e", `Versão inesperada: ${moduleDefinition.version}`);
 check(moduleDefinition.year === 2 && moduleDefinition.module === 1, "Escopo deve ser 2º ano / M01");
 check(moduleDefinition.normativeProfile?.profile === "Y2_FOUNDATIONAL_LITERACY", "Perfil Y2 v1.2 ausente");
 check(moduleDefinition.normativeProfile?.reading.includes("R1"), "M01 deve declarar R0 dominante / R1 máximo");
@@ -97,7 +97,9 @@ for (const id of migratedIds) {
 }
 
 const item03 = getQuestion("EN2-M1-03");
-check(item03.image?.enabled === true && item03.image?.src, "EN2-M1-03 deve manter apoio visual noturno");
+check(!item03.image?.enabled, "EN2-M1-03 não deve declarar imagem principal incompatível com o perfil Router do Drag & Drop");
+check(item03.metadata?.targets?.[0]?.imageSrc, "EN2-M1-03 deve manter apoio visual noturno dentro do alvo Drag & Drop");
+check(item03.metadata?.contextualVisualPlacement === "drag-drop-target", "EN2-M1-03 deve auditar o posicionamento contextual da imagem");
 const item15 = getQuestion("EN2-M1-15");
 check(item15.delivery.mechanic === "target-shooter", "EN2-M1-15 deve usar Target Shooter nesta candidata");
 check(item15.metadata?.sourceAnswer === "BAG", "EN2-M1-15 deve preservar BAG");
@@ -115,4 +117,4 @@ check(page.includes('../year2-v22-homolog-core.js?v=1'), "Página deve carregar 
 check(page.includes('channel: "canary-v1"'), "Página deve continuar ancorada no Canary 143");
 
 console.log("DUDUQ YEAR2 M01 V2.2 + FACTORY V1.2 RUNTIME OVERRIDES: PASS");
-console.log(JSON.stringify({ runnableItems: runnableIds.length, blockedItems: blockedIds, mechanics: byMechanic, migratedFromMatching: migratedIds, wordSlashPilot: "EN2-M1-08", runtimeKey: "module01v22homolog" }, null, 2));
+console.log(JSON.stringify({ runnableItems: runnableIds.length, blockedItems: blockedIds, mechanics: byMechanic, migratedFromMatching: migratedIds, contextualVisual: "EN2-M1-03@drag-drop-target", wordSlashPilot: "EN2-M1-08", runtimeKey: "module01v22homolog" }, null, 2));
