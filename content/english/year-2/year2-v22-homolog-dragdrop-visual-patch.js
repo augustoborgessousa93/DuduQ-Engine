@@ -33,33 +33,25 @@
   function patchM112(question) {
     if (question?.id !== "EN2-M1-12") return;
     const letters = Array.isArray(question.alternatives) ? question.alternatives : [];
-    const byText = Object.fromEntries(letters.map((item) => [String(item?.text || "").toUpperCase(), item?.id]));
-    const order = ["L", "E", "O"].map((letter) => byText[letter]).filter(Boolean);
-    if (order.length !== 3 || !byText.A) {
-      throw new Error("EN2-M1-12: catálogo L/E/O/A incompleto para montagem compacta.");
+    const values = letters.map((item) => String(item?.text || "").toUpperCase());
+    for (const required of ["L", "E", "O", "A"]) {
+      if (!values.includes(required)) throw new Error(`EN2-M1-12: letra ${required} ausente.`);
     }
 
-    question.answer = { type: "single", value: null };
-    question.payload = {
-      mode: "sequence",
-      items: letters.map((item) => ({
-        id: item.id,
-        label: item.text,
-        text: item.text,
-        audio: item.audio,
-        required: order.includes(item.id)
-      })),
-      targets: [{ id: "spell-sequence", kind: "list", capacity: 3 }],
-      order,
-      targetLabel: "MONTE O NOME"
-    };
+    const targets = question?.metadata?.targets;
+    if (!Array.isArray(targets) || targets.length !== 3) {
+      throw new Error("EN2-M1-12: esperados três destinos posicionais.");
+    }
+    for (const target of targets) {
+      target.kind = "spell-slot";
+      target.compact = true;
+    }
+
     question.metadata = question.metadata || {};
-    question.metadata.sequenceTargetId = "spell-sequence";
-    question.metadata.sequenceTitle = "MONTE O NOME";
     question.metadata.interactionAdaptation = {
       ...(question.metadata.interactionAdaptation || {}),
-      runtimeFormat: "Primeira escuta sem letras; depois, três slots compactos em linha e quatro letras móveis L/E/O/A.",
-      visualRule: "No mobile, os três slots e as quatro letras devem aparecer no primeiro viewport após o reveal."
+      runtimeFormat: "Primeira escuta sem letras; depois, três destinos posicionais compactos em linha e quatro letras móveis L/E/O/A.",
+      visualRule: "No mobile, os três destinos e as quatro letras devem aparecer juntos no primeiro viewport após o reveal."
     };
   }
 
@@ -79,6 +71,6 @@
     ...factory,
     buildModule,
     __dragDropVisualPatchApplied: true,
-    dragDropVisualPatchVersion: "1.0.0-homolog"
+    dragDropVisualPatchVersion: "1.0.1-homolog"
   });
 })();
