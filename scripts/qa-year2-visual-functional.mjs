@@ -38,23 +38,29 @@ for (let module = 1; module <= 6; module += 1) {
       const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
       check(response && response.ok(), `M${mm}/${viewport.name}: HTTP ${response?.status?.()}`);
 
+      const startButton = page.getByRole("button", { name: /INICIAR MISSÃO/i });
+      await startButton.waitFor({ state: "visible", timeout: 15000 });
+      const startBox = await startButton.boundingBox();
+      check(startBox && startBox.width >= 180 && startBox.height >= 44, `M${mm}/${viewport.name}: botão inicial fora do padrão de toque`);
+      await startButton.click();
+
       await page.waitForFunction(() => {
         const root = document.getElementById("root");
         const text = root?.textContent || "";
         return Boolean(document.querySelector("iframe")) || /Erro:/i.test(text) || /Erro ao carregar/i.test(text);
-      }, { timeout: 45000 });
+      }, undefined, { timeout: 20000 });
 
       const rootText = await page.locator("#root").innerText().catch(() => "");
       check(!/Erro:/i.test(rootText) && !/Erro ao carregar/i.test(rootText), `M${mm}/${viewport.name}: runtime exibiu erro: ${rootText.slice(0, 220)}`);
 
       await page.evaluate(() => {
-        try { window.DuduQIntro?.hide?.({ immediate: true, reason: "qa" }); } catch (_) {}
+        try { window.DuduQIntro?.hide?.({ immediate: true, reason: "qa-after-start" }); } catch (_) {}
         try { window.DuduQTransition?.hideImmediate?.(); } catch (_) {}
       });
-      await page.waitForTimeout(900);
+      await page.waitForTimeout(1000);
 
       const iframe = page.locator("iframe").first();
-      await iframe.waitFor({ state: "attached", timeout: 10000 });
+      await iframe.waitFor({ state: "visible", timeout: 10000 });
       const box = await iframe.boundingBox();
       check(box && box.width >= Math.min(300, viewport.width - 24), `M${mm}/${viewport.name}: iframe estreito demais (${box?.width || 0}px)`);
       check(box && box.height >= 220, `M${mm}/${viewport.name}: iframe baixo demais (${box?.height || 0}px)`);
@@ -70,7 +76,7 @@ for (let module = 1; module <= 6; module += 1) {
       const frame = page.frames().find((candidate) => candidate !== page.mainFrame() && /engine\/releases\/mechanics\//.test(candidate.url())) || page.frames().find((candidate) => candidate !== page.mainFrame());
       check(frame, `M${mm}/${viewport.name}: frame da mecânica não localizado`);
       await frame.waitForLoadState("domcontentloaded", { timeout: 15000 }).catch(() => {});
-      await page.waitForTimeout(600);
+      await page.waitForTimeout(700);
 
       const frameMetrics = await frame.evaluate(() => {
         const doc = document.documentElement;
@@ -92,17 +98,19 @@ for (let module = 1; module <= 6; module += 1) {
       check(!/^Erro\b/i.test(frameMetrics.textSample), `M${mm}/${viewport.name}: mecânica exibiu erro: ${frameMetrics.textSample}`);
       check(frameMetrics.interactive > 0, `M${mm}/${viewport.name}: nenhum controle interativo detectado`);
       check(frameMetrics.scrollWidth <= frameMetrics.clientWidth + 18, `M${mm}/${viewport.name}: overflow horizontal na mecânica (${frameMetrics.scrollWidth}/${frameMetrics.clientWidth})`);
-
       check(pageErrors.length === 0, `M${mm}/${viewport.name}: pageerror: ${pageErrors.join(" | ")}`);
+
       entry.pass = true;
       entry.mainMetrics = mainMetrics;
       entry.frameMetrics = frameMetrics;
       entry.consoleErrors = consoleErrors;
+      console.log(`PASS M${mm}/${viewport.name}`);
     } catch (error) {
       entry.error = String(error?.message || error);
       entry.pageErrors = pageErrors;
       entry.consoleErrors = consoleErrors;
       failures.push(entry);
+      console.error(`FAIL M${mm}/${viewport.name}: ${entry.error}`);
     } finally {
       await page.screenshot({ path: screenshot, fullPage: false }).catch(() => {});
       report.push(entry);
