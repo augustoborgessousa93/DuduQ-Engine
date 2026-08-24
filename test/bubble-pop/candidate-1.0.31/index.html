@@ -16,14 +16,14 @@
 <body>
   <div id="root">Preparando homologação do Bubble Pop 1.0.31...</div>
   <script>
-    window.DUDUQ_ENGINE_BASE = window.location.origin;
+    window.DUDUQ_ENGINE_BASE = new URL("../../..", window.location.href).href.replace(/\/$/, "");
     window.DUDUQ_GAME_CONFIG = Object.freeze({
       engineBase: window.DUDUQ_ENGINE_BASE,
       channel: "homolog-bubble-pop-1.0.31",
       label: "DuduQ — Homologação Bubble Pop 1.0.31",
       modulePath: ["test", "bubblePop1031"],
       requiredMechanics: ["bubble-pop"],
-      contentScript: "/test/bubble-pop/candidate-1.0.31/bubble-pop-test-content.js?candidate=1031"
+      contentScript: new URL("./bubble-pop-test-content.js?candidate=1031", window.location.href).href
     });
   </script>
   <script>
@@ -66,8 +66,8 @@
           }
         }, 25);
       }
-      loadScript("/engine/duduq-player-v1.js")
-        .then(function () { installAutoStart(); return loadScript("/engine/duduq-loader-v1.js"); })
+      loadScript("../../../engine/duduq-player-v1.js")
+        .then(function () { installAutoStart(); return loadScript("../../../engine/duduq-loader-v1.js"); })
         .catch(function (error) {
           console.error("[DuduQ Bubble Pop 1.0.31 Homologation]", error);
           const root = document.getElementById("root");
