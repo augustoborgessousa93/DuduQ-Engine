@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const yearDir = path.join(root, "content", "english", "year-2");
 const layoutBridgePath = path.join(yearDir, "year2-v22-homolog-layout.js");
+const firstListenGatePath = path.join(yearDir, "module-01", "m1-12-first-listen-gate.js");
 const sandbox = { console };
 sandbox.window = {};
 sandbox.window.window = sandbox.window;
@@ -26,6 +27,10 @@ check(fs.existsSync(layoutBridgePath), "Bridge responsivo de homologação Year2
 const layoutBridge = fs.readFileSync(layoutBridgePath, "utf8");
 check(layoutBridge.includes("max-width: 640px"), "Bridge deve declarar breakpoint mobile de 640px");
 check(layoutBridge.includes("min-height") && layoutBridge.includes("520px"), "Bridge deve impedir iframe mobile com altura padrão de 150px");
+check(fs.existsSync(firstListenGatePath), "Gate de primeira escuta M01-12 ausente");
+const firstListenGate = fs.readFileSync(firstListenGatePath, "utf8");
+check(firstListenGate.includes('const STEP_ID = "en2-m1-12-drag-drop"'), "Gate M01-12 deve apontar para atividade própria");
+check(firstListenGate.includes('utterance.onend = finish'), "Gate M01-12 só pode revelar após conclusão do áudio");
 
 run("content/english/year-2/year2-v22-homolog-core.js");
 check(sandbox.window.DuduQYear2V22Factory?.version === "1.2.0-homolog-core", "Factory Year2 v1.2 não carregou");
@@ -54,6 +59,11 @@ runtimePages.forEach((p, index) => {
   check(/channel\s*:\s*["']canary-v1["']/.test(html), `M${index + 1}: página deve permanecer no Canary 143`);
   check(html.includes(expectedKeys[index]), `M${index + 1}: modulePath de homologação incorreto`);
   check(html.includes('../year2-v22-homolog-layout.js?v=1'), `M${index + 1}: bridge responsivo mobile não carregado`);
+  if (index === 0) {
+    check(html.includes('./m1-12-first-listen-gate.js?v=1'), "M01: gate de primeira escuta não carregado");
+    check(html.includes('runnableItems: 15'), "M01: página deve declarar 15 itens executáveis");
+    check(html.includes('blockedItems: []'), "M01: página não deve manter item bloqueado");
+  }
 });
 
 const allIds = [];
@@ -88,8 +98,14 @@ for (let index = 0; index < modules.length; index += 1) {
       check(typeof override.reason === "string" && override.reason.length > 20, `${item.id}: override precisa manter justificativa auditável`);
     }
     if (item.delivery.mechanic === "drag-drop" && item.answer?.type === "pairs") {
-      check(Array.isArray(item.answer.value) && item.answer.value.length === 1, `${item.id}: seleção única em Drag & Drop deve ter exatamente um par correto`);
-      check((item.alternatives || []).length >= 2, `${item.id}: Drag & Drop deve preservar distratores editoriais`);
+      const pairCount = Array.isArray(item.answer.value) ? item.answer.value.length : 0;
+      if (item.id === "EN2-M1-12") {
+        check(pairCount === 3, "EN2-M1-12: montagem deve ter três pares posicionais");
+        check((item.alternatives || []).map((alt) => alt.text).join("") === "LEOA", "EN2-M1-12: letras móveis devem ser L/E/O/A");
+      } else {
+        check(pairCount === 1, `${item.id}: seleção única em Drag & Drop deve ter exatamente um par correto`);
+      }
+      check((item.alternatives || []).length >= 2, `${item.id}: Drag & Drop deve preservar opções/distratores necessários`);
     }
     mechanics[item.delivery.mechanic] = (mechanics[item.delivery.mechanic] || 0) + 1;
   });
@@ -105,8 +121,8 @@ for (let m = 1; m <= 6; m += 1) for (let i = 1; i <= 15; i += 1) expectedIds.pus
 check(allIds.length === 90, `Total editorial deve ser 90; atual=${allIds.length}`);
 check(new Set(allIds).size === 90, "Há IDs duplicados entre M01–M06");
 check(expectedIds.every((id) => allIds.includes(id)), "Um ou mais IDs oficiais EN2-M1..M6 estão ausentes");
-check(executable.length === 89, `Esperado 89 executáveis enquanto M1-12 está bloqueado; atual=${executable.length}`);
-check(blocked.length === 1 && blocked[0].id === "EN2-M1-12", `Único bloqueio permitido neste estágio é EN2-M1-12; atual=${blocked.map(x=>x.id).join(",")}`);
+check(executable.length === 90, `Esperado 90 executáveis após first-listen gate; atual=${executable.length}`);
+check(blocked.length === 0, `Nenhum item deve permanecer bloqueado nesta candidata; atual=${blocked.map(x=>x.id).join(",")}`);
 check(runtimeOverrides.length > 0, "Correção de compatibilidade precisa registrar overrides auditáveis");
 check(!executable.some((q) => q.delivery?.mechanic === "matching"), "Nenhum single-choice v2.2 deve chegar ao Matching 1.0.23 nesta candidata");
 
@@ -116,6 +132,13 @@ check(wordSlash[0].metadata?.wordSlash?.difficulty?.wrongPenalty === 0, "EN2-M1-
 check(wordSlash[0].metadata?.wordSlash?.difficulty?.maxObjects <= 3, "EN2-M1-08: simultaneidade deve permanecer baixa");
 
 const qById = Object.fromEntries(executable.map((q) => [q.id, q]));
+const m112 = qById["EN2-M1-12"];
+check(m112?.metadata?.firstListenGate?.required === true, "EN2-M1-12: firstListenGate obrigatório ausente");
+check(m112?.metadata?.firstListenGate?.hideMovablesBeforeFirstListen === true, "EN2-M1-12: letras devem permanecer ocultas antes da primeira escuta");
+check(m112?.metadata?.firstListenGate?.commercialRecordedAudioRequired === true, "EN2-M1-12: áudio gravado comercial continua sendo gate");
+check(m112?.metadata?.editorialAnswer === "LEO", "EN2-M1-12: resposta editorial LEO não preservada");
+check(JSON.stringify(m112?.metadata?.editorialAlternatives) === JSON.stringify(["LEO","LOE","LEA","ELO"]), "EN2-M1-12: alternativas editoriais não preservadas");
+
 const sentinels = {
   "EN2-M2-01": "eleven",
   "EN2-M2-15": "This is my grandfather.",
@@ -141,5 +164,5 @@ for (const id of ["EN2-M6-11", "EN2-M6-12"]) {
   check(q.metadata.targetShooter.items.every((item) => item.display === "image" && item.label === ""), `${id}: primeira tentativa não pode exibir texto nas alternativas`);
 }
 
-console.log("DUDUQ YEAR2 M01-M06 V2.2 + FACTORY V1.2 + RUNTIME COMPAT: PASS");
-console.log(JSON.stringify({ editorialItems: allIds.length, executableItems: executable.length, blockedItems: blocked.map(x => x.id), wordSlash: wordSlash.map(q => q.id), runtimeOverrides: runtimeOverrides.length, distributions, mobileBridge: "year2-v22-homolog-layout.js" }, null, 2));
+console.log("DUDUQ YEAR2 M01-M06 V2.2 + FACTORY V1.2 + FIRST LISTEN GATE: PASS");
+console.log(JSON.stringify({ editorialItems: allIds.length, executableItems: executable.length, blockedItems: [], wordSlash: wordSlash.map(q => q.id), firstListenGate: "EN2-M1-12", runtimeOverrides: runtimeOverrides.length, distributions, mobileBridge: "year2-v22-homolog-layout.js" }, null, 2));
