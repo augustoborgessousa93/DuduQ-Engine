@@ -44,6 +44,12 @@
     ]
   });
 
+  const EXACT_IDS = Object.freeze([
+    ...Object.keys(SINGLE_VISUALS),
+    ...Object.keys(OPTION_VISUALS)
+  ]);
+  const EXACT_SET = new Set(EXACT_IDS);
+
   function cloneConfig(config) {
     const next = { ...config, plan: { ...(config?.plan || {}) } };
     for (const [id, entry] of Object.entries(next.plan)) next.plan[id] = { ...entry };
@@ -65,18 +71,44 @@
     return next;
   }
 
+  function imageSources(question) {
+    const out = [];
+    const add = (src) => src && out.push(String(src));
+    add(question?.image?.src);
+    for (const target of question?.metadata?.targets || []) add(target?.imageSrc || target?.image);
+    for (const item of question?.metadata?.targetShooter?.items || []) add(item?.image);
+    for (const alternative of question?.alternatives || []) add(alternative?.image?.src);
+    return out;
+  }
+
+  function postProcess(module) {
+    for (const activity of module?.activities || []) {
+      for (const question of activity?.questions || []) {
+        if (!EXACT_SET.has(question?.id)) continue;
+        const sources = imageSources(question);
+        const fullyRepositoryBacked = sources.length > 0 && sources.every((src) => !/^data:image\//i.test(src));
+        question.metadata = question.metadata || {};
+        question.metadata.assetAudit = fullyRepositoryBacked
+          ? "EXACT_EXISTING_REPOSITORY_ASSET"
+          : "EXACT_ASSET_WIRING_INCOMPLETE";
+        if (fullyRepositoryBacked) {
+          question.metadata.visualStatus = "repository-asset";
+          question.metadata.finalAssetRequired = false;
+        }
+      }
+    }
+    return module;
+  }
+
   function buildModule(config) {
-    return originalBuild(patchPlan(config));
+    return postProcess(originalBuild(patchPlan(config)));
   }
 
   window.DuduQYear2V22Factory = Object.freeze({
     ...factory,
     buildModule,
     __editorialAssetsPatchApplied: true,
-    editorialAssetsPatchVersion: "1.0.0-homolog",
-    exactEditorialAssetItems: Object.freeze([
-      ...Object.keys(SINGLE_VISUALS),
-      ...Object.keys(OPTION_VISUALS)
-    ])
+    editorialAssetsPatchVersion: "1.1.0-homolog",
+    exactEditorialAssetItems: EXACT_IDS
   });
 })();
