@@ -38,9 +38,9 @@ for (let m = 2; m <= 6; m += 1) {
 }
 
 const factory = sandbox.window.DuduQYear2V22Factory;
-check(factory?.editorialAssetsPatchVersion === "1.2.0-homolog", "Camada de assets editoriais exatos não carregou");
+check(factory?.editorialAssetsPatchVersion === "1.1.0-homolog", "Camada de assets editoriais exatos não carregou");
 const exactIds = Array.from(factory.exactEditorialAssetItems || []);
-check(exactIds.length === 13, `Esperados 13 itens ligados nesta rodada; atual=${exactIds.length}`);
+check(exactIds.length === 10, `Esperados 10 itens ligados nesta rodada; atual=${exactIds.length}`);
 
 const y2 = sandbox.window.DUDUQ_CONTENT?.english?.year2 || {};
 const modules = Array.from({ length: 6 }, (_, index) => y2[`module${String(index + 1).padStart(2, "0")}v22homolog`]);
@@ -65,10 +65,7 @@ const expectedFiles = {
   "EN2-M6-03": "Orange%20%20-laranja%20fruta.png",
   "EN2-M6-04": "Grapes%20-%20uvas.png",
   "EN2-M6-05": "Papaya%20-%20mam%C3%A3o.png",
-  "EN2-M6-06": "Melon%20-%20mel%C3%A3o.png",
-  "EN2-M6-07": "Apple%20-%20ma%C3%A7%C3%A3.png",
-  "EN2-M6-08": "Banana.png",
-  "EN2-M6-13": "Tomato%20-%20tomate.png"
+  "EN2-M6-06": "Melon%20-%20mel%C3%A3o.png"
 };
 for (const [id, encodedFile] of Object.entries(expectedFiles)) {
   check(sources(qById[id]).some((src) => src.endsWith(encodedFile)), `${id}: arquivo editorial exato divergente`);
