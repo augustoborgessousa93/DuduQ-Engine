@@ -16,6 +16,18 @@ const page = fs.readFileSync(pagePath, "utf8");
 const canonical = JSON.parse(fs.readFileSync(canonicalPath, "utf8"));
 
 function check(condition, message) { if (!condition) throw new Error(message); }
+function resolvedAnswer(question) {
+  const alternatives = question.alternatives || [];
+  if (question.answer?.type === "single") {
+    return alternatives.find((alternative) => alternative.id === question.answer.value)?.text || null;
+  }
+  if (question.answer?.type === "pairs") {
+    const pair = Array.isArray(question.answer.value) ? question.answer.value[0] : null;
+    return alternatives.find((alternative) => alternative.id === pair?.source)?.text || null;
+  }
+  return null;
+}
+
 const sandbox = { window: {}, console };
 sandbox.window.window = sandbox.window;
 vm.createContext(sandbox);
@@ -25,7 +37,7 @@ vm.runInContext(source, sandbox, { filename: runtimePath });
 
 const moduleDefinition = sandbox.window.DUDUQ_CONTENT?.english?.year2?.module01v22homolog;
 check(moduleDefinition, "Runtime v2.2 não registrou module01v22homolog");
-check(moduleDefinition.version === "2.2.0-v12-homolog-c", `Versão inesperada: ${moduleDefinition.version}`);
+check(moduleDefinition.version === "2.2.0-v12-homolog-d", `Versão inesperada: ${moduleDefinition.version}`);
 check(moduleDefinition.year === 2 && moduleDefinition.module === 1, "Escopo deve ser 2º ano / M01");
 check(moduleDefinition.normativeProfile?.profile === "Y2_FOUNDATIONAL_LITERACY", "Perfil Y2 v1.2 ausente");
 check(moduleDefinition.normativeProfile?.reading.includes("R1"), "M01 deve declarar R0 dominante / R1 máximo");
@@ -50,8 +62,7 @@ for (const { activity, question } of questions) {
   check(question.delivery?.mechanic === activity.mechanic && question.delivery.mechanic !== "auto", `${question.id}: mecânica explícita inválida`);
   const texts = (question.alternatives || []).map((alternative) => alternative.text);
   check(JSON.stringify(texts) === JSON.stringify(sourceItem.alternatives), `${question.id}: alternativas divergem da v2.2`);
-  let selected = null;
-  if (question.answer?.type === "single") selected = (question.alternatives || []).find((alternative) => alternative.id === question.answer.value)?.text;
+  const selected = resolvedAnswer(question);
   check(selected === sourceItem.answer, `${question.id}: resposta diverge da v2.2; atual=${selected}; esperada=${sourceItem.answer}`);
   check(["R0", "R0-R1", "R1"].includes(question.metadata?.readingDemand), `${question.id}: readingDemand fora de R0/R1`);
   check(question.metadata?.sourceVersion === "2.2", `${question.id}: sourceVersion deve ser 2.2`);
@@ -59,11 +70,11 @@ for (const { activity, question } of questions) {
 }
 
 const byMechanic = questions.reduce((acc, { activity }) => { acc[activity.mechanic] = (acc[activity.mechanic] || 0) + 1; return acc; }, {});
-check(byMechanic.matching === 8, `M01 v1.2 deve executar 8 itens em Matching; atual=${byMechanic.matching}`);
-check(byMechanic["target-shooter"] === 3, `M01 v1.2 deve executar 3 itens em Target Shooter; atual=${byMechanic["target-shooter"]}`);
-check(byMechanic["bubble-pop"] === 2, `M01 v1.2 deve executar 2 itens em Bubble Pop; atual=${byMechanic["bubble-pop"]}`);
-check(byMechanic["word-slash"] === 1, `M01 v1.2 deve executar 1 Word Slash; atual=${byMechanic["word-slash"]}`);
-check(!byMechanic["drag-drop"], "EN2-M1-12 bloqueado: Drag & Drop ainda não deve aparecer na execução");
+check(!byMechanic.matching, `M01 não deve executar Matching como single-choice; atual=${byMechanic.matching || 0}`);
+check(byMechanic["drag-drop"] === 8, `M01 deve executar 8 itens single-choice de áudio em Drag & Drop; atual=${byMechanic["drag-drop"]}`);
+check(byMechanic["target-shooter"] === 3, `M01 deve executar 3 itens em Target Shooter; atual=${byMechanic["target-shooter"]}`);
+check(byMechanic["bubble-pop"] === 2, `M01 deve executar 2 itens em Bubble Pop; atual=${byMechanic["bubble-pop"]}`);
+check(byMechanic["word-slash"] === 1, `M01 deve executar 1 Word Slash; atual=${byMechanic["word-slash"]}`);
 check(Math.max(...Object.values(byMechanic)) / questions.length <= 0.70, "M01 excedeu 70% de concentração mecânica");
 
 const getQuestion = (id) => questions.find((entry) => entry.question.id === id)?.question;
@@ -75,10 +86,14 @@ check(slash.metadata?.wordSlash?.difficulty?.speedMinMs >= 6500, "Word Slash Y2 
 check(slash.metadata?.wordSlash?.difficulty?.wrongPenalty === 0, "Word Slash Y2 não pode penalizar erro/tempo");
 check(JSON.stringify(slash.metadata?.wordSlash?.objects?.map((item) => item.value)) === JSON.stringify(["C", "A", "B", "D"]), "Word Slash deve preservar C/A/B/D");
 
-for (const id of ["EN2-M1-01","EN2-M1-02","EN2-M1-03","EN2-M1-04","EN2-M1-05","EN2-M1-11","EN2-M1-13","EN2-M1-14"]) {
+const migratedIds = ["EN2-M1-01","EN2-M1-02","EN2-M1-03","EN2-M1-04","EN2-M1-05","EN2-M1-11","EN2-M1-13","EN2-M1-14"];
+for (const id of migratedIds) {
   const item = getQuestion(id);
-  check(item.delivery.mechanic === "matching", `${id}: deve usar Matching na Factory v1.2`);
+  check(item.delivery.mechanic === "drag-drop", `${id}: single-choice de áudio deve usar Drag & Drop nesta candidata`);
+  check(item.answer?.type === "pairs" && item.answer.value?.length === 1, `${id}: deve preservar uma única resposta correta em pares`);
   check(item.alternatives.every((alternative) => alternative.audio?.enabled && alternative.audio?.text), `${id}: todas as alternativas devem oferecer áudio tocável`);
+  check(item.metadata?.optionAudioRequired === true, `${id}: optionAudioRequired deve permanecer explícito`);
+  check(item.metadata?.runtimeMechanicOverride?.from === "matching" && item.metadata.runtimeMechanicOverride.to === "drag-drop", `${id}: override Matching→Drag & Drop deve ser auditável`);
 }
 
 const item03 = getQuestion("EN2-M1-03");
@@ -99,5 +114,5 @@ check(page.includes('contentScript: "./module-01-v22-homolog.js?v=2"'), "Página
 check(page.includes('../year2-v22-homolog-core.js?v=1'), "Página deve carregar Factory v1.2 antes do módulo");
 check(page.includes('channel: "canary-v1"'), "Página deve continuar ancorada no Canary 143");
 
-console.log("DUDUQ YEAR2 M01 V2.2 + FACTORY V1.2: PASS");
-console.log(JSON.stringify({ runnableItems: runnableIds.length, blockedItems: blockedIds, mechanics: byMechanic, wordSlashPilot: "EN2-M1-08", runtimeKey: "module01v22homolog" }, null, 2));
+console.log("DUDUQ YEAR2 M01 V2.2 + FACTORY V1.2 RUNTIME OVERRIDES: PASS");
+console.log(JSON.stringify({ runnableItems: runnableIds.length, blockedItems: blockedIds, mechanics: byMechanic, migratedFromMatching: migratedIds, wordSlashPilot: "EN2-M1-08", runtimeKey: "module01v22homolog" }, null, 2));
