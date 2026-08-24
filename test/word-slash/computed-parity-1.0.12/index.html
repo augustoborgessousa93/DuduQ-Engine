@@ -8,6 +8,86 @@
 <style>*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,sans-serif;background:#eef6fb;color:#17375e}body{padding:20px}.report{width:min(1080px,100%);margin:auto;background:#fff;border:2px solid #c8d9e9;border-radius:22px;padding:20px;box-shadow:0 14px 34px rgba(31,65,99,.11)}h1{margin:0 0 8px;font-size:24px}.muted{color:#62778c;font-weight:650}.status{font-weight:900;font-size:20px;margin:12px 0}.pass{color:#16723a}.fail{color:#b42318}.wait{color:#805400}table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}th,td{padding:9px 10px;border-bottom:1px solid #e1eaf2;text-align:left}th{background:#f5f9fc}.same{color:#16723a;font-weight:850}.different{color:#b42318;font-weight:850}.previews{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}.preview{height:345px;overflow:hidden;border:1px solid #c8d9e9;border-radius:16px;background:#dbe9f3;position:relative}.preview iframe{position:absolute;left:0;top:0;width:1039px;height:732px;border:0;transform:scale(.485);transform-origin:0 0}.label{position:absolute;z-index:3;left:10px;top:10px;background:rgba(255,255,255,.92);padding:5px 9px;border-radius:999px;font-size:12px;font-weight:900;box-shadow:0 2px 8px rgba(0,0,0,.08)}@media(max-width:850px){.previews{grid-template-columns:1fr}.preview{height:315px}.preview iframe{transform:scale(.43)}table{font-size:12px}}</style>
 </head>
 <body>
-<main class="report"><h1>Paridade tipográfica — Word Slash 1.0.12 × Target Shooter 1.0.21</h1><p class="muted">Auditoria direta: cada lado monta apenas Host + adapter + runtime, sem Intro, Transition ou módulo completo. Ambos usam viewport interno idêntico de 1039×732.</p><div id="status" class="status wait">MONTANDO OS DOIS RUNTIMES…</div><table><thead><tr><th>Propriedade</th><th>Target Shooter</th><th>Word Slash</th><th>Resultado</th></tr></thead><tbody id="rows"></tbody></table><p id="attrs" class="muted"></p><p id="diagnostic" class="muted"></p><div class="previews"><div class="preview"><span class="label">Target Shooter 1.0.21 — probe direto</span><iframe id="target" src="./target-probe.html" title="Target Shooter direct probe"></iframe></div><div class="preview"><span class="label">Word Slash 1.0.12 — probe direto</span><iframe id="word" src="./word-probe.html" title="Word Slash direct probe"></iframe></div></div></main>
-<script>(function(){"use strict";const fields=["fontFamily","fontSize","fontWeight","lineHeight","letterSpacing","textTransform"],labels={fontFamily:"font-family",fontSize:"font-size",fontWeight:"font-weight",lineHeight:"line-height",letterSpacing:"letter-spacing",textTransform:"text-transform"},target=document.getElementById("target"),word=document.getElementById("word"),rows=document.getElementById("rows"),status=document.getElementById("status"),attrs=document.getElementById("attrs"),diagnostic=document.getElementById("diagnostic");function probeInfo(frame){try{const outer=frame.contentDocument;if(!outer)return{doc:null,state:"loading",error:""};const state=outer.documentElement.dataset.probe||"loading",error=outer.documentElement.dataset.probeError||"",nested=outer.querySelector(".duduq-mechanic-frame iframe");return{doc:nested?.contentDocument||null,state,error}}catch(error){return{doc:null,state:"error",error:String(error?.message||error)}}}function worldFusionReady(doc){if(!doc?.documentElement)return false;const html=doc.documentElement,link=doc.getElementById("duduq-world-fusion-style");let sheetReady=false;try{sheetReady=Boolean(link&&link.sheet)}catch(_){sheetReady=Boolean(link)}return html.classList.contains("duduq-world-fusion")&&Boolean(html.getAttribute("data-duduq-world-fusion-version"))&&html.getAttribute("data-duduq-literacy-early")!==null&&sheetReady}function sample(frame,selector){const probe=probeInfo(frame);if(probe.state==="error")return{probeError:probe.error};const doc=probe.doc;if(!doc)return null;const node=doc.querySelector(selector);if(!node)return null;const cs=doc.defaultView.getComputedStyle(node),out={};fields.forEach(k=>out[k]=cs[k]);const html=doc.documentElement;out.year=html.getAttribute("data-duduq-ano-ativo")||"";out.literacy=html.getAttribute("data-duduq-literacy-early")||"";out.fusion=html.classList.contains("duduq-world-fusion");out.fusionVersion=html.getAttribute("data-duduq-world-fusion-version")||"";out.styleReady=worldFusionReady(doc);return out}function signature(v){return v&&!v.probeError?JSON.stringify(fields.map(k=>v[k]).concat([v.year,v.literacy,v.fusion,v.fusionVersion,v.styleReady])):""}function render(a,b){let all=true;rows.innerHTML="";fields.forEach(k=>{const same=a[k]===b[k];all=all&&same;const tr=document.createElement("tr");tr.innerHTML="<td>"+labels[k]+"</td><td>"+a[k]+"</td><td>"+b[k]+"</td><td class='"+(same?"same":"different")+"'>"+(same?"PASS":"FAIL")+"</td>";rows.appendChild(tr)});const semantic=a.year===b.year&&a.literacy===b.literacy&&a.fusion===true&&b.fusion===true&&a.styleReady===true&&b.styleReady===true;all=all&&semantic;attrs.textContent="Perfil semântico — Target: ano="+a.year+", literacy-early="+a.literacy+" | Word Slash: ano="+b.year+", literacy-early="+b.literacy;diagnostic.textContent="World Fusion — Target: css="+(a.styleReady?"loaded":"pending")+", versão="+a.fusionVersion+" | Word Slash: css="+(b.styleReady?"loaded":"pending")+", versão="+b.fusionVersion;status.className="status "+(all?"pass":"fail");status.textContent=all?"PASS — COMPUTED STYLE IDÊNTICO E ESTÁVEL":"FAIL — DIVERGÊNCIA REAL CONFIRMADA";document.documentElement.dataset.parity=all?"pass":"fail"}let attempts=0,stable=0,last="";const timer=setInterval(function(){attempts++;const a=sample(target,".duduq-ts-instruction h2"),b=sample(word,".duduq-ws-instruction h2");if(a?.probeError||b?.probeError){clearInterval(timer);status.className="status fail";status.textContent="FALHA DE MONTAGEM DO PROBE";diagnostic.textContent="Target: "+(a?.probeError||"ok")+" | Word Slash: "+(b?.probeError||"ok");return}if(!a||!b){stable=0;last="";status.textContent="AGUARDANDO OS DOIS ENUNCIADOS…"}else if(!a.styleReady||!b.styleReady){stable=0;last="";status.textContent="AGUARDANDO WORLD FUSION CSS…"}else{const pair=signature(a)+"||"+signature(b);if(pair===last)stable++;else{last=pair;stable=1}status.textContent="ESTABILIZANDO COMPUTED STYLE… "+stable+"/4";if(stable>=4){clearInterval(timer);render(a,b);return}}if(attempts>200){clearInterval(timer);status.className="status fail";status.textContent="FALHA — PROBES NÃO ESTABILIZARAM";diagnostic.textContent="Abra os probes abaixo para diagnóstico visual."}},200)})();</script>
+<main class="report"><h1>Paridade tipográfica — Word Slash 1.0.12 × Target Shooter 1.0.21</h1><p class="muted">Auditoria direta: cada lado monta apenas Host + adapter + runtime, sem Intro, Transition ou módulo completo. Ambos usam viewport interno idêntico de 1039×732. Avisos não fatais do shell não bloqueiam a medição quando o runtime e o enunciado já estão montados.</p><div id="status" class="status wait">MONTANDO OS DOIS RUNTIMES…</div><table><thead><tr><th>Propriedade</th><th>Target Shooter</th><th>Word Slash</th><th>Resultado</th></tr></thead><tbody id="rows"></tbody></table><p id="attrs" class="muted"></p><p id="diagnostic" class="muted"></p><div class="previews"><div class="preview"><span class="label">Target Shooter 1.0.21 — probe direto</span><iframe id="target" src="./target-probe.html" title="Target Shooter direct probe"></iframe></div><div class="preview"><span class="label">Word Slash 1.0.12 — probe direto</span><iframe id="word" src="./word-probe.html" title="Word Slash direct probe"></iframe></div></div></main>
+<script>
+(function(){
+  "use strict";
+  const fields=["fontFamily","fontSize","fontWeight","lineHeight","letterSpacing","textTransform"];
+  const labels={fontFamily:"font-family",fontSize:"font-size",fontWeight:"font-weight",lineHeight:"line-height",letterSpacing:"letter-spacing",textTransform:"text-transform"};
+  const target=document.getElementById("target"),word=document.getElementById("word"),rows=document.getElementById("rows"),status=document.getElementById("status"),attrs=document.getElementById("attrs"),diagnostic=document.getElementById("diagnostic");
+
+  function probeInfo(frame){
+    try{
+      const outer=frame.contentDocument;
+      if(!outer)return{doc:null,state:"loading",error:""};
+      const root=outer.documentElement;
+      const state=root?.dataset?.probe||"loading";
+      const error=root?.dataset?.probeError||"";
+      const nested=outer.querySelector(".duduq-mechanic-frame iframe");
+      return{doc:nested?.contentDocument||null,state,error};
+    }catch(error){return{doc:null,state:"error",error:String(error?.message||error)}}
+  }
+
+  function worldFusionReady(doc){
+    if(!doc?.documentElement)return false;
+    const html=doc.documentElement;
+    const link=doc.getElementById("duduq-world-fusion-style");
+    let sheetReady=false;
+    try{sheetReady=Boolean(link&&link.sheet)}catch(_){sheetReady=Boolean(link)}
+    return html.classList.contains("duduq-world-fusion")&&Boolean(html.getAttribute("data-duduq-world-fusion-version"))&&html.getAttribute("data-duduq-literacy-early")!==null&&sheetReady;
+  }
+
+  function sample(frame,selector){
+    const probe=probeInfo(frame);
+    const doc=probe.doc;
+    if(!doc){
+      if(probe.state==="error")return{probeError:probe.error};
+      return null;
+    }
+    const node=doc.querySelector(selector);
+    if(!node){
+      if(probe.state==="error")return{probeError:probe.error};
+      return null;
+    }
+    const cs=doc.defaultView.getComputedStyle(node),out={};
+    fields.forEach(k=>out[k]=cs[k]);
+    const html=doc.documentElement;
+    out.year=html.getAttribute("data-duduq-ano-ativo")||"";
+    out.literacy=html.getAttribute("data-duduq-literacy-early")||"";
+    out.fusion=html.classList.contains("duduq-world-fusion");
+    out.fusionVersion=html.getAttribute("data-duduq-world-fusion-version")||"";
+    out.styleReady=worldFusionReady(doc);
+    out.probeWarning=probe.state==="error"?probe.error:"";
+    return out;
+  }
+
+  function signature(v){return v&&!v.probeError?JSON.stringify(fields.map(k=>v[k]).concat([v.year,v.literacy,v.fusion,v.fusionVersion,v.styleReady])):""}
+
+  function render(a,b){
+    let all=true;rows.innerHTML="";
+    fields.forEach(k=>{const same=a[k]===b[k];all=all&&same;const tr=document.createElement("tr");tr.innerHTML="<td>"+labels[k]+"</td><td>"+a[k]+"</td><td>"+b[k]+"</td><td class='"+(same?"same":"different")+"'>"+(same?"PASS":"FAIL")+"</td>";rows.appendChild(tr)});
+    const semantic=a.year===b.year&&a.literacy===b.literacy&&a.fusion===true&&b.fusion===true&&a.styleReady===true&&b.styleReady===true;
+    all=all&&semantic;
+    attrs.textContent="Perfil semântico — Target: ano="+a.year+", literacy-early="+a.literacy+" | Word Slash: ano="+b.year+", literacy-early="+b.literacy;
+    const warnings=[];
+    if(a.probeWarning)warnings.push("Target warning: "+a.probeWarning);
+    if(b.probeWarning)warnings.push("Word Slash warning: "+b.probeWarning);
+    diagnostic.textContent="World Fusion — Target: css="+(a.styleReady?"loaded":"pending")+", versão="+a.fusionVersion+" | Word Slash: css="+(b.styleReady?"loaded":"pending")+", versão="+b.fusionVersion+(warnings.length?" | "+warnings.join(" | "):"");
+    status.className="status "+(all?"pass":"fail");
+    status.textContent=all?"PASS — COMPUTED STYLE IDÊNTICO E ESTÁVEL":"FAIL — DIVERGÊNCIA REAL CONFIRMADA";
+    document.documentElement.dataset.parity=all?"pass":"fail";
+  }
+
+  let attempts=0,stable=0,last="";
+  const timer=setInterval(function(){
+    attempts++;
+    const a=sample(target,".duduq-ts-instruction h2"),b=sample(word,".duduq-ws-instruction h2");
+    if(a?.probeError||b?.probeError){clearInterval(timer);status.className="status fail";status.textContent="FALHA DE MONTAGEM DO PROBE";diagnostic.textContent="Target: "+(a?.probeError||"ok")+" | Word Slash: "+(b?.probeError||"ok");return}
+    if(!a||!b){stable=0;last="";status.textContent="AGUARDANDO OS DOIS ENUNCIADOS…"}
+    else if(!a.styleReady||!b.styleReady){stable=0;last="";status.textContent="AGUARDANDO WORLD FUSION CSS…"}
+    else{const pair=signature(a)+"||"+signature(b);if(pair===last)stable++;else{last=pair;stable=1}status.textContent="ESTABILIZANDO COMPUTED STYLE… "+stable+"/4";if(stable>=4){clearInterval(timer);render(a,b);return}}
+    if(attempts>200){clearInterval(timer);status.className="status fail";status.textContent="FALHA — PROBES NÃO ESTABILIZARAM";diagnostic.textContent="Os runtimes não expuseram estilos estáveis em tempo hábil."}
+  },200);
+})();
+</script>
 </body></html>
