@@ -1,0 +1,43 @@
+/* DuduQ Bubble Pop 1.0.27 — paridade computada do subcard.
+   O World Fusion continua soberano sobre altura e padding vertical.
+   Este patch compensa apenas a largura do contêiner Bubble Pop e alinha
+   grade, gaps e padding horizontal ao Target Shooter. */
+html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction {
+  width:
+    min(
+      var(--duduq-instruction-max-width, 1040px),
+      calc(100% - 44px)
+    ) !important;
+  grid-template-columns: 48px minmax(0, 1fr) 48px !important;
+  align-items: center !important;
+  column-gap: clamp(8px, 1.4vw, 14px) !important;
+  row-gap: clamp(8px, 1.4vw, 14px) !important;
+  padding-left: 13px !important;
+  padding-right: 13px !important;
+}
+
+@media (min-width: 820px) and (min-height: 600px) {
+  html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction {
+    width:
+      min(
+        var(--duduq-instruction-max-width, 1110px),
+        calc(100% - 22px)
+      ) !important;
+  }
+}
+
+@media (max-width: 819px) {
+  html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction {
+    width: calc(100% - 4px) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction {
+    grid-template-columns: 38px minmax(0, 1fr) 44px !important;
+    column-gap: 7px !important;
+    row-gap: 7px !important;
+    padding-left: 9px !important;
+    padding-right: 9px !important;
+  }
+}
