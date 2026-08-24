@@ -1,0 +1,204 @@
+/* DuduQ Bubble Pop 1.0.31 — paridade do shell e acabamento glass das bolhas.
+   O World Fusion continua soberano sobre altura mínima e padding vertical.
+   Este patch alinha largura, grade, gaps e padding ao Target Shooter e,
+   no viewport amplo, limita apenas os itens que dimensionam a linha do grid.
+   A caixa permanece com min-height: conteúdo de duas linhas ainda pode crescer. */
+html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction {
+  width:
+    min(
+      var(--duduq-instruction-max-width, 1040px),
+      calc(100% - 44px)
+    ) !important;
+  grid-template-columns: 48px minmax(0, 1fr) 48px !important;
+  align-items: center !important;
+  column-gap: clamp(8px, 1.4vw, 14px) !important;
+  row-gap: clamp(8px, 1.4vw, 14px) !important;
+  padding-left: 13px !important;
+  padding-right: 13px !important;
+}
+
+@media (min-width: 820px) and (min-height: 600px) {
+  html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction {
+    width:
+      min(
+        var(--duduq-instruction-max-width, 1110px),
+        calc(100% - 22px)
+      ) !important;
+  }
+
+  /* O Target Shooter mede 40px de faixa útil (60px totais menos bordas
+     e padding). Estes dois itens eram os únicos a expandir o Bubble para
+     61.03px. O h2 não é travado e continua livre para quebrar em duas linhas. */
+  html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction::before,
+  html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction .duduq-bp-audio-shell {
+    height: 40px !important;
+  }
+}
+
+/* O botão mede 44px e o invólucro desktop mede 40px para não expandir
+   a linha do grid. A posição absoluta centraliza o círculo sem fazê-lo
+   participar do cálculo de altura; as interações preservam o mesmo centro. */
+html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction .duduq-bp-audio-shell {
+  align-self: center !important;
+  justify-self: center !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: visible !important;
+}
+
+html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction .duduq-bp-audio-button {
+  position: absolute !important;
+  inset: 50% auto auto 50% !important;
+  margin: 0 !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction .duduq-bp-audio-button:hover:not(:disabled) {
+  transform: translate(-50%, calc(-50% - 2px)) !important;
+}
+
+html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction .duduq-bp-audio-button:active:not(:disabled) {
+  transform: translate(-50%, calc(-50% + 3px)) scale(.985) !important;
+}
+
+html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction .duduq-bp-audio-button svg {
+  display: block !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 819px) {
+  html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction {
+    width: calc(100% - 4px) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction {
+    grid-template-columns: 38px minmax(0, 1fr) 44px !important;
+    column-gap: 7px !important;
+    row-gap: 7px !important;
+    padding-left: 9px !important;
+    padding-right: 9px !important;
+  }
+}
+
+/* =========================================================
+   GLASS BUBBLE V2
+   Centro translúcido, aro óptico e reflexos especulares.
+   A legibilidade do rótulo permanece prioritária.
+   ========================================================= */
+html body .duduq-engine-stage .duduq-bp-root .duduq-bp-bubble {
+  --bp-glass-edge: hsla(var(--hue), 100%, 91%, .88);
+  --bp-glass-rim: hsla(var(--hue), 96%, 72%, .34);
+  --bp-glass-shadow: hsla(var(--hue), 82%, 42%, .20);
+  border: 2px solid var(--bp-glass-edge) !important;
+  background:
+    radial-gradient(
+      ellipse at 29% 20%,
+      rgba(255,255,255,.98) 0%,
+      rgba(255,255,255,.72) 5%,
+      rgba(255,255,255,.24) 13%,
+      rgba(255,255,255,0) 30%
+    ),
+    radial-gradient(
+      ellipse at 72% 80%,
+      rgba(255,255,255,.42) 0%,
+      rgba(255,255,255,.13) 12%,
+      rgba(255,255,255,0) 29%
+    ),
+    radial-gradient(
+      circle at 49% 46%,
+      hsla(var(--hue), 100%, 98%, .05) 0%,
+      hsla(var(--hue), 100%, 96%, .07) 48%,
+      hsla(var(--hue), 98%, 82%, .20) 69%,
+      hsla(calc(var(--hue) + 24), 100%, 78%, .38) 85%,
+      rgba(255,255,255,.82) 100%
+    ) !important;
+  background-blend-mode: screen, screen, normal !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.54),
+    inset 7px 9px 13px rgba(255,255,255,.42),
+    inset -9px -11px 17px hsla(calc(var(--hue) + 28), 96%, 68%, .19),
+    inset 0 0 25px var(--bp-glass-rim),
+    0 9px 20px var(--bp-glass-shadow),
+    0 0 17px hsla(var(--hue), 100%, 82%, .24) !important;
+  backdrop-filter: blur(2.5px) saturate(1.28) contrast(1.03) !important;
+  -webkit-backdrop-filter: blur(2.5px) saturate(1.28) contrast(1.03) !important;
+}
+
+html body .duduq-engine-stage .duduq-bp-root .duduq-bp-bubble::before {
+  inset: 1.5% !important;
+  border: 1px solid rgba(255,255,255,.42) !important;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      transparent 0%,
+      transparent 57%,
+      hsla(var(--hue), 100%, 90%, .08) 64%,
+      rgba(255,255,255,.38) 72%,
+      hsla(calc(var(--hue) + 42), 100%, 78%, .20) 76%,
+      transparent 80%
+    ),
+    conic-gradient(
+      from 18deg,
+      hsla(330,100%,82%,.20),
+      hsla(38,100%,82%,.14),
+      hsla(72,100%,84%,.17),
+      hsla(158,100%,82%,.16),
+      hsla(205,100%,82%,.22),
+      hsla(274,100%,84%,.18),
+      hsla(330,100%,82%,.20)
+    ) !important;
+  background-blend-mode: screen !important;
+  opacity: .94 !important;
+}
+
+html body .duduq-engine-stage .duduq-bp-root .duduq-bp-bubble::after {
+  left: 14% !important;
+  top: 10% !important;
+  width: 38% !important;
+  height: 21% !important;
+  border-radius: 50% !important;
+  background:
+    radial-gradient(
+      ellipse at 34% 36%,
+      rgba(255,255,255,.98) 0%,
+      rgba(255,255,255,.82) 24%,
+      rgba(255,255,255,.34) 48%,
+      rgba(255,255,255,0) 72%
+    ) !important;
+  filter: blur(.55px) !important;
+  opacity: .94 !important;
+  transform: rotate(-27deg) !important;
+  box-shadow:
+    0 0 9px rgba(255,255,255,.62),
+    31px 45px 8px -10px rgba(255,255,255,.46) !important;
+}
+
+html body .duduq-engine-stage .duduq-bp-root .duduq-bp-label {
+  color: #123B66 !important;
+  text-shadow:
+    0 2px 0 rgba(255,255,255,.98),
+    0 0 10px rgba(255,255,255,.88),
+    0 3px 9px hsla(var(--hue), 78%, 30%, .18) !important;
+}
+
+html body .duduq-engine-stage .duduq-bp-root .duduq-bp-bubble:hover:not(:disabled) {
+  filter: brightness(1.09) saturate(1.20) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.70),
+    inset 8px 10px 15px rgba(255,255,255,.50),
+    inset -10px -12px 19px hsla(calc(var(--hue) + 28), 100%, 68%, .24),
+    inset 0 0 28px hsla(var(--hue), 100%, 72%, .39),
+    0 13px 28px hsla(var(--hue), 90%, 42%, .27),
+    0 0 0 5px rgba(255,255,255,.24),
+    0 0 22px hsla(var(--hue), 100%, 82%, .30) !important;
+}
+
+@supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
+  html body .duduq-engine-stage .duduq-bp-root .duduq-bp-bubble {
+    background:
+      radial-gradient(ellipse at 29% 20%, rgba(255,255,255,.98) 0%, rgba(255,255,255,.66) 7%, rgba(255,255,255,0) 30%),
+      radial-gradient(circle at 50% 48%, hsla(var(--hue),100%,98%,.20) 0%, hsla(var(--hue),96%,84%,.34) 72%, rgba(255,255,255,.86) 100%) !important;
+  }
+}
