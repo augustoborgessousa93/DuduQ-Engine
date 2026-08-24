@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "status": "homologation-only",
+  "scope": {
+    "subject": "Língua Inglesa",
+    "year": 2,
+    "modules": [1, 2, 3, 4, 5, 6],
+    "baseCanaryRevision": 143
+  },
+  "sources": {
+    "officialContent": "DUDUQ Conteúdo Oficial de Língua Inglesa — Revisão Pedagógica Integral v2.2",
+    "master": "DUDUQ Documento Mestre — Conteúdo & Orquestração v1.0",
+    "pedagogicalSpecification": "DUDUQ Factory Pedagogical Specification v1.1",
+    "latestDirective": "Word Slash autorizado para entrar no conjunto elegível em homologação do 2º ano, sem seleção obrigatória e sem alteração retroativa do Canary 143."
+  },
+  "sourceConflict": {
+    "detected": true,
+    "description": "A Pedagogical Specification v1.1 ainda registra Word Slash como FORA DE PRODUÇÃO, enquanto o Canary 143 já expõe wordSlashApproved=true e a diretriz mais recente autoriza seu uso em homologação.",
+    "resolutionForThisBranch": "Tratar Word Slash como elegível SOMENTE nesta homologação do 2º ano. Não promover automaticamente para produção nem reescrever conteúdos já homologados.",
+    "productionGate": "Antes de uma promoção definitiva, atualizar/versionar a especificação normativa para remover a contradição documental e reauditar os módulos afetados."
+  },
+  "literacyProfile": {
+    "id": "Y2_FOUNDATIONAL_LITERACY",
+    "dominantReadingDemand": "R0",
+    "maximumStandardReadingDemand": "R1",
+    "r2Policy": "Excepcional, totalmente modelado, com áudio e apoio visual; nunca usar leitura autônoma de frase como única evidência.",
+    "instructionPolicy": "Enunciados essenciais em português devem ser curtos, narráveis e com áudio/fallback; inglês-alvo deve ser repetível sem penalidade."
+  },
+  "wordSlashEligibility": {
+    "eligibleWhen": [
+      "a ação cognitiva principal é discriminar letra, palavra isolada ou forma ortográfica curta já apoiada por áudio/contexto",
+      "o ato de cortar representa claramente selecionar o alvo correto entre distratores próximos",
+      "a resposta não exige leitura autônoma de sentença",
+      "os alvos são grandes, visualmente distinguíveis e a precisão motora não decide a proficiência",
+      "o áudio pode ser repetido e não revela visualmente a resposta antes da interação"
+    ],
+    "avoidWhen": [
+      "a imagem complexa ou a compreensão de uma cena é essencial para decidir",
+      "a tarefa exige sequência, ordenação ou construção de frase",
+      "o texto ultrapassa palavra isolada/chunk muito curto sem forte apoio",
+      "timer, velocidade ou precisão motora passam a ser evidência principal de acerto"
+    ],
+    "year2RuntimeDefaults": {
+      "goal": 2,
+      "speedMinMs": 6500,
+      "speedMaxMs": 8000,
+      "maxObjects": 3,
+      "spawnEveryMs": 1300,
+      "timeLimitSeconds": 60,
+      "correctProbability": 0.6,
+      "wrongPenalty": 0
+    }
+  },
+  "moduleScreening": {
+    "M01": {
+      "title": "Greetings & The Alphabet",
+      "preferredWordSlashCandidates": ["EN2-M1-06", "EN2-M1-07", "EN2-M1-08", "EN2-M1-09", "EN2-M1-10"],
+      "pilot": "EN2-M1-08",
+      "reason": "Reconhecimento auditivo de nome de letra com resposta por símbolo isolado; baixa carga leitora e correspondência clara entre ouvir e cortar a letra-alvo."
+    },
+    "M02": {
+      "title": "Numbers 1–20 & My Family",
+      "preferredWordSlashCandidates": ["EN2-M2-01", "EN2-M2-02", "EN2-M2-03", "EN2-M2-04", "EN2-M2-05", "EN2-M2-06", "EN2-M2-14"],
+      "reason": "Reconhecimento de forma escrita de números pode usar Word Slash somente com modelagem/áudio; manter imagem/numeral como apoio fora do corte quando necessário."
+    },
+    "M03": {
+      "title": "Toys, Colors & Favorites",
+      "preferredWordSlashCandidates": [],
+      "conditionalCandidates": ["EN2-M3-01", "EN2-M3-02", "EN2-M3-03", "EN2-M3-04", "EN2-M3-05", "EN2-M3-06", "EN2-M3-11"],
+      "reason": "O conteúdo é majoritariamente imagem→palavra. Matching/Target Shooter/Bubble Pop preservam melhor a compreensão visual; Word Slash só entra se a palavra estiver fortemente apoiada por áudio e não aumentar a carga leitora."
+    },
+    "M04": {
+      "title": "Animals & Shapes",
+      "preferredWordSlashCandidates": [],
+      "conditionalCandidates": ["EN2-M4-01", "EN2-M4-02", "EN2-M4-03", "EN2-M4-06", "EN2-M4-07", "EN2-M4-08"],
+      "reason": "Animais e formas são alvos concretos e visuais; Word Slash não deve substituir uma mecânica imagem/áudio mais direta sem ganho pedagógico."
+    },
+    "M05": {
+      "title": "Human Body",
+      "preferredWordSlashCandidates": [],
+      "conditionalCandidates": ["EN2-M5-01", "EN2-M5-02", "EN2-M5-03", "EN2-M5-04", "EN2-M5-05", "EN2-M5-06", "EN2-M5-07", "EN2-M5-08", "EN2-M5-12", "EN2-M5-13"],
+      "reason": "Partes do corpo pedem forte apoio visual/gestual; Word Slash é secundário e somente para reconhecimento de palavra já modelada."
+    },
+    "M06": {
+      "title": "Fruits, Vegetables, Colors & Size",
+      "preferredWordSlashCandidates": [],
+      "conditionalCandidates": ["EN2-M6-01", "EN2-M6-02", "EN2-M6-03", "EN2-M6-04", "EN2-M6-05", "EN2-M6-06"],
+      "reason": "O módulo é predominantemente multimodal. Itens auditivos EN2-M6-11/12 devem continuar áudio→imagem, não Word Slash textual."
+    }
+  },
+  "publicationGate": {
+    "preserveIds": true,
+    "preserveEditorialAnswers": true,
+    "routerValidationRequired": true,
+    "manualPedagogicalAuditRequired": true,
+    "canary143MustRemainUnchanged": true,
+    "noAutomaticPromotion": true
+  }
+}
