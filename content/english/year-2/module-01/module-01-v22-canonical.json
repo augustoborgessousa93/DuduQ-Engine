@@ -46,5 +46,13 @@
     "total": 15,
     "maximumShare": 0.4667,
     "note": "Plano de homologação, não transcrição do documento editorial. A mecânica é escolhida item a item e pode ser ajustada após teste visual/funcional."
+  },
+  "implementationStatus": {
+    "runtimeAligned": false,
+    "reason": "O runtime oficial do M01 ainda está baseado no conteúdo v1.0. Este manifesto fixa a v2.2 antes da reconstrução do runtime para impedir que correções editoriais sejam misturadas com alterações de mecânica.",
+    "knownCriticalEditorialDifferences": [
+      "EN2-M1-12: v2.2 exige LEO; runtime antigo usa GOOD MORNING.",
+      "EN2-M1-15: v2.2 exige BAG; runtime antigo usa SEE YOU."
+    ]
   }
 }
