@@ -8,6 +8,7 @@ on:
       - "content/english/year-2/**"
       - "scripts/qa-year2-word-slash-homolog.mjs"
       - "scripts/qa-year2-m01-v22-canonical.mjs"
+      - "scripts/qa-year2-m01-v22-runtime.mjs"
       - "engine/channels/canary-v1.json"
       - ".github/workflows/year2-word-slash-homolog.yml"
   pull_request:
@@ -17,6 +18,7 @@ on:
       - "content/english/year-2/**"
       - "scripts/qa-year2-word-slash-homolog.mjs"
       - "scripts/qa-year2-m01-v22-canonical.mjs"
+      - "scripts/qa-year2-m01-v22-runtime.mjs"
       - "engine/channels/canary-v1.json"
       - ".github/workflows/year2-word-slash-homolog.yml"
 
@@ -40,6 +42,9 @@ jobs:
 
       - name: Validate official M01 v2.2 source
         run: node scripts/qa-year2-m01-v22-canonical.mjs
+
+      - name: Validate isolated M01 v2.2 runtime
+        run: node scripts/qa-year2-m01-v22-runtime.mjs
 
       - name: Validate isolated Word Slash pilot
         run: node scripts/qa-year2-word-slash-homolog.mjs
