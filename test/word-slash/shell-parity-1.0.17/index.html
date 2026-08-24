@@ -12,13 +12,13 @@
 <body>
 <main class="report">
 <h1>Paridade exata do shell — Word Slash 1.0.17 × Target Shooter 1.0.21</h1>
-<p class="muted">Os dois runtimes usam viewport interno idêntico de 1039×732. O gate compara Computed Style do enunciado, grid da surface, chip de status, tipografia, geometria/posição da arena e composição visual do gramado. Não há aprovação por aparência aproximada.</p>
+<p class="muted">Os runtimes usam, um por vez, viewport interno idêntico de 1039×732. O gate compara Computed Style do enunciado, grid da surface, chip de status, tipografia, geometria/posição da arena e composição visual do gramado. Não há aprovação por aparência aproximada.</p>
 <div id="status" class="status wait">MONTANDO RUNTIMES…</div>
 <table><thead><tr><th>Propriedade</th><th>Target Shooter</th><th>Word Slash</th><th>Resultado</th></tr></thead><tbody id="rows"></tbody></table>
 <p id="diagnostic" class="muted"></p>
 <div class="previews">
-<div class="preview"><span class="label">Target Shooter 1.0.21</span><iframe id="target" src="./target-probe.html?probe=1212" title="Target Shooter direct probe"></iframe></div>
-<div class="preview"><span class="label">Word Slash 1.0.17</span><iframe id="word" src="about:blank" data-probe-src="./word-probe.html?probe=1172" title="Word Slash 1.0.17 direct probe"></iframe></div>
+<div class="preview"><span class="label">Target Shooter 1.0.21</span><iframe id="target" src="./target-probe.html?probe=1213" title="Target Shooter direct probe"></iframe></div>
+<div class="preview"><span class="label">Word Slash 1.0.17</span><iframe id="word" src="about:blank" data-probe-src="./word-probe.html?probe=1173" title="Word Slash 1.0.17 direct probe"></iframe></div>
 </div>
 </main>
 <script>
@@ -42,40 +42,61 @@ function revealProbe(frame){try{const outer=frame.contentDocument,cover=outer?.g
 function sample(doc,selector,fields,pseudo){const node=doc?.querySelector(selector);if(!node)return null;const cs=doc.defaultView.getComputedStyle(node,pseudo||null),out={};fields.forEach(k=>out[k]=cs[k]);const r=node.getBoundingClientRect();out.rectWidth=r.width.toFixed(2)+"px";out.rectHeight=r.height.toFixed(2)+"px";out.rectTop=r.top.toFixed(2)+"px";out.rectBottom=r.bottom.toFixed(2)+"px";return out}
 function norm(v){return String(v??"").replace(/\s+/g," ").trim()}
 function render(td,wd){let all=true;rows.innerHTML="";for(const g of groups){const trh=document.createElement("tr");trh.className="group";trh.innerHTML="<td colspan='4'>"+g.name+"</td>";rows.appendChild(trh);const a=g.expected?g.expected:sample(td,g.target,g.fields,g.pseudo),b=sample(wd,g.word,g.fields,g.pseudo);if(!a||!b){all=false;const tr=document.createElement("tr");tr.innerHTML="<td>elemento</td><td>"+(a?"OK":"AUSENTE")+"</td><td>"+(b?"OK":"AUSENTE")+"</td><td class='different'>FAIL</td>";rows.appendChild(tr);continue}for(const k of g.fields){const same=norm(a[k])===norm(b[k]);all=all&&same;const tr=document.createElement("tr");tr.innerHTML="<td>"+(label[k]||k)+"</td><td>"+a[k]+"</td><td>"+b[k]+"</td><td class='"+(same?"same":"different")+"'>"+(same?"PASS":"FAIL")+"</td>";rows.appendChild(tr)}if(g.rectFields){for(const k of g.rectFields){const same=norm(a[k])===norm(b[k]);all=all&&same;const tr=document.createElement("tr");tr.innerHTML="<td>"+label[k]+"</td><td>"+a[k]+"</td><td>"+b[k]+"</td><td class='"+(same?"same":"different")+"'>"+(same?"PASS":"FAIL")+"</td>";rows.appendChild(tr)}}}
-status.className="status "+(all?"pass":"fail");status.textContent=all?"PASS — SHELL E ARENA IDÊNTICOS AO TARGET SHOOTER":"FAIL — AINDA EXISTE DIVERGÊNCIA ESTRUTURAL";document.documentElement.dataset.shellParity=all?"pass":"fail";diagnostic.textContent="World Fusion carregado nos dois runtimes. Gate inclui posição, dimensões e composição visual da arena; as duas camadas do gramado devem coincidir com o Target."}
-let attempts=0,stable=0,last="",wordStarted=false;
+status.className="status "+(all?"pass":"fail");status.textContent=all?"PASS — SHELL E ARENA IDÊNTICOS AO TARGET SHOOTER":"FAIL — AINDA EXISTE DIVERGÊNCIA ESTRUTURAL";document.documentElement.dataset.shellParity=all?"pass":"fail";diagnostic.textContent="World Fusion verificado em cada runtime. O Target foi medido e encerrado antes da montagem da Word Slash; o gate compara os valores computados armazenados, incluindo as duas camadas do gramado."}
+let attempts=0,targetStable=0,targetLast="",wordStable=0,wordLast="",targetCaptured=false,wordStarted=false;
 function startWord(){if(wordStarted)return;wordStarted=true;word.src=word.dataset.probeSrc}
+function valuesOf(doc,side){return groups.map(g=>sample(doc,g[side],g.fields,g.pseudo))}
+function fail(title,message){clearInterval(timer);status.className="status fail";status.textContent=title;diagnostic.textContent=message;document.documentElement.dataset.shellParity="fail"}
+function releaseTarget(){
+ target.srcdoc='<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><style>html,body{margin:0;width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(145deg,#f7fbff,#e6f3fb);color:#17375e;font:900 18px/1.45 Nunito,system-ui,sans-serif;text-align:center}.note{padding:30px}.small{display:block;margin-top:8px;color:#62778c;font-size:14px}</style></head><body><div class="note">TARGET MEDIDO E LIBERADO<span class="small">Valores computados armazenados para a comparação.</span></div></body></html>';
+}
 const timer=setInterval(function(){
  attempts++;
- const tp=probeState(target);
- if(tp.state==="error"){clearInterval(timer);status.className="status fail";status.textContent="FAIL — TARGET SHOOTER NÃO MONTOU";diagnostic.textContent=tp.message||tp.error||"Falha sem diagnóstico do Target.";document.documentElement.dataset.shellParity="fail";return}
- const td=innerDoc(target);
- if(!td){status.textContent=tp.message||"TARGET SHOOTER: AGUARDANDO RUNTIME";stable=0}
- else if(!ready(td)){status.textContent=tp.message||"TARGET SHOOTER: AGUARDANDO WORLD FUSION";stable=0}
- else{
-  revealProbe(target);
-  if(!wordStarted){startWord();status.textContent="TARGET PRONTO; INICIANDO WORD SLASH…";stable=0;return}
+ if(!targetCaptured){
+  const tp=probeState(target);
+  if(tp.state==="error"){fail("FAIL — TARGET SHOOTER NÃO MONTOU",tp.message||tp.error||"Falha sem diagnóstico do Target.");return}
+  const td=innerDoc(target);
+  if(!td){status.textContent=tp.message||"TARGET SHOOTER: AGUARDANDO RUNTIME";targetStable=0}
+  else if(!ready(td)){status.textContent=tp.message||"TARGET SHOOTER: AGUARDANDO WORLD FUSION";targetStable=0}
+  else{
+   revealProbe(target);
+   const values=valuesOf(td,"target");
+   if(values.some(v=>!v)){status.textContent="TARGET SHOOTER: AGUARDANDO ELEMENTOS DA AUDITORIA";targetStable=0}
+   else{
+    const sig=JSON.stringify(values);
+    if(sig===targetLast)targetStable++;else{targetLast=sig;targetStable=1}
+    status.textContent="MEDINDO TARGET SHOOTER… "+targetStable+"/4";
+    if(targetStable>=4){
+     values.forEach((value,index)=>groups[index].expected=value);
+     targetCaptured=true;
+     releaseTarget();
+     startWord();
+     status.textContent="TARGET MEDIDO; CARREGANDO WORD SLASH SOZINHA…";
+    }
+   }
+  }
+ }else{
   const wp=probeState(word);
-  if(wp.state==="error"){clearInterval(timer);status.className="status fail";status.textContent="FAIL — WORD SLASH NÃO MONTOU";diagnostic.textContent=wp.message||wp.error||"Falha sem diagnóstico da Word Slash.";document.documentElement.dataset.shellParity="fail";return}
+  if(wp.state==="error"){fail("FAIL — WORD SLASH NÃO MONTOU",wp.message||wp.error||"Falha sem diagnóstico da Word Slash.");return}
   const wd=innerDoc(word);
-  if(!wd){status.textContent=wp.message||"WORD SLASH: AGUARDANDO RUNTIME";stable=0}
-  else if(!ready(wd)){status.textContent=wp.message||"WORD SLASH: AGUARDANDO WORLD FUSION";stable=0}
+  if(!wd){status.textContent=wp.message||"WORD SLASH: AGUARDANDO RUNTIME";wordStable=0}
+  else if(!ready(wd)){status.textContent=wp.message||"WORD SLASH: AGUARDANDO WORLD FUSION";wordStable=0}
   else{
    revealProbe(word);
-   const ta=td.querySelector(".duduq-ts-instruction"),wa=wd.querySelector(".duduq-ws-instruction");
-   if(!ta||!wa){status.textContent="AGUARDANDO CARDS PRINCIPAIS…";stable=0}
+   const values=valuesOf(wd,"word");
+   if(values.some(v=>!v)){status.textContent="WORD SLASH: AGUARDANDO ELEMENTOS DA AUDITORIA";wordStable=0}
    else{
-    const tsa=td.querySelector(".duduq-ts-surface"),wsa=wd.querySelector(".duduq-ws-surface"),tar=td.querySelector(".duduq-ts-arena"),war=wd.querySelector(".duduq-ws-arena");
-    if(!tsa||!wsa||!tar||!war){status.textContent="AGUARDANDO ARENAS PRINCIPAIS…";stable=0;return}
-    const tr=tar.getBoundingClientRect(),wr=war.getBoundingClientRect(),th=td.defaultView.getComputedStyle(tar,"::after"),wh=wd.defaultView.getComputedStyle(war,"::after"),targetMeadow=td.querySelector(".duduq-ts-ambient"),wordMeadow=wd.querySelector(".duduq-ws-background-layer"),teh=targetMeadow?td.defaultView.getComputedStyle(targetMeadow,"::before"):null,weh=wordMeadow?wd.defaultView.getComputedStyle(wordMeadow,"::before"):null;
-    const sig=[td.defaultView.getComputedStyle(ta).width,td.defaultView.getComputedStyle(ta).gridTemplateColumns,wd.defaultView.getComputedStyle(wa).width,wd.defaultView.getComputedStyle(wa).gridTemplateColumns,td.defaultView.getComputedStyle(tsa).gridTemplateRows,wd.defaultView.getComputedStyle(wsa).gridTemplateRows,tr.top.toFixed(2),tr.height.toFixed(2),wr.top.toFixed(2),wr.height.toFixed(2),th.bottom,th.height,th.backgroundImage,wh.bottom,wh.height,wh.backgroundImage,teh?.content,teh?.height,teh?.backgroundImage,weh?.content,weh?.height,weh?.backgroundImage].join("|");
-    if(sig===last)stable++;else{last=sig;stable=1}
-    status.textContent="ESTABILIZANDO SHELL… "+stable+"/4";
-    if(stable>=4){clearInterval(timer);render(td,wd)}
+    const sig=JSON.stringify(values);
+    if(sig===wordLast)wordStable++;else{wordLast=sig;wordStable=1}
+    status.textContent="MEDINDO WORD SLASH… "+wordStable+"/4";
+    if(wordStable>=4){clearInterval(timer);render(null,wd)}
    }
   }
  }
- if(attempts>600){clearInterval(timer);status.className="status fail";status.textContent="FAIL — AUDITORIA NÃO ESTABILIZOU";const wp=wordStarted?probeState(word):{state:"não iniciado",message:""};diagnostic.textContent="Tempo limite excedido após 120 segundos. Target: "+(tp.message||tp.state||"sem estado")+" | Word Slash: "+(wp.message||wp.state||"sem estado")}
+ if(attempts>600){
+  const phase=targetCaptured?"Word Slash":"Target Shooter";
+  fail("FAIL — AUDITORIA NÃO ESTABILIZOU","Tempo limite excedido após 120 segundos durante: "+phase+". Apenas um runtime fica ativo por vez.")
+ }
 },200);
 })();
 </script>
