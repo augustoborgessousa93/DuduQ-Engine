@@ -4,4 +4,4 @@
 
 A candidata v2.2 está em homologação nesta branch. O runtime validado é `homolog-v22-runtime.html`.
 
-O `index.html` oficial de produção permanece preservado até o fechamento dos gates de assets finais e áudio gravado.
+O `index.html` oficial de produção permanece preservado. Ele só deve ser substituído pela candidata v2.2 após o fechamento dos gates de assets finais e áudio gravado.
