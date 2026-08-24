@@ -18,25 +18,25 @@ function run(rel) {
 function questions(module) {
   return (module?.activities || []).flatMap((activity) => activity?.questions || []);
 }
-function hasRecordedRef(value) {
+function recorded(value) {
   return Boolean(value && typeof value === "object" && (value.src || value.path || value.url || value.asset || value.assetKey || value.audioAssetKey));
 }
-function collectImageRefs(question) {
-  const refs = [];
-  const add = (src, alt, origin) => src && refs.push({ src: String(src), alt: String(alt || ""), origin });
+function images(question) {
+  const out = [];
+  const add = (src, alt, origin) => src && out.push({ src: String(src), alt: String(alt || ""), origin });
   add(question?.image?.src, question?.image?.alt, "question.image");
   for (const target of question?.metadata?.targets || []) add(target?.imageSrc || target?.image, target?.alt || target?.label, "metadata.targets");
   for (const item of question?.metadata?.targetShooter?.items || []) add(item?.image, item?.alt || item?.label, "targetShooter.items");
-  for (const alternative of question?.alternatives || []) add(alternative?.image?.src, alternative?.image?.alt || alternative?.text, "alternatives.image");
-  return refs;
+  for (const alt of question?.alternatives || []) add(alt?.image?.src, alt?.image?.alt || alt?.text, "alternatives.image");
+  return out;
 }
-function audioProfile(question) {
+function audio(question) {
   const stimuli = [];
-  const add = (value, origin, forcedLanguage = "") => {
+  const add = (value, origin, language = "") => {
     if (!value || typeof value !== "object") return;
     const text = String(value.text || value.spokenText || "").trim();
-    if (!text && !hasRecordedRef(value)) return;
-    stimuli.push({ origin, language: value.language || value.locale || value.speechLocale || forcedLanguage, recorded: hasRecordedRef(value) });
+    if (!text && !recorded(value)) return;
+    stimuli.push({ origin, language: value.language || value.locale || value.speechLocale || language, recorded: recorded(value) });
   };
   add(question?.audio, "question.audio");
   add(question?.metadata?.stimulusAudio, "metadata.stimulusAudio");
@@ -48,14 +48,13 @@ function audioProfile(question) {
     englishStimulusConfigured: english.length > 0,
     englishStimulusRecorded: english.length > 0 && english.some((item) => item.recorded),
     optionAudioConfigured: optionAudios.length > 0,
-    optionAudioRecordedAll: optionAudios.length > 0 && optionAudios.every((alt) => hasRecordedRef(alt.audio))
+    optionAudioRecordedAll: optionAudios.length > 0 && optionAudios.every((alt) => recorded(alt.audio))
   };
 }
 
 run("content/english/year-2/year2-v22-homolog-core.js");
-if (fs.existsSync(path.join(root, "content/english/year-2/year2-v22-homolog-dragdrop-visual-patch.js"))) {
-  run("content/english/year-2/year2-v22-homolog-dragdrop-visual-patch.js");
-}
+run("content/english/year-2/year2-v22-homolog-dragdrop-visual-patch.js");
+run("content/english/year-2/year2-v22-homolog-editorial-assets.js");
 run("content/english/year-2/module-01/module-01-v22-homolog.js");
 for (let m = 2; m <= 6; m += 1) {
   const mm = String(m).padStart(2, "0");
@@ -86,37 +85,38 @@ try {
   remoteError = String(error?.message || error);
 }
 
-const items = all.map((question) => {
-  const images = collectImageRefs(question);
-  const previewImages = images.filter((entry) => /^data:image\//i.test(entry.src));
-  const repositoryImages = images.filter((entry) => !/^data:image\//i.test(entry.src));
-  const audio = audioProfile(question);
+const itemAudit = all.map((question) => {
+  const refs = images(question);
+  const previews = refs.filter((entry) => /^data:image\//i.test(entry.src));
+  const repository = refs.filter((entry) => !/^data:image\//i.test(entry.src));
   return {
     id: question.id,
     module: question.module,
     mechanic: question.delivery?.mechanic,
-    visualRequired: images.length > 0,
-    visualFinalAssetRequired: question.metadata?.finalAssetRequired === true || previewImages.length > 0,
-    previewImageCount: previewImages.length,
-    repositoryImageCount: repositoryImages.length,
-    visualConcepts: Array.from(new Set(previewImages.map((entry) => entry.alt).filter(Boolean))),
-    ...audio
+    visualRequired: refs.length > 0,
+    visualFinalAssetRequired: question.metadata?.finalAssetRequired === true || previews.length > 0,
+    previewImageCount: previews.length,
+    repositoryImageCount: repository.length,
+    repositoryImages: repository.map((entry) => ({ alt: entry.alt, src: entry.src, origin: entry.origin })),
+    visualConcepts: Array.from(new Set(previews.map((entry) => entry.alt).filter(Boolean))),
+    ...audio(question)
   };
 });
 
-const visualRequired = items.filter((item) => item.visualRequired);
-const visualPending = items.filter((item) => item.visualFinalAssetRequired);
+const visualRequired = itemAudit.filter((item) => item.visualRequired);
+const visualPending = itemAudit.filter((item) => item.visualFinalAssetRequired);
 const visualReady = visualRequired.filter((item) => !item.visualFinalAssetRequired && item.repositoryImageCount > 0);
-const englishStimulus = items.filter((item) => item.englishStimulusConfigured);
-const englishStimulusRecorded = englishStimulus.filter((item) => item.englishStimulusRecorded);
-const optionAudio = items.filter((item) => item.optionAudioConfigured);
-const optionAudioRecorded = optionAudio.filter((item) => item.optionAudioRecordedAll);
+const englishStimulus = itemAudit.filter((item) => item.englishStimulusConfigured);
+const englishRecorded = englishStimulus.filter((item) => item.englishStimulusRecorded);
+const optionAudio = itemAudit.filter((item) => item.optionAudioConfigured);
+const optionRecorded = optionAudio.filter((item) => item.optionAudioRecordedAll);
 const pendingConcepts = Array.from(new Set(visualPending.flatMap((item) => item.visualConcepts))).sort((a, b) => a.localeCompare(b));
 const audioEntries = Array.isArray(audioRoot) ? audioRoot : [];
 const year2AudioDir = audioEntries.find((entry) => /^(?:2[_ -]?ANO|YEAR[_ -]?2)$/i.test(entry.name || ""));
+const exactAssetItems = Array.from(sandbox.window.DuduQYear2V22Factory?.exactEditorialAssetItems || []);
 
 const report = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   generatedAt: new Date().toISOString(),
   source: {
     engineBranch: "homolog/year2-word-slash-pedagogy",
@@ -126,38 +126,42 @@ const report = {
     remoteError
   },
   summary: {
-    editorialItems: items.length,
+    editorialItems: itemAudit.length,
+    exactExistingAssetItemsWired: exactAssetItems.length,
     visualRequiredItems: visualRequired.length,
     visualReadyRepositoryItems: visualReady.length,
     visualPendingPreviewItems: visualPending.length,
     uniquePendingVisualConcepts: pendingConcepts.length,
     englishStimulusItems: englishStimulus.length,
-    englishStimulusRecordedItems: englishStimulusRecorded.length,
+    englishStimulusRecordedItems: englishRecorded.length,
     optionAudioItems: optionAudio.length,
-    optionAudioFullyRecordedItems: optionAudioRecorded.length,
+    optionAudioFullyRecordedItems: optionRecorded.length,
     year2AudioDirectoryPresent: Boolean(year2AudioDir),
-    commercialReady: !remoteError && visualPending.length === 0 && englishStimulusRecorded.length === englishStimulus.length && Boolean(year2AudioDir)
+    commercialReady: !remoteError && visualPending.length === 0 && englishRecorded.length === englishStimulus.length && Boolean(year2AudioDir)
   },
+  exactExistingAssetItems: exactAssetItems,
   year2AudioDirectory: year2AudioDir ? { name: year2AudioDir.name, path: year2AudioDir.path, sha: year2AudioDir.sha } : null,
   pendingVisualConcepts: pendingConcepts,
-  items
+  items: itemAudit
 };
 
 fs.writeFileSync(path.join(outDir, "year2-commercial-readiness.json"), JSON.stringify(report, null, 2));
 fs.writeFileSync(path.join(outDir, "README.md"), [
   "# DuduQ — 2º Ano — Readiness comercial",
   "",
-  `Itens: **${report.summary.editorialItems}**`,
-  `Imagens pendentes em preview/vetor: **${report.summary.visualPendingPreviewItems}**`,
-  `Conceitos visuais únicos pendentes: **${report.summary.uniquePendingVisualConcepts}**`,
+  `Itens editoriais: **${report.summary.editorialItems}**`,
+  `Itens ligados a assets exatos já existentes nesta rodada: **${report.summary.exactExistingAssetItemsWired}**`,
+  `Itens já com imagem de repositório: **${report.summary.visualReadyRepositoryItems}**`,
+  `Itens ainda com preview/vetor: **${report.summary.visualPendingPreviewItems}**`,
+  `Conceitos visuais únicos ainda pendentes: **${report.summary.uniquePendingVisualConcepts}**`,
   `Estímulos em inglês: **${report.summary.englishStimulusItems}**`,
   `Estímulos em inglês já ligados a áudio gravado: **${report.summary.englishStimulusRecordedItems}**`,
   `Pasta Audios/2_ANO presente: **${report.summary.year2AudioDirectoryPresent ? "SIM" : "NÃO"}**`,
   `Pronto comercialmente: **${report.summary.commercialReady ? "SIM" : "NÃO"}**`,
   "",
-  "TTS e vetores/data-URI continuam válidos apenas na homologação; esta auditoria não promove assets automaticamente."
+  "Somente correspondências semânticas exatas foram ligadas automaticamente. Composições de quantidade, tamanho, cor específica, família, formas e partes isoladas do corpo permanecem em preview quando o repositório não oferece um equivalente exato. TTS continua apenas fallback de homologação."
 ].join("\n"));
 
-console.log("DUDUQ YEAR2 COMMERCIAL READINESS AUDIT");
+console.log("DUDUQ YEAR2 COMMERCIAL READINESS AUDIT V2");
 console.log(JSON.stringify(report.summary, null, 2));
 if (remoteError) console.warn(`REMOTE AUDIT WARNING: ${remoteError}`);
