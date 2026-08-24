@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "contractMajor": 1,
-  "revision": 142,
+  "revision": 143,
   "core": {
     "release": "1.0.9",
     "styles": [
@@ -26,7 +26,7 @@
     "router": { "src": "/engine/releases/core/1.0.9/duduq-router.js", "release": "1.0.9" }
   },
   "mechanics": {
-    "bubble-pop": { "release": "1.0.25", "adapter": "/engine/releases/mechanics/bubble-pop/1.0.25/bubble-pop.js", "runtime": "/engine/releases/mechanics/bubble-pop/1.0.25/DUDUQ_BUBBLE_POP.html" },
+    "bubble-pop": { "release": "1.0.31", "adapter": "/engine/releases/mechanics/bubble-pop/1.0.31/bubble-pop.js", "runtime": "/engine/releases/mechanics/bubble-pop/1.0.31/DUDUQ_BUBBLE_POP.html" },
     "drag-drop": { "release": "2.0.22", "adapter": "/engine/releases/mechanics/drag-drop/2.0.22/drag-drop.js", "runtime": "/engine/releases/mechanics/drag-drop/2.0.22/DUDUQ_DRAG_DROP.html" },
     "matching": { "release": "1.0.23", "adapter": "/engine/releases/mechanics/matching/1.0.23/matching.js", "runtime": "/engine/releases/mechanics/matching/1.0.23/DUDUQ_MATCHING.html" },
     "memory-quest": { "release": "1.0.27", "adapter": "/engine/releases/mechanics/memory-quest/1.0.27/memory-quest.js", "runtime": "/engine/releases/mechanics/memory-quest/1.0.27/DUDUQ_MEMORY_QUEST.html" },
@@ -39,8 +39,9 @@
     "manifestNoStore": true,
     "hotfixViaChannelPromotion": true,
     "rollbackViaManifest": true,
-    "wordSlashApproved": true
+    "wordSlashApproved": true,
+    "bubblePopApproved": true
   },
   "channel": "canary-v1",
-  "status": "approved-r142-word-slash-1.0.17-target-shell-arena-meadow-parity"
+  "status": "approved-r143-bubble-pop-1.0.31-subcard-parity-glass-visual"
 }
