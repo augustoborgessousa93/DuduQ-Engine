@@ -5,29 +5,71 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Word Slash 1.0.15 — Shell Probe</title>
-<style>html,body,#mount{margin:0;width:100%;height:100%;overflow:hidden}body{background:#eef6fb}</style>
+<style>html,body,#mount{margin:0;width:100%;height:100%;overflow:hidden}body{background:#eef6fb}#probe-status{position:fixed;inset:0;z-index:999999;display:grid;place-items:center;padding:28px;box-sizing:border-box;background:linear-gradient(145deg,#f7fbff,#e6f3fb);color:#17375e;font:900 18px/1.4 Nunito,system-ui,sans-serif;text-align:center}#probe-status[data-state="ready"]{display:none}#probe-status[data-state="error"]{color:#a61b12;background:#fff1f0}</style>
+<link rel="preload" href="../../../engine/releases/mechanics/word-slash/1.0.15/DUDUQ_WORD_SLASH.html?engineAdapter=1.0.15" as="fetch" crossorigin="anonymous">
 <link id="duduq-world-fusion-core-style" rel="stylesheet" href="../../../engine/releases/core/1.0.9/duduq-world-fusion.css?v=147">
 <link id="duduq-audio-native-standard-style" rel="stylesheet" href="../../../engine/releases/core/1.0.10-candidate/duduq-audio-native.css">
 <script>window.DUDUQ_ENGINE_BASE=new URL("../../../..",location.href).href.replace(/\/$/,"");</script>
 <script id="duduq-world-fusion-core-script" src="../../../engine/releases/core/1.0.9/duduq-world-fusion.js?v=150"></script>
 <script id="duduq-audio-native-standard-script" src="../../../engine/releases/core/1.0.10-candidate/duduq-audio-native.js"></script>
 <script src="../../../engine/releases/core/1.0.9/duduq-host.js"></script>
-<script src="../../../engine/releases/mechanics/word-slash/1.0.15/word-slash.js"></script>
+<script src="../../../engine/releases/mechanics/word-slash/1.0.15/word-slash.js?probe=1151"></script>
 </head>
 <body>
+<div id="probe-status" data-state="loading">CARREGANDO WORD SLASH 1.0.15…</div>
 <div id="mount"></div>
 <script>
 (function(){
   "use strict";
   const q={id:"PARITY-WS-15",year:1,statement:"WORD",instruction:"Corte somente a palavra APPLE.",audio:{enabled:true,text:"Slice the word apple.",language:"en-US"},feedback:{correct:"Muito bem!",incorrect:"Tente novamente."},metadata:{screenTitle:"WORDS",wordSlash:{mode:"correct-word",target:{label:"APPLE",value:"apple",spokenText:"apple"},goal:3,difficulty:{maxObjects:4,timeLimitSeconds:38,correctProbability:.5},objects:[{id:"apple-word",type:"word",label:"APPLE",value:"apple",category:"fruit",weight:3},{id:"table-word",type:"word",label:"TABLE",value:"table",category:"object"},{id:"house-word",type:"word",label:"HOUSE",value:"house",category:"place"},{id:"dog-word",type:"word",label:"DOG",value:"dog",category:"animal"}]}}};
+  const root=document.documentElement;
+  const mount=document.getElementById("mount");
+  const status=document.getElementById("probe-status");
+  function phase(message,state){
+    const value=state||"loading";
+    root.dataset.probeState=value;
+    root.dataset.probeMessage=String(message||"");
+    status.dataset.state=value;
+    status.textContent=message||"";
+  }
   try{
     const mechanic=window.DuduQ?.getMechanic?.("word-slash");
-    if(!mechanic)throw new Error("Word Slash 1.0.15 não registrada");
-    mechanic.mount({container:document.getElementById("mount"),payload:{title:"WORD SLASH",questions:[q]},context:{year:1,subject:"Língua Inglesa",module:0,stepIndex:0,totalSteps:1},onComplete:function(){}});
-    document.documentElement.dataset.probe="mounted";
+    if(!mechanic)throw new Error("Adapter Word Slash 1.0.15 não registrado");
+    phase("BUSCANDO RUNTIME WORD SLASH 1.0.15…","loading");
+    mechanic.mount({container:mount,payload:{title:"WORD SLASH",questions:[q]},context:{year:1,subject:"Língua Inglesa",module:0,stepIndex:0,totalSteps:1},onComplete:function(){}});
+    root.dataset.probe="mounted";
+    const started=Date.now();
+    const timer=setInterval(function(){
+      const frame=mount.querySelector(".duduq-mechanic-frame iframe");
+      let doc=null;
+      try{doc=frame?.contentDocument||null}catch(_){}
+      if(mount.textContent.includes("Erro ao preparar a atividade")){
+        clearInterval(timer);
+        phase("FALHA AO CARREGAR O RUNTIME WORD SLASH 1.0.15.","error");
+        return;
+      }
+      const game=doc?.querySelector(".duduq-ws-root");
+      const fusion=doc?.documentElement?.classList.contains("duduq-world-fusion");
+      const profile=doc?.documentElement?.getAttribute("data-duduq-literacy-early");
+      if(game&&fusion&&profile!==null){
+        clearInterval(timer);
+        phase("","ready");
+        return;
+      }
+      if(game){
+        phase("RUNTIME MONTADO; APLICANDO WORLD FUSION…","loading");
+      }else if(frame?.srcdoc){
+        phase("INICIALIZANDO A INTERFACE WORD SLASH…","loading");
+      }
+      if(Date.now()-started>45000){
+        clearInterval(timer);
+        phase("TIMEOUT: O RUNTIME NÃO CONCLUIU A MONTAGEM.","error");
+      }
+    },250);
   }catch(error){
-    document.documentElement.dataset.probe="error";
-    document.documentElement.dataset.probeError=String(error?.message||error);
+    root.dataset.probe="error";
+    root.dataset.probeError=String(error?.message||error);
+    phase("ERRO: "+String(error?.message||error),"error");
     console.error(error);
   }
 })();
