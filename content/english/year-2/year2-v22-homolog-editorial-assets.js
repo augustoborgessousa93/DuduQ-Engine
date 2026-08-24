@@ -26,10 +26,7 @@
     "EN2-M6-03": raw("Orange  -laranja fruta.png", "Orange"),
     "EN2-M6-04": raw("Grapes - uvas.png", "Grapes"),
     "EN2-M6-05": raw("Papaya - mamão.png", "Papaya"),
-    "EN2-M6-06": raw("Melon - melão.png", "Melon"),
-    "EN2-M6-07": raw("Apple - maçã.png", "Maçã vermelha"),
-    "EN2-M6-08": raw("Banana.png", "Banana amarela"),
-    "EN2-M6-13": raw("Tomato - tomate.png", "Tomate vermelho")
+    "EN2-M6-06": raw("Melon - melão.png", "Melon")
   });
 
   const OPTION_VISUALS = Object.freeze({
@@ -111,7 +108,7 @@
     ...factory,
     buildModule,
     __editorialAssetsPatchApplied: true,
-    editorialAssetsPatchVersion: "1.2.0-homolog",
+    editorialAssetsPatchVersion: "1.1.0-homolog",
     exactEditorialAssetItems: EXACT_IDS
   });
 })();
