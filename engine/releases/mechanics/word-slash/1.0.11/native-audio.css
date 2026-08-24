@@ -1,0 +1,63 @@
+/* DUDUQ WORD SLASH 1.0.11 — native audio parity with Target Shooter 1.0.21 */
+html body #root .duduq-ws-audio[data-playing="true"] {
+  position: relative !important;
+  overflow: visible !important;
+  isolation: isolate !important;
+  border-color: #359500 !important;
+  background: linear-gradient(180deg,#70E90E 0%,#58CC02 62%,#49B900 100%) !important;
+  color: #1B5E20 !important;
+  box-shadow: 0 5px 0 #2F8A00,0 10px 20px rgba(57,156,0,.22),inset 0 2px 0 rgba(255,255,255,.36) !important;
+  filter: none !important;
+}
+
+html body #root .duduq-ws-audio[data-playing="true"] svg,
+html body #root .duduq-ws-audio[data-playing="true"] svg * {
+  color: #1B5E20 !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+html body #root .duduq-ws-audio-shell {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+html body #root .duduq-ws-audio-shell:has(.duduq-ws-audio[data-playing="true"])::before,
+html body #root .duduq-ws-audio-shell:has(.duduq-ws-audio[data-playing="true"])::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: 54px !important;
+  height: 54px !important;
+  margin: 0 !important;
+  border: 3px solid rgba(88,204,2,.72) !important;
+  border-radius: 999px !important;
+  box-sizing: border-box !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  transform: translate(-50%,-50%) scale(.88) !important;
+  transform-origin: 50% 50% !important;
+  opacity: 0;
+  animation: duduqWsNativeAudioWave111 1.30s cubic-bezier(.16,.72,.28,1) infinite !important;
+}
+
+html body #root .duduq-ws-audio-shell:has(.duduq-ws-audio[data-playing="true"])::after {
+  animation-delay: .42s !important;
+}
+
+@keyframes duduqWsNativeAudioWave111 {
+  0% { transform: translate(-50%,-50%) scale(.88); opacity:.78; }
+  18% { opacity:.62; }
+  68% { opacity:.16; }
+  100% { transform: translate(-50%,-50%) scale(1.58); opacity:0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body #root .duduq-ws-audio-shell:has(.duduq-ws-audio[data-playing="true"])::before,
+  html body #root .duduq-ws-audio-shell:has(.duduq-ws-audio[data-playing="true"])::after {
+    animation: none !important;
+    opacity: .30 !important;
+    transform: translate(-50%,-50%) scale(1.20) !important;
+  }
+}
