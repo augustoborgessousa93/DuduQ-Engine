@@ -15,6 +15,7 @@ on:
       - "scripts/qa-year2-visual-functional-base.mjs"
       - "scripts/qa-year2-m01-12-first-listen.mjs"
       - "scripts/audit-year2-commercial-readiness.mjs"
+      - "scripts/build-year2-production-plan.mjs"
       - "engine/channels/canary-v1.json"
       - ".github/workflows/year2-word-slash-homolog.yml"
   pull_request:
@@ -31,6 +32,7 @@ on:
       - "scripts/qa-year2-visual-functional-base.mjs"
       - "scripts/qa-year2-m01-12-first-listen.mjs"
       - "scripts/audit-year2-commercial-readiness.mjs"
+      - "scripts/build-year2-production-plan.mjs"
       - "engine/channels/canary-v1.json"
       - ".github/workflows/year2-word-slash-homolog.yml"
 
@@ -67,8 +69,20 @@ jobs:
       - name: Validate exact existing editorial assets
         run: node scripts/qa-year2-editorial-assets.mjs
 
+      - name: Build reusable asset and audio production plan
+        run: node scripts/build-year2-production-plan.mjs
+
       - name: Audit commercial assets and recorded audio
         run: node scripts/audit-year2-commercial-readiness.mjs
+
+      - name: Upload production plan
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year2-production-plan
+          path: artifacts/year2-production-plan
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: Upload commercial readiness audit
         if: always()
