@@ -91,6 +91,10 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"] .duduq-ws-instruction 
     min-height:0!important;max-height:none!important;flex:none!important;
     margin:0!important;justify-self:stretch!important;
   }
+  html.duduq-world-fusion .duduq-engine-stage .duduq-ws-arena::after{
+    left:-8%!important;right:-8%!important;bottom:-88px!important;height:180px!important;
+    border-radius:50% 50% 0 0!important;
+  }
 }
 @media(max-width:640px){
   .duduq-ws-surface{gap:12px!important;padding:2px!important}
