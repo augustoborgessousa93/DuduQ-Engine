@@ -13,6 +13,7 @@ on:
       - "scripts/qa-year2-visual-functional.mjs"
       - "scripts/qa-year2-visual-functional-base.mjs"
       - "scripts/qa-year2-m01-12-first-listen.mjs"
+      - "scripts/audit-year2-commercial-readiness.mjs"
       - "engine/channels/canary-v1.json"
       - ".github/workflows/year2-word-slash-homolog.yml"
   pull_request:
@@ -27,6 +28,7 @@ on:
       - "scripts/qa-year2-visual-functional.mjs"
       - "scripts/qa-year2-visual-functional-base.mjs"
       - "scripts/qa-year2-m01-12-first-listen.mjs"
+      - "scripts/audit-year2-commercial-readiness.mjs"
       - "engine/channels/canary-v1.json"
       - ".github/workflows/year2-word-slash-homolog.yml"
 
@@ -37,7 +39,7 @@ jobs:
   structural-gate:
     name: Structural pedagogical gate
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 7
 
     steps:
       - name: Checkout candidate
@@ -59,6 +61,18 @@ jobs:
 
       - name: Validate Year 2 M01-M06 v2.2 + Factory v1.2
         run: node scripts/qa-year2-all-v22-runtime.mjs
+
+      - name: Audit commercial assets and recorded audio
+        run: node scripts/audit-year2-commercial-readiness.mjs
+
+      - name: Upload commercial readiness audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year2-commercial-readiness
+          path: artifacts/year2-readiness
+          if-no-files-found: warn
+          retention-days: 14
 
   visual-functional-gate:
     name: Visual and functional gate
