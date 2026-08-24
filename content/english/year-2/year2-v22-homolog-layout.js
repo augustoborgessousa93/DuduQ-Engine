@@ -46,6 +46,14 @@
     }
   }
 
+  function stabilizeViewportTop() {
+    if (!isMobile()) return;
+    resetViewport();
+    window.requestAnimationFrame(resetViewport);
+    window.setTimeout(resetViewport, 60);
+    window.setTimeout(resetViewport, 180);
+  }
+
   function apply() {
     const mobile = isMobile();
     document.querySelectorAll("#root iframe").forEach((frame) => applyFrame(frame, mobile));
@@ -69,11 +77,11 @@
   window.addEventListener("duduq:engine-ready", schedule);
   window.addEventListener("duduq:step-start", function () {
     schedule();
-    window.requestAnimationFrame(resetViewport);
+    stabilizeViewportTop();
   });
   window.addEventListener("duduq:m1-12-first-listen-revealed", function () {
     schedule();
-    window.requestAnimationFrame(resetViewport);
+    stabilizeViewportTop();
   });
 
   if (document.readyState === "loading") {
