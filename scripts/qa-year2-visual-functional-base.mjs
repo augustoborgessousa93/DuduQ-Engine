@@ -70,7 +70,7 @@ for (let module = 1; module <= 6; module += 1) {
         const interactive = document.querySelectorAll('button,[role="button"],[draggable="true"],[tabindex],input,select,.duduq-dd2-item').length;
         return /Falha ao preparar|Modo editorial|\bErro\b/i.test(text) || (!/^Preparando\b/i.test(text) && interactive > 0);
       }, undefined, { timeout: 15000 });
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(1050);
 
       const frameMetrics = await frame.evaluate(() => {
         const doc = document.documentElement;
@@ -81,7 +81,8 @@ for (let module = 1; module <= 6; module += 1) {
           textSample: text.slice(0, 260),
           interactive: document.querySelectorAll('button,[role="button"],[draggable="true"],[tabindex],input,select,.duduq-dd2-item').length,
           scrollWidth: Math.max(doc?.scrollWidth || 0, body?.scrollWidth || 0),
-          clientWidth: doc?.clientWidth || 0
+          clientWidth: doc?.clientWidth || 0,
+          scrollY: Math.max(window.scrollY || 0, doc?.scrollTop || 0, body?.scrollTop || 0)
         };
       });
 
@@ -95,10 +96,15 @@ for (let module = 1; module <= 6; module += 1) {
 
       const mainMetrics = await page.evaluate(() => ({
         scrollWidth: document.documentElement.scrollWidth,
-        clientWidth: document.documentElement.clientWidth
+        clientWidth: document.documentElement.clientWidth,
+        scrollY: Math.max(window.scrollY || 0, document.documentElement.scrollTop || 0, document.body?.scrollTop || 0)
       }));
       check(mainMetrics.scrollWidth <= mainMetrics.clientWidth + 12, `M${mm}/${viewport.name}: overflow horizontal no host (${mainMetrics.scrollWidth}/${mainMetrics.clientWidth})`);
       check(frameMetrics.scrollWidth <= frameMetrics.clientWidth + 18, `M${mm}/${viewport.name}: overflow horizontal na mecânica (${frameMetrics.scrollWidth}/${frameMetrics.clientWidth})`);
+      if (viewport.name === "mobile") {
+        check(mainMetrics.scrollY <= 2, `M${mm}/mobile: host iniciou deslocado verticalmente (${mainMetrics.scrollY}px)`);
+        check(frameMetrics.scrollY <= 2, `M${mm}/mobile: mecânica iniciou deslocada verticalmente (${frameMetrics.scrollY}px)`);
+      }
       check(pageErrors.length === 0, `M${mm}/${viewport.name}: pageerror: ${pageErrors.join(" | ")}`);
 
       entry.pass = true;
