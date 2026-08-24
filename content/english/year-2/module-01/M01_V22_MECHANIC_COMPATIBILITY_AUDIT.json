@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "status": "homologation-audit",
+  "scope": "English Year 2 Module 01 v2.2",
+  "baseCanaryRevision": 143,
+  "purpose": "Impedir que a distribuição estética de mecânicas altere o construto pedagógico, especialmente em itens de escuta do 2º ano.",
+  "adapterCapabilities": {
+    "target-shooter@1.0.21": {
+      "questionAudio": true,
+      "optionAudio": false,
+      "questionImage": true,
+      "optionImageUrl": true,
+      "optionImageAssetKey": true,
+      "timerRequired": false,
+      "earlyLiteracy": true,
+      "decision": "Adequado para escuta com alternativas curtas, letras/símbolos ou forte apoio visual. Evitar quando alternativas longas precisam de áudio para que leitura não vire barreira."
+    },
+    "matching@1.0.23": {
+      "questionAudio": true,
+      "optionAudio": true,
+      "questionImage": true,
+      "optionImageUrl": true,
+      "optionImageAssetKey": true,
+      "earlyLiteracy": true,
+      "decision": "Preferir em itens auditivos com alternativas verbais mais longas quando é necessário disponibilizar áudio nas opções."
+    },
+    "bubble-pop@1.0.31": {
+      "questionAudio": true,
+      "alternativeSpeechText": true,
+      "minimumAlternatives": 2,
+      "decision": "Adequado para letras, símbolos e chunks curtos. Não usar como principal evidência em respostas longas nem quando velocidade/motricidade pode dominar o desempenho."
+    },
+    "drag-drop@2.0.22": {
+      "sequence": true,
+      "itemAudio": true,
+      "targetAudio": true,
+      "instructionAudio": true,
+      "decision": "Adequado ao EN2-M1-12 porque a v2.2 pede escuta de L-E-O e trabalho com letras móveis; preservar ordem auditiva e não revelar as letras antes da primeira escuta."
+    },
+    "word-slash@1.0.17": {
+      "questionAudio": true,
+      "optionAudio": false,
+      "earlyLiteracy": true,
+      "speedBased": true,
+      "decision": "Somente piloto EN2-M1-08 nesta etapa. O alvo é uma letra isolada ouvida; velocidade reduzida, meta curta e sem penalidade."
+    }
+  },
+  "itemOverridesAfterCapabilityAudit": {
+    "EN2-M1-11": {
+      "previousPlan": "target-shooter",
+      "approvedPlan": "matching",
+      "reason": "A habilidade é escuta, mas as quatro alternativas são perguntas completas. Target Shooter não suporta optionAudio; Matching suporta. As opções devem poder ser ouvidas para evitar que leitura autônoma de sentença se torne requisito oculto."
+    },
+    "EN2-M1-13": {
+      "previousPlan": "target-shooter",
+      "approvedPlan": "matching",
+      "reason": "O item avalia compreensão de mini diálogo e possui alternativas de tamanho desigual. Matching permite áudio nas opções; isso preserva a escuta como evidência principal."
+    }
+  },
+  "approvedDistribution": {
+    "target-shooter": 5,
+    "matching": 4,
+    "bubble-pop": 4,
+    "word-slash": 1,
+    "drag-drop": 1,
+    "total": 15,
+    "maximumShare": 0.3333
+  },
+  "gates": [
+    "Nenhum item de escuta com alternativa longa pode depender exclusivamente de leitura se existir mecânica compatível com optionAudio.",
+    "Word Slash não pode ser aplicado a tarefas de sequência ou construção.",
+    "Drag & Drop de sequência deve preservar primeira escuta sem revelar L-E-O visualmente.",
+    "Bubble Pop e Word Slash devem ser testados quanto a carga motora/temporal em tela menor.",
+    "O runtime oficial permanece intocado até o M01 v2.2 homologado passar pelos gates estrutural, visual e funcional."
+  ]
+}
