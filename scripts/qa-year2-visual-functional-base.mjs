@@ -76,13 +76,22 @@ for (let module = 1; module <= 6; module += 1) {
         const doc = document.documentElement;
         const body = document.body;
         const text = (body?.innerText || "").trim();
+        const responseTarget = document.querySelector('.duduq-dd2-target[data-kind="response"]');
+        const responseRect = responseTarget?.getBoundingClientRect();
+        const itemRects = Array.from(document.querySelectorAll('.duduq-dd2-item,.duduq-dd-item,[draggable="true"]')).map((node) => {
+          const rect = node.getBoundingClientRect();
+          return { top: rect.top, bottom: rect.bottom, width: rect.width, height: rect.height };
+        });
         return {
           textLength: text.length,
           textSample: text.slice(0, 260),
           interactive: document.querySelectorAll('button,[role="button"],[draggable="true"],[tabindex],input,select,.duduq-dd2-item').length,
           scrollWidth: Math.max(doc?.scrollWidth || 0, body?.scrollWidth || 0),
           clientWidth: doc?.clientWidth || 0,
-          scrollY: Math.max(window.scrollY || 0, doc?.scrollTop || 0, body?.scrollTop || 0)
+          scrollY: Math.max(window.scrollY || 0, doc?.scrollTop || 0, body?.scrollTop || 0),
+          innerHeight: window.innerHeight,
+          responseTarget: responseRect ? { top: responseRect.top, bottom: responseRect.bottom, width: responseRect.width, height: responseRect.height } : null,
+          itemRects
         };
       });
 
@@ -104,6 +113,11 @@ for (let module = 1; module <= 6; module += 1) {
       if (viewport.name === "mobile") {
         check(mainMetrics.scrollY <= 2, `M${mm}/mobile: host iniciou deslocado verticalmente (${mainMetrics.scrollY}px)`);
         check(frameMetrics.scrollY <= 2, `M${mm}/mobile: mecânica iniciou deslocada verticalmente (${frameMetrics.scrollY}px)`);
+        if (frameMetrics.responseTarget) {
+          check(frameMetrics.responseTarget.height <= 150, `M${mm}/mobile: alvo de resposta continua alto demais (${frameMetrics.responseTarget.height}px)`);
+          const visibleItems = frameMetrics.itemRects.filter((rect) => rect.top >= -2 && rect.bottom <= frameMetrics.innerHeight + 2).length;
+          check(visibleItems >= Math.min(4, frameMetrics.itemRects.length), `M${mm}/mobile: alternativas do Drag & Drop não ficam visíveis no primeiro viewport (${visibleItems}/${frameMetrics.itemRects.length})`);
+        }
       }
       check(pageErrors.length === 0, `M${mm}/${viewport.name}: pageerror: ${pageErrors.join(" | ")}`);
 
