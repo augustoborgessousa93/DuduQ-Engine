@@ -35,8 +35,43 @@
       margin: 0 !important;
       font-size: 12px !important;
     }
+
+    .duduq-dd2-targets:has(.duduq-dd2-target[data-kind="spell-slot"]) {
+      grid-template-columns: repeat(3, minmax(0, 112px)) !important;
+      justify-content: center !important;
+      align-items: stretch !important;
+      gap: 10px !important;
+    }
+    .duduq-dd2-target[data-kind="spell-slot"] {
+      width: 112px !important;
+      min-width: 0 !important;
+      min-height: 0 !important;
+      aspect-ratio: 1 / 1 !important;
+      padding: 8px !important;
+      gap: 4px !important;
+      border-radius: 18px !important;
+    }
+    .duduq-dd2-target[data-kind="spell-slot"] .duduq-dd2-target-head {
+      min-height: 22px !important;
+      padding: 0 !important;
+      justify-content: center !important;
+    }
+    .duduq-dd2-target[data-kind="spell-slot"] .duduq-dd2-zone {
+      min-height: 0 !important;
+      height: auto !important;
+      flex: 1 1 auto !important;
+      padding: 4px !important;
+      border-radius: 12px !important;
+    }
+    .duduq-dd2-target[data-kind="spell-slot"] .duduq-dd2-empty {
+      margin: 0 !important;
+      font-size: 11px !important;
+      line-height: 1.1 !important;
+    }
+
     @media (max-width: 640px) {
-      .duduq-dd2-root:has(.duduq-dd2-target[data-kind="response"]) .duduq-dd2-arena {
+      .duduq-dd2-root:has(.duduq-dd2-target[data-kind="response"]) .duduq-dd2-arena,
+      .duduq-dd2-root:has(.duduq-dd2-target[data-kind="spell-slot"]) .duduq-dd2-arena {
         gap: 10px !important;
       }
       .duduq-dd2-targets:has(.duduq-dd2-target[data-kind="response"]) {
@@ -54,11 +89,25 @@
         min-height: 52px !important;
         padding: 5px 7px !important;
       }
-      .duduq-dd2-root:has(.duduq-dd2-target[data-kind="list"]) .duduq-dd2-arena {
-        gap: 8px !important;
+
+      .duduq-dd2-targets:has(.duduq-dd2-target[data-kind="spell-slot"]) {
+        grid-template-columns: repeat(3, minmax(0, 86px)) !important;
+        gap: 7px !important;
       }
-      .duduq-dd2-target[data-kind="list"] {
-        padding-top: 14px !important;
+      .duduq-dd2-target[data-kind="spell-slot"] {
+        width: 86px !important;
+        padding: 6px !important;
+        border-radius: 15px !important;
+      }
+      .duduq-dd2-target[data-kind="spell-slot"] .duduq-dd2-target-head {
+        min-height: 18px !important;
+      }
+      .duduq-dd2-target[data-kind="spell-slot"] .duduq-dd2-zone {
+        padding: 3px !important;
+        border-radius: 10px !important;
+      }
+      .duduq-dd2-target[data-kind="spell-slot"] .duduq-dd2-empty {
+        font-size: 10px !important;
       }
     }
   `;
