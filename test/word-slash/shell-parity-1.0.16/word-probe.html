@@ -51,14 +51,13 @@
       const game=doc?.querySelector(".duduq-ws-root");
       const fusion=doc?.documentElement?.classList.contains("duduq-world-fusion");
       const profile=doc?.documentElement?.getAttribute("data-duduq-literacy-early");
-      if(game&&fusion&&profile!==null){
+      if(game){
+        root.dataset.probeFusion=fusion&&profile!==null?"ready":"pending";
         clearInterval(timer);
         phase("","ready");
         return;
       }
-      if(game){
-        phase("RUNTIME MONTADO; APLICANDO WORLD FUSION…","loading");
-      }else if(frame?.srcdoc){
+      if(frame?.srcdoc){
         phase("INICIALIZANDO A INTERFACE WORD SLASH…","loading");
       }
       if(Date.now()-started>45000){
