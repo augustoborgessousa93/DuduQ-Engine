@@ -1,0 +1,20 @@
+/* DuduQ Bubble Pop 1.0.26 — paridade geométrica do subcard de enunciado.
+   Escopo deliberadamente restrito: não altera bolhas, arena, áudio ou conteúdo. */
+html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction {
+  min-height: 66px !important;
+  grid-template-columns: 48px minmax(0, 1fr) 48px !important;
+  align-items: center !important;
+  column-gap: clamp(8px, 1.4vw, 14px) !important;
+  row-gap: clamp(8px, 1.4vw, 14px) !important;
+  padding: 7px 13px 10px !important;
+}
+
+@media (max-width: 640px) {
+  html body .duduq-engine-stage .duduq-bp-root .duduq-bp-instruction {
+    min-height: 62px !important;
+    grid-template-columns: 38px minmax(0, 1fr) 44px !important;
+    column-gap: 7px !important;
+    row-gap: 7px !important;
+    padding: 7px 9px 10px !important;
+  }
+}
