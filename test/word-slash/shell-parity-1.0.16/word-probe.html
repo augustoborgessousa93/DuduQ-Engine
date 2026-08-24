@@ -13,7 +13,7 @@
 <script id="duduq-world-fusion-core-script" src="../../../engine/releases/core/1.0.9/duduq-world-fusion.js?v=150"></script>
 <script id="duduq-audio-native-standard-script" src="../../../engine/releases/core/1.0.10-candidate/duduq-audio-native.js"></script>
 <script src="../../../engine/releases/core/1.0.9/duduq-host.js"></script>
-<script src="../../../engine/releases/mechanics/word-slash/1.0.16/word-slash.js?probe=1161"></script>
+<script src="../../../engine/releases/mechanics/word-slash/1.0.16/word-slash.js?probe=1163"></script>
 </head>
 <body>
 <div id="probe-status" data-state="loading">CARREGANDO WORD SLASH 1.0.16…</div>
@@ -51,13 +51,15 @@
       const game=doc?.querySelector(".duduq-ws-root");
       const fusion=doc?.documentElement?.classList.contains("duduq-world-fusion");
       const profile=doc?.documentElement?.getAttribute("data-duduq-literacy-early");
-      if(game){
-        root.dataset.probeFusion=fusion&&profile!==null?"ready":"pending";
+      root.dataset.probeFusion=fusion&&profile!==null?"ready":"pending";
+      if(game&&fusion&&profile!==null){
         clearInterval(timer);
         phase("","ready");
         return;
       }
-      if(frame?.srcdoc){
+      if(game){
+        phase("RUNTIME MONTADO; APLICANDO WORLD FUSION…","loading");
+      }else if(frame?.srcdoc){
         phase("INICIALIZANDO A INTERFACE WORD SLASH…","loading");
       }
       if(Date.now()-started>45000){
