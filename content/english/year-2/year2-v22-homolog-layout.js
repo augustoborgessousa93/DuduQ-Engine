@@ -4,6 +4,7 @@
 
   const MARKER = "data-duduq-year2-homolog-mobile-frame";
   const MOBILE_QUERY = "(max-width: 640px)";
+  /* O mínimo anterior de 520px eliminou o iframe padrão de 150px, mas ainda comprimia o chrome da mecânica. */
   const MOBILE_HEIGHT = "max(680px, 100dvh)";
 
   function isMobile() {
