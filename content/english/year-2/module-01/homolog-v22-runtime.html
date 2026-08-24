@@ -23,9 +23,14 @@
       sourceVersion: "2.2",
       factorySpec: "1.2",
       sourceItems: 15,
-      runnableItems: 14,
-      blockedItems: ["EN2-M1-12"],
-      blocker: "Primeira escuta de L-E-O deve ocorrer sem revelar letras.",
+      runnableItems: 15,
+      blockedItems: [],
+      firstListenGate: {
+        itemId: "EN2-M1-12",
+        rule: "Primeira escuta sem revelar letras; letras móveis somente após o áudio.",
+        implementation: "homologation-only-parent-gate",
+        commercialRecordedAudioRequired: true
+      },
       productionIndexUntouched: true,
       productionModuleUntouched: true
     });
@@ -33,6 +38,7 @@
 
   <script src="../year2-v22-homolog-core.js?v=1"></script>
   <script src="../year2-v22-homolog-layout.js?v=1"></script>
+  <script src="./m1-12-first-listen-gate.js?v=1"></script>
   <script>
     (function () {
       "use strict";
