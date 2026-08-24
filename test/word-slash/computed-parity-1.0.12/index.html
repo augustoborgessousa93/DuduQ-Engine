@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>DuduQ — Auditoria Computed Style Word Slash 1.0.12</title>
+  <title>DuduQ — Auditoria Estável Computed Style Word Slash 1.0.12</title>
   <style>
     *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,sans-serif;background:#eef6fb;color:#17375e}
     body{padding:20px}.report{width:min(1080px,100%);margin:auto;background:#fff;border:2px solid #c8d9e9;border-radius:22px;padding:20px;box-shadow:0 14px 34px rgba(31,65,99,.11)}
@@ -17,16 +17,17 @@
 <body>
   <main class="report">
     <h1>Paridade tipográfica — Word Slash 1.0.12 × Target Shooter 1.0.21</h1>
-    <p class="muted">Os dois testes abaixo usam viewport interno idêntico de 1039×732. A aprovação exige igualdade dos seis campos de Computed Style.</p>
-    <div id="status" class="status wait">AGUARDANDO RENDERIZAÇÃO…</div>
+    <p class="muted">Os dois testes usam viewport interno idêntico de 1039×732. A medição só é liberada depois que o World Fusion está carregado e os estilos permanecem estáveis por quatro ciclos consecutivos.</p>
+    <div id="status" class="status wait">AGUARDANDO WORLD FUSION E ESTABILIZAÇÃO…</div>
     <table>
       <thead><tr><th>Propriedade</th><th>Target Shooter</th><th>Word Slash</th><th>Resultado</th></tr></thead>
       <tbody id="rows"></tbody>
     </table>
     <p id="attrs" class="muted"></p>
+    <p id="diagnostic" class="muted"></p>
     <div class="previews">
-      <div class="preview"><span class="label">Target Shooter 1.0.21</span><iframe id="target" src="../../target-shooter/candidate-1.0.21/?parity=1" title="Target Shooter"></iframe></div>
-      <div class="preview"><span class="label">Word Slash 1.0.12</span><iframe id="word" src="../candidate-1.0.12/?parity=1" title="Word Slash"></iframe></div>
+      <div class="preview"><span class="label">Target Shooter 1.0.21</span><iframe id="target" src="../../target-shooter/candidate-1.0.21/?parity=stable" title="Target Shooter"></iframe></div>
+      <div class="preview"><span class="label">Word Slash 1.0.12</span><iframe id="word" src="../candidate-1.0.12/?parity=stable" title="Word Slash"></iframe></div>
     </div>
   </main>
 <script>
@@ -34,7 +35,7 @@
   "use strict";
   const fields=["fontFamily","fontSize","fontWeight","lineHeight","letterSpacing","textTransform"];
   const labels={fontFamily:"font-family",fontSize:"font-size",fontWeight:"font-weight",lineHeight:"line-height",letterSpacing:"letter-spacing",textTransform:"text-transform"};
-  const target=document.getElementById("target"),word=document.getElementById("word"),rows=document.getElementById("rows"),status=document.getElementById("status"),attrs=document.getElementById("attrs");
+  const target=document.getElementById("target"),word=document.getElementById("word"),rows=document.getElementById("rows"),status=document.getElementById("status"),attrs=document.getElementById("attrs"),diagnostic=document.getElementById("diagnostic");
 
   function mechanicDoc(frame){
     try{
@@ -44,15 +45,38 @@
       return nested?.contentDocument || outer;
     }catch(_){return null}
   }
+
+  function worldFusionReady(doc){
+    if(!doc?.documentElement)return false;
+    const html=doc.documentElement;
+    const link=doc.getElementById("duduq-world-fusion-style");
+    let sheetReady=false;
+    try{sheetReady=Boolean(link&&link.sheet)}catch(_){sheetReady=Boolean(link)}
+    return html.classList.contains("duduq-world-fusion") &&
+      html.getAttribute("data-duduq-world-fusion-version") &&
+      html.getAttribute("data-duduq-literacy-early")!==null &&
+      sheetReady;
+  }
+
   function sample(frame,selector){
     const doc=mechanicDoc(frame); if(!doc)return null;
     const node=doc.querySelector(selector); if(!node)return null;
     const cs=doc.defaultView.getComputedStyle(node);
     const out={}; fields.forEach(k=>out[k]=cs[k]);
-    out.year=doc.documentElement.getAttribute("data-duduq-ano-ativo")||"";
-    out.literacy=doc.documentElement.getAttribute("data-duduq-literacy-early")||"";
+    const html=doc.documentElement;
+    out.year=html.getAttribute("data-duduq-ano-ativo")||"";
+    out.literacy=html.getAttribute("data-duduq-literacy-early")||"";
+    out.fusion=html.classList.contains("duduq-world-fusion");
+    out.fusionVersion=html.getAttribute("data-duduq-world-fusion-version")||"";
+    out.styleReady=worldFusionReady(doc);
     return out;
   }
+
+  function signature(value){
+    if(!value)return "";
+    return JSON.stringify(fields.map(k=>value[k]).concat([value.year,value.literacy,value.fusion,value.fusionVersion,value.styleReady]));
+  }
+
   function render(a,b){
     let all=true; rows.innerHTML="";
     fields.forEach(function(k){
@@ -61,20 +85,41 @@
       tr.innerHTML="<td>"+labels[k]+"</td><td>"+a[k]+"</td><td>"+b[k]+"</td><td class='"+(same?"same":"different")+"'>"+(same?"PASS":"FAIL")+"</td>";
       rows.appendChild(tr);
     });
-    const semantic=a.year===b.year && a.literacy===b.literacy;
+    const semantic=a.year===b.year && a.literacy===b.literacy && a.fusion===true && b.fusion===true && a.styleReady===true && b.styleReady===true;
     all=all&&semantic;
     attrs.textContent="Perfil semântico — Target: ano="+a.year+", literacy-early="+a.literacy+" | Word Slash: ano="+b.year+", literacy-early="+b.literacy;
+    diagnostic.textContent="World Fusion — Target: class="+a.fusion+", css="+(a.styleReady?"loaded":"pending")+", versão="+a.fusionVersion+" | Word Slash: class="+b.fusion+", css="+(b.styleReady?"loaded":"pending")+", versão="+b.fusionVersion;
     status.className="status "+(all?"pass":"fail");
-    status.textContent=all?"PASS — COMPUTED STYLE IDÊNTICO":"FAIL — AINDA EXISTE DIVERGÊNCIA";
+    status.textContent=all?"PASS — COMPUTED STYLE IDÊNTICO E ESTÁVEL":"FAIL — DIVERGÊNCIA CONFIRMADA APÓS ESTABILIZAÇÃO";
     document.documentElement.dataset.parity=all?"pass":"fail";
   }
-  let attempts=0;
+
+  let attempts=0,stableCycles=0,lastPair="";
   const timer=setInterval(function(){
     attempts++;
     const a=sample(target,".duduq-ts-instruction h2");
     const b=sample(word,".duduq-ws-instruction h2");
-    if(a&&b){clearInterval(timer);render(a,b);return}
-    if(attempts>160){clearInterval(timer);status.className="status fail";status.textContent="FALHA — NÃO FOI POSSÍVEL CAPTURAR OS DOIS H2"}
+
+    if(!a||!b){
+      stableCycles=0; lastPair="";
+      status.textContent="AGUARDANDO OS DOIS ENUNCIADOS…";
+    }else if(!a.styleReady||!b.styleReady){
+      stableCycles=0; lastPair="";
+      status.textContent="AGUARDANDO WORLD FUSION CSS…";
+      diagnostic.textContent="Target css="+(a.styleReady?"loaded":"pending")+" | Word Slash css="+(b.styleReady?"loaded":"pending");
+    }else{
+      const pair=signature(a)+"||"+signature(b);
+      if(pair===lastPair)stableCycles++; else{lastPair=pair;stableCycles=1}
+      status.textContent="ESTABILIZANDO COMPUTED STYLE… "+stableCycles+"/4";
+      if(stableCycles>=4){clearInterval(timer);render(a,b);return}
+    }
+
+    if(attempts>200){
+      clearInterval(timer);
+      status.className="status fail";
+      status.textContent="FALHA — ESTILOS NÃO ESTABILIZARAM EM TEMPO HÁBIL";
+      document.documentElement.dataset.parity="timeout";
+    }
   },200);
 })();
 </script>
