@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR" data-duduq-homologation="word-slash-1.0.17">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>DuduQ — Homologação Word Slash 1.0.17</title>
+  <style>
+    html, body { margin: 0; width: 100%; height: 100%; }
+    body { overflow: hidden; background: #eef6fb; }
+    #root { width: 100%; height: 100%; }
+    html[data-duduq-homologation="word-slash-1.0.17"] .duduq-intro { opacity: 0 !important; pointer-events: none !important; }
+  </style>
+</head>
+<body>
+  <div id="root">Preparando homologação do Word Slash 1.0.17...</div>
+  <script>
+    window.DUDUQ_ENGINE_BASE = new URL("../../..", window.location.href).href.replace(/\/$/, "");
+    window.DUDUQ_GAME_CONFIG = Object.freeze({
+      engineBase: window.DUDUQ_ENGINE_BASE,
+      channel: "homolog-word-slash-1.0.17",
+      label: "DuduQ — Homologação Word Slash 1.0.17",
+      modulePath: ["test", "wordSlash101"],
+      requiredMechanics: ["word-slash"],
+      contentScript: "../candidate-1.0.1/word-slash-test-content.js?v=16"
+    });
+  </script>
+  <script>
+    (function () {
+      "use strict";
+      const stamp = Date.now();
+      function loadScript(src) {
+        return new Promise(function (resolve, reject) {
+          const script = document.createElement("script");
+          script.src = src + "?t=" + stamp;
+          script.async = false;
+          script.onload = resolve;
+          script.onerror = function () { reject(new Error("Falha ao carregar " + src)); };
+          document.head.appendChild(script);
+        });
+      }
+      function installAutoStart() {
+        if (new URLSearchParams(window.location.search).get("intro") === "1") {
+          document.documentElement.removeAttribute("data-duduq-homologation");
+          return;
+        }
+        let attempts = 0;
+        let timer = null;
+        function clickStart() {
+          const button = document.querySelector(".duduq-intro-start-button");
+          if (button && !button.disabled) {
+            if (timer !== null) window.clearInterval(timer);
+            timer = null;
+            button.click();
+            return true;
+          }
+          return false;
+        }
+        document.addEventListener("duduq:intro-ready", function () { window.setTimeout(clickStart, 20); });
+        timer = window.setInterval(function () {
+          attempts += 1;
+          if (clickStart() || attempts > 200) {
+            if (timer !== null) window.clearInterval(timer);
+            timer = null;
+          }
+        }, 25);
+      }
+      loadScript("../../../engine/duduq-player-v1.js")
+        .then(function () { installAutoStart(); return loadScript("../../../engine/duduq-loader-v1.js"); })
+        .catch(function (error) {
+          console.error("[DuduQ Word Slash 1.0.17 Homologation]", error);
+          const root = document.getElementById("root");
+          if (root) root.textContent = "Erro ao carregar a homologação do Word Slash 1.0.17.";
+        });
+    })();
+  </script>
+</body>
+</html>
