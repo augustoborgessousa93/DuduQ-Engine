@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>DuduQ — Registro Direto Word Slash 1.0.13</title>
+  <style>
+    html,body{margin:0;min-height:100%;font-family:system-ui,sans-serif;background:#eef6fb;color:#17375e}
+    body{display:grid;place-items:center;min-height:100vh;padding:24px;box-sizing:border-box;isolation:isolate}
+    .card{position:relative;z-index:10;width:min(680px,92vw);background:#fff;border:2px solid #c8d9e9;border-radius:24px;padding:32px;box-shadow:0 16px 42px rgba(31,65,99,.14);text-align:center}
+    .ok{color:#16723a}.fail{color:#b42318}.muted{color:#61758a;font-weight:650}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1 id="status">Verificando registro direto…</h1>
+    <p id="detail" class="muted">A 1.0.13 deve registrar de forma síncrona e manter o Canary fora deste teste.</p>
+  </main>
+  <script>
+    window.DUDUQ_ENGINE_BASE = new URL("../../..", window.location.href).href.replace(/\/$/, "");
+    window.__DUDUQ_DIRECT_REGISTRATION_ERROR__ = "";
+    window.addEventListener("error", function (event) {
+      if (event && event.message) window.__DUDUQ_DIRECT_REGISTRATION_ERROR__ = String(event.message);
+    });
+  </script>
+  <script src="../../../engine/releases/core/1.0.9/duduq-host.js?t=ws113-direct"></script>
+  <script src="../../../engine/releases/mechanics/word-slash/1.0.13/word-slash.js?t=ws113-direct"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      const status = document.getElementById("status");
+      const detail = document.getElementById("detail");
+      const mechanic = window.DuduQ?.getMechanic?.("word-slash");
+      if (mechanic && mechanic.version === "1.0.13") {
+        status.className = "ok";
+        status.textContent = "REGISTRO OK — Word Slash 1.0.13";
+        detail.textContent = "Registro síncrono confirmado; shell principal usa a geometria canônica do Target Shooter 1.0.21.";
+        return;
+      }
+      status.className = "fail";
+      status.textContent = "FALHA DE REGISTRO";
+      const runtimeError = window.__DUDUQ_DIRECT_REGISTRATION_ERROR__;
+      detail.textContent = runtimeError ? ("Erro capturado: " + runtimeError) : (mechanic ? ("Versão registrada: " + mechanic.version) : "A mecânica word-slash não foi registrada.");
+    });
+  </script>
+</body>
+</html>
