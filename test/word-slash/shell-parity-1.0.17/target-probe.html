@@ -6,12 +6,11 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Target Shooter 1.0.21 — Shell Probe</title>
 <style>html,body,#mount{margin:0;width:100%;height:100%;overflow:hidden}body{background:#eef6fb}#probe-status{position:fixed;inset:0;z-index:999999;display:grid;place-items:center;padding:28px;box-sizing:border-box;background:linear-gradient(145deg,#f7fbff,#e6f3fb);color:#17375e;font:900 18px/1.4 Nunito,system-ui,sans-serif;text-align:center}#probe-status[data-state="ready"]{display:none}#probe-status[data-state="error"]{color:#a61b12;background:#fff1f0}</style>
-<link rel="preload" href="../../../engine/releases/mechanics/target-shooter/1.0.21/DUDUQ_TARGET_SHOOTER.html?engineAdapter=1.0.21" as="fetch" crossorigin="anonymous">
 <link id="duduq-world-fusion-core-style" rel="stylesheet" href="../../../engine/releases/core/1.0.9/duduq-world-fusion.css?v=147">
 <script>window.DUDUQ_ENGINE_BASE=new URL("../../../..",location.href).href.replace(/\/$/,"");</script>
 <script id="duduq-world-fusion-core-script" src="../../../engine/releases/core/1.0.9/duduq-world-fusion.js?v=150"></script>
 <script src="../../../engine/releases/core/1.0.9/duduq-host.js"></script>
-<script src="../../../engine/releases/mechanics/target-shooter/1.0.21/target-shooter.js?probe=1211"></script>
+<script src="../../../engine/releases/mechanics/target-shooter/1.0.21/target-shooter.js?probe=1212"></script>
 </head>
 <body>
 <div id="probe-status" data-state="loading">CARREGANDO TARGET SHOOTER 1.0.21…</div>
@@ -31,6 +30,8 @@
     const started=Date.now();
     const timer=setInterval(function(){
       const frame=mount.querySelector(".duduq-mechanic-frame iframe");
+      if(frame&&!frame.dataset.probeFusionHook){frame.dataset.probeFusionHook="true";frame.addEventListener("load",function(){try{window.DuduQWorldFusion?.refresh?.()}catch(_){}})}
+      if(frame){try{window.DuduQWorldFusion?.refresh?.()}catch(_){}}
       let doc=null;try{doc=frame?.contentDocument||null}catch(_){}
       if(mount.textContent.includes("Erro ao preparar a atividade")){
         clearInterval(timer);phase("FALHA AO CARREGAR O RUNTIME TARGET SHOOTER 1.0.21.","error");return;
@@ -42,7 +43,7 @@
       if(game&&fusion&&profile!==null){clearInterval(timer);phase("","ready");return}
       if(game){phase("TARGET MONTADO; APLICANDO WORLD FUSION…","loading")}
       else if(frame?.srcdoc){phase("INICIALIZANDO A INTERFACE TARGET SHOOTER…","loading")}
-      if(Date.now()-started>45000){clearInterval(timer);phase("TIMEOUT: O TARGET SHOOTER NÃO CONCLUIU A MONTAGEM.","error")}
+      if(Date.now()-started>60000){clearInterval(timer);phase("TIMEOUT: O TARGET SHOOTER NÃO CONCLUIU A MONTAGEM.","error")}
     },250);
   }catch(error){root.dataset.probe="error";root.dataset.probeError=String(error?.message||error);phase("ERRO: "+String(error?.message||error),"error");console.error(error)}
 })();
