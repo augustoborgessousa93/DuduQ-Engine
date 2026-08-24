@@ -57,10 +57,41 @@ for (let module = 1; module <= 6; module += 1) {
         try { window.DuduQIntro?.hide?.({ immediate: true, reason: "qa-after-start" }); } catch (_) {}
         try { window.DuduQTransition?.hideImmediate?.(); } catch (_) {}
       });
-      await page.waitForTimeout(1000);
 
       const iframe = page.locator("iframe").first();
       await iframe.waitFor({ state: "visible", timeout: 10000 });
+
+      const frame = page.frames().find((candidate) => candidate !== page.mainFrame() && /engine\/releases\/mechanics\//.test(candidate.url())) || page.frames().find((candidate) => candidate !== page.mainFrame());
+      check(frame, `M${mm}/${viewport.name}: frame da mecânica não localizado`);
+      await frame.waitForLoadState("domcontentloaded", { timeout: 15000 }).catch(() => {});
+
+      await frame.waitForFunction(() => {
+        const text = (document.body?.innerText || "").trim();
+        const interactive = document.querySelectorAll('button,[role="button"],[draggable="true"],[tabindex],input,select,.duduq-dd2-item').length;
+        return /Falha ao preparar|Modo editorial|\bErro\b/i.test(text) || (!/^Preparando\b/i.test(text) && interactive > 0);
+      }, undefined, { timeout: 15000 });
+      await page.waitForTimeout(700);
+
+      const frameMetrics = await frame.evaluate(() => {
+        const doc = document.documentElement;
+        const body = document.body;
+        const text = (body?.innerText || "").trim();
+        const interactive = document.querySelectorAll('button,[role="button"],[draggable="true"],[tabindex],input,select,.duduq-dd2-item').length;
+        return {
+          textLength: text.length,
+          textSample: text.slice(0, 260),
+          interactive,
+          scrollWidth: Math.max(doc?.scrollWidth || 0, body?.scrollWidth || 0),
+          clientWidth: doc?.clientWidth || 0,
+          scrollHeight: Math.max(doc?.scrollHeight || 0, body?.scrollHeight || 0),
+          clientHeight: doc?.clientHeight || 0
+        };
+      });
+
+      check(frameMetrics.textLength > 0, `M${mm}/${viewport.name}: mecânica sem conteúdo textual/semântica carregada`);
+      check(!/Falha ao preparar|Modo editorial|\bErro\b/i.test(frameMetrics.textSample), `M${mm}/${viewport.name}: mecânica exibiu erro: ${frameMetrics.textSample}`);
+      check(frameMetrics.interactive > 0, `M${mm}/${viewport.name}: nenhum controle interativo detectado`);
+
       const box = await iframe.boundingBox();
       check(box && box.width >= Math.min(300, viewport.width - 24), `M${mm}/${viewport.name}: iframe estreito demais (${box?.width || 0}px)`);
       check(box && box.height >= 220, `M${mm}/${viewport.name}: iframe baixo demais (${box?.height || 0}px)`);
@@ -72,37 +103,13 @@ for (let module = 1; module <= 6; module += 1) {
         clientHeight: document.documentElement.clientHeight
       }));
       check(mainMetrics.scrollWidth <= mainMetrics.clientWidth + 12, `M${mm}/${viewport.name}: overflow horizontal no host (${mainMetrics.scrollWidth}/${mainMetrics.clientWidth})`);
-
-      const frame = page.frames().find((candidate) => candidate !== page.mainFrame() && /engine\/releases\/mechanics\//.test(candidate.url())) || page.frames().find((candidate) => candidate !== page.mainFrame());
-      check(frame, `M${mm}/${viewport.name}: frame da mecânica não localizado`);
-      await frame.waitForLoadState("domcontentloaded", { timeout: 15000 }).catch(() => {});
-      await page.waitForTimeout(700);
-
-      const frameMetrics = await frame.evaluate(() => {
-        const doc = document.documentElement;
-        const body = document.body;
-        const text = (body?.innerText || "").trim();
-        const interactive = document.querySelectorAll('button,[role="button"],[draggable="true"],[tabindex],input,select,.duduq-dd2-item').length;
-        return {
-          textLength: text.length,
-          textSample: text.slice(0, 180),
-          interactive,
-          scrollWidth: Math.max(doc?.scrollWidth || 0, body?.scrollWidth || 0),
-          clientWidth: doc?.clientWidth || 0,
-          scrollHeight: Math.max(doc?.scrollHeight || 0, body?.scrollHeight || 0),
-          clientHeight: doc?.clientHeight || 0
-        };
-      });
-
-      check(frameMetrics.textLength > 0, `M${mm}/${viewport.name}: mecânica sem conteúdo textual/semântica carregada`);
-      check(!/^Erro\b/i.test(frameMetrics.textSample), `M${mm}/${viewport.name}: mecânica exibiu erro: ${frameMetrics.textSample}`);
-      check(frameMetrics.interactive > 0, `M${mm}/${viewport.name}: nenhum controle interativo detectado`);
       check(frameMetrics.scrollWidth <= frameMetrics.clientWidth + 18, `M${mm}/${viewport.name}: overflow horizontal na mecânica (${frameMetrics.scrollWidth}/${frameMetrics.clientWidth})`);
       check(pageErrors.length === 0, `M${mm}/${viewport.name}: pageerror: ${pageErrors.join(" | ")}`);
 
       entry.pass = true;
       entry.mainMetrics = mainMetrics;
       entry.frameMetrics = frameMetrics;
+      entry.iframe = box;
       entry.consoleErrors = consoleErrors;
       console.log(`PASS M${mm}/${viewport.name}`);
     } catch (error) {
