@@ -55,6 +55,7 @@ function audio(question) {
 run("content/english/year-2/year2-v22-homolog-core.js");
 run("content/english/year-2/year2-v22-homolog-dragdrop-visual-patch.js");
 run("content/english/year-2/year2-v22-homolog-editorial-assets.js");
+run("content/english/year-2/year2-v22-homolog-semantic-vectors.js");
 run("content/english/year-2/module-01/module-01-v22-homolog.js");
 for (let m = 2; m <= 6; m += 1) {
   const mm = String(m).padStart(2, "0");
@@ -89,23 +90,29 @@ const itemAudit = all.map((question) => {
   const refs = images(question);
   const previews = refs.filter((entry) => /^data:image\//i.test(entry.src));
   const repository = refs.filter((entry) => !/^data:image\//i.test(entry.src));
+  const semanticVectorFinal = question.metadata?.visualStatus === "final-semantic-vector";
+  const explicitFinal = question.metadata?.finalAssetRequired === false;
+  const requiresFinalAsset = question.metadata?.finalAssetRequired === true || (previews.length > 0 && !semanticVectorFinal && !explicitFinal);
   return {
     id: question.id,
     module: question.module,
     mechanic: question.delivery?.mechanic,
     visualRequired: refs.length > 0,
-    visualFinalAssetRequired: question.metadata?.finalAssetRequired === true || previews.length > 0,
+    visualFinalAssetRequired: requiresFinalAsset,
+    semanticVectorFinal,
     previewImageCount: previews.length,
     repositoryImageCount: repository.length,
     repositoryImages: repository.map((entry) => ({ alt: entry.alt, src: entry.src, origin: entry.origin })),
-    visualConcepts: Array.from(new Set(previews.map((entry) => entry.alt).filter(Boolean))),
+    visualConcepts: requiresFinalAsset ? Array.from(new Set(previews.map((entry) => entry.alt).filter(Boolean))) : [],
     ...audio(question)
   };
 });
 
 const visualRequired = itemAudit.filter((item) => item.visualRequired);
 const visualPending = itemAudit.filter((item) => item.visualFinalAssetRequired);
-const visualReady = visualRequired.filter((item) => !item.visualFinalAssetRequired && item.repositoryImageCount > 0);
+const visualReadyRepository = visualRequired.filter((item) => !item.visualFinalAssetRequired && item.repositoryImageCount > 0);
+const semanticVectorFinal = itemAudit.filter((item) => item.semanticVectorFinal);
+const visualReadyTotal = visualRequired.filter((item) => !item.visualFinalAssetRequired);
 const englishStimulus = itemAudit.filter((item) => item.englishStimulusConfigured);
 const englishRecorded = englishStimulus.filter((item) => item.englishStimulusRecorded);
 const optionAudio = itemAudit.filter((item) => item.optionAudioConfigured);
@@ -114,9 +121,10 @@ const pendingConcepts = Array.from(new Set(visualPending.flatMap((item) => item.
 const audioEntries = Array.isArray(audioRoot) ? audioRoot : [];
 const year2AudioDir = audioEntries.find((entry) => /^(?:2[_ -]?ANO|YEAR[_ -]?2)$/i.test(entry.name || ""));
 const exactAssetItems = Array.from(sandbox.window.DuduQYear2V22Factory?.exactEditorialAssetItems || []);
+const finalVectorIds = Array.from(sandbox.window.DuduQYear2V22Factory?.finalSemanticVectorIds || []);
 
 const report = {
-  schemaVersion: 2,
+  schemaVersion: 3,
   generatedAt: new Date().toISOString(),
   source: {
     engineBranch: "homolog/year2-word-slash-pedagogy",
@@ -128,8 +136,10 @@ const report = {
   summary: {
     editorialItems: itemAudit.length,
     exactExistingAssetItemsWired: exactAssetItems.length,
+    finalSemanticVectorItems: semanticVectorFinal.length,
     visualRequiredItems: visualRequired.length,
-    visualReadyRepositoryItems: visualReady.length,
+    visualReadyRepositoryItems: visualReadyRepository.length,
+    visualReadyTotalItems: visualReadyTotal.length,
     visualPendingPreviewItems: visualPending.length,
     uniquePendingVisualConcepts: pendingConcepts.length,
     englishStimulusItems: englishStimulus.length,
@@ -140,6 +150,7 @@ const report = {
     commercialReady: !remoteError && visualPending.length === 0 && englishRecorded.length === englishStimulus.length && Boolean(year2AudioDir)
   },
   exactExistingAssetItems: exactAssetItems,
+  finalSemanticVectorIds: finalVectorIds,
   year2AudioDirectory: year2AudioDir ? { name: year2AudioDir.name, path: year2AudioDir.path, sha: year2AudioDir.sha } : null,
   pendingVisualConcepts: pendingConcepts,
   items: itemAudit
@@ -150,18 +161,19 @@ fs.writeFileSync(path.join(outDir, "README.md"), [
   "# DuduQ — 2º Ano — Readiness comercial",
   "",
   `Itens editoriais: **${report.summary.editorialItems}**`,
-  `Itens ligados a assets exatos já existentes nesta rodada: **${report.summary.exactExistingAssetItemsWired}**`,
-  `Itens já com imagem de repositório: **${report.summary.visualReadyRepositoryItems}**`,
-  `Itens ainda com preview/vetor: **${report.summary.visualPendingPreviewItems}**`,
+  `Itens ligados a assets exatos já existentes: **${report.summary.exactExistingAssetItemsWired}**`,
+  `Itens finalizados como vetor semântico determinístico: **${report.summary.finalSemanticVectorItems}**`,
+  `Itens visualmente prontos no total: **${report.summary.visualReadyTotalItems}**`,
+  `Itens ainda com preview ilustrativo: **${report.summary.visualPendingPreviewItems}**`,
   `Conceitos visuais únicos ainda pendentes: **${report.summary.uniquePendingVisualConcepts}**`,
   `Estímulos em inglês: **${report.summary.englishStimulusItems}**`,
   `Estímulos em inglês já ligados a áudio gravado: **${report.summary.englishStimulusRecordedItems}**`,
   `Pasta Audios/2_ANO presente: **${report.summary.year2AudioDirectoryPresent ? "SIM" : "NÃO"}**`,
   `Pronto comercialmente: **${report.summary.commercialReady ? "SIM" : "NÃO"}**`,
   "",
-  "Somente correspondências semânticas exatas foram ligadas automaticamente. Composições de quantidade, tamanho, cor específica, família, formas e partes isoladas do corpo permanecem em preview quando o repositório não oferece um equivalente exato. TTS continua apenas fallback de homologação."
+  "Numerais e formas geométricas simples podem ser finais como vetores semânticos determinísticos. Emojis, pessoas, família, brinquedos e partes do corpo continuam sendo apenas preview até receberem ilustração editorial adequada. TTS continua apenas fallback de homologação."
 ].join("\n"));
 
-console.log("DUDUQ YEAR2 COMMERCIAL READINESS AUDIT V2");
+console.log("DUDUQ YEAR2 COMMERCIAL READINESS AUDIT V3");
 console.log(JSON.stringify(report.summary, null, 2));
 if (remoteError) console.warn(`REMOTE AUDIT WARNING: ${remoteError}`);
