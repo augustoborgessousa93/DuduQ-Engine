@@ -11,6 +11,8 @@ on:
       - "scripts/qa-year2-m01-v22-runtime.mjs"
       - "scripts/qa-year2-all-v22-runtime.mjs"
       - "scripts/qa-year2-visual-functional.mjs"
+      - "scripts/qa-year2-visual-functional-base.mjs"
+      - "scripts/qa-year2-m01-12-first-listen.mjs"
       - "engine/channels/canary-v1.json"
       - ".github/workflows/year2-word-slash-homolog.yml"
   pull_request:
@@ -23,6 +25,8 @@ on:
       - "scripts/qa-year2-m01-v22-runtime.mjs"
       - "scripts/qa-year2-all-v22-runtime.mjs"
       - "scripts/qa-year2-visual-functional.mjs"
+      - "scripts/qa-year2-visual-functional-base.mjs"
+      - "scripts/qa-year2-m01-12-first-listen.mjs"
       - "engine/channels/canary-v1.json"
       - ".github/workflows/year2-word-slash-homolog.yml"
 
@@ -87,7 +91,10 @@ jobs:
           exit 1
 
       - name: Validate M01-M06 desktop and mobile
-        run: node scripts/qa-year2-visual-functional.mjs
+        run: node scripts/qa-year2-visual-functional-base.mjs
+
+      - name: Validate EN2-M1-12 first-listen gate
+        run: node scripts/qa-year2-m01-12-first-listen.mjs
 
       - name: Upload visual QA evidence
         if: always()
