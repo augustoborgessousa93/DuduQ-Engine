@@ -34,6 +34,9 @@ function csv(value) {
   const text = String(value ?? "");
   return `"${text.replace(/"/g, '""')}"`;
 }
+function check(condition, message) {
+  if (!condition) throw new Error(message);
+}
 
 run("content/english/year-2/year2-v22-homolog-core.js");
 run("content/english/year-2/year2-v22-homolog-dragdrop-visual-patch.js");
@@ -47,9 +50,9 @@ for (let m = 2; m <= 6; m += 1) {
 
 const y2 = sandbox.window.DUDUQ_CONTENT?.english?.year2 || {};
 const modules = Array.from({ length: 6 }, (_, index) => y2[`module${String(index + 1).padStart(2, "0")}v22homolog`]);
-if (!modules.every(Boolean)) throw new Error("M01-M06 não carregaram no plano de produção");
+check(modules.every(Boolean), "M01-M06 não carregaram no plano de produção");
 const all = modules.flatMap(questions);
-if (all.length !== 90) throw new Error(`Esperados 90 itens; atual=${all.length}`);
+check(all.length === 90, `Esperados 90 itens; atual=${all.length}`);
 
 const audioUses = [];
 function addAudio(question, value, role, origin, fallbackLocale = "") {
@@ -87,7 +90,6 @@ for (const use of audioUses) {
       clipId: `EN2-AUD-${String(clipMap.size + 1).padStart(3, "0")}`,
       locale: use.locale,
       text: use.text,
-      filename: "",
       itemIds: new Set(),
       modules: new Set(),
       roles: new Set(),
@@ -100,7 +102,7 @@ for (const use of audioUses) {
   clip.roles.add(use.role);
   clip.origins.add(use.origin);
 }
-const clips = Array.from(clipMap.values()).map((clip, index) => ({
+const clips = Array.from(clipMap.values()).map((clip) => ({
   clipId: clip.clipId,
   locale: clip.locale,
   text: clip.text,
@@ -120,7 +122,7 @@ const clips = Array.from(clipMap.values()).map((clip, index) => ({
 }));
 
 const assetPlan = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   principle: "reuse-first-atomic-assets-plus-runtime-composition",
   rules: [
     "Não criar uma imagem diferente para cada questão quando a mesma unidade visual pode ser reutilizada.",
@@ -149,7 +151,10 @@ const assetPlan = {
   verifyExistingBeforeCreate: [
     { itemId: "EN2-M3-14", existing: "Train - trem.png", requirement: "o trem precisa ser inequivocamente vermelho", fallbackFilename: "toy-train-red-trem-vermelho.png" },
     { itemId: "EN2-M4-11", existing: "Pato.png", requirement: "o pato precisa ser amarelo e manter leitura clara quando repetido 10 vezes", fallbackFilename: "animal-duck-yellow-pato-amarelo.png" },
-    { itemId: "EN2-M4-14", existing: "Cachorro - dog.png", requirement: "o cachorro precisa ser marrom e manter leitura clara em composição plural", fallbackFilename: "animal-dog-brown-cachorro-marrom.png" }
+    { itemId: "EN2-M4-14", existing: "Cachorro - dog.png", requirement: "o cachorro precisa ser marrom e manter leitura clara em composição plural", fallbackFilename: "animal-dog-brown-cachorro-marrom.png" },
+    { itemId: "EN2-M6-07", existing: "Apple - maçã.png", requirement: "a maçã precisa ser inequivocamente vermelha", fallbackFilename: "food-apple-red-maca-vermelha.png" },
+    { itemId: "EN2-M6-08", existing: "Banana.png", requirement: "a banana precisa ser inequivocamente amarela", fallbackFilename: "food-banana-yellow-banana-amarela.png" },
+    { itemId: "EN2-M6-13", existing: "Tomato - tomate.png", requirement: "o tomate precisa ser inequivocamente vermelho", fallbackFilename: "food-tomato-red-tomate-vermelho.png" }
   ],
   compositionRecipes: [
     { itemIds: ["EN2-M2-07","EN2-M2-08","EN2-M2-09","EN2-M2-10","EN2-M2-11","EN2-M2-12","EN2-M2-13","EN2-M2-15"], recipe: "family-six-atomic-assets; highlight role when required; no separate family scene per question" },
@@ -169,6 +174,12 @@ const assetPlan = {
     semanticVectorItemIds: Array.from(sandbox.window.DuduQYear2V22Factory?.finalSemanticVectorIds || [])
   }
 };
+
+check(assetPlan.newAtomicAssets.length === 15, `Plano deve manter 15 assets-base garantidos; atual=${assetPlan.newAtomicAssets.length}`);
+check(assetPlan.verifyExistingBeforeCreate.length === 6, `Plano deve manter 6 verificações condicionais; atual=${assetPlan.verifyExistingBeforeCreate.length}`);
+check(assetPlan.alreadyFinalWithoutNewArtwork.exactRepositoryAssetItemIds.length === 10, `Esperados 10 itens já ligados a assets exatos; atual=${assetPlan.alreadyFinalWithoutNewArtwork.exactRepositoryAssetItemIds.length}`);
+check(assetPlan.alreadyFinalWithoutNewArtwork.semanticVectorItemIds.length === 15, `Esperados 15 itens finais por vetor semântico; atual=${assetPlan.alreadyFinalWithoutNewArtwork.semanticVectorItemIds.length}`);
+check(clips.length > 0, "Manifesto de áudio não pode ficar vazio");
 
 const audioManifest = {
   schemaVersion: 1,
