@@ -126,6 +126,7 @@ for (const viewport of viewports) {
       const items = document.querySelectorAll('.duduq-dd2-item,.duduq-dd-item,[draggable="true"]');
       return /Falha ao preparar|\bErro\b/i.test(text) || items.length >= 4;
     }, undefined, { timeout: 15000 });
+    await page.waitForTimeout(1050);
 
     const runtime = await frame.evaluate(() => {
       const bodyText = (document.body?.innerText || "").trim();
@@ -134,12 +135,15 @@ for (const viewport of viewports) {
         .map((node) => (node.textContent || "").trim().toUpperCase())
         .filter((value) => /^[A-Z]$/.test(value));
       const targets = document.querySelectorAll('.duduq-dd2-target,.duduq-dd-target').length;
+      const doc = document.documentElement;
+      const body = document.body;
       return {
         text: bodyText.slice(0, 500),
         letters: Array.from(new Set(letters)),
         targets,
-        scrollWidth: document.documentElement.scrollWidth,
-        clientWidth: document.documentElement.clientWidth
+        scrollWidth: doc.scrollWidth,
+        clientWidth: doc.clientWidth,
+        scrollY: Math.max(window.scrollY || 0, doc.scrollTop || 0, body?.scrollTop || 0)
       };
     });
 
@@ -149,6 +153,12 @@ for (const viewport of viewports) {
     }
     check(runtime.targets >= 3, `M01-12/${viewport.name}: esperadas três posições; atual=${runtime.targets}`);
     check(runtime.scrollWidth <= runtime.clientWidth + 18, `M01-12/${viewport.name}: overflow horizontal (${runtime.scrollWidth}/${runtime.clientWidth})`);
+    if (viewport.name === "mobile") {
+      check(runtime.scrollY <= 2, `M01-12/mobile: Drag & Drop foi revelado com topo interno deslocado (${runtime.scrollY}px)`);
+      const hostScrollY = await page.evaluate(() => Math.max(window.scrollY || 0, document.documentElement.scrollTop || 0, document.body?.scrollTop || 0));
+      check(hostScrollY <= 2, `M01-12/mobile: host foi revelado deslocado verticalmente (${hostScrollY}px)`);
+      entry.hostScrollY = hostScrollY;
+    }
     check(pageErrors.length === 0, `M01-12/${viewport.name}: pageerror: ${pageErrors.join(" | ")}`);
 
     await page.screenshot({ path: afterShot, fullPage: false, timeout: 10000 });
