@@ -27,7 +27,7 @@ html.duduq-world-fusion[data-duduq-literacy-early="true"] .duduq-ws-instruction 
   line-height:1.08!important;
   letter-spacing:.01em!important;
 }
-/* O h2 não recebe tamanho local: World Fusion continua sendo a autoridade tipográfica compartilhada. */
+/* As regras acima espelham o perfil tipográfico final do World Fusion para garantir a mesma cascata do Target Shooter. */
 .duduq-ws-dashboard{display:flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;flex-wrap:wrap!important;margin:0!important;min-height:36px!important}
 .duduq-ws-stat{
   min-height:36px!important;height:auto!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;
