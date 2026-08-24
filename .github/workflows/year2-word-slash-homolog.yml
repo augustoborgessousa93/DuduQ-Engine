@@ -10,6 +10,7 @@ on:
       - "scripts/qa-year2-m01-v22-canonical.mjs"
       - "scripts/qa-year2-m01-v22-runtime.mjs"
       - "scripts/qa-year2-all-v22-runtime.mjs"
+      - "scripts/qa-year2-visual-functional.mjs"
       - "engine/channels/canary-v1.json"
       - ".github/workflows/year2-word-slash-homolog.yml"
   pull_request:
@@ -21,6 +22,7 @@ on:
       - "scripts/qa-year2-m01-v22-canonical.mjs"
       - "scripts/qa-year2-m01-v22-runtime.mjs"
       - "scripts/qa-year2-all-v22-runtime.mjs"
+      - "scripts/qa-year2-visual-functional.mjs"
       - "engine/channels/canary-v1.json"
       - ".github/workflows/year2-word-slash-homolog.yml"
 
@@ -53,3 +55,45 @@ jobs:
 
       - name: Validate Year 2 M01-M06 v2.2 + Factory v1.2
         run: node scripts/qa-year2-all-v22-runtime.mjs
+
+  visual-functional-gate:
+    name: Visual and functional gate
+    needs: structural-gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local homologation server
+        run: |
+          python3 -m http.server 4173 > /tmp/duduq-http.log 2>&1 &
+          for i in {1..20}; do
+            if curl -fsS http://127.0.0.1:4173/engine/channels/canary-v1.json >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-http.log
+          exit 1
+
+      - name: Validate M01-M06 desktop and mobile
+        run: node scripts/qa-year2-visual-functional.mjs
+
+      - name: Upload visual QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year2-visual-functional-evidence
+          path: artifacts/year2-visual
+          if-no-files-found: warn
+          retention-days: 14
