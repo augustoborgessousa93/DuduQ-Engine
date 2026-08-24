@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>DuduQ — Auditoria Computed Style Word Slash 1.0.12</title>
+  <style>
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,sans-serif;background:#eef6fb;color:#17375e}
+    body{padding:20px}.report{width:min(1080px,100%);margin:auto;background:#fff;border:2px solid #c8d9e9;border-radius:22px;padding:20px;box-shadow:0 14px 34px rgba(31,65,99,.11)}
+    h1{margin:0 0 8px;font-size:24px}.muted{color:#62778c;font-weight:650}.status{font-weight:900;font-size:20px;margin:12px 0}.pass{color:#16723a}.fail{color:#b42318}.wait{color:#805400}
+    table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}th,td{padding:9px 10px;border-bottom:1px solid #e1eaf2;text-align:left}th{background:#f5f9fc}.same{color:#16723a;font-weight:850}.different{color:#b42318;font-weight:850}
+    .previews{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}.preview{height:345px;overflow:hidden;border:1px solid #c8d9e9;border-radius:16px;background:#dbe9f3;position:relative}.preview iframe{position:absolute;left:0;top:0;width:1039px;height:732px;border:0;transform:scale(.485);transform-origin:0 0}.label{position:absolute;z-index:3;left:10px;top:10px;background:rgba(255,255,255,.92);padding:5px 9px;border-radius:999px;font-size:12px;font-weight:900;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    @media(max-width:850px){.previews{grid-template-columns:1fr}.preview{height:315px}.preview iframe{transform:scale(.43)}table{font-size:12px}}
+  </style>
+</head>
+<body>
+  <main class="report">
+    <h1>Paridade tipográfica — Word Slash 1.0.12 × Target Shooter 1.0.21</h1>
+    <p class="muted">Os dois testes abaixo usam viewport interno idêntico de 1039×732. A aprovação exige igualdade dos seis campos de Computed Style.</p>
+    <div id="status" class="status wait">AGUARDANDO RENDERIZAÇÃO…</div>
+    <table>
+      <thead><tr><th>Propriedade</th><th>Target Shooter</th><th>Word Slash</th><th>Resultado</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p id="attrs" class="muted"></p>
+    <div class="previews">
+      <div class="preview"><span class="label">Target Shooter 1.0.21</span><iframe id="target" src="../../target-shooter/candidate-1.0.21/?parity=1" title="Target Shooter"></iframe></div>
+      <div class="preview"><span class="label">Word Slash 1.0.12</span><iframe id="word" src="../candidate-1.0.12/?parity=1" title="Word Slash"></iframe></div>
+    </div>
+  </main>
+<script>
+(function(){
+  "use strict";
+  const fields=["fontFamily","fontSize","fontWeight","lineHeight","letterSpacing","textTransform"];
+  const labels={fontFamily:"font-family",fontSize:"font-size",fontWeight:"font-weight",lineHeight:"line-height",letterSpacing:"letter-spacing",textTransform:"text-transform"};
+  const target=document.getElementById("target"),word=document.getElementById("word"),rows=document.getElementById("rows"),status=document.getElementById("status"),attrs=document.getElementById("attrs");
+
+  function mechanicDoc(frame){
+    try{
+      const outer=frame.contentDocument;
+      if(!outer)return null;
+      const nested=outer.querySelector(".duduq-mechanic-frame iframe");
+      return nested?.contentDocument || outer;
+    }catch(_){return null}
+  }
+  function sample(frame,selector){
+    const doc=mechanicDoc(frame); if(!doc)return null;
+    const node=doc.querySelector(selector); if(!node)return null;
+    const cs=doc.defaultView.getComputedStyle(node);
+    const out={}; fields.forEach(k=>out[k]=cs[k]);
+    out.year=doc.documentElement.getAttribute("data-duduq-ano-ativo")||"";
+    out.literacy=doc.documentElement.getAttribute("data-duduq-literacy-early")||"";
+    return out;
+  }
+  function render(a,b){
+    let all=true; rows.innerHTML="";
+    fields.forEach(function(k){
+      const same=a[k]===b[k]; all=all&&same;
+      const tr=document.createElement("tr");
+      tr.innerHTML="<td>"+labels[k]+"</td><td>"+a[k]+"</td><td>"+b[k]+"</td><td class='"+(same?"same":"different")+"'>"+(same?"PASS":"FAIL")+"</td>";
+      rows.appendChild(tr);
+    });
+    const semantic=a.year===b.year && a.literacy===b.literacy;
+    all=all&&semantic;
+    attrs.textContent="Perfil semântico — Target: ano="+a.year+", literacy-early="+a.literacy+" | Word Slash: ano="+b.year+", literacy-early="+b.literacy;
+    status.className="status "+(all?"pass":"fail");
+    status.textContent=all?"PASS — COMPUTED STYLE IDÊNTICO":"FAIL — AINDA EXISTE DIVERGÊNCIA";
+    document.documentElement.dataset.parity=all?"pass":"fail";
+  }
+  let attempts=0;
+  const timer=setInterval(function(){
+    attempts++;
+    const a=sample(target,".duduq-ts-instruction h2");
+    const b=sample(word,".duduq-ws-instruction h2");
+    if(a&&b){clearInterval(timer);render(a,b);return}
+    if(attempts>160){clearInterval(timer);status.className="status fail";status.textContent="FALHA — NÃO FOI POSSÍVEL CAPTURAR OS DOIS H2"}
+  },200);
+})();
+</script>
+</body>
+</html>
