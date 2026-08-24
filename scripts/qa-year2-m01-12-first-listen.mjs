@@ -131,19 +131,32 @@ for (const viewport of viewports) {
     const runtime = await frame.evaluate(() => {
       const bodyText = (document.body?.innerText || "").trim();
       const itemNodes = Array.from(document.querySelectorAll('.duduq-dd2-item,.duduq-dd-item,[draggable="true"]'));
-      const letters = itemNodes
-        .map((node) => (node.textContent || "").trim().toUpperCase())
-        .filter((value) => /^[A-Z]$/.test(value));
-      const targets = document.querySelectorAll('.duduq-dd2-target,.duduq-dd-target').length;
+      const letterEntries = itemNodes
+        .map((node) => ({ node, value: (node.textContent || "").trim().toUpperCase() }))
+        .filter((entry) => /^[A-Z]$/.test(entry.value));
+      const letters = letterEntries.map((entry) => entry.value);
+      const sequenceSlots = Array.from(document.querySelectorAll('.duduq-dd2-sequence-slot'));
       const doc = document.documentElement;
       const body = document.body;
+      const allLetterRects = letterEntries.map(({ node, value }) => {
+        const rect = node.getBoundingClientRect();
+        return { value, top: rect.top, bottom: rect.bottom, left: rect.left, right: rect.right, width: rect.width, height: rect.height };
+      });
+      const slotRects = sequenceSlots.map((node) => {
+        const rect = node.getBoundingClientRect();
+        return { top: rect.top, bottom: rect.bottom, left: rect.left, right: rect.right, width: rect.width, height: rect.height };
+      });
       return {
         text: bodyText.slice(0, 500),
         letters: Array.from(new Set(letters)),
-        targets,
+        sequenceSlots: sequenceSlots.length,
+        targetContainers: document.querySelectorAll('.duduq-dd2-target,.duduq-dd-target').length,
         scrollWidth: doc.scrollWidth,
         clientWidth: doc.clientWidth,
-        scrollY: Math.max(window.scrollY || 0, doc.scrollTop || 0, body?.scrollTop || 0)
+        scrollY: Math.max(window.scrollY || 0, doc.scrollTop || 0, body?.scrollTop || 0),
+        innerHeight: window.innerHeight,
+        letterRects: allLetterRects,
+        slotRects
       };
     });
 
@@ -151,14 +164,21 @@ for (const viewport of viewports) {
     for (const letter of ["L", "E", "O", "A"]) {
       check(runtime.letters.includes(letter), `M01-12/${viewport.name}: letra ${letter} ausente; atual=${runtime.letters.join(",")}`);
     }
-    check(runtime.targets >= 3, `M01-12/${viewport.name}: esperadas três posições; atual=${runtime.targets}`);
+    check(runtime.sequenceSlots === 3, `M01-12/${viewport.name}: esperados três slots compactos; atual=${runtime.sequenceSlots}`);
+    check(runtime.targetContainers === 1, `M01-12/${viewport.name}: esperado um único alvo de sequência; atual=${runtime.targetContainers}`);
     check(runtime.scrollWidth <= runtime.clientWidth + 18, `M01-12/${viewport.name}: overflow horizontal (${runtime.scrollWidth}/${runtime.clientWidth})`);
+
     if (viewport.name === "mobile") {
       check(runtime.scrollY <= 2, `M01-12/mobile: Drag & Drop foi revelado com topo interno deslocado (${runtime.scrollY}px)`);
       const hostScrollY = await page.evaluate(() => Math.max(window.scrollY || 0, document.documentElement.scrollTop || 0, document.body?.scrollTop || 0));
       check(hostScrollY <= 2, `M01-12/mobile: host foi revelado deslocado verticalmente (${hostScrollY}px)`);
+      check(runtime.slotRects.every((rect) => rect.width <= 100 && rect.height <= 110), `M01-12/mobile: slots continuam grandes demais: ${JSON.stringify(runtime.slotRects)}`);
+      check(runtime.letterRects.length >= 4, `M01-12/mobile: cartões de letras insuficientes`);
+      const visibleLetterCount = runtime.letterRects.filter((rect) => rect.top >= -2 && rect.bottom <= runtime.innerHeight + 2).length;
+      check(visibleLetterCount >= 4, `M01-12/mobile: as quatro letras não aparecem juntas no primeiro viewport (${visibleLetterCount}/4)`);
       entry.hostScrollY = hostScrollY;
     }
+
     check(pageErrors.length === 0, `M01-12/${viewport.name}: pageerror: ${pageErrors.join(" | ")}`);
 
     await page.screenshot({ path: afterShot, fullPage: false, timeout: 10000 });
