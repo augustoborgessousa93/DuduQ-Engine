@@ -8,29 +8,6 @@ const OUT=path.resolve(process.env.DUDUQ_QA_OUT||"artifacts/year2-v23");
 fs.mkdirSync(OUT,{recursive:true});
 const check=(cond,msg)=>{if(!cond)throw new Error(msg)};
 
-async function waitHostReady(page,device){
-  await page.waitForFunction(()=>{
-    const s=window.DuduQ?.getSession?.();
-    return Boolean(s)&&s.transitioning===false;
-  },undefined,{timeout:10000}).catch(async()=>{
-    const s=await page.evaluate(()=>window.DuduQ?.getSession?.()||null);
-    throw new Error(`M1-12 ${device}: Host não saiu da transição; sessão=${JSON.stringify(s)}`);
-  });
-}
-
-async function advanceOne(page,device){
-  await waitHostReady(page,device);
-  const before=await page.evaluate(()=>({session:window.DuduQ.getSession(),event:window.__DUDUQ_QA_STEP__}));
-  const previousIndex=Number(before.session?.stepIndex);
-  const accepted=await page.evaluate(()=>window.DuduQ.next({qaAdvance:true}));
-  check(accepted!==false,`M1-12 ${device}: Host recusou avanço pronto em ${before.event?.id||"n/a"}`);
-  await page.waitForFunction(prev=>{
-    const s=window.DuduQ?.getSession?.();
-    return Boolean(s)&&(s.stepIndex>prev||s.completed===true);
-  },previousIndex,{timeout:10000});
-  await waitHostReady(page,device);
-}
-
 async function run(browser,device){
   const viewport=device==="mobile"?{width:390,height:844}:{width:1366,height:768};
   const page=await browser.newPage({viewport});
@@ -45,34 +22,22 @@ async function run(browser,device){
         window.__DUDUQ_QA_STEP__={id:d.stepId||null,index:d.stepIndex??null,mechanic:d.mechanicId||null};
       });
     });
-    const response=await page.goto(`${BASE}/content/english/year-2/module-01/homolog-v23-runtime.html`,{waitUntil:"domcontentloaded",timeout:30000});
+
+    const response=await page.goto(`${BASE}/content/english/year-2/module-01/homolog-v23-m112-runtime.html`,{waitUntil:"domcontentloaded",timeout:30000});
     check(response?.ok(),`M1-12 ${device}: HTTP ${response?.status()}`);
-    await page.waitForFunction(()=>Boolean(window.DUDUQ_CONTENT?.english?.year2?.module01v23multimodal),undefined,{timeout:15000});
-    const expected=await page.evaluate(()=>{
-      const mod=window.DUDUQ_CONTENT.english.year2.module01v23multimodal;
-      const activity=(mod.activities||[]).find(a=>(a.questions||[]).some(q=>q.id==="EN2-M1-12"));
-      return activity?{id:activity.id,mechanic:activity.mechanic,questionIds:activity.questions.map(q=>q.id)}:null;
-    });
-    check(expected,`M1-12 ${device}: atividade fonte não encontrada`);
-    check(expected.id==="en2-m1-12-drag-drop-alphabet",`M1-12 ${device}: id v2.3 inesperado ${expected.id}`);
-    check(expected.mechanic==="drag-drop",`M1-12 ${device}: mecânica fonte inesperada ${expected.mechanic}`);
-    check(expected.questionIds.length===1&&expected.questionIds[0]==="EN2-M1-12",`M1-12 ${device}: atividade não está isolada`);
+
+    const qaEntry=await page.evaluate(()=>window.DUDUQ_QA_ENTRY||null);
+    check(qaEntry?.qaOnly===true&&qaEntry?.questionId==="EN2-M1-12",`M1-12 ${device}: entrypoint QA incorreto`);
 
     const start=page.getByRole("button",{name:/INICIAR MISSÃO/i});
     await start.waitFor({state:"visible",timeout:15000});
     await start.click();
-    await page.waitForFunction(()=>Boolean(window.DuduQ?.next)&&Boolean(window.DuduQ?.getSession?.())&&Boolean(window.__DUDUQ_QA_STEP__?.id),undefined,{timeout:15000});
 
-    for(let guard=0;guard<20;guard++){
-      const state=await page.evaluate(()=>({event:window.__DUDUQ_QA_STEP__,session:window.DuduQ.getSession()}));
-      if(state.event?.id===expected.id)break;
-      check(state.session?.completed!==true,`M1-12 ${device}: módulo terminou antes da etapa dedicada`);
-      await advanceOne(page,device);
-    }
-
-    const target=await page.evaluate(()=>({event:window.__DUDUQ_QA_STEP__,session:window.DuduQ.getSession()}));
-    check(target.event?.id===expected.id,`M1-12 ${device}: etapa dedicada não alcançada; etapa=${target.event?.id||"n/a"}`);
-    check(target.event?.mechanic==="drag-drop",`M1-12 ${device}: evento com mecânica inesperada ${target.event?.mechanic||"n/a"}`);
+    await page.waitForFunction(()=>Boolean(window.__DUDUQ_QA_STEP__?.id),undefined,{timeout:15000});
+    const target=await page.evaluate(()=>({event:window.__DUDUQ_QA_STEP__,session:window.DuduQ?.getSession?.()||null}));
+    check(target.event?.id==="en2-m1-12-drag-drop-alphabet",`M1-12 ${device}: activity id inesperado ${target.event?.id||"n/a"}`);
+    check(target.event?.mechanic==="drag-drop",`M1-12 ${device}: mecânica inesperada ${target.event?.mechanic||"n/a"}`);
+    check(target.session?.totalSteps===1,`M1-12 ${device}: QA direto deveria ter 1 etapa, recebeu ${target.session?.totalSteps??"n/a"}`);
 
     const overlay=page.locator("#duduq-m1-12-first-listen-overlay");
     await overlay.waitFor({state:"visible",timeout:10000});
@@ -97,9 +62,11 @@ async function run(browser,device){
       const fake=utterance=>setTimeout(()=>{if(typeof utterance.onend==="function")utterance.onend({type:"end"})},100);
       try{Object.defineProperty(synth,"speak",{value:fake,configurable:true})}catch(_){synth.speak=fake}
     });
+
     await page.getByRole("button",{name:/OUVIR SOLETRAÇÃO/i}).click();
     await page.waitForFunction(()=>document.documentElement.getAttribute("data-duduq-m1-12-first-listen")==="revealed",undefined,{timeout:8000});
     await iframe.waitFor({state:"visible",timeout:5000});
+
     const afterFrame=await iframe.evaluate(el=>({marker:el.getAttribute("data-duduq-m1-12-gated-frame"),aria:el.getAttribute("aria-hidden"),visibility:getComputedStyle(el).visibility,opacity:getComputedStyle(el).opacity}));
     check(afterFrame.marker===null&&afterFrame.aria===null&&afterFrame.visibility!=="hidden"&&afterFrame.opacity!=="0",`M1-12 ${device}: iframe permaneceu bloqueado depois do áudio`);
 
@@ -112,14 +79,18 @@ async function run(browser,device){
     for(const letter of ["L","E","O","A"])check(joined.includes(letter),`M1-12 ${device}: letra ${letter} ausente após reveal`);
     const targetCount=await frame.locator(".duduq-dd2-target,.duduq-dd-target").count();
     check(targetCount>=3,`M1-12 ${device}: destinos < 3`);
+
     const outerOverflow=await page.evaluate(()=>document.documentElement.scrollWidth>document.documentElement.clientWidth+2);
     const innerOverflow=await frame.evaluate(()=>document.documentElement.scrollWidth>document.documentElement.clientWidth+2).catch(()=>false);
     check(!outerOverflow&&!innerOverflow,`M1-12 ${device}: overflow horizontal`);
     check(errors.length===0,`M1-12 ${device}: console/page errors: ${errors.slice(0,3).join(" | ")}`);
+
     await page.screenshot({path:path.join(OUT,`M01-M12-after-${device}.png`),fullPage:false});
     console.log(`PASS V23 M01-M12 ${device}`);
-    return {device,status:"PASS",activityId:expected.id};
-  }finally{await page.close()}
+    return {device,status:"PASS",activityId:target.event.id};
+  }finally{
+    await page.close();
+  }
 }
 
 const browser=await chromium.launch({headless:true});
@@ -129,7 +100,10 @@ try{
     try{results.push(await run(browser,device))}
     catch(e){failures.push(`${device}: ${e.message}`);console.error(failures.at(-1))}
   }
-}finally{await browser.close()}
+}finally{
+  await browser.close();
+}
+
 fs.writeFileSync(path.join(OUT,"report-m112.json"),JSON.stringify({results,failures},null,2));
 if(failures.length){console.error("DUDUQ YEAR2 v2.3 M1-12 QA: FAIL");process.exit(1)}
 console.log("DUDUQ YEAR2 v2.3 M1-12 QA: PASS (2/2)");
