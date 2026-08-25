@@ -74,6 +74,27 @@ function bankChoice(frame, letter) {
   return frame.locator(".duduq-dd2-bank .duduq-dd2-item").filter({ hasText: `🔊 ${letter}` }).first();
 }
 
+async function waitTargetFilled(target, expected = true) {
+  await target.waitFor({ state: "visible", timeout: 3_000 });
+  const wanted = expected ? "true" : "false";
+  await target.locator(`xpath=.`).evaluate((element, value) => {
+    if (element.getAttribute("data-filled") === value) return;
+    return new Promise((resolve, reject) => {
+      const observer = new MutationObserver(() => {
+        if (element.getAttribute("data-filled") === value) {
+          observer.disconnect();
+          resolve();
+        }
+      });
+      observer.observe(element, { attributes: true, attributeFilter: ["data-filled"] });
+      setTimeout(() => {
+        observer.disconnect();
+        reject(new Error(`data-filled não chegou a ${value}`));
+      }, 2800);
+    });
+  }, wanted);
+}
+
 async function dragChoice(page, choice, target) {
   const sourceBox = await choice.boundingBox();
   const targetBox = await target.boundingBox();
@@ -81,7 +102,7 @@ async function dragChoice(page, choice, target) {
 
   await page.mouse.move(sourceBox.x + sourceBox.width / 2, sourceBox.y + sourceBox.height / 2);
   await page.mouse.down();
-  await page.mouse.move(targetBox.x + targetBox.width / 2, targetBox.y + targetBox.height * 0.82, { steps: 14 });
+  await page.mouse.move(targetBox.x + targetBox.width / 2, targetBox.y + targetBox.height * 0.72, { steps: 18 });
   await page.mouse.up();
 }
 
@@ -110,14 +131,16 @@ async function desktopScenario(browser) {
   const choiceA = bankChoice(frame, "A");
   await choiceA.waitFor({ state: "visible", timeout: 5_000 });
   await dragChoice(page, choiceA, target);
-  await target.locator(".duduq-dd2-item").filter({ hasText: "🔊 A" }).waitFor({ state: "visible", timeout: 3_000 });
+  await waitTargetFilled(target, true);
+  assert(await target.locator(".duduq-dd2-item").count() === 1, "Arraste de A não deixou exatamente uma alternativa no destino.");
   assert(!(await confirm.isDisabled()), "CONFIRMAR não habilitou após alternativa A ser colocada.");
 
   // Troca por toque/clique antes de confirmar. C também é incorreta e deve substituir A sem revelar gabarito.
   const choiceC = bankChoice(frame, "C");
   await choiceC.click();
-  await target.locator(".duduq-dd2-item").filter({ hasText: "🔊 C" }).waitFor({ state: "visible", timeout: 3_000 });
+  await waitTargetFilled(target, true);
   await bankChoice(frame, "A").waitFor({ state: "visible", timeout: 3_000 });
+  assert(await target.locator(".duduq-dd2-item").count() === 1, "Troca A → C deixou mais de uma alternativa no destino.");
   assert(!(await confirm.isDisabled()), "CONFIRMAR não permaneceu habilitado após troca A → C.");
 
   const confirmBox = await confirm.boundingBox();
@@ -125,18 +148,20 @@ async function desktopScenario(browser) {
 
   // Validação só acontece agora.
   await confirm.click();
-  const retryCard = target.locator('.duduq-dd2-item[data-wrong="true"]').filter({ hasText: "🔊 C" });
+  const retryCard = target.locator('.duduq-dd2-item[data-wrong="true"]');
   await retryCard.waitFor({ state: "visible", timeout: 2_500 });
   await page.screenshot({ path: `${RESULTS}/desktop-wrong-red.png`, fullPage: true });
 
   // O card incorreto deve permanecer visível brevemente e depois retornar ao banco.
   await bankChoice(frame, "C").waitFor({ state: "visible", timeout: 2_500 });
+  await waitTargetFilled(target, false);
   assert(await target.locator(".duduq-dd2-item").count() === 0, "Após o feedback de erro, o card incorreto não retornou à origem.");
 
   // Nova tentativa por toque. B é a resposta correta da primeira questão.
   const choiceB = bankChoice(frame, "B");
   await choiceB.click();
-  await target.locator(".duduq-dd2-item").filter({ hasText: "🔊 B" }).waitFor({ state: "visible", timeout: 3_000 });
+  await waitTargetFilled(target, true);
+  assert(await target.locator(".duduq-dd2-item").count() === 1, "Toque em B não colocou exatamente uma alternativa no destino.");
   assert(!(await confirm.isDisabled()), "CONFIRMAR não habilitou na segunda tentativa correta.");
   await confirm.click();
 
@@ -169,7 +194,8 @@ async function mobileScenario(browser) {
 
   // Toque deve colocar qualquer alternativa e habilitar confirmar sem revelar se está correta.
   await bankChoice(frame, "D").click();
-  await target.locator(".duduq-dd2-item").filter({ hasText: "🔊 D" }).waitFor({ state: "visible", timeout: 3_000 });
+  await waitTargetFilled(target, true);
+  assert(await target.locator(".duduq-dd2-item").count() === 1, "Mobile: toque em D não colocou exatamente uma alternativa no destino.");
   const confirm = frame.locator(".duduq-dd2-confirm");
   assert(!(await confirm.isDisabled()), "Mobile: CONFIRMAR não habilitou após toque em alternativa D.");
 
