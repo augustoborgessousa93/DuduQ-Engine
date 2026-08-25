@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "year": 2,
+  "sourceVersion": "2.2",
+  "factorySpec": "1.2",
+  "mode": "EXISTING_ASSET_PLUS_PROVISIONAL",
+  "status": "ACTIVE_FOR_TECHNICAL_HOMOLOGATION",
+  "decision": "Use exact images already available in Assets-DuduQ. When an exact image does not yet exist, continue with the Factory provisional emoji/vector visual until the final asset is added.",
+  "rules": {
+    "preferExistingRepositoryAssets": true,
+    "missingAssetsUseProvisionalEmojiVector": true,
+    "finalMissingAssetsDeferred": true,
+    "blocksTechnicalQA": false,
+    "blocksCurrentHomologation": false,
+    "blocksProductionPromotionWithoutExplicitApproval": true,
+    "assetRepository": "augustoborgessousa93/Assets-DuduQ",
+    "replaceByStableSemanticKey": true,
+    "doNotChangeOfficialQuestionOrAnswerWhenReplacingAssets": true
+  },
+  "runtime": {
+    "useFactoryPreviewVisualsAsFallback": true,
+    "loadEditorialAssetPatch": true,
+    "loadSemanticFinalAssetPatch": false,
+    "editorialAssetPatch": "year2-v22-homolog-editorial-assets.js",
+    "audioMayUseHomologationFallbackUntilFinalRecordedAudioIsIntegrated": true
+  },
+  "replacementContract": {
+    "principle": "Use a repository asset when an exact semantic match exists; otherwise keep the provisional visual. Future replacement changes only the visual source while preserving stable item ID, mechanic, prompt, alternatives, answer and pedagogical evidence.",
+    "preferredNaming": "intelligent-semantic-filenames",
+    "futureLocation": "Assets-DuduQ"
+  }
+}
