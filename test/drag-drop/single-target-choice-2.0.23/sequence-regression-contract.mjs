@@ -31,17 +31,22 @@ for (const signature of [
 }
 
 // SINGLE_TARGET_CHOICE may share retry infrastructure, but every behavioral
-// branch introduced by 2.0.23 must be explicitly gated. This prevents M03 rules
-// from leaking into sequence/classification/association.
+// branch introduced by 2.0.23 must be explicitly gated. Keep these assertions
+// semantic rather than whitespace-sensitive because the runtime patch stores
+// replacement code inside template literals.
 for (const gatedSignature of [
   'if (question.strategy !== "single-target-choice") return;',
   'onPointerDown:question.strategy === "single-target-choice" ? undefined',
-  'question.strategy === "single-target-choice"\n      ? positionedCount === 1',
+  'positionedCount === 1',
   'if (question.strategy === "single-target-choice") {',
   'question.strategy === "single-target-choice" || question.strategy === "sequence"'
 ]) {
   expect(activeRuntimePatch.includes(gatedSignature), `Patch DD2 sem gate explícito esperado: ${gatedSignature}`);
 }
+expect(
+  activeRuntimePatch.includes('requiredItems.length > 0 && positionedCount === requiredItems.length'),
+  "Readiness genérico para sequence/association deixou de exigir todos os itens obrigatórios posicionados."
+);
 
 // Sequence must remain on the original synthetic pointer path. Only the new
 // single-target strategy may opt out in favor of the native document-level owner.
