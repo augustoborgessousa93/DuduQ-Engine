@@ -95,14 +95,19 @@ expect(activeRuntimePatch.includes('}, 850);') || consolidated.includes('}, 850)
 expect(activeRuntimePatch.includes('.duduq-dd2-capacity'), "Patch ativo não remove visualmente o 0/1 do DD2.");
 expect(activeRuntimePatch.includes('.duduq-dd2-bank-items'), "Patch ativo não controla o banco real de alternativas DD2.");
 
-// 5c) O gesto de arraste precisa continuar mesmo quando o pointer deixa o card.
-expect(pointerBridge.includes('question.strategy !== "single-target-choice"'), "Ponte de pointer perdeu o gate exclusivo do single-target-choice.");
-expect(pointerBridge.includes('document.addEventListener("pointermove", forwardPointerMove, true)'), "Ponte de pointer não encaminha pointermove pelo documento do iframe.");
-expect(pointerBridge.includes('document.addEventListener("pointerup", forwardPointerUp, true)'), "Ponte de pointer não encaminha pointerup pelo documento do iframe.");
-expect(pointerBridge.includes('document.addEventListener("pointercancel", forwardPointerCancel, true)'), "Ponte de pointer não trata cancelamento do gesto.");
-expect(pointerBridge.includes('onPointerMove(event);'), "Ponte de pointer não reutiliza o handler canônico de movimento.");
-expect(pointerBridge.includes('finishDrag(event);'), "Ponte de pointer não reutiliza o handler canônico de conclusão.");
-expect(pointerBridge.includes('target.closest(".duduq-dd2-item")'), "Ponte de pointer não evita processamento duplicado quando o item ainda é o dono local do evento.");
+// 5c) O gesto de arraste deve usar o mesmo place() do toque, mas somente neste modo.
+expect(pointerBridge.includes('const READY_EVENT = "duduq:dd23-single-target-runtime-ready"'), "Ponte de pointer não sincroniza com o hook ativo do runtime.");
+expect(pointerBridge.includes('window.addEventListener(READY_EVENT, onRuntimeReady)'), "Ponte de pointer não instala o wrapper no evento síncrono de prontidão.");
+expect(pointerBridge.includes('question.strategy === "single-target-choice"'), "Ponte de pointer perdeu o gate exclusivo do single-target-choice.");
+expect(pointerBridge.includes('var bridgePointerId = event.pointerId;'), "Ponte de pointer não ancora o gesto ao pointerId iniciado no card.");
+expect(pointerBridge.includes('bridgeDocument.addEventListener("pointermove", forwardPointerMove, true)'), "Ponte de pointer não acompanha movimento no documento do iframe.");
+expect(pointerBridge.includes('bridgeDocument.addEventListener("pointerup", forwardPointerUp, true)'), "Ponte de pointer não captura o drop no documento do iframe.");
+expect(pointerBridge.includes('bridgeDocument.addEventListener("pointercancel", forwardPointerCancel, true)'), "Ponte de pointer não trata cancelamento do gesto.");
+expect(pointerBridge.includes('onPointerMove(pointerEvent);'), "Ponte de pointer não reutiliza o movimento canônico DD2.");
+expect(pointerBridge.includes('hit.closest("[data-dd2-target-id]")'), "Ponte de pointer não resolve o destino real no pointerup.");
+expect(pointerBridge.includes('place(bridgeItemId, targetId, "drag-bridge")'), "Arraste single-target não converge para o mesmo place() usado pelo toque.");
+expect(pointerBridge.includes('cleanupPointerBridge();'), "Ponte de pointer não limpa listeners após o gesto.");
+expect(pointerBridge.includes('finishBridgeGesture();'), "Ponte de pointer não encerra o estado visual do drag após drop/cancelamento.");
 
 // 6) Assinaturas críticas devem continuar únicas nas bases para composição determinística.
 expectOnce(consolidated, 'const CANDIDATE_VERSION = "2.0.22";', "2.0.22 / CANDIDATE_VERSION");
@@ -118,4 +123,4 @@ expectOnce(baseRuntime, '"data-dd2-target-id":target.id,', "2.0.18 active DD2 / 
 console.log("PASS — Drag & Drop 2.0.23 SINGLE_TARGET_CHOICE active DD2 composition contract");
 console.log("Canary preservado em R143 / drag-drop 2.0.22");
 console.log("M03 isolado em homolog-m03-single-target-v1 / drag-drop 2.0.23");
-console.log("Pointer bridge gated ao single-target-choice e carregado antes do mount");
+console.log("Drag e tap convergem para o mesmo place() no single-target-choice");
