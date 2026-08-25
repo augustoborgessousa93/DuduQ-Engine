@@ -5,6 +5,10 @@ const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:4173";
 const URL = `${BASE_URL}/content/english/year-2/module-03/index.html`;
 const EXPECTED_SOURCE_ID = "opt-2"; // EN2-M3-01: doll = source alternative index 1.
 
+function itemIdForLetter(letter) {
+  return `opt-${letter.toUpperCase().charCodeAt(0) - 64}`;
+}
+
 async function waitForMechanicFrame(page) {
   const deadline = Date.now() + 35_000;
   while (Date.now() < deadline) {
@@ -15,13 +19,28 @@ async function waitForMechanicFrame(page) {
   throw new Error("iframe about:srcdoc do Drag & Drop não apareceu.");
 }
 
-async function waitUntilEnabled(locator, timeout = 6_000) {
+async function waitForFinalInteractive(page, frame, locator, timeout = 10_000) {
   const startedAt = Date.now();
+  await page.waitForFunction(
+    () => !document.documentElement.hasAttribute("data-duduq-initial-speech-gate"),
+    null,
+    { timeout }
+  );
+  let stableSince = null;
   while (Date.now() - startedAt < timeout) {
-    if (await locator.isEnabled().catch(() => false)) return Date.now() - startedAt;
-    await new Promise((resolve) => setTimeout(resolve, 50));
+    const enabled = await locator.isEnabled().catch(() => false);
+    const arenaDisabled = await frame.evaluate(
+      () => document.querySelector(".duduq-dd2-arena")?.getAttribute("data-disabled") === "true"
+    ).catch(() => true);
+    if (enabled && !arenaDisabled) {
+      if (stableSince === null) stableSince = Date.now();
+      if (Date.now() - stableSince >= 350) return Date.now() - startedAt;
+    } else {
+      stableSince = null;
+    }
+    await page.waitForTimeout(50);
   }
-  throw new Error(`Alternativa permaneceu desabilitada por mais de ${timeout}ms após o DD2 ficar visível.`);
+  throw new Error(`DD2 não atingiu estado interativo final em ${timeout}ms.`);
 }
 
 async function boot(browser) {
@@ -36,20 +55,21 @@ async function boot(browser) {
   } catch (_) {}
   const frame = await waitForMechanicFrame(page);
   await frame.locator('.duduq-dd2-target[data-single-target-choice="true"]').waitFor({ state: "visible", timeout: 35_000 });
-  const firstChoice = frame.locator(".duduq-dd2-bank .duduq-dd2-item").first();
+  const firstChoice = frame.locator('.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="opt-1"]').first();
   await firstChoice.waitFor({ state: "visible", timeout: 5_000 });
-  const interactiveWaitMs = await waitUntilEnabled(firstChoice);
+  const interactiveWaitMs = await waitForFinalInteractive(page, frame, firstChoice);
   return { context, page, frame, interactiveWaitMs };
 }
 
 async function probe(browser, letter) {
   const { context, page, frame, interactiveWaitMs } = await boot(browser);
   try {
-    const button = frame.locator(".duduq-dd2-bank .duduq-dd2-item").filter({ hasText: `🔊 ${letter}` }).first();
+    const expectedId = itemIdForLetter(letter);
+    const button = frame.locator(`.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="${expectedId}"]`).first();
     await button.waitFor({ state: "visible", timeout: 5_000 });
-    await waitUntilEnabled(button);
     const itemId = await button.getAttribute("data-dd2-item-id");
     const aria = await button.getAttribute("aria-label");
+    const visibleText = (await button.innerText()).trim();
     await button.click();
     await frame.waitForFunction(() => document.querySelector('.duduq-dd2-target[data-single-target-choice="true"]')?.getAttribute("data-filled") === "true");
     const confirm = frame.locator(".duduq-dd2-confirm");
@@ -66,7 +86,7 @@ async function probe(browser, letter) {
         bodyText: document.body?.innerText || ""
       };
     });
-    return { letter, itemId, aria, interactiveWaitMs, ...result };
+    return { letter, itemId, aria, visibleText, interactiveWaitMs, ...result };
   } finally {
     await context.close();
   }
@@ -79,6 +99,12 @@ try {
 
   console.log("=== DD2 CORRECT CHOICE MAPPING PROBE ===");
   console.log(JSON.stringify(probes, null, 2));
+
+  for (const entry of probes) {
+    if (/🔊/.test(entry.visibleText)) {
+      throw new Error(`Alternativa ${entry.letter}/${entry.itemId} ainda duplica o glyph visual de áudio no rótulo: ${entry.visibleText}`);
+    }
+  }
 
   const successes = probes.filter((entry) => entry.feedbackState === "success");
   if (successes.length === 0) {
@@ -102,7 +128,7 @@ try {
     throw new Error(`A alternativa correta ${accepted.letter}/${accepted.itemId} foi aceita, mas o feedback padrão de acerto não ficou observável.`);
   }
 
-  console.log(`PASS — EN2-M3-01 preserva fonte: ${accepted.letter}/${accepted.itemId} = doll e feedback success observável.`);
+  console.log(`PASS — EN2-M3-01 preserva fonte: ${accepted.letter}/${accepted.itemId} = doll, sem glyph duplicado, e feedback success observável.`);
 } finally {
   await browser.close();
 }
