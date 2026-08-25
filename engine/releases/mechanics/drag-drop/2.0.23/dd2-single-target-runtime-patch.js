@@ -6,15 +6,18 @@
    question/strategy and reads the latest React state/callbacks through a ref,
    avoiding detach/reattach gaps during normal rerenders. The same patch also
    preserves correctChoiceId through DD2 normalization so scoring remains tied
-   to the original content source.
+   to the original content source. Visual rules and compact viewport handling
+   are owned by this candidate rather than by content-side M03 code.
 */
 (function () {
   "use strict";
 
-  const VERSION = "2.0.23-dd2-single-target-f";
+  const VERSION = "2.0.23-dd2-single-target-g";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqDD23SingleTargetWrapped";
   const MAX_ATTEMPTS = 1200;
+  const RUNTIME_STYLE_ID = "duduq-dd23-single-target-runtime-style";
+  const COMPACT_HOST_ATTRIBUTE = "data-duduq-host-compact-viewport";
 
   function fail(message) {
     throw new Error("[DuduQ Drag & Drop 2.0.23 DD2] " + message);
@@ -32,7 +35,6 @@
 /* === DUDUQ DRAG & DROP 2.0.23 — SINGLE TARGET CHOICE / ACTIVE DD2 === */
 .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) {
   display: grid !important;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, .78fr) !important;
   align-items: start !important;
   gap: clamp(18px, 2.5vw, 34px) !important;
 }
@@ -44,13 +46,6 @@
 .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-capacity {
   display: none !important;
 }
-.duduq-dd2-target[data-single-target-choice="true"] {
-  width: min(100%, 520px) !important;
-  min-height: clamp(260px, 43vh, 390px) !important;
-}
-.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone {
-  min-height: clamp(150px, 24vh, 230px) !important;
-}
 .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank {
   min-width: 0 !important;
   margin: 0 !important;
@@ -58,15 +53,117 @@
 }
 .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank-items {
   display: grid !important;
-  grid-template-columns: minmax(0, 1fr) !important;
   align-content: start !important;
-  gap: 10px !important;
 }
 .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item[data-wrong="true"] {
   border-color: #ff5d5d !important;
   background: #fff0f0 !important;
   box-shadow: 0 4px 0 #e14b4b, 0 8px 14px rgba(183,28,28,.10) !important;
 }
+
+@media (min-width: 761px) {
+  .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) {
+    grid-template-columns: minmax(360px, 1fr) minmax(280px, 320px) !important;
+    gap: clamp(22px, 2.5vw, 36px) !important;
+  }
+
+  .duduq-dd2-target[data-single-target-choice="true"] {
+    width: min(100%, 540px) !important;
+    min-height: clamp(270px, 38vh, 340px) !important;
+  }
+
+  .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head {
+    min-height: clamp(150px, 23vh, 205px) !important;
+    flex: 1 1 auto !important;
+    padding: 8px 14px !important;
+  }
+
+  .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head img,
+  .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head .duduq-dd2-item-media {
+    width: min(78%, 230px) !important;
+    max-width: 78% !important;
+    height: min(23vh, 190px) !important;
+    max-height: 190px !important;
+    object-fit: contain !important;
+  }
+
+  .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone {
+    flex: 0 0 clamp(92px, 15vh, 112px) !important;
+    min-height: clamp(92px, 15vh, 112px) !important;
+    padding: 10px 14px !important;
+  }
+
+  .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank {
+    width: 100% !important;
+    max-width: 320px !important;
+    justify-self: stretch !important;
+  }
+
+  .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank-items {
+    width: 100% !important;
+    max-width: none !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank .duduq-dd2-item-shell {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+  }
+
+  .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank .duduq-dd2-item {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    min-height: 68px !important;
+    padding: 10px 14px !important;
+  }
+}
+
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) {
+  gap: 18px !important;
+}
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] {
+  min-height: 246px !important;
+  max-height: 270px !important;
+}
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head {
+  min-height: 126px !important;
+  max-height: 142px !important;
+  padding: 5px 12px !important;
+}
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head img,
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head .duduq-dd2-item-media {
+  width: min(72%, 205px) !important;
+  max-width: 72% !important;
+  height: min(128px, 24vh) !important;
+  max-height: 128px !important;
+}
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone {
+  flex: 0 0 78px !important;
+  min-height: 78px !important;
+  max-height: 84px !important;
+  padding: 7px 12px !important;
+}
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank-items {
+  gap: 8px !important;
+}
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank .duduq-dd2-item {
+  min-height: 60px !important;
+  padding-block: 7px !important;
+}
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-actions,
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-matching-action-slot.duduq-dd2-actions {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-confirm {
+  min-height: 46px !important;
+}
+
 @media (max-width: 760px) {
   .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) {
     grid-template-columns: minmax(0, 1fr) !important;
@@ -83,8 +180,30 @@
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px !important;
   }
+  .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank .duduq-dd2-item {
+    min-height: 58px !important;
+  }
 }
 `;
+
+  const COMPACT_VIEWPORT_SCRIPT = `<script>
+(function () {
+  "use strict";
+  var attributeName = "${COMPACT_HOST_ATTRIBUTE}";
+  function syncCompactViewport() {
+    var hostWindow = window;
+    try {
+      if (window.parent && window.parent !== window) hostWindow = window.parent;
+    } catch (_) {}
+    var width = Number(hostWindow.innerWidth || window.innerWidth || 0);
+    var height = Number(hostWindow.innerHeight || window.innerHeight || 0);
+    var compact = width >= 761 && (height <= 680 || (width <= 1100 && height <= 800));
+    document.documentElement.setAttribute(attributeName, compact ? "true" : "false");
+  }
+  syncCompactViewport();
+  window.addEventListener("resize", syncCompactViewport, { passive:true });
+})();
+</script>`;
 
   function patchActiveDD2(html) {
     if (typeof html !== "string" || !html.trim()) {
@@ -172,9 +291,12 @@
     );
 
     if (!prepared.includes("</head>")) {
-      fail("runtime sem </head> para injeção do CSS single-target.");
+      fail("runtime sem </head> para injeção do CSS/viewport single-target.");
     }
-    prepared = prepared.replace("</head>", `<style>${SINGLE_TARGET_CSS}</style></head>`);
+    prepared = prepared.replace(
+      "</head>",
+      `<style id="${RUNTIME_STYLE_ID}">${SINGLE_TARGET_CSS}</style>${COMPACT_VIEWPORT_SCRIPT}</head>`
+    );
 
     return prepared;
   }
@@ -184,6 +306,8 @@
       version: VERSION,
       ready: Boolean(ready),
       hook: HOOK,
+      styleId: RUNTIME_STYLE_ID,
+      compactHostAttribute: COMPACT_HOST_ATTRIBUTE,
       details: details || null
     });
   }
@@ -207,9 +331,9 @@
       writable: false
     });
 
-    expose(true, "active-dd2-single-owner-stable-pointer-and-answer");
+    expose(true, "active-dd2-single-owner-answer-and-visuals");
     window.dispatchEvent(new CustomEvent("duduq:dd23-single-target-runtime-ready", {
-      detail: { version: VERSION }
+      detail: { version: VERSION, styleId: RUNTIME_STYLE_ID }
     }));
     return true;
   }
