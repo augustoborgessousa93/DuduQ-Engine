@@ -10,12 +10,10 @@ on:
       - "scripts/qa-year2-m01-v22-canonical.mjs"
       - "scripts/qa-year2-m01-v22-runtime.mjs"
       - "scripts/qa-year2-all-v22-runtime.mjs"
-      - "scripts/qa-year2-editorial-assets.mjs"
+      - "scripts/qa-year2-provisional-visual-policy.mjs"
       - "scripts/qa-year2-visual-functional.mjs"
       - "scripts/qa-year2-visual-functional-base.mjs"
       - "scripts/qa-year2-m01-12-first-listen.mjs"
-      - "scripts/audit-year2-commercial-readiness.mjs"
-      - "scripts/build-year2-production-plan.mjs"
       - "engine/channels/canary-v1.json"
       - ".github/workflows/year2-word-slash-homolog.yml"
   pull_request:
@@ -27,12 +25,10 @@ on:
       - "scripts/qa-year2-m01-v22-canonical.mjs"
       - "scripts/qa-year2-m01-v22-runtime.mjs"
       - "scripts/qa-year2-all-v22-runtime.mjs"
-      - "scripts/qa-year2-editorial-assets.mjs"
+      - "scripts/qa-year2-provisional-visual-policy.mjs"
       - "scripts/qa-year2-visual-functional.mjs"
       - "scripts/qa-year2-visual-functional-base.mjs"
       - "scripts/qa-year2-m01-12-first-listen.mjs"
-      - "scripts/audit-year2-commercial-readiness.mjs"
-      - "scripts/build-year2-production-plan.mjs"
       - "engine/channels/canary-v1.json"
       - ".github/workflows/year2-word-slash-homolog.yml"
 
@@ -66,32 +62,8 @@ jobs:
       - name: Validate Year 2 M01-M06 v2.2 + Factory v1.2
         run: node scripts/qa-year2-all-v22-runtime.mjs
 
-      - name: Validate exact existing editorial assets
-        run: node scripts/qa-year2-editorial-assets.mjs
-
-      - name: Build reusable asset and audio production plan
-        run: node scripts/build-year2-production-plan.mjs
-
-      - name: Audit commercial assets and recorded audio
-        run: node scripts/audit-year2-commercial-readiness.mjs
-
-      - name: Upload production plan
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: year2-production-plan
-          path: artifacts/year2-production-plan
-          if-no-files-found: warn
-          retention-days: 14
-
-      - name: Upload commercial readiness audit
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: year2-commercial-readiness
-          path: artifacts/year2-readiness
-          if-no-files-found: warn
-          retention-days: 14
+      - name: Validate provisional emoji/vector visual policy
+        run: node scripts/qa-year2-provisional-visual-policy.mjs
 
   visual-functional-gate:
     name: Visual and functional gate
