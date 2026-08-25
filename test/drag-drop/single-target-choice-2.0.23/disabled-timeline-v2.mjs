@@ -55,8 +55,7 @@ try {
       return {
         buttonDisabled: button?.disabled ?? null,
         arenaDisabled: arena?.getAttribute("data-disabled") || null,
-        feedbackState: feedback?.getAttribute("data-state") || "idle",
-        pointerAttached: Boolean(window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__?.attached)
+        feedbackState: feedback?.getAttribute("data-state") || "idle"
       };
     });
 
