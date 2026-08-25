@@ -1,0 +1,72 @@
+name: Year 2 v2.3 Multimodal Homolog
+
+on:
+  push:
+    branches:
+      - homolog/year2-v23-multimodal
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "content/english/year-2/**"
+      - "scripts/qa-year2-v23-**"
+      - ".github/workflows/year2-v23-multimodal-homolog.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  structural-and-browser:
+    name: Year2 v2.3 structural + Chromium
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Structural pedagogical gate
+        run: node scripts/qa-year2-v23-multimodal.mjs
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local DuduQ server
+        run: |
+          python3 -m http.server 4173 > /tmp/duduq-year2-v23-server.log 2>&1 &
+          echo $! > /tmp/duduq-year2-v23-server.pid
+          for i in {1..20}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/duduq-year2-v23-server.log
+          exit 1
+
+      - name: M1-12 first-listen desktop/mobile
+        env:
+          DUDUQ_QA_BASE: http://127.0.0.1:4173
+          DUDUQ_QA_OUT: artifacts/year2-v23
+        run: node scripts/qa-year2-v23-m112-first-listen.mjs
+
+      - name: M01-M06 normal desktop/mobile
+        env:
+          DUDUQ_QA_BASE: http://127.0.0.1:4173
+          DUDUQ_QA_OUT: artifacts/year2-v23
+        run: node scripts/qa-year2-v23-browser-normal.mjs
+
+      - name: Upload visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year2-v23-multimodal-visual-evidence
+          path: artifacts/year2-v23
+          if-no-files-found: warn
+          retention-days: 14
