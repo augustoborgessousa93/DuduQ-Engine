@@ -56,15 +56,15 @@ try {
   if (mechanicFrame) {
     runtime = await mechanicFrame.evaluate(() => {
       const target = document.querySelector(".duduq-dd2-target");
-      const capacity = document.querySelector(".duduq-dd2-target-capacity");
-      const pool = document.querySelector(".duduq-dd2-pool");
-      const confirm = document.querySelector(".duduq-dd2-primary");
+      const capacity = document.querySelector(".duduq-dd2-capacity");
+      const bank = document.querySelector(".duduq-dd2-bank");
+      const confirm = document.querySelector(".duduq-dd2-confirm");
       return {
         title: document.title,
         targetAttributes: target ? Object.fromEntries(Array.from(target.attributes).map((attr) => [attr.name, attr.value])) : null,
         targetClass: target?.className || null,
         capacityDisplay: capacity ? getComputedStyle(capacity).display : null,
-        poolClass: pool?.className || null,
+        bankClass: bank?.className || null,
         confirmDisabled: confirm?.disabled ?? null,
         bodyText: document.body?.innerText?.slice(0, 1200) || ""
       };
