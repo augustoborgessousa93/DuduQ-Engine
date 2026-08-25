@@ -7,7 +7,7 @@
   "use strict";
 
   const STYLE_ID = "duduq-m03-single-target-choice-visual-polish";
-  const VERSION = "1.0.0-homolog";
+  const VERSION = "1.1.0-homolog";
   const FRAME_SELECTOR = 'iframe[title="DuduQ — Drag & Drop"]';
 
   const CSS = `
@@ -73,6 +73,74 @@
     min-width: 0 !important;
     min-height: 68px !important;
     padding: 10px 14px !important;
+  }
+}
+
+/* Short notebook viewport: the iframe is substantially shorter than the browser
+   because the global DuduQ header remains above it. Compact only the vertical
+   dimensions needed to keep CONFIRMAR fully visible; preserve the two-column
+   desktop composition and large motor targets. */
+@media (min-width: 761px) and (max-height: 560px) {
+  .duduq-dd2-surface {
+    gap: 6px !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+
+  .duduq-dd2-instruction,
+  .duduq-dd2-prompt,
+  .duduq-dd2-question {
+    margin-bottom: 4px !important;
+  }
+
+  .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) {
+    gap: 18px !important;
+  }
+
+  .duduq-dd2-target[data-single-target-choice="true"] {
+    min-height: 246px !important;
+    max-height: 270px !important;
+  }
+
+  .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head {
+    min-height: 126px !important;
+    max-height: 142px !important;
+    padding: 5px 12px !important;
+  }
+
+  .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head img,
+  .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head .duduq-dd2-item-media {
+    width: min(72%, 205px) !important;
+    max-width: 72% !important;
+    height: min(128px, 24vh) !important;
+    max-height: 128px !important;
+  }
+
+  .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone {
+    flex: 0 0 78px !important;
+    min-height: 78px !important;
+    max-height: 84px !important;
+    padding: 7px 12px !important;
+  }
+
+  .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank-items {
+    gap: 8px !important;
+  }
+
+  .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank .duduq-dd2-item {
+    min-height: 60px !important;
+    padding-block: 7px !important;
+  }
+
+  .duduq-dd2-actions,
+  .duduq-matching-action-slot.duduq-dd2-actions {
+    margin-top: 2px !important;
+    padding-top: 0 !important;
+    padding-bottom: 2px !important;
+  }
+
+  .duduq-dd2-confirm {
+    min-height: 48px !important;
   }
 }
 
