@@ -1,0 +1,92 @@
+name: Year 2 Live Pages Post-Deploy
+
+on:
+  push:
+    branches:
+      - release/year2-v22-public-links
+    paths:
+      - ".github/workflows/year2-live-pages-postdeploy.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  live-pages:
+    name: Validate live Pages M01-M06
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout release validation branch
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Validate deployed public modules
+        run: |
+          node <<'NODE'
+          const { chromium } = require('playwright');
+          const base = 'https://duduq-engine.pages.dev/content/english/year-2';
+          const sleep = ms => new Promise(r => setTimeout(r, ms));
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const failures = [];
+            for (let m = 1; m <= 6; m++) {
+              const mm = String(m).padStart(2, '0');
+              const url = `${base}/module-${mm}/`;
+              let passed = false;
+              let lastError = '';
+              for (let attempt = 1; attempt <= 12 && !passed; attempt++) {
+                const page = await browser.newPage({ viewport: { width: 1366, height: 768 } });
+                try {
+                  const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+                  if (!response || !response.ok()) throw new Error(`HTTP ${response?.status?.()}`);
+                  const publicEntry = await page.evaluate(() => window.DUDUQ_PUBLIC_ENTRY || null);
+                  if (!publicEntry || publicEntry.year !== 2 || publicEntry.module !== m) throw new Error('entrypoint ainda não propagado');
+                  const start = page.getByRole('button', { name: /INICIAR MISSÃO/i });
+                  await start.waitFor({ state: 'visible', timeout: 15000 });
+                  await start.click();
+                  await page.waitForFunction(() => {
+                    const root = document.getElementById('root');
+                    const text = root?.textContent || '';
+                    return Boolean(document.querySelector('iframe')) || /Erro:/i.test(text) || /Erro ao carregar/i.test(text);
+                  }, undefined, { timeout: 20000 });
+                  const rootText = await page.locator('#root').innerText().catch(() => '');
+                  if (/Erro:/i.test(rootText) || /Erro ao carregar/i.test(rootText)) throw new Error(rootText.slice(0, 220));
+                  const iframe = page.locator('iframe').first();
+                  await iframe.waitFor({ state: 'visible', timeout: 10000 });
+                  const handle = await iframe.elementHandle();
+                  const frame = await handle?.contentFrame();
+                  if (!frame) throw new Error('iframe sem contentFrame');
+                  await frame.waitForFunction(() => {
+                    const text = (document.body?.innerText || '').trim();
+                    const interactive = document.querySelectorAll('button,[role="button"],[draggable="true"],[tabindex],input,select,.duduq-dd2-item').length;
+                    return /Falha ao preparar|Modo editorial|\bErro\b/i.test(text) || (!/^Preparando\b/i.test(text) && interactive > 0);
+                  }, undefined, { timeout: 15000 });
+                  const text = await frame.locator('body').innerText().catch(() => '');
+                  if (/Falha ao preparar|Modo editorial|\bErro\b/i.test(text)) throw new Error(text.slice(0, 220));
+                  console.log(`PASS LIVE M${mm} attempt=${attempt} ${url}`);
+                  passed = true;
+                } catch (error) {
+                  lastError = String(error?.message || error);
+                  console.log(`WAIT LIVE M${mm} attempt=${attempt}: ${lastError}`);
+                  if (attempt < 12) await sleep(10000);
+                } finally {
+                  await page.close();
+                }
+              }
+              if (!passed) failures.push(`M${mm}: ${lastError}`);
+            }
+            await browser.close();
+            if (failures.length) {
+              console.error('LIVE PAGES QA FAIL');
+              failures.forEach(f => console.error(f));
+              process.exit(1);
+            }
+            console.log('DUDUQ YEAR2 LIVE PAGES QA: PASS (6/6)');
+          })().catch(error => { console.error(error); process.exit(1); });
+          NODE
