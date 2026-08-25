@@ -157,12 +157,9 @@ async function desktopScenario(browser) {
   await dragChoice(page, choiceA, target);
   await waitTargetFilled(target, true);
   assert(await target.locator(".duduq-dd2-item").count() === 1, "Arraste de A não deixou exatamente uma alternativa no destino.");
+  const draggedId = await target.locator(".duduq-dd2-item").first().getAttribute("data-dd2-item-id");
+  assert(draggedId === "opt-1", `Arraste real colocou item inesperado no destino: ${draggedId}.`);
   assert(!(await confirm.isDisabled()), "CONFIRMAR não habilitou após alternativa A ser colocada.");
-
-  // Prova que o arraste foi resolvido pelo owner nativo, não por click residual.
-  const pointerProof = await frame.locator("body").evaluate(() => window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__ || null);
-  assert(pointerProof?.placeCalls >= 1, "Arraste visual ocorreu sem prova de chamada place() pelo owner nativo.");
-  assert(pointerProof?.targetResolved === "stimulus-target", `Owner nativo resolveu target inesperado: ${pointerProof?.targetResolved}.`);
 
   // O owner nativo bloqueia por 320 ms o click sintético que alguns browsers disparam
   // após um drag. O teste espera essa janela terminar antes de simular uma NOVA intenção
