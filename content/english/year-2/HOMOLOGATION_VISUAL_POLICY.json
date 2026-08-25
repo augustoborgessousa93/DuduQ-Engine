@@ -1,28 +1,31 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "year": 2,
   "sourceVersion": "2.2",
   "factorySpec": "1.2",
-  "mode": "PROVISIONAL_EMOJI_VECTOR",
+  "mode": "EXISTING_ASSET_PLUS_PROVISIONAL",
   "status": "ACTIVE_FOR_TECHNICAL_HOMOLOGATION",
-  "decision": "Final editorial images are intentionally deferred. Continue development and QA with provisional emoji/vector visuals.",
+  "decision": "Use exact images already available in Assets-DuduQ. When an exact image does not yet exist, continue with the Factory provisional emoji/vector visual until the final asset is added.",
   "rules": {
-    "finalAssetsDeferred": true,
+    "preferExistingRepositoryAssets": true,
+    "missingAssetsUseProvisionalEmojiVector": true,
+    "finalMissingAssetsDeferred": true,
     "blocksTechnicalQA": false,
     "blocksCurrentHomologation": false,
     "blocksProductionPromotionWithoutExplicitApproval": true,
-    "futureAssetRepository": "augustoborgessousa93/Assets-DuduQ",
+    "assetRepository": "augustoborgessousa93/Assets-DuduQ",
     "replaceByStableSemanticKey": true,
     "doNotChangeOfficialQuestionOrAnswerWhenReplacingAssets": true
   },
   "runtime": {
-    "useFactoryPreviewVisuals": true,
-    "loadEditorialAssetPatch": false,
+    "useFactoryPreviewVisualsAsFallback": true,
+    "loadEditorialAssetPatch": true,
     "loadSemanticFinalAssetPatch": false,
+    "editorialAssetPatch": "year2-v22-homolog-editorial-assets.js",
     "audioMayUseHomologationFallbackUntilFinalRecordedAudioIsIntegrated": true
   },
   "replacementContract": {
-    "principle": "Replace only the visual source while preserving stable item IDs, mechanic, prompt, alternatives, answer and pedagogical evidence.",
+    "principle": "Use a repository asset when an exact semantic match exists; otherwise keep the provisional visual. Future replacement changes only the visual source while preserving stable item ID, mechanic, prompt, alternatives, answer and pedagogical evidence.",
     "preferredNaming": "intelligent-semantic-filenames",
     "futureLocation": "Assets-DuduQ"
   }
