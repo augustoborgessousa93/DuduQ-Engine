@@ -93,6 +93,7 @@ try {
   assert(nativeOwnerBefore === null, "Owner nativo exclusivo do SINGLE_TARGET_CHOICE foi instalado em strategy=sequence.");
 
   const confirm = frame.locator(".duduq-dd2-confirm");
+  await confirm.waitFor({ state: "visible", timeout: 5_000 });
   assert(await confirm.isDisabled(), "Sequence deveria iniciar com CONFIRMAR desabilitado.");
 
   // Cenário sentinela real: 6 correto na posição 1; 8 e 7 trocados nas posições 2/3.
@@ -107,7 +108,8 @@ try {
   assert(JSON.stringify(wrongOrder) === JSON.stringify(["six", "eight", "seven"]), `Ordem pré-confirmação inesperada: ${JSON.stringify(wrongOrder)}.`);
 
   await confirm.click();
-  await frame.locator('.duduq-engine-feedback[data-state="retry"] .duduq-engine-feedback-card').waitFor({ state: "visible", timeout: 3_000 });
+  const retryFeedback = frame.locator('.duduq-engine-feedback[data-state="retry"] .duduq-engine-feedback-card');
+  await retryFeedback.waitFor({ state: "visible", timeout: 3_000 });
 
   const retryState = await frame.evaluate(() => Array.from(document.querySelectorAll(".duduq-dd2-sequence-slot")).map((slot) => ({
     correct: slot.getAttribute("data-correct"),
@@ -123,7 +125,13 @@ try {
   assert(JSON.stringify(afterReturn) === JSON.stringify(["six", null, null]), `Após ~850ms somente o item correto deveria permanecer: ${JSON.stringify(afterReturn)}.`);
   assert(await itemByAlt(frame, "seven").isVisible(), "seven incorreto não retornou ao banco.");
   assert(await itemByAlt(frame, "eight").isVisible(), "eight incorreto não retornou ao banco.");
-  assert(await confirm.isDisabled(), "CONFIRMAR deveria voltar a desabilitado enquanto a sequence está incompleta.");
+
+  // Durante o feedback de retry o shell pode retirar temporariamente a ação do DOM.
+  // O contrato de regressão é: depois do feedback, a mesma questão volta editável,
+  // com o item correto travado e CONFIRMAR novamente desabilitado até completar 3/3.
+  await retryFeedback.waitFor({ state: "hidden", timeout: 5_000 }).catch(() => {});
+  await confirm.waitFor({ state: "visible", timeout: 5_000 });
+  assert(await confirm.isDisabled(), "CONFIRMAR deveria voltar desabilitado enquanto a sequence está incompleta.");
 
   // Completa as posições restantes no fluxo original de sequence.
   await dragItem(page, frame, "seven");
