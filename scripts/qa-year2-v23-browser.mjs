@@ -82,7 +82,7 @@ async function runM112(browser,device){
       window.addEventListener("duduq:step-start",event=>{
         const d=event.detail||{};
         window.__DUDUQ_QA_STEP__={
-          id:d.step?.id||d.activity?.id||d.id||null,
+          id:d.stepId||d.step?.id||d.activity?.id||d.id||null,
           index:d.stepIndex??d.index??null,
           mechanic:d.mechanicId||d.mechanic||d.activity?.mechanic||null
         };
