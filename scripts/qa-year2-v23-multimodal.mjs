@@ -21,9 +21,25 @@ function sha(v){
   return crypto.createHash("sha256").update(JSON.stringify(v)).digest("hex");
 }
 
+const sharedV22Patch=fs.readFileSync(path.join(YEAR2,"year2-v22-homolog-dragdrop-visual-patch.js"),"utf8");
+const isolatedV23Patch=fs.readFileSync(path.join(YEAR2,"year2-v23-dragdrop-visual-patch.js"),"utf8");
+check(!sharedV22Patch.includes("DuduQYear2V23Factory"),"Patch compartilhado v2.2 foi contaminado por lógica v2.3");
+check(isolatedV23Patch.includes("DuduQYear2V23Factory"),"Patch visual isolado v2.3 não referencia a Factory v2.3");
+
+for(let m=1;m<=6;m++){
+  const mm=String(m).padStart(2,"0");
+  const page=fs.readFileSync(path.join(YEAR2,`module-${mm}/homolog-v23-runtime.html`),"utf8");
+  check(page.includes("year2-v23-dragdrop-visual-patch.js"),`M${mm}: runtime v2.3 não carrega patch visual isolado`);
+  check(!page.includes("year2-v22-homolog-dragdrop-visual-patch.js"),`M${mm}: runtime v2.3 ainda carrega patch compartilhado v2.2`);
+}
+const directM112=fs.readFileSync(path.join(YEAR2,"module-01/homolog-v23-m112-runtime.html"),"utf8");
+check(directM112.includes("year2-v23-dragdrop-visual-patch.js"),"M1-12 QA: patch visual v2.3 isolado ausente");
+check(!directM112.includes("year2-v22-homolog-dragdrop-visual-patch.js"),"M1-12 QA: patch v2.2 compartilhado ainda carregado");
+
 run("content/english/year-2/year2-v22-homolog-core.js");
 run("content/english/year-2/year2-v22-homolog-editorial-assets.js");
 run("content/english/year-2/year2-v23-multimodal-adapter.js");
+run("content/english/year-2/year2-v23-dragdrop-visual-patch.js");
 for(let m=1;m<=6;m++) run(`content/english/year-2/module-${String(m).padStart(2,"0")}/module-${String(m).padStart(2,"0")}-v23-multimodal.js`);
 
 const signatures=JSON.parse(fs.readFileSync(path.join(YEAR2,"YEAR2_V23_SOURCE_SIGNATURES.json"),"utf8"));
@@ -93,6 +109,7 @@ const m112=byId["EN2-M1-12"];
 check(m112?.metadata?.firstListenGate?.required===true,"EN2-M1-12 sem first-listen gate");
 check(m112.metadata.firstListenGate.visibleLettersBeforeFirstListen===false,"EN2-M1-12 revela letras antes da primeira escuta");
 check(m112.metadata.editorialAnswer==="LEO","EN2-M1-12 resposta editorial não preservada");
+check(m112.metadata?.interactionAdaptation?.visualRule?.includes("primeiro viewport"),"EN2-M1-12 sem regra visual compacta v2.3");
 
 for(const id of ["EN2-M6-11","EN2-M6-12"]){
   const q=byId[id];
@@ -119,6 +136,7 @@ console.log(JSON.stringify({
   blocked:0,
   wordSlash:["EN2-M1-08"],
   m112FirstListen:true,
+  v23VisualPatchIsolated:true,
   m6AudioImage:["EN2-M6-11","EN2-M6-12"],
   exactExistingAssetItems:10,
   overallSha256:overall
