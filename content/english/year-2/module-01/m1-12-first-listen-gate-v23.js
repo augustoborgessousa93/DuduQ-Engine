@@ -144,7 +144,7 @@
 
   function createOverlay(){
     if(!active||overlay?.isConnected)return;
-    const root=document.getElementById("root")||document.body;
+    const root=document.body||document.documentElement;
     overlay=document.createElement("div");
     overlay.id=OVERLAY_ID;
     overlay.setAttribute("role","region");
