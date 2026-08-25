@@ -5,7 +5,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "2.0.23-dd2-single-target-a";
+  const VERSION = "2.0.23-dd2-single-target-b";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqDD23SingleTargetWrapped";
   const MAX_ATTEMPTS = 1200;
@@ -24,23 +24,37 @@
 
   const SINGLE_TARGET_CSS = `
 /* === DUDUQ DRAG & DROP 2.0.23 — SINGLE TARGET CHOICE / ACTIVE DD2 === */
-.duduq-dd2-stage:has(.duduq-dd2-target[data-single-target-choice="true"]) {
+.duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) {
+  display: grid !important;
   grid-template-columns: minmax(0, 1fr) minmax(300px, .78fr) !important;
   align-items: start !important;
   gap: clamp(18px, 2.5vw, 34px) !important;
 }
-.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-capacity {
+.duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-targets {
+  grid-template-columns: minmax(0, 1fr) !important;
+  justify-items: center !important;
+  min-width: 0 !important;
+}
+.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-capacity {
   display: none !important;
 }
 .duduq-dd2-target[data-single-target-choice="true"] {
+  width: min(100%, 520px) !important;
   min-height: clamp(260px, 43vh, 390px) !important;
-}
-.duduq-dd2-stage:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-pool {
-  grid-template-columns: 1fr !important;
-  align-content: start !important;
 }
 .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone {
   min-height: clamp(150px, 24vh, 230px) !important;
+}
+.duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank {
+  min-width: 0 !important;
+  margin: 0 !important;
+  align-self: start !important;
+}
+.duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank-items {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  align-content: start !important;
+  gap: 10px !important;
 }
 .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item[data-wrong="true"] {
   border-color: #ff5d5d !important;
@@ -48,17 +62,18 @@
   box-shadow: 0 4px 0 #e14b4b, 0 8px 14px rgba(183,28,28,.10) !important;
 }
 @media (max-width: 760px) {
-  .duduq-dd2-stage:has(.duduq-dd2-target[data-single-target-choice="true"]) {
-    grid-template-columns: 1fr !important;
+  .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) {
+    grid-template-columns: minmax(0, 1fr) !important;
     gap: 14px !important;
   }
   .duduq-dd2-target[data-single-target-choice="true"] {
+    width: min(100%, 360px) !important;
     min-height: 210px !important;
   }
   .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone {
     min-height: 118px !important;
   }
-  .duduq-dd2-stage:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-pool {
+  .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank-items {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px !important;
   }
