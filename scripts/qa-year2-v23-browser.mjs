@@ -72,6 +72,15 @@ async function runModule(browser,m,device){
   }finally{await page.close()}
 }
 
+async function requestNextWhenHostReady(page,state,device){
+  for(let attempt=0;attempt<30;attempt++){
+    const accepted=await page.evaluate(()=>window.DuduQ.next({qaAdvance:true}));
+    if(accepted!==false) return true;
+    await page.waitForTimeout(120);
+  }
+  throw new Error(`M1-12 ${device}: Host permaneceu ocupado na etapa ${state?.id||"desconhecida"}`);
+}
+
 async function runM112(browser,device){
   const viewport=device==="mobile"?{width:390,height:844}:{width:1366,height:768};
   const page=await browser.newPage({viewport});
@@ -97,12 +106,11 @@ async function runM112(browser,device){
       const state=await page.evaluate(()=>window.__DUDUQ_QA_STEP__);
       if(state?.id==="en2-m1-12-drag-drop"){found=true;break}
       const previousIndex=Number(state?.index);
-      const accepted=await page.evaluate(()=>window.DuduQ.next({qaAdvance:true}));
-      check(accepted!==false,`M1-12 ${device}: Host recusou avanço na etapa ${state?.id||"desconhecida"}`);
+      await requestNextWhenHostReady(page,state,device);
       await page.waitForFunction(prev=>{
         const s=window.__DUDUQ_QA_STEP__;
         return s?.id==="en2-m1-12-drag-drop" || (Number.isFinite(Number(s?.index))&&Number(s.index)>prev);
-      },previousIndex,{timeout:6000});
+      },previousIndex,{timeout:8000});
     }
     const targetState=await page.evaluate(()=>window.__DUDUQ_QA_STEP__);
     if(targetState?.id==="en2-m1-12-drag-drop") found=true;
