@@ -1,13 +1,13 @@
 /* DUDUQ Drag & Drop 2.0.23 — SINGLE_TARGET_CHOICE pointer bridge
-   Homologation-only helper. The active DD2 runtime owns pointer handlers on
-   the source item itself; this bridge binds document-level forwarding at the
-   exact pointerdown that starts the gesture, removing mount/effect timing races.
-   It is strictly gated to strategy === "single-target-choice".
+   Homologation-only helper. For this gated interaction, pointer movement keeps
+   the native DD2 drag visuals, while pointerup over the single target commits
+   through the same canonical place() used by tap/click. This removes dependence
+   on the legacy finishDrag timing without changing any other Drag & Drop mode.
 */
 (function () {
   "use strict";
 
-  const VERSION = "2.0.23-pointer-bridge-c";
+  const VERSION = "2.0.23-pointer-bridge-d";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqDD23SingleTargetPointerBridgeWrapped";
   const READY_EVENT = "duduq:dd23-single-target-runtime-ready";
@@ -32,7 +32,7 @@
 
     const originalPointerDown = `    var onPointerDown = useCallback(function (itemId, event) {\n      if (disabled || feedbackState === "success" || event.button !== 0) return;\n      var rect = event.currentTarget.getBoundingClientRect();\n      event.currentTarget.setPointerCapture && event.currentTarget.setPointerCapture(event.pointerId);\n      var nextDrag = { itemId:itemId, originTargetId:locationOf(itemId), pointerId:event.pointerId, startX:event.clientX, startY:event.clientY, x:rect.left, y:rect.top, offsetX:event.clientX-rect.left, offsetY:event.clientY-rect.top, moved:false, width:rect.width, height:rect.height };\n      dragRef.current = nextDrag;\n      setDrag(nextDrag);\n    }, [disabled, feedbackState, locationOf]);`;
 
-    const bridgedPointerDown = `    var onPointerDown = useCallback(function (itemId, event) {\n      if (disabled || feedbackState === "success" || event.button !== 0) return;\n      var rect = event.currentTarget.getBoundingClientRect();\n      event.currentTarget.setPointerCapture && event.currentTarget.setPointerCapture(event.pointerId);\n      var nextDrag = { itemId:itemId, originTargetId:locationOf(itemId), pointerId:event.pointerId, startX:event.clientX, startY:event.clientY, x:rect.left, y:rect.top, offsetX:event.clientX-rect.left, offsetY:event.clientY-rect.top, moved:false, width:rect.width, height:rect.height };\n      dragRef.current = nextDrag;\n      setDrag(nextDrag);\n\n      if (question.strategy === "single-target-choice") {\n        var bridgePointerId = event.pointerId;\n        var bridgeDocument = event.currentTarget.ownerDocument || document;\n        var cleanupPointerBridge = function () {\n          bridgeDocument.removeEventListener("pointermove", forwardPointerMove, true);\n          bridgeDocument.removeEventListener("pointerup", forwardPointerUp, true);\n          bridgeDocument.removeEventListener("pointercancel", forwardPointerCancel, true);\n        };\n        var forwardPointerMove = function (pointerEvent) {\n          if (pointerEvent.pointerId !== bridgePointerId) return;\n          onPointerMove(pointerEvent);\n        };\n        var forwardPointerUp = function (pointerEvent) {\n          if (pointerEvent.pointerId !== bridgePointerId) return;\n          cleanupPointerBridge();\n          finishDrag(pointerEvent);\n        };\n        var forwardPointerCancel = function (pointerEvent) {\n          if (pointerEvent.pointerId !== bridgePointerId) return;\n          cleanupPointerBridge();\n          var activeDrag = dragRef.current;\n          if (!activeDrag || activeDrag.pointerId !== pointerEvent.pointerId) return;\n          dragRef.current = null;\n          setDrag(null);\n          setHoverTarget(null);\n        };\n        bridgeDocument.addEventListener("pointermove", forwardPointerMove, true);\n        bridgeDocument.addEventListener("pointerup", forwardPointerUp, true);\n        bridgeDocument.addEventListener("pointercancel", forwardPointerCancel, true);\n      }\n    }, [disabled, feedbackState, locationOf, question.strategy]);`;
+    const bridgedPointerDown = `    var onPointerDown = useCallback(function (itemId, event) {\n      if (disabled || feedbackState === "success" || event.button !== 0) return;\n      var rect = event.currentTarget.getBoundingClientRect();\n      event.currentTarget.setPointerCapture && event.currentTarget.setPointerCapture(event.pointerId);\n      var nextDrag = { itemId:itemId, originTargetId:locationOf(itemId), pointerId:event.pointerId, startX:event.clientX, startY:event.clientY, x:rect.left, y:rect.top, offsetX:event.clientX-rect.left, offsetY:event.clientY-rect.top, moved:false, width:rect.width, height:rect.height };\n      dragRef.current = nextDrag;\n      setDrag(nextDrag);\n\n      if (question.strategy === "single-target-choice") {\n        var bridgePointerId = event.pointerId;\n        var bridgeItemId = itemId;\n        var bridgeDocument = event.currentTarget.ownerDocument || document;\n        var cleanupPointerBridge = function () {\n          bridgeDocument.removeEventListener("pointermove", forwardPointerMove, true);\n          bridgeDocument.removeEventListener("pointerup", forwardPointerUp, true);\n          bridgeDocument.removeEventListener("pointercancel", forwardPointerCancel, true);\n        };\n        var finishBridgeGesture = function () {\n          dragRef.current = null;\n          setDrag(null);\n          setHoverTarget(null);\n        };\n        var forwardPointerMove = function (pointerEvent) {\n          if (pointerEvent.pointerId !== bridgePointerId) return;\n          onPointerMove(pointerEvent);\n        };\n        var forwardPointerUp = function (pointerEvent) {\n          if (pointerEvent.pointerId !== bridgePointerId) return;\n          cleanupPointerBridge();\n          var hit = bridgeDocument.elementFromPoint(pointerEvent.clientX, pointerEvent.clientY);\n          var targetNode = hit && hit.closest ? hit.closest("[data-dd2-target-id]") : null;\n          var targetId = targetNode ? targetNode.getAttribute("data-dd2-target-id") : null;\n          finishBridgeGesture();\n          if (targetId) {\n            pointerEvent.preventDefault && pointerEvent.preventDefault();\n            place(bridgeItemId, targetId, "drag-bridge");\n          }\n        };\n        var forwardPointerCancel = function (pointerEvent) {\n          if (pointerEvent.pointerId !== bridgePointerId) return;\n          cleanupPointerBridge();\n          finishBridgeGesture();\n        };\n        bridgeDocument.addEventListener("pointermove", forwardPointerMove, true);\n        bridgeDocument.addEventListener("pointerup", forwardPointerUp, true);\n        bridgeDocument.addEventListener("pointercancel", forwardPointerCancel, true);\n      }\n    }, [disabled, feedbackState, locationOf, onPointerMove, place, question.strategy]);`;
 
     return replaceRequired(html, originalPointerDown, bridgedPointerDown, 1);
   }
@@ -69,7 +69,7 @@
       writable: false
     });
 
-    expose(true, "pointerdown-document-forwarding-installed");
+    expose(true, "single-target-drag-commits-through-place");
     window.dispatchEvent(new CustomEvent("duduq:dd23-pointer-bridge-ready", {
       detail: { version: VERSION }
     }));
@@ -87,9 +87,6 @@
   }
 
   function onRuntimeReady() {
-    /* The active runtime patch emits this event synchronously immediately
-       after replacing the shared hook. Installing here guarantees that the
-       pointer bridge wraps the same hook before the loader can mount DD2. */
     if (install()) stopWaiting();
   }
 
