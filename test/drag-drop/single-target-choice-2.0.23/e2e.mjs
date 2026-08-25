@@ -20,7 +20,7 @@ async function bootM03(page, diagnosticName = "boot") {
 
   await page.goto(M03_URL, { waitUntil: "domcontentloaded", timeout: 30_000 });
   await page.waitForFunction(
-    () => window.DuduQDD23SingleTargetRuntimePatch?.ready === true,
+    () => window.DuduQDD23SingleTargetRuntimePatch?.ready === true && window.DuduQDD23PointerBridge?.ready === true,
     null,
     { timeout: 20_000 }
   );
@@ -77,22 +77,16 @@ function bankChoice(frame, letter) {
 async function waitTargetFilled(target, expected = true) {
   await target.waitFor({ state: "visible", timeout: 3_000 });
   const wanted = expected ? "true" : "false";
-  await target.locator(`xpath=.`).evaluate((element, value) => {
-    if (element.getAttribute("data-filled") === value) return;
-    return new Promise((resolve, reject) => {
-      const observer = new MutationObserver(() => {
-        if (element.getAttribute("data-filled") === value) {
-          observer.disconnect();
-          resolve();
-        }
-      });
-      observer.observe(element, { attributes: true, attributeFilter: ["data-filled"] });
-      setTimeout(() => {
-        observer.disconnect();
-        reject(new Error(`data-filled não chegou a ${value}`));
-      }, 2800);
-    });
-  }, wanted);
+  const deadline = Date.now() + 3_000;
+  let lastValue = null;
+
+  while (Date.now() < deadline) {
+    lastValue = await target.getAttribute("data-filled").catch(() => null);
+    if (lastValue === wanted) return;
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
+
+  throw new Error(`data-filled não chegou a ${wanted}; último valor=${lastValue}`);
 }
 
 async function dragChoice(page, choice, target) {
