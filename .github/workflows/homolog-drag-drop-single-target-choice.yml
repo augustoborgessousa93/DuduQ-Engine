@@ -64,6 +64,9 @@ jobs:
       - name: Syntax check drag diagnostics
         run: node --check test/drag-drop/single-target-choice-2.0.23/drag-inspect.mjs
 
+      - name: Syntax check correct feedback diagnostics
+        run: node --check test/drag-drop/single-target-choice-2.0.23/correct-inspect.mjs
+
       - name: Syntax check E2E
         run: node --check test/drag-drop/single-target-choice-2.0.23/e2e.mjs
 
@@ -109,6 +112,11 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/drag-drop/single-target-choice-2.0.23/drag-inspect.mjs
+
+      - name: Inspect correct feedback lifecycle
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/correct-inspect.mjs
 
       - name: Run M03 SINGLE_TARGET_CHOICE E2E
         env:
