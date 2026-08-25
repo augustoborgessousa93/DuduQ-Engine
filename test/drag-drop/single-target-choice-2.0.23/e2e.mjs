@@ -11,13 +11,30 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-async function waitUntilEnabled(locator, timeout = 6_000) {
+function itemIdForLetter(letter) {
+  return `opt-${letter.toUpperCase().charCodeAt(0) - 64}`;
+}
+
+async function waitForFinalInteractive(page, frame, locator, timeout = 10_000) {
   const startedAt = Date.now();
+  await page.waitForFunction(
+    () => !document.documentElement.hasAttribute("data-duduq-initial-speech-gate"),
+    null,
+    { timeout }
+  );
+  let stableSince = null;
   while (Date.now() - startedAt < timeout) {
-    if (await locator.isEnabled().catch(() => false)) return Date.now() - startedAt;
-    await new Promise((resolve) => setTimeout(resolve, 50));
+    const enabled = await locator.isEnabled().catch(() => false);
+    const arenaDisabled = await frame.locator(".duduq-dd2-arena").getAttribute("data-disabled").catch(() => "true") === "true";
+    if (enabled && !arenaDisabled) {
+      if (stableSince === null) stableSince = Date.now();
+      if (Date.now() - stableSince >= 350) return Date.now() - startedAt;
+    } else {
+      stableSince = null;
+    }
+    await page.waitForTimeout(50);
   }
-  throw new Error(`Alternativa permaneceu desabilitada por mais de ${timeout}ms após o DD2 ficar visível.`);
+  throw new Error(`DD2 não atingiu estado interativo final em ${timeout}ms.`);
 }
 
 async function bootM03(page, diagnosticName = "boot") {
@@ -29,7 +46,7 @@ async function bootM03(page, diagnosticName = "boot") {
 
   await page.goto(M03_URL, { waitUntil: "domcontentloaded", timeout: 30_000 });
   await page.waitForFunction(
-    () => window.DuduQDD23SingleTargetRuntimePatch?.ready === true,
+    () => window.DuduQDD23SingleTargetRuntimePatch?.ready === true && window.DuduQYear2M03SingleTargetVisualPolish?.ready === true,
     null,
     { timeout: 20_000 }
   );
@@ -71,9 +88,9 @@ async function bootM03(page, diagnosticName = "boot") {
     throw new Error(`Boot M03 falhou. Diagnóstico salvo em ${RESULTS}/${diagnosticName}-boot-diagnostic.txt. Mensagens: ${browserErrors.join(" | ") || "nenhuma"}`);
   }
 
-  const firstChoice = frame.locator(".duduq-dd2-bank .duduq-dd2-item").first();
+  const firstChoice = frame.locator('.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="opt-1"]').first();
   await firstChoice.waitFor({ state: "visible", timeout: 5_000 });
-  const interactiveWaitMs = await waitUntilEnabled(firstChoice);
+  const interactiveWaitMs = await waitForFinalInteractive(page, frame, firstChoice);
 
   if (browserErrors.length) {
     const fatal = browserErrors.filter((message) => /Falha|Error|erro|failed/i.test(message));
@@ -84,7 +101,8 @@ async function bootM03(page, diagnosticName = "boot") {
 }
 
 function bankChoice(frame, letter) {
-  return frame.locator(".duduq-dd2-bank .duduq-dd2-item").filter({ hasText: `🔊 ${letter}` }).first();
+  const itemId = itemIdForLetter(letter);
+  return frame.locator(`.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="${itemId}"]`).first();
 }
 
 async function waitTargetFilled(target, expected = true) {
@@ -103,7 +121,6 @@ async function waitTargetFilled(target, expected = true) {
 }
 
 async function dragChoice(page, choice, target) {
-  await waitUntilEnabled(choice);
   await choice.hover({ timeout: 8_000 });
   const sourceBox = await choice.boundingBox();
   const targetBox = await target.boundingBox();
@@ -112,6 +129,15 @@ async function dragChoice(page, choice, target) {
   await page.mouse.down();
   await page.mouse.move(targetBox.x + targetBox.width / 2, targetBox.y + targetBox.height * 0.72, { steps: 18 });
   await page.mouse.up();
+}
+
+async function assertLargeChoice(choice, label, minWidth = 220, minHeight = 60) {
+  const box = await choice.boundingBox();
+  assert(box, `${label}: alternativa não possui bounding box.`);
+  assert(box.width >= minWidth, `${label}: alternativa estreita demais (${Math.round(box.width)}px; mínimo ${minWidth}px).`);
+  assert(box.height >= minHeight, `${label}: alternativa baixa demais (${Math.round(box.height)}px; mínimo ${minHeight}px).`);
+  const text = (await choice.innerText()).trim();
+  assert(!/🔊/.test(text), `${label}: glyph de áudio duplicado permanece no rótulo (${text}).`);
 }
 
 async function desktopScenario(browser) {
@@ -128,6 +154,15 @@ async function desktopScenario(browser) {
   assert(targetBox.x < bankBox.x, "Desktop: estímulo/destino deveria ficar à esquerda das alternativas.");
   assert(bankBox.x - targetBox.x > 180, "Desktop: separação horizontal insuficiente entre estímulo e alternativas.");
 
+  const targetImage = target.locator(".duduq-dd2-target-head img").first();
+  await targetImage.waitFor({ state: "visible", timeout: 5_000 });
+  const targetImageBox = await targetImage.boundingBox();
+  assert(targetImageBox && targetImageBox.width >= 130 && targetImageBox.height >= 100, `Desktop: estímulo visual pequeno demais (${Math.round(targetImageBox?.width || 0)}x${Math.round(targetImageBox?.height || 0)}).`);
+
+  for (const letter of ["A", "B", "C", "D"]) {
+    await assertLargeChoice(bankChoice(frame, letter), `Desktop ${letter}`);
+  }
+
   assert(await confirm.isDisabled(), "CONFIRMAR deveria iniciar desabilitado sem escolha.");
 
   const capacity = target.locator(".duduq-dd2-capacity");
@@ -138,7 +173,6 @@ async function desktopScenario(browser) {
 
   // Primeiro gesto: arraste real de uma alternativa errada (A). A resposta correta da EN2-M3-01 é B.
   const choiceA = bankChoice(frame, "A");
-  await choiceA.waitFor({ state: "visible", timeout: 5_000 });
   await dragChoice(page, choiceA, target);
   await waitTargetFilled(target, true);
   assert(await target.locator(".duduq-dd2-item").count() === 1, "Arraste de A não deixou exatamente uma alternativa no destino.");
@@ -151,7 +185,6 @@ async function desktopScenario(browser) {
 
   // Troca por toque/clique antes de confirmar. C também é incorreta e deve substituir A sem revelar gabarito.
   const choiceC = bankChoice(frame, "C");
-  await waitUntilEnabled(choiceC);
   await choiceC.click();
   await waitTargetFilled(target, true);
   await bankChoice(frame, "A").waitFor({ state: "visible", timeout: 3_000 });
@@ -174,7 +207,6 @@ async function desktopScenario(browser) {
 
   // Nova tentativa por toque. B é a resposta correta da primeira questão.
   const choiceB = bankChoice(frame, "B");
-  await waitUntilEnabled(choiceB);
   await choiceB.click();
   await waitTargetFilled(target, true);
   assert(await target.locator(".duduq-dd2-item").count() === 1, "Toque em B não colocou exatamente uma alternativa no destino.");
@@ -208,10 +240,13 @@ async function mobileScenario(browser) {
   assert(firstBox && secondBox, "Mobile: alternativas não possuem caixas mensuráveis.");
   assert(Math.abs(firstBox.y - secondBox.y) < 28, "Mobile: primeiras alternativas não estão em duas colunas.");
   assert(Math.abs(firstBox.x - secondBox.x) > 80, "Mobile: colunas de alternativas não estão visualmente separadas.");
+  for (const letter of ["A", "B", "C", "D"]) {
+    const text = (await bankChoice(frame, letter).innerText()).trim();
+    assert(!/🔊/.test(text), `Mobile ${letter}: glyph de áudio duplicado permanece no rótulo (${text}).`);
+  }
 
   // Toque deve colocar qualquer alternativa e habilitar confirmar sem revelar se está correta.
   const choiceD = bankChoice(frame, "D");
-  await waitUntilEnabled(choiceD);
   await choiceD.click();
   await waitTargetFilled(target, true);
   assert(await target.locator(".duduq-dd2-item").count() === 1, "Mobile: toque em D não colocou exatamente uma alternativa no destino.");
@@ -226,7 +261,7 @@ const browser = await chromium.launch({ headless: true });
 try {
   await desktopScenario(browser);
   await mobileScenario(browser);
-  console.log("PASS — E2E SINGLE_TARGET_CHOICE: active DD2 + desktop + mobile + drag + tap + retry + correct");
+  console.log("PASS — E2E SINGLE_TARGET_CHOICE: active DD2 + desktop + mobile + drag + tap + retry + correct + visual sizing");
 } finally {
   await browser.close();
 }
