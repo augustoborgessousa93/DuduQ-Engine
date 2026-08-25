@@ -1,17 +1,9 @@
-/* DUDUQ Year2 v2.2 — homologation-only Drag & Drop visual/data patch
+/* DUDUQ Year2 — homologation-only Drag & Drop visual/data patch
    Purpose: keep Y2 interactions compact on mobile without changing immutable mechanic releases.
+   Applies to both the v2.2 base Factory and, when already loaded, the v2.3 multimodal Factory.
 */
 (function () {
   "use strict";
-
-  const factory = window.DuduQYear2V22Factory;
-  if (!factory || typeof factory.buildModule !== "function") {
-    console.error("[DuduQ Year2 DragDrop Visual Patch] Factory indisponível.");
-    return;
-  }
-  if (factory.__dragDropVisualPatchApplied) return;
-
-  const originalBuild = factory.buildModule.bind(factory);
 
   function allQuestions(module) {
     return (module?.activities || []).flatMap((activity) => activity?.questions || []);
@@ -63,14 +55,37 @@
     return module;
   }
 
-  function buildModule(config) {
-    return postProcess(originalBuild(config));
+  function wrapFactory(globalName, markerName, versionName) {
+    const factory = window[globalName];
+    if (!factory || typeof factory.buildModule !== "function") return false;
+    if (factory[markerName]) return true;
+
+    const originalBuild = factory.buildModule.bind(factory);
+    const wrapped = Object.freeze({
+      ...factory,
+      buildModule(config) {
+        return postProcess(originalBuild(config));
+      },
+      [markerName]: true,
+      [versionName]: "1.0.2-homolog"
+    });
+    window[globalName] = wrapped;
+    return true;
   }
 
-  window.DuduQYear2V22Factory = Object.freeze({
-    ...factory,
-    buildModule,
-    __dragDropVisualPatchApplied: true,
-    dragDropVisualPatchVersion: "1.0.1-homolog"
-  });
+  const baseOk = wrapFactory(
+    "DuduQYear2V22Factory",
+    "__dragDropVisualPatchApplied",
+    "dragDropVisualPatchVersion"
+  );
+
+  const v23Ok = wrapFactory(
+    "DuduQYear2V23Factory",
+    "__dragDropVisualPatchAppliedV23",
+    "dragDropVisualPatchVersionV23"
+  );
+
+  if (!baseOk && !v23Ok) {
+    console.error("[DuduQ Year2 DragDrop Visual Patch] Factories indisponíveis.");
+  }
 })();
