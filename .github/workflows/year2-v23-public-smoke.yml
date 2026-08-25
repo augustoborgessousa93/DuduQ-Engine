@@ -1,0 +1,36 @@
+name: Year 2 v2.3 Public Smoke
+
+on:
+  push:
+    branches:
+      - release/year2-v23-public
+    paths:
+      - "scripts/qa-year2-v23-public-smoke.mjs"
+      - ".github/workflows/year2-v23-public-smoke.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  public-smoke:
+    name: Year2 v2.3 pages.dev Chromium
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Validate public M01-M06 desktop/mobile
+        env:
+          DUDUQ_PUBLIC_BASE: https://duduq-engine.pages.dev
+        run: node scripts/qa-year2-v23-public-smoke.mjs
