@@ -52,9 +52,6 @@ jobs:
       - name: Syntax check active DD2 runtime patch
         run: node --check engine/releases/mechanics/drag-drop/2.0.23/dd2-single-target-runtime-patch.js
 
-      - name: Syntax check single target pointer bridge
-        run: node --check engine/releases/mechanics/drag-drop/2.0.23/dd2-single-target-pointer-bridge.js
-
       - name: Syntax check M03 visual patch
         run: node --check content/english/year-2/year2-v23-dragdrop-visual-patch.js
 
@@ -108,7 +105,7 @@ jobs:
           BASE_URL: http://127.0.0.1:4173
         run: node test/drag-drop/single-target-choice-2.0.23/inspect.mjs
 
-      - name: Inspect DD2 drag pointer path
+      - name: Inspect DD2 native drag pointer path
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/drag-drop/single-target-choice-2.0.23/drag-inspect.mjs
