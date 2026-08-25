@@ -65,7 +65,7 @@ jobs:
         run: node --check test/drag-drop/single-target-choice-2.0.23/inspect.mjs
 
       - name: Syntax check disabled lifecycle diagnostic
-        run: node --check test/drag-drop/single-target-choice-2.0.23/disabled-timeline.mjs
+        run: node --check test/drag-drop/single-target-choice-2.0.23/disabled-timeline-v2.mjs
 
       - name: Syntax check pointer gate probe
         run: node --check test/drag-drop/single-target-choice-2.0.23/gate-inspect.mjs
@@ -123,7 +123,7 @@ jobs:
       - name: Inspect DD2 disabled lifecycle
         env:
           BASE_URL: http://127.0.0.1:4173
-        run: node test/drag-drop/single-target-choice-2.0.23/disabled-timeline.mjs
+        run: node test/drag-drop/single-target-choice-2.0.23/disabled-timeline-v2.mjs
 
       - name: Inspect DD2 pointerdown gate
         env:
