@@ -91,36 +91,40 @@ try {
 
     const itemA = choice(frame, "A");
     const target = frame.locator('.duduq-dd2-target[data-single-target-choice="true"]');
+
+    // hover() is deliberate: it waits until the parent transition/bridge no longer intercepts pointer input.
+    await itemA.hover({ timeout: 8_000 });
     const sourceBox = await itemA.boundingBox();
     const targetBox = await target.boundingBox();
     if (!sourceBox || !targetBox) throw new Error("Não foi possível medir A/target no diagnóstico de drag.");
 
     const endX = targetBox.x + targetBox.width / 2;
     const endY = targetBox.y + targetBox.height * 0.72;
-    await page.mouse.move(sourceBox.x + sourceBox.width / 2, sourceBox.y + sourceBox.height / 2);
     await page.mouse.down();
     await page.mouse.move(endX, endY, { steps: 18 });
     await page.mouse.up();
     await page.waitForTimeout(350);
 
     const state = await snapshot(frame);
+    const iframeBox = await page.locator('iframe[title="DuduQ — Drag & Drop"]').boundingBox();
+    if (!iframeBox) throw new Error("Iframe não possui bounding box no diagnóstico.");
     const localHit = await frame.evaluate(({ x, y }) => {
-      const iframe = window.frameElement;
-      void iframe;
       const element = document.elementFromPoint(x, y);
       return {
         tag: element?.tagName || null,
         className: element?.className || null,
         dropId: element?.closest?.("[data-dd2-target-id]")?.getAttribute("data-dd2-target-id") || null
       };
-    }, {
-      // Playwright bounding boxes are main-frame coordinates. Subtract the iframe offset for frame-local elementFromPoint diagnostics.
-      x: endX - (await page.locator('iframe[title="DuduQ — Drag & Drop"]').boundingBox()).x,
-      y: endY - (await page.locator('iframe[title="DuduQ — Drag & Drop"]').boundingBox()).y
-    });
+    }, { x: endX - iframeBox.x, y: endY - iframeBox.y });
 
     console.log("=== DD2 DRAG DIAGNOSTIC ===");
     console.log(JSON.stringify({ sourceBox, targetBox, endX, endY, localHit, state }, null, 2));
+    if (state.debugEvents.length === 0) {
+      throw new Error("Nenhum pointer/mouse event chegou ao iframe após hover actionável.");
+    }
+    if (state.targetFilled !== "true") {
+      throw new Error("Pointer drag chegou ao iframe, mas não concluiu placement no target.");
+    }
     await context.close();
   }
 
