@@ -87,6 +87,9 @@ jobs:
       - name: Syntax check sequence regression guard
         run: node --check test/drag-drop/single-target-choice-2.0.23/sequence-regression-contract.mjs
 
+      - name: Syntax check sequence retry A/B baseline
+        run: node --check test/drag-drop/single-target-choice-2.0.23/sequence-retry-baseline.mjs
+
       - name: Syntax check sequence browser regression
         run: node --check test/drag-drop/single-target-choice-2.0.23/sequence-browser-regression.mjs
 
@@ -155,6 +158,11 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/drag-drop/single-target-choice-2.0.23/e2e.mjs
+
+      - name: Compare sequence retry lifecycle 2.0.22 vs 2.0.23
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/sequence-retry-baseline.mjs
 
       - name: Run sequence regression against Drag Drop 2.0.23
         env:
