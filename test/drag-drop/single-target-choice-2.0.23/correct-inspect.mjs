@@ -15,6 +15,15 @@ async function waitForMechanicFrame(page) {
   throw new Error("iframe about:srcdoc do Drag & Drop não apareceu.");
 }
 
+async function waitUntilEnabled(locator, timeout = 6_000) {
+  const startedAt = Date.now();
+  while (Date.now() - startedAt < timeout) {
+    if (await locator.isEnabled().catch(() => false)) return Date.now() - startedAt;
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
+  throw new Error(`Alternativa permaneceu desabilitada por mais de ${timeout}ms após o DD2 ficar visível.`);
+}
+
 async function boot(browser) {
   const context = await browser.newContext({ viewport: { width: 1366, height: 768 } });
   const page = await context.newPage();
@@ -27,14 +36,18 @@ async function boot(browser) {
   } catch (_) {}
   const frame = await waitForMechanicFrame(page);
   await frame.locator('.duduq-dd2-target[data-single-target-choice="true"]').waitFor({ state: "visible", timeout: 35_000 });
-  return { context, page, frame };
+  const firstChoice = frame.locator(".duduq-dd2-bank .duduq-dd2-item").first();
+  await firstChoice.waitFor({ state: "visible", timeout: 5_000 });
+  const interactiveWaitMs = await waitUntilEnabled(firstChoice);
+  return { context, page, frame, interactiveWaitMs };
 }
 
 async function probe(browser, letter) {
-  const { context, page, frame } = await boot(browser);
+  const { context, page, frame, interactiveWaitMs } = await boot(browser);
   try {
     const button = frame.locator(".duduq-dd2-bank .duduq-dd2-item").filter({ hasText: `🔊 ${letter}` }).first();
     await button.waitFor({ state: "visible", timeout: 5_000 });
+    await waitUntilEnabled(button);
     const itemId = await button.getAttribute("data-dd2-item-id");
     const aria = await button.getAttribute("aria-label");
     await button.click();
@@ -53,7 +66,7 @@ async function probe(browser, letter) {
         bodyText: document.body?.innerText || ""
       };
     });
-    return { letter, itemId, aria, ...result };
+    return { letter, itemId, aria, interactiveWaitMs, ...result };
   } finally {
     await context.close();
   }
