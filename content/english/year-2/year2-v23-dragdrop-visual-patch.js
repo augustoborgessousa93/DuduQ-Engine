@@ -58,6 +58,24 @@
       motorRule: "Arrastar e tocar/clicar são equivalentes para selecionar uma resposta."
     };
 
+    /* O runtime já fornece um botão de áudio real por alternativa. O glyph 🔊
+       que vinha no rótulo editorial duplicava a affordance visual. No piloto M03,
+       o card exibe apenas A/B/C/D e preserva alt.audio integralmente. */
+    alternatives.forEach((alternative, index) => {
+      if (!alternative || typeof alternative !== "object") return;
+      const letter = String.fromCharCode(65 + index);
+      const currentText = String(alternative.text || "").trim();
+      if (alternative.audio?.enabled === true && /^🔊\s*[A-D]$/u.test(currentText)) {
+        alternative.text = letter;
+      }
+      alternative.metadata = {
+        ...(alternative.metadata || {}),
+        choiceLetter: letter,
+        audioAffordanceOwner: "runtime-control",
+        duplicateAudioGlyphRemoved: true
+      };
+    });
+
     const target = targets[0];
     target.kind = "single-choice";
     target.capacity = 1;
@@ -108,6 +126,6 @@
       return postProcess(originalBuild(config));
     },
     __dragDropVisualPatchAppliedV23: true,
-    dragDropVisualPatchVersionV23: "1.1.0-single-target-choice-homolog"
+    dragDropVisualPatchVersionV23: "1.2.0-single-target-choice-visual-polish"
   });
 })();
