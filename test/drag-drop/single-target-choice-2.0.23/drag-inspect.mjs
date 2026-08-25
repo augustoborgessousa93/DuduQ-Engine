@@ -3,7 +3,7 @@ import process from "node:process";
 
 const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:4173";
 const URL = `${BASE_URL}/content/english/year-2/module-03/index.html`;
-const POINTER_VERSION = "2.0.23-native-pointer-a";
+const POINTER_VERSION = "2.0.23-native-pointer-b";
 
 async function openM03(browser) {
   const context = await browser.newContext({ viewport: { width: 1366, height: 768 } });
