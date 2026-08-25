@@ -62,7 +62,7 @@ try {
   } catch (_) {}
 
   const frame = await waitForMechanicFrame(page);
-  const choiceA = frame.locator(".duduq-dd2-bank .duduq-dd2-item").filter({ hasText: "🔊 A" }).first();
+  const choiceA = frame.locator('.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="opt-1"]').first();
   await choiceA.waitFor({ state: "visible", timeout: 35_000 });
   await frame.waitForFunction(() => window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__?.attached === true, null, { timeout: 10_000 });
 
