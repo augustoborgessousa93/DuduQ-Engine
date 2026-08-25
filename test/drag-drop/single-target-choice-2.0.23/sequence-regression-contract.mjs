@@ -39,7 +39,8 @@ for (const gatedSignature of [
   'onPointerDown:question.strategy === "single-target-choice" ? undefined',
   'positionedCount === 1',
   'if (question.strategy === "single-target-choice") {',
-  'question.strategy === "single-target-choice" || question.strategy === "sequence"'
+  'else if (question.strategy === "sequence") {',
+  'if ((question.strategy === "sequence" || question.strategy === "single-target-choice") && incorrect.length > 0) {'
 ]) {
   expect(activeRuntimePatch.includes(gatedSignature), `Patch DD2 sem gate explícito esperado: ${gatedSignature}`);
 }
