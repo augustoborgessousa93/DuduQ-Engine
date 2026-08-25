@@ -52,6 +52,9 @@ jobs:
       - name: Syntax check M03 visual patch
         run: node --check content/english/year-2/year2-v23-dragdrop-visual-patch.js
 
+      - name: Syntax check browser diagnostics
+        run: node --check test/drag-drop/single-target-choice-2.0.23/inspect.mjs
+
       - name: Syntax check E2E
         run: node --check test/drag-drop/single-target-choice-2.0.23/e2e.mjs
 
@@ -87,6 +90,11 @@ jobs:
           done
           cat /tmp/duduq-http.log
           exit 1
+
+      - name: Inspect SINGLE_TARGET_CHOICE propagation
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/inspect.mjs
 
       - name: Run M03 SINGLE_TARGET_CHOICE E2E
         env:
