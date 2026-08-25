@@ -5,6 +5,15 @@ const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:4173";
 const URL = `${BASE_URL}/content/english/year-2/module-03/index.html`;
 const POINTER_VERSION = "2.0.23-native-pointer-b";
 
+async function waitUntilEnabled(locator, timeout = 6_000) {
+  const startedAt = Date.now();
+  while (Date.now() - startedAt < timeout) {
+    if (await locator.isEnabled().catch(() => false)) return Date.now() - startedAt;
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
+  throw new Error(`Alternativa permaneceu desabilitada por mais de ${timeout}ms após o DD2 ficar visível.`);
+}
+
 async function openM03(browser) {
   const context = await browser.newContext({ viewport: { width: 1366, height: 768 } });
   const page = await context.newPage();
@@ -27,6 +36,10 @@ async function openM03(browser) {
     { timeout: 10_000 }
   );
 
+  const firstChoice = mechanicFrame.locator(".duduq-dd2-bank .duduq-dd2-item").first();
+  await firstChoice.waitFor({ state: "visible", timeout: 5_000 });
+  const interactiveWaitMs = await waitUntilEnabled(firstChoice);
+
   const pointerRuntime = await mechanicFrame.evaluate(() => window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__ || null);
   if (!pointerRuntime?.attached) {
     throw new Error("Runtime DD2 renderizado não anexou o owner nativo de pointer.");
@@ -35,7 +48,7 @@ async function openM03(browser) {
     throw new Error(`Runtime DD2 contém pointer owner inesperado: ${pointerRuntime.version}; esperado ${POINTER_VERSION}.`);
   }
 
-  return { context, page, frame: mechanicFrame, pointerRuntime };
+  return { context, page, frame: mechanicFrame, pointerRuntime, interactiveWaitMs };
 }
 
 async function waitForMechanicFrame(page) {
@@ -60,7 +73,8 @@ async function snapshot(frame) {
       text: el.innerText,
       itemId: el.getAttribute("data-dd2-item-id"),
       aria: el.getAttribute("aria-label"),
-      placed: el.getAttribute("data-placed")
+      placed: el.getAttribute("data-placed"),
+      disabled: el.disabled
     }));
     const placed = Array.from(target?.querySelectorAll(".duduq-dd2-item") || []).map((el) => ({
       text: el.innerText,
@@ -73,6 +87,7 @@ async function snapshot(frame) {
       targetFilled: target?.getAttribute("data-filled") || null,
       targetActive: target?.getAttribute("data-active") || null,
       targetWrong: target?.getAttribute("data-wrong") || null,
+      arenaDisabled: document.querySelector(".duduq-dd2-arena")?.getAttribute("data-disabled") || null,
       confirmDisabled: confirm?.disabled ?? null,
       bank,
       placed,
@@ -85,6 +100,7 @@ async function snapshot(frame) {
 function explainPointerFailure(state) {
   const diag = state.pointerRuntime;
   if (!diag?.attached) return "owner nativo de pointer não está anexado ao documento do iframe";
+  if (state.arenaDisabled === "true") return "host ainda marcava a arena como disabled no início do gesto";
   if ((diag.pointerDown || 0) < 1) return "pointerdown DOM chegou, mas o listener nativo gated não iniciou o gesto";
   if ((diag.moves || 0) < 1) return "pointerdown iniciou, mas o owner nativo não recebeu movimento";
   if ((diag.pointerUps || 0) < 1) return "owner nativo recebeu movimento, mas não recebeu pointerup";
@@ -97,9 +113,9 @@ const browser = await chromium.launch({ headless: true });
 try {
   // 1) Diagnóstico do gesto real de mouse/pointer usado pelo E2E.
   {
-    const { context, page, frame, pointerRuntime } = await openM03(browser);
+    const { context, page, frame, pointerRuntime, interactiveWaitMs } = await openM03(browser);
     console.log("=== DD2 NATIVE POINTER OWNER ===");
-    console.log(JSON.stringify(pointerRuntime, null, 2));
+    console.log(JSON.stringify({ interactiveWaitMs, ...pointerRuntime }, null, 2));
 
     await frame.evaluate(() => {
       window.__DUDUQ_DD23_DRAG_EVENTS__ = [];
@@ -128,6 +144,7 @@ try {
 
     const itemA = choice(frame, "A");
     const target = frame.locator('.duduq-dd2-target[data-single-target-choice="true"]');
+    await waitUntilEnabled(itemA);
 
     await itemA.hover({ timeout: 8_000 });
     const sourceBox = await itemA.boundingBox();
@@ -173,7 +190,9 @@ try {
   // 2) Controle positivo: toque/clique continua colocando alternativa pelo mesmo place() canônico.
   {
     const { context, frame } = await openM03(browser);
-    await choice(frame, "A").click();
+    const itemA = choice(frame, "A");
+    await waitUntilEnabled(itemA);
+    await itemA.click();
     await frame.waitForTimeout(250);
     const state = await snapshot(frame);
     console.log("=== DD2 TAP CONTROL ===");
