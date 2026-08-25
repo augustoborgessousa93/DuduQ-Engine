@@ -50,11 +50,17 @@ jobs:
           cat /tmp/duduq-year2-v23-server.log
           exit 1
 
-      - name: Chromium desktop/mobile + first-listen gate
+      - name: M1-12 first-listen desktop/mobile
         env:
           DUDUQ_QA_BASE: http://127.0.0.1:4173
           DUDUQ_QA_OUT: artifacts/year2-v23
-        run: node scripts/qa-year2-v23-browser-deterministic.mjs
+        run: node scripts/qa-year2-v23-m112-first-listen.mjs
+
+      - name: M01-M06 normal desktop/mobile
+        env:
+          DUDUQ_QA_BASE: http://127.0.0.1:4173
+          DUDUQ_QA_OUT: artifacts/year2-v23
+        run: node scripts/qa-year2-v23-browser-normal.mjs
 
       - name: Upload visual evidence
         if: always()
