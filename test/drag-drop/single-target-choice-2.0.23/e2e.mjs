@@ -11,11 +11,11 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-async function bootM03(page) {
+async function bootM03(page, diagnosticName = "boot") {
   const browserErrors = [];
   page.on("pageerror", (error) => browserErrors.push(error.message));
   page.on("console", (msg) => {
-    if (msg.type() === "error") browserErrors.push(`console: ${msg.text()}`);
+    if (msg.type() === "error" || msg.type() === "warning") browserErrors.push(`${msg.type()}: ${msg.text()}`);
   });
 
   await page.goto(M03_URL, { waitUntil: "domcontentloaded", timeout: 30_000 });
@@ -30,7 +30,32 @@ async function bootM03(page) {
 
   const frame = page.frameLocator('iframe[title="DuduQ — Drag & Drop"]');
   const target = frame.locator('.duduq-dd-target[data-single-target-choice="true"]');
-  await target.waitFor({ state: "visible", timeout: 35_000 });
+  try {
+    await target.waitFor({ state: "visible", timeout: 35_000 });
+  } catch (error) {
+    const bodyText = await page.locator("body").innerText().catch(() => "<body indisponível>");
+    const frames = page.frames().map((item) => `${item.name() || "<sem-nome>"} :: ${item.url()}`);
+    await page.screenshot({ path: `${RESULTS}/${diagnosticName}-boot-failure.png`, fullPage: true }).catch(() => {});
+    fs.writeFileSync(
+      `${RESULTS}/${diagnosticName}-boot-diagnostic.txt`,
+      [
+        `URL: ${page.url()}`,
+        "",
+        "BODY:",
+        bodyText,
+        "",
+        "FRAMES:",
+        ...frames,
+        "",
+        "BROWSER MESSAGES:",
+        ...(browserErrors.length ? browserErrors : ["<nenhuma mensagem capturada>"]),
+        "",
+        "ORIGINAL ERROR:",
+        String(error?.stack || error)
+      ].join("\n")
+    );
+    throw new Error(`Boot M03 falhou. Diagnóstico salvo em ${RESULTS}/${diagnosticName}-boot-diagnostic.txt. Mensagens: ${browserErrors.join(" | ") || "nenhuma"}`);
+  }
 
   if (browserErrors.length) {
     const fatal = browserErrors.filter((message) => /Falha|Error|erro|failed/i.test(message));
@@ -58,7 +83,7 @@ async function dragChoice(page, choice, target) {
 async function desktopScenario(browser) {
   const context = await browser.newContext({ viewport: { width: 1366, height: 768 } });
   const page = await context.newPage();
-  const { frame, target } = await bootM03(page);
+  const { frame, target } = await bootM03(page, "desktop");
   const pool = frame.locator(".duduq-dd-pool");
   const confirm = frame.locator(".duduq-dd-primary");
 
@@ -120,7 +145,7 @@ async function desktopScenario(browser) {
 async function mobileScenario(browser) {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const page = await context.newPage();
-  const { frame, target } = await bootM03(page);
+  const { frame, target } = await bootM03(page, "mobile");
   const pool = frame.locator(".duduq-dd-pool");
 
   const targetBox = await target.boundingBox();
