@@ -1,11 +1,19 @@
 /* DUDUQ Drag & Drop 2.0.23 — active DD2 SINGLE_TARGET_CHOICE runtime patch
    Homologation helper. Wraps the configurable 2.0.22 runtime hook and patches
    only the active .duduq-dd2-* implementation. No Canary/main promotion here.
+
+   SINGLE_TARGET_CHOICE deliberately has ONE pointer owner here. The earlier
+   external pointer bridge was useful diagnostically, but browser evidence showed
+   DOM pointer events could arrive while the synthetic onPointerDown path did not.
+   This patch therefore delegates pointer input natively at document capture level
+   only for single-target-choice, while every other Drag & Drop strategy keeps the
+   untouched 2.0.22 pointer path.
 */
 (function () {
   "use strict";
 
-  const VERSION = "2.0.23-dd2-single-target-c";
+  const VERSION = "2.0.23-dd2-single-target-d";
+  const POINTER_RUNTIME_VERSION = "2.0.23-native-pointer-a";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqDD23SingleTargetWrapped";
   const MAX_ATTEMPTS = 1200;
@@ -96,7 +104,19 @@
     prepared = replaceRequired(
       prepared,
       `var onItemClick = useCallback(function (item) {\n      if (suppressClick.current) { suppressClick.current = false; return; }\n      if (disabled || feedbackState === "success") return;\n      setSelected(function (current) { return current === item.id ? null : item.id; });\n      onInteraction && onInteraction();\n      if (item.audioAssetKey || item.spokenText) playValueAudio(item, "item");\n    }, [disabled, feedbackState, onInteraction, playValueAudio]);`,
-      `var onItemClick = useCallback(function (item) {\n      if (suppressClick.current) { suppressClick.current = false; return; }\n      if (disabled || feedbackState === "success" || retryAnimating) return;\n      if (question.strategy === "single-target-choice") {\n        var singleTarget = question.targets && question.targets[0];\n        if (singleTarget) {\n          place(item.id, singleTarget.id, "tap");\n          return;\n        }\n      }\n      setSelected(function (current) { return current === item.id ? null : item.id; });\n      onInteraction && onInteraction();\n      if (item.audioAssetKey || item.spokenText) playValueAudio(item, "item");\n    }, [disabled, feedbackState, onInteraction, place, playValueAudio, question.strategy, question.targets, retryAnimating]);`
+      `useEffect(function () {\n      if (question.strategy !== "single-target-choice") return;\n\n      var pointerRuntime = window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__;\n      if (!pointerRuntime || pointerRuntime.version !== "${POINTER_RUNTIME_VERSION}") {\n        pointerRuntime = {\n          version:"${POINTER_RUNTIME_VERSION}",\n          attached:false,\n          mounts:0,\n          pointerDown:0,\n          moves:0,\n          pointerUps:0,\n          pointerCancels:0,\n          placeCalls:0,\n          lastItemId:null,\n          targetResolved:null,\n          lastHitClass:null,\n          afterPlaceFilled:null\n        };\n        window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__ = pointerRuntime;\n      }\n      pointerRuntime.attached = true;\n      pointerRuntime.mounts += 1;\n\n      function itemButtonFromEvent(event) {\n        var node = event.target instanceof Element ? event.target : null;\n        return node && node.closest ? node.closest("button.duduq-dd2-item[data-dd2-item-id]") : null;\n      }\n\n      function targetAtPoint(event) {\n        var hit = document.elementFromPoint(event.clientX, event.clientY);\n        var target = hit && hit.closest ? hit.closest("[data-dd2-target-id]") : null;\n        var bank = hit && hit.closest ? hit.closest("[data-dd2-bank]") : null;\n        pointerRuntime.lastHitClass = hit ? (hit.className || hit.tagName || null) : null;\n        pointerRuntime.targetResolved = target ? target.getAttribute("data-dd2-target-id") : null;\n        return { hit:hit, target:target, bank:bank };\n      }\n\n      function finishVisualDrag() {\n        dragRef.current = null;\n        setDrag(null);\n        setHoverTarget(null);\n      }\n\n      function onSingleTargetPointerDown(event) {\n        var button = itemButtonFromEvent(event);\n        if (!button || button.disabled || disabled || feedbackState === "success" || retryAnimating) return;\n        if (event.pointerType === "mouse" && event.button !== 0) return;\n        var itemId = button.getAttribute("data-dd2-item-id");\n        if (!itemId || !itemMap.has(itemId) || correctItemIds.indexOf(itemId) >= 0) return;\n        var rect = button.getBoundingClientRect();\n        var nextDrag = {\n          itemId:itemId,\n          originTargetId:locationOf(itemId),\n          pointerId:event.pointerId,\n          startX:event.clientX,\n          startY:event.clientY,\n          x:rect.left,\n          y:rect.top,\n          offsetX:event.clientX-rect.left,\n          offsetY:event.clientY-rect.top,\n          moved:false,\n          width:rect.width,\n          height:rect.height\n        };\n        dragRef.current = nextDrag;\n        setDrag(nextDrag);\n        setHoverTarget(null);\n        pointerRuntime.pointerDown += 1;\n        pointerRuntime.lastItemId = itemId;\n        pointerRuntime.targetResolved = null;\n        pointerRuntime.afterPlaceFilled = null;\n      }\n\n      function onSingleTargetPointerMove(event) {\n        var current = dragRef.current;\n        if (!current || current.pointerId !== event.pointerId) return;\n        var moved = current.moved || Math.hypot(event.clientX-current.startX,event.clientY-current.startY) > 6;\n        if (moved && event.cancelable) event.preventDefault();\n        var next = Object.assign({}, current, {\n          x:event.clientX-current.offsetX,\n          y:event.clientY-current.offsetY,\n          moved:moved\n        });\n        dragRef.current = next;\n        pointerRuntime.moves += 1;\n        var ghost = document.querySelector(".duduq-dd2-ghost");\n        if (ghost) {\n          ghost.style.left = next.x + "px";\n          ghost.style.top = next.y + "px";\n        }\n        if (moved) {\n          var resolved = targetAtPoint(event);\n          var nextTargetId = resolved.target ? resolved.target.getAttribute("data-dd2-target-id") : null;\n          setHoverTarget(function (previousTarget) { return previousTarget === nextTargetId ? previousTarget : nextTargetId; });\n        }\n        setDrag(next);\n      }\n\n      function onSingleTargetPointerUp(event) {\n        var activeDrag = dragRef.current;\n        if (!activeDrag || activeDrag.pointerId !== event.pointerId) return;\n        pointerRuntime.pointerUps += 1;\n        if (!activeDrag.moved) {\n          finishVisualDrag();\n          return;\n        }\n\n        var resolved = targetAtPoint(event);\n        suppressClick.current = true;\n        window.setTimeout(function () { suppressClick.current = false; }, 320);\n        finishVisualDrag();\n\n        if (resolved.target) {\n          var targetId = resolved.target.getAttribute("data-dd2-target-id");\n          pointerRuntime.placeCalls += 1;\n          place(activeDrag.itemId, targetId, "drop");\n          window.setTimeout(function () {\n            var targetNode = document.querySelector('[data-dd2-target-id="' + targetId + '"]');\n            pointerRuntime.afterPlaceFilled = targetNode ? targetNode.getAttribute("data-filled") : null;\n          }, 80);\n        } else if (resolved.bank) {\n          pointerRuntime.placeCalls += 1;\n          place(activeDrag.itemId, null, "drop");\n        } else {\n          setAnnouncement("Item retornou para a posição anterior.");\n        }\n      }\n\n      function onSingleTargetPointerCancel(event) {\n        var activeDrag = dragRef.current;\n        if (!activeDrag || activeDrag.pointerId !== event.pointerId) return;\n        pointerRuntime.pointerCancels += 1;\n        finishVisualDrag();\n      }\n\n      document.addEventListener("pointerdown", onSingleTargetPointerDown, true);\n      document.addEventListener("pointermove", onSingleTargetPointerMove, true);\n      document.addEventListener("pointerup", onSingleTargetPointerUp, true);\n      document.addEventListener("pointercancel", onSingleTargetPointerCancel, true);\n\n      return function () {\n        pointerRuntime.attached = false;\n        document.removeEventListener("pointerdown", onSingleTargetPointerDown, true);\n        document.removeEventListener("pointermove", onSingleTargetPointerMove, true);\n        document.removeEventListener("pointerup", onSingleTargetPointerUp, true);\n        document.removeEventListener("pointercancel", onSingleTargetPointerCancel, true);\n      };\n    }, [correctItemIds, disabled, feedbackState, itemMap, locationOf, place, question.strategy, retryAnimating]);\n\n    var onItemClick = useCallback(function (item) {\n      if (suppressClick.current) { suppressClick.current = false; return; }\n      if (disabled || feedbackState === "success" || retryAnimating) return;\n      if (question.strategy === "single-target-choice") {\n        var singleTarget = question.targets && question.targets[0];\n        if (singleTarget) {\n          place(item.id, singleTarget.id, "tap");\n          return;\n        }\n      }\n      setSelected(function (current) { return current === item.id ? null : item.id; });\n      onInteraction && onInteraction();\n      if (item.audioAssetKey || item.spokenText) playValueAudio(item, "item");\n    }, [disabled, feedbackState, onInteraction, place, playValueAudio, question.strategy, question.targets, retryAnimating]);`
+    );
+
+    prepared = replaceRequired(
+      prepared,
+      `"data-placed":placed ? "true" : "false",`,
+      `"data-placed":placed ? "true" : "false",\n          "data-dd2-item-id":item.id,`
+    );
+
+    prepared = replaceRequired(
+      prepared,
+      `onPointerDown:function (event) { onPointerDown(item.id,event); },\n          onPointerMove:onPointerMove,\n          onPointerUp:finishDrag,\n          onPointerCancel:function () { dragRef.current = null; setDrag(null); setHoverTarget(null); }`,
+      `onPointerDown:question.strategy === "single-target-choice" ? undefined : function (event) { onPointerDown(item.id,event); },\n          onPointerMove:question.strategy === "single-target-choice" ? undefined : onPointerMove,\n          onPointerUp:question.strategy === "single-target-choice" ? undefined : finishDrag,\n          onPointerCancel:question.strategy === "single-target-choice" ? undefined : function () { dragRef.current = null; setDrag(null); setHoverTarget(null); }`
     );
 
     prepared = replaceRequired(
@@ -158,6 +178,7 @@
   function expose(ready, details) {
     window.DuduQDD23SingleTargetRuntimePatch = Object.freeze({
       version: VERSION,
+      pointerRuntimeVersion: POINTER_RUNTIME_VERSION,
       ready: Boolean(ready),
       hook: HOOK,
       details: details || null
@@ -183,9 +204,9 @@
       writable: false
     });
 
-    expose(true, "active-dd2-hook-wrapped");
+    expose(true, "active-dd2-single-owner-native-pointer");
     window.dispatchEvent(new CustomEvent("duduq:dd23-single-target-runtime-ready", {
-      detail: { version: VERSION }
+      detail: { version: VERSION, pointerRuntimeVersion: POINTER_RUNTIME_VERSION }
     }));
     return true;
   }
