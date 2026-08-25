@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "year": 2,
+  "sourceVersion": "2.2",
+  "factorySpec": "1.2",
+  "mode": "PROVISIONAL_EMOJI_VECTOR",
+  "status": "ACTIVE_FOR_TECHNICAL_HOMOLOGATION",
+  "decision": "Final editorial images are intentionally deferred. Continue development and QA with provisional emoji/vector visuals.",
+  "rules": {
+    "finalAssetsDeferred": true,
+    "blocksTechnicalQA": false,
+    "blocksCurrentHomologation": false,
+    "blocksProductionPromotionWithoutExplicitApproval": true,
+    "futureAssetRepository": "augustoborgessousa93/Assets-DuduQ",
+    "replaceByStableSemanticKey": true,
+    "doNotChangeOfficialQuestionOrAnswerWhenReplacingAssets": true
+  },
+  "runtime": {
+    "useFactoryPreviewVisuals": true,
+    "loadEditorialAssetPatch": false,
+    "loadSemanticFinalAssetPatch": false,
+    "audioMayUseHomologationFallbackUntilFinalRecordedAudioIsIntegrated": true
+  },
+  "replacementContract": {
+    "principle": "Replace only the visual source while preserving stable item IDs, mechanic, prompt, alternatives, answer and pedagogical evidence.",
+    "preferredNaming": "intelligent-semantic-filenames",
+    "futureLocation": "Assets-DuduQ"
+  }
+}
