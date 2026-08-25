@@ -57,6 +57,7 @@ expect(m03Entry.includes('interactionPilot:"SINGLE_TARGET_CHOICE"'), "M03 não d
 expect(m03Entry.includes('dragDropCandidate:"2.0.23"'), "M03 não declara o candidato Drag & Drop 2.0.23.");
 expect(m03Entry.includes('engine/releases/mechanics/drag-drop/2.0.23/dd2-single-target-runtime-patch.js'), "M03 não carrega o patch do runtime DD2 ativo.");
 expect(!m03Entry.includes('dd2-single-target-pointer-bridge.js'), "M03 ainda carrega a ponte externa de pointer; o piloto deve ter apenas um proprietário do gesto.");
+expect(!m03Entry.includes('dd2-single-target-gate-diagnostic.js'), "M03 ainda carrega instrumentação diagnóstica do pointer.");
 expect(
   m03Entry.indexOf('dd2-single-target-runtime-patch.js') < m03Entry.indexOf('duduq-loader-v1.js'),
   "Patch DD2 single-owner precisa ser instalado antes do loader."
@@ -78,8 +79,7 @@ expect(candidate.includes('correctChoiceId'), "Candidato não separa gabarito da
 expect(candidate.includes('}, 850);'), "Janela de feedback vermelho/retorno de 850 ms ausente.");
 
 // 5b) O comportamento homologado deve atingir a implementação DD2 realmente renderizada.
-expect(activeRuntimePatch.includes('const VERSION = "2.0.23-dd2-single-target-e"'), "Patch ativo não está na revisão estável esperada.");
-expect(activeRuntimePatch.includes('const POINTER_RUNTIME_VERSION = "2.0.23-native-pointer-b"'), "Identidade do pointer runtime estável ausente.");
+expect(activeRuntimePatch.includes('const VERSION = "2.0.23-dd2-single-target-f"'), "Patch ativo não está na revisão de release-cleanup esperada.");
 expect(activeRuntimePatch.includes('const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__"'), "Patch ativo não compõe o hook consolidado 2.0.22.");
 expect(activeRuntimePatch.includes('.duduq-dd2-target[data-single-target-choice="true"]'), "Patch ativo não estiliza o target DD2 real.");
 expect(activeRuntimePatch.includes('"data-single-target-choice":question.strategy === "single-target-choice"'), "Patch ativo não marca o DOM DD2.");
@@ -94,8 +94,9 @@ expect(activeRuntimePatch.includes('}, 850);') || consolidated.includes('}, 850)
 expect(activeRuntimePatch.includes('.duduq-dd2-capacity'), "Patch ativo não remove visualmente o 0/1 do DD2.");
 expect(activeRuntimePatch.includes('.duduq-dd2-bank-items'), "Patch ativo não controla o banco real de alternativas DD2.");
 
-// 5c) Pointer: um único owner nativo estável, gated, convergindo para o mesmo place() do tap.
-expect(activeRuntimePatch.includes('window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__'), "Diagnóstico do pointer runtime nativo ausente.");
+// 5c) Pointer: um único owner nativo estável, gated e sem telemetria global de homologação.
+expect(!activeRuntimePatch.includes('window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__'), "Telemetria global do pointer ainda está embutida no runtime candidato.");
+expect(!activeRuntimePatch.includes('pointerRuntime.'), "Contadores diagnósticos do pointer ainda estão embutidos no runtime candidato.");
 expect(activeRuntimePatch.includes('var singleTargetPointerContextRef = useRef(null)'), "Owner nativo não mantém contexto atual em ref estável.");
 expect(activeRuntimePatch.includes('singleTargetPointerContextRef.current = {'), "Contexto atual do pointer não é atualizado por render.");
 expect(activeRuntimePatch.includes('if (question.strategy !== "single-target-choice") return;'), "Owner nativo perdeu o gate exclusivo do single-target-choice.");
@@ -123,4 +124,4 @@ expectOnce(baseRuntime, '"data-dd2-target-id":target.id,', "2.0.18 active DD2 / 
 console.log("PASS — Drag & Drop 2.0.23 SINGLE_TARGET_CHOICE active DD2 composition contract");
 console.log("Canary preservado em R143 / drag-drop 2.0.22");
 console.log("M03 isolado em homolog-m03-single-target-v1 / drag-drop 2.0.23");
-console.log("Gabarito preservado + single-owner native pointer estável por question.id/strategy");
+console.log("Gabarito preservado + single-owner native pointer estável e sem telemetria global");
