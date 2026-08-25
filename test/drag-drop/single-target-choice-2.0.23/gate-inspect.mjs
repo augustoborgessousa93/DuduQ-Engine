@@ -14,13 +14,34 @@ async function waitForMechanicFrame(page) {
   throw new Error("iframe about:srcdoc do Drag & Drop não apareceu.");
 }
 
-async function waitUntilEnabled(locator, timeout = 6_000) {
+async function waitForFinalInteractive(page, frame, locator, timeout = 10_000) {
   const startedAt = Date.now();
+
+  // A timeline provou um falso estado actionável antes da liberação do primeiro áudio:
+  // 0ms enabled -> 168ms disabled -> ~3030ms gate removido + enabled final.
+  await page.waitForFunction(
+    () => !document.documentElement.hasAttribute("data-duduq-initial-speech-gate"),
+    null,
+    { timeout }
+  );
+
+  let stableSince = null;
   while (Date.now() - startedAt < timeout) {
-    if (await locator.isEnabled().catch(() => false)) return Date.now() - startedAt;
-    await new Promise((resolve) => setTimeout(resolve, 50));
+    const enabled = await locator.isEnabled().catch(() => false);
+    const arenaDisabled = await frame.evaluate(
+      () => document.querySelector(".duduq-dd2-arena")?.getAttribute("data-disabled") === "true"
+    ).catch(() => true);
+
+    if (enabled && !arenaDisabled) {
+      if (stableSince === null) stableSince = Date.now();
+      if (Date.now() - stableSince >= 350) return Date.now() - startedAt;
+    } else {
+      stableSince = null;
+    }
+    await page.waitForTimeout(50);
   }
-  throw new Error(`Alternativa permaneceu desabilitada por mais de ${timeout}ms após o DD2 ficar visível.`);
+
+  throw new Error(`DD2 não atingiu estado interativo final e estável em ${timeout}ms.`);
 }
 
 const browser = await chromium.launch({ headless: true });
@@ -45,17 +66,20 @@ try {
   await choiceA.waitFor({ state: "visible", timeout: 35_000 });
   await frame.waitForFunction(() => window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__?.attached === true, null, { timeout: 10_000 });
 
-  const interactiveWaitMs = await waitUntilEnabled(choiceA);
-  const preflight = await frame.evaluate(() => ({
-    arenaDisabled: document.querySelector(".duduq-dd2-arena")?.getAttribute("data-disabled") || null,
-    buttonDisabled: document.querySelector('.duduq-dd2-item[data-dd2-item-id="opt-1"]')?.disabled ?? null,
-    feedbackState: document.querySelector(".duduq-engine-feedback")?.getAttribute("data-state") || "idle"
-  }));
-  console.log("=== DD2 INTERACTIVE PREFLIGHT ===");
+  const interactiveWaitMs = await waitForFinalInteractive(page, frame, choiceA);
+  const preflight = {
+    gate: await page.evaluate(() => document.documentElement.getAttribute("data-duduq-initial-speech-gate")),
+    ...(await frame.evaluate(() => ({
+      arenaDisabled: document.querySelector(".duduq-dd2-arena")?.getAttribute("data-disabled") || null,
+      buttonDisabled: document.querySelector('.duduq-dd2-item[data-dd2-item-id="opt-1"]')?.disabled ?? null,
+      feedbackState: document.querySelector(".duduq-engine-feedback")?.getAttribute("data-state") || "idle"
+    })))
+  };
+  console.log("=== DD2 FINAL INTERACTIVE PREFLIGHT ===");
   console.log(JSON.stringify({ interactiveWaitMs, ...preflight }, null, 2));
 
-  if (preflight.buttonDisabled !== false || preflight.arenaDisabled === "true") {
-    throw new Error(`DD2 não ficou interativo de forma consistente após ${interactiveWaitMs}ms: ${JSON.stringify(preflight)}`);
+  if (preflight.gate !== null || preflight.buttonDisabled !== false || preflight.arenaDisabled === "true") {
+    throw new Error(`DD2 não ficou interativo após o gate inicial: ${JSON.stringify(preflight)}`);
   }
 
   await choiceA.hover({ timeout: 8_000 });
@@ -92,7 +116,7 @@ try {
     throw new Error(`Pointerdown passou pelos gates, mas o drag state não iniciou. Gate=${JSON.stringify(pointer.lastPointerDownGate)}`);
   }
 
-  console.log("PASS — pointerdown aceito somente após o DD2 entrar em estado interativo");
+  console.log("PASS — pointerdown aceito após o gate inicial terminar e o DD2 ficar estável");
   await context.close();
 } finally {
   await browser.close();
