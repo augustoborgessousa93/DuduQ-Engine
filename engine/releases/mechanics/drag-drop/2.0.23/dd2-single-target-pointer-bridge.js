@@ -1,13 +1,13 @@
 /* DUDUQ Drag & Drop 2.0.23 — SINGLE_TARGET_CHOICE pointer bridge
    Homologation-only helper. The active DD2 runtime owns pointer handlers on
-   the source item itself; this bridge forwards pointer move/up/cancel events
-   that continue through the iframe document after the pointer leaves the card.
+   the source item itself; this bridge binds document-level forwarding at the
+   exact pointerdown that starts the gesture, removing mount/effect timing races.
    It is strictly gated to strategy === "single-target-choice".
 */
 (function () {
   "use strict";
 
-  const VERSION = "2.0.23-pointer-bridge-b";
+  const VERSION = "2.0.23-pointer-bridge-c";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqDD23SingleTargetPointerBridgeWrapped";
   const READY_EVENT = "duduq:dd23-single-target-runtime-ready";
@@ -30,10 +30,11 @@
       fail("runtime recebido vazio ou inválido.");
     }
 
-    const needle = `    var onItemClick = useCallback(function (item) {`;
-    const bridge = `    useEffect(function () {\n      if (question.strategy !== "single-target-choice") return;\n\n      function eventIsOwnedByItem(event) {\n        var target = event && event.target;\n        return Boolean(target && target.closest && target.closest(".duduq-dd2-item"));\n      }\n\n      function forwardPointerMove(event) {\n        if (eventIsOwnedByItem(event)) return;\n        onPointerMove(event);\n      }\n\n      function forwardPointerUp(event) {\n        if (eventIsOwnedByItem(event)) return;\n        finishDrag(event);\n      }\n\n      function forwardPointerCancel(event) {\n        var activeDrag = dragRef.current;\n        if (!activeDrag || activeDrag.pointerId !== event.pointerId) return;\n        dragRef.current = null;\n        setDrag(null);\n        setHoverTarget(null);\n      }\n\n      document.addEventListener("pointermove", forwardPointerMove, true);\n      document.addEventListener("pointerup", forwardPointerUp, true);\n      document.addEventListener("pointercancel", forwardPointerCancel, true);\n\n      return function () {\n        document.removeEventListener("pointermove", forwardPointerMove, true);\n        document.removeEventListener("pointerup", forwardPointerUp, true);\n        document.removeEventListener("pointercancel", forwardPointerCancel, true);\n      };\n    }, [finishDrag, onPointerMove, question.strategy]);\n\n`;
+    const originalPointerDown = `    var onPointerDown = useCallback(function (itemId, event) {\n      if (disabled || feedbackState === "success" || event.button !== 0) return;\n      var rect = event.currentTarget.getBoundingClientRect();\n      event.currentTarget.setPointerCapture && event.currentTarget.setPointerCapture(event.pointerId);\n      var nextDrag = { itemId:itemId, originTargetId:locationOf(itemId), pointerId:event.pointerId, startX:event.clientX, startY:event.clientY, x:rect.left, y:rect.top, offsetX:event.clientX-rect.left, offsetY:event.clientY-rect.top, moved:false, width:rect.width, height:rect.height };\n      dragRef.current = nextDrag;\n      setDrag(nextDrag);\n    }, [disabled, feedbackState, locationOf]);`;
 
-    return replaceRequired(html, needle, bridge + needle, 1);
+    const bridgedPointerDown = `    var onPointerDown = useCallback(function (itemId, event) {\n      if (disabled || feedbackState === "success" || event.button !== 0) return;\n      var rect = event.currentTarget.getBoundingClientRect();\n      event.currentTarget.setPointerCapture && event.currentTarget.setPointerCapture(event.pointerId);\n      var nextDrag = { itemId:itemId, originTargetId:locationOf(itemId), pointerId:event.pointerId, startX:event.clientX, startY:event.clientY, x:rect.left, y:rect.top, offsetX:event.clientX-rect.left, offsetY:event.clientY-rect.top, moved:false, width:rect.width, height:rect.height };\n      dragRef.current = nextDrag;\n      setDrag(nextDrag);\n\n      if (question.strategy === "single-target-choice") {\n        var bridgePointerId = event.pointerId;\n        var bridgeDocument = event.currentTarget.ownerDocument || document;\n        var cleanupPointerBridge = function () {\n          bridgeDocument.removeEventListener("pointermove", forwardPointerMove, true);\n          bridgeDocument.removeEventListener("pointerup", forwardPointerUp, true);\n          bridgeDocument.removeEventListener("pointercancel", forwardPointerCancel, true);\n        };\n        var forwardPointerMove = function (pointerEvent) {\n          if (pointerEvent.pointerId !== bridgePointerId) return;\n          onPointerMove(pointerEvent);\n        };\n        var forwardPointerUp = function (pointerEvent) {\n          if (pointerEvent.pointerId !== bridgePointerId) return;\n          cleanupPointerBridge();\n          finishDrag(pointerEvent);\n        };\n        var forwardPointerCancel = function (pointerEvent) {\n          if (pointerEvent.pointerId !== bridgePointerId) return;\n          cleanupPointerBridge();\n          var activeDrag = dragRef.current;\n          if (!activeDrag || activeDrag.pointerId !== pointerEvent.pointerId) return;\n          dragRef.current = null;\n          setDrag(null);\n          setHoverTarget(null);\n        };\n        bridgeDocument.addEventListener("pointermove", forwardPointerMove, true);\n        bridgeDocument.addEventListener("pointerup", forwardPointerUp, true);\n        bridgeDocument.addEventListener("pointercancel", forwardPointerCancel, true);\n      }\n    }, [disabled, feedbackState, locationOf, question.strategy]);`;
+
+    return replaceRequired(html, originalPointerDown, bridgedPointerDown, 1);
   }
 
   function expose(ready, details) {
@@ -68,7 +69,7 @@
       writable: false
     });
 
-    expose(true, "document-pointer-forwarding-installed");
+    expose(true, "pointerdown-document-forwarding-installed");
     window.dispatchEvent(new CustomEvent("duduq:dd23-pointer-bridge-ready", {
       detail: { version: VERSION }
     }));
