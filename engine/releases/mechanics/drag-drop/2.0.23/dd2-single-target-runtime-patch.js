@@ -5,7 +5,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "2.0.23-dd2-single-target-b";
+  const VERSION = "2.0.23-dd2-single-target-c";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqDD23SingleTargetWrapped";
   const MAX_ATTEMPTS = 1200;
@@ -133,6 +133,18 @@
       prepared,
       `setAnnouncement(correct.length ? "Os itens corretos ficaram em verde. Complete as posições restantes." : "Tente novamente.");`,
       `setAnnouncement(question.strategy === "single-target-choice"\n            ? "Ouça novamente e tente outra vez."\n            : (correct.length ? "Os itens corretos ficaram em verde. Complete as posições restantes." : "Tente novamente."));`
+    );
+
+    prepared = replaceRequired(
+      prepared,
+      `ready && feedbackState === "idle" ? React.createElement("div", { className:"duduq-matching-action-slot duduq-dd2-actions" },`,
+      `feedbackState === "idle" ? React.createElement("div", { className:"duduq-matching-action-slot duduq-dd2-actions" },`
+    );
+
+    prepared = replaceRequired(
+      prepared,
+      `className:"duduq-matching-primary duduq-dd2-confirm",\n              disabled:disabled,`,
+      `className:"duduq-matching-primary duduq-dd2-confirm",\n              disabled:disabled || !ready,`
     );
 
     if (!prepared.includes("</head>")) {
