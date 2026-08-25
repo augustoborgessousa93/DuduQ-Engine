@@ -3,6 +3,7 @@ import process from "node:process";
 
 const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:4173";
 const URL = `${BASE_URL}/content/english/year-2/module-03/index.html`;
+const BRIDGE_VERSION = "2.0.23-pointer-bridge-e";
 
 async function openM03(browser) {
   const context = await browser.newContext({ viewport: { width: 1366, height: 768 } });
@@ -20,7 +21,16 @@ async function openM03(browser) {
   } catch (_) {}
   const mechanicFrame = await waitForMechanicFrame(page);
   await mechanicFrame.locator('.duduq-dd2-target[data-single-target-choice="true"]').waitFor({ state: "visible", timeout: 35_000 });
-  return { context, page, frame: mechanicFrame };
+
+  const bridge = await mechanicFrame.evaluate(() => window.__DUDUQ_DD23_POINTER_BRIDGE_RUNTIME__ || null);
+  if (!bridge?.injected) {
+    throw new Error("Runtime DD2 renderizado não contém o marcador do pointer bridge; falha de composição/hook, não de gesto.");
+  }
+  if (bridge.version !== BRIDGE_VERSION) {
+    throw new Error(`Runtime DD2 contém pointer bridge inesperado: ${bridge.version}; esperado ${BRIDGE_VERSION}.`);
+  }
+
+  return { context, page, frame: mechanicFrame, bridge };
 }
 
 async function waitForMechanicFrame(page) {
@@ -59,16 +69,31 @@ async function snapshot(frame) {
       confirmDisabled: confirm?.disabled ?? null,
       bank,
       placed,
+      bridgeRuntime: window.__DUDUQ_DD23_POINTER_BRIDGE_RUNTIME__ || null,
       debugEvents: window.__DUDUQ_DD23_DRAG_EVENTS__ || []
     };
   });
+}
+
+function explainBridgeFailure(state) {
+  const diag = state.bridgeRuntime;
+  if (!diag?.injected) return "pointer bridge não foi injetado no runtime efetivamente renderizado";
+  if ((diag.pointerDown || 0) < 1) return "runtime recebeu o bridge, mas o onPointerDown instrumentado não executou";
+  if ((diag.moves || 0) < 1) return "pointerdown executou, mas o bridge não recebeu movimento";
+  if ((diag.pointerUps || 0) < 1) return "bridge recebeu movimento, mas não recebeu pointerup";
+  if (!diag.targetResolved) return `pointerup executou, mas elementFromPoint não resolveu destino; hit=${diag.lastHitClass || "null"}`;
+  if ((diag.placeCalls || 0) < 1) return `destino ${diag.targetResolved} foi resolvido, mas place() não foi chamado`;
+  return `place() foi chamado ${diag.placeCalls}x para ${diag.lastPlaceItem} -> ${diag.lastPlaceTarget}, porém o target permaneceu ${state.targetFilled}; afterPlaceFilled=${diag.afterPlaceFilled}`;
 }
 
 const browser = await chromium.launch({ headless: true });
 try {
   // 1) Diagnóstico do gesto real de mouse/pointer usado pelo E2E.
   {
-    const { context, page, frame } = await openM03(browser);
+    const { context, page, frame, bridge } = await openM03(browser);
+    console.log("=== DD2 POINTER BRIDGE INJECTION ===");
+    console.log(JSON.stringify(bridge, null, 2));
+
     await frame.evaluate(() => {
       window.__DUDUQ_DD23_DRAG_EVENTS__ = [];
       const kinds = ["pointerdown", "pointermove", "pointerup", "pointercancel", "mousedown", "mousemove", "mouseup", "click"];
@@ -96,7 +121,7 @@ try {
     const itemA = choice(frame, "A");
     const target = frame.locator('.duduq-dd2-target[data-single-target-choice="true"]');
 
-    // hover() is deliberate: it waits until the parent transition/bridge no longer intercepts pointer input.
+    // hover() waits until the parent transition no longer intercepts pointer input.
     await itemA.hover({ timeout: 8_000 });
     const sourceBox = await itemA.boundingBox();
     const targetBox = await target.boundingBox();
@@ -127,12 +152,15 @@ try {
       throw new Error("Nenhum pointer/mouse event chegou ao iframe após hover actionável.");
     }
     if (state.targetFilled !== "true") {
-      throw new Error("Pointer drag chegou ao iframe, mas não concluiu placement no target.");
+      throw new Error(`Pointer drag não concluiu placement: ${explainBridgeFailure(state)}.`);
+    }
+    if (state.bridgeRuntime?.placeCalls < 1 || state.bridgeRuntime?.targetResolved !== "stimulus-target") {
+      throw new Error("Drag terminou preenchido, mas o caminho instrumentado do pointer bridge não foi comprovado.");
     }
     await context.close();
   }
 
-  // 2) Controle positivo: toque/clique precisa colocar a alternativa usando o mesmo place().
+  // 2) Controle positivo: toque/clique precisa colocar a alternativa usando o place() canônico.
   {
     const { context, frame } = await openM03(browser);
     await choice(frame, "A").click();
