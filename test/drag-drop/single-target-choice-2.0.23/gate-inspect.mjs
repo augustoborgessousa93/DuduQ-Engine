@@ -14,6 +14,15 @@ async function waitForMechanicFrame(page) {
   throw new Error("iframe about:srcdoc do Drag & Drop não apareceu.");
 }
 
+async function waitUntilEnabled(locator, timeout = 6_000) {
+  const startedAt = Date.now();
+  while (Date.now() - startedAt < timeout) {
+    if (await locator.isEnabled().catch(() => false)) return Date.now() - startedAt;
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
+  throw new Error(`Alternativa permaneceu desabilitada por mais de ${timeout}ms após o DD2 ficar visível.`);
+}
+
 const browser = await chromium.launch({ headless: true });
 try {
   const context = await browser.newContext({ viewport: { width: 1366, height: 768 } });
@@ -35,6 +44,19 @@ try {
   const choiceA = frame.locator(".duduq-dd2-bank .duduq-dd2-item").filter({ hasText: "🔊 A" }).first();
   await choiceA.waitFor({ state: "visible", timeout: 35_000 });
   await frame.waitForFunction(() => window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__?.attached === true, null, { timeout: 10_000 });
+
+  const interactiveWaitMs = await waitUntilEnabled(choiceA);
+  const preflight = await frame.evaluate(() => ({
+    arenaDisabled: document.querySelector(".duduq-dd2-arena")?.getAttribute("data-disabled") || null,
+    buttonDisabled: document.querySelector('.duduq-dd2-item[data-dd2-item-id="opt-1"]')?.disabled ?? null,
+    feedbackState: document.querySelector(".duduq-engine-feedback")?.getAttribute("data-state") || "idle"
+  }));
+  console.log("=== DD2 INTERACTIVE PREFLIGHT ===");
+  console.log(JSON.stringify({ interactiveWaitMs, ...preflight }, null, 2));
+
+  if (preflight.buttonDisabled !== false || preflight.arenaDisabled === "true") {
+    throw new Error(`DD2 não ficou interativo de forma consistente após ${interactiveWaitMs}ms: ${JSON.stringify(preflight)}`);
+  }
 
   await choiceA.hover({ timeout: 8_000 });
   const box = await choiceA.boundingBox();
@@ -70,7 +92,7 @@ try {
     throw new Error(`Pointerdown passou pelos gates, mas o drag state não iniciou. Gate=${JSON.stringify(pointer.lastPointerDownGate)}`);
   }
 
-  console.log("PASS — pointerdown aceito pelo owner nativo SINGLE_TARGET_CHOICE");
+  console.log("PASS — pointerdown aceito somente após o DD2 entrar em estado interativo");
   await context.close();
 } finally {
   await browser.close();
