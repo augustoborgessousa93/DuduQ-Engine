@@ -82,8 +82,14 @@ jobs:
       - name: Syntax check visual breakpoints
         run: node --check test/drag-drop/single-target-choice-2.0.23/visual-breakpoints.mjs
 
+      - name: Syntax check sequence regression guard
+        run: node --check test/drag-drop/single-target-choice-2.0.23/sequence-regression-contract.mjs
+
       - name: Validate SINGLE_TARGET_CHOICE composition contract
         run: node test/drag-drop/single-target-choice-2.0.23/contract.mjs
+
+      - name: Validate sequence regression guard
+        run: node test/drag-drop/single-target-choice-2.0.23/sequence-regression-contract.mjs
 
   chromium-e2e:
     name: Chromium M03 visual + pedagogical
@@ -145,7 +151,7 @@ jobs:
           BASE_URL: http://127.0.0.1:4173
         run: node test/drag-drop/single-target-choice-2.0.23/e2e.mjs
 
-      - name: Validate notebook and tablet breakpoints
+      - name: Validate desktop notebook and tablet breakpoints
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/drag-drop/single-target-choice-2.0.23/visual-breakpoints.mjs
