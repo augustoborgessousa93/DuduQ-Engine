@@ -8,6 +8,19 @@ const OUT=path.resolve(process.env.DUDUQ_QA_OUT||"artifacts/year2-v23");
 fs.mkdirSync(OUT,{recursive:true});
 const check=(cond,msg)=>{if(!cond)throw new Error(msg)};
 
+async function waitTransitionClear(page,device){
+  await page.waitForFunction(()=>{
+    const t=document.querySelector(".duduq-transition");
+    if(!t)return true;
+    const st=getComputedStyle(t);
+    const opacity=Number.parseFloat(st.opacity||"0");
+    return st.visibility==="hidden"||opacity<0.05;
+  },undefined,{timeout:10000}).catch(()=>{
+    throw new Error(`M1-12 ${device}: ponte de transição não liberou a atividade`);
+  });
+  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+}
+
 async function run(browser,device){
   const viewport=device==="mobile"?{width:390,height:844}:{width:1366,height:768};
   const page=await browser.newPage({viewport});
@@ -74,11 +87,35 @@ async function run(browser,device){
     const frame=await handle?.contentFrame();
     check(frame,`M1-12 ${device}: frame ausente após reveal`);
     await frame.waitForFunction(()=>document.querySelectorAll(".duduq-dd2-item,.duduq-dd-item").length>=4,undefined,{timeout:10000});
+    await waitTransitionClear(page,device);
+
     const movable=await frame.locator(".duduq-dd2-item,.duduq-dd-item").allInnerTexts();
     const joined=movable.join(" ").toUpperCase();
     for(const letter of ["L","E","O","A"])check(joined.includes(letter),`M1-12 ${device}: letra ${letter} ausente após reveal`);
-    const targetCount=await frame.locator(".duduq-dd2-target,.duduq-dd-target").count();
-    check(targetCount>=3,`M1-12 ${device}: destinos < 3`);
+
+    const geometry=await frame.evaluate(()=>{
+      const rects=nodes=>[...nodes].map(el=>{
+        const r=el.getBoundingClientRect();
+        return {left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height};
+      });
+      const targets=rects(document.querySelectorAll(".duduq-dd2-target,.duduq-dd-target"));
+      const items=rects(document.querySelectorAll(".duduq-dd2-item,.duduq-dd-item"));
+      return {innerWidth:window.innerWidth,innerHeight:window.innerHeight,targets,items};
+    });
+
+    check(geometry.targets.length===3,`M1-12 ${device}: esperados 3 destinos, recebeu ${geometry.targets.length}`);
+    check(geometry.items.length>=4,`M1-12 ${device}: esperadas 4 letras móveis, recebeu ${geometry.items.length}`);
+    const maxTargetBottom=Math.max(...geometry.targets.map(r=>r.bottom));
+    const maxItemBottom=Math.max(...geometry.items.slice(0,4).map(r=>r.bottom));
+    check(maxTargetBottom<=geometry.innerHeight+2,`M1-12 ${device}: destino saiu do primeiro viewport interno`);
+    check(maxItemBottom<=geometry.innerHeight+2,`M1-12 ${device}: letra móvel saiu do primeiro viewport interno`);
+
+    if(device==="mobile"){
+      const targetTopSpread=Math.max(...geometry.targets.map(r=>r.top))-Math.min(...geometry.targets.map(r=>r.top));
+      check(targetTopSpread<=40,`M1-12 mobile: destinos quebraram de linha (spread=${targetTopSpread.toFixed(1)}px)`);
+      const itemTopSpread=Math.max(...geometry.items.slice(0,4).map(r=>r.top))-Math.min(...geometry.items.slice(0,4).map(r=>r.top));
+      check(itemTopSpread<=40,`M1-12 mobile: letras não ficaram juntas (spread=${itemTopSpread.toFixed(1)}px)`);
+    }
 
     const outerOverflow=await page.evaluate(()=>document.documentElement.scrollWidth>document.documentElement.clientWidth+2);
     const innerOverflow=await frame.evaluate(()=>document.documentElement.scrollWidth>document.documentElement.clientWidth+2).catch(()=>false);
@@ -87,7 +124,7 @@ async function run(browser,device){
 
     await page.screenshot({path:path.join(OUT,`M01-M12-after-${device}.png`),fullPage:false});
     console.log(`PASS V23 M01-M12 ${device}`);
-    return {device,status:"PASS",activityId:target.event.id};
+    return {device,status:"PASS",activityId:target.event.id,geometry};
   }finally{
     await page.close();
   }
@@ -106,4 +143,4 @@ try{
 
 fs.writeFileSync(path.join(OUT,"report-m112.json"),JSON.stringify({results,failures},null,2));
 if(failures.length){console.error("DUDUQ YEAR2 v2.3 M1-12 QA: FAIL");process.exit(1)}
-console.log("DUDUQ YEAR2 v2.3 M1-12 QA: PASS (2/2)");
+console.log("DUDUQ YEAR2 v2.3 M1-12 QA: PASS (2/2 + geometry)");
