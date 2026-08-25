@@ -54,7 +54,7 @@ jobs:
         env:
           DUDUQ_QA_BASE: http://127.0.0.1:4173
           DUDUQ_QA_OUT: artifacts/year2-v23
-        run: node scripts/qa-year2-v23-browser.mjs
+        run: node scripts/qa-year2-v23-browser-deterministic.mjs
 
       - name: Upload visual evidence
         if: always()
