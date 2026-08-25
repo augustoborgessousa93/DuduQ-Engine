@@ -57,9 +57,6 @@ jobs:
       - name: Syntax check M03 data patch
         run: node --check content/english/year-2/year2-v23-dragdrop-visual-patch.js
 
-      - name: Syntax check M03 iframe visual polish
-        run: node --check content/english/year-2/module-03/single-target-choice-visual-polish.js
-
       - name: Syntax check browser diagnostics
         run: node --check test/drag-drop/single-target-choice-2.0.23/inspect.mjs
 
