@@ -55,8 +55,11 @@ jobs:
       - name: Syntax check pointer gate diagnostic
         run: node --check engine/releases/mechanics/drag-drop/2.0.23/dd2-single-target-gate-diagnostic.js
 
-      - name: Syntax check M03 visual patch
+      - name: Syntax check M03 data patch
         run: node --check content/english/year-2/year2-v23-dragdrop-visual-patch.js
+
+      - name: Syntax check M03 iframe visual polish
+        run: node --check content/english/year-2/module-03/single-target-choice-visual-polish.js
 
       - name: Syntax check browser diagnostics
         run: node --check test/drag-drop/single-target-choice-2.0.23/inspect.mjs
@@ -75,6 +78,9 @@ jobs:
 
       - name: Syntax check E2E
         run: node --check test/drag-drop/single-target-choice-2.0.23/e2e.mjs
+
+      - name: Syntax check visual breakpoints
+        run: node --check test/drag-drop/single-target-choice-2.0.23/visual-breakpoints.mjs
 
       - name: Validate SINGLE_TARGET_CHOICE composition contract
         run: node test/drag-drop/single-target-choice-2.0.23/contract.mjs
@@ -138,6 +144,11 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/drag-drop/single-target-choice-2.0.23/e2e.mjs
+
+      - name: Validate notebook and tablet breakpoints
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/visual-breakpoints.mjs
 
       - name: Upload homologation screenshots
         if: always()
