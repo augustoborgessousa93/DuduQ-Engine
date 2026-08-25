@@ -44,12 +44,45 @@ async function boot(page) {
   return { frame, target, choiceA };
 }
 
-async function visibleRect(locator) {
+async function clippedVisibleRect(locator) {
   return locator.evaluate((element) => {
     const rect = element.getBoundingClientRect();
     const style = getComputedStyle(element);
-    const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
-    const visibleWidth = Math.max(0, Math.min(rect.right, window.innerWidth) - Math.max(rect.left, 0));
+    let visibleLeft = Math.max(0, rect.left);
+    let visibleTop = Math.max(0, rect.top);
+    let visibleRight = Math.min(window.innerWidth, rect.right);
+    let visibleBottom = Math.min(window.innerHeight, rect.bottom);
+    const clippingAncestors = [];
+
+    let node = element.parentElement;
+    while (node && node !== document.documentElement) {
+      const nodeStyle = getComputedStyle(node);
+      const clipsX = /(hidden|clip|auto|scroll)/.test(`${nodeStyle.overflowX} ${nodeStyle.overflow}`);
+      const clipsY = /(hidden|clip|auto|scroll)/.test(`${nodeStyle.overflowY} ${nodeStyle.overflow}`);
+      if (clipsX || clipsY) {
+        const nodeRect = node.getBoundingClientRect();
+        if (clipsX) {
+          visibleLeft = Math.max(visibleLeft, nodeRect.left);
+          visibleRight = Math.min(visibleRight, nodeRect.right);
+        }
+        if (clipsY) {
+          visibleTop = Math.max(visibleTop, nodeRect.top);
+          visibleBottom = Math.min(visibleBottom, nodeRect.bottom);
+        }
+        clippingAncestors.push({
+          tag: node.tagName,
+          className: node.className || null,
+          overflowX: nodeStyle.overflowX,
+          overflowY: nodeStyle.overflowY,
+          top: nodeRect.top,
+          bottom: nodeRect.bottom
+        });
+      }
+      node = node.parentElement;
+    }
+
+    const visibleWidth = Math.max(0, visibleRight - visibleLeft);
+    const visibleHeight = Math.max(0, visibleBottom - visibleTop);
     const area = Math.max(1, rect.width * rect.height);
     return {
       top: rect.top,
@@ -60,12 +93,17 @@ async function visibleRect(locator) {
       height: rect.height,
       viewportWidth: window.innerWidth,
       viewportHeight: window.innerHeight,
+      visibleLeft,
+      visibleTop,
+      visibleRight,
+      visibleBottom,
       visibleWidth,
       visibleHeight,
       visibleRatio: (visibleWidth * visibleHeight) / area,
       display: style.display,
       visibility: style.visibility,
-      opacity: Number(style.opacity)
+      opacity: Number(style.opacity),
+      clippingAncestors
     };
   });
 }
@@ -120,7 +158,7 @@ async function hostVisibleIframeRect(iframe) {
   });
 }
 
-async function scenario(browser, name, viewport, minimumChoiceWidth, expectedShortHost) {
+async function scenario(browser, name, viewport, minimumChoiceWidth, expectedCompactHost) {
   const context = await browser.newContext({ viewport });
   const page = await context.newPage();
   const { frame, target, choiceA } = await boot(page);
@@ -129,8 +167,8 @@ async function scenario(browser, name, viewport, minimumChoiceWidth, expectedSho
   const iframe = page.locator('iframe[title="DuduQ — Drag & Drop"]');
 
   assert(await frame.locator("#duduq-m03-single-target-choice-visual-polish").count() === 1, `${name}: CSS de homologação não foi injetado no iframe.`);
-  const shortHostMode = await frame.locator("html").getAttribute("data-duduq-host-short-viewport");
-  assert(shortHostMode === (expectedShortHost ? "true" : "false"), `${name}: modo de viewport host incorreto (${shortHostMode}).`);
+  const compactMode = await frame.locator("html").getAttribute("data-duduq-host-compact-viewport");
+  assert(compactMode === (expectedCompactHost ? "true" : "false"), `${name}: modo compacto incorreto (${compactMode}).`);
 
   const targetBox = await target.boundingBox();
   const bankBox = await bank.boundingBox();
@@ -155,21 +193,27 @@ async function scenario(browser, name, viewport, minimumChoiceWidth, expectedSho
   await target.locator('.duduq-dd2-item[data-dd2-item-id="opt-1"]').waitFor({ state: "visible", timeout: 3_000 });
   assert(!(await confirm.isDisabled()), `${name}: CONFIRMAR não habilitou após seleção.`);
 
-  const confirmVisible = await visibleRect(confirm);
+  const confirmVisible = await clippedVisibleRect(confirm);
   const hostIframe = await hostVisibleIframeRect(iframe);
   assert(confirmVisible.display !== "none" && confirmVisible.visibility !== "hidden" && confirmVisible.opacity > 0, `${name}: CONFIRMAR existe, mas não está visualmente renderizado.`);
 
-  // Frame-local visibility is necessary but not sufficient: the host can clip a taller iframe.
+  // This catches the exact failure previously visible in the screenshots: the
+  // button was inside the iframe viewport but partially hidden by an inner host
+  // panel with overflow clipping.
   assert(
-    confirmVisible.bottom <= confirmVisible.viewportHeight - 2 && confirmVisible.visibleRatio >= 0.98,
-    `${name}: CONFIRMAR está recortado dentro do próprio iframe (${Math.round(confirmVisible.bottom)}/${Math.round(confirmVisible.viewportHeight)}, ${(confirmVisible.visibleRatio * 100).toFixed(1)}%).`
+    confirmVisible.visibleRatio >= 0.98,
+    `${name}: somente ${(confirmVisible.visibleRatio * 100).toFixed(1)}% do CONFIRMAR está visível. Inner ancestors=${JSON.stringify(confirmVisible.clippingAncestors)}`
+  );
+  assert(
+    confirmVisible.visibleBottom >= confirmVisible.bottom - 2,
+    `${name}: base do CONFIRMAR é cortada dentro do DD2 (${Math.round(confirmVisible.visibleBottom)} < ${Math.round(confirmVisible.bottom - 2)}). Inner ancestors=${JSON.stringify(confirmVisible.clippingAncestors)}`
   );
 
   const confirmPageTop = hostIframe.iframeTop + confirmVisible.top;
   const confirmPageBottom = hostIframe.iframeTop + confirmVisible.bottom;
   assert(
     confirmPageBottom <= hostIframe.visibleBottom - 2,
-    `${name}: CONFIRMAR passa no iframe, mas é cortado pelo host (${Math.round(confirmPageBottom)} > ${Math.round(hostIframe.visibleBottom - 2)}). Ancestors=${JSON.stringify(hostIframe.clippingAncestors)}`
+    `${name}: CONFIRMAR é cortado pelo host externo (${Math.round(confirmPageBottom)} > ${Math.round(hostIframe.visibleBottom - 2)}). Outer ancestors=${JSON.stringify(hostIframe.clippingAncestors)}`
   );
   assert(
     confirmPageTop >= hostIframe.visibleTop - 2,
@@ -178,19 +222,19 @@ async function scenario(browser, name, viewport, minimumChoiceWidth, expectedSho
 
   await page.screenshot({ path: `${RESULTS}/${name}-selected.png`, fullPage: false });
   console.log(
-    `PASS — ${name}: shortHost=${shortHostMode}, choice=${Math.round(choiceBox.width)}x${Math.round(choiceBox.height)}, ` +
+    `PASS — ${name}: compact=${compactMode}, choice=${Math.round(choiceBox.width)}x${Math.round(choiceBox.height)}, ` +
     `image=${Math.round(imageBox.width)}x${Math.round(imageBox.height)}, zone=${Math.round(zoneBox.height)}, ` +
-    `confirmLocal=${Math.round(confirmVisible.top)}-${Math.round(confirmVisible.bottom)}/${Math.round(confirmVisible.viewportHeight)}, ` +
-    `confirmPage=${Math.round(confirmPageTop)}-${Math.round(confirmPageBottom)}, hostVisibleBottom=${Math.round(hostIframe.visibleBottom)}`
+    `confirm=${Math.round(confirmVisible.top)}-${Math.round(confirmVisible.bottom)}, visible=${(confirmVisible.visibleRatio * 100).toFixed(1)}%`
   );
   await context.close();
 }
 
 const browser = await chromium.launch({ headless: true });
 try {
+  await scenario(browser, "desktop-1366x768", { width: 1366, height: 768 }, 210, false);
   await scenario(browser, "notebook-1280x650", { width: 1280, height: 650 }, 210, true);
-  await scenario(browser, "tablet-1024x768", { width: 1024, height: 768 }, 185, false);
-  console.log("PASS — visual breakpoints notebook + tablet with host clipping guard");
+  await scenario(browser, "tablet-1024x768", { width: 1024, height: 768 }, 185, true);
+  console.log("PASS — visual breakpoints desktop + notebook + tablet with inner/outer clipping guards");
 } finally {
   await browser.close();
 }
