@@ -7,9 +7,9 @@
   "use strict";
 
   const STYLE_ID = "duduq-m03-single-target-choice-visual-polish";
-  const VERSION = "1.2.1-homolog";
+  const VERSION = "1.3.0-homolog";
   const FRAME_SELECTOR = 'iframe[title="DuduQ — Drag & Drop"]';
-  const SHORT_HOST_ATTRIBUTE = "data-duduq-host-short-viewport";
+  const COMPACT_HOST_ATTRIBUTE = "data-duduq-host-compact-viewport";
 
   const CSS = `
 /* Desktop/tablet: give the audiovisual stimulus priority and make every choice
@@ -77,57 +77,58 @@
   }
 }
 
-/* The mechanic iframe can be taller than the actually visible host panel because
-   the DuduQ shell clips it below the global header. Therefore the iframe's own
-   height is not a reliable signal for a 1280x650 notebook. The parent
-   homologation script stamps this attribute from the REAL host viewport. */
-html[${SHORT_HOST_ATTRIBUTE}="true"] .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) {
+/* The host shell, not the iframe viewport alone, determines how much vertical
+   room is actually available. Compact notebooks and 1024-class tablets use a
+   shorter composition so CONFIRMAR remains fully visible without shrinking the
+   motor targets below the Y2 minimum. Wide 1366x768 desktop keeps the richer
+   image scale. */
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) {
   gap: 18px !important;
 }
 
-html[${SHORT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] {
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] {
   min-height: 246px !important;
   max-height: 270px !important;
 }
 
-html[${SHORT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head {
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head {
   min-height: 126px !important;
   max-height: 142px !important;
   padding: 5px 12px !important;
 }
 
-html[${SHORT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head img,
-html[${SHORT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head .duduq-dd2-item-media {
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head img,
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head .duduq-dd2-item-media {
   width: min(72%, 205px) !important;
   max-width: 72% !important;
   height: min(128px, 24vh) !important;
   max-height: 128px !important;
 }
 
-html[${SHORT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone {
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone {
   flex: 0 0 78px !important;
   min-height: 78px !important;
   max-height: 84px !important;
   padding: 7px 12px !important;
 }
 
-html[${SHORT_HOST_ATTRIBUTE}="true"] .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank-items {
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank-items {
   gap: 8px !important;
 }
 
-html[${SHORT_HOST_ATTRIBUTE}="true"] .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank .duduq-dd2-item {
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank .duduq-dd2-item {
   min-height: 60px !important;
   padding-block: 7px !important;
 }
 
-html[${SHORT_HOST_ATTRIBUTE}="true"] .duduq-dd2-actions,
-html[${SHORT_HOST_ATTRIBUTE}="true"] .duduq-matching-action-slot.duduq-dd2-actions {
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-actions,
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-matching-action-slot.duduq-dd2-actions {
   margin-top: 0 !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
 
-html[${SHORT_HOST_ATTRIBUTE}="true"] .duduq-dd2-confirm {
+html[${COMPACT_HOST_ATTRIBUTE}="true"] .duduq-dd2-confirm {
   min-height: 46px !important;
 }
 
@@ -140,10 +141,20 @@ html[${SHORT_HOST_ATTRIBUTE}="true"] .duduq-dd2-confirm {
 }
 `;
 
+  function shouldUseCompactHostLayout() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    if (width < 761) return false;
+    if (height <= 680) return true;
+    return width <= 1100 && height <= 800;
+  }
+
   function syncHostViewportMode(doc) {
     if (!doc?.documentElement) return;
-    const shortNotebook = window.innerWidth >= 761 && window.innerHeight <= 680;
-    doc.documentElement.setAttribute(SHORT_HOST_ATTRIBUTE, shortNotebook ? "true" : "false");
+    doc.documentElement.setAttribute(
+      COMPACT_HOST_ATTRIBUTE,
+      shouldUseCompactHostLayout() ? "true" : "false"
+    );
   }
 
   function inject(iframe) {
@@ -188,7 +199,7 @@ html[${SHORT_HOST_ATTRIBUTE}="true"] .duduq-dd2-confirm {
     version: VERSION,
     homologationOnly: true,
     styleId: STYLE_ID,
-    hostViewportAttribute: SHORT_HOST_ATTRIBUTE,
+    hostViewportAttribute: COMPACT_HOST_ATTRIBUTE,
     ready: true
   });
 })();
