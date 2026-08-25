@@ -12,19 +12,18 @@ page.on("pageerror", (error) => messages.push(`pageerror: ${error.message}`));
 
 try {
   await page.goto(URL, { waitUntil: "domcontentloaded", timeout: 30_000 });
-  const start = page.locator(".duduq-intro-start-button");
-  try {
-    await start.waitFor({ state: "visible", timeout: 12_000 });
-    await start.click();
-  } catch (_) {}
+  await page.waitForFunction(
+    () => window.DuduQDD23SingleTargetRuntimePatch?.ready === true,
+    null,
+    { timeout: 20_000 }
+  );
 
-  await page.waitForTimeout(4_000);
-
-  const top = await page.evaluate(() => {
+  const beforeStart = await page.evaluate(() => {
     const module = window.DUDUQ_CONTENT?.english?.year2?.module03v23multimodal;
     const activity = module?.activities?.[0];
     const question = activity?.questions?.[0];
     return {
+      runtimePatch: window.DuduQDD23SingleTargetRuntimePatch || null,
       manifestDragDrop: window.DUDUQ_ENGINE_MANIFEST?.mechanics?.["drag-drop"] || null,
       mechanics: window.DuduQ?.listMechanics?.() || [],
       moduleId: module?.id || null,
@@ -43,37 +42,47 @@ try {
     };
   });
 
+  const start = page.locator(".duduq-intro-start-button");
+  try {
+    await start.waitFor({ state: "visible", timeout: 12_000 });
+    await start.click();
+  } catch (_) {}
+
+  await page.waitForTimeout(4_000);
+
   const frames = page.frames();
   const mechanicFrame = frames.find((frame) => frame !== page.mainFrame() && frame.url() === "about:srcdoc");
   let runtime = null;
   if (mechanicFrame) {
     runtime = await mechanicFrame.evaluate(() => {
-      const target = document.querySelector(".duduq-dd-target");
-      const configEl = document.querySelector("#targetShooterConfig");
-      let config = null;
-      try { config = configEl ? JSON.parse(configEl.textContent || "null") : null; } catch (error) { config = { parseError: String(error) }; }
+      const target = document.querySelector(".duduq-dd2-target");
+      const capacity = document.querySelector(".duduq-dd2-target-capacity");
+      const pool = document.querySelector(".duduq-dd2-pool");
+      const confirm = document.querySelector(".duduq-dd2-primary");
       return {
         title: document.title,
         targetAttributes: target ? Object.fromEntries(Array.from(target.attributes).map((attr) => [attr.name, attr.value])) : null,
         targetClass: target?.className || null,
-        configStage: config?.stages?.[0] ? {
-          id: config.stages[0].id,
-          strategy: config.stages[0].strategy,
-          mode: config.stages[0].mode,
-          behavior: config.stages[0].behavior,
-          targets: config.stages[0].targets,
-          items: config.stages[0].items
-        } : null
+        capacityDisplay: capacity ? getComputedStyle(capacity).display : null,
+        poolClass: pool?.className || null,
+        confirmDisabled: confirm?.disabled ?? null,
+        bodyText: document.body?.innerText?.slice(0, 1200) || ""
       };
     });
   }
 
-  console.log("=== SINGLE_TARGET_CHOICE TOP ===");
-  console.log(JSON.stringify(top, null, 2));
-  console.log("=== SINGLE_TARGET_CHOICE RUNTIME ===");
+  console.log("=== SINGLE_TARGET_CHOICE BEFORE START ===");
+  console.log(JSON.stringify(beforeStart, null, 2));
+  console.log("=== SINGLE_TARGET_CHOICE ACTIVE DD2 RUNTIME ===");
   console.log(JSON.stringify(runtime, null, 2));
   console.log("=== BROWSER MESSAGES ===");
   console.log(messages.join("\n"));
+
+  if (!beforeStart.runtimePatch?.ready) throw new Error("DD2 runtime patch não ficou pronto antes do início.");
+  if (runtime?.targetAttributes?.["data-single-target-choice"] !== "true") {
+    throw new Error("Runtime DD2 ativo não recebeu data-single-target-choice=true.");
+  }
+  if (runtime.capacityDisplay !== "none") throw new Error("Badge de capacidade permanece visível no runtime DD2 ativo.");
 } finally {
   await browser.close();
 }
