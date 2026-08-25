@@ -20,7 +20,7 @@ async function bootM03(page, diagnosticName = "boot") {
 
   await page.goto(M03_URL, { waitUntil: "domcontentloaded", timeout: 30_000 });
   await page.waitForFunction(
-    () => window.DuduQDD23SingleTargetRuntimePatch?.ready === true && window.DuduQDD23PointerBridge?.ready === true,
+    () => window.DuduQDD23SingleTargetRuntimePatch?.ready === true,
     null,
     { timeout: 20_000 }
   );
@@ -90,7 +90,6 @@ async function waitTargetFilled(target, expected = true) {
 }
 
 async function dragChoice(page, choice, target) {
-  // hover() waits for the parent transition/bridge to stop intercepting pointer input.
   await choice.hover({ timeout: 8_000 });
   const sourceBox = await choice.boundingBox();
   const targetBox = await target.boundingBox();
@@ -129,6 +128,11 @@ async function desktopScenario(browser) {
   await waitTargetFilled(target, true);
   assert(await target.locator(".duduq-dd2-item").count() === 1, "Arraste de A não deixou exatamente uma alternativa no destino.");
   assert(!(await confirm.isDisabled()), "CONFIRMAR não habilitou após alternativa A ser colocada.");
+
+  // Prova que o arraste foi resolvido pelo owner nativo, não por click residual.
+  const pointerProof = await frame.locator("body").evaluate(() => window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__ || null);
+  assert(pointerProof?.placeCalls >= 1, "Arraste visual ocorreu sem prova de chamada place() pelo owner nativo.");
+  assert(pointerProof?.targetResolved === "stimulus-target", `Owner nativo resolveu target inesperado: ${pointerProof?.targetResolved}.`);
 
   // Troca por toque/clique antes de confirmar. C também é incorreta e deve substituir A sem revelar gabarito.
   const choiceC = bankChoice(frame, "C");
