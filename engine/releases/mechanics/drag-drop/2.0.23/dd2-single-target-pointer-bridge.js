@@ -7,9 +7,10 @@
 (function () {
   "use strict";
 
-  const VERSION = "2.0.23-pointer-bridge-a";
+  const VERSION = "2.0.23-pointer-bridge-b";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqDD23SingleTargetPointerBridgeWrapped";
+  const READY_EVENT = "duduq:dd23-single-target-runtime-ready";
   const MAX_ATTEMPTS = 1200;
 
   function fail(message) {
@@ -74,21 +75,42 @@
     return true;
   }
 
-  expose(false, "waiting-for-single-target-runtime-patch");
+  let timer = null;
 
-  if (install()) return;
+  function stopWaiting() {
+    window.removeEventListener(READY_EVENT, onRuntimeReady);
+    if (timer !== null) {
+      window.clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  function onRuntimeReady() {
+    /* The active runtime patch emits this event synchronously immediately
+       after replacing the shared hook. Installing here guarantees that the
+       pointer bridge wraps the same hook before the loader can mount DD2. */
+    if (install()) stopWaiting();
+  }
+
+  expose(false, "waiting-for-single-target-runtime-patch");
+  window.addEventListener(READY_EVENT, onRuntimeReady);
+
+  if (install()) {
+    stopWaiting();
+    return;
+  }
 
   let attempts = 0;
-  const timer = window.setInterval(function () {
+  timer = window.setInterval(function () {
     attempts += 1;
 
     if (install()) {
-      window.clearInterval(timer);
+      stopWaiting();
       return;
     }
 
     if (attempts >= MAX_ATTEMPTS) {
-      window.clearInterval(timer);
+      stopWaiting();
       expose(false, "timeout-waiting-for-single-target-runtime-patch");
       console.error("[DuduQ Drag & Drop 2.0.23 Pointer Bridge] runtime patch não ficou pronto a tempo.");
     }
