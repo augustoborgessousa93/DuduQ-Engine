@@ -11,6 +11,15 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+async function waitUntilEnabled(locator, timeout = 6_000) {
+  const startedAt = Date.now();
+  while (Date.now() - startedAt < timeout) {
+    if (await locator.isEnabled().catch(() => false)) return Date.now() - startedAt;
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
+  throw new Error(`Alternativa permaneceu desabilitada por mais de ${timeout}ms após o DD2 ficar visível.`);
+}
+
 async function bootM03(page, diagnosticName = "boot") {
   const browserErrors = [];
   page.on("pageerror", (error) => browserErrors.push(error.message));
@@ -62,12 +71,16 @@ async function bootM03(page, diagnosticName = "boot") {
     throw new Error(`Boot M03 falhou. Diagnóstico salvo em ${RESULTS}/${diagnosticName}-boot-diagnostic.txt. Mensagens: ${browserErrors.join(" | ") || "nenhuma"}`);
   }
 
+  const firstChoice = frame.locator(".duduq-dd2-bank .duduq-dd2-item").first();
+  await firstChoice.waitFor({ state: "visible", timeout: 5_000 });
+  const interactiveWaitMs = await waitUntilEnabled(firstChoice);
+
   if (browserErrors.length) {
     const fatal = browserErrors.filter((message) => /Falha|Error|erro|failed/i.test(message));
     assert(fatal.length === 0, `Erros de browser durante boot: ${fatal.join(" | ")}`);
   }
 
-  return { frame, target };
+  return { frame, target, interactiveWaitMs };
 }
 
 function bankChoice(frame, letter) {
@@ -90,6 +103,7 @@ async function waitTargetFilled(target, expected = true) {
 }
 
 async function dragChoice(page, choice, target) {
+  await waitUntilEnabled(choice);
   await choice.hover({ timeout: 8_000 });
   const sourceBox = await choice.boundingBox();
   const targetBox = await target.boundingBox();
@@ -103,9 +117,10 @@ async function dragChoice(page, choice, target) {
 async function desktopScenario(browser) {
   const context = await browser.newContext({ viewport: { width: 1366, height: 768 } });
   const page = await context.newPage();
-  const { frame, target } = await bootM03(page, "desktop");
+  const { frame, target, interactiveWaitMs } = await bootM03(page, "desktop");
   const bank = frame.locator(".duduq-dd2-bank");
   const confirm = frame.locator(".duduq-dd2-confirm");
+  console.log(`DESKTOP interactive after ${interactiveWaitMs}ms`);
 
   const targetBox = await target.boundingBox();
   const bankBox = await bank.boundingBox();
@@ -136,6 +151,7 @@ async function desktopScenario(browser) {
 
   // Troca por toque/clique antes de confirmar. C também é incorreta e deve substituir A sem revelar gabarito.
   const choiceC = bankChoice(frame, "C");
+  await waitUntilEnabled(choiceC);
   await choiceC.click();
   await waitTargetFilled(target, true);
   await bankChoice(frame, "A").waitFor({ state: "visible", timeout: 3_000 });
@@ -158,6 +174,7 @@ async function desktopScenario(browser) {
 
   // Nova tentativa por toque. B é a resposta correta da primeira questão.
   const choiceB = bankChoice(frame, "B");
+  await waitUntilEnabled(choiceB);
   await choiceB.click();
   await waitTargetFilled(target, true);
   assert(await target.locator(".duduq-dd2-item").count() === 1, "Toque em B não colocou exatamente uma alternativa no destino.");
@@ -174,8 +191,9 @@ async function desktopScenario(browser) {
 async function mobileScenario(browser) {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const page = await context.newPage();
-  const { frame, target } = await bootM03(page, "mobile");
+  const { frame, target, interactiveWaitMs } = await bootM03(page, "mobile");
   const bank = frame.locator(".duduq-dd2-bank");
+  console.log(`MOBILE interactive after ${interactiveWaitMs}ms`);
 
   const targetBox = await target.boundingBox();
   const bankBox = await bank.boundingBox();
@@ -192,7 +210,9 @@ async function mobileScenario(browser) {
   assert(Math.abs(firstBox.x - secondBox.x) > 80, "Mobile: colunas de alternativas não estão visualmente separadas.");
 
   // Toque deve colocar qualquer alternativa e habilitar confirmar sem revelar se está correta.
-  await bankChoice(frame, "D").click();
+  const choiceD = bankChoice(frame, "D");
+  await waitUntilEnabled(choiceD);
+  await choiceD.click();
   await waitTargetFilled(target, true);
   assert(await target.locator(".duduq-dd2-item").count() === 1, "Mobile: toque em D não colocou exatamente uma alternativa no destino.");
   const confirm = frame.locator(".duduq-dd2-confirm");
