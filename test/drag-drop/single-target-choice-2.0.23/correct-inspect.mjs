@@ -58,7 +58,7 @@ try {
 
   await page.goto(URL, { waitUntil: "domcontentloaded", timeout: 30_000 });
   await page.waitForFunction(
-    () => window.DuduQDD23SingleTargetRuntimePatch?.ready === true && window.DuduQDD23PointerBridge?.ready === true,
+    () => window.DuduQDD23SingleTargetRuntimePatch?.ready === true,
     null,
     { timeout: 20_000 }
   );
