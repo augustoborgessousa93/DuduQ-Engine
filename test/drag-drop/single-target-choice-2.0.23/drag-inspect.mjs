@@ -5,13 +5,32 @@ const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:4173";
 const URL = `${BASE_URL}/content/english/year-2/module-03/index.html`;
 const POINTER_VERSION = "2.0.23-native-pointer-b";
 
-async function waitUntilEnabled(locator, timeout = 6_000) {
+function itemIdForLetter(letter) {
+  return `opt-${letter.toUpperCase().charCodeAt(0) - 64}`;
+}
+
+async function waitForFinalInteractive(page, frame, locator, timeout = 10_000) {
   const startedAt = Date.now();
+  await page.waitForFunction(
+    () => !document.documentElement.hasAttribute("data-duduq-initial-speech-gate"),
+    null,
+    { timeout }
+  );
+  let stableSince = null;
   while (Date.now() - startedAt < timeout) {
-    if (await locator.isEnabled().catch(() => false)) return Date.now() - startedAt;
-    await new Promise((resolve) => setTimeout(resolve, 50));
+    const enabled = await locator.isEnabled().catch(() => false);
+    const arenaDisabled = await frame.evaluate(
+      () => document.querySelector(".duduq-dd2-arena")?.getAttribute("data-disabled") === "true"
+    ).catch(() => true);
+    if (enabled && !arenaDisabled) {
+      if (stableSince === null) stableSince = Date.now();
+      if (Date.now() - stableSince >= 350) return Date.now() - startedAt;
+    } else {
+      stableSince = null;
+    }
+    await page.waitForTimeout(50);
   }
-  throw new Error(`Alternativa permaneceu desabilitada por mais de ${timeout}ms após o DD2 ficar visível.`);
+  throw new Error(`DD2 não atingiu estado interativo final em ${timeout}ms.`);
 }
 
 async function openM03(browser) {
@@ -36,9 +55,9 @@ async function openM03(browser) {
     { timeout: 10_000 }
   );
 
-  const firstChoice = mechanicFrame.locator(".duduq-dd2-bank .duduq-dd2-item").first();
+  const firstChoice = mechanicFrame.locator('.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="opt-1"]').first();
   await firstChoice.waitFor({ state: "visible", timeout: 5_000 });
-  const interactiveWaitMs = await waitUntilEnabled(firstChoice);
+  const interactiveWaitMs = await waitForFinalInteractive(page, mechanicFrame, firstChoice);
 
   const pointerRuntime = await mechanicFrame.evaluate(() => window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__ || null);
   if (!pointerRuntime?.attached) {
@@ -62,7 +81,7 @@ async function waitForMechanicFrame(page) {
 }
 
 function choice(frame, letter) {
-  return frame.locator(".duduq-dd2-bank .duduq-dd2-item").filter({ hasText: `🔊 ${letter}` }).first();
+  return frame.locator(`.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="${itemIdForLetter(letter)}"]`).first();
 }
 
 async function snapshot(frame) {
@@ -144,7 +163,6 @@ try {
 
     const itemA = choice(frame, "A");
     const target = frame.locator('.duduq-dd2-target[data-single-target-choice="true"]');
-    await waitUntilEnabled(itemA);
 
     await itemA.hover({ timeout: 8_000 });
     const sourceBox = await itemA.boundingBox();
@@ -191,7 +209,6 @@ try {
   {
     const { context, frame } = await openM03(browser);
     const itemA = choice(frame, "A");
-    await waitUntilEnabled(itemA);
     await itemA.click();
     await frame.waitForTimeout(250);
     const state = await snapshot(frame);
