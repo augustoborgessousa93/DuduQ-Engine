@@ -6,7 +6,6 @@ import process from "node:process";
 const BASE=(process.env.DUDUQ_QA_BASE||"http://127.0.0.1:4173").replace(/\/$/,"");
 const OUT=path.resolve(process.env.DUDUQ_QA_OUT||"artifacts/year2-v23");
 fs.mkdirSync(OUT,{recursive:true});
-const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const check=(cond,msg)=>{if(!cond) throw new Error(msg)};
 
 async function waitRuntime(page){
@@ -92,15 +91,23 @@ async function runM112(browser,device){
     const response=await page.goto(url,{waitUntil:"domcontentloaded",timeout:30000});
     check(response?.ok(),`M1-12 ${device}: HTTP ${response?.status()}`);
     await page.getByRole("button",{name:/INICIAR MISSÃO/i}).click();
-    await page.waitForFunction(()=>Boolean(window.DuduQ?.next),undefined,{timeout:15000});
+    await page.waitForFunction(()=>Boolean(window.DuduQ?.next)&&Boolean(window.__DUDUQ_QA_STEP__?.id),undefined,{timeout:15000});
     let found=false;
-    for(let n=0;n<20;n++){
+    for(let n=0;n<30;n++){
       const state=await page.evaluate(()=>window.__DUDUQ_QA_STEP__);
       if(state?.id==="en2-m1-12-drag-drop"){found=true;break}
-      await page.evaluate(()=>window.DuduQ.next({qaAdvance:true}));
-      await sleep(320);
+      const previousIndex=Number(state?.index);
+      const accepted=await page.evaluate(()=>window.DuduQ.next({qaAdvance:true}));
+      check(accepted!==false,`M1-12 ${device}: Host recusou avanço na etapa ${state?.id||"desconhecida"}`);
+      await page.waitForFunction(prev=>{
+        const s=window.__DUDUQ_QA_STEP__;
+        return s?.id==="en2-m1-12-drag-drop" || (Number.isFinite(Number(s?.index))&&Number(s.index)>prev);
+      },previousIndex,{timeout:6000});
     }
-    check(found,`M1-12 ${device}: etapa dedicada não alcançada`);
+    const targetState=await page.evaluate(()=>window.__DUDUQ_QA_STEP__);
+    if(targetState?.id==="en2-m1-12-drag-drop") found=true;
+    check(found,`M1-12 ${device}: etapa dedicada não alcançada; última etapa=${targetState?.id||"n/a"} índice=${targetState?.index??"n/a"}`);
+    check(targetState?.mechanic==="drag-drop",`M1-12 ${device}: mecânica inesperada ${targetState?.mechanic||"n/a"}`);
     const overlay=page.locator("#duduq-m1-12-first-listen-overlay");
     await overlay.waitFor({state:"visible",timeout:10000});
     const beforeText=await overlay.innerText();
