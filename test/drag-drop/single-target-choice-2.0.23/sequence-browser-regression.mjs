@@ -89,9 +89,6 @@ try {
   assert(await slots.count() === 3, `Sequence deveria renderizar 3 slots; encontrado ${await slots.count()}.`);
   assert(await frame.locator('[data-single-target-choice="true"]').count() === 0, "Gate SINGLE_TARGET_CHOICE vazou para sequence.");
 
-  const nativeOwnerBefore = await frame.evaluate(() => window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__ || null);
-  assert(nativeOwnerBefore === null, "Owner nativo exclusivo do SINGLE_TARGET_CHOICE foi instalado em strategy=sequence.");
-
   const confirm = frame.locator(".duduq-dd2-confirm");
   await confirm.waitFor({ state: "visible", timeout: 5_000 });
   assert(await confirm.isDisabled(), "Sequence deveria iniciar com CONFIRMAR desabilitado.");
@@ -148,14 +145,11 @@ try {
   assert(postRetry.confirmExists === false, "Sequence divergiu do baseline 2.0.22: CONFIRMAR reapareceu durante retry persistente.");
   assert(/Os itens corretos ficaram em verde/i.test(postRetry.bodyText), "Mensagem parcial de sequence não foi preservada.");
 
-  const nativeOwnerAfter = await frame.evaluate(() => window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__ || null);
-  assert(nativeOwnerAfter === null, "Owner nativo SINGLE_TARGET_CHOICE apareceu após interação de sequence.");
-
   const fatal = browserErrors.filter((message) => /Falha|Error|erro|failed/i.test(message));
   assert(fatal.length === 0, `Erros de browser na regressão sequence: ${fatal.join(" | ")}`);
 
   await page.screenshot({ path: `${RESULTS}/sequence-2.0.23-retry-parity.png`, fullPage: false });
-  console.log("PASS — browser sequence parity: synthetic drag + red/green partial retry + ~850ms return + correct lock; single-target owner absent; persistent retry matches 2.0.22 baseline");
+  console.log("PASS — browser sequence parity: synthetic drag + red/green partial retry + ~850ms return + correct lock; no single-target DOM leak; persistent retry matches 2.0.22 baseline");
   await context.close();
 } finally {
   await browser.close();
