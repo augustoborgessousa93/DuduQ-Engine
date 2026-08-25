@@ -96,11 +96,12 @@ async function waitTargetFilled(target, expected = true) {
 }
 
 async function dragChoice(page, choice, target) {
+  // hover() waits for the parent transition/bridge to stop intercepting pointer input.
+  await choice.hover({ timeout: 8_000 });
   const sourceBox = await choice.boundingBox();
   const targetBox = await target.boundingBox();
   assert(sourceBox && targetBox, "Não foi possível obter coordenadas para o arraste.");
 
-  await page.mouse.move(sourceBox.x + sourceBox.width / 2, sourceBox.y + sourceBox.height / 2);
   await page.mouse.down();
   await page.mouse.move(targetBox.x + targetBox.width / 2, targetBox.y + targetBox.height * 0.72, { steps: 18 });
   await page.mouse.up();
