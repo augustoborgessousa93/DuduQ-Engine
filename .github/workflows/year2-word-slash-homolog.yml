@@ -11,6 +11,7 @@ on:
       - "scripts/qa-year2-m01-v22-runtime.mjs"
       - "scripts/qa-year2-all-v22-runtime.mjs"
       - "scripts/qa-year2-provisional-visual-policy.mjs"
+      - "scripts/qa-year2-editorial-assets.mjs"
       - "scripts/qa-year2-visual-functional.mjs"
       - "scripts/qa-year2-visual-functional-base.mjs"
       - "scripts/qa-year2-m01-12-first-listen.mjs"
@@ -26,6 +27,7 @@ on:
       - "scripts/qa-year2-m01-v22-runtime.mjs"
       - "scripts/qa-year2-all-v22-runtime.mjs"
       - "scripts/qa-year2-provisional-visual-policy.mjs"
+      - "scripts/qa-year2-editorial-assets.mjs"
       - "scripts/qa-year2-visual-functional.mjs"
       - "scripts/qa-year2-visual-functional-base.mjs"
       - "scripts/qa-year2-m01-12-first-listen.mjs"
@@ -62,8 +64,11 @@ jobs:
       - name: Validate Year 2 M01-M06 v2.2 + Factory v1.2
         run: node scripts/qa-year2-all-v22-runtime.mjs
 
-      - name: Validate provisional emoji/vector visual policy
+      - name: Validate existing assets plus provisional fallback policy
         run: node scripts/qa-year2-provisional-visual-policy.mjs
+
+      - name: Validate exact existing editorial assets
+        run: node scripts/qa-year2-editorial-assets.mjs
 
   visual-functional-gate:
     name: Visual and functional gate
