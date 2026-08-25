@@ -23,6 +23,7 @@ function expectOnce(source, needle, label) {
 
 const candidatePath = "engine/releases/mechanics/drag-drop/2.0.23/drag-drop.js";
 const activeRuntimePatchPath = "engine/releases/mechanics/drag-drop/2.0.23/dd2-single-target-runtime-patch.js";
+const pointerBridgePath = "engine/releases/mechanics/drag-drop/2.0.23/dd2-single-target-pointer-bridge.js";
 const baseAdapterPath = "engine/releases/mechanics/drag-drop/2.0.18/drag-drop.js";
 const baseRuntimePath = "engine/releases/mechanics/drag-drop/2.0.18/DUDUQ_DRAG_DROP.html";
 const consolidatedPath = "engine/releases/mechanics/drag-drop/2.0.22/drag-drop.js";
@@ -33,6 +34,7 @@ const m03PatchPath = "content/english/year-2/year2-v23-dragdrop-visual-patch.js"
 
 const candidate = read(candidatePath);
 const activeRuntimePatch = read(activeRuntimePatchPath);
+const pointerBridge = read(pointerBridgePath);
 const baseAdapter = read(baseAdapterPath);
 const baseRuntime = read(baseRuntimePath);
 const consolidated = read(consolidatedPath);
@@ -51,14 +53,19 @@ expect(homolog.policy?.homologationOnly === true, "Canal do piloto precisa estar
 expect(homolog.mechanics?.["drag-drop"]?.release === "2.0.23", "Canal do piloto não está usando Drag & Drop 2.0.23.");
 expect(homolog.mechanics?.["drag-drop"]?.adapter === "/engine/releases/mechanics/drag-drop/2.0.23/drag-drop.js", "Adapter 2.0.23 incorreto no canal de homologação.");
 
-// 3) M03 deve entrar pelo canal isolado, declarar o piloto e preparar o patch DD2 antes do loader.
+// 3) M03 deve entrar pelo canal isolado, declarar o piloto e preparar os patches DD2 antes do loader.
 expect(m03Entry.includes('channel:"homolog-m03-single-target-v1"'), "M03 não aponta para o canal isolado do piloto.");
 expect(m03Entry.includes('interactionPilot:"SINGLE_TARGET_CHOICE"'), "M03 não declara SINGLE_TARGET_CHOICE no entrypoint.");
 expect(m03Entry.includes('dragDropCandidate:"2.0.23"'), "M03 não declara o candidato Drag & Drop 2.0.23.");
 expect(m03Entry.includes('engine/releases/mechanics/drag-drop/2.0.23/dd2-single-target-runtime-patch.js'), "M03 não carrega o patch do runtime DD2 ativo.");
+expect(m03Entry.includes('engine/releases/mechanics/drag-drop/2.0.23/dd2-single-target-pointer-bridge.js'), "M03 não carrega a ponte de pointer do DD2 ativo.");
 expect(
-  m03Entry.indexOf('dd2-single-target-runtime-patch.js') < m03Entry.indexOf('duduq-loader-v1.js'),
-  "Patch DD2 precisa ser carregado antes do loader para eliminar corrida antes do mount."
+  m03Entry.indexOf('dd2-single-target-runtime-patch.js') < m03Entry.indexOf('dd2-single-target-pointer-bridge.js'),
+  "Patch comportamental DD2 precisa ser instalado antes da ponte de pointer."
+);
+expect(
+  m03Entry.indexOf('dd2-single-target-pointer-bridge.js') < m03Entry.indexOf('duduq-loader-v1.js'),
+  "Ponte de pointer DD2 precisa ser carregada antes do loader para eliminar corrida antes do mount."
 );
 
 // 4) O patch pedagógico deve ser estritamente gated ao M03 e não vazar para outros módulos.
@@ -88,6 +95,15 @@ expect(activeRuntimePatch.includes('}, 850);') || consolidated.includes('}, 850)
 expect(activeRuntimePatch.includes('.duduq-dd2-capacity'), "Patch ativo não remove visualmente o 0/1 do DD2.");
 expect(activeRuntimePatch.includes('.duduq-dd2-bank-items'), "Patch ativo não controla o banco real de alternativas DD2.");
 
+// 5c) O gesto de arraste precisa continuar mesmo quando o pointer deixa o card.
+expect(pointerBridge.includes('question.strategy !== "single-target-choice"'), "Ponte de pointer perdeu o gate exclusivo do single-target-choice.");
+expect(pointerBridge.includes('document.addEventListener("pointermove", forwardPointerMove, true)'), "Ponte de pointer não encaminha pointermove pelo documento do iframe.");
+expect(pointerBridge.includes('document.addEventListener("pointerup", forwardPointerUp, true)'), "Ponte de pointer não encaminha pointerup pelo documento do iframe.");
+expect(pointerBridge.includes('document.addEventListener("pointercancel", forwardPointerCancel, true)'), "Ponte de pointer não trata cancelamento do gesto.");
+expect(pointerBridge.includes('onPointerMove(event);'), "Ponte de pointer não reutiliza o handler canônico de movimento.");
+expect(pointerBridge.includes('finishDrag(event);'), "Ponte de pointer não reutiliza o handler canônico de conclusão.");
+expect(pointerBridge.includes('target.closest(".duduq-dd2-item")'), "Ponte de pointer não evita processamento duplicado quando o item ainda é o dono local do evento.");
+
 // 6) Assinaturas críticas devem continuar únicas nas bases para composição determinística.
 expectOnce(consolidated, 'const CANDIDATE_VERSION = "2.0.22";', "2.0.22 / CANDIDATE_VERSION");
 expectOnce(consolidated, 'source = source.split("DuduQ Drag & Drop 2.0.18").join("DuduQ Drag & Drop 2.0.22");', "2.0.22 / identity rewrite");
@@ -102,3 +118,4 @@ expectOnce(baseRuntime, '"data-dd2-target-id":target.id,', "2.0.18 active DD2 / 
 console.log("PASS — Drag & Drop 2.0.23 SINGLE_TARGET_CHOICE active DD2 composition contract");
 console.log("Canary preservado em R143 / drag-drop 2.0.22");
 console.log("M03 isolado em homolog-m03-single-target-v1 / drag-drop 2.0.23");
+console.log("Pointer bridge gated ao single-target-choice e carregado antes do mount");
