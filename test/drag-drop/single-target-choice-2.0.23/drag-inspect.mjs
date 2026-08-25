@@ -3,14 +3,14 @@ import process from "node:process";
 
 const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:4173";
 const URL = `${BASE_URL}/content/english/year-2/module-03/index.html`;
-const BRIDGE_VERSION = "2.0.23-pointer-bridge-e";
+const POINTER_VERSION = "2.0.23-native-pointer-a";
 
 async function openM03(browser) {
   const context = await browser.newContext({ viewport: { width: 1366, height: 768 } });
   const page = await context.newPage();
   await page.goto(URL, { waitUntil: "domcontentloaded", timeout: 30_000 });
   await page.waitForFunction(
-    () => window.DuduQDD23SingleTargetRuntimePatch?.ready === true && window.DuduQDD23PointerBridge?.ready === true,
+    () => window.DuduQDD23SingleTargetRuntimePatch?.ready === true,
     null,
     { timeout: 20_000 }
   );
@@ -21,16 +21,21 @@ async function openM03(browser) {
   } catch (_) {}
   const mechanicFrame = await waitForMechanicFrame(page);
   await mechanicFrame.locator('.duduq-dd2-target[data-single-target-choice="true"]').waitFor({ state: "visible", timeout: 35_000 });
+  await mechanicFrame.waitForFunction(
+    (version) => window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__?.version === version && window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__?.attached === true,
+    POINTER_VERSION,
+    { timeout: 10_000 }
+  );
 
-  const bridge = await mechanicFrame.evaluate(() => window.__DUDUQ_DD23_POINTER_BRIDGE_RUNTIME__ || null);
-  if (!bridge?.injected) {
-    throw new Error("Runtime DD2 renderizado não contém o marcador do pointer bridge; falha de composição/hook, não de gesto.");
+  const pointerRuntime = await mechanicFrame.evaluate(() => window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__ || null);
+  if (!pointerRuntime?.attached) {
+    throw new Error("Runtime DD2 renderizado não anexou o owner nativo de pointer.");
   }
-  if (bridge.version !== BRIDGE_VERSION) {
-    throw new Error(`Runtime DD2 contém pointer bridge inesperado: ${bridge.version}; esperado ${BRIDGE_VERSION}.`);
+  if (pointerRuntime.version !== POINTER_VERSION) {
+    throw new Error(`Runtime DD2 contém pointer owner inesperado: ${pointerRuntime.version}; esperado ${POINTER_VERSION}.`);
   }
 
-  return { context, page, frame: mechanicFrame, bridge };
+  return { context, page, frame: mechanicFrame, pointerRuntime };
 }
 
 async function waitForMechanicFrame(page) {
@@ -53,11 +58,13 @@ async function snapshot(frame) {
     const confirm = document.querySelector(".duduq-dd2-confirm");
     const bank = Array.from(document.querySelectorAll(".duduq-dd2-bank .duduq-dd2-item")).map((el) => ({
       text: el.innerText,
+      itemId: el.getAttribute("data-dd2-item-id"),
       aria: el.getAttribute("aria-label"),
       placed: el.getAttribute("data-placed")
     }));
     const placed = Array.from(target?.querySelectorAll(".duduq-dd2-item") || []).map((el) => ({
       text: el.innerText,
+      itemId: el.getAttribute("data-dd2-item-id"),
       aria: el.getAttribute("aria-label"),
       placed: el.getAttribute("data-placed"),
       wrong: el.getAttribute("data-wrong")
@@ -69,30 +76,30 @@ async function snapshot(frame) {
       confirmDisabled: confirm?.disabled ?? null,
       bank,
       placed,
-      bridgeRuntime: window.__DUDUQ_DD23_POINTER_BRIDGE_RUNTIME__ || null,
+      pointerRuntime: window.__DUDUQ_DD23_NATIVE_POINTER_RUNTIME__ || null,
       debugEvents: window.__DUDUQ_DD23_DRAG_EVENTS__ || []
     };
   });
 }
 
-function explainBridgeFailure(state) {
-  const diag = state.bridgeRuntime;
-  if (!diag?.injected) return "pointer bridge não foi injetado no runtime efetivamente renderizado";
-  if ((diag.pointerDown || 0) < 1) return "runtime recebeu o bridge, mas o onPointerDown instrumentado não executou";
-  if ((diag.moves || 0) < 1) return "pointerdown executou, mas o bridge não recebeu movimento";
-  if ((diag.pointerUps || 0) < 1) return "bridge recebeu movimento, mas não recebeu pointerup";
+function explainPointerFailure(state) {
+  const diag = state.pointerRuntime;
+  if (!diag?.attached) return "owner nativo de pointer não está anexado ao documento do iframe";
+  if ((diag.pointerDown || 0) < 1) return "pointerdown DOM chegou, mas o listener nativo gated não iniciou o gesto";
+  if ((diag.moves || 0) < 1) return "pointerdown iniciou, mas o owner nativo não recebeu movimento";
+  if ((diag.pointerUps || 0) < 1) return "owner nativo recebeu movimento, mas não recebeu pointerup";
   if (!diag.targetResolved) return `pointerup executou, mas elementFromPoint não resolveu destino; hit=${diag.lastHitClass || "null"}`;
   if ((diag.placeCalls || 0) < 1) return `destino ${diag.targetResolved} foi resolvido, mas place() não foi chamado`;
-  return `place() foi chamado ${diag.placeCalls}x para ${diag.lastPlaceItem} -> ${diag.lastPlaceTarget}, porém o target permaneceu ${state.targetFilled}; afterPlaceFilled=${diag.afterPlaceFilled}`;
+  return `place() foi chamado ${diag.placeCalls}x para ${diag.lastItemId} -> ${diag.targetResolved}, porém o target permaneceu ${state.targetFilled}; afterPlaceFilled=${diag.afterPlaceFilled}`;
 }
 
 const browser = await chromium.launch({ headless: true });
 try {
   // 1) Diagnóstico do gesto real de mouse/pointer usado pelo E2E.
   {
-    const { context, page, frame, bridge } = await openM03(browser);
-    console.log("=== DD2 POINTER BRIDGE INJECTION ===");
-    console.log(JSON.stringify(bridge, null, 2));
+    const { context, page, frame, pointerRuntime } = await openM03(browser);
+    console.log("=== DD2 NATIVE POINTER OWNER ===");
+    console.log(JSON.stringify(pointerRuntime, null, 2));
 
     await frame.evaluate(() => {
       window.__DUDUQ_DD23_DRAG_EVENTS__ = [];
@@ -112,6 +119,7 @@ try {
             clientY: Math.round(event.clientY ?? 0),
             targetClass: target?.className || target?.tagName || null,
             itemText: item?.innerText || null,
+            itemId: item?.getAttribute?.("data-dd2-item-id") || null,
             dropId: drop?.getAttribute?.("data-dd2-target-id") || null
           });
         }, true);
@@ -121,7 +129,6 @@ try {
     const itemA = choice(frame, "A");
     const target = frame.locator('.duduq-dd2-target[data-single-target-choice="true"]');
 
-    // hover() waits until the parent transition no longer intercepts pointer input.
     await itemA.hover({ timeout: 8_000 });
     const sourceBox = await itemA.boundingBox();
     const targetBox = await target.boundingBox();
@@ -132,7 +139,7 @@ try {
     await page.mouse.down();
     await page.mouse.move(endX, endY, { steps: 18 });
     await page.mouse.up();
-    await page.waitForTimeout(350);
+    await page.waitForTimeout(400);
 
     const state = await snapshot(frame);
     const iframeBox = await page.locator('iframe[title="DuduQ — Drag & Drop"]').boundingBox();
@@ -152,15 +159,18 @@ try {
       throw new Error("Nenhum pointer/mouse event chegou ao iframe após hover actionável.");
     }
     if (state.targetFilled !== "true") {
-      throw new Error(`Pointer drag não concluiu placement: ${explainBridgeFailure(state)}.`);
+      throw new Error(`Pointer drag não concluiu placement: ${explainPointerFailure(state)}.`);
     }
-    if (state.bridgeRuntime?.placeCalls < 1 || state.bridgeRuntime?.targetResolved !== "stimulus-target") {
-      throw new Error("Drag terminou preenchido, mas o caminho instrumentado do pointer bridge não foi comprovado.");
+    if (state.pointerRuntime?.placeCalls < 1 || state.pointerRuntime?.targetResolved !== "stimulus-target") {
+      throw new Error("Drag terminou preenchido, mas o caminho single-owner nativo até place() não foi comprovado.");
+    }
+    if ((state.debugEvents || []).some((event) => event.type === "click") && state.pointerRuntime?.placeCalls < 1) {
+      throw new Error("Drag foi preenchido por click/tap residual, não pelo owner nativo de pointer.");
     }
     await context.close();
   }
 
-  // 2) Controle positivo: toque/clique precisa colocar a alternativa usando o place() canônico.
+  // 2) Controle positivo: toque/clique continua colocando alternativa pelo mesmo place() canônico.
   {
     const { context, frame } = await openM03(browser);
     await choice(frame, "A").click();
@@ -169,7 +179,7 @@ try {
     console.log("=== DD2 TAP CONTROL ===");
     console.log(JSON.stringify(state, null, 2));
     if (state.targetFilled !== "true" || state.placed.length !== 1 || state.confirmDisabled !== false) {
-      throw new Error("Controle por toque falhou: o problema não está restrito ao gesto de arraste.");
+      throw new Error("Controle por toque falhou: drag e tap não convergem para o comportamento single-target esperado.");
     }
     await context.close();
   }
