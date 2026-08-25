@@ -7,7 +7,7 @@
   "use strict";
 
   const STYLE_ID = "duduq-m03-single-target-choice-visual-polish";
-  const VERSION = "1.2.0-homolog";
+  const VERSION = "1.2.1-homolog";
   const FRAME_SELECTOR = 'iframe[title="DuduQ — Drag & Drop"]';
   const SHORT_HOST_ATTRIBUTE = "data-duduq-host-short-viewport";
 
@@ -78,8 +78,8 @@
 }
 
 /* The mechanic iframe can be taller than the actually visible host panel because
-   the DuduQ shell clips it below the global header. Therefore CSS `max-height`
-   inside the iframe is not a reliable signal for a 1280x650 notebook. The parent
+   the DuduQ shell clips it below the global header. Therefore the iframe's own
+   height is not a reliable signal for a 1280x650 notebook. The parent
    homologation script stamps this attribute from the REAL host viewport. */
 html[${SHORT_HOST_ATTRIBUTE}="true"] .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) {
   gap: 18px !important;
