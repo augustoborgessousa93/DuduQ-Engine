@@ -48,6 +48,9 @@ jobs:
       - name: Syntax check Matching render audit
         run: node --check test/year2/gamification-diversity-matching-render-rc1.mjs
 
+      - name: Syntax check public entry smoke
+        run: node --check test/year2/gamification-diversity-public-entry-rc1.mjs
+
       - name: Syntax check Matching distractor diagnostic
         run: node --check test/year2/gamification-diversity-matching-diagnostic.mjs
 
@@ -105,6 +108,11 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year2/gamification-diversity-matching-render-rc1.mjs
+
+      - name: Smoke all public M01-M06 entrypoints
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/gamification-diversity-public-entry-rc1.mjs
 
       - name: Upload browser homologation evidence
         if: always()
