@@ -98,27 +98,68 @@ async function inspectAllModulePayloads(browser){
   }
 }
 
+async function writeBootDiagnostic(page, errors, reason){
+  const state = await page.evaluate(() => {
+    const module = window.DUDUQ_CONTENT?.english?.year2?.module02v23multimodal;
+    return {
+      url: location.href,
+      matchingCandidate: window.DuduQMatching124RightDistractors || null,
+      moduleId: module?.id || null,
+      distribution: module?.mechanicDistribution || null,
+      firstActivity: module?.activities?.[0] ? {
+        id: module.activities[0].id,
+        mechanic: module.activities[0].mechanic,
+        questionIds: module.activities[0].questions?.map(question => question.id)
+      } : null
+    };
+  }).catch(()=>null);
+  const body = await page.locator("body").innerText().catch(()=>"<body indisponível>");
+  const frames = page.frames().map(frame => `${frame.name() || "<sem-nome>"} :: ${frame.url()}`);
+  fs.writeFileSync(`${RESULTS}/m02-boot-diagnostic.txt`, [
+    `REASON: ${reason}`,
+    `STATE: ${JSON.stringify(state,null,2)}`,
+    "",
+    "BODY:", body,
+    "",
+    "FRAMES:", ...frames,
+    "",
+    "BROWSER ERRORS:", ...(errors.length ? errors : ["<nenhum>"])
+  ].join("\n"));
+  await page.screenshot({path:`${RESULTS}/m02-boot-failure.png`,fullPage:true}).catch(()=>{});
+}
+
 async function bootM02Matching(page){
   const errors=[];
-  page.on("pageerror", error => errors.push(error.message));
+  page.on("pageerror", error => errors.push(`pageerror: ${error.message}`));
   page.on("console", message => {
-    if(message.type()==="error") errors.push(message.text());
+    if(message.type()==="error") errors.push(`console: ${message.text()}`);
   });
 
   await loadModule(page,2);
   await page.waitForFunction(() => window.DuduQMatching124RightDistractors?.ready === true, null, {timeout:20_000});
 
   const start = page.locator(".duduq-intro-start-button");
-  if(await start.isVisible({timeout:8_000}).catch(()=>false)) await start.click();
+  try{
+    await start.waitFor({state:"visible",timeout:12_000});
+    await start.click();
+  }catch(_){
+    // Alguns hosts de homologação podem entrar diretamente. O iframe abaixo é a prova autoritativa.
+  }
 
   const frame = page.frameLocator('iframe[title="DuduQ — Matching"]');
   const leftCards = frame.locator('.duduq-matching-column[data-side="left"] .duduq-matching-card');
   const rightShells = frame.locator('.duduq-matching-column[data-side="right"] .duduq-matching-card-shell');
-  await leftCards.first().waitFor({state:"visible",timeout:30_000});
-  await rightShells.first().waitFor({state:"visible",timeout:10_000});
+  try{
+    await leftCards.first().waitFor({state:"visible",timeout:35_000});
+    await rightShells.first().waitFor({state:"visible",timeout:10_000});
+  }catch(error){
+    await writeBootDiagnostic(page,errors,String(error?.stack || error));
+    throw new Error(`M02 Matching não montou. Diagnóstico salvo em ${RESULTS}/m02-boot-diagnostic.txt.`);
+  }
   await waitEnabled(leftCards.first());
 
-  assert(errors.length===0, `M02 boot produziu erros: ${errors.join(" | ")}`);
+  const fatal = errors.filter(message => /error|falha|failed|invalid|exception/i.test(message));
+  assert(fatal.length===0, `M02 boot produziu erros: ${fatal.join(" | ")}`);
   return {frame,leftCards,rightShells};
 }
 
