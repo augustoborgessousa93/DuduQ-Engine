@@ -59,16 +59,16 @@ jobs:
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
 
-      - name: Run M01-M06 desktop/mobile smoke against production
+      - name: Run latency-safe M01-M06 desktop/mobile smoke against production
         env:
           BASE_URL: https://duduq-engine.pages.dev
-        run: node test/year2/gamification-diversity-public-entry-rc1.mjs
+        run: node test/year2/gamification-diversity-live-production.mjs
 
       - name: Upload live production evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: year2-live-production-smoke
-          path: test-results/year2-gamification-diversity-rc1/public-entry
+          path: test-results/year2-live-production
           if-no-files-found: warn
           retention-days: 7
