@@ -1,0 +1,162 @@
+name: Homolog Drag Drop Single Target Choice
+
+on:
+  push:
+    branches:
+      - homolog/drag-drop-single-target-choice-m03
+    paths:
+      - "engine/releases/mechanics/drag-drop/2.0.18/**"
+      - "engine/releases/mechanics/drag-drop/2.0.22/**"
+      - "engine/releases/mechanics/drag-drop/2.0.23/**"
+      - "engine/channels/canary-v1.json"
+      - "engine/channels/homolog-m03-single-target-v1.json"
+      - "content/english/year-2/module-03/**"
+      - "content/english/year-2/year2-v23-dragdrop-visual-patch.js"
+      - "test/drag-drop/sequence-2.0.23/**"
+      - "test/drag-drop/single-target-choice-2.0.23/**"
+      - ".github/workflows/homolog-drag-drop-single-target-choice.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "engine/releases/mechanics/drag-drop/2.0.18/**"
+      - "engine/releases/mechanics/drag-drop/2.0.22/**"
+      - "engine/releases/mechanics/drag-drop/2.0.23/**"
+      - "engine/channels/canary-v1.json"
+      - "engine/channels/homolog-m03-single-target-v1.json"
+      - "content/english/year-2/module-03/**"
+      - "content/english/year-2/year2-v23-dragdrop-visual-patch.js"
+      - "test/drag-drop/sequence-2.0.23/**"
+      - "test/drag-drop/single-target-choice-2.0.23/**"
+      - ".github/workflows/homolog-drag-drop-single-target-choice.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-contract:
+    name: Static composition contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout homolog branch
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Syntax check candidate adapter
+        run: node --check engine/releases/mechanics/drag-drop/2.0.23/drag-drop.js
+
+      - name: Syntax check active DD2 runtime patch
+        run: node --check engine/releases/mechanics/drag-drop/2.0.23/dd2-single-target-runtime-patch.js
+
+      - name: Syntax check M03 data patch
+        run: node --check content/english/year-2/year2-v23-dragdrop-visual-patch.js
+
+      - name: Syntax check browser diagnostics
+        run: node --check test/drag-drop/single-target-choice-2.0.23/inspect.mjs
+
+      - name: Syntax check disabled lifecycle diagnostic
+        run: node --check test/drag-drop/single-target-choice-2.0.23/disabled-timeline-v2.mjs
+
+      - name: Syntax check correct feedback diagnostics
+        run: node --check test/drag-drop/single-target-choice-2.0.23/correct-inspect.mjs
+
+      - name: Syntax check E2E
+        run: node --check test/drag-drop/single-target-choice-2.0.23/e2e.mjs
+
+      - name: Syntax check visual breakpoints
+        run: node --check test/drag-drop/single-target-choice-2.0.23/visual-breakpoints.mjs
+
+      - name: Syntax check sequence regression guard
+        run: node --check test/drag-drop/single-target-choice-2.0.23/sequence-regression-contract.mjs
+
+      - name: Syntax check sequence retry A/B baseline
+        run: node --check test/drag-drop/single-target-choice-2.0.23/sequence-retry-baseline.mjs
+
+      - name: Syntax check sequence browser regression
+        run: node --check test/drag-drop/single-target-choice-2.0.23/sequence-browser-regression.mjs
+
+      - name: Validate SINGLE_TARGET_CHOICE composition contract
+        run: node test/drag-drop/single-target-choice-2.0.23/contract.mjs
+
+      - name: Validate sequence regression guard
+        run: node test/drag-drop/single-target-choice-2.0.23/sequence-regression-contract.mjs
+
+  chromium-e2e:
+    name: Chromium M03 visual + pedagogical
+    needs: static-contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout homolog branch
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local DuduQ server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-http.log 2>&1 &
+          echo $! > /tmp/duduq-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-http.log
+          exit 1
+
+      - name: Inspect SINGLE_TARGET_CHOICE propagation
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/inspect.mjs
+
+      - name: Inspect DD2 disabled lifecycle
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/disabled-timeline-v2.mjs
+
+      - name: Inspect correct feedback lifecycle
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/correct-inspect.mjs
+
+      - name: Run M03 SINGLE_TARGET_CHOICE E2E
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/e2e.mjs
+
+      - name: Compare sequence retry lifecycle 2.0.22 vs 2.0.23
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/sequence-retry-baseline.mjs
+
+      - name: Run sequence regression against Drag Drop 2.0.23
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/sequence-browser-regression.mjs
+
+      - name: Validate desktop notebook and tablet breakpoints
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/visual-breakpoints.mjs
+
+      - name: Upload homologation screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m03-single-target-choice-screenshots
+          path: test-results/single-target-choice-2.0.23
+          if-no-files-found: warn
+          retention-days: 7
