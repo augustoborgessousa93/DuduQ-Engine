@@ -3,7 +3,7 @@ import fs from "node:fs";
 import process from "node:process";
 
 const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:4173";
-const URL = `${BASE_URL}/content/english/year-2/module-03/index.html`;
+const URL = `${BASE_URL}/test/drag-drop/single-target-choice-2.0.23/m03-homolog.html`;
 const RESULTS = "test-results/single-target-choice-2.0.23";
 fs.mkdirSync(RESULTS, { recursive: true });
 
