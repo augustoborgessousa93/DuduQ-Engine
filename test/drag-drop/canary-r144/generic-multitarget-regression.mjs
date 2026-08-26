@@ -34,12 +34,14 @@ function targetItemByLabel(target, label) {
 
 async function drag(page, source, target) {
   await waitEnabled(source);
+  const dropZone = target.locator(".duduq-dd2-zone").first();
+  await dropZone.waitFor({ state: "visible", timeout: 5_000 });
   const sourceBox = await source.boundingBox();
-  const targetBox = await target.boundingBox();
-  assert(sourceBox && targetBox, "Bounding box indisponível no smoke multi-target.");
+  const zoneBox = await dropZone.boundingBox();
+  assert(sourceBox && zoneBox, "Bounding box indisponível no smoke multi-target.");
   await page.mouse.move(sourceBox.x + sourceBox.width / 2, sourceBox.y + sourceBox.height / 2);
   await page.mouse.down();
-  await page.mouse.move(targetBox.x + targetBox.width / 2, targetBox.y + targetBox.height * 0.65, { steps: 16 });
+  await page.mouse.move(zoneBox.x + zoneBox.width / 2, zoneBox.y + zoneBox.height / 2, { steps: 18 });
   await page.mouse.up();
 }
 
