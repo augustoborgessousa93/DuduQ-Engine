@@ -1,0 +1,74 @@
+name: Year 2 Live Production Smoke
+
+on:
+  push:
+    branches:
+      - "feat/year2-gamification-diversity-v23"
+    paths:
+      - ".github/workflows/year2-live-production-smoke.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-production-smoke:
+    name: M01-M06 live production browser smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout verification branch
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Wait for homologated Year 2 layer on production
+        shell: bash
+        run: |
+          set -euo pipefail
+          TARGET="https://duduq-engine.pages.dev/content/english/year-2/module-01/index.html"
+          for i in {1..36}; do
+            BODY="$(curl -fsSL --max-time 20 "$TARGET" || true)"
+            if printf '%s' "$BODY" | grep -q 'year2-v23-gamification-diversity.js'; then
+              echo "Production is serving the homologated Year 2 diversity layer."
+              exit 0
+            fi
+            echo "Attempt $i/36: production not updated yet; waiting 10s..."
+            sleep 10
+          done
+          echo "Production did not expose the homologated Year 2 layer within the wait window."
+          exit 1
+
+      - name: Verify all six official module URLs respond
+        shell: bash
+        run: |
+          set -euo pipefail
+          for module in 01 02 03 04 05 06; do
+            URL="https://duduq-engine.pages.dev/content/english/year-2/module-${module}/index.html"
+            CODE="$(curl -L -sS -o "/tmp/year2-m${module}.html" -w '%{http_code}' --max-time 30 "$URL")"
+            test "$CODE" = "200"
+            grep -q 'year2-v23-gamification-diversity.js' "/tmp/year2-m${module}.html"
+            echo "M${module}: HTTP 200 + homologated layer present"
+          done
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Run M01-M06 desktop/mobile smoke against production
+        env:
+          BASE_URL: https://duduq-engine.pages.dev
+        run: node test/year2/gamification-diversity-public-entry-rc1.mjs
+
+      - name: Upload live production evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year2-live-production-smoke
+          path: test-results/year2-gamification-diversity-rc1/public-entry
+          if-no-files-found: warn
+          retention-days: 7
