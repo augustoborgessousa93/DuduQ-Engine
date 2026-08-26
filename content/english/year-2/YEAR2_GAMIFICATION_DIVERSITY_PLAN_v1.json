@@ -17,8 +17,10 @@
   "runtimeConstraints": {
     "matching": {
       "canaryRelease": "1.0.23",
+      "homologCandidate": "1.0.24",
+      "behaviorFlag": "allowRightDistractors",
       "homologRequirement": "Permitir um estímulo pareado a uma única resposta correta com distratores não pareados no lado de respostas.",
-      "reason": "O runtime já possui áudio individual nos cards e expectedConnectionCount baseado em pairs.length; o bloqueio atual é a validação UNPAIRED_RIGHT_ITEM.",
+      "reason": "O runtime já possui áudio individual nos cards e expectedConnectionCount baseado em pairs.length; o candidato 1.0.24 relaxa apenas UNPAIRED_RIGHT_ITEM quando behavior.allowRightDistractors=true.",
       "canaryUntouched": true
     },
     "bubblePop": {
