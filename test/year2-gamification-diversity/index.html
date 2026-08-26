@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>DuduQ — Year 2 Gamification Diversity Homolog</title>
+</head>
+<body>
+  <div id="root">Carregando homologação de diversidade gamificada do 2º ano...</div>
+  <script>
+  (function(){
+    "use strict";
+    const params = new URLSearchParams(location.search);
+    const requested = Number(params.get("module") || 2);
+    const moduleNumber = Number.isInteger(requested) && requested >= 1 && requested <= 6 ? requested : 2;
+    const pad = String(moduleNumber).padStart(2,"0");
+    const key = `module${pad}v23multimodal`;
+
+    window.DUDUQ_ENGINE_BASE = new URL("../..", location.href).href.replace(/\/$/,"");
+    window.DUDUQ_GAME_CONFIG = Object.freeze({
+      engineBase: window.DUDUQ_ENGINE_BASE,
+      channel: "homolog-year2-gamification-diversity-v1",
+      label: `DuduQ — English — Year 2 — Module ${pad} — Gamification Diversity Homolog`,
+      modulePath: ["english","year2",key],
+      contentScript: `../../content/english/year-2/module-${pad}/module-${pad}-v23-multimodal.js?v=homolog-gamification-diversity-v1`
+    });
+    window.DUDUQ_YEAR2_GAMIFICATION_HOMOLOG = Object.freeze({
+      module: moduleNumber,
+      moduleKey: key,
+      sourceVersion: "2.3",
+      diversityPlan: "YEAR2_GAMIFICATION_DIVERSITY_PLAN_v1",
+      matchingCandidate: "1.0.24",
+      canaryUntouched: true
+    });
+  })();
+  </script>
+
+  <script src="../../content/english/year-2/year2-v22-homolog-core.js?v=homolog-gamification-diversity-v1"></script>
+  <script src="../../content/english/year-2/year2-v22-homolog-editorial-assets.js?v=homolog-gamification-diversity-v1"></script>
+  <script src="../../content/english/year-2/year2-v23-multimodal-adapter.js?v=homolog-gamification-diversity-v1"></script>
+  <script src="../../content/english/year-2/year2-v23-dragdrop-visual-patch.js?v=homolog-gamification-diversity-v1"></script>
+  <script src="../../content/english/year-2/year2-v23-gamification-diversity-adapter.js?v=homolog-gamification-diversity-v1"></script>
+  <script src="../../content/english/year-2/year2-v22-homolog-layout.js?v=homolog-gamification-diversity-v1"></script>
+
+  <script>
+  (function(){
+    const stamp = Date.now();
+    function load(src){
+      return new Promise((resolve,reject)=>{
+        const s=document.createElement("script");
+        s.src=src+(src.includes("?")?"&":"?")+"t="+stamp;
+        s.async=false;
+        s.onload=resolve;
+        s.onerror=()=>reject(new Error("Falha ao carregar "+src));
+        document.head.appendChild(s);
+      });
+    }
+    load("../../engine/duduq-player-v1.js")
+      .then(()=>load("../../engine/duduq-loader-v1.js"))
+      .catch(error=>{
+        console.error("[DuduQ Year2 Gamification Diversity Homolog]",error);
+        document.getElementById("root").textContent="Erro ao carregar homologação do 2º ano.";
+      });
+  })();
+  </script>
+</body>
+</html>
