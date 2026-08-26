@@ -9,6 +9,7 @@ on:
       - "engine/channels/homolog-m03-r143-visual-v2.json"
       - "content/english/year-2/year2-v24-single-target-ux-patch.js"
       - "test/drag-drop/single-target-choice-2.0.24/**"
+      - "test/drag-drop/sequence-2.0.24/**"
       - "docs/qa/drag-drop-2.0.24-r143-visual.md"
       - ".github/workflows/homolog-drag-drop-2.0.24-r143-visual.yml"
   workflow_dispatch:
@@ -33,14 +34,16 @@ jobs:
           node --check content/english/year-2/year2-v24-single-target-ux-patch.js
           node --check test/drag-drop/single-target-choice-2.0.24/contract.mjs
           node --check test/drag-drop/single-target-choice-2.0.24/e2e.mjs
+          node --check test/drag-drop/single-target-choice-2.0.24/sequence-parity.mjs
+          node --check test/drag-drop/single-target-choice-2.0.24/generic-multitarget-parity.mjs
       - name: Validate candidate isolation + UX contract
         run: node test/drag-drop/single-target-choice-2.0.24/contract.mjs
 
   chromium:
-    name: Chromium M03 R143 visual + interaction
+    name: Chromium M03 R143 visual + interaction + regression
     needs: static-contract
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 22
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -63,6 +66,14 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/drag-drop/single-target-choice-2.0.24/e2e.mjs
+      - name: Run sequence parity
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.24/sequence-parity.mjs
+      - name: Run generic multi-target parity
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.24/generic-multitarget-parity.mjs
       - name: Upload DD24 homolog screenshots
         if: always()
         uses: actions/upload-artifact@v4
