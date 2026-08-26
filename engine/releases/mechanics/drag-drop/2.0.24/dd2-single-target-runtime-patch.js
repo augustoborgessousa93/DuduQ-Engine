@@ -12,7 +12,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "2.0.24-r143-visual-a";
+  const VERSION = "2.0.24-r143-visual-b";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqDD24R143VisualWrapped";
   const BASE_PATCH_URL = "/engine/releases/mechanics/drag-drop/2.0.23/dd2-single-target-runtime-patch.js";
@@ -88,7 +88,7 @@
   flex: 1 1 auto !important;
   min-height: 0 !important;
   height: auto !important;
-  padding: 2px 6px !important;
+  padding: 0 2px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -99,13 +99,15 @@
 .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head .duduq-dd2-item-media,
 .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-media,
 .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-media img {
-  width: min(94%, 176px) !important;
-  max-width: 94% !important;
-  height: min(94%, 168px) !important;
-  max-height: 168px !important;
+  width: min(96%, 184px) !important;
+  max-width: 96% !important;
+  height: min(96%, 176px) !important;
+  max-height: 176px !important;
   object-fit: contain !important;
-  font-size: clamp(70px, 8vw, 104px) !important;
+  font-size: clamp(78px, 8.6vw, 112px) !important;
   line-height: 1 !important;
+  transform: scale(1.22) !important;
+  transform-origin: center !important;
 }
 
 .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone {
@@ -208,6 +210,69 @@
   margin: 0 !important;
 }
 
+/* 2.0.23 marks notebook/tablet hosts with this attribute. These selectors are
+   intentionally equally/more specific so R143 visual rules cannot be silently
+   overridden by the inherited R144 compact-host block. */
+html[data-duduq-host-compact-viewport="true"] .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 7px !important;
+}
+html[data-duduq-host-compact-viewport="true"] .duduq-dd2-target[data-single-target-choice="true"] {
+  width: min(100%, 250px) !important;
+  height: 218px !important;
+  min-height: 218px !important;
+  max-height: 218px !important;
+}
+html[data-duduq-host-compact-viewport="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head {
+  min-height: 0 !important;
+  max-height: none !important;
+  padding: 0 2px !important;
+}
+html[data-duduq-host-compact-viewport="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head img,
+html[data-duduq-host-compact-viewport="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head .duduq-dd2-item-media,
+html[data-duduq-host-compact-viewport="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-media,
+html[data-duduq-host-compact-viewport="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-media img {
+  width: min(96%, 164px) !important;
+  max-width: 96% !important;
+  height: min(96%, 154px) !important;
+  max-height: 154px !important;
+  font-size: 88px !important;
+  transform: scale(1.2) !important;
+}
+html[data-duduq-host-compact-viewport="true"] .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone {
+  flex: 0 0 60px !important;
+  height: 60px !important;
+  min-height: 60px !important;
+  max-height: 60px !important;
+  padding: 4px 8px !important;
+}
+html[data-duduq-host-compact-viewport="true"] .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank-items {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 7px 10px !important;
+}
+html[data-duduq-host-compact-viewport="true"] .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank .duduq-dd2-item {
+  width: 100px !important;
+  min-width: 100px !important;
+  max-width: 100px !important;
+  height: 50px !important;
+  min-height: 50px !important;
+  max-height: 50px !important;
+  padding-block: 5px !important;
+}
+html[data-duduq-host-compact-viewport="true"] .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-actions,
+html[data-duduq-host-compact-viewport="true"] .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-matching-action-slot.duduq-dd2-actions {
+  width: min(100%, 270px) !important;
+  margin: 3px auto 0 !important;
+  padding: 0 !important;
+  min-height: 48px !important;
+}
+html[data-duduq-host-compact-viewport="true"] .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-confirm {
+  width: 100% !important;
+  min-height: 48px !important;
+}
+
 @media (min-width: 761px) and (max-height: 680px) {
   .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-arena {
     gap: 7px !important;
@@ -215,16 +280,18 @@
   .duduq-dd2-target[data-single-target-choice="true"] {
     width: min(100%, 250px) !important;
     height: 218px !important;
+    min-height: 218px !important;
     max-height: 218px !important;
   }
   .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head img,
   .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head .duduq-dd2-item-media,
   .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-media,
   .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-media img {
-    width: min(92%, 154px) !important;
-    height: min(92%, 146px) !important;
-    max-height: 146px !important;
-    font-size: 82px !important;
+    width: min(96%, 164px) !important;
+    height: min(96%, 154px) !important;
+    max-height: 154px !important;
+    font-size: 88px !important;
+    transform: scale(1.2) !important;
   }
   .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone {
     flex-basis: 60px !important;
@@ -245,16 +312,18 @@
   .duduq-dd2-target[data-single-target-choice="true"] {
     width: min(100%, 270px) !important;
     height: 232px !important;
+    min-height: 232px !important;
     max-height: 232px !important;
   }
   .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head img,
   .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-head .duduq-dd2-item-media,
   .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-media,
   .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-target-media img {
-    width: min(92%, 164px) !important;
-    height: min(92%, 156px) !important;
-    max-height: 156px !important;
-    font-size: 86px !important;
+    width: min(96%, 174px) !important;
+    height: min(96%, 164px) !important;
+    max-height: 164px !important;
+    font-size: 92px !important;
+    transform: scale(1.18) !important;
   }
   .duduq-dd2-arena:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-bank {
     width: min(100%, 340px) !important;
