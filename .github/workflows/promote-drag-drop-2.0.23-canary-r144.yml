@@ -1,0 +1,115 @@
+name: Promote Drag Drop 2.0.23 Canary R144
+
+on:
+  push:
+    branches:
+      - promotion/drag-drop-2.0.23-canary-r144
+    paths:
+      - "engine/channels/canary-v1.json"
+      - "engine/channels/rollback/canary-r143-before-drag-drop-2.0.23.json"
+      - "engine/releases/mechanics/drag-drop/2.0.23/**"
+      - "content/english/year-2/module-03/**"
+      - "content/english/year-2/year2-v23-dragdrop-visual-patch.js"
+      - "test/drag-drop/**"
+      - ".github/workflows/promote-drag-drop-2.0.23-canary-r144.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "engine/channels/canary-v1.json"
+      - "engine/channels/rollback/canary-r143-before-drag-drop-2.0.23.json"
+      - "content/english/year-2/module-03/**"
+      - "test/drag-drop/canary-r144/**"
+      - ".github/workflows/promote-drag-drop-2.0.23-canary-r144.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  promotion-contract:
+    name: R144 promotion + rollback contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax check promotion contract
+        run: node --check test/drag-drop/canary-r144/promotion-contract.mjs
+      - name: Syntax check generic multi-target regression
+        run: node --check test/drag-drop/canary-r144/generic-multitarget-regression.mjs
+      - name: Syntax check M03 E2E
+        run: node --check test/drag-drop/single-target-choice-2.0.23/e2e.mjs
+      - name: Syntax check M03 visual breakpoints
+        run: node --check test/drag-drop/single-target-choice-2.0.23/visual-breakpoints.mjs
+      - name: Validate R144 promotion contract
+        run: node test/drag-drop/canary-r144/promotion-contract.mjs
+      - name: Validate sequence isolation contract
+        run: node test/drag-drop/single-target-choice-2.0.23/sequence-regression-contract.mjs
+
+  chromium-preactivation:
+    name: Chromium pre-activation gate
+    needs: promotion-contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local DuduQ server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-http.log 2>&1 &
+          echo $! > /tmp/duduq-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-http.log
+          exit 1
+      - name: Verify public M03 SINGLE_TARGET_CHOICE propagation
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/inspect.mjs
+      - name: Verify initial disabled lifecycle
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/disabled-timeline-v2.mjs
+      - name: Verify source answer and feedback lifecycle
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/correct-inspect.mjs
+      - name: Run public M03 end-to-end
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/e2e.mjs
+      - name: Run generic multi-target regression through Canary R144
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/canary-r144/generic-multitarget-regression.mjs
+      - name: Compare sequence baseline 2.0.22 vs 2.0.23
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/sequence-retry-baseline.mjs
+      - name: Run sequence browser regression
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/sequence-browser-regression.mjs
+      - name: Validate public M03 desktop notebook tablet breakpoints
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.23/visual-breakpoints.mjs
+      - name: Upload R144 pre-activation screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: canary-r144-drag-drop-2.0.23-preactivation
+          path: test-results/single-target-choice-2.0.23
+          if-no-files-found: warn
+          retention-days: 7
