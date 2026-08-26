@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "status": "HOMOLOGATION_ONLY",
+  "scope": "English Year 2 M01-M06 v2.3 multimodal",
+  "sourceLock": {
+    "document": "DUDUQ_Ingles_1ao5_Revisao_Alfabetizacao_Multimodal_v2.3",
+    "canonicalFieldsImmutable": ["id", "prompt", "alternatives", "answer"],
+    "itemCount": 90,
+    "rule": "A revisão altera apenas a mecânica/apresentação. Não altera conteúdo, habilidade, vocabulário, alternativas editoriais nem gabarito."
+  },
+  "pedagogicalRules": {
+    "yearProfile": "Y2_FOUNDATIONAL_LITERACY",
+    "reading": "R0 dominante; R1 somente com apoio e nunca como requisito para acertar.",
+    "audio": "Áudio repetível e sem penalidade.",
+    "mechanicChoice": "A mecânica deve representar a ação cognitiva da questão; variedade nunca justifica alterar o conteúdo."
+  },
+  "runtimeConstraints": {
+    "matching": {
+      "canaryRelease": "1.0.23",
+      "homologRequirement": "Permitir um estímulo pareado a uma única resposta correta com distratores não pareados no lado de respostas.",
+      "reason": "O runtime já possui áudio individual nos cards e expectedConnectionCount baseado em pairs.length; o bloqueio atual é a validação UNPAIRED_RIGHT_ITEM.",
+      "canaryUntouched": true
+    },
+    "bubblePop": {
+      "decision": "Não forçar em imagem/contexto → áudio.",
+      "reason": "O Bubble Pop atual oferece áudio do enunciado, não audição independente de cada alternativa antes da seleção. Usá-lo nesses itens criaria leitura autônoma em inglês ou retiraria o estímulo visual."
+    },
+    "targetShooter": {
+      "decision": "Manter quando a própria questão já é áudio → imagem ou áudio → símbolo isolado.",
+      "reason": "Não converter imagem → áudio em alvo textual, pois isso aumentaria a dependência de leitura."
+    },
+    "wordSlash": {
+      "decision": "Manter apenas em letra isolada quando PED-15 permanece atendido.",
+      "reason": "Não transformar vocabulário/frases em leitura rápida no 2º ano."
+    }
+  },
+  "matchingQuestionIds": [
+    "EN2-M1-11", "EN2-M1-13",
+    "EN2-M2-01", "EN2-M2-02", "EN2-M2-03", "EN2-M2-07", "EN2-M2-08", "EN2-M2-09", "EN2-M2-13", "EN2-M2-15",
+    "EN2-M3-01", "EN2-M3-02", "EN2-M3-03", "EN2-M3-07", "EN2-M3-09", "EN2-M3-11", "EN2-M3-13", "EN2-M3-15",
+    "EN2-M4-01", "EN2-M4-02", "EN2-M4-06", "EN2-M4-07", "EN2-M4-08", "EN2-M4-11", "EN2-M4-13", "EN2-M4-15",
+    "EN2-M5-01", "EN2-M5-02", "EN2-M5-03", "EN2-M5-07", "EN2-M5-08", "EN2-M5-09", "EN2-M5-12", "EN2-M5-14",
+    "EN2-M6-01", "EN2-M6-02", "EN2-M6-03", "EN2-M6-07", "EN2-M6-09", "EN2-M6-13", "EN2-M6-15"
+  ],
+  "expectedDistribution": {
+    "matching": 41,
+    "drag-drop": 37,
+    "target-shooter": 9,
+    "bubble-pop": 2,
+    "word-slash": 1,
+    "total": 90
+  },
+  "moduleExpectations": {
+    "M01": {"matching": 2, "drag-drop": 3, "target-shooter": 7, "bubble-pop": 2, "word-slash": 1},
+    "M02": {"matching": 8, "drag-drop": 7},
+    "M03": {"matching": 8, "drag-drop": 7},
+    "M04": {"matching": 8, "drag-drop": 7},
+    "M05": {"matching": 8, "drag-drop": 7},
+    "M06": {"matching": 7, "drag-drop": 6, "target-shooter": 2}
+  },
+  "promotionGate": [
+    "90/90 IDs e gabaritos canônicos preservados",
+    "nenhuma alternativa editorial adicionada, removida ou renomeada",
+    "Matching single-choice com 1 par correto + distratores validado por browser",
+    "áudio individual dos cards repetível e sem revelar gabarito",
+    "erro só após confirmação; retry sem penalidade",
+    "desktop, notebook, tablet e mobile sem clipping",
+    "Canary continua R143 e Matching 1.0.23 até promoção explícita"
+  ]
+}
