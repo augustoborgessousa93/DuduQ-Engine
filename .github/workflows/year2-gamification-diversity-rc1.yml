@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: feat/year2-gamification-diversity-v23
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -54,6 +56,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: feat/year2-gamification-diversity-v23
 
       - name: Setup Node
         uses: actions/setup-node@v4
