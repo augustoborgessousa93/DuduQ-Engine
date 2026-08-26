@@ -122,7 +122,7 @@ async function inspectPublicModule(page, module) {
   assert(snapshot.questions === 15, `M${module}: esperado banco público de 15 questões; encontrado ${snapshot.questions}.`);
   assert(snapshot.questionIds.length === new Set(snapshot.questionIds).size, `M${module}: IDs duplicados no entrypoint público.`);
   assert(snapshot.activities > 0, `M${module}: nenhuma atividade pública encontrada.`);
-  assert(snapshot.session?.totalSteps === snapshot.activities, `M${module}: Host iniciou ${snapshot.session?.totalSteps} etapas para ${snapshot.activities} atividades.`);
+  assert(snapshot.session?.totalSteps === snapshot.questions, `M${module}: Host iniciou ${snapshot.session?.totalSteps} etapas para ${snapshot.questions} questões.`);
   assert(snapshot.session?.stepIndex === 0, `M${module}: entrypoint não iniciou na primeira etapa.`);
   assert(snapshot.session?.completed !== true, `M${module}: módulo apareceu concluído no primeiro carregamento.`);
   assert(snapshot.session?.year === 2 && snapshot.session?.module === module, `M${module}: sessão pública não corresponde ao conteúdo carregado.`);
