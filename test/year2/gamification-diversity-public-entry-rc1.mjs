@@ -40,21 +40,39 @@ async function waitForPublicModule(page, module) {
   const key = moduleKey(module);
   await page.goto(moduleUrl(module), { waitUntil: "domcontentloaded", timeout: 30_000 });
 
+  // Primeiro valida que o entrypoint público carregou conteúdo/configuração. O Host só
+  // cria a sessão depois do CTA real da Intro em builds que usam o handoff interativo.
   await page.waitForFunction(
     ({ expectedKey, expectedModule }) => {
       const built = window.DUDUQ_CONTENT?.english?.year2?.[expectedKey];
-      const session = window.DuduQ?.getSession?.();
       return Boolean(
         built?.gamificationDiversityAudit &&
         built?.module === expectedModule &&
         window.DUDUQ_GAME_CONFIG &&
-        window.DUDUQ_PUBLIC_ENTRY &&
-        session &&
-        session.module === expectedModule &&
-        session.totalSteps > 0
+        window.DUDUQ_PUBLIC_ENTRY
       );
     },
     { expectedKey: key, expectedModule: module },
+    { timeout: 30_000 }
+  );
+
+  const alreadyStarted = await page.evaluate((expectedModule) => {
+    const session = window.DuduQ?.getSession?.();
+    return Boolean(session && session.module === expectedModule && session.totalSteps > 0);
+  }, module);
+
+  if (!alreadyStarted) {
+    const startMission = page.getByRole("button", { name: /INICIAR MISSÃO/i }).first();
+    await startMission.waitFor({ state: "visible", timeout: 20_000 });
+    await startMission.click();
+  }
+
+  await page.waitForFunction(
+    (expectedModule) => {
+      const session = window.DuduQ?.getSession?.();
+      return Boolean(session && session.module === expectedModule && session.totalSteps > 0);
+    },
+    module,
     { timeout: 30_000 }
   );
 
@@ -173,8 +191,7 @@ async function runScenario(browser, module, viewport) {
     );
     assert(fatalMessages.length === 0, `M${module}: erros fatais no entrypoint: ${fatalMessages.join(" | ")}`);
 
-    // Captura o estado público real. A Intro pode ainda estar cobrindo a mecânica;
-    // isso é esperado no handoff inicial e não é removido artificialmente neste gate.
+    // Captura o estado público após o handoff real da Intro para a primeira mecânica.
     await fs.mkdir(OUTPUT_DIR, { recursive: true });
     const screenshot = path.join(OUTPUT_DIR, `M${String(module).padStart(2, "0")}-${viewport.name}-${viewport.width}x${viewport.height}.png`);
     await page.screenshot({ path: screenshot, fullPage: true });
