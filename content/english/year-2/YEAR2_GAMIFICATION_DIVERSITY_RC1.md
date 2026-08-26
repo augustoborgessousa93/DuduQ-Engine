@@ -28,7 +28,13 @@ O runtime Matching normalmente exige que todos os itens da coluna direita façam
 
 O browser gate também valida a segunda tentativa de forma comportamental: após um erro, a questão deve permanecer incompleta, apresentar feedback de retry, remover o par incorreto e devolver os cards à interação. O teste não exige que o marcador visual interno volte para `idle`; `retry` pode permanecer enquanto a segunda tentativa já estiver disponível.
 
-## Gates automatizados
+## Compatibilidade com o Router R143
+
+As transformações preservam o conteúdo pedagógico e removem apenas campos de apresentação herdados que não pertencem à nova interação. No Bubble Pop áudio → numeral, o áudio correto permanece como estímulo da questão e os numerais permanecem como alternativas visuais; imagem principal e áudio individual de alternativa não são enviados ao Router. No Target Shooter áudio → imagem, o áudio permanece como estímulo e os alvos permanecem visuais, sem áudio individual herdado nas alternativas.
+
+Essa normalização é restrita às questões explicitamente transformadas pela camada de diversidade e não altera IDs, respostas, vocabulário, dificuldade, habilidade, sequência ou scripts de áudio oficiais.
+
+## Gates automatizados permanentes
 
 O teste `test/year2/gamification-diversity-rc1.mjs` executa os seis módulos reais e valida os 90 itens:
 
@@ -41,10 +47,34 @@ O teste `test/year2/gamification-diversity-rc1.mjs` executa os seis módulos rea
 - somente os dois fallbacks intencionais de M5;
 - estrutura das novas mecânicas e patch restrito do Matching.
 
-O browser gate `test/year2/gamification-diversity-browser-rc1.mjs` usa Chromium/Playwright para verificar casos representativos de Matching, Bubble Pop e Target Shooter em desktop e mobile, incluindo erro → feedback → segunda tentativa → acerto no Matching e ausência de overflow horizontal.
+A homologação permanente em Chromium/Playwright mantém quatro camadas complementares:
+
+- `gamification-diversity-browser-rc1.mjs`: casos representativos de Matching, Bubble Pop e Target Shooter em desktop e mobile, incluindo erro → feedback → segunda tentativa → acerto no Matching e ausência de overflow horizontal;
+- `gamification-diversity-dynamic-visibility-rc1.mjs`: auditoria visual de todos os itens transformados por mecânicas dinâmicas;
+- `gamification-diversity-matching-render-rc1.mjs`: renderização exaustiva de todos os itens Matching transformados;
+- `gamification-diversity-public-entry-rc1.mjs`: smoke dos entrypoints reais M01–M06 em desktop e mobile, distinguindo corretamente 15 questões pedagógicas da quantidade de atividades/etapas agrupadas pelo Host.
+
+O diagnóstico exploratório temporário de Matching foi removido depois que os gates permanentes passaram a cobrir o comportamento necessário.
+
+## Evidência de homologação da RC limpa
+
+Head homologado após a retirada do diagnóstico temporário: `2db8bf4759fdb20b440336b567d3dabcf2091bd3`.
+
+Workflow `Year 2 Gamification Diversity RC1`, run `33010456265`: **sucesso integral**.
+
+Nesse run passaram:
+
+- integridade dos 90 itens reais;
+- homologação representativa em Chromium;
+- auditoria de visibilidade de todos os itens dinâmicos transformados;
+- renderização exaustiva de Matching;
+- smoke dos seis módulos públicos em desktop e mobile, totalizando 12 cenários de entrypoint;
+- upload das evidências visuais da homologação.
+
+O smoke público valida separadamente que cada módulo mantém 15 questões, que nenhuma atividade está vazia e que `session.totalSteps` corresponde à quantidade real de atividades agrupadas pelo Player.
 
 ## Homologação antes de promoção
 
-A RC só pode sair de Draft quando os gates de integridade e Chromium estiverem verdes e as evidências visuais forem revisadas. A baseline Drag & Drop R143 e o repositório Assets-DuduQ não fazem parte desta promoção.
+A baseline Drag & Drop R143 e o repositório Assets-DuduQ não fazem parte desta promoção. A RC permanece em Draft até a revisão final e autorização explícita para promoção/merge.
 
-> Revalidação: o workflow foi ajustado para sempre fazer checkout explícito da branch RC durante a homologação, evitando re-runs presos a um merge ref antigo do PR.
+> Revalidação: o workflow faz checkout explícito do head da PR durante a homologação, evitando re-runs presos a um merge ref antigo. Após esta atualização documental, deve existir um último run verde no head exato da branch antes de qualquer promoção.
