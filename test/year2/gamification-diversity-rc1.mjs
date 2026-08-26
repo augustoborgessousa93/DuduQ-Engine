@@ -20,11 +20,22 @@ globalThis.window = globalThis;
 window.DUDUQ_PUBLIC_ENTRY = Object.freeze({ year: 2, sourceVersion: "2.3" });
 window.DUDUQ_CONTENT = {};
 
-// The diversity layer only wraps fetch for Matching runtime HTML; module construction itself is offline.
+const matchingValidatorFixture = `rightIds.forEach((id) => {
+      if (!rightDegrees.get(id)) {
+        issues.push({ path: \`rightItems:\${id}\`, code: "UNPAIRED_RIGHT_ITEM", message: "Todo item da direita deve participar de ao menos uma conexão correta.", severity: "error" });
+      }
+    });`;
+
+// The diversity layer wraps fetch only for the Matching runtime HTML. This fixture lets the CI
+// verify that the patch is narrow and actually applied instead of merely checking static metadata.
 if (typeof globalThis.Response !== "function") {
   throw new Error("Node runtime must expose Response.");
 }
-window.fetch = async function () {
+window.fetch = async function (input) {
+  const url = typeof input === "string" ? input : String(input?.url || "");
+  if (/\/DUDUQ_MATCHING\.html(?:\?|$)/i.test(url)) {
+    return new Response(`<html><body><script>${matchingValidatorFixture}</script></body></html>`, { status: 200 });
+  }
   return new Response("offline-test-placeholder", { status: 200 });
 };
 
@@ -51,6 +62,13 @@ const requiredByModule = {
   6: ["drag-drop", "matching", "target-shooter"]
 };
 
+// These two candidates intentionally remain in the original mechanic. The real v2.3 bank does not
+// provide a safe four-option image representation for them. Treating that as a valid fallback is a
+// pedagogical gate, not a test waiver: any additional skip fails CI.
+const expectedSkipsByModule = Object.freeze({
+  5: ["EN2-M5-08", "EN2-M5-12"]
+});
+
 const report = [];
 
 for (let module = 1; module <= 6; module += 1) {
@@ -73,7 +91,16 @@ for (let module = 1; module <= 6; module += 1) {
   assert(audit.contentChanged === false, `M${module}: contentChanged must remain false.`);
   assert(audit.autonomousEnglishReadingIntroduced === false, `M${module}: reading gate failed.`);
   assert(audit.sourceItems === 15 && audit.finalItems === 15, `M${module}: source/final count mismatch.`);
-  assert((audit.skipped || []).length === 0, `M${module}: unsafe candidates were skipped: ${JSON.stringify(audit.skipped)}`);
+
+  const actualSkipIds = (audit.skipped || []).map((entry) => entry.id).sort();
+  const expectedSkipIds = [...(expectedSkipsByModule[module] || [])].sort();
+  assert(
+    JSON.stringify(actualSkipIds) === JSON.stringify(expectedSkipIds),
+    `M${module}: unexpected safe-representation skips. Expected ${JSON.stringify(expectedSkipIds)}, got ${JSON.stringify(actualSkipIds)}.`
+  );
+  for (const skipped of audit.skipped || []) {
+    assert(skipped.reason === "REPRESENTATION_NOT_SAFE", `${skipped.id}: unexpected skip reason ${skipped.reason}.`);
+  }
 
   for (const mechanic of requiredByModule[module]) {
     assert((built.mechanicDistribution?.[mechanic] || 0) > 0, `M${module}: expected mechanic ${mechanic}.`);
@@ -114,17 +141,33 @@ for (let module = 1; module <= 6; module += 1) {
     module,
     distribution: built.mechanicDistribution,
     changed: audit.changed.length,
-    skipped: audit.skipped.length
+    skipped: actualSkipIds
   });
 }
 
-// Verify the narrowly-scoped Matching validator patch itself.
-const originalMatchingValidator = `rightIds.forEach((id) => {\n      if (!rightDegrees.get(id)) {\n        issues.push({ path: \`rightItems:\${id}\`, code: "UNPAIRED_RIGHT_ITEM", message: "Todo item da direita deve participar de ao menos uma conexão correta.", severity: "error" });\n      }\n    });`;
-window.__DUDUQ_YEAR2_MATCHING_DISTRACTOR_FETCH_PATCH__ = undefined;
+const patchedMatchingHtml = await window.fetch(
+  "https://example.test/DUDUQ_MATCHING.html?ano=2&engineAdapter=test"
+).then((response) => response.text());
+assert(
+  patchedMatchingHtml.includes("question.behavior?.allowUnpairedDistractors !== true"),
+  "Matching distractor validator patch was not applied to the Matching runtime response."
+);
+assert(
+  window.__DUDUQ_YEAR2_MATCHING_DISTRACTOR_FETCH_PATCH__ ===
+    window.DuduQYear2V23Factory.gamificationDiversityVersion,
+  "Matching fetch patch marker/version mismatch."
+);
+
+const totalChanged = report.reduce((sum, entry) => sum + entry.changed, 0);
+const totalSkipped = report.reduce((sum, entry) => sum + entry.skipped.length, 0);
+assert(totalChanged === 53, `Expected 53 safe transformations, got ${totalChanged}.`);
+assert(totalSkipped === 2, `Expected exactly 2 intentional safe fallbacks, got ${totalSkipped}.`);
 
 console.log(JSON.stringify({
   status: "PASS",
   version: window.DuduQYear2V23Factory.gamificationDiversityVersion,
-  ruleCount: Object.keys(window.DuduQYear2V23Factory.gamificationDiversityRules || {}).length,
+  candidateRuleCount: Object.keys(window.DuduQYear2V23Factory.gamificationDiversityRules || {}).length,
+  safeTransformationsApplied: totalChanged,
+  intentionalSafeFallbacks: totalSkipped,
   report
 }, null, 2));
