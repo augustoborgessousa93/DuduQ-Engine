@@ -13,7 +13,7 @@
   if (factory.__gamificationRouterCompatApplied) return;
 
   const originalBuild = factory.buildModule.bind(factory);
-  const VERSION = "1.0.0-bubble-audio-numeral";
+  const VERSION = "1.0.1-bubble-audio-numeral";
 
   function allQuestions(module) {
     return (module?.activities || []).flatMap((activity) => activity?.questions || []);
@@ -26,16 +26,29 @@
     /*
      * The original Year 2 source item is image/numeral -> audio. The diversity
      * rule intentionally inverts the presentation to audio -> numeral bubbles.
-     * Bubble Pop's R143 router profile does not accept a question-level image,
-     * and the old source visual is no longer part of the transformed stimulus.
-     * Disable only that stale presentation field; numeral alternatives, source
-     * answer and repeatable English audio remain untouched.
+     * Bubble Pop's R143 router profile accepts question audio, but does not accept
+     * a question-level image or per-option audio. Those fields are leftovers from
+     * the source presentation and are not part of the transformed interaction.
+     * Disable only those stale presentation fields; numeral labels, source answer
+     * and the repeatable English stimulus audio remain untouched.
      */
     question.image = {
       enabled: false,
       src: null,
       alt: ""
     };
+
+    for (const alternative of question.alternatives || []) {
+      if (!alternative || typeof alternative !== "object") continue;
+      alternative.audio = {
+        enabled: false,
+        src: null,
+        text: "",
+        language: "en-US",
+        role: "option"
+      };
+    }
+
     question.delivery = {
       ...(question.delivery || {}),
       allowImage: false,
@@ -47,6 +60,8 @@
         version: VERSION,
         scope: "PRESENTATION_ONLY",
         staleQuestionImageDisabled: true,
+        staleOptionAudioDisabled: true,
+        stimulusAudioPreserved: true,
         contentChanged: false,
         sourceAnswerPreserved: true
       }
