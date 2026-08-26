@@ -24,6 +24,25 @@ async function waitEnabled(locator, timeout = 8_000) {
   throw new Error("Item Drag & Drop genérico permaneceu desabilitado.");
 }
 
+async function waitFinalInteractive(page, locator, timeout = 12_000) {
+  const started = Date.now();
+  let stableSince = null;
+  while (Date.now() - started < timeout) {
+    const gate = await page.evaluate(() => document.documentElement.getAttribute("data-duduq-initial-speech-gate"));
+    const enabled = await locator.isEnabled().catch(() => false);
+    if (gate === null && enabled) {
+      if (stableSince === null) stableSince = Date.now();
+      if (Date.now() - stableSince >= 400) return Date.now() - started;
+    } else {
+      stableSince = null;
+    }
+    await page.waitForTimeout(50);
+  }
+  const gate = await page.evaluate(() => document.documentElement.getAttribute("data-duduq-initial-speech-gate")).catch(() => "<indisponível>");
+  const enabled = await locator.isEnabled().catch(() => false);
+  throw new Error(`DD2 genérico não atingiu estado interativo final estável; gate=${gate}; enabled=${enabled}.`);
+}
+
 function bankItemByLabel(frame, label) {
   return frame.locator(`.duduq-dd2-bank .duduq-dd2-item[aria-label^="${label}."]`).first();
 }
@@ -79,6 +98,11 @@ try {
     ["2", "scene-goodbye"],
     ["3", "scene-afternoon"]
   ];
+
+  const firstSource = bankItemByLabel(frame, pairs[0][0]);
+  await firstSource.waitFor({ state: "visible", timeout: 6_000 });
+  const finalInteractiveWaitMs = await waitFinalInteractive(page, firstSource);
+  console.log(`GENERIC MULTI-TARGET final interactive after ${finalInteractiveWaitMs}ms`);
 
   for (let index = 0; index < pairs.length; index += 1) {
     const [label, targetId] = pairs[index];
