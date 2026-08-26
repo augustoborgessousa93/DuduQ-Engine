@@ -24,17 +24,39 @@ const publicM03Entry = read("content/english/year-2/module-03/index.html");
 const homologHarness = read("test/drag-drop/single-target-choice-2.0.23/m03-homolog.html");
 const m03Patch = read("content/english/year-2/year2-v23-dragdrop-visual-patch.js");
 
-// 1) Produção permanece intacta enquanto 2.0.23 entra apenas como release candidate.
-expect(canary.revision === 143, `Canary inesperado: revisão ${canary.revision}; esperado 143.`);
-expect(canary.mechanics?.["drag-drop"]?.release === "2.0.22", "Canary precisa permanecer em Drag & Drop 2.0.22.");
-expect(!JSON.stringify(canary).includes("2.0.23"), "Canary contém referência indevida ao candidato 2.0.23.");
-expect(publicM03Entry.includes('channel:"canary-v1"'), "Entry público do M03 deixou de usar Canary durante revisão do RC.");
-expect(!publicM03Entry.includes('interactionPilot:"SINGLE_TARGET_CHOICE"'), "Entry público do M03 ativou o piloto antes da promoção.");
-expect(!publicM03Entry.includes('dragDropCandidate:"2.0.23"'), "Entry público do M03 referencia 2.0.23 antes da promoção.");
-expect(!publicM03Entry.includes('dd2-single-target-runtime-patch.js'), "Entry público do M03 carrega runtime 2.0.23 antes da promoção.");
+// 1) Lifecycle: o mesmo contrato precisa ser válido antes e depois da promoção.
+// Antes: Canary R143 / 2.0.22 e M03 público inativo.
+// Depois: Canary R144 / 2.0.23 e M03 público com opt-in explícito.
+const prePromotion =
+  canary.revision === 143 &&
+  canary.mechanics?.["drag-drop"]?.release === "2.0.22";
+const promoted =
+  canary.revision === 144 &&
+  canary.mechanics?.["drag-drop"]?.release === "2.0.23";
+
+expect(
+  prePromotion || promoted,
+  `Estado Canary inesperado: revisão ${canary.revision}, drag-drop ${canary.mechanics?.["drag-drop"]?.release}.`
+);
+expect(publicM03Entry.includes('channel:"canary-v1"'), "Entry público do M03 precisa permanecer no Canary.");
 expect(!publicM03Entry.includes('homolog-m03-single-target-v1'), "Entry público do M03 vazou para o canal de homologação.");
 
-// 2) Homologação continua disponível em harness isolado, sem alterar o entry público.
+if (prePromotion) {
+  expect(!JSON.stringify(canary).includes("2.0.23"), "Canary R143 contém referência indevida ao candidato 2.0.23.");
+  expect(!publicM03Entry.includes('interactionPilot:"SINGLE_TARGET_CHOICE"'), "Entry público do M03 ativou o piloto antes da promoção.");
+  expect(!publicM03Entry.includes('dragDropCandidate:"2.0.23"'), "Entry público do M03 referencia 2.0.23 antes da promoção.");
+  expect(!publicM03Entry.includes('dd2-single-target-runtime-patch.js'), "Entry público do M03 carrega runtime 2.0.23 antes da promoção.");
+} else {
+  expect(canary.mechanics?.["drag-drop"]?.adapter === "/engine/releases/mechanics/drag-drop/2.0.23/drag-drop.js", "Canary R144 não aponta para o adapter 2.0.23.");
+  expect(canary.mechanics?.["drag-drop"]?.runtime === "/engine/releases/mechanics/drag-drop/2.0.22/DUDUQ_DRAG_DROP.html", "Canary R144 deve continuar compondo o runtime HTML imutável 2.0.22.");
+  expect(canary.policy?.dragDropSingleTargetChoiceApproved === true, "Canary R144 não registra aprovação do SINGLE_TARGET_CHOICE.");
+  expect(publicM03Entry.includes('interactionPilot:"SINGLE_TARGET_CHOICE"'), "Entry público do M03 não ativa o piloto após a promoção.");
+  expect(publicM03Entry.includes('dragDropCandidate:"2.0.23"'), "Entry público do M03 não referencia 2.0.23 após a promoção.");
+  expect(publicM03Entry.includes('dd2-single-target-runtime-patch.js'), "Entry público do M03 não carrega o runtime patch 2.0.23 após a promoção.");
+  expect(publicM03Entry.indexOf('dd2-single-target-runtime-patch.js') < publicM03Entry.indexOf('duduq-loader-v1.js'), "Runtime patch 2.0.23 precisa ser instalado antes do loader no M03 público.");
+}
+
+// 2) Homologação continua disponível em harness isolado como sentinela do candidato.
 expect(homolog.policy?.homologationOnly === true, "Canal do piloto precisa ser homologationOnly.");
 expect(homolog.mechanics?.["drag-drop"]?.release === "2.0.23", "Canal do piloto não usa Drag & Drop 2.0.23.");
 expect(homolog.mechanics?.["drag-drop"]?.adapter === "/engine/releases/mechanics/drag-drop/2.0.23/drag-drop.js", "Adapter incorreto no canal de homologação.");
@@ -47,7 +69,7 @@ expect(!homologHarness.includes('dd2-single-target-pointer-bridge.js'), "Harness
 expect(!homologHarness.includes('dd2-single-target-gate-diagnostic.js'), "Harness ainda depende do gate diagnostic antigo.");
 expect(homologHarness.indexOf('dd2-single-target-runtime-patch.js') < homologHarness.indexOf('duduq-loader-v1.js'), "Runtime patch precisa ser instalado antes do loader no harness.");
 
-// 3) O patch de conteúdo fica inerte em produção e só ativa o M03 sob opt-in explícito.
+// 3) O patch de conteúdo só ativa o M03 sob opt-in explícito.
 expect(m03Patch.includes('window.DUDUQ_PUBLIC_ENTRY?.interactionPilot === "SINGLE_TARGET_CHOICE"'), "Patch M03 perdeu gate explícito de interactionPilot.");
 expect(m03Patch.includes('window.DUDUQ_PUBLIC_ENTRY?.dragDropCandidate === "2.0.23"'), "Patch M03 perdeu gate explícito de candidato 2.0.23.");
 expect(m03Patch.includes('if (!singleTargetPilotEnabled()) return;'), "Patch M03 não aborta fora do piloto explícito.");
@@ -109,7 +131,11 @@ expectOnce(baseRuntime, 'var positionedCount = requiredItems.filter(function (it
 expectOnce(baseRuntime, 'var validatePlacement = useCallback(function () {', "2.0.18 DD2 / validatePlacement");
 expectOnce(baseRuntime, '"data-dd2-target-id":target.id,', "2.0.18 DD2 / target DOM");
 
-console.log("PASS — Drag & Drop 2.0.23 SINGLE_TARGET_CHOICE release-candidate composition contract");
-console.log("Canary e entry público M03 preservados em R143 / drag-drop 2.0.22");
-console.log("M03 2.0.23 exercitado somente pelo harness isolado de homologação");
+console.log("PASS — Drag & Drop 2.0.23 SINGLE_TARGET_CHOICE composition contract");
+console.log(
+  prePromotion
+    ? "Lifecycle: pre-promotion R143 / drag-drop 2.0.22 / M03 público inativo"
+    : "Lifecycle: promoted R144 / drag-drop 2.0.23 / M03 público SINGLE_TARGET_CHOICE ativo"
+);
+console.log("Harness de homologação permanece como sentinela isolada do candidato");
 console.log("Pointer, scoring e visuais consolidados no candidato; ativação de conteúdo exige opt-in explícito");
