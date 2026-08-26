@@ -5,14 +5,14 @@
    - stable-height target/drop zone;
    - larger visual stimulus;
    - compact placed answer;
-   - one-shot audio playback after tap or completed drag.
+   - one-shot audio on tap; completed drag keeps the base DD2 audio path.
 
    Homologation only. Canary/public production remains on R143 / 2.0.22.
 */
 (function () {
   "use strict";
 
-  const VERSION = "2.0.24-r143-visual-b";
+  const VERSION = "2.0.24-r143-visual-c";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqDD24R143VisualWrapped";
   const BASE_PATCH_URL = "/engine/releases/mechanics/drag-drop/2.0.23/dd2-single-target-runtime-patch.js";
@@ -353,24 +353,13 @@ html[data-duduq-host-compact-viewport="true"] .duduq-dd2-root:has(.duduq-dd2-tar
   function patchAfter23(html) {
     let prepared = html;
 
-    /* Shared short debounce: tap and drag converge on the same audio behavior,
-       while the 2.0.23 synthetic-click suppression continues preventing ghost clicks. */
+    /* DD2 base already plays choice audio exactly once when place(..., "drop")
+       completes. 2.0.24 only adds the missing tap/click path. This avoids a
+       second restart after drag and therefore avoids duplicate audio. */
     prepared = replaceRequired(
       prepared,
       `var singleTargetPointerContextRef = useRef(null);`,
       `var singleTargetAudioGateRef = useRef({ itemId:null, at:0 });\n    function playSingleTargetSelectionAudio(item) {\n      if (!item || !(item.audioAssetKey || item.spokenText)) return;\n      var now = Date.now();\n      var gate = singleTargetAudioGateRef.current || {};\n      if (gate.itemId === item.id && now - Number(gate.at || 0) < 260) return;\n      singleTargetAudioGateRef.current = { itemId:item.id, at:now };\n      playValueAudio(item, "item");\n    }\n    var singleTargetPointerContextRef = useRef(null);`
-    );
-
-    prepared = replaceRequired(
-      prepared,
-      `      locationOf:locationOf,\n      place:place\n    };`,
-      `      locationOf:locationOf,\n      place:place,\n      playChoiceAudio:playSingleTargetSelectionAudio\n    };`
-    );
-
-    prepared = replaceRequired(
-      prepared,
-      `          ctx.place(activeDrag.itemId, targetId, "drop");`,
-      `          ctx.place(activeDrag.itemId, targetId, "drop");\n          if (typeof ctx.playChoiceAudio === "function" && ctx.itemMap && ctx.itemMap.has(activeDrag.itemId)) {\n            ctx.playChoiceAudio(ctx.itemMap.get(activeDrag.itemId));\n          }`
     );
 
     prepared = replaceRequired(
@@ -413,7 +402,7 @@ html[data-duduq-host-compact-viewport="true"] .duduq-dd2-root:has(.duduq-dd2-tar
       writable: false
     });
 
-    expose(true, "2.0.23-behavior-plus-r143-visual-and-selection-audio");
+    expose(true, "2.0.23-behavior-plus-r143-visual-and-tap-audio");
     window.dispatchEvent(new CustomEvent("duduq:dd24-r143-visual-ready", {
       detail: { version: VERSION, styleId: STYLE_ID }
     }));
