@@ -1,0 +1,40 @@
+name: Year 2 Gamification Diversity RC1
+
+on:
+  pull_request:
+    paths:
+      - "content/english/year-2/**"
+      - "test/year2/gamification-diversity-rc1.mjs"
+      - ".github/workflows/year2-gamification-diversity-rc1.yml"
+  push:
+    branches:
+      - "feat/year2-gamification-diversity-v23"
+    paths:
+      - "content/english/year-2/**"
+      - "test/year2/gamification-diversity-rc1.mjs"
+      - ".github/workflows/year2-gamification-diversity-rc1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  integrity:
+    name: 90-item content + mechanic integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Syntax check diversity layer
+        run: node --check content/english/year-2/year2-v23-gamification-diversity.js
+
+      - name: Syntax check Year 2 RC test
+        run: node --check test/year2/gamification-diversity-rc1.mjs
+
+      - name: Validate all six modules and 90 real items
+        run: node test/year2/gamification-diversity-rc1.mjs
