@@ -1,0 +1,116 @@
+name: Year 2 Gamification Diversity RC1
+
+on:
+  pull_request:
+    paths:
+      - "content/english/year-2/**"
+      - "test/year2/gamification-diversity-*.mjs"
+      - ".github/workflows/year2-gamification-diversity-rc1.yml"
+  push:
+    branches:
+      - "feat/year2-gamification-diversity-v23"
+    paths:
+      - "content/english/year-2/**"
+      - "test/year2/gamification-diversity-*.mjs"
+      - ".github/workflows/year2-gamification-diversity-rc1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  integrity:
+    name: 90-item content + mechanic integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Syntax check diversity layer
+        run: node --check content/english/year-2/year2-v23-gamification-diversity.js
+
+      - name: Syntax check Year 2 RC test
+        run: node --check test/year2/gamification-diversity-rc1.mjs
+
+      - name: Syntax check browser homologation
+        run: node --check test/year2/gamification-diversity-browser-rc1.mjs
+
+      - name: Syntax check dynamic visibility audit
+        run: node --check test/year2/gamification-diversity-dynamic-visibility-rc1.mjs
+
+      - name: Syntax check Matching render audit
+        run: node --check test/year2/gamification-diversity-matching-render-rc1.mjs
+
+      - name: Syntax check public entry smoke
+        run: node --check test/year2/gamification-diversity-public-entry-rc1.mjs
+
+      - name: Validate all six modules and 90 real items
+        run: node test/year2/gamification-diversity-rc1.mjs
+
+  chromium-homologation:
+    name: Chromium interaction + responsive homologation
+    needs: integrity
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local DuduQ server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-year2-http.log 2>&1 &
+          echo $! > /tmp/duduq-year2-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-year2-http.log
+          exit 1
+
+      - name: Run browser gamification homologation
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/gamification-diversity-browser-rc1.mjs
+
+      - name: Audit all transformed dynamic items on-screen
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/gamification-diversity-dynamic-visibility-rc1.mjs
+
+      - name: Audit every transformed Matching render
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/gamification-diversity-matching-render-rc1.mjs
+
+      - name: Smoke all public M01-M06 entrypoints
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/gamification-diversity-public-entry-rc1.mjs
+
+      - name: Upload browser homologation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year2-gamification-diversity-rc1-browser
+          path: test-results/year2-gamification-diversity-rc1
+          if-no-files-found: warn
+          retention-days: 7
