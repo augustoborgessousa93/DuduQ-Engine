@@ -147,7 +147,9 @@ async function mechanicFrame(page, expectedMechanic) {
     assert(titlePattern.test(String(hostTitle || "")), `${expectedMechanic}: iframe inesperado: ${hostTitle}`);
   }
 
-  const frame = await frameElement.contentFrame();
+  const elementHandle = await frameElement.elementHandle();
+  assert(elementHandle, `${expectedMechanic}: iframe não possui ElementHandle.`);
+  const frame = await elementHandle.contentFrame();
   assert(frame, `${expectedMechanic}: não foi possível acessar o iframe.`);
 
   await frame.waitForFunction(() => {
