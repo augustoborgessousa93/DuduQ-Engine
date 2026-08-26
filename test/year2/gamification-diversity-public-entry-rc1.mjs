@@ -85,6 +85,9 @@ async function inspectPublicModule(page, module) {
     const built = window.DUDUQ_CONTENT?.english?.year2?.[expectedKey];
     const session = window.DuduQ?.getSession?.() || null;
     const activities = Array.isArray(built?.activities) ? built.activities : [];
+    const activityQuestionCounts = activities.map((activity) =>
+      Array.isArray(activity.questions) ? activity.questions.length : 0
+    );
     const questionIds = activities.flatMap((activity) =>
       (Array.isArray(activity.questions) ? activity.questions : []).map((question) => question.id)
     );
@@ -99,6 +102,7 @@ async function inspectPublicModule(page, module) {
       module: built?.module || null,
       subject: built?.subject || null,
       activities: activities.length,
+      activityQuestionCounts,
       questions: questionIds.length,
       questionIds,
       mechanics,
@@ -122,7 +126,23 @@ async function inspectPublicModule(page, module) {
   assert(snapshot.questions === 15, `M${module}: esperado banco público de 15 questões; encontrado ${snapshot.questions}.`);
   assert(snapshot.questionIds.length === new Set(snapshot.questionIds).size, `M${module}: IDs duplicados no entrypoint público.`);
   assert(snapshot.activities > 0, `M${module}: nenhuma atividade pública encontrada.`);
-  assert(snapshot.session?.totalSteps === snapshot.questions, `M${module}: Host iniciou ${snapshot.session?.totalSteps} etapas para ${snapshot.questions} questões.`);
+  assert(
+    snapshot.activityQuestionCounts.length === snapshot.activities &&
+    snapshot.activityQuestionCounts.every((count) => count > 0),
+    `M${module}: existe atividade pública vazia ou contagem de atividades inconsistente: ${JSON.stringify(snapshot.activityQuestionCounts)}.`
+  );
+  assert(
+    snapshot.activityQuestionCounts.reduce((sum, count) => sum + count, 0) === snapshot.questions,
+    `M${module}: soma das questões por atividade diverge do banco público.`
+  );
+  assert(
+    snapshot.audit?.sourceItems === snapshot.questions && snapshot.audit?.finalItems === snapshot.questions,
+    `M${module}: auditoria de integridade divergiu do banco público (${snapshot.audit?.sourceItems}/${snapshot.audit?.finalItems} vs ${snapshot.questions}).`
+  );
+  assert(
+    snapshot.session?.totalSteps === snapshot.activities,
+    `M${module}: Host iniciou ${snapshot.session?.totalSteps} etapas para ${snapshot.activities} atividades (${snapshot.questions} questões).`
+  );
   assert(snapshot.session?.stepIndex === 0, `M${module}: entrypoint não iniciou na primeira etapa.`);
   assert(snapshot.session?.completed !== true, `M${module}: módulo apareceu concluído no primeiro carregamento.`);
   assert(snapshot.session?.year === 2 && snapshot.session?.module === module, `M${module}: sessão pública não corresponde ao conteúdo carregado.`);
