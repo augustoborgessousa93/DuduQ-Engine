@@ -24,6 +24,18 @@ async function waitEnabled(locator, timeout = 8_000) {
   throw new Error("Item Drag & Drop genérico permaneceu desabilitado.");
 }
 
+function exactText(label) {
+  return new RegExp(`^\\s*${String(label).replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")}\\s*$`);
+}
+
+function bankItemByLabel(frame, label) {
+  return frame.locator(".duduq-dd2-bank .duduq-dd2-item").filter({ hasText: exactText(label) }).first();
+}
+
+function targetItemByLabel(target, label) {
+  return target.locator(".duduq-dd2-item").filter({ hasText: exactText(label) }).first();
+}
+
 async function drag(page, source, target) {
   await waitEnabled(source);
   const sourceBox = await source.boundingBox();
@@ -60,20 +72,24 @@ try {
   const confirm = frame.locator(".duduq-dd2-confirm");
   assert(await confirm.count() === 0, "Multi-target divergiu do baseline 2.0.22: CONFIRMAR apareceu antes de qualquer associação.");
 
+  /* O runtime DD2 base não expõe data-dd2-item-id nos cards; esse atributo é
+     acrescentado somente pelo runtime patch do SINGLE_TARGET_CHOICE. Para não
+     transformar instrumentação específica do M03 em requisito global, este
+     teste identifica os itens genéricos por seus rótulos visíveis estáveis. */
   const pairs = [
-    ["audio-1", "scene-selfintro"],
-    ["audio-2", "scene-goodbye"],
-    ["audio-3", "scene-afternoon"]
+    ["1", "scene-selfintro"],
+    ["2", "scene-goodbye"],
+    ["3", "scene-afternoon"]
   ];
 
   for (let index = 0; index < pairs.length; index += 1) {
-    const [itemId, targetId] = pairs[index];
-    const source = frame.locator(`.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="${itemId}"]`).first();
+    const [label, targetId] = pairs[index];
+    const source = bankItemByLabel(frame, label);
     const target = frame.locator(`.duduq-dd2-target[data-dd2-target-id="${targetId}"]`).first();
     await source.waitFor({ state: "visible", timeout: 6_000 });
     await target.waitFor({ state: "visible", timeout: 6_000 });
     await drag(page, source, target);
-    await target.locator(`.duduq-dd2-item[data-dd2-item-id="${itemId}"]`).waitFor({ state: "visible", timeout: 3_000 });
+    await targetItemByLabel(target, label).waitFor({ state: "visible", timeout: 3_000 });
 
     if (index < pairs.length - 1) {
       assert(
