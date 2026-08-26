@@ -31,7 +31,16 @@
     }
   }
 
+  function singleTargetPilotEnabled() {
+    return window.DUDUQ_PUBLIC_ENTRY?.interactionPilot === "SINGLE_TARGET_CHOICE" &&
+      window.DUDUQ_PUBLIC_ENTRY?.dragDropCandidate === "2.0.23";
+  }
+
   function patchSingleTargetChoiceM03(question) {
+    /* Release-candidate safety gate: merely merging this patch into main must not
+       partially activate the pilot while Canary still points to Drag & Drop 2.0.22.
+       Only an explicit entrypoint declaring the 2.0.23 pilot may adapt M03. */
+    if (!singleTargetPilotEnabled()) return;
     if (!/^EN2-M3-\d{2}$/.test(String(question?.id || ""))) return;
     if (question?.delivery?.mechanic !== "drag-drop") return;
 
@@ -126,6 +135,6 @@
       return postProcess(originalBuild(config));
     },
     __dragDropVisualPatchAppliedV23: true,
-    dragDropVisualPatchVersionV23: "1.2.0-single-target-choice-visual-polish"
+    dragDropVisualPatchVersionV23: "1.3.0-single-target-choice-pilot-gated"
   });
 })();
