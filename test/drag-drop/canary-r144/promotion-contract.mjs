@@ -9,12 +9,17 @@ function assert(condition, message) { if (!condition) throw new Error(message); 
 
 const promoted = json("engine/channels/canary-v1.json");
 const rollback = json("engine/channels/rollback/canary-r143-before-drag-drop-2.0.23.json");
+const rollbackM03 = read("engine/channels/rollback/canary-r143-m03-public-entry.html");
 const m03 = read("content/english/year-2/module-03/index.html");
 const contentPatch = read("content/english/year-2/year2-v23-dragdrop-visual-patch.js");
 const runtimePatch = read("engine/releases/mechanics/drag-drop/2.0.23/dd2-single-target-runtime-patch.js");
 
 assert(rollback.revision === 143, "Rollback snapshot precisa ser R143.");
 assert(rollback.mechanics?.["drag-drop"]?.release === "2.0.22", "Rollback snapshot precisa apontar Drag & Drop 2.0.22.");
+assert(rollbackM03.includes('channel:"canary-v1"'), "Snapshot M03 R143 perdeu o canal canary-v1.");
+assert(!rollbackM03.includes('interactionPilot:"SINGLE_TARGET_CHOICE"'), "Snapshot M03 R143 não pode ativar SINGLE_TARGET_CHOICE.");
+assert(!rollbackM03.includes('dd2-single-target-runtime-patch.js'), "Snapshot M03 R143 não pode carregar o runtime patch 2.0.23.");
+
 assert(promoted.revision === 144, `Promoção precisa ser R144; encontrado ${promoted.revision}.`);
 assert(promoted.channel === "canary-v1", "Promoção deve preservar o canal canary-v1.");
 assert(promoted.mechanics?.["drag-drop"]?.release === "2.0.23", "R144 não aponta Drag & Drop 2.0.23.");
@@ -42,4 +47,4 @@ assert(runtimePatch.includes('const VERSION = "2.0.23-dd2-single-target-g"'), "R
 
 console.log("PASS — Canary R144 promotion contract");
 console.log("Scope: canary Drag & Drop 2.0.22 → 2.0.23 + M03 explicit activation only");
-console.log("Rollback snapshot: engine/channels/rollback/canary-r143-before-drag-drop-2.0.23.json");
+console.log("Rollback pair: R143 manifest + R143 M03 public entry snapshots");
