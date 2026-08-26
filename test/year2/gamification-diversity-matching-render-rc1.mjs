@@ -190,6 +190,29 @@ async function waitForImages(frame, expected, id) {
   return images;
 }
 
+async function waitForAudioControls(frame, id) {
+  const audioButtons = frame.locator(".duduq-matching-item-audio");
+  const count = await audioButtons.count();
+  if (count === 0) return { count: 0, initiallyDisabled: 0, readyMs: 0 };
+
+  const initiallyDisabled = await audioButtons.evaluateAll((buttons) => buttons.filter((button) => button.disabled).length);
+  const started = Date.now();
+
+  // O Matching bloqueia temporariamente os itens enquanto a instrução inicial está
+  // sendo reproduzida. Isso é comportamento esperado. O gate abaixo não aceita,
+  // porém, um bloqueio permanente: todos os replays precisam ficar disponíveis
+  // em uma janela curta e previsível para o aluno.
+  await frame.waitForFunction((expectedCount) => {
+    const buttons = Array.from(document.querySelectorAll(".duduq-matching-item-audio"));
+    return buttons.length === expectedCount && buttons.every((button) => !button.disabled);
+  }, count, { timeout: 5_000 });
+
+  const readyMs = Date.now() - started;
+  const labels = await audioButtons.evaluateAll((buttons) => buttons.map((button) => button.getAttribute("aria-label") || ""));
+  assert(labels.every((label) => /ouvir|interromper/i.test(label)), `${id}: controle de áudio sem rótulo acessível adequado.`);
+  return { count, initiallyDisabled, readyMs, labels };
+}
+
 async function verifyMatchingRender(frame, probe) {
   assert(probe.mechanic === "matching", `${probe.id}: mecânica final não é Matching.`);
   assert(probe.matching?.leftItems?.length === 1, `${probe.id}: Matching precisa de 1 estímulo à esquerda.`);
@@ -225,11 +248,7 @@ async function verifyMatchingRender(frame, probe) {
     throw new Error(`${probe.id}: regra Matching inesperada: ${probe.rule}`);
   }
 
-  const audioButtons = frame.locator(".duduq-matching-item-audio");
-  for (let index = 0; index < await audioButtons.count(); index += 1) {
-    assert(!(await audioButtons.nth(index).isDisabled()), `${probe.id}: controle de áudio ${index} iniciou desabilitado.`);
-  }
-
+  const audioAvailability = await waitForAudioControls(frame, probe.id);
   const images = await waitForImages(frame, expectedImages, probe.id);
   const geometry = await verifyCardGeometry(frame, probe.id);
   const dimensions = await frame.evaluate(() => ({
@@ -238,7 +257,7 @@ async function verifyMatchingRender(frame, probe) {
   }));
   assert(dimensions.scroll <= dimensions.viewport + 6, `${probe.id}: overflow horizontal ${dimensions.scroll}px > ${dimensions.viewport}px.`);
 
-  return { leftAudio, rightAudio, leftImages, rightImages, images, geometry };
+  return { leftAudio, rightAudio, leftImages, rightImages, audioAvailability, images, geometry };
 }
 
 async function writeFailure(page, context, messages, error) {
@@ -299,6 +318,7 @@ const summary = {
   status: "PASS",
   transformedMatchingItems: discoveredCount,
   viewportScenarios: report.length,
+  maxAudioReadyMs: Math.max(...report.map((entry) => entry.render.audioAvailability.readyMs)),
   cases: report
 };
 await fs.writeFile(path.join(OUTPUT_DIR, "report.json"), JSON.stringify(summary, null, 2));
