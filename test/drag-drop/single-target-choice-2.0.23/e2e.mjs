@@ -3,7 +3,7 @@ import fs from "node:fs";
 import process from "node:process";
 
 const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:4173";
-const M03_URL = `${BASE_URL}/content/english/year-2/module-03/index.html`;
+const M03_URL = `${BASE_URL}/test/drag-drop/single-target-choice-2.0.23/m03-homolog.html`;
 const RESULTS = "test-results/single-target-choice-2.0.23";
 fs.mkdirSync(RESULTS, { recursive: true });
 
@@ -152,7 +152,6 @@ async function desktopScenario(browser) {
     assert(display === "none", "Badge 0/1 continua visível no SINGLE_TARGET_CHOICE.");
   }
 
-  // Primeiro gesto: arraste real de uma alternativa errada (A). A resposta correta da EN2-M3-01 é B.
   const choiceA = bankChoice(frame, "A");
   await dragChoice(page, choiceA, target);
   await waitTargetFilled(target, true);
@@ -161,12 +160,8 @@ async function desktopScenario(browser) {
   assert(draggedId === "opt-1", `Arraste real colocou item inesperado no destino: ${draggedId}.`);
   assert(!(await confirm.isDisabled()), "CONFIRMAR não habilitou após alternativa A ser colocada.");
 
-  // O owner nativo bloqueia por 320 ms o click sintético que alguns browsers disparam
-  // após um drag. O teste espera essa janela terminar antes de simular uma NOVA intenção
-  // de toque/clique; isso evita confundir o anti-ghost-click com a troca A → C.
   await page.waitForTimeout(360);
 
-  // Troca por toque/clique antes de confirmar. C também é incorreta e deve substituir A sem revelar gabarito.
   const choiceC = bankChoice(frame, "C");
   await choiceC.click();
   await waitTargetFilled(target, true);
@@ -177,18 +172,15 @@ async function desktopScenario(browser) {
   const confirmBox = await confirm.boundingBox();
   assert(confirmBox && confirmBox.y + confirmBox.height <= 768, "Desktop 1366x768: CONFIRMAR ficou fora do primeiro viewport.");
 
-  // Validação só acontece agora.
   await confirm.click();
   const retryCard = target.locator('.duduq-dd2-item[data-wrong="true"]');
   await retryCard.waitFor({ state: "visible", timeout: 2_500 });
   await page.screenshot({ path: `${RESULTS}/desktop-wrong-red.png`, fullPage: true });
 
-  // O card incorreto deve permanecer visível brevemente e depois retornar ao banco.
   await bankChoice(frame, "C").waitFor({ state: "visible", timeout: 2_500 });
   await waitTargetFilled(target, false);
   assert(await target.locator(".duduq-dd2-item").count() === 0, "Após o feedback de erro, o card incorreto não retornou à origem.");
 
-  // Nova tentativa por toque. B é a resposta correta da primeira questão.
   const choiceB = bankChoice(frame, "B");
   await choiceB.click();
   await waitTargetFilled(target, true);
@@ -224,7 +216,6 @@ async function mobileScenario(browser) {
   assert(Math.abs(firstBox.y - secondBox.y) < 28, "Mobile: primeiras alternativas não estão em duas colunas.");
   assert(Math.abs(firstBox.x - secondBox.x) > 80, "Mobile: colunas de alternativas não estão visualmente separadas.");
 
-  // Toque deve colocar qualquer alternativa e habilitar confirmar sem revelar se está correta.
   const choiceD = bankChoice(frame, "D");
   await choiceD.click();
   await waitTargetFilled(target, true);
