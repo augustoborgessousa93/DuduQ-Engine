@@ -9,14 +9,15 @@ const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
 const json = (relative) => JSON.parse(read(relative));
 
 function extractJsonConst(source, name, nextName){
-  const startToken = `const ${name}=`;
-  const start = source.indexOf(startToken);
-  assert.notEqual(start, -1, `${name} ausente`);
-  const contentStart = start + startToken.length;
-  const endToken = `;const ${nextName}=`;
-  const end = source.indexOf(endToken, contentStart);
-  assert.notEqual(end, -1, `${nextName} não delimita ${name}`);
-  return JSON.parse(source.slice(contentStart, end));
+  const startPattern = new RegExp(`const\\s+${name}\\s*=`);
+  const startMatch = startPattern.exec(source);
+  assert.ok(startMatch, `${name} ausente`);
+  const contentStart = startMatch.index + startMatch[0].length;
+  const remainder = source.slice(contentStart);
+  const endPattern = new RegExp(`;\\s*const\\s+${nextName}\\s*=`);
+  const endMatch = endPattern.exec(remainder);
+  assert.ok(endMatch, `${nextName} não delimita ${name}`);
+  return JSON.parse(remainder.slice(0, endMatch.index));
 }
 
 const planDoc = json("content/english/year-2/YEAR2_GAMIFICATION_DIVERSITY_PLAN_v1.json");
