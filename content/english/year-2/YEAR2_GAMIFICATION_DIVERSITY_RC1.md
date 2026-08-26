@@ -46,3 +46,5 @@ O browser gate `test/year2/gamification-diversity-browser-rc1.mjs` usa Chromium/
 ## Homologação antes de promoção
 
 A RC só pode sair de Draft quando os gates de integridade e Chromium estiverem verdes e as evidências visuais forem revisadas. A baseline Drag & Drop R143 e o repositório Assets-DuduQ não fazem parte desta promoção.
+
+> Revalidação: o workflow foi ajustado para sempre fazer checkout explícito da branch RC durante a homologação, evitando re-runs presos a um merge ref antigo do PR.
