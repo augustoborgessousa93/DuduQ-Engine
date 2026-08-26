@@ -318,10 +318,18 @@ async function verifyMatching(page, frame, probe, { exerciseRetry = false } = {}
 
   await frame.waitForFunction(() => {
     const slot = document.querySelector(".duduq-matching-action-slot");
-    const confirmButton = document.querySelector(".duduq-matching-primary");
     const paired = document.querySelectorAll('.duduq-matching-card[data-paired="true"]').length;
-    return Boolean(slot?.getAttribute("data-feedback-state") === "idle" && confirmButton && paired === 0);
+    const selected = document.querySelectorAll('.duduq-matching-card[data-selected="true"]').length;
+    const leftCard = document.querySelector('.duduq-matching-column[data-side="left"] .duduq-matching-card');
+    const rightCard = document.querySelector('.duduq-matching-column[data-side="right"] .duduq-matching-card');
+    const interactive = [leftCard, rightCard].every((card) =>
+      card && !card.disabled && card.getAttribute("data-locked") !== "true"
+    );
+    const state = slot?.getAttribute("data-feedback-state");
+    return Boolean(paired === 0 && selected === 0 && interactive && (state === "retry" || state === "idle"));
   }, null, { timeout: 6_000 });
+
+  diagnostic.retryReadyState = await matchingSnapshot(frame, 0);
 
   const afterRetryAlts = await renderedRightAlts(right);
   const correctDomIndexAfterRetry = afterRetryAlts.findIndex((alt) => alt === correctAlt);
