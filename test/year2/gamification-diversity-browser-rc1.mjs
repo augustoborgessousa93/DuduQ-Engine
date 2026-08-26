@@ -22,6 +22,19 @@ function moduleUrl(module) {
 async function preparePage(browser, viewport) {
   const page = await browser.newPage({ viewport });
   const messages = [];
+
+  // O entrypoint público carrega player + loader. Para homologar questões isoladas,
+  // neutralizamos somente o player automático no navegador de teste e preservamos
+  // o loader, core, canal e adaptadores reais. Assim nenhum start paralelo pode
+  // destruir o iframe da questão-probe.
+  await page.route("**/engine/duduq-player-v1.js*", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/javascript; charset=utf-8",
+      body: "window.__DUDUQ_QA_PLAYER_SUPPRESSED__ = true;"
+    });
+  });
+
   page.on("console", (msg) => {
     const text = msg.text();
     messages.push(`${msg.type()}: ${text}`);
@@ -50,6 +63,9 @@ async function openModule(page, module) {
     key,
     { timeout: 30_000 }
   );
+
+  const playerSuppressed = await page.evaluate(() => window.__DUDUQ_QA_PLAYER_SUPPRESSED__ === true);
+  assert(playerSuppressed, "Browser RC não conseguiu isolar o player automático.");
 
   await page.evaluate(() => {
     try { window.DuduQIntro?.hide?.({ immediate: true, reason: "qa-gamification-diversity" }); } catch (_) {}
