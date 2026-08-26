@@ -17,16 +17,40 @@ Esta baseline existe para impedir que melhorias técnicas futuras alterem silenc
 - runtime patch `2.0.23/dd2-single-target-runtime-patch.js`: não carregado pelo M03 público
 - URL primária de validação: `https://duduq-engine.pages.dev/content/english/year-2/module-03/`
 
-## Referência visual obrigatória
+## Pacote de evidência aprovado
 
-O pacote de evidência deve conter screenshots integrais nos seguintes viewports:
+Workflow: `R143 Visual Baseline`
+
+- Run: `32919122660`
+- Head: `6a80b9f31aa8e9ea5a21682da4ab7f77bee8b364`
+- Resultado: **SUCCESS**
+- Artifact: `r143-approved-visual-baseline`
+- Artifact ID: `9589222031`
+- Digest: `sha256:4db852260a3ddeba58ab634fc86104d91b37f394dab3983d6958fd9ca25b6ca5`
+- Retenção configurada: 30 dias
+
+O pacote contém screenshots e métricas JSON para:
 
 - Desktop: 1366 × 768
 - Notebook: 1280 × 650
 - Tablet: 1024 × 768
 - Mobile: 390 × 844
 
-O workflow `R143 Visual Baseline` gera também arquivos JSON com medidas do host, iframe, card principal e controles visíveis para comparação posterior.
+Todos os quatro cenários foram capturados no site público com Canary R143 / Drag & Drop 2.0.22 e passaram sem overflow horizontal.
+
+## Características visuais que definem esta baseline
+
+A referência visual aprovada usa:
+
+- composição centralizada;
+- card principal compacto, sem ocupar desnecessariamente metade da tela;
+- estímulo visual central com área de soltura imediatamente associada;
+- alternativas organizadas horizontalmente no desktop/notebook, mantendo proximidade visual com o estímulo;
+- reorganização responsiva no mobile, preservando alvos grandes e leitura clara;
+- cabeçalho, progresso e instrução visualmente separados do espaço da atividade;
+- amplo espaço de respiro sem transformar a atividade em dois grandes blocos laterais concorrentes.
+
+A apresentação promovida no R144 — grande painel à esquerda + coluna vertical de respostas à direita — **não é referência visual aprovada** e não deve voltar ao fluxo público sem nova aprovação explícita.
 
 ## Regras para qualquer nova versão
 
@@ -35,12 +59,13 @@ Uma nova implementação de Drag & Drop pode melhorar comportamento, acessibilid
 Critérios mínimos:
 
 1. Preservar a hierarquia visual e a sensação de composição da R143.
-2. Não reduzir de forma relevante a presença do estímulo principal ou transformar a tela em uma composição excessivamente vazia.
+2. Não transformar o card principal em um painel excessivamente grande nem deslocar as alternativas para uma coluna lateral dominante sem aprovação visual específica.
 3. Manter alternativas e ações com dimensões confortáveis para alunos dos anos iniciais.
-4. Não introduzir clipping, overflow horizontal ou botão principal parcialmente oculto.
-5. Não exibir instrumentação técnica, badges de capacidade ou marcadores de homologação ao aluno.
+4. Não introduzir clipping ou overflow horizontal.
+5. Não exibir instrumentação técnica ou marcadores de homologação ao aluno.
 6. Mudanças funcionais não equivalem automaticamente a aprovação visual.
 7. A comparação final deve ser feita lado a lado contra os screenshots desta baseline antes de qualquer promoção do Canary.
+8. Mudanças pequenas e úteis — por exemplo, remoção de informação redundante — podem ser propostas, mas devem ser validadas sem descaracterizar a composição aprovada.
 
 ## Histórico
 
