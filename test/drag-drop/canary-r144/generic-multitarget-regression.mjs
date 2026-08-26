@@ -53,9 +53,12 @@ try {
   assert(await frame.locator('.duduq-dd2-target[data-single-target-choice="true"]').count() === 0, "SINGLE_TARGET_CHOICE vazou para cenário multi-target.");
   assert(await frame.locator(".duduq-dd2-bank .duduq-dd2-item").count() === 3, "Banco multi-target deveria conter 3 itens.");
 
+  /* Paridade deliberada com o runtime base 2.0.22: no fluxo multi-target,
+     CONFIRMAR só é renderizado quando todos os itens obrigatórios estão
+     posicionados. O SINGLE_TARGET_CHOICE muda esse lifecycle apenas no M03,
+     onde seu runtime patch é carregado explicitamente. */
   const confirm = frame.locator(".duduq-dd2-confirm");
-  await confirm.waitFor({ state: "visible", timeout: 5_000 });
-  assert(await confirm.isDisabled(), "Multi-target deveria iniciar com CONFIRMAR desabilitado.");
+  assert(await confirm.count() === 0, "Multi-target divergiu do baseline 2.0.22: CONFIRMAR apareceu antes de qualquer associação.");
 
   const pairs = [
     ["audio-1", "scene-selfintro"],
@@ -71,16 +74,23 @@ try {
     await target.waitFor({ state: "visible", timeout: 6_000 });
     await drag(page, source, target);
     await target.locator(`.duduq-dd2-item[data-dd2-item-id="${itemId}"]`).waitFor({ state: "visible", timeout: 3_000 });
-    if (index < pairs.length - 1) assert(await confirm.isDisabled(), `CONFIRMAR habilitou cedo demais após ${index + 1}/3 associações.`);
+
+    if (index < pairs.length - 1) {
+      assert(
+        await confirm.count() === 0,
+        `Multi-target divergiu do baseline 2.0.22: CONFIRMAR apareceu cedo demais após ${index + 1}/3 associações.`
+      );
+    }
   }
 
-  assert(!(await confirm.isDisabled()), "CONFIRMAR não habilitou após completar as 3 associações.");
+  await confirm.waitFor({ state: "visible", timeout: 5_000 });
+  assert(!(await confirm.isDisabled()), "CONFIRMAR apareceu, mas não habilitou após completar as 3 associações.");
   await confirm.click();
   await frame.locator('.duduq-engine-feedback[data-state="success"] .duduq-engine-feedback-card').waitFor({ state: "visible", timeout: 3_000 });
 
   const fatal = errors.filter((message) => /error|erro|failed|falha/i.test(message));
   assert(fatal.length === 0, `Erros de browser no multi-target R144: ${fatal.join(" | ")}`);
-  console.log("PASS — Canary R144 generic multi-target: 3 destinos + drag real + confirm + success; sem vazamento SINGLE_TARGET_CHOICE");
+  console.log("PASS — Canary R144 generic multi-target: lifecycle base preservado (CONFIRMAR ausente até ready) + 3 destinos + drag real + success; sem vazamento SINGLE_TARGET_CHOICE");
   await context.close();
 } finally {
   await browser.close();
