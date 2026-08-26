@@ -1,0 +1,100 @@
+name: Homolog Year 2 Gamification Diversity
+
+on:
+  push:
+    branches:
+      - homolog/year2-gamification-diversity-v1
+    paths:
+      - "engine/releases/mechanics/matching/1.0.24/**"
+      - "engine/channels/canary-v1.json"
+      - "engine/channels/homolog-year2-gamification-diversity-v1.json"
+      - "content/english/year-2/**"
+      - "test/year2-gamification-diversity/**"
+      - ".github/workflows/homolog-year2-gamification-diversity.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "engine/releases/mechanics/matching/1.0.24/**"
+      - "engine/channels/canary-v1.json"
+      - "engine/channels/homolog-year2-gamification-diversity-v1.json"
+      - "content/english/year-2/**"
+      - "test/year2-gamification-diversity/**"
+      - ".github/workflows/homolog-year2-gamification-diversity.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-contract:
+    name: Pedagogical + composition contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout homolog branch
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Syntax check Matching 1.0.24 candidate
+        run: node --check engine/releases/mechanics/matching/1.0.24/matching.js
+
+      - name: Syntax check Year 2 diversity adapter
+        run: node --check content/english/year-2/year2-v23-gamification-diversity-adapter.js
+
+      - name: Syntax check static contract
+        run: node --check test/year2-gamification-diversity/contract.mjs
+
+      - name: Syntax check browser E2E
+        run: node --check test/year2-gamification-diversity/e2e.mjs
+
+      - name: Validate Year 2 content lock + mechanic distribution
+        run: node test/year2-gamification-diversity/contract.mjs
+
+  chromium-e2e:
+    name: Chromium Matching + Year 2 payloads
+    needs: static-contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - name: Checkout homolog branch
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local DuduQ server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-http.log 2>&1 &
+          echo $! > /tmp/duduq-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-http.log
+          exit 1
+
+      - name: Run Year 2 gamification diversity E2E
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2-gamification-diversity/e2e.mjs
+
+      - name: Upload homologation screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year2-gamification-diversity-screenshots
+          path: test-results/year2-gamification-diversity
+          if-no-files-found: warn
+          retention-days: 7
