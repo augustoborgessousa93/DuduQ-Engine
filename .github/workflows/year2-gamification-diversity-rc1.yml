@@ -42,6 +42,9 @@ jobs:
       - name: Syntax check browser homologation
         run: node --check test/year2/gamification-diversity-browser-rc1.mjs
 
+      - name: Syntax check dynamic visibility audit
+        run: node --check test/year2/gamification-diversity-dynamic-visibility-rc1.mjs
+
       - name: Syntax check Matching distractor diagnostic
         run: node --check test/year2/gamification-diversity-matching-diagnostic.mjs
 
@@ -89,6 +92,11 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year2/gamification-diversity-browser-rc1.mjs
+
+      - name: Audit all transformed dynamic items on-screen
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/gamification-diversity-dynamic-visibility-rc1.mjs
 
       - name: Upload browser homologation evidence
         if: always()
