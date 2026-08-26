@@ -13,6 +13,26 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+async function saveDiagnostic(page, label, extra = {}) {
+  const state = await page.evaluate(() => ({
+    href: location.href,
+    title: document.title,
+    readyState: document.readyState,
+    engineBase: window.DUDUQ_ENGINE_BASE || null,
+    manifest: window.DUDUQ_ENGINE_MANIFEST || null,
+    publicEntry: window.DUDUQ_PUBLIC_ENTRY || null,
+    duduqVersion: window.DuduQ?.version || null,
+    bodyText: document.body?.innerText?.slice(0, 5000) || "",
+    scripts: Array.from(document.scripts).map((script) => script.src || "<inline>")
+  })).catch((error) => ({ evaluationError: String(error) }));
+
+  fs.writeFileSync(
+    `${RESULTS}/${TARGET_NAME}-${label}-diagnostic.json`,
+    JSON.stringify({ publicUrl: PUBLIC_URL, ...extra, state }, null, 2)
+  );
+  await page.screenshot({ path: `${RESULTS}/${TARGET_NAME}-${label}-failure.png`, fullPage: true }).catch(() => {});
+}
+
 async function waitFinalInteractive(page, frame, itemId, timeout = 12_000) {
   const choice = frame.locator(`.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="${itemId}"]`).first();
   const started = Date.now();
@@ -89,10 +109,18 @@ try {
   const context = await browser.newContext({ viewport: { width: 1366, height: 768 } });
   const page = await context.newPage();
   const browserErrors = [];
+  const failedRequests = [];
+  const httpErrors = [];
 
   page.on("pageerror", (error) => browserErrors.push(error.message));
   page.on("console", (msg) => {
     if (msg.type() === "error") browserErrors.push(msg.text());
+  });
+  page.on("requestfailed", (request) => {
+    failedRequests.push({ url: request.url(), failure: request.failure()?.errorText || "requestfailed" });
+  });
+  page.on("response", (response) => {
+    if (response.status() >= 400) httpErrors.push({ status: response.status(), url: response.url() });
   });
 
   await page.addInitScript(() => {
@@ -110,13 +138,24 @@ try {
 
   await page.goto(PUBLIC_URL, { waitUntil: "domcontentloaded", timeout: 45_000 });
 
-  await page.waitForFunction(
-    () => window.DUDUQ_ENGINE_MANIFEST?.revision === 144 && window.DUDUQ_ENGINE_MANIFEST?.mechanics?.["drag-drop"]?.release === "2.0.23",
-    null,
-    { timeout: 30_000 }
-  );
+  try {
+    await page.waitForFunction(
+      () => window.DUDUQ_ENGINE_MANIFEST?.revision === 144 && window.DUDUQ_ENGINE_MANIFEST?.mechanics?.["drag-drop"]?.release === "2.0.23",
+      null,
+      { timeout: 30_000 }
+    );
+  } catch (error) {
+    await saveDiagnostic(page, "manifest", { browserErrors, failedRequests, httpErrors, originalError: String(error) });
+    console.error("PUBLIC HOST PREFLIGHT", JSON.stringify({ TARGET_NAME, PUBLIC_URL, browserErrors, failedRequests, httpErrors }, null, 2));
+    throw error;
+  }
 
-  await page.waitForFunction(() => window.DuduQ?.getSession && window.DUDUQ_PUBLIC_ENTRY?.interactionPilot === "SINGLE_TARGET_CHOICE", null, { timeout: 30_000 });
+  try {
+    await page.waitForFunction(() => window.DuduQ?.getSession && window.DUDUQ_PUBLIC_ENTRY?.interactionPilot === "SINGLE_TARGET_CHOICE", null, { timeout: 30_000 });
+  } catch (error) {
+    await saveDiagnostic(page, "host", { browserErrors, failedRequests, httpErrors, originalError: String(error) });
+    throw error;
+  }
 
   const introStart = page.locator(".duduq-intro-start-button");
   try {
@@ -201,7 +240,7 @@ try {
   assert(fatal.length === 0, `Erros de browser no pós-deploy ${TARGET_NAME}: ${fatal.join(" | ")}`);
 
   await page.screenshot({ path: `${RESULTS}/${TARGET_NAME}-step-2-ready.png`, fullPage: true });
-  fs.writeFileSync(`${RESULTS}/${TARGET_NAME}-events.json`, JSON.stringify({ publicUrl: PUBLIC_URL, session, events }, null, 2));
+  fs.writeFileSync(`${RESULTS}/${TARGET_NAME}-events.json`, JSON.stringify({ publicUrl: PUBLIC_URL, session, events, failedRequests, httpErrors }, null, 2));
 
   console.log(`PASS — ${TARGET_NAME}: Canary R144 público + DD 2.0.23 + 4 questões reais + feedback + step complete + progress 1/N + transition + next step ready`);
   await context.close();
