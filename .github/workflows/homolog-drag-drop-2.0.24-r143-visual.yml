@@ -1,0 +1,73 @@
+name: Homolog Drag Drop 2.0.24 R143 Visual
+
+on:
+  push:
+    branches:
+      - homolog/drag-drop-2.0.24-r143-visual
+    paths:
+      - "engine/releases/mechanics/drag-drop/2.0.24/**"
+      - "engine/channels/homolog-m03-r143-visual-v2.json"
+      - "content/english/year-2/year2-v24-single-target-ux-patch.js"
+      - "test/drag-drop/single-target-choice-2.0.24/**"
+      - "docs/qa/drag-drop-2.0.24-r143-visual.md"
+      - ".github/workflows/homolog-drag-drop-2.0.24-r143-visual.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-contract:
+    name: Static R143 visual contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax checks
+        run: |
+          node --check engine/releases/mechanics/drag-drop/2.0.24/drag-drop.js
+          node --check engine/releases/mechanics/drag-drop/2.0.24/dd2-single-target-runtime-patch.js
+          node --check content/english/year-2/year2-v24-single-target-ux-patch.js
+          node --check test/drag-drop/single-target-choice-2.0.24/contract.mjs
+          node --check test/drag-drop/single-target-choice-2.0.24/e2e.mjs
+      - name: Validate candidate isolation + UX contract
+        run: node test/drag-drop/single-target-choice-2.0.24/contract.mjs
+
+  chromium:
+    name: Chromium M03 R143 visual + interaction
+    needs: static-contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local DuduQ server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-dd24-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-dd24-http.log
+          exit 1
+      - name: Run M03 R143 visual + UX E2E
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-target-choice-2.0.24/e2e.mjs
+      - name: Upload DD24 homolog screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dd24-r143-visual-homolog
+          path: test-results/single-target-choice-2.0.24
+          if-no-files-found: warn
+          retention-days: 14
