@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR" data-duduq-homologation="drag-drop-single-target-choice-2.0.24-r143-visual">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>DuduQ — Homologação M03 — DD 2.0.24 / R143 Visual</title>
+</head>
+<body>
+  <div id="root">Carregando homologação M03 2.0.24...</div>
+  <script>
+    window.DUDUQ_ENGINE_BASE = new URL("../../..", location.href).href.replace(/\/$/, "");
+    window.DUDUQ_GAME_CONFIG = Object.freeze({
+      engineBase: window.DUDUQ_ENGINE_BASE,
+      channel: "homolog-m03-r143-visual-v2",
+      label: "DuduQ — English — Year 2 — Module 03 — DD 2.0.24 R143 visual homolog",
+      modulePath: ["english", "year2", "module03v23multimodal"],
+      contentScript: "../../../content/english/year-2/module-03/module-03-v23-multimodal.js?v=dd24-r143-a"
+    });
+    window.DUDUQ_PUBLIC_ENTRY = Object.freeze({
+      year: 2,
+      module: 3,
+      sourceVersion: "2.3",
+      factorySpec: "1.2",
+      visualPolicy: "R143_BASELINE_REQUIRED",
+      existingAssetsPreferred: true,
+      provisionalFallbackAllowed: true,
+      ttsProvisional: true,
+      englishReadingRequired: false,
+      homologationOnly: true,
+      interactionPilot: "SINGLE_TARGET_CHOICE",
+      dragDropCandidate: "2.0.24",
+      visualBaseline: "R143"
+    });
+  </script>
+  <script src="../../../content/english/year-2/year2-v22-homolog-core.js?v=dd24-r143-a"></script>
+  <script src="../../../content/english/year-2/year2-v22-homolog-editorial-assets.js?v=dd24-r143-a"></script>
+  <script src="../../../content/english/year-2/year2-v23-multimodal-adapter.js?v=dd24-r143-a"></script>
+  <script src="../../../content/english/year-2/year2-v23-dragdrop-visual-patch.js?v=dd24-r143-a"></script>
+  <script src="../../../content/english/year-2/year2-v24-single-target-ux-patch.js?v=dd24-r143-a"></script>
+  <script src="../../../content/english/year-2/year2-v22-homolog-layout.js?v=dd24-r143-a"></script>
+  <script>
+    (function () {
+      const stamp = Date.now();
+      function load(src) {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = src + "?t=" + stamp;
+          script.async = false;
+          script.onload = resolve;
+          script.onerror = () => reject(new Error("Falha ao carregar " + src));
+          document.head.appendChild(script);
+        });
+      }
+      load("../../../engine/duduq-player-v1.js")
+        .then(() => load("../../../engine/releases/mechanics/drag-drop/2.0.24/dd2-single-target-runtime-patch.js"))
+        .then(() => load("../../../engine/duduq-loader-v1.js"))
+        .catch((error) => {
+          console.error("[DuduQ M03 DD24 R143 Visual Homolog]", error);
+          document.getElementById("root").textContent = "Erro ao carregar a homologação M03 2.0.24.";
+        });
+    })();
+  </script>
+</body>
+</html>
