@@ -97,10 +97,18 @@ async function startQuestionProbe(page, module, questionId) {
       question.metadata.matching.behavior.shuffleRight = false;
     }
 
+    const matching = question.metadata?.matching;
+    const correctPairRightId = matching?.pairs?.[0]?.rightId || null;
+    const matchingCorrectIndex = correctPairRightId && Array.isArray(matching?.rightItems)
+      ? matching.rightItems.findIndex((entry) => entry.id === correctPairRightId)
+      : -1;
+
     const answerValue = question.answer?.value;
-    const correctIndex = typeof answerValue === "string" && /^opt-\d+$/.test(answerValue)
+    const universalCorrectIndex = typeof answerValue === "string" && /^opt-\d+$/.test(answerValue)
       ? Number(answerValue.slice(4)) - 1
       : null;
+
+    const correctIndex = matchingCorrectIndex >= 0 ? matchingCorrectIndex : universalCorrectIndex;
 
     window.DuduQIntro?.hide?.({ immediate: true, reason: "qa-question-probe" });
     window.DuduQTransition?.hideImmediate?.();
@@ -138,9 +146,13 @@ async function startQuestionProbe(page, module, questionId) {
       mechanic: step.mechanic,
       rule: diversity.rule,
       correctIndex,
+      universalCorrectIndex,
+      matchingCorrectIndex,
+      correctPairRightId,
+      rightItemIds: matching?.rightItems?.map((entry) => entry.id) || [],
       sourceAnswer: question.metadata?.sourceAnswerV23,
       optionTexts: (question.alternatives || []).map((entry) => String(entry.text || "")),
-      matchingMode: question.metadata?.matching?.mode || null,
+      matchingMode: matching?.mode || null,
       targetMode: question.metadata?.targetShooter?.mode || null,
       targetItems: question.metadata?.targetShooter?.items || [],
       session
@@ -195,7 +207,27 @@ async function assertNoHorizontalOverflow(frame, label) {
   );
 }
 
-async function verifyMatching(frame, probe, { exerciseRetry = false } = {}) {
+async function matchingSnapshot(frame, delayMs) {
+  if (delayMs > 0) await new Promise((resolve) => setTimeout(resolve, delayMs));
+  if (frame.isDetached()) return { delayMs, detached: true };
+  return frame.evaluate((sampleDelay) => ({
+    delayMs: sampleDelay,
+    detached: false,
+    bodyText: String(document.body?.innerText || "").slice(0, 1800),
+    liveText: String(document.querySelector(".duduq-matching-live")?.textContent || ""),
+    actionFeedbackState: document.querySelector(".duduq-matching-action-slot")?.getAttribute("data-feedback-state") || null,
+    confirmDisabled: document.querySelector(".duduq-matching-primary")?.disabled ?? null,
+    cards: Array.from(document.querySelectorAll(".duduq-matching-card")).map((card) => ({
+      aria: card.getAttribute("aria-label"),
+      selected: card.getAttribute("data-selected"),
+      paired: card.getAttribute("data-paired"),
+      feedback: card.getAttribute("data-feedback"),
+      locked: card.getAttribute("data-locked")
+    }))
+  }), delayMs);
+}
+
+async function verifyMatching(page, frame, probe, { exerciseRetry = false } = {}) {
   await frame.locator(".duduq-matching-card").first().waitFor({ state: "visible", timeout: 20_000 });
   const left = frame.locator('.duduq-matching-column[data-side="left"] .duduq-matching-card');
   const right = frame.locator('.duduq-matching-column[data-side="right"] .duduq-matching-card');
@@ -207,27 +239,86 @@ async function verifyMatching(frame, probe, { exerciseRetry = false } = {}) {
   assert(await labels.count() === 0, `${probe.id}: Matching expôs texto inglês antes da resposta.`);
   assert(await confirm.count() === 1, `${probe.id}: botão CONFIRMAR não encontrado.`);
 
-  if (!exerciseRetry) return;
-  assert(Number.isInteger(probe.correctIndex), `${probe.id}: gabarito não pôde ser convertido em índice.`);
+  const diagnostic = {
+    probe: {
+      correctIndex: probe.correctIndex,
+      universalCorrectIndex: probe.universalCorrectIndex,
+      matchingCorrectIndex: probe.matchingCorrectIndex,
+      correctPairRightId: probe.correctPairRightId,
+      rightItemIds: probe.rightItemIds
+    },
+    retrySamples: []
+  };
+
+  if (!exerciseRetry) return diagnostic;
+  assert(Number.isInteger(probe.correctIndex) && probe.correctIndex >= 0 && probe.correctIndex < 4, `${probe.id}: gabarito não pôde ser convertido em índice.`);
+  if (Number.isInteger(probe.universalCorrectIndex)) {
+    assert(
+      probe.universalCorrectIndex === probe.correctIndex,
+      `${probe.id}: gabarito universal (${probe.universalCorrectIndex}) diverge do par Matching (${probe.correctIndex}).`
+    );
+  }
 
   const wrongIndex = probe.correctIndex === 0 ? 1 : 0;
+  diagnostic.wrongIndex = wrongIndex;
+
   await left.first().click();
   await right.nth(wrongIndex).click();
+  assert(!(await confirm.isDisabled()), `${probe.id}: CONFIRMAR permaneceu desabilitado após formar um par.`);
   await confirm.click();
 
-  await frame.locator('.duduq-matching-card[data-feedback="retry"]').first()
-    .waitFor({ state: "visible", timeout: 5_000 });
+  let elapsed = 0;
+  for (const increment of [0, 60, 140, 300, 700, 1100]) {
+    const wait = increment === 0 ? 0 : increment - elapsed;
+    elapsed = increment;
+    diagnostic.retrySamples.push(await matchingSnapshot(frame, wait));
+  }
 
-  await frame.waitForFunction(() =>
-    document.querySelectorAll('.duduq-matching-card[data-feedback="retry"]').length === 0,
-  null, { timeout: 5_000 });
+  const sessionAfterWrong = await page.evaluate(() => window.DuduQ?.getSession?.() || null);
+  diagnostic.sessionAfterWrong = sessionAfterWrong;
+
+  assert(
+    sessionAfterWrong && sessionAfterWrong.completed !== true && sessionAfterWrong.results?.length === 0,
+    `${probe.id}: resposta errada concluiu indevidamente a atividade.`
+  );
+
+  const retryEvidence = diagnostic.retrySamples.some((sample) => {
+    const text = `${sample.liveText || ""} ${sample.bodyText || ""}`;
+    return (
+      sample.actionFeedbackState === "retry" ||
+      sample.cards?.some((card) => card.feedback === "retry") ||
+      /0\s+de\s+1|tente\s+criar|tente\s+novamente|ouça\s+novamente|observe\s+novamente/i.test(text)
+    );
+  });
+  diagnostic.retryEvidence = retryEvidence;
+
+  assert(retryEvidence, `${probe.id}: resposta errada não apresentou evidência observável de feedback/pista para segunda tentativa.`);
+  assert(!frame.isDetached(), `${probe.id}: Matching foi desmontado depois do erro.`);
+
+  await frame.waitForFunction(() => {
+    const confirmButton = document.querySelector(".duduq-matching-primary");
+    const paired = document.querySelectorAll('.duduq-matching-card[data-paired="true"]').length;
+    return Boolean(confirmButton && paired === 0);
+  }, null, { timeout: 5_000 });
 
   await left.first().click();
   await right.nth(probe.correctIndex).click();
+  assert(!(await confirm.isDisabled()), `${probe.id}: CONFIRMAR não habilitou na segunda tentativa.`);
   await confirm.click();
 
-  await frame.locator('.duduq-matching-card[data-feedback="correct"]').first()
-    .waitFor({ state: "visible", timeout: 5_000 });
+  await page.waitForFunction(
+    () => window.DuduQ?.getSession?.()?.completed === true,
+    null,
+    { timeout: 6_000 }
+  );
+
+  diagnostic.sessionAfterCorrect = await page.evaluate(() => window.DuduQ?.getSession?.() || null);
+  assert(
+    diagnostic.sessionAfterCorrect?.results?.length === 1,
+    `${probe.id}: segunda tentativa correta não registrou a conclusão esperada.`
+  );
+
+  return diagnostic;
 }
 
 async function verifyBubble(frame, probe) {
@@ -243,6 +334,7 @@ async function verifyBubble(frame, probe) {
     visibleTexts.every((text) => /^\s*\d+\s*$/.test(text)),
     `${probe.id}: Bubble Pop expôs algo além de numeral: ${JSON.stringify(visibleTexts)}`
   );
+  return { visibleTexts };
 }
 
 async function verifyTarget(frame, probe) {
@@ -256,29 +348,50 @@ async function verifyTarget(frame, probe) {
   await frame.locator(".duduq-ts-target").first().waitFor({ state: "visible", timeout: 20_000 });
   const targetCount = await frame.locator(".duduq-ts-target").count();
   assert(targetCount >= 1, `${probe.id}: nenhum alvo ativo foi renderizado.`);
+  return { targetCount };
+}
+
+async function writeFailureEvidence(page, testCase, probe, messages, error, diagnostic = null) {
+  await fs.mkdir(OUTPUT_DIR, { recursive: true });
+  const base = `${testCase.id}-${testCase.viewport.width}x${testCase.viewport.height}-FAIL`;
+  const screenshot = path.join(OUTPUT_DIR, `${base}.png`);
+  const json = path.join(OUTPUT_DIR, `${base}.json`);
+  try { await page.screenshot({ path: screenshot, fullPage: true }); } catch (_) {}
+  await fs.writeFile(json, JSON.stringify({
+    id: testCase.id,
+    viewport: testCase.viewport,
+    probe,
+    diagnostic,
+    error: error?.stack || error?.message || String(error),
+    messages
+  }, null, 2));
 }
 
 async function runCase(browser, testCase) {
   const { page, messages } = await preparePage(browser, testCase.viewport);
+  let probe = null;
+  let diagnostic = null;
   try {
     await openModule(page, testCase.module);
-    const probe = await startQuestionProbe(page, testCase.module, testCase.id);
+    probe = await startQuestionProbe(page, testCase.module, testCase.id);
     assert(probe.mechanic === testCase.mechanic, `${testCase.id}: esperado ${testCase.mechanic}, recebeu ${probe.mechanic}.`);
     assert(probe.rule === testCase.rule, `${testCase.id}: regra inesperada ${probe.rule}.`);
 
     const frame = await mechanicFrame(page, probe.mechanic);
 
     if (probe.mechanic === "matching") {
-      await verifyMatching(frame, probe, { exerciseRetry: testCase.exerciseRetry === true });
+      diagnostic = await verifyMatching(page, frame, probe, { exerciseRetry: testCase.exerciseRetry === true });
     } else if (probe.mechanic === "bubble-pop") {
-      await verifyBubble(frame, probe);
+      diagnostic = await verifyBubble(frame, probe);
     } else if (probe.mechanic === "target-shooter") {
-      await verifyTarget(frame, probe);
+      diagnostic = await verifyTarget(frame, probe);
     } else {
       throw new Error(`${testCase.id}: mecânica não prevista no browser RC: ${probe.mechanic}`);
     }
 
-    await assertNoHorizontalOverflow(frame, `${testCase.id} ${testCase.viewport.width}x${testCase.viewport.height}`);
+    if (!frame.isDetached()) {
+      await assertNoHorizontalOverflow(frame, `${testCase.id} ${testCase.viewport.width}x${testCase.viewport.height}`);
+    }
 
     await fs.mkdir(OUTPUT_DIR, { recursive: true });
     const screenshot = path.join(
@@ -298,8 +411,12 @@ async function runCase(browser, testCase) {
       mechanic: probe.mechanic,
       rule: probe.rule,
       viewport: testCase.viewport,
-      screenshot
+      screenshot,
+      diagnostic
     };
+  } catch (error) {
+    await writeFailureEvidence(page, testCase, probe, messages, error, diagnostic);
+    throw error;
   } finally {
     await page.close();
   }
