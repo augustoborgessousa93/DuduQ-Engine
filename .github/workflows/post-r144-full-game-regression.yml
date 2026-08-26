@@ -29,7 +29,7 @@ jobs:
           node -e 'const fs=require("fs"); const c=JSON.parse(fs.readFileSync("engine/channels/canary-v1.json","utf8")); if(c.revision!==144||c.mechanics?.["drag-drop"]?.release!=="2.0.23") throw new Error("Expected Canary R144 / drag-drop 2.0.23"); console.log("PASS — source is R144 / drag-drop 2.0.23")'
 
   public-smoke:
-    name: Public ${﻿{ matrix.target }}
+    name: Public ${{ matrix.target }}
     needs: syntax
     runs-on: ubuntu-latest
     timeout-minutes: 18
@@ -52,14 +52,14 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Run public full-game integration smoke
         env:
-          TARGET_NAME: ${﻿{ matrix.target }}
-          PUBLIC_URL: ${﻿{ matrix.public_url }}
+          TARGET_NAME: ${{ matrix.target }}
+          PUBLIC_URL: ${{ matrix.public_url }}
         run: node test/drag-drop/canary-r144/post-deploy-full-game-regression.mjs
       - name: Upload post-deploy evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: post-r144-${﻿{ matrix.target }}
+          name: post-r144-${{ matrix.target }}
           path: test-results/post-r144-full-game
           if-no-files-found: warn
           retention-days: 7
