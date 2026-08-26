@@ -11,6 +11,13 @@ function assert(condition, message){
   if(!condition) throw new Error(message);
 }
 
+function sameDistribution(actual, expected){
+  const actualKeys = Object.keys(actual || {}).sort();
+  const expectedKeys = Object.keys(expected || {}).sort();
+  if(JSON.stringify(actualKeys) !== JSON.stringify(expectedKeys)) return false;
+  return expectedKeys.every(key => actual[key] === expected[key]);
+}
+
 async function waitEnabled(locator, timeout = 8_000){
   const deadline = Date.now() + timeout;
   while(Date.now() < deadline){
@@ -71,7 +78,7 @@ async function inspectAllModulePayloads(browser){
     }, {key});
 
     assert(snapshot.questions.length===15, `M${pad}: esperado 15 itens, recebido ${snapshot.questions.length}.`);
-    assert(JSON.stringify(snapshot.distribution)===JSON.stringify(expected[pad]), `M${pad}: distribuição inesperada ${JSON.stringify(snapshot.distribution)}.`);
+    assert(sameDistribution(snapshot.distribution, expected[pad]), `M${pad}: distribuição inesperada ${JSON.stringify(snapshot.distribution)}; esperado ${JSON.stringify(expected[pad])}.`);
     assert(snapshot.audit?.contentLock==="PASS_BY_CONSTRUCTION", `M${pad}: content lock ausente.`);
     assert(snapshot.audit?.matchingCandidate==="1.0.24", `M${pad}: candidato Matching incorreto.`);
     assert(snapshot.diversityVersion, `M${pad}: adapter de diversidade não carregou.`);
