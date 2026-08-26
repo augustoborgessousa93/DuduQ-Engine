@@ -1,0 +1,60 @@
+name: R143 Visual Baseline
+
+on:
+  push:
+    branches:
+      - qa/r143-visual-baseline
+    paths:
+      - "test/visual/r143-baseline-capture.mjs"
+      - "docs/qa/r143-visual-baseline.md"
+      - ".github/workflows/r143-visual-baseline.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  baseline:
+    name: Capture approved R143 baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate source contract
+        run: |
+          node --check test/visual/r143-baseline-capture.mjs
+          node - <<'NODE'
+          const fs = require('fs');
+          const manifest = JSON.parse(fs.readFileSync('engine/channels/canary-v1.json', 'utf8'));
+          const entry = fs.readFileSync('content/english/year-2/module-03/index.html', 'utf8');
+          if (manifest.revision !== 143) throw new Error(`Expected R143, found R${manifest.revision}`);
+          if (manifest.mechanics?.['drag-drop']?.release !== '2.0.22') throw new Error('Expected drag-drop 2.0.22');
+          if (entry.includes('interactionPilot:"SINGLE_TARGET_CHOICE"')) throw new Error('Public M03 still activates SINGLE_TARGET_CHOICE');
+          if (entry.includes('dragDropCandidate:"2.0.23"')) throw new Error('Public M03 still declares 2.0.23 candidate');
+          if (entry.includes('dd2-single-target-runtime-patch.js')) throw new Error('Public M03 still loads 2.0.23 runtime patch');
+          console.log('PASS — repository source matches approved R143 baseline');
+          NODE
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Capture public baseline
+        env:
+          PUBLIC_URL: https://duduq-engine.pages.dev/content/english/year-2/module-03/
+        run: node test/visual/r143-baseline-capture.mjs
+
+      - name: Upload baseline evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r143-approved-visual-baseline
+          path: test-results/r143-visual-baseline
+          if-no-files-found: error
+          retention-days: 30
