@@ -24,16 +24,12 @@ async function waitEnabled(locator, timeout = 8_000) {
   throw new Error("Item Drag & Drop genérico permaneceu desabilitado.");
 }
 
-function exactText(label) {
-  return new RegExp(`^\\s*${String(label).replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")}\\s*$`);
-}
-
 function bankItemByLabel(frame, label) {
-  return frame.locator(".duduq-dd2-bank .duduq-dd2-item").filter({ hasText: exactText(label) }).first();
+  return frame.locator(`.duduq-dd2-bank .duduq-dd2-item[aria-label^="${label}."]`).first();
 }
 
 function targetItemByLabel(target, label) {
-  return target.locator(".duduq-dd2-item").filter({ hasText: exactText(label) }).first();
+  return target.locator(`.duduq-dd2-item[aria-label^="${label}."]`).first();
 }
 
 async function drag(page, source, target) {
@@ -72,10 +68,10 @@ try {
   const confirm = frame.locator(".duduq-dd2-confirm");
   assert(await confirm.count() === 0, "Multi-target divergiu do baseline 2.0.22: CONFIRMAR apareceu antes de qualquer associação.");
 
-  /* O runtime DD2 base não expõe data-dd2-item-id nos cards; esse atributo é
-     acrescentado somente pelo runtime patch do SINGLE_TARGET_CHOICE. Para não
-     transformar instrumentação específica do M03 em requisito global, este
-     teste identifica os itens genéricos por seus rótulos visíveis estáveis. */
+  /* O runtime DD2 base esconde rótulos numéricos auxiliares em cards de áudio
+     e não expõe data-dd2-item-id. O nome acessível continua preservando 1/2/3,
+     então o teste usa aria-label — contrato já existente na base 2.0.22 — em
+     vez de exigir instrumentação DOM que pertence apenas ao single-target. */
   const pairs = [
     ["1", "scene-selfintro"],
     ["2", "scene-goodbye"],
