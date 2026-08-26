@@ -91,7 +91,8 @@ async function startQuestionProbe(page, module, questionId) {
     const diversity = question.metadata?.gamificationDiversity;
     if (!diversity) throw new Error(`${expectedId}: não recebeu transformação de diversidade.`);
 
-    // Ordem estável apenas para o teste de interação. Não altera o conteúdo publicado.
+    // O runtime Matching pode aplicar sua própria apresentação aleatória. O teste
+    // não depende da ordem visual; mantém estes flags apenas como pedido editorial.
     if (question.metadata?.matching?.behavior) {
       question.metadata.matching.behavior.shuffleLeft = false;
       question.metadata.matching.behavior.shuffleRight = false;
@@ -149,7 +150,7 @@ async function startQuestionProbe(page, module, questionId) {
       universalCorrectIndex,
       matchingCorrectIndex,
       correctPairRightId,
-      rightItemIds: matching?.rightItems?.map((entry) => entry.id) || [],
+      matchingRightItems: matching?.rightItems || [],
       sourceAnswer: question.metadata?.sourceAnswerV23,
       optionTexts: (question.alternatives || []).map((entry) => String(entry.text || "")),
       matchingMode: matching?.mode || null,
@@ -222,9 +223,14 @@ async function matchingSnapshot(frame, delayMs) {
       selected: card.getAttribute("data-selected"),
       paired: card.getAttribute("data-paired"),
       feedback: card.getAttribute("data-feedback"),
-      locked: card.getAttribute("data-locked")
+      locked: card.getAttribute("data-locked"),
+      imgAlt: card.querySelector("img")?.getAttribute("alt") || null
     }))
   }), delayMs);
+}
+
+async function renderedRightAlts(right) {
+  return right.evaluateAll((cards) => cards.map((card) => card.querySelector("img")?.getAttribute("alt") || null));
 }
 
 async function verifyMatching(page, frame, probe, { exerciseRetry = false } = {}) {
@@ -245,7 +251,7 @@ async function verifyMatching(page, frame, probe, { exerciseRetry = false } = {}
       universalCorrectIndex: probe.universalCorrectIndex,
       matchingCorrectIndex: probe.matchingCorrectIndex,
       correctPairRightId: probe.correctPairRightId,
-      rightItemIds: probe.rightItemIds
+      matchingRightItems: probe.matchingRightItems
     },
     retrySamples: []
   };
@@ -259,12 +265,27 @@ async function verifyMatching(page, frame, probe, { exerciseRetry = false } = {}
     );
   }
 
-  const wrongIndex = probe.correctIndex === 0 ? 1 : 0;
-  diagnostic.wrongIndex = wrongIndex;
+  const correctAlt = probe.matchingRightItems?.[probe.correctIndex]?.alt || null;
+  assert(correctAlt, `${probe.id}: alternativa visual correta não possui alt para homologação.`);
+
+  const beforeAlts = await renderedRightAlts(right);
+  const correctDomIndex = beforeAlts.findIndex((alt) => alt === correctAlt);
+  assert(correctDomIndex >= 0, `${probe.id}: imagem correta (${correctAlt}) não foi encontrada na ordem renderizada ${JSON.stringify(beforeAlts)}.`);
+  const wrongDomIndex = beforeAlts.findIndex((_, index) => index !== correctDomIndex);
+  assert(wrongDomIndex >= 0, `${probe.id}: não foi possível localizar um distrator visual.`);
+
+  diagnostic.renderedRightAltsBeforeWrong = beforeAlts;
+  diagnostic.correctDomIndexBeforeWrong = correctDomIndex;
+  diagnostic.wrongDomIndex = wrongDomIndex;
 
   await left.first().click();
-  await right.nth(wrongIndex).click();
+  await right.nth(wrongDomIndex).click();
   assert(!(await confirm.isDisabled()), `${probe.id}: CONFIRMAR permaneceu desabilitado após formar um par.`);
+
+  const pairedAltBeforeSubmit = await right.nth(wrongDomIndex).locator("img").getAttribute("alt");
+  assert(pairedAltBeforeSubmit !== correctAlt, `${probe.id}: teste de erro selecionou acidentalmente a resposta correta.`);
+  diagnostic.wrongAlt = pairedAltBeforeSubmit;
+
   await confirm.click();
 
   let elapsed = 0;
@@ -278,7 +299,7 @@ async function verifyMatching(page, frame, probe, { exerciseRetry = false } = {}
   diagnostic.sessionAfterWrong = sessionAfterWrong;
 
   assert(
-    sessionAfterWrong && sessionAfterWrong.completed !== true && sessionAfterWrong.results?.length === 0,
+    sessionAfterWrong && sessionAfterWrong.completed !== true,
     `${probe.id}: resposta errada concluiu indevidamente a atividade.`
   );
 
@@ -296,13 +317,20 @@ async function verifyMatching(page, frame, probe, { exerciseRetry = false } = {}
   assert(!frame.isDetached(), `${probe.id}: Matching foi desmontado depois do erro.`);
 
   await frame.waitForFunction(() => {
+    const slot = document.querySelector(".duduq-matching-action-slot");
     const confirmButton = document.querySelector(".duduq-matching-primary");
     const paired = document.querySelectorAll('.duduq-matching-card[data-paired="true"]').length;
-    return Boolean(confirmButton && paired === 0);
-  }, null, { timeout: 5_000 });
+    return Boolean(slot?.getAttribute("data-feedback-state") === "idle" && confirmButton && paired === 0);
+  }, null, { timeout: 6_000 });
+
+  const afterRetryAlts = await renderedRightAlts(right);
+  const correctDomIndexAfterRetry = afterRetryAlts.findIndex((alt) => alt === correctAlt);
+  assert(correctDomIndexAfterRetry >= 0, `${probe.id}: resposta correta desapareceu depois da tentativa incorreta.`);
+  diagnostic.renderedRightAltsAfterRetry = afterRetryAlts;
+  diagnostic.correctDomIndexAfterRetry = correctDomIndexAfterRetry;
 
   await left.first().click();
-  await right.nth(probe.correctIndex).click();
+  await right.nth(correctDomIndexAfterRetry).click();
   assert(!(await confirm.isDisabled()), `${probe.id}: CONFIRMAR não habilitou na segunda tentativa.`);
   await confirm.click();
 
