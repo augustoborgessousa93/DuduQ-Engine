@@ -40,6 +40,9 @@ jobs:
       - name: Syntax check browser homologation
         run: node --check test/year2/gamification-diversity-browser-rc1.mjs
 
+      - name: Syntax check Matching distractor diagnostic
+        run: node --check test/year2/gamification-diversity-matching-diagnostic.mjs
+
       - name: Validate all six modules and 90 real items
         run: node test/year2/gamification-diversity-rc1.mjs
 
@@ -72,6 +75,11 @@ jobs:
           done
           cat /tmp/duduq-year2-http.log
           exit 1
+
+      - name: Collect Matching distractor diagnostic
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/gamification-diversity-matching-diagnostic.mjs
 
       - name: Run browser gamification homologation
         env:
