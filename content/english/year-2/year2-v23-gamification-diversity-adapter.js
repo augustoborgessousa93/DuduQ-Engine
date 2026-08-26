@@ -3,7 +3,7 @@
    - homologation-only;
    - preserves canonical v2.3 content fields;
    - changes mechanic/presentation only;
-   - does not touch Canary or immutable mechanic releases.
+   - composes Matching 1.0.24 candidate without touching Canary.
 */
 (function(){
   "use strict";
@@ -13,7 +13,7 @@
     throw new Error("[DuduQ Y2 Gamification Diversity] DuduQYear2V23Factory indisponível.");
   }
 
-  const VERSION = "1.0.0-homolog-a";
+  const VERSION = "1.0.1-homolog-b";
   const SENTINEL = "matching-single-choice-homolog";
   const MATCHING_IDS = new Set([
     "EN2-M1-11", "EN2-M1-13",
@@ -59,10 +59,18 @@
         if(entry.mode !== "image-choice" && entry.mode !== "audio-choice"){
           throw new Error(`[DuduQ Y2 Gamification Diversity] ${id}: modo ${entry.mode} não pode usar Matching single-choice.`);
         }
+
+        /*
+          Sentinel intencional: a Factory v1.2 redireciona mechanic="matching"
+          para Drag & Drop/Target Shooter por causa da limitação do Matching
+          Canary 1.0.23. Um identificador temporário faz a Factory gerar o
+          payload de associação sem acionar esse fallback; após a geração,
+          finalizeModule troca somente o delivery para "matching".
+        */
         entry.mechanic = SENTINEL;
         entry.gamificationDiversity = {
           targetMechanic: "matching",
-          subtype: "single-choice-with-distractors",
+          subtype: "single-choice-with-right-distractors",
           rationale: "Preserva um único gabarito e três distratores; usa áudio individual nos cards sem exigir leitura autônoma."
         };
       }
@@ -98,7 +106,7 @@
 
     matching.behavior = {
       ...(matching.behavior || {}),
-      allowDistractors: true,
+      allowRightDistractors: true,
       distractorSide: "right",
       lockLeftOrder: true,
       shuffleRight: true,
@@ -111,6 +119,11 @@
     matching.leftTitle = question?.metadata?.stimulusAudio ? "OUÇA" : "OBSERVE";
     matching.rightTitle = "OUÇA E RELACIONE";
 
+    /*
+      O conteúdo editorial das alternativas continua preservado em spokenText
+      e sourceWrittenLabel. A letra A/B/C/D é só apresentação pré-resposta,
+      evitando leitura autônoma em inglês no 2º ano.
+    */
     matching.rightItems = matching.rightItems.map((item, index) => {
       const spokenText = String(item.spokenText || item.label || "");
       const letter = optionLetter(index);
@@ -138,9 +151,10 @@
       ...(question.metadata || {}),
       gamificationDiversity: {
         version: VERSION,
-        sourceMechanic: question?.delivery?.mechanic === "matching" ? SENTINEL : question?.delivery?.mechanic,
+        generatedThroughSentinel: SENTINEL,
         targetMechanic: "matching",
-        subtype: "single-choice-with-distractors",
+        matchingCandidate: "1.0.24",
+        subtype: "single-choice-with-right-distractors",
         contentChanged: false,
         scoringChanged: false,
         readingDependencyAdded: false
@@ -224,7 +238,8 @@
         contentLock: "PASS_BY_CONSTRUCTION",
         canonicalSnapshotLength: expectedCanonical.length,
         canaryUntouched: true,
-        matchingRuntimeRequirement: "allowDistractors=true on right side"
+        matchingCandidate: "1.0.24",
+        matchingRuntimeRequirement: "behavior.allowRightDistractors=true"
       }
     };
 
@@ -251,6 +266,7 @@
 
   window.DuduQYear2GamificationDiversity = Object.freeze({
     version: VERSION,
+    matchingCandidate: "1.0.24",
     matchingQuestionIds: Object.freeze([...MATCHING_IDS]),
     canonicalFields: Object.freeze(["id", "prompt", "alternatives", "answer"]),
     status: "HOMOLOGATION_ONLY"
