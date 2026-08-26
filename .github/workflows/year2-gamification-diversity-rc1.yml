@@ -5,13 +5,16 @@ on:
     paths:
       - "content/english/year-2/**"
       - "test/year2/gamification-diversity-*.mjs"
+      - "test/year2/manual-review-hotfix-*.mjs"
       - ".github/workflows/year2-gamification-diversity-rc1.yml"
   push:
     branches:
       - "feat/year2-gamification-diversity-v23"
+      - "fix/year2-logo-smart-assets-matching-v2"
     paths:
       - "content/english/year-2/**"
       - "test/year2/gamification-diversity-*.mjs"
+      - "test/year2/manual-review-hotfix-*.mjs"
       - ".github/workflows/year2-gamification-diversity-rc1.yml"
 
 permissions:
@@ -36,8 +39,14 @@ jobs:
       - name: Syntax check diversity layer
         run: node --check content/english/year-2/year2-v23-gamification-diversity.js
 
+      - name: Syntax check manual-review hotfix
+        run: node --check content/english/year-2/year2-v23-manual-review-hotfix.js
+
       - name: Syntax check Year 2 RC test
         run: node --check test/year2/gamification-diversity-rc1.mjs
+
+      - name: Syntax check manual-review diagnostic
+        run: node --check test/year2/manual-review-hotfix-diagnostic.mjs
 
       - name: Syntax check browser homologation
         run: node --check test/year2/gamification-diversity-browser-rc1.mjs
@@ -51,8 +60,11 @@ jobs:
       - name: Syntax check public entry smoke
         run: node --check test/year2/gamification-diversity-public-entry-rc1.mjs
 
-      - name: Validate all six modules and 90 real items
+      - name: Validate frozen six-module / 90-item source integrity
         run: node test/year2/gamification-diversity-rc1.mjs
+
+      - name: Diagnose final manual-review Matching across all modules
+        run: node test/year2/manual-review-hotfix-diagnostic.mjs
 
   chromium-homologation:
     name: Chromium interaction + responsive homologation
