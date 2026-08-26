@@ -364,13 +364,14 @@ async function verifyBubble(frame, probe) {
   );
 
   await frame.locator(".duduq-bp-bubble").first().waitFor({ state: "visible", timeout: 20_000 });
-  const visibleTexts = await frame.locator(".duduq-bp-bubble").allInnerTexts();
-  assert(visibleTexts.length > 0, `${probe.id}: nenhuma bolha foi renderizada.`);
+  const bubbleTexts = await frame.locator(".duduq-bp-bubble").allInnerTexts();
+  const visibleTexts = bubbleTexts.map((text) => text.trim()).filter(Boolean);
+  assert(visibleTexts.length > 0, `${probe.id}: nenhuma bolha com conteúdo foi renderizada.`);
   assert(
-    visibleTexts.every((text) => /^\s*\d+\s*$/.test(text)),
-    `${probe.id}: Bubble Pop expôs algo além de numeral: ${JSON.stringify(visibleTexts)}`
+    visibleTexts.every((text) => /^\d+$/.test(text)),
+    `${probe.id}: Bubble Pop expôs conteúdo não numérico: ${JSON.stringify(visibleTexts)}`
   );
-  return { visibleTexts };
+  return { bubbleTexts, visibleTexts };
 }
 
 async function verifyTarget(frame, probe) {
