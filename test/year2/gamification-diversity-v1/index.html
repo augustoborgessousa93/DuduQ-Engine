@@ -67,12 +67,13 @@
       .then(()=>load(y2Base+"/year2-v23-multimodal-adapter.js"))
       .then(()=>load(y2Base+`/module-${modulePadded}/module-${modulePadded}-v23-multimodal.js`))
       .then(()=>load(y2Base+"/year2-v24-gamification-diversity-adapter.js"))
+      .then(()=>load(y2Base+"/year2-v24-bubble-exact-alternatives-patch.js"))
       .then(()=>{
         const sourceKey=`module${modulePadded}v23multimodal`;
         const outputKey=`module${modulePadded}v24diversified`;
         const source=window.DUDUQ_CONTENT?.english?.year2?.[sourceKey];
         if(!source)throw new Error("Módulo fonte indisponível: "+sourceKey);
-        const diversified=window.DuduQYear2GamificationDiversity.apply(source);
+        const diversified=window.DuduQYear2GamificationDiversityExact.apply(source);
         window.DUDUQ_CONTENT.english.year2[outputKey]=focusModule(diversified,focusId);
         window.DUDUQ_GAME_CONFIG=Object.freeze({
           engineBase,
