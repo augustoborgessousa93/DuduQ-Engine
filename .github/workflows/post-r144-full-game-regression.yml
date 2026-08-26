@@ -1,0 +1,65 @@
+name: Post R144 Full Game Regression
+
+on:
+  push:
+    branches:
+      - qa/post-r144-full-game-regression
+    paths:
+      - "test/drag-drop/canary-r144/post-deploy-full-game-regression.mjs"
+      - ".github/workflows/post-r144-full-game-regression.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  syntax:
+    name: Syntax + source contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax check post-deploy regression
+        run: node --check test/drag-drop/canary-r144/post-deploy-full-game-regression.mjs
+      - name: Confirm branch is based on promoted R144
+        run: |
+          node -e 'const fs=require("fs"); const c=JSON.parse(fs.readFileSync("engine/channels/canary-v1.json","utf8")); if(c.revision!==144||c.mechanics?.["drag-drop"]?.release!=="2.0.23") throw new Error("Expected Canary R144 / drag-drop 2.0.23"); console.log("PASS — source is R144 / drag-drop 2.0.23")'
+
+  public-smoke:
+    name: Public ${﻿{ matrix.target }}
+    needs: syntax
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: github-pages
+            public_url: https://augustoborgessousa93.github.io/DuduQ-Engine/content/english/year-2/module-03/
+          - target: cloudflare-pages
+            public_url: https://duduq-engine.pages.dev/content/english/year-2/module-03/
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Run public full-game integration smoke
+        env:
+          TARGET_NAME: ${﻿{ matrix.target }}
+          PUBLIC_URL: ${﻿{ matrix.public_url }}
+        run: node test/drag-drop/canary-r144/post-deploy-full-game-regression.mjs
+      - name: Upload post-deploy evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: post-r144-${﻿{ matrix.target }}
+          path: test-results/post-r144-full-game
+          if-no-files-found: warn
+          retention-days: 7
