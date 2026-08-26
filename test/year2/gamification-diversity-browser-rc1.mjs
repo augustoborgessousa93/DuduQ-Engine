@@ -364,14 +364,41 @@ async function verifyBubble(frame, probe) {
   );
 
   await frame.locator(".duduq-bp-bubble").first().waitFor({ state: "visible", timeout: 20_000 });
-  const bubbleTexts = await frame.locator(".duduq-bp-bubble").allInnerTexts();
-  const visibleTexts = bubbleTexts.map((text) => text.trim()).filter(Boolean);
-  assert(visibleTexts.length > 0, `${probe.id}: nenhuma bolha com conteúdo foi renderizada.`);
+  await frame.waitForFunction(() => {
+    const arena = document.querySelector(".duduq-bp-arena")?.getBoundingClientRect();
+    return Array.from(document.querySelectorAll(".duduq-bp-bubble-shell")).some((shell) => {
+      const text = String(shell.textContent || "").trim();
+      if (!/^\d+$/.test(text)) return false;
+      const style = getComputedStyle(shell);
+      const rect = shell.getBoundingClientRect();
+      const opacity = Number.parseFloat(style.opacity || "1");
+      const intersectsViewport = rect.bottom > 0 && rect.top < window.innerHeight && rect.right > 0 && rect.left < window.innerWidth;
+      const intersectsArena = !arena || (rect.bottom > arena.top && rect.top < arena.bottom && rect.right > arena.left && rect.left < arena.right);
+      return style.visibility !== "hidden" && style.display !== "none" && opacity > 0.15 && rect.width > 0 && rect.height > 0 && intersectsViewport && intersectsArena;
+    });
+  }, null, { timeout: 6_000 });
+
+  const bubbleState = await frame.evaluate(() => {
+    const arena = document.querySelector(".duduq-bp-arena")?.getBoundingClientRect();
+    return Array.from(document.querySelectorAll(".duduq-bp-bubble-shell")).map((shell) => {
+      const style = getComputedStyle(shell);
+      const rect = shell.getBoundingClientRect();
+      const text = String(shell.textContent || "").trim();
+      const opacity = Number.parseFloat(style.opacity || "1");
+      const onScreen = rect.bottom > 0 && rect.top < window.innerHeight && rect.right > 0 && rect.left < window.innerWidth;
+      const inArena = !arena || (rect.bottom > arena.top && rect.top < arena.bottom && rect.right > arena.left && rect.left < arena.right);
+      return { text, opacity, onScreen, inArena };
+    });
+  });
+  const visibleTexts = bubbleState
+    .filter((entry) => entry.opacity > 0.15 && entry.onScreen && entry.inArena && entry.text)
+    .map((entry) => entry.text);
+  assert(visibleTexts.length > 0, `${probe.id}: nenhuma bolha numérica ficou visível na arena em até 6s.`);
   assert(
     visibleTexts.every((text) => /^\d+$/.test(text)),
     `${probe.id}: Bubble Pop expôs conteúdo não numérico: ${JSON.stringify(visibleTexts)}`
   );
-  return { bubbleTexts, visibleTexts };
+  return { bubbleState, visibleTexts };
 }
 
 async function verifyTarget(frame, probe) {
