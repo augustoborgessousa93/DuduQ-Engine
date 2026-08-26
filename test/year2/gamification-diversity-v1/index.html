@@ -19,6 +19,7 @@
     const params=new URLSearchParams(location.search);
     const moduleNumber=Math.max(1,Math.min(6,Number(params.get("module")||2)));
     const modulePadded=String(moduleNumber).padStart(2,"0");
+    const focusId=String(params.get("focus")||"").trim();
     const engineBase=new URL("../../..",location.href).href.replace(/\/$/,"");
     window.DUDUQ_ENGINE_BASE=engineBase;
 
@@ -43,6 +44,23 @@
       },25);
     }
 
+    function focusModule(module,id){
+      if(!id)return module;
+      for(const activity of module.activities||[]){
+        const question=(activity.questions||[]).find((item)=>item.id===id);
+        if(!question)continue;
+        return Object.freeze({
+          ...module,
+          id:`${module.id}-qa-focus-${id.toLowerCase()}`,
+          description:`${module.description} — QA focus ${id}.`,
+          activities:[{...activity,id:`${activity.id}-qa-focus`,questions:[question]}],
+          mechanicDistribution:{[activity.mechanic]:1},
+          qaFocus:{id,mechanic:activity.mechanic,sourceModuleId:module.id}
+        });
+      }
+      throw new Error("Questão de foco não encontrada no módulo revisado: "+id);
+    }
+
     const y2Base="../../../content/english/year-2";
     load(y2Base+"/year2-v22-homolog-core.js")
       .then(()=>load(y2Base+"/year2-v22-homolog-editorial-assets.js"))
@@ -54,7 +72,8 @@
         const outputKey=`module${modulePadded}v24diversified`;
         const source=window.DUDUQ_CONTENT?.english?.year2?.[sourceKey];
         if(!source)throw new Error("Módulo fonte indisponível: "+sourceKey);
-        window.DUDUQ_CONTENT.english.year2[outputKey]=window.DuduQYear2GamificationDiversity.apply(source);
+        const diversified=window.DuduQYear2GamificationDiversity.apply(source);
+        window.DUDUQ_CONTENT.english.year2[outputKey]=focusModule(diversified,focusId);
         window.DUDUQ_GAME_CONFIG=Object.freeze({
           engineBase,
           channel:"homolog-year2-gamification-diversity-v1",
@@ -63,7 +82,7 @@
           requiredMechanics:["drag-drop","matching","bubble-pop","target-shooter","word-slash"],
           contentScript:"./noop-content.js?v=diversity-v1"
         });
-        window.DUDUQ_YEAR2_DIVERSITY_HOMOLOG=Object.freeze({module:moduleNumber,sourceKey,outputKey,ready:true});
+        window.DUDUQ_YEAR2_DIVERSITY_HOMOLOG=Object.freeze({module:moduleNumber,sourceKey,outputKey,focusId,ready:true});
         installAutoStart();
         return load("../../../engine/duduq-player-v1.js");
       })
