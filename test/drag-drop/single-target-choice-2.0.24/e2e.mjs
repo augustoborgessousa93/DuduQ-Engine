@@ -98,9 +98,15 @@ async function assertImageProminence(target) {
       fontSize: style ? parseFloat(style.fontSize || "0") : 0
     };
   });
-  assert(metrics.head && metrics.head.height >= 125, `Área visual principal pequena demais: ${JSON.stringify(metrics)}.`);
-  const visuallyLarge = (metrics.media && metrics.media.width >= 110 && metrics.media.height >= 100) || metrics.fontSize >= 64;
-  assert(visuallyLarge, `Imagem/emoji principal não aproveita o espaço: ${JSON.stringify(metrics)}.`);
+
+  /* Compact notebook mode deliberately reserves vertical space for the stable
+     drop zone and CONFIRMAR. Judge prominence by the rendered stimulus itself,
+     not by an arbitrary parent-height threshold that would encourage card growth. */
+  assert(metrics.head && metrics.head.height >= 108, `Área útil do estímulo colapsou: ${JSON.stringify(metrics)}.`);
+  const imageLarge = Boolean(metrics.media && metrics.media.width >= 120 && metrics.media.height >= 105);
+  const emojiLarge = metrics.fontSize >= 72;
+  assert(imageLarge || emojiLarge, `Imagem/emoji principal não aproveita o espaço: ${JSON.stringify(metrics)}.`);
+  return metrics;
 }
 
 async function assertConfirmFullyVisible(frame, viewportHeight, label) {
@@ -125,7 +131,7 @@ async function desktopScenario(browser, viewport, name) {
   const line = await promptLine(frame);
   assert(line === "VEJA, OUÇA E ESCOLHA", `${name}: enunciado ainda está poluído: ${JSON.stringify(line)}.`);
   await assertCleanAlternatives(frame);
-  await assertImageProminence(target);
+  const stimulusMetrics = await assertImageProminence(target);
 
   const bankItems = frame.locator(".duduq-dd2-bank .duduq-dd2-item");
   const firstBox = await box(bankItems.nth(0), `${name} item 1`);
@@ -135,6 +141,8 @@ async function desktopScenario(browser, viewport, name) {
   const targetBefore = await box(target, `${name} target inicial`);
   const zoneBefore = await box(target.locator(".duduq-dd2-zone"), `${name} zone inicial`);
   assert(zoneBefore.height <= 68, `${name}: drop zone alta demais antes da seleção (${zoneBefore.height}).`);
+  await page.screenshot({ path: `${RESULTS}/${name}-initial.png`, fullPage: true });
+  console.log(`${name} stimulus=${JSON.stringify(stimulusMetrics)} target=${Math.round(targetBefore.width)}x${Math.round(targetBefore.height)} zone=${Math.round(zoneBefore.height)}`);
 
   const opt1 = frame.locator('.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="opt-1"]').first();
   await drag(page, opt1, target);
@@ -207,7 +215,7 @@ async function mobileScenario(browser) {
   const line = await promptLine(frame);
   assert(line === "VEJA, OUÇA E ESCOLHA", `mobile: enunciado poluído: ${JSON.stringify(line)}.`);
   await assertCleanAlternatives(frame);
-  await assertImageProminence(target);
+  const stimulusMetrics = await assertImageProminence(target);
 
   const items = frame.locator(".duduq-dd2-bank .duduq-dd2-item");
   const a = await box(items.nth(0), "mobile item 1");
@@ -217,6 +225,9 @@ async function mobileScenario(browser) {
   assert(c.y > a.y + 20, "mobile: alternativas não quebraram para a segunda linha.");
 
   const targetBefore = await box(target, "mobile target inicial");
+  await page.screenshot({ path: `${RESULTS}/mobile-390x844-initial.png`, fullPage: true });
+  console.log(`mobile stimulus=${JSON.stringify(stimulusMetrics)} target=${Math.round(targetBefore.width)}x${Math.round(targetBefore.height)}`);
+
   await items.nth(0).click();
   const placedId = await target.locator(".duduq-dd2-item").first().getAttribute("data-dd2-item-id");
   assert(placedId, "mobile: toque não moveu alternativa para SOLTE AQUI.");
