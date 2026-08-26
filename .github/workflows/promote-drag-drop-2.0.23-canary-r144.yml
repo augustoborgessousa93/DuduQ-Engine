@@ -6,20 +6,22 @@ on:
       - promotion/drag-drop-2.0.23-canary-r144
     paths:
       - "engine/channels/canary-v1.json"
-      - "engine/channels/rollback/canary-r143-before-drag-drop-2.0.23.json"
+      - "engine/channels/rollback/**"
       - "engine/releases/mechanics/drag-drop/2.0.23/**"
       - "content/english/year-2/module-03/**"
       - "content/english/year-2/year2-v23-dragdrop-visual-patch.js"
       - "test/drag-drop/**"
+      - "docs/release/drag-drop-2.0.23-canary-r144.md"
       - ".github/workflows/promote-drag-drop-2.0.23-canary-r144.yml"
   pull_request:
     branches:
       - main
     paths:
       - "engine/channels/canary-v1.json"
-      - "engine/channels/rollback/canary-r143-before-drag-drop-2.0.23.json"
+      - "engine/channels/rollback/**"
       - "content/english/year-2/module-03/**"
       - "test/drag-drop/canary-r144/**"
+      - "docs/release/drag-drop-2.0.23-canary-r144.md"
       - ".github/workflows/promote-drag-drop-2.0.23-canary-r144.yml"
   workflow_dispatch:
 
