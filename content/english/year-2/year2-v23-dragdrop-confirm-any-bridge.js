@@ -11,13 +11,14 @@
    - audio alternatives remain independently clickable while another option is playing,
      so the shared audio controller can stop the previous option and start the new one;
    - the movable card remains drag-enabled and also keeps tap-to-place as an accessible fallback;
+   - single-target capacity badge is hidden because 1/1 adds no learner information;
    - sequence/classification/regular association remain untouched;
    - no candidate 2.0.23 CSS/layout is imported.
 */
 (function () {
   "use strict";
 
-  const VERSION = "1.3.0-year2-separated-audio-drag-active-dd2";
+  const VERSION = "1.3.1-year2-separated-audio-drag-clean-target-dd2";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqYear2ConfirmAnyActiveDD2";
   const nativeDefineProperty = Object.defineProperty;
@@ -44,8 +45,6 @@
 
     let prepared = html;
 
-    /* Infer the single-target contract from the payload already produced by
-       adapter 2.0.18/2.0.22. This keeps answer.value/sourceAnswer untouched. */
     prepared = replaceRequired(
       prepared,
       `      strategy: payload.strategy || "association",`,
@@ -58,7 +57,6 @@
       `        snapCorrectItems: false,\n        singleTargetChoice: (function () {\n          var target = payload.targets && payload.targets.length === 1 ? payload.targets[0] : null;\n          var items = Array.isArray(payload.items) ? payload.items : [];\n          var requiredForTarget = target ? items.filter(function (item) { return item.required !== false && item.targetId === target.id; }) : [];\n          return Boolean(target && Number(target.capacity || 1) === 1 && items.length >= 2 && requiredForTarget.length === 1 && items.some(function (item) { return item.required === false; }));\n        })(),\n        correctChoiceId: (function () {\n          var target = payload.targets && payload.targets.length === 1 ? payload.targets[0] : null;\n          var items = Array.isArray(payload.items) ? payload.items : [];\n          var correct = target ? items.find(function (item) { return item.required !== false && item.targetId === target.id; }) : null;\n          return correct ? correct.id : undefined;\n        })()\n      }`
     );
 
-    /* Diagnostic markers only; no shared-layout rules are changed. */
     prepared = replaceRequired(
       prepared,
       `"data-dd2-target-id":target.id,`,
@@ -71,8 +69,6 @@
       `"data-placed":placed ? "true" : "false",\n          "data-dd2-item-id":item.id,`
     );
 
-    /* Single-target listening cards get a dedicated sibling audio control.
-       The card itself remains the movable/tappable answer surface. */
     prepared = replaceRequired(
       prepared,
       `return React.createElement("div", { className:"duduq-dd2-item-shell", key:item.id },`,
@@ -91,15 +87,12 @@
       `          hasAudio && question.strategy !== "single-target-choice" ? React.createElement("span", { className:"duduq-dd2-audio-mark", "data-playing":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id) ? "true" : "false", "aria-hidden":"true" }, React.createElement(TSAudioIcon,null)) : null\n        ),\n        hasAudio && question.strategy === "single-target-choice" && !placed ? React.createElement("button", {\n          type:"button",\n          className:"duduq-dd2-item-audio",\n          "data-dd2-audio-item-id":item.id,\n          "data-playing":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id) ? "true" : "false",\n          disabled:disabled || feedbackState === "success",\n          onClick:function (event) { event.stopPropagation(); onInteraction && onInteraction(); playValueAudio(item, "item"); },\n          "aria-label":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id)\n            ? ("Parar áudio da alternativa " + dd2Accessible(item))\n            : ("Ouvir alternativa " + dd2Accessible(item))\n        }, React.createElement(TSAudioIcon,null)) : null\n      );`
     );
 
-    /* Tap/click outside the dedicated audio button behaves like choosing one movable card.
-       This is retained as a keyboard/touch fallback; drag remains fully native. */
     prepared = replaceRequired(
       prepared,
       `var onItemClick = useCallback(function (item) {\n      if (suppressClick.current) { suppressClick.current = false; return; }\n      if (disabled || feedbackState === "success") return;\n      setSelected(function (current) { return current === item.id ? null : item.id; });\n      onInteraction && onInteraction();\n      if (item.audioAssetKey || item.spokenText) playValueAudio(item, "item");\n    }, [disabled, feedbackState, onInteraction, playValueAudio]);`,
       `var onItemClick = useCallback(function (item) {\n      if (suppressClick.current) { suppressClick.current = false; return; }\n      if (disabled || feedbackState === "success" || retryAnimating) return;\n      if (question.strategy === "single-target-choice") {\n        var singleTarget = question.targets && question.targets[0];\n        if (singleTarget) {\n          place(item.id, singleTarget.id, "tap");\n          return;\n        }\n      }\n      setSelected(function (current) { return current === item.id ? null : item.id; });\n      onInteraction && onInteraction();\n      if (item.audioAssetKey || item.spokenText) playValueAudio(item, "item");\n    }, [disabled, feedbackState, onInteraction, place, playValueAudio, question.strategy, question.targets, retryAnimating]);`
     );
 
-    /* Any selected card makes the choice ready; do not leak correctness. */
     prepared = replaceRequired(
       prepared,
       `var requiredItems = question.items.filter(function (item) { return item.required !== false; });\n    var positionedCount = requiredItems.filter(function (item) { return Boolean(locationOf(item.id)); }).length;\n    var ready = requiredItems.length > 0 && positionedCount === requiredItems.length;`,
@@ -118,7 +111,6 @@
       `var correct = question.strategy === "single-target-choice"\n        ? question.items.filter(function (item) { return Boolean(locationOf(item.id)) && incorrect.indexOf(item.id) < 0; }).map(function (item) { return item.id; })\n        : question.items.filter(function (item) { return item.required !== false && incorrect.indexOf(item.id) < 0; }).map(function (item) { return item.id; });`
     );
 
-    /* Reuse the already-homologated 2.0.22 red-feedback timer (850ms). */
     prepared = replaceRequired(
       prepared,
       `if (question.strategy === "sequence" && incorrect.length > 0) {`,
@@ -137,7 +129,6 @@
       `setAnnouncement(question.strategy === "single-target-choice"\n            ? "Ouça novamente e tente outra vez."\n            : (correct.length ? "Os itens corretos ficaram em verde. Complete as posições restantes." : "Tente novamente."));`
     );
 
-    /* Keep CONFIRMAR visible in idle state, disabled only until a card is placed. */
     prepared = replaceRequired(
       prepared,
       `ready && feedbackState === "idle" ? React.createElement("div", { className:"duduq-matching-action-slot duduq-dd2-actions" },`,
@@ -150,16 +141,12 @@
       `className:"duduq-matching-primary duduq-dd2-confirm",\n              disabled:disabled || !ready,`
     );
 
-    /* Listening association: do not lock the other option-audio controls while
-       one option is playing. The shared audio controller owns stop/switch behavior. */
     prepared = replaceRequired(
       prepared,
       `disabled: disabled || feedbackState === "success" || audio.isPlaying && !playing,`,
       `disabled: disabled || feedbackState === "success",`
     );
 
-    /* Year-2-only internal alignment for the separate option-audio button.
-       No shared mechanic stylesheet, geometry scale, zoom or shell structure is replaced. */
     const listeningChoiceCss = `<style id="duduq-year2-dd-listening-choice-control">
 .duduq-dd2-item-shell-audio-choice {
   display: grid !important;
@@ -170,6 +157,9 @@
 .duduq-dd2-item-shell-audio-choice > .duduq-dd2-item {
   width: 100% !important;
   min-width: 0 !important;
+}
+.duduq-dd2-target[data-single-target-choice="true"] > .duduq-dd2-capacity {
+  display: none !important;
 }
 .duduq-dd2-item-audio {
   box-sizing: border-box;
@@ -199,7 +189,6 @@
 }
 </style>`;
 
-    /* Sentinel for diagnostics and to prevent accidental double-patching. */
     if (!prepared.includes("</head>")) fail("runtime sem </head> para sentinela Year 2.");
     prepared = prepared.replace(
       "</head>",
@@ -275,9 +264,10 @@
     targetRelease: "2.0.22",
     hookTiming: "before-runtime-build",
     layoutModified: true,
-    layoutScope: "single-target-choice-option-audio-control-only",
+    layoutScope: "single-target-choice-option-audio-and-capacity-cleanup-only",
     alternativeAudioSwitchEnabled: true,
     separatedAudioAndAnswerActions: true,
-    tapToPlaceFallbackPreserved: true
+    tapToPlaceFallbackPreserved: true,
+    singleTargetCapacityBadgeHidden: true
   });
 })();
