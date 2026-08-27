@@ -5,6 +5,7 @@ on:
     paths:
       - "content/english/year-2/**"
       - "test/year2/public-entry-visual-ready-rc2.mjs"
+      - "test/year2/bubble-runtime-asset-bridge-diagnostic-rc3.mjs"
       - ".github/workflows/year2-public-entry-visual-ready-rc2.yml"
   push:
     branches:
@@ -12,6 +13,7 @@ on:
     paths:
       - "content/english/year-2/**"
       - "test/year2/public-entry-visual-ready-rc2.mjs"
+      - "test/year2/bubble-runtime-asset-bridge-diagnostic-rc3.mjs"
       - ".github/workflows/year2-public-entry-visual-ready-rc2.yml"
 
 permissions:
@@ -36,6 +38,9 @@ jobs:
       - name: Syntax check visual-ready test
         run: node --check test/year2/public-entry-visual-ready-rc2.mjs
 
+      - name: Syntax check Bubble runtime diagnostic
+        run: node --check test/year2/bubble-runtime-asset-bridge-diagnostic-rc3.mjs
+
       - name: Install Playwright Chromium
         run: |
           npm install --no-save playwright@1.55.0
@@ -52,6 +57,11 @@ jobs:
           cat /tmp/duduq-year2-visual-ready-http.log
           exit 1
 
+      - name: Diagnose Bubble M02 asset bridge
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/bubble-runtime-asset-bridge-diagnostic-rc3.mjs
+
       - name: Verify actual public mechanics on desktop and mobile
         env:
           BASE_URL: http://127.0.0.1:4173
@@ -62,6 +72,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: year2-public-entry-visual-ready-rc2
-          path: test-results/year2-public-entry-visual-ready-rc2
+          path: |
+            test-results/year2-public-entry-visual-ready-rc2
+            test-results/year2-bubble-runtime-asset-bridge-diagnostic-rc3
           if-no-files-found: warn
           retention-days: 7
