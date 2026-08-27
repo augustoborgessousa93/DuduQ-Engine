@@ -148,7 +148,7 @@ async function exerciseSingleTarget(browser, viewport, name) {
 
     await assertSmartImagesLoaded(frame, ".duduq-dd2-bank .duduq-dd2-item img", `${name}/${info.questionId} imagens da bolsa`);
 
-    const confirm = frame.locator(".duduq-dd2-confirm");
+    let confirm = frame.locator(".duduq-dd2-confirm");
     await confirm.waitFor({ state: "visible", timeout: 8_000 });
     assert(await confirm.isDisabled(), `${name}/${info.questionId}: CONFIRMAR deveria iniciar desabilitado.`);
 
@@ -162,14 +162,17 @@ async function exerciseSingleTarget(browser, viewport, name) {
     await wrongInTarget.waitFor({ state: "visible", timeout: 2_500 });
     await page.screenshot({ path: path.join(OUTPUT_DIR, `${name}-${info.questionId}-wrong-red.png`), fullPage: false });
 
+    // Durante feedbackState=retry, o Player pode ocultar a ação. O contrato
+    // pedagógico é alvo limpo + item devolvido; a próxima escolha reabre idle.
     await frame.locator(`.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="${wrongId}"]`).waitFor({ state: "visible", timeout: 3_500 });
     await frame.waitForFunction((id) => !document.querySelector(`.duduq-dd2-target .duduq-dd2-item[data-dd2-item-id="${id}"]`), wrongId, { timeout: 3_500 });
-    assert(await confirm.isDisabled(), `${name}/${info.questionId}: CONFIRMAR deveria voltar a desabilitar após erro e limpeza do alvo.`);
 
     const correct = frame.locator(`.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="${info.correctSource}"]`).first();
     await correct.click();
     await target.locator(`.duduq-dd2-item[data-dd2-item-id="${info.correctSource}"]`).waitFor({ state: "visible", timeout: 4_000 });
-    assert(!(await confirm.isDisabled()), `${name}/${info.questionId}: CONFIRMAR não habilitou com alternativa correta.`);
+    confirm = frame.locator(".duduq-dd2-confirm");
+    await confirm.waitFor({ state: "visible", timeout: 4_000 });
+    assert(!(await confirm.isDisabled()), `${name}/${info.questionId}: CONFIRMAR não reapareceu habilitado na nova tentativa.`);
     await confirm.click();
     await frame.locator('.duduq-engine-feedback[data-state="success"]').first().waitFor({ state: "visible", timeout: 4_000 });
     await page.screenshot({ path: path.join(OUTPUT_DIR, `${name}-${info.questionId}-correct.png`), fullPage: false });
