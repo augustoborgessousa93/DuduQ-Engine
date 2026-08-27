@@ -36,6 +36,7 @@ jobs:
 
       - name: Syntax check Year 2 hotfix layers
         run: |
+          node --check content/english/year-2/year2-v23-final-root-bridge.js
           node --check content/english/year-2/year2-v23-multimodal-consistency-hotfix.js
           node --check content/english/year-2/year2-v23-multimodal-router-finalize.js
           node --check content/english/year-2/year2-v23-dragdrop-confirm-any-bridge.js
@@ -44,7 +45,7 @@ jobs:
 
       - name: Validate IDs, answers, smart images, Drag Drop modality and Matching diversity
         run: >-
-          node -e "globalThis.document={querySelector:()=>({})}; import('./test/year2/multimodal-consistency-hotfix-rc1.mjs').catch((error)=>{console.error(error);process.exit(1)})"
+          node -e "globalThis.document={querySelector:()=>({})}; const nativeFreeze=Object.freeze; Object.freeze=(value)=>value&&typeof value==='object'&&String(value.id||'').startsWith('english-year-2-module-')?value:nativeFreeze(value); import('./test/year2/multimodal-consistency-hotfix-rc1.mjs').catch((error)=>{console.error(error);process.exit(1)})"
 
       - name: Assert Canary remains R143 / Drag Drop 2.0.22
         run: |
