@@ -207,6 +207,11 @@ async function verifyMatching(page, frame, probe) {
   assert(imageInfo.every((entry) => entry.src && entry.width > 0 && entry.height > 0), `${probe.id}: imagem de Matching ausente/quebrada.`);
   assert(imageInfo.every((entry) => !/Imagem%20generica\.svg/i.test(entry.src)), `${probe.id}: imagem genérica usada no Matching.`);
 
+  // Responsive geometry must be checked while the mechanic iframe is still
+  // attached. A successful confirmation legitimately completes the one-step
+  // QA session and the Host may remove that iframe immediately afterwards.
+  await noHorizontalOverflow(frame, probe.id);
+
   for (let index = 0; index < n; index += 1) {
     await left.nth(index).click();
     await right.nth(index).click();
@@ -218,7 +223,6 @@ async function verifyMatching(page, frame, probe) {
   await page.waitForFunction(() => window.DuduQ?.getSession?.()?.completed === true, null, { timeout: 8_000 });
   const session = await page.evaluate(() => window.DuduQ?.getSession?.() || null);
   assert(session?.results?.length === 1, `${probe.id}: pareamento correto não concluiu.`);
-  await noHorizontalOverflow(frame, probe.id);
   return { pairCount:n, images:imageInfo };
 }
 
