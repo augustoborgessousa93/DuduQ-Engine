@@ -12,9 +12,10 @@
   }
   if (factory.__mechanicsRegressionRouterCompatApplied) return;
 
-  const VERSION = "1.0.3-mechanics-regression-word-slash-quarantine";
+  const VERSION = "1.0.4-mechanics-regression-bubble-runtime-bridge";
   const WORD_SLASH_QUARANTINE_REASON = "WORD_SLASH_1_0_17_OBJECT_SPAWN_RUNTIME_LOCK";
   const originalBuild = factory.buildModule.bind(factory);
+  const bubbleAssetUrls = new Set();
 
   function questions(module) {
     return (module?.activities || []).flatMap((activity) => activity?.questions || []);
@@ -74,6 +75,10 @@
     disableMainImage(question);
     for (const alternative of question.alternatives || []) {
       if (!alternative || typeof alternative !== "object") continue;
+      const imageAssetKey = String(alternative?.metadata?.imageAssetKey || "").trim();
+      if (/^(?:https?:|data:image\/)/i.test(imageAssetKey)) {
+        bubbleAssetUrls.add(imageAssetKey);
+      }
       alternative.image = {
         ...(alternative.image || {}),
         enabled: false,
@@ -231,6 +236,62 @@
   }
 
   /*
+   * Bubble Pop 1.0.31 intentionally resolves imageAssetKey through its own
+   * BUBBLE_POP_ASSETS map. Year 2 smart assets are official absolute URLs, so
+   * the adapter preserves the URL as imageAssetKey but the immutable runtime
+   * does not know that key. The public adapter mounts the runtime by direct
+   * iframe.src, therefore a parent fetch() rewrite cannot affect it.
+   *
+   * This Year-2-only bridge runs in the capture phase of the iframe load event,
+   * before the adapter's target load handler posts DUDUQ_LOAD_CONTENT. It adds
+   * only already-resolved official URLs as identity entries (url -> url) to the
+   * runtime asset map. Release files and Canary remain untouched.
+   */
+  function injectBubbleRuntimeAssets(frame) {
+    if (!frame || frame.tagName !== "IFRAME") return false;
+    try {
+      const runtimeWindow = frame.contentWindow;
+      if (!runtimeWindow) return false;
+      const assets = runtimeWindow.BUBBLE_POP_ASSETS ||
+        runtimeWindow.eval?.('typeof BUBBLE_POP_ASSETS !== "undefined" ? BUBBLE_POP_ASSETS : null');
+      if (!assets || typeof assets !== "object") return false;
+      let injected = 0;
+      for (const url of bubbleAssetUrls) {
+        if (!url) continue;
+        if (assets[url] !== url) {
+          assets[url] = url;
+          injected += 1;
+        }
+      }
+      runtimeWindow.__DUDUQ_YEAR2_BUBBLE_ASSET_BRIDGE__ = {
+        version: VERSION,
+        injected,
+        knownOfficialUrls: bubbleAssetUrls.size
+      };
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function installBubbleRuntimeAssetBridge() {
+    if (window.__DUDUQ_YEAR2_BUBBLE_RUNTIME_ASSET_BRIDGE__) return;
+    document.addEventListener(
+      "load",
+      function year2BubbleRuntimeLoadCapture(event) {
+        const frame = event.target;
+        if (!frame || frame.tagName !== "IFRAME") return;
+        const src = String(frame.getAttribute("src") || frame.src || "");
+        if (!/\/DUDUQ_BUBBLE_POP\.html(?:\?|$)/i.test(src)) return;
+        injectBubbleRuntimeAssets(frame);
+        window.setTimeout(() => injectBubbleRuntimeAssets(frame), 0);
+      },
+      true
+    );
+    window.__DUDUQ_YEAR2_BUBBLE_RUNTIME_ASSET_BRIDGE__ = VERSION;
+  }
+
+  /*
    * RC1 temporarily changed the fetched Word Slash launch trajectory and first
    * spawn delay. Diagnostics RC3/RC4 showed that the 1.0.17 runtime locks when
    * the first object enters React/DOM even without World Fusion. This guard keeps
@@ -278,11 +339,14 @@
     }
 
     const synchronizedActivities = synchronizeActivityMechanics(module);
+    installBubbleRuntimeAssetBridge();
     installCanonicalWordSlashRuntimeGuard();
 
     const audit = Object.freeze({
       version: VERSION,
       patchedBubbleItems: bubbleItems,
+      bubbleRuntimeAssetBridgeInstalled: true,
+      bubbleRuntimeOfficialUrlCount: bubbleAssetUrls.size,
       quarantinedWordSlashItems,
       synchronizedActivities,
       activityMechanicsHomogeneous: true,
@@ -292,6 +356,7 @@
       optionImageAssetKeyPreserved: true,
       canonicalWordSlashPhysicsRestored: true,
       wordSlashReleaseModified: false,
+      bubblePopReleaseModified: false,
       canaryModified: false,
       contentChanged: false,
       sourceAnswersPreserved: true
