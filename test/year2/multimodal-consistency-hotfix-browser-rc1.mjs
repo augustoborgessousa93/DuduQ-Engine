@@ -123,8 +123,11 @@ async function assertAudioAlternativeContract(frame, info, label) {
   assert(count >= 2 && count <= 4, `${label}: esperado 2–4 alternativas, encontrado ${count}.`);
   assert((await bankItems.locator("img").count()) === 0, `${label}: alternativas continuam imagem-primárias.`);
 
-  const audioButtons = bankItems.locator('button[aria-label^="Ouvir "], button[aria-label^="Parar áudio"]');
-  assert(await audioButtons.count() === count, `${label}: nem toda alternativa possui controle de áudio (${await audioButtons.count()}/${count}).`);
+  // O runtime 2.0.18 herdado pela 2.0.22 mantém a classe histórica UDD
+  // para o botão de áudio, embora o restante da casca ativa use dd2.
+  const audioButtons = frame.locator(".duduq-dd2-bank .duduq-udd-item-audio, .duduq-dd2-bank .duduq-dd2-item-audio");
+  const audioCount = await audioButtons.count();
+  assert(audioCount === count, `${label}: nem toda alternativa possui controle de áudio (${audioCount}/${count}).`);
 
   const visibleText = await bankItems.evaluateAll((nodes) => nodes.map((node) => String(node.innerText || "").trim().replace(/\s+/g, " ")));
   const sourceWords = (info.sourceAlternatives || []).map((value) => String(value).trim()).filter(Boolean);
@@ -133,25 +136,24 @@ async function assertAudioAlternativeContract(frame, info, label) {
   }
 
   for (let index = 0; index < count; index += 1) {
+    const aria = String(await audioButtons.nth(index).getAttribute("aria-label") || "");
+    assert(/^(Ouvir|Parar)/i.test(aria), `${label}: controle ${index + 1} sem rótulo auditivo acessível: ${aria}`);
     assert(!(await audioButtons.nth(index).isDisabled()), `${label}: áudio da alternativa ${index + 1} iniciou desabilitado.`);
   }
 
-  // Exercita a troca de áudio. Em ambientes headless o TTS pode terminar antes
-  // da amostragem; o contrato obrigatório é que o segundo controle nunca fique
-  // bloqueado e que nunca haja dois cards marcados como tocando ao mesmo tempo.
   await audioButtons.nth(0).click();
   await frame.waitForTimeout(80);
   assert(!(await audioButtons.nth(1).isDisabled()), `${label}: outro áudio ficou bloqueado enquanto uma opção tocava.`);
-  const firstWasPlaying = await bankItems.nth(0).getAttribute("data-playing") === "true";
+  const firstWasPlaying = await audioButtons.nth(0).getAttribute("data-playing") === "true";
   await audioButtons.nth(1).click();
   await frame.waitForTimeout(80);
-  const playingStates = await bankItems.evaluateAll((nodes) => nodes.map((node) => node.getAttribute("data-playing") === "true"));
+  const playingStates = await audioButtons.evaluateAll((nodes) => nodes.map((node) => node.getAttribute("data-playing") === "true"));
   assert(playingStates.filter(Boolean).length <= 1, `${label}: mais de um áudio ficou marcado como ativo simultaneamente.`);
   if (firstWasPlaying && playingStates.some(Boolean)) {
     assert(playingStates[0] === false, `${label}: o primeiro áudio não foi interrompido ao acionar o segundo.`);
   }
 
-  return { count, visibleText, firstWasPlaying, playingStates };
+  return { count, audioCount, visibleText, firstWasPlaying, playingStates };
 }
 
 async function exerciseListeningAssociation(browser, viewport, name) {
@@ -191,7 +193,6 @@ async function exerciseListeningAssociation(browser, viewport, name) {
     await confirm.waitFor({ state: "visible", timeout: 8_000 });
     assert(await confirm.isDisabled(), `${name}/${info.questionId}: CONFIRMAR deveria iniciar desabilitado.`);
 
-    // Clica no corpo do card, longe do botão de áudio, para simular tap/drag choice.
     const wrong = frame.locator(`.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="${wrongId}"]`).first();
     await wrong.click({ position: { x: 20, y: 20 } });
     await target.locator(`.duduq-dd2-item[data-dd2-item-id="${wrongId}"]`).waitFor({ state: "visible", timeout: 4_000 });
@@ -207,7 +208,6 @@ async function exerciseListeningAssociation(browser, viewport, name) {
     const correct = frame.locator(`.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="${info.correctSource}"]`).first();
     await correct.click({ position: { x: 20, y: 20 } });
     await target.locator(`.duduq-dd2-item[data-dd2-item-id="${info.correctSource}"]`).waitFor({ state: "visible", timeout: 4_000 });
-    // A imagem central deve permanecer visível depois do drop.
     await assertCentralImage(target, `${name}/${info.questionId} após drop`);
     confirm = frame.locator(".duduq-dd2-confirm");
     await confirm.waitFor({ state: "visible", timeout: 4_000 });
