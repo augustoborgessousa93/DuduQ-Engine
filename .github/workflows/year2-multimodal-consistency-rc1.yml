@@ -1,0 +1,100 @@
+name: Year 2 Multimodal Consistency RC1
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "content/english/year-2/**"
+      - "test/year2/multimodal-consistency-hotfix-rc1.mjs"
+      - "test/year2/multimodal-consistency-hotfix-browser-rc1.mjs"
+      - ".github/workflows/year2-multimodal-consistency-rc1.yml"
+  push:
+    branches:
+      - hotfix/year2-multimodal-dd-matching-diversity
+    paths:
+      - "content/english/year-2/**"
+      - "test/year2/multimodal-consistency-hotfix-rc1.mjs"
+      - "test/year2/multimodal-consistency-hotfix-browser-rc1.mjs"
+      - ".github/workflows/year2-multimodal-consistency-rc1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-pedagogical-contract:
+    name: 90-item multimodal + pedagogical contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Syntax check Year 2 hotfix layers
+        run: |
+          node --check content/english/year-2/year2-v23-multimodal-consistency-hotfix.js
+          node --check content/english/year-2/year2-v23-multimodal-router-finalize.js
+          node --check content/english/year-2/year2-v23-dragdrop-confirm-any-bridge.js
+          node --check test/year2/multimodal-consistency-hotfix-rc1.mjs
+          node --check test/year2/multimodal-consistency-hotfix-browser-rc1.mjs
+
+      - name: Validate IDs, answers, smart images, Drag Drop modality and Matching diversity
+        run: node test/year2/multimodal-consistency-hotfix-rc1.mjs
+
+      - name: Assert Canary remains R143 / Drag Drop 2.0.22
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const channel = JSON.parse(fs.readFileSync('engine/channels/canary-v1.json', 'utf8'));
+          if (channel.revision !== 143) throw new Error(`Canary revision changed: ${channel.revision}`);
+          if (channel.mechanics?.['drag-drop']?.release !== '2.0.22') {
+            throw new Error(`Drag Drop Canary changed: ${channel.mechanics?.['drag-drop']?.release}`);
+          }
+          console.log('PASS — Canary R143 and Drag Drop 2.0.22 preserved.');
+          NODE
+
+  chromium-functional:
+    name: Chromium confirm-any + smart visual review
+    needs: static-pedagogical-contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local DuduQ server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-http.log 2>&1 &
+          echo $! > /tmp/duduq-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-http.log
+          exit 1
+
+      - name: Run Year 2 functional browser gate
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/multimodal-consistency-hotfix-browser-rc1.mjs
+
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year2-multimodal-consistency-rc1
+          path: test-results/year2-multimodal-consistency-rc1
+          if-no-files-found: warn
+          retention-days: 7
