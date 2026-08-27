@@ -7,13 +7,15 @@
    - correctness is evaluated only after CONFIRMAR;
    - wrong choice stays red briefly, returns to the bank and clears the target;
    - correct choice follows the normal success path;
+   - audio alternatives remain independently clickable while another option is playing,
+     so the shared audio controller can stop the previous option and start the new one;
    - sequence/classification/regular association remain untouched;
    - no candidate 2.0.23 CSS/layout is imported.
 */
 (function () {
   "use strict";
 
-  const VERSION = "1.1.0-year2-confirm-any-active-dd2";
+  const VERSION = "1.2.0-year2-listening-audio-switch-active-dd2";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqYear2ConfirmAnyActiveDD2";
   const nativeDefineProperty = Object.defineProperty;
@@ -125,6 +127,14 @@
       `className:"duduq-matching-primary duduq-dd2-confirm",\n              disabled:disabled || !ready,`
     );
 
+    /* Listening association: do not lock the other option-audio controls while
+       one option is playing. The shared audio controller owns stop/switch behavior. */
+    prepared = replaceRequired(
+      prepared,
+      `disabled: disabled || feedbackState === "success" || audio.isPlaying && !playing,`,
+      `disabled: disabled || feedbackState === "success",`
+    );
+
     /* Sentinel for diagnostics and to prevent accidental double-patching. */
     if (!prepared.includes("</head>")) fail("runtime sem </head> para sentinela Year 2.");
     prepared = prepared.replace(
@@ -200,6 +210,7 @@
     canaryModified: false,
     targetRelease: "2.0.22",
     hookTiming: "before-runtime-build",
-    layoutModified: false
+    layoutModified: false,
+    alternativeAudioSwitchEnabled: true
   });
 })();
