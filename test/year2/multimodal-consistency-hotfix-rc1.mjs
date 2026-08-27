@@ -22,14 +22,32 @@ function sourceLabels(question) {
     String(alternative?.metadata?.sourceWrittenLabel ?? alternative?.audio?.text ?? alternative?.text ?? "")
   );
 }
+function sourceAlternativeTypes(question) {
+  const stored = question?.metadata?.sourceAlternativeTypesV23;
+  return Array.isArray(stored) ? stored.map((value) => String(value).toLowerCase()) : [];
+}
+function sourceAudioAlternatives(question) {
+  const types = sourceAlternativeTypes(question);
+  return types.length >= 2 && types.every((type) => type === "audio");
+}
 function hasAudioStimulus(question) {
   return question?.audio?.enabled === true || question?.metadata?.stimulusAudio?.enabled === true;
+}
+function targetImageSources(question) {
+  const targets = [
+    ...(Array.isArray(question?.metadata?.targets) ? question.metadata.targets : []),
+    ...(Array.isArray(question?.metadata?.dragDrop?.targets) ? question.metadata.dragDrop.targets : [])
+  ];
+  return targets.map((target) =>
+    String(target?.imageSrc || target?.imageUrl || target?.image || target?.imageAssetKey || "").trim()
+  ).filter(Boolean);
 }
 function hasImageStimulus(question) {
   return Boolean(
     (question?.image?.enabled && question?.image?.src) ||
     (question?.media?.image?.enabled && question?.media?.image?.src) ||
-    (question?.stimulus?.image?.enabled && question?.stimulus?.image?.src)
+    (question?.stimulus?.image?.enabled && question?.stimulus?.image?.src) ||
+    targetImageSources(question).length
   );
 }
 function singleTargetChoiceShape(question) {
@@ -49,6 +67,9 @@ function visualSource(value) {
 globalThis.window = globalThis;
 window.DUDUQ_PUBLIC_ENTRY = Object.freeze({ year: 2, sourceVersion: "2.3" });
 window.DUDUQ_CONTENT = {};
+if (!globalThis.document) {
+  globalThis.document = { querySelector: () => ({}) };
+}
 if (typeof globalThis.Response !== "function") throw new Error("Node runtime must expose Response.");
 
 const matchingValidatorFixture = `rightIds.forEach((id) => {\n      if (!rightDegrees.get(id)) {\n        issues.push({ path: \`rightItems:\${id}\`, code: "UNPAIRED_RIGHT_ITEM", message: "Todo item da direita deve participar de ao menos uma conexão correta.", severity: "error" });\n      }\n    });`;
@@ -74,13 +95,16 @@ run("content/english/year-2/year2-v23-manual-review-hotfix-v2.js");
 run("content/english/year-2/year2-v23-manual-review-router-compat.js");
 run("content/english/year-2/year2-v23-mechanics-regression-hotfix.js");
 run("content/english/year-2/year2-v23-mechanics-regression-router-compat.js");
+run("content/english/year-2/year2-v23-final-root-bridge.js");
 run("content/english/year-2/year2-v23-multimodal-consistency-hotfix.js");
+run("content/english/year-2/year2-v23-dragdrop-modality-finalize.js");
 run("content/english/year-2/year2-v23-multimodal-router-finalize.js");
 run("content/english/year-2/year2-v23-dragdrop-visual-patch.js");
 
 let total = 0;
 let singleTargetChoices = 0;
 let audioToImageChoices = 0;
+let imageToAudioChoices = 0;
 let targetVisualQuestions = 0;
 let bubbleVisualQuestions = 0;
 let matchingQuestions = 0;
@@ -109,8 +133,20 @@ for (let module = 1; module <= 6; module += 1) {
       assert(question?.metadata?.confirmOnAnySelection === true, `${question.id}: CONFIRMAR não está marcado para qualquer seleção.`);
       assert(question?.metadata?.replacePreviousChoice === true, `${question.id}: troca de alternativa não está habilitada.`);
 
-      if (hasAudioStimulus(question) && !hasImageStimulus(question)) {
-        const alternatives = question.alternatives || [];
+      const alternatives = question.alternatives || [];
+      const visualStimulus = hasImageStimulus(question);
+
+      if (visualStimulus && sourceAudioAlternatives(question)) {
+        const stimulusSources = targetImageSources(question);
+        assert(
+          stimulusSources.some(visualSource) || visualSource(question?.image?.src) || visualSource(question?.media?.image?.src),
+          `${question.id}: modalidade imagem/contexto→áudio sem estímulo visual resolvido.`
+        );
+        assert(alternatives.every((alternative) => alternative?.audio?.enabled === true), `${question.id}: imagem/contexto→áudio perdeu áudio nas alternativas.`);
+        assert(question?.metadata?.multimodalChoiceAudit?.status === "IMAGE_TO_AUDIO", `${question.id}: auditoria IMAGE_TO_AUDIO ausente.`);
+        assert(question?.metadata?.pedagogicalModality === "IMAGE_CONTEXT_TO_AUDIO", `${question.id}: modalidade pedagógica final não registrada.`);
+        imageToAudioChoices += 1;
+      } else if (hasAudioStimulus(question) && !visualStimulus) {
         const images = alternatives.map((alternative) =>
           alternative?.metadata?.imageAssetKey || alternative?.image?.src || alternative?.imageSrc || ""
         );
@@ -179,14 +215,16 @@ for (let module = 1; module <= 6; module += 1) {
 
   const audit = built?.audit?.multimodalConsistency;
   assert(audit, `M${mm}: auditoria multimodalConsistency ausente.`);
-  assert(audit.dragDropVisualFailures.length === 0, `M${mm}: Drag & Drop com resolução visual incompleta: ${audit.dragDropVisualFailures.join(", ")}`);
+  assert(audit.dragDropVisualFailures.length === 0, `M${mm}: Drag & Drop com resolução visual/modal incompleta: ${audit.dragDropVisualFailures.join(", ")}`);
   assert(audit.targetVisualFailures.length === 0, `M${mm}: Target Shooter com resolução visual incompleta: ${audit.targetVisualFailures.join(", ")}`);
   assert(audit.bubbleVisualFailures.length === 0, `M${mm}: Bubble Pop com resolução visual incompleta: ${audit.bubbleVisualFailures.join(", ")}`);
+  assert((built?.audit?.dragDropModalityFinalize?.visualStimulusFailures || []).length === 0, `M${mm}: estímulo visual de Drag & Drop não resolvido.`);
 
   moduleReports.push({
     module,
     distribution: built.mechanicDistribution,
     multimodalConsistency: audit,
+    dragDropModalityFinalize: built?.audit?.dragDropModalityFinalize,
     multimodalRouterFinalize: built?.audit?.multimodalRouterFinalize
   });
 }
@@ -194,6 +232,7 @@ for (let module = 1; module <= 6; module += 1) {
 assert(total === 90, `Esperados 90 itens; encontrados ${total}.`);
 assert(singleTargetChoices >= 1, "Nenhum Drag & Drop single-target foi identificado.");
 assert(audioToImageChoices >= 1, "Nenhum Drag & Drop áudio→imagem foi homologado pelo hotfix.");
+assert(imageToAudioChoices >= 1, "Nenhum Drag & Drop imagem/contexto→áudio foi preservado pelo hotfix.");
 assert(targetVisualQuestions >= 1, "Sem cobertura Target Shooter visual.");
 assert(bubbleVisualQuestions >= 1, "Sem cobertura Bubble Pop visual.");
 assert(matchingQuestions >= 1, "Sem cobertura Matching.");
@@ -204,6 +243,7 @@ console.log(JSON.stringify({
   total,
   singleTargetChoices,
   audioToImageChoices,
+  imageToAudioChoices,
   targetVisualQuestions,
   bubbleVisualQuestions,
   matchingQuestions,
