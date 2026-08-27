@@ -12,7 +12,7 @@
   }
   if (factory.__mechanicsRegressionRouterCompatApplied) return;
 
-  const VERSION = "1.0.2-mechanics-regression-word-slash-quarantine";
+  const VERSION = "1.0.3-mechanics-regression-word-slash-quarantine";
   const WORD_SLASH_QUARANTINE_REASON = "WORD_SLASH_1_0_17_OBJECT_SPAWN_RUNTIME_LOCK";
   const originalBuild = factory.buildModule.bind(factory);
 
@@ -200,6 +200,37 @@
   }
 
   /*
+   * Activities are the unit validated by the public Player. If a post-build
+   * compatibility layer changes a question mechanic, the containing activity
+   * must declare that same final mechanic. We only synchronize homogeneous
+   * activities; a mixed final activity is an integrity error and must never be
+   * silently published.
+   */
+  function synchronizeActivityMechanics(module) {
+    let synchronized = 0;
+    for (const activity of module?.activities || []) {
+      const activityQuestions = Array.isArray(activity?.questions) ? activity.questions : [];
+      if (!activityQuestions.length) continue;
+      const finalMechanics = [...new Set(
+        activityQuestions
+          .map((question) => String(question?.delivery?.mechanic || activity.mechanic || "").trim())
+          .filter(Boolean)
+      )];
+      if (finalMechanics.length !== 1) {
+        throw new Error(
+          `[DuduQ Year2 Mechanics Router Compat] Atividade ${activity?.id || "sem-id"} ficou mista após pós-processamento: ${finalMechanics.join(", ") || "sem mecânica"}.`
+        );
+      }
+      const finalMechanic = finalMechanics[0];
+      if (activity.mechanic !== finalMechanic) {
+        activity.mechanic = finalMechanic;
+        synchronized += 1;
+      }
+    }
+    return synchronized;
+  }
+
+  /*
    * RC1 temporarily changed the fetched Word Slash launch trajectory and first
    * spawn delay. Diagnostics RC3/RC4 showed that the 1.0.17 runtime locks when
    * the first object enters React/DOM even without World Fusion. This guard keeps
@@ -245,12 +276,16 @@
       if (normalizeBubble(question)) bubbleItems += 1;
       if (quarantineWordSlash(question)) quarantinedWordSlashItems += 1;
     }
+
+    const synchronizedActivities = synchronizeActivityMechanics(module);
     installCanonicalWordSlashRuntimeGuard();
 
     const audit = Object.freeze({
       version: VERSION,
       patchedBubbleItems: bubbleItems,
       quarantinedWordSlashItems,
+      synchronizedActivities,
+      activityMechanicsHomogeneous: true,
       wordSlashRuntime: "1.0.17",
       wordSlashRuntimeBlocked: quarantinedWordSlashItems > 0,
       wordSlashQuarantineReason: quarantinedWordSlashItems > 0 ? WORD_SLASH_QUARANTINE_REASON : null,
