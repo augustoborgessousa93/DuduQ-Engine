@@ -131,15 +131,15 @@ jobs:
           BASE_URL: http://127.0.0.1:4173
         run: timeout 45s node test/year2/word-slash-frame-diagnostic-rc2.mjs
 
-      - name: Homologate Intro + every Matching-origin item on desktop and mobile
-        env:
-          BASE_URL: http://127.0.0.1:4173
-        run: node test/year2/manual-review-hotfix-browser-rc2.mjs
-
       - name: Homologate Word Slash, Bubble, Target uniqueness and dense Matching RC2
         env:
           BASE_URL: http://127.0.0.1:4173
         run: timeout 240s node test/year2/mechanics-regression-browser-diagnostic-rc2.mjs
+
+      - name: Homologate Intro + every Matching-origin item on desktop and mobile
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/manual-review-hotfix-browser-rc2.mjs
 
       - name: Smoke all public M01-M06 entrypoints
         env:
