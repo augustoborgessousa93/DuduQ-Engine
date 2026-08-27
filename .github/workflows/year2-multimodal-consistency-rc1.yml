@@ -8,6 +8,7 @@ on:
       - "content/english/year-2/**"
       - "test/year2/multimodal-consistency-hotfix-rc1.mjs"
       - "test/year2/multimodal-consistency-hotfix-browser-rc1.mjs"
+      - "test/year2/dragdrop-listening-action-separation-rc1.mjs"
       - ".github/workflows/year2-multimodal-consistency-rc1.yml"
   push:
     branches:
@@ -16,6 +17,7 @@ on:
       - "content/english/year-2/**"
       - "test/year2/multimodal-consistency-hotfix-rc1.mjs"
       - "test/year2/multimodal-consistency-hotfix-browser-rc1.mjs"
+      - "test/year2/dragdrop-listening-action-separation-rc1.mjs"
       - ".github/workflows/year2-multimodal-consistency-rc1.yml"
   workflow_dispatch:
 
@@ -48,6 +50,7 @@ jobs:
           node --check content/english/year-2/year2-v23-dragdrop-confirm-any-bridge.js
           node --check test/year2/multimodal-consistency-hotfix-rc1.mjs
           node --check test/year2/multimodal-consistency-hotfix-browser-rc1.mjs
+          node --check test/year2/dragdrop-listening-action-separation-rc1.mjs
 
       - name: Validate IDs, answers, listening association, smart images and Matching diversity
         run: node test/year2/multimodal-consistency-hotfix-rc1.mjs
@@ -92,6 +95,11 @@ jobs:
           cat /tmp/duduq-http.log
           exit 1
 
+      - name: Verify separated option audio and real Drag Drop
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/dragdrop-listening-action-separation-rc1.mjs
+
       - name: Run Year 2 functional browser gate
         env:
           BASE_URL: http://127.0.0.1:4173
@@ -102,6 +110,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: year2-multimodal-consistency-rc1
-          path: test-results/year2-multimodal-consistency-rc1
+          path: |
+            test-results/year2-dragdrop-listening-action-separation-rc1
+            test-results/year2-multimodal-consistency-rc1
           if-no-files-found: warn
           retention-days: 7
