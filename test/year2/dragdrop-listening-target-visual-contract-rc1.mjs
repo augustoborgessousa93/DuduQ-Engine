@@ -83,7 +83,7 @@ async function run(browser, name, viewport) {
   const page = await context.newPage();
   try {
     await boot(page);
-    const { current, target, active } = await findListening(page);
+    const { target, active } = await findListening(page);
     assert(active.targetLabel === "SOLTE A RESPOSTA AQUI", `${name}/${active.id}: label de conteúdo inesperado: ${active.targetLabel}`);
     assert(active.targetInstructionConsistent, `${name}/${active.id}: finalizador não declarou instrução consistente.`);
 
@@ -104,7 +104,6 @@ async function run(browser, name, viewport) {
 
     const bridge = await page.evaluate(() => window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_BRIDGE__ || null);
     assert(bridge?.singleTargetCapacityBadgeHidden === true, `${name}/${active.id}: bridge não declara limpeza do badge.`);
-    assert(window === window, "noop");
 
     return { name, questionId: active.id, targetText, badgeState, bridgeVersion: bridge.version };
   } finally {
