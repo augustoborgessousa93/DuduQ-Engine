@@ -8,7 +8,8 @@ const OUTPUT_DIR = path.resolve("test-results/year2-gamification-diversity-rc1/w
 const REPORT_FILE = path.join(OUTPUT_DIR, "EN2-M1-08-frame-lifecycle.json");
 const SCREENSHOT_FILE = path.join(OUTPUT_DIR, "EN2-M1-08-frame-lifecycle.png");
 const MODULE_URL = `${BASE_URL}/content/english/year-2/module-01/index.html?qa=word-slash-frame-diagnostic-rc2`;
-const SAMPLE_DELAYS = [0, 250, 750, 1500, 3000, 6000];
+const BASELINE_URL = `${BASE_URL}/test/word-slash/shell-parity-1.0.17/word-probe.html?qa=year2-baseline`;
+const SAMPLE_DELAYS = [0, 250, 750, 1500, 2200];
 const FRAME_READ_TIMEOUT_MS = 1200;
 
 await fs.mkdir(OUTPUT_DIR, { recursive: true });
@@ -24,6 +25,33 @@ function withTimeout(promise, timeoutMs, label) {
 }
 
 const browser = await chromium.launch({ headless: true });
+let baseline = null;
+
+// First prove that the immutable 1.0.17 adapter/runtime still mounts in its
+// already-homologated minimal environment. Close it before the Year 2 probe:
+// Word Slash 1.0.17 parity itself requires only one active runtime at a time.
+const baselinePage = await browser.newPage({ viewport: { width: 1039, height: 732 } });
+baselinePage.setDefaultTimeout(45_000);
+try {
+  await baselinePage.goto(BASELINE_URL, { waitUntil: "domcontentloaded", timeout: 20_000 });
+  await baselinePage.waitForFunction(() => {
+    const state = document.documentElement.dataset.probeState;
+    return state === "ready" || state === "error";
+  }, null, { timeout: 45_000 });
+  baseline = await baselinePage.evaluate(() => ({
+    state: document.documentElement.dataset.probeState || "",
+    message: document.documentElement.dataset.probeMessage || "",
+    error: document.documentElement.dataset.probeError || "",
+    fusion: document.documentElement.dataset.probeFusion || "",
+    iframeCount: document.querySelectorAll("#mount iframe").length,
+    srcdocLength: String(document.querySelector("#mount iframe")?.getAttribute("srcdoc") || "").length
+  }));
+} catch (error) {
+  baseline = { state: "diagnostic-error", message: error.message, error: error.stack || null };
+} finally {
+  await Promise.race([baselinePage.close().catch(() => {}), new Promise((resolve) => setTimeout(resolve, 1500))]);
+}
+
 const page = await browser.newPage({ viewport: { width: 1366, height: 768 } });
 page.setDefaultTimeout(12_000);
 page.setDefaultNavigationTimeout(20_000);
@@ -76,7 +104,7 @@ async function sample(label) {
     });
     return {
       rootChildCount: root?.children?.length || 0,
-      rootText: String(root?.textContent || "").replace(/\s+/g, " ").trim().slice(0, 600),
+      rootText: String(root?.innerText || "").replace(/\s+/g, " ").trim().slice(0, 600),
       rootHtmlPrefix: String(root?.innerHTML || "").slice(0, 1200),
       iframes,
       mechanics: window.DuduQ?.listMechanics?.().map((entry) => ({ id: entry.id, version: entry.version })) || []
@@ -87,17 +115,31 @@ async function sample(label) {
   for (const frame of page.frames()) {
     let state;
     try {
-      state = await withTimeout(frame.evaluate(() => ({
-        href: location.href,
-        readyState: document.readyState,
-        bodyExists: Boolean(document.body),
-        bodyChildCount: document.body?.children?.length || 0,
-        bodyText: String(document.body?.textContent || "").replace(/\s+/g, " ").trim().slice(0, 600),
-        rootChildCount: document.querySelector("#root")?.children?.length || 0,
-        wsObjectCount: document.querySelectorAll(".duduq-ws-object").length,
-        runtimeError: String(document.querySelector("#duduq-runtime-error")?.textContent || "").replace(/\s+/g, " ").trim().slice(0, 1000),
-        bootText: String(document.querySelector("#duduq-boot")?.textContent || "").replace(/\s+/g, " ").trim().slice(0, 600)
-      })), FRAME_READ_TIMEOUT_MS, `${label}: frame ${frame.url() || "about:blank"}`);
+      state = await withTimeout(frame.evaluate(() => {
+        const root = document.querySelector("#root");
+        const boot = document.querySelector("#duduq-boot");
+        const first = root?.firstElementChild;
+        return {
+          href: location.href,
+          readyState: document.readyState,
+          bodyExists: Boolean(document.body),
+          bodyChildCount: document.body?.children?.length || 0,
+          bodyText: String(document.body?.innerText || "").replace(/\s+/g, " ").trim().slice(0, 1000),
+          rootChildCount: root?.children?.length || 0,
+          rootFirstChildClass: first?.className || "",
+          rootHtmlPrefix: String(root?.innerHTML || "").slice(0, 3000),
+          engineRootCount: document.querySelectorAll(".duduq-engine-root").length,
+          wsRootCount: document.querySelectorAll(".duduq-ws-root").length,
+          wsArenaCount: document.querySelectorAll(".duduq-ws-arena").length,
+          wsObjectCount: document.querySelectorAll(".duduq-ws-object").length,
+          transitionCount: document.querySelectorAll(".duduq-engine-transition, .duduq-step-transition").length,
+          runtimeError: String(document.querySelector("#duduq-runtime-error")?.innerText || "").replace(/\s+/g, " ").trim().slice(0, 1000),
+          bootText: String(boot?.innerText || "").replace(/\s+/g, " ").trim().slice(0, 600),
+          bootHidden: Boolean(boot?.hidden),
+          heading: String(document.querySelector(".duduq-engine-heading h1")?.textContent || "").trim(),
+          wsStatus: String(document.querySelector(".duduq-ws-status")?.textContent || "").trim()
+        };
+      }), FRAME_READ_TIMEOUT_MS, `${label}: frame ${frame.url() || "about:blank"}`);
     } catch (error) {
       state = { evaluationError: error.message };
     }
@@ -134,6 +176,9 @@ try {
     if (!activity) throw new Error("EN2-M1-08 activity not found.");
     const source = activity.questions.find((question) => question.id === "EN2-M1-08");
     const question = JSON.parse(JSON.stringify(source));
+    const normalized = window.DuduQSchema?.normalizeQuestion
+      ? window.DuduQSchema.normalizeQuestion(question, 0, {})
+      : question;
     const mechanic = question.delivery?.mechanic || activity.mechanic;
     window.DuduQ.destroy();
     const started = window.DuduQ.start({
@@ -162,8 +207,13 @@ try {
       mechanic,
       registered: window.DuduQ.hasMechanic(mechanic),
       hostVersion: window.DuduQ.version,
+      schemaVersion: window.DuduQSchema?.version || null,
       wordSlashAudit: question.metadata?.wordSlashPayloadAudit || null,
-      wordSlashObjectCount: question.metadata?.wordSlash?.objects?.length || 0
+      wordSlashObjectCount: question.metadata?.wordSlash?.objects?.length || 0,
+      normalizedWordSlashObjectCount: normalized?.metadata?.wordSlash?.objects?.length || 0,
+      normalizedWordSlashTarget: normalized?.metadata?.wordSlash?.target || null,
+      normalizedMediaAudio: normalized?.media?.audio || null,
+      normalizedInstruction: normalized?.instruction || ""
     };
   });
 
@@ -176,32 +226,39 @@ try {
     previous = delay;
   }
 
-  await page.screenshot({ path: SCREENSHOT_FILE, fullPage: false, timeout: 6_000 });
+  await page.screenshot({ path: SCREENSHOT_FILE, fullPage: false, timeout: 4_000 });
 } catch (error) {
   fatalError = { name: error.name, message: error.message, stack: error.stack || null };
   try { samples.push(await sample("fatal-snapshot")); } catch (_) {}
   try { await page.screenshot({ path: SCREENSHOT_FILE, fullPage: false, timeout: 3_000 }); } catch (_) {}
 } finally {
   const childFrames = samples.flatMap((entry) => entry.frames.filter((frame) => frame.url !== MODULE_URL));
-  const loadedWordSlash = childFrames.some((frame) => frame.wsObjectCount > 0);
+  const loadedWordSlashObjects = childFrames.some((frame) => frame.wsObjectCount > 0);
+  const loadedWordSlashRoot = childFrames.some((frame) => frame.wsRootCount > 0);
+  const loadedEngineRoot = childFrames.some((frame) => frame.engineRootCount > 0);
   const srcdocMounted = samples.some((entry) => entry.host.iframes.some((iframe) => iframe.srcdocLength > 0));
   const mountErrorText = samples.map((entry) => entry.host.rootText).find((text) => /Erro ao preparar a atividade Word Slash/i.test(text)) || "";
   const attachedBlankFrame = samples.some((entry) => entry.host.iframes.length > 0 && entry.frames.some((frame) => frame.url === "about:blank" && frame.bodyChildCount === 0));
 
-  const classification = loadedWordSlash
-    ? "WORD_SLASH_RUNTIME_RENDERED"
-    : mountErrorText
-      ? "WORD_SLASH_ADAPTER_PREPARE_ERROR"
-      : srcdocMounted
-        ? "WORD_SLASH_SRCDOC_MOUNTED_BUT_RUNTIME_NOT_RENDERED"
-        : attachedBlankFrame
-          ? "WORD_SLASH_IFRAME_STAYED_BLANK_BEFORE_SRCDOC"
-          : "WORD_SLASH_FRAME_STATE_UNRESOLVED";
+  const classification = loadedWordSlashObjects
+    ? "WORD_SLASH_OBJECTS_RENDERED"
+    : loadedWordSlashRoot
+      ? "WORD_SLASH_ROOT_RENDERED_OBJECTS_NOT_SPAWNED"
+      : loadedEngineRoot
+        ? "WORD_SLASH_ENGINE_RENDERED_MECHANIC_ROOT_MISSING"
+        : mountErrorText
+          ? "WORD_SLASH_ADAPTER_PREPARE_ERROR"
+          : srcdocMounted
+            ? "WORD_SLASH_SRCDOC_MOUNTED_ENGINE_NOT_RENDERED"
+            : attachedBlankFrame
+              ? "WORD_SLASH_IFRAME_STAYED_BLANK_BEFORE_SRCDOC"
+              : "WORD_SLASH_FRAME_STATE_UNRESOLVED";
 
   const report = {
     status: fatalError ? "DIAGNOSTIC_ERROR" : "OBSERVED",
     contract: "YEAR2_WORD_SLASH_FRAME_LIFECYCLE_RC2",
     id: "EN2-M1-08",
+    baseline,
     startResult,
     classification,
     fatalError,
@@ -216,6 +273,7 @@ try {
   console.log(JSON.stringify({
     status: report.status,
     id: report.id,
+    baseline: report.baseline,
     classification: report.classification,
     startResult: report.startResult,
     wordSlashResponses,
