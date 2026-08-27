@@ -1,7 +1,7 @@
 /* DUDUQ English Year 2 — mechanics regression post-hotfix Router compatibility
    Keeps smart Bubble visuals in metadata.imageAssetKey (supported by Router),
-   removes duplicate option image URLs, and restores the canonical Word Slash
-   1.0.17 spawn physics after the Year 2 presentation hotfix.
+   restores canonical Word Slash 1.0.17 fetch semantics, and quarantines active
+   Year 2 Word Slash delivery while the frozen runtime has a confirmed object-spawn lock.
 */
 (function () {
   "use strict";
@@ -12,11 +12,51 @@
   }
   if (factory.__mechanicsRegressionRouterCompatApplied) return;
 
-  const VERSION = "1.0.1-mechanics-regression-rc2";
+  const VERSION = "1.0.2-mechanics-regression-word-slash-quarantine";
+  const WORD_SLASH_QUARANTINE_REASON = "WORD_SLASH_1_0_17_OBJECT_SPAWN_RUNTIME_LOCK";
   const originalBuild = factory.buildModule.bind(factory);
 
   function questions(module) {
     return (module?.activities || []).flatMap((activity) => activity?.questions || []);
+  }
+
+  function normalize(value) {
+    return String(value == null ? "" : value)
+      .trim()
+      .toLowerCase()
+      .replace(/[.!?]/g, "")
+      .replace(/\s+/g, " ");
+  }
+
+  function sourceAlternatives(question) {
+    const source = question?.metadata?.sourceAlternativesV23;
+    if (Array.isArray(source) && source.length) return source.map(String);
+    return (question?.alternatives || []).map((alternative) =>
+      String(
+        alternative?.metadata?.sourceWrittenLabel ??
+        alternative?.audio?.text ??
+        alternative?.text ??
+        ""
+      )
+    );
+  }
+
+  function sourceAnswer(question) {
+    return String(
+      question?.metadata?.sourceAnswerV23 ??
+      question?.metadata?.sourceAnswer ??
+      question?.metadata?.correctAnswerReinforcement?.writtenText ??
+      ""
+    );
+  }
+
+  function sourceAnswerIndex(question, labels) {
+    const answer = normalize(sourceAnswer(question));
+    const exact = labels.findIndex((label) => normalize(label) === answer);
+    if (exact >= 0) return exact;
+    const current = String(question?.answer?.value ?? "");
+    const match = current.match(/(?:opt-|option-)(\d+)$/i);
+    return match ? Math.max(0, Number(match[1]) - 1) : -1;
   }
 
   function disableMainImage(question) {
@@ -34,8 +74,6 @@
     disableMainImage(question);
     for (const alternative of question.alternatives || []) {
       if (!alternative || typeof alternative !== "object") continue;
-      // Bubble Pop Router accepts metadata.imageAssetKey, not option image URLs.
-      // Preserve the smart official-bank key and remove only its duplicate URL alias.
       alternative.image = {
         ...(alternative.image || {}),
         enabled: false,
@@ -66,15 +104,107 @@
     return true;
   }
 
+  function quarantineWordSlash(question) {
+    if (question?.delivery?.mechanic !== "word-slash") return false;
+
+    const labels = sourceAlternatives(question);
+    const correctIndex = sourceAnswerIndex(question, labels);
+    if (labels.length < 2 || correctIndex < 0 || correctIndex >= labels.length) {
+      throw new Error(`${question?.id || "sem-id"}: Word Slash não pode ser colocado em quarentena sem preservar o gabarito.`);
+    }
+
+    const answerText = sourceAnswer(question) || labels[correctIndex];
+    const originalWordSlash = question?.metadata?.wordSlash
+      ? JSON.parse(JSON.stringify(question.metadata.wordSlash))
+      : null;
+
+    question.delivery = {
+      ...(question.delivery || {}),
+      mechanic: "target-shooter",
+      allowImage: false,
+      allowAudio: true
+    };
+    question.alternatives = labels.map((label, index) => ({
+      id: `opt-${index + 1}`,
+      text: String(label),
+      metadata: {
+        sourceWrittenLabel: String(label),
+        sourceMechanic: "word-slash"
+      }
+    }));
+    question.answer = {
+      type: "single",
+      value: `opt-${correctIndex + 1}`
+    };
+    question.audio = {
+      enabled: true,
+      text: answerText,
+      language: "en-US",
+      role: "stimulus"
+    };
+    question.media = question.media || {};
+    question.media.audio = {
+      enabled: true,
+      src: null,
+      text: answerText,
+      language: "en-US",
+      role: "stimulus"
+    };
+    question.metadata = question.metadata || {};
+    question.metadata.stimulusAudio = {
+      enabled: true,
+      text: answerText,
+      language: "en-US",
+      repeatable: true
+    };
+    question.metadata.targetShooter = {
+      audioText: answerText,
+      mode: "audio-to-word",
+      shape: "balloon",
+      correctIds: [`opt-${correctIndex + 1}`],
+      difficulty: {
+        speed: 0.24,
+        objectCount: Math.min(4, labels.length),
+        spawnIntervalMs: 320,
+        requiredCorrect: 1,
+        targetSize: 184
+      },
+      items: labels.map((label, index) => ({
+        id: `opt-${index + 1}`,
+        label: String(label),
+        display: "text"
+      }))
+    };
+    question.metadata.wordSlashRuntimeQuarantine = {
+      version: VERSION,
+      runtime: "1.0.17",
+      reason: WORD_SLASH_QUARANTINE_REASON,
+      sourceMechanic: "word-slash",
+      fallbackMechanic: "target-shooter",
+      sourceAnswerPreserved: true,
+      originalWordSlash
+    };
+    question.metadata.mechanicsRegressionFallback = {
+      version: VERSION,
+      from: "word-slash",
+      to: "target-shooter",
+      reason: WORD_SLASH_QUARANTINE_REASON,
+      sourceAnswerPreserved: true,
+      reversible: true
+    };
+    delete question.metadata.wordSlash;
+    disableMainImage(question);
+    question.statement = "OUÇA E ATINJA A OPÇÃO";
+    question.instruction = question.statement;
+    return true;
+  }
+
   /*
-   * The RC1 Year 2 hotfix tried to make Word Slash objects visible immediately
-   * by changing the approved 1.0.17 launch trajectory and shortening its first
-   * spawn delay inside the fetched runtime HTML. Browser diagnostics proved that
-   * the payload is valid (C/A/B/D text cards) and srcdoc is mounted, but execution
-   * locks as the patched runtime starts. Word Slash 1.0.17 was homologated with
-   * its original below-the-arena launch physics, so this compatibility guard
-   * reverses only those two Year 2 runtime substitutions. The immutable release
-   * and Canary manifest remain untouched.
+   * RC1 temporarily changed the fetched Word Slash launch trajectory and first
+   * spawn delay. Diagnostics RC3/RC4 showed that the 1.0.17 runtime locks when
+   * the first object enters React/DOM even without World Fusion. This guard keeps
+   * the immutable 1.0.17 HTML semantically canonical for any diagnostic fetch;
+   * active Year 2 delivery is quarantined separately above.
    */
   function installCanonicalWordSlashRuntimeGuard() {
     if (window.__DUDUQ_YEAR2_WORD_SLASH_CANONICAL_PHYSICS_GUARD__) return;
@@ -109,14 +239,21 @@
 
   function postProcess(module) {
     let bubbleItems = 0;
+    let quarantinedWordSlashItems = 0;
+
     for (const question of questions(module)) {
       if (normalizeBubble(question)) bubbleItems += 1;
+      if (quarantineWordSlash(question)) quarantinedWordSlashItems += 1;
     }
     installCanonicalWordSlashRuntimeGuard();
 
     const audit = Object.freeze({
       version: VERSION,
       patchedBubbleItems: bubbleItems,
+      quarantinedWordSlashItems,
+      wordSlashRuntime: "1.0.17",
+      wordSlashRuntimeBlocked: quarantinedWordSlashItems > 0,
+      wordSlashQuarantineReason: quarantinedWordSlashItems > 0 ? WORD_SLASH_QUARANTINE_REASON : null,
       optionImageAssetKeyPreserved: true,
       canonicalWordSlashPhysicsRestored: true,
       wordSlashReleaseModified: false,
