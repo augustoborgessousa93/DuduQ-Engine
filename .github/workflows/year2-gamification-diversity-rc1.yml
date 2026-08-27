@@ -39,8 +39,8 @@ jobs:
       - name: Syntax check diversity layer
         run: node --check content/english/year-2/year2-v23-gamification-diversity.js
 
-      - name: Syntax check manual-review hotfix
-        run: node --check content/english/year-2/year2-v23-manual-review-hotfix.js
+      - name: Syntax check manual-review hotfix RC2
+        run: node --check content/english/year-2/year2-v23-manual-review-hotfix-v2.js
 
       - name: Syntax check Year 2 RC test
         run: node --check test/year2/gamification-diversity-rc1.mjs
@@ -63,7 +63,7 @@ jobs:
       - name: Validate frozen six-module / 90-item source integrity
         run: node test/year2/gamification-diversity-rc1.mjs
 
-      - name: Diagnose final manual-review Matching across all modules
+      - name: Validate variable complete-pair Matching + manual review hotfix
         run: node test/year2/manual-review-hotfix-diagnostic.mjs
 
   chromium-homologation:
