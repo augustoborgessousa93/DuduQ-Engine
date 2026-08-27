@@ -1,0 +1,79 @@
+name: Year 2 Public Entry Visual Ready RC2
+
+on:
+  pull_request:
+    paths:
+      - "content/english/year-2/**"
+      - "test/year2/public-entry-visual-ready-rc2.mjs"
+      - "test/year2/bubble-runtime-asset-bridge-diagnostic-rc3.mjs"
+      - ".github/workflows/year2-public-entry-visual-ready-rc2.yml"
+  push:
+    branches:
+      - "hotfix/year2-mechanics-regression"
+    paths:
+      - "content/english/year-2/**"
+      - "test/year2/public-entry-visual-ready-rc2.mjs"
+      - "test/year2/bubble-runtime-asset-bridge-diagnostic-rc3.mjs"
+      - ".github/workflows/year2-public-entry-visual-ready-rc2.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  visual-ready:
+    name: Public M01-M06 actual mechanic visibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Syntax check visual-ready test
+        run: node --check test/year2/public-entry-visual-ready-rc2.mjs
+
+      - name: Syntax check Bubble runtime diagnostic
+        run: node --check test/year2/bubble-runtime-asset-bridge-diagnostic-rc3.mjs
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local DuduQ server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-year2-visual-ready-http.log 2>&1 &
+          echo $! > /tmp/duduq-year2-visual-ready-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-year2-visual-ready-http.log
+          exit 1
+
+      - name: Diagnose Bubble M02 asset bridge
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/bubble-runtime-asset-bridge-diagnostic-rc3.mjs
+
+      - name: Verify actual public mechanics on desktop and mobile
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/public-entry-visual-ready-rc2.mjs
+
+      - name: Upload actual-render evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year2-public-entry-visual-ready-rc2
+          path: |
+            test-results/year2-public-entry-visual-ready-rc2
+            test-results/year2-bubble-runtime-asset-bridge-diagnostic-rc3
+          if-no-files-found: warn
+          retention-days: 7
