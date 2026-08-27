@@ -13,7 +13,7 @@
   }
   if (factory.__dragDropModalityFinalizeApplied) return;
 
-  const VERSION = "1.0.0-year2-v23-modality-finalize";
+  const VERSION = "1.0.1-year2-v23-explicit-plan-mode";
   const originalBuild = factory.buildModule.bind(factory);
   const resolveVisual = typeof factory.resolveYear2VisualConsistent === "function"
     ? factory.resolveYear2VisualConsistent.bind(factory)
@@ -102,10 +102,12 @@
   function restoreImageToAudio(question, audit) {
     if (!singleTarget(question) || !sourceAudioAlternatives(question)) return;
 
+    const sourcePlanMode = String(question?.metadata?.sourcePlanModeV23 || "").toLowerCase();
     const sourcePrompt = String(question?.metadata?.sourcePromptV23 || "");
-    const sourceSuggestsVisualStimulus = /observe|imagem|grupo|personagem|numeral|mostra|vê|veja/i.test(sourcePrompt);
+    const sourceDeclaresVisualStimulus = sourcePlanMode === "image-choice";
+    const legacyVisualCue = /observe|imagem|grupo|personagem|numeral|mostra|vê|veja|cart[aã]o/i.test(sourcePrompt);
     const existingVisual = targetVisual(question);
-    if (!sourceSuggestsVisualStimulus && !existingVisual) return;
+    if (!sourceDeclaresVisualStimulus && !legacyVisualCue && !existingVisual) return;
 
     const visual = ensureStimulusVisual(question);
     if (!visual?.src) {
@@ -148,13 +150,13 @@
     question.metadata.multimodalChoiceAudit = {
       version: VERSION,
       status: "IMAGE_TO_AUDIO",
+      sourcePlanModeV23: sourcePlanMode,
       stimulusVisualAsset: visual.src,
       stimulusVisualStatus: visual.status,
       sourceAnswerPreserved: true
     };
 
-    const consistency = question?.metadata;
-    if (consistency) consistency.pedagogicalModality = "IMAGE_CONTEXT_TO_AUDIO";
+    question.metadata.pedagogicalModality = "IMAGE_CONTEXT_TO_AUDIO";
     audit.imageToAudio.push(question.id);
   }
 
@@ -167,7 +169,7 @@
       const restored = new Set(audit.imageToAudio);
       consistency.dragDropVisualFailures = (consistency.dragDropVisualFailures || []).filter((id) => !restored.has(id));
       consistency.dragDropAudioToImage = (consistency.dragDropAudioToImage || []).filter((id) => !restored.has(id));
-      consistency.dragDropImageToAudio = [...(consistency.dragDropImageToAudio || []), ...audit.imageToAudio];
+      consistency.dragDropImageToAudio = [...new Set([...(consistency.dragDropImageToAudio || []), ...audit.imageToAudio])];
     }
     module.audit = { ...(module.audit || {}), dragDropModalityFinalize: audit };
     return module;
