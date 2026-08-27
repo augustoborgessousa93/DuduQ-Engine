@@ -11,9 +11,11 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0-year2-confirm-any-selection";
-  const DD222_SCRIPT = /\/engine\/releases\/mechanics\/drag-drop\/2\.0\.22\/drag-drop\.js(?:[?#]|$)/i;
+  const VERSION = "1.0.1-year2-confirm-any-selection-prebuild";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
+  const nativeDefineProperty = Object.defineProperty;
+  let interceptionArmed = true;
+  let restoreTimer = null;
 
   if (window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_BRIDGE__) return;
 
@@ -135,51 +137,74 @@
     return prepared;
   }
 
-  function composeHook() {
-    const upstream = window[HOOK];
-    if (typeof upstream !== "function" || upstream.__year2ConfirmAnyComposed) return false;
-
+  function composeRuntimeHook(upstream) {
+    if (typeof upstream !== "function") return upstream;
+    if (upstream.__year2ConfirmAnyComposed) return upstream;
     const composed = function year2ConfirmAnyRuntimeHook(html) {
-      const upstreamPrepared = upstream(html);
-      return patchYear2Runtime(upstreamPrepared);
+      return patchYear2Runtime(upstream(html));
     };
-    Object.defineProperty(composed, "__year2ConfirmAnyComposed", { value: true });
+    nativeDefineProperty(composed, "__year2ConfirmAnyComposed", { value: true });
+    return composed;
+  }
 
-    try {
-      Object.defineProperty(window, HOOK, {
-        value: composed,
+  function restoreDefineProperty() {
+    if (restoreTimer !== null) {
+      window.clearTimeout(restoreTimer);
+      restoreTimer = null;
+    }
+    if (Object.defineProperty === interceptedDefineProperty) {
+      Object.defineProperty = nativeDefineProperty;
+    }
+  }
+
+  function interceptedDefineProperty(target, property, descriptor) {
+    if (
+      interceptionArmed &&
+      target === window &&
+      property === HOOK &&
+      descriptor &&
+      typeof descriptor.value === "function"
+    ) {
+      const nextDescriptor = { ...descriptor, value: composeRuntimeHook(descriptor.value) };
+      const result = nativeDefineProperty(target, property, nextDescriptor);
+      interceptionArmed = false;
+      window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_CAPTURED__ = true;
+      restoreDefineProperty();
+      return result;
+    }
+    return nativeDefineProperty(target, property, descriptor);
+  }
+
+  function armBeforeAdapterBuild() {
+    const existing = window[HOOK];
+    if (typeof existing === "function") {
+      nativeDefineProperty(window, HOOK, {
+        value: composeRuntimeHook(existing),
         configurable: true,
         writable: false
       });
-    } catch (_) {
-      window[HOOK] = composed;
+      interceptionArmed = false;
+      window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_CAPTURED__ = true;
+      return;
     }
-    return true;
+
+    Object.defineProperty = interceptedDefineProperty;
+    restoreTimer = window.setTimeout(() => {
+      if (interceptionArmed) {
+        console.warn("[DuduQ Year2 DD confirm-any] Hook 2.0.22 não foi definido dentro da janela de inicialização.");
+      }
+      restoreDefineProperty();
+    }, 30000);
   }
 
-  document.addEventListener(
-    "load",
-    function year2DragDropAdapterLoadCapture(event) {
-      const script = event.target;
-      if (!script || script.tagName !== "SCRIPT") return;
-      const src = String(script.src || script.getAttribute("src") || "");
-      if (!DD222_SCRIPT.test(src)) return;
-      try {
-        if (!composeHook()) {
-          console.warn("[DuduQ Year2 DD confirm-any] Hook 2.0.22 não estava disponível após o adapter carregar.");
-        }
-      } catch (error) {
-        console.error("[DuduQ Year2 DD confirm-any] Falha ao compor runtime.", error);
-      }
-    },
-    true
-  );
+  armBeforeAdapterBuild();
 
   window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_BRIDGE__ = Object.freeze({
     version: VERSION,
     scope: "english-year-2",
     releaseModified: false,
     canaryModified: false,
-    targetRelease: "2.0.22"
+    targetRelease: "2.0.22",
+    hookTiming: "before-runtime-build"
   });
 })();
