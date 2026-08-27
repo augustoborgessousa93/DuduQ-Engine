@@ -7,7 +7,7 @@ on:
       - "test/year2/gamification-diversity-*.mjs"
       - "test/year2/manual-review-hotfix-*.mjs"
       - "test/year2/mechanics-regression-*.mjs"
-      - "test/year2/word-slash-frame-diagnostic-*.mjs"
+      - "test/year2/word-slash-*.mjs"
       - ".github/workflows/year2-gamification-diversity-rc1.yml"
   push:
     branches:
@@ -19,7 +19,7 @@ on:
       - "test/year2/gamification-diversity-*.mjs"
       - "test/year2/manual-review-hotfix-*.mjs"
       - "test/year2/mechanics-regression-*.mjs"
-      - "test/year2/word-slash-frame-diagnostic-*.mjs"
+      - "test/year2/word-slash-*.mjs"
       - ".github/workflows/year2-gamification-diversity-rc1.yml"
 
 permissions:
@@ -79,6 +79,9 @@ jobs:
 
       - name: Syntax check Word Slash first-spawn diagnostic RC3
         run: node --check test/year2/word-slash-frame-diagnostic-spawn-rc3.mjs
+
+      - name: Syntax check Word Slash World Fusion isolation RC4
+        run: node --check test/year2/word-slash-world-fusion-isolation-rc4.mjs
 
       - name: Syntax check public entry smoke
         run: node --check test/year2/gamification-diversity-public-entry-rc1.mjs
@@ -144,6 +147,11 @@ jobs:
           set -e
           if [ "$code" -ne 0 ] && [ "$code" -ne 124 ]; then exit "$code"; fi
           echo "Word Slash spawn diagnostic exit=$code"
+
+      - name: Isolate Word Slash object spawn with and without World Fusion RC4
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: timeout 25s node test/year2/word-slash-world-fusion-isolation-rc4.mjs
 
       - name: Homologate Word Slash, Bubble, Target uniqueness and dense Matching RC2
         env:
