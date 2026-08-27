@@ -12,7 +12,7 @@
   if (factory.__manualReviewRouterCompatApplied) return;
 
   const originalBuild = factory.buildModule.bind(factory);
-  const VERSION = "1.0.0-manual-review-post-visual";
+  const VERSION = "1.0.1-manual-review-post-visual";
 
   function allQuestions(module) {
     return (module?.activities || []).flatMap((activity) => activity?.questions || []);
@@ -20,6 +20,9 @@
 
   function disableQuestionImage(question) {
     question.image = { enabled: false, src: null, alt: "" };
+    if (question?.media && typeof question.media === "object") {
+      question.media.image = { enabled: false, src: null, alt: "" };
+    }
     if (question?.stimulus?.image && typeof question.stimulus.image === "object") {
       question.stimulus.image = { enabled: false, src: null, alt: "" };
     }
@@ -81,21 +84,46 @@
       return "target";
     }
 
+    if (mechanic === "drag-drop") {
+      // Router intentionally forbids a main question image for Drag & Drop.
+      // Visual meaning must live in the target/option payload. The manual-review
+      // layer already moves the safe visual to metadata.targets when needed;
+      // remove only duplicate main-image aliases that Schema would normalize
+      // back into media.image and reject before the Intro can launch.
+      disableQuestionImage(question);
+      question.delivery = { ...(question.delivery || {}), allowAudio: true };
+      question.metadata = {
+        ...(question.metadata || {}),
+        manualReviewRouterCompatibility: {
+          version: VERSION,
+          rule: rule || "drag-drop-main-image-normalization",
+          questionImageDisabled: true,
+          targetVisualsPreserved: true,
+          contentChanged: false,
+          sourceAnswerPreserved: true
+        }
+      };
+      return "drag";
+    }
+
     return null;
   }
 
   function postProcess(module) {
     let bubble = 0;
     let target = 0;
+    let drag = 0;
     for (const question of allQuestions(module)) {
       const result = normalize(question);
       if (result === "bubble") bubble += 1;
       if (result === "target") target += 1;
+      if (result === "drag") drag += 1;
     }
     const audit = Object.freeze({
       version: VERSION,
       patchedBubbleItems: bubble,
       patchedTargetItems: target,
+      patchedDragDropItems: drag,
       contentChanged: false,
       sourceAnswersPreserved: true
     });
