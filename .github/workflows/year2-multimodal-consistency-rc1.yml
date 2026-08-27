@@ -43,12 +43,13 @@ jobs:
           node --check content/english/year-2/year2-v23-final-root-bridge.js
           node --check content/english/year-2/year2-v23-multimodal-consistency-hotfix.js
           node --check content/english/year-2/year2-v23-dragdrop-modality-finalize.js
+          node --check content/english/year-2/year2-v23-dragdrop-listening-association-final.js
           node --check content/english/year-2/year2-v23-multimodal-router-finalize.js
           node --check content/english/year-2/year2-v23-dragdrop-confirm-any-bridge.js
           node --check test/year2/multimodal-consistency-hotfix-rc1.mjs
           node --check test/year2/multimodal-consistency-hotfix-browser-rc1.mjs
 
-      - name: Validate IDs, answers, smart images, Drag Drop modality and Matching diversity
+      - name: Validate IDs, answers, listening association, smart images and Matching diversity
         run: node test/year2/multimodal-consistency-hotfix-rc1.mjs
 
       - name: Assert Canary remains R143 / Drag Drop 2.0.22
@@ -64,7 +65,7 @@ jobs:
           NODE
 
   chromium-functional:
-    name: Chromium confirm-any + smart visual review
+    name: Chromium listening association + confirm-any + smart visual review
     needs: static-pedagogical-contract
     runs-on: ubuntu-latest
     timeout-minutes: 20
