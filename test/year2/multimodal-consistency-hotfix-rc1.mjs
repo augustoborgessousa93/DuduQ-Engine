@@ -15,13 +15,6 @@ function assert(condition, message) {
 function unique(values) {
   return new Set(values).size === values.length;
 }
-function sourceLabels(question) {
-  const stored = question?.metadata?.sourceAlternativesV23;
-  if (Array.isArray(stored) && stored.length) return stored.map(String);
-  return (question?.alternatives || []).map((alternative) =>
-    String(alternative?.metadata?.sourceWrittenLabel ?? alternative?.audio?.text ?? alternative?.text ?? "")
-  );
-}
 function sourceAlternativeTypes(question) {
   const stored = question?.metadata?.sourceAlternativeTypesV23;
   return Array.isArray(stored) ? stored.map((value) => String(value).toLowerCase()) : [];
@@ -29,6 +22,9 @@ function sourceAlternativeTypes(question) {
 function sourceAudioAlternatives(question) {
   const types = sourceAlternativeTypes(question);
   return types.length >= 2 && types.every((type) => type === "audio");
+}
+function sourcePlanMode(question) {
+  return String(question?.metadata?.sourcePlanModeV23 || "").toLowerCase();
 }
 function hasAudioStimulus(question) {
   return question?.audio?.enabled === true || question?.metadata?.stimulusAudio?.enabled === true;
@@ -67,9 +63,7 @@ function visualSource(value) {
 globalThis.window = globalThis;
 window.DUDUQ_PUBLIC_ENTRY = Object.freeze({ year: 2, sourceVersion: "2.3" });
 window.DUDUQ_CONTENT = {};
-if (!globalThis.document) {
-  globalThis.document = { querySelector: () => ({}) };
-}
+if (!globalThis.document) globalThis.document = { querySelector: () => ({}) };
 if (typeof globalThis.Response !== "function") throw new Error("Node runtime must expose Response.");
 
 const matchingValidatorFixture = `rightIds.forEach((id) => {\n      if (!rightDegrees.get(id)) {\n        issues.push({ path: \`rightItems:\${id}\`, code: "UNPAIRED_RIGHT_ITEM", message: "Todo item da direita deve participar de ao menos uma conexão correta.", severity: "error" });\n      }\n    });`;
@@ -134,9 +128,11 @@ for (let module = 1; module <= 6; module += 1) {
       assert(question?.metadata?.replacePreviousChoice === true, `${question.id}: troca de alternativa não está habilitada.`);
 
       const alternatives = question.alternatives || [];
+      const planMode = sourcePlanMode(question);
       const visualStimulus = hasImageStimulus(question);
 
-      if (visualStimulus && sourceAudioAlternatives(question)) {
+      if (planMode === "image-choice" && sourceAudioAlternatives(question)) {
+        assert(visualStimulus, `${question.id}: sourcePlanMode=image-choice perdeu o estímulo visual.`);
         const stimulusSources = targetImageSources(question);
         assert(
           stimulusSources.some(visualSource) || visualSource(question?.image?.src) || visualSource(question?.media?.image?.src),
@@ -146,7 +142,7 @@ for (let module = 1; module <= 6; module += 1) {
         assert(question?.metadata?.multimodalChoiceAudit?.status === "IMAGE_TO_AUDIO", `${question.id}: auditoria IMAGE_TO_AUDIO ausente.`);
         assert(question?.metadata?.pedagogicalModality === "IMAGE_CONTEXT_TO_AUDIO", `${question.id}: modalidade pedagógica final não registrada.`);
         imageToAudioChoices += 1;
-      } else if (hasAudioStimulus(question) && !visualStimulus) {
+      } else if ((planMode === "audio-choice" || hasAudioStimulus(question)) && !visualStimulus) {
         const images = alternatives.map((alternative) =>
           alternative?.metadata?.imageAssetKey || alternative?.image?.src || alternative?.imageSrc || ""
         );
