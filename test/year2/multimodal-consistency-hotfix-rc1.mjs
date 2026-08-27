@@ -15,49 +15,25 @@ function assert(condition, message) {
 function unique(values) {
   return new Set(values).size === values.length;
 }
-function sourceAlternativeTypes(question) {
-  const stored = question?.metadata?.sourceAlternativeTypesV23;
-  return Array.isArray(stored) ? stored.map((value) => String(value).toLowerCase()) : [];
+function visualSource(value) {
+  const src = String(value || "").trim();
+  return /^https:\/\/raw\.githubusercontent\.com\/augustoborgessousa93\/Assets-DuduQ\//i.test(src) ||
+    /^data:image\//i.test(src) || /^https?:\/\//i.test(src);
 }
-function sourceAudioAlternatives(question) {
-  const types = sourceAlternativeTypes(question);
-  return types.length >= 2 && types.every((type) => type === "audio");
-}
-function sourcePlanMode(question) {
-  return String(question?.metadata?.sourcePlanModeV23 || "").toLowerCase();
-}
-function hasAudioStimulus(question) {
-  return question?.audio?.enabled === true || question?.metadata?.stimulusAudio?.enabled === true;
-}
-function targetImageSources(question) {
-  const targets = [
-    ...(Array.isArray(question?.metadata?.targets) ? question.metadata.targets : []),
-    ...(Array.isArray(question?.metadata?.dragDrop?.targets) ? question.metadata.dragDrop.targets : [])
-  ];
-  return targets.map((target) =>
-    String(target?.imageSrc || target?.imageUrl || target?.image || target?.imageAssetKey || "").trim()
-  ).filter(Boolean);
-}
-function hasImageStimulus(question) {
-  return Boolean(
-    (question?.image?.enabled && question?.image?.src) ||
-    (question?.media?.image?.enabled && question?.media?.image?.src) ||
-    (question?.stimulus?.image?.enabled && question?.stimulus?.image?.src) ||
-    targetImageSources(question).length
-  );
+function targetVisualSource(target) {
+  const image = target?.image;
+  return String(
+    target?.imageSrc || target?.imageUrl || target?.imageAssetKey ||
+    (image && typeof image === "object" ? image.src : image) || ""
+  ).trim();
 }
 function singleTargetChoiceShape(question) {
   const pairs = Array.isArray(question?.answer?.value) ? question.answer.value : [];
   const targets = Array.isArray(question?.metadata?.targets) ? question.metadata.targets : [];
-  return question?.delivery?.mechanic === "drag-drop" &&
-    pairs.length === 1 && targets.length === 1 &&
-    Number(targets[0]?.capacity || 1) === 1 &&
-    (question.alternatives || []).length >= 2 &&
+  const alternatives = Array.isArray(question?.alternatives) ? question.alternatives : [];
+  return question?.delivery?.mechanic === "drag-drop" && pairs.length === 1 && targets.length === 1 &&
+    Number(targets[0]?.capacity || 1) === 1 && alternatives.length >= 2 && alternatives.length <= 4 &&
     question?.metadata?.optionPresentation !== "MOVABLE_LETTERS_AFTER_FIRST_LISTEN";
-}
-function visualSource(value) {
-  const src = String(value || "");
-  return /^https:\/\/raw\.githubusercontent\.com\/augustoborgessousa93\/Assets-DuduQ\//i.test(src) || /^data:image\//i.test(src);
 }
 
 globalThis.window = globalThis;
@@ -92,13 +68,12 @@ run("content/english/year-2/year2-v23-mechanics-regression-router-compat.js");
 run("content/english/year-2/year2-v23-final-root-bridge.js");
 run("content/english/year-2/year2-v23-multimodal-consistency-hotfix.js");
 run("content/english/year-2/year2-v23-dragdrop-modality-finalize.js");
+run("content/english/year-2/year2-v23-dragdrop-listening-association-final.js");
 run("content/english/year-2/year2-v23-multimodal-router-finalize.js");
 run("content/english/year-2/year2-v23-dragdrop-visual-patch.js");
 
 let total = 0;
-let singleTargetChoices = 0;
-let audioToImageChoices = 0;
-let imageToAudioChoices = 0;
+let listeningAssociationChoices = 0;
 let targetVisualQuestions = 0;
 let bubbleVisualQuestions = 0;
 let matchingQuestions = 0;
@@ -122,36 +97,37 @@ for (let module = 1; module <= 6; module += 1) {
     assert(question?.metadata?.englishReadingRequired === false, `${question.id}: leitura autônoma em inglês voltou a ser requisito.`);
 
     if (singleTargetChoiceShape(question)) {
-      singleTargetChoices += 1;
-      assert(question?.metadata?.singleTargetChoice === true, `${question.id}: single-target sem marca pedagógica.`);
-      assert(question?.metadata?.confirmOnAnySelection === true, `${question.id}: CONFIRMAR não está marcado para qualquer seleção.`);
-      assert(question?.metadata?.replacePreviousChoice === true, `${question.id}: troca de alternativa não está habilitada.`);
-
+      listeningAssociationChoices += 1;
+      const target = question.metadata.targets[0];
       const alternatives = question.alternatives || [];
-      const planMode = sourcePlanMode(question);
-      const visualStimulus = hasImageStimulus(question);
+      const sourceLabels = Array.isArray(question?.metadata?.sourceAlternativesV23)
+        ? question.metadata.sourceAlternativesV23.map(String)
+        : [];
+      const association = question?.metadata?.listeningAssociation;
 
-      if (planMode === "image-choice" && sourceAudioAlternatives(question)) {
-        assert(visualStimulus, `${question.id}: sourcePlanMode=image-choice perdeu o estímulo visual.`);
-        const stimulusSources = targetImageSources(question);
-        assert(
-          stimulusSources.some(visualSource) || visualSource(question?.image?.src) || visualSource(question?.media?.image?.src),
-          `${question.id}: modalidade imagem/contexto→áudio sem estímulo visual resolvido.`
-        );
-        assert(alternatives.every((alternative) => alternative?.audio?.enabled === true), `${question.id}: imagem/contexto→áudio perdeu áudio nas alternativas.`);
-        assert(question?.metadata?.multimodalChoiceAudit?.status === "IMAGE_TO_AUDIO", `${question.id}: auditoria IMAGE_TO_AUDIO ausente.`);
-        assert(question?.metadata?.pedagogicalModality === "IMAGE_CONTEXT_TO_AUDIO", `${question.id}: modalidade pedagógica final não registrada.`);
-        imageToAudioChoices += 1;
-      } else if ((planMode === "audio-choice" || hasAudioStimulus(question)) && !visualStimulus) {
-        const images = alternatives.map((alternative) =>
-          alternative?.metadata?.imageAssetKey || alternative?.image?.src || alternative?.imageSrc || ""
-        );
-        assert(images.length >= 2 && images.every(visualSource), `${question.id}: Drag & Drop áudio→áudio ou asset visual ausente.`);
-        assert(unique(images), `${question.id}: Drag & Drop usa imagens repetidas nas alternativas.`);
-        assert(alternatives.every((alternative) => alternative?.audio?.enabled !== true), `${question.id}: alternativa continua áudio-primária em estímulo de áudio.`);
-        assert(question?.metadata?.multimodalChoiceAudit?.status === "AUDIO_TO_IMAGE", `${question.id}: auditoria AUDIO_TO_IMAGE ausente.`);
-        audioToImageChoices += 1;
-      }
+      assert(question?.metadata?.singleTargetChoice === true, `${question.id}: single-target sem marca pedagógica.`);
+      assert(question?.metadata?.confirmOnAnySelection === true, `${question.id}: CONFIRMAR não está liberado para qualquer seleção.`);
+      assert(question?.metadata?.replacePreviousChoice === true, `${question.id}: troca de alternativa não está habilitada.`);
+      assert(question?.metadata?.optionPresentation === "LISTENING_ASSOCIATION_AUDIO_CHOICES", `${question.id}: apresentação final não é áudio-alternativa.`);
+      assert(question?.metadata?.pedagogicalModality === "LISTENING_IMAGE_AUDIO_ASSOCIATION", `${question.id}: modalidade final incorreta.`);
+      assert(association?.status === "READY", `${question.id}: listeningAssociation não está READY.`);
+      assert(JSON.stringify(association?.sequence) === JSON.stringify(["PRIMARY_AUDIO","CENTRAL_IMAGE","AUDIO_OPTIONS","DRAG_DROP","CONFIRM"]), `${question.id}: sequência pedagógica final incorreta.`);
+      assert(association?.primaryAudioReady === true, `${question.id}: áudio principal ausente.`);
+
+      const centralImage = targetVisualSource(target);
+      assert(visualSource(centralImage), `${question.id}: imagem central não resolvida: ${centralImage}`);
+      assert(sourceLabels.length === alternatives.length && sourceLabels.length >= 2, `${question.id}: alternativas fonte não preservadas.`);
+
+      alternatives.forEach((alternative, index) => {
+        assert(alternative?.audio?.enabled === true, `${question.id}/${alternative.id}: alternativa sem áudio.`);
+        assert(String(alternative?.audio?.text || "") === sourceLabels[index], `${question.id}/${alternative.id}: áudio não corresponde ao texto original.`);
+        assert(alternative?.audio?.role === "option", `${question.id}/${alternative.id}: áudio sem role option.`);
+        assert(alternative?.image?.enabled === false, `${question.id}/${alternative.id}: alternativa ainda é imagem-primária.`);
+        assert(!alternative?.imageSrc && !alternative?.imageUrl && !alternative?.metadata?.imageAssetKey, `${question.id}/${alternative.id}: asset visual permaneceu na alternativa.`);
+        assert(String(alternative?.metadata?.sourceWrittenLabel || "") === sourceLabels[index], `${question.id}/${alternative.id}: rótulo original não preservado em metadata.`);
+        assert(alternative?.metadata?.writtenLabelVisibleBeforeAnswer === false, `${question.id}/${alternative.id}: palavra inglesa voltou a ficar visível antes da resposta.`);
+        assert(String(alternative?.text || "") === String.fromCharCode(65 + index), `${question.id}/${alternative.id}: identificação visual A/B/C/D inconsistente.`);
+      });
     }
 
     if (question?.delivery?.mechanic === "target-shooter") {
@@ -188,12 +164,10 @@ for (let module = 1; module <= 6; module += 1) {
     }
   }
 
-  const m1Matching = module === 1
-    ? questions.filter((question) => question?.delivery?.mechanic === "matching")
-    : [];
-  if (m1Matching.length > 1) {
+  if (module === 1) {
+    const matchingList = questions.filter((question) => question?.delivery?.mechanic === "matching");
     const byTopic = new Map();
-    for (const question of m1Matching) {
+    for (const question of matchingList) {
       const topic = String(question?.metadata?.matchingDiversity?.topic || question?.metadata?.topic || "GENERAL");
       if (!byTopic.has(topic)) byTopic.set(topic, []);
       byTopic.get(topic).push(question);
@@ -203,43 +177,43 @@ for (let module = 1; module <= 6; module += 1) {
         const previous = new Set(list[index - 1]?.metadata?.matchingDiversity?.labels || []);
         const current = new Set(list[index]?.metadata?.matchingDiversity?.labels || []);
         if (!previous.size || !current.size) continue;
-        const identical = previous.size === current.size && [...previous].every((label) => current.has(label));
-        assert(!identical, `M01/${topic}: Matching consecutivo permaneceu com conjunto idêntico (${[...current].join(", ")}).`);
+        const overlap = [...previous].filter((label) => current.has(label)).length;
+        const denominator = Math.max(previous.size, current.size);
+        assert(overlap / denominator <= 0.5, `M01/${topic}: Matching consecutivo com sobreposição excessiva (${overlap}/${denominator}).`);
       }
     }
   }
 
-  const audit = built?.audit?.multimodalConsistency;
-  assert(audit, `M${mm}: auditoria multimodalConsistency ausente.`);
-  assert(audit.dragDropVisualFailures.length === 0, `M${mm}: Drag & Drop com resolução visual/modal incompleta: ${audit.dragDropVisualFailures.join(", ")}`);
-  assert(audit.targetVisualFailures.length === 0, `M${mm}: Target Shooter com resolução visual incompleta: ${audit.targetVisualFailures.join(", ")}`);
-  assert(audit.bubbleVisualFailures.length === 0, `M${mm}: Bubble Pop com resolução visual incompleta: ${audit.bubbleVisualFailures.join(", ")}`);
-  assert((built?.audit?.dragDropModalityFinalize?.visualStimulusFailures || []).length === 0, `M${mm}: estímulo visual de Drag & Drop não resolvido.`);
+  const listeningAudit = built?.audit?.dragDropListeningAssociation;
+  assert(listeningAudit, `M${mm}: auditoria dragDropListeningAssociation ausente.`);
+  assert(listeningAudit.failures.length === 0, `M${mm}: falhas listening association: ${JSON.stringify(listeningAudit.failures)}`);
+  assert(listeningAudit.missingPrimaryAudio.length === 0, `M${mm}: áudio principal ausente em: ${listeningAudit.missingPrimaryAudio.join(", ")}`);
+
+  const consistencyAudit = built?.audit?.multimodalConsistency;
+  assert(consistencyAudit, `M${mm}: auditoria multimodalConsistency ausente.`);
+  assert(consistencyAudit.targetVisualFailures.length === 0, `M${mm}: Target Shooter com resolução visual incompleta.`);
+  assert(consistencyAudit.bubbleVisualFailures.length === 0, `M${mm}: Bubble Pop com resolução visual incompleta.`);
 
   moduleReports.push({
     module,
     distribution: built.mechanicDistribution,
-    multimodalConsistency: audit,
-    dragDropModalityFinalize: built?.audit?.dragDropModalityFinalize,
+    dragDropListeningAssociation: listeningAudit,
+    multimodalConsistency: consistencyAudit,
     multimodalRouterFinalize: built?.audit?.multimodalRouterFinalize
   });
 }
 
 assert(total === 90, `Esperados 90 itens; encontrados ${total}.`);
-assert(singleTargetChoices >= 1, "Nenhum Drag & Drop single-target foi identificado.");
-assert(audioToImageChoices >= 1, "Nenhum Drag & Drop áudio→imagem foi homologado pelo hotfix.");
-assert(imageToAudioChoices >= 1, "Nenhum Drag & Drop imagem/contexto→áudio foi preservado pelo hotfix.");
+assert(listeningAssociationChoices >= 1, "Nenhum Drag & Drop listening association foi homologado.");
 assert(targetVisualQuestions >= 1, "Sem cobertura Target Shooter visual.");
 assert(bubbleVisualQuestions >= 1, "Sem cobertura Bubble Pop visual.");
 assert(matchingQuestions >= 1, "Sem cobertura Matching.");
 
 console.log(JSON.stringify({
   status: "PASS",
-  contract: "YEAR2_V23_MULTIMODAL_CONSISTENCY",
+  contract: "YEAR2_V23_LISTENING_IMAGE_AUDIO_ASSOCIATION",
   total,
-  singleTargetChoices,
-  audioToImageChoices,
-  imageToAudioChoices,
+  listeningAssociationChoices,
   targetVisualQuestions,
   bubbleVisualQuestions,
   matchingQuestions,
