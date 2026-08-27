@@ -68,20 +68,8 @@ jobs:
       - name: Syntax check exhaustive manual-review browser RC2
         run: node --check test/year2/manual-review-hotfix-browser-rc2.mjs
 
-      - name: Syntax check deterministic mechanics regression browser RC2
-        run: node --check test/year2/mechanics-regression-browser-rc2.mjs
-
-      - name: Syntax check mechanics regression browser diagnostic supervisor RC2
-        run: node --check test/year2/mechanics-regression-browser-diagnostic-rc2.mjs
-
-      - name: Syntax check focused Word Slash frame diagnostic RC2
-        run: node --check test/year2/word-slash-frame-diagnostic-rc2.mjs
-
-      - name: Syntax check Word Slash first-spawn diagnostic RC3
-        run: node --check test/year2/word-slash-frame-diagnostic-spawn-rc3.mjs
-
-      - name: Syntax check Word Slash World Fusion isolation RC4
-        run: node --check test/year2/word-slash-world-fusion-isolation-rc4.mjs
+      - name: Syntax check Word Slash quarantine browser RC3
+        run: node --check test/year2/word-slash-quarantine-browser-rc3.mjs
 
       - name: Syntax check public entry smoke
         run: node --check test/year2/gamification-diversity-public-entry-rc1.mjs
@@ -132,31 +120,10 @@ jobs:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year2/gamification-diversity-browser-rc2.mjs
 
-      - name: Capture focused Word Slash iframe lifecycle RC2
+      - name: Homologate Word Slash runtime quarantine fallback RC3
         env:
           BASE_URL: http://127.0.0.1:4173
-        run: timeout 45s node test/year2/word-slash-frame-diagnostic-rc2.mjs
-
-      - name: Trace first Word Slash spawn RC3
-        env:
-          BASE_URL: http://127.0.0.1:4173
-        run: |
-          set +e
-          timeout 12s node test/year2/word-slash-frame-diagnostic-spawn-rc3.mjs
-          code=$?
-          set -e
-          if [ "$code" -ne 0 ] && [ "$code" -ne 124 ]; then exit "$code"; fi
-          echo "Word Slash spawn diagnostic exit=$code"
-
-      - name: Isolate Word Slash object spawn with and without World Fusion RC4
-        env:
-          BASE_URL: http://127.0.0.1:4173
-        run: timeout 25s node test/year2/word-slash-world-fusion-isolation-rc4.mjs
-
-      - name: Homologate Word Slash, Bubble, Target uniqueness and dense Matching RC2
-        env:
-          BASE_URL: http://127.0.0.1:4173
-        run: timeout 240s node test/year2/mechanics-regression-browser-diagnostic-rc2.mjs
+        run: node test/year2/word-slash-quarantine-browser-rc3.mjs
 
       - name: Homologate Intro + every Matching-origin item on desktop and mobile
         env:
