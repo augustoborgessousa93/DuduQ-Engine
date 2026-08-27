@@ -34,6 +34,8 @@ function postProcessQuestion(q,item,plan){
   q.metadata.sourceAlternativeTypesV23=clone(item.alternativeTypes||[]);
   q.metadata.sourceAnswerV23=item.answer;
   q.metadata.sourceStatus=item.status;
+  q.metadata.sourcePlanModeV23=String(plan.mode||"");
+  q.metadata.sourcePlanMechanicV23=String(plan.mechanic||"");
   q.metadata.topic=plan.topic||item.topic||"";
   q.metadata.englishReadingRequired=false;
   q.metadata.readingDependency="NÃO";
