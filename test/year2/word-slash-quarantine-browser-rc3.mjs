@@ -52,6 +52,10 @@ try {
       const correct = (question.alternatives || []).find((alternative) => alternative.id === correctId);
       return {
         mechanic: question.delivery?.mechanic || activity.mechanic,
+        activityMechanic: String(activity.mechanic || ""),
+        activityQuestionMechanics: [...new Set(
+          (activity.questions || []).map((entry) => String(entry?.delivery?.mechanic || activity.mechanic || ""))
+        )],
         sourceAnswer: String(question.metadata?.sourceAnswerV23 || ""),
         audioText: String(question.audio?.text || question.media?.audio?.text || ""),
         labels,
@@ -65,6 +69,10 @@ try {
     });
 
     assert(model.mechanic === "target-shooter", `${viewport.name}: EN2-M1-08 must be quarantined to target-shooter.`);
+    assert(model.activityMechanic === "target-shooter", `${viewport.name}: activity mechanic was not synchronized after Word Slash quarantine.`);
+    assert(model.activityQuestionMechanics.length === 1 && model.activityQuestionMechanics[0] === model.activityMechanic, `${viewport.name}: activity became mixed after Word Slash quarantine: ${model.activityQuestionMechanics.join(", ")}.`);
+    assert(model.routerAudit?.activityMechanicsHomogeneous === true, `${viewport.name}: activity homogeneity audit missing.`);
+    assert(model.routerAudit?.synchronizedActivities >= 1, `${viewport.name}: expected at least one synchronized activity in M01.`);
     assert(model.fallback?.from === "word-slash" && model.fallback?.to === "target-shooter", `${viewport.name}: reversible Word Slash fallback metadata missing.`);
     assert(model.quarantine?.runtime === "1.0.17", `${viewport.name}: frozen Word Slash runtime version missing from quarantine audit.`);
     assert(model.quarantine?.sourceAnswerPreserved === true, `${viewport.name}: quarantine did not certify source-answer preservation.`);
@@ -166,5 +174,10 @@ await fs.writeFile(
 console.log(JSON.stringify({
   status: "PASS",
   contract: "WORD_SLASH_1_0_17_RUNTIME_QUARANTINE",
-  viewports: report.map((entry) => ({ viewport: entry.viewport, mechanic: entry.model.mechanic, visibleTargets: entry.runtime.visibleTargets }))
+  viewports: report.map((entry) => ({
+    viewport: entry.viewport,
+    mechanic: entry.model.mechanic,
+    activityMechanic: entry.model.activityMechanic,
+    visibleTargets: entry.runtime.visibleTargets
+  }))
 }, null, 2));
