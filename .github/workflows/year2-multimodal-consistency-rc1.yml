@@ -43,7 +43,8 @@ jobs:
           node --check test/year2/multimodal-consistency-hotfix-browser-rc1.mjs
 
       - name: Validate IDs, answers, smart images, Drag Drop modality and Matching diversity
-        run: node test/year2/multimodal-consistency-hotfix-rc1.mjs
+        run: >-
+          node -e "globalThis.document={querySelector:()=>({})}; import('./test/year2/multimodal-consistency-hotfix-rc1.mjs').catch((error)=>{console.error(error);process.exit(1)})"
 
       - name: Assert Canary remains R143 / Drag Drop 2.0.22
         run: |
