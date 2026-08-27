@@ -48,14 +48,14 @@ jobs:
       - name: Syntax check manual-review diagnostic
         run: node --check test/year2/manual-review-hotfix-diagnostic.mjs
 
-      - name: Syntax check browser homologation RC2
+      - name: Syntax check quick browser homologation RC2
         run: node --check test/year2/gamification-diversity-browser-rc2.mjs
+
+      - name: Syntax check exhaustive manual-review browser RC2
+        run: node --check test/year2/manual-review-hotfix-browser-rc2.mjs
 
       - name: Syntax check dynamic visibility audit
         run: node --check test/year2/gamification-diversity-dynamic-visibility-rc1.mjs
-
-      - name: Syntax check Matching render audit
-        run: node --check test/year2/gamification-diversity-matching-render-rc1.mjs
 
       - name: Syntax check public entry smoke
         run: node --check test/year2/gamification-diversity-public-entry-rc1.mjs
@@ -98,20 +98,20 @@ jobs:
           cat /tmp/duduq-year2-http.log
           exit 1
 
-      - name: Run browser manual-review homologation RC2
+      - name: Run quick browser manual-review smoke RC2
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year2/gamification-diversity-browser-rc2.mjs
 
-      - name: Audit all transformed dynamic items on-screen
+      - name: Homologate Intro + every Matching-origin item on desktop and mobile
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/manual-review-hotfix-browser-rc2.mjs
+
+      - name: Audit all transformed Bubble/Target items on-screen
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year2/gamification-diversity-dynamic-visibility-rc1.mjs
-
-      - name: Audit every transformed Matching render
-        env:
-          BASE_URL: http://127.0.0.1:4173
-        run: node test/year2/gamification-diversity-matching-render-rc1.mjs
 
       - name: Smoke all public M01-M06 entrypoints
         env:
