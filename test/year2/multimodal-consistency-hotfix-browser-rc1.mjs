@@ -80,7 +80,16 @@ async function activeActivityInfo(page, module) {
       pedagogicalModality: single?.metadata?.pedagogicalModality || null,
       sourceAlternatives: single?.metadata?.sourceAlternativesV23 || [],
       centralVisualAsset: single?.metadata?.listeningAssociation?.centralVisualAsset || null,
-      primaryAudioReady: single?.metadata?.listeningAssociation?.primaryAudioReady === true
+      primaryAudioReady: single?.metadata?.listeningAssociation?.primaryAudioReady === true,
+      alternativeAudioModel: (single?.alternatives || []).map((alternative) => ({
+        id: alternative?.id || null,
+        text: alternative?.text || null,
+        audio: alternative?.audio || null,
+        spokenText: alternative?.spokenText || null,
+        speechLocale: alternative?.speechLocale || null,
+        audioDescription: alternative?.audioDescription || null,
+        metadataAudioAlias: alternative?.metadata?.audioCompatibilityAliasesReady === true
+      }))
     };
   }, { moduleKey: key(module) });
 }
@@ -117,17 +126,62 @@ async function assertCentralImage(target, label) {
   return state;
 }
 
+async function runtimeAudioDebug(frame, info) {
+  return frame.evaluate((parentInfo) => {
+    let parsed = null;
+    let parseError = null;
+    const raw = document.querySelector('#targetShooterConfig')?.textContent || '';
+    try { parsed = raw ? JSON.parse(raw) : null; } catch (error) { parseError = error?.message || String(error); }
+    const stages = Array.isArray(parsed?.stages) ? parsed.stages : [];
+    const stage = stages.find((entry) => entry?.id === parentInfo.questionId) || stages[0] || null;
+    return {
+      questionId: parentInfo.questionId,
+      parentAlternativeAudioModel: parentInfo.alternativeAudioModel,
+      configKeys: parsed ? Object.keys(parsed) : [],
+      stage: stage ? {
+        id: stage.id,
+        strategy: stage.strategy,
+        items: (stage.items || []).map((item) => ({
+          id: item.id,
+          label: item.label,
+          audioAssetKey: item.audioAssetKey || null,
+          spokenText: item.spokenText || null,
+          speechLocale: item.speechLocale || null,
+          audioDescription: item.audioDescription || null,
+          imageAssetKey: item.imageAssetKey || null,
+          required: item.required,
+          targetId: item.targetId || null
+        })),
+        targets: (stage.targets || []).map((target) => ({ id: target.id, imageAssetKey: target.imageAssetKey || null, alt: target.alt || null }))
+      } : null,
+      parseError,
+      bankItems: Array.from(document.querySelectorAll('.duduq-dd2-bank .duduq-dd2-item')).map((node) => ({
+        id: node.getAttribute('data-dd2-item-id'),
+        text: String(node.innerText || '').trim(),
+        html: node.parentElement?.outerHTML?.slice(0, 1600) || node.outerHTML.slice(0, 1600),
+        buttons: Array.from((node.parentElement || node).querySelectorAll('button')).map((button) => ({
+          className: button.className,
+          ariaLabel: button.getAttribute('aria-label'),
+          disabled: button.disabled,
+          dataPlaying: button.getAttribute('data-playing')
+        }))
+      }))
+    };
+  }, info);
+}
+
 async function assertAudioAlternativeContract(frame, info, label) {
   const bankItems = frame.locator(".duduq-dd2-bank .duduq-dd2-item");
   const count = await bankItems.count();
   assert(count >= 2 && count <= 4, `${label}: esperado 2–4 alternativas, encontrado ${count}.`);
   assert((await bankItems.locator("img").count()) === 0, `${label}: alternativas continuam imagem-primárias.`);
 
-  // O runtime 2.0.18 herdado pela 2.0.22 mantém a classe histórica UDD
-  // para o botão de áudio, embora o restante da casca ativa use dd2.
   const audioButtons = frame.locator(".duduq-dd2-bank .duduq-udd-item-audio, .duduq-dd2-bank .duduq-dd2-item-audio");
   const audioCount = await audioButtons.count();
-  assert(audioCount === count, `${label}: nem toda alternativa possui controle de áudio (${audioCount}/${count}).`);
+  if (audioCount !== count) {
+    const debug = await runtimeAudioDebug(frame, info);
+    throw new Error(`${label}: nem toda alternativa possui controle de áudio (${audioCount}/${count}). RUNTIME_AUDIO_DEBUG=${JSON.stringify(debug)}`);
+  }
 
   const visibleText = await bankItems.evaluateAll((nodes) => nodes.map((node) => String(node.innerText || "").trim().replace(/\s+/g, " ")));
   const sourceWords = (info.sourceAlternatives || []).map((value) => String(value).trim()).filter(Boolean);
