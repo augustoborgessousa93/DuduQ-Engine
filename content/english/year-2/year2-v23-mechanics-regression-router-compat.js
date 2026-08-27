@@ -12,10 +12,9 @@
   }
   if (factory.__mechanicsRegressionRouterCompatApplied) return;
 
-  const VERSION = "1.0.4-mechanics-regression-bubble-runtime-bridge";
+  const VERSION = "1.0.5-mechanics-regression-bubble-renderer-bridge";
   const WORD_SLASH_QUARANTINE_REASON = "WORD_SLASH_1_0_17_OBJECT_SPAWN_RUNTIME_LOCK";
   const originalBuild = factory.buildModule.bind(factory);
-  const bubbleAssetUrls = new Set();
 
   function questions(module) {
     return (module?.activities || []).flatMap((activity) => activity?.questions || []);
@@ -75,10 +74,6 @@
     disableMainImage(question);
     for (const alternative of question.alternatives || []) {
       if (!alternative || typeof alternative !== "object") continue;
-      const imageAssetKey = String(alternative?.metadata?.imageAssetKey || "").trim();
-      if (/^(?:https?:|data:image\/)/i.test(imageAssetKey)) {
-        bubbleAssetUrls.add(imageAssetKey);
-      }
       alternative.image = {
         ...(alternative.image || {}),
         enabled: false,
@@ -236,59 +231,35 @@
   }
 
   /*
-   * Bubble Pop 1.0.31 intentionally resolves imageAssetKey through its own
-   * BUBBLE_POP_ASSETS map. Year 2 smart assets are official absolute URLs, so
-   * the adapter preserves the URL as imageAssetKey but the immutable runtime
-   * does not know that key. The public adapter mounts the runtime by direct
-   * iframe.src, therefore a parent fetch() rewrite cannot affect it.
+   * Bubble Pop 1.0.31 keeps BUBBLE_POP_ASSETS inside the bundle closure. Browser
+   * diagnostics proved that official Year 2 imageAssetKey URLs reach the iframe,
+   * but that lexical asset map cannot be extended from the parent document.
    *
-   * This Year-2-only bridge runs in the capture phase of the iframe load event,
-   * before the adapter's target load handler posts DUDUQ_LOAD_CONTENT. It adds
-   * only already-resolved official URLs as identity entries (url -> url) to the
-   * runtime asset map. Release files and Canary remain untouched.
+   * Load a Year-2-only renderer bridge instead. The bridge runs before the
+   * public adapter sends DUDUQ_LOAD_CONTENT and intercepts only BubblePopMedia
+   * when imageAssetKey is an approved Assets-DuduQ URL (or deterministic data
+   * image fallback). No immutable release file or Canary manifest is modified.
    */
-  function injectBubbleRuntimeAssets(frame) {
-    if (!frame || frame.tagName !== "IFRAME") return false;
-    try {
-      const runtimeWindow = frame.contentWindow;
-      if (!runtimeWindow) return false;
-      const assets = runtimeWindow.BUBBLE_POP_ASSETS ||
-        runtimeWindow.eval?.('typeof BUBBLE_POP_ASSETS !== "undefined" ? BUBBLE_POP_ASSETS : null');
-      if (!assets || typeof assets !== "object") return false;
-      let injected = 0;
-      for (const url of bubbleAssetUrls) {
-        if (!url) continue;
-        if (assets[url] !== url) {
-          assets[url] = url;
-          injected += 1;
-        }
-      }
-      runtimeWindow.__DUDUQ_YEAR2_BUBBLE_ASSET_BRIDGE__ = {
-        version: VERSION,
-        injected,
-        knownOfficialUrls: bubbleAssetUrls.size
-      };
-      return true;
-    } catch (_) {
-      return false;
-    }
-  }
+  function installBubbleSmartRendererBridgeScript() {
+    if (window.__DUDUQ_YEAR2_BUBBLE_SMART_RENDERER_BRIDGE_REQUESTED__) return;
 
-  function installBubbleRuntimeAssetBridge() {
-    if (window.__DUDUQ_YEAR2_BUBBLE_RUNTIME_ASSET_BRIDGE__) return;
-    document.addEventListener(
-      "load",
-      function year2BubbleRuntimeLoadCapture(event) {
-        const frame = event.target;
-        if (!frame || frame.tagName !== "IFRAME") return;
-        const src = String(frame.getAttribute("src") || frame.src || "");
-        if (!/\/DUDUQ_BUBBLE_POP\.html(?:\?|$)/i.test(src)) return;
-        injectBubbleRuntimeAssets(frame);
-        window.setTimeout(() => injectBubbleRuntimeAssets(frame), 0);
-      },
-      true
-    );
-    window.__DUDUQ_YEAR2_BUBBLE_RUNTIME_ASSET_BRIDGE__ = VERSION;
+    const existing = document.querySelector('script[data-duduq-year2-bubble-smart-renderer="true"]');
+    if (existing) {
+      window.__DUDUQ_YEAR2_BUBBLE_SMART_RENDERER_BRIDGE_REQUESTED__ = VERSION;
+      return;
+    }
+
+    const currentSrc = String(document.currentScript?.src || location.href);
+    const script = document.createElement("script");
+    script.src = new URL(
+      `./year2-v23-bubble-smart-renderer-bridge.js?v=${encodeURIComponent(VERSION)}`,
+      currentSrc
+    ).href;
+    script.async = false;
+    script.dataset.duduqYear2BubbleSmartRenderer = "true";
+    script.onerror = () => console.error("[DuduQ Year2 Mechanics Router Compat] Falha ao carregar a ponte visual do Bubble Pop.");
+    (document.head || document.documentElement).appendChild(script);
+    window.__DUDUQ_YEAR2_BUBBLE_SMART_RENDERER_BRIDGE_REQUESTED__ = VERSION;
   }
 
   /*
@@ -339,14 +310,13 @@
     }
 
     const synchronizedActivities = synchronizeActivityMechanics(module);
-    installBubbleRuntimeAssetBridge();
+    installBubbleSmartRendererBridgeScript();
     installCanonicalWordSlashRuntimeGuard();
 
     const audit = Object.freeze({
       version: VERSION,
       patchedBubbleItems: bubbleItems,
-      bubbleRuntimeAssetBridgeInstalled: true,
-      bubbleRuntimeOfficialUrlCount: bubbleAssetUrls.size,
+      bubbleSmartRendererBridgeRequested: true,
       quarantinedWordSlashItems,
       synchronizedActivities,
       activityMechanicsHomogeneous: true,
