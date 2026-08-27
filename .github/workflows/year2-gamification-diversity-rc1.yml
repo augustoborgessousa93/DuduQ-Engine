@@ -48,6 +48,9 @@ jobs:
       - name: Syntax check mechanics regression hotfix RC1
         run: node --check content/english/year-2/year2-v23-mechanics-regression-hotfix.js
 
+      - name: Syntax check mechanics regression Router compatibility
+        run: node --check content/english/year-2/year2-v23-mechanics-regression-router-compat.js
+
       - name: Syntax check Year 2 RC test
         run: node --check test/year2/gamification-diversity-rc1.mjs
 
@@ -63,8 +66,8 @@ jobs:
       - name: Syntax check exhaustive manual-review browser RC2
         run: node --check test/year2/manual-review-hotfix-browser-rc2.mjs
 
-      - name: Syntax check mechanics regression browser RC1
-        run: node --check test/year2/mechanics-regression-browser-rc1.mjs
+      - name: Syntax check deterministic mechanics regression browser RC2
+        run: node --check test/year2/mechanics-regression-browser-rc2.mjs
 
       - name: Syntax check public entry smoke
         run: node --check test/year2/gamification-diversity-public-entry-rc1.mjs
@@ -120,10 +123,10 @@ jobs:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year2/manual-review-hotfix-browser-rc2.mjs
 
-      - name: Homologate Word Slash, Bubble, Target uniqueness and dense Matching
+      - name: Homologate Word Slash, Bubble, Target uniqueness and dense Matching RC2
         env:
           BASE_URL: http://127.0.0.1:4173
-        run: node test/year2/mechanics-regression-browser-rc1.mjs
+        run: timeout 240s node test/year2/mechanics-regression-browser-rc2.mjs
 
       - name: Smoke all public M01-M06 entrypoints
         env:
