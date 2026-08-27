@@ -8,18 +8,30 @@ const OUTPUT_DIR = path.resolve("test-results/year2-gamification-diversity-rc1/w
 const REPORT_FILE = path.join(OUTPUT_DIR, "EN2-M1-08-frame-lifecycle.json");
 const SCREENSHOT_FILE = path.join(OUTPUT_DIR, "EN2-M1-08-frame-lifecycle.png");
 const MODULE_URL = `${BASE_URL}/content/english/year-2/module-01/index.html?qa=word-slash-frame-diagnostic-rc2`;
-const SAMPLE_DELAYS = [0, 250, 750, 1500, 3000, 6000, 10000];
+const SAMPLE_DELAYS = [0, 250, 750, 1500, 3000, 6000];
+const FRAME_READ_TIMEOUT_MS = 1200;
 
 await fs.mkdir(OUTPUT_DIR, { recursive: true });
 
+function withTimeout(promise, timeoutMs, label) {
+  let timer;
+  return Promise.race([
+    Promise.resolve(promise),
+    new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error(`${label} timed out after ${timeoutMs} ms`)), timeoutMs);
+    })
+  ]).finally(() => clearTimeout(timer));
+}
+
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 1366, height: 768 } });
-page.setDefaultTimeout(15_000);
-page.setDefaultNavigationTimeout(25_000);
+page.setDefaultTimeout(12_000);
+page.setDefaultNavigationTimeout(20_000);
 
 const consoleMessages = [];
 const pageErrors = [];
 const failedRequests = [];
+const wordSlashResponses = [];
 
 page.on("console", (message) => {
   if (["error", "warning"].includes(message.type())) {
@@ -32,6 +44,12 @@ page.on("requestfailed", (request) => failedRequests.push({
   method: request.method(),
   failure: request.failure()?.errorText || "unknown"
 }));
+page.on("response", (response) => {
+  const url = response.url();
+  if (/word-slash\/1\.0\.17|DUDUQ_WORD_SLASH\.html/i.test(url)) {
+    wordSlashResponses.push({ url, status: response.status(), ok: response.ok() });
+  }
+});
 
 await page.route("**/engine/duduq-player-v1.js*", async (route) => {
   await route.fulfill({
@@ -42,7 +60,7 @@ await page.route("**/engine/duduq-player-v1.js*", async (route) => {
 });
 
 async function sample(label) {
-  const host = await page.evaluate(() => {
+  const host = await withTimeout(page.evaluate(() => {
     const root = document.querySelector("#root");
     const iframes = Array.from(root?.querySelectorAll("iframe") || []).map((iframe, index) => {
       const rect = iframe.getBoundingClientRect();
@@ -63,13 +81,13 @@ async function sample(label) {
       iframes,
       mechanics: window.DuduQ?.listMechanics?.().map((entry) => ({ id: entry.id, version: entry.version })) || []
     };
-  });
+  }), FRAME_READ_TIMEOUT_MS, `${label}: host snapshot`);
 
   const frames = [];
   for (const frame of page.frames()) {
     let state;
     try {
-      state = await frame.evaluate(() => ({
+      state = await withTimeout(frame.evaluate(() => ({
         href: location.href,
         readyState: document.readyState,
         bodyExists: Boolean(document.body),
@@ -79,7 +97,7 @@ async function sample(label) {
         wsObjectCount: document.querySelectorAll(".duduq-ws-object").length,
         runtimeError: String(document.querySelector("#duduq-runtime-error")?.textContent || "").replace(/\s+/g, " ").trim().slice(0, 1000),
         bootText: String(document.querySelector("#duduq-boot")?.textContent || "").replace(/\s+/g, " ").trim().slice(0, 600)
-      }));
+      })), FRAME_READ_TIMEOUT_MS, `${label}: frame ${frame.url() || "about:blank"}`);
     } catch (error) {
       state = { evaluationError: error.message };
     }
@@ -95,11 +113,11 @@ let fatalError = null;
 const samples = [];
 
 try {
-  await page.goto(MODULE_URL, { waitUntil: "domcontentloaded" });
+  await page.goto(MODULE_URL, { waitUntil: "domcontentloaded", timeout: 20_000 });
   await page.waitForFunction(() => Boolean(
     window.DUDUQ_CONTENT?.english?.year2?.module01v23multimodal?.mechanicsRegressionAudit &&
     window.DuduQ?.hasMechanic?.("word-slash")
-  ), null, { timeout: 25_000 });
+  ), null, { timeout: 20_000 });
 
   await page.evaluate(() => {
     try { window.DuduQIntro?.hide?.({ immediate: true, reason: "qa-word-slash-frame-diagnostic-rc2" }); } catch (_) {}
@@ -158,11 +176,11 @@ try {
     previous = delay;
   }
 
-  await page.screenshot({ path: SCREENSHOT_FILE, fullPage: false, timeout: 10_000 });
+  await page.screenshot({ path: SCREENSHOT_FILE, fullPage: false, timeout: 6_000 });
 } catch (error) {
   fatalError = { name: error.name, message: error.message, stack: error.stack || null };
   try { samples.push(await sample("fatal-snapshot")); } catch (_) {}
-  try { await page.screenshot({ path: SCREENSHOT_FILE, fullPage: false, timeout: 5_000 }); } catch (_) {}
+  try { await page.screenshot({ path: SCREENSHOT_FILE, fullPage: false, timeout: 3_000 }); } catch (_) {}
 } finally {
   const childFrames = samples.flatMap((entry) => entry.frames.filter((frame) => frame.url !== MODULE_URL));
   const loadedWordSlash = childFrames.some((frame) => frame.wsObjectCount > 0);
@@ -188,6 +206,7 @@ try {
     classification,
     fatalError,
     samples,
+    wordSlashResponses,
     consoleMessages,
     pageErrors,
     failedRequests
@@ -199,12 +218,13 @@ try {
     id: report.id,
     classification: report.classification,
     startResult: report.startResult,
+    wordSlashResponses,
     consoleMessages: consoleMessages.slice(-8),
     pageErrors: pageErrors.slice(-8),
     failedRequests: failedRequests.slice(-8),
     reportFile: REPORT_FILE
   }, null, 2));
 
-  await page.close().catch(() => {});
-  await browser.close().catch(() => {});
+  await Promise.race([page.close().catch(() => {}), new Promise((resolve) => setTimeout(resolve, 1500))]);
+  await Promise.race([browser.close().catch(() => {}), new Promise((resolve) => setTimeout(resolve, 1500))]);
 }
