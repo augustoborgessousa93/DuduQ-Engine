@@ -7,6 +7,7 @@ on:
       - "test/year2/gamification-diversity-*.mjs"
       - "test/year2/manual-review-hotfix-*.mjs"
       - "test/year2/mechanics-regression-*.mjs"
+      - "test/year2/word-slash-frame-diagnostic-*.mjs"
       - ".github/workflows/year2-gamification-diversity-rc1.yml"
   push:
     branches:
@@ -18,6 +19,7 @@ on:
       - "test/year2/gamification-diversity-*.mjs"
       - "test/year2/manual-review-hotfix-*.mjs"
       - "test/year2/mechanics-regression-*.mjs"
+      - "test/year2/word-slash-frame-diagnostic-*.mjs"
       - ".github/workflows/year2-gamification-diversity-rc1.yml"
 
 permissions:
@@ -72,6 +74,9 @@ jobs:
       - name: Syntax check mechanics regression browser diagnostic supervisor RC2
         run: node --check test/year2/mechanics-regression-browser-diagnostic-rc2.mjs
 
+      - name: Syntax check focused Word Slash frame diagnostic RC2
+        run: node --check test/year2/word-slash-frame-diagnostic-rc2.mjs
+
       - name: Syntax check public entry smoke
         run: node --check test/year2/gamification-diversity-public-entry-rc1.mjs
 
@@ -125,6 +130,11 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year2/manual-review-hotfix-browser-rc2.mjs
+
+      - name: Capture focused Word Slash iframe lifecycle RC2
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/word-slash-frame-diagnostic-rc2.mjs
 
       - name: Homologate Word Slash, Bubble, Target uniqueness and dense Matching RC2
         env:
