@@ -6,15 +6,18 @@ on:
       - "content/english/year-2/**"
       - "test/year2/gamification-diversity-*.mjs"
       - "test/year2/manual-review-hotfix-*.mjs"
+      - "test/year2/mechanics-regression-*.mjs"
       - ".github/workflows/year2-gamification-diversity-rc1.yml"
   push:
     branches:
       - "feat/year2-gamification-diversity-v23"
       - "fix/year2-logo-smart-assets-matching-v2"
+      - "hotfix/year2-mechanics-regression"
     paths:
       - "content/english/year-2/**"
       - "test/year2/gamification-diversity-*.mjs"
       - "test/year2/manual-review-hotfix-*.mjs"
+      - "test/year2/mechanics-regression-*.mjs"
       - ".github/workflows/year2-gamification-diversity-rc1.yml"
 
 permissions:
@@ -42,11 +45,17 @@ jobs:
       - name: Syntax check manual-review hotfix RC2
         run: node --check content/english/year-2/year2-v23-manual-review-hotfix-v2.js
 
+      - name: Syntax check mechanics regression hotfix RC1
+        run: node --check content/english/year-2/year2-v23-mechanics-regression-hotfix.js
+
       - name: Syntax check Year 2 RC test
         run: node --check test/year2/gamification-diversity-rc1.mjs
 
       - name: Syntax check manual-review diagnostic
         run: node --check test/year2/manual-review-hotfix-diagnostic.mjs
+
+      - name: Syntax check mechanics regression diagnostic
+        run: node --check test/year2/mechanics-regression-hotfix-rc1.mjs
 
       - name: Syntax check quick browser homologation RC2
         run: node --check test/year2/gamification-diversity-browser-rc2.mjs
@@ -54,8 +63,8 @@ jobs:
       - name: Syntax check exhaustive manual-review browser RC2
         run: node --check test/year2/manual-review-hotfix-browser-rc2.mjs
 
-      - name: Syntax check dynamic visibility audit
-        run: node --check test/year2/gamification-diversity-dynamic-visibility-rc1.mjs
+      - name: Syntax check mechanics regression browser RC1
+        run: node --check test/year2/mechanics-regression-browser-rc1.mjs
 
       - name: Syntax check public entry smoke
         run: node --check test/year2/gamification-diversity-public-entry-rc1.mjs
@@ -66,11 +75,14 @@ jobs:
       - name: Validate variable complete-pair Matching + manual review hotfix
         run: node test/year2/manual-review-hotfix-diagnostic.mjs
 
+      - name: Validate mechanics regression contracts across all 90 items
+        run: node test/year2/mechanics-regression-hotfix-rc1.mjs
+
   chromium-homologation:
     name: Chromium interaction + responsive homologation
     needs: integrity
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 18
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -108,10 +120,10 @@ jobs:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year2/manual-review-hotfix-browser-rc2.mjs
 
-      - name: Audit all transformed Bubble/Target items on-screen
+      - name: Homologate Word Slash, Bubble, Target uniqueness and dense Matching
         env:
           BASE_URL: http://127.0.0.1:4173
-        run: node test/year2/gamification-diversity-dynamic-visibility-rc1.mjs
+        run: node test/year2/mechanics-regression-browser-rc1.mjs
 
       - name: Smoke all public M01-M06 entrypoints
         env:
