@@ -15,7 +15,7 @@
   }
   if (factory.__dragDropListeningAssociationFinalApplied) return;
 
-  const VERSION = "1.0.0-year2-listening-vocabulary-association";
+  const VERSION = "1.0.1-year2-listening-vocabulary-association-audio-aliases";
   const originalBuild = factory.buildModule.bind(factory);
   const resolveVisual = typeof factory.resolveYear2VisualConsistent === "function"
     ? factory.resolveYear2VisualConsistent.bind(factory)
@@ -29,7 +29,7 @@
     const stored = question?.metadata?.sourceAlternativesV23;
     if (Array.isArray(stored) && stored.length) return stored.map(String);
     return (question?.alternatives || []).map((alternative) =>
-      String(alternative?.metadata?.sourceWrittenLabel ?? alternative?.audio?.text ?? alternative?.text ?? alternative?.label ?? "")
+      String(alternative?.metadata?.sourceWrittenLabel ?? alternative?.audio?.text ?? alternative?.spokenText ?? alternative?.text ?? alternative?.label ?? "")
     );
   }
 
@@ -48,10 +48,19 @@
       question?.metadata?.optionPresentation !== "MOVABLE_LETTERS_AFTER_FIRST_LISTEN";
   }
 
+  function visualString(value) {
+    if (!value) return "";
+    if (typeof value === "string") return value.trim();
+    if (typeof value === "object") {
+      return String(value.src || value.url || value.path || value.asset || value.assetKey || "").trim();
+    }
+    return "";
+  }
+
   function imageSourceFromAlternative(alternative) {
     return String(
       alternative?.metadata?.imageAssetKey ||
-      alternative?.image?.src ||
+      visualString(alternative?.image) ||
       alternative?.imageSrc ||
       alternative?.imageUrl ||
       ""
@@ -64,7 +73,7 @@
       ...(Array.isArray(question?.metadata?.dragDrop?.targets) ? question.metadata.dragDrop.targets : [])
     ];
     for (const target of targets) {
-      const src = String(target?.imageSrc || target?.imageUrl || target?.image || target?.imageAssetKey || "").trim();
+      const src = String(target?.imageSrc || target?.imageUrl || visualString(target?.image) || target?.imageAssetKey || "").trim();
       if (src) return { src, status: "existing-target-visual", alt: String(target?.alt || "Imagem central da atividade") };
     }
     return null;
@@ -99,9 +108,6 @@
   }
 
   function chooseCentralVisual(question) {
-    /* If the editorial source already supplied a visual context, preserve it.
-       Otherwise reuse the already-resolved image of the correct option before
-       falling back to the central smart resolver. */
     if (question?.metadata?.sourcePlanHasVisualV23 === true || String(question?.metadata?.sourcePlanModeV23 || "").toLowerCase() === "image-choice") {
       const existing = existingTargetVisual(question);
       if (existing) return existing;
@@ -113,8 +119,6 @@
     const enabled = question?.audio?.enabled === true || question?.media?.audio?.enabled === true || question?.metadata?.stimulusAudio?.enabled === true;
     if (enabled) return true;
 
-    /* Preserve the source construct. If an earlier layer stored the original stimulus,
-       restore only that exact text; never invent a new sentence. */
     const sourceStimulus = String(
       question?.metadata?.sourceStimulusAudioV23 ||
       question?.metadata?.sourceAudioV23 ||
@@ -159,16 +163,27 @@
 
     alternatives.forEach((alternative, index) => {
       const label = String(labels[index]);
+      const letter = String.fromCharCode(65 + index);
       const existingAudio = alternative?.audio && typeof alternative.audio === "object" ? alternative.audio : {};
-      alternative.text = String.fromCharCode(65 + index);
+      const speechLocale = existingAudio.language || existingAudio.locale || alternative?.speechLocale || "en-US";
+
+      alternative.text = letter;
       alternative.label = "";
       alternative.audio = {
         ...existingAudio,
         enabled: true,
         text: label,
-        language: existingAudio.language || existingAudio.locale || "en-US",
+        language: speechLocale,
+        locale: speechLocale,
         role: "option"
       };
+      /* Direct aliases are intentionally duplicated because the shared 2.0.18 adapter
+         also accepts these fields. This makes the auditory option survive compatibility
+         layers that may clone/normalize only the top-level item shape. */
+      alternative.spokenText = label;
+      alternative.speechLocale = speechLocale;
+      alternative.audioDescription = `Ouvir alternativa ${letter}`;
+
       alternative.image = { enabled: false, src: null, alt: "" };
       delete alternative.imageSrc;
       delete alternative.imageUrl;
@@ -178,6 +193,7 @@
         writtenLabelVisibleBeforeAnswer: false,
         multimodalRole: "AUDIO_ALTERNATIVE",
         audioAffordanceOwner: "runtime-control",
+        audioCompatibilityAliasesReady: true,
         centralStimulusVisual: visual.src
       };
       delete alternative.metadata.imageAssetKey;
@@ -206,7 +222,8 @@
         primaryAudioReady,
         sourceAnswerPreserved: true,
         sourceAlternativeLabelsPreserved: true,
-        visualShellPreserved: true
+        visualShellPreserved: true,
+        audioCompatibilityAliasesReady: true
       }
     };
 
