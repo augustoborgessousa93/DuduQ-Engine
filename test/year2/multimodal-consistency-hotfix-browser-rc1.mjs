@@ -86,7 +86,7 @@ async function findSingleTarget(page, module) {
   for (let attempt = 0; attempt < total; attempt += 1) {
     const info = await activeActivityInfo(page, module);
     const { frame } = await currentFrame(page);
-    const target = frame.locator('.duduq-dd2-target[data-year2-single-target-choice="true"]').first();
+    const target = frame.locator('.duduq-dd2-target[data-single-target-choice="true"]').first();
     if (await target.isVisible().catch(() => false)) {
       assert(info.correctSource, `M${module}: runtime single-target ativo, mas gabarito estrutural não foi localizado na atividade ${info.activityId}.`);
       return { frame, target, info };
