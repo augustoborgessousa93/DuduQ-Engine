@@ -7,6 +7,7 @@ const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:4173";
 const OUTPUT_DIR = path.resolve("test-results/year2-public-entry-visual-ready-rc2");
 const VIEWPORTS = [
   { name: "desktop", width: 1366, height: 768 },
+  { name: "fullscreen", width: 1920, height: 1080 },
   { name: "mobile", width: 390, height: 844 }
 ];
 
@@ -71,6 +72,96 @@ async function bootPublicModule(page, module) {
   return { iframe, frame, model };
 }
 
+async function waitForHostReveal(page, module) {
+  await page.waitForFunction(() => {
+    const html = document.documentElement;
+    const body = document.body;
+    const overlay = document.querySelector(".duduq-transition");
+    const locked = html.classList.contains("duduq-transition-lock") ||
+      body?.classList.contains("duduq-transition-lock");
+
+    if (locked) return false;
+    if (!overlay) return true;
+
+    const style = getComputedStyle(overlay);
+    const opacity = Number.parseFloat(style.opacity || "0");
+    const active = overlay.classList.contains("is-covering") ||
+      overlay.classList.contains("is-covered") ||
+      overlay.classList.contains("is-revealing");
+
+    return !active && opacity <= 0.02;
+  }, null, { timeout: 25_000 });
+
+  // Dois paints estáveis garantem que a captura não aconteça no mesmo frame
+  // em que o Host remove o véu opaco da transição.
+  await page.evaluate(() => new Promise((resolve) => {
+    requestAnimationFrame(() => requestAnimationFrame(resolve));
+  }));
+
+  const reveal = await page.evaluate(() => {
+    const overlay = document.querySelector(".duduq-transition");
+    const style = overlay ? getComputedStyle(overlay) : null;
+    return {
+      overlayPresent: Boolean(overlay),
+      overlayOpacity: overlay ? Number.parseFloat(style?.opacity || "0") : 0,
+      overlayClasses: overlay ? Array.from(overlay.classList) : [],
+      htmlLocked: document.documentElement.classList.contains("duduq-transition-lock"),
+      bodyLocked: Boolean(document.body?.classList.contains("duduq-transition-lock"))
+    };
+  });
+
+  assert(!reveal.htmlLocked && !reveal.bodyLocked, `M${module}: Host permaneceu bloqueado pela transição.`);
+  assert(reveal.overlayOpacity <= 0.02, `M${module}: véu da transição ainda opaco (${reveal.overlayOpacity}).`);
+  assert(!reveal.overlayClasses.some((name) => ["is-covering", "is-covered", "is-revealing"].includes(name)),
+    `M${module}: transição ainda ativa: ${reveal.overlayClasses.join(", ")}.`);
+
+  return reveal;
+}
+
+async function waitForBubbleEvidence(frame, module) {
+  await frame.waitForFunction(() => {
+    const arena = document.querySelector(".duduq-bp-arena");
+    const images = Array.from(document.querySelectorAll(".duduq-bp-media"));
+    if (!arena || images.length < 2) return false;
+
+    const arenaRect = arena.getBoundingClientRect();
+    const fullyVisible = images.filter((image) => {
+      const rect = image.getBoundingClientRect();
+      const shell = image.closest(".duduq-bp-bubble-shell");
+      const style = getComputedStyle(image);
+      const shellStyle = shell ? getComputedStyle(shell) : style;
+      const shellOpacity = Number.parseFloat(shellStyle.opacity || "1");
+      return image.complete && image.naturalWidth > 0 &&
+        rect.width > 20 && rect.height > 20 &&
+        style.visibility !== "hidden" && style.display !== "none" &&
+        shellOpacity > 0.35 &&
+        rect.left >= arenaRect.left - 2 &&
+        rect.right <= arenaRect.right + 2 &&
+        rect.top >= arenaRect.top - 2 &&
+        rect.bottom <= arenaRect.bottom + 2;
+    });
+
+    return fullyVisible.length >= Math.min(2, images.length);
+  }, null, { timeout: 10_000 });
+
+  const visibleBubbleCount = await frame.evaluate(() => {
+    const arena = document.querySelector(".duduq-bp-arena");
+    if (!arena) return 0;
+    const arenaRect = arena.getBoundingClientRect();
+    return Array.from(document.querySelectorAll(".duduq-bp-media")).filter((image) => {
+      const rect = image.getBoundingClientRect();
+      const shell = image.closest(".duduq-bp-bubble-shell");
+      const shellStyle = shell ? getComputedStyle(shell) : getComputedStyle(image);
+      return Number.parseFloat(shellStyle.opacity || "1") > 0.35 &&
+        rect.left >= arenaRect.left - 2 && rect.right <= arenaRect.right + 2 &&
+        rect.top >= arenaRect.top - 2 && rect.bottom <= arenaRect.bottom + 2;
+    }).length;
+  });
+
+  assert(visibleBubbleCount >= 2, `M${module}: Bubble Pop não apresentou ao menos duas imagens integralmente visíveis para evidência.`);
+  return visibleBubbleCount;
+}
+
 async function waitForActualMechanic(page, iframe, frame, module, mechanic) {
   const selectors = {
     "drag-drop": ".duduq-dd2-item",
@@ -102,7 +193,12 @@ async function waitForActualMechanic(page, iframe, frame, module, mechanic) {
       style.visibility !== "hidden" && Number.parseFloat(style.opacity || "1") > .85;
   }, null, { timeout: 20_000 });
 
-  await page.waitForTimeout(350);
+  const hostReveal = await waitForHostReveal(page, module);
+  const visualBubbleCount = mechanic === "bubble-pop"
+    ? await waitForBubbleEvidence(frame, module)
+    : 0;
+
+  await page.waitForTimeout(120);
 
   const runtime = await frame.evaluate(({ mechanic, selector }) => {
     const nodes = Array.from(document.querySelectorAll(selector));
@@ -150,7 +246,7 @@ async function waitForActualMechanic(page, iframe, frame, module, mechanic) {
     assert(new Set(identities).size === identities.length, `M${module}: Bubble Pop contém imagem repetida no primeiro round.`);
   }
 
-  return runtime;
+  return { ...runtime, hostReveal, visualBubbleCount };
 }
 
 await fs.mkdir(OUTPUT_DIR, { recursive: true });
@@ -193,10 +289,10 @@ try {
   await browser.close();
 }
 
-assert(report.length === 12, `Esperados 12 cenários públicos reais; executados ${report.length}.`);
+assert(report.length === 18, `Esperados 18 cenários públicos reais; executados ${report.length}.`);
 const summary = {
   status: "PASS",
-  contract: "PUBLIC_ENTRY_ACTUAL_MECHANIC_VISIBILITY",
+  contract: "PUBLIC_ENTRY_ACTUAL_MECHANIC_VISIBILITY_AFTER_HOST_REVEAL",
   scenarios: report.length,
   modules: 6,
   viewports: VIEWPORTS.map((entry) => entry.name),
@@ -212,6 +308,8 @@ console.log(JSON.stringify({
     viewport: entry.viewport.name,
     mechanic: entry.model.mechanic,
     visibleCount: entry.runtime.visibleCount,
-    bubbleImages: entry.runtime.bubbleImages.length
+    bubbleImages: entry.runtime.bubbleImages.length,
+    visualBubbleCount: entry.runtime.visualBubbleCount,
+    hostOverlayOpacity: entry.runtime.hostReveal.overlayOpacity
   }))
 }, null, 2));
