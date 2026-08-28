@@ -148,6 +148,7 @@ async function runScenario(browser, name, viewport, mobile) {
     assert(bridge.selectedTools?.selectedChoiceReplayEnabled === true, `${name}: replay selecionado não declarado.`);
     assert(bridge.selectedTools?.selectedChoiceReplayAvoidsGlobalButtonNormalizer === true, `${name}: replay não declara isolamento do normalizador global.`);
     assert(bridge.selectedTools?.selectedChoiceReplayKeyboardAccessible === true, `${name}: replay não declara acesso por teclado.`);
+    assert(bridge.selectedTools?.selectedChoiceReplayNeutralAccessibleName === true, `${name}: replay não declara nome acessível neutro.`);
     assert(bridge.selectedTools?.selectedChoiceClearEnabled === true, `${name}: clear selecionado não declarado.`);
     assert(bridge.release === "2.0.22", `${name}: Drag Drop mudou para ${bridge.release}.`);
 
@@ -175,7 +176,7 @@ async function runScenario(browser, name, viewport, mobile) {
     await clear.waitFor({ state: "visible", timeout: 5_000 });
     assert(await replay.evaluate((node) => node.tagName === "SPAN" && node.getAttribute("role") === "button" && node.tabIndex === 0), `${name}: replay voltou a ser um button capturável ou perdeu acessibilidade.`);
     assert(!(await replay.evaluate((node) => node.classList.contains("duduq-audio-standard") || node.hasAttribute("data-duduq-native-audio"))), `${name}: replay foi capturado pelo normalizador global de áudio.`);
-    assert(/Ouvir novamente|Parar áudio/i.test(await replay.getAttribute("aria-label") || ""), `${name}: replay sem nome acessível correto.`);
+    assert(/Repetir alternativa escolhida|Parar repetição da alternativa escolhida/i.test(await replay.getAttribute("aria-label") || ""), `${name}: replay sem nome acessível correto.`);
     assert(/Remover alternativa escolhida/i.test(await clear.getAttribute("aria-label") || ""), `${name}: X sem nome acessível correto.`);
 
     const confirm = frame.locator(".duduq-dd2-confirm").first();
