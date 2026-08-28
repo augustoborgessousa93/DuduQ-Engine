@@ -7,6 +7,9 @@
      not click replay when that audio is already active;
    - tap/click placement has no native autoplay, so this layer invokes the already
      homologated selected-choice replay control exactly once;
+   - while the automatic instruction audio is playing, option-audio controls stay
+     available so the learner can listen/switch alternatives without placing an answer;
+   - answer cards keep the Host disabled state during the automatic instruction audio;
    - X removal and wrong-answer return do not autoplay;
    - reselecting after the target becomes empty may autoplay again;
    - no scoring, answer mapping, release source or Canary source is modified.
@@ -14,11 +17,12 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0-year2-dd-selected-placement-autoplay";
+  const VERSION = "1.1.0-year2-dd-placement-autoplay-option-audio-unlock";
   const FRAME_WIRED = "data-duduq-year2-placement-autoplay-wired";
   const INNER_OBSERVER = "__DUDUQ_YEAR2_PLACEMENT_AUTOPLAY_OBSERVER__";
   const ROOT_LAST = "__DUDUQ_YEAR2_PLACEMENT_AUTOPLAY_LAST__";
   const ROOT_TIMER = "__DUDUQ_YEAR2_PLACEMENT_AUTOPLAY_TIMER__";
+  const INSTRUCTION_UNLOCK = "data-duduq-year2-instruction-audio-unlocked";
 
   if (window.__DUDUQ_YEAR2_DD_PLACEMENT_AUTOPLAY_BRIDGE__) return;
 
@@ -34,8 +38,41 @@
     }
   }
 
+  function syncOptionAudioDuringInstruction(root) {
+    if (!root?.querySelector) return;
+    const target = root.querySelector('.duduq-dd2-target[data-single-target-choice="true"]');
+    if (!target) return;
+
+    const instructionButton = root.querySelector(
+      '.duduq-dd2-instruction .duduq-ts-audio-button[data-playing="true"]'
+    );
+    const arena = root.querySelector('.duduq-dd2-arena');
+    const instructionPlaying = Boolean(instructionButton);
+    const mechanicDisabled = arena?.getAttribute('data-disabled') === 'true';
+
+    root.querySelectorAll('.duduq-dd2-item-audio').forEach(function (button) {
+      const wasUnlocked = button.getAttribute(INSTRUCTION_UNLOCK) === 'true';
+
+      if (instructionPlaying && mechanicDisabled) {
+        if (button.disabled) button.disabled = false;
+        if (!wasUnlocked) button.setAttribute(INSTRUCTION_UNLOCK, 'true');
+        return;
+      }
+
+      if (wasUnlocked) {
+        button.removeAttribute(INSTRUCTION_UNLOCK);
+        // If the Host is still disabled after instruction playback stopped, the
+        // reason is no longer the instruction-only lock (pause/transition/etc.).
+        if (mechanicDisabled) button.disabled = true;
+      }
+    });
+  }
+
   function syncRoot(root) {
     if (!root?.querySelector) return;
+
+    syncOptionAudioDuringInstruction(root);
+
     const target = root.querySelector('.duduq-dd2-target[data-single-target-choice="true"]');
     if (!target) return;
 
@@ -93,7 +130,14 @@
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ["data-placed", "data-dd2-replay-playing", "data-wrong"]
+      attributeFilter: [
+        "data-placed",
+        "data-dd2-replay-playing",
+        "data-wrong",
+        "data-playing",
+        "data-disabled",
+        "disabled"
+      ]
     });
 
     try {
@@ -155,6 +199,8 @@
     selectedChoicePlacementAutoPlaysAudioOnce: true,
     autoplaySources: "drop-native+tap-replay-fallback",
     avoidsDoublePlayWhenNativeDropAlreadyPlaying: true,
+    optionAudioAvailableDuringInstructionPlayback: true,
+    instructionPlaybackStillLocksAnswerPlacement: true,
     removalDoesNotAutoplay: true,
     retryReturnDoesNotAutoplay: true
   });
