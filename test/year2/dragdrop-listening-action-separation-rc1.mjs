@@ -184,6 +184,88 @@ async function assertSeparatedControls(frame, target, label) {
   return { cardCount, audioCount, cardState, audioState, firstWasPlaying, playingAfterSwitch };
 }
 
+async function installAudioTrace(frame) {
+  await frame.evaluate(() => {
+    if (window.__DUDUQ_QA_AUDIO_TRACE_INSTALLED__) {
+      window.__DUDUQ_QA_AUDIO_TRACE__.length = 0;
+      return;
+    }
+
+    window.__DUDUQ_QA_AUDIO_TRACE__ = [];
+    window.__DUDUQ_QA_AUDIO_TRACE_INSTALLED__ = true;
+    const push = (entry) => {
+      window.__DUDUQ_QA_AUDIO_TRACE__.push({
+        at: Math.round(performance.now()),
+        ...entry
+      });
+    };
+    const mediaState = (media) => ({
+      src: media?.currentSrc || media?.src || "",
+      paused: Boolean(media?.paused),
+      ended: Boolean(media?.ended),
+      readyState: Number(media?.readyState ?? -1),
+      currentTime: Number(media?.currentTime || 0)
+    });
+
+    const originalPlay = HTMLMediaElement.prototype.play;
+    HTMLMediaElement.prototype.play = function (...args) {
+      push({
+        kind: "media.play-call",
+        userActivation: navigator.userActivation ? {
+          isActive: navigator.userActivation.isActive,
+          hasBeenActive: navigator.userActivation.hasBeenActive
+        } : null,
+        ...mediaState(this)
+      });
+      let result;
+      try {
+        result = originalPlay.apply(this, args);
+      } catch (error) {
+        push({ kind: "media.play-throw", name: error?.name || "Error", message: error?.message || String(error), ...mediaState(this) });
+        throw error;
+      }
+      if (result?.then) {
+        result.then(() => {
+          push({ kind: "media.play-resolve", ...mediaState(this) });
+        }).catch((error) => {
+          push({ kind: "media.play-reject", name: error?.name || "Error", message: error?.message || String(error), ...mediaState(this) });
+        });
+      }
+      return result;
+    };
+
+    ["play", "playing", "pause", "ended", "error", "canplay"].forEach((type) => {
+      document.addEventListener(type, (event) => {
+        if (event.target instanceof HTMLMediaElement) {
+          push({ kind: `media.event.${type}`, ...mediaState(event.target) });
+        }
+      }, true);
+    });
+
+    if (window.speechSynthesis && typeof window.speechSynthesis.speak === "function") {
+      const originalSpeak = window.speechSynthesis.speak.bind(window.speechSynthesis);
+      window.speechSynthesis.speak = function (utterance) {
+        push({
+          kind: "speech.speak-call",
+          text: String(utterance?.text || ""),
+          lang: String(utterance?.lang || ""),
+          userActivation: navigator.userActivation ? {
+            isActive: navigator.userActivation.isActive,
+            hasBeenActive: navigator.userActivation.hasBeenActive
+          } : null
+        });
+        return originalSpeak(utterance);
+      };
+    }
+  });
+}
+
+async function clearAudioTrace(frame) {
+  await frame.evaluate(() => {
+    if (Array.isArray(window.__DUDUQ_QA_AUDIO_TRACE__)) window.__DUDUQ_QA_AUDIO_TRACE__.length = 0;
+  });
+}
+
 async function dragCard(page, source, target, label) {
   const sourceBox = await source.boundingBox();
   const targetBox = await target.boundingBox();
@@ -213,18 +295,29 @@ async function placeChoice(page, source, target, itemId, mode, label) {
 async function assertPlacedAutoplay(target, itemId, label) {
   const replay = target.locator(`.duduq-dd2-placed-replay[data-dd2-placed-replay-item-id="${itemId}"]`).first();
   await replay.waitFor({ state: "visible", timeout: 5_000 });
-  const observed = await target.evaluate(async (node, id) => {
+  const result = await target.evaluate(async (node, id) => {
     const selector = `.duduq-dd2-placed-replay[data-dd2-placed-replay-item-id="${CSS.escape(id)}"]`;
     const deadline = performance.now() + 1600;
     while (performance.now() < deadline) {
       const control = node.querySelector(selector);
-      if (control?.getAttribute("data-dd2-replay-playing") === "true") return true;
+      if (control?.getAttribute("data-dd2-replay-playing") === "true") {
+        return { observed: true, trace: (window.__DUDUQ_QA_AUDIO_TRACE__ || []).slice(-30) };
+      }
       await new Promise((resolve) => setTimeout(resolve, 25));
     }
-    return false;
+    const control = node.querySelector(selector);
+    return {
+      observed: false,
+      replayPlaying: control?.getAttribute("data-dd2-replay-playing") || null,
+      replayAria: control?.getAttribute("aria-label") || null,
+      trace: (window.__DUDUQ_QA_AUDIO_TRACE__ || []).slice(-30)
+    };
   }, itemId);
-  assert(observed, `${label}/${itemId}: áudio da alternativa não iniciou automaticamente ao entrar na lacuna.`);
-  return observed;
+  if (!result.observed) {
+    console.log(`[placement-autoplay-trace] ${label}/${itemId} ${JSON.stringify(result, null, 2)}`);
+  }
+  assert(result.observed, `${label}/${itemId}: áudio da alternativa não iniciou automaticamente ao entrar na lacuna. trace=${JSON.stringify(result.trace)}`);
+  return result.observed;
 }
 
 async function runScenario(browser, mode, viewport) {
@@ -261,6 +354,7 @@ async function runScenario(browser, mode, viewport) {
 
     const centralBefore = await assertCentralImage(target, `${mode}/${info.questionId}`);
     const controls = await assertSeparatedControls(frame, target, `${mode}/${info.questionId}`);
+    await installAudioTrace(frame);
 
     const cards = frame.locator(".duduq-dd2-bank .duduq-dd2-item");
     const ids = await cards.evaluateAll((nodes) => nodes.map((node) => node.getAttribute("data-dd2-item-id")).filter(Boolean));
@@ -270,6 +364,7 @@ async function runScenario(browser, mode, viewport) {
 
     let confirm = frame.locator(".duduq-dd2-confirm");
     const wrong = frame.locator(`.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="${wrongId}"]`).first();
+    await clearAudioTrace(frame);
     await placeChoice(page, wrong, target, wrongId, mode, `${mode}/${info.questionId}`);
     const wrongAutoplay = await assertPlacedAutoplay(target, wrongId, `${mode}/${info.questionId}`);
     assert(!(await confirm.isDisabled()), `${mode}/${info.questionId}: CONFIRMAR não habilitou após responder.`);
@@ -280,6 +375,7 @@ async function runScenario(browser, mode, viewport) {
     await frame.locator(`.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="${wrongId}"]`).waitFor({ state: "visible", timeout: 4_000 });
 
     const correct = frame.locator(`.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="${info.correctSource}"]`).first();
+    await clearAudioTrace(frame);
     await placeChoice(page, correct, target, info.correctSource, mode, `${mode}/${info.questionId}`);
     const correctAutoplay = await assertPlacedAutoplay(target, info.correctSource, `${mode}/${info.questionId}`);
     const centralAfter = await assertCentralImage(target, `${mode}/${info.questionId} após resposta`);
