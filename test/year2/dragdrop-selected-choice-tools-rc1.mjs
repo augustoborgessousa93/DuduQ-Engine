@@ -11,7 +11,7 @@ function assert(condition, message) {
 }
 
 async function boot(page) {
-  await page.goto(`${BASE_URL}/content/english/year-2/module-01/index.html?qa=dd-selected-tools-rc2`, {
+  await page.goto(`${BASE_URL}/content/english/year-2/module-01/index.html?qa=dd-selected-tools-rc3`, {
     waitUntil: "domcontentloaded",
     timeout: 30_000
   });
@@ -102,6 +102,59 @@ async function visualChoiceOrder(frame) {
   });
 }
 
+async function listeningHierarchy(frame) {
+  return frame.locator(".duduq-dd2-bank-items > .duduq-dd2-item-shell-audio-choice").evaluateAll((nodes) => nodes.map((shell) => {
+    const item = shell.querySelector(".duduq-dd2-item");
+    const audio = shell.querySelector(".duduq-dd2-item-audio");
+    const itemRect = item?.getBoundingClientRect();
+    const audioRect = audio?.getBoundingClientRect();
+    return {
+      letter: shell.getAttribute("data-choice-letter") || "",
+      item: itemRect ? { left:itemRect.left, top:itemRect.top, right:itemRect.right, bottom:itemRect.bottom, width:itemRect.width, height:itemRect.height } : null,
+      audio: audioRect ? { left:audioRect.left, top:audioRect.top, right:audioRect.right, bottom:audioRect.bottom, width:audioRect.width, height:audioRect.height } : null,
+      animationName: audio ? getComputedStyle(audio).animationName : "none"
+    };
+  }));
+}
+
+function assertListeningHierarchy(state, label) {
+  assert(state.length === 4, `${label}: hierarquia visual não encontrou quatro alternativas.`);
+  for (const entry of state) {
+    assert(entry.item && entry.audio, `${label}/${entry.letter}: card ou áudio ausente.`);
+    const itemCenter = entry.item.left + entry.item.width / 2;
+    const audioCenter = entry.audio.left + entry.audio.width / 2;
+    assert(entry.audio.top >= entry.item.bottom + 2, `${label}/${entry.letter}: áudio não ficou abaixo da alternativa.`);
+    assert(Math.abs(itemCenter - audioCenter) <= 6, `${label}/${entry.letter}: áudio não ficou centralizado abaixo da alternativa.`);
+    assert(entry.audio.width < entry.item.width, `${label}/${entry.letter}: áudio continua competindo visualmente com a alternativa.`);
+  }
+}
+
+async function selectedHierarchy(target) {
+  return target.evaluate((node) => {
+    const shell = node.querySelector(".duduq-dd2-item-shell-selected-choice");
+    const item = shell?.querySelector(":scope > .duduq-dd2-item");
+    const replay = shell?.querySelector(".duduq-dd2-placed-replay");
+    const clear = shell?.querySelector(".duduq-dd2-placed-clear");
+    const targetRect = node.getBoundingClientRect();
+    const itemRect = item?.getBoundingClientRect();
+    const replayRect = replay?.getBoundingClientRect();
+    const clearRect = clear?.getBoundingClientRect();
+    const shape = (rect) => rect ? ({ left:rect.left, top:rect.top, right:rect.right, bottom:rect.bottom, width:rect.width, height:rect.height }) : null;
+    return { target:shape(targetRect), item:shape(itemRect), replay:shape(replayRect), clear:shape(clearRect) };
+  });
+}
+
+function assertSelectedHierarchy(state, label) {
+  assert(state.target && state.item && state.replay && state.clear, `${label}: composição selecionada incompleta.`);
+  const targetCenter = state.target.left + state.target.width / 2;
+  const itemCenter = state.item.left + state.item.width / 2;
+  const toolsCenter = (state.replay.left + state.replay.width / 2 + state.clear.left + state.clear.width / 2) / 2;
+  assert(Math.abs(targetCenter - itemCenter) <= 6, `${label}: alternativa escolhida não ficou centralizada no alvo.`);
+  assert(state.replay.top >= state.item.bottom + 2 && state.clear.top >= state.item.bottom + 2, `${label}: 🔊/X não ficaram abaixo da alternativa escolhida.`);
+  assert(state.replay.width < state.item.width * 0.6 && state.clear.width < state.item.width * 0.6, `${label}: 🔊/X continuam roubando a hierarquia da resposta.`);
+  assert(Math.abs(targetCenter - toolsCenter) <= 12, `${label}: linha auxiliar 🔊/X ficou desalinhada do centro.`);
+}
+
 async function bankDisplay(frame) {
   return frame.locator(".duduq-dd2-bank").first().evaluate((node) => getComputedStyle(node).display);
 }
@@ -147,10 +200,12 @@ async function runScenario(browser, name, viewport, mobile) {
     assert(bridge.selectedTools?.selectedChoiceReplayNeutralAccessibleName === true, `${name}: replay não declara nome acessível neutro.`);
     assert(bridge.selectedTools?.selectedChoiceReplayNeutralClassName === true, `${name}: replay não declara classe neutra.`);
     assert(bridge.selectedTools?.selectedChoiceClearEnabled === true, `${name}: clear selecionado não declarado.`);
+    assert(bridge.selectedTools?.selectedChoiceCenteredPrimary === true, `${name}: centralização da alternativa escolhida não declarada.`);
+    assert(bridge.selectedTools?.selectedChoiceToolsSubordinateRow === true, `${name}: linha auxiliar de 🔊/X não declarada.`);
     assert(bridge.release === "2.0.22", `${name}: Drag Drop mudou para ${bridge.release}.`);
 
     await frame.waitForSelector("#duduq-year2-dd-selected-tools-v2", { state: "attached", timeout: 10_000 });
-    await frame.waitForSelector("#duduq-year2-subcard-balance-v3", { state: "attached", timeout: 10_000 });
+    await frame.waitForSelector("#duduq-year2-subcard-balance-v4", { state: "attached", timeout: 10_000 });
 
     const cards = frame.locator(".duduq-dd2-bank .duduq-dd2-item");
     const ids = await cards.evaluateAll((nodes) => nodes.map((node) => node.getAttribute("data-dd2-item-id")).filter(Boolean));
@@ -161,8 +216,20 @@ async function runScenario(browser, name, viewport, mobile) {
 
     const initialOrder = await visualChoiceOrder(frame);
     assert(initialOrder.join("") === "ABCD", `${name}/${info.questionId}: ordem inicial não é A-B-C-D (${initialOrder.join("-")}).`);
+    const initialHierarchy = await listeningHierarchy(frame);
+    assertListeningHierarchy(initialHierarchy, `${name}/${info.questionId}`);
     assert((await target.locator(".duduq-dd2-placed-replay").count()) === 0, `${name}: replay apareceu antes da escolha.`);
     assert((await target.locator(".duduq-dd2-placed-clear").count()) === 0, `${name}: X apareceu antes da escolha.`);
+
+    const firstAudio = frame.locator(".duduq-dd2-bank .duduq-dd2-item-audio").first();
+    await firstAudio.click();
+    await frame.waitForTimeout(80);
+    const hintDismissed = await frame.locator(".duduq-dd2-root").first().getAttribute("data-audio-hint-dismissed");
+    assert(hintDismissed === "true", `${name}: pista visual do áudio não encerrou após a primeira interação.`);
+    if (await firstAudio.getAttribute("data-playing") === "true") {
+      await firstAudio.click();
+      await frame.waitForTimeout(60);
+    }
 
     await placeByClick(frame, target, wrongId);
     assert(await bankDisplay(frame) === "none", `${name}/${info.questionId}: banco não sumiu após escolha.`);
@@ -175,6 +242,9 @@ async function runScenario(browser, name, viewport, mobile) {
     assert(!(await replay.evaluate((node) => node.classList.contains("duduq-audio-standard") || node.hasAttribute("data-duduq-native-audio"))), `${name}: replay foi capturado pelo normalizador global de áudio.`);
     assert(/Repetir alternativa escolhida|Parar repetição da alternativa escolhida/i.test(await replay.getAttribute("aria-label") || ""), `${name}: replay sem nome acessível correto.`);
     assert(/Remover alternativa escolhida/i.test(await clear.getAttribute("aria-label") || ""), `${name}: X sem nome acessível correto.`);
+
+    const selectedVisual = await selectedHierarchy(target);
+    assertSelectedHierarchy(selectedVisual, `${name}/${info.questionId}`);
 
     const confirm = frame.locator(".duduq-dd2-confirm").first();
     await confirm.waitFor({ state: "visible", timeout: 5_000 });
@@ -205,6 +275,7 @@ async function runScenario(browser, name, viewport, mobile) {
 
     const orderAfterClear = await visualChoiceOrder(frame);
     assert(orderAfterClear.join("") === "ABCD", `${name}: A-D não voltou à ordem original após X (${orderAfterClear.join("-")}).`);
+    assertListeningHierarchy(await listeningHierarchy(frame), `${name}/${info.questionId} após X`);
 
     await placeByClick(frame, target, wrongId);
     await frame.locator(".duduq-dd2-confirm").first().click();
@@ -219,10 +290,11 @@ async function runScenario(browser, name, viewport, mobile) {
     assert(await bankDisplay(frame) !== "none", `${name}: banco não reapareceu após erro.`);
     const orderAfterWrong = await visualChoiceOrder(frame);
     assert(orderAfterWrong.join("") === "ABCD", `${name}: A-D não voltou após erro (${orderAfterWrong.join("-")}).`);
+    assertListeningHierarchy(await listeningHierarchy(frame), `${name}/${info.questionId} após erro`);
 
     assert(pageErrors.length === 0, `${name}: erros de página: ${pageErrors.join(" | ")}`);
 
-    return { name, viewport, questionId: info.questionId, wrongId, initialOrder, orderAfterClear, orderAfterWrong, bridge };
+    return { name, viewport, questionId: info.questionId, wrongId, initialOrder, orderAfterClear, orderAfterWrong, initialHierarchy, selectedVisual, bridge };
   } finally {
     await context.close();
   }
@@ -233,7 +305,7 @@ const browser = await chromium.launch({ headless: true });
 try {
   const shortNotebook = await runScenario(browser, "short-notebook", { width: 1366, height: 645 }, false);
   const mobile = await runScenario(browser, "mobile", { width: 390, height: 844 }, true);
-  const report = { status: "PASS", contract: "YEAR2_DD_SELECTED_CHOICE_TOOLS_RC2", shortNotebook, mobile };
+  const report = { status: "PASS", contract: "YEAR2_DD_SELECTED_CHOICE_TOOLS_RC3", shortNotebook, mobile };
   await fs.writeFile(path.join(OUTPUT_DIR, "report.json"), JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
 } finally {
