@@ -1,42 +1,28 @@
-/* DUDUQ English Year 2 — Drag & Drop selected-placement autoplay bridge
+/* DUDUQ English Year 2 — Drag & Drop selected-placement autoplay coordinator
    Year-2-only parent-page bridge. Keeps Canary R143 and Drag & Drop 2.0.22 immutable.
 
    Contract:
    - when a single-target listening choice enters the drop-zone, its sound is heard once;
-   - native pointer drop already starts the item audio in DD2 2.0.22, so this layer does
-     not invoke the force-restart trigger when that audio is already active;
-   - tap/click placement has no native autoplay, so this layer invokes the hidden
-     native force-restart trigger exposed by the selected-choice tools bridge;
-   - while the automatic instruction audio is playing, option-audio controls stay
-     available so the learner can listen/switch alternatives without placing an answer;
+   - native pointer drop already starts the item audio in DD2 2.0.22;
+   - tap/click placement starts the item audio synchronously inside the Year-2 confirm-any
+     bridge so browser user activation is preserved;
+   - this coordinator never performs a delayed synthetic replay, avoiding duplicate TTS;
+   - while automatic instruction audio is playing, option-audio controls stay available
+     so the learner can listen/switch alternatives without placing an answer;
    - answer cards keep the Host disabled state during the automatic instruction audio;
    - X removal and wrong-answer return do not autoplay;
-   - reselecting after the target becomes empty may autoplay again;
+   - reselecting after the target becomes empty may autoplay again through the native path;
    - no scoring, answer mapping, release source or Canary source is modified.
 */
 (function () {
   "use strict";
 
-  const VERSION = "1.2.0-year2-dd-placement-autoplay-force-restart";
+  const VERSION = "1.3.0-year2-dd-placement-autoplay-native-gesture";
   const FRAME_WIRED = "data-duduq-year2-placement-autoplay-wired";
   const INNER_OBSERVER = "__DUDUQ_YEAR2_PLACEMENT_AUTOPLAY_OBSERVER__";
-  const ROOT_LAST = "__DUDUQ_YEAR2_PLACEMENT_AUTOPLAY_LAST__";
-  const ROOT_TIMER = "__DUDUQ_YEAR2_PLACEMENT_AUTOPLAY_TIMER__";
   const INSTRUCTION_UNLOCK = "data-duduq-year2-instruction-audio-unlocked";
 
   if (window.__DUDUQ_YEAR2_DD_PLACEMENT_AUTOPLAY_BRIDGE__) return;
-
-  function escapeAttr(value) {
-    return String(value).replace(/\\/g, "\\\\").replace(/"/g, '\\"');
-  }
-
-  function clearPending(root) {
-    const timer = root && root[ROOT_TIMER];
-    if (timer) {
-      window.clearTimeout(timer);
-      root[ROOT_TIMER] = null;
-    }
-  }
 
   function syncOptionAudioDuringInstruction(root) {
     if (!root?.querySelector) return;
@@ -70,53 +56,7 @@
 
   function syncRoot(root) {
     if (!root?.querySelector) return;
-
     syncOptionAudioDuringInstruction(root);
-
-    const target = root.querySelector('.duduq-dd2-target[data-single-target-choice="true"]');
-    if (!target) return;
-
-    const placed = target.querySelector('.duduq-dd2-item[data-placed="true"][data-dd2-item-id]');
-    if (!placed) {
-      clearPending(root);
-      root[ROOT_LAST] = null;
-      return;
-    }
-
-    const itemId = placed.getAttribute("data-dd2-item-id");
-    if (!itemId || root[ROOT_LAST] === itemId || root[ROOT_TIMER]) return;
-
-    root[ROOT_TIMER] = window.setTimeout(function () {
-      root[ROOT_TIMER] = null;
-
-      const safeId = escapeAttr(itemId);
-      const stillPlaced = target.querySelector(
-        `.duduq-dd2-item[data-placed="true"][data-dd2-item-id="${safeId}"]`
-      );
-      if (!stillPlaced) return;
-
-      const replay = target.querySelector(
-        `.duduq-dd2-placed-replay[data-dd2-placed-replay-item-id="${safeId}"]`
-      );
-      // During retry/transition the selected replay is intentionally absent.
-      if (!replay) return;
-
-      // Mark before invoking audio so observer callbacks triggered by state changes
-      // cannot enqueue a second playback for the same placement.
-      root[ROOT_LAST] = itemId;
-
-      // Pointer drop in DD2 2.0.22 already calls playValueAudio(..., true).
-      // If it is already playing, do nothing. Tap/click placement instead uses a
-      // hidden native React trigger that forces restart even when a stale audio key
-      // from a previous preview remains selected in the shared controller.
-      if (replay.getAttribute("data-dd2-replay-playing") !== "true") {
-        const autoplayTrigger = target.querySelector(
-          `.duduq-dd2-placed-autoplay-trigger[data-dd2-placed-autoplay-item-id="${safeId}"]`
-        );
-        if (autoplayTrigger) autoplayTrigger.click();
-        else replay.click();
-      }
-    }, 120);
   }
 
   function syncDocument(doc) {
@@ -137,9 +77,6 @@
       subtree: true,
       attributes: true,
       attributeFilter: [
-        "data-placed",
-        "data-dd2-replay-playing",
-        "data-wrong",
         "data-playing",
         "data-disabled",
         "disabled"
@@ -202,10 +139,11 @@
     releaseModified: false,
     canaryModified: false,
     usesNativeSelectedReplay: true,
-    usesNativeForceRestartTriggerForTap: true,
+    usesNativeForceRestartTriggerForTap: false,
     selectedChoicePlacementAutoPlaysAudioOnce: true,
-    autoplaySources: "drop-native+tap-force-restart",
+    autoplaySources: "drop-native+tap-native-gesture",
     avoidsDoublePlayWhenNativeDropAlreadyPlaying: true,
+    avoidsDelayedSyntheticReplay: true,
     optionAudioAvailableDuringInstructionPlayback: true,
     instructionPlaybackStillLocksAnswerPlacement: true,
     removalDoesNotAutoplay: true,
