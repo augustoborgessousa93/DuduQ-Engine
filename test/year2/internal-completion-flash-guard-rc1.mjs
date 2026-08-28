@@ -13,9 +13,25 @@ const page = await browser.newPage({ viewport: { width: 1366, height: 645 } });
 try {
   await page.goto(MODULE_URL, { waitUntil: "domcontentloaded" });
 
+  await page.waitForFunction(() => Boolean(
+    window.__DUDUQ_YEAR2_INTERNAL_COMPLETION_GUARD__ &&
+    window.DuduQ &&
+    window.DuduQIntro
+  ), null, { timeout: 30000 });
+
+  const started = await page.evaluate(() => window.DuduQ?.getSession?.()?.module === 1);
+  if (!started) {
+    const start = page.getByRole("button", { name: /INICIAR MISSÃO/i }).first();
+    await start.waitFor({ state: "visible", timeout: 20000 });
+    await start.click();
+  }
+
   await page.waitForFunction(() => {
+    const session = window.DuduQ?.getSession?.();
     return Boolean(
-      window.__DUDUQ_YEAR2_INTERNAL_COMPLETION_GUARD__ &&
+      session?.module === 1 &&
+      session.totalSteps > 0 &&
+      !session.transitioning &&
       document.querySelector("#root iframe")
     );
   }, null, { timeout: 30000 });
