@@ -177,11 +177,23 @@ async function assertAudioAlternativeContract(frame, info, label) {
   assert(count >= 2 && count <= 4, `${label}: esperado 2–4 alternativas, encontrado ${count}.`);
   assert((await bankItems.locator("img").count()) === 0, `${label}: alternativas continuam imagem-primárias.`);
 
-  const audioButtons = frame.locator(".duduq-dd2-bank .duduq-udd-item-audio, .duduq-dd2-bank .duduq-dd2-item-audio");
+  const audioButtons = frame.locator(".duduq-dd2-bank .duduq-dd2-item-audio");
   const audioCount = await audioButtons.count();
   if (audioCount !== count) {
     const debug = await runtimeAudioDebug(frame, info);
     throw new Error(`${label}: nem toda alternativa possui controle de áudio (${audioCount}/${count}). RUNTIME_AUDIO_DEBUG=${JSON.stringify(debug)}`);
+  }
+
+  try {
+    await frame.waitForFunction((expectedCount) => {
+      const buttons = Array.from(document.querySelectorAll('.duduq-dd2-bank .duduq-dd2-item-audio'));
+      return buttons.length === expectedCount && buttons.every((button) => (
+        button.disabled === false && button.getAttribute('aria-disabled') !== 'true'
+      ));
+    }, count, { timeout: 2_500 });
+  } catch (_) {
+    const debug = await runtimeAudioDebug(frame, info);
+    throw new Error(`${label}: controles de áudio não estabilizaram habilitados. RUNTIME_AUDIO_DEBUG=${JSON.stringify(debug)}`);
   }
 
   const visibleText = await bankItems.evaluateAll((nodes) => nodes.map((node) => String(node.innerText || "").trim().replace(/\s+/g, " ")));
