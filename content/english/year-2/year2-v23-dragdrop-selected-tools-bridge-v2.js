@@ -18,7 +18,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "2.0.4-year2-selected-choice-tools-dd2";
+  const VERSION = "2.0.5-year2-selected-choice-tools-dd2";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqYear2SelectedToolsV2ActiveDD2";
   const SENTINEL = "__DUDUQ_YEAR2_SELECTED_TOOLS_V2_ACTIVE_DD2__";
@@ -71,35 +71,38 @@
   max-width: 100% !important;
   min-width: 0 !important;
   display: grid !important;
-  grid-template-columns: clamp(36px,3.7vw,42px) minmax(64px,1fr) clamp(36px,3.7vw,42px) !important;
-  grid-template-rows: auto !important;
+  grid-template-columns: repeat(2, 30px) !important;
+  grid-template-rows: auto auto !important;
   align-items: center !important;
+  justify-content: center !important;
   justify-items: center !important;
-  gap: clamp(8px,1vw,14px) !important;
-  padding: 0 clamp(4px,.6vw,8px) !important;
+  column-gap: 10px !important;
+  row-gap: 6px !important;
+  padding: 1px 6px 0 !important;
 }
 .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item-shell-selected-choice > .duduq-dd2-item {
-  grid-column: 2 !important;
+  grid-column: 1 / -1 !important;
   grid-row: 1 !important;
   justify-self: center !important;
-  min-width: clamp(72px,7vw,86px) !important;
+  min-width: clamp(72px,7vw,88px) !important;
   max-width: min(100%,112px) !important;
+  margin-inline: auto !important;
 }
 .duduq-dd2-placed-replay,
 .duduq-dd2-placed-clear {
   box-sizing: border-box !important;
-  width: clamp(36px,3.7vw,42px) !important;
-  height: clamp(36px,3.7vw,42px) !important;
-  min-width: clamp(36px,3.7vw,42px) !important;
-  min-height: clamp(36px,3.7vw,42px) !important;
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
   padding: 0 !important;
   display: grid !important;
   place-items: center !important;
-  border: 2px solid #8fbbe0 !important;
+  border: 1.5px solid #9fc3e3 !important;
   border-radius: 999px !important;
-  background: #fff !important;
+  background: rgba(255,255,255,.94) !important;
   color: #1565c0 !important;
-  box-shadow: 0 3px 0 rgba(57,103,149,.18) !important;
+  box-shadow: 0 2px 0 rgba(57,103,149,.14) !important;
   cursor: pointer !important;
   line-height: 1 !important;
   z-index: 4 !important;
@@ -109,20 +112,22 @@
 }
 .duduq-dd2-placed-replay {
   grid-column: 1 !important;
-  grid-row: 1 !important;
+  grid-row: 2 !important;
+  justify-self: end !important;
 }
 .duduq-dd2-placed-replay-glyph {
   display: block !important;
-  font-size: clamp(17px,1.8vw,21px) !important;
+  font-size: 14px !important;
   line-height: 1 !important;
-  transform: translateY(-1px) !important;
+  transform: translateY(-.5px) !important;
 }
 .duduq-dd2-placed-clear {
-  grid-column: 3 !important;
-  grid-row: 1 !important;
-  border-color: #ef9a9a !important;
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  justify-self: start !important;
+  border-color: #f0b3b3 !important;
   color: #c62828 !important;
-  font: 900 clamp(20px,2vw,24px)/1 Nunito,system-ui,sans-serif !important;
+  font: 900 18px/1 Nunito,system-ui,sans-serif !important;
 }
 .duduq-dd2-placed-replay:focus-visible,
 .duduq-dd2-placed-clear:focus-visible {
@@ -135,16 +140,23 @@
 }
 @media (max-width: 640px) {
   .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item-shell-selected-choice {
-    grid-template-columns: 36px minmax(58px,1fr) 36px !important;
-    gap: 8px !important;
+    grid-template-columns: repeat(2, 28px) !important;
+    column-gap: 9px !important;
+    row-gap: 5px !important;
     padding-inline: 2px !important;
   }
   .duduq-dd2-placed-replay,
   .duduq-dd2-placed-clear {
-    width: 36px !important;
-    height: 36px !important;
-    min-width: 36px !important;
-    min-height: 36px !important;
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+  }
+  .duduq-dd2-placed-replay-glyph {
+    font-size: 13px !important;
+  }
+  .duduq-dd2-placed-clear {
+    font-size: 17px !important;
   }
 }
 </style>`;
@@ -251,6 +263,8 @@
     selectedChoiceReplayNeutralClassName: true,
     selectedChoiceClearEnabled: true,
     clearUsesNativePlacePath: true,
-    retryFeedbackPreserved: true
+    retryFeedbackPreserved: true,
+    selectedChoiceCenteredPrimary: true,
+    selectedChoiceToolsSubordinateRow: true
   });
 })();
