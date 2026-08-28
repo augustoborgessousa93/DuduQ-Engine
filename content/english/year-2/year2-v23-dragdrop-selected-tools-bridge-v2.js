@@ -18,7 +18,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "2.0.5-year2-selected-choice-tools-dd2";
+  const VERSION = "2.0.6-year2-selected-choice-tools-dd2";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqYear2SelectedToolsV2ActiveDD2";
   const SENTINEL = "__DUDUQ_YEAR2_SELECTED_TOOLS_V2_ACTIVE_DD2__";
@@ -65,11 +65,13 @@
     );
 
     const selectedToolsCss = `<style id="duduq-year2-dd-selected-tools-v2">
-.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item-shell-selected-choice {
+.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone > .duduq-dd2-item-shell-selected-choice {
   box-sizing: border-box !important;
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
+  flex: 1 1 100% !important;
+  align-self: stretch !important;
   display: grid !important;
   grid-template-columns: repeat(2, 30px) !important;
   grid-template-rows: auto auto !important;
@@ -139,7 +141,7 @@
   opacity: .55 !important;
 }
 @media (max-width: 640px) {
-  .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item-shell-selected-choice {
+  .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone > .duduq-dd2-item-shell-selected-choice {
     grid-template-columns: repeat(2, 28px) !important;
     column-gap: 9px !important;
     row-gap: 5px !important;
@@ -265,6 +267,7 @@
     clearUsesNativePlacePath: true,
     retryFeedbackPreserved: true,
     selectedChoiceCenteredPrimary: true,
-    selectedChoiceToolsSubordinateRow: true
+    selectedChoiceToolsSubordinateRow: true,
+    selectedChoiceShellFillsDropZone: true
   });
 })();
