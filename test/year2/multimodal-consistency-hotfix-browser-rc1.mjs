@@ -127,6 +127,68 @@ async function assertCentralImage(target, label) {
   return state;
 }
 
+async function assertStableVisibleImageSet(frame, selector, label) {
+  try {
+    await frame.waitForFunction((cssSelector) => {
+      const nodes = Array.from(document.querySelectorAll(cssSelector));
+      const visible = nodes.filter((node) => {
+        const rect = node.getBoundingClientRect();
+        const style = getComputedStyle(node);
+        const opacity = Number.parseFloat(style.opacity || "1");
+        return (
+          rect.width > 0 &&
+          rect.height > 0 &&
+          style.display !== "none" &&
+          style.visibility !== "hidden" &&
+          Number.isFinite(opacity) &&
+          opacity > 0.01
+        );
+      });
+      if (!visible.length) return false;
+      const sources = visible.map((node) => node.currentSrc || node.src || "");
+      const loaded = visible.every((node) => Boolean(node.complete && Number(node.naturalWidth || 0) > 0 && Number(node.naturalHeight || 0) > 0));
+      return loaded && sources.every(Boolean) && new Set(sources).size === sources.length;
+    }, selector, { timeout: 3_500 });
+  } catch (_) {
+    // Detailed assertion below reports the settled DOM state instead of masking the failure.
+  }
+
+  const state = await frame.locator(selector).evaluateAll((nodes) => nodes.map((node) => {
+    const rect = node.getBoundingClientRect();
+    const style = getComputedStyle(node);
+    const opacity = Number.parseFloat(style.opacity || "1");
+    return {
+      complete: Boolean(node.complete),
+      naturalWidth: Number(node.naturalWidth || 0),
+      naturalHeight: Number(node.naturalHeight || 0),
+      src: node.currentSrc || node.src || "",
+      visible: (
+        rect.width > 0 &&
+        rect.height > 0 &&
+        style.display !== "none" &&
+        style.visibility !== "hidden" &&
+        Number.isFinite(opacity) &&
+        opacity > 0.01
+      ),
+      width: rect.width,
+      height: rect.height,
+      opacity: style.opacity
+    };
+  }));
+
+  const visible = state.filter((item) => item.visible);
+  assert(visible.length > 0, `${label}: nenhuma imagem visível após estabilização. STATE=${JSON.stringify(state)}`);
+  assert(
+    visible.every((item) => item.complete && item.naturalWidth > 0 && item.naturalHeight > 0 && item.src),
+    `${label}: imagem quebrada após estabilização. STATE=${JSON.stringify(visible)}`
+  );
+  assert(
+    new Set(visible.map((item) => item.src)).size === visible.length,
+    `${label}: imagem repetida após estabilização. STATE=${JSON.stringify(visible)}`
+  );
+  return visible;
+}
+
 async function runtimeAudioDebug(frame, info) {
   return frame.evaluate((parentInfo) => {
     let parsed = null;
@@ -317,16 +379,12 @@ async function visualSmokeAllModules(browser) {
 
           const bubbleImages = frame.locator(".duduq-bp-media");
           if (await bubbleImages.count()) {
-            const state = await bubbleImages.evaluateAll((nodes) => nodes.map((node) => ({ complete: node.complete, naturalWidth: node.naturalWidth, src: node.currentSrc || node.src || "" })));
-            assert(state.every((item) => item.complete && item.naturalWidth > 0), `M${module}/step${step}: Bubble Pop com imagem quebrada.`);
-            assert(new Set(state.map((item) => item.src)).size === state.length, `M${module}/step${step}: Bubble Pop com imagem repetida.`);
+            await assertStableVisibleImageSet(frame, ".duduq-bp-media", `M${module}/step${step}: Bubble Pop`);
           }
 
           const targetImages = frame.locator(".duduq-ts-target img");
           if (await targetImages.count()) {
-            const state = await targetImages.evaluateAll((nodes) => nodes.map((node) => ({ complete: node.complete, naturalWidth: node.naturalWidth, src: node.currentSrc || node.src || "" })));
-            assert(state.every((item) => item.complete && item.naturalWidth > 0), `M${module}/step${step}: Target Shooter com imagem quebrada.`);
-            assert(new Set(state.map((item) => item.src)).size === state.length, `M${module}/step${step}: Target Shooter com imagem repetida.`);
+            await assertStableVisibleImageSet(frame, ".duduq-ts-target img", `M${module}/step${step}: Target Shooter`);
           }
 
           if (step + 1 < total) await advance(page);
