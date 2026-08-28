@@ -6,8 +6,9 @@
    - expose an explicit remove (X) control so the learner can change the choice
      before pressing CONFIRMAR;
    - replay uses the native DD2 playValueAudio(item, "item") path;
-   - replay is an accessible non-button control so the global button/audio normalizer
-     cannot capture or disable it;
+   - replay is an accessible non-button control with its own speaker glyph and a
+     neutral "Repetir alternativa" accessible name, avoiding the global audio
+     normalizer signature without sacrificing keyboard or screen-reader access;
    - remove uses the native DD2 place(itemId, null) path, returning cleanly to the bank
      without validating the answer;
    - controls disappear during retry feedback and never modify scoring/content.
@@ -15,7 +16,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "2.0.0-year2-selected-choice-tools-dd2";
+  const VERSION = "2.0.1-year2-selected-choice-tools-dd2";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqYear2SelectedToolsV2ActiveDD2";
   const SENTINEL = "__DUDUQ_YEAR2_SELECTED_TOOLS_V2_ACTIVE_DD2__";
@@ -52,7 +53,7 @@
     prepared = replaceRequired(
       prepared,
       `        hasAudio && question.strategy === "single-target-choice" && !placed ? React.createElement("button", {\n          type:"button",\n          className:"duduq-dd2-item-audio",\n          "data-dd2-audio-item-id":item.id,\n          "data-playing":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id) ? "true" : "false",\n          disabled:disabled || feedbackState === "success",\n          onClick:function (event) { event.stopPropagation(); onInteraction && onInteraction(); playValueAudio(item, "item"); },\n          "aria-label":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id)\n            ? ("Parar áudio da alternativa " + dd2Accessible(item))\n            : ("Ouvir alternativa " + dd2Accessible(item))\n        }, React.createElement(TSAudioIcon,null)) : null\n      );`,
-      `        hasAudio && question.strategy === "single-target-choice" && !placed ? React.createElement("button", {\n          type:"button",\n          className:"duduq-dd2-item-audio",\n          "data-dd2-audio-item-id":item.id,\n          "data-playing":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id) ? "true" : "false",\n          disabled:disabled || feedbackState === "success",\n          onClick:function (event) { event.stopPropagation(); onInteraction && onInteraction(); playValueAudio(item, "item"); },\n          "aria-label":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id)\n            ? ("Parar áudio da alternativa " + dd2Accessible(item))\n            : ("Ouvir alternativa " + dd2Accessible(item))\n        }, React.createElement(TSAudioIcon,null)) : null,\n        hasAudio && question.strategy === "single-target-choice" && placed && !retryAnimating && feedbackState === "idle" ? React.createElement("span", {\n          role:"button",\n          tabIndex:0,\n          className:"duduq-dd2-placed-audio",\n          "data-dd2-placed-audio-item-id":item.id,\n          "data-playing":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id) ? "true" : "false",\n          onPointerDown:function (event) { event.stopPropagation(); },\n          onClick:function (event) {\n            event.preventDefault();\n            event.stopPropagation();\n            onInteraction && onInteraction();\n            playValueAudio(item, "item");\n          },\n          onKeyDown:function (event) {\n            if (event.key === "Enter" || event.key === " ") {\n              event.preventDefault();\n              event.stopPropagation();\n              onInteraction && onInteraction();\n              playValueAudio(item, "item");\n            }\n          },\n          "aria-label":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id)\n            ? ("Parar áudio da alternativa escolhida " + dd2Accessible(item))\n            : ("Ouvir novamente a alternativa escolhida " + dd2Accessible(item))\n        }, React.createElement(TSAudioIcon,null)) : null,\n        question.strategy === "single-target-choice" && placed && !retryAnimating && feedbackState === "idle" ? React.createElement("button", {\n          type:"button",\n          className:"duduq-dd2-placed-clear",\n          "data-dd2-clear-item-id":item.id,\n          disabled:disabled,\n          onPointerDown:function (event) { event.stopPropagation(); },\n          onClick:function (event) {\n            event.preventDefault();\n            event.stopPropagation();\n            place(item.id, null, "clear");\n          },\n          "aria-label":"Remover alternativa escolhida " + dd2Accessible(item),\n          title:"Remover alternativa"\n        }, "×") : null\n      );`
+      `        hasAudio && question.strategy === "single-target-choice" && !placed ? React.createElement("button", {\n          type:"button",\n          className:"duduq-dd2-item-audio",\n          "data-dd2-audio-item-id":item.id,\n          "data-playing":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id) ? "true" : "false",\n          disabled:disabled || feedbackState === "success",\n          onClick:function (event) { event.stopPropagation(); onInteraction && onInteraction(); playValueAudio(item, "item"); },\n          "aria-label":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id)\n            ? ("Parar áudio da alternativa " + dd2Accessible(item))\n            : ("Ouvir alternativa " + dd2Accessible(item))\n        }, React.createElement(TSAudioIcon,null)) : null,\n        hasAudio && question.strategy === "single-target-choice" && placed && !retryAnimating && feedbackState === "idle" ? React.createElement("span", {\n          role:"button",\n          tabIndex:0,\n          className:"duduq-dd2-placed-audio",\n          "data-dd2-placed-audio-item-id":item.id,\n          "data-playing":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id) ? "true" : "false",\n          onPointerDown:function (event) { event.stopPropagation(); },\n          onClick:function (event) {\n            event.preventDefault();\n            event.stopPropagation();\n            onInteraction && onInteraction();\n            playValueAudio(item, "item");\n          },\n          onKeyDown:function (event) {\n            if (event.key === "Enter" || event.key === " ") {\n              event.preventDefault();\n              event.stopPropagation();\n              onInteraction && onInteraction();\n              playValueAudio(item, "item");\n            }\n          },\n          "aria-label":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id)\n            ? ("Parar repetição da alternativa escolhida " + dd2Accessible(item))\n            : ("Repetir alternativa escolhida " + dd2Accessible(item))\n        }, React.createElement("span", { className:"duduq-dd2-placed-audio-glyph", "aria-hidden":"true" }, "🔊")) : null,\n        question.strategy === "single-target-choice" && placed && !retryAnimating && feedbackState === "idle" ? React.createElement("button", {\n          type:"button",\n          className:"duduq-dd2-placed-clear",\n          "data-dd2-clear-item-id":item.id,\n          disabled:disabled,\n          onPointerDown:function (event) { event.stopPropagation(); },\n          onClick:function (event) {\n            event.preventDefault();\n            event.stopPropagation();\n            place(item.id, null, "clear");\n          },\n          "aria-label":"Remover alternativa escolhida " + dd2Accessible(item),\n          title:"Remover alternativa"\n        }, "×") : null\n      );`
     );
 
     const selectedToolsCss = `<style id="duduq-year2-dd-selected-tools-v2">
@@ -102,16 +103,18 @@
   grid-column: 1 !important;
   grid-row: 1 !important;
 }
+.duduq-dd2-placed-audio-glyph {
+  display: block !important;
+  font-size: clamp(17px,1.8vw,21px) !important;
+  line-height: 1 !important;
+  transform: translateY(-1px) !important;
+}
 .duduq-dd2-placed-clear {
   grid-column: 3 !important;
   grid-row: 1 !important;
   border-color: #ef9a9a !important;
   color: #c62828 !important;
   font: 900 clamp(20px,2vw,24px)/1 Nunito,system-ui,sans-serif !important;
-}
-.duduq-dd2-placed-audio svg {
-  width: clamp(18px,1.9vw,22px) !important;
-  height: clamp(18px,1.9vw,22px) !important;
 }
 .duduq-dd2-placed-audio:focus-visible,
 .duduq-dd2-placed-clear:focus-visible {
@@ -233,6 +236,7 @@
     selectedChoiceReplayUsesNativeAudioPath: true,
     selectedChoiceReplayAvoidsGlobalButtonNormalizer: true,
     selectedChoiceReplayKeyboardAccessible: true,
+    selectedChoiceReplayNeutralAccessibleName: true,
     selectedChoiceClearEnabled: true,
     clearUsesNativePlacePath: true,
     retryFeedbackPreserved: true
