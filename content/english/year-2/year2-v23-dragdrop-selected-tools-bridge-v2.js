@@ -18,7 +18,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "2.0.6-year2-selected-choice-tools-dd2";
+  const VERSION = "2.0.7-year2-selected-choice-tools-dd2";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqYear2SelectedToolsV2ActiveDD2";
   const SENTINEL = "__DUDUQ_YEAR2_SELECTED_TOOLS_V2_ACTIVE_DD2__";
@@ -66,32 +66,33 @@
 
     const selectedToolsCss = `<style id="duduq-year2-dd-selected-tools-v2">
 .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone > .duduq-dd2-item-shell-selected-choice {
+  position: relative !important;
   box-sizing: border-box !important;
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
+  min-height: 86px !important;
   flex: 1 1 100% !important;
   align-self: stretch !important;
   display: grid !important;
-  grid-template-columns: repeat(2, 30px) !important;
-  grid-template-rows: auto auto !important;
-  align-items: center !important;
-  justify-content: center !important;
-  justify-items: center !important;
-  column-gap: 10px !important;
-  row-gap: 6px !important;
-  padding: 1px 6px 0 !important;
+  grid-template-columns: minmax(0,1fr) !important;
+  grid-template-rows: auto !important;
+  place-items: start center !important;
+  padding: 1px 6px 37px !important;
 }
 .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item-shell-selected-choice > .duduq-dd2-item {
-  grid-column: 1 / -1 !important;
+  grid-column: 1 !important;
   grid-row: 1 !important;
   justify-self: center !important;
+  align-self: start !important;
   min-width: clamp(72px,7vw,88px) !important;
   max-width: min(100%,112px) !important;
-  margin-inline: auto !important;
+  margin: 0 auto !important;
 }
 .duduq-dd2-placed-replay,
 .duduq-dd2-placed-clear {
+  position: absolute !important;
+  bottom: 1px !important;
   box-sizing: border-box !important;
   width: 30px !important;
   height: 30px !important;
@@ -113,9 +114,7 @@
   touch-action: manipulation !important;
 }
 .duduq-dd2-placed-replay {
-  grid-column: 1 !important;
-  grid-row: 2 !important;
-  justify-self: end !important;
+  left: calc(50% - 36px) !important;
 }
 .duduq-dd2-placed-replay-glyph {
   display: block !important;
@@ -124,9 +123,7 @@
   transform: translateY(-.5px) !important;
 }
 .duduq-dd2-placed-clear {
-  grid-column: 2 !important;
-  grid-row: 2 !important;
-  justify-self: start !important;
+  right: calc(50% - 36px) !important;
   border-color: #f0b3b3 !important;
   color: #c62828 !important;
   font: 900 18px/1 Nunito,system-ui,sans-serif !important;
@@ -142,10 +139,8 @@
 }
 @media (max-width: 640px) {
   .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-zone > .duduq-dd2-item-shell-selected-choice {
-    grid-template-columns: repeat(2, 28px) !important;
-    column-gap: 9px !important;
-    row-gap: 5px !important;
-    padding-inline: 2px !important;
+    min-height: 82px !important;
+    padding: 1px 2px 34px !important;
   }
   .duduq-dd2-placed-replay,
   .duduq-dd2-placed-clear {
@@ -153,11 +148,16 @@
     height: 28px !important;
     min-width: 28px !important;
     min-height: 28px !important;
+    bottom: 1px !important;
+  }
+  .duduq-dd2-placed-replay {
+    left: calc(50% - 33px) !important;
   }
   .duduq-dd2-placed-replay-glyph {
     font-size: 13px !important;
   }
   .duduq-dd2-placed-clear {
+    right: calc(50% - 33px) !important;
     font-size: 17px !important;
   }
 }
@@ -268,6 +268,7 @@
     retryFeedbackPreserved: true,
     selectedChoiceCenteredPrimary: true,
     selectedChoiceToolsSubordinateRow: true,
-    selectedChoiceShellFillsDropZone: true
+    selectedChoiceShellFillsDropZone: true,
+    selectedChoiceControlsDoNotAffectPrimaryCenter: true
   });
 })();
