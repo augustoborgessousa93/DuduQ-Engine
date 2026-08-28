@@ -32,8 +32,9 @@ async function bootModule(page, module) {
   }
   await page.waitForFunction((moduleNumber) => {
     const session = window.DuduQ?.getSession?.();
-    return Boolean(session?.module === moduleNumber && session.totalSteps > 0);
+    return Boolean(session?.module === moduleNumber && session.totalSteps > 0 && !session.transitioning);
   }, module, { timeout: 25_000 });
+  await page.waitForTimeout(100);
 }
 
 async function currentFrame(page) {
