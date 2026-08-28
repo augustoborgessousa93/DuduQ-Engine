@@ -59,8 +59,9 @@
 
     /*
       Listening-bank hierarchy: the answer card is the primary object and its
-      replay button sits directly below it. This visually groups each sound with
-      its own A/B/C/D choice instead of creating an A-audio-B-audio horizontal run.
+      replay button sits clearly below it. The extra vertical breathing room keeps
+      each sound visually associated with its own A/B/C/D choice while making the
+      audio control unmistakably clickable.
     */
     html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
       .duduq-dd2-bank-items {
@@ -77,7 +78,7 @@
       grid-template-rows: auto auto !important;
       justify-items: center !important;
       align-items: center !important;
-      gap: 7px !important;
+      gap: 12px !important;
       width: auto !important;
       min-width: 54px !important;
       margin: 0 !important;
@@ -93,21 +94,41 @@
       .duduq-dd2-item-shell-audio-choice > .duduq-dd2-item-audio {
       grid-row: 2 !important;
       justify-self: center !important;
-      width: 34px !important;
-      height: 34px !important;
-      min-width: 34px !important;
-      min-height: 34px !important;
+      box-sizing: border-box !important;
+      width: 38px !important;
+      height: 38px !important;
+      min-width: 38px !important;
+      min-height: 38px !important;
       margin: 0 !important;
+      padding: 0 !important;
+      border: 2px solid #78afe0 !important;
+      border-radius: 999px !important;
+      background: linear-gradient(180deg,#ffffff 0%,#eef7ff 100%) !important;
+      color: #0f6fc8 !important;
+      box-shadow: 0 3px 0 #b4cadd, 0 7px 13px rgba(31,91,148,.13), inset 0 1px 0 rgba(255,255,255,.98) !important;
+      cursor: pointer !important;
+    }
+
+    html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+      .duduq-dd2-item-shell-audio-choice > .duduq-dd2-item-audio:not(:disabled):hover {
+      border-color: #4f99d8 !important;
+      background: linear-gradient(180deg,#ffffff 0%,#e5f3ff 100%) !important;
+    }
+
+    html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+      .duduq-dd2-item-shell-audio-choice > .duduq-dd2-item-audio:not(:disabled):active {
+      box-shadow: 0 1px 0 #a8bfd3, 0 3px 7px rgba(31,91,148,.12), inset 0 1px 2px rgba(28,83,134,.08) !important;
+      background: linear-gradient(180deg,#e8f4ff 0%,#ffffff 100%) !important;
     }
 
     /* Gentle first-use sound-wave cue. It never changes element geometry, so the
        replay control stays easy to click/tap while the halo invites listening. */
     @keyframes duduqYear2ListeningCue {
       0%, 100% {
-        box-shadow: 0 2px 0 rgba(57,103,149,.18), 0 0 0 0 rgba(30,123,224,.22);
+        box-shadow: 0 3px 0 #b4cadd, 0 7px 13px rgba(31,91,148,.13), 0 0 0 0 rgba(30,123,224,.24), inset 0 1px 0 rgba(255,255,255,.98);
       }
       52% {
-        box-shadow: 0 2px 0 rgba(57,103,149,.18), 0 0 0 8px rgba(30,123,224,0);
+        box-shadow: 0 3px 0 #b4cadd, 0 7px 13px rgba(31,91,148,.13), 0 0 0 9px rgba(30,123,224,0), inset 0 1px 0 rgba(255,255,255,.98);
       }
     }
 
@@ -176,15 +197,15 @@
 
       html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
         .duduq-dd2-bank-items > .duduq-dd2-item-shell-audio-choice {
-        gap: 5px !important;
+        gap: 10px !important;
       }
 
       html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
         .duduq-dd2-item-shell-audio-choice > .duduq-dd2-item-audio {
-        width: 31px !important;
-        height: 31px !important;
-        min-width: 31px !important;
-        min-height: 31px !important;
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
       }
 
       html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
@@ -220,15 +241,15 @@
       html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
         .duduq-dd2-bank-items > .duduq-dd2-item-shell-audio-choice {
         min-width: 48px !important;
-        gap: 5px !important;
+        gap: 9px !important;
       }
 
       html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
         .duduq-dd2-item-shell-audio-choice > .duduq-dd2-item-audio {
-        width: 30px !important;
-        height: 30px !important;
-        min-width: 30px !important;
-        min-height: 30px !important;
+        width: 34px !important;
+        height: 34px !important;
+        min-width: 34px !important;
+        min-height: 34px !important;
       }
 
       html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
