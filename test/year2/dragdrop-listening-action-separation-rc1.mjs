@@ -194,10 +194,7 @@ async function installAudioTrace(frame) {
     window.__DUDUQ_QA_AUDIO_TRACE__ = [];
     window.__DUDUQ_QA_AUDIO_TRACE_INSTALLED__ = true;
     const push = (entry) => {
-      window.__DUDUQ_QA_AUDIO_TRACE__.push({
-        at: Math.round(performance.now()),
-        ...entry
-      });
+      window.__DUDUQ_QA_AUDIO_TRACE__.push({ at: Math.round(performance.now()), ...entry });
     };
     const mediaState = (media) => ({
       src: media?.currentSrc || media?.src || "",
@@ -225,20 +222,15 @@ async function installAudioTrace(frame) {
         throw error;
       }
       if (result?.then) {
-        result.then(() => {
-          push({ kind: "media.play-resolve", ...mediaState(this) });
-        }).catch((error) => {
-          push({ kind: "media.play-reject", name: error?.name || "Error", message: error?.message || String(error), ...mediaState(this) });
-        });
+        result.then(() => push({ kind: "media.play-resolve", ...mediaState(this) }))
+          .catch((error) => push({ kind: "media.play-reject", name: error?.name || "Error", message: error?.message || String(error), ...mediaState(this) }));
       }
       return result;
     };
 
     ["play", "playing", "pause", "ended", "error", "canplay"].forEach((type) => {
       document.addEventListener(type, (event) => {
-        if (event.target instanceof HTMLMediaElement) {
-          push({ kind: `media.event.${type}`, ...mediaState(event.target) });
-        }
+        if (event.target instanceof HTMLMediaElement) push({ kind: `media.event.${type}`, ...mediaState(event.target) });
       }, true);
     });
 
@@ -295,29 +287,62 @@ async function placeChoice(page, source, target, itemId, mode, label) {
 async function assertPlacedAutoplay(target, itemId, label) {
   const replay = target.locator(`.duduq-dd2-placed-replay[data-dd2-placed-replay-item-id="${itemId}"]`).first();
   await replay.waitFor({ state: "visible", timeout: 5_000 });
+
   const result = await target.evaluate(async (node, id) => {
     const selector = `.duduq-dd2-placed-replay[data-dd2-placed-replay-item-id="${CSS.escape(id)}"]`;
-    const deadline = performance.now() + 1600;
-    while (performance.now() < deadline) {
+    const classify = () => {
+      const trace = (window.__DUDUQ_QA_AUDIO_TRACE__ || []).slice(-40);
+      const speechCalls = trace.filter((entry) => entry.kind === "speech.speak-call");
+      const answerMediaCalls = trace.filter((entry) =>
+        entry.kind === "media.play-call" && !/Efeitos%20sonoros\/click\.mp3(?:$|\?)/i.test(String(entry.src || ""))
+      );
+      const answerMediaRejects = trace.filter((entry) =>
+        entry.kind === "media.play-reject" && !/Efeitos%20sonoros\/click\.mp3(?:$|\?)/i.test(String(entry.src || ""))
+      );
       const control = node.querySelector(selector);
-      if (control?.getAttribute("data-dd2-replay-playing") === "true") {
-        return { observed: true, trace: (window.__DUDUQ_QA_AUDIO_TRACE__ || []).slice(-30) };
+      return {
+        trace,
+        speechCalls,
+        answerMediaCalls,
+        answerMediaRejects,
+        replayPlaying: control?.getAttribute("data-dd2-replay-playing") || null,
+        replayAria: control?.getAttribute("aria-label") || null
+      };
+    };
+
+    const deadline = performance.now() + 1600;
+    let state = classify();
+    while (performance.now() < deadline) {
+      const starts = state.speechCalls.length + state.answerMediaCalls.length;
+      if (starts > 0 || state.replayPlaying === "true") {
+        // The old delayed bridge duplicated TTS roughly 120 ms later. Keep observing
+        // long enough to catch a second playback rather than passing on first evidence.
+        await new Promise((resolve) => setTimeout(resolve, 380));
+        state = classify();
+        break;
       }
       await new Promise((resolve) => setTimeout(resolve, 25));
+      state = classify();
     }
-    const control = node.querySelector(selector);
+
     return {
-      observed: false,
-      replayPlaying: control?.getAttribute("data-dd2-replay-playing") || null,
-      replayAria: control?.getAttribute("aria-label") || null,
-      trace: (window.__DUDUQ_QA_AUDIO_TRACE__ || []).slice(-30)
+      observedStarts: state.speechCalls.length + state.answerMediaCalls.length,
+      speechCalls: state.speechCalls,
+      answerMediaCalls: state.answerMediaCalls,
+      answerMediaRejects: state.answerMediaRejects,
+      replayPlaying: state.replayPlaying,
+      replayAria: state.replayAria,
+      trace: state.trace
     };
   }, itemId);
-  if (!result.observed) {
+
+  if (result.observedStarts !== 1 || result.answerMediaRejects.length) {
     console.log(`[placement-autoplay-trace] ${label}/${itemId} ${JSON.stringify(result, null, 2)}`);
   }
-  assert(result.observed, `${label}/${itemId}: áudio da alternativa não iniciou automaticamente ao entrar na lacuna. trace=${JSON.stringify(result.trace)}`);
-  return result.observed;
+  assert(result.observedStarts >= 1, `${label}/${itemId}: nenhuma reprodução real da alternativa iniciou ao entrar na lacuna. trace=${JSON.stringify(result.trace)}`);
+  assert(result.observedStarts === 1, `${label}/${itemId}: reprodução duplicada da alternativa (${result.observedStarts} inícios). trace=${JSON.stringify(result.trace)}`);
+  assert(result.answerMediaRejects.length === 0, `${label}/${itemId}: mídia da alternativa foi rejeitada pelo navegador. trace=${JSON.stringify(result.trace)}`);
+  return true;
 }
 
 async function runScenario(browser, mode, viewport) {
@@ -340,16 +365,18 @@ async function runScenario(browser, mode, viewport) {
       separated: window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_BRIDGE__?.separatedAudioAndAnswerActions === true,
       audioSwitch: window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_BRIDGE__?.alternativeAudioSwitchEnabled === true,
       tapFallback: window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_BRIDGE__?.tapToPlaceFallbackPreserved === true,
+      tapGestureAutoplay: window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_BRIDGE__?.tapPlacementAutoplayUsesPointerUpGesture === true,
       placementAutoplay: window.__DUDUQ_YEAR2_DD_PLACEMENT_AUTOPLAY_BRIDGE__ || null,
       release: window.DuduQ?.getMechanic?.("drag-drop")?.version || null
     }));
 
     assert(bridge.captured && bridge.separated && bridge.audioSwitch && bridge.tapFallback, `${mode}: bridge de separação não está ativo: ${JSON.stringify(bridge)}`);
-    assert(bridge.placementAutoplay?.selectedChoicePlacementAutoPlaysAudioOnce === true, `${mode}: bridge de autoplay de placement não está ativo: ${JSON.stringify(bridge)}`);
-    assert(bridge.placementAutoplay?.usesNativeSelectedReplay === true, `${mode}: autoplay não reutiliza o replay nativo selecionado.`);
-    assert(bridge.placementAutoplay?.usesNativeForceRestartTriggerForTap === true, `${mode}: autoplay por toque não usa o gatilho nativo de force restart.`);
+    assert(bridge.tapGestureAutoplay, `${mode}: tap-to-place não declara autoplay dentro do pointerup do usuário.`);
+    assert(bridge.placementAutoplay?.selectedChoicePlacementAutoPlaysAudioOnce === true, `${mode}: coordenador de autoplay de placement não está ativo: ${JSON.stringify(bridge)}`);
+    assert(bridge.placementAutoplay?.usesNativeForceRestartTriggerForTap === false, `${mode}: ainda existe fallback sintético tardio de force restart.`);
     assert(bridge.placementAutoplay?.avoidsDoublePlayWhenNativeDropAlreadyPlaying === true, `${mode}: autoplay não declara proteção contra áudio duplicado no drop.`);
-    assert(bridge.placementAutoplay?.autoplaySources === "drop-native+tap-force-restart", `${mode}: fontes de autoplay inesperadas: ${bridge.placementAutoplay?.autoplaySources}`);
+    assert(bridge.placementAutoplay?.avoidsDelayedSyntheticReplay === true, `${mode}: coordenador não protege contra replay sintético atrasado.`);
+    assert(bridge.placementAutoplay?.autoplaySources === "drop-native+tap-native-gesture", `${mode}: fontes de autoplay inesperadas: ${bridge.placementAutoplay?.autoplaySources}`);
     assert(bridge.release === "2.0.22", `${mode}: release Drag & Drop mudou para ${bridge.release}.`);
 
     const centralBefore = await assertCentralImage(target, `${mode}/${info.questionId}`);
