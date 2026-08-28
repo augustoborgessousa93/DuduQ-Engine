@@ -15,7 +15,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0-year2-tactile-buttons-3d";
+  const VERSION = "1.0.1-year2-tactile-buttons-3d-observer-safe";
   const STYLE_ID = "duduq-year2-tactile-buttons-3d";
   const MARK = "data-duduq-tactile-3d";
   const PRESERVE = "data-duduq-tactile-preserve-transform";
@@ -158,7 +158,7 @@
   function shouldPreserveTransform(node, style) {
     if (style.transform && style.transform !== "none") return true;
     return Boolean(node.matches(
-      ".duduq-bp-bubble, .duduq-ts-target, .duduq-mq-card, [data-preserve-transform], [data-animated]"
+      ".duduq-dd2-item, .duduq-bp-bubble, .duduq-ts-target, .duduq-mq-card, .duduq-matching-card, [draggable='true'], [data-dd2-item-id], [data-preserve-transform], [data-animated]"
     ));
   }
 
@@ -168,11 +168,17 @@
 
     const style = getComputedStyle(node);
     const color = firstRenderedColor(style);
-    node.style.setProperty("--duduq-tactile-shadow", shadowFrom(color));
-    node.setAttribute(MARK, "true");
+    const nextShadow = shadowFrom(color);
+    const currentShadow = node.style.getPropertyValue("--duduq-tactile-shadow").trim();
+    if (currentShadow !== nextShadow) {
+      node.style.setProperty("--duduq-tactile-shadow", nextShadow);
+    }
 
-    if (shouldPreserveTransform(node, style)) node.setAttribute(PRESERVE, "true");
-    else node.removeAttribute(PRESERVE);
+    if (node.getAttribute(MARK) !== "true") node.setAttribute(MARK, "true");
+
+    const preserve = shouldPreserveTransform(node, style);
+    if (preserve && node.getAttribute(PRESERVE) !== "true") node.setAttribute(PRESERVE, "true");
+    if (!preserve && node.hasAttribute(PRESERVE)) node.removeAttribute(PRESERVE);
   }
 
   function markDocument(doc) {
@@ -272,6 +278,7 @@
     activeDepthPx: 0,
     transitionMs: 120,
     preservesExistingMechanicTransforms: true,
+    observerWritesAreIdempotent: true,
     derivesShadowFromRenderedButtonColor: true,
     optionAudioHaloPreserved: true,
     releaseModified: false,
