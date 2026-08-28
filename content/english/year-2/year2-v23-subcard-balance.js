@@ -100,16 +100,13 @@
       margin: 0 !important;
     }
 
-    /* Gentle first-use cue: sound waves/pulse invite listening without shaking
-       the answer card. The cue stops for the whole question after the first audio
-       interaction and respects reduced-motion preferences. */
+    /* Gentle first-use sound-wave cue. It never changes element geometry, so the
+       replay control stays easy to click/tap while the halo invites listening. */
     @keyframes duduqYear2ListeningCue {
       0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 2px 0 rgba(57,103,149,.18), 0 0 0 0 rgba(30,123,224,.20);
+        box-shadow: 0 2px 0 rgba(57,103,149,.18), 0 0 0 0 rgba(30,123,224,.22);
       }
       52% {
-        transform: scale(1.055);
         box-shadow: 0 2px 0 rgba(57,103,149,.18), 0 0 0 8px rgba(30,123,224,0);
       }
     }
@@ -117,7 +114,6 @@
     html body #root .duduq-dd2-root:not([data-audio-hint-dismissed="true"]):has(.duduq-dd2-target[data-single-target-choice="true"])
       .duduq-dd2-item-shell-audio-choice > .duduq-dd2-item-audio:not([data-playing="true"]) {
       animation: duduqYear2ListeningCue 1.8s ease-in-out infinite !important;
-      transform-origin: center !important;
     }
 
     @media (prefers-reduced-motion: reduce) {
