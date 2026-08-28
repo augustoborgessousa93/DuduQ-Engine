@@ -2,9 +2,11 @@
    Year-2-only presentation bridge.
    Keeps Bubble Pop physics/content intact and only aligns its usable board width
    with the wide Target Shooter presentation approved for the same host stage.
-   Also reserves a safe vertical action area for the Year-2 single-target Drag & Drop
-   and keeps the visible choice labels A/B/C/D in canonical order while preserving
-   the already-randomized answer/audio mapping behind those labels.
+   Also keeps the visible choice labels A/B/C/D in canonical order while preserving
+   the randomized answer/audio mapping behind those labels.
+   For single-target Drag & Drop, the interaction is staged: choices first; once a
+   choice is placed, the choice bank is hidden and CONFIRMAR appears alone. On retry,
+   the runtime returns the wrong card to the bank and the choices reappear.
 */
 (function () {
   "use strict";
@@ -55,27 +57,51 @@
       .duduq-dd2-bank-items > .duduq-dd2-item-shell-audio-choice[data-choice-letter="D"] { order: 4 !important; }
 
     /*
-      Drag & Drop single-target safe action area.
-      The enabled button has a lower 3D shadow. The action slot is pulled upward
-      without shrinking the button, while keeping enough internal bottom room for
-      the shadow so short notebook viewports do not clip the active state.
+      Progressive single-target flow:
+      1) before a choice: show A-D, hide CONFIRMAR;
+      2) after a choice is placed: hide the bank, show CONFIRMAR by itself;
+      3) on a wrong answer, the runtime keeps the card red briefly, then clears the
+         target; as soon as it returns to the bank, A-D reappear automatically.
     */
-    html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-actions,
-    html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-matching-action-slot.duduq-dd2-actions {
+    html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+      .duduq-dd2-actions,
+    html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+      .duduq-matching-action-slot.duduq-dd2-actions {
+      display: none !important;
+    }
+
+    html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item[data-placed="true"])
+      .duduq-dd2-bank {
+      display: none !important;
+      min-height: 0 !important;
+      height: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: 0 !important;
+      overflow: hidden !important;
+    }
+
+    html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item[data-placed="true"])
+      .duduq-dd2-actions,
+    html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item[data-placed="true"])
+      .duduq-matching-action-slot.duduq-dd2-actions {
+      display: grid !important;
       box-sizing: border-box !important;
-      min-height: 76px !important;
-      padding: 0 0 16px !important;
-      margin-top: -8px !important;
+      min-height: 82px !important;
+      padding: 0 0 18px !important;
+      margin-top: 12px !important;
       place-items: start center !important;
       overflow: visible !important;
     }
 
     @media (min-width: 641px) and (max-height: 700px) {
-      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-actions,
-      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-matching-action-slot.duduq-dd2-actions {
-        min-height: 78px !important;
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item[data-placed="true"])
+        .duduq-dd2-actions,
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item[data-placed="true"])
+        .duduq-matching-action-slot.duduq-dd2-actions {
+        min-height: 80px !important;
         padding: 0 0 18px !important;
-        margin-top: -10px !important;
+        margin-top: 10px !important;
       }
     }
 
@@ -84,11 +110,13 @@
         width: 100% !important;
       }
 
-      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-dd2-actions,
-      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"]) .duduq-matching-action-slot.duduq-dd2-actions {
-        min-height: 72px !important;
-        padding: 2px 0 14px !important;
-        margin-top: -4px !important;
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item[data-placed="true"])
+        .duduq-dd2-actions,
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item[data-placed="true"])
+        .duduq-matching-action-slot.duduq-dd2-actions {
+        min-height: 74px !important;
+        padding: 0 0 14px !important;
+        margin-top: 8px !important;
       }
     }
   `;
