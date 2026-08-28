@@ -7,7 +7,7 @@
   const factory = window.DuduQYear2V23Factory;
   if (!factory || typeof factory.buildModule !== "function") throw new Error("[DuduQ Year2 DragDrop Listening Association] Factory indisponível.");
   if (factory.__dragDropListeningAssociationFinalApplied) return;
-  const VERSION = "1.0.2-year2-listening-target-label-consistent";
+  const VERSION = "1.0.3-year2-central-official-asset-priority";
   const originalBuild = factory.buildModule.bind(factory);
   const resolveVisual = typeof factory.resolveYear2VisualConsistent === "function" ? factory.resolveYear2VisualConsistent.bind(factory) : null;
   function allQuestions(module) { return (module?.activities || []).flatMap((activity) => activity?.questions || []); }
@@ -59,7 +59,11 @@
       const existing = existingTargetVisual(question);
       if (existing) return existing;
     }
-    return correctAlternativeVisual(question) || existingTargetVisual(question) || resolvedAnswerVisual(question);
+    /* The central stimulus represents the correct concept itself, so it must resolve
+       independently from any per-option visual de-duplication. This lets an exact
+       official Assets-DuduQ image win even when the draggable option previously used
+       a semantic variant only to keep distractor visuals unique. */
+    return resolvedAnswerVisual(question) || correctAlternativeVisual(question) || existingTargetVisual(question);
   }
   function ensurePrimaryAudio(question) {
     const enabled = question?.audio?.enabled === true || question?.media?.audio?.enabled === true || question?.metadata?.stimulusAudio?.enabled === true;
@@ -106,7 +110,7 @@
     question.delivery = { ...(question.delivery || {}), allowImage: true, allowAudio: true };
     question.statement = "OUÇA, OBSERVE E ARRASTE A RESPOSTA";
     question.instruction = question.statement;
-    question.metadata = { ...(question.metadata || {}), singleTargetChoice: true, confirmOnAnySelection: true, replacePreviousChoice: true, tapToPlace: true, hideCapacityBadge: true, optionPresentation: "LISTENING_ASSOCIATION_AUDIO_CHOICES", pedagogicalModality: "LISTENING_IMAGE_AUDIO_ASSOCIATION", listeningAssociation: { version: VERSION, status: "READY", sequence: ["PRIMARY_AUDIO", "CENTRAL_IMAGE", "AUDIO_OPTIONS", "DRAG_DROP", "CONFIRM"], centralVisualAsset: visual.src, centralVisualStatus: visual.status, primaryAudioReady, sourceAnswerPreserved: true, sourceAlternativeLabelsPreserved: true, visualShellPreserved: true, audioCompatibilityAliasesReady: true, targetInstructionConsistent: true } };
+    question.metadata = { ...(question.metadata || {}), singleTargetChoice: true, confirmOnAnySelection: true, replacePreviousChoice: true, tapToPlace: true, hideCapacityBadge: true, optionPresentation: "LISTENING_ASSOCIATION_AUDIO_CHOICES", pedagogicalModality: "LISTENING_IMAGE_AUDIO_ASSOCIATION", listeningAssociation: { version: VERSION, status: "READY", sequence: ["PRIMARY_AUDIO", "CENTRAL_IMAGE", "AUDIO_OPTIONS", "DRAG_DROP", "CONFIRM"], centralVisualAsset: visual.src, centralVisualStatus: visual.status, primaryAudioReady, sourceAnswerPreserved: true, sourceAlternativeLabelsPreserved: true, visualShellPreserved: true, audioCompatibilityAliasesReady: true, targetInstructionConsistent: true, exactCentralConceptResolution: true } };
     audit.patched.push(question.id);
     if (!primaryAudioReady) audit.missingPrimaryAudio.push(question.id);
   }
