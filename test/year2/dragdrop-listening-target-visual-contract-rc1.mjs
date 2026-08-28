@@ -74,8 +74,47 @@ async function findListening(page) {
   throw new Error("Nenhum single-target listening association foi encontrado.");
 }
 
+async function visibleChoiceOrder(current, name, questionId) {
+  await current.waitForSelector("#duduq-year2-subcard-balance-v3", { state: "attached", timeout: 10_000 });
+  await current.waitForFunction(() => {
+    const shells = Array.from(document.querySelectorAll(".duduq-dd2-bank-items > .duduq-dd2-item-shell-audio-choice"));
+    return shells.length === 4 && shells.every((node) => /^[A-D]$/.test(node.getAttribute("data-choice-letter") || ""));
+  }, null, { timeout: 10_000 });
+
+  const visualOrder = await current.locator(".duduq-dd2-bank-items > .duduq-dd2-item-shell-audio-choice").evaluateAll((nodes) => {
+    return nodes.map((node) => {
+      const rect = node.getBoundingClientRect();
+      return {
+        letter: node.getAttribute("data-choice-letter") || "",
+        top: rect.top,
+        left: rect.left
+      };
+    }).sort((a, b) => {
+      if (Math.abs(a.top - b.top) > 4) return a.top - b.top;
+      return a.left - b.left;
+    }).map((entry) => entry.letter);
+  });
+
+  assert(visualOrder.join("") === "ABCD", `${name}/${questionId}: alternativas visuais fora de A-B-C-D (${JSON.stringify(visualOrder)}).`);
+  return visualOrder;
+}
+
+async function activateConfirm(current, name, questionId) {
+  const firstChoice = current.locator(".duduq-dd2-bank-items > .duduq-dd2-item-shell-audio-choice .duduq-dd2-item").first();
+  await firstChoice.waitFor({ state: "visible", timeout: 10_000 });
+  await firstChoice.click();
+
+  const confirm = current.locator(".duduq-dd2-confirm").first();
+  await confirm.waitFor({ state: "visible", timeout: 10_000 });
+  await current.waitForFunction(() => {
+    const button = document.querySelector(".duduq-dd2-confirm");
+    return Boolean(button && button.disabled === false);
+  }, null, { timeout: 10_000 });
+
+  assert(!(await confirm.isDisabled()), `${name}/${questionId}: CONFIRMAR não ativou após escolher uma alternativa.`);
+}
+
 async function confirmSafeArea(current, name, questionId) {
-  await current.waitForSelector("#duduq-year2-subcard-balance-v2", { state: "attached", timeout: 10_000 });
   const confirm = current.locator(".duduq-dd2-confirm").first();
   await confirm.waitFor({ state: "visible", timeout: 10_000 });
 
@@ -84,21 +123,38 @@ async function confirmSafeArea(current, name, questionId) {
     const action = node.closest(".duduq-dd2-actions");
     const actionStyle = action ? getComputedStyle(action) : null;
     const viewportHeight = document.documentElement.clientHeight;
+
+    let clippingBottom = viewportHeight;
+    let ancestor = node.parentElement;
+    while (ancestor) {
+      const style = getComputedStyle(ancestor);
+      const overflowY = style.overflowY || style.overflow;
+      if (["hidden", "clip", "auto", "scroll"].includes(overflowY)) {
+        const ancestorRect = ancestor.getBoundingClientRect();
+        if (ancestorRect.height > 0) clippingBottom = Math.min(clippingBottom, ancestorRect.bottom);
+      }
+      ancestor = ancestor.parentElement;
+    }
+
     return {
       top: rect.top,
       bottom: rect.bottom,
       height: rect.height,
       viewportHeight,
-      bottomClearance: viewportHeight - rect.bottom,
+      clippingBottom,
+      visibleBottomClearance: clippingBottom - rect.bottom,
+      viewportBottomClearance: viewportHeight - rect.bottom,
+      boxShadow: getComputedStyle(node).boxShadow,
       actionMinHeight: actionStyle?.minHeight || null,
       actionPaddingTop: actionStyle?.paddingTop || null,
-      actionPaddingBottom: actionStyle?.paddingBottom || null
+      actionPaddingBottom: actionStyle?.paddingBottom || null,
+      actionMarginTop: actionStyle?.marginTop || null
     };
   });
 
   assert(geometry.height >= 48, `${name}/${questionId}: botão CONFIRMAR foi comprimido (${JSON.stringify(geometry)}).`);
   assert(geometry.top >= 0, `${name}/${questionId}: topo do CONFIRMAR saiu do viewport (${JSON.stringify(geometry)}).`);
-  assert(geometry.bottomClearance >= 6, `${name}/${questionId}: CONFIRMAR está cortado/encostado no limite inferior (${JSON.stringify(geometry)}).`);
+  assert(geometry.visibleBottomClearance >= 12, `${name}/${questionId}: estado ativo/sombra do CONFIRMAR sem folga inferior segura (${JSON.stringify(geometry)}).`);
   return geometry;
 }
 
@@ -130,12 +186,14 @@ async function run(browser, name, viewport) {
     assert(badgeState.display === "none", `${name}/${active.id}: badge ${badgeState.text} continua visível (${JSON.stringify(badgeState)}).`);
     assert(badgeState.width === 0 && badgeState.height === 0, `${name}/${active.id}: badge oculto ainda ocupa espaço.`);
 
+    const choiceOrder = await visibleChoiceOrder(current, name, active.id);
+    await activateConfirm(current, name, active.id);
     const confirmGeometry = await confirmSafeArea(current, name, active.id);
 
     const bridge = await page.evaluate(() => window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_BRIDGE__ || null);
     assert(bridge?.singleTargetCapacityBadgeHidden === true, `${name}/${active.id}: bridge não declara limpeza do badge.`);
 
-    return { name, questionId: active.id, targetText, badgeState, confirmGeometry, bridgeVersion: bridge.version };
+    return { name, questionId: active.id, targetText, badgeState, choiceOrder, confirmGeometry, bridgeVersion: bridge.version };
   } finally {
     await context.close();
   }
