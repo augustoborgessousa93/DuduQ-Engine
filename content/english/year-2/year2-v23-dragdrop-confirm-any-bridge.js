@@ -11,6 +11,7 @@
    - audio alternatives remain independently clickable while another option is playing,
      so the shared audio controller can stop the previous option and start the new one;
    - the movable card remains drag-enabled and also keeps tap-to-place as an accessible fallback;
+   - tap placement starts the selected option audio inside the original user gesture;
    - single-target capacity badge is hidden because 1/1 adds no learner information;
    - sequence/classification/regular association remain untouched;
    - no candidate 2.0.23 CSS/layout is imported.
@@ -18,7 +19,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.3.1-year2-separated-audio-drag-clean-target-dd2";
+  const VERSION = "1.3.2-year2-separated-audio-drag-tap-autoplay-dd2";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqYear2ConfirmAnyActiveDD2";
   const nativeDefineProperty = Object.defineProperty;
@@ -90,7 +91,7 @@
     prepared = replaceRequired(
       prepared,
       `var onItemClick = useCallback(function (item) {\n      if (suppressClick.current) { suppressClick.current = false; return; }\n      if (disabled || feedbackState === "success") return;\n      setSelected(function (current) { return current === item.id ? null : item.id; });\n      onInteraction && onInteraction();\n      if (item.audioAssetKey || item.spokenText) playValueAudio(item, "item");\n    }, [disabled, feedbackState, onInteraction, playValueAudio]);`,
-      `var onItemClick = useCallback(function (item) {\n      if (suppressClick.current) { suppressClick.current = false; return; }\n      if (disabled || feedbackState === "success" || retryAnimating) return;\n      if (question.strategy === "single-target-choice") {\n        var singleTarget = question.targets && question.targets[0];\n        if (singleTarget) {\n          place(item.id, singleTarget.id, "tap");\n          return;\n        }\n      }\n      setSelected(function (current) { return current === item.id ? null : item.id; });\n      onInteraction && onInteraction();\n      if (item.audioAssetKey || item.spokenText) playValueAudio(item, "item");\n    }, [disabled, feedbackState, onInteraction, place, playValueAudio, question.strategy, question.targets, retryAnimating]);`
+      `var onItemClick = useCallback(function (item) {\n      if (suppressClick.current) { suppressClick.current = false; return; }\n      if (disabled || feedbackState === "success" || retryAnimating) return;\n      if (question.strategy === "single-target-choice") {\n        var singleTarget = question.targets && question.targets[0];\n        if (singleTarget) {\n          place(item.id, singleTarget.id, "tap");\n          if (item.audioAssetKey || item.spokenText) playValueAudio(item, "item", true);\n          return;\n        }\n      }\n      setSelected(function (current) { return current === item.id ? null : item.id; });\n      onInteraction && onInteraction();\n      if (item.audioAssetKey || item.spokenText) playValueAudio(item, "item");\n    }, [disabled, feedbackState, onInteraction, place, playValueAudio, question.strategy, question.targets, retryAnimating]);`
     );
 
     prepared = replaceRequired(
@@ -268,6 +269,7 @@
     alternativeAudioSwitchEnabled: true,
     separatedAudioAndAnswerActions: true,
     tapToPlaceFallbackPreserved: true,
+    tapPlacementAutoplayUsesUserGesture: true,
     singleTargetCapacityBadgeHidden: true
   });
 })();
