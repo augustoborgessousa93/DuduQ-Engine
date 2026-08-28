@@ -10,7 +10,6 @@
    - option audio is a separate sibling control: listening never places an answer;
    - audio alternatives remain independently clickable while another option is playing,
      so the shared audio controller can stop the previous option and start the new one;
-   - placing a listening choice by drag/drop or tap plays that choice once in the target;
    - the movable card remains drag-enabled and also keeps tap-to-place as an accessible fallback;
    - single-target capacity badge is hidden because 1/1 adds no learner information;
    - sequence/classification/regular association remain untouched;
@@ -19,7 +18,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.3.2-year2-separated-audio-drag-clean-target-dd2";
+  const VERSION = "1.3.1-year2-separated-audio-drag-clean-target-dd2";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqYear2ConfirmAnyActiveDD2";
   const nativeDefineProperty = Object.defineProperty;
@@ -148,18 +147,6 @@
       `disabled: disabled || feedbackState === "success",`
     );
 
-    prepared = replaceRequired(
-      prepared,
-      `if (source === "drop" && (item.audioAssetKey || item.spokenText)) {`,
-      `if ((source === "drop" || (question.strategy === "single-target-choice" && source === "tap")) && (item.audioAssetKey || item.spokenText)) {`
-    );
-
-    prepared = replaceRequired(
-      prepared,
-      `}, [audio.activeAudioKey, capacityFor, disabled, feedbackState, itemMap, onInteraction, placements, playValueAudio, question.id, targetMap]);`,
-      `}, [audio.activeAudioKey, capacityFor, disabled, feedbackState, itemMap, onInteraction, placements, playValueAudio, question.id, question.strategy, targetMap]);`
-    );
-
     const listeningChoiceCss = `<style id="duduq-year2-dd-listening-choice-control">
 .duduq-dd2-item-shell-audio-choice {
   display: grid !important;
@@ -281,8 +268,6 @@
     alternativeAudioSwitchEnabled: true,
     separatedAudioAndAnswerActions: true,
     tapToPlaceFallbackPreserved: true,
-    selectedChoicePlacementAutoPlaysAudioOnce: true,
-    selectedChoiceAutoplaySources: "drop+tap",
     singleTargetCapacityBadgeHidden: true
   });
 })();
