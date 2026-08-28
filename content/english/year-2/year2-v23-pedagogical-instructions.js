@@ -5,7 +5,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0-short-narrable-instructions";
+  const VERSION = "1.0.1-short-narrable-instructions";
   const factory = window.DuduQYear2V23Factory;
   if (!factory || typeof factory.buildModule !== "function") {
     throw new Error("[DuduQ Year2 Instructions] Factory v2.3 indisponível.");
@@ -36,8 +36,6 @@
   }
 
   function commandFor(question, activity) {
-    if (question?.id === "EN2-M1-12") return null; // module-specific image grouping owns its instruction.
-
     const mechanic = String(activity?.mechanic || question?.delivery?.mechanic || "").toLowerCase();
     const mode = String(question?.metadata?.sourcePlanModeV23 || "").toLowerCase();
     const topic = String(question?.metadata?.topic || activity?.topic || "").toUpperCase();
@@ -106,8 +104,6 @@
     for (const activity of refined.activities || []) {
       for (const question of activity.questions || []) {
         const display = commandFor(question, activity);
-        if (!display) continue;
-
         const previous = String(question.statement || question.instruction || "");
         const speech = spoken(display);
         question.metadata = question.metadata || {};
