@@ -100,6 +100,16 @@ async function findListeningStep(page) {
 async function assertCentralImage(target, label) {
   const image = target.locator("img").first();
   await image.waitFor({ state: "visible", timeout: 8_000 });
+  const loaded = await image.evaluate((node) => {
+    if (node.complete) return node.naturalWidth > 0 && node.naturalHeight > 0;
+    return new Promise((resolve) => {
+      const finish = () => resolve(Boolean(node.complete && node.naturalWidth > 0 && node.naturalHeight > 0));
+      node.addEventListener("load", finish, { once: true });
+      node.addEventListener("error", () => resolve(false), { once: true });
+      window.setTimeout(finish, 5_000);
+    });
+  });
+  assert(loaded, `${label}: imagem central não carregou.`);
   const state = await image.evaluate((node) => ({
     src: node.currentSrc || node.src || "",
     complete: Boolean(node.complete),
