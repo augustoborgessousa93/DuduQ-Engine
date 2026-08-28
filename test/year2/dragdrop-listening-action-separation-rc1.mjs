@@ -210,6 +210,23 @@ async function placeChoice(page, source, target, itemId, mode, label) {
   await target.locator(`.duduq-dd2-item[data-dd2-item-id="${itemId}"]`).waitFor({ state: "visible", timeout: 5_000 });
 }
 
+async function assertPlacedAutoplay(target, itemId, label) {
+  const replay = target.locator(`.duduq-dd2-placed-replay[data-dd2-placed-replay-item-id="${itemId}"]`).first();
+  await replay.waitFor({ state: "visible", timeout: 5_000 });
+  const observed = await target.evaluate(async (node, id) => {
+    const selector = `.duduq-dd2-placed-replay[data-dd2-placed-replay-item-id="${CSS.escape(id)}"]`;
+    const deadline = performance.now() + 1600;
+    while (performance.now() < deadline) {
+      const control = node.querySelector(selector);
+      if (control?.getAttribute("data-dd2-replay-playing") === "true") return true;
+      await new Promise((resolve) => setTimeout(resolve, 25));
+    }
+    return false;
+  }, itemId);
+  assert(observed, `${label}/${itemId}: áudio da alternativa não iniciou automaticamente ao entrar na lacuna.`);
+  return observed;
+}
+
 async function runScenario(browser, mode, viewport) {
   const context = await browser.newContext({
     viewport,
@@ -230,10 +247,13 @@ async function runScenario(browser, mode, viewport) {
       separated: window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_BRIDGE__?.separatedAudioAndAnswerActions === true,
       audioSwitch: window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_BRIDGE__?.alternativeAudioSwitchEnabled === true,
       tapFallback: window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_BRIDGE__?.tapToPlaceFallbackPreserved === true,
+      autoplay: window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_BRIDGE__?.selectedChoicePlacementAutoPlaysAudioOnce === true,
+      autoplaySources: window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_BRIDGE__?.selectedChoiceAutoplaySources || null,
       release: window.DuduQ?.getMechanic?.("drag-drop")?.version || null
     }));
 
     assert(bridge.captured && bridge.separated && bridge.audioSwitch && bridge.tapFallback, `${mode}: bridge de separação não está ativo: ${JSON.stringify(bridge)}`);
+    assert(bridge.autoplay && bridge.autoplaySources === "drop+tap", `${mode}: contrato de autoplay ao selecionar não está ativo: ${JSON.stringify(bridge)}`);
     assert(bridge.release === "2.0.22", `${mode}: release Drag & Drop mudou para ${bridge.release}.`);
 
     const centralBefore = await assertCentralImage(target, `${mode}/${info.questionId}`);
@@ -248,6 +268,7 @@ async function runScenario(browser, mode, viewport) {
     let confirm = frame.locator(".duduq-dd2-confirm");
     const wrong = frame.locator(`.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="${wrongId}"]`).first();
     await placeChoice(page, wrong, target, wrongId, mode, `${mode}/${info.questionId}`);
+    const wrongAutoplay = await assertPlacedAutoplay(target, wrongId, `${mode}/${info.questionId}`);
     assert(!(await confirm.isDisabled()), `${mode}/${info.questionId}: CONFIRMAR não habilitou após responder.`);
 
     await confirm.click();
@@ -257,6 +278,7 @@ async function runScenario(browser, mode, viewport) {
 
     const correct = frame.locator(`.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="${info.correctSource}"]`).first();
     await placeChoice(page, correct, target, info.correctSource, mode, `${mode}/${info.questionId}`);
+    const correctAutoplay = await assertPlacedAutoplay(target, info.correctSource, `${mode}/${info.questionId}`);
     const centralAfter = await assertCentralImage(target, `${mode}/${info.questionId} após resposta`);
     assert(centralAfter.src === centralBefore.src, `${mode}/${info.questionId}: imagem central mudou após o drop.`);
 
@@ -273,6 +295,8 @@ async function runScenario(browser, mode, viewport) {
       correctId: info.correctSource,
       wrongId,
       placementMode: mode === "desktop" ? "pointer-drag" : "touch-tap-fallback",
+      wrongAutoplay,
+      correctAutoplay,
       bridge,
       controls,
       centralBefore,
