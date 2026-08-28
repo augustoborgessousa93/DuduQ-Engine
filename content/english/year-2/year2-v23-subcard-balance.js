@@ -58,8 +58,9 @@
 
     /*
       Progressive single-target flow:
-      1) before a choice: show A-D, hide CONFIRMAR;
-      2) after a choice is placed: hide the bank, show CONFIRMAR by itself;
+      1) before a choice: A-D are visible; CONFIRMAR stays in the DOM for the
+         existing runtime/test contract, but is visually hidden and non-interactive;
+      2) after a choice is placed: hide the bank and reveal CONFIRMAR by itself;
       3) on a wrong answer, the runtime keeps the card red briefly, then clears the
          target; as soon as it returns to the bank, A-D reappear automatically.
     */
@@ -67,7 +68,15 @@
       .duduq-dd2-actions,
     html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
       .duduq-matching-action-slot.duduq-dd2-actions {
-      display: none !important;
+      display: grid !important;
+      box-sizing: border-box !important;
+      min-height: 70px !important;
+      padding: 0 0 14px !important;
+      margin-top: 8px !important;
+      place-items: start center !important;
+      overflow: visible !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
 
     html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item[data-placed="true"])
@@ -85,16 +94,23 @@
       .duduq-dd2-actions,
     html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item[data-placed="true"])
       .duduq-matching-action-slot.duduq-dd2-actions {
-      display: grid !important;
-      box-sizing: border-box !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
       min-height: 82px !important;
       padding: 0 0 18px !important;
       margin-top: 12px !important;
-      place-items: start center !important;
-      overflow: visible !important;
     }
 
     @media (min-width: 641px) and (max-height: 700px) {
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+        .duduq-dd2-actions,
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+        .duduq-matching-action-slot.duduq-dd2-actions {
+        min-height: 66px !important;
+        padding: 0 0 12px !important;
+        margin-top: 6px !important;
+      }
+
       html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item[data-placed="true"])
         .duduq-dd2-actions,
       html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item[data-placed="true"])
@@ -108,6 +124,15 @@
     @media (max-width: 640px) {
       html body #root .duduq-engine-stage .duduq-bp-board {
         width: 100% !important;
+      }
+
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+        .duduq-dd2-actions,
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+        .duduq-matching-action-slot.duduq-dd2-actions {
+        min-height: 60px !important;
+        padding: 0 0 10px !important;
+        margin-top: 4px !important;
       }
 
       html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item[data-placed="true"])
