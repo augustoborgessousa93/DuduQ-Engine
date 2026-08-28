@@ -5,6 +5,7 @@ import process from "node:process";
 
 const BASE_URL = process.env.BASE_URL || "http://127.0.0.1:4173";
 const OUTPUT_DIR = path.resolve("test-results/year2-m1-12-image-group-rc1");
+// Controlled CI rerun marker: product code is unchanged; verifies whether the unrelated M02 Bubble Pop duplicate was transient.
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
