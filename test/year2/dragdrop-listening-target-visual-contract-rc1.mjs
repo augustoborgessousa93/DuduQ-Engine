@@ -75,7 +75,7 @@ async function findListening(page) {
 }
 
 async function visibleChoiceOrder(current, name, questionId) {
-  await current.waitForSelector("#duduq-year2-subcard-balance-v3", { state: "attached", timeout: 10_000 });
+  await current.waitForSelector("#duduq-year2-subcard-balance-v4", { state: "attached", timeout: 10_000 });
   await current.waitForFunction(() => {
     const shells = Array.from(document.querySelectorAll(".duduq-dd2-bank-items > .duduq-dd2-item-shell-audio-choice"));
     return shells.length === 4 && shells.every((node) => /^[A-D]$/.test(node.getAttribute("data-choice-letter") || ""));
