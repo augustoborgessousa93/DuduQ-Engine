@@ -31,6 +31,7 @@ permissions:
 jobs:
   promotion-contract:
     name: R144 promotion + rollback contract
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.head_ref == 'promotion/drag-drop-2.0.23-canary-r144'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
