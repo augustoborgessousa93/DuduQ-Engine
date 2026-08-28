@@ -9,6 +9,8 @@
    - replay is an accessible non-button control with its own speaker glyph, a
      neutral replay class/name and a private replay-state marker, outside both the
      global audio normalizer selector and the generic [data-playing] observer scope;
+   - while a single-target answer is placed and idle, the target zone no longer
+     inherits aria-disabled over replay/X; the zone itself stays out of tab order;
    - remove uses the native DD2 place(itemId, null) path, returning cleanly to the bank
      without validating the answer;
    - controls disappear during retry feedback and never modify scoring/content.
@@ -16,7 +18,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "2.0.3-year2-selected-choice-tools-dd2";
+  const VERSION = "2.0.4-year2-selected-choice-tools-dd2";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqYear2SelectedToolsV2ActiveDD2";
   const SENTINEL = "__DUDUQ_YEAR2_SELECTED_TOOLS_V2_ACTIVE_DD2__";
@@ -48,6 +50,12 @@
       prepared,
       `return React.createElement("div", { className:"duduq-dd2-item-shell" + (hasAudio && question.strategy === "single-target-choice" && !placed ? " duduq-dd2-item-shell-audio-choice" : ""), key:item.id },`,
       `return React.createElement("div", { className:"duduq-dd2-item-shell" + (hasAudio && question.strategy === "single-target-choice" && !placed ? " duduq-dd2-item-shell-audio-choice" : "") + (question.strategy === "single-target-choice" && placed ? " duduq-dd2-item-shell-selected-choice" : ""), key:item.id },`
+    );
+
+    prepared = replaceRequired(
+      prepared,
+      `"aria-disabled":disabled || !selected || feedbackState === "success" ? "true" : "false",`,
+      `"aria-disabled":disabled || (!selected && !(question.strategy === "single-target-choice" && ids.length > 0 && feedbackState === "idle")) || feedbackState === "success" ? "true" : "false",`
     );
 
     prepared = replaceRequired(
@@ -237,6 +245,7 @@
     selectedChoiceReplayAvoidsGlobalButtonNormalizer: true,
     selectedChoiceReplayAvoidsNativePlayingObserver: true,
     selectedChoiceReplayUsesPrivatePlayingMarker: true,
+    selectedChoiceToolsKeepPlacedZoneAccessibilityEnabled: true,
     selectedChoiceReplayKeyboardAccessible: true,
     selectedChoiceReplayNeutralAccessibleName: true,
     selectedChoiceReplayNeutralClassName: true,
