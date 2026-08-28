@@ -11,9 +11,10 @@
 (function () {
   "use strict";
 
-  const STYLE_ID = "duduq-year2-subcard-balance-v3";
+  const STYLE_ID = "duduq-year2-subcard-balance-v4";
   const WIRED = "data-duduq-year2-subcard-balance-wired";
   const INNER_OBSERVER = "__DUDUQ_YEAR2_CHOICE_ORDER_OBSERVER__";
+  const AUDIO_HINT_WIRED = "__DUDUQ_YEAR2_AUDIO_HINT_WIRED__";
 
   const CSS = `
     html body #root .duduq-engine-stage .duduq-bp-root,
@@ -55,6 +56,76 @@
       .duduq-dd2-bank-items > .duduq-dd2-item-shell-audio-choice[data-choice-letter="C"] { order: 3 !important; }
     html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
       .duduq-dd2-bank-items > .duduq-dd2-item-shell-audio-choice[data-choice-letter="D"] { order: 4 !important; }
+
+    /*
+      Listening-bank hierarchy: the answer card is the primary object and its
+      replay button sits directly below it. This visually groups each sound with
+      its own A/B/C/D choice instead of creating an A-audio-B-audio horizontal run.
+    */
+    html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+      .duduq-dd2-bank-items {
+      align-items: flex-start !important;
+      justify-content: center !important;
+      column-gap: clamp(18px,2.2vw,30px) !important;
+      row-gap: 10px !important;
+    }
+
+    html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+      .duduq-dd2-bank-items > .duduq-dd2-item-shell-audio-choice {
+      display: grid !important;
+      grid-template-columns: auto !important;
+      grid-template-rows: auto auto !important;
+      justify-items: center !important;
+      align-items: center !important;
+      gap: 7px !important;
+      width: auto !important;
+      min-width: 54px !important;
+      margin: 0 !important;
+    }
+
+    html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+      .duduq-dd2-item-shell-audio-choice > .duduq-dd2-item {
+      grid-row: 1 !important;
+      justify-self: center !important;
+    }
+
+    html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+      .duduq-dd2-item-shell-audio-choice > .duduq-dd2-item-audio {
+      grid-row: 2 !important;
+      justify-self: center !important;
+      width: 34px !important;
+      height: 34px !important;
+      min-width: 34px !important;
+      min-height: 34px !important;
+      margin: 0 !important;
+    }
+
+    /* Gentle first-use cue: sound waves/pulse invite listening without shaking
+       the answer card. The cue stops for the whole question after the first audio
+       interaction and respects reduced-motion preferences. */
+    @keyframes duduqYear2ListeningCue {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 0 rgba(57,103,149,.18), 0 0 0 0 rgba(30,123,224,.20);
+      }
+      52% {
+        transform: scale(1.055);
+        box-shadow: 0 2px 0 rgba(57,103,149,.18), 0 0 0 8px rgba(30,123,224,0);
+      }
+    }
+
+    html body #root .duduq-dd2-root:not([data-audio-hint-dismissed="true"]):has(.duduq-dd2-target[data-single-target-choice="true"])
+      .duduq-dd2-item-shell-audio-choice > .duduq-dd2-item-audio:not([data-playing="true"]) {
+      animation: duduqYear2ListeningCue 1.8s ease-in-out infinite !important;
+      transform-origin: center !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+        .duduq-dd2-item-shell-audio-choice > .duduq-dd2-item-audio {
+        animation: none !important;
+      }
+    }
 
     /*
       Progressive single-target flow:
@@ -103,6 +174,24 @@
 
     @media (min-width: 641px) and (max-height: 700px) {
       html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+        .duduq-dd2-bank-items {
+        column-gap: clamp(15px,1.8vw,24px) !important;
+      }
+
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+        .duduq-dd2-bank-items > .duduq-dd2-item-shell-audio-choice {
+        gap: 5px !important;
+      }
+
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+        .duduq-dd2-item-shell-audio-choice > .duduq-dd2-item-audio {
+        width: 31px !important;
+        height: 31px !important;
+        min-width: 31px !important;
+        min-height: 31px !important;
+      }
+
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
         .duduq-dd2-actions,
       html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
         .duduq-matching-action-slot.duduq-dd2-actions {
@@ -124,6 +213,26 @@
     @media (max-width: 640px) {
       html body #root .duduq-engine-stage .duduq-bp-board {
         width: 100% !important;
+      }
+
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+        .duduq-dd2-bank-items {
+        column-gap: 12px !important;
+        row-gap: 8px !important;
+      }
+
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+        .duduq-dd2-bank-items > .duduq-dd2-item-shell-audio-choice {
+        min-width: 48px !important;
+        gap: 5px !important;
+      }
+
+      html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
+        .duduq-dd2-item-shell-audio-choice > .duduq-dd2-item-audio {
+        width: 30px !important;
+        height: 30px !important;
+        min-width: 30px !important;
+        min-height: 30px !important;
       }
 
       html body #root .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
@@ -161,9 +270,31 @@
     });
   }
 
+  function wireAudioHint(doc) {
+    if (!doc?.documentElement || doc[AUDIO_HINT_WIRED]) return;
+    const dismiss = function (event) {
+      const control = event.target?.closest?.(".duduq-dd2-item-audio");
+      if (!control) return;
+      const root = control.closest(".duduq-dd2-root");
+      if (root?.querySelector('.duduq-dd2-target[data-single-target-choice="true"]')) {
+        root.setAttribute("data-audio-hint-dismissed", "true");
+      }
+    };
+    doc.addEventListener("pointerdown", dismiss, true);
+    doc.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") dismiss(event);
+    }, true);
+    try {
+      Object.defineProperty(doc, AUDIO_HINT_WIRED, { value: true, configurable: true });
+    } catch (_) {
+      doc[AUDIO_HINT_WIRED] = true;
+    }
+  }
+
   function wireInnerObserver(doc) {
     if (!doc?.documentElement) return;
     markChoiceOrder(doc);
+    wireAudioHint(doc);
     if (doc[INNER_OBSERVER]) return;
     const observer = new MutationObserver(function () {
       markChoiceOrder(doc);
@@ -183,7 +314,8 @@
       if (!doc?.head) return;
       [
         "duduq-year2-subcard-balance-v1",
-        "duduq-year2-subcard-balance-v2"
+        "duduq-year2-subcard-balance-v2",
+        "duduq-year2-subcard-balance-v3"
       ].forEach(function (id) {
         const stale = doc.getElementById(id);
         if (stale) stale.remove();
