@@ -10,6 +10,7 @@ on:
       - "test/year2/multimodal-consistency-hotfix-browser-rc1.mjs"
       - "test/year2/dragdrop-listening-action-separation-rc1.mjs"
       - "test/year2/dragdrop-listening-target-visual-contract-rc1.mjs"
+      - "test/year2/dragdrop-selected-choice-tools-rc1.mjs"
       - ".github/workflows/year2-multimodal-consistency-rc1.yml"
   push:
     branches:
@@ -20,6 +21,7 @@ on:
       - "test/year2/multimodal-consistency-hotfix-browser-rc1.mjs"
       - "test/year2/dragdrop-listening-action-separation-rc1.mjs"
       - "test/year2/dragdrop-listening-target-visual-contract-rc1.mjs"
+      - "test/year2/dragdrop-selected-choice-tools-rc1.mjs"
       - ".github/workflows/year2-multimodal-consistency-rc1.yml"
   workflow_dispatch:
 
@@ -50,10 +52,12 @@ jobs:
           node --check content/english/year-2/year2-v23-dragdrop-listening-association-final.js
           node --check content/english/year-2/year2-v23-multimodal-router-finalize.js
           node --check content/english/year-2/year2-v23-dragdrop-confirm-any-bridge.js
+          node --check content/english/year-2/year2-v23-dragdrop-selected-tools-bridge.js
           node --check test/year2/multimodal-consistency-hotfix-rc1.mjs
           node --check test/year2/multimodal-consistency-hotfix-browser-rc1.mjs
           node --check test/year2/dragdrop-listening-action-separation-rc1.mjs
           node --check test/year2/dragdrop-listening-target-visual-contract-rc1.mjs
+          node --check test/year2/dragdrop-selected-choice-tools-rc1.mjs
 
       - name: Validate IDs, answers, listening association, smart images and Matching diversity
         run: node test/year2/multimodal-consistency-hotfix-rc1.mjs
@@ -108,6 +112,11 @@ jobs:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year2/dragdrop-listening-action-separation-rc1.mjs
 
+      - name: Verify selected-choice replay, clear and retry flow
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/dragdrop-selected-choice-tools-rc1.mjs
+
       - name: Run Year 2 functional browser gate
         env:
           BASE_URL: http://127.0.0.1:4173
@@ -120,6 +129,7 @@ jobs:
           name: year2-multimodal-consistency-rc1
           path: |
             test-results/year2-dragdrop-listening-action-separation-rc1
+            test-results/year2-dragdrop-selected-choice-tools-rc1
             test-results/year2-multimodal-consistency-rc1
           if-no-files-found: warn
           retention-days: 7
