@@ -1,0 +1,232 @@
+/* DUDUQ English Year 2 — Drag & Drop selected-choice tools bridge
+   Year-2 page scope only. Keeps Canary R143 and Drag & Drop 2.0.22 immutable.
+
+   Single-target choice contract:
+   - after a choice is placed, expose a replay-audio control inside the target;
+   - expose an explicit remove (X) control so the learner can change the choice
+     before pressing CONFIRMAR;
+   - remove uses the native DD2 place(itemId, null) path, so state returns cleanly
+     to the bank without validating the answer;
+   - controls disappear during retry feedback and never modify scoring/content.
+*/
+(function () {
+  "use strict";
+
+  const VERSION = "1.0.0-year2-selected-choice-tools-dd2";
+  const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
+  const MARK = "__duduqYear2SelectedToolsActiveDD2";
+  const SENTINEL = "__DUDUQ_YEAR2_SELECTED_TOOLS_ACTIVE_DD2__";
+  const inheritedDefineProperty = Object.defineProperty;
+  let interceptionArmed = true;
+  let restoreTimer = null;
+
+  if (window.__DUDUQ_YEAR2_DD_SELECTED_TOOLS_BRIDGE__) return;
+
+  function fail(message) {
+    throw new Error("[DuduQ Year2 DD selected tools] " + message);
+  }
+
+  function replaceRequired(source, from, to, expected = 1) {
+    const count = source.split(from).length - 1;
+    if (count !== expected) {
+      fail("assinatura inesperada (" + count + "/" + expected + "): " + from.slice(0, 150));
+    }
+    return source.split(from).join(to);
+  }
+
+  function patchSelectedTools(html) {
+    if (typeof html !== "string" || !html.trim()) fail("runtime DD2 vazio.");
+    if (html.includes(SENTINEL)) return html;
+
+    let prepared = html;
+
+    prepared = replaceRequired(
+      prepared,
+      `return React.createElement("div", { className:"duduq-dd2-item-shell" + (hasAudio && question.strategy === "single-target-choice" && !placed ? " duduq-dd2-item-shell-audio-choice" : ""), key:item.id },`,
+      `return React.createElement("div", { className:"duduq-dd2-item-shell" + (hasAudio && question.strategy === "single-target-choice" && !placed ? " duduq-dd2-item-shell-audio-choice" : "") + (question.strategy === "single-target-choice" && placed ? " duduq-dd2-item-shell-selected-choice" : ""), key:item.id },`
+    );
+
+    prepared = replaceRequired(
+      prepared,
+      `        hasAudio && question.strategy === "single-target-choice" && !placed ? React.createElement("button", {\n          type:"button",\n          className:"duduq-dd2-item-audio",\n          "data-dd2-audio-item-id":item.id,\n          "data-playing":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id) ? "true" : "false",\n          disabled:disabled || feedbackState === "success",\n          onClick:function (event) { event.stopPropagation(); onInteraction && onInteraction(); playValueAudio(item, "item"); },\n          "aria-label":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id)\n            ? ("Parar áudio da alternativa " + dd2Accessible(item))\n            : ("Ouvir alternativa " + dd2Accessible(item))\n        }, React.createElement(TSAudioIcon,null)) : null\n      );`,
+      `        hasAudio && question.strategy === "single-target-choice" && !placed ? React.createElement("button", {\n          type:"button",\n          className:"duduq-dd2-item-audio",\n          "data-dd2-audio-item-id":item.id,\n          "data-playing":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id) ? "true" : "false",\n          disabled:disabled || feedbackState === "success",\n          onClick:function (event) { event.stopPropagation(); onInteraction && onInteraction(); playValueAudio(item, "item"); },\n          "aria-label":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id)\n            ? ("Parar áudio da alternativa " + dd2Accessible(item))\n            : ("Ouvir alternativa " + dd2Accessible(item))\n        }, React.createElement(TSAudioIcon,null)) : null,\n        hasAudio && question.strategy === "single-target-choice" && placed && !retryAnimating ? React.createElement("button", {\n          type:"button",\n          className:"duduq-dd2-placed-audio",\n          "data-dd2-placed-audio-item-id":item.id,\n          "data-playing":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id) ? "true" : "false",\n          disabled:disabled || feedbackState === "success",\n          onPointerDown:function (event) { event.stopPropagation(); },\n          onClick:function (event) { event.preventDefault(); event.stopPropagation(); onInteraction && onInteraction(); playValueAudio(item, "item"); },\n          "aria-label":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id)\n            ? ("Parar áudio da alternativa escolhida " + dd2Accessible(item))\n            : ("Ouvir novamente a alternativa escolhida " + dd2Accessible(item))\n        }, React.createElement(TSAudioIcon,null)) : null,\n        question.strategy === "single-target-choice" && placed && !retryAnimating ? React.createElement("button", {\n          type:"button",\n          className:"duduq-dd2-placed-clear",\n          "data-dd2-clear-item-id":item.id,\n          disabled:disabled || feedbackState === "success",\n          onPointerDown:function (event) { event.stopPropagation(); },\n          onClick:function (event) { event.preventDefault(); event.stopPropagation(); place(item.id, null, "clear"); },\n          "aria-label":"Remover alternativa escolhida " + dd2Accessible(item),\n          title:"Remover alternativa"\n        }, "×") : null\n      );`
+    );
+
+    const selectedToolsCss = `<style id="duduq-year2-dd-selected-tools">
+.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item-shell-selected-choice {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  display: grid !important;
+  grid-template-columns: clamp(36px,3.7vw,42px) minmax(64px,1fr) clamp(36px,3.7vw,42px) !important;
+  grid-template-rows: auto !important;
+  align-items: center !important;
+  justify-items: center !important;
+  gap: clamp(8px,1vw,14px) !important;
+  padding: 0 clamp(4px,.6vw,8px) !important;
+}
+.duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item-shell-selected-choice > .duduq-dd2-item {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  justify-self: center !important;
+  min-width: clamp(72px,7vw,86px) !important;
+  max-width: min(100%, 112px) !important;
+}
+.duduq-dd2-placed-audio,
+.duduq-dd2-placed-clear {
+  box-sizing: border-box !important;
+  width: clamp(36px,3.7vw,42px) !important;
+  height: clamp(36px,3.7vw,42px) !important;
+  min-width: clamp(36px,3.7vw,42px) !important;
+  min-height: clamp(36px,3.7vw,42px) !important;
+  padding: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  border: 2px solid #8fbbe0 !important;
+  border-radius: 999px !important;
+  background: #fff !important;
+  color: #1565c0 !important;
+  box-shadow: 0 3px 0 rgba(57,103,149,.18) !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+  z-index: 4 !important;
+}
+.duduq-dd2-placed-audio {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+}
+.duduq-dd2-placed-clear {
+  grid-column: 3 !important;
+  grid-row: 1 !important;
+  border-color: #ef9a9a !important;
+  color: #c62828 !important;
+  font: 900 clamp(20px,2vw,24px)/1 Nunito,system-ui,sans-serif !important;
+}
+.duduq-dd2-placed-audio svg {
+  width: clamp(18px,1.9vw,22px) !important;
+  height: clamp(18px,1.9vw,22px) !important;
+}
+.duduq-dd2-placed-audio:focus-visible,
+.duduq-dd2-placed-clear:focus-visible {
+  outline: 3px solid #79b9ee !important;
+  outline-offset: 2px !important;
+}
+.duduq-dd2-placed-audio:disabled,
+.duduq-dd2-placed-clear:disabled {
+  cursor: default !important;
+  opacity: .55 !important;
+}
+@media (max-width: 640px) {
+  .duduq-dd2-target[data-single-target-choice="true"] .duduq-dd2-item-shell-selected-choice {
+    grid-template-columns: 36px minmax(58px,1fr) 36px !important;
+    gap: 8px !important;
+    padding-inline: 2px !important;
+  }
+  .duduq-dd2-placed-audio,
+  .duduq-dd2-placed-clear {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+  }
+}
+</style>`;
+
+    if (!prepared.includes("</head>")) fail("runtime sem </head> para controles da alternativa selecionada.");
+    prepared = prepared.replace(
+      "</head>",
+      selectedToolsCss + `<script>window.${SENTINEL}=true;</script></head>`
+    );
+
+    return prepared;
+  }
+
+  function compose(upstream) {
+    if (typeof upstream !== "function") return upstream;
+    if (upstream[MARK]) return upstream;
+    const wrapped = function year2SelectedToolsDD2(source) {
+      return patchSelectedTools(upstream(source));
+    };
+    try {
+      Reflect.defineProperty(wrapped, MARK, { value: true });
+    } catch (_) {}
+    return wrapped;
+  }
+
+  function installOnExistingHook() {
+    const existing = window[HOOK];
+    if (typeof existing !== "function") return false;
+    const wrapped = compose(existing);
+    try {
+      Reflect.defineProperty(window, HOOK, {
+        value: wrapped,
+        configurable: true,
+        writable: false
+      });
+    } catch (_) {
+      return false;
+    }
+    interceptionArmed = false;
+    window.__DUDUQ_YEAR2_DD_SELECTED_TOOLS_CAPTURED__ = true;
+    return true;
+  }
+
+  function restoreDefineProperty() {
+    if (restoreTimer !== null) {
+      window.clearTimeout(restoreTimer);
+      restoreTimer = null;
+    }
+    if (Object.defineProperty === selectedToolsDefineProperty) {
+      Object.defineProperty = inheritedDefineProperty;
+    }
+  }
+
+  function selectedToolsDefineProperty(target, property, descriptor) {
+    if (
+      interceptionArmed &&
+      target === window &&
+      property === HOOK &&
+      descriptor &&
+      typeof descriptor.value === "function"
+    ) {
+      const result = inheritedDefineProperty(target, property, descriptor);
+      const currentHook = window[HOOK];
+      if (typeof currentHook !== "function") fail("hook DD2 não ficou disponível após definição.");
+      const wrapped = compose(currentHook);
+      const ok = Reflect.defineProperty(window, HOOK, {
+        value: wrapped,
+        configurable: true,
+        writable: false
+      });
+      if (!ok) fail("não foi possível compor controles sobre o hook DD2.");
+      interceptionArmed = false;
+      window.__DUDUQ_YEAR2_DD_SELECTED_TOOLS_CAPTURED__ = true;
+      restoreDefineProperty();
+      return result;
+    }
+    return inheritedDefineProperty(target, property, descriptor);
+  }
+
+  if (!installOnExistingHook()) {
+    Object.defineProperty = selectedToolsDefineProperty;
+    restoreTimer = window.setTimeout(function () {
+      if (interceptionArmed) {
+        console.warn("[DuduQ Year2 DD selected tools] Hook 2.0.22 não apareceu na janela de inicialização.");
+      }
+      restoreDefineProperty();
+    }, 30000);
+  }
+
+  window.__DUDUQ_YEAR2_DD_SELECTED_TOOLS_BRIDGE__ = Object.freeze({
+    version: VERSION,
+    scope: "english-year-2",
+    targetRelease: "2.0.22",
+    releaseModified: false,
+    canaryModified: false,
+    selectedChoiceReplayEnabled: true,
+    selectedChoiceClearEnabled: true,
+    clearUsesNativePlacePath: true,
+    retryFeedbackPreserved: true
+  });
+})();
