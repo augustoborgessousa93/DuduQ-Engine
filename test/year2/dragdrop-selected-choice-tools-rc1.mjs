@@ -11,7 +11,7 @@ function assert(condition, message) {
 }
 
 async function boot(page) {
-  await page.goto(`${BASE_URL}/content/english/year-2/module-01/index.html?qa=dd-selected-tools-rc3`, {
+  await page.goto(`${BASE_URL}/content/english/year-2/module-01/index.html?qa=dd-selected-tools-rc4`, {
     waitUntil: "domcontentloaded",
     timeout: 30_000
   });
@@ -108,11 +108,18 @@ async function listeningHierarchy(frame) {
     const audio = shell.querySelector(".duduq-dd2-item-audio");
     const itemRect = item?.getBoundingClientRect();
     const audioRect = audio?.getBoundingClientRect();
+    const audioStyle = audio ? getComputedStyle(audio) : null;
     return {
       letter: shell.getAttribute("data-choice-letter") || "",
       item: itemRect ? { left:itemRect.left, top:itemRect.top, right:itemRect.right, bottom:itemRect.bottom, width:itemRect.width, height:itemRect.height } : null,
       audio: audioRect ? { left:audioRect.left, top:audioRect.top, right:audioRect.right, bottom:audioRect.bottom, width:audioRect.width, height:audioRect.height } : null,
-      animationName: audio ? getComputedStyle(audio).animationName : "none"
+      animationName: audioStyle?.animationName || "none",
+      borderWidth: audioStyle?.borderTopWidth || "0px",
+      borderRadius: audioStyle?.borderRadius || "0px",
+      boxShadow: audioStyle?.boxShadow || "none",
+      backgroundImage: audioStyle?.backgroundImage || "none",
+      backgroundColor: audioStyle?.backgroundColor || "transparent",
+      cursor: audioStyle?.cursor || "auto"
     };
   }));
 }
@@ -123,9 +130,14 @@ function assertListeningHierarchy(state, label) {
     assert(entry.item && entry.audio, `${label}/${entry.letter}: card ou áudio ausente.`);
     const itemCenter = entry.item.left + entry.item.width / 2;
     const audioCenter = entry.audio.left + entry.audio.width / 2;
-    assert(entry.audio.top >= entry.item.bottom + 2, `${label}/${entry.letter}: áudio não ficou abaixo da alternativa.`);
+    assert(entry.audio.top >= entry.item.bottom + 8, `${label}/${entry.letter}: áudio sem respiro suficiente abaixo da alternativa.`);
     assert(Math.abs(itemCenter - audioCenter) <= 6, `${label}/${entry.letter}: áudio não ficou centralizado abaixo da alternativa.`);
+    assert(entry.audio.width >= 34 && entry.audio.height >= 34, `${label}/${entry.letter}: área de toque do áudio ficou pequena (${entry.audio.width}x${entry.audio.height}).`);
     assert(entry.audio.width < entry.item.width, `${label}/${entry.letter}: áudio continua competindo visualmente com a alternativa.`);
+    assert(parseFloat(entry.borderWidth) >= 2, `${label}/${entry.letter}: áudio não tem borda suficiente para parecer botão.`);
+    assert(entry.boxShadow !== "none", `${label}/${entry.letter}: áudio perdeu profundidade/sombra de botão.`);
+    assert(entry.cursor === "pointer", `${label}/${entry.letter}: áudio não comunica interação por cursor.`);
+    assert(entry.backgroundImage !== "none" || !/rgba\(0, 0, 0, 0\)|transparent/.test(entry.backgroundColor), `${label}/${entry.letter}: áudio ficou sem superfície visual de botão.`);
   }
 }
 
@@ -305,7 +317,7 @@ const browser = await chromium.launch({ headless: true });
 try {
   const shortNotebook = await runScenario(browser, "short-notebook", { width: 1366, height: 645 }, false);
   const mobile = await runScenario(browser, "mobile", { width: 390, height: 844 }, true);
-  const report = { status: "PASS", contract: "YEAR2_DD_SELECTED_CHOICE_TOOLS_RC3", shortNotebook, mobile };
+  const report = { status: "PASS", contract: "YEAR2_DD_SELECTED_CHOICE_TOOLS_RC4", shortNotebook, mobile };
   await fs.writeFile(path.join(OUTPUT_DIR, "report.json"), JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
 } finally {
