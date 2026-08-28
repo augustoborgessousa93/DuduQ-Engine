@@ -7,6 +7,61 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+async function readGuardState(page) {
+  const deadline = Date.now() + 15000;
+  let lastError = null;
+
+  while (Date.now() < deadline) {
+    try {
+      const frameHandle = await page.locator("#root iframe").first().elementHandle();
+      if (!frameHandle) throw new Error("Iframe da mecânica não foi montado.");
+
+      const frame = await frameHandle.contentFrame();
+      if (!frame) throw new Error("Não foi possível acessar o iframe da mecânica.");
+
+      await frame.waitForFunction(() => {
+        return document.documentElement.getAttribute(
+          "data-duduq-year2-internal-completion-guard"
+        ) === "active";
+      }, null, { timeout: 2500 });
+
+      await frame.waitForTimeout(80);
+
+      return await frame.evaluate(() => {
+        const fake = document.createElement("section");
+        fake.className = "duduq-engine-complete";
+        fake.innerHTML = "<h2>Parabéns! Lição concluída</h2>";
+        document.body.appendChild(fake);
+
+        const computed = getComputedStyle(fake);
+        const result = {
+          styleInstalled: Boolean(
+            document.getElementById("duduq-year2-internal-completion-guard")
+          ),
+          visibility: computed.visibility,
+          opacity: computed.opacity,
+          pointerEvents: computed.pointerEvents,
+          text: fake.textContent.trim(),
+          frameUrl: location.href
+        };
+
+        fake.remove();
+        return result;
+      });
+    } catch (error) {
+      lastError = error;
+      const message = String(error?.message || error);
+      const navigationRace = /Execution context was destroyed|navigation|detached|Target page, context or browser has been closed/i.test(message);
+      if (!navigationRace && !/Timeout/i.test(message)) throw error;
+      await page.waitForTimeout(120);
+    }
+  }
+
+  throw new Error(
+    `Guard não ficou estável no iframe final em 15s. Último erro: ${String(lastError?.message || lastError || "desconhecido")}`
+  );
+}
+
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 1366, height: 645 } });
 
@@ -36,38 +91,7 @@ try {
     );
   }, null, { timeout: 30000 });
 
-  const frameHandle = await page.locator("#root iframe").first().elementHandle();
-  assert(frameHandle, "Iframe da mecânica não foi montado.");
-
-  const frame = await frameHandle.contentFrame();
-  assert(frame, "Não foi possível acessar o iframe da mecânica.");
-
-  await frame.waitForFunction(() => {
-    return document.documentElement.getAttribute(
-      "data-duduq-year2-internal-completion-guard"
-    ) === "active";
-  }, null, { timeout: 15000 });
-
-  const state = await frame.evaluate(() => {
-    const fake = document.createElement("section");
-    fake.className = "duduq-engine-complete";
-    fake.innerHTML = "<h2>Parabéns! Lição concluída</h2>";
-    document.body.appendChild(fake);
-
-    const computed = getComputedStyle(fake);
-    const result = {
-      styleInstalled: Boolean(
-        document.getElementById("duduq-year2-internal-completion-guard")
-      ),
-      visibility: computed.visibility,
-      opacity: computed.opacity,
-      pointerEvents: computed.pointerEvents,
-      text: fake.textContent.trim()
-    };
-
-    fake.remove();
-    return result;
-  });
+  const state = await readGuardState(page);
 
   assert(state.styleInstalled, "Guard CSS não foi instalado no iframe.");
   assert(
