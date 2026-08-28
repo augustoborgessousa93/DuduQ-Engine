@@ -11,7 +11,7 @@ function assert(condition, message) {
 }
 
 async function boot(page) {
-  await page.goto(`${BASE_URL}/content/english/year-2/module-01/index.html?qa=dd-selected-tools-rc1`, {
+  await page.goto(`${BASE_URL}/content/english/year-2/module-01/index.html?qa=dd-selected-tools-rc2`, {
     waitUntil: "domcontentloaded",
     timeout: 30_000
   });
@@ -137,19 +137,21 @@ async function runScenario(browser, name, viewport, mobile) {
     const { frame, target, info } = await findListening(page);
 
     const bridge = await page.evaluate(() => ({
-      selectedTools: window.__DUDUQ_YEAR2_DD_SELECTED_TOOLS_BRIDGE__ || null,
-      selectedToolsCaptured: window.__DUDUQ_YEAR2_DD_SELECTED_TOOLS_CAPTURED__ === true,
+      selectedTools: window.__DUDUQ_YEAR2_DD_SELECTED_TOOLS_V2_BRIDGE__ || null,
+      selectedToolsCaptured: window.__DUDUQ_YEAR2_DD_SELECTED_TOOLS_V2_CAPTURED__ === true,
       confirmAnyCaptured: window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_CAPTURED__ === true,
       release: window.DuduQ?.getMechanic?.("drag-drop")?.version || null
     }));
 
-    assert(bridge.selectedToolsCaptured, `${name}: bridge selected-tools não capturou o runtime.`);
+    assert(bridge.selectedToolsCaptured, `${name}: bridge selected-tools V2 não capturou o runtime.`);
     assert(bridge.confirmAnyCaptured, `${name}: bridge confirm-any não capturou o runtime.`);
     assert(bridge.selectedTools?.selectedChoiceReplayEnabled === true, `${name}: replay selecionado não declarado.`);
+    assert(bridge.selectedTools?.selectedChoiceReplayAvoidsGlobalButtonNormalizer === true, `${name}: replay não declara isolamento do normalizador global.`);
+    assert(bridge.selectedTools?.selectedChoiceReplayKeyboardAccessible === true, `${name}: replay não declara acesso por teclado.`);
     assert(bridge.selectedTools?.selectedChoiceClearEnabled === true, `${name}: clear selecionado não declarado.`);
     assert(bridge.release === "2.0.22", `${name}: Drag Drop mudou para ${bridge.release}.`);
 
-    await frame.waitForSelector("#duduq-year2-dd-selected-tools", { state: "attached", timeout: 10_000 });
+    await frame.waitForSelector("#duduq-year2-dd-selected-tools-v2", { state: "attached", timeout: 10_000 });
     await frame.waitForSelector("#duduq-year2-subcard-balance-v3", { state: "attached", timeout: 10_000 });
 
     const cards = frame.locator(".duduq-dd2-bank .duduq-dd2-item");
@@ -171,6 +173,8 @@ async function runScenario(browser, name, viewport, mobile) {
     const clear = target.locator(`.duduq-dd2-placed-clear[data-dd2-clear-item-id="${wrongId}"]`).first();
     await replay.waitFor({ state: "visible", timeout: 5_000 });
     await clear.waitFor({ state: "visible", timeout: 5_000 });
+    assert(await replay.evaluate((node) => node.tagName === "SPAN" && node.getAttribute("role") === "button" && node.tabIndex === 0), `${name}: replay voltou a ser um button capturável ou perdeu acessibilidade.`);
+    assert(!(await replay.evaluate((node) => node.classList.contains("duduq-audio-standard") || node.hasAttribute("data-duduq-native-audio"))), `${name}: replay foi capturado pelo normalizador global de áudio.`);
     assert(/Ouvir novamente|Parar áudio/i.test(await replay.getAttribute("aria-label") || ""), `${name}: replay sem nome acessível correto.`);
     assert(/Remover alternativa escolhida/i.test(await clear.getAttribute("aria-label") || ""), `${name}: X sem nome acessível correto.`);
 
@@ -184,6 +188,11 @@ async function runScenario(browser, name, viewport, mobile) {
     await frame.waitForTimeout(120);
     assert((await target.locator(`.duduq-dd2-item[data-dd2-item-id="${wrongId}"]`).count()) === 1, `${name}: replay removeu/moveu a alternativa selecionada.`);
     assert(!(await confirm.isDisabled()), `${name}: replay alterou o estado do CONFIRMAR.`);
+
+    await replay.focus();
+    await replay.press("Enter");
+    await frame.waitForTimeout(80);
+    assert((await target.locator(`.duduq-dd2-item[data-dd2-item-id="${wrongId}"]`).count()) === 1, `${name}: replay via teclado alterou a resposta.`);
 
     await page.screenshot({ path: path.join(OUTPUT_DIR, `${name}-${info.questionId}-selected-tools.png`), fullPage: false });
 
@@ -237,7 +246,7 @@ try {
   const mobile = await runScenario(browser, "mobile", { width: 390, height: 844 }, true);
   const report = {
     status: "PASS",
-    contract: "YEAR2_DD_SELECTED_CHOICE_TOOLS_RC1",
+    contract: "YEAR2_DD_SELECTED_CHOICE_TOOLS_RC2",
     shortNotebook,
     mobile
   };
