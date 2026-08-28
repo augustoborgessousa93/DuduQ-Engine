@@ -11,7 +11,8 @@
    - audio alternatives remain independently clickable while another option is playing,
      so the shared audio controller can stop the previous option and start the new one;
    - the movable card remains drag-enabled and also keeps tap-to-place as an accessible fallback;
-   - tap placement starts the selected option audio inside the original user gesture;
+   - tap placement starts the selected option audio inside the original pointer-up user gesture;
+   - keyboard/click activation keeps a fallback tap path when no pointer-up placement occurred;
    - single-target capacity badge is hidden because 1/1 adds no learner information;
    - sequence/classification/regular association remain untouched;
    - no candidate 2.0.23 CSS/layout is imported.
@@ -19,7 +20,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.3.2-year2-separated-audio-drag-tap-autoplay-dd2";
+  const VERSION = "1.3.3-year2-separated-audio-drag-pointerup-autoplay-dd2";
   const HOOK = "__DUDUQ_DD222_PATCH_RUNTIME__";
   const MARK = "__duduqYear2ConfirmAnyActiveDD2";
   const nativeDefineProperty = Object.defineProperty;
@@ -86,6 +87,12 @@
       prepared,
       `          hasAudio ? React.createElement("span", { className:"duduq-dd2-audio-mark", "data-playing":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id) ? "true" : "false", "aria-hidden":"true" }, React.createElement(TSAudioIcon,null)) : null\n        )\n      );`,
       `          hasAudio && question.strategy !== "single-target-choice" ? React.createElement("span", { className:"duduq-dd2-audio-mark", "data-playing":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id) ? "true" : "false", "aria-hidden":"true" }, React.createElement(TSAudioIcon,null)) : null\n        ),\n        hasAudio && question.strategy === "single-target-choice" && !placed ? React.createElement("button", {\n          type:"button",\n          className:"duduq-dd2-item-audio",\n          "data-dd2-audio-item-id":item.id,\n          "data-playing":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id) ? "true" : "false",\n          disabled:disabled || feedbackState === "success",\n          onClick:function (event) { event.stopPropagation(); onInteraction && onInteraction(); playValueAudio(item, "item"); },\n          "aria-label":audio.activeAudioKey === ("dd2:" + question.id + ":item:" + item.id)\n            ? ("Parar áudio da alternativa " + dd2Accessible(item))\n            : ("Ouvir alternativa " + dd2Accessible(item))\n        }, React.createElement(TSAudioIcon,null)) : null\n      );`
+    );
+
+    prepared = replaceRequired(
+      prepared,
+      `var finishDrag = useCallback(function (event) {\n      var activeDrag = dragRef.current;\n      if (!activeDrag || activeDrag.pointerId !== event.pointerId) return;\n      if (activeDrag.moved) {\n        var element = document.elementFromPoint(event.clientX,event.clientY);\n        var target = element && element.closest && element.closest("[data-dd2-target-id]");\n        var bank = element && element.closest && element.closest("[data-dd2-bank]");\n        if (target) place(activeDrag.itemId, target.getAttribute("data-dd2-target-id"), "drop");\n        else if (bank) place(activeDrag.itemId, null);\n        suppressClick.current = true;\n      }\n      dragRef.current = null;\n      setDrag(null); setHoverTarget(null);\n    }, [place]);`,
+      `var finishDrag = useCallback(function (event) {\n      var activeDrag = dragRef.current;\n      if (!activeDrag || activeDrag.pointerId !== event.pointerId) return;\n      if (activeDrag.moved) {\n        var element = document.elementFromPoint(event.clientX,event.clientY);\n        var target = element && element.closest && element.closest("[data-dd2-target-id]");\n        var bank = element && element.closest && element.closest("[data-dd2-bank]");\n        if (target) place(activeDrag.itemId, target.getAttribute("data-dd2-target-id"), "drop");\n        else if (bank) place(activeDrag.itemId, null);\n        suppressClick.current = true;\n      } else if (question.strategy === "single-target-choice") {\n        var singleTarget = question.targets && question.targets[0];\n        var tappedItem = itemMap.get(activeDrag.itemId);\n        if (singleTarget && tappedItem) {\n          place(activeDrag.itemId, singleTarget.id, "tap");\n          if (tappedItem.audioAssetKey || tappedItem.spokenText) playValueAudio(tappedItem, "item", true);\n          suppressClick.current = true;\n        }\n      }\n      dragRef.current = null;\n      setDrag(null); setHoverTarget(null);\n    }, [itemMap, place, playValueAudio, question.strategy, question.targets]);`
     );
 
     prepared = replaceRequired(
@@ -270,6 +277,7 @@
     separatedAudioAndAnswerActions: true,
     tapToPlaceFallbackPreserved: true,
     tapPlacementAutoplayUsesUserGesture: true,
+    tapPlacementAutoplayUsesPointerUpGesture: true,
     singleTargetCapacityBadgeHidden: true
   });
 })();
