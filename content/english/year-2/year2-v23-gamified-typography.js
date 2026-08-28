@@ -1,14 +1,18 @@
 /* DUDUQ English Year 2 — gamified rounded typography
-   Year-2 presentation layer only. Offline-safe: no remote font import.
-   Nunito is preferred whenever available; rounded/system fallbacks keep the
-   interface usable without network access.
+   Year-2 presentation layer only.
+   Online-first Nunito via Google Fonts with safe rounded/system fallbacks.
+   Font loading never blocks the game or changes mechanic releases/content.
 */
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0-year2-gamified-rounded-typography";
+  const VERSION = "1.1.0-year2-gamified-nunito-online";
   const STYLE_ID = "duduq-year2-gamified-typography";
+  const FONT_LINK_ID = "duduq-year2-nunito-google-font";
+  const PRECONNECT_GOOGLE_ID = "duduq-year2-fonts-google-preconnect";
+  const PRECONNECT_GSTATIC_ID = "duduq-year2-fonts-gstatic-preconnect";
   const WIRED = "data-duduq-year2-gamified-typography-wired";
+  const FONT_URL = "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap";
 
   if (window.__DUDUQ_YEAR2_GAMIFIED_TYPOGRAPHY__) return;
 
@@ -42,7 +46,7 @@
       font-weight: 900 !important;
     }
 
-    /* Short educational instructions benefit from a bold, highly legible weight. */
+    /* Short educational instructions use a bold, highly legible weight. */
     #root .duduq-engine-instruction,
     #root .duduq-dd2-instruction,
     #root [class*="instruction"],
@@ -51,14 +55,14 @@
       font-weight: 700 !important;
     }
 
-    /* Long copy stays lighter when explicitly marked as body/description. */
+    /* Long copy remains lighter when explicitly marked as body/description. */
     #root p,
     #root [class*="description"],
     #root [class*="body-copy"] {
       font-weight: 400;
     }
 
-    /* Primary CTAs: tactile, emphatic and consistent across mechanics. */
+    /* Buttons keep a friendly bold face; primary CTAs receive the full 900 treatment. */
     #root button,
     #root [role="button"] {
       font-weight: 800;
@@ -76,7 +80,7 @@
       letter-spacing: 1px !important;
     }
 
-    /* Small icon-only controls must not inherit uppercase/letter spacing. */
+    /* Icon-only controls must not inherit uppercase/letter spacing. */
     #root .duduq-dd2-item-audio,
     #root .duduq-dd2-placed-replay,
     #root .duduq-dd2-placed-clear,
@@ -96,8 +100,32 @@
     }
   `;
 
+  function appendPreconnect(doc, id, href, crossOrigin) {
+    if (!doc?.head || doc.getElementById(id)) return;
+    const link = doc.createElement("link");
+    link.id = id;
+    link.rel = "preconnect";
+    link.href = href;
+    if (crossOrigin) link.crossOrigin = "anonymous";
+    doc.head.appendChild(link);
+  }
+
+  function ensureNunito(doc) {
+    if (!doc?.head) return;
+    appendPreconnect(doc, PRECONNECT_GOOGLE_ID, "https://fonts.googleapis.com", false);
+    appendPreconnect(doc, PRECONNECT_GSTATIC_ID, "https://fonts.gstatic.com", true);
+    if (doc.getElementById(FONT_LINK_ID)) return;
+    const link = doc.createElement("link");
+    link.id = FONT_LINK_ID;
+    link.rel = "stylesheet";
+    link.href = FONT_URL;
+    doc.head.appendChild(link);
+  }
+
   function inject(doc) {
-    if (!doc?.head || doc.getElementById(STYLE_ID)) return;
+    if (!doc?.head) return;
+    ensureNunito(doc);
+    if (doc.getElementById(STYLE_ID)) return;
     const style = doc.createElement("style");
     style.id = STYLE_ID;
     style.textContent = CSS;
@@ -144,8 +172,11 @@
     version: VERSION,
     scope: "english-year-2",
     preferredFamily: "Nunito",
-    offlineSafe: true,
-    remoteFontImport: false,
+    onlinePrimarySource: "Google Fonts",
+    remoteFontImport: true,
+    remoteWeights: Object.freeze([400, 600, 700, 800, 900]),
+    displayStrategy: "swap",
+    safeFallbacks: true,
     ctaWeight: 900,
     titleWeight: "800-900",
     instructionWeight: 700,
