@@ -170,25 +170,68 @@ async function inspectFirstMechanic(page, module, snapshot) {
   const frame = await handle?.contentFrame();
   assert(frame, `M${module}: iframe da primeira mecânica inacessível.`);
 
+  // O 2º ano é visual-first. Conteúdo observável não pode ser medido apenas por
+  // innerText: uma atividade válida pode começar com imagem, botão, canvas ou outra
+  // superfície interativa. Ainda exigimos presença visual real; body vazio, mídia
+  // quebrada ou elementos ocultos continuam falhando.
   await frame.waitForFunction(() => {
     const error = document.querySelector("#duduq-runtime-error");
     if (error && getComputedStyle(error).display !== "none") return true;
-    return Boolean(document.body && document.body.children.length > 0);
+
+    const visible = (node) => {
+      if (!(node instanceof Element)) return false;
+      const rect = node.getBoundingClientRect();
+      const style = getComputedStyle(node);
+      const opacity = Number.parseFloat(style.opacity || "1");
+      return rect.width > 2 && rect.height > 2 && style.display !== "none" &&
+        style.visibility !== "hidden" && Number.isFinite(opacity) && opacity > 0.01;
+    };
+
+    const text = String(document.body?.innerText || "").trim();
+    const loadedImage = Array.from(document.images || []).some((image) =>
+      visible(image) && image.complete && Number(image.naturalWidth || 0) > 0 && Number(image.naturalHeight || 0) > 0
+    );
+    const visibleControl = Array.from(document.querySelectorAll("button,[role='button'],input,select,textarea,a[href]")).some(visible);
+    const visibleSurface = Array.from(document.querySelectorAll("canvas,svg,[role='img'],[data-duduq-mechanic],[class*='board'],[class*='arena'],[class*='stage']")).some(visible);
+
+    return Boolean(text || loadedImage || visibleControl || visibleSurface);
   }, null, { timeout: 20_000 });
 
   const runtime = await frame.evaluate(() => {
     const error = document.querySelector("#duduq-runtime-error");
     const doc = document.documentElement;
+    const visible = (node) => {
+      if (!(node instanceof Element)) return false;
+      const rect = node.getBoundingClientRect();
+      const style = getComputedStyle(node);
+      const opacity = Number.parseFloat(style.opacity || "1");
+      return rect.width > 2 && rect.height > 2 && style.display !== "none" &&
+        style.visibility !== "hidden" && Number.isFinite(opacity) && opacity > 0.01;
+    };
+    const visibleImages = Array.from(document.images || []).filter((image) =>
+      visible(image) && image.complete && Number(image.naturalWidth || 0) > 0 && Number(image.naturalHeight || 0) > 0
+    );
+    const visibleControls = Array.from(document.querySelectorAll("button,[role='button'],input,select,textarea,a[href]")).filter(visible);
+    const visibleSurfaces = Array.from(document.querySelectorAll("canvas,svg,[role='img'],[data-duduq-mechanic],[class*='board'],[class*='arena'],[class*='stage']")).filter(visible);
+    const bodyText = String(document.body?.innerText || "").slice(0, 1400);
     return {
       runtimeError: error && getComputedStyle(error).display !== "none" ? String(error.textContent || "") : "",
-      bodyText: String(document.body?.innerText || "").slice(0, 1400),
+      bodyText,
+      textLength: bodyText.trim().length,
+      visibleImages: visibleImages.length,
+      visibleControls: visibleControls.length,
+      visibleSurfaces: visibleSurfaces.length,
       viewport: doc.clientWidth,
       scroll: Math.max(doc.scrollWidth, document.body?.scrollWidth || 0)
     };
   });
 
+  const observableCount = runtime.textLength + runtime.visibleImages + runtime.visibleControls + runtime.visibleSurfaces;
   assert(!runtime.runtimeError, `M${module}: runtime da primeira mecânica falhou: ${runtime.runtimeError}`);
-  assert(runtime.bodyText.trim().length > 0, `M${module}: primeira mecânica renderizou sem conteúdo observável.`);
+  assert(
+    observableCount > 0,
+    `M${module}: primeira mecânica renderizou sem conteúdo observável. STATE=${JSON.stringify(runtime)}`
+  );
   assert(runtime.scroll <= runtime.viewport + 6, `M${module}: primeira mecânica com overflow horizontal ${runtime.scroll}px > ${runtime.viewport}px.`);
 
   return { iframeTitle: title, ...runtime };
