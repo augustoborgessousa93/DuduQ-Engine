@@ -14,6 +14,8 @@ on:
       - "test/year2/internal-completion-flash-guard-rc1.mjs"
       - "test/year2/gamified-ui-contract-rc1.mjs"
       - "test/year2/m1-12-image-group-rc1.mjs"
+      - "test/year2/m1-12-visual-polish-rc1.mjs"
+      - "test/year2/pedagogical-instructions-rc1.mjs"
       - ".github/workflows/year2-multimodal-consistency-rc1.yml"
   push:
     branches:
@@ -28,6 +30,8 @@ on:
       - "test/year2/internal-completion-flash-guard-rc1.mjs"
       - "test/year2/gamified-ui-contract-rc1.mjs"
       - "test/year2/m1-12-image-group-rc1.mjs"
+      - "test/year2/m1-12-visual-polish-rc1.mjs"
+      - "test/year2/pedagogical-instructions-rc1.mjs"
       - ".github/workflows/year2-multimodal-consistency-rc1.yml"
   workflow_dispatch:
 
@@ -64,8 +68,10 @@ jobs:
           node --check content/english/year-2/year2-v23-internal-completion-guard.js
           node --check content/english/year-2/year2-v23-gamified-typography.js
           node --check content/english/year-2/year2-v23-tactile-buttons-3d.js
+          node --check content/english/year-2/year2-v23-pedagogical-instructions.js
           node --check content/english/year-2/module-01/m1-12-image-group-v23.js
           node --check content/english/year-2/module-01/m1-12-mobile-compact-v23.js
+          node --check content/english/year-2/module-01/m1-12-visual-polish-v23.js
           node --check test/year2/multimodal-consistency-hotfix-rc1.mjs
           node --check test/year2/multimodal-consistency-hotfix-browser-rc1.mjs
           node --check test/year2/dragdrop-listening-action-separation-rc1.mjs
@@ -74,6 +80,8 @@ jobs:
           node --check test/year2/internal-completion-flash-guard-rc1.mjs
           node --check test/year2/gamified-ui-contract-rc1.mjs
           node --check test/year2/m1-12-image-group-rc1.mjs
+          node --check test/year2/m1-12-visual-polish-rc1.mjs
+          node --check test/year2/pedagogical-instructions-rc1.mjs
 
       - name: Validate IDs, answers, listening association, smart images and Matching diversity
         run: node test/year2/multimodal-consistency-hotfix-rc1.mjs
@@ -97,7 +105,7 @@ jobs:
     name: Chromium listening association + confirm-any + smart visual review
     needs: static-pedagogical-contract
     runs-on: ubuntu-latest
-    timeout-minutes: 22
+    timeout-minutes: 24
     steps:
       - uses: actions/checkout@v4
 
@@ -121,10 +129,20 @@ jobs:
           cat /tmp/duduq-http.log
           exit 1
 
+      - name: Verify short narrable instructions across all 90 items
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/pedagogical-instructions-rc1.mjs
+
       - name: Verify M01-12 image grouping
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year2/m1-12-image-group-rc1.mjs
+
+      - name: Verify M01-12 compact visual hierarchy
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/m1-12-visual-polish-rc1.mjs
 
       - name: Verify clean listening target instruction and capacity
         env:
