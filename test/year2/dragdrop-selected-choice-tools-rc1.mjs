@@ -122,11 +122,7 @@ async function placeByClick(frame, target, itemId) {
 }
 
 async function runScenario(browser, name, viewport, mobile) {
-  const context = await browser.newContext({
-    viewport,
-    isMobile: mobile,
-    hasTouch: mobile
-  });
+  const context = await browser.newContext({ viewport, isMobile: mobile, hasTouch: mobile });
   const page = await context.newPage();
   page.setDefaultTimeout(20_000);
   const pageErrors = [];
@@ -149,6 +145,7 @@ async function runScenario(browser, name, viewport, mobile) {
     assert(bridge.selectedTools?.selectedChoiceReplayAvoidsGlobalButtonNormalizer === true, `${name}: replay não declara isolamento do normalizador global.`);
     assert(bridge.selectedTools?.selectedChoiceReplayKeyboardAccessible === true, `${name}: replay não declara acesso por teclado.`);
     assert(bridge.selectedTools?.selectedChoiceReplayNeutralAccessibleName === true, `${name}: replay não declara nome acessível neutro.`);
+    assert(bridge.selectedTools?.selectedChoiceReplayNeutralClassName === true, `${name}: replay não declara classe neutra.`);
     assert(bridge.selectedTools?.selectedChoiceClearEnabled === true, `${name}: clear selecionado não declarado.`);
     assert(bridge.release === "2.0.22", `${name}: Drag Drop mudou para ${bridge.release}.`);
 
@@ -164,17 +161,17 @@ async function runScenario(browser, name, viewport, mobile) {
 
     const initialOrder = await visualChoiceOrder(frame);
     assert(initialOrder.join("") === "ABCD", `${name}/${info.questionId}: ordem inicial não é A-B-C-D (${initialOrder.join("-")}).`);
-    assert((await target.locator(".duduq-dd2-placed-audio").count()) === 0, `${name}: replay apareceu antes da escolha.`);
+    assert((await target.locator(".duduq-dd2-placed-replay").count()) === 0, `${name}: replay apareceu antes da escolha.`);
     assert((await target.locator(".duduq-dd2-placed-clear").count()) === 0, `${name}: X apareceu antes da escolha.`);
 
     await placeByClick(frame, target, wrongId);
     assert(await bankDisplay(frame) === "none", `${name}/${info.questionId}: banco não sumiu após escolha.`);
 
-    const replay = target.locator(`.duduq-dd2-placed-audio[data-dd2-placed-audio-item-id="${wrongId}"]`).first();
+    const replay = target.locator(`.duduq-dd2-placed-replay[data-dd2-placed-replay-item-id="${wrongId}"]`).first();
     const clear = target.locator(`.duduq-dd2-placed-clear[data-dd2-clear-item-id="${wrongId}"]`).first();
     await replay.waitFor({ state: "visible", timeout: 5_000 });
     await clear.waitFor({ state: "visible", timeout: 5_000 });
-    assert(await replay.evaluate((node) => node.tagName === "SPAN" && node.getAttribute("role") === "button" && node.tabIndex === 0), `${name}: replay voltou a ser um button capturável ou perdeu acessibilidade.`);
+    assert(await replay.evaluate((node) => node.tagName === "SPAN" && node.getAttribute("role") === "button" && node.tabIndex === 0), `${name}: replay perdeu acessibilidade.`);
     assert(!(await replay.evaluate((node) => node.classList.contains("duduq-audio-standard") || node.hasAttribute("data-duduq-native-audio"))), `${name}: replay foi capturado pelo normalizador global de áudio.`);
     assert(/Repetir alternativa escolhida|Parar repetição da alternativa escolhida/i.test(await replay.getAttribute("aria-label") || ""), `${name}: replay sem nome acessível correto.`);
     assert(/Remover alternativa escolhida/i.test(await clear.getAttribute("aria-label") || ""), `${name}: X sem nome acessível correto.`);
@@ -203,7 +200,7 @@ async function runScenario(browser, name, viewport, mobile) {
     assert(await bankDisplay(frame) !== "none", `${name}: banco não reapareceu após X.`);
     const hiddenAction = await actionState(frame);
     assert(hiddenAction.opacity <= 0.01 && hiddenAction.pointerEvents === "none", `${name}: CONFIRMAR não ocultou após X (${JSON.stringify(hiddenAction)}).`);
-    assert((await target.locator(".duduq-dd2-placed-audio").count()) === 0, `${name}: replay permaneceu após remover.`);
+    assert((await target.locator(".duduq-dd2-placed-replay").count()) === 0, `${name}: replay permaneceu após remover.`);
     assert((await target.locator(".duduq-dd2-placed-clear").count()) === 0, `${name}: X permaneceu após remover.`);
 
     const orderAfterClear = await visualChoiceOrder(frame);
@@ -212,7 +209,7 @@ async function runScenario(browser, name, viewport, mobile) {
     await placeByClick(frame, target, wrongId);
     await frame.locator(".duduq-dd2-confirm").first().click();
     await target.locator(`.duduq-dd2-item[data-dd2-item-id="${wrongId}"][data-wrong="true"]`).waitFor({ state: "visible", timeout: 2_500 });
-    assert((await target.locator(".duduq-dd2-placed-audio").count()) === 0, `${name}: replay ficou ativo durante feedback vermelho.`);
+    assert((await target.locator(".duduq-dd2-placed-replay").count()) === 0, `${name}: replay ficou ativo durante feedback vermelho.`);
     assert((await target.locator(".duduq-dd2-placed-clear").count()) === 0, `${name}: X ficou ativo durante feedback vermelho.`);
 
     await page.screenshot({ path: path.join(OUTPUT_DIR, `${name}-${info.questionId}-wrong-feedback.png`), fullPage: false });
@@ -225,16 +222,7 @@ async function runScenario(browser, name, viewport, mobile) {
 
     assert(pageErrors.length === 0, `${name}: erros de página: ${pageErrors.join(" | ")}`);
 
-    return {
-      name,
-      viewport,
-      questionId: info.questionId,
-      wrongId,
-      initialOrder,
-      orderAfterClear,
-      orderAfterWrong,
-      bridge
-    };
+    return { name, viewport, questionId: info.questionId, wrongId, initialOrder, orderAfterClear, orderAfterWrong, bridge };
   } finally {
     await context.close();
   }
@@ -245,12 +233,7 @@ const browser = await chromium.launch({ headless: true });
 try {
   const shortNotebook = await runScenario(browser, "short-notebook", { width: 1366, height: 645 }, false);
   const mobile = await runScenario(browser, "mobile", { width: 390, height: 844 }, true);
-  const report = {
-    status: "PASS",
-    contract: "YEAR2_DD_SELECTED_CHOICE_TOOLS_RC2",
-    shortNotebook,
-    mobile
-  };
+  const report = { status: "PASS", contract: "YEAR2_DD_SELECTED_CHOICE_TOOLS_RC2", shortNotebook, mobile };
   await fs.writeFile(path.join(OUTPUT_DIR, "report.json"), JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
 } finally {
