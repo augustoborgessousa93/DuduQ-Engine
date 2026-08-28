@@ -74,6 +74,34 @@ async function findListening(page) {
   throw new Error("Nenhum single-target listening association foi encontrado.");
 }
 
+async function confirmSafeArea(current, name, questionId) {
+  await current.waitForSelector("#duduq-year2-subcard-balance-v2", { state: "attached", timeout: 10_000 });
+  const confirm = current.locator(".duduq-dd2-confirm").first();
+  await confirm.waitFor({ state: "visible", timeout: 10_000 });
+
+  const geometry = await confirm.evaluate((node) => {
+    const rect = node.getBoundingClientRect();
+    const action = node.closest(".duduq-dd2-actions");
+    const actionStyle = action ? getComputedStyle(action) : null;
+    const viewportHeight = document.documentElement.clientHeight;
+    return {
+      top: rect.top,
+      bottom: rect.bottom,
+      height: rect.height,
+      viewportHeight,
+      bottomClearance: viewportHeight - rect.bottom,
+      actionMinHeight: actionStyle?.minHeight || null,
+      actionPaddingTop: actionStyle?.paddingTop || null,
+      actionPaddingBottom: actionStyle?.paddingBottom || null
+    };
+  });
+
+  assert(geometry.height >= 48, `${name}/${questionId}: botão CONFIRMAR foi comprimido (${JSON.stringify(geometry)}).`);
+  assert(geometry.top >= 0, `${name}/${questionId}: topo do CONFIRMAR saiu do viewport (${JSON.stringify(geometry)}).`);
+  assert(geometry.bottomClearance >= 6, `${name}/${questionId}: CONFIRMAR está cortado/encostado no limite inferior (${JSON.stringify(geometry)}).`);
+  return geometry;
+}
+
 async function run(browser, name, viewport) {
   const context = await browser.newContext({
     viewport,
@@ -83,7 +111,7 @@ async function run(browser, name, viewport) {
   const page = await context.newPage();
   try {
     await boot(page);
-    const { target, active } = await findListening(page);
+    const { current, target, active } = await findListening(page);
     assert(active.targetLabel === "SOLTE A RESPOSTA AQUI", `${name}/${active.id}: label de conteúdo inesperado: ${active.targetLabel}`);
     assert(active.targetInstructionConsistent, `${name}/${active.id}: finalizador não declarou instrução consistente.`);
 
@@ -102,10 +130,12 @@ async function run(browser, name, viewport) {
     assert(badgeState.display === "none", `${name}/${active.id}: badge ${badgeState.text} continua visível (${JSON.stringify(badgeState)}).`);
     assert(badgeState.width === 0 && badgeState.height === 0, `${name}/${active.id}: badge oculto ainda ocupa espaço.`);
 
+    const confirmGeometry = await confirmSafeArea(current, name, active.id);
+
     const bridge = await page.evaluate(() => window.__DUDUQ_YEAR2_DD_CONFIRM_ANY_BRIDGE__ || null);
     assert(bridge?.singleTargetCapacityBadgeHidden === true, `${name}/${active.id}: bridge não declara limpeza do badge.`);
 
-    return { name, questionId: active.id, targetText, badgeState, bridgeVersion: bridge.version };
+    return { name, questionId: active.id, targetText, badgeState, confirmGeometry, bridgeVersion: bridge.version };
   } finally {
     await context.close();
   }
@@ -114,11 +144,13 @@ async function run(browser, name, viewport) {
 const browser = await chromium.launch({ headless: true });
 try {
   const desktop = await run(browser, "desktop", { width: 1366, height: 768 });
+  const shortNotebook = await run(browser, "short-notebook", { width: 1366, height: 645 });
   const mobile = await run(browser, "mobile", { width: 390, height: 844 });
   console.log(JSON.stringify({
     status: "PASS",
     contract: "YEAR2_DD_LISTENING_TARGET_VISUAL_CONTRACT_RC1",
     desktop,
+    shortNotebook,
     mobile
   }, null, 2));
 } finally {
