@@ -254,8 +254,9 @@ async function runScenario(browser, mode, viewport) {
     assert(bridge.captured && bridge.separated && bridge.audioSwitch && bridge.tapFallback, `${mode}: bridge de separação não está ativo: ${JSON.stringify(bridge)}`);
     assert(bridge.placementAutoplay?.selectedChoicePlacementAutoPlaysAudioOnce === true, `${mode}: bridge de autoplay de placement não está ativo: ${JSON.stringify(bridge)}`);
     assert(bridge.placementAutoplay?.usesNativeSelectedReplay === true, `${mode}: autoplay não reutiliza o replay nativo selecionado.`);
+    assert(bridge.placementAutoplay?.usesNativeForceRestartTriggerForTap === true, `${mode}: autoplay por toque não usa o gatilho nativo de force restart.`);
     assert(bridge.placementAutoplay?.avoidsDoublePlayWhenNativeDropAlreadyPlaying === true, `${mode}: autoplay não declara proteção contra áudio duplicado no drop.`);
-    assert(bridge.placementAutoplay?.autoplaySources === "drop-native+tap-replay-fallback", `${mode}: fontes de autoplay inesperadas: ${bridge.placementAutoplay?.autoplaySources}`);
+    assert(bridge.placementAutoplay?.autoplaySources === "drop-native+tap-force-restart", `${mode}: fontes de autoplay inesperadas: ${bridge.placementAutoplay?.autoplaySources}`);
     assert(bridge.release === "2.0.22", `${mode}: release Drag & Drop mudou para ${bridge.release}.`);
 
     const centralBefore = await assertCentralImage(target, `${mode}/${info.questionId}`);
