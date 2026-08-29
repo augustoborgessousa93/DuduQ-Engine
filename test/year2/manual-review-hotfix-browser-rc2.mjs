@@ -212,12 +212,32 @@ async function verifyMatching(page, frame, probe) {
   // QA session and the Host may remove that iframe immediately afterwards.
   await noHorizontalOverflow(frame, probe.id);
 
-  for (let index = 0; index < n; index += 1) {
-    await left.nth(index).click();
-    await right.nth(index).click();
-  }
   const confirm = frame.locator(".duduq-matching-primary");
   assert(await confirm.count() === 1, `${probe.id}: CONFIRMAR ausente.`);
+
+  // Cada clique automatizado só avança depois que o React confirmou a
+  // transição anterior. Isso mantém o teste rigoroso sem deixar o próximo
+  // clique ultrapassar o commit de estado do pareamento em máquinas de CI.
+  for (let index = 0; index < n; index += 1) {
+    await left.nth(index).click();
+    await frame.waitForFunction(({ position }) => {
+      const cards = document.querySelectorAll('.duduq-matching-column[data-side="left"] .duduq-matching-card');
+      return cards[position]?.getAttribute("aria-pressed") === "true";
+    }, { position:index }, { timeout: 4_000 });
+
+    await right.nth(index).click();
+    await frame.waitForFunction(({ expectedPairs, totalPairs }) => {
+      const button = document.querySelector(".duduq-matching-primary");
+      const label = String(button?.getAttribute("aria-label") || "");
+      const pressed = document.querySelectorAll('.duduq-matching-card[aria-pressed="true"]');
+      return Boolean(
+        button &&
+        label.includes(`${expectedPairs} de ${totalPairs} prontas`) &&
+        pressed.length === 0
+      );
+    }, { expectedPairs:index + 1, totalPairs:n }, { timeout: 4_000 });
+  }
+
   try {
     await frame.waitForFunction(() => {
       const button = document.querySelector(".duduq-matching-primary");
@@ -273,7 +293,7 @@ async function verifyFallback(frame, probe) {
 }
 
 await fs.mkdir(OUTPUT_DIR, { recursive: true });
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({ headless:true });
 const introReport = [];
 const cases = [];
 let discoveredDesktop = 0;
