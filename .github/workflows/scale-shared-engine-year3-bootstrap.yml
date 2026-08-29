@@ -20,6 +20,7 @@ jobs:
           node --check engine/duduq-loader-v1.js
           node --check engine/shared/bubble-pop-runtime-safety-v1.js
           node --check engine/shared/smart-visual-resolver-v1.js
+          node --check engine/shared/runtime-frame-sync-v1.js
           node --check content/english/year-3/year3-content-factory-v1.js
           for module in 01 02 03 04 05 06; do
             node --check "content/english/year-3/module-${module}/module-${module}-v1.js"
