@@ -1,0 +1,48 @@
+name: Shared Engine Foundation RC1
+
+on:
+  push:
+    branches:
+      - 'scale/**'
+    paths:
+      - 'core/duduq-gamified-typography.js'
+      - 'core/duduq-tactile-buttons-3d.js'
+      - 'core/duduq-host-completion-guard.js'
+      - 'test/shared/shared-engine-foundation-rc1.mjs'
+      - '.github/workflows/shared-engine-foundation-rc1.yml'
+  pull_request:
+    paths:
+      - 'core/duduq-gamified-typography.js'
+      - 'core/duduq-tactile-buttons-3d.js'
+      - 'core/duduq-host-completion-guard.js'
+      - 'test/shared/shared-engine-foundation-rc1.mjs'
+      - '.github/workflows/shared-engine-foundation-rc1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shared-foundation-contract:
+    name: Shared core syntax + scope contract
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax check shared typography
+        run: node --check core/duduq-gamified-typography.js
+
+      - name: Syntax check shared tactile controls
+        run: node --check core/duduq-tactile-buttons-3d.js
+
+      - name: Syntax check shared completion guard
+        run: node --check core/duduq-host-completion-guard.js
+
+      - name: Validate shared foundation contract
+        run: node test/shared/shared-engine-foundation-rc1.mjs
