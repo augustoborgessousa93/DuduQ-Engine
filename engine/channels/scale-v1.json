@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "contractMajor": 1,
-  "revision": 2,
+  "revision": 3,
   "core": {
     "release": "1.0.9",
     "styles": [
@@ -33,6 +33,11 @@
         "id": "duduq-shared-bubble-runtime-safety-v1",
         "src": "/engine/shared/bubble-pop-runtime-safety-v1.js",
         "release": "shared-1.0.0"
+      },
+      {
+        "id": "duduq-shared-host-completion-guard-v1",
+        "src": "/engine/shared/host-owned-completion-guard-v1.js",
+        "release": "shared-1.0.0"
       }
     ],
     "router": { "src": "/engine/releases/core/1.0.9/duduq-router.js", "release": "1.0.9" }
@@ -55,5 +60,5 @@
     "rollbackViaChannel": true
   },
   "channel": "scale-v1",
-  "status": "experimental-shared-engine-year3-bootstrap"
+  "status": "experimental-shared-engine-years1-5"
 }
