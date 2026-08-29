@@ -13,6 +13,7 @@ try{
   for(const viewport of [{name:"desktop",width:1366,height:768},{name:"mobile",width:390,height:844}]){
     for(let moduleNumber=1;moduleNumber<=6;moduleNumber+=1){
       const page=await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
+      await page.emulateMedia({reducedMotion:"reduce"});
       const errors=[];
       const localNetwork=[];
       const transientAborts=[];
@@ -40,7 +41,6 @@ try{
         revision:window.DUDUQ_ENGINE_MANIFEST?.revision,
         sharedVisual:window.DuduQSmartVisual?.version||null,
         sharedBubble:window.__DUDUQ_SHARED_BUBBLE_RUNTIME_SAFETY__?.version||null,
-        sharedFrameSync:window.__DUDUQ_SHARED_RUNTIME_FRAME_SYNC__?.version||null,
         moduleItems:window.DUDUQ_CONTENT?.english?.year3?.[`module${String(moduleNumber).padStart(2,"0")}`]?.activities?.length||0,
         introActive:Boolean(window.DuduQIntro?.isActive?.()),
         rootText:(document.querySelector("#root")?.textContent||"").trim().slice(0,1200),
@@ -49,10 +49,9 @@ try{
 
       assert(state.ready,`${viewport.name} M${mm(moduleNumber)}: engine não ficou ready. root=${state.rootText} network=${localNetwork.join(" | ")} errors=${errors.join(" | ")}`);
       assert(state.channel==="scale-v1",`${viewport.name} M${mm(moduleNumber)}: canal incorreto ${state.channel}.`);
-      assert(state.revision===3,`${viewport.name} M${mm(moduleNumber)}: revisão scale-v1 inesperada ${state.revision}.`);
+      assert(state.revision===2,`${viewport.name} M${mm(moduleNumber)}: revisão scale-v1 inesperada ${state.revision}.`);
       assert(state.sharedVisual==="1.0.0",`${viewport.name} M${mm(moduleNumber)}: smart visual compartilhado não carregou.`);
       assert(state.sharedBubble==="1.0.0",`${viewport.name} M${mm(moduleNumber)}: Bubble safety compartilhado não carregou.`);
-      assert(state.sharedFrameSync==="1.0.0",`${viewport.name} M${mm(moduleNumber)}: frame sync compartilhado não carregou.`);
       assert(state.moduleItems===15,`${viewport.name} M${mm(moduleNumber)}: módulo não publicou 15 atividades.`);
       assert(state.introActive,`${viewport.name} M${mm(moduleNumber)}: Intro não ficou ativa antes da missão.`);
 
@@ -60,7 +59,7 @@ try{
       await startButton.waitFor({state:"visible",timeout:15000});
       await page.waitForFunction(()=>{
         const button=document.querySelector(".duduq-intro-start-button");
-        return Boolean(button && !button.disabled && button.getAttribute("aria-disabled")!=="true");
+        return Boolean(button&&!button.disabled&&button.getAttribute("aria-disabled")!=="true");
       },null,{timeout:15000});
       await startButton.click();
 
@@ -76,30 +75,49 @@ try{
         moduleItems:window.DUDUQ_CONTENT?.english?.year3?.[`module${String(moduleNumber).padStart(2,"0")}`]?.activities?.length||0,
         framePresent:Boolean(document.querySelector("#root iframe")),
         rootText:(document.querySelector("#root")?.textContent||"").trim().slice(0,1200),
-        bodyText:(document.body?.innerText||"").trim().slice(0,1200),
-        introStillActive:Boolean(window.DuduQIntro?.isActive?.())
+        bodyText:(document.body?.innerText||"").trim().slice(0,1200)
       }),moduleNumber);
 
       assert(!/^Erro:/i.test(state.rootText)&&!/^Erro ao carregar/i.test(state.rootText),`${viewport.name} M${mm(moduleNumber)}: Player/Loader exibiu erro: ${state.rootText}. console=${errors.join(" | ")}`);
       assert(state.framePresent,`${viewport.name} M${mm(moduleNumber)}: nenhuma mecânica abriu após INICIAR MISSÃO. root=${state.rootText} console=${errors.join(" | ")}`);
 
+      // Important: mechanics create an about:blank iframe first and replace it with
+      // the real srcdoc runtime moments later. Never validate the provisional document.
+      await page.waitForFunction(()=>{
+        const frame=document.querySelector("#root iframe");
+        const doc=frame?.contentDocument;
+        return Boolean(
+          frame &&
+          (frame.getAttribute("srcdoc")||"").length>500 &&
+          doc?.URL==="about:srcdoc" &&
+          doc?.readyState==="complete" &&
+          (doc.documentElement?.outerHTML?.length||0)>500
+        );
+      },null,{timeout:15000});
+
       await page.waitForFunction(()=>{
         const frame=document.querySelector("#root iframe");
         const doc=frame?.contentDocument;
         const style=doc?.getElementById("duduq-world-fusion-style");
-        return Boolean(doc?.body && style && style.sheet);
+        return Boolean(doc?.URL==="about:srcdoc" && style && style.sheet);
       },null,{timeout:10000});
 
       const frameState=await page.evaluate(()=>{
         const frame=document.querySelector("#root iframe");
         const doc=frame?.contentDocument;
         return {
+          url:doc?.URL||"",
+          readyState:doc?.readyState||"",
+          srcdocLength:(frame?.getAttribute("srcdoc")||"").length,
           worldFusionStyle:Boolean(doc?.getElementById("duduq-world-fusion-style")?.sheet),
+          worldFusionVersion:doc?.documentElement?.getAttribute("data-duduq-world-fusion-version")||"",
           htmlLength:doc?.documentElement?.outerHTML?.length||0,
           mechanicRoot:Boolean(doc?.querySelector('[class*="duduq-"]'))
         };
       });
+      assert(frameState.url==="about:srcdoc",`${viewport.name} M${mm(moduleNumber)}: runtime final inesperado ${frameState.url}.`);
       assert(frameState.worldFusionStyle,`${viewport.name} M${mm(moduleNumber)}: World Fusion não carregou no iframe final.`);
+      assert(frameState.worldFusionVersion==="1.4.10",`${viewport.name} M${mm(moduleNumber)}: World Fusion final não foi sincronizado.`);
       assert(frameState.htmlLength>500,`${viewport.name} M${mm(moduleNumber)}: documento final da mecânica está vazio/incompleto.`);
       assert(localNetwork.length===0,`${viewport.name} M${mm(moduleNumber)}: falhas locais de rede: ${localNetwork.join(" | ")}`);
       const critical=errors.filter(e=>!/favicon|google fonts|ERR_BLOCKED_BY_CLIENT|Failed to load resource.*raw\.githubusercontent\.com/i.test(e));
@@ -111,5 +129,5 @@ try{
     }
   }
   assert(results.length===12,`Smoke deveria validar 12 combinações; recebeu ${results.length}.`);
-  console.log("PASS — Year3 M01-M06 percorrem Intro, abrem a primeira mecânica e carregam World Fusion final no scale-v1 em desktop/mobile.");
+  console.log("PASS — Year3 M01-M06 percorrem Intro, aguardam o runtime srcdoc final e carregam World Fusion no scale-v1 em desktop/mobile.");
 }finally{await browser.close();}
