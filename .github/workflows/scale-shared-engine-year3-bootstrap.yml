@@ -15,15 +15,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Syntax shared layers and Year 3 bootstrap
+      - name: Syntax shared layers and Year 3 modules
         run: |
           node --check engine/duduq-loader-v1.js
           node --check engine/shared/bubble-pop-runtime-safety-v1.js
           node --check engine/shared/smart-visual-resolver-v1.js
           node --check content/english/year-3/year3-content-factory-v1.js
-          node --check content/english/year-3/module-01/module-01-v1.js
+          for module in 01 02 03 04 05 06; do
+            node --check "content/english/year-3/module-${module}/module-${module}-v1.js"
+          done
           node --check test/scale/year3-bootstrap-static.mjs
-      - name: Guard Canary and Year 3 thin-content contract
+          node --check test/scale/year3-all-modules-smoke.mjs
+      - name: Guard Canary and Year 3 90-item thin-content contract
         run: node test/scale/year3-bootstrap-static.mjs
 
   browser-checkpoint:
@@ -48,7 +51,7 @@ jobs:
           done
           cat /tmp/duduq-scale-http.log
           exit 1
-      - name: Smoke Year 3 M01 desktop and mobile
+      - name: Smoke Year 3 M01-M06 desktop and mobile
         env:
           BASE_URL: http://127.0.0.1:4173
-        run: node test/scale/year3-m01-smoke.mjs
+        run: node test/scale/year3-all-modules-smoke.mjs
