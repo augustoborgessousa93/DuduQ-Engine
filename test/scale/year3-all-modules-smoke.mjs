@@ -3,6 +3,9 @@ import { chromium } from "playwright";
 const BASE=process.env.BASE_URL||"http://127.0.0.1:4173";
 function assert(condition,message){if(!condition)throw new Error(message);}
 function mm(value){return String(value).padStart(2,"0");}
+function isExpectedWorldFusionAbort(url,errorText){
+  return /\/engine\/releases\/core\/1\.0\.9\/duduq-world-fusion\.css(?:\?|$)/.test(url) && /ERR_ABORTED/i.test(errorText||"");
+}
 
 const browser=await chromium.launch({headless:true});
 try{
@@ -12,9 +15,16 @@ try{
       const page=await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
       const errors=[];
       const localNetwork=[];
+      const transientAborts=[];
       page.on("pageerror",e=>errors.push(`pageerror: ${String(e.message||e)}`));
       page.on("console",msg=>{if(msg.type()==="error")errors.push(`console: ${msg.text()}`);});
-      page.on("requestfailed",req=>{if(req.url().startsWith(BASE))localNetwork.push(`requestfailed ${req.url()} :: ${req.failure()?.errorText||"unknown"}`);});
+      page.on("requestfailed",req=>{
+        if(!req.url().startsWith(BASE))return;
+        const errorText=req.failure()?.errorText||"unknown";
+        const message=`requestfailed ${req.url()} :: ${errorText}`;
+        if(isExpectedWorldFusionAbort(req.url(),errorText))transientAborts.push(message);
+        else localNetwork.push(message);
+      });
       page.on("response",res=>{if(res.url().startsWith(BASE)&&res.status()>=400)localNetwork.push(`http ${res.status()} ${res.url()}`);});
 
       const url=`${BASE}/content/english/year-3/module-${mm(moduleNumber)}/`;
@@ -62,23 +72,42 @@ try{
         channel:window.DUDUQ_ENGINE_MANIFEST?.channel,
         revision:window.DUDUQ_ENGINE_MANIFEST?.revision,
         moduleItems:window.DUDUQ_CONTENT?.english?.year3?.[`module${String(moduleNumber).padStart(2,"0")}`]?.activities?.length||0,
-        frameSrc:document.querySelector("#root iframe")?.getAttribute("src")||document.querySelector("#root iframe")?.getAttribute("srcdoc")?.slice(0,40)||"",
+        framePresent:Boolean(document.querySelector("#root iframe")),
         rootText:(document.querySelector("#root")?.textContent||"").trim().slice(0,1200),
         bodyText:(document.body?.innerText||"").trim().slice(0,1200),
         introStillActive:Boolean(window.DuduQIntro?.isActive?.())
       }),moduleNumber);
 
       assert(!/^Erro:/i.test(state.rootText)&&!/^Erro ao carregar/i.test(state.rootText),`${viewport.name} M${mm(moduleNumber)}: Player/Loader exibiu erro: ${state.rootText}. console=${errors.join(" | ")}`);
-      assert(state.frameSrc,`${viewport.name} M${mm(moduleNumber)}: nenhuma mecânica abriu após INICIAR MISSÃO. root=${state.rootText} console=${errors.join(" | ")}`);
+      assert(state.framePresent,`${viewport.name} M${mm(moduleNumber)}: nenhuma mecânica abriu após INICIAR MISSÃO. root=${state.rootText} console=${errors.join(" | ")}`);
+
+      await page.waitForFunction(()=>{
+        const frame=document.querySelector("#root iframe");
+        const doc=frame?.contentDocument;
+        const style=doc?.getElementById("duduq-world-fusion-style");
+        return Boolean(doc?.body && style && style.sheet);
+      },null,{timeout:10000});
+
+      const frameState=await page.evaluate(()=>{
+        const frame=document.querySelector("#root iframe");
+        const doc=frame?.contentDocument;
+        return {
+          worldFusionStyle:Boolean(doc?.getElementById("duduq-world-fusion-style")?.sheet),
+          htmlLength:doc?.documentElement?.outerHTML?.length||0,
+          mechanicRoot:Boolean(doc?.querySelector('[class*="duduq-"]'))
+        };
+      });
+      assert(frameState.worldFusionStyle,`${viewport.name} M${mm(moduleNumber)}: World Fusion não carregou no iframe final.`);
+      assert(frameState.htmlLength>500,`${viewport.name} M${mm(moduleNumber)}: documento final da mecânica está vazio/incompleto.`);
       assert(localNetwork.length===0,`${viewport.name} M${mm(moduleNumber)}: falhas locais de rede: ${localNetwork.join(" | ")}`);
       const critical=errors.filter(e=>!/favicon|google fonts|ERR_BLOCKED_BY_CLIENT|Failed to load resource.*raw\.githubusercontent\.com/i.test(e));
       assert(critical.length===0,`${viewport.name} M${mm(moduleNumber)}: erros críticos: ${critical.join(" | ")}`);
 
-      results.push({viewport:viewport.name,module:moduleNumber,items:state.moduleItems,frame:true});
+      results.push({viewport:viewport.name,module:moduleNumber,items:state.moduleItems,frame:true,worldFusion:true,transientAborts:transientAborts.length});
       console.log(JSON.stringify(results.at(-1)));
       await page.close();
     }
   }
   assert(results.length===12,`Smoke deveria validar 12 combinações; recebeu ${results.length}.`);
-  console.log("PASS — Year3 M01-M06 percorrem Intro e abrem a primeira mecânica no scale-v1 em desktop/mobile.");
+  console.log("PASS — Year3 M01-M06 percorrem Intro, abrem a primeira mecânica e carregam World Fusion final no scale-v1 em desktop/mobile.");
 }finally{await browser.close();}
