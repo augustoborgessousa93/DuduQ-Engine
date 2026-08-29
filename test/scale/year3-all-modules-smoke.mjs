@@ -44,6 +44,7 @@ try{
           revision:window.DUDUQ_ENGINE_MANIFEST?.revision,
           sharedVisual:window.DuduQSmartVisual?.version||null,
           sharedBubble:window.__DUDUQ_SHARED_BUBBLE_RUNTIME_SAFETY__?.version||null,
+          sharedBubbleMedia:window.__DUDUQ_SHARED_BUBBLE_SMART_MEDIA__?.version||null,
           moduleItems:module?.activities?.length||0,
           firstMechanic:module?.activities?.[0]?.mechanic||"",
           introActive:Boolean(window.DuduQIntro?.isActive?.()),
@@ -54,9 +55,10 @@ try{
 
       assert(state.ready,`${viewport.name} M${mm(moduleNumber)}: engine não ficou ready. root=${state.rootText} network=${localNetwork.join(" | ")} errors=${errors.join(" | ")}`);
       assert(state.channel==="scale-v1",`${viewport.name} M${mm(moduleNumber)}: canal incorreto ${state.channel}.`);
-      assert(state.revision===3,`${viewport.name} M${mm(moduleNumber)}: revisão scale-v1 inesperada ${state.revision}.`);
+      assert(state.revision===4,`${viewport.name} M${mm(moduleNumber)}: revisão scale-v1 inesperada ${state.revision}.`);
       assert(state.sharedVisual==="1.1.0",`${viewport.name} M${mm(moduleNumber)}: smart visual compartilhado não carregou (recebido ${state.sharedVisual}).`);
-      assert(state.sharedBubble==="1.0.0",`${viewport.name} M${mm(moduleNumber)}: Bubble safety compartilhado não carregou.`);
+      assert(state.sharedBubble==="1.1.0",`${viewport.name} M${mm(moduleNumber)}: Bubble safety compartilhado não carregou (recebido ${state.sharedBubble}).`);
+      assert(state.sharedBubbleMedia==="1.0.1",`${viewport.name} M${mm(moduleNumber)}: Bubble smart media compartilhado não carregou (recebido ${state.sharedBubbleMedia}).`);
       assert(state.moduleItems===15,`${viewport.name} M${mm(moduleNumber)}: módulo não publicou 15 atividades.`);
       assert(state.firstMechanic,`${viewport.name} M${mm(moduleNumber)}: primeira mecânica não foi publicada.`);
       assert(state.introActive,`${viewport.name} M${mm(moduleNumber)}: Intro não ficou ativa antes da missão.`);
@@ -92,11 +94,6 @@ try{
       assert(!/^Erro:/i.test(state.rootText)&&!/^Erro ao carregar/i.test(state.rootText),`${viewport.name} M${mm(moduleNumber)}: Player/Loader exibiu erro: ${state.rootText}. console=${errors.join(" | ")}`);
       assert(state.framePresent,`${viewport.name} M${mm(moduleNumber)}: nenhuma mecânica abriu após INICIAR MISSÃO. root=${state.rootText} console=${errors.join(" | ")}`);
 
-      // Adapters do Golden Master usam dois ciclos válidos:
-      // - Bubble Pop e outras mecânicas navegam o iframe por `src`;
-      // - Drag & Drop e afins constroem o runtime por `srcdoc`.
-      // Em ambos os casos, o iframe nasce como about:blank. O smoke só valida
-      // depois que o documento final está completo, com conteúdo e World Fusion.
       await page.waitForFunction(()=>{
         const frame=document.querySelector("#root iframe");
         const doc=frame?.contentDocument;
