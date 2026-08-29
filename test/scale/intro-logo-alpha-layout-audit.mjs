@@ -20,9 +20,6 @@ async function inspect(name,viewport){
     await page.goto(URL,{waitUntil:"domcontentloaded"});
     await page.waitForFunction(()=>Boolean(window.DUDUQ_ENGINE_READY===true&&window.DuduQIntro?.isActive?.()));
 
-    // A auditoria precisa medir o layout estabilizado. Sem isto, o bounding box
-    // captura os scales intermediários do keyframe (ex.: 445px × .58 = 258.1px)
-    // e produz um falso diagnóstico de logo pequena.
     await page.waitForFunction(()=>{
       const root=document.querySelector(".duduq-intro");
       const button=document.querySelector(".duduq-intro-start-button");
@@ -30,6 +27,7 @@ async function inspect(name,viewport){
       return Boolean(
         root?.classList.contains("is-mission") &&
         root?.classList.contains("is-ready") &&
+        window.__DUDUQ_SHARED_INTRO_LAYOUT__?.version==="1.0.0" &&
         logo?.complete && logo.naturalWidth>0 && logo.naturalHeight>0 &&
         button && getComputedStyle(button).visibility!=="hidden"
       );
@@ -114,6 +112,7 @@ async function inspect(name,viewport){
         phase:root?.getAttribute("data-duduq-intro-phase")||"",
         ready:Boolean(root?.classList.contains("is-ready")),
         reducedMotion:matchMedia("(prefers-reduced-motion: reduce)").matches,
+        sharedIntro:window.__DUDUQ_SHARED_INTRO_LAYOUT__||null,
         src:logo?.currentSrc||logo?.src||"",
         natural:{width:logo?.naturalWidth||0,height:logo?.naturalHeight||0},
         logoRect,collectionRect,stageRect,metaRect,loadingRect,actionsRect,startRect,
@@ -126,15 +125,38 @@ async function inspect(name,viewport){
         gapMetaToLoading:metaRect&&loadingRect?loadingRect.top-metaRect.bottom:null,
         gapLoadingToActions:loadingRect&&actionsRect?actionsRect.top-loadingRect.bottom:null,
         gapLogoToStart:logoRect&&startRect?startRect.top-logoRect.bottom:null,
-        occupiedFromCollectionToActions:collectionRect&&actionsRect?actionsRect.bottom-collectionRect.top:null
+        occupiedFromCollectionToActions:collectionRect&&actionsRect?actionsRect.bottom-collectionRect.top:null,
+        documentWidth:document.documentElement.scrollWidth,
+        documentHeight:document.documentElement.scrollHeight
       };
     });
 
     assert(state.phase==="mission"&&state.ready,`${name}: Intro não estabilizou em mission/ready.`);
     assert(state.reducedMotion,`${name}: auditoria precisa de reduced-motion para geometria determinística.`);
+    assert(state.sharedIntro?.version==="1.0.0",`${name}: camada compartilhada da Intro não carregou.`);
     assert(state.logoComputed.transform==="none",`${name}: logo ainda possui transform durante a medição (${state.logoComputed.transform}).`);
     assert(state.natural.width>0&&state.natural.height>0,`${name}: logo oficial não carregou.`);
     assert(state.logoRect?.width>100&&state.logoRect?.height>100,`${name}: elemento da logo está pequeno/invisível.`);
+    assert(state.documentWidth<=viewport.width+6,`${name}: Intro criou overflow horizontal (${state.documentWidth} > ${viewport.width}).`);
+
+    if(viewport.width>=1600&&viewport.height>=900){
+      assert(state.logoRect.height>=500,`${name}: logo fullscreen continua pequena (${state.logoRect.height.toFixed(1)}px).`);
+      assert(state.logoRect.height<=620,`${name}: logo fullscreen ficou excessiva (${state.logoRect.height.toFixed(1)}px).`);
+      assert(state.occupiedFromCollectionToActions>=800,`${name}: bloco fullscreen ainda subutiliza altura (${state.occupiedFromCollectionToActions.toFixed(1)}px).`);
+      assert(state.actionsRect.bottom<=viewport.height-70,`${name}: CTA fullscreen ficou próximo demais da borda inferior (${state.actionsRect.bottom.toFixed(1)}px).`);
+      assert(state.stageTopGap>=35,`${name}: bloco fullscreen ficou próximo demais da borda superior (${state.stageTopGap.toFixed(1)}px).`);
+    }else if(viewport.width<=560){
+      assert(state.logoRect.height>=235,`${name}: logo mobile voltou a ficar pequena (${state.logoRect.height.toFixed(1)}px).`);
+      assert(state.logoRect.height<=300,`${name}: logo mobile ficou excessiva (${state.logoRect.height.toFixed(1)}px).`);
+      assert(state.collectionRect.height>=275,`${name}: coleção mobile continua comprimida (${state.collectionRect.height.toFixed(1)}px).`);
+      assert(state.actionsRect.right<=viewport.width+2&&state.actionsRect.left>=-2,`${name}: CTA mobile saiu da viewport.`);
+    }else{
+      // 1366×768 é a baseline já homologada: a nova camada não deve alterar
+      // significativamente esta composição para resolver telas maiores/menores.
+      assert(state.logoRect.height>=390&&state.logoRect.height<=410,`${name}: baseline notebook mudou (${state.logoRect.height.toFixed(1)}px).`);
+      assert(state.occupiedFromCollectionToActions>=640&&state.occupiedFromCollectionToActions<=665,`${name}: baseline notebook alterou a ocupação vertical (${state.occupiedFromCollectionToActions.toFixed(1)}px).`);
+    }
+
     reports.push({name,viewport,state});
     await page.screenshot({path:path.join(OUT_DIR,`${name}.png`),fullPage:false});
     console.log(JSON.stringify({name,...state},null,2));
@@ -148,7 +170,7 @@ try{
   await inspect("fullscreen-1920x1080",{width:1920,height:1080});
   await inspect("mobile-390x844",{width:390,height:844});
   await fs.writeFile(path.join(OUT_DIR,"report.json"),JSON.stringify({status:"PASS",reports},null,2));
-  console.log("PASS — Intro audit captured final mission/ready geometry with animation transforms neutralized.");
+  console.log("PASS — Shared Intro layout preserves notebook baseline and improves fullscreen/mobile brand presence.");
 }finally{
   await browser.close();
 }
