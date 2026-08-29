@@ -30,7 +30,11 @@ const report={
   intent:"cross-year shared-mechanics migration readiness",
   years:{},
   global:{modules:0,indexes:0,localStructuralCandidates:0},
-  invariants:{scalePromotionDisabled:false,sharedHostCompletionGuard:false}
+  invariants:{
+    scalePromotionDisabled:false,
+    sharedHostCompletionGuard:false,
+    sharedBubbleSmartMedia:false
+  }
 };
 
 for(let year=1;year<=5;year+=1){
@@ -57,6 +61,7 @@ for(let year=1;year<=5;year+=1){
     const sharedAliases=/scale-smart-visual-aliases-v1\.js/.test(index);
     const sharedCompat=/scale-content-compat-v1\.js/.test(index);
     const localCompletionGuard=/year2-v23-internal-completion-guard\.js/.test(index);
+    const localBubbleSmartBridge=/year2-v23-bubble-smart-renderer-bridge\.js/.test(index);
     const localCandidates=moduleFiles.filter(file=>file.endsWith(".js")&&patchName.test(path.basename(file))).map(file=>path.basename(file));
     const mechanics=Array.from(new Set([...mechanicsFrom(index),...mechanicsFrom(jsSource)]));
 
@@ -70,6 +75,7 @@ for(let year=1;year<=5;year+=1){
       sharedAliases,
       sharedCompat,
       localCompletionGuard,
+      localBubbleSmartBridge,
       mechanics,
       jsFiles:moduleFiles.filter(file=>file.endsWith(".js")).length,
       localStructuralCandidates:localCandidates
@@ -82,12 +88,14 @@ for(let year=1;year<=5;year+=1){
   const directCoreModules=moduleReport.filter(item=>item.directCore).map(item=>item.module);
   const sharedModules=moduleReport.filter(item=>item.sharedAliases&&item.sharedCompat).map(item=>item.module);
   const localCompletionGuardModules=moduleReport.filter(item=>item.localCompletionGuard).map(item=>item.module);
+  const localBubbleSmartBridgeModules=moduleReport.filter(item=>item.localBubbleSmartBridge).map(item=>item.module);
   report.years[year]={
     modules:6,
     channels,
     directCoreModules,
     sharedModules,
     localCompletionGuardModules,
+    localBubbleSmartBridgeModules,
     localStructuralCandidateCount:candidateFiles.length,
     localStructuralCandidates:candidateFiles.map(file=>file.replace(`${yearDir}/`,"")),
     mechanics:Array.from(new Set(moduleReport.flatMap(item=>item.mechanics))),
@@ -106,12 +114,17 @@ report.invariants.sharedHostCompletionGuard=postMechanicScripts.some(layer=>
   layer?.id==="duduq-shared-host-completion-guard-v1"&&
   layer?.src==="/engine/shared/host-owned-completion-guard-v1.js"
 );
+report.invariants.sharedBubbleSmartMedia=postMechanicScripts.some(layer=>
+  layer?.id==="duduq-shared-bubble-smart-media-v1"&&
+  layer?.src==="/engine/shared/bubble-pop-smart-media-v1.js"
+);
 
 assert(report.global.modules===30,"Esperados 30 módulos entre Years 1–5.");
 assert(report.global.indexes===30,"Esperados 30 public entries entre Years 1–5.");
 assert(report.invariants.scalePromotionDisabled,"scale-v1 não pode promover produção nesta fase.");
 assert(report.invariants.scaleReleasesImmutable,"scale-v1 deve manter releases imutáveis durante a consolidação cross-year.");
 assert(report.invariants.sharedHostCompletionGuard,"scale-v1 deve fornecer o completion guard compartilhado da Engine.");
+assert(report.invariants.sharedBubbleSmartMedia,"scale-v1 deve fornecer o smart media compartilhado da Bubble Pop.");
 
 for(const year of [1,2,3,4,5]){
   const data=report.years[year];
@@ -124,21 +137,23 @@ for(const year of [1,2,3,4,5]){
 }
 
 // Years 1, 3, 4 e 5 usam a camada fina de compatibilidade/aliases no próprio
-// conteúdo. Year 2 ainda preserva sua factory/bridges homologados durante a
-// limpeza progressiva; o canal compartilhado da Engine já é obrigatório.
+// conteúdo. Year 2 ainda preserva sua factory e bridges pedagógicos homologados
+// durante a limpeza progressiva; comportamentos estruturais migram para Engine.
 for(const year of [1,3,4,5]){
   assert(report.years[year].sharedModules.length===6,`Year ${year}: todos os módulos devem carregar aliases/compat compartilhados.`);
 }
 
 assert(report.years[2].localCompletionGuardModules.length===0,"Year 2: nenhum módulo pode voltar a carregar year2-v23-internal-completion-guard.js; a responsabilidade agora é da Engine compartilhada.");
+assert(report.years[2].localBubbleSmartBridgeModules.length===0,"Year 2: nenhum módulo pode voltar a carregar year2-v23-bubble-smart-renderer-bridge.js; smart media da Bubble Pop agora pertence à Engine compartilhada.");
+assert(!exists("content/english/year-2/year2-v23-bubble-smart-renderer-bridge.js"),"Year 2: o bridge local de Bubble smart media deve permanecer removido da branch scale.");
 assert(report.years[2].localStructuralCandidateCount>0,"Year 2: limpeza dos bridges locais ainda deve permanecer visível na auditoria até a migração estrutural terminar.");
 
 report.recommendation={
   phase1:"COMPLETED — all 30 modules route through universal Player/Loader on scale-v1",
-  phase2:"IN PROGRESS — Year2 local completion guard migrated to shared Engine; continue reducing one proven structural bridge at a time",
+  phase2:"IN PROGRESS — completion guard and Bubble smart media migrated from Year2 to shared Engine; continue one proven structural responsibility at a time",
   phase3:"move reusable mechanic behavior into shared scale layers while preserving pedagogical exceptions",
   phase4:"apply mechanic/responsive/audio/smart-image fixes once across Years 1–5"
 };
 
 console.log(JSON.stringify(report,null,2));
-console.log("PASS — Years 1–5 estão travados no scale-v1; Year2 usa o completion guard compartilhado e mantém apenas a limpeza progressiva dos demais bridges locais.");
+console.log("PASS — Years 1–5 usam scale-v1; completion guard e Bubble smart media já são responsabilidades compartilhadas da Engine.");
