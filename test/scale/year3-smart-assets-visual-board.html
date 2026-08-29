@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Year 3 Smart Assets — Visual QA</title>
+  <style>
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;background:#eef5fb;color:#173d68}body{padding:24px}
+    header{max-width:1180px;margin:0 auto 20px}h1{margin:0 0 8px;font-size:clamp(24px,3vw,38px)}p{margin:0;line-height:1.45;color:#48677f}
+    #board{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+    .qa-card{min-width:0;background:#fff;border:2px solid #c7dceb;border-radius:20px;padding:14px;box-shadow:0 6px 18px rgba(22,61,104,.08);overflow:hidden}
+    .qa-media{width:100%;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;background:#f7fbff;border:1px solid #d9e7f1;border-radius:14px;overflow:hidden}
+    .qa-media img{display:block;width:100%;height:100%;object-fit:contain;max-width:100%;max-height:100%}
+    .qa-query{margin:10px 0 5px;font-size:15px;font-weight:800;overflow-wrap:anywhere}.qa-meta{font-size:12px;color:#5d768a;overflow-wrap:anywhere}
+    .gap{border-color:#c62828}.broken{border-color:#ef6c00}
+    @media(max-width:520px){body{padding:12px}#board{grid-template-columns:1fr 1fr;gap:10px}.qa-card{padding:9px;border-radius:14px}.qa-query{font-size:12px}.qa-meta{font-size:10px}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Year 3 • Smart Assets • Visual QA</h1>
+    <p>Painel técnico dos estímulos visuais de maior risco. Labels ficam fora das imagens e existem apenas para auditoria.</p>
+  </header>
+  <main id="board" aria-label="Painel de auditoria visual"></main>
+  <script src="/engine/releases/core/1.0.9/duduq-assets.js"></script>
+  <script src="/engine/shared/smart-visual-resolver-v1.js"></script>
+  <script>
+    (() => {
+      const queries = [
+        "friends","Nice to meet you","How are you","Maya profile","age",
+        "mother","father","brother","sister","grandfather","grandmother",
+        "ball","three turtles","3 yellow ducks","7 white cats","2 brown rabbits",
+        "big blue pencil","green car","red and blue bus","big truck",
+        "nose","eyes","hair","two big hands","two green eyes","brown hair"
+      ];
+      const board=document.getElementById("board");
+      const results=[];
+      for(const query of queries){
+        const resolved=window.DuduQSmartVisual?.resolve?.(query)||null;
+        const card=document.createElement("article");
+        card.className="qa-card"+(resolved?.src?"":" gap");
+        card.dataset.query=query;
+        card.dataset.status=resolved?.status||"asset-gap";
+        card.dataset.kind=resolved?.kind||"gap";
+        const media=document.createElement("div");media.className="qa-media";
+        if(resolved?.src){
+          const img=document.createElement("img");
+          img.src=resolved.src;img.alt=query;img.loading="eager";img.decoding="sync";
+          img.addEventListener("error",()=>card.classList.add("broken"));
+          media.appendChild(img);
+        }
+        const title=document.createElement("div");title.className="qa-query";title.textContent=query;
+        const meta=document.createElement("div");meta.className="qa-meta";meta.textContent=`${resolved?.status||"asset-gap"} • ${resolved?.kind||"gap"}`;
+        card.append(media,title,meta);board.appendChild(card);
+        results.push({query,status:resolved?.status||"asset-gap",kind:resolved?.kind||"gap",src:resolved?.src||null});
+      }
+      window.__YEAR3_SMART_VISUAL_BOARD__={version:"1.0.0",resolverVersion:window.DuduQSmartVisual?.version||null,results};
+    })();
+  </script>
+</body>
+</html>
