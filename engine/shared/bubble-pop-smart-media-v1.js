@@ -1,23 +1,35 @@
 /* =========================================================
-   DUDUQ SHARED — BUBBLE POP SMART MEDIA v1.0.0
+   DUDUQ SHARED — BUBBLE POP SMART MEDIA v1.0.1
 
    Structural cross-year behavior:
    - renders official Assets-DuduQ URLs already carried by bubble.imageAssetKey;
    - accepts deterministic data:image fallbacks already resolved upstream;
    - removes only synthetic distractors that duplicate an existing visual;
+   - suppresses the retired Year-2 renderer request while scale migration is active;
    - does not alter answers, scoring, timing, pedagogy or mechanic releases;
    - leaves trajectory/safe-area ownership to bubble-pop-runtime-safety-v1.js.
    ========================================================= */
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0";
+  const VERSION = "1.0.1";
   const RUNTIME_RE = /\/DUDUQ_BUBBLE_POP\.html(?:\?|$)/i;
   const OFFICIAL_ASSET = /^https:\/\/raw\.githubusercontent\.com\/augustoborgessousa93\/Assets-DuduQ\//i;
   const GENERATED_IMAGE = /^data:image\//i;
   const SYNTHETIC_DISTRACTOR = /__duduq_distractor_\d+$/i;
 
   if (window.__DUDUQ_SHARED_BUBBLE_SMART_MEDIA__) return;
+
+  /*
+   * Transitional compatibility only: the old Year-2 router layer checks this
+   * flag before dynamically requesting its retired renderer bridge. On scale-v1
+   * this shared layer is already loaded before content is built, so the request
+   * can be suppressed without reintroducing a Year-specific runtime patch.
+   */
+  if (!window.__DUDUQ_YEAR2_BUBBLE_SMART_RENDERER_BRIDGE_REQUESTED__) {
+    window.__DUDUQ_YEAR2_BUBBLE_SMART_RENDERER_BRIDGE_REQUESTED__ =
+      "superseded-by-shared-bubble-smart-media-v1";
+  }
 
   function acceptedSource(value) {
     const source = String(value || "").trim();
@@ -166,6 +178,7 @@
     officialAssets: true,
     generatedImages: true,
     syntheticVisualDedupe: true,
+    legacyYear2RendererRequestSuppressed: true,
     safeTrajectoryOwnedElsewhere: true,
     releaseModified: false
   });
