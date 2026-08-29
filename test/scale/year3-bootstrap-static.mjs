@@ -23,6 +23,7 @@ assert(Array.isArray(scale.core?.postMechanicScripts) && scale.core.postMechanic
 assert(loader.includes("postMechanicScripts"),"Loader não suporta camadas compartilhadas pós-mecânica.");
 assert(bubbleSmartMedia.includes('scope: "all-years"'),"Bubble smart media precisa ser cross-year.");
 assert(bubbleSmartMedia.includes("syntheticVisualDedupe: true"),"Bubble smart media deve preservar dedupe sintético estrutural.");
+assert(bubbleSmartMedia.includes("legacyYear2RendererRequestSuppressed: true"),"Bubble smart media deve impedir o carregamento do bridge Year 2 aposentado no scale-v1.");
 assert(bubbleSmartMedia.includes("releaseModified: false"),"Bubble smart media não pode alterar release.");
 assert(bubbleShared.includes('scope: "all-years"'),"Bubble safety precisa ser cross-year.");
 assert(bubbleShared.includes("visualBreathingRoom: true"),"Bubble safety deve proteger margem visual além do box.");
@@ -34,8 +35,8 @@ const smartContract="OFFICIAL_EXACT_ALIAS > OFFICIAL_LIBRARY > CONTROLLED_SEMANT
 assert(visualShared.includes(smartContract),"Contrato smart visual compartilhado ausente.");
 assert(scale.policy?.smartVisualContract===smartContract,"scale-v1 precisa declarar o mesmo contrato smart visual do resolver.");
 assert(scale.core.postMechanicScripts.find(x=>x.id==="duduq-shared-smart-visual-resolver-v1")?.release==="shared-1.1.0","scale-v1 precisa declarar smart visual shared-1.1.0.");
-assert(scale.core.postMechanicScripts.find(x=>x.id==="duduq-shared-bubble-smart-media-v1")?.release==="shared-1.0.0","scale-v1 precisa declarar Bubble smart media shared-1.0.0.");
-assert(scale.core.postMechanicScripts.find(x=>x.id==="duduq-shared-bubble-runtime-safety-v1")?.release==="shared-1.0.0","scale-v1 precisa declarar Bubble runtime safety shared-1.0.0.");
+assert(scale.core.postMechanicScripts.find(x=>x.id==="duduq-shared-bubble-smart-media-v1")?.release==="shared-1.0.1","scale-v1 precisa declarar Bubble smart media shared-1.0.1.");
+assert(scale.core.postMechanicScripts.find(x=>x.id==="duduq-shared-bubble-runtime-safety-v1")?.release==="shared-1.1.0","scale-v1 precisa declarar Bubble runtime safety shared-1.1.0.");
 assert(scale.core.postMechanicScripts.find(x=>x.id==="duduq-shared-host-completion-guard-v1")?.release==="shared-1.0.0","scale-v1 precisa declarar host completion guard shared-1.0.0.");
 for(const [id,entry] of Object.entries(canary.mechanics||{})){
   assert(scale.mechanics?.[id]?.release===entry.release,`scale-v1 divergiu da release Canary em ${id}.`);
