@@ -1,10 +1,10 @@
-/* DUDUQ English Year 3 — thin content factory v1.0.0
+/* DUDUQ English Year 3 — thin content factory v1.0.1
    CONTENT-only helper: maps source-approved item records into the universal DuduQ schema.
    It does not patch mechanics, layout, routing or feedback behavior.
 */
 (function () {
   "use strict";
-  const VERSION = "1.0.0";
+  const VERSION = "1.0.1";
   if (window.DuduQYear3Factory?.version === VERSION) return;
 
   function text(value, fallback = "") {
@@ -32,6 +32,7 @@
   }
 
   function baseQuestion(item, moduleSpec) {
+    const declaredMechanic = text(item.mechanic, "bubble-pop");
     return {
       id: item.id,
       subject: "english",
@@ -40,7 +41,7 @@
       skill: { code: null, description: item.skill },
       difficulty: difficulty(item.difficulty),
       statement: item.prompt,
-      instruction: item.instruction || (item.mechanic === "drag-drop" ? "Observe, ouça quando disponível e arraste a resposta correta." : item.mechanic === "target-shooter" ? "Ouça e toque na resposta correta." : "Ouça ou leia a situação e escolha a resposta correta."),
+      instruction: item.instruction || (declaredMechanic === "drag-drop" ? "Observe, ouça quando disponível e arraste a resposta correta." : declaredMechanic === "target-shooter" ? "Ouça e toque na resposta correta." : "Ouça ou leia a situação e escolha a resposta correta."),
       contentLanguage: "en",
       instructionLanguage: "pt-BR",
       feedbackLanguage: "pt-BR",
@@ -50,6 +51,11 @@
       feedback: {
         correct: "Muito bem!",
         incorrect: "Observe ou ouça novamente e tente outra vez."
+      },
+      delivery: {
+        mechanic: declaredMechanic,
+        preferred: [declaredMechanic],
+        blocked: []
       },
       metadata: {
         sourceStatus: item.status,
@@ -163,7 +169,8 @@
         sourceRevision: "Revisão Pedagógica Integral v2.2",
         scaleChannel: "scale-v1",
         thinContent: true,
-        yearSpecificMechanicPatch: false
+        yearSpecificMechanicPatch: false,
+        routingContract: "activity.mechanic === question.delivery.mechanic"
       },
       activities
     };
