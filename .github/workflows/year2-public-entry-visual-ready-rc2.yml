@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - "content/english/year-2/**"
+      - "engine/shared/bubble-pop-smart-media-v1.js"
+      - "engine/shared/bubble-pop-runtime-safety-v1.js"
+      - "engine/channels/scale-v1.json"
       - "test/year2/public-entry-visual-ready-rc2.mjs"
       - "test/year2/bubble-runtime-asset-bridge-diagnostic-rc3.mjs"
       - "test/year2/bubble-safe-trajectory-browser-rc1.mjs"
@@ -14,6 +17,9 @@ on:
       - "hotfix/year2-mechanics-regression"
     paths:
       - "content/english/year-2/**"
+      - "engine/shared/bubble-pop-smart-media-v1.js"
+      - "engine/shared/bubble-pop-runtime-safety-v1.js"
+      - "engine/channels/scale-v1.json"
       - "test/year2/public-entry-visual-ready-rc2.mjs"
       - "test/year2/bubble-runtime-asset-bridge-diagnostic-rc3.mjs"
       - "test/year2/bubble-safe-trajectory-browser-rc1.mjs"
@@ -39,8 +45,10 @@ jobs:
         with:
           node-version: 22
 
-      - name: Syntax check Year 2 Bubble safe bridge
-        run: node --check content/english/year-2/year2-v23-bubble-smart-renderer-bridge.js
+      - name: Syntax check shared Bubble layers
+        run: |
+          node --check engine/shared/bubble-pop-smart-media-v1.js
+          node --check engine/shared/bubble-pop-runtime-safety-v1.js
 
       - name: Syntax check M01 wide desktop bridge
         run: node --check content/english/year-2/module-01/m1-wide-desktop-v23.js
@@ -73,7 +81,7 @@ jobs:
           cat /tmp/duduq-year2-visual-ready-http.log
           exit 1
 
-      - name: Diagnose Bubble M02 asset bridge
+      - name: Diagnose Bubble M02 smart media
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year2/bubble-runtime-asset-bridge-diagnostic-rc3.mjs
