@@ -11,7 +11,7 @@
     window.DUDUQ_ENGINE_BASE = new URL("../../../..", location.href).href.replace(/\/$/, "");
     window.DUDUQ_GAME_CONFIG = Object.freeze({
       engineBase: window.DUDUQ_ENGINE_BASE,
-      channel: "canary-v1",
+      channel: "scale-v1",
       label: "DuduQ — English — Year 2 — Module 01 — v2.3 multimodal",
       modulePath: ["english","year2","module01v23multimodal"],
       contentScript: "./module-01-v23-multimodal.js?v=public-v23-1"
@@ -25,7 +25,8 @@
       existingAssetsPreferred: true,
       provisionalFallbackAllowed: false,
       ttsProvisional: true,
-      englishReadingRequired: false
+      englishReadingRequired: false,
+      sharedChannelPilot: true
     });
   </script>
   <script src="../year2-v22-homolog-core.js?v=public-v23-1"></script>
