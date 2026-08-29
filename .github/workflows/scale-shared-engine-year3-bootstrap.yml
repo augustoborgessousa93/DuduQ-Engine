@@ -20,6 +20,7 @@ jobs:
           node --check engine/duduq-loader-v1.js
           node --check engine/shared/bubble-pop-runtime-safety-v1.js
           node --check engine/shared/smart-visual-resolver-v1.js
+          node --check engine/shared/host-owned-completion-guard-v1.js
           node --check content/english/shared/scale-smart-visual-aliases-v1.js
           node --check content/english/shared/scale-content-compat-v1.js
           node --check content/english/year-3/year3-content-factory-v1.js
