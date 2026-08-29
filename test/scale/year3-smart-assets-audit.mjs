@@ -47,7 +47,7 @@ try{
     contract:window.DuduQSmartVisual?.contract||null,
     assetsVersion:window.DuduQAssets?.version||null
   }));
-  assert(runtime.resolverVersion==="1.0.0",`Smart resolver inesperado: ${runtime.resolverVersion}.`);
+  assert(runtime.resolverVersion==="1.1.0",`Smart resolver inesperado: ${runtime.resolverVersion}.`);
 
   const resolved=await page.evaluate(async(items)=>{
     const unique=new Map();
@@ -85,6 +85,7 @@ try{
       output.push({
         ...item,
         status:result?.status||"asset-gap",
+        kind:result?.kind||"gap",
         visualKey:result?.visualKey||`gap:${item.query}`,
         src,
         loadOk
@@ -103,20 +104,51 @@ try{
   const broken=resolved.filter(item=>item.src&&!item.loadOk);
   const semantic=resolved.filter(item=>item.status==="semantic-composition");
   const official=resolved.filter(item=>item.status==="official");
+  const degraded=resolved.filter(item=>
+    /\b(?:ducks?|cats?|rabbits?|turtles?|balls?|pencils?|cars?|bus(?:es)?|trucks?|planes?|trains?|eyes?|hands?|hair|nose)\b/i.test(item.query)
+    && (item.kind==="number"||item.kind==="color")
+  );
+
+  const mustCompose=[
+    "ball",
+    "three turtles",
+    "3 yellow ducks",
+    "7 white cats",
+    "2 brown rabbits",
+    "big blue pencil",
+    "green car",
+    "red and blue bus",
+    "big truck",
+    "nose",
+    "eyes",
+    "hair",
+    "two big hands",
+    "two green eyes",
+    "brown hair"
+  ];
+  const compositionFailures=mustCompose.map(query=>{
+    const item=resolved.find(entry=>entry.query===query);
+    return {query,id:item?.id||null,status:item?.status||null,kind:item?.kind||null,src:Boolean(item?.src)};
+  }).filter(item=>!item.src||item.status!=="semantic-composition"||item.kind!=="object-composition");
 
   console.log(JSON.stringify({
-    status:"AUDIT",
+    status:"GATE",
     runtime,
-    totals:{items:resolved.length,uniqueQueries:uniqueQueries.length,official:official.length,semantic:semantic.length,gaps:gaps.length,dragDropGaps:dragDropGaps.length,brokenResolvedAssets:broken.length},
+    totals:{items:resolved.length,uniqueQueries:uniqueQueries.length,official:official.length,semantic:semantic.length,gaps:gaps.length,dragDropGaps:dragDropGaps.length,brokenResolvedAssets:broken.length,degraded:degraded.length,compositionFailures:compositionFailures.length},
     counts,
     dragDropGaps:dragDropGaps.map(({module,id,query,media,format})=>({module,id,query,media,format})),
     allGaps:gaps.map(({module,id,mechanic,query})=>({module,id,mechanic,query})),
-    semantic:semantic.map(({module,id,mechanic,query,visualKey})=>({module,id,mechanic,query,visualKey})),
+    degraded:degraded.map(({module,id,query,kind,visualKey})=>({module,id,query,kind,visualKey})),
+    compositionFailures,
     broken:broken.map(({module,id,query,src})=>({module,id,query,src}))
   },null,2));
 
   assert(broken.length===0,`Resolver retornou ${broken.length} asset(s) que não carregam.`);
-  console.log(`PASS — auditoria executada em ${resolved.length} itens / ${uniqueQueries.length} consultas únicas; gaps são reportados para correção compartilhada.`);
+  assert(degraded.length===0,`Resolver degradou ${degraded.length} conceito(s) composto(s) para número/cor.`);
+  assert(compositionFailures.length===0,`Falharam ${compositionFailures.length} composições semânticas obrigatórias.`);
+  assert(dragDropGaps.length===0,`Persistem ${dragDropGaps.length} gap(s) em Drag & Drop.`);
+  assert(gaps.length===0,`Persistem ${gaps.length} gap(s) visuais no Year 3.`);
+  console.log(`PASS — Year3 smart assets: ${resolved.length}/90 itens, ${uniqueQueries.length} consultas únicas, zero gaps, zero assets quebrados e zero degradações semânticas.`);
 }finally{
   await browser.close();
 }
