@@ -1,0 +1,31 @@
+name: Year 2 Smart Assets Official First RC1
+
+on:
+  pull_request:
+    paths:
+      - 'content/english/year-2/**'
+      - 'test/year2/smart-assets-official-first-rc1.mjs'
+      - '.github/workflows/year2-smart-assets-official-first-rc1.yml'
+  workflow_dispatch:
+
+jobs:
+  smart-assets-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax check smart visual bridge
+        run: node --check content/english/year-2/year2-v23-final-root-bridge.js
+
+      - name: Syntax check smart assets test
+        run: node --check test/year2/smart-assets-official-first-rc1.mjs
+
+      - name: Enforce official-first semantic resolution
+        run: node test/year2/smart-assets-official-first-rc1.mjs
