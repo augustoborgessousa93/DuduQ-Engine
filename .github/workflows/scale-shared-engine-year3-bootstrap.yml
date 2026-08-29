@@ -25,12 +25,15 @@ jobs:
             node --check "content/english/year-3/module-${module}/module-${module}-v1.js"
           done
           node --check test/scale/year3-bootstrap-static.mjs
+          node --check test/scale/year3-v23-multimodal-contract.mjs
           node --check test/scale/year3-m02-frame-diagnostic.mjs
           node --check test/scale/year3-all-modules-smoke.mjs
           node --check test/scale/year3-smart-assets-audit.mjs
           node --check test/scale/year3-smart-assets-visual-proof.mjs
       - name: Guard Canary and Year 3 90-item thin-content contract
         run: node test/scale/year3-bootstrap-static.mjs
+      - name: Guard Year 3 multimodal v2.3 source contract
+        run: node test/scale/year3-v23-multimodal-contract.mjs
 
   browser-checkpoint:
     runs-on: ubuntu-latest
