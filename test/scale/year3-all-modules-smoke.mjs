@@ -31,6 +31,7 @@ try{
         sharedVisual:window.DuduQSmartVisual?.version||null,
         sharedBubble:window.__DUDUQ_SHARED_BUBBLE_RUNTIME_SAFETY__?.version||null,
         moduleItems:window.DUDUQ_CONTENT?.english?.year3?.[`module${String(moduleNumber).padStart(2,"0")}`]?.activities?.length||0,
+        introActive:Boolean(window.DuduQIntro?.isActive?.()),
         rootText:(document.querySelector("#root")?.textContent||"").trim().slice(0,1200),
         bodyText:(document.body?.innerText||"").trim().slice(0,1200)
       }),moduleNumber);
@@ -41,6 +42,15 @@ try{
       assert(state.sharedVisual==="1.0.0",`${viewport.name} M${mm(moduleNumber)}: smart visual compartilhado não carregou.`);
       assert(state.sharedBubble==="1.0.0",`${viewport.name} M${mm(moduleNumber)}: Bubble safety compartilhado não carregou.`);
       assert(state.moduleItems===15,`${viewport.name} M${mm(moduleNumber)}: módulo não publicou 15 atividades.`);
+      assert(state.introActive,`${viewport.name} M${mm(moduleNumber)}: Intro não ficou ativa antes da missão.`);
+
+      const startButton=page.locator(".duduq-intro-start-button");
+      await startButton.waitFor({state:"visible",timeout:15000});
+      await page.waitForFunction(()=>{
+        const button=document.querySelector(".duduq-intro-start-button");
+        return Boolean(button && !button.disabled && button.getAttribute("aria-disabled")!=="true");
+      },null,{timeout:15000});
+      await startButton.click();
 
       await page.waitForFunction(()=>{
         const root=(document.querySelector("#root")?.textContent||"").trim();
@@ -54,13 +64,14 @@ try{
         moduleItems:window.DUDUQ_CONTENT?.english?.year3?.[`module${String(moduleNumber).padStart(2,"0")}`]?.activities?.length||0,
         frameSrc:document.querySelector("#root iframe")?.getAttribute("src")||document.querySelector("#root iframe")?.getAttribute("srcdoc")?.slice(0,40)||"",
         rootText:(document.querySelector("#root")?.textContent||"").trim().slice(0,1200),
-        bodyText:(document.body?.innerText||"").trim().slice(0,1200)
+        bodyText:(document.body?.innerText||"").trim().slice(0,1200),
+        introStillActive:Boolean(window.DuduQIntro?.isActive?.())
       }),moduleNumber);
 
       assert(!/^Erro:/i.test(state.rootText)&&!/^Erro ao carregar/i.test(state.rootText),`${viewport.name} M${mm(moduleNumber)}: Player/Loader exibiu erro: ${state.rootText}. console=${errors.join(" | ")}`);
-      assert(state.frameSrc,`${viewport.name} M${mm(moduleNumber)}: nenhuma mecânica abriu no iframe. root=${state.rootText} console=${errors.join(" | ")}`);
+      assert(state.frameSrc,`${viewport.name} M${mm(moduleNumber)}: nenhuma mecânica abriu após INICIAR MISSÃO. root=${state.rootText} console=${errors.join(" | ")}`);
       assert(localNetwork.length===0,`${viewport.name} M${mm(moduleNumber)}: falhas locais de rede: ${localNetwork.join(" | ")}`);
-      const critical=errors.filter(e=>!/favicon|google fonts|ERR_BLOCKED_BY_CLIENT/i.test(e));
+      const critical=errors.filter(e=>!/favicon|google fonts|ERR_BLOCKED_BY_CLIENT|Failed to load resource.*raw\.githubusercontent\.com/i.test(e));
       assert(critical.length===0,`${viewport.name} M${mm(moduleNumber)}: erros críticos: ${critical.join(" | ")}`);
 
       results.push({viewport:viewport.name,module:moduleNumber,items:state.moduleItems,frame:true});
@@ -69,5 +80,5 @@ try{
     }
   }
   assert(results.length===12,`Smoke deveria validar 12 combinações; recebeu ${results.length}.`);
-  console.log("PASS — Year3 M01-M06 abrem no scale-v1 em desktop/mobile com 15 atividades por módulo.");
+  console.log("PASS — Year3 M01-M06 percorrem Intro e abrem a primeira mecânica no scale-v1 em desktop/mobile.");
 }finally{await browser.close();}
