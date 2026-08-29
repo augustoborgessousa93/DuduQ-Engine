@@ -1,4 +1,4 @@
-name: Scale Shared Engine + Year 3 Bootstrap
+name: Scale Shared Engine + Years 3-4 Bootstrap
 
 on:
   pull_request:
@@ -15,14 +15,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Syntax shared layers and Year 3 modules
+      - name: Syntax shared layers and Years 3-4 modules
         run: |
           node --check engine/duduq-loader-v1.js
           node --check engine/shared/bubble-pop-runtime-safety-v1.js
           node --check engine/shared/smart-visual-resolver-v1.js
+          node --check content/english/shared/scale-smart-visual-aliases-v1.js
+          node --check content/english/shared/scale-content-compat-v1.js
           node --check content/english/year-3/year3-content-factory-v1.js
           for module in 01 02 03 04 05 06; do
             node --check "content/english/year-3/module-${module}/module-${module}-v1.js"
+          done
+          node --check content/english/year-4/year4-content-factory-v1.js
+          for module in 01 02 03 04 05 06; do
+            node --check "content/english/year-4/module-${module}/module-${module}-v1.js"
           done
           node --check test/scale/year3-bootstrap-static.mjs
           node --check test/scale/year3-v23-multimodal-contract.mjs
@@ -30,10 +36,14 @@ jobs:
           node --check test/scale/year3-all-modules-smoke.mjs
           node --check test/scale/year3-smart-assets-audit.mjs
           node --check test/scale/year3-smart-assets-visual-proof.mjs
+          node --check test/scale/year4-v23-functional-reading-contract.mjs
+          node --check test/scale/year4-all-modules-smoke.mjs
       - name: Guard Canary and Year 3 90-item thin-content contract
         run: node test/scale/year3-bootstrap-static.mjs
       - name: Guard Year 3 multimodal v2.3 source contract
         run: node test/scale/year3-v23-multimodal-contract.mjs
+      - name: Guard Year 4 functional-reading v2.3 source contract
+        run: node test/scale/year4-v23-functional-reading-contract.mjs
 
   browser-checkpoint:
     runs-on: ubuntu-latest
@@ -74,6 +84,10 @@ jobs:
           BASE_URL: http://127.0.0.1:4173
           OUT_DIR: test-results/year3-smart-assets-visual-proof
         run: node test/scale/year3-smart-assets-visual-proof.mjs
+      - name: Smoke Year 4 M01-M06 desktop and mobile
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/scale/year4-all-modules-smoke.mjs
       - name: Upload Year 3 smart asset visual proof
         if: always()
         uses: actions/upload-artifact@v4
