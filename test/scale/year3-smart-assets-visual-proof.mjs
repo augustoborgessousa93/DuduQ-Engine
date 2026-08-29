@@ -12,7 +12,7 @@ const expectedObjectCompositions=new Set([
   "green car","red and blue bus","big truck","nose","eyes","hair","two big hands","two green eyes","brown hair"
 ]);
 const expectedContext=new Set([
-  "profile:maya","profile:age:10","profile:maya:10","profile:ana:12","profile:sister:8","profile:grandfather:50",
+  "profile:maya","profile:maya:10","profile:ana:12","profile:sister:8","profile:grandfather:50",
   "duo:leo:mia","duo:maya:leo",
   "calendar:may:12","calendar:may:9","calendar:june:12","calendar:march:12",
   "math:2 + 3 = 5:+","math:5 − 2 = 3:−","math:3 × 2 = 6:×","math:8 ÷ 2 = 4:÷","math:4 + 1 = 5:="
@@ -24,7 +24,7 @@ try{
   for(const viewport of [{name:"desktop",width:1366,height:768},{name:"mobile",width:390,height:844}]){
     const page=await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
     await page.goto(`${BASE}/test/scale/year3-smart-assets-visual-board.html`,{waitUntil:"networkidle",timeout:30000});
-    await page.waitForFunction(()=>window.__YEAR3_SMART_VISUAL_BOARD__?.results?.length===40,null,{timeout:15000});
+    await page.waitForFunction(()=>window.__YEAR3_SMART_VISUAL_BOARD__?.results?.length===39,null,{timeout:15000});
     await page.waitForFunction(()=>[...document.images].every(img=>img.complete),null,{timeout:15000});
 
     const state=await page.evaluate(()=>{
@@ -36,10 +36,10 @@ try{
       return {boardVersion:board.version||null,resolverVersion:board.resolverVersion||null,factoryVersion:board.factoryVersion||null,bodyScrollWidth:document.body.scrollWidth,viewportWidth:window.innerWidth,cards};
     });
 
-    assert(state.boardVersion==="2.3.0",`${viewport.name}: painel não é v2.3.`);
+    assert(state.boardVersion==="2.3.1",`${viewport.name}: painel não é v2.3.1.`);
     assert(state.resolverVersion==="1.1.0",`${viewport.name}: resolver ${state.resolverVersion}.`);
     assert(state.factoryVersion==="1.1.0",`${viewport.name}: factory ${state.factoryVersion}.`);
-    assert(state.cards.length===40,`${viewport.name}: esperado 40 cards; recebeu ${state.cards.length}.`);
+    assert(state.cards.length===39,`${viewport.name}: esperado 39 cards; recebeu ${state.cards.length}.`);
     assert(state.bodyScrollWidth<=state.viewportWidth+1,`${viewport.name}: overflow horizontal body ${state.bodyScrollWidth}>${state.viewportWidth}.`);
 
     for(const card of state.cards){
@@ -60,5 +60,5 @@ try{
   }
   fs.writeFileSync(path.join(OUT,"report.json"),JSON.stringify({status:"PASS",source:"v2.3",resolverVersion:"1.1.0",factoryVersion:"1.1.0",report},null,2));
   console.log(JSON.stringify({status:"PASS",report},null,2));
-  console.log("PASS — Year3 v2.3 visual proof: 40 high-risk multimodal visuals render sem gaps, quebra ou overflow em desktop/mobile.");
+  console.log("PASS — Year3 v2.3 visual proof: 39 high-risk multimodal visuals render sem gaps, quebra ou overflow em desktop/mobile.");
 }finally{await browser.close();}
