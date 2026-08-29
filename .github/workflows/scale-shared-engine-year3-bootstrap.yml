@@ -1,4 +1,4 @@
-name: Scale Shared Engine + Years 3-5 Bootstrap
+name: Scale Shared Engine + Years 1-5 Baseline
 
 on:
   pull_request:
@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Syntax shared layers and Years 3-5 modules
+      - name: Syntax shared layers and Years 1-5 gates
         run: |
           node --check engine/duduq-loader-v1.js
           node --check engine/shared/bubble-pop-runtime-safety-v1.js
@@ -34,6 +34,8 @@ jobs:
           for module in 01 02 03 04 05 06; do
             node --check "content/english/year-5/module-${module}/module-${module}-v1.js"
           done
+          node --check test/scale/cross-year-architecture-audit.mjs
+          node --check test/scale/year1-year2-baseline-smoke.mjs
           node --check test/scale/year3-bootstrap-static.mjs
           node --check test/scale/year3-v23-multimodal-contract.mjs
           node --check test/scale/year3-m02-frame-diagnostic.mjs
@@ -44,6 +46,8 @@ jobs:
           node --check test/scale/year4-all-modules-smoke.mjs
           node --check test/scale/year5-v23-integrated-functional-contract.mjs
           node --check test/scale/year5-all-modules-smoke.mjs
+      - name: Audit Years 1-5 architecture baseline
+        run: node test/scale/cross-year-architecture-audit.mjs
       - name: Guard Canary and Year 3 90-item thin-content contract
         run: node test/scale/year3-bootstrap-static.mjs
       - name: Guard Year 3 multimodal v2.3 source contract
@@ -75,6 +79,10 @@ jobs:
           done
           cat /tmp/duduq-scale-http.log
           exit 1
+      - name: Baseline Year 1-2 M01-M06 desktop and mobile
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/scale/year1-year2-baseline-smoke.mjs
       - name: Diagnose Year 3 M02 final Drag Drop frame
         env:
           BASE_URL: http://127.0.0.1:4173
