@@ -28,11 +28,11 @@
   <script>
     (() => {
       const queries = [
-        "profile:maya","profile:age:10","profile:maya:10","profile:ana:12","profile:sister:8","profile:grandfather:50",
+        "profile:maya","profile:maya:10","profile:ana:12","profile:sister:8","profile:grandfather:50",
         "duo:leo:mia","duo:maya:leo",
         "calendar:may:12","calendar:may:9","calendar:june:12","calendar:march:12",
         "math:2 + 3 = 5:+","math:5 − 2 = 3:−","math:3 × 2 = 6:×","math:8 ÷ 2 = 4:÷","math:4 + 1 = 5:=",
-        "ball","three turtles","3 yellow ducks","7 white cats","2 brown rabbits","big blue pencil",
+        "10","ball","three turtles","3 yellow ducks","7 white cats","2 brown rabbits","big blue pencil",
         "one red circle","6 blue rectangles","3 small circles","2 big triangles","2 yellow stars","4 green squares","7 red squares",
         "green car","red and blue bus","big truck","hands","nose","eyes","hair","two big hands","two green eyes","brown hair"
       ];
@@ -42,20 +42,14 @@
         const resolved=window.DuduQYear3Factory?.resolveVisual?.(query)||null;
         const card=document.createElement("article");
         card.className="qa-card"+(resolved?.src?"":" gap");
-        card.dataset.query=query;
-        card.dataset.status=resolved?.status||"asset-gap";
-        card.dataset.kind=resolved?.kind||"context";
+        card.dataset.query=query;card.dataset.status=resolved?.status||"asset-gap";card.dataset.kind=resolved?.kind||"context";
         const media=document.createElement("div");media.className="qa-media";
-        if(resolved?.src){
-          const img=document.createElement("img");img.src=resolved.src;img.alt=query;img.loading="eager";img.decoding="sync";
-          img.addEventListener("error",()=>card.classList.add("broken"));media.appendChild(img);
-        }
+        if(resolved?.src){const img=document.createElement("img");img.src=resolved.src;img.alt=query;img.loading="eager";img.decoding="sync";img.addEventListener("error",()=>card.classList.add("broken"));media.appendChild(img);}
         const title=document.createElement("div");title.className="qa-query";title.textContent=query;
         const meta=document.createElement("div");meta.className="qa-meta";meta.textContent=`${resolved?.status||"asset-gap"} • ${resolved?.kind||"context"}`;
-        card.append(media,title,meta);board.appendChild(card);
-        results.push({query,status:resolved?.status||"asset-gap",kind:resolved?.kind||"context",src:resolved?.src||null});
+        card.append(media,title,meta);board.appendChild(card);results.push({query,status:resolved?.status||"asset-gap",kind:resolved?.kind||"context",src:resolved?.src||null});
       }
-      window.__YEAR3_SMART_VISUAL_BOARD__={version:"2.3.0",resolverVersion:window.DuduQSmartVisual?.version||null,factoryVersion:window.DuduQYear3Factory?.version||null,results};
+      window.__YEAR3_SMART_VISUAL_BOARD__={version:"2.3.1",resolverVersion:window.DuduQSmartVisual?.version||null,factoryVersion:window.DuduQYear3Factory?.version||null,results};
     })();
   </script>
 </body>
