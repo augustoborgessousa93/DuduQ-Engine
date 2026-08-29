@@ -15,20 +15,36 @@ const reports=[];
 async function inspect(name,viewport){
   const page=await browser.newPage({viewport});
   page.setDefaultTimeout(30_000);
+  await page.emulateMedia({reducedMotion:"reduce"});
   try{
     await page.goto(URL,{waitUntil:"domcontentloaded"});
     await page.waitForFunction(()=>Boolean(window.DUDUQ_ENGINE_READY===true&&window.DuduQIntro?.isActive?.()));
-    const logo=page.locator(".duduq-intro-collection-logo");
-    await logo.waitFor({state:"visible"});
+
+    // A auditoria precisa medir o layout estabilizado. Sem isto, o bounding box
+    // captura os scales intermediários do keyframe (ex.: 445px × .58 = 258.1px)
+    // e produz um falso diagnóstico de logo pequena.
     await page.waitForFunction(()=>{
-      const img=document.querySelector(".duduq-intro-collection-logo");
-      return Boolean(img?.complete&&img.naturalWidth>0&&img.naturalHeight>0);
-    });
+      const root=document.querySelector(".duduq-intro");
+      const button=document.querySelector(".duduq-intro-start-button");
+      const logo=document.querySelector(".duduq-intro-collection-logo");
+      return Boolean(
+        root?.classList.contains("is-mission") &&
+        root?.classList.contains("is-ready") &&
+        logo?.complete && logo.naturalWidth>0 && logo.naturalHeight>0 &&
+        button && getComputedStyle(button).visibility!=="hidden"
+      );
+    },null,{timeout:30_000});
+
+    await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
 
     const state=await page.evaluate(async()=>{
+      const root=document.querySelector(".duduq-intro");
       const logo=document.querySelector(".duduq-intro-collection-logo");
       const collection=document.querySelector(".duduq-intro-collection");
       const stage=document.querySelector(".duduq-intro-stage");
+      const meta=document.querySelector(".duduq-intro-meta");
+      const loading=document.querySelector(".duduq-intro-loading");
+      const actions=document.querySelector(".duduq-intro-actions");
       const start=document.querySelector(".duduq-intro-start-button");
       const rect=(node)=>{
         if(!node)return null;
@@ -38,7 +54,12 @@ async function inspect(name,viewport){
       const logoRect=rect(logo);
       const collectionRect=rect(collection);
       const stageRect=rect(stage);
+      const metaRect=rect(meta);
+      const loadingRect=rect(loading);
+      const actionsRect=rect(actions);
       const startRect=rect(start);
+      const logoStyle=logo?getComputedStyle(logo):null;
+      const collectionStyle=collection?getComputedStyle(collection):null;
       let alpha=null;
       let alphaError="";
       try{
@@ -90,16 +111,28 @@ async function inspect(name,viewport){
       }
       return {
         viewport:{width:innerWidth,height:innerHeight},
+        phase:root?.getAttribute("data-duduq-intro-phase")||"",
+        ready:Boolean(root?.classList.contains("is-ready")),
+        reducedMotion:matchMedia("(prefers-reduced-motion: reduce)").matches,
         src:logo?.currentSrc||logo?.src||"",
         natural:{width:logo?.naturalWidth||0,height:logo?.naturalHeight||0},
-        logoRect,collectionRect,stageRect,startRect,
+        logoRect,collectionRect,stageRect,metaRect,loadingRect,actionsRect,startRect,
+        logoComputed:{height:logoStyle?.height||null,width:logoStyle?.width||null,transform:logoStyle?.transform||null,opacity:logoStyle?.opacity||null},
+        collectionComputed:{minHeight:collectionStyle?.minHeight||null,height:collectionStyle?.height||null,marginTop:collectionStyle?.marginTop||null,marginBottom:collectionStyle?.marginBottom||null},
         alpha,alphaError,
         collectionUnusedBelowLogo:collectionRect&&logoRect?collectionRect.bottom-logoRect.bottom:null,
         stageTopGap:stageRect&&collectionRect?collectionRect.top-stageRect.top:null,
-        gapLogoToStart:logoRect&&startRect?startRect.top-logoRect.bottom:null
+        gapLogoToMeta:logoRect&&metaRect?metaRect.top-logoRect.bottom:null,
+        gapMetaToLoading:metaRect&&loadingRect?loadingRect.top-metaRect.bottom:null,
+        gapLoadingToActions:loadingRect&&actionsRect?actionsRect.top-loadingRect.bottom:null,
+        gapLogoToStart:logoRect&&startRect?startRect.top-logoRect.bottom:null,
+        occupiedFromCollectionToActions:collectionRect&&actionsRect?actionsRect.bottom-collectionRect.top:null
       };
     });
 
+    assert(state.phase==="mission"&&state.ready,`${name}: Intro não estabilizou em mission/ready.`);
+    assert(state.reducedMotion,`${name}: auditoria precisa de reduced-motion para geometria determinística.`);
+    assert(state.logoComputed.transform==="none",`${name}: logo ainda possui transform durante a medição (${state.logoComputed.transform}).`);
     assert(state.natural.width>0&&state.natural.height>0,`${name}: logo oficial não carregou.`);
     assert(state.logoRect?.width>100&&state.logoRect?.height>100,`${name}: elemento da logo está pequeno/invisível.`);
     reports.push({name,viewport,state});
@@ -115,7 +148,7 @@ try{
   await inspect("fullscreen-1920x1080",{width:1920,height:1080});
   await inspect("mobile-390x844",{width:390,height:844});
   await fs.writeFile(path.join(OUT_DIR,"report.json"),JSON.stringify({status:"PASS",reports},null,2));
-  console.log("PASS — Intro logo/layout audit captured DOM geometry and PNG alpha bounds.");
+  console.log("PASS — Intro audit captured final mission/ready geometry with animation transforms neutralized.");
 }finally{
   await browser.close();
 }
