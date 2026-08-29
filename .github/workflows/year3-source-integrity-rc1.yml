@@ -1,0 +1,42 @@
+name: Year 3 Source Integrity RC1
+
+on:
+  push:
+    branches:
+      - 'scale/**'
+    paths:
+      - 'content/english/year-3/module-*/module-*-source-v22.js'
+      - 'test/year3/year3-source-integrity-rc1.mjs'
+      - '.github/workflows/year3-source-integrity-rc1.yml'
+  pull_request:
+    paths:
+      - 'content/english/year-3/module-*/module-*-source-v22.js'
+      - 'test/year3/year3-source-integrity-rc1.mjs'
+      - '.github/workflows/year3-source-integrity-rc1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-integrity:
+    name: Official 90-item source contract
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax check Year 3 source modules
+        run: |
+          for file in content/english/year-3/module-*/module-*-source-v22.js; do
+            echo "Checking $file"
+            node --check "$file"
+          done
+
+      - name: Validate 90 IDs, answers and source order
+        run: node test/year3/year3-source-integrity-rc1.mjs
