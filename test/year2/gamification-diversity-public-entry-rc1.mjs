@@ -74,7 +74,41 @@ async function waitForPublicModule(page, module) {
     { timeout: 30_000 }
   );
 
-  await page.locator("#root iframe").first().waitFor({ state: "attached", timeout: 20_000 });
+  const iframe = page.locator("#root iframe").first();
+  await iframe.waitFor({ state: "attached", timeout: 20_000 });
+
+  // O conteúdo interno pode estar pronto antes do Host terminar a transição.
+  // Só avançamos quando o iframe está realmente exposto na tela pública.
+  await page.waitForFunction(() => {
+    const iframeNode = document.querySelector("#root iframe");
+    if (!(iframeNode instanceof HTMLIFrameElement)) return false;
+
+    const rect = iframeNode.getBoundingClientRect();
+    if (rect.width <= 20 || rect.height <= 20) return false;
+    if (rect.bottom <= 0 || rect.right <= 0 ||
+        rect.top >= window.innerHeight || rect.left >= window.innerWidth) return false;
+
+    let node = iframeNode;
+    while (node instanceof Element) {
+      const style = getComputedStyle(node);
+      const opacity = Number.parseFloat(style.opacity || "1");
+      if (
+        style.display === "none" ||
+        style.visibility === "hidden" ||
+        !Number.isFinite(opacity) ||
+        opacity <= 0.01
+      ) {
+        return false;
+      }
+      node = node.parentElement;
+    }
+
+    const x = Math.min(window.innerWidth - 1, Math.max(0, rect.left + rect.width / 2));
+    const y = Math.min(window.innerHeight - 1, Math.max(0, rect.top + rect.height / 2));
+    return document.elementFromPoint(x, y) === iframeNode;
+  }, null, { timeout: 30_000 });
+
+  await page.waitForTimeout(180);
 }
 
 async function inspectPublicModule(page, module) {
