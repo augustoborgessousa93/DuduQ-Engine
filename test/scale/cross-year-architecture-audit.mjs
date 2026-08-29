@@ -30,7 +30,7 @@ const report={
   intent:"cross-year shared-mechanics migration readiness",
   years:{},
   global:{modules:0,indexes:0,localStructuralCandidates:0},
-  invariants:{scalePromotionDisabled:false}
+  invariants:{scalePromotionDisabled:false,sharedHostCompletionGuard:false}
 };
 
 for(let year=1;year<=5;year+=1){
@@ -56,6 +56,7 @@ for(let year=1;year<=5;year+=1){
     const inlineHostBootstrap=/DuduQ\.start\s*\(\s*\{/m.test(index);
     const sharedAliases=/scale-smart-visual-aliases-v1\.js/.test(index);
     const sharedCompat=/scale-content-compat-v1\.js/.test(index);
+    const localCompletionGuard=/year2-v23-internal-completion-guard\.js/.test(index);
     const localCandidates=moduleFiles.filter(file=>file.endsWith(".js")&&patchName.test(path.basename(file))).map(file=>path.basename(file));
     const mechanics=Array.from(new Set([...mechanicsFrom(index),...mechanicsFrom(jsSource)]));
 
@@ -68,6 +69,7 @@ for(let year=1;year<=5;year+=1){
       inlineHostBootstrap,
       sharedAliases,
       sharedCompat,
+      localCompletionGuard,
       mechanics,
       jsFiles:moduleFiles.filter(file=>file.endsWith(".js")).length,
       localStructuralCandidates:localCandidates
@@ -79,11 +81,13 @@ for(let year=1;year<=5;year+=1){
   const channels=Array.from(new Set(moduleReport.map(item=>item.channel)));
   const directCoreModules=moduleReport.filter(item=>item.directCore).map(item=>item.module);
   const sharedModules=moduleReport.filter(item=>item.sharedAliases&&item.sharedCompat).map(item=>item.module);
+  const localCompletionGuardModules=moduleReport.filter(item=>item.localCompletionGuard).map(item=>item.module);
   report.years[year]={
     modules:6,
     channels,
     directCoreModules,
     sharedModules,
+    localCompletionGuardModules,
     localStructuralCandidateCount:candidateFiles.length,
     localStructuralCandidates:candidateFiles.map(file=>file.replace(`${yearDir}/`,"")),
     mechanics:Array.from(new Set(moduleReport.flatMap(item=>item.mechanics))),
@@ -93,15 +97,21 @@ for(let year=1;year<=5;year+=1){
 }
 
 const scale=JSON.parse(read("engine/channels/scale-v1.json"));
+const postMechanicScripts=Array.isArray(scale?.core?.postMechanicScripts)?scale.core.postMechanicScripts:[];
 report.invariants.scalePromotionDisabled=scale?.policy?.productionPromotionAllowed===false;
 report.invariants.scaleReleasesImmutable=scale?.policy?.releasesImmutable===true;
 report.invariants.scaleChannel=scale?.channel||"";
 report.invariants.scaleRevision=scale?.revision??null;
+report.invariants.sharedHostCompletionGuard=postMechanicScripts.some(layer=>
+  layer?.id==="duduq-shared-host-completion-guard-v1"&&
+  layer?.src==="/engine/shared/host-owned-completion-guard-v1.js"
+);
 
 assert(report.global.modules===30,"Esperados 30 módulos entre Years 1–5.");
 assert(report.global.indexes===30,"Esperados 30 public entries entre Years 1–5.");
 assert(report.invariants.scalePromotionDisabled,"scale-v1 não pode promover produção nesta fase.");
 assert(report.invariants.scaleReleasesImmutable,"scale-v1 deve manter releases imutáveis durante a consolidação cross-year.");
+assert(report.invariants.sharedHostCompletionGuard,"scale-v1 deve fornecer o completion guard compartilhado da Engine.");
 
 for(const year of [1,2,3,4,5]){
   const data=report.years[year];
@@ -120,14 +130,15 @@ for(const year of [1,3,4,5]){
   assert(report.years[year].sharedModules.length===6,`Year ${year}: todos os módulos devem carregar aliases/compat compartilhados.`);
 }
 
+assert(report.years[2].localCompletionGuardModules.length===0,"Year 2: nenhum módulo pode voltar a carregar year2-v23-internal-completion-guard.js; a responsabilidade agora é da Engine compartilhada.");
 assert(report.years[2].localStructuralCandidateCount>0,"Year 2: limpeza dos bridges locais ainda deve permanecer visível na auditoria até a migração estrutural terminar.");
 
 report.recommendation={
   phase1:"COMPLETED — all 30 modules route through universal Player/Loader on scale-v1",
-  phase2:"reduce Year2 local structural bridges one proven responsibility at a time",
+  phase2:"IN PROGRESS — Year2 local completion guard migrated to shared Engine; continue reducing one proven structural bridge at a time",
   phase3:"move reusable mechanic behavior into shared scale layers while preserving pedagogical exceptions",
   phase4:"apply mechanic/responsive/audio/smart-image fixes once across Years 1–5"
 };
 
 console.log(JSON.stringify(report,null,2));
-console.log("PASS — Years 1–5 estão travados no scale-v1; Year2 mantém apenas sua limpeza progressiva de bridges locais.");
+console.log("PASS — Years 1–5 estão travados no scale-v1; Year2 usa o completion guard compartilhado e mantém apenas a limpeza progressiva dos demais bridges locais.");
