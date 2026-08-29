@@ -19,7 +19,7 @@
   }
   if (factory.__finalRootBridgeApplied) return;
 
-  const VERSION = "1.1.0-year2-smart-visual-root";
+  const VERSION = "1.1.1-year2-smart-visual-root";
   const originalBuild = factory.buildModule.bind(factory);
   const upstreamResolve = typeof factory.resolveYear2Visual === "function"
     ? factory.resolveYear2Visual.bind(factory)
@@ -229,7 +229,8 @@
     }
 
     // For descriptive phrases without an exact composite asset, preserve the
-    // semantic object. This deliberately avoids returning a standalone color card.
+    // semantic object. If color/attributes are not visually encoded, keep the
+    // original visualKey so Matching cannot treat the same bitmap as two variants.
     if (upstreamResolve) {
       const objectVisual = upstreamResolve(object.canonical);
       if (objectVisual?.src) {
@@ -238,7 +239,7 @@
           status: objectVisual.status === "repository-asset"
             ? "repository-asset-object-context"
             : String(objectVisual.status || "semantic-object-context"),
-          visualKey: `${objectVisual.visualKey || objectVisual.src}:context:${key}`,
+          visualKey: String(objectVisual.visualKey || objectVisual.src),
           canonical: key
         };
       }
