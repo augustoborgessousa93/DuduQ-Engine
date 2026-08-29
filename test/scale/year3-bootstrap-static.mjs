@@ -10,22 +10,18 @@ const scale=JSON.parse(read("engine/channels/scale-v1.json"));
 const loader=read("engine/duduq-loader-v1.js");
 const bubbleShared=read("engine/shared/bubble-pop-runtime-safety-v1.js");
 const visualShared=read("engine/shared/smart-visual-resolver-v1.js");
-const frameSyncShared=read("engine/shared/runtime-frame-sync-v1.js");
 const factorySource=read("content/english/year-3/year3-content-factory-v1.js");
 
 assert(canary.revision===143,"Canary precisa permanecer R143.");
 assert(!canary.core?.postMechanicScripts,"Canary não deve receber camadas experimentais de scale.");
 assert(scale.channel==="scale-v1","Canal de escala ausente.");
-assert(scale.revision===3,"scale-v1 precisa estar na revisão 3 do checkpoint compartilhado.");
+assert(scale.revision===2,"scale-v1 precisa permanecer na revisão 2 enquanto as camadas compartilhadas são experimentais.");
 assert(scale.policy?.productionPromotionAllowed===false,"scale-v1 não pode permitir promoção para produção.");
-assert(Array.isArray(scale.core?.postMechanicScripts) && scale.core.postMechanicScripts.length===3,"scale-v1 deve carregar as três camadas compartilhadas.");
-assert(scale.core.postMechanicScripts.some(x=>x.src==="/engine/shared/runtime-frame-sync-v1.js"),"scale-v1 precisa carregar runtime-frame-sync compartilhado.");
+assert(Array.isArray(scale.core?.postMechanicScripts) && scale.core.postMechanicScripts.length===2,"scale-v1 deve carregar somente as duas camadas compartilhadas comprovadas.");
 assert(loader.includes("postMechanicScripts"),"Loader não suporta camadas compartilhadas pós-mecânica.");
 assert(bubbleShared.includes('scope: "all-years"'),"Bubble safety precisa ser cross-year.");
 assert(bubbleShared.includes("releaseModified: false"),"Bubble safety não pode alterar release.");
 assert(visualShared.includes("OFFICIAL_EXACT_ALIAS > CONTROLLED_SEMANTIC > EXPLICIT_GAP"),"Contrato smart visual compartilhado ausente.");
-assert(frameSyncShared.includes('scope:"all-years-all-mechanics"'),"Frame sync precisa ser cross-year/cross-mechanic.");
-assert(frameSyncShared.includes("releaseModified:false"),"Frame sync não pode alterar release de mecânica.");
 for(const [id,entry] of Object.entries(canary.mechanics||{})){
   assert(scale.mechanics?.[id]?.release===entry.release,`scale-v1 divergiu da release Canary em ${id}.`);
 }
