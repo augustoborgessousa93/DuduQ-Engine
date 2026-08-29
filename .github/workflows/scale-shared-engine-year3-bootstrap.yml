@@ -28,6 +28,7 @@ jobs:
           node --check test/scale/year3-m02-frame-diagnostic.mjs
           node --check test/scale/year3-all-modules-smoke.mjs
           node --check test/scale/year3-smart-assets-audit.mjs
+          node --check test/scale/year3-smart-assets-visual-proof.mjs
       - name: Guard Canary and Year 3 90-item thin-content contract
         run: node test/scale/year3-bootstrap-static.mjs
 
@@ -65,3 +66,16 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/scale/year3-smart-assets-audit.mjs
+      - name: Capture Year 3 smart asset visual proof
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          OUT_DIR: test-results/year3-smart-assets-visual-proof
+        run: node test/scale/year3-smart-assets-visual-proof.mjs
+      - name: Upload Year 3 smart asset visual proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year3-smart-assets-visual-proof
+          path: test-results/year3-smart-assets-visual-proof
+          if-no-files-found: warn
+          retention-days: 14
