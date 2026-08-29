@@ -5,6 +5,7 @@ on:
     paths:
       - 'content/english/year-2/**'
       - 'test/year2/smart-assets-official-first-rc1.mjs'
+      - 'test/year2/m05-body-highlight-rc1.mjs'
       - '.github/workflows/year2-smart-assets-official-first-rc1.yml'
   workflow_dispatch:
 
@@ -24,8 +25,17 @@ jobs:
       - name: Syntax check smart visual bridge
         run: node --check content/english/year-2/year2-v23-final-root-bridge.js
 
+      - name: Syntax check M05 body highlight bridge
+        run: node --check content/english/year-2/year2-v23-body-highlight-bridge.js
+
       - name: Syntax check smart assets test
         run: node --check test/year2/smart-assets-official-first-rc1.mjs
 
+      - name: Syntax check M05 body highlight test
+        run: node --check test/year2/m05-body-highlight-rc1.mjs
+
       - name: Enforce official-first semantic resolution
         run: node test/year2/smart-assets-official-first-rc1.mjs
+
+      - name: Enforce M05 highlighted body-part semantics
+        run: node test/year2/m05-body-highlight-rc1.mjs
