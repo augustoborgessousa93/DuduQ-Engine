@@ -1,7 +1,7 @@
 /* DUDUQ English Year 2 — M01 wide-screen balance
    Module-01-only visual bridge.
    Enlarges the single-target listening card on desktop/fullscreen while keeping
-   mobile and the special M01-12 multi-target image-group activity unchanged.
+   mobile, short notebooks and the special M01-12 multi-target image-group activity unchanged.
 
    The Host may reuse the same iframe across steps, so the bridge reapplies its
    presentation style after each duduq:step-start and during a short bounded scan.
@@ -9,7 +9,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.2-m01-wide-single-target-reused-frame";
+  const VERSION = "1.0.3-m01-wide-single-target-short-notebook-safe";
   const STYLE_ID = "duduq-year2-m01-wide-single-target";
   const SCAN_INTERVAL_MS = 80;
   const INITIAL_SCAN_MS = 8000;
@@ -33,7 +33,7 @@
       style.id = STYLE_ID;
       style.dataset.duduqYear2M01Wide = VERSION;
       style.textContent = `
-        @media (min-width: 900px) and (min-height: 620px) {
+        @media (min-width: 900px) and (min-height: 700px) {
           .duduq-dd2-root:has(.duduq-dd2-target[data-single-target-choice="true"])
             .duduq-dd2-targets {
             grid-template-columns: repeat(auto-fit, minmax(300px, 350px)) !important;
@@ -129,6 +129,7 @@
     version: VERSION,
     module: 1,
     mobileChanged: false,
+    shortNotebookChanged: false,
     multiTargetChanged: false,
     releaseModified: false,
     observedFrameInjection: true,
