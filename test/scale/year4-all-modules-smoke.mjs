@@ -30,7 +30,7 @@ try{
 
       assert(state.ready,`${viewport.name} M${mm(moduleNumber)}: engine não ficou ready. root=${state.rootText}`);
       assert(state.channel==="scale-v1",`${viewport.name} M${mm(moduleNumber)}: canal incorreto ${state.channel}.`);
-      assert(state.revision===2,`${viewport.name} M${mm(moduleNumber)}: revisão scale-v1 inesperada ${state.revision}.`);
+      assert(state.revision===3,`${viewport.name} M${mm(moduleNumber)}: revisão scale-v1 inesperada ${state.revision}.`);
       assert(state.sharedVisual==="1.1.0",`${viewport.name} M${mm(moduleNumber)}: smart visual compartilhado não carregou.`);
       assert(state.moduleItems===15,`${viewport.name} M${mm(moduleNumber)}: esperado 15 atividades.`);
       assert(state.firstMechanic==="drag-drop",`${viewport.name} M${mm(moduleNumber)}: bootstrap deve iniciar em drag-drop.`);
