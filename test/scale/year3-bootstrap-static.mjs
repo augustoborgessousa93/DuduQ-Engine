@@ -8,6 +8,7 @@ function read(file){ return fs.readFileSync(file,"utf8"); }
 const canary=JSON.parse(read("engine/channels/canary-v1.json"));
 const scale=JSON.parse(read("engine/channels/scale-v1.json"));
 const loader=read("engine/duduq-loader-v1.js");
+const bubbleSmartMedia=read("engine/shared/bubble-pop-smart-media-v1.js");
 const bubbleShared=read("engine/shared/bubble-pop-runtime-safety-v1.js");
 const visualShared=read("engine/shared/smart-visual-resolver-v1.js");
 const completionShared=read("engine/shared/host-owned-completion-guard-v1.js");
@@ -16,11 +17,15 @@ const factorySource=read("content/english/year-3/year3-content-factory-v1.js");
 assert(canary.revision===143,"Canary precisa permanecer R143.");
 assert(!canary.core?.postMechanicScripts,"Canary não deve receber camadas experimentais de scale.");
 assert(scale.channel==="scale-v1","Canal de escala ausente.");
-assert(scale.revision===3,"scale-v1 precisa estar na revisão 3 da baseline cross-year.");
+assert(scale.revision===4,"scale-v1 precisa estar na revisão 4 da baseline cross-year.");
 assert(scale.policy?.productionPromotionAllowed===false,"scale-v1 não pode permitir promoção para produção.");
-assert(Array.isArray(scale.core?.postMechanicScripts) && scale.core.postMechanicScripts.length===3,"scale-v1 deve carregar somente as três camadas compartilhadas comprovadas.");
+assert(Array.isArray(scale.core?.postMechanicScripts) && scale.core.postMechanicScripts.length===4,"scale-v1 deve carregar somente as quatro camadas compartilhadas comprovadas.");
 assert(loader.includes("postMechanicScripts"),"Loader não suporta camadas compartilhadas pós-mecânica.");
+assert(bubbleSmartMedia.includes('scope: "all-years"'),"Bubble smart media precisa ser cross-year.");
+assert(bubbleSmartMedia.includes("syntheticVisualDedupe: true"),"Bubble smart media deve preservar dedupe sintético estrutural.");
+assert(bubbleSmartMedia.includes("releaseModified: false"),"Bubble smart media não pode alterar release.");
 assert(bubbleShared.includes('scope: "all-years"'),"Bubble safety precisa ser cross-year.");
+assert(bubbleShared.includes("visualBreathingRoom: true"),"Bubble safety deve proteger margem visual além do box.");
 assert(bubbleShared.includes("releaseModified: false"),"Bubble safety não pode alterar release.");
 assert(completionShared.includes('scope: "all-years"'),"Completion guard precisa ser cross-year.");
 assert(completionShared.includes("hostOwnsProgression: true"),"Completion guard deve declarar Host como dono da progressão.");
@@ -29,6 +34,8 @@ const smartContract="OFFICIAL_EXACT_ALIAS > OFFICIAL_LIBRARY > CONTROLLED_SEMANT
 assert(visualShared.includes(smartContract),"Contrato smart visual compartilhado ausente.");
 assert(scale.policy?.smartVisualContract===smartContract,"scale-v1 precisa declarar o mesmo contrato smart visual do resolver.");
 assert(scale.core.postMechanicScripts.find(x=>x.id==="duduq-shared-smart-visual-resolver-v1")?.release==="shared-1.1.0","scale-v1 precisa declarar smart visual shared-1.1.0.");
+assert(scale.core.postMechanicScripts.find(x=>x.id==="duduq-shared-bubble-smart-media-v1")?.release==="shared-1.0.0","scale-v1 precisa declarar Bubble smart media shared-1.0.0.");
+assert(scale.core.postMechanicScripts.find(x=>x.id==="duduq-shared-bubble-runtime-safety-v1")?.release==="shared-1.0.0","scale-v1 precisa declarar Bubble runtime safety shared-1.0.0.");
 assert(scale.core.postMechanicScripts.find(x=>x.id==="duduq-shared-host-completion-guard-v1")?.release==="shared-1.0.0","scale-v1 precisa declarar host completion guard shared-1.0.0.");
 for(const [id,entry] of Object.entries(canary.mechanics||{})){
   assert(scale.mechanics?.[id]?.release===entry.release,`scale-v1 divergiu da release Canary em ${id}.`);
