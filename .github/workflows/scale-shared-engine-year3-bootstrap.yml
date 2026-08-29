@@ -26,6 +26,7 @@ jobs:
             node --check "content/english/year-3/module-${module}/module-${module}-v1.js"
           done
           node --check test/scale/year3-bootstrap-static.mjs
+          node --check test/scale/year3-m02-frame-diagnostic.mjs
           node --check test/scale/year3-all-modules-smoke.mjs
       - name: Guard Canary and Year 3 90-item thin-content contract
         run: node test/scale/year3-bootstrap-static.mjs
@@ -52,6 +53,10 @@ jobs:
           done
           cat /tmp/duduq-scale-http.log
           exit 1
+      - name: Diagnose Year 3 M02 final Drag Drop frame
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/scale/year3-m02-frame-diagnostic.mjs
       - name: Smoke Year 3 M01-M06 desktop and mobile
         env:
           BASE_URL: http://127.0.0.1:4173
