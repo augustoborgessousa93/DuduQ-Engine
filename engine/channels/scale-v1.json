@@ -27,7 +27,7 @@
       {
         "id": "duduq-shared-smart-visual-resolver-v1",
         "src": "/engine/shared/smart-visual-resolver-v1.js",
-        "release": "shared-1.0.0"
+        "release": "shared-1.1.0"
       },
       {
         "id": "duduq-shared-bubble-runtime-safety-v1",
@@ -50,7 +50,7 @@
     "releasesImmutable": true,
     "manifestNoStore": true,
     "sharedPostMechanicLayers": true,
-    "smartVisualContract": "OFFICIAL_EXACT_ALIAS > CONTROLLED_SEMANTIC > EXPLICIT_GAP",
+    "smartVisualContract": "OFFICIAL_EXACT_ALIAS > OFFICIAL_LIBRARY > CONTROLLED_SEMANTIC > EXPLICIT_GAP",
     "productionPromotionAllowed": false,
     "rollbackViaChannel": true
   },
