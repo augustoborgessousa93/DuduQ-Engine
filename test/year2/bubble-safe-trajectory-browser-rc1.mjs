@@ -26,8 +26,7 @@ async function homologate(name, viewport) {
     await page.goto(MODULE_URL, { waitUntil: "domcontentloaded" });
     await page.waitForFunction(() => Boolean(
       window.DUDUQ_CONTENT?.english?.year2?.module02v23multimodal &&
-      window.DuduQIntro &&
-      window.DuduQ
+      window.DuduQIntro && window.DuduQ
     ));
 
     const startMission = page.getByRole("button", { name: /INICIAR MISSÃO/i }).first();
@@ -43,21 +42,48 @@ async function homologate(name, viewport) {
     await frame.locator(".duduq-bp-arena[data-mode='dynamic-stream']").waitFor({ state: "visible" });
     await frame.locator(".duduq-bp-bubble-shell--dynamic").first().waitFor({ state: "attached" });
 
+    await frame.waitForFunction(() => {
+      const channel = String(parent?.DUDUQ_GAME_CONFIG?.channel || "");
+      return channel === "scale-v1"
+        ? Boolean(document.getElementById("duduq-shared-bubble-safe-trajectory-v1"))
+        : Boolean(document.getElementById("duduq-year2-bubble-safe-trajectory"));
+    });
+
     const styleState = await frame.evaluate(() => {
-      const style = document.getElementById("duduq-year2-bubble-safe-trajectory");
+      const channel = String(parent?.DUDUQ_GAME_CONFIG?.channel || "");
+      const delegated = channel === "scale-v1";
+      const localStyle = document.getElementById("duduq-year2-bubble-safe-trajectory");
+      const sharedStyle = document.getElementById("duduq-shared-bubble-safe-trajectory-v1");
       const shell = document.querySelector(".duduq-bp-bubble-shell--dynamic");
       const computed = shell ? getComputedStyle(shell) : null;
       return {
-        stylePresent: Boolean(style),
-        styleVersion: style?.dataset?.duduqYear2BubbleSafeTrajectory || null,
+        channel,
+        delegated,
+        localStylePresent: Boolean(localStyle),
+        localStyleVersion: localStyle?.dataset?.duduqYear2BubbleSafeTrajectory || null,
+        sharedStylePresent: Boolean(sharedStyle),
+        sharedStyleVersion: sharedStyle?.dataset?.duduqSharedBubbleSafety || null,
         animationName: computed?.animationName || null,
-        safeEdge: computed?.getPropertyValue("--y2-bp-safe-edge")?.trim() || null,
-        bridge: window.__DUDUQ_YEAR2_BUBBLE_SMART_RENDERER_PATCH__ || null
+        localSafeEdge: computed?.getPropertyValue("--y2-bp-safe-edge")?.trim() || null,
+        sharedSafeEdge: computed?.getPropertyValue("--duduq-bp-safe-edge")?.trim() || null,
+        bridge: window.__DUDUQ_YEAR2_BUBBLE_SMART_RENDERER_PATCH__ || null,
+        sharedRuntime: window.__DUDUQ_SHARED_BUBBLE_RUNTIME_SAFETY_ACTIVE__ || null
       };
     });
 
-    assert(styleState.stylePresent, `${name}: estilo de trajetória segura não foi instalado.`);
-    assert(styleState.animationName === "duduq-year2-bp-stream-safe", `${name}: animação segura não está ativa (${styleState.animationName}).`);
+    if (styleState.delegated) {
+      assert(styleState.sharedStylePresent, `${name}: estilo compartilhado de trajetória segura não foi instalado.`);
+      assert(!styleState.localStylePresent, `${name}: scale-v1 não pode manter trajetória Year2 duplicada.`);
+      assert(styleState.animationName === "duduq-shared-bp-stream-safe", `${name}: animação compartilhada segura não está ativa (${styleState.animationName}).`);
+      assert(Boolean(styleState.sharedSafeEdge), `${name}: safe edge compartilhado ausente.`);
+      assert(styleState.bridge?.safeTrajectoryOwner === "shared-scale-layer", `${name}: bridge Year2 não delegou trajetória ao compartilhado.`);
+      assert(styleState.sharedRuntime?.safeTrajectory === true, `${name}: runtime compartilhado não marcou safeTrajectory.`);
+    } else {
+      assert(styleState.localStylePresent, `${name}: fallback local Year2 de trajetória segura não foi instalado.`);
+      assert(styleState.animationName === "duduq-year2-bp-stream-safe", `${name}: animação Year2 segura não está ativa (${styleState.animationName}).`);
+      assert(Boolean(styleState.localSafeEdge), `${name}: safe edge Year2 ausente.`);
+      assert(styleState.bridge?.safeTrajectoryOwner === "year2-local-canary-fallback", `${name}: fallback Canary não declarou ownership local.`);
+    }
     assert(styleState.bridge?.safeTrajectory === true, `${name}: bridge não marcou safeTrajectory.`);
 
     const samples = [];
