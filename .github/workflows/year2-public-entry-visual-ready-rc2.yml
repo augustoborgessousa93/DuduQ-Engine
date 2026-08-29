@@ -7,6 +7,7 @@ on:
       - "test/year2/public-entry-visual-ready-rc2.mjs"
       - "test/year2/bubble-runtime-asset-bridge-diagnostic-rc3.mjs"
       - "test/year2/bubble-safe-trajectory-browser-rc1.mjs"
+      - "test/year2/m1-wide-desktop-browser-rc1.mjs"
       - ".github/workflows/year2-public-entry-visual-ready-rc2.yml"
   push:
     branches:
@@ -16,6 +17,7 @@ on:
       - "test/year2/public-entry-visual-ready-rc2.mjs"
       - "test/year2/bubble-runtime-asset-bridge-diagnostic-rc3.mjs"
       - "test/year2/bubble-safe-trajectory-browser-rc1.mjs"
+      - "test/year2/m1-wide-desktop-browser-rc1.mjs"
       - ".github/workflows/year2-public-entry-visual-ready-rc2.yml"
 
 permissions:
@@ -25,7 +27,7 @@ jobs:
   visual-ready:
     name: Public M01-M06 actual mechanic visibility
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 14
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,6 +47,9 @@ jobs:
 
       - name: Syntax check Bubble safe trajectory gate
         run: node --check test/year2/bubble-safe-trajectory-browser-rc1.mjs
+
+      - name: Syntax check M01 wide desktop gate
+        run: node --check test/year2/m1-wide-desktop-browser-rc1.mjs
 
       - name: Install Playwright Chromium
         run: |
@@ -72,6 +77,11 @@ jobs:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year2/bubble-safe-trajectory-browser-rc1.mjs
 
+      - name: Enforce M01 wide desktop and preserved mobile
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/m1-wide-desktop-browser-rc1.mjs
+
       - name: Verify actual public mechanics on desktop and mobile
         env:
           BASE_URL: http://127.0.0.1:4173
@@ -86,5 +96,6 @@ jobs:
             test-results/year2-public-entry-visual-ready-rc2
             test-results/year2-bubble-runtime-asset-bridge-diagnostic-rc3
             test-results/year2-bubble-safe-trajectory-browser-rc1
+            test-results/year2-m1-wide-desktop-browser-rc1
           if-no-files-found: warn
           retention-days: 7
