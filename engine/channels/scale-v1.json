@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "contractMajor": 1,
-  "revision": 3,
+  "revision": 4,
   "core": {
     "release": "1.0.9",
     "styles": [
@@ -28,6 +28,11 @@
         "id": "duduq-shared-smart-visual-resolver-v1",
         "src": "/engine/shared/smart-visual-resolver-v1.js",
         "release": "shared-1.1.0"
+      },
+      {
+        "id": "duduq-shared-bubble-smart-media-v1",
+        "src": "/engine/shared/bubble-pop-smart-media-v1.js",
+        "release": "shared-1.0.0"
       },
       {
         "id": "duduq-shared-bubble-runtime-safety-v1",
