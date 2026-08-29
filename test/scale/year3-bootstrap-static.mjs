@@ -21,7 +21,10 @@ assert(Array.isArray(scale.core?.postMechanicScripts) && scale.core.postMechanic
 assert(loader.includes("postMechanicScripts"),"Loader não suporta camadas compartilhadas pós-mecânica.");
 assert(bubbleShared.includes('scope: "all-years"'),"Bubble safety precisa ser cross-year.");
 assert(bubbleShared.includes("releaseModified: false"),"Bubble safety não pode alterar release.");
-assert(visualShared.includes("OFFICIAL_EXACT_ALIAS > CONTROLLED_SEMANTIC > EXPLICIT_GAP"),"Contrato smart visual compartilhado ausente.");
+const smartContract="OFFICIAL_EXACT_ALIAS > OFFICIAL_LIBRARY > CONTROLLED_SEMANTIC > EXPLICIT_GAP";
+assert(visualShared.includes(smartContract),"Contrato smart visual compartilhado ausente.");
+assert(scale.policy?.smartVisualContract===smartContract,"scale-v1 precisa declarar o mesmo contrato smart visual do resolver.");
+assert(scale.core.postMechanicScripts.find(x=>x.id==="duduq-shared-smart-visual-resolver-v1")?.release==="shared-1.1.0","scale-v1 precisa declarar smart visual shared-1.1.0.");
 for(const [id,entry] of Object.entries(canary.mechanics||{})){
   assert(scale.mechanics?.[id]?.release===entry.release,`scale-v1 divergiu da release Canary em ${id}.`);
 }
