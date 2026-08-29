@@ -1,8 +1,9 @@
 /* =========================================================
-   DUDUQ SHARED — BUBBLE POP RUNTIME SAFETY v1.0.0
+   DUDUQ SHARED — BUBBLE POP RUNTIME SAFETY v1.1.0
 
    Structural cross-year behavior:
-   - keeps every visible dynamic bubble inside the playable arena;
+   - keeps every visible dynamic bubble inside the playable arena with visual breathing room;
+   - protects not only the bubble box but also its glass glow/shadow from edge clipping;
    - preserves Bubble Pop release timing, duration, pause and feedback logic;
    - does not alter content, answers, assets or pedagogical rules;
    - works as a channel-level compatibility layer while releases remain immutable.
@@ -10,7 +11,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0";
+  const VERSION = "1.1.0";
   const STYLE_ID = "duduq-shared-bubble-safe-trajectory-v1";
   const RUNTIME_RE = /\/DUDUQ_BUBBLE_POP\.html(?:\?|$)/i;
 
@@ -29,7 +30,8 @@
         .duduq-bp-bubble-shell--dynamic,
       html body #root .duduq-engine-stage .duduq-bp-root[data-paused="false"]
         .duduq-bp-bubble-shell--dynamic:not([data-popped="true"]) {
-        --duduq-bp-safe-edge: 84px;
+        /* 98px protects the largest 140px bubble plus its glass halo/shadow. */
+        --duduq-bp-safe-edge: 98px;
         left: clamp(var(--duduq-bp-safe-edge), var(--bp-x0, 50%), calc(100% - var(--duduq-bp-safe-edge))) !important;
         top: clamp(var(--duduq-bp-safe-edge), var(--bp-y0, 82%), calc(100% - var(--duduq-bp-safe-edge))) !important;
         animation-name: duduq-shared-bp-stream-safe !important;
@@ -69,7 +71,7 @@
           .duduq-bp-bubble-shell--dynamic,
         html body #root .duduq-engine-stage .duduq-bp-root[data-paused="false"]
           .duduq-bp-bubble-shell--dynamic:not([data-popped="true"]) {
-          --duduq-bp-safe-edge: 78px;
+          --duduq-bp-safe-edge: 90px;
         }
       }
 
@@ -78,7 +80,7 @@
           .duduq-bp-bubble-shell--dynamic,
         html body #root .duduq-engine-stage .duduq-bp-root[data-paused="false"]
           .duduq-bp-bubble-shell--dynamic:not([data-popped="true"]) {
-          --duduq-bp-safe-edge: 76px;
+          --duduq-bp-safe-edge: 86px;
         }
       }
     `;
@@ -87,6 +89,7 @@
     runtimeWindow.__DUDUQ_SHARED_BUBBLE_RUNTIME_SAFETY_ACTIVE__ = Object.freeze({
       version: VERSION,
       safeTrajectory: true,
+      visualBreathingRoom: true,
       releaseModified: false
     });
     return true;
@@ -114,6 +117,7 @@
     scope: "all-years",
     mechanic: "bubble-pop",
     safeTrajectory: true,
+    visualBreathingRoom: true,
     releaseModified: false
   });
 })();
