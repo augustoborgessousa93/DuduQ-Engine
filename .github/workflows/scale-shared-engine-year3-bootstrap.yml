@@ -38,6 +38,7 @@ jobs:
           done
           node --check test/scale/cross-year-architecture-audit.mjs
           node --check test/scale/year1-year2-baseline-smoke.mjs
+          node --check test/scale/intro-logo-alpha-layout-audit.mjs
           node --check test/scale/year3-bootstrap-static.mjs
           node --check test/scale/year3-v23-multimodal-contract.mjs
           node --check test/scale/year3-m02-frame-diagnostic.mjs
@@ -86,6 +87,10 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/scale/year1-year2-baseline-smoke.mjs
+      - name: Measure Intro logo alpha and layout geometry
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/scale/intro-logo-alpha-layout-audit.mjs
       - name: Bubble Pop shared safe-area desktop and mobile
         env:
           BASE_URL: http://127.0.0.1:4173
@@ -122,6 +127,7 @@ jobs:
         with:
           name: scale-visual-evidence
           path: |
+            test-results/intro-logo-alpha-layout-audit
             test-results/year2-bubble-safe-trajectory-browser-rc1
             test-results/year3-smart-assets-visual-proof
           if-no-files-found: warn
