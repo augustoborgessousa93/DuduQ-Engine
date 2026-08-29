@@ -40,8 +40,6 @@ async function waitForPublicModule(page, module) {
   const key = moduleKey(module);
   await page.goto(moduleUrl(module), { waitUntil: "domcontentloaded", timeout: 30_000 });
 
-  // Primeiro valida que o entrypoint público carregou conteúdo/configuração. O Host só
-  // cria a sessão depois do CTA real da Intro em builds que usam o handoff interativo.
   await page.waitForFunction(
     ({ expectedKey, expectedModule }) => {
       const built = window.DUDUQ_CONTENT?.english?.year2?.[expectedKey];
@@ -76,7 +74,41 @@ async function waitForPublicModule(page, module) {
     { timeout: 30_000 }
   );
 
-  await page.locator("#root iframe").first().waitFor({ state: "attached", timeout: 20_000 });
+  const iframe = page.locator("#root iframe").first();
+  await iframe.waitFor({ state: "attached", timeout: 20_000 });
+
+  // O conteúdo interno pode estar pronto antes do Host terminar a transição.
+  // Só avançamos quando o iframe está realmente exposto na tela pública.
+  await page.waitForFunction(() => {
+    const iframeNode = document.querySelector("#root iframe");
+    if (!(iframeNode instanceof HTMLIFrameElement)) return false;
+
+    const rect = iframeNode.getBoundingClientRect();
+    if (rect.width <= 20 || rect.height <= 20) return false;
+    if (rect.bottom <= 0 || rect.right <= 0 ||
+        rect.top >= window.innerHeight || rect.left >= window.innerWidth) return false;
+
+    let node = iframeNode;
+    while (node instanceof Element) {
+      const style = getComputedStyle(node);
+      const opacity = Number.parseFloat(style.opacity || "1");
+      if (
+        style.display === "none" ||
+        style.visibility === "hidden" ||
+        !Number.isFinite(opacity) ||
+        opacity <= 0.01
+      ) {
+        return false;
+      }
+      node = node.parentElement;
+    }
+
+    const x = Math.min(window.innerWidth - 1, Math.max(0, rect.left + rect.width / 2));
+    const y = Math.min(window.innerHeight - 1, Math.max(0, rect.top + rect.height / 2));
+    return document.elementFromPoint(x, y) === iframeNode;
+  }, null, { timeout: 30_000 });
+
+  await page.waitForTimeout(180);
 }
 
 async function inspectPublicModule(page, module) {
@@ -170,26 +202,110 @@ async function inspectFirstMechanic(page, module, snapshot) {
   const frame = await handle?.contentFrame();
   assert(frame, `M${module}: iframe da primeira mecânica inacessível.`);
 
+  // A atividade só está pronta quando existe evidência pedagógica real.
+  // Não aceitamos board/arena/stage genéricos nem mensagens "Preparando...":
+  // isso evita aprovar um iframe que mostra somente o background.
   await frame.waitForFunction(() => {
     const error = document.querySelector("#duduq-runtime-error");
     if (error && getComputedStyle(error).display !== "none") return true;
-    return Boolean(document.body && document.body.children.length > 0);
+
+    const visible = (node) => {
+      if (!(node instanceof Element)) return false;
+      const rect = node.getBoundingClientRect();
+      const style = getComputedStyle(node);
+      const opacity = Number.parseFloat(style.opacity || "1");
+      return rect.width > 2 && rect.height > 2 &&
+        style.display !== "none" &&
+        style.visibility !== "hidden" &&
+        Number.isFinite(opacity) &&
+        opacity > 0.01;
+    };
+
+    const normalizedText = String(document.body?.innerText || "").replace(/\s+/g, " ").trim();
+    const usefulText = Boolean(
+      normalizedText &&
+      !/^Preparando\b/i.test(normalizedText) &&
+      !/^Carregando\b/i.test(normalizedText)
+    );
+    const loadedImage = Array.from(document.images || []).some((image) =>
+      visible(image) &&
+      image.complete &&
+      Number(image.naturalWidth || 0) > 0 &&
+      Number(image.naturalHeight || 0) > 0
+    );
+    const visibleControl = Array.from(
+      document.querySelectorAll("button,[role='button'],input,select,textarea,a[href]")
+    ).some(visible);
+
+    return usefulText || loadedImage || visibleControl;
   }, null, { timeout: 20_000 });
+
+  // Confirma que o estado ficou estável por um pequeno intervalo antes da captura.
+  await frame.waitForTimeout(180);
 
   const runtime = await frame.evaluate(() => {
     const error = document.querySelector("#duduq-runtime-error");
     const doc = document.documentElement;
+    const visible = (node) => {
+      if (!(node instanceof Element)) return false;
+      const rect = node.getBoundingClientRect();
+      const style = getComputedStyle(node);
+      const opacity = Number.parseFloat(style.opacity || "1");
+      return rect.width > 2 && rect.height > 2 &&
+        style.display !== "none" &&
+        style.visibility !== "hidden" &&
+        Number.isFinite(opacity) &&
+        opacity > 0.01;
+    };
+
+    const bodyText = String(document.body?.innerText || "").slice(0, 1400);
+    const normalizedText = bodyText.replace(/\s+/g, " ").trim();
+    const usefulText = Boolean(
+      normalizedText &&
+      !/^Preparando\b/i.test(normalizedText) &&
+      !/^Carregando\b/i.test(normalizedText)
+    );
+    const visibleImages = Array.from(document.images || []).filter((image) =>
+      visible(image) &&
+      image.complete &&
+      Number(image.naturalWidth || 0) > 0 &&
+      Number(image.naturalHeight || 0) > 0
+    );
+    const visibleControls = Array.from(
+      document.querySelectorAll("button,[role='button'],input,select,textarea,a[href]")
+    ).filter(visible);
+    const visibleSurfaces = Array.from(
+      document.querySelectorAll("canvas,svg,[role='img'],[data-duduq-mechanic],[class*='board'],[class*='arena'],[class*='stage']")
+    ).filter(visible);
+
     return {
       runtimeError: error && getComputedStyle(error).display !== "none" ? String(error.textContent || "") : "",
-      bodyText: String(document.body?.innerText || "").slice(0, 1400),
+      bodyText,
+      textLength: bodyText.trim().length,
+      usefulText,
+      placeholderOnly: Boolean(normalizedText) && !usefulText,
+      visibleImages: visibleImages.length,
+      visibleControls: visibleControls.length,
+      visibleSurfaces: visibleSurfaces.length,
       viewport: doc.clientWidth,
       scroll: Math.max(doc.scrollWidth, document.body?.scrollWidth || 0)
     };
   });
 
+  const realContentCount =
+    (runtime.usefulText ? 1 : 0) +
+    runtime.visibleImages +
+    runtime.visibleControls;
+
   assert(!runtime.runtimeError, `M${module}: runtime da primeira mecânica falhou: ${runtime.runtimeError}`);
-  assert(runtime.bodyText.trim().length > 0, `M${module}: primeira mecânica renderizou sem conteúdo observável.`);
-  assert(runtime.scroll <= runtime.viewport + 6, `M${module}: primeira mecânica com overflow horizontal ${runtime.scroll}px > ${runtime.viewport}px.`);
+  assert(
+    realContentCount > 0,
+    `M${module}: primeira mecânica ficou sem conteúdo pedagógico real. STATE=${JSON.stringify(runtime)}`
+  );
+  assert(
+    runtime.scroll <= runtime.viewport + 6,
+    `M${module}: primeira mecânica com overflow horizontal ${runtime.scroll}px > ${runtime.viewport}px.`
+  );
 
   return { iframeTitle: title, ...runtime };
 }
@@ -211,9 +327,11 @@ async function runScenario(browser, module, viewport) {
     );
     assert(fatalMessages.length === 0, `M${module}: erros fatais no entrypoint: ${fatalMessages.join(" | ")}`);
 
-    // Captura o estado público após o handoff real da Intro para a primeira mecânica.
     await fs.mkdir(OUTPUT_DIR, { recursive: true });
-    const screenshot = path.join(OUTPUT_DIR, `M${String(module).padStart(2, "0")}-${viewport.name}-${viewport.width}x${viewport.height}.png`);
+    const screenshot = path.join(
+      OUTPUT_DIR,
+      `M${String(module).padStart(2, "0")}-${viewport.name}-${viewport.width}x${viewport.height}.png`
+    );
     await page.screenshot({ path: screenshot, fullPage: true });
 
     return {
@@ -241,7 +359,9 @@ async function runScenario(browser, module, viewport) {
   } catch (error) {
     await fs.mkdir(OUTPUT_DIR, { recursive: true });
     const base = `M${String(module).padStart(2, "0")}-${viewport.name}-${viewport.width}x${viewport.height}-FAIL`;
-    try { await page.screenshot({ path: path.join(OUTPUT_DIR, `${base}.png`), fullPage: true }); } catch (_) {}
+    try {
+      await page.screenshot({ path: path.join(OUTPUT_DIR, `${base}.png`), fullPage: true });
+    } catch (_) {}
     await fs.writeFile(path.join(OUTPUT_DIR, `${base}.json`), JSON.stringify({
       ...context,
       error: error?.stack || error?.message || String(error),

@@ -1,0 +1,183 @@
+name: Year 2 Multimodal Consistency RC1
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "content/english/year-2/**"
+      - "test/year2/multimodal-consistency-hotfix-rc1.mjs"
+      - "test/year2/multimodal-consistency-hotfix-browser-rc1.mjs"
+      - "test/year2/dragdrop-listening-action-separation-rc1.mjs"
+      - "test/year2/dragdrop-listening-target-visual-contract-rc1.mjs"
+      - "test/year2/dragdrop-selected-choice-tools-rc1.mjs"
+      - "test/year2/internal-completion-flash-guard-rc1.mjs"
+      - "test/year2/gamified-ui-contract-rc1.mjs"
+      - "test/year2/m1-12-image-group-rc1.mjs"
+      - "test/year2/m1-12-visual-polish-rc1.mjs"
+      - "test/year2/pedagogical-instructions-rc1.mjs"
+      - ".github/workflows/year2-multimodal-consistency-rc1.yml"
+  push:
+    branches:
+      - hotfix/year2-multimodal-dd-matching-diversity
+    paths:
+      - "content/english/year-2/**"
+      - "test/year2/multimodal-consistency-hotfix-rc1.mjs"
+      - "test/year2/multimodal-consistency-hotfix-browser-rc1.mjs"
+      - "test/year2/dragdrop-listening-action-separation-rc1.mjs"
+      - "test/year2/dragdrop-listening-target-visual-contract-rc1.mjs"
+      - "test/year2/dragdrop-selected-choice-tools-rc1.mjs"
+      - "test/year2/internal-completion-flash-guard-rc1.mjs"
+      - "test/year2/gamified-ui-contract-rc1.mjs"
+      - "test/year2/m1-12-image-group-rc1.mjs"
+      - "test/year2/m1-12-visual-polish-rc1.mjs"
+      - "test/year2/pedagogical-instructions-rc1.mjs"
+      - ".github/workflows/year2-multimodal-consistency-rc1.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: year2-multimodal-consistency-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  static-pedagogical-contract:
+    name: 90-item multimodal + pedagogical contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Syntax check Year 2 hotfix layers
+        run: |
+          node --check content/english/year-2/year2-v23-final-root-bridge.js
+          node --check content/english/year-2/year2-v23-multimodal-consistency-hotfix.js
+          node --check content/english/year-2/year2-v23-dragdrop-modality-finalize.js
+          node --check content/english/year-2/year2-v23-dragdrop-listening-association-final.js
+          node --check content/english/year-2/year2-v23-multimodal-router-finalize.js
+          node --check content/english/year-2/year2-v23-dragdrop-confirm-any-bridge.js
+          node --check content/english/year-2/year2-v23-dragdrop-selected-tools-bridge.js
+          node --check content/english/year-2/year2-v23-dragdrop-selected-tools-bridge-v2.js
+          node --check content/english/year-2/year2-v23-dragdrop-placement-autoplay.js
+          node --check content/english/year-2/year2-v23-internal-completion-guard.js
+          node --check content/english/year-2/year2-v23-gamified-typography.js
+          node --check content/english/year-2/year2-v23-tactile-buttons-3d.js
+          node --check content/english/year-2/year2-v23-pedagogical-instructions.js
+          node --check content/english/year-2/module-01/m1-12-image-group-v23.js
+          node --check content/english/year-2/module-01/m1-12-mobile-compact-v23.js
+          node --check content/english/year-2/module-01/m1-12-visual-polish-v23.js
+          node --check test/year2/multimodal-consistency-hotfix-rc1.mjs
+          node --check test/year2/multimodal-consistency-hotfix-browser-rc1.mjs
+          node --check test/year2/dragdrop-listening-action-separation-rc1.mjs
+          node --check test/year2/dragdrop-listening-target-visual-contract-rc1.mjs
+          node --check test/year2/dragdrop-selected-choice-tools-rc1.mjs
+          node --check test/year2/internal-completion-flash-guard-rc1.mjs
+          node --check test/year2/gamified-ui-contract-rc1.mjs
+          node --check test/year2/m1-12-image-group-rc1.mjs
+          node --check test/year2/m1-12-visual-polish-rc1.mjs
+          node --check test/year2/pedagogical-instructions-rc1.mjs
+
+      - name: Validate IDs, answers, listening association, smart images and Matching diversity
+        run: node test/year2/multimodal-consistency-hotfix-rc1.mjs
+
+      - name: Validate Nunito and tactile 3D UI contract
+        run: node test/year2/gamified-ui-contract-rc1.mjs
+
+      - name: Assert Canary remains R143 / Drag Drop 2.0.22
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const channel = JSON.parse(fs.readFileSync('engine/channels/canary-v1.json', 'utf8'));
+          if (channel.revision !== 143) throw new Error(`Canary revision changed: ${channel.revision}`);
+          if (channel.mechanics?.['drag-drop']?.release !== '2.0.22') {
+            throw new Error(`Drag Drop Canary changed: ${channel.mechanics?.['drag-drop']?.release}`);
+          }
+          console.log('PASS — Canary R143 and Drag Drop 2.0.22 preserved.');
+          NODE
+
+  chromium-functional:
+    name: Chromium listening association + confirm-any + smart visual review
+    needs: static-pedagogical-contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local DuduQ server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-http.log 2>&1 &
+          echo $! > /tmp/duduq-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-http.log
+          exit 1
+
+      - name: Verify short narrable instructions across all 90 items
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/pedagogical-instructions-rc1.mjs
+
+      - name: Verify M01-12 image grouping
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/m1-12-image-group-rc1.mjs
+
+      - name: Verify M01-12 compact visual hierarchy
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/m1-12-visual-polish-rc1.mjs
+
+      - name: Verify clean listening target instruction and capacity
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/dragdrop-listening-target-visual-contract-rc1.mjs
+
+      - name: Verify separated option audio and real Drag Drop
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/dragdrop-listening-action-separation-rc1.mjs
+
+      - name: Verify selected-choice replay, clear and retry flow
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/dragdrop-selected-choice-tools-rc1.mjs
+
+      - name: Verify internal lesson-complete screen never flashes
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/internal-completion-flash-guard-rc1.mjs
+
+      - name: Run Year 2 functional browser gate
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year2/multimodal-consistency-hotfix-browser-rc1.mjs
+
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year2-multimodal-consistency-rc1
+          path: |
+            test-results/year2-m1-12-image-group-rc1
+            test-results/year2-dragdrop-listening-action-separation-rc1
+            test-results/year2-dragdrop-selected-choice-tools-rc1
+            test-results/year2-multimodal-consistency-rc1
+          if-no-files-found: warn
+          retention-days: 7

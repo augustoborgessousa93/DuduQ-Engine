@@ -3,14 +3,22 @@
    Keeps Bubble Pop 1.0.31 immutable while allowing an official Assets-DuduQ
    absolute URL already carried in bubble.imageAssetKey to render through the
    runtime's existing .duduq-bp-media visual contract.
+
+   Visual-safety contract:
+   - dynamic bubbles keep moving, but visible trajectory points stay inside a
+     size-aware safe area so the complete bubble remains legible;
+   - Year-2 selector specificity intentionally outranks the immutable runtime's
+     later duduq-bp-edge-trajectory-108 rule without changing that release;
+   - the global Bubble Pop release and Canary manifest remain untouched.
 */
 (function () {
   "use strict";
 
-  const VERSION = "1.0.1-year2-official-smart-media-dedupe";
+  const VERSION = "1.0.5-year2-official-smart-media-safe-rotated-bounds";
   const OFFICIAL_ASSET = /^https:\/\/raw\.githubusercontent\.com\/augustoborgessousa93\/Assets-DuduQ\//i;
   const GENERATED_IMAGE = /^data:image\//i;
   const SYNTHETIC_DISTRACTOR = /__duduq_distractor_\d+$/i;
+  const SAFE_TRAJECTORY_STYLE_ID = "duduq-year2-bubble-safe-trajectory";
 
   if (window.__DUDUQ_YEAR2_BUBBLE_SMART_RENDERER_BRIDGE__) return;
 
@@ -63,6 +71,76 @@
     return removed;
   }
 
+  function installSafeTrajectoryStyle(runtimeWindow) {
+    const doc = runtimeWindow?.document;
+    if (!doc?.head) return false;
+    if (doc.getElementById(SAFE_TRAJECTORY_STYLE_ID)) return true;
+
+    const style = doc.createElement("style");
+    style.id = SAFE_TRAJECTORY_STYLE_ID;
+    style.dataset.duduqYear2BubbleSafeTrajectory = VERSION;
+    style.textContent = `
+      html body #root .duduq-engine-stage .duduq-bp-root
+        .duduq-bp-bubble-shell--dynamic,
+      html body #root .duduq-engine-stage .duduq-bp-root[data-paused="false"]
+        .duduq-bp-bubble-shell--dynamic:not([data-popped="true"]) {
+        --y2-bp-safe-edge: 84px;
+        left: clamp(var(--y2-bp-safe-edge), var(--bp-x0, 50%), calc(100% - var(--y2-bp-safe-edge))) !important;
+        top: clamp(var(--y2-bp-safe-edge), var(--bp-y0, 82%), calc(100% - var(--y2-bp-safe-edge))) !important;
+        animation-name: duduq-year2-bp-stream-safe !important;
+      }
+
+      @keyframes duduq-year2-bp-stream-safe {
+        0% {
+          opacity: 0;
+          left: clamp(var(--y2-bp-safe-edge), var(--bp-x0, 50%), calc(100% - var(--y2-bp-safe-edge)));
+          top: clamp(var(--y2-bp-safe-edge), var(--bp-y0, 82%), calc(100% - var(--y2-bp-safe-edge)));
+          transform: translate(-50%, -50%) scale(.90) rotate(var(--bp-tilt-neg, -2deg));
+        }
+        6% { opacity: 1; }
+        32% {
+          opacity: 1;
+          left: clamp(var(--y2-bp-safe-edge), var(--bp-x1, 36%), calc(100% - var(--y2-bp-safe-edge)));
+          top: clamp(var(--y2-bp-safe-edge), var(--bp-y1, 60%), calc(100% - var(--y2-bp-safe-edge)));
+          transform: translate(-50%, -50%) scale(.98) rotate(var(--bp-tilt, 2deg));
+        }
+        66% {
+          opacity: 1;
+          left: clamp(var(--y2-bp-safe-edge), var(--bp-x2, 64%), calc(100% - var(--y2-bp-safe-edge)));
+          top: clamp(var(--y2-bp-safe-edge), var(--bp-y2, 38%), calc(100% - var(--y2-bp-safe-edge)));
+          transform: translate(-50%, -50%) scale(1.02) rotate(var(--bp-tilt-neg, -2deg));
+        }
+        94% { opacity: 1; }
+        100% {
+          opacity: 0;
+          left: clamp(var(--y2-bp-safe-edge), var(--bp-x3, 50%), calc(100% - var(--y2-bp-safe-edge)));
+          top: clamp(var(--y2-bp-safe-edge), var(--bp-y3, 14%), calc(100% - var(--y2-bp-safe-edge)));
+          transform: translate(-50%, -50%) scale(.94) rotate(var(--bp-tilt, 2deg));
+        }
+      }
+
+      @media (max-width: 720px) {
+        html body #root .duduq-engine-stage .duduq-bp-root
+          .duduq-bp-bubble-shell--dynamic,
+        html body #root .duduq-engine-stage .duduq-bp-root[data-paused="false"]
+          .duduq-bp-bubble-shell--dynamic:not([data-popped="true"]) {
+          --y2-bp-safe-edge: 78px;
+        }
+      }
+
+      @media (max-width: 430px) {
+        html body #root .duduq-engine-stage .duduq-bp-root
+          .duduq-bp-bubble-shell--dynamic,
+        html body #root .duduq-engine-stage .duduq-bp-root[data-paused="false"]
+          .duduq-bp-bubble-shell--dynamic:not([data-popped="true"]) {
+          --y2-bp-safe-edge: 76px;
+        }
+      }
+    `;
+    doc.head.appendChild(style);
+    return true;
+  }
+
   function installMessageDedupe(runtimeWindow) {
     if (!runtimeWindow || runtimeWindow.__DUDUQ_YEAR2_BUBBLE_MESSAGE_DEDUPE__) return;
 
@@ -104,6 +182,8 @@
 
     try {
       const runtimeWindow = frame.contentWindow;
+      installSafeTrajectoryStyle(runtimeWindow);
+
       const React = runtimeWindow?.React;
       if (!React || typeof React.createElement !== "function") return false;
 
@@ -143,7 +223,9 @@
         releaseModified: false,
         canaryModified: false,
         officialAssetsOnly: true,
-        syntheticVisualDedupe: true
+        syntheticVisualDedupe: true,
+        safeTrajectory: true,
+        runtimeTrajectoryOverriddenYear2Only: true
       });
       return true;
     } catch (error) {
@@ -161,8 +243,8 @@
       if (!/\/DUDUQ_BUBBLE_POP\.html(?:\?|$)/i.test(src)) return;
 
       // Capture phase runs before the adapter's target load handler posts
-      // DUDUQ_LOAD_CONTENT, so media rendering and synthetic visual dedupe are
-      // installed before the first external Bubble Pop render.
+      // DUDUQ_LOAD_CONTENT, so media rendering, trajectory safety and synthetic
+      // visual dedupe are installed before the first external Bubble Pop render.
       patchBubbleFrame(frame);
     },
     true
@@ -173,6 +255,8 @@
     releaseModified: false,
     canaryModified: false,
     scope: "english-year-2",
-    syntheticVisualDedupe: true
+    syntheticVisualDedupe: true,
+    safeTrajectory: true,
+    runtimeTrajectoryOverriddenYear2Only: true
   });
 })();
