@@ -14,7 +14,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.4-year2-official-smart-media-safe-trajectory-precedence";
+  const VERSION = "1.0.5-year2-official-smart-media-safe-rotated-bounds";
   const OFFICIAL_ASSET = /^https:\/\/raw\.githubusercontent\.com\/augustoborgessousa93\/Assets-DuduQ\//i;
   const GENERATED_IMAGE = /^data:image\//i;
   const SYNTHETIC_DISTRACTOR = /__duduq_distractor_\d+$/i;
@@ -84,7 +84,7 @@
         .duduq-bp-bubble-shell--dynamic,
       html body #root .duduq-engine-stage .duduq-bp-root[data-paused="false"]
         .duduq-bp-bubble-shell--dynamic:not([data-popped="true"]) {
-        --y2-bp-safe-edge: 76px;
+        --y2-bp-safe-edge: 84px;
         left: clamp(var(--y2-bp-safe-edge), var(--bp-x0, 50%), calc(100% - var(--y2-bp-safe-edge))) !important;
         top: clamp(var(--y2-bp-safe-edge), var(--bp-y0, 82%), calc(100% - var(--y2-bp-safe-edge))) !important;
         animation-name: duduq-year2-bp-stream-safe !important;
@@ -124,7 +124,7 @@
           .duduq-bp-bubble-shell--dynamic,
         html body #root .duduq-engine-stage .duduq-bp-root[data-paused="false"]
           .duduq-bp-bubble-shell--dynamic:not([data-popped="true"]) {
-          --y2-bp-safe-edge: 72px;
+          --y2-bp-safe-edge: 78px;
         }
       }
 
@@ -133,7 +133,7 @@
           .duduq-bp-bubble-shell--dynamic,
         html body #root .duduq-engine-stage .duduq-bp-root[data-paused="false"]
           .duduq-bp-bubble-shell--dynamic:not([data-popped="true"]) {
-          --y2-bp-safe-edge: 68px;
+          --y2-bp-safe-edge: 76px;
         }
       }
     `;
