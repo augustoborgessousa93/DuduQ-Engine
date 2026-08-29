@@ -39,6 +39,12 @@ jobs:
         with:
           node-version: 22
 
+      - name: Syntax check Year 2 Bubble safe bridge
+        run: node --check content/english/year-2/year2-v23-bubble-smart-renderer-bridge.js
+
+      - name: Syntax check M01 wide desktop bridge
+        run: node --check content/english/year-2/module-01/m1-wide-desktop-v23.js
+
       - name: Syntax check visual-ready test
         run: node --check test/year2/public-entry-visual-ready-rc2.mjs
 
