@@ -40,6 +40,7 @@ try{
         revision:window.DUDUQ_ENGINE_MANIFEST?.revision,
         sharedVisual:window.DuduQSmartVisual?.version||null,
         sharedBubble:window.__DUDUQ_SHARED_BUBBLE_RUNTIME_SAFETY__?.version||null,
+        sharedFrameSync:window.__DUDUQ_SHARED_RUNTIME_FRAME_SYNC__?.version||null,
         moduleItems:window.DUDUQ_CONTENT?.english?.year3?.[`module${String(moduleNumber).padStart(2,"0")}`]?.activities?.length||0,
         introActive:Boolean(window.DuduQIntro?.isActive?.()),
         rootText:(document.querySelector("#root")?.textContent||"").trim().slice(0,1200),
@@ -48,9 +49,10 @@ try{
 
       assert(state.ready,`${viewport.name} M${mm(moduleNumber)}: engine não ficou ready. root=${state.rootText} network=${localNetwork.join(" | ")} errors=${errors.join(" | ")}`);
       assert(state.channel==="scale-v1",`${viewport.name} M${mm(moduleNumber)}: canal incorreto ${state.channel}.`);
-      assert(state.revision===2,`${viewport.name} M${mm(moduleNumber)}: revisão scale-v1 inesperada ${state.revision}.`);
+      assert(state.revision===3,`${viewport.name} M${mm(moduleNumber)}: revisão scale-v1 inesperada ${state.revision}.`);
       assert(state.sharedVisual==="1.0.0",`${viewport.name} M${mm(moduleNumber)}: smart visual compartilhado não carregou.`);
       assert(state.sharedBubble==="1.0.0",`${viewport.name} M${mm(moduleNumber)}: Bubble safety compartilhado não carregou.`);
+      assert(state.sharedFrameSync==="1.0.0",`${viewport.name} M${mm(moduleNumber)}: frame sync compartilhado não carregou.`);
       assert(state.moduleItems===15,`${viewport.name} M${mm(moduleNumber)}: módulo não publicou 15 atividades.`);
       assert(state.introActive,`${viewport.name} M${mm(moduleNumber)}: Intro não ficou ativa antes da missão.`);
 
