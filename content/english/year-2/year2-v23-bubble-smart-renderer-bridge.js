@@ -6,13 +6,13 @@
 
    Visual-safety contract:
    - dynamic bubbles keep moving, but visible trajectory points stay inside a
-     responsive safe area so the complete bubble remains legible;
+     size-aware safe area so the complete bubble remains legible;
    - the global Bubble Pop release and Canary manifest remain untouched.
 */
 (function () {
   "use strict";
 
-  const VERSION = "1.0.2-year2-official-smart-media-safe-trajectory";
+  const VERSION = "1.0.3-year2-official-smart-media-safe-trajectory";
   const OFFICIAL_ASSET = /^https:\/\/raw\.githubusercontent\.com\/augustoborgessousa93\/Assets-DuduQ\//i;
   const GENERATED_IMAGE = /^data:image\//i;
   const SYNTHETIC_DISTRACTOR = /__duduq_distractor_\d+$/i;
@@ -78,62 +78,46 @@
     style.id = SAFE_TRAJECTORY_STYLE_ID;
     style.dataset.duduqYear2BubbleSafeTrajectory = VERSION;
     style.textContent = `
-      .duduq-bp-root {
-        --y2-bp-safe-min-x: 8%;
-        --y2-bp-safe-max-x: 92%;
-        --y2-bp-safe-min-y: 10%;
-        --y2-bp-safe-max-y: 90%;
-      }
-
       .duduq-bp-bubble-shell--dynamic {
+        --y2-bp-safe-edge: 76px;
         animation-name: duduq-year2-bp-stream-safe !important;
       }
 
       @keyframes duduq-year2-bp-stream-safe {
         0% {
           opacity: 0;
-          left: clamp(var(--y2-bp-safe-min-x), var(--bp-x0, 50%), var(--y2-bp-safe-max-x));
-          top: clamp(var(--y2-bp-safe-min-y), var(--bp-y0, 82%), var(--y2-bp-safe-max-y));
+          left: clamp(var(--y2-bp-safe-edge), var(--bp-x0, 50%), calc(100% - var(--y2-bp-safe-edge)));
+          top: clamp(var(--y2-bp-safe-edge), var(--bp-y0, 82%), calc(100% - var(--y2-bp-safe-edge)));
           transform: translate(-50%, -50%) scale(.90) rotate(var(--bp-tilt-neg, -2deg));
         }
         6% { opacity: 1; }
         32% {
           opacity: 1;
-          left: clamp(var(--y2-bp-safe-min-x), var(--bp-x1, 36%), var(--y2-bp-safe-max-x));
-          top: clamp(var(--y2-bp-safe-min-y), var(--bp-y1, 60%), var(--y2-bp-safe-max-y));
+          left: clamp(var(--y2-bp-safe-edge), var(--bp-x1, 36%), calc(100% - var(--y2-bp-safe-edge)));
+          top: clamp(var(--y2-bp-safe-edge), var(--bp-y1, 60%), calc(100% - var(--y2-bp-safe-edge)));
           transform: translate(-50%, -50%) scale(.98) rotate(var(--bp-tilt, 2deg));
         }
         66% {
           opacity: 1;
-          left: clamp(var(--y2-bp-safe-min-x), var(--bp-x2, 64%), var(--y2-bp-safe-max-x));
-          top: clamp(var(--y2-bp-safe-min-y), var(--bp-y2, 38%), var(--y2-bp-safe-max-y));
+          left: clamp(var(--y2-bp-safe-edge), var(--bp-x2, 64%), calc(100% - var(--y2-bp-safe-edge)));
+          top: clamp(var(--y2-bp-safe-edge), var(--bp-y2, 38%), calc(100% - var(--y2-bp-safe-edge)));
           transform: translate(-50%, -50%) scale(1.02) rotate(var(--bp-tilt-neg, -2deg));
         }
         94% { opacity: 1; }
         100% {
           opacity: 0;
-          left: clamp(var(--y2-bp-safe-min-x), var(--bp-x3, 50%), var(--y2-bp-safe-max-x));
-          top: clamp(var(--y2-bp-safe-min-y), var(--bp-y3, 14%), var(--y2-bp-safe-max-y));
+          left: clamp(var(--y2-bp-safe-edge), var(--bp-x3, 50%), calc(100% - var(--y2-bp-safe-edge)));
+          top: clamp(var(--y2-bp-safe-edge), var(--bp-y3, 14%), calc(100% - var(--y2-bp-safe-edge)));
           transform: translate(-50%, -50%) scale(.94) rotate(var(--bp-tilt, 2deg));
         }
       }
 
       @media (max-width: 720px) {
-        .duduq-bp-root {
-          --y2-bp-safe-min-x: 18%;
-          --y2-bp-safe-max-x: 82%;
-          --y2-bp-safe-min-y: 17%;
-          --y2-bp-safe-max-y: 83%;
-        }
+        .duduq-bp-bubble-shell--dynamic { --y2-bp-safe-edge: 72px; }
       }
 
       @media (max-width: 430px) {
-        .duduq-bp-root {
-          --y2-bp-safe-min-x: 20%;
-          --y2-bp-safe-max-x: 80%;
-          --y2-bp-safe-min-y: 18%;
-          --y2-bp-safe-max-y: 82%;
-        }
+        .duduq-bp-bubble-shell--dynamic { --y2-bp-safe-edge: 68px; }
       }
     `;
     doc.head.appendChild(style);
