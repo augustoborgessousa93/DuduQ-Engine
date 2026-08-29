@@ -71,7 +71,7 @@
           .duduq-bp-bubble-shell--dynamic,
         html body #root .duduq-engine-stage .duduq-bp-root[data-paused="false"]
           .duduq-bp-bubble-shell--dynamic:not([data-popped="true"]) {
-          --duduq-bp-safe-edge: 90px;
+          --duduq-bp-safe-edge: 96px;
         }
       }
 
@@ -80,7 +80,7 @@
           .duduq-bp-bubble-shell--dynamic,
         html body #root .duduq-engine-stage .duduq-bp-root[data-paused="false"]
           .duduq-bp-bubble-shell--dynamic:not([data-popped="true"]) {
-          --duduq-bp-safe-edge: 86px;
+          --duduq-bp-safe-edge: 96px;
         }
       }
     `;
