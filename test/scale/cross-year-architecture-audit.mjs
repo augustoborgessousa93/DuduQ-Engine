@@ -101,18 +101,26 @@ report.invariants.scaleRevision=scale?.revision??null;
 assert(report.global.modules===30,"Esperados 30 módulos entre Years 1–5.");
 assert(report.global.indexes===30,"Esperados 30 public entries entre Years 1–5.");
 assert(report.invariants.scalePromotionDisabled,"scale-v1 não pode promover produção nesta fase.");
-for(const year of [3,4,5]){
-  const channels=report.years[year].channels;
-  assert(channels.length===1&&channels[0]==="scale-v1",`Year ${year}: todos os módulos devem permanecer no scale-v1.`);
-  assert(report.years[year].directCoreModules.length===0,`Year ${year}: não deve voltar ao bootstrap manual do Core.`);
+
+for(const year of [1,3,4,5]){
+  const data=report.years[year];
+  assert(data.channels.length===1&&data.channels[0]==="scale-v1",`Year ${year}: todos os módulos devem permanecer no scale-v1.`);
+  assert(data.directCoreModules.length===0,`Year ${year}: não deve voltar ao bootstrap manual do Core.`);
+  assert(data.sharedModules.length===6,`Year ${year}: todos os módulos devem carregar aliases/compat compartilhados.`);
+  for(const module of data.moduleReport){
+    assert(module.universalPlayer&&module.universalLoader,`Year ${year} M${String(module.module).padStart(2,"0")}: Player/Loader universal obrigatório.`);
+    assert(!module.inlineHostBootstrap,`Year ${year} M${String(module.module).padStart(2,"0")}: bootstrap inline do Host não pode retornar.`);
+  }
 }
 
+assert(report.years[2].channels.includes("canary-v1"),"Year 2 deve permanecer no Canary até a migração controlada de bridges locais.");
+
 report.recommendation={
-  phase1:"baseline Year1/Year2 public entries before migration",
-  phase2:"move reusable local behaviors into shared scale layers",
-  phase3:"route Years 1–5 through the same experimental shared channel",
-  phase4:"apply mechanic/responsive/audio/smart-image fixes once across all years"
+  phase1:"COMPLETED — Year1 migrated to universal Player/Loader on scale-v1",
+  phase2:"move reusable Year2 local behaviors into shared scale layers",
+  phase3:"route Year2 through scale-v1 after duplicate local/shared behavior is removed",
+  phase4:"apply mechanic/responsive/audio/smart-image fixes once across Years 1–5"
 };
 
 console.log(JSON.stringify(report,null,2));
-console.log("PASS — arquitetura Years 1–5 inventariada; diferenças legadas são reportadas sem alterar conteúdo/release.");
+console.log("PASS — Years 1,3,4,5 compartilham scale-v1; Year2 permanece isolado até migração controlada dos bridges.");
