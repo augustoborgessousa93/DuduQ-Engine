@@ -19,15 +19,29 @@ async function readGuardState(page) {
       const frame = await frameHandle.contentFrame();
       if (!frame) throw new Error("Não foi possível acessar o iframe da mecânica.");
 
-      await frame.waitForFunction(() => {
-        return document.documentElement.getAttribute(
+      // Marker, stylesheet e efeito visual precisam ser observados de forma atômica
+      // no mesmo documento. O iframe pode navegar/recarregar durante o handoff da
+      // Intro; separar essas leituras permitia combinar o marker do documento antigo
+      // com o DOM do documento novo e gerar um falso negativo.
+      const state = await frame.evaluate(() => {
+        const markerActive = document.documentElement.getAttribute(
           "data-duduq-year2-internal-completion-guard"
         ) === "active";
-      }, null, { timeout: 2500 });
+        const styleInstalled = Boolean(
+          document.getElementById("duduq-year2-internal-completion-guard")
+        );
 
-      await frame.waitForTimeout(80);
+        if (markerActive && !styleInstalled) {
+          return {
+            invariantBroken: true,
+            markerActive,
+            styleInstalled,
+            frameUrl: location.href
+          };
+        }
 
-      return await frame.evaluate(() => {
+        if (!markerActive || !styleInstalled || !document.body) return null;
+
         const fake = document.createElement("section");
         fake.className = "duduq-engine-complete";
         fake.innerHTML = "<h2>Parabéns! Lição concluída</h2>";
@@ -35,9 +49,9 @@ async function readGuardState(page) {
 
         const computed = getComputedStyle(fake);
         const result = {
-          styleInstalled: Boolean(
-            document.getElementById("duduq-year2-internal-completion-guard")
-          ),
+          invariantBroken: false,
+          markerActive,
+          styleInstalled,
           visibility: computed.visibility,
           opacity: computed.opacity,
           pointerEvents: computed.pointerEvents,
@@ -48,11 +62,22 @@ async function readGuardState(page) {
         fake.remove();
         return result;
       });
+
+      if (state?.invariantBroken) {
+        throw new Error(
+          `Guard marcou o documento como ativo sem instalar o CSS: ${JSON.stringify(state)}`
+        );
+      }
+
+      if (state) return state;
+
+      lastError = new Error("Guard ainda não está completo no documento atual.");
+      await page.waitForTimeout(120);
     } catch (error) {
       lastError = error;
       const message = String(error?.message || error);
       const navigationRace = /Execution context was destroyed|navigation|detached|Target page, context or browser has been closed/i.test(message);
-      if (!navigationRace && !/Timeout/i.test(message)) throw error;
+      if (!navigationRace && !/Guard ainda não está completo/i.test(message)) throw error;
       await page.waitForTimeout(120);
     }
   }
@@ -94,6 +119,7 @@ try {
   const state = await readGuardState(page);
 
   assert(state.styleInstalled, "Guard CSS não foi instalado no iframe.");
+  assert(state.markerActive, "Guard não marcou o iframe final como ativo.");
   assert(
     state.text.includes("Lição concluída"),
     "Sentinela de conclusão interna não foi criada corretamente."
