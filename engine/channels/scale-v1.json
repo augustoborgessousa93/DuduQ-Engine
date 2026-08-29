@@ -32,12 +32,12 @@
       {
         "id": "duduq-shared-bubble-smart-media-v1",
         "src": "/engine/shared/bubble-pop-smart-media-v1.js",
-        "release": "shared-1.0.0"
+        "release": "shared-1.0.1"
       },
       {
         "id": "duduq-shared-bubble-runtime-safety-v1",
         "src": "/engine/shared/bubble-pop-runtime-safety-v1.js",
-        "release": "shared-1.0.0"
+        "release": "shared-1.1.0"
       },
       {
         "id": "duduq-shared-host-completion-guard-v1",
