@@ -7,12 +7,14 @@
    Visual-safety contract:
    - dynamic bubbles keep moving, but visible trajectory points stay inside a
      size-aware safe area so the complete bubble remains legible;
+   - Year-2 selector specificity intentionally outranks the immutable runtime's
+     later duduq-bp-edge-trajectory-108 rule without changing that release;
    - the global Bubble Pop release and Canary manifest remain untouched.
 */
 (function () {
   "use strict";
 
-  const VERSION = "1.0.3-year2-official-smart-media-safe-trajectory";
+  const VERSION = "1.0.4-year2-official-smart-media-safe-trajectory-precedence";
   const OFFICIAL_ASSET = /^https:\/\/raw\.githubusercontent\.com\/augustoborgessousa93\/Assets-DuduQ\//i;
   const GENERATED_IMAGE = /^data:image\//i;
   const SYNTHETIC_DISTRACTOR = /__duduq_distractor_\d+$/i;
@@ -78,8 +80,13 @@
     style.id = SAFE_TRAJECTORY_STYLE_ID;
     style.dataset.duduqYear2BubbleSafeTrajectory = VERSION;
     style.textContent = `
-      .duduq-bp-bubble-shell--dynamic {
+      html body #root .duduq-engine-stage .duduq-bp-root
+        .duduq-bp-bubble-shell--dynamic,
+      html body #root .duduq-engine-stage .duduq-bp-root[data-paused="false"]
+        .duduq-bp-bubble-shell--dynamic:not([data-popped="true"]) {
         --y2-bp-safe-edge: 76px;
+        left: clamp(var(--y2-bp-safe-edge), var(--bp-x0, 50%), calc(100% - var(--y2-bp-safe-edge))) !important;
+        top: clamp(var(--y2-bp-safe-edge), var(--bp-y0, 82%), calc(100% - var(--y2-bp-safe-edge))) !important;
         animation-name: duduq-year2-bp-stream-safe !important;
       }
 
@@ -113,11 +120,21 @@
       }
 
       @media (max-width: 720px) {
-        .duduq-bp-bubble-shell--dynamic { --y2-bp-safe-edge: 72px; }
+        html body #root .duduq-engine-stage .duduq-bp-root
+          .duduq-bp-bubble-shell--dynamic,
+        html body #root .duduq-engine-stage .duduq-bp-root[data-paused="false"]
+          .duduq-bp-bubble-shell--dynamic:not([data-popped="true"]) {
+          --y2-bp-safe-edge: 72px;
+        }
       }
 
       @media (max-width: 430px) {
-        .duduq-bp-bubble-shell--dynamic { --y2-bp-safe-edge: 68px; }
+        html body #root .duduq-engine-stage .duduq-bp-root
+          .duduq-bp-bubble-shell--dynamic,
+        html body #root .duduq-engine-stage .duduq-bp-root[data-paused="false"]
+          .duduq-bp-bubble-shell--dynamic:not([data-popped="true"]) {
+          --y2-bp-safe-edge: 68px;
+        }
       }
     `;
     doc.head.appendChild(style);
@@ -207,7 +224,8 @@
         canaryModified: false,
         officialAssetsOnly: true,
         syntheticVisualDedupe: true,
-        safeTrajectory: true
+        safeTrajectory: true,
+        runtimeTrajectoryOverriddenYear2Only: true
       });
       return true;
     } catch (error) {
@@ -238,6 +256,7 @@
     canaryModified: false,
     scope: "english-year-2",
     syntheticVisualDedupe: true,
-    safeTrajectory: true
+    safeTrajectory: true,
+    runtimeTrajectoryOverriddenYear2Only: true
   });
 })();
