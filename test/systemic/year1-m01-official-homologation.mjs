@@ -26,6 +26,7 @@ const EXPECTED = [
   ["EN1-M1-11", "A", ["See you!", "Good afternoon!", "Hi!"]],
   ["EN1-M1-12", "A", ["Hi, Mia!", "Bye, Mia!", "See you, Mia!"]]
 ];
+const expected = EXPECTED;
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
