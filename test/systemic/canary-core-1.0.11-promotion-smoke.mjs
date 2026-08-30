@@ -62,6 +62,7 @@ try {
             unknown: window.DuduQAssets?.resolveImageDetails("definitely unknown official asset") || null,
             correctSound: window.DuduQAssets?.getSound?.("correct") || "",
             scripts,
+            requiredMechanics: Array.isArray(window.DUDUQ_GAME_CONFIG?.requiredMechanics) ? [...window.DUDUQ_GAME_CONFIG.requiredMechanics] : [],
             mechanics: window.DuduQ?.listMechanics?.().map((item) => item.id) || []
           };
         }, ASSET_SENTINELS);
@@ -76,7 +77,8 @@ try {
         assert(boot.scripts.some((src) => src.includes("/engine/releases/core/1.0.11/duduq-assets.js")), `M${moduleKey} ${viewport.name}: published Core assets consumer not loaded.`);
         assert(boot.scripts.some((src) => src.includes("/engine/releases/core/1.0.11/duduq-host.js")), `M${moduleKey} ${viewport.name}: published Host not loaded.`);
         assert(boot.scripts.some((src) => src.includes("/engine/releases/core/1.0.11/duduq-router.js")), `M${moduleKey} ${viewport.name}: published Router not loaded.`);
-        assert(boot.mechanics.includes("target-shooter") && boot.mechanics.includes("drag-drop"), `M${moduleKey} ${viewport.name}: Year 1 mechanics did not register.`);
+        assert(boot.requiredMechanics.length > 0, `M${moduleKey} ${viewport.name}: module declared no required mechanics.`);
+        assert(boot.requiredMechanics.every((mechanicId) => boot.mechanics.includes(mechanicId)), `M${moduleKey} ${viewport.name}: required mechanic missing. Required=${boot.requiredMechanics.join(",")} Registered=${boot.mechanics.join(",")}`);
         assert(String(boot.correctSound).endsWith("/Efeitos%20sonoros/correct.mp3"), `M${moduleKey} ${viewport.name}: sound API regressed.`);
 
         for (const query of ASSET_SENTINELS) {
@@ -128,7 +130,7 @@ try {
         assert(pageErrors.length === 0, `M${moduleKey} ${viewport.name}: pageerror ${pageErrors.join(" | ")}`);
         assert(critical404.length === 0, `M${moduleKey} ${viewport.name}: critical 404 ${critical404.join(" | ")}`);
 
-        cases.push({ module: moduleKey, viewport: viewport.name, totalSteps: initial.totalSteps, progress, assetStrategies: Object.fromEntries(Object.entries(boot.resolved).map(([key, value]) => [key, value?.strategy || "missing"])), status: "PASS" });
+        cases.push({ module: moduleKey, viewport: viewport.name, requiredMechanics: boot.requiredMechanics, totalSteps: initial.totalSteps, progress, assetStrategies: Object.fromEntries(Object.entries(boot.resolved).map(([key, value]) => [key, value?.strategy || "missing"])), status: "PASS" });
         console.log(`PASS M${moduleKey} ${viewport.name}`);
       } finally {
         await page.close();
