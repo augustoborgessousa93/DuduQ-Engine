@@ -22,6 +22,7 @@ jobs:
           node --check engine/shared/bubble-pop-runtime-safety-v1.js
           node --check engine/shared/smart-visual-resolver-v1.js
           node --check engine/shared/host-owned-completion-guard-v1.js
+          node --check engine/shared/intro-layout-v1.js
           node --check content/english/shared/scale-smart-visual-aliases-v1.js
           node --check content/english/shared/scale-content-compat-v1.js
           node --check content/english/year-3/year3-content-factory-v1.js
@@ -87,7 +88,7 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/scale/year1-year2-baseline-smoke.mjs
-      - name: Measure Intro logo alpha and layout geometry
+      - name: Gate stabilized Intro geometry
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/scale/intro-logo-alpha-layout-audit.mjs
