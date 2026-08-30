@@ -34,12 +34,21 @@ try {
         const boot = await page.evaluate((moduleKey) => {
           const module = window.DUDUQ_CONTENT?.english?.year1?.[`module${moduleKey}`];
           const config = window.DUDUQ_GAME_CONFIG || {};
+          const scripts = Array.from(document.scripts).map((script) => script.getAttribute("src") || "").filter(Boolean);
+          const legacyScripts = scripts.filter((src) => {
+            let pathname = "";
+            try { pathname = new URL(src, location.href).pathname; } catch { pathname = String(src); }
+            // Correct versioned runtime lives under /engine/releases/**.
+            // Legacy debt means the old top-level /core/** or /mechanics/** trees.
+            return /^\/(?:core|mechanics)\//.test(pathname);
+          });
           return {
             moduleExists: Boolean(module),
             activities: Array.isArray(module?.activities) ? module.activities.length : 0,
             channel: config.channel || "",
             modulePath: config.modulePath || [],
-            scripts: Array.from(document.scripts).map((script) => script.getAttribute("src") || "").filter(Boolean),
+            scripts,
+            legacyScripts,
             documentWidth: document.documentElement.scrollWidth,
             rootText: String(document.querySelector("#root")?.textContent || "").trim()
           };
@@ -49,7 +58,7 @@ try {
         assert(boot.channel === "canary-v1", `Y1 M${moduleKey}: canal inesperado ${boot.channel}.`);
         assert(boot.modulePath.join("/") === `english/year1/module${moduleKey}`, `Y1 M${moduleKey}: modulePath incorreto ${boot.modulePath.join("/")}.`);
         assert(boot.scripts.some((src) => /engine\/duduq-loader-v1\.js/.test(src)), `Y1 M${moduleKey}: Loader versionado ausente.`);
-        assert(!boot.scripts.some((src) => /(?:^|\/)core\/|(?:^|\/)mechanics\//.test(src)), `Y1 M${moduleKey}: entrypoint ainda carrega Core/mecânica legada diretamente.`);
+        assert(boot.legacyScripts.length === 0, `Y1 M${moduleKey}: entrypoint ainda carrega raiz legada diretamente: ${boot.legacyScripts.join(", ")}`);
         assert(!/^Erro:/i.test(boot.rootText), `Y1 M${moduleKey}: erro no boot: ${boot.rootText}`);
         assert(boot.documentWidth <= viewport.width + 6, `Y1 M${moduleKey}: overflow na Intro.`);
 
