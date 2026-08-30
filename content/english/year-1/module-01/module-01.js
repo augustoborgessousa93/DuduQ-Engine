@@ -141,34 +141,44 @@
     return question;
   }
 
-  function matchingQuestion(spec, leftItems, rightItems, correctRightId) {
+  function audioChoiceDragQuestion(spec, target, optionAudios) {
     const question = commonQuestion(spec);
+    const targetId = `${spec.id}-answer-target`;
     question.delivery = {
-      mechanic: "matching",
-      preferred: ["matching"],
+      mechanic: "drag-drop",
+      preferred: ["drag-drop"],
       blocked: ["smart-sentence"],
       allowImage: true,
       allowAudio: true
     };
-    question.metadata.matching = {
-      mode: "image-audio",
-      leftTitle: "Observe",
-      rightTitle: "Ouça",
-      leftItems,
-      rightItems,
-      pairs: [
-        {
-          leftId: leftItems[0].id,
-          rightId: correctRightId
-        }
-      ],
-      behavior: {
-        lockLeftOrder: true,
-        shuffleRight: true,
-        connectionMode: "1x1",
-        interactionMode: "smart",
-        lockCorrectPairsOnRetry: true
-      }
+    question.payload = {
+      mode: "association",
+      strategy: "association",
+      items: optionAudios.map((item, index) => ({
+        id: item.id,
+        label: String(index + 1),
+        spokenText: item.spokenText,
+        speechLocale: item.speechLocale,
+        audioDescription: item.audioDescription,
+        required: item.id === spec.answer,
+        ...(item.id === spec.answer ? { targetId } : {})
+      })),
+      targets: [{
+        id: targetId,
+        label: "",
+        imageAsset: target.imageAsset,
+        image: { src: target.imageUrl, alt: target.alt },
+        alt: target.alt,
+        capacity: 1,
+        kind: "box"
+      }]
+    };
+    question.metadata.dragDropChoice = {
+      singleEditorialAnswer: spec.answer,
+      visibleLabels: "numeric-only",
+      optionAudioRequired: true,
+      correctTargetId: targetId,
+      targetImageAsset: target.imageAsset
     };
     return question;
   }
@@ -195,12 +205,12 @@
     imageItem("C", "greeting good morning bom dia", "Cena de cumprimento pela manhã")
   ]);
 
-  const q02 = matchingQuestion({
+  const q02 = audioChoiceDragQuestion({
     id: "EN1-M1-02",
     difficulty: "easy",
     skill: "Relacionar cumprimentos a situações cotidianas.",
     statement: "É de manhã. Qual saudação combina com esse momento? Ouça as opções antes de responder.",
-    instruction: "Observe a manhã, ouça as opções e escolha a saudação correta.",
+    instruction: "Observe a manhã, toque nos cards para ouvir e arraste a opção correta para a cena.",
     alternatives: [
       { id: "A", text: "Good afternoon" },
       { id: "B", text: "Goodbye" },
@@ -210,20 +220,18 @@
     sourceStatus: "Ajustar — Fácil",
     sourceSkill: "Compreensão multimodal",
     sourceMedia: "Imagem de manhã/sol nascendo. Contexto → áudio; leitura não necessária."
-  }, [
-    imageItem("context-morning", "chegada escola manha arriving at school morning", "Manhã com chegada à escola")
-  ], [
-    audioItem("audio-a", "Good afternoon", "en-US", "Ouvir Good afternoon"),
-    audioItem("audio-b", "Goodbye", "en-US", "Ouvir Goodbye"),
-    audioItem("audio-c", "Good morning", "en-US", "Ouvir Good morning")
-  ], "audio-c");
+  }, imageItem("context-morning", "chegada escola manha arriving at school morning", "Manhã com chegada à escola"), [
+    audioItem("A", "Good afternoon", "en-US", "Ouvir Good afternoon"),
+    audioItem("B", "Goodbye", "en-US", "Ouvir Goodbye"),
+    audioItem("C", "Good morning", "en-US", "Ouvir Good morning")
+  ]);
 
-  const q03 = matchingQuestion({
+  const q03 = audioChoiceDragQuestion({
     id: "EN1-M1-03",
     difficulty: "easy",
     skill: "Relacionar cumprimentos a situações cotidianas.",
     statement: "É de tarde. Qual saudação combina com esse momento? Ouça as opções antes de responder.",
-    instruction: "Observe a tarde, ouça as opções e escolha a saudação correta.",
+    instruction: "Observe a tarde, toque nos cards para ouvir e arraste a opção correta para a cena.",
     alternatives: [
       { id: "A", text: "Good afternoon" },
       { id: "B", text: "Good morning" },
@@ -233,13 +241,11 @@
     sourceStatus: "Ajustar — Fácil",
     sourceSkill: "Compreensão multimodal",
     sourceMedia: "Imagem do período da tarde. Contexto → áudio; leitura não necessária."
-  }, [
-    imageItem("context-afternoon", "greeting good afternoon boa tarde", "Cena de período da tarde")
-  ], [
-    audioItem("audio-a", "Good afternoon", "en-US", "Ouvir Good afternoon"),
-    audioItem("audio-b", "Good morning", "en-US", "Ouvir Good morning"),
-    audioItem("audio-c", "Goodbye", "en-US", "Ouvir Goodbye")
-  ], "audio-a");
+  }, imageItem("context-afternoon", "greeting good afternoon boa tarde", "Cena de período da tarde"), [
+    audioItem("A", "Good afternoon", "en-US", "Ouvir Good afternoon"),
+    audioItem("B", "Good morning", "en-US", "Ouvir Good morning"),
+    audioItem("C", "Goodbye", "en-US", "Ouvir Goodbye")
+  ]);
 
   const q04 = targetQuestion({
     id: "EN1-M1-04",
@@ -285,12 +291,12 @@
     imageItem("C", "introduction my name meu nome", "Personagem apresentando o próprio nome")
   ]);
 
-  const q06 = matchingQuestion({
+  const q06 = audioChoiceDragQuestion({
     id: "EN1-M1-06",
     difficulty: "easy",
     skill: "Reconhecer o vocabulário boy/girl com apoio visual.",
     statement: "Observe o personagem indicado como “boy”. Ouça as opções e toque no áudio que corresponde à imagem.",
-    instruction: "Observe o personagem, ouça as opções e escolha o áudio correto.",
+    instruction: "Observe o personagem, toque nos cards para ouvir e arraste o áudio correto para a imagem.",
     alternatives: [
       { id: "A", text: "boy" },
       { id: "B", text: "girl" },
@@ -300,20 +306,18 @@
     sourceStatus: "Ajustar — Fácil",
     sourceSkill: "Compreensão multimodal",
     sourceMedia: "Personagem fictício não estereotipado. Imagem/contexto → áudio."
-  }, [
-    imageItem("context-boy", "person boy menino", "Personagem fictício indicado como boy")
-  ], [
-    audioItem("audio-a", "boy", "en-US", "Ouvir boy"),
-    audioItem("audio-b", "girl", "en-US", "Ouvir girl"),
-    audioItem("audio-c", "hello", "en-US", "Ouvir hello")
-  ], "audio-a");
+  }, imageItem("context-boy", "person boy menino", "Personagem fictício indicado como boy"), [
+    audioItem("A", "boy", "en-US", "Ouvir boy"),
+    audioItem("B", "girl", "en-US", "Ouvir girl"),
+    audioItem("C", "hello", "en-US", "Ouvir hello")
+  ]);
 
-  const q07 = matchingQuestion({
+  const q07 = audioChoiceDragQuestion({
     id: "EN1-M1-07",
     difficulty: "easy",
     skill: "Reconhecer o vocabulário boy/girl com apoio visual.",
     statement: "Observe a personagem indicada como “girl”. Ouça as opções e toque no áudio que corresponde à imagem.",
-    instruction: "Observe a personagem, ouça as opções e escolha o áudio correto.",
+    instruction: "Observe a personagem, toque nos cards para ouvir e arraste o áudio correto para a imagem.",
     alternatives: [
       { id: "A", text: "boy" },
       { id: "B", text: "girl" },
@@ -323,13 +327,11 @@
     sourceStatus: "Ajustar — Fácil",
     sourceSkill: "Compreensão multimodal",
     sourceMedia: "Personagem fictícia não estereotipada. Imagem/contexto → áudio."
-  }, [
-    imageItem("context-girl", "person girl menina", "Personagem fictícia indicada como girl")
-  ], [
-    audioItem("audio-a", "boy", "en-US", "Ouvir boy"),
-    audioItem("audio-b", "girl", "en-US", "Ouvir girl"),
-    audioItem("audio-c", "goodbye", "en-US", "Ouvir goodbye")
-  ], "audio-b");
+  }, imageItem("context-girl", "person girl menina", "Personagem fictícia indicada como girl"), [
+    audioItem("A", "boy", "en-US", "Ouvir boy"),
+    audioItem("B", "girl", "en-US", "Ouvir girl"),
+    audioItem("C", "goodbye", "en-US", "Ouvir goodbye")
+  ]);
 
   const q08 = targetQuestion({
     id: "EN1-M1-08",
@@ -353,12 +355,12 @@
     imageItem("C", "criancas se cumprimentando children greeting hello", "Crianças se cumprimentando informalmente")
   ]);
 
-  const q09 = matchingQuestion({
+  const q09 = audioChoiceDragQuestion({
     id: "EN1-M1-09",
     difficulty: "medium",
     skill: "Identificar apresentação pessoal simples.",
     statement: "Ouça: “I’m Ana.” O que a pessoa está fazendo?",
-    instruction: "Ouça a fala e depois ouça as opções em português.",
+    instruction: "Ouça a fala, toque nos cards para ouvir as opções e arraste a resposta correta para a cena.",
     alternatives: [
       { id: "A", text: "Dizendo o próprio nome" },
       { id: "B", text: "Despedindo-se" },
@@ -369,13 +371,11 @@
     sourceSkill: "Escuta",
     sourceMedia: "Áudio EN obrigatório: I’m Ana. Opções auditivas em português; não exibir texto antes da resposta.",
     audio: { text: "I’m Ana.", language: "en-US" }
-  }, [
-    imageItem("context-ana", "ana", "Personagem fictícia Ana")
-  ], [
-    audioItem("audio-a", "Dizendo o próprio nome", "pt-BR", "Ouvir: dizendo o próprio nome"),
-    audioItem("audio-b", "Despedindo-se", "pt-BR", "Ouvir: despedindo-se"),
-    audioItem("audio-c", "Dizendo boa tarde", "pt-BR", "Ouvir: dizendo boa tarde")
-  ], "audio-a");
+  }, imageItem("context-selfintro", "introduction my name meu nome", "Cena de apresentação pessoal"), [
+    audioItem("A", "Dizendo o próprio nome", "pt-BR", "Ouvir: dizendo o próprio nome"),
+    audioItem("B", "Despedindo-se", "pt-BR", "Ouvir: despedindo-se"),
+    audioItem("C", "Dizendo boa tarde", "pt-BR", "Ouvir: dizendo boa tarde")
+  ]);
 
   const q10 = targetQuestion({
     id: "EN1-M1-10",
@@ -421,12 +421,12 @@
     imageItem("C", "criancas se cumprimentando children greeting hello", "Cena de cumprimento informal")
   ]);
 
-  const q12 = matchingQuestion({
+  const q12 = audioChoiceDragQuestion({
     id: "EN1-M1-12",
     difficulty: "hard",
     skill: "Selecionar uma resposta simples que mantém uma interação de cumprimento.",
     statement: "Mia diz: “Hello! I’m Mia.” Qual resposta também é um cumprimento e mantém a conversa? Ouça as opções antes de responder.",
-    instruction: "Ouça Mia, depois ouça as opções e escolha a resposta que mantém o cumprimento.",
+    instruction: "Ouça Mia, toque nos cards para ouvir as respostas e arraste a opção que mantém o cumprimento para Mia.",
     alternatives: [
       { id: "A", text: "Hi, Mia!" },
       { id: "B", text: "Bye, Mia!" },
@@ -437,13 +437,11 @@
     sourceSkill: "Escuta + interação guiada",
     sourceMedia: "Mini diálogo em áudio com personagens fictícios. Contexto → áudio; leitura não necessária.",
     audio: { text: "Hello! I’m Mia.", language: "en-US" }
-  }, [
-    imageItem("context-mia", "mia", "Personagem fictícia Mia se apresentando")
-  ], [
-    audioItem("audio-a", "Hi, Mia!", "en-US", "Ouvir Hi, Mia!"),
-    audioItem("audio-b", "Bye, Mia!", "en-US", "Ouvir Bye, Mia!"),
-    audioItem("audio-c", "See you, Mia!", "en-US", "Ouvir See you, Mia!")
-  ], "audio-a");
+  }, imageItem("context-mia", "mia", "Personagem fictícia Mia se apresentando"), [
+    audioItem("A", "Hi, Mia!", "en-US", "Ouvir Hi, Mia!"),
+    audioItem("B", "Bye, Mia!", "en-US", "Ouvir Bye, Mia!"),
+    audioItem("C", "See you, Mia!", "en-US", "Ouvir See you, Mia!")
+  ]);
 
   const moduleDefinition = {
     id: "duduq-english-y1-module-01",
@@ -506,7 +504,7 @@
       {
         id: "Y1-M01-A02",
         title: TOPIC,
-        mechanic: "matching",
+        mechanic: "drag-drop",
         skill: { description: "Contexto visual e escolha auditiva" },
         questions: [q02, q03]
       },
@@ -520,7 +518,7 @@
       {
         id: "Y1-M01-A04",
         title: TOPIC,
-        mechanic: "matching",
+        mechanic: "drag-drop",
         skill: { description: "Vocabulário receptivo com apoio visual" },
         questions: [q06, q07]
       },
@@ -534,7 +532,7 @@
       {
         id: "Y1-M01-A06",
         title: TOPIC,
-        mechanic: "matching",
+        mechanic: "drag-drop",
         skill: { description: "Compreensão auditiva guiada" },
         questions: [q09]
       },
@@ -548,7 +546,7 @@
       {
         id: "Y1-M01-A08",
         title: TOPIC,
-        mechanic: "matching",
+        mechanic: "drag-drop",
         skill: { description: "Interação guiada de cumprimento" },
         questions: [q12]
       }
