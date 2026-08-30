@@ -28,6 +28,7 @@ jobs:
           node --check test/systemic/foundation-architecture-audit.mjs
           node --check test/systemic/year1-loader-compat-smoke.mjs
           node --check test/systemic/year1-public-entry-smoke.mjs
+          node --check test/systemic/canary-core-progression-diagnostic.mjs
           node --check test/systemic/canary-core-1.0.11-promotion-smoke.mjs
 
       - name: Guard systemic foundation
@@ -71,6 +72,11 @@ jobs:
           BASE_URL: http://127.0.0.1:4173
         run: node test/systemic/year1-public-entry-smoke.mjs
 
+      - name: Diagnose Core 1.0.9 vs 1.0.11 progression boundary
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/canary-core-progression-diagnostic.mjs
+
       - name: Validate Canary R145 Core 1.0.11 progression and completion sentinels
         env:
           BASE_URL: http://127.0.0.1:4173
@@ -83,6 +89,7 @@ jobs:
           name: systemic-year1-post-reveal-evidence
           path: |
             test-results/systemic/year1-public-entry
+            test-results/systemic/canary-core-progression-diagnostic
             test-results/systemic/canary-core-1.0.11-promotion
           if-no-files-found: warn
           retention-days: 14
