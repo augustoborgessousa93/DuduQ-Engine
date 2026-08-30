@@ -1,0 +1,30 @@
+name: Systemic Foundation Audit
+
+on:
+  push:
+    branches:
+      - refactor/systemic-foundation-years1-5
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  foundation-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Syntax
+        run: node --check test/systemic/foundation-architecture-audit.mjs
+
+      - name: Guard systemic foundation
+        run: node test/systemic/foundation-architecture-audit.mjs
