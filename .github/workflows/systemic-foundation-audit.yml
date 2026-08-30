@@ -28,6 +28,7 @@ jobs:
           node --check test/systemic/foundation-architecture-audit.mjs
           node --check test/systemic/year1-loader-compat-smoke.mjs
           node --check test/systemic/year1-public-entry-smoke.mjs
+          node --check test/systemic/canary-core-1.0.11-promotion-smoke.mjs
 
       - name: Guard systemic foundation
         run: node test/systemic/foundation-architecture-audit.mjs
@@ -70,11 +71,18 @@ jobs:
           BASE_URL: http://127.0.0.1:4173
         run: node test/systemic/year1-public-entry-smoke.mjs
 
+      - name: Validate Canary R145 Core 1.0.11 progression and completion sentinels
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/canary-core-1.0.11-promotion-smoke.mjs
+
       - name: Upload Year 1 browser evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: systemic-year1-post-reveal-evidence
-          path: test-results/systemic/year1-public-entry
+          path: |
+            test-results/systemic/year1-public-entry
+            test-results/systemic/canary-core-1.0.11-promotion
           if-no-files-found: warn
           retention-days: 14
