@@ -227,10 +227,10 @@ try {
           fullscreen.exited = true;
         }
 
-        // Feedback visual real: qualquer alvo deve produzir hit/miss/pending ou impacto visível.
+        // Os alvos do Target Shooter se movem por design; o QA não deve esperar estabilidade geométrica.
         const target = page.frameLocator("iframe").locator(".duduq-ts-target:not(:disabled)").first();
         await target.waitFor({ state: "visible", timeout: 10_000 });
-        await target.click();
+        await target.click({ force: true });
         await page.waitForFunction(() => {
           const doc = document.querySelector("iframe")?.contentDocument;
           if (!doc) return false;
