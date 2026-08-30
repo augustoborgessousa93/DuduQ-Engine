@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>DuduQ Year 1 Universal Loader Compatibility</title>
+  <style>html,body,#root{margin:0;width:100%;height:100%;min-height:100%;font-family:system-ui,sans-serif}body{overflow:hidden}</style>
+</head>
+<body>
+  <div id="root">Carregando teste de compatibilidade...</div>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const moduleNumber = Math.min(6, Math.max(2, Number(params.get("module")) || 2));
+    const moduleKey = String(moduleNumber).padStart(2, "0");
+    window.DUDUQ_ENGINE_BASE = new URL("../..", location.href).href.replace(/\/$/, "");
+    window.DUDUQ_GAME_CONFIG = Object.freeze({
+      engineBase: window.DUDUQ_ENGINE_BASE,
+      channel: "canary-v1",
+      label: `DuduQ English Year 1 Module ${moduleKey} — universal loader compatibility`,
+      modulePath: ["english", "year1", `module${moduleKey}`],
+      requiredMechanics: ["drag-drop", "target-shooter"],
+      contentScript: `../../content/english/year-1/module-${moduleKey}/module-${moduleKey}.js?qa=universal-loader`,
+      contentVersion: "year1-foundation-compat"
+    });
+  </script>
+  <script src="../../engine/duduq-player-v1.js?qa=universal-loader"></script>
+  <script src="../../engine/duduq-loader-v1.js?qa=universal-loader"></script>
+</body>
+</html>
