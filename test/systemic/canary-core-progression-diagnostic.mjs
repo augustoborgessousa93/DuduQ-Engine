@@ -79,7 +79,7 @@ async function runScenario(browser, coreRelease, manifest) {
     if (url.includes("/engine/") || url.includes("/content/english/year-1/")) critical404.push(url);
   });
 
-  await page.route("**/engine/channels/canary-v1.json", async (route) => {
+  await page.route("**/engine/channels/canary-v1.json**", async (route) => {
     await route.fulfill({
       status: 200,
       contentType: "application/json; charset=utf-8",
