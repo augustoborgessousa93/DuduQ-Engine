@@ -62,6 +62,11 @@ jobs:
           cat /tmp/duduq-systemic-http.log
           exit 1
 
+      - name: Diagnose Core 1.0.9 vs 1.0.11 progression boundary
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/canary-core-progression-diagnostic.mjs
+
       - name: Smoke Year 1 M02-M06 via universal Loader
         env:
           BASE_URL: http://127.0.0.1:4173
@@ -71,11 +76,6 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/systemic/year1-public-entry-smoke.mjs
-
-      - name: Diagnose Core 1.0.9 vs 1.0.11 progression boundary
-        env:
-          BASE_URL: http://127.0.0.1:4173
-        run: node test/systemic/canary-core-progression-diagnostic.mjs
 
       - name: Validate Canary R145 Core 1.0.11 progression and completion sentinels
         env:
