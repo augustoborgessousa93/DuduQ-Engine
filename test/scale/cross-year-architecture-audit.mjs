@@ -33,7 +33,8 @@ const report={
   invariants:{
     scalePromotionDisabled:false,
     sharedHostCompletionGuard:false,
-    sharedBubbleSmartMedia:false
+    sharedBubbleSmartMedia:false,
+    sharedIntroLayout:false
   }
 };
 
@@ -118,13 +119,19 @@ report.invariants.sharedBubbleSmartMedia=postMechanicScripts.some(layer=>
   layer?.id==="duduq-shared-bubble-smart-media-v1"&&
   layer?.src==="/engine/shared/bubble-pop-smart-media-v1.js"
 );
+report.invariants.sharedIntroLayout=postMechanicScripts.some(layer=>
+  layer?.id==="duduq-shared-intro-layout-v1"&&
+  layer?.src==="/engine/shared/intro-layout-v1.js"
+);
 
 assert(report.global.modules===30,"Esperados 30 módulos entre Years 1–5.");
 assert(report.global.indexes===30,"Esperados 30 public entries entre Years 1–5.");
 assert(report.invariants.scalePromotionDisabled,"scale-v1 não pode promover produção nesta fase.");
 assert(report.invariants.scaleReleasesImmutable,"scale-v1 deve manter releases imutáveis durante a consolidação cross-year.");
+assert(report.invariants.scaleRevision===5,"scale-v1 deve permanecer na Revision 5 durante este checkpoint.");
 assert(report.invariants.sharedHostCompletionGuard,"scale-v1 deve fornecer o completion guard compartilhado da Engine.");
 assert(report.invariants.sharedBubbleSmartMedia,"scale-v1 deve fornecer o smart media compartilhado da Bubble Pop.");
+assert(report.invariants.sharedIntroLayout,"scale-v1 deve fornecer o layout responsivo compartilhado da Intro.");
 
 for(const year of [1,2,3,4,5]){
   const data=report.years[year];
@@ -136,9 +143,6 @@ for(const year of [1,2,3,4,5]){
   }
 }
 
-// Years 1, 3, 4 e 5 usam a camada fina de compatibilidade/aliases no próprio
-// conteúdo. Year 2 ainda preserva sua factory e bridges pedagógicos homologados
-// durante a limpeza progressiva; comportamentos estruturais migram para Engine.
 for(const year of [1,3,4,5]){
   assert(report.years[year].sharedModules.length===6,`Year ${year}: todos os módulos devem carregar aliases/compat compartilhados.`);
 }
@@ -150,10 +154,10 @@ assert(report.years[2].localStructuralCandidateCount>0,"Year 2: limpeza dos brid
 
 report.recommendation={
   phase1:"COMPLETED — all 30 modules route through universal Player/Loader on scale-v1",
-  phase2:"IN PROGRESS — completion guard and Bubble smart media migrated from Year2 to shared Engine; continue one proven structural responsibility at a time",
+  phase2:"IN PROGRESS — completion guard, Bubble smart media and Intro responsive layout are shared Engine responsibilities",
   phase3:"move reusable mechanic behavior into shared scale layers while preserving pedagogical exceptions",
   phase4:"apply mechanic/responsive/audio/smart-image fixes once across Years 1–5"
 };
 
 console.log(JSON.stringify(report,null,2));
-console.log("PASS — Years 1–5 usam scale-v1; completion guard e Bubble smart media já são responsabilidades compartilhadas da Engine.");
+console.log("PASS — Years 1–5 usam scale-v1 Revision 5; completion guard, Bubble smart media e Intro layout são responsabilidades compartilhadas da Engine.");
