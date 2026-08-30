@@ -260,14 +260,14 @@ try {
 
       // Mecânica real: um erro não pode avançar a etapa; a tentativa correta deve avançar.
       const frame = page.frameLocator("iframe");
-      const wrongTarget = frame.locator(".duduq-ts-target").filter({ has: frame.locator('img[alt="Cena de despedida e saída"]') }).first();
+      const wrongTarget = frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]').first();
       await wrongTarget.waitFor({ state: "visible", timeout: 10_000 });
       await wrongTarget.click({ force: true });
       await page.waitForTimeout(350);
       const afterWrong = await page.evaluate(() => window.DuduQ.getSession());
       assert(afterWrong.stepIndex === 0 && afterWrong.completed === false, `${viewport.name}: erro avançou indevidamente a etapa.`);
 
-      const correctTarget = frame.locator(".duduq-ts-target").filter({ has: frame.locator('img[alt="Cena de chegada e cumprimento"]') }).first();
+      const correctTarget = frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo B"]').first();
       await correctTarget.waitFor({ state: "visible", timeout: 10_000 });
       await correctTarget.click({ force: true });
       await page.waitForFunction(() => {
