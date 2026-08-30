@@ -1,5 +1,5 @@
 /* =========================================================
-   DUDUQ SHARED — INTRO RESPONSIVE LAYOUT v1.0.1
+   DUDUQ SHARED — INTRO RESPONSIVE LAYOUT v1.0.0
 
    Cross-year structural behavior:
    - gives EduQ Play stronger visual presence on large desktop/fullscreen;
@@ -12,7 +12,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.1";
+  const VERSION = "1.0.0";
   const STYLE_ID = "duduq-shared-intro-layout-v1";
 
   if (window.__DUDUQ_SHARED_INTRO_LAYOUT__) return;
