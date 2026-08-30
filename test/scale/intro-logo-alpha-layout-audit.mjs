@@ -44,6 +44,7 @@ async function inspect(name,viewport){
       const loading=document.querySelector(".duduq-intro-loading");
       const actions=document.querySelector(".duduq-intro-actions");
       const start=document.querySelector(".duduq-intro-start-button");
+      const sharedStyle=document.getElementById("duduq-shared-intro-layout-v1");
       const rect=(node)=>{
         if(!node)return null;
         const r=node.getBoundingClientRect();
@@ -58,6 +59,36 @@ async function inspect(name,viewport){
       const startRect=rect(start);
       const logoStyle=logo?getComputedStyle(logo):null;
       const collectionStyle=collection?getComputedStyle(collection):null;
+
+      const sharedRuleDiagnostics=[];
+      function walkRules(rules,media="all"){
+        for(const rule of Array.from(rules||[])){
+          if(rule.type===CSSRule.MEDIA_RULE){
+            const query=rule.conditionText||rule.media?.mediaText||"";
+            const matches=matchMedia(query).matches;
+            sharedRuleDiagnostics.push({kind:"media",query,matches});
+            if(matches)walkRules(rule.cssRules,query);
+            continue;
+          }
+          if(rule.type===CSSRule.STYLE_RULE&&/duduq-intro-(?:collection|collection-logo|meta|loading|actions|start-button)/.test(rule.selectorText||"")){
+            sharedRuleDiagnostics.push({
+              kind:"style",
+              media,
+              selector:rule.selectorText,
+              matchesLogo:Boolean(logo?.matches?.(rule.selectorText)),
+              matchesCollection:Boolean(collection?.matches?.(rule.selectorText)),
+              height:rule.style.height||"",
+              minHeight:rule.style.minHeight||"",
+              maxHeight:rule.style.maxHeight||"",
+              width:rule.style.width||"",
+              priorityHeight:rule.style.getPropertyPriority("height"),
+              priorityMinHeight:rule.style.getPropertyPriority("min-height")
+            });
+          }
+        }
+      }
+      try{walkRules(sharedStyle?.sheet?.cssRules||[]);}catch(error){sharedRuleDiagnostics.push({kind:"error",message:String(error?.message||error)});}
+
       let alpha=null;
       let alphaError="";
       try{
@@ -107,17 +138,39 @@ async function inspect(name,viewport){
       }catch(error){
         alphaError=String(error?.message||error);
       }
+
       return {
         viewport:{width:innerWidth,height:innerHeight},
         phase:root?.getAttribute("data-duduq-intro-phase")||"",
         ready:Boolean(root?.classList.contains("is-ready")),
         reducedMotion:matchMedia("(prefers-reduced-motion: reduce)").matches,
+        largeMediaMatches:matchMedia("(min-width: 1600px) and (min-height: 900px)").matches,
+        mobileMediaMatches:matchMedia("(max-width: 560px)").matches,
         sharedIntro:window.__DUDUQ_SHARED_INTRO_LAYOUT__||null,
+        sharedStyle:{present:Boolean(sharedStyle),textLength:sharedStyle?.textContent?.length||0,sheetRules:sharedStyle?.sheet?.cssRules?.length||0},
+        sharedRuleDiagnostics,
         src:logo?.currentSrc||logo?.src||"",
         natural:{width:logo?.naturalWidth||0,height:logo?.naturalHeight||0},
         logoRect,collectionRect,stageRect,metaRect,loadingRect,actionsRect,startRect,
-        logoComputed:{height:logoStyle?.height||null,width:logoStyle?.width||null,transform:logoStyle?.transform||null,opacity:logoStyle?.opacity||null},
-        collectionComputed:{minHeight:collectionStyle?.minHeight||null,height:collectionStyle?.height||null,marginTop:collectionStyle?.marginTop||null,marginBottom:collectionStyle?.marginBottom||null},
+        logoComputed:{
+          height:logoStyle?.height||null,
+          width:logoStyle?.width||null,
+          minHeight:logoStyle?.minHeight||null,
+          maxHeight:logoStyle?.maxHeight||null,
+          minWidth:logoStyle?.minWidth||null,
+          maxWidth:logoStyle?.maxWidth||null,
+          transform:logoStyle?.transform||null,
+          opacity:logoStyle?.opacity||null,
+          objectFit:logoStyle?.objectFit||null
+        },
+        collectionComputed:{
+          minHeight:collectionStyle?.minHeight||null,
+          maxHeight:collectionStyle?.maxHeight||null,
+          height:collectionStyle?.height||null,
+          overflow:collectionStyle?.overflow||null,
+          marginTop:collectionStyle?.marginTop||null,
+          marginBottom:collectionStyle?.marginBottom||null
+        },
         alpha,alphaError,
         collectionUnusedBelowLogo:collectionRect&&logoRect?collectionRect.bottom-logoRect.bottom:null,
         stageTopGap:stageRect&&collectionRect?collectionRect.top-stageRect.top:null,
@@ -131,35 +184,39 @@ async function inspect(name,viewport){
       };
     });
 
+    // Always print and capture evidence before geometry assertions. A failing
+    // viewport must still reveal the exact cascade/media constraints that won.
+    console.log(JSON.stringify({name,...state},null,2));
+    await page.screenshot({path:path.join(OUT_DIR,`${name}.png`),fullPage:false});
+
     assert(state.phase==="mission"&&state.ready,`${name}: Intro não estabilizou em mission/ready.`);
     assert(state.reducedMotion,`${name}: auditoria precisa de reduced-motion para geometria determinística.`);
     assert(state.sharedIntro?.version==="1.0.0",`${name}: camada compartilhada da Intro não carregou.`);
+    assert(state.sharedStyle.present&&state.sharedStyle.sheetRules>0,`${name}: stylesheet compartilhado da Intro não ficou ativo.`);
     assert(state.logoComputed.transform==="none",`${name}: logo ainda possui transform durante a medição (${state.logoComputed.transform}).`);
     assert(state.natural.width>0&&state.natural.height>0,`${name}: logo oficial não carregou.`);
     assert(state.logoRect?.width>100&&state.logoRect?.height>100,`${name}: elemento da logo está pequeno/invisível.`);
     assert(state.documentWidth<=viewport.width+6,`${name}: Intro criou overflow horizontal (${state.documentWidth} > ${viewport.width}).`);
 
     if(viewport.width>=1600&&viewport.height>=900){
-      assert(state.logoRect.height>=500,`${name}: logo fullscreen continua pequena (${state.logoRect.height.toFixed(1)}px).`);
+      assert(state.largeMediaMatches,`${name}: media query fullscreen não casou apesar da viewport ${viewport.width}x${viewport.height}.`);
+      assert(state.logoRect.height>=500,`${name}: logo fullscreen continua pequena (${state.logoRect.height.toFixed(1)}px; max-height=${state.logoComputed.maxHeight}; collection=${state.collectionComputed.height}/${state.collectionComputed.maxHeight}).`);
       assert(state.logoRect.height<=620,`${name}: logo fullscreen ficou excessiva (${state.logoRect.height.toFixed(1)}px).`);
       assert(state.occupiedFromCollectionToActions>=800,`${name}: bloco fullscreen ainda subutiliza altura (${state.occupiedFromCollectionToActions.toFixed(1)}px).`);
       assert(state.actionsRect.bottom<=viewport.height-70,`${name}: CTA fullscreen ficou próximo demais da borda inferior (${state.actionsRect.bottom.toFixed(1)}px).`);
       assert(state.stageTopGap>=35,`${name}: bloco fullscreen ficou próximo demais da borda superior (${state.stageTopGap.toFixed(1)}px).`);
     }else if(viewport.width<=560){
-      assert(state.logoRect.height>=235,`${name}: logo mobile voltou a ficar pequena (${state.logoRect.height.toFixed(1)}px).`);
+      assert(state.mobileMediaMatches,`${name}: media query mobile não casou.`);
+      assert(state.logoRect.height>=235,`${name}: logo mobile voltou a ficar pequena (${state.logoRect.height.toFixed(1)}px; max-height=${state.logoComputed.maxHeight}).`);
       assert(state.logoRect.height<=300,`${name}: logo mobile ficou excessiva (${state.logoRect.height.toFixed(1)}px).`);
       assert(state.collectionRect.height>=275,`${name}: coleção mobile continua comprimida (${state.collectionRect.height.toFixed(1)}px).`);
       assert(state.actionsRect.right<=viewport.width+2&&state.actionsRect.left>=-2,`${name}: CTA mobile saiu da viewport.`);
     }else{
-      // 1366×768 é a baseline já homologada: a nova camada não deve alterar
-      // significativamente esta composição para resolver telas maiores/menores.
       assert(state.logoRect.height>=390&&state.logoRect.height<=410,`${name}: baseline notebook mudou (${state.logoRect.height.toFixed(1)}px).`);
       assert(state.occupiedFromCollectionToActions>=640&&state.occupiedFromCollectionToActions<=665,`${name}: baseline notebook alterou a ocupação vertical (${state.occupiedFromCollectionToActions.toFixed(1)}px).`);
     }
 
     reports.push({name,viewport,state});
-    await page.screenshot({path:path.join(OUT_DIR,`${name}.png`),fullPage:false});
-    console.log(JSON.stringify({name,...state},null,2));
   }finally{
     await page.close();
   }
