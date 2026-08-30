@@ -27,13 +27,14 @@ jobs:
         run: |
           node --check test/systemic/foundation-architecture-audit.mjs
           node --check test/systemic/year1-loader-compat-smoke.mjs
+          node --check test/systemic/year1-public-entry-smoke.mjs
 
       - name: Guard systemic foundation
         run: node test/systemic/foundation-architecture-audit.mjs
 
   year1-loader-compat:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -63,3 +64,17 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/systemic/year1-loader-compat-smoke.mjs
+
+      - name: Gate Year 1 public M01-M06 desktop and mobile
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/year1-public-entry-smoke.mjs
+
+      - name: Upload Year 1 browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: systemic-year1-public-entry-evidence
+          path: test-results/systemic/year1-public-entry
+          if-no-files-found: warn
+          retention-days: 14
