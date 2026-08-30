@@ -18,7 +18,11 @@ try {
     for (let moduleNumber = 2; moduleNumber <= 6; moduleNumber += 1) {
       const page = await browser.newPage({ viewport });
       const pageErrors = [];
+      const consoleErrors = [];
       page.on("pageerror", (error) => pageErrors.push(String(error?.message || error)));
+      page.on("console", (message) => {
+        if (message.type() === "error") consoleErrors.push(message.text());
+      });
       try {
         const url = `${BASE}/test/systemic/year1-loader-compat.html?module=${moduleNumber}`;
         await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30_000 });
@@ -27,10 +31,29 @@ try {
         const moduleState = await page.evaluate((moduleNumber) => {
           const key = `module${String(moduleNumber).padStart(2, "0")}`;
           const module = window.DUDUQ_CONTENT?.english?.year1?.[key];
+          const routerChecks = [];
+          for (const activity of module?.activities || []) {
+            for (let questionIndex = 0; questionIndex < (activity.questions || []).length; questionIndex += 1) {
+              const question = activity.questions[questionIndex];
+              const decision = window.DuduQRouter?.select?.(question, {
+                index: questionIndex,
+                defaults: { subject: module.subject, year: module.year, module: module.module }
+              });
+              routerChecks.push({
+                questionId: question?.id || "",
+                declared: activity.mechanic || "",
+                selected: decision?.selected?.mechanicId || "",
+                rejections: (decision?.candidates || [])
+                  .filter((candidate) => !candidate.eligible)
+                  .map((candidate) => ({ mechanicId: candidate.mechanicId, rejections: candidate.rejections }))
+              });
+            }
+          }
           return {
             exists: Boolean(module),
             activityCount: Array.isArray(module?.activities) ? module.activities.length : 0,
             mechanics: Array.from(new Set((module?.activities || []).map((activity) => activity?.mechanic).filter(Boolean))),
+            routerChecks,
             rootText: String(document.querySelector("#root")?.textContent || "").trim(),
             documentWidth: document.documentElement.scrollWidth
           };
@@ -39,6 +62,8 @@ try {
         assert(moduleState.exists, `Y1 M${moduleNumber}: conteúdo não carregou via Loader.`);
         assert(moduleState.activityCount > 0, `Y1 M${moduleNumber}: sem atividades.`);
         assert(moduleState.mechanics.every((mechanic) => ["drag-drop", "target-shooter"].includes(mechanic)), `Y1 M${moduleNumber}: mecânica fora do contrato atual: ${moduleState.mechanics.join(", ")}`);
+        const routerMismatches = moduleState.routerChecks.filter((check) => check.declared !== check.selected);
+        assert(routerMismatches.length === 0, `Y1 M${moduleNumber}: Router divergiu da Factory: ${JSON.stringify(routerMismatches)}`);
         assert(!/^Erro:/i.test(moduleState.rootText), `Y1 M${moduleNumber}: Player reportou ${moduleState.rootText}`);
         assert(moduleState.documentWidth <= viewport.width + 6, `Y1 M${moduleNumber}: overflow antes do início (${moduleState.documentWidth} > ${viewport.width}).`);
 
@@ -48,28 +73,52 @@ try {
 
         await page.waitForFunction(() => {
           const root = document.querySelector("#root");
-          if (/^Erro:/i.test(String(root?.textContent || "").trim())) return false;
+          if (/^Erro:/i.test(String(root?.textContent || "").trim())) return true;
           return Array.from(document.querySelectorAll("iframe")).some((frame) => {
             const rect = frame.getBoundingClientRect();
             const style = getComputedStyle(frame);
-            return rect.width > 40 && rect.height > 40 && style.display !== "none" && style.visibility !== "hidden";
+            const doc = frame.contentDocument;
+            return rect.width > 40 && rect.height > 40 &&
+              style.display !== "none" && style.visibility !== "hidden" &&
+              Boolean(frame.srcdoc) && Boolean(doc?.documentElement) && Boolean(doc?.body);
           });
         }, null, { timeout: 30_000 });
 
         await page.waitForTimeout(900);
         const runtimeState = await page.evaluate(() => ({
           rootText: String(document.querySelector("#root")?.textContent || "").trim(),
-          iframeSrcs: Array.from(document.querySelectorAll("iframe")).map((frame) => frame.src).filter(Boolean),
+          frames: Array.from(document.querySelectorAll("iframe")).map((frame) => {
+            const rect = frame.getBoundingClientRect();
+            const doc = frame.contentDocument;
+            return {
+              title: frame.title || "",
+              hasSrcdoc: Boolean(frame.srcdoc),
+              srcdocLength: String(frame.srcdoc || "").length,
+              width: rect.width,
+              height: rect.height,
+              documentTitle: doc?.title || "",
+              hasRoot: Boolean(doc?.querySelector?.("#root")),
+              bodyTextLength: String(doc?.body?.textContent || "").trim().length
+            };
+          }),
           documentWidth: document.documentElement.scrollWidth,
           documentHeight: document.documentElement.scrollHeight
         }));
 
         assert(!/^Erro:/i.test(runtimeState.rootText), `Y1 M${moduleNumber}: erro após iniciar: ${runtimeState.rootText}`);
-        assert(runtimeState.iframeSrcs.some((src) => /DUDUQ_(?:DRAG_DROP|TARGET_SHOOTER)\.html/i.test(src)), `Y1 M${moduleNumber}: runtime esperado não abriu.`);
+        const liveFrames = runtimeState.frames.filter((frame) => frame.hasSrcdoc && frame.srcdocLength > 1000 && frame.width > 40 && frame.height > 40 && frame.hasRoot);
+        assert(liveFrames.length > 0, `Y1 M${moduleNumber}: runtime srcdoc não ficou ativo: ${JSON.stringify(runtimeState.frames)}`);
         assert(runtimeState.documentWidth <= viewport.width + 6, `Y1 M${moduleNumber}: overflow após início (${runtimeState.documentWidth} > ${viewport.width}).`);
         assert(pageErrors.length === 0, `Y1 M${moduleNumber}: pageerror: ${pageErrors.join(" | ")}`);
+        assert(consoleErrors.filter((message) => !/Failed to load resource/i.test(message)).length === 0, `Y1 M${moduleNumber}: console error: ${consoleErrors.join(" | ")}`);
 
-        report.push({ viewport: viewport.name, module: moduleNumber, mechanics: moduleState.mechanics, runtime: runtimeState.iframeSrcs });
+        report.push({
+          viewport: viewport.name,
+          module: moduleNumber,
+          mechanics: moduleState.mechanics,
+          routerChecks: moduleState.routerChecks,
+          runtime: liveFrames
+        });
       } finally {
         await page.close();
       }
