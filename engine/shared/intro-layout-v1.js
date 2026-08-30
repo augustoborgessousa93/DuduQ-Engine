@@ -13,13 +13,17 @@
   "use strict";
 
   const VERSION = "1.0.0";
-  const STYLE_ID = "duduq-shared-intro-layout-v1";
+  // IMPORTANT: this must differ from the loader <script> id
+  // `duduq-shared-intro-layout-v1`, otherwise document.getElementById()
+  // mistakes the script tag for the injected stylesheet and skips installation.
+  const STYLE_ID = "duduq-shared-intro-layout-style-v1";
 
   if (window.__DUDUQ_SHARED_INTRO_LAYOUT__) return;
 
   function install() {
     if (!document?.head) return false;
-    if (document.getElementById(STYLE_ID)) return true;
+    const existing = document.getElementById(STYLE_ID);
+    if (existing?.tagName === "STYLE") return true;
 
     const style = document.createElement("style");
     style.id = STYLE_ID;
@@ -92,7 +96,7 @@
     `;
 
     document.head.appendChild(style);
-    return true;
+    return Boolean(style.sheet || document.getElementById(STYLE_ID));
   }
 
   const installed = install();
@@ -101,6 +105,7 @@
     version: VERSION,
     scope: "all-years",
     component: "intro",
+    styleId: STYLE_ID,
     largeScreenScale: true,
     mobileBrandPresence: true,
     notebookBaselinePreserved: true,
