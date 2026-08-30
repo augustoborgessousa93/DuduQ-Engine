@@ -1,0 +1,70 @@
+name: Core Canonical Assets Candidate
+
+on:
+  push:
+    branches:
+      - refactor/core-1.0.11-canonical-assets-candidate
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax
+        run: |
+          node --check engine/releases/core/1.0.11-candidate/duduq-assets.js
+          node --check test/systemic/core-canonical-assets-candidate.mjs
+          node --check test/systemic/core-canonical-assets-candidate-browser.mjs
+          node --check test/systemic/core-canonical-assets-year1-smoke.mjs
+      - name: Guard candidate architecture and provenance
+        run: node test/systemic/core-canonical-assets-candidate.mjs
+
+  browser-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-core-candidate-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-core-candidate-http.log
+          exit 1
+      - name: Load pinned canonical runtime and exercise Core assets API
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/core-canonical-assets-candidate-browser.mjs
+      - name: Homologate Year 1 M01-M06 in four viewports against candidate
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/core-canonical-assets-year1-smoke.mjs
+      - name: Upload Year 1 candidate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-1.0.11-canonical-assets-year1-evidence
+          path: test-results/systemic/core-canonical-assets-year1
+          if-no-files-found: warn
+          retention-days: 14
