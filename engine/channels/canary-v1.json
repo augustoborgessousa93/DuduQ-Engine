@@ -1,29 +1,30 @@
 {
   "schemaVersion": 1,
   "contractMajor": 1,
-  "revision": 143,
+  "revision": 145,
   "core": {
-    "release": "1.0.9",
+    "release": "1.0.11",
     "styles": [
-      { "href": "/engine/releases/core/1.0.9/duduq-theme.css", "release": "1.0.9" },
-      { "href": "/engine/releases/core/1.0.9/duduq-intro.css", "release": "1.0.9" },
-      { "href": "/engine/releases/core/1.0.9/duduq-transition.css", "release": "1.0.9" },
-      { "href": "/engine/releases/core/1.0.9/duduq-completion.css", "release": "1.0.9" },
-      { "id": "duduq-world-fusion-core-style", "href": "/engine/releases/core/1.0.9/duduq-world-fusion.css", "release": "1.0.9" }
+      { "href": "/engine/releases/core/1.0.11/duduq-theme.css", "release": "1.0.11" },
+      { "href": "/engine/releases/core/1.0.11/duduq-intro.css", "release": "1.0.11" },
+      { "href": "/engine/releases/core/1.0.11/duduq-transition.css", "release": "1.0.11" },
+      { "href": "/engine/releases/core/1.0.11/duduq-completion.css", "release": "1.0.11" },
+      { "id": "duduq-world-fusion-core-style", "href": "/engine/releases/core/1.0.11/duduq-world-fusion.css", "release": "1.0.11" }
     ],
     "preMechanicScripts": [
-      { "src": "/engine/releases/core/1.0.9/duduq-assets.js", "release": "1.0.9" },
-      { "id": "duduq-world-fusion-core-script", "src": "/engine/releases/core/1.0.9/duduq-world-fusion.js", "release": "1.0.9" },
-      { "src": "/engine/releases/core/1.0.9/duduq-sound.js", "release": "1.0.9" },
-      { "src": "/engine/releases/core/1.0.9/duduq-intro.js", "release": "1.0.9" },
-      { "src": "/engine/releases/core/1.0.9/duduq-schema.js", "release": "1.0.9" },
-      { "src": "/engine/releases/core/1.0.9/duduq-content-audio.js", "release": "1.0.9" },
-      { "src": "/engine/releases/core/1.0.9/duduq-completion.js", "release": "1.0.9" },
-      { "src": "/engine/releases/core/1.0.9/duduq-transition.js", "release": "1.0.9" },
-      { "src": "/engine/releases/core/1.0.9/duduq-host.js", "release": "1.0.9" },
-      { "src": "/engine/releases/core/1.0.9/duduq-progress-ui.js", "release": "1.0.9" }
+      { "id": "duduq-canonical-assets-runtime", "src": "https://cdn.jsdelivr.net/gh/augustoborgessousa93/Assets-DuduQ@f0f8bed8e8c24fad4eae204bf4a5cc84a8d8263f/asset-catalog/runtime-index.js", "release": "assets-f0f8bed8" },
+      { "src": "/engine/releases/core/1.0.11/duduq-assets.js", "release": "1.0.11" },
+      { "id": "duduq-world-fusion-core-script", "src": "/engine/releases/core/1.0.11/duduq-world-fusion.js", "release": "1.0.11" },
+      { "src": "/engine/releases/core/1.0.11/duduq-sound.js", "release": "1.0.11" },
+      { "src": "/engine/releases/core/1.0.11/duduq-intro.js", "release": "1.0.11" },
+      { "src": "/engine/releases/core/1.0.11/duduq-schema.js", "release": "1.0.11" },
+      { "src": "/engine/releases/core/1.0.11/duduq-content-audio.js", "release": "1.0.11" },
+      { "src": "/engine/releases/core/1.0.11/duduq-completion.js", "release": "1.0.11" },
+      { "src": "/engine/releases/core/1.0.11/duduq-transition.js", "release": "1.0.11" },
+      { "src": "/engine/releases/core/1.0.11/duduq-host.js", "release": "1.0.11" },
+      { "src": "/engine/releases/core/1.0.11/duduq-progress-ui.js", "release": "1.0.11" }
     ],
-    "router": { "src": "/engine/releases/core/1.0.9/duduq-router.js", "release": "1.0.9" }
+    "router": { "src": "/engine/releases/core/1.0.11/duduq-router.js", "release": "1.0.11" }
   },
   "mechanics": {
     "bubble-pop": { "release": "1.0.31", "adapter": "/engine/releases/mechanics/bubble-pop/1.0.31/bubble-pop.js", "runtime": "/engine/releases/mechanics/bubble-pop/1.0.31/DUDUQ_BUBBLE_POP.html" },
@@ -40,8 +41,10 @@
     "hotfixViaChannelPromotion": true,
     "rollbackViaManifest": true,
     "wordSlashApproved": true,
-    "bubblePopApproved": true
+    "bubblePopApproved": true,
+    "canonicalAssetCatalogSchema": 2,
+    "canonicalAssetRuntimeCommit": "f0f8bed8e8c24fad4eae204bf4a5cc84a8d8263f"
   },
   "channel": "canary-v1",
-  "status": "approved-r143-bubble-pop-1.0.31-subcard-parity-glass-visual"
+  "status": "approved-r145-core-1.0.11-canonical-assets"
 }

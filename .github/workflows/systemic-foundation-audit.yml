@@ -28,13 +28,15 @@ jobs:
           node --check test/systemic/foundation-architecture-audit.mjs
           node --check test/systemic/year1-loader-compat-smoke.mjs
           node --check test/systemic/year1-public-entry-smoke.mjs
+          node --check test/systemic/canary-core-progression-diagnostic.mjs
+          node --check test/systemic/canary-core-1.0.11-promotion-smoke.mjs
 
       - name: Guard systemic foundation
         run: node test/systemic/foundation-architecture-audit.mjs
 
   year1-loader-compat:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 25
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -65,16 +67,16 @@ jobs:
           BASE_URL: http://127.0.0.1:4173
         run: node test/systemic/year1-loader-compat-smoke.mjs
 
-      - name: Homologate Year 1 M01-M06 after Host reveal in four viewports
+      - name: Revalidate Canary R145 Core 1.0.11 progression and completion sentinels
         env:
           BASE_URL: http://127.0.0.1:4173
-        run: node test/systemic/year1-public-entry-smoke.mjs
+        run: node test/systemic/canary-core-1.0.11-promotion-smoke.mjs
 
-      - name: Upload Year 1 browser evidence
+      - name: Upload final progression evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: systemic-year1-post-reveal-evidence
-          path: test-results/systemic/year1-public-entry
+          name: core-r145-progression-final-evidence
+          path: test-results/systemic/canary-core-1.0.11-promotion
           if-no-files-found: warn
           retention-days: 14
