@@ -350,7 +350,7 @@
   }, [
     imageItem("A", "greeting goodbye tchau", "Cena de despedida"),
     imageItem("B", "greeting good night boa noite", "Cena de despedida antes de dormir"),
-    imageItem("C", "criancas se cumprimentando children greeting greeting", "Crianças se cumprimentando informalmente")
+    imageItem("C", "criancas se cumprimentando children greeting hello", "Crianças se cumprimentando informalmente")
   ]);
 
   const q09 = matchingQuestion({
@@ -418,7 +418,7 @@
   }, [
     imageItem("A", "saida da escola leaving school school exit", "Leo indo embora e se despedindo"),
     imageItem("B", "greeting good afternoon boa tarde", "Cena de cumprimento à tarde"),
-    imageItem("C", "criancas se cumprimentando children greeting greeting", "Cena de cumprimento informal")
+    imageItem("C", "criancas se cumprimentando children greeting hello", "Cena de cumprimento informal")
   ]);
 
   const q12 = matchingQuestion({
