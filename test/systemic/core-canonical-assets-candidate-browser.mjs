@@ -15,6 +15,14 @@ try {
   await page.addScriptTag({ url: `${BASE}/engine/releases/core/1.0.11-candidate/duduq-assets.js` });
   const result = await page.evaluate(() => {
     const queries = ["3","three","tres","number 3","red","tchau","bye tchau","dog","cachorro","hello","school bag"];
+    const numberTopic = window.DuduQAssets?.inferActivityTopic(
+      { title: "OUÇA E ESCOLHA", questions: [{ statement: "Choose number three", alternatives: [{ text: "3" }, { text: "4" }] }] },
+      { title: "English" }
+    );
+    const colorTopic = window.DuduQAssets?.inferActivityTopic(
+      { title: "LISTEN AND CHOOSE", questions: [{ statement: "Choose red", alternatives: [{ text: "red" }, { text: "blue" }] }] },
+      { title: "English" }
+    );
     return {
       runtime: {
         schema: window.DUDUQ_CANONICAL_ASSET_CATALOG?.schemaVersion,
@@ -29,7 +37,10 @@ try {
       resolved: Object.fromEntries(queries.map((query) => [query, window.DuduQAssets?.resolveImageDetails(query)])),
       unknown: window.DuduQAssets?.resolveImage("definitely unknown asset"),
       legacyHello: window.DuduQAssets?.rewriteUrl("https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Hello.png"),
-      correctSound: window.DuduQAssets?.getSound("correct")
+      correctSound: window.DuduQAssets?.getSound("correct"),
+      contentGreeting: window.DuduQAssets?.getContent("english", 1, 1, "greeting"),
+      numberTopic,
+      colorTopic
     };
   });
 
@@ -51,7 +62,10 @@ try {
   }
   assert(result.unknown === null, "Unknown semantic query should remain unresolved instead of using a generic image.");
   assert(String(result.legacyHello).endsWith("greeting-hello-oi.png"), `Legacy Hello rewrite regressed: ${result.legacyHello}`);
-  assert(String(result.correctSound).endsWith("/Efeitos%20sonoros/correct.mp3"), "Non-image Core asset API regressed.");
+  assert(String(result.correctSound).endsWith("/Efeitos%20sonoros/correct.mp3"), "Non-image Core sound API regressed.");
+  assert(String(result.contentGreeting).endsWith("/Imagens%20Ilustrativa/Hello.png"), `getContent API regressed: ${result.contentGreeting}`);
+  assert(result.numberTopic === "NUMBERS", `Topic inference expected NUMBERS, got ${result.numberTopic}.`);
+  assert(result.colorTopic === "COLORS", `Topic inference expected COLORS, got ${result.colorTopic}.`);
   assert(errors.length === 0, `Browser pageerror: ${errors.join(" | ")}`);
 
   console.log(JSON.stringify({ contract: "DUDUQ_CORE_CANONICAL_ASSETS_BROWSER", status: "PASS", ...result }, null, 2));
