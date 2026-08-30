@@ -47,7 +47,7 @@
       {
         "id": "duduq-shared-intro-layout-v1",
         "src": "/engine/shared/intro-layout-v1.js",
-        "release": "shared-1.0.0"
+        "release": "shared-1.0.1"
       }
     ],
     "router": { "src": "/engine/releases/core/1.0.9/duduq-router.js", "release": "1.0.9" }
