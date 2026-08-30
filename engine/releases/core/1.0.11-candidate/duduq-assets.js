@@ -78,6 +78,13 @@
     "5%C2%BA%20ano%20-sky-lab.png"
   ]);
 
+  function normalizeAssetFileName(value) {
+    return String(value || "")
+      .replace(/ /g, "%20")
+      .replace(/%C3%A7/gi, "%C3%A7")
+      .replace(/%C3%A3/gi, "%C3%A3");
+  }
+
   function audioFolderFromFile(fileName) {
     const match = String(fileName || "").match(/^ING_(\d+)ANO_M(\d+)_/i);
     if (!match) return "";
@@ -103,7 +110,7 @@
       }
       return BASE + relative;
     }
-    const file = String(relative || "").replace(/ /g, "%20");
+    const file = normalizeAssetFileName(relative);
     if (IMAGE_FILES.has(file)) return IMAGE_BASE + file;
     if (SOUND_FILES.has(file)) return SOUND_BASE + file;
     if (TEMPLATE_FILES.has(file)) return TEMPLATE_BASE + file;
@@ -160,7 +167,27 @@
       "4": TEMPLATE_BASE + "4%C2%BA%20ano%20-papercraft-campus.png",
       "5": TEMPLATE_BASE + "5%C2%BA%20ano%20-sky-lab.png"
     }),
-    content: Object.freeze({ english: Object.freeze({}) })
+    content: Object.freeze({
+      english: Object.freeze({
+        year1: Object.freeze({
+          module01: Object.freeze({
+            greeting: IMAGE_BASE + "Hello.png", goodbye: IMAGE_BASE + "Bye.png",
+            morning: IMAGE_BASE + "Good%20Morning.png", afternoon: IMAGE_BASE + "Good%20Afternoon.png",
+            night: IMAGE_BASE + "Good%20Night.png", boy: IMAGE_BASE + "Boy.png", girl: IMAGE_BASE + "Girl.png",
+            selfintro: IMAGE_BASE + "My%20name.png", rain: IMAGE_BASE + "Rain.png", nervous: IMAGE_BASE + "nervous.png",
+            fishGirl: IMAGE_BASE + "Fish_Girl.png", wheelchairBoy: IMAGE_BASE + "wheelchair_boy.png"
+          })
+        }),
+        year2: Object.freeze({
+          module01: Object.freeze({
+            greeting: IMAGE_BASE + "Hello.png", goodbye: IMAGE_BASE + "Bye.png",
+            morning: IMAGE_BASE + "Good%20Morning.png", afternoon: IMAGE_BASE + "Good%20Afternoon.png",
+            night: IMAGE_BASE + "Good%20Night.png", rain: IMAGE_BASE + "Rain.png", nervous: IMAGE_BASE + "nervous.png",
+            fishGirl: IMAGE_BASE + "Fish_Girl.png", wheelchairBoy: IMAGE_BASE + "wheelchair_boy.png"
+          })
+        })
+      })
+    })
   });
 
   function applyYear(value) {
@@ -177,9 +204,17 @@
     return true;
   }
 
+  function getContentAsset(subject, year, module, name) {
+    const subjectKey = String(subject || "").trim().toLowerCase();
+    const yearKey = "year" + String(year || "").replace(/\D/g, "");
+    const moduleKey = "module" + String(module || "").replace(/\D/g, "").padStart(2, "0");
+    return ASSETS.content?.[subjectKey]?.[yearKey]?.[moduleKey]?.[name] || null;
+  }
+
   function cloneAndRewrite(value, seen) {
     if (typeof value === "string") return rewriteLegacyAssetUrl(value);
     if (value === null || typeof value !== "object") return value;
+    if (value instanceof Date) return new Date(value.getTime());
     const cache = seen || new WeakMap();
     if (cache.has(value)) return cache.get(value);
     if (Array.isArray(value)) {
@@ -192,12 +227,45 @@
     return result;
   }
 
+  const GENERIC_ACTIVITY_TITLE = /^(?:ou[cç]a|listen|toque|escolha|relacione|encontre|coloque|organize|arraste|estoure|aponte|clique)\b/i;
+  const TOPIC_RULES = Object.freeze([
+    ["NUMBERS", /\b(?:one|two|three|four|five|six|seven|eight|nine|ten|number|numbers|numeral|numerals|numero|numeros|quantidade|quantidades|\d+)\b/i],
+    ["COLORS", /\b(?:color|colors|colour|colours|red|blue|yellow|green|orange|pink|purple|brown|black|white|cor|cores|vermelh\w*|azul|amarel\w*|verde|laranja|rosa|roxo|marrom|preto|branco)\b/i],
+    ["SCHOOL OBJECTS", /\b(?:school objects?|pencils?|rulers?|crayons?|erasers?|backpacks?|pencil cases?|books?|notebooks?|pens?|lapis|regua|giz|borracha|mochila|estojo|livro|caderno|caneta|objetos? escolares?)\b/i],
+    ["BODY PARTS", /\b(?:body|head|hands?|arms?|legs?|feet|foot|eyes?|ears?|nose|mouth|cabeca|maos?|bracos?|pernas?|pes?|olhos?|orelhas?|nariz|boca|partes? do corpo)\b/i],
+    ["PETS", /\b(?:pets?|dog|cat|rabbit|turtle|fish|hamster|bird|cachorro|gato|coelho|tartaruga|peixe|passaro|animais? de estimacao)\b/i],
+    ["SIZES", /\b(?:size|sizes|big|small|large|little|tamanho|tamanhos|grande|pequeno)\b/i],
+    ["GREETINGS", /\b(?:greetings?|hello|hi|good morning|good afternoon|good evening|good night|goodbye|bye|see you|saudacao|saudacoes|cumprimento|cumprimentos|despedida)\b/i],
+    ["INTRODUCTIONS", /\b(?:introductions?|my name|what is your name|how old|i am|i'm|nome|idade|apresentacao|apresentacoes)\b/i],
+    ["CLASSROOM COMMANDS", /\b(?:classroom commands?|sit down|stand up|come in|quiet|touch|listen|repeat|open|close|comandos? de sala|sente|levante|entre|silencio|toque)\b/i],
+    ["WEATHER", /\b(?:weather|sunny|rainy|windy|foggy|cloudy|stormy|snowy|hot|cold|clima|ensolarado|chuvoso|ventando|neblina|nublado|tempestade|nevando|quente|frio)\b/i],
+    ["EMOTIONS", /\b(?:emotions?|happy|sad|angry|afraid|scared|nervous|tired|emocao|emocoes|feliz|triste|bravo|assustado|nervoso|cansado)\b/i]
+  ]);
+
+  function topicText(question) {
+    const parts = [];
+    function add(value) { if (typeof value === "string" && value.trim()) parts.push(value); }
+    add(question?.statement); add(question?.audioText); add(question?.skill?.description); add(question?.metadata?.sourceStatement);
+    [question?.alternatives, question?.options, question?.metadata?.sourceOptions, question?.metadata?.targetShooter?.items, question?.metadata?.bubblePop?.items]
+      .forEach((collection) => {
+        if (!Array.isArray(collection)) return;
+        collection.forEach((entry) => { add(entry?.text); add(entry?.label); add(entry?.alt); add(entry?.audioText); });
+      });
+    return normalizeSemanticAssetName(parts.join(" "));
+  }
+
   function inferActivityTopic(activity, moduleDefinition) {
     const explicit = String(activity?.topic || "").trim();
     if (explicit) return explicit.toUpperCase();
     const current = String(activity?.title || "").trim();
-    if (current) return current;
-    return String(moduleDefinition?.title || "ENGLISH").trim().toUpperCase();
+    if (current && !GENERIC_ACTIVITY_TITLE.test(current)) return current;
+    const questions = Array.isArray(activity?.questions) ? activity.questions : [];
+    const semanticText = questions.map(topicText).join(" ");
+    const topics = TOPIC_RULES.filter((entry) => entry[1].test(semanticText)).map((entry) => entry[0]);
+    if (topics.length === 1) return topics[0];
+    if (topics.length === 2) return topics.join(" & ");
+    const moduleTitle = String(moduleDefinition?.title || "").trim();
+    return (moduleTitle || current || "ENGLISH").toUpperCase();
   }
 
   function normalizeModule(moduleDefinition) {
@@ -212,6 +280,11 @@
         normalized.intro.collectionLogo = ASSETS.branding.eduqPlayLogo;
       }
     }
+    if (Array.isArray(normalized.activities)) {
+      normalized.activities.forEach((activity) => {
+        if (activity && typeof activity === "object") activity.title = inferActivityTopic(activity, normalized);
+      });
+    }
     return Object.freeze(normalized);
   }
 
@@ -219,14 +292,17 @@
     const content = window.DUDUQ_CONTENT;
     if (!content || typeof content !== "object") return false;
     let changed = false;
-    Object.values(content).forEach((subject) => {
+    Object.keys(content).forEach((subjectKey) => {
+      const subject = content[subjectKey];
       if (!subject || typeof subject !== "object") return;
-      Object.values(subject).forEach((yearObject) => {
+      Object.keys(subject).forEach((yearKey) => {
+        const yearObject = subject[yearKey];
         if (!yearObject || typeof yearObject !== "object") return;
         Object.keys(yearObject).forEach((moduleKey) => {
           const current = yearObject[moduleKey];
           if (!current || typeof current !== "object") return;
-          yearObject[moduleKey] = normalizeModule(current); changed = true;
+          try { yearObject[moduleKey] = normalizeModule(current); changed = true; }
+          catch (error) { console.warn("[DuduQ Assets] Não foi possível normalizar " + subjectKey + "/" + yearKey + "/" + moduleKey + ".", error); }
         });
       });
     });
@@ -246,18 +322,29 @@
         return new Response(rewriteText(html), { status: response.status, statusText: response.statusText, headers });
       }) : response);
     };
-    Object.defineProperty(bridgedFetch, "__duduqAssetPathBridge", { value: true });
+    Object.defineProperty(bridgedFetch, "__duduqAssetPathBridge", { value: true, enumerable: false });
+    Object.defineProperty(bridgedFetch, "__duduqNativeFetch", { value: nativeFetch, enumerable: false });
     window.fetch = bridgedFetch;
     return true;
   }
 
   window.DUDUQ_ASSETS = ASSETS;
   window.DuduQAssets = Object.freeze({
-    version: VERSION, assets: ASSETS, canonicalCatalog: ASSETS.canonicalCatalog,
-    setYear: applyYear, getYear: () => document.documentElement.getAttribute("data-duduq-ano-ativo") || null,
-    get: (type, name) => ASSETS[type]?.[name] || null, getSound: (name) => ASSETS.sounds[name] || null,
-    getContent: () => null, resolveImage, resolveImageDetails, normalizeImageName: normalizeSemanticAssetName,
-    inferActivityTopic, rewriteUrl: rewriteLegacyAssetUrl, rewriteText, normalizeContent: normalizeLoadedContent,
+    version: VERSION,
+    assets: ASSETS,
+    canonicalCatalog: ASSETS.canonicalCatalog,
+    setYear: applyYear,
+    getYear: () => document.documentElement.getAttribute("data-duduq-ano-ativo") || null,
+    get: (type, name) => ASSETS[type]?.[name] || null,
+    getSound: (name) => ASSETS.sounds[name] || null,
+    getContent: getContentAsset,
+    resolveImage,
+    resolveImageDetails,
+    normalizeImageName: normalizeSemanticAssetName,
+    inferActivityTopic,
+    rewriteUrl: rewriteLegacyAssetUrl,
+    rewriteText,
+    normalizeContent: normalizeLoadedContent,
     getAudioBase: moduleAudioBase
   });
 
