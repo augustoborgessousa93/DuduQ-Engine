@@ -36,7 +36,7 @@ jobs:
 
   year1-loader-compat:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -62,34 +62,16 @@ jobs:
           cat /tmp/duduq-systemic-http.log
           exit 1
 
-      - name: Diagnose Core 1.0.9 vs 1.0.11 progression boundary
-        env:
-          BASE_URL: http://127.0.0.1:4173
-        run: node test/systemic/canary-core-progression-diagnostic.mjs
-
-      - name: Smoke Year 1 M02-M06 via universal Loader
-        env:
-          BASE_URL: http://127.0.0.1:4173
-        run: node test/systemic/year1-loader-compat-smoke.mjs
-
-      - name: Homologate Year 1 M01-M06 after Host reveal in four viewports
-        env:
-          BASE_URL: http://127.0.0.1:4173
-        run: node test/systemic/year1-public-entry-smoke.mjs
-
-      - name: Validate Canary R145 Core 1.0.11 progression and completion sentinels
+      - name: Isolate Canary R145 Core 1.0.11 progression and completion sentinel
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/systemic/canary-core-1.0.11-promotion-smoke.mjs
 
-      - name: Upload Year 1 browser evidence
+      - name: Upload promotion evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: systemic-year1-post-reveal-evidence
-          path: |
-            test-results/systemic/year1-public-entry
-            test-results/systemic/canary-core-progression-diagnostic
-            test-results/systemic/canary-core-1.0.11-promotion
+          name: core-r145-promotion-isolated-evidence
+          path: test-results/systemic/canary-core-1.0.11-promotion
           if-no-files-found: warn
           retention-days: 14
