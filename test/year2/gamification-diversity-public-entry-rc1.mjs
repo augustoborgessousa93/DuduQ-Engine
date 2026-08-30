@@ -180,7 +180,7 @@ async function inspectPublicModule(page, module) {
   assert(snapshot.session?.year === 2 && snapshot.session?.module === module, `M${module}: sessão pública não corresponde ao conteúdo carregado.`);
   assert(snapshot.publicEntry?.englishReadingRequired === false, `M${module}: entrypoint perdeu a regra de não exigir leitura autônoma em inglês.`);
   assert(snapshot.publicEntry?.sourceVersion === "2.3", `M${module}: sourceVersion pública inesperada ${snapshot.publicEntry?.sourceVersion}.`);
-  assert(snapshot.gameConfig?.channel === "canary-v1", `M${module}: canal público inesperado ${snapshot.gameConfig?.channel}.`);
+  assert(snapshot.gameConfig?.channel === "scale-v1", `M${module}: canal público inesperado ${snapshot.gameConfig?.channel}.`);
   assert(
     JSON.stringify(snapshot.gameConfig?.modulePath) === JSON.stringify(["english", "year2", moduleKey(module)]),
     `M${module}: modulePath público divergente ${JSON.stringify(snapshot.gameConfig?.modulePath)}.`

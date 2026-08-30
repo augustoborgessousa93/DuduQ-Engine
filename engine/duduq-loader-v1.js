@@ -1,12 +1,12 @@
 /* =========================================================
-   DUDUQ CHANNEL LOADER v1.0.1
-   Stable/Canary + releases imutáveis + hotfix central
+   DUDUQ CHANNEL LOADER v1.0.2
+   Stable/Canary + releases imutáveis + camadas compartilhadas
    ========================================================= */
 
 (function () {
   "use strict";
 
-  const VERSION = "1.0.1";
+  const VERSION = "1.0.2";
 
   if (window.DuduQChannelLoader?.version === VERSION) {
     return;
@@ -252,6 +252,26 @@
           release:
             mechanic.release
         });
+      }
+
+      /*
+       * Camadas compartilhadas pós-mecânica.
+       * Servem para melhorias estruturais cross-year que precisam ser
+       * validadas antes de virar uma nova release imutável da mecânica.
+       * O canal decide explicitamente quais camadas carregar, mantendo
+       * rollback simples e sem espalhar hotfixes por ano.
+       */
+      const postMechanic =
+        Array.isArray(
+          manifest.core?.postMechanicScripts
+        )
+          ? manifest.core.postMechanicScripts
+          : [];
+
+      for (
+        const item of postMechanic
+      ) {
+        await loadScript(item);
       }
 
       if (manifest.core?.router) {

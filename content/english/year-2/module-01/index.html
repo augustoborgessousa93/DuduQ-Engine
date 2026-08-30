@@ -11,7 +11,7 @@
     window.DUDUQ_ENGINE_BASE = new URL("../../../..", location.href).href.replace(/\/$/, "");
     window.DUDUQ_GAME_CONFIG = Object.freeze({
       engineBase: window.DUDUQ_ENGINE_BASE,
-      channel: "canary-v1",
+      channel: "scale-v1",
       label: "DuduQ — English — Year 2 — Module 01 — v2.3 multimodal",
       modulePath: ["english","year2","module01v23multimodal"],
       contentScript: "./module-01-v23-multimodal.js?v=public-v23-1"
@@ -25,7 +25,8 @@
       existingAssetsPreferred: true,
       provisionalFallbackAllowed: false,
       ttsProvisional: true,
-      englishReadingRequired: false
+      englishReadingRequired: false,
+      sharedChannelPilot: true
     });
   </script>
   <script src="../year2-v22-homolog-core.js?v=public-v23-1"></script>
@@ -36,7 +37,6 @@
   <script src="../year2-v23-manual-review-hotfix-v2.js?v=manual-review-rc2"></script>
   <script src="../year2-v23-manual-review-router-compat.js?v=manual-review-rc2"></script>
   <script src="../year2-v23-mechanics-regression-hotfix.js?v=mechanics-regression-rc1"></script>
-  <script src="../year2-v23-bubble-smart-renderer-bridge.js?v=mechanics-regression-rc1" data-duduq-year2-bubble-smart-renderer="true"></script>
   <script src="../year2-v23-mechanics-regression-router-compat.js?v=mechanics-regression-rc1"></script>
   <script src="../year2-v23-final-root-bridge.js?v=multimodal-consistency-rc1"></script>
   <script src="../year2-v23-multimodal-consistency-hotfix.js?v=multimodal-consistency-rc1"></script>
@@ -46,7 +46,6 @@
   <script src="../year2-v23-dragdrop-confirm-any-bridge.js?v=confirm-any-stable-rc3"></script>
   <script src="../year2-v23-dragdrop-selected-tools-bridge-v2.js?v=selected-tools-rc5"></script>
   <script src="../year2-v23-dragdrop-placement-autoplay.js?v=placement-autoplay-rc3"></script>
-  <script src="../year2-v23-internal-completion-guard.js?v=completion-flash-guard-rc1"></script>
   <script src="../year2-v23-dragdrop-visual-patch.js?v=public-v23-1"></script>
   <script src="../year2-v22-homolog-layout.js?v=public-v23-1"></script>
   <script src="../year2-v23-subcard-balance.js?v=visual-hierarchy-rc2"></script>

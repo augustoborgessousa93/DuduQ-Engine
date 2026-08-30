@@ -1,0 +1,63 @@
+name: Scale Intro Layout Audit
+
+on:
+  pull_request:
+    paths:
+      - "engine/shared/intro-layout-v1.js"
+      - "engine/channels/scale-v1.json"
+      - "test/scale/intro-logo-alpha-layout-audit.mjs"
+      - ".github/workflows/scale-intro-layout-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  intro-layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Syntax audit
+        run: |
+          node --check test/scale/intro-logo-alpha-layout-audit.mjs
+          if [ -f engine/shared/intro-layout-v1.js ]; then
+            node --check engine/shared/intro-layout-v1.js
+          fi
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-intro-layout-http.log 2>&1 &
+          echo $! > /tmp/duduq-intro-layout-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-intro-layout-http.log
+          exit 1
+
+      - name: Measure stabilized Intro geometry
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/scale/intro-logo-alpha-layout-audit.mjs
+
+      - name: Upload Intro evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scale-intro-layout-evidence
+          path: test-results/intro-logo-alpha-layout-audit
+          if-no-files-found: warn
+          retention-days: 14
