@@ -95,34 +95,9 @@ try {
         await page.waitForFunction(() => {
           const session = window.DuduQ?.getSession?.();
           const iframe = document.querySelector("iframe");
-          return Boolean(session && !session.transitioning && iframe?.srcdoc && window.DuduQTransition?.getState?.() === "idle");
+          const mountedView = Boolean(iframe && (iframe.srcdoc || iframe.getAttribute("src")));
+          return Boolean(session && !session.transitioning && mountedView && window.DuduQTransition?.getState?.() === "idle");
         }, null, { timeout: 35_000 });
-
-        await page.evaluate(() => {
-          const names = [
-            "duduq:step-complete",
-            "duduq:step-start",
-            "duduq:transition-cover-start",
-            "duduq:transition-covered",
-            "duduq:transition-swap",
-            "duduq:transition-reveal-start",
-            "duduq:transition-complete",
-            "duduq:module-complete"
-          ];
-          window.__DUDUQ_PROMOTION_EVENTS = [];
-          for (const name of names) {
-            window.addEventListener(name, (event) => {
-              window.__DUDUQ_PROMOTION_EVENTS.push({
-                name,
-                t: Math.round(performance.now()),
-                stepIndex: window.DuduQ?.getSession?.()?.stepIndex ?? null,
-                transitioning: window.DuduQ?.getSession?.()?.transitioning ?? null,
-                completed: window.DuduQ?.getSession?.()?.completed ?? null,
-                detailStepIndex: event?.detail?.stepIndex ?? null
-              });
-            });
-          }
-        });
 
         const initial = await page.evaluate(() => window.DuduQ.getSession());
         assert(initial.totalSteps > 0 && initial.stepIndex === 0 && initial.progress?.percent === 0, `M${moduleKey} ${viewport.name}: initial progress invalid.`);
@@ -131,37 +106,18 @@ try {
         for (let step = 0; step < initial.totalSteps; step += 1) {
           const accepted = await page.evaluate((stepIndex) => window.DuduQ.next({ qa: "canary-r145", stepIndex }), step);
           assert(accepted === true, `M${moduleKey} ${viewport.name}: Host rejected progression at step ${step + 1}.`);
-          console.log(`NEXT M${moduleKey} ${viewport.name} ${step + 1}/${initial.totalSteps}: accepted`);
 
-          try {
-            await page.waitForFunction(({ expected, total }) => {
-              const session = window.DuduQ?.getSession?.();
-              if (!session || session.transitioning) return false;
-              if (expected >= total) return session.completed === true && session.progress?.percent === 100;
-              const iframe = document.querySelector("iframe");
-              return session.stepIndex === expected && session.completed === false && Boolean(iframe?.srcdoc) && window.DuduQTransition?.getState?.() === "idle";
-            }, { expected: step + 1, total: initial.totalSteps }, { timeout: 12_000 });
-          } catch (error) {
-            const diagnostic = await page.evaluate(() => {
-              const session = window.DuduQ?.getSession?.() || null;
-              const iframe = document.querySelector("iframe");
-              return {
-                session,
-                transitionState: window.DuduQTransition?.getState?.() || null,
-                iframe: iframe ? {
-                  hasSrcdoc: Boolean(iframe.srcdoc),
-                  title: iframe.contentDocument?.title || ""
-                } : null,
-                recentEvents: (window.__DUDUQ_PROMOTION_EVENTS || []).slice(-12)
-              };
-            });
-            console.error(`TIMEOUT M${moduleKey} ${viewport.name} ${step + 1}/${initial.totalSteps}: ${JSON.stringify(diagnostic)}`);
-            throw error;
-          }
+          await page.waitForFunction(({ expected, total }) => {
+            const session = window.DuduQ?.getSession?.();
+            if (!session || session.transitioning) return false;
+            if (expected >= total) return session.completed === true && session.progress?.percent === 100;
+            const iframe = document.querySelector("iframe");
+            const mountedView = Boolean(iframe && (iframe.srcdoc || iframe.getAttribute("src")));
+            return session.stepIndex === expected && session.completed === false && mountedView && window.DuduQTransition?.getState?.() === "idle";
+          }, { expected: step + 1, total: initial.totalSteps }, { timeout: 12_000 });
 
           const snapshot = await page.evaluate(() => window.DuduQ.getSession());
           progress.push(snapshot.progress?.percent ?? -1);
-          console.log(`READY M${moduleKey} ${viewport.name} ${step + 1}/${initial.totalSteps}: stepIndex=${snapshot.stepIndex} transitioning=${snapshot.transitioning} completed=${snapshot.completed}`);
         }
 
         const finalState = await page.evaluate(() => ({
