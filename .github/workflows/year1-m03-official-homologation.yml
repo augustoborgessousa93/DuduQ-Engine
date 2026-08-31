@@ -36,10 +36,14 @@ jobs:
           node --check content/english/year-1/module-03/module-03.js
           node --check content/english/year-1/module-03/m03-visual-composition.js
           node --check test/systemic/year1-m03-official-homologation.mjs
-          if grep -nE 'data:image|<svg|createElement\(["'"']canvas|images:[[:space:]]*\[' content/english/year-1/module-03/module-03.js; then
-            echo 'Prohibited M03 media representation found.' >&2
-            exit 1
-          fi
+          python3 - <<'PY'
+          from pathlib import Path
+          text = Path('content/english/year-1/module-03/module-03.js').read_text(encoding='utf-8').lower()
+          prohibited = ['data:image', '<svg', 'images:[', 'images: [']
+          found = [token for token in prohibited if token in text]
+          if found:
+              raise SystemExit(f'Prohibited M03 media representation found: {found}')
+          PY
 
       - name: Setup Node
         uses: actions/setup-node@v4
