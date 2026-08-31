@@ -30,17 +30,13 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-async function waitForStableStep(page, expected, timeout = 15_000) {
+async function waitForHostStep(page, expected, timeout = 15_000) {
   await page.waitForFunction((step) => {
     const session = window.DuduQ?.getSession?.();
     const iframe = document.querySelector("iframe");
     return Boolean(
-      session &&
-      !session.transitioning &&
-      session.stepIndex === step &&
-      !session.completed &&
-      iframe &&
-      (iframe.srcdoc || iframe.getAttribute("src")) &&
+      session && !session.transitioning && session.stepIndex === step && !session.completed &&
+      iframe && (iframe.srcdoc || iframe.getAttribute("src")) &&
       window.DuduQTransition?.getState?.() === "idle"
     );
   }, expected, { timeout });
@@ -75,27 +71,22 @@ try {
     const page = await browser.newPage({ viewport });
     const pageErrors = [];
     const critical404 = [];
-
-    if (viewport.name === "mobile-390x844") {
-      await page.emulateMedia({ reducedMotion: "reduce" });
-    }
+    if (viewport.name === "mobile-390x844") await page.emulateMedia({ reducedMotion: "reduce" });
 
     page.on("pageerror", (error) => pageErrors.push(String(error?.message || error)));
     page.on("response", (response) => {
       if (response.status() !== 404) return;
       const url = response.url();
-      if (
-        url.includes("/engine/") ||
-        url.includes("/content/english/year-1/module-01/") ||
-        url.includes("asset-catalog/runtime-index.js")
-      ) critical404.push(url);
+      if (url.includes("/engine/") || url.includes("/content/english/year-1/module-01/") || url.includes("asset-catalog/runtime-index.js")) {
+        critical404.push(url);
+      }
     });
 
     try {
-      const response = await page.goto(
-        `${BASE}/content/english/year-1/module-01/?qa=official-y1-m01-r146-${viewport.name}`,
-        { waitUntil: "domcontentloaded", timeout: 35_000 }
-      );
+      const response = await page.goto(`${BASE}/content/english/year-1/module-01/?qa=official-y1-m01-r146-${viewport.name}`, {
+        waitUntil: "domcontentloaded",
+        timeout: 35_000
+      });
       assert(response?.ok(), `${viewport.name}: M01 HTTP ${response?.status()}.`);
       await page.waitForFunction(() => window.DUDUQ_ENGINE_READY === true, null, { timeout: 35_000 });
 
@@ -103,46 +94,29 @@ try {
         const moduleDefinition = window.DUDUQ_CONTENT?.english?.year1?.module01;
         const questions = (moduleDefinition?.activities || []).flatMap((activity) => activity?.questions || []);
         const ids = questions.map((q) => q.id);
-        const mechanics = (moduleDefinition?.activities || []).map((activity) => activity.mechanic);
         const assetKeys = [];
         const semanticAssets = [];
         const audioItems = [];
 
         for (const question of questions) {
           for (const item of question?.metadata?.targetShooter?.items || []) {
-            if (item.imageAsset) {
-              assetKeys.push(item.imageAsset);
-              semanticAssets.push({ questionId: question.id, key: item.imageAsset, alt: item.alt || "", optionId: item.id });
-            }
+            if (!item.imageAsset) continue;
+            assetKeys.push(item.imageAsset);
+            semanticAssets.push({ key: item.imageAsset, alt: item.alt || "" });
           }
           for (const target of question?.payload?.targets || []) {
-            if (target.imageAsset) {
-              assetKeys.push(target.imageAsset);
-              semanticAssets.push({ questionId: question.id, key: target.imageAsset, alt: target.alt || target.image?.alt || "", optionId: "context" });
-            }
+            if (!target.imageAsset) continue;
+            assetKeys.push(target.imageAsset);
+            semanticAssets.push({ key: target.imageAsset, alt: target.alt || target.image?.alt || "" });
           }
           for (const item of question?.payload?.items || []) {
-            if (item.spokenText) {
-              audioItems.push({
-                questionId: question.id,
-                id: item.id,
-                spokenText: item.spokenText,
-                speechLocale: item.speechLocale,
-                label: item.label,
-                required: item.required,
-                targetId: item.targetId || null
-              });
-            }
+            if (!item.spokenText) continue;
+            audioItems.push({ questionId: question.id, id: item.id, spokenText: item.spokenText, speechLocale: item.speechLocale });
           }
         }
 
         const uniqueAssetKeys = [...new Set(assetKeys)];
-        const resolvedAssets = Object.fromEntries(
-          uniqueAssetKeys.map((key) => [key, window.DuduQAssets?.resolveImageDetails?.(key) || null])
-        );
-        const scripts = Array.from(document.scripts).map((script) => script.src).filter(Boolean);
         const manifest = window.DUDUQ_ENGINE_MANIFEST || {};
-
         return {
           exists: Boolean(moduleDefinition),
           version: moduleDefinition?.version || "",
@@ -155,7 +129,7 @@ try {
           factoryCore: moduleDefinition?.factory?.core || "",
           activities: moduleDefinition?.activities?.length || 0,
           activityTitles: (moduleDefinition?.activities || []).map((activity) => activity.title),
-          mechanics,
+          mechanics: (moduleDefinition?.activities || []).map((activity) => activity.mechanic),
           ids,
           duplicateIds: ids.filter((id, index) => ids.indexOf(id) !== index),
           questions: questions.map((q) => ({
@@ -166,7 +140,6 @@ try {
             alternatives: (q.alternatives || []).map((a) => a.text),
             readingEssential: q.metadata?.readingEssential,
             literacyDemand: q.metadata?.literacyDemand,
-            screenTitle: q.metadata?.screenTitle,
             delivery: q.delivery?.mechanic,
             hasFeedback: Boolean(q.feedback?.correct && q.feedback?.incorrect),
             targetSize: q.metadata?.targetShooter?.difficulty?.targetSize || null,
@@ -178,12 +151,10 @@ try {
             dragTargets: q.payload?.targets || [],
             instructionFallback: q.metadata?.instructionAudioFallback || null
           })),
-          rawHasPreview: JSON.stringify(moduleDefinition).includes('"status":"preview"'),
-          rawHasDataImage: JSON.stringify(moduleDefinition).includes("data:image"),
-          rawHasLegacyFallback: /legacy-fallback|procedural/i.test(JSON.stringify(moduleDefinition)),
+          raw: JSON.stringify(moduleDefinition),
           assetKeys: uniqueAssetKeys,
           semanticAssets,
-          resolvedAssets,
+          resolvedAssets: Object.fromEntries(uniqueAssetKeys.map((key) => [key, window.DuduQAssets?.resolveImageDetails?.(key) || null])),
           audioItems,
           manifestRevision: manifest.revision,
           manifestCore: manifest.core?.release || "",
@@ -191,99 +162,85 @@ try {
           manifestTargetShooter: manifest.mechanics?.["target-shooter"]?.release || "",
           requiredMechanics: [...(window.DUDUQ_GAME_CONFIG?.requiredMechanics || [])],
           registeredMechanics: window.DuduQ?.listMechanics?.() || [],
-          scripts,
+          scripts: Array.from(document.scripts).map((script) => script.src).filter(Boolean),
           canonicalRuntimeCommit: window.DuduQAssets?.canonicalCatalog?.runtimeCommit || ""
         };
       });
 
       // 1. CONTEÚDO
       assert(audit.exists, `${viewport.name}: módulo M01 ausente.`);
-      assert(audit.version === "2.3.0-homolog-r145", `${viewport.name}: versão editorial do conteúdo ${audit.version}.`);
-      assert(audit.ids.length === EXPECTED.length, `${viewport.name}: esperadas 12 questões, recebidas ${audit.ids.length}.`);
-      assert(audit.duplicateIds.length === 0, `${viewport.name}: IDs duplicados ${audit.duplicateIds.join(",")}.`);
+      assert(audit.version === "2.3.0-homolog-r145", `${viewport.name}: versão editorial ${audit.version}.`);
+      assert(audit.ids.length === 12 && audit.duplicateIds.length === 0, `${viewport.name}: IDs inválidos/duplicados.`);
       assert(audit.ids.join(",") === EXPECTED.map((entry) => entry[0]).join(","), `${viewport.name}: ordem/IDs oficiais divergiram.`);
       for (const [id, answer, alternatives] of EXPECTED) {
-        const actual = audit.questions.find((q) => q.id === id);
-        assert(actual, `${viewport.name}: questão oficial ausente ${id}.`);
-        assert(actual.answer === answer, `${viewport.name}: resposta de ${id} divergente (${actual.answer}/${answer}).`);
-        assert(JSON.stringify(actual.alternatives) === JSON.stringify(alternatives), `${viewport.name}: alternativas de ${id} divergiram.`);
-        assert(actual.skill.length > 0 && actual.sourceSkill.length > 0, `${viewport.name}: habilidade/rastreabilidade ausente em ${id}.`);
-        assert(actual.hasFeedback, `${viewport.name}: ${id} sem feedback de acerto/erro.`);
+        const question = audit.questions.find((entry) => entry.id === id);
+        assert(question?.answer === answer, `${viewport.name}: gabarito ${id} divergente.`);
+        assert(JSON.stringify(question?.alternatives) === JSON.stringify(alternatives), `${viewport.name}: alternativas ${id} divergiram.`);
+        assert(question?.skill && question?.sourceSkill && question?.hasFeedback, `${viewport.name}: rastreabilidade/feedback ausente em ${id}.`);
       }
 
       // 2. PEDAGOGIA
-      assert(audit.profile === "Y1_EARLY_LITERACY", `${viewport.name}: perfil pedagógico incorreto.`);
-      assert(audit.readingDefault === "R0", `${viewport.name}: leitura padrão não é R0.`);
-      assert(audit.autonomousReading === false, `${viewport.name}: leitura autônoma não pode ser requisito.`);
-      assert(audit.smartSentenceScored === false, `${viewport.name}: Smart Sentence pontuado é proibido no perfil Y1.`);
-      assert(audit.spec === "DUDUQ_FACTORY_PEDAGOGICAL_SPECIFICATION_v1.2", `${viewport.name}: Factory spec incorreta.`);
-      assert(audit.contentSpec.includes("v2.3"), `${viewport.name}: fonte de conteúdo v2.3 ausente.`);
-      assert(audit.questions.every((q) => q.readingEssential === false && q.literacyDemand === "R0"), `${viewport.name}: há questão fora do perfil R0.`);
-      assert(audit.questions.every((q) => q.instructionFallback?.enabled && q.instructionFallback?.language === "pt-BR"), `${viewport.name}: instrução essencial sem fallback de áudio pt-BR.`);
+      assert(audit.profile === "Y1_EARLY_LITERACY" && audit.readingDefault === "R0", `${viewport.name}: perfil Y1/R0 divergente.`);
+      assert(audit.autonomousReading === false && audit.smartSentenceScored === false, `${viewport.name}: demanda de leitura incompatível.`);
+      assert(audit.spec === "DUDUQ_FACTORY_PEDAGOGICAL_SPECIFICATION_v1.2" && audit.contentSpec.includes("v2.3"), `${viewport.name}: especificações oficiais divergentes.`);
+      assert(audit.questions.every((q) => q.readingEssential === false && q.literacyDemand === "R0"), `${viewport.name}: questão fora de R0.`);
+      assert(audit.questions.every((q) => q.instructionFallback?.enabled && q.instructionFallback?.language === "pt-BR"), `${viewport.name}: fallback auditivo de instrução ausente.`);
 
-      // 3. MECÂNICA + 9. INTEGRAÇÃO — contrato estático e Canary real.
-      assert(audit.factoryCore === "1.0.11", `${viewport.name}: provenance Core incorreta.`);
-      assert(audit.manifestRevision === 146 && audit.manifestCore === "1.0.11", `${viewport.name}: runtime não está em R146/Core 1.0.11.`);
-      assert(audit.manifestDragDrop === "2.0.24", `${viewport.name}: Drag & Drop Canary ${audit.manifestDragDrop}.`);
-      assert(audit.manifestTargetShooter === "1.0.21", `${viewport.name}: Target Shooter Canary ${audit.manifestTargetShooter}.`);
-      assert(audit.requiredMechanics.join(",") === "target-shooter,drag-drop", `${viewport.name}: requiredMechanics inesperado ${audit.requiredMechanics.join(",")}.`);
+      // 3. MECÂNICA + 9. INTEGRAÇÃO
+      assert(audit.factoryCore === "1.0.11", `${viewport.name}: provenance Core divergente.`);
+      assert(audit.manifestRevision === 146 && audit.manifestCore === "1.0.11", `${viewport.name}: Canary real não é R146/Core 1.0.11.`);
+      assert(audit.manifestDragDrop === "2.0.24" && audit.manifestTargetShooter === "1.0.21", `${viewport.name}: releases das mecânicas divergentes.`);
+      assert(audit.requiredMechanics.join(",") === "target-shooter,drag-drop", `${viewport.name}: requiredMechanics divergente.`);
       const registeredIds = audit.registeredMechanics.map((entry) => entry.id);
-      assert(audit.requiredMechanics.every((id) => registeredIds.includes(id)), `${viewport.name}: mecânica obrigatória não registrada.`);
+      assert(audit.requiredMechanics.every((id) => registeredIds.includes(id)), `${viewport.name}: mecânica requerida não registrada.`);
       assert(audit.registeredMechanics.find((entry) => entry.id === "drag-drop")?.version === "2.0.24", `${viewport.name}: DD registrado não é 2.0.24.`);
-      assert(audit.mechanics.every((id) => id === "target-shooter" || id === "drag-drop"), `${viewport.name}: mecânica fora do contrato M01.`);
-      assert(audit.activityTitles.every((title) => title === "GREETINGS"), `${viewport.name}: tópico visual não é GREETINGS.`);
+      assert(audit.mechanics.every((id) => id === "target-shooter" || id === "drag-drop"), `${viewport.name}: mecânica fora do contrato.`);
+      assert(audit.activityTitles.every((title) => title === "GREETINGS"), `${viewport.name}: tópico não é GREETINGS.`);
       assert(audit.scripts.some((src) => src.includes("/engine/duduq-player-v1.js")), `${viewport.name}: Player ausente.`);
       assert(audit.scripts.some((src) => src.includes("/engine/duduq-loader-v1.js")), `${viewport.name}: Loader ausente.`);
       assert(audit.scripts.some((src) => src.includes("/engine/releases/core/1.0.11/duduq-host.js")), `${viewport.name}: Host 1.0.11 ausente.`);
       assert(audit.scripts.some((src) => src.includes("/engine/releases/core/1.0.11/duduq-router.js")), `${viewport.name}: Router 1.0.11 ausente.`);
-      assert(audit.scripts.some((src) => src.includes("/engine/releases/mechanics/drag-drop/2.0.24/drag-drop.js")), `${viewport.name}: adapter DD 2.0.24 não carregou.`);
+      assert(audit.scripts.some((src) => src.includes("/engine/releases/mechanics/drag-drop/2.0.24/drag-drop.js")), `${viewport.name}: adapter DD 2.0.24 ausente.`);
 
       for (const question of audit.questions) {
         if (question.delivery === "target-shooter") {
-          assert(question.targetItems.length === 3, `${viewport.name}: ${question.id} deve ter 3 alvos visuais.`);
-          assert(question.targetSize >= 150, `${viewport.name}: ${question.id} exige precisão motora excessiva.`);
-          assert(question.targetTimer === "none" && question.targetTimeLimit === 0, `${viewport.name}: ${question.id} não pode ter timer punitivo.`);
+          assert(question.targetItems.length === 3 && question.targetSize >= 150, `${viewport.name}: ${question.id} alvo/precisão inválidos.`);
+          assert(question.targetTimer === "none" && question.targetTimeLimit === 0, `${viewport.name}: ${question.id} possui timer punitivo.`);
           const urls = question.targetItems.map((item) => item.image || item.imageUrl).filter(Boolean);
-          assert(new Set(urls).size === urls.length, `${viewport.name}: ${question.id} reutiliza o mesmo visual em alternativas diferentes.`);
+          assert(new Set(urls).size === urls.length, `${viewport.name}: ${question.id} duplica visual nas alternativas.`);
         }
         if (question.delivery === "drag-drop") {
-          assert(question.dragMode === "single-choice", `${viewport.name}: ${question.id} não usa payload.mode=single-choice.`);
-          assert(question.dragItems.length === 3, `${viewport.name}: ${question.id} deve preservar 3 opções auditivas.`);
-          assert(question.dragTargets.length === 1 && question.dragTargets[0].capacity === 1, `${viewport.name}: ${question.id} deve possuir um único destino de capacidade 1.`);
+          assert(question.dragMode === "single-choice", `${viewport.name}: ${question.id} não usa single-choice.`);
+          assert(question.dragItems.length === 3 && question.dragTargets.length === 1 && question.dragTargets[0].capacity === 1, `${viewport.name}: ${question.id} contrato 3-opções/1-destino inválido.`);
           const required = question.dragItems.filter((item) => item.required !== false);
           const distractors = question.dragItems.filter((item) => item.required === false);
-          assert(required.length === 1 && required[0].id === question.answer && required[0].targetId === question.dragTargets[0].id, `${viewport.name}: ${question.id} perdeu o gabarito único.`);
-          assert(distractors.length === 2 && distractors.every((item) => !item.targetId), `${viewport.name}: ${question.id} possui distrator com targetId.`);
-          assert(question.dragItems.every((item, index) => item.label === String(index + 1)), `${viewport.name}: ${question.id} expõe leitura inglesa em vez de cards numerados.`);
-          assert(question.dragItems.every((item) => item.spokenText && item.speechLocale), `${viewport.name}: ${question.id} possui opção sem áudio/locale.`);
-          assert(question.dragTargets[0].imageAsset, `${viewport.name}: ${question.id} perdeu o contexto visual canônico.`);
+          assert(required.length === 1 && required[0].id === question.answer && required[0].targetId === question.dragTargets[0].id, `${viewport.name}: ${question.id} gabarito single-choice inválido.`);
+          assert(distractors.length === 2 && distractors.every((item) => !item.targetId), `${viewport.name}: ${question.id} distrator com targetId.`);
+          assert(question.dragItems.every((item, index) => item.label === String(index + 1) && item.spokenText && item.speechLocale), `${viewport.name}: ${question.id} card não é numérico/auditivo.`);
+          assert(question.dragTargets[0].imageAsset, `${viewport.name}: ${question.id} contexto visual ausente.`);
         }
       }
 
       // 4. ASSETS
-      assert(audit.canonicalRuntimeCommit === PIN, `${viewport.name}: catálogo canônico não está pinado.`);
-      assert(audit.rawHasPreview === false, `${viewport.name}: payload contém asset preview.`);
-      assert(audit.rawHasDataImage === false, `${viewport.name}: payload contém data:image.`);
-      assert(audit.rawHasLegacyFallback === false, `${viewport.name}: payload contém fallback legado/procedural.`);
-      assert(audit.assetKeys.length >= 10, `${viewport.name}: cobertura de assets canônicos insuficiente.`);
-      assert(audit.semanticAssets.every((entry) => entry.alt.trim().length > 0), `${viewport.name}: asset sem descrição semântica.`);
+      assert(audit.canonicalRuntimeCommit === PIN, `${viewport.name}: pin canônico divergente.`);
+      assert(!audit.raw.includes('"status":"preview"') && !audit.raw.includes("data:image") && !/legacy-fallback|procedural/i.test(audit.raw), `${viewport.name}: asset não canônico/fallback no payload.`);
+      assert(audit.assetKeys.length >= 10 && audit.semanticAssets.every((entry) => entry.alt.trim()), `${viewport.name}: cobertura/semântica de assets insuficiente.`);
       for (const key of audit.assetKeys) {
         const details = audit.resolvedAssets[key];
-        assert(details?.url && details?.file, `${viewport.name}: asset '${key}' não resolvido.`);
-        assert(details.catalogRuntimeCommit === PIN, `${viewport.name}: asset '${key}' perdeu provenance canônica.`);
-        assert(details.strategy === "canonical-key" || details.strategy === "canonical-alias", `${viewport.name}: asset '${key}' usou estratégia ${details.strategy}.`);
+        assert(details?.url && details?.file && details.catalogRuntimeCommit === PIN, `${viewport.name}: asset '${key}' não resolvido/provenance inválida.`);
+        assert(details.strategy === "canonical-key" || details.strategy === "canonical-alias", `${viewport.name}: estratégia inesperada para '${key}'.`);
       }
 
       // 5. ÁUDIO
       const q09Audios = audit.audioItems.filter((item) => item.questionId === "EN1-M1-09");
-      assert(q09Audios.length === 3 && q09Audios.every((item) => item.speechLocale === "pt-BR"), `${viewport.name}: EN1-M1-09 precisa de 3 opções auditivas em pt-BR.`);
-      assert(audit.audioItems.every((item) => item.spokenText && item.speechLocale), `${viewport.name}: item auditivo sem texto/locale.`);
+      assert(q09Audios.length === 3 && q09Audios.every((item) => item.speechLocale === "pt-BR"), `${viewport.name}: EN1-M1-09 áudio pt-BR inválido.`);
+      assert(audit.audioItems.every((item) => item.spokenText && item.speechLocale), `${viewport.name}: opção auditiva sem texto/locale.`);
 
-      // Início do fluxo real.
+      // Fluxo real começa no Target Shooter.
       const start = page.locator(".duduq-intro-start-button");
       await start.waitFor({ state: "visible", timeout: 30_000 });
       await start.click();
-      await waitForStableStep(page, 0, 35_000);
+      await waitForHostStep(page, 0, 35_000);
       await page.waitForFunction(() => {
         const doc = document.querySelector("iframe")?.contentDocument;
         return Boolean(doc?.querySelector(".duduq-ts-root") && doc.querySelectorAll(".duduq-ts-target").length === 3);
@@ -301,51 +258,43 @@ try {
           instruction: String(doc?.querySelector(".duduq-ts-instruction")?.textContent || "").replace(/\s+/g, " ").trim(),
           rects: targets.map((el) => { const r = el.getBoundingClientRect(); return { width: r.width, height: r.height, tabIndex: el.tabIndex }; }),
           audioControls: buttons.filter((el) => /áudio|audio|ouvir|som|instruction/i.test(String(el.getAttribute("aria-label") || el.textContent || ""))).length,
-          brokenImages: images.filter((img) => img.currentSrc && (!img.complete || img.naturalWidth < 1)).map((img) => img.currentSrc),
+          brokenImages: images.filter((img) => img.currentSrc && (!img.complete || img.naturalWidth < 1)).length,
           overflowX: Math.max(0, (doc?.body?.scrollWidth || 0) - (doc?.documentElement?.clientWidth || 0)),
           background: doc ? getComputedStyle(doc.body).backgroundColor : "",
           reducedMotion: root?.getAttribute("data-reduced-motion") || ""
         };
       });
-      assert(tsView.heading === "GREETINGS", `${viewport.name}: Target Shooter perdeu tópico GREETINGS.`);
-      assert(tsView.instruction.length > 0, `${viewport.name}: instrução do Target Shooter ausente.`);
-      assert(tsView.rects.every((r) => r.width >= 44 && r.height >= 44 && r.tabIndex >= 0), `${viewport.name}: Target Shooter falhou touch/teclado.`);
-      assert(tsView.audioControls >= 1, `${viewport.name}: Target Shooter sem áudio repetível.`);
-      assert(tsView.brokenImages.length === 0, `${viewport.name}: imagem quebrada no Target Shooter.`);
-      assert(tsView.overflowX <= 6, `${viewport.name}: overflow horizontal no Target Shooter.`);
-      assert(tsView.background && tsView.background !== "rgba(0, 0, 0, 0)", `${viewport.name}: background ausente.`);
-      if (viewport.name === "mobile-390x844") assert(tsView.reducedMotion === "true", `${viewport.name}: reduced-motion não propagou ao Target Shooter.`);
+      assert(tsView.heading === "GREETINGS" && tsView.instruction, `${viewport.name}: TS perdeu título/instrução.`);
+      assert(tsView.rects.every((r) => r.width >= 44 && r.height >= 44 && r.tabIndex >= 0), `${viewport.name}: TS touch/teclado inválido.`);
+      assert(tsView.audioControls >= 1 && tsView.brokenImages === 0 && tsView.overflowX <= 6, `${viewport.name}: TS áudio/imagem/overflow inválido.`);
+      assert(tsView.background && tsView.background !== "rgba(0, 0, 0, 0)", `${viewport.name}: TS background ausente.`);
+      if (viewport.name === "mobile-390x844") assert(tsView.reducedMotion === "true", `${viewport.name}: reduced-motion TS não propagou.`);
 
-      assert(await page.evaluate(() => typeof window.DuduQFullscreen?.toggle === "function"), `${viewport.name}: API de fullscreen ausente.`);
+      assert(await page.evaluate(() => typeof window.DuduQFullscreen?.toggle === "function"), `${viewport.name}: fullscreen API ausente.`);
       await page.evaluate(() => window.DuduQFullscreen.toggle());
       await page.waitForFunction(() => Boolean(document.fullscreenElement), null, { timeout: 5_000 });
       await page.evaluate(async () => { if (document.fullscreenElement) await document.exitFullscreen(); });
       await page.waitForFunction(() => !document.fullscreenElement, null, { timeout: 5_000 });
 
-      // Target Shooter — espera determinística; jamais voltar para wait(450).
+      // Target Shooter — espera determinística, sem wait(450).
       const frame = page.frameLocator("iframe");
       const wrongTarget = frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]').first();
       await wrongTarget.waitFor({ state: "visible", timeout: 10_000 });
-      await page.waitForFunction(() => {
-        const doc = document.querySelector("iframe")?.contentDocument;
-        const target = doc?.querySelector('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]');
-        return Boolean(target && !target.disabled);
-      }, null, { timeout: 8_000 });
       await wrongTarget.click({ force: true });
       await waitForFeedback(page, "retry", 2_500);
       const tsWrong = await page.evaluate(() => ({
-        session: window.DuduQ?.getSession?.(),
+        stepIndex: window.DuduQ?.getSession?.()?.stepIndex,
+        completed: window.DuduQ?.getSession?.()?.completed,
         feedback: document.querySelector("iframe")?.contentDocument?.querySelector(".duduq-engine-feedback")?.getAttribute("data-state") || ""
       }));
-      assert(tsWrong.session?.stepIndex === 0 && tsWrong.session?.completed === false, `${viewport.name}: erro no Target Shooter avançou a etapa.`);
-      assert(tsWrong.feedback === "retry", `${viewport.name}: Target Shooter não apresentou retry.`);
+      assert(tsWrong.stepIndex === 0 && tsWrong.completed === false && tsWrong.feedback === "retry", `${viewport.name}: TS retry/progressão inválidos.`);
 
       const correctTarget = frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo B"]').first();
       await correctTarget.waitFor({ state: "visible", timeout: 10_000 });
       await correctTarget.click({ force: true });
-      await waitForStableStep(page, 1, 15_000);
+      await waitForHostStep(page, 1, 15_000);
 
-      // Drag & Drop 2.0.24 single-choice — runtime real do M01.
+      // Drag & Drop 2.0.24 single-choice — Q02/Q03 são estágios da mesma atividade Host.
       await waitForDDReady(page);
       const ddView = await page.evaluate(() => {
         const doc = document.querySelector("iframe")?.contentDocument;
@@ -354,7 +303,6 @@ try {
         const targets = doc ? [...doc.querySelectorAll(".duduq-dd2-target[data-dd2-target-id]")] : [];
         const images = doc ? [...doc.images] : [];
         return {
-          root: Boolean(root),
           heading: String(doc?.querySelector(".duduq-engine-heading h1,h1")?.textContent || "").trim(),
           itemTexts: items.map((el) => String(el.textContent || "").replace(/\s+/g, " ").trim()),
           itemTabIndexes: items.map((el) => el.tabIndex),
@@ -362,61 +310,40 @@ try {
           audioCount: items.filter((el) => el.getAttribute("data-has-audio") === "true").length,
           targetCount: targets.length,
           targetImageCount: targets.filter((target) => Boolean(target.querySelector(".duduq-dd2-target-media"))).length,
+          targetImageSrc: targets[0]?.querySelector("img")?.currentSrc || "",
           confirmVisible: Boolean(doc?.querySelector(".duduq-dd2-confirm")),
-          brokenImages: images.filter((img) => img.currentSrc && (!img.complete || img.naturalWidth < 1)).map((img) => img.currentSrc),
+          brokenImages: images.filter((img) => img.currentSrc && (!img.complete || img.naturalWidth < 1)).length,
           overflowX: Math.max(0, (doc?.body?.scrollWidth || 0) - (doc?.documentElement?.clientWidth || 0)),
           reducedMotion: root?.getAttribute("data-reduced-motion") || ""
         };
       });
-      assert(ddView.root, `${viewport.name}: Drag & Drop DD2 não montou.`);
-      assert(ddView.heading === "GREETINGS", `${viewport.name}: Drag & Drop perdeu tópico GREETINGS.`);
-      assert(ddView.itemTexts.length === 3 && ["1", "2", "3"].every((label) => ddView.itemTexts.includes(label)), `${viewport.name}: DD não preservou os 3 cards numéricos.`);
-      assert(ddView.audioCount === 3, `${viewport.name}: DD não expôs áudio nas 3 alternativas.`);
-      assert(ddView.itemTabIndexes.every((value) => value >= 0), `${viewport.name}: DD sem acesso por teclado nos cards.`);
-      assert(ddView.itemRects.every((r) => r.width >= 44 && r.height >= 44), `${viewport.name}: DD possui alvo menor que 44px.`);
-      assert(ddView.targetCount === 1 && ddView.targetImageCount === 1, `${viewport.name}: DD perdeu o único contexto visual.`);
-      assert(ddView.confirmVisible === false, `${viewport.name}: single-choice não deve exigir CONFIRMAR.`);
-      assert(ddView.brokenImages.length === 0, `${viewport.name}: imagem quebrada no DD.`);
-      assert(ddView.overflowX <= 6, `${viewport.name}: overflow horizontal no DD.`);
-      if (viewport.name === "mobile-390x844") assert(ddView.reducedMotion === "true", `${viewport.name}: reduced-motion não propagou ao DD.`);
+      assert(ddView.heading === "GREETINGS" && ddView.itemTexts.length === 3 && ["1", "2", "3"].every((label) => ddView.itemTexts.includes(label)), `${viewport.name}: DD visual/título/cards inválidos.`);
+      assert(ddView.audioCount === 3 && ddView.itemTabIndexes.every((value) => value >= 0) && ddView.itemRects.every((r) => r.width >= 44 && r.height >= 44), `${viewport.name}: DD áudio/acessibilidade inválidos.`);
+      assert(ddView.targetCount === 1 && ddView.targetImageCount === 1 && ddView.targetImageSrc, `${viewport.name}: DD contexto visual inválido.`);
+      assert(ddView.confirmVisible === false && ddView.brokenImages === 0 && ddView.overflowX <= 6, `${viewport.name}: DD confirmar/imagem/overflow inválidos.`);
+      if (viewport.name === "mobile-390x844") assert(ddView.reducedMotion === "true", `${viewport.name}: reduced-motion DD não propagou.`);
 
       const ddFrame = page.frameLocator("iframe");
-
-      // Áudio/replay observável nas três alternativas.
       for (const id of ["A", "B", "C"]) {
         const item = ddFrame.locator(`.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="${id}"]`).first();
-        await item.waitFor({ state: "visible", timeout: 5_000 });
         await item.click({ force: true });
         await page.waitForFunction((itemId) => {
           const doc = document.querySelector("iframe")?.contentDocument;
           return Boolean(doc?.querySelector(`.duduq-dd2-item[data-dd2-item-id="${itemId}"][data-audio-playing="true"]`));
         }, id, { timeout: 1_500 });
-        await page.waitForFunction(() => {
-          const doc = document.querySelector("iframe")?.contentDocument;
-          return !doc?.querySelector(".duduq-dd2-item[data-audio-playing='true']");
-        }, null, { timeout: 6_000 });
+        await page.waitForFunction(() => !document.querySelector("iframe")?.contentDocument?.querySelector(".duduq-dd2-item[data-audio-playing='true']"), null, { timeout: 6_000 });
       }
 
-      // Fluxo obrigatório real: distrator A → retry → mesma questão → destino liberado → correto C → success → progresso.
-      const wrongItem = ddFrame.locator('.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="A"]').first();
+      // Fluxo obrigatório: distrator A → retry → mesma questão → destino liberado → correto C → success.
       const targetZone = ddFrame.locator(".duduq-dd2-zone").first();
-      await wrongItem.click({ force: true });
-      await targetZone.waitFor({ state: "visible", timeout: 5_000 });
+      await ddFrame.locator('.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="A"]').first().click({ force: true });
       await targetZone.click({ force: true });
       await waitForFeedback(page, "retry", 3_000);
-
-      const ddWrong = await page.evaluate(() => {
-        const doc = document.querySelector("iframe")?.contentDocument;
-        const session = window.DuduQ?.getSession?.();
-        return {
-          session,
-          feedback: doc?.querySelector(".duduq-engine-feedback")?.getAttribute("data-state") || "",
-          confirmVisible: Boolean(doc?.querySelector(".duduq-dd2-confirm"))
-        };
-      });
-      assert(ddWrong.session?.stepIndex === 1 && ddWrong.session?.completed === false, `${viewport.name}: distrator DD avançou/concluiu.`);
-      assert(ddWrong.feedback === "retry", `${viewport.name}: distrator DD não produziu retry.`);
-      assert(ddWrong.confirmVisible === false, `${viewport.name}: single-choice exibiu CONFIRMAR após erro.`);
+      const wrongState = await page.evaluate(() => ({
+        session: window.DuduQ?.getSession?.(),
+        confirmVisible: Boolean(document.querySelector("iframe")?.contentDocument?.querySelector(".duduq-dd2-confirm"))
+      }));
+      assert(wrongState.session?.stepIndex === 1 && wrongState.session?.completed === false && !wrongState.confirmVisible, `${viewport.name}: distrator DD avançou/concluiu/exibiu confirmar.`);
 
       await page.waitForFunction(() => {
         const doc = document.querySelector("iframe")?.contentDocument;
@@ -426,29 +353,33 @@ try {
         const cards = [...(doc?.querySelectorAll(".duduq-dd2-bank .duduq-dd2-item") || [])];
         return Boolean(bankWrong && !zoneWrong && correct && !correct.disabled && cards.length === 3 && cards.every((item) => !item.disabled));
       }, null, { timeout: 3_500 });
-      const afterRetry = await page.evaluate(() => ({
+      const retryState = await page.evaluate(() => ({
         stepIndex: window.DuduQ?.getSession?.()?.stepIndex,
         zoneCount: document.querySelector("iframe")?.contentDocument?.querySelectorAll(".duduq-dd2-zone .duduq-dd2-item").length || 0
       }));
-      assert(afterRetry.stepIndex === 1 && afterRetry.zoneCount === 0, `${viewport.name}: retry não preservou a questão/liberou o destino.`);
+      assert(retryState.stepIndex === 1 && retryState.zoneCount === 0, `${viewport.name}: retry não preservou questão/liberou destino.`);
 
-      const correctAfterRetry = ddFrame.locator('.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="C"]').first();
-      await correctAfterRetry.click({ force: true });
+      await ddFrame.locator('.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="C"]').first().click({ force: true });
       await targetZone.click({ force: true });
       await waitForFeedback(page, "success", 5_000);
-      await waitForStableStep(page, 2, 15_000);
 
-      // Correto direto no M01 real: Q03 = alternativa A.
-      await waitForDDReady(page);
+      // Q02 concluída: a atividade permanece no Host step 1 e o runtime troca para Q03.
+      await page.waitForFunction((previousSrc) => {
+        const doc = document.querySelector("iframe")?.contentDocument;
+        const nextSrc = doc?.querySelector('.duduq-dd2-target[data-dd2-target-id] img')?.currentSrc || "";
+        const items = [...(doc?.querySelectorAll(".duduq-dd2-bank-items .duduq-dd2-item") || [])];
+        const session = window.DuduQ?.getSession?.();
+        return Boolean(session?.stepIndex === 1 && !session?.completed && nextSrc && nextSrc !== previousSrc && items.length === 3 && items.every((item) => !item.disabled));
+      }, ddView.targetImageSrc, { timeout: 12_000 });
+
+      // Correto direto real na Q03 = A. Só então a atividade fecha e o Host progride.
       const directFrame = page.frameLocator("iframe");
-      const directCorrect = directFrame.locator('.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="A"]').first();
-      const directZone = directFrame.locator(".duduq-dd2-zone").first();
-      await directCorrect.click({ force: true });
-      await directZone.click({ force: true });
+      await directFrame.locator('.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="A"]').first().click({ force: true });
+      await directFrame.locator(".duduq-dd2-zone").first().click({ force: true });
       await waitForFeedback(page, "success", 5_000);
-      await waitForStableStep(page, 3, 15_000);
+      await waitForHostStep(page, 2, 15_000);
 
-      // 10. REGRESSÃO proporcional: restante do M01 deve progredir até Completion.
+      // 10. REGRESSÃO proporcional: completar o restante sem reauditar outro módulo.
       const progress = [];
       let session = await page.evaluate(() => window.DuduQ.getSession());
       progress.push(session.progress?.percent ?? 0);
@@ -471,8 +402,8 @@ try {
       assert(progress.every((value, index) => index === 0 || value >= progress[index - 1]), `${viewport.name}: progresso regrediu ${progress.join(" -> ")}.`);
       const completionText = await page.evaluate(() => String(document.body?.innerText || "").replace(/\s+/g, " "));
       assert(/Missão concluída/i.test(completionText), `${viewport.name}: Completion não apareceu.`);
-      assert(pageErrors.length === 0, `${viewport.name}: pageerror: ${pageErrors.join(" | ")}`);
-      assert(critical404.length === 0, `${viewport.name}: 404 crítico: ${critical404.join(" | ")}`);
+      assert(pageErrors.length === 0, `${viewport.name}: pageerror ${pageErrors.join(" | ")}`);
+      assert(critical404.length === 0, `${viewport.name}: 404 crítico ${critical404.join(" | ")}`);
 
       await page.screenshot({ path: path.join(OUT, `m01-${viewport.name}-completion.png`), fullPage: false });
       cases.push({
@@ -490,7 +421,6 @@ try {
         questions: audit.ids.length,
         activities: audit.activities,
         dragDrop: audit.manifestDragDrop,
-        progress,
         status: "PASS"
       });
       console.log(`PASS Y1 M01 ${viewport.name}`);
