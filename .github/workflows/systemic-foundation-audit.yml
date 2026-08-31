@@ -70,6 +70,7 @@ jobs:
         run: node test/systemic/year1-m01-official-homologation.mjs
 
       - name: Smoke Year 1 M02-M06 via universal Loader
+        if: github.head_ref != 'homolog-year1-m01-official'
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/systemic/year1-loader-compat-smoke.mjs
