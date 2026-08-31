@@ -161,6 +161,7 @@
         setRetryAnimating(true);
         if (retryReturnTimer.current !== null) window.clearTimeout(retryReturnTimer.current);
         retryReturnTimer.current = window.setTimeout(function () {
+          suppressClick.current = false;
           setPlacements(initialPlacements());
           setSelected(null);
           setWrongItemIds([]);
