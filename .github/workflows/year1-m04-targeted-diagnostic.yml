@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout M04 diagnostic head
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Verify diagnostic-only delta from known M04 product head
         run: |
           git diff --name-only 5338389eed1e8cd244976321d80e83dc146d5e47...HEAD
