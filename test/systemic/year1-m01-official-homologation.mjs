@@ -292,7 +292,10 @@ try {
       const wrongTarget = frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]').first();
       await wrongTarget.waitFor({ state: "visible", timeout: 10_000 });
       await wrongTarget.click({ force: true });
-      await wait(450);
+      await page.waitForFunction(() => {
+        const doc = document.querySelector("iframe")?.contentDocument;
+        return doc?.querySelector(".duduq-engine-feedback")?.getAttribute("data-state") === "retry";
+      }, null, { timeout: 2_500 });
       const tsWrong = await page.evaluate(() => ({
         session: window.DuduQ?.getSession?.(),
         feedback: document.querySelector("iframe")?.contentDocument?.querySelector(".duduq-engine-feedback")?.getAttribute("data-state") || ""
