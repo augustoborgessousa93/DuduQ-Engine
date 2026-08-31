@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout merged-base sanity branch
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Verify product equals merged base
         run: |
