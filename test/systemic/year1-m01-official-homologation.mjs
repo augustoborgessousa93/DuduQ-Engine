@@ -276,10 +276,26 @@ try {
       await page.evaluate(async () => { if (document.fullscreenElement) await document.exitFullscreen(); });
       await page.waitForFunction(() => !document.fullscreenElement, null, { timeout: 5_000 });
 
-      // Target Shooter — espera determinística, sem wait(450).
+      // Target Shooter — espera determinística, incluindo prontidão auditiva; sem wait fixo.
       const frame = page.frameLocator("iframe");
       const wrongTarget = frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]').first();
       await wrongTarget.waitFor({ state: "visible", timeout: 10_000 });
+      await page.waitForFunction(() => {
+        const doc = document.querySelector("iframe")?.contentDocument;
+        const target = doc?.querySelector('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]');
+        const audioControls = [...(doc?.querySelectorAll("button,[role='button']") || [])].filter((button) =>
+          /áudio|audio|ouvir|som|instruction/i.test(String(button.getAttribute("aria-label") || button.textContent || ""))
+        );
+        const audioBusy = audioControls.some((button) =>
+          Boolean(button.disabled) || /reprodução|playing/i.test(String(button.getAttribute("aria-label") || ""))
+        );
+        const session = window.DuduQ?.getSession?.();
+        return Boolean(
+          target && !target.disabled && audioControls.length >= 1 && !audioBusy &&
+          session?.stepIndex === 0 && !session?.transitioning && !session?.completed &&
+          window.DuduQTransition?.getState?.() === "idle"
+        );
+      }, null, { timeout: 8_000 });
       await wrongTarget.click({ force: true });
       await waitForFeedback(page, "retry", 2_500);
       const tsWrong = await page.evaluate(() => ({
