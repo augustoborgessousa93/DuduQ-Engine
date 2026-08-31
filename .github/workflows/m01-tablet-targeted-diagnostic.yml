@@ -1,0 +1,53 @@
+name: M01 Tablet Targeted Diagnostic
+
+on:
+  push:
+    branches:
+      - diag/m01-tablet-r146
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tablet-targeted:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-tablet-http.log 2>&1 &
+          echo $! > /tmp/duduq-tablet-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-tablet-http.log
+          exit 1
+
+      - name: Diagnose tablet 768x1024 only
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/year1-m01-tablet-targeted-diagnostic.mjs
+
+      - name: Upload tablet diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m01-tablet-targeted-diagnostic
+          path: test-results/systemic/year1-m01-tablet-targeted
+          if-no-files-found: warn
+          retention-days: 7
