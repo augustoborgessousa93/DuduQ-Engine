@@ -1,0 +1,85 @@
+name: Year 1 M04 Official Homologation
+
+on:
+  push:
+    branches:
+      - homolog-year1-m04-official
+    paths:
+      - 'content/english/year-1/module-04/**'
+      - 'test/systemic/year1-m04-official-homologation.mjs'
+      - '.github/workflows/year1-m04-official-homologation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  m04-ten-criteria:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout M04 candidate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify closed local M04 scope
+        run: |
+          git fetch origin refactor/systemic-foundation-years1-5
+          files="$(git diff --name-only origin/refactor/systemic-foundation-years1-5...HEAD)"
+          printf '%s\n' "$files"
+          unexpected="$(printf '%s\n' "$files" | grep -Ev '^(content/english/year-1/module-04/|test/systemic/year1-m04-official-homologation\.mjs$|\.github/workflows/year1-m04-official-homologation\.yml$)' || true)"
+          if [ -n "$unexpected" ]; then
+            echo 'Unexpected diff outside local M04 homologation scope:' >&2
+            printf '%s\n' "$unexpected" >&2
+            exit 1
+          fi
+
+      - name: Syntax and prohibited-media guard
+        run: |
+          node --check content/english/year-1/module-04/module-04.js
+          node --check content/english/year-1/module-04/m04-visual-composition.js
+          node --check test/systemic/year1-m04-official-homologation.mjs
+          python3 - <<'PY'
+          from pathlib import Path
+          text = Path('content/english/year-1/module-04/module-04.js').read_text(encoding='utf-8').lower()
+          prohibited = ['data:image', '<svg', 'gap-preview', 'legacy-fallback']
+          found = [token for token in prohibited if token in text]
+          if found:
+              raise SystemExit(f'Prohibited M04 media representation found: {found}')
+          PY
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start M04 candidate server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-m04-http.log 2>&1 &
+          echo $! > /tmp/duduq-m04-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-m04-http.log
+          exit 1
+
+      - name: Run M04 10/10 on 4 viewports
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/year1-m04-official-homologation.mjs
+
+      - name: Upload M04 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year1-m04-official-homologation-evidence
+          path: test-results/systemic/year1-m04-official/
+          if-no-files-found: ignore
+          retention-days: 14
