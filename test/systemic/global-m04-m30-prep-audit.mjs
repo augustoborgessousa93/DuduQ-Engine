@@ -1,0 +1,70 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
+const root = process.cwd();
+const read = (p) => fs.readFileSync(path.join(root,p),'utf8');
+const exists = (p) => fs.existsSync(path.join(root,p));
+const count = (text,re) => [...text.matchAll(re)].length;
+
+const rows=[];
+function add(row){rows.push(row)}
+
+for (const module of [5,6]) {
+  const id=`M0${module}`;
+  const dir=`content/english/year-1/module-0${module}`;
+  const index=read(`${dir}/index.html`);
+  const content=read(`${dir}/module-0${module}.js`);
+  add({
+    id,year:1,module,
+    location:dir,
+    contentVersion:(content.match(/const VERSION = "([^"]+)"/)||[])[1]||'unknown',
+    pedagogy:/PEDAGOGY v1\.0/i.test(content)?'v1.0 legacy':'unknown',
+    canaryLegacy:(content.match(/Engine baseline: Canary ([^\n]+)/)||[])[1]?.trim()||'unknown',
+    entrypoint:/systemic-loader-v1/.test(index)?'systemic-loader-v1':'other',
+    runtimeSurfaceGuard:/duduq-runtime-surface-guard-v1/.test(index),
+    directPayloadBridge:/duduq-router-direct-payload-compat-v1/.test(index),
+    dataImageOccurrences:count(content,/data:image/gi),
+    proceduralHelpers:['svgAsset','countDots','colorBlock','bodyPreview','simplePet','pairSizePreview','simpleSchoolCount','iconPreview','numeralPreview','dayScene','greetingScene'].filter(n=>content.includes(`function ${n}`)),
+    gapPreviewOccurrences:count(content,/gap-preview/gi),
+    mechanics:[...new Set([...content.matchAll(/"mechanic"\s*:\s*"([^"]+)"/g)].map(m=>m[1]))].sort(),
+    audioPlannedOccurrences:count(content,/plannedSrc/gi),
+    emptyAudioSrcOccurrences:count(content,/"src"\s*:\s*""/g)
+  });
+}
+
+for (let module=1; module<=6; module++) {
+  const id=`M${String(module+6).padStart(2,'0')}`;
+  const dir=`content/english/year-2/module-0${module}`;
+  const index=read(`${dir}/index.html`);
+  const v23=`${dir}/module-0${module}-v23-multimodal.js`;
+  const content=exists(v23)?read(v23):'';
+  const scripts=[...index.matchAll(/<script[^>]+src="([^"]+)"/g)].map(m=>m[1]);
+  add({
+    id,year:2,module,
+    location:dir,
+    contentVersion:/sourceVersion:"2\.3"/.test(index)||/sourceVersion:\s*"2\.3"/.test(index)?'v2.3':'unknown',
+    pedagogy:/factorySpec:"1\.2"/.test(index)||/factorySpec:\s*"1\.2"/.test(index)?'Factory 1.2':'unknown',
+    entrypoint:'public-v23',
+    dynamicPlayerLoader:/Date\.now\(\)/.test(index)&&/duduq-player-v1\.js/.test(index)&&/duduq-loader-v1\.js/.test(index),
+    scriptCount:scripts.length,
+    routerCompatScripts:scripts.filter(s=>/router-compat/.test(s)),
+    bridgeScripts:scripts.filter(s=>/bridge/.test(s)),
+    hotfixScripts:scripts.filter(s=>/hotfix|patch/.test(s)),
+    dataImageOccurrences:count(content,/data:image/gi),
+    mechanics:[...new Set([...content.matchAll(/mechanic\s*:\s*"([^"]+)"/g)].map(m=>m[1]))].sort(),
+    ttsProvisional:/ttsProvisional:true/.test(index)||/ttsProvisional:\s*true/.test(index)
+  });
+}
+
+const year3Branch='feat/year3-v23-multimodal';
+const report={
+  contract:'DUDUQ_GLOBAL_M04_M30_PREP_STATIC_AUDIT_V1',
+  rows,
+  year3:{branch:year3Branch,materializedOnFoundation:false,knownStaging:'content/english/year-3/README.md'},
+  year4:{githubLocationFound:false},
+  year5:{githubLocationFound:false}
+};
+
+fs.mkdirSync(path.join(root,'test-results/systemic/global-prep'),{recursive:true});
+fs.writeFileSync(path.join(root,'test-results/systemic/global-prep/report.json'),JSON.stringify(report,null,2));
+console.log(JSON.stringify(report,null,2));
