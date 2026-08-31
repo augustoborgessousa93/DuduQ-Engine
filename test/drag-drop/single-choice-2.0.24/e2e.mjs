@@ -25,9 +25,7 @@ function singleChoicePayload(id = "single-choice-valid") {
         { id: "B", label: "2", spokenText: "Good morning", speechLocale: "en-US", audioDescription: "Ouvir opção 2", required: true, targetId: "scene" },
         { id: "C", label: "3", spokenText: "Good afternoon", speechLocale: "en-US", audioDescription: "Ouvir opção 3", required: false }
       ],
-      targets: [
-        { id: "scene", label: "CENA", capacity: 1, kind: "box" }
-      ]
+      targets: [{ id: "scene", label: "CENA", capacity: 1, kind: "box" }]
     },
     feedback: { correct: "Muito bem!", incorrect: "Ouça novamente e tente outra vez." }
   };
@@ -38,9 +36,7 @@ function invalidPayload(kind) {
   if (kind === "zero-correct") {
     payload.payload.items = payload.payload.items.map((item) => ({ ...item, required: false, targetId: undefined }));
   } else if (kind === "two-correct") {
-    payload.payload.items = payload.payload.items.map((item) => item.id === "C"
-      ? { ...item, required: true, targetId: "scene" }
-      : item);
+    payload.payload.items = payload.payload.items.map((item) => item.id === "C" ? { ...item, required: true, targetId: "scene" } : item);
   } else if (kind === "no-target") {
     payload.payload.targets = [];
     payload.payload.items = payload.payload.items.map((item) => ({ ...item, targetId: undefined }));
@@ -90,10 +86,7 @@ function pairsPayload() {
     title: "PAIRS",
     instruction: "Faça os pares.",
     behavior: { shuffleItems: false, shuffleTargets: false },
-    alternatives: [
-      { id: "pair-a", text: "A" },
-      { id: "pair-b", text: "B" }
-    ],
+    alternatives: [{ id: "pair-a", text: "A" }, { id: "pair-b", text: "B" }],
     answer: {
       type: "pairs",
       value: [
@@ -116,10 +109,7 @@ function sequencePayload() {
     title: "SEQUENCE",
     instruction: "Monte a sequência.",
     behavior: { shuffleItems: false, shuffleTargets: false },
-    alternatives: [
-      { id: "seq-a", text: "A" },
-      { id: "seq-b", text: "B" }
-    ],
+    alternatives: [{ id: "seq-a", text: "A" }, { id: "seq-b", text: "B" }],
     answer: { type: "sequence", value: ["seq-a", "seq-b"] },
     metadata: { sequenceTargetId: "sequence-target", sequenceTitle: "ORDEM" }
   };
@@ -150,12 +140,10 @@ async function state(page) {
     const frame = document.querySelector("#mount iframe");
     const doc = frame?.contentDocument;
     const root = doc?.querySelector(".duduq-dd2-root");
-    const feedback = doc?.querySelector(".duduq-engine-feedback")?.getAttribute("data-state") || "";
-    const session = frame?.contentWindow?.DuduQ?.getSession?.() || null;
     const images = doc ? [...doc.images] : [];
     return {
-      feedback,
-      session,
+      feedback: doc?.querySelector(".duduq-engine-feedback")?.getAttribute("data-state") || "",
+      session: frame?.contentWindow?.DuduQ?.getSession?.() || null,
       resultCount: window.__DD224_RESULTS__.length,
       results: window.__DD224_RESULTS__,
       completionCount: window.__DD224_COMPLETIONS__.length,
@@ -172,26 +160,41 @@ async function state(page) {
   });
 }
 
+function itemSelector(itemId) {
+  return `.duduq-dd2-item[data-dd2-item-id="${itemId}"]`;
+}
+
+function zoneSelector(targetId) {
+  return `.duduq-dd2-target[data-dd2-target-id="${targetId}"] .duduq-dd2-zone`;
+}
+
+async function waitSelected(frame, itemId) {
+  await frame.locator(`${itemSelector(itemId)}[data-selected="true"]`).first().waitFor({ state: "visible", timeout: 2_000 });
+}
+
 async function placeByClick(frame, itemId, targetId) {
-  const item = frame.locator(`.duduq-dd2-item[data-dd2-item-id="${itemId}"]`).first();
-  const zone = frame.locator(`.duduq-dd2-target[data-dd2-target-id="${targetId}"] .duduq-dd2-zone`).first();
+  const item = frame.locator(itemSelector(itemId)).first();
+  const zone = frame.locator(zoneSelector(targetId)).first();
   await item.click({ force: true });
+  await waitSelected(frame, itemId);
   await zone.click({ force: true });
 }
 
 async function placeByKeyboard(frame, itemId, targetId) {
-  const item = frame.locator(`.duduq-dd2-item[data-dd2-item-id="${itemId}"]`).first();
-  const zone = frame.locator(`.duduq-dd2-target[data-dd2-target-id="${targetId}"] .duduq-dd2-zone`).first();
+  const item = frame.locator(itemSelector(itemId)).first();
+  const zone = frame.locator(zoneSelector(targetId)).first();
   await item.focus();
   await item.press("Enter");
+  await waitSelected(frame, itemId);
   await zone.focus();
   await zone.press("Enter");
 }
 
 async function placeByTap(frame, itemId, targetId) {
-  const item = frame.locator(`.duduq-dd2-item[data-dd2-item-id="${itemId}"]`).first();
-  const zone = frame.locator(`.duduq-dd2-target[data-dd2-target-id="${targetId}"] .duduq-dd2-zone`).first();
+  const item = frame.locator(itemSelector(itemId)).first();
+  const zone = frame.locator(zoneSelector(targetId)).first();
   await item.tap({ force: true });
+  await waitSelected(frame, itemId);
   await zone.tap({ force: true });
 }
 
@@ -224,7 +227,6 @@ async function runSingleChoiceViewport(browser, viewport) {
     assert(response?.ok(), `${viewport.name}: harness HTTP ${response?.status()}.`);
     await waitRegistered(page);
 
-    // Contratos A/F/G/H.
     const validation = await page.evaluate(({ valid, zero, two, none }) => ({
       valid: window.dd224Validate(valid),
       zero: window.dd224Validate(zero),
@@ -252,8 +254,7 @@ async function runSingleChoiceViewport(browser, viewport) {
     assert(initial.overflowX <= 6, `${viewport.name}: overflow horizontal ${initial.overflowX}px.`);
     if (viewport.touch) assert(initial.reducedMotion === "true", `${viewport.name}: reduced-motion não propagou.`);
 
-    // Áudio + replay: o card continua acionável e a reprodução não responde a questão.
-    const audioCard = frame.locator('.duduq-dd2-item[data-dd2-item-id="C"]').first();
+    const audioCard = frame.locator(itemSelector("C")).first();
     await audioCard.click({ force: true });
     await page.waitForTimeout(80);
     await audioCard.click({ force: true });
@@ -262,18 +263,16 @@ async function runSingleChoiceViewport(browser, viewport) {
     await page.waitForTimeout(80);
     assert(await audioCard.count() === 1, `${viewport.name}: card de áudio desapareceu após replay.`);
     assert((await state(page)).resultCount === 0, `${viewport.name}: ouvir alternativa não pode responder a questão.`);
-
-    // Limpa seleção de áudio antes da tentativa por drag/touch.
-    if ((await audioCard.getAttribute("data-selected")) === "true") await audioCard.click({ force: true });
-
-    // B — Distrator: desktop usa drag real; mobile usa fluxo touch acessível.
-    const wrongItem = frame.locator('.duduq-dd2-item[data-dd2-item-id="A"]').first();
-    const targetZone = frame.locator('.duduq-dd2-target[data-dd2-target-id="scene"] .duduq-dd2-zone').first();
-    if (viewport.touch) {
-      await placeByTap(frame, "A", "scene");
-    } else {
-      await wrongItem.dragTo(targetZone, { force: true });
+    if ((await audioCard.getAttribute("data-selected")) === "true") {
+      await audioCard.click({ force: true });
+      await frame.locator(`${itemSelector("C")}[data-selected="false"]`).first().waitFor({ state: "visible", timeout: 2_000 });
     }
+
+    const wrongItem = frame.locator(itemSelector("A")).first();
+    const targetZone = frame.locator(zoneSelector("scene")).first();
+    if (viewport.touch) await placeByTap(frame, "A", "scene");
+    else await wrongItem.dragTo(targetZone, { force: true });
+
     await waitResult(page, false, 0);
     await page.waitForFunction(() => document.querySelector("#mount iframe")?.contentDocument?.querySelector(".duduq-engine-feedback")?.getAttribute("data-state") === "retry", null, { timeout: 5_000 });
     const wrong = await state(page);
@@ -283,7 +282,6 @@ async function runSingleChoiceViewport(browser, viewport) {
     assert(!wrong.session?.completed, `${viewport.name}: erro marcou sessão como concluída.`);
     assert((wrong.session?.progress?.percent ?? 0) < 100, `${viewport.name}: erro avançou progresso.`);
 
-    // C — Retry: destino libera e resposta correta continua disponível.
     await page.waitForFunction(() => {
       const doc = document.querySelector("#mount iframe")?.contentDocument;
       const bankWrong = doc?.querySelector('.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="A"]');
@@ -292,7 +290,6 @@ async function runSingleChoiceViewport(browser, viewport) {
       return Boolean(bankWrong && !zoneWrong && correct && !correct.disabled);
     }, null, { timeout: 3_000 });
 
-    // D — Correto após erro: desktop valida teclado; mobile valida touch.
     if (viewport.touch) await placeByTap(frame, "B", "scene");
     else await placeByKeyboard(frame, "B", "scene");
     await waitResult(page, true, 1);
@@ -304,7 +301,6 @@ async function runSingleChoiceViewport(browser, viewport) {
 
     await page.screenshot({ path: path.join(OUT, `${viewport.name}-wrong-then-correct.png`), fullPage: false });
 
-    // E — Correto direto em uma montagem limpa.
     await mount(page, singleChoicePayload(`single-choice-direct-${viewport.name}`));
     const directFrame = page.frameLocator("#mount iframe");
     await placeByClick(directFrame, "B", "scene");
