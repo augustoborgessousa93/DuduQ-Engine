@@ -1,0 +1,86 @@
+import { chromium } from "playwright";
+import fs from "node:fs/promises";
+import path from "node:path";
+
+const BASE=process.env.BASE_URL||"http://127.0.0.1:4173";
+const PIN="f0f8bed8e8c24fad4eae204bf4a5cc84a8d8263f";
+const OUT=path.resolve("test-results/systemic/year1-m03-official");
+const VIEWPORTS=[
+ {name:"desktop-1366x768",width:1366,height:768},
+ {name:"fullhd-1920x1080",width:1920,height:1080},
+ {name:"tablet-768x1024",width:768,height:1024},
+ {name:"mobile-390x844",width:390,height:844,mobile:true}
+];
+const EXPECTED=[
+ ["EN1-M3-01","B",["green","red","yellow"],"drag-drop"],
+ ["EN1-M3-02","C",["red","green","blue"],"drag-drop"],
+ ["EN1-M3-03","A",["yellow","red","green"],"drag-drop"],
+ ["EN1-M3-04","B",["red","green","yellow"],"drag-drop"],
+ ["EN1-M3-05","C",["eraser","colored pencil","pencil"],"drag-drop"],
+ ["EN1-M3-06","A",["eraser","pencil","colored pencil"],"drag-drop"],
+ ["EN1-M3-07","B",["eraser","ruler","pencil"],"drag-drop"],
+ ["EN1-M3-08","C",["eraser","pencil","backpack"],"drag-drop"],
+ ["EN1-M3-09","B",["orange","purple","pink"],"target-shooter"],
+ ["EN1-M3-10","B",["two rulers","three rulers","five rulers"],"drag-drop"],
+ ["EN1-M3-11","A",["orange crayon","pink crayon","orange pencil"],"drag-drop"],
+ ["EN1-M3-12","A",["pink pencil case","purple pencil case","pink backpack"],"drag-drop"]
+];
+function assert(ok,msg){if(!ok)throw new Error(msg)}
+async function waitStep(page,step,timeout=25000){await page.waitForFunction(expected=>{const s=window.DuduQ?.getSession?.(),f=document.querySelector("iframe");return Boolean(s&&s.stepIndex===expected&&s.transitioning===false&&s.completed===false&&f&&(f.srcdoc||f.getAttribute("src"))&&window.DuduQTransition?.getState?.()==="idle")},step,{timeout})}
+async function waitFeedback(page,state,timeout=6000){await page.waitForFunction(expected=>document.querySelector("iframe")?.contentDocument?.querySelector(".duduq-engine-feedback")?.getAttribute("data-state")===expected,state,{timeout})}
+async function waitNext(page,previous,total,timeout=25000){await page.waitForFunction(({previous,total})=>{const s=window.DuduQ?.getSession?.();if(!s||s.transitioning)return false;if(s.completed)return previous===total-1&&s.progress?.percent===100;const f=document.querySelector("iframe");return Boolean(s.stepIndex===previous+1&&f&&(f.srcdoc||f.getAttribute("src"))&&window.DuduQTransition?.getState?.()==="idle")},{previous,total},{timeout})}
+async function waitDD(page,timeout=12000){await page.waitForFunction(()=>{const d=document.querySelector("iframe")?.contentDocument,items=[...(d?.querySelectorAll(".duduq-dd2-bank-items .duduq-dd2-item")||[])];return Boolean(d?.querySelector(".duduq-dd2-root")&&d?.querySelector(".duduq-dd2-target[data-dd2-target-id]")&&items.length===3&&items.every(x=>!x.disabled))},null,{timeout})}
+async function waitTS(page,timeout=12000){await page.waitForFunction(()=>{const d=document.querySelector("iframe")?.contentDocument,t=[...(d?.querySelectorAll(".duduq-ts-target")||[])];return Boolean(d?.querySelector(".duduq-ts-root")&&t.length===3&&t.every(x=>!x.disabled))},null,{timeout})}
+async function waitCardAudio(page){await page.waitForFunction(()=>!document.querySelector("iframe")?.contentDocument?.querySelector(".duduq-dd2-item[data-audio-playing='true']"),null,{timeout:7000}).catch(()=>{})}
+async function answerDD(page,step,answer,id){
+ await waitDD(page);const frame=page.frameLocator("iframe"),wrong=["A","B","C"].find(x=>x!==answer);
+ const wrongCard=frame.locator(`.duduq-dd2-item[data-dd2-item-id="${wrong}"]`).first();await wrongCard.click({force:true});await waitCardAudio(page);await frame.locator(".duduq-dd2-zone").first().click({force:true});await waitFeedback(page,"retry");
+ const retry=await page.evaluate(()=>window.DuduQ?.getSession?.());assert(retry?.stepIndex===step&&!retry.completed,`${id}: distrator DD avançou.`);await waitDD(page);
+ const released=await page.evaluate(()=>{const d=document.querySelector("iframe")?.contentDocument;return [...(d?.querySelectorAll(".duduq-dd2-zone .duduq-dd2-item")||[])].length===0});assert(released,`${id}: target não foi liberado após retry.`);
+ const card=frame.locator(`.duduq-dd2-item[data-dd2-item-id="${answer}"]`).first();await card.click({force:true});await waitCardAudio(page);await frame.locator(".duduq-dd2-zone").first().click({force:true});await waitFeedback(page,"success");
+}
+
+await fs.rm(OUT,{recursive:true,force:true});await fs.mkdir(OUT,{recursive:true});
+const browser=await chromium.launch({headless:true});const cases=[];
+try{
+ for(const viewport of VIEWPORTS){
+  const page=await browser.newPage({viewport:{width:viewport.width,height:viewport.height},hasTouch:Boolean(viewport.mobile),isMobile:Boolean(viewport.mobile)});if(viewport.mobile)await page.emulateMedia({reducedMotion:"reduce"});
+  const pageErrors=[],critical404=[];page.on("pageerror",e=>pageErrors.push(String(e?.message||e)));page.on("response",r=>{if(r.status()===404&&(/\/engine\//.test(r.url())||/\/content\/english\/year-1\/module-03\//.test(r.url())||/asset-catalog\/runtime-index\.js/.test(r.url())))critical404.push(r.url())});
+  try{
+   const response=await page.goto(`${BASE}/content/english/year-1/module-03/?qa=official-m03-r146-${viewport.name}`,{waitUntil:"domcontentloaded",timeout:35000});assert(response?.ok(),`${viewport.name}: HTTP ${response?.status()}`);await page.waitForFunction(()=>window.DUDUQ_ENGINE_READY===true,null,{timeout:35000});
+   const audit=await page.evaluate(()=>{const m=window.DUDUQ_CONTENT?.english?.year1?.module03,q=(m?.activities||[]).flatMap(a=>a.questions||[]),manifest=window.DUDUQ_ENGINE_MANIFEST||{},keys=[...new Set(q.flatMap(x=>(x.payload?.targets||[]).map(t=>t.imageAsset).filter(Boolean)))];return{version:m?.version,profile:m?.pedagogyPolicy?.profile,reading:m?.pedagogyPolicy?.readingDefault,autonomous:m?.pedagogyPolicy?.autonomousEnglishReadingRequired,spec:m?.pedagogyPolicy?.specification,contentSpec:m?.pedagogyPolicy?.contentSpecification,factory:m?.factory,ids:q.map(x=>x.id),questions:q.map(x=>({id:x.id,answer:x.answer?.value,alternatives:(x.alternatives||[]).map(a=>a.text),mechanic:x.delivery?.mechanic,reading:x.metadata?.literacyDemand,essential:x.metadata?.readingEssential,fallback:x.metadata?.instructionAudioFallback,payload:x.payload||null,ts:x.metadata?.targetShooter||null,composition:x.metadata?.m03VisualComposition||x.metadata?.dragDropChoice?.visualComposition||null,skill:x.skill?.description,sourceSkill:x.metadata?.sourceSkill})),raw:JSON.stringify(m),keys,resolved:Object.fromEntries(keys.map(k=>[k,window.DuduQAssets?.resolveImageDetails?.(k)||null])),runtimeCommit:window.DuduQAssets?.canonicalCatalog?.runtimeCommit||"",revision:manifest.revision,core:manifest.core?.release,dd:manifest.mechanics?.["drag-drop"]?.release,ts:manifest.mechanics?.["target-shooter"]?.release,required:[...(window.DUDUQ_GAME_CONFIG?.requiredMechanics||[])],registered:window.DuduQ?.listMechanics?.()||[],scripts:[...document.scripts].map(s=>s.src).filter(Boolean),helper:window.M03VisualComposition?.version||""}});
+   assert(audit.version==="2.3.0-homolog-r146",`${viewport.name}: versão ${audit.version}`);assert(audit.ids.join(",")===EXPECTED.map(x=>x[0]).join(","),`${viewport.name}: IDs/ordem divergentes.`);
+   for(const [id,answer,alts,mech] of EXPECTED){const q=audit.questions.find(x=>x.id===id);assert(q?.answer===answer,`${id}: gabarito`);assert(JSON.stringify(q?.alternatives)===JSON.stringify(alts),`${id}: alternativas`);assert(q?.mechanic===mech&&q?.skill&&q?.sourceSkill,`${id}: mecânica/skill/rastreabilidade`);assert(q?.reading==="R0"&&q?.essential===false&&q?.fallback?.enabled,`${id}: R0/fallback`) }
+   assert(audit.profile==="Y1_EARLY_LITERACY"&&audit.reading==="R0"&&audit.autonomous===false,`${viewport.name}: perfil R0`);assert(audit.spec==="DUDUQ_FACTORY_PEDAGOGICAL_SPECIFICATION_v1.2"&&audit.contentSpec.includes("v2.3"),`${viewport.name}: specs`);
+   assert(audit.revision===146&&audit.core==="1.0.11"&&audit.dd==="2.0.24"&&audit.ts==="1.0.21",`${viewport.name}: Canary/releases`);assert(audit.factory?.core==="1.0.11"&&audit.factory?.dragDrop==="2.0.24"&&audit.factory?.targetShooter==="1.0.21",`${viewport.name}: factory`);
+   assert(audit.required.join(",")==="drag-drop,target-shooter",`${viewport.name}: requiredMechanics`);const regs=audit.registered.map(x=>`${x.id}@${x.version}`);assert(regs.includes("drag-drop@2.0.24")&&regs.includes("target-shooter@1.0.21"),`${viewport.name}: registros`);
+   assert(audit.helper.startsWith("1.0."),`${viewport.name}: helper M03 ausente`);assert(audit.scripts.some(s=>s.includes("m03-visual-composition.js"))&&audit.scripts.some(s=>s.includes("duduq-runtime-surface-guard-v1.js"))&&audit.scripts.some(s=>s.includes("duduq-router-direct-payload-compat-v1.js")),`${viewport.name}: scripts integração`);
+   for(const q of audit.questions){if(q.mechanic==="drag-drop"){assert(q.payload?.mode==="single-choice"&&q.payload?.targets?.length===1&&q.payload.targets[0].capacity===1&&q.payload?.items?.length===3,`${q.id}: DD contrato`);const required=q.payload.items.filter(x=>x.required!==false),dist=q.payload.items.filter(x=>x.required===false);assert(required.length===1&&required[0].id===q.answer&&required[0].targetId===q.payload.targets[0].id,`${q.id}: DD correto`);assert(dist.length===2&&dist.every(x=>!x.targetId),`${q.id}: DD distratores`);assert(q.payload.items.every(x=>x.spokenText&&x.speechLocale==="en-US"),`${q.id}: áudio alternativas`)}else{assert(q.id==="EN1-M3-09"&&q.ts?.audioText==="purple"&&q.ts?.items?.length===3&&q.ts?.correctIds?.join("")==="B",`${q.id}: TS contrato`);assert(q.ts.items.map(x=>x.semanticLabel).join(",")==="orange,purple,pink",`${q.id}: semântica swatches`);assert(new Set(q.ts.items.map(x=>x.accent)).size===3,`${q.id}: accents`);assert(q.ts.items.every(x=>["A","B","C"].includes(x.label)&&!/orange|purple|pink/i.test(x.label)),`${q.id}: labels visuais`)} }
+   assert(audit.runtimeCommit===PIN,`${viewport.name}: pin assets`);assert(audit.keys.length===10,`${viewport.name}: esperados 10 assets únicos, ${audit.keys.length}`);for(const k of audit.keys){const d=audit.resolved[k];assert(d?.url&&d?.file&&d?.catalogRuntimeCommit===PIN,`${k}: provenance canônica`)}assert(!audit.raw.includes("data:image")&&!audit.raw.includes("<svg")&&!audit.raw.includes("canvas"),`${viewport.name}: mídia procedural/data detectada`);
+
+   const intro=page.locator(".duduq-intro-start-button");await intro.waitFor({state:"visible",timeout:30000});await intro.click();await waitStep(page,0,35000);const initial=await page.evaluate(()=>window.DuduQ?.getSession?.());assert(initial?.totalSteps===12,`${viewport.name}: totalSteps`);
+   for(let step=0;step<EXPECTED.length;step++){
+    const [id,answer,,mech]=EXPECTED[step];await waitStep(page,step);
+    if(id==="EN1-M3-09"){
+      await waitTS(page);await page.waitForFunction(()=>{const d=document.querySelector("iframe")?.contentDocument;return d?.querySelectorAll('.duduq-ts-target[data-m03-swatch="true"]').length===3&&d?.getElementById("duduq-m03-q09-swatches")},null,{timeout:5000});
+      const visual=await page.evaluate(()=>{const d=document.querySelector("iframe").contentDocument,c=JSON.parse(d.getElementById("targetShooterConfig").textContent),stage=c.stages[0],targets=[...d.querySelectorAll(".duduq-ts-target")];return{stageId:stage.id,audio:stage.audioText,labels:[...d.querySelectorAll(".duduq-ts-label")].map(x=>({text:x.textContent,rect:x.getBoundingClientRect().toJSON()})),targets:targets.map(t=>{const r=t.getBoundingClientRect(),shell=t.querySelector(".duduq-ts-target-shell"),cs=getComputedStyle(shell);return{aria:t.getAttribute("aria-label"),accent:t.style.getPropertyValue("--accent"),w:r.width,h:r.height,bg:cs.backgroundImage,border:cs.borderTopWidth}}),reduced:matchMedia("(prefers-reduced-motion: reduce)").matches};});
+      assert(visual.stageId===id&&visual.audio.toLowerCase()==="purple",`${viewport.name}: Q09 áudio purple`);assert(visual.targets.length===3&&new Set(visual.targets.map(x=>x.accent.toLowerCase())).size===3,`${viewport.name}: Q09 swatches distintos`);assert(visual.targets.every(x=>x.w>=44&&x.h>=44&&x.bg!=="none"&&parseFloat(x.border)>=4),`${viewport.name}: Q09 força/tamanho swatches`);assert(visual.labels.every(x=>["A","B","C"].includes(x.text)&&x.rect.width<=2&&x.rect.height<=2),`${viewport.name}: Q09 nomes/labels visuais`);assert(visual.targets.some(x=>/orange/i.test(x.aria))&&visual.targets.some(x=>/purple/i.test(x.aria))&&visual.targets.some(x=>/pink/i.test(x.aria)),`${viewport.name}: Q09 accessible names`);if(viewport.mobile)assert(visual.reduced,`${viewport.name}: Q09 reduced-motion`);
+      await page.screenshot({path:path.join(OUT,`${viewport.name}-q09.png`)});
+      const frame=page.frameLocator("iframe"),wrong=frame.locator('.duduq-ts-target[aria-label*="orange" i]').first();if(viewport.name==="desktop-1366x768"){await wrong.focus();await page.keyboard.press("Enter")}else await wrong.click({force:true});await waitFeedback(page,"retry");const retry=await page.evaluate(()=>window.DuduQ?.getSession?.());assert(retry?.stepIndex===step&&!retry.completed,`${viewport.name}: Q09 distrator avançou`);await waitTS(page);await frame.locator('.duduq-ts-target[aria-label*="purple" i]').first().click({force:true});await waitFeedback(page,"success");
+    }else{
+      if(id==="EN1-M3-10"){
+       await waitDD(page);await page.waitForFunction(()=>document.querySelector("iframe")?.contentDocument?.querySelectorAll('.duduq-dd2-target img.duduq-dd2-target-media').length===3,null,{timeout:5000});
+       const rulers=await page.evaluate(()=>{const d=document.querySelector("iframe").contentDocument,root=d.querySelector('.duduq-dd2-target[data-m03-composed="true"]'),imgs=[...(root?.querySelectorAll("img.duduq-dd2-target-media")||[])],rects=imgs.map(x=>x.getBoundingClientRect().toJSON());return{count:imgs.length,srcs:imgs.map(x=>x.currentSrc||x.src),alts:imgs.map(x=>x.alt),copies:imgs.filter(x=>x.getAttribute("aria-hidden")==="true"&&x.getAttribute("role")==="presentation").length,aria:root?.getAttribute("aria-label"),complete:imgs.every(x=>x.complete&&x.naturalWidth>0),rects,stage:JSON.parse(d.getElementById("targetShooterConfig").textContent).stages[0]};});
+       assert(rulers.count===3&&new Set(rulers.srcs).size===1,`${viewport.name}: Q10 não tem exatamente 3 réguas mesmo src`);assert(!/^(data:|blob:)/i.test(rulers.srcs[0])&&!/\.svg(?:\?|$)/i.test(rulers.srcs[0]),`${viewport.name}: Q10 src inválido`);assert(rulers.alts.filter(x=>x==="três réguas").length===1&&rulers.copies===2&&/três réguas/i.test(rulers.aria||""),`${viewport.name}: Q10 acessibilidade cópias`);assert(rulers.complete,`${viewport.name}: Q10 imagem quebrada`);const sorted=[...rulers.rects].sort((a,b)=>a.x-b.x);assert(sorted.every(r=>r.width>18&&r.height>18)&&sorted[0].x+sorted[0].width<=sorted[1].x+2&&sorted[1].x+sorted[1].width<=sorted[2].x+2,`${viewport.name}: Q10 clipping/overlap`);const audioMap=Object.fromEntries(rulers.stage.items.map(x=>[x.id,x.spokenText]));assert(audioMap.A==="two rulers"&&audioMap.B==="three rulers"&&audioMap.C==="five rulers",`${viewport.name}: Q10 áudios`);await page.screenshot({path:path.join(OUT,`${viewport.name}-q10.png`)});
+      }
+      await answerDD(page,step,answer,id);
+    }
+    await waitNext(page,step,EXPECTED.length);
+   }
+   const final=await page.evaluate(()=>({s:window.DuduQ?.getSession?.(),text:String(document.body.innerText||"").replace(/\s+/g," "),w:document.documentElement.scrollWidth,vw:innerWidth,fw:document.querySelector("iframe")?.contentDocument?.documentElement?.scrollWidth||0,fcw:document.querySelector("iframe")?.contentDocument?.documentElement?.clientWidth||0,helper:window.M03VisualComposition?.getState?.()}));
+   assert(final.s?.completed===true&&final.s?.progress?.percent===100,`${viewport.name}: completion`);assert(/Missão concluída/i.test(final.text),`${viewport.name}: UI conclusão`);assert(final.w<=final.vw+2&&(!final.fcw||final.fw<=final.fcw+2),`${viewport.name}: overflow`);assert(final.helper?.q09Applied>0&&final.helper?.q10Applied>0,`${viewport.name}: helper não atuou`);assert(pageErrors.length===0,`${viewport.name}: pageerror ${pageErrors.join(" | ")}`);assert(critical404.length===0,`${viewport.name}: 404 ${critical404.join(" | ")}`);
+   const criteria={content:"PASS",pedagogy:"PASS",mechanic:"PASS",assets:"PASS",audio:"PASS",visual:"PASS",responsive:"PASS",accessibility:"PASS",integration:"PASS",regression:"PASS"};cases.push({viewport:viewport.name,criteria,progress:100,pageErrors,critical404});console.log(`M03 PASS 10/10 ${viewport.name}`);
+  }finally{await page.close()}
+ }
+}finally{await browser.close()}
+const report={contract:"DUDUQ_YEAR1_M03_OFFICIAL_HOMOLOGATION_R146",status:cases.length===4?"PASS":"FAIL",module:"M03",canary:146,core:"1.0.11",targetShooter:"1.0.21",dragDrop:"2.0.24",cases};await fs.writeFile(path.join(OUT,"report.json"),JSON.stringify(report,null,2));assert(cases.length===4,`Expected 4 viewports, got ${cases.length}`);console.log("DUDUQ_YEAR1_M03_OFFICIAL_HOMOLOGATION_R146 PASS 4/4 10/10");
