@@ -5,6 +5,7 @@ import path from "node:path";
 const BASE = process.env.BASE_URL || "http://127.0.0.1:4173";
 const PIN = "f0f8bed8e8c24fad4eae204bf4a5cc84a8d8263f";
 const OUT = path.resolve("test-results/systemic/canary-core-1.0.11-promotion");
+const EXPECTED_REVISION = 146;
 const VIEWPORTS = [
   { name: "desktop-1366x768", width: 1366, height: 768 },
   { name: "mobile-390x844", width: 390, height: 844 }
@@ -38,7 +39,7 @@ try {
       });
 
       try {
-        const url = `${BASE}/content/english/year-1/module-${moduleKey}/?qa=canary-r145-core-1.0.11`;
+        const url = `${BASE}/content/english/year-1/module-${moduleKey}/?qa=canary-r${EXPECTED_REVISION}-core-1.0.11`;
         const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 35_000 });
         assert(response?.ok(), `M${moduleKey} ${viewport.name}: entry HTTP ${response?.status()}.`);
         await page.waitForFunction(() => window.DUDUQ_ENGINE_READY === true, null, { timeout: 35_000 });
@@ -67,7 +68,7 @@ try {
           };
         }, ASSET_SENTINELS);
 
-        assert(boot.revision === 145, `M${moduleKey} ${viewport.name}: Canary revision ${boot.revision}.`);
+        assert(boot.revision === EXPECTED_REVISION, `M${moduleKey} ${viewport.name}: Canary revision ${boot.revision}.`);
         assert(boot.channel === "canary-v1", `M${moduleKey} ${viewport.name}: channel ${boot.channel}.`);
         assert(boot.core === "1.0.11", `M${moduleKey} ${viewport.name}: Core ${boot.core}.`);
         assert(boot.runtimeCommit === PIN, `M${moduleKey} ${viewport.name}: canonical runtime commit drifted.`);
@@ -104,7 +105,7 @@ try {
 
         const progress = [initial.progress?.percent ?? 0];
         for (let step = 0; step < initial.totalSteps; step += 1) {
-          const accepted = await page.evaluate((stepIndex) => window.DuduQ.next({ qa: "canary-r145", stepIndex }), step);
+          const accepted = await page.evaluate(({ stepIndex, revision }) => window.DuduQ.next({ qa: `canary-r${revision}`, stepIndex }), { stepIndex: step, revision: EXPECTED_REVISION });
           assert(accepted === true, `M${moduleKey} ${viewport.name}: Host rejected progression at step ${step + 1}.`);
 
           await page.waitForFunction(({ expected, total }) => {
@@ -144,11 +145,11 @@ try {
 }
 
 const report = {
-  contract: "DUDUQ_CANARY_R145_CORE_1_0_11_PROMOTION",
+  contract: "DUDUQ_CANARY_R146_CORE_1_0_11_PROMOTION",
   status: cases.length === 12 ? "PASS" : "FAIL",
   core: "1.0.11",
   rollbackCore: "1.0.9",
-  revision: 145,
+  revision: EXPECTED_REVISION,
   canonicalRuntimeCommit: PIN,
   cases
 };

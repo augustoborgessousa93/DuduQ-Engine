@@ -1,0 +1,79 @@
+name: Drag Drop 2.0.24 Single Choice
+
+on:
+  push:
+    branches:
+      - release/drag-drop-2.0.24-single-choice
+    paths:
+      - "engine/releases/mechanics/drag-drop/2.0.24/**"
+      - "test/drag-drop/single-choice-2.0.24/**"
+      - ".github/workflows/drag-drop-single-choice-2.0.24.yml"
+  pull_request:
+    branches:
+      - refactor/systemic-foundation-years1-5
+    paths:
+      - "engine/releases/mechanics/drag-drop/2.0.24/**"
+      - "test/drag-drop/single-choice-2.0.24/**"
+      - ".github/workflows/drag-drop-single-choice-2.0.24.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    name: explicit-contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax adapter
+        run: node --check engine/releases/mechanics/drag-drop/2.0.24/drag-drop.js
+      - name: Syntax E2E
+        run: node --check test/drag-drop/single-choice-2.0.24/e2e.mjs
+      - name: Validate immutable and explicit contract
+        run: node test/drag-drop/single-choice-2.0.24/contract.mjs
+
+  chromium:
+    name: single-choice-and-regression
+    needs: contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-dd224-http.log 2>&1 &
+          echo $! > /tmp/duduq-dd224-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-dd224-http.log
+          exit 1
+      - name: Run explicit single-choice + regression
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-choice-2.0.24/e2e.mjs
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: drag-drop-single-choice-2.0.24-evidence
+          path: test-results/drag-drop-single-choice-2.0.24
+          if-no-files-found: warn
+          retention-days: 14
