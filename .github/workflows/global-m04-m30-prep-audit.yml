@@ -1,0 +1,42 @@
+name: Global M04-M30 Preparation Audit
+
+on:
+  push:
+    branches:
+      - prep/global-m04-m30
+    paths:
+      - 'content/english/year-1/module-05/**'
+      - 'content/english/year-1/module-06/**'
+      - 'content/english/year-2/**'
+      - 'test/systemic/global-m04-m30-prep-audit.mjs'
+      - 'docs/prep/DUDUQ_GLOBAL_M04_M30_MATRIX.md'
+      - '.github/workflows/global-m04-m30-prep-audit.yml'
+  workflow_dispatch:
+
+jobs:
+  prep-static-audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout preparation branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run static preparation audit
+        run: node test/systemic/global-m04-m30-prep-audit.mjs
+      - name: Verify Year 3 staging source and Year 4/5 absence
+        shell: bash
+        run: |
+          git fetch origin feat/year3-v23-multimodal
+          git show origin/feat/year3-v23-multimodal:content/english/year-3/README.md >/tmp/year3-readme.md
+          grep -q 'DuduQ English — Year 3 v2.3 multimodal' /tmp/year3-readme.md
+          if git branch -r | grep -Ei 'year[-_/]?4|year[-_/]?5'; then
+            echo 'Candidate Year 4/5 branches detected; inspect before updating matrix.'
+          else
+            echo 'No Year 4/5 branch names detected in current remote refs.'
+          fi
+      - name: Upload preparation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: global-m04-m30-prep-report
+          path: test-results/systemic/global-prep/report.json
+          retention-days: 14
