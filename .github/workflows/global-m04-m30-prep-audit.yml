@@ -9,8 +9,7 @@ on:
       - 'content/english/year-1/module-06/**'
       - 'content/english/year-2/**'
       - 'test/systemic/global-m04-m30-prep-audit.mjs'
-      - 'docs/prep/DUDUQ_GLOBAL_M04_M30_MATRIX.md'
-      - 'docs/prep/DUDUQ_GLOBAL_M04_M30_MATRIX_UPDATE_01.md'
+      - 'docs/prep/**'
       - '.github/workflows/global-m04-m30-prep-audit.yml'
   workflow_dispatch:
 
