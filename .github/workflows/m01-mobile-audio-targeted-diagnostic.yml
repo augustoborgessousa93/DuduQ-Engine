@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   mobile-audio-targeted:
@@ -42,3 +42,18 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/systemic/year1-m01-mobile-audio-targeted-diagnostic.mjs
+
+      - name: Apply observer latch to PR QA only
+        run: |
+          cp test/systemic/apply-m01-audio-latch-qa-patch.mjs /tmp/apply-m01-audio-latch-qa-patch.mjs
+          git fetch origin homolog-year1-m01-official
+          git checkout -B homolog-year1-m01-official origin/homolog-year1-m01-official
+          node /tmp/apply-m01-audio-latch-qa-patch.mjs
+          git diff --check
+          test "$(git diff --name-only)" = "test/systemic/year1-m01-official-homologation.mjs"
+          node --check test/systemic/year1-m01-official-homologation.mjs
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add test/systemic/year1-m01-official-homologation.mjs
+          git commit -m "test(year1-m01): latch transient Drag Drop audio state"
+          git push origin HEAD:homolog-year1-m01-official
