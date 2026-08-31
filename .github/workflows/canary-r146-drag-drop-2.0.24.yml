@@ -1,0 +1,75 @@
+name: Canary R146 Drag Drop 2.0.24
+
+on:
+  push:
+    branches:
+      - release/canary-r146-drag-drop-2.0.24
+    paths:
+      - "engine/channels/canary-v1.json"
+      - "engine/channels/canary-r145-rollback.json"
+      - "test/systemic/canary-r146-drag-drop-2.0.24-*.mjs"
+      - ".github/workflows/canary-r146-drag-drop-2.0.24.yml"
+  pull_request:
+    branches:
+      - refactor/systemic-foundation-years1-5
+    paths:
+      - "engine/channels/canary-v1.json"
+      - "engine/channels/canary-r145-rollback.json"
+      - "test/systemic/canary-r146-drag-drop-2.0.24-*.mjs"
+      - ".github/workflows/canary-r146-drag-drop-2.0.24.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  promote:
+    name: manifest-loader-single-choice-regression
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax
+        run: |
+          node --check test/systemic/canary-r146-drag-drop-2.0.24-contract.mjs
+          node --check test/systemic/canary-r146-drag-drop-2.0.24-smoke.mjs
+          node --check test/drag-drop/single-choice-2.0.24/e2e.mjs
+      - name: Guard controlled manifest diff and rollback
+        run: node test/systemic/canary-r146-drag-drop-2.0.24-contract.mjs
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-r146-http.log 2>&1 &
+          echo $! > /tmp/duduq-r146-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-r146-http.log
+          exit 1
+      - name: Loader and Canary sanity
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/canary-r146-drag-drop-2.0.24-smoke.mjs
+      - name: Single-choice and mechanic regression
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/single-choice-2.0.24/e2e.mjs
+      - name: Upload Canary evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: canary-r146-drag-drop-2.0.24-evidence
+          path: |
+            test-results/systemic/canary-r146-drag-drop-2.0.24
+            test-results/drag-drop-single-choice-2.0.24
+          if-no-files-found: warn
+          retention-days: 14
