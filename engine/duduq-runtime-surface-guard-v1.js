@@ -1,21 +1,27 @@
 /* =========================================================
-   DUDUQ RUNTIME SURFACE GUARD v1.0.0
+   DUDUQ RUNTIME SURFACE GUARD v1.0.1
 
    Guarantees an opaque fallback surface behind the same-origin
    Target Shooter scene without changing its arena, assets, physics,
    feedback, timing, or shared visual layers.
 
-   The guard only acts when the iframe document is transparent.
+   The guard identifies the Target Shooter iframe from the title set
+   by its adapter, so the fallback is applied as soon as srcdoc loads
+   instead of depending on the React root already being mounted.
    ========================================================= */
 (function () {
   "use strict";
 
-  const VERSION = "1.0.0";
+  const VERSION = "1.0.1";
   const FLAG = "__DUDUQ_RUNTIME_SURFACE_GUARD_V1__";
   const FALLBACK = "#f7fbff";
 
   if (window[FLAG]) return;
   window[FLAG] = VERSION;
+
+  function isTargetShooterFrame(iframe) {
+    return /target\s*shooter/i.test(String(iframe?.title || ""));
+  }
 
   function isTransparent(value) {
     const color = String(value || "").replace(/\s+/g, "").toLowerCase();
@@ -23,20 +29,25 @@
   }
 
   function apply(iframe) {
+    if (!isTargetShooterFrame(iframe)) return;
+
     try {
       const doc = iframe?.contentDocument;
       if (!doc?.documentElement || !doc?.body) return;
-      if (!doc.querySelector(".duduq-ts-root")) return;
 
-      const htmlColor = getComputedStyle(doc.documentElement).backgroundColor;
-      const bodyColor = getComputedStyle(doc.body).backgroundColor;
+      const htmlColor = iframe.contentWindow?.getComputedStyle
+        ? iframe.contentWindow.getComputedStyle(doc.documentElement).backgroundColor
+        : getComputedStyle(doc.documentElement).backgroundColor;
+      const bodyColor = iframe.contentWindow?.getComputedStyle
+        ? iframe.contentWindow.getComputedStyle(doc.body).backgroundColor
+        : getComputedStyle(doc.body).backgroundColor;
 
       if (isTransparent(htmlColor)) {
-        doc.documentElement.style.backgroundColor = FALLBACK;
+        doc.documentElement.style.setProperty("background-color", FALLBACK, "important");
       }
 
       if (isTransparent(bodyColor)) {
-        doc.body.style.backgroundColor = FALLBACK;
+        doc.body.style.setProperty("background-color", FALLBACK, "important");
       }
     } catch (_) {
       /* Same-origin DuduQ runtimes are expected; fail silently otherwise. */
