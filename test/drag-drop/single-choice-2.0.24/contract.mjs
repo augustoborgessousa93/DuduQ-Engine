@@ -58,6 +58,7 @@ expect(candidate.includes('var ready = question.mode === "single-choice" ? false
 
 // Retry: item errado é liberado sem progresso e a alternativa correta continua disponível.
 expect(candidate.includes("setRetryAnimating(true)"), "Retry single-choice não bloqueia a janela de retorno.");
+expect(candidate.includes("suppressClick.current = false"), "Retry não libera a próxima ativação após pointer drag.");
 expect(candidate.includes("setPlacements(initialPlacements())"), "Retry não libera o destino single-choice.");
 expect(candidate.includes("setWrongItemIds([])"), "Retry não limpa o estado visual incorreto.");
 expect(candidate.includes("}, 850);"), "Janela de retorno/retry de 850ms ausente.");
