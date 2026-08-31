@@ -3,11 +3,27 @@
 "use strict";
 if(window.M04VisualComposition)return;
 const MODULE="english/year1/module04",LEGS_Q="EN1-M4-07",LEGS_FILE="body-part-touch-knees-tocar-joelhos.png";
-const state={legsApplied:0,lastQuestionId:""};
+const state={legsApplied:0,targetSemanticsApplied:0,lastQuestionId:""};
 function moduleOK(){return Array.isArray(window.DUDUQ_GAME_CONFIG?.modulePath)&&window.DUDUQ_GAME_CONFIG.modulePath.join("/")===MODULE}
 function config(doc){try{const node=doc?.getElementById("targetShooterConfig");if(!node)return null;return JSON.parse(node.textContent||"null")}catch(_){return null}}
 function stage(doc){const c=config(doc);return c&&Array.isArray(c.stages)&&c.stages.length===1?c.stages[0]:null}
 function style(doc,id,css){let node=doc.getElementById(id);if(node)return node;node=doc.createElement("style");node.id=id;node.textContent=css;(doc.head||doc.documentElement).appendChild(node);return node}
+function applyTargetSemantics(doc,s){
+ if(!moduleOK()||!s||s.mode!=="audio-to-image"||!Array.isArray(s.items)||s.items.length!==3)return false;
+ const targets=[...doc.querySelectorAll(".duduq-ts-target")];if(targets.length!==3)return false;
+ const byId=new Map(s.items.map(item=>[String(item.id||""),String(item.accessibleLabel||item.semanticLabel||item.alt||"").trim()]));
+ if(byId.size!==3||[...byId.values()].some(v=>!v))return false;
+ let changed=false;
+ for(const target of targets){
+  const current=String(target.getAttribute("aria-label")||"");
+  const match=current.match(/alvo\s+([ABC])(?:\b|$)/i);if(!match)continue;
+  const id=match[1].toUpperCase(),semantic=byId.get(id);if(!semantic)continue;
+  const next=`Lançar estrela no alvo ${id}: ${semantic}`;
+  if(current!==next){target.setAttribute("aria-label",next);target.setAttribute("data-m04-semantic-target",id);changed=true}
+ }
+ if(changed){state.targetSemanticsApplied+=1;state.lastQuestionId=String(s.id||"")}
+ return targets.every(t=>t.hasAttribute("data-m04-semantic-target"));
+}
 function applyLegs(doc,s){
  if(!moduleOK()||s?.id!==LEGS_Q||s?.mode!=="single-choice"||!Array.isArray(s?.targets)||s.targets.length!==1)return false;
  const target=s.targets[0];if(Number(target.capacity)!==1||String(target.alt||"").toLowerCase()!=="corpo com pernas destacadas")return false;
@@ -28,8 +44,8 @@ html[data-duduq-m04-question="${LEGS_Q}"] .duduq-m04-legs-highlight{position:abs
  let overlay=head.querySelector(".duduq-m04-legs-highlight");if(!overlay){overlay=doc.createElement("span");overlay.className="duduq-m04-legs-highlight";overlay.setAttribute("aria-hidden","true");overlay.setAttribute("role","presentation");head.appendChild(overlay);state.legsApplied+=1;state.lastQuestionId=LEGS_Q}
  return true;
 }
-function inspectFrame(frame){if(!moduleOK())return;let doc;try{doc=frame.contentDocument}catch(_){return}if(!doc)return;const s=stage(doc);if(s?.id!==LEGS_Q)return;const apply=()=>applyLegs(doc,stage(doc));if(doc.body&&!doc.__DUDUQ_M04_OBSERVER__){const o=new MutationObserver(apply);o.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src","data-dd2-target-id"]});doc.__DUDUQ_M04_OBSERVER__=o}apply()}
+function inspectFrame(frame){if(!moduleOK())return;let doc;try{doc=frame.contentDocument}catch(_){return}if(!doc)return;const apply=()=>{const s=stage(doc);if(!s)return;if(s.mode==="audio-to-image")applyTargetSemantics(doc,s);if(s.id===LEGS_Q)applyLegs(doc,s)};if(doc.body&&!doc.__DUDUQ_M04_OBSERVER__){const o=new MutationObserver(apply);o.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src","data-dd2-target-id","aria-label"]});doc.__DUDUQ_M04_OBSERVER__=o}apply()}
 function scan(){if(!moduleOK())return;document.querySelectorAll("iframe").forEach(frame=>{if(!frame.__DUDUQ_M04_LOAD__){frame.addEventListener("load",()=>inspectFrame(frame));frame.__DUDUQ_M04_LOAD__=true}inspectFrame(frame)})}
 if(moduleOK()){new MutationObserver(scan).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("DOMContentLoaded",scan,{once:true});setInterval(scan,180)}
-window.M04VisualComposition=Object.freeze({version:"1.0.0-m04-local",getState:()=>({...state}),scan});
+window.M04VisualComposition=Object.freeze({version:"1.0.1-m04-local",getState:()=>({...state}),scan});
 })();
