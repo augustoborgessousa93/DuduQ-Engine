@@ -283,10 +283,15 @@ try {
       await page.evaluate(async () => { if (document.fullscreenElement) await document.exitFullscreen(); });
       await page.waitForFunction(() => !document.fullscreenElement, null, { timeout: 5_000 });
 
-      // Target Shooter: erro + retry + acerto real.
+      // Target Shooter: aguarda interatividade, depois erro + retry + acerto real.
       const frame = page.frameLocator("iframe");
       const wrongTarget = frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]').first();
       await wrongTarget.waitFor({ state: "visible", timeout: 10_000 });
+      await page.waitForFunction(() => {
+        const doc = document.querySelector("iframe")?.contentDocument;
+        const target = doc?.querySelector('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]');
+        return Boolean(target && !target.disabled);
+      }, null, { timeout: 8_000 });
       await wrongTarget.click({ force: true });
       await page.waitForFunction(() => {
         const doc = document.querySelector("iframe")?.contentDocument;
@@ -312,6 +317,11 @@ try {
         const doc = document.querySelector("iframe")?.contentDocument;
         return Boolean(doc?.querySelector(".duduq-dd2-root"));
       }, null, { timeout: 20_000 });
+      await page.waitForFunction(() => {
+        const doc = document.querySelector("iframe")?.contentDocument;
+        const items = [...(doc?.querySelectorAll(".duduq-dd2-bank-items .duduq-dd2-item") || [])];
+        return items.length === 3 && items.every((item) => !item.disabled);
+      }, null, { timeout: 8_000 });
 
       const ddView = await page.evaluate(() => {
         const doc = document.querySelector("iframe")?.contentDocument;
