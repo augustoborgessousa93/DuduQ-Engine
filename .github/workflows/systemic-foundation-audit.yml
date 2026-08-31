@@ -30,9 +30,14 @@ jobs:
           node --check test/systemic/year1-public-entry-smoke.mjs
           node --check test/systemic/canary-core-progression-diagnostic.mjs
           node --check test/systemic/canary-core-1.0.11-promotion-smoke.mjs
+          node --check test/systemic/router-drag-drop-data-driven-single-contract.mjs
+          node --check engine/releases/core/1.0.12-candidate/duduq-router.js
 
       - name: Guard systemic foundation
         run: node test/systemic/foundation-architecture-audit.mjs
+
+      - name: Router Drag Drop data-driven single contract
+        run: node test/systemic/router-drag-drop-data-driven-single-contract.mjs
 
   year1-loader-compat:
     runs-on: ubuntu-latest
