@@ -23,12 +23,13 @@ jobs:
           fetch-depth: 0
       - name: Run static preparation audit
         run: node test/systemic/global-m04-m30-prep-audit.mjs
-      - name: Verify Year 3 source lineages and Year 4/5 absence
+      - name: Verify Year 3-5 located source lineages
         shell: bash
         run: |
           git fetch origin feat/year3-v23-multimodal scale/shared-engine-year3-bootstrap scale/year3-shared-engine-foundation
           git show origin/feat/year3-v23-multimodal:content/english/year-3/README.md >/tmp/year3-readme.md
           grep -q 'DuduQ English — Year 3 v2.3 multimodal' /tmp/year3-readme.md
+
           for ref in origin/scale/shared-engine-year3-bootstrap origin/scale/year3-shared-engine-foundation; do
             count="$(git ls-tree -d -r --name-only "$ref" content/english/year-3 | grep -Ec '^content/english/year-3/module-[0-9]{2}$' || true)"
             if [ "$count" != "6" ]; then
@@ -37,11 +38,19 @@ jobs:
             fi
             echo "$ref: 6 Year 3 module directories confirmed"
           done
-          if git branch -r | grep -Ei 'year[-_/]?4|year[-_/]?5'; then
-            echo 'Candidate Year 4/5 branches detected; inspect before updating matrix.'
-          else
-            echo 'No Year 4/5 branch names detected in current remote refs.'
-          fi
+
+          scale=origin/scale/shared-engine-year3-bootstrap
+          for year in 4 5; do
+            count="$(git ls-tree -d -r --name-only "$scale" "content/english/year-${year}" | grep -Ec "^content/english/year-${year}/module-[0-9]{2}$" || true)"
+            if [ "$count" != "6" ]; then
+              echo "$scale: expected 6 Year ${year} module directories, found $count" >&2
+              exit 1
+            fi
+            git show "$scale:content/english/year-${year}/module-01/module-01-v1.js" | grep -q 'DUDUQ_Ingles_1ao5_Revisao_Alfabetizacao_Multimodal_v2.3'
+            git show "$scale:test/scale/year${year}-all-modules-smoke.mjs" >/tmp/year${year}-smoke.mjs
+            git show "$scale:test/scale/year${year}-v23-$( [ "$year" = 4 ] && printf 'functional-reading' || printf 'integrated-functional' )-contract.mjs" >/tmp/year${year}-contract.mjs
+            echo "$scale: Year ${year} source candidate M01-M06 + v2.3 contract + smoke confirmed"
+          done
       - name: Upload preparation report
         uses: actions/upload-artifact@v4
         with:
