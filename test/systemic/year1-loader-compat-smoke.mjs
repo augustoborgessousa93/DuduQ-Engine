@@ -5,6 +5,7 @@ const VIEWPORTS = [
   { name: "desktop", width: 1366, height: 768 },
   { name: "mobile", width: 390, height: 844 }
 ];
+const OFFICIAL_ENTRYPOINT_MODULES = new Set([2, 3]);
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -25,15 +26,15 @@ try {
       });
       try {
         /*
-         * M02 homologado usa uma bridge fail-closed de compatibilidade de payload
-         * que existe somente durante o bootstrap síncrono do entrypoint real e
-         * restaura o perfil canônico do Router na microtask seguinte. Testar
-         * Router.select() depois desse restore gera falso negativo. Para M02,
-         * portanto, o smoke abre o entrypoint público real; M03-M06 continuam no
-         * harness universal até suas homologações próprias.
+         * Módulos já oficialmente homologados que dependem de bridge fail-closed
+         * de bootstrap devem ser exercitados pelo entrypoint público real. A bridge
+         * existe antes do Loader, amplia a compatibilidade somente no dispatch
+         * síncrono duduq:engine-ready e restaura o perfil canônico na microtask.
+         * M02 e M03 já estão homologados; M04-M06 permanecem no harness universal
+         * até suas homologações próprias.
          */
-        const url = moduleNumber === 2
-          ? `${BASE}/content/english/year-1/module-02/?qa=universal-loader-compat`
+        const url = OFFICIAL_ENTRYPOINT_MODULES.has(moduleNumber)
+          ? `${BASE}/content/english/year-1/module-${String(moduleNumber).padStart(2, "0")}/?qa=universal-loader-compat`
           : `${BASE}/test/systemic/year1-loader-compat.html?module=${moduleNumber}`;
         await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30_000 });
         await page.waitForFunction(() => window.DUDUQ_ENGINE_READY === true, null, { timeout: 30_000 });
@@ -74,12 +75,18 @@ try {
               });
             }
           }
+          const scriptSources = Array.from(document.scripts).map((script) => String(script.src || ""));
+          const bridgeIndex = scriptSources.findIndex((src) => src.includes("/engine/duduq-router-direct-payload-compat-v1.js"));
+          const loaderIndex = scriptSources.findIndex((src) => src.includes("/engine/duduq-loader-v1.js"));
           return {
             exists: Boolean(module),
             activityCount: Array.isArray(module?.activities) ? module.activities.length : 0,
             mechanics: Array.from(new Set((module?.activities || []).map((activity) => activity?.mechanic).filter(Boolean))),
             routerChecks,
             bootstrapBridge: String(window.__DUDUQ_ROUTER_DIRECT_PAYLOAD_COMPAT_V1__ || ""),
+            bridgeBeforeLoader: bridgeIndex >= 0 && loaderIndex >= 0 && bridgeIndex < loaderIndex,
+            requiredMechanics: Array.isArray(window.DUDUQ_GAME_CONFIG?.requiredMechanics) ? [...window.DUDUQ_GAME_CONFIG.requiredMechanics] : [],
+            registeredMechanics: ["drag-drop", "target-shooter"].filter((mechanicId) => window.DuduQ?.hasMechanic?.(mechanicId) === true),
             rootText: String(document.querySelector("#root")?.textContent || "").trim(),
             documentWidth: document.documentElement.scrollWidth
           };
@@ -91,6 +98,11 @@ try {
         const directSingles = moduleState.routerChecks.filter((check) => check.directSingleEligible);
         if (directSingles.length > 0) {
           assert(moduleState.bootstrapBridge, `Y1 M${moduleNumber}: payload direto single-choice sem bridge de bootstrap.`);
+        }
+        if (OFFICIAL_ENTRYPOINT_MODULES.has(moduleNumber)) {
+          assert(moduleState.bridgeBeforeLoader, `Y1 M${moduleNumber}: bridge bootstrap não precede o Loader no entrypoint real.`);
+          assert(moduleState.requiredMechanics.slice().sort().join(",") === "drag-drop,target-shooter", `Y1 M${moduleNumber}: requiredMechanics divergentes: ${moduleState.requiredMechanics.join(", ")}`);
+          assert(moduleState.registeredMechanics.slice().sort().join(",") === "drag-drop,target-shooter", `Y1 M${moduleNumber}: DD/TS não registrados: ${moduleState.registeredMechanics.join(", ")}`);
         }
         const routerMismatches = moduleState.routerChecks.filter((check) => !check.directSingleEligible && check.declared !== check.selected);
         assert(routerMismatches.length === 0, `Y1 M${moduleNumber}: Router divergiu da Factory: ${JSON.stringify(routerMismatches)}`);
@@ -146,6 +158,10 @@ try {
           viewport: viewport.name,
           module: moduleNumber,
           mechanics: moduleState.mechanics,
+          requiredMechanics: moduleState.requiredMechanics,
+          registeredMechanics: moduleState.registeredMechanics,
+          bootstrapBridge: moduleState.bootstrapBridge,
+          bridgeBeforeLoader: moduleState.bridgeBeforeLoader,
           routerChecks: moduleState.routerChecks,
           runtime: liveFrames
         });

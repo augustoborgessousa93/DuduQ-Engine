@@ -1,0 +1,81 @@
+name: Year 1 M03 Official Homologation
+
+on:
+  push:
+    branches:
+      - homolog-year1-m03-official
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  m03-ten-criteria:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout M03 candidate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify closed local M03 scope
+        run: |
+          git fetch origin refactor/systemic-foundation-years1-5
+          files="$(git diff --name-only origin/refactor/systemic-foundation-years1-5...HEAD)"
+          printf '%s\n' "$files"
+          unexpected="$(printf '%s\n' "$files" | grep -Ev '^(content/english/year-1/module-03/|test/systemic/year1-m03-official-homologation\.mjs$|\.github/workflows/year1-m03-official-homologation\.yml$)' || true)"
+          if [ -n "$unexpected" ]; then
+            echo 'Unexpected diff outside local M03 homologation scope:' >&2
+            printf '%s\n' "$unexpected" >&2
+            exit 1
+          fi
+
+      - name: Syntax and prohibited-media guard
+        run: |
+          node --check content/english/year-1/module-03/module-03.js
+          node --check content/english/year-1/module-03/m03-visual-composition.js
+          node --check test/systemic/year1-m03-official-homologation.mjs
+          python3 - <<'PY'
+          from pathlib import Path
+          text = Path('content/english/year-1/module-03/module-03.js').read_text(encoding='utf-8').lower()
+          prohibited = ['data:image', '<svg', 'images:[', 'images: [']
+          found = [token for token in prohibited if token in text]
+          if found:
+              raise SystemExit(f'Prohibited M03 media representation found: {found}')
+          PY
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start M03 candidate server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-m03-http.log 2>&1 &
+          echo $! > /tmp/duduq-m03-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-m03-http.log
+          exit 1
+
+      - name: Run M03 10/10 on 4 viewports
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/year1-m03-official-homologation.mjs
+
+      - name: Upload M03 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year1-m03-official-homologation-evidence
+          path: test-results/systemic/year1-m03-official/
+          if-no-files-found: ignore
+          retention-days: 14
