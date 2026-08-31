@@ -148,7 +148,7 @@ try {
   const firstFrame = page.frameLocator("iframe");
   const correctTarget = firstFrame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo B"]').first();
   await correctTarget.waitFor({ state: "visible", timeout: 10_000 });
-  await correctTarget.click();
+  await correctTarget.click({ force: true });
 
   await page.waitForFunction(() => {
     const session = window.DuduQ?.getSession?.();
