@@ -24,6 +24,42 @@ jobs:
           git checkout --detach bc8eadb945484cbdc4c7a539eb1b65fda7b35c87
           cp /tmp/year1-m01-postmerge-sanity-final.mjs test/systemic/.year1-m01-postmerge-sanity-final.tmp.mjs
 
+      - name: Fix sanity stage-transition sentinel only
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('test/systemic/.year1-m01-postmerge-sanity-final.tmp.mjs')
+          text = path.read_text(encoding='utf-8')
+          before_correct = '''  await ddFrame.locator('.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="C"]').first().click({ force: true });
+          '''
+          with_src = '''  const q02TargetSrc = await page.evaluate(() => document.querySelector("iframe")?.contentDocument?.querySelector('.duduq-dd2-target[data-dd2-target-id] img')?.currentSrc || "");
+          assert(q02TargetSrc, "Contexto visual Q02 ausente antes da transição para Q03.");
+
+          await ddFrame.locator('.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="C"]').first().click({ force: true });
+          '''
+          old_wait = '''  await page.waitForFunction(() => {
+            const s = window.DuduQ?.getSession?.();
+            const doc = document.querySelector("iframe")?.contentDocument;
+            return Boolean(s?.stepIndex === 1 && !s.transitioning && doc?.querySelector('.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="A"]'));
+          }, null, { timeout: 12_000 });
+          '''
+          new_wait = '''  await page.waitForFunction((previousSrc) => {
+            const s = window.DuduQ?.getSession?.();
+            const doc = document.querySelector("iframe")?.contentDocument;
+            const nextSrc = doc?.querySelector('.duduq-dd2-target[data-dd2-target-id] img')?.currentSrc || "";
+            const items = [...(doc?.querySelectorAll(".duduq-dd2-bank-items .duduq-dd2-item") || [])];
+            return Boolean(s?.stepIndex === 1 && !s.transitioning && nextSrc && nextSrc !== previousSrc && items.length === 3 && items.every((item) => !item.disabled));
+          }, q02TargetSrc, { timeout: 12_000 });
+          '''
+          if text.count(before_correct) != 1:
+              raise SystemExit(f'Expected one Q02 correct marker, got {text.count(before_correct)}')
+          if text.count(old_wait) != 1:
+              raise SystemExit(f'Expected one weak Q02→Q03 sentinel, got {text.count(old_wait)}')
+          text = text.replace(before_correct, with_src).replace(old_wait, new_wait)
+          path.write_text(text, encoding='utf-8')
+          PY
+          node --check test/systemic/.year1-m01-postmerge-sanity-final.tmp.mjs
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
