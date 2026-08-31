@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "contractMajor": 1,
+  "revision": 1,
+  "channel": "core-router-drag-drop-single-candidate-v1",
+  "status": "experimental-core-1.0.12-candidate-router-drag-drop-data-single",
+  "core": {
+    "release": "1.0.12-candidate",
+    "styles": [
+      { "href": "/engine/releases/core/1.0.12-candidate/duduq-theme.css", "release": "1.0.12-candidate" },
+      { "href": "/engine/releases/core/1.0.12-candidate/duduq-intro.css", "release": "1.0.12-candidate" },
+      { "href": "/engine/releases/core/1.0.12-candidate/duduq-transition.css", "release": "1.0.12-candidate" },
+      { "href": "/engine/releases/core/1.0.12-candidate/duduq-completion.css", "release": "1.0.12-candidate" },
+      { "id": "duduq-world-fusion-core-style", "href": "/engine/releases/core/1.0.12-candidate/duduq-world-fusion.css", "release": "1.0.12-candidate" }
+    ],
+    "preMechanicScripts": [
+      { "id": "duduq-canonical-assets-runtime", "src": "https://cdn.jsdelivr.net/gh/augustoborgessousa93/Assets-DuduQ@f0f8bed8e8c24fad4eae204bf4a5cc84a8d8263f/asset-catalog/runtime-index.js", "release": "assets-f0f8bed8" },
+      { "src": "/engine/releases/core/1.0.12-candidate/duduq-assets.js", "release": "1.0.12-candidate" },
+      { "id": "duduq-world-fusion-core-script", "src": "/engine/releases/core/1.0.12-candidate/duduq-world-fusion.js", "release": "1.0.12-candidate" },
+      { "src": "/engine/releases/core/1.0.12-candidate/duduq-sound.js", "release": "1.0.12-candidate" },
+      { "src": "/engine/releases/core/1.0.12-candidate/duduq-intro.js", "release": "1.0.12-candidate" },
+      { "src": "/engine/releases/core/1.0.12-candidate/duduq-schema.js", "release": "1.0.12-candidate" },
+      { "src": "/engine/releases/core/1.0.12-candidate/duduq-content-audio.js", "release": "1.0.12-candidate" },
+      { "src": "/engine/releases/core/1.0.12-candidate/duduq-completion.js", "release": "1.0.12-candidate" },
+      { "src": "/engine/releases/core/1.0.12-candidate/duduq-transition.js", "release": "1.0.12-candidate" },
+      { "src": "/engine/releases/core/1.0.12-candidate/duduq-host.js", "release": "1.0.12-candidate" },
+      { "src": "/engine/releases/core/1.0.12-candidate/duduq-progress-ui.js", "release": "1.0.12-candidate" }
+    ],
+    "router": { "src": "/engine/releases/core/1.0.12-candidate/duduq-router.js", "release": "1.0.12-candidate" }
+  },
+  "mechanics": {
+    "bubble-pop": { "release": "1.0.31", "adapter": "/engine/releases/mechanics/bubble-pop/1.0.31/bubble-pop.js", "runtime": "/engine/releases/mechanics/bubble-pop/1.0.31/DUDUQ_BUBBLE_POP.html" },
+    "drag-drop": { "release": "2.0.22", "adapter": "/engine/releases/mechanics/drag-drop/2.0.22/drag-drop.js", "runtime": "/engine/releases/mechanics/drag-drop/2.0.22/DUDUQ_DRAG_DROP.html" },
+    "matching": { "release": "1.0.23", "adapter": "/engine/releases/mechanics/matching/1.0.23/matching.js", "runtime": "/engine/releases/mechanics/matching/1.0.23/DUDUQ_MATCHING.html" },
+    "memory-quest": { "release": "1.0.27", "adapter": "/engine/releases/mechanics/memory-quest/1.0.27/memory-quest.js", "runtime": "/engine/releases/mechanics/memory-quest/1.0.27/DUDUQ_MEMORY_QUEST.html" },
+    "smart-sentence": { "release": "4.0.20", "adapter": "/engine/releases/mechanics/smart-sentence/4.0.20/smart-sentence.js", "runtime": "/engine/releases/mechanics/smart-sentence/4.0.20/DUDUQ_SMART_SENTENCE.html" },
+    "target-shooter": { "release": "1.0.21", "adapter": "/engine/releases/mechanics/target-shooter/1.0.21/target-shooter.js", "runtime": "/engine/releases/mechanics/target-shooter/1.0.21/DUDUQ_TARGET_SHOOTER.html" },
+    "word-slash": { "release": "1.0.17", "adapter": "/engine/releases/mechanics/word-slash/1.0.17/word-slash.js", "runtime": "/engine/releases/mechanics/word-slash/1.0.17/DUDUQ_WORD_SLASH.html" }
+  },
+  "policy": {
+    "releasesImmutable": true,
+    "manifestNoStore": true,
+    "rollbackViaManifest": true,
+    "experimentalCandidate": true,
+    "productionPromotionAllowed": false,
+    "canonicalAssetCatalogSchema": 2,
+    "canonicalAssetRuntimeCommit": "f0f8bed8e8c24fad4eae204bf4a5cc84a8d8263f"
+  }
+}
