@@ -30,10 +30,6 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-function wait(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 await fs.rm(OUT, { recursive: true, force: true });
 await fs.mkdir(OUT, { recursive: true });
 
@@ -311,76 +307,99 @@ try {
         return Boolean(session && !session.transitioning && session.stepIndex === 1);
       }, null, { timeout: 12_000 });
 
-      // Drag & Drop: mount e contrato visual/auditivo real.
+      // Drag & Drop 2.0.22: runtime ativo DD2, interação real.
       await page.waitForFunction(() => {
         const doc = document.querySelector("iframe")?.contentDocument;
-        return Boolean(doc?.querySelector(".duduq-udd-root"));
+        return Boolean(doc?.querySelector(".duduq-dd2-root"));
       }, null, { timeout: 20_000 });
+
       const ddView = await page.evaluate(() => {
         const doc = document.querySelector("iframe")?.contentDocument;
-        const root = doc?.querySelector(".duduq-udd-root");
-        const items = doc ? [...doc.querySelectorAll(".duduq-udd-item[data-dd-item-id]")] : [];
-        const audioButtons = doc ? [...doc.querySelectorAll(".duduq-udd-item-audio")] : [];
-        const targets = doc ? [...doc.querySelectorAll(".duduq-udd-target[data-dd-target-id]")] : [];
+        const root = doc?.querySelector(".duduq-dd2-root");
+        const items = doc ? [...doc.querySelectorAll(".duduq-dd2-bank-items .duduq-dd2-item")] : [];
+        const targets = doc ? [...doc.querySelectorAll(".duduq-dd2-target[data-dd2-target-id]")] : [];
         const images = doc ? [...doc.images] : [];
         return {
           root: Boolean(root),
           heading: String(doc?.querySelector(".duduq-engine-heading h1,h1")?.textContent || "").trim(),
-          itemIds: items.map((el) => el.getAttribute("data-dd-item-id")),
-          itemTexts: items.map((el) => String(el.textContent || "").trim()),
+          itemTexts: items.map((el) => String(el.textContent || "").replace(/\s+/g, " ").trim()),
           itemTabIndexes: items.map((el) => el.tabIndex),
-          audioCount: audioButtons.length,
-          audioTabIndexes: audioButtons.map((el) => el.tabIndex),
+          audioCount: items.filter((el) => el.getAttribute("data-has-audio") === "true").length,
           targetCount: targets.length,
+          targetImageCount: targets.filter((target) => Boolean(target.querySelector(".duduq-dd2-target-media"))).length,
           brokenImages: images.filter((img) => img.currentSrc && (!img.complete || img.naturalWidth < 1)).map((img) => img.currentSrc),
           overflowX: Math.max(0, (doc?.body?.scrollWidth || 0) - (doc?.documentElement?.clientWidth || 0)),
           reducedMotion: root?.getAttribute("data-reduced-motion") || ""
         };
       });
-      assert(ddView.root, `${viewport.name}: Drag & Drop não montou.`);
+      assert(ddView.root, `${viewport.name}: Drag & Drop DD2 não montou.`);
       assert(ddView.heading === "GREETINGS", `${viewport.name}: Drag & Drop perdeu tópico GREETINGS.`);
-      assert(ddView.itemIds.length === 3 && ["A", "B", "C"].every((id) => ddView.itemIds.includes(id)), `${viewport.name}: Drag & Drop não preservou as 3 opções.`);
-      assert(ddView.itemTexts.every((text) => /^[123]$/.test(text)), `${viewport.name}: Drag & Drop expôs texto além dos cards numerados.`);
-      assert(ddView.audioCount === 3, `${viewport.name}: Drag & Drop não expôs 3 áudios de alternativa.`);
-      assert(ddView.itemTabIndexes.every((value) => value >= 0) && ddView.audioTabIndexes.every((value) => value >= 0), `${viewport.name}: Drag & Drop sem acesso por teclado.`);
-      assert(ddView.targetCount === 1, `${viewport.name}: Drag & Drop deveria exibir um contexto visual.`);
+      assert(ddView.itemTexts.length === 3 && ["1", "2", "3"].every((label) => ddView.itemTexts.includes(label)), `${viewport.name}: Drag & Drop não preservou os 3 cards numéricos.`);
+      assert(ddView.audioCount === 3, `${viewport.name}: Drag & Drop não expôs áudio nas 3 alternativas.`);
+      assert(ddView.itemTabIndexes.every((value) => value >= 0), `${viewport.name}: Drag & Drop sem acesso por teclado nos cards.`);
+      assert(ddView.targetCount === 1 && ddView.targetImageCount === 1, `${viewport.name}: Drag & Drop perdeu o único contexto visual.`);
       assert(ddView.brokenImages.length === 0, `${viewport.name}: imagem quebrada no Drag & Drop.`);
       assert(ddView.overflowX <= 6, `${viewport.name}: overflow horizontal no Drag & Drop.`);
       if (viewport.name === "mobile-390x844") assert(ddView.reducedMotion === "true", `${viewport.name}: reduced-motion não propagou ao Drag & Drop.`);
 
-      // Áudio de alternativa precisa ser acionável e repetível.
       const ddFrame = page.frameLocator("iframe");
-      const firstAudio = ddFrame.locator(".duduq-udd-item-audio").first();
-      await firstAudio.click({ force: true });
-      await wait(150);
-      assert(await firstAudio.count() === 1, `${viewport.name}: controle de áudio desapareceu após reprodução.`);
 
-      // Drag & Drop: tentativa incorreta precisa gerar erro/retry, sem revelar o gabarito pela habilitação do botão.
-      const wrongItem = ddFrame.locator('.duduq-udd-item[data-dd-item-id="A"]').first();
+      // As três alternativas precisam reproduzir áudio de forma observável e repetível.
+      for (const label of ["1", "2", "3"]) {
+        const item = ddFrame.locator(".duduq-dd2-bank-items .duduq-dd2-item", { hasText: label }).first();
+        await item.waitFor({ state: "visible", timeout: 5_000 });
+        await item.click({ force: true });
+        await page.waitForFunction((expectedLabel) => {
+          const doc = document.querySelector("iframe")?.contentDocument;
+          return [...(doc?.querySelectorAll(".duduq-dd2-item[data-audio-playing='true']") || [])]
+            .some((el) => String(el.textContent || "").trim() === expectedLabel);
+        }, label, { timeout: 1_500 });
+        await page.waitForFunction(() => {
+          const doc = document.querySelector("iframe")?.contentDocument;
+          return !doc?.querySelector(".duduq-dd2-item[data-audio-playing='true']");
+        }, null, { timeout: 6_000 });
+      }
+
+      // Tentativa incorreta real: card 1 (A) no contexto. Não pode concluir e deve produzir retry.
+      const wrongItem = ddFrame.locator(".duduq-dd2-bank-items .duduq-dd2-item", { hasText: "1" }).first();
       await wrongItem.click({ force: true });
-      const targetHead = ddFrame.locator(".duduq-udd-target-head").first();
-      await targetHead.waitFor({ state: "visible", timeout: 5_000 });
-      await targetHead.click({ force: true });
-      await wait(500);
+      const targetZone = ddFrame.locator(".duduq-dd2-zone").first();
+      await targetZone.waitFor({ state: "visible", timeout: 5_000 });
+      await targetZone.click({ force: true });
+      await page.waitForFunction(() => {
+        const doc = document.querySelector("iframe")?.contentDocument;
+        return [...(doc?.querySelectorAll(".duduq-dd2-zone .duduq-dd2-item") || [])]
+          .some((el) => String(el.textContent || "").trim() === "1");
+      }, null, { timeout: 2_500 });
+
+      let ddRetryObserved = true;
+      try {
+        await page.waitForFunction(() => {
+          const doc = document.querySelector("iframe")?.contentDocument;
+          return doc?.querySelector(".duduq-engine-feedback")?.getAttribute("data-state") === "retry";
+        }, null, { timeout: 2_500 });
+      } catch (_) {
+        ddRetryObserved = false;
+      }
+
       const ddWrong = await page.evaluate(() => {
         const doc = document.querySelector("iframe")?.contentDocument;
+        const session = window.DuduQ?.getSession?.();
         const feedback = doc?.querySelector(".duduq-engine-feedback")?.getAttribute("data-state") || "";
-        const confirm = doc?.querySelector(".duduq-udd-primary");
-        const wrongPlaced = Boolean(doc?.querySelector('.duduq-udd-zone-items .duduq-udd-item[data-dd-item-id="A"]'));
-        return { feedback, confirmDisabled: Boolean(confirm?.disabled), wrongPlaced };
+        const wrongPlaced = [...(doc?.querySelectorAll(".duduq-dd2-zone .duduq-dd2-item") || [])]
+          .some((el) => String(el.textContent || "").trim() === "1");
+        const confirmVisible = Boolean(doc?.querySelector(".duduq-dd2-confirm"));
+        return { session, feedback, wrongPlaced, confirmVisible };
       });
       assert(ddWrong.wrongPlaced, `${viewport.name}: tentativa incorreta não foi registrada no destino.`);
-      assert(ddWrong.feedback === "retry", `${viewport.name}: PRODUCT_BUG Drag & Drop — opção incorreta foi aceita no destino, mas não gerou feedback/retry (feedback='${ddWrong.feedback}', confirmarDesabilitado=${ddWrong.confirmDisabled}).`);
+      assert(ddWrong.session?.stepIndex === 1 && ddWrong.session?.completed === false, `${viewport.name}: erro no Drag & Drop avançou/concluiu indevidamente.`);
+      assert(ddRetryObserved && ddWrong.feedback === "retry", `${viewport.name}: PRODUCT_BUG Drag & Drop 2.0.22 — distrator foi aceito no único destino, mas o runtime não emitiu retry (feedback='${ddWrong.feedback}', confirmarVisivel=${ddWrong.confirmVisible}).`);
 
-      // Se o contrato de erro passar, devolve a opção errada, responde corretamente e valida progressão.
-      const wrongAgain = ddFrame.locator('.duduq-udd-item[data-dd-item-id="A"]').first();
-      await wrongAgain.click({ force: true });
-      const poolReturn = ddFrame.locator(".duduq-udd-pool-return,.duduq-udd-pool-complete[data-can-return='true']").first();
-      if (await poolReturn.count()) await poolReturn.click({ force: true });
-      const correctItem = ddFrame.locator('.duduq-udd-item[data-dd-item-id="C"]').first();
+      // Após retry, responder corretamente e validar progressão.
+      const correctItem = ddFrame.locator(".duduq-dd2-bank-items .duduq-dd2-item", { hasText: "3" }).first();
       await correctItem.click({ force: true });
-      await targetHead.click({ force: true });
-      const confirm = ddFrame.locator(".duduq-udd-primary").first();
+      await targetZone.click({ force: true });
+      const confirm = ddFrame.locator(".duduq-dd2-confirm").first();
       await confirm.waitFor({ state: "visible", timeout: 5_000 });
       assert(!(await confirm.isDisabled()), `${viewport.name}: confirmar permaneceu desabilitado após resposta correta.`);
       await confirm.click({ force: true });
