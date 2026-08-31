@@ -1,4 +1,4 @@
-name: M01 Mobile Audio Targeted Diagnostic
+name: M01 Post-Merge Sanity
 
 on:
   push:
@@ -10,19 +10,19 @@ permissions:
   contents: read
 
 jobs:
-  mobile-audio-targeted:
+  m01-postmerge-sanity:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Checkout diagnostic branch
         uses: actions/checkout@v4
 
-      - name: Preserve targeted test and checkout PR head
+      - name: Preserve sanity test and checkout merge commit
         run: |
-          cp test/systemic/year1-m01-mobile-observer-targeted-final.mjs /tmp/year1-m01-mobile-observer-targeted-final.mjs
-          git fetch origin homolog-year1-m01-official
-          git checkout -B homolog-year1-m01-official origin/homolog-year1-m01-official
-          cp /tmp/year1-m01-mobile-observer-targeted-final.mjs test/systemic/.year1-m01-mobile-observer-targeted-final.tmp.mjs
+          cp test/systemic/year1-m01-postmerge-sanity-final.mjs /tmp/year1-m01-postmerge-sanity-final.mjs
+          git fetch origin bc8eadb945484cbdc4c7a539eb1b65fda7b35c87
+          git checkout --detach bc8eadb945484cbdc4c7a539eb1b65fda7b35c87
+          cp /tmp/year1-m01-postmerge-sanity-final.mjs test/systemic/.year1-m01-postmerge-sanity-final.tmp.mjs
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -34,18 +34,18 @@ jobs:
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
 
-      - name: Start PR-head local server
+      - name: Start merged M01 local server
         run: |
-          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-mobile-http.log 2>&1 &
-          echo $! > /tmp/duduq-mobile-http.pid
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-m01-sanity-http.log 2>&1 &
+          echo $! > /tmp/duduq-m01-sanity-http.pid
           for i in {1..30}; do
             if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
             sleep 1
           done
-          cat /tmp/duduq-mobile-http.log
+          cat /tmp/duduq-m01-sanity-http.log
           exit 1
 
-      - name: Validate final mobile observer latch on PR head
+      - name: Run proportional M01 post-merge sanity
         env:
           BASE_URL: http://127.0.0.1:4173
-        run: node test/systemic/.year1-m01-mobile-observer-targeted-final.tmp.mjs
+        run: node test/systemic/.year1-m01-postmerge-sanity-final.tmp.mjs
