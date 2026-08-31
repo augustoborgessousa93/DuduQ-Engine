@@ -1,0 +1,64 @@
+name: M01 Core 1.0.12 Candidate Integration
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax
+        run: |
+          node --check test/systemic/year1-m01-core-1.0.12-candidate-smoke.mjs
+          node --check engine/releases/core/1.0.12-candidate/duduq-router.js
+          node --check content/english/year-1/module-01/module-01.js
+      - name: Guard foundation
+        run: node test/systemic/foundation-architecture-audit.mjs
+
+  m01-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-m01-candidate-http.log 2>&1 &
+          echo $! > /tmp/duduq-m01-candidate-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-m01-candidate-http.log
+          exit 1
+      - name: Test M01 against Core 1.0.12 candidate
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/year1-m01-core-1.0.12-candidate-smoke.mjs
+      - name: Upload candidate integration evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m01-core-1.0.12-candidate-evidence
+          path: test-results/systemic/m01-core-1.0.12-candidate
+          if-no-files-found: warn
+          retention-days: 14
