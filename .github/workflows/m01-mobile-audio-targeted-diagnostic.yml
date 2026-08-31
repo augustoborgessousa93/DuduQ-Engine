@@ -22,6 +22,7 @@ jobs:
           cp test/systemic/year1-m01-mobile-observer-targeted-final.mjs /tmp/year1-m01-mobile-observer-targeted-final.mjs
           git fetch origin homolog-year1-m01-official
           git checkout -B homolog-year1-m01-official origin/homolog-year1-m01-official
+          cp /tmp/year1-m01-mobile-observer-targeted-final.mjs test/systemic/.year1-m01-mobile-observer-targeted-final.tmp.mjs
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -47,4 +48,4 @@ jobs:
       - name: Validate final mobile observer latch on PR head
         env:
           BASE_URL: http://127.0.0.1:4173
-        run: node /tmp/year1-m01-mobile-observer-targeted-final.mjs
+        run: node test/systemic/.year1-m01-mobile-observer-targeted-final.tmp.mjs
