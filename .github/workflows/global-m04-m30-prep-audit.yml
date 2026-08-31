@@ -31,7 +31,7 @@ jobs:
           git show origin/feat/year3-v23-multimodal:content/english/year-3/README.md >/tmp/year3-readme.md
           grep -q 'DuduQ English — Year 3 v2.3 multimodal' /tmp/year3-readme.md
           for ref in origin/scale/shared-engine-year3-bootstrap origin/scale/year3-shared-engine-foundation; do
-            count="$(git ls-tree -d --name-only "$ref" content/english/year-3/module-* | wc -l | tr -d ' ')"
+            count="$(git ls-tree -d -r --name-only "$ref" content/english/year-3 | grep -Ec '^content/english/year-3/module-[0-9]{2}$' || true)"
             if [ "$count" != "6" ]; then
               echo "$ref: expected 6 Year 3 module directories, found $count" >&2
               exit 1
