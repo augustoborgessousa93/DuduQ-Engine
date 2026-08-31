@@ -130,11 +130,15 @@ try {
   await page.waitForFunction(() => {
     const session = window.DuduQ?.getSession?.();
     const doc = document.querySelector("iframe")?.contentDocument;
-    return Boolean(session && session.stepIndex === 0 && !session.transitioning && doc?.querySelector(".duduq-ts-root"));
+    return Boolean(
+      session &&
+      session.stepIndex === 0 &&
+      !session.transitioning &&
+      doc?.querySelector(".duduq-ts-root") &&
+      window.DuduQTransition?.getState?.() === "idle"
+    );
   }, null, { timeout: 35_000 });
 
-  // O Host bloqueia interação durante o autoplay inicial. Esperar o alvo habilitado
-  // evita que force:true produza um clique DOM silenciosamente ignorado.
   await page.waitForFunction(() => {
     const doc = document.querySelector("iframe")?.contentDocument;
     const target = doc?.querySelector('.duduq-ts-target[aria-label="Lançar estrela no alvo B"]');
@@ -149,7 +153,7 @@ try {
   await page.waitForFunction(() => {
     const session = window.DuduQ?.getSession?.();
     const doc = document.querySelector("iframe")?.contentDocument;
-    return Boolean(session && session.stepIndex === 1 && !session.transitioning && doc?.querySelector(".duduq-udd-root"));
+    return Boolean(session && session.stepIndex === 1 && !session.transitioning && doc?.querySelector(".duduq-udd-root") && window.DuduQTransition?.getState?.() === "idle");
   }, null, { timeout: 20_000 });
 
   const mounted = await page.evaluate(() => {
@@ -172,7 +176,6 @@ try {
   assert(mounted.errorText === false, "Distratores required=false causaram erro de preparação/runtime.");
   assert(mounted.brokenImages.length === 0, `Imagem quebrada no Drag & Drop: ${mounted.brokenImages.join(" | ")}.`);
 
-  // Prova de áudio acionável sem remover os cards.
   const ddFrame = page.frameLocator("iframe");
   const firstAudio = ddFrame.locator(".duduq-udd-item-audio").first();
   await firstAudio.waitFor({ state: "visible", timeout: 5_000 });
@@ -180,7 +183,6 @@ try {
   await page.waitForTimeout(180);
   assert(await ddFrame.locator(".duduq-udd-item-audio").count() === 3, "Cards auditivos desapareceram após reprodução.");
 
-  // Resposta real da EN1-M1-02: selecionar C, mover ao contexto e confirmar.
   await page.waitForFunction(() => {
     const doc = document.querySelector("iframe")?.contentDocument;
     const item = doc?.querySelector('.duduq-udd-item[data-dd-item-id="C"]');
