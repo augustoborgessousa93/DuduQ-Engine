@@ -10,6 +10,7 @@ on:
       - 'content/english/year-2/**'
       - 'test/systemic/global-m04-m30-prep-audit.mjs'
       - 'docs/prep/DUDUQ_GLOBAL_M04_M30_MATRIX.md'
+      - 'docs/prep/DUDUQ_GLOBAL_M04_M30_MATRIX_UPDATE_01.md'
       - '.github/workflows/global-m04-m30-prep-audit.yml'
   workflow_dispatch:
 
@@ -23,12 +24,20 @@ jobs:
           fetch-depth: 0
       - name: Run static preparation audit
         run: node test/systemic/global-m04-m30-prep-audit.mjs
-      - name: Verify Year 3 staging source and Year 4/5 absence
+      - name: Verify Year 3 source lineages and Year 4/5 absence
         shell: bash
         run: |
-          git fetch origin feat/year3-v23-multimodal
+          git fetch origin feat/year3-v23-multimodal scale/shared-engine-year3-bootstrap scale/year3-shared-engine-foundation
           git show origin/feat/year3-v23-multimodal:content/english/year-3/README.md >/tmp/year3-readme.md
           grep -q 'DuduQ English — Year 3 v2.3 multimodal' /tmp/year3-readme.md
+          for ref in origin/scale/shared-engine-year3-bootstrap origin/scale/year3-shared-engine-foundation; do
+            count="$(git ls-tree -d --name-only "$ref" content/english/year-3/module-* | wc -l | tr -d ' ')"
+            if [ "$count" != "6" ]; then
+              echo "$ref: expected 6 Year 3 module directories, found $count" >&2
+              exit 1
+            fi
+            echo "$ref: 6 Year 3 module directories confirmed"
+          done
           if git branch -r | grep -Ei 'year[-_/]?4|year[-_/]?5'; then
             echo 'Candidate Year 4/5 branches detected; inspect before updating matrix.'
           else
