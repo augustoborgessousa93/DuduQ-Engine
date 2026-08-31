@@ -47,5 +47,5 @@ html[data-duduq-m04-question="${LEGS_Q}"] .duduq-m04-legs-highlight{position:abs
 function inspectFrame(frame){if(!moduleOK())return;let doc;try{doc=frame.contentDocument}catch(_){return}if(!doc)return;const apply=()=>{const s=stage(doc);if(!s)return;if(s.mode==="audio-to-image")applyTargetSemantics(doc,s);if(s.id===LEGS_Q)applyLegs(doc,s)};if(doc.body&&!doc.__DUDUQ_M04_OBSERVER__){const o=new MutationObserver(apply);o.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src","data-dd2-target-id","aria-label"]});doc.__DUDUQ_M04_OBSERVER__=o}apply()}
 function scan(){if(!moduleOK())return;document.querySelectorAll("iframe").forEach(frame=>{if(!frame.__DUDUQ_M04_LOAD__){frame.addEventListener("load",()=>inspectFrame(frame));frame.__DUDUQ_M04_LOAD__=true}inspectFrame(frame)})}
 if(moduleOK()){new MutationObserver(scan).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("DOMContentLoaded",scan,{once:true});setInterval(scan,180)}
-window.M04VisualComposition=Object.freeze({version:"1.0.1-m04-local",getState:()=>({...state}),scan});
+window.M04VisualComposition=Object.freeze({version:"1.0.0-m04-local",getState:()=>({...state}),scan});
 })();
