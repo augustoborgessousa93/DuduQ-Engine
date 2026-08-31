@@ -4,6 +4,7 @@ import path from "node:path";
 const root = process.cwd();
 const readJson = (file) => JSON.parse(fs.readFileSync(path.join(root, file), "utf8"));
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
+const stableObject = (value) => Object.fromEntries(Object.entries(value || {}).sort(([a], [b]) => a.localeCompare(b)));
 
 const current = readJson("engine/channels/canary-v1.json");
 const rollback = readJson("engine/channels/canary-r145-rollback.json");
@@ -27,7 +28,10 @@ assert(JSON.stringify(current.core) === JSON.stringify(rollback.core), "Core mud
 assert(current.policy?.canonicalAssetRuntimeCommit === rollback.policy?.canonicalAssetRuntimeCommit, "Pin de assets mudou.");
 
 const allowedPolicy = { ...rollback.policy, dragDropSingleChoiceApproved: true };
-assert(JSON.stringify(current.policy) === JSON.stringify(allowedPolicy), "Policy mudou além de dragDropSingleChoiceApproved.");
+assert(
+  JSON.stringify(stableObject(current.policy)) === JSON.stringify(stableObject(allowedPolicy)),
+  "Policy mudou além de dragDropSingleChoiceApproved."
+);
 assert(current.channel === rollback.channel && current.channel === "canary-v1", "Canal Canary mudou.");
 
 console.log(JSON.stringify({
