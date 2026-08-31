@@ -130,6 +130,12 @@ try {
     return cards.length === 3 && cards.every((card) => !card.disabled) && !doc?.querySelector(".duduq-dd2-zone .duduq-dd2-item");
   }, null, { timeout: 3_500 });
 
+  await page.evaluate(() => {
+    const doc = document.querySelector("iframe")?.contentDocument;
+    window.__DUDUQ_SANITY_Q02_TARGET_SRC__ = doc?.querySelector('.duduq-dd2-target[data-dd2-target-id] img')?.currentSrc || "";
+  });
+  assert(await page.evaluate(() => Boolean(window.__DUDUQ_SANITY_Q02_TARGET_SRC__)), "Contexto visual Q02 ausente antes da transição para Q03.");
+
   await ddFrame.locator('.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="C"]').first().click({ force: true });
   await zone.click({ force: true });
   await waitFeedback(page, "success", 5_000);
@@ -137,13 +143,29 @@ try {
   await page.waitForFunction(() => {
     const s = window.DuduQ?.getSession?.();
     const doc = document.querySelector("iframe")?.contentDocument;
-    return Boolean(s?.stepIndex === 1 && !s.transitioning && doc?.querySelector('.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="A"]'));
+    const previousSrc = window.__DUDUQ_SANITY_Q02_TARGET_SRC__ || "";
+    const nextSrc = doc?.querySelector('.duduq-dd2-target[data-dd2-target-id] img')?.currentSrc || "";
+    const items = [...(doc?.querySelectorAll(".duduq-dd2-bank-items .duduq-dd2-item") || [])];
+    return Boolean(s?.stepIndex === 1 && !s.transitioning && previousSrc && nextSrc && nextSrc !== previousSrc && items.length === 3 && items.every((item) => !item.disabled));
   }, null, { timeout: 12_000 });
   const q03Frame = page.frameLocator("iframe");
   await q03Frame.locator('.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="A"]').first().click({ force: true });
   await q03Frame.locator(".duduq-dd2-zone").first().click({ force: true });
   await waitFeedback(page, "success", 5_000);
-  await page.waitForFunction(() => window.DuduQ?.getSession?.()?.stepIndex === 2, null, { timeout: 15_000 });
+
+  await page.waitForFunction(() => {
+    const session = window.DuduQ?.getSession?.();
+    const iframe = document.querySelector("iframe");
+    const mountedView = Boolean(iframe && (iframe.srcdoc || iframe.getAttribute("src")));
+    return Boolean(
+      session &&
+      session.stepIndex === 2 &&
+      session.transitioning === false &&
+      session.completed === false &&
+      mountedView &&
+      window.DuduQTransition?.getState?.() === "idle"
+    );
+  }, null, { timeout: 12_000 });
 
   const afterRealInteractions = await page.evaluate(() => window.DuduQ?.getSession?.());
   assert((afterRealInteractions?.progress?.percent ?? 0) > 0, "Progress não avançou após interações reais.");
@@ -151,12 +173,64 @@ try {
   let session = afterRealInteractions;
   while (!session.completed) {
     const previous = session.stepIndex;
+
+    await page.waitForFunction((expectedStep) => {
+      const current = window.DuduQ?.getSession?.();
+      if (!current || current.completed || current.transitioning || current.stepIndex !== expectedStep) return false;
+      const iframe = document.querySelector("iframe");
+      const mountedView = Boolean(iframe && (iframe.srcdoc || iframe.getAttribute("src")));
+      return mountedView && window.DuduQTransition?.getState?.() === "idle";
+    }, previous, { timeout: 12_000 });
+
+    const beforeNext = await page.evaluate(() => {
+      const current = window.DuduQ?.getSession?.();
+      const iframe = document.querySelector("iframe");
+      return {
+        stepIndex: current?.stepIndex,
+        transitioning: current?.transitioning,
+        completed: current?.completed,
+        totalSteps: current?.totalSteps,
+        progress: current?.progress?.percent,
+        transition: window.DuduQTransition?.getState?.(),
+        iframeExists: Boolean(iframe),
+        mountedView: Boolean(iframe && (iframe.srcdoc || iframe.getAttribute("src"))),
+        iframeSrc: iframe?.getAttribute("src") || "",
+        hasSrcdoc: Boolean(iframe?.srcdoc)
+      };
+    });
+
     const accepted = await page.evaluate((stepIndex) => window.DuduQ.next({ sanity: "postmerge-r146", stepIndex }), previous);
+    if (accepted !== true) {
+      const rejectedState = await page.evaluate(() => {
+        const current = window.DuduQ?.getSession?.();
+        const iframe = document.querySelector("iframe");
+        return {
+          stepIndex: current?.stepIndex,
+          transitioning: current?.transitioning,
+          completed: current?.completed,
+          totalSteps: current?.totalSteps,
+          progress: current?.progress?.percent,
+          transition: window.DuduQTransition?.getState?.(),
+          iframeExists: Boolean(iframe),
+          mountedView: Boolean(iframe && (iframe.srcdoc || iframe.getAttribute("src"))),
+          iframeSrc: iframe?.getAttribute("src") || "",
+          hasSrcdoc: Boolean(iframe?.srcdoc)
+        };
+      });
+      console.error("SANITY_NEXT_REJECTED", JSON.stringify({ previous, accepted, beforeNext, rejectedState }));
+    }
     assert(accepted === true, `Host recusou sanity progression no step ${previous}.`);
+
     await page.waitForFunction(({ previous, total }) => {
-      const s = window.DuduQ?.getSession?.();
-      return Boolean(s && !s.transitioning && (s.completed ? s.progress?.percent === 100 : s.stepIndex > previous && s.stepIndex < total));
+      const current = window.DuduQ?.getSession?.();
+      if (!current || current.transitioning) return false;
+      if (current.completed) return current.progress?.percent === 100;
+      if (!(current.stepIndex > previous && current.stepIndex < total)) return false;
+      const iframe = document.querySelector("iframe");
+      const mountedView = Boolean(iframe && (iframe.srcdoc || iframe.getAttribute("src")));
+      return mountedView && window.DuduQTransition?.getState?.() === "idle";
     }, { previous, total: session.totalSteps }, { timeout: 12_000 });
+
     session = await page.evaluate(() => window.DuduQ?.getSession?.());
   }
 
