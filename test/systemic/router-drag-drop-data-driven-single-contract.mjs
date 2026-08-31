@@ -59,9 +59,17 @@ assert(ddBaseSource.includes("if (!requiredItems.length)"), "buildStage não exi
 assert(ddBaseSource.includes("if (!item.targetId || !targetIds.has(item.targetId))"), "buildStage não exige targetId válido para item obrigatório.");
 assert(ddBaseSource.includes("if (Array.isArray(question.payload?.items) && Array.isArray(question.payload?.targets)) return true;"), "validate não aceita payload items+targets.");
 
+class TestCustomEvent {
+  constructor(type, init = {}) {
+    this.type = type;
+    this.detail = init.detail;
+  }
+}
+
 const context = vm.createContext({
   console,
   structuredClone,
+  CustomEvent: TestCustomEvent,
   window: null
 });
 context.window = context;
