@@ -1,0 +1,70 @@
+name: Year 1 M03 Post-Merge Sanity
+
+on:
+  push:
+    branches:
+      - sanity/year1-m03-post-merge
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  m03-post-merge-sanity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout merged-base sanity branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify product equals merged base
+        run: |
+          git fetch origin refactor/systemic-foundation-years1-5
+          files="$(git diff --name-only origin/refactor/systemic-foundation-years1-5...HEAD)"
+          printf '%s\n' "$files"
+          unexpected="$(printf '%s\n' "$files" | grep -Ev '^(.github/workflows/year1-m03-post-merge-sanity.yml|test/systemic/year1-m03-post-merge-sanity.mjs)$' || true)"
+          if [ -n "$unexpected" ]; then
+            echo "Unexpected product diff in M03 sanity branch:" >&2
+            printf '%s\n' "$unexpected" >&2
+            exit 1
+          fi
+
+      - name: Syntax
+        run: node --check test/systemic/year1-m03-post-merge-sanity.mjs
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start merged-base server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-m03-sanity-http.log 2>&1 &
+          echo $! > /tmp/duduq-m03-sanity-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-m03-sanity-http.log
+          exit 1
+
+      - name: Run proportional M03 sanity
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/year1-m03-post-merge-sanity.mjs
+
+      - name: Upload sanity evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year1-m03-post-merge-sanity-evidence
+          path: test-results/systemic/year1-m03-post-merge-sanity/
+          if-no-files-found: warn
+          retention-days: 14
