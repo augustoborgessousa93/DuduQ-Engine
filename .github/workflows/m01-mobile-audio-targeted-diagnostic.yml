@@ -1,4 +1,4 @@
-name: M01 Post-Merge Sanity
+name: M01 Post-Merge Step 2 Diagnostic
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  m01-postmerge-sanity:
+  m01-postmerge-step2-diagnostic:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -24,7 +24,7 @@ jobs:
           git checkout --detach bc8eadb945484cbdc4c7a539eb1b65fda7b35c87
           cp /tmp/year1-m01-postmerge-sanity-final.mjs test/systemic/.year1-m01-postmerge-sanity-final.tmp.mjs
 
-      - name: Fix sanity stage-transition sentinel only
+      - name: Patch only diagnostic sentinels
         run: |
           python3 - <<'PY'
           from pathlib import Path
@@ -46,12 +46,108 @@ jobs:
             const items = [...(doc?.querySelectorAll(".duduq-dd2-bank-items .duduq-dd2-item") || [])];
             return Boolean(s?.stepIndex === 1 && !s.transitioning && previousSrc && nextSrc && nextSrc !== previousSrc && items.length === 3 && items.every((item) => !item.disabled));'''
 
+          weak_step2 = '''  await page.waitForFunction(() => window.DuduQ?.getSession?.()?.stepIndex === 2, null, { timeout: 15_000 });'''
+          diagnostic_step2 = '''  await page.waitForFunction(() => window.DuduQ?.getSession?.()?.stepIndex === 2, null, { timeout: 15_000 });
+          const step2ArrivedAt = Date.now();
+          const step2Arrival = await page.evaluate((timestamp) => {
+            const session = window.DuduQ?.getSession?.();
+            const iframe = document.querySelector("iframe");
+            const doc = iframe?.contentDocument;
+            const mountedView = Boolean(iframe && (iframe.srcdoc || iframe.getAttribute("src")));
+            const roots = [
+              ".duduq-ts-root",
+              ".duduq-dd2-root",
+              ".duduq-matching-root",
+              ".duduq-bp-root",
+              ".duduq-word-slash-root",
+              ".duduq-memory-root",
+              ".duduq-smart-sentence-root"
+            ].filter((selector) => Boolean(doc?.querySelector(selector)));
+            return {
+              timestamp,
+              stepIndex: session?.stepIndex,
+              transitioning: session?.transitioning,
+              completed: session?.completed,
+              totalSteps: session?.totalSteps,
+              progress: session?.progress?.percent,
+              transition: window.DuduQTransition?.getState?.(),
+              iframeExists: Boolean(iframe),
+              iframeSrc: iframe?.getAttribute("src") || "",
+              hasSrcdoc: Boolean(iframe?.srcdoc),
+              mountedView,
+              readyState: doc?.readyState || "",
+              bodyChildren: doc?.body?.children?.length || 0,
+              mechanicRoots: roots
+            };
+          }, step2ArrivedAt);
+
+          await page.waitForFunction(() => {
+            const session = window.DuduQ?.getSession?.();
+            const iframe = document.querySelector("iframe");
+            const mountedView = Boolean(iframe && (iframe.srcdoc || iframe.getAttribute("src")));
+            return Boolean(
+              session &&
+              session.stepIndex === 2 &&
+              session.transitioning === false &&
+              session.completed === false &&
+              mountedView &&
+              window.DuduQTransition?.getState?.() === "idle"
+            );
+          }, null, { timeout: 12_000 });
+
+          const step2IdleAt = Date.now();
+          const step2Stable = await page.evaluate((timestamp) => {
+            const session = window.DuduQ?.getSession?.();
+            const iframe = document.querySelector("iframe");
+            const doc = iframe?.contentDocument;
+            const mountedView = Boolean(iframe && (iframe.srcdoc || iframe.getAttribute("src")));
+            const roots = [
+              ".duduq-ts-root",
+              ".duduq-dd2-root",
+              ".duduq-matching-root",
+              ".duduq-bp-root",
+              ".duduq-word-slash-root",
+              ".duduq-memory-root",
+              ".duduq-smart-sentence-root"
+            ].filter((selector) => Boolean(doc?.querySelector(selector)));
+            return {
+              timestamp,
+              stepIndex: session?.stepIndex,
+              transitioning: session?.transitioning,
+              completed: session?.completed,
+              totalSteps: session?.totalSteps,
+              progress: session?.progress?.percent,
+              transition: window.DuduQTransition?.getState?.(),
+              iframeExists: Boolean(iframe),
+              iframeSrc: iframe?.getAttribute("src") || "",
+              hasSrcdoc: Boolean(iframe?.srcdoc),
+              mountedView,
+              readyState: doc?.readyState || "",
+              bodyChildren: doc?.body?.children?.length || 0,
+              mechanicRoots: roots
+            };
+          }, step2IdleAt);
+
+          console.log("STEP2_DIAGNOSTIC", JSON.stringify({
+            mergeSha: MERGE_SHA,
+            arrival: step2Arrival,
+            stable: step2Stable,
+            arrivalToIdleMs: step2IdleAt - step2ArrivedAt,
+            pageErrors,
+            critical404
+          }));
+          throw new Error("STEP2_DIAGNOSTIC_COMPLETE");'''
+
           if text.count(correct_marker) != 1:
               raise SystemExit(f'Expected one Q02 correct marker, got {text.count(correct_marker)}')
           if text.count(weak_return) != 1:
               raise SystemExit(f'Expected one weak Q02→Q03 return, got {text.count(weak_return)}')
+          if text.count(weak_step2) != 1:
+              raise SystemExit(f'Expected one weak step2 wait, got {text.count(weak_step2)}')
 
-          text = text.replace(correct_marker, capture, 1).replace(weak_return, strong_return, 1)
+          text = text.replace(correct_marker, capture, 1)
+          text = text.replace(weak_return, strong_return, 1)
+          text = text.replace(weak_step2, diagnostic_step2, 1)
           path.write_text(text, encoding='utf-8')
           PY
           node --check test/systemic/.year1-m01-postmerge-sanity-final.tmp.mjs
@@ -77,7 +173,7 @@ jobs:
           cat /tmp/duduq-m01-sanity-http.log
           exit 1
 
-      - name: Run proportional M01 post-merge sanity
+      - name: Diagnose exact Host step 2 state
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/systemic/.year1-m01-postmerge-sanity-final.tmp.mjs
