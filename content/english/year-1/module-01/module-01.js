@@ -152,7 +152,7 @@
       allowAudio: true
     };
     question.payload = {
-      mode: "association",
+      mode: "single-choice",
       strategy: "association",
       items: optionAudios.map((item, index) => ({
         id: item.id,
