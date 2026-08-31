@@ -133,10 +133,18 @@ try {
     return Boolean(session && session.stepIndex === 0 && !session.transitioning && doc?.querySelector(".duduq-ts-root"));
   }, null, { timeout: 35_000 });
 
+  // O Host bloqueia interação durante o autoplay inicial. Esperar o alvo habilitado
+  // evita que force:true produza um clique DOM silenciosamente ignorado.
+  await page.waitForFunction(() => {
+    const doc = document.querySelector("iframe")?.contentDocument;
+    const target = doc?.querySelector('.duduq-ts-target[aria-label="Lançar estrela no alvo B"]');
+    return Boolean(target && !target.disabled && target.getAttribute("aria-disabled") !== "true");
+  }, null, { timeout: 12_000 });
+
   const firstFrame = page.frameLocator("iframe");
   const correctTarget = firstFrame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo B"]').first();
   await correctTarget.waitFor({ state: "visible", timeout: 10_000 });
-  await correctTarget.click({ force: true });
+  await correctTarget.click();
 
   await page.waitForFunction(() => {
     const session = window.DuduQ?.getSession?.();
@@ -173,12 +181,17 @@ try {
   assert(await ddFrame.locator(".duduq-udd-item-audio").count() === 3, "Cards auditivos desapareceram após reprodução.");
 
   // Resposta real da EN1-M1-02: selecionar C, mover ao contexto e confirmar.
+  await page.waitForFunction(() => {
+    const doc = document.querySelector("iframe")?.contentDocument;
+    const item = doc?.querySelector('.duduq-udd-item[data-dd-item-id="C"]');
+    return Boolean(item && !item.disabled);
+  }, null, { timeout: 8_000 });
   const correctItem = ddFrame.locator('.duduq-udd-item[data-dd-item-id="C"]').first();
   await correctItem.waitFor({ state: "visible", timeout: 5_000 });
-  await correctItem.click({ force: true });
+  await correctItem.click();
   const targetHead = ddFrame.locator(".duduq-udd-target-head").first();
   await targetHead.waitFor({ state: "visible", timeout: 5_000 });
-  await targetHead.click({ force: true });
+  await targetHead.click();
 
   const confirm = ddFrame.locator(".duduq-udd-primary").first();
   await confirm.waitFor({ state: "visible", timeout: 5_000 });
@@ -187,7 +200,7 @@ try {
     const button = doc?.querySelector(".duduq-udd-primary");
     return Boolean(button && !button.disabled);
   }, null, { timeout: 8_000 });
-  await confirm.click({ force: true });
+  await confirm.click();
 
   await page.waitForFunction(() => {
     const session = window.DuduQ?.getSession?.();
