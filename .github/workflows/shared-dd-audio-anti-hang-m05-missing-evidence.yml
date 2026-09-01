@@ -1,0 +1,73 @@
+name: Shared DD Audio Anti-Hang — M05 Missing Evidence
+
+on:
+  push:
+    branches:
+      - test/shared-dd-audio-anti-hang-m05
+    paths:
+      - 'test/systemic/shared-r147-turbo-rerun.mjs'
+      - '.github/workflows/shared-dd-audio-anti-hang-m05-missing-evidence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  m05-missing-evidence:
+    name: M05 R147 — ${{ matrix.viewport }} — ${{ matrix.question_range }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport: [desktop-1366x768, fullhd-1920x1080, tablet-768x1024, mobile-390x844]
+        question_range: [Q05-Q08, Q09-Q12]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax
+        run: |
+          node --check test/systemic/lib/turbo-item-guard.mjs
+          node --check test/systemic/shared-r147-turbo-rerun.mjs
+          node --check test/systemic/year1-m05-official-r147-turbo-shard.mjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start M05 candidate server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-m05-missing-http.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/duduq-m05-missing-http.log
+          exit 1
+      - name: Run missing M05 evidence only
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          SHARD_PATH: test/systemic/year1-m05-official-r147-turbo-shard.mjs
+          VIEWPORT_NAME: ${{ matrix.viewport }}
+          QUESTION_RANGE: ${{ matrix.question_range }}
+        run: node test/systemic/shared-r147-turbo-rerun.mjs
+      - name: Upload M05 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year1-m05-r147-missing-${{ matrix.viewport }}-${{ matrix.question_range }}
+          path: test-results/systemic/year1-m05-official/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  m05-missing-aggregate:
+    name: M05 missing evidence aggregate 8/8
+    needs: m05-missing-evidence
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require all 8 missing shards
+        env:
+          MATRIX_RESULT: ${{ needs.m05-missing-evidence.result }}
+        run: |
+          if [ "$MATRIX_RESULT" != "success" ]; then echo "M05 missing evidence FAIL: matrix result=$MATRIX_RESULT" >&2; exit 1; fi
+          echo 'M05 R147 missing evidence PASS — Q05-Q12 x 4 viewports; prior Q01-Q04 preserved from run 33555383000'
