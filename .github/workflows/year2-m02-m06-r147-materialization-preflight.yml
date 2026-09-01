@@ -1,0 +1,47 @@
+name: Year 2 M02-M06 R147 Materialization Preflight
+
+on:
+  push:
+    branches: [materialize-year2-m02-m06-r147]
+    paths:
+      - 'content/english/year-2/module-0[2-6]/**'
+      - 'test/systemic/year2-m02-m06-r147-materialization-preflight.mjs'
+      - '.github/workflows/year2-m02-m06-r147-materialization-preflight.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    name: Y2 M${{ matrix.module }} — ${{ matrix.viewport }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        module: [2,3,4,5,6]
+        viewport: [desktop-1366x768, mobile-390x844]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax
+        run: node --check test/systemic/year2-m02-m06-r147-materialization-preflight.mjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start candidate server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/year2-batch-http.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/year2-batch-http.log
+          exit 1
+      - name: Run materialization preflight
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          MODULE: ${{ matrix.module }}
+          VIEWPORT_NAME: ${{ matrix.viewport }}
+        run: node test/systemic/year2-m02-m06-r147-materialization-preflight.mjs
