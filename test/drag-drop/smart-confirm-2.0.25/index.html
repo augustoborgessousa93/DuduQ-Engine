@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>DuduQ — Drag & Drop 2.0.25 Smart Confirm Harness</title>
+  <style>html,body{margin:0;width:100%;height:100%;background:#eef6fb;font-family:system-ui,sans-serif}body{overflow:hidden}#mount{width:100vw;height:100vh;min-height:0;overflow:hidden}</style>
+</head>
+<body>
+  <main id="mount" aria-label="Harness Drag & Drop"></main>
+  <script>
+    window.DUDUQ_ENGINE_BASE = new URL("../../..", window.location.href).href.replace(/\/$/, "");
+    window.__DD225_RESULTS__=[]; window.__DD225_COMPLETIONS__=[]; window.__DD225_ERRORS__=[]; window.__DD225_DESTROY__=null;
+    addEventListener("error",e=>__DD225_ERRORS__.push(String(e?.message||e)));
+    addEventListener("unhandledrejection",e=>__DD225_ERRORS__.push(String(e?.reason?.stack||e?.reason?.message||e?.reason||e)));
+    addEventListener("message",e=>{ if(e.data?.type==="DUDUQ_DRAG_DROP_RESULT") __DD225_RESULTS__.push(e.data.payload); });
+  </script>
+  <script src="../../../engine/releases/core/1.0.11/duduq-host.js?dd225=harness"></script>
+  <script src="../../../engine/releases/mechanics/drag-drop/2.0.25/drag-drop.js?dd225=harness"></script>
+  <script>
+    window.dd225Mechanic=()=>window.DuduQ?.getMechanic?.("drag-drop");
+    window.dd225Validate=p=>Boolean(dd225Mechanic()?.version==="2.0.25"&&dd225Mechanic().validate(p));
+    window.dd225Mount=function(payload,context){
+      const mechanic=dd225Mechanic(); if(!mechanic||mechanic.version!=="2.0.25") throw new Error("Drag & Drop 2.0.25 não registrado.");
+      try{__DD225_DESTROY__?.();}catch(_){}
+      __DD225_RESULTS__=[]; __DD225_COMPLETIONS__=[]; document.getElementById("mount").innerHTML="";
+      __DD225_DESTROY__=mechanic.mount({container:document.getElementById("mount"),payload,context:Object.assign({subject:"english",year:3,module:1,stepId:payload?.id||"dd225",stepTitle:payload?.title||"DRAG DROP",stepIndex:0,totalSteps:1},context||{}),onComplete:r=>__DD225_COMPLETIONS__.push(r)});
+      return true;
+    };
+  </script>
+</body>
+</html>
