@@ -31,8 +31,17 @@ for (let module=1; module<=6; module++) {
 
 const scaleCandidate='scale/shared-engine-year3-bootstrap';
 const report={
-  contract:'DUDUQ_GLOBAL_M04_M30_PREP_STATIC_AUDIT_V3',
+  contract:'DUDUQ_GLOBAL_M04_M30_PREP_STATIC_AUDIT_V4',
   rows,
+  sharedBlockers:[{
+    id:'SHARED_COMPACT_MECHANIC_SURFACE_R146',
+    classification:'BLOCKER_GLOBAL',
+    affects:'compact runtime homologation where the shared mechanic frame resolves to 150px',
+    evidence:{m04OfficialRun:33455363921,m01VsM04DiagnosticRun:33455904240,tabletM01VisibleTargetShooterTargets:0,tabletM04VisibleTargetShooterTargets:0,mobileM01VisibleTargetShooterTargets:0,mobileM04VisibleTargetShooterTargets:0},
+    localWorkaroundAuthorized:false,
+    resolution:'shared-infrastructure candidate + frozen-module regressions + Canary promotion before resuming M04 freeze'
+  }],
+  qaPolicy:{viewportSharding:{requiredWhenPractical:true,failFast:false,viewports:['desktop-1366x768','fullhd-1920x1080','tablet-768x1024','mobile-390x844'],aggregateRequires:'4/4 10/10'}},
   year3:{materializedOnFoundation:false,policyBranch:'feat/year3-v23-multimodal',implementationCandidates:[{branch:scaleCandidate,expectedModules:6,materializedEntrypoints:true},{branch:'scale/year3-shared-engine-foundation',expectedModules:6,materializedEntrypoints:false,sourceRuntimeSplit:true}],authorityStatus:'RECONCILE_BEFORE_FILA_A'},
   year4:{githubLocationFound:true,candidateBranch:scaleCandidate,expectedModules:6,declaredSource:'DUDUQ_Ingles_1ao5_Revisao_Alfabetizacao_Multimodal_v2.3',contractTest:'test/scale/year4-v23-functional-reading-contract.mjs',smokeTest:'test/scale/year4-all-modules-smoke.mjs',status:'SOURCE_CANDIDATE_LOCATED_RECONCILE_BEFORE_FILA_A'},
   year5:{githubLocationFound:true,candidateBranch:scaleCandidate,expectedModules:6,declaredSource:'DUDUQ_Ingles_1ao5_Revisao_Alfabetizacao_Multimodal_v2.3',contractTest:'test/scale/year5-v23-integrated-functional-contract.mjs',smokeTest:'test/scale/year5-all-modules-smoke.mjs',status:'SOURCE_CANDIDATE_LOCATED_RECONCILE_BEFORE_FILA_A'}
