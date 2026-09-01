@@ -4,25 +4,23 @@
 if(window.M05VisualComposition)return;
 const MODULE="english/year1/module05",PIN="f0f8bed8e8c24fad4eae204bf4a5cc84a8d8263f",ROOT=`https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/${PIN}/Imagens%20Ilustrativa/`,PERSON_PET_Q="EN1-M5-11";
 const U=f=>ROOT+f.split("/").map(encodeURIComponent).join("/");
-const PAIRS=Object.freeze([
- {large:U("big cat - gato grande.png"),small:U("small cat -gato pequeno.png"),source:"big cat - gato grande.png",needle:"dois gatos",alt:"Dois gatos: um grande e um pequeno"},
- {large:U("big dog - cachorro grande.png"),small:U("small dog -cachorro pequeno.png"),source:"big dog - cachorro grande.png",needle:"dois cachorros",alt:"Dois cachorros: um grande e um pequeno"}
-]);
+const PAIRS=Object.freeze({
+ 6:{large:U("big cat - gato grande.png"),small:U("small cat -gato pequeno.png"),source:"big cat - gato grande.png",alt:"Dois gatos: um grande e um pequeno",questionId:"EN1-M5-07"},
+ 7:{large:U("big dog - cachorro grande.png"),small:U("small dog -cachorro pequeno.png"),source:"big dog - cachorro grande.png",alt:"Dois cachorros: um grande e um pequeno",questionId:"EN1-M5-08"}
+});
 const PERSON=U("boy_menino_child_boy_s4xru5.png"),PETS=Object.freeze({A:{src:U("Cachorro.png"),label:"Menino com cachorro",needle:"cachorro"},B:{src:U("Gato.png"),label:"Menino com gato",needle:"gato"},C:{src:U("coelho.png"),label:"Menino com coelho",needle:"coelho"}});
 const state={pairApplied:0,personPetApplied:0,lastQuestionId:""};
 function moduleOK(){return Array.isArray(window.DUDUQ_GAME_CONFIG?.modulePath)&&window.DUDUQ_GAME_CONFIG.modulePath.join("/")===MODULE}
+function currentStep(){const n=Number(window.DuduQ?.getSession?.()?.stepIndex);return Number.isInteger(n)?n:-1}
 function config(doc){try{const n=doc?.getElementById("targetShooterConfig");return n?JSON.parse(n.textContent||"null"):null}catch(_){return null}}
 function stage(doc){const c=config(doc);return c&&Array.isArray(c.stages)&&c.stages.length===1?c.stages[0]:null}
 function style(doc,id,css){let n=doc.getElementById(id);if(n)return n;n=doc.createElement("style");n.id=id;n.textContent=css;(doc.head||doc.documentElement).appendChild(n);return n}
 function safeHttp(url){return /^https:\/\//i.test(String(url||""))&&!/^(data:|blob:)/i.test(String(url||""))&&!/\.svg(?:\?|$)/i.test(String(url||""))}
 function applyPair(doc){
- if(!moduleOK())return false;const roots=[...doc.querySelectorAll(".duduq-dd2-target")];let applied=false;
- for(const root of roots){const img=root.querySelector("img.duduq-dd2-target-media");if(!img||!img.complete||img.naturalWidth<40||!safeHttp(img.currentSrc||img.src))continue;const current=decodeURIComponent(String(img.currentSrc||img.src||"")).toLowerCase(),spec=PAIRS.find(p=>current.includes(p.source.toLowerCase()));if(!spec)continue;const semantic=[root.getAttribute("aria-label"),img.getAttribute("alt")].filter(Boolean).join(" ").toLowerCase();if(!semantic.includes(spec.needle))continue;const head=img.parentElement;if(!head?.classList.contains("duduq-dd2-target-head"))continue;
-  style(doc,"duduq-m05-pair-style",`.duduq-m05-pair{width:100%;min-height:170px;display:flex;align-items:flex-end;justify-content:center;gap:clamp(10px,3vw,42px);overflow:hidden}.duduq-m05-pair img{object-fit:contain;display:block;width:auto}.duduq-m05-pair .small{height:88px;max-width:40%}.duduq-m05-pair .big{height:154px;max-width:52%}@media(max-width:520px){.duduq-m05-pair{min-height:132px}.duduq-m05-pair .small{height:68px}.duduq-m05-pair .big{height:116px}}@media(prefers-reduced-motion:reduce){.duduq-m05-pair *{animation:none!important;transition:none!important}}`);
-  if(!head.querySelector(".duduq-m05-pair")){img.hidden=true;const pair=doc.createElement("span");pair.className="duduq-m05-pair";pair.setAttribute("role","img");pair.setAttribute("aria-label",spec.alt);for(const [cls,src] of [["big",spec.large],["small",spec.small]]){const x=doc.createElement("img");x.className=cls;x.src=src;x.alt="";x.setAttribute("aria-hidden","true");pair.appendChild(x)}head.appendChild(pair);state.pairApplied+=1}
-  if(root.getAttribute("data-m05-local-composition")!=="canonical-size-pair")root.setAttribute("data-m05-local-composition","canonical-size-pair");if(root.getAttribute("aria-label")!==spec.alt)root.setAttribute("aria-label",spec.alt);state.lastQuestionId=spec.needle.includes("gatos")?"EN1-M5-07":"EN1-M5-08";applied=true;
- }
- return applied;
+ if(!moduleOK())return false;const spec=PAIRS[currentStep()];if(!spec)return false;const roots=[...doc.querySelectorAll(".duduq-dd2-target")];if(roots.length!==1)return false;const root=roots[0],img=root.querySelector("img.duduq-dd2-target-media");if(!img||!img.complete||img.naturalWidth<40||!safeHttp(img.currentSrc||img.src))return false;const current=decodeURIComponent(String(img.currentSrc||img.src||"")).toLowerCase();if(!current.includes(PIN.toLowerCase())||!current.includes(spec.source.toLowerCase()))return false;const head=img.parentElement;if(!head?.classList.contains("duduq-dd2-target-head"))return false;
+ style(doc,"duduq-m05-pair-style",`.duduq-m05-pair{width:100%;min-height:170px;display:flex;align-items:flex-end;justify-content:center;gap:clamp(10px,3vw,42px);overflow:hidden}.duduq-m05-pair img{object-fit:contain;display:block;width:auto}.duduq-m05-pair .small{height:88px;max-width:40%}.duduq-m05-pair .big{height:154px;max-width:52%}@media(max-width:520px){.duduq-m05-pair{min-height:132px}.duduq-m05-pair .small{height:68px}.duduq-m05-pair .big{height:116px}}@media(prefers-reduced-motion:reduce){.duduq-m05-pair *{animation:none!important;transition:none!important}}`);
+ if(!head.querySelector(".duduq-m05-pair")){img.hidden=true;const pair=doc.createElement("span");pair.className="duduq-m05-pair";pair.setAttribute("role","img");pair.setAttribute("aria-label",spec.alt);for(const [cls,src] of [["big",spec.large],["small",spec.small]]){const x=doc.createElement("img");x.className=cls;x.src=src;x.alt="";x.setAttribute("aria-hidden","true");pair.appendChild(x)}head.appendChild(pair);state.pairApplied+=1}
+ if(root.getAttribute("data-m05-local-composition")!=="canonical-size-pair")root.setAttribute("data-m05-local-composition","canonical-size-pair");if(root.getAttribute("aria-label")!==spec.alt)root.setAttribute("aria-label",spec.alt);state.lastQuestionId=spec.questionId;return true;
 }
 function targetId(target){const a=String(target.getAttribute("aria-label")||"");const m=a.match(/alvo\s+([ABC])(?:\b|$)/i);return m?m[1].toUpperCase():String(target.dataset?.targetId||target.getAttribute("data-target-id")||"").toUpperCase()}
 function applyPersonPet(doc,s){
@@ -33,5 +31,5 @@ function applyPersonPet(doc,s){
 function inspect(frame){if(!moduleOK())return;let doc;try{doc=frame.contentDocument}catch(_){return}if(!doc)return;const apply=()=>{applyPair(doc);const s=stage(doc);if(s)applyPersonPet(doc,s)};if(doc.body&&!doc.__DUDUQ_M05_OBSERVER__){const o=new MutationObserver(apply);o.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src","aria-label","data-dd2-target-id","data-target-id"]});doc.__DUDUQ_M05_OBSERVER__=o}apply()}
 function scan(){if(!moduleOK())return;document.querySelectorAll("iframe").forEach(f=>{if(!f.__DUDUQ_M05_LOAD__){f.addEventListener("load",()=>inspect(f));f.__DUDUQ_M05_LOAD__=true}inspect(f)})}
 if(moduleOK()){new MutationObserver(scan).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("DOMContentLoaded",scan,{once:true});setInterval(scan,180)}
-window.M05VisualComposition=Object.freeze({version:"1.0.3-m05-local",getState:()=>({...state}),scan});
+window.M05VisualComposition=Object.freeze({version:"1.0.4-m05-local",getState:()=>({...state}),scan});
 })();
