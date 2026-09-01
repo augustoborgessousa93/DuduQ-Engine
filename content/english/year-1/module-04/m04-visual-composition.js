@@ -32,7 +32,7 @@ function applyLegs(doc,s){
  const src=decodeURIComponent(String(img.currentSrc||img.getAttribute("src")||"")).toLowerCase();
  if(!src.includes(LEGS_FILE)||/^(data:|blob:)/i.test(src)||/\.svg(?:\?|$)/i.test(src))return false;
  const head=img.parentElement;if(!head?.classList.contains("duduq-dd2-target-head"))return false;
- doc.documentElement.setAttribute("data-duduq-m04-question",LEGS_Q);
+ if(doc.documentElement.getAttribute("data-duduq-m04-question")!==LEGS_Q)doc.documentElement.setAttribute("data-duduq-m04-question",LEGS_Q);
  style(doc,"duduq-m04-legs-highlight-style",`
 html[data-duduq-m04-question="${LEGS_Q}"] .duduq-dd2-target-head[data-m04-legs-context="true"]{position:relative!important;isolation:isolate!important;overflow:hidden!important}
 html[data-duduq-m04-question="${LEGS_Q}"] .duduq-dd2-target-head[data-m04-legs-context="true"] img.duduq-dd2-target-media{position:relative!important;z-index:1!important}
@@ -40,12 +40,17 @@ html[data-duduq-m04-question="${LEGS_Q}"] .duduq-m04-legs-highlight{position:abs
 @media(max-width:520px){html[data-duduq-m04-question="${LEGS_Q}"] .duduq-m04-legs-highlight{left:22%!important;right:22%!important;top:51%!important;bottom:4%!important}}
 @media(prefers-reduced-motion:reduce){html[data-duduq-m04-question="${LEGS_Q}"] .duduq-m04-legs-highlight{animation:none!important;transition:none!important}}
 `);
- head.setAttribute("data-m04-legs-context","true");root.setAttribute("data-m04-legs-highlight","true");root.setAttribute("aria-label","Contexto visual: pernas destacadas");
+ if(head.getAttribute("data-m04-legs-context")!=="true")head.setAttribute("data-m04-legs-context","true");
+ if(root.getAttribute("data-m04-legs-highlight")!=="true")root.setAttribute("data-m04-legs-highlight","true");
+ const label="Contexto visual: pernas destacadas";
+ /* aria-label is in the observer's attributeFilter. Only mutate it when the value
+    actually changes, otherwise applyLegs() would enqueue itself forever. */
+ if(root.getAttribute("aria-label")!==label)root.setAttribute("aria-label",label);
  let overlay=head.querySelector(".duduq-m04-legs-highlight");if(!overlay){overlay=doc.createElement("span");overlay.className="duduq-m04-legs-highlight";overlay.setAttribute("aria-hidden","true");overlay.setAttribute("role","presentation");head.appendChild(overlay);state.legsApplied+=1;state.lastQuestionId=LEGS_Q}
  return true;
 }
 function inspectFrame(frame){if(!moduleOK())return;let doc;try{doc=frame.contentDocument}catch(_){return}if(!doc)return;const apply=()=>{const s=stage(doc);if(!s)return;if(s.mode==="audio-to-image")applyTargetSemantics(doc,s);if(s.id===LEGS_Q)applyLegs(doc,s)};if(doc.body&&!doc.__DUDUQ_M04_OBSERVER__){const o=new MutationObserver(apply);o.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src","data-dd2-target-id","aria-label"]});doc.__DUDUQ_M04_OBSERVER__=o}apply()}
 function scan(){if(!moduleOK())return;document.querySelectorAll("iframe").forEach(frame=>{if(!frame.__DUDUQ_M04_LOAD__){frame.addEventListener("load",()=>inspectFrame(frame));frame.__DUDUQ_M04_LOAD__=true}inspectFrame(frame)})}
 if(moduleOK()){new MutationObserver(scan).observe(document.documentElement,{childList:true,subtree:true});window.addEventListener("DOMContentLoaded",scan,{once:true});setInterval(scan,180)}
-window.M04VisualComposition=Object.freeze({version:"1.0.0-m04-local",getState:()=>({...state}),scan});
+window.M04VisualComposition=Object.freeze({version:"1.0.1-m04-local",getState:()=>({...state}),scan});
 })();
