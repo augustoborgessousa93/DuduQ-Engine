@@ -495,6 +495,11 @@
 
   let source = xhr.responseText;
   source = source.split("2.0.24").join("2.0.25");
+  source = replaceRequired(
+    source,
+    'rejectWrongDrop: explicitMode === "single-choice" ? false : true',
+    'rejectWrongDrop: false'
+  );
 
   source = replaceRequired(
     source,
