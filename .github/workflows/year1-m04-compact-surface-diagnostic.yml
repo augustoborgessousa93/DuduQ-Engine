@@ -1,0 +1,56 @@
+name: Year 1 M04 Compact Surface Diagnostic
+
+on:
+  push:
+    branches:
+      - homolog-year1-m04-official
+    paths:
+      - 'test/systemic/year1-m04-compact-surface-diagnostic.mjs'
+      - '.github/workflows/year1-m04-compact-surface-diagnostic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compact-surface:
+    name: compact surface — ${{ matrix.viewport }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport:
+          - tablet-768x1024
+          - mobile-390x844
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/m04-compact-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/m04-compact-http.log
+          exit 1
+      - name: Compare frozen M03 and M04 surface
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          VIEWPORT_NAME: ${{ matrix.viewport }}
+        run: node test/systemic/year1-m04-compact-surface-diagnostic.mjs
+      - name: Upload compact evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year1-m04-compact-surface-${{ matrix.viewport }}
+          path: test-results/systemic/year1-m04-compact-surface/${{ matrix.viewport }}/
+          if-no-files-found: ignore
+          retention-days: 7
