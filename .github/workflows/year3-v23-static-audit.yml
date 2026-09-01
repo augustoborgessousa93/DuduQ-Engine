@@ -1,0 +1,22 @@
+name: Year 3 v2.3 Static Audit
+on:
+  push:
+    branches: [materialize-year3-m01-m06-r147]
+    paths:
+      - 'content/english/year-3/**'
+      - 'test/systemic/year3-v23-static-audit.mjs'
+      - '.github/workflows/year3-v23-static-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  static-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Audit 90 official v2.3 items
+        run: node test/systemic/year3-v23-static-audit.mjs
