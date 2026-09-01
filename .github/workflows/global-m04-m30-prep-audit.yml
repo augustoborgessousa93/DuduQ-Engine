@@ -46,10 +46,19 @@ jobs:
               echo "$scale: expected 6 Year ${year} module directories, found $count" >&2
               exit 1
             fi
-            git show "$scale:content/english/year-${year}/module-01/module-01-v1.js" | grep -q 'DUDUQ_Ingles_1ao5_Revisao_Alfabetizacao_Multimodal_v2.3'
+
+            git cat-file -e "$scale:content/english/year-${year}/year${year}-content-factory-v1.js"
+            for module in 01 02 03 04 05 06; do
+              base="content/english/year-${year}/module-${module}"
+              git cat-file -e "$scale:${base}/index.html"
+              git cat-file -e "$scale:${base}/module-${module}-v1.js"
+              git show "$scale:${base}/module-${module}-v1.js" | grep -q 'DUDUQ_Ingles_1ao5_Revisao_Alfabetizacao_Multimodal_v2.3'
+              echo "$scale: Year ${year} module-${module} entrypoint + v2.3 candidate confirmed"
+            done
+
             git show "$scale:test/scale/year${year}-all-modules-smoke.mjs" >/tmp/year${year}-smoke.mjs
             git show "$scale:test/scale/year${year}-v23-$( [ "$year" = 4 ] && printf 'functional-reading' || printf 'integrated-functional' )-contract.mjs" >/tmp/year${year}-contract.mjs
-            echo "$scale: Year ${year} source candidate M01-M06 + v2.3 contract + smoke confirmed"
+            echo "$scale: Year ${year} M01-M06 + factory + v2.3 contracts + smoke confirmed"
           done
       - name: Upload preparation report
         uses: actions/upload-artifact@v4
