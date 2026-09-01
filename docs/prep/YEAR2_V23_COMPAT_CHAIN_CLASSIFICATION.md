@@ -2,9 +2,16 @@
 
 Preparation only. No script is removed, reordered or rewritten by this document.
 
+## Status vocabulary
+
+- `ACTIVE`: current public M01–M06 entrypoints load the layer and a reachable transformation path exists.
+- `DORMANT`: the code is present, but the current public-entry configuration cannot satisfy its activation gate.
+- `REDUNDANT`: equivalent behavior has been proven elsewhere and the layer can be removed without changing output. **No Year 2 layer is classified REDUNDANT yet.**
+- `REQUIRED`: current evidence shows the layer protects a contract still used by the public candidate, or no parity replacement has been proven; retain it for future homologation.
+
 ## Common public-entry chain (M01–M06)
 
-Observed across all six Year 2 public v2.3 entrypoints:
+Observed across the six public v2.3 entrypoints:
 
 - `year2-v22-homolog-core.js`
 - `year2-v22-homolog-editorial-assets.js`
@@ -19,80 +26,70 @@ Observed across all six Year 2 public v2.3 entrypoints:
 - `year2-v23-dragdrop-visual-patch.js`
 - `year2-v22-homolog-layout.js`
 
-M01 additionally has local first-listen/mobile compact scripts.
+M01 additionally carries first-listen/mobile compact scripts. Player and Loader are appended dynamically with a `Date.now()` query stamp. Current evidence classifies the timestamp as cache-busting; no functional state is derived from it.
 
-Player and Loader are appended dynamically with a `Date.now()` query stamp. Current evidence classifies this as cache-busting only. No functional dependency on the timestamp has been proven.
+## Explicit classification
 
-## Classification by responsibility
+| layer / sub-path | status | evidence / disposition |
+|---|---|---|
+| v2.2 homolog core | ACTIVE + REQUIRED | base factory consumed by v2.3 adapter chain; no independent v2.3 replacement proven |
+| v2.2 editorial assets | ACTIVE + REQUIRED | source visual/editorial metadata remains input to later v2.3 transforms |
+| v2.3 multimodal adapter | ACTIVE + REQUIRED | public candidate content is built from the v2.3 source and R0/multimodal rules |
+| v2.3 gamification diversity | ACTIVE + REQUIRED | current rules have reachable M02–M06 consumers including Bubble/Target/Matching/DD choices |
+| gamification-router-compat | ACTIVE + REQUIRED | wraps `buildModule`, normalizes Router-facing fields after diversity transforms and preserves source answers; no native-Router parity proven |
+| manual-review-hotfix-v2 | ACTIVE + REQUIRED | official-assets-first and complete Matching-pair reconstruction are current delivery transformations, not cosmetic cleanup |
+| manual-review-router-compat | ACTIVE + REQUIRED | normalizes post-manual-review Bubble/Target/DD payloads before Router; no equivalent modern entrypoint proven |
+| mechanics-regression-hotfix | ACTIVE + REQUIRED | quarantine/fallback layer for unsafe Word Slash, non-unique Target visuals and Bubble upgrades; preserves source answers |
+| bubble-smart-renderer-bridge | ACTIVE + REQUIRED | Bubble Pop 1.0.31 is immutable/current and bridge supplies official image rendering + synthetic duplicate visual dedupe without answer mutation |
+| mechanics-regression-router-compat | ACTIVE + REQUIRED | synchronizes post-hotfix mechanics/payloads with Router and protects fallback output; removal not parity-proven |
+| dragdrop-visual-patch — generic response-target normalization | ACTIVE + REQUIRED | runs for current DD questions whenever target metadata needs response normalization |
+| dragdrop-visual-patch — EN2-M1-12 spell-slot/mobile adaptation | ACTIVE + REQUIRED | M01 source still has the first-listen + positional L/E/O requirement and public M01 loads this patch |
+| dragdrop-visual-patch — M03 DD2.0.23 SINGLE_TARGET_CHOICE pilot | **DORMANT** | activation requires both `interactionPilot === "SINGLE_TARGET_CHOICE"` and `dragDropCandidate === "2.0.23"`; current M03 public entry declares neither. Do not delete yet: prove regression-safe before extracting the dormant sub-path |
+| v2.2 homolog layout | ACTIVE + REQUIRED | public pages still load the layout layer; no layout-parity replacement proven |
+| Player/Loader `Date.now()` cache stamp | ACTIVE, not a contract layer | observable use is URL cache-busting only. Do not classify as product bug or remove until deployment-cache equivalence is proven |
 
-### Schema/router compatibility — CURRENTLY FUNCTIONAL, DO NOT REMOVE
+## No REDUNDANT classification yet
 
-`year2-v23-gamification-router-compat.js`
-- normalizes payload presentation fields that the shared Router does not accept;
-- preserves source answers;
-- belongs to the transformation layer rather than pedagogy.
+A script being old, layered, duplicated-looking or carrying an RC name is insufficient to call it redundant. The current preparation evidence supports zero whole-file removals.
 
-`year2-v23-manual-review-router-compat.js`
-- keeps manual-review output compatible with Router after visual/matching normalization;
-- paired with the manual-review factory transformation;
-- removal requires a real entrypoint parity test, not cleanup reasoning.
+The only evidence-backed dormant portion is the **M03 DD2.0.23 single-target pilot sub-path** inside `year2-v23-dragdrop-visual-patch.js`; the same file has other active responsibilities, so the file itself remains REQUIRED.
 
-`year2-v23-mechanics-regression-router-compat.js`
-- protects post-hotfix payloads from Router rejection;
-- coupled to mechanics-regression fallbacks;
-- retain until the relevant payload forms are proven native under the then-current Router contract.
+## Why the Router wrappers remain REQUIRED
 
-### Visual/media compatibility — CURRENTLY FUNCTIONAL
+The three compatibility wrappers execute after different transformation stages:
 
-`year2-v23-bubble-smart-renderer-bridge.js`
-- keeps Bubble Pop 1.0.31 immutable;
-- injects official Assets-DuduQ absolute URLs through the existing `.duduq-bp-media` contract;
-- deduplicates only synthetic duplicate visuals while explicitly preserving source answers;
-- current Canary still uses Bubble Pop 1.0.31, therefore this bridge is not classified as dead.
+1. diversity / gamification output;
+2. manual-review visual + Matching reconstruction;
+3. regression quarantine/fallback output.
 
-`year2-v23-dragdrop-visual-patch.js`
-Contains three distinct responsibilities and must not be treated as one cleanup unit:
-1. generic response-target normalization — potentially still active;
-2. EN2-M1-12 spell-slot/first-listen adaptation — specific and potentially still active;
-3. M03 single-target pilot for Drag & Drop 2.0.23 — explicitly gated by `interactionPilot=SINGLE_TARGET_CHOICE` plus `dragDropCandidate=2.0.23`; under Canary DD 2.0.24 this sub-path appears dormant unless an entrypoint still declares the old pilot. Prove dormant across M01–M06 before deleting only that sub-path.
+Each stage can create a different Router-facing shape while preserving source answer metadata. A future consolidation may replace them only with an A/B gate proving identical effective mechanic, accepted payload, answer, asset provenance, retry/success and Completion for M01–M06.
 
-### Pedagogy-preserving visual transformation — CURRENTLY FUNCTIONAL
+## Runtime regression quarantine
 
-`year2-v23-manual-review-hotfix-v2.js`
-- official asset bank first;
-- reconstructs Matching as complete audio↔visual pairs rather than loose distractors;
-- requires original pedagogical answer/concept to remain represented;
-- falls back only when safe distinct visuals are unavailable.
+`year2-v23-mechanics-regression-hotfix.js` is technical debt but still functional:
 
-This is not a cosmetic patch. It changes delivery representation while preserving source pedagogy.
+- validates Word Slash renderability;
+- provides reversible Word Slash→Target Shooter fallback when unsafe;
+- validates unique Target Shooter visual sets and can fall back to Drag & Drop;
+- upgrades Bubble alternatives to safe resolved visuals;
+- preserves source-answer metadata.
 
-### Runtime regression quarantine — CURRENTLY FUNCTIONAL / TECHNICAL DEBT
+Word Slash 1.0.17 remains quarantined until an explicit Year 2 gate proves the affected payloads mount and complete natively.
 
-`year2-v23-mechanics-regression-hotfix.js`
-- validates Word Slash payload renderability;
-- provides reversible Word Slash→Target Shooter fallback when the Word Slash contract/runtime is unsafe;
-- deduplicates/validates Target Shooter image sets and can fall back to Drag & Drop when images are not unique;
-- upgrades Bubble Pop alternatives to safe resolved visuals where possible;
-- preserves source answer metadata.
+## Date.now()
 
-Word Slash 1.0.17 must remain quarantined until an explicit Year 2 runtime gate proves the relevant payloads can mount and complete without the fallback.
+The public entry constructs versioned Player/Loader URLs with a timestamp query. Nothing in the inspected path reads the timestamp back into pedagogy, session state, answer resolution or mechanic selection. Current classification: **cache-busting behavior, not a hidden contract**. Removal is still deferred until deployment-cache behavior is tested.
 
-## Consolidation candidates — NOT YET AUTHORIZED
+## Required pre-homologation evidence
 
-1. Replace the three Year 2 router compatibility wrappers with the modern real-entry/bootstrap pattern only if an A/B gate proves identical payload acceptance, source-answer preservation, mechanics selection and completion for all six modules.
-2. Replace dynamic Player/Loader stamping with stable versioned URLs only after proving there is no stale-cache deployment dependency. `Date.now()` itself is not currently a product bug.
-3. Remove the obsolete DD 2.0.23 M03 pilot sub-path only after scanning all public entries/config for `SINGLE_TARGET_CHOICE` / `dragDropCandidate: 2.0.23` and running a regression that shows no active consumer.
-4. Move Bubble Pop official-image support into a future shared release only in a separately homologated release. Do not mutate 1.0.31 in this preparation branch.
+Before FILA A reaches Year 2, produce a read-only matrix per M01–M06 with:
 
-## Required Year 2 pre-homologation gate
-
-Before FILA A reaches Year 2, create a read-only compatibility matrix per M01–M06 that records:
-- effective mechanics after all transformations;
-- which compatibility layer touched each item;
-- whether a fallback is active;
+- effective mechanic after all transformations;
+- compatibility layers that touched each item;
+- active fallback and reason;
 - source answer before/after;
 - resolved visual provenance;
-- public-entry script chain;
-- runtime mount + Completion under current Canary.
+- public-entry chain;
+- runtime mount, retry/success and Completion under then-current Canary.
 
-Only after that matrix is green may individual wrappers be classified as safely replaceable.
+Only that evidence can promote a layer from `REQUIRED` to `REDUNDANT` or authorize consolidation.
