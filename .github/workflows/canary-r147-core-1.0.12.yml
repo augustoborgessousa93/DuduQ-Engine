@@ -1,0 +1,67 @@
+name: Canary R147 Core 1.0.12
+
+on:
+  push:
+    branches:
+      - release/canary-r147-core-1.0.12
+    paths:
+      - "engine/channels/canary-v1.json"
+      - "engine/channels/canary-r146-rollback.json"
+      - "test/systemic/canary-r147-core-1.0.12-*.mjs"
+      - ".github/workflows/canary-r147-core-1.0.12.yml"
+  pull_request:
+    branches:
+      - refactor/systemic-foundation-years1-5
+    paths:
+      - "engine/channels/canary-v1.json"
+      - "engine/channels/canary-r146-rollback.json"
+      - "test/systemic/canary-r147-core-1.0.12-*.mjs"
+      - ".github/workflows/canary-r147-core-1.0.12.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  promote:
+    name: manifest-loader-player-compact-sanity
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax
+        run: |
+          node --check test/systemic/canary-r147-core-1.0.12-contract.mjs
+          node --check test/systemic/canary-r147-core-1.0.12-smoke.mjs
+          node --check test/systemic/foundation-architecture-audit.mjs
+          node --check test/systemic/year1-loader-compat-smoke.mjs
+      - name: Manifest and rollback contract
+        run: node test/systemic/canary-r147-core-1.0.12-contract.mjs
+      - name: Foundation contract
+        run: node test/systemic/foundation-architecture-audit.mjs
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-r147-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-r147-http.log
+          exit 1
+      - name: M01 TS and M03 DD compact sanity with progress transition completion
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/canary-r147-core-1.0.12-smoke.mjs
+      - name: Loader and Player compatibility
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/year1-loader-compat-smoke.mjs
