@@ -5,7 +5,7 @@ const VIEWPORTS = [
   { name: "desktop", width: 1366, height: 768 },
   { name: "mobile", width: 390, height: 844 }
 ];
-const OFFICIAL_ENTRYPOINT_MODULES = new Set([2, 3]);
+const OFFICIAL_ENTRYPOINT_MODULES = new Set([2, 3, 4]);
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -30,8 +30,8 @@ try {
          * de bootstrap devem ser exercitados pelo entrypoint público real. A bridge
          * existe antes do Loader, amplia a compatibilidade somente no dispatch
          * síncrono duduq:engine-ready e restaura o perfil canônico na microtask.
-         * M02 e M03 já estão homologados; M04-M06 permanecem no harness universal
-         * até suas homologações próprias.
+         * M02, M03 e M04 já estão homologados; M05-M06 permanecem no harness
+         * universal até suas homologações próprias.
          */
         const url = OFFICIAL_ENTRYPOINT_MODULES.has(moduleNumber)
           ? `${BASE}/content/english/year-1/module-${String(moduleNumber).padStart(2, "0")}/?qa=universal-loader-compat`

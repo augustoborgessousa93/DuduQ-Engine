@@ -1,0 +1,67 @@
+name: Year 1 M04 Targeted Desktop Diagnostic
+
+on:
+  push:
+    branches:
+      - homolog-year1-m04-official
+    paths:
+      - 'content/english/year-1/module-04/m04-visual-composition.js'
+      - 'test/systemic/year1-m04-targeted-diagnostic.mjs'
+      - '.github/workflows/year1-m04-targeted-diagnostic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  targeted-desktop-q01-q07:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout M04 diagnostic head
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify surgical M04 diagnostic scope
+        run: |
+          git diff --name-only 5338389eed1e8cd244976321d80e83dc146d5e47...HEAD
+          unexpected="$(git diff --name-only 5338389eed1e8cd244976321d80e83dc146d5e47...HEAD | grep -Ev '^(content/english/year-1/module-04/m04-visual-composition\.js|test/systemic/year1-m04-targeted-diagnostic\.mjs|\.github/workflows/year1-m04-targeted-diagnostic\.yml)$' || true)"
+          if [ -n "$unexpected" ]; then
+            echo 'Unexpected change outside surgical M04 diagnostic scope:' >&2
+            printf '%s\n' "$unexpected" >&2
+            exit 1
+          fi
+      - name: Syntax check targeted diagnostic and local helper
+        run: |
+          node --check test/systemic/year1-m04-targeted-diagnostic.mjs
+          node --check content/english/year-1/module-04/m04-visual-composition.js
+          grep -q '1.0.1-m04-local' content/english/year-1/module-04/m04-visual-composition.js
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start M04 candidate server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-m04-targeted-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-m04-targeted-http.log
+          exit 1
+      - name: Run targeted desktop Q01-Q07 with per-await diagnostics
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/year1-m04-targeted-diagnostic.mjs
+      - name: Upload targeted diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year1-m04-targeted-desktop-q01-q07
+          path: test-results/systemic/year1-m04-targeted/
+          if-no-files-found: ignore
+          retention-days: 14
