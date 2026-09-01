@@ -6,7 +6,9 @@ on:
       - test/shared-dd-audio-anti-hang-m06
     paths:
       - 'test/systemic/lib/turbo-item-guard.mjs'
+      - 'test/systemic/lib/headless-tts-safety.mjs'
       - 'test/systemic/shared-dd-audio-smoke.mjs'
+      - 'test/systemic/shared-dd-audio-smoke-safe.mjs'
       - '.github/workflows/shared-dd-audio-anti-hang-m06-smoke.yml'
   workflow_dispatch:
 
@@ -23,7 +25,9 @@ jobs:
       - name: Syntax
         run: |
           node --check test/systemic/lib/turbo-item-guard.mjs
+          node --check test/systemic/lib/headless-tts-safety.mjs
           node --check test/systemic/shared-dd-audio-smoke.mjs
+          node --check test/systemic/shared-dd-audio-smoke-safe.mjs
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -45,7 +49,7 @@ jobs:
           CORRECT_ID: B
           WRONG_ID: A
           VIEWPORT_NAME: desktop-1366x768
-        run: node test/systemic/shared-dd-audio-smoke.mjs
+        run: node test/systemic/shared-dd-audio-smoke-safe.mjs
       - name: Upload smoke evidence
         if: always()
         uses: actions/upload-artifact@v4
