@@ -9,7 +9,7 @@ if (!/^test\/systemic\/year1-m0[56]-official-r147-turbo-shard\.mjs$/.test(shardE
 const src = path.resolve(shardEnv);
 let code = await fs.readFile(src, "utf8");
 
-const helperImport = 'import {clickDdOptionWithAudio,closeBrowserBounded,runQuestionGuarded} from "./lib/turbo-item-guard.mjs";\n';
+const helperImport = 'import {clickDdOptionWithAudio,closeBrowserBounded,runQuestionGuarded} from "./lib/turbo-item-guard-v2.mjs";\nimport {installHeadlessTtsSafety} from "./lib/headless-tts-safety.mjs";\n';
 code = helperImport + code;
 const baseMarker = 'const BASE=';
 if (code.split(baseMarker).length - 1 !== 1) throw new Error("Shared turbo patch: BASE marker mismatch");
@@ -25,6 +25,11 @@ const chooseTo = 'async function chooseDD(page,id){await waitDD(page);return cli
 const chooseCount = code.split(chooseFrom).length - 1;
 if (chooseCount !== 1) throw new Error(`Shared turbo patch: chooseDD marker count=${chooseCount}`);
 code = code.replace(chooseFrom, chooseTo);
+
+const pageMarker = 'const page=await browser.newPage({viewport:{width:v.width,height:v.height},hasTouch:!!v.mobile,isMobile:!!v.mobile});';
+const pageCount = code.split(pageMarker).length - 1;
+if (pageCount !== 1) throw new Error(`Shared turbo patch: page marker count=${pageCount}`);
+code = code.replace(pageMarker, `${pageMarker}await installHeadlessTtsSafety(page);`);
 
 const perStart = code.indexOf('async function perItem(page,e,fn){');
 const perEnd = code.indexOf('\nawait fs.mkdir(OUT,{recursive:true});', perStart);
