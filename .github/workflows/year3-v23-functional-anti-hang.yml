@@ -1,0 +1,74 @@
+name: Year 3 v2.3 Functional Gate — Anti-Hang
+
+on:
+  push:
+    branches:
+      - test/year3-functional-anti-hang
+    paths:
+      - '.github/year3-functional-go'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  functional:
+    name: Year3 M${{ matrix.module }} — ${{ matrix.viewport }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    strategy:
+      fail-fast: false
+      matrix:
+        module: ['01', '02', '03', '04', '05', '06']
+        viewport: [desktop-1366x768, fullhd-1920x1080, tablet-768x1024, mobile-390x844]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax
+        run: |
+          node --check test/systemic/lib/turbo-item-guard-v2.mjs
+          node --check test/systemic/lib/headless-tts-safety.mjs
+          node --check test/systemic/year3-v23-functional-shard.mjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start Year 3 candidate server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-y3-functional-http.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/duduq-y3-functional-http.log
+          exit 1
+      - name: Run module functional shard
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          MODULE: ${{ matrix.module }}
+          VIEWPORT_NAME: ${{ matrix.viewport }}
+        run: node test/systemic/year3-v23-functional-shard.mjs
+      - name: Upload Year 3 functional evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year3-v23-functional-m${{ matrix.module }}-${{ matrix.viewport }}
+          path: test-results/systemic/year3-v23-functional/module-${{ matrix.module }}/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  aggregate:
+    name: Year 3 functional aggregate 24/24
+    needs: functional
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require all 24 functional shards
+        env:
+          MATRIX_RESULT: ${{ needs.functional.result }}
+        run: |
+          if [ "$MATRIX_RESULT" != "success" ]; then
+            echo "YEAR3 FUNCTIONAL FAIL: matrix result=$MATRIX_RESULT" >&2
+            exit 1
+          fi
+          echo 'YEAR3 FUNCTIONAL PASS — 6 modules x 4 viewports = 24/24'
