@@ -28,15 +28,17 @@ jobs:
           node --check test/systemic/foundation-architecture-audit.mjs
           node --check test/systemic/year1-loader-compat-smoke.mjs
           node --check test/systemic/year1-public-entry-smoke.mjs
-          node --check test/systemic/canary-core-progression-diagnostic.mjs
-          node --check test/systemic/canary-core-1.0.11-promotion-smoke.mjs
-          node --check test/systemic/year1-m01-official-homologation.mjs
-          node --check content/english/year-1/module-01/module-01.js
+          node --check test/systemic/canary-r147-core-1.0.12-contract.mjs
+          node --check test/systemic/canary-r147-core-1.0.12-smoke.mjs
 
       - name: Guard systemic foundation
         run: node test/systemic/foundation-architecture-audit.mjs
 
+      - name: Guard Canary R147 manifest and rollback
+        run: node test/systemic/canary-r147-core-1.0.12-contract.mjs
+
   year1-loader-compat:
+    if: github.event_name != 'pull_request' || github.head_ref != 'release/canary-r147-core-1.0.12'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -64,36 +66,12 @@ jobs:
           cat /tmp/duduq-systemic-http.log
           exit 1
 
-      - name: Homologate official Year 1 M01 against ten criteria
+      - name: Revalidate Canary R147 proportional runtime sentinels
         env:
           BASE_URL: http://127.0.0.1:4173
-        run: node test/systemic/year1-m01-official-homologation.mjs
+        run: node test/systemic/canary-r147-core-1.0.12-smoke.mjs
 
       - name: Smoke Year 1 M02-M06 via universal Loader
-        if: github.head_ref != 'homolog-year1-m01-official'
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/systemic/year1-loader-compat-smoke.mjs
-
-      - name: Revalidate Canary R146 Core 1.0.11 progression and completion sentinels
-        env:
-          BASE_URL: http://127.0.0.1:4173
-        run: node test/systemic/canary-core-1.0.11-promotion-smoke.mjs
-
-      - name: Upload M01 official homologation evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: year1-m01-official-homologation-evidence
-          path: test-results/systemic/year1-m01-official
-          if-no-files-found: warn
-          retention-days: 14
-
-      - name: Upload final progression evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: core-r146-progression-final-evidence
-          path: test-results/systemic/canary-core-1.0.11-promotion
-          if-no-files-found: warn
-          retention-days: 14

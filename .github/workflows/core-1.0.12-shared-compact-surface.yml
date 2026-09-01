@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   candidate-gate:
+    if: github.event_name != 'pull_request' || github.head_ref == 'fix/shared-compact-mechanic-surface'
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
