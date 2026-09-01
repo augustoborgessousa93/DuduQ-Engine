@@ -1,0 +1,46 @@
+name: Year 2 M01 R147 Materialization Smoke
+
+on:
+  push:
+    branches:
+      - homolog-year2-m01-official
+    paths:
+      - 'content/english/year-2/**'
+      - 'test/systemic/year2-m01-r147-materialization-smoke.mjs'
+      - '.github/workflows/year2-m01-r147-materialization-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    name: Year2 M01 preflight — ${{ matrix.viewport }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport: [desktop-1366x768, mobile-390x844]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax
+        run: node --check test/systemic/year2-m01-r147-materialization-smoke.mjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start candidate server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/year2-m01-http.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/year2-m01-http.log
+          exit 1
+      - name: Run preflight
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          VIEWPORT_NAME: ${{ matrix.viewport }}
+        run: node test/systemic/year2-m01-r147-materialization-smoke.mjs
