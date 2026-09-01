@@ -81,6 +81,19 @@ async function waitFeedback(page, state, timeout = 6_000) {
   }, state, { timeout });
 }
 
+async function waitInstructionAudioIdle(page, timeout = 10_000) {
+  await page.waitForFunction(() => {
+    const doc = document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument;
+    const controls = [...(doc?.querySelectorAll("button,[role='button']") || [])].filter((button) =>
+      /áudio|audio|ouvir|som|instruction/i.test(String(button.getAttribute("aria-label") || button.textContent || ""))
+    );
+    const busy = controls.some((button) =>
+      Boolean(button.disabled) || /reprodução|playing/i.test(String(button.getAttribute("aria-label") || ""))
+    );
+    return controls.length >= 1 && !busy;
+  }, null, { timeout });
+}
+
 async function measureSurface(page, kind) {
   return page.evaluate((mechanicKind) => {
     const wrapper = document.querySelector("#root > .duduq-mechanic-frame");
@@ -158,7 +171,8 @@ async function exerciseM01TS(browser, viewport) {
     assertCommonLayout(layout, viewport, `M01 TS/${viewport.name}`);
     assert(layout.targets.length === 3, `M01 TS/${viewport.name}: expected 3 targets.`);
     assert(layout.targets.every((target) => target.width >= 44 && target.height >= 44 && target.visibleRatio > 0.9), `M01 TS/${viewport.name}: target size/visibility failed.`);
-    assert(layout.audioControls.length >= 1 && layout.audioControls.some((control) => !control.disabled), `M01 TS/${viewport.name}: instruction audio unavailable.`);
+    assert(layout.audioControls.length >= 1, `M01 TS/${viewport.name}: instruction audio control missing.`);
+    await waitInstructionAudioIdle(page, 10_000);
 
     const frame = page.frameLocator("#root > .duduq-mechanic-frame iframe");
     const wrong = frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]').first();
