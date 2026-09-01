@@ -11,6 +11,10 @@ on:
       - '.github/workflows/year1-m06-official-r147-homologation.yml'
   workflow_dispatch:
 
+concurrency:
+  group: year1-m06-official-r147-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
