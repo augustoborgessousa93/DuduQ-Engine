@@ -2,52 +2,77 @@
 
 Preparation-only record for FILA B. No Year 3 implementation is promoted by this file.
 
-## 1. v2.3 policy/source branch
+## Decision summary
+
+- **Editorial/pedagogical authority:** `feat/year3-v23-multimodal` + `DUDUQ_Ingles_1ao5_Revisao_Alfabetizacao_Multimodal_v2.3.docx`.
+- **Best materialized implementation candidate:** `scale/shared-engine-year3-bootstrap`.
+- **Alternative technical lineage, not deployable authority:** `scale/year3-shared-engine-foundation`.
+
+This decision means Year 3 must **not** be reconstructed from zero, but neither historical scale branch is promoted wholesale. The candidate must be reconciled onto the then-current Foundation/Canary.
+
+## 1. Editorial authority — v2.3 policy/source branch
 
 Branch: `feat/year3-v23-multimodal`
 
-Role observed: v2.3 multimodal source/policy staging. This is the pedagogical-direction branch to reconcile against implementation candidates.
+The Year 3 README explicitly names `DUDUQ_Ingles_1ao5_Revisao_Alfabetizacao_Multimodal_v2.3.docx` as source of truth and requires:
 
-## 2. Shared-engine bootstrap implementation
+- 90/90 source IDs `EN3-M1-*` through `EN3-M6-*`;
+- source answers and order preserved;
+- no autonomous English reading as a success requirement;
+- repeatable audio for verbal content;
+- visual/context support before autonomous reading;
+- assets-first resolution;
+- mechanic selection by pedagogical fit, not diversity for its own sake.
+
+Therefore this branch/source governs **what must be preserved**.
+
+## 2. Best materialized implementation candidate
 
 Branch: `scale/shared-engine-year3-bootstrap`
 Head observed: `f33f1a2a2d8d3fdc4b0f89cc388b1e0c86cc8a08`
 
-Contains six materialized module directories and real public entrypoints.
-Example M01:
-- channel `scale-v1`;
-- `requiredMechanics: ["drag-drop","target-shooter"]`;
-- content `module-01-v1.js` version `1.1.0-v23-multimodal`;
-- `year3-content-factory-v1.js`;
-- shared smart-visual aliases and content-compat;
-- shared Player/Loader.
+Why this is the best materialized candidate:
 
-The M01 content explicitly cites the Year 3 v2.3 multimodal revision and materializes 15 official item IDs with source prompts/options/answers preserved. This makes this branch a strong implementation candidate, but its scale-v1 runtime still needs reconciliation with current Canary R146/Foundation when Year 3 reaches FILA A.
+1. Contains real `module-01` through `module-06` directories with public `index.html` entrypoints.
+2. Uses `year3-content-factory-v1.js` plus shared visual/content compatibility layers.
+3. Module M01 declares version `1.1.0-v23-multimodal` and explicitly cites the v2.3 pedagogical source.
+4. M01 materializes 15 IDs with prompts/options/answers in source-shaped records; the six-module architecture therefore matches the expected 90-item Year 3 structure.
+5. The branch includes explicit Year 3 v2.3 contract tests, all-modules browser smoke, smart-asset audit and visual proof tooling.
+6. Its shared workflow also includes Year 4/5 baselines, so this tree is closer to a deployable multi-year bootstrap than the alternative lineage.
 
-## 3. Shared-engine foundation experiment
+Historical runtime caveat:
+- entrypoints target `scale-v1`, not current Canary R146/Foundation;
+- shared scale compatibility/visual layers must be reconciled, not copied blindly;
+- any old generated-vector fallback must be rechecked against the current Assets-DuduQ-first policy.
+
+## 3. Alternative shared-engine foundation lineage
 
 Branch: `scale/year3-shared-engine-foundation`
 Head observed: `44f55de3095d900feeb96d627c77d8b7e13854d6`
 
-Contains six module directories but a different shape. M01, for example, contains:
-- `module-01-source-v22.js`;
-- `module-01-runtime-v1.js`;
-- no module-level `index.html` at that path.
+Observed shape differs materially:
 
-The Year root also includes `year3-factory-v1.js`, `year3-plan-v1.js` and `year3-visual-resolver-v1.js`.
+- M01 contains `module-01-source-v22.js` + `module-01-runtime-v1.js`;
+- no equivalent module-level public `index.html` at the inspected M01 path;
+- Year root carries `year3-factory-v1.js`, `year3-plan-v1.js`, `year3-visual-resolver-v1.js`;
+- source naming still references v2.2 in the module split.
 
-This branch therefore looks like an earlier/different shared-foundation architecture rather than the same deployable tree as `scale/shared-engine-year3-bootstrap`.
+Classification: **technical reference lineage**, useful only where an abstraction is proven superior/equivalent. It is not the preferred materialized content tree because it is less directly aligned to the v2.3 deployable module shape.
 
-## Reconciliation rule before Year 3 FILA A
+## Reconciliation contract before Year 3 FILA A
 
-Do not merge these lineages mechanically. Before Year 3 homologation:
+For M13–M18:
 
-1. Treat v2.3 pedagogical source as authoritative for IDs/prompts/options/answers and literacy policy.
-2. Compare the six `module-XX-v1.js` implementations in `scale/shared-engine-year3-bootstrap` against that authority.
-3. Reuse only technical bootstrap/factory/resolver elements that remain compatible with current Foundation/Canary.
-4. Compare the `scale/year3-shared-engine-foundation` utilities for useful shared abstractions, but do not replace deployable modules merely because that branch name contains “foundation”.
-5. Create a Year 3 candidate on the then-current official Foundation, not by promoting either historical scale branch wholesale.
+1. Extract authoritative IDs/order/answers/literacy constraints from v2.3.
+2. Diff each `module-XX-v1.js` in `scale/shared-engine-year3-bootstrap` against that authority.
+3. Record per-item mechanic, media requirement, asset provenance, audio support and any fallback.
+4. Replace only historical runtime/bootstrap details that conflict with current Foundation/Canary.
+5. Compare alternative-foundation utilities only as implementation candidates; never let a v2.2 source split override v2.3 editorial content.
+6. Run 90/90 static source parity before browser homologation.
+7. Materialize the future homologation branch from current official Foundation, overlaying reconciled Year 3 content rather than merging a historical scale tree wholesale.
 
 ## Current FILA B status
 
-M13–M18: technical sources located; no need to reconstruct from zero. Authority reconciliation remains the preparation task before homologation begins.
+M13–M18: **SOURCE AUTHORITY IDENTIFIED + BEST MATERIALIZED CANDIDATE IDENTIFIED**.
+
+Next preparation work is per-module source parity and technical migration mapping, not source discovery.
