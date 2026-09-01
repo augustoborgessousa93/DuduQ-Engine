@@ -4,39 +4,18 @@
    DUDUQ CORE 1.0.12 CANDIDATE — CAUSAL PROBE
    SHARED_COMPACT_MECHANIC_SURFACE
 
-   Experimental scope for the proof only:
-   restore a definite percentage-height chain on compact
-   mechanic surfaces without changing mechanics or non-mechanic
-   pages. The final rule is written only after browser evidence.
+   The mechanic adapter mounts .duduq-mechanic-frame directly
+   under the Host container. Both the wrapper and its iframe use
+   height:100%, so compact mode needs a definite block-size on
+   that containing #root. Non-mechanic pages keep the historical
+   auto-height / anti-clipping policy.
    ========================================================= */
 @media (max-width: 900px) {
   html.duduq-world-fusion:not(:fullscreen)
-    body > #root:has(.duduq-engine-shell .duduq-mechanic-frame) {
+    body > #root:has(> .duduq-mechanic-frame) {
+    box-sizing: border-box;
     height: 100dvh !important;
     min-height: 100dvh !important;
-    overflow: visible !important;
-  }
-
-  html.duduq-world-fusion:not(:fullscreen)
-    .duduq-engine-root:has(.duduq-mechanic-frame) {
-    height: 100% !important;
-    min-height: 0 !important;
-    overflow: visible !important;
-  }
-
-  html.duduq-world-fusion:not(:fullscreen)
-    .duduq-engine-shell:has(.duduq-mechanic-frame) {
-    height: 100% !important;
-    min-height: 0 !important;
-    grid-template-rows: auto minmax(0, 1fr) 108px;
-    align-content: stretch;
-    overflow: visible !important;
-  }
-
-  html.duduq-world-fusion:not(:fullscreen)
-    .duduq-engine-stage:has(.duduq-mechanic-frame) {
-    height: 100% !important;
-    min-height: 0 !important;
     overflow: visible !important;
   }
 }
