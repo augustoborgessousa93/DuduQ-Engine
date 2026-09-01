@@ -35,6 +35,11 @@ async function mount(page,payload){
   await page.evaluate(p=>window.dd225Mount(p),payload);
   await page.waitForFunction(()=>Boolean(document.querySelector("#mount iframe")?.contentDocument?.querySelector(".duduq-dd2-root")),null,{timeout:15000});
   await page.waitForFunction(()=>{const d=document.querySelector("#mount iframe")?.contentDocument;const x=[...(d?.querySelectorAll(".duduq-dd2-item")||[])];return x.length>0&&x.some(n=>!n.disabled)},null,{timeout:15000});
+  // A desmontagem do Host anterior pode publicar a conclusão em uma microtask tardia.
+  // Limpa somente o coletor QA depois que o novo iframe já está pronto; a partir daqui
+  // qualquer onAnswer pertence inequivocamente ao cenário atual.
+  await page.waitForTimeout(60);
+  await page.evaluate(()=>{window.__DD225_RESULTS__=[];window.__DD225_COMPLETIONS__=[];});
 }
 
 async function state(page){return page.evaluate(()=>{const f=document.querySelector("#mount iframe"),d=f?.contentDocument,r=d?.querySelector(".duduq-dd2-root");return{results:window.__DD225_RESULTS__.slice(),completions:window.__DD225_COMPLETIONS__.length,errors:window.__DD225_ERRORS__.slice(),feedback:d?.querySelector(".duduq-engine-feedback")?.getAttribute("data-state")||"",confirm:d?.querySelectorAll(".duduq-dd2-confirm").length||0,smart:r?.getAttribute("data-dd225-smart-snap"),instant:r?.getAttribute("data-dd225-instant-validation"),overflowX:d?Math.max(0,d.body.scrollWidth-d.documentElement.clientWidth):999,bodyHeight:d?.body.scrollHeight||0,viewportH:d?.documentElement.clientHeight||0};});}
@@ -55,7 +60,10 @@ async function runViewport(browser,v){
     await page.waitForFunction(()=>window.__DD225_RESULTS__.length===2&&window.__DD225_RESULTS__[1]?.isCorrect===true,null,{timeout:5000}); await page.waitForFunction(()=>window.__DD225_COMPLETIONS__.length===1,null,{timeout:5000});
 
     await mount(page,classification());
-    await clickPlace(frame,"A","left",!!v.touch); await clickPlace(frame,"B","left",!!v.touch); await clickPlace(frame,"C","right",!!v.touch); s=await state(page); assert(s.results.length===0&&s.confirm===1,`${v.name}: classificação avaliou antes do confirmar`); await confirm(frame); await page.waitForFunction(()=>window.__DD225_RESULTS__.length===1,null,{timeout:5000});
+    await clickPlace(frame,"A","left",!!v.touch); await clickPlace(frame,"B","left",!!v.touch); await clickPlace(frame,"C","right",!!v.touch); s=await state(page);
+    assert(s.results.length===0,`${v.name}: classificação avaliou antes do confirmar: ${JSON.stringify(s.results)}`);
+    assert(s.confirm===1,`${v.name}: classificação não habilitou Confirmar: ${JSON.stringify(s)}`);
+    await confirm(frame); await page.waitForFunction(()=>window.__DD225_RESULTS__.length===1,null,{timeout:5000});
     await page.waitForFunction(()=>{const d=document.querySelector("#mount iframe")?.contentDocument;return Boolean(d?.querySelector('.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="B"]')&&d?.querySelector('.duduq-dd2-zone .duduq-dd2-item[data-dd2-item-id="A"]:disabled')&&d?.querySelector('.duduq-dd2-zone .duduq-dd2-item[data-dd2-item-id="C"]:disabled'));},null,{timeout:3500});
     if(v.touch)await clickPlace(frame,"B","right",true);else await clickPlace(frame,"B","right",false); await confirm(frame); await page.waitForFunction(()=>window.__DD225_RESULTS__.length===2&&window.__DD225_RESULTS__[1]?.isCorrect===true,null,{timeout:5000});
     s=await state(page); assert(s.overflowX<=6,`${v.name}: overflow final ${s.overflowX}px`); assert(errors.length===0&&s.errors.length===0,`${v.name}: JS errors ${[...errors,...s.errors].join(" | ")}`); assert(critical404.length===0,`${v.name}: critical404 ${critical404.join(",")}`);
