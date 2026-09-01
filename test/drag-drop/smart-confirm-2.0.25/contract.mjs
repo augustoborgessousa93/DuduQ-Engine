@@ -19,5 +19,6 @@ expect(candidate.includes("magneticRadiusPx:104")&&candidate.includes("snapRadiu
 expect(candidate.includes("setRetryAnimating(true)")&&candidate.includes("wrongItemIds.slice()"),"retry parcial compartilhado ausente");
 expect(candidate.includes("onRootKeyDown")&&candidate.includes('event.key !== "Escape"'),"Escape acessível ausente");
 expect(candidate.includes("object-fit: contain"),"proteção de mídia ausente");
+expect(candidate.includes("'rejectWrongDrop: false'"),"posicionamento neutro pré-CONFIRMAR não foi aplicado");
 expect(!candidate.includes("React CDN"),"runtime não deve importar React CDN");
 console.log("PASS — Drag & Drop 2.0.25 Smart Confirm static contract");
