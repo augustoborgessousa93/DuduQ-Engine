@@ -1,0 +1,89 @@
+name: Year 1 M05 Official R147 Homologation
+
+on:
+  push:
+    branches:
+      - homolog-year1-m05-official
+    paths:
+      - 'content/english/year-1/module-05/**'
+      - 'test/systemic/year1-m05-official-r147-homologation.mjs'
+      - '.github/workflows/year1-m05-official-r147-homologation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  m05-ten-criteria:
+    name: M05 R147 10/10 — ${{ matrix.viewport }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport:
+          - desktop-1366x768
+          - fullhd-1920x1080
+          - tablet-768x1024
+          - mobile-390x844
+    steps:
+      - name: Checkout M05 candidate
+        uses: actions/checkout@v4
+
+      - name: Syntax
+        run: |
+          node --check content/english/year-1/module-05/module-05.js
+          node --check content/english/year-1/module-05/m05-visual-composition.js
+          node --check test/systemic/year1-m05-official-r147-homologation.mjs
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start M05 candidate server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-m05-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-m05-http.log
+          exit 1
+
+      - name: Run M05 R147 10/10 — ${{ matrix.viewport }}
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          VIEWPORT_NAME: ${{ matrix.viewport }}
+        run: node test/systemic/year1-m05-official-r147-homologation.mjs
+
+      - name: Upload M05 evidence — ${{ matrix.viewport }}
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year1-m05-r147-${{ matrix.viewport }}
+          path: test-results/systemic/year1-m05-official/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  m05-aggregate:
+    name: M05 R147 aggregate 4/4 10/10
+    needs: m05-ten-criteria
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require all four viewport shards
+        env:
+          MATRIX_RESULT: ${{ needs.m05-ten-criteria.result }}
+        run: |
+          if [ "$MATRIX_RESULT" != "success" ]; then
+            echo "M05 R147 aggregate FAIL: matrix result=$MATRIX_RESULT" >&2
+            exit 1
+          fi
+          echo 'M05 R147 PASS 4/4 10/10'
