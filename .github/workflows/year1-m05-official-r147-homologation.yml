@@ -6,8 +6,7 @@ on:
       - homolog-year1-m05-official
     paths:
       - 'content/english/year-1/module-05/**'
-      - 'test/systemic/year1-m05-official-r147-homologation.mjs'
-      - 'test/systemic/year1-m05-official-r147-rerun.mjs'
+      - 'test/systemic/year1-m05-official-r147-turbo-shard.mjs'
       - '.github/workflows/year1-m05-official-r147-homologation.yml'
   workflow_dispatch:
 
@@ -16,9 +15,9 @@ permissions:
 
 jobs:
   m05-ten-criteria:
-    name: M05 R147 10/10 — ${{ matrix.viewport }}
+    name: M05 R147 — ${{ matrix.viewport }} — ${{ matrix.question_range }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
@@ -27,6 +26,10 @@ jobs:
           - fullhd-1920x1080
           - tablet-768x1024
           - mobile-390x844
+        question_range:
+          - Q01-Q04
+          - Q05-Q08
+          - Q09-Q12
     steps:
       - name: Checkout M05 candidate
         uses: actions/checkout@v4
@@ -34,8 +37,7 @@ jobs:
         run: |
           node --check content/english/year-1/module-05/module-05.js
           node --check content/english/year-1/module-05/m05-visual-composition.js
-          node --check test/systemic/year1-m05-official-r147-homologation.mjs
-          node --check test/systemic/year1-m05-official-r147-rerun.mjs
+          node --check test/systemic/year1-m05-official-r147-turbo-shard.mjs
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -53,28 +55,29 @@ jobs:
           done
           cat /tmp/duduq-m05-http.log
           exit 1
-      - name: Run M05 R147 10/10 — ${{ matrix.viewport }}
+      - name: Run M05 turbo shard
         env:
           BASE_URL: http://127.0.0.1:4173
           VIEWPORT_NAME: ${{ matrix.viewport }}
-        run: node test/systemic/year1-m05-official-r147-rerun.mjs
-      - name: Upload M05 evidence — ${{ matrix.viewport }}
+          QUESTION_RANGE: ${{ matrix.question_range }}
+        run: node test/systemic/year1-m05-official-r147-turbo-shard.mjs
+      - name: Upload M05 evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: year1-m05-r147-${{ matrix.viewport }}
+          name: year1-m05-r147-${{ matrix.viewport }}-${{ matrix.question_range }}
           path: test-results/systemic/year1-m05-official/
           if-no-files-found: ignore
           retention-days: 14
 
   m05-aggregate:
-    name: M05 R147 aggregate 4/4 10/10
+    name: M05 R147 aggregate 12/12 shards 10/10
     needs: m05-ten-criteria
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: Require all four viewport shards
+      - name: Require all 12 viewport-range shards
         env:
           MATRIX_RESULT: ${{ needs.m05-ten-criteria.result }}
         run: |
@@ -82,4 +85,4 @@ jobs:
             echo "M05 R147 aggregate FAIL: matrix result=$MATRIX_RESULT" >&2
             exit 1
           fi
-          echo 'M05 R147 PASS 4/4 10/10'
+          echo 'M05 R147 PASS — 12/12 shards — 12/12 questions × 4 viewports — 10/10 criteria'
