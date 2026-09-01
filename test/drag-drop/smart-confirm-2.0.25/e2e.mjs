@@ -41,7 +41,13 @@ async function mount(page,payload){
 
 async function state(page){return page.evaluate(()=>{const f=document.querySelector("#mount iframe"),d=f?.contentDocument,r=d?.querySelector(".duduq-dd2-root");const locations={};d?.querySelectorAll('.duduq-dd2-item[data-dd2-item-id]')?.forEach(n=>{const id=n.getAttribute('data-dd2-item-id');locations[id]=n.closest('[data-dd2-target-id]')?.getAttribute('data-dd2-target-id')||'bank';});return{results:window.__DD225_RESULTS__.slice(),completions:window.__DD225_COMPLETIONS__.length,errors:window.__DD225_ERRORS__.slice(),feedback:d?.querySelector(".duduq-engine-feedback")?.getAttribute("data-state")||"",confirm:d?.querySelectorAll(".duduq-dd2-confirm").length||0,smart:r?.getAttribute("data-dd225-smart-snap"),instant:r?.getAttribute("data-dd225-instant-validation"),locations,overflowX:d?Math.max(0,d.body.scrollWidth-d.documentElement.clientWidth):999,bodyHeight:d?.body.scrollHeight||0,viewportH:d?.documentElement.clientHeight||0};});}
 
-async function clickPlace(frame,itemId,targetId,touch=false){const i=frame.locator(item(itemId)).first(),z=frame.locator(zone(targetId)).first();if(touch)await i.tap({force:true});else await i.click({force:true});await frame.locator(`${item(itemId)}[data-selected="true"]`).waitFor({state:"visible",timeout:2500});if(touch)await z.tap({force:true});else await z.click({force:true});await frame.locator(`${zone(targetId)} ${item(itemId)}`).waitFor({state:"visible",timeout:2500});}
+async function clickFreeEdge(locator,touch){
+  const box=await locator.boundingBox();
+  assert(box,"zona de destino sem bounding box");
+  const position={x:Math.max(4,Math.min(box.width-4,8)),y:Math.max(4,Math.min(box.height-4,box.height-8))};
+  if(touch)await locator.tap({force:true,position});else await locator.click({force:true,position});
+}
+async function clickPlace(frame,itemId,targetId,touch=false){const i=frame.locator(item(itemId)).first(),z=frame.locator(zone(targetId)).first();if(touch)await i.tap({force:true});else await i.click({force:true});await frame.locator(`${item(itemId)}[data-selected="true"]`).waitFor({state:"visible",timeout:2500});await clickFreeEdge(z,touch);await frame.locator(`${zone(targetId)} ${item(itemId)}`).waitFor({state:"visible",timeout:2500});}
 async function keyboardPlace(frame,itemId,targetId){const i=frame.locator(item(itemId)).first(),z=frame.locator(zone(targetId)).first();await i.focus();await i.press("Enter");await frame.locator(`${item(itemId)}[data-selected="true"]`).waitFor({state:"visible",timeout:2500});await z.focus();await z.press("Enter");await frame.locator(`${zone(targetId)} ${item(itemId)}`).waitFor({state:"visible",timeout:2500});}
 async function confirm(frame){await frame.locator(".duduq-dd2-confirm").click({force:true});}
 
