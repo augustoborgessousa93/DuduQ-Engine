@@ -1,0 +1,87 @@
+name: Year 1 M04 Official R147 Rerun
+
+on:
+  push:
+    branches:
+      - homolog-year1-m04-official
+    paths:
+      - 'test/systemic/year1-m04-official-r147-rerun.mjs'
+      - '.github/workflows/year1-m04-official-r147-rerun.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  m04-r147-ten-criteria:
+    name: M04 R147 10/10 — ${{ matrix.viewport }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport:
+          - desktop-1366x768
+          - fullhd-1920x1080
+          - tablet-768x1024
+          - mobile-390x844
+    steps:
+      - name: Checkout M04 R147 candidate
+        uses: actions/checkout@v4
+
+      - name: Syntax
+        run: |
+          node --check test/systemic/year1-m04-official-homologation.mjs
+          node --check test/systemic/year1-m04-official-r147-rerun.mjs
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start M04 candidate server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-m04-r147-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-m04-r147-http.log
+          exit 1
+
+      - name: Run M04 R147 10/10 — ${{ matrix.viewport }}
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          VIEWPORT_NAME: ${{ matrix.viewport }}
+        run: node test/systemic/year1-m04-official-r147-rerun.mjs
+
+      - name: Upload M04 R147 evidence — ${{ matrix.viewport }}
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: year1-m04-r147-${{ matrix.viewport }}
+          path: test-results/systemic/year1-m04-official/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  m04-r147-aggregate:
+    name: M04 R147 aggregate 4/4 10/10
+    needs: m04-r147-ten-criteria
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require all four viewport shards
+        env:
+          MATRIX_RESULT: ${{ needs.m04-r147-ten-criteria.result }}
+        run: |
+          if [ "$MATRIX_RESULT" != "success" ]; then
+            echo "M04 R147 aggregate FAIL: matrix result=$MATRIX_RESULT" >&2
+            exit 1
+          fi
+          echo 'M04 R147 PASS 4/4 10/10'
