@@ -1,0 +1,56 @@
+name: Shared DD Audio Anti-Hang — M06 Q01 Smoke
+
+on:
+  push:
+    branches:
+      - test/shared-dd-audio-anti-hang-m06
+    paths:
+      - 'test/systemic/lib/turbo-item-guard.mjs'
+      - 'test/systemic/shared-dd-audio-smoke.mjs'
+      - '.github/workflows/shared-dd-audio-anti-hang-m06-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  m06-q01-desktop:
+    name: M06 EN1-M6-01 — desktop-1366x768
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax
+        run: |
+          node --check test/systemic/lib/turbo-item-guard.mjs
+          node --check test/systemic/shared-dd-audio-smoke.mjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start candidate server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-shared-smoke-http.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/duduq-shared-smoke-http.log
+          exit 1
+      - name: Smoke EN1-M6-01 only
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          MODULE: '06'
+          QUESTION_ID: EN1-M6-01
+          CORRECT_ID: B
+          WRONG_ID: A
+          VIEWPORT_NAME: desktop-1366x768
+        run: node test/systemic/shared-dd-audio-smoke.mjs
+      - name: Upload smoke evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shared-dd-audio-m06-q01-desktop
+          path: test-results/systemic/shared-dd-audio-smoke/module-06/
+          if-no-files-found: ignore
+          retention-days: 14
