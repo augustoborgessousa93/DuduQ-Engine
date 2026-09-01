@@ -28,22 +28,43 @@ export async function installHeadlessTtsSafety(page) {
           state.calls += 1;
           state.lastText = String(utterance?.text || "");
           state.lastLang = String(utterance?.lang || "");
-          try { utterance?.onstart?.({ type: "start", utterance }); } catch {}
+          try {
+            utterance?.onstart?.({ type: "start", utterance });
+          } catch {}
           const finish = () => {
-            try { utterance?.onend?.({ type: "end", utterance }); } catch {}
+            try {
+              utterance?.onend?.({ type: "end", utterance });
+            } catch {}
           };
-          try { (target.queueMicrotask || queueMicrotask)(finish); }
-          catch { Promise.resolve().then(finish); }
+          try {
+            (target.queueMicrotask || queueMicrotask)(finish);
+          } catch {
+            Promise.resolve().then(finish);
+          }
         };
 
-        const safeCancel = function () { state.cancels += 1; };
+        const safeCancel = function () {
+          state.cancels += 1;
+        };
 
         try {
-          Object.defineProperty(synth, "speak", { configurable: true, writable: true, value: safeSpeak });
-        } catch { try { synth.speak = safeSpeak; } catch {} }
+          Object.defineProperty(synth, "speak", {
+            configurable: true,
+            writable: true,
+            value: safeSpeak,
+          });
+        } catch {
+          try { synth.speak = safeSpeak; } catch {}
+        }
         try {
-          Object.defineProperty(synth, "cancel", { configurable: true, writable: true, value: safeCancel });
-        } catch { try { synth.cancel = safeCancel; } catch {} }
+          Object.defineProperty(synth, "cancel", {
+            configurable: true,
+            writable: true,
+            value: safeCancel,
+          });
+        } catch {
+          try { synth.cancel = safeCancel; } catch {}
+        }
 
         try {
           if (synth.speak !== safeSpeak || synth.cancel !== safeCancel) {
@@ -54,8 +75,11 @@ export async function installHeadlessTtsSafety(page) {
             }
           }
         } catch {}
+
         return synth.speak === safeSpeak;
-      } catch { return false; }
+      } catch {
+        return false;
+      }
     }
 
     patchSpeechWindow(globalThis);
