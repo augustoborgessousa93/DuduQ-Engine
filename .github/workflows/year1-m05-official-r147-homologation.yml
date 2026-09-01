@@ -7,6 +7,7 @@ on:
     paths:
       - 'content/english/year-1/module-05/**'
       - 'test/systemic/year1-m05-official-r147-homologation.mjs'
+      - 'test/systemic/year1-m05-official-r147-rerun.mjs'
       - '.github/workflows/year1-m05-official-r147-homologation.yml'
   workflow_dispatch:
 
@@ -29,23 +30,20 @@ jobs:
     steps:
       - name: Checkout M05 candidate
         uses: actions/checkout@v4
-
       - name: Syntax
         run: |
           node --check content/english/year-1/module-05/module-05.js
           node --check content/english/year-1/module-05/m05-visual-composition.js
           node --check test/systemic/year1-m05-official-r147-homologation.mjs
-
+          node --check test/systemic/year1-m05-official-r147-rerun.mjs
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
-
       - name: Install Playwright Chromium
         run: |
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
-
       - name: Start M05 candidate server
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-m05-http.log 2>&1 &
@@ -55,13 +53,11 @@ jobs:
           done
           cat /tmp/duduq-m05-http.log
           exit 1
-
       - name: Run M05 R147 10/10 — ${{ matrix.viewport }}
         env:
           BASE_URL: http://127.0.0.1:4173
           VIEWPORT_NAME: ${{ matrix.viewport }}
-        run: node test/systemic/year1-m05-official-r147-homologation.mjs
-
+        run: node test/systemic/year1-m05-official-r147-rerun.mjs
       - name: Upload M05 evidence — ${{ matrix.viewport }}
         if: always()
         uses: actions/upload-artifact@v4
