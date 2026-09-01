@@ -7,6 +7,7 @@ on:
     paths:
       - 'content/english/year-1/module-05/**'
       - 'test/systemic/year1-m05-official-r147-turbo-shard.mjs'
+      - 'test/systemic/year1-m05-official-r147-turbo-rerun.mjs'
       - '.github/workflows/year1-m05-official-r147-homologation.yml'
   workflow_dispatch:
 
@@ -21,25 +22,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        viewport:
-          - desktop-1366x768
-          - fullhd-1920x1080
-          - tablet-768x1024
-          - mobile-390x844
-        question_range:
-          - Q01-Q04
-          - Q05-Q08
-          - Q09-Q12
+        viewport: [desktop-1366x768, fullhd-1920x1080, tablet-768x1024, mobile-390x844]
+        question_range: [Q01-Q04, Q05-Q08, Q09-Q12]
     steps:
-      - name: Checkout M05 candidate
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       - name: Syntax
         run: |
           node --check content/english/year-1/module-05/module-05.js
           node --check content/english/year-1/module-05/m05-visual-composition.js
           node --check test/systemic/year1-m05-official-r147-turbo-shard.mjs
-      - name: Setup Node
-        uses: actions/setup-node@v4
+          node --check test/systemic/year1-m05-official-r147-turbo-rerun.mjs
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Install Playwright Chromium
@@ -49,10 +42,7 @@ jobs:
       - name: Start M05 candidate server
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-m05-http.log 2>&1 &
-          for i in {1..30}; do
-            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
-            sleep 1
-          done
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
           cat /tmp/duduq-m05-http.log
           exit 1
       - name: Run M05 turbo shard
@@ -60,7 +50,7 @@ jobs:
           BASE_URL: http://127.0.0.1:4173
           VIEWPORT_NAME: ${{ matrix.viewport }}
           QUESTION_RANGE: ${{ matrix.question_range }}
-        run: node test/systemic/year1-m05-official-r147-turbo-shard.mjs
+        run: node test/systemic/year1-m05-official-r147-turbo-rerun.mjs
       - name: Upload M05 evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -81,8 +71,5 @@ jobs:
         env:
           MATRIX_RESULT: ${{ needs.m05-ten-criteria.result }}
         run: |
-          if [ "$MATRIX_RESULT" != "success" ]; then
-            echo "M05 R147 aggregate FAIL: matrix result=$MATRIX_RESULT" >&2
-            exit 1
-          fi
+          if [ "$MATRIX_RESULT" != "success" ]; then echo "M05 R147 aggregate FAIL: matrix result=$MATRIX_RESULT" >&2; exit 1; fi
           echo 'M05 R147 PASS — 12/12 shards — 12/12 questions × 4 viewports — 10/10 criteria'
