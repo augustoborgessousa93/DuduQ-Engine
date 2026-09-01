@@ -2,81 +2,96 @@ export async function installHeadlessTtsSafety(page) {
   await page.addInitScript(() => {
     if (globalThis.navigator?.webdriver !== true || globalThis.__DUDUQ_QA_TTS_BRIDGE_INSTALLED__) return;
 
-    function patchSpeechWindow(target) {
-      try {
-        if (!target) return false;
-        const synth = target.speechSynthesis;
-        if (!synth) return false;
-
-        let state = target.__DUDUQ_QA_TTS_SAFETY_STATE__;
-        if (!state) {
-          state = {
-            calls: 0,
-            cancels: 0,
-            lastText: "",
-            lastLang: "",
-            nativeSuppressed: true,
-            patchedBeforeMechanicReady: false,
-          };
+    function ensureState(target) {
+      let state = target.__DUDUQ_QA_TTS_SAFETY_STATE__;
+      if (!state) {
+        state = {
+          calls: 0,
+          cancels: 0,
+          lastText: "",
+          lastLang: "",
+          nativeSuppressed: true,
+          fakeObjectInstalled: false,
+          patchedBeforeMechanicReady: false,
+        };
+        try {
           Object.defineProperty(target, "__DUDUQ_QA_TTS_SAFETY_STATE__", {
             value: state,
             configurable: true,
           });
+        } catch {
+          try { target.__DUDUQ_QA_TTS_SAFETY_STATE__ = state; } catch {}
         }
+      }
+      return state;
+    }
 
-        const safeSpeak = function (utterance) {
+    function createSafeSynth(target, state) {
+      const voices = [];
+      const safe = {
+        get speaking() { return false; },
+        get pending() { return false; },
+        get paused() { return false; },
+        speak(utterance) {
           state.calls += 1;
           state.lastText = String(utterance?.text || "");
           state.lastLang = String(utterance?.lang || "");
-          try {
-            utterance?.onstart?.({ type: "start", utterance });
-          } catch {}
+          try { utterance?.onstart?.({ type: "start", utterance }); } catch {}
           const finish = () => {
-            try {
-              utterance?.onend?.({ type: "end", utterance });
-            } catch {}
+            try { utterance?.onend?.({ type: "end", utterance }); } catch {}
           };
-          try {
-            (target.queueMicrotask || queueMicrotask)(finish);
-          } catch {
-            Promise.resolve().then(finish);
-          }
-        };
+          try { (target.queueMicrotask || queueMicrotask)(finish); }
+          catch { Promise.resolve().then(finish); }
+        },
+        cancel() { state.cancels += 1; },
+        pause() {},
+        resume() {},
+        getVoices() { return voices.slice(); },
+        addEventListener() {},
+        removeEventListener() {},
+        dispatchEvent() { return true; },
+        onvoiceschanged: null,
+      };
+      return safe;
+    }
 
-        const safeCancel = function () {
-          state.cancels += 1;
-        };
+    function patchSpeechWindow(target) {
+      try {
+        if (!target) return false;
+        const state = ensureState(target);
+        const safeSynth = createSafeSynth(target, state);
 
         try {
-          Object.defineProperty(synth, "speak", {
+          Object.defineProperty(target, "speechSynthesis", {
             configurable: true,
-            writable: true,
-            value: safeSpeak,
+            enumerable: true,
+            get() { return safeSynth; },
           });
-        } catch {
-          try { synth.speak = safeSpeak; } catch {}
-        }
-        try {
-          Object.defineProperty(synth, "cancel", {
-            configurable: true,
-            writable: true,
-            value: safeCancel,
-          });
-        } catch {
-          try { synth.cancel = safeCancel; } catch {}
-        }
-
-        try {
-          if (synth.speak !== safeSpeak || synth.cancel !== safeCancel) {
-            const proto = Object.getPrototypeOf(synth);
-            if (proto) {
-              Object.defineProperty(proto, "speak", { configurable: true, writable: true, value: safeSpeak });
-              Object.defineProperty(proto, "cancel", { configurable: true, writable: true, value: safeCancel });
-            }
-          }
+          state.fakeObjectInstalled = target.speechSynthesis === safeSynth;
         } catch {}
 
-        return synth.speak === safeSpeak;
+        if (!state.fakeObjectInstalled) {
+          let synth = null;
+          try { synth = target.speechSynthesis; } catch {}
+          if (!synth) return false;
+          try {
+            Object.defineProperty(synth, "speak", { configurable: true, writable: true, value: safeSynth.speak.bind(safeSynth) });
+            Object.defineProperty(synth, "cancel", { configurable: true, writable: true, value: safeSynth.cancel.bind(safeSynth) });
+            Object.defineProperty(synth, "getVoices", { configurable: true, writable: true, value: safeSynth.getVoices.bind(safeSynth) });
+          } catch {
+            try { synth.speak = safeSynth.speak.bind(safeSynth); } catch {}
+            try { synth.cancel = safeSynth.cancel.bind(safeSynth); } catch {}
+          }
+          try {
+            const proto = Object.getPrototypeOf(synth);
+            if (proto) {
+              Object.defineProperty(proto, "speak", { configurable: true, writable: true, value: safeSynth.speak.bind(safeSynth) });
+              Object.defineProperty(proto, "cancel", { configurable: true, writable: true, value: safeSynth.cancel.bind(safeSynth) });
+            }
+          } catch {}
+        }
+
+        return state.fakeObjectInstalled || !!target.speechSynthesis;
       } catch {
         return false;
       }
