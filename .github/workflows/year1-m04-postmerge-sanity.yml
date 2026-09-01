@@ -1,0 +1,75 @@
+name: Year 1 M04 Post-Merge Sanity
+
+on:
+  push:
+    branches:
+      - sanity/year1-m04-r147
+    paths:
+      - '.github/workflows/year1-m04-postmerge-sanity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  m04-compact-sanity:
+    name: M04 sanity — ${{ matrix.viewport }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        viewport:
+          - tablet-768x1024
+          - mobile-390x844
+    steps:
+      - name: Checkout exact post-merge Foundation
+        uses: actions/checkout@v4
+
+      - name: Syntax
+        run: |
+          node --check test/systemic/year1-m04-official-homologation.mjs
+          node --check test/systemic/year1-m04-official-r147-rerun.mjs
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-m04-postmerge-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-m04-postmerge-http.log
+          exit 1
+
+      - name: Run M04 post-merge sanity — ${{ matrix.viewport }}
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          VIEWPORT_NAME: ${{ matrix.viewport }}
+        run: node test/systemic/year1-m04-official-r147-rerun.mjs
+
+  aggregate:
+    name: M04 post-merge sanity 2/2
+    needs: m04-compact-sanity
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require tablet and mobile
+        env:
+          MATRIX_RESULT: ${{ needs.m04-compact-sanity.result }}
+        run: |
+          if [ "$MATRIX_RESULT" != "success" ]; then
+            echo "M04 post-merge sanity FAIL: $MATRIX_RESULT" >&2
+            exit 1
+          fi
+          echo 'M04 post-merge sanity PASS 2/2'
