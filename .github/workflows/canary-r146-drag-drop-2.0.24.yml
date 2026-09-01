@@ -24,6 +24,7 @@ permissions:
 
 jobs:
   promote:
+    if: github.event_name != 'pull_request' || github.head_ref == 'release/canary-r146-drag-drop-2.0.24'
     name: manifest-loader-single-choice-regression
     runs-on: ubuntu-latest
     timeout-minutes: 15
