@@ -1,0 +1,46 @@
+name: Core 1.0.12 Shared Compact Surface
+
+on:
+  push:
+    branches:
+      - fix/shared-compact-mechanic-surface
+    paths:
+      - 'engine/releases/core/1.0.12/**'
+      - 'test/systemic/core-1.0.12-shared-compact-*.mjs'
+      - '.github/workflows/core-1.0.12-shared-compact-surface.yml'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  causal-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax
+        run: node --check test/systemic/core-1.0.12-shared-compact-causal.mjs
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-core-1.0.12-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-core-1.0.12-http.log
+          exit 1
+      - name: Prove shared compact surface causality
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/core-1.0.12-shared-compact-causal.mjs
