@@ -6,8 +6,7 @@ on:
       - homolog-year1-m06-official
     paths:
       - 'content/english/year-1/module-06/**'
-      - 'test/systemic/year1-m06-official-r147-homologation.mjs'
-      - 'test/systemic/year1-m06-official-r147-rerun.mjs'
+      - 'test/systemic/year1-m06-official-r147-turbo-shard.mjs'
       - '.github/workflows/year1-m06-official-r147-homologation.yml'
   workflow_dispatch:
 
@@ -16,9 +15,9 @@ permissions:
 
 jobs:
   m06-ten-criteria:
-    name: M06 R147 10/10 — ${{ matrix.viewport }}
+    name: M06 R147 — ${{ matrix.viewport }} — ${{ matrix.question_range }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
@@ -27,14 +26,17 @@ jobs:
           - fullhd-1920x1080
           - tablet-768x1024
           - mobile-390x844
+        question_range:
+          - Q01-Q04
+          - Q05-Q08
+          - Q09-Q12
     steps:
       - uses: actions/checkout@v4
       - name: Syntax
         run: |
           node --check content/english/year-1/module-06/module-06.js
           node --check content/english/year-1/module-06/m06-visual-composition.js
-          node --check test/systemic/year1-m06-official-r147-homologation.mjs
-          node --check test/systemic/year1-m06-official-r147-rerun.mjs
+          node --check test/systemic/year1-m06-official-r147-turbo-shard.mjs
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -51,28 +53,29 @@ jobs:
           done
           cat /tmp/duduq-m06-http.log
           exit 1
-      - name: Run M06 R147 10/10 — ${{ matrix.viewport }}
+      - name: Run M06 turbo shard
         env:
           BASE_URL: http://127.0.0.1:4173
           VIEWPORT_NAME: ${{ matrix.viewport }}
-        run: node test/systemic/year1-m06-official-r147-rerun.mjs
-      - name: Upload M06 evidence — ${{ matrix.viewport }}
+          QUESTION_RANGE: ${{ matrix.question_range }}
+        run: node test/systemic/year1-m06-official-r147-turbo-shard.mjs
+      - name: Upload M06 evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: year1-m06-r147-${{ matrix.viewport }}
+          name: year1-m06-r147-${{ matrix.viewport }}-${{ matrix.question_range }}
           path: test-results/systemic/year1-m06-official/
           if-no-files-found: ignore
           retention-days: 14
 
   m06-aggregate:
-    name: M06 R147 aggregate 4/4 10/10
+    name: M06 R147 aggregate 12/12 shards 10/10
     needs: m06-ten-criteria
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: Require all four viewport shards
+      - name: Require all 12 viewport-range shards
         env:
           MATRIX_RESULT: ${{ needs.m06-ten-criteria.result }}
         run: |
@@ -80,4 +83,4 @@ jobs:
             echo "M06 R147 aggregate FAIL: matrix result=$MATRIX_RESULT" >&2
             exit 1
           fi
-          echo 'M06 R147 PASS 4/4 10/10'
+          echo 'M06 R147 PASS — 12/12 shards — 12/12 questions × 4 viewports — 10/10 criteria'
