@@ -22,8 +22,10 @@ jobs:
           node --check test/drag-drop/smart-confirm-2.0.25/e2e.mjs
       - name: Static contract
         run: node test/drag-drop/smart-confirm-2.0.25/contract.mjs
-      - name: Install Chromium
-        run: npx --yes playwright@1.55.0 install --with-deps chromium
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
       - name: Start server
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/dd225-server.log 2>&1 &
@@ -32,4 +34,4 @@ jobs:
       - name: Functional suite
         env:
           BASE_URL: http://127.0.0.1:4173
-        run: npx --yes -p playwright@1.55.0 node test/drag-drop/smart-confirm-2.0.25/e2e.mjs
+        run: node test/drag-drop/smart-confirm-2.0.25/e2e.mjs
