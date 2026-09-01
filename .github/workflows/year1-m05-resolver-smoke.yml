@@ -1,0 +1,47 @@
+name: Year 1 M05 Resolver Smoke
+
+on:
+  push:
+    branches:
+      - homolog-year1-m05-official
+    paths:
+      - 'content/english/year-1/module-05/**'
+      - 'test/systemic/year1-m05-resolver-smoke.mjs'
+      - '.github/workflows/year1-m05-resolver-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  m05-resolver-smoke:
+    name: M05 resolver smoke Q07-Q08-Q11
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax
+        run: |
+          node --check content/english/year-1/module-05/module-05.js
+          node --check content/english/year-1/module-05/m05-visual-composition.js
+          node --check test/systemic/year1-m05-resolver-smoke.mjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start candidate server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-m05-smoke-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-m05-smoke-http.log
+          exit 1
+      - name: Run resolver smoke
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/year1-m05-resolver-smoke.mjs
