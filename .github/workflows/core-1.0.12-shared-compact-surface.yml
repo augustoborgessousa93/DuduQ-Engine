@@ -6,7 +6,7 @@ on:
       - fix/shared-compact-mechanic-surface
     paths:
       - 'engine/releases/core/1.0.12/**'
-      - 'test/systemic/core-1.0.12-shared-compact-*.mjs'
+      - 'test/systemic/core-1.0.12-*.mjs'
       - '.github/workflows/core-1.0.12-shared-compact-surface.yml'
   pull_request:
   workflow_dispatch:
@@ -15,9 +15,9 @@ permissions:
   contents: read
 
 jobs:
-  causal-proof:
+  candidate-gate:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 35
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,7 +26,18 @@ jobs:
         with:
           node-version: 22
       - name: Syntax
-        run: node --check test/systemic/core-1.0.12-shared-compact-causal.mjs
+        run: |
+          node --check test/systemic/core-1.0.12-shared-compact-causal.mjs
+          node --check test/systemic/core-1.0.12-shared-compact-regression.mjs
+          node --check test/systemic/core-1.0.12-release-integrity.mjs
+          node --check test/systemic/foundation-architecture-audit.mjs
+          node --check test/systemic/year1-loader-compat-smoke.mjs
+      - name: Core 1.0.12 release integrity
+        run: node test/systemic/core-1.0.12-release-integrity.mjs
+      - name: Foundation contract
+        run: node test/systemic/foundation-architecture-audit.mjs
+      - name: Drag and Drop 2.0.24 contract
+        run: node test/systemic/canary-r146-drag-drop-2.0.24-contract.mjs
       - name: Install Playwright Chromium
         run: |
           npm install --no-save playwright@1.55.0
@@ -44,3 +55,11 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/systemic/core-1.0.12-shared-compact-causal.mjs
+      - name: Validate frozen TS and DD consumers on candidate
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/core-1.0.12-shared-compact-regression.mjs
+      - name: Loader and Player compatibility smoke
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/year1-loader-compat-smoke.mjs
