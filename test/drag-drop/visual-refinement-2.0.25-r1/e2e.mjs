@@ -64,6 +64,8 @@ async function state(page) {
     const removeButtons = [...doc.querySelectorAll(".duduq-dd225-vr-remove")];
     const visibleBank = bank ? getComputedStyle(bank).display !== "none" && bank.getBoundingClientRect().height > 1 : false;
     const root = doc.querySelector(".duduq-dd2-root");
+    const htmlOverflowX = Math.max(0, doc.documentElement.scrollWidth - doc.documentElement.clientWidth);
+    const bodyOverflowX = Math.max(0, doc.body.scrollWidth - doc.body.clientWidth);
     return {
       version: window.dd225vrMechanic?.()?.version || "",
       visualVersion: window.DD225VisualRefinementR1?.version || "",
@@ -81,7 +83,9 @@ async function state(page) {
       objectFits: placedImages.map((node) => getComputedStyle(node).objectFit),
       brokenItemImages: allItemImages.filter((img) => !img.complete || img.naturalWidth < 1 || img.naturalHeight < 1).map((img) => img.currentSrc || img.src),
       removeCount: removeButtons.length,
-      overflowX: Math.max(0, doc.body.scrollWidth - doc.documentElement.clientWidth),
+      htmlOverflowX,
+      bodyOverflowX,
+      overflowX: Math.max(htmlOverflowX, bodyOverflowX),
       rootOverflowX: root ? getComputedStyle(root).overflowX : "",
       feedback: doc.querySelector(".duduq-engine-feedback")?.getAttribute("data-state") || "idle",
       results: window.__DD225VR_RESULTS__.slice(),
@@ -89,6 +93,66 @@ async function state(page) {
       errors: window.__DD225VR_ERRORS__.slice()
     };
   });
+}
+
+async function sampleSuccessOverflow(page, durationMs = 1250, intervalMs = 25) {
+  const started = Date.now();
+  let maxHtml = 0;
+  let maxBody = 0;
+  let feedbackSeen = false;
+  let feedbackReadable = true;
+
+  while (Date.now() - started <= durationMs) {
+    const sample = await page.evaluate(() => {
+      const doc = document.querySelector("#mount iframe")?.contentDocument;
+      if (!doc) return null;
+      const htmlOverflow = Math.max(0, doc.documentElement.scrollWidth - doc.documentElement.clientWidth);
+      const bodyOverflow = Math.max(0, doc.body.scrollWidth - doc.body.clientWidth);
+      const feedback = doc.querySelector('.duduq-engine-feedback[data-state="success"]');
+      const card = feedback?.querySelector(".duduq-engine-feedback-card");
+      const copy = feedback?.querySelector(".duduq-engine-feedback-copy");
+      const cardRect = card?.getBoundingClientRect();
+      const copyRect = copy?.getBoundingClientRect();
+      return {
+        htmlOverflow,
+        bodyOverflow,
+        feedbackSeen: Boolean(feedback),
+        feedbackReadable: !feedback || Boolean(
+          cardRect &&
+          copyRect &&
+          cardRect.left >= -0.5 &&
+          cardRect.right <= doc.documentElement.clientWidth + 0.5 &&
+          copyRect.width > 0 &&
+          copyRect.height > 0
+        )
+      };
+    });
+    if (sample) {
+      maxHtml = Math.max(maxHtml, sample.htmlOverflow);
+      maxBody = Math.max(maxBody, sample.bodyOverflow);
+      feedbackSeen = feedbackSeen || sample.feedbackSeen;
+      feedbackReadable = feedbackReadable && sample.feedbackReadable;
+    }
+    await page.waitForTimeout(intervalMs);
+  }
+
+  const after = await page.evaluate(() => {
+    const doc = document.querySelector("#mount iframe")?.contentDocument;
+    if (!doc) return { htmlOverflow: 999, bodyOverflow: 999 };
+    return {
+      htmlOverflow: Math.max(0, doc.documentElement.scrollWidth - doc.documentElement.clientWidth),
+      bodyOverflow: Math.max(0, doc.body.scrollWidth - doc.body.clientWidth)
+    };
+  });
+
+  return {
+    maxHtml,
+    maxBody,
+    afterHtml: after.htmlOverflow,
+    afterBody: after.bodyOverflow,
+    feedbackSeen,
+    feedbackReadable
+  };
 }
 
 async function waitResult(page, correct, previousCount) {
@@ -159,7 +223,7 @@ async function runViewport(browser, viewport) {
     assert(completeLayout.placedImageWidths.every((value) => value >= 55), `${viewport.name}: imagens posicionadas ficaram pequenas demais (${completeLayout.placedImageWidths.join(",")}).`);
     assert(completeLayout.brokenItemImages.length === 0, `${viewport.name}: imagem quebrou após posicionamento.`);
     assert(completeLayout.confirmBottom <= completeLayout.clientHeight + 3, `${viewport.name}: CONFIRMAR saiu da área visível (${completeLayout.confirmBottom}/${completeLayout.clientHeight}).`);
-    assert(completeLayout.overflowX <= 4, `${viewport.name}: overflow horizontal ${completeLayout.overflowX}px.`);
+    assert(completeLayout.htmlOverflowX === 0 && completeLayout.bodyOverflowX === 0, `${viewport.name}: overflow antes do feedback html=${completeLayout.htmlOverflowX}px body=${completeLayout.bodyOverflowX}px.`);
 
     const removeDog = frame.locator('.duduq-dd2-item-shell:has(.duduq-dd2-item[data-dd2-item-id="dog"]) .duduq-dd225-vr-remove').first();
     await removeDog.click({ force: true });
@@ -203,16 +267,22 @@ async function runViewport(browser, viewport) {
     await place(retryFrame, "backpack", "school");
     await retryFrame.locator(".duduq-dd2-confirm").first().click({ force: true });
     await waitResult(page, true, 1);
+
+    const successOverflow = await sampleSuccessOverflow(page);
     await page.waitForFunction(() => (window.__DD225VR_COMPLETIONS__ || []).length === 1, null, { timeout: 6_000 });
 
     const finalState = await state(page);
+    assert(successOverflow.maxHtml === 0, `${viewport.name}: documentElement gerou ${successOverflow.maxHtml}px durante SUCCESS.`);
+    assert(successOverflow.maxBody === 0, `${viewport.name}: body gerou ${successOverflow.maxBody}px durante SUCCESS.`);
+    assert(successOverflow.afterHtml === 0 && successOverflow.afterBody === 0, `${viewport.name}: overflow após animação html=${successOverflow.afterHtml}px body=${successOverflow.afterBody}px.`);
+    assert(successOverflow.feedbackReadable, `${viewport.name}: feedback SUCCESS saiu da largura útil.`);
     assert(finalState.results.length === 2 && finalState.results[0].isCorrect === false && finalState.results[1].isCorrect === true, `${viewport.name}: retry/success divergiu da lógica 2.0.25.`);
     assert(finalState.completionCount === 1, `${viewport.name}: success não concluiu o exemplo.`);
-    assert(finalState.overflowX <= 4, `${viewport.name}: overflow após retry/success ${finalState.overflowX}px.`);
+    assert(finalState.htmlOverflowX === 0 && finalState.bodyOverflowX === 0, `${viewport.name}: overflow final html=${finalState.htmlOverflowX}px body=${finalState.bodyOverflowX}px.`);
     assert(pageErrors.length === 0, `${viewport.name}: pageError: ${pageErrors.join(" | ")}`);
     assert(critical404.length === 0, `${viewport.name}: critical404 do escopo: ${critical404.join(" | ")}`);
 
-    console.log(`PASS ${viewport.name} wider-targets + empty-bank-hide + conditional-confirm + remove-x + media + retry/success`);
+    console.log(`PASS ${viewport.name} overflow=0px wider-targets + empty-bank-hide + conditional-confirm + remove-x + media + retry/success`);
   } finally {
     await context.close();
   }
@@ -221,7 +291,7 @@ async function runViewport(browser, viewport) {
 const browser = await chromium.launch({ headless: true });
 try {
   for (const viewport of viewports) await runViewport(browser, viewport);
-  console.log("PASS — Drag & Drop 2.0.25 Visual Refinement R1 isolated example");
+  console.log("PASS — Drag & Drop 2.0.25 Visual Refinement R1 isolated example — 3/3 — overflow=0px");
 } finally {
   await browser.close();
 }
