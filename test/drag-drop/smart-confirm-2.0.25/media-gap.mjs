@@ -9,6 +9,7 @@ const ASSETS={
   "pencil-img":ROOT+"school-object-pencil-lapis.png",
   "backpack-img":ROOT+"school-object-backpack-mochila.png"
 };
+const MEDIA_URLS=new Set(Object.values(ASSETS));
 const q={
   id:"media-gap",title:"MEDIA",instruction:"Classifique as imagens.",assets:ASSETS,
   behavior:{shuffleItems:false,shuffleTargets:false},
@@ -38,7 +39,7 @@ await page.addInitScript(()=>{
 });
 const errors=[],critical404=[];
 page.on("pageerror",e=>errors.push(String(e?.message||e)));
-page.on("response",r=>{if(r.status()===404&&(r.url().includes("/engine/")||r.url().includes("/test/drag-drop/")||r.url().includes("Assets-DuduQ")))critical404.push(r.url())});
+page.on("response",r=>{const u=r.url();if(r.status()===404&&(u.includes("/engine/")||u.includes("/test/drag-drop/")||MEDIA_URLS.has(u)))critical404.push(u)});
 const res=await page.goto(`${URL}?gap=media`,{waitUntil:"domcontentloaded",timeout:30000});
 assert(res?.ok(),`MEDIA HTTP ${res?.status()}`);
 await page.waitForFunction(()=>window.dd225Mechanic?.()?.version==="2.0.25",null,{timeout:15000});
