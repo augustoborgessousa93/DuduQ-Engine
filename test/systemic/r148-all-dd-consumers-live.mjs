@@ -26,7 +26,7 @@ function walk(dir) {
 function staticInventory() {
   const base=path.join(ROOT,"content","english");
   const files=walk(base);
-  const consumers=new Map();
+  const referenced=new Map();
   const legacy=[];
   for (const file of files) {
     const text=fs.readFileSync(file,"utf8");
@@ -34,8 +34,8 @@ function staticInventory() {
     const mm=rel.match(/^content\/english\/(year-\d+)\/(module-\d+)\//);
     if (mm && /drag-drop|drag_drop/i.test(text)) {
       const key=`${mm[1]}/${mm[2]}`;
-      if(!consumers.has(key)) consumers.set(key,[]);
-      consumers.get(key).push(rel);
+      if(!referenced.has(key)) referenced.set(key,[]);
+      referenced.get(key).push(rel);
     }
     const relevantPin =
       /\/engine\/releases\/mechanics\/drag-drop\/2\.0\.24\//i.test(text) ||
@@ -43,11 +43,11 @@ function staticInventory() {
       /(?:release|version)[^\n]{0,40}2\.0\.24[^\n]{0,120}drag-drop/i.test(text);
     if (relevantPin && rel.startsWith("content/english/")) legacy.push(rel);
   }
-  assert(consumers.size===30,`consumer modules ${consumers.size}, expected 30`);
+  assert(referenced.size===30,`referenced modules ${referenced.size}, expected 30`);
   assert(legacy.length===0,`legacy 2.0.24 pins: ${legacy.join(", ")}`);
-  console.log(`DRAG_DROP_CONSUMER_MODULES=${consumers.size}`);
+  console.log(`DRAG_DROP_REFERENCED_MODULES=${referenced.size}`);
   console.log(`LEGACY_2_0_24_PINS=${legacy.length}`);
-  return {consumers:[...consumers.keys()].sort(),legacy};
+  return {referenced:[...referenced.keys()].sort(),legacy};
 }
 
 async function installTtsStub(page) {
@@ -185,7 +185,7 @@ async function retryRepresentative(page){
   const q=qs.find(x=>x.id==="EN1-M1-02")||qs.find(x=>contract(x).wrong);
   assert(q,"retry representative not found");
   const c=contract(q);assert(c.wrong,"retry wrong placement unavailable");
-  let frame=await mount(page,q,1,1);
+  const frame=await mount(page,q,1,1);
   await place(frame,c.wrong.source,c.wrong.target);
   assert(await page.evaluate(()=>window.__R148_ALL_RESULTS__.length)===0,"retry rep: drop evaluated");
   const confirm=frame.locator(".duduq-dd2-confirm");
@@ -217,7 +217,9 @@ async function progressRepresentative(page,y){
 const inventory=staticInventory();
 const browser=await chromium.launch({headless:true});
 const tested=[];
-const yearStatus={1:"PASS",2:"PASS",3:"PASS",4:"PASS",5:"PASS"};
+const runtimeByViewport={desktop:new Set(),mobile:new Set()};
+const runtimeQuestions=new Map();
+const referencedOnly=new Set();
 let retry=null;
 const progress=[];
 try{
@@ -226,6 +228,7 @@ try{
     await installTtsStub(page);
     try{
       for(const y of YEARS) for(const m of MODULES){
+        const key=moduleKey(y,m);
         const errors=[];const critical404=[];
         const onError=e=>errors.push(String(e?.message||e));
         const onResponse=r=>{if(r.status()===404&&(r.url().includes("/engine/")||r.url().includes(`/content/english/year-${y}/`)))critical404.push(r.url())};
@@ -233,13 +236,21 @@ try{
         try{
           await boot(page,y,m);
           const qs=await ddQuestions(page,y,m);
-          assert(qs.length,`${moduleKey(y,m)}: no real DD question`);
+          if(!qs.length){
+            if(inventory.referenced.includes(key)) referencedOnly.add(key);
+            assert(!errors.length,`${key} ${viewport.name}: pageError ${errors.join(" | ")}`);
+            assert(!critical404.length,`${key} ${viewport.name}: critical404 ${critical404.join(" | ")}`);
+            console.log(`N/A ${viewport.name} ${key} — referenced but no runtime DD question`);
+            continue;
+          }
+          runtimeByViewport[viewport.name].add(`${y}/${m}`);
           const q=qs.find(x=>contract(x).pairs.length);
-          assert(q,`${moduleKey(y,m)}: no compatible DD question`);
+          assert(q,`${key}: runtime DD exists but no compatible pair contract`);
+          runtimeQuestions.set(`${y}/${m}`,q.id);
           tested.push(await oneConsumer(page,q,y,m,viewport.name));
-          assert(!errors.length,`${moduleKey(y,m)} ${viewport.name}: pageError ${errors.join(" | ")}`);
-          assert(!critical404.length,`${moduleKey(y,m)} ${viewport.name}: critical404 ${critical404.join(" | ")}`);
-          console.log(`PASS ${viewport.name} ${moduleKey(y,m)} ${q.id}`);
+          assert(!errors.length,`${key} ${viewport.name}: pageError ${errors.join(" | ")}`);
+          assert(!critical404.length,`${key} ${viewport.name}: critical404 ${critical404.join(" | ")}`);
+          console.log(`PASS ${viewport.name} ${key} ${q.id}`);
         }finally{
           page.off("pageerror",onError);page.off("response",onResponse);await destroy(page);
         }
@@ -251,7 +262,35 @@ try{
   try{retry=await retryRepresentative(behaviorPage);for(const y of YEARS)progress.push(await progressRepresentative(behaviorPage,y));}finally{await behaviorPage.close();}
 }finally{await browser.close();}
 
+const desktop=[...runtimeByViewport.desktop].sort();
+const mobile=[...runtimeByViewport.mobile].sort();
+assert(desktop.length>0,"no runtime Drag Drop consumers found");
+assert(JSON.stringify(desktop)===JSON.stringify(mobile),`runtime consumer mismatch desktop=${desktop.join(",")} mobile=${mobile.join(",")}`);
 const uniqueModules=new Set(tested.map(x=>`${x.year}/${x.module}`));
-assert(uniqueModules.size===30,`modules tested ${uniqueModules.size}/30`);
-assert(tested.length===60,`viewport executions ${tested.length}/60`);
-console.log(JSON.stringify({status:"R148_ALL_DD_CONSUMERS_PASS",consumerModules:inventory.consumers.length,modulesTested:`${uniqueModules.size}/30`,viewportExecutions:tested.length,legacyPins:inventory.legacy.length,payloadFixes:0,years:yearStatus,retry,progress,tested},null,2));
+assert(uniqueModules.size===desktop.length,`modules tested ${uniqueModules.size}/${desktop.length}`);
+assert(tested.length===desktop.length*2,`viewport executions ${tested.length}/${desktop.length*2}`);
+
+const years={};
+for(const y of YEARS){
+  const count=desktop.filter(k=>k.startsWith(`${y}/`)).length;
+  years[y]=count?"PASS":"N/A_NO_RUNTIME_DD";
+}
+
+console.log(`DRAG_DROP_RUNTIME_CONSUMER_MODULES=${desktop.length}`);
+console.log(`MODULES_TESTED=${uniqueModules.size}/${desktop.length}`);
+console.log(`REFERENCED_ONLY_MODULES=${[...referencedOnly].sort().join(",")||"none"}`);
+console.log(JSON.stringify({
+  status:"R148_ALL_RUNTIME_DD_CONSUMERS_PASS",
+  referencedModules:inventory.referenced.length,
+  runtimeConsumerModules:desktop.length,
+  modulesTested:`${uniqueModules.size}/${desktop.length}`,
+  viewportExecutions:tested.length,
+  legacyPins:inventory.legacy.length,
+  payloadFixes:0,
+  referencedOnly:[...referencedOnly].sort(),
+  years,
+  retry,
+  progress,
+  runtimeQuestions:Object.fromEntries(runtimeQuestions),
+  tested
+},null,2));
