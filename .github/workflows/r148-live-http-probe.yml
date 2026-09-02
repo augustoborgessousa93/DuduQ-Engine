@@ -1,0 +1,36 @@
+name: R148 Live HTTP Probe
+
+on:
+  push:
+    branches:
+      - release/canary-r148-drag-drop-2.0.25
+    paths:
+      - ".github/workflows/r148-live-http-probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Probe public manifest and consumers
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://duduq-engine.pages.dev"
+          STAMP="$(date +%s)"
+          curl -fsSL --retry 3 --retry-delay 2 "$BASE/engine/channels/canary-v1.json?probe=$STAMP" -o /tmp/canary.json
+          echo "PUBLIC MANIFEST:"
+          cat /tmp/canary.json
+          grep -Eq '"revision"[[:space:]]*:[[:space:]]*148' /tmp/canary.json
+          grep -Eq '"drag-drop"[[:space:]]*:[[:space:]]*\{[^}]*"release"[[:space:]]*:[[:space:]]*"2\.0\.25"' /tmp/canary.json
+          for y in 1 3 5; do
+            code="$(curl -sS -o /tmp/y${y}.html -w '%{http_code}' "$BASE/content/english/year-$y/module-01/?probe=$STAMP")"
+            echo "Y${y} HTTP $code"
+            test "$code" = "200"
+            grep -qi '<!doctype html' /tmp/y${y}.html
+          done
+          echo "HTTP_DEPLOYMENT_PASS"
