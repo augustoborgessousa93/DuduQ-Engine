@@ -1,0 +1,78 @@
+name: Canary R148 Drag Drop 2.0.25
+
+on:
+  push:
+    branches:
+      - release/canary-r148-drag-drop-2.0.25
+    paths:
+      - "engine/channels/canary-v1.json"
+      - "engine/channels/canary-r147-rollback.json"
+      - "engine/releases/mechanics/drag-drop/2.0.25/**"
+      - "test/systemic/canary-r148-drag-drop-2.0.25-*.mjs"
+      - ".github/workflows/canary-r148-drag-drop-2.0.25.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  promotion-gate:
+    name: manifest-loader-registration-shell
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax and manifest contract
+        run: |
+          node --check test/systemic/canary-r148-drag-drop-2.0.25-contract.mjs
+          node --check test/systemic/canary-r148-drag-drop-2.0.25-smoke.mjs
+          node --check test/systemic/canary-r148-drag-drop-2.0.25-published-sanity.mjs
+          node test/systemic/canary-r148-drag-drop-2.0.25-contract.mjs
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/r148-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/r148-http.log
+          exit 1
+      - name: Promotion smoke
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/canary-r148-drag-drop-2.0.25-smoke.mjs
+
+  published-sanity:
+    name: years-1-5-proportional-real-consumers
+    needs: promotion-gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/r148-sanity-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/r148-sanity-http.log
+          exit 1
+      - name: Published consumer sanity
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/systemic/canary-r148-drag-drop-2.0.25-published-sanity.mjs
