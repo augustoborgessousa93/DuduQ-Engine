@@ -6,9 +6,9 @@ const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:1366,height:768}});
 const pageErrors=[];const critical404=[];
 page.on("pageerror",e=>pageErrors.push(String(e?.message||e)));
-page.on("response",r=>{if(r.status()===404){const u=r.url();if(u.includes("/engine/")||u.includes("/content/english/"))critical404.push(u)}});
+page.on("response",r=>{if(r.status()===404){const u=r.url();if(u.includes("/engine/")||u.includes("/content/english/year-1/"))critical404.push(u)}});
 try{
-  const response=await page.goto(`${BASE}/test/systemic/year1-loader-compat.html?module=2&qa=canary-r148-dd225`,{waitUntil:"domcontentloaded",timeout:35000});
+  const response=await page.goto(`${BASE}/content/english/year-1/module-01/?qa=canary-r148-dd225`,{waitUntil:"domcontentloaded",timeout:35000});
   assert(response?.ok(),`shell HTTP ${response?.status()}`);
   await page.waitForFunction(()=>window.DUDUQ_ENGINE_READY===true,null,{timeout:35000});
   const boot=await page.evaluate(()=>{
@@ -21,6 +21,7 @@ try{
   assert(boot.channel==="canary-v1",`channel ${boot.channel}`);
   assert(boot.dragDrop?.release==="2.0.25",`DD ${boot.dragDrop?.release}`);
   assert(boot.dragDrop?.adapter?.includes("/drag-drop/2.0.25/drag-drop.js"),"adapter 2.0.25 ausente");
+  assert(boot.required.includes("drag-drop"),"entrypoint real não solicitou drag-drop");
   assert(boot.scripts.some(s=>s.includes("/engine/duduq-loader-v1.js")),"Loader ausente");
   assert(boot.scripts.some(s=>s.includes("/engine/releases/core/1.0.12/duduq-host.js")),"Host Core 1.0.12 ausente");
   assert(boot.scripts.some(s=>s.includes("/engine/releases/core/1.0.12/duduq-router.js")),"Router Core 1.0.12 ausente");
