@@ -31,7 +31,7 @@ jobs:
         run: |
           node --check test/systemic/canary-r148-drag-drop-2.0.25-contract.mjs
           node --check test/systemic/canary-r148-drag-drop-2.0.25-smoke.mjs
-          node --check test/systemic/canary-r148-drag-drop-2.0.25-sanity-v4.mjs
+          node --check test/systemic/canary-r148-drag-drop-2.0.25-sanity-v5.mjs
           node test/systemic/canary-r148-drag-drop-2.0.25-contract.mjs
       - name: Install Playwright Chromium
         run: |
@@ -77,4 +77,4 @@ jobs:
       - name: Published consumer sanity
         env:
           BASE_URL: http://127.0.0.1:4173
-        run: node test/systemic/canary-r148-drag-drop-2.0.25-sanity-v4.mjs
+        run: node test/systemic/canary-r148-drag-drop-2.0.25-sanity-v5.mjs
