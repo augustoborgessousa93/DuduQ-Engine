@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>DuduQ — Drag & Drop 2.0.25 Visual R1</title>
+  <style>
+    html,body{margin:0;width:100%;height:100%;background:#eef6fb;font-family:system-ui,sans-serif}
+    body{overflow:hidden}
+    #mount{width:100vw;height:100vh;min-height:0;overflow:hidden}
+  </style>
+</head>
+<body>
+  <main id="mount" aria-label="Exemplo isolado Drag & Drop 2.0.25 Visual R1"></main>
+
+  <script>
+    window.DUDUQ_ENGINE_BASE = new URL("../../..", window.location.href).href.replace(/\/$/, "");
+    window.__DD225VR_RESULTS__ = [];
+    window.__DD225VR_COMPLETIONS__ = [];
+    window.__DD225VR_ERRORS__ = [];
+    window.__DD225VR_DESTROY__ = null;
+
+    window.addEventListener("error", function (event) {
+      window.__DD225VR_ERRORS__.push(String(event && event.message || event));
+    });
+    window.addEventListener("unhandledrejection", function (event) {
+      window.__DD225VR_ERRORS__.push(String(event && event.reason && (event.reason.stack || event.reason.message) || event.reason || event));
+    });
+    window.addEventListener("message", function (event) {
+      const data = event.data;
+      if (data && data.type === "DUDUQ_DRAG_DROP_RESULT") {
+        window.__DD225VR_RESULTS__.push(data.payload);
+      }
+    });
+  </script>
+
+  <script src="../../../engine/releases/core/1.0.12/duduq-host.js?dd225vr=r1"></script>
+  <script src="../../../engine/releases/mechanics/drag-drop/2.0.25/drag-drop.js?dd225vr=r1"></script>
+  <script src="./visual-refinement.js?v=1"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const ASSET_BASE = "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/";
+
+      function payload(id) {
+        return {
+          id: id || "dd225-visual-r1",
+          title: "ANIMAIS E SAUDAÇÕES",
+          instruction: "Arraste as imagens para os destinos. Depois, confirme.",
+          behavior: {
+            shuffleItems: false,
+            shuffleTargets: false,
+            lockCorrectItemsOnRetry: true,
+            returnIncorrectItemsOnRetry: true
+          },
+          payload: {
+            mode: "classification",
+            strategy: "classification",
+            items: [
+              {
+                id: "ana",
+                label: "HELLO",
+                image: { src: ASSET_BASE + "My%20name.png", alt: "Criança se apresentando" },
+                targetId: "greetings",
+                required: true
+              },
+              {
+                id: "bye",
+                label: "GOODBYE",
+                image: { src: ASSET_BASE + "Bye.png", alt: "Cena de despedida" },
+                targetId: "farewells",
+                required: true
+              },
+              {
+                id: "afternoon",
+                label: "GOOD AFTERNOON",
+                image: { src: ASSET_BASE + "Good%20Afternoon.png", alt: "Cena do período da tarde" },
+                targetId: "greetings",
+                required: true
+              },
+              {
+                id: "bye-2",
+                label: "BYE",
+                image: { src: ASSET_BASE + "Bye.png", alt: "Outra cena de despedida" },
+                targetId: "farewells",
+                required: true
+              }
+            ],
+            targets: [
+              { id: "greetings", label: "SAUDAÇÕES", capacity: 2, kind: "category" },
+              { id: "farewells", label: "DESPEDIDAS", capacity: 2, kind: "category" }
+            ]
+          },
+          feedback: {
+            correct: "Muito bem! Tudo certo.",
+            incorrect: "Revise apenas os itens incorretos e tente novamente."
+          }
+        };
+      }
+
+      window.dd225vrMechanic = function () {
+        return window.DuduQ && window.DuduQ.getMechanic && window.DuduQ.getMechanic("drag-drop");
+      };
+
+      window.dd225vrPayload = payload;
+
+      window.dd225vrMount = function (customPayload) {
+        const mechanic = window.dd225vrMechanic();
+        if (!mechanic || mechanic.version !== "2.0.25") {
+          throw new Error("Drag & Drop 2.0.25 não registrada.");
+        }
+        if (typeof window.__DD225VR_DESTROY__ === "function") {
+          try { window.__DD225VR_DESTROY__(); } catch (_) {}
+        }
+        window.__DD225VR_RESULTS__ = [];
+        window.__DD225VR_COMPLETIONS__ = [];
+        const mount = document.getElementById("mount");
+        mount.innerHTML = "";
+        window.__DD225VR_DESTROY__ = mechanic.mount({
+          container: mount,
+          payload: customPayload || payload(),
+          context: {
+            subject: "english",
+            year: 2,
+            module: 1,
+            stepId: "dd225-visual-r1",
+            stepTitle: "Visual R1",
+            stepIndex: 0,
+            totalSteps: 1
+          },
+          onComplete: function (result) {
+            window.__DD225VR_COMPLETIONS__.push(result);
+          }
+        });
+        window.DD225VisualRefinementR1 && window.DD225VisualRefinementR1.watchMount(mount);
+        return true;
+      };
+
+      window.dd225vrMount();
+    })();
+  </script>
+</body>
+</html>
