@@ -58,8 +58,7 @@ async function snap(){return page.evaluate(()=>{
     targetCount:targets.length,
     mediaCount:mediaImgs.length,
     allImages:imgs.map(x=>({class:x.className,src:x.getAttribute("src"),nw:x.naturalWidth,nh:x.naturalHeight,visibility:getComputedStyle(x).visibility})),
-    rootText:d?.querySelector(".duduq-dd2-root")?.textContent?.slice(0,300)||"",
-    errors:[...errors]
+    rootText:d?.querySelector(".duduq-dd2-root")?.textContent?.slice(0,300)||""
   };
 });}
 
@@ -70,6 +69,7 @@ for(let i=0;i<24;i++){
   await sleep(150);
 }
 const last=samples.at(-1);
+if(errors.length) throw new Error(`MEDIA JS ${errors.join("|")}`);
 if(!last.configAssets.includes("cat-img")) throw new Error("MEDIA registry missing cat-img");
 if(!last.stageItemKeys.some(([id,key])=>id==="cat"&&key==="cat-img")) throw new Error("MEDIA normalized item key missing");
 if(last.mediaCount<6) throw new Error(`MEDIA image count ${last.mediaCount}; flags=${JSON.stringify(last.itemMediaFlags)}; globals=${JSON.stringify(last.globalConfigAssets)}; allImages=${JSON.stringify(last.allImages)}`);
