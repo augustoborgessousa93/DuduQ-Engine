@@ -37,11 +37,13 @@ async function mount(page,q,year,module){
     if(!mech.validate(input)&&q?.payload)input={id:q.id,title:q.metadata?.activityTitle||q.metadata?.screenTitle||"DRAG DROP",instruction:q.instruction||q.statement||"",payload:q.payload};if(!mech.validate(input))throw new Error(`Questão real ${q?.id||""} rejeitada pelo DD 2.0.25`);
     window.__R148_DESTROY__=mech.mount({container:host,payload:input,context:{subject:"english",year,module,stepId:q.id||"sanity",stepTitle:"R148 sanity",stepIndex:0,totalSteps:1},onComplete:r=>window.__R148_DONE__.push(r)});
   },{q,year,module});
-  const deadline=Date.now()+12000;let frame=null;while(Date.now()<deadline&&!frame){frame=page.frames().find(f=>f!==page.mainFrame()&&f.url()==="about:srcdoc");if(!frame)await page.waitForTimeout(80)}assert(frame,`Y${year} M${module}: iframe DD ausente`);await frame.locator(".duduq-dd2-root").waitFor({state:"visible",timeout:12000});
+  await page.locator("#r148-sanity-host iframe").waitFor({state:"attached",timeout:12000});
+  const frame=page.frameLocator("#r148-sanity-host iframe");
+  await frame.locator(".duduq-dd2-root").waitFor({state:"visible",timeout:12000});
   assert(await frame.locator(".duduq-dd2-root").getAttribute("data-dd225-smart-snap")==="true",`Y${year}: smart snap inativo`);assert(await frame.locator(".duduq-dd2-root").getAttribute("data-dd225-instant-validation")==="false",`Y${year}: instant validation ativo`);return frame;
 }
 async function behavioral(page,q,year,module){
-  const c=contract(q);assert(c.pairs.length>0,`Y${year} ${q.id}: sem pares`);assert(c.wrong,`Y${year} ${q.id}: sem erro seguro`);const frame=await mount(page,q,year,module);
+  const c=contract(q);assert(c.pairs.length>0,`Y${year} ${q.id}: sem pares`);assert(c.wrong,`Y${year} ${q.id}: sem erro seguro`);console.log(`SANITY Y${year} M${module} ${q.id}`);const frame=await mount(page,q,year,module);
   const item=id=>frame.locator(`[data-dd2-item-id="${id}"]`).first(),zone=id=>frame.locator(`[data-dd2-target-id="${id}"] .duduq-dd2-zone`).first();const place=async(s,t)=>{await item(s).click({force:true});await zone(t).click({force:true})};
   await place(c.wrong.source,c.wrong.target);assert(await page.evaluate(()=>window.__R148_RESULTS__.length)===0,`Y${year}: drop avaliou`);const confirm=frame.locator(".duduq-dd2-confirm");await confirm.waitFor({state:"visible",timeout:4000});await confirm.click({force:true});await page.waitForFunction(()=>window.__R148_RESULTS__.length===1,null,{timeout:7000});assert((await page.evaluate(()=>window.__R148_RESULTS__[0]))?.isCorrect===false,`Y${year}: retry ausente`);await page.waitForTimeout(900);
   for(const p of c.pairs)await place(p.source,p.target);assert((await page.evaluate(()=>window.__R148_RESULTS__.length))===1,`Y${year}: avaliou antes do Confirmar`);await confirm.click({force:true});await page.waitForFunction(()=>window.__R148_RESULTS__.some(r=>r?.isCorrect===true),null,{timeout:7000});await page.waitForFunction(()=>window.__R148_DONE__.length>0,null,{timeout:7000});
