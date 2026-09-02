@@ -32,7 +32,7 @@ await page.waitForFunction(()=>document.querySelector("#mount iframe")?.contentD
 const frame=page.frameLocator("#mount iframe");
 
 async function snap(){return page.evaluate(()=>{
-  const d=document.querySelector("#mount iframe")?.contentDocument,slots=[...(d?.querySelectorAll(".duduq-dd2-sequence-slot")||[])];
+  const d=document.querySelector("#mount iframe")?.contentDocument,slots=[...(d?.querySelectorAll(".duduq-dd2-sequence-slot")||[])],confirm=d?.querySelector(".duduq-dd2-confirm");
   let cfg=null;try{cfg=JSON.parse(d?.querySelector("#targetShooterConfig")?.textContent||"null")}catch{}
   const stage=cfg?.stages?.[0];
   return {
@@ -42,7 +42,7 @@ async function snap(){return page.evaluate(()=>{
     order:slots.map(s=>s.querySelector("[data-dd2-item-id]")?.getAttribute("data-dd2-item-id")||null),
     rects:slots.map(s=>{const a=s.getBoundingClientRect(),i=s.querySelector("[data-dd2-item-id]")?.getBoundingClientRect();return{a:[a.left,a.top,a.right,a.bottom,a.width,a.height],i:i?[i.left,i.top,i.right,i.bottom,i.width,i.height]:null}}),
     disabled:Object.fromEntries([...(d?.querySelectorAll(".duduq-dd2-item[data-dd2-item-id]")||[])].map(n=>[n.getAttribute("data-dd2-item-id"),n.disabled])),
-    results:__DD225_RESULTS__.slice(),confirm:d?.querySelectorAll(".duduq-dd2-confirm").length||0,complete:__DD225_COMPLETIONS__.length,
+    results:__DD225_RESULTS__.slice(),confirm:confirm?1:0,confirmDisabled:confirm?confirm.disabled:null,feedbackState:d?.querySelector(".duduq-engine-feedback")?.getAttribute("data-state")||null,complete:__DD225_COMPLETIONS__.length,
     overflow:d?Math.max(0,d.body.scrollWidth-d.documentElement.clientWidth):999
   };
 })}
@@ -68,7 +68,7 @@ await tapIntoNextSlot("A");
 await tapIntoNextSlot("C");
 await keyIntoZone("B");
 await dragIntoNextSlot("D");
-s=await snap();assert(JSON.stringify(s.order)===JSON.stringify(["A","C","B","D"]),`SEQUENCE first order ${JSON.stringify(s.order)}`);assert(!s.results.length&&s.confirm===1,"SEQUENCE pre-confirm feedback");layout(s,"SEQUENCE assembled");
+s=await snap();assert(JSON.stringify(s.order)===JSON.stringify(["A","C","B","D"]),`SEQUENCE first order ${JSON.stringify(s.order)}`);assert(!s.results.length&&s.confirm===1&&!s.confirmDisabled,"SEQUENCE pre-confirm feedback");layout(s,"SEQUENCE assembled");
 
 await toBank("C");await toBank("B");await dragIntoNextSlot("B");await dragIntoNextSlot("C");
 s=await snap();assert(JSON.stringify(s.order)===JSON.stringify(["A","B","C","D"]),`SEQUENCE pre-confirm reposition ${JSON.stringify(s.order)}`);assert(!s.results.length,"SEQUENCE reposition evaluated");layout(s,"SEQUENCE repositioned");
@@ -81,7 +81,8 @@ await page.waitForFunction(()=>{const d=document.querySelector("#mount iframe")?
 s=await snap();assert(s.results[0]?.isCorrect===false,"SEQUENCE wrong did not retry");assert(s.disabled.A&&s.disabled.D&&!s.disabled.B&&!s.disabled.C,"SEQUENCE partial retry contract");assert(JSON.stringify(s.order)===JSON.stringify(["A",null,null,"D"]),`SEQUENCE preserved positions ${JSON.stringify(s.order)}`);layout(s,"SEQUENCE retry");
 
 await dragIntoNextSlot("B");await dragIntoNextSlot("C");
-s=await snap();assert(JSON.stringify(s.order)===JSON.stringify(["A","B","C","D"]),`SEQUENCE final order ${JSON.stringify(s.order)}`);assert(s.results.length===1&&s.confirm===1,"SEQUENCE correction auto-evaluated");layout(s,"SEQUENCE corrected");
+await page.waitForFunction(()=>{const d=document.querySelector("#mount iframe")?.contentDocument,c=d?.querySelector(".duduq-dd2-confirm"),f=d?.querySelector(".duduq-engine-feedback")?.getAttribute("data-state");return Boolean(c&&!c.disabled&&f==="idle")},null,{timeout:3000});
+s=await snap();assert(JSON.stringify(s.order)===JSON.stringify(["A","B","C","D"]),`SEQUENCE final order ${JSON.stringify(s.order)}`);assert(s.results.length===1&&s.confirm===1&&!s.confirmDisabled&&s.feedbackState==="idle",`SEQUENCE correction not ready ${JSON.stringify({feedback:s.feedbackState,disabled:s.confirmDisabled})}`);layout(s,"SEQUENCE corrected");
 await frame.locator(".duduq-dd2-confirm").click({force:true});
 await page.waitForFunction(()=>__DD225_RESULTS__.length===2&&__DD225_RESULTS__[1]?.isCorrect===true,null,{timeout:5000});
 await page.waitForFunction(()=>__DD225_COMPLETIONS__.length===1,null,{timeout:5000});
