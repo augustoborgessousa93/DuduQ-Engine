@@ -6,6 +6,7 @@ on:
       - refine/target-shooter-1.0.22-20260902
     paths:
       - "test/refinement/target-shooter-baseline-1.0.21.mjs"
+      - "test/refinement/target-shooter-baseline-followup-1.0.21.mjs"
       - ".github/workflows/target-shooter-baseline-1.0.21.yml"
   workflow_dispatch:
 
@@ -38,3 +39,7 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/refinement/target-shooter-baseline-1.0.21.mjs
+      - name: Prove functional clusters and image candidates
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/refinement/target-shooter-baseline-followup-1.0.21.mjs
