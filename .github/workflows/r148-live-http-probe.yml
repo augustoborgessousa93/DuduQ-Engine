@@ -22,12 +22,16 @@ jobs:
           set -u
           BASE="https://duduq-engine.pages.dev"
           STAMP="$(date +%s)"
+          echo "=== MANIFEST HEADERS ==="
+          curl -sS -D - -o /dev/null "$BASE/engine/channels/canary-v1.json?probe=$STAMP" | tr -d '\r'
+          echo "=== DD 2.0.25 HEADERS ==="
+          curl -sS -D - -o /dev/null "$BASE/engine/releases/mechanics/drag-drop/2.0.25/drag-drop.js?probe=$STAMP" | tr -d '\r'
+
           curl -fsSL --retry 3 --retry-delay 2 "$BASE/engine/channels/canary-v1.json?probe=$STAMP" -o /tmp/canary.json
-          echo "PUBLIC MANIFEST:"
-          cat /tmp/canary.json
           REV="$(python3 -c 'import json;print(json.load(open("/tmp/canary.json")).get("revision"))')"
           DD="$(python3 -c 'import json;print(json.load(open("/tmp/canary.json")).get("mechanics",{}).get("drag-drop",{}).get("release"))')"
-          echo "PUBLIC REVISION=$REV DRAG_DROP=$DD"
+          STATUS="$(python3 -c 'import json;print(json.load(open("/tmp/canary.json")).get("status"))')"
+          echo "PUBLIC REVISION=$REV DRAG_DROP=$DD STATUS=$STATUS"
 
           dd25="$(curl -sS -o /tmp/dd25.js -w '%{http_code}' "$BASE/engine/releases/mechanics/drag-drop/2.0.25/drag-drop.js?probe=$STAMP")"
           echo "DD 2.0.25 ADAPTER HTTP $dd25"
