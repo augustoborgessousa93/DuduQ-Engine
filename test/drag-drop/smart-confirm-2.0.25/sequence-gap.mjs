@@ -55,6 +55,7 @@ async function selectTap(id){const x=frame.locator(item(id)).first();await x.tap
 async function tapIntoNextSlot(id){await selectTap(id);const slot=frame.locator('.duduq-dd2-sequence-slot[data-filled="false"]').first();await slot.tap({force:true});await frame.locator(`${zone} ${item(id)}`).waitFor({state:"visible",timeout:3000})}
 async function keyIntoZone(id){const x=frame.locator(item(id)).first(),z=frame.locator(zone).first();await x.focus();await x.press("Enter");await frame.locator(`${item(id)}[data-selected="true"]`).waitFor({state:"visible",timeout:3000});await z.focus();await z.press("Enter");await frame.locator(`${zone} ${item(id)}`).waitFor({state:"visible",timeout:3000})}
 async function dragTo(id,to){const a=await frame.locator(item(id)).first().boundingBox(),b=await to.boundingBox();assert(a&&b,`SEQUENCE drag box ${id}`);await page.mouse.move(a.x+a.width/2,a.y+a.height/2);await page.mouse.down();await page.mouse.move(b.x+b.width/2,b.y+b.height/2,{steps:12});await page.mouse.up()}
+async function dragIntoNextSlot(id){const slot=frame.locator('.duduq-dd2-sequence-slot[data-filled="false"]').first();await dragTo(id,slot);await frame.locator(`${zone} ${item(id)}`).waitFor({state:"visible",timeout:3000})}
 async function toBank(id){const bank=frame.locator(".duduq-dd2-bank").first();await dragTo(id,bank);await frame.locator(`.duduq-dd2-bank ${item(id)}`).waitFor({state:"visible",timeout:3000})}
 
 let s=await snap();
@@ -66,14 +67,13 @@ assert(s.confirm===0&&!s.results.length,"SEQUENCE early feedback");layout(s,"SEQ
 await tapIntoNextSlot("A");
 await tapIntoNextSlot("C");
 await keyIntoZone("B");
-await dragTo("D",frame.locator('.duduq-dd2-sequence-slot[data-filled="false"]').first());
-await frame.locator(`${zone} ${item("D")}`).waitFor({state:"visible",timeout:3000});
+await dragIntoNextSlot("D");
 s=await snap();assert(JSON.stringify(s.order)===JSON.stringify(["A","C","B","D"]),`SEQUENCE first order ${JSON.stringify(s.order)}`);assert(!s.results.length&&s.confirm===1,"SEQUENCE pre-confirm feedback");layout(s,"SEQUENCE assembled");
 
-await toBank("C");await toBank("B");await keyIntoZone("B");await keyIntoZone("C");
+await toBank("C");await toBank("B");await dragIntoNextSlot("B");await dragIntoNextSlot("C");
 s=await snap();assert(JSON.stringify(s.order)===JSON.stringify(["A","B","C","D"]),`SEQUENCE pre-confirm reposition ${JSON.stringify(s.order)}`);assert(!s.results.length,"SEQUENCE reposition evaluated");layout(s,"SEQUENCE repositioned");
 
-await toBank("B");await toBank("C");await keyIntoZone("C");await keyIntoZone("B");
+await toBank("B");await toBank("C");await dragIntoNextSlot("C");await dragIntoNextSlot("B");
 s=await snap();assert(JSON.stringify(s.order)===JSON.stringify(["A","C","B","D"]),`SEQUENCE retry setup ${JSON.stringify(s.order)}`);assert(!s.results.length,"SEQUENCE retry setup evaluated");
 await frame.locator(".duduq-dd2-confirm").click({force:true});
 await page.waitForFunction(()=>__DD225_RESULTS__.length===1,null,{timeout:5000});
