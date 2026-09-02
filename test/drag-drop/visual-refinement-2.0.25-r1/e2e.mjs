@@ -38,9 +38,7 @@ async function waitMounted(page) {
 async function place(frame, itemId, targetId) {
   const item = frame.locator(itemSelector(itemId)).first();
   const zone = frame.locator(zoneSelector(targetId)).first();
-  await item.click({ force: true });
-  await frame.locator(`${itemSelector(itemId)}[data-selected="true"]`).first().waitFor({ state: "visible", timeout: 3_000 });
-  await zone.click({ force: true });
+  await item.dragTo(zone, { force: true });
   await frame.locator(`${zoneSelector(targetId)} ${itemSelector(itemId)}`).first().waitFor({ state: "visible", timeout: 3_000 });
 }
 
