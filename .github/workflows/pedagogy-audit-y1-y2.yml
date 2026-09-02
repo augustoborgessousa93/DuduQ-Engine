@@ -1,0 +1,40 @@
+name: Pedagogy Audit Year 1-2
+
+on:
+  push:
+    branches:
+      - audit/pedagogy-y1-y2-20260902
+    paths:
+      - "test/refinement/pedagogy-audit-y1-y2.mjs"
+      - ".github/workflows/pedagogy-audit-y1-y2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright Chromium once
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/pedagogy-audit-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/pedagogy-audit-http.log
+          exit 1
+      - name: Audit Year 1 and Year 2
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/refinement/pedagogy-audit-y1-y2.mjs
