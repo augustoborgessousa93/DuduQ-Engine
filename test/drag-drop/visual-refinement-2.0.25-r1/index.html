@@ -42,13 +42,20 @@
     (function () {
       "use strict";
 
-      const ASSET_BASE = "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/";
+      const ASSET_BASE = "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/";
+      const ASSETS = {
+        "cat-img": ASSET_BASE + "pet-cat-gato.png",
+        "dog-img": ASSET_BASE + "pet-dog-cachorro.png",
+        "pencil-img": ASSET_BASE + "school-object-pencil-lapis.png",
+        "backpack-img": ASSET_BASE + "school-object-backpack-mochila.png"
+      };
 
       function payload(id) {
         return {
           id: id || "dd225-visual-r1",
-          title: "ANIMAIS E SAUDAÇÕES",
+          title: "CLASSIFIQUE AS IMAGENS",
           instruction: "Arraste as imagens para os destinos. Depois, confirme.",
+          assets: ASSETS,
           behavior: {
             shuffleItems: false,
             shuffleTargets: false,
@@ -60,37 +67,41 @@
             strategy: "classification",
             items: [
               {
-                id: "ana",
-                label: "HELLO",
-                image: { src: ASSET_BASE + "My%20name.png", alt: "Criança se apresentando" },
-                targetId: "greetings",
+                id: "cat",
+                label: "CAT",
+                imageAsset: { assetKey: "cat-img" },
+                alt: "Cat",
+                targetId: "pets",
                 required: true
               },
               {
-                id: "bye",
-                label: "GOODBYE",
-                image: { src: ASSET_BASE + "Bye.png", alt: "Cena de despedida" },
-                targetId: "farewells",
+                id: "dog",
+                label: "DOG",
+                imageAsset: { assetKey: "dog-img" },
+                alt: "Dog",
+                targetId: "pets",
                 required: true
               },
               {
-                id: "afternoon",
-                label: "GOOD AFTERNOON",
-                image: { src: ASSET_BASE + "Good%20Afternoon.png", alt: "Cena do período da tarde" },
-                targetId: "greetings",
+                id: "pencil",
+                label: "PENCIL",
+                imageAsset: { assetKey: "pencil-img" },
+                alt: "Pencil",
+                targetId: "school",
                 required: true
               },
               {
-                id: "bye-2",
-                label: "BYE",
-                image: { src: ASSET_BASE + "Bye.png", alt: "Outra cena de despedida" },
-                targetId: "farewells",
+                id: "backpack",
+                label: "BACKPACK",
+                imageAsset: { assetKey: "backpack-img" },
+                alt: "Backpack",
+                targetId: "school",
                 required: true
               }
             ],
             targets: [
-              { id: "greetings", label: "SAUDAÇÕES", capacity: 2, kind: "category" },
-              { id: "farewells", label: "DESPEDIDAS", capacity: 2, kind: "category" }
+              { id: "pets", label: "ANIMAIS", capacity: 2, kind: "category" },
+              { id: "school", label: "OBJETOS ESCOLARES", capacity: 2, kind: "category" }
             ]
           },
           feedback: {

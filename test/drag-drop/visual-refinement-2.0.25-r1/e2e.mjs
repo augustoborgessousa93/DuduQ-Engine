@@ -23,7 +23,10 @@ function zoneSelector(id) {
 
 function isExampleMediaUrl(url) {
   const decoded = decodeURIComponent(url);
-  return decoded.endsWith("/My name.png") || decoded.endsWith("/Bye.png") || decoded.endsWith("/Good Afternoon.png");
+  return decoded.endsWith("/pet-cat-gato.png") ||
+    decoded.endsWith("/pet-dog-cachorro.png") ||
+    decoded.endsWith("/school-object-pencil-lapis.png") ||
+    decoded.endsWith("/school-object-backpack-mochila.png");
 }
 
 async function waitMounted(page) {
@@ -125,7 +128,7 @@ async function runViewport(browser, viewport) {
       const doc = document.querySelector("#mount iframe")?.contentDocument;
       const images = [...(doc?.querySelectorAll(".duduq-dd2-item-media") || [])];
       return images.length === 4 && images.every((img) => img.complete && img.naturalWidth > 0 && img.naturalHeight > 0);
-    }, null, { timeout: 10_000 });
+    }, null, { timeout: 20_000 });
 
     const initial = await state(page);
     assert(initial.version === "2.0.25", `${viewport.name}: versão oficial divergente (${initial.version}).`);
@@ -135,10 +138,10 @@ async function runViewport(browser, viewport) {
     assert(initial.confirmCount === 0, `${viewport.name}: CONFIRMAR apareceu antes de todos os itens estarem posicionados.`);
     assert(initial.brokenItemImages.length === 0, `${viewport.name}: mídia do exemplo não carregou: ${initial.brokenItemImages.join(" | ")}`);
 
-    await place(frame, "ana", "greetings");
-    await place(frame, "afternoon", "greetings");
-    await place(frame, "bye", "farewells");
-    await place(frame, "bye-2", "farewells");
+    await place(frame, "cat", "pets");
+    await place(frame, "dog", "pets");
+    await place(frame, "pencil", "school");
+    await place(frame, "backpack", "school");
 
     await page.waitForFunction(() => {
       const doc = document.querySelector("#mount iframe")?.contentDocument;
@@ -158,12 +161,12 @@ async function runViewport(browser, viewport) {
     assert(completeLayout.confirmBottom <= completeLayout.clientHeight + 3, `${viewport.name}: CONFIRMAR saiu da área visível (${completeLayout.confirmBottom}/${completeLayout.clientHeight}).`);
     assert(completeLayout.overflowX <= 4, `${viewport.name}: overflow horizontal ${completeLayout.overflowX}px.`);
 
-    const removeAfternoon = frame.locator('.duduq-dd2-item-shell:has(.duduq-dd2-item[data-dd2-item-id="afternoon"]) .duduq-dd225-vr-remove').first();
-    await removeAfternoon.click({ force: true });
+    const removeDog = frame.locator('.duduq-dd2-item-shell:has(.duduq-dd2-item[data-dd2-item-id="dog"]) .duduq-dd225-vr-remove').first();
+    await removeDog.click({ force: true });
     await page.waitForFunction(() => {
       const doc = document.querySelector("#mount iframe")?.contentDocument;
       return Boolean(
-        doc?.querySelector('.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="afternoon"]') &&
+        doc?.querySelector('.duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id="dog"]') &&
         !doc?.querySelector(".duduq-dd2-confirm") &&
         getComputedStyle(doc.querySelector(".duduq-dd2-bank")).display !== "none"
       );
@@ -171,33 +174,33 @@ async function runViewport(browser, viewport) {
 
     const afterRemove = await state(page);
     assert(afterRemove.bankVisible, `${viewport.name}: banco não reapareceu após ×.`);
-    assert(afterRemove.bankItemIds.includes("afternoon"), `${viewport.name}: × não devolveu o item ao banco.`);
+    assert(afterRemove.bankItemIds.includes("dog"), `${viewport.name}: × não devolveu o item ao banco.`);
     assert(afterRemove.confirmCount === 0, `${viewport.name}: CONFIRMAR permaneceu visível após remover item.`);
 
-    await place(frame, "afternoon", "greetings");
+    await place(frame, "dog", "pets");
     await frame.locator(".duduq-dd2-confirm").first().waitFor({ state: "visible", timeout: 3_000 });
 
-    /* Retry/success regression: fresh mount, two swapped items, explicit Confirm. */
+    /* Retry/success regression: fresh mount, two correct and two swapped. */
     await remount(page, `${viewport.name}-retry`);
     const retryFrame = page.frameLocator("#mount iframe");
-    await place(retryFrame, "ana", "greetings");
-    await place(retryFrame, "bye", "farewells");
-    await place(retryFrame, "afternoon", "farewells");
-    await place(retryFrame, "bye-2", "greetings");
+    await place(retryFrame, "cat", "pets");
+    await place(retryFrame, "pencil", "school");
+    await place(retryFrame, "dog", "school");
+    await place(retryFrame, "backpack", "pets");
     await retryFrame.locator(".duduq-dd2-confirm").first().click({ force: true });
     await waitResult(page, false, 0);
     await page.waitForFunction(() => {
       const doc = document.querySelector("#mount iframe")?.contentDocument;
       const bankIds = [...(doc?.querySelectorAll(".duduq-dd2-bank .duduq-dd2-item[data-dd2-item-id]") || [])].map((node) => node.getAttribute("data-dd2-item-id"));
-      return bankIds.includes("afternoon") && bankIds.includes("bye-2") && !doc?.querySelector(".duduq-dd2-confirm");
-    }, null, { timeout: 4_000 });
+      return bankIds.includes("dog") && bankIds.includes("backpack") && !doc?.querySelector(".duduq-dd2-confirm");
+    }, null, { timeout: 5_000 });
 
     const retryState = await state(page);
     assert(retryState.bankVisible, `${viewport.name}: retry não reabriu o banco.`);
     assert(retryState.confirmCount === 0, `${viewport.name}: CONFIRMAR deveria sumir durante estado incompleto pós-retry.`);
 
-    await place(retryFrame, "afternoon", "greetings");
-    await place(retryFrame, "bye-2", "farewells");
+    await place(retryFrame, "dog", "pets");
+    await place(retryFrame, "backpack", "school");
     await retryFrame.locator(".duduq-dd2-confirm").first().click({ force: true });
     await waitResult(page, true, 1);
     await page.waitForFunction(() => (window.__DD225VR_COMPLETIONS__ || []).length === 1, null, { timeout: 6_000 });
