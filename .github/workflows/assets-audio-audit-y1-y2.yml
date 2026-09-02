@@ -5,6 +5,7 @@ on:
     branches:
       - audit/assets-audio-y1-y2-20260902
     paths:
+      - "test/refinement/*media-audit-y1-y2.mjs"
       - "test/refinement/assets-audio-audit-y1-y2.mjs"
       - ".github/workflows/assets-audio-audit-y1-y2.yml"
   workflow_dispatch:
@@ -15,7 +16,7 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -34,7 +35,11 @@ jobs:
           done
           cat /tmp/assets-audio-http.log
           exit 1
-      - name: Audit Year 1 and Year 2 assets/audio
+      - name: Static assets/audio audit
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/refinement/assets-audio-audit-y1-y2.mjs
+      - name: Rendered media classification
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/refinement/rendered-media-audit-y1-y2.mjs
