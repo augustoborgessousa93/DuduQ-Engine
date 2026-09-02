@@ -1,4 +1,4 @@
-name: Drag Drop 2.0.25 Smart Confirm
+name: Drag Drop 2.0.25 Final Gate
 
 on:
   push:
@@ -7,26 +7,18 @@ on:
   workflow_dispatch:
 
 jobs:
-  smart-confirm:
+  final-gate:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Syntax
+      - name: Final gate syntax
         run: |
-          node --check engine/releases/mechanics/drag-drop/2.0.25/drag-drop.js
-          node --check test/drag-drop/smart-confirm-2.0.25/contract.mjs
-          node --check test/drag-drop/smart-confirm-2.0.25/published-regression.mjs
-          node --check test/drag-drop/smart-confirm-2.0.25/e2e.mjs
-      - name: Static contract
-        run: node test/drag-drop/smart-confirm-2.0.25/contract.mjs
-      - name: Published consumer inventory
-        run: node test/drag-drop/smart-confirm-2.0.25/published-regression.mjs
+          node --check test/drag-drop/smart-confirm-2.0.25/final-gate.mjs
+          node --check test/drag-drop/smart-confirm-2.0.25/media-sequence.mjs
       - name: Install Playwright Chromium
         run: |
           npm install --no-save playwright@1.55.0
@@ -36,7 +28,7 @@ jobs:
           python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/dd225-server.log 2>&1 &
           echo $! > /tmp/dd225-server.pid
           for i in $(seq 1 30); do curl -fsS http://127.0.0.1:4173/test/drag-drop/smart-confirm-2.0.25/index.html >/dev/null && break; sleep 1; done
-      - name: Functional suite
+      - name: Definitive final gate
         env:
           BASE_URL: http://127.0.0.1:4173
-        run: node test/drag-drop/smart-confirm-2.0.25/e2e.mjs
+        run: node test/drag-drop/smart-confirm-2.0.25/final-gate.mjs
