@@ -1,0 +1,6 @@
+DuduQ Pages production deployment marker
+revision=148
+drag-drop=2.0.25
+core=1.0.12
+source-main=08fe744b2a24988437957390461b82a17f14f95e
+created=2026-09-02
