@@ -1,0 +1,40 @@
+name: Year2 M01 PED-06 Verification
+
+on:
+  push:
+    branches:
+      - audit/pedagogy-y1-y2-20260902
+    paths:
+      - "test/refinement/year2-m01-visual-p0-verification.mjs"
+      - ".github/workflows/year2-m01-visual-p0-verification.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright Chromium once
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/ped06-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/ped06-http.log
+          exit 1
+      - name: Verify EN2-M1-01 and EN2-M1-05
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/refinement/year2-m01-visual-p0-verification.mjs
