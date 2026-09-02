@@ -18,6 +18,7 @@ jobs:
       - name: Gate syntax
         run: |
           node --check test/drag-drop/smart-confirm-2.0.25/final-gate.mjs
+          node --check test/drag-drop/smart-confirm-2.0.25/media-gap.mjs
           node --check test/drag-drop/smart-confirm-2.0.25/media-sequence.mjs
           node --check test/drag-drop/smart-confirm-2.0.25/media-render-probe.mjs
       - name: Install Playwright Chromium
@@ -35,7 +36,7 @@ jobs:
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
           if [[ "$COMMIT_MESSAGE" == *"[media-only]"* ]]; then
-            node test/drag-drop/smart-confirm-2.0.25/media-render-probe.mjs
+            node test/drag-drop/smart-confirm-2.0.25/media-gap.mjs
           elif [[ "$COMMIT_MESSAGE" == *"[sequence-only]"* ]]; then
             DD225_SCENARIO=sequence node test/drag-drop/smart-confirm-2.0.25/media-sequence.mjs
           else
