@@ -47,5 +47,5 @@
     "canonicalAssetRuntimeCommit": "f0f8bed8e8c24fad4eae204bf4a5cc84a8d8263f"
   },
   "channel": "canary-v1",
-  "status": "approved-r148-drag-drop-2.0.25"
+  "status": "approved-r148-drag-drop-2.0.25-redeploy-1"
 }
