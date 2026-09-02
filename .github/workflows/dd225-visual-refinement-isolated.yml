@@ -1,0 +1,45 @@
+name: DD225 Visual Refinement Isolated
+
+on:
+  push:
+    branches:
+      - refine/drag-drop-2.0.25-visual-card-r1-20260902
+    paths:
+      - "test/drag-drop/visual-refinement-2.0.25-r1/**"
+      - ".github/workflows/dd225-visual-refinement-isolated.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  visual-r1:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax
+        run: |
+          node --check test/drag-drop/visual-refinement-2.0.25-r1/e2e.mjs
+          node --check test/drag-drop/visual-refinement-2.0.25-r1/visual-refinement.js
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/dd225-visual-r1-http.log 2>&1 &
+          echo $! > /tmp/dd225-visual-r1-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/test/drag-drop/visual-refinement-2.0.25-r1/index.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/dd225-visual-r1-http.log
+          exit 1
+      - name: Validate visual refinement R1
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/visual-refinement-2.0.25-r1/e2e.mjs
