@@ -16,37 +16,48 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 4
     steps:
-      - name: Probe public manifest and consumers
+      - name: Fingerprint public deployment
         shell: bash
         run: |
-          set -u
+          set -euo pipefail
+          REPO="augustoborgessousa93/DuduQ-Engine"
           BASE="https://duduq-engine.pages.dev"
-          STAMP="$(date +%s)"
-          echo "=== MANIFEST HEADERS ==="
-          curl -sS -D - -o /dev/null "$BASE/engine/channels/canary-v1.json?probe=$STAMP" | tr -d '\r'
-          echo "=== DD 2.0.25 HEADERS ==="
-          curl -sS -D - -o /dev/null "$BASE/engine/releases/mechanics/drag-drop/2.0.25/drag-drop.js?probe=$STAMP" | tr -d '\r'
+          STAMP="$(date +%s%N)"
 
-          curl -fsSL --retry 3 --retry-delay 2 "$BASE/engine/channels/canary-v1.json?probe=$STAMP" -o /tmp/canary.json
-          REV="$(python3 -c 'import json;print(json.load(open("/tmp/canary.json")).get("revision"))')"
-          DD="$(python3 -c 'import json;print(json.load(open("/tmp/canary.json")).get("mechanics",{}).get("drag-drop",{}).get("release"))')"
-          STATUS="$(python3 -c 'import json;print(json.load(open("/tmp/canary.json")).get("status"))')"
-          echo "PUBLIC REVISION=$REV DRAG_DROP=$DD STATUS=$STATUS"
+          curl -fsSL "$BASE/engine/channels/canary-v1.json?probe=$STAMP" -D /tmp/public.headers -o /tmp/public.json
+          curl -fsSL "https://raw.githubusercontent.com/$REPO/main/engine/channels/canary-v1.json?probe=$STAMP" -o /tmp/main.json
+          curl -fsSL "https://raw.githubusercontent.com/$REPO/main/engine/channels/canary-r147-rollback.json?probe=$STAMP" -o /tmp/r147.json
+          curl -fsSL "https://raw.githubusercontent.com/$REPO/release/canary-r148-drag-drop-2.0.25/engine/channels/canary-v1.json?probe=$STAMP" -o /tmp/r148.json
 
-          dd25="$(curl -sS -o /tmp/dd25.js -w '%{http_code}' "$BASE/engine/releases/mechanics/drag-drop/2.0.25/drag-drop.js?probe=$STAMP")"
-          echo "DD 2.0.25 ADAPTER HTTP $dd25"
+          echo "=== MANIFEST FINGERPRINTS ==="
+          sha256sum /tmp/public.json /tmp/main.json /tmp/r147.json /tmp/r148.json
+          wc -c /tmp/public.json /tmp/main.json /tmp/r147.json /tmp/r148.json
+          echo "PUBLIC_EQUALS_MAIN=$(cmp -s /tmp/public.json /tmp/main.json && echo yes || echo no)"
+          echo "PUBLIC_EQUALS_R147=$(cmp -s /tmp/public.json /tmp/r147.json && echo yes || echo no)"
+          echo "PUBLIC_EQUALS_R148=$(cmp -s /tmp/public.json /tmp/r148.json && echo yes || echo no)"
+          echo "=== PUBLIC HEADERS ==="
+          tr -d '\r' < /tmp/public.headers
 
-          bad=0
-          for y in 1 3 5; do
-            code="$(curl -sS -o /tmp/y${y}.html -w '%{http_code}' "$BASE/content/english/year-$y/module-01/?probe=$STAMP")"
-            bytes="$(wc -c < /tmp/y${y}.html | tr -d ' ')"
-            title="$(grep -io '<title>[^<]*</title>' /tmp/y${y}.html | head -1 || true)"
-            echo "Y${y} HTTP $code BYTES=$bytes $title"
-            if [ "$code" != "200" ]; then bad=1; fi
-          done
+          echo "=== DD 2.0.25 PUBLIC BODY ==="
+          curl -sS "$BASE/engine/releases/mechanics/drag-drop/2.0.25/drag-drop.js?probe=$STAMP" -D /tmp/dd.headers -o /tmp/dd-public
+          curl -fsSL "https://raw.githubusercontent.com/$REPO/main/engine/releases/mechanics/drag-drop/2.0.25/drag-drop.js?probe=$STAMP" -o /tmp/dd-main
+          tr -d '\r' < /tmp/dd.headers
+          sha256sum /tmp/dd-public /tmp/dd-main
+          wc -c /tmp/dd-public /tmp/dd-main
+          echo "PUBLIC_DD_EQUALS_MAIN=$(cmp -s /tmp/dd-public /tmp/dd-main && echo yes || echo no)"
+          printf 'PUBLIC_DD_PREFIX='; head -c 80 /tmp/dd-public | tr '\n' ' '; echo
+          printf 'MAIN_DD_PREFIX='; head -c 80 /tmp/dd-main | tr '\n' ' '; echo
 
-          if [ "$REV" != "148" ] || [ "$DD" != "2.0.25" ] || [ "$dd25" != "200" ] || [ "$bad" != "0" ]; then
+          REV="$(python3 -c 'import json;print(json.load(open("/tmp/public.json")).get("revision"))')"
+          DD="$(python3 -c 'import json;print(json.load(open("/tmp/public.json")).get("mechanics",{}).get("drag-drop",{}).get("release"))')"
+          echo "PUBLIC_REVISION=$REV PUBLIC_DRAG_DROP=$DD"
+
+          if [ "$REV" != "148" ] || [ "$DD" != "2.0.25" ]; then
             echo "HTTP_DEPLOYMENT_STALE"
+            exit 1
+          fi
+          if ! cmp -s /tmp/dd-public /tmp/dd-main; then
+            echo "DD_RELEASE_NOT_PUBLIC"
             exit 1
           fi
           echo "HTTP_DEPLOYMENT_PASS"
