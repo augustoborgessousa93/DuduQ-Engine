@@ -21,6 +21,11 @@ function zoneSelector(id) {
   return `.duduq-dd2-target[data-dd2-target-id="${id}"] .duduq-dd2-zone`;
 }
 
+function isExampleMediaUrl(url) {
+  const decoded = decodeURIComponent(url);
+  return decoded.endsWith("/My name.png") || decoded.endsWith("/Bye.png") || decoded.endsWith("/Good Afternoon.png");
+}
+
 async function waitMounted(page) {
   await page.waitForFunction(() => {
     const mechanic = window.dd225vrMechanic?.();
@@ -52,6 +57,7 @@ async function state(page) {
     const targets = [...doc.querySelectorAll(".duduq-dd2-target")];
     const zones = [...doc.querySelectorAll(".duduq-dd2-zone")];
     const placedImages = [...doc.querySelectorAll('.duduq-dd2-zone .duduq-dd2-item[data-has-media="true"][data-placed="true"] .duduq-dd2-item-media')];
+    const allItemImages = [...doc.querySelectorAll(".duduq-dd2-item-media")];
     const removeButtons = [...doc.querySelectorAll(".duduq-dd225-vr-remove")];
     const visibleBank = bank ? getComputedStyle(bank).display !== "none" && bank.getBoundingClientRect().height > 1 : false;
     const root = doc.querySelector(".duduq-dd2-root");
@@ -70,6 +76,7 @@ async function state(page) {
       placedImageWidths: placedImages.map((node) => node.getBoundingClientRect().width),
       placedImageHeights: placedImages.map((node) => node.getBoundingClientRect().height),
       objectFits: placedImages.map((node) => getComputedStyle(node).objectFit),
+      brokenItemImages: allItemImages.filter((img) => !img.complete || img.naturalWidth < 1 || img.naturalHeight < 1).map((img) => img.currentSrc || img.src),
       removeCount: removeButtons.length,
       overflowX: Math.max(0, doc.body.scrollWidth - doc.documentElement.clientWidth),
       rootOverflowX: root ? getComputedStyle(root).overflowX : "",
@@ -103,7 +110,7 @@ async function runViewport(browser, viewport) {
   page.on("response", (response) => {
     if (response.status() !== 404) return;
     const url = response.url();
-    if (url.includes("/engine/") || url.includes("/test/drag-drop/visual-refinement-2.0.25-r1/") || url.includes("Assets-DuduQ")) {
+    if (url.includes("/engine/") || url.includes("/test/drag-drop/visual-refinement-2.0.25-r1/") || isExampleMediaUrl(url)) {
       critical404.push(url);
     }
   });
@@ -114,12 +121,19 @@ async function runViewport(browser, viewport) {
     await waitMounted(page);
     const frame = page.frameLocator("#mount iframe");
 
+    await page.waitForFunction(() => {
+      const doc = document.querySelector("#mount iframe")?.contentDocument;
+      const images = [...(doc?.querySelectorAll(".duduq-dd2-item-media") || [])];
+      return images.length === 4 && images.every((img) => img.complete && img.naturalWidth > 0 && img.naturalHeight > 0);
+    }, null, { timeout: 10_000 });
+
     const initial = await state(page);
     assert(initial.version === "2.0.25", `${viewport.name}: versão oficial divergente (${initial.version}).`);
     assert(initial.visualVersion === "2.0.25-visual-r1", `${viewport.name}: patch visual isolado não carregou.`);
     assert(initial.bankVisible, `${viewport.name}: banco deve aparecer enquanto há itens.`);
     assert(initial.bankItemIds.length === 4, `${viewport.name}: banco inicial deveria ter 4 itens.`);
     assert(initial.confirmCount === 0, `${viewport.name}: CONFIRMAR apareceu antes de todos os itens estarem posicionados.`);
+    assert(initial.brokenItemImages.length === 0, `${viewport.name}: mídia do exemplo não carregou: ${initial.brokenItemImages.join(" | ")}`);
 
     await place(frame, "ana", "greetings");
     await place(frame, "afternoon", "greetings");
@@ -140,6 +154,7 @@ async function runViewport(browser, viewport) {
     assert(completeLayout.targetWidths.every((value) => value >= 250), `${viewport.name}: destinos não aproveitaram a largura disponível (${completeLayout.targetWidths.join(",")}).`);
     assert(completeLayout.objectFits.length === 4 && completeLayout.objectFits.every((value) => value === "contain"), `${viewport.name}: object-fit contain não foi preservado.`);
     assert(completeLayout.placedImageWidths.every((value) => value >= 55), `${viewport.name}: imagens posicionadas ficaram pequenas demais (${completeLayout.placedImageWidths.join(",")}).`);
+    assert(completeLayout.brokenItemImages.length === 0, `${viewport.name}: imagem quebrou após posicionamento.`);
     assert(completeLayout.confirmBottom <= completeLayout.clientHeight + 3, `${viewport.name}: CONFIRMAR saiu da área visível (${completeLayout.confirmBottom}/${completeLayout.clientHeight}).`);
     assert(completeLayout.overflowX <= 4, `${viewport.name}: overflow horizontal ${completeLayout.overflowX}px.`);
 
@@ -192,9 +207,9 @@ async function runViewport(browser, viewport) {
     assert(finalState.completionCount === 1, `${viewport.name}: success não concluiu o exemplo.`);
     assert(finalState.overflowX <= 4, `${viewport.name}: overflow após retry/success ${finalState.overflowX}px.`);
     assert(pageErrors.length === 0, `${viewport.name}: pageError: ${pageErrors.join(" | ")}`);
-    assert(critical404.length === 0, `${viewport.name}: critical404: ${critical404.join(" | ")}`);
+    assert(critical404.length === 0, `${viewport.name}: critical404 do escopo: ${critical404.join(" | ")}`);
 
-    console.log(`PASS ${viewport.name} wider-targets + empty-bank-hide + conditional-confirm + remove-x + retry/success`);
+    console.log(`PASS ${viewport.name} wider-targets + empty-bank-hide + conditional-confirm + remove-x + media + retry/success`);
   } finally {
     await context.close();
   }
