@@ -2,295 +2,34 @@ import fs from "node:fs";
 import path from "node:path";
 import { chromium } from "playwright";
 
-const BASE = process.env.LIVE_BASE || "https://duduq-engine.pages.dev";
-const ROOT = process.cwd();
-const YEARS = [1,2,3,4,5];
-const MODULES = [1,2,3,4,5,6];
-const VIEWPORTS = [
-  { name:"desktop", width:1366, height:768 },
-  { name:"mobile", width:390, height:844 }
-];
-const assert = (value, message) => { if (!value) throw new Error(message); };
-const moduleKey = (y,m) => `year-${y}/module-${String(m).padStart(2,"0")}`;
+const BASE=process.env.LIVE_BASE||"https://duduq-engine.pages.dev";
+const ROOT=process.cwd(), YEARS=[1,2,3,4,5], MODULES=[1,2,3,4,5,6];
+const VIEWPORTS=[{name:"desktop",width:1366,height:768},{name:"mobile",width:390,height:844}];
+const A=(v,m)=>{if(!v)throw Error(m)}, key=(y,m)=>`year-${y}/module-${String(m).padStart(2,"0")}`;
 
-function walk(dir) {
-  const out=[];
-  for (const entry of fs.readdirSync(dir,{withFileTypes:true})) {
-    const full=path.join(dir,entry.name);
-    if (entry.isDirectory()) out.push(...walk(full));
-    else if (/\.(?:js|html|json)$/i.test(entry.name)) out.push(full);
-  }
-  return out;
+function walk(d){let o=[];for(const e of fs.readdirSync(d,{withFileTypes:true})){const f=path.join(d,e.name);e.isDirectory()?o.push(...walk(f)):/\.(?:js|html|json)$/i.test(e.name)&&o.push(f)}return o}
+function inventory(){
+  const refs=new Set(),pins=[];
+  for(const f of walk(path.join(ROOT,"content","english"))){const t=fs.readFileSync(f,"utf8"),r=path.relative(ROOT,f).replaceAll(path.sep,"/"),m=r.match(/^content\/english\/(year-\d+)\/(module-\d+)\//);if(m&&/drag-drop|drag_drop/i.test(t))refs.add(`${m[1]}/${m[2]}`);if(r.startsWith("content/english/")&&(/\/engine\/releases\/mechanics\/drag-drop\/2\.0\.24\//i.test(t)||/drag-drop[^\n]{0,120}(?:release|version)[^\n]{0,40}2\.0\.24/i.test(t)||/(?:release|version)[^\n]{0,40}2\.0\.24[^\n]{0,120}drag-drop/i.test(t)))pins.push(r)}
+  A(refs.size===30,`referenced ${refs.size}/30`);A(!pins.length,`legacy pins ${pins.join(",")}`);console.log(`DRAG_DROP_REFERENCED_MODULES=${refs.size}`);console.log(`LEGACY_2_0_24_PINS=${pins.length}`);return{refs,pins};
 }
+async function tts(p){await p.addInitScript(()=>{const s={speaking:false,pending:false,paused:false,getVoices:()=>[],cancel(){this.speaking=false;this.pending=false},pause(){this.paused=true},resume(){this.paused=false},speak(u){this.speaking=true;queueMicrotask(()=>{this.speaking=false;try{u?.onend?.({type:"end"})}catch{}})}};try{Object.defineProperty(globalThis,"speechSynthesis",{value:s,configurable:true})}catch{globalThis.speechSynthesis=s}})}
+async function boot(p,y,m){const u=`${BASE}/content/english/year-${y}/module-${String(m).padStart(2,"0")}/?r148=${Date.now()}`;const r=await p.goto(u,{waitUntil:"domcontentloaded",timeout:35000});A(r?.ok(),`${key(y,m)} HTTP ${r?.status()}`);await p.waitForFunction(()=>DUDUQ_ENGINE_READY===true,null,{timeout:35000});const s=await p.evaluate(()=>({r:DUDUQ_ENGINE_MANIFEST?.revision,c:DUDUQ_ENGINE_MANIFEST?.core?.release,d:DUDUQ_ENGINE_MANIFEST?.mechanics?.["drag-drop"]?.release,v:DuduQ?.getMechanic?.("drag-drop")?.version}));A(s.r===148&&s.c==="1.0.12"&&s.d==="2.0.25"&&s.v==="2.0.25",`${key(y,m)} boot ${JSON.stringify(s)}`);return s}
+async function questions(p,y,m){return p.evaluate(({y,m})=>{const seen=new Set();function f(v){if(!v||typeof v!=="object"||seen.has(v))return null;seen.add(v);if(Array.isArray(v.activities)&&+v.year===y&&+v.module===m)return v;for(const x of Object.values(v)){const z=f(x);if(z)return z}}const mod=f(DUDUQ_CONTENT||{}),out=[];for(const a of mod?.activities||[])for(const q of a.questions||[]){const mech=String(a.mechanic||q?.delivery?.mechanic||q?.renderer||"").toLowerCase().replace(/_/g,"-");if(mech==="drag-drop")out.push(q)}return out},{y,m})}
+function shape(q){const p=q?.payload||{},ans=q?.answer||{};let pairs=[];if(Array.isArray(p.items))pairs=p.items.filter(x=>x?.required!==false&&x?.targetId).map(x=>[String(x.id),String(x.targetId),Number(x.sequenceIndex??9999)]);if(!pairs.length&&ans.type==="pairs")pairs=(ans.value||[]).map((x,i)=>[String(x?.source||x?.itemId||""),String(x?.target||x?.targetId||""),i]).filter(x=>x[0]&&x[1]);pairs.sort((a,b)=>a[2]-b[2]);if(pairs.length)return{mode:"pairs",pairs};if(ans.type==="sequence"&&Array.isArray(ans.value)&&ans.value.length)return{mode:"sequence",sources:ans.value.map(String)};if(ans.type==="single"&&ans.value!=null)return{mode:"single",sources:[String(ans.value)]};return null}
+async function destroy(p){await p.evaluate(()=>{try{__R148_DESTROY__?.()}catch{};document.querySelector("#r148-host")?.remove()})}
+async function mount(p,q,y,m){await p.evaluate(({q,y,m})=>{window.__R148_RESULTS__=[];window.__R148_COMPLETE__=[];if(!window.__R148_LISTENER__){addEventListener("message",e=>{if(e.data?.type==="DUDUQ_DRAG_DROP_RESULT")__R148_RESULTS__.push(e.data.payload)});window.__R148_LISTENER__=1}document.querySelector("#r148-host")?.remove();const h=document.body.appendChild(document.createElement("div"));h.id="r148-host";h.style.cssText="position:fixed;inset:0;z-index:999999;background:#fff";const mech=DuduQ.getMechanic("drag-drop");let i=q;if(!mech.validate(i)&&q.payload)i={id:q.id,title:"DD",instruction:q.instruction||q.statement||"",payload:q.payload};if(!mech.validate(i))throw Error(`validate ${q.id}`);window.__R148_DESTROY__=mech.mount({container:h,payload:i,context:{subject:"english",year:y,module:m,stepId:q.id,stepIndex:0,totalSteps:1},onComplete:x=>__R148_COMPLETE__.push(x)})},{q,y,m});const el=p.locator("#r148-host iframe");await el.waitFor({state:"attached",timeout:12000});const h=await el.elementHandle(),f=await h.contentFrame();await f.locator(".duduq-dd2-root").waitFor({state:"visible",timeout:12000});return f}
+async function free(zone){const pos=await zone.evaluate(el=>{const r=el.getBoundingClientRect(),xs=[8,r.width-8,r.width/2,16],ys=[r.height-8,8,r.height/2,16];for(const y of ys)for(const x of xs){if(x>2&&x<r.width-2&&y>2&&y<r.height-2){const hit=document.elementFromPoint(r.left+x,r.top+y);if(!hit?.closest?.(".duduq-dd2-item"))return{x,y}}}return{x:8,y:Math.max(8,r.height-8)}});await zone.click({force:true,position:pos})}
+async function place(f,s,t){const i=f.locator(`[data-dd2-item-id="${s}"]`).first();await i.waitFor({state:"visible",timeout:7000});await i.click({force:true});const z=f.locator(`[data-dd2-target-id="${t}"] .duduq-dd2-zone`).first();await z.waitFor({state:"visible",timeout:7000});await free(z)}
+async function plan(f,q){const s=shape(q);if(!s)return null;if(s.mode==="pairs")return s;const targets=await f.locator("[data-dd2-target-id]").evaluateAll(ns=>ns.map(n=>n.getAttribute("data-dd2-target-id")).filter(Boolean));if(!targets.length)return null;return{mode:s.mode,pairs:s.sources.map(x=>[x,targets[0],9999])}}
+async function consumer(p,q,y,m,vp){const f=await mount(p,q,y,m),pl=await plan(f,q);A(pl?.pairs?.length,`${key(y,m)} ${q.id}: normalized plan unavailable`);await place(f,pl.pairs[0][0],pl.pairs[0][1]);A(await p.evaluate(()=>__R148_RESULTS__.length)===0,`${key(y,m)} ${q.id}: drop evaluated`);for(const x of pl.pairs.slice(1))await place(f,x[0],x[1]);const b=f.locator(".duduq-dd2-confirm");await b.waitFor({state:"visible",timeout:7000});const n=await p.evaluate(()=>__R148_RESULTS__.length);await b.click({force:true});await p.waitForFunction(n=>__R148_RESULTS__.length>n,n,{timeout:8000});A((await p.evaluate(()=>__R148_RESULTS__.at(-1)))?.isCorrect===true,`${key(y,m)} ${q.id}: success false`);await p.waitForFunction(()=>__R148_COMPLETE__.length>0,null,{timeout:8000});await destroy(p);return{year:y,module:m,questionId:q.id,contract:pl.mode,viewport:vp,canaryRevision:148,dragDropVersion:"2.0.25",confirm:"PASS",success:"PASS"}}
+async function retry(p){await boot(p,1,1);const qs=await questions(p,1,1),q=qs.find(x=>x.id==="EN1-M1-02");A(q,"retry q missing");const f=await mount(p,q,1,1),pl=await plan(f,q);const good=new Set(pl.pairs.map(x=>x[0])),ids=await f.locator("[data-dd2-item-id]").evaluateAll(ns=>[...new Set(ns.map(n=>n.getAttribute("data-dd2-item-id")))].filter(Boolean)),wrong=ids.find(x=>!good.has(x)),target=pl.pairs[0][1];A(wrong,"retry distractor missing");await place(f,wrong,target);A(await p.evaluate(()=>__R148_RESULTS__.length)===0,"retry drop evaluated");const b=f.locator(".duduq-dd2-confirm");await b.waitFor({state:"visible",timeout:7000});await b.click({force:true});await p.waitForFunction(()=>__R148_RESULTS__.length===1,null,{timeout:8000});A((await p.evaluate(()=>__R148_RESULTS__[0]))?.isCorrect===false,"retry false result missing");await p.waitForTimeout(950);A(await f.locator(`[data-dd2-item-id="${wrong}"]`).count()>0,"retry wrong unavailable");await destroy(p);return"PASS"}
+async function progress(p,y){await boot(p,y,1);const b=p.locator(".duduq-intro-start-button");await b.waitFor({state:"visible",timeout:30000});await b.click({force:true});await p.waitForFunction(()=>{const s=DuduQ?.getSession?.();return s&&!s.transitioning&&DuduQTransition?.getState?.()==="idle"},null,{timeout:35000});const before=await p.evaluate(()=>DuduQ.getSession()),ok=await p.evaluate(()=>DuduQ.next({qa:"r148-all"}));A(ok!==false,`Y${y} progress rejected`);await p.waitForFunction(i=>{const s=DuduQ.getSession();return !s.transitioning&&(s.completed||s.stepIndex!==i)&&DuduQTransition.getState()==="idle"},before.stepIndex,{timeout:12000});return"PASS"}
 
-function staticInventory() {
-  const base=path.join(ROOT,"content","english");
-  const files=walk(base);
-  const referenced=new Map();
-  const legacy=[];
-  for (const file of files) {
-    const text=fs.readFileSync(file,"utf8");
-    const rel=path.relative(ROOT,file).replaceAll(path.sep,"/");
-    const mm=rel.match(/^content\/english\/(year-\d+)\/(module-\d+)\//);
-    if (mm && /drag-drop|drag_drop/i.test(text)) {
-      const key=`${mm[1]}/${mm[2]}`;
-      if(!referenced.has(key)) referenced.set(key,[]);
-      referenced.get(key).push(rel);
-    }
-    const relevantPin =
-      /\/engine\/releases\/mechanics\/drag-drop\/2\.0\.24\//i.test(text) ||
-      /drag-drop[^\n]{0,120}(?:release|version)[^\n]{0,40}2\.0\.24/i.test(text) ||
-      /(?:release|version)[^\n]{0,40}2\.0\.24[^\n]{0,120}drag-drop/i.test(text);
-    if (relevantPin && rel.startsWith("content/english/")) legacy.push(rel);
-  }
-  assert(referenced.size===30,`referenced modules ${referenced.size}, expected 30`);
-  assert(legacy.length===0,`legacy 2.0.24 pins: ${legacy.join(", ")}`);
-  console.log(`DRAG_DROP_REFERENCED_MODULES=${referenced.size}`);
-  console.log(`LEGACY_2_0_24_PINS=${legacy.length}`);
-  return {referenced:[...referenced.keys()].sort(),legacy};
-}
-
-async function installTtsStub(page) {
-  await page.addInitScript(() => {
-    const synth={speaking:false,pending:false,paused:false,getVoices:()=>[],cancel(){this.speaking=false;this.pending=false},pause(){this.paused=true},resume(){this.paused=false},speak(u){this.speaking=true;this.pending=false;try{u?.onstart?.({type:"start"})}catch{};queueMicrotask(()=>{this.speaking=false;try{u?.onend?.({type:"end"})}catch{}})}};
-    try { Object.defineProperty(globalThis,"speechSynthesis",{value:synth,configurable:true}); } catch { globalThis.speechSynthesis=synth; }
-  });
-}
-
-async function boot(page,y,m) {
-  const url=`${BASE}/content/english/year-${y}/module-${String(m).padStart(2,"0")}/?r148=${Date.now()}`;
-  const response=await page.goto(url,{waitUntil:"domcontentloaded",timeout:35000});
-  assert(response?.ok(),`${moduleKey(y,m)} HTTP ${response?.status()}`);
-  await page.waitForFunction(()=>window.DUDUQ_ENGINE_READY===true,null,{timeout:35000});
-  const state=await page.evaluate(()=>({
-    revision:window.DUDUQ_ENGINE_MANIFEST?.revision,
-    core:window.DUDUQ_ENGINE_MANIFEST?.core?.release,
-    manifestVersion:window.DUDUQ_ENGINE_MANIFEST?.mechanics?.["drag-drop"]?.release,
-    registeredVersion:window.DuduQ?.getMechanic?.("drag-drop")?.version
-  }));
-  assert(state.revision===148,`${moduleKey(y,m)} revision ${state.revision}`);
-  assert(state.core==="1.0.12",`${moduleKey(y,m)} core ${state.core}`);
-  assert(state.manifestVersion==="2.0.25",`${moduleKey(y,m)} manifest DD ${state.manifestVersion}`);
-  assert(state.registeredVersion==="2.0.25",`${moduleKey(y,m)} registered DD ${state.registeredVersion}`);
-  return state;
-}
-
-async function ddQuestions(page,y,m) {
-  return page.evaluate(({y,m})=>{
-    const seen=new Set();
-    function find(value){
-      if(!value||typeof value!=="object"||seen.has(value)) return null;
-      seen.add(value);
-      if(Array.isArray(value.activities)&&Number(value.year)===y&&Number(value.module)===m) return value;
-      for(const child of Object.values(value)){const found=find(child);if(found)return found;}
-      return null;
-    }
-    const mod=find(window.DUDUQ_CONTENT||{});
-    const out=[];
-    for(const activity of mod?.activities||[]) for(const q of activity.questions||[]) {
-      const mech=String(activity.mechanic||q?.delivery?.mechanic||q?.renderer||"").toLowerCase().replace(/_/g,"-");
-      if(mech==="drag-drop") out.push(q);
-    }
-    return out;
-  },{y,m});
-}
-
-function contract(question) {
-  const p=question?.payload||{};
-  let pairs=[];
-  if(Array.isArray(p.items)) pairs=p.items.filter(x=>x?.required!==false&&x?.targetId).map(x=>({source:String(x.id),target:String(x.targetId),sequenceIndex:Number.isFinite(Number(x.sequenceIndex))?Number(x.sequenceIndex):9999}));
-  if(!pairs.length&&question?.answer?.type==="pairs") pairs=(question.answer.value||[]).map((x,i)=>({source:String(x?.source||x?.itemId||""),target:String(x?.target||x?.targetId||""),sequenceIndex:i})).filter(x=>x.source&&x.target);
-  pairs.sort((a,b)=>a.sequenceIndex-b.sequenceIndex);
-  const requiredSources=new Set(pairs.map(x=>x.source));
-  const items=p.items||question?.alternatives||[];
-  const targets=p.targets||question?.metadata?.targets||[];
-  const distractor=items.find(x=>!requiredSources.has(String(x?.id||"")));
-  let wrong=null;
-  if(distractor&&pairs[0]) wrong={source:String(distractor.id),target:pairs[0].target};
-  if(!wrong&&pairs[0]&&targets.length>1){const t=targets.find(x=>String(x?.id||"")!==pairs[0].target);if(t)wrong={source:pairs[0].source,target:String(t.id)}}
-  return {pairs,wrong};
-}
-
-async function destroy(page){
-  await page.evaluate(()=>{try{window.__R148_ALL_DESTROY__?.()}catch{};document.querySelector("#r148-all-host")?.remove();});
-}
-
-async function mount(page,question,y,m){
-  await page.evaluate(({question,y,m})=>{
-    window.__R148_ALL_RESULTS__=[];
-    window.__R148_ALL_COMPLETE__=[];
-    if(!window.__R148_ALL_LISTENER__){
-      addEventListener("message",e=>{if(e.data?.type==="DUDUQ_DRAG_DROP_RESULT")window.__R148_ALL_RESULTS__.push(e.data.payload)});
-      window.__R148_ALL_LISTENER__=true;
-    }
-    document.querySelector("#r148-all-host")?.remove();
-    const host=document.body.appendChild(document.createElement("div"));host.id="r148-all-host";host.style.cssText="position:fixed;inset:0;z-index:999999;background:#fff";
-    const mech=window.DuduQ?.getMechanic?.("drag-drop");
-    let input=question;
-    if(!mech?.validate?.(input)&&question?.payload) input={id:question.id,title:"DD",instruction:question.instruction||question.statement||"",payload:question.payload};
-    if(!mech?.validate?.(input)) throw Error(`validate ${question?.id}`);
-    window.__R148_ALL_DESTROY__=mech.mount({container:host,payload:input,context:{subject:"english",year:y,module:m,stepId:question.id,stepIndex:0,totalSteps:1},onComplete:r=>window.__R148_ALL_COMPLETE__.push(r)});
-  },{question,y,m});
-  const iframe=page.locator("#r148-all-host iframe");
-  await iframe.waitFor({state:"attached",timeout:12000});
-  const handle=await iframe.elementHandle();
-  const frame=await handle.contentFrame();
-  await frame.locator(".duduq-dd2-root").waitFor({state:"visible",timeout:12000});
-  return frame;
-}
-
-async function freeZoneClick(zone){
-  const pos=await zone.evaluate(el=>{
-    const r=el.getBoundingClientRect();
-    const xs=[8,r.width-8,r.width/2,16,r.width-16].filter(x=>x>2&&x<r.width-2);
-    const ys=[r.height-8,8,r.height/2,r.height-16,16].filter(y=>y>2&&y<r.height-2);
-    for(const y of ys)for(const x of xs){const hit=document.elementFromPoint(r.left+x,r.top+y);if(!hit?.closest?.(".duduq-dd2-item"))return{x,y};}
-    return{x:Math.max(4,Math.min(r.width-4,8)),y:Math.max(4,Math.min(r.height-4,r.height-8))};
-  });
-  await zone.click({force:true,position:pos});
-}
-
-async function place(frame,source,target){
-  const item=frame.locator(`[data-dd2-item-id="${source}"]`).first();
-  await item.waitFor({state:"visible",timeout:7000});
-  await item.click({force:true});
-  const zone=frame.locator(`[data-dd2-target-id="${target}"] .duduq-dd2-zone`).first();
-  await zone.waitFor({state:"visible",timeout:7000});
-  await freeZoneClick(zone);
-}
-
-async function oneConsumer(page,question,y,m,viewport){
-  const c=contract(question);
-  assert(c.pairs.length,`${moduleKey(y,m)} ${question.id}: no normalized pair contract`);
-  const frame=await mount(page,question,y,m);
-  await place(frame,c.pairs[0].source,c.pairs[0].target);
-  const afterDrop=await page.evaluate(()=>window.__R148_ALL_RESULTS__.length);
-  assert(afterDrop===0,`${moduleKey(y,m)} ${question.id}: drop evaluated`);
-  for(const pair of c.pairs.slice(1)) await place(frame,pair.source,pair.target);
-  const confirm=frame.locator(".duduq-dd2-confirm");
-  await confirm.waitFor({state:"visible",timeout:7000});
-  const before=await page.evaluate(()=>window.__R148_ALL_RESULTS__.length);
-  await confirm.click({force:true});
-  await page.waitForFunction(n=>window.__R148_ALL_RESULTS__.length>n,before,{timeout:8000});
-  const result=await page.evaluate(()=>window.__R148_ALL_RESULTS__.at(-1));
-  assert(result?.isCorrect===true,`${moduleKey(y,m)} ${question.id}: success false`);
-  await page.waitForFunction(()=>window.__R148_ALL_COMPLETE__.length>0,null,{timeout:8000});
-  await destroy(page);
-  return {year:y,module:m,questionId:question.id,viewport,canaryRevision:148,dragDropVersion:"2.0.25",confirm:"PASS",success:"PASS"};
-}
-
-async function retryRepresentative(page){
-  await boot(page,1,1);
-  const qs=await ddQuestions(page,1,1);
-  const q=qs.find(x=>x.id==="EN1-M1-02")||qs.find(x=>contract(x).wrong);
-  assert(q,"retry representative not found");
-  const c=contract(q);assert(c.wrong,"retry wrong placement unavailable");
-  const frame=await mount(page,q,1,1);
-  await place(frame,c.wrong.source,c.wrong.target);
-  assert(await page.evaluate(()=>window.__R148_ALL_RESULTS__.length)===0,"retry rep: drop evaluated");
-  const confirm=frame.locator(".duduq-dd2-confirm");
-  await confirm.waitFor({state:"visible",timeout:7000});
-  await confirm.click({force:true});
-  await page.waitForFunction(()=>window.__R148_ALL_RESULTS__.length===1,null,{timeout:8000});
-  const wrong=await page.evaluate(()=>window.__R148_ALL_RESULTS__[0]);
-  assert(wrong?.isCorrect===false,"retry rep: wrong not evaluated false");
-  await page.waitForTimeout(950);
-  const wrongBack=frame.locator(`[data-dd2-item-id="${c.wrong.source}"]`);
-  assert(await wrongBack.count()>0,"retry rep: wrong item unavailable");
-  await destroy(page);
-  return {year:1,module:1,questionId:q.id,retry:"PASS"};
-}
-
-async function progressRepresentative(page,y){
-  await boot(page,y,1);
-  const start=page.locator(".duduq-intro-start-button");
-  await start.waitFor({state:"visible",timeout:30000});
-  await start.click({force:true});
-  await page.waitForFunction(()=>{const s=window.DuduQ?.getSession?.();return Boolean(s&&!s.transitioning&&window.DuduQTransition?.getState?.()==="idle")},null,{timeout:35000});
-  const before=await page.evaluate(()=>window.DuduQ.getSession());
-  const accepted=await page.evaluate(()=>window.DuduQ.next({qa:"r148-all-consumers"}));
-  assert(accepted!==false,`Y${y} progress rejected`);
-  await page.waitForFunction(i=>{const s=window.DuduQ?.getSession?.();return Boolean(s&&!s.transitioning&&(s.completed||s.stepIndex!==i)&&window.DuduQTransition?.getState?.()==="idle")},before.stepIndex,{timeout:12000});
-  return {year:y,progress:"PASS"};
-}
-
-const inventory=staticInventory();
-const browser=await chromium.launch({headless:true});
-const tested=[];
-const runtimeByViewport={desktop:new Set(),mobile:new Set()};
-const runtimeQuestions=new Map();
-const referencedOnly=new Set();
-let retry=null;
-const progress=[];
+const inv=inventory(),browser=await chromium.launch({headless:true}),tested=[],sets={desktop:new Set(),mobile:new Set()},qmap=new Map(),refOnly=new Set();let retryStatus="NOT_RUN";const prog={};
 try{
-  for(const viewport of VIEWPORTS){
-    const page=await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
-    await installTtsStub(page);
-    try{
-      for(const y of YEARS) for(const m of MODULES){
-        const key=moduleKey(y,m);
-        const errors=[];const critical404=[];
-        const onError=e=>errors.push(String(e?.message||e));
-        const onResponse=r=>{if(r.status()===404&&(r.url().includes("/engine/")||r.url().includes(`/content/english/year-${y}/`)))critical404.push(r.url())};
-        page.on("pageerror",onError);page.on("response",onResponse);
-        try{
-          await boot(page,y,m);
-          const qs=await ddQuestions(page,y,m);
-          if(!qs.length){
-            if(inventory.referenced.includes(key)) referencedOnly.add(key);
-            assert(!errors.length,`${key} ${viewport.name}: pageError ${errors.join(" | ")}`);
-            assert(!critical404.length,`${key} ${viewport.name}: critical404 ${critical404.join(" | ")}`);
-            console.log(`N/A ${viewport.name} ${key} — referenced but no runtime DD question`);
-            continue;
-          }
-          runtimeByViewport[viewport.name].add(`${y}/${m}`);
-          const q=qs.find(x=>contract(x).pairs.length);
-          assert(q,`${key}: runtime DD exists but no compatible pair contract`);
-          runtimeQuestions.set(`${y}/${m}`,q.id);
-          tested.push(await oneConsumer(page,q,y,m,viewport.name));
-          assert(!errors.length,`${key} ${viewport.name}: pageError ${errors.join(" | ")}`);
-          assert(!critical404.length,`${key} ${viewport.name}: critical404 ${critical404.join(" | ")}`);
-          console.log(`PASS ${viewport.name} ${key} ${q.id}`);
-        }finally{
-          page.off("pageerror",onError);page.off("response",onResponse);await destroy(page);
-        }
-      }
-    }finally{await page.close();}
-  }
-
-  const behaviorPage=await browser.newPage({viewport:{width:1366,height:768}});await installTtsStub(behaviorPage);
-  try{retry=await retryRepresentative(behaviorPage);for(const y of YEARS)progress.push(await progressRepresentative(behaviorPage,y));}finally{await behaviorPage.close();}
-}finally{await browser.close();}
-
-const desktop=[...runtimeByViewport.desktop].sort();
-const mobile=[...runtimeByViewport.mobile].sort();
-assert(desktop.length>0,"no runtime Drag Drop consumers found");
-assert(JSON.stringify(desktop)===JSON.stringify(mobile),`runtime consumer mismatch desktop=${desktop.join(",")} mobile=${mobile.join(",")}`);
-const uniqueModules=new Set(tested.map(x=>`${x.year}/${x.module}`));
-assert(uniqueModules.size===desktop.length,`modules tested ${uniqueModules.size}/${desktop.length}`);
-assert(tested.length===desktop.length*2,`viewport executions ${tested.length}/${desktop.length*2}`);
-
-const years={};
-for(const y of YEARS){
-  const count=desktop.filter(k=>k.startsWith(`${y}/`)).length;
-  years[y]=count?"PASS":"N/A_NO_RUNTIME_DD";
-}
-
-console.log(`DRAG_DROP_RUNTIME_CONSUMER_MODULES=${desktop.length}`);
-console.log(`MODULES_TESTED=${uniqueModules.size}/${desktop.length}`);
-console.log(`REFERENCED_ONLY_MODULES=${[...referencedOnly].sort().join(",")||"none"}`);
-console.log(JSON.stringify({
-  status:"R148_ALL_RUNTIME_DD_CONSUMERS_PASS",
-  referencedModules:inventory.referenced.length,
-  runtimeConsumerModules:desktop.length,
-  modulesTested:`${uniqueModules.size}/${desktop.length}`,
-  viewportExecutions:tested.length,
-  legacyPins:inventory.legacy.length,
-  payloadFixes:0,
-  referencedOnly:[...referencedOnly].sort(),
-  years,
-  retry,
-  progress,
-  runtimeQuestions:Object.fromEntries(runtimeQuestions),
-  tested
-},null,2));
+ for(const vp of VIEWPORTS){const p=await browser.newPage({viewport:{width:vp.width,height:vp.height}});await tts(p);try{for(const y of YEARS)for(const m of MODULES){const k=key(y,m),errs=[],fours=[];const pe=e=>errs.push(String(e?.message||e)),pr=r=>{if(r.status()===404&&(r.url().includes("/engine/")||r.url().includes(`/content/english/year-${y}/`)))fours.push(r.url())};p.on("pageerror",pe);p.on("response",pr);try{await boot(p,y,m);const qs=await questions(p,y,m);if(!qs.length){inv.refs.has(k)&&refOnly.add(k);A(!errs.length,`${k} ${vp.name} pageError ${errs.join("|")}`);A(!fours.length,`${k} ${vp.name} 404 ${fours.join("|")}`);console.log(`N/A ${vp.name} ${k} no runtime DD`);continue}sets[vp.name].add(`${y}/${m}`);const q=qs.find(x=>shape(x));A(q,`${k}: unsupported runtime DD contract ${qs.map(x=>`${x.id}:${x.answer?.type}`).join(",")}`);qmap.set(`${y}/${m}`,`${q.id}:${shape(q).mode}`);tested.push(await consumer(p,q,y,m,vp.name));A(!errs.length,`${k} ${vp.name} pageError ${errs.join("|")}`);A(!fours.length,`${k} ${vp.name} 404 ${fours.join("|")}`);console.log(`PASS ${vp.name} ${k} ${q.id} ${shape(q).mode}`)}finally{p.off("pageerror",pe);p.off("response",pr);await destroy(p)}}}finally{await p.close()}}
+ const p=await browser.newPage({viewport:{width:1366,height:768}});await tts(p);try{retryStatus=await retry(p);for(const y of YEARS)prog[y]=await progress(p,y)}finally{await p.close()}
+}finally{await browser.close()}
+const d=[...sets.desktop].sort(),mob=[...sets.mobile].sort();A(d.length>0,"no runtime consumers");A(JSON.stringify(d)===JSON.stringify(mob),`viewport consumer mismatch d=${d} m=${mob}`);const unique=new Set(tested.map(x=>`${x.year}/${x.module}`));A(unique.size===d.length,`tested ${unique.size}/${d.length}`);A(tested.length===d.length*2,`viewport runs ${tested.length}/${d.length*2}`);const years={};for(const y of YEARS)years[y]=d.some(x=>x.startsWith(`${y}/`))?"PASS":"N/A_NO_RUNTIME_DD";
+console.log(`DRAG_DROP_RUNTIME_CONSUMER_MODULES=${d.length}`);console.log(`MODULES_TESTED=${unique.size}/${d.length}`);console.log(`REFERENCED_ONLY_MODULES=${[...refOnly].sort().join(",")||"none"}`);console.log(JSON.stringify({status:"R148_ALL_RUNTIME_DD_CONSUMERS_PASS",referencedModules:inv.refs.size,runtimeConsumerModules:d.length,modulesTested:`${unique.size}/${d.length}`,viewportExecutions:tested.length,legacyPins:inv.pins.length,payloadFixes:0,referencedOnly:[...refOnly].sort(),years,retry:retryStatus,progress:prog,runtimeQuestions:Object.fromEntries(qmap),tested},null,2));
