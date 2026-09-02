@@ -1,0 +1,33 @@
+name: R148 All Drag Drop Consumers Live
+
+on:
+  push:
+    branches:
+      - qa/r148-dd225-all-consumers-20260902
+    paths:
+      - "test/systemic/r148-all-dd-consumers-live.mjs"
+      - ".github/workflows/r148-all-dd-consumers-live.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  all-consumers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax
+        run: node --check test/systemic/r148-all-dd-consumers-live.mjs
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Live regression — all published Drag Drop consumers
+        env:
+          LIVE_BASE: https://duduq-engine.pages.dev
+        run: node test/systemic/r148-all-dd-consumers-live.mjs
