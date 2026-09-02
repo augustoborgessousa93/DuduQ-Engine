@@ -304,6 +304,13 @@
     width: 50px !important;
     height: 50px !important;
   }
+  /* The mascot burst used negative insets + visible overflow; contain only this decoration on mobile. */
+  .duduq-star-burst[data-origin="mascot"] {
+    inset: -65% !important;
+    overflow: clip !important;
+    contain: paint !important;
+    pointer-events: none !important;
+  }
 }
 
 @media (max-height: 720px) and (min-width: 700px) {
