@@ -156,6 +156,28 @@
   min-height: 50px !important;
 }
 
+/* Decorative success burst cannot create horizontal scroll in the compact activity viewport. */
+.duduq-engine-feedback {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+.duduq-engine-feedback-card {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: clip;
+}
+
+.duduq-engine-feedback-copy {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
 /* Small removal affordance, outside the media footprint. */
 .duduq-dd2-root[${PATCHED_ATTR}="true"] .${REMOVE_CLASS} {
   position: absolute;
@@ -272,6 +294,15 @@
     top: -4px;
     right: -4px;
     font-size: 15px;
+  }
+  .duduq-engine-feedback-card {
+    grid-template-columns: 54px minmax(0, 1fr) !important;
+    gap: 8px 10px !important;
+    padding-inline: 10px !important;
+  }
+  .duduq-mascot[data-size="feedback"] {
+    width: 50px !important;
+    height: 50px !important;
   }
 }
 
