@@ -80,7 +80,7 @@ await page.waitForFunction(()=>__DD225_RESULTS__.length===1,null,{timeout:5000})
 await page.waitForFunction(()=>{const d=document.querySelector("#mount iframe")?.contentDocument,A=d?.querySelector('[data-dd2-item-id="A"]'),D=d?.querySelector('[data-dd2-item-id="D"]'),B=d?.querySelector('[data-dd2-item-id="B"]'),C=d?.querySelector('[data-dd2-item-id="C"]');return Boolean(A?.disabled&&D?.disabled&&!B?.disabled&&!C?.disabled&&d?.querySelector('.duduq-dd2-bank [data-dd2-item-id="B"]')&&d?.querySelector('.duduq-dd2-bank [data-dd2-item-id="C"]'))},null,{timeout:5000});
 s=await snap();assert(s.results[0]?.isCorrect===false,"SEQUENCE wrong did not retry");assert(s.disabled.A&&s.disabled.D&&!s.disabled.B&&!s.disabled.C,"SEQUENCE partial retry contract");assert(JSON.stringify(s.order)===JSON.stringify(["A",null,null,"D"]),`SEQUENCE preserved positions ${JSON.stringify(s.order)}`);layout(s,"SEQUENCE retry");
 
-await keyIntoZone("B");await keyIntoZone("C");
+await dragIntoNextSlot("B");await dragIntoNextSlot("C");
 s=await snap();assert(JSON.stringify(s.order)===JSON.stringify(["A","B","C","D"]),`SEQUENCE final order ${JSON.stringify(s.order)}`);assert(s.results.length===1&&s.confirm===1,"SEQUENCE correction auto-evaluated");layout(s,"SEQUENCE corrected");
 await frame.locator(".duduq-dd2-confirm").click({force:true});
 await page.waitForFunction(()=>__DD225_RESULTS__.length===2&&__DD225_RESULTS__[1]?.isCorrect===true,null,{timeout:5000});
