@@ -5,7 +5,7 @@ on:
     branches:
       - audit/pedagogy-y1-y2-20260902
     paths:
-      - "test/refinement/pedagogy-audit-y1-y2.mjs"
+      - "test/refinement/pedagogy-audit-y1-y2*.mjs"
       - ".github/workflows/pedagogy-audit-y1-y2.yml"
   workflow_dispatch:
 
@@ -37,4 +37,4 @@ jobs:
       - name: Audit Year 1 and Year 2
         env:
           BASE_URL: http://127.0.0.1:4173
-        run: node test/refinement/pedagogy-audit-y1-y2.mjs
+        run: node test/refinement/pedagogy-audit-y1-y2-v2.mjs
