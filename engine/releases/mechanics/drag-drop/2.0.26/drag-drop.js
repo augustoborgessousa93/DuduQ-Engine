@@ -198,6 +198,12 @@
   .duduq-dd2-actions {
     top: clamp(24px, 4.6vh, 36px) !important;
   }
+
+  /* Depois do primeiro posicionamento, o banco parcial usa um pouco mais da
+     faixa inferior. O tamanho do card permanece idêntico ao estado inicial. */
+  .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) {
+    top: clamp(42px, 6.2vh, 50px) !important;
+  }
 }
 
 @media (max-height: 720px) and (min-width: 700px) {
@@ -216,6 +222,7 @@
   .duduq-dd2-zone { padding: 4px 7px !important; gap: 7px !important; }
   .duduq-dd2-bank[data-dd2-bank],
   .duduq-dd2-actions { top: 14px !important; }
+  .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) { top: 24px !important; }
   .duduq-dd2-bank[data-dd2-bank] { padding-block: 4px 6px !important; }
   .duduq-dd2-actions { margin-top: 9px !important; padding-top: 8px !important; }
 }
@@ -234,6 +241,7 @@
   .duduq-dd2-zone { gap: 6px !important; padding-inline: 5px !important; }
   .duduq-dd2-bank[data-dd2-bank],
   .duduq-dd2-actions { top: 14px !important; }
+  .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) { top: 26px !important; }
 }
 
 @media (max-width: 520px) {
@@ -252,7 +260,8 @@
   .duduq-dd2-target-head { min-height: 38px !important; }
   .duduq-dd2-zone .duduq-dd2-item-shell { max-width: min(var(--dd226-placed-card-w), 46%) !important; }
   .duduq-dd2-bank[data-dd2-bank],
-  .duduq-dd2-actions { top: 0 !important; }
+  .duduq-dd2-actions,
+  .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) { top: 0 !important; }
   .duduq-dd2-bank-items { gap: 8px !important; }
 }
 
