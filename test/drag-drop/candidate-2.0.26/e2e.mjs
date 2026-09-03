@@ -90,6 +90,7 @@ try {
 
     await place(frame, "cat", "pets");
     await place(frame, "dog", "pets");
+    await frame.locator(".duduq-dd226-remove").nth(1).waitFor({ state:"visible", timeout:2500 });
     const partial = await metrics(page);
     assert(partial.bankCards.length === 2, `${viewport.name}: banco parcial != 2`);
     assert(partial.placedCards.length === 2, `${viewport.name}: posicionados parciais != 2`);
@@ -108,7 +109,7 @@ try {
     await place(frame, "pencil", "school");
     await place(frame, "backpack", "school");
     await frame.locator(".duduq-dd2-confirm").waitFor({ state:"visible", timeout:2500 });
-    await frame.locator(".duduq-dd226-remove").first().waitFor({ state:"visible", timeout:2500 });
+    await frame.locator(".duduq-dd226-remove").nth(3).waitFor({ state:"visible", timeout:2500 });
     await page.waitForTimeout(120);
     const complete = await metrics(page);
 
@@ -131,6 +132,7 @@ try {
     await removeCat.click({ force:true });
     await frame.locator(`.duduq-dd2-bank ${item("cat")}`).first().waitFor({ state:"visible", timeout:2500 });
     await frame.locator(".duduq-dd2-confirm").waitFor({ state:"detached", timeout:2500 });
+    await frame.locator(".duduq-dd226-remove").nth(2).waitFor({ state:"visible", timeout:2500 });
     const removed = await metrics(page);
     assert(removed.bankCards.length === 1, `${viewport.name}: × não devolveu item ao banco`);
     assert(!removed.confirm, `${viewport.name}: CONFIRMAR permaneceu após remoção`);
@@ -139,6 +141,7 @@ try {
 
     await place(frame, "cat", "pets");
     await frame.locator(".duduq-dd2-confirm").waitFor({ state:"visible", timeout:2500 });
+    await frame.locator(".duduq-dd226-remove").nth(3).waitFor({ state:"visible", timeout:2500 });
     await page.waitForTimeout(100);
     const restored = await metrics(page);
     assert(restored.bankDisplay === "none" || restored.bankHeight <= 1, `${viewport.name}: banco não ocultou após reposicionar`);
