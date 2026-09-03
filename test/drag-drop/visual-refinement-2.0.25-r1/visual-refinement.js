@@ -17,6 +17,8 @@
   const STYLE_ID = "duduq-dd225-visual-r1";
   const REMOVE_CLASS = "duduq-dd225-vr-remove";
   const PATCHED_ATTR = "data-dd225-visual-r1";
+  const BURST_PAD = 108;
+  const BURST_MARGIN = 4;
   let pointerSerial = 9100;
 
   const CSS = `
@@ -304,12 +306,28 @@
     width: 50px !important;
     height: 50px !important;
   }
-  /* The mascot burst used negative insets + visible overflow; contain only this decoration on mobile. */
+
+  /*
+     The mascot burst is absolutely positioned around the mascot. Its original
+     large negative inset made the burst element itself wider than the mobile
+     viewport. Keep the box inside the available viewport and preserve the
+     particle origin at the mascot center through variables set by sync().
+  */
   .duduq-star-burst[data-origin="mascot"] {
-    inset: -65% !important;
+    inset:
+      var(--dd225-vr-burst-top, 0px)
+      var(--dd225-vr-burst-right, 0px)
+      var(--dd225-vr-burst-bottom, 0px)
+      var(--dd225-vr-burst-left, 0px) !important;
+    width: auto !important;
+    height: auto !important;
     overflow: clip !important;
     contain: paint !important;
     pointer-events: none !important;
+  }
+  .duduq-star-burst[data-origin="mascot"] .duduq-star-particle {
+    left: var(--dd225-vr-burst-origin-x, 50%) !important;
+    top: var(--dd225-vr-burst-origin-y, 50%) !important;
   }
 }
 
@@ -371,6 +389,31 @@
     return true;
   }
 
+  function syncMascotBurstContainment(doc) {
+    const viewportWidth = doc.documentElement.clientWidth;
+    const viewportHeight = doc.documentElement.clientHeight;
+    if (viewportWidth > 520 || !viewportWidth || !viewportHeight) return;
+
+    doc.querySelectorAll('.duduq-star-burst[data-origin="mascot"]').forEach(function (burst) {
+      const mascot = burst.closest(".duduq-mascot");
+      if (!mascot) return;
+      const rect = mascot.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+
+      const leftPad = Math.min(BURST_PAD, Math.max(0, rect.left - BURST_MARGIN));
+      const rightPad = Math.min(BURST_PAD, Math.max(0, viewportWidth - rect.right - BURST_MARGIN));
+      const topPad = Math.min(BURST_PAD, Math.max(0, rect.top - BURST_MARGIN));
+      const bottomPad = Math.min(BURST_PAD, Math.max(0, viewportHeight - rect.bottom - BURST_MARGIN));
+
+      burst.style.setProperty("--dd225-vr-burst-left", `${-leftPad}px`);
+      burst.style.setProperty("--dd225-vr-burst-right", `${-rightPad}px`);
+      burst.style.setProperty("--dd225-vr-burst-top", `${-topPad}px`);
+      burst.style.setProperty("--dd225-vr-burst-bottom", `${-bottomPad}px`);
+      burst.style.setProperty("--dd225-vr-burst-origin-x", `${leftPad + rect.width / 2}px`);
+      burst.style.setProperty("--dd225-vr-burst-origin-y", `${topPad + rect.height / 2}px`);
+    });
+  }
+
   function feedbackIdle(doc) {
     const feedback = doc.querySelector(".duduq-engine-feedback");
     return !feedback || !feedback.getAttribute("data-state") || feedback.getAttribute("data-state") === "idle";
@@ -387,6 +430,8 @@
       style.textContent = CSS;
       doc.head.appendChild(style);
     }
+
+    syncMascotBurstContainment(doc);
 
     const idle = feedbackIdle(doc);
     const placedShells = doc.querySelectorAll(".duduq-dd2-zone .duduq-dd2-item-shell");
