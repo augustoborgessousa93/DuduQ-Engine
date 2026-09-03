@@ -172,6 +172,7 @@
   min-width: 0;
   box-sizing: border-box;
   overflow: clip;
+  contain: layout paint;
 }
 
 .duduq-engine-feedback-copy {
@@ -322,7 +323,7 @@
     width: auto !important;
     height: auto !important;
     overflow: clip !important;
-    contain: paint !important;
+    contain: layout paint !important;
     pointer-events: none !important;
   }
   .duduq-star-burst[data-origin="mascot"] .duduq-star-particle {
