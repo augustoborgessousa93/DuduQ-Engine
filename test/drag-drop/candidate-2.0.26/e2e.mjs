@@ -41,7 +41,8 @@ async function metrics(page) {
     if (!doc) return null;
     const rects = (selector) => [...doc.querySelectorAll(selector)].map(node => {
       const r = node.getBoundingClientRect();
-      return { width:r.width, height:r.height, top:r.top, bottom:r.bottom };
+      const s = getComputedStyle(node);
+      return { width:r.width, height:r.height, top:r.top, bottom:r.bottom, className:node.className || "", display:s.display, flex:s.flex, alignSelf:s.alignSelf };
     });
     const one = (selector) => {
       const node = doc.querySelector(selector);
@@ -58,6 +59,8 @@ async function metrics(page) {
       .reduce((a,b) => Math.max(a,b), 0);
     return {
       bankCards: rects('.duduq-dd2-bank .duduq-dd2-item[data-has-media="true"]'),
+      bankShells: rects('.duduq-dd2-bank-items .duduq-dd2-item-shell'),
+      bankChildren: rects('.duduq-dd2-bank-items > *'),
       placedCards: rects('.duduq-dd2-zone .duduq-dd2-item[data-has-media="true"]'),
       targets: rects('.duduq-dd2-target'),
       zones: rects('.duduq-dd2-zone'),
@@ -104,7 +107,7 @@ try {
 
     await place(frame, "cat", "pets");
     const partialOne = await metrics(page);
-    console.log(`SPACE ${viewport.name} partial1 unused=${partialOne.unusedBelowContent.toFixed(1)} root=${JSON.stringify(partialOne.root)} surface=${JSON.stringify(partialOne.surface)} arena=${JSON.stringify(partialOne.arena)} targets=${JSON.stringify(partialOne.targetsBox)} bank=${JSON.stringify(partialOne.bankBox)} actions=${JSON.stringify(partialOne.actionsBox)}`);
+    console.log(`SHELL ${viewport.name} initialCards=${JSON.stringify(initial.bankCards)} initialShells=${JSON.stringify(initial.bankShells)} partialCards=${JSON.stringify(partialOne.bankCards)} partialShells=${JSON.stringify(partialOne.bankShells)} bankChildren=${JSON.stringify(partialOne.bankChildren)}`);
 
     await place(frame, "dog", "pets");
     const partial = await metrics(page);
