@@ -244,7 +244,12 @@
           const frame = mount.querySelector("iframe");
           let doc;
           try { doc = frame && frame.contentDocument; } catch (_) { return; }
-          if (!doc || !doc.head || doc.getElementById(STYLE_ID)) return;
+          if (!doc || !doc.head) return;
+          const existing = doc.getElementById(STYLE_ID);
+          if (existing) {
+            doc.head.appendChild(existing);
+            return;
+          }
           const style = doc.createElement("style");
           style.id = STYLE_ID;
           style.textContent = CSS;
