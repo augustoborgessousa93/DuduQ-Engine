@@ -1,11 +1,13 @@
 /* =========================================================
    DUDUQ MECHANIC — DRAG & DROP 2.0.26 CANDIDATE
-   BALANCED CARD SCALE
+   BALANCED CARD SCALE + COMPLETE REVIEW SURFACE
 
    Base imutável: Drag & Drop 2.0.25.
    Escopo desta candidata:
    - estabiliza a proporção entre banco, itens posicionados e destinos;
-   - remove saltos visuais grandes entre estados;
+   - amplia levemente os cards sem saltos visuais grandes entre estados;
+   - quando todos os itens estão posicionados, usa melhor a área disponível;
+   - adiciona × discreto que devolve o item pelo caminho nativo do banco;
    - preserva integralmente avaliação, confirmar, retry, success e smart snap;
    - não altera Core, Loader, Player, Host, Progress ou conteúdo.
    ========================================================= */
@@ -15,6 +17,7 @@
   const VERSION = "2.0.26";
   const BASE_URL = "/engine/releases/mechanics/drag-drop/2.0.25/drag-drop.js";
   const BALANCED_CSS_HOOK = "__DUDUQ_DD226_BALANCED_CSS__";
+  const BALANCED_RUNTIME_HOOK = "__DUDUQ_DD226_BALANCED_RUNTIME__";
 
   function fail(message) {
     throw new Error("[DuduQ Drag & Drop 2.0.26 candidate] " + message);
@@ -30,15 +33,15 @@
   }
 
   const BALANCED_CSS = `
-/* === DUDUQ DRAG & DROP 2.0.26 — BALANCED CARDS === */
+/* === DUDUQ DRAG & DROP 2.0.26 — BALANCED CARDS + COMPLETE REVIEW === */
 .duduq-dd2-root {
-  --dd226-bank-card-w: clamp(148px, 12vw, 160px);
-  --dd226-bank-card-h: 92px;
-  --dd226-placed-card-w: clamp(146px, 11.8vw, 158px);
-  --dd226-placed-card-h: 90px;
-  --dd226-media-h: 60px;
-  --dd226-target-h: clamp(150px, 20vh, 172px);
-  --dd226-zone-h: 98px;
+  --dd226-bank-card-w: clamp(152px, 12.3vw, 164px);
+  --dd226-bank-card-h: 96px;
+  --dd226-placed-card-w: clamp(150px, 12vw, 162px);
+  --dd226-placed-card-h: 94px;
+  --dd226-media-h: 64px;
+  --dd226-target-h: clamp(154px, 20.5vh, 176px);
+  --dd226-zone-h: 102px;
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
@@ -88,9 +91,9 @@
   align-items: center !important;
   justify-content: center !important;
   gap: 8px !important;
-  padding: 5px 8px !important;
+  padding: 6px 9px !important;
   box-sizing: border-box !important;
-  overflow: clip !important;
+  overflow: visible !important;
 }
 
 /* Mesma família de tamanho em todos os estados: sem salto grande. */
@@ -107,6 +110,7 @@
 }
 
 .duduq-dd2-zone .duduq-dd2-item-shell {
+  position: relative !important;
   width: var(--dd226-placed-card-w) !important;
   min-width: 0 !important;
   max-width: min(var(--dd226-placed-card-w), 48%) !important;
@@ -130,7 +134,7 @@
 
 .duduq-dd2-bank[data-dd2-bank] .duduq-dd2-item-media,
 .duduq-dd2-zone .duduq-dd2-item-media {
-  width: min(92%, 112px) !important;
+  width: min(92%, 116px) !important;
   max-width: 92% !important;
   height: var(--dd226-media-h) !important;
   max-height: var(--dd226-media-h) !important;
@@ -172,8 +176,8 @@
   transform-origin: center center;
 }
 
-/* O banco vazio deixa de reservar altura. */
-.duduq-dd2-bank[data-dd2-bank]:not(:has(.duduq-dd2-item)) {
+/* O banco vazio deixa de reservar altura. O proxy é usado apenas durante × -> banco. */
+.duduq-dd2-bank[data-dd2-bank]:not([data-dd226-return-proxy="true"]):not(:has(.duduq-dd2-item)) {
   display: none !important;
   min-height: 0 !important;
   height: 0 !important;
@@ -188,8 +192,74 @@
   padding-top: 8px !important;
 }
 
-/* Usa visualmente a faixa inferior sem alterar a altura estrutural medida
-   pelo Host. Isso evita o salto de layout quando um item sai do banco. */
+/* × discreto. Fica no canto do shell, fora da área principal da imagem. */
+.duduq-dd226-remove {
+  position: absolute !important;
+  top: -7px !important;
+  right: -7px !important;
+  z-index: 20 !important;
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  min-height: 22px !important;
+  display: grid !important;
+  place-items: center !important;
+  margin: 0 !important;
+  padding: 0 0 2px !important;
+  border: 1px solid rgba(72,89,108,.28) !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,.97) !important;
+  color: #52606d !important;
+  box-shadow: 0 2px 6px rgba(31,65,99,.16) !important;
+  font: 800 16px/1 system-ui,sans-serif !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+.duduq-dd226-remove:hover { background:#f7fafc !important; color:#24384d !important; }
+.duduq-dd226-remove:focus-visible { outline:3px solid #111827 !important; outline-offset:2px !important; }
+
+/* Hit target invisível usado somente para acionar a devolução nativa ao banco. */
+.duduq-dd2-bank[data-dd226-return-proxy="true"] {
+  display: flex !important;
+  position: fixed !important;
+  left: 3px !important;
+  bottom: 3px !important;
+  z-index: 2147483000 !important;
+  width: 74px !important;
+  height: 74px !important;
+  min-width: 74px !important;
+  min-height: 74px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: auto !important;
+}
+
+/* Estado de revisão: todos posicionados. Usa a área liberada pelo banco vazio. */
+@media (min-width: 821px) and (min-height: 721px) {
+  .duduq-dd2-root:has(.duduq-dd2-bank[data-dd2-bank]:not(:has(.duduq-dd2-item))) {
+    --dd226-placed-card-w: 178px;
+    --dd226-placed-card-h: 110px;
+    --dd226-media-h: 78px;
+    --dd226-target-h: 194px;
+    --dd226-zone-h: 122px;
+  }
+  .duduq-dd2-root:has(.duduq-dd2-bank[data-dd2-bank]:not(:has(.duduq-dd2-item))) .duduq-dd2-zone .duduq-dd2-item-media {
+    width: min(94%, 132px) !important;
+    max-width: 94% !important;
+  }
+  .duduq-dd2-root:has(.duduq-dd2-bank[data-dd2-bank]:not(:has(.duduq-dd2-item))) .duduq-dd2-target {
+    padding-bottom: 10px !important;
+  }
+  .duduq-dd2-root:has(.duduq-dd2-bank[data-dd2-bank]:not(:has(.duduq-dd2-item))) .duduq-dd2-actions {
+    margin-top: 18px !important;
+    padding-top: 10px !important;
+    transform: translateY(4px);
+  }
+}
+
+/* Usa visualmente a faixa inferior sem alterar a altura estrutural medida pelo Host. */
 @media (min-width: 900px) and (min-height: 650px) {
   .duduq-dd2-bank[data-dd2-bank] .duduq-dd2-bank-items {
     transform: translateY(clamp(14px, 2.6vh, 20px));
@@ -201,49 +271,71 @@
 
 @media (max-height: 720px) and (min-width: 700px) {
   .duduq-dd2-root {
-    --dd226-bank-card-w: 150px;
-    --dd226-bank-card-h: 86px;
-    --dd226-placed-card-w: 150px;
-    --dd226-placed-card-h: 86px;
-    --dd226-media-h: 56px;
-    --dd226-target-h: 156px;
-    --dd226-zone-h: 94px;
+    --dd226-bank-card-w: 154px;
+    --dd226-bank-card-h: 88px;
+    --dd226-placed-card-w: 154px;
+    --dd226-placed-card-h: 88px;
+    --dd226-media-h: 58px;
+    --dd226-target-h: 160px;
+    --dd226-zone-h: 98px;
   }
   .duduq-dd2-arena { gap: 6px !important; padding-bottom: 6px !important; }
   .duduq-dd2-target { padding: 18px 7px 6px !important; }
   .duduq-dd2-target-head { min-height: 34px !important; }
-  .duduq-dd2-zone { padding: 4px 7px !important; gap: 7px !important; }
+  .duduq-dd2-zone { padding: 5px 8px !important; gap: 7px !important; }
   .duduq-dd2-bank[data-dd2-bank] { padding-block: 4px 6px !important; }
   .duduq-dd2-bank[data-dd2-bank] .duduq-dd2-bank-items { transform: translateY(10px); }
   .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) .duduq-dd2-bank-items { transform: translateY(16px); }
   .duduq-dd2-actions { margin-top: 9px !important; padding-top: 8px !important; }
+  .duduq-dd2-root:has(.duduq-dd2-bank[data-dd2-bank]:not(:has(.duduq-dd2-item))) {
+    --dd226-placed-card-w: 166px;
+    --dd226-placed-card-h: 96px;
+    --dd226-media-h: 66px;
+    --dd226-target-h: 176px;
+    --dd226-zone-h: 108px;
+  }
+  .duduq-dd2-root:has(.duduq-dd2-bank[data-dd2-bank]:not(:has(.duduq-dd2-item))) .duduq-dd2-actions {
+    margin-top: 15px !important;
+    padding-top: 8px !important;
+  }
 }
 
 @media (max-width: 820px) {
   .duduq-dd2-root {
-    --dd226-bank-card-w: 146px;
-    --dd226-bank-card-h: 86px;
-    --dd226-placed-card-w: 144px;
-    --dd226-placed-card-h: 84px;
-    --dd226-media-h: 54px;
-    --dd226-target-h: 148px;
-    --dd226-zone-h: 92px;
+    --dd226-bank-card-w: 150px;
+    --dd226-bank-card-h: 90px;
+    --dd226-placed-card-w: 148px;
+    --dd226-placed-card-h: 88px;
+    --dd226-media-h: 58px;
+    --dd226-target-h: 152px;
+    --dd226-zone-h: 96px;
   }
   .duduq-dd2-targets { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important; }
-  .duduq-dd2-zone { gap: 6px !important; padding-inline: 5px !important; }
+  .duduq-dd2-zone { gap: 6px !important; padding-inline: 6px !important; }
   .duduq-dd2-bank[data-dd2-bank] .duduq-dd2-bank-items { transform: translateY(10px); }
   .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) .duduq-dd2-bank-items { transform: translateY(16px); }
+  .duduq-dd2-root:has(.duduq-dd2-bank[data-dd2-bank]:not(:has(.duduq-dd2-item))) {
+    --dd226-placed-card-w: 156px;
+    --dd226-placed-card-h: 96px;
+    --dd226-media-h: 66px;
+    --dd226-target-h: 164px;
+    --dd226-zone-h: 104px;
+  }
+  .duduq-dd2-root:has(.duduq-dd2-bank[data-dd2-bank]:not(:has(.duduq-dd2-item))) .duduq-dd2-actions {
+    margin-top: 14px !important;
+    padding-top: 9px !important;
+  }
 }
 
 @media (max-width: 520px) {
   .duduq-dd2-root {
-    --dd226-bank-card-w: 138px;
-    --dd226-bank-card-h: 82px;
-    --dd226-placed-card-w: 136px;
-    --dd226-placed-card-h: 82px;
-    --dd226-media-h: 52px;
-    --dd226-target-h: 138px;
-    --dd226-zone-h: 88px;
+    --dd226-bank-card-w: 142px;
+    --dd226-bank-card-h: 84px;
+    --dd226-placed-card-w: 140px;
+    --dd226-placed-card-h: 84px;
+    --dd226-media-h: 54px;
+    --dd226-target-h: 140px;
+    --dd226-zone-h: 90px;
   }
   .duduq-dd2-arena { gap: 7px !important; padding: 2px 4px 8px !important; }
   .duduq-dd2-targets { grid-template-columns: minmax(0, 1fr) !important; gap: 7px !important; }
@@ -253,13 +345,156 @@
   .duduq-dd2-bank[data-dd2-bank] .duduq-dd2-bank-items,
   .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) .duduq-dd2-bank-items { transform: none; }
   .duduq-dd2-bank-items { gap: 8px !important; }
+  .duduq-dd226-remove {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    top: -5px !important;
+    right: -5px !important;
+    font-size: 15px !important;
+  }
+  .duduq-dd2-root:has(.duduq-dd2-bank[data-dd2-bank]:not(:has(.duduq-dd2-item))) {
+    --dd226-placed-card-w: 146px;
+    --dd226-placed-card-h: 88px;
+    --dd226-media-h: 58px;
+    --dd226-target-h: 146px;
+    --dd226-zone-h: 94px;
+  }
+  .duduq-dd2-root:has(.duduq-dd2-bank[data-dd2-bank]:not(:has(.duduq-dd2-item))) .duduq-dd2-actions {
+    margin-top: 11px !important;
+    padding-top: 7px !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .duduq-dd2-target,
   .duduq-dd2-item,
-  .duduq-dd2-ghost { transition: none !important; transform: none !important; }
+  .duduq-dd2-ghost,
+  .duduq-dd226-remove { transition: none !important; transform: none !important; }
 }
+`;
+
+  const BALANCED_RUNTIME = `
+(function () {
+  "use strict";
+  var REMOVE_CLASS = "duduq-dd226-remove";
+  var RETURN_PROXY = "data-dd226-return-proxy";
+  var pointerSerial = 22600;
+  var syncQueued = false;
+
+  function dispatchPointer(target, type, coords, pointerId) {
+    var event = new PointerEvent(type, {
+      bubbles:true,
+      cancelable:true,
+      composed:true,
+      pointerId:pointerId,
+      pointerType:"mouse",
+      isPrimary:true,
+      button:0,
+      buttons:type === "pointerup" ? 0 : 1,
+      clientX:coords.x,
+      clientY:coords.y
+    });
+    target.dispatchEvent(event);
+  }
+
+  function feedbackIdle(doc) {
+    var feedback = doc.querySelector(".duduq-engine-feedback");
+    var state = feedback && feedback.getAttribute("data-state");
+    return !state || state === "idle";
+  }
+
+  function returnThroughNativeBank(doc, itemButton) {
+    var bank = doc.querySelector(".duduq-dd2-bank[data-dd2-bank]");
+    if (!bank || !itemButton || itemButton.disabled) return false;
+
+    bank.setAttribute(RETURN_PROXY, "true");
+    var itemRect = itemButton.getBoundingClientRect();
+    var bankRect = bank.getBoundingClientRect();
+    var start = { x:itemRect.left + itemRect.width / 2, y:itemRect.top + itemRect.height / 2 };
+    var end = { x:bankRect.left + bankRect.width / 2, y:bankRect.top + bankRect.height / 2 };
+    var pointerId = ++pointerSerial;
+    var ownSetPointerCapture = Object.prototype.hasOwnProperty.call(itemButton, "setPointerCapture");
+    var previousSetPointerCapture = itemButton.setPointerCapture;
+
+    try {
+      itemButton.setPointerCapture = function () {};
+      dispatchPointer(itemButton, "pointerdown", start, pointerId);
+      dispatchPointer(itemButton, "pointermove", end, pointerId);
+      dispatchPointer(itemButton, "pointerup", end, pointerId);
+    } finally {
+      if (ownSetPointerCapture) itemButton.setPointerCapture = previousSetPointerCapture;
+      else {
+        try { delete itemButton.setPointerCapture; }
+        catch (_) { itemButton.setPointerCapture = previousSetPointerCapture; }
+      }
+      bank.removeAttribute(RETURN_PROXY);
+    }
+    return true;
+  }
+
+  function sync() {
+    syncQueued = false;
+    var doc = document;
+    var idle = feedbackIdle(doc);
+    var placedShells = doc.querySelectorAll(".duduq-dd2-zone .duduq-dd2-item-shell");
+
+    placedShells.forEach(function (shell) {
+      var item = shell.querySelector('.duduq-dd2-item[data-placed="true"]');
+      var remove = shell.querySelector("." + REMOVE_CLASS);
+      var removable = Boolean(item && !item.disabled && idle);
+
+      if (!removable) {
+        if (remove) remove.remove();
+        return;
+      }
+      if (remove) return;
+
+      remove = doc.createElement("button");
+      remove.type = "button";
+      remove.className = REMOVE_CLASS;
+      remove.textContent = "×";
+      remove.setAttribute("aria-label", "Remover item e devolver para Itens");
+      remove.setAttribute("title", "Devolver para Itens");
+      remove.addEventListener("pointerdown", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+      remove.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        returnThroughNativeBank(doc, item);
+        window.setTimeout(queueSync, 0);
+      });
+      shell.appendChild(remove);
+    });
+
+    doc.querySelectorAll("." + REMOVE_CLASS).forEach(function (remove) {
+      if (!remove.closest(".duduq-dd2-zone .duduq-dd2-item-shell")) remove.remove();
+    });
+  }
+
+  function queueSync() {
+    if (syncQueued) return;
+    syncQueued = true;
+    window.requestAnimationFrame(sync);
+  }
+
+  var observer = new MutationObserver(queueSync);
+  function start() {
+    observer.observe(document.documentElement, {
+      childList:true,
+      subtree:true,
+      attributes:true,
+      attributeFilter:["data-placed", "data-state", "disabled"]
+    });
+    queueSync();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once:true });
+  else start();
+})();
 `;
 
   try {
@@ -270,6 +505,16 @@
     });
   } catch (_) {
     window[BALANCED_CSS_HOOK] = BALANCED_CSS;
+  }
+
+  try {
+    Object.defineProperty(window, BALANCED_RUNTIME_HOOK, {
+      value: BALANCED_RUNTIME,
+      configurable: true,
+      writable: false
+    });
+  } catch (_) {
+    window[BALANCED_RUNTIME_HOOK] = BALANCED_RUNTIME;
   }
 
   const xhr = new XMLHttpRequest();
@@ -290,7 +535,7 @@
   source = replaceRequired(
     source,
     `prepared = prepared.replace("</head>", '<style id="duduq-dd225-internal-smart-surface">' + INTERNAL_CSS + "</style></head>");`,
-    `prepared = prepared.replace("</head>", '<style id="duduq-dd225-internal-smart-surface">' + INTERNAL_CSS + '</style><style id="duduq-dd226-balanced-cards">' + window.__DUDUQ_DD226_BALANCED_CSS__ + "</style></head>");`
+    `prepared = prepared.replace("</head>", '<style id="duduq-dd225-internal-smart-surface">' + INTERNAL_CSS + '</style><style id="duduq-dd226-balanced-cards">' + window.__DUDUQ_DD226_BALANCED_CSS__ + "</style></head>");\n    prepared = prepared.replace("</body>", '<script id="duduq-dd226-balanced-runtime">' + window.__DUDUQ_DD226_BALANCED_RUNTIME__ + "</script></body>");`
   );
 
   try {
