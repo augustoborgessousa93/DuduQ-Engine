@@ -35,8 +35,8 @@
   const BALANCED_CSS = `
 /* === DUDUQ DRAG & DROP 2.0.26 — BALANCED CARDS + COMPLETE REVIEW === */
 .duduq-dd2-root {
-  --dd226-bank-card-w: clamp(152px, 12.3vw, 164px);
-  --dd226-bank-card-h: 96px;
+  --dd226-bank-card-w: clamp(174px, 12.9vw, 176px);
+  --dd226-bank-card-h: 104px;
   --dd226-placed-card-w: clamp(150px, 12vw, 162px);
   --dd226-placed-card-h: 94px;
   --dd226-media-h: 64px;
@@ -238,6 +238,12 @@
 
 /* Estado de revisão: todos posicionados. Usa a área liberada pelo banco vazio. */
 @media (min-width: 821px) and (min-height: 721px) {
+  /* Ajuste visual r8: amplia somente os itens ainda disponíveis no desktop. */
+  .duduq-dd2-bank[data-dd2-bank] .duduq-dd2-item-media {
+    height: 74px !important;
+    max-height: 74px !important;
+    flex: 0 0 74px !important;
+  }
   .duduq-dd2-root:has(.duduq-dd2-bank[data-dd2-bank]:not(:has(.duduq-dd2-item))) {
     --dd226-placed-card-w: 178px;
     --dd226-placed-card-h: 110px;
