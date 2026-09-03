@@ -156,6 +156,8 @@
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
+  margin-top: clamp(16px, 4vh, 30px) !important;
+  margin-bottom: clamp(6px, 1.5vh, 12px) !important;
   padding: 5px 8px 7px !important;
   box-sizing: border-box !important;
 }
@@ -185,6 +187,15 @@
   padding-top: 8px !important;
 }
 
+/* Em telas amplas, usa parte do vazio inferior para equilibrar a composição,
+   sem aumentar novamente cards ou destinos. */
+@media (min-width: 900px) and (min-height: 650px) {
+  .duduq-dd2-bank[data-dd2-bank] {
+    margin-top: clamp(28px, 5.5vh, 42px) !important;
+    margin-bottom: clamp(10px, 2vh, 16px) !important;
+  }
+}
+
 @media (max-height: 720px) and (min-width: 700px) {
   .duduq-dd2-root {
     --dd226-bank-card-w: 150px;
@@ -199,7 +210,11 @@
   .duduq-dd2-target { padding: 18px 7px 6px !important; }
   .duduq-dd2-target-head { min-height: 34px !important; }
   .duduq-dd2-zone { padding: 4px 7px !important; gap: 7px !important; }
-  .duduq-dd2-bank[data-dd2-bank] { padding-block: 4px 6px !important; }
+  .duduq-dd2-bank[data-dd2-bank] {
+    margin-top: 16px !important;
+    margin-bottom: 6px !important;
+    padding-block: 4px 6px !important;
+  }
   .duduq-dd2-actions { margin-top: 9px !important; padding-top: 8px !important; }
 }
 
@@ -215,6 +230,7 @@
   }
   .duduq-dd2-targets { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important; }
   .duduq-dd2-zone { gap: 6px !important; padding-inline: 5px !important; }
+  .duduq-dd2-bank[data-dd2-bank] { margin-top: 18px !important; margin-bottom: 8px !important; }
 }
 
 @media (max-width: 520px) {
@@ -232,6 +248,7 @@
   .duduq-dd2-target { padding: 18px 6px 6px !important; }
   .duduq-dd2-target-head { min-height: 38px !important; }
   .duduq-dd2-zone .duduq-dd2-item-shell { max-width: min(var(--dd226-placed-card-w), 46%) !important; }
+  .duduq-dd2-bank[data-dd2-bank] { margin-top: 8px !important; margin-bottom: 0 !important; }
   .duduq-dd2-bank-items { gap: 8px !important; }
 }
 
