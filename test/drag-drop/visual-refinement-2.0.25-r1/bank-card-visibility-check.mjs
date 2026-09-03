@@ -169,8 +169,29 @@ try {
   assert(allPlaced.length === 4, `estado completo deveria ter 4 itens posicionados, recebeu ${allPlaced.length}`);
   assertPlacedVisible(allPlaced, "COMPLETE");
 
+  const confirmGeometry = await page.evaluate(() => {
+    const doc = document.querySelector("#mount iframe")?.contentDocument;
+    if (!doc) return null;
+    const confirm = doc.querySelector(".duduq-dd2-confirm");
+    const targets = [...doc.querySelectorAll(".duduq-dd2-target")];
+    const confirmRect = confirm?.getBoundingClientRect();
+    const targetBottom = Math.max(...targets.map((target) => target.getBoundingClientRect().bottom));
+    return confirmRect ? {
+      confirmTop: confirmRect.top,
+      confirmBottom: confirmRect.bottom,
+      targetBottom,
+      gap: confirmRect.top - targetBottom,
+      viewportHeight: doc.documentElement.clientHeight
+    } : null;
+  });
+
+  assert(confirmGeometry, "geometria do CONFIRMAR indisponível");
+  assert(confirmGeometry.gap >= 14, `CONFIRMAR muito próximo dos destinos: gap=${confirmGeometry.gap}px`);
+  assert(confirmGeometry.confirmBottom <= confirmGeometry.viewportHeight + 0.5, `CONFIRMAR saiu da viewport: bottom=${confirmGeometry.confirmBottom}px viewport=${confirmGeometry.viewportHeight}px`);
+
   console.log(`SHORT_TARGET_PASS zone=${emptyTarget.zoneHeight.toFixed(1)}px target=${emptyTarget.targetHeight.toFixed(1)}px`);
   console.log(`PLACED_LABELS_PASS partial=3 complete=4 minLabelHeight=${Math.min(...allPlaced.map((entry) => entry.labelHeight)).toFixed(1)}px`);
+  console.log(`CONFIRM_SEPARATION_PASS gap=${confirmGeometry.gap.toFixed(1)}px confirmTop=${confirmGeometry.confirmTop.toFixed(1)}px targetBottom=${confirmGeometry.targetBottom.toFixed(1)}px`);
   console.log(`BANK_CARD_VISIBILITY_PASS viewport=1366x648 itemBottom=${result.rect.bottom.toFixed(1)} labelBottom=${result.labelRect.bottom.toFixed(1)} viewport=${result.viewportHeight}`);
   console.log(`PANEL_CONTAINMENT_PASS itemBottom=${result.rect.bottom.toFixed(1)} bankBottom=${result.bankRect.bottom.toFixed(1)} arenaBottom=${result.arenaRect.bottom.toFixed(1)}`);
   console.log(`BANK_RECT top=${result.bankRect?.top?.toFixed?.(1)} bottom=${result.bankRect?.bottom?.toFixed?.(1)} height=${result.bankRect?.height?.toFixed?.(1)}`);
