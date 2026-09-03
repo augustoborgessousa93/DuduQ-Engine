@@ -123,9 +123,9 @@
           }
 
           /*
-             Short desktop/tablet landscape: compact both destinations and the
-             remaining option bank so every card stays inside the activity
-             surface. This is preview-only and does not alter DD 2.0.25.
+             Short desktop/tablet landscape: keep destinations compact, preserve
+             complete item labels and reserve a separate visual lane for CONFIRM.
+             This is preview-only and does not alter DD 2.0.25.
           */
           @media (max-height:720px) and (min-width:700px) {
             .duduq-dd2-root[data-dd225-visual-r1="true"] .duduq-dd2-arena {
@@ -209,6 +209,14 @@
               height: 54px !important;
               max-height: 54px !important;
               object-fit: contain !important;
+            }
+            .duduq-dd2-root[data-dd225-visual-r1="true"] .duduq-dd2-actions,
+            .duduq-dd2-root[data-dd225-visual-r1="true"] .duduq-matching-action-slot.duduq-dd2-actions {
+              min-height: 66px !important;
+              margin-top: 10px !important;
+              padding: 10px 0 4px !important;
+              place-items: start center !important;
+              overflow: visible !important;
             }
           }
         `;
