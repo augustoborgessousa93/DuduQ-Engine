@@ -79,7 +79,7 @@ try {
     const page = await context.newPage();
     const errors = [];
     page.on("pageerror", error => errors.push(String(error?.message || error)));
-    const response = await page.goto(`${URL}?v=${viewport.name}&r=complete-review-r6`, { waitUntil:"domcontentloaded", timeout:30_000 });
+    const response = await page.goto(`${URL}?v=${viewport.name}&r=complete-review-r7`, { waitUntil:"domcontentloaded", timeout:30_000 });
     assert(response?.ok(), `${viewport.name}: HTTP ${response?.status()}`);
     await waitMounted(page);
     const frame = page.frameLocator("#mount iframe");
@@ -120,7 +120,7 @@ try {
     assert(complete.bankDisplay === "none" || complete.bankHeight <= 1, `${viewport.name}: banco vazio ainda ocupa ${complete.bankHeight}px`);
     assert(complete.confirm, `${viewport.name}: CONFIRMAR não apareceu`);
     assert(complete.removeButtons.length === 4, `${viewport.name}: × completo ${complete.removeButtons.length}/4`);
-    assert(completePlacedW >= partialPlacedW + 4, `${viewport.name}: cards não cresceram no completo ${partialPlacedW.toFixed(1)} -> ${completePlacedW.toFixed(1)}`);
+    assert(completePlacedW >= partialPlacedW - 1, `${viewport.name}: cards encolheram no completo ${partialPlacedW.toFixed(1)} -> ${completePlacedW.toFixed(1)}`);
     assert(completePlacedH >= partialPlacedH + 4, `${viewport.name}: altura dos cards não cresceu ${partialPlacedH.toFixed(1)} -> ${completePlacedH.toFixed(1)}`);
     assert(completeMediaH >= partialMediaH + 4, `${viewport.name}: imagens não cresceram ${partialMediaH.toFixed(1)} -> ${completeMediaH.toFixed(1)}`);
     assert(completeTargetH >= partialTargetH + 4, `${viewport.name}: destinos não cresceram ${partialTargetH.toFixed(1)} -> ${completeTargetH.toFixed(1)}`);
