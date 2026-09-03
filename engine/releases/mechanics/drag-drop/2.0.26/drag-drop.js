@@ -156,8 +156,6 @@
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
-  position: relative !important;
-  top: 0;
   margin: 0 !important;
   padding: 5px 8px 7px !important;
   box-sizing: border-box !important;
@@ -170,6 +168,8 @@
   gap: 10px !important;
   align-items: center !important;
   justify-content: center !important;
+  transform: none;
+  transform-origin: center center;
 }
 
 /* O banco vazio deixa de reservar altura. */
@@ -177,7 +177,6 @@
   display: none !important;
   min-height: 0 !important;
   height: 0 !important;
-  top: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
@@ -185,24 +184,18 @@
 }
 
 .duduq-dd2-actions {
-  position: relative !important;
-  top: 0;
   margin-top: 8px !important;
   padding-top: 8px !important;
 }
 
-/* O host centraliza a mecanica. Em telas amplas, reposicionamos apenas o
-   banco/acoes dentro do espaço livre, sem inflar a altura estrutural. */
+/* Usa visualmente a faixa inferior sem alterar a altura estrutural medida
+   pelo Host. Isso evita o salto de layout quando um item sai do banco. */
 @media (min-width: 900px) and (min-height: 650px) {
-  .duduq-dd2-bank[data-dd2-bank],
-  .duduq-dd2-actions {
-    top: clamp(24px, 4.6vh, 36px) !important;
+  .duduq-dd2-bank[data-dd2-bank] .duduq-dd2-bank-items {
+    transform: translateY(clamp(14px, 2.6vh, 20px));
   }
-
-  /* Depois do primeiro posicionamento, o banco parcial usa um pouco mais da
-     faixa inferior. O tamanho do card permanece idêntico ao estado inicial. */
-  .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) {
-    top: clamp(42px, 6.2vh, 50px) !important;
+  .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) .duduq-dd2-bank-items {
+    transform: translateY(clamp(22px, 3.4vh, 28px));
   }
 }
 
@@ -220,10 +213,9 @@
   .duduq-dd2-target { padding: 18px 7px 6px !important; }
   .duduq-dd2-target-head { min-height: 34px !important; }
   .duduq-dd2-zone { padding: 4px 7px !important; gap: 7px !important; }
-  .duduq-dd2-bank[data-dd2-bank],
-  .duduq-dd2-actions { top: 14px !important; }
-  .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) { top: 24px !important; }
   .duduq-dd2-bank[data-dd2-bank] { padding-block: 4px 6px !important; }
+  .duduq-dd2-bank[data-dd2-bank] .duduq-dd2-bank-items { transform: translateY(10px); }
+  .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) .duduq-dd2-bank-items { transform: translateY(16px); }
   .duduq-dd2-actions { margin-top: 9px !important; padding-top: 8px !important; }
 }
 
@@ -239,9 +231,8 @@
   }
   .duduq-dd2-targets { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important; }
   .duduq-dd2-zone { gap: 6px !important; padding-inline: 5px !important; }
-  .duduq-dd2-bank[data-dd2-bank],
-  .duduq-dd2-actions { top: 14px !important; }
-  .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) { top: 26px !important; }
+  .duduq-dd2-bank[data-dd2-bank] .duduq-dd2-bank-items { transform: translateY(10px); }
+  .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) .duduq-dd2-bank-items { transform: translateY(16px); }
 }
 
 @media (max-width: 520px) {
@@ -259,9 +250,8 @@
   .duduq-dd2-target { padding: 18px 6px 6px !important; }
   .duduq-dd2-target-head { min-height: 38px !important; }
   .duduq-dd2-zone .duduq-dd2-item-shell { max-width: min(var(--dd226-placed-card-w), 46%) !important; }
-  .duduq-dd2-bank[data-dd2-bank],
-  .duduq-dd2-actions,
-  .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) { top: 0 !important; }
+  .duduq-dd2-bank[data-dd2-bank] .duduq-dd2-bank-items,
+  .duduq-dd2-bank[data-dd2-bank]:has(.duduq-dd2-item-shell):not(:has(.duduq-dd2-item-shell:nth-child(4))) .duduq-dd2-bank-items { transform: none; }
   .duduq-dd2-bank-items { gap: 8px !important; }
 }
 
