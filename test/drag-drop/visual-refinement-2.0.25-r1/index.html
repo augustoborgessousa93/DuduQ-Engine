@@ -124,7 +124,7 @@
 
           /* When at least one item is already positioned, remaining bank cards
              become slightly smaller so the visual focus stays on the destinations. */
-          .duduq-dd2-root[data-dd225-visual-r1="true"]:has(.duduq-dd2-zone .duduq-dd2-item[data-placed="true"])
+          .duduq-dd2-root[data-dd225-visual-r1="true"]:where(:has(.duduq-dd2-zone .duduq-dd2-item[data-placed="true"]))
           .duduq-dd2-bank[data-empty="false"] .duduq-dd2-item[data-has-media="true"] {
             width: clamp(108px, 12vw, 148px) !important;
             max-width: min(148px, 100%) !important;
@@ -132,7 +132,7 @@
             padding: 6px 7px !important;
             gap: 2px !important;
           }
-          .duduq-dd2-root[data-dd225-visual-r1="true"]:has(.duduq-dd2-zone .duduq-dd2-item[data-placed="true"])
+          .duduq-dd2-root[data-dd225-visual-r1="true"]:where(:has(.duduq-dd2-zone .duduq-dd2-item[data-placed="true"]))
           .duduq-dd2-bank[data-empty="false"] .duduq-dd2-item[data-has-media="true"] .duduq-dd2-item-media {
             width: min(92%, 112px) !important;
             max-width: 92% !important;
