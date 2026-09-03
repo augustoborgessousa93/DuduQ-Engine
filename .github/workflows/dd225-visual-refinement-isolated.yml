@@ -24,6 +24,7 @@ jobs:
       - name: Syntax
         run: |
           node --check test/drag-drop/visual-refinement-2.0.25-r1/e2e.mjs
+          node --check test/drag-drop/visual-refinement-2.0.25-r1/remote-preview-check.mjs
           node --check test/drag-drop/visual-refinement-2.0.25-r1/visual-refinement.js
       - name: Install Playwright Chromium
         run: |
@@ -43,3 +44,5 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/drag-drop/visual-refinement-2.0.25-r1/e2e.mjs
+      - name: Validate real remote preview URL
+        run: node test/drag-drop/visual-refinement-2.0.25-r1/remote-preview-check.mjs
