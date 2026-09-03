@@ -8,10 +8,22 @@ function assert(condition, message) {
 }
 
 async function place(frame, itemId, targetId) {
-  const item = frame.locator(`.duduq-dd2-item[data-dd2-item-id="${itemId}"]`).first();
-  const zone = frame.locator(`.duduq-dd2-target[data-dd2-target-id="${targetId}"] .duduq-dd2-zone`).first();
-  await item.dragTo(zone, { force: true });
-  await frame.locator(`.duduq-dd2-target[data-dd2-target-id="${targetId}"] .duduq-dd2-item[data-dd2-item-id="${itemId}"]`).first().waitFor({ state: "visible", timeout: 3000 });
+  const itemSelector = `.duduq-dd2-item[data-dd2-item-id="${itemId}"]`;
+  const zoneSelector = `.duduq-dd2-target[data-dd2-target-id="${targetId}"] .duduq-dd2-zone`;
+  const placedSelector = `.duduq-dd2-target[data-dd2-target-id="${targetId}"] ${itemSelector}`;
+
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    const item = frame.locator(itemSelector).first();
+    const zone = frame.locator(zoneSelector).first();
+    await item.dragTo(zone, { force: true });
+    try {
+      await frame.locator(placedSelector).first().waitFor({ state: "visible", timeout: 1500 });
+      return;
+    } catch (error) {
+      if (attempt === 2) throw error;
+      await frame.page().waitForTimeout(80);
+    }
+  }
 }
 
 const browser = await chromium.launch({ headless: true });
