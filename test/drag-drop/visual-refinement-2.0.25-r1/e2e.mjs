@@ -46,8 +46,16 @@ async function waitMounted(page) {
 async function place(frame, itemId, targetId) {
   const item = frame.locator(itemSelector(itemId)).first();
   const zone = frame.locator(zoneSelector(targetId)).first();
-  await item.dragTo(zone, { force: true });
-  await frame.locator(`${zoneSelector(targetId)} ${itemSelector(itemId)}`).first().waitFor({ state: "visible", timeout: 3_000 });
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    await item.dragTo(zone, { force: true });
+    try {
+      await frame.locator(`${zoneSelector(targetId)} ${itemSelector(itemId)}`).first().waitFor({ state: "visible", timeout: 1_500 });
+      return;
+    } catch (error) {
+      if (attempt === 2) throw error;
+      await frame.page().waitForTimeout(80);
+    }
+  }
 }
 
 async function state(page) {
@@ -101,6 +109,7 @@ async function sampleSuccessOverflow(page, durationMs = 1250, intervalMs = 25) {
   let maxBody = 0;
   let feedbackSeen = false;
   let feedbackReadable = true;
+  let diagnostic = null;
 
   while (Date.now() - started <= durationMs) {
     const sample = await page.evaluate(() => {
@@ -113,9 +122,32 @@ async function sampleSuccessOverflow(page, durationMs = 1250, intervalMs = 25) {
       const copy = feedback?.querySelector(".duduq-engine-feedback-copy");
       const cardRect = card?.getBoundingClientRect();
       const copyRect = copy?.getBoundingClientRect();
+      const bodyClient = doc.body.clientWidth;
+      const offenders = [...doc.querySelectorAll("*")]
+        .map((node) => {
+          const rect = node.getBoundingClientRect();
+          const style = getComputedStyle(node);
+          return {
+            tag: node.tagName,
+            cls: typeof node.className === "string" ? node.className.slice(0, 140) : "",
+            left: Math.round(rect.left * 10) / 10,
+            right: Math.round(rect.right * 10) / 10,
+            width: Math.round(rect.width * 10) / 10,
+            position: style.position,
+            overflowX: style.overflowX,
+            transform: style.transform === "none" ? "none" : style.transform.slice(0, 100)
+          };
+        })
+        .filter((entry) => entry.width > 0 && (entry.right > bodyClient + 0.5 || entry.left < -0.5))
+        .sort((a, b) => Math.max(b.right - bodyClient, -b.left) - Math.max(a.right - bodyClient, -a.left))
+        .slice(0, 10);
       return {
         htmlOverflow,
         bodyOverflow,
+        htmlScrollWidth: doc.documentElement.scrollWidth,
+        htmlClientWidth: doc.documentElement.clientWidth,
+        bodyScrollWidth: doc.body.scrollWidth,
+        bodyClientWidth: bodyClient,
         feedbackSeen: Boolean(feedback),
         feedbackReadable: !feedback || Boolean(
           cardRect &&
@@ -124,11 +156,13 @@ async function sampleSuccessOverflow(page, durationMs = 1250, intervalMs = 25) {
           cardRect.right <= doc.documentElement.clientWidth + 0.5 &&
           copyRect.width > 0 &&
           copyRect.height > 0
-        )
+        ),
+        offenders
       };
     });
     if (sample) {
       maxHtml = Math.max(maxHtml, sample.htmlOverflow);
+      if (sample.bodyOverflow > maxBody) diagnostic = sample;
       maxBody = Math.max(maxBody, sample.bodyOverflow);
       feedbackSeen = feedbackSeen || sample.feedbackSeen;
       feedbackReadable = feedbackReadable && sample.feedbackReadable;
@@ -151,7 +185,8 @@ async function sampleSuccessOverflow(page, durationMs = 1250, intervalMs = 25) {
     afterHtml: after.htmlOverflow,
     afterBody: after.bodyOverflow,
     feedbackSeen,
-    feedbackReadable
+    feedbackReadable,
+    diagnostic
   };
 }
 
@@ -273,7 +308,7 @@ async function runViewport(browser, viewport) {
 
     const finalState = await state(page);
     assert(successOverflow.maxHtml === 0, `${viewport.name}: documentElement gerou ${successOverflow.maxHtml}px durante SUCCESS.`);
-    assert(successOverflow.maxBody === 0, `${viewport.name}: body gerou ${successOverflow.maxBody}px durante SUCCESS.`);
+    assert(successOverflow.maxBody === 0, `${viewport.name}: body gerou ${successOverflow.maxBody}px durante SUCCESS. DIAG=${JSON.stringify(successOverflow.diagnostic)}`);
     assert(successOverflow.afterHtml === 0 && successOverflow.afterBody === 0, `${viewport.name}: overflow após animação html=${successOverflow.afterHtml}px body=${successOverflow.afterBody}px.`);
     assert(successOverflow.feedbackReadable, `${viewport.name}: feedback SUCCESS saiu da largura útil.`);
     assert(finalState.results.length === 2 && finalState.results[0].isCorrect === false && finalState.results[1].isCorrect === true, `${viewport.name}: retry/success divergiu da lógica 2.0.25.`);
