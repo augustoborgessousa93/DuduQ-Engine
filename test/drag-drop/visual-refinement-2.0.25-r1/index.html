@@ -113,7 +113,40 @@
 
       function containSuccessDecoration(mount) {
         const STYLE_ID = "dd225-vr-success-decoration-containment";
-        const CSS = "@media (max-width:520px){.duduq-engine-complete{overflow:clip!important;contain:paint!important;isolation:isolate!important}}";
+        const CSS = `
+          @media (max-width:520px) {
+            .duduq-engine-complete {
+              overflow: clip !important;
+              contain: paint !important;
+              isolation: isolate !important;
+            }
+          }
+
+          /*
+             Short desktop/tablet landscape: keep the remaining option card
+             completely inside the activity surface without changing targets.
+          */
+          @media (max-height:720px) and (min-width:700px) {
+            .duduq-dd2-root[data-dd225-visual-r1="true"] .duduq-dd2-bank[data-empty="false"] {
+              min-height: 108px !important;
+              padding: 4px 8px 7px !important;
+            }
+            .duduq-dd2-root[data-dd225-visual-r1="true"] .duduq-dd2-bank[data-empty="false"] .duduq-dd2-bank-items {
+              align-items: center !important;
+            }
+            .duduq-dd2-root[data-dd225-visual-r1="true"] .duduq-dd2-bank[data-empty="false"] .duduq-dd2-item[data-has-media="true"] {
+              min-height: 100px !important;
+              height: auto !important;
+              padding: 5px 7px !important;
+              gap: 2px !important;
+            }
+            .duduq-dd2-root[data-dd225-visual-r1="true"] .duduq-dd2-bank[data-empty="false"] .duduq-dd2-item[data-has-media="true"] .duduq-dd2-item-media {
+              height: 72px !important;
+              max-height: 72px !important;
+              object-fit: contain !important;
+            }
+          }
+        `;
 
         function inject() {
           const frame = mount.querySelector("iframe");
