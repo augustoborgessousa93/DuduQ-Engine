@@ -53,7 +53,7 @@ async function place(frame, itemId, targetId) {
       return;
     } catch (error) {
       if (attempt === 2) throw error;
-      await frame.page().waitForTimeout(80);
+      await new Promise((resolve) => setTimeout(resolve, 80));
     }
   }
 }
