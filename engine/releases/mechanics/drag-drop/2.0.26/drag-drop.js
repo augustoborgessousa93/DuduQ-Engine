@@ -367,6 +367,69 @@
   }
 }
 
+/* Marcador explícito do estado visual completo. Evita depender de :has() aninhado. */
+@media (min-width: 821px) and (min-height: 721px) {
+  .duduq-dd2-root[data-dd226-complete="true"] {
+    --dd226-placed-card-w: 178px;
+    --dd226-placed-card-h: 110px;
+    --dd226-media-h: 78px;
+    --dd226-target-h: 194px;
+    --dd226-zone-h: 122px;
+  }
+  .duduq-dd2-root[data-dd226-complete="true"] .duduq-dd2-zone .duduq-dd2-item-media {
+    width: min(94%, 132px) !important;
+    max-width: 94% !important;
+  }
+  .duduq-dd2-root[data-dd226-complete="true"] .duduq-dd2-target { padding-bottom: 10px !important; }
+  .duduq-dd2-root[data-dd226-complete="true"] .duduq-dd2-actions {
+    margin-top: 18px !important;
+    padding-top: 10px !important;
+    transform: translateY(4px);
+  }
+}
+
+@media (max-height: 720px) and (min-width: 700px) {
+  .duduq-dd2-root[data-dd226-complete="true"] {
+    --dd226-placed-card-w: 166px;
+    --dd226-placed-card-h: 96px;
+    --dd226-media-h: 66px;
+    --dd226-target-h: 176px;
+    --dd226-zone-h: 108px;
+  }
+  .duduq-dd2-root[data-dd226-complete="true"] .duduq-dd2-actions {
+    margin-top: 15px !important;
+    padding-top: 8px !important;
+  }
+}
+
+@media (max-width: 820px) {
+  .duduq-dd2-root[data-dd226-complete="true"] {
+    --dd226-placed-card-w: 156px;
+    --dd226-placed-card-h: 96px;
+    --dd226-media-h: 66px;
+    --dd226-target-h: 164px;
+    --dd226-zone-h: 104px;
+  }
+  .duduq-dd2-root[data-dd226-complete="true"] .duduq-dd2-actions {
+    margin-top: 14px !important;
+    padding-top: 9px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .duduq-dd2-root[data-dd226-complete="true"] {
+    --dd226-placed-card-w: 146px;
+    --dd226-placed-card-h: 88px;
+    --dd226-media-h: 58px;
+    --dd226-target-h: 146px;
+    --dd226-zone-h: 94px;
+  }
+  .duduq-dd2-root[data-dd226-complete="true"] .duduq-dd2-actions {
+    margin-top: 11px !important;
+    padding-top: 7px !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .duduq-dd2-target,
   .duduq-dd2-item,
@@ -438,6 +501,10 @@
     syncQueued = false;
     var doc = document;
     var idle = feedbackIdle(doc);
+    var root = doc.querySelector(".duduq-dd2-root");
+    var bank = doc.querySelector(".duduq-dd2-bank[data-dd2-bank]");
+    var complete = Boolean(bank && bank.querySelectorAll(".duduq-dd2-item").length === 0);
+    if (root) root.setAttribute("data-dd226-complete", complete ? "true" : "false");
     var placedShells = doc.querySelectorAll(".duduq-dd2-zone .duduq-dd2-item-shell");
 
     placedShells.forEach(function (shell) {
