@@ -111,6 +111,29 @@
         };
       }
 
+      function containSuccessDecoration(mount) {
+        const STYLE_ID = "dd225-vr-success-decoration-containment";
+        const CSS = "@media (max-width:520px){.duduq-engine-complete{overflow:clip!important;contain:paint!important;isolation:isolate!important}}";
+
+        function inject() {
+          const frame = mount.querySelector("iframe");
+          let doc;
+          try { doc = frame && frame.contentDocument; } catch (_) { return; }
+          if (!doc || !doc.head || doc.getElementById(STYLE_ID)) return;
+          const style = doc.createElement("style");
+          style.id = STYLE_ID;
+          style.textContent = CSS;
+          doc.head.appendChild(style);
+        }
+
+        inject();
+        const observer = new MutationObserver(inject);
+        observer.observe(mount, { childList: true, subtree: true });
+        window.setTimeout(inject, 0);
+        window.setTimeout(inject, 80);
+        window.setTimeout(inject, 240);
+      }
+
       window.dd225vrMechanic = function () {
         return window.DuduQ && window.DuduQ.getMechanic && window.DuduQ.getMechanic("drag-drop");
       };
@@ -146,6 +169,7 @@
           }
         });
         window.DD225VisualRefinementR1 && window.DD225VisualRefinementR1.watchMount(mount);
+        containSuccessDecoration(mount);
         return true;
       };
 
