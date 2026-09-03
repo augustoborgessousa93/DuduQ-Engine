@@ -26,6 +26,48 @@ async function place(frame, itemId, targetId) {
   }
 }
 
+async function placedGeometry(page) {
+  return page.evaluate(() => {
+    const doc = document.querySelector("#mount iframe")?.contentDocument;
+    if (!doc) return [];
+    return [...doc.querySelectorAll('.duduq-dd2-zone .duduq-dd2-item[data-placed="true"]')].map((item) => {
+      const label = item.querySelector("span:not(.duduq-dd2-audio-mark)");
+      const shell = item.closest(".duduq-dd2-item-shell");
+      const zone = item.closest(".duduq-dd2-zone");
+      const itemRect = item.getBoundingClientRect();
+      const shellRect = shell?.getBoundingClientRect();
+      const zoneRect = zone?.getBoundingClientRect();
+      const labelRect = label?.getBoundingClientRect();
+      return {
+        id: item.getAttribute("data-dd2-item-id"),
+        itemTop: itemRect.top,
+        itemBottom: itemRect.bottom,
+        itemHeight: itemRect.height,
+        shellTop: shellRect?.top ?? 0,
+        shellBottom: shellRect?.bottom ?? 0,
+        zoneTop: zoneRect?.top ?? 0,
+        zoneBottom: zoneRect?.bottom ?? 0,
+        labelTop: labelRect?.top ?? 0,
+        labelBottom: labelRect?.bottom ?? 0,
+        labelHeight: labelRect?.height ?? 0,
+        itemOverflowY: getComputedStyle(item).overflowY,
+        zoneOverflowY: zone ? getComputedStyle(zone).overflowY : ""
+      };
+    });
+  });
+}
+
+function assertPlacedVisible(entries, phase) {
+  assert(entries.length > 0, `${phase}: nenhum item posicionado encontrado`);
+  for (const entry of entries) {
+    assert(entry.labelHeight >= 15, `${phase}/${entry.id}: rótulo sem altura útil (${entry.labelHeight}px)`);
+    assert(entry.labelTop >= entry.itemTop - 0.5, `${phase}/${entry.id}: rótulo subiu para fora do card`);
+    assert(entry.labelBottom <= entry.itemBottom + 0.5, `${phase}/${entry.id}: rótulo passou do card labelBottom=${entry.labelBottom} itemBottom=${entry.itemBottom}`);
+    assert(entry.itemTop >= entry.zoneTop - 0.5, `${phase}/${entry.id}: card subiu para fora do destino`);
+    assert(entry.itemBottom <= entry.zoneBottom + 0.5, `${phase}/${entry.id}: card passou do destino itemBottom=${entry.itemBottom} zoneBottom=${entry.zoneBottom}`);
+  }
+}
+
 const browser = await chromium.launch({ headless: true });
 const context = await browser.newContext({ viewport: { width: 1366, height: 648 } });
 const page = await context.newPage();
@@ -64,6 +106,10 @@ try {
 
   await place(frame, "pencil", "school");
   await place(frame, "backpack", "school");
+
+  const partialPlaced = await placedGeometry(page);
+  assert(partialPlaced.length === 3, `estado parcial deveria ter 3 itens posicionados, recebeu ${partialPlaced.length}`);
+  assertPlacedVisible(partialPlaced, "PARTIAL");
 
   const result = await page.evaluate(() => {
     const doc = document.querySelector("#mount iframe")?.contentDocument;
@@ -117,7 +163,14 @@ try {
   assert(result.clippedBy.length === 0, `DOG cortado por ancestral: ${JSON.stringify(result.clippedBy)}`);
   assert(result.htmlOverflow === 0 && result.bodyOverflow === 0, `overflow horizontal html=${result.htmlOverflow} body=${result.bodyOverflow}`);
 
+  await place(frame, "dog", "pets");
+  await frame.locator(".duduq-dd2-confirm").first().waitFor({ state: "visible", timeout: 3000 });
+  const allPlaced = await placedGeometry(page);
+  assert(allPlaced.length === 4, `estado completo deveria ter 4 itens posicionados, recebeu ${allPlaced.length}`);
+  assertPlacedVisible(allPlaced, "COMPLETE");
+
   console.log(`SHORT_TARGET_PASS zone=${emptyTarget.zoneHeight.toFixed(1)}px target=${emptyTarget.targetHeight.toFixed(1)}px`);
+  console.log(`PLACED_LABELS_PASS partial=3 complete=4 minLabelHeight=${Math.min(...allPlaced.map((entry) => entry.labelHeight)).toFixed(1)}px`);
   console.log(`BANK_CARD_VISIBILITY_PASS viewport=1366x648 itemBottom=${result.rect.bottom.toFixed(1)} labelBottom=${result.labelRect.bottom.toFixed(1)} viewport=${result.viewportHeight}`);
   console.log(`PANEL_CONTAINMENT_PASS itemBottom=${result.rect.bottom.toFixed(1)} bankBottom=${result.bankRect.bottom.toFixed(1)} arenaBottom=${result.arenaRect.bottom.toFixed(1)}`);
   console.log(`BANK_RECT top=${result.bankRect?.top?.toFixed?.(1)} bottom=${result.bankRect?.bottom?.toFixed?.(1)} height=${result.bankRect?.height?.toFixed?.(1)}`);
