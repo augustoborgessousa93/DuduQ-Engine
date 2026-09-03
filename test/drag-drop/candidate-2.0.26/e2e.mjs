@@ -36,14 +36,26 @@ async function place(frame, itemId, targetId) {
 
 async function metrics(page) {
   return page.evaluate(() => {
-    const doc = document.querySelector("#mount iframe")?.contentDocument;
+    const frame = document.querySelector("#mount iframe");
+    const doc = frame?.contentDocument;
     if (!doc) return null;
     const rects = (selector) => [...doc.querySelectorAll(selector)].map(node => {
       const r = node.getBoundingClientRect();
-      return { width:r.width, height:r.height, bottom:r.bottom };
+      return { width:r.width, height:r.height, top:r.top, bottom:r.bottom };
     });
+    const one = (selector) => {
+      const node = doc.querySelector(selector);
+      if (!node) return null;
+      const r = node.getBoundingClientRect();
+      const s = getComputedStyle(node);
+      return { selector, width:r.width, height:r.height, top:r.top, bottom:r.bottom, display:s.display, minHeight:s.minHeight, heightCss:s.height, paddingTop:s.paddingTop, paddingBottom:s.paddingBottom, gap:s.gap, alignContent:s.alignContent, justifyContent:s.justifyContent };
+    };
     const bank = doc.querySelector(".duduq-dd2-bank[data-dd2-bank]");
     const confirm = doc.querySelector(".duduq-dd2-confirm");
+    const lastContent = [...doc.querySelectorAll('.duduq-dd2-targets,.duduq-dd2-bank,.duduq-dd2-actions')]
+      .filter(node => getComputedStyle(node).display !== 'none')
+      .map(node => node.getBoundingClientRect().bottom)
+      .reduce((a,b) => Math.max(a,b), 0);
     return {
       bankCards: rects('.duduq-dd2-bank .duduq-dd2-item[data-has-media="true"]'),
       placedCards: rects('.duduq-dd2-zone .duduq-dd2-item[data-has-media="true"]'),
@@ -58,7 +70,17 @@ async function metrics(page) {
         doc.body.scrollWidth - doc.body.clientWidth
       ),
       clientHeight: doc.documentElement.clientHeight,
-      confirmBottom: confirm?.getBoundingClientRect().bottom || 0
+      bodyHeight: doc.body.getBoundingClientRect().height,
+      iframeHeight: frame?.getBoundingClientRect().height || 0,
+      confirmBottom: confirm?.getBoundingClientRect().bottom || 0,
+      root: one('.duduq-dd2-root'),
+      surface: one('.duduq-dd2-surface'),
+      arena: one('.duduq-dd2-arena'),
+      targetsBox: one('.duduq-dd2-targets'),
+      bankBox: one('.duduq-dd2-bank'),
+      actionsBox: one('.duduq-dd2-actions'),
+      lastContent,
+      unusedBelowContent: Math.max(0, doc.documentElement.clientHeight - lastContent)
     };
   });
 }
@@ -81,6 +103,9 @@ try {
     assert(initial.overflow === 0, `${viewport.name}: overflow inicial ${initial.overflow}px`);
 
     await place(frame, "cat", "pets");
+    const partialOne = await metrics(page);
+    console.log(`SPACE ${viewport.name} partial1 unused=${partialOne.unusedBelowContent.toFixed(1)} root=${JSON.stringify(partialOne.root)} surface=${JSON.stringify(partialOne.surface)} arena=${JSON.stringify(partialOne.arena)} targets=${JSON.stringify(partialOne.targetsBox)} bank=${JSON.stringify(partialOne.bankBox)} actions=${JSON.stringify(partialOne.actionsBox)}`);
+
     await place(frame, "dog", "pets");
     const partial = await metrics(page);
     assert(partial.bankCards.length === 2, `${viewport.name}: banco parcial != 2`);
