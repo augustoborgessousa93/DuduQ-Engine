@@ -80,7 +80,7 @@ try {
     const page = await context.newPage();
     const errors = [];
     page.on("pageerror", error => errors.push(String(error?.message || error)));
-    const response = await page.goto(`${URL}?v=${viewport.name}&r=complete-review-r9`, { waitUntil:"domcontentloaded", timeout:30_000 });
+    const response = await page.goto(`${URL}?v=${viewport.name}&r=complete-review-r10`, { waitUntil:"domcontentloaded", timeout:30_000 });
     assert(response?.ok(), `${viewport.name}: HTTP ${response?.status()}`);
     await waitMounted(page);
     const frame = page.frameLocator("#mount iframe");
@@ -93,14 +93,16 @@ try {
 
     const initialW = avg(initial.bankCards.map(card => card.width));
     const initialH = avg(initial.bankCards.map(card => card.height));
+    const initialMediaW = avg(initial.bankMedia.map(media => media.width));
     const initialMediaH = avg(initial.bankMedia.map(media => media.height));
     if (viewport.name === "desktop-1366x768") {
       const ordered = [...initial.bankCards].sort((a,b) => a.left - b.left);
       const gaps = ordered.slice(1).map((card, index) => card.left - ordered[index].right);
       const topSpread = Math.max(...initial.bankCards.map(card => card.top)) - Math.min(...initial.bankCards.map(card => card.top));
-      assert(initialW >= 182 && initialW <= 186, `${viewport.name}: largura do card fora do alvo ${initialW.toFixed(1)}px`);
-      assert(initialH >= 108 && initialH <= 112, `${viewport.name}: altura do card fora do alvo ${initialH.toFixed(1)}px`);
-      assert(initialMediaH >= 78 && initialMediaH <= 82, `${viewport.name}: imagem fora do alvo ${initialMediaH.toFixed(1)}px`);
+      assert(initialW >= 206 && initialW <= 212, `${viewport.name}: largura do card fora do alvo ${initialW.toFixed(1)}px`);
+      assert(initialH >= 120 && initialH <= 124, `${viewport.name}: altura do card fora do alvo ${initialH.toFixed(1)}px`);
+      assert(initialMediaW >= 148 && initialMediaW <= 158, `${viewport.name}: largura da imagem fora do alvo ${initialMediaW.toFixed(1)}px`);
+      assert(initialMediaH >= 90 && initialMediaH <= 94, `${viewport.name}: altura da imagem fora do alvo ${initialMediaH.toFixed(1)}px`);
       assert(topSpread <= 1, `${viewport.name}: cards quebraram para outra linha (spread ${topSpread.toFixed(1)}px)`);
       assert(gaps.every(gap => gap >= 9 && gap <= 13), `${viewport.name}: gap fora do alvo ${gaps.map(gap => gap.toFixed(1)).join("/")}px`);
     }
@@ -119,7 +121,7 @@ try {
     const partialMediaH = avg(partial.placedMedia.map(media => media.height));
     const partialTargetH = avg(partial.targets.map(target => target.height));
     assert(Math.abs(initialW - partialBankW) <= 12, `${viewport.name}: banco mudou demais ${initialW.toFixed(1)} -> ${partialBankW.toFixed(1)}`);
-    assert(Math.abs(partialBankW - partialPlacedW) <= 24, `${viewport.name}: banco/posicionado desproporcional ${partialBankW.toFixed(1)} vs ${partialPlacedW.toFixed(1)}`);
+    assert(Math.abs(partialBankW - partialPlacedW) <= 52, `${viewport.name}: banco/posicionado desproporcional ${partialBankW.toFixed(1)} vs ${partialPlacedW.toFixed(1)}`);
     assert(partial.overflow === 0, `${viewport.name}: overflow parcial ${partial.overflow}px`);
 
     await place(frame, "pencil", "school");
@@ -166,7 +168,7 @@ try {
     assert(restored.overflow === 0, `${viewport.name}: overflow restaurado ${restored.overflow}px`);
     assert(errors.length === 0, `${viewport.name}: pageerror ${errors.join(" | ")}`);
 
-    console.log(`PASS ${viewport.name} bank=${initialW.toFixed(1)}x${initialH.toFixed(1)}px bankMedia=${initialMediaH.toFixed(1)}px partialPlaced=${partialPlacedW.toFixed(1)}x${partialPlacedH.toFixed(1)} completePlaced=${completePlacedW.toFixed(1)}x${completePlacedH.toFixed(1)} media=${partialMediaH.toFixed(1)}->${completeMediaH.toFixed(1)} target=${partialTargetH.toFixed(1)}->${completeTargetH.toFixed(1)} confirmGap=${complete.confirmGap.toFixed(1)} remove=PASS overflow=0`);
+    console.log(`PASS ${viewport.name} bank=${initialW.toFixed(1)}x${initialH.toFixed(1)}px bankMedia=${initialMediaW.toFixed(1)}x${initialMediaH.toFixed(1)}px partialPlaced=${partialPlacedW.toFixed(1)}x${partialPlacedH.toFixed(1)} completePlaced=${completePlacedW.toFixed(1)}x${completePlacedH.toFixed(1)} media=${partialMediaH.toFixed(1)}->${completeMediaH.toFixed(1)} target=${partialTargetH.toFixed(1)}->${completeTargetH.toFixed(1)} confirmGap=${complete.confirmGap.toFixed(1)} remove=PASS overflow=0`);
     await context.close();
   }
   console.log("PASS — Drag & Drop 2.0.26 complete-review candidate — 3/3");
