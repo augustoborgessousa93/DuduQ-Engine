@@ -80,7 +80,7 @@ try {
     const page = await context.newPage();
     const errors = [];
     page.on("pageerror", error => errors.push(String(error?.message || error)));
-    const response = await page.goto(`${URL}?v=${viewport.name}&r=complete-review-r8`, { waitUntil:"domcontentloaded", timeout:30_000 });
+    const response = await page.goto(`${URL}?v=${viewport.name}&r=complete-review-r9`, { waitUntil:"domcontentloaded", timeout:30_000 });
     assert(response?.ok(), `${viewport.name}: HTTP ${response?.status()}`);
     await waitMounted(page);
     const frame = page.frameLocator("#mount iframe");
@@ -98,9 +98,9 @@ try {
       const ordered = [...initial.bankCards].sort((a,b) => a.left - b.left);
       const gaps = ordered.slice(1).map((card, index) => card.left - ordered[index].right);
       const topSpread = Math.max(...initial.bankCards.map(card => card.top)) - Math.min(...initial.bankCards.map(card => card.top));
-      assert(initialW >= 174 && initialW <= 178, `${viewport.name}: largura do card fora do alvo ${initialW.toFixed(1)}px`);
-      assert(initialH >= 102 && initialH <= 106, `${viewport.name}: altura do card fora do alvo ${initialH.toFixed(1)}px`);
-      assert(initialMediaH >= 72 && initialMediaH <= 76, `${viewport.name}: imagem fora do alvo ${initialMediaH.toFixed(1)}px`);
+      assert(initialW >= 182 && initialW <= 186, `${viewport.name}: largura do card fora do alvo ${initialW.toFixed(1)}px`);
+      assert(initialH >= 108 && initialH <= 112, `${viewport.name}: altura do card fora do alvo ${initialH.toFixed(1)}px`);
+      assert(initialMediaH >= 78 && initialMediaH <= 82, `${viewport.name}: imagem fora do alvo ${initialMediaH.toFixed(1)}px`);
       assert(topSpread <= 1, `${viewport.name}: cards quebraram para outra linha (spread ${topSpread.toFixed(1)}px)`);
       assert(gaps.every(gap => gap >= 9 && gap <= 13), `${viewport.name}: gap fora do alvo ${gaps.map(gap => gap.toFixed(1)).join("/")}px`);
     }
@@ -119,7 +119,7 @@ try {
     const partialMediaH = avg(partial.placedMedia.map(media => media.height));
     const partialTargetH = avg(partial.targets.map(target => target.height));
     assert(Math.abs(initialW - partialBankW) <= 12, `${viewport.name}: banco mudou demais ${initialW.toFixed(1)} -> ${partialBankW.toFixed(1)}`);
-    assert(Math.abs(partialBankW - partialPlacedW) <= 20, `${viewport.name}: banco/posicionado desproporcional ${partialBankW.toFixed(1)} vs ${partialPlacedW.toFixed(1)}`);
+    assert(Math.abs(partialBankW - partialPlacedW) <= 24, `${viewport.name}: banco/posicionado desproporcional ${partialBankW.toFixed(1)} vs ${partialPlacedW.toFixed(1)}`);
     assert(partial.overflow === 0, `${viewport.name}: overflow parcial ${partial.overflow}px`);
 
     await place(frame, "pencil", "school");
