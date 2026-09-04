@@ -1,0 +1,55 @@
+name: Target Shooter 1.0.21 Baseline R149
+
+on:
+  push:
+    branches:
+      - audit/target-shooter-1.0.21-baseline-r149-20260904
+    paths:
+      - "test/refinement/target-shooter-baseline-1.0.21.mjs"
+      - "test/refinement/target-shooter-baseline-followup-1.0.21.mjs"
+      - ".github/workflows/target-shooter-baseline-1.0.21-r149.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "test/refinement/target-shooter-baseline-1.0.21.mjs"
+      - "test/refinement/target-shooter-baseline-followup-1.0.21.mjs"
+      - ".github/workflows/target-shooter-baseline-1.0.21-r149.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  baseline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax
+        run: |
+          node --check test/refinement/target-shooter-baseline-1.0.21.mjs
+          node --check test/refinement/target-shooter-baseline-followup-1.0.21.mjs
+      - name: Install Playwright Chromium once
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/ts-baseline-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/ts-baseline-http.log
+          exit 1
+      - name: Run clustered baseline over 66 real items
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/refinement/target-shooter-baseline-1.0.21.mjs
+      - name: Prove functional clusters and image candidates
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/refinement/target-shooter-baseline-followup-1.0.21.mjs
