@@ -4,6 +4,7 @@ const BASE = process.env.BASE_URL || "http://127.0.0.1:4173";
 const URL = `${BASE}/test/drag-drop/candidate-2.0.26/index.html`;
 const viewports = [
   { name:"desktop-1366x768", width:1366, height:768 },
+  { name:"desktop-browser-1366x640", width:1366, height:640 },
   { name:"tablet-768x1024", width:768, height:1024 },
   { name:"mobile-390x844", width:390, height:844 }
 ];
@@ -42,13 +43,26 @@ async function metrics(page) {
     const rects = (selector) => [...doc.querySelectorAll(selector)].map(node => {
       const r = node.getBoundingClientRect();
       const s = getComputedStyle(node);
-      return { width:r.width, height:r.height, top:r.top, right:r.right, bottom:r.bottom, left:r.left, className:node.className || "", display:s.display, objectFit:s.objectFit || "" };
+      return {
+        width:r.width,
+        height:r.height,
+        top:r.top,
+        right:r.right,
+        bottom:r.bottom,
+        left:r.left,
+        className:node.className || "",
+        display:s.display,
+        objectFit:s.objectFit || "",
+        flex:s.flex || "",
+        transform:s.transform || "none"
+      };
     });
     const bank = doc.querySelector(".duduq-dd2-bank[data-dd2-bank]");
     const confirm = doc.querySelector(".duduq-dd2-confirm");
     const targets = rects('.duduq-dd2-target');
     const maxTargetBottom = targets.reduce((max, entry) => Math.max(max, entry.bottom), 0);
     return {
+      bankShells: rects('.duduq-dd2-bank .duduq-dd2-item-shell'),
       bankCards: rects('.duduq-dd2-bank .duduq-dd2-item[data-has-media="true"]'),
       bankMedia: rects('.duduq-dd2-bank .duduq-dd2-item-media'),
       placedCards: rects('.duduq-dd2-zone .duduq-dd2-item[data-has-media="true"]'),
@@ -80,29 +94,37 @@ try {
     const page = await context.newPage();
     const errors = [];
     page.on("pageerror", error => errors.push(String(error?.message || error)));
-    const response = await page.goto(`${URL}?v=${viewport.name}&r=complete-review-r10`, { waitUntil:"domcontentloaded", timeout:30_000 });
+    const response = await page.goto(`${URL}?v=${viewport.name}&r=complete-review-r11`, { waitUntil:"domcontentloaded", timeout:30_000 });
     assert(response?.ok(), `${viewport.name}: HTTP ${response?.status()}`);
     await waitMounted(page);
     const frame = page.frameLocator("#mount iframe");
 
     const initial = await metrics(page);
+    assert(initial.bankShells.length === 4, `${viewport.name}: shells iniciais != 4`);
     assert(initial.bankCards.length === 4, `${viewport.name}: banco inicial != 4`);
     assert(initial.bankMedia.length === 4, `${viewport.name}: mídias iniciais != 4`);
     assert(initial.overflow === 0, `${viewport.name}: overflow inicial ${initial.overflow}px`);
     assert(initial.bankMedia.every(media => media.objectFit === "contain"), `${viewport.name}: object-fit do banco deixou de ser contain`);
 
+    const initialShellW = avg(initial.bankShells.map(shell => shell.width));
     const initialW = avg(initial.bankCards.map(card => card.width));
     const initialH = avg(initial.bankCards.map(card => card.height));
     const initialMediaW = avg(initial.bankMedia.map(media => media.width));
     const initialMediaH = avg(initial.bankMedia.map(media => media.height));
-    if (viewport.name === "desktop-1366x768") {
+    if (viewport.name.startsWith("desktop")) {
       const ordered = [...initial.bankCards].sort((a,b) => a.left - b.left);
       const gaps = ordered.slice(1).map((card, index) => card.left - ordered[index].right);
       const topSpread = Math.max(...initial.bankCards.map(card => card.top)) - Math.min(...initial.bankCards.map(card => card.top));
+      assert(initialShellW >= 206 && initialShellW <= 212, `${viewport.name}: shell do card fora do alvo ${initialShellW.toFixed(1)}px`);
       assert(initialW >= 206 && initialW <= 212, `${viewport.name}: largura do card fora do alvo ${initialW.toFixed(1)}px`);
-      assert(initialH >= 120 && initialH <= 124, `${viewport.name}: altura do card fora do alvo ${initialH.toFixed(1)}px`);
       assert(initialMediaW >= 148 && initialMediaW <= 158, `${viewport.name}: largura da imagem fora do alvo ${initialMediaW.toFixed(1)}px`);
-      assert(initialMediaH >= 90 && initialMediaH <= 94, `${viewport.name}: altura da imagem fora do alvo ${initialMediaH.toFixed(1)}px`);
+      if (viewport.name === "desktop-1366x768") {
+        assert(initialH >= 120 && initialH <= 124, `${viewport.name}: altura do card fora do alvo ${initialH.toFixed(1)}px`);
+        assert(initialMediaH >= 90 && initialMediaH <= 94, `${viewport.name}: altura da imagem fora do alvo ${initialMediaH.toFixed(1)}px`);
+      } else {
+        assert(initialH >= 116 && initialH <= 120, `${viewport.name}: altura do card fora do alvo ${initialH.toFixed(1)}px`);
+        assert(initialMediaH >= 86 && initialMediaH <= 90, `${viewport.name}: altura da imagem fora do alvo ${initialMediaH.toFixed(1)}px`);
+      }
       assert(topSpread <= 1, `${viewport.name}: cards quebraram para outra linha (spread ${topSpread.toFixed(1)}px)`);
       assert(gaps.every(gap => gap >= 9 && gap <= 13), `${viewport.name}: gap fora do alvo ${gaps.map(gap => gap.toFixed(1)).join("/")}px`);
     }
@@ -168,10 +190,10 @@ try {
     assert(restored.overflow === 0, `${viewport.name}: overflow restaurado ${restored.overflow}px`);
     assert(errors.length === 0, `${viewport.name}: pageerror ${errors.join(" | ")}`);
 
-    console.log(`PASS ${viewport.name} bank=${initialW.toFixed(1)}x${initialH.toFixed(1)}px bankMedia=${initialMediaW.toFixed(1)}x${initialMediaH.toFixed(1)}px partialPlaced=${partialPlacedW.toFixed(1)}x${partialPlacedH.toFixed(1)} completePlaced=${completePlacedW.toFixed(1)}x${completePlacedH.toFixed(1)} media=${partialMediaH.toFixed(1)}->${completeMediaH.toFixed(1)} target=${partialTargetH.toFixed(1)}->${completeTargetH.toFixed(1)} confirmGap=${complete.confirmGap.toFixed(1)} remove=PASS overflow=0`);
+    console.log(`PASS ${viewport.name} shell=${initialShellW.toFixed(1)}px bank=${initialW.toFixed(1)}x${initialH.toFixed(1)}px bankMedia=${initialMediaW.toFixed(1)}x${initialMediaH.toFixed(1)}px partialPlaced=${partialPlacedW.toFixed(1)}x${partialPlacedH.toFixed(1)} completePlaced=${completePlacedW.toFixed(1)}x${completePlacedH.toFixed(1)} media=${partialMediaH.toFixed(1)}->${completeMediaH.toFixed(1)} target=${partialTargetH.toFixed(1)}->${completeTargetH.toFixed(1)} confirmGap=${complete.confirmGap.toFixed(1)} remove=PASS overflow=0`);
     await context.close();
   }
-  console.log("PASS — Drag & Drop 2.0.26 complete-review candidate — 3/3");
+  console.log("PASS — Drag & Drop 2.0.26 complete-review candidate — 4/4");
 } finally {
   await browser.close();
 }
