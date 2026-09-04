@@ -61,6 +61,8 @@ const animal=questions.find(q=>q.id==='EN3-M1-09');
 assert.ok(animal.metadata.targetShooter.items.every(i=>i.imageUrl&&i.imageAssetKey),'M01-09 must carry canonical option images');
 
 const sequence=questions.find(q=>q.id==='EN3-M1-12');
+assert.equal(sequence.answer.type,'sequence');
+assert.deepEqual(sequence.answer.value,['H','E','L','L','O']);
 assert.equal(sequence.payload.strategy,'sequence');
 assert.equal(sequence.payload.targets.length,1);
 assert.equal(sequence.payload.targets[0].kind,'list');
