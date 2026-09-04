@@ -307,6 +307,38 @@
   }
 }
 
+/*
+ * Correção estrutural r11: em uma tela física 1366×768, o viewport útil do
+ * navegador costuma ficar abaixo de 721px por causa da barra do browser.
+ * A regra compacta acima estava reduzindo novamente o banco para 154×88,
+ * anulando visualmente todos os aumentos feitos para desktop. O banco passa
+ * a responder à largura real disponível, enquanto destinos e ações mantêm
+ * o modo vertical compacto. Também fixamos o shell ao mesmo tamanho do card,
+ * eliminando qualquer flex-basis legado das camadas 2.0.18→2.0.25.
+ */
+@media (min-width: 1000px) {
+  .duduq-dd2-bank[data-dd2-bank] .duduq-dd2-item-shell {
+    width: var(--dd226-bank-card-w) !important;
+    min-width: var(--dd226-bank-card-w) !important;
+    max-width: var(--dd226-bank-card-w) !important;
+    flex: 0 0 var(--dd226-bank-card-w) !important;
+  }
+}
+
+@media (min-width: 1000px) and (max-height: 720px) {
+  .duduq-dd2-root {
+    --dd226-bank-card-w: 210px;
+    --dd226-bank-card-h: 118px;
+  }
+  .duduq-dd2-bank[data-dd2-bank] .duduq-dd2-item-media {
+    width: min(94%, 156px) !important;
+    max-width: 94% !important;
+    height: 88px !important;
+    max-height: 88px !important;
+    flex: 0 0 88px !important;
+  }
+}
+
 @media (max-width: 820px) {
   .duduq-dd2-root {
     --dd226-bank-card-w: 150px;
