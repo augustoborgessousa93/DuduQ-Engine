@@ -1,0 +1,29 @@
+name: Canary R149 Live Production Smoke
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'test/drag-drop/canary-r149/live-production-smoke.mjs'
+      - '.github/workflows/canary-r149-live-production-smoke.yml'
+
+jobs:
+  live-r149:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax
+        run: node --check test/drag-drop/canary-r149/live-production-smoke.mjs
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Verify R149 public manifest and live consumers
+        env:
+          BASE_URL: https://duduq-engine.pages.dev
+        run: node test/drag-drop/canary-r149/live-production-smoke.mjs
