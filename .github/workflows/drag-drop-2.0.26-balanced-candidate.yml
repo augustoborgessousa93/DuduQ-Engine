@@ -1,0 +1,45 @@
+name: Drag Drop 2.0.26 Balanced Candidate
+
+on:
+  push:
+    branches:
+      - refine/drag-drop-2.0.26-balanced-cards-20260903
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'engine/releases/mechanics/drag-drop/2.0.26/**'
+      - 'test/drag-drop/candidate-2.0.26/**'
+      - '.github/workflows/drag-drop-2.0.26-balanced-candidate.yml'
+
+jobs:
+  balanced-cards:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax
+        run: |
+          node --check engine/releases/mechanics/drag-drop/2.0.26/drag-drop.js
+          node --check test/drag-drop/candidate-2.0.26/e2e.mjs
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/dd226-http.log 2>&1 &
+          echo $! > /tmp/dd226-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/test/drag-drop/candidate-2.0.26/index.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/dd226-http.log
+          exit 1
+      - name: Validate balanced proportions
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/drag-drop/candidate-2.0.26/e2e.mjs
