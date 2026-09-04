@@ -164,6 +164,7 @@
     const q=baseQuestion(source,analysis,"drag-drop");
     if(source.id!=="EN3-M1-12")throw new Error(`[DuduQ Y3 Track B] drag sentinel inesperado: ${source.id}`);
     const letters=["H","E","L","L","O"],targetId=`${source.id}-sequence`;
+    q.answer={type:"sequence",value:[...letters]};
     q.payload={
       mode:"sequence",strategy:"sequence",
       options:{shuffleItems:true,shuffleTargets:false,maxAttempts:3},retry:{maxAttempts:3,wrongBehaviour:"return-incorrect"},
