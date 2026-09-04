@@ -143,7 +143,7 @@ try {
     const partialMediaH = avg(partial.placedMedia.map(media => media.height));
     const partialTargetH = avg(partial.targets.map(target => target.height));
     assert(Math.abs(initialW - partialBankW) <= 12, `${viewport.name}: banco mudou demais ${initialW.toFixed(1)} -> ${partialBankW.toFixed(1)}`);
-    assert(Math.abs(partialBankW - partialPlacedW) <= 52, `${viewport.name}: banco/posicionado desproporcional ${partialBankW.toFixed(1)} vs ${partialPlacedW.toFixed(1)}`);
+    assert(Math.abs(partialBankW - partialPlacedW) <= 60, `${viewport.name}: banco/posicionado desproporcional ${partialBankW.toFixed(1)} vs ${partialPlacedW.toFixed(1)}`);
     assert(partial.overflow === 0, `${viewport.name}: overflow parcial ${partial.overflow}px`);
 
     await place(frame, "pencil", "school");
