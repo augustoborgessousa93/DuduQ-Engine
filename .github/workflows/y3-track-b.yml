@@ -1,0 +1,25 @@
+name: Y3 Track B Remodel
+
+on:
+  push:
+    branches:
+      - 'refactor/y3-m01-m06-mechanic-orchestration-track-b-20260904'
+  pull_request:
+    paths:
+      - 'content/english/year-3/**'
+      - 'content/english/shared/pedagogical-orchestrator-v1.js'
+      - 'test/year3/**'
+      - '.github/workflows/y3-track-b.yml'
+
+jobs:
+  source-matrix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Track B
+        uses: actions/checkout@v4
+      - name: Use Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Gate 90-item source baseline and matrix
+        run: node test/year3/y3-track-b-matrix.mjs
