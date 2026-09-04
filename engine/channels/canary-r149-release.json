@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "contractMajor": 1,
+  "revision": 149,
+  "core": {
+    "release": "1.0.12",
+    "styles": [
+      { "href": "/engine/releases/core/1.0.12/duduq-theme.css", "release": "1.0.12" },
+      { "href": "/engine/releases/core/1.0.12/duduq-intro.css", "release": "1.0.12" },
+      { "href": "/engine/releases/core/1.0.12/duduq-transition.css", "release": "1.0.12" },
+      { "href": "/engine/releases/core/1.0.12/duduq-completion.css", "release": "1.0.12" },
+      { "id": "duduq-world-fusion-core-style", "href": "/engine/releases/core/1.0.12/duduq-world-fusion.css", "release": "1.0.12" }
+    ],
+    "preMechanicScripts": [
+      { "id": "duduq-canonical-assets-runtime", "src": "https://cdn.jsdelivr.net/gh/augustoborgessousa93/Assets-DuduQ@f0f8bed8e8c24fad4eae204bf4a5cc84a8d8263f/asset-catalog/runtime-index.js", "release": "assets-f0f8bed8" },
+      { "src": "/engine/releases/core/1.0.12/duduq-assets.js", "release": "1.0.12" },
+      { "id": "duduq-world-fusion-core-script", "src": "/engine/releases/core/1.0.12/duduq-world-fusion.js", "release": "1.0.12" },
+      { "src": "/engine/releases/core/1.0.12/duduq-sound.js", "release": "1.0.12" },
+      { "src": "/engine/releases/core/1.0.12/duduq-intro.js", "release": "1.0.12" },
+      { "src": "/engine/releases/core/1.0.12/duduq-schema.js", "release": "1.0.12" },
+      { "src": "/engine/releases/core/1.0.12/duduq-content-audio.js", "release": "1.0.12" },
+      { "src": "/engine/releases/core/1.0.12/duduq-completion.js", "release": "1.0.12" },
+      { "src": "/engine/releases/core/1.0.12/duduq-transition.js", "release": "1.0.12" },
+      { "src": "/engine/releases/core/1.0.12/duduq-host.js", "release": "1.0.12" },
+      { "src": "/engine/releases/core/1.0.12/duduq-progress-ui.js", "release": "1.0.12" }
+    ],
+    "router": { "src": "/engine/releases/core/1.0.12/duduq-router.js", "release": "1.0.12" }
+  },
+  "mechanics": {
+    "bubble-pop": { "release": "1.0.31", "adapter": "/engine/releases/mechanics/bubble-pop/1.0.31/bubble-pop.js", "runtime": "/engine/releases/mechanics/bubble-pop/1.0.31/DUDUQ_BUBBLE_POP.html" },
+    "drag-drop": { "release": "2.0.26", "adapter": "/engine/releases/mechanics/drag-drop/2.0.26/drag-drop.js", "runtime": "/engine/releases/mechanics/drag-drop/2.0.22/DUDUQ_DRAG_DROP.html" },
+    "matching": { "release": "1.0.23", "adapter": "/engine/releases/mechanics/matching/1.0.23/matching.js", "runtime": "/engine/releases/mechanics/matching/1.0.23/DUDUQ_MATCHING.html" },
+    "memory-quest": { "release": "1.0.27", "adapter": "/engine/releases/mechanics/memory-quest/1.0.27/memory-quest.js", "runtime": "/engine/releases/mechanics/memory-quest/1.0.27/DUDUQ_MEMORY_QUEST.html" },
+    "smart-sentence": { "release": "4.0.20", "adapter": "/engine/releases/mechanics/smart-sentence/4.0.20/smart-sentence.js", "runtime": "/engine/releases/mechanics/smart-sentence/4.0.20/DUDUQ_SMART_SENTENCE.html" },
+    "target-shooter": { "release": "1.0.21", "adapter": "/engine/releases/mechanics/target-shooter/1.0.21/target-shooter.js", "runtime": "/engine/releases/mechanics/target-shooter/1.0.21/DUDUQ_TARGET_SHOOTER.html" },
+    "word-slash": { "release": "1.0.17", "adapter": "/engine/releases/mechanics/word-slash/1.0.17/word-slash.js", "runtime": "/engine/releases/mechanics/word-slash/1.0.17/DUDUQ_WORD_SLASH.html" }
+  },
+  "policy": {
+    "releasesImmutable": true,
+    "manifestNoStore": true,
+    "hotfixViaChannelPromotion": true,
+    "rollbackViaManifest": true,
+    "wordSlashApproved": true,
+    "bubblePopApproved": true,
+    "dragDropSingleChoiceApproved": true,
+    "canonicalAssetCatalogSchema": 2,
+    "canonicalAssetRuntimeCommit": "f0f8bed8e8c24fad4eae204bf4a5cc84a8d8263f"
+  },
+  "channel": "canary-v1",
+  "status": "approved-r149-drag-drop-2.0.26"
+}
