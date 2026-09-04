@@ -23,3 +23,16 @@ jobs:
           node-version: 20
       - name: Gate 90-item source baseline and matrix
         run: node test/year3/y3-track-b-matrix.mjs
+
+  m01-sentinel-contract:
+    needs: source-matrix
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Track B
+        uses: actions/checkout@v4
+      - name: Use Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Gate M01 Track B runtime contracts
+        run: node test/year3/y3-track-b-m01-sentinel.mjs
