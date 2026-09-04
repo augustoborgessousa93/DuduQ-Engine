@@ -36,3 +36,35 @@ jobs:
           node-version: 20
       - name: Gate M01 Track B runtime contracts
         run: node test/year3/y3-track-b-m01-sentinel.mjs
+
+  m01-sentinel-browser:
+    needs: m01-sentinel-contract
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout Track B
+        uses: actions/checkout@v4
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax
+        run: node --check test/year3/y3-track-b-m01-browser.mjs
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/y3-m01-http.log 2>&1 &
+          echo $! > /tmp/y3-m01-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/content/english/year-3/module-01/index.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/y3-m01-http.log
+          exit 1
+      - name: Gate M01 functional browser sentinel — 4 viewports
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year3/y3-track-b-m01-browser.mjs
