@@ -20,7 +20,7 @@
     }),
     "target-shooter":Object.freeze({
       maxReading:"R2",
-      intents:["recognize_audio_number","recognize_audio_image","recognize_audio_word","recognize_visual_word","listen_discriminate"],
+      intents:["recognize_audio_number","recognize_audio_image","recognize_audio_word","recognize_visual_word","listen_discriminate","quantity_match"],
       modalities:["text","image","audio"],supportsRetry:true
     }),
     "bubble-pop":Object.freeze({
