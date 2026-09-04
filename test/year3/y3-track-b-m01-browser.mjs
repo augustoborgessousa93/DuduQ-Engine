@@ -70,10 +70,12 @@ async function mountRepresentative(page,representative){
   },representative);
 
   await page.waitForFunction(()=>{
+    const rootText=(document.getElementById("root")?.textContent||"").trim();
+    if(/Não foi possível abrir esta etapa|não é compatível com a mecânica|Não foi possível iniciar a mecânica|Erro ao preparar|falha ao preparar/i.test(rootText))return true;
     const frame=document.querySelector("#root iframe");
     if(!frame?.contentDocument?.body)return false;
     const body=(frame.contentDocument.body.textContent||"").trim();
-    return frame.contentDocument.readyState==="complete"&&body.length>0&&!/Erro ao preparar|falha ao preparar/i.test(body);
+    return frame.contentDocument.readyState==="complete"&&body.length>0;
   },null,{timeout:30_000});
   await page.waitForTimeout(350);
 
@@ -84,7 +86,9 @@ async function mountRepresentative(page,representative){
     const images=[...(doc?.images||[])].map(img=>({src:img.currentSrc||img.src||"",alt:img.alt||"",complete:img.complete,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight}));
     const canonicalImages=images.filter(img=>/raw\.githubusercontent\.com\/augustoborgessousa93\/Assets-DuduQ/i.test(img.src));
     const root=document.getElementById("root");
-    const innerOverflow=doc?Math.max(0,doc.documentElement.scrollWidth-doc.documentElement.clientWidth,doc.body.scrollWidth-doc.body.clientWidth):999;
+    const rootText=(root?.textContent||"").trim();
+    const hostError=/Não foi possível abrir esta etapa|não é compatível com a mecânica|Não foi possível iniciar a mecânica|Erro ao preparar|falha ao preparar/i.test(rootText);
+    const innerOverflow=doc?Math.max(0,doc.documentElement.scrollWidth-doc.documentElement.clientWidth,doc.body.scrollWidth-doc.body.clientWidth):0;
     const outerOverflow=Math.max(0,document.documentElement.scrollWidth-document.documentElement.clientWidth,document.body.scrollWidth-document.body.clientWidth);
     return {
       id,mechanic,bodyLength:body.length,
@@ -92,6 +96,8 @@ async function mountRepresentative(page,representative){
       innerOverflow,outerOverflow,
       rootWidth:root?.getBoundingClientRect().width||0,
       viewportWidth:document.documentElement.clientWidth,
+      rootText,
+      hostError,
       errorText:/Erro ao preparar|Erro:|falha ao preparar/i.test(body),
       canonicalImageCount:canonicalImages.length,
       canonicalImagesLoaded:canonicalImages.filter(img=>img.complete&&img.naturalWidth>0&&img.naturalHeight>0).length,
@@ -123,12 +129,12 @@ try{
     assert(snapshot.requiredImages.every(entry=>entry.src&&entry.key),`${viewport.name}: canonical runtime reference missing url/key`);
     assert(!/^Erro:/i.test(snapshot.rootText),`${viewport.name}: root error ${snapshot.rootText}`);
 
-    const mounts=[];
     for(const representative of representatives){
       const result=await mountRepresentative(page,representative);
-      mounts.push(result);
-      assert(!result.errorText,`${viewport.name}/${representative.id}: mechanic error text`);
-      assert(result.bodyLength>0,`${viewport.name}/${representative.id}: empty iframe`);
+      console.log(`MOUNT ${viewport.name}/${representative.id}/${representative.mechanic} frame=${result.frameTitle||"NONE"} body=${result.bodyLength} hostError=${result.hostError}`);
+      assert(!result.hostError,`${viewport.name}/${representative.id}: host error ${result.rootText}`);
+      assert(!result.errorText,`${viewport.name}/${representative.id}: mechanic error text ${result.rootText}`);
+      assert(result.bodyLength>0,`${viewport.name}/${representative.id}: empty iframe; root=${result.rootText}`);
       assert(result.outerOverflow<=2,`${viewport.name}/${representative.id}: outer overflow ${result.outerOverflow}px`);
       assert(result.innerOverflow<=2,`${viewport.name}/${representative.id}: inner overflow ${result.innerOverflow}px`);
       if(representative.expectCanonicalImage){
