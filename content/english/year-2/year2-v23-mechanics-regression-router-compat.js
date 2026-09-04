@@ -14,6 +14,10 @@
 
   const VERSION = "1.0.5-mechanics-regression-bubble-renderer-bridge";
   const WORD_SLASH_QUARANTINE_REASON = "WORD_SLASH_1_0_17_OBJECT_SPAWN_RUNTIME_LOCK";
+  const ORANGE_FOOD_ASSET_FIX_VERSION = "1.0.1-food-orange-canonical";
+  const ASSET_BASE = "https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/";
+  const ORANGE_FRUIT_FILE = "Orange Fruit -laranja fruta.png";
+  const ORANGE_FRUIT_URL = ASSET_BASE + encodeURIComponent(ORANGE_FRUIT_FILE);
   const originalBuild = factory.buildModule.bind(factory);
 
   function questions(module) {
@@ -57,6 +61,79 @@
     const current = String(question?.answer?.value ?? "");
     const match = current.match(/(?:opt-|option-)(\d+)$/i);
     return match ? Math.max(0, Number(match[1]) - 1) : -1;
+  }
+
+  function isFoodOrangeQuestion(question) {
+    if (normalize(question?.metadata?.topic) !== "food") return false;
+    return [...sourceAlternatives(question), sourceAnswer(question)]
+      .some((value) => normalize(value) === "orange");
+  }
+
+  function safeDecode(value) {
+    try {
+      return decodeURIComponent(String(value));
+    } catch (_) {
+      return String(value);
+    }
+  }
+
+  function isReplaceableOrangeVisual(value) {
+    if (typeof value !== "string" || !/^https?:\/\//i.test(value)) return false;
+    if (value === ORANGE_FRUIT_URL) return false;
+
+    const decoded = safeDecode(value).toLowerCase();
+    if (!decoded.includes("/imagens ilustrativa/")) return false;
+
+    const file = decoded.split("/").pop() || "";
+    return file === "color-orange-laranja.png" ||
+      file === "color orange-cor laranja.png" ||
+      file === "cor laranja - orange color.png" ||
+      file === "orange  -laranja fruta.png" ||
+      file === "orange -laranja fruta.png";
+  }
+
+  function replaceOrangeVisuals(value, seen) {
+    if (typeof value === "string") {
+      return isReplaceableOrangeVisual(value)
+        ? { value: ORANGE_FRUIT_URL, replacements: 1 }
+        : { value, replacements: 0 };
+    }
+    if (!value || typeof value !== "object") return { value, replacements: 0 };
+    if (seen.has(value)) return { value, replacements: 0 };
+    seen.add(value);
+
+    let replacements = 0;
+    if (Array.isArray(value)) {
+      for (let index = 0; index < value.length; index += 1) {
+        const result = replaceOrangeVisuals(value[index], seen);
+        value[index] = result.value;
+        replacements += result.replacements;
+      }
+      return { value, replacements };
+    }
+
+    for (const key of Object.keys(value)) {
+      const result = replaceOrangeVisuals(value[key], seen);
+      value[key] = result.value;
+      replacements += result.replacements;
+    }
+    return { value, replacements };
+  }
+
+  function normalizeFoodOrangeAsset(question) {
+    if (!isFoodOrangeQuestion(question)) return 0;
+    const result = replaceOrangeVisuals(question, new WeakSet());
+    if (!result.replacements) return 0;
+
+    question.metadata = question.metadata || {};
+    question.metadata.foodOrangeAssetNormalization = {
+      version: ORANGE_FOOD_ASSET_FIX_VERSION,
+      canonicalAsset: ORANGE_FRUIT_FILE,
+      replacements: result.replacements,
+      scope: "FOOD_ONLY",
+      colorsSemanticsTouched: false
+    };
+    return result.replacements;
   }
 
   function disableMainImage(question) {
@@ -303,10 +380,17 @@
   function postProcess(module) {
     let bubbleItems = 0;
     let quarantinedWordSlashItems = 0;
+    let foodOrangeAssetReplacements = 0;
+    const foodOrangeAssetQuestions = [];
 
     for (const question of questions(module)) {
       if (normalizeBubble(question)) bubbleItems += 1;
       if (quarantineWordSlash(question)) quarantinedWordSlashItems += 1;
+      const orangeReplacements = normalizeFoodOrangeAsset(question);
+      if (orangeReplacements > 0) {
+        foodOrangeAssetReplacements += orangeReplacements;
+        foodOrangeAssetQuestions.push(question.id);
+      }
     }
 
     const synchronizedActivities = synchronizeActivityMechanics(module);
@@ -325,6 +409,11 @@
       wordSlashQuarantineReason: quarantinedWordSlashItems > 0 ? WORD_SLASH_QUARANTINE_REASON : null,
       optionImageAssetKeyPreserved: true,
       canonicalWordSlashPhysicsRestored: true,
+      foodOrangeAssetFixVersion: ORANGE_FOOD_ASSET_FIX_VERSION,
+      foodOrangeAssetQuestions,
+      foodOrangeAssetReplacements,
+      orangeFruitCanonicalAsset: ORANGE_FRUIT_FILE,
+      colorsSemanticsTouched: false,
       wordSlashReleaseModified: false,
       bubblePopReleaseModified: false,
       canaryModified: false,
