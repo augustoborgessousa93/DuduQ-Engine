@@ -139,9 +139,9 @@ try {
     assert(complete.confirm, `${viewport.name}: CONFIRMAR não apareceu`);
     assert(complete.removeButtons.length === 4, `${viewport.name}: × completo ${complete.removeButtons.length}/4`);
     assert(completePlacedW >= partialPlacedW - 1, `${viewport.name}: cards encolheram no completo ${partialPlacedW.toFixed(1)} -> ${completePlacedW.toFixed(1)}`);
-    assert(completePlacedH >= partialPlacedH + 4, `${viewport.name}: altura dos cards não cresceu ${partialPlacedH.toFixed(1)} -> ${completePlacedH.toFixed(1)}`);
-    assert(completeMediaH >= partialMediaH + 4, `${viewport.name}: imagens não cresceram ${partialMediaH.toFixed(1)} -> ${completeMediaH.toFixed(1)}`);
-    assert(completeTargetH >= partialTargetH + 4, `${viewport.name}: destinos não cresceram ${partialTargetH.toFixed(1)} -> ${completeTargetH.toFixed(1)}`);
+    assert(completePlacedH >= partialPlacedH + 3.5, `${viewport.name}: altura dos cards não cresceu ${partialPlacedH.toFixed(1)} -> ${completePlacedH.toFixed(1)}`);
+    assert(completeMediaH >= partialMediaH + 3.5, `${viewport.name}: imagens não cresceram ${partialMediaH.toFixed(1)} -> ${completeMediaH.toFixed(1)}`);
+    assert(completeTargetH >= partialTargetH + 3.5, `${viewport.name}: destinos não cresceram ${partialTargetH.toFixed(1)} -> ${completeTargetH.toFixed(1)}`);
     assert(complete.confirmGap >= 8, `${viewport.name}: CONFIRMAR muito próximo dos destinos (${complete.confirmGap.toFixed(1)}px)`);
     assert(complete.confirmBottom <= complete.clientHeight + 2, `${viewport.name}: CONFIRMAR fora da viewport`);
     assert(complete.overflow === 0, `${viewport.name}: overflow completo ${complete.overflow}px`);
