@@ -112,7 +112,9 @@ try{
     const context=await browser.newContext({viewport:{width:viewport.width,height:viewport.height}});
     const page=await context.newPage();
     const pageErrors=[];
-    page.on("pageerror",error=>pageErrors.push(String(error?.message||error)));
+    const consoleErrors=[];
+    page.on("pageerror",error=>pageErrors.push(String(error?.stack||error?.message||error)));
+    page.on("console",message=>{if(message.type()==="error")consoleErrors.push(message.text());});
     const response=await page.goto(`${URL}?trackB=${viewport.name}&v=1`,{waitUntil:"domcontentloaded",timeout:45_000});
     assert(response?.ok(),`${viewport.name}: HTTP ${response?.status()}`);
     await waitEngine(page);
@@ -130,11 +132,15 @@ try{
     assert(!/^Erro:/i.test(snapshot.rootText),`${viewport.name}: root error ${snapshot.rootText}`);
 
     for(const representative of representatives){
+      pageErrors.length=0;
+      consoleErrors.length=0;
       const result=await mountRepresentative(page,representative);
       console.log(`MOUNT ${viewport.name}/${representative.id}/${representative.mechanic} frame=${result.frameTitle||"NONE"} body=${result.bodyLength} hostError=${result.hostError}`);
-      assert(!result.hostError,`${viewport.name}/${representative.id}: host error ${result.rootText}`);
-      assert(!result.errorText,`${viewport.name}/${representative.id}: mechanic error text ${result.rootText}`);
-      assert(result.bodyLength>0,`${viewport.name}/${representative.id}: empty iframe; root=${result.rootText}`);
+      if(consoleErrors.length)console.log(`CONSOLE_ERROR ${viewport.name}/${representative.id}: ${consoleErrors.join(" || ")}`);
+      if(pageErrors.length)console.log(`PAGEERROR ${viewport.name}/${representative.id}: ${pageErrors.join(" || ")}`);
+      assert(!result.hostError,`${viewport.name}/${representative.id}: host error ${result.rootText}; console=${consoleErrors.join(" || ")}; pageerror=${pageErrors.join(" || ")}`);
+      assert(!result.errorText,`${viewport.name}/${representative.id}: mechanic error text ${result.rootText}; console=${consoleErrors.join(" || ")}`);
+      assert(result.bodyLength>0,`${viewport.name}/${representative.id}: empty iframe; root=${result.rootText}; console=${consoleErrors.join(" || ")}`);
       assert(result.outerOverflow<=2,`${viewport.name}/${representative.id}: outer overflow ${result.outerOverflow}px`);
       assert(result.innerOverflow<=2,`${viewport.name}/${representative.id}: inner overflow ${result.innerOverflow}px`);
       if(representative.expectCanonicalImage){
