@@ -115,7 +115,7 @@
 
   function targetLabel(button) {
     return String(button && button.getAttribute("aria-label") || "")
-      .replace(/^Lançar estrela no alvo\\s*/i, "")
+      .replace(/^Lançar estrela no alvo\s*/i, "")
       .trim();
   }
 
@@ -198,7 +198,7 @@
   new MutationObserver(ensurePanel).observe(document.documentElement, { childList:true, subtree:true });
 })();
 </script>\`;
-    return html.replace(marker, patch + "\\n" + marker);
+    return html.replace(marker, patch + "\n" + marker);
   }
 `;
 
@@ -216,13 +216,13 @@
   source = replaceRequired(
     source,
     '      audioText: asString(config.audioText || question?.media?.audio?.text || question?.audio?.text),',
-    '      audioText: asString(config.audioText || question?.media?.audio?.text || question?.audio?.text),\\n      promptVisual: asString(config.promptVisual),'
+    '      audioText: asString(config.audioText || question?.media?.audio?.text || question?.audio?.text),\n      promptVisual: asString(config.promptVisual),'
   );
-  source = replaceRequired(source, '  function installVisualEnvironment(html) {', OPTION_AUDIO_FUNCTION + '\\n  function installVisualEnvironment(html) {');
+  source = replaceRequired(source, '  function installVisualEnvironment(html) {', OPTION_AUDIO_FUNCTION + '\n  function installVisualEnvironment(html) {');
   source = replaceRequired(
     source,
     '        prepared = installVisualEnvironment(prepared);',
-    '        prepared = installVisualEnvironment(prepared);\\n        prepared = installOptionAudioPreview(prepared);'
+    '        prepared = installVisualEnvironment(prepared);\n        prepared = installOptionAudioPreview(prepared);'
   );
   source = replaceRequired(source, '          optionAudio: false', '          optionAudio: true');
 
