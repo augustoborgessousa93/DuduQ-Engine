@@ -200,7 +200,7 @@
 </script>\`;
     return html.replace(marker, patch + "\n" + marker);
   }
-`;
+`.split("\\`").join("`");
 
   const xhr = new XMLHttpRequest();
   xhr.open("GET", BASE_URL + "?ts122Base=1.0.21", false);
