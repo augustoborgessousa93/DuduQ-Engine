@@ -122,9 +122,9 @@ try{
     assert(snapshot.version==="3.0.0-track-b-m01-sentinel",`${viewport.name}: version ${snapshot.version}`);
     assert(snapshot.activities===15,`${viewport.name}: activities ${snapshot.activities}/15`);
     assert(stable(snapshot.distribution)===stable(expectedDistribution),`${viewport.name}: distribution ${JSON.stringify(snapshot.distribution)}`);
-    assert(snapshot.manifestRevision===149,`${viewport.name}: Canary R${snapshot.manifestRevision}`);
+    assert(snapshot.manifestRevision===150,`${viewport.name}: Canary R${snapshot.manifestRevision}`);
     assert(snapshot.core==="1.0.12",`${viewport.name}: Core ${snapshot.core}`);
-    for(const [mechanic,version] of Object.entries({"smart-sentence":"4.0.20","word-slash":"1.0.17","bubble-pop":"1.2.13","target-shooter":"1.0.21","drag-drop":"2.0.26"})){
+    for(const [mechanic,version] of Object.entries({"smart-sentence":"4.0.20","word-slash":"1.0.17","bubble-pop":"1.2.13","target-shooter":"1.0.22","drag-drop":"2.0.26"})){
       assert(snapshot.mechanics[mechanic]===version,`${viewport.name}: ${mechanic} registered ${snapshot.mechanics[mechanic]||"MISSING"}, expected ${version}`);
     }
     assert(snapshot.requiredImages.length===6,`${viewport.name}: canonical runtime references ${snapshot.requiredImages.length}/6`);
@@ -156,10 +156,10 @@ try{
       }
       assert(pageErrors.length===0,`${viewport.name}/${representative.id}: pageerror ${pageErrors.join(" | ")}`);
     }
-    console.log(`PASS ${viewport.name} — 15/15 content; mechanics 5/5 mounted; canonical refs 6/6; overflow=0`);
+    console.log(`PASS ${viewport.name} — M01 frozen smoke; 15/15 content; mechanics 5/5 mounted; canonical refs 6/6; overflow=0`);
     await context.close();
   }
-  console.log("Y3_M01_BROWSER_SENTINEL = PASS — 4/4 viewports");
+  console.log("Y3_M01_BROWSER_SENTINEL = PASS — 4/4 viewports — frozen smoke under R150");
 }finally{
   await browser.close();
 }
