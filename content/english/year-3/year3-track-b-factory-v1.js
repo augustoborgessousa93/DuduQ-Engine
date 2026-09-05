@@ -164,11 +164,21 @@
     const q=baseQuestion(source,analysis,"drag-drop");
     if(source.id!=="EN3-M1-12")throw new Error(`[DuduQ Y3 Track B] drag sentinel inesperado: ${source.id}`);
     const letters=["H","E","L","L","O"],targetId=`${source.id}-sequence`;
-    q.answer={type:"sequence",value:[...letters]};
+    const items=letters.map((letter,index)=>({
+      id:`${source.id}-letter-${index+1}`,label:letter,text:letter,spokenText:letter,speechLocale:"en-US",audioDescription:`Ouvir letra ${letter}`,
+      targetId,required:true,sequenceIndex:index
+    }));
+    q.alternatives=items.map(item=>({
+      id:item.id,text:item.label,label:item.label,audioText:item.spokenText,spokenText:item.spokenText,speechLocale:item.speechLocale,
+      audio:audio(item.spokenText),metadata:{speechText:item.spokenText,speechLanguage:"en-US"}
+    }));
+    q.answer={type:"sequence",value:items.map(item=>item.id)};
+    q.metadata.sequenceTargetId=targetId;
+    q.metadata.sequenceTitle="H – E – L – L – O";
     q.payload={
       mode:"sequence",strategy:"sequence",
       options:{shuffleItems:true,shuffleTargets:false,maxAttempts:3},retry:{maxAttempts:3,wrongBehaviour:"return-incorrect"},
-      items:letters.map((letter,index)=>({id:`${source.id}-letter-${index+1}`,label:letter,spokenText:letter,speechLocale:"en-US",audioDescription:`Ouvir letra ${letter}`,targetId,required:true,sequenceIndex:index})),
+      items,
       targets:[{id:targetId,label:"H – E – L – L – O",accessibleLabel:"Monte a sequência ouvida",capacity:letters.length,kind:"list",audio:{text:text(source.listenText,"H. E. L. L. O."),spokenText:text(source.listenText,"H. E. L. L. O."),language:"en-US",speechLocale:"en-US",repeatable:true}}]
     };
     q.metadata.dragSemanticRole="sequence";
