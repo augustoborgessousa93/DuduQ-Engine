@@ -8,6 +8,8 @@ on:
     paths:
       - 'content/english/year-3/**'
       - 'content/english/shared/pedagogical-orchestrator-v1.js'
+      - 'engine/channels/canary-v1.json'
+      - 'engine/releases/mechanics/target-shooter/1.0.22/**'
       - 'test/year3/**'
       - '.github/workflows/y3-track-b.yml'
 
@@ -49,7 +51,9 @@ jobs:
         with:
           node-version: '22'
       - name: Syntax
-        run: node --check test/year3/y3-track-b-m01-browser.mjs
+        run: |
+          node --check engine/releases/mechanics/target-shooter/1.0.22/target-shooter.js
+          node --check test/year3/y3-track-b-m01-browser.mjs
       - name: Install Playwright Chromium
         run: |
           npm install --no-save playwright@1.55.0
@@ -64,7 +68,54 @@ jobs:
           done
           cat /tmp/y3-m01-http.log
           exit 1
-      - name: Gate M01 functional browser sentinel — 4 viewports
+      - name: Smoke frozen M01 under shared R150 change — 4 viewports
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year3/y3-track-b-m01-browser.mjs
+
+  m02-contract:
+    needs: m01-sentinel-browser
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Track B
+        uses: actions/checkout@v4
+      - name: Use Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Syntax
+        run: node --check test/year3/y3-track-b-m02.mjs
+      - name: Gate M02 Track B runtime contracts
+        run: node test/year3/y3-track-b-m02.mjs
+
+  m02-browser:
+    needs: m02-contract
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - name: Checkout Track B
+        uses: actions/checkout@v4
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax
+        run: node --check test/year3/y3-track-b-m02-browser.mjs
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/y3-m02-http.log 2>&1 &
+          echo $! > /tmp/y3-m02-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/content/english/year-3/module-02/index.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/y3-m02-http.log
+          exit 1
+      - name: Gate M02 functional browser — 4 viewports
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year3/y3-track-b-m02-browser.mjs
