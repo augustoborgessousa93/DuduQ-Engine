@@ -47,7 +47,7 @@ async function moduleSnapshot(page){
       distribution,
       mechanics,
       requiredImages,
-      rootText:(document.getElementById("root")?.textContent||"").trim(),
+      rootText:(document.getElementById("root")?.innerText||"").trim(),
       manifestRevision:window.DUDUQ_ENGINE_MANIFEST?.revision,
       core:window.DUDUQ_ENGINE_MANIFEST?.core?.release
     };
@@ -70,35 +70,35 @@ async function mountRepresentative(page,representative){
   },representative);
 
   await page.waitForFunction(()=>{
-    const rootText=(document.getElementById("root")?.textContent||"").trim();
+    const rootText=(document.getElementById("root")?.innerText||"").trim();
     if(/Não foi possível abrir esta etapa|não é compatível com a mecânica|Não foi possível iniciar a mecânica|Erro ao preparar|falha ao preparar/i.test(rootText))return true;
     const frame=document.querySelector("#root iframe");
     if(!frame?.contentDocument?.body)return false;
-    const body=(frame.contentDocument.body.textContent||"").trim();
-    return frame.contentDocument.readyState==="complete"&&body.length>0;
+    const visibleText=(frame.contentDocument.body.innerText||"").trim();
+    return frame.contentDocument.readyState==="complete"&&visibleText.length>0;
   },null,{timeout:30_000});
   await page.waitForTimeout(350);
 
   return page.evaluate(({id,mechanic,expectCanonicalImage})=>{
     const frame=document.querySelector("#root iframe");
     const doc=frame?.contentDocument;
-    const body=(doc?.body?.textContent||"").trim();
+    const visibleText=(doc?.body?.innerText||"").trim();
     const images=[...(doc?.images||[])].map(img=>({src:img.currentSrc||img.src||"",alt:img.alt||"",complete:img.complete,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight}));
     const canonicalImages=images.filter(img=>/raw\.githubusercontent\.com\/augustoborgessousa93\/Assets-DuduQ/i.test(img.src));
     const root=document.getElementById("root");
-    const rootText=(root?.textContent||"").trim();
+    const rootText=(root?.innerText||"").trim();
     const hostError=/Não foi possível abrir esta etapa|não é compatível com a mecânica|Não foi possível iniciar a mecânica|Erro ao preparar|falha ao preparar/i.test(rootText);
     const innerOverflow=doc?Math.max(0,doc.documentElement.scrollWidth-doc.documentElement.clientWidth,doc.body.scrollWidth-doc.body.clientWidth):0;
     const outerOverflow=Math.max(0,document.documentElement.scrollWidth-document.documentElement.clientWidth,document.body.scrollWidth-document.body.clientWidth);
     return {
-      id,mechanic,bodyLength:body.length,
+      id,mechanic,bodyLength:visibleText.length,
       frameTitle:frame?.title||"",
       innerOverflow,outerOverflow,
       rootWidth:root?.getBoundingClientRect().width||0,
       viewportWidth:document.documentElement.clientWidth,
       rootText,
       hostError,
-      errorText:/Erro ao preparar|Erro:|falha ao preparar/i.test(body),
+      errorText:/Erro ao preparar|Erro:|falha ao preparar/i.test(visibleText),
       canonicalImageCount:canonicalImages.length,
       canonicalImagesLoaded:canonicalImages.filter(img=>img.complete&&img.naturalWidth>0&&img.naturalHeight>0).length,
       expectCanonicalImage:Boolean(expectCanonicalImage)
