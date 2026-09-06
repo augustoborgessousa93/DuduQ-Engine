@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "contractMajor": 1,
-  "revision": 149,
+  "revision": 151,
   "core": {
     "release": "1.0.12",
     "styles": [
@@ -32,7 +32,7 @@
     "matching": { "release": "1.0.23", "adapter": "/engine/releases/mechanics/matching/1.0.23/matching.js", "runtime": "/engine/releases/mechanics/matching/1.0.23/DUDUQ_MATCHING.html" },
     "memory-quest": { "release": "1.0.27", "adapter": "/engine/releases/mechanics/memory-quest/1.0.27/memory-quest.js", "runtime": "/engine/releases/mechanics/memory-quest/1.0.27/DUDUQ_MEMORY_QUEST.html" },
     "smart-sentence": { "release": "4.0.20", "adapter": "/engine/releases/mechanics/smart-sentence/4.0.20/smart-sentence.js", "runtime": "/engine/releases/mechanics/smart-sentence/4.0.20/DUDUQ_SMART_SENTENCE.html" },
-    "target-shooter": { "release": "1.0.21", "adapter": "/engine/releases/mechanics/target-shooter/1.0.21/target-shooter.js", "runtime": "/engine/releases/mechanics/target-shooter/1.0.21/DUDUQ_TARGET_SHOOTER.html" },
+    "target-shooter": { "release": "1.0.23", "adapter": "/engine/releases/mechanics/target-shooter/1.0.23/target-shooter.js", "runtime": "/engine/releases/mechanics/target-shooter/1.0.21/DUDUQ_TARGET_SHOOTER.html" },
     "word-slash": { "release": "1.0.17", "adapter": "/engine/releases/mechanics/word-slash/1.0.17/word-slash.js", "runtime": "/engine/releases/mechanics/word-slash/1.0.17/DUDUQ_WORD_SLASH.html" }
   },
   "policy": {
@@ -47,5 +47,5 @@
     "canonicalAssetRuntimeCommit": "f0f8bed8e8c24fad4eae204bf4a5cc84a8d8263f"
   },
   "channel": "canary-v1",
-  "status": "approved-r149-drag-drop-2.0.26"
+  "status": "candidate-r151-y3-target-stimulus-visual"
 }

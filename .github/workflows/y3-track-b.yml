@@ -1,0 +1,147 @@
+name: Y3 Track B Remodel
+
+on:
+  push:
+    branches:
+      - 'refactor/y3-m01-m06-mechanic-orchestration-track-b-20260904'
+  pull_request:
+    paths:
+      - 'content/english/year-3/**'
+      - 'content/english/shared/pedagogical-orchestrator-v1.js'
+      - 'engine/channels/canary-v1.json'
+      - 'engine/releases/mechanics/target-shooter/1.0.22/**'
+      - 'engine/releases/mechanics/target-shooter/1.0.23/**'
+      - 'test/year3/**'
+      - '.github/workflows/y3-track-b.yml'
+
+jobs:
+  source-matrix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Gate 90-item source baseline and frozen pedagogical matrix
+        run: node test/year3/y3-track-b-matrix.mjs
+
+  sentinel-contracts:
+    needs: source-matrix
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Syntax — R151 factory and immutable Target Shooter 1.0.23
+        run: |
+          node --check content/english/year-3/year3-track-b-factory-v1.js
+          node --check engine/releases/mechanics/target-shooter/1.0.23/target-shooter.js
+          node --check test/year3/y3-track-b-m01-sentinel.mjs
+          node --check test/year3/y3-track-b-m02.mjs
+          node --check test/year3/y3-track-b-module.mjs
+          node --check test/year3/y3-track-b-module-browser.mjs
+          node --check test/year3/y3-track-b-final-browser.mjs
+      - name: Regression contract — frozen M01
+        run: node test/year3/y3-track-b-m01-sentinel.mjs
+      - name: Regression contract — frozen M02 option audio
+        run: node test/year3/y3-track-b-m02.mjs
+
+  sentinel-browser:
+    needs: sentinel-contracts
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/y3-sentinel-http.log 2>&1 &
+          echo $! > /tmp/y3-sentinel-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/content/english/year-3/module-01/index.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/y3-sentinel-http.log
+          exit 1
+      - name: Regression browser — M01 — 4 viewports
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year3/y3-track-b-m01-browser.mjs
+      - name: Regression browser — M02 option audio — 4 viewports
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year3/y3-track-b-m02-browser.mjs
+
+  m03-m06-implementation:
+    needs: sentinel-browser
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/y3-track-b-http.log 2>&1 &
+          echo $! > /tmp/y3-track-b-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/content/english/year-3/module-03/index.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/y3-track-b-http.log
+          exit 1
+
+      - name: M03 contract — 15/15 + placeholder manifest
+        run: node test/year3/y3-track-b-module.mjs 3
+      - name: M03 browser — 4 viewports + stimulus/retry/completion
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          MODULE: '3'
+        run: node test/year3/y3-track-b-module-browser.mjs
+
+      - name: M04 contract — 15/15 + placeholder manifest
+        run: node test/year3/y3-track-b-module.mjs 4
+      - name: M04 browser — 4 viewports + stimulus/retry/completion
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          MODULE: '4'
+        run: node test/year3/y3-track-b-module-browser.mjs
+
+      - name: M05 contract — 15/15 + placeholder manifest
+        run: node test/year3/y3-track-b-module.mjs 5
+      - name: M05 browser — 4 viewports + stimulus/retry/completion
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          MODULE: '5'
+        run: node test/year3/y3-track-b-module-browser.mjs
+
+      - name: M06 contract — 15/15 + placeholder manifest
+        run: node test/year3/y3-track-b-module.mjs 6
+      - name: M06 browser — 4 viewports + stimulus/retry/completion
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          MODULE: '6'
+        run: node test/year3/y3-track-b-module-browser.mjs
+
+      - name: Year 3 final implementation gate + consolidated pending assets
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year3/y3-track-b-final-browser.mjs
+      - name: Upload Year 3 implementation status
+        uses: actions/upload-artifact@v4
+        with:
+          name: y3-track-b-r151-status
+          path: test-results/year3/
+          if-no-files-found: error
