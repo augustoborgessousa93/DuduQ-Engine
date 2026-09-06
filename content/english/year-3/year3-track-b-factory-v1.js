@@ -53,7 +53,7 @@
   function moduleNumber(source){const m=text(source?.id).match(/^EN3-M(\d)-/);return m?Number(m[1]):0}
   function versionFor(module){return VERSION_BY_MODULE[module]||`3.0.0-track-b-m${String(module).padStart(2,"0")}`}
   function normalizeWords(v){return text(v).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim()}
-  function singular(v){const w=text(v).toLowerCase();if(w.endsWith("ies"))return w.slice(0,-3)+"y";if(w.endsWith("ses"))return w.slice(0,-2);if(w.endsWith("s")&&!w.endsWith("ss"))return w.slice(0,-1);return w}
+  function singular(v){const w=text(v).toLowerCase();if(w==="bus")return w;if(w.endsWith("ies"))return w.slice(0,-3)+"y";if(w.endsWith("ses"))return w.slice(0,-2);if(w.endsWith("s")&&!w.endsWith("ss"))return w.slice(0,-1);return w}
   function sourceInvariant(source){return Object.freeze({
     id:source.id,
     skill:source.skill,
