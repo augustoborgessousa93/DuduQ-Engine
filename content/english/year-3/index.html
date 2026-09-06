@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="duduq-year3-test-home" content="duduq-year3-test-home">
+  <title>DuduQ — Língua Inglesa — 3º Ano — Teste dos módulos</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #12304a;
+      --muted: #5e7387;
+      --surface: rgba(255,255,255,.92);
+      --line: rgba(18,48,74,.12);
+      --blue: #1769d2;
+      --blue-dark: #0f4fa8;
+      --sky: #eaf7ff;
+      --gold: #f3b626;
+      --ok: #177245;
+      --pending: #8a5b00;
+      font-family: Inter, ui-rounded, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { min-height: 100%; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255,255,255,.95) 0 10%, transparent 35%),
+        linear-gradient(150deg, #dff4ff 0%, #f7fbff 48%, #eef7ff 100%);
+    }
+
+    .shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0 44px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 5vw, 48px);
+      border: 1px solid rgba(23,105,210,.12);
+      border-radius: 30px;
+      background: var(--surface);
+      box-shadow: 0 20px 60px rgba(32,86,130,.12);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -70px;
+      top: -90px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, rgba(23,105,210,.16), rgba(243,182,38,.16));
+      pointer-events: none;
+    }
+
+    .brand {
+      margin: 0;
+      color: var(--blue);
+      font-size: clamp(2rem, 6vw, 4.2rem);
+      line-height: .95;
+      font-weight: 1000;
+      letter-spacing: .04em;
+    }
+
+    .subject {
+      margin: 12px 0 0;
+      font-size: clamp(1rem, 2.3vw, 1.35rem);
+      font-weight: 850;
+      letter-spacing: .12em;
+    }
+
+    .year {
+      display: inline-flex;
+      margin-top: 12px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 900;
+      letter-spacing: .04em;
+    }
+
+    h1 {
+      margin: 28px 0 10px;
+      font-size: clamp(1.65rem, 4vw, 2.5rem);
+      line-height: 1.08;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+
+    .status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .status span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: .82rem;
+      font-weight: 900;
+      letter-spacing: .035em;
+    }
+
+    .approved {
+      color: var(--ok);
+      background: #e8f7ef;
+      border: 1px solid #c6ead6;
+    }
+
+    .assets {
+      color: var(--pending);
+      background: #fff6dc;
+      border: 1px solid #f5dda0;
+    }
+
+    .notice {
+      margin: 18px 0 0;
+      padding: 12px 14px;
+      border-radius: 14px;
+      color: var(--muted);
+      background: rgba(234,247,255,.74);
+      border: 1px solid rgba(23,105,210,.10);
+      font-size: .91rem;
+      line-height: 1.45;
+    }
+
+    .modules {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .module-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 250px;
+      padding: 22px;
+      border-radius: 24px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 32px rgba(32,86,130,.08);
+    }
+
+    .module-number {
+      display: inline-flex;
+      align-self: flex-start;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--sky);
+      color: var(--blue-dark);
+      font-size: .78rem;
+      font-weight: 950;
+      letter-spacing: .06em;
+    }
+
+    .module-card h2 {
+      margin: 16px 0 12px;
+      font-size: 1.16rem;
+      line-height: 1.25;
+    }
+
+    .module-card p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .test-button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: auto;
+      min-height: 48px;
+      padding: 12px 16px;
+      border-radius: 16px;
+      color: #fff;
+      background: linear-gradient(180deg, #2378df 0%, var(--blue-dark) 100%);
+      box-shadow: 0 7px 0 #0a3f88, 0 12px 22px rgba(15,79,168,.2);
+      text-decoration: none;
+      font-weight: 950;
+      letter-spacing: .035em;
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+
+    .test-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 9px 0 #0a3f88, 0 15px 24px rgba(15,79,168,.22);
+    }
+
+    .test-button:active {
+      transform: translateY(5px);
+      box-shadow: 0 2px 0 #0a3f88, 0 7px 14px rgba(15,79,168,.18);
+    }
+
+    .test-button:focus-visible {
+      outline: 4px solid rgba(243,182,38,.45);
+      outline-offset: 4px;
+    }
+
+    footer {
+      padding: 22px 4px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: .84rem;
+    }
+
+    @media (max-width: 900px) {
+      .modules { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 20px, 1120px); padding-top: 10px; }
+      .hero { border-radius: 22px; padding: 24px 20px; }
+      .modules { grid-template-columns: 1fr; gap: 14px; }
+      .module-card { min-height: 220px; border-radius: 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .test-button { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="brand">DUDUQ</p>
+      <p class="subject">LÍNGUA INGLESA</p>
+      <span class="year">3º ANO</span>
+
+      <h1 id="page-title">Teste dos módulos</h1>
+      <p class="lead">Escolha um módulo abaixo para iniciar o teste local do Year 3 Track B.</p>
+
+      <div class="status" aria-label="Status desta versão de teste">
+        <span class="approved">IMPLEMENTAÇÃO: APROVADA PARA TESTE</span>
+        <span class="assets">ASSETS FINAIS: EM SUBSTITUIÇÃO</span>
+      </div>
+
+      <p class="notice">Versão de teste — algumas ilustrações ainda utilizam representações temporárias.</p>
+    </section>
+
+    <section class="modules" aria-label="Módulos do 3º ano">
+      <article class="module-card">
+        <span class="module-number">MÓDULO 1</span>
+        <h2>Greetings, Friends &amp; Personal Information</h2>
+        <p>Abra o primeiro módulo para o teste local.</p>
+        <a class="test-button" href="./module-01/index.html" aria-label="Testar módulo 1">TESTAR MÓDULO</a>
+      </article>
+
+      <article class="module-card">
+        <span class="module-number">MÓDULO 2</span>
+        <h2>Numbers 1–50 &amp; Age</h2>
+        <p>Abra o segundo módulo para o teste local.</p>
+        <a class="test-button" href="./module-02/index.html" aria-label="Testar módulo 2">TESTAR MÓDULO</a>
+      </article>
+
+      <article class="module-card">
+        <span class="module-number">MÓDULO 3</span>
+        <h2>Family, Toys &amp; Animals</h2>
+        <p>Abra o terceiro módulo para o teste local.</p>
+        <a class="test-button" href="./module-03/index.html" aria-label="Testar módulo 3">TESTAR MÓDULO</a>
+      </article>
+
+      <article class="module-card">
+        <span class="module-number">MÓDULO 4</span>
+        <h2>Math in English &amp; School Objects</h2>
+        <p>Abra o quarto módulo para o teste local.</p>
+        <a class="test-button" href="./module-04/index.html" aria-label="Testar módulo 4">TESTAR MÓDULO</a>
+      </article>
+
+      <article class="module-card">
+        <span class="module-number">MÓDULO 5</span>
+        <h2>Shapes, Colors, Numbers &amp; Size</h2>
+        <p>Abra o quinto módulo para o teste local.</p>
+        <a class="test-button" href="./module-05/index.html" aria-label="Testar módulo 5">TESTAR MÓDULO</a>
+      </article>
+
+      <article class="module-card">
+        <span class="module-number">MÓDULO 6</span>
+        <h2>Transportation &amp; Body Description</h2>
+        <p>Abra o sexto módulo para o teste local.</p>
+        <a class="test-button" href="./module-06/index.html" aria-label="Testar módulo 6">TESTAR MÓDULO</a>
+      </article>
+    </section>
+
+    <footer>Central local de teste — Year 3 Track B</footer>
+  </main>
+</body>
+</html>
