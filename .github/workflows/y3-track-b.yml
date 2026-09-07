@@ -1,0 +1,133 @@
+name: Y3 Track B Production Promotion
+
+on:
+  pull_request:
+    paths:
+      - 'content/english/year-3/**'
+      - 'content/english/shared/pedagogical-orchestrator-v1.js'
+      - 'engine/channels/year3-r151-v1.json'
+      - 'engine/releases/mechanics/target-shooter/1.0.22/**'
+      - 'engine/releases/mechanics/target-shooter/1.0.23/**'
+      - 'test/year3/**'
+      - '.github/workflows/y3-track-b.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'content/english/year-3/**'
+      - 'content/english/shared/pedagogical-orchestrator-v1.js'
+      - 'engine/channels/year3-r151-v1.json'
+      - 'engine/releases/mechanics/target-shooter/1.0.22/**'
+      - 'engine/releases/mechanics/target-shooter/1.0.23/**'
+      - 'test/year3/**'
+      - '.github/workflows/y3-track-b.yml'
+
+jobs:
+  year3-production-gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Exclude Year 4 experimental files from promotion
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          git fetch origin main
+          BAD="$(git diff --name-only origin/main...HEAD | grep -E '^(content/english/year-4/|test/year4/|\.github/workflows/y4-)' || true)"
+          if [ -n "$BAD" ]; then
+            echo "Unexpected Year 4 promotion files:"
+            echo "$BAD"
+            exit 1
+          fi
+          echo 'YEAR4_EXPERIMENTAL_FILES_ADDED = 0'
+
+      - name: Validate dedicated Year 3 R151 channel and publication authorization
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const global=JSON.parse(fs.readFileSync('engine/channels/canary-v1.json','utf8'));
+          const y3=JSON.parse(fs.readFileSync('engine/channels/year3-r151-v1.json','utf8'));
+          if(global.revision!==149) throw new Error(`Global canary changed: ${global.revision}`);
+          if(y3.revision!==151||y3.core?.release!=='1.0.12'||y3.mechanics?.['target-shooter']?.release!=='1.0.23') throw new Error('Year 3 R151 pin mismatch');
+          if(y3.policy?.year3Publication!=='GO_WITH_TEMPORARY_VISUALS'||y3.policy?.temporaryVisualsAuthorized!==true) throw new Error('Year 3 publication override missing');
+          console.log('YEAR3_DEDICATED_CHANNEL = PASS');
+          console.log('YEAR3_PUBLICATION_OVERRIDE = GO_WITH_TEMPORARY_VISUALS');
+          NODE
+
+      - name: Source matrix 90/90
+        run: node test/year3/y3-track-b-matrix.mjs
+
+      - name: Syntax gates
+        run: |
+          node --check content/english/year-3/year3-track-b-factory-v1.js
+          node --check engine/releases/mechanics/target-shooter/1.0.23/target-shooter.js
+          node --check test/year3/y3-track-b-module.mjs
+          node --check test/year3/y3-track-b-module-browser.mjs
+          node --check test/year3/y3-track-b-final-browser.mjs
+          node --check test/year3/y3-production-links.mjs
+
+      - name: Bind contract fixtures to the dedicated Year 3 channel
+        run: cp engine/channels/year3-r151-v1.json engine/channels/canary-v1.json
+
+      - name: M01-M06 contracts
+        run: |
+          node test/year3/y3-track-b-m01-sentinel.mjs
+          node test/year3/y3-track-b-m02.mjs
+          node test/year3/y3-track-b-module.mjs 3
+          node test/year3/y3-track-b-module.mjs 4
+          node test/year3/y3-track-b-module.mjs 5
+          node test/year3/y3-track-b-module.mjs 6
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/y3-production-http.log 2>&1 &
+          echo $! > /tmp/y3-production-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/content/english/year-3/index.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/y3-production-http.log
+          exit 1
+
+      - name: HOME routes and navigation
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year3/y3-production-links.mjs
+
+      - name: M01-M02 browser regressions
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: |
+          node test/year3/y3-track-b-m01-browser.mjs
+          node test/year3/y3-track-b-m02-browser.mjs
+
+      - name: M03-M06 browser regressions
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: |
+          for m in 3 4 5 6; do
+            MODULE="$m" node test/year3/y3-track-b-module-browser.mjs
+          done
+
+      - name: Year 3 consolidated implementation gate
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year3/y3-track-b-final-browser.mjs
+
+      - name: Upload Year 3 production validation status
+        uses: actions/upload-artifact@v4
+        with:
+          name: y3-r151-production-validation
+          path: test-results/year3/
+          if-no-files-found: error
