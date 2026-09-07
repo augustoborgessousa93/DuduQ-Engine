@@ -46,9 +46,9 @@
       changeReason:"SMART_NOT_FALLBACK — descrição visual reconhecida, não construída."
     }),
     "EN3-M4-15":Object.freeze({
-      primary:"target-shooter",secondary:"smart-sentence",audio:"OPTION_AUDIO_REQUIRED_REPEATABLE",
+      intent:"visual_description",primary:"target-shooter",secondary:"smart-sentence",audio:"OPTION_AUDIO_REQUIRED_REPEATABLE",
       reason:"A operação é um estímulo visual e a criança reconhece sua leitura oral; Target Shooter apresenta a operação e mantém áudio repetível nas opções.",
-      changeReason:"SMART_NOT_FALLBACK — reconhecimento de frase matemática, não construção."
+      changeReason:"SMART_NOT_FALLBACK — reconhecimento de frase matemática, não construção; a intenção de apresentação foi corrigida para reconhecimento visual, sem alterar o source."
     }),
     "EN3-M5-07":Object.freeze({
       primary:"target-shooter",secondary:"smart-sentence",audio:"OPTION_AUDIO_REQUIRED_REPEATABLE",
