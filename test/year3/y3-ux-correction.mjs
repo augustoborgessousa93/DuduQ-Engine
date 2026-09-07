@@ -41,17 +41,19 @@ function distribution(questions){
   return questions.reduce((out,q)=>{const m=q.delivery.mechanic;out[m]=(out[m]||0)+1;return out},{});
 }
 function maxStreak(entries){
-  let max=0,current=0,last='';
+  let max=0,current=0,last='',lastModule=undefined;
   const runs=[];
   let start=null;
   entries.forEach((entry,index)=>{
-    if(entry.mechanic===last){current+=1;}else{
-      if(current)runs.push({mechanic:last,count:current,start,end:index-1});
+    const crossesModule=entry.module!==undefined&&lastModule!==undefined&&entry.module!==lastModule;
+    if(!crossesModule&&entry.mechanic===last){current+=1;}else{
+      if(current)runs.push({mechanic:last,count:current,start,end:index-1,module:lastModule});
       last=entry.mechanic;current=1;start=index;
     }
+    lastModule=entry.module;
     max=Math.max(max,current);
   });
-  if(current)runs.push({mechanic:last,count:current,start,end:entries.length-1});
+  if(current)runs.push({mechanic:last,count:current,start,end:entries.length-1,module:lastModule});
   return {max,runs};
 }
 
@@ -107,7 +109,7 @@ for(let moduleNumber=1;moduleNumber<=6;moduleNumber++){
     if(String(q.instruction).length>40)longAfter+=1;
     instructions.push({id:q.id,studentInstruction:q.instruction,mechanic:q.delivery.mechanic});
   }
-  const moduleSequence=questions.map(q=>({id:q.id,mechanic:q.delivery.mechanic}));
+  const moduleSequence=questions.map(q=>({id:q.id,mechanic:q.delivery.mechanic,module:moduleNumber}));
   moduleReports.push({module:moduleNumber,distribution:distribution(questions),studentInstructions:instructions,maxStreak:maxStreak(moduleSequence).max});
   allQuestions.push(...questions);
   console.log(`M${tag}_CONTRACT = PASS — 15/15`);
@@ -132,15 +134,16 @@ assert.equal(afterStreak.max,7,'corrected max streak with documented exceptions'
 
 for(const run of afterStreak.runs.filter(run=>run.count>4)){
   const ids=afterSequence.slice(run.start,run.end+1).map(item=>item.id);
-  const exception=STREAK_EXCEPTIONS.find(entry=>entry.mechanic===run.mechanic&&JSON.stringify(entry.ids)===JSON.stringify(ids));
-  assert.ok(exception,`undocumented mechanic streak ${run.mechanic} ${ids.join(',')}`);
+  const exception=STREAK_EXCEPTIONS.find(entry=>entry.module===run.module&&entry.mechanic===run.mechanic&&JSON.stringify(entry.ids)===JSON.stringify(ids));
+  assert.ok(exception,`undocumented mechanic streak M${run.module} ${run.mechanic} ${ids.join(',')}`);
 }
 
 const baseStreakPosition=new Map();
-let previous='';let position=0;
+let previous='',previousModule=0,position=0;
 for(const entry of beforeSequence){
-  position=entry.mechanic===previous?position+1:1;
+  position=entry.module===previousModule&&entry.mechanic===previous?position+1:1;
   previous=entry.mechanic;
+  previousModule=entry.module;
   baseStreakPosition.set(entry.id,position);
 }
 const audit=BaseMatrix.expectedIds.map(id=>{
