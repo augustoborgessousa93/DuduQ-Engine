@@ -24,6 +24,11 @@ const representatives={
   5:{id:'EN3-M5-07',mechanic:'target-shooter'},
   6:{id:'EN3-M6-09',mechanic:'target-shooter'}
 };
+const targetModeCases=[
+  {module:1,id:'EN3-M1-09',mode:'audio-to-image',label:'canonical-audio-to-image'},
+  {module:2,id:'EN3-M2-01',mode:'visual-to-audio',label:'numeral-visual-to-audio'},
+  {module:3,id:'EN3-M3-01',mode:'visual-to-audio',label:'image-visual-to-audio'}
+];
 function assert(ok,message){if(!ok)throw new Error(message)}
 function sameDistribution(actual,wanted){return JSON.stringify(Object.entries(actual).sort())===JSON.stringify(Object.entries(wanted).sort())}
 
@@ -87,32 +92,12 @@ async function mount(page,moduleNumber,id,mechanic){
   });
 }
 
-function styleShape(style){
-  return {
-    minHeight:style.minHeight,
-    paddingLeft:style.paddingLeft,
-    paddingRight:style.paddingRight,
-    borderRadius:style.borderRadius,
-    borderTopWidth:style.borderTopWidth,
-    borderTopColor:style.borderTopColor,
-    backgroundImage:style.backgroundImage,
-    color:style.color,
-    boxShadow:style.boxShadow,
-    fontFamily:style.fontFamily,
-    fontSize:style.fontSize,
-    fontWeight:style.fontWeight,
-    outlineWidth:style.outlineWidth,
-    outlineColor:style.outlineColor,
-    outlineOffset:style.outlineOffset,
-    filter:style.filter,
-    transform:style.transform
-  };
-}
 async function computed(locator){return locator.evaluate(el=>{const s=getComputedStyle(el);return {
   minHeight:s.minHeight,paddingLeft:s.paddingLeft,paddingRight:s.paddingRight,borderRadius:s.borderRadius,borderTopWidth:s.borderTopWidth,borderTopColor:s.borderTopColor,
   backgroundImage:s.backgroundImage,color:s.color,boxShadow:s.boxShadow,fontFamily:s.fontFamily,fontSize:s.fontSize,fontWeight:s.fontWeight,
   outlineWidth:s.outlineWidth,outlineColor:s.outlineColor,outlineOffset:s.outlineOffset,filter:s.filter,transform:s.transform
 }})}
+async function pseudo(locator,pseudoElement){return locator.evaluate((el,pseudoElement)=>{const s=getComputedStyle(el,pseudoElement);return {height:s.height,borderRadius:s.borderRadius,backgroundImage:s.backgroundImage,opacity:s.opacity}},pseudoElement)}
 function assertParity(a,b,label){
   for(const key of ['minHeight','paddingLeft','paddingRight','borderRadius','borderTopWidth','borderTopColor','backgroundImage','color','boxShadow','fontFamily','fontSize','fontWeight']){
     assert(a[key]===b[key],`${label}: ${key} differs Smart=${a[key]} Matching=${b[key]}`);
@@ -137,15 +122,19 @@ async function buttonParity(browser,viewport){
 
   const smartDisabled=await computed(smart),matchingDisabled=await computed(matching);
   assert(smartDisabled.minHeight===matchingDisabled.minHeight,`${viewport.name}: disabled height parity`);
-  assert(smartDisabled.borderTopColor===matchingDisabled.borderTopColor,`${viewport.name}: disabled border parity`);
-  assert(smartDisabled.backgroundImage===matchingDisabled.backgroundImage,`${viewport.name}: disabled background parity`);
+  assert(smartDisabled.borderTopColor===matchingDisabled.borderTopColor,`${viewport.name}: disabled border parity Smart=${smartDisabled.borderTopColor} Matching=${matchingDisabled.borderTopColor}`);
+  assert(smartDisabled.backgroundImage===matchingDisabled.backgroundImage,`${viewport.name}: disabled background parity Smart=${smartDisabled.backgroundImage} Matching=${matchingDisabled.backgroundImage}`);
   assert(smartDisabled.color===matchingDisabled.color,`${viewport.name}: disabled text parity`);
-  assert(smartDisabled.boxShadow===matchingDisabled.boxShadow,`${viewport.name}: disabled depth parity`);
+  assert(smartDisabled.boxShadow===matchingDisabled.boxShadow,`${viewport.name}: disabled depth parity Smart=${smartDisabled.boxShadow} Matching=${matchingDisabled.boxShadow}`);
 
   await smart.evaluate(el=>{el.disabled=false});
   await matching.evaluate(el=>{el.disabled=false});
   const smartNormal=await computed(smart),matchingNormal=await computed(matching);
   assertParity(smartNormal,matchingNormal,`${viewport.name}/normal`);
+  const smartBefore=await pseudo(smart,'::before'),matchingBefore=await pseudo(matching,'::before');
+  for(const key of ['height','borderRadius','backgroundImage','opacity'])assert(smartBefore[key]===matchingBefore[key],`${viewport.name}/normal ::before ${key} differs Smart=${smartBefore[key]} Matching=${matchingBefore[key]}`);
+  const smartAfter=await pseudo(smart,'::after'),matchingAfter=await pseudo(matching,'::after');
+  for(const key of ['backgroundImage','opacity'])assert(smartAfter[key]===matchingAfter[key],`${viewport.name}/normal ::after ${key} differs Smart=${smartAfter[key]} Matching=${matchingAfter[key]}`);
 
   await smart.hover();await matching.hover();
   const smartHover=await computed(smart),matchingHover=await computed(matching);
@@ -153,9 +142,8 @@ async function buttonParity(browser,viewport){
 
   await smart.focus();await matching.focus();
   const smartFocus=await computed(smart),matchingFocus=await computed(matching);
-  assert(smartFocus.outlineWidth===matchingFocus.outlineWidth&&smartFocus.outlineColor===matchingFocus.outlineColor&&smartFocus.outlineOffset===matchingFocus.outlineOffset,`${viewport.name}/focus-visible`);
+  assert(smartFocus.outlineWidth===matchingFocus.outlineWidth&&smartFocus.outlineColor===matchingFocus.outlineColor&&smartFocus.outlineOffset===matchingFocus.outlineOffset,`${viewport.name}/focus-visible Smart=${smartFocus.outlineWidth}/${smartFocus.outlineColor}/${smartFocus.outlineOffset} Matching=${matchingFocus.outlineWidth}/${matchingFocus.outlineColor}/${matchingFocus.outlineOffset}`);
 
-  // Press state is sampled with a real pointer-down in each actual component.
   let box=await smart.boundingBox();assert(box,`${viewport.name}: Smart button box`);
   await smartPage.mouse.move(box.x+box.width/2,box.y+box.height/2);await smartPage.mouse.down();
   const smartPressed=await computed(smart);await smartPage.mouse.up();
@@ -163,9 +151,8 @@ async function buttonParity(browser,viewport){
   await matchingPage.mouse.move(box.x+box.width/2,box.y+box.height/2);await matchingPage.mouse.down();
   const matchingPressed=await computed(matching);await matchingPage.mouse.up();
   assert(smartPressed.transform===matchingPressed.transform,`${viewport.name}/pressed transform Smart=${smartPressed.transform} Matching=${matchingPressed.transform}`);
-  assert(smartPressed.boxShadow===matchingPressed.boxShadow,`${viewport.name}/pressed depth`);
+  assert(smartPressed.boxShadow===matchingPressed.boxShadow,`${viewport.name}/pressed depth Smart=${smartPressed.boxShadow} Matching=${matchingPressed.boxShadow}`);
 
-  // Capture both actual buttons and compose them side by side in the same viewport.
   await smart.evaluate(el=>{el.disabled=false;el.blur()});
   await matching.evaluate(el=>{el.disabled=false;el.blur()});
   const smartPng=await smart.screenshot();
@@ -176,7 +163,59 @@ async function buttonParity(browser,viewport){
   fs.mkdirSync('test-results/year3',{recursive:true});
   await compare.screenshot({path:`test-results/year3/button-parity-${viewport.name}.png`,fullPage:true});
   await context.close();
-  console.log(`PRIMARY_BUTTON_PARITY ${viewport.name} normal=PASS hover=PASS pressed=PASS disabled=PASS focus=PASS mobile=PASS`);
+  console.log(`PRIMARY_BUTTON_PARITY ${viewport.name} normal=PASS hover=PASS pressed=PASS disabled=PASS focus=PASS pseudo=PASS mobile=PASS`);
+}
+
+async function targetShooterModeParity(browser,viewport){
+  const samples=[];
+  fs.mkdirSync('test-results/year3',{recursive:true});
+  for(const probe of targetModeCases){
+    const context=await browser.newContext({viewport:{width:viewport.width,height:viewport.height}});
+    const page=await context.newPage();
+    await waitModule(page,probe.module);
+    const mounted=await mount(page,probe.module,probe.id,'target-shooter');
+    assert(!mounted.error,`${viewport.name}/${probe.id}: Target Shooter mount error`);
+    const frame=page.frameLocator('#root iframe');
+    const arena=frame.locator('.duduq-ts-arena');
+    const target=frame.locator('.duduq-ts-target-shell').first();
+    const audio=frame.locator('.duduq-ts-audio-button');
+    await arena.waitFor({state:'visible',timeout:15_000});
+    await target.waitFor({state:'visible',timeout:15_000});
+    await audio.waitFor({state:'visible',timeout:15_000});
+    const mode=await frame.locator('#targetShooterConfig').evaluate(el=>JSON.parse(el.textContent||'{}').stages?.[0]?.mode||'');
+    assert(mode===probe.mode,`${viewport.name}/${probe.id}: expected mode ${probe.mode}, got ${mode}`);
+    await audio.evaluate(el=>{el.disabled=false});
+    const arenaStyle=await computed(arena),targetStyle=await computed(target),audioStyle=await computed(audio);
+    let confirmStyle=null;
+    if(mode==='visual-to-audio'){
+      const marker=await frame.locator('#duduq-y3-target-mode-parity').getAttribute('data-reference');
+      assert(marker==='target-shooter-1.0.23',`${viewport.name}/${probe.id}: Target Shooter parity style not injected`);
+      const panel=frame.locator('.duduq-ts-option-audio-panel');
+      const confirm=frame.locator('.duduq-ts-option-audio-confirm');
+      await panel.waitFor({state:'visible',timeout:15_000});
+      await confirm.waitFor({state:'visible',timeout:15_000});
+      await confirm.evaluate(el=>{el.disabled=false});
+      confirmStyle=await computed(confirm);
+      for(const key of ['borderTopColor','backgroundImage','color','boxShadow']){
+        assert(confirmStyle[key]===audioStyle[key],`${viewport.name}/${probe.id}: Target Shooter mode control ${key} differs confirm=${confirmStyle[key]} audio=${audioStyle[key]}`);
+      }
+      await confirm.focus();
+      const confirmFocus=await computed(confirm);await audio.focus();const audioFocus=await computed(audio);
+      assert(confirmFocus.outlineWidth===audioFocus.outlineWidth&&confirmFocus.outlineColor===audioFocus.outlineColor&&confirmFocus.outlineOffset===audioFocus.outlineOffset,`${viewport.name}/${probe.id}: Target Shooter focus language differs`);
+    }else{
+      assert(await frame.locator('.duduq-ts-option-audio-panel').count()===0,`${viewport.name}/${probe.id}: unexpected option-audio panel in ${mode}`);
+    }
+    samples.push({probe,arena:arenaStyle,target:targetStyle,audio:audioStyle,confirm:confirmStyle});
+    await page.locator('#root iframe').screenshot({path:`test-results/year3/target-shooter-${probe.label}-${viewport.name}.png`});
+    await context.close();
+  }
+  const baseline=samples[0];
+  for(const sample of samples.slice(1)){
+    for(const key of ['backgroundImage','borderRadius'])assert(sample.arena[key]===baseline.arena[key],`${viewport.name}/${sample.probe.id}: Target Shooter arena ${key} differs by mode`);
+    for(const key of ['backgroundImage','borderRadius','boxShadow'])assert(sample.target[key]===baseline.target[key],`${viewport.name}/${sample.probe.id}: Target Shooter target shell ${key} differs by mode`);
+    for(const key of ['borderTopColor','backgroundImage','boxShadow'])assert(sample.audio[key]===baseline.audio[key],`${viewport.name}/${sample.probe.id}: Target Shooter audio control ${key} differs by mode`);
+  }
+  console.log(`TARGET_SHOOTER_MODE_PARITY ${viewport.name} audio-to-image=PASS visual-to-audio-text=PASS visual-to-audio-image=PASS`);
 }
 
 const browser=await chromium.launch({headless:true});
@@ -205,10 +244,12 @@ try{
       await context.close();
       console.log(`M${String(moduleNumber).padStart(2,'0')}_BROWSER ${viewport.name} = PASS`);
     }
+    await targetShooterModeParity(browser,viewport);
     await buttonParity(browser,viewport);
   }
 }finally{await browser.close()}
 
+console.log('TARGET_SHOOTER_MODE_PARITY = PASS');
 console.log('PRIMARY_BUTTON_PARITY = PASS');
 console.log('MATCHING_VISUAL_PARITY = PASS');
 console.log('YEAR3_UX_BROWSER = PASS');
