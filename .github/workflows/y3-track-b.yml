@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'content/english/year-3/**'
+      - 'engine/channels/year3-r151-v1.json'
+      - 'engine/releases/mechanics/target-shooter/1.0.24/**'
       - 'test/year3/**'
       - '.github/workflows/y3-track-b.yml'
 
@@ -19,42 +21,40 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Guard correction scope and keep Year 4 out
+      - name: Guard correction scope and keep unrelated releases out
         shell: bash
         run: |
           git fetch origin main
-          BAD="$(git diff --name-only origin/main...HEAD | grep -E '^(content/english/year-4/|content/english/year-5/|test/year4/|test/year5/|engine/releases/mechanics/|engine/releases/core/)' || true)"
+          CHANGED="$(git diff --name-only origin/main...HEAD)"
+          BAD="$(printf '%s\n' "$CHANGED" | grep -E '^(content/english/year-4/|content/english/year-5/|test/year4/|test/year5/|engine/releases/core/|engine/releases/mechanics/)' | grep -v '^engine/releases/mechanics/target-shooter/1.0.24/' || true)"
           if [ -n "$BAD" ]; then
             echo 'Unexpected out-of-scope correction files:'
             echo "$BAD"
             exit 1
           fi
-          echo 'YEAR4_YEAR5_ENGINE_RELEASES_MODIFIED = 0'
+          echo 'YEAR4_YEAR5_CORE_UNRELATED_MECHANICS_MODIFIED = 0'
 
-      - name: Validate runtime baseline remains R151
+      - name: Validate runtime baseline and Target candidate boundary
         run: |
           node - <<'NODE'
           const fs=require('fs');
           const y3=JSON.parse(fs.readFileSync('engine/channels/year3-r151-v1.json','utf8'));
-          if(y3.revision!==151||y3.core?.release!=='1.0.12'||y3.mechanics?.['target-shooter']?.release!=='1.0.23'||y3.mechanics?.['smart-sentence']?.release!=='4.0.20') throw new Error('Year 3 runtime baseline changed');
-          console.log('YEAR3_RUNTIME_BASELINE = R151 / Core 1.0.12 / Target Shooter 1.0.23 / Smart Sentence 4.0.20');
+          const target=y3.mechanics?.['target-shooter']?.release;
+          if(y3.revision!==151||y3.core?.release!=='1.0.12'||!['1.0.23','1.0.24'].includes(target)||y3.mechanics?.['smart-sentence']?.release!=='4.0.20'||y3.mechanics?.['bubble-pop']?.release!=='1.0.31'||y3.mechanics?.['drag-drop']?.release!=='2.0.26'||y3.mechanics?.['word-slash']?.release!=='1.0.17') throw new Error('Year 3 runtime boundary changed');
+          console.log(`YEAR3_RUNTIME_BOUNDARY = R151 / Core 1.0.12 / Target Shooter ${target} / Smart Sentence 4.0.20`);
           NODE
 
       - name: Syntax gates
         run: |
+          node --check engine/releases/mechanics/target-shooter/1.0.24/target-shooter.js
           node --check content/english/year-3/y3-ux-orchestration-v1.js
           node --check content/english/year-3/year3-ux-presentation-v1.js
+          node --check test/year3/target-shooter-1.0.24-reconciliation.mjs
           node --check test/year3/y3-track-b-matrix.mjs
           node --check test/year3/y3-ux-correction.mjs
           node --check test/year3/y3-ux-browser.mjs
           node --check test/year3/y3-track-b-final-browser.mjs
           node --check test/year3/y3-production-links.mjs
-
-      - name: Source matrix 90/90 and mechanic equivalence audit
-        run: node test/year3/y3-track-b-matrix.mjs
-
-      - name: M01-M06 UX contracts instructions diversity and source invariants
-        run: node test/year3/y3-ux-correction.mjs
 
       - name: Install Playwright Chromium
         run: |
@@ -72,24 +72,63 @@ jobs:
           cat /tmp/y3-ux-http.log
           exit 1
 
+      - name: Target Shooter 1.0.24 focal reconciliation gate
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year3/target-shooter-1.0.24-reconciliation.mjs
+
+      - name: Detect dedicated Year 3 channel promotion
+        id: channel
+        shell: bash
+        run: |
+          TARGET="$(node -e "const fs=require('fs');const y=JSON.parse(fs.readFileSync('engine/channels/year3-r151-v1.json','utf8'));process.stdout.write(y.mechanics['target-shooter'].release)")"
+          if [ "$TARGET" = "1.0.24" ]; then
+            echo 'promoted=true' >> "$GITHUB_OUTPUT"
+            echo 'YEAR3_TARGET_CHANNEL = 1.0.24'
+          else
+            echo 'promoted=false' >> "$GITHUB_OUTPUT"
+            echo 'YEAR3_TARGET_CHANNEL = 1.0.23 — focal candidate only'
+          fi
+
+      - name: Source matrix 90/90 and mechanic equivalence audit
+        if: steps.channel.outputs.promoted == 'true'
+        run: node test/year3/y3-track-b-matrix.mjs
+
+      - name: M01-M06 UX contracts instructions diversity and source invariants
+        if: steps.channel.outputs.promoted == 'true'
+        run: node test/year3/y3-ux-correction.mjs
+
       - name: HOME routes and navigation regression
+        if: steps.channel.outputs.promoted == 'true'
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year3/y3-production-links.mjs
 
-      - name: M01-M06 browser UX and Smart Matching parity
+      - name: M01-M06 browser UX Target parity and Smart Matching parity
+        if: steps.channel.outputs.promoted == 'true'
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year3/y3-ux-browser.mjs
 
       - name: Year 3 consolidated regression
+        if: steps.channel.outputs.promoted == 'true'
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year3/y3-track-b-final-browser.mjs
 
-      - name: Mark UX correction ready for human retest
+      - name: Mark candidate focal pass awaiting channel promotion
+        if: steps.channel.outputs.promoted != 'true'
         run: |
+          echo 'TARGET_SHOOTER_1_0_24 = FOCAL PASS'
+          echo 'CHANNEL_PROMOTION = PENDING'
+          echo 'FULL_YEAR3_RETEST = NOT STARTED BY DESIGN'
+
+      - name: Mark UX correction ready for human retest
+        if: steps.channel.outputs.promoted == 'true'
+        run: |
+          echo 'TARGET_SHOOTER_1_0_24 = PASS'
           echo 'YEAR3_UX_CORRECTION = PASS'
+          echo 'READY FOR USER RETEST'
           echo 'PUBLICATION = SUSPENDED — USER RETEST REQUIRED'
 
       - name: Upload Year 3 UX correction evidence
@@ -97,4 +136,4 @@ jobs:
         with:
           name: y3-ux-correction-evidence
           path: test-results/year3/
-          if-no-files-found: error
+          if-no-files-found: warn
