@@ -138,9 +138,12 @@ async function smartMatchingParity(browser,viewport){
   const sf=await computed(smart),mf=await computed(matching);
   assert(sf.outlineWidth===mf.outlineWidth&&sf.outlineColor===mf.outlineColor&&sf.outlineOffset===mf.outlineOffset,`${viewport.name}/focus`);
 
-  let box=await smart.boundingBox();assert(box,`${viewport.name}: smart box`);await smartPage.mouse.move(box.x+box.width/2,box.y+box.height/2);await smartPage.mouse.down();const sp=await computed(smart);await smartPage.mouse.up();
-  box=await matching.boundingBox();assert(box,`${viewport.name}: matching box`);await matchingPage.mouse.move(box.x+box.width/2,box.y+box.height/2);await matchingPage.mouse.down();const mp=await computed(matching);await matchingPage.mouse.up();
-  assert(sp.transform===mp.transform&&sp.boxShadow===mp.boxShadow,`${viewport.name}/pressed`);
+  // Both components define the same 45ms pressed transition. Sample only after
+  // that transition settles; the first battery sampled different interpolation
+  // frames because Smart lives in an iframe while Matching is in the main page.
+  let box=await smart.boundingBox();assert(box,`${viewport.name}: smart box`);await smartPage.mouse.move(box.x+box.width/2,box.y+box.height/2);await smartPage.mouse.down();await smartPage.waitForTimeout(80);const sp=await computed(smart);await smartPage.mouse.up();
+  box=await matching.boundingBox();assert(box,`${viewport.name}: matching box`);await matchingPage.mouse.move(box.x+box.width/2,box.y+box.height/2);await matchingPage.mouse.down();await matchingPage.waitForTimeout(80);const mp=await computed(matching);await matchingPage.mouse.up();
+  assert(sp.transform===mp.transform&&sp.boxShadow===mp.boxShadow,`${viewport.name}/pressed Smart=${sp.transform}/${sp.boxShadow} Matching=${mp.transform}/${mp.boxShadow}`);
 
   fs.mkdirSync('test-results/year3',{recursive:true});
   await smartPage.screenshot({path:`test-results/year3/smart-matching-${viewport.name}.png`});
