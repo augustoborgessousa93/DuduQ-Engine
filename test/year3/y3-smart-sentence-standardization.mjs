@@ -48,7 +48,7 @@ async function mountSmart(page,moduleNumber,id,{trackCompletion=false}={}){
       steps:[{id:`probe-${id}`,mechanic:'smart-sentence',payload:{id:`payload-${id}`,title:activity.title,subject:'english',year:3,module:moduleNumber,questions:activity.questions}}]
     });
     const q=activity.questions[0];
-    return {instruction:q.instruction,answerText:q.answer?.text||q.answer?.value||'',sourceStatement:q.metadata?.sourceStatement||''};
+    return {instruction:q.instruction,answerText:q.metadata?.smartSentence?.answer||q.answer?.text||'',sourceStatement:q.metadata?.sourceStatement||''};
   },{tag,moduleNumber,id,trackCompletion});
 
   await page.waitForFunction(()=>Boolean(document.querySelector('#root iframe')?.contentDocument?.querySelector('.duduq-smart-ts-stage')),null,{timeout:30_000});
