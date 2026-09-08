@@ -163,22 +163,35 @@ const audit=BaseMatrix.expectedIds.map(id=>{
   };
 });
 
-// Matching visual source audit: values are taken from the current real Matching 1.0.23 component.
+// The active Matching state is audited from the real 1.0.23 component, including the later :not(:disabled) visual override.
 const matchingHtml=fs.readFileSync('engine/releases/mechanics/matching/1.0.23/DUDUQ_MATCHING.html','utf8');
-const requiredMatchingTokens=['width: min(220px,100%)','min-height: 56px','padding: 0 28px','border-radius: 18px','font: 900 19px/1 Fredoka,Nunito,sans-serif','--dq-primary: #0056B3','--dq-primary-depth: #003A7A','--dq-disabled: #E2E8F0','--dq-focus: #111827'];
+const requiredMatchingTokens=[
+  'width: min(220px,100%)','min-height: 56px','padding: 0 28px','border-radius: 18px','font: 900 19px/1 Fredoka,Nunito,sans-serif',
+  '.duduq-matching-primary:not(:disabled)','border-color: #0b5db4','background: linear-gradient(180deg, #1984e8 0%, #0868cb 72%, #075eb9 100%)','0 6px 0 #064a92',
+  '--dq-disabled: #E2E8F0','--dq-focus: #111827'
+];
 for(const token of requiredMatchingTokens)assert.ok(matchingHtml.includes(token),`Matching visual reference missing: ${token}`);
+
+// Target Shooter mode audit: the visual-to-audio add-on must reuse the real Target Shooter blue/depth/focus language rather than invent a separate component style.
+const targetHtml=fs.readFileSync('engine/releases/mechanics/target-shooter/1.0.21/DUDUQ_TARGET_SHOOTER.html','utf8');
+const targetOptionPatch=fs.readFileSync('engine/releases/mechanics/target-shooter/1.0.22/target-shooter.js','utf8');
+for(const token of ['.duduq-ts-audio-button','border: 2px solid #064A92','background: linear-gradient(180deg, #218BEA, #0B70D5 70%, #0864BF)','box-shadow: 0 4px 0 #064A92','outline: 4px solid var(--dq-focus, #111827)'])assert.ok(targetHtml.includes(token),`Target Shooter visual reference missing: ${token}`);
+for(const token of ['stage.mode !== "visual-to-audio"','.duduq-ts-option-audio-panel','.duduq-ts-option-audio-confirm'])assert.ok(targetOptionPatch.includes(token),`Target Shooter mode patch missing: ${token}`);
+
 const uxSource=fs.readFileSync('content/english/year-3/year3-ux-presentation-v1.js','utf8');
-for(const token of ['min-height:56px','padding:0 28px','border-radius:18px','font:900 19px/1 Fredoka,Nunito,sans-serif','outline:4px solid #111827'])assert.ok(uxSource.includes(token),`Smart parity token missing: ${token}`);
+for(const token of ['min-height:56px','padding:0 28px','border-radius:18px','border:2px solid #0B5DB4','background:linear-gradient(180deg,#1984E8 0%,#0868CB 72%,#075EB9 100%)','font:900 19px/1 Fredoka,Nunito,sans-serif','outline:4px solid #111827'])assert.ok(uxSource.includes(token),`Smart parity token missing: ${token}`);
+for(const token of ['duduq-y3-target-mode-parity','TARGET_SHOOTER_MODE_CSS','border:2px solid #064A92','background:linear-gradient(180deg,#218BEA 0%,#0B70D5 70%,#0864BF 100%)','box-shadow:0 4px 0 #064A92','TARGET_MODE_REFERENCE'])assert.ok(uxSource.includes(token),`Target Shooter mode parity token missing: ${token}`);
 
 fs.mkdirSync('test-results/year3',{recursive:true});
 const report={
-  schemaVersion:1,
+  schemaVersion:2,
   status:'YEAR3_UX_CORRECTION = PASS',
   source:'90/90 PASS',
   conciseInstructions:'PASS',
   longInstructionBefore:longBefore,
   longInstructionAfter:longAfter,
   primaryButtonParity:'CONTRACT_PASS',
+  targetShooterModeParity:'CONTRACT_PASS',
   mechanicDistributionBefore:BEFORE_TOTAL,
   mechanicDistributionAfter:afterTotal,
   maxStreakBefore:beforeStreak.max,
@@ -193,6 +206,7 @@ console.log(`LONG_INSTRUCTION_BEFORE = ${longBefore}`);
 console.log(`LONG_INSTRUCTION_AFTER = ${longAfter}`);
 console.log('YEAR3_CONCISE_INSTRUCTION_GATE = PASS');
 console.log('PRIMARY_BUTTON_MATCHING_SOURCE_AUDIT = PASS');
+console.log('TARGET_SHOOTER_MODE_SOURCE_AUDIT = PASS');
 console.log('MECHANIC_DISTRIBUTION_BEFORE',JSON.stringify(BEFORE_TOTAL));
 console.log('MECHANIC_DISTRIBUTION_AFTER',JSON.stringify(afterTotal));
 console.log(`MAX_SAME_MECHANIC_STREAK_BEFORE = ${beforeStreak.max}`);
