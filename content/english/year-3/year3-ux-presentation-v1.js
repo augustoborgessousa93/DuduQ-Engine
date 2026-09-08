@@ -230,9 +230,6 @@
   text-shadow:none!important;
   cursor:default!important;
 }
-/* Active state is bound explicitly to the same boolean attribute toggled by
-   Target Shooter 1.0.22/1.0.23. This prevents the disabled visual layer from
-   winning the cascade after an option preview activates CONFIRMAR. */
 .duduq-ts-option-audio-confirm:not([disabled]){
   border-color:#064A92!important;
   background:linear-gradient(180deg,#218BEA 0%,#0B70D5 70%,#0864BF 100%)!important;
@@ -270,6 +267,33 @@
     },50);
   }
 
+  function installTargetControlStateBridge(frame){
+    if(!frame||frame.__duduqY3TargetStateBridge)return;
+    frame.__duduqY3TargetStateBridge=true;
+    const attach=()=>{
+      try{
+        const doc=frame.contentDocument;
+        if(!doc?.documentElement||doc.__duduqY3TargetStateObserver)return false;
+        const reconcile=()=>{
+          const selected=doc.querySelector('.duduq-ts-target[data-duduq-option-audio-selected="true"]');
+          const confirm=doc.querySelector('.duduq-ts-option-audio-confirm');
+          if(selected&&confirm&&confirm.disabled)confirm.disabled=false;
+        };
+        const observer=new MutationObserver(()=>queueMicrotask(reconcile));
+        observer.observe(doc.documentElement,{subtree:true,childList:true});
+        doc.__duduqY3TargetStateObserver=observer;
+        reconcile();
+        return true;
+      }catch(_){return false;}
+    };
+    frame.addEventListener("load",()=>{attach();setTimeout(attach,50);},{passive:true});
+    let tries=0;
+    const timer=setInterval(()=>{
+      tries+=1;
+      if(attach()||tries>80)clearInterval(timer);
+    },50);
+  }
+
   function patchSmartFrame(frame){
     if(!frame||frame.__duduqY3ButtonPatch)return;
     frame.__duduqY3ButtonPatch=true;
@@ -280,6 +304,7 @@
     if(!frame||frame.__duduqY3TargetModePatch)return;
     frame.__duduqY3TargetModePatch=true;
     injectFrameStyle(frame,"duduq-y3-target-mode-parity","target-shooter-1.0.23",TARGET_SHOOTER_MODE_CSS);
+    installTargetControlStateBridge(frame);
   }
 
   function scanFrames(){
