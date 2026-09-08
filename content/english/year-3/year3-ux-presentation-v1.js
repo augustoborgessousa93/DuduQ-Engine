@@ -1,7 +1,8 @@
 /* DUDUQ English Year 3 — UX presentation correction.
    - keeps the complete editorial source prompt in metadata.sourceStatement;
    - exposes only a concise studentInstruction;
-   - aligns Smart Sentence CONFIRMAR with the real Matching primary action.
+   - aligns Smart Sentence CONFIRMAR with the real active Matching primary action;
+   - keeps Target Shooter visual-to-audio additions inside the Target Shooter visual language.
    No answer, validation, retry, feedback or completion logic is changed.
 */
 (function(root,factory){
@@ -13,20 +14,31 @@
   "use strict";
 
   const BUTTON_REFERENCE=Object.freeze({
-    source:"matching@1.0.23 / .duduq-matching-primary",
+    source:"matching@1.0.23 / .duduq-matching-primary active computed style",
     width:"min(220px, 100%)",
     minHeight:"56px",
     padding:"0 28px",
-    border:"2px solid #003A7A",
+    border:"2px solid #0B5DB4",
     borderRadius:"18px",
-    background:"linear-gradient(180deg,#1471CF 0%,#0056B3 72%,#004892 100%)",
+    background:"linear-gradient(180deg,#1984E8 0%,#0868CB 72%,#075EB9 100%)",
     color:"#fff",
-    boxShadow:"0 6px 0 #003A7A, 0 12px 22px rgba(0,86,179,.16), inset 0 2px 0 rgba(255,255,255,.28)",
+    boxShadow:"0 6px 0 #064A92, 0 12px 22px rgba(9,103,201,.20), inset 0 2px 0 rgba(255,255,255,.38)",
     font:"900 19px/1 Fredoka,Nunito,sans-serif",
     focus:"4px solid #111827",
     mobileMinWidth:"190px",
     mobileMinHeight:"50px",
     mobileFontSize:"18px"
+  });
+
+  const TARGET_MODE_REFERENCE=Object.freeze({
+    source:"target-shooter@1.0.23 visual-to-audio auxiliary controls",
+    canonicalBase:"target-shooter@1.0.21 / .duduq-ts-audio-button",
+    border:"2px solid #064A92",
+    background:"linear-gradient(180deg,#218BEA,#0B70D5 70%,#0864BF)",
+    depth:"#064A92",
+    focus:"#111827",
+    disabledBackground:"#E2E8F0",
+    disabledDepth:"#B7C1CC"
   });
 
   function words(text){
@@ -78,7 +90,6 @@
       const instruction=assertInstruction(studentInstruction(source,q.metadata,q.delivery?.mechanic),q.id);
       if(instruction.length>55||words(instruction)>7)after+=1;
 
-      // SOURCE invariant: preserve the complete editorial prompt untouched.
       q.metadata.sourceStatement=original;
       q.metadata.studentInstruction=instruction;
       q.metadata.uxCorrection=Object.freeze({
@@ -89,9 +100,7 @@
       });
       q.statement=instruction;
       q.instruction=instruction;
-      if(q.metadata.smartSentence){
-        q.metadata.smartSentence.instruction=instruction;
-      }
+      if(q.metadata.smartSentence)q.metadata.smartSentence.instruction=instruction;
       instructions.push(Object.freeze({id:q.id,instruction,mechanic:q.delivery?.mechanic}));
     }
     const audit=Object.freeze({module:built?.module,before,after,instructions:Object.freeze(instructions)});
@@ -115,7 +124,8 @@
   }
 
   const SMART_BUTTON_CSS=`
-/* Matching 1.0.23 primary action parity — visual only. */
+/* Matching 1.0.23 active primary action parity — visual only. */
+@keyframes duduq-y3-smart-button-shine{0%{transform:translateX(-180%) skewX(-18deg)}100%{transform:translateX(340%) skewX(-18deg)}}
 .duduq-smart-ts-confirm{
   position:relative!important;
   isolation:isolate!important;
@@ -124,11 +134,11 @@
   min-width:0!important;
   min-height:56px!important;
   padding:0 28px!important;
-  border:2px solid #003A7A!important;
+  border:2px solid #0B5DB4!important;
   border-radius:18px!important;
-  background:linear-gradient(180deg,#1471CF 0%,#0056B3 72%,#004892 100%)!important;
+  background:linear-gradient(180deg,#1984E8 0%,#0868CB 72%,#075EB9 100%)!important;
   color:#fff!important;
-  box-shadow:0 6px 0 #003A7A,0 12px 22px rgba(0,86,179,.16),inset 0 2px 0 rgba(255,255,255,.28)!important;
+  box-shadow:0 6px 0 #064A92,0 12px 22px rgba(9,103,201,.20),inset 0 2px 0 rgba(255,255,255,.38)!important;
   font:900 19px/1 Fredoka,Nunito,sans-serif!important;
   letter-spacing:0!important;
   text-transform:uppercase!important;
@@ -137,7 +147,16 @@
   transition:transform 90ms ease,filter 140ms ease,box-shadow 90ms ease!important;
   -webkit-tap-highlight-color:transparent;
 }
+.duduq-smart-ts-confirm::before{
+  content:"";position:absolute;z-index:0;inset:2px 8px auto;height:42%;border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,255,255,.46),rgba(255,255,255,0));opacity:.8;pointer-events:none;
+}
+.duduq-smart-ts-confirm::after{
+  content:"";position:absolute;z-index:1;top:-45%;bottom:-45%;left:-42%;width:34%;transform:skewX(-18deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.56),transparent);opacity:0;pointer-events:none;
+}
 .duduq-smart-ts-confirm:hover:not(:disabled){filter:brightness(1.05) saturate(1.03)!important;}
+.duduq-smart-ts-confirm:hover:not(:disabled)::after{opacity:.78;animation:duduq-y3-smart-button-shine 760ms ease-out both;}
 .duduq-smart-ts-confirm:active:not(:disabled),
 .duduq-smart-ts-confirm[data-pressed="true"]{
   transform:translateY(5px)!important;
@@ -167,18 +186,67 @@
 }
 `;
 
-  function patchSmartFrame(frame){
-    if(!frame||frame.__duduqY3ButtonPatch)return;
-    frame.__duduqY3ButtonPatch=true;
+  const TARGET_SHOOTER_MODE_CSS=`
+/* Year 3 visual-to-audio mode keeps the canonical Target Shooter control language. */
+.duduq-ts-option-audio-panel{
+  border:2px solid rgba(132,171,190,.42)!important;
+  border-radius:18px!important;
+  background:rgba(255,255,255,.97)!important;
+  box-shadow:0 4px 0 rgba(161,188,199,.50),0 10px 22px rgba(43,89,110,.08)!important;
+}
+.duduq-ts-option-audio-prompt{
+  border:2px solid rgba(62,132,201,.18)!important;
+  border-radius:16px!important;
+  background:#F4F9FF!important;
+  color:#17395F!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95)!important;
+  font-family:Fredoka,Nunito,system-ui,sans-serif!important;
+}
+.duduq-ts-option-audio-confirm{
+  min-width:132px!important;
+  min-height:42px!important;
+  padding:7px 15px!important;
+  border:2px solid #064A92!important;
+  border-radius:16px!important;
+  background:linear-gradient(180deg,#218BEA 0%,#0B70D5 70%,#0864BF 100%)!important;
+  color:#fff!important;
+  box-shadow:0 4px 0 #064A92,0 8px 15px rgba(9,103,201,.18),inset 0 2px 0 rgba(255,255,255,.42)!important;
+  font:900 15px/1 Fredoka,Nunito,system-ui,sans-serif!important;
+  text-shadow:0 1px 0 rgba(0,0,0,.16)!important;
+  cursor:pointer!important;
+  transition:transform 90ms ease,filter 140ms ease,box-shadow 90ms ease!important;
+}
+.duduq-ts-option-audio-confirm:hover:not(:disabled){filter:brightness(1.05)!important;}
+.duduq-ts-option-audio-confirm:active:not(:disabled){
+  transform:translateY(4px)!important;
+  box-shadow:0 1px 0 #064A92,0 3px 7px rgba(9,103,201,.13)!important;
+}
+.duduq-ts-option-audio-confirm:focus-visible{outline:4px solid #111827!important;outline-offset:4px!important;}
+.duduq-ts-option-audio-confirm:disabled{
+  border-color:#C7D0DB!important;
+  background:#E2E8F0!important;
+  color:#6D7D8C!important;
+  box-shadow:0 4px 0 #B7C1CC!important;
+  text-shadow:none!important;
+  cursor:default!important;
+}
+@media(max-width:520px){
+  .duduq-ts-option-audio-panel{border-radius:16px!important;}
+  .duduq-ts-option-audio-confirm{min-width:112px!important;min-height:38px!important;font-size:13px!important;}
+  .duduq-ts-option-audio-prompt{border-radius:14px!important;}
+}
+`;
+
+  function injectFrameStyle(frame,id,reference,css){
     const apply=()=>{
       try{
         const doc=frame.contentDocument;
         if(!doc?.head)return false;
-        if(doc.getElementById("duduq-y3-smart-primary-parity"))return true;
+        if(doc.getElementById(id))return true;
         const style=doc.createElement("style");
-        style.id="duduq-y3-smart-primary-parity";
-        style.dataset.reference="matching-1.0.23";
-        style.textContent=SMART_BUTTON_CSS;
+        style.id=id;
+        style.dataset.reference=reference;
+        style.textContent=css;
         doc.head.appendChild(style);
         return true;
       }catch(_){return false;}
@@ -191,33 +259,50 @@
     },50);
   }
 
+  function patchSmartFrame(frame){
+    if(!frame||frame.__duduqY3ButtonPatch)return;
+    frame.__duduqY3ButtonPatch=true;
+    injectFrameStyle(frame,"duduq-y3-smart-primary-parity","matching-1.0.23",SMART_BUTTON_CSS);
+  }
+
+  function patchTargetFrame(frame){
+    if(!frame||frame.__duduqY3TargetModePatch)return;
+    frame.__duduqY3TargetModePatch=true;
+    injectFrameStyle(frame,"duduq-y3-target-mode-parity","target-shooter-1.0.23",TARGET_SHOOTER_MODE_CSS);
+  }
+
   function scanFrames(){
     if(!root?.document)return;
     root.document.querySelectorAll('iframe[title="DuduQ — Smart Sentence"]').forEach(patchSmartFrame);
+    root.document.querySelectorAll('#root iframe').forEach(patchTargetFrame);
   }
 
-  function installButtonParity(){
+  function installVisualParity(){
     if(!root?.document)return false;
     scanFrames();
     const observer=new MutationObserver(scanFrames);
     observer.observe(root.document.documentElement,{subtree:true,childList:true});
-    root.__DUDUQ_Y3_SMART_BUTTON_OBSERVER__=observer;
+    root.__DUDUQ_Y3_VISUAL_PARITY_OBSERVER__=observer;
     root.DUDUQ_Y3_PRIMARY_BUTTON_REFERENCE=BUTTON_REFERENCE;
+    root.DUDUQ_Y3_TARGET_SHOOTER_MODE_REFERENCE=TARGET_MODE_REFERENCE;
     return true;
   }
 
   if(root?.document){
     installFactoryWrapper();
-    installButtonParity();
+    installVisualParity();
   }
 
   return Object.freeze({
-    version:"1.0.0-ux-correction",
+    version:"1.1.0-ux-correction",
     studentInstruction,
     applyPresentation,
     installFactoryWrapper,
-    installButtonParity,
+    installButtonParity:installVisualParity,
+    installVisualParity,
     buttonReference:BUTTON_REFERENCE,
-    smartButtonCss:SMART_BUTTON_CSS
+    targetModeReference:TARGET_MODE_REFERENCE,
+    smartButtonCss:SMART_BUTTON_CSS,
+    targetShooterModeCss:TARGET_SHOOTER_MODE_CSS
   });
 });
