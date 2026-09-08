@@ -199,7 +199,7 @@ async function targetShooterModeParity(browser,viewport){
       assert(confirmDisabled.backgroundImage==='none',`${viewport.name}/${probe.id}: Target Shooter disabled confirm background`);
       assert(confirmDisabled.boxShadow.includes('rgb(183, 193, 204)'),`${viewport.name}/${probe.id}: Target Shooter disabled confirm depth`);
       const choice=frame.locator('.duduq-ts-target').first();
-      await choice.click();
+      await choice.evaluate(el=>el.click());
       await page.waitForTimeout(80);
       assert(await confirm.isEnabled(),`${viewport.name}/${probe.id}: Target Shooter confirm did not activate after option preview`);
       confirmStyle=await computed(confirm);
