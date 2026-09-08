@@ -216,19 +216,30 @@
   cursor:pointer!important;
   transition:transform 90ms ease,filter 140ms ease,box-shadow 90ms ease!important;
 }
-.duduq-ts-option-audio-confirm:hover:not(:disabled){filter:brightness(1.05)!important;}
-.duduq-ts-option-audio-confirm:active:not(:disabled){
+.duduq-ts-option-audio-confirm:hover:not([disabled]){filter:brightness(1.05)!important;}
+.duduq-ts-option-audio-confirm:active:not([disabled]){
   transform:translateY(4px)!important;
   box-shadow:0 1px 0 #064A92,0 3px 7px rgba(9,103,201,.13)!important;
 }
 .duduq-ts-option-audio-confirm:focus-visible{outline:4px solid #111827!important;outline-offset:4px!important;}
-.duduq-ts-option-audio-confirm:disabled{
+.duduq-ts-option-audio-confirm[disabled]{
   border-color:#C7D0DB!important;
   background:#E2E8F0!important;
   color:#6D7D8C!important;
   box-shadow:0 4px 0 #B7C1CC!important;
   text-shadow:none!important;
   cursor:default!important;
+}
+/* Active state is bound explicitly to the same boolean attribute toggled by
+   Target Shooter 1.0.22/1.0.23. This prevents the disabled visual layer from
+   winning the cascade after an option preview activates CONFIRMAR. */
+.duduq-ts-option-audio-confirm:not([disabled]){
+  border-color:#064A92!important;
+  background:linear-gradient(180deg,#218BEA 0%,#0B70D5 70%,#0864BF 100%)!important;
+  color:#fff!important;
+  box-shadow:0 4px 0 #064A92,0 8px 15px rgba(9,103,201,.18),inset 0 2px 0 rgba(255,255,255,.42)!important;
+  text-shadow:0 1px 0 rgba(0,0,0,.16)!important;
+  cursor:pointer!important;
 }
 @media(max-width:520px){
   .duduq-ts-option-audio-panel{border-radius:16px!important;}
