@@ -95,10 +95,7 @@ try{
   assert(initial.correctId,'correct logical item id missing');
   assert(initial.confirmDisabled===true,'CONFIRM must start disabled');
 
-  await frame.evaluate(()=>{
-    window.__DUDUQ_TS124_OLD_TARGET__.click();
-    window.dispatchEvent(new Event('resize'));
-  });
+  await frame.evaluate(()=>window.__DUDUQ_TS124_OLD_TARGET__.click());
 
   await frame.waitForFunction(expectedId=>{
     const confirm=document.querySelector('.duduq-ts-option-audio-confirm');
@@ -124,10 +121,56 @@ try{
   assert(selected.currentMarked===true,'current target not marked after selection');
   assert(selected.speechCalls>=1,'option audio preview did not call speech synthesis');
 
+  /*
+    Force the original failure mode deterministically. React keeps host-node
+    event metadata as expando properties; copying those test-only properties
+    to a cloned button lets the replacement remain a valid current host node.
+    The release itself does not depend on these internals: its observer sees
+    only child-list replacement and re-projects selectedItemId onto the clone.
+  */
+  const forcedReplacement=await frame.evaluate(expectedId=>{
+    const old=window.__DUDUQ_TS124_OLD_TARGET__;
+    if(!old||!old.isConnected)throw new Error('old selected target missing before forced replacement');
+    const clone=old.cloneNode(true);
+    let reactProperties=0;
+    for(const key of Object.getOwnPropertyNames(old)){
+      if(!key.startsWith('__react'))continue;
+      try{
+        clone[key]=old[key];
+        reactProperties+=1;
+        if(key.startsWith('__reactFiber$')){
+          const fiber=old[key];
+          if(fiber){
+            fiber.stateNode=clone;
+            if(fiber.alternate)fiber.alternate.stateNode=clone;
+          }
+        }
+      }catch(_){}
+    }
+    old.replaceWith(clone);
+    window.__DUDUQ_TS124_FORCED_TARGET__=clone;
+    return {
+      reactProperties,
+      oldConnected:Boolean(old.isConnected),
+      newConnected:Boolean(clone.isConnected),
+      differentNode:old!==clone,
+      expectedId
+    };
+  },initial.correctId);
+  assert(forcedReplacement.differentNode===true,'forced reconciliation reused old target node');
+  assert(forcedReplacement.oldConnected===false&&forcedReplacement.newConnected===true,'forced target replacement did not occur');
+  assert(forcedReplacement.reactProperties>=1,'React host metadata unavailable for deterministic replacement');
+
   await frame.waitForFunction(expectedId=>{
     const old=window.__DUDUQ_TS124_OLD_TARGET__;
     const current=[...document.querySelectorAll('.duduq-ts-target')].find(button=>button.getAttribute('data-duduq-option-id')===expectedId);
-    return Boolean(old&&current&&old!==current);
+    const confirm=document.querySelector('.duduq-ts-option-audio-confirm');
+    return Boolean(
+      old&&current&&old!==current&&
+      window.__DUDUQ_TARGET_OPTION_AUDIO_SELECTED_ITEM_ID__===expectedId&&
+      current.getAttribute('data-duduq-option-audio-selected')==='true'&&
+      confirm&&!confirm.disabled
+    );
   },initial.correctId,{timeout:5_000});
 
   const afterReconcile=await frame.evaluate(expectedId=>{
@@ -161,6 +204,7 @@ try{
   console.log('TARGET_SHOOTER_1_0_24 = PASS');
   console.log('TARGET_STATE_MODEL = STABLE_ITEM_ID');
   console.log('DOM_NODE_AS_SOURCE_OF_TRUTH = NO');
+  console.log('TARGET_FORCED_DOM_REPLACEMENT = PASS');
   console.log('TARGET_SELECTION_SURVIVES_RECONCILIATION = PASS');
   console.log('CONFIRM_EXPECTED_ENABLED = true');
   console.log('OPTION_AUDIO_REGRESSION = PASS');
