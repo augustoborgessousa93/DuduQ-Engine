@@ -1,16 +1,15 @@
-name: Y3 UX Pedagogical Correction
+name: Y3 Final Validation
 
 on:
   pull_request:
     paths:
       - 'content/english/year-3/**'
       - 'engine/channels/year3-r151-v1.json'
-      - 'engine/releases/mechanics/target-shooter/1.0.24/**'
       - 'test/year3/**'
       - '.github/workflows/y3-track-b.yml'
 
 jobs:
-  year3-ux-correction:
+  year3-final-validation:
     runs-on: ubuntu-24.04
     timeout-minutes: 55
     steps:
@@ -21,119 +20,94 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Guard correction scope and keep unrelated releases out
+      - name: Guard final Year 3 scope
         shell: bash
         run: |
           git fetch origin main
           CHANGED="$(git diff --name-only origin/main...HEAD)"
           BAD="$(printf '%s\n' "$CHANGED" | grep -E '^(content/english/year-4/|content/english/year-5/|test/year4/|test/year5/|engine/releases/core/|engine/releases/mechanics/)' | grep -v '^engine/releases/mechanics/target-shooter/1.0.24/' || true)"
           if [ -n "$BAD" ]; then
-            echo 'Unexpected out-of-scope correction files:'
+            echo 'Unexpected out-of-scope finalization files:'
             echo "$BAD"
             exit 1
           fi
           echo 'YEAR4_YEAR5_CORE_UNRELATED_MECHANICS_MODIFIED = 0'
+          echo 'TARGET_SHOOTER_1_0_24 = QUARANTINED / NOT AN ACTIVE GATE'
 
-      - name: Validate runtime baseline and Target candidate boundary
+      - name: Validate frozen Year 3 runtime baseline
         run: |
           node - <<'NODE'
           const fs=require('fs');
           const y3=JSON.parse(fs.readFileSync('engine/channels/year3-r151-v1.json','utf8'));
-          const target=y3.mechanics?.['target-shooter']?.release;
-          if(y3.revision!==151||y3.core?.release!=='1.0.12'||!['1.0.23','1.0.24'].includes(target)||y3.mechanics?.['smart-sentence']?.release!=='4.0.20'||y3.mechanics?.['bubble-pop']?.release!=='1.0.31'||y3.mechanics?.['drag-drop']?.release!=='2.0.26'||y3.mechanics?.['word-slash']?.release!=='1.0.17') throw new Error('Year 3 runtime boundary changed');
-          console.log(`YEAR3_RUNTIME_BOUNDARY = R151 / Core 1.0.12 / Target Shooter ${target} / Smart Sentence 4.0.20`);
+          if(y3.revision!==151||y3.core?.release!=='1.0.12'||y3.mechanics?.['target-shooter']?.release!=='1.0.23'||y3.mechanics?.['smart-sentence']?.release!=='4.0.20'||y3.mechanics?.['bubble-pop']?.release!=='1.0.31'||y3.mechanics?.['drag-drop']?.release!=='2.0.26'||y3.mechanics?.['word-slash']?.release!=='1.0.17'||y3.mechanics?.matching?.release!=='1.0.23') throw new Error('Year 3 frozen runtime boundary changed');
+          console.log('YEAR3_RUNTIME = R151 / Core 1.0.12 / Target Shooter 1.0.23 / Smart Sentence 4.0.20');
+          console.log('TARGET_SHOOTER_1_0_24 = ABORTED / NOT PROMOTED');
           NODE
 
       - name: Syntax gates
         run: |
-          node --check engine/releases/mechanics/target-shooter/1.0.24/target-shooter.js
           node --check content/english/year-3/y3-ux-orchestration-v1.js
           node --check content/english/year-3/year3-ux-presentation-v1.js
-          node --check test/year3/target-shooter-1.0.24-reconciliation.mjs
+          node --check content/english/year-3/year3-intro-brand-v1.js
           node --check test/year3/y3-track-b-matrix.mjs
           node --check test/year3/y3-ux-correction.mjs
-          node --check test/year3/y3-ux-browser.mjs
+          node --check test/year3/y3-final-validation-browser.mjs
           node --check test/year3/y3-track-b-final-browser.mjs
           node --check test/year3/y3-production-links.mjs
+
+      - name: Source matrix 90/90 and mechanic equivalence audit
+        run: node test/year3/y3-track-b-matrix.mjs
+
+      - name: M01-M06 contracts concise instructions and mechanic diversity
+        run: node test/year3/y3-ux-correction.mjs
 
       - name: Install Playwright Chromium
         run: |
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
 
-      - name: Start correction test server
+      - name: Start final validation server
         run: |
-          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/y3-ux-http.log 2>&1 &
-          echo $! > /tmp/y3-ux-http.pid
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/y3-final-http.log 2>&1 &
+          echo $! > /tmp/y3-final-http.pid
           for i in {1..30}; do
             if curl -fsS http://127.0.0.1:4173/content/english/year-3/index.html >/dev/null; then exit 0; fi
             sleep 1
           done
-          cat /tmp/y3-ux-http.log
+          cat /tmp/y3-final-http.log
           exit 1
 
-      - name: Target Shooter 1.0.24 focal reconciliation gate
-        env:
-          BASE_URL: http://127.0.0.1:4173
-        run: node test/year3/target-shooter-1.0.24-reconciliation.mjs
-
-      - name: Detect dedicated Year 3 channel promotion
-        id: channel
-        shell: bash
-        run: |
-          TARGET="$(node -e "const fs=require('fs');const y=JSON.parse(fs.readFileSync('engine/channels/year3-r151-v1.json','utf8'));process.stdout.write(y.mechanics['target-shooter'].release)")"
-          if [ "$TARGET" = "1.0.24" ]; then
-            echo 'promoted=true' >> "$GITHUB_OUTPUT"
-            echo 'YEAR3_TARGET_CHANNEL = 1.0.24'
-          else
-            echo 'promoted=false' >> "$GITHUB_OUTPUT"
-            echo 'YEAR3_TARGET_CHANNEL = 1.0.23 — focal candidate only'
-          fi
-
-      - name: Source matrix 90/90 and mechanic equivalence audit
-        if: steps.channel.outputs.promoted == 'true'
-        run: node test/year3/y3-track-b-matrix.mjs
-
-      - name: M01-M06 UX contracts instructions diversity and source invariants
-        if: steps.channel.outputs.promoted == 'true'
-        run: node test/year3/y3-ux-correction.mjs
-
-      - name: HOME routes and navigation regression
-        if: steps.channel.outputs.promoted == 'true'
+      - name: HOME routes and navigation
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year3/y3-production-links.mjs
 
-      - name: M01-M06 browser UX Target parity and Smart Matching parity
-        if: steps.channel.outputs.promoted == 'true'
+      - name: M01-M06 browser Target 1.0.23 Smart Matching and intro logo
         env:
           BASE_URL: http://127.0.0.1:4173
-        run: node test/year3/y3-ux-browser.mjs
+        run: node test/year3/y3-final-validation-browser.mjs
 
       - name: Year 3 consolidated regression
-        if: steps.channel.outputs.promoted == 'true'
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year3/y3-track-b-final-browser.mjs
 
-      - name: Mark candidate focal pass awaiting channel promotion
-        if: steps.channel.outputs.promoted != 'true'
+      - name: Mark Year 3 ready for final user test
         run: |
-          echo 'TARGET_SHOOTER_1_0_24 = FOCAL PASS'
-          echo 'CHANNEL_PROMOTION = PENDING'
-          echo 'FULL_YEAR3_RETEST = NOT STARTED BY DESIGN'
+          echo 'TARGET_SHOOTER_ACTIVE = 1.0.23'
+          echo 'TARGET_SHOOTER_1_0_24 = ABORTED / NOT PROMOTED'
+          echo 'NEW_TARGET_SHOOTER_RELEASE = NO'
+          echo 'MECHANIC_DIVERSITY = ACCEPTED'
+          echo 'CANONICAL_ASSETS = PENDING'
+          echo 'TECHNICAL_BLOCKERS = 0'
+          echo 'YEAR3_FINAL_VALIDATION = PASS'
+          echo 'YEAR3_READY_FOR_FINAL_USER_TEST = YES'
+          echo 'MERGED = NO'
+          echo 'PUBLISHED = NO'
 
-      - name: Mark UX correction ready for human retest
-        if: steps.channel.outputs.promoted == 'true'
-        run: |
-          echo 'TARGET_SHOOTER_1_0_24 = PASS'
-          echo 'YEAR3_UX_CORRECTION = PASS'
-          echo 'READY FOR USER RETEST'
-          echo 'PUBLICATION = SUSPENDED — USER RETEST REQUIRED'
-
-      - name: Upload Year 3 UX correction evidence
+      - name: Upload Year 3 final validation evidence
         uses: actions/upload-artifact@v4
         with:
-          name: y3-ux-correction-evidence
+          name: y3-final-validation-evidence
           path: test-results/year3/
           if-no-files-found: warn
