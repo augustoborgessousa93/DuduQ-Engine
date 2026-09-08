@@ -6,6 +6,8 @@
    - troca referência DOM transitória por identidade lógica estável;
    - reaplica seleção e estado de CONFIRMAR após reconciliações DOM;
    - resolve o alvo DOM atual somente no momento da confirmação;
+   - despacha a confirmação fora da pilha do clique de preview para que
+     o React/runtime processe a ativação real sem reentrância sintética;
    - preserva integralmente gameplay normal, scoring, feedback, Host,
      completion, timer, promptVisual, promptVisualMedia e option audio.
    ========================================================= */
@@ -71,11 +73,11 @@
     '    return String(item && (item.id || item.label) || "").trim();',
     '  }',
     '',
-    '  function currentTargetForSelectedItem() {',
-    '    if (!selectedItemId) return null;',
+    '  function currentTargetForItemId(itemId) {',
+    '    if (!itemId) return null;',
     '    var targets = document.querySelectorAll(".duduq-ts-target");',
     '    for (var index = 0; index < targets.length; index += 1) {',
-    '      if (itemIdentity(itemFor(targets[index])) === selectedItemId) return targets[index];',
+    '      if (itemIdentity(itemFor(targets[index])) === itemId) return targets[index];',
     '    }',
     '    return null;',
     '  }',
@@ -152,11 +154,16 @@
     '      clearSelection();',
     '      bypassPreview = true;',
     '      try { target.click(); } finally { bypassPreview = false; }`,',
-    '    String.raw`      var target = currentTargetForSelectedItem();',
-    '      if (!selectedItemId || !target || target.disabled) return;',
+    '    String.raw`      var confirmedItemId = selectedItemId;',
+    '      var target = currentTargetForItemId(confirmedItemId);',
+    '      if (!confirmedItemId || !target || target.disabled) return;',
     '      clearSelection();',
-    '      bypassPreview = true;',
-    '      try { target.click(); } finally { bypassPreview = false; }`',
+    '      setTimeout(function () {',
+    '        var currentTarget = currentTargetForItemId(confirmedItemId);',
+    '        if (!currentTarget || currentTarget.disabled) return;',
+    '        bypassPreview = true;',
+    '        try { currentTarget.click(); } finally { bypassPreview = false; }',
+    '      }, 0);`',
     '  );',
     '',
     '  source = replaceRequired(',
