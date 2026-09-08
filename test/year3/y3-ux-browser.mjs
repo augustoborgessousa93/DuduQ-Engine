@@ -194,7 +194,14 @@ async function targetShooterModeParity(browser,viewport){
       const confirm=frame.locator('.duduq-ts-option-audio-confirm');
       await panel.waitFor({state:'visible',timeout:15_000});
       await confirm.waitFor({state:'visible',timeout:15_000});
-      await confirm.evaluate(el=>{el.disabled=false});
+      const confirmDisabled=await computed(confirm);
+      assert(confirmDisabled.borderTopColor==='rgb(199, 208, 219)',`${viewport.name}/${probe.id}: Target Shooter disabled confirm border`);
+      assert(confirmDisabled.backgroundImage==='none',`${viewport.name}/${probe.id}: Target Shooter disabled confirm background`);
+      assert(confirmDisabled.boxShadow.includes('rgb(183, 193, 204)'),`${viewport.name}/${probe.id}: Target Shooter disabled confirm depth`);
+      const choice=frame.locator('.duduq-ts-target').first();
+      await choice.click();
+      await page.waitForTimeout(80);
+      assert(await confirm.isEnabled(),`${viewport.name}/${probe.id}: Target Shooter confirm did not activate after option preview`);
       confirmStyle=await computed(confirm);
       for(const key of ['borderTopColor','backgroundImage','color','boxShadow']){
         assert(confirmStyle[key]===audioStyle[key],`${viewport.name}/${probe.id}: Target Shooter mode control ${key} differs confirm=${confirmStyle[key]} audio=${audioStyle[key]}`);
