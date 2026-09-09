@@ -5,6 +5,7 @@ on:
     paths:
       - 'content/english/year-3/**'
       - 'test/year3/y3-smart-sentence-standardization.mjs'
+      - 'test/year3/y3-human-ux-correction.mjs'
       - '.github/workflows/y3-smart-sentence-standardization.yml'
   workflow_dispatch:
 
@@ -14,7 +15,7 @@ permissions:
 jobs:
   smart-sentence-standardization:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
@@ -36,7 +37,9 @@ jobs:
           console.log('YEAR3_RUNTIME_FROZEN = PASS');
           NODE
           node --check content/english/year-3/year3-smart-sentence-standard-v1.js
+          node --check content/english/year-3/year3-human-ux-correction-v1.js
           node --check test/year3/y3-smart-sentence-standardization.mjs
+          node --check test/year3/y3-human-ux-correction.mjs
 
       - name: Preserve source, concise instructions and mechanic distribution
         run: |
@@ -59,7 +62,12 @@ jobs:
           cat /tmp/y3-smart-standard-http.log
           exit 1
 
-      - name: Validate all Year 3 Smart Sentence against EN3-M1-03 golden reference
+      - name: Focal human UX correction — Smart visual support and Target direct shoot
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year3/y3-human-ux-correction.mjs
+
+      - name: Final affected regression — Smart Sentence golden standard
         env:
           BASE_URL: http://127.0.0.1:4173
         run: node test/year3/y3-smart-sentence-standardization.mjs
@@ -68,6 +76,8 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: y3-smart-sentence-standardization
-          path: test-results/year3-smart-standard/
+          name: y3-human-ux-final-focal
+          path: |
+            test-results/year3-human-ux/
+            test-results/year3-smart-standard/
           if-no-files-found: ignore
