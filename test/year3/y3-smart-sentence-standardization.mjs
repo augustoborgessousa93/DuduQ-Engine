@@ -127,6 +127,34 @@ function sameSignature(actual,golden,label){
   }
 }
 
+async function settleVisualState(page,frame){
+  await page.mouse.move(1,1);
+  await frame.evaluate(async()=>{
+    try{document.activeElement?.blur?.()}catch(_){}
+    const selectors=['.duduq-smart-ts-clear','.duduq-smart-ts-confirm','.duduq-smart-ts-token','.duduq-smart-ts-choice'];
+    const elements=selectors.flatMap(selector=>[...document.querySelectorAll(selector)]);
+    for(const el of elements){try{el.blur?.()}catch(_){}}
+    const sample=()=>elements.map(el=>{
+      const s=getComputedStyle(el);
+      return [s.boxShadow,s.transform,s.filter,s.backgroundColor,s.backgroundImage,s.borderTopColor].join('|');
+    }).join('\n');
+    await new Promise(resolve=>{
+      let previous='';
+      let stableFrames=0;
+      let frames=0;
+      const tick=()=>{
+        const current=sample();
+        stableFrames=current===previous?stableFrames+1:0;
+        previous=current;
+        frames+=1;
+        if(stableFrames>=2||frames>=120){resolve();return;}
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  });
+}
+
 async function goldenFunctional(page,frame,answerText,viewportName){
   const audio=frame.locator('.duduq-ts-audio-button');
   await audio.waitFor({state:'visible',timeout:10_000});
@@ -164,6 +192,7 @@ try{
 
     await waitModule(page,1);
     const goldenMount=await mountSmart(page,1,GOLDEN_ID,{trackCompletion:true});
+    await settleVisualState(page,goldenMount.frame);
     const golden=await visualProof(goldenMount.frame);
     assert(golden.marker===GOLDEN_ID,`${viewport.name}: golden style marker missing`);
     assert(golden.documentMarker===GOLDEN_ID,`${viewport.name}: golden document marker missing`);
@@ -180,6 +209,7 @@ try{
       viewportCount+=ids.length;
       for(const id of ids){
         const mounted=await mountSmart(page,moduleNumber,id);
+        await settleVisualState(page,mounted.frame);
         const proof=await visualProof(mounted.frame);
         const label=`${viewport.name}/${id}`;
         assert(proof.marker===GOLDEN_ID,`${label}: standard layer missing`);
