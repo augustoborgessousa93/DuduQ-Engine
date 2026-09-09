@@ -20,7 +20,7 @@
     }),
     "target-shooter":Object.freeze({
       maxReading:"R2",
-      intents:["recognize_audio_number","recognize_audio_image","recognize_audio_word","recognize_visual_word","listen_discriminate","quantity_match"],
+      intents:["recognize_audio_number","recognize_audio_image","recognize_audio_word","recognize_visual_word","visual_description","listen_discriminate","quantity_match"],
       modalities:["text","image","audio"],supportsRetry:true
     }),
     "bubble-pop":Object.freeze({
@@ -44,5 +44,5 @@
       modalities:["text","image","audio","manipulation"],supportsRetry:true
     })
   });
-  return Object.freeze({version:"1.0.0-track-b",yearProfile:YEAR_PROFILE,mechanicProfiles:profiles});
+  return Object.freeze({version:"1.0.1-ux-correction",yearProfile:YEAR_PROFILE,mechanicProfiles:profiles});
 });
