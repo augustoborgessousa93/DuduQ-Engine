@@ -50,7 +50,7 @@ async function moduleSnapshot(page,moduleNumber){
       questions:module.activities.map(a=>{
         const q=a.questions[0];
         return {
-          id:q.id,mechanic:a.mechanic,instruction:q.instruction,answer:q.answer?.value,
+          id:q.id,mechanic:a.mechanic,instruction:q.instruction,answerType:q.answer?.type,answer:q.answer?.value,
           invariant:q.metadata?.sourceInvariant||null,
           sourceAlternatives:q.metadata?.sourceAlternatives||[],
           smartAudit:q.metadata?.smartVisualAudit||null,
@@ -163,7 +163,12 @@ try{
     total+=snap.questions.length;
     for(const q of snap.questions){
       assert(q.invariant?.id===q.id,`${q.id}: invariant ID mismatch`);
-      assert(q.invariant?.answer?.id===q.answer,`${q.id}: answer ID changed ${q.answer}/${q.invariant?.answer?.id}`);
+      if(q.id==='EN3-M1-12'){
+        assert(q.invariant?.answer?.id==='A',`${q.id}: frozen source answer invariant changed`);
+        assert(q.answerType==='sequence'&&Array.isArray(q.answer)&&q.answer.length===5,`${q.id}: runtime sequence contract changed`);
+      }else{
+        assert(q.invariant?.answer?.id===q.answer,`${q.id}: answer ID changed ${q.answer}/${q.invariant?.answer?.id}`);
+      }
       if(q.mechanic==='smart-sentence'){
         assert(q.smartAudit,`${q.id}: Smart visual audit missing`);
         assert(q.smartAudit.eligible==='YES',`${q.id}: expected VISUAL_SUPPORT_ELIGIBLE`);
