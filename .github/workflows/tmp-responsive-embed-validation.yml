@@ -40,10 +40,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          base64 -d tmp/responsive-embed-battery.mjs.gz.b64 | gzip -dc > /tmp/responsive-embed-battery.mjs
-          base64 -d tmp/responsive-embed-functional.mjs.gz.b64 | gzip -dc > /tmp/responsive-embed-functional.mjs
-          node --check /tmp/responsive-embed-battery.mjs
-          node --check /tmp/responsive-embed-functional.mjs
+          rm -rf .tmp-responsive-validation
+          mkdir -p .tmp-responsive-validation
+          base64 -d tmp/responsive-embed-battery.mjs.gz.b64 | gzip -dc > .tmp-responsive-validation/responsive-embed-battery.mjs
+          base64 -d tmp/responsive-embed-functional.mjs.gz.b64 | gzip -dc > .tmp-responsive-validation/responsive-embed-functional.mjs
+          node --check .tmp-responsive-validation/responsive-embed-battery.mjs
+          node --check .tmp-responsive-validation/responsive-embed-functional.mjs
           npm init -y >/dev/null 2>&1
           npm install --no-save playwright@1.55.0 >/dev/null
           npx playwright install --with-deps chromium >/dev/null
@@ -65,14 +67,14 @@ jobs:
         env:
           BASE_URL: http://127.0.0.1:4173
         run: |
-          node /tmp/responsive-embed-battery.mjs
+          node .tmp-responsive-validation/responsive-embed-battery.mjs
 
       - name: Functional sentinels — years and mechanics
         shell: bash
         env:
           BASE_URL: http://127.0.0.1:4173
         run: |
-          node /tmp/responsive-embed-functional.mjs
+          node .tmp-responsive-validation/responsive-embed-functional.mjs
 
       - name: Consolidate final gate
         shell: bash
