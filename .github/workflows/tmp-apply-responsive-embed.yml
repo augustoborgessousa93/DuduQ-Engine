@@ -1,0 +1,40 @@
+name: tmp-apply-responsive-embed
+
+on:
+  push:
+    branches:
+      - tmp/responsive-embed-apply-20260911
+    paths:
+      - '.github/workflows/tmp-apply-responsive-embed.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply audited patch to product branch atomically
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp tmp/embed-implementation.patch /tmp/embed-implementation.patch
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin feat/responsive-highres-embed-mode-20260910
+          git checkout -B feat/responsive-highres-embed-mode-20260910 origin/feat/responsive-highres-embed-mode-20260910
+          test "$(git rev-parse HEAD)" = "00c1ba10042eb91fbc98d86f1cb8f33f640263ef"
+          git apply --check /tmp/embed-implementation.patch
+          git apply /tmp/embed-implementation.patch
+          node --check engine/duduq-loader-v1.js
+          node --check engine/duduq-player-v1.js
+          test -z "$(git diff --name-only | grep -v -E '^(engine/duduq-loader-v1.js|engine/duduq-player-v1.js)$' || true)"
+          test "$(git diff --name-only | wc -l | tr -d ' ')" = "2"
+          ! git diff | grep -E '^\+.*(transform[[:space:]]*:[[:space:]]*scale\(|zoom[[:space:]]*:)' >/dev/null
+          git add engine/duduq-loader-v1.js engine/duduq-player-v1.js
+          git commit -m "feat(embed): add responsive high-res host mode"
+          git push origin HEAD:feat/responsive-highres-embed-mode-20260910
+          echo "IMPLEMENTATION_COMMIT=$(git rev-parse HEAD)"
