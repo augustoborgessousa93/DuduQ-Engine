@@ -21,7 +21,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cp tmp/embed-implementation.patch /tmp/embed-implementation.patch
+          base64 -d tmp/embed-implementation.patch.gz.b64 | gzip -dc > /tmp/embed-implementation.patch
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin feat/responsive-highres-embed-mode-20260910
