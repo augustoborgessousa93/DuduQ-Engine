@@ -8,6 +8,29 @@
 
   const VERSION = "1.0.1";
 
+
+  /* =========================================================
+     RESPONSIVE HIGH-RES EMBED MODE
+     Query contract: ?embed=1
+     This marker is intentionally established before the engine
+     manifest/content load so every shared layer can read one
+     stable, traceable flag. Normal mode remains untouched.
+     ========================================================= */
+  const DUDUQ_EMBED_MODE =
+    new URLSearchParams(window.location.search).get("embed") === "1";
+
+  window.DUDUQ_EMBED_MODE = DUDUQ_EMBED_MODE;
+
+  if (DUDUQ_EMBED_MODE) {
+    document.documentElement.setAttribute("data-duduq-embed", "true");
+    document.body?.setAttribute("data-duduq-embed", "true");
+    document.getElementById("root")?.setAttribute("data-duduq-embed", "true");
+  } else {
+    document.documentElement.removeAttribute("data-duduq-embed");
+    document.body?.removeAttribute("data-duduq-embed");
+    document.getElementById("root")?.removeAttribute("data-duduq-embed");
+  }
+
   if (window.DuduQChannelLoader?.version === VERSION) {
     return;
   }

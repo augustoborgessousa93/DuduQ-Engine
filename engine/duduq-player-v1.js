@@ -1608,3 +1608,328 @@ html[data-duduq-fullscreen="true"]
     install();
   }
 })();
+
+
+/* =========================================================
+   DUDUQ RESPONSIVE HIGH-RES EMBED MODE v1
+   Scope: shared Host/Shell surface only.
+   - opt-in via ?embed=1
+   - native-resolution layout; no structural transform/zoom
+   - same content/mechanics/audio/Host behavior
+   - same-origin mechanic frames inherit only safe responsive bounds
+   ========================================================= */
+(function () {
+  "use strict";
+
+  if (window.__DUDUQ_RESPONSIVE_EMBED_V1__) return;
+  window.__DUDUQ_RESPONSIVE_EMBED_V1__ = true;
+
+  const STYLE_ID = "duduq-responsive-highres-embed-v1";
+  const FRAME_STYLE_ID = "duduq-responsive-highres-embed-frame-v1";
+
+  function embedActive() {
+    return window.DUDUQ_EMBED_MODE === true;
+  }
+
+  function installHostStyle() {
+    if (!embedActive()) return;
+
+    document.documentElement.setAttribute("data-duduq-embed", "true");
+    document.body?.setAttribute("data-duduq-embed", "true");
+
+    const root = document.getElementById("root");
+    root?.setAttribute("data-duduq-embed", "true");
+
+    let style = document.getElementById(STYLE_ID);
+    if (!style) {
+      style = document.createElement("style");
+      style.id = STYLE_ID;
+      (document.head || document.documentElement).appendChild(style);
+    }
+
+    style.textContent = `
+html[data-duduq-embed="true"],
+html[data-duduq-embed="true"] body,
+html[data-duduq-embed="true"] #root {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+}
+
+html[data-duduq-embed="true"] {
+  min-height: 100% !important;
+  height: auto !important;
+  overflow-x: clip !important;
+  overflow-y: auto !important;
+}
+
+html[data-duduq-embed="true"] body {
+  min-height: 100dvh !important;
+  height: auto !important;
+  overflow-x: clip !important;
+  overflow-y: auto !important;
+}
+
+html[data-duduq-embed="true"] #root {
+  min-height: 100dvh !important;
+  height: auto !important;
+}
+
+html[data-duduq-embed="true"] .duduq-engine-root {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  min-height: 100dvh !important;
+  height: auto !important;
+  max-height: none !important;
+  padding:
+    clamp(5px, 1.1vw, 12px)
+    clamp(6px, 1.25vw, 16px)
+    max(clamp(7px, 1.2vw, 14px), env(safe-area-inset-bottom)) !important;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
+
+html[data-duduq-embed="true"] .duduq-engine-shell {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 1320px !important;
+  min-width: 0 !important;
+  min-height: calc(100dvh - 20px) !important;
+  height: auto !important;
+  max-height: none !important;
+  margin-inline: auto !important;
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  row-gap: clamp(5px, 1.1dvh, 12px) !important;
+  overflow: visible !important;
+}
+
+html[data-duduq-embed="true"] .duduq-engine-header,
+html[data-duduq-embed="true"] .duduq-engine-stage,
+html[data-duduq-embed="true"] .duduq-engine-feedback {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+html[data-duduq-embed="true"] .duduq-engine-header {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: clamp(4px, .8vw, 10px) !important;
+  align-items: center !important;
+}
+
+html[data-duduq-embed="true"] .duduq-engine-stage {
+  min-height: min(420px, 58dvh) !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
+
+html[data-duduq-embed="true"] .duduq-engine-stage > iframe,
+html[data-duduq-embed="true"] iframe {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  border: 0 !important;
+}
+
+html[data-duduq-embed="true"] img,
+html[data-duduq-embed="true"] video,
+html[data-duduq-embed="true"] canvas,
+html[data-duduq-embed="true"] svg {
+  max-width: 100% !important;
+}
+
+html[data-duduq-embed="true"] img,
+html[data-duduq-embed="true"] video {
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+html[data-duduq-embed="true"][data-duduq-fullscreen="true"] body,
+html[data-duduq-embed="true"][data-duduq-fullscreen="true"] #root,
+html[data-duduq-embed="true"][data-duduq-fullscreen="true"] .duduq-engine-root {
+  min-height: 100dvh !important;
+  height: 100dvh !important;
+  max-height: 100dvh !important;
+  overflow: hidden !important;
+}
+
+html[data-duduq-embed="true"][data-duduq-fullscreen="true"] .duduq-engine-shell {
+  min-height: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  overflow: hidden !important;
+}
+
+html[data-duduq-embed="true"][data-duduq-fullscreen="true"] .duduq-engine-stage {
+  min-height: 0 !important;
+  height: auto !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 900px) {
+  html[data-duduq-embed="true"] .duduq-engine-root {
+    padding-inline: clamp(5px, 1.8vw, 10px) !important;
+  }
+
+  html[data-duduq-embed="true"] .duduq-engine-shell {
+    max-width: 100% !important;
+  }
+
+  html[data-duduq-embed="true"] .duduq-engine-stage {
+    min-height: min(400px, 60dvh) !important;
+  }
+}
+
+@media (max-width: 520px) {
+  html[data-duduq-embed="true"] .duduq-engine-root {
+    padding: 4px 5px max(7px, env(safe-area-inset-bottom)) !important;
+  }
+
+  html[data-duduq-embed="true"] .duduq-engine-shell {
+    min-height: calc(100dvh - 12px) !important;
+    row-gap: 5px !important;
+  }
+
+  html[data-duduq-embed="true"] .duduq-engine-stage {
+    min-height: min(360px, 62dvh) !important;
+  }
+
+  html[data-duduq-embed="true"] .duduq-engine-feedback:not([data-state="idle"]):not(:empty) {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+`;
+  }
+
+  function syncFrame(frame) {
+    if (!embedActive() || !frame || frame.tagName !== "IFRAME") return;
+
+    try {
+      const doc = frame.contentDocument;
+      if (!doc?.documentElement || !doc?.head) return;
+
+      doc.documentElement.setAttribute("data-duduq-embed", "true");
+      doc.body?.setAttribute("data-duduq-embed", "true");
+
+      let style = doc.getElementById(FRAME_STYLE_ID);
+      if (!style) {
+        style = doc.createElement("style");
+        style.id = FRAME_STYLE_ID;
+        doc.head.appendChild(style);
+      }
+
+      style.textContent = `
+html[data-duduq-embed="true"],
+html[data-duduq-embed="true"] body,
+html[data-duduq-embed="true"] #root {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+html[data-duduq-embed="true"] body {
+  margin: 0 !important;
+  overflow-x: clip !important;
+}
+
+html[data-duduq-embed="true"] #root,
+html[data-duduq-embed="true"] [class*="duduq-"] {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+html[data-duduq-embed="true"] img,
+html[data-duduq-embed="true"] video {
+  max-width: 100% !important;
+  object-fit: contain !important;
+}
+`;
+
+      try {
+        frame.contentWindow?.dispatchEvent(new Event("resize"));
+      } catch (_) {}
+    } catch (_) {}
+  }
+
+  const seen = new WeakSet();
+
+  function watchFrame(frame) {
+    if (!embedActive() || !frame || seen.has(frame)) return;
+    seen.add(frame);
+    frame.addEventListener("load", function () {
+      requestAnimationFrame(function () {
+        syncFrame(frame);
+      });
+    });
+    syncFrame(frame);
+  }
+
+  function refresh() {
+    if (!embedActive()) return;
+
+    installHostStyle();
+
+    const root = document.getElementById("root");
+    if (!root) return;
+
+    root.querySelectorAll("iframe").forEach(watchFrame);
+    root.querySelectorAll("iframe").forEach(syncFrame);
+  }
+
+  function install() {
+    if (!embedActive()) return;
+
+    installHostStyle();
+
+    const root = document.getElementById("root");
+    if (!root) return;
+
+    const observer = new MutationObserver(function (records) {
+      records.forEach(function (record) {
+        record.addedNodes.forEach(function (node) {
+          if (!(node instanceof Element)) return;
+          if (node.tagName === "IFRAME") watchFrame(node);
+          node.querySelectorAll?.("iframe").forEach(watchFrame);
+        });
+      });
+    });
+
+    observer.observe(root, { childList: true, subtree: true });
+
+    document.addEventListener("fullscreenchange", function () {
+      document.documentElement.setAttribute(
+        "data-duduq-fullscreen",
+        document.fullscreenElement ? "true" : "false"
+      );
+      requestAnimationFrame(refresh);
+    });
+
+    window.addEventListener("resize", function () {
+      requestAnimationFrame(refresh);
+    }, { passive: true });
+
+    refresh();
+  }
+
+  window.addEventListener("duduq:engine-ready", install);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", install, { once: true });
+  } else {
+    install();
+  }
+})();
+
