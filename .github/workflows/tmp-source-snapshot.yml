@@ -1,0 +1,33 @@
+name: tmp-source-snapshot
+
+on:
+  push:
+    branches:
+      - refactor/y1-y2-pedagogical-mechanics-recovery-20260911
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Prepare source snapshot
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/duduq-source
+          for p in content engine shared test tests scripts package.json package-lock.json playwright.config.* README.md; do
+            if compgen -G "$p" > /dev/null; then cp -a $p /tmp/duduq-source/; fi
+          done
+          git rev-parse HEAD > /tmp/duduq-source/SNAPSHOT_HEAD.txt
+          du -sh /tmp/duduq-source
+      - name: Upload source snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-source-snapshot
+          path: /tmp/duduq-source
+          if-no-files-found: error
