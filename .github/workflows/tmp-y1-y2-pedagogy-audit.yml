@@ -1,0 +1,62 @@
+name: tmp-y1-y2-pedagogy-audit
+
+on:
+  push:
+    branches:
+      - refactor/y1-y2-pedagogical-mechanics-recovery-20260911
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Inventory pedagogy/content files
+        run: |
+          set -euo pipefail
+          echo '=== SHARED PEDAGOGY ==='
+          find shared/pedagogy -maxdepth 3 -type f -print 2>/dev/null | sort || true
+          echo '=== ENGLISH SHARED ==='
+          find content/english/shared -maxdepth 3 -type f -print 2>/dev/null | sort || true
+          echo '=== YEAR 1 ==='
+          find content/english/year-1 -maxdepth 3 -type f -print | sort
+          echo '=== YEAR 2 ==='
+          find content/english/year-2 -maxdepth 3 -type f -print | sort
+
+      - name: Build diagnostic bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/duduq-audit
+          mkdir -p /tmp/duduq-audit
+          cp -a shared/pedagogy /tmp/duduq-audit/shared-pedagogy 2>/dev/null || true
+          cp -a content/english/shared /tmp/duduq-audit/english-shared 2>/dev/null || true
+          cp -a content/english/year-1 /tmp/duduq-audit/year-1
+          cp -a content/english/year-2 /tmp/duduq-audit/year-2
+          find . -maxdepth 4 -type f \( -iname '*curriculum*' -o -iname '*validation*.json' -o -iname '*pedagog*.json' -o -iname '*question*.json' \) -print | sort > /tmp/duduq-audit/candidate-data-files.txt
+          grep -RInE 'target[-_ ]?shooter|matching|bubble[-_ ]?pop|word[-_ ]?slash|drag[-_ ]?(and[-_ ]?)?drop|smart[-_ ]?sentence|delivery\.mechanic|mechanic' content/english/year-1 content/english/year-2 shared/pedagogy content/english/shared > /tmp/duduq-audit/mechanic-hits.txt || true
+          grep -RhoE 'EN[1-5][-_]M[0-9]{1,2}[-_][A-Za-z0-9_-]+' content shared test tests 2>/dev/null | sort -u > /tmp/duduq-audit/id-like.txt || true
+          {
+            echo "HEAD=$(git rev-parse HEAD)"
+            echo "Y1_FILES=$(find content/english/year-1 -type f | wc -l)"
+            echo "Y2_FILES=$(find content/english/year-2 -type f | wc -l)"
+            echo "ID_LIKE_UNIQUE=$(wc -l < /tmp/duduq-audit/id-like.txt)"
+            echo "MECHANIC_HITS=$(wc -l < /tmp/duduq-audit/mechanic-hits.txt)"
+          } | tee /tmp/duduq-audit/summary.txt
+          echo '=== CANDIDATE DATA FILES ==='
+          cat /tmp/duduq-audit/candidate-data-files.txt
+          echo '=== FIRST 100 MECHANIC HITS ==='
+          head -100 /tmp/duduq-audit/mechanic-hits.txt || true
+
+      - name: Upload diagnostic bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: y1-y2-pedagogy-audit
+          path: /tmp/duduq-audit
+          if-no-files-found: error
