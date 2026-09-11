@@ -1,0 +1,19 @@
+name: tmp-y1-y2-golden-pilot-pregate
+on:
+  push:
+    branches:
+      - tmp/y1-y2-golden-pilot-pregate-20260911
+jobs:
+  pregate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate frozen Commit A
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "f74b7455c282a45a83280b29d742a3111bb526db" || true
+          node --check content/english/shared/pedagogical-orchestrator-v1.js
+          node test/systemic/y1-y2-early-literacy-router.mjs
