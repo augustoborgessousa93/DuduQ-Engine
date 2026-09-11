@@ -1,0 +1,39 @@
+name: tmp-y1-y2-recovery-amend-a
+
+on:
+  push:
+    branches:
+      - tmp/y1-y2-recovery-apply-20260911-v5
+    paths:
+      - '.github/workflows/tmp-y1-y2-recovery-amend-a.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  amend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Amend Commit A with native mechanic contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp tmp/amend-a-native-builders.py /tmp/amend-a-native-builders.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin refactor/y1-y2-mechanics-recovery-clean-20260911
+          git checkout -B refactor/y1-y2-mechanics-recovery-clean-20260911 origin/refactor/y1-y2-mechanics-recovery-clean-20260911
+          test "$(git rev-parse HEAD^)" = "00c1ba10042eb91fbc98d86f1cb8f33f640263ef"
+          test "$(git log -1 --format=%s)" = "refactor(y1-y2): add early-literacy mechanic router"
+          python3 /tmp/amend-a-native-builders.py
+          node --check content/english/shared/pedagogical-orchestrator-v1.js
+          node --check test/systemic/y1-y2-early-literacy-router.mjs
+          node test/systemic/y1-y2-early-literacy-router.mjs
+          test -z "$(git diff --name-only | grep -v -E '^(content/english/shared/pedagogical-orchestrator-v1.js|test/systemic/y1-y2-early-literacy-router.mjs)$' || true)"
+          git add content/english/shared/pedagogical-orchestrator-v1.js test/systemic/y1-y2-early-literacy-router.mjs
+          git commit --amend --no-edit
+          git push --force-with-lease origin HEAD:refactor/y1-y2-mechanics-recovery-clean-20260911
+          echo "COMMIT_A=$(git rev-parse HEAD)"
