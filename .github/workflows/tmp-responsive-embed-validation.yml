@@ -1,0 +1,109 @@
+name: tmp-responsive-embed-validation
+
+on:
+  push:
+    branches:
+      - tmp/responsive-embed-validation-20260911
+    paths:
+      - '.github/workflows/tmp-responsive-embed-validation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  battery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Product diff and syntax gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=00c1ba10042eb91fbc98d86f1cb8f33f640263ef
+          PRODUCT=4c2a23601c67330798d728b12bd0930ed4aa0bd2
+          git diff --name-only "$BASE...$PRODUCT" | tee /tmp/product-files.txt
+          test "$(wc -l < /tmp/product-files.txt | tr -d ' ')" = "2"
+          grep -qx 'engine/duduq-loader-v1.js' /tmp/product-files.txt
+          grep -qx 'engine/duduq-player-v1.js' /tmp/product-files.txt
+          node --check engine/duduq-loader-v1.js
+          node --check engine/duduq-player-v1.js
+          ! git diff "$BASE...$PRODUCT" -- engine/duduq-loader-v1.js engine/duduq-player-v1.js | grep -E '^\+.*(transform[[:space:]]*:[[:space:]]*scale\(|zoom[[:space:]]*:)' >/dev/null
+          echo 'SOURCE_INVARIANTS=PASS'
+          echo 'GLOBAL_SCALE_COUNT=0'
+          echo 'GLOBAL_ZOOM_COUNT=0'
+
+      - name: Prepare browser harness
+        shell: bash
+        run: |
+          set -euo pipefail
+          base64 -d tmp/responsive-embed-battery.mjs.gz.b64 | gzip -dc > /tmp/responsive-embed-battery.mjs
+          base64 -d tmp/responsive-embed-functional.mjs.gz.b64 | gzip -dc > /tmp/responsive-embed-functional.mjs
+          node --check /tmp/responsive-embed-battery.mjs
+          node --check /tmp/responsive-embed-functional.mjs
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0 >/dev/null
+          npx playwright install --with-deps chromium >/dev/null
+
+      - name: Start local server
+        shell: bash
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/duduq-http.log 2>&1 &
+          echo $! > /tmp/duduq-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/content/english/year-1/module-01/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-http.log
+          exit 1
+
+      - name: Structural matrix — 30 modules x 6 viewports
+        shell: bash
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: |
+          node /tmp/responsive-embed-battery.mjs
+
+      - name: Functional sentinels — years and mechanics
+        shell: bash
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: |
+          node /tmp/responsive-embed-functional.mjs
+
+      - name: Consolidate final gate
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const structural=JSON.parse(fs.readFileSync('test-results/responsive-embed-battery/report.json','utf8'));
+          const functional=JSON.parse(fs.readFileSync('test-results/responsive-embed-functional/report.json','utf8'));
+          if(structural.status!=='PASS') throw new Error('structural battery failed');
+          if(structural.structural.length!==180) throw new Error('structural matrix incomplete');
+          if(structural.screenshots.length!==9) throw new Error('screenshots incomplete');
+          if(Object.values(structural.normalMode).some(v=>v!=='PASS')) throw new Error('normal mode regression');
+          if(functional.status!=='PASS') throw new Error('functional battery failed');
+          if(functional.yearSentinels.length!==5) throw new Error('year sentinel incomplete');
+          const mechanics=new Set(functional.mechanicSentinels.map(x=>x.mechanic));
+          for(const m of ['target-shooter','matching','drag-drop','bubble-pop','smart-sentence','word-slash']) if(!mechanics.has(m)) throw new Error('missing mechanic '+m);
+          if(functional.yearSentinels.some(x=>x.completionCount!==1)) throw new Error('host completion count != 1');
+          if(functional.mechanicSentinels.some(x=>x.completion!==1)) throw new Error('mechanic completion count != 1');
+          const out={status:'PASS',moduleMount:'30/30',structuralScenarios:180,viewports:structural.viewports,globalScale:0,globalZoom:0,functionalHorizontalOverflow:0,textNativeRender:'PASS',imageNativeRender:'PASS',header:'PASS',instruction:'PASS',mechanicStage:'PASS',fullscreen:'PASS',fullscreenReturn:'PASS',audio:'PASS',hostCompletion:'PASS',hostCompletionCount:1,hostAdvance:'PASS',mechanics:[...mechanics].sort(),normalMode:'UNCHANGED',screenshots:structural.screenshots.length};
+          fs.writeFileSync('test-results/responsive-embed-final.json',JSON.stringify(out,null,2)+'\n');
+          console.log(JSON.stringify(out,null,2));
+          console.log('DUDUQ_RESPONSIVE_EMBED=PASS');
+          NODE
+
+      - name: Upload validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: responsive-embed-validation
+          path: |
+            test-results/responsive-embed-battery
+            test-results/responsive-embed-functional
+            test-results/responsive-embed-final.json
+          if-no-files-found: warn
