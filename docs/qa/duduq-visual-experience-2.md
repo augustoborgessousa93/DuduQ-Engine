@@ -112,3 +112,171 @@ state transitions from before the click instead of taking one immediate sample;
 an unobserved playback state is blocking. No audio source is changed.
 
 Battery 2 is the final run. No third battery or further code correction allowed.
+
+
+========================================
+DUDUQ VISUAL EXPERIENCE 2.0
+TARGET STABILIZATION REPORT
+========================================
+
+REPOSITORY: augustoborgessousa93/DuduQ-Engine
+BASE ORIGINAL: 00c1ba10042eb91fbc98d86f1cb8f33f640263ef
+VISUAL BASE: f686c832aa768b097b612f29db3d5e73cdd1c50e
+STABILIZATION BRANCH: fix/vx2-target-stabilization-20260912
+FINAL SHA (tested product): 0a2a803c2cf3e9bdb0ec14b719b03326e50f5081
+TARGET VERSION: 1.0.21
+CORE: 1.0.12
+
+----------------------------------------
+FAILURE CLASSIFICATION
+----------------------------------------
+Counts below are outstanding gate failures, counted by resize width.
+HARNESS_BUG: 0 confirmed outstanding
+PRODUCT_RESPONSIVE_BLOCKER: 3 observed resize cases (390, 600, 700px)
+BASELINE_INHERITED: 0 outstanding in candidate
+ENVIRONMENT_LIMITATION: 0 reported by final battery
+
+Historical classifications:
+- HARNESS_BUG: outgoing-frame click after Host completion; immediate audio-state
+  sampling; missing boot-ready precondition. Corrected without suppressing errors.
+- PRODUCT_RESPONSIVE_BLOCKER: legacy min-height cascade and centered target edge
+  clipping. Fixed viewport tests now pass; resize gate still fails.
+- BASELINE_INHERITED: 1071x549 yielded a 150px iframe. Fixed only in opt-in adapter.
+- ENVIRONMENT_LIMITATION: direct git push lacked CLI credentials; GitHub connector
+  committed the exact local file trees successfully. No final CI limitation.
+
+Resize evidence: 390px reports B and A clipped; 600px reports C; 700px reports A.
+That is four control observations across three widths. These are candidate-only
+reports relative to baseline. The sweep records geometry but no per-width capture
+or ancestor bounds. A transient resize-timing contribution is not excluded;
+persistence and precise clipping ancestor are unproven. No extra run was used to
+reclassify these as harness errors or waive the failing gate.
+
+----------------------------------------
+FUNCTIONAL
+----------------------------------------
+MOUNT: PASS
+READY: PASS
+AUDIO: PASS (playback state observed; acoustic quality not measured)
+WRONG: PASS
+RETRY: PASS
+CORRECT: PASS
+HOST COMPLETION: PASS (exactly 1)
+HOST ADVANCE: PASS (exactly 1)
+DUPLICATE COMPLETION: 0
+
+All 11 scenarios passed these checks, with no page errors. Parent event logs are
+in the JSON artifact. No success-screen delay was added for screenshots.
+
+----------------------------------------
+VISUAL EXPERIENCE
+----------------------------------------
+DIRECTION OF ART: PENDING HUMAN REVIEW
+GAME FEEL: PENDING HUMAN REVIEW
+MASCOT: preserved; PENDING HUMAN REVIEW
+TARGETS: PASS fixed viewport geometry; FAIL resize gate
+MOTION: preserved; subjective quality PENDING HUMAN REVIEW
+PARTICLES: preserved, event-driven
+FEEDBACK: PASS fixed viewport interaction and geometry
+AUDIO UX: PASS playback-state observation; subjective quality PENDING HUMAN REVIEW
+DEPTH: preserved; PENDING HUMAN REVIEW
+TRANSITIONS: PASS Host advancement; visual quality PENDING HUMAN REVIEW
+
+No aesthetic PASS is invented from screenshots or source code. Before/after
+initial and retry captures exist for the six mandatory evidence sizes. Final
+mobile retry, short desktop initial and desktop DPR2 captures were visually
+inspected: instructions, controls, targets, scenery and feedback are present.
+Screenshots do not prove animation smoothness or real-device performance.
+
+----------------------------------------
+VIEWPORTS
+----------------------------------------
+1366x900: PASS
+1200x800: PASS
+1071x549: PASS
+865x549: PASS
+768x700: PASS
+768x1024: PASS
+390x700: PASS
+390x844: PASS
+
+These are independent fixed-viewport scenarios, not the dynamic resize sweep.
+
+----------------------------------------
+DPR2
+----------------------------------------
+1366x900: PASS
+768x1024: PASS
+390x844: PASS
+
+----------------------------------------
+RESPONSIVE QUALITY
+----------------------------------------
+RESIZE SWEEP: FAIL (3 of 13 widths)
+HORIZONTAL OVERFLOW: 0
+NEW CANDIDATE CLIPPING: 4 control observations in resize; 0 fixed scenarios
+IMAGE DISTORTION: 0 observed in inspected screenshots / contain checks
+ASPECT VIOLATIONS: 0 observed; not independently quantified in the sweep
+LOW RES BLOCKERS: 0
+GLOBAL SCALE: NO
+GLOBAL ZOOM: NO
+
+----------------------------------------
+ACCESSIBILITY / MOTION
+----------------------------------------
+FOCUS: PASS
+REDUCED MOTION: PASS
+
+----------------------------------------
+CREATIVE QUALITY
+----------------------------------------
+CSS/SVG PROCEDURAL EFFECTS: YES
+NEW RASTER ASSETS: 0
+MASCOT REACTIONS: YES (retained state-driven implementation)
+TARGET IMPACT: YES
+EVENT PARTICLES: YES
+ANIMATED AUDIO STATE: YES
+GAME STAGE DEPTH: YES
+
+----------------------------------------
+SCOPE
+----------------------------------------
+TARGET MODIFIED: YES (opt-in visual adapter only)
+MATCHING MODIFIED: NO
+BUBBLE POP: NO
+DRAG DROP: NO
+WORD SLASH: NO
+SMART SENTENCE: NO
+CORE: UNCHANGED
+CANARY: UNCHANGED
+MAIN: UNCHANGED
+PRODUCTION: UNCHANGED
+
+----------------------------------------
+ANTI-LOOP
+----------------------------------------
+BATTERIES: 2
+CORRECTIONS: 1
+BATTERY 3: NO
+
+----------------------------------------
+PREVIEW
+----------------------------------------
+CLOUDFLARE PREVIEW (diagnostic, not approved):
+https://ba24fe07.duduq-engine.pages.dev/test/visual-experience-2/target.html
+
+Branch preview:
+https://fix-vx2-target-stabilization.duduq-engine.pages.dev/test/visual-experience-2/
+
+PR: https://github.com/augustoborgessousa93/DuduQ-Engine/pull/100
+Battery 1: https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/34708787011
+Battery 2: https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/34709059557
+Final screenshots + JSON artifact: 10302573855 (duduq-vx2-target-evidence).
+
+----------------------------------------
+FINAL STATUS
+----------------------------------------
+NO-GO — TARGET STABILIZATION
+
+STOP. No further correction, test battery, Matching implementation or merge.
+========================================
