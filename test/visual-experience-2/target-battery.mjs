@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 
 const out='test-results/visual-experience-2';
 await fs.mkdir(out,{recursive:true});
-const report={battery:1,mission:"target-stabilization-20260912",mechanic:'target-shooter',base:'00c1ba10042eb91fbc98d86f1cb8f33f640263ef',startedAt:new Date().toISOString(),cases:[],screenshots:[],limitations:[],status:'RUNNING'};
+const report={battery:2,mission:"target-stabilization-20260912",mechanic:'target-shooter',base:'00c1ba10042eb91fbc98d86f1cb8f33f640263ef',startedAt:new Date().toISOString(),cases:[],screenshots:[],limitations:[],status:'RUNNING'};
 const base=process.env.BASE_URL||'http://127.0.0.1:8765';
 const browser=await chromium.launch({headless:true});
 const dimensions=[[1366,900],[1200,800],[1071,549],[865,549],[768,700],[768,1024],[390,700],[390,844]];
@@ -46,7 +46,7 @@ async function inspect(frame){
     const images=[...document.images].filter(visible).map(e=>{const r=e.getBoundingClientRect(),s=getComputedStyle(e);return {src:e.currentSrc,natural:[e.naturalWidth,e.naturalHeight],rendered:[r.width,r.height],fit:s.objectFit,transform:s.transform,lowRes:e.naturalWidth<r.width*devicePixelRatio*.8||e.naturalHeight<r.height*devicePixelRatio*.8};});
     const roots=[...document.querySelectorAll('.duduq-engine-root,.duduq-engine-shell,.duduq-engine-stage')].map(e=>({class:e.className,transform:getComputedStyle(e).transform,zoom:getComputedStyle(e).zoom}));
     const arena=document.querySelector('.duduq-ts-arena')?.getBoundingClientRect();
-    return {width:w,height:h,dpr:devicePixelRatio,overflow:Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)-w,clipped,images,roots,arena:arena&&{width:arena.width,height:arena.height},focusable:controls.length,motion:matchMedia('(prefers-reduced-motion: reduce)').matches};
+    return {width:w,height:h,dpr:devicePixelRatio,overflow:Math.max(0,Math.max(document.documentElement.scrollWidth,document.body.scrollWidth)-w),clipped,images,roots,arena:arena&&{width:arena.width,height:arena.height},focusable:controls.length,motion:matchMedia('(prefers-reduced-motion: reduce)').matches};
   });
 }
 
@@ -117,9 +117,20 @@ try{
       await audio.focus();
       result.checks.keyboardFocus=await audio.evaluate(e=>document.activeElement===e&&getComputedStyle(e).outlineStyle!=='none');
       if(!result.checks.keyboardFocus) failure(result,'Visible keyboard focus missing');
+      await audio.evaluate(e=>{
+        window.VX_AUDIO_SEEN=false;
+        window.VX_AUDIO_OBSERVER=new MutationObserver(records=>{
+          if(e.dataset.playing==='true'||records.some(r=>r.oldValue==='true'))window.VX_AUDIO_SEEN=true;
+        });
+        window.VX_AUDIO_OBSERVER.observe(e,{attributes:true,attributeFilter:['data-playing'],attributeOldValue:true});
+      });
       await audio.click();
       result.checks.audioRequested=true;
-      result.checks.audioPlaying=await audio.getAttribute('data-playing')==='true';
+      await frame.waitForFunction(()=>window.VX_AUDIO_SEEN,{},{timeout:8000}).catch(error=>{
+        if(error.name!=='TimeoutError')throw error;
+        failure(result,'Audio playback state not observed');
+      });
+      result.checks.audioPlaying=await frame.evaluate(()=>{window.VX_AUDIO_OBSERVER.disconnect();return window.VX_AUDIO_SEEN;});
       if(!result.checks.audioPlaying) report.limitations.push(`${key}: native audio playback state was not observed; no audibility claim.`);
       await capture(page,`target-after-${key}-interaction`);
       await frame.waitForFunction(()=>document.querySelector('.duduq-ts-audio-button')?.disabled===false,{}, {timeout:15000});

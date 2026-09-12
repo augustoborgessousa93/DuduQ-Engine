@@ -24,7 +24,7 @@ jobs:
         run: |
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
-      - name: Target battery 1
+      - name: Target battery 2
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/vx-server.log 2>&1 &
           node test/visual-experience-2/target-battery.mjs

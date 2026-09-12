@@ -98,6 +98,12 @@
       const destroyOriginal = original.mount(args);
       const iframe = args.container.querySelector('iframe');
       let detach = () => {};
+      // The fullscreen pilot Host root otherwise becomes auto-height at
+      // wide/short sizes, making its 100% iframe fall back to 150px.
+      const containerStyle = args.container.style;
+      const oldHeight = containerStyle?.getPropertyValue('height');
+      const oldPriority = containerStyle?.getPropertyPriority('height');
+      containerStyle?.setProperty('height', '100dvh', 'important');
 
       function onLoad() {
         detach();
@@ -112,6 +118,8 @@
       return () => {
         iframe?.removeEventListener('load', onLoad);
         detach();
+        if (oldHeight) containerStyle?.setProperty('height', oldHeight, oldPriority);
+        else containerStyle?.removeProperty('height');
         if (typeof destroyOriginal === 'function') destroyOriginal();
       };
     }

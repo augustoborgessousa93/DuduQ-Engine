@@ -94,3 +94,21 @@ blocking evidence. No forced clicks or detached-frame exception suppression.
 
 Battery 1: pending. Node adapter contract and JavaScript syntax: PASS.
 No production release, Core, Canary, official content or main change.
+
+### Battery 1 result and sole permitted correction
+
+Run 34708787011, SHA fa032e18b9f2ecc5feff5a88946ad6e8de69a313:
+NO-GO. All 11 functional paths passed, including exact Host completion/advance,
+wrong-answer guards, ready, focus and raster density. Reduced motion passed.
+New clipping detection exposed Target centers too close to arena edges.
+The 1071x549 parent iframe was 150px tall in both baseline and candidate:
+BASELINE_INHERITED. The Core fixed this only below 900px width.
+Some late legacy selectors still won ties against the first layout stylesheet.
+
+The single correction strengthens scoped layout specificity, bounds target
+centers with room for focus/float, restores a definite pilot Host height with
+cleanup, and corrects audio-shell dimensions. The audio harness now observes
+state transitions from before the click instead of taking one immediate sample;
+an unobserved playback state is blocking. No audio source is changed.
+
+Battery 2 is the final run. No third battery or further code correction allowed.
