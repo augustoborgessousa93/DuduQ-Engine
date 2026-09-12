@@ -68,3 +68,29 @@ Native audio audibility, subjective visual quality and real-device performance c
 Only one minimal correction is permitted after a real redesign blocker, followed by Battery 2. No third battery, second correction or Matching implementation without Target PASS. The workflow must not be rerun for cosmetic preference changes.
 
 Final aesthetic approval belongs to the user. Do not label this candidate “FINAL VISUAL APPROVED”.
+
+## Target stabilization — 2026-09-12 (new mission)
+
+Visual base: f686c832aa768b097b612f29db3d5e73cdd1c50e.
+Branch: fix/vx2-target-stabilization-20260912. Maximum two CI batteries,
+with at most one minimal correction after Battery 1. Matching remains unchanged.
+
+Inspection confirmed Host 1.0.12 dispatches step-complete then swaps the runtime;
+Target 1.0.21 guards its completion callback. Clicking an outgoing iframe's
+feedback action is a HARNESS_BUG. The new harness observes exact completion and
+start counts in the parent, then checks that the replacement runtime is ready.
+
+Previous Battery 2 artifact 10301781763 was downloaded and its report and mobile
+retry screenshot inspected. Legacy #root rules with !important retain minimum
+arena heights despite less-specific pilot overrides, causing real clipping.
+The consolidated opt-in layout overrides that cascade, distributes available
+height between header, stage and feedback, and bounds targets by both arena axes.
+Sky, meadow, target materials, mascot reactions and event effects are retained.
+The ineffective ultra-compact block (26px audio / 12px instructions) was removed.
+
+Boot interception is not assumed to be harmless: readiness now waits for the
+boot to stop intercepting input. Persistent boot and resource errors remain
+blocking evidence. No forced clicks or detached-frame exception suppression.
+
+Battery 1: pending. Node adapter contract and JavaScript syntax: PASS.
+No production release, Core, Canary, official content or main change.

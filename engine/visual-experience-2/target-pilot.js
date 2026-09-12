@@ -12,7 +12,8 @@
   const source = document.currentScript.src;
   const stylesheets = [
     new URL('./theme.css', source).href,
-    new URL('./target-creative.css', source).href
+    new URL('./target-creative.css', source).href,
+    new URL('./target-layout.css', source).href
   ];
 
   function attach(doc) {

@@ -10,7 +10,7 @@ permissions:
   contents: read
 jobs:
   target-pilot:
-    if: github.head_ref == 'feat/duduq-visual-experience-2-pilots'
+    if: github.head_ref == 'fix/vx2-target-stabilization-20260912'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
