@@ -1,0 +1,37 @@
+name: DuduQ Visual Experience 2 — Target battery
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'engine/visual-experience-2/**'
+      - 'test/visual-experience-2/**'
+      - '.github/workflows/duduq-visual-experience-2.yml'
+permissions:
+  contents: read
+jobs:
+  target-pilot:
+    if: github.head_ref == 'fix/vx2-target-stabilization-20260912'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify adapter contract
+        run: node test/visual-experience-2/contract.test.mjs
+      - name: Install browser
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Target battery 2
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/vx-server.log 2>&1 &
+          node test/visual-experience-2/target-battery.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-vx2-target-evidence
+          path: test-results/visual-experience-2
+          retention-days: 30
+          if-no-files-found: warn

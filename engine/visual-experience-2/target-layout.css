@@ -1,0 +1,95 @@
+/* Available-space layout. Specificity intentionally exceeds immutable legacy
+   #root#root rules; only the opt-in Target document receives these overrides. */
+html[data-duduq-vx="2"] body #root#root { height:100dvh !important; min-height:0 !important; }
+html[data-duduq-vx="2"] body #root#root .duduq-engine-root {
+  height:100% !important; min-height:0 !important; box-sizing:border-box !important;
+  padding:clamp(8px,1.2vw,16px) !important; overflow:visible !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-engine-shell {
+  height:100% !important; min-height:0 !important; display:flex !important;
+  flex-direction:column !important; gap:10px !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-engine-header {
+  flex:0 0 auto !important; margin:0 !important; min-height:0 !important;
+  padding:8px 12px !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-engine-stage {
+  flex:1 1 0 !important; height:auto !important; min-height:0 !important;
+  padding:0 !important; overflow:visible !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-engine-stage .duduq-ts-root,
+html[data-duduq-vx="2"] body #root#root .duduq-engine-stage .duduq-ts-surface {
+  height:100% !important; min-height:0 !important; padding:0 !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-engine-stage .duduq-ts-surface {
+  display:flex !important; gap:8px !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-ts-instruction {
+  flex:0 0 auto !important; min-height:60px !important;
+  padding:6px 10px !important; gap:8px !important;
+  grid-template-columns:minmax(0,1fr) 48px !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-ts-instruction::before { display:none !important; }
+html[data-duduq-vx="2"] body #root#root .duduq-ts-instruction[data-has-image="true"] {
+  grid-template-columns:44px minmax(0,1fr) 48px !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-ts-status { flex:0 0 auto !important; }
+html[data-duduq-vx="2"] body #root#root .duduq-engine-stage .duduq-ts-arena {
+  flex:1 1 0 !important; height:auto !important; min-height:0 !important;
+  container-type:size; box-sizing:border-box !important;
+}
+/* Preserve runtime positions and launch trajectories. Bound size to both axes. */
+html[data-duduq-vx="2"] body #root#root .duduq-ts-target {
+  --vx-target-size:clamp(64px,min(18cqw,28cqh),132px);
+  width:var(--vx-target-size) !important;
+  height:var(--vx-target-size) !important;
+  left:clamp(calc(var(--vx-target-size)/2 + 12px),var(--x),calc(100% - var(--vx-target-size)/2 - 12px)) !important;
+  top:clamp(calc(var(--vx-target-size)/2 + 14px),var(--y),calc(100% - var(--vx-target-size)/2 - 20px)) !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-engine-feedback {
+  flex:0 0 auto !important; margin:0 !important; padding:0 !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-engine-feedback:empty { display:none !important; }
+html[data-duduq-vx="2"] body #root#root .duduq-engine-feedback-card {
+  margin:0 !important; min-height:0 !important; padding:8px 12px !important;
+}
+@media (max-height:700px), (max-width:600px) {
+  html[data-duduq-vx="2"] body #root#root .duduq-engine-header-mascot-slot {
+    width:48px !important; height:48px !important; flex-basis:48px !important;
+  }
+  html[data-duduq-vx="2"] body #root#root .duduq-engine-shell { gap:8px !important; }
+  html[data-duduq-vx="2"] body #root#root .duduq-ts-hint { display:none !important; }
+  html[data-duduq-vx="2"] body #root#root .duduq-ts-cloud { display:none !important; }
+}
+@media (max-width:600px) {
+  html[data-duduq-vx="2"] body #root#root .duduq-engine-header { gap:6px !important; }
+  html[data-duduq-vx="2"] body #root#root .duduq-engine-toolbar { flex-wrap:wrap !important; }
+  html[data-duduq-vx="2"] body #root#root .duduq-engine-heading h1 { font-size:19px !important; }
+  html[data-duduq-vx="2"] body #root#root .duduq-ts-target {
+    --vx-target-size:clamp(64px,min(27cqw,27cqh),106px);
+    left:clamp(calc(var(--vx-target-size)/2 + 12px),var(--mx),calc(100% - var(--vx-target-size)/2 - 12px)) !important;
+    top:clamp(calc(var(--vx-target-size)/2 + 14px),calc(var(--my) + 12%),calc(100% - var(--vx-target-size)/2 - 20px)) !important;
+  }
+}
+
+html[data-duduq-vx="2"] body #root#root .duduq-ts-instruction {
+  overflow:visible !important; border-radius:22px !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-ts-instruction h2 {
+  font-size:clamp(17px,1.65vw,24px) !important;
+  text-transform:none !important; line-height:1.25 !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-ts-instruction::after { display:none !important; }
+html[data-duduq-vx="2"] body #root#root .duduq-ts-audio-shell {
+  width:48px !important; height:48px !important; min-width:48px !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-ts-audio-button {
+  width:44px !important; height:44px !important; min-width:44px !important; min-height:44px !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-ts-content {
+  width:100% !important; height:100% !important; padding:0 !important;
+}
+html[data-duduq-vx="2"] body #root#root .duduq-engine-header-mascot-slot .duduq-mascot,
+html[data-duduq-vx="2"] body #root#root .duduq-engine-header-mascot-slot .duduq-mascot-body {
+  width:100% !important; height:100% !important;
+}
