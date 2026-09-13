@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Teste Visual - Ecossistema DuduQ</title>
+    <style>
+        :root {
+            --primary: #3A8AF5;
+            --success: #58cc02;
+            --error: #ff4b4b;
+            --surface: #ffffff;
+            --background: #f0f4f8;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        .test-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+        
+        .test-card:nth-child(1) { animation-delay: 0.1s; }
+        .test-card:nth-child(2) { animation-delay: 0.2s; }
+        .test-card:nth-child(3) { animation-delay: 0.3s; }
+        
+        .test-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .card-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .test-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), #2563eb);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(58, 138, 245, 0.4);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(58, 138, 245, 0.6);
+        }
+        
+        .test-button:active {
+            transform: translateY(0);
+        }
+        
+        .features {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .feature-tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0.25rem;
+            font-weight: 600;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+            max-width: 800px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .instructions h2 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .instructions ol {
+            margin-left: 1.5rem;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .instructions li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>✨ Teste Visual - Ecossistema DuduQ</h1>
+        <p class="subtitle">Experimente as melhorias visuais e animações premium</p>
+    </header>
+    
+    <div class="test-grid">
+        <!-- Bubble Pop -->
+        <div class="test-card">
+            <span class="card-icon">🫧</span>
+            <span class="status-badge">Fase 1 ✅</span>
+            <h2 class="card-title">Bubble Pop</h2>
+            <p class="card-description">
+                Estoure as bolhas com efeitos de glassmorphism, glow hover e animações de pop naturais.
+            </p>
+            <div class="features">
+                <span class="feature-tag">Glassmorphism</span>
+                <span class="feature-tag">Glow Hover</span>
+                <span class="feature-tag">Pop Animation</span>
+                <span class="feature-tag">Shake Error</span>
+            </div>
+            <a href="DUDUQ_BUBBLE_POP.html" class="test-button">Testar Agora →</a>
+        </div>
+        
+        <!-- Drag & Drop -->
+        <div class="test-card">
+            <span class="card-icon">🎯</span>
+            <span class="status-badge">Fase 1 ✅</span>
+            <h2 class="card-title">Drag & Drop</h2>
+            <p class="card-description">
+                Arraste e solte com gradientes sutis, elevação no hover e feedbacks visuais ricos.
+            </p>
+            <div class="features">
+                <span class="feature-tag">Gradientes</span>
+                <span class="feature-tag">Hover Elevado</span>
+                <span class="feature-tag">Seleção Bounce</span>
+                <span class="feature-tag">Correct Glow</span>
+            </div>
+            <a href="DUDUQ_DRAG_DROP.html" class="test-button">Testar Agora →</a>
+        </div>
+        
+        <!-- Em Breve -->
+        <div class="test-card" style="opacity: 0.7;">
+            <span class="card-icon">🚀</span>
+            <span class="status-badge" style="background: #ff9800;">Em Breve</span>
+            <h2 class="card-title">Matching</h2>
+            <p class="card-description">
+                Cards de par com animação de match e celebração (próxima fase).
+            </p>
+            <div class="features">
+                <span class="feature-tag">Em Desenvolvimento</span>
+            </div>
+            <button class="test-button" disabled style="background: #ccc; cursor: not-allowed;">Aguarde...</button>
+        </div>
+    </div>
+    
+    <div class="instructions">
+        <h2>📋 Como Testar</h2>
+        <ol>
+            <li>Clique em "Testar Agora" para abrir cada jogo em uma nova aba</li>
+            <li>Interaja com os elementos para ver as animações de hover, clique e feedback</li>
+            <li>Teste em diferentes tamanhos de tela (redimensione a janela)</li>
+            <li>Observe os efeitos de glassmorphism, sombras e brilhos</li>
+            <li>Use F12 (DevTools) para inspecionar as animações e performance</li>
+            <li>Compare a experiência visual entre as duas mecânicas</li>
+        </ol>
+    </div>
+</body>
+</html>
