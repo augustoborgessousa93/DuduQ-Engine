@@ -9750,9 +9750,31 @@ var DuduQBubblePop = (() => {
       0 18px 30px rgba(123,171,209,.22),
       0 0 0 12px color-mix(in srgb, var(--bp-halo) 72%, transparent),
       inset 0 2px 0 rgba(255,255,255,.98),
-      inset 0 -8px 16px rgba(169,204,230,.18);
+      inset 0 -8px 16px rgba(169,204,230,.18),
+      0 0 24px rgba(58, 168, 245, 0.30);
     animation-play-state: paused;
     transform: translateY(-5px) scale(1.038);
+  }
+
+  /* ✨ DUDUQ DESIGN SYSTEM: Animação de pop aprimorada */
+  @keyframes duduqBubblePopEnhanced {
+    0% { 
+      transform: scale(1);
+      opacity: 1;
+    }
+    40% {
+      transform: scale(1.12);
+      opacity: 0.9;
+    }
+    100% { 
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+  
+  .duduq-bp-bubble-shell[data-popped="true"] .duduq-bp-bubble {
+    animation: duduqBubblePopEnhanced 300ms cubic-bezier(.34, 1.56, .64, 1) forwards;
+    pointer-events: none;
   }
 
   .duduq-bp-bubble:active:not(:disabled) {
@@ -9771,16 +9793,15 @@ var DuduQBubblePop = (() => {
 
   .duduq-bp-bubble:disabled { cursor: default; }
 
-  .duduq-bp-bubble-shell[data-popped="true"] .duduq-bp-bubble {
-    animation: duduq-bp-pop 420ms cubic-bezier(.18,.76,.22,1) forwards;
-    pointer-events: none;
+  /* ✨ DUDUQ DESIGN SYSTEM: Feedback wrong com shake */
+  @keyframes duduqBubbleWrongEnhanced {
+    0%, 100% { transform: translateX(0) scale(1); }
+    20% { transform: translateX(-8px) scale(0.98); }
+    40% { transform: translateX(8px) scale(0.98); }
+    60% { transform: translateX(-6px) scale(0.98); }
+    80% { transform: translateX(6px) scale(0.98); }
   }
-
-  .duduq-bp-bubble-shell[data-popped="true"] .duduq-bp-bubble {
-    animation: duduq-bp-pop 420ms cubic-bezier(.18,.76,.22,1) forwards;
-    pointer-events: none;
-  }
-
+  
   .duduq-bp-bubble-shell[data-wrong="true"] .duduq-bp-bubble {
     border-color: rgba(255,255,255,.86);
     background:
@@ -9792,8 +9813,9 @@ var DuduQBubblePop = (() => {
       0 14px 24px rgba(183,28,28,.14),
       0 0 0 10px rgba(255,170,170,.26),
       inset 0 2px 0 rgba(255,255,255,.94),
-      inset 0 -8px 16px rgba(238,170,170,.16);
-    animation: duduq-bp-wrong 420ms cubic-bezier(.36,.07,.19,.97) both;
+      inset 0 -8px 16px rgba(238,170,170,.16),
+      0 0 20px rgba(255, 75, 75, 0.25);
+    animation: duduqBubbleWrongEnhanced 420ms cubic-bezier(.36,.07,.19,.97) both;
   }
 
   .duduq-bp-media {
