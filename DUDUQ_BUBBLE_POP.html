@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light" />
   <title>DuduQ — Bubble Pop 1.2.2 Sky Background No Sun</title>
+  
+  <!-- ✨ DUDUQ DESIGN SYSTEM 2025 — Potencialização Visual -->
+  <link rel="stylesheet" href="/core/duduq-design-system.css" />
+  
   <style>
     html,body,#root{width:100%;min-height:100%;margin:0;background:transparent}body{min-height:100vh;font-family:Nunito,ui-rounded,system-ui,sans-serif}
     #duduq-boot{position:fixed;inset:0;display:grid;place-items:center;padding:24px;color:#164274;font:800 17px/1.45 ui-rounded,system-ui,sans-serif;text-align:center;background:#F7FBFF;z-index:99999}#duduq-boot[hidden]{display:none}
@@ -9671,6 +9675,40 @@ var DuduQBubblePop = (() => {
     transition: filter 160ms ease, box-shadow 170ms ease, opacity 220ms ease, transform 170ms ease;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
+    
+    /* ✨ DUDUQ DESIGN SYSTEM: Efeitos Premium */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  /* ✨ DUDUQ DESIGN SYSTEM: Brilho interno aprimorado */
+  .duduq-bp-bubble::after {
+    content: "";
+    position: absolute;
+    inset: 16%;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 36% 30%, rgba(255,255,255,.88) 0 10%, transparent 11%),
+      linear-gradient(180deg, color-mix(in srgb, var(--bp-disc) 94%, white 6%) 0%, color-mix(in srgb, var(--bp-disc-2) 88%, white 12%) 100%);
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,.98),
+      inset 0 -5px 12px rgba(162,190,215,.24),
+      0 8px 14px rgba(147,188,219,.16);
+    z-index: 0;
+  }
+  
+  /* ✨ DUDUQ DESIGN SYSTEM: Hover com glow effect */
+  .duduq-bp-bubble:hover:not(:disabled) {
+    filter: brightness(1.03) saturate(1.02);
+    box-shadow:
+      0 7px 0 var(--bp-edge-soft),
+      0 18px 30px rgba(123,171,209,.22),
+      0 0 0 12px color-mix(in srgb, var(--bp-halo) 72%, transparent),
+      inset 0 2px 0 rgba(255,255,255,.98),
+      inset 0 -8px 16px rgba(169,204,230,.18),
+      0 0 24px rgba(58, 168, 245, 0.30);
+    animation-play-state: paused;
+    transform: translateY(-5px) scale(1.038);
   }
 
   .duduq-bp-bubble::before {
@@ -9712,9 +9750,31 @@ var DuduQBubblePop = (() => {
       0 18px 30px rgba(123,171,209,.22),
       0 0 0 12px color-mix(in srgb, var(--bp-halo) 72%, transparent),
       inset 0 2px 0 rgba(255,255,255,.98),
-      inset 0 -8px 16px rgba(169,204,230,.18);
+      inset 0 -8px 16px rgba(169,204,230,.18),
+      0 0 24px rgba(58, 168, 245, 0.30);
     animation-play-state: paused;
     transform: translateY(-5px) scale(1.038);
+  }
+
+  /* ✨ DUDUQ DESIGN SYSTEM: Animação de pop aprimorada */
+  @keyframes duduqBubblePopEnhanced {
+    0% { 
+      transform: scale(1);
+      opacity: 1;
+    }
+    40% {
+      transform: scale(1.12);
+      opacity: 0.9;
+    }
+    100% { 
+      transform: scale(1.8);
+      opacity: 0;
+    }
+  }
+  
+  .duduq-bp-bubble-shell[data-popped="true"] .duduq-bp-bubble {
+    animation: duduqBubblePopEnhanced 300ms cubic-bezier(.34, 1.56, .64, 1) forwards;
+    pointer-events: none;
   }
 
   .duduq-bp-bubble:active:not(:disabled) {
@@ -9733,16 +9793,15 @@ var DuduQBubblePop = (() => {
 
   .duduq-bp-bubble:disabled { cursor: default; }
 
-  .duduq-bp-bubble-shell[data-popped="true"] .duduq-bp-bubble {
-    animation: duduq-bp-pop 420ms cubic-bezier(.18,.76,.22,1) forwards;
-    pointer-events: none;
+  /* ✨ DUDUQ DESIGN SYSTEM: Feedback wrong com shake */
+  @keyframes duduqBubbleWrongEnhanced {
+    0%, 100% { transform: translateX(0) scale(1); }
+    20% { transform: translateX(-8px) scale(0.98); }
+    40% { transform: translateX(8px) scale(0.98); }
+    60% { transform: translateX(-6px) scale(0.98); }
+    80% { transform: translateX(6px) scale(0.98); }
   }
-
-  .duduq-bp-bubble-shell[data-popped="true"] .duduq-bp-bubble {
-    animation: duduq-bp-pop 420ms cubic-bezier(.18,.76,.22,1) forwards;
-    pointer-events: none;
-  }
-
+  
   .duduq-bp-bubble-shell[data-wrong="true"] .duduq-bp-bubble {
     border-color: rgba(255,255,255,.86);
     background:
@@ -9754,8 +9813,9 @@ var DuduQBubblePop = (() => {
       0 14px 24px rgba(183,28,28,.14),
       0 0 0 10px rgba(255,170,170,.26),
       inset 0 2px 0 rgba(255,255,255,.94),
-      inset 0 -8px 16px rgba(238,170,170,.16);
-    animation: duduq-bp-wrong 420ms cubic-bezier(.36,.07,.19,.97) both;
+      inset 0 -8px 16px rgba(238,170,170,.16),
+      0 0 20px rgba(255, 75, 75, 0.25);
+    animation: duduqBubbleWrongEnhanced 420ms cubic-bezier(.36,.07,.19,.97) both;
   }
 
   .duduq-bp-media {

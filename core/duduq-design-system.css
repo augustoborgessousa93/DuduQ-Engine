@@ -1,0 +1,840 @@
+/* =========================================================
+   DUDUQ DESIGN SYSTEM 2025 — VISUAL ENHANCEMENT LAYER
+   Potencialização Visual Unificada para Todo Ecossistema
+   Versão 1.0.0
+   
+   OBJETIVOS:
+   - Elevar qualidade visual mantendo consistência
+   - Melhorar hierarquia e legibilidade
+   - Adicionar profundidade e sofisticação
+   - Manter acessibilidade WCAG AA+
+   - Criar identidade visual coesa entre mecânicas
+   
+   COMPONENTES COBERTOS:
+   - Instruções / Enunciados
+   - Cards de Feedback
+   - Botões e Ações
+   - Elementos Interativos
+   - Progresso e Navegação
+   - Transições e Animações
+   ========================================================= */
+
+:root {
+  /* ===========================================
+     PALETA DE CORES PRINCIPAL
+     =========================================== */
+  
+  /* Azuis DuduQ — Hierarquia completa */
+  --duduq-blue-primary: #0874d8;
+  --duduq-blue-primary-hover: #065fb3;
+  --duduq-blue-primary-active: #044a8f;
+  --duduq-blue-light: #3aa8f5;
+  --duduq-blue-light-soft: #e8f6ff;
+  --duduq-blue-dark: #0054aa;
+  --duduq-blue-deep: #073f7c;
+  --duduq-blue-navy: #1b4866;
+  
+  /* Cores de Estado */
+  --duduq-success: #58cc02;
+  --duduq-success-light: #7ae524;
+  --duduq-success-soft: #e8f8d9;
+  --duduq-error: #ff4b4b;
+  --duduq-error-light: #ff6b6b;
+  --duduq-error-soft: #ffe8e8;
+  --duduq-warning: #ffc928;
+  --duduq-warning-soft: #fff8e8;
+  
+  /* Neutros Sofisticados */
+  --duduq-ink: #153d66;
+  --duduq-text-primary: #1a2b3c;
+  --duduq-text-secondary: #55738e;
+  --duduq-text-muted: #8299ae;
+  --duduq-text-inverse: #ffffff;
+  
+  /* Superfícies */
+  --duduq-surface-white: #ffffff;
+  --duduq-surface-offwhite: #f7fbff;
+  --duduq-surface-cool: #f0f6fa;
+  --duduq-surface-warm: #fffaf5;
+  
+  /* Gradientes Premium */
+  --duduq-gradient-primary: linear-gradient(180deg, #43b3ff 0%, #1592ff 100%);
+  --duduq-gradient-success: linear-gradient(180deg, #7ae524 0%, #58cc02 100%);
+  --duduq-gradient-error: linear-gradient(180deg, #ff6b6b 0%, #ff4b4b 100%);
+  --duduq-gradient-glass: linear-gradient(180deg, rgba(249, 253, 255, .95) 0%, rgba(247, 252, 255, .88) 100%);
+  --duduq-gradient-surface: linear-gradient(180deg, #ffffff 0%, #f5faff 100%);
+  
+  /* Sombras Cinemáticas */
+  --duduq-shadow-xs: 0 1px 2px rgba(22, 58, 88, 0.06);
+  --duduq-shadow-sm: 0 2px 6px rgba(22, 58, 88, 0.08);
+  --duduq-shadow-md: 0 4px 12px rgba(22, 58, 88, 0.10);
+  --duduq-shadow-lg: 0 8px 24px rgba(22, 58, 88, 0.12);
+  --duduq-shadow-xl: 0 12px 40px rgba(22, 58, 88, 0.16);
+  --duduq-shadow-glow: 0 0 24px rgba(58, 168, 245, 0.40);
+  
+  /* Bordas e Divisores */
+  --duduq-border-subtle: rgba(206, 225, 239, 0.80);
+  --duduq-border-default: rgba(186, 210, 230, 0.90);
+  --duduq-border-strong: rgba(138, 168, 198, 0.95);
+  
+  /* ===========================================
+     TIPOGRAFIA
+     =========================================== */
+  
+  --duduq-font-primary: "Nunito", ui-rounded, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --duduq-font-display: "Fredoka", "Nunito", ui-rounded, system-ui, sans-serif;
+  --duduq-font-brand: "Aptos Display", "Segoe UI Variable Display", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  
+  /* Tamanhos Responsivos */
+  --duduq-text-xs: clamp(12px, 1.2vw, 14px);
+  --duduq-text-sm: clamp(14px, 1.4vw, 16px);
+  --duduq-text-base: clamp(16px, 1.6vw, 18px);
+  --duduq-text-lg: clamp(18px, 1.9vw, 22px);
+  --duduq-text-xl: clamp(22px, 2.2vw, 28px);
+  --duduq-text-2xl: clamp(28px, 2.8vw, 36px);
+  --duduq-text-3xl: clamp(36px, 3.6vw, 48px);
+  
+  /* Pesos */
+  --duduq-font-normal: 400;
+  --duduq-font-medium: 600;
+  --duduq-font-semibold: 700;
+  --duduq-font-bold: 800;
+  --duduq-font-extrabold: 900;
+  
+  /* Altura de Linha */
+  --duduq-leading-tight: 1.1;
+  --duduq-leading-normal: 1.45;
+  --duduq-leading-relaxed: 1.6;
+  
+  /* ===========================================
+     ESPAÇAMENTO
+     =========================================== */
+  
+  --duduq-space-1: 4px;
+  --duduq-space-2: 8px;
+  --duduq-space-3: 12px;
+  --duduq-space-4: 16px;
+  --duduq-space-5: 20px;
+  --duduq-space-6: 24px;
+  --duduq-space-8: 32px;
+  --duduq-space-10: 40px;
+  --duduq-space-12: 48px;
+  --duduq-space-16: 64px;
+  
+  /* ===========================================
+     BORDAS E RAIO
+     =========================================== */
+  
+  --duduq-radius-sm: 8px;
+  --duduq-radius-md: 12px;
+  --duduq-radius-lg: 16px;
+  --duduq-radius-xl: 20px;
+  --duduq-radius-2xl: 24px;
+  --duduq-radius-full: 9999px;
+  
+  /* ===========================================
+     TRANSIÇÕES
+     =========================================== */
+  
+  --duduq-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --duduq-transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --duduq-transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --duduq-transition-bounce: 450ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* =========================================================
+   INSTRUÇÕES / ENUNCIADOS — NÍVEL PREMIUM
+   ========================================================= */
+
+.duduq-engine-stage :is(
+  .duduq-dd-instruction,
+  .duduq-udd-instruction,
+  .duduq-bp-instruction,
+  .duduq-mq-instruction,
+  .duduq-matching-instruction,
+  .duduq-fc-instruction,
+  .duduq-cf-instruction,
+  .duduq-ws-instruction,
+  .duduq-ts-instruction,
+  .duduq-ss-instruction
+) {
+  position: relative;
+  width: min(900px, calc(100% - 24px));
+  margin: 0 auto var(--duduq-space-4);
+  padding: var(--duduq-space-5) var(--duduq-space-6);
+  
+  border: 2px solid var(--duduq-border-subtle);
+  border-radius: var(--duduq-radius-2xl);
+  
+  background: var(--duduq-gradient-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  box-shadow: 
+    0 2px 0 rgba(255, 255, 255, 0.90) inset,
+    var(--duduq-shadow-md),
+    0 0 0 1px rgba(255, 255, 255, 0.40) inset;
+  
+  transition: all var(--duduq-transition-base);
+}
+
+/* Efeito hover sutil nas instruções */
+.duduq-engine-stage :is(
+  .duduq-dd-instruction,
+  .duduq-udd-instruction,
+  .duduq-bp-instruction,
+  .duduq-mq-instruction,
+  .duduq-matching-instruction,
+  .duduq-fc-instruction,
+  .duduq-cf-instruction,
+  .duduq-ws-instruction,
+  .duduq-ts-instruction,
+  .duduq-ss-instruction
+):has(.duduq-audio-button:hover) {
+  border-color: var(--duduq-blue-light);
+  box-shadow: 
+    0 2px 0 rgba(255, 255, 255, 0.90) inset,
+    var(--duduq-shadow-lg),
+    0 0 0 1px rgba(58, 168, 245, 0.20) inset,
+    var(--duduq-shadow-glow);
+}
+
+/* Títulos das Instruções */
+.duduq-engine-stage :is(
+  .duduq-dd-instruction h2,
+  .duduq-udd-instruction h2,
+  .duduq-bp-instruction h2,
+  .duduq-mq-instruction h2,
+  .duduq-matching-instruction h2,
+  .duduq-fc-instruction h2,
+  .duduq-cf-instruction h2,
+  .duduq-ws-instruction h2,
+  .duduq-ts-instruction h2,
+  .duduq-ss-instruction h2
+) {
+  margin: 0;
+  padding: 0;
+  
+  color: var(--duduq-text-primary);
+  font-family: var(--duduq-font-display);
+  font-size: var(--duduq-text-xl);
+  font-weight: var(--duduq-font-extrabold);
+  line-height: var(--duduq-leading-tight);
+  letter-spacing: -0.02em;
+  
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.80);
+}
+
+/* Perfil de Alfabetização — CAIXA ALTA */
+html[data-duduq-literacy-early="true"] .duduq-engine-stage :is(
+  .duduq-dd-instruction h2,
+  .duduq-udd-instruction h2,
+  .duduq-bp-instruction h2,
+  .duduq-mq-instruction h2,
+  .duduq-matching-instruction h2,
+  .duduq-fc-instruction h2,
+  .duduq-cf-instruction h2,
+  .duduq-ws-instruction h2,
+  .duduq-ts-instruction h2,
+  .duduq-ss-instruction h2
+) {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: var(--duduq-text-lg);
+}
+
+/* Botão de Áudio — Redesign Premium */
+.duduq-audio-button,
+.duduq-engine-audio-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--duduq-space-2);
+  
+  min-width: 44px;
+  height: 44px;
+  padding: 0 var(--duduq-space-4);
+  
+  border: 2px solid var(--duduq-border-default);
+  border-radius: var(--duduq-radius-full);
+  
+  background: linear-gradient(180deg, #ffffff 0%, #f0f8ff 100%);
+  color: var(--duduq-blue-primary);
+  
+  font-family: var(--duduq-font-primary);
+  font-size: var(--duduq-text-sm);
+  font-weight: var(--duduq-font-semibold);
+  
+  cursor: pointer;
+  user-select: none;
+  
+  box-shadow: 
+    0 2px 0 rgba(255, 255, 255, 0.95) inset,
+    0 2px 4px rgba(22, 58, 88, 0.08),
+    0 1px 0 rgba(22, 58, 88, 0.04);
+  
+  transition: all var(--duduq-transition-fast);
+}
+
+.duduq-audio-button:hover,
+.duduq-engine-audio-button:hover {
+  border-color: var(--duduq-blue-primary);
+  background: linear-gradient(180deg, #f0f8ff 0%, #e0f0ff 100%);
+  color: var(--duduq-blue-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 
+    0 2px 0 rgba(255, 255, 255, 0.95) inset,
+    0 4px 8px rgba(22, 58, 88, 0.12),
+    0 2px 0 rgba(22, 58, 88, 0.06);
+}
+
+.duduq-audio-button:active,
+.duduq-engine-audio-button:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 1px 2px rgba(22, 58, 88, 0.08);
+}
+
+/* Ícone de áudio animado */
+.duduq-audio-button svg,
+.duduq-engine-audio-button svg {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--duduq-transition-fast);
+}
+
+.duduq-audio-button:hover svg,
+.duduq-engine-audio-button:hover svg {
+  transform: scale(1.1);
+}
+
+/* Ondas sonoras animadas durante playback */
+.duduq-audio-button[data-playing="true"] svg,
+.duduq-engine-audio-button[data-playing="true"] svg {
+  animation: duduqAudioPulse 600ms ease-in-out infinite;
+}
+
+@keyframes duduqAudioPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* =========================================================
+   CARDS DE FEEDBACK — EXPERIÊNCIA AAA+
+   ========================================================= */
+
+.duduq-engine-feedback-card {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  min-height: 96px;
+  max-height: 120px;
+  margin: 0 auto !important;
+  padding: var(--duduq-space-4) var(--duduq-space-5) !important;
+  gap: var(--duduq-space-3) var(--duduq-space-4) !important;
+  
+  border: 2px solid transparent;
+  border-radius: var(--duduq-radius-2xl) !important;
+  
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  
+  font-family: var(--duduq-font-primary);
+  font-size: var(--duduq-text-base);
+  font-weight: var(--duduq-font-semibold);
+  line-height: var(--duduq-leading-normal);
+  
+  transition: all var(--duduq-transition-bounce);
+  
+  overflow: hidden;
+}
+
+/* Feedback de Sucesso */
+.duduq-engine-feedback-card[data-state="success"] {
+  border-color: var(--duduq-success);
+  background: linear-gradient(180deg, var(--duduq-success-soft) 0%, rgba(232, 248, 217, 0.90) 100%);
+  color: var(--duduq-text-primary);
+  
+  box-shadow: 
+    0 2px 0 rgba(255, 255, 255, 0.80) inset,
+    0 4px 12px rgba(88, 204, 2, 0.20),
+    0 0 0 1px rgba(88, 204, 2, 0.15) inset;
+  
+  animation: duduqFeedbackSuccess 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Feedback de Erro/Tentativa */
+.duduq-engine-feedback-card[data-state="retry"] {
+  border-color: var(--duduq-error);
+  background: linear-gradient(180deg, var(--duduq-error-soft) 0%, rgba(255, 232, 232, 0.90) 100%);
+  color: var(--duduq-text-primary);
+  
+  box-shadow: 
+    0 2px 0 rgba(255, 255, 255, 0.80) inset,
+    0 4px 12px rgba(255, 75, 75, 0.20),
+    0 0 0 1px rgba(255, 75, 75, 0.15) inset;
+  
+  animation: duduqFeedbackRetry 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Mascote no Feedback */
+.duduq-engine-feedback-mascot,
+.duduq-mascot[data-size="feedback"] {
+  width: 72px !important;
+  height: 72px !important;
+  flex: 0 0 72px !important;
+  
+  border-radius: var(--duduq-radius-xl);
+  box-shadow: var(--duduq-shadow-md);
+  
+  transition: transform var(--duduq-transition-bounce);
+}
+
+.duduq-engine-feedback-card[data-state="success"] .duduq-engine-feedback-mascot {
+  animation: duduqMascotCelebrate 600ms ease-out;
+}
+
+.duduq-engine-feedback-card[data-state="retry"] .duduq-engine-feedback-mascot {
+  animation: duduqMascotEncourage 600ms ease-out;
+}
+
+@keyframes duduqFeedbackSuccess {
+  0% { 
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes duduqFeedbackRetry {
+  0% { 
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes duduqMascotCelebrate {
+  0% { transform: scale(0.8) rotate(-10deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes duduqMascotEncourage {
+  0% { transform: scale(0.8) translateY(-10px); }
+  50% { transform: scale(1.05) translateY(5px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+/* =========================================================
+   BOTÕES DE AÇÃO — ESTILO DUOLINGO PREMIUM
+   ========================================================= */
+
+.duduq-engine-action-button,
+.duduq-dd-action-button,
+.duduq-primary-action {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--duduq-space-2);
+  
+  min-width: 160px;
+  min-height: 52px;
+  padding: var(--duduq-space-3) var(--duduq-space-6);
+  
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  border-radius: var(--duduq-radius-xl);
+  
+  background: var(--duduq-gradient-primary);
+  color: var(--duduq-text-inverse);
+  
+  font-family: var(--duduq-font-display);
+  font-size: var(--duduq-text-lg);
+  font-weight: var(--duduq-font-extrabold);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  
+  cursor: pointer;
+  user-select: none;
+  
+  box-shadow: 
+    0 3px 0 rgba(0, 0, 0, 0.20),
+    0 4px 8px rgba(22, 58, 88, 0.15),
+    0 2px 0 rgba(255, 255, 255, 0.30) inset;
+  
+  transition: all var(--duduq-transition-fast);
+  
+  overflow: visible;
+}
+
+.duduq-engine-action-button:hover,
+.duduq-dd-action-button:hover,
+.duduq-primary-action:hover {
+  filter: brightness(1.05);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 5px 0 rgba(0, 0, 0, 0.20),
+    0 6px 12px rgba(22, 58, 88, 0.20),
+    0 2px 0 rgba(255, 255, 255, 0.30) inset;
+}
+
+.duduq-engine-action-button:active,
+.duduq-dd-action-button:active,
+.duduq-primary-action:active {
+  transform: translateY(2px);
+  box-shadow: 
+    0 1px 0 rgba(0, 0, 0, 0.20),
+    0 2px 4px rgba(22, 58, 88, 0.10),
+    0 1px 0 rgba(255, 255, 255, 0.30) inset;
+}
+
+/* Botão Desabilitado */
+.duduq-engine-action-button:disabled,
+.duduq-dd-action-button:disabled,
+.duduq-primary-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 
+    0 2px 0 rgba(0, 0, 0, 0.10),
+    0 2px 4px rgba(22, 58, 88, 0.08);
+}
+
+/* Botão Secundário */
+.duduq-secondary-action {
+  background: linear-gradient(180deg, #ffffff 0%, #f0f6fa 100%);
+  color: var(--duduq-blue-primary);
+  border: 2px solid var(--duduq-border-default);
+  box-shadow: 
+    0 2px 0 rgba(255, 255, 255, 0.95) inset,
+    0 2px 4px rgba(22, 58, 88, 0.08);
+}
+
+.duduq-secondary-action:hover {
+  background: linear-gradient(180deg, #f0f8ff 0%, #e0f0ff 100%);
+  border-color: var(--duduq-blue-primary);
+}
+
+/* =========================================================
+   ELEMENTOS INTERATIVOS — CARDS, BOLHAS, ITENS
+   ========================================================= */
+
+/* Cards Arrastáveis (Drag & Drop) */
+.duduq-dd-item,
+.duduq-dd-pool-item,
+.duduq-matching-item {
+  position: relative;
+  
+  border: 2px solid var(--duduq-border-default);
+  border-radius: var(--duduq-radius-xl);
+  
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  
+  box-shadow: 
+    0 2px 0 rgba(255, 255, 255, 0.90) inset,
+    0 3px 8px rgba(22, 58, 88, 0.10),
+    0 1px 0 rgba(22, 58, 88, 0.04);
+  
+  cursor: grab;
+  user-select: none;
+  
+  transition: all var(--duduq-transition-fast);
+}
+
+.duduq-dd-item:hover,
+.duduq-dd-pool-item:hover,
+.duduq-matching-item:hover {
+  border-color: var(--duduq-blue-light);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 2px 0 rgba(255, 255, 255, 0.90) inset,
+    0 6px 16px rgba(22, 58, 88, 0.14),
+    0 0 0 1px rgba(58, 168, 245, 0.15) inset;
+}
+
+.duduq-dd-item:active,
+.duduq-dd-pool-item:active,
+.duduq-matching-item:active {
+  cursor: grabbing;
+  transform: scale(0.98);
+}
+
+/* Item Correto */
+.duduq-dd-item[data-feedback="correct"],
+.duduq-matching-item[data-feedback="correct"] {
+  border-color: var(--duduq-success);
+  background: linear-gradient(180deg, var(--duduq-success-soft) 0%, rgba(232, 248, 217, 0.80) 100%);
+  box-shadow: 
+    0 2px 0 rgba(255, 255, 255, 0.80) inset,
+    0 2px 8px rgba(88, 204, 2, 0.15);
+}
+
+/* Item Incorreto */
+.duduq-dd-item[data-feedback="retry"],
+.duduq-matching-item[data-feedback="retry"] {
+  border-color: var(--duduq-error);
+  background: linear-gradient(180deg, var(--duduq-error-soft) 0%, rgba(255, 232, 232, 0.80) 100%);
+  animation: duduqShake 400ms ease-in-out;
+}
+
+@keyframes duduqShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+/* Bolhas Bubble Pop */
+.duduq-bp-bubble {
+  position: relative;
+  
+  border: 3px solid rgba(255, 255, 255, 0.90);
+  border-radius: 50%;
+  
+  box-shadow: 
+    inset 0 -8px 16px rgba(0, 0, 0, 0.10),
+    inset 0 8px 16px rgba(255, 255, 255, 0.40),
+    0 4px 12px rgba(22, 58, 88, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.50) inset;
+  
+  cursor: pointer;
+  transition: all var(--duduq-transition-fast);
+}
+
+.duduq-bp-bubble:hover {
+  transform: scale(1.08);
+  box-shadow: 
+    inset 0 -8px 16px rgba(0, 0, 0, 0.10),
+    inset 0 8px 16px rgba(255, 255, 255, 0.40),
+    0 8px 20px rgba(22, 58, 88, 0.20),
+    0 0 0 1px rgba(255, 255, 255, 0.60) inset,
+    var(--duduq-shadow-glow);
+}
+
+.duduq-bp-bubble:active {
+  transform: scale(0.95);
+}
+
+/* Estouro de bolha */
+.duduq-bp-bubble[data-popped="true"] {
+  animation: duduqBubblePop 300ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes duduqBubblePop {
+  0% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% { 
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   BARRA DE PROGRESSO — ESTILO DUOLINGO
+   ========================================================= */
+
+.duduq-progress-track {
+  position: relative;
+  overflow: hidden !important;
+  min-height: 18px !important;
+  height: 18px !important;
+  border-radius: var(--duduq-radius-full) !important;
+  
+  background: linear-gradient(180deg, #e6eef6 0%, #dce6f0 100%) !important;
+  
+  border: none !important;
+  
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.95) inset !important;
+}
+
+.duduq-progress-fill {
+  position: relative;
+  border-radius: inherit !important;
+  
+  background: var(--duduq-gradient-primary) !important;
+  
+  box-shadow: 
+    inset 0 2px 0 rgba(255, 255, 255, 0.35),
+    0 2px 4px rgba(8, 116, 216, 0.20) !important;
+}
+
+.duduq-progress-fill::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  top: 1px;
+  height: 40%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.15) 100%);
+}
+
+.duduq-progress-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  
+  background: linear-gradient(
+    115deg,
+    transparent 18%,
+    rgba(255, 255, 255, 0.12) 32%,
+    rgba(255, 255, 255, 0.45) 46%,
+    rgba(255, 255, 255, 0.18) 58%,
+    transparent 72%
+  );
+  
+  background-size: 180% 100%;
+  animation: duduqProgressShine 2.2s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes duduqProgressShine {
+  0% { background-position: 140% 0; }
+  100% { background-position: -40% 0; }
+}
+
+/* Contador de Progresso */
+.duduq-progress-copy strong {
+  color: var(--duduq-text-primary) !important;
+  font-family: var(--duduq-font-display) !important;
+  font-size: clamp(14px, 1.6vw, 18px) !important;
+  font-weight: var(--duduq-font-extrabold) !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* =========================================================
+   CABEÇALHO E NAVEGAÇÃO
+   ========================================================= */
+
+.duduq-engine-heading {
+  text-align: center;
+  margin-bottom: var(--duduq-space-4);
+}
+
+.duduq-engine-heading h1 {
+  margin: 0;
+  padding: 0;
+  
+  color: var(--duduq-text-primary);
+  font-family: var(--duduq-font-display);
+  font-size: var(--duduq-text-2xl);
+  font-weight: var(--duduq-font-extrabold);
+  line-height: var(--duduq-leading-tight);
+  letter-spacing: -0.02em;
+  
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.80);
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 640px) {
+  :root {
+    --duduq-space-4: 12px;
+    --duduq-space-5: 16px;
+    --duduq-space-6: 20px;
+  }
+  
+  .duduq-engine-stage :is(
+    .duduq-dd-instruction,
+    .duduq-udd-instruction,
+    .duduq-bp-instruction,
+    .duduq-mq-instruction,
+    .duduq-matching-instruction,
+    .duduq-fc-instruction,
+    .duduq-cf-instruction,
+    .duduq-ws-instruction,
+    .duduq-ts-instruction,
+    .duduq-ss-instruction
+  ) {
+    width: calc(100% - 16px);
+    padding: var(--duduq-space-4) var(--duduq-space-4);
+  }
+  
+  .duduq-engine-stage :is(
+    .duduq-dd-instruction h2,
+    .duduq-udd-instruction h2,
+    .duduq-bp-instruction h2,
+    .duduq-mq-instruction h2,
+    .duduq-matching-instruction h2,
+    .duduq-fc-instruction h2,
+    .duduq-cf-instruction h2,
+    .duduq-ws-instruction h2,
+    .duduq-ts-instruction h2,
+    .duduq-ss-instruction h2
+  ) {
+    font-size: var(--duduq-text-lg);
+  }
+  
+  .duduq-engine-feedback-card {
+    min-height: 84px;
+    max-height: 104px;
+    padding: var(--duduq-space-3) var(--duduq-space-4) !important;
+  }
+  
+  .duduq-engine-feedback-mascot,
+  .duduq-mascot[data-size="feedback"] {
+    width: 56px !important;
+    height: 56px !important;
+    flex: 0 0 56px !important;
+  }
+  
+  .duduq-engine-action-button,
+  .duduq-dd-action-button,
+  .duduq-primary-action {
+    min-width: 140px;
+    min-height: 48px;
+    font-size: var(--duduq-text-base);
+  }
+}
+
+/* =========================================================
+   ACESSIBILIDADE — REDUÇÃO DE MOVIMENTO
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .duduq-progress-fill::after {
+    animation: none;
+  }
+}
+
+/* =========================================================
+   MODO ESCURO (FUTURO)
+   ========================================================= */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* A definir quando implementar modo escuro completo */
+  }
+}

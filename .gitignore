@@ -1,0 +1,9 @@
+```
+# Logs and temp files
+*.log
+server.log
+
+# Temp files
+*.tmp
+*.swp
+```
