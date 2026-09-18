@@ -19,7 +19,7 @@ Run `npm run duduq:resume` in a normal terminal, then continue from `.duduq/TASK
 PENPOT_SYNC_REQUIRED: live API/export is unavailable; human browser review remains authority.
 
 ## Branch / commit
-duduq-autopilot-2026-09-18 / 761127dddaed830ea4f77a0fa292b505577f0a37
+duduq-autopilot-2026-09-18 / 739102c (continuity metadata anchor)
 
 ## Remote
 https://github.com/augustoborgessousa93/DuduQ-Engine.git (SYNCED)
