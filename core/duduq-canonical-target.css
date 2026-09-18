@@ -1,0 +1,3 @@
+/* Canonical Target state material. Arena placement/content stays mechanic-owned. */
+.duduq-canonical-target-select { border-radius: var(--duduq-radius-target); }
+.duduq-canonical-target.is-selected .duduq-canonical-target-select { box-shadow: var(--duduq-shadow-target); }

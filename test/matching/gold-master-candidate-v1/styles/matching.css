@@ -1,0 +1,133 @@
+.matching-playfield { position: relative; display: grid; grid-template-columns: minmax(0, 320fr) minmax(150px, 310fr) minmax(0, 320fr); width: min(950px, calc(100% - 32px)); margin: calc(30px * var(--ui-scale)) auto 0; }
+.matching-column { position: relative; z-index: 1; min-width: 0; }
+.column-heading { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; clip-path: inset(50%); }
+.card-list { display: grid; grid-template-rows: repeat(4, calc(82px * var(--ui-scale))); gap: calc(16px * var(--ui-scale)); }
+.matching-card { position: relative; display: grid; grid-template-columns: 28px minmax(0,1fr) 28px; align-items: center; min-width: 0; width: 100%; height: 100%; padding: 0 16px; border: 1px solid rgba(214,196,154,.92); border-radius: var(--duduq-radius-card); color: var(--duduq-text); background: linear-gradient(180deg,rgba(255,254,249,.98),rgba(255,250,239,.97)); box-shadow: 0 5px 0 rgba(98,85,55,.31), 0 10px 18px rgba(34,56,41,.12), inset 0 1px 0 rgba(255,255,255,.96); transition: border-color var(--duduq-motion-ui), box-shadow var(--duduq-motion-ui), transform var(--duduq-motion-ui); }
+.matching-card::before { content: ""; position: absolute; top: 5px; left: 14px; right: 14px; height: 3px; border-radius: 99px; background: linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent); pointer-events: none; }
+.matching-card:hover { box-shadow: 0 6px 0 rgba(98,85,55,.27), 0 10px 19px rgba(34,56,41,.15), inset 0 1px 0 #fff; }
+.matching-card:active { filter: brightness(.985); }
+.matching-card:focus-visible { z-index: 4; outline: 3px solid #ffdc73; outline-offset: 2px; }
+.matching-card[data-kind="word"] { cursor: pointer; }
+.matching-card[data-kind="image"] { cursor: pointer; }
+.matching-card[data-state="selected"] { border-color: #6ac4ef; background: linear-gradient(180deg,#f7fdff,#edf8ff); box-shadow: 0 5px 0 #62b7df, 0 0 0 2px rgba(51,171,225,.17), 0 10px 18px rgba(34,56,41,.13), inset 0 1px 0 #fff; }
+.matching-card[data-state="connected"] { border-color: #5ca9d2; background: linear-gradient(180deg,#f8fdff,#eef8fc); box-shadow: 0 5px 0 #78bad8, 0 8px 16px rgba(34,56,41,.12), inset 0 1px 0 #fff; }
+.matching-card[data-state="correct"] { border-color: #55c488; background: linear-gradient(180deg,#f5fff8,#ebf9ef); box-shadow: 0 5px 0 #46ae72, 0 8px 18px rgba(34,56,41,.12), inset 0 1px 0 #fff; animation: match-correct var(--motion-feedback) var(--ease-game) both; }
+.matching-card[data-state="incorrect"] { border-color: #ef8b7f; background: linear-gradient(180deg,#fff9f7,#fff0ec); box-shadow: 0 5px 0 #d97d72, 0 8px 16px rgba(34,56,41,.12), inset 0 1px 0 #fff; animation: match-incorrect var(--motion-feedback) var(--ease-game) both; }
+.matching-card-status { position: absolute; z-index: 5; top: 50%; right: 13px; display: none; place-items: center; width: 27px; height: 27px; transform: translateY(-50%); border: 2px solid rgba(255,255,255,.96); border-radius: 50%; color: #fff; box-shadow: 0 3px 0 rgba(39,82,53,.28), 0 5px 9px rgba(34,56,41,.13), inset 0 1px 0 rgba(255,255,255,.72); }
+.matching-card-status::before { font: 900 15px/1 var(--duduq-font-body); }
+.matching-card[data-state="correct"] .matching-card-status { display: grid; background: linear-gradient(180deg,#74dd9a,#35a961 76%,#2b9652); }
+.matching-card[data-state="correct"] .matching-card-status::before { content: "✓"; }
+.matching-card[data-state="incorrect"] .matching-card-status { display: grid; background: linear-gradient(180deg,#f7ad9d,#df7168 76%,#c95e58); box-shadow: 0 2px 0 rgba(123,61,56,.28), inset 0 1px 0 rgba(255,255,255,.64); }
+.matching-card[data-state="incorrect"] .matching-card-status::before { content: "×"; font-size: 19px; }
+.matching-card[aria-disabled="true"] { cursor: default; }
+.matching-card:disabled[data-state="idle"] { cursor: not-allowed; filter: saturate(.7); }
+.matching-word { grid-column: 2; margin: 0; font: 900 calc(28px * var(--ui-scale))/1.05 var(--duduq-font-body); letter-spacing: -.2px; text-align: center; text-transform: uppercase; }
+.matching-image { grid-column: 2; justify-self: center; display: block; width: calc(70px * var(--ui-scale)); height: calc(70px * var(--ui-scale)); object-fit: contain; filter: drop-shadow(0 2px 1px rgba(88,68,40,.12)); }
+.matching-image[data-load="error"] { width: 0; height: 0; }
+.matching-port { position: absolute; z-index: 3; top: 50%; display: grid; place-items: center; width: 22px; height: 22px; padding: 0; transform: translateY(-50%); border: 2px solid #5ab0dd; border-radius: 50%; background: linear-gradient(#fff,#e8f7ff); box-shadow: 0 1px 4px rgba(22,85,111,.25), inset 0 1px 0 white; transition: border-color var(--motion-fast) var(--ease-ui), box-shadow var(--motion-fast) var(--ease-ui), background var(--motion-fast) var(--ease-ui); }
+.matching-port::before { content: ""; position: absolute; inset: -3px; border: 1.5px solid rgba(103,204,246,.8); border-radius: inherit; opacity: 0; transform: scale(.72); pointer-events: none; }
+.matching-column-words .matching-port { right: -11px; }
+.matching-column-images .matching-port { left: -11px; }
+/* O badge fica sempre no lado externo do card: distante do conector central. */
+.matching-column-words .matching-card-status { right: auto; left: 13px; }
+.matching-column-images .matching-card-status { right: 13px; left: auto; }
+.matching-port::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #70c2e8; box-shadow: 0 0 0 1px rgba(39,134,180,.13), 0 0 5px rgba(55,174,224,.32); transition: background var(--motion-fast) var(--ease-ui), box-shadow var(--motion-fast) var(--ease-ui); }
+.matching-card[data-state="selected"] .matching-port { border-color: #238fc8; background: linear-gradient(180deg,#faffff,#d8f3ff); box-shadow: 0 0 0 2px rgba(70,188,235,.17), 0 0 9px rgba(53,174,224,.3), inset 0 1px 0 #fff; }
+.matching-card[data-state="selected"] .matching-port::before { animation: connector-anchor-pulse var(--motion-node-pulse) var(--ease-game) both; }
+.matching-card[data-state="selected"] .matching-port::after { background: #35a9df; box-shadow: 0 0 0 1px rgba(39,134,180,.18), 0 0 8px rgba(44,174,229,.72); }
+.matching-card[data-state="connected"] .matching-port { border-color: #2b9ccc; background: radial-gradient(circle at 32% 26%,#fff 0 18%,#e4f9ff 40%,#c6edfb 100%); box-shadow: 0 0 0 2px rgba(67,186,227,.2), 0 0 10px rgba(45,166,216,.34), inset 0 1px 0 #fff; }
+.matching-card[data-state="connected"] .matching-port::before { border-color: rgba(111,217,255,.8); opacity: .78; transform: scale(1); }
+.matching-card[data-state="connected"] .matching-port::after { background: #37aee0; box-shadow: 0 0 0 1px rgba(39,134,180,.2), 0 0 8px rgba(44,174,229,.76); }
+.matching-card[data-state="correct"] .matching-port { border-color: #38ad70; background: radial-gradient(circle at 32% 26%,#fff 0 18%,#e8fff0 42%,#c9f5d9 100%); box-shadow: 0 0 0 2px rgba(64,190,120,.17), 0 0 10px rgba(47,173,106,.3), inset 0 1px 0 #fff; }
+.matching-card[data-state="correct"] .matching-port::before { border-color: rgba(121,231,165,.84); opacity: .78; transform: scale(1); }
+.matching-card[data-state="correct"] .matching-port::after { background: #36b96d; box-shadow: 0 0 0 1px rgba(39,134,82,.2), 0 0 8px rgba(55,191,114,.72); }
+.matching-card[data-state="incorrect"] .matching-port { border-color: #d97c72; background: radial-gradient(circle at 32% 26%,#fff 0 18%,#fff2ef 42%,#f9d9d3 100%); box-shadow: 0 0 0 2px rgba(226,123,111,.16), 0 0 9px rgba(211,105,94,.28), inset 0 1px 0 #fff; }
+.matching-card[data-state="incorrect"] .matching-port::before { border-color: rgba(247,169,154,.82); opacity: .72; transform: scale(1); }
+.matching-card[data-state="incorrect"] .matching-port::after { background: #df756d; box-shadow: 0 0 0 1px rgba(160,77,71,.18), 0 0 7px rgba(223,117,109,.68); }
+.connection-layer { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.matching-playfield { --connector-width: 8px; --connector-core-width: 3px; --connector-thread-width: 1.15px; --connector-glow-width: 16px; --connector-node-radius: 8.5px; }
+.matching-connection { color: var(--connector-blue); --connector-core: #b9f4ff; --connector-thread: rgba(255,255,255,.96); }
+.matching-connection.is-correct { color: var(--connector-correct); --connector-core: #c6ffda; --connector-thread: rgba(249,255,251,.98); }
+.matching-connection.is-incorrect { color: var(--connector-incorrect); --connector-core: #ffe1dc; --connector-thread: rgba(255,250,248,.98); }
+.connection-shadow, .connection-glow, .connection-cable-shadow, .connection-cable, .connection-core, .connection-thread { fill: none; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.connection-shadow { stroke: rgba(15,61,79,.2); stroke-width: calc(var(--connector-width) + 6px); transform: translateY(2px); }
+.connection-glow { stroke: currentColor; stroke-width: var(--connector-glow-width); opacity: .14; filter: blur(3px); }
+.connection-cable-shadow { stroke: var(--connector-blue-deep); stroke-width: calc(var(--connector-width) + 2.5px); opacity: .58; transform: translateY(1px); }
+.is-correct .connection-cable-shadow { stroke: #258b56; }
+.is-incorrect .connection-cable-shadow { stroke: #ab5a55; }
+.connection-cable { stroke: currentColor; stroke-width: var(--connector-width); }
+.connection-core { stroke: var(--connector-core); stroke-width: var(--connector-core-width); opacity: .88; }
+.connection-thread { stroke: var(--connector-thread); stroke-width: var(--connector-thread-width); stroke-dasharray: 5 7; stroke-dashoffset: 0; opacity: .94; animation: connector-energy-flow var(--motion-energy-flow) linear infinite; }
+.is-connecting .connection-cable { stroke-dasharray: 1; stroke-dashoffset: 1; animation: connector-draw var(--motion-connector-draw) var(--ease-game) forwards; }
+.is-correct .connection-cable { animation: connector-confirm var(--motion-connector-status) var(--ease-game) both; }
+.is-incorrect .connection-cable { animation: connector-gentle-error var(--motion-connector-status) var(--ease-game) both; }
+.connection-node-shadow { fill: rgba(27,65,72,.2); transform: translateY(2px); }
+.connection-node { fill: #f4fcff; stroke: currentColor; stroke-width: 2.6; vector-effect: non-scaling-stroke; r: var(--connector-node-radius); }
+.connection-node-ring { fill: none; stroke: var(--connector-core); stroke-width: 1.5; opacity: .96; vector-effect: non-scaling-stroke; }
+.connection-node-core { fill: currentColor; stroke: rgba(255,255,255,.68); stroke-width: .8; vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center; animation: connector-node-arrive 260ms var(--ease-game) both; }
+.connection-node-core[data-node="target"] { animation-delay: 170ms; }
+.connection-node-highlight { fill: #fff; opacity: .9; pointer-events: none; }
+.is-correct .connection-node-core { animation-name: connector-node-success; }
+.is-incorrect .connection-node-core { animation-name: connector-node-error; }
+.connection-gutter { min-width: 0; }
+
+@keyframes connector-energy-flow { to { stroke-dashoffset: -18; } }
+@keyframes connector-draw { to { stroke-dashoffset: 0; } }
+@keyframes connector-anchor-pulse { 0% { opacity: .92; transform: scale(.72); } 100% { opacity: 0; transform: scale(1.42); } }
+@keyframes connector-node-arrive { 0% { opacity: .45; transform: scale(.56); } 65% { opacity: 1; transform: scale(1.18); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes connector-node-success { 0% { transform: scale(1); } 45% { transform: scale(1.35); } 100% { transform: scale(1); } }
+@keyframes connector-node-error { 0%,100% { transform: scale(1); } 45% { transform: scale(1.18); } }
+@keyframes connector-confirm { 0% { stroke-width: var(--connector-width); } 45% { stroke-width: calc(var(--connector-width) + 2px); } 100% { stroke-width: var(--connector-width); } }
+@keyframes connector-gentle-error { 0%,100% { opacity: 1; } 35% { opacity: .78; } 70% { opacity: 1; } }
+@keyframes match-correct { 0% { transform: scale(1); } 48% { transform: scale(1.025); } 100% { transform: scale(1); } }
+@keyframes match-incorrect { 0%,100% { transform: translateX(0); } 30% { transform: translateX(-3px); } 70% { transform: translateX(3px); } }
+
+@container game (max-width: 900px) {
+  .matching-playfield { --connector-width: 7px; --connector-core-width: 2.6px; --connector-thread-width: 1px; --connector-glow-width: 14px; --connector-node-radius: 7.5px; }
+  .matching-playfield { grid-template-columns: minmax(0, 1fr) minmax(42px, .28fr) minmax(0, 1fr); width: calc(100% - 20px); margin-top: 17px; }
+  .card-list { grid-template-rows: repeat(4, minmax(40px, 1fr)); gap: clamp(7px, 1.25cqh, 13px); }
+  .matching-card { padding-inline: 6px; border-radius: 14px; grid-template-columns: 18px minmax(0,1fr) 18px; box-shadow: 0 3px 0 rgba(98,85,55,.30), 0 5px 10px rgba(34,56,41,.10), inset 0 1px 0 #fff; }
+  .matching-card::before { top: 3px; left: 8px; right: 8px; height: 2px; }
+  .matching-word { font-size: clamp(13px, 2.5cqi, 20px); }
+  .matching-image { width: clamp(34px, 8cqh, 52px); height: clamp(34px, 8cqh, 52px); }
+  .matching-port { width: 17px; height: 17px; border-width: 1.5px; }
+  .matching-port::after { width: 6px; height: 6px; }
+  .matching-column-words .matching-port { right: -8px; }
+  .matching-column-images .matching-port { left: -8px; }
+}
+
+@container game (max-width: 520px) {
+  .matching-playfield { --connector-width: 6px; --connector-core-width: 2.2px; --connector-thread-width: .95px; --connector-glow-width: 12px; --connector-node-radius: 6px; }
+  .matching-playfield { grid-template-columns: minmax(0,1fr) 18px minmax(0,1fr); width: calc(100% - 4px); margin-top: 13px; }
+  .card-list { grid-template-rows: repeat(4, clamp(43px, 7.2cqh, 61px)); gap: clamp(8px, 1.2cqh, 12px); }
+  .matching-card { grid-template-columns: 11px minmax(0,1fr) 11px; padding: 0 4px; border-radius: 12px; }
+  .matching-word { font-size: clamp(13px, 3.6cqi, 17px); }
+  .matching-image { width: clamp(35px, 7cqh, 50px); height: clamp(35px, 7cqh, 50px); }
+  .matching-port { width: 13px; height: 13px; border-width: 1px; }
+  .matching-port::after { width: 5px; height: 5px; }
+  .matching-column-words .matching-port { right: -6px; }
+  .matching-column-images .matching-port { left: -6px; }
+}
+
+@container game (max-height: 420px) {
+  .matching-playfield { margin-top: 5px; }
+  .card-list { grid-template-rows: repeat(4, 44px); gap: 6px; }
+  .matching-word { font-size: clamp(12px, 2.1cqi, 18px); }
+  .matching-image { width: clamp(32px, 8cqh, 44px); height: clamp(32px, 8cqh, 44px); }
+}
+
+@container game (max-width: 520px) and (max-height: 420px) {
+  .matching-playfield { margin-top: 0; }
+  .card-list { grid-template-rows: repeat(4, 44px); gap: 0; }
+  .matching-card { min-height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .connection-thread,
+  .connection-node-core,
+  .matching-card[data-state="selected"] .matching-port::before,
+  .is-correct .connection-cable,
+  .is-incorrect .connection-cable { animation: none; }
+  .connection-thread { stroke-dashoffset: 0; }
+  .is-connecting .connection-cable { animation: none; stroke-dasharray: none; stroke-dashoffset: 0; }
+}

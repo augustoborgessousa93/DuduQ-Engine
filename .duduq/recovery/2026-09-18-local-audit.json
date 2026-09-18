@@ -1,0 +1,16 @@
+{
+  "createdAt": "2026-09-18T22:43:00Z",
+  "workspace": "C:/Users/augus/Downloads/workspace",
+  "repository": "augustoborgessousa93/DuduQ-Engine",
+  "gitExecutable": false,
+  "branch": "UNKNOWN",
+  "head": "UNKNOWN",
+  "remote": "UNKNOWN",
+  "synchronization": "NOT_ATTEMPTED",
+  "reason": "Git is not installed/configured in this environment; local files were preserved and no remote overwrite was attempted.",
+  "penpot": {
+    "fileId": "d8ac01df-6646-81d2-8008-a2900d806e30",
+    "controlPanelPageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
+    "status": "PENPOT_SYNC_REQUIRED"
+  }
+}

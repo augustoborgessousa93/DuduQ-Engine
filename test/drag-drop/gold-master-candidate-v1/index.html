@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>DuduQ Drag &amp; Drop — Gold Master Candidate</title>
+  <link rel="stylesheet" href="../../../core/duduq-canonical-header-hud.css">
+  <link rel="stylesheet" href="../../../core/duduq-canonical-question-hud.css">
+  <style>html,body,#root{width:100%;height:100%;margin:0}body{overflow:hidden;background:#eef6fb}</style>
+</head>
+<body>
+  <div id="root">Preparando Drag &amp; Drop...</div>
+  <script>
+    window.DUDUQ_ENGINE_BASE = new URL("../../..", window.location.href).href.replace(/\/$/, "");
+    window.DUDUQ_GAME_CONFIG = Object.freeze({ engineBase: window.DUDUQ_ENGINE_BASE, channel: "canary-v1", label: "DuduQ — Drag & Drop Gold Master", modulePath: ["test", "dragDrop"], requiredMechanics: ["drag-drop"], contentScript: "../drag-drop-test-content.js?v=1" });
+  </script>
+  <script type="module" src="./canonical-hud-adapter.js"></script>
+  <script>
+    const load = (src) => new Promise((resolve,reject) => { const script=document.createElement("script"); script.src=src; script.onload=resolve; script.onerror=reject; document.head.append(script); });
+    load("../../../engine/duduq-player-v1.js").then(() => load("../../../engine/duduq-loader-v1.js")).catch(() => { document.querySelector("#root").textContent="Erro ao carregar Drag & Drop."; });
+  </script>
+</body>
+</html>

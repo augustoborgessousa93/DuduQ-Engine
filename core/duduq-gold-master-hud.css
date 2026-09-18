@@ -1,0 +1,216 @@
+/* DuduQ Gold Master HUD runtime bridge.
+   Geometry mirrors Penpot mains:
+   header 1056x94, question 720x86, controls 56px. */
+:root {
+  --duduq-gold-scale: 1;
+  --duduq-gold-header-width: min(1056px, calc(100% - 24px));
+  --duduq-gold-question-width: min(720px, calc(100% - 24px));
+  --duduq-gold-radius-header: 28px;
+  --duduq-gold-radius-question: 25px;
+}
+
+/* Static candidate pages and shared Core markup. */
+.game-hud,
+.duduq-engine-header {
+  position: relative !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  width: var(--duduq-gold-header-width) !important;
+  height: calc(94px * var(--duduq-gold-scale)) !important;
+  min-height: calc(94px * var(--duduq-gold-scale)) !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  border: 1px solid rgba(225, 236, 218, .96) !important;
+  border-radius: var(--duduq-gold-radius-header) !important;
+  background: rgba(255, 255, 251, .96) !important;
+  box-shadow: 0 5px 0 rgba(61, 106, 71, .24), 0 12px 26px rgba(29, 62, 43, .16), inset 0 1px 0 #fff !important;
+  transform: none !important;
+  overflow: visible !important;
+  z-index: 10;
+}
+
+.game-hud .hud-brand,
+.duduq-engine-header-main {
+  position: absolute !important;
+  left: calc(8px * var(--duduq-gold-scale));
+  top: calc(1px * var(--duduq-gold-scale));
+  display: flex !important;
+  align-items: center !important;
+  width: calc(300px * var(--duduq-gold-scale)) !important;
+  height: calc(86px * var(--duduq-gold-scale)) !important;
+  min-width: 0 !important;
+  gap: calc(19px * var(--duduq-gold-scale)) !important;
+  overflow: visible !important;
+}
+
+.game-hud .hud-mascot,
+.duduq-engine-header-mascot-slot {
+  position: relative !important;
+  left: 0 !important;
+  display: block !important;
+  flex: 0 0 auto !important;
+  width: calc(102px * var(--duduq-gold-scale)) !important;
+  height: calc(86px * var(--duduq-gold-scale)) !important;
+  min-width: calc(102px * var(--duduq-gold-scale)) !important;
+  min-height: calc(86px * var(--duduq-gold-scale)) !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
+
+.game-hud .hud-title-group,
+.duduq-engine-heading {
+  position: relative !important;
+  top: calc(4px * var(--duduq-gold-scale));
+  min-width: 0 !important;
+}
+
+.game-hud .hud-title,
+.duduq-engine-heading h1 {
+  margin: 0 !important;
+  color: #364b43 !important;
+  font-family: var(--duduq-font-body, "Nunito", sans-serif) !important;
+  font-size: calc(24px * var(--duduq-gold-scale)) !important;
+  font-weight: 900 !important;
+  line-height: 1.05 !important;
+  letter-spacing: .1px !important;
+  white-space: nowrap !important;
+}
+
+.game-hud .hud-subtitle {
+  max-width: calc(220px * var(--duduq-gold-scale)) !important;
+  margin: calc(7px * var(--duduq-gold-scale)) 0 0 !important;
+  color: #718b7f !important;
+  font-family: var(--duduq-font-display, "Fredoka", sans-serif) !important;
+  font-size: calc(13px * var(--duduq-gold-scale)) !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.duduq-engine-heading { left: calc(121px * var(--duduq-gold-scale)); }
+.duduq-engine-heading h1 { max-width: calc(220px * var(--duduq-gold-scale)); }
+.duduq-engine-header-mascot-slot[data-visible="false"] { visibility: hidden; }
+
+.game-hud .hud-progress,
+.duduq-engine-header .duduq-progress-trail {
+  position: absolute !important;
+  left: calc(371px * var(--duduq-gold-scale));
+  top: calc(39px * var(--duduq-gold-scale));
+  width: calc(490px * var(--duduq-gold-scale)) !important;
+  height: calc(16px * var(--duduq-gold-scale)) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 999px !important;
+  overflow: hidden !important;
+}
+
+.game-hud .hud-progress { border: 1px solid rgba(191, 218, 219, .7) !important; background: linear-gradient(#e9f1ec,#dce8df) !important; box-shadow: inset 0 1px 3px rgba(51,85,67,.12) !important; }
+.game-hud .hud-progress-fill { display: block !important; height: 100% !important; border-radius: inherit !important; background: linear-gradient(180deg,#45b8f5,#278fd2 74%,#247fba) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.48),0 1px 1px rgba(20,89,125,.2) !important; }
+
+.game-hud .hud-counter,
+.duduq-engine-counter {
+  position: absolute !important;
+  left: calc(812px * var(--duduq-gold-scale));
+  top: calc(28px * var(--duduq-gold-scale));
+  display: grid !important;
+  place-items: center !important;
+  width: calc(72px * var(--duduq-gold-scale)) !important;
+  height: calc(38px * var(--duduq-gold-scale)) !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  border: 1px solid #ead68a !important;
+  border-radius: 17px !important;
+  background: linear-gradient(#fffdf1,#fff0b5) !important;
+  color: #586654 !important;
+  font: 700 calc(14px * var(--duduq-gold-scale))/1 var(--duduq-font-display, "Fredoka", sans-serif) !important;
+  box-shadow: 0 3px 0 #baa45b,0 5px 8px rgba(66,63,37,.12),inset 0 1px 0 #fff !important;
+}
+
+.game-hud .fullscreen-button,
+.duduq-engine-fullscreen-button {
+  position: absolute !important;
+  left: calc(976px * var(--duduq-gold-scale));
+  top: calc(19px * var(--duduq-gold-scale));
+  display: grid !important;
+  place-items: center !important;
+  width: calc(56px * var(--duduq-gold-scale)) !important;
+  height: calc(56px * var(--duduq-gold-scale)) !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 18px !important;
+  color: #fff !important;
+  background: linear-gradient(180deg,#8fd6ff 0%,#349fdf 55%,#2a82c0 100%) !important;
+  box-shadow: 0 5px 0 #175c93,0 7px 8px rgba(37,59,83,.18),inset 0 1px 0 #bfe8ff !important;
+}
+.game-hud .fullscreen-button svg,
+.duduq-engine-fullscreen-icon { width: calc(26px * var(--duduq-gold-scale)) !important; height: calc(26px * var(--duduq-gold-scale)) !important; }
+.duduq-engine-fullscreen-label { display: none !important; }
+.duduq-engine-button-quiet { display: none !important; }
+
+/* Gold Master question shell. Mechanic instruction cards are the shared QuestionPanel role. */
+.question-panel,
+.duduq-matching-instruction,
+.duduq-dd-instruction,
+.duduq-ts-instruction,
+.duduq-bp-instruction,
+.duduq-ss-instruction,
+.duduq-mq-instruction {
+  position: relative !important;
+  box-sizing: border-box !important;
+  display: grid !important;
+  grid-template-columns: 1fr calc(56px * var(--duduq-gold-scale)) !important;
+  align-items: center !important;
+  width: var(--duduq-gold-question-width) !important;
+  height: calc(86px * var(--duduq-gold-scale)) !important;
+  min-height: calc(86px * var(--duduq-gold-scale)) !important;
+  margin: calc(24px * var(--duduq-gold-scale)) auto 0 !important;
+  padding: calc(5px * var(--duduq-gold-scale)) calc(13px * var(--duduq-gold-scale)) calc(8px * var(--duduq-gold-scale)) calc(44px * var(--duduq-gold-scale)) !important;
+  gap: calc(12px * var(--duduq-gold-scale)) !important;
+  border: 1px solid #e8d3a6 !important;
+  border-radius: var(--duduq-gold-radius-question) !important;
+  background: rgba(255,252,243,.96) !important;
+  box-shadow: 0 5px 0 rgba(119,91,56,.24),0 12px 25px rgba(47,65,42,.17),inset 0 1px 0 #fff !important;
+  z-index: 9;
+}
+
+.question-panel .question-copy,
+.duduq-matching-instruction h2,
+.duduq-dd-instruction > h2,
+.duduq-ts-instruction h2,
+.duduq-bp-instruction h2,
+.duduq-ss-instruction h2,
+.duduq-mq-instruction h2 { min-width: 0 !important; margin: 0 !important; transform: none !important; }
+.question-panel .question-copy { display: block !important; }
+.question-label { margin: 0 0 calc(5px * var(--duduq-gold-scale)) !important; color: #7f9788 !important; font: 500 calc(13px * var(--duduq-gold-scale))/1.15 var(--duduq-font-display,"Fredoka",sans-serif) !important; letter-spacing: .5px !important; text-transform: uppercase !important; }
+.question-prompt,
+.duduq-matching-instruction h2,
+.duduq-dd-instruction > h2,
+.duduq-ts-instruction h2,
+.duduq-bp-instruction h2,
+.duduq-ss-instruction h2,
+.duduq-mq-instruction h2 { color: #364b43 !important; font: 900 calc(22px * var(--duduq-gold-scale))/1.15 var(--duduq-font-body,"Nunito",sans-serif) !important; letter-spacing: -.22px !important; text-transform: uppercase !important; text-align: left !important; }
+.duduq-dd-instruction { grid-template-columns: 1fr calc(56px * var(--duduq-gold-scale)) !important; }
+.duduq-dd-instruction::before { content: "QUAL PALAVRA REPRESENTA A IMAGEM?" !important; width: auto !important; height: auto !important; color: #7f9788 !important; font: 500 calc(13px * var(--duduq-gold-scale))/1.15 var(--duduq-font-display,"Fredoka",sans-serif) !important; letter-spacing: .5px !important; text-transform: uppercase !important; position: absolute !important; left: calc(44px * var(--duduq-gold-scale)) !important; top: calc(5px * var(--duduq-gold-scale)) !important; }
+.duduq-dd-instruction > h2 { grid-column: 1 !important; padding-top: calc(18px * var(--duduq-gold-scale)) !important; }
+.question-panel .audio-button,
+.duduq-matching-audio,
+.duduq-dd-audio-shell > button,
+.duduq-ts-audio-shell > button,
+.duduq-bp-audio-shell > button,
+.duduq-ss-audio-shell > button,
+.duduq-mq-audio-shell > button { width: calc(56px * var(--duduq-gold-scale)) !important; height: calc(56px * var(--duduq-gold-scale)) !important; min-width: 0 !important; min-height: 0 !important; border-radius: 18px !important; }
+
+@media (max-width: 640px) {
+  :root { --duduq-gold-scale: .62; }
+  .game-hud, .duduq-engine-header { margin-inline: 12px !important; width: calc(100% - 24px) !important; }
+  .game-hud .hud-brand, .duduq-engine-header-main { gap: 8px !important; }
+  .game-hud .hud-title, .duduq-engine-heading h1 { font-size: clamp(14px, 3.5vw, 24px) !important; }
+  .game-hud .hud-subtitle { max-width: 150px !important; overflow: hidden; text-overflow: ellipsis; }
+  .game-hud .hud-progress, .duduq-engine-header .duduq-progress-trail { left: 35% !important; width: 32% !important; }
+  .game-hud .hud-counter, .duduq-engine-counter { left: 70% !important; }
+  .game-hud .fullscreen-button, .duduq-engine-fullscreen-button { left: auto !important; right: 2% !important; }
+  .question-panel, .duduq-matching-instruction, .duduq-dd-instruction, .duduq-ts-instruction, .duduq-bp-instruction, .duduq-ss-instruction, .duduq-mq-instruction { width: calc(100% - 24px) !important; margin-top: 12px !important; }
+}

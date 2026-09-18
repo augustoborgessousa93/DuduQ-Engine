@@ -1,0 +1,20 @@
+import crypto from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
+
+const root = path.resolve(import.meta.dirname, "..");
+const read = (file) => JSON.parse(fs.readFileSync(path.join(root, file), "utf8"));
+const hash = (value) => crypto.createHash("sha256").update(JSON.stringify(value)).digest("hex");
+const snapshot = read("design-system/duduq-sync-snapshot.json");
+const tokens = read("design-system/duduq-design-tokens.json");
+const manifest = read("design-system/duduq-component-manifest.json");
+const exportPath = path.join(root, "design-system/duduq-penpot-authorized-export.json");
+const current = { tokens: hash(tokens), manifest: hash(manifest), penpotAuthorizedExport: fs.existsSync(exportPath) ? hash(read("design-system/duduq-penpot-authorized-export.json")) : "MISSING" };
+const baseline = snapshot.hashes || {};
+const penpotChanged = current.penpotAuthorizedExport !== "MISSING" && current.penpotAuthorizedExport !== baseline.penpotAuthorizedExport;
+const coreChanged = ["tokens", "manifest"].some((key) => baseline[key] !== "BASELINE" && current[key] !== baseline[key]);
+const status = penpotChanged && coreChanged ? "BOTH_CHANGED" : penpotChanged ? "PENPOT_CHANGED" : coreChanged ? "CORE_CHANGED" : "NO_CHANGE";
+const report = { status, penpotChanged, coreChanged, current, action: status === "BOTH_CHANGED" ? "STOP: human resolution required" : status === "PENPOT_CHANGED" ? "REVIEW Penpot → Core diff before applying" : status === "CORE_CHANGED" ? "PENPOT UPDATE REQUIRED: YES" : "No mapped change detected", limitation: current.penpotAuthorizedExport === "MISSING" ? "No authorized Penpot export is present; canvas was not scraped or guessed." : null };
+fs.writeFileSync(path.join(root, "design-system/duduq-sync-report.json"), `${JSON.stringify(report, null, 2)}\n`);
+console.log(JSON.stringify(report, null, 2));
+process.exitCode = status === "BOTH_CHANGED" ? 2 : 0;

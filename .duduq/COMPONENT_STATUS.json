@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "components": {
+    "DUDUQ / HUD / Header": {
+      "penpotMainId": "88954f25-7a86-800b-8008-a87e6f0d4e44",
+      "controlPanelInstanceId": "855af85f-faf4-8069-8008-a8ea68c23da7",
+      "corePath": "core/ui/duduq-canonical-header-hud.js",
+      "cssPath": "core/duduq-canonical-header-hud.css",
+      "humanApproval": true,
+      "frozen": true,
+      "syncStatus": "PENPOT_SYNC_REQUIRED",
+      "owner": "Core",
+      "lastModified": null
+    },
+    "DUDUQ / HUD / Question": {
+      "penpotMainId": "88954f25-7a86-800b-8008-a87e700a22e9",
+      "controlPanelInstanceId": "855af85f-faf4-8069-8008-a8ea777f267c",
+      "corePath": "core/ui/duduq-canonical-question-hud.js",
+      "cssPath": "core/duduq-canonical-question-hud.css",
+      "humanApproval": true,
+      "frozen": true,
+      "syncStatus": "PENPOT_SYNC_REQUIRED",
+      "owner": "Core",
+      "lastModified": null
+    },
+    "DUDUQ / Mascot / Header": {
+      "penpotMainId": "002497e5-f2c0-8002-8008-a2b93cb5ffc5",
+      "controlPanelInstanceId": "855af85f-faf4-8069-8008-a8eb46126a75",
+      "corePath": "core/ui/duduq-canonical-header-hud.js",
+      "cssPath": "core/duduq-canonical-header-hud.css",
+      "humanApproval": null,
+      "frozen": false,
+      "syncStatus": "PENPOT_SYNC_REQUIRED",
+      "owner": "Core",
+      "lastModified": null
+    },
+    "DUDUQ / Progress / Track": {
+      "penpotMainId": "0fa9ab83-e084-8008-8008-a728c75fd710",
+      "controlPanelInstanceId": "855af85f-faf4-8069-8008-a8eb1d7e8f9a",
+      "corePath": "core/ui/index.js",
+      "cssPath": "core/duduq-canonical-header-hud.css",
+      "humanApproval": null,
+      "frozen": false,
+      "syncStatus": "PENPOT_SYNC_REQUIRED",
+      "owner": "Core",
+      "lastModified": null
+    },
+    "DUDUQ / Progress / Fill": {
+      "penpotMainId": "0fa9ab83-e084-8008-8008-a728c75fd710",
+      "controlPanelInstanceId": null,
+      "corePath": "core/ui/duduq-canonical-header-hud.js",
+      "cssPath": "core/duduq-canonical-header-hud.css",
+      "humanApproval": null,
+      "frozen": false,
+      "syncStatus": "UNKNOWN",
+      "owner": "Core",
+      "lastModified": null
+    },
+    "DUDUQ / Progress / Badge": {
+      "penpotMainId": "0fa9ab83-e084-8008-8008-a7296506ef2a",
+      "controlPanelInstanceId": "855af85f-faf4-8069-8008-a8eb189d1c68",
+      "corePath": "core/ui/index.js",
+      "cssPath": "core/duduq-canonical-header-hud.css",
+      "humanApproval": null,
+      "frozen": false,
+      "syncStatus": "PENPOT_SYNC_REQUIRED",
+      "owner": "Core",
+      "lastModified": null
+    },
+    "DUDUQ / Control / Fullscreen": {
+      "penpotMainId": "536e9278-6e26-80b9-8008-a63b998ce41c",
+      "controlPanelInstanceId": "855af85f-faf4-8069-8008-a8eb3deeae0c",
+      "corePath": "core/ui/duduq-canonical-fullscreen-button.js",
+      "cssPath": "core/duduq-canonical-header-hud.css",
+      "humanApproval": null,
+      "frozen": false,
+      "syncStatus": "PENPOT_SYNC_REQUIRED",
+      "owner": "Core",
+      "lastModified": null
+    },
+    "DUDUQ / Control / Audio": {
+      "penpotMainId": "536e9278-6e26-80b9-8008-a63b9ad28e51",
+      "controlPanelInstanceId": "855af85f-faf4-8069-8008-a8eb36f33f07",
+      "corePath": "core/ui/duduq-canonical-audio-button.js",
+      "cssPath": "core/duduq-canonical-question-hud.css",
+      "humanApproval": null,
+      "frozen": false,
+      "syncStatus": "PENPOT_SYNC_REQUIRED",
+      "owner": "Core",
+      "lastModified": null
+    },
+    "DUDUQ / Button / Primary": {
+      "penpotMainId": "544eb6c9-7cd2-80cb-8008-a29ff290ab95",
+      "controlPanelInstanceId": "855af85f-faf4-8069-8008-a8eb2c4e5725",
+      "corePath": "core/ui/index.js",
+      "cssPath": "core/duduq-tokens.css",
+      "humanApproval": null,
+      "frozen": false,
+      "syncStatus": "PENPOT_SYNC_REQUIRED",
+      "owner": "Core",
+      "lastModified": null
+    },
+    "DUDUQ / Target / Base": {
+      "penpotMainId": "a6aad67f-36be-80e2-8008-a51a6f80d3c8",
+      "controlPanelInstanceId": "855af85f-faf4-8069-8008-a8eb502c79b6",
+      "corePath": "test/target-shooter/gold-master-clean-v2/styles/master.css",
+      "cssPath": "test/target-shooter/gold-master-clean-v2/styles/master.css",
+      "humanApproval": null,
+      "frozen": false,
+      "syncStatus": "PENPOT_SYNC_REQUIRED",
+      "owner": "Target Shooter",
+      "lastModified": null
+    },
+    "DUDUQ / Target / Select": {
+      "penpotMainId": "a6aad67f-36be-80e2-8008-a51a54fbcc3e",
+      "controlPanelInstanceId": "855af85f-faf4-8069-8008-a8eb5e3111c6",
+      "corePath": "core/duduq-canonical-target.css",
+      "cssPath": "core/duduq-canonical-target.css",
+      "humanApproval": null,
+      "frozen": false,
+      "syncStatus": "PENPOT_SYNC_REQUIRED",
+      "owner": "Core target contract",
+      "lastModified": null
+    },
+    "DUDUQ / Feedback": {
+      "penpotMainId": "a6aad67f-36be-80e2-8008-a51abe6ac48f",
+      "controlPanelInstanceId": null,
+      "corePath": "core/ui/index.js",
+      "cssPath": "core/duduq-tokens.css",
+      "humanApproval": null,
+      "frozen": false,
+      "syncStatus": "UNKNOWN",
+      "owner": "Core",
+      "lastModified": null
+    }
+  },
+  "generatedAt": "2026-09-18T22:55:57.617Z"
+}

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR" data-duduq-ano="1">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>DUDUQ Matching — Gold Master Candidate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/shell.css">
+  <link rel="stylesheet" href="../../../core/duduq-canonical-header-hud.css">
+  <link rel="stylesheet" href="../../../core/duduq-canonical-question-hud.css">
+  <link rel="stylesheet" href="styles/matching.css">
+</head>
+<body>
+  <main id="game" class="game-screen" aria-label="DuduQ Matching">
+    <div class="world-backdrop" aria-hidden="true"></div>
+    <div class="readability-veil" aria-hidden="true"></div>
+    <div id="game-shell" class="game-shell">
+      <div data-canonical-header-slot></div>
+      <div data-canonical-question-slot></div>
+
+      <section class="matching-playfield" aria-label="Área de associação">
+        <svg class="connection-layer" aria-hidden="true"></svg>
+        <div class="matching-column matching-column-words" data-side="words">
+          <h3 class="column-heading" data-slot="left-heading"></h3>
+          <div class="card-list" data-list="left"></div>
+        </div>
+        <div class="connection-gutter" aria-hidden="true"></div>
+        <div class="matching-column matching-column-images" data-side="images">
+          <h3 class="column-heading" data-slot="right-heading"></h3>
+          <div class="card-list" data-list="right"></div>
+        </div>
+      </section>
+
+      <div class="matching-action-area cta-attention-wrapper" aria-label="Ações da atividade">
+        <button class="primary-action" type="button" disabled aria-label="Confirme as associações">
+          <span data-slot="action"></span>
+        </button>
+      </div>
+    </div>
+    <div class="result-fx-layer success-celebration-layer" aria-hidden="true"></div>
+    <section class="feedback-ribbon" data-feedback="" aria-live="polite" aria-atomic="true" hidden>
+      <img class="feedback-mascot" data-asset="feedback-mascot" alt="">
+      <div class="feedback-copy"><h2 data-slot="feedback-title"></h2><p data-slot="feedback-detail"></p></div>
+      <button class="feedback-action game-button" type="button"><span data-slot="feedback-action"></span></button>
+    </section>
+    <section class="loading-screen" aria-live="polite" aria-label="Carregando próxima etapa" hidden>
+      <img data-asset="transition-mascot" alt="DuduQ preparando a próxima etapa">
+      <p class="loading-kicker">DUDUQ</p><h2 data-slot="loading-title">Preparando a próxima etapa…</h2>
+      <div class="loading-progress" role="progressbar" aria-label="Carregando"><span></span></div>
+      <button class="complete-action" type="button" hidden>JOGAR NOVAMENTE</button>
+    </section>
+    <div class="sr-only" data-slot="live" aria-live="polite" aria-atomic="true"></div>
+  </main>
+  <script src="../../../core/duduq-assets.js"></script>
+  <script src="data/gold-master-content.js"></script>
+  <script type="module" src="src/result-fx.js"></script>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

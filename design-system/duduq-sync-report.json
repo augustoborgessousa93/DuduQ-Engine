@@ -1,0 +1,12 @@
+{
+  "status": "NO_CHANGE",
+  "penpotChanged": false,
+  "coreChanged": false,
+  "current": {
+    "tokens": "169a8d1f23157600e288213081fd551ccdf18653f2f2bb5f1116d57a0a34d464",
+    "manifest": "90e67f502b857880e79f4510b8f8b08411f112ffedebc0adca568efac0cbcf61",
+    "penpotAuthorizedExport": "MISSING"
+  },
+  "action": "No mapped change detected",
+  "limitation": "No authorized Penpot export is present; canvas was not scraped or guessed."
+}

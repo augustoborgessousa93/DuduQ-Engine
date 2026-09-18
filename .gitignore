@@ -1,9 +1,15 @@
-```
-# Logs and temp files
-*.log
-server.log
+# Legacy note retained from prior workspace state.
 
-# Temp files
+# Disposable runtime/browser artifacts (never delete automatically).
+node_modules/
+server*.log
 *.tmp
-*.swp
-```
+*.temp
+*.bak
+*.zip
+artifacts/**/chrome-profile/
+artifacts/**/qa-chrome-profile/
+
+# Local Autopilot lock/runtime marker; continuity JSON remains tracked.
+.duduq/autopilot.lock
+res.end('ok')).listen(4173))

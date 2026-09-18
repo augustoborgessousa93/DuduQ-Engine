@@ -1,0 +1,7 @@
+{
+  "status": "PENPOT_SYNC_REQUIRED",
+  "reason": "No authorized Penpot export/API/MCP write capability is available to the local sync runner.",
+  "components": {},
+  "lastSyncTime": null,
+  "lastSyncDirection": null
+}

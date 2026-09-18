@@ -1,0 +1,164 @@
+:root {
+  /* Mirror of design-system/duduq-design-tokens.json. Do not create mechanic-local equivalents. */
+  --duduq-color-primary: #55c8f2;
+  --duduq-color-secondary: #58dc88;
+  --duduq-color-progress-fill: linear-gradient(180deg, #6acbfb 0%, #3ca9e8 32%, #278fd2 74%, #247fba 100%);
+  --duduq-color-hud-surface: #fffaf0;
+  --duduq-color-button-surface: #55c8f2;
+  --duduq-color-highlight: rgba(255,255,255,.58);
+  --duduq-color-text: #364b43;
+  --duduq-color-success: #36b96d;
+  --duduq-color-error: #e86c68;
+  --duduq-space-xs: 4px;
+  --duduq-space-sm: 8px;
+  --duduq-space-md: 16px;
+  --duduq-space-lg: 24px;
+  --duduq-space-xl: 32px;
+  --duduq-radius-button: 16px;
+  --duduq-radius-badge: 18px;
+  --duduq-radius-hud: 25px;
+  --duduq-radius-panel: 25px;
+  --duduq-radius-target: 50%;
+  --duduq-shadow-button: 0 4px 0 #176c9a, 0 8px 12px rgba(30,78,92,.18);
+  --duduq-shadow-badge: 0 3px 0 #b49d50, 0 6px 10px rgba(66,63,37,.14);
+  --duduq-shadow-hud: 0 8px 24px rgba(31,54,43,.20);
+  --duduq-shadow-panel: 0 8px 24px rgba(31,54,43,.20);
+  --duduq-shadow-target: 0 0 0 6px rgba(189,255,255,.47);
+  color-scheme: light;
+  --duduq-blue: #2f9cdb;
+  --duduq-blue-deep: #177db5;
+  --duduq-green: #36b96d;
+  --duduq-red: #e86c68;
+  /* Shared DuduQ Core component tokens. */
+  --game-blue: #55c8f2;
+  --game-blue-dark: #176c9a;
+  --game-green: #58dc88;
+  --game-green-dark: #178347;
+  --game-coral: #f7aa9b;
+  --game-coral-dark: #ad5954;
+  --game-highlight: rgba(255,255,255,.58);
+  --game-shadow: rgba(30,78,92,.18);
+  --game-radius-lg: 16px;
+  --game-depth: 4px;
+  --duduq-button-blue-face: #55c8f2;
+  --duduq-button-blue-depth: #176c9a;
+  --duduq-button-green-face: #58dc88;
+  --duduq-button-green-depth: #178347;
+  --duduq-button-coral-face: #f7aa9b;
+  --duduq-button-coral-depth: #ad5954;
+  --duduq-button-highlight: rgba(255,255,255,.58);
+  --duduq-button-shadow: rgba(30,78,92,.18);
+  --duduq-button-radius: 16px;
+  --duduq-blue-top: var(--duduq-button-blue-face);
+  --duduq-blue-bottom: #2e9cd1;
+  --duduq-blue-depth: var(--duduq-button-blue-depth);
+  --duduq-green-top: var(--duduq-button-green-face);
+  --duduq-green-bottom: #2dc36a;
+  --duduq-green-depth: var(--duduq-button-green-depth);
+  --duduq-coral-top: var(--duduq-button-coral-face);
+  --duduq-coral-bottom: #e67c72;
+  --duduq-coral-depth: var(--duduq-button-coral-depth);
+  --duduq-highlight: var(--duduq-button-highlight);
+  --duduq-shadow: var(--duduq-button-shadow);
+  --duduq-button-depth: var(--game-depth);
+  --duduq-header-control-width: 54px;
+  --duduq-header-control-height: 54px;
+  --duduq-header-control-radius: var(--duduq-button-radius);
+  --duduq-header-control-face-top: var(--duduq-button-blue-face);
+  --duduq-header-control-face-bottom: #2e9cd1;
+  --duduq-header-control-depth: var(--duduq-button-blue-depth);
+  --duduq-header-control-highlight: var(--duduq-button-highlight);
+  --duduq-header-control-shadow: var(--duduq-button-shadow);
+  --duduq-header-control-icon-size: 28px;
+  /* Penpot masters: DuduQ / Core / Control / Audio + Fullscreen. */
+  --duduq-control-size: 56px;
+  --duduq-control-radius: 18px;
+  --duduq-control-surface-top: #8fd6ff;
+  --duduq-control-surface-mid: #349fdf;
+  --duduq-control-surface-bottom: #2a82c0;
+  --duduq-control-depth: #175c93;
+  --duduq-control-highlight: #bfe8ff;
+  --duduq-control-shadow: rgba(37, 59, 83, .35);
+  /* Shared glyph scale for the 56px Audio and Fullscreen masters. */
+  --duduq-control-icon-size: 26px;
+  /* Penpot master: DuduQ / Core / Button / Confirm. */
+  --duduq-primary-width: 280px;
+  --duduq-primary-height: 72px;
+  --duduq-primary-radius: 20px;
+  --duduq-primary-surface-top: #78bbff;
+  --duduq-primary-surface-mid: #438de5;
+  --duduq-primary-surface-bottom: #3277d2;
+  --duduq-primary-depth: #174f98;
+  --duduq-primary-highlight-top: rgba(234, 255, 253, .367647);
+  --duduq-primary-highlight-mid: #b9deff;
+  --duduq-primary-highlight-bottom: #85bff4;
+  --duduq-primary-stroke: #2666b7;
+  --duduq-primary-label-size: 21px;
+  --duduq-hud-height: 92px;
+  --duduq-feedback-height: 92px;
+  --duduq-header-mascot-size: clamp(60px, 4.5cqi, 72px);
+  --duduq-hud-mascot-size: var(--duduq-header-mascot-size);
+  --duduq-hud-mascot-min-size: 64px;
+  --duduq-hud-mascot-size-fluid: calc(var(--duduq-hud-mascot-size) * var(--ui-scale, 1));
+  --duduq-hud-mascot-max-size: 92px;
+  --duduq-feedback-mascot-size: 72px;
+  --duduq-motion-float: 3.4s;
+  --duduq-matching-action-gap: clamp(32px, 4cqh, 44px);
+  --duduq-matching-action-bottom-gap: clamp(28px, 4cqh, 40px);
+  --duduq-motion-feedback: 360ms;
+  --duduq-cream: #fffaf0;
+  --duduq-surface: rgba(255, 255, 252, .96);
+  --duduq-text: #364b43;
+  --duduq-muted: #718b7f;
+  --duduq-surface-shadow: rgba(31, 54, 43, .20);
+  --duduq-button-sheen-strong: rgba(255, 255, 255, .42);
+  --duduq-button-sheen-soft: rgba(255, 255, 255, .18);
+  --duduq-button-rim: rgba(255, 255, 255, .38);
+  --duduq-button-inset-low: rgba(18, 79, 59, .18);
+  --duduq-button-focus: #ffe17b;
+  --connector-blue: #279cdb;
+  --connector-blue-deep: #147eb8;
+  --connector-correct: #35b970;
+  --connector-incorrect: #df756d;
+  --connector-core: #b9f4ff;
+  --connector-width: 8px;
+  --connector-core-width: 3px;
+  --connector-thread-width: 1.15px;
+  --connector-glow-width: 16px;
+  --connector-node-radius: 8.5px;
+  --motion-connector-draw: 340ms;
+  --motion-connector-status: 300ms;
+  --motion-energy-flow: 1.6s;
+  --motion-node-pulse: 230ms;
+  --duduq-space-1: 4px;
+  --duduq-space-2: 8px;
+  --duduq-space-3: 12px;
+  --duduq-space-4: 16px;
+  --duduq-space-5: 20px;
+  --duduq-space-6: 24px;
+  --duduq-radius-card: 24px;
+  --duduq-radius-panel: 25px;
+  --duduq-radius-shell: 28px;
+  --duduq-font-display: "Fredoka", "Trebuchet MS", sans-serif;
+  --duduq-font-body: "Nunito", "Trebuchet MS", sans-serif;
+  --duduq-motion-fast: 140ms;
+  --duduq-motion-ui: 220ms;
+  --motion-fast: 120ms;
+  --motion-normal: 180ms;
+  --motion-feedback: 240ms;
+  --motion-mascot: 3.4s;
+  --ease-ui: cubic-bezier(.2,.7,.25,1);
+  --ease-game: cubic-bezier(.18,.82,.2,1);
+}
+
+* { box-sizing: border-box; }
+
+html, body { width: 100%; min-width: 0; min-height: 100%; margin: 0; }
+body { font-family: var(--duduq-font-body); color: var(--duduq-text); }
+button { font: inherit; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; clip-path: inset(50%); }
+:focus-visible { outline: 3px solid var(--duduq-button-focus); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://design-tokens.org/format/",
+  "name": "DUDUQ Official Design Tokens",
+  "version": "1.0.0",
+  "sourceOfTruth": "Penpot Main Components + this reviewed token registry",
+  "color": {
+    "primary": { "value": "#55c8f2", "css": "--duduq-color-primary" },
+    "secondary": { "value": "#58dc88", "css": "--duduq-color-secondary" },
+    "progressFill": { "value": "linear-gradient(180deg, #6acbfb 0%, #3ca9e8 32%, #278fd2 74%, #247fba 100%)", "css": "--duduq-color-progress-fill" },
+    "hudSurface": { "value": "#fffaf0", "css": "--duduq-color-hud-surface" },
+    "buttonSurface": { "value": "#55c8f2", "css": "--duduq-color-button-surface" },
+    "highlight": { "value": "rgba(255,255,255,.58)", "css": "--duduq-color-highlight" },
+    "text": { "value": "#364b43", "css": "--duduq-color-text" },
+    "success": { "value": "#36b96d", "css": "--duduq-color-success" },
+    "error": { "value": "#e86c68", "css": "--duduq-color-error" }
+  },
+  "space": { "xs": { "value": "4px" }, "sm": { "value": "8px" }, "md": { "value": "16px" }, "lg": { "value": "24px" }, "xl": { "value": "32px" } },
+  "radius": { "button": { "value": "16px" }, "badge": { "value": "18px" }, "hud": { "value": "25px" }, "panel": { "value": "25px" }, "target": { "value": "50%" } },
+  "shadow": { "button": { "value": "0 4px 0 #176c9a, 0 8px 12px rgba(30,78,92,.18)" }, "badge": { "value": "0 3px 0 #b49d50, 0 6px 10px rgba(66,63,37,.14)" }, "hud": { "value": "0 8px 24px rgba(31,54,43,.20)" }, "panel": { "value": "0 8px 24px rgba(31,54,43,.20)" }, "target": { "value": "0 0 0 6px rgba(189,255,255,.47)" } },
+  "type": { "mechanicTitle": { "font": "Fredoka", "size": "clamp(18px, 2vw, 28px)", "weight": 800 }, "instruction": { "font": "Nunito", "size": "clamp(14px, 1.4vw, 16px)", "weight": 800 }, "question": { "font": "Fredoka", "size": "clamp(22px, 2.2vw, 28px)", "weight": 800 }, "badge": { "font": "Nunito", "size": "16px", "weight": 900 }, "button": { "font": "Fredoka", "size": "21px", "weight": 900 } }
+}

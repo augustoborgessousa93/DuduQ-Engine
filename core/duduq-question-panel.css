@@ -1,0 +1,18 @@
+/* Canonical QuestionPanel variant contract. Mechanics provide only the variant. */
+:root {
+  --duduq-question-standard-width: 720px;
+  --duduq-question-wide-width: 826px;
+  --duduq-question-height: 86px;
+}
+
+.question-panel[data-duduq-question-variant="standard"] {
+  width: var(--duduq-question-standard-width);
+  height: var(--duduq-question-height);
+  min-height: var(--duduq-question-height);
+}
+
+.question-panel[data-duduq-question-variant="wide"] {
+  width: var(--duduq-question-wide-width);
+  height: var(--duduq-question-height);
+  min-height: var(--duduq-question-height);
+}

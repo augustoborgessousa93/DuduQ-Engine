@@ -1,0 +1,12 @@
+import { GameShell, BackgroundLayer } from "../../../matching/gold-master-candidate-v1/src/game-shell.js";
+import { MascotHUD, MascotFeedback, QuestionPanel, GameAudioButton, GameFullscreenButton, GameButton, FeedbackHUD, CTAAttention } from "../../../matching/gold-master-candidate-v1/src/core/ui/index.js";
+import { ResultFXLayer } from "../../../matching/gold-master-candidate-v1/src/core/ui/result-fx.js";
+import { createEngine } from "./engine.js";
+const assets=window.DuduQAssets.assets,screen=document.querySelector('.ts-screen'),engine=createEngine('dog'),fx=ResultFXLayer(document.querySelector('.fx'));
+new GameShell(screen);BackgroundLayer({root:screen},assets.backgrounds['1']);
+const hud=document.querySelector('.hud-mascot');hud.src=assets.mascots.idle;MascotHUD(hud);QuestionPanel(document.querySelector('.question'));GameAudioButton(document.querySelector('.ts-hud .audio'));GameFullscreenButton(document.querySelector('.fullscreen')).onclick=()=>screen.requestFullscreen?.();
+const feedback=document.querySelector('.feedback'),cta=feedback.querySelector('button'),attention=CTAAttention(cta,{delay:5000,repeat:5000});FeedbackHUD(feedback);GameButton(cta);MascotFeedback(feedback.querySelector('img'));
+const targetAsset=new URL('../../../../asset-alvo.png',import.meta.url).href;const items=[['dog','DOG'],['cat','CAT'],['bird','BIRD']];const targets=document.querySelector('.targets');
+items.forEach(([id,label])=>{const b=document.createElement('button');b.className='target';b.dataset.state='idle';b.innerHTML=`<img src="${targetAsset}" alt=""><span>${label}</span><em></em>`;b.onclick=()=>{engine.select(id);document.querySelectorAll('.target').forEach(x=>x.dataset.state='idle');b.dataset.state='selected';setTimeout(()=>answer(b,id),180)};targets.append(b)});
+function answer(node,id){const ok=engine.evaluate();node.dataset.state=ok?'correct':'incorrect';feedback.hidden=false;feedback.dataset.outcome=ok?'correct':'incorrect';feedback.querySelector('img').src=ok?assets.mascots.correct:assets.mascots.error;feedback.querySelector('strong').textContent=ok?'Correto!':'Quase!';feedback.querySelector('p').textContent=ok?'Você acertou o alvo!':'Tente mais uma vez.';cta.textContent=ok?'CONTINUAR':'TENTAR DE NOVO';attention.start();if(ok)document.querySelector('.fx').dispatchEvent(new CustomEvent('activity-success'));}
+cta.onclick=()=>{attention.stop();feedback.hidden=true;engine.reset();document.querySelectorAll('.target').forEach(x=>x.dataset.state='idle')};

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR" data-duduq-ano="1">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DuduQ — Target Shooter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/target-shooter.css">
+</head>
+<body>
+  <main class="game-screen" id="game" aria-label="DuduQ Target Shooter">
+    <div class="world-backdrop" aria-hidden="true"></div><div class="readability-veil" aria-hidden="true"></div>
+    <div class="game-shell">
+      <header class="game-hud" aria-label="Cabeçalho do jogo">
+        <div class="hud-brand"><img class="hud-mascot" data-asset="header-mascot" alt="DuduQ"><div><h1>TARGET SHOOTER</h1><p>English · Pets</p></div></div>
+        <div class="hud-progress" role="progressbar" aria-label="Progresso" aria-valuemin="0" aria-valuemax="10" aria-valuenow="4"><span></span></div>
+        <div class="hud-counter">4 / 10</div>
+        <button class="header-control-button fullscreen-button" type="button" aria-label="Ativar tela cheia"><svg viewBox="0 0 24 24"><path d="M8 4H5a1 1 0 0 0-1 1v3m12-4h3a1 1 0 0 1 1 1v3M4 16v3a1 1 0 0 0 1 1h3m12-4v3a1 1 0 0 1-1 1h-3"/></svg></button>
+      </header>
+      <section class="question-panel" aria-labelledby="question"><div><p>OUÇA E ACERTE O ALVO CORRETO</p><h2 id="question">WHICH ONE IS “DOG”?</h2></div><button class="header-control-button audio-button" type="button" aria-label="Ouvir pergunta"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16 9a4 4 0 0 1 0 6m2.5-8.5a7.5 7.5 0 0 1 0 11"/></svg></button></section>
+      <section class="arena" aria-label="Alvos de animais"><div class="aim-line" aria-hidden="true"></div><div class="targets" data-targets></div><div class="slingshot" aria-label="Magic Slingshot" aria-hidden="true"><i class="arm arm-left"></i><i class="arm arm-right"></i><i class="band"></i><i class="orb"></i><i class="glow"></i><i class="base"></i><div class="dots"><b></b><b></b><b></b><b></b></div></div></section>
+    </div>
+    <div class="celebration success-celebration-layer" aria-hidden="true"></div>
+    <section class="feedback-ribbon" aria-live="polite" hidden><img data-asset="feedback-mascot" alt=""><div><h2></h2><p></p></div><button class="game-button" type="button"></button></section>
+  </main>
+  <script src="../../../core/duduq-assets.js"></script><script type="module" src="src/app.js"></script>
+</body></html>

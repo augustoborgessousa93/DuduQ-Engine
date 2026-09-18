@@ -1,0 +1,14 @@
+{
+  "running": false,
+  "lastScan": "2026-09-18T22:55:57.616Z",
+  "lastCheckpoint": "2026-09-18T22:43:57.405Z",
+  "lastPush": null,
+  "validation": "PASS_WITH_LIMITATION",
+  "activeBranch": "UNKNOWN",
+  "dirty": true,
+  "pendingHumanReview": true,
+  "pendingPenpotSync": true,
+  "warnings": [
+    "Git executable not available; remote/branch/push cannot be verified."
+  ]
+}

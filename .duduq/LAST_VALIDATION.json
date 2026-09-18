@@ -1,0 +1,44 @@
+{
+  "status": "PASS_WITH_LIMITATION",
+  "timestamp": "2026-09-18T22:43:57.400Z",
+  "checks": [
+    {
+      "name": "JSON design-system/duduq-component-manifest.json",
+      "status": "PASS"
+    },
+    {
+      "name": "JSON design-system/duduq-penpot-runtime-map.json",
+      "status": "PASS"
+    },
+    {
+      "name": "JSON design-system/duduq-design-tokens.json",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical HUD architecture",
+      "status": "BLOCKED_ENVIRONMENT",
+      "output": "spawnSync node EPERM"
+    },
+    {
+      "name": "Penpot/Core guarded sync",
+      "status": "BLOCKED_ENVIRONMENT",
+      "output": "spawnSync node EPERM"
+    },
+    {
+      "name": "syntax core/ui/duduq-canonical-header-hud.js",
+      "status": "BLOCKED_ENVIRONMENT",
+      "output": "spawnSync node EPERM"
+    },
+    {
+      "name": "syntax core/ui/duduq-canonical-question-hud.js",
+      "status": "BLOCKED_ENVIRONMENT",
+      "output": "spawnSync node EPERM"
+    },
+    {
+      "name": "syntax scripts/duduq-sync-penpot-to-core.mjs",
+      "status": "BLOCKED_ENVIRONMENT",
+      "output": "spawnSync node EPERM"
+    }
+  ],
+  "limitation": "Nested process execution is blocked by this Windows environment (EPERM); run the same checks directly in a normal terminal."
+}

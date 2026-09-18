@@ -1,0 +1,13 @@
+import assert from "node:assert/strict";
+import { createTargetShooterEngine, TargetShooterState } from "./target-shooter-engine.js";
+const question = { metadata: { targetShooter: { correctIds: ["one"], requiredCorrect: 1, items: [{ id: "one" }, { id: "two" }] } } };
+const engine = createTargetShooterEngine(question);
+assert.equal(engine.snapshot().state, TargetShooterState.READY);
+assert.equal(engine.select("one").state, TargetShooterState.AIMING);
+assert.equal(engine.shoot().semantic, "activity-success");
+assert.equal(engine.snapshot().complete, true);
+engine.reset(); engine.select("two"); assert.equal(engine.shoot().result, "incorrect");
+assert.equal(engine.retry().state, TargetShooterState.READY);
+engine.select("one"); assert.equal(engine.shoot().completed, 1);
+engine.reset(); assert.equal(engine.snapshot().completed, 0);
+console.log("TargetShooterEngine: PASS");

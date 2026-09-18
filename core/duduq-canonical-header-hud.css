@@ -1,0 +1,152 @@
+/* Gold Master 88954f25-7a86-800b-8008-a87e6f0d4e44 — Core-owned only. */
+@import url("./duduq-gold-master-hud.css");
+.duduq-canonical-header-hud { isolation: isolate; }
+
+/* Three-zone canonical Header: identity | centered progress region | controls. */
+.duduq-canonical-header-hud {
+  display: grid !important;
+  grid-template-columns: calc(300px * var(--duduq-gold-scale)) minmax(0, 1fr) auto auto !important;
+  align-items: center !important;
+  column-gap: calc(20px * var(--duduq-gold-scale)) !important;
+  padding: 0 calc(24px * var(--duduq-gold-scale)) 0 calc(8px * var(--duduq-gold-scale)) !important;
+}
+.duduq-canonical-header-hud .hud-brand {
+  position: static !important;
+  width: auto !important;
+  height: calc(86px * var(--duduq-gold-scale)) !important;
+}
+
+/* Core-owned mascot refinement: ~14% smaller and gently alive without layout work. */
+.duduq-canonical-header-hud .duduq-canonical-mascot-motion {
+  display: block;
+  flex: 0 0 auto;
+  width: calc(88px * var(--duduq-gold-scale));
+  height: calc(74px * var(--duduq-gold-scale));
+  animation: duduq-canonical-mascot-float 3.8s cubic-bezier(.45, .05, .55, .95) infinite;
+  will-change: transform;
+}
+
+.duduq-canonical-header-hud .duduq-canonical-mascot-motion .hud-mascot {
+  display: block !important;
+  width: calc(88px * var(--duduq-gold-scale)) !important;
+  height: calc(74px * var(--duduq-gold-scale)) !important;
+  min-width: calc(88px * var(--duduq-gold-scale)) !important;
+  min-height: calc(74px * var(--duduq-gold-scale)) !important;
+  object-fit: contain;
+}
+
+/* Official counter: fixed optical center, breathing room, and a compact game-token depth. */
+.duduq-canonical-header-hud .hud-counter {
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: calc(76px * var(--duduq-gold-scale)) !important;
+  min-width: calc(76px * var(--duduq-gold-scale)) !important;
+  height: calc(40px * var(--duduq-gold-scale)) !important;
+  padding: 0 calc(8px * var(--duduq-gold-scale)) calc(1px * var(--duduq-gold-scale)) !important;
+  letter-spacing: .12px !important;
+  font-variant-numeric: tabular-nums;
+  text-align: center !important;
+  box-shadow: 0 3px 0 #b49d50, 0 6px 10px rgba(66,63,37,.14), inset 0 1px 0 rgba(255,255,255,.96) !important;
+}
+
+.duduq-canonical-header-hud .hud-counter > span { display: block; transform: translateY(-.25px); }
+
+/* Center region owns track alignment; controls remain a fixed right-side group. */
+.duduq-canonical-header-hud .duduq-canonical-progress-region {
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+  /* Optical correction: preserves the 500px track while centering it left of the region's geometric center. */
+  padding-inline-end: calc(48px * var(--duduq-gold-scale));
+}
+.duduq-canonical-header-hud .duduq-canonical-progress-region .hud-progress {
+  position: static !important;
+  width: min(calc(500px * var(--duduq-gold-scale)), 100%) !important;
+  height: calc(16px * var(--duduq-gold-scale)) !important;
+  min-width: 0 !important;
+}
+.duduq-canonical-header-hud .duduq-canonical-progress-region .hud-progress-fill {
+  position: relative;
+  overflow: hidden;
+  background: var(--duduq-color-progress-fill) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), inset 0 -1px 0 rgba(18,98,146,.22), 0 1px 2px rgba(20,89,125,.26) !important;
+}
+.duduq-canonical-header-hud .duduq-canonical-progress-region .hud-progress-fill::after {
+  content: "";
+  position: absolute;
+  inset: 1px 3px auto;
+  height: 38%;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,.36), rgba(255,255,255,0));
+  pointer-events: none;
+}
+.duduq-canonical-header-hud > .hud-counter {
+  position: static !important;
+}
+.duduq-canonical-header-hud > .fullscreen-button {
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  justify-self: end;
+}
+
+/* A bounded, balanced title block: Core decides natural whole-word wrapping. */
+.duduq-canonical-header-hud .hud-title-group {
+  width: calc(120px * var(--duduq-gold-scale)) !important;
+  max-width: calc(120px * var(--duduq-gold-scale)) !important;
+  top: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  min-height: calc(74px * var(--duduq-gold-scale));
+}
+.duduq-canonical-header-hud .hud-title {
+  width: 100% !important;
+  max-width: 100% !important;
+  white-space: normal !important;
+  overflow-wrap: normal;
+  word-break: normal;
+  text-wrap: balance;
+  line-height: .96 !important;
+}
+
+/* Official fullscreen control: one centered icon and tactile depth for every Header consumer. */
+.duduq-canonical-header-hud .fullscreen-button {
+  box-sizing: border-box !important;
+  display: grid !important;
+  place-items: center !important;
+  width: calc(56px * var(--duduq-gold-scale)) !important;
+  height: calc(56px * var(--duduq-gold-scale)) !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+  border: 1px solid rgba(191,232,255,.88) !important;
+  background: linear-gradient(180deg,#99dcff 0%,#3aa4e2 54%,#267ebc 100%) !important;
+  box-shadow: 0 5px 0 #155a90, 0 8px 12px rgba(32,74,105,.2), inset 0 1px 0 rgba(255,255,255,.58) !important;
+  transition: transform 140ms ease, filter 140ms ease, box-shadow 140ms ease;
+}
+.duduq-canonical-header-hud .fullscreen-button svg { display:block; width:calc(25px * var(--duduq-gold-scale)) !important; height:calc(25px * var(--duduq-gold-scale)) !important; stroke:currentColor; fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+.duduq-canonical-header-hud .fullscreen-button:hover:not(:disabled) { filter:brightness(1.06) saturate(1.04); transform:translateY(-1px); }
+.duduq-canonical-header-hud .fullscreen-button:active:not(:disabled) { transform:translateY(3px); box-shadow:0 2px 0 #155a90,0 3px 6px rgba(32,74,105,.16),inset 0 1px 0 rgba(255,255,255,.45) !important; }
+.duduq-canonical-header-hud .fullscreen-button:focus-visible { outline:3px solid #ffe48a; outline-offset:3px; }
+.duduq-canonical-header-hud .fullscreen-button:disabled { cursor:not-allowed; filter:grayscale(.35) opacity(.58); }
+
+@keyframes duduq-canonical-mascot-float {
+  0%, 100% { transform: translate3d(0, 1px, 0); }
+  50% { transform: translate3d(0, -4px, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .duduq-canonical-header-hud .duduq-canonical-mascot-motion { animation: none; }
+}
+
+@media (max-width: 640px) {
+  .duduq-canonical-header-hud {
+    grid-template-columns: calc(300px * var(--duduq-gold-scale)) minmax(0, 1fr) auto auto !important;
+    column-gap: clamp(6px, 2vw, 12px) !important;
+  }
+  .duduq-canonical-header-hud .duduq-canonical-progress-region { padding-inline-end: 0; }
+}

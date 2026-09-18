@@ -1,0 +1,104 @@
+@import url("../../../../core/duduq-question-panel.css");
+
+/* Target Shooter owns arena composition only. Core HUD geometry is inherited. */
+.target-shooter-screen{background:#183f36}.target-shooter-screen .world-backdrop{background-image:url('https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Templates/1%C2%BA%20ano%20-whispering-woods.png')}
+.target-shooter-arena{position:absolute;top:0;left:50%;z-index:1;width:1366px;height:768px;transform:translateX(-50%) scale(var(--ui-scale));transform-origin:top center}.target-shooter-target{position:absolute;width:184px;height:236px;margin:0}.target-shooter-target__base{position:absolute;inset:0;width:184px;height:236px;object-fit:contain}.target-shooter-target__animal{position:absolute;z-index:2;left:45px;top:53px;width:93px;height:105px;object-fit:contain}.target-shooter-target--dog{left:196px;top:287px}.target-shooter-target--cat{left:460px;top:220px}.target-shooter-target--rabbit{left:705px;top:305px}.target-shooter-target--fish{left:970px;top:236px}.target-state-ring{position:absolute;z-index:3;left:3px;top:4px;display:grid;place-items:center;width:178px;height:178px;border:5px solid transparent;border-radius:50%;color:#fff;font:900 33px/1 Arial}.is-selected .target-state-ring{border-color:#36d3e8;background:radial-gradient(circle,transparent 66%,#bdffff22 67%);box-shadow:0 0 0 6px #bdffff77;color:#dfffff;font-size:27px}.is-correct .target-state-ring{border-color:#3bb46b;box-shadow:0 0 0 6px #c8ffdc99}.is-incorrect .target-state-ring{border-color:#f06d69;box-shadow:0 0 0 6px #ffd0c999}.duduq-magic-slingshot{position:absolute;left:591px;top:535px;width:184px;height:203px;filter:drop-shadow(0 12px 8px #123d3540)}.slingshot-pedestal{position:absolute;left:21px;bottom:0;width:142px;height:54px;border:5px solid #f0af49;border-radius:50% 50% 34% 34%;background:linear-gradient(#9b5529,#cf7b32 36%,#71371f);box-shadow:inset 0 8px #eaa45c}.slingshot-arm{position:absolute;bottom:39px;width:35px;height:131px;border:4px solid #f2ba57;border-radius:30px;background:linear-gradient(90deg,#6c301d,#dc8639 45%,#7a3820)}.slingshot-arm--left{left:37px;transform:rotate(-23deg)}.slingshot-arm--right{right:37px;transform:rotate(23deg)}.slingshot-elastic{position:absolute;left:62px;top:51px;width:59px;height:13px;border-radius:50%;background:#1d7ccd;box-shadow:0 0 0 3px #84ecf1}.projectile{position:absolute;z-index:2;left:65px;top:36px;display:grid;place-items:center;width:55px;height:55px;border:4px solid #c6ffff;border-radius:50%;color:#fff;font:900 25px/1 Arial;background:radial-gradient(circle at 35% 25%,#fff 0 7%,#6df0ff 12%,#1988dc 50%,#083e8d 77%);box-shadow:0 0 0 5px #1167b6,0 0 25px #3ef0ff}.aim-trajectory{position:absolute;left:84px;top:-66px;display:flex;flex-direction:column;gap:9px}.aim-trajectory i{width:9px;height:9px;border-radius:50%;background:#d9ffff;box-shadow:0 0 8px #1fe2f1}.aim-trajectory i:nth-child(4){opacity:.6}.aim-trajectory i:nth-child(5){opacity:.35}.aim-trajectory i:nth-child(6){opacity:.17}@container game (max-width:900px){.target-shooter-arena{transform:translateX(-50%) scale(.67)}}@container game (max-width:520px) and (max-height:420px){.target-shooter-arena{transform:translateX(-50%) scale(.43)}}
+
+/* Penpot Premium Slingshot: exact local coordinates from PREMIUM_SLINGSHOT_FORENSIC_LOCK.md. */
+.duduq-magic-slingshot{left:568px;top:572px;width:230px;height:150px;overflow:visible;filter:none}
+.duduq-magic-slingshot>*:not(.aim-trajectory){position:absolute;display:block;box-sizing:border-box;transform-origin:center}
+.slingshot-pedestal{z-index:45;left:-24px;top:142px;width:252px;height:32px;border:2px solid #75472f;border-radius:16px;background:linear-gradient(180deg,#bc8053 0%,#815037 100%);box-shadow:0 4px 8px 0 rgb(70 49 38 / 28%)}
+.slingshot-arm{width:40px;height:132px;border:0;border-radius:16px;background:linear-gradient(145.008deg,#e5ad70 0%,#c9824d 48%,#905432 100%);box-shadow:inset 0 0 0 2px #8a4e31,0 5px 9px 0 rgb(96 59 42 / 24%)}
+.slingshot-arm-left{z-index:48;left:-.3937298674682px;top:26.0408477738056px;transform:rotate(335deg)}
+.slingshot-arm-right{z-index:49;left:111.6062701325209px;top:29.4217938677289px;transform:rotate(25deg)}
+.slingshot-elastic{width:16px;height:112px;border:1.5px solid #1e78ad;border-radius:6px;background:linear-gradient(180deg,#8deaff 0%,#39afe8 45%,#1879ba 100%);box-shadow:none}
+.slingshot-elastic::after{content:none}
+.slingshot-elastic-left{z-index:52;left:45.751803787145px;top:39.1191953814669px;transform:rotate(352deg)}
+.slingshot-elastic-right{z-index:53;left:128.7775920804161px;top:39.675887785309px;transform:rotate(8deg)}
+.slingshot-pocket{z-index:55;left:67px;top:121px;width:70px;height:38px;border:2px solid #75452f;border-radius:13px;background:linear-gradient(180deg,#b9774d 0%,#8c5235 100%);box-shadow:0 3px 5px 0 rgb(81 50 38 / 22%)}
+.slingshot-orb-aura{z-index:57;left:63px;top:54px;width:80px;height:80px;border:2px solid rgb(116 220 255 / 50%);border-radius:50%;background:rgb(140 238 255 / 22%)}
+.slingshot-orb{z-index:58;left:74px;top:65px;width:58px;height:58px;border:3px solid #e8fdff;border-radius:50%;background:linear-gradient(145.008deg,#9bf5ff 0%,#42c7f1 28%,#218bd3 100%);box-shadow:0 3px 9px 1px rgb(21 155 210 / 32%)}
+.slingshot-orb-highlight{z-index:59;left:86px;top:64px;width:19px;height:16px;border-radius:50%;background:rgb(255 255 255 / 90%)}
+.slingshot-orb-star{z-index:60;left:89px;top:65px;width:28px;height:32px;color:rgb(234 255 255 / 94%);font-family:Fredoka,sans-serif;font-size:18px;font-weight:700;line-height:1.2;letter-spacing:0;text-align:center}
+.aim-trajectory i:nth-child(1){z-index:61}.aim-trajectory i:nth-child(2){z-index:62}.aim-trajectory i:nth-child(3){z-index:63}.aim-trajectory i:nth-child(4){z-index:64}.aim-trajectory i:nth-child(5){z-index:65}.aim-trajectory i:nth-child(6){z-index:66}.aim-trajectory i:nth-child(7){z-index:67}.aim-trajectory i:nth-child(8){z-index:68}.aim-trajectory i:nth-child(9){z-index:69}
+
+/* Target Shooter Magic Launcher: official modular PNG assembly. */
+.duduq-magic-launcher{position:absolute;left:523px;top:555px;width:320px;height:190px;overflow:visible;isolation:isolate;filter:drop-shadow(0 12px 10px rgb(13 52 65 / 22%))}
+.duduq-magic-launcher>div{position:absolute;inset:0;pointer-events:none}
+.launcher-base{z-index:10}.launcher-support{z-index:11}.launcher-base__art{position:absolute;left:10px;top:38px;width:300px;height:150px;object-fit:contain;display:block}.launcher-support__art{position:absolute;left:48px;top:5px;width:224px;height:184px;object-fit:contain;display:block}
+.launcher-aim-system{z-index:20;transform-origin:160px 102px;transition:transform 180ms ease-out}
+.launcher-recoil-system{position:absolute;inset:0;transform:translateZ(0)}
+.launcher-aim-system .launcher-barrel-shell{position:absolute;left:0;top:42px;width:320px;height:107px;object-fit:contain}
+.launcher-aim-system .launcher-aura{position:absolute;left:120px;top:15px;width:150px;height:150px;object-fit:contain;opacity:.9}
+.launcher-aim-system .launcher-core{position:absolute;left:122px;top:56px;width:76px;height:76px;object-fit:contain}
+.launcher-aim-system .launcher-muzzle{position:absolute;left:253px;top:48px;width:72px;height:72px;object-fit:contain}
+.launcher-aim-system .launcher-aura[hidden]{display:none}
+/* Source artwork faces right at 0deg; neutral aims into the upper target field. */
+.launcher-state-left{transform:rotate(-80deg)}.launcher-state-center{transform:rotate(-62deg)}.launcher-state-right{transform:rotate(-44deg)}
+.launcher-fx{z-index:30}.launcher-fx img{position:absolute;display:block;object-fit:contain}.launcher-fx img[hidden]{display:none}
+.launcher-projectile{left:260px;top:30px;width:90px;height:68px}.launcher-trail{left:30px;top:48px;width:260px;height:130px}.launcher-impact{left:100px;top:-80px;width:160px;height:160px}.launcher-particles{left:85px;top:-45px;width:180px;height:180px}
+.duduq-magic-launcher~.aim-trajectory{display:none}
+
+/* Final measured target-local alignment overrides. */
+.target-shooter-target__animal{transform:translate(var(--animal-shift-x,0px),var(--animal-shift-y,0px))}
+.target-shooter-target--dog{--animal-shift-y:-12px}.target-shooter-target--cat{--animal-shift-x:-.5px;--animal-shift-y:.5px}.target-shooter-target--rabbit{--animal-shift-x:3px;--animal-shift-y:4px}.target-shooter-target--fish{--animal-shift-x:-36px;--animal-shift-y:5px}
+.target-status-badge{top:-2px;right:-2px}
+.target-shooter-target{cursor:pointer}
+.target-shooter-target.is-hovered .target-state-ring{border-color:#36d3e8;box-shadow:0 0 0 6px rgb(189 255 255 / 48%),0 0 18px rgb(54 211 232 / 38%)}
+.target-feedback-shake{animation:target-feedback-shake 360ms ease-out both}
+.target-feedback-pulse .target-state-ring{animation:target-feedback-pulse 720ms ease-in-out both}
+@keyframes target-feedback-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px) rotate(-1deg)}40%{transform:translateX(4px) rotate(1deg)}60%{transform:translateX(-3px)}80%{transform:translateX(2px)}}
+@keyframes target-feedback-pulse{0%,100%{filter:brightness(1);box-shadow:0 0 0 6px rgb(200 255 220 / 60%)}35%{filter:brightness(1.22);box-shadow:0 0 0 9px rgb(200 255 220 / 72%),0 0 22px rgb(59 180 107 / 62%)}70%{filter:brightness(1.08);box-shadow:0 0 0 7px rgb(200 255 220 / 66%),0 0 14px rgb(59 180 107 / 46%)}}
+@media (prefers-reduced-motion: reduce){.target-feedback-shake,.target-feedback-pulse .target-state-ring{animation:none}}
+.launcher-state-center{transform:rotate(1.409deg)}
+.launcher-muzzle-point{position:absolute;left:180px;top:16px;width:1px;height:1px;opacity:0;pointer-events:none}
+.launcher-gameplay-fx{position:absolute;inset:0;z-index:80;pointer-events:none;overflow:visible}
+.launcher-gameplay-fx img{position:absolute;display:block;object-fit:contain;pointer-events:none;will-change:transform,opacity}
+.launcher-gameplay-fx img[hidden]{display:none}
+.launcher-gameplay-fx .launcher-projectile-front{z-index:3}
+.launcher-gameplay-fx .launcher-trail-front{z-index:2;opacity:.72;transform-origin:center}
+.launcher-gameplay-fx .launcher-impact-front{z-index:4;opacity:0;transform:scale(.5);transition:opacity 120ms ease-out,transform 180ms ease-out}
+.launcher-gameplay-fx .launcher-impact-front.is-impacting{opacity:.9;transform:scale(1)}
+.launcher-aim-system .launcher-portal-front.is-charging{opacity:.42;animation:launcher-portal-charge 360ms ease-in-out infinite alternate}
+.launcher-gameplay-fx .launcher-particles-front.is-charging{opacity:.5;animation:launcher-particles-charge 420ms ease-in-out infinite alternate}
+@keyframes launcher-portal-charge{from{transform:scale(.92);opacity:.18}to{transform:scale(1);opacity:.48}}
+@keyframes launcher-particles-charge{from{transform:scale(.94);opacity:.2}to{transform:scale(1.02);opacity:.52}}
+@media (prefers-reduced-motion: reduce){.launcher-aim-system .launcher-portal-front.is-charging,.launcher-gameplay-fx .launcher-particles-front.is-charging{animation:none}.launcher-gameplay-fx .launcher-impact-front{transition:none}}
+@container game (max-width:700px) and (max-height:420px){.target-shooter-arena{transform:translateX(-50%) scale(.43)}}
+.target-status-badge{position:absolute;z-index:8;top:-8px;right:-8px;display:grid;place-items:center;width:44px;height:44px;border:4px solid #fff;border-radius:50%;font:900 27px/1 Arial;color:#fff;box-shadow:0 4px 9px rgb(38 54 54 / 30%);pointer-events:none;opacity:0;visibility:hidden;transform:scale(.82);transition:opacity 140ms ease-out,transform 180ms ease-out,visibility 0s linear 180ms}
+.is-incorrect .target-status-badge{background:#ef6f6b;box-shadow:0 0 0 3px rgb(255 208 201 / 72%),0 4px 9px rgb(38 54 54 / 30%)}
+.is-correct .target-status-badge{background:#39b66c;box-shadow:0 0 0 3px rgb(200 255 220 / 72%),0 4px 9px rgb(38 54 54 / 30%)}
+.is-incorrect .target-status-badge,.is-correct .target-status-badge{opacity:1;visibility:visible;transform:scale(1);transition-delay:0s}
+.target-shooter-target.is-subdued{opacity:.72;filter:saturate(.78) brightness(.96);transition:opacity 220ms ease-out,filter 220ms ease-out}
+.launcher-state-center{transform:rotate(1.409deg)}
+@media (prefers-reduced-motion: reduce){.launcher-aim-system{transition:none}}
+
+/* Measured target-local optical centering corrections; roots and locked geometry stay unchanged. */
+.target-shooter-target__animal{transform:translate(var(--animal-shift-x,0px),var(--animal-shift-y,0px))}
+.target-shooter-target--dog{--animal-shift-y:-12px}.target-shooter-target--cat{--animal-shift-x:-.5px;--animal-shift-y:.5px}.target-shooter-target--rabbit{--animal-shift-x:3px;--animal-shift-y:4px}.target-shooter-target--fish{--animal-shift-x:-36px;--animal-shift-y:5px}
+.target-status-badge{top:-2px;right:-2px}
+
+/* Authoritative front-facing kit. Legacy side-view rules remain reference-only. */
+.duduq-magic-launcher{left:503px;top:542px;width:360px;height:220px;transform:scale(1.02);transform-origin:180px 0;filter:drop-shadow(0 12px 12px rgb(13 52 65 / 24%))}
+.launcher-base{z-index:10}.launcher-support{z-index:11}.launcher-base-front__art{position:absolute;left:26px;top:88px;width:308px;height:132px;object-fit:contain;display:block}.launcher-support-front__art{position:absolute;left:28px;top:68px;width:304px;height:152px;object-fit:contain;display:block}
+.launcher-aim-system{z-index:20;transform-origin:180px 126px}.launcher-recoil-system{position:absolute;inset:0}
+.launcher-aim-system .launcher-barrel-front{position:absolute;left:86px;top:0;width:188px;height:210px;object-fit:contain;display:block}
+.launcher-aim-system .launcher-core-front[hidden],.launcher-aim-system .launcher-portal-front[hidden],.launcher-aim-system .launcher-muzzle-front[hidden]{display:none}
+.launcher-aim-system .launcher-core-front{position:absolute;left:134px;top:65px;width:92px;height:92px;object-fit:contain}
+.launcher-aim-system .launcher-muzzle-front{position:absolute;left:105px;top:4px;width:150px;height:76px;object-fit:contain}
+.launcher-aim-system .launcher-portal-front{position:absolute;left:92px;top:-8px;width:176px;height:170px;object-fit:contain;opacity:0}
+.launcher-state-left{transform:rotate(-10deg)}.launcher-state-center{transform:rotate(1.409deg)}.launcher-state-right{transform:rotate(10deg)}
+.launcher-fx{z-index:30}.launcher-fx img[hidden]{display:none}
+.duduq-magic-launcher~.aim-trajectory{display:none}
+.target-shooter-target--fish{--animal-shift-x:0px;--animal-shift-y:5px}.target-status-badge{top:-16px;right:-16px}
+.target-shooter-target--fish .target-state-ring{left:3px;top:4px}
+.target-shooter-screen \.legacy-game-hud,.target-shooter-screen \.legacy-question-panel{z-index:10}
+.target-shooter-screen.is-fullscreen-fallback{position:fixed;inset:0;z-index:9999;width:100vw;height:100vh;overflow:hidden}
+\.legacy-audio-button[data-audio-state="requested"]{filter:brightness(1.12) saturate(1.15);transform:translateY(-1px)}
+
+/* Gold Master HUD authority for this static candidate. */
+.target-shooter-screen \.legacy-question-panel{width:min(720px,calc(100% - 24px)) !important;height:86px !important;min-height:86px !important;margin-top:24px !important;padding:5px 13px 8px 44px !important;border-radius:25px !important}
+.target-shooter-screen .question-copy{transform:none !important;padding-right:12px !important}
+.target-shooter-screen .question-label{margin:0 0 5px !important;font-size:13px !important;line-height:1.15 !important}
+.target-shooter-screen .question-prompt{font-size:22px !important;line-height:1.15 !important}
+.target-shooter-screen \.legacy-audio-button{width:56px !important;height:56px !important;min-width:56px !important;min-height:56px !important;border-radius:18px !important}
