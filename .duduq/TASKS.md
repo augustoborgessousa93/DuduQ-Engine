@@ -6,11 +6,11 @@
 - Canonical manifests and guarded sync workflow created.
 
 ## NOW
-- WIP checkpoint created; validation requires review.
+- Autopilot infrastructure activated; local-first baseline is on `duduq-autopilot-2026-09-18`.
 
 ## NEXT
-- Configure `workspace-sync-2026-09-18` or a clearly named continuity branch.
-- Push a validated checkpoint to `augustoborgessousa93/DuduQ-Engine`.
+- Run `npm run duduq:resume` and `npm run duduq:validate` from a normal terminal.
+- Review Penpot visually; keep `PENPOT_SYNC_REQUIRED` until an authorized export/write is available.
 
 ## BLOCKED
-- Git executable and GitHub remote are unavailable in the current environment.
+- No infrastructure blocker. Nested child-process checks are limited only inside this managed Codex sandbox.
