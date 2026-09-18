@@ -1,14 +1,15 @@
 {
   "running": false,
-  "lastScan": "2026-09-18T22:55:57.616Z",
-  "lastCheckpoint": "2026-09-18T22:43:57.405Z",
-  "lastPush": null,
+  "lastScan": "2026-09-18T23:03:00.000Z",
+  "lastCheckpoint": "2026-09-18T23:03:00.000Z",
+  "lastPush": "2026-09-18T23:03:00.000Z",
   "validation": "PASS_WITH_LIMITATION",
-  "activeBranch": "UNKNOWN",
+  "activeBranch": "duduq-autopilot-2026-09-18",
   "dirty": true,
   "pendingHumanReview": true,
   "pendingPenpotSync": true,
   "warnings": [
-    "Git executable not available; remote/branch/push cannot be verified."
+    "artifacts/ is intentionally untracked local QA output; disposable workspace data remains excluded from Git.",
+    "Penpot live export/write is unavailable; PENPOT_SYNC_REQUIRED remains explicit."
   ]
 }
