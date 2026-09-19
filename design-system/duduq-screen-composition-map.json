@@ -26,10 +26,18 @@
         "header": "855af85f-faf4-8069-8008-a8ea68c23da7",
         "question": "855af85f-faf4-8069-8008-a8ea777f267c"
       },
-      "mechanicInstanceIds": {},
+      "mechanicInstanceIds": {
+        "dog": "855af85f-faf4-8069-8008-a8eb5e3111c6",
+        "cat": "706d3143-51ea-8066-8008-a8f8b8eae375",
+        "rabbit": "706d3143-51ea-8066-8008-a8f8b0becce5",
+        "fish": "855af85f-faf4-8069-8008-a8eb502c79b6",
+        "dogSelectOuterGlow": "855af85f-faf4-8069-8008-a8eb5e317eaf",
+        "rabbitCorrectRing": "706d3143-51ea-8066-8008-a8f8b0becce9",
+        "catIncorrectBadge": "706d3143-51ea-8066-8008-a8f8b8eb0eae"
+      },
       "targetSceneRules": {"targetIdentity": "Main", "scenePosition": "Instance", "dog": "instance-only position", "cat": "instance-only position", "rabbit": "instance-only position", "fish": "instance-only position"},
       "editableProperties": ["x", "y", "width", "height", "fill", "radius", "shadow", "alignment"],
-      "status": "RUNTIME_AUDITED_NATIVE_COMPOSITION_PENDING",
+      "status": "RUNTIME_AUDITED_NATIVE_TARGET_LAYERS_VERIFIED_COMPOSITION_FRAME_PENDING",
       "gameplay": "Magic Cannon / Magic Launcher protected; no gameplay ownership in Penpot"
     },
     "Drag & Drop": {
