@@ -1,23 +1,22 @@
 # DUDUQ Tasks
 
 ## DONE
-- Native Control Panel shared components verified.
-- Auxiliary SVG underlay removed.
-- Component inventory and screen composition map created.
-- Target Shooter DOG/CAT/RABBIT/FISH native layers verified and mapped.
-- Canonical HUD and screen-composition guards pass.
-- GitHub Actions validation passed on commit 4c704a00c239586b16c66dfa192e30258505c7e9.
-- Three native Penpot Board hosts created and recorded in the composition map.
+- Shared native Control Panel components verified.
+- Three native composition frame hosts created for Matching, Target Shooter and Drag & Drop.
+- Target Shooter DOG/CAT/RABBIT/FISH native layers verified and movable.
+- Composition IDs recorded in design-system/duduq-screen-composition-map.json.
+- Detached official instances: 0.
+- Duplicate official mains: 0.
 
 ## NOW
-- Finish native editable Penpot screen compositions inside the existing Control Panel page.
+- Finish mechanic-specific native editable layers inside the three existing frames.
 
 ## NEXT
-- Reparent/organize Matching mechanic layers into its native frame and record IDs.
-- Reparent/organize Target Shooter shared instances and launcher visual into its native frame.
-- Reparent/organize Drag & Drop mechanic layers into its native frame and record IDs.
-- Re-run validation, update maps, checkpoint, and push.
+- Matching: create/reparent Word Card, Image Card, Playfield, Primary Button, Feedback and related visual layers; record verified IDs.
+- Target Shooter: organize Header/Question/shared controls plus launcher visual inside the existing Target Shooter frame; keep target positions editable as screen instances.
+- Drag & Drop: create/organize Illustration/Image Frame, DropZone, Answer Tile, Feedback and related visual layers; record verified IDs.
+- Re-run validation, update maps, checkpoint and push.
 
 ## BLOCKED
 - No GitHub blocker.
-- Penpot live API/export is unavailable; use browser-assisted native Penpot editing only.
+- Penpot live API/export remains unavailable; final native-layer work requires browser-assisted Penpot editing.
