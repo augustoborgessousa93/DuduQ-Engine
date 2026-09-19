@@ -22,4 +22,4 @@ Human visual review of the three workbenches, then controlled Penpot-property ex
 `RUNTIME_TWIN_PENDING_HUMAN_APPROVAL`: Penpot write access is verified; continuous live sync is not claimed. Human visual review remains required before any workbench becomes visual source of truth.
 
 ## Branch / commit
-`recovery/duduq-20260919-workbench-master` / `bd92e1c` (published recovery branch; preserves local workbench state without overwriting the diverged development branch).
+`recovery/duduq-20260919-workbench-master` / `6fc0cfd` (published recovery branch; preserves local workbench state without overwriting the diverged development branch).
