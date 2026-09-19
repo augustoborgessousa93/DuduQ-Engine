@@ -14,7 +14,7 @@
 - Validated continuity metadata; checkpoint ready.
 
 ## NEXT
-- Controlled Penpot-property export to Core using the captured workbench snapshot.
+- Restore a browser route that can reach `http://127.0.0.1:4175`, or provide a supported self-contained rendered HTML bundle, then repeat the isolated HTML PARA DESIGN import test.
 - Re-run validation, checkpoint, and push.
 
 ## BLOCKED
