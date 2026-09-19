@@ -1,0 +1,83 @@
+name: Y3 Smart Sentence Standardization
+
+on:
+  pull_request:
+    paths:
+      - 'content/english/year-3/**'
+      - 'test/year3/y3-smart-sentence-standardization.mjs'
+      - 'test/year3/y3-human-ux-correction.mjs'
+      - '.github/workflows/y3-smart-sentence-standardization.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smart-sentence-standardization:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Guard frozen Year 3 runtime and syntax
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const y3=JSON.parse(fs.readFileSync('engine/channels/year3-r151-v1.json','utf8'));
+          if(y3.revision!==151) throw new Error('Year 3 revision changed');
+          if(y3.core?.release!=='1.0.12') throw new Error('Core changed');
+          if(y3.mechanics?.['target-shooter']?.release!=='1.0.23') throw new Error('Target Shooter changed');
+          if(y3.mechanics?.['smart-sentence']?.release!=='4.0.20') throw new Error('Smart Sentence release changed');
+          console.log('YEAR3_RUNTIME_FROZEN = PASS');
+          NODE
+          node --check content/english/year-3/year3-smart-sentence-standard-v1.js
+          node --check content/english/year-3/year3-human-ux-correction-v1.js
+          node --check test/year3/y3-smart-sentence-standardization.mjs
+          node --check test/year3/y3-human-ux-correction.mjs
+
+      - name: Preserve source, concise instructions and mechanic distribution
+        run: |
+          node test/year3/y3-track-b-matrix.mjs
+          node test/year3/y3-ux-correction.mjs
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local Year 3 validation server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/y3-smart-standard-http.log 2>&1 &
+          echo $! > /tmp/y3-smart-standard-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/content/english/year-3/index.html >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/y3-smart-standard-http.log
+          exit 1
+
+      - name: Focal human UX correction — Smart visual support and Target direct shoot
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year3/y3-human-ux-correction.mjs
+
+      - name: Final affected regression — Smart Sentence golden standard
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: node test/year3/y3-smart-sentence-standardization.mjs
+
+      - name: Upload visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: y3-human-ux-final-focal
+          path: |
+            test-results/year3-human-ux/
+            test-results/year3-smart-standard/
+          if-no-files-found: ignore

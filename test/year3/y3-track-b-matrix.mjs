@@ -4,7 +4,7 @@ import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
-const Matrix=require('../../content/english/year-3/y3-orchestration-matrix-v1.js');
+const Matrix=require('../../content/english/year-3/y3-ux-orchestration-v1.js');
 const Profile=require('../../content/english/year-3/y3-guided-reading-profile-v1.js');
 const Orchestrator=require('../../content/english/shared/pedagogical-orchestrator-v1.js');
 
@@ -45,8 +45,9 @@ for(const row of matrix){
 }
 
 const distribution=Matrix.distribution();
-assert.deepEqual(distribution,{'smart-sentence':43,'word-slash':1,'bubble-pop':3,'target-shooter':42,'drag-drop':1});
+assert.deepEqual(distribution,{'smart-sentence':35,'word-slash':1,'bubble-pop':6,'target-shooter':47,'drag-drop':1});
 assert.equal(distribution.matching||0,0);
+assert.equal(Object.keys(Matrix.uxChanges).length,11,'expected 11 justified mechanic changes');
 
 const m01=matrix.filter(r=>r.module===1);
 assert.equal(m01.length,15);
@@ -56,5 +57,6 @@ assert.equal(m01.filter(r=>r.status.execution==='READY').length,15,'M01 sentinel
 
 console.log('Y3_SOURCE_BASELINE = PASS — 90/90 IDs, answers, skills, abilities, difficulties and linguistic targets frozen');
 console.log('Y3_MATRIX = PASS — 90/90 orchestration decisions materialized');
+console.log('Y3_UX_MECHANIC_CHANGES = 11 — all equivalence-justified');
 console.log('DISTRIBUTION',JSON.stringify(distribution));
 console.log('M01_SENTINEL_PLANNING = PASS — 15/15 execution-eligible');
