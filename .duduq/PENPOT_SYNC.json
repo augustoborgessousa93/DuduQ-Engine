@@ -1,7 +1,7 @@
 {
-  "status": "PENPOT_SYNC_REQUIRED",
-  "reason": "No authorized Penpot export/API/MCP write capability is available to the local sync runner.",
+  "status": "CONTROLLED_SYNC_READY",
+  "reason": "Penpot MCP write gate and native property reads verified for the connected Control Panel session; continuous live sync remains unavailable.",
   "components": {},
-  "lastSyncTime": null,
-  "lastSyncDirection": null
+  "lastSyncTime": "2026-09-19T13:30:00-03:00",
+  "lastSyncDirection": "PENPOT_READ_TO_SNAPSHOT"
 }

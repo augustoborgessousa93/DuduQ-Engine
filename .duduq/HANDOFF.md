@@ -13,7 +13,7 @@ Runtime evidence remains unchanged; gameplay and Magic Cannon / Magic Launcher b
 Header Main 88954f25-7a86-800b-8008-a87e6f0d4e44; Question Main 88954f25-7a86-800b-8008-a87e700a22e9; Control Panel 855af85f-faf4-8069-8008-a8e75a3255fd; gameplay and Magic Cannon / Magic Launcher protected.
 
 ## Current limitation
-Penpot live sync is not claimed. The property map records inspected native IDs; a future sync must read current Penpot properties before writing Core.
+Penpot MCP write gate and native property reads are verified in the connected session. Continuous live sync is not claimed; Core updates remain controlled and must diff against `design-system/duduq-workbench-sync-snapshot.json`.
 
 ## Next exact action
 Human visual review of the three workbenches, then controlled Penpot-property export to Core. No gameplay changes.
@@ -22,4 +22,4 @@ Human visual review of the three workbenches, then controlled Penpot-property ex
 `PENPOT_SYNC_REQUIRED`: browser/MCP review is the current authority.
 
 ## Branch / commit
-`recovery/duduq-20260919-workbench-master` / `12219e8` (published; preserves local workbench state without overwriting the diverged development branch).
+`recovery/duduq-20260919-workbench-master` / checkpoint pending (published recovery branch; preserves local workbench state without overwriting the diverged development branch).
