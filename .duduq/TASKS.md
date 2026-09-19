@@ -14,7 +14,7 @@
 - Validated continuity metadata; checkpoint ready.
 
 ## NEXT
-- Restore a browser route that can reach `http://127.0.0.1:4175`, or provide a supported self-contained rendered HTML bundle, then repeat the isolated HTML PARA DESIGN import test.
+- Use the generated 4176 snapshot package through a verified Penpot import/write route, then compare the imported result against the approved runtime before any promotion.
 - Re-run validation, checkpoint, and push.
 
 ## BLOCKED
