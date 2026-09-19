@@ -67,7 +67,7 @@
 .duduq-canonical-header-hud .duduq-canonical-progress-region .hud-progress {
   position: static !important;
   width: min(calc(500px * var(--duduq-gold-scale)), 100%) !important;
-  height: calc(16px * var(--duduq-gold-scale)) !important;
+  height: calc(18px * var(--duduq-gold-scale)) !important;
   min-width: 0 !important;
 }
 .duduq-canonical-header-hud .duduq-canonical-progress-region .hud-progress-fill {
