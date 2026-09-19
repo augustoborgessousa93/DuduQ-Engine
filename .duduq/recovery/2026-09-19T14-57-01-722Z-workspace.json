@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-09-19T14:57:01.722Z",
+  "workspace": "C:\\Users\\augus\\Downloads\\workspace",
+  "fileCount": 2156,
+  "git": {
+    "available": true,
+    "branch": "recovery/duduq-20260919-workbench-master",
+    "head": "24aecc71f4253cd5da99d2bb8ff29f9a3bb28d0f",
+    "status": "M .duduq/AUTOPILOT_STATUS.json\n M .duduq/LAST_VALIDATION.json\n?? artifacts/",
+    "remote": "origin\thttps://github.com/augustoborgessousa93/DuduQ-Engine.git (fetch)\norigin\thttps://github.com/augustoborgessousa93/DuduQ-Engine.git (push)"
+  },
+  "importantFiles": [
+    "AGENTS.md",
+    "package.json"
+  ],
+  "protectedPenpot": {
+    "headerMain": "88954f25-7a86-800b-8008-a87e6f0d4e44",
+    "questionMain": "88954f25-7a86-800b-8008-a87e700a22e9",
+    "controlPanel": "855af85f-faf4-8069-8008-a8e75a3255fd"
+  },
+  "penpotSync": {
+    "status": "CONTROLLED_SYNC_READY",
+    "reason": "Penpot MCP write gate and native property reads verified for the connected Control Panel session; continuous live sync remains unavailable.",
+    "components": {},
+    "lastSyncTime": "2026-09-19T13:30:00-03:00",
+    "lastSyncDirection": "PENPOT_READ_TO_SNAPSHOT"
+  }
+}
