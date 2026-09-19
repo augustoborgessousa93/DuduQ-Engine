@@ -1,21 +1,22 @@
 # DUDUQ Tasks
 
 ## DONE
-- Native Control Panel instances created and verified.
-- Auxiliary SVG underlay removed in Penpot.
-- Canonical manifests and guarded sync workflow created.
-- Autopilot continuity branch pushed to GitHub.
-- Normal ChatGPT continuity test completed successfully from GitHub.
-- GitHub Actions workflow corrected and validated successfully.
+- Native Control Panel shared components verified.
+- Auxiliary SVG underlay removed.
+- Component inventory and screen composition map created.
+- Target Shooter DOG/CAT/RABBIT/FISH native layers verified and mapped.
+- Canonical HUD and screen-composition guards pass.
+- GitHub Actions validation passed on commit 4c704a00c239586b16c66dfa192e30258505c7e9.
 
 ## NOW
-- Shared native Penpot IDs are verified; mechanic-specific composition IDs remain honestly pending native-node inspection.
+- Finish native editable Penpot screen compositions inside the existing Control Panel page.
 
 ## NEXT
-- When Codex resumes, fetch the active branch before continuing so it receives commit `3760d76e21bf433c4fa5cf89a721447be76a7be4`.
-- Continue the real Penpot → Core synchronization proof using a controlled, reversible visual change.
-- Keep `PENPOT_SYNC_REQUIRED` until an authorized Penpot export/write path is available.
+- Create/organize MATCHING editable composition and record verified native IDs.
+- Create/organize TARGET SHOOTER full composition frame around the already verified native target layers and record frame/instance IDs.
+- Create/organize DRAG & DROP editable composition and record verified native IDs.
+- Re-run validation, update maps, checkpoint, and push.
 
 ## BLOCKED
-- No GitHub continuity blocker.
-- Penpot live API/export remains unavailable.
+- No GitHub blocker.
+- Penpot live API/export is unavailable; use browser-assisted native Penpot editing only.
