@@ -1,7 +1,23 @@
 {
   "status": "PENPOT_SYNC_REQUIRED",
-  "reason": "No authorized Penpot export/API/MCP write capability is available to the local sync runner.",
-  "components": {},
-  "lastSyncTime": null,
-  "lastSyncDirection": null
+  "reason": "No live Penpot API/MCP bridge is available. One human-authorized visual property was manually mirrored to Core from screenshot evidence.",
+  "components": {
+    "DUDUQ / Progress / Track": {
+      "status": "SYNCED",
+      "evidence": "Human screenshot in ChatGPT normal",
+      "observed": {
+        "widthPx": 260,
+        "heightPx": 18
+      },
+      "core": {
+        "path": "core/duduq-canonical-header-hud.css",
+        "heightPx": 18
+      },
+      "direction": "PENPOT_TO_CORE",
+      "commit": "1254bbcadb6b0ff6a80786de61bc8567160b42c6",
+      "note": "This proves the controlled manual-authorized bridge, not live automatic Penpot API sync."
+    }
+  },
+  "lastSyncTime": "2026-09-19T00:47:49.000Z",
+  "lastSyncDirection": "PENPOT_TO_CORE"
 }
