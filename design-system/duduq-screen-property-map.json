@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "fileId": "d8ac01df-6646-81d2-8008-a2900d806e30",
+  "controlPanelPageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
+  "penpotPropertyRead": "AVAILABLE_FOR_NATIVE_NODES_VIA_PENPOT_MCP_WHEN_CONNECTED",
+  "runtimePropertyMapping": {
+    "x": "layout.position.x",
+    "y": "layout.position.y",
+    "width": "layout.size.width",
+    "height": "layout.size.height",
+    "fill": "visual.fill",
+    "stroke": "visual.stroke",
+    "radius": "visual.borderRadius",
+    "shadow": "visual.boxShadow",
+    "opacity": "visual.opacity",
+    "typography": "visual.typography",
+    "spacing": "layout.spacing",
+    "alignment": "layout.alignment"
+  },
+  "nodes": [
+    {"mechanic":"Matching","component":"DUDUQ / MATCHING / EDITABLE WORKBENCH","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dbb811d92","runtimePath":"test/matching/gold-master-candidate-v1/","runtimeSelector":".game-screen","editableProperties":["x","y","width","height","fill","radius","shadow","opacity","spacing","alignment"]},
+    {"mechanic":"Matching","component":"HEADER / INSTANCE","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dbca66a66","runtimePath":"core/ui/duduq-canonical-header-hud.js","runtimeSelector":"[data-canonical-header-slot]","editableProperties":["x","y","width","height","spacing","alignment"]},
+    {"mechanic":"Matching","component":"QUESTION HUD / INSTANCE","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dbcfc7e62","runtimePath":"core/ui/duduq-canonical-question-hud.js","runtimeSelector":"[data-canonical-question-slot]","editableProperties":["x","y","width","height","spacing","alignment"]},
+    {"mechanic":"Matching","component":"MATCHING / WORD CARD / 01","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dbe438bf3","runtimePath":"test/matching/gold-master-candidate-v1/styles/matching.css","runtimeSelector":".matching-card[data-kind=word]","editableProperties":["x","y","width","height","fill","stroke","radius","shadow","typography","spacing","alignment"]},
+    {"mechanic":"Matching","component":"MATCHING / WORD CARD / 02","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dbe607843","runtimePath":"test/matching/gold-master-candidate-v1/styles/matching.css","runtimeSelector":".matching-card[data-kind=word]","editableProperties":["x","y","width","height","fill","stroke","radius","shadow","typography","spacing","alignment"]},
+    {"mechanic":"Matching","component":"MATCHING / IMAGE CARD / 01","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dbe7c5c87","runtimePath":"test/matching/gold-master-candidate-v1/styles/matching.css","runtimeSelector":".matching-card[data-kind=image]","editableProperties":["x","y","width","height","fill","stroke","radius","shadow","typography","spacing","alignment"]},
+    {"mechanic":"Matching","component":"MATCHING / IMAGE CARD / 02","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dbe976919","runtimePath":"test/matching/gold-master-candidate-v1/styles/matching.css","runtimeSelector":".matching-card[data-kind=image]","editableProperties":["x","y","width","height","fill","stroke","radius","shadow","typography","spacing","alignment"]},
+    {"mechanic":"Matching","component":"MATCHING / CONFIRM BUTTON","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dbeb86ffd","runtimePath":"test/matching/gold-master-candidate-v1/styles/shell.css","runtimeSelector":".matching-action-area .primary-action","editableProperties":["x","y","width","height","fill","radius","shadow","typography"]},
+    {"mechanic":"Target Shooter","component":"DUDUQ / TARGET SHOOTER / EDITABLE WORKBENCH","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dbc21b142","runtimePath":"test/target-shooter/gold-master-clean-v2/styles/penpot-geometry-lock.css","runtimeSelector":".target-shooter-screen","editableProperties":["x","y","width","height","fill","spacing","alignment"]},
+    {"mechanic":"Target Shooter","component":"HEADER / INSTANCE","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dbef4697c","runtimePath":"core/ui/duduq-canonical-header-hud.js","runtimeSelector":"[data-canonical-header-slot]","editableProperties":["x","y","width","height","spacing","alignment"]},
+    {"mechanic":"Target Shooter","component":"QUESTION HUD / INSTANCE","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dbf2053c3","runtimePath":"core/ui/duduq-canonical-question-hud.js","runtimeSelector":"[data-canonical-question-slot]","editableProperties":["x","y","width","height","spacing","alignment"]},
+    {"mechanic":"Target Shooter","component":"TARGET / DOG / INSTANCE","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dc09767c1","runtimePath":"test/target-shooter/gold-master-clean-v2/styles/penpot-geometry-lock.css","runtimeSelector":".target-shooter-target--dog","editableProperties":["x","y","width","height"]},
+    {"mechanic":"Target Shooter","component":"TARGET / CAT / INSTANCE","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dc0ddaaa1","runtimePath":"test/target-shooter/gold-master-clean-v2/styles/penpot-geometry-lock.css","runtimeSelector":".target-shooter-target--cat","editableProperties":["x","y","width","height"]},
+    {"mechanic":"Target Shooter","component":"TARGET / RABBIT / INSTANCE","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dc1213449","runtimePath":"test/target-shooter/gold-master-clean-v2/styles/penpot-geometry-lock.css","runtimeSelector":".target-shooter-target--rabbit","editableProperties":["x","y","width","height"]},
+    {"mechanic":"Target Shooter","component":"TARGET / FISH / INSTANCE","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dc159dc12","runtimePath":"test/target-shooter/gold-master-clean-v2/styles/penpot-geometry-lock.css","runtimeSelector":".target-shooter-target--fish","editableProperties":["x","y","width","height"]},
+    {"mechanic":"Drag & Drop","component":"DUDUQ / DRAG DROP / EDITABLE WORKBENCH","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dbc64c72a","runtimePath":"test/drag-drop/gold-master-candidate-v1/","runtimeSelector":"#root","editableProperties":["x","y","width","height","fill","spacing","alignment"]},
+    {"mechanic":"Drag & Drop","component":"HEADER / INSTANCE","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dc193424d","runtimePath":"core/ui/duduq-canonical-header-hud.js","runtimeSelector":"[data-canonical-header-slot]","editableProperties":["x","y","width","height","spacing","alignment"]},
+    {"mechanic":"Drag & Drop","component":"QUESTION HUD / INSTANCE","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dc208b0e8","runtimePath":"core/ui/duduq-canonical-question-hud.js","runtimeSelector":"[data-canonical-question-slot]","editableProperties":["x","y","width","height","spacing","alignment"]},
+    {"mechanic":"Drag & Drop","component":"DRAG DROP / IMAGE FRAME","scope":"SCREEN_INSTANCE","penpotNodeId":"b96e92df-258a-802e-8008-a91dc30979d5","runtimePath":"test/drag-drop/gold-master-candidate-v1/","runtimeSelector":"[data-component=prompt-visual]","editableProperties":["x","y","width","height","fill","stroke","radius","shadow"]}
+  ],
+  "limitation": "Property reads require an active Penpot MCP connection; this file records inspected native IDs and does not claim live write synchronization."
+}

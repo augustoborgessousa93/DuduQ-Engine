@@ -2,37 +2,37 @@
   "schemaVersion": 1,
   "fileId": "d8ac01df-6646-81d2-8008-a2900d806e30",
   "controlPanelPageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
-  "penpotCapability": "browser UI only; composition frame IDs require native-node inspection",
+  "penpotCapability": "native Penpot MCP created and inspected; runtime-to-property sync remains controlled",
   "compositions": {
     "Matching": {
       "section": "19 MATCHING COMPONENTS",
-      "frameId": "706d3143-51ea-8066-8008-a91477f4f890",
+      "frameId": "b96e92df-258a-802e-8008-a91dbb811d92",
       "resolution": "1366x768 runtime reference",
       "runtimePath": "test/matching/gold-master-candidate-v1/",
       "sharedInstances": {
-        "header": "855af85f-faf4-8069-8008-a8ea68c23da7",
-        "question": "855af85f-faf4-8069-8008-a8ea777f267c"
+        "header": "b96e92df-258a-802e-8008-a91dbca66a66",
+        "question": "b96e92df-258a-802e-8008-a91dbcfc7e62"
       },
-      "mechanicInstanceIds": {},
+      "mechanicInstanceIds": {"wordCard01":"b96e92df-258a-802e-8008-a91dbe438bf3","wordCard02":"b96e92df-258a-802e-8008-a91dbe607843","imageCard01":"b96e92df-258a-802e-8008-a91dbe7c5c87","imageCard02":"b96e92df-258a-802e-8008-a91dbe976919","confirm":"b96e92df-258a-802e-8008-a91dbeb86ffd"},
       "editableProperties": ["x", "y", "width", "height", "fill", "radius", "shadow", "typography", "spacing", "alignment"],
-      "status": "NATIVE_FRAME_CREATED_MECHANIC_LAYERS_PENDING",
-      "frameName": "MATCHING / SCREEN / EDITABLE",
-      "note": "Native Penpot board inspected; mechanic-specific cards and playfield are not yet reparented into this board."
+      "status": "APPROVED_RUNTIME_EDITABLE_WORKBENCH",
+      "frameName": "DUDUQ / MATCHING / EDITABLE WORKBENCH",
+      "note": "Workbench mirrors the 1366x768 runtime geometry and exposes native Header, Question, cards, Confirm, and visual states."
     },
     "Target Shooter": {
       "section": "20 TARGET SHOOTER COMPONENTS",
-      "frameId": "706d3143-51ea-8066-8008-a914d997331c",
+      "frameId": "b96e92df-258a-802e-8008-a91dbc21b142",
       "resolution": "1366x768 runtime reference",
       "runtimePath": "test/target-shooter/gold-master-clean-v2/",
       "sharedInstances": {
-        "header": "855af85f-faf4-8069-8008-a8ea68c23da7",
-        "question": "855af85f-faf4-8069-8008-a8ea777f267c"
+        "header": "b96e92df-258a-802e-8008-a91dbef4697c",
+        "question": "b96e92df-258a-802e-8008-a91dbf2053c3"
       },
       "mechanicInstanceIds": {
-        "dog": "855af85f-faf4-8069-8008-a8eb5e3111c6",
-        "cat": "706d3143-51ea-8066-8008-a8f8b8eae375",
-        "rabbit": "706d3143-51ea-8066-8008-a8f8b0becce5",
-        "fish": "855af85f-faf4-8069-8008-a8eb502c79b6",
+        "dog": "b96e92df-258a-802e-8008-a91dc09767c1",
+        "cat": "b96e92df-258a-802e-8008-a91dc0ddaaa1",
+        "rabbit": "b96e92df-258a-802e-8008-a91dc1213449",
+        "fish": "b96e92df-258a-802e-8008-a91dc159dc12",
         "dogSelectOuterGlow": "855af85f-faf4-8069-8008-a8eb5e317eaf",
         "rabbitCorrectRing": "706d3143-51ea-8066-8008-a8f8b0becce9",
         "catIncorrectBadge": "706d3143-51ea-8066-8008-a8f8b8eb0eae"
@@ -50,25 +50,24 @@
       },
       "targetSceneRules": {"targetIdentity": "Main", "scenePosition": "Instance", "dog": "instance-only position", "cat": "instance-only position", "rabbit": "instance-only position", "fish": "instance-only position"},
       "editableProperties": ["x", "y", "width", "height", "fill", "radius", "shadow", "alignment"],
-      "status": "NATIVE_FRAME_CREATED_TARGET_LAYERS_VERIFIED",
-      "frameName": "Board",
-      "nativeFrameCandidates": ["706d3143-51ea-8066-8008-a914fff1efef", "706d3143-51ea-8066-8008-a91517348680"],
+      "status": "APPROVED_RUNTIME_EDITABLE_WORKBENCH",
+      "frameName": "DUDUQ / TARGET SHOOTER / EDITABLE WORKBENCH",
       "gameplay": "Magic Cannon / Magic Launcher protected; no gameplay ownership in Penpot"
     },
     "Drag & Drop": {
       "section": "21 DRAG & DROP COMPONENTS",
-      "frameId": "706d3143-51ea-8066-8008-a91517348680",
+      "frameId": "b96e92df-258a-802e-8008-a91dbc64c72a",
       "resolution": "1366x768 runtime reference when available",
       "runtimePath": "test/drag-drop/gold-master-candidate-v1/",
       "sharedInstances": {
-        "header": null,
-        "question": null
+        "header": "b96e92df-258a-802e-8008-a91dc193424d",
+        "question": "b96e92df-258a-802e-8008-a91dc208b0e8"
       },
-      "mechanicInstanceIds": {},
+      "mechanicInstanceIds": {"imageFrame":"b96e92df-258a-802e-8008-a91dc30979d5"},
       "editableProperties": ["x", "y", "width", "height", "fill", "radius", "shadow", "typography", "spacing", "alignment"],
-      "status": "NATIVE_FRAME_CREATED_HOST_GEOMETRY_PENDING",
-      "frameName": "Board",
-      "note": "Current candidate bootstraps through the host engine; no native screen geometry is invented here."
+      "status": "APPROVED_RUNTIME_EDITABLE_WORKBENCH",
+      "frameName": "DUDUQ / DRAG DROP / EDITABLE WORKBENCH",
+      "note": "Workbench mirrors the current runtime host and exposes the native shared HUD plus editable image-frame host."
     }
   }
 }
