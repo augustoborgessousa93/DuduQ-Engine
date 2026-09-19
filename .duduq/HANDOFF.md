@@ -4,7 +4,7 @@
 Maintaining three approved-runtime native Penpot editable workbenches inside the existing DUDUQ Control Panel.
 
 ## Just completed
-Created and inspected native workbenches: Matching `b96e92df-258a-802e-8008-a91dbb811d92`, Target Shooter `b96e92df-258a-802e-8008-a91dbc21b142`, and Drag & Drop `b96e92df-258a-802e-8008-a91dbc64c72a`. Added `design-system/duduq-screen-property-map.json`.
+Created and inspected native workbenches: Matching `b96e92df-258a-802e-8008-a91dbb811d92`, Target Shooter `b96e92df-258a-802e-8008-a91dbc21b142`, and Drag & Drop `b96e92df-258a-802e-8008-a91dbc64c72a`. Replaced Matching card animal fills with approved DOG/CAT/RABBIT/FISH assets, added approved Magic Launcher art layers, corrected locked background containment, and hid state-only placeholder layers.
 
 ## Validation
 Runtime evidence remains unchanged; gameplay and Magic Cannon / Magic Launcher behavior are protected.
@@ -19,7 +19,7 @@ Penpot MCP write gate and native property reads are verified in the connected se
 Human visual review of the three workbenches, then controlled Penpot-property export to Core. No gameplay changes.
 
 ## Penpot
-`PENPOT_SYNC_REQUIRED`: browser/MCP review is the current authority.
+`RUNTIME_TWIN_PENDING_HUMAN_APPROVAL`: Penpot write access is verified; continuous live sync is not claimed. Human visual review remains required before any workbench becomes visual source of truth.
 
 ## Branch / commit
 `recovery/duduq-20260919-workbench-master` / `bd92e1c` (published recovery branch; preserves local workbench state without overwriting the diverged development branch).

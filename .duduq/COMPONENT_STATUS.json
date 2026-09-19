@@ -190,12 +190,12 @@
     },
     "Target Shooter / Magic Launcher": {
       "penpotMainId": null,
-      "controlPanelInstanceId": null,
+      "controlPanelInstanceId": "9b455a0d-ecca-809f-8008-a9ba4ea32db2",
       "corePath": "test/target-shooter/gold-master-clean-v2/src/static-view.js",
       "cssPath": "test/target-shooter/gold-master-clean-v2/styles/master.css",
       "humanApproval": null,
       "frozen": false,
-      "syncStatus": "UNKNOWN",
+      "syncStatus": "RUNTIME_TWIN_PENDING_HUMAN_APPROVAL",
       "owner": "Target Shooter",
       "lastModified": null
     },
