@@ -1,6 +1,6 @@
 {
-  "status": "PASS_WITH_LIMITATION",
-  "timestamp": "2026-09-19T13:44:59.202Z",
+  "status": "PASS",
+  "timestamp": "2026-09-19T14:27:39.857Z",
   "checks": [
     {
       "name": "JSON design-system/duduq-component-manifest.json",
@@ -24,34 +24,34 @@
     },
     {
       "name": "canonical HUD architecture",
-      "status": "BLOCKED_ENVIRONMENT",
-      "output": "spawnSync node EPERM"
+      "status": "PASS",
+      "output": "CanonicalHudArchitectureGuard PASS — Matching, Target Shooter, and Drag & Drop use the Core HUD contract."
     },
     {
       "name": "Penpot/Core guarded sync",
-      "status": "BLOCKED_ENVIRONMENT",
-      "output": "spawnSync node EPERM"
+      "status": "PASS",
+      "output": "{\n  \"status\": \"NO_CHANGE\",\n  \"penpotChanged\": false,\n  \"coreChanged\": false,\n  \"current\": {\n    \"tokens\": \"169a8d1f23157600e288213081fd551ccdf18653f2f2bb5f1116d57a0a34d464\",\n    \"manifest\": \"13eaaa0ce16da94bec252d773b892a82282997603879e540a08bb6f04dac5837\",\n    \"penpotAuthorizedExport\": \"MISSING\"\n  },\n  \"action\": \"No mapped change detected\",\n  \"limitation\": \"No authorized Penpot export is present; canvas was not scraped or guessed.\"\n}"
     },
     {
       "name": "screen composition inventory",
-      "status": "BLOCKED_ENVIRONMENT",
-      "output": "spawnSync node EPERM"
+      "status": "PASS",
+      "output": "DuduQScreenCompositionGuard PASS — runtime inventory and honest Penpot composition map are valid."
     },
     {
       "name": "syntax core/ui/duduq-canonical-header-hud.js",
-      "status": "BLOCKED_ENVIRONMENT",
-      "output": "spawnSync node EPERM"
+      "status": "PASS",
+      "output": ""
     },
     {
       "name": "syntax core/ui/duduq-canonical-question-hud.js",
-      "status": "BLOCKED_ENVIRONMENT",
-      "output": "spawnSync node EPERM"
+      "status": "PASS",
+      "output": ""
     },
     {
       "name": "syntax scripts/duduq-sync-penpot-to-core.mjs",
-      "status": "BLOCKED_ENVIRONMENT",
-      "output": "spawnSync node EPERM"
+      "status": "PASS",
+      "output": ""
     }
   ],
-  "limitation": "Nested process execution is blocked by this Windows environment (EPERM); run the same checks directly in a normal terminal."
+  "limitation": "Visual Penpot approval remains browser/human authority; no live export is assumed."
 }

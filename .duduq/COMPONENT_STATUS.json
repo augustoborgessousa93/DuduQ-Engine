@@ -190,12 +190,12 @@
     },
     "Target Shooter / Magic Launcher": {
       "penpotMainId": null,
-      "controlPanelInstanceId": "9b455a0d-ecca-809f-8008-a9ba4ea32db2",
+      "controlPanelInstanceId": null,
       "corePath": "test/target-shooter/gold-master-clean-v2/src/static-view.js",
       "cssPath": "test/target-shooter/gold-master-clean-v2/styles/master.css",
       "humanApproval": null,
       "frozen": false,
-      "syncStatus": "RUNTIME_TWIN_PENDING_HUMAN_APPROVAL",
+      "syncStatus": "UNKNOWN",
       "owner": "Target Shooter",
       "lastModified": null
     },
@@ -244,11 +244,5 @@
       "lastModified": null
     }
   },
-  "workbenchSnapshot": "design-system/duduq-workbench-sync-snapshot.json",
-  "exposedWorkbenchNodes": {
-    "Matching": ["b96e92df-258a-802e-8008-a91dbb811d92","9b455a0d-ecca-809f-8008-a9ba3f66639c","9b455a0d-ecca-809f-8008-a9ba3f7628ca","9b455a0d-ecca-809f-8008-a9ba3f849c1d","9b455a0d-ecca-809f-8008-a9ba3f92e508"],
-    "Target Shooter": ["b96e92df-258a-802e-8008-a91dbc21b142","b96e92df-258a-802e-8008-a91dc09767c1","b96e92df-258a-802e-8008-a91dc0ddaaa1","b96e92df-258a-802e-8008-a91dc1213449","b96e92df-258a-802e-8008-a91dc159dc12","9b455a0d-ecca-809f-8008-a9ba4ea32db2"],
-    "Drag & Drop": ["b96e92df-258a-802e-8008-a91dbc64c72a","b96e92df-258a-802e-8008-a91dc30979d5"]
-  },
-  "generatedAt": "2026-09-19T13:30:00-03:00"
+  "generatedAt": "2026-09-19T14:27:41.291Z"
 }

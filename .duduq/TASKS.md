@@ -11,7 +11,7 @@
 - Penpot write gate verified; matching card geometry corrected to the 1366px runtime grid; Target Shooter launcher assembly exposed as native editable layers; workbench sync snapshot captured.
 
 ## NOW
-- Human visual review of the three workbenches, especially Target Shooter Magic Launcher and Matching animal assets.
+- Validated continuity metadata; checkpoint ready.
 
 ## NEXT
 - Controlled Penpot-property export to Core using the captured workbench snapshot.

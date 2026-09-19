@@ -1,25 +1,26 @@
 # DUDUQ Continuity Handoff
 
 ## What are we doing?
-Maintaining three approved-runtime native Penpot editable workbenches inside the existing DUDUQ Control Panel.
+Maintaining a credit-independent DUDUQ workflow: GitHub technical source, Penpot visual source, Core runtime.
 
 ## Just completed
-Created and inspected native workbenches: Matching `b96e92df-258a-802e-8008-a91dbb811d92`, Target Shooter `b96e92df-258a-802e-8008-a91dbc21b142`, and Drag & Drop `b96e92df-258a-802e-8008-a91dbc64c72a`. Replaced Matching card animal fills with approved DOG/CAT/RABBIT/FISH assets, added approved Magic Launcher art layers, corrected locked background containment, and hid state-only placeholder layers.
+Autopilot continuity metadata and guarded validation/checkpoint commands are installed. The Penpot Control Panel SVG underlay is removed; native linked components remain.
 
 ## Validation
-Runtime evidence remains unchanged; gameplay and Magic Cannon / Magic Launcher behavior are protected.
+PASS at 2026-09-19T14:27:39.857Z.
 
 ## Approved / frozen
 Header Main 88954f25-7a86-800b-8008-a87e6f0d4e44; Question Main 88954f25-7a86-800b-8008-a87e700a22e9; Control Panel 855af85f-faf4-8069-8008-a8e75a3255fd; gameplay and Magic Cannon / Magic Launcher protected.
 
-## Current limitation
-Penpot MCP write gate and native property reads are verified in the connected session. Continuous live sync is not claimed; Core updates remain controlled and must diff against `design-system/duduq-workbench-sync-snapshot.json`.
-
 ## Next exact action
-Human visual review of the three workbenches, then controlled Penpot-property export to Core. No gameplay changes.
+Review the checkpoint diff, then push the active development branch with duduq:checkpoint.
 
 ## Penpot
-`RUNTIME_TWIN_PENDING_HUMAN_APPROVAL`: Penpot write access is verified; continuous live sync is not claimed. Human visual review remains required before any workbench becomes visual source of truth.
+PENPOT_SYNC_REQUIRED: live API/export is unavailable; human browser review remains authority.
 
 ## Branch / commit
-`recovery/duduq-20260919-workbench-master` / `710a047` (published recovery branch; preserves local workbench state without overwriting the diverged development branch).
+recovery/duduq-20260919-workbench-master / e1227eda8e9bec8b04ba1fc067a09bcf3e42d9d4
+
+## Remote
+origin	https://github.com/augustoborgessousa93/DuduQ-Engine.git (fetch)
+origin	https://github.com/augustoborgessousa93/DuduQ-Engine.git (push)
