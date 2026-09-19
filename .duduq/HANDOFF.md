@@ -22,7 +22,7 @@ Use the existing Control Panel page via Penpot browser UI to create/organize the
 PENPOT_SYNC_REQUIRED: no live API/export bridge. Browser-assisted native editing is allowed; do not claim live sync.
 
 ## Branch / commit
-duduq-autopilot-2026-09-18 / pending checkpoint for native frame IDs
+duduq-autopilot-2026-09-18 / 31f03b9
 
 ## Remote
 https://github.com/augustoborgessousa93/DuduQ-Engine.git (SYNCED)
