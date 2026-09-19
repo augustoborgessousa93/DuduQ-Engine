@@ -6,7 +6,7 @@
   "compositions": {
     "Matching": {
       "section": "19 MATCHING COMPONENTS",
-      "frameId": null,
+      "frameId": "706d3143-51ea-8066-8008-a91477f4f890",
       "resolution": "1366x768 runtime reference",
       "runtimePath": "test/matching/gold-master-candidate-v1/",
       "sharedInstances": {
@@ -15,11 +15,13 @@
       },
       "mechanicInstanceIds": {},
       "editableProperties": ["x", "y", "width", "height", "fill", "radius", "shadow", "typography", "spacing", "alignment"],
-      "status": "RUNTIME_AUDITED_NATIVE_COMPOSITION_PENDING"
+      "status": "NATIVE_FRAME_CREATED_MECHANIC_LAYERS_PENDING",
+      "frameName": "MATCHING / SCREEN / EDITABLE",
+      "note": "Native Penpot board inspected; mechanic-specific cards and playfield are not yet reparented into this board."
     },
     "Target Shooter": {
       "section": "20 TARGET SHOOTER COMPONENTS",
-      "frameId": null,
+      "frameId": "706d3143-51ea-8066-8008-a914d997331c",
       "resolution": "1366x768 runtime reference",
       "runtimePath": "test/target-shooter/gold-master-clean-v2/",
       "sharedInstances": {
@@ -48,12 +50,14 @@
       },
       "targetSceneRules": {"targetIdentity": "Main", "scenePosition": "Instance", "dog": "instance-only position", "cat": "instance-only position", "rabbit": "instance-only position", "fish": "instance-only position"},
       "editableProperties": ["x", "y", "width", "height", "fill", "radius", "shadow", "alignment"],
-      "status": "RUNTIME_AUDITED_NATIVE_TARGET_LAYERS_VERIFIED_COMPOSITION_FRAME_PENDING",
+      "status": "NATIVE_FRAME_CREATED_TARGET_LAYERS_VERIFIED",
+      "frameName": "Board",
+      "nativeFrameCandidates": ["706d3143-51ea-8066-8008-a914fff1efef", "706d3143-51ea-8066-8008-a91517348680"],
       "gameplay": "Magic Cannon / Magic Launcher protected; no gameplay ownership in Penpot"
     },
     "Drag & Drop": {
       "section": "21 DRAG & DROP COMPONENTS",
-      "frameId": null,
+      "frameId": "706d3143-51ea-8066-8008-a91517348680",
       "resolution": "1366x768 runtime reference when available",
       "runtimePath": "test/drag-drop/gold-master-candidate-v1/",
       "sharedInstances": {
@@ -62,7 +66,8 @@
       },
       "mechanicInstanceIds": {},
       "editableProperties": ["x", "y", "width", "height", "fill", "radius", "shadow", "typography", "spacing", "alignment"],
-      "status": "RUNTIME_AUDITED_NATIVE_COMPOSITION_PENDING",
+      "status": "NATIVE_FRAME_CREATED_HOST_GEOMETRY_PENDING",
+      "frameName": "Board",
       "note": "Current candidate bootstraps through the host engine; no native screen geometry is invented here."
     }
   }

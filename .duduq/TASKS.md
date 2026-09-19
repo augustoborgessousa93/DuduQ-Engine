@@ -7,14 +7,15 @@
 - Target Shooter DOG/CAT/RABBIT/FISH native layers verified and mapped.
 - Canonical HUD and screen-composition guards pass.
 - GitHub Actions validation passed on commit 4c704a00c239586b16c66dfa192e30258505c7e9.
+- Three native Penpot Board hosts created and recorded in the composition map.
 
 ## NOW
 - Finish native editable Penpot screen compositions inside the existing Control Panel page.
 
 ## NEXT
-- Create/organize MATCHING editable composition and record verified native IDs.
-- Create/organize TARGET SHOOTER full composition frame around the already verified native target layers and record frame/instance IDs.
-- Create/organize DRAG & DROP editable composition and record verified native IDs.
+- Reparent/organize Matching mechanic layers into its native frame and record IDs.
+- Reparent/organize Target Shooter shared instances and launcher visual into its native frame.
+- Reparent/organize Drag & Drop mechanic layers into its native frame and record IDs.
 - Re-run validation, update maps, checkpoint, and push.
 
 ## BLOCKED

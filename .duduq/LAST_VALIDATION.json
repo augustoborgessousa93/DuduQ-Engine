@@ -1,6 +1,6 @@
 {
   "status": "PASS_WITH_LIMITATION",
-  "timestamp": "2026-09-19T01:13:05.759Z",
+  "timestamp": "2026-09-19T01:25:24.787Z",
   "checks": [
     {
       "name": "JSON design-system/duduq-component-manifest.json",
