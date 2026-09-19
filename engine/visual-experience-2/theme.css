@@ -1,0 +1,229 @@
+/* DUDUQ VISUAL EXPERIENCE 2.0
+ * Orbit studio: ink blue, luminous aqua, warm orange and quiet surfaces.
+ * Every rule is opt-in, confined to the pilot iframe. No global zoom/scale.
+ */
+html[data-duduq-vx="2"] {
+  --vx-ink:#12354b; --vx-muted:#456376; --vx-blue:#0765d5;
+  --vx-aqua:#00b9bd; --vx-orange:#ffb342; --vx-paper:#fff;
+  --vx-success:#15764e; --vx-retry:#975006;
+  --vx-space-1:4px; --vx-space-2:8px; --vx-space-3:12px;
+  --vx-space-4:16px; --vx-space-6:24px; --vx-space-8:32px;
+  --vx-radius-sm:14px; --vx-radius-md:22px; --vx-radius-lg:32px;
+  --vx-shadow:0 12px 32px #14354b18;
+  --vx-lift:0 5px 0 #b7cddc,0 12px 20px #14354b18;
+  --vx-fast:140ms; --vx-medium:280ms; --vx-enter:420ms;
+  --vx-ease:cubic-bezier(.2,.8,.2,1);
+  --vx-spring:cubic-bezier(.2,1.35,.4,1);
+  --vx-z-content:2; --vx-z-feedback:10;
+  color:var(--vx-ink);
+}
+html[data-duduq-vx="2"] body {
+  background:radial-gradient(ellipse at 0 0,#c2f6ef,transparent 65%),
+    radial-gradient(ellipse at 100% 100%,#d6e9ff,transparent 65%),#edf5fa !important;
+  background-attachment:scroll !important;
+}
+html[data-duduq-vx="2"] .duduq-engine-root {
+  padding:clamp(8px,1.5vw,22px) !important;
+  background:transparent !important;
+  transform:none !important; zoom:1 !important;
+  min-width:0 !important; width:100% !important;
+}
+html[data-duduq-vx="2"] .duduq-engine-shell {
+  width:100% !important; max-width:1440px !important; min-width:0 !important;
+  transform:none !important; zoom:1 !important;
+  margin-inline:auto !important; gap:var(--vx-space-3) !important;
+}
+html[data-duduq-vx="2"] .duduq-engine-header {
+  position:relative; min-width:0 !important;
+  padding:12px 20px !important; margin-bottom:12px !important;
+  border:1px solid #ffffff !important; border-radius:var(--vx-radius-md) !important;
+  background:#ffffffed !important; box-shadow:var(--vx-shadow) !important;
+  color:var(--vx-ink) !important; backdrop-filter:none !important;
+}
+html[data-duduq-vx="2"] .duduq-engine-heading h1 {
+  font-size:clamp(19px,2.1vw,28px) !important;
+  line-height:1.15 !important; letter-spacing:-.025em !important;
+  color:var(--vx-ink) !important;
+}
+html[data-duduq-vx="2"] .duduq-engine-header-mascot-slot {
+  width:76px !important; height:76px !important; flex:0 0 76px !important;
+  border-radius:50%; background:radial-gradient(circle,#d8faf4 0 57%,transparent 59%);
+  overflow:visible !important;
+}
+html[data-duduq-vx="2"] .duduq-engine-header-mascot-slot .duduq-mascot {
+  width:100% !important; height:100% !important; margin:0 !important;
+}
+html[data-duduq-vx="2"] .duduq-mascot-body {
+  animation:none !important; transform:none !important; will-change:auto !important;
+}
+html[data-duduq-vx="2"] .duduq-mascot img,
+html[data-duduq-vx="2"] .duduq-world-header-mascot-clone {
+  object-fit:contain !important; transform:none !important;
+  width:100% !important; height:100% !important; max-width:100% !important;
+}
+html[data-duduq-vx="2"][data-vx-state="listen"] .duduq-engine-header-mascot-slot {
+  box-shadow:0 0 0 4px #00b9bd35;
+}
+html[data-duduq-vx="2"][data-vx-state="thinking"] .duduq-engine-header-mascot-slot {
+  box-shadow:0 0 0 4px #ffb34265;
+}
+html[data-duduq-vx="2"]:is([data-vx-state="correct"],[data-vx-state="happy"],[data-vx-state="complete"]) .duduq-mascot-body {
+  animation:vx-celebrate 480ms var(--vx-spring) both !important;
+}
+html[data-duduq-vx="2"][data-vx-state="retry"] .duduq-mascot-body {
+  animation:vx-nod 320ms var(--vx-ease) both !important;
+}
+html[data-duduq-vx="2"] .duduq-engine-button,
+html[data-duduq-vx="2"] .duduq-ts-audio-button {
+  min-height:44px !important; min-width:44px !important;
+  border-radius:var(--vx-radius-sm) !important;
+  border:2px solid #c8dce6 !important;
+  background:#fff !important; color:var(--vx-ink) !important;
+  box-shadow:0 4px 0 #b7cddc,0 8px 14px #14354b10 !important;
+  transition:transform var(--vx-fast) var(--vx-spring),box-shadow var(--vx-fast) !important;
+}
+html[data-duduq-vx="2"] .duduq-ts-audio-button,
+html[data-duduq-vx="2"] .duduq-engine-button-primary {
+  color:#fff !important; background:linear-gradient(#147bea,#0759c5) !important;
+  border-color:#095ab6 !important; box-shadow:0 4px 0 #03448b,0 8px 18px #0765d526 !important;
+}
+html[data-duduq-vx="2"] .duduq-engine-button:active:not(:disabled),
+html[data-duduq-vx="2"] .duduq-ts-audio-button:active:not(:disabled) {
+  transform:translateY(3px) scale(.97) !important; box-shadow:0 1px 0 #03448b !important;
+}
+html[data-duduq-vx="2"] button:focus-visible {
+  outline:3px solid #102c47 !important; outline-offset:4px !important;
+}
+html[data-duduq-vx="2"] button:disabled { cursor:default; }
+html[data-duduq-vx="2"] .duduq-engine-button:disabled { opacity:.55; box-shadow:none !important; }
+html[data-duduq-vx="2"] .duduq-ts-audio-button[data-playing="true"] {
+  background:#006d76 !important; border-color:#005861 !important;
+  box-shadow:0 0 0 5px #00b9bd30,0 4px 0 #005861 !important;
+}
+html[data-duduq-vx="2"] .duduq-progress-track {
+  background:#e5eef4 !important; border:0 !important; box-shadow:inset 0 2px 4px #12354b14 !important;
+}
+html[data-duduq-vx="2"] .duduq-progress-fill {
+  background:linear-gradient(90deg,var(--vx-blue),var(--vx-aqua)) !important;
+}
+html[data-duduq-vx="2"] .duduq-engine-stage {
+  min-width:0 !important; transform:none !important; zoom:1 !important;
+  background:transparent !important; border:0 !important; box-shadow:none !important;
+  animation:vx-enter var(--vx-enter) var(--vx-ease) both !important;
+}
+html[data-duduq-vx="2"] .duduq-ts-root,
+html[data-duduq-vx="2"] .duduq-ts-surface {
+  min-width:0 !important; background:transparent !important;
+  border:0 !important; border-radius:0 !important; box-shadow:none !important;
+  padding:0 !important; gap:12px !important;
+}
+html[data-duduq-vx="2"] .duduq-ts-instruction {
+  width:100% !important; max-width:none !important; box-sizing:border-box !important;
+  padding:14px 18px !important; gap:16px !important;
+  border:1px solid #fff !important; border-left:5px solid var(--vx-aqua) !important;
+  border-radius:var(--vx-radius-md) !important; background:#fff !important;
+  box-shadow:0 6px 16px #14354b0b !important;
+}
+html[data-duduq-vx="2"] .duduq-ts-instruction h2 {
+  color:var(--vx-ink) !important; font-size:clamp(17px,1.65vw,24px) !important;
+  text-transform:none !important; line-height:1.35 !important; overflow-wrap:anywhere;
+}
+html[data-duduq-vx="2"] .duduq-ts-status { gap:8px !important; }
+html[data-duduq-vx="2"] .duduq-ts-chip {
+  padding:6px 14px !important; min-height:30px !important;
+  background:#ffffffcf !important; color:var(--vx-ink) !important;
+  border:1px solid #cbdfe7 !important; box-shadow:none !important; font-size:13px !important;
+}
+html[data-duduq-vx="2"] .duduq-ts-arena {
+  position:relative; isolation:isolate;
+  border:2px solid #fff !important; border-radius:var(--vx-radius-lg) !important;
+  background:radial-gradient(ellipse at 50% 0,#fff9,transparent 65%),
+    linear-gradient(165deg,#c9f3f2,#ddedfc 65%,#c8e4f4) !important;
+  box-shadow:inset 0 0 0 1px #bedde8,var(--vx-shadow) !important;
+}
+html[data-duduq-vx="2"] .duduq-ts-arena::before {
+  background:radial-gradient(ellipse at 50% 110%,#75c4c655,transparent 70%) !important;
+  border-radius:inherit !important; filter:none !important;
+}
+html[data-duduq-vx="2"] .duduq-ts-arena::after,
+html[data-duduq-vx="2"] .duduq-ts-ambient { display:none !important; }
+html[data-duduq-vx="2"] .duduq-ts-target {
+  filter:none !important; cursor:pointer !important;
+  animation:none !important; transform:translate(-50%,-50%) !important;
+}
+html[data-duduq-vx="2"] .duduq-ts-target .duduq-ts-target-shell {
+  border:3px solid #fff !important; border-radius:30% !important; clip-path:none !important;
+  background:linear-gradient(150deg,#fff 40%,#eaf5fa) !important;
+  box-shadow:0 7px 0 #a8cbdc,0 16px 26px #18455725,inset 0 0 0 1px #dcecf1 !important;
+  padding:10px !important; transform:none !important;
+  transition:transform 180ms var(--vx-spring),box-shadow 180ms var(--vx-ease) !important;
+}
+html[data-duduq-vx="2"] .duduq-ts-target::before,
+html[data-duduq-vx="2"] .duduq-ts-target::after { display:none !important; }
+html[data-duduq-vx="2"] .duduq-ts-target img {
+  object-fit:contain !important; transform:none !important;
+  max-width:100% !important; max-height:100% !important;
+}
+html[data-duduq-vx="2"] .duduq-ts-target:active .duduq-ts-target-shell,
+html[data-duduq-vx="2"] .duduq-ts-target[data-state="pending"] .duduq-ts-target-shell {
+  transform:translateY(4px) scale(.96) !important;
+  box-shadow:0 2px 0 #95bbcd,0 7px 14px #18455722 !important;
+  animation:none !important;
+}
+html[data-duduq-vx="2"] .duduq-ts-target[data-state="hit"] .duduq-ts-target-shell {
+  border-color:#15764e !important; background:#d7f6e7 !important;
+  animation:vx-hit 480ms var(--vx-ease) forwards !important;
+}
+html[data-duduq-vx="2"] .duduq-ts-target[data-state="miss"] .duduq-ts-target-shell {
+  border-color:#b56818 !important; background:#fff3dd !important;
+  animation:vx-retry 280ms var(--vx-ease) both !important;
+}
+html[data-duduq-vx="2"] .duduq-ts-particle:nth-of-type(n+7),
+html[data-duduq-vx="2"] .duduq-ts-impact-ring:nth-of-type(2),
+html[data-duduq-vx="2"] .duduq-ts-fragment { display:none !important; }
+html[data-duduq-vx="2"] .duduq-ts-hint {
+  background:#ffffffd9 !important; color:var(--vx-muted) !important;
+  font-size:12px !important; line-height:1.35 !important;
+}
+html[data-duduq-vx="2"] .duduq-engine-feedback-card {
+  border-radius:var(--vx-radius-md) !important; box-shadow:var(--vx-shadow) !important;
+  padding:12px 18px !important; animation:vx-enter 220ms var(--vx-ease) both !important;
+}
+html[data-duduq-vx="2"] .duduq-engine-feedback[data-state="success"] .duduq-engine-feedback-card {
+  background:#e5f8ee !important; border:2px solid #15764e !important; color:#104c34 !important;
+}
+html[data-duduq-vx="2"] .duduq-engine-feedback[data-state="retry"] .duduq-engine-feedback-card {
+  background:#fff4df !important; border:2px solid #b56818 !important; color:#6d3e08 !important;
+}
+@media (hover:hover) {
+  html[data-duduq-vx="2"] .duduq-ts-target[data-state="idle"]:hover .duduq-ts-target-shell {
+    transform:translateY(-4px) !important; box-shadow:0 10px 0 #a8cbdc,0 22px 28px #18455725 !important;
+  }
+  html[data-duduq-vx="2"] .duduq-engine-button:not(:disabled):hover { transform:translateY(-2px); }
+}
+@media (max-width:600px) {
+  html[data-duduq-vx="2"] .duduq-engine-header { padding:8px 10px !important; gap:8px !important; }
+  html[data-duduq-vx="2"] .duduq-engine-header-mascot-slot { width:54px !important;height:54px !important;flex-basis:54px !important; }
+  html[data-duduq-vx="2"] .duduq-ts-instruction { padding:12px !important;gap:10px !important; }
+  html[data-duduq-vx="2"] .duduq-ts-arena { border-radius:24px !important; }
+  html[data-duduq-vx="2"] .duduq-ts-hint { max-width:90% !important;font-size:11px !important; }
+  html[data-duduq-vx="2"] .duduq-ts-particle:nth-of-type(n+5) { display:none !important; }
+}
+@media (max-height:600px) and (min-width:601px) {
+  html[data-duduq-vx="2"] .duduq-engine-header { padding:6px 14px !important;margin-bottom:8px !important; }
+  html[data-duduq-vx="2"] .duduq-engine-header-mascot-slot { width:52px !important;height:52px !important;flex-basis:52px !important; }
+  html[data-duduq-vx="2"] .duduq-ts-instruction { padding:8px 14px !important; }
+  html[data-duduq-vx="2"] .duduq-ts-surface { gap:8px !important; }
+}
+@keyframes vx-enter { from {opacity:0;translate:0 9px} to {opacity:1;translate:0 0} }
+@keyframes vx-celebrate { 0%,100% {transform:translateY(0)} 45% {transform:translateY(-7px) rotate(-4deg)} }
+@keyframes vx-nod { 0%,100% {transform:rotate(0)} 45% {transform:rotate(5deg)} }
+@keyframes vx-hit { 0% {transform:scale(1)} 35% {transform:scale(1.06)} 100% {transform:scale(.88);opacity:0} }
+@keyframes vx-retry { 0%,100% {transform:translateX(0)} 35% {transform:translateX(-4px)} 70% {transform:translateX(3px)} }
+@media (prefers-reduced-motion:reduce) {
+  html[data-duduq-vx="2"] *,html[data-duduq-vx="2"] *::before,html[data-duduq-vx="2"] *::after {
+    animation:none !important; transition:none !important; scroll-behavior:auto !important;
+  }
+  html[data-duduq-vx="2"] .duduq-ts-target[data-state="hit"] .duduq-ts-target-shell { opacity:0 !important; }
+  html[data-duduq-vx="2"] .duduq-ts-impact,html[data-duduq-vx="2"] .duduq-ts-shot { display:none !important; }
+}
