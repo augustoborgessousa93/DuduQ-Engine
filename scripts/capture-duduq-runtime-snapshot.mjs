@@ -4,8 +4,10 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
-const source = process.env.RUNTIME_URL || "http://127.0.0.1:4176/test/target-shooter/gold-master-clean-v2/index.html";
-const output = path.resolve(process.env.SNAPSHOT_DIR || "design-system/runtime-snapshots/target-shooter/approved-4176");
+const args = Object.fromEntries(process.argv.slice(2).filter((_, i, a) => i % 2 === 0).map((key, i) => [key.replace(/^--/, ""), process.argv.slice(2)[i * 2 + 1]]));
+const source = args.url || process.env.RUNTIME_URL || "http://127.0.0.1:4176/test/target-shooter/gold-master-clean-v2/index.html";
+const output = path.resolve(args.output || process.env.SNAPSHOT_DIR || "design-system/runtime-snapshots/target-shooter/approved-4176");
+const config = JSON.parse(fs.readFileSync(path.resolve(args.config || "design-system/runtime-snapshots/configs/target-shooter.json"), "utf8"));
 const chrome = process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const runtimeDir = path.join(root, "test/target-shooter/gold-master-clean-v2");
 fs.mkdirSync(output, { recursive: true });
@@ -45,15 +47,13 @@ for (const [url, value] of replacements) snapshot = snapshot.replaceAll(url, val
 snapshot = snapshot.replace("</head>", `<style>${css}</style></head>`);
 fs.writeFileSync(path.join(output, "snapshot.html"), snapshot);
 
-const geometry = {
-  source, viewport: { width: 1366, height: 768 }, capturedAt: new Date().toISOString(),
-  layers: [
-    ["Background", ".world-backdrop", 0, 0, 1366, 768], ["Header instance", ".duduq-canonical-header-hud", 155, 12, 1056, 94],
-    ["Question HUD instance", ".duduq-canonical-question-hud", 273, 130, 820, 86], ["DOG", ".target-shooter-target--dog", 196, 287, 184, 236],
-    ["CAT", ".target-shooter-target--cat", 460, 220, 184, 236], ["RABBIT", ".target-shooter-target--rabbit", 705, 305, 184, 236],
-    ["FISH", ".target-shooter-target--fish", 970, 236, 184, 236], ["Magic Launcher", ".duduq-magic-launcher", 503, 542, 360, 220]
-  ].map(([name, selector, x, y, width, height]) => ({ name, selector, x, y, width, height }))
-};
+const inspector = path.join(output, "__runtime-inspector.html");
+fs.writeFileSync(inspector, `<!doctype html><iframe src="${source}"></iframe><pre id="out"></pre><script>document.querySelector('iframe').onload=()=>{const w=document.querySelector('iframe').contentWindow,d=w.document,style=e=>{const s=w.getComputedStyle(e);return Object.fromEntries(['position','display','transform','transformOrigin','opacity','zIndex','fontFamily','fontSize','fontWeight','lineHeight','textAlign','background','backgroundColor','backgroundImage','border','borderRadius','boxShadow','padding','margin','gap'].map(k=>[k,s[k]]))};const r=e=>{const x=e.getBoundingClientRect();return {x:x.x,y:x.y,left:x.left,top:x.top,right:x.right,bottom:x.bottom,width:x.width,height:x.height,style:style(e)}};document.querySelector('#out').textContent=JSON.stringify({layers:Object.fromEntries(Object.entries(${JSON.stringify(config.elements)}).map(([n,s])=>[n,{selector:s,...r(d.querySelector(s))}]))})}</script>`);
+const extracted = execFileSync(chrome, ["--headless", "--disable-gpu", "--no-first-run", `--user-data-dir=${profile("chrome-inspector")}`, "--dump-dom", `http://127.0.0.1:4176/${path.relative(root, inspector).replaceAll("\\\\", "/")}`], { encoding: "utf8" });
+fs.unlinkSync(inspector);
+const encoded = extracted.match(/<pre id="out">([\s\S]*?)<\/pre>/)?.[1]?.replaceAll("&quot;", '"').replaceAll("&amp;", "&");
+if (!encoded) throw new Error("Live runtime geometry extraction did not serialize.");
+const geometry = { source, viewport: config.viewport, capturedAt: new Date().toISOString(), mechanic: config.mechanic, extractedFrom: "live getBoundingClientRect/getComputedStyle", ...JSON.parse(encoded) };
 fs.writeFileSync(path.join(output, "geometry.json"), JSON.stringify(geometry, null, 2));
 const unresolvedAssets = [...assetUrls].filter((u) => !replacements.has(u));
 fs.writeFileSync(path.join(output, "manifest.json"), JSON.stringify({ schemaVersion: 1, source, selfContained: unresolvedAssets.length === 0 && !/https?:\/\//.test(snapshot), screenshot: "runtime-1366x768.png", snapshot: "snapshot.html", geometry: "geometry.json", editablePriorities: geometry.layers.map((l) => l.name), unresolvedAssets }, null, 2));
