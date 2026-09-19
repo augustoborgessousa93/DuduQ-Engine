@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "fileId": "d8ac01df-6646-81d2-8008-a2900d806e30",
+  "controlPanelPageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
+  "penpotCapability": "browser UI only; composition frame IDs require native-node inspection",
+  "compositions": {
+    "Matching": {
+      "section": "19 MATCHING COMPONENTS",
+      "frameId": null,
+      "resolution": "1366x768 runtime reference",
+      "runtimePath": "test/matching/gold-master-candidate-v1/",
+      "sharedInstances": {
+        "header": "855af85f-faf4-8069-8008-a8ea68c23da7",
+        "question": "855af85f-faf4-8069-8008-a8ea777f267c"
+      },
+      "mechanicInstanceIds": {},
+      "editableProperties": ["x", "y", "width", "height", "fill", "radius", "shadow", "typography", "spacing", "alignment"],
+      "status": "RUNTIME_AUDITED_NATIVE_COMPOSITION_PENDING"
+    },
+    "Target Shooter": {
+      "section": "20 TARGET SHOOTER COMPONENTS",
+      "frameId": null,
+      "resolution": "1366x768 runtime reference",
+      "runtimePath": "test/target-shooter/gold-master-clean-v2/",
+      "sharedInstances": {
+        "header": "855af85f-faf4-8069-8008-a8ea68c23da7",
+        "question": "855af85f-faf4-8069-8008-a8ea777f267c"
+      },
+      "mechanicInstanceIds": {},
+      "targetSceneRules": {"targetIdentity": "Main", "scenePosition": "Instance", "dog": "instance-only position", "cat": "instance-only position", "rabbit": "instance-only position", "fish": "instance-only position"},
+      "editableProperties": ["x", "y", "width", "height", "fill", "radius", "shadow", "alignment"],
+      "status": "RUNTIME_AUDITED_NATIVE_COMPOSITION_PENDING",
+      "gameplay": "Magic Cannon / Magic Launcher protected; no gameplay ownership in Penpot"
+    },
+    "Drag & Drop": {
+      "section": "21 DRAG & DROP COMPONENTS",
+      "frameId": null,
+      "resolution": "1366x768 runtime reference when available",
+      "runtimePath": "test/drag-drop/gold-master-candidate-v1/",
+      "sharedInstances": {
+        "header": null,
+        "question": null
+      },
+      "mechanicInstanceIds": {},
+      "editableProperties": ["x", "y", "width", "height", "fill", "radius", "shadow", "typography", "spacing", "alignment"],
+      "status": "RUNTIME_AUDITED_NATIVE_COMPOSITION_PENDING",
+      "note": "Current candidate bootstraps through the host engine; no native screen geometry is invented here."
+    }
+  }
+}

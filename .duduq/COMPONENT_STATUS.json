@@ -134,5 +134,12 @@
       "lastModified": null
     }
   },
-  "generatedAt": "2026-09-18T22:55:57.617Z"
+  "inventoryPath": "design-system/duduq-component-inventory.json",
+  "screenCompositionMap": "design-system/duduq-screen-composition-map.json",
+  "mechanicCompositionStatus": {
+    "Matching": "RUNTIME_AUDITED_NATIVE_COMPOSITION_PENDING",
+    "Target Shooter": "RUNTIME_AUDITED_NATIVE_COMPOSITION_PENDING",
+    "Drag & Drop": "HOST_ENGINE_GEOMETRY_PENDING"
+  },
+  "generatedAt": "2026-09-18T23:12:00.000Z"
 }

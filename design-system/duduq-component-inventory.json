@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "source": "current runtime candidates audited 2026-09-18",
+  "classification": {
+    "sharedCore": [
+      "DUDUQ / HUD / Header", "DUDUQ / HUD / Question", "DUDUQ / Mascot / Header",
+      "DUDUQ / Progress / Track", "DUDUQ / Progress / Fill", "DUDUQ / Progress / Badge",
+      "DUDUQ / Control / Fullscreen", "DUDUQ / Control / Audio",
+      "DUDUQ / Button / Primary", "DUDUQ / Button / Secondary", "DUDUQ / Button / CTA",
+      "DUDUQ / Feedback / Correct", "DUDUQ / Feedback / Incorrect",
+      "DUDUQ / Target / Base", "DUDUQ / Target / Select", "DUDUQ / Target / Correct", "DUDUQ / Target / Incorrect"
+    ],
+    "mechanicSpecific": {
+      "Matching": ["Matching Word Card", "Matching Image Card", "Column Heading", "Connector Point", "Connection Line", "Matching Playfield", "Primary Confirm Button", "CTA Attention Wrapper", "Feedback Ribbon", "Loading Screen", "Loading Progress", "Complete Action"],
+      "Target Shooter": ["Target Animal Slot", "Dog Target Composition", "Cat Target Composition", "Rabbit Target Composition", "Fish Target Composition", "Target Status Badge", "Target State Ring", "Magic Cannon / Magic Launcher", "Launcher Base", "Launcher Support", "Launcher Barrel", "Launcher Core", "Launcher Muzzle", "Launcher Portal", "Projectile", "Trail", "Impact", "Particles"],
+      "Drag & Drop": ["Main Illustration Frame", "Image Frame", "DropZone", "Answer Tile", "Tile Label", "Tile Audio Affordance", "Instruction Area", "Primary Interaction State", "Correct State", "Incorrect State", "Feedback Visual"]
+    },
+    "compositionOnly": ["BACKGROUND / MATCHING", "BACKGROUND / TARGET SHOOTER", "BACKGROUND / DRAG DROP", "ARENA", "CONNECTION GUTTER", "READABILITY VEIL"],
+    "assets": ["asset-alvo.png", "core/assets/duduq-hud-mascot.png", "magic-launcher-front/*.png", "pet-dog-cachorro.png", "pet-cat-gato.png", "pet-rabbit-coelho.png", "pet-fish-peixe.png"],
+    "gameplayNotPenpotOwned": ["matching-engine state", "connection validation", "target aim and projectile trajectory", "drag/drop hit testing", "scoring", "audio playback", "fullscreen API"]
+  },
+  "evidence": {
+    "Matching": "test/matching/gold-master-candidate-v1/index.html + src + styles",
+    "Target Shooter": "test/target-shooter/gold-master-clean-v2/index.html + src/static-view.js + styles/penpot-geometry-lock.css",
+    "Drag & Drop": "test/drag-drop/gold-master-candidate-v1/index.html + canonical-hud-adapter.js"
+  },
+  "penpotPolicy": "Only known Main/Instance IDs from the verified manifest are populated; unknown mechanic composition IDs remain null until native Penpot nodes are created and inspected."
+}

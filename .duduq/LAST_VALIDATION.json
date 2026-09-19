@@ -1,6 +1,6 @@
 {
   "status": "PASS_WITH_LIMITATION",
-  "timestamp": "2026-09-18T23:03:57.677Z",
+  "timestamp": "2026-09-19T01:13:05.759Z",
   "checks": [
     {
       "name": "JSON design-system/duduq-component-manifest.json",
@@ -15,12 +15,25 @@
       "status": "PASS"
     },
     {
+      "name": "JSON design-system/duduq-component-inventory.json",
+      "status": "PASS"
+    },
+    {
+      "name": "JSON design-system/duduq-screen-composition-map.json",
+      "status": "PASS"
+    },
+    {
       "name": "canonical HUD architecture",
       "status": "BLOCKED_ENVIRONMENT",
       "output": "spawnSync node EPERM"
     },
     {
       "name": "Penpot/Core guarded sync",
+      "status": "BLOCKED_ENVIRONMENT",
+      "output": "spawnSync node EPERM"
+    },
+    {
+      "name": "screen composition inventory",
       "status": "BLOCKED_ENVIRONMENT",
       "output": "spawnSync node EPERM"
     },

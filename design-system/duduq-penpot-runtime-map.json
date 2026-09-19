@@ -1,6 +1,6 @@
 {
   "penpot": { "fileId": "d8ac01df-6646-81d2-8008-a2900d806e30", "activePageId": "855af85f-faf4-8069-8008-a8e75a3255fd", "read": "browser UI only", "write": "browser UI only; no Penpot API or MCP endpoint detected" },
-  "runtime": { "tokens": "design-system/duduq-design-tokens.json", "cssMirror": "core/duduq-tokens.css", "manifest": "design-system/duduq-component-manifest.json" },
+  "runtime": { "tokens": "design-system/duduq-design-tokens.json", "cssMirror": "core/duduq-tokens.css", "manifest": "design-system/duduq-component-manifest.json", "inventory": "design-system/duduq-component-inventory.json", "screenCompositions": "design-system/duduq-screen-composition-map.json" },
   "syncPolicy": { "humanChanges": "Penpot → authorized export → guarded diff → Core", "aiChanges": "Core → browser-assisted Penpot Main update when verified", "conflict": "STOP when both sides changed" },
   "verifiedNativeInstances": {
     "header": { "instanceId": "855af85f-faf4-8069-8008-a8ea68c23da7", "mainId": "88954f25-7a86-800b-8008-a87e6f0d4e44" },

@@ -55,9 +55,10 @@ function validate() {
   const checks = [];
   const run = (name, args) => { const r = spawnSync(args[0], args.slice(1), { cwd: ROOT, encoding: 'utf8' }); const blocked = Boolean(r.error); const status = r.status === 0 ? 'PASS' : (blocked ? 'BLOCKED_ENVIRONMENT' : 'FAIL'); checks.push({ name, status, output: (r.stdout || r.stderr || r.error?.message || '').trim().slice(-2000) }); return status !== 'FAIL'; };
   let ok = true;
-  for (const f of ['design-system/duduq-component-manifest.json', 'design-system/duduq-penpot-runtime-map.json', 'design-system/duduq-design-tokens.json']) { try { JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')); checks.push({ name: `JSON ${f}`, status: 'PASS' }); } catch (e) { checks.push({ name: `JSON ${f}`, status: 'FAIL', output: e.message }); ok = false; } }
+  for (const f of ['design-system/duduq-component-manifest.json', 'design-system/duduq-penpot-runtime-map.json', 'design-system/duduq-design-tokens.json', 'design-system/duduq-component-inventory.json', 'design-system/duduq-screen-composition-map.json']) { try { JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')); checks.push({ name: `JSON ${f}`, status: 'PASS' }); } catch (e) { checks.push({ name: `JSON ${f}`, status: 'FAIL', output: e.message }); ok = false; } }
   ok = run('canonical HUD architecture', ['node', 'test/systemic/canonical-hud-architecture-guard.mjs']) && ok;
   ok = run('Penpot/Core guarded sync', ['node', 'scripts/duduq-sync-penpot-to-core.mjs']) && ok;
+  ok = run('screen composition inventory', ['node', 'test/systemic/duduq-screen-composition-guard.mjs']) && ok;
   for (const f of ['core/ui/duduq-canonical-header-hud.js', 'core/ui/duduq-canonical-question-hud.js', 'scripts/duduq-sync-penpot-to-core.mjs']) ok = run(`syntax ${f}`, ['node', '--check', f]) && ok;
   const blocked = checks.some(c => c.status === 'BLOCKED_ENVIRONMENT');
   const result = { status: ok ? (blocked ? 'PASS_WITH_LIMITATION' : 'PASS') : 'FAIL', timestamp: now(), checks, limitation: blocked ? 'Nested process execution is blocked by this Windows environment (EPERM); run the same checks directly in a normal terminal.' : 'Visual Penpot approval remains browser/human authority; no live export is assumed.' };
