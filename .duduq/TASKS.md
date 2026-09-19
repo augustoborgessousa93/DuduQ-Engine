@@ -21,3 +21,4 @@
 ## BLOCKED
 - No GitHub blocker.
 - Penpot live API/export is unavailable; use browser-assisted native Penpot editing only.
+- Original browser session containing the three recorded host frames is currently inaccessible; connected Penpot MCP inspection confirms those IDs are not present in the server-persisted page. Do not create new frames without explicit authorization.

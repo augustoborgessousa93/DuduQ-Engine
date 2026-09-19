@@ -10,19 +10,19 @@ Runtime evidence for all three mechanics was audited. Native Target Shooter targ
 GitHub Actions `DUDUQ Validate`: SUCCESS at 2026-09-19T01:17:51Z on commit `4c704a00c239586b16c66dfa192e30258505c7e9`.
 
 ## Current limitation
-The task remains PARTIAL: the native frame hosts exist, but mechanic-specific layers have not been fully reparented into the Matching and Drag & Drop hosts, and shared instances were not duplicated or detached. Target Shooter target layers remain verified as existing native layers. Several mechanic-specific Penpot Main/Instance IDs remain null by design.
+The task remains PARTIAL. The only browser session that showed the three existing host frames became inaccessible. A fresh connected Penpot project session was inspected through the native Penpot MCP and does not contain the recorded frame IDs or their names; it contains the shared native components and target layers, but no Matching/Target Shooter/Drag & Drop host frames. Because the user explicitly forbids creating new frames, no replacement frames were created and no reparenting was claimed. The recorded frame IDs are retained as last-observed browser-session IDs pending recovery of the original unsaved session.
 
 ## Approved / protected
 Header Main 88954f25-7a86-800b-8008-a87e6f0d4e44; Question Main 88954f25-7a86-800b-8008-a87e700a22e9; Control Panel 855af85f-faf4-8069-8008-a8e75a3255fd; gameplay and Magic Cannon / Magic Launcher protected.
 
 ## Next exact action
-Use the existing Control Panel page via Penpot browser UI to create/organize the three native editable composition Frames, reuse linked official shared instances, expose mechanic-specific visual layers, inspect their native IDs, and populate `design-system/duduq-screen-composition-map.json` without inventing unknown IDs.
+Recover the original Penpot browser session that contains the three host frames, then reparent the already-existing native layers into those frames while preserving absolute positions. Do not create replacement frames. After recovery, inspect child IDs and update `design-system/duduq-screen-composition-map.json` without inventing unknown IDs.
 
 ## Penpot
 PENPOT_SYNC_REQUIRED: no live API/export bridge. Browser-assisted native editing is allowed; do not claim live sync.
 
 ## Branch / commit
-duduq-autopilot-2026-09-18 / 498e0c3
+duduq-autopilot-2026-09-18 / 48fc307 (local validation metadata pending)
 
 ## Remote
 https://github.com/augustoborgessousa93/DuduQ-Engine.git (SYNCED)
