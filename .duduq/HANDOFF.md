@@ -1,25 +1,28 @@
 # DUDUQ Continuity Handoff
 
 ## What are we doing?
-Maintaining a credit-independent DUDUQ workflow: GitHub technical source, Penpot visual source, Core runtime.
+Testing the controlled Penpot → ChatGPT Normal → GitHub → Core → mechanics workflow on an isolated branch.
 
 ## Just completed
-Normal ChatGPT successfully resumed from GitHub without Codex context, read the continuity contract/state, inspected the active branch, diagnosed the failing GitHub Action, fixed the workflow cache issue, committed the fix, and verified the GitHub Action completed successfully.
+Augusto changed the visible DuduQ Progress Bar in Penpot to H=18 px (W=260 px shown in the screenshot). ChatGPT Normal mirrored only the canonical Core progress height from 16 px to 18 px in `core/duduq-canonical-header-hud.css`.
 
 ## Validation
-GitHub Actions `DUDUQ Validate`: SUCCESS at 2026-09-18T23:08:26Z on commit `3760d76e21bf433c4fa5cf89a721447be76a7be4`.
+GitHub Actions `DUDUQ Validate`: SUCCESS at 2026-09-19T00:48:12Z on functional commit `1254bbcadb6b0ff6a80786de61bc8567160b42c6`.
 
-## Approved / frozen
-Header Main 88954f25-7a86-800b-8008-a87e6f0d4e44; Question Main 88954f25-7a86-800b-8008-a87e700a22e9; Control Panel 855af85f-faf4-8069-8008-a8e75a3255fd; gameplay and Magic Cannon / Magic Launcher protected.
+## Propagation proof
+Matching, Target Shooter and Drag & Drop all load the shared `core/duduq-canonical-header-hud.css`; no mechanic-local progress height was changed.
+
+## Human review
+Still required in a browser. This is a controlled manual-authorized Penpot bridge, not live Penpot API sync.
+
+## Branch
+chatgpt-normal-penpot-sync-test-2026-09-18
+
+## Functional commit
+1254bbcadb6b0ff6a80786de61bc8567160b42c6
 
 ## Next exact action
-If Codex resumes, first fetch the active branch so it includes the ChatGPT commit, then run `npm run duduq:resume` and `npm run duduq:validate`. Continue from `.duduq/TASKS.md`.
+Open/sync this test branch in the local workspace and visually confirm the 18 px progress bar in Matching, Target Shooter and Drag & Drop. If approved, promote the same canonical change to the active continuity branch; otherwise revert the isolated test branch only.
 
 ## Penpot
-PENPOT_SYNC_REQUIRED: live API/export is unavailable; human browser review remains authority.
-
-## Branch / commit
-duduq-autopilot-2026-09-18 / 3760d76e21bf433c4fa5cf89a721447be76a7be4
-
-## Remote
-https://github.com/augustoborgessousa93/DuduQ-Engine.git (SYNCED)
+Global status remains PENPOT_SYNC_REQUIRED because no live API/export bridge exists. The Progress Track test property itself is recorded as SYNCED from human screenshot evidence.
