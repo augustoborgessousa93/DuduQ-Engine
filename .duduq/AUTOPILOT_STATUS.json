@@ -4,11 +4,12 @@
   "lastCheckpoint": "2026-09-18T23:03:00.000Z",
   "lastPush": "2026-09-18T23:08:08.000Z",
   "validation": "PASS_WITH_LIMITATION",
-  "activeBranch": "UNKNOWN",
+  "activeBranch": "recovery/duduq-20260919-workbench-master",
   "dirty": true,
   "pendingHumanReview": true,
   "pendingPenpotSync": true,
   "warnings": [
-    "Git executable not available; remote/branch/push cannot be verified."
+    "Active branch is a recovery branch because the development branch has remote commits not present locally; no force push performed.",
+    "Penpot live write sync is unavailable; human review remains pending."
   ]
 }

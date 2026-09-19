@@ -22,4 +22,4 @@ Human visual review of the three workbenches, then controlled Penpot-property ex
 `PENPOT_SYNC_REQUIRED`: browser/MCP review is the current authority.
 
 ## Branch / commit
-`duduq-autopilot-2026-09-18` / local checkpoint pending.
+`recovery/duduq-20260919-workbench-master` / `12219e8` (published; preserves local workbench state without overwriting the diverged development branch).
