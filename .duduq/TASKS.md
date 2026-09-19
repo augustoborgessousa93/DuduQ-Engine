@@ -9,7 +9,7 @@
 - GitHub Actions workflow corrected and validated successfully.
 
 ## NOW
-- Credit-independent development is operational on `duduq-autopilot-2026-09-18`.
+- Shared native Penpot IDs are verified; mechanic-specific composition IDs remain honestly pending native-node inspection.
 
 ## NEXT
 - When Codex resumes, fetch the active branch before continuing so it receives commit `3760d76e21bf433c4fa5cf89a721447be76a7be4`.
