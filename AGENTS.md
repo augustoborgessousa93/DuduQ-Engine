@@ -15,3 +15,10 @@ Session start: read continuity files, validate branch, inspect Penpot drift, con
 Session end: validate, update state/handoff/tasks, checkpoint, push development branch when GitHub is available, and mark Penpot sync honestly.
 
 Use `CONTINUAR DUDUQ` as the normal-chat recovery trigger. A fresh executor must recover from GitHub, not conversation memory.
+
+## Test-link rule
+- Always provide Augusto with ready-to-open test links after any runtime/UI change.
+- Standard local server is `http://127.0.0.1:4175` unless the active workspace documents another port.
+- After every change, report direct links for the affected mechanics; when a change is shared by the canonical Core, include Matching, Target Shooter, and Drag & Drop links.
+- Never finish a visual/runtime task with only a commit SHA or file path when a browser test link can be provided.
+- If the current remote branch is not yet present in Augusto's local workspace, say so explicitly and provide the exact branch name that must be synced before the localhost links reflect the change.
