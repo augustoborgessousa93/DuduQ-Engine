@@ -1,21 +1,20 @@
 # DUDUQ Tasks
 
 ## DONE
-- Native Control Panel instances created and verified.
-- Auxiliary SVG underlay removed in Penpot.
-- Canonical manifests and guarded sync workflow created.
-- Autopilot continuity branch pushed to GitHub.
-- Normal ChatGPT continuity test completed successfully from GitHub.
-- GitHub Actions workflow corrected and validated successfully.
+- Credit-independent ChatGPT Normal continuity proved through GitHub.
+- Penpot Progress Track screenshot captured at W=260 / H=18.
+- Canonical Core progress height changed 16 px → 18 px on isolated test branch.
+- GitHub Actions validation passed.
+- Static inheritance verified: Matching, Target Shooter and Drag & Drop load the same canonical Header CSS.
 
 ## NOW
-- Credit-independent development is operational on `duduq-autopilot-2026-09-18`.
+- Human visual verification of the 18 px progress bar in the three mechanics.
 
 ## NEXT
-- When Codex resumes, fetch the active branch before continuing so it receives commit `3760d76e21bf433c4fa5cf89a721447be76a7be4`.
-- Continue the real Penpot → Core synchronization proof using a controlled, reversible visual change.
-- Keep `PENPOT_SYNC_REQUIRED` until an authorized Penpot export/write path is available.
+- Sync/open `chatgpt-normal-penpot-sync-test-2026-09-18` locally and inspect Matching, Target Shooter and Drag & Drop.
+- If visually approved, promote the canonical 18 px change to `duduq-autopilot-2026-09-18`.
+- If rejected, revert only the isolated test branch.
 
 ## BLOCKED
-- No GitHub continuity blocker.
+- ChatGPT Normal cannot directly mutate Augusto's local Windows workspace; remote GitHub changes require the local workspace to fetch/switch to the test branch before localhost can display them.
 - Penpot live API/export remains unavailable.
