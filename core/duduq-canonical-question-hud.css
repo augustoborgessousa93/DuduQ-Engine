@@ -1,5 +1,6 @@
 /* Gold Master 88954f25-7a86-800b-8008-a87e700a22e9 — Core-owned only. */
 /* Shared Gold Master geometry is imported once by duduq-canonical-header-hud.css. */
+@import "./duduq-question-audio-contract.css";
 .duduq-canonical-question-hud { isolation: isolate; }
 
 /* Official audio control: same tactile family as fullscreen, tuned to the question surface. */
@@ -7,24 +8,24 @@
   box-sizing: border-box !important;
   display: grid !important;
   place-items: center !important;
-  width: calc(56px * var(--duduq-gold-scale)) !important;
-  height: calc(56px * var(--duduq-gold-scale)) !important;
-  min-width: calc(56px * var(--duduq-gold-scale)) !important;
-  min-height: calc(56px * var(--duduq-gold-scale)) !important;
+  width: calc(var(--duduq-question-audio-width) * var(--duduq-gold-scale)) !important;
+  height: calc(var(--duduq-question-audio-height) * var(--duduq-gold-scale)) !important;
+  min-width: calc(var(--duduq-question-audio-width) * var(--duduq-gold-scale)) !important;
+  min-height: calc(var(--duduq-question-audio-height) * var(--duduq-gold-scale)) !important;
   padding: 0 !important;
   line-height: 0 !important;
-  border: 1px solid rgba(255,221,125,.92) !important;
-  border-radius: calc(18px * var(--duduq-gold-scale)) !important;
-  color: #fff !important;
-  background: linear-gradient(180deg,#ffc95f 0%,#f4a83a 56%,#d88023 100%) !important;
-  box-shadow: 0 5px 0 #aa641f, 0 8px 12px rgba(103,64,25,.18), inset 0 1px 0 rgba(255,255,255,.58) !important;
+  border: var(--duduq-question-audio-border) !important;
+  border-radius: calc(var(--duduq-question-audio-radius) * var(--duduq-gold-scale)) !important;
+  color: var(--duduq-question-audio-icon-color) !important;
+  background: var(--duduq-question-audio-surface) !important;
+  box-shadow: var(--duduq-question-audio-shadow) !important;
   transition: transform 140ms ease, filter 140ms ease, box-shadow 140ms ease;
 }
-.duduq-canonical-question-hud .audio-button svg { display:block; width:calc(26px * var(--duduq-gold-scale)); height:calc(26px * var(--duduq-gold-scale)); stroke:currentColor; fill:none; stroke-width:2.05; stroke-linecap:round; stroke-linejoin:round; }
-.duduq-canonical-question-hud .audio-button:hover:not(:disabled) { filter:brightness(1.06) saturate(1.05); transform:translateY(-1px); }
-.duduq-canonical-question-hud .audio-button:active:not(:disabled),.duduq-canonical-question-hud .audio-button[data-audio-state="playing"] { transform:translateY(3px); box-shadow:0 2px 0 #aa641f,0 3px 6px rgba(103,64,25,.16),inset 0 1px 0 rgba(255,255,255,.42) !important; }
+.duduq-canonical-question-hud .audio-button svg { display:block; width:calc(var(--duduq-question-audio-icon-size) * var(--duduq-gold-scale)); height:calc(var(--duduq-question-audio-icon-size) * var(--duduq-gold-scale)); stroke:currentColor; fill:none; stroke-width:2.05; stroke-linecap:round; stroke-linejoin:round; }
+.duduq-canonical-question-hud .audio-button:hover:not(:disabled) { filter:var(--duduq-question-audio-hover-filter); transform:var(--duduq-question-audio-hover-transform); }
+.duduq-canonical-question-hud .audio-button:active:not(:disabled),.duduq-canonical-question-hud .audio-button[data-audio-state="playing"] { transform:var(--duduq-question-audio-pressed-transform); box-shadow:var(--duduq-question-audio-pressed-shadow) !important; }
 .duduq-canonical-question-hud .audio-button[data-audio-state="playing"] .audio-wave { animation:duduq-canonical-audio-wave 700ms ease-in-out infinite alternate; }
 .duduq-canonical-question-hud .audio-button:focus-visible { outline:3px solid #70cdf7; outline-offset:3px; }
-.duduq-canonical-question-hud .audio-button:disabled { cursor:not-allowed; filter:grayscale(.35) opacity(.58); }
+.duduq-canonical-question-hud .audio-button:disabled { cursor:not-allowed; filter:var(--duduq-question-audio-disabled-filter); }
 @keyframes duduq-canonical-audio-wave { from { opacity:.42; } to { opacity:1; } }
 @media (prefers-reduced-motion: reduce) { .duduq-canonical-question-hud .audio-button { transition:none; } .duduq-canonical-question-hud .audio-button[data-audio-state="playing"] .audio-wave { animation:none; } }
