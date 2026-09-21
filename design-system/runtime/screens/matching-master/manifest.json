@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "compilerVersion": "1.0.0",
+  "screenId": "50f514fe-4a8a-804d-8008-aa3b1478e03a",
+  "screenName": "MATCHING — MASTER / IDLE",
+  "source": "Penpot MCP generateMarkup/generateStyle/generateFontFaces",
+  "hashes": {
+    "markup": "ead6f4b8e281c716363ce3368868b3520b9ce280122de13967eb941a4d4d5107",
+    "styles": "576e634855c05eb1b250cdfd2da0a3f1a89563d7908e3f2b714d75aa50a2c0ae",
+    "fonts": "81d75b6126af601a29809c7272211068fe43ae09b6e04aa987968cf9100c17f7"
+  },
+  "generatedAt": "2026-09-21T19:54:26.947Z"
+}
