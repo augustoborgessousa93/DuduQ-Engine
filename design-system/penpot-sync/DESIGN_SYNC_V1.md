@@ -7,3 +7,7 @@
 - Rollback: restore the manifest and generated CSS through Git.
 
 Supported safe properties: dimensions, surface, depth/highlight metadata, border, radius, shadow, icon name/asset/color/size, and hover/pressed/disabled visual state values. Structural layers/slots require review; unknown top-level contract properties block. Add a component by giving it its own contract, Core consumer, and focused sync test.
+
+## DUDUQ Live Authoring Sync V1 baseline
+
+Commit `bc4bebf` is the homologated baseline for Live Authoring Sync V1. Future evolution must preserve the validated sequence: Penpot LIVE authoring read → semantic diff → Core apply → Matching and Target Shooter consumer validation → successful snapshot update. The regression coverage for authoring-source divergence is mandatory.
