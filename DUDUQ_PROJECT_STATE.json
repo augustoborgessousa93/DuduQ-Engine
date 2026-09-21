@@ -1,1 +1,66 @@
-{"architectureVersion":"lossless-penpot-runtime-v1","penpotMcpEndpoint":"http://localhost:4401/mcp","currentStatus":"CHECKPOINT_5_COMPLETE","lastCompletedCheckpoint":5,"nextCheckpoint":6,"screenPackages":"design-system/runtime/screens","updateCommand":"npm run duduq:update-core","successfulScreenPackages":{"matching-master":"3314324286f72742a75feb295a9a2ef2918bda1d9efbf1e76db7458c637f16f3","target-shooter-master":"e114bff26d5ff6e15abce9339a5b1e0fd8d8c5f509ad68ccdff24d27408db134"},"matchingRuntime":"RECOVERED","matchingRuntimePath":"mechanics/matching.js","targetShooterRuntime":"RECOVERED","targetShooterRuntimePath":"mechanics/target-shooter.js","checkpoint3Status":"COMPLETE","checkpoint4Status":"COMPLETE","checkpoint5Status":"COMPLETE","nextSafeAction":"finalize portable production baseline and fresh-agent continuation"}
+{
+  "project": "DUDUQ",
+  "architectureVersion": "lossless-penpot-runtime-v1",
+  "status": "PRODUCTION_READY",
+  "productionBaseline": "70c1c791",
+  "documentationBaseline": "70c1c791",
+  "lastSuccessfulCommit": "70c1c791",
+  "lastCompletedCheckpoint": 6,
+  "nextCheckpoint": null,
+  "checkpoints": {
+    "visualCompiler": "e12e2ef",
+    "universalHost": "9084fd44",
+    "matchingRuntimeRecovery": "88ab394",
+    "matchingUniversalRuntime": "5aed8165",
+    "targetShooterUniversalRuntime": "fd22da82",
+    "liveUniversalSync": "70c1c791"
+  },
+  "penpot": {
+    "mcpEndpoint": "http://localhost:4401/mcp",
+    "pluginRequired": true
+  },
+  "commands": {
+    "updateCore": "npm run duduq:update-core",
+    "dryRun": "npm run duduq:update-core -- --dry-run",
+    "compileMatching": "node scripts/compile-penpot-screen.mjs matching-master",
+    "compileTargetShooter": "node scripts/compile-penpot-screen.mjs target-shooter-master",
+    "screenRuntimeTest": "node test/penpot-sync/duduq-screen-runtime.test.mjs",
+    "matrixTest": "node test/runtime/universal-visual-change-matrix.mjs",
+    "matchingE2E": "node test/runtime/matching-universal-host.e2e.mjs",
+    "targetShooterE2E": "node test/runtime/target-shooter-universal-host.e2e.mjs"
+  },
+  "screenPackages": {
+    "root": "design-system/runtime/screens",
+    "matching-master": "3314324286f72742a75feb295a9a2ef2918bda1d9efbf1e76db7458c637f16f3",
+    "target-shooter-master": "e114bff26d5ff6e15abce9339a5b1e0fd8d8c5f509ad68ccdff24d27408db134"
+  },
+  "validatedCapabilities": [
+    "live Penpot capture",
+    "affected screen detection",
+    "incremental compilation",
+    "atomic package activation",
+    "move",
+    "color",
+    "size",
+    "shadow",
+    "opacity",
+    "typography",
+    "SVG/icon",
+    "image",
+    "add node",
+    "remove node",
+    "reorder",
+    "new screen detection",
+    "second-run NO_CHANGES",
+    "reverse sync"
+  ],
+  "validatedConsumers": ["matching", "target-shooter"],
+  "currentArchitecture": "Penpot LIVE -> Design Graph -> lossless Visual Package -> Universal Screen Host -> behavior/game runtime -> E2E validation -> atomic activation -> successful state -> Git",
+  "visualSourceOfTruth": "Penpot generated markup/style/font payload",
+  "universalHost": "core/duduq-screen-runtime.js",
+  "behaviorRuntime": ["mechanics/matching.js", "mechanics/target-shooter.js"],
+  "successfulGraph": "design-system/penpot-sync/graph/last-successful.json",
+  "knownLimitations": [],
+  "operationalPrerequisites": ["Penpot plugin connected to http://localhost:4401/mcp", "local Chrome/CDP test harness for E2E"],
+  "nextSafeAction": "edit Penpot in an authorized screen and run npm run duduq:update-core"
+}
