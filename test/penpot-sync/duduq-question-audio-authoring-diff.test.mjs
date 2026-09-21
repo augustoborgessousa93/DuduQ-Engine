@@ -5,4 +5,7 @@ const snap=(fill)=>({componentId:"QUESTION_AUDIO",semanticId:"question-audio",so
 assert.equal(semanticDiff(snap("#349FDF"),snap("#8B5CF6")).state,"CHANGE_DETECTED");
 assert.equal(semanticDiff(snap("#349FDF"),snap("#349FDF")).state,"NO_CHANGES");
 assert.equal(semanticDiff(snap("#349FDF"),snap("#8B5CF6")).changed.includes("surface"),true);
+const geometry=(x)=>({id:"audio-icon",x,y:15,width:26,height:26,translateX:x,translateY:0,ownership:"CORE_SHARED_GEOMETRY"});
+assert.equal(semanticDiff({...snap("#349FDF"),audioIcon:geometry(8)},{...snap("#349FDF"),audioIcon:geometry(0)}).state,"CHANGE_DETECTED");
+assert.equal(semanticDiff({...snap("#349FDF"),audioIcon:geometry(8)},{...snap("#349FDF"),audioIcon:geometry(8)}).state,"NO_CHANGES");
 console.log("QuestionAudio authoring diff regression: PASS");

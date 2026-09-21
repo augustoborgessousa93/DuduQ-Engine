@@ -21,7 +21,7 @@
   box-shadow: var(--duduq-question-audio-shadow) !important;
   transition: transform 140ms ease, filter 140ms ease, box-shadow 140ms ease;
 }
-.duduq-canonical-question-hud .audio-button svg { display:block; width:calc(var(--duduq-question-audio-icon-size) * var(--duduq-gold-scale)); height:calc(var(--duduq-question-audio-icon-size) * var(--duduq-gold-scale)); stroke:currentColor; fill:none; stroke-width:2.05; stroke-linecap:round; stroke-linejoin:round; }
+.duduq-canonical-question-hud .audio-button svg { display:block; width:calc(var(--duduq-question-audio-icon-size) * var(--duduq-gold-scale)); height:calc(var(--duduq-question-audio-icon-size) * var(--duduq-gold-scale)); transform:translate(calc(var(--duduq-question-audio-icon-translate-x) * var(--duduq-gold-scale)),calc(var(--duduq-question-audio-icon-translate-y) * var(--duduq-gold-scale))); stroke:currentColor; fill:none; stroke-width:2.05; stroke-linecap:round; stroke-linejoin:round; }
 .duduq-canonical-question-hud .audio-button:hover:not(:disabled) { filter:var(--duduq-question-audio-hover-filter); transform:var(--duduq-question-audio-hover-transform); }
 .duduq-canonical-question-hud .audio-button:active:not(:disabled),.duduq-canonical-question-hud .audio-button[data-audio-state="playing"] { transform:var(--duduq-question-audio-pressed-transform); box-shadow:var(--duduq-question-audio-pressed-shadow) !important; }
 .duduq-canonical-question-hud .audio-button[data-audio-state="playing"] .audio-wave { animation:duduq-canonical-audio-wave 700ms ease-in-out infinite alternate; }

@@ -10,6 +10,7 @@ const contract = (snapshot) => ({
   dimensions: snapshot.dimensions,
   surface: snapshot.surface,
   icon: snapshot.icon,
+  audioIcon: snapshot.audioIcon,
   hierarchy: snapshot.hierarchy,
   source: snapshot.source
 });
@@ -25,7 +26,7 @@ export function normalizeLiveSnapshot(snapshot) {
 export function semanticDiff(current, previous) {
   const now = normalizeLiveSnapshot(current);
   const then = normalizeLiveSnapshot(previous);
-  const fields = ["dimensions", "surface", "icon"];
+  const fields = ["dimensions", "surface", "icon", "audioIcon"];
   const changed = fields.filter((field) => JSON.stringify(now[field]) !== JSON.stringify(then[field]));
   return { state: changed.length ? "CHANGE_DETECTED" : "NO_CHANGES", changed };
 }
@@ -48,7 +49,7 @@ export function trace() {
   const previous = read("question-audio-last-successful.json");
   const normalizedCurrent = normalizeLiveSnapshot(current);
   const normalizedPrevious = normalizeLiveSnapshot(previous);
-  return { component: current.semanticId, authoringNodeId: current.source.surfaceId, current: normalizedCurrent.surface.fills[0].color, previous: normalizedPrevious.surface.fills[0].color, normalizedCurrent: normalizedCurrent.surface.fills[0].color, normalizedPrevious: normalizedPrevious.surface.fills[0].color, diff: semanticDiff(current, previous) };
+  return { component: current.semanticId, authoringNodeId: current.source.surfaceId, current: normalizedCurrent.surface.fills[0].color, previous: normalizedPrevious.surface.fills[0].color, audioIcon: { current: normalizedCurrent.audioIcon, previous: normalizedPrevious.audioIcon }, normalizedCurrent: normalizedCurrent.surface.fills[0].color, normalizedPrevious: normalizedPrevious.surface.fills[0].color, diff: semanticDiff(current, previous) };
 }
 
 export function markSuccessful() {

@@ -84,6 +84,18 @@
       }
     ]
   },
+  "audioIcon": {
+    "id": "50f514fe-4a8a-804d-8008-aa3b16bd3fd8",
+    "x": -22774,
+    "y": -19489,
+    "width": 26,
+    "height": 26,
+    "relativeX": 23.89,
+    "relativeY": 28.11,
+    "translateX": 8.89,
+    "translateY": 13.11,
+    "ownership": "CORE_SHARED_GEOMETRY"
+  },
   "hierarchy": [
     {
       "id": "88954f25-7a86-800b-8008-a87e700a22eb",
@@ -103,7 +115,7 @@
   ],
   "successfulSnapshot": {
     "checkpoint": "B",
-    "capturedAt": "2026-09-21T18:19:42.596Z",
+    "capturedAt": "2026-09-21T18:36:22.912Z",
     "bridgeResult": "APPLIED",
     "semanticDiff": "CHANGE_DETECTED"
   }
