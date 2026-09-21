@@ -3,7 +3,7 @@
   "architectureVersion": "lossless-penpot-runtime-v1",
   "status": "PRODUCTION_READY",
   "productionBaseline": "70c1c791",
-  "documentationBaseline": "70c1c791",
+  "documentationBaseline": "4d0dce29",
   "lastSuccessfulCommit": "70c1c791",
   "lastCompletedCheckpoint": 6,
   "nextCheckpoint": null,
