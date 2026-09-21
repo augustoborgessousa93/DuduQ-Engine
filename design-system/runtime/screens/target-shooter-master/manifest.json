@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "compilerVersion": "1.0.0",
+  "screenId": "50f514fe-4a8a-804d-8008-aa23c3818e55",
+  "screenName": "TARGET SHOOTER — MASTER / IDLE",
+  "source": "Penpot MCP generateMarkup/generateStyle/generateFontFaces",
+  "hashes": {
+    "markup": "e114bff26d5ff6e15abce9339a5b1e0fd8d8c5f509ad68ccdff24d27408db134",
+    "styles": "6d07034fb60806fe4e64c081e0f6893d8dcaa379cef120a1d86d4e79c0356420",
+    "fonts": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "generatedAt": "2026-09-21T21:16:36.247Z"
+}

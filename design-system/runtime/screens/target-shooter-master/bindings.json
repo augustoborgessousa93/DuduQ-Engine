@@ -1,0 +1,10 @@
+{
+  "screenId": "50f514fe-4a8a-804d-8008-aa23c3818e55",
+  "behaviorBindings": [
+    {
+      "sourceId": "50f514fe-4a8a-804d-8008-aa23c3818e55",
+      "semanticId": "target-shooter-screen",
+      "action": "TARGET_SHOOTER_SCREEN"
+    }
+  ]
+}

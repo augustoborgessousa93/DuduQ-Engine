@@ -1,0 +1,2386 @@
+
+    html,body,#root{width:100%;min-height:100%;margin:0;background:transparent}body{min-height:100vh;font-family:Nunito,ui-rounded,system-ui,sans-serif}
+    #duduq-boot{position:fixed;inset:0;display:grid;place-items:center;padding:24px;color:#164274;font:800 17px/1.45 ui-rounded,system-ui,sans-serif;text-align:center;background:#F7FBFF;z-index:99999}#duduq-boot[hidden]{display:none}
+    #duduq-runtime-error{white-space:pre-wrap;max-width:760px;padding:20px;border:2px solid #ef9a9a;border-radius:18px;background:#fff;color:#8b1e1e;box-shadow:0 8px 28px rgba(50,70,90,.12)}
+  
+
+/* === DUDUQ GLOBAL OVERRIDES: FULLSCREEN + DUOLINGO PROGRESS === */
+.duduq-engine-fullscreen-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+}
+.duduq-engine-fullscreen-icon {
+  font-size: 17px;
+  line-height: 1;
+}
+.duduq-engine-fullscreen-label {
+  white-space: nowrap;
+}
+
+.duduq-progress-trail {
+  gap: 8px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.duduq-progress-trail::before { display: none !important; }
+.duduq-progress-copy {
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 0 0 6px !important;
+}
+.duduq-progress-copy span { display: none !important; }
+.duduq-progress-copy strong {
+  color: #1D2B53 !important;
+  font-family: Fredoka, Nunito, sans-serif !important;
+  font-size: clamp(13px, 1.55vw, 18px) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+}
+.duduq-progress-track {
+  position: relative;
+  overflow: hidden !important;
+  min-height: 16px !important;
+  height: 16px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(180deg, #E6EEF6 0%, #DCE6F0 100%) !important;
+  border: none !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 4px rgba(84,114,146,.15) !important;
+}
+.duduq-progress-track::after,
+.duduq-progress-marker,
+.duduq-progress-marker::after {
+  display: none !important;
+}
+.duduq-progress-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 18%, rgba(255,255,255,.10) 32%, rgba(255,255,255,.42) 46%, rgba(255,255,255,.16) 58%, transparent 72%);
+  background-size: 180% 100%;
+  animation: duduqProgressShine 2.6s linear infinite;
+  pointer-events: none;
+}
+.duduq-progress-fill {
+  border-radius: inherit !important;
+  background: linear-gradient(180deg, #43B3FF 0%, #1592FF 100%) !important;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.35), 0 1px 2px rgba(10,108,214,.16) !important;
+}
+.duduq-progress-fill::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  top: 1px;
+  height: 42%;
+  border-radius: 999px;
+  background: rgba(255,255,255,.28);
+}
+
+@keyframes duduqProgressShine {
+  0% { background-position: 140% 0; }
+  100% { background-position: -40% 0; }
+}
+
+@media (max-width: 640px) {
+  .duduq-engine-fullscreen-label { display: none; }
+  .duduq-engine-fullscreen-button { min-width: 44px; padding-inline: 12px !important; }
+  .duduq-progress-track { min-height: 14px !important; height: 14px !important; }
+}
+
+
+
+/*
+  Escala fluida do CONTEUDO, nao apenas do card externo.
+  Funciona tanto no fullscreen nativo quanto quando o Player amplia o iframe,
+  pois se baseia no viewport efetivo da mecanica.
+*/
+@media (min-width: 980px) and (min-height: 620px) {
+  .duduq-engine-heading h1 {
+    font-size: clamp(24px, 2vw, 34px) !important;
+    line-height: 1.08 !important;
+  }
+  .duduq-progress-copy strong {
+    font-size: clamp(15px, 1.2vw, 20px) !important;
+  }
+  .duduq-dd-board,
+  .duduq-bp-board,
+  .duduq-ss-board,
+  .duduq-mq-board,
+  .duduq-ts-content {
+    width: min(1380px, calc(100% - 24px)) !important;
+    max-width: 100% !important;
+  }
+  .duduq-dd-instruction,
+  .duduq-bp-instruction,
+  .duduq-ss-instruction,
+  .duduq-ts-instruction,
+  .duduq-mq-instruction {
+    font-size: clamp(18px, 1.45vw, 26px) !important;
+    line-height: 1.28 !important;
+  }
+  .duduq-dd-item,
+  .duduq-dd-target,
+  .duduq-ss-token,
+  .duduq-ss-gap,
+  .duduq-bp-bubble,
+  .duduq-ts-target,
+  .duduq-mq-label {
+    font-size: clamp(17px, 1.3vw, 24px) !important;
+  }
+  .duduq-dd-item,
+  .duduq-dd-target,
+  .duduq-ss-token {
+    padding: clamp(10px, .8vw, 16px) clamp(14px, 1.15vw, 22px) !important;
+  }
+  .duduq-dd-target-grid,
+  .duduq-dd-pool-items,
+  .duduq-ss-bank,
+  .duduq-mq-grid {
+    gap: clamp(10px, 1vw, 18px) !important;
+  }
+  .duduq-dd-media img,
+  .duduq-dd-target-media img,
+  .duduq-bp-media img,
+  .duduq-ss-inline-image,
+  .duduq-ts-instruction-image,
+  .duduq-mq-media img {
+    width: auto !important;
+    max-width: min(100%, 220px) !important;
+    max-height: clamp(110px, 17vh, 210px) !important;
+    object-fit: contain !important;
+  }
+  .duduq-dd-audio-shell,
+  .duduq-bp-audio-shell,
+  .duduq-ss-audio-shell,
+  .duduq-ts-audio-shell,
+  .duduq-udd-audio-shell {
+    transform-origin: center !important;
+  }
+}
+
+@media (min-width: 1360px) and (min-height: 760px) {
+  .duduq-dd-board,
+  .duduq-bp-board,
+  .duduq-ss-board,
+  .duduq-mq-board,
+  .duduq-ts-content {
+    gap: clamp(12px, 1.1vw, 22px) !important;
+  }
+  .duduq-ss-sentence,
+  .duduq-ss-text,
+  .duduq-dd-display,
+  .duduq-bp-label,
+  .duduq-ts-label {
+    font-size: clamp(19px, 1.35vw, 27px) !important;
+  }
+}
+
+/* Nao deixa a ampliacao criar cortes em notebook/landscape baixo. */
+@media (min-width: 900px) and (max-height: 680px) {
+  .duduq-dd-board,
+  .duduq-bp-board,
+  .duduq-ss-board,
+  .duduq-mq-board,
+  .duduq-ts-content {
+    max-height: 100% !important;
+  }
+}
+
+
+/* O titulo identifica a atividade sem competir com o enunciado. */
+@media (min-width: 760px) {
+  .duduq-engine-heading h1 {
+    font-size: clamp(19px, 1.55vw, 25px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -.012em !important;
+  }
+}
+
+/* A altura do jogo passa a acompanhar o conteudo real. */
+html, body, #root {
+  min-height: 100% !important;
+}
+body {
+  overflow-y: auto !important;
+  overscroll-behavior-y: contain;
+}
+.duduq-engine-root,
+.duduq-engine-shell {
+  height: auto !important;
+  min-height: 100dvh !important;
+  overflow: visible !important;
+}
+.duduq-engine-stage {
+  min-height: 0 !important;
+  overflow-y: visible !important;
+}
+
+/* Feedback nunca pode ficar escondido sob o limite inferior da viewport. */
+.duduq-engine-feedback {
+  box-sizing: border-box !important;
+  position: relative !important;
+  inset: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  width: min(1000px, calc(100% - 20px)) !important;
+  max-width: calc(100% - 20px) !important;
+  margin: clamp(10px, 1.5vh, 16px) auto max(18px, env(safe-area-inset-bottom)) !important;
+  padding-bottom: max(2px, env(safe-area-inset-bottom)) !important;
+  overflow: visible !important;
+  scroll-margin-block: 18px max(28px, env(safe-area-inset-bottom));
+  z-index: 60 !important;
+}
+.duduq-engine-feedback-card {
+  max-height: none !important;
+  overflow: visible !important;
+}
+.duduq-engine-feedback-action {
+  max-width: min(100%, 320px) !important;
+}
+
+/* Fullscreen nativo e iframe ampliado: reservar espaco real para o feedback. */
+html:fullscreen,
+html:fullscreen body,
+html:fullscreen #root {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow-y: auto !important;
+}
+html:fullscreen .duduq-engine-root,
+html:fullscreen .duduq-engine-shell {
+  min-height: 100dvh !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+html:fullscreen .duduq-engine-stage {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  padding-bottom: clamp(10px, 1.8vh, 22px) !important;
+}
+html:fullscreen .duduq-engine-feedback {
+  position: relative !important;
+  margin-bottom: max(26px, env(safe-area-inset-bottom)) !important;
+}
+
+/* Em notebook baixo, compacta o feedback em vez de corta-lo. */
+@media (min-width: 900px) and (max-height: 800px) {
+  .duduq-engine-feedback {
+    margin-top: 8px !important;
+    margin-bottom: max(14px, env(safe-area-inset-bottom)) !important;
+  }
+  .duduq-engine-feedback-card {
+    min-height: 0 !important;
+    padding-top: 10px !important;
+    padding-bottom: 12px !important;
+  }
+  .duduq-engine-feedback-copy strong {
+    font-size: clamp(15px, 1.35vw, 18px) !important;
+  }
+  .duduq-engine-feedback-copy span {
+    font-size: clamp(13px, 1.08vw, 16px) !important;
+    line-height: 1.25 !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .duduq-engine-feedback {
+    width: calc(100% - 12px) !important;
+    max-width: calc(100% - 12px) !important;
+  }
+}
+
+
+/*
+  A 028 removeu o positionamento fixo, mas algumas bases ainda mantinham o
+  shell como grid de altura total com uma terceira linha reservada ao feedback.
+  Na 029 o fluxo e explicitamente: HEADER -> STAGE -> FEEDBACK.
+*/
+html, body, #root {
+  height: auto !important;
+  min-height: 100% !important;
+}
+body {
+  min-height: 100dvh !important;
+  overflow-y: auto !important;
+}
+.duduq-engine-root {
+  box-sizing: border-box !important;
+  height: auto !important;
+  min-height: 100dvh !important;
+  overflow: visible !important;
+}
+.duduq-engine-shell {
+  height: auto !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-rows: auto auto auto !important;
+  align-content: start !important;
+  row-gap: clamp(8px, 1.25vh, 12px) !important;
+  overflow: visible !important;
+}
+.duduq-engine-stage {
+  grid-row: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  padding-bottom: 0 !important;
+}
+.duduq-engine-feedback {
+  grid-row: auto !important;
+  align-self: start !important;
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+  width: min(1000px, calc(100% - 20px)) !important;
+  max-width: calc(100% - 20px) !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 2px auto max(14px, env(safe-area-inset-bottom)) !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  z-index: 20 !important;
+}
+.duduq-engine-feedback-card {
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+html:fullscreen,
+html:fullscreen body,
+html:fullscreen #root,
+html:fullscreen .duduq-engine-root {
+  height: auto !important;
+  min-height: 100dvh !important;
+  overflow-y: auto !important;
+}
+html:fullscreen .duduq-engine-shell {
+  height: auto !important;
+  min-height: 0 !important;
+  grid-template-rows: auto auto auto !important;
+  align-content: start !important;
+}
+html:fullscreen .duduq-engine-stage {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+html:fullscreen .duduq-engine-feedback {
+  position: relative !important;
+  margin-top: 2px !important;
+  margin-bottom: max(16px, env(safe-area-inset-bottom)) !important;
+}
+
+@media (min-width: 900px) and (max-height: 820px) {
+  .duduq-engine-shell {
+    row-gap: 8px !important;
+  }
+  .duduq-engine-feedback-card {
+    padding-top: 10px !important;
+    padding-bottom: 11px !important;
+  }
+  .duduq-engine-feedback .duduq-mascot[data-size="feedback"] {
+    width: 68px !important;
+    height: 68px !important;
+  }
+}
+
+
+
+
+  /* ========================================================================
+     DUDUQ BASE VISUAL MESTRE V1 — CAMADA CANÔNICA FINAL
+     Gerado a partir de DUDUQ_VISUAL_TOKENS_V1.ts.
+     Esta camada é deliberadamente a última da cascata do Engine.
+     ======================================================================== */
+
+  .duduq-engine-root {
+    --dq-primary: #0056B3;
+    --dq-primary-hover: #0867C8;
+    --dq-primary-pressed: #004892;
+    --dq-primary-depth: #003A7A;
+    --dq-primary-soft: #EFF6FF;
+    --dq-text: #1A1A1A;
+    --dq-heading: #16375B;
+    --dq-muted: #52606D;
+    --dq-surface: #FFFFFF;
+    --dq-soft-surface: #F5F7FA;
+    --dq-border: #D8E0E8;
+    --dq-border-strong: #AFC0D3;
+    --dq-depth: #B8C5D6;
+    --dq-disabled: #E2E8F0;
+    --dq-disabled-border: #C7D0DB;
+    --dq-disabled-text: #64748B;
+    --dq-disabled-depth: #B7C1CC;
+    --dq-selected-bg: #EFF6FF;
+    --dq-selected-border: #0056B3;
+    --dq-selected-depth: #75A9D8;
+    --dq-success-bg: #E8F5E9;
+    --dq-success-border: #58CC02;
+    --dq-success-text: #1B5E20;
+    --dq-success-depth: #46A302;
+    --dq-retry-bg: #FFEBEE;
+    --dq-retry-border: #FF8A8A;
+    --dq-retry-text: #B71C1C;
+    --dq-retry-depth: #D96B6B;
+    --dq-focus: #111827;
+
+    --engine-bg: transparent;
+    --engine-panel: var(--dq-surface);
+    --engine-text: var(--dq-text);
+    --engine-muted: var(--dq-muted);
+    --engine-border: var(--dq-border);
+    --engine-primary: var(--dq-primary);
+    --engine-primary-depth: var(--dq-primary-depth);
+    --engine-success: var(--dq-success-text);
+    --engine-success-bg: var(--dq-success-bg);
+    --engine-success-border: var(--dq-success-border);
+    --engine-retry: var(--dq-retry-text);
+    --engine-retry-bg: var(--dq-retry-bg);
+    --engine-retry-border: var(--dq-retry-border);
+    --engine-focus: var(--dq-focus);
+
+    width: 100%;
+    min-height: 100dvh;
+    padding: clamp(12px, 1.8vw, 24px);
+    background: transparent !important;
+    color: var(--dq-text);
+    font-family: Nunito, ui-rounded, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .duduq-engine-shell {
+    width: min(1180px, 100%);
+  }
+
+  .duduq-engine-header {
+    min-height: 76px;
+    gap: 12px 18px;
+    margin-bottom: clamp(18px, 2.4vh, 24px);
+    padding: 10px 16px;
+    border: 2px solid var(--dq-border);
+    border-radius: 24px;
+    background: rgba(255,255,255,.96);
+    box-shadow:
+      0 4px 0 var(--dq-depth),
+      0 12px 24px rgba(31,65,99,.07),
+      inset 0 1px 0 #fff;
+  }
+
+  .duduq-engine-heading h1 {
+    color: var(--dq-heading);
+    font-family: Fredoka, Nunito, ui-rounded, system-ui, sans-serif;
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    line-height: 1.12;
+  }
+
+  .duduq-engine-toolbar {
+    gap: 8px;
+  }
+
+  .duduq-engine-button-secondary,
+  .duduq-engine-toolbar .duduq-engine-button {
+    min-height: 44px;
+    padding-inline: 14px;
+    border: 2px solid var(--dq-border-strong);
+    border-radius: 14px;
+    background: var(--dq-surface);
+    color: var(--dq-heading);
+    box-shadow: 0 3px 0 var(--dq-depth);
+  }
+
+  .duduq-progress-trail {
+    width: 100%;
+    max-width: 580px;
+    min-height: 52px;
+    grid-template-columns: minmax(0,1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: 18px;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .duduq-progress-trail::before {
+    display: none;
+  }
+
+  .duduq-progress-copy {
+    grid-column: 2;
+    display: block;
+    min-width: max-content;
+    padding: 0;
+  }
+
+  .duduq-progress-copy span {
+    display: none;
+  }
+
+  .duduq-progress-copy strong {
+    display: block;
+    color: var(--dq-heading);
+    font: 900 13px/1 Nunito, sans-serif;
+  }
+
+  .duduq-progress-track {
+    grid-column: 1;
+    height: 16px;
+    margin: 0 18px;
+    border: 2px solid var(--dq-border-strong);
+    border-radius: 999px;
+    background: var(--dq-soft-surface);
+    box-shadow:
+      inset 0 2px 4px rgba(31,65,99,.13),
+      0 2px 0 rgba(184,197,214,.8);
+  }
+
+  .duduq-progress-fill {
+    border-radius: 999px;
+    background: linear-gradient(180deg, #1471CF 0%, var(--dq-primary) 72%, #004892 100%);
+    box-shadow: inset 0 2px 0 rgba(255,255,255,.26);
+  }
+
+  .duduq-progress-fill::after {
+    animation-duration: 4.6s;
+    opacity: .34;
+  }
+
+  .duduq-progress-marker {
+    width: 28px;
+    height: 28px;
+    border: 2px solid var(--dq-border-strong);
+    background: var(--dq-surface);
+    color: var(--dq-muted);
+    font-size: .82rem;
+    box-shadow:
+      0 3px 0 var(--dq-depth),
+      0 7px 14px rgba(31,65,99,.08),
+      inset 0 1px 0 #fff;
+  }
+
+  .duduq-progress-marker[data-status="current"] {
+    border-color: var(--dq-primary);
+    background: var(--dq-primary);
+    color: #fff;
+    box-shadow:
+      0 4px 0 var(--dq-primary-depth),
+      0 0 0 4px rgba(0,86,179,.11),
+      0 9px 16px rgba(0,86,179,.14);
+  }
+
+  .duduq-progress-marker[data-status="complete"] {
+    border-color: #D49A16;
+    background: #FFD43B;
+    color: #744E00;
+    box-shadow:
+      0 4px 0 #C88B08,
+      0 8px 15px rgba(210,145,0,.14);
+  }
+
+  .duduq-mascot[data-size="idle"] { width: 64px; height: 64px; }
+  .duduq-mascot[data-size="feedback"] { width: 84px; height: 84px; }
+  .duduq-mascot[data-size="transition"] { width: 96px; height: 96px; }
+  .duduq-mascot[data-size="complete"] { width: 154px; height: 154px; }
+
+  .duduq-engine-header-mascot-slot {
+    width: 72px;
+    min-width: 72px;
+    height: 64px;
+    overflow: visible;
+  }
+
+  .duduq-engine-header-mascot-slot .duduq-mascot[data-size="idle"] {
+    width: 64px;
+    height: 64px;
+  }
+
+  .duduq-engine-button-primary:not(.duduq-engine-feedback-action),
+  .duduq-engine-stage .duduq-dd-primary {
+    min-width: 220px;
+    min-height: 56px;
+    padding: 0 28px;
+    border: 2px solid var(--dq-primary-depth);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #1471CF 0%, var(--dq-primary) 72%, #004892 100%);
+    color: #fff;
+    box-shadow:
+      0 6px 0 var(--dq-primary-depth),
+      0 12px 22px rgba(0,86,179,.16),
+      inset 0 2px 0 rgba(255,255,255,.28);
+    font: 900 19px/1 Fredoka, Nunito, sans-serif;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .duduq-engine-button-primary:not(.duduq-engine-feedback-action):disabled,
+  .duduq-engine-stage .duduq-dd-primary:disabled {
+    border-color: var(--dq-disabled-border);
+    background: var(--dq-disabled);
+    color: var(--dq-disabled-text);
+    box-shadow: 0 4px 0 var(--dq-disabled-depth);
+  }
+
+  .duduq-engine-stage .duduq-dd-instruction {
+    width: min(760px, 100%);
+    min-height: 60px;
+    margin: clamp(14px,2.2vh,24px) auto clamp(24px,3.2vh,32px);
+    padding: 8px 14px 10px;
+    border: 2px solid var(--dq-border-strong);
+    border-radius: 999px;
+    background: rgba(255,255,255,.96);
+    box-shadow:
+      0 4px 0 var(--dq-depth),
+      0 12px 24px rgba(31,65,99,.07);
+  }
+
+  .duduq-engine-stage .duduq-dd-instruction h2 {
+    color: var(--dq-primary);
+    font-family: Fredoka, Nunito, sans-serif;
+    font-size: clamp(18px,2vw,28px);
+    font-weight: 800;
+  }
+
+  .duduq-engine-stage .duduq-dd-audio-shell > button {
+    width: 48px;
+    height: 48px;
+    border: 2px solid var(--dq-primary-depth);
+    border-radius: 999px;
+    background: linear-gradient(180deg,#1471CF,var(--dq-primary));
+    color: #fff;
+    box-shadow: 0 4px 0 var(--dq-primary-depth);
+  }
+
+  .duduq-engine-stage .duduq-dd-audio-shell > button[style*="58CC02"],
+  .duduq-engine-stage .duduq-dd-audio-shell > button[style*="success"] {
+    border-color: #359500;
+    background: linear-gradient(180deg,#70E90E,#58CC02 62%,#49B900);
+    box-shadow: 0 4px 0 #2F8A00;
+  }
+
+  .duduq-engine-feedback {
+    width: min(760px, 100%);
+    margin: 24px auto 0;
+  }
+
+  .duduq-engine-feedback-card,
+  .duduq-engine-feedback[data-state="success"] .duduq-engine-feedback-card,
+  .duduq-engine-feedback[data-state="retry"] .duduq-engine-feedback-card {
+    width: 100%;
+    min-height: 104px;
+    grid-template-columns: 84px minmax(0,1fr) auto;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 20px;
+    border: 2px solid var(--dq-border);
+    border-radius: 24px;
+    background: var(--dq-surface);
+    box-shadow:
+      0 4px 0 var(--dq-depth),
+      0 12px 24px rgba(31,65,99,.07);
+  }
+
+  .duduq-engine-feedback[data-state="success"] .duduq-engine-feedback-card {
+    border-color: var(--dq-success-border);
+    background: var(--dq-success-bg);
+    color: var(--dq-success-text);
+    box-shadow:
+      0 4px 0 var(--dq-success-depth),
+      0 10px 20px rgba(70,163,2,.12);
+  }
+
+  .duduq-engine-feedback[data-state="retry"] .duduq-engine-feedback-card {
+    border-color: var(--dq-retry-border);
+    background: var(--dq-retry-bg);
+    color: var(--dq-retry-text);
+    box-shadow:
+      0 4px 0 var(--dq-retry-depth),
+      0 10px 20px rgba(183,28,28,.10);
+  }
+
+  .duduq-engine-feedback .duduq-mascot[data-size="feedback"] {
+    width: 84px;
+    height: 84px;
+  }
+
+  .duduq-engine-feedback-action {
+    min-height: 52px;
+    min-width: 190px;
+    border-radius: 18px;
+    font-family: Fredoka, Nunito, sans-serif;
+    font-weight: 900;
+  }
+
+  .duduq-engine-feedback[data-state="success"] .duduq-engine-feedback-action {
+    border-color: #359500;
+    background: linear-gradient(180deg,#70E90E 0%,#58CC02 62%,#49B900 100%);
+    color: #fff;
+    box-shadow: 0 5px 0 #2F8A00, 0 10px 18px rgba(57,156,0,.18);
+  }
+
+  .duduq-star-burst[data-variant="answer"] .duduq-star-particle {
+    animation-duration: 820ms;
+  }
+
+  .duduq-star-burst[data-variant="lesson"] .duduq-star-particle {
+    animation-duration: 1450ms;
+  }
+
+  @media (min-width: 1120px) {
+    .duduq-engine-header {
+      grid-template-columns: minmax(0,1fr) minmax(480px,580px) minmax(0,1fr);
+    }
+  }
+
+  @media (max-width: 720px) {
+    .duduq-engine-root { padding: 8px; }
+
+    .duduq-engine-header {
+      min-height: 70px;
+      margin-bottom: 16px;
+      padding: 8px 10px;
+      border-radius: 20px;
+    }
+
+    .duduq-progress-trail {
+      min-height: 46px;
+      padding: 6px 4px;
+    }
+
+    .duduq-progress-track {
+      height: 14px;
+      margin-inline: 14px;
+    }
+
+    .duduq-progress-marker {
+      width: 26px;
+      height: 26px;
+    }
+
+    .duduq-mascot[data-size="idle"],
+    .duduq-engine-header-mascot-slot .duduq-mascot[data-size="idle"] {
+      width: 52px;
+      height: 52px;
+    }
+
+    .duduq-engine-header-mascot-slot {
+      width: 58px;
+      min-width: 58px;
+      height: 52px;
+    }
+
+    .duduq-mascot[data-size="feedback"],
+    .duduq-engine-feedback .duduq-mascot[data-size="feedback"] {
+      width: 72px;
+      height: 72px;
+    }
+
+    .duduq-engine-button-primary:not(.duduq-engine-feedback-action),
+    .duduq-engine-stage .duduq-dd-primary {
+      min-width: 190px;
+      min-height: 50px;
+      font-size: 18px;
+    }
+
+    .duduq-engine-stage .duduq-dd-instruction {
+      grid-template-columns: 44px minmax(0,1fr) 44px;
+      gap: 8px;
+      margin-block: 10px 20px;
+      padding-inline: 9px;
+    }
+
+    .duduq-engine-stage .duduq-dd-audio-shell > button {
+      width: 44px;
+      height: 44px;
+    }
+
+    .duduq-engine-feedback {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .duduq-engine-feedback-card,
+    .duduq-engine-feedback[data-state="success"] .duduq-engine-feedback-card,
+    .duduq-engine-feedback[data-state="retry"] .duduq-engine-feedback-card {
+      min-height: 92px;
+      grid-template-columns: 72px minmax(0,1fr);
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 20px;
+    }
+
+    .duduq-engine-feedback-action {
+      grid-column: 1 / -1;
+      justify-self: center;
+    }
+  }
+
+
+
+  /* ========================================================================
+     DUDUQ BASE VISUAL MESTRE V1 — DRAG & DROP 1.2.0
+     A mecânica controla composição e interação; a identidade visual é global.
+     ======================================================================== */
+
+  .duduq-udd-root {
+    --dq-primary: #0056B3;
+    --dq-primary-hover: #0867C8;
+    --dq-primary-pressed: #004892;
+    --dq-primary-depth: #003A7A;
+    --dq-primary-soft: #EFF6FF;
+    --dq-text: #1A1A1A;
+    --dq-heading: #16375B;
+    --dq-muted: #52606D;
+    --dq-surface: #FFFFFF;
+    --dq-soft-surface: #F5F7FA;
+    --dq-border: #D8E0E8;
+    --dq-border-strong: #AFC0D3;
+    --dq-depth: #B8C5D6;
+    --dq-disabled: #E2E8F0;
+    --dq-disabled-border: #C7D0DB;
+    --dq-disabled-text: #64748B;
+    --dq-disabled-depth: #B7C1CC;
+    --dq-selected-bg: #EFF6FF;
+    --dq-selected-border: #0056B3;
+    --dq-selected-depth: #75A9D8;
+    --dq-success-bg: #E8F5E9;
+    --dq-success-border: #58CC02;
+    --dq-success-text: #1B5E20;
+    --dq-success-depth: #46A302;
+    --dq-retry-bg: #FFEBEE;
+    --dq-retry-border: #FF8A8A;
+    --dq-retry-text: #B71C1C;
+    --dq-retry-depth: #D96B6B;
+    --dq-focus: #111827;
+
+    width: 100%;
+    min-width: 0;
+    color: var(--dq-text);
+    font-family: Nunito, ui-rounded, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .duduq-udd-surface {
+    width: min(1000px, 100%);
+    gap: clamp(14px, 2vh, 22px);
+    padding: clamp(6px, 1vw, 14px);
+  }
+
+  .duduq-udd-instruction {
+    width: min(760px, 100%);
+    min-height: 60px;
+    margin: clamp(10px, 1.8vh, 18px) auto clamp(22px, 3vh, 30px);
+    grid-template-columns: 48px minmax(0,1fr) 48px;
+    gap: 12px;
+    padding: 8px 14px 10px;
+    border: 2px solid var(--dq-border-strong);
+    border-radius: 999px;
+    background: rgba(255,255,255,.96);
+    box-shadow:
+      0 4px 0 var(--dq-depth),
+      0 12px 24px rgba(31,65,99,.07),
+      inset 0 1px 0 #fff;
+  }
+
+  .duduq-udd-instruction h2 {
+    color: var(--dq-primary);
+    font-family: Fredoka, Nunito, sans-serif;
+    font-size: clamp(18px, 2vw, 28px);
+    font-weight: 800;
+    line-height: 1.16;
+  }
+
+  .duduq-udd-audio,
+  .duduq-udd-item-audio,
+  .duduq-udd-target-audio {
+    border: 2px solid var(--dq-primary-depth);
+    border-radius: 999px;
+    background: linear-gradient(180deg,#1471CF 0%,var(--dq-primary) 100%);
+    color: #fff;
+    box-shadow: 0 4px 0 var(--dq-primary-depth), 0 8px 15px rgba(0,86,179,.15);
+  }
+
+  .duduq-udd-audio,
+  .duduq-udd-audio-shell {
+    width: 48px;
+    height: 48px;
+  }
+
+  .duduq-udd-audio[data-playing="true"],
+  .duduq-udd-item-audio[data-playing="true"],
+  .duduq-udd-target-audio[data-playing="true"] {
+    border-color: #359500;
+    background: linear-gradient(180deg,#70E90E 0%,#58CC02 62%,#49B900 100%);
+    box-shadow: 0 4px 0 #2F8A00, 0 0 0 5px rgba(88,204,2,.14), 0 9px 17px rgba(57,156,0,.18);
+  }
+
+  .duduq-udd-audio-wave {
+    border-color: rgba(0,86,179,.34);
+  }
+
+  .duduq-udd-board {
+    width: 100%;
+    gap: clamp(16px, 2.4vw, 24px);
+  }
+
+  .duduq-udd-targets {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 235px), 1fr));
+    align-items: stretch;
+    gap: clamp(12px, 1.7vw, 18px);
+  }
+
+  .duduq-udd-target {
+    min-height: 152px;
+    gap: 12px;
+    padding: 14px;
+    border: 2px solid var(--dq-border);
+    border-radius: 24px;
+    background: rgba(255,255,255,.94);
+    box-shadow:
+      0 4px 0 var(--dq-depth),
+      0 12px 24px rgba(31,65,99,.07),
+      inset 0 1px 0 #fff;
+  }
+
+  .duduq-udd-target[data-valid="true"] {
+    border-color: var(--dq-selected-border);
+    background: var(--dq-selected-bg);
+  }
+
+  .duduq-udd-target[data-active="true"] {
+    transform: translateY(-2px);
+    border-color: var(--dq-selected-border);
+    background: var(--dq-selected-bg);
+    box-shadow:
+      0 5px 0 var(--dq-selected-depth),
+      0 14px 26px rgba(0,86,179,.15);
+  }
+
+  .duduq-udd-target-head {
+    min-height: 76px;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: 18px;
+    background: var(--dq-soft-surface);
+    color: var(--dq-heading);
+    font: 800 clamp(15px,1.7vw,19px)/1.16 Fredoka,Nunito,sans-serif;
+  }
+
+  .duduq-udd-target-head:disabled {
+    opacity: 1;
+    color: var(--dq-heading);
+  }
+
+  .duduq-udd-target-media {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    image-rendering: auto;
+    border-radius: 16px;
+    filter: drop-shadow(0 4px 8px rgba(31,65,99,.07));
+  }
+
+  .duduq-udd-zone-items,
+  .duduq-udd-pool-items {
+    border-radius: 18px;
+    background: rgba(245,247,250,.82);
+  }
+
+  .duduq-udd-zone-items {
+    min-height: 76px;
+    gap: 10px;
+    padding: 9px;
+  }
+
+  .duduq-udd-pool {
+    width: min(900px,100%);
+    margin-inline: auto;
+    padding: 14px;
+    border: 2px solid var(--dq-border-strong);
+    border-radius: 24px;
+    background: rgba(255,255,255,.92);
+    box-shadow:
+      0 4px 0 var(--dq-depth),
+      0 12px 24px rgba(31,65,99,.07),
+      inset 0 1px 0 #fff;
+  }
+
+  .duduq-udd-pool[data-count="1"] { width: min(250px,100%); }
+  .duduq-udd-pool[data-count="2"] { width: min(440px,100%); }
+  .duduq-udd-pool[data-count="3"] { width: min(640px,100%); }
+  .duduq-udd-pool[data-count="4"] { width: min(820px,100%); }
+  .duduq-udd-pool[data-empty="true"] {
+    width: min(540px,100%);
+    padding: 8px 12px 10px;
+    border-radius: 18px;
+  }
+
+  .duduq-udd-pool-title {
+    margin-bottom: 12px;
+    color: var(--dq-muted);
+    font-size: 13px;
+    letter-spacing: .065em;
+  }
+
+  .duduq-udd-pool-items {
+    min-height: 92px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 180px));
+    justify-content: center;
+    align-items: stretch;
+    gap: 14px;
+    padding: 12px;
+  }
+
+  .duduq-udd-pool[data-count="1"] .duduq-udd-pool-items { grid-template-columns: minmax(150px,180px); }
+  .duduq-udd-pool[data-count="2"] .duduq-udd-pool-items { grid-template-columns: repeat(2,minmax(150px,180px)); }
+  .duduq-udd-pool[data-count="3"] .duduq-udd-pool-items { grid-template-columns: repeat(3,minmax(150px,180px)); }
+
+  .duduq-udd-item-shell,
+  .duduq-udd-zone-items .duduq-udd-item-shell {
+    width: 100%;
+    max-width: 180px;
+    flex: 0 1 180px;
+    justify-self: center;
+  }
+
+  .duduq-udd-item {
+    min-height: 78px;
+    gap: 10px;
+    padding: 11px 14px;
+    border: 2px solid var(--dq-border);
+    border-radius: 18px;
+    background: var(--dq-surface);
+    color: var(--dq-heading);
+    box-shadow: 0 4px 0 var(--dq-depth), 0 10px 18px rgba(31,65,99,.06);
+    font: 800 clamp(15px,1.6vw,19px)/1.18 Nunito,sans-serif;
+  }
+
+  .duduq-udd-item[data-has-media="true"] {
+    min-height: 108px;
+    flex-direction: column;
+  }
+
+  .duduq-udd-media {
+    width: 84px;
+    height: 84px;
+    max-width: 100%;
+    object-fit: contain;
+    image-rendering: auto;
+    border-radius: 14px;
+    filter: drop-shadow(0 4px 8px rgba(31,65,99,.07));
+  }
+
+  .duduq-udd-zone-items .duduq-udd-media {
+    width: 62px;
+    height: 62px;
+  }
+
+  .duduq-udd-item:hover:not(:disabled) {
+    border-color: var(--dq-border-strong);
+    transform: translateY(-1px);
+  }
+
+  .duduq-udd-item:active:not(:disabled) {
+    transform: translateY(3px) scale(.992);
+    box-shadow: 0 1px 0 var(--dq-depth), 0 4px 9px rgba(31,65,99,.08);
+  }
+
+  .duduq-udd-item[data-selected="true"] {
+    transform: translateY(-2px);
+    border-color: var(--dq-selected-border);
+    background: var(--dq-selected-bg);
+    box-shadow: 0 5px 0 var(--dq-selected-depth), 0 14px 26px rgba(0,86,179,.15);
+  }
+
+  .duduq-udd-item[data-feedback="correct"] {
+    border-color: var(--dq-success-border);
+    background: var(--dq-success-bg);
+    box-shadow: 0 4px 0 var(--dq-success-depth), 0 10px 20px rgba(70,163,2,.12);
+  }
+
+  .duduq-udd-item[data-feedback="retry"] {
+    border-color: var(--dq-retry-border);
+    background: var(--dq-retry-bg);
+    box-shadow: 0 4px 0 var(--dq-retry-depth), 0 10px 20px rgba(183,28,28,.10);
+  }
+
+  .duduq-udd-item:disabled {
+    opacity: 1;
+  }
+
+  .duduq-udd-item-audio,
+  .duduq-udd-target-audio {
+    width: 44px;
+    height: 44px;
+    font-size: 13px;
+  }
+
+  .duduq-udd-item-audio { right: -7px; top: -7px; }
+  .duduq-udd-target-audio { right: 8px; top: 8px; }
+
+  .duduq-udd-item-shell:has(.duduq-udd-item-audio[data-playing="true"]) .duduq-udd-item {
+    border-color: var(--dq-success-border);
+    box-shadow: 0 4px 0 var(--dq-success-depth), 0 0 0 5px rgba(88,204,2,.10);
+  }
+
+  .duduq-udd-capacity {
+    background: #EAF2F8;
+    color: var(--dq-muted);
+  }
+
+  .duduq-udd-order {
+    background: var(--dq-primary);
+    color: #fff;
+  }
+
+  .duduq-udd-empty {
+    color: var(--dq-muted);
+  }
+
+  .duduq-udd-pool-return {
+    border-color: var(--dq-border-strong);
+    background: var(--dq-surface);
+    color: var(--dq-primary);
+    box-shadow: 0 3px 0 var(--dq-depth);
+  }
+
+  .duduq-udd-action-slot {
+    min-height: 80px;
+    padding: 24px 0 8px;
+  }
+
+  .duduq-udd-primary {
+    min-width: 220px;
+    min-height: 56px;
+    padding: 0 28px;
+    border: 2px solid var(--dq-primary-depth);
+    border-radius: 18px;
+    background: linear-gradient(180deg,#1471CF 0%,var(--dq-primary) 72%,#004892 100%);
+    color: #fff;
+    box-shadow: 0 6px 0 var(--dq-primary-depth), 0 12px 22px rgba(0,86,179,.16), inset 0 2px 0 rgba(255,255,255,.26);
+    font: 900 19px/1 Fredoka,Nunito,sans-serif;
+  }
+
+  .duduq-udd-primary:disabled {
+    border-color: var(--dq-disabled-border);
+    background: var(--dq-disabled);
+    color: var(--dq-disabled-text);
+    box-shadow: 0 4px 0 var(--dq-disabled-depth);
+  }
+
+  .duduq-udd-audio:focus-visible,
+  .duduq-udd-item:focus-visible,
+  .duduq-udd-item-audio:focus-visible,
+  .duduq-udd-target-audio:focus-visible,
+  .duduq-udd-target-head:focus-visible,
+  .duduq-udd-pool-complete:focus-visible,
+  .duduq-udd-pool-return:focus-visible,
+  .duduq-udd-primary:focus-visible {
+    outline: 4px solid var(--dq-focus);
+    outline-offset: 4px;
+  }
+
+  .duduq-udd-root[data-density="balanced"] .duduq-udd-target {
+    min-height: 136px;
+    padding: 11px;
+    gap: 9px;
+  }
+
+  .duduq-udd-root[data-density="balanced"] .duduq-udd-target-head { min-height: 64px; }
+  .duduq-udd-root[data-density="balanced"] .duduq-udd-target-media { width: 68px; height: 68px; }
+  .duduq-udd-root[data-density="balanced"] .duduq-udd-zone-items { min-height: 66px; }
+
+  .duduq-udd-root[data-density="compact"] .duduq-udd-target {
+    min-height: 112px;
+    padding: 8px;
+    gap: 6px;
+    border-radius: 18px;
+  }
+
+  .duduq-udd-root[data-density="compact"] .duduq-udd-target-head {
+    min-height: 54px;
+    gap: 6px;
+    border-radius: 14px;
+    font-size: 13px;
+  }
+
+  .duduq-udd-root[data-density="compact"] .duduq-udd-target-media { width: 50px; height: 50px; }
+  .duduq-udd-root[data-density="compact"] .duduq-udd-zone-items { min-height: 48px; padding: 5px; }
+
+  .duduq-udd-root[data-density="compact"] .duduq-udd-pool-items {
+    min-height: 68px;
+    grid-template-columns: repeat(auto-fit,minmax(92px,124px));
+    gap: 8px;
+    padding: 7px;
+  }
+
+  .duduq-udd-root[data-density="compact"] .duduq-udd-item-shell,
+  .duduq-udd-root[data-density="compact"] .duduq-udd-zone-items .duduq-udd-item-shell {
+    width: 100%;
+    max-width: 124px;
+    flex: 1 1 104px;
+  }
+
+  .duduq-udd-root[data-density="compact"] .duduq-udd-item {
+    min-height: 58px;
+    padding: 6px 8px;
+    border-radius: 14px;
+    font-size: 13px;
+  }
+
+  .duduq-udd-root[data-density="compact"] .duduq-udd-item[data-has-media="true"] {
+    min-height: 76px;
+  }
+
+  .duduq-udd-root[data-density="compact"] .duduq-udd-media,
+  .duduq-udd-root[data-density="compact"] .duduq-udd-zone-items .duduq-udd-media {
+    width: 48px;
+    height: 48px;
+  }
+
+  @media (max-width: 640px) {
+    .duduq-udd-surface {
+      width: 100%;
+      gap: 12px;
+      padding: 4px;
+    }
+
+    .duduq-udd-instruction {
+      grid-template-columns: 44px minmax(0,1fr) 44px;
+      gap: 8px;
+      margin-block: 8px 18px;
+      padding-inline: 9px;
+    }
+
+    .duduq-udd-audio,
+    .duduq-udd-audio-shell {
+      width: 44px;
+      height: 44px;
+    }
+
+    .duduq-udd-targets,
+    .duduq-udd-root[data-density="compact"] .duduq-udd-targets {
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 10px;
+    }
+
+    .duduq-udd-target[data-kind="list"] {
+      grid-column: 1 / -1;
+    }
+
+    .duduq-udd-target {
+      min-height: 132px;
+      padding: 9px;
+      gap: 7px;
+      border-radius: 20px;
+    }
+
+    .duduq-udd-target-head {
+      min-height: 64px;
+      gap: 5px;
+      padding: 5px;
+      border-radius: 15px;
+      font-size: 13px;
+      flex-direction: column;
+    }
+
+    .duduq-udd-target-media {
+      width: 64px;
+      height: 64px;
+    }
+
+    .duduq-udd-capacity {
+      position: absolute;
+      right: 7px;
+      bottom: 7px;
+      margin: 0;
+    }
+
+    .duduq-udd-zone-items {
+      min-height: 54px;
+      padding: 5px;
+      gap: 5px;
+    }
+
+    .duduq-udd-pool {
+      padding: 10px;
+      border-radius: 20px;
+    }
+
+    .duduq-udd-pool[data-count="1"] { width: min(190px,100%); }
+    .duduq-udd-pool[data-count="2"],
+    .duduq-udd-pool[data-count="3"],
+    .duduq-udd-pool[data-count="4"] { width: 100%; }
+
+    .duduq-udd-pool-items {
+      min-height: 78px;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 9px;
+      padding: 8px;
+    }
+
+    .duduq-udd-pool[data-count="1"] .duduq-udd-pool-items { grid-template-columns: minmax(0,150px); }
+    .duduq-udd-pool[data-count="2"] .duduq-udd-pool-items { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .duduq-udd-pool[data-count="3"] .duduq-udd-pool-items { grid-template-columns: repeat(3,minmax(0,1fr)); }
+
+    .duduq-udd-item-shell,
+    .duduq-udd-zone-items .duduq-udd-item-shell {
+      width: 100%;
+      max-width: 156px;
+      flex-basis: 156px;
+    }
+
+    .duduq-udd-item {
+      min-height: 68px;
+      padding: 8px 7px;
+      font-size: 14px;
+    }
+
+    .duduq-udd-item[data-has-media="true"] {
+      min-height: 92px;
+      flex-direction: column;
+    }
+
+    .duduq-udd-media {
+      width: 66px;
+      height: 66px;
+    }
+
+    .duduq-udd-zone-items .duduq-udd-media {
+      width: 48px;
+      height: 48px;
+    }
+
+    .duduq-udd-item-audio,
+    .duduq-udd-target-audio {
+      width: 40px;
+      height: 40px;
+    }
+
+    .duduq-udd-action-slot {
+      min-height: 70px;
+      padding: 18px 0 6px;
+    }
+
+    .duduq-udd-primary {
+      min-width: 190px;
+      min-height: 50px;
+      font-size: 18px;
+    }
+
+    .duduq-udd-root[data-density="balanced"] .duduq-udd-target,
+    .duduq-udd-root[data-density="compact"] .duduq-udd-target {
+      min-height: 112px;
+      padding: 6px;
+    }
+
+    .duduq-udd-root[data-density="balanced"] .duduq-udd-target-head,
+    .duduq-udd-root[data-density="compact"] .duduq-udd-target-head {
+      min-height: 56px;
+    }
+
+    .duduq-udd-root[data-density="balanced"] .duduq-udd-target-media,
+    .duduq-udd-root[data-density="compact"] .duduq-udd-target-media {
+      width: 50px;
+      height: 50px;
+    }
+
+    .duduq-udd-root[data-density="compact"] .duduq-udd-pool-items {
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 6px;
+      padding: 6px;
+    }
+
+    .duduq-udd-root[data-density="compact"] .duduq-udd-item-shell,
+    .duduq-udd-root[data-density="compact"] .duduq-udd-zone-items .duduq-udd-item-shell {
+      max-width: 108px;
+    }
+
+    .duduq-udd-root[data-density="compact"] .duduq-udd-item {
+      min-height: 50px;
+      padding: 5px;
+      font-size: 11px;
+    }
+
+    .duduq-udd-root[data-density="compact"] .duduq-udd-item[data-has-media="true"] {
+      min-height: 66px;
+      flex-direction: column;
+    }
+
+    .duduq-udd-root[data-density="compact"] .duduq-udd-media,
+    .duduq-udd-root[data-density="compact"] .duduq-udd-zone-items .duduq-udd-media {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .duduq-udd-pool[data-count="3"] .duduq-udd-pool-items {
+      grid-template-columns: repeat(3,minmax(0,1fr));
+    }
+  }
+
+  @media (max-height: 700px) and (max-width: 640px) {
+    .duduq-engine-root {
+      min-height: 100dvh;
+      height: auto;
+      overflow-y: auto;
+    }
+
+    .duduq-engine-shell,
+    .duduq-engine-stage {
+      min-height: 0;
+      height: auto;
+      overflow: visible;
+    }
+
+    .duduq-udd-instruction { margin-block: 4px 12px; }
+    .duduq-udd-action-slot { padding-top: 12px; }
+  }
+
+
+
+/* =====================================================================
+   DUDUQ — PADRÃO VISUAL COMPARTILHADO V3
+   Cabeçalho + tipografia: Drag & Drop
+   Ritmo vertical: Target Shooter
+   Distância entre enunciado, indicadores e área principal: 12px desktop
+   e 10px mobile. Esta camada substitui integralmente a V2.
+   ===================================================================== */
+:root {
+  --duduq-standard-header-bottom-gap: clamp(18px, 2.4vh, 24px);
+  --duduq-standard-stage-top-space: clamp(2px, .6vw, 8px);
+  --duduq-standard-block-gap: 12px;
+  --duduq-standard-small-card-gap: 10px;
+}
+
+/* ---------- CABEÇALHO MESTRE: DRAG & DROP ---------- */
+.duduq-engine-shell {
+  width: min(1180px, 100%) !important;
+}
+
+.duduq-engine-header {
+  min-height: 76px !important;
+  gap: 12px 18px !important;
+  margin-bottom: var(--duduq-standard-header-bottom-gap) !important;
+  padding: 10px 16px !important;
+  border: 2px solid var(--dq-border) !important;
+  border-radius: 24px !important;
+  background: rgba(255,255,255,.96) !important;
+  box-shadow:
+    0 4px 0 var(--dq-depth),
+    0 12px 24px rgba(31,65,99,.07),
+    inset 0 1px 0 #fff !important;
+}
+
+@media (min-width: 1120px) {
+  .duduq-engine-header {
+    grid-template-columns: minmax(0,1fr) minmax(480px,580px) minmax(0,1fr) !important;
+  }
+}
+
+/* ---------- RITMO VERTICAL ÚNICO ----------
+   Todas as surfaces usam o mesmo espaço entre seus filhos diretos. */
+.duduq-engine-stage .duduq-dd-surface,
+.duduq-engine-stage .duduq-mq-surface,
+.duduq-engine-stage .duduq-matching-surface,
+.duduq-engine-stage .duduq-fc-surface,
+.duduq-engine-stage .duduq-bp-surface,
+.duduq-engine-stage .duduq-cf-surface,
+.duduq-engine-stage .duduq-ws-surface,
+.duduq-engine-stage .duduq-ts-surface {
+  padding-top: var(--duduq-standard-stage-top-space) !important;
+  gap: var(--duduq-standard-block-gap) !important;
+  row-gap: var(--duduq-standard-block-gap) !important;
+}
+
+/* O enunciado não soma margens próprias ao gap mestre. */
+.duduq-engine-stage .duduq-dd-instruction,
+.duduq-engine-stage .duduq-mq-instruction,
+.duduq-engine-stage .duduq-matching-instruction,
+.duduq-engine-stage .duduq-fc-instruction,
+.duduq-engine-stage .duduq-bp-instruction,
+.duduq-engine-stage .duduq-cf-instruction,
+.duduq-engine-stage .duduq-ws-instruction,
+.duduq-engine-stage .duduq-ts-instruction {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Os blocos principais começam exatamente após o gap mestre.
+   Isto força também o Drag & Drop a abandonar o respiro antigo. */
+.duduq-engine-stage .duduq-dd-board,
+.duduq-engine-stage .duduq-matching-board,
+.duduq-engine-stage .duduq-cf-board,
+.duduq-engine-stage .duduq-fc-board,
+.duduq-engine-stage .duduq-mq-board,
+.duduq-engine-stage .duduq-bp-board,
+.duduq-engine-stage .duduq-ts-arena,
+.duduq-engine-stage .duduq-ws-arena {
+  margin-top: 0 !important;
+}
+
+/* Memory Quest e Bubble Pop têm os indicadores dentro do board.
+   O espaço indicador → área principal também segue o mesmo padrão. */
+.duduq-engine-stage .duduq-mq-board,
+.duduq-engine-stage .duduq-bp-board {
+  gap: var(--duduq-standard-block-gap) !important;
+  row-gap: var(--duduq-standard-block-gap) !important;
+}
+
+/* Cards pequenos / indicadores. */
+.duduq-engine-stage .duduq-ts-status,
+.duduq-engine-stage .duduq-bp-meta,
+.duduq-engine-stage .duduq-mq-meta,
+.duduq-engine-stage .duduq-fc-meta,
+.duduq-engine-stage .duduq-ws-dashboard {
+  gap: var(--duduq-standard-small-card-gap) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* ---------- TIPOGRAFIA DO ENUNCIADO: DRAG & DROP ---------- */
+.duduq-engine-stage .duduq-dd-instruction h2,
+.duduq-engine-stage .duduq-mq-instruction h2,
+.duduq-engine-stage .duduq-matching-instruction h2,
+.duduq-engine-stage .duduq-fc-instruction h2,
+.duduq-engine-stage .duduq-bp-instruction h2,
+.duduq-engine-stage .duduq-cf-instruction h2,
+.duduq-engine-stage .duduq-ws-instruction h2,
+.duduq-engine-stage .duduq-ts-instruction h2 {
+  color: var(--dq-primary, #0056B3) !important;
+  font-family: Fredoka, Nunito, ui-rounded, system-ui, sans-serif !important;
+  font-size: clamp(18px, 2vw, 28px) !important;
+  font-weight: 800 !important;
+  line-height: 1.16 !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+}
+
+/* Tipografia consistente dos indicadores pequenos. */
+.duduq-engine-stage .duduq-ts-chip,
+.duduq-engine-stage .duduq-bp-chip,
+.duduq-engine-stage .duduq-mq-chip,
+.duduq-engine-stage .duduq-fc-chip,
+.duduq-engine-stage .duduq-ws-stat {
+  font-family: Nunito, ui-rounded, system-ui, sans-serif !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+
+.duduq-engine-stage .duduq-ts-chip strong,
+.duduq-engine-stage .duduq-bp-chip strong,
+.duduq-engine-stage .duduq-mq-chip strong,
+.duduq-engine-stage .duduq-fc-chip strong,
+.duduq-engine-stage .duduq-ws-stat strong {
+  font-weight: 900 !important;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --duduq-standard-block-gap: 10px;
+    --duduq-standard-small-card-gap: 8px;
+  }
+
+  .duduq-engine-header {
+    min-height: 70px !important;
+    margin-bottom: 16px !important;
+    padding: 8px 10px !important;
+    border-radius: 20px !important;
+  }
+
+  .duduq-engine-stage .duduq-dd-surface,
+  .duduq-engine-stage .duduq-mq-surface,
+  .duduq-engine-stage .duduq-matching-surface,
+  .duduq-engine-stage .duduq-fc-surface,
+  .duduq-engine-stage .duduq-bp-surface,
+  .duduq-engine-stage .duduq-cf-surface,
+  .duduq-engine-stage .duduq-ws-surface,
+  .duduq-engine-stage .duduq-ts-surface {
+    padding-top: 2px !important;
+  }
+
+  .duduq-engine-stage .duduq-dd-instruction h2,
+  .duduq-engine-stage .duduq-mq-instruction h2,
+  .duduq-engine-stage .duduq-matching-instruction h2,
+  .duduq-engine-stage .duduq-fc-instruction h2,
+  .duduq-engine-stage .duduq-bp-instruction h2,
+  .duduq-engine-stage .duduq-cf-instruction h2,
+  .duduq-engine-stage .duduq-ws-instruction h2,
+  .duduq-engine-stage .duduq-ts-instruction h2 {
+    font-size: clamp(18px, 5vw, 22px) !important;
+    font-weight: 800 !important;
+  }
+}
+
+
+/* =====================================================================
+   DUDUQ CANARY 035 â€” ADAPTIVE SPACE V1
+   Ocupacao inteligente da area util sem escalar cegamente a interface.
+   ===================================================================== */
+
+html body #root .duduq-engine-stage {
+  min-height: 0 !important;
+}
+
+html body #root .duduq-engine-stage .duduq-dd-root,
+html body #root .duduq-engine-stage .duduq-mq-root,
+html body #root .duduq-engine-stage .duduq-matching-root,
+html body #root .duduq-engine-stage .duduq-ss-root,
+html body #root .duduq-engine-stage .duduq-bp-root,
+html body #root .duduq-engine-stage .duduq-ts-root {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+html body #root .duduq-engine-stage .duduq-dd-surface,
+html body #root .duduq-engine-stage .duduq-mq-surface,
+html body #root .duduq-engine-stage .duduq-matching-surface,
+html body #root .duduq-engine-stage .duduq-ss-surface,
+html body #root .duduq-engine-stage .duduq-bp-surface,
+html body #root .duduq-engine-stage .duduq-ts-surface {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+/* ---------------- DRAG & DROP ---------------- */
+html body #root .duduq-engine-stage .duduq-dd-surface {
+  display: flex !important;
+  flex-direction: column !important;
+}
+html body #root .duduq-engine-stage .duduq-dd-instruction {
+  flex: 0 0 auto !important;
+}
+html body #root .duduq-engine-stage .duduq-dd-board {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+html body #root .duduq-engine-stage .duduq-dd-target-grid {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  align-items: stretch !important;
+  align-content: stretch !important;
+  grid-auto-rows: minmax(clamp(196px, 27vh, 246px), 1fr) !important;
+}
+html body #root .duduq-engine-stage .duduq-dd-target,
+html body #root .duduq-engine-stage .duduq-dd-target[data-valid-target="true"] {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: 286px !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+html body #root .duduq-engine-stage .duduq-dd-target[data-has-media="true"] .duduq-dd-target-head {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  padding-top: 4px !important;
+}
+html body #root .duduq-engine-stage .duduq-dd-target-media {
+  width: clamp(148px, 12vw, 178px) !important;
+  height: clamp(148px, 12vw, 178px) !important;
+  max-width: 58% !important;
+  max-height: 178px !important;
+}
+html body #root .duduq-engine-stage .duduq-dd-target-items {
+  width: min(154px, 54%) !important;
+  min-width: 132px !important;
+  max-width: 154px !important;
+  min-height: 48px !important;
+  height: 48px !important;
+  flex: 0 0 48px !important;
+  margin: 0 auto 9px !important;
+  padding: 1px 4px !important;
+}
+html body #root .duduq-engine-stage .duduq-dd-target-items .duduq-dd-item {
+  min-height: 44px !important;
+  height: 44px !important;
+  padding: 2px 6px !important;
+}
+html body #root .duduq-engine-stage .duduq-dd-target-items .duduq-dd-audio-shell,
+html body #root .duduq-engine-stage .duduq-dd-target-items .duduq-dd-audio-shell > button {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+}
+html body #root .duduq-engine-stage .duduq-dd-action-slot {
+  flex: 0 0 auto !important;
+  padding-top: 10px !important;
+  padding-bottom: 4px !important;
+}
+
+/* ---------------- MEMORY QUEST ---------------- */
+html body #root .duduq-engine-stage .duduq-mq-surface {
+  display: grid !important;
+  grid-template-rows: max-content minmax(0, 1fr) !important;
+  gap: clamp(10px, 1.6vh, 16px) !important;
+  overflow: hidden !important;
+}
+html body #root .duduq-engine-stage .duduq-mq-board {
+  box-sizing: border-box !important;
+  width: min(1040px, calc(100% - 20px)) !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  padding: clamp(8px, 1.3vh, 14px) clamp(14px, 1.8vw, 24px) !important;
+}
+html body #root .duduq-engine-stage .duduq-mq-meta {
+  flex: 0 0 auto !important;
+  margin: 0 auto clamp(10px, 1.4vh, 14px) !important;
+}
+html body #root .duduq-engine-stage .duduq-mq-grid {
+  box-sizing: border-box !important;
+  width: min(calc(var(--mq-grid-max, 820px) + 120px), 94%) !important;
+  max-width: 940px !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  gap: clamp(14px, 1.25vw, 20px) !important;
+  align-content: center !important;
+  align-items: stretch !important;
+}
+html body #root .duduq-engine-stage .duduq-mq-card {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  aspect-ratio: 1.58 / 1 !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+  overflow: visible !important;
+}
+html body #root .duduq-engine-stage .duduq-mq-card-inner {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+html body #root .duduq-engine-stage .duduq-mq-face {
+  box-sizing: border-box !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-width: 2px !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+}
+html body #root .duduq-engine-stage .duduq-mq-front::before,
+html body #root .duduq-engine-stage .duduq-mq-front::after,
+html body #root .duduq-engine-stage .duduq-mq-back::after {
+  content: none !important;
+  display: none !important;
+}
+html body #root .duduq-engine-stage .duduq-mq-front {
+  border-color: #235fc8 !important;
+  background:
+    radial-gradient(circle at 18% 15%, rgba(255,255,255,.22) 0 7%, transparent 8%),
+    linear-gradient(135deg, rgba(151,88,255,.86) 0%, rgba(72,80,232,.96) 48%, rgba(20,116,220,.96) 100%) !important;
+  box-shadow:
+    0 5px 0 #173d88,
+    0 11px 18px rgba(22,65,135,.18),
+    inset 0 1px 0 rgba(255,255,255,.34) !important;
+}
+html body #root .duduq-engine-stage .duduq-mq-back {
+  border-color: #A9BED2 !important;
+  background: linear-gradient(180deg,#FFFFFF 0%,#F5F9FD 100%) !important;
+  box-shadow:
+    0 5px 0 #93A9BE,
+    0 11px 18px rgba(31,65,99,.14),
+    inset 0 1px 0 rgba(255,255,255,.96) !important;
+}
+html body #root .duduq-engine-stage .duduq-mq-media {
+  width: min(82%, 170px) !important;
+  height: min(76%, 150px) !important;
+  object-fit: contain !important;
+}
+html body #root .duduq-engine-stage .duduq-mq-status {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
+
+/* ---------------- MATCHING ---------------- */
+html body #root .duduq-engine-stage .duduq-matching-surface {
+  display: grid !important;
+  grid-template-rows: max-content minmax(0, 1fr) max-content !important;
+  align-content: stretch !important;
+}
+html body #root .duduq-engine-stage .duduq-matching-board {
+  height: 100% !important;
+  min-height: 0 !important;
+  align-self: stretch !important;
+}
+html body #root .duduq-engine-stage .duduq-matching-column {
+  height: 100% !important;
+  justify-content: center !important;
+}
+/* ---------------- SMART SENTENCE ---------------- */
+html body #root .duduq-engine-stage .duduq-ss-surface {
+  display: flex !important;
+  flex-direction: column !important;
+}
+html body #root .duduq-engine-stage .duduq-ss-board {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+html body #root .duduq-engine-stage .duduq-ss-sentence-card {
+  min-height: clamp(132px, 21vh, 184px) !important;
+}
+html body #root .duduq-engine-stage .duduq-ss-context img {
+  width: clamp(112px, 12vw, 154px) !important;
+  height: clamp(112px, 12vw, 154px) !important;
+}
+
+/* ---------------- BUBBLE POP ---------------- */
+html body #root .duduq-engine-stage .duduq-bp-surface {
+  display: flex !important;
+  flex-direction: column !important;
+}
+html body #root .duduq-engine-stage .duduq-bp-board {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+html body #root .duduq-engine-stage .duduq-bp-arena {
+  flex: 1 1 auto !important;
+  min-height: clamp(280px, 47vh, 430px) !important;
+  max-height: none !important;
+}
+
+/* ---------------- TARGET SHOOTER ---------------- */
+html body #root .duduq-engine-stage .duduq-ts-surface {
+  display: flex !important;
+  flex-direction: column !important;
+}
+html body #root .duduq-engine-stage .duduq-ts-arena {
+  flex: 1 1 auto !important;
+  min-height: clamp(280px, 47vh, 430px) !important;
+  max-height: none !important;
+}
+
+/* O modo compacto reduz novamente quando a area real e curta. */
+html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-dd-target-grid {
+  grid-auto-rows: minmax(158px, auto) !important;
+}
+html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-dd-target,
+html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-dd-target[data-valid-target="true"] {
+  max-height: 220px !important;
+}
+html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-dd-target-media {
+  width: clamp(112px, 10vw, 140px) !important;
+  height: clamp(112px, 10vw, 140px) !important;
+}
+html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-mq-grid {
+  width: min(var(--mq-grid-max, 820px), 92%) !important;
+  gap: 10px !important;
+}
+html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-mq-card {
+  aspect-ratio: 1.62 / 1 !important;
+}
+html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-bp-arena,
+html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-ts-arena {
+  min-height: 230px !important;
+}
+
+@media (max-width: 720px) {
+  html body #root .duduq-engine-stage .duduq-dd-target-grid {
+    grid-auto-rows: minmax(154px, auto) !important;
+  }
+  html body #root .duduq-engine-stage .duduq-mq-grid {
+    width: 96% !important;
+    gap: 9px !important;
+  }
+  html body #root .duduq-engine-stage .duduq-mq-card,
+  html body #root .duduq-engine-stage .duduq-mq-card-inner,
+  html body #root .duduq-engine-stage .duduq-mq-face {
+    border-radius: 15px !important;
+  }
+}
+
+
+/* =====================================================================
+   DUDUQ CANARY 036 â€” COMPLETION TYPOGRAPHY LOCK
+   Mesma tipografia/peso em todas as telas de conclusao.
+   ===================================================================== */
+html body #root .duduq-engine-complete,
+html body #root .duduq-engine-complete h1,
+html body #root .duduq-engine-complete h2,
+html body #root .duduq-engine-complete h3,
+html body #root .duduq-engine-complete p,
+html body #root .duduq-engine-complete span,
+html body #root .duduq-engine-complete strong,
+html body #root .duduq-engine-complete button,
+html body #root .duduq-engine-complete-action,
+html body #root .duduq-engine-complete-reward,
+html body #root .duduq-engine-complete-eyebrow {
+  font-family: Nunito, "Arial Rounded MT Bold", "Segoe UI", system-ui, sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-kerning: normal !important;
+  font-synthesis: weight !important;
+}
+html body #root .duduq-engine-complete h1,
+html body #root .duduq-engine-complete h2,
+html body #root .duduq-engine-complete h3,
+html body #root .duduq-engine-complete strong,
+html body #root .duduq-engine-complete-action,
+html body #root .duduq-engine-complete-reward,
+html body #root .duduq-engine-complete-eyebrow {
+  font-weight: 900 !important;
+}
+html body #root .duduq-engine-complete p,
+html body #root .duduq-engine-complete span:not(.duduq-engine-complete-eyebrow):not(.duduq-engine-complete-reward) {
+  font-weight: 800 !important;
+}
+
+
+/* =====================================================================
+   DUDUQ CANARY 039 â€” INSTRUCTION AUDIO STANDARD
+   Padroniza o botao de audio do enunciado para o visual do Memory Quest.
+   ===================================================================== */
+html body #root .duduq-engine-stage .duduq-engine-instruction-audio,
+html body #root .duduq-engine-stage .duduq-instruction-audio,
+html body #root .duduq-engine-stage .duduq-prompt-audio,
+html body #root .duduq-engine-stage .instruction-audio,
+html body #root .duduq-engine-stage .enunciado-audio,
+html body #root .duduq-engine-stage .enunciation-audio,
+html body #root .duduq-engine-stage [data-role="instruction-audio"],
+html body #root .duduq-engine-stage [class*="instruction"][class*="audio"],
+html body #root .duduq-engine-stage [class*="prompt"][class*="audio"],
+html body #root .duduq-engine-stage [class*="enunciado"][class*="audio"] {
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  min-height: 58px !important;
+  border-radius: 999px !important;
+  border: 2px solid #0B4EA2 !important;
+  background: linear-gradient(180deg, #1E88F6 0%, #0A63D8 100%) !important;
+  box-shadow: 0 3px 0 #084C96, 0 8px 18px rgba(10, 99, 216, .20), inset 0 2px 0 rgba(255,255,255,.22) !important;
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+html body #root .duduq-engine-stage .duduq-engine-instruction-audio svg,
+html body #root .duduq-engine-stage .duduq-instruction-audio svg,
+html body #root .duduq-engine-stage .duduq-prompt-audio svg,
+html body #root .duduq-engine-stage .instruction-audio svg,
+html body #root .duduq-engine-stage .enunciado-audio svg,
+html body #root .duduq-engine-stage .enunciation-audio svg,
+html body #root .duduq-engine-stage [data-role="instruction-audio"] svg,
+html body #root .duduq-engine-stage [class*="instruction"][class*="audio"] svg,
+html body #root .duduq-engine-stage [class*="prompt"][class*="audio"] svg,
+html body #root .duduq-engine-stage [class*="enunciado"][class*="audio"] svg {
+  width: 24px !important;
+  height: 24px !important;
+  fill: currentColor !important;
+}
+html body #root .duduq-engine-stage .duduq-engine-instruction-audio:hover,
+html body #root .duduq-engine-stage .duduq-instruction-audio:hover,
+html body #root .duduq-engine-stage .duduq-prompt-audio:hover,
+html body #root .duduq-engine-stage .instruction-audio:hover,
+html body #root .duduq-engine-stage .enunciado-audio:hover,
+html body #root .duduq-engine-stage .enunciation-audio:hover,
+html body #root .duduq-engine-stage [data-role="instruction-audio"]:hover,
+html body #root .duduq-engine-stage [class*="instruction"][class*="audio"]:hover,
+html body #root .duduq-engine-stage [class*="prompt"][class*="audio"]:hover,
+html body #root .duduq-engine-stage [class*="enunciado"][class*="audio"]:hover {
+  filter: brightness(1.03) !important;
+  transform: translateY(-1px) !important;
+}
+
+
+/* =====================================================================
+   DUDUQ CANARY 040 â€” AUDIO PLAYING STANDARD
+   Estado neutro azul; durante reproducao: verde + ondas sonoras.
+   Aplicado tanto ao audio do enunciado quanto aos audios de cards/opcoes.
+   ===================================================================== */
+.duduq-audio-standard {
+  position: relative !important;
+  overflow: visible !important;
+  isolation: isolate !important;
+  transition: transform 140ms ease, filter 140ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease !important;
+}
+
+.duduq-audio-standard[data-duduq-audio-playing="true"] {
+  border-color: #359500 !important;
+  background: linear-gradient(180deg, #70E90E 0%, #58CC02 62%, #49B900 100%) !important;
+  color: #1B5E20 !important;
+  box-shadow:
+    0 5px 0 #2F8A00,
+    0 10px 20px rgba(57,156,0,.22),
+    inset 0 2px 0 rgba(255,255,255,.38) !important;
+  filter: none !important;
+  transform: translateY(-1px) !important;
+}
+
+.duduq-audio-standard[data-duduq-audio-playing="true"] svg,
+.duduq-audio-standard[data-duduq-audio-playing="true"] svg *,
+.duduq-audio-standard[data-duduq-audio-playing="true"] .icon,
+.duduq-audio-standard[data-duduq-audio-playing="true"] [class*="icon"] {
+  color: #1B5E20 !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+.duduq-audio-standard::before,
+.duduq-audio-standard::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: -4px !important;
+  border: 3px solid rgba(88,204,2,.62) !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+  transform: scale(.90) !important;
+}
+
+.duduq-audio-standard[data-duduq-audio-playing="true"]::before {
+  animation: duduqAudioWave040 1.18s ease-out infinite !important;
+}
+.duduq-audio-standard[data-duduq-audio-playing="true"]::after {
+  animation: duduqAudioWave040 1.18s ease-out .34s infinite !important;
+}
+
+@keyframes duduqAudioWave040 {
+  0% { transform: scale(.90); opacity: .72; }
+  70% { opacity: .20; }
+  100% { transform: scale(1.58); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .duduq-audio-standard[data-duduq-audio-playing="true"]::before,
+  .duduq-audio-standard[data-duduq-audio-playing="true"]::after {
+    animation: none !important;
+    opacity: .28 !important;
+    transform: scale(1.22) !important;
+  }
+}
+
+
+/* =====================================================================
+   DUDUQ CANARY 041 â€” NATIVE AUDIO STATE FIX
+
+   A fonte da verdade agora e o estado NATIVO que os runtimes ja emitem:
+   data-playing="true".
+
+   A Canary 040 tentou criar um segundo estado paralelo por JavaScript.
+   Nesta release nao dependemos mais desse estado artificial.
+   ===================================================================== */
+
+/* Qualquer controle de audio realmente em reproducao. */
+html body #root [data-playing="true"] {
+  position: relative !important;
+  overflow: visible !important;
+  isolation: isolate !important;
+  border-color: #359500 !important;
+  background: linear-gradient(180deg, #70E90E 0%, #58CC02 62%, #49B900 100%) !important;
+  color: #1B5E20 !important;
+  box-shadow:
+    0 5px 0 #2F8A00,
+    0 10px 20px rgba(57,156,0,.22),
+    inset 0 2px 0 rgba(255,255,255,.36) !important;
+  filter: none !important;
+}
+
+html body #root [data-playing="true"] svg,
+html body #root [data-playing="true"] svg *,
+html body #root [data-playing="true"] [class*="icon"] {
+  color: #1B5E20 !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* Ondas: usam os pseudo-elementos do proprio controle ativo.
+   Isto funciona mesmo quando a mecanica nao possui um shell de ondas. */
+html body #root [data-playing="true"]::before,
+html body #root [data-playing="true"]::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  inset: -5px !important;
+  border: 3px solid rgba(88,204,2,.68) !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+  transform: scale(.88) !important;
+  pointer-events: none !important;
+  z-index: 5 !important;
+}
+
+html body #root [data-playing="true"]::before {
+  animation: duduqNativeAudioWave041 1.20s cubic-bezier(.16,.72,.28,1) infinite !important;
+}
+
+html body #root [data-playing="true"]::after {
+  animation: duduqNativeAudioWave041 1.20s cubic-bezier(.16,.72,.28,1) .38s infinite !important;
+}
+
+@keyframes duduqNativeAudioWave041 {
+  0%   { transform: scale(.88); opacity: .72; }
+  20%  { opacity: .58; }
+  72%  { opacity: .12; }
+  100% { transform: scale(1.52); opacity: 0; }
+}
+
+/* Os runtimes UDD (Drag/Memory e bases compartilhadas) ja possuem shell de ondas.
+   Quando o audio esta reproduzindo, o shell deve acompanhar o estado real. */
+html body #root .duduq-udd-audio-shell:has(.duduq-udd-audio[data-playing="true"]) .duduq-udd-audio-waves,
+html body #root .duduq-dd-audio-shell:has([data-playing="true"]) .duduq-dd-audio-waves,
+html body #root .duduq-ss-audio-shell:has(.duduq-ss-audio[data-playing="true"]) .duduq-ss-audio-waves {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+html body #root .duduq-udd-audio-shell:has(.duduq-udd-audio[data-playing="true"]) .duduq-udd-audio-wave,
+html body #root .duduq-dd-audio-shell:has([data-playing="true"]) .duduq-dd-audio-wave,
+html body #root .duduq-ss-audio-shell:has(.duduq-ss-audio[data-playing="true"]) .duduq-ss-audio-wave {
+  border-color: rgba(88,204,2,.58) !important;
+  animation-play-state: running !important;
+}
+
+/* Corrige especificamente a regra historica do Memory Quest que usa
+   data-highlight no shell. O destaque segue a reproducao real. */
+html body #root .duduq-udd-audio-shell:has(.duduq-udd-audio[data-playing="true"]),
+html body #root .duduq-dd-audio-shell:has([data-playing="true"]),
+html body #root .duduq-ss-audio-shell:has(.duduq-ss-audio[data-playing="true"]) {
+  overflow: visible !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body #root [data-playing="true"]::before,
+  html body #root [data-playing="true"]::after {
+    animation: none !important;
+    opacity: .30 !important;
+    transform: scale(1.20) !important;
+  }
+}
+
+
+/* =====================================================================
+   DUDUQ CANARY 042 â€” AUDIO WAVE + VERTICAL ALIGNMENT
+   - preserva o data-playing/verde da 041;
+   - remove ondas internas que podem ser cortadas;
+   - usa halo externo fixo criado pelo controlador 042;
+   - centraliza geometricamente o audio do enunciado em todas as mecanicas.
+   ===================================================================== */
+
+/* Desativa as ondas por pseudo-elementos da 041 para evitar dupla renderizacao. */
+html body #root [data-playing="true"]::before,
+html body #root [data-playing="true"]::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+
+/* Desativa shells de ondas historicos. O halo 042 passa a ser a unica fonte visual. */
+html body #root .duduq-udd-audio-waves,
+html body #root .duduq-dd-audio-waves,
+html body #root .duduq-ss-audio-waves,
+html body #root .duduq-ts-audio-waves,
+html body #root .duduq-matching-audio-waves,
+html body #root .duduq-bp-audio-waves {
+  display: none !important;
+  visibility: hidden !important;
+  animation: none !important;
+}
+
+/* Card de enunciado vira referencia geometrica para o botao. */
+html body #root [data-duduq-instruction-card="true"] {
+  position: relative !important;
+  box-sizing: border-box !important;
+}
+
+/* O shell/botao do audio fica sempre no centro vertical real do card. */
+html body #root [data-duduq-instruction-audio-anchor="true"] {
+  position: absolute !important;
+  top: 50% !important;
+  right: clamp(12px, 1.35vw, 18px) !important;
+  bottom: auto !important;
+  left: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: translateY(-50%) !important;
+  align-self: center !important;
+  justify-self: center !important;
+  z-index: 30 !important;
+  overflow: visible !important;
+}
+
+html body #root [data-duduq-instruction-audio-anchor="true"] > button,
+html body #root button[data-duduq-instruction-audio-anchor="true"] {
+  margin: 0 !important;
+  align-self: center !important;
+  vertical-align: middle !important;
+}
+
+/* Halo externo: fica no body, fora dos cards e portanto nunca e cortado por overflow. */
+.duduq-audio-halo-042 {
+  position: fixed !important;
+  pointer-events: none !important;
+  z-index: 9998 !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+}
+
+.duduq-audio-halo-042 .duduq-audio-ring-042 {
+  position: absolute !important;
+  inset: -5px !important;
+  border: 3px solid rgba(88,204,2,.72) !important;
+  border-radius: 999px !important;
+  opacity: 0;
+  transform: scale(.86);
+  transform-origin: center center;
+  animation: duduqAudioWave042 1.28s cubic-bezier(.16,.72,.28,1) infinite !important;
+  will-change: transform, opacity;
+}
+
+.duduq-audio-halo-042 .duduq-audio-ring-042:nth-child(2) {
+  animation-delay: .42s !important;
+}
+
+@keyframes duduqAudioWave042 {
+  0%   { transform: scale(.86); opacity: .78; }
+  18%  { opacity: .62; }
+  68%  { opacity: .16; }
+  100% { transform: scale(1.58); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .duduq-audio-halo-042 .duduq-audio-ring-042 {
+    animation: none !important;
+    transform: scale(1.20) !important;
+    opacity: .28 !important;
+  }
+}
+
+
+/* DUDUQ CANARY 043 â€” ondas concentricas pelo centro real do botao. */
+.duduq-audio-halo-042 { display:none !important; visibility:hidden !important; }
+.duduq-audio-wave-layer-043 {
+  position:fixed !important;
+  inset:0 !important;
+  width:100vw !important;
+  height:100vh !important;
+  pointer-events:none !important;
+  overflow:visible !important;
+  z-index:2147483000 !important;
+}
+.duduq-audio-halo-043 {
+  position:absolute !important;
+  pointer-events:none !important;
+  border-radius:999px !important;
+  box-sizing:border-box !important;
+  transform:translate(-50%,-50%) !important;
+  transform-origin:center center !important;
+}
+.duduq-audio-halo-043 > span {
+  position:absolute !important;
+  inset:-4px !important;
+  border:3px solid rgba(88,204,2,.76) !important;
+  border-radius:999px !important;
+  box-sizing:border-box !important;
+  transform-origin:50% 50% !important;
+  animation:duduqAudioWave043 1.28s cubic-bezier(.16,.72,.28,1) infinite !important;
+  opacity:0;
+}
+.duduq-audio-halo-043 > span:nth-child(2){animation-delay:.42s !important;}
+@keyframes duduqAudioWave043 {
+  0%{transform:scale(.94);opacity:.78}
+  18%{opacity:.62}
+  68%{opacity:.16}
+  100%{transform:scale(1.58);opacity:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .duduq-audio-halo-043 > span{animation:none !important;transform:scale(1.18)!important;opacity:.30!important}
+}
+
+
+/* CANARY 044 â€” ondas presas ao proprio botao: centro local 50% / 50%. */
+.duduq-audio-wave-layer-043,.duduq-audio-halo-043,.duduq-audio-wave-layer-042,.duduq-audio-halo-042{display:none!important;visibility:hidden!important}
+html body [class*="audio-wave"]:not(.duduq-wave-044){display:none!important;animation:none!important}
+html body [data-duduq-wave-active="true"]{
+  position:relative!important;
+  overflow:visible!important;
+  isolation:isolate!important;
+}
+html body [data-duduq-wave-host="true"]{overflow:visible!important}
+.duduq-wave-044{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:var(--duduq-wave-size-044,64px)!important;
+  height:var(--duduq-wave-size-044,64px)!important;
+  margin:0!important;
+  padding:0!important;
+  border:3px solid rgba(88,204,2,.72)!important;
+  border-radius:999px!important;
+  box-sizing:border-box!important;
+  pointer-events:none!important;
+  z-index:3!important;
+  transform:translate(-50%,-50%) scale(.88)!important;
+  transform-origin:50% 50%!important;
+  opacity:0;
+  animation:duduqWave044 1.30s cubic-bezier(.16,.72,.28,1) infinite!important;
+}
+.duduq-wave-044-b{animation-delay:.42s!important}
+@keyframes duduqWave044{
+  0%{transform:translate(-50%,-50%) scale(.88);opacity:.76}
+  18%{opacity:.58}
+  70%{opacity:.14}
+  100%{transform:translate(-50%,-50%) scale(1.42);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){.duduq-wave-044{animation:none!important;transform:translate(-50%,-50%) scale(1.16)!important;opacity:.28!important}.duduq-wave-044-b{display:none!important}}
