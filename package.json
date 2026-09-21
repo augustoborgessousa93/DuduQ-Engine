@@ -1,19 +1,23 @@
 {
-    "private":  true,
-    "type":  "module",
-    "scripts":  {
-                    "duduq:sync:penpot-to-core":  "node scripts/duduq-sync-penpot-to-core.mjs",
-                    "duduq:guard":  "node test/systemic/canonical-hud-architecture-guard.mjs",
-                    "duduq:resume":  "node scripts/duduq-autopilot.mjs resume",
-                    "duduq:validate":  "node scripts/duduq-autopilot.mjs validate",
-                    "duduq:checkpoint":  "node scripts/duduq-autopilot.mjs checkpoint",
-                    "duduq:sync":  "node scripts/duduq-autopilot.mjs sync",
-                    "duduq:status":  "node scripts/duduq-autopilot.mjs status",
-                    "duduq:doctor":  "node scripts/duduq-autopilot.mjs doctor",
-                    "duduq:autopilot":  "node scripts/duduq-autopilot.mjs autopilot",
-                    "duduq:autopilot:start":  "node scripts/duduq-autopilot.mjs start",
-                    "duduq:autopilot:stop":  "node scripts/duduq-autopilot.mjs stop",
-                    "duduq:penpot:sync:check":  "node scripts/duduq-penpot-export-to-core.mjs --check",
-                    "duduq:penpot:sync:test":  "node test/penpot-sync/duduq-penpot-transformer.test.mjs"
-                }
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "duduq:sync:penpot-to-core": "node scripts/duduq-sync-penpot-to-core.mjs",
+        "duduq:guard": "node test/systemic/canonical-hud-architecture-guard.mjs",
+        "duduq:resume": "node scripts/duduq-autopilot.mjs resume",
+        "duduq:validate": "node scripts/duduq-autopilot.mjs validate",
+        "duduq:checkpoint": "node scripts/duduq-autopilot.mjs checkpoint",
+        "duduq:sync": "node scripts/duduq-autopilot.mjs sync",
+        "duduq:update-core": "node scripts/duduq-update-core.mjs",
+        "duduq:status": "node scripts/duduq-autopilot.mjs status",
+        "duduq:doctor": "node scripts/duduq-autopilot.mjs doctor",
+        "duduq:autopilot": "node scripts/duduq-autopilot.mjs autopilot",
+        "duduq:autopilot:start": "node scripts/duduq-autopilot.mjs start",
+        "duduq:autopilot:stop": "node scripts/duduq-autopilot.mjs stop",
+        "duduq:penpot:sync:check": "node scripts/duduq-penpot-export-to-core.mjs --check",
+        "duduq:penpot:sync:test": "node test/penpot-sync/duduq-penpot-transformer.test.mjs"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.30.0"
+    }
 }
