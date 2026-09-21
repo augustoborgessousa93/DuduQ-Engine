@@ -2,6 +2,12 @@
   "schemaVersion": 1,
   "componentId": "QUESTION_AUDIO",
   "semanticId": "question-audio",
+  "successfulSnapshot": {
+    "checkpoint": "B",
+    "capturedAt": "2026-09-21T14:51:15-03:00",
+    "bridgeResult": "APPLIED",
+    "semanticDiff": "NO_CHANGES"
+  },
   "source": {
     "resolution": "STABLE_ID_FALLBACK",
     "classification": "LIVE_INSTANCE_OF_CANONICAL",
