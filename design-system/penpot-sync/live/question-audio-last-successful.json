@@ -25,7 +25,7 @@
     },
     "fills": [
       {
-        "color": "#8B5CF6",
+        "color": "#349FDF",
         "opacity": 1,
         "gradient": null
       }
@@ -103,7 +103,7 @@
   ],
   "successfulSnapshot": {
     "checkpoint": "B",
-    "capturedAt": "2026-09-21T18:08:03.762Z",
+    "capturedAt": "2026-09-21T18:19:42.596Z",
     "bridgeResult": "APPLIED",
     "semanticDiff": "CHANGE_DETECTED"
   }

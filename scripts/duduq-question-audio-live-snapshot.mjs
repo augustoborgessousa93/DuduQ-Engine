@@ -34,6 +34,23 @@ export function run() {
   return semanticDiff(read("question-audio-current-live.json"), read("question-audio-last-successful.json"));
 }
 
+export function captureAuthoringFill(fill) {
+  if (typeof fill !== "string" || !/^#[0-9A-F]{6}$/.test(fill)) throw Error("INVALID_LIVE_AUTHORING_FILL");
+  const current = read("question-audio-current-live.json");
+  if (current.source?.resolution !== "AUTHORIZED_AUTHORING_SOURCE" || current.source?.authorizedControlPanel !== true) throw Error("UNAUTHORIZED_AUTHORING_SOURCE");
+  current.surface.fills[0].color = fill;
+  fs.writeFileSync(path.join(liveDir, "question-audio-current-live.json"), `${JSON.stringify(current, null, 2)}\n`);
+  return trace();
+}
+
+export function trace() {
+  const current = read("question-audio-current-live.json");
+  const previous = read("question-audio-last-successful.json");
+  const normalizedCurrent = normalizeLiveSnapshot(current);
+  const normalizedPrevious = normalizeLiveSnapshot(previous);
+  return { component: current.semanticId, authoringNodeId: current.source.surfaceId, current: normalizedCurrent.surface.fills[0].color, previous: normalizedPrevious.surface.fills[0].color, normalizedCurrent: normalizedCurrent.surface.fills[0].color, normalizedPrevious: normalizedPrevious.surface.fills[0].color, diff: semanticDiff(current, previous) };
+}
+
 export function markSuccessful() {
   const current = read("question-audio-current-live.json");
   current.successfulSnapshot = { checkpoint: "B", capturedAt: new Date().toISOString(), bridgeResult: "APPLIED", semanticDiff: "CHANGE_DETECTED" };
@@ -42,6 +59,7 @@ export function markSuccessful() {
 }
 
 if (process.argv[1]?.endsWith("duduq-question-audio-live-snapshot.mjs")) {
-  const result = process.argv.includes("--mark-success") ? markSuccessful() : run();
+  const fillIndex = process.argv.indexOf("--capture-fill");
+  const result = process.argv.includes("--mark-success") ? markSuccessful() : fillIndex >= 0 ? captureAuthoringFill(process.argv[fillIndex + 1]) : process.argv.includes("--trace") ? trace() : run();
   console.log(JSON.stringify(result, null, 2));
 }

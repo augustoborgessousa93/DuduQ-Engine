@@ -12,28 +12,93 @@
     "surfaceId": "50f514fe-4a8a-804d-8008-aa3b16cea7b7",
     "componentReference": null
   },
-  "dimensions": { "width": 56, "height": 56 },
+  "dimensions": {
+    "width": 56,
+    "height": 56
+  },
   "surface": {
     "id": "50f514fe-4a8a-804d-8008-aa3b16cea7b7",
     "name": "BUTTON / AUDIO",
-    "dimensions": { "width": 56, "height": 56 },
-    "fills": [{ "color": "#8B5CF6", "opacity": 1, "gradient": null }],
-    "strokes": [{ "color": "#D58A25", "opacity": 1, "width": 0.888889, "alignment": "inner" }],
-    "radius": { "topLeft": 18, "topRight": 18, "bottomRight": 18, "bottomLeft": 18 },
-    "shadows": [{ "style": "drop-shadow", "offsetX": 0, "offsetY": 5, "blur": 0, "spread": 0, "color": "#AA641F", "opacity": 1 }],
+    "dimensions": {
+      "width": 56,
+      "height": 56
+    },
+    "fills": [
+      {
+        "color": "#349FDF",
+        "opacity": 1,
+        "gradient": null
+      }
+    ],
+    "strokes": [
+      {
+        "color": "#D58A25",
+        "opacity": 1,
+        "width": 0.888889,
+        "alignment": "inner"
+      }
+    ],
+    "radius": {
+      "topLeft": 18,
+      "topRight": 18,
+      "bottomRight": 18,
+      "bottomLeft": 18
+    },
+    "shadows": [
+      {
+        "style": "drop-shadow",
+        "offsetX": 0,
+        "offsetY": 5,
+        "blur": 0,
+        "spread": 0,
+        "color": "#AA641F",
+        "opacity": 1
+      }
+    ],
     "opacity": 1
   },
   "icon": {
     "name": "Icon / Audio",
-    "dimensions": { "width": 28, "height": 28 },
+    "dimensions": {
+      "width": 28,
+      "height": 28
+    },
     "paths": [
-      { "id": "88954f25-7a86-800b-8008-a87e700a4775", "fill": "#FFFFFF", "stroke": { "color": "#FFFFFF", "width": 1.5 } },
-      { "id": "88954f25-7a86-800b-8008-a87e700a4776", "fill": null, "stroke": { "color": "#FFFFFF", "width": 2.5, "capStart": "round", "capEnd": "round" } }
+      {
+        "id": "88954f25-7a86-800b-8008-a87e700a4775",
+        "fill": "#FFFFFF",
+        "stroke": {
+          "color": "#FFFFFF",
+          "width": 1.5
+        }
+      },
+      {
+        "id": "88954f25-7a86-800b-8008-a87e700a4776",
+        "fill": null,
+        "stroke": {
+          "color": "#FFFFFF",
+          "width": 2.5,
+          "capStart": "round",
+          "capEnd": "round"
+        }
+      }
     ]
   },
   "hierarchy": [
-    { "id": "88954f25-7a86-800b-8008-a87e700a22eb", "name": "Question Panel / Audio Action", "type": "board" },
-    { "id": "88954f25-7a86-800b-8008-a87e700a476d", "name": "DuduQ / Button / Icon / Audio / Blue / Default", "type": "group" },
-    { "id": "88954f25-7a86-800b-8008-a87e700a4770", "name": "Button Surface", "type": "rectangle" }
+    {
+      "id": "88954f25-7a86-800b-8008-a87e700a22eb",
+      "name": "Question Panel / Audio Action",
+      "type": "board"
+    },
+    {
+      "id": "88954f25-7a86-800b-8008-a87e700a476d",
+      "name": "DuduQ / Button / Icon / Audio / Blue / Default",
+      "type": "group"
+    },
+    {
+      "id": "88954f25-7a86-800b-8008-a87e700a4770",
+      "name": "Button Surface",
+      "type": "rectangle"
+    }
   ]
 }
