@@ -1,4 +1,10 @@
 {
   "screenId": "50f514fe-4a8a-804d-8008-aa3b1478e03a",
-  "behaviorBindings": []
+  "behaviorBindings": [
+    {
+      "sourceId": "50f514fe-4a8a-804d-8008-aa3b16cea7b7",
+      "semanticId": "question-audio",
+      "action": "PLAY_QUESTION_AUDIO"
+    }
+  ]
 }

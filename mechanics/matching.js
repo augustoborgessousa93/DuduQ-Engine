@@ -1758,7 +1758,19 @@ html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-ts-arena {
       }
     };
 
-    container.innerHTML =
+    const visualBridge =
+      window.DuduQMatchingVisualBridge
+        ?.mount?.({
+          container,
+          payload
+        }) ||
+      null;
+
+    const gameplayContainer =
+      visualBridge?.gameplayHost ||
+      container;
+
+    gameplayContainer.innerHTML =
       "";
 
     const wrapper =
@@ -1824,8 +1836,12 @@ html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-ts-arena {
       iframe
     );
 
-    container.appendChild(
+    gameplayContainer.appendChild(
       wrapper
+    );
+
+    visualBridge?.setFrame?.(
+      iframe
     );
 
     let destroyed =
@@ -1899,7 +1915,7 @@ html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-ts-arena {
         );
 
         if (!destroyed) {
-          container.textContent =
+          gameplayContainer.textContent =
             "Erro ao iniciar a atividade Matching: " +
             detail;
         }
@@ -2006,7 +2022,7 @@ html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-ts-arena {
           if (
             !destroyed
           ) {
-            container.textContent =
+            gameplayContainer.textContent =
               "Erro ao preparar a atividade Matching: " +
               asString(
                 error
@@ -2033,6 +2049,7 @@ html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-ts-arena {
 
       iframe.remove();
       wrapper.remove();
+      visualBridge?.dispose?.();
     };
   }
 
