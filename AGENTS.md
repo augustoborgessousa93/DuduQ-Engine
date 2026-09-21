@@ -14,3 +14,11 @@ Critical rules:
 - Do not edit successful snapshots manually.
 - Do not modify golden baselines without regression proof.
 - Prefer the existing Penpot compiler, graph, package, host, and E2E infrastructure.
+
+When the user says **“Atualize o Core”**:
+
+- read `DUDUQ_PROJECT_STATE.json`;
+- run the official `npm run duduq:update-core` flow (never add `--component` unless explicitly requested);
+- resolve the consumers actually affected by the live change;
+- ensure the official preview server is running and HTTP-health-check every verification URL;
+- ALWAYS include verified clickable mechanic preview links in the final response, including for `NO_CHANGES` when the relevant consumer is known.

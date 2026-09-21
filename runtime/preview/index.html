@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DUDUQ runtime verification</title><style>html,body,#root{margin:0;width:100%;height:100%;overflow:hidden}#root{min-height:320px}</style></head>
+<body><main id="root"></main>
+<script>window.DUDUQ_ENGINE_BASE=window.location.origin;window.__DUDUQ_VERIFICATION__={consumer:new URLSearchParams(location.search).get('mechanic')||'matching',ready:false};</script>
+<script src="/core/duduq-screen-runtime.js"></script>
+<script src="/core/duduq-schema.js"></script>
+<script src="/core/duduq-host.js"></script>
+<script src="/core/duduq-matching-visual-bridge.js"></script>
+<script src="/core/duduq-target-shooter-visual-bridge.js"></script>
+<script>
+  window.__matchingVerification = { registration:null };
+  const originalRegister = window.DuduQ.registerMechanic;
+  window.DuduQ.registerMechanic = (entry) => { window.__matchingVerification.registration=entry; return originalRegister.call(window.DuduQ, entry); };
+</script>
+<script>
+window.addEventListener('load', () => {
+  const mode=window.__DUDUQ_VERIFICATION__.consumer;
+  const item=(id,label,emoji)=>({id,label,emoji,display:'image'});
+  const matchingQuestion={id:'verification-q1',statement:'Question one',instruction:'Listen and match.',audio:{text:'Question one',language:'en-US'},metadata:{matching:{mode:'audio-image',leftItems:[{id:'hello',spokenText:'Hello'},{id:'goodbye',spokenText:'Goodbye'}],rightItems:[{id:'greeting',imageAssetKey:'greeting',alt:'Greeting'},{id:'farewell',imageAssetKey:'goodbye',alt:'Farewell'}],pairs:[{leftId:'hello',rightId:'greeting'},{leftId:'goodbye',rightId:'farewell'}],behavior:{connectionMode:'1x1',interactionMode:'smart',shuffleLeft:false,shuffleRight:false}}}};
+  const targetQuestion={id:'verification-target-1',statement:'Find the cat',instruction:'Shoot the correct target.',feedback:{correct:'Correct!',incorrect:'Try again.'},metadata:{targetShooter:{audioText:'Cat',mode:'image-to-response',shape:'balloon',correctIds:['cat'],items:[item('cat','CAT','🐱'),item('dog','DOG','🐶'),item('bird','BIRD','🐦')],difficulty:{objectCount:3,requiredCorrect:1,spawnIntervalMs:10,targetSize:110}}}};
+  const root=document.getElementById('root');
+  if(mode==='target-shooter'){
+    window.__DUDUQ_VERIFICATION__.package='target-shooter-master';
+    window.DuduQ.start({id:'verification-target',year:1,steps:[{id:'verification-target-step',mechanic:'target-shooter',payload:{title:'Target Shooter',questions:[targetQuestion]},options:{}}]});
+  } else {
+    window.__DUDUQ_VERIFICATION__.package='matching-master';
+    const reg=window.DuduQ.getMechanic?.('matching') || window.__matchingVerification.registration;
+    if(reg) reg.mount({container:root,payload:{title:'Matching',questions:[matchingQuestion]},context:{year:2,moduleId:'verification',totalSteps:1},onComplete(){}});
+  }
+  setTimeout(()=>{window.__DUDUQ_VERIFICATION__.ready=Boolean(document.querySelector('[data-duduq-visual-package]')||document.querySelector('iframe'));document.documentElement.dataset.duduqVerification=window.__DUDUQ_VERIFICATION__.ready?'ready':'pending';},1500);
+});
+</script>
+<script src="/mechanics/matching.js" onload="if(window.__DUDUQ_VERIFICATION__.consumer==='target-shooter')this.remove()"></script>
+<script src="/mechanics/target-shooter.js" onload="if(window.__DUDUQ_VERIFICATION__.consumer!=='target-shooter')this.remove()"></script>
+</body></html>

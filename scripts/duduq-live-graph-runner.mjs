@@ -4,6 +4,7 @@ import crypto from "node:crypto";
 import { capture } from "./capture-penpot-graph.mjs";
 import { diff } from "./duduq-design-graph-v2.mjs";
 import { compile, screens } from "./compile-penpot-screen.mjs";
+import { resolveVerificationUrls } from "./duduq-verification-links.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const graphDir = path.join(root, "design-system/penpot-sync/graph");
@@ -54,14 +55,14 @@ export async function runLiveGraph({ dryRun = false } = {}) {
   const current = read(currentPath);
   const currentNodes = verify(current);
   const previous = fs.existsSync(successfulPath) ? read(successfulPath) : null;
-  if (!previous) return { result: dryRun ? "BOOTSTRAP_READY" : "BOOTSTRAP_REQUIRED", capture: "PASS", nodes: currentNodes.length, promoted: false };
+  if (!previous) return { result: dryRun ? "BOOTSTRAP_READY" : "BOOTSTRAP_REQUIRED", capture: "PASS", nodes: currentNodes.length, promoted: false, verification: { urls: await resolveVerificationUrls({ noChanges: true }) } };
   const changes = diff(previous, current);
   const changedScreens = screenChanges(changes);
   const currentHash = hash(current);
   const previousHash = hash(previous);
   const base = { capture: "PASS", currentGraphHash: currentHash, successfulGraphHash: previousHash, changedScreens, changesDetected: changes.length, captureDurationMs: captureResult?.durationMs ?? Date.now() - started, promoted: false };
-  if (dryRun) return { ...base, result: changes.length ? "CHANGE_DETECTED" : "NO_CHANGES", promotion: "SKIPPED" };
-  if (!changes.length) return { ...base, result: "NO_CHANGES" };
+  if (dryRun) return { ...base, result: changes.length ? "CHANGE_DETECTED" : "NO_CHANGES", promotion: "SKIPPED", verification: { urls: await resolveVerificationUrls({ changedScreens, noChanges: !changes.length }) } };
+  if (!changes.length) return { ...base, result: "NO_CHANGES", verification: { urls: await resolveVerificationUrls({ noChanges: true, packageHashes: previous.successfulSnapshot?.packageHashes || {} }) } };
 
   const stageRoot = path.join(root, `.duduq-runtime-stage-${process.pid}`);
   const backups = [];
@@ -90,7 +91,7 @@ export async function runLiveGraph({ dryRun = false } = {}) {
     const promoted = promote(current, manifests, { source: "PENPOT_LIVE", changedScreens: changedScreens.map((entry) => entry.packageName) });
     for (const { backupDir } of backups) fs.rmSync(backupDir, { recursive: true, force: true });
     fs.rmSync(stageRoot, { recursive: true, force: true });
-    return { ...base, result: "APPLIED", packageHashes: manifests, promoted: true, runtimeValidation: "PACKAGE_VALIDATED", elapsedMs: Date.now() - started, successfulGraphHash: hash(promoted) };
+    return { ...base, result: "APPLIED", packageHashes: manifests, promoted: true, runtimeValidation: "PACKAGE_VALIDATED", verification: { urls: await resolveVerificationUrls({ changedScreens, packageHashes: manifests }) }, elapsedMs: Date.now() - started, successfulGraphHash: hash(promoted) };
   } catch (error) {
     for (const { finalDir, backupDir } of backups.reverse()) {
       fs.rmSync(finalDir, { recursive: true, force: true });

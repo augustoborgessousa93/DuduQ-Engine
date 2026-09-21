@@ -27,7 +27,8 @@
     "screenRuntimeTest": "node test/penpot-sync/duduq-screen-runtime.test.mjs",
     "matrixTest": "node test/runtime/universal-visual-change-matrix.mjs",
     "matchingE2E": "node test/runtime/matching-universal-host.e2e.mjs",
-    "targetShooterE2E": "node test/runtime/target-shooter-universal-host.e2e.mjs"
+    "targetShooterE2E": "node test/runtime/target-shooter-universal-host.e2e.mjs",
+    "verificationLinksSmoke": "node test/runtime/verification-links-smoke.mjs"
   },
   "screenPackages": {
     "root": "design-system/runtime/screens",
@@ -62,5 +63,15 @@
   "successfulGraph": "design-system/penpot-sync/graph/last-successful.json",
   "knownLimitations": [],
   "operationalPrerequisites": ["Penpot plugin connected to http://localhost:4401/mcp", "local Chrome/CDP test harness for E2E"],
-  "nextSafeAction": "edit Penpot in an authorized screen and run npm run duduq:update-core"
+  "verification": {
+    "requiredAfterUpdateCore": true,
+    "previewServerScript": "scripts/duduq-test-server.mjs",
+    "serverDefaultPort": 4175,
+    "healthCheckRequired": true,
+    "routes": {
+      "matching": "/runtime/preview/?mechanic=matching",
+      "target-shooter": "/runtime/preview/?mechanic=target-shooter"
+    }
+  },
+  "nextSafeAction": "edit Penpot in an authorized screen and run npm run duduq:update-core; return verified clickable preview URLs"
 }

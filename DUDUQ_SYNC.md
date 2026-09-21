@@ -27,6 +27,7 @@ Normal operation never requires `--component`, a node ID, a property name, or a 
 7. Validate the Universal Screen Host and the existing consumers (Matching and Target Shooter).
 8. Promote the raw current graph and package hashes only after validation passes.
 9. Commit the resulting checkpoint in Git.
+10. Resolve the affected consumers' real local preview routes, ensure the preview server is running, perform HTTP health checks, and return clickable verification URLs. A successful update must never end with only “Core atualizado”. When there are no changes, return the current relevant consumer URLs as well.
 
 Dry-run stops after capture, diff, screen identification, and policy/reporting. It performs no package activation, Core write, mechanic write, or successful-snapshot promotion.
 
@@ -52,5 +53,14 @@ node test/runtime/target-shooter-universal-host.e2e.mjs
 npm run duduq:update-core -- --dry-run
 npm run duduq:update-core
 ```
+
+## Verification links
+
+The official preview server is `scripts/duduq-test-server.mjs` (default port `4175`; an available `DUDUQ_TEST_PORT` is honored). The verification registry lives in `DUDUQ_PROJECT_STATE.json` under `verification.routes`:
+
+- Matching: `/runtime/preview/?mechanic=matching`
+- Target Shooter: `/runtime/preview/?mechanic=target-shooter`
+
+The runner health-checks each resolved URL and returns its HTTP status and clickable URL in the `verification.urls` result. These routes mount the real Visual Package through `DuduQScreenRuntime` and the real mechanic runtime; they are not Penpot or static fixture links.
 
 The last four commands are the live regression path; the E2E commands use the existing local browser test harness.
