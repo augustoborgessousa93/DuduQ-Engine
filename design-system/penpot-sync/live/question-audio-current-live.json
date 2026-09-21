@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "componentId": "QUESTION_AUDIO",
+  "semanticId": "question-audio",
+  "source": {
+    "resolution": "STABLE_ID_FALLBACK",
+    "classification": "LIVE_INSTANCE_OF_CANONICAL",
+    "questionAudioId": "88954f25-7a86-800b-8008-a87e700a22eb",
+    "questionAudioName": "Question Panel / Audio Action",
+    "questionAudioParent": { "id": "88954f25-7a86-800b-8008-a87e700a22e9", "name": "DUDUQ / HUD / QUESTION / DUDUQ / HUD / QUESTION / GOLD MASTER" },
+    "isComponentInstance": true,
+    "componentReference": null
+  },
+  "dimensions": { "width": 56, "height": 56 },
+  "surface": {
+    "id": "88954f25-7a86-800b-8008-a87e700a4770",
+    "name": "Button Surface",
+    "dimensions": { "width": 56, "height": 51 },
+    "fills": [{ "color": "#349FDF", "opacity": 1, "gradient": null }],
+    "strokes": [],
+    "radius": { "topLeft": 16, "topRight": 16, "bottomRight": 16, "bottomLeft": 16 },
+    "shadows": [],
+    "opacity": null
+  },
+  "icon": {
+    "name": "Icon / Audio",
+    "dimensions": { "width": 28, "height": 28 },
+    "paths": [
+      { "id": "88954f25-7a86-800b-8008-a87e700a4775", "fill": "#FFFFFF", "stroke": { "color": "#FFFFFF", "width": 1.5 } },
+      { "id": "88954f25-7a86-800b-8008-a87e700a4776", "fill": null, "stroke": { "color": "#FFFFFF", "width": 2.5, "capStart": "round", "capEnd": "round" } }
+    ]
+  },
+  "hierarchy": [
+    { "id": "88954f25-7a86-800b-8008-a87e700a22eb", "name": "Question Panel / Audio Action", "type": "board" },
+    { "id": "88954f25-7a86-800b-8008-a87e700a476d", "name": "DuduQ / Button / Icon / Audio / Blue / Default", "type": "group" },
+    { "id": "88954f25-7a86-800b-8008-a87e700a4770", "name": "Button Surface", "type": "rectangle" }
+  ]
+}

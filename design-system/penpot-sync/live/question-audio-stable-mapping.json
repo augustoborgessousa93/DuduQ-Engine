@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "componentId": "QUESTION_AUDIO",
+  "semanticId": "question-audio",
+  "source": {
+    "mappingRegistry": "design-system/penpot-sync/schema/node-mapping-registry.json",
+    "questionAudioId": "88954f25-7a86-800b-8008-a87e700a22eb",
+    "questionAudioName": "Question Panel / Audio Action",
+    "buttonSurfaceId": "88954f25-7a86-800b-8008-a87e700a4770",
+    "buttonSurfaceName": "Button Surface"
+  }
+}
