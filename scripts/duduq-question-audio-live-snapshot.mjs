@@ -34,4 +34,14 @@ export function run() {
   return semanticDiff(read("question-audio-current-live.json"), read("question-audio-last-successful.json"));
 }
 
-if (process.argv[1]?.endsWith("duduq-question-audio-live-snapshot.mjs")) console.log(JSON.stringify(run(), null, 2));
+export function markSuccessful() {
+  const current = read("question-audio-current-live.json");
+  current.successfulSnapshot = { checkpoint: "B", capturedAt: new Date().toISOString(), bridgeResult: "APPLIED", semanticDiff: "CHANGE_DETECTED" };
+  fs.writeFileSync(path.join(liveDir, "question-audio-last-successful.json"), `${JSON.stringify(current, null, 2)}\n`);
+  return current.successfulSnapshot;
+}
+
+if (process.argv[1]?.endsWith("duduq-question-audio-live-snapshot.mjs")) {
+  const result = process.argv.includes("--mark-success") ? markSuccessful() : run();
+  console.log(JSON.stringify(result, null, 2));
+}
