@@ -46207,9 +46207,20 @@
     }
   ],
   "metadata": {
-    "capturedAt": "2026-09-21T22:15:00.403Z",
-    "durationMs": 1151,
+    "capturedAt": "2026-09-21T22:10:02.084Z",
+    "durationMs": 1133,
     "payloadBytes": 884008,
-    "nodeCount": 644
+    "nodeCount": 644,
+    "graphHash": "6a1969a7e4fc111aad32b9546b64fbe33ca836765df91fd21758ea9b61c260fc"
+  },
+  "successfulSnapshot": {
+    "source": "PENPOT_LIVE",
+    "changedScreens": [
+      "matching-master"
+    ],
+    "packageHashes": {
+      "matching-master": "3314324286f72742a75feb295a9a2ef2918bda1d9efbf1e76db7458c637f16f3"
+    },
+    "promotedAt": "2026-09-21T22:10:48.105Z"
   }
 }

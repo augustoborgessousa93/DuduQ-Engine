@@ -18,7 +18,7 @@ function cachedTargetPayload() {
   return { markup, styles, fonts: "" };
 }
 
-export async function compile(name = "matching-master") {
+export async function compile(name = "matching-master", { outputRoot = path.join(root, "design-system/runtime/screens") } = {}) {
   const screen = screens[name];
   if (!screen) throw new Error(`UNKNOWN_SCREEN:${name}`);
   let client = null;
@@ -35,7 +35,7 @@ export async function compile(name = "matching-master") {
       if (name !== "target-shooter-master") throw error;
       payload = cachedTargetPayload();
     }
-    const dir = path.join(root, "design-system/runtime/screens", name);
+    const dir = path.join(outputRoot, name);
     fs.mkdirSync(dir, { recursive: true });
     for (const [key, file] of Object.entries({ markup: "visual.svg", styles: "styles.css", fonts: "fonts.css" })) fs.writeFileSync(path.join(dir, file), payload[key]);
     const bindingPath = path.join(dir, "bindings.json");

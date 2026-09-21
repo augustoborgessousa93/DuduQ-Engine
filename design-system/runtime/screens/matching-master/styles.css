@@ -644,16 +644,6 @@ body {
   box-shadow: 0px 5px 0px 0px #afa17dFF;
 }
 
-/* pet-image */
-.petimage-aa3b1b1cc5b3 {
-  position: absolute;
-  left: 135.11px;
-  top: 6px;
-  width: 70px;
-  height: 70px;
-  background: url(https://design.penpot.app/assets/by-file-media-id/c514c1fb-1cda-8125-8008-aa3b1d511402) no-repeat center center / cover;
-}
-
 /* card-highlight */
 .cardhighl-aa3b1b0befc8 {
   position: absolute;
@@ -666,6 +656,16 @@ body {
   border-start-end-radius: 99px;
   border-end-start-radius: 99px;
   border-end-end-radius: 99px;
+}
+
+/* pet-image */
+.petimage-aa3b1b1cc5b3 {
+  position: absolute;
+  left: 135.11px;
+  top: 6px;
+  width: 70px;
+  height: 70px;
+  background: url(https://design.penpot.app/assets/by-file-media-id/c514c1fb-1cda-8125-8008-aa3b1d511402) no-repeat center center / cover;
 }
 
 /* CONNECTOR / IMAGE FISH */
@@ -723,16 +723,6 @@ body {
   box-shadow: 0px 5px 0px 0px #afa17dFF;
 }
 
-/* pet-image */
-.petimage-aa3b19d9d979 {
-  position: absolute;
-  left: 135.11px;
-  top: 6px;
-  width: 70px;
-  height: 70px;
-  background: url(https://design.penpot.app/assets/by-file-media-id/c514c1fb-1cda-8125-8008-aa3b1c12e5e9) no-repeat center center / cover;
-}
-
 /* card-highlight */
 .cardhighl-aa3b19c914c0 {
   position: absolute;
@@ -745,6 +735,16 @@ body {
   border-start-end-radius: 99px;
   border-end-start-radius: 99px;
   border-end-end-radius: 99px;
+}
+
+/* pet-image */
+.petimage-aa3b19d9d979 {
+  position: absolute;
+  left: 135.11px;
+  top: 6px;
+  width: 70px;
+  height: 70px;
+  background: url(https://design.penpot.app/assets/by-file-media-id/c514c1fb-1cda-8125-8008-aa3b1c12e5e9) no-repeat center center / cover;
 }
 
 /* CONNECTOR / IMAGE DOG */
@@ -802,16 +802,6 @@ body {
   box-shadow: 0px 5px 0px 0px #afa17dFF;
 }
 
-/* pet-image */
-.petimage-aa3b18a7e626 {
-  position: absolute;
-  left: 135.11px;
-  top: 6px;
-  width: 70px;
-  height: 70px;
-  background: url(https://design.penpot.app/assets/by-file-media-id/d8ac01df-6646-81d2-8008-aa3b1ad511f5) no-repeat center center / cover;
-}
-
 /* card-highlight */
 .cardhighl-aa3b18970956 {
   position: absolute;
@@ -824,6 +814,16 @@ body {
   border-start-end-radius: 99px;
   border-end-start-radius: 99px;
   border-end-end-radius: 99px;
+}
+
+/* pet-image */
+.petimage-aa3b18a7e626 {
+  position: absolute;
+  left: 135.11px;
+  top: 8px;
+  width: 70px;
+  height: 70px;
+  background: url(https://design.penpot.app/assets/by-file-media-id/d8ac01df-6646-81d2-8008-aa3b1ad511f5) no-repeat center center / cover;
 }
 
 /* CONNECTOR / IMAGE RABBIT */
@@ -881,16 +881,6 @@ body {
   box-shadow: 0px 5px 0px 0px #afa17dFF;
 }
 
-/* pet-image */
-.petimage-aa3b175e9f4b {
-  position: absolute;
-  left: 135.11px;
-  top: 6px;
-  width: 70px;
-  height: 70px;
-  background: url(https://design.penpot.app/assets/by-file-media-id/d8ac01df-6646-81d2-8008-aa3b199bbfd3) no-repeat center center / cover;
-}
-
 /* card-highlight */
 .cardhighl-aa3b174c5d0b {
   position: absolute;
@@ -912,6 +902,16 @@ body {
   top: 29.89px;
   width: 22px;
   height: 22px;
+}
+
+/* pet-image */
+.petimage-aa3b175e9f4b {
+  position: absolute;
+  left: 135.11px;
+  top: 6px;
+  width: 70px;
+  height: 70px;
+  background: url(https://design.penpot.app/assets/by-file-media-id/d8ac01df-6646-81d2-8008-aa3b199bbfd3) no-repeat center center / cover;
 }
 
 /* CONNECTOR / IMAGE CAT */
