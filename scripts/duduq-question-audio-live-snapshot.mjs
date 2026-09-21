@@ -17,14 +17,15 @@ const contract = (snapshot) => ({
 export function normalizeLiveSnapshot(snapshot) {
   const normalized = contract(snapshot);
   if (normalized.componentId !== "QUESTION_AUDIO" || normalized.semanticId !== "question-audio") throw Error("INVALID_QUESTION_AUDIO_LIVE_SNAPSHOT");
-  if (!normalized.source?.isComponentInstance || !normalized.surface?.fills?.length) throw Error("UNSAFE_LIVE_SOURCE");
+  const authorized = normalized.source?.resolution === "AUTHORIZED_AUTHORING_SOURCE" && normalized.source?.authorizedControlPanel === true;
+  if ((!normalized.source?.isComponentInstance && !authorized) || !normalized.surface?.fills?.length) throw Error("UNSAFE_LIVE_SOURCE");
   return normalized;
 }
 
 export function semanticDiff(current, previous) {
   const now = normalizeLiveSnapshot(current);
   const then = normalizeLiveSnapshot(previous);
-  const fields = ["dimensions", "surface", "icon", "hierarchy", "source"];
+  const fields = ["dimensions", "surface", "icon"];
   const changed = fields.filter((field) => JSON.stringify(now[field]) !== JSON.stringify(then[field]));
   return { state: changed.length ? "CHANGE_DETECTED" : "NO_CHANGES", changed };
 }
