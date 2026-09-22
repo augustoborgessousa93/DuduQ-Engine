@@ -496,28 +496,14 @@
       }
     });
 
-    const runtimeUrl = getEngineBase() + RELEASE_PATH + "DUDUQ_TARGET_SHOOTER.html?engineAdapter=" + encodeURIComponent(VERSION);
+    const runtimeUrl = getEngineBase() + "/test/target-shooter/gold-master-clean-v2/index.html";
+    iframe.dataset.mechanicVersion = "gold-master-clean-v2";
+    iframe.dataset.goldMasterCommit = "761127dddaed830ea4f77a0fa292b505577f0a37";
+    iframe.dataset.goldMasterPath = "test/target-shooter/gold-master-clean-v2";
 
     visualBridge?.setFrame?.(iframe);
 
-    fetch(runtimeUrl)
-      .then((response) => {
-        if (!response.ok) throw new Error(`HTTP ${response.status} ao carregar Target Shooter.`);
-        return response.text();
-      })
-      .then((html) => {
-        if (destroyed) return;
-        const config = buildRuntimeConfig(payload, questions);
-        let prepared = replaceConfig(html, config);
-        prepared = installCompletionBridge(prepared);
-        prepared = installVisualEnvironment(prepared);
-        prepared = stampYear(prepared, context.year);
-        iframe.srcdoc = prepared;
-      })
-      .catch((error) => {
-        console.error("[DuduQ Target Shooter] Falha ao preparar runtime:", error);
-        if (!destroyed) container.textContent = "Erro ao preparar a atividade Target Shooter.";
-      });
+    iframe.src = runtimeUrl;
 
     return function destroy() {
       destroyed = true;

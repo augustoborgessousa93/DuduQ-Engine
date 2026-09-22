@@ -10,23 +10,24 @@
     shell.className = "duduq-target-shooter-visual-shell";
     Object.assign(shell.style, { position: "relative", width: "100%", height: "100%", minHeight: "0", overflow: "hidden" });
     const visualHost = document.createElement("div");
-    Object.assign(visualHost.style, { position: "absolute", inset: "0", zIndex: "0", pointerEvents: "none" });
+    Object.assign(visualHost.style, { position: "absolute", inset: "0", zIndex: "1", pointerEvents: "none" });
     const gameplayHost = document.createElement("div");
     // The legacy mechanic remains the behavior/input owner, but its visual shell
     // must never compete with the Penpot package mounted below it.
-    Object.assign(gameplayHost.style, { position: "absolute", inset: "0", zIndex: "1", opacity: "0", pointerEvents: "none" });
+    // A real iframe is deliberately kept visible and receives the user's
+    // native pointer events.  Do not emulate clicks from the package SVG.
+    const goldenOnly = new URLSearchParams(global.location.search).get("mode") === "golden-test";
+    Object.assign(gameplayHost.style, { position: "absolute", inset: "0", zIndex: "0", opacity: goldenOnly ? "0" : "1", pointerEvents: goldenOnly ? "none" : "auto" });
     shell.append(visualHost, gameplayHost);
     container.appendChild(shell);
     const runtime = new global.DuduQScreenRuntime(visualHost);
     visualHost.__duduqScreenRuntime = runtime;
     let disposed = false;
     let frame = null;
-    let visibleInteraction = null;
     global.DuduQVisualPackages.loadVisualPackage(PACKAGE_BASE, PACKAGE_NAME)
       .then((pkg) => {
         if (disposed) return;
         runtime.mount(pkg);
-        if (frame) visibleInteraction = runtime.bindVisibleGameplay({ frame, mode: "target-shooter" });
         visualHost.setAttribute("data-duduq-visual-package", pkg.manifest.screenId);
       })
       .catch((error) => {
@@ -38,14 +39,9 @@
         if (!nextFrame) return;
         frame = nextFrame;
         frame.setAttribute("data-duduq-visual-runtime", "target-shooter");
-        // Keep the legacy document as an input/behavior surface only. Its
-        // generated scene must never paint over the Penpot visual package.
-        frame.style.setProperty("opacity", "0", "important");
         frame.style.setProperty("visibility", "visible", "important");
-        visibleInteraction?.dispose?.();
-        visibleInteraction = runtime.bindVisibleGameplay({ frame, mode: "target-shooter" });
       },
-      dispose() { disposed = true; visibleInteraction?.dispose?.(); runtime.dispose(); shell.remove(); },
+      dispose() { disposed = true; runtime.dispose(); shell.remove(); },
       runtime
     };
   }

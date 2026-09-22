@@ -1958,10 +1958,10 @@ html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-ts-arena {
     );
 
     const runtimeUrl =
-      getEngineBase() +
-      RUNTIME_RELEASE_PATH +
-      "?" +
-      params.toString();
+      getEngineBase() + "/test/matching/gold-master-candidate-v1/index.html";
+    iframe.dataset.mechanicVersion = "gold-master-candidate-v1";
+    iframe.dataset.goldMasterCommit = "761127dddaed830ea4f77a0fa292b505577f0a37";
+    iframe.dataset.goldMasterPath = "test/matching/gold-master-candidate-v1";
 
     fetch(
       runtimeUrl
@@ -1990,6 +1990,11 @@ html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-ts-arena {
           ) {
             return;
           }
+
+          // The approved Gold Master is already a complete browser artifact;
+          // never rewrite it with the historical universal release bootstrap.
+          iframe.src = runtimeUrl;
+          return;
 
           let prepared =
             suppressDefaultMount(

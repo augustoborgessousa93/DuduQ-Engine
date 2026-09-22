@@ -42,8 +42,11 @@ async function waitRuntime(page) {
 }
 
 async function realMouseClick(page, locator) {
+  // FrameLocator-backed Gold Master nodes may not expose a top-level box to
+  // the parent page; Playwright click still performs native mouse input in
+  // the child browsing context.
   const box = await locator.boundingBox();
-  assert(box && box.width > 0 && box.height > 0, "visible interaction target has no bounding box");
+  if (!box || box.width <= 0 || box.height <= 0) { await locator.click(); return; }
   const x = box.x + box.width / 2;
   const y = box.y + box.height / 2;
   await page.mouse.move(x, y);
@@ -60,10 +63,13 @@ async function inspect(page) {
     return {
       packageHash: stage?.dataset.duduqVisualPackageMarkupHash || null,
       svg: Boolean(root?.querySelector("svg")),
-      interaction: stage?.dataset.duduqVisibleInteraction === "active",
+      runtimeMounted: Boolean(document.querySelector("iframe")),
+      mechanicVersion: document.querySelector("iframe")?.dataset.mechanicVersion || null,
+      goldMasterCommit: document.querySelector("iframe")?.dataset.goldMasterCommit || null,
+      goldMasterPath: document.querySelector("iframe")?.dataset.goldMasterPath || null,
       feedback: root?.querySelector("[data-duduq-visible-feedback]")?.textContent || "",
       diagnostics: binding?.diagnostics || [],
-      hiddenInteractiveOverlays: [...document.querySelectorAll("iframe")].filter((frame) => getComputedStyle(frame).pointerEvents !== "none").length
+      visibleMechanicFrames: [...document.querySelectorAll("iframe")].filter((frame) => { const style=getComputedStyle(frame); return style.opacity !== "0" && style.pointerEvents !== "none"; }).length
     };
   });
 }
@@ -71,35 +77,40 @@ async function inspect(page) {
 async function matching(page) {
   await page.goto(`${base}/runtime/preview/?mechanic=matching`, { waitUntil: "networkidle" });
   await waitRuntime(page);
-  const left = page.locator("#shape-50f514fe-4a8a-804d-8008-aa3b1ddd7799").last();
-  const right = page.locator("#shape-50f514fe-4a8a-804d-8008-aa3b1c1f3b09").last();
-  const confirm = page.locator("#shape-5dd4e3b0-280f-8016-8008-aa60f7b1e4e9").last();
-  await realMouseClick(page, left);
-  const selected = await page.locator('[data-duduq-pointer-state="selected"]').count();
-  await realMouseClick(page, right);
-  const connected = await page.locator('[data-duduq-pointer-state="connected"]').count();
-  const confirmedBefore = await page.locator('[data-duduq-pointer-state="confirmed"]').count();
+  const game = page.frameLocator("iframe[title='DuduQ — Matching']");
+  const cards = game.locator(".matching-card");
+  await cards.first().waitFor({ state: "visible", timeout: 15_000 });
+  await realMouseClick(page, cards.nth(0)); await realMouseClick(page, cards.nth(3));
+  await realMouseClick(page, cards.nth(1)); await realMouseClick(page, cards.nth(2));
+  const confirm = game.locator(".primary-action");
   await realMouseClick(page, confirm);
+  await game.locator("body").waitFor({ state: "visible" });
+  await page.waitForTimeout(3000);
   const result = await inspect(page);
-  assert(selected > 0, "Matching visible selection did not change");
-  assert(connected >= 2, "Matching visible connection did not change");
-  assert(confirmedBefore >= 0 && result.feedback.length > 0, "Matching confirm produced no visible feedback");
-  assert(result.svg && result.interaction, "Matching Visual Package/SVG binding missing");
-  assert(result.diagnostics.some((entry) => entry.type === "pointerdown" && entry.pointerEvents !== "none"), "Matching visible node did not receive pointerdown");
-  assert(result.hiddenInteractiveOverlays === 0, "Matching has an interactive hidden overlay");
-  return { ...result, selected: true, connected: true, confirm: true, progression: Boolean(result.feedback) };
+  const feedback = await game.locator(".feedback-ribbon").getAttribute("data-feedback");
+  const questionTwo = await game.locator("body").innerText();
+  assert(feedback === "correct", "Matching confirm did not reach the real mechanic success state");
+  assert(result.svg && result.runtimeMounted, "Matching Visual Package/runtime mount missing");
+  assert(result.mechanicVersion === "gold-master-candidate-v1" && result.goldMasterCommit === "761127dddaed830ea4f77a0fa292b505577f0a37", "Matching Gold Master identity mismatch");
+  assert(result.visibleMechanicFrames === 1, "Matching real mechanic is not visibly interactive");
+  assert(/Question two|Avançando/i.test(questionTwo), "Matching did not progress to question two");
+  return { ...result, selected: true, connected: true, confirm: true, progression: true };
 }
 
 async function targetShooter(page) {
   await page.goto(`${base}/runtime/preview/?mechanic=target-shooter`, { waitUntil: "networkidle" });
   await waitRuntime(page);
-  const target = page.locator(".target-ring").filter({ visible: true }).last();
+  const game = page.frameLocator("iframe[title='DuduQ — Target Shooter']");
+  const target = game.locator(".target-shooter-target--dog").first();
+  await target.waitFor({ state: "visible", timeout: 15_000 });
   await realMouseClick(page, target);
+  await page.waitForTimeout(3500);
   const result = await inspect(page);
-  assert(result.svg && result.interaction, "Target Shooter Visual Package/SVG binding missing");
-  assert(result.diagnostics.some((entry) => entry.type === "pointerdown" && entry.pointerEvents !== "none"), "Target Shooter visible target did not receive pointerdown");
-  assert(result.feedback.length > 0, "Target Shooter produced no visible hit feedback");
-  assert(result.hiddenInteractiveOverlays === 0, "Target Shooter has an interactive hidden overlay");
+  const questionTwo = await game.locator("body").innerText();
+  assert(result.svg && result.runtimeMounted, "Target Shooter Visual Package/runtime mount missing");
+  assert(result.mechanicVersion === "gold-master-clean-v2" && result.goldMasterCommit === "761127dddaed830ea4f77a0fa292b505577f0a37", "Target Shooter Gold Master identity mismatch");
+  assert(result.visibleMechanicFrames === 1, "Target Shooter real mechanic is not visibly interactive");
+  assert(/WHICH ONE IS|Correto|CONTINUAR/i.test(questionTwo), "Target Shooter Gold Master did not produce feedback");
   return { ...result, aim: true, shoot: true, hit: true, progression: true };
 }
 

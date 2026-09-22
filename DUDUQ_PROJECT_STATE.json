@@ -60,6 +60,18 @@
     "reverse sync"
   ],
   "validatedConsumers": ["matching", "target-shooter"],
+  "goldMasters": {
+    "matching": {
+      "commit": "761127dddaed830ea4f77a0fa292b505577f0a37",
+      "path": "test/matching/gold-master-candidate-v1",
+      "version": "gold-master-candidate-v1"
+    },
+    "targetShooter": {
+      "commit": "761127dddaed830ea4f77a0fa292b505577f0a37",
+      "path": "test/target-shooter/gold-master-clean-v2",
+      "version": "gold-master-clean-v2"
+    }
+  },
   "currentArchitecture": "Penpot LIVE -> Design Graph -> lossless Visual Package -> Universal Screen Host -> behavior/game runtime -> E2E validation -> atomic activation -> successful state -> Git",
   "visualSourceOfTruth": "Penpot generated markup/style/font payload",
   "universalHost": "core/duduq-screen-runtime.js",
