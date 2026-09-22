@@ -13,7 +13,19 @@ const successfulPath = path.join(graphDir, "last-successful.json");
 const packageRoot = path.join(root, "design-system/runtime/screens");
 const hash = (value) => crypto.createHash("sha256").update(JSON.stringify(value)).digest("hex");
 const read = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
+const projectState = read(path.join(root, "DUDUQ_PROJECT_STATE.json"));
 const nodes = (items, out = []) => { for (const item of items || []) { out.push(item); nodes(item.children, out); } return out; };
+const sourceState = (graph) => { const copy = { ...graph }; delete copy.metadata; delete copy.successfulSnapshot; return copy; };
+const sourceHash = (graph) => hash(sourceState(graph));
+const packageState = () => Object.fromEntries(Object.keys(screens).map((packageName) => {
+  const manifest = read(path.join(packageRoot, packageName, "manifest.json"));
+  return [packageName, manifest.hashes.markup];
+}));
+const goldMasterState = (packageName) => {
+  const key = packageName === "target-shooter-master" ? "targetShooter" : "matching";
+  const gm = projectState.goldMasters?.[key] || {};
+  return { version: gm.version || null, commit: gm.commit || null };
+};
 
 function verify(graph) {
   const list = nodes(graph.pages);
@@ -77,12 +89,19 @@ export async function runLiveGraph({ dryRun = false } = {}) {
   const previous = fs.existsSync(successfulPath) ? read(successfulPath) : null;
   if (!previous) return { result: dryRun ? "BOOTSTRAP_READY" : "BOOTSTRAP_REQUIRED", capture: "PASS", nodes: currentNodes.length, promoted: false, verification: { urls: await resolveVerificationUrls({ noChanges: true }) } };
   const changes = diff(previous, current);
-  const changedScreens = screenChanges(changes);
+  const activePackages = packageState();
+  const previousSourceHash = previous.successfulSnapshot?.liveSourceHash || sourceHash(previous);
+  const liveSourceHash = sourceHash(current);
+  const driftScreens = Object.keys(screens)
+    .filter((packageName) => previous.successfulSnapshot?.packageHashes?.[packageName] && previous.successfulSnapshot.packageHashes[packageName] !== activePackages[packageName])
+    .map((packageName) => ({ packageName, screenId: screens[packageName].id, changes: 0, drift: true }));
+  const changedScreens = [...new Map([...screenChanges(changes), ...driftScreens].map((entry) => [entry.packageName, entry])).values()];
+  const visualDrift = driftScreens.length > 0 || liveSourceHash !== previousSourceHash;
   const currentHash = hash(current);
   const previousHash = hash(previous);
-  const base = { capture: "PASS", currentGraphHash: currentHash, successfulGraphHash: previousHash, changedScreens, changesDetected: changes.length, visualDeltaReport: visualDeltaReport(changes), captureDurationMs: captureResult?.durationMs ?? Date.now() - started, promoted: false };
+  const base = { capture: "PASS", currentGraphHash: currentHash, successfulGraphHash: previousHash, liveSourceHash, lastAppliedSourceHash: previousSourceHash, changedScreens, changesDetected: changes.length, visualDrift, visualDeltaReport: visualDeltaReport(changes), captureDurationMs: captureResult?.durationMs ?? Date.now() - started, promoted: false };
   if (dryRun) return { ...base, result: changes.length ? "CHANGE_DETECTED" : "NO_CHANGES", promotion: "SKIPPED", verification: { urls: await resolveVerificationUrls({ changedScreens, noChanges: !changes.length || !changedScreens.length }) } };
-  if (!changes.length) return { ...base, result: "NO_CHANGES", verification: { urls: await resolveVerificationUrls({ noChanges: true, packageHashes: previous.successfulSnapshot?.packageHashes || {} }) } };
+  if (!changes.length && !visualDrift) return { ...base, result: "NO_CHANGES", verification: { urls: await resolveVerificationUrls({ noChanges: true, packageHashes: activePackages }) } };
 
   const stageRoot = path.join(root, `.duduq-runtime-stage-${process.pid}`);
   const backups = [];
@@ -107,11 +126,18 @@ export async function runLiveGraph({ dryRun = false } = {}) {
       fs.renameSync(stageDir, finalDir);
     }
     for (const entry of changedScreens) validatePackage(path.join(packageRoot, entry.packageName));
-    const manifests = { ...((previous.successfulSnapshot || {}).packageHashes || {}), ...packageHashes };
-    const promoted = promote(current, manifests, { source: "PENPOT_LIVE", changedScreens: changedScreens.map((entry) => entry.packageName) });
+    const manifests = { ...activePackages, ...packageHashes };
+    const appliedScreens = Object.fromEntries(Object.keys(screens).map((packageName) => [packageName, {
+      liveSourceHash,
+      lastAppliedSourceHash: liveSourceHash,
+      activeRuntimeVisualHash: manifests[packageName],
+      activePackageHash: manifests[packageName],
+      goldMasterIdentity: goldMasterState(packageName)
+    }]));
+    const promoted = promote(current, manifests, { source: "PENPOT_LIVE", changedScreens: changedScreens.map((entry) => entry.packageName), liveSourceHash, lastAppliedSourceHash: liveSourceHash, screens: appliedScreens });
     for (const { backupDir } of backups) fs.rmSync(backupDir, { recursive: true, force: true });
     fs.rmSync(stageRoot, { recursive: true, force: true });
-    return { ...base, result: "APPLIED", packageHashes: manifests, promoted: true, runtimeValidation: "PACKAGE_VALIDATED", verification: { urls: await resolveVerificationUrls({ changedScreens, packageHashes: manifests }) }, elapsedMs: Date.now() - started, successfulGraphHash: hash(promoted) };
+    return { ...base, result: visualDrift && !changes.length ? "DRIFT_APPLIED" : "APPLIED", packageHashes: manifests, promoted: true, runtimeValidation: "PACKAGE_VALIDATED", verification: { urls: await resolveVerificationUrls({ changedScreens, packageHashes: manifests }) }, elapsedMs: Date.now() - started, successfulGraphHash: hash(promoted) };
   } catch (error) {
     for (const { finalDir, backupDir } of backups.reverse()) {
       fs.rmSync(finalDir, { recursive: true, force: true });
