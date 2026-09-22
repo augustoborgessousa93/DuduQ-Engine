@@ -17,6 +17,7 @@
         "duduq:penpot:sync:check": "node scripts/duduq-penpot-export-to-core.mjs --check",
         "duduq:penpot:sync:test": "node test/penpot-sync/duduq-penpot-transformer.test.mjs",
         "test:visual-golden": "node test/runtime/self-contained-golden-visual.mjs"
+        ,"test:human-interaction": "node test/runtime/human-interaction.mjs"
     },
     "dependencies": {
         "@modelcontextprotocol/sdk": "^1.30.0"
