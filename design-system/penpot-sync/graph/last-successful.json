@@ -45952,209 +45952,6 @@
             "penpotProperties": {},
             "fingerprint": "0c9aaa4ef589"
           }
-        },
-        {
-          "penpotId": "d5068148-a7b5-80c6-8008-acaa3ccddf76",
-          "semanticId": "document.duduq-design-system-control-panel.lucide-headphones",
-          "name": "lucide / headphones",
-          "type": "group",
-          "role": "element",
-          "pageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
-          "parentId": null,
-          "parentSemanticId": "document.duduq-design-system-control-panel",
-          "children": [
-            {
-              "penpotId": "d5068148-a7b5-80c6-8008-acaa3cd03ded",
-              "semanticId": "document.duduq-design-system-control-panel.lucide-headphones.base-background",
-              "name": "base-background",
-              "type": "rectangle",
-              "role": "element",
-              "pageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
-              "parentId": null,
-              "parentSemanticId": "document.duduq-design-system-control-panel.lucide-headphones",
-              "children": [],
-              "componentId": null,
-              "componentRef": null,
-              "instanceOf": null,
-              "authoringSource": false,
-              "ownership": "UNKNOWN",
-              "geometry": {
-                "x": -23100,
-                "y": -19502,
-                "width": 24,
-                "height": 24,
-                "rotation": 0
-              },
-              "layout": {
-                "constraints": {
-                  "horizontal": null,
-                  "vertical": null
-                }
-              },
-              "appearance": {
-                "fills": [],
-                "strokes": [
-                  {
-                    "strokeColor": "#000000",
-                    "strokeColorRefFile": null,
-                    "strokeColorRefId": null,
-                    "strokeOpacity": 1,
-                    "strokeStyle": null,
-                    "strokeWidth": 2,
-                    "strokeAlignment": null,
-                    "strokeCapStart": null,
-                    "strokeCapEnd": null,
-                    "strokeColorGradient": null,
-                    "strokeImage": null
-                  }
-                ],
-                "radius": 0,
-                "opacity": null
-              },
-              "effects": {
-                "shadows": [],
-                "blur": null
-              },
-              "typography": {
-                "family": null,
-                "size": null,
-                "weight": null,
-                "lineHeight": null,
-                "letterSpacing": null,
-                "alignment": null
-              },
-              "asset": {
-                "type": null,
-                "reference": null,
-                "source": null
-              },
-              "visibility": false,
-              "state": null,
-              "metadata": {
-                "penpotProperties": {},
-                "fingerprint": "6ea393a070b2"
-              }
-            },
-            {
-              "penpotId": "d5068148-a7b5-80c6-8008-acaa3cd0ae32",
-              "semanticId": "document.duduq-design-system-control-panel.lucide-headphones.svg-path",
-              "name": "svg-path",
-              "type": "path",
-              "role": "element",
-              "pageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
-              "parentId": null,
-              "parentSemanticId": "document.duduq-design-system-control-panel.lucide-headphones",
-              "children": [],
-              "componentId": null,
-              "componentRef": null,
-              "instanceOf": null,
-              "authoringSource": false,
-              "ownership": "UNKNOWN",
-              "geometry": {
-                "x": -23097,
-                "y": -19499,
-                "width": 18,
-                "height": 18,
-                "rotation": 0
-              },
-              "layout": {
-                "constraints": {
-                  "horizontal": null,
-                  "vertical": null
-                }
-              },
-              "appearance": {
-                "fills": [],
-                "strokes": [
-                  {
-                    "strokeColor": "#000000",
-                    "strokeColorRefFile": null,
-                    "strokeColorRefId": null,
-                    "strokeOpacity": 1,
-                    "strokeStyle": null,
-                    "strokeWidth": 2,
-                    "strokeAlignment": null,
-                    "strokeCapStart": "round",
-                    "strokeCapEnd": "round",
-                    "strokeColorGradient": null,
-                    "strokeImage": null
-                  }
-                ],
-                "radius": null,
-                "opacity": null
-              },
-              "effects": {
-                "shadows": [],
-                "blur": null
-              },
-              "typography": {
-                "family": null,
-                "size": null,
-                "weight": null,
-                "lineHeight": null,
-                "letterSpacing": null,
-                "alignment": null
-              },
-              "asset": {
-                "type": null,
-                "reference": null,
-                "source": null
-              },
-              "visibility": true,
-              "state": null,
-              "metadata": {
-                "penpotProperties": {},
-                "fingerprint": "a38e75ac76fe"
-              }
-            }
-          ],
-          "componentId": null,
-          "componentRef": null,
-          "instanceOf": null,
-          "authoringSource": false,
-          "ownership": "UNKNOWN",
-          "geometry": {
-            "x": -23100,
-            "y": -19502,
-            "width": 24,
-            "height": 24,
-            "rotation": 0
-          },
-          "layout": {
-            "constraints": {
-              "horizontal": null,
-              "vertical": null
-            }
-          },
-          "appearance": {
-            "fills": [],
-            "strokes": [],
-            "radius": null,
-            "opacity": null
-          },
-          "effects": {
-            "shadows": [],
-            "blur": null
-          },
-          "typography": {
-            "family": null,
-            "size": null,
-            "weight": null,
-            "lineHeight": null,
-            "letterSpacing": null,
-            "alignment": null
-          },
-          "asset": {
-            "type": null,
-            "reference": null,
-            "source": null
-          },
-          "visibility": true,
-          "state": null,
-          "metadata": {
-            "penpotProperties": {},
-            "fingerprint": "b2ca0d27e088"
-          }
         }
       ],
       "componentId": null,
@@ -46207,20 +46004,45 @@
     }
   ],
   "metadata": {
-    "capturedAt": "2026-09-21T22:10:02.084Z",
-    "durationMs": 1133,
-    "payloadBytes": 884008,
-    "nodeCount": 644,
-    "graphHash": "6a1969a7e4fc111aad32b9546b64fbe33ca836765df91fd21758ea9b61c260fc"
+    "capturedAt": "2026-09-22T19:27:30.268Z",
+    "durationMs": 1750,
+    "payloadBytes": 880688,
+    "nodeCount": 641,
+    "graphHash": "058feaac43a5d41555089602b625e702f3ecd3fb5367b7466ad946d245245fe8"
   },
   "successfulSnapshot": {
     "source": "PENPOT_LIVE",
     "changedScreens": [
       "matching-master"
     ],
-    "packageHashes": {
-      "matching-master": "3314324286f72742a75feb295a9a2ef2918bda1d9efbf1e76db7458c637f16f3"
+    "liveSourceHash": "9a7d130dfeafb8aa774a3a667d88927a4c5af87f9c304537a30c4b92f755b126",
+    "lastAppliedSourceHash": "9a7d130dfeafb8aa774a3a667d88927a4c5af87f9c304537a30c4b92f755b126",
+    "screens": {
+      "matching-master": {
+        "liveSourceHash": "9a7d130dfeafb8aa774a3a667d88927a4c5af87f9c304537a30c4b92f755b126",
+        "lastAppliedSourceHash": "9a7d130dfeafb8aa774a3a667d88927a4c5af87f9c304537a30c4b92f755b126",
+        "activeRuntimeVisualHash": "6cc610c3d399377f401637546cf7e908af62e3fa41af773f1cc70961cf7ba1f1",
+        "activePackageHash": "6cc610c3d399377f401637546cf7e908af62e3fa41af773f1cc70961cf7ba1f1",
+        "goldMasterIdentity": {
+          "version": "gold-master-candidate-v1",
+          "commit": "761127dddaed830ea4f77a0fa292b505577f0a37"
+        }
+      },
+      "target-shooter-master": {
+        "liveSourceHash": "9a7d130dfeafb8aa774a3a667d88927a4c5af87f9c304537a30c4b92f755b126",
+        "lastAppliedSourceHash": "9a7d130dfeafb8aa774a3a667d88927a4c5af87f9c304537a30c4b92f755b126",
+        "activeRuntimeVisualHash": "9787bbdc7fcb433c2aef237e346d5c253f7313da62a9977d9269f7fac81743f6",
+        "activePackageHash": "9787bbdc7fcb433c2aef237e346d5c253f7313da62a9977d9269f7fac81743f6",
+        "goldMasterIdentity": {
+          "version": "gold-master-clean-v2",
+          "commit": "761127dddaed830ea4f77a0fa292b505577f0a37"
+        }
+      }
     },
-    "promotedAt": "2026-09-21T22:10:48.105Z"
+    "packageHashes": {
+      "matching-master": "6cc610c3d399377f401637546cf7e908af62e3fa41af773f1cc70961cf7ba1f1",
+      "target-shooter-master": "9787bbdc7fcb433c2aef237e346d5c253f7313da62a9977d9269f7fac81743f6"
+    },
+    "promotedAt": "2026-09-22T19:28:28.601Z"
   }
 }

@@ -29,3 +29,4 @@ When the user says **“Atualize o Core”**:
 - Never call a preview “verified” from HTTP 200 alone: require active package-hash, package-asset, golden-visual, and gameplay-E2E health.
 - `GAMEPLAY API PASS` is not `INTERACTION PASS`: verified mechanics require real Playwright mouse/pointer input on visible Penpot package nodes and an observable visible state transition. Hidden legacy DOM, direct runtime calls, `dispatchEvent`, and test-only controls are invalid proof.
 - Human preview URLs must remain LIVE_VISUAL_PACKAGE routes and never default to Golden/static fixture mode.
+- `NO_CHANGES` describes source plus applied-runtime consistency, not merely an empty graph diff. Before returning it, compare the live source hash with the last applied source hash, verify active package/runtime visual hashes and Gold Master identity, and treat any package-hash mismatch as `VISUAL_DRIFT_DETECTED` requiring reconciliation.

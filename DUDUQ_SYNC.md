@@ -49,6 +49,13 @@ Dry-run stops after capture, diff, screen identification, and policy/reporting. 
 - Project state and next safe action: `DUDUQ_PROJECT_STATE.json`.
 - Architecture and golden checkpoints: `DUDUQ_ARCHITECTURE.md`.
 
+`NO_CHANGES` is valid only when the live source hash equals the last successfully
+applied source hash, every active package hash is healthy and matches its applied
+record, the runtime visual state corresponds to that package, and the expected Gold
+Master identity is unchanged. A package-hash mismatch is always
+`VISUAL_DRIFT_DETECTED`, never `NO_CHANGES`; the existing compiler reconciles the
+affected screen in place before promoting the successful snapshot.
+
 If a package validation or consumer test fails, keep the prior active package and investigate the failing stage. Do not edit successful snapshots manually and do not bypass the Universal Screen Host.
 
 ## Real commands

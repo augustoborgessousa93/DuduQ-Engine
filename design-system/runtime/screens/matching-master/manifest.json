@@ -5,10 +5,10 @@
   "screenName": "MATCHING — MASTER / IDLE",
   "source": "Penpot MCP generateMarkup/generateStyle/generateFontFaces/export_shape",
   "hashes": {
-    "markup": "6a64eb93058a8cfedfdd2738807ffe40a236b9e92016f667dfcedbf086795341",
+    "markup": "6cc610c3d399377f401637546cf7e908af62e3fa41af773f1cc70961cf7ba1f1",
     "styles": "7e7dfc224b05e7e8b2ed92a81274d5487a87b5b5f1abdca48ba786c891e6f2f8",
-    "fonts": "81d75b6126af601a29809c7272211068fe43ae09b6e04aa987968cf9100c17f7",
+    "fonts": "1c727aaf31e32f58d2abe18e6ab10211b9fc05cf5f325858ece3f0f4c1e61368",
     "reference": "6c97f8f58d39f565011baaa0182401299099b1b45c512886ff4194ca344cf641"
   },
-  "generatedAt": "2026-09-21T23:46:05.054Z"
+  "generatedAt": "2026-09-22T19:28:28.566Z"
 }

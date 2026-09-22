@@ -29,7 +29,7 @@ const packageNames = { matching: "matching-master", "target-shooter": "target-sh
 const goldenNames = { matching: "matching.png", "target-shooter": "target-shooter.png" };
 const visualThresholds = { matching: 0.98, "target-shooter": 0.95 };
 const expectedHashes = {
-  matching: "6a64eb93058a8cfedfdd2738807ffe40a236b9e92016f667dfcedbf086795341",
+  matching: "6cc610c3d399377f401637546cf7e908af62e3fa41af773f1cc70961cf7ba1f1",
   "target-shooter": "9787bbdc7fcb433c2aef237e346d5c253f7313da62a9977d9269f7fac81743f6"
 };
 const assert = (condition, message) => { if (!condition) throw new Error(message); };

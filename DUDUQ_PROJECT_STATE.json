@@ -45,7 +45,7 @@
   },
   "screenPackages": {
     "root": "design-system/runtime/screens",
-    "matching-master": "6a64eb93058a8cfedfdd2738807ffe40a236b9e92016f667dfcedbf086795341",
+    "matching-master": "6cc610c3d399377f401637546cf7e908af62e3fa41af773f1cc70961cf7ba1f1",
     "target-shooter-master": "9787bbdc7fcb433c2aef237e346d5c253f7313da62a9977d9269f7fac81743f6"
   },
   "validatedCapabilities": [
@@ -84,6 +84,7 @@
   "currentArchitecture": "Penpot LIVE -> Design Graph -> lossless Visual Package -> Universal Screen Host -> behavior/game runtime -> E2E validation -> atomic activation -> successful state -> Git",
   "visualSourceOfTruth": "Penpot generated markup/style/font payload",
   "visualSyncGovernance": "PENPOT_VISUAL_SYNC_IS_SCREEN_WIDE_AND_NODE_GENERIC; behavior bindings never exempt visual nodes or descendants from compilation",
+  "noChangesContract": "NO_CHANGES requires liveSourceHash == lastAppliedSourceHash, active package/runtime visual hash health PASS, and unchanged Gold Master identity; otherwise return VISUAL_DRIFT_DETECTED and reconcile",
   "universalHost": "core/duduq-screen-runtime.js",
   "behaviorRuntime": ["mechanics/matching.js", "mechanics/target-shooter.js"],
   "successfulGraph": "design-system/penpot-sync/graph/last-successful.json",
