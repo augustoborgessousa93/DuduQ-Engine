@@ -23,12 +23,23 @@ function tcpHealth(port, host = "127.0.0.1") {
     socket.setTimeout(1200, () => done(false));
   });
 }
-function detached(command, args, cwd, logName) {
+function bashPath(value) {
+  const normalized = path.resolve(value).replace(/\\\\/g, "/");
+  return normalized.replace(/^([A-Za-z]):/, (_, drive) => "/" + drive.toLowerCase());
+}
+function gitBash() {
+  const candidates = [process.env.DUDUQ_GIT_BASH, "C:\\Program Files\\Git\\bin\\bash.exe", "C:\\Program Files\\Git\\usr\\bin\\bash.exe"].filter(Boolean);
+  const selected = candidates.find((candidate) => fs.existsSync(candidate));
+  if (!selected) throw new Error("GIT_BASH_NOT_FOUND");
+  return selected;
+}
+function detachedGitBash(cwd, command, logName) {
   const logDir = path.join(root, "artifacts");
   fs.mkdirSync(logDir, { recursive: true });
   const out = fs.openSync(path.join(logDir, `${logName}.out.log`), "a");
   const err = fs.openSync(path.join(logDir, `${logName}.err.log`), "a");
-  const child = spawn(command, args, { cwd, detached: true, windowsHide: true, stdio: ["ignore", out, err], env: process.env });
+  const script = "cd '" + bashPath(cwd) + "' && exec " + command;
+  const child = spawn(gitBash(), ["-lc", script], { cwd: root, detached: true, windowsHide: true, stdio: ["ignore", out, err], env: process.env });
   child.unref();
   return child.pid;
 }
@@ -42,13 +53,12 @@ export async function ensurePenpotMcp({ startOnly = false } = {}) {
   const before = { plugin: await httpHealth("http://localhost:4400/manifest.json"), mcp: await httpHealth("http://localhost:4401/mcp"), websocket: await tcpHealth(4402) };
   const started = { plugin: false, mcp: false, websocket: false };
   if (!before.mcp || !before.websocket) {
-    detached(process.execPath, [path.join(installation.serverRoot, "dist", "index.js")], installation.serverRoot, "penpot-mcp-server");
+    detachedGitBash(installation.serverRoot, "node dist/index.js", "penpot-mcp-server");
     started.mcp = !before.mcp;
     started.websocket = !before.websocket;
   }
   if (!before.plugin) {
-    const vite = path.join(installation.pluginRoot, "node_modules", "vite", "bin", "vite.js");
-    detached(process.execPath, [vite, "preview", "--host", "localhost", "--port", "4400"], installation.pluginRoot, "penpot-mcp-plugin");
+    detachedGitBash(installation.pluginRoot, "node node_modules/vite/bin/vite.js preview --host localhost --port 4400", "penpot-mcp-plugin");
     started.plugin = true;
   }
   const ready = {
