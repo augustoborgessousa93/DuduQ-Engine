@@ -32,6 +32,23 @@ function screenChanges(changes) {
   return result;
 }
 
+function visualDeltaReport(changes) {
+  const report = { changedNodes: [], addedNodes: [], removedNodes: [], reorderedNodes: [], assetChanges: [], typographyChanges: [], geometryChanges: [], styleChanges: [] };
+  for (const change of changes) {
+    const entry = { nodeId: change.nodeId, path: change.path || change.semanticPath, kind: change.kind };
+    if (change.kind === "NODE_ADDED") report.addedNodes.push(entry);
+    else if (change.kind === "NODE_REMOVED") report.removedNodes.push(entry);
+    else if (change.kind === "NODE_REPARENTED") report.reorderedNodes.push(entry);
+    else report.changedNodes.push(entry);
+    const path = String(entry.path || "").toLowerCase();
+    if (/asset|image|href|svg|vector/.test(path)) report.assetChanges.push(entry);
+    if (/typography|font|letterspacing|lineheight|align/.test(path)) report.typographyChanges.push(entry);
+    if (/geometry|\.x$|\.y$|width|height|rotation/.test(path)) report.geometryChanges.push(entry);
+    if (/appearance|fills|strokes|radius|opacity|effects|shadow|blur|visible/.test(path)) report.styleChanges.push(entry);
+  }
+  return report;
+}
+
   function validatePackage(dir) {
     const required = ["manifest.json", "visual.svg", "styles.css", "fonts.css", "bindings.json", "visual-reference.png"];
     for (const file of required) if (!fs.existsSync(path.join(dir, file))) throw new Error(`VISUAL_PACKAGE_INVALID:${file}`);
@@ -63,7 +80,7 @@ export async function runLiveGraph({ dryRun = false } = {}) {
   const changedScreens = screenChanges(changes);
   const currentHash = hash(current);
   const previousHash = hash(previous);
-  const base = { capture: "PASS", currentGraphHash: currentHash, successfulGraphHash: previousHash, changedScreens, changesDetected: changes.length, captureDurationMs: captureResult?.durationMs ?? Date.now() - started, promoted: false };
+  const base = { capture: "PASS", currentGraphHash: currentHash, successfulGraphHash: previousHash, changedScreens, changesDetected: changes.length, visualDeltaReport: visualDeltaReport(changes), captureDurationMs: captureResult?.durationMs ?? Date.now() - started, promoted: false };
   if (dryRun) return { ...base, result: changes.length ? "CHANGE_DETECTED" : "NO_CHANGES", promotion: "SKIPPED", verification: { urls: await resolveVerificationUrls({ changedScreens, noChanges: !changes.length || !changedScreens.length }) } };
   if (!changes.length) return { ...base, result: "NO_CHANGES", verification: { urls: await resolveVerificationUrls({ noChanges: true, packageHashes: previous.successfulSnapshot?.packageHashes || {} }) } };
 
