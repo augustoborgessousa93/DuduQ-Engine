@@ -587,3 +587,5 @@ Continuity metadata initialized. Subsequent checkpoints append validated state c
 - 2026-09-22T14:12:06.644Z checkpoint PASS; branch feat/design-sync-primary-button-v1; commit 424b9438ea0f1b4c119601b2a907c93e5c3a7aaf.
 
 - 2026-09-22T14:14:24.119Z checkpoint PASS; branch feat/design-sync-primary-button-v1; commit ae746de52c1ef2cc632784f40a93e5011d41742a.
+
+- 2026-09-22T14:19:31.823Z checkpoint PASS; branch feat/design-sync-primary-button-v1; commit 96d6e9802393ebc7370c84335c2b3a778401c368.
