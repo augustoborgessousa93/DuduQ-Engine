@@ -17,8 +17,7 @@
     const [markup, styles, fonts, bindings] = await Promise.all([
       get(`${base}/visual.svg`), get(`${base}/styles.css`), get(`${base}/fonts.css`), get(`${base}/bindings.json`, "json")
     ]);
-    const referenceImage = `${base}/visual-reference.png`;
-    return { manifest, markup, styles, fonts, bindings, referenceImage, packageUrl: base };
+    return { manifest, markup, styles, fonts, bindings, packageUrl: base };
   }
 
   class DuduQScreenRuntime {
@@ -40,9 +39,12 @@
       const markup = resolveResources(pkg.markup);
       const styles = resolveResources(pkg.styles);
       const fonts = resolveResources(pkg.fonts);
-      const reference = pkg.referenceImage ? `<img class="duduq-visual-reference" data-duduq-visual-reference src="${pkg.referenceImage}" alt="">` : "";
-      const staged = `<style data-duduq-fonts>${fonts}</style><style data-duduq-styles>${styles}</style><style data-duduq-reference>.duduq-visual-reference{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;z-index:0}.duduq-visual-markup{position:absolute;inset:0;visibility:hidden!important;pointer-events:none!important}.duduq-visual-markup *{visibility:hidden!important;pointer-events:none!important}</style><div data-duduq-screen="${pkg.manifest.screenId}" style="position:relative;width:100%;height:100%;overflow:hidden">${reference}<div class="duduq-visual-markup">${markup}</div></div>`;
+      const markupHash = text(pkg.manifest?.hashes?.markup);
+      // Golden exports are comparison oracles only.  The production surface is
+      // always the generated vector markup from the active Visual Package.
+      const staged = `<style data-duduq-fonts>${fonts}</style><style data-duduq-styles>${styles}</style><style data-duduq-runtime-stage>.duduq-visual-markup{position:absolute;inset:0;width:100%;height:100%;overflow:hidden}.duduq-visual-markup>svg{display:block;width:100%;height:100%}.duduq-visual-markup svg{max-width:100%;max-height:100%}</style><div data-duduq-screen="${pkg.manifest.screenId}" data-duduq-visual-package-markup-hash="${markupHash}" data-duduq-runtime-source="LIVE_VISUAL_PACKAGE" style="position:relative;width:100%;height:100%;overflow:hidden"><div class="duduq-visual-markup">${markup}</div></div>`;
       root.innerHTML = staged;
+      root.querySelector?.(".duduq-visual-markup > svg")?.setAttribute("preserveAspectRatio", "xMidYMid meet");
       this.root = root;
       this.package = pkg;
       this.bound.clear();

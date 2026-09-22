@@ -70,7 +70,7 @@
     "previewServerScript": "scripts/duduq-test-server.mjs",
     "serverDefaultPort": 4175,
     "healthCheckRequired": true,
-    "verifiedDefinition": ["HTTP_200", "ACTIVE_PACKAGE_HASH", "PACKAGE_ASSETS_RESOLVED", "GOLDEN_VISUAL_REGRESSION", "GAMEPLAY_E2E"],
+    "verifiedDefinition": ["HTTP_200", "ACTIVE_PACKAGE_HASH", "VISUAL_PACKAGE_DOM_MOUNTED", "GOLDEN_NOT_RUNTIME", "SVG_ROOT_PRESENT", "PACKAGE_ASSETS_RESOLVED", "GOLDEN_VS_INTERACTIVE_RUNTIME_REGRESSION", "GAMEPLAY_E2E", "HIGH_DPI_VECTOR_FIDELITY"],
     "routes": {
       "matching": "/runtime/preview/?mechanic=matching",
       "target-shooter": "/runtime/preview/?mechanic=target-shooter"
