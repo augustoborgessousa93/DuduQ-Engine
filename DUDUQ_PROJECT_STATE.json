@@ -17,7 +17,16 @@
   },
   "penpot": {
     "mcpEndpoint": "http://localhost:4401/mcp",
-    "pluginRequired": true
+    "pluginRequired": true,
+    "installation": {
+      "root": "C:\\Users\\augus\\AppData\\Local\\npm-cache\\_npx\\f4739471492be2e8\\node_modules\\@penpot\\mcp",
+      "serverRoot": "C:\\Users\\augus\\AppData\\Local\\npm-cache\\_npx\\f4739471492be2e8\\node_modules\\@penpot\\mcp\\packages\\server",
+      "pluginRoot": "C:\\Users\\augus\\AppData\\Local\\npm-cache\\_npx\\f4739471492be2e8\\node_modules\\@penpot\\mcp\\packages\\plugin",
+      "pluginManifest": "http://localhost:4400/manifest.json",
+      "websocket": "ws://localhost:4402",
+      "serverCommand": "node dist/index.js",
+      "pluginCommand": "node node_modules/vite/bin/vite.js preview --host localhost --port 4400"
+    }
   },
   "commands": {
     "updateCore": "npm run duduq:update-core",

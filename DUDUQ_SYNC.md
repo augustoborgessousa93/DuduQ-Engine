@@ -14,6 +14,16 @@ npm run duduq:update-core
 npm run duduq:update-core -- --dry-run
 ```
 
+Before the normal command runs, `scripts/duduq-penpot-bootstrap.mjs` health-checks
+ports 4400/4401/4402 and starts only missing services from the registered existing
+installation in `DUDUQ_PROJECT_STATE.json`. It never installs or duplicates MCP
+processes. If the Penpot plugin is not connected, the command stops with:
+`PENPOT_PLUGIN_NOT_CONNECTED: Abra o Plugin Penpot MCP no Penpot e clique em Connect.`
+
+Windows users may optionally run `DUDUQ_START.cmd` (including from Startup or Task
+Scheduler) to start missing MCP services and the preview server without running an
+update. No Git Bash session is required.
+
 The command accepts no component, node, or property selector. It always evaluates the complete live screen graph; component-targeted visual sync is not supported.
 
 ## Universal live protocol
