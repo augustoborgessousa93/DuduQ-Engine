@@ -1,12 +1,30 @@
 # DuduQ English — Year 2
 
-Estrutura oficial de organização do conteúdo de Língua Inglesa do 2º ano.
+Conteúdo multimodal v2.3 do 2º ano.
 
-- module-01 — Greetings & The Alphabet
-- module-02 — Numbers 1–20 & My Family
-- module-03 — Toys, Colors & Favorites
-- module-04 — Animals & Shapes
-- module-05 — Human Body
-- module-06 — Fruits, Vegetables, Colors & Size
+## Teste manual do hotfix PR #72
 
-> Os módulos 02–06 estão com a estrutura reservada no `main` enquanto as candidatas v2.2 permanecem em homologação. A presença das pastas não significa promoção do conteúdo para produção.
+A raiz do preview do repositório não é o entrypoint do Year 2. Para validação manual, abrir diretamente um dos módulos abaixo no preview da branch:
+
+- M01: `/content/english/year-2/module-01/`
+- M02: `/content/english/year-2/module-02/`
+- M03: `/content/english/year-2/module-03/`
+- M04: `/content/english/year-2/module-04/`
+- M05: `/content/english/year-2/module-05/`
+- M06: `/content/english/year-2/module-06/`
+
+Branch preview atual:
+`https://hotfix-year2-multimodal-dd-m.duduq-engine.pages.dev`
+
+Exemplo M01 completo:
+`https://hotfix-year2-multimodal-dd-m.duduq-engine.pages.dev/content/english/year-2/module-01/`
+
+Não usar somente a raiz do domínio para testar o Year 2.
+
+## Contrato
+
+- fonte pedagógica: v2.3;
+- IDs e gabaritos preservados;
+- multimodalidade adequada à alfabetização;
+- imagens oficiais Assets-DuduQ priorizadas;
+- validação desktop, fullscreen e mobile antes de merge.

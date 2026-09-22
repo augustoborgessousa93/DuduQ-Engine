@@ -218,7 +218,33 @@ async function verifyMatching(page, frame, probe) {
   }
   const confirm = frame.locator(".duduq-matching-primary");
   assert(await confirm.count() === 1, `${probe.id}: CONFIRMAR ausente.`);
-  assert(!(await confirm.isDisabled()), `${probe.id}: CONFIRMAR não habilitou após ${n} pares.`);
+  try {
+    await frame.waitForFunction(() => {
+      const button = document.querySelector(".duduq-matching-primary");
+      return Boolean(button && button.disabled === false && button.getAttribute("aria-disabled") !== "true");
+    }, null, { timeout: 4_000 });
+  } catch (_) {
+    const debug = await frame.evaluate(() => ({
+      confirm: (() => {
+        const button = document.querySelector(".duduq-matching-primary");
+        return button ? {
+          disabled: Boolean(button.disabled),
+          ariaDisabled: button.getAttribute("aria-disabled"),
+          className: button.className,
+          text: String(button.textContent || "").trim()
+        } : null;
+      })(),
+      cards: Array.from(document.querySelectorAll(".duduq-matching-card")).map((card) => ({
+        side: card.closest('[data-side]')?.getAttribute("data-side") || null,
+        id: card.getAttribute("data-id") || card.getAttribute("data-item-id") || null,
+        disabled: Boolean(card.disabled),
+        ariaPressed: card.getAttribute("aria-pressed"),
+        className: card.className
+      }))
+    }));
+    throw new Error(`${probe.id}: CONFIRMAR não habilitou após ${n} pares estabilizados. MATCHING_DEBUG=${JSON.stringify(debug)}`);
+  }
+  assert(!(await confirm.isDisabled()), `${probe.id}: CONFIRMAR permaneceu desabilitado após estabilização.`);
   await confirm.click();
   await page.waitForFunction(() => window.DuduQ?.getSession?.()?.completed === true, null, { timeout: 8_000 });
   const session = await page.evaluate(() => window.DuduQ?.getSession?.() || null);
