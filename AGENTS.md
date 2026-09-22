@@ -31,3 +31,5 @@ When the user says **“Atualize o Core”**:
 - Human preview URLs must remain LIVE_VISUAL_PACKAGE routes and never default to Golden/static fixture mode.
 - `NO_CHANGES` describes source plus applied-runtime consistency, not merely an empty graph diff. Before returning it, compare the live source hash with the last applied source hash, verify active package/runtime visual hashes and Gold Master identity, and treat any package-hash mismatch as `VISUAL_DRIFT_DETECTED` requiring reconciliation.
 - Runtime geometry is screen-wide and node-generic: resolve the current Penpot screen hierarchy, apply one uniform board-to-iframe scale and Penpot-owned x/y/size without allowing legacy flex/grid layout to reflow synced nodes. Gold Master behavior, listeners, state, hit testing, and progression remain unchanged.
+
+- Production visual contract: Penpot's complete LIVE_VISUAL_PACKAGE is the only visible scene; Gold Master files are behavior engines only. Do not load legacy iframe geometry projection or property/component visual patching.
