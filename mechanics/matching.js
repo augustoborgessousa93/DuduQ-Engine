@@ -1281,6 +1281,23 @@ html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-ts-arena {
     } catch (_) {}
   }
 
+  window.addEventListener("message", function (event) {
+    if (!event.data || event.data.type !== "DUDUQ_BEHAVIOR_ACTION") return;
+    const action = event.data.action;
+    if (action === "PLAY_QUESTION_AUDIO") {
+      const audio = document.querySelector(".audio-button, .duduq-matching-audio");
+      if (audio && typeof audio.click === "function") audio.click();
+      return;
+    }
+    if (action !== "VISIBLE_NODE_CLICK") return;
+    const index = Number(event.data.index);
+    const cards = Array.from(document.querySelectorAll(".duduq-mq-card, .matching-card"));
+    const target = cards[Math.max(0, Math.min(cards.length - 1, Number.isFinite(index) ? index : 0))];
+    if (target && typeof target.click === "function") target.click();
+    const confirm = document.querySelector(".duduq-matching-primary, .primary-action");
+    if (event.data.confirm && confirm && typeof confirm.click === "function") confirm.click();
+  });
+
   function mascotAsset(
     source,
     alt
@@ -1991,8 +2008,8 @@ html body #root .duduq-engine-stage[data-duduq-fit="compact"] .duduq-ts-arena {
             return;
           }
 
-          // The approved Gold Master is already a complete browser artifact;
-          // never rewrite it with the historical universal release bootstrap.
+          // The approved Gold Master is the behavior engine artifact. Keep
+          // its existing lifecycle and mount it as the nonvisual engine.
           iframe.src = runtimeUrl;
           return;
 

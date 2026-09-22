@@ -9,24 +9,24 @@
     const shell = document.createElement("div");
     shell.className = "duduq-target-shooter-visual-shell";
     Object.assign(shell.style, { position: "relative", width: "100%", height: "100%", minHeight: "0", overflow: "hidden" });
-    const goldenOnly = new URLSearchParams(global.location.search).get("mode") === "golden-test";
-    const visualHost = goldenOnly ? document.createElement("div") : null;
-    if (visualHost) Object.assign(visualHost.style, { position: "absolute", inset: "0", zIndex: "1", pointerEvents: "auto" });
+    const visualHost = document.createElement("div");
+    Object.assign(visualHost.style, { position: "absolute", inset: "0", zIndex: "1", pointerEvents: "auto" });
     const gameplayHost = document.createElement("div");
     // The legacy mechanic remains the behavior/input owner, but its visual shell
     // must never compete with the Penpot package mounted below it.
     // A real iframe is deliberately kept visible and receives the user's
     // native pointer events.  Do not emulate clicks from the package SVG.
-    Object.assign(gameplayHost.style, { position: "absolute", inset: "0", zIndex: "0", opacity: "1", pointerEvents: "auto" });
-    if (visualHost) shell.append(visualHost);
+    Object.assign(gameplayHost.style, { display: "none", width: "0", height: "0", overflow: "hidden", opacity: "0", pointerEvents: "none" });
+    shell.append(visualHost);
     shell.append(gameplayHost);
     container.appendChild(shell);
-    const runtime = visualHost ? new global.DuduQScreenRuntime(visualHost) : null;
-    if (visualHost) visualHost.__duduqScreenRuntime = runtime;
+    const runtime = new global.DuduQScreenRuntime(visualHost);
+    visualHost.__duduqScreenRuntime = runtime;
     let disposed = false;
     let frame = null;
     let geometryLoadHandler = null;
-    (goldenOnly ? global.DuduQVisualPackages.loadVisualPackage(PACKAGE_BASE, PACKAGE_NAME) : Promise.resolve(null))
+    let gameplayBinding = null;
+    global.DuduQVisualPackages.loadVisualPackage(PACKAGE_BASE, PACKAGE_NAME)
       .then((pkg) => {
         if (disposed) return;
         if (!pkg) return;
@@ -42,14 +42,13 @@
         if (!nextFrame) return;
         if (geometryLoadHandler && frame) frame.removeEventListener("load", geometryLoadHandler);
         frame = nextFrame;
-        const applyGeometry = () => global.DuduQRuntimeGeometry?.apply({ frame, mechanic: "Target Shooter", screenId: "50f514fe-4a8a-804d-8008-aa23c3818e55" });
-        geometryLoadHandler = applyGeometry;
-        frame.addEventListener("load", geometryLoadHandler);
-        applyGeometry();
+        const bindGameplay = () => { gameplayBinding?.dispose?.(); gameplayBinding = runtime.bindVisibleGameplay({ frame, mode: "target-shooter" }); };
+        frame.addEventListener("load", bindGameplay, { once: true });
+        if (frame.contentDocument?.body) bindGameplay();
         frame.setAttribute("data-duduq-visual-runtime", "target-shooter");
         frame.style.setProperty("visibility", "visible", "important");
       },
-      dispose() { disposed = true; if (geometryLoadHandler && frame) frame.removeEventListener("load", geometryLoadHandler); runtime?.dispose(); shell.remove(); },
+      dispose() { disposed = true; gameplayBinding?.dispose?.(); runtime?.dispose(); shell.remove(); },
       runtime
     };
   }

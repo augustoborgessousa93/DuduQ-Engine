@@ -25,7 +25,8 @@
       "pluginManifest": "http://localhost:4400/manifest.json",
       "websocket": "ws://localhost:4402",
       "serverCommand": "node dist/index.js",
-      "pluginCommand": "node node_modules/vite/bin/vite.js preview --host localhost --port 4400"
+      "pluginCommand": "node node_modules/vite/bin/vite.js preview --host localhost --port 4400",
+      "bootstrap": "scripts/duduq-penpot-bootstrap.mjs uses C:\\Program Files\\Git\\bin\\bash.exe -lc with the registered serverRoot/pluginRoot commands; starts only missing 4400/4401/4402 services"
     }
   },
   "commands": {
@@ -81,12 +82,13 @@
       "version": "gold-master-clean-v2"
     }
   },
-  "currentArchitecture": "Penpot LIVE -> Design Graph -> lossless Visual Package -> Universal Screen Host -> behavior/game runtime -> E2E validation -> atomic activation -> successful state -> Git",
+  "currentArchitecture": "Penpot LIVE -> complete screen Visual Package -> single visible LIVE_VISUAL_PACKAGE tree -> existing Gold Master behavior engine -> E2E validation -> atomic activation -> successful state -> Git",
   "visualSourceOfTruth": "Penpot generated markup/style/font payload",
-  "visualSyncGovernance": "PENPOT_VISUAL_SYNC_IS_SCREEN_WIDE_AND_NODE_GENERIC; behavior bindings never exempt visual nodes or descendants from compilation; runtime geometry uses the current screen hierarchy and one uniform board-to-iframe scale while Gold Master behavior remains authoritative",
+  "visualSyncGovernance": "PENPOT_IS_THE_ONLY_VISUAL_AUTHORITY; complete screen replacement is atomic; behavior bindings contain semantic identities only; legacy iframe geometry projection and property/component visual patches are not production paths",
   "noChangesContract": "NO_CHANGES requires liveSourceHash == lastAppliedSourceHash, active package/runtime visual hash health PASS, and unchanged Gold Master identity; otherwise return VISUAL_DRIFT_DETECTED and reconcile",
   "universalHost": "core/duduq-screen-runtime.js",
   "behaviorRuntime": ["mechanics/matching.js", "mechanics/target-shooter.js"],
+  "behaviorManifests": ["design-system/runtime/screens/matching-master/bindings.json", "design-system/runtime/screens/target-shooter-master/bindings.json"],
   "successfulGraph": "design-system/penpot-sync/graph/last-successful.json",
   "knownLimitations": ["Human interaction verification must use isolated Playwright Chromium; external CDP/browser sessions are not valid."],
   "operationalPrerequisites": ["Penpot plugin connected to http://localhost:4401/mcp", "Playwright-compatible Chromium for isolated visual tests"],

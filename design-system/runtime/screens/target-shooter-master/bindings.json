@@ -5,6 +5,12 @@
       "sourceId": "50f514fe-4a8a-804d-8008-aa23c3818e55",
       "semanticId": "target-shooter-screen",
       "action": "TARGET_SHOOTER_SCREEN"
-    }
+    },
+    { "sourceId": "50f514fe-4a8a-804d-8008-aa23cf33ea21", "semanticId": "targetShooter-target-0", "action": "TARGET_POINTER", "index": 0 },
+    { "sourceId": "50f514fe-4a8a-804d-8008-aa23cf232404", "semanticId": "targetShooter-target-1", "action": "TARGET_POINTER", "index": 1 },
+    { "sourceId": "50f514fe-4a8a-804d-8008-aa23cef4423e", "semanticId": "targetShooter-target-2", "action": "TARGET_POINTER", "index": 2 },
+    { "sourceId": "50f514fe-4a8a-804d-8008-aa23cd73e6f9", "semanticId": "targetShooter-target-3", "action": "TARGET_POINTER", "index": 3 },
+    { "sourceId": "50f514fe-4a8a-804d-8008-aa23cd62cb20", "semanticId": "targetShooter-target-4", "action": "TARGET_POINTER", "index": 4 },
+    { "sourceId": "50f514fe-4a8a-804d-8008-aa23cbdacdf4", "semanticId": "targetShooter-target-5", "action": "TARGET_POINTER", "index": 5 }
   ]
 }

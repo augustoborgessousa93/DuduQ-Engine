@@ -25,31 +25,29 @@
     const shell = document.createElement("div");
     shell.className = "duduq-matching-visual-shell";
     Object.assign(shell.style, { position: "relative", width: "100%", height: "100%", minHeight: "0", overflow: "hidden" });
-    const goldenOnly = new URLSearchParams(global.location.search).get("mode") === "golden-test";
-    const visualHost = goldenOnly ? document.createElement("div") : null;
-    // Live Penpot visuals are the authored paint layer.  The Gold Master
-    // remains underneath as the behavior/input owner; pointer-events:none on
-    // the visual layer lets native input fall through to it.
-    if (visualHost) Object.assign(visualHost.style, { position: "absolute", inset: "0", zIndex: "1", pointerEvents: "auto" });
+    // The compiled screen is the production scene, not a regression-only
+    // overlay.  Never condition this on a route or a component selector.
+    const visualHost = document.createElement("div");
+    Object.assign(visualHost.style, { position: "absolute", inset: "0", zIndex: "1", pointerEvents: "auto" });
     const gameplayHost = document.createElement("div");
     // The proven mechanic owns behavior; it must not obscure Penpot visuals.
-    Object.assign(gameplayHost.style, { position: "absolute", inset: "0", zIndex: "0", opacity: "1", pointerEvents: "auto" });
-    if (visualHost) shell.append(visualHost);
+    Object.assign(gameplayHost.style, { display: "none", width: "0", height: "0", overflow: "hidden", opacity: "0", pointerEvents: "none" });
+    shell.append(visualHost);
     shell.append(gameplayHost);
     container.appendChild(shell);
 
-    const runtime = visualHost ? new global.DuduQScreenRuntime(visualHost) : null;
-    if (visualHost) visualHost.__duduqScreenRuntime = runtime;
+    const runtime = new global.DuduQScreenRuntime(visualHost);
+    visualHost.__duduqScreenRuntime = runtime;
     let detachAudio = null;
     let observer = null;
     let frame = null;
     let geometryLoadHandler = null;
+    let gameplayBinding = null;
     let disposed = false;
-    let audioProxy = null;
 
     const question = (payload?.questions || payload?.items || [payload])[0] || {};
     const matching = question.metadata?.matching || {};
-    (goldenOnly ? global.DuduQVisualPackages.loadVisualPackage(PACKAGE_BASE, PACKAGE_NAME) : Promise.resolve(null))
+    global.DuduQVisualPackages.loadVisualPackage(PACKAGE_BASE, PACKAGE_NAME)
       .then((pkg) => {
         if (disposed) return;
         if (!pkg) return;
@@ -60,27 +58,8 @@
           setText(runtime.lookup(SOURCES.words[index]), item.label || item.spokenText || item.alt || "");
         });
         detachAudio = runtime.bind(SOURCES.audio, "click", () => {
-          frame?.contentDocument?.querySelector(".audio-button, .duduq-matching-audio")?.click();
+          frame?.contentWindow?.postMessage({ type: "DUDUQ_BEHAVIOR_ACTION", action: "PLAY_QUESTION_AUDIO" }, "*");
         });
-        const source = runtime.lookup(SOURCES.audio);
-        if (source) {
-          audioProxy = document.createElement("button");
-          audioProxy.type = "button";
-          audioProxy.className = "duduq-matching-audio-binding";
-          audioProxy.setAttribute("data-source-id", SOURCES.audio);
-          audioProxy.setAttribute("aria-label", "Ouvir a pergunta");
-          Object.assign(audioProxy.style, { position: "absolute", zIndex: "2", border: "0", background: "transparent", cursor: "pointer" });
-          const placeAudioProxy = () => {
-            const sourceBox = source.getBoundingClientRect();
-            const shellBox = shell.getBoundingClientRect();
-            Object.assign(audioProxy.style, { left: `${sourceBox.left - shellBox.left}px`, top: `${sourceBox.top - shellBox.top}px`, width: `${sourceBox.width}px`, height: `${sourceBox.height}px` });
-          };
-          audioProxy.addEventListener("click", () => frame?.contentDocument?.querySelector(".audio-button, .duduq-matching-audio")?.click());
-          shell.appendChild(audioProxy);
-          placeAudioProxy();
-          global.addEventListener("resize", placeAudioProxy, { passive: true });
-          audioProxy.__duduqDispose = () => global.removeEventListener("resize", placeAudioProxy);
-        }
         visualHost.setAttribute("data-duduq-visual-package", pkg.manifest.screenId);
       })
       .catch((error) => {
@@ -94,10 +73,9 @@
         if (geometryLoadHandler && frame) frame.removeEventListener("load", geometryLoadHandler);
         frame = nextFrame;
         if (!frame) return;
-        const applyGeometry = () => global.DuduQRuntimeGeometry?.apply({ frame, mechanic: "Matching", screenId: "50f514fe-4a8a-804d-8008-aa3b1478e03a" });
-        geometryLoadHandler = applyGeometry;
-        frame.addEventListener("load", geometryLoadHandler);
-        if (frame.contentDocument?.body) applyGeometry();
+        const bindGameplay = () => { gameplayBinding?.dispose?.(); gameplayBinding = runtime.bindVisibleGameplay({ frame, mode: "matching" }); };
+        frame.addEventListener("load", bindGameplay, { once: true });
+        if (frame.contentDocument?.body) bindGameplay();
         if (!frame.contentDocument?.body) return;
         observer?.disconnect();
         observer = new MutationObserver(() => {
@@ -108,11 +86,8 @@
       },
       dispose() {
         disposed = true;
-        if (geometryLoadHandler && frame) frame.removeEventListener("load", geometryLoadHandler);
         observer?.disconnect();
         detachAudio?.();
-        audioProxy?.__duduqDispose?.();
-        audioProxy?.remove();
         runtime?.dispose();
         shell.remove();
       },

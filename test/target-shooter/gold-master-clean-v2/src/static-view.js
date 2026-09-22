@@ -143,4 +143,12 @@ const celebration = DuduQFX(document.querySelector(".success-celebration-layer")
 const activitySuccess = () => game.dispatchEvent(new CustomEvent("activity-success", { bubbles: true, detail: { source: "target-shooter" } }));
 game.addEventListener("activity-success", () => celebration.play("success"));
 const gameplay = TargetShooterGameplay({ game, arena: document.querySelector(".target-shooter-arena"), launcher, feedback, showFeedback, activitySuccess });
+window.addEventListener("message", (event) => {
+  if (!event.data || event.data.type !== "DUDUQ_BEHAVIOR_ACTION") return;
+  if (event.data.action === "TARGET_POINTER") {
+    const targets = [...document.querySelectorAll(".duduq-ts-target, .target-shooter-target")];
+    targets[Math.max(0, Math.min(targets.length - 1, Number(event.data.index) || 0))]?.click();
+  }
+  if (event.data.action === "PLAY_QUESTION_AUDIO") document.querySelector(".duduq-ts-audio-button, .audio-button")?.click();
+});
 window.DuduQTargetShooterStatic = Object.freeze({ shell, launcher, gameplay, celebration, showFeedback, activitySuccess });

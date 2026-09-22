@@ -5,6 +5,11 @@
       "sourceId": "50f514fe-4a8a-804d-8008-aa3b16cea7b7",
       "semanticId": "question-audio",
       "action": "PLAY_QUESTION_AUDIO"
-    }
+    },
+    { "sourceId": "50f514fe-4a8a-804d-8008-aa3b1db7746c", "semanticId": "matching-option-left-0", "action": "VISIBLE_NODE_CLICK", "index": 0 },
+    { "sourceId": "50f514fe-4a8a-804d-8008-aa3b1d452e60", "semanticId": "matching-option-left-1", "action": "VISIBLE_NODE_CLICK", "index": 1 },
+    { "sourceId": "50f514fe-4a8a-804d-8008-aa3b1ccee288", "semanticId": "matching-option-left-2", "action": "VISIBLE_NODE_CLICK", "index": 2 },
+    { "sourceId": "50f514fe-4a8a-804d-8008-aa3b1c62f1ee", "semanticId": "matching-option-left-3", "action": "VISIBLE_NODE_CLICK", "index": 3 },
+    { "sourceId": "5dd4e3b0-280f-8016-8008-aa60f7b1e4e9", "semanticId": "matching-confirm", "action": "VISIBLE_NODE_CLICK", "confirm": true }
   ]
 }

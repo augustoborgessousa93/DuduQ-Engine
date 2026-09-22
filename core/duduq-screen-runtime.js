@@ -140,8 +140,9 @@
         }
         if (!target) return null;
         const init = { bubbles: true, cancelable: true, composed: true, clientX: x - frameBox.left, clientY: y - frameBox.top, button: event.button, buttons: event.buttons, pointerId: event.pointerId || 1, pointerType: event.pointerType || "mouse" };
-        if (type === "click") target.dispatchEvent(new MouseEvent("click", init));
-        else target.dispatchEvent(new PointerEvent(type, init));
+        const sourceId = node?.id?.replace(/^shape-/, "") || null;
+        const mapped = sourceId ? this.getBinding(sourceId)?.binding : null;
+        frame.contentWindow?.postMessage({ type: "DUDUQ_BEHAVIOR_ACTION", action: mapped?.action || (mode === "target-shooter" ? "TARGET_POINTER" : "VISIBLE_NODE_CLICK"), sourceId, index: mapped?.index ?? (mode === "target-shooter" ? targetNodes().indexOf(node.closest?.(".target-ring") || node) : visibleNodes().indexOf(node)), confirm: Boolean(mapped?.confirm) }, "*");
         return target;
       };
       const handle = (event) => {
@@ -165,7 +166,7 @@
           }
           lastNode = node;
           forward(event, "click", node);
-        } else forward(event, event.type, node);
+        }
       };
       surface.style.pointerEvents = "auto";
       svg.style.pointerEvents = "auto";

@@ -8,7 +8,7 @@
 - Penpot `generateMarkup`, `generateStyle`, `generateFontFaces`, and `export_shape` provide the lossless visual payload.
 - **Visual Packages** under `design-system/runtime/screens/` are versioned runtime artifacts.
 - **DuduQScreenRuntime** in `core/duduq-screen-runtime.js` is the generic visual host.
-- Behavior/game runtime remains separate from visual markup. Matching and Target Shooter are validated consumers.
+- Behavior/game runtime remains separate from visual markup. Matching and Target Shooter are validated consumers; their Gold Master DOM is behavior-only and is never a second visible scene.
 - **Git** is the technical source of truth for checkpoints, rollback, and continuation.
 - Golden visual verification launches its own isolated Playwright Chromium; it never requires an external CDP port or a human browser session.
 
@@ -44,7 +44,7 @@ The normal human command is `npm run duduq:update-core`. It does not require a c
 
 `design-system/runtime/screens/matching-master/` and `target-shooter-master/` contain `manifest.json`, generated markup, styles, fonts, and bindings. Package hashes are recorded in `DUDUQ_PROJECT_STATE.json` and in the successful graph metadata.
 
-The host is shared. Screen-specific behavior belongs in the existing mechanic integration layer. Human mechanic previews expose only the Gold Master iframe as the visible scene; the Visual Package is mounted only by the explicit `mode=golden-test` regression route.
+The host is shared. Screen-specific behavior belongs in the existing mechanic integration layer. Human mechanic previews expose the complete LIVE_VISUAL_PACKAGE tree as the only visible scene; the Gold Master iframe is hidden and used only as a behavior engine. Interactive behavior is rebound to visible Penpot source nodes through `bindings.json`.
 
 ## Future work
 
@@ -58,4 +58,4 @@ Failed staged packages are rejected before activation and the previous active pa
 
 ## Known limitations
 
-No unresolved functional limitation is known. Operationally, live capture requires a connected Penpot plugin. Visual and human-interaction verification launches isolated Playwright Chromium and must not depend on external CDP, `127.0.0.1:9223`, or a browser opened by a user.
+Live capture requires a connected Penpot plugin. Visual and human-interaction verification launches isolated Playwright Chromium and must not depend on external CDP, `127.0.0.1:9223`, or a browser opened by a user. Legacy iframe geometry projection is deprecated and is not loaded by production previews.

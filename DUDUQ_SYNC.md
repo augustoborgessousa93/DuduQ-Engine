@@ -31,10 +31,10 @@ The command accepts no component, node, or property selector. It always evaluate
 1. Connect to the configured Penpot MCP endpoint and capture the authorized Design Graph.
 2. Validate graph completeness and compare the current graph with `design-system/penpot-sync/graph/last-successful.json`.
 3. Identify affected screens from the generic graph diff.
-4. Compile only affected screens with `scripts/compile-penpot-screen.mjs` and Penpot-generated markup/style/font payloads. The delta report is node-generic and includes changed, added, removed, reparented/reordered, asset, typography, geometry, and style changes.
+4. Compile each affected screen as a complete replacement package with `scripts/compile-penpot-screen.mjs` and Penpot-generated markup/style/font payloads. The delta report is node-generic and includes changed, added, removed, reparented/reordered, asset, typography, geometry, and style changes; no property-specific projection is used.
 5. Stage and validate the complete Visual Package (`manifest.json`, markup, styles, fonts, bindings).
 6. Atomically activate staged packages; a failed stage leaves the previous package active.
-7. Validate the Universal Screen Host and the existing consumers (Matching and Target Shooter).
+7. Mount the package as the only visible runtime tree, bind the existing Gold Master behavior engine to its semantic nodes, and validate the existing consumers (Matching and Target Shooter).
 8. Promote the raw current graph and package hashes only after validation passes.
 9. Commit the resulting checkpoint in Git.
 10. Resolve the affected consumers' real local preview routes, ensure the preview server is running, perform HTTP health checks, and return clickable verification URLs. A successful update must never end with only “Core atualizado”. When there are no changes, return the current relevant consumer URLs as well.

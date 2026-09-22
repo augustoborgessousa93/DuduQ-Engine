@@ -59,5 +59,19 @@
   <script src="data/gold-master-content.js"></script>
   <script type="module" src="src/result-fx.js"></script>
   <script type="module" src="src/app.js"></script>
+  <script>
+    window.addEventListener("message", (event) => {
+      if (!event.data || event.data.type !== "DUDUQ_BEHAVIOR_ACTION") return;
+      if (event.data.action === "PLAY_QUESTION_AUDIO") {
+        document.querySelector(".duduq-matching-audio, .audio-button")?.click();
+        return;
+      }
+      if (event.data.action !== "VISIBLE_NODE_CLICK") return;
+      const cards = [...document.querySelectorAll(".matching-card, .duduq-mq-card")];
+      const card = cards[Math.max(0, Math.min(cards.length - 1, Number(event.data.index) || 0))];
+      card?.click();
+      if (event.data.confirm) document.querySelector(".primary-action")?.click();
+    });
+  </script>
 </body>
 </html>
