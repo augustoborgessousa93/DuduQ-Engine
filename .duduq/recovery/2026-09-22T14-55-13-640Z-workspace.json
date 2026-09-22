@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-09-22T14:55:13.640Z",
+  "workspace": "C:\\Users\\augus\\Downloads\\workspace",
+  "fileCount": 11012,
+  "git": {
+    "available": true,
+    "branch": "feat/design-sync-primary-button-v1",
+    "head": "0d25ba4f487939b435f69d621263125114e27db1",
+    "status": "M .duduq/AUTOPILOT_STATUS.json\n M .duduq/LAST_VALIDATION.json\n M core/duduq-canonical-header-hud.css\n M design-system/penpot-sync/graph/current-live.json\n?? DUDUQ_DESIGN_CONTRACT_V1.md\n?? DUDUQ_DRAG_DROP.html\n?? artifacts/\n?? design-system/penpot-sync/generated-preview/\n?? design-system/penpot-sync/generated/\n?? design-system/penpot-sync/input/\n?? design-system/penpot-sync/reports/\n?? design-system/penpot-sync/schema/authorized-penpot-export.schema.json\n?? design-system/penpot-sync/semantic-bindings.json\n?? design-system/primary-button-component-contract.json\n?? design-system/runtime-snapshots/\n?? design-system/runtime/golden/matching-master.svg\n?? design-system/runtime/golden/previews/\n?? design-system/runtime/golden/target-shooter-master.svg\n?? test/penpot-sync/duduq-penpot-transformer.test.mjs\n?? test/penpot-sync/duduq-semantic-binding.test.mjs",
+    "remote": "origin\thttps://github.com/augustoborgessousa93/DuduQ-Engine.git (fetch)\norigin\thttps://github.com/augustoborgessousa93/DuduQ-Engine.git (push)"
+  },
+  "importantFiles": [
+    "AGENTS.md",
+    "package.json"
+  ],
+  "protectedPenpot": {
+    "headerMain": "88954f25-7a86-800b-8008-a87e6f0d4e44",
+    "questionMain": "88954f25-7a86-800b-8008-a87e700a22e9",
+    "controlPanel": "855af85f-faf4-8069-8008-a8e75a3255fd"
+  },
+  "penpotSync": {
+    "status": "CONTROLLED_SYNC_READY",
+    "reason": "Penpot MCP write gate and native property reads verified for the connected Control Panel session; continuous live sync remains unavailable.",
+    "components": {},
+    "lastSyncTime": "2026-09-19T13:30:00-03:00",
+    "lastSyncDirection": "PENPOT_READ_TO_SNAPSHOT"
+  }
+}
