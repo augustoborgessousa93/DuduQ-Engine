@@ -527,3 +527,5 @@ Continuity metadata initialized. Subsequent checkpoints append validated state c
 - 2026-09-21T12:57:37.547Z checkpoint PASS; branch test/penpot-core-transformer-v1; commit 03a2d151e40f8e501119b66b80d5e20037fe9aac.
 
 - 2026-09-21T12:59:58.335Z checkpoint PASS; branch test/penpot-core-transformer-v1; commit 5a4e243cb5834cbf0b0e19d84ee33e2025a54b37.
+
+- 2026-09-22T02:03:21.711Z checkpoint PASS; branch feat/design-sync-primary-button-v1; commit 8a5c73c78bf00625e0f0a3de218b9087c99bb667.
