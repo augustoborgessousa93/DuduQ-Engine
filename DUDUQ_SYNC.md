@@ -53,6 +53,7 @@ node test/runtime/target-shooter-universal-host.e2e.mjs
 node test/runtime/capture-golden-previews.mjs
 node test/runtime/golden-visual-regression.mjs
 npm run test:visual-golden
+npm run test:human-interaction
 npm run duduq:update-core -- --dry-run
 npm run duduq:update-core
 ```
@@ -69,3 +70,7 @@ The runner health-checks each resolved URL and returns its HTTP status and click
 `npm run test:visual-golden` is the authoritative Golden-vs-runtime visual regression command. It starts an isolated headless Chromium through Playwright, ensures the preview server, waits for the live package/fonts/assets, captures only the approved board clip, and compares the real SVG runtime against the Penpot Golden at DPR 1 and DPR 2. Visual verification MUST NOT depend on an external CDP endpoint, `127.0.0.1:9223`, or a browser session opened by a user.
 
 The remaining consumer E2E commands use the existing browser harness where available; the Golden visual gate itself is CI-safe and self-contained.
+
+## Human interaction contract
+
+`npm run test:human-interaction` opens the exact human preview URLs in isolated Playwright Chromium and performs real mouse movement and pointer down/up on visible SVG/DOM elements. It proves the visible Penpot package receives the event and changes state. It never calls gameplay APIs, dispatches synthetic events from the test, or targets hidden legacy controls. `GAMEPLAY API PASS` is not `INTERACTION PASS`.

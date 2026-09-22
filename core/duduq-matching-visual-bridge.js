@@ -28,7 +28,7 @@
     const visualHost = document.createElement("div");
     Object.assign(visualHost.style, { position: "absolute", inset: "0", zIndex: "0" });
     const gameplayHost = document.createElement("div");
-    Object.assign(gameplayHost.style, { position: "absolute", inset: "0", zIndex: "1", opacity: "0", pointerEvents: "auto" });
+    Object.assign(gameplayHost.style, { position: "absolute", inset: "0", zIndex: "1", opacity: "0", pointerEvents: "none" });
     shell.append(visualHost, gameplayHost);
     container.appendChild(shell);
 
@@ -37,6 +37,7 @@
     let detachAudio = null;
     let observer = null;
     let frame = null;
+    let visibleInteraction = null;
     let disposed = false;
     let audioProxy = null;
 
@@ -46,6 +47,7 @@
       .then((pkg) => {
         if (disposed) return;
         runtime.mount(pkg);
+        if (frame) visibleInteraction = runtime.bindVisibleGameplay({ frame, mode: "matching" });
         setText(runtime.lookup(SOURCES.question), question.statement || question.prompt || "");
         setText(runtime.lookup(SOURCES.instruction), question.instruction || "");
         (matching.leftItems || []).slice(0, SOURCES.words.length).forEach((item, index) => {
@@ -84,6 +86,8 @@
       gameplayHost,
       setFrame(nextFrame) {
         frame = nextFrame;
+        visibleInteraction?.dispose?.();
+        visibleInteraction = runtime.bindVisibleGameplay({ frame, mode: "matching" });
         if (!frame?.contentDocument) return;
         observer?.disconnect();
         observer = new MutationObserver(() => {
@@ -95,6 +99,7 @@
       dispose() {
         disposed = true;
         observer?.disconnect();
+        visibleInteraction?.dispose?.();
         detachAudio?.();
         audioProxy?.__duduqDispose?.();
         audioProxy?.remove();

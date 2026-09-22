@@ -31,7 +31,8 @@
     "goldenCapture": "node test/runtime/capture-golden-previews.mjs",
     "goldenVisualRegression": "node test/runtime/golden-visual-regression.mjs",
     "selfContainedGoldenVisual": "npm run test:visual-golden",
-    "verificationLinksSmoke": "node test/runtime/verification-links-smoke.mjs"
+    "verificationLinksSmoke": "node test/runtime/verification-links-smoke.mjs",
+    "humanInteraction": "npm run test:human-interaction"
   },
   "screenPackages": {
     "root": "design-system/runtime/screens",
@@ -64,14 +65,14 @@
   "universalHost": "core/duduq-screen-runtime.js",
   "behaviorRuntime": ["mechanics/matching.js", "mechanics/target-shooter.js"],
   "successfulGraph": "design-system/penpot-sync/graph/last-successful.json",
-  "knownLimitations": [],
+  "knownLimitations": ["Human interaction verification must use isolated Playwright Chromium; external CDP/browser sessions are not valid."],
   "operationalPrerequisites": ["Penpot plugin connected to http://localhost:4401/mcp", "Playwright-compatible Chromium for isolated visual tests"],
   "verification": {
     "requiredAfterUpdateCore": true,
     "previewServerScript": "scripts/duduq-test-server.mjs",
     "serverDefaultPort": 4175,
     "healthCheckRequired": true,
-    "verifiedDefinition": ["HTTP_200", "ACTIVE_PACKAGE_HASH", "VISUAL_PACKAGE_DOM_MOUNTED", "GOLDEN_NOT_RUNTIME", "SVG_ROOT_PRESENT", "PACKAGE_ASSETS_RESOLVED", "GOLDEN_VS_INTERACTIVE_RUNTIME_REGRESSION", "GAMEPLAY_E2E", "HIGH_DPI_VECTOR_FIDELITY"],
+    "verifiedDefinition": ["HTTP_200", "ACTIVE_PACKAGE_HASH", "VISUAL_PACKAGE_DOM_MOUNTED", "GOLDEN_NOT_RUNTIME", "SVG_ROOT_PRESENT", "PACKAGE_ASSETS_RESOLVED", "GOLDEN_VS_INTERACTIVE_RUNTIME_REGRESSION", "GAMEPLAY_E2E", "REAL_VISIBLE_POINTER_INTERACTION", "HIGH_DPI_VECTOR_FIDELITY"],
     "routes": {
       "matching": "/runtime/preview/?mechanic=matching",
       "target-shooter": "/runtime/preview/?mechanic=target-shooter"

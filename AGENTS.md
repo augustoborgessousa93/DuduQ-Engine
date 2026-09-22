@@ -23,3 +23,5 @@ When the user says **“Atualize o Core”**:
 - ensure the official preview server is running and HTTP-health-check every verification URL;
 - ALWAYS include verified clickable mechanic preview links in the final response, including for `NO_CHANGES` when the relevant consumer is known.
 - Never call a preview “verified” from HTTP 200 alone: require active package-hash, package-asset, golden-visual, and gameplay-E2E health.
+- `GAMEPLAY API PASS` is not `INTERACTION PASS`: verified mechanics require real Playwright mouse/pointer input on visible Penpot package nodes and an observable visible state transition. Hidden legacy DOM, direct runtime calls, `dispatchEvent`, and test-only controls are invalid proof.
+- Human preview URLs must remain LIVE_VISUAL_PACKAGE routes and never default to Golden/static fixture mode.

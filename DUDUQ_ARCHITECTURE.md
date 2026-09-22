@@ -58,4 +58,4 @@ Failed staged packages are rejected before activation and the previous active pa
 
 ## Known limitations
 
-No unresolved functional limitation is known. Operationally, live capture requires a connected Penpot plugin and browser E2E requires the existing local Chrome/CDP test setup.
+No unresolved functional limitation is known. Operationally, live capture requires a connected Penpot plugin. Visual and human-interaction verification launches isolated Playwright Chromium and must not depend on external CDP, `127.0.0.1:9223`, or a browser opened by a user.
