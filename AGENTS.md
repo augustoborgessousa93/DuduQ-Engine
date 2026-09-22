@@ -7,6 +7,8 @@ For “ATUALIZE O CORE” and its aliases, run the documented Universal Sync pro
 
 Critical rules:
 
+- Never recover an older mechanic merely because it was historically known to be playable. Always resolve the current approved Gold Master from project state and repository evidence. Penpot updates Gold Master visuals; it does not select or replace the mechanic version.
+
 - Do not redesign the sync architecture or create a V3.
 - Do not add property-specific visual handlers or component-specific visual adapters.
 - Do not use `--component` for normal “ATUALIZE O CORE”.
