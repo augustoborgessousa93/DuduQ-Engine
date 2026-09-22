@@ -15,7 +15,8 @@
         "duduq:autopilot:start": "node scripts/duduq-autopilot.mjs start",
         "duduq:autopilot:stop": "node scripts/duduq-autopilot.mjs stop",
         "duduq:penpot:sync:check": "node scripts/duduq-penpot-export-to-core.mjs --check",
-        "duduq:penpot:sync:test": "node test/penpot-sync/duduq-penpot-transformer.test.mjs"
+        "duduq:penpot:sync:test": "node test/penpot-sync/duduq-penpot-transformer.test.mjs",
+        "test:visual-golden": "node test/runtime/self-contained-golden-visual.mjs"
     },
     "dependencies": {
         "@modelcontextprotocol/sdk": "^1.30.0"

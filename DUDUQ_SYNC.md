@@ -52,6 +52,7 @@ node test/runtime/matching-universal-host.e2e.mjs
 node test/runtime/target-shooter-universal-host.e2e.mjs
 node test/runtime/capture-golden-previews.mjs
 node test/runtime/golden-visual-regression.mjs
+npm run test:visual-golden
 npm run duduq:update-core -- --dry-run
 npm run duduq:update-core
 ```
@@ -65,4 +66,6 @@ The official preview server is `scripts/duduq-test-server.mjs` (default port `41
 
 The runner health-checks each resolved URL and returns its HTTP status and clickable URL in the `verification.urls` result. A link is **VERIFIED** only when HTTP is `200`, the active package hash matches its manifest, all package-local visual assets resolve, the golden visual regression passes, and the consumer E2E passes. HTTP health alone is never sufficient. These routes mount the real Visual Package through `DuduQScreenRuntime` and the real mechanic runtime; they are not Penpot or static fixture links.
 
-The last four commands are the live regression path; the E2E commands use the existing local browser test harness.
+`npm run test:visual-golden` is the authoritative Golden-vs-runtime visual regression command. It starts an isolated headless Chromium through Playwright, ensures the preview server, waits for the live package/fonts/assets, captures only the approved board clip, and compares the real SVG runtime against the Penpot Golden at DPR 1 and DPR 2. Visual verification MUST NOT depend on an external CDP endpoint, `127.0.0.1:9223`, or a browser session opened by a user.
+
+The remaining consumer E2E commands use the existing browser harness where available; the Golden visual gate itself is CI-safe and self-contained.

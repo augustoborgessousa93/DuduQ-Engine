@@ -30,6 +30,7 @@
     "targetShooterE2E": "node test/runtime/target-shooter-universal-host.e2e.mjs",
     "goldenCapture": "node test/runtime/capture-golden-previews.mjs",
     "goldenVisualRegression": "node test/runtime/golden-visual-regression.mjs",
+    "selfContainedGoldenVisual": "npm run test:visual-golden",
     "verificationLinksSmoke": "node test/runtime/verification-links-smoke.mjs"
   },
   "screenPackages": {
@@ -64,7 +65,7 @@
   "behaviorRuntime": ["mechanics/matching.js", "mechanics/target-shooter.js"],
   "successfulGraph": "design-system/penpot-sync/graph/last-successful.json",
   "knownLimitations": [],
-  "operationalPrerequisites": ["Penpot plugin connected to http://localhost:4401/mcp", "local Chrome/CDP test harness for E2E"],
+  "operationalPrerequisites": ["Penpot plugin connected to http://localhost:4401/mcp", "Playwright-compatible Chromium for isolated visual tests"],
   "verification": {
     "requiredAfterUpdateCore": true,
     "previewServerScript": "scripts/duduq-test-server.mjs",

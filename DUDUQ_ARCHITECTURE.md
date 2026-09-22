@@ -10,6 +10,7 @@
 - **DuduQScreenRuntime** in `core/duduq-screen-runtime.js` is the generic visual host.
 - Behavior/game runtime remains separate from visual markup. Matching and Target Shooter are validated consumers.
 - **Git** is the technical source of truth for checkpoints, rollback, and continuation.
+- Golden visual verification launches its own isolated Playwright Chromium; it never requires an external CDP port or a human browser session.
 
 ## Official flow
 
