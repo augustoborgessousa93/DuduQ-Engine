@@ -25,6 +25,7 @@
     if (visualHost) visualHost.__duduqScreenRuntime = runtime;
     let disposed = false;
     let frame = null;
+    let geometryLoadHandler = null;
     (goldenOnly ? global.DuduQVisualPackages.loadVisualPackage(PACKAGE_BASE, PACKAGE_NAME) : Promise.resolve(null))
       .then((pkg) => {
         if (disposed) return;
@@ -39,11 +40,16 @@
       gameplayHost,
       setFrame(nextFrame) {
         if (!nextFrame) return;
+        if (geometryLoadHandler && frame) frame.removeEventListener("load", geometryLoadHandler);
         frame = nextFrame;
+        const applyGeometry = () => global.DuduQRuntimeGeometry?.apply({ frame, mechanic: "Target Shooter", screenId: "50f514fe-4a8a-804d-8008-aa23c3818e55" });
+        geometryLoadHandler = applyGeometry;
+        frame.addEventListener("load", geometryLoadHandler);
+        applyGeometry();
         frame.setAttribute("data-duduq-visual-runtime", "target-shooter");
         frame.style.setProperty("visibility", "visible", "important");
       },
-      dispose() { disposed = true; runtime?.dispose(); shell.remove(); },
+      dispose() { disposed = true; if (geometryLoadHandler && frame) frame.removeEventListener("load", geometryLoadHandler); runtime?.dispose(); shell.remove(); },
       runtime
     };
   }

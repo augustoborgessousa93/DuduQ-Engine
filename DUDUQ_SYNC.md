@@ -91,3 +91,13 @@ The remaining consumer E2E commands use the existing browser harness where avail
 ## Human interaction contract
 
 `npm run test:human-interaction` opens the exact human preview URLs in isolated Playwright Chromium and performs real mouse movement and pointer down/up on visible SVG/DOM elements. It proves the visible Penpot package receives the event and changes state. It never calls gameplay APIs, dispatches synthetic events from the test, or targets hidden legacy controls. `GAMEPLAY API PASS` is not `INTERACTION PASS`.
+
+## Runtime geometry ownership
+
+Penpot geometry is applied in the existing Gold Master iframe through the
+generic screen property map and live graph. The applier resolves nodes by the
+current screen hierarchy, uses one uniform board scale in the iframe CSS
+coordinate space, and applies only visual transforms and editable dimensions.
+Flex/grid reflow must not restore legacy positions; gameplay listeners, state,
+hit testing, and progression remain owned by the Gold Master. Geometry drift in
+any mapped node is runtime visual drift, not `NO_CHANGES`.

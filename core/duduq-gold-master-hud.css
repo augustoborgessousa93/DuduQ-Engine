@@ -160,15 +160,15 @@
 .duduq-mq-instruction {
   position: relative !important;
   box-sizing: border-box !important;
-  display: grid !important;
-  grid-template-columns: 1fr calc(56px * var(--duduq-gold-scale)) !important;
+  display: flex !important;
+  grid-template-columns: none !important;
   align-items: center !important;
   width: var(--duduq-gold-question-width) !important;
   height: calc(86px * var(--duduq-gold-scale)) !important;
   min-height: calc(86px * var(--duduq-gold-scale)) !important;
   margin: calc(24px * var(--duduq-gold-scale)) auto 0 !important;
-  padding: calc(5px * var(--duduq-gold-scale)) calc(13px * var(--duduq-gold-scale)) calc(8px * var(--duduq-gold-scale)) calc(44px * var(--duduq-gold-scale)) !important;
-  gap: calc(12px * var(--duduq-gold-scale)) !important;
+  padding: calc(12px * var(--duduq-gold-scale)) calc(13px * var(--duduq-gold-scale)) calc(12px * var(--duduq-gold-scale)) calc(44px * var(--duduq-gold-scale)) !important;
+  gap: 0 !important;
   border: 1px solid #e8d3a6 !important;
   border-radius: var(--duduq-gold-radius-question) !important;
   background: rgba(255,252,243,.96) !important;

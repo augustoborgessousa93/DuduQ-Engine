@@ -83,7 +83,7 @@
   },
   "currentArchitecture": "Penpot LIVE -> Design Graph -> lossless Visual Package -> Universal Screen Host -> behavior/game runtime -> E2E validation -> atomic activation -> successful state -> Git",
   "visualSourceOfTruth": "Penpot generated markup/style/font payload",
-  "visualSyncGovernance": "PENPOT_VISUAL_SYNC_IS_SCREEN_WIDE_AND_NODE_GENERIC; behavior bindings never exempt visual nodes or descendants from compilation",
+  "visualSyncGovernance": "PENPOT_VISUAL_SYNC_IS_SCREEN_WIDE_AND_NODE_GENERIC; behavior bindings never exempt visual nodes or descendants from compilation; runtime geometry uses the current screen hierarchy and one uniform board-to-iframe scale while Gold Master behavior remains authoritative",
   "noChangesContract": "NO_CHANGES requires liveSourceHash == lastAppliedSourceHash, active package/runtime visual hash health PASS, and unchanged Gold Master identity; otherwise return VISUAL_DRIFT_DETECTED and reconcile",
   "universalHost": "core/duduq-screen-runtime.js",
   "behaviorRuntime": ["mechanics/matching.js", "mechanics/target-shooter.js"],

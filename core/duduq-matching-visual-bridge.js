@@ -43,6 +43,7 @@
     let detachAudio = null;
     let observer = null;
     let frame = null;
+    let geometryLoadHandler = null;
     let disposed = false;
     let audioProxy = null;
 
@@ -90,8 +91,14 @@
     return {
       gameplayHost,
       setFrame(nextFrame) {
+        if (geometryLoadHandler && frame) frame.removeEventListener("load", geometryLoadHandler);
         frame = nextFrame;
-        if (!frame?.contentDocument) return;
+        if (!frame) return;
+        const applyGeometry = () => global.DuduQRuntimeGeometry?.apply({ frame, mechanic: "Matching", screenId: "50f514fe-4a8a-804d-8008-aa3b1478e03a" });
+        geometryLoadHandler = applyGeometry;
+        frame.addEventListener("load", geometryLoadHandler);
+        if (frame.contentDocument?.body) applyGeometry();
+        if (!frame.contentDocument?.body) return;
         observer?.disconnect();
         observer = new MutationObserver(() => {
           const liveQuestion = frame.contentDocument.querySelector(".duduq-matching-instruction")?.textContent?.trim();
@@ -101,6 +108,7 @@
       },
       dispose() {
         disposed = true;
+        if (geometryLoadHandler && frame) frame.removeEventListener("load", geometryLoadHandler);
         observer?.disconnect();
         detachAudio?.();
         audioProxy?.__duduqDispose?.();
