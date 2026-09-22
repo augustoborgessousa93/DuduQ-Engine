@@ -10,5 +10,6 @@ export async function connectPenpot({url="http://localhost:4401/mcp",timeoutMs=1
   const tools=await client.request({method:"tools/list",params:{}},ListToolsResultSchema);
   const execute=tools.tools.find(t=>t.name==="execute_code" || t.name.endsWith("execute_code"));
   if(!execute){await client.close();throw Error("REQUIRED_MCP_TOOL_UNAVAILABLE")}
-  return {client,tools:tools.tools,executeName:execute.name,async execute(code){return client.request({method:"tools/call",params:{name:execute.name,arguments:{code}}},CallToolResultSchema)},async close(){await client.close()}};
+  const exportShape=tools.tools.find(t=>t.name==="export_shape");
+  return {client,tools:tools.tools,executeName:execute.name,async execute(code){return client.request({method:"tools/call",params:{name:execute.name,arguments:{code}}},CallToolResultSchema)},async exportShape(arguments_){if(!exportShape)throw Error("REQUIRED_MCP_TOOL_UNAVAILABLE:export_shape");return client.request({method:"tools/call",params:{name:exportShape.name,arguments:arguments_}},CallToolResultSchema)},async close(){await client.close()}};
 }

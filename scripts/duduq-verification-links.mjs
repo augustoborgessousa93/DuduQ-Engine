@@ -9,6 +9,15 @@ const defaultPort = Number(process.env.DUDUQ_TEST_PORT || 4175);
 const routeMap = { matching: "/runtime/preview/?mechanic=matching", "target-shooter": "/runtime/preview/?mechanic=target-shooter" };
 
 function state() { return JSON.parse(fs.readFileSync(statePath, "utf8")); }
+function packageHealth(consumer, project) {
+  const packageName = consumer === "matching" ? "matching-master" : "target-shooter-master";
+  const dir = path.join(root, "design-system/runtime/screens", packageName);
+  const manifest = JSON.parse(fs.readFileSync(path.join(dir, "manifest.json"), "utf8"));
+  const visual = fs.readFileSync(path.join(dir, "visual.svg"), "utf8");
+  const assets = [...visual.matchAll(/(?:href|url\([^)]*)["']?(assets\/[A-Za-z0-9._-]+)/g)].map((m) => m[1]);
+  const missingAssets = [...new Set(assets)].filter((asset) => !fs.existsSync(path.join(dir, asset)));
+  return { manifest, packageHash: manifest.hashes?.markup, missingAssets, goldenVisualHealth: manifest.hashes?.reference && fs.existsSync(path.join(dir, "visual-reference.png")) ? "PASS" : "FAIL" };
+}
 function consumerForScreen(name) { return name.startsWith("target-shooter") ? "target-shooter" : name.startsWith("matching") ? "matching" : null; }
 function consumersFor({ changedScreens = [], noChanges = false } = {}) {
   const found = [...new Set(changedScreens.map((s) => consumerForScreen(typeof s === "string" ? s : s.packageName)).filter(Boolean))];
@@ -33,9 +42,10 @@ export async function resolveVerificationUrls({ changedScreens = [], noChanges =
   const urls = consumers.map((consumer) => {
     const packageName = consumer === "matching" ? "matching-master" : "target-shooter-master";
     const build = packageHashes[packageName] || project.screenPackages?.[packageName] || "current";
-    return { consumer, url: `${server.base}${routeMap[consumer]}&build=${encodeURIComponent(build)}`, route: routeMap[consumer], status: 0 };
+    const health = packageHealth(consumer, project);
+    return { consumer, url: `${server.base}${routeMap[consumer]}&build=${encodeURIComponent(build)}`, route: routeMap[consumer], status: 0, packageHash: health.packageHash, packageHashHealth: health.packageHash === build || build === "current" ? "PASS" : "FAIL", assetHealth: health.missingAssets.length ? "FAIL" : "PASS", goldenVisualHealth: health.goldenVisualHealth, missingAssets: health.missingAssets.length };
   });
-  for (const item of urls) { if (!(await healthy(server.base, item.route))) throw new Error(`PREVIEW_HEALTH_FAILED:${item.consumer}`); item.status = 200; }
+  for (const item of urls) { if (!(await healthy(server.base, item.route))) throw new Error(`PREVIEW_HEALTH_FAILED:${item.consumer}`); if (item.assetHealth !== "PASS") throw new Error(`PREVIEW_ASSET_HEALTH_FAILED:${item.consumer}`); if (item.goldenVisualHealth !== "PASS") throw new Error(`PREVIEW_GOLDEN_HEALTH_FAILED:${item.consumer}`); item.status = 200; }
   return urls;
 }
 export { routeMap, consumersFor };

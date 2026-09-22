@@ -32,13 +32,16 @@ function screenChanges(changes) {
   return result;
 }
 
-function validatePackage(dir) {
-  const required = ["manifest.json", "visual.svg", "styles.css", "fonts.css", "bindings.json"];
-  for (const file of required) if (!fs.existsSync(path.join(dir, file))) throw new Error(`VISUAL_PACKAGE_INVALID:${file}`);
-  const manifest = read(path.join(dir, "manifest.json"));
-  if (!manifest.screenId || !manifest.hashes?.markup || !manifest.hashes?.styles) throw new Error("VISUAL_PACKAGE_INVALID:manifest");
-  return manifest;
-}
+  function validatePackage(dir) {
+    const required = ["manifest.json", "visual.svg", "styles.css", "fonts.css", "bindings.json", "visual-reference.png"];
+    for (const file of required) if (!fs.existsSync(path.join(dir, file))) throw new Error(`VISUAL_PACKAGE_INVALID:${file}`);
+    const manifest = read(path.join(dir, "manifest.json"));
+    if (!manifest.screenId || !manifest.hashes?.markup || !manifest.hashes?.styles || !manifest.hashes?.reference) throw new Error("VISUAL_PACKAGE_INVALID:manifest");
+    const visual = fs.readFileSync(path.join(dir, "visual.svg"), "utf8");
+    const refs = [...visual.matchAll(/(?:href|xlink:href)=["']([^"']+)["']/g)].map((match) => match[1]).filter((ref) => !/^(data:|https?:|#|mailto:|javascript:)/i.test(ref));
+    for (const ref of refs) if (!fs.existsSync(path.resolve(dir, ref))) throw new Error(`VISUAL_PACKAGE_INVALID:asset:${ref}`);
+    return manifest;
+  }
 
 function promote(graph, packageHashes, metadata = {}) {
   const staged = { ...graph, metadata: { ...graph.metadata, graphHash: hash(graph) }, successfulSnapshot: { ...metadata, packageHashes, promotedAt: new Date().toISOString() } };
@@ -61,7 +64,7 @@ export async function runLiveGraph({ dryRun = false } = {}) {
   const currentHash = hash(current);
   const previousHash = hash(previous);
   const base = { capture: "PASS", currentGraphHash: currentHash, successfulGraphHash: previousHash, changedScreens, changesDetected: changes.length, captureDurationMs: captureResult?.durationMs ?? Date.now() - started, promoted: false };
-  if (dryRun) return { ...base, result: changes.length ? "CHANGE_DETECTED" : "NO_CHANGES", promotion: "SKIPPED", verification: { urls: await resolveVerificationUrls({ changedScreens, noChanges: !changes.length }) } };
+  if (dryRun) return { ...base, result: changes.length ? "CHANGE_DETECTED" : "NO_CHANGES", promotion: "SKIPPED", verification: { urls: await resolveVerificationUrls({ changedScreens, noChanges: !changes.length || !changedScreens.length }) } };
   if (!changes.length) return { ...base, result: "NO_CHANGES", verification: { urls: await resolveVerificationUrls({ noChanges: true, packageHashes: previous.successfulSnapshot?.packageHashes || {} }) } };
 
   const stageRoot = path.join(root, `.duduq-runtime-stage-${process.pid}`);

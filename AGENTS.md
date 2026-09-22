@@ -22,3 +22,4 @@ When the user says **“Atualize o Core”**:
 - resolve the consumers actually affected by the live change;
 - ensure the official preview server is running and HTTP-health-check every verification URL;
 - ALWAYS include verified clickable mechanic preview links in the final response, including for `NO_CHANGES` when the relevant consumer is known.
+- Never call a preview “verified” from HTTP 200 alone: require active package-hash, package-asset, golden-visual, and gameplay-E2E health.

@@ -12,7 +12,9 @@
     const visualHost = document.createElement("div");
     Object.assign(visualHost.style, { position: "absolute", inset: "0", zIndex: "0", pointerEvents: "none" });
     const gameplayHost = document.createElement("div");
-    Object.assign(gameplayHost.style, { position: "absolute", inset: "0", zIndex: "1", pointerEvents: "auto" });
+    // The legacy mechanic remains the behavior/input owner, but its visual shell
+    // must never compete with the Penpot package mounted below it.
+    Object.assign(gameplayHost.style, { position: "absolute", inset: "0", zIndex: "1", opacity: "0", pointerEvents: "auto" });
     shell.append(visualHost, gameplayHost);
     container.appendChild(shell);
     const runtime = new global.DuduQScreenRuntime(visualHost);
@@ -29,7 +31,14 @@
       });
     return {
       gameplayHost,
-      setFrame(frame) { if (frame) frame.setAttribute("data-duduq-visual-runtime", "target-shooter"); },
+      setFrame(frame) {
+        if (!frame) return;
+        frame.setAttribute("data-duduq-visual-runtime", "target-shooter");
+        // Keep the legacy document as an input/behavior surface only. Its
+        // generated scene must never paint over the Penpot visual package.
+        frame.style.setProperty("opacity", "0", "important");
+        frame.style.setProperty("visibility", "visible", "important");
+      },
       dispose() { disposed = true; runtime.dispose(); shell.remove(); },
       runtime
     };

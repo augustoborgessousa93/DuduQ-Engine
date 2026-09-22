@@ -50,6 +50,8 @@ node test/penpot-sync/duduq-screen-runtime.test.mjs
 node test/runtime/universal-visual-change-matrix.mjs
 node test/runtime/matching-universal-host.e2e.mjs
 node test/runtime/target-shooter-universal-host.e2e.mjs
+node test/runtime/capture-golden-previews.mjs
+node test/runtime/golden-visual-regression.mjs
 npm run duduq:update-core -- --dry-run
 npm run duduq:update-core
 ```
@@ -61,6 +63,6 @@ The official preview server is `scripts/duduq-test-server.mjs` (default port `41
 - Matching: `/runtime/preview/?mechanic=matching`
 - Target Shooter: `/runtime/preview/?mechanic=target-shooter`
 
-The runner health-checks each resolved URL and returns its HTTP status and clickable URL in the `verification.urls` result. These routes mount the real Visual Package through `DuduQScreenRuntime` and the real mechanic runtime; they are not Penpot or static fixture links.
+The runner health-checks each resolved URL and returns its HTTP status and clickable URL in the `verification.urls` result. A link is **VERIFIED** only when HTTP is `200`, the active package hash matches its manifest, all package-local visual assets resolve, the golden visual regression passes, and the consumer E2E passes. HTTP health alone is never sufficient. These routes mount the real Visual Package through `DuduQScreenRuntime` and the real mechanic runtime; they are not Penpot or static fixture links.
 
 The last four commands are the live regression path; the E2E commands use the existing local browser test harness.

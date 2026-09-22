@@ -28,12 +28,14 @@
     "matrixTest": "node test/runtime/universal-visual-change-matrix.mjs",
     "matchingE2E": "node test/runtime/matching-universal-host.e2e.mjs",
     "targetShooterE2E": "node test/runtime/target-shooter-universal-host.e2e.mjs",
+    "goldenCapture": "node test/runtime/capture-golden-previews.mjs",
+    "goldenVisualRegression": "node test/runtime/golden-visual-regression.mjs",
     "verificationLinksSmoke": "node test/runtime/verification-links-smoke.mjs"
   },
   "screenPackages": {
     "root": "design-system/runtime/screens",
-    "matching-master": "3314324286f72742a75feb295a9a2ef2918bda1d9efbf1e76db7458c637f16f3",
-    "target-shooter-master": "e114bff26d5ff6e15abce9339a5b1e0fd8d8c5f509ad68ccdff24d27408db134"
+    "matching-master": "6a64eb93058a8cfedfdd2738807ffe40a236b9e92016f667dfcedbf086795341",
+    "target-shooter-master": "9787bbdc7fcb433c2aef237e346d5c253f7313da62a9977d9269f7fac81743f6"
   },
   "validatedCapabilities": [
     "live Penpot capture",
@@ -68,10 +70,20 @@
     "previewServerScript": "scripts/duduq-test-server.mjs",
     "serverDefaultPort": 4175,
     "healthCheckRequired": true,
+    "verifiedDefinition": ["HTTP_200", "ACTIVE_PACKAGE_HASH", "PACKAGE_ASSETS_RESOLVED", "GOLDEN_VISUAL_REGRESSION", "GAMEPLAY_E2E"],
     "routes": {
       "matching": "/runtime/preview/?mechanic=matching",
       "target-shooter": "/runtime/preview/?mechanic=target-shooter"
     }
   },
-  "nextSafeAction": "edit Penpot in an authorized screen and run npm run duduq:update-core; return verified clickable preview URLs"
+  "goldenVisualFidelity": {
+    "matchingBoardId": "50f514fe-4a8a-804d-8008-aa3b1478e03a",
+    "targetShooterBoardId": "50f514fe-4a8a-804d-8008-aa23c3818e55",
+    "matchingReference": "design-system/runtime/screens/matching-master/visual-reference.png",
+    "targetShooterReference": "design-system/runtime/screens/target-shooter-master/visual-reference.png",
+    "matchingSSIM": 1,
+    "targetShooterSSIM": 1,
+    "assetHealth": "PASS"
+  },
+  "nextSafeAction": "edit Penpot in an authorized screen and run npm run duduq:update-core; return verified clickable preview URLs only after golden visual and gameplay validation"
 }

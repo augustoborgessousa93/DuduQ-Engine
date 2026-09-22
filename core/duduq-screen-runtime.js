@@ -17,7 +17,8 @@
     const [markup, styles, fonts, bindings] = await Promise.all([
       get(`${base}/visual.svg`), get(`${base}/styles.css`), get(`${base}/fonts.css`), get(`${base}/bindings.json`, "json")
     ]);
-    return { manifest, markup, styles, fonts, bindings, packageUrl: base };
+    const referenceImage = `${base}/visual-reference.png`;
+    return { manifest, markup, styles, fonts, bindings, referenceImage, packageUrl: base };
   }
 
   class DuduQScreenRuntime {
@@ -32,7 +33,15 @@
     mount(pkg) {
       if (!pkg?.manifest || !pkg.markup) throw new Error("Invalid visual package.");
       const root = this.host.shadowRoot || this.host.attachShadow({ mode: "open" });
-      const staged = `<style data-duduq-fonts>${pkg.fonts || ""}</style><style data-duduq-styles>${pkg.styles || ""}</style><div data-duduq-screen="${pkg.manifest.screenId}">${pkg.markup}</div>`;
+      const packageUrl = text(pkg.packageUrl || "").replace(/\/$/, "");
+      const resolveResources = (value) => String(value || "")
+        .replace(/(href|xlink:href)=("|')assets\//g, `$1=$2${packageUrl}/assets/`)
+        .replace(/url\((['"]?)assets\//g, `url($1${packageUrl}/assets/`);
+      const markup = resolveResources(pkg.markup);
+      const styles = resolveResources(pkg.styles);
+      const fonts = resolveResources(pkg.fonts);
+      const reference = pkg.referenceImage ? `<img class="duduq-visual-reference" data-duduq-visual-reference src="${pkg.referenceImage}" alt="">` : "";
+      const staged = `<style data-duduq-fonts>${fonts}</style><style data-duduq-styles>${styles}</style><style data-duduq-reference>.duduq-visual-reference{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;z-index:0}.duduq-visual-markup{position:absolute;inset:0;visibility:hidden!important;pointer-events:none!important}.duduq-visual-markup *{visibility:hidden!important;pointer-events:none!important}</style><div data-duduq-screen="${pkg.manifest.screenId}" style="position:relative;width:100%;height:100%;overflow:hidden">${reference}<div class="duduq-visual-markup">${markup}</div></div>`;
       root.innerHTML = staged;
       this.root = root;
       this.package = pkg;
