@@ -14,14 +14,14 @@ npm run duduq:update-core
 npm run duduq:update-core -- --dry-run
 ```
 
-Normal operation never requires `--component`, a node ID, a property name, or a manual snapshot. `--component question-audio` remains an advanced diagnostic route only.
+The command accepts no component, node, or property selector. It always evaluates the complete live screen graph; component-targeted visual sync is not supported.
 
 ## Universal live protocol
 
 1. Connect to the configured Penpot MCP endpoint and capture the authorized Design Graph.
 2. Validate graph completeness and compare the current graph with `design-system/penpot-sync/graph/last-successful.json`.
 3. Identify affected screens from the generic graph diff.
-4. Compile only affected screens with `scripts/compile-penpot-screen.mjs` and Penpot-generated markup/style/font payloads.
+4. Compile only affected screens with `scripts/compile-penpot-screen.mjs` and Penpot-generated markup/style/font payloads. The delta report is node-generic and includes changed, added, removed, reparented/reordered, asset, typography, geometry, and style changes.
 5. Stage and validate the complete Visual Package (`manifest.json`, markup, styles, fonts, bindings).
 6. Atomically activate staged packages; a failed stage leaves the previous package active.
 7. Validate the Universal Screen Host and the existing consumers (Matching and Target Shooter).
@@ -65,7 +65,7 @@ The official preview server is `scripts/duduq-test-server.mjs` (default port `41
 - Matching: `/runtime/preview/?mechanic=matching`
 - Target Shooter: `/runtime/preview/?mechanic=target-shooter`
 
-The runner health-checks each resolved URL and returns its HTTP status and clickable URL in the `verification.urls` result. A link is **VERIFIED** only when HTTP is `200`, the active package hash matches its manifest, all package-local visual assets resolve, the golden visual regression passes, and the consumer E2E passes. HTTP health alone is never sufficient. These routes mount the real Visual Package through `DuduQScreenRuntime` and the real mechanic runtime; they are not Penpot or static fixture links.
+The runner health-checks each resolved URL and returns its HTTP status and clickable URL in the `verification.urls` result. A link is **VERIFIED** only when HTTP is `200`, the active package hash matches its manifest, all package-local visual assets resolve, the golden visual regression passes, and the consumer E2E passes. HTTP health alone is never sufficient. Human routes mount exactly one visible Gold Master mechanic scene; the Visual Package is reserved for `mode=golden-test` regression capture and is never a second human-preview layer.
 
 `npm run test:visual-golden` is the authoritative Golden-vs-runtime visual regression command. It starts an isolated headless Chromium through Playwright, ensures the preview server, waits for the live package/fonts/assets, captures only the approved board clip, and compares the real SVG runtime against the Penpot Golden at DPR 1 and DPR 2. Visual verification MUST NOT depend on an external CDP endpoint, `127.0.0.1:9223`, or a browser session opened by a user.
 

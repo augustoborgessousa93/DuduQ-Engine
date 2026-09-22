@@ -9,24 +9,26 @@
     const shell = document.createElement("div");
     shell.className = "duduq-target-shooter-visual-shell";
     Object.assign(shell.style, { position: "relative", width: "100%", height: "100%", minHeight: "0", overflow: "hidden" });
-    const visualHost = document.createElement("div");
-    Object.assign(visualHost.style, { position: "absolute", inset: "0", zIndex: "1", pointerEvents: "none" });
+    const goldenOnly = new URLSearchParams(global.location.search).get("mode") === "golden-test";
+    const visualHost = goldenOnly ? document.createElement("div") : null;
+    if (visualHost) Object.assign(visualHost.style, { position: "absolute", inset: "0", zIndex: "1", pointerEvents: "auto" });
     const gameplayHost = document.createElement("div");
     // The legacy mechanic remains the behavior/input owner, but its visual shell
     // must never compete with the Penpot package mounted below it.
     // A real iframe is deliberately kept visible and receives the user's
     // native pointer events.  Do not emulate clicks from the package SVG.
-    const goldenOnly = new URLSearchParams(global.location.search).get("mode") === "golden-test";
-    Object.assign(gameplayHost.style, { position: "absolute", inset: "0", zIndex: "0", opacity: goldenOnly ? "0" : "1", pointerEvents: goldenOnly ? "none" : "auto" });
-    shell.append(visualHost, gameplayHost);
+    Object.assign(gameplayHost.style, { position: "absolute", inset: "0", zIndex: "0", opacity: "1", pointerEvents: "auto" });
+    if (visualHost) shell.append(visualHost);
+    shell.append(gameplayHost);
     container.appendChild(shell);
-    const runtime = new global.DuduQScreenRuntime(visualHost);
-    visualHost.__duduqScreenRuntime = runtime;
+    const runtime = visualHost ? new global.DuduQScreenRuntime(visualHost) : null;
+    if (visualHost) visualHost.__duduqScreenRuntime = runtime;
     let disposed = false;
     let frame = null;
-    global.DuduQVisualPackages.loadVisualPackage(PACKAGE_BASE, PACKAGE_NAME)
+    (goldenOnly ? global.DuduQVisualPackages.loadVisualPackage(PACKAGE_BASE, PACKAGE_NAME) : Promise.resolve(null))
       .then((pkg) => {
         if (disposed) return;
+        if (!pkg) return;
         runtime.mount(pkg);
         visualHost.setAttribute("data-duduq-visual-package", pkg.manifest.screenId);
       })
@@ -41,7 +43,7 @@
         frame.setAttribute("data-duduq-visual-runtime", "target-shooter");
         frame.style.setProperty("visibility", "visible", "important");
       },
-      dispose() { disposed = true; runtime.dispose(); shell.remove(); },
+      dispose() { disposed = true; runtime?.dispose(); shell.remove(); },
       runtime
     };
   }

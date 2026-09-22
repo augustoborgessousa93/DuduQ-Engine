@@ -25,20 +25,21 @@
     const shell = document.createElement("div");
     shell.className = "duduq-matching-visual-shell";
     Object.assign(shell.style, { position: "relative", width: "100%", height: "100%", minHeight: "0", overflow: "hidden" });
-    const visualHost = document.createElement("div");
+    const goldenOnly = new URLSearchParams(global.location.search).get("mode") === "golden-test";
+    const visualHost = goldenOnly ? document.createElement("div") : null;
     // Live Penpot visuals are the authored paint layer.  The Gold Master
     // remains underneath as the behavior/input owner; pointer-events:none on
     // the visual layer lets native input fall through to it.
-    Object.assign(visualHost.style, { position: "absolute", inset: "0", zIndex: "1", pointerEvents: "none" });
+    if (visualHost) Object.assign(visualHost.style, { position: "absolute", inset: "0", zIndex: "1", pointerEvents: "auto" });
     const gameplayHost = document.createElement("div");
     // The proven mechanic owns behavior; it must not obscure Penpot visuals.
-    const goldenOnly = new URLSearchParams(global.location.search).get("mode") === "golden-test";
-    Object.assign(gameplayHost.style, { position: "absolute", inset: "0", zIndex: "0", opacity: goldenOnly ? "0" : "1", pointerEvents: goldenOnly ? "none" : "auto" });
-    shell.append(visualHost, gameplayHost);
+    Object.assign(gameplayHost.style, { position: "absolute", inset: "0", zIndex: "0", opacity: "1", pointerEvents: "auto" });
+    if (visualHost) shell.append(visualHost);
+    shell.append(gameplayHost);
     container.appendChild(shell);
 
-    const runtime = new global.DuduQScreenRuntime(visualHost);
-    visualHost.__duduqScreenRuntime = runtime;
+    const runtime = visualHost ? new global.DuduQScreenRuntime(visualHost) : null;
+    if (visualHost) visualHost.__duduqScreenRuntime = runtime;
     let detachAudio = null;
     let observer = null;
     let frame = null;
@@ -47,9 +48,10 @@
 
     const question = (payload?.questions || payload?.items || [payload])[0] || {};
     const matching = question.metadata?.matching || {};
-    global.DuduQVisualPackages.loadVisualPackage(PACKAGE_BASE, PACKAGE_NAME)
+    (goldenOnly ? global.DuduQVisualPackages.loadVisualPackage(PACKAGE_BASE, PACKAGE_NAME) : Promise.resolve(null))
       .then((pkg) => {
         if (disposed) return;
+        if (!pkg) return;
         runtime.mount(pkg);
         setText(runtime.lookup(SOURCES.question), question.statement || question.prompt || "");
         setText(runtime.lookup(SOURCES.instruction), question.instruction || "");
@@ -103,7 +105,7 @@
         detachAudio?.();
         audioProxy?.__duduqDispose?.();
         audioProxy?.remove();
-        runtime.dispose();
+        runtime?.dispose();
         shell.remove();
       },
       runtime

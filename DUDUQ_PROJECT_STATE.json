@@ -74,6 +74,7 @@
   },
   "currentArchitecture": "Penpot LIVE -> Design Graph -> lossless Visual Package -> Universal Screen Host -> behavior/game runtime -> E2E validation -> atomic activation -> successful state -> Git",
   "visualSourceOfTruth": "Penpot generated markup/style/font payload",
+  "visualSyncGovernance": "PENPOT_VISUAL_SYNC_IS_SCREEN_WIDE_AND_NODE_GENERIC; behavior bindings never exempt visual nodes or descendants from compilation",
   "universalHost": "core/duduq-screen-runtime.js",
   "behaviorRuntime": ["mechanics/matching.js", "mechanics/target-shooter.js"],
   "successfulGraph": "design-system/penpot-sync/graph/last-successful.json",
@@ -84,7 +85,7 @@
     "previewServerScript": "scripts/duduq-test-server.mjs",
     "serverDefaultPort": 4175,
     "healthCheckRequired": true,
-    "verifiedDefinition": ["HTTP_200", "ACTIVE_PACKAGE_HASH", "VISUAL_PACKAGE_DOM_MOUNTED", "GOLDEN_NOT_RUNTIME", "SVG_ROOT_PRESENT", "PACKAGE_ASSETS_RESOLVED", "GOLDEN_VS_INTERACTIVE_RUNTIME_REGRESSION", "GAMEPLAY_E2E", "REAL_VISIBLE_POINTER_INTERACTION", "HIGH_DPI_VECTOR_FIDELITY"],
+    "verifiedDefinition": ["HTTP_200", "ACTIVE_PACKAGE_HASH", "HUMAN_VISIBLE_GAME_ROOT_COUNT_1", "STATIC_PENPOT_OVERLAY_COUNT_0", "GOLDEN_NOT_HUMAN_RUNTIME", "PACKAGE_ASSETS_RESOLVED", "GOLDEN_VS_INTERACTIVE_RUNTIME_REGRESSION", "GAMEPLAY_E2E", "REAL_VISIBLE_POINTER_INTERACTION", "HIGH_DPI_VECTOR_FIDELITY"],
     "routes": {
       "matching": "/runtime/preview/?mechanic=matching",
       "target-shooter": "/runtime/preview/?mechanic=target-shooter"

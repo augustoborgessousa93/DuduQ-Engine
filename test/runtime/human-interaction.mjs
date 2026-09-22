@@ -33,12 +33,10 @@ async function ensureServer() {
 }
 
 async function waitRuntime(page) {
-  const packageRoot = page.locator('[data-duduq-runtime-source="LIVE_VISUAL_PACKAGE"]');
-  await packageRoot.waitFor({ state: "attached", timeout: 10000 });
+  const frame = page.locator("iframe").first();
+  await frame.waitFor({ state: "visible", timeout: 10000 });
   await page.waitForFunction(() => document.fonts?.status === "loaded");
-  await page.waitForFunction(() => [...document.images].every((image) => image.complete && image.naturalWidth > 0));
-  await page.waitForFunction(() => [...document.querySelectorAll("*")].some((node) => node.shadowRoot?.querySelector('[data-duduq-runtime-source="LIVE_VISUAL_PACKAGE"] svg')));
-  return packageRoot;
+  return frame;
 }
 
 async function realMouseClick(page, locator) {
@@ -56,20 +54,28 @@ async function realMouseClick(page, locator) {
 
 async function inspect(page) {
   return page.evaluate(() => {
-    const host = [...document.querySelectorAll("*")].find((node) => node.shadowRoot?.querySelector('[data-duduq-runtime-source="LIVE_VISUAL_PACKAGE"]'));
-    const root = host?.shadowRoot;
-    const stage = root?.querySelector('[data-duduq-runtime-source="LIVE_VISUAL_PACKAGE"]');
-    const binding = stage?.__duduqVisibleInteraction;
+    const frames = [...document.querySelectorAll("iframe")];
+    const visibleFrames = frames.filter((frame) => { const style=getComputedStyle(frame); const box=frame.getBoundingClientRect(); return style.visibility !== "hidden" && style.display !== "none" && Number(style.opacity) > 0 && box.width > 0 && box.height > 0; });
+    const packageRoots = [...document.querySelectorAll('[data-duduq-visual-package], [data-duduq-runtime-source="LIVE_VISUAL_PACKAGE"], img[src*="visual-reference"], [data-golden-reference]')];
+    const visiblePackageRoots = packageRoots.filter((node) => { const style=getComputedStyle(node); const box=node.getBoundingClientRect(); return style.visibility !== "hidden" && style.display !== "none" && Number(style.opacity) > 0 && box.width > 0 && box.height > 0; });
+    const gameplayFrame = visibleFrames[0];
+    const frameBox = gameplayFrame?.getBoundingClientRect();
+    const point = frameBox ? { x: frameBox.left + frameBox.width / 2, y: frameBox.top + frameBox.height / 2 } : null;
+    const pointOwner = point ? document.elementFromPoint(point.x, point.y) : null;
     return {
-      packageHash: stage?.dataset.duduqVisualPackageMarkupHash || null,
-      svg: Boolean(root?.querySelector("svg")),
-      runtimeMounted: Boolean(document.querySelector("iframe")),
-      mechanicVersion: document.querySelector("iframe")?.dataset.mechanicVersion || null,
-      goldMasterCommit: document.querySelector("iframe")?.dataset.goldMasterCommit || null,
-      goldMasterPath: document.querySelector("iframe")?.dataset.goldMasterPath || null,
-      feedback: root?.querySelector("[data-duduq-visible-feedback]")?.textContent || "",
-      diagnostics: binding?.diagnostics || [],
-      visibleMechanicFrames: [...document.querySelectorAll("iframe")].filter((frame) => { const style=getComputedStyle(frame); return style.opacity !== "0" && style.pointerEvents !== "none"; }).length
+      packageHash: null,
+      svg: Boolean(gameplayFrame?.contentDocument?.querySelector("svg")),
+      runtimeMounted: Boolean(gameplayFrame),
+      mechanicVersion: gameplayFrame?.dataset.mechanicVersion || null,
+      goldMasterCommit: gameplayFrame?.dataset.goldMasterCommit || null,
+      goldMasterPath: gameplayFrame?.dataset.goldMasterPath || null,
+      feedback: gameplayFrame?.contentDocument?.body?.innerText || "",
+      diagnostics: [],
+      visibleMechanicFrames: visibleFrames.length,
+      visibleGameRoots: visibleFrames.length,
+      staticPenpotOverlays: visiblePackageRoots.length,
+      hiddenPlayableGameUnderPreview: false
+      ,elementFromPointOwner: pointOwner === gameplayFrame ? "GOLD_MASTER_IFRAME" : pointOwner?.tagName || null
     };
   });
 }
@@ -90,7 +96,8 @@ async function matching(page) {
   const feedback = await game.locator(".feedback-ribbon").getAttribute("data-feedback");
   const questionTwo = await game.locator("body").innerText();
   assert(feedback === "correct", "Matching confirm did not reach the real mechanic success state");
-  assert(result.svg && result.runtimeMounted, "Matching Visual Package/runtime mount missing");
+  assert(result.runtimeMounted && result.visibleGameRoots === 1 && result.staticPenpotOverlays === 0, "Matching must expose exactly one playable Gold Master root and no Penpot overlay");
+  assert(result.elementFromPointOwner === "GOLD_MASTER_IFRAME", "Matching elementFromPoint must resolve to the visible Gold Master");
   assert(result.mechanicVersion === "gold-master-candidate-v1" && result.goldMasterCommit === "761127dddaed830ea4f77a0fa292b505577f0a37", "Matching Gold Master identity mismatch");
   assert(result.visibleMechanicFrames === 1, "Matching real mechanic is not visibly interactive");
   assert(/Question two|Avançando/i.test(questionTwo), "Matching did not progress to question two");
@@ -107,7 +114,8 @@ async function targetShooter(page) {
   await page.waitForTimeout(3500);
   const result = await inspect(page);
   const questionTwo = await game.locator("body").innerText();
-  assert(result.svg && result.runtimeMounted, "Target Shooter Visual Package/runtime mount missing");
+  assert(result.runtimeMounted && result.visibleGameRoots === 1 && result.staticPenpotOverlays === 0, "Target Shooter must expose exactly one playable Gold Master root and no Penpot overlay");
+  assert(result.elementFromPointOwner === "GOLD_MASTER_IFRAME", "Target Shooter elementFromPoint must resolve to the visible Gold Master");
   assert(result.mechanicVersion === "gold-master-clean-v2" && result.goldMasterCommit === "761127dddaed830ea4f77a0fa292b505577f0a37", "Target Shooter Gold Master identity mismatch");
   assert(result.visibleMechanicFrames === 1, "Target Shooter real mechanic is not visibly interactive");
   assert(/WHICH ONE IS|Correto|CONTINUAR/i.test(questionTwo), "Target Shooter Gold Master did not produce feedback");

@@ -44,7 +44,7 @@ The normal human command is `npm run duduq:update-core`. It does not require a c
 
 `design-system/runtime/screens/matching-master/` and `target-shooter-master/` contain `manifest.json`, generated markup, styles, fonts, and bindings. Package hashes are recorded in `DUDUQ_PROJECT_STATE.json` and in the successful graph metadata.
 
-The host is shared. Screen-specific behavior belongs in the existing mechanic integration layer; visual mounting is never duplicated as a Matching- or Target-Shooter-specific host.
+The host is shared. Screen-specific behavior belongs in the existing mechanic integration layer. Human mechanic previews expose only the Gold Master iframe as the visible scene; the Visual Package is mounted only by the explicit `mode=golden-test` regression route.
 
 ## Future work
 
