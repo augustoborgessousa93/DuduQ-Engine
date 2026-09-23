@@ -77,12 +77,14 @@ npm run duduq:update-core
 
 ## Verification links
 
-The official preview server is `scripts/duduq-test-server.mjs` (default port `4175`; an available `DUDUQ_TEST_PORT` is honored). The verification registry lives in `DUDUQ_PROJECT_STATE.json` under `verification.routes`:
+The official product server is `scripts/duduq-test-server.mjs` (default port `4175`; an available `DUDUQ_TEST_PORT` is honored). Product routes are `/play/matching/` and `/play/target-shooter/`; QA routes remain under `/runtime/preview/`.
 
-- Matching: `/runtime/preview/?mechanic=matching`
-- Target Shooter: `/runtime/preview/?mechanic=target-shooter`
+- Matching product: `/play/matching/`
+- Target Shooter product: `/play/target-shooter/`
+- Matching QA: `/runtime/preview/?mechanic=matching`
+- Target Shooter QA: `/runtime/preview/?mechanic=target-shooter`
 
-The runner health-checks each resolved URL and returns its HTTP status and clickable URL in the `verification.urls` result. A link is **VERIFIED** only when HTTP is `200`, the active package hash matches its manifest, all package-local visual assets resolve, the golden visual regression passes, and the consumer E2E passes. HTTP health alone is never sufficient. Human routes mount exactly one visible Gold Master mechanic scene; the Visual Package is reserved for `mode=golden-test` regression capture and is never a second human-preview layer.
+The runner health-checks each resolved URL and returns its HTTP status and clickable URL in the `verification.urls` result. A link is **VERIFIED** only when HTTP is `200`, the active package hash matches its manifest, all package-local visual assets resolve, the golden visual regression passes, and the consumer E2E passes. Product and QA routes mount exactly one visible LIVE_VISUAL_PACKAGE scene; the Gold Master is hidden behavior-only.
 
 `npm run test:visual-golden` is the authoritative Golden-vs-runtime visual regression command. It starts an isolated headless Chromium through Playwright, ensures the preview server, waits for the live package/fonts/assets, captures only the approved board clip, and compares the real SVG runtime against the Penpot Golden at DPR 1 and DPR 2. Visual verification MUST NOT depend on an external CDP endpoint, `127.0.0.1:9223`, or a browser session opened by a user.
 
@@ -94,10 +96,6 @@ The remaining consumer E2E commands use the existing browser harness where avail
 
 ## Runtime geometry ownership
 
-Penpot geometry is applied in the existing Gold Master iframe through the
-generic screen property map and live graph. The applier resolves nodes by the
-current screen hierarchy, uses one uniform board scale in the iframe CSS
-coordinate space, and applies only visual transforms and editable dimensions.
-Flex/grid reflow must not restore legacy positions; gameplay listeners, state,
-hit testing, and progression remain owned by the Gold Master. Geometry drift in
-any mapped node is runtime visual drift, not `NO_CHANGES`.
+Penpot geometry is rendered directly by the complete mounted Visual Package.
+The Gold Master iframe is behavior-only; no geometry projection or legacy
+property map is loaded in production.

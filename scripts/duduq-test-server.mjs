@@ -34,6 +34,10 @@ function safePath(urlPath) {
 }
 
 const server = http.createServer((req, res) => {
+  // Canonical product entrypoints use the same live package host as QA, with
+  // the mechanic selected by the route (never a static fixture or screenshot).
+  if (req.url === "/play/matching" || req.url === "/play/matching/") req.url = "/runtime/preview/index.html?mechanic=matching";
+  if (req.url === "/play/target-shooter" || req.url === "/play/target-shooter/") req.url = "/runtime/preview/index.html?mechanic=target-shooter";
   const file = safePath(req.url);
   if (!file) {
     res.writeHead(403, { "Content-Type": "text/plain; charset=utf-8" });

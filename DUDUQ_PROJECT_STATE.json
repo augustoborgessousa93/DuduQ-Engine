@@ -99,8 +99,16 @@
     "healthCheckRequired": true,
     "verifiedDefinition": ["HTTP_200", "ACTIVE_PACKAGE_HASH", "HUMAN_VISIBLE_GAME_ROOT_COUNT_1", "STATIC_PENPOT_OVERLAY_COUNT_0", "GOLDEN_NOT_HUMAN_RUNTIME", "PACKAGE_ASSETS_RESOLVED", "GOLDEN_VS_INTERACTIVE_RUNTIME_REGRESSION", "GAMEPLAY_E2E", "REAL_VISIBLE_POINTER_INTERACTION", "HIGH_DPI_VECTOR_FIDELITY"],
     "routes": {
+      "matching": "/play/matching/",
+      "target-shooter": "/play/target-shooter/"
+    },
+    "qaRoutes": {
       "matching": "/runtime/preview/?mechanic=matching",
       "target-shooter": "/runtime/preview/?mechanic=target-shooter"
+    },
+    "goldenTestRoutes": {
+      "matching": "/runtime/preview/?mechanic=matching&mode=golden-test",
+      "target-shooter": "/runtime/preview/?mechanic=target-shooter&mode=golden-test"
     }
   },
   "goldenVisualFidelity": {
