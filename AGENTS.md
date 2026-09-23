@@ -33,3 +33,4 @@ When the user says **“Atualize o Core”**:
 - Runtime geometry is screen-wide and node-generic: resolve the current Penpot screen hierarchy, apply one uniform board-to-iframe scale and Penpot-owned x/y/size without allowing legacy flex/grid layout to reflow synced nodes. Gold Master behavior, listeners, state, hit testing, and progression remain unchanged.
 
 - Production visual contract: Penpot's complete LIVE_VISUAL_PACKAGE is the only visible scene; Gold Master files are behavior engines only. Do not load legacy iframe geometry projection or property/component visual patching.
+- Product certification contract: `/play/*` must mount `core/duduq-headless-product.js` directly. Headless engines own data/state without DOM queries; final QA requires dynamic progression, zero iframes, native pointer input, video, screenshots, and Playwright traces.

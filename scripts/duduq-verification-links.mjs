@@ -6,7 +6,7 @@ import { spawn } from "node:child_process";
 const root = path.resolve(import.meta.dirname, "..");
 const statePath = path.join(root, "DUDUQ_PROJECT_STATE.json");
 const defaultPort = Number(process.env.DUDUQ_TEST_PORT || 4175);
-const routeMap = { matching: "/runtime/preview/?mechanic=matching", "target-shooter": "/runtime/preview/?mechanic=target-shooter" };
+const routeMap = { matching: "/play/matching/", "target-shooter": "/play/target-shooter/" };
 
 function state() { return JSON.parse(fs.readFileSync(statePath, "utf8")); }
 function packageHealth(consumer, project) {
