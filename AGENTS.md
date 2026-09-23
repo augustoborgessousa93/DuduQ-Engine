@@ -1,5 +1,9 @@
 # DUDUQ Sync
 
+## Mandatory Penpot preflight
+
+Before every Penpot operation—live read, compilation, `Atualize o Core`, mutation, reverse, or production certification—run `scripts/duduq-penpot-bootstrap.mjs`. It must report 4400, 4401, and 4402 healthy, `PLUGIN_CONNECTED`, and `LIVE_PENPOT_DOCUMENT_READ` as `PASS`. Restart missing project-local services automatically through this bootstrap; never substitute a cached graph for a failed live read and never require a user to launch Git Bash.
+
 1. **READ `DUDUQ_PROJECT_STATE.json` FIRST.**
 2. Read `DUDUQ_ARCHITECTURE.md` and `DUDUQ_SYNC.md` before changing the sync.
 

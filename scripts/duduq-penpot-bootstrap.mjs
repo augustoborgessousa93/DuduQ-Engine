@@ -69,16 +69,19 @@ export async function ensurePenpotMcp({ startOnly = false } = {}) {
   if (!ready.plugin || !ready.mcp || !ready.websocket) throw new Error("PENPOT_MCP_SERVICES_NOT_READY");
   if (startOnly) return { before, ready, started, pluginConnected: null };
   let pluginConnected = false;
+  let liveDocumentRead = false;
   const mcp = await connectPenpot();
   try {
-    const result = await mcp.execute("return {ok:true};");
+    const result = await mcp.execute("const matching=penpotUtils.findShapeById('50f514fe-4a8a-804d-8008-aa3b1478e03a');const target=penpotUtils.findShapeById('50f514fe-4a8a-804d-8008-aa23c3818e55');return {ok:true,liveDocumentRead:Boolean(matching&&target)};");
     pluginConnected = Boolean(result?.content?.some((item) => item.type === "text" && item.text.includes('"ok": true')));
+    liveDocumentRead = Boolean(result?.content?.some((item) => item.type === "text" && item.text.includes('"liveDocumentRead":true')));
   } catch (error) {
     if (/No Penpot plugin instances|plugin.*connected/i.test(String(error.message))) throw new Error("PENPOT_PLUGIN_NOT_CONNECTED:\nAbra o Plugin Penpot MCP no Penpot e clique em Connect.");
     throw error;
   } finally { await mcp.close(); }
   if (!pluginConnected) throw new Error("PENPOT_PLUGIN_NOT_CONNECTED:\nAbra o Plugin Penpot MCP no Penpot e clique em Connect.");
-  return { before, ready, started, pluginConnected };
+  if (!liveDocumentRead) throw new Error("LIVE_PENPOT_DOCUMENT_READ_FAILED");
+  return { before, ready, started, pluginConnected, liveDocumentRead, preflight: { PLUGIN_SERVER_4400: "PASS", MCP_4401: "PASS", WEBSOCKET_4402: "PASS", PLUGIN_CONNECTED: "PASS", LIVE_PENPOT_DOCUMENT_READ: "PASS" } };
 }
 
 if (process.argv[1]?.endsWith("duduq-penpot-bootstrap.mjs")) {
