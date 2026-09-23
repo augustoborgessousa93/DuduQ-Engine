@@ -4,7 +4,7 @@
   "status": "PRODUCTION_READY",
   "productionBaseline": "70c1c791",
   "documentationBaseline": "4d0dce29",
-  "lastSuccessfulCommit": "70c1c791",
+  "lastSuccessfulCommit": "3d12cb47",
   "lastCompletedCheckpoint": 6,
   "nextCheckpoint": null,
   "checkpoints": {
@@ -120,5 +120,7 @@
     "targetShooterSSIM": 1,
     "assetHealth": "PASS"
   },
-  "nextSafeAction": "edit Penpot in an authorized screen and run npm run duduq:update-core; return verified clickable preview URLs only after golden visual and gameplay validation"
+  "productionTag": "duduq-exact-penpot-playable-v1",
+  "finalCertification": "artifacts/final-certification/FINAL_CERTIFICATION.json",
+  "nextSafeAction": "edit Penpot in an authorized screen and run npm run duduq:update-core; return verified clickable product URLs only after golden visual and gameplay validation"
 }
