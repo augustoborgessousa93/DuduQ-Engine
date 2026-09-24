@@ -1,1 +1,46 @@
-{"currentPhase":"TRANSITION","currentTask":"Integrate shared flow into Matching and Target Shooter","completedTasks":[],"nextTask":"Run native transition QA, then promote Bubble Pop","blockedTasks":["Official transition artwork is not yet a workspace asset; neutral development container is in use."],"lastCommit":null,"lastTest":null,"productUrls":{"matching":"/play/matching/","targetShooter":"/play/target-shooter/","bubblePop":"/play/bubble-pop/","dragDrop":"/play/drag-drop/"}}
+{
+  "currentPhase": "TRANSITION",
+  "currentTask": "Await the official Penpot transition frame, then run visual fidelity certification",
+  "completedTasks": [
+    "DELIVERY_STATE_PATH_VERIFIED",
+    "SHARED_GAME_FLOW_CREATED",
+    "MATCHING_SUCCESS_FLOW_WIRED",
+    "TARGET_SUCCESS_FLOW_WIRED",
+    "TRANSITION_ROUTE_CREATED",
+    "TRANSITION_EXIT_COMPLETE_NATIVE_QA_PASS",
+    "MATCHING_DOCUMENT_CLEANUP_NATIVE_QA_PASS",
+    "HUMAN_INTERACTION_REGRESSION_PASS",
+    "OFFICIAL_ROUTES_DIRECT_GOLD_MASTERS",
+    "REAL_MATCHING_TO_TARGET_NATIVE_QA_PASS",
+    "CERTIFIER_REFERENCE_GATE_IMPLEMENTED",
+    "BUBBLE_POP_CANDIDATE_AUDITED",
+    "DRAG_DROP_CANDIDATE_AUDITED",
+    "PERFECT_FLOW_CERTIFIER_GATE_IMPLEMENTED",
+    "AAA_FLOW_CERTIFIER_GATE_IMPLEMENTED",
+    "AAA_FLOW_1366X768_NATIVE_REGRESSION_PASS"
+  ],
+  "nextTask": "Create a direct no-iframe Bubble Pop host after the transition visual gate completes",
+  "blockedTasks": [
+    "PENPOT_SECURITY_GATE: browser session can inspect the authenticated official frame but browser policy blocks persisting its PNG locally; required reference is artifacts/delivery/final-flow/penpot-transition-reference.png (1366x768).",
+    "Bubble Pop promotion is deferred until its direct host replaces the legacy iframe adapter.",
+    "Drag & Drop promotion is deferred until its direct host replaces the legacy iframe harness."
+  ],
+  "lastCommit": null,
+  "lastTest": "node test/runtime/real-matching-transition-target.e2e.mjs - PASS at 1366x768; AAA certifier correctly requires the independent Penpot frame",
+  "productUrls": {
+    "matching": "/play/matching/",
+    "transition": "/play/transition/?next=target-shooter",
+    "targetShooter": "/play/target-shooter/",
+    "bubblePopCandidate": "/test/bubble-pop/candidate-1.0.31/"
+  },
+  "evidencePaths": {
+    "video": "artifacts/delivery/REAL-matching-transition-target.webm",
+    "screenshots": [
+      "artifacts/delivery/real-matching.png",
+      "artifacts/delivery/real-transition.png",
+      "artifacts/delivery/target-direct-clean.png",
+      "artifacts/delivery/target-after-transition-clean.png"
+    ],
+    "trace": "artifacts/delivery/REAL-matching-transition-target-trace.zip"
+  }
+}
