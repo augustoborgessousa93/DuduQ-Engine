@@ -3,6 +3,7 @@ import path from "node:path";
 import net from "node:net";
 import { spawn } from "node:child_process";
 import { connectPenpot } from "./penpot-mcp-client.mjs";
+import { resolvePenpotFrame } from "./lib/penpot-frame-discovery.mjs";
 import { ensurePreviewServer } from "./duduq-verification-links.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
@@ -72,9 +73,10 @@ export async function ensurePenpotMcp({ startOnly = false } = {}) {
   let liveDocumentRead = false;
   const mcp = await connectPenpot();
   try {
-    const result = await mcp.execute("const matching=penpotUtils.findShapeById('50f514fe-4a8a-804d-8008-aa3b1478e03a');const target=penpotUtils.findShapeById('50f514fe-4a8a-804d-8008-aa23c3818e55');return {ok:true,liveDocumentRead:Boolean(matching&&target)};");
+    const config={fileId:"d8ac01df-6646-81d2-8008-a2900d806e30",pageId:"855af85f-faf4-8069-8008-a8e75a3255fd",frameName:"TARGET SHOOTER — MASTER / IDLE",aliases:["ATIRADOR DE ALVO — MESTRE / OCIOSO"]};
+    const result = await mcp.execute(`const p=penpotUtils.getPageById('${config.pageId}');const s=n=>({id:n.id,name:n.name,type:n.type,x:n.x,y:n.y,width:n.width,height:n.height,children:(n.children||[]).map(s)});return {ok:true,document:{id:'${config.fileId}',pages:p?[{id:p.id,name:p.name,root:{children:(p.root.children||[]).map(s)}}]:[]}};`);
     pluginConnected = Boolean(result?.content?.some((item) => item.type === "text" && item.text.includes('"ok": true')));
-    liveDocumentRead = Boolean(result?.content?.some((item) => item.type === "text" && item.text.includes('"liveDocumentRead":true')));
+    const text=result?.content?.find((item)=>item.type==="text")?.text||"{}",raw=JSON.parse(text).result??JSON.parse(text); const frame=resolvePenpotFrame({...config,document:raw.document}); liveDocumentRead=Boolean(frame?.frameId);
   } catch (error) {
     if (/No Penpot plugin instances|plugin.*connected/i.test(String(error.message))) throw new Error("PENPOT_PLUGIN_NOT_CONNECTED:\nAbra o Plugin Penpot MCP no Penpot e clique em Connect.");
     throw error;

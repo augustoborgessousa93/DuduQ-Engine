@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { connectPenpot } from "./penpot-mcp-client.mjs";
+import { resolvePenpotFrame } from "./lib/penpot-frame-discovery.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const sha = (value) => crypto.createHash("sha256").update(value).digest("hex");
@@ -17,6 +18,7 @@ export async function compile(name = "matching-master", { outputRoot = path.join
   try {
     let payload;
     client = await connectPenpot();
+    const pageId="855af85f-faf4-8069-8008-a8e75a3255fd",aliases=screen.name.includes("TARGET")?["ATIRADOR DE ALVO — MESTRE / OCIOSO"]:[]; const discovered=await client.execute(`const p=penpotUtils.getPageById('${pageId}');const s=n=>({id:n.id,name:n.name,type:n.type,x:n.x,y:n.y,width:n.width,height:n.height,children:(n.children||[]).map(s)});return {document:{id:'d8ac01df-6646-81d2-8008-a2900d806e30',pages:[{id:p.id,root:{children:(p.root.children||[]).map(s)}}]}};`);const dtext=discovered.content.find(x=>x.type==='text')?.text||'{}';const resolved=resolvePenpotFrame({document:JSON.parse(dtext).result?.document??JSON.parse(dtext).document,fileId:'d8ac01df-6646-81d2-8008-a2900d806e30',pageId,frameId:screen.id,frameName:screen.name,aliases});screen.id=resolved.frameId;screen.name=resolved.frameName;
     const code = `const s=penpotUtils.findShapeById('${screen.id}');if(!s)throw Error('SCREEN_NOT_FOUND');const markup=penpot.generateMarkup([s],{type:'svg'}),styles=penpot.generateStyle([s],{type:'css',withPrelude:true,includeChildren:true}),fonts=await penpot.generateFontFaces([s]);return {markup,styles,fonts}`;
     const result = await client.execute(code);
     const text = result.content.find((item) => item.type === "text")?.text || "";
