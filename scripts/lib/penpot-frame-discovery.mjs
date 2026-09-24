@@ -1,4 +1,4 @@
-export const normalizeFrameName = (name) => String(name ?? "").normalize("NFKC").trim().toLowerCase().replace(/[—–-]/g,"-").replace(/\s*\/\s*/g,"/").replace(/\s+/g," ");
+export const normalizeFrameName = (name) => String(name ?? "").normalize("NFKC").trim().toLowerCase().replace(/\s*[-—–]\s*/g,"-").replace(/\s*\/\s*/g,"/").replace(/\s+/g," ");
 const frames = (page) => (page?.root?.children || page?.children || []).filter((node) => /frame|board/i.test(node.type || "") || node.width > 0 && node.height > 0);
 export function resolvePenpotFrame({ document, fileId, pageId, frameId, frameName, aliases=[] }) {
   if (fileId && document?.id && document.id !== fileId) throw Error("PENPOT_FILE_NOT_FOUND");
