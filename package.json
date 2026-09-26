@@ -16,6 +16,7 @@
         "duduq:autopilot:stop": "node scripts/duduq-autopilot.mjs stop",
         "duduq:penpot:sync:check": "node scripts/duduq-penpot-export-to-core.mjs --check",
         "duduq:penpot:sync:test": "node test/penpot-sync/duduq-penpot-transformer.test.mjs",
+        "penpot": "node scripts/duduq-penpot-bootstrap.mjs --start-only",
         "test:visual-golden": "node test/runtime/self-contained-golden-visual.mjs"
         ,"test:human-interaction": "node test/runtime/human-penpot-authority.mjs",
         "duduq:certify-approved-flow": "node test/runtime/certify-approved-flow.mjs",
