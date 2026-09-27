@@ -17,6 +17,13 @@ const projectState = read(path.join(root, "DUDUQ_PROJECT_STATE.json"));
 const nodes = (items, out = []) => { for (const item of items || []) { out.push(item); nodes(item.children, out); } return out; };
 const sourceState = (graph) => { const copy = { ...graph }; delete copy.metadata; delete copy.successfulSnapshot; return copy; };
 const sourceHash = (graph) => hash(sourceState(graph));
+const graphWithSelectedScreens = (previous, current, selectedIds) => {
+  const currentNodes = new Map(nodes(current.pages).map((node) => [node.penpotId, node]));
+  const replace = (items) => (items || []).map((node) => selectedIds.has(node.penpotId)
+    ? structuredClone(currentNodes.get(node.penpotId))
+    : { ...node, children: replace(node.children) });
+  return { ...structuredClone(previous), pages: replace(previous.pages), metadata: { ...current.metadata } };
+};
 const packageState = () => Object.fromEntries(Object.keys(screens).map((packageName) => {
   const manifest = read(path.join(packageRoot, packageName, "manifest.json"));
   return [packageName, manifest.hashes.markup];
@@ -81,7 +88,8 @@ function promote(graph, packageHashes, metadata = {}) {
   return staged;
 }
 
-export async function runLiveGraph({ dryRun = false } = {}) {
+export async function runLiveGraph({ dryRun = false, screen = null } = {}) {
+  if (screen && !screens[screen]) throw new Error("UNKNOWN_SCREEN");
   const started = Date.now();
   const captureResult = await capture();
   const current = read(currentPath);
@@ -96,11 +104,13 @@ export async function runLiveGraph({ dryRun = false } = {}) {
     .filter((packageName) => previous.successfulSnapshot?.packageHashes?.[packageName] && previous.successfulSnapshot.packageHashes[packageName] !== activePackages[packageName])
     .map((packageName) => ({ packageName, screenId: screens[packageName].id, changes: 0, drift: true }));
   const changedScreens = [...new Map([...screenChanges(changes), ...driftScreens].map((entry) => [entry.packageName, entry])).values()];
+  const screensToApply = screen ? changedScreens.filter((entry) => entry.packageName === screen) : changedScreens;
+  const skippedScreens = screen ? changedScreens.filter((entry) => entry.packageName !== screen) : [];
   const visualDrift = driftScreens.length > 0 || liveSourceHash !== previousSourceHash;
   const currentHash = hash(current);
   const previousHash = hash(previous);
-  const base = { capture: "PASS", currentGraphHash: currentHash, successfulGraphHash: previousHash, liveSourceHash, lastAppliedSourceHash: previousSourceHash, changedScreens, changesDetected: changes.length, visualDrift, visualDeltaReport: visualDeltaReport(changes), captureDurationMs: captureResult?.durationMs ?? Date.now() - started, promoted: false };
-  if (dryRun) return { ...base, result: changes.length ? "CHANGE_DETECTED" : "NO_CHANGES", promotion: "SKIPPED", verification: { urls: await resolveVerificationUrls({ changedScreens, noChanges: !changes.length || !changedScreens.length }) } };
+  const base = { capture: "PASS", currentGraphHash: currentHash, successfulGraphHash: previousHash, liveSourceHash, lastAppliedSourceHash: previousSourceHash, changedScreens, allChangedScreens: changedScreens, selectedScreen: screen, screensToApply, skippedScreens, changesDetected: changes.length, visualDrift, visualDeltaReport: visualDeltaReport(changes), captureDurationMs: captureResult?.durationMs ?? Date.now() - started, promoted: false };
+  if (dryRun) return { ...base, result: screensToApply.length ? "CHANGE_DETECTED" : "NO_SELECTED_SCREEN_CHANGES", promotion: "SKIPPED", verification: { urls: await resolveVerificationUrls({ changedScreens: screensToApply, noChanges: !screensToApply.length }) } };
   if (!changes.length && !visualDrift) return { ...base, result: "NO_CHANGES", verification: { urls: await resolveVerificationUrls({ noChanges: true, packageHashes: activePackages }) } };
 
   const stageRoot = path.join(root, `.duduq-runtime-stage-${process.pid}`);
@@ -109,7 +119,7 @@ export async function runLiveGraph({ dryRun = false } = {}) {
   try {
     fs.rmSync(stageRoot, { recursive: true, force: true });
     fs.mkdirSync(stageRoot, { recursive: true });
-    for (const entry of changedScreens) {
+    for (const entry of screensToApply) {
       const finalDir = path.join(packageRoot, entry.packageName);
       const stageDir = path.join(stageRoot, entry.packageName);
       fs.cpSync(finalDir, stageDir, { recursive: true });
@@ -117,7 +127,7 @@ export async function runLiveGraph({ dryRun = false } = {}) {
       const manifest = validatePackage(stageDir);
       packageHashes[entry.packageName] = manifest.hashes.markup;
     }
-    for (const entry of changedScreens) {
+    for (const entry of screensToApply) {
       const finalDir = path.join(packageRoot, entry.packageName);
       const stageDir = path.join(stageRoot, entry.packageName);
       const backupDir = `${finalDir}.checkpoint5-backup`;
@@ -125,7 +135,7 @@ export async function runLiveGraph({ dryRun = false } = {}) {
       fs.renameSync(finalDir, backupDir); backups.push({ finalDir, backupDir });
       fs.renameSync(stageDir, finalDir);
     }
-    for (const entry of changedScreens) validatePackage(path.join(packageRoot, entry.packageName));
+    for (const entry of screensToApply) validatePackage(path.join(packageRoot, entry.packageName));
     const manifests = { ...activePackages, ...packageHashes };
     const appliedScreens = Object.fromEntries(Object.keys(screens).map((packageName) => [packageName, {
       liveSourceHash,
@@ -134,10 +144,12 @@ export async function runLiveGraph({ dryRun = false } = {}) {
       activePackageHash: manifests[packageName],
       goldMasterIdentity: goldMasterState(packageName)
     }]));
-    const promoted = promote(current, manifests, { source: "PENPOT_LIVE", changedScreens: changedScreens.map((entry) => entry.packageName), liveSourceHash, lastAppliedSourceHash: liveSourceHash, screens: appliedScreens });
+    const graphToPromote = screen ? graphWithSelectedScreens(previous, current, new Set(screensToApply.map((entry) => entry.screenId))) : current;
+    const appliedSourceHash = sourceHash(graphToPromote);
+    const promoted = promote(graphToPromote, manifests, { source: "PENPOT_LIVE", changedScreens: screensToApply.map((entry) => entry.packageName), pendingScreens: skippedScreens.map((entry) => entry.packageName), liveSourceHash: appliedSourceHash, lastAppliedSourceHash: appliedSourceHash, screens: appliedScreens });
     for (const { backupDir } of backups) fs.rmSync(backupDir, { recursive: true, force: true });
     fs.rmSync(stageRoot, { recursive: true, force: true });
-    return { ...base, result: visualDrift && !changes.length ? "DRIFT_APPLIED" : "APPLIED", packageHashes: manifests, promoted: true, runtimeValidation: "PACKAGE_VALIDATED", verification: { urls: await resolveVerificationUrls({ changedScreens, packageHashes: manifests }) }, elapsedMs: Date.now() - started, successfulGraphHash: hash(promoted) };
+    return { ...base, result: visualDrift && !changes.length ? "DRIFT_APPLIED" : "APPLIED", packageHashes: manifests, promoted: true, runtimeValidation: "PACKAGE_VALIDATED", verification: { urls: await resolveVerificationUrls({ changedScreens: screensToApply, packageHashes: manifests }) }, elapsedMs: Date.now() - started, successfulGraphHash: hash(promoted) };
   } catch (error) {
     for (const { finalDir, backupDir } of backups.reverse()) {
       fs.rmSync(finalDir, { recursive: true, force: true });

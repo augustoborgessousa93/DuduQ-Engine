@@ -17,8 +17,8 @@
         "duduq:penpot:sync:check": "node scripts/duduq-penpot-export-to-core.mjs --check",
         "duduq:penpot:sync:test": "node test/penpot-sync/duduq-penpot-transformer.test.mjs",
         "penpot": "node scripts/duduq-penpot-bootstrap.mjs --start-only",
-        "test:visual-golden": "node test/runtime/self-contained-golden-visual.mjs"
-        ,"test:human-interaction": "node test/runtime/human-penpot-authority.mjs",
+        "test:visual-golden": "node test/runtime/self-contained-golden-visual.mjs",
+        "test:human-interaction": "node test/runtime/human-penpot-authority.mjs",
         "duduq:certify-approved-flow": "node test/runtime/certify-approved-flow.mjs",
         "duduq:certify-perfect-flow": "node test/runtime/certify-perfect-flow.mjs",
         "duduq:certify-aaa-flow": "node test/runtime/certify-aaa-flow.mjs",
@@ -28,6 +28,26 @@
         "duduq:verify-live-runtime": "node test/runtime/verify-live-runtime.mjs"
     },
     "dependencies": {
-        "@modelcontextprotocol/sdk": "^1.30.0"
-    }
+        "@modelcontextprotocol/sdk": "^1.30.0",
+        "@penpot/mcp": "^2.15.4"
+    },
+    "name": "workspace",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "directories": {
+        "doc": "docs",
+        "test": "test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/augustoborgessousa93/DuduQ-Engine.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/augustoborgessousa93/DuduQ-Engine/issues"
+    },
+    "homepage": "https://github.com/augustoborgessousa93/DuduQ-Engine#readme"
 }
