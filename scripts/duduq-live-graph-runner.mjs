@@ -30,7 +30,7 @@ const goldMasterState = (packageName) => {
 function verify(graph) {
   const list = nodes(graph.pages);
   const ids = new Set(list.map((node) => node.penpotId));
-  if (!graph.metadata?.capturedAt || !graph.metadata?.nodeCount || ids.size !== list.length || !list.some((node) => node.penpotId === "50f514fe-4a8a-804d-8008-aa3b16cea7b7")) throw new Error("LIVE_GRAPH_INCOMPLETE");
+  if (!graph.metadata?.capturedAt || !graph.metadata?.nodeCount || ids.size !== list.length || !list.some((node) => node.penpotId === "393d75f5-200b-8067-8008-b351ceb2ba9a")) throw new Error("LIVE_GRAPH_INCOMPLETE");
   return list;
 }
 
