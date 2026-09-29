@@ -2,7 +2,7 @@ import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 import { CallToolResultSchema, ListToolsResultSchema } from "@modelcontextprotocol/sdk/types.js";
 
-export async function connectPenpot({url="http://localhost:4401/mcp",timeoutMs=15000}={}) {
+export async function connectPenpot({url="http://127.0.0.1:4401/mcp",timeoutMs=15000}={}) {
   const client=new Client({name:"duduq-penpot-bridge",version:"2.0.0"});
   const transport=new StreamableHTTPClientTransport(new URL(url));
   try { await Promise.race([client.connect(transport),new Promise((_,reject)=>setTimeout(()=>reject(Error("PENPOT_MCP_UNAVAILABLE")),timeoutMs))]); }
