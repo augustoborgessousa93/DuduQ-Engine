@@ -1,0 +1,404 @@
+:root, body, #game { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
+.drag-drop-screen { background: #87c95a; }
+.dnd-game-shell { position: relative; z-index: 1; }
+
+/* Penpot: DUDUQ - HUD OPTIONS CARDS GROUP, positioned in the 1366x768 screen space. */
+.dnd-options-cards-group {
+  position: absolute;
+  z-index: 0;
+  left: 240px;
+  top: 238px;
+  width: 1056px;
+  height: 307px;
+  background: transparent;
+  pointer-events: none;
+}
+.dnd-options-cards-group__shadow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  filter: drop-shadow(4px 8px 4px rgba(0, 0, 0, .2));
+  pointer-events: none;
+}
+.dnd-options-cards-group__surface {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border: 2px dotted #e8d3a6;
+  border-radius: 25px;
+  background: #fffdf7;
+  box-shadow: 0 5px 0 0 #b8a68e;
+}
+.dnd-options-cards-group__category {
+  position: absolute;
+  z-index: 1;
+  width: 476px;
+  height: 263px;
+}
+.dnd-options-cards-group__category--animals { left: 33px; top: 22px; }
+.dnd-options-cards-group__category--food { left: 550px; top: 22px; }
+.dnd-options-cards-group__category-surface {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border: 3px dashed #b17f00;
+  border-radius: 30px;
+  background: rgba(184, 166, 142, .1215686275);
+}
+.dnd-rectangle-group__surface {
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  border-radius: 30px;
+  background: #B8A68E1F;
+}
+.dnd-rectangle-group__border {
+  position: absolute;
+  inset: 0;
+  width: 476px;
+  height: 263px;
+  overflow: visible;
+  pointer-events: none;
+}
+.dnd-rectangle-group__border rect {
+  fill: none;
+  stroke: #B17F00;
+  stroke-width: 3px;
+  stroke-dasharray: 12 14;
+  stroke-linecap: butt;
+}
+.dnd-category-food__surface {
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  border-radius: 30px;
+  background: rgba(184, 166, 142, .12254901960784313);
+}
+.dnd-category-food__border {
+  position: absolute;
+  inset: 0;
+  width: 476px;
+  height: 263px;
+  overflow: visible;
+  pointer-events: none;
+}
+.dnd-category-food__border rect {
+  fill: none;
+  stroke: #B17F00;
+  stroke-width: 3px;
+  stroke-dasharray: 12 14;
+  stroke-linecap: butt;
+}
+.dnd-option-image-card {
+  position: absolute;
+  z-index: 1;
+  left: 284px;
+  top: 579px;
+  width: 150px;
+  height: 150px;
+  margin: 0;
+  overflow: visible;
+  background: transparent;
+}
+.dnd-option-image-card__artwork {
+  position: absolute;
+  left: -24px;
+  top: -27px;
+  display: block;
+  width: 210px;
+  height: 228px;
+  max-width: none;
+  object-fit: fill;
+}
+.dnd-image-card-row {
+  position: absolute;
+  z-index: 2;
+  left: 268px;
+  top: 579px;
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  align-items: flex-start;
+}
+.dnd-image-card-row > .dnd-option-image-card {
+  position: relative;
+  left: auto;
+  top: auto;
+}
+
+/* Drag & Drop V1 interaction states; idle artwork geometry remains unchanged. */
+.dnd-options-cards-group__category { pointer-events: auto; }
+.dnd-option-image-card {
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none;
+  transform-origin: center;
+  transition: box-shadow 140ms ease, scale 140ms ease, translate 140ms ease;
+}
+.dnd-option-image-card__artwork { user-select: none; -webkit-user-drag: none; pointer-events: none; }
+.dnd-option-image-card:hover:not([data-drag-state]):not([data-state="correct"]):not([data-state="incorrect"]) {
+  outline: 2px solid #278FD2;
+  outline-offset: 2px;
+  box-shadow: 0 5px 12px rgba(24, 83, 119, .2);
+  scale: 1.03;
+  translate: 0 -2px;
+}
+.dnd-option-image-card[data-drag-state="picked"],
+.dnd-option-image-card[data-drag-state="dragging"] {
+  z-index: 1000;
+  cursor: grabbing;
+  scale: 1.055;
+  translate: 0 -5px;
+  box-shadow: 0 12px 24px rgba(25, 63, 82, .3);
+}
+.dnd-option-image-card[data-state="correct"] { pointer-events: none; cursor: default; }
+.dnd-option-image-card[data-feedback="success"] { filter: drop-shadow(0 0 5px rgba(51, 160, 103, .65)); }
+.dnd-option-image-card[data-feedback="error"] { filter: drop-shadow(0 0 4px rgba(207, 113, 39, .45)); }
+
+.dnd-drop-zone__content {
+  position: absolute;
+  z-index: 2;
+  left: 16px;
+  right: 16px;
+  top: 58px;
+  bottom: 16px;
+  display: grid;
+  grid-template-columns: repeat(var(--dnd-grid-columns, 1), var(--dnd-card-size, 150px));
+  grid-auto-rows: var(--dnd-card-size, 150px);
+  align-content: center;
+  justify-content: center;
+  gap: 10px;
+  overflow: visible;
+  pointer-events: auto;
+}
+.dnd-drop-zone__content > .dnd-option-image-card {
+  position: relative;
+  left: auto;
+  top: auto;
+  z-index: auto;
+  overflow: visible;
+  box-shadow: none;
+  outline: none;
+  scale: 1;
+  translate: none;
+  pointer-events: auto;
+}
+.dnd-option-image-card[data-state="correct"],
+.dnd-option-image-card[data-state="incorrect"] { pointer-events: auto; cursor: default; outline: none; filter: drop-shadow(2px 8px 4px rgba(255,255,255,.2)); }
+.dnd-option-image-card__state-art {
+  position: absolute;
+  z-index: 8;
+  left: 0;
+  top: -6%;
+  display: block;
+  width: 107.5267%;
+  height: 106%;
+  overflow: visible;
+  pointer-events: none;
+}
+.dnd-option-image-card__state-art--incorrect {
+  top: -4.6667%;
+  width: 106.6667%;
+  height: 104.6667%;
+}
+.dnd-option-image-card__state-art svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.dnd-option-image-card__state-art--correct { filter: drop-shadow(0 2px 4px rgba(23,114,58,.22)) drop-shadow(0 0 6px rgba(67,185,108,.15)); }
+.dnd-option-image-card__state-art--correct circle { filter: drop-shadow(0 2px 5px rgba(35,123,69,.2)); }
+.dnd-option-image-card__state-art--incorrect svg { filter: drop-shadow(0 2px 4px rgba(230,45,35,.2)); }
+#game .dnd-confirm-action-motion {
+  position: absolute !important;
+  z-index: 20;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: clamp(28px, 4cqh, 40px) !important;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  pointer-events: none;
+}
+#game .dnd-confirm-action {
+  position: relative !important;
+  isolation: isolate !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  left: auto !important;
+  bottom: auto !important;
+  width: 304px !important;
+  min-width: 304px !important;
+  height: 91px !important;
+  min-height: 91px !important;
+  padding: 0 !important;
+  transform: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: #fff !important;
+  background: transparent !important;
+  box-shadow: 4px 4px 4px 0px #00000059 !important;
+  filter: none !important;
+  overflow: visible !important;
+  pointer-events: auto;
+}
+#game .dnd-confirm-action::before,
+#game .dnd-confirm-action::after { content: none !important; display: none !important; }
+#game .dnd-confirm-action > .dnd-confirm-action__shadow,
+#game .dnd-confirm-action > .dnd-confirm-action__depth,
+#game .dnd-confirm-action > .dnd-confirm-action__surface,
+#game .dnd-confirm-action > .dnd-confirm-action__highlight,
+#game .dnd-confirm-action > .dnd-confirm-action__label {
+  position: absolute !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+#game .dnd-confirm-action > .dnd-confirm-action__shadow {
+  display: none !important;
+}
+#game .dnd-confirm-action__depth {
+  z-index: 1 !important;
+  left: 0 !important;
+  top: 9.671498px !important;
+  width: 304px !important;
+  height: 73.745169px !important;
+  border-radius: 19px !important;
+  background: #175c93 !important;
+}
+#game .dnd-confirm-action__surface {
+  z-index: 2 !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 304px !important;
+  height: 73.745169px !important;
+  border-radius: 19px !important;
+  background: #349fdf !important;
+}
+#game .dnd-confirm-action__highlight {
+  z-index: 3 !important;
+  left: 15.2px !important;
+  top: 6.044686px !important;
+  width: 59.714286px !important;
+  height: 8.46256px !important;
+  border-radius: 6px !important;
+  background: #e1e0f5 !important;
+  opacity: .16 !important;
+}
+#game .dnd-confirm-action__label {
+  z-index: 4 !important;
+  left: 66px !important;
+  top: 22px !important;
+  width: auto !important;
+  height: 36px !important;
+  display: block !important;
+  color: #fff !important;
+  font-family: "Fredoka", sans-serif !important;
+  font-size: 30px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  letter-spacing: .5px !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  text-shadow: none !important;
+}
+#game .dnd-confirm-action__label::before,
+#game .dnd-confirm-action__label::after { content: none !important; display: none !important; }
+#game .dnd-confirm-action:not(:disabled) { box-shadow: 4px 4px 4px 0px #00000059 !important; }
+.dnd-confirm-action-motion[hidden] { display: none !important; }
+.dnd-options-cards-group__category[data-drop-state="active"] .dnd-options-cards-group__category-surface {
+  box-shadow: 0 0 0 3px rgba(39, 143, 210, .85), 0 0 18px rgba(39, 143, 210, .32);
+  transform: scale(1.008);
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+.dnd-options-cards-group__category[data-drop-state="error"] .dnd-options-cards-group__category-surface {
+  box-shadow: 0 0 0 3px rgba(216, 117, 59, .8), 0 0 14px rgba(216, 117, 59, .28);
+}
+.dnd-options-cards-group__category[data-drop-state="correct"] .dnd-options-cards-group__category-surface {
+  box-shadow: 0 0 0 3px rgba(72, 166, 111, .78), 0 0 14px rgba(72, 166, 111, .25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dnd-option-image-card,
+  .dnd-options-cards-group__category-surface {
+    transition-duration: 0.01ms !important;
+  }
+  .dnd-option-image-card:hover:not([data-state="correct"]),
+  .dnd-option-image-card[data-drag-state="picked"],
+  .dnd-option-image-card[data-drag-state="dragging"] {
+    scale: 1;
+    translate: none;
+  }
+}
+.dnd-options-cards-group__category-label {
+  position: absolute;
+  left: 162.89777777777635px;
+  top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150.20444444444365px;
+  height: 40px;
+  margin: 0;
+  color: #364b43;
+  font-family: Nunito, sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.4165107114575133;
+  letter-spacing: 0;
+  text-align: center;
+}
+.dnd-options-cards-group__paw {
+  position: absolute;
+  left: 314.16px;
+  top: 17px;
+  width: 31.73px;
+  height: 30px;
+  overflow: visible;
+  fill: none;
+  stroke: #364b43;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.dnd-options-cards-group__menu-icon {
+  position: absolute;
+  z-index: 1;
+  left: 837px;
+  top: 39px;
+  width: 30px;
+  height: 30px;
+  overflow: visible;
+  fill: none;
+  stroke: #364b43;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Local hotfix from Penpot board 98d9f395-4ecd-8037-8008-b74bda5d37de. */
+#game[aria-label="DuduQ Drag and Drop"] .duduq-canonical-header-hud .hud-progress[data-artwork="penpot-official-board"] {
+  position: absolute !important; left: 300px !important; top: 40px !important;
+  width: 482px !important; height: 18px !important; box-sizing: border-box !important;
+  border: 0 !important; border-radius: 9px !important; background: #dce8df !important;
+  box-shadow: none !important; overflow: hidden !important;
+}
+#game[aria-label="DuduQ Drag and Drop"] .duduq-canonical-header-hud .hud-progress[data-artwork="penpot-official-board"]::before {
+  content: "" !important; position: absolute !important; z-index: 2 !important; inset: 0 !important;
+  box-sizing: border-box !important; border: .888889px solid #c8d8cd !important;
+  border-radius: 9px !important; pointer-events: none !important;
+}
+#game[aria-label="DuduQ Drag and Drop"] .duduq-canonical-header-hud .hud-progress[data-artwork="penpot-official-board"]::after {
+  content: "" !important; position: absolute !important; z-index: 3 !important;
+  left: 7px !important; top: 2px !important; width: var(--dnd-progress-highlight-width, 0px) !important;
+  height: 3px !important; border-radius: 1.5px !important;
+  background: rgba(191,232,255,.416667) !important; opacity: .76 !important; pointer-events: none !important;
+}
+#game[aria-label="DuduQ Drag and Drop"] .duduq-canonical-header-hud .hud-progress[data-artwork="penpot-official-board"] .hud-progress-fill {
+  position: absolute !important; z-index: 1 !important; left: .89px !important; top: -.11px !important;
+  height: 18px !important; border: 0 !important; border-radius: 9px !important;
+  background: #278fd2 !important; box-shadow: none !important;
+}
+#game[aria-label="DuduQ Drag and Drop"] .duduq-canonical-header-hud .hud-progress[data-artwork="penpot-official-board"] .hud-progress-fill::after { content: none !important; }

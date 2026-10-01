@@ -1,0 +1,2024 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": {
+    "provider": "penpot",
+    "fileId": "d8ac01df-6646-81d2-8008-a2900d806e30"
+  },
+  "components": {
+    "DUDUQ_CANONICAL_HEADER_HUD": {
+      "mainId": "88954f25-7a86-800b-8008-a87e6f0d4e44",
+      "tree": {
+        "borderRadius": 28,
+        "borderRadiusBottomLeft": 28,
+        "borderRadiusBottomRight": 28,
+        "borderRadiusTopLeft": 28,
+        "borderRadiusTopRight": 28,
+        "children": [
+          {
+            "borderRadius": null,
+            "borderRadiusBottomLeft": null,
+            "borderRadiusBottomRight": null,
+            "borderRadiusTopLeft": null,
+            "borderRadiusTopRight": null,
+            "fills": [
+              {
+                "fillColor": "#294238",
+                "fillColorGradient": null,
+                "fillColorRefFile": null,
+                "fillColorRefId": null,
+                "fillImage": null,
+                "fillOpacity": 1
+              }
+            ],
+            "fontFamily": "Nunito",
+            "fontSize": "24",
+            "fontStyle": "normal",
+            "fontWeight": "900",
+            "height": 24,
+            "id": "88954f25-7a86-800b-8008-a87e6f0d4e45",
+            "layoutCell": null,
+            "layoutChild": null,
+            "letterSpacing": "0.1",
+            "lineHeight": "1.05",
+            "name": "Header Activity Title / Strong",
+            "opacity": null,
+            "shadows": [],
+            "strokes": [],
+            "textTransform": "none",
+            "type": "text",
+            "width": 190,
+            "x": 10378,
+            "y": 2256
+          },
+          {
+            "borderRadius": null,
+            "borderRadiusBottomLeft": null,
+            "borderRadiusBottomRight": null,
+            "borderRadiusTopLeft": null,
+            "borderRadiusTopRight": null,
+            "fills": [
+              {
+                "fillColor": "#647a70",
+                "fillColorGradient": null,
+                "fillColorRefFile": null,
+                "fillColorRefId": null,
+                "fillImage": null,
+                "fillOpacity": 1
+              }
+            ],
+            "fontFamily": "Fredoka",
+            "fontSize": "13",
+            "fontStyle": "normal",
+            "fontWeight": "500",
+            "height": 18,
+            "id": "88954f25-7a86-800b-8008-a87e6f0d4e46",
+            "layoutCell": null,
+            "layoutChild": null,
+            "letterSpacing": "0",
+            "lineHeight": "1",
+            "name": "Header Activity Subtitle / Legible",
+            "opacity": null,
+            "shadows": [],
+            "strokes": [],
+            "textTransform": "none",
+            "type": "text",
+            "width": 134,
+            "x": 10378,
+            "y": 2287
+          },
+          {
+            "borderRadius": 0,
+            "borderRadiusBottomLeft": 0,
+            "borderRadiusBottomRight": 0,
+            "borderRadiusTopLeft": 0,
+            "borderRadiusTopRight": 0,
+            "children": [],
+            "fills": [],
+            "flex": null,
+            "grid": null,
+            "height": 86,
+            "horizontalSizing": "fix",
+            "id": "88954f25-7a86-800b-8008-a87e6f0daec8",
+            "layoutCell": null,
+            "layoutChild": null,
+            "name": "DuduQ Mascot Slot — HUD Optical Anchor",
+            "opacity": null,
+            "shadows": [],
+            "strokes": [],
+            "type": "board",
+            "verticalSizing": "fix",
+            "width": 102,
+            "x": 10257,
+            "y": 2233
+          },
+          {
+            "borderRadius": 8,
+            "borderRadiusBottomLeft": 8,
+            "borderRadiusBottomRight": 8,
+            "borderRadiusTopLeft": 8,
+            "borderRadiusTopRight": 8,
+            "children": [
+              {
+                "borderRadius": 7,
+                "borderRadiusBottomLeft": 7,
+                "borderRadiusBottomRight": 7,
+                "borderRadiusTopLeft": 7,
+                "borderRadiusTopRight": 7,
+                "fills": [
+                  {
+                    "fillColor": "#164c70",
+                    "fillColorGradient": null,
+                    "fillColorRefFile": null,
+                    "fillColorRefId": null,
+                    "fillImage": null,
+                    "fillOpacity": 1
+                  }
+                ],
+                "height": 14,
+                "id": "88954f25-7a86-800b-8008-a87e6f0daecc",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "Progress Shadow",
+                "opacity": null,
+                "shadows": [
+                  {
+                    "blur": 7,
+                    "color": {
+                      "color": "#25384a",
+                      "opacity": 0.12
+                    },
+                    "hidden": false,
+                    "id": "881bb268-25e8-800a-8008-a38950fb4507",
+                    "offsetX": 0,
+                    "offsetY": 2,
+                    "spread": 0,
+                    "style": "drop-shadow"
+                  }
+                ],
+                "strokes": [],
+                "type": "rectangle",
+                "width": 346,
+                "x": 10622,
+                "y": 2274
+              },
+              {
+                "borderRadius": 10,
+                "borderRadiusBottomLeft": 10,
+                "borderRadiusBottomRight": 10,
+                "borderRadiusTopLeft": 10,
+                "borderRadiusTopRight": 10,
+                "fills": [
+                  {
+                    "fillColor": "#9cbeb0",
+                    "fillColorGradient": null,
+                    "fillColorRefFile": null,
+                    "fillColorRefId": null,
+                    "fillImage": null,
+                    "fillOpacity": 1
+                  }
+                ],
+                "height": 14,
+                "id": "88954f25-7a86-800b-8008-a87e6f0daecd",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "Progress Track Depth",
+                "opacity": null,
+                "shadows": [
+                  {
+                    "blur": 3,
+                    "color": {
+                      "color": "#667b8a",
+                      "opacity": 0.14
+                    },
+                    "hidden": false,
+                    "id": "881bb268-25e8-800a-8008-a38950fc5442",
+                    "offsetX": 0,
+                    "offsetY": 1,
+                    "spread": 0,
+                    "style": "drop-shadow"
+                  }
+                ],
+                "strokes": [],
+                "type": "rectangle",
+                "width": 490,
+                "x": 10620,
+                "y": 2273
+              },
+              {
+                "borderRadius": 10,
+                "borderRadiusBottomLeft": 10,
+                "borderRadiusBottomRight": 10,
+                "borderRadiusTopLeft": 10,
+                "borderRadiusTopRight": 10,
+                "fills": [
+                  {
+                    "fillColor": null,
+                    "fillColorGradient": {
+                      "endX": 0.5,
+                      "endY": 1,
+                      "startX": 0.5,
+                      "startY": 0,
+                      "stops": [
+                        {
+                          "color": "#e9f0ec",
+                          "offset": 0,
+                          "opacity": 1
+                        },
+                        {
+                          "color": "#d3e2db",
+                          "offset": 0.55,
+                          "opacity": 1
+                        },
+                        {
+                          "color": "#c8d9d1",
+                          "offset": 1,
+                          "opacity": 1
+                        }
+                      ],
+                      "type": "linear",
+                      "width": 1
+                    },
+                    "fillColorRefFile": null,
+                    "fillColorRefId": null,
+                    "fillImage": null,
+                    "fillOpacity": 1
+                  }
+                ],
+                "height": 14,
+                "id": "88954f25-7a86-800b-8008-a87e6f0daece",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "Progress Track",
+                "opacity": null,
+                "shadows": [
+                  {
+                    "blur": 2,
+                    "color": {
+                      "color": "#ffffff",
+                      "opacity": 0.2
+                    },
+                    "hidden": false,
+                    "id": "881bb268-25e8-800a-8008-a38950fd0a53",
+                    "offsetX": 0,
+                    "offsetY": 1,
+                    "spread": 0,
+                    "style": "drop-shadow"
+                  }
+                ],
+                "strokes": [
+                  {
+                    "strokeAlignment": "inner",
+                    "strokeCapEnd": null,
+                    "strokeCapStart": null,
+                    "strokeColor": "#f3f7f5",
+                    "strokeColorGradient": null,
+                    "strokeColorRefFile": null,
+                    "strokeColorRefId": null,
+                    "strokeImage": null,
+                    "strokeOpacity": 0.9,
+                    "strokeStyle": "solid",
+                    "strokeWidth": 1
+                  }
+                ],
+                "type": "rectangle",
+                "width": 490,
+                "x": 10620,
+                "y": 2271
+              },
+              {
+                "borderRadius": 10,
+                "borderRadiusBottomLeft": 10,
+                "borderRadiusBottomRight": 10,
+                "borderRadiusTopLeft": 10,
+                "borderRadiusTopRight": 10,
+                "fills": [
+                  {
+                    "fillColor": "#175c93",
+                    "fillColorGradient": null,
+                    "fillColorRefFile": null,
+                    "fillColorRefId": null,
+                    "fillImage": null,
+                    "fillOpacity": 1
+                  }
+                ],
+                "height": 14,
+                "id": "88954f25-7a86-800b-8008-a87e6f0daecf",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "Progress Fill Depth",
+                "opacity": null,
+                "shadows": [
+                  {
+                    "blur": 4,
+                    "color": {
+                      "color": "#4c2c9a",
+                      "opacity": 0.22
+                    },
+                    "hidden": false,
+                    "id": "881bb268-25e8-800a-8008-a38950fe2808",
+                    "offsetX": 0,
+                    "offsetY": 2,
+                    "spread": 0,
+                    "style": "drop-shadow"
+                  }
+                ],
+                "strokes": [],
+                "type": "rectangle",
+                "width": 318,
+                "x": 10620,
+                "y": 2273
+              },
+              {
+                "borderRadius": 10,
+                "borderRadiusBottomLeft": 10,
+                "borderRadiusBottomRight": 10,
+                "borderRadiusTopLeft": 10,
+                "borderRadiusTopRight": 10,
+                "fills": [
+                  {
+                    "fillColor": null,
+                    "fillColorGradient": {
+                      "endX": 0.5,
+                      "endY": 1,
+                      "startX": 0.5,
+                      "startY": 0,
+                      "stops": [
+                        {
+                          "color": "#8fd6ff",
+                          "offset": 0,
+                          "opacity": 1
+                        },
+                        {
+                          "color": "#349fdf",
+                          "offset": 0.55,
+                          "opacity": 1
+                        },
+                        {
+                          "color": "#2a82c0",
+                          "offset": 1,
+                          "opacity": 1
+                        }
+                      ],
+                      "type": "linear",
+                      "width": 1
+                    },
+                    "fillColorRefFile": null,
+                    "fillColorRefId": null,
+                    "fillImage": null,
+                    "fillOpacity": 1
+                  }
+                ],
+                "height": 12,
+                "id": "88954f25-7a86-800b-8008-a87e6f0daed0",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "Progress Fill",
+                "opacity": null,
+                "shadows": [
+                  {
+                    "blur": 3,
+                    "color": {
+                      "color": "#6e56d7",
+                      "opacity": 0.22
+                    },
+                    "hidden": false,
+                    "id": "881bb268-25e8-800a-8008-a38950feefa0",
+                    "offsetX": 0,
+                    "offsetY": 1,
+                    "spread": 0,
+                    "style": "drop-shadow"
+                  }
+                ],
+                "strokes": [],
+                "type": "rectangle",
+                "width": 318,
+                "x": 10620,
+                "y": 2271
+              },
+              {
+                "borderRadius": 6,
+                "borderRadiusBottomLeft": 6,
+                "borderRadiusBottomRight": 6,
+                "borderRadiusTopLeft": 6,
+                "borderRadiusTopRight": 6,
+                "fills": [
+                  {
+                    "fillColor": "#bfe8ff",
+                    "fillColorGradient": null,
+                    "fillColorRefFile": null,
+                    "fillColorRefId": null,
+                    "fillImage": null,
+                    "fillOpacity": 1
+                  }
+                ],
+                "height": 2,
+                "id": "88954f25-7a86-800b-8008-a87e6f0daed1",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "Progress Highlight",
+                "opacity": 0.14,
+                "shadows": [],
+                "strokes": [],
+                "type": "rectangle",
+                "width": 295,
+                "x": 10628,
+                "y": 2272
+              }
+            ],
+            "fills": [],
+            "flex": null,
+            "grid": null,
+            "height": 16,
+            "horizontalSizing": "fix",
+            "id": "88954f25-7a86-800b-8008-a87e6f0daec9",
+            "layoutCell": null,
+            "layoutChild": null,
+            "name": "Header / Progress",
+            "opacity": null,
+            "shadows": [],
+            "strokes": [],
+            "type": "board",
+            "verticalSizing": "fix",
+            "width": 350,
+            "x": 10620,
+            "y": 2271
+          },
+          {
+            "borderRadius": 15,
+            "borderRadiusBottomLeft": 15,
+            "borderRadiusBottomRight": 15,
+            "borderRadiusTopLeft": 15,
+            "borderRadiusTopRight": 15,
+            "children": [
+              {
+                "borderRadius": 18,
+                "borderRadiusBottomLeft": 18,
+                "borderRadiusBottomRight": 18,
+                "borderRadiusTopLeft": 18,
+                "borderRadiusTopRight": 18,
+                "fills": [
+                  {
+                    "fillColor": "#b99e54",
+                    "fillColorGradient": null,
+                    "fillColorRefFile": null,
+                    "fillColorRefId": null,
+                    "fillImage": null,
+                    "fillOpacity": 1
+                  }
+                ],
+                "height": 34,
+                "id": "88954f25-7a86-800b-8008-a87e6f0daed2",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "Counter Depth",
+                "opacity": null,
+                "shadows": [],
+                "strokes": [],
+                "type": "rectangle",
+                "width": 72,
+                "x": 11061,
+                "y": 2263
+              },
+              {
+                "borderRadius": 18,
+                "borderRadiusBottomLeft": 18,
+                "borderRadiusBottomRight": 18,
+                "borderRadiusTopLeft": 18,
+                "borderRadiusTopRight": 18,
+                "fills": [
+                  {
+                    "fillColor": null,
+                    "fillColorGradient": {
+                      "endX": 0.5,
+                      "endY": 1,
+                      "startX": 0.5,
+                      "startY": 0,
+                      "stops": [
+                        {
+                          "color": "#fffdf1",
+                          "offset": 0,
+                          "opacity": 1
+                        },
+                        {
+                          "color": "#fff4cc",
+                          "offset": 0.55,
+                          "opacity": 1
+                        },
+                        {
+                          "color": "#f6e6ae",
+                          "offset": 1,
+                          "opacity": 1
+                        }
+                      ],
+                      "type": "linear",
+                      "width": 1
+                    },
+                    "fillColorRefFile": null,
+                    "fillColorRefId": null,
+                    "fillImage": null,
+                    "fillOpacity": 1
+                  }
+                ],
+                "height": 34,
+                "id": "88954f25-7a86-800b-8008-a87e6f0daed3",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "Counter Surface",
+                "opacity": null,
+                "shadows": [
+                  {
+                    "blur": 4,
+                    "color": {
+                      "color": "#000000",
+                      "opacity": 0.2
+                    },
+                    "hidden": false,
+                    "id": "002497e5-f2c0-8002-8008-a2b058ad1acb",
+                    "offsetX": 0,
+                    "offsetY": 2,
+                    "spread": 0,
+                    "style": "drop-shadow"
+                  }
+                ],
+                "strokes": [
+                  {
+                    "strokeAlignment": "inner",
+                    "strokeCapEnd": null,
+                    "strokeCapStart": null,
+                    "strokeColor": "#e1c978",
+                    "strokeColorGradient": null,
+                    "strokeColorRefFile": null,
+                    "strokeColorRefId": null,
+                    "strokeImage": null,
+                    "strokeOpacity": 1,
+                    "strokeStyle": "solid",
+                    "strokeWidth": 1.5
+                  }
+                ],
+                "type": "rectangle",
+                "width": 72,
+                "x": 11061,
+                "y": 2260
+              },
+              {
+                "borderRadius": null,
+                "borderRadiusBottomLeft": null,
+                "borderRadiusBottomRight": null,
+                "borderRadiusTopLeft": null,
+                "borderRadiusTopRight": null,
+                "fills": [
+                  {
+                    "fillColor": "#344257",
+                    "fillColorGradient": null,
+                    "fillColorRefFile": null,
+                    "fillColorRefId": null,
+                    "fillImage": null,
+                    "fillOpacity": 1
+                  }
+                ],
+                "fontFamily": "Fredoka",
+                "fontSize": "14",
+                "fontStyle": "normal",
+                "fontWeight": "600",
+                "height": 34,
+                "id": "88954f25-7a86-800b-8008-a87e6f0daed4",
+                "layoutCell": null,
+                "layoutChild": null,
+                "letterSpacing": "0",
+                "lineHeight": "1.15",
+                "name": "Counter Label",
+                "opacity": null,
+                "shadows": [],
+                "strokes": [],
+                "textTransform": "none",
+                "type": "text",
+                "width": 72,
+                "x": 11061,
+                "y": 2260
+              }
+            ],
+            "fills": [],
+            "flex": null,
+            "grid": null,
+            "height": 38,
+            "horizontalSizing": "fix",
+            "id": "88954f25-7a86-800b-8008-a87e6f0daeca",
+            "layoutCell": null,
+            "layoutChild": null,
+            "name": "Header / Question Counter",
+            "opacity": null,
+            "shadows": [],
+            "strokes": [],
+            "type": "board",
+            "verticalSizing": "fix",
+            "width": 72,
+            "x": 11061,
+            "y": 2260
+          },
+          {
+            "borderRadius": 0,
+            "borderRadiusBottomLeft": 0,
+            "borderRadiusBottomRight": 0,
+            "borderRadiusTopLeft": 0,
+            "borderRadiusTopRight": 0,
+            "children": [
+              {
+                "borderRadius": null,
+                "borderRadiusBottomLeft": null,
+                "borderRadiusBottomRight": null,
+                "borderRadiusTopLeft": null,
+                "borderRadiusTopRight": null,
+                "children": [
+                  {
+                    "borderRadius": 4,
+                    "borderRadiusBottomLeft": 4,
+                    "borderRadiusBottomRight": 4,
+                    "borderRadiusTopLeft": 4,
+                    "borderRadiusTopRight": 4,
+                    "fills": [
+                      {
+                        "fillColor": "#253b53",
+                        "fillColorGradient": null,
+                        "fillColorRefFile": null,
+                        "fillColorRefId": null,
+                        "fillImage": null,
+                        "fillOpacity": 0.35
+                      }
+                    ],
+                    "height": 5,
+                    "id": "88954f25-7a86-800b-8008-a87e6f0daed6",
+                    "layoutCell": null,
+                    "layoutChild": null,
+                    "name": "Button Shadow",
+                    "opacity": 0.82,
+                    "shadows": [],
+                    "strokes": [],
+                    "type": "rectangle",
+                    "width": 44,
+                    "x": 11231,
+                    "y": 2300
+                  },
+                  {
+                    "borderRadius": 18,
+                    "borderRadiusBottomLeft": 18,
+                    "borderRadiusBottomRight": 18,
+                    "borderRadiusTopLeft": 18,
+                    "borderRadiusTopRight": 18,
+                    "fills": [
+                      {
+                        "fillColor": "#175c93",
+                        "fillColorGradient": null,
+                        "fillColorRefFile": null,
+                        "fillColorRefId": null,
+                        "fillImage": null,
+                        "fillOpacity": 1
+                      }
+                    ],
+                    "height": 51,
+                    "id": "88954f25-7a86-800b-8008-a87e6f0daed7",
+                    "layoutCell": null,
+                    "layoutChild": null,
+                    "name": "Button Depth",
+                    "opacity": null,
+                    "shadows": [],
+                    "strokes": [],
+                    "type": "rectangle",
+                    "width": 56,
+                    "x": 11225,
+                    "y": 2256
+                  },
+                  {
+                    "borderRadius": 18,
+                    "borderRadiusBottomLeft": 18,
+                    "borderRadiusBottomRight": 18,
+                    "borderRadiusTopLeft": 18,
+                    "borderRadiusTopRight": 18,
+                    "fills": [
+                      {
+                        "fillColor": null,
+                        "fillColorGradient": {
+                          "endX": 0.5,
+                          "endY": 1,
+                          "startX": 0.5,
+                          "startY": 0,
+                          "stops": [
+                            {
+                              "color": "#8fd6ff",
+                              "offset": 0,
+                              "opacity": 1
+                            },
+                            {
+                              "color": "#349fdf",
+                              "offset": 0.55,
+                              "opacity": 1
+                            },
+                            {
+                              "color": "#2a82c0",
+                              "offset": 1,
+                              "opacity": 1
+                            }
+                          ],
+                          "type": "linear",
+                          "width": 1
+                        },
+                        "fillColorRefFile": null,
+                        "fillColorRefId": null,
+                        "fillImage": null,
+                        "fillOpacity": 1
+                      }
+                    ],
+                    "height": 51,
+                    "id": "88954f25-7a86-800b-8008-a87e6f0daed8",
+                    "layoutCell": null,
+                    "layoutChild": null,
+                    "name": "Button Surface",
+                    "opacity": null,
+                    "shadows": [],
+                    "strokes": [],
+                    "type": "rectangle",
+                    "width": 56,
+                    "x": 11225,
+                    "y": 2251
+                  },
+                  {
+                    "borderRadius": 7,
+                    "borderRadiusBottomLeft": 7,
+                    "borderRadiusBottomRight": 7,
+                    "borderRadiusTopLeft": 7,
+                    "borderRadiusTopRight": 7,
+                    "fills": [
+                      {
+                        "fillColor": "#bfe8ff",
+                        "fillColorGradient": null,
+                        "fillColorRefFile": null,
+                        "fillColorRefId": null,
+                        "fillImage": null,
+                        "fillOpacity": 0.53
+                      }
+                    ],
+                    "height": 5,
+                    "id": "88954f25-7a86-800b-8008-a87e6f0daed9",
+                    "layoutCell": null,
+                    "layoutChild": null,
+                    "name": "Button Highlight",
+                    "opacity": 0.76,
+                    "shadows": [],
+                    "strokes": [],
+                    "type": "rectangle",
+                    "width": 28,
+                    "x": 11232,
+                    "y": 2255
+                  },
+                  {
+                    "borderRadius": 0,
+                    "borderRadiusBottomLeft": 0,
+                    "borderRadiusBottomRight": 0,
+                    "borderRadiusTopLeft": 0,
+                    "borderRadiusTopRight": 0,
+                    "children": [
+                      {
+                        "borderRadius": null,
+                        "borderRadiusBottomLeft": null,
+                        "borderRadiusBottomRight": null,
+                        "borderRadiusTopLeft": null,
+                        "borderRadiusTopRight": null,
+                        "children": [
+                          {
+                            "borderRadius": 0,
+                            "borderRadiusBottomLeft": 0,
+                            "borderRadiusBottomRight": 0,
+                            "borderRadiusTopLeft": 0,
+                            "borderRadiusTopRight": 0,
+                            "fills": [],
+                            "height": 28,
+                            "id": "88954f25-7a86-800b-8008-a87e6f0daedc",
+                            "layoutCell": null,
+                            "layoutChild": null,
+                            "name": "base-background",
+                            "opacity": null,
+                            "shadows": [],
+                            "strokes": [],
+                            "type": "rectangle",
+                            "width": 28,
+                            "x": 11239,
+                            "y": 2265
+                          },
+                          {
+                            "borderRadius": null,
+                            "borderRadiusBottomLeft": null,
+                            "borderRadiusBottomRight": null,
+                            "borderRadiusTopLeft": null,
+                            "borderRadiusTopRight": null,
+                            "content": "M11243,2276L11243,2269L11250,2269M11256,2269L11263,2269L11263,2276M11263,2282L11263,2289L11256,2289M11250,2289L11243,2289L11243,2282",
+                            "fills": [],
+                            "height": 20,
+                            "id": "88954f25-7a86-800b-8008-a87e6f0dda82",
+                            "layoutCell": null,
+                            "layoutChild": null,
+                            "name": "svg-path",
+                            "opacity": null,
+                            "shadows": [],
+                            "strokes": [
+                              {
+                                "strokeAlignment": null,
+                                "strokeCapEnd": "round",
+                                "strokeCapStart": "round",
+                                "strokeColor": "#ffffff",
+                                "strokeColorGradient": null,
+                                "strokeColorRefFile": null,
+                                "strokeColorRefId": null,
+                                "strokeImage": null,
+                                "strokeOpacity": 1,
+                                "strokeStyle": null,
+                                "strokeWidth": 2.8
+                              }
+                            ],
+                            "type": "path",
+                            "width": 20,
+                            "x": 11243,
+                            "y": 2269
+                          }
+                        ],
+                        "fills": [],
+                        "height": 28,
+                        "id": "88954f25-7a86-800b-8008-a87e6f0daedb",
+                        "layoutCell": null,
+                        "layoutChild": {
+                          "absolute": false,
+                          "alignSelf": "auto",
+                          "bottomMargin": 0,
+                          "horizontalMargin": 0,
+                          "horizontalSizing": "fix",
+                          "leftMargin": 0,
+                          "marginType": "simple",
+                          "maxHeight": null,
+                          "maxWidth": null,
+                          "minHeight": null,
+                          "minWidth": null,
+                          "rightMargin": 0,
+                          "topMargin": 0,
+                          "verticalMargin": 0,
+                          "verticalSizing": "fix",
+                          "zIndex": 0
+                        },
+                        "name": "Icon / Fullscreen",
+                        "opacity": null,
+                        "shadows": [],
+                        "strokes": [],
+                        "type": "group",
+                        "width": 28,
+                        "x": 11239,
+                        "y": 2265
+                      }
+                    ],
+                    "fills": [],
+                    "flex": {
+                      "alignContent": "stretch",
+                      "alignItems": "center",
+                      "bottomPadding": 0,
+                      "columnGap": 0,
+                      "dir": "column",
+                      "horizontalPadding": 0,
+                      "horizontalSizing": "fix",
+                      "justifyContent": "center",
+                      "justifyItems": null,
+                      "leftPadding": 0,
+                      "paddingType": "simple",
+                      "rightPadding": 0,
+                      "rowGap": 0,
+                      "topPadding": 0,
+                      "verticalPadding": 0,
+                      "verticalSizing": "fix",
+                      "wrap": "nowrap"
+                    },
+                    "grid": null,
+                    "height": 44,
+                    "horizontalSizing": "fix",
+                    "id": "88954f25-7a86-800b-8008-a87e6f0daeda",
+                    "layoutCell": null,
+                    "layoutChild": null,
+                    "name": "Icon Content",
+                    "opacity": null,
+                    "shadows": [],
+                    "strokes": [],
+                    "type": "board",
+                    "verticalSizing": "fix",
+                    "width": 44,
+                    "x": 11231,
+                    "y": 2257
+                  }
+                ],
+                "fills": [],
+                "height": 56,
+                "id": "88954f25-7a86-800b-8008-a87e6f0daed5",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "DuduQ / Button / Icon / Fullscreen / Neutral / Default",
+                "opacity": null,
+                "shadows": [],
+                "strokes": [],
+                "type": "group",
+                "width": 56,
+                "x": 11225,
+                "y": 2251
+              }
+            ],
+            "fills": [],
+            "flex": null,
+            "grid": null,
+            "height": 56,
+            "horizontalSizing": "fix",
+            "id": "88954f25-7a86-800b-8008-a87e6f0daecb",
+            "layoutCell": null,
+            "layoutChild": null,
+            "name": "Header / Fullscreen",
+            "opacity": null,
+            "shadows": [],
+            "strokes": [],
+            "type": "board",
+            "verticalSizing": "fix",
+            "width": 56,
+            "x": 11225,
+            "y": 2251
+          }
+        ],
+        "fills": [
+          {
+            "fillColor": null,
+            "fillColorGradient": {
+              "endX": 0.5,
+              "endY": 1,
+              "startX": 0.5,
+              "startY": 0,
+              "stops": [
+                {
+                  "color": "#fffdf7",
+                  "offset": 0,
+                  "opacity": 1
+                },
+                {
+                  "color": "#f7fcf7",
+                  "offset": 0.55,
+                  "opacity": 1
+                },
+                {
+                  "color": "#edf7f1",
+                  "offset": 1,
+                  "opacity": 1
+                }
+              ],
+              "type": "linear",
+              "width": 1
+            },
+            "fillColorRefFile": null,
+            "fillColorRefId": null,
+            "fillImage": null,
+            "fillOpacity": 1
+          }
+        ],
+        "flex": null,
+        "grid": null,
+        "height": 94,
+        "horizontalSizing": "fix",
+        "id": "88954f25-7a86-800b-8008-a87e6f0d4e44",
+        "layoutCell": null,
+        "layoutChild": null,
+        "name": "DUDUQ / HUD / HEADER / DUDUQ / HUD / HEADER / GOLD MASTER",
+        "opacity": null,
+        "shadows": [
+          {
+            "blur": 13,
+            "color": {
+              "color": "#315143",
+              "opacity": 0.2
+            },
+            "hidden": false,
+            "id": "881bb268-25e8-800a-8008-a376f68bfdc6",
+            "offsetX": 0,
+            "offsetY": 7,
+            "spread": 0,
+            "style": "drop-shadow"
+          }
+        ],
+        "strokes": [
+          {
+            "strokeAlignment": "inner",
+            "strokeCapEnd": null,
+            "strokeCapStart": null,
+            "strokeColor": "#c9ded2",
+            "strokeColorGradient": null,
+            "strokeColorRefFile": null,
+            "strokeColorRefId": null,
+            "strokeImage": null,
+            "strokeOpacity": 1,
+            "strokeStyle": "solid",
+            "strokeWidth": 2
+          }
+        ],
+        "type": "board",
+        "verticalSizing": "fix",
+        "width": 1056,
+        "x": 10249,
+        "y": 2232
+      }
+    },
+    "DUDUQ_CANONICAL_QUESTION_HUD": {
+      "mainId": "88954f25-7a86-800b-8008-a87e700a22e9",
+      "tree": {
+        "borderRadius": 0,
+        "borderRadiusBottomLeft": 0,
+        "borderRadiusBottomRight": 0,
+        "borderRadiusTopLeft": 0,
+        "borderRadiusTopRight": 0,
+        "children": [
+          {
+            "borderRadius": null,
+            "borderRadiusBottomLeft": null,
+            "borderRadiusBottomRight": null,
+            "borderRadiusTopLeft": null,
+            "borderRadiusTopRight": null,
+            "children": [
+              {
+                "borderRadius": 4,
+                "borderRadiusBottomLeft": 4,
+                "borderRadiusBottomRight": 4,
+                "borderRadiusTopLeft": 4,
+                "borderRadiusTopRight": 4,
+                "fills": [
+                  {
+                    "fillColor": "#675f53",
+                    "fillColorGradient": null,
+                    "fillColorRefFile": null,
+                    "fillColorRefId": null,
+                    "fillImage": null,
+                    "fillOpacity": 0.08
+                  }
+                ],
+                "height": 2.8666666666672427,
+                "id": "88954f25-7a86-800b-8008-a87e700a4764",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "Panel Shadow",
+                "opacity": null,
+                "shadows": [
+                  {
+                    "blur": 6,
+                    "color": {
+                      "color": "#675f53",
+                      "opacity": 0.09
+                    },
+                    "hidden": false,
+                    "id": "002497e5-f2c0-8002-8008-a2af16bc29ba",
+                    "offsetX": 0,
+                    "offsetY": 2,
+                    "spread": -1,
+                    "style": "drop-shadow"
+                  }
+                ],
+                "strokes": [],
+                "type": "rectangle",
+                "width": 672,
+                "x": 10447,
+                "y": 2389.156360295173
+              },
+              {
+                "borderRadius": 24,
+                "borderRadiusBottomLeft": 24,
+                "borderRadiusBottomRight": 24,
+                "borderRadiusTopLeft": 24,
+                "borderRadiusTopRight": 24,
+                "fills": [
+                  {
+                    "fillColor": "#c7a96e",
+                    "fillColorGradient": null,
+                    "fillColorRefFile": null,
+                    "fillColorRefId": null,
+                    "fillImage": null,
+                    "fillOpacity": 1
+                  }
+                ],
+                "height": 83.255319148936,
+                "id": "88954f25-7a86-800b-8008-a87e700a4765",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "Panel Depth",
+                "opacity": null,
+                "shadows": [],
+                "strokes": [],
+                "type": "rectangle",
+                "width": 720,
+                "x": 10423,
+                "y": 2351.7200000000003
+              },
+              {
+                "borderRadius": 24,
+                "borderRadiusBottomLeft": 24,
+                "borderRadiusBottomRight": 24,
+                "borderRadiusTopLeft": 24,
+                "borderRadiusTopRight": 24,
+                "fills": [
+                  {
+                    "fillColor": null,
+                    "fillColorGradient": {
+                      "endX": 0.5,
+                      "endY": 1,
+                      "startX": 0.5,
+                      "startY": 0,
+                      "stops": [
+                        {
+                          "color": "#fffffb",
+                          "offset": 0,
+                          "opacity": 1
+                        },
+                        {
+                          "color": "#fff8e6",
+                          "offset": 0.55,
+                          "opacity": 1
+                        },
+                        {
+                          "color": "#f6ecd2",
+                          "offset": 1,
+                          "opacity": 1
+                        }
+                      ],
+                      "type": "linear",
+                      "width": 1
+                    },
+                    "fillColorRefFile": null,
+                    "fillColorRefId": null,
+                    "fillImage": null,
+                    "fillOpacity": 1
+                  }
+                ],
+                "height": 83.255319148936,
+                "id": "88954f25-7a86-800b-8008-a87e700a4766",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "Panel Surface",
+                "opacity": null,
+                "shadows": [
+                  {
+                    "blur": 11,
+                    "color": {
+                      "color": "#62553c",
+                      "opacity": 0.18
+                    },
+                    "hidden": false,
+                    "id": "881bb268-25e8-800a-8008-a37dda5041c8",
+                    "offsetX": 0,
+                    "offsetY": 6,
+                    "spread": 0,
+                    "style": "drop-shadow"
+                  }
+                ],
+                "strokes": [
+                  {
+                    "strokeAlignment": "inner",
+                    "strokeCapEnd": null,
+                    "strokeCapStart": null,
+                    "strokeColor": "#dcc798",
+                    "strokeColorGradient": null,
+                    "strokeColorRefFile": null,
+                    "strokeColorRefId": null,
+                    "strokeImage": null,
+                    "strokeOpacity": 1,
+                    "strokeStyle": "solid",
+                    "strokeWidth": 2
+                  }
+                ],
+                "type": "rectangle",
+                "width": 720,
+                "x": 10423,
+                "y": 2350
+              },
+              {
+                "borderRadius": 8,
+                "borderRadiusBottomLeft": 8,
+                "borderRadiusBottomRight": 8,
+                "borderRadiusTopLeft": 8,
+                "borderRadiusTopRight": 8,
+                "fills": [
+                  {
+                    "fillColor": "#ffffff",
+                    "fillColorGradient": null,
+                    "fillColorRefFile": null,
+                    "fillColorRefId": null,
+                    "fillImage": null,
+                    "fillOpacity": 0.9
+                  }
+                ],
+                "height": 5.1599999999998545,
+                "id": "88954f25-7a86-800b-8008-a87e700a4767",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "Panel Highlight",
+                "opacity": 0.72,
+                "shadows": [],
+                "strokes": [],
+                "type": "rectangle",
+                "width": 300,
+                "x": 10443,
+                "y": 2352.8666666666663
+              },
+              {
+                "borderRadius": 0,
+                "borderRadiusBottomLeft": 0,
+                "borderRadiusBottomRight": 0,
+                "borderRadiusTopLeft": 0,
+                "borderRadiusTopRight": 0,
+                "children": [
+                  {
+                    "borderRadius": 0,
+                    "borderRadiusBottomLeft": 0,
+                    "borderRadiusBottomRight": 0,
+                    "borderRadiusTopLeft": 0,
+                    "borderRadiusTopRight": 0,
+                    "children": [],
+                    "fills": [],
+                    "flex": {
+                      "alignContent": "stretch",
+                      "alignItems": "start",
+                      "bottomPadding": 0,
+                      "columnGap": 0,
+                      "dir": "column",
+                      "horizontalPadding": 0,
+                      "horizontalSizing": "fix",
+                      "justifyContent": "center",
+                      "justifyItems": null,
+                      "leftPadding": 0,
+                      "paddingType": "simple",
+                      "rightPadding": 0,
+                      "rowGap": 0,
+                      "topPadding": 0,
+                      "verticalPadding": 0,
+                      "verticalSizing": "fix",
+                      "wrap": "nowrap"
+                    },
+                    "grid": null,
+                    "height": 48,
+                    "horizontalSizing": "fix",
+                    "id": "88954f25-7a86-800b-8008-a87e700a4769",
+                    "layoutCell": null,
+                    "layoutChild": {
+                      "absolute": false,
+                      "alignSelf": "auto",
+                      "bottomMargin": 0,
+                      "horizontalMargin": 0,
+                      "horizontalSizing": "fix",
+                      "leftMargin": 0,
+                      "marginType": "simple",
+                      "maxHeight": null,
+                      "maxWidth": null,
+                      "minHeight": null,
+                      "minWidth": null,
+                      "rightMargin": 0,
+                      "topMargin": 0,
+                      "verticalMargin": 0,
+                      "verticalSizing": "fix",
+                      "zIndex": 0
+                    },
+                    "name": "Action Slot",
+                    "opacity": null,
+                    "shadows": [],
+                    "strokes": [],
+                    "type": "board",
+                    "verticalSizing": "fix",
+                    "width": 632,
+                    "x": 9788,
+                    "y": 1
+                  },
+                  {
+                    "borderRadius": 0,
+                    "borderRadiusBottomLeft": 0,
+                    "borderRadiusBottomRight": 0,
+                    "borderRadiusTopLeft": 0,
+                    "borderRadiusTopRight": 0,
+                    "children": [],
+                    "fills": [],
+                    "flex": {
+                      "alignContent": "stretch",
+                      "alignItems": "start",
+                      "bottomPadding": 0,
+                      "columnGap": 0,
+                      "dir": "column",
+                      "horizontalPadding": 0,
+                      "horizontalSizing": "fix",
+                      "justifyContent": "center",
+                      "justifyItems": null,
+                      "leftPadding": 0,
+                      "paddingType": "simple",
+                      "rightPadding": 0,
+                      "rowGap": 0,
+                      "topPadding": 0,
+                      "verticalPadding": 0,
+                      "verticalSizing": "fix",
+                      "wrap": "nowrap"
+                    },
+                    "grid": null,
+                    "height": 72,
+                    "horizontalSizing": "fix",
+                    "id": "88954f25-7a86-800b-8008-a87e700a476a",
+                    "layoutCell": null,
+                    "layoutChild": {
+                      "absolute": false,
+                      "alignSelf": "auto",
+                      "bottomMargin": 0,
+                      "horizontalMargin": 0,
+                      "horizontalSizing": "fix",
+                      "leftMargin": 0,
+                      "marginType": "simple",
+                      "maxHeight": null,
+                      "maxWidth": null,
+                      "minHeight": null,
+                      "minWidth": null,
+                      "rightMargin": 0,
+                      "topMargin": 0,
+                      "verticalMargin": 0,
+                      "verticalSizing": "fix",
+                      "zIndex": 0
+                    },
+                    "name": "Media Slot",
+                    "opacity": null,
+                    "shadows": [],
+                    "strokes": [],
+                    "type": "board",
+                    "verticalSizing": "fix",
+                    "width": 632,
+                    "x": 9788,
+                    "y": 1
+                  },
+                  {
+                    "borderRadius": 0,
+                    "borderRadiusBottomLeft": 0,
+                    "borderRadiusBottomRight": 0,
+                    "borderRadiusTopLeft": 0,
+                    "borderRadiusTopRight": 0,
+                    "children": [
+                      {
+                        "borderRadius": null,
+                        "borderRadiusBottomLeft": null,
+                        "borderRadiusBottomRight": null,
+                        "borderRadiusTopLeft": null,
+                        "borderRadiusTopRight": null,
+                        "fills": [
+                          {
+                            "fillColor": "#26352d",
+                            "fillColorGradient": null,
+                            "fillColorRefFile": null,
+                            "fillColorRefId": null,
+                            "fillImage": null,
+                            "fillOpacity": 1
+                          }
+                        ],
+                        "fontFamily": "Nunito",
+                        "fontSize": "22",
+                        "fontStyle": "normal",
+                        "fontWeight": "900",
+                        "height": 44,
+                        "id": "88954f25-7a86-800b-8008-a87e700a476c",
+                        "layoutCell": null,
+                        "layoutChild": {
+                          "absolute": false,
+                          "alignSelf": "auto",
+                          "bottomMargin": 0,
+                          "horizontalMargin": 0,
+                          "horizontalSizing": "fix",
+                          "leftMargin": 0,
+                          "marginType": "simple",
+                          "maxHeight": null,
+                          "maxWidth": null,
+                          "minHeight": null,
+                          "minWidth": null,
+                          "rightMargin": 0,
+                          "topMargin": 0,
+                          "verticalMargin": 0,
+                          "verticalSizing": "fix",
+                          "zIndex": 0
+                        },
+                        "letterSpacing": "-0.22",
+                        "lineHeight": "1.15",
+                        "name": "Question / Text",
+                        "opacity": null,
+                        "shadows": [],
+                        "strokes": [],
+                        "textTransform": "none",
+                        "type": "text",
+                        "width": 570,
+                        "x": 10467,
+                        "y": 2372.7021276595747
+                      }
+                    ],
+                    "fills": [],
+                    "flex": {
+                      "alignContent": "stretch",
+                      "alignItems": "start",
+                      "bottomPadding": 0,
+                      "columnGap": 0,
+                      "dir": "column",
+                      "horizontalPadding": 0,
+                      "horizontalSizing": "fix",
+                      "justifyContent": "center",
+                      "justifyItems": null,
+                      "leftPadding": 0,
+                      "paddingType": "simple",
+                      "rightPadding": 0,
+                      "rowGap": 0,
+                      "topPadding": 0,
+                      "verticalPadding": 0,
+                      "verticalSizing": "fix",
+                      "wrap": "nowrap"
+                    },
+                    "grid": null,
+                    "height": 42,
+                    "horizontalSizing": "fix",
+                    "id": "88954f25-7a86-800b-8008-a87e700a476b",
+                    "layoutCell": null,
+                    "layoutChild": {
+                      "absolute": false,
+                      "alignSelf": "auto",
+                      "bottomMargin": 0,
+                      "horizontalMargin": 0,
+                      "horizontalSizing": "fix",
+                      "leftMargin": 0,
+                      "marginType": "simple",
+                      "maxHeight": null,
+                      "maxWidth": null,
+                      "minHeight": null,
+                      "minWidth": null,
+                      "rightMargin": 0,
+                      "topMargin": 0,
+                      "verticalMargin": 0,
+                      "verticalSizing": "fix",
+                      "zIndex": 0
+                    },
+                    "name": "Question Slot",
+                    "opacity": null,
+                    "shadows": [],
+                    "strokes": [],
+                    "type": "board",
+                    "verticalSizing": "fix",
+                    "width": 570,
+                    "x": 10467,
+                    "y": 2373.7021276595747
+                  }
+                ],
+                "fills": [],
+                "flex": {
+                  "alignContent": "stretch",
+                  "alignItems": "start",
+                  "bottomPadding": 12,
+                  "columnGap": 10,
+                  "dir": "column",
+                  "horizontalPadding": 16,
+                  "horizontalSizing": "fix",
+                  "justifyContent": "center",
+                  "justifyItems": null,
+                  "leftPadding": 16,
+                  "paddingType": "simple",
+                  "rightPadding": 16,
+                  "rowGap": 10,
+                  "topPadding": 12,
+                  "verticalPadding": 12,
+                  "verticalSizing": "fix",
+                  "wrap": "nowrap"
+                },
+                "grid": null,
+                "height": 49.40425531914889,
+                "horizontalSizing": "fix",
+                "id": "88954f25-7a86-800b-8008-a87e700a4768",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "Question Panel",
+                "opacity": null,
+                "shadows": [],
+                "strokes": [],
+                "type": "board",
+                "verticalSizing": "fix",
+                "width": 664,
+                "x": 10451,
+                "y": 2370
+              }
+            ],
+            "fills": [],
+            "height": 84.97531914893625,
+            "id": "88954f25-7a86-800b-8008-a87e700a22ea",
+            "layoutCell": null,
+            "layoutChild": null,
+            "name": "DuduQ / Game / QuestionPanel / Text / Default",
+            "opacity": null,
+            "shadows": [],
+            "strokes": [],
+            "type": "group",
+            "width": 720,
+            "x": 10423,
+            "y": 2350
+          },
+          {
+            "borderRadius": 0,
+            "borderRadiusBottomLeft": 0,
+            "borderRadiusBottomRight": 0,
+            "borderRadiusTopLeft": 0,
+            "borderRadiusTopRight": 0,
+            "children": [
+              {
+                "borderRadius": null,
+                "borderRadiusBottomLeft": null,
+                "borderRadiusBottomRight": null,
+                "borderRadiusTopLeft": null,
+                "borderRadiusTopRight": null,
+                "children": [
+                  {
+                    "borderRadius": 4,
+                    "borderRadiusBottomLeft": 4,
+                    "borderRadiusBottomRight": 4,
+                    "borderRadiusTopLeft": 4,
+                    "borderRadiusTopRight": 4,
+                    "fills": [
+                      {
+                        "fillColor": "#253b53",
+                        "fillColorGradient": null,
+                        "fillColorRefFile": null,
+                        "fillColorRefId": null,
+                        "fillImage": null,
+                        "fillOpacity": 0.35
+                      }
+                    ],
+                    "height": 5,
+                    "id": "88954f25-7a86-800b-8008-a87e700a476e",
+                    "layoutCell": null,
+                    "layoutChild": null,
+                    "name": "Button Shadow",
+                    "opacity": 0.82,
+                    "shadows": [],
+                    "strokes": [],
+                    "type": "rectangle",
+                    "width": 44,
+                    "x": 11079,
+                    "y": 2413
+                  },
+                  {
+                    "borderRadius": 16,
+                    "borderRadiusBottomLeft": 16,
+                    "borderRadiusBottomRight": 16,
+                    "borderRadiusTopLeft": 16,
+                    "borderRadiusTopRight": 16,
+                    "fills": [
+                      {
+                        "fillColor": "#175c93",
+                        "fillColorGradient": null,
+                        "fillColorRefFile": null,
+                        "fillColorRefId": null,
+                        "fillImage": null,
+                        "fillOpacity": 1
+                      }
+                    ],
+                    "height": 51,
+                    "id": "88954f25-7a86-800b-8008-a87e700a476f",
+                    "layoutCell": null,
+                    "layoutChild": null,
+                    "name": "Button Depth",
+                    "opacity": null,
+                    "shadows": [],
+                    "strokes": [],
+                    "type": "rectangle",
+                    "width": 56,
+                    "x": 11073,
+                    "y": 2369
+                  },
+                  {
+                    "borderRadius": 16,
+                    "borderRadiusBottomLeft": 16,
+                    "borderRadiusBottomRight": 16,
+                    "borderRadiusTopLeft": 16,
+                    "borderRadiusTopRight": 16,
+                    "fills": [
+                      {
+                        "fillColor": "#349fdf",
+                        "fillColorGradient": null,
+                        "fillColorRefFile": null,
+                        "fillColorRefId": null,
+                        "fillImage": null,
+                        "fillOpacity": 1
+                      }
+                    ],
+                    "height": 51,
+                    "id": "88954f25-7a86-800b-8008-a87e700a4770",
+                    "layoutCell": null,
+                    "layoutChild": null,
+                    "name": "Button Surface",
+                    "opacity": null,
+                    "shadows": [],
+                    "strokes": [],
+                    "type": "rectangle",
+                    "width": 56,
+                    "x": 11073,
+                    "y": 2364
+                  },
+                  {
+                    "borderRadius": 4,
+                    "borderRadiusBottomLeft": 4,
+                    "borderRadiusBottomRight": 4,
+                    "borderRadiusTopLeft": 4,
+                    "borderRadiusTopRight": 4,
+                    "fills": [
+                      {
+                        "fillColor": "#bfe8ff",
+                        "fillColorGradient": null,
+                        "fillColorRefFile": null,
+                        "fillColorRefId": null,
+                        "fillImage": null,
+                        "fillOpacity": 0.4166666666666667
+                      }
+                    ],
+                    "height": 5,
+                    "id": "88954f25-7a86-800b-8008-a87e700a4771",
+                    "layoutCell": null,
+                    "layoutChild": null,
+                    "name": "Button Highlight",
+                    "opacity": 0.76,
+                    "shadows": [],
+                    "strokes": [],
+                    "type": "rectangle",
+                    "width": 28,
+                    "x": 11080,
+                    "y": 2368
+                  },
+                  {
+                    "borderRadius": 0,
+                    "borderRadiusBottomLeft": 0,
+                    "borderRadiusBottomRight": 0,
+                    "borderRadiusTopLeft": 0,
+                    "borderRadiusTopRight": 0,
+                    "children": [
+                      {
+                        "borderRadius": null,
+                        "borderRadiusBottomLeft": null,
+                        "borderRadiusBottomRight": null,
+                        "borderRadiusTopLeft": null,
+                        "borderRadiusTopRight": null,
+                        "children": [
+                          {
+                            "borderRadius": 0,
+                            "borderRadiusBottomLeft": 0,
+                            "borderRadiusBottomRight": 0,
+                            "borderRadiusTopLeft": 0,
+                            "borderRadiusTopRight": 0,
+                            "fills": [],
+                            "height": 28,
+                            "id": "88954f25-7a86-800b-8008-a87e700a4774",
+                            "layoutCell": null,
+                            "layoutChild": null,
+                            "name": "base-background",
+                            "opacity": null,
+                            "shadows": [],
+                            "strokes": [],
+                            "type": "rectangle",
+                            "width": 28,
+                            "x": 11087,
+                            "y": 2375
+                          },
+                          {
+                            "borderRadius": null,
+                            "borderRadiusBottomLeft": null,
+                            "borderRadiusBottomRight": null,
+                            "borderRadiusTopLeft": null,
+                            "borderRadiusTopRight": null,
+                            "content": "M11090,2386L11095,2386L11102,2380L11102,2398L11095,2392L11090,2392Z",
+                            "fills": [
+                              {
+                                "fillColor": "#ffffff",
+                                "fillColorGradient": null,
+                                "fillColorRefFile": null,
+                                "fillColorRefId": null,
+                                "fillImage": null,
+                                "fillOpacity": null
+                              }
+                            ],
+                            "height": 18,
+                            "id": "88954f25-7a86-800b-8008-a87e700a4775",
+                            "layoutCell": null,
+                            "layoutChild": null,
+                            "name": "svg-path",
+                            "opacity": null,
+                            "shadows": [],
+                            "strokes": [
+                              {
+                                "strokeAlignment": null,
+                                "strokeCapEnd": null,
+                                "strokeCapStart": null,
+                                "strokeColor": "#ffffff",
+                                "strokeColorGradient": null,
+                                "strokeColorRefFile": null,
+                                "strokeColorRefId": null,
+                                "strokeImage": null,
+                                "strokeOpacity": 1,
+                                "strokeStyle": null,
+                                "strokeWidth": 1.5
+                              }
+                            ],
+                            "type": "path",
+                            "width": 12,
+                            "x": 11090,
+                            "y": 2380
+                          },
+                          {
+                            "borderRadius": null,
+                            "borderRadiusBottomLeft": null,
+                            "borderRadiusBottomRight": null,
+                            "borderRadiusTopLeft": null,
+                            "borderRadiusTopRight": null,
+                            "content": "M11106,2384C11109.333984375,2387.333251953125,11109.333984375,2390.666748046875,11106,2394M11109,2380C11115,2386,11115,2392,11109,2398",
+                            "fills": [],
+                            "height": 18,
+                            "id": "88954f25-7a86-800b-8008-a87e700a4776",
+                            "layoutCell": null,
+                            "layoutChild": null,
+                            "name": "svg-path",
+                            "opacity": null,
+                            "shadows": [],
+                            "strokes": [
+                              {
+                                "strokeAlignment": null,
+                                "strokeCapEnd": "round",
+                                "strokeCapStart": "round",
+                                "strokeColor": "#ffffff",
+                                "strokeColorGradient": null,
+                                "strokeColorRefFile": null,
+                                "strokeColorRefId": null,
+                                "strokeImage": null,
+                                "strokeOpacity": 1,
+                                "strokeStyle": null,
+                                "strokeWidth": 2.5
+                              }
+                            ],
+                            "type": "path",
+                            "width": 7.5,
+                            "x": 11106,
+                            "y": 2380
+                          }
+                        ],
+                        "fills": [],
+                        "height": 28,
+                        "id": "88954f25-7a86-800b-8008-a87e700a4773",
+                        "layoutCell": null,
+                        "layoutChild": {
+                          "absolute": false,
+                          "alignSelf": "auto",
+                          "bottomMargin": 0,
+                          "horizontalMargin": 0,
+                          "horizontalSizing": "fix",
+                          "leftMargin": 0,
+                          "marginType": "simple",
+                          "maxHeight": null,
+                          "maxWidth": null,
+                          "minHeight": null,
+                          "minWidth": null,
+                          "rightMargin": 0,
+                          "topMargin": 0,
+                          "verticalMargin": 0,
+                          "verticalSizing": "fix",
+                          "zIndex": 0
+                        },
+                        "name": "Icon / Audio",
+                        "opacity": null,
+                        "shadows": [],
+                        "strokes": [],
+                        "type": "group",
+                        "width": 28,
+                        "x": 11087,
+                        "y": 2375
+                      }
+                    ],
+                    "fills": [],
+                    "flex": {
+                      "alignContent": "stretch",
+                      "alignItems": "center",
+                      "bottomPadding": 0,
+                      "columnGap": 0,
+                      "dir": "column",
+                      "horizontalPadding": 0,
+                      "horizontalSizing": "fix",
+                      "justifyContent": "center",
+                      "justifyItems": null,
+                      "leftPadding": 0,
+                      "paddingType": "simple",
+                      "rightPadding": 0,
+                      "rowGap": 0,
+                      "topPadding": 0,
+                      "verticalPadding": 0,
+                      "verticalSizing": "fix",
+                      "wrap": "nowrap"
+                    },
+                    "grid": null,
+                    "height": 44,
+                    "horizontalSizing": "fix",
+                    "id": "88954f25-7a86-800b-8008-a87e700a4772",
+                    "layoutCell": null,
+                    "layoutChild": null,
+                    "name": "Icon Content",
+                    "opacity": null,
+                    "shadows": [],
+                    "strokes": [],
+                    "type": "board",
+                    "verticalSizing": "fix",
+                    "width": 44,
+                    "x": 11079,
+                    "y": 2367
+                  }
+                ],
+                "fills": [],
+                "height": 56,
+                "id": "88954f25-7a86-800b-8008-a87e700a476d",
+                "layoutCell": null,
+                "layoutChild": null,
+                "name": "DuduQ / Button / Icon / Audio / Blue / Default",
+                "opacity": null,
+                "shadows": [],
+                "strokes": [],
+                "type": "group",
+                "width": 56,
+                "x": 11073,
+                "y": 2364
+              }
+            ],
+            "fills": [],
+            "flex": null,
+            "grid": null,
+            "height": 56,
+            "horizontalSizing": "fix",
+            "id": "88954f25-7a86-800b-8008-a87e700a22eb",
+            "layoutCell": null,
+            "layoutChild": null,
+            "name": "Question Panel / Audio Action",
+            "opacity": null,
+            "shadows": [],
+            "strokes": [],
+            "type": "board",
+            "verticalSizing": "fix",
+            "width": 56,
+            "x": 11073,
+            "y": 2364
+          },
+          {
+            "borderRadius": 0,
+            "borderRadiusBottomLeft": 0,
+            "borderRadiusBottomRight": 0,
+            "borderRadiusTopLeft": 0,
+            "borderRadiusTopRight": 0,
+            "children": [
+              {
+                "borderRadius": null,
+                "borderRadiusBottomLeft": null,
+                "borderRadiusBottomRight": null,
+                "borderRadiusTopLeft": null,
+                "borderRadiusTopRight": null,
+                "fills": [
+                  {
+                    "fillColor": "#668174",
+                    "fillColorGradient": null,
+                    "fillColorRefFile": null,
+                    "fillColorRefId": null,
+                    "fillImage": null,
+                    "fillOpacity": 1
+                  }
+                ],
+                "fontFamily": "Fredoka",
+                "fontSize": "13",
+                "fontStyle": "normal",
+                "fontWeight": "500",
+                "height": 15,
+                "id": "88954f25-7a86-800b-8008-a87e700a4777",
+                "layoutCell": null,
+                "layoutChild": {
+                  "absolute": false,
+                  "alignSelf": "auto",
+                  "bottomMargin": 0,
+                  "horizontalMargin": 0,
+                  "horizontalSizing": "fix",
+                  "leftMargin": 0,
+                  "marginType": "simple",
+                  "maxHeight": null,
+                  "maxWidth": null,
+                  "minHeight": null,
+                  "minWidth": null,
+                  "rightMargin": 0,
+                  "topMargin": 0,
+                  "verticalMargin": 0,
+                  "verticalSizing": "fix",
+                  "zIndex": 0
+                },
+                "letterSpacing": "0.5",
+                "lineHeight": "1.15",
+                "name": "Instruction / Text",
+                "opacity": null,
+                "shadows": [],
+                "strokes": [],
+                "textTransform": "none",
+                "type": "text",
+                "width": 280,
+                "x": 10468,
+                "y": 2357.5
+              }
+            ],
+            "fills": [],
+            "flex": {
+              "alignContent": "stretch",
+              "alignItems": "start",
+              "bottomPadding": 0,
+              "columnGap": 0,
+              "dir": "column",
+              "horizontalPadding": 0,
+              "horizontalSizing": "fix",
+              "justifyContent": "center",
+              "justifyItems": null,
+              "leftPadding": 0,
+              "paddingType": "simple",
+              "rightPadding": 0,
+              "rowGap": 0,
+              "topPadding": 0,
+              "verticalPadding": 0,
+              "verticalSizing": "fix",
+              "wrap": "nowrap"
+            },
+            "grid": null,
+            "height": 20,
+            "horizontalSizing": "fix",
+            "id": "88954f25-7a86-800b-8008-a87e700a4763",
+            "layoutCell": null,
+            "layoutChild": null,
+            "name": "Instruction Slot",
+            "opacity": null,
+            "shadows": [],
+            "strokes": [],
+            "type": "board",
+            "verticalSizing": "fix",
+            "width": 570,
+            "x": 10468,
+            "y": 2355
+          }
+        ],
+        "fills": [],
+        "flex": null,
+        "grid": null,
+        "height": 86,
+        "horizontalSizing": "fix",
+        "id": "88954f25-7a86-800b-8008-a87e700a22e9",
+        "layoutCell": null,
+        "layoutChild": null,
+        "name": "DUDUQ / HUD / QUESTION / DUDUQ / HUD / QUESTION / GOLD MASTER",
+        "opacity": null,
+        "shadows": [],
+        "strokes": [],
+        "type": "board",
+        "verticalSizing": "fix",
+        "width": 720,
+        "x": 10423,
+        "y": 2350
+      }
+    }
+  },
+  "questionAudioButton": {
+    "found": false,
+    "status": "QUESTION_AUDIO_AMBIGUOUS",
+    "candidates": [
+      {
+        "found": true,
+        "id": "88954f25-7a86-800b-8008-a87e700a22eb",
+        "name": "Question Panel / Audio Action",
+        "type": "board",
+        "width": 56,
+        "height": 56,
+        "fills": [],
+        "borderRadius": 0,
+        "shadows": []
+      },
+      {
+        "found": true,
+        "id": "88954f25-7a86-800b-8008-a87e700a476d",
+        "name": "DuduQ / Button / Icon / Audio / Blue / Default",
+        "type": "group",
+        "width": 56,
+        "height": 56,
+        "fills": [],
+        "borderRadius": null,
+        "shadows": []
+      },
+      {
+        "found": true,
+        "id": "88954f25-7a86-800b-8008-a87e700a4773",
+        "name": "Icon / Audio",
+        "type": "group",
+        "width": 28,
+        "height": 28,
+        "fills": [],
+        "borderRadius": null,
+        "shadows": []
+      }
+    ]
+  },
+  "hashes": {
+    "header": "56a9153f",
+    "question": "bbf7a45d",
+    "combined": "f250c868"
+  }
+}

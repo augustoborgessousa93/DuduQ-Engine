@@ -1,3 +1,5 @@
+import { DuduqSound } from "../../../../core/audio/duduq-sound-system.js";
+
 const STATES = Object.freeze({
   IDLE: "IDLE",
   TARGET_SELECTED: "TARGET_SELECTED",
@@ -104,6 +106,8 @@ export function TargetShooterGameplay({ game, arena, launcher, feedback, showFee
     node.classList.add(result === "correct" ? "is-correct" : "is-incorrect", result === "correct" ? "target-feedback-pulse" : "target-feedback-shake");
     if (result === "correct") targetNodes.forEach((other) => other.classList.toggle("is-subdued", other !== node));
     node.dataset.gameplayState = result;
+    DuduqSound.play(result === "correct" ? "correct" : "error");
+    window.setTimeout(() => DuduqSound.playVoice(result === "correct" ? "correct" : "error"), 140);
     setState(result === "correct" ? STATES.CORRECT_FEEDBACK : STATES.INCORRECT_FEEDBACK);
     showFeedback(result, () => { if (result === "correct") setState(STATES.READY_NEXT); finishFeedback(); });
     if (result === "correct") activitySuccess();
@@ -122,6 +126,7 @@ export function TargetShooterGameplay({ game, arena, launcher, feedback, showFee
   };
   const select = (node) => {
     if (![STATES.IDLE, STATES.TARGET_HOVER].includes(state) || !node?.dataset.targetId) return;
+    DuduqSound.play("uiClick");
     sequence += 1; clearTimer(); selected = node; setTargetVisuals(node); setState(STATES.TARGET_SELECTED); runSequence(node, sequence);
   };
   targetNodes.forEach((node) => {

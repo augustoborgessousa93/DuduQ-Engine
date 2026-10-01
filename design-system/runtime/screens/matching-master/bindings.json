@@ -2,7 +2,7 @@
   "screenId": "50f514fe-4a8a-804d-8008-aa3b1478e03a",
   "behaviorBindings": [
     {
-      "sourceId": "50f514fe-4a8a-804d-8008-aa3b16cea7b7",
+      "sourceId": "393d75f5-200b-8067-8008-b351ceb2ba9a",
       "semanticId": "question-audio",
       "action": "PLAY_QUESTION_AUDIO"
     },

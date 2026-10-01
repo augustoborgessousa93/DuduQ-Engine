@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap");
+
 :root {
   /* Mirror of design-system/duduq-design-tokens.json. Do not create mechanic-local equivalents. */
   --duduq-color-primary: #55c8f2;

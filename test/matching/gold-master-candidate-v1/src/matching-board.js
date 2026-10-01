@@ -1,5 +1,6 @@
 import { StatusIcon } from "./matching-components.js";
 import { MatchingCard } from "./core/ui/index.js";
+import { DuduqSound } from "../../../../core/audio/duduq-sound-system.js";
 
 const svgNS = "http://www.w3.org/2000/svg";
 
@@ -121,6 +122,7 @@ export function MatchingBoard(root, engine, interaction, resolveAsset, onChange)
   const onCardClick = (event) => {
     const card = event.target.closest(".matching-card");
     if (!card || !root.contains(card)) return;
+    DuduqSound.play("uiClick");
     paint(interaction.select(card.dataset.side, card.dataset.id));
   };
   root.addEventListener("click", onCardClick);

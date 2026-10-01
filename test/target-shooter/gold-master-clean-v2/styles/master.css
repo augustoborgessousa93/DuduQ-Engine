@@ -65,9 +65,9 @@
 @keyframes launcher-particles-charge{from{transform:scale(.94);opacity:.2}to{transform:scale(1.02);opacity:.52}}
 @media (prefers-reduced-motion: reduce){.launcher-aim-system .launcher-portal-front.is-charging,.launcher-gameplay-fx .launcher-particles-front.is-charging{animation:none}.launcher-gameplay-fx .launcher-impact-front{transition:none}}
 @container game (max-width:700px) and (max-height:420px){.target-shooter-arena{transform:translateX(-50%) scale(.43)}}
-.target-status-badge{position:absolute;z-index:8;top:-8px;right:-8px;display:grid;place-items:center;width:44px;height:44px;border:4px solid #fff;border-radius:50%;font:900 27px/1 Arial;color:#fff;box-shadow:0 4px 9px rgb(38 54 54 / 30%);pointer-events:none;opacity:0;visibility:hidden;transform:scale(.82);transition:opacity 140ms ease-out,transform 180ms ease-out,visibility 0s linear 180ms}
-.is-incorrect .target-status-badge{background:#ef6f6b;box-shadow:0 0 0 3px rgb(255 208 201 / 72%),0 4px 9px rgb(38 54 54 / 30%)}
-.is-correct .target-status-badge{background:#39b66c;box-shadow:0 0 0 3px rgb(200 255 220 / 72%),0 4px 9px rgb(38 54 54 / 30%)}
+.target-status-badge{position:absolute;z-index:8;top:-8px;right:-8px;display:grid;place-items:center;width:44px;height:44px;border:3.55556px solid #fff;border-radius:50%;font:900 27px/1 Arial;color:#fff;box-shadow:none;pointer-events:none;opacity:0;visibility:hidden;transform:scale(.82);transition:opacity 140ms ease-out,transform 180ms ease-out,visibility 0s linear 180ms}
+.is-incorrect .target-status-badge{background:#ef6f6b;box-shadow:0 0 0 3px rgb(255 208 201 / 72%)}
+.is-correct .target-status-badge{background:#39b66c;box-shadow:0 0 0 3px rgb(200 255 220 / 72%)}
 .is-incorrect .target-status-badge,.is-correct .target-status-badge{opacity:1;visibility:visible;transform:scale(1);transition-delay:0s}
 .target-shooter-target.is-subdued{opacity:.72;filter:saturate(.78) brightness(.96);transition:opacity 220ms ease-out,filter 220ms ease-out}
 .launcher-state-center{transform:rotate(1.409deg)}
@@ -102,3 +102,31 @@
 .target-shooter-screen .question-label{margin:0 0 5px !important;font-size:13px !important;line-height:1.15 !important}
 .target-shooter-screen .question-prompt{font-size:22px !important;line-height:1.15 !important}
 .target-shooter-screen \.legacy-audio-button{width:56px !important;height:56px !important;min-width:56px !important;min-height:56px !important;border-radius:18px !important}
+
+/* TARGET SHOOTER — MASTER / IDLE: board-relative gameplay parity (1366×768).
+   HUD remains owned by core/duduq-live-hud.css. These rules only align the
+   individual visual assets to their persisted Penpot geometry. */
+@media (min-width:901px){
+  .target-shooter-target__animal{transform:none}
+  .target-shooter-target--dog .target-shooter-target__animal{left:42px;top:50px;width:87px;height:95px}
+  .target-shooter-target--cat .target-shooter-target__animal{left:49px;top:49px;width:87px;height:95px}
+  .target-shooter-target--rabbit .target-shooter-target__animal{left:47px;top:49px;width:87px;height:97px}
+  .target-shooter-target--fish .target-shooter-target__animal{left:49px;top:49px;width:87px;height:97px}
+
+  .duduq-magic-launcher{left:529px;top:542px;width:308px;height:220px;transform:none;transform-origin:0 0}
+  .launcher-base-front__art{left:0;top:88px;width:308px;height:132px}
+  .launcher-support-front__art{left:2px;top:68px;width:304px;height:152px}
+  .launcher-aim-system{transform-origin:154px 126px}
+  .launcher-aim-system .launcher-barrel-front{left:60px;top:0;width:188px;height:210px}
+  .launcher-state-center{transform:none}
+}
+
+/* Official Penpot board position for the DOG target wrapper. */
+.target-shooter-target--dog{left:276px;top:280px}
+
+/* Official Penpot board position for the CAT target wrapper. */
+.target-shooter-target--cat{left:505px;top:230px}
+
+/* Penpot: the -9,-118 rabbit group is local to the 184×236 target board;
+   this wrapper is therefore placed at that board's 750,421 arena position. */
+.target-shooter-target--rabbit{left:742px;top:294px}

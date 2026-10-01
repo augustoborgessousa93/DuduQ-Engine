@@ -1,0 +1,32 @@
+/* Product-only visual correction: compensates transparent padding in the approved Dudu artwork. */
+.official-transition-mascot {
+  /* The approved PNG includes generous transparent margins. Size its canvas
+     from the visible character, rather than its intrinsic canvas. */
+  width: clamp(300px, 38vw, 500px) !important;
+  height: clamp(300px, 38vw, 500px) !important;
+  max-width: 62% !important;
+  max-height: 68% !important;
+  object-position: center 45%;
+}
+
+/* A stable layout slot prevents flex shrinking the mascot. The wrapper owns
+   scale; the image owns only its levitation transform. */
+.transition-mascot-scale {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  flex: 0 0 280px;
+  width: min(100%, 500px);
+  place-items: center;
+  overflow: visible;
+  transform: scale(1.7);
+  transform-origin: center 54%;
+}
+
+.transition-mascot-scale .official-transition-mascot {
+  position: absolute;
+  width: 500px !important;
+  height: 500px !important;
+  max-width: none !important;
+  max-height: none !important;
+}

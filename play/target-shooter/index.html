@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <base href="/test/target-shooter/gold-master-clean-v2/" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>DUDUQ Target Shooter</title>
+    <link rel="stylesheet" href="/core/duduq-tokens.css" />
+    <link rel="stylesheet" href="/core/duduq-game-shell.css" />
+    <link
+      rel="stylesheet"
+      href="/test/target-shooter/gold-master-clean-v2/styles/master.css"
+    />
+    <link rel="stylesheet" href="/core/duduq-canonical-header-hud.css" />
+    <link rel="stylesheet" href="/core/duduq-canonical-question-hud.css" />
+    <link rel="stylesheet" href="/core/duduq-live-hud.css?v=HUD_FINAL_01" />
+    <link rel="stylesheet" href="/core/duduq-page-transition.css" />
+  </head>
+  <body>
+    <main
+      id="game"
+      class="game-screen target-shooter-screen"
+      aria-label="DuduQ Target Shooter"
+    >
+      <div class="world-backdrop" aria-hidden="true"></div>
+      <div class="readability-veil" aria-hidden="true"></div>
+      <div id="game-shell" class="game-shell">
+        <div data-canonical-header-slot></div>
+        <div data-canonical-question-slot></div>
+        <section class="target-shooter-arena" aria-label="Alvos">
+          <article class="target-shooter-target target-shooter-target--dog">
+            <img
+              class="target-shooter-target__base"
+              src="/asset-alvo.png"
+              alt="Alvo com cachorro"
+            /><img
+              class="target-shooter-target__animal"
+              src="https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/pet-dog-cachorro.png"
+              alt="Cachorro"
+            /><span class="target-state-ring">✦</span>
+          </article>
+          <article class="target-shooter-target target-shooter-target--cat">
+            <img
+              class="target-shooter-target__base"
+              src="/asset-alvo.png"
+              alt="Alvo com gato"
+            /><img
+              class="target-shooter-target__animal"
+              src="https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/pet-cat-gato.png"
+              alt="Gato"
+            /><span class="target-state-ring">×</span>
+          </article>
+          <article class="target-shooter-target target-shooter-target--rabbit">
+            <img
+              class="target-shooter-target__base"
+              src="/asset-alvo.png"
+              alt="Alvo com coelho"
+            /><img
+              class="target-shooter-target__animal"
+              src="https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/pet-rabbit-coelho.png"
+              alt="Coelho"
+            /><span class="target-state-ring">✓</span>
+          </article>
+          <article class="target-shooter-target target-shooter-target--fish">
+            <img
+              class="target-shooter-target__base"
+              src="/asset-alvo.png"
+              alt="Alvo com peixe"
+            /><img
+              class="target-shooter-target__animal"
+              src="https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/pet-fish-peixe.png"
+              alt="Peixe"
+            />
+          </article>
+          <div class="duduq-magic-slingshot" aria-label="Magic Slingshot">
+            <div class="aim-trajectory" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div
+        class="result-fx-layer success-celebration-layer"
+        aria-hidden="true"
+      ></div>
+      <section
+        class="feedback-ribbon"
+        data-feedback="correct"
+        aria-live="polite"
+        aria-atomic="true"
+        hidden
+      >
+        <img
+          class="feedback-mascot"
+          src="/core/assets/duduq-feedback-correct.png"
+          alt="DuduQ comemorando"
+        />
+        <div class="feedback-copy">
+          <h2>Correto!</h2>
+          <p>Você acertou o alvo correto.</p>
+        </div>
+        <button class="feedback-action game-button" type="button">
+          CONTINUAR
+        </button>
+      </section>
+    </main>
+    <script
+      type="module"
+      src="/test/target-shooter/gold-master-clean-v2/src/static-view.js"
+    ></script>
+    <script src="/core/duduq-page-transition.js"></script>
+    <script src="/core/duduq-transition.js"></script>
+    <script src="/core/duduq-game-flow.js"></script>
+    <script>
+      window.addEventListener(
+        "click",
+        (e) => {
+          const button = e.target.closest(".feedback-action"),
+            feedback = document.querySelector(
+              '.feedback-ribbon:not([hidden])[data-feedback="correct"]',
+            );
+          if (button && feedback)
+            DuduQGameFlow.complete({
+              mechanic: "target-shooter",
+              result: "correct",
+            });
+        },
+        true,
+      );
+      window.__DUDUQ_PRODUCT__ = Object.freeze({
+        runtimeType: "APPROVED_TARGET_SHOOTER_GOLD_MASTER",
+        source: "/test/target-shooter/gold-master-clean-v2",
+      });
+    </script>
+  </body>
+</html>

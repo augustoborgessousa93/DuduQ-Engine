@@ -1,0 +1,344 @@
+/* Final product-route visual authority: shell only, loaded last by both routes. */
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap");
+@import url("/design-system/runtime/screens/target-shooter-master/fonts.css");
+@import url("/design-system/runtime/screens/matching-master/fonts.css");
+#game .duduq-canonical-header-hud.game-hud {position:relative!important;top:1px!important;width:min(1056px,100%)!important;height:94px!important;min-height:94px!important;padding:0!important;column-gap:0!important;border:0!important;border-radius:28px!important;background:#fffdf7!important;box-shadow:0 5px 0 #75917b54!important;overflow:visible!important;}
+#game .duduq-canonical-header-hud[data-mechanic="matching"] .duduq-canonical-mascot-motion{position:absolute!important;left:19px!important;top:9px!important;width:82px!important;height:76px!important;display:block!important;visibility:visible!important;opacity:1!important;z-index:1!important;background:none!important;filter:none!important;box-shadow:none!important;transform-origin:50% 68%!important;animation:duduq-hud-float var(--duduq-motion-float) ease-in-out infinite!important;padding:0!important;}
+#game .duduq-canonical-header-hud[data-mechanic="matching"] .duduq-canonical-mascot-motion .hud-mascot{display:none!important;}
+#game .duduq-canonical-header-hud[data-mechanic="matching"] .hud-title-group{position:absolute!important;left:120px!important;top:37px!important;width:108px!important;height:29px!important;min-height:29px!important;max-height:29px!important;display:block!important;}
+#game .duduq-canonical-header-hud[data-mechanic="matching"] .hud-title{position:absolute!important;left:0!important;top:0!important;display:flex!important;align-items:center!important;justify-content:center!important;width:108px!important;height:29px!important;margin:0!important;font-family:"Nunito",sans-serif!important;font-size:21.9925532701044px!important;font-weight:900!important;line-height:1.2933671781705627!important;color:#364b43!important;letter-spacing:0!important;text-rendering:geometricPrecision!important;text-align:center!important;white-space:nowrap!important;}
+#game .duduq-canonical-header-hud[data-mechanic="matching"] .hud-progress{position:absolute!important;left:300px!important;top:40px!important;width:482px!important;height:18px!important;box-sizing:border-box!important;border:.89px solid #c8d8cd!important;border-radius:20px!important;background:#dce8df!important;overflow:hidden!important;}
+#game .duduq-canonical-header-hud[data-mechanic="matching"] .hud-progress-fill{position:absolute!important;left:0!important;top:-1px!important;height:18px!important;border-radius:20px!important;background:#278fd2!important;}
+#game .duduq-canonical-header-hud[data-mechanic="matching"] .hud-progress-fill::after{left:7px!important;top:3px!important;width:calc(100% - 14px)!important;height:3px!important;background:#bfe8ff6a!important;border-radius:20px!important;opacity:.76!important;}
+@media (prefers-reduced-motion:reduce){#game .duduq-canonical-header-hud[data-mechanic="matching"] .duduq-canonical-mascot-motion{animation:none!important;}}
+#game .duduq-canonical-header-hud .duduq-canonical-mascot-motion{overflow:visible!important;}
+#game .duduq-canonical-header-hud .duduq-blink{position:absolute!important;inset:auto!important;left:50%!important;top:50%!important;width:90px!important;height:84px!important;transform:translate(-50%,-50%)!important;pointer-events:none!important;z-index:1!important;}
+#game .duduq-canonical-header-hud .duduq-blink__open,#game .duduq-canonical-header-hud .duduq-blink__closed{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center!important;pointer-events:none!important;}
+#game .duduq-canonical-header-hud .duduq-blink__open{opacity:1;animation:duduq-blink-open 4.8s linear infinite!important;}
+#game .duduq-canonical-header-hud .duduq-blink__closed{opacity:0;animation:duduq-blink-closed 4.8s linear infinite!important;}
+@keyframes duduq-blink-open{0%,84%{opacity:1}86%,89%{opacity:0}91%,100%{opacity:1}}
+@keyframes duduq-blink-closed{0%,84%{opacity:0}86%,89%{opacity:1}91%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){#game .duduq-canonical-header-hud .duduq-blink__open{animation:none!important;opacity:1!important;}#game .duduq-canonical-header-hud .duduq-blink__closed{animation:none!important;opacity:0!important;}}
+#game .duduq-canonical-header-hud .duduq-canonical-mascot-motion,#game .duduq-canonical-header-hud .hud-mascot{width:82px!important;height:76px!important;}
+#game .duduq-canonical-header-hud .hud-progress{height:18px!important;border:1.777778px solid #c8d8cd!important;border-radius:9px!important;background:#dce8df!important;box-shadow:none!important;}
+#game .duduq-canonical-header-hud .hud-progress-fill{height:18px!important;border-radius:9px!important;background:#278fd2!important;box-shadow:none!important;}
+#game .duduq-canonical-header-hud .hud-counter{width:76px!important;height:42px!important;border:1.777778px solid #e2c860!important;border-radius:18px!important;background:#fff0b5!important;box-shadow:0 3px 0 #b49d50!important;font-family:Inter!important;font-size:15.6364px!important;font-weight:900!important;color:#586654!important;}
+#game button.fullscreen-button[data-component="DUDUQ_CANONICAL_FULLSCREEN_BUTTON"]{display:flex!important;align-items:center!important;justify-content:center!important;width:50px!important;height:52px!important;min-width:50px!important;min-height:52px!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;filter:none!important;transform:translateY(0)!important;transition:transform 80ms ease-out!important;outline:none!important;}
+#game button.fullscreen-button[data-component="DUDUQ_CANONICAL_FULLSCREEN_BUTTON"]:active{transform:translateY(4px)!important;box-shadow:none!important;}
+#game .duduq-canonical-header-hud.game-hud .fullscreen-button::before,#game .duduq-canonical-header-hud.game-hud .fullscreen-button::after{content:none!important;display:none!important;}
+/* Penpot fullscreen vector owns its own path geometry and stroke. */
+#game button.fullscreen-button[data-component="DUDUQ_CANONICAL_FULLSCREEN_BUTTON"] img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;filter:none!important;opacity:1!important;transform:none!important;}
+#game .duduq-canonical-question-hud.question-panel{position:relative!important;top:0!important;box-sizing:border-box!important;width:720px!important;height:86px!important;min-height:86px!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;isolation:isolate!important;}
+#game .duduq-canonical-question-hud.question-panel>.duduq-question-panel-shadow{display:none!important;}
+#game .duduq-canonical-question-hud.question-panel::before{content:""!important;position:absolute!important;z-index:2!important;left:13px!important;top:5px!important;width:300px!important;height:5.16px!important;background:rgba(255,255,255,.90)!important;border:0!important;border-radius:8px!important;box-shadow:none!important;filter:none!important;opacity:.72!important;pointer-events:none!important;}
+#game .duduq-canonical-question-hud.question-panel::after{content:""!important;position:absolute!important;z-index:1!important;left:0!important;top:0!important;box-sizing:border-box!important;width:720px!important;height:86px!important;background:#fffdf7!important;border:.89px solid #e8d3a6!important;border-radius:25px!important;box-shadow:0 5px 0 0 #b8a68e!important;filter:none!important;pointer-events:none!important;}
+#game .duduq-canonical-question-hud.question-panel .question-copy{position:absolute!important;z-index:3!important;left:0!important;top:0!important;width:720px!important;height:86px!important;margin:0!important;padding:0!important;transform:none!important;}
+#game .duduq-canonical-question-hud.question-panel .question-label{position:absolute!important;left:44.89px!important;top:17.89px!important;height:15px!important;margin:0!important;display:flex!important;align-items:flex-start!important;font-family:Nunito!important;font-size:12.953790921693384px!important;font-weight:700!important;font-style:normal!important;line-height:1.0979202219551534!important;letter-spacing:0!important;color:#7f9788!important;text-rendering:geometricPrecision!important;text-transform:uppercase!important;white-space:pre!important;}
+#game .duduq-canonical-question-hud.question-panel .question-prompt{position:absolute!important;left:44.89px!important;top:36.33px!important;width:570px!important;height:32px!important;min-height:0!important;margin:0!important;display:flex!important;align-items:flex-start!important;color:#364b43!important;font-family:Nunito!important;font-size:21.963204549255728px!important;font-weight:900!important;font-style:normal!important;line-height:1.4165107114575133!important;letter-spacing:0!important;text-rendering:geometricPrecision!important;text-transform:uppercase!important;white-space:pre!important;}
+#game .duduq-canonical-question-hud .audio-button{position:relative!important;z-index:3!important;display:block!important;width:50px!important;height:52px!important;min-width:50px!important;min-height:52px!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;color:#ffffff!important;overflow:visible!important;isolation:isolate!important;transform:translateY(0)!important;transition:transform 80ms ease-out!important;}
+#game .duduq-canonical-question-hud .audio-button::before,#game .duduq-canonical-question-hud .audio-button::after{content:none!important;display:none!important;}
+#game .duduq-canonical-question-hud .audio-button .duduq-audio-depth{position:absolute!important;z-index:0!important;left:0!important;top:4.64px!important;width:50px!important;height:47.36px!important;background:#175c93!important;border-radius:18px!important;pointer-events:none!important;}
+#game .duduq-canonical-question-hud .audio-button .duduq-audio-surface{position:absolute!important;z-index:1!important;left:0!important;top:0!important;width:50px!important;height:47.36px!important;background:linear-gradient(to bottom,rgba(143,214,255,1) 0%,rgba(52,159,223,1) 55%,rgba(42,130,192,1) 100%)!important;border-radius:15px!important;pointer-events:none!important;}
+#game .duduq-canonical-question-hud .audio-button .duduq-audio-highlight{position:absolute!important;z-index:2!important;left:7px!important;top:5px!important;width:19px!important;height:4px!important;background:#BFE8FF87!important;border-radius:7px!important;opacity:.76!important;pointer-events:none!important;}
+#game .duduq-canonical-question-hud .audio-button .duduq-audio-icon-content{position:absolute!important;z-index:3!important;left:11px!important;top:12px!important;width:27px!important;height:27px!important;display:flex!important;align-items:center!important;align-content:stretch!important;justify-content:center!important;flex-direction:column!important;flex-wrap:nowrap!important;overflow:hidden!important;pointer-events:none!important;}
+#game .duduq-canonical-question-hud .audio-button .duduq-audio-icon{position:relative!important;width:23.5px!important;height:18px!important;display:block!important;flex-shrink:0!important;overflow:visible!important;pointer-events:none!important;}
+#game .duduq-canonical-question-hud .audio-button .duduq-audio-icon svg{display:block!important;width:23.5px!important;height:18px!important;max-width:none!important;transform:none!important;filter:none!important;}
+#game .duduq-canonical-question-hud .audio-button:hover:not(:disabled),#game .duduq-canonical-question-hud .audio-button[data-audio-state="playing"]{filter:none!important;transform:translateY(0)!important;box-shadow:none!important;}
+#game .duduq-canonical-question-hud .audio-button:active:not(:disabled){transform:translateY(4.64px)!important;box-shadow:none!important;}
+#game .matching-card .matching-word{font-family:Inter!important;font-size:27.5908px!important;font-weight:900!important;font-style:normal!important;line-height:1.4497574!important;letter-spacing:0!important;}
+#game .matching-action-area .primary-action.game-action-button--primary{position:relative!important;isolation:isolate!important;display:block!important;width:280px!important;min-width:280px!important;height:72px!important;min-height:72px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;filter:none!important;overflow:visible!important;color:#fff!important;text-shadow:none!important;}
+#game .matching-action-area .primary-action.game-action-button--primary::after{content:""!important;position:absolute!important;z-index:-2!important;left:0!important;top:8px!important;width:280px!important;height:61px!important;background:#175c93!important;border-radius:19px!important;box-shadow:none!important;filter:none!important;pointer-events:none!important;}
+#game .matching-action-area .primary-action.game-action-button--primary::before{content:""!important;display:block!important;position:absolute!important;z-index:-1!important;left:0!important;top:0!important;width:280px!important;height:61px!important;background:#349fdf!important;border-radius:19px!important;box-shadow:none!important;opacity:1!important;pointer-events:none!important;}
+#game .matching-action-area .primary-action.game-action-button--primary>span{position:absolute!important;z-index:auto!important;left:0!important;top:5px!important;display:flex!important;align-items:center!important;justify-content:center!important;width:280px!important;height:61px!important;margin:0!important;color:#fff!important;font-family:Nunito!important;font-size:21px!important;font-weight:800!important;font-style:normal!important;line-height:1!important;letter-spacing:.35px!important;text-align:center!important;text-rendering:geometricPrecision!important;white-space:pre!important;}
+#game .matching-action-area .primary-action.game-action-button--primary>[data-slot="action"]::before{content:""!important;position:absolute!important;z-index:0!important;left:14px!important;top:0!important;width:55px!important;height:7px!important;background:#e1e0f5!important;border:0!important;border-radius:6px!important;box-shadow:none!important;filter:none!important;opacity:.16!important;pointer-events:none!important;}
+#game .matching-action-area .primary-action.game-action-button--primary>[data-slot="action"]::after{content:""!important;position:absolute!important;z-index:-3!important;left:0!important;top:-5px!important;width:280px!important;height:69px!important;background:transparent!important;border:0!important;border-radius:19px!important;box-shadow:4px 4px 4px 0 rgba(0,0,0,.35)!important;filter:none!important;pointer-events:none!important;}
+#game .matching-action-area .primary-action.game-action-button--primary:disabled,#game .matching-action-area .primary-action.game-action-button--primary[hidden]{opacity:0!important;visibility:hidden!important;pointer-events:none!important;animation:none!important;translate:0!important;rotate:0!important;scale:1!important;}
+#game .matching-action-area .primary-action.game-action-button--primary:not(:disabled):not([hidden]):not(:hover):not(:active):not(:focus-visible){opacity:1!important;visibility:visible!important;pointer-events:auto!important;animation:duduq-confirm-ready-in 200ms ease-out both,duduq-confirm-ready-shake 2s ease-in-out 200ms infinite!important;}
+#game .matching-action-area .primary-action.game-action-button--primary:not(:disabled):not([hidden]):is(:hover,:active,:focus-visible){animation:none!important;translate:0!important;rotate:0!important;scale:1!important;}
+#game .matching-action-area.cta-attention-wrapper[data-attention="cta-attention-shake"]{animation:none!important;}
+@keyframes duduq-confirm-ready-in{from{opacity:0;scale:.96}to{opacity:1;scale:1}}
+@keyframes duduq-confirm-ready-shake{0%,78%,100%{translate:0;rotate:0}82%{translate:-3px 0;rotate:-.8deg}86%{translate:3px 0;rotate:.8deg}90%{translate:-2px 0;rotate:-.5deg}94%{translate:2px 0;rotate:.5deg}97%{translate:-1px 0;rotate:0}}
+@media (prefers-reduced-motion:reduce){#game .matching-action-area .primary-action.game-action-button--primary:not(:disabled):not([hidden]){animation:none!important;translate:0!important;rotate:0!important;scale:1!important;}}
+#game.target-shooter-screen .duduq-canonical-header-hud.game-hud{width:1056px!important;height:94px!important;min-height:94px!important;}
+#game.target-shooter-screen .duduq-canonical-header-hud .duduq-canonical-mascot-motion{position:absolute!important;left:19px!important;top:9px!important;width:82px!important;height:76px!important;background:none!important;transform-origin:50% 68%!important;animation:duduq-hud-float var(--duduq-motion-float) ease-in-out infinite!important;}
+#game.target-shooter-screen .duduq-canonical-header-hud .duduq-canonical-mascot-motion .hud-mascot{display:none!important;}
+#game.target-shooter-screen .duduq-canonical-header-hud .hud-title-group{position:absolute!important;left:120px!important;top:37px!important;width:110px!important;height:29px!important;min-height:29px!important;max-height:29px!important;display:block!important;}
+#game.target-shooter-screen .duduq-canonical-header-hud .hud-title{position:absolute!important;left:0!important;top:0!important;width:110px!important;height:29px!important;margin:0!important;font-size:0!important;color:transparent!important;white-space:pre!important;text-transform:none!important;}
+#game.target-shooter-screen .duduq-canonical-header-hud .hud-title::after{content:"SHOOTER";position:absolute!important;inset:0!important;display:flex!important;align-items:center!important;justify-content:center!important;color:#364b43!important;font-family:Nunito!important;font-size:21.9925532701044px!important;font-weight:900!important;font-style:normal!important;line-height:1.2933671781705627!important;letter-spacing:0!important;text-rendering:geometricPrecision!important;white-space:pre!important;}
+#game.target-shooter-screen .duduq-canonical-header-hud .hud-progress{position:absolute!important;left:300px!important;top:40px!important;width:482px!important;height:18px!important;box-sizing:border-box!important;border:.89px solid #c8d8cd!important;border-radius:20px!important;background:#dce8df!important;overflow:hidden!important;}
+#game.target-shooter-screen .duduq-canonical-header-hud .hud-progress-fill{position:absolute!important;left:0!important;top:-1px!important;height:18px!important;background:#278fd2!important;border-radius:20px!important;}
+#game.target-shooter-screen .duduq-canonical-header-hud .hud-progress-fill::after{left:7px!important;top:2px!important;width:calc(100% - 14px)!important;height:3px!important;background:#bfe8ff6a!important;border-radius:20px!important;opacity:.76!important;}
+#game.target-shooter-screen .duduq-canonical-header-hud .hud-counter{position:absolute!important;left:854px!important;top:26px!important;width:76px!important;height:42px!important;box-sizing:border-box!important;border:.89px solid #e2c860!important;border-radius:18px!important;background:#fff0b5!important;box-shadow:0 3px 0 #b49d50!important;font-family:Nunito!important;font-size:15.636446262213134px!important;font-weight:900!important;font-style:normal!important;line-height:1.19379222268311!important;letter-spacing:0!important;color:#586654!important;text-rendering:geometricPrecision!important;}
+#game.target-shooter-screen .duduq-canonical-header-hud .hud-counter>span{position:absolute!important;left:15.99px!important;top:11.89px!important;display:block!important;margin:0!important;transform:none!important;white-space:pre!important;}
+#game.target-shooter-screen .duduq-canonical-header-hud .fullscreen-button{position:absolute!important;left:990px!important;top:21px!important;width:50px!important;height:52px!important;}
+@media (min-width:641px){
+  #game .duduq-canonical-header-hud .duduq-canonical-mascot-motion,#game .duduq-canonical-header-hud .hud-mascot{position:absolute!important;left:20px!important;top:8px!important;}
+  #game .duduq-canonical-header-hud .hud-title-group{position:absolute!important;left:123px!important;top:26px!important;width:108px!important;height:52px!important;}
+  #game .duduq-canonical-header-hud .hud-title{font-family:"Nunito",sans-serif!important;font-size:21.528580298372667px!important;font-weight:900!important;line-height:1.3212410787032793!important;letter-spacing:0!important;color:#364b43!important;}
+  #game .duduq-canonical-header-hud .hud-progress{position:absolute!important;left:300px!important;top:37px!important;width:482px!important;min-width:482px!important;max-width:482px!important;flex:0 0 482px!important;overflow:hidden!important;}
+  #game .duduq-canonical-header-hud .hud-progress-fill::after{left:7px!important;top:2px!important;width:calc(100% - 14px)!important;height:3px!important;background:#bfe8ff6a!important;border-radius:20px!important;opacity:.76!important;}
+  #game .duduq-canonical-header-hud .hud-counter{position:absolute!important;left:854px!important;top:26px!important;}
+  #game .duduq-canonical-header-hud .fullscreen-button{position:absolute!important;left:990px!important;top:21px!important;}
+  #game .duduq-canonical-question-hud.question-panel .question-label{position:absolute!important;left:44.89px!important;top:17.89px!important;}
+  #game .duduq-canonical-question-hud .question-prompt{position:absolute!important;left:44.89px!important;top:36.33px!important;}
+  #game .duduq-canonical-question-hud .audio-button{position:absolute!important;z-index:3!important;left:655px!important;top:17px!important;}
+}
+@media (max-width:640px){#game .game-hud{padding-inline:16px!important;column-gap:12px!important}#game .game-hud .fullscreen-button{width:52px!important;height:52px!important;min-width:52px!important;min-height:52px!important;border-radius:17px!important}#game .question-panel{padding:14px 18px!important}}
+
+/* Matching — Penpot Feedback Continuar / correct state only. */
+#game[aria-label="DuduQ Matching"][data-feedback-legacy="true"] .feedback-ribbon[data-feedback="correct"]{
+  position:absolute!important;
+  left:50%!important;
+  right:auto!important;
+  bottom:10px!important;
+  width:min(1318px,calc(100% - 48px))!important;
+  height:88px!important;
+  min-height:88px!important;
+  padding:0!important;
+  display:block!important;
+  box-sizing:border-box!important;
+  border-radius:22px!important;
+  overflow:visible!important;
+  transform:translateX(-50%)!important;
+}
+#game[aria-label="DuduQ Matching"][data-feedback-legacy="true"] .feedback-ribbon[data-feedback="correct"]::before{
+  content:""!important;
+  position:absolute!important;
+  left:1146px!important;
+  top:18px!important;
+  width:55px!important;
+  height:7px!important;
+  display:block!important;
+  border:0!important;
+  border-radius:6px!important;
+  background:#e4fdd7!important;
+  box-shadow:none!important;
+  opacity:.16!important;
+  pointer-events:none!important;
+  z-index:5!important;
+}
+#game[aria-label="DuduQ Matching"][data-feedback-legacy="true"] .feedback-ribbon[data-feedback="correct"]::after{
+  content:""!important;
+  position:absolute!important;
+  left:1162px!important;
+  top:21px!important;
+  width:96px!important;
+  height:5px!important;
+  display:block!important;
+  border-radius:5px!important;
+  background:#d9ffe29e!important;
+  filter:blur(4px)!important;
+  opacity:1!important;
+  pointer-events:none!important;
+  z-index:5!important;
+}
+#game[aria-label="DuduQ Matching"][data-feedback-legacy="true"] .feedback-ribbon[data-feedback="correct"] .feedback-mascot{
+  position:absolute!important;
+  left:-50px!important;
+  top:-59px!important;
+  width:216px!important;
+  height:212px!important;
+  min-width:0!important;
+  min-height:0!important;
+  margin:0!important;
+  content:url("/core/assets/duduq-feedback-correct.png")!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  overflow:visible!important;
+  transform:none!important;
+  animation:none!important;
+  z-index:1!important;
+}
+#game[aria-label="DuduQ Matching"][data-feedback-legacy="true"] .feedback-ribbon[data-feedback="correct"] .feedback-copy{
+  position:absolute!important;
+  inset:0!important;
+  min-width:0!important;
+  padding:0!important;
+  z-index:3!important;
+}
+#game[aria-label="DuduQ Matching"][data-feedback-legacy="true"] .feedback-ribbon[data-feedback="correct"] .feedback-copy h2{
+  position:absolute!important;
+  left:111px!important;
+  top:22px!important;
+  height:26px!important;
+  margin:0!important;
+  display:block!important;
+  color:#23764a!important;
+  font-family:"Fredoka",sans-serif!important;
+  font-style:normal!important;
+  font-weight:700!important;
+  font-size:24px!important;
+  line-height:1.05!important;
+  letter-spacing:0!important;
+  text-rendering:geometricPrecision!important;
+  white-space:pre!important;
+}
+#game[aria-label="DuduQ Matching"][data-feedback-legacy="true"] .feedback-ribbon[data-feedback="correct"] .feedback-copy p{
+  position:absolute!important;
+  left:114px!important;
+  top:52px!important;
+  height:15px!important;
+  margin:0!important;
+  color:#4d8262!important;
+  font-family:"Fredoka",sans-serif!important;
+  font-style:normal!important;
+  font-weight:500!important;
+  font-size:14px!important;
+  line-height:1.05!important;
+  letter-spacing:0!important;
+  text-rendering:geometricPrecision!important;
+  white-space:pre!important;
+}
+#game[aria-label="DuduQ Matching"][data-feedback-legacy="true"] .feedback-ribbon[data-feedback="correct"] .feedback-action{
+  position:absolute!important;
+  left:1134px!important;
+  top:11px!important;
+  width:152px!important;
+  min-width:152px!important;
+  height:67px!important;
+  min-height:67px!important;
+  padding:0 0 9px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  box-sizing:border-box!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#fff!important;
+  font-family:"Fredoka",sans-serif!important;
+  font-style:normal!important;
+  font-weight:700!important;
+  font-size:17px!important;
+  line-height:1!important;
+  letter-spacing:.15px!important;
+  text-align:center!important;
+  text-rendering:geometricPrecision!important;
+  text-shadow:none!important;
+  white-space:pre!important;
+  filter:none!important;
+  transform:none!important;
+  isolation:isolate!important;
+  z-index:4!important;
+}
+#game[aria-label="DuduQ Matching"][data-feedback-legacy="true"] .feedback-ribbon[data-feedback="correct"] .feedback-action::before{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;
+  top:0!important;
+  width:152px!important;
+  height:60px!important;
+  box-sizing:border-box!important;
+  border:2px solid #2b8e56!important;
+  border-radius:20px!important;
+  background:linear-gradient(to bottom,#8fe0a6 0%,#4dba76 55%,#2f965c 100%)!important;
+  box-shadow:0 8px 16px 0 rgba(28,108,64,.278),0 2px 24px 0 rgba(168,240,185,.102)!important;
+  pointer-events:none!important;
+  z-index:-1!important;
+}
+#game[aria-label="DuduQ Matching"][data-feedback-legacy="true"] .feedback-ribbon[data-feedback="correct"] .feedback-action::after{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;
+  top:9px!important;
+  width:152px!important;
+  height:58px!important;
+  border-radius:19px!important;
+  background:#237a4a!important;
+  box-shadow:none!important;
+  filter:none!important;
+  pointer-events:none!important;
+  z-index:-2!important;
+}
+
+/* Shared Penpot Feedback Correct + Continuar composition. */
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"],#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"]{position:absolute!important;left:50%!important;right:auto!important;bottom:10px!important;width:1299px!important;height:90px!important;min-height:90px!important;padding:0!important;display:block!important;box-sizing:border-box!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important;transform:translateX(-50%) scale(min(1,calc(100vw / 1299px)))!important;transform-origin:50% 100%!important;scale:1!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"]::before,#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"]::before{content:""!important;position:absolute!important;left:0!important;top:2px!important;width:1299px!important;height:88px!important;display:block!important;box-sizing:border-box!important;border:1px solid #b9e1c5!important;border-radius:22px!important;background:linear-gradient(135deg,rgba(250,255,250,.99),rgba(235,249,238,.98))!important;box-shadow:0 5px 0 rgba(51,105,68,.2),0 12px 24px rgba(29,62,43,.14),inset 0 1px #fff!important;pointer-events:none!important;z-index:0!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"]::after,#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"]::after{content:""!important;position:absolute!important;left:1162px!important;top:23px!important;width:96px!important;height:5px!important;display:block!important;border-radius:5px!important;background:rgba(217,255,226,.62)!important;filter:blur(4px)!important;pointer-events:none!important;z-index:5!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"] .feedback-mascot,#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"] .feedback-mascot{position:absolute!important;left:11px!important;top:2px!important;width:80px!important;height:80px!important;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;content:url("/core/assets/duduq-feedback-correct.png")!important;object-fit:cover!important;object-position:center center!important;overflow:visible!important;transform-origin:50% 68%!important;scale:none!important;zoom:1!important;animation:duduq-feedback-float var(--duduq-motion-float) ease-in-out infinite!important;z-index:1!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"] .feedback-copy,#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"] .feedback-copy{position:absolute!important;inset:0!important;min-width:0!important;padding:0!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"] .feedback-copy::before,#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"] .feedback-copy::before{content:""!important;position:absolute!important;left:1146px!important;top:20px!important;width:55px!important;height:7px!important;border-radius:6px!important;background:#e4fdd7!important;opacity:.16!important;pointer-events:none!important;z-index:5!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"] .feedback-copy h2,#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"] .feedback-copy h2{position:absolute!important;left:111px!important;top:24px!important;height:26px!important;margin:0!important;display:block!important;color:#23764a!important;font-family:"Fredoka",sans-serif!important;font-style:normal!important;font-weight:700!important;font-size:24px!important;line-height:1.05!important;letter-spacing:0!important;text-rendering:geometricPrecision!important;white-space:pre!important;z-index:3!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"] .feedback-copy p,#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"] .feedback-copy p{position:absolute!important;left:114px!important;top:54px!important;height:15px!important;margin:0!important;color:#4d8262!important;font-family:"Fredoka",sans-serif!important;font-style:normal!important;font-weight:500!important;font-size:14px!important;line-height:1.05!important;letter-spacing:0!important;text-rendering:geometricPrecision!important;white-space:pre!important;z-index:3!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"] .feedback-action,#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"] .feedback-action{position:absolute!important;left:1134px!important;top:13px!important;width:152px!important;min-width:152px!important;height:67px!important;min-height:67px!important;padding:0 0 9px!important;display:flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#fff!important;font-family:"Fredoka",sans-serif!important;font-style:normal!important;font-weight:700!important;font-size:17px!important;line-height:1!important;letter-spacing:.15px!important;text-align:center!important;text-rendering:geometricPrecision!important;text-shadow:none!important;white-space:pre!important;filter:none!important;transform:none;isolation:isolate!important;z-index:4!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"] .feedback-action::before,#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"] .feedback-action::before{content:""!important;position:absolute!important;left:0!important;top:0!important;width:152px!important;height:60px!important;box-sizing:border-box!important;border:2px solid #2b8e56!important;border-radius:20px!important;background:linear-gradient(to bottom,#8fe0a6 0%,#4dba76 55%,#2f965c 100%)!important;box-shadow:0 8px 16px 0 rgba(28,108,64,.278),0 2px 24px 0 rgba(168,240,185,.102)!important;pointer-events:none!important;z-index:-1!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"] .feedback-action::after,#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"] .feedback-action::after{content:""!important;position:absolute!important;left:0!important;top:9px!important;width:152px!important;height:58px!important;border-radius:19px!important;background:#237a4a!important;box-shadow:none!important;filter:none!important;pointer-events:none!important;z-index:-2!important;}
+
+/* Feedback Correct behavior: gameplay owns [hidden] and data-feedback; CSS owns only presentation. */
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"][hidden],
+#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"][hidden]{opacity:0!important;visibility:hidden!important;pointer-events:none!important;animation:none!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"]:not([hidden]),
+#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"]:not([hidden]){opacity:1!important;visibility:visible!important;pointer-events:auto!important;}
+@keyframes duduq-feedback-float{0%,100%{transform:translateY(-2px)}50%{transform:translateY(2px)}}
+@keyframes duduq-feedback-continue-shake{0%,76%,100%{transform:translateX(0) rotate(0deg)}80%{transform:translateX(-4px) rotate(-.8deg)}84%{transform:translateX(4px) rotate(.8deg)}88%{transform:translateX(-3px) rotate(-.6deg)}92%{transform:translateX(3px) rotate(.6deg)}96%{transform:translateX(-1px) rotate(-.2deg)}}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"][hidden] .feedback-action,
+#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"][hidden] .feedback-action{animation:none!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"]:not([hidden]) .feedback-action,
+#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"]:not([hidden]) .feedback-action{animation:duduq-feedback-continue-shake 2s ease-in-out infinite!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"] .feedback-action:active,
+#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"] .feedback-action:active{animation:none!important;}
+@media (prefers-reduced-motion:reduce){#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"] .feedback-action,#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"] .feedback-action,#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="correct"] .feedback-mascot,#game.target-shooter-screen .feedback-ribbon[data-feedback="correct"] .feedback-mascot{animation:none!important;}}
+
+/* Shared Penpot Feedback Incorrect + Tentar de Novo composition. */
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"],#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"]{position:absolute!important;left:50%!important;right:auto!important;bottom:10px!important;width:1304px!important;height:88px!important;min-height:88px!important;padding:0!important;display:block!important;box-sizing:border-box!important;border:1px solid #f0c1b8!important;border-radius:22px!important;background:linear-gradient(135deg,rgba(255,251,249,.99),rgba(255,238,234,.99))!important;box-shadow:0 5px 0 rgba(120,70,65,.20),0 12px 24px rgba(82,42,39,.14),inset 0 1px #fff!important;overflow:visible!important;transform:translateX(-50%) scale(min(1,calc(100vw / 1304px)))!important;transform-origin:50% 100%!important;scale:1!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"]::before,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"]::before{content:none!important;display:none!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"]::after,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"]::after{content:""!important;position:absolute!important;left:1160px!important;top:21px!important;width:150px!important;height:5px!important;display:block!important;border-radius:5px!important;background:rgba(255,226,221,.62)!important;filter:blur(4px)!important;pointer-events:none!important;z-index:5!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"] .feedback-mascot,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-mascot{position:absolute!important;left:13px!important;top:4px!important;width:79px!important;height:79px!important;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;content:url("/core/assets/duduq-feedback-error.png")!important;object-fit:cover!important;object-position:center center!important;overflow:visible!important;transform:none;scale:none!important;zoom:1!important;animation:none!important;z-index:1!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"] .feedback-copy,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-copy{position:absolute!important;inset:0!important;min-width:0!important;padding:0!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"] .feedback-copy::before,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-copy::before{content:""!important;position:absolute!important;left:1112px!important;top:19px!important;width:55px!important;height:7px!important;border-radius:6px!important;background:#ece0e2!important;opacity:.16!important;pointer-events:none!important;z-index:5!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"] .feedback-copy h2,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-copy h2{position:absolute!important;left:109px!important;top:17px!important;height:26px!important;margin:0!important;display:block!important;color:#a84742!important;font-family:"Fredoka",sans-serif!important;font-style:normal!important;font-weight:700!important;font-size:24px!important;line-height:1.05!important;letter-spacing:0!important;text-rendering:geometricPrecision!important;white-space:pre!important;z-index:3!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"] .feedback-copy p,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-copy p{position:absolute!important;left:109px!important;top:48px!important;height:15px!important;margin:0!important;color:#9c6561!important;font-family:"Fredoka",sans-serif!important;font-style:normal!important;font-weight:500!important;font-size:14px!important;line-height:1.05!important;letter-spacing:0!important;text-rendering:geometricPrecision!important;white-space:pre!important;z-index:3!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"] .feedback-action,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-action{position:absolute!important;left:1099.06px!important;top:11.2px!important;width:190px!important;min-width:190px!important;height:64.8px!important;min-height:64.8px!important;padding:22.8px 0 0!important;display:flex!important;align-items:flex-start!important;justify-content:center!important;box-sizing:border-box!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#fff!important;font-family:"Fredoka",sans-serif!important;font-style:normal!important;font-weight:700!important;font-size:17px!important;line-height:1!important;letter-spacing:.15px!important;text-align:center!important;text-rendering:geometricPrecision!important;text-shadow:none!important;white-space:pre!important;filter:none!important;transform:none;isolation:isolate!important;z-index:4!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"] .feedback-action::before,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-action::before{content:""!important;position:absolute!important;left:0!important;top:0!important;width:190px!important;height:60px!important;box-sizing:border-box!important;border:2px solid #b94f4a!important;border-radius:20px!important;background:linear-gradient(to bottom,#ffb4ab 0%,#e9776d 55%,#c95751 100%)!important;box-shadow:0 8px 16px 0 rgba(143,61,57,.278),0 2px 24px 0 rgba(255,208,201,.102)!important;pointer-events:none!important;z-index:-1!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"] .feedback-action::after,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-action::after{content:""!important;position:absolute!important;left:-.06px!important;top:6.8px!important;width:190px!important;height:58px!important;border-radius:19px!important;background:#b94f4a!important;box-shadow:none!important;filter:none!important;pointer-events:none!important;z-index:-2!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"][hidden],#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"][hidden]{opacity:0!important;visibility:hidden!important;pointer-events:none!important;animation:none!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"]:not([hidden]),#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"]:not([hidden]){opacity:1!important;visibility:visible!important;pointer-events:auto!important;}
+@keyframes duduq-feedback-retry-shake{0%,78%,100%{transform:translateX(0) rotate(0)}82%{transform:translateX(-3px) rotate(-.7deg)}86%{transform:translateX(3px) rotate(.7deg)}90%{transform:translateX(-2px) rotate(-.4deg)}94%{transform:translateX(2px) rotate(.4deg)}97%{transform:translateX(-1px) rotate(0)}}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"] .feedback-mascot,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-mascot{animation:duduq-feedback-float var(--duduq-motion-float) ease-in-out infinite!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"][hidden] .feedback-mascot,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"][hidden] .feedback-mascot{animation:none!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"][hidden] .feedback-action,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"][hidden] .feedback-action{animation:none!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"]:not([hidden]) .feedback-action,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"]:not([hidden]) .feedback-action{animation:duduq-feedback-retry-shake 2s ease-in-out infinite!important;}
+#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"] .feedback-action:active,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-action:active{animation:none!important;}
+@media (prefers-reduced-motion:reduce){#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"] .feedback-mascot,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-mascot,#game[aria-label="DuduQ Matching"] .feedback-ribbon[data-feedback="incorrect"] .feedback-action,#game.target-shooter-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-action{animation:none!important;}}
+
+/* Shared-shell consumer title: keeps the Target Shooter Gold Master header
+   geometry, mascot, blink, progress and controls, while preserving the
+   consumer-provided activity title instead of Target Shooter's fixed label. */
+#game.duduq-shared-gold-shell .duduq-canonical-header-hud .hud-title{position:absolute!important;left:0!important;top:0!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;width:160px!important;height:29px!important;margin:0!important;color:#364b43!important;font-size:21.9925532701044px!important;font-weight:900!important;font-style:normal!important;line-height:1.2933671781705627!important;letter-spacing:0!important;text-rendering:geometricPrecision!important;text-align:left!important;white-space:nowrap!important;}
+#game.duduq-shared-gold-shell .duduq-canonical-header-hud .hud-title::after{content:none!important;display:none!important;}
+#game.duduq-shared-gold-shell .duduq-canonical-header-hud .hud-title-group{left:120px!important;top:37px!important;width:160px!important;height:29px!important;min-height:29px!important;max-height:29px!important;}
+#game.duduq-shared-gold-shell .duduq-canonical-header-hud,#game.duduq-shared-gold-shell .feedback-ribbon{font-family:Nunito,"Trebuchet MS",sans-serif!important;}
+#game.duduq-shared-gold-shell .success-celebration-layer[data-effect="correct"]~.feedback-ribbon[data-feedback="correct"]{animation:feedback-enter 220ms var(--ease-game) both!important;}
+
+/* Official global header-title contract for every canonical HUD consumer. */
+#game .duduq-canonical-header-hud .hud-title,#game .duduq-canonical-header-hud .hud-title::after{font-family:"Nunito",sans-serif!important;font-weight:900!important;}
+
+/* Matching: the engine keeps data-state="correct" across retry; it must outrank the generic neutral port repaint. */
+#game[aria-label="DuduQ Matching"] .matching-card[data-state="correct"] .matching-port{border-color:#38ad70!important;background:radial-gradient(circle at 32% 26%,#fff 0 18%,#e8fff0 42%,#c9f5d9 100%)!important;box-shadow:0 0 0 2px rgba(64,190,120,.17),0 0 10px rgba(47,173,106,.3),inset 0 1px 0 #fff!important;}
+#game[aria-label="DuduQ Matching"] .matching-card[data-state="correct"] .matching-port::before{border-color:rgba(121,231,165,.84)!important;opacity:.78!important;transform:scale(1)!important;}
+#game[aria-label="DuduQ Matching"] .matching-card[data-state="correct"] .matching-port::after{background:#36b96d!important;box-shadow:0 0 0 1px rgba(39,134,82,.2),0 0 8px rgba(55,191,114,.72)!important;}
+
+/* Matching success surface: the engine already persists data-state="correct" on both cards. */
+#game[aria-label="DuduQ Matching"] .matching-card[data-state="correct"]{
+  background:linear-gradient(180deg,#f7fff9 0%,#eaf9ef 100%);
+  border-color:#38ad70;
+  box-shadow:0 5px 0 rgba(47,150,92,.55),0 0 0 2px rgba(64,190,120,.14),0 10px 18px rgba(34,56,41,.12),inset 0 1px 0 rgba(255,255,255,.96);
+}
+#game[aria-label="DuduQ Matching"] .matching-card[data-state="correct"]:hover{
+  background:linear-gradient(180deg,#f7fff9 0%,#eaf9ef 100%);
+  border-color:#38ad70;
+  box-shadow:0 5px 0 rgba(47,150,92,.55),0 0 0 2px rgba(64,190,120,.14),0 10px 18px rgba(34,56,41,.12),inset 0 1px 0 rgba(255,255,255,.96);
+}
+
+/* Matching error surface: retry removes this engine state, while correct cards remain locked. */
+#game[aria-label="DuduQ Matching"] .matching-card[data-state="incorrect"]{
+  background:linear-gradient(180deg,#fff9f7 0%,#fff0ec 100%);
+  border-color:#ef8b7f;
+  box-shadow:0 5px 0 #d97d72,0 8px 16px rgba(34,56,41,.12),inset 0 1px 0 #fff;
+}
+#game[aria-label="DuduQ Matching"] .matching-card[data-state="incorrect"]:hover{
+  background:linear-gradient(180deg,#fff9f7 0%,#fff0ec 100%);
+  border-color:#ef8b7f;
+  box-shadow:0 5px 0 #d97d72,0 8px 16px rgba(34,56,41,.12),inset 0 1px 0 #fff;
+}

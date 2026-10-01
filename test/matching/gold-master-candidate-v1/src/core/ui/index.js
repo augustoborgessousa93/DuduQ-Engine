@@ -37,6 +37,8 @@ export function CTAAttention(button, { delay = 700, repeat = 5000, target = butt
   if (!button) return Object.freeze({ start() {}, stop() {} });
   let timer = 0;
   let active = false;
+  let activeDelay = delay;
+  let activeRepeat = repeat;
   const stop = () => {
     active = false;
     window.clearTimeout(timer);
@@ -46,13 +48,15 @@ export function CTAAttention(button, { delay = 700, repeat = 5000, target = butt
     if (!active || button.hidden || button.disabled) return stop();
     target.dataset.attention = "";
     requestAnimationFrame(() => { if (active) target.dataset.attention = "cta-attention-shake"; });
-    timer = window.setTimeout(pulse, repeat);
+    timer = window.setTimeout(pulse, activeRepeat);
   };
-  const start = () => {
+  const start = ({ delay: nextDelay = delay, repeat: nextRepeat = repeat } = {}) => {
     stop();
     if (button.hidden || button.disabled) return;
+    activeDelay = nextDelay;
+    activeRepeat = nextRepeat;
     active = true;
-    timer = window.setTimeout(pulse, delay);
+    timer = window.setTimeout(pulse, activeDelay);
   };
   ["pointerenter", "focus", "pointerdown", "click"].forEach((eventName) => button.addEventListener(eventName, stop));
   return Object.freeze({ start, stop });

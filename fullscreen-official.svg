@@ -1,0 +1,60 @@
+<svg width="50" xmlns="http://www.w3.org/2000/svg" height="52" id="screenshot-98cf88ec-b308-806d-8008-b333e0cbee48" viewBox="109 -34 50 52" style="-webkit-print-color-adjust::exact" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1">
+  <g id="shape-98cf88ec-b308-806d-8008-b333e0cbee48" rx="0" ry="0">
+    <g id="shape-98cf88ec-b308-806d-8008-b3306c8496f1" rx="0" ry="0">
+      <g id="shape-98cf88ec-b308-806d-8008-b32cffd857d4">
+        <g class="fills" id="fills-98cf88ec-b308-806d-8008-b32cffd857d4">
+          <rect rx="18" ry="18" x="109" y="-29.35714285714289" transform="matrix(1.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000)" width="50" height="47.35714285714289" style="fill:#175c93;fill-opacity:1">
+          </rect>
+        </g>
+      </g>
+      <g id="shape-98cf88ec-b308-806d-8008-b32cffd857d5">
+        <defs>
+          <linearGradient id="fill-color-gradient-render-3206-0" x1="0.5" y1="0" x2="0.5" y2="1" gradientTransform="">
+            <stop offset="0" stop-color="#8fd6ff" stop-opacity="1">
+            </stop>
+            <stop offset="0.55" stop-color="#349fdf" stop-opacity="1">
+            </stop>
+            <stop offset="1" stop-color="#2a82c0" stop-opacity="1">
+            </stop>
+          </linearGradient>
+          <pattern patternUnits="userSpaceOnUse" x="109" y="-34" width="50" height="47.35714285714289" id="fill-0-render-3206">
+            <g>
+              <rect width="50" height="47.35714285714289" style="fill:url(#fill-color-gradient-render-3206-0);fill-opacity:1">
+              </rect>
+            </g>
+          </pattern>
+        </defs>
+        <g class="fills" id="fills-98cf88ec-b308-806d-8008-b32cffd857d5">
+          <rect rx="15" ry="15" x="109" y="-34" transform="matrix(1.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000)" width="50" height="47.35714285714289" fill="url(#fill-0-render-3206)">
+          </rect>
+        </g>
+      </g>
+      <g id="shape-98cf88ec-b308-806d-8008-b32cffd857d8" style="fill:#000000" width="28" height="28" rx="0" ry="0">
+        <g id="shape-98cf88ec-b308-806d-8008-b32cffd857d9" style="display:none">
+          <g class="fills" id="fills-98cf88ec-b308-806d-8008-b32cffd857d9">
+            <rect rx="0" ry="0" x="120" y="-22" transform="matrix(1.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000)" width="28" height="28" fill="none" style="fill:none">
+            </rect>
+          </g>
+        </g>
+        <g id="shape-98cf88ec-b308-806d-8008-b32cffd857da">
+          <g class="fills" id="fills-98cf88ec-b308-806d-8008-b32cffd857da">
+            <path d="M124,-11L124,-18L131,-18M137,-18L144,-18L144,-11M144,-5L144,2L137,2M131,2L124,2L124,-5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="fill:none">
+            </path>
+          </g>
+          <g fill="none" stroke-linecap="round" stroke-linejoin="round" id="strokes-885e964d-30e7-80d1-8008-b373bbeec7e9-98cf88ec-b308-806d-8008-b32cffd857da" class="strokes">
+            <g class="stroke-shape">
+              <path d="M124,-11L124,-18L131,-18M137,-18L144,-18L144,-11M144,-5L144,2L137,2M131,2L124,2L124,-5" style="fill:none;fill-opacity:none;stroke-width:2.8;stroke:#ffffff;stroke-opacity:1;stroke-linecap:round">
+              </path>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g id="shape-98cf88ec-b308-806d-8008-b333564597a6" style="opacity:0.76">
+      <g class="fills" id="fills-98cf88ec-b308-806d-8008-b333564597a6">
+        <rect rx="2" ry="2" x="116" y="-29" transform="matrix(1.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000)" width="19" height="4" style="fill:#bfe8ff;fill-opacity:0.53">
+        </rect>
+      </g>
+    </g>
+  </g>
+</svg>

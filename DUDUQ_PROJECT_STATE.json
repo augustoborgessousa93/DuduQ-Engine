@@ -1,6 +1,6 @@
 {
   "project": "DUDUQ",
-  "architectureVersion": "lossless-penpot-runtime-v1",
+  "architectureVersion": "penpot-headless-product-v1",
   "status": "PRODUCTION_READY",
   "productionBaseline": "70c1c791",
   "documentationBaseline": "4d0dce29",
@@ -16,17 +16,18 @@
     "liveUniversalSync": "70c1c791"
   },
   "penpot": {
-    "mcpEndpoint": "http://localhost:4401/mcp",
+    "mcpEndpoint": "http://127.0.0.1:4401/mcp",
     "pluginRequired": true,
     "installation": {
-      "root": "C:\\Users\\augus\\AppData\\Local\\npm-cache\\_npx\\f4739471492be2e8\\node_modules\\@penpot\\mcp",
-      "serverRoot": "C:\\Users\\augus\\AppData\\Local\\npm-cache\\_npx\\f4739471492be2e8\\node_modules\\@penpot\\mcp\\packages\\server",
-      "pluginRoot": "C:\\Users\\augus\\AppData\\Local\\npm-cache\\_npx\\f4739471492be2e8\\node_modules\\@penpot\\mcp\\packages\\plugin",
-      "pluginManifest": "http://localhost:4400/manifest.json",
-      "websocket": "ws://localhost:4402",
+      "version": "2.17.0",
+      "root": "C:\\Users\\augus\\Downloads\\workspace\\tools\\penpot-mcp\\mcp",
+      "serverRoot": "C:\\Users\\augus\\Downloads\\workspace\\tools\\penpot-mcp\\mcp\\packages\\server",
+      "pluginRoot": "C:\\Users\\augus\\Downloads\\workspace\\tools\\penpot-mcp\\mcp\\packages\\plugin",
+      "pluginManifest": "http://127.0.0.1:4400/manifest.json",
+      "websocket": "ws://127.0.0.1:4402",
       "serverCommand": "node dist/index.js",
-      "pluginCommand": "node node_modules/vite/bin/vite.js preview --host localhost --port 4400",
-      "bootstrap": "scripts/duduq-penpot-bootstrap.mjs uses C:\\Program Files\\Git\\bin\\bash.exe -lc with the registered serverRoot/pluginRoot commands; starts only missing 4400/4401/4402 services"
+      "pluginCommand": "node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4400",
+      "bootstrap": "scripts/duduq-penpot-bootstrap.mjs spawns registered local Node server/plugin processes; starts only missing 4400/4401/4402 services"
     }
   },
   "commands": {
@@ -87,11 +88,11 @@
   "visualSyncGovernance": "PENPOT_IS_THE_ONLY_VISUAL_AUTHORITY; complete screen replacement is atomic; behavior bindings contain semantic identities only; legacy iframe geometry projection and property/component visual patches are not production paths",
   "noChangesContract": "NO_CHANGES requires liveSourceHash == lastAppliedSourceHash, active package/runtime visual hash health PASS, and unchanged Gold Master identity; otherwise return VISUAL_DRIFT_DETECTED and reconcile",
   "universalHost": "core/duduq-screen-runtime.js",
-  "behaviorRuntime": ["mechanics/matching.js", "mechanics/target-shooter.js"],
+  "behaviorRuntime": ["core/duduq-headless-product.js#MatchingEngine", "core/duduq-headless-product.js#TargetShooterEngine"],
   "behaviorManifests": ["design-system/runtime/screens/matching-master/bindings.json", "design-system/runtime/screens/target-shooter-master/bindings.json"],
   "successfulGraph": "design-system/penpot-sync/graph/last-successful.json",
   "knownLimitations": ["Human interaction verification must use isolated Playwright Chromium; external CDP/browser sessions are not valid."],
-  "operationalPrerequisites": ["Penpot plugin connected to http://localhost:4401/mcp", "Playwright-compatible Chromium for isolated visual tests"],
+  "operationalPrerequisites": ["Penpot plugin connected to http://127.0.0.1:4401/mcp", "Playwright-compatible Chromium for isolated visual tests"],
   "verification": {
     "requiredAfterUpdateCore": true,
     "previewServerScript": "scripts/duduq-test-server.mjs",
@@ -122,5 +123,5 @@
   },
   "productionTag": "duduq-exact-penpot-playable-v1",
   "finalCertification": "artifacts/final-certification/FINAL_CERTIFICATION.json",
-  "nextSafeAction": "edit Penpot in an authorized screen and run npm run duduq:update-core; return verified clickable product URLs only after golden visual and gameplay validation"
+  "nextSafeAction": "Every Penpot operation must run scripts/duduq-penpot-bootstrap.mjs first and require 4400/4401/4402 health, plugin connection, and a live board read before update or certification."
 }

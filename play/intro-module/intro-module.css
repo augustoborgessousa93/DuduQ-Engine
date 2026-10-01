@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@700;800;900&display=swap");
+
+:root { background: #86d8ff; font-family: Nunito, ui-rounded, system-ui, sans-serif; }
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; }
+body { min-width: 0; min-height: 0; }
+#intro-module-root { position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh; margin: 0; padding: 0; overflow: hidden; }
+.duduq-module-intro {
+  container-type: inline-size; position: relative; isolation: isolate; overflow: hidden;
+  width: 1366px; height: 768px; left: 50%; top: 50%;
+  transform: translate(-50%, -50%) scale(var(--intro-scale, 1)); transform-origin: center center;
+}
+.duduq-module-intro::before { content: ""; position: absolute; inset: 0; z-index: 0; display: block; width: 100%; height: 100%; margin: 0; padding: 0; transform: none; background: #87c95a url("../../core/assets/Background%20Tela%20Inicial.png") center center / cover no-repeat; }
+.duduq-intro-footer-blur{position:absolute;left:-91px;top:573px;z-index:2;width:1503px;height:253px;background:#AABDF7;filter:blur(50px);pointer-events:none}
+.duduq-intro-mascot-motion { position:absolute; z-index:1; width:37.909334cqw; height:37.909334cqw; left:5.56cqw; top:6.3cqw; animation:duduqIntroLevitate 3.4s ease-in-out infinite; }
+.duduq-intro-mascot { position:absolute; left:0; top:0; display:block; width:34.992679cqw; height:34.992679cqw; object-fit:contain; transform:rotate(5deg); transform-origin:top left; }
+.intro-content { position:absolute; z-index:4; inset:0; text-align:center; }
+/* The live master places the module information directly over the lower scene. */
+.intro-eyebrow,.intro-content h1,.intro-support{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.intro-info{position:absolute;inset:0;display:block;margin:0;}
+.intro-info__card{position:absolute;min-width:0;padding:0;background:linear-gradient(155deg,#fff 0%,#f5fcff 70%,#cbecff);border:.16cqw solid #d1f1ff;border-radius:1cqw;box-shadow:.293cqw .293cqw .293cqw rgba(0,0,0,.20),inset 0 .14cqw #fff;}
+.intro-info__card--grade{left:1.903cqw;top:46.12cqw;width:12.079cqw;height:5.271cqw}.intro-info__card--module{left:15.081cqw;top:46.12cqw;width:14.714cqw;height:5.271cqw}.intro-info__card--subject{left:30.893cqw;top:46.193cqw;width:14.714cqw;height:5.271cqw}
+.intro-info__card::before{content:"";position:absolute;width:2.855cqw;height:2.855cqw;border-radius:50%;background:linear-gradient(135deg,#ffe75c,#ff8f00);box-shadow:.146cqw .293cqw .293cqw rgba(0,0,0,.09),inset 0 .18cqw #fff5a7}.intro-info__card--grade::before{left:.512cqw;top:1.244cqw;background:linear-gradient(135deg,#c350ff,#ee9cff)}.intro-info__card--module::before{left:.805cqw;top:1.171cqw}.intro-info__card--subject::before{left:.732cqw;top:1.244cqw;background:linear-gradient(135deg,#ffdc39,#f18513)}
+.intro-info dt,.intro-info dd{position:absolute;margin:0;text-align:center;font-family:Fredoka,ui-rounded,sans-serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.intro-info dt{color:#6B8490;font-size:.805cqw;line-height:1.2;font-weight:500}.intro-info dd{color:#29485C;font-weight:700}
+.intro-info__card--grade dt{left:4.026cqw;top:.732cqw;width:6.003cqw;height:1.171cqw}.intro-info__card--grade dd{left:3.221cqw;top:2.343cqw;width:7.540cqw;height:1.830cqw;font-size:1.464cqw;line-height:1.2}.intro-info__card--module dt{left:5.491cqw;top:.732cqw;width:6.003cqw;height:1.171cqw}.intro-info__card--module dd{left:5.271cqw;top:2.270cqw;width:7.540cqw;height:1.830cqw;font-size:1.464cqw;line-height:1.2}.intro-info__card--subject dt{left:5.051cqw;top:.659cqw;width:6.003cqw;height:1.171cqw}.intro-info__card--subject dd{left:5.710cqw;top:1.903cqw;width:7.174cqw;height:1.611cqw;font-size:.805cqw;line-height:1;white-space:normal;overflow:visible;text-overflow:clip}
+.intro-start{position:absolute;left:50.366cqw;top:45.754cqw;display:block;margin:0;width:26.647cqw;height:6.516cqw;border:0;padding:0;background:none;cursor:pointer;isolation:isolate}.intro-start__motion{position:absolute;inset:0;display:block;animation:none}.intro-start__outer-shadow{position:absolute;left:.659cqw;top:1.244cqw;width:23.280cqw;height:5.564cqw;border-radius:1.830cqw;background:rgba(18,56,77,.20);z-index:1}.intro-start__depth,.intro-start__surface{position:absolute;left:0;width:24.598cqw;height:5.857cqw;border-radius:1.903cqw}.intro-start__depth{top:.805cqw;background:#175C93;z-index:2}.intro-start__surface{top:0;display:block;box-sizing:border-box;background:#349FDF;border:2px solid #1E7BB6;z-index:3}.intro-start__highlight{position:absolute;left:19.327cqw;top:.659cqw;width:4.026cqw;height:.512cqw;border-radius:999px;background:rgba(225,224,245,.30);z-index:4}.intro-start__play{position:absolute;left:1.464cqw;top:.732cqw;width:4.100cqw;height:4.612cqw;z-index:5}.intro-start__play-shape{position:absolute;inset:0;width:100%;height:100%;background:#fff;clip-path:path("M 11.6666564941406 13.1251220703125 C 11.6661682128906 11.2447509765625 12.5595397949219 9.5076904296875 14.0087585449219 8.571044921875 C 15.4579772949219 7.6346435546875 17.2418212890625 7.641357421875 18.685302734375 8.5888671875 L 46.6783447265625 26.958740234375 C 48.1160430908203 27.8974609375 49.0014343261719 29.6251220703125 49.0028381347656 31.4952392578125 C 49.0043487548828 33.364990234375 48.12158203125 35.0947265625 46.6853179931641 36.0360107421875 L 18.685302734375 54.4111328125 C 17.2418212890625 55.358642578125 15.4579772949219 55.3653564453125 14.0087585449219 54.428955078125 C 12.5595397949219 53.4923095703125 11.6661682128906 51.7552490234375 11.6666564941406 49.8748779296875 L 11.6666564941406 13.1251220703125")}.intro-start__label{position:absolute;left:5.710cqw;top:1.464cqw;width:16.837cqw;height:2.416cqw;color:#fff;font-family:Fredoka,ui-rounded,sans-serif;font-size:2.635cqw;line-height:1.2;font-weight:700;text-align:center;white-space:nowrap;z-index:6}.intro-start:focus-visible{outline:.26cqw solid #ffdf43;outline-offset:.45cqw}.intro-start-hint{position:absolute;left:50.366cqw;top:52.75cqw;width:24.598cqw;margin:0;color:#f9fbff;text-shadow:0 .08cqw .18cqw #226f9a;font-size:.72cqw;font-weight:900;letter-spacing:.06cqw}
+@keyframes duduqIntroLevitate{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}@keyframes intro-cta-invite{0%,76%,100%{transform:translate(0,0)}82%{transform:translateY(-.15cqw)}87%{transform:translateY(.08cqw)}92%{transform:translateY(-.06cqw)}}
+.duduq-start-button-motion{position:absolute;left:50.366cqw;top:45.754cqw;width:26.647cqw;height:6.516cqw;transform-origin:center center;animation:duduqStartAttention 2s ease-in-out infinite}.duduq-start-button-motion .intro-start{position:absolute;left:0;top:0;width:100%;height:100%}.duduq-start-button-motion:hover{animation:none;transform:scale(1.02)}.duduq-start-button-motion:active{animation:none;transform:scale(.985)}@keyframes duduqStartAttention{0%,72%,100%{transform:scale(1)}82%{transform:scale(1.035)}90%{transform:scale(1)}95%{transform:scale(1.018)}}
+.duduq-start-button-motion.is-portal-pressed{animation:none;transform:scale(.975)}.duduq-module-intro.duduq-tv-collapse{transform-origin:center center;transform:translate(-50%,-50%) scale(var(--intro-scale,1)) scaleY(.025);opacity:0;filter:brightness(1.25);transition:transform 220ms cubic-bezier(.55,0,.85,.45),opacity 220ms cubic-bezier(.55,0,.85,.45),filter 180ms ease-out;will-change:transform,opacity,filter}
+@media (prefers-reduced-motion:reduce){.duduq-intro-mascot-motion,.intro-start__motion,.duduq-start-button-motion{animation:none!important}.intro-start{transition:none}}
+@media (prefers-reduced-motion:reduce){.duduq-module-intro.duduq-tv-collapse{opacity:.08;filter:none;transform:translate(-50%,-50%) scale(var(--intro-scale,1));transition:opacity 170ms linear}.duduq-start-button-motion.is-portal-pressed{transform:none}}
+@media (max-aspect-ratio: 1/1){.intro-info dd{font-size:1.35cqw}}
+/* Ano/Série — DOM hierárquico equivalente ao CSS oficial do Penpot. */
+.intro-info__card--grade{background:none;border:0;border-radius:0;box-shadow:.293cqw .293cqw .293cqw 0 #00000033;isolation:isolate;overflow:visible}
+.year-card__visual{position:absolute;inset:0;overflow:visible;z-index:0}
+.year-card__vector{position:absolute;left:0;top:0;width:15.00732cqw;height:7.46706cqw;transform:translate(-1.464129cqw,-1.098097cqw);filter:drop-shadow(0 .366032cqw 0 #349FDF);overflow:visible;pointer-events:none}
+.year-card__surface{position:absolute;inset:0;background:#FFFDF7;clip-path:shape(from 9.7561% 35.365%, curve to 15.793% 14.7059% with 9.7561% 23.9622% / 12.4611% 14.7059%, line to 84.2072% 14.7059%, curve to 90.2439% 35.365% with 87.5389% 14.7059% / 90.2439% 23.9622%, line to 90.2439% 64.6331%, curve to 84.2072% 85.2941% with 90.2439% 76.0359% / 87.5389% 85.2941%, line to 15.793% 85.2941%, curve to 9.7561% 64.6331% with 12.4611% 85.2941% / 9.7561% 76.0359%, line to 9.7561% 35.365%, close)}
+.year-card__outline-vector{position:absolute;left:0;top:0;z-index:2;display:block;width:205px;height:102px;overflow:visible;pointer-events:none}
+.year-card__outline{position:absolute;z-index:2;left:1.496665cqw;top:2.640730cqw;width:0.065072cqw;height:0.065072cqw;border-radius:50%;background:#349FDF;overflow:visible;isolation:isolate;box-shadow:0.035111cqw -0.423685cqw 0 0 #349FDF,
+  0.145724cqw -0.832909cqw 0 0 #349FDF,
+  0.346600cqw -1.202336cqw 0 0 #349FDF,
+  0.661656cqw -1.464883cqw 0 0 #349FDF,
+  1.073074cqw -1.510097cqw 0 0 #349FDF,
+  1.504179cqw -1.510097cqw 0 0 #349FDF,
+  1.935283cqw -1.510097cqw 0 0 #349FDF,
+  2.366388cqw -1.510097cqw 0 0 #349FDF,
+  2.797492cqw -1.510097cqw 0 0 #349FDF,
+  3.228597cqw -1.510097cqw 0 0 #349FDF,
+  3.659702cqw -1.510097cqw 0 0 #349FDF,
+  4.090806cqw -1.510097cqw 0 0 #349FDF,
+  4.521911cqw -1.510097cqw 0 0 #349FDF,
+  4.953015cqw -1.510097cqw 0 0 #349FDF,
+  5.384120cqw -1.510097cqw 0 0 #349FDF,
+  5.815225cqw -1.510097cqw 0 0 #349FDF,
+  6.246329cqw -1.510097cqw 0 0 #349FDF,
+  6.677434cqw -1.510097cqw 0 0 #349FDF,
+  7.108538cqw -1.510097cqw 0 0 #349FDF,
+  7.539643cqw -1.510097cqw 0 0 #349FDF,
+  7.970748cqw -1.510097cqw 0 0 #349FDF,
+  8.401852cqw -1.510097cqw 0 0 #349FDF,
+  8.832957cqw -1.510097cqw 0 0 #349FDF,
+  9.264062cqw -1.510097cqw 0 0 #349FDF,
+  9.695166cqw -1.510097cqw 0 0 #349FDF,
+  10.126271cqw -1.510097cqw 0 0 #349FDF,
+  10.557375cqw -1.510097cqw 0 0 #349FDF,
+  10.988480cqw -1.510097cqw 0 0 #349FDF,
+  11.393034cqw -1.445324cqw 0 0 #349FDF,
+  11.694709cqw -1.164956cqw 0 0 #349FDF,
+  11.884530cqw -0.789081cqw 0 0 #349FDF,
+  11.986288cqw -0.377348cqw 0 0 #349FDF,
+  12.013991cqw 0.047556cqw 0 0 #349FDF,
+  12.013991cqw 0.478661cqw 0 0 #349FDF,
+  12.013991cqw 0.909766cqw 0 0 #349FDF,
+  12.013991cqw 1.340870cqw 0 0 #349FDF,
+  12.013991cqw 1.771975cqw 0 0 #349FDF,
+  12.013933cqw 2.202870cqw 0 0 #349FDF,
+  11.975907cqw 2.626260cqw 0 0 #349FDF,
+  11.861978cqw 3.034504cqw 0 0 #349FDF,
+  11.656957cqw 3.401379cqw 0 0 #349FDF,
+  11.337030cqw 3.656877cqw 0 0 #349FDF,
+  10.923412cqw 3.695694cqw 0 0 #349FDF,
+  10.492307cqw 3.695694cqw 0 0 #349FDF,
+  10.061202cqw 3.695694cqw 0 0 #349FDF,
+  9.630098cqw 3.695694cqw 0 0 #349FDF,
+  9.198993cqw 3.695694cqw 0 0 #349FDF,
+  8.767888cqw 3.695694cqw 0 0 #349FDF,
+  8.336784cqw 3.695694cqw 0 0 #349FDF,
+  7.905679cqw 3.695694cqw 0 0 #349FDF,
+  7.474575cqw 3.695694cqw 0 0 #349FDF,
+  7.043470cqw 3.695694cqw 0 0 #349FDF,
+  6.612365cqw 3.695694cqw 0 0 #349FDF,
+  6.181261cqw 3.695694cqw 0 0 #349FDF,
+  5.750156cqw 3.695694cqw 0 0 #349FDF,
+  5.319052cqw 3.695694cqw 0 0 #349FDF,
+  4.887947cqw 3.695694cqw 0 0 #349FDF,
+  4.456842cqw 3.695694cqw 0 0 #349FDF,
+  4.025738cqw 3.695694cqw 0 0 #349FDF,
+  3.594633cqw 3.695694cqw 0 0 #349FDF,
+  3.163529cqw 3.695694cqw 0 0 #349FDF,
+  2.732424cqw 3.695694cqw 0 0 #349FDF,
+  2.301319cqw 3.695694cqw 0 0 #349FDF,
+  1.870215cqw 3.695694cqw 0 0 #349FDF,
+  1.439110cqw 3.695694cqw 0 0 #349FDF,
+  1.008005cqw 3.695694cqw 0 0 #349FDF,
+  0.606336cqw 3.622965cqw 0 0 #349FDF,
+  0.309598cqw 3.336498cqw 0 0 #349FDF,
+  0.123766cqw 2.958405cqw 0 0 #349FDF,
+  0.025216cqw 2.545815cqw 0 0 #349FDF;pointer-events:none}
+.intro-info__card--grade::before{content:none}
+.year-card__label,.year-card__value{z-index:2;font-style:normal;letter-spacing:0;text-rendering:geometricPrecision}
+.year-card__icon{position:absolute;left:.5124cqw;top:1.2445cqw;width:2.855cqw;height:2.855cqw;object-fit:cover;object-position:center;filter:drop-shadow(.1464cqw .2933cqw .2933cqw #00000017);z-index:3;pointer-events:none}
+
+/* Card Módulo — geometria e estilos do vetor próprio recuperado do Penpot. */
+.intro-info__card--module.module-card{background:none;border:0;border-radius:0;box-shadow:.293cqw .293cqw .293cqw 0 #00000033;isolation:isolate;overflow:visible}
+.intro-info__card--module.module-card::before{content:none}
+.module-card__visual{position:absolute;inset:0;overflow:visible;z-index:0;pointer-events:none}
+.module-card__vector{--module-card-path:shape(from 0% 29.267036%,curve to 7.499611% 0% with 0% 13.113064% / 3.36065% 0%,line to 92.499915% 0%,curve to 100% 29.267036% with 96.638876% 0% / 100% 13.113064%,line to 100% 70.730253%,curve to 92.499915% 100% with 100% 86.884223% / 96.638876% 100%,line to 7.499611% 100%,curve to 0% 70.730253% with 3.36065% 100% / 0% 86.884223%,line to 0% 29.267036%,close);position:absolute;left:0;top:0;width:14.7145cqw;height:5.2709cqw;transform:translate(-1.464129cqw,-1.098097cqw);overflow:visible;isolation:isolate}
+.module-card__vector::before{content:"";position:absolute;inset:0;z-index:0;background:#349FDF;clip-path:var(--module-card-path);transform:translateY(5px);pointer-events:none}
+.module-card__surface{position:absolute;inset:0;z-index:1;background:#FFFDF7;clip-path:var(--module-card-path)}
+.module-card__outline{position:absolute;inset:0;z-index:2;overflow:visible}
+.module-card__dot{position:absolute;display:block;width:.4422338%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:#349FDF}
+.module-card__label,.module-card__value{z-index:2;font-style:normal;letter-spacing:0;text-rendering:geometricPrecision}
+.intro-info__card--module .module-card__value{text-align:left}
+.module-card__icon{position:absolute;left:.80527cqw;top:1.1713cqw;width:2.855cqw;height:2.855cqw;object-fit:cover;object-position:center;filter:drop-shadow(.1464cqw .2933cqw .2933cqw #00000017);z-index:3;pointer-events:none}
+
+/* DUDUD — CARD MÓDULO: medidas oficiais no canvas-base 1366×768. */
+.intro-info__card--module.module-card{left:206px;top:630px;width:201px;height:72px;box-shadow:4px 4px 4px 0 #00000033}
+.module-card__vector{width:201px;height:72px;transform:translate(-20px,-15px)}
+.intro-info__card--module .module-card__label{left:75px;top:10px;width:82px;height:16px;font-family:Fredoka,ui-rounded,sans-serif;font-size:11px;line-height:1.2;font-weight:500;letter-spacing:0;color:#6B8490;text-align:center}
+.intro-info__card--module .module-card__value{left:72px;top:31px;width:103px;height:25px;font-family:Fredoka,ui-rounded,sans-serif;font-size:20px;line-height:1.2;font-weight:700;letter-spacing:0;color:#29485C;text-align:left}
+.module-card__icon{left:11px;top:16px;width:39px;height:39px;object-fit:cover;filter:drop-shadow(2px 4px 4px #00000017)}
+
+/* DUDUD — CARD MÓDULO rebuilt from its own Penpot vector hierarchy. */
+.duduq-module-card-v2{position:absolute;left:206px;top:630px;width:201px;height:72px;margin:0;padding:0;background:transparent;background-color:transparent;background-image:none;border:0;outline:0;box-shadow:none;isolation:isolate;overflow:visible}
+.duduq-module-card-v2__visual{position:absolute;inset:0;z-index:0;overflow:visible;pointer-events:none}
+.duduq-module-card-v2__vector{--module-v2-path:shape(from 0% 29.267036%,curve to 7.499611% 0% with 0% 13.113064% / 3.36065% 0%,line to 92.499915% 0%,curve to 100% 29.267036% with 96.638876% 0% / 100% 13.113064%,line to 100% 70.730253%,curve to 92.499915% 100% with 100% 86.884223% / 96.638876% 100%,line to 7.499611% 100%,curve to 0% 70.730253% with 3.36065% 100% / 0% 86.884223%,line to 0% 29.267036%,close);position:absolute;left:0;top:0;width:201px;height:72px;transform:none;overflow:visible;isolation:isolate;filter:drop-shadow(4px 4px 4px #00000033)}
+.duduq-module-card-v2__depth,.duduq-module-card-v2__surface{position:absolute;inset:0;clip-path:var(--module-v2-path)}
+.duduq-module-card-v2__depth{z-index:0;background:#349FDF;transform:translateY(5px)}
+.duduq-module-card-v2__surface{z-index:1;background:#FFFDF7}
+.duduq-module-card-v2__outline{position:absolute;inset:0;z-index:2;overflow:visible}
+.duduq-module-card-v2__dot{position:absolute;display:block;width:.4422338%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:#349FDF}
+.duduq-module-card-v2__label,.duduq-module-card-v2__value{position:absolute;z-index:3;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:Fredoka,ui-rounded,sans-serif;font-style:normal;letter-spacing:0;text-rendering:geometricPrecision}
+.duduq-module-card-v2__label{left:75px;top:10px;width:82px;height:16px;color:#6B8490;font-size:11px;line-height:1.2;font-weight:500;text-align:center}
+.duduq-module-card-v2__value{left:72px;top:31px;width:103px;height:25px;color:#29485C;font-size:20px;line-height:1.2;font-weight:700;text-align:left}
+.duduq-module-card-v2__icon{position:absolute;left:11px;top:16px;z-index:4;display:block;width:39px;height:39px;object-fit:cover;object-position:center;filter:drop-shadow(2px 4px 4px #00000017);pointer-events:none}
+
+.duduq-year-card-v2{position:absolute;left:26px;top:630px;width:165px;height:72px;margin:0;padding:0;background:transparent;border:0;isolation:isolate;overflow:visible}
+.duduq-year-card-v2__surface{position:absolute;left:0;top:0;z-index:1;width:205px;height:132px;transform:translate(-20px,-15px);overflow:visible;pointer-events:none;filter:drop-shadow(4px 4px 4px #00000033)}
+.duduq-year-card-v2__label,.duduq-year-card-v2__value{position:absolute;z-index:2;margin:0;font-family:Fredoka,ui-rounded,sans-serif;font-style:normal;letter-spacing:0;text-rendering:geometricPrecision}
+.duduq-year-card-v2__label{left:55px;top:10px;width:82px;height:16px;color:#6B8490;font-size:11px;line-height:1.2;font-weight:500;text-align:center}
+.duduq-year-card-v2__value{left:44px;top:32px;width:103px;height:25px;color:#29485C;font-size:20px;line-height:1.2;font-weight:700;text-align:center}
+.duduq-year-card-v2__icon{position:absolute;left:7px;top:17px;z-index:3;width:39px;height:39px;object-fit:cover;object-position:center;filter:drop-shadow(2px 4px 4px #00000017);pointer-events:none}
+
+/* DUDUQ — CARD DISCIPLINA: independent Penpot component tree. */
+.duduq-subject-card{position:absolute;left:422px;top:631px;width:201px;height:72px;margin:0;padding:0;background:transparent;background-color:transparent;background-image:none;border:0;outline:0;box-shadow:none;isolation:isolate;overflow:visible}
+.duduq-subject-card__vector{--subject-card-path:shape(from 0% 29.267036%,curve to 7.499611% 0% with 0% 13.113064% / 3.36065% 0%,line to 92.499915% 0%,curve to 100% 29.267036% with 96.638876% 0% / 100% 13.113064%,line to 100% 70.730253%,curve to 92.499915% 100% with 100% 86.884223% / 96.638876% 100%,line to 7.499611% 100%,curve to 0% 70.730253% with 3.36065% 100% / 0% 86.884223%,line to 0% 29.267036%,close);position:absolute;inset:0;overflow:visible;filter:drop-shadow(4px 4px 4px #00000033)}
+.duduq-subject-card__depth,.duduq-subject-card__surface{position:absolute;inset:0;clip-path:var(--subject-card-path)}
+.duduq-subject-card__depth{z-index:0;background:#349FDF;transform:translateY(5px)}
+.duduq-subject-card__surface{z-index:1;background:#FFFDF7;overflow:hidden}
+.duduq-subject-card__outline{position:absolute;inset:0;z-index:2;overflow:visible}
+.duduq-subject-card__dot{position:absolute;display:block;width:.4422338%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:#349FDF}
+.duduq-subject-card__label,.duduq-subject-card__value{position:absolute;z-index:2;margin:0;font-family:Fredoka,ui-rounded,sans-serif;font-style:normal;letter-spacing:0;text-rendering:geometricPrecision}
+.duduq-subject-card__label{left:69px;top:9px;width:82px;height:16px;color:#6B8490;font-size:11px;line-height:1.2;font-weight:500;text-align:center}
+.intro-info .duduq-subject-card__value{left:61px;top:26px;display:block;width:98px;height:auto;min-height:22px;max-height:36px;color:#29485C;font-size:18px;line-height:1;font-weight:700;text-align:center;white-space:normal;word-break:normal;overflow-wrap:normal;overflow:visible;text-overflow:clip;-webkit-line-clamp:unset;line-clamp:unset;-webkit-box-orient:unset}
+.duduq-subject-card__icon{position:absolute;left:10px;top:17px;z-index:3;width:39px;height:39px;object-fit:cover;object-position:center;filter:drop-shadow(2px 4px 4px #00000017);pointer-events:none}

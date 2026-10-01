@@ -1,4 +1,4 @@
-const icon = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H5a1 1 0 0 0-1 1v3m12-4h3a1 1 0 0 1 1 1v3M4 16v3a1 1 0 0 0 1 1h3m12-4v3a1 1 0 0 1-1 1h-3"/></svg>`;
+const icon = `<img src="/fullscreen-official.svg" alt="" aria-hidden="true">`;
 
 /** Core-owned fullscreen control used exclusively by the canonical Header HUD. */
 export function DuduQCanonicalFullscreenButton({ target = document.documentElement, onChange, ariaLabel = "Ativar tela cheia", disabled = false } = {}) {

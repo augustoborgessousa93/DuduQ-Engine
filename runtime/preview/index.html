@@ -1,38 +1,7 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DUDUQ runtime verification</title><style>html,body,#root{margin:0;width:100%;height:100%;overflow:hidden}#root{min-height:320px}</style></head>
-<body><main id="root"></main>
-<style>.duduq-matching-visual-shell,.duduq-target-shooter-visual-shell{height:100vh!important;min-height:100vh!important}</style>
-<script>window.DUDUQ_ENGINE_BASE=window.location.origin;const __pathMechanic=location.pathname.includes('/play/target-shooter')?'target-shooter':location.pathname.includes('/play/matching')?'matching':null;window.__DUDUQ_VERIFICATION__={consumer:new URLSearchParams(location.search).get('mechanic')||__pathMechanic||'matching',ready:false};</script>
-<script src="/core/duduq-screen-runtime.js"></script>
-<script src="/core/duduq-schema.js"></script>
-<script src="/core/duduq-host.js"></script>
-<script src="/core/duduq-matching-visual-bridge.js"></script>
-<script src="/core/duduq-target-shooter-visual-bridge.js"></script>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DUDUQ — Penpot Product</title><style>html,body,#root{margin:0;width:100%;height:100%;overflow:hidden}#root{min-height:320px}</style></head><body><main id="root"></main>
+<script src="/core/duduq-screen-runtime.js"></script><script src="/core/duduq-headless-product.js"></script>
 <script>
-  window.__matchingVerification = { registration:null };
-  const originalRegister = window.DuduQ.registerMechanic;
-  window.DuduQ.registerMechanic = (entry) => { window.__matchingVerification.registration=entry; return originalRegister.call(window.DuduQ, entry); };
-</script>
-<script>
-window.addEventListener('load', () => {
-  const mode=window.__DUDUQ_VERIFICATION__.consumer;
-  const item=(id,label,emoji)=>({id,label,emoji,display:'image'});
-  const matchingQuestion={id:'verification-q1',statement:'Question one: match the animals.',instruction:'Listen and match.',audio:{text:'Question one',language:'en-US'},metadata:{matching:{mode:'audio-image',leftItems:[{id:'dog',spokenText:'DOG',audioDescription:'Dog spoken aloud'},{id:'cat',spokenText:'CAT',audioDescription:'Cat spoken aloud'}],rightItems:[{id:'dog-image',imageAssetKey:'greeting',alt:'Dog'},{id:'cat-image',imageAssetKey:'goodbye',alt:'Cat'}],pairs:[{leftId:'dog',rightId:'dog-image'},{leftId:'cat',rightId:'cat-image'}],behavior:{connectionMode:'1x1',interactionMode:'smart',shuffleLeft:false,shuffleRight:false}}}};
-  const matchingQuestion2={...matchingQuestion,id:'verification-q2',statement:'Question two: match the colors.',metadata:{matching:{...matchingQuestion.metadata.matching,leftItems:[{id:'red',spokenText:'RED',audioDescription:'Red spoken aloud'},{id:'blue',spokenText:'BLUE',audioDescription:'Blue spoken aloud'}],rightItems:[{id:'red-image',imageAssetKey:'greeting',alt:'Red'},{id:'blue-image',imageAssetKey:'goodbye',alt:'Blue'}],pairs:[{leftId:'red',rightId:'red-image'},{id:'blue',rightId:'blue-image'}]}}};
-  const targetQuestion={id:'verification-target-1',statement:'Question one: find the cat',instruction:'Shoot the correct target.',feedback:{correct:'Correct!',incorrect:'Try again.'},metadata:{targetShooter:{audioText:'Cat',mode:'image-to-response',shape:'balloon',correctIds:['cat'],items:[item('cat','CAT','🐱'),item('dog','DOG','🐶'),item('bird','BIRD','🐦')],difficulty:{objectCount:3,requiredCorrect:1,spawnIntervalMs:10,targetSize:110}}}};
-  const targetQuestion2={...targetQuestion,id:'verification-target-2',statement:'Question two: find the bird',metadata:{targetShooter:{...targetQuestion.metadata.targetShooter,correctIds:['bird']}}};
-  const root=document.getElementById('root');
-  if(mode==='target-shooter'){
-    window.__DUDUQ_VERIFICATION__.package='target-shooter-master';
-    window.DuduQ.start({id:'verification-target',year:1,steps:[{id:'verification-target-step',mechanic:'target-shooter',payload:{title:'Target Shooter',questions:[targetQuestion,targetQuestion2]},options:{}}]});
-  } else {
-    window.__DUDUQ_VERIFICATION__.package='matching-master';
-    const reg=window.DuduQ.getMechanic?.('matching') || window.__matchingVerification.registration;
-    if(reg) reg.mount({container:root,payload:{title:'Matching',questions:[matchingQuestion,matchingQuestion2]},context:{year:2,moduleId:'verification',totalSteps:1},onComplete(){}});
-  }
-  setTimeout(()=>{const iframe=document.querySelector('iframe');const visual=document.querySelector('[data-duduq-visual-package]');const stage=visual?.shadowRoot?.querySelector('[data-duduq-runtime-source="LIVE_VISUAL_PACKAGE"]');const visible=(node)=>{const s=getComputedStyle(node),b=node.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)>0&&b.width>10&&b.height>10};window.__DUDUQ_VERIFICATION__.identity=iframe?{mechanicVersion:iframe.dataset.mechanicVersion,goldMasterCommit:iframe.dataset.goldMasterCommit,goldMasterPath:iframe.dataset.goldMasterPath,packageHash:stage?.dataset.duduqVisualPackageMarkupHash||null}:null;window.__DUDUQ_VERIFICATION__.visibleGameRoots=stage&&visible(visual)?1:0;window.__DUDUQ_VERIFICATION__.staticPenpotOverlays=0;window.__DUDUQ_VERIFICATION__.hiddenLegacyVisualScene=[...document.querySelectorAll('iframe')].filter(visible).length;window.__DUDUQ_VERIFICATION__.ready=Boolean(visual&&stage&&iframe?.contentDocument&&window.__DUDUQ_VERIFICATION__.visibleGameRoots===1&&window.__DUDUQ_VERIFICATION__.hiddenLegacyVisualScene===0);document.documentElement.dataset.duduqVerification=window.__DUDUQ_VERIFICATION__.ready?'ready':'pending';},1500);
-});
-</script>
-<script src="/mechanics/matching.js" onload="if(window.__DUDUQ_VERIFICATION__.consumer==='target-shooter')this.remove()"></script>
-<script src="/mechanics/target-shooter.js" onload="if(window.__DUDUQ_VERIFICATION__.consumer!=='target-shooter')this.remove()"></script>
-</body></html>
+const path=location.pathname, mechanic=new URLSearchParams(location.search).get('mechanic')||(path.includes('/target-shooter')?'target-shooter':'matching');
+window.__DUDUQ_PRODUCT__={route:path,mechanic,runtimeType:'PENPOT_RENDERER + HEADLESS_ENGINE'};
+window.addEventListener('load',()=>{const root=document.getElementById('root');window.__DUDUQ_PRODUCT__.instance=window.DuduQHeadlessProduct.mount({container:root,mechanic});setTimeout(()=>{const host=root.querySelector('[data-duduq-product-runtime]'),stage=host?.shadowRoot?.querySelector('[data-duduq-runtime-source="LIVE_VISUAL_PACKAGE"]');const visible=n=>{const s=getComputedStyle(n),b=n.getBoundingClientRect();return s.display!=='none'&&s.visibility!=='hidden'&&+s.opacity>0&&b.width>10&&b.height>10};window.__DUDUQ_PRODUCT__.health={visibleRoots:stage&&visible(host)?1:0,staticOverlays:0,hiddenLegacyGames:document.querySelectorAll('iframe').length,goldenImages:[...document.images].filter(i=>/golden|visual-reference/i.test(i.src)).length,source:stage?.dataset.duduqRuntimeSource||null,ready:Boolean(stage&&visible(host))};document.documentElement.dataset.duduqProduct=window.__DUDUQ_PRODUCT__.health.ready?'ready':'pending'},500)});
+</script></body></html>

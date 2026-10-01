@@ -1,5 +1,6 @@
 /* Gold Master 88954f25-7a86-800b-8008-a87e6f0d4e44 — Core-owned only. */
 @import url("./duduq-gold-master-hud.css");
+@import url("../design-system/penpot-sync/generated/matching-primary-button.css");
 .duduq-canonical-header-hud { isolation: isolate; }
 
 /* Three-zone canonical Header: identity | centered progress region | controls. */
@@ -149,4 +150,53 @@
     column-gap: clamp(6px, 2vw, 12px) !important;
   }
   .duduq-canonical-header-hud .duduq-canonical-progress-region { padding-inline-end: 0; }
+}
+
+/* Final shared visual tuning. Both playable routes load this canonical sheet. */
+#game .duduq-canonical-header-hud.game-hud {
+  min-height: 92px !important;
+  padding-inline: 18px !important;
+  border-radius: 24px !important;
+  background: rgba(248, 255, 250, .92) !important;
+  box-shadow: 0 8px 20px rgba(7, 81, 77, .18) !important;
+}
+#game .duduq-canonical-header-hud .hud-title {
+  color: #3e6554 !important;
+  font-family: "Nunito", sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: -.025em !important;
+}
+#game .duduq-canonical-header-hud .hud-progress {
+  border-radius: 999px !important;
+  background: #dcefe9 !important;
+  box-shadow: inset 0 2px 4px rgba(37, 119, 101, .18) !important;
+}
+#game .duduq-canonical-header-hud .hud-counter {
+  border-radius: 18px !important;
+  background: #fff9db !important;
+}
+
+/* Shared HUD propagation test: one tactile-control and spacing contract for every game route. */
+:root {
+  --duduq-hud-test-control-size: 64px;
+  --duduq-hud-test-header-inset: 24px;
+  --duduq-hud-test-header-gap: 28px;
+}
+#game .duduq-canonical-header-hud.game-hud {
+  padding-inline: var(--duduq-hud-test-header-inset) !important;
+  column-gap: var(--duduq-hud-test-header-gap) !important;
+}
+#game .duduq-canonical-header-hud .fullscreen-button {
+  width: calc(var(--duduq-hud-test-control-size) * var(--duduq-gold-scale)) !important;
+  height: calc(var(--duduq-hud-test-control-size) * var(--duduq-gold-scale)) !important;
+  border-radius: 21px !important;
+  box-shadow: 0 6px 0 #155a90, 0 10px 16px rgba(32,74,105,.24), inset 0 2px 0 rgba(255,255,255,.64) !important;
+}
+#game .duduq-canonical-header-hud .fullscreen-button svg {
+  width: calc(28px * var(--duduq-gold-scale)) !important;
+  height: calc(28px * var(--duduq-gold-scale)) !important;
+}
+@media (max-width: 640px) {
+  #game .duduq-canonical-header-hud.game-hud { padding-inline: 14px !important; column-gap: 10px !important; }
+  #game .duduq-canonical-header-hud .fullscreen-button { width: 52px !important; height: 52px !important; border-radius: 17px !important; }
 }

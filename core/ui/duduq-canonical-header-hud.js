@@ -2,7 +2,7 @@ import { DuduQHud, MascotHUD, ProgressBadge, ProgressBar } from "./index.js";
 import { DuduQCanonicalFullscreenButton } from "./duduq-canonical-fullscreen-button.js";
 
 /** The only runtime constructor for a DuduQ activity header. */
-export function DuduQCanonicalHeaderHUD({ root, title = "", progressCurrent = 0, progressTotal = 1, mascot = "", onFullscreen } = {}) {
+export function DuduQCanonicalHeaderHUD({ root, title = "", progressCurrent = 0, progressTotal = 1, progressArtwork = "", mascot = "", onFullscreen } = {}) {
   const header = root || document.createElement("header");
   if (!root) header.innerHTML = `<div class="hud-brand"><span class="duduq-canonical-mascot-motion"><img class="hud-mascot" alt="DuduQ"></span><div class="hud-title-group"><h1 class="hud-title"></h1></div></div><div class="duduq-canonical-progress-region"><div class="hud-progress" role="progressbar" aria-label="Progresso da atividade"><span class="hud-progress-fill" aria-hidden="true"></span></div></div><div class="hud-counter"><span></span></div>`;
   header.classList.add("duduq-canonical-header-hud", "game-hud");
@@ -12,6 +12,7 @@ export function DuduQCanonicalHeaderHUD({ root, title = "", progressCurrent = 0,
   header.querySelector(".hud-subtitle")?.remove();
   const progress = header.querySelector(".hud-progress");
   const counter = header.querySelector(".hud-counter");
+  if (progressArtwork) progress.dataset.artwork = progressArtwork;
   let region = header.querySelector(".duduq-canonical-progress-region");
   if (!region) { region = document.createElement("div"); region.className = "duduq-canonical-progress-region"; progress?.replaceWith(region); if (progress) region.append(progress); }
   if (counter) header.append(counter);
@@ -24,6 +25,21 @@ export function DuduQCanonicalHeaderHUD({ root, title = "", progressCurrent = 0,
     motion.className = "duduq-canonical-mascot-motion";
     image.replaceWith(motion); motion.append(image);
   }
+  const motion = header.querySelector(".duduq-canonical-mascot-motion");
+  if (motion && !motion.querySelector(".duduq-blink")) {
+    const blink = document.createElement("span");
+    blink.className = "duduq-blink";
+    blink.setAttribute("aria-hidden", "true");
+    for (const [state, src] of [["open", "/core/assets/duduq-blink-open.png"], ["closed", "/core/assets/duduq-blink-closed.png"]]) {
+      const frame = document.createElement("img");
+      frame.className = `duduq-blink__${state}`;
+      frame.src = src;
+      frame.alt = "";
+      frame.decoding = "sync";
+      blink.append(frame);
+    }
+    motion.append(blink);
+  }
   if (mascot) image.src = mascot;
   MascotHUD(image);
   header.querySelector(".hud-title").textContent = title;
@@ -34,7 +50,14 @@ export function DuduQCanonicalHeaderHUD({ root, title = "", progressCurrent = 0,
     (counter.firstElementChild || counter).textContent = `${safeCompleted} / ${safeTotal}`;
     ProgressBadge(counter, { completed: safeCompleted, total: safeTotal });
     const bar = header.querySelector(".hud-progress");
-    bar.querySelector(".hud-progress-fill").style.width = `${safeCompleted / safeTotal * 100}%`;
+    const percentage = safeCompleted / safeTotal * 100;
+    const fill = bar.querySelector(".hud-progress-fill");
+    if (bar.dataset.artwork === "penpot-official-board") {
+      const fillWidth = 482 * percentage / 100;
+      fill.style.setProperty("width", `${fillWidth}px`, "important");
+      fill.style.setProperty("max-width", "none", "important");
+      bar.style.setProperty("--dnd-progress-highlight-width", `${Math.max(0, fillWidth - 14)}px`);
+    } else fill.style.width = `${percentage}%`;
     bar.setAttribute("aria-valuetext", `${safeCompleted} de ${safeTotal} etapas concluídas`);
     ProgressBar(bar, { completed: safeCompleted, total: safeTotal });
   };

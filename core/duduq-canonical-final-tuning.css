@@ -1,0 +1,9 @@
+/* Final shared visual contract: loaded after mechanic styles by both official products. */
+#game .duduq-canonical-header-hud.game-hud { min-height:92px; border-radius:24px; background:rgba(248,255,250,.92); box-shadow:0 8px 20px rgba(7,81,77,.18); padding-inline:18px!important; }
+#game .duduq-canonical-header-hud .hud-title { color:#3e6554!important; font-family:"Nunito",sans-serif!important; font-weight:900!important; letter-spacing:-.025em!important; }
+#game .duduq-canonical-header-hud .hud-progress { border-radius:999px!important; background:#dcefe9!important; box-shadow:inset 0 2px 4px rgba(37,119,101,.18)!important; }
+#game .duduq-canonical-header-hud .hud-counter { border-radius:18px!important; background:#fff9db!important; }
+#game .duduq-canonical-question-hud.question-panel { border:1px solid rgba(255,255,255,.9)!important; border-radius:20px!important; background:rgba(255,254,250,.94)!important; box-shadow:0 7px 18px rgba(18,82,82,.16)!important; padding:14px 20px!important; }
+#game .duduq-canonical-question-hud .question-label,#game .duduq-canonical-question-hud .question-prompt { font-family:Fredoka,Nunito,sans-serif!important; color:#3f605c!important; }
+#game .duduq-canonical-question-hud .audio-button { width:56px!important;height:56px!important;border-radius:16px!important;background:linear-gradient(180deg,#99dcff,#3aa4e2 54%,#267ebc)!important;box-shadow:0 5px 0 #155a90,0 8px 12px rgba(32,74,105,.2),inset 0 1px rgba(255,255,255,.58)!important;color:#fff!important; }
+#game .duduq-canonical-question-hud .audio-button:active { transform:translateY(3px)!important;box-shadow:0 2px 0 #155a90!important; }

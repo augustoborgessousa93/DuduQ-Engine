@@ -6,7 +6,7 @@
   const SOURCES = Object.freeze({
     question: "50f514fe-4a8a-804d-8008-aa3b16e25219",
     instruction: "50f514fe-4a8a-804d-8008-aa3b16fc5826",
-    audio: "50f514fe-4a8a-804d-8008-aa3b16cea7b7",
+    audio: "393d75f5-200b-8067-8008-b351ceb2ba9a",
     words: [
       "50f514fe-4a8a-804d-8008-aa3b1db7746c",
       "50f514fe-4a8a-804d-8008-aa3b1d452e60",

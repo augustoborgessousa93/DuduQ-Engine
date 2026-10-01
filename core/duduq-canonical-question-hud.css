@@ -29,3 +29,49 @@
 .duduq-canonical-question-hud .audio-button:disabled { cursor:not-allowed; filter:var(--duduq-question-audio-disabled-filter); }
 @keyframes duduq-canonical-audio-wave { from { opacity:.42; } to { opacity:1; } }
 @media (prefers-reduced-motion: reduce) { .duduq-canonical-question-hud .audio-button { transition:none; } .duduq-canonical-question-hud .audio-button[data-audio-state="playing"] .audio-wave { animation:none; } }
+
+/* Shared question shell and audio affordance, deliberately independent of mechanic gameplay. */
+#game .duduq-canonical-question-hud.question-panel {
+  border: 1px solid rgba(255, 255, 255, .9) !important;
+  border-radius: 20px !important;
+  background: rgba(255, 254, 250, .94) !important;
+  box-shadow: 0 7px 18px rgba(18, 82, 82, .16) !important;
+  padding: 14px 20px !important;
+}
+#game .duduq-canonical-question-hud .question-label,
+#game .duduq-canonical-question-hud .question-prompt {
+  font-family: Fredoka, Nunito, sans-serif !important;
+  color: #3f605c !important;
+}
+#game .duduq-canonical-question-hud .audio-button {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 16px !important;
+  background: linear-gradient(180deg, #99dcff, #3aa4e2 54%, #267ebc) !important;
+  box-shadow: 0 5px 0 #155a90, 0 8px 12px rgba(32, 74, 105, .2), inset 0 1px rgba(255,255,255,.58) !important;
+  color: #fff !important;
+}
+#game .duduq-canonical-question-hud .audio-button:active {
+  transform: translateY(3px) !important;
+  box-shadow: 0 2px 0 #155a90 !important;
+}
+
+/* Shared question rhythm: audio remains a canonical control, never mechanic-owned. */
+:root { --duduq-question-test-control-size: 64px; --duduq-question-test-inline-inset: 28px; }
+#game .duduq-canonical-question-hud.question-panel {
+  padding: 18px var(--duduq-question-test-inline-inset) !important;
+}
+#game .duduq-canonical-question-hud .question-label { margin-bottom: 9px !important; }
+#game .duduq-canonical-question-hud .audio-button {
+  width: var(--duduq-question-test-control-size) !important;
+  height: var(--duduq-question-test-control-size) !important;
+  min-width: var(--duduq-question-test-control-size) !important;
+  min-height: var(--duduq-question-test-control-size) !important;
+  border-radius: 21px !important;
+  box-shadow: 0 6px 0 #155a90, 0 10px 16px rgba(32,74,105,.24), inset 0 2px 0 rgba(255,255,255,.64) !important;
+}
+#game .duduq-canonical-question-hud .audio-button svg { width: 29px !important; height: 29px !important; }
+@media (max-width: 640px) {
+  #game .duduq-canonical-question-hud.question-panel { padding: 14px 16px !important; }
+  #game .duduq-canonical-question-hud .audio-button { width: 52px !important; height: 52px !important; min-width: 52px !important; min-height: 52px !important; border-radius: 17px !important; }
+}

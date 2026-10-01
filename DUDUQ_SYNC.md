@@ -14,10 +14,7 @@ npm run duduq:update-core
 npm run duduq:update-core -- --dry-run
 ```
 
-Before the normal command runs, `scripts/duduq-penpot-bootstrap.mjs` health-checks
-ports 4400/4401/4402 and starts only missing services from the registered existing
-installation in `DUDUQ_PROJECT_STATE.json`. It never installs or duplicates MCP
-processes. If the Penpot plugin is not connected, the command stops with:
+Before every Penpot operation (read, compile, update, mutation, reverse, or certification), `scripts/duduq-penpot-bootstrap.mjs` health-checks ports 4400/4401/4402, starts only missing services from the registered existing installation, waits for health, verifies the plugin connection, and performs a real live-board read. Cached graph data is never a substitute for this preflight. It never installs or duplicates MCP processes. If the Penpot plugin is not connected, the command stops with:
 `PENPOT_PLUGIN_NOT_CONNECTED: Abra o Plugin Penpot MCP no Penpot e clique em Connect.`
 
 Windows users may optionally run `DUDUQ_START.cmd` (including from Startup or Task
@@ -99,3 +96,8 @@ The remaining consumer E2E commands use the existing browser harness where avail
 Penpot geometry is rendered directly by the complete mounted Visual Package.
 The Gold Master iframe is behavior-only; no geometry projection or legacy
 property map is loaded in production.
+
+Canonical product routes mount `core/duduq-headless-product.js` directly.
+MatchingEngine and TargetShooterEngine are data/state machines with no DOM
+queries. Product certification requires dynamic progression, zero iframes,
+native pointer input, screenshots, videos, and Playwright traces.

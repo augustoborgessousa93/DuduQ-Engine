@@ -131,3 +131,47 @@
   .connection-thread { stroke-dashoffset: 0; }
   .is-connecting .connection-cable { animation: none; stroke-dasharray: none; stroke-dashoffset: 0; }
 }
+
+/* Penpot Matching Master — idle gameplay surfaces, 1366px baseline. */
+@media (min-width: 901px) {
+  #game .matching-card {
+    border: .888889px solid #d6c49a;
+    border-radius: 24px;
+    background: #fffdf7;
+    box-shadow: 0 5px 0 #afa17d;
+  }
+  #game .matching-card[data-state="selected"],
+  #game .matching-card[data-state="connected"] {
+    border-color: #6ac4ef;
+    background: linear-gradient(180deg,#f7fdff,#edf8ff);
+    box-shadow: 0 5px 0 #62b7df, 0 0 0 2px rgba(51,171,225,.17), 0 10px 18px rgba(34,56,41,.13), inset 0 1px 0 #fff;
+  }
+  #game .matching-card[data-state="selected"]:focus-visible { outline-color: #6ac4ef; }
+  #game .matching-card::before { background: #fff; }
+  #game .matching-port {
+    border: 1.77778px solid #5ab0dd;
+    background: #f2fbff;
+    box-shadow: 0 1px 4px rgba(22,85,111,.22);
+  }
+  #game .matching-port::after { background: #70c2e8; }
+  #game .matching-action-area .primary-action.game-action-button--primary {
+    position: relative;
+    left: 3.8px;
+    top: 7.8px;
+    width: 280px;
+    min-width: 280px;
+    height: 61px;
+    min-height: 61px;
+    border: 0 !important;
+    border-radius: 19px !important;
+    background: #349fdf !important;
+    background-image: none !important;
+    box-shadow: 0 8px 0 #175c93 !important;
+    color: #fff !important;
+  }
+  #game .matching-action-area .primary-action.game-action-button--primary::before {
+    content: none;
+    display: none;
+  }
+  #game .matching-action-area .primary-action.game-action-button--primary > [data-slot="action"] { top: -1px; }
+}

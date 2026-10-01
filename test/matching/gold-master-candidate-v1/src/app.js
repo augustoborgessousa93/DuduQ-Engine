@@ -5,6 +5,7 @@ import { MatchingBoard } from "./matching-board.js";
 import { ResultFXLayer } from "./result-fx.js";
 import { CTAAttention } from "./core/ui/index.js";
 import { mountMatchingComponents } from "./matching-components.js";
+import { DuduqSound } from "../../../../core/audio/duduq-sound-system.js";
 
 const initialContent = window.DUDUQ_MATCHING_GOLD_MASTER;
 const assetApi = window.DuduQAssets;
@@ -21,6 +22,7 @@ let roundIndex = 0;
 let activeInteraction;
 let activeBoard;
 let confirmWasVisible = false;
+let completionSoundPlayed = false;
 const confirmAttention = CTAAttention(action, { target: action.closest(".cta-attention-wrapper") || action });
 
 mountMatchingComponents(document);
@@ -73,6 +75,10 @@ async function advance() {
     return;
   }
   loading.dataset.state = "complete";
+  if (!completionSoundPlayed) {
+    completionSoundPlayed = true;
+    DuduqSound.play("complete");
+  }
   transitionMascot.src = assetApi?.assets?.mascots?.complete || assetApi?.assets?.mascots?.transition || "";
   transitionMascot.alt = "DuduQ celebrando a prévia concluída";
   loading.querySelector('[data-slot="loading-title"]').textContent = "Prévia concluída!";
@@ -81,6 +87,7 @@ async function advance() {
   completeAction.hidden = false;
   completeAction.onclick = () => {
     roundIndex = 0;
+    completionSoundPlayed = false;
     mountRound(initialContent);
     loading.hidden = true;
     document.querySelector(".game-screen").dataset.screenState = "idle";
@@ -104,6 +111,7 @@ function mountRound(content) {
   GameHUD(document, content, assetApi?.assets, engine.progress);
   GameQuestionPanel(document, engine.question);
   PrimaryAction(action, content.actionLabel || "CONFIRMAR", async () => {
+    DuduqSound.play("uiClick");
     const live = document.querySelector('[data-slot="live"]');
     const initial = interaction.snapshot();
     if (initial.connections.length !== engine.pairs.length) {
@@ -116,6 +124,13 @@ function mountRound(content) {
     activeBoard.paint(interaction.setStatus("validating"));
     await new Promise((resolve) => setTimeout(resolve, 110));
     const result = interaction.confirm();
+    if (result.status === "correct") {
+      DuduqSound.play("correct");
+      window.setTimeout(() => DuduqSound.playVoice("correct"), 140);
+    } else if (result.status === "incorrect") {
+      DuduqSound.play("error");
+      window.setTimeout(() => DuduqSound.playVoice("error"), 140);
+    }
     action.hidden = true;
     document.querySelector(".game-screen").dataset.screenState = result.status;
     if (result.status === "incorrect") live.textContent = "Há associações incorretas. Revise os pares destacados.";
@@ -127,12 +142,17 @@ function mountRound(content) {
         feedback.hidden = true;
         resultFX.clear();
         if (result.status === "incorrect") {
+          DuduqSound.play("uiClick");
           activeBoard.paint(interaction.retry());
           document.querySelector(".game-screen").dataset.screenState = "idle";
           window.dispatchEvent(new CustomEvent("duduq:feedback", { detail: { type: "retry" } }));
           return;
         }
-        window.dispatchEvent(new CustomEvent("duduq:feedback", { detail: { type: "continue" } }));
+        const continueEvent = new CustomEvent("duduq:feedback", {
+          cancelable: true,
+          detail: { type: "continue" }
+        });
+        if (!window.dispatchEvent(continueEvent)) return;
         void advance();
       });
       window.setTimeout(() => result.status === "correct" ? resultFXLayer.dispatchEvent(new CustomEvent("activity-success", { bubbles: true, detail: { source: "matching" } })) : resultFX.trigger("incorrect"), result.status === "correct" ? 40 : 0);

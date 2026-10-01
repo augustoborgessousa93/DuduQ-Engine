@@ -59,3 +59,12 @@ Failed staged packages are rejected before activation and the previous active pa
 ## Known limitations
 
 Live capture requires a connected Penpot plugin. Visual and human-interaction verification launches isolated Playwright Chromium and must not depend on external CDP, `127.0.0.1:9223`, or a browser opened by a user. Legacy iframe geometry projection is deprecated and is not loaded by production previews.
+
+## Product runtime contract
+
+The canonical `/play/matching/` and `/play/target-shooter/` routes mount the
+complete Penpot package directly and instantiate `core/duduq-headless-product.js`.
+MatchingEngine and TargetShooterEngine own data/state only; they contain no DOM
+queries. Visible Penpot nodes carry semantic source metadata and dispatch native
+pointer actions into these engines. Legacy mechanic iframes are not product
+runtime and product certification requires zero iframes.

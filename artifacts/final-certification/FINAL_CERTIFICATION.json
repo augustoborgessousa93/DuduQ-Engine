@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "generatedAt": "2026-09-22T23:54:11.422Z",
+  "generatedAt": "2026-09-23T01:08:38.355Z",
   "productRoutes": {
     "matching": "http://127.0.0.1:4175/play/matching/",
     "targetShooter": "http://127.0.0.1:4175/play/target-shooter/"
@@ -39,30 +39,30 @@
     "matching": {
       "route": "/play/matching/",
       "scene": {
-        "visibleRoots": 1,
+        "visibleRoots": 0,
         "staticOverlays": 0,
         "hiddenLegacyTrees": 0,
         "goldenImages": 0,
-        "source": "LIVE_VISUAL_PACKAGE",
-        "packageHash": "6cc610c3d399377f401637546cf7e908af62e3fa41af773f1cc70961cf7ba1f1",
-        "iframeCount": 1
+        "source": null,
+        "packageHash": null,
+        "iframeCount": 0
       },
-      "pointerStateNodes": 1,
-      "pointer": true
+      "pointerStateNodes": 0,
+      "pointer": false
     },
     "targetShooter": {
       "route": "/play/target-shooter/",
       "scene": {
-        "visibleRoots": 1,
+        "visibleRoots": 0,
         "staticOverlays": 0,
         "hiddenLegacyTrees": 0,
         "goldenImages": 0,
-        "source": "LIVE_VISUAL_PACKAGE",
-        "packageHash": "9787bbdc7fcb433c2aef237e346d5c253f7313da62a9977d9269f7fac81743f6",
-        "iframeCount": 1
+        "source": null,
+        "packageHash": null,
+        "iframeCount": 0
       },
-      "pointerStateNodes": 1,
-      "pointer": true
+      "pointerStateNodes": 0,
+      "pointer": false
     }
   },
   "commands": [

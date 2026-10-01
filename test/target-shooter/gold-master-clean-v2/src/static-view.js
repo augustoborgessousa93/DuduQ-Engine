@@ -2,6 +2,7 @@
 import { GameShell } from "../../../../core/ui/game-shell.js";
 import { DuduQHud, MascotHUD, ProgressBadge, ProgressBar, QuestionPanel, GameAudioButton, GameFullscreenButton, FeedbackHUD, MascotFeedback, GameButton, CTAAttention, DuduQFX, DuduQCanonicalHeaderHUD, DuduQCanonicalQuestionHUD } from "../../../../core/ui/index.js";
 import { TargetShooterGameplay } from "./target-shooter-gameplay.js";
+import { DuduqSound } from "../../../../core/audio/duduq-sound-system.js";
 
 const game = document.querySelector("#game");
 const headerSlot = document.querySelector("[data-canonical-header-slot]");
@@ -122,8 +123,9 @@ const question = canonical(document.querySelector(".question-panel"), "0fa9ab83-
 QuestionPanel(question, "wide");
 const feedback = document.querySelector(".feedback-ribbon");
 const feedbackAction = feedback.querySelector(".feedback-action");
+let completionSoundPlayed = false;
 const attention = CTAAttention(feedbackAction, { delay: 5000, repeat: 5000 });
-feedbackAction.addEventListener("click", () => attention.stop());
+feedbackAction.addEventListener("click", () => { attention.stop(); DuduqSound.play("uiClick"); });
 function showFeedback(outcome = "correct", onAction = () => {}) {
   const correct = outcome === "correct";
   feedback.hidden = false;
@@ -136,7 +138,14 @@ function showFeedback(outcome = "correct", onAction = () => {}) {
   feedback.querySelector("p").textContent = correct ? "Você acertou o alvo correto." : "Tente mais uma vez.";
   feedbackAction.textContent = correct ? "CONTINUAR" : "TENTAR DE NOVO";
   GameButton(feedbackAction, correct ? "success" : "danger");
-  feedbackAction.onclick = () => { attention.stop(); onAction(); };
+  feedbackAction.onclick = () => {
+    attention.stop();
+    if (correct && !completionSoundPlayed) {
+      completionSoundPlayed = true;
+      DuduqSound.play("complete");
+    }
+    onAction();
+  };
   attention.start();
 }
 const celebration = DuduQFX(document.querySelector(".success-celebration-layer"));

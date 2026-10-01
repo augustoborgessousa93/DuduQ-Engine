@@ -11,6 +11,13 @@ export function DuduQCanonicalQuestionHUD({ root, eyebrow = "", question = "", a
   panel.setAttribute("aria-labelledby", prompt.id);
   panel.dataset.component = "DUDUQ_CANONICAL_QUESTION_HUD";
   QuestionPanel(panel);
+  let visualShadow = panel.querySelector(":scope > .duduq-question-panel-shadow");
+  if (!visualShadow) {
+    visualShadow = document.createElement("div");
+    visualShadow.className = "duduq-question-panel-shadow";
+    visualShadow.setAttribute("aria-hidden", "true");
+    panel.prepend(visualShadow);
+  }
   panel.querySelector(".question-label").textContent = eyebrow;
   prompt.textContent = question;
   panel.querySelector(".audio-button")?.remove();

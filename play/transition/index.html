@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="pt-BR" data-duduq-ano="1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DUDUQ — Transição</title><link rel="stylesheet" href="/core/duduq-official-transition.css"><link rel="stylesheet" href="/core/duduq-transition-presence.css">
+<style>@keyframes duduq-float{0%,100%{transform:translateY(0) rotate(-.35deg)}50%{transform:translateY(-7px) rotate(.35deg)}}@keyframes duduq-load{0%{width:0}32%{width:30%}67%{width:70%}88%{width:85%}100%{width:100%}}@keyframes duduq-shimmer{to{transform:translateX(135%)}}.official-transition-mascot{animation:duduq-float 2.8s ease-in-out infinite}.official-transition-progress span{width:0;position:relative;overflow:hidden;animation:duduq-load .62s cubic-bezier(.22,.82,.25,1) forwards;box-shadow:inset 0 2px #fff9,0 0 14px #50c6ee88}.official-transition-progress span:after{content:"";position:absolute;inset:0 auto 0 -45%;width:38%;background:linear-gradient(90deg,transparent,#ffffff99,transparent);animation:duduq-shimmer 1.1s ease-in-out infinite}.official-transition-card{animation:duduq-scene-in .19s ease-out}@keyframes duduq-scene-in{from{opacity:.94;transform:scale(.992)}to{opacity:1;transform:scale(1)}}</style>
+<style>@keyframes duduq-float-presence{0%,100%{transform:translateY(0) rotate(-.35deg)}50%{transform:translateY(-7px) rotate(.35deg)}}.official-transition-mascot{animation-name:duduq-float-presence;transform-origin:center}</style>
+<body>
+<main class="official-transition" data-duduq-transition-frame="ba7410f9-72c0-80ac-8008-a3c347339825">
+  <header class="transition-hud" aria-label="Progresso da atividade">
+    <div class="transition-hud-brand"><img class="transition-hud-mascot" alt="Mascote DuduQ"><div><strong>ANIMALS</strong><span>Ligue cada palavra à<br>imagem correta</span></div></div>
+    <div class="transition-hud-meter" aria-hidden="true"><i></i></div><b class="transition-hud-count">4 / 10</b><button class="transition-hud-fullscreen" aria-label="Tela cheia">⌗</button>
+  </header>
+  <section class="official-transition-card">
+    <div class="transition-mascot-scale"><img class="official-transition-mascot" alt="DuduQ celebrando"></div><h1 class="official-transition-title">Muito bem!</h1>
+    <p class="official-transition-copy">Preparando a próxima atividade...</p><div class="official-transition-progress" aria-label="Carregando próxima atividade"><span></span></div>
+    <p class="official-transition-next">Próxima aventura a caminho!</p><div class="official-transition-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+  </section>
+</main>
+<script src="/core/duduq-assets.js"></script><script src="/core/duduq-transition.js"></script><script src="/core/duduq-game-flow.js"></script>
+<script>(()=>{const requested=new URLSearchParams(location.search).get("next"),destination=DuduQGameFlow.resolveDestination(requested),stage=name=>{document.documentElement.dataset.duduqTransitionStage=name;window.dispatchEvent(new CustomEvent("duduq:transition-route-stage",{detail:{stage:name,next:requested}}))},wait=ms=>new Promise(r=>setTimeout(r,ms));const root=document.querySelector(".official-transition"),mascot=document.querySelector(".official-transition-mascot"),hudMascot=document.querySelector(".transition-hud-mascot");root.style.backgroundImage=`url("${DuduQAssets.assets.backgrounds["1"]}")`;mascot.src=DuduQAssets.assets.mascots.correct;hudMascot.src=DuduQAssets.assets.mascots.hud||DuduQAssets.assets.mascots.correct;if(!destination){stage("INVALID_DESTINATION");return}(async()=>{stage("ENTER");await DuduQTransition.cover({coverDurationMs:190});stage("HOLD");await Promise.all([mascot.decode?.().catch(()=>{}),hudMascot.decode?.().catch(()=>{}),wait(380)]);stage("EXIT");await DuduQTransition.reveal({revealDurationMs:230});stage("EXIT_COMPLETE");await wait(0);location.replace(destination)})().catch(()=>{stage("FAILED");DuduQTransition.hideImmediate()})})()</script>
+</body></html>

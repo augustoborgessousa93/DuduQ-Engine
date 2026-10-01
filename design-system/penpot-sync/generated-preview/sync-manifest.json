@@ -1,0 +1,30 @@
+{
+  "transformerVersion": "1.0.0",
+  "inputExportHash": "94b721ba1d6d9fd2fc40d572f6703f37b302e97156560d7bbd3d6186e8800752",
+  "generatedOutputHash": "078a245836c8206d1965daae2022330f7f761aa011fd160755a7f5022c96a5e7",
+  "fileId": "d8ac01df-6646-81d2-8008-a2900d806e30",
+  "baselineHashes": {
+    "header": "56a9153f",
+    "question": "bbf7a45d"
+  },
+  "actualHashes": {
+    "header": "56a9153f",
+    "question": "bbf7a45d",
+    "combined": "f250c868"
+  },
+  "state": "MAPPING_REVIEW_REQUIRED",
+  "mappedNodes": [],
+  "unmappedProperties": [
+    {
+      "property": "questionAudioButton.background",
+      "status": "CORE_EQUIVALENCE_MISMATCH",
+      "nodeId": "88954f25-7a86-800b-8008-a87e700a22eb",
+      "nodeName": "Question Panel / Audio Action",
+      "surfaceNodeId": "88954f25-7a86-800b-8008-a87e700a4770",
+      "penpotFill": "#349fdf",
+      "currentCore": "linear-gradient(180deg,#ffc95f 0%,#f4a83a 56%,#d88023 100%)",
+      "match": "NO"
+    }
+  ],
+  "timestamp": "2026-09-20T18:24:42.895Z"
+}

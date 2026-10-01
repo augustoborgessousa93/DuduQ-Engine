@@ -26,9 +26,11 @@ export function ProgressBar(element, { completed, total }) {
 }
 
 export function GameHUD(root, content, assetSources, progress) {
+  const officialMascot = "assets/duduq-hud-mascot.png";
   let existing = root.querySelector(".game-hud");
-  if (!existing) { existing = DuduQCanonicalHeaderHUD({ title: content.topic, subtitle: content.subtitle, progressCurrent: progress.completed, progressTotal: progress.total, mascot: "assets/duduq-hud-mascot.png" }); root.querySelector("[data-canonical-header-slot]").replaceWith(existing); return existing; }
-  DuduQCanonicalHeaderHUD({ root: existing, title: content.topic, subtitle: content.subtitle, progressCurrent: progress.completed, progressTotal: progress.total, mascot: "assets/duduq-hud-mascot.png" });
+  if (!existing) { existing = DuduQCanonicalHeaderHUD({ title: content.topic, subtitle: content.subtitle, progressCurrent: progress.completed, progressTotal: progress.total, mascot: officialMascot }); existing.dataset.mechanic = "matching"; root.querySelector("[data-canonical-header-slot]").replaceWith(existing); return existing; }
+  DuduQCanonicalHeaderHUD({ root: existing, title: content.topic, subtitle: content.subtitle, progressCurrent: progress.completed, progressTotal: progress.total, mascot: officialMascot });
+  existing.dataset.mechanic = "matching";
   DuduQHud(root.querySelector(".game-hud"));
   root.querySelector('[data-slot="topic"]').textContent = content.topic;
   root.querySelector('[data-slot="subtitle"]').textContent = content.subtitle;
@@ -38,7 +40,7 @@ export function GameHUD(root, content, assetSources, progress) {
   const mascot = root.querySelector('[data-asset="mascot-idle"]');
   MascotHUD(mascot);
   // Official DuduQ idle art cropped from the approved source: avoids its 3840px transparent canvas.
-  mascot.src = "assets/duduq-hud-mascot.png";
+  mascot.src = officialMascot;
   mascot.alt = "DuduQ";
   ProgressBar(root.querySelector(".hud-progress"), progress);
 }
@@ -67,7 +69,7 @@ export function Feedback(root, assets, outcome, onAction) {
   const mascot = root.querySelector('[data-asset="feedback-mascot"]');
   MascotFeedback(mascot, outcome);
   // Feedback variants use local crops of the official source art, not full transparent canvases.
-  mascot.src = isCorrect ? "assets/duduq-feedback-correct.png" : "assets/duduq-feedback-error.png";
+  mascot.src = isCorrect ? "/test/matching/gold-master-candidate-v1/assets/duduq-feedback-correct.png" : "/test/matching/gold-master-candidate-v1/assets/duduq-feedback-error.png";
   mascot.alt = isCorrect ? "DuduQ comemorando o acerto" : "DuduQ incentivando nova tentativa";
   root.querySelector('[data-slot="feedback-title"]').textContent = isCorrect ? "Correto!" : "Ops!";
   root.querySelector('[data-slot="feedback-detail"]').textContent = isCorrect ? "Você ligou corretamente." : "Revise as ligações e tente novamente.";
@@ -81,6 +83,6 @@ export function Feedback(root, assets, outcome, onAction) {
   else ErrorActionButton(button);
   button._duduqAttention ??= CTAAttention(button);
   button._duduqAttention.stop();
-  button._duduqAttention.start();
+  button._duduqAttention.start(isCorrect ? { repeat: 2000 } : undefined);
   button.onclick = () => { button._duduqAttention.stop(); onAction(); };
 }
