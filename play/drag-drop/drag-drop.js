@@ -2,19 +2,33 @@ import { DuduQCanonicalHeaderHUD, DuduQCanonicalQuestionHUD, GameActionButton, C
 import { DuduqSound } from "/core/audio/duduq-sound-system.js";
 import { ResultFXLayer } from "/core/ui/result-fx.js";
 import { Feedback } from "/test/matching/gold-master-candidate-v1/src/core-components.js";
-import { createDuduqDragDropEngine } from "../../core/duduq-drag-drop-engine.js";
-import { createDuduqDragDropLifecycle } from "../../core/duduq-drag-drop-lifecycle.js";
+import { createDuduqDragDropEngine } from "/core/duduq-drag-drop-engine.js";
+import { createDuduqDragDropLifecycle } from "/core/duduq-drag-drop-lifecycle.js";
 
 const root = document.querySelector("#game");
 const background = window.DuduQAssets?.assets?.backgrounds?.["1"] || "";
 const activity = Object.freeze({
+  id: "drag-drop-grouping-main",
+  mechanic: "drag-drop",
+  layout: "grouping",
+  validation: Object.freeze({ strategy: "groupId" }),
   title: "DRAG & DROP",
   progress: { completed: 0, total: 1 },
-  questionHud: {
-    title: "MATCH THE WORDS",
-    instruction: "Drag each word to the correct picture.",
-    audio: "Drag each word to the correct picture."
-  }
+  prompt: Object.freeze({
+    eyebrow: "MATCH THE WORDS",
+    title: "Drag each word to the correct picture.",
+    audioSrc: "Drag each word to the correct picture."
+  }),
+  items: Object.freeze(Array.from({ length: 6 }, (_, index) => Object.freeze({
+    id: `card-${String(index + 1).padStart(2, "0")}`,
+    type: "image",
+    imageSrc: "/core/assets/drag-drop/option-cat-card.png",
+    correctGroupId: "animals"
+  }))),
+  targets: Object.freeze([
+    Object.freeze({ id: "animals", type: "group", groupId: "animals", title: "ANIMALS", capacity: "infinite" }),
+    Object.freeze({ id: "food", type: "group", groupId: "food", title: "FOOD", capacity: "infinite" })
+  ])
 });
 
 root.className = "game-screen target-shooter-screen duduq-shared-gold-shell drag-drop-screen";
@@ -22,11 +36,12 @@ root.setAttribute("aria-label", "DuduQ Drag and Drop");
 root.innerHTML = `
   <div class="world-backdrop" aria-hidden="true"></div>
   <div class="readability-veil" aria-hidden="true"></div>
+  <div class="dnd-artboard" data-dnd-owner="Artboard">
   <section class="dnd-options-cards-group" data-dnd-owner="OptionsCardsGroup" aria-label="Áreas de classificação">
     <div class="dnd-options-cards-group__shadow">
       <div class="dnd-options-cards-group__surface"></div>
     </div>
-    <section class="dnd-rectangle-group dnd-options-cards-group__category dnd-options-cards-group__category--animals" data-dnd-owner="RectangleGroup" data-penpot-id="0f686644-17fe-807c-8008-b8127a01851a" data-drop-target-id="animals" data-drop-state="idle" role="group" aria-label="Animals">
+    <section class="dnd-rectangle-group dnd-options-cards-group__category dnd-options-cards-group__category--animals" data-dnd-owner="RectangleGroup" data-penpot-id="0f686644-17fe-807c-8008-b8127a01851a" data-drop-state="idle" role="group" aria-label="Animals">
       <div class="dnd-rectangle-group__surface dnd-options-cards-group__category-surface" data-penpot-id="0f686644-17fe-807c-8008-b8127a025e36"></div>
       <svg class="dnd-rectangle-group__border" viewBox="0 0 476 263" preserveAspectRatio="none" aria-hidden="true" focusable="false">
         <rect x="1.5" y="1.5" width="473" height="260" rx="28.5" ry="28.5" fill="none" stroke="#B17F00" stroke-width="3" stroke-dasharray="12 14" stroke-linecap="butt"></rect>
@@ -44,7 +59,7 @@ root.innerHTML = `
       </div>
       <div class="dnd-drop-zone__content" data-drop-zone-content="animals" aria-label="Cards colocados em Animals"></div>
     </section>
-    <section class="dnd-category-food dnd-options-cards-group__category dnd-options-cards-group__category--food" data-dnd-owner="CategoryFood" data-penpot-id="0f686644-17fe-807c-8008-b8135943a54b" data-drop-target-id="food" data-drop-state="idle" role="group" aria-label="Food">
+    <section class="dnd-category-food dnd-options-cards-group__category dnd-options-cards-group__category--food" data-dnd-owner="CategoryFood" data-penpot-id="0f686644-17fe-807c-8008-b8135943a54b" data-drop-state="idle" role="group" aria-label="Food">
       <div class="dnd-category-food__surface dnd-options-cards-group__category-surface" data-penpot-id="0f686644-17fe-807c-8008-b8135943a54d"></div>
       <svg class="dnd-category-food__border" viewBox="0 0 476 263" preserveAspectRatio="none" aria-hidden="true" focusable="false">
         <rect x="1.5" y="1.5" width="473" height="260" rx="28.5" ry="28.5" fill="none" stroke="#B17F00" stroke-width="3" stroke-dasharray="12 14" stroke-linecap="butt"></rect>
@@ -63,32 +78,32 @@ root.innerHTML = `
     </section>
   </section>
   <div class="dnd-image-card-row" data-dnd-owner="ImageCardRow" aria-label="Cards de imagem">
-  <figure class="dnd-option-image-card" data-dnd-owner="OptionImageCard" data-penpot-id="179c70ae-2ebb-806e-8008-b75e3fc9cd10" role="button" tabindex="0" aria-label="Card de imagem 1. Arraste para Animals ou Food" data-correct-target-id="animals">
+  <figure class="dnd-option-image-card" data-dnd-owner="OptionImageCard" data-penpot-id="179c70ae-2ebb-806e-8008-b75e3fc9cd10" role="button" tabindex="0" aria-label="Card de imagem 1. Arraste para Animals ou Food">
     <img class="dnd-option-image-card__hover-frame" src="/core/assets/drag-drop/card-hover-frame.svg" alt="" aria-hidden="true">
     <img class="dnd-option-image-card__hover-pet" src="/core/assets/drag-drop/answer-cat-official.png" alt="" aria-hidden="true">
     <img class="dnd-option-image-card__artwork" src="/core/assets/drag-drop/option-cat-card.png" alt="">
   </figure>
-  <figure class="dnd-option-image-card" data-dnd-owner="OptionImageCard" data-penpot-id="179c70ae-2ebb-806e-8008-b75e41b72598" role="button" tabindex="0" aria-label="Card de imagem 2. Arraste para Animals ou Food" data-correct-target-id="animals">
+  <figure class="dnd-option-image-card" data-dnd-owner="OptionImageCard" data-penpot-id="179c70ae-2ebb-806e-8008-b75e41b72598" role="button" tabindex="0" aria-label="Card de imagem 2. Arraste para Animals ou Food">
     <img class="dnd-option-image-card__hover-frame" src="/core/assets/drag-drop/card-hover-frame.svg" alt="" aria-hidden="true">
     <img class="dnd-option-image-card__hover-pet" src="/core/assets/drag-drop/answer-cat-official.png" alt="" aria-hidden="true">
     <img class="dnd-option-image-card__artwork" src="/core/assets/drag-drop/option-cat-card.png" alt="">
   </figure>
-  <figure class="dnd-option-image-card" data-dnd-owner="OptionImageCard" data-penpot-id="179c70ae-2ebb-806e-8008-b75e43521863" role="button" tabindex="0" aria-label="Card de imagem 3. Arraste para Animals ou Food" data-correct-target-id="animals">
+  <figure class="dnd-option-image-card" data-dnd-owner="OptionImageCard" data-penpot-id="179c70ae-2ebb-806e-8008-b75e43521863" role="button" tabindex="0" aria-label="Card de imagem 3. Arraste para Animals ou Food">
     <img class="dnd-option-image-card__hover-frame" src="/core/assets/drag-drop/card-hover-frame.svg" alt="" aria-hidden="true">
     <img class="dnd-option-image-card__hover-pet" src="/core/assets/drag-drop/answer-cat-official.png" alt="" aria-hidden="true">
     <img class="dnd-option-image-card__artwork" src="/core/assets/drag-drop/option-cat-card.png" alt="">
   </figure>
-  <figure class="dnd-option-image-card" data-dnd-owner="OptionImageCard" data-penpot-id="179c70ae-2ebb-806e-8008-b75e451a311d" role="button" tabindex="0" aria-label="Card de imagem 4. Arraste para Animals ou Food" data-correct-target-id="animals">
+  <figure class="dnd-option-image-card" data-dnd-owner="OptionImageCard" data-penpot-id="179c70ae-2ebb-806e-8008-b75e451a311d" role="button" tabindex="0" aria-label="Card de imagem 4. Arraste para Animals ou Food">
     <img class="dnd-option-image-card__hover-frame" src="/core/assets/drag-drop/card-hover-frame.svg" alt="" aria-hidden="true">
     <img class="dnd-option-image-card__hover-pet" src="/core/assets/drag-drop/answer-cat-official.png" alt="" aria-hidden="true">
     <img class="dnd-option-image-card__artwork" src="/core/assets/drag-drop/option-cat-card.png" alt="">
   </figure>
-  <figure class="dnd-option-image-card" data-dnd-owner="OptionImageCard" data-penpot-id="179c70ae-2ebb-806e-8008-b75e46f2972a" role="button" tabindex="0" aria-label="Card de imagem 5. Arraste para Animals ou Food" data-correct-target-id="animals">
+  <figure class="dnd-option-image-card" data-dnd-owner="OptionImageCard" data-penpot-id="179c70ae-2ebb-806e-8008-b75e46f2972a" role="button" tabindex="0" aria-label="Card de imagem 5. Arraste para Animals ou Food">
     <img class="dnd-option-image-card__hover-frame" src="/core/assets/drag-drop/card-hover-frame.svg" alt="" aria-hidden="true">
     <img class="dnd-option-image-card__hover-pet" src="/core/assets/drag-drop/answer-cat-official.png" alt="" aria-hidden="true">
     <img class="dnd-option-image-card__artwork" src="/core/assets/drag-drop/option-cat-card.png" alt="">
   </figure>
-  <figure class="dnd-option-image-card" data-dnd-owner="OptionImageCard" data-penpot-id="179c70ae-2ebb-806e-8008-b75e48b27cfc" role="button" tabindex="0" aria-label="Card de imagem 6. Arraste para Animals ou Food" data-correct-target-id="animals">
+  <figure class="dnd-option-image-card" data-dnd-owner="OptionImageCard" data-penpot-id="179c70ae-2ebb-806e-8008-b75e48b27cfc" role="button" tabindex="0" aria-label="Card de imagem 6. Arraste para Animals ou Food">
     <img class="dnd-option-image-card__hover-frame" src="/core/assets/drag-drop/card-hover-frame.svg" alt="" aria-hidden="true">
     <img class="dnd-option-image-card__hover-pet" src="/core/assets/drag-drop/answer-cat-official.png" alt="" aria-hidden="true">
     <img class="dnd-option-image-card__artwork" src="/core/assets/drag-drop/option-cat-card.png" alt="">
@@ -107,6 +122,7 @@ root.innerHTML = `
       </button>
     </div>
   </section>
+  </div>
   <div class="result-fx-layer success-celebration-layer" aria-hidden="true"></div>
   <section class="feedback-ribbon" data-feedback="" aria-live="polite" aria-atomic="true" hidden>
     <img class="feedback-mascot" data-asset="feedback-mascot" alt="">
@@ -133,9 +149,9 @@ header.dataset.mechanic = "matching";
 root.querySelector("[data-canonical-header-slot]").replaceWith(header);
 root.querySelector("[data-canonical-question-slot]").replaceWith(
   DuduQCanonicalQuestionHUD({
-    eyebrow: activity.questionHud.title,
-    question: activity.questionHud.instruction,
-    audio: activity.questionHud.audio
+    eyebrow: activity.prompt.eyebrow,
+    question: activity.prompt.title,
+    audio: activity.prompt.audioSrc
   })
 );
 
@@ -160,8 +176,21 @@ window.DuduQDragDropShell = Object.freeze({ activity, header, setQuestionProgres
 
 // Drag & Drop V2: placement is provisional; the learner confirms the full set.
 const imageCards = [...root.querySelectorAll(".dnd-option-image-card")];
+const artboard = root.querySelector(".dnd-artboard");
 const imageCardRow = root.querySelector(".dnd-image-card-row");
-const dropTargets = [...root.querySelectorAll("[data-drop-target-id]")];
+const engine = createDuduqDragDropEngine(activity);
+const lifecycle = createDuduqDragDropLifecycle(engine);
+const itemData = engine.config.items;
+const targetData = engine.config.targets;
+const targetElements = [...root.querySelectorAll(".dnd-options-cards-group__category")];
+if (imageCards.length !== itemData.length || targetElements.length !== targetData.length) {
+  throw new Error("Grouping renderer does not match its canonical activity configuration.");
+}
+const itemElementById = new Map(itemData.map((item, index) => [item.id, imageCards[index]]));
+const itemIdForElement = new Map(imageCards.map((element, index) => [element, itemData[index].id]));
+const targetElementById = new Map(targetData.map((target, index) => [target.id, targetElements[index]]));
+const targetIdForElement = new Map(targetElements.map((element, index) => [element, targetData[index].id]));
+const dropTargets = targetData.map(target => targetElementById.get(target.id));
 const panel = root.querySelector(".dnd-options-cards-group");
 const confirmAction = root.querySelector(".dnd-confirm-action-motion");
 const confirmButton = confirmAction.querySelector(".dnd-confirm-action");
@@ -170,36 +199,19 @@ const resultFxLayer = root.querySelector(".result-fx-layer");
 ResultFXLayer(resultFxLayer);
 GameActionButton(confirmButton, "primary");
 const confirmAttention = CTAAttention(confirmButton, { delay: 700, repeat: 2000, target: confirmAction });
-const items = imageCards.map((element, index) => ({
-  id: `card-${String(index + 1).padStart(2, "0")}`,
-  type: "image",
-  correctTargetId: element.dataset.correctTargetId,
-  element
-}));
-const groupingRound = createDuduqDragDropLifecycle(createDuduqDragDropEngine({
-  id: "drag-drop-grouping",
-  mechanic: "drag-drop",
-  layout: "grouping",
-  validation: { strategy: "groupId" },
-  items: items.map(item => ({ id: item.id, type: item.type, correctGroupId: item.correctTargetId })),
-  targets: dropTargets.map(target => ({
-    id: target.dataset.dropTargetId, type: "group", groupId: target.dataset.dropTargetId, capacity: "infinite"
-  }))
-}));
-const itemForElement = new Map(items.map(item => [item.element, item]));
+const itemState = itemId => lifecycle.itemState(itemId);
+const roundSnapshot = () => lifecycle.snapshot();
+const roundStatus = () => roundSnapshot().status;
+const questionComplete = () => roundStatus() === "completed";
+const isValidating = () => roundStatus() === "checking";
+const itemForElement = itemIdForElement;
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const motionDuration = milliseconds => reducedMotion.matches ? Math.min(80, milliseconds) : milliseconds;
 const DRAG_THRESHOLD_PX = 6;
 let activeDrag = null;
-let questionComplete = false;
 let completionSoundPlayed = false;
-let isValidating = false;
-let hasValidatedPlacement = false;
-let continueRequested = false;
 
-const roundSnapshot = () => groupingRound.snapshot();
-const stateFor = item => roundSnapshot().items.find(state => state.id === item.id);
-const getPlacedCount = () => groupingRound.snapshot().placedCount;
+const getPlacedCount = () => roundSnapshot().placedCount;
 const isFullscreenEnhanced = () => root.dataset.duduqFullscreenEnhanced === "true";
 const baseCardSize = () => {
   if (!isFullscreenEnhanced()) return 150;
@@ -214,8 +226,24 @@ const baseCardSize = () => {
   return Math.max(1, Math.min(requestedSize, sixCardWidth, sixCardHeight));
 };
 const stageScale = () => {
-  const rect = root.getBoundingClientRect();
-  return { x: rect.width / (root.offsetWidth || rect.width), y: rect.height / (root.offsetHeight || rect.height) };
+  const rect = artboard.getBoundingClientRect();
+  return { x: rect.width / (artboard.offsetWidth || rect.width), y: rect.height / (artboard.offsetHeight || rect.height) };
+};
+const applyArtboardGeometry = () => {
+  if (isFullscreenEnhanced()) {
+    artboard.style.width = "100%";
+    artboard.style.height = "100%";
+    artboard.style.left = "0";
+    artboard.style.top = "0";
+    artboard.style.transform = "none";
+    return;
+  }
+  const scale = Math.min(root.clientWidth / 1366, root.clientHeight / 768);
+  artboard.style.width = "1366px";
+  artboard.style.height = "768px";
+  artboard.style.left = "50%";
+  artboard.style.top = "50%";
+  artboard.style.transform = `translate(-50%, -50%) scale(${scale})`;
 };
 const rectMap = elements => new Map(elements.map(element => [element, element.getBoundingClientRect()]));
 const cardsIn = parent => [...parent.querySelectorAll(":scope > .dnd-option-image-card")];
@@ -251,7 +279,8 @@ const animateFlip = (elements, beforeRects, duration = 210) => {
 };
 
 const updateConfirmAction = ({ restartAttention = false } = {}) => {
-  const ready = roundSnapshot().status === "editing" && !questionComplete && getPlacedCount() === items.length;
+  const round = roundSnapshot();
+  const ready = round.status === "editing" && round.placedCount === round.totalItems;
   const wasVisible = !confirmAction.hidden;
   confirmAction.hidden = !ready;
   if (!ready) confirmAttention.stop();
@@ -261,7 +290,7 @@ const updateConfirmAction = ({ restartAttention = false } = {}) => {
 const recenterSourceRow = beforeRects => {
   const remaining = cardsIn(imageCardRow);
   const panelRect = panel.getBoundingClientRect();
-  const rootRect = root.getBoundingClientRect();
+  const rootRect = artboard.getBoundingClientRect();
   const scale = stageScale();
   const cardWidth = remaining[0]?.getBoundingClientRect().width / scale.x || baseCardSize();
   const rowStyles = getComputedStyle(imageCardRow);
@@ -313,6 +342,7 @@ const clearTargetStates = except => {
 };
 const captureRowRects = () => rectMap(cardsIn(imageCardRow));
 const targetForCard = card => dropTargets.find(target => target.querySelector("[data-drop-zone-content]")?.contains(card)) || null;
+const targetIdForCard = card => targetIdForElement.get(targetForCard(card)) || null;
 const restoreCardLayout = card => {
   card.removeAttribute("data-drag-state");
   card.style.position = "relative";
@@ -325,19 +355,26 @@ const restoreCardLayout = card => {
   card.style.removeProperty("transition");
   card.style.removeProperty("pointer-events");
 };
-const setCardState = (item, state) => {
-  if (state === "idle") item.element.removeAttribute("data-state");
-  else item.element.dataset.state = state;
-  const artwork = item.element.querySelector(".dnd-option-image-card__artwork");
-  if (artwork) {
-    artwork.dataset.baseSrc ||= artwork.getAttribute("src");
-    artwork.src = state === "correct"
-      ? "/core/assets/drag-drop/option-cat-card-correct.png"
-      : state === "incorrect"
-        ? "/core/assets/drag-drop/option-cat-card-incorrect.png"
-        : artwork.dataset.baseSrc;
-  }
-  item.element.querySelector(".dnd-option-image-card__state-art")?.remove();
+const setCardArtworkState = (itemId, state) => {
+  const artwork = itemElementById.get(itemId)?.querySelector(".dnd-option-image-card__artwork");
+  if (!artwork) return;
+  artwork.dataset.baseSrc ||= artwork.getAttribute("src");
+  const stateSources = {
+    selected: "/core/assets/drag-drop/option-cat-card-selected.png",
+    correct: "/core/assets/drag-drop/option-cat-card-correct-state.png",
+    incorrect: "/core/assets/drag-drop/option-cat-card-incorrect-state.png"
+  };
+  artwork.src = stateSources[state] || artwork.dataset.baseSrc;
+};
+const setCardState = itemId => {
+  const item = itemState(itemId);
+  const card = itemElementById.get(itemId);
+  if (!item || !card) return;
+  const state = item.state;
+  if (state === "idle") card.removeAttribute("data-state");
+  else card.dataset.state = state;
+  setCardArtworkState(itemId, state);
+  card.querySelector(".dnd-option-image-card__state-art")?.remove();
   if (state === "correct" || state === "incorrect") {
     const stateArt = document.createElement("span");
     stateArt.className = `dnd-option-image-card__state-art dnd-option-image-card__state-art--${state}`;
@@ -345,15 +382,15 @@ const setCardState = (item, state) => {
     stateArt.innerHTML = state === "correct"
       ? `<svg viewBox="0 0 161.29 159" preserveAspectRatio="none"><circle cx="144.14499999999998" cy="17.144999999999996" r="15.1667307692303" fill="#3BB46B" stroke="#fff" stroke-width="3"/><path d="M137.286376953125 17.40869140625L141.50732421875 21.4970703125L150.87158203125 12.0018310546875" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
       : `<svg viewBox="0 0 160 157" preserveAspectRatio="none"><circle cx="143.14499999999998" cy="17.144999999999996" r="15.1667307692303" fill="#E62B51" stroke="#fff" stroke-width="3"/><path d="M148 12L138 22M138 12L148 22" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-    item.element.append(stateArt);
+    card.append(stateArt);
   }
-  const locked = state === "correct" || questionComplete;
-  item.element.setAttribute("aria-disabled", String(locked));
-  item.element.tabIndex = locked ? -1 : 0;
+  const locked = item.locked || questionComplete();
+  card.setAttribute("aria-disabled", String(locked));
+  card.tabIndex = locked ? -1 : 0;
 };
 
 const returnToOrigin = drag => {
-  const { card, item, originalParent, originalIndex, originalTarget, originalTargetId, originalState } = drag;
+  const { card, itemId, originalParent, originalIndex, originalTarget, originalTargetId } = drag;
   const currentRect = card.getBoundingClientRect();
   const beforeParent = rectMap(cardsIn(originalParent));
   beforeParent.set(card, currentRect);
@@ -361,7 +398,8 @@ const returnToOrigin = drag => {
   if (originalParent === imageCardRow) setCardArtSize(card, baseCardSize());
   const siblings = cardsIn(originalParent);
   originalParent.insertBefore(card, siblings[originalIndex] || null);
-  setCardState(item, originalState);
+  if (originalTargetId) lifecycle.place(itemId, originalTargetId);
+  setCardState(itemId);
   if (originalParent === imageCardRow) recenterSourceRow(beforeParent);
   else if (originalTarget) layoutPlacedCards(originalTarget, beforeParent);
   clearTargetStates();
@@ -369,9 +407,12 @@ const returnToOrigin = drag => {
 };
 
 const placeInTarget = (drag, target) => {
-  const { card, item } = drag;
-  const placement = groupingRound.place(item.id, target.dataset.dropTargetId);
-  if (!placement) return false;
+  const { card, itemId } = drag;
+  const targetId = targetIdForElement.get(target);
+  if (!targetId || !lifecycle.place(itemId, targetId)) {
+    returnToOrigin(drag);
+    return false;
+  }
   const currentRect = card.getBoundingClientRect();
   const content = target.querySelector("[data-drop-zone-content]");
   const before = rectMap(cardsIn(content));
@@ -380,9 +421,8 @@ const placeInTarget = (drag, target) => {
   card.style.width = `${baseCardSize()}px`;
   card.style.height = `${baseCardSize()}px`;
   content.append(card);
-  hasValidatedPlacement = false;
-  setCardState(item, "placed");
-  card.setAttribute("aria-label", `Card ${item.id.slice(-2)} colocado em ${target.dataset.dropTargetId}. Pressione Enter para mover de grupo.`);
+  setCardState(itemId);
+  card.setAttribute("aria-label", `Card ${itemId.slice(-2)} colocado em ${targetId}. Pressione Enter para mover de grupo.`);
   clearTargetStates();
   layoutPlacedCards(target, before);
   DuduqSound.play("snap");
@@ -391,17 +431,19 @@ const placeInTarget = (drag, target) => {
 };
 
 const moveCardToTarget = (card, target) => {
-  const item = itemForElement.get(card);
-  const itemState = item && stateFor(item);
-  if (!item || itemState?.locked || itemState?.state === "correct" || roundSnapshot().status !== "editing" || questionComplete || isValidating || activeDrag || !target) return;
+  const itemId = itemForElement.get(card);
+  if (!itemId || !lifecycle.canEdit(itemId) || isValidating() || activeDrag || !target) return;
   const originalParent = card.parentElement;
   const originalTarget = targetForCard(card);
+  const originalTargetId = itemState(itemId)?.currentTargetId || null;
+  const originalIndex = cardsIn(originalParent).indexOf(card);
+  if (originalTargetId && !lifecycle.remove(itemId)) return;
   const beforeParent = rectMap(cardsIn(originalParent));
   beforeParent.set(card, card.getBoundingClientRect());
   card.remove();
   if (originalParent === imageCardRow) recenterSourceRow(beforeParent);
   else if (originalTarget) layoutPlacedCards(originalTarget, beforeParent);
-  if (!placeInTarget({ card, item }, target)) returnToOrigin({ card, item, originalParent, originalTarget, originalIndex: cardsIn(originalParent).length, originalTargetId: itemState.currentTargetId, originalState: itemState.state });
+  placeInTarget({ card, itemId, originalParent, originalIndex, originalTarget, originalTargetId }, target);
 };
 
 const completeQuestion = () => {
@@ -411,11 +453,10 @@ const completeQuestion = () => {
 };
 
 const retryIncorrectItems = () => {
-  if (roundSnapshot().status !== "retry") return;
-  const incorrectItems = items.filter(item => stateFor(item)?.state === "incorrect" && !stateFor(item)?.locked);
-  if (!incorrectItems.length) return;
-  const returnedIds = new Set(groupingRound.retry());
-  if (!returnedIds.size) return;
+  const beforeState = roundSnapshot();
+  if (beforeState.status !== "retry") return;
+  const incorrectItemIds = beforeState.items.filter(item => item.state === "incorrect" && !item.locked).map(item => item.id);
+  if (!incorrectItemIds.length) return;
 
   DuduqSound.play("uiClick");
   feedbackRibbon.hidden = true;
@@ -428,33 +469,36 @@ const retryIncorrectItems = () => {
   ]));
   const affectedTargets = new Set();
 
-  for (const item of incorrectItems) {
-    const card = item.element;
+  for (const itemId of incorrectItemIds) {
+    const card = itemElementById.get(itemId);
     sourceBefore.set(card, card.getBoundingClientRect());
     const target = targetForCard(card);
     if (target) affectedTargets.add(target);
+  }
+  const returnedIds = new Set(lifecycle.retry());
+
+  for (const itemId of returnedIds) {
+    const card = itemElementById.get(itemId);
     card.remove();
     restoreCardLayout(card);
     card.style.width = `${baseCardSize()}px`;
     card.style.height = `${baseCardSize()}px`;
     setCardArtSize(card, baseCardSize());
-    setCardState(item, "idle");
-    card.setAttribute("aria-label", `Card ${item.id.slice(-2)}. Arraste para Animals ou Food.`);
+    setCardState(itemId);
+    card.setAttribute("aria-label", `Card ${itemId.slice(-2)}. Arraste para Animals ou Food.`);
   }
 
-  const sourceCards = [...cardsIn(imageCardRow), ...incorrectItems.map(item => item.element)];
-  sourceCards.sort((a, b) => itemForElement.get(a).id.localeCompare(itemForElement.get(b).id));
+  const sourceCards = [...cardsIn(imageCardRow), ...[...returnedIds].map(itemId => itemElementById.get(itemId))];
+  sourceCards.sort((a, b) => itemForElement.get(a).localeCompare(itemForElement.get(b)));
   for (const card of sourceCards) imageCardRow.append(card);
 
   for (const target of affectedTargets) {
     layoutPlacedCards(target, targetBefore.get(target));
   }
 
-  hasValidatedPlacement = false;
-  continueRequested = false;
   recenterSourceRow(sourceBefore);
   updateConfirmAction();
-  incorrectItems[0].element.focus();
+  itemElementById.get([...returnedIds][0])?.focus();
 };
 
 const showValidationFeedback = outcome => {
@@ -463,14 +507,13 @@ const showValidationFeedback = outcome => {
       retryIncorrectItems();
       return;
     }
-    if (continueRequested || !groupingRound.continueActivity()) return;
-    continueRequested = true;
+    if (!lifecycle.continueActivity()) return;
     DuduqSound.play("uiClick");
     const button = feedbackRibbon.querySelector(".feedback-action");
     if (button) button.disabled = true;
     root.dispatchEvent(new CustomEvent("dnd:continue-requested", {
       bubbles: true,
-      detail: { placedCount: getPlacedCount(), totalItems: items.length, questionComplete: true }
+      detail: { placedCount: getPlacedCount(), totalItems: itemData.length, questionComplete: true }
     }));
   });
 
@@ -484,22 +527,18 @@ const showValidationFeedback = outcome => {
 };
 
 const confirmAnswers = () => {
-  if (isValidating || roundSnapshot().status !== "editing" || hasValidatedPlacement || questionComplete || getPlacedCount() !== items.length) return;
-  isValidating = true;
-  hasValidatedPlacement = true;
+  if (isValidating() || questionComplete() || !lifecycle.canConfirm()) return;
   confirmAttention.stop();
   updateConfirmAction();
   DuduqSound.play("uiClick");
-  const validation = groupingRound.validate();
-  if (!validation) { isValidating = false; return; }
-  const { correctCount, incorrectCount } = validation;
-  for (const item of items) {
-    setCardState(item, stateFor(item)?.state || "idle");
+  const validation = lifecycle.validate();
+  if (!validation) return;
+  for (const item of itemData) {
+    setCardState(item.id);
   }
-  isValidating = false;
+  const { correctCount, incorrectCount } = validation;
 
   if (incorrectCount === 0) {
-    questionComplete = true;
     updateConfirmAction();
     DuduqSound.play("correct");
     resultFxLayer.dispatchEvent(new CustomEvent("activity-success", {
@@ -514,7 +553,7 @@ const confirmAnswers = () => {
     window.setTimeout(() => showValidationFeedback("correct"), 180);
     root.dispatchEvent(new CustomEvent("dnd:question-complete", {
       bubbles: true,
-      detail: { placedCount: getPlacedCount(), totalItems: items.length, correctCount, incorrectCount, questionComplete }
+      detail: { placedCount: getPlacedCount(), totalItems: itemData.length, correctCount, incorrectCount, questionComplete: true }
     }));
     return;
   }
@@ -525,13 +564,13 @@ const confirmAnswers = () => {
   window.setTimeout(() => showValidationFeedback("incorrect"), 180);
   root.dispatchEvent(new CustomEvent("dnd:answer-validated", {
     bubbles: true,
-    detail: { placedCount: getPlacedCount(), totalItems: items.length, correctCount, incorrectCount, questionComplete: false, correct: false }
+    detail: { placedCount: getPlacedCount(), totalItems: itemData.length, correctCount, incorrectCount, questionComplete: false, correct: false }
   }));
 };
 
 confirmButton.addEventListener("click", confirmAnswers);
-confirmButton.addEventListener("pointerleave", () => { if (!confirmAction.hidden && !questionComplete) confirmAttention.start(); });
-confirmButton.addEventListener("blur", () => { if (!confirmAction.hidden && !questionComplete) confirmAttention.start(); });
+confirmButton.addEventListener("pointerleave", () => { if (!confirmAction.hidden && !questionComplete()) confirmAttention.start(); });
+confirmButton.addEventListener("blur", () => { if (!confirmAction.hidden && !questionComplete()) confirmAttention.start(); });
 
 const finishDrag = (event, cancelled = false) => {
   if (!activeDrag || (event && event.pointerId !== activeDrag.pointerId)) return;
@@ -574,23 +613,25 @@ function updateDragFrame(drag) {
 
 root.addEventListener("pointerdown", event => {
   const card = event.target.closest?.(".dnd-option-image-card");
-  const item = card && itemForElement.get(card);
-  const itemState = item && stateFor(item);
-  if (!item || itemState?.locked || itemState?.state === "correct" || roundSnapshot().status !== "editing" || questionComplete || isValidating || activeDrag || event.button > 0) return;
+  const itemId = card && itemForElement.get(card);
+  const item = itemId && itemState(itemId);
+  if (!itemId || !lifecycle.canEdit(itemId) || isValidating() || activeDrag || event.button > 0) return;
   event.preventDefault();
   const originalRect = card.getBoundingClientRect();
-  const rootRect = root.getBoundingClientRect();
+  const rootRect = artboard.getBoundingClientRect();
   const scale = stageScale();
   const originalParent = card.parentElement;
   const originalTarget = targetForCard(card);
   const siblings = cardsIn(originalParent);
   const originalIndex = siblings.indexOf(card);
   const beforeParent = rectMap(siblings);
+  const originalTargetId = item.currentTargetId;
+  if (originalTargetId && !lifecycle.remove(itemId)) return;
   const left = (originalRect.left - rootRect.left) / scale.x;
   const top = (originalRect.top - rootRect.top) / scale.y;
   activeDrag = {
-    pointerId: event.pointerId, card, item, originalParent, originalIndex, originalRect,
-    originalTarget, originalTargetId: itemState.currentTargetId, originalState: itemState.state,
+    pointerId: event.pointerId, card, itemId, originalParent, originalIndex, originalRect,
+    originalTarget, originalTargetId,
     scale, startX: event.clientX, startY: event.clientY, lastX: event.clientX,
     dx: 0, dy: 0, angle: 0, currentTarget: null,
     targetRects: new Map(dropTargets.map(target => [target, target.getBoundingClientRect()])),
@@ -600,6 +641,7 @@ root.addEventListener("pointerdown", event => {
   root.setPointerCapture(event.pointerId);
   card.removeAttribute("data-state");
   card.dataset.dragState = "picked";
+  setCardArtworkState(itemId, "selected");
   card.style.position = "absolute";
   card.style.left = `${left}px`;
   card.style.top = `${top}px`;
@@ -608,7 +650,7 @@ root.addEventListener("pointerdown", event => {
   card.style.zIndex = "1000";
   card.style.transform = "translate3d(0, 0, 0)";
   card.style.transition = `transform ${motionDuration(120)}ms cubic-bezier(.2,.8,.25,1)`;
-  root.append(card);
+  artboard.append(card);
   if (originalParent === imageCardRow) recenterSourceRow(beforeParent);
   else if (originalTarget) layoutPlacedCards(originalTarget, beforeParent);
   updateConfirmAction();
@@ -640,20 +682,20 @@ root.addEventListener("pointercancel", event => finishDrag(event, true));
 root.addEventListener("lostpointercapture", event => finishDrag(event, true));
 
 for (const card of imageCards) card.addEventListener("keydown", event => {
-  const item = itemForElement.get(card);
-  const itemState = item && stateFor(item);
-  if (!item || itemState?.locked || itemState?.state === "correct" || roundSnapshot().status !== "editing" || questionComplete || isValidating || (event.key !== "Enter" && event.key !== " ")) return;
+  const itemId = itemForElement.get(card);
+  if (!itemId || !lifecycle.canEdit(itemId) || isValidating() || (event.key !== "Enter" && event.key !== " ")) return;
   event.preventDefault();
-  const current = itemState.currentTargetId;
-  const next = current === "animals" ? "food" : "animals";
-  moveCardToTarget(card, dropTargets.find(target => target.dataset.dropTargetId === next));
+  const current = itemState(itemId)?.currentTargetId;
+  const currentIndex = targetData.findIndex(target => target.id === current);
+  const nextTarget = targetData[(currentIndex + 1) % targetData.length];
+  moveCardToTarget(card, targetElementById.get(nextTarget.id));
 });
 
 window.DuduQDragDropGame = Object.freeze({
-  items,
+  activity: engine.config,
   confirm: confirmAnswers,
-  getState: () => { const state = roundSnapshot(); return ({ placedCount: state.placedCount, totalItems: items.length, questionComplete, isValidating, roundStatus: state.status, correctCount: state.items.filter(item => item.state === "correct").length, incorrectCount: state.items.filter(item => item.state === "incorrect").length, activeItemId: activeDrag?.item.id || null }); },
-  getQuestionComplete: () => questionComplete
+  getState: () => ({ ...roundSnapshot(), questionComplete: questionComplete(), isValidating: isValidating(), activeItemId: activeDrag?.itemId || null }),
+  getQuestionComplete: questionComplete
 });
 
 const refreshResponsiveCardGeometry = () => {
@@ -669,6 +711,7 @@ const refreshResponsiveCardGeometry = () => {
 };
 let geometryRefreshFrame = 0;
 const scheduleResponsiveCardGeometry = () => {
+  applyArtboardGeometry();
   if (geometryRefreshFrame) cancelAnimationFrame(geometryRefreshFrame);
   geometryRefreshFrame = requestAnimationFrame(() => {
     geometryRefreshFrame = 0;
@@ -676,7 +719,7 @@ const scheduleResponsiveCardGeometry = () => {
   });
 };
 document.addEventListener("fullscreenchange", scheduleResponsiveCardGeometry);
-window.addEventListener("resize", () => {
-  if (isFullscreenEnhanced()) scheduleResponsiveCardGeometry();
-}, { passive: true });
+window.addEventListener("resize", scheduleResponsiveCardGeometry, { passive: true });
+applyArtboardGeometry();
+recenterSourceRow(captureRowRects());
 if (isFullscreenEnhanced()) scheduleResponsiveCardGeometry();

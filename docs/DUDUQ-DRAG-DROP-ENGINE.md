@@ -33,6 +33,12 @@ Audio is an `audio` draggable type. Its renderer preserves the existing play con
 
 Fullscreen remains renderer-owned: it changes responsive geometry only. The engine stays DOM-free, so hit testing remains in the renderer's native coordinate system.
 
+## Incremental route migration
+
+`/play/drag-drop/` is the first migrated and homologated route. It passes its complete grouping activity configuration to the shared engine and lifecycle. `core/duduq-drag-drop-engine.js` owns round state, placements, validation, correct locks, retry, and continuation; `play/drag-drop/drag-drop.js` owns DOM associations, pointer capture/drag preview, layout, and presentation/audio effects, without a parallel round-state model.
+
+`/play/drag-drop-multimedia/` remains on its existing adapter until its own parity migration is performed and reviewed. Do not migrate it in the same change as Grouping, and do not use the Mixed QA route as authority for either official route.
+
 ## Adding a mode
 
 Create data with existing item/target types, choose a layout renderer and validation strategy, then instantiate `createDuduqDragDropEngine(activity)`. Add a renderer only when the layout is genuinely new; do not create a second state, validation, feedback, or drag engine. `test/drag-drop/unified-engine-mixed-fixture.mjs` is the QA fixture showing text, audio, and image items in one target-grid configuration.
