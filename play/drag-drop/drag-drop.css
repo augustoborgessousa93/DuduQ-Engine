@@ -3,6 +3,20 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
 .drag-drop-screen { background: #87c95a; }
 .dnd-game-shell { position: relative; z-index: 1; }
 
+/* Keep the canonical Matching footer above the DND shell/result layers.
+   The shared Feedback component and its state-specific styling remain owners. */
+#game.drag-drop-screen > .feedback-ribbon[hidden] {
+  display: none !important;
+}
+#game.drag-drop-screen > .feedback-ribbon:not([hidden]) {
+  position: absolute !important;
+  z-index: 30 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
 /* Penpot: DUDUQ - HUD OPTIONS CARDS GROUP, positioned in the 1366x768 screen space. */
 .dnd-options-cards-group {
   position: absolute;
@@ -111,6 +125,28 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
   max-width: none;
   object-fit: fill;
 }
+.dnd-option-image-card__hover-frame,
+.dnd-option-image-card__hover-pet {
+  position: absolute;
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+}
+.dnd-option-image-card__hover-frame {
+  z-index: 1;
+  left: -20px;
+  top: -15px;
+  width: 190px;
+  height: 210px;
+}
+.dnd-option-image-card__hover-pet {
+  z-index: 2;
+  left: 10px;
+  top: 12px;
+  width: 131px;
+  height: 131px;
+  object-fit: contain;
+}
 .dnd-image-card-row {
   position: absolute;
   z-index: 2;
@@ -136,23 +172,45 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
   -webkit-user-drag: none;
   touch-action: none;
   transform-origin: center;
-  transition: box-shadow 140ms ease, scale 140ms ease, translate 140ms ease;
+  scale: 1;
+  transition: box-shadow 140ms ease, scale 160ms ease, translate 140ms ease;
 }
-.dnd-option-image-card__artwork { user-select: none; -webkit-user-drag: none; pointer-events: none; }
-.dnd-option-image-card:hover:not([data-drag-state]):not([data-state="correct"]):not([data-state="incorrect"]) {
-  outline: 2px solid #278FD2;
-  outline-offset: 2px;
-  box-shadow: 0 5px 12px rgba(24, 83, 119, .2);
-  scale: 1.03;
-  translate: 0 -2px;
+.dnd-option-image-card__artwork {
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+  transform-origin: calc(50% - 6px) calc(50% - 12px);
+  transition: transform 160ms ease;
 }
+.dnd-option-image-card:hover:not([data-drag-state]):not([data-state]):not([aria-disabled="true"]) {
+  z-index: 5;
+  scale: 1.08;
+  box-shadow: 2px 8px 4px 0px #ffffff33;
+}
+.dnd-option-image-card:hover:not([data-drag-state]):not([data-state]):not([aria-disabled="true"]) .dnd-option-image-card__hover-frame,
+.dnd-option-image-card:hover:not([data-drag-state]):not([data-state]):not([aria-disabled="true"]) .dnd-option-image-card__hover-pet {
+  opacity: 1;
+}
+.dnd-option-image-card:hover:not([data-drag-state]):not([data-state]):not([aria-disabled="true"]) .dnd-option-image-card__artwork {
+  opacity: 0;
+}
+.dnd-option-image-card__hover-frame,
+.dnd-option-image-card__hover-pet,
+.dnd-option-image-card__artwork { transition: opacity 160ms ease; }
+.dnd-option-image-card[data-drag-state] .dnd-option-image-card__hover-frame,
+.dnd-option-image-card[data-drag-state] .dnd-option-image-card__hover-pet { opacity: 0 !important; }
+.dnd-option-image-card[data-drag-state] .dnd-option-image-card__artwork { opacity: 1 !important; }
 .dnd-option-image-card[data-drag-state="picked"],
 .dnd-option-image-card[data-drag-state="dragging"] {
   z-index: 1000;
   cursor: grabbing;
   scale: 1.055;
   translate: 0 -5px;
-  box-shadow: 0 12px 24px rgba(25, 63, 82, .3);
+  background: transparent;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  filter: none;
 }
 .dnd-option-image-card[data-state="correct"] { pointer-events: none; cursor: default; }
 .dnd-option-image-card[data-feedback="success"] { filter: drop-shadow(0 0 5px rgba(51, 160, 103, .65)); }
@@ -217,6 +275,10 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
   display: flex;
   justify-content: center;
   width: 100%;
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
   pointer-events: none;
 }
 #game .dnd-confirm-action {
@@ -231,12 +293,14 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
   height: 91px !important;
   min-height: 91px !important;
   padding: 0 !important;
-  transform: none !important;
+  transform: scale(1) !important;
+  transform-origin: center center !important;
+  transition: transform 160ms ease !important;
   border: 0 !important;
   border-radius: 0 !important;
   color: #fff !important;
   background: transparent !important;
-  box-shadow: 4px 4px 4px 0px #00000059 !important;
+  box-shadow: none !important;
   filter: none !important;
   overflow: visible !important;
   pointer-events: auto;
@@ -275,6 +339,7 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
   height: 73.745169px !important;
   border-radius: 19px !important;
   background: #349fdf !important;
+  box-shadow: 4px 4px 4px 0px #00000059 !important;
 }
 #game .dnd-confirm-action__highlight {
   z-index: 3 !important;
@@ -306,7 +371,11 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
 }
 #game .dnd-confirm-action__label::before,
 #game .dnd-confirm-action__label::after { content: none !important; display: none !important; }
-#game .dnd-confirm-action:not(:disabled) { box-shadow: 4px 4px 4px 0px #00000059 !important; }
+#game .dnd-confirm-action:not(:disabled) { box-shadow: none !important; }
+#game .dnd-confirm-action:not(:disabled):hover {
+  transform: scale(1.05) !important;
+  z-index: 1 !important;
+}
 .dnd-confirm-action-motion[hidden] { display: none !important; }
 .dnd-options-cards-group__category[data-drop-state="active"] .dnd-options-cards-group__category-surface {
   box-shadow: 0 0 0 3px rgba(39, 143, 210, .85), 0 0 18px rgba(39, 143, 210, .32);
@@ -325,7 +394,6 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
   .dnd-options-cards-group__category-surface {
     transition-duration: 0.01ms !important;
   }
-  .dnd-option-image-card:hover:not([data-state="correct"]),
   .dnd-option-image-card[data-drag-state="picked"],
   .dnd-option-image-card[data-drag-state="dragging"] {
     scale: 1;
@@ -366,8 +434,9 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
 .dnd-options-cards-group__menu-icon {
   position: absolute;
   z-index: 1;
-  left: 837px;
-  top: 39px;
+  /* Reparented into the Food group's shared header; preserve normal-mode placement. */
+  left: 287px;
+  top: 17px;
   width: 30px;
   height: 30px;
   overflow: visible;

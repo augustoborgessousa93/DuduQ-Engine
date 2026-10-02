@@ -1,0 +1,222 @@
+/* Opt-in only: normal-mode consumers retain their current computed values. */
+:root {
+  --duduq-fullscreen-ui-scale: 1.06;
+  --duduq-fullscreen-header-scale: calc(var(--duduq-fullscreen-ui-scale) - .02);
+  --duduq-fullscreen-question-scale: calc(var(--duduq-fullscreen-ui-scale) - .02);
+  --duduq-fullscreen-panel-scale: calc(var(--duduq-fullscreen-ui-scale) - .02);
+  --duduq-fullscreen-card-scale: calc(var(--duduq-fullscreen-ui-scale) - .03);
+  --duduq-fullscreen-button-scale: calc(var(--duduq-fullscreen-ui-scale) - .01);
+  --duduq-fullscreen-footer-scale: calc(var(--duduq-fullscreen-ui-scale) - .02);
+  --duduq-fullscreen-motion: 180ms ease;
+}
+
+#game[data-duduq-fullscreen-enhanced="true"] .duduq-canonical-header-hud,
+#game[data-duduq-fullscreen-enhanced="true"] .duduq-canonical-question-hud,
+#game[data-duduq-fullscreen-enhanced="true"] .feedback-ribbon {
+  transition: scale var(--duduq-fullscreen-motion);
+}
+
+#game[data-duduq-fullscreen-enhanced="true"] .duduq-canonical-header-hud {
+  scale: var(--duduq-fullscreen-header-scale) !important;
+  transform-origin: center top !important;
+  z-index: 4 !important;
+}
+
+#game[data-duduq-fullscreen-enhanced="true"] .duduq-canonical-question-hud {
+  scale: var(--duduq-fullscreen-question-scale) !important;
+  transform-origin: center center !important;
+  z-index: 4 !important;
+}
+
+#game[data-duduq-fullscreen-enhanced="true"] .feedback-ribbon:not([hidden]) {
+  scale: var(--duduq-fullscreen-footer-scale) !important;
+  transform-origin: center bottom !important;
+  z-index: 40 !important;
+}
+
+#game[data-duduq-fullscreen-enhanced="true"] .feedback-ribbon .feedback-action {
+  scale: calc(var(--duduq-fullscreen-footer-scale) - .02) !important;
+  transform-origin: center center !important;
+}
+
+/* Matching: scale the playfield as one interaction surface so SVG connectors,
+   cards, ports and hit areas remain in the same coordinate space. */
+#game[aria-label="DuduQ Matching"][data-duduq-fullscreen-enhanced="true"] .matching-playfield {
+  scale: var(--duduq-fullscreen-panel-scale) !important;
+  transform-origin: center center !important;
+  transition: scale var(--duduq-fullscreen-motion);
+}
+
+#game[aria-label="DuduQ Matching"][data-duduq-fullscreen-enhanced="true"] .matching-confirm-action {
+  scale: var(--duduq-fullscreen-button-scale) !important;
+  transform-origin: center center !important;
+}
+
+/* Target Shooter's gameplay reads arena.getBoundingClientRect() for aim and
+   projectile conversion, so the visual scale remains reflected in hit testing. */
+#game.target-shooter-screen[data-duduq-fullscreen-enhanced="true"] .target-shooter-arena {
+  scale: var(--duduq-fullscreen-panel-scale) !important;
+  transform-origin: center top !important;
+  transition: scale var(--duduq-fullscreen-motion);
+}
+
+/* Drag & Drop: fullscreen uses a real responsive reflow so hit testing and
+   rendered geometry continue to share the same client rectangles. */
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] {
+  --dnd-fullscreen-panel-top: clamp(210px, 25cqh, 270px);
+  --dnd-fullscreen-panel-height: clamp(360px, 47.2cqh, 510px);
+  --dnd-fullscreen-card-size: clamp(171px, 11vw, 210px);
+  --dnd-fullscreen-card-gap: clamp(22px, 1.7vw, 34px);
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-options-cards-group {
+  left: 50%;
+  top: var(--dnd-fullscreen-panel-top);
+  width: min(1800px, calc(100% - clamp(48px, 5vw, 96px)));
+  height: var(--dnd-fullscreen-panel-height);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  align-items: stretch;
+  column-gap: clamp(28px, 2.5vw, 48px);
+  padding: clamp(18px, 2.4cqh, 32px) clamp(24px, 2.5vw, 48px);
+  box-sizing: border-box;
+  transform: translateX(-50%);
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-options-cards-group__shadow,
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-options-cards-group__surface {
+  inset: 0;
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-options-cards-group__category {
+  position: relative;
+  inset: auto;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  align-self: stretch;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 46px minmax(0, 1fr);
+  row-gap: 4px;
+  align-items: center;
+  padding: 8px 20px;
+  box-sizing: border-box;
+}
+
+#game.drag-drop-screen .dnd-group-header {
+  display: contents;
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-group-header {
+  position: relative;
+  z-index: 2;
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-rectangle-group__border,
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-category-food__border {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-rectangle-group__border rect,
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-category-food__border rect {
+  vector-effect: non-scaling-stroke;
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-options-cards-group__category-label {
+  position: static;
+  left: auto;
+  top: auto;
+  width: max-content;
+  min-width: 0;
+  height: auto;
+  margin: 0;
+  z-index: 2;
+  transform: none;
+  font-size: clamp(28px, 2vw, 38px);
+  line-height: 1.2;
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-options-cards-group__paw,
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-options-cards-group__menu-icon {
+  position: static;
+  left: auto;
+  top: auto;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  display: block;
+  transform: none;
+  z-index: 2;
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-drop-zone__content {
+  position: relative;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  left: auto;
+  right: auto;
+  top: auto;
+  bottom: auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  gap: clamp(14px, 1.2vw, 22px);
+  justify-content: space-evenly;
+  align-content: space-evenly;
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-image-card-row {
+  left: 50%;
+  top: calc(var(--dnd-fullscreen-panel-top) + var(--dnd-fullscreen-panel-height) + clamp(14px, 1.5cqh, 20px));
+  gap: var(--dnd-fullscreen-card-gap);
+  transform: translateX(-50%);
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-image-card-row > .dnd-option-image-card {
+  width: var(--dnd-fullscreen-card-size);
+  height: var(--dnd-fullscreen-card-size);
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-option-image-card__hover-frame {
+  left: -13.333%;
+  top: -10%;
+  width: 126.667%;
+  height: 140%;
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-option-image-card__hover-pet {
+  left: 6.667%;
+  top: 8%;
+  width: 87.333%;
+  height: 87.333%;
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] .dnd-confirm-action-motion {
+  bottom: clamp(18px, 3cqh, 34px) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #game[data-duduq-fullscreen-enhanced="true"] .duduq-canonical-header-hud,
+  #game[data-duduq-fullscreen-enhanced="true"] .duduq-canonical-question-hud,
+  #game[data-duduq-fullscreen-enhanced="true"] .feedback-ribbon,
+  #game[data-duduq-fullscreen-enhanced="true"] .matching-playfield,
+  #game[data-duduq-fullscreen-enhanced="true"] .target-shooter-arena,
+  #game[data-duduq-fullscreen-enhanced="true"] .dnd-options-cards-group {
+    transition-duration: 1ms !important;
+  }
+}

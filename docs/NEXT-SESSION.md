@@ -1,30 +1,33 @@
-# Next DuduQ Session
+# Next DUDUQ Session
 
-## First action
+## First task — do not skip
 
-Augusto opens the live Drag & Drop route:
+DRAG & DROP MULTIMEDIA
+→ FULLSCREEN
+→ FEEDBACK FOOTER
+→ CENTRALIZE / ALIGN
+→ PRESERVE NORMAL MODE
 
-http://127.0.0.1:4175/play/drag-drop/
+Route: http://127.0.0.1:4175/play/drag-drop-multimedia/
 
-and visually validates the Confirm button. Check:
+Inspect only the canonical success and error feedback footer in fullscreen.
+Augusto has not homologated its alignment. Verify viewport centering, equal side
+margins, consistent bottom spacing, and internal alignment of mascot/text with
+Continue or Try Again. Change only fullscreen footer positioning if needed;
+normal mode must remain exactly as it is. Do not reopen architecture or modify
+gameplay before this check.
 
-- size 304×91;
-- blue surface and dark-blue depth;
-- shadow and highlight;
-- Fredoka 700 / 30px label;
-- centering in the lower area;
-- attention animation.
+## Preserve
 
-If Augusto approves, homologate the visual. If he reports a difference, adjust only the property he identifies. Do not claim visual pass before human validation.
+- Intro, DUDUQ TV Switch, Matching, and Target Shooter Gold Masters.
+- Current Drag & Drop and Drag & Drop Multimedia gameplay and visuals.
+- Canonical feedback, correct/error sounds, ResultFXLayer/confetti, and
+  user-controlled Continue flow (no auto advance).
+- Augusto's state colors and Multimedia AUDIO play/press behavior documented in
+  [the 2026-10-02 checkpoint](CHECKPOINT-2026-10-02-DUDUQ.md).
 
-## After the visual check
+## Stop condition
 
-Test the flow by placing every card and clicking Confirm:
-
-- When any answer is wrong: show correct/incorrect, then “TENTAR NOVAMENTE”; retry only incorrect items and keep correct items frozen in their groups.
-- When all answers are correct: show “CONTINUAR”.
-- Do not auto-advance.
-
-## Current checkpoint
-
-See [CHECKPOINT-2026-10-01-DUDUQ.md](CHECKPOINT-2026-10-01-DUDUQ.md).
+After the fullscreen footer correction/check, stop and return the route to
+Augusto for visual retest. Do not homologate automatically or start another
+component/task.

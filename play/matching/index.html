@@ -23,6 +23,7 @@
     />
     <link rel="stylesheet" href="/core/duduq-live-hud.css?v=HUD_FINAL_01" />
     <link rel="stylesheet" href="/core/duduq-page-transition.css" />
+    <link rel="stylesheet" href="/core/duduq-fullscreen-mode.css" />
   </head>
   <body>
     <main id="game" class="game-screen" aria-label="DuduQ Matching">
@@ -51,12 +52,16 @@
           aria-label="Ações da atividade"
         >
           <button
-            class="primary-action"
+            class="primary-action matching-confirm-action"
             type="button"
             disabled
             aria-label="Confirme as associações"
           >
-            <span data-slot="action"></span>
+            <span class="dnd-confirm-action__shadow" aria-hidden="true"></span>
+            <span class="dnd-confirm-action__depth" aria-hidden="true"></span>
+            <span class="dnd-confirm-action__surface" aria-hidden="true"></span>
+            <span class="dnd-confirm-action__highlight" aria-hidden="true"></span>
+            <span class="dnd-confirm-action__label" data-slot="action"></span>
           </button>
         </div>
       </div>

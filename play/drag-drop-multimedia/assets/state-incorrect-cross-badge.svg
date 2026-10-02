@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+  <defs>
+    <linearGradient id="incorrect-fill" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0" stop-color="#FF8E82"/>
+      <stop offset=".48" stop-color="#E95D52"/>
+      <stop offset="1" stop-color="#C9433B"/>
+    </linearGradient>
+    <filter id="incorrect-shadow" x="-25%" y="-25%" width="150%" height="165%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#E62D23" flood-opacity=".2"/>
+    </filter>
+  </defs>
+  <circle cx="17" cy="17" r="15.5" fill="#fff" filter="url(#incorrect-shadow)"/>
+  <circle cx="17" cy="17" r="12.5" fill="url(#incorrect-fill)"/>
+  <path d="M21.5 12.5 12.5 20.5M12.5 12.5 21.5 21.5" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
