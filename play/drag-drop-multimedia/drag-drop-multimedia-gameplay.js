@@ -3,42 +3,41 @@ import { DuduqSound } from "/core/audio/duduq-sound-system.js";
 import { ResultFXLayer } from "/core/ui/result-fx.js";
 import { Feedback } from "/test/matching/gold-master-candidate-v1/src/core-components.js";
 import { createMultimediaRound } from "./drag-drop-multimedia-round.js";
-import { createDuduqDragDropLifecycle } from "../../core/duduq-drag-drop-lifecycle.js";
+import { createDuduqDragDropLifecycle } from "/core/duduq-drag-drop-lifecycle.js";
 
 const DRAG_THRESHOLD = 5;
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank, targets, items: itemElements, activity }) {
-  const activityItemsById = new Map((activity?.items || []).map(item => [item.id, item]));
-  const activityTargetsById = new Map((activity?.targets || []).map(target => [target.id, target]));
-  const itemConfig = itemElements.map((element, order) => ({
-    ...(activityItemsById.get(element.dataset.itemId) || {}),
-    id: element.dataset.itemId,
-    type: element.dataset.itemType,
-    answerKey: element.dataset.answerKey,
-    audioSrc: element.dataset.audioSrc || element.audioSrc || element.dataset.audio || "",
-    element,
-    homeOrder: order
-  }));
-  const targetConfig = targets.map(({ id, answerKey, slot, element }) => ({
-    ...(activityTargetsById.get(id) || {}), id, answerKey, slot, element
-  }));
-  const round = createDuduqDragDropLifecycle(createMultimediaRound(activity || {
-    id: "drag-drop-multimedia", mechanic: "drag-drop", layout: "target-grid", validation: { strategy: "answerKey" },
-    items: itemConfig.map(({ id, type, answerKey, correctGroupId }) => ({ id, type, answerKey, correctGroupId })),
-    targets: targetConfig.map(({ id, type, answerKey, groupId, capacity }) => ({ id, type, answerKey, groupId, capacity }))
-  }));
+export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank, targets: targetElements, items: itemElements, activity }) {
+  if (!activity || !Array.isArray(activity.items) || !Array.isArray(activity.targets)) {
+    throw new Error("Drag & Drop Multimedia requires a complete activity configuration.");
+  }
+  const itemElementsById = new Map(itemElements.map(element => [element.dataset.itemId, element]));
+  const targetElementsById = new Map(targetElements.map(target => [target.id, target]));
+  const itemConfig = activity.items.map((definition, order) => {
+    const element = itemElementsById.get(definition.id);
+    if (!element) throw new Error(`Missing Multimedia item renderer for ${definition.id}.`);
+    return { ...definition, element, homeOrder: order };
+  });
+  const targetConfig = activity.targets.map(definition => {
+    const rendered = targetElementsById.get(definition.id);
+    if (!rendered) throw new Error(`Missing Multimedia target renderer for ${definition.id}.`);
+    return { ...definition, ...rendered };
+  });
+  if (itemConfig.length !== itemElements.length || targetConfig.length !== targetElements.length) {
+    throw new Error("Multimedia activity configuration and renderer elements must match exactly.");
+  }
+  const round = createDuduqDragDropLifecycle(createMultimediaRound(activity));
   const itemsById = new Map(itemConfig.map(item => [item.id, item]));
   const targetsById = new Map(targetConfig.map(target => [target.id, target]));
+  const targetsBySlot = new Map(targetConfig.map(target => [target.slot, target]));
   const removeButtonsByItemId = new Map();
   const stateByItem = () => new Map(round.snapshot().items.map(item => [item.id, item]));
   let activeDrag = null;
   let activeAudioItem = null;
   let activeContentAudio = null;
   let selectedKeyboardItem = null;
-  let validationLocked = false;
   let completionSoundPlayed = false;
-  let continueDispatched = false;
 
   for (const item of itemConfig) {
     const button = document.createElement("button");
@@ -85,10 +84,10 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
     <button class="feedback-action game-button" type="button"><span data-slot="feedback-action"></span></button>`;
   root.append(feedback);
 
-  const allPlaced = () => round.snapshot().placedCount === itemConfig.length;
+  const allPlaced = () => round.canConfirm();
   const updateConfirmVisibility = () => {
     const state = round.snapshot();
-    const visible = state.status === "editing" && allPlaced() && !validationLocked;
+    const visible = state.status === "editing" && allPlaced();
     const wasVisible = !confirmMotion.hidden;
     confirmMotion.hidden = !visible;
     if (!visible) confirmAttention.stop();
@@ -160,7 +159,7 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
     dragWordBank.insertBefore(element, next || null);
   };
   const removePlacedItem = itemId => {
-    if (validationLocked || round.snapshot().status !== "editing") return false;
+    if (round.snapshot().status !== "editing") return false;
     const state = stateByItem().get(itemId);
     const item = itemsById.get(itemId);
     if (!state?.currentTargetId || state.locked || !item || !round.remove(itemId)) return false;
@@ -169,7 +168,7 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
     item.element.removeAttribute("data-placement");
     item.element.removeAttribute("data-locked");
     item.element.removeAttribute("aria-disabled");
-    item.element.setAttribute("aria-label", item.type === "audio" ? "Áudio FISH para arrastar; botão para ouvir." : "Texto FISH para arrastar.");
+    item.element.setAttribute("aria-label", item.type === "audio" ? `Áudio ${item.text || ""} para arrastar; botão para ouvir.` : `Texto ${item.text || ""} para arrastar.`);
     item.element.tabIndex = 0;
     insertInBankOrder(item.element);
     refreshTargetPresentation();
@@ -200,7 +199,7 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
     item.element.dataset.placement = "slot";
     item.element.dataset.locked = "false";
     item.element.setAttribute("aria-disabled", "false");
-    item.element.setAttribute("aria-label", `${item.type === "audio" ? "Áudio" : "Texto"} FISH colocado. Pressione Enter para mover.`);
+    item.element.setAttribute("aria-label", `${item.type === "audio" ? "Áudio" : "Texto"} ${item.text || ""} colocado. Pressione Enter para mover.`);
     item.element.tabIndex = 0;
     target.slot.append(item.element);
     refreshTargetPresentation();
@@ -220,14 +219,12 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
     animateToRect(drag.element, currentRect);
   };
   const confirmAnswers = () => {
-    if (validationLocked || round.snapshot().status !== "editing" || !allPlaced()) return;
-    validationLocked = true;
+    if (!round.canConfirm()) return;
     confirmAttention.stop();
     confirmMotion.hidden = true;
     clearAudioPlayback();
     DuduqSound.play("uiClick");
     const result = round.validate();
-    validationLocked = false;
     if (!result) {
       updateConfirmVisibility();
       return;
@@ -277,7 +274,7 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
       item.element.removeAttribute("data-locked");
       item.element.removeAttribute("data-placement");
       item.element.removeAttribute("aria-disabled");
-      item.element.setAttribute("aria-label", item.type === "audio" ? "Áudio FISH para arrastar; botão para ouvir." : "Texto FISH para arrastar.");
+      item.element.setAttribute("aria-label", item.type === "audio" ? `Áudio ${item.text || ""} para arrastar; botão para ouvir.` : `Texto ${item.text || ""} para arrastar.`);
       item.element.tabIndex = 0;
       insertInBankOrder(item.element);
     }
@@ -287,8 +284,7 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
     itemsById.get(returnedIds[0])?.element.focus();
   }
   function continueActivity() {
-    if (continueDispatched || !round.continueActivity()) return;
-    continueDispatched = true;
+    if (!round.continueActivity()) return;
     DuduqSound.play("uiClick");
     const button = feedback.querySelector(".feedback-action");
     if (button) button.disabled = true;
@@ -365,7 +361,7 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
   };
 
   root.addEventListener("pointerdown", event => {
-    if (event.button > 0 || activeDrag || validationLocked || round.snapshot().status !== "editing") return;
+    if (event.button > 0 || activeDrag || round.snapshot().status !== "editing") return;
     if (event.target.closest?.(".dnd-multimedia-audio-item__play, .dnd-multimedia-remove-option")) return;
     const element = event.target.closest?.("[data-item-id]");
     const item = element && itemsById.get(element.dataset.itemId);
@@ -436,11 +432,12 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
       return;
     }
     const slot = event.target.closest?.("[data-drop-target-id]");
-    if (slot && selectedKeyboardItem && (event.key === "Enter" || event.key === " ")) {
+    const target = slot && targetsBySlot.get(slot);
+    if (target && selectedKeyboardItem && (event.key === "Enter" || event.key === " ")) {
       event.preventDefault();
       const element = itemsById.get(selectedKeyboardItem)?.element;
       const rect = element?.getBoundingClientRect();
-      if (element && rect) syncRoundPlacement(selectedKeyboardItem, slot.dataset.dropTargetId, rect);
+      if (element && rect) syncRoundPlacement(selectedKeyboardItem, target.id, rect);
       selectedKeyboardItem = null;
     }
   });

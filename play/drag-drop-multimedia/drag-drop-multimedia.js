@@ -6,13 +6,29 @@ if (!root) throw new Error("Drag & Drop Multimedia root was not found.");
 
 const background = window.DuduQAssets?.assets?.backgrounds?.["1"] || "";
 const activity = Object.freeze({
+  id: "drag-drop-multimedia-main",
+  mechanic: "drag-drop",
+  layout: "target-grid",
+  validation: Object.freeze({ strategy: "answerKey" }),
   title: "DRAG & DROP",
   progress: { completed: 0, total: 1 },
-  questionHud: {
-    title: "MATCH THE WORDS",
-    instruction: "Drag each word to the correct picture.",
-    audio: "Drag each word to the correct picture."
-  }
+  prompt: Object.freeze({
+    eyebrow: "MATCH THE WORDS",
+    title: "Drag each word to the correct picture.",
+    audioSrc: "Drag each word to the correct picture."
+  }),
+  items: Object.freeze([
+    Object.freeze({ id: "text-fish-01", type: "text", text: "FISH", answerKey: "fish" }),
+    Object.freeze({ id: "text-fish-02", type: "text", text: "FISH", answerKey: "fish" }),
+    Object.freeze({ id: "audio-fish-01", type: "audio", text: "FISH", audioSrc: "./test-assets/test-fish-a.wav", answerKey: "fish" }),
+    Object.freeze({ id: "audio-fish-02", type: "audio", text: "FISH", audioSrc: "./test-assets/test-fish-b.wav", answerKey: "fish" })
+  ]),
+  targets: Object.freeze([
+    Object.freeze({ id: "target-fish-01", type: "image", imageSrc: "./assets/rectangle-01-pet.png", title: "Peixe ilustrado", answerKey: "fish", capacity: 1 }),
+    Object.freeze({ id: "target-fish-02", type: "image", imageSrc: "./assets/rectangle-02-pet.png", title: "Peixe ilustrado", answerKey: "fish", capacity: 1 }),
+    Object.freeze({ id: "target-fish-03", type: "image", imageSrc: "./assets/rectangle-03-pet.png", title: "Peixe ilustrado", answerKey: "fish", capacity: 1 }),
+    Object.freeze({ id: "target-fish-04", type: "image", imageSrc: "./assets/rectangle-04-pet.png", title: "Peixe ilustrado", answerKey: "fish", capacity: 1 })
+  ])
 });
 
 root.className = "game-screen target-shooter-screen duduq-shared-gold-shell drag-drop-screen drag-drop-multimedia-screen";
@@ -37,9 +53,9 @@ const header = DuduQCanonicalHeaderHUD({
 header.dataset.mechanic = "matching";
 
 const questionHud = DuduQCanonicalQuestionHUD({
-  eyebrow: activity.questionHud.title,
-  question: activity.questionHud.instruction,
-  audio: activity.questionHud.audio
+  eyebrow: activity.prompt.eyebrow,
+  question: activity.prompt.title,
+  audio: activity.prompt.audioSrc
 });
 
 root.querySelector(".dnd-game-shell").append(header, questionHud);
@@ -53,11 +69,10 @@ questionHud.after(centralPanel);
 const imageOptionCard = document.createElement("figure");
 imageOptionCard.className = "dnd-multimedia-image-option";
 imageOptionCard.dataset.component = "PENPOT_RECTANGLE_01";
-imageOptionCard.dataset.targetId = "target-fish-01";
-imageOptionCard.dataset.answerKey = "fish";
+imageOptionCard.dataset.targetId = activity.targets[0].id;
 imageOptionCard.setAttribute("aria-label", "Opção com imagem");
 imageOptionCard.innerHTML = `
-  <img src="./assets/rectangle-01-pet.png" alt="Peixe ilustrado">
+  <img src="${activity.targets[0].imageSrc}" alt="${activity.targets[0].title}">
   <svg class="dnd-multimedia-image-option__stroke" viewBox="0 0 256 208" preserveAspectRatio="none" aria-hidden="true" focusable="false">
     <defs>
       <clipPath id="dnd-multimedia-image-option-inner-clip">
@@ -71,28 +86,25 @@ centralPanel.append(imageOptionCard);
 const imageOptionCard02 = document.createElement("figure");
 imageOptionCard02.className = "dnd-multimedia-image-option dnd-multimedia-image-option--02";
 imageOptionCard02.dataset.component = "PENPOT_RECTANGLE_02";
-imageOptionCard02.dataset.targetId = "target-fish-02";
-imageOptionCard02.dataset.answerKey = "fish";
+imageOptionCard02.dataset.targetId = activity.targets[1].id;
 imageOptionCard02.setAttribute("aria-label", "Retângulo 2 com imagem");
-imageOptionCard02.innerHTML = '<img src="./assets/rectangle-02-pet.png" alt="Peixe ilustrado">';
+imageOptionCard02.innerHTML = `<img src="${activity.targets[1].imageSrc}" alt="${activity.targets[1].title}">`;
 centralPanel.append(imageOptionCard02);
 
 const imageOptionCard03 = document.createElement("figure");
 imageOptionCard03.className = "dnd-multimedia-image-option dnd-multimedia-image-option--03";
 imageOptionCard03.dataset.component = "PENPOT_RECTANGLE_03";
-imageOptionCard03.dataset.targetId = "target-fish-03";
-imageOptionCard03.dataset.answerKey = "fish";
+imageOptionCard03.dataset.targetId = activity.targets[2].id;
 imageOptionCard03.setAttribute("aria-label", "Retângulo 3 com imagem");
-imageOptionCard03.innerHTML = '<img src="./assets/rectangle-03-pet.png" alt="Peixe ilustrado">';
+imageOptionCard03.innerHTML = `<img src="${activity.targets[2].imageSrc}" alt="${activity.targets[2].title}">`;
 centralPanel.append(imageOptionCard03);
 
 const imageOptionCard04 = document.createElement("figure");
 imageOptionCard04.className = "dnd-multimedia-image-option dnd-multimedia-image-option--04";
 imageOptionCard04.dataset.component = "PENPOT_RECTANGLE_04";
-imageOptionCard04.dataset.targetId = "target-fish-04";
-imageOptionCard04.dataset.answerKey = "fish";
+imageOptionCard04.dataset.targetId = activity.targets[3].id;
 imageOptionCard04.setAttribute("aria-label", "Retângulo 4 com imagem");
-imageOptionCard04.innerHTML = '<img src="./assets/rectangle-04-pet.png" alt="Peixe ilustrado">';
+imageOptionCard04.innerHTML = `<img src="${activity.targets[3].imageSrc}" alt="${activity.targets[3].title}">`;
 centralPanel.append(imageOptionCard04);
 
 // Penpot validation badges are shown only after a card has been checked.
@@ -107,8 +119,7 @@ const questionGroup = document.createElement("div");
 questionGroup.className = "dnd-multimedia-question-group";
 questionGroup.dataset.component = "PENPOT_DUDUQ_DRAG_HERE_01";
 questionGroup.dataset.penpotBoard = "604bd19c-1954-8078-8008-b9b8eff8a29f";
-questionGroup.dataset.dropTargetId = "target-fish-01";
-questionGroup.dataset.answerKey = "fish";
+questionGroup.dataset.dropTargetId = activity.targets[0].id;
 questionGroup.setAttribute("role", "group");
 questionGroup.tabIndex = 0;
 questionGroup.setAttribute("aria-label", "ARRASTE AQUI");
@@ -119,8 +130,7 @@ const questionGroup02 = document.createElement("div");
 questionGroup02.className = "dnd-multimedia-question-group dnd-multimedia-question-group--02";
 questionGroup02.dataset.component = "PENPOT_DUDUQ_DRAG_HERE_02";
 questionGroup02.dataset.penpotBoard = "604bd19c-1954-8078-8008-b9b96a6ea6fe";
-questionGroup02.dataset.dropTargetId = "target-fish-02";
-questionGroup02.dataset.answerKey = "fish";
+questionGroup02.dataset.dropTargetId = activity.targets[1].id;
 questionGroup02.setAttribute("role", "group");
 questionGroup02.tabIndex = 0;
 questionGroup02.setAttribute("aria-label", "ARRASTE AQUI");
@@ -131,8 +141,7 @@ const questionGroup03 = document.createElement("div");
 questionGroup03.className = "dnd-multimedia-question-group dnd-multimedia-question-group--03";
 questionGroup03.dataset.component = "PENPOT_DUDUQ_DRAG_HERE_03";
 questionGroup03.dataset.penpotBoard = "604bd19c-1954-8078-8008-b9b9b1f0cbfb";
-questionGroup03.dataset.dropTargetId = "target-fish-03";
-questionGroup03.dataset.answerKey = "fish";
+questionGroup03.dataset.dropTargetId = activity.targets[2].id;
 questionGroup03.setAttribute("role", "group");
 questionGroup03.tabIndex = 0;
 questionGroup03.setAttribute("aria-label", "ARRASTE AQUI");
@@ -143,8 +152,7 @@ const questionGroup04 = document.createElement("div");
 questionGroup04.className = "dnd-multimedia-question-group dnd-multimedia-question-group--04";
 questionGroup04.dataset.component = "PENPOT_DUDUQ_DRAG_HERE_04";
 questionGroup04.dataset.penpotBoard = "604bd19c-1954-8078-8008-b9b9d0b89839";
-questionGroup04.dataset.dropTargetId = "target-fish-04";
-questionGroup04.dataset.answerKey = "fish";
+questionGroup04.dataset.dropTargetId = activity.targets[3].id;
 questionGroup04.setAttribute("role", "group");
 questionGroup04.tabIndex = 0;
 questionGroup04.setAttribute("aria-label", "ARRASTE AQUI");
@@ -155,9 +163,7 @@ const dragWordItem = document.createElement("figure");
 dragWordItem.className = "dnd-multimedia-drag-word-item";
 dragWordItem.dataset.component = "PENPOT_NEUTRAL_DRAG_BUTTON";
 dragWordItem.dataset.penpotBoard = "e3b9056b-29d3-8012-8008-b72fefe919e1";
-dragWordItem.dataset.itemId = "text-fish-01";
-dragWordItem.dataset.itemType = "text";
-dragWordItem.dataset.answerKey = "fish";
+dragWordItem.dataset.itemId = activity.items[0].id;
 dragWordItem.setAttribute("role", "button");
 dragWordItem.tabIndex = 0;
 dragWordItem.setAttribute("aria-label", "FISH, item neutro de arraste");
@@ -180,20 +186,18 @@ dragWordBank.append(dragWordItem);
 const dragWordItem02 = dragWordItem.cloneNode(true);
 dragWordItem02.dataset.component = "PENPOT_NEUTRAL_DRAG_BUTTON_02";
 dragWordItem02.dataset.penpotBoard = "e3b9056b-29d3-8012-8008-b72ff42792fe";
-dragWordItem02.dataset.itemId = "text-fish-02";
-dragWordItem02.dataset.itemType = "text";
-dragWordItem02.dataset.answerKey = "fish";
+dragWordItem02.dataset.itemId = activity.items[1].id;
+dragWordItem.querySelector(".dnd-multimedia-drag-word-item__label").textContent = activity.items[0].text;
+dragWordItem02.querySelector(".dnd-multimedia-drag-word-item__label").textContent = activity.items[1].text;
 dragWordBank.append(dragWordItem02);
 
-const createDragAudioItem = (componentId, order, { audioSrc = "" } = {}) => {
+const createDragAudioItem = (componentId, order, definition) => {
+  const { id, text, audioSrc = "" } = definition;
   const item = document.createElement("figure");
   item.className = "dnd-multimedia-audio-item";
   item.dataset.component = `PENPOT_DRAG_AUDIO_ITEM_${order}`;
   item.dataset.penpotComponentId = componentId;
-  item.dataset.itemId = `audio-fish-${order}`;
-  item.dataset.itemType = "audio";
-  item.dataset.answerKey = "fish";
-  if (audioSrc) item.dataset.audioSrc = audioSrc;
+  item.dataset.itemId = id;
   item.setAttribute("role", "group");
   item.setAttribute("aria-label", "Item de áudio para arrastar");
   item.innerHTML = `
@@ -221,8 +225,8 @@ const createDragAudioItem = (componentId, order, { audioSrc = "" } = {}) => {
 
 // DEV AUDIO FIXTURE — REMOVE/REPLACE WHEN REAL CONTENT AUDIO IS PROVIDED
 dragWordBank.append(
-  createDragAudioItem("6b1bdf21-2d2c-8040-8008-b998d41569ff", "01", { audioSrc: "./test-assets/test-fish-a.wav" }),
-  createDragAudioItem("6b1bdf21-2d2c-8040-8008-b99902174c7f", "02", { audioSrc: "./test-assets/test-fish-b.wav" })
+  createDragAudioItem("6b1bdf21-2d2c-8040-8008-b998d41569ff", "01", activity.items[2]),
+  createDragAudioItem("6b1bdf21-2d2c-8040-8008-b99902174c7f", "02", activity.items[3])
 );
 centralPanel.after(dragWordBank);
 
@@ -231,12 +235,13 @@ initializeMultimediaDragDrop({
   centralPanel,
   dragWordBank,
   targets: [
-    { id: imageOptionCard.dataset.targetId, answerKey: imageOptionCard.dataset.answerKey, element: imageOptionCard, slot: questionGroup },
-    { id: imageOptionCard02.dataset.targetId, answerKey: imageOptionCard02.dataset.answerKey, element: imageOptionCard02, slot: questionGroup02 },
-    { id: imageOptionCard03.dataset.targetId, answerKey: imageOptionCard03.dataset.answerKey, element: imageOptionCard03, slot: questionGroup03 },
-    { id: imageOptionCard04.dataset.targetId, answerKey: imageOptionCard04.dataset.answerKey, element: imageOptionCard04, slot: questionGroup04 }
+    { id: imageOptionCard.dataset.targetId, element: imageOptionCard, slot: questionGroup },
+    { id: imageOptionCard02.dataset.targetId, element: imageOptionCard02, slot: questionGroup02 },
+    { id: imageOptionCard03.dataset.targetId, element: imageOptionCard03, slot: questionGroup03 },
+    { id: imageOptionCard04.dataset.targetId, element: imageOptionCard04, slot: questionGroup04 }
   ],
-  items: [dragWordItem, dragWordItem02, ...dragWordBank.querySelectorAll(".dnd-multimedia-audio-item")]
+  items: [dragWordItem, dragWordItem02, ...dragWordBank.querySelectorAll(".dnd-multimedia-audio-item")],
+  activity
 });
 
 const setQuestionProgress = (currentQuestionIndex, totalQuestions) => {
