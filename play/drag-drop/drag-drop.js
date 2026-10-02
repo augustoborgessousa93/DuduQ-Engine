@@ -2,6 +2,8 @@ import { DuduQCanonicalHeaderHUD, DuduQCanonicalQuestionHUD, GameActionButton, C
 import { DuduqSound } from "/core/audio/duduq-sound-system.js";
 import { ResultFXLayer } from "/core/ui/result-fx.js";
 import { Feedback } from "/test/matching/gold-master-candidate-v1/src/core-components.js";
+import { createDuduqDragDropEngine } from "../../core/duduq-drag-drop-engine.js";
+import { createDuduqDragDropLifecycle } from "../../core/duduq-drag-drop-lifecycle.js";
 
 const root = document.querySelector("#game");
 const background = window.DuduQAssets?.assets?.backgrounds?.["1"] || "";
@@ -172,10 +174,17 @@ const items = imageCards.map((element, index) => ({
   id: `card-${String(index + 1).padStart(2, "0")}`,
   type: "image",
   correctTargetId: element.dataset.correctTargetId,
-  currentTargetId: null,
-  locked: false,
-  element,
-  state: "idle"
+  element
+}));
+const groupingRound = createDuduqDragDropLifecycle(createDuduqDragDropEngine({
+  id: "drag-drop-grouping",
+  mechanic: "drag-drop",
+  layout: "grouping",
+  validation: { strategy: "groupId" },
+  items: items.map(item => ({ id: item.id, type: item.type, correctGroupId: item.correctTargetId })),
+  targets: dropTargets.map(target => ({
+    id: target.dataset.dropTargetId, type: "group", groupId: target.dataset.dropTargetId, capacity: "infinite"
+  }))
 }));
 const itemForElement = new Map(items.map(item => [item.element, item]));
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -186,10 +195,11 @@ let questionComplete = false;
 let completionSoundPlayed = false;
 let isValidating = false;
 let hasValidatedPlacement = false;
-let roundStatus = "editing";
 let continueRequested = false;
 
-const getPlacedCount = () => items.filter(item => Boolean(item.currentTargetId)).length;
+const roundSnapshot = () => groupingRound.snapshot();
+const stateFor = item => roundSnapshot().items.find(state => state.id === item.id);
+const getPlacedCount = () => groupingRound.snapshot().placedCount;
 const isFullscreenEnhanced = () => root.dataset.duduqFullscreenEnhanced === "true";
 const baseCardSize = () => {
   if (!isFullscreenEnhanced()) return 150;
@@ -241,7 +251,7 @@ const animateFlip = (elements, beforeRects, duration = 210) => {
 };
 
 const updateConfirmAction = ({ restartAttention = false } = {}) => {
-  const ready = roundStatus === "editing" && !questionComplete && getPlacedCount() === items.length;
+  const ready = roundSnapshot().status === "editing" && !questionComplete && getPlacedCount() === items.length;
   const wasVisible = !confirmAction.hidden;
   confirmAction.hidden = !ready;
   if (!ready) confirmAttention.stop();
@@ -316,8 +326,6 @@ const restoreCardLayout = card => {
   card.style.removeProperty("pointer-events");
 };
 const setCardState = (item, state) => {
-  item.state = state;
-  item.locked = state === "correct";
   if (state === "idle") item.element.removeAttribute("data-state");
   else item.element.dataset.state = state;
   const artwork = item.element.querySelector(".dnd-option-image-card__artwork");
@@ -339,7 +347,7 @@ const setCardState = (item, state) => {
       : `<svg viewBox="0 0 160 157" preserveAspectRatio="none"><circle cx="143.14499999999998" cy="17.144999999999996" r="15.1667307692303" fill="#E62B51" stroke="#fff" stroke-width="3"/><path d="M148 12L138 22M138 12L148 22" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     item.element.append(stateArt);
   }
-  const locked = item.locked || questionComplete;
+  const locked = state === "correct" || questionComplete;
   item.element.setAttribute("aria-disabled", String(locked));
   item.element.tabIndex = locked ? -1 : 0;
 };
@@ -353,7 +361,6 @@ const returnToOrigin = drag => {
   if (originalParent === imageCardRow) setCardArtSize(card, baseCardSize());
   const siblings = cardsIn(originalParent);
   originalParent.insertBefore(card, siblings[originalIndex] || null);
-  item.currentTargetId = originalTargetId;
   setCardState(item, originalState);
   if (originalParent === imageCardRow) recenterSourceRow(beforeParent);
   else if (originalTarget) layoutPlacedCards(originalTarget, beforeParent);
@@ -363,6 +370,8 @@ const returnToOrigin = drag => {
 
 const placeInTarget = (drag, target) => {
   const { card, item } = drag;
+  const placement = groupingRound.place(item.id, target.dataset.dropTargetId);
+  if (!placement) return false;
   const currentRect = card.getBoundingClientRect();
   const content = target.querySelector("[data-drop-zone-content]");
   const before = rectMap(cardsIn(content));
@@ -371,19 +380,20 @@ const placeInTarget = (drag, target) => {
   card.style.width = `${baseCardSize()}px`;
   card.style.height = `${baseCardSize()}px`;
   content.append(card);
-  item.currentTargetId = target.dataset.dropTargetId;
   hasValidatedPlacement = false;
   setCardState(item, "placed");
-  card.setAttribute("aria-label", `Card ${item.id.slice(-2)} colocado em ${item.currentTargetId}. Pressione Enter para mover de grupo.`);
+  card.setAttribute("aria-label", `Card ${item.id.slice(-2)} colocado em ${target.dataset.dropTargetId}. Pressione Enter para mover de grupo.`);
   clearTargetStates();
   layoutPlacedCards(target, before);
   DuduqSound.play("snap");
   updateConfirmAction();
+  return true;
 };
 
 const moveCardToTarget = (card, target) => {
   const item = itemForElement.get(card);
-  if (!item || item.locked || item.state === "correct" || roundStatus !== "editing" || questionComplete || isValidating || activeDrag || !target) return;
+  const itemState = item && stateFor(item);
+  if (!item || itemState?.locked || itemState?.state === "correct" || roundSnapshot().status !== "editing" || questionComplete || isValidating || activeDrag || !target) return;
   const originalParent = card.parentElement;
   const originalTarget = targetForCard(card);
   const beforeParent = rectMap(cardsIn(originalParent));
@@ -391,7 +401,7 @@ const moveCardToTarget = (card, target) => {
   card.remove();
   if (originalParent === imageCardRow) recenterSourceRow(beforeParent);
   else if (originalTarget) layoutPlacedCards(originalTarget, beforeParent);
-  placeInTarget({ card, item }, target);
+  if (!placeInTarget({ card, item }, target)) returnToOrigin({ card, item, originalParent, originalTarget, originalIndex: cardsIn(originalParent).length, originalTargetId: itemState.currentTargetId, originalState: itemState.state });
 };
 
 const completeQuestion = () => {
@@ -401,9 +411,11 @@ const completeQuestion = () => {
 };
 
 const retryIncorrectItems = () => {
-  if (roundStatus !== "retry") return;
-  const incorrectItems = items.filter(item => item.state === "incorrect" && !item.locked);
+  if (roundSnapshot().status !== "retry") return;
+  const incorrectItems = items.filter(item => stateFor(item)?.state === "incorrect" && !stateFor(item)?.locked);
   if (!incorrectItems.length) return;
+  const returnedIds = new Set(groupingRound.retry());
+  if (!returnedIds.size) return;
 
   DuduqSound.play("uiClick");
   feedbackRibbon.hidden = true;
@@ -426,7 +438,6 @@ const retryIncorrectItems = () => {
     card.style.width = `${baseCardSize()}px`;
     card.style.height = `${baseCardSize()}px`;
     setCardArtSize(card, baseCardSize());
-    item.currentTargetId = null;
     setCardState(item, "idle");
     card.setAttribute("aria-label", `Card ${item.id.slice(-2)}. Arraste para Animals ou Food.`);
   }
@@ -439,7 +450,6 @@ const retryIncorrectItems = () => {
     layoutPlacedCards(target, targetBefore.get(target));
   }
 
-  roundStatus = "editing";
   hasValidatedPlacement = false;
   continueRequested = false;
   recenterSourceRow(sourceBefore);
@@ -453,7 +463,7 @@ const showValidationFeedback = outcome => {
       retryIncorrectItems();
       return;
     }
-    if (continueRequested) return;
+    if (continueRequested || !groupingRound.continueActivity()) return;
     continueRequested = true;
     DuduqSound.play("uiClick");
     const button = feedbackRibbon.querySelector(".feedback-action");
@@ -474,24 +484,21 @@ const showValidationFeedback = outcome => {
 };
 
 const confirmAnswers = () => {
-  if (isValidating || roundStatus !== "editing" || hasValidatedPlacement || questionComplete || getPlacedCount() !== items.length) return;
-  roundStatus = "checking";
+  if (isValidating || roundSnapshot().status !== "editing" || hasValidatedPlacement || questionComplete || getPlacedCount() !== items.length) return;
   isValidating = true;
   hasValidatedPlacement = true;
   confirmAttention.stop();
   updateConfirmAction();
   DuduqSound.play("uiClick");
-  let correctCount = 0;
+  const validation = groupingRound.validate();
+  if (!validation) { isValidating = false; return; }
+  const { correctCount, incorrectCount } = validation;
   for (const item of items) {
-    const state = item.currentTargetId === item.correctTargetId ? "correct" : "incorrect";
-    if (state === "correct") correctCount += 1;
-    setCardState(item, state);
+    setCardState(item, stateFor(item)?.state || "idle");
   }
-  const incorrectCount = items.length - correctCount;
   isValidating = false;
 
   if (incorrectCount === 0) {
-    roundStatus = "completed";
     questionComplete = true;
     updateConfirmAction();
     DuduqSound.play("correct");
@@ -512,7 +519,6 @@ const confirmAnswers = () => {
     return;
   }
 
-  roundStatus = "retry";
   DuduqSound.play("error");
   window.setTimeout(() => DuduqSound.playVoice("error"), 140);
   updateConfirmAction();
@@ -569,7 +575,8 @@ function updateDragFrame(drag) {
 root.addEventListener("pointerdown", event => {
   const card = event.target.closest?.(".dnd-option-image-card");
   const item = card && itemForElement.get(card);
-  if (!item || item.locked || item.state === "correct" || roundStatus !== "editing" || questionComplete || isValidating || activeDrag || event.button > 0) return;
+  const itemState = item && stateFor(item);
+  if (!item || itemState?.locked || itemState?.state === "correct" || roundSnapshot().status !== "editing" || questionComplete || isValidating || activeDrag || event.button > 0) return;
   event.preventDefault();
   const originalRect = card.getBoundingClientRect();
   const rootRect = root.getBoundingClientRect();
@@ -583,16 +590,14 @@ root.addEventListener("pointerdown", event => {
   const top = (originalRect.top - rootRect.top) / scale.y;
   activeDrag = {
     pointerId: event.pointerId, card, item, originalParent, originalIndex, originalRect,
-    originalTarget, originalTargetId: item.currentTargetId, originalState: item.state,
+    originalTarget, originalTargetId: itemState.currentTargetId, originalState: itemState.state,
     scale, startX: event.clientX, startY: event.clientY, lastX: event.clientX,
     dx: 0, dy: 0, angle: 0, currentTarget: null,
     targetRects: new Map(dropTargets.map(target => [target, target.getBoundingClientRect()])),
     frame: 0, dragStarted: false
   };
-  item.currentTargetId = null;
   DuduqSound.play("pickup");
   root.setPointerCapture(event.pointerId);
-  item.state = "picked";
   card.removeAttribute("data-state");
   card.dataset.dragState = "picked";
   card.style.position = "absolute";
@@ -636,9 +641,10 @@ root.addEventListener("lostpointercapture", event => finishDrag(event, true));
 
 for (const card of imageCards) card.addEventListener("keydown", event => {
   const item = itemForElement.get(card);
-  if (!item || item.locked || item.state === "correct" || roundStatus !== "editing" || questionComplete || isValidating || (event.key !== "Enter" && event.key !== " ")) return;
+  const itemState = item && stateFor(item);
+  if (!item || itemState?.locked || itemState?.state === "correct" || roundSnapshot().status !== "editing" || questionComplete || isValidating || (event.key !== "Enter" && event.key !== " ")) return;
   event.preventDefault();
-  const current = item.currentTargetId;
+  const current = itemState.currentTargetId;
   const next = current === "animals" ? "food" : "animals";
   moveCardToTarget(card, dropTargets.find(target => target.dataset.dropTargetId === next));
 });
@@ -646,7 +652,7 @@ for (const card of imageCards) card.addEventListener("keydown", event => {
 window.DuduQDragDropGame = Object.freeze({
   items,
   confirm: confirmAnswers,
-  getState: () => ({ placedCount: getPlacedCount(), totalItems: items.length, questionComplete, isValidating, roundStatus, correctCount: items.filter(item => item.state === "correct").length, incorrectCount: items.filter(item => item.state === "incorrect").length, activeItemId: activeDrag?.item.id || null }),
+  getState: () => { const state = roundSnapshot(); return ({ placedCount: state.placedCount, totalItems: items.length, questionComplete, isValidating, roundStatus: state.status, correctCount: state.items.filter(item => item.state === "correct").length, incorrectCount: state.items.filter(item => item.state === "incorrect").length, activeItemId: activeDrag?.item.id || null }); },
   getQuestionComplete: () => questionComplete
 });
 

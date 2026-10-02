@@ -206,11 +206,14 @@ const createDragAudioItem = (componentId, order, { audioSrc = "" } = {}) => {
     <img class="dnd-multimedia-audio-item__play-art" src="./assets/drag-audio-item.svg" alt="">
     <button class="dnd-multimedia-audio-item__play" type="button" aria-label="Ouvir FISH"${audioSrc ? "" : " disabled aria-disabled=\"true\" title=\"Áudio de conteúdo ainda não configurado\""}>
       <span class="dnd-multimedia-audio-item__play-depth" aria-hidden="true"></span>
-      <span class="dnd-multimedia-audio-item__play-surface" aria-hidden="true">
-        <svg class="dnd-multimedia-audio-item__playing-icon" viewBox="0 0 53 53" focusable="false">
-          <path class="dnd-multimedia-audio-item__speaker" d="M15 24L20.105 24L27.256 18L27.256 36L20.105 30L15 30Z" />
-          <path class="dnd-multimedia-audio-item__waves" d="M31.34 22C34.746 25.334 34.746 28.668 31.34 32M34.404 18C40.531 24 40.531 30 34.404 36" />
-        </svg>
+      <span class="dnd-multimedia-audio-item__play-visual" aria-hidden="true">
+        <span class="dnd-multimedia-audio-item__play-ring"></span>
+        <span class="dnd-multimedia-audio-item__play-surface">
+          <svg class="dnd-multimedia-audio-item__playing-icon" viewBox="0 0 53 53" focusable="false">
+            <path class="dnd-multimedia-audio-item__speaker" d="M15 24L20.105 24L27.256 18L27.256 36L20.105 30L15 30Z" />
+            <path class="dnd-multimedia-audio-item__waves" d="M31.34 22C34.746 25.334 34.746 28.668 31.34 32M34.404 18C40.531 24 40.531 30 34.404 36" />
+          </svg>
+        </span>
       </span>
     </button>`;
   return item;

@@ -281,10 +281,11 @@ body {
 #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play {
   position: absolute;
   z-index: 2;
-  left: 40.7%;
-  top: 16.25%;
-  width: 18.93%;
-  height: 66.25%;
+  left: 50%;
+  top: 50%;
+  width: 18.9285714%;
+  height: auto;
+  aspect-ratio: 1;
   padding: 0;
   border: 0;
   border-radius: 50%;
@@ -298,8 +299,10 @@ body {
   --audio-surface-scale: 1;
   --audio-depth-y: 3px;
   --audio-depth-scale: 1;
+  transform: translate(-50%, -50%);
 }
 #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play-depth,
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play-visual,
 #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play-surface {
   position: absolute;
   inset: 0;
@@ -314,12 +317,28 @@ body {
   background: var(--audio-depth);
   transform: translateY(var(--audio-depth-y)) scale(var(--audio-depth-scale));
 }
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play-visual {
+  z-index: 1;
+  transform: translateY(var(--audio-surface-y)) scale(var(--audio-surface-scale));
+}
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play-ring {
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 50%;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
 #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play-surface {
   z-index: 1;
   display: grid;
   place-items: center;
   background: var(--audio-face);
-  transform: translateY(var(--audio-surface-y)) scale(var(--audio-surface-scale));
 }
 #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__playing-icon {
   display: block;
@@ -348,18 +367,19 @@ body {
   --audio-depth-scale: .98;
 }
 #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play:active:not(:disabled) .dnd-multimedia-audio-item__play-depth,
-#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play:active:not(:disabled) .dnd-multimedia-audio-item__play-surface {
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play:active:not(:disabled) .dnd-multimedia-audio-item__play-visual {
   transition-duration: 95ms;
   transition-timing-function: ease-in;
 }
 #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item[data-playing="true"] .dnd-multimedia-audio-item__play {
   --audio-face: linear-gradient(180deg, #15df33 0%, #14af38 55%, #189037 100%);
   --audio-depth: #0a7e22;
-  outline: 2px solid rgb(21 223 51 / 52.941176%);
-  outline-offset: 2px;
   cursor: progress;
 }
-#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item[data-playing="true"] .dnd-multimedia-audio-item__playing-icon {
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item[data-playing="true"] .dnd-multimedia-audio-item__play-ring {
+  border-color: rgb(21 223 51 / 52.941176%);
+}
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item[data-playing="true"] .dnd-multimedia-audio-item__play-visual {
   transform-origin: 50% 50%;
   animation: dnduq-audio-playing-pulse 650ms ease-in-out infinite;
 }
@@ -376,8 +396,8 @@ body {
 #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play:focus-visible { outline: 3px solid #175c93; outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) {
   #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play-depth,
-  #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play-surface { transition: none; }
-  #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__playing-icon { animation: none !important; }
+  #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play-visual { transition: none; }
+  #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play-visual { animation: none !important; }
 }
 
 /* Existing official Confirmar component: same layers and measurements as D&D. */
@@ -442,8 +462,7 @@ body {
 #game.drag-drop-multimedia-screen .result-fx-layer { position: fixed; z-index: 50; inset: 0; display: none; overflow: hidden; pointer-events: none; contain: layout paint; }
 #game.drag-drop-multimedia-screen .result-fx-layer[data-effect="correct"] { display: block; }
 #game.drag-drop-multimedia-screen .result-fx-layer[data-effect=""] { display: none; }
-#game.drag-drop-multimedia-screen .feedback-ribbon,
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] {
+#game.drag-drop-multimedia-screen .feedback-ribbon {
   --feedback-edge: #3a925d;
   position: fixed;
   z-index: 51;
@@ -462,16 +481,10 @@ body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] {
   box-shadow: 0 5px 0 rgba(51,105,68,.2),0 12px 24px rgba(29,62,43,.14),inset 0 1px #fff;
   animation: dnd-multimedia-feedback-enter 220ms ease-out both;
 }
-#game.drag-drop-multimedia-screen .feedback-ribbon[hidden],
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"][hidden] { display: none !important; }
-#game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"],
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"][data-feedback="incorrect"] { --feedback-edge: #b75852; border-color: #f0c1b8; background: linear-gradient(135deg,rgba(255,251,249,.99),rgba(255,238,234,.99)); }
-/* Keep the shared Target Shooter legacy footer projection from positioning this
-   multimedia route's canonical footer against the zero-height game root. */
+#game.drag-drop-multimedia-screen .feedback-ribbon[hidden] { display: none !important; }
+#game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] { --feedback-edge: #b75852; border-color: #f0c1b8; background: linear-gradient(135deg,rgba(255,251,249,.99),rgba(255,238,234,.99)); }
 #game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"],
-#game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"],
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"][data-feedback="correct"],
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"][data-feedback="incorrect"] {
+#game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] {
   position: fixed !important;
   top: auto !important;
   right: 0 !important;
@@ -486,20 +499,13 @@ body > .dnd-multimedia-feedback[data-fullscreen-portal="true"][data-feedback="in
   transform-origin: initial !important;
   scale: 1 !important;
 }
-#game.drag-drop-multimedia-screen .feedback-ribbon .feedback-mascot,
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-mascot { grid-column: auto; width: 82px; height: 70px; margin: 0; object-fit: contain; }
-#game.drag-drop-multimedia-screen .feedback-copy h2,
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-copy h2 { margin: 0 0 3px; color: #318052; font: 700 24px/1.1 Fredoka, sans-serif; }
-#game.drag-drop-multimedia-screen .feedback-copy p,
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-copy p { margin: 0; color: #5f806b; font: 700 14px/1.25 Nunito, sans-serif; }
-#game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-copy h2,
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"][data-feedback="incorrect"] .feedback-copy h2 { color: #ad5a55; }
-#game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-copy p,
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"][data-feedback="incorrect"] .feedback-copy p { color: #92726d; }
-#game.drag-drop-multimedia-screen .feedback-action,
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-action { align-self: center; }
-#game.drag-drop-multimedia-screen .feedback-action,
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-action {
+#game.drag-drop-multimedia-screen .feedback-ribbon .feedback-mascot { grid-column: auto; width: 82px; height: 70px; margin: 0; object-fit: contain; }
+#game.drag-drop-multimedia-screen .feedback-copy h2 { margin: 0 0 3px; color: #318052; font: 700 24px/1.1 Fredoka, sans-serif; }
+#game.drag-drop-multimedia-screen .feedback-copy p { margin: 0; color: #5f806b; font: 700 14px/1.25 Nunito, sans-serif; }
+#game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-copy h2 { color: #ad5a55; }
+#game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-copy p { color: #92726d; }
+#game.drag-drop-multimedia-screen .feedback-action { align-self: center; }
+#game.drag-drop-multimedia-screen .feedback-action {
   --button-face-top: #58dc88;
   --button-face-mid: #2dc36a;
   --button-face-base: #20a953;
@@ -520,16 +526,11 @@ body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-action 
   cursor: pointer;
   transition: filter 140ms ease, transform 140ms ease, box-shadow 140ms ease;
 }
-#game.drag-drop-multimedia-screen .feedback-action:hover,
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-action:hover { filter: brightness(1.055) saturate(1.04); transform: translateY(-1px); box-shadow: 0 6px 0 var(--button-edge), 0 11px 18px rgba(26,87,47,.22), inset 0 1px 0 rgba(255,255,255,.75), inset 0 -2px 0 rgba(18,105,52,.14); }
-#game.drag-drop-multimedia-screen .feedback-action:active,
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-action:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--button-edge), 0 4px 8px rgba(26,87,47,.16), inset 0 1px 0 rgba(255,255,255,.5), inset 0 -1px 0 rgba(18,105,52,.14); }
-#game.drag-drop-multimedia-screen .feedback-action:focus-visible,
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-action:focus-visible { outline: 3px solid #175c93; outline-offset: 3px; }
-#game.drag-drop-multimedia-screen .feedback-action.is-correct,
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-action.is-correct { --button-face-top:#58dc88; --button-face-mid:#2dc36a; --button-face-base:#20a953; --button-edge:#178347; }
-#game.drag-drop-multimedia-screen .feedback-action.is-incorrect,
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-action.is-incorrect { --button-face-top:#f7aa9b; --button-face-mid:#e67c72; --button-face-base:#ce625d; --button-edge:#ad5954; border-color: rgba(255,255,255,.46); background-image: linear-gradient(180deg,rgba(255,255,255,.38) 0%,rgba(255,255,255,.13) 16%,rgba(255,255,255,0) 48%),linear-gradient(180deg,var(--button-face-top) 0%,var(--button-face-mid) 78%,var(--button-face-base) 100%); box-shadow: 0 5px 0 var(--button-edge), 0 8px 15px rgba(87,42,38,.17), inset 0 1px 0 rgba(255,255,255,.68), inset 0 -2px 0 rgba(119,48,45,.16); }
+#game.drag-drop-multimedia-screen .feedback-action:hover { filter: brightness(1.055) saturate(1.04); transform: translateY(-1px); box-shadow: 0 6px 0 var(--button-edge), 0 11px 18px rgba(26,87,47,.22), inset 0 1px 0 rgba(255,255,255,.75), inset 0 -2px 0 rgba(18,105,52,.14); }
+#game.drag-drop-multimedia-screen .feedback-action:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--button-edge), 0 4px 8px rgba(26,87,47,.16), inset 0 1px 0 rgba(255,255,255,.5), inset 0 -1px 0 rgba(18,105,52,.14); }
+#game.drag-drop-multimedia-screen .feedback-action:focus-visible { outline: 3px solid #175c93; outline-offset: 3px; }
+#game.drag-drop-multimedia-screen .feedback-action.is-correct { --button-face-top:#58dc88; --button-face-mid:#2dc36a; --button-face-base:#20a953; --button-edge:#178347; }
+#game.drag-drop-multimedia-screen .feedback-action.is-incorrect { --button-face-top:#f7aa9b; --button-face-mid:#e67c72; --button-face-base:#ce625d; --button-edge:#ad5954; border-color: rgba(255,255,255,.46); background-image: linear-gradient(180deg,rgba(255,255,255,.38) 0%,rgba(255,255,255,.13) 16%,rgba(255,255,255,0) 48%),linear-gradient(180deg,var(--button-face-top) 0%,var(--button-face-mid) 78%,var(--button-face-base) 100%); box-shadow: 0 5px 0 var(--button-edge), 0 8px 15px rgba(87,42,38,.17), inset 0 1px 0 rgba(255,255,255,.68), inset 0 -2px 0 rgba(119,48,45,.16); }
 @keyframes dnd-multimedia-feedback-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 680px) {
   #game.drag-drop-multimedia-screen .feedback-ribbon { right: 10px; bottom: 8px; left: 10px; grid-template-columns: 48px 56px minmax(0,1fr); column-gap: 10px; min-height: 74px; padding: 7px 12px; }
@@ -623,6 +624,9 @@ body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-action.
   --dnd-multimedia-fullscreen-panel-width: min(1580px, calc(100vw - 80px), calc(100dvh * 1.58));
   --dnd-multimedia-fullscreen-item-width: clamp(280px, 18vw, 346px);
   --dnd-multimedia-fullscreen-layout-gap: clamp(12px, 1.8vh, 22px);
+  /* Keep the question HUD and its playfield as separate reading surfaces.
+     This is deliberately independent from the tighter internal layout gap. */
+  --dnd-multimedia-fullscreen-question-panel-gap: clamp(20px, 2.8vh, 32px);
   height: 100dvh;
   min-height: 0;
   overflow-x: hidden;
@@ -638,7 +642,7 @@ body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-action.
 #game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-central-panel {
   width: var(--dnd-multimedia-fullscreen-panel-width);
   max-width: 100%;
-  margin-top: var(--dnd-multimedia-fullscreen-layout-gap);
+  margin-top: var(--dnd-multimedia-fullscreen-question-panel-gap);
   transition: width 180ms ease, margin 180ms ease;
 }
 #game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-question-group {
@@ -675,43 +679,12 @@ body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-action.
   scale: 1.06;
   transition: transform 160ms ease, scale 180ms ease;
 }
-#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .feedback-ribbon[data-feedback="correct"],
-#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .feedback-ribbon[data-feedback="incorrect"],
-body.duduq-fullscreen-enhanced > .dnd-multimedia-feedback[data-fullscreen-portal="true"][data-feedback="correct"],
-body.duduq-fullscreen-enhanced > .dnd-multimedia-feedback[data-fullscreen-portal="true"][data-feedback="incorrect"] {
-  left: 50% !important;
-  right: auto !important;
-  width: min(calc(100vw - clamp(32px, 5vw, 96px)), 1450px) !important;
-  min-height: clamp(96px, 9vh, 112px) !important;
-  padding: clamp(12px, 1.4vh, 18px) clamp(28px, 3vw, 48px);
-  margin-inline: 0 !important;
-  translate: -50% 0 !important;
+
+/* Fullscreen keeps the same canonical footer node and visual composition.
+   Only its fixed, viewport-sized shell remains responsive. */
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] > .feedback-ribbon:not([hidden]),
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] > .feedback-ribbon:not([hidden]) .feedback-action {
   scale: 1 !important;
-  transform: none !important;
-  transform-origin: initial !important;
-  box-sizing: border-box !important;
-  bottom: clamp(14px, 2vh, 24px) !important;
-}
-#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .feedback-ribbon .feedback-mascot,
-body.duduq-fullscreen-enhanced > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-mascot {
-  width: clamp(82px, 5.2vw, 100px);
-  height: clamp(70px, 4.8vw, 92px);
-}
-#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .feedback-copy h2,
-body.duduq-fullscreen-enhanced > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-copy h2 { font-size: clamp(24px, 1.45vw, 29px); }
-#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .feedback-copy p,
-body.duduq-fullscreen-enhanced > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-copy p { font-size: clamp(14px, .9vw, 17px); }
-#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .feedback-action,
-body.duduq-fullscreen-enhanced > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-action {
-  width: clamp(152px, 9.2vw, 178px);
-  min-width: clamp(152px, 9.2vw, 178px);
-  height: clamp(60px, 6vh, 68px);
-  min-height: clamp(60px, 6vh, 68px);
-  font-size: clamp(17px, 1vw, 19px);
-}
-body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] {
-  z-index: 9999 !important;
-  pointer-events: auto;
 }
 
 @media (max-height: 800px) {
@@ -719,22 +692,6 @@ body > .dnd-multimedia-feedback[data-fullscreen-portal="true"] {
     --dnd-multimedia-fullscreen-layout-gap: clamp(8px, 1.2vh, 12px);
   }
   #game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-drag-word-bank { gap: clamp(18px, 1.5vw, 24px); }
-}
-@media (max-width: 680px) {
-  body.duduq-fullscreen-enhanced > .dnd-multimedia-feedback[data-fullscreen-portal="true"] {
-    left: 50% !important;
-    right: auto !important;
-    bottom: 8px !important;
-    width: calc(100vw - 20px) !important;
-    min-height: 74px !important;
-    padding: 7px 12px !important;
-    grid-template-columns: 48px 56px minmax(0, 1fr);
-    column-gap: 10px;
-  }
-  body.duduq-fullscreen-enhanced > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-mascot { width: 56px; height: 54px; }
-  body.duduq-fullscreen-enhanced > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-copy h2 { font-size: 18px; }
-  body.duduq-fullscreen-enhanced > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-copy p { font-size: 11px; }
-  body.duduq-fullscreen-enhanced > .dnd-multimedia-feedback[data-fullscreen-portal="true"] .feedback-action { grid-column: 1 / -1; width: 100%; min-height: 44px; }
 }
 @media (prefers-reduced-motion: reduce) {
   #game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-central-panel,

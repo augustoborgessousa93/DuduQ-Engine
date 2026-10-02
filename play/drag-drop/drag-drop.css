@@ -17,6 +17,24 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
   pointer-events: auto !important;
 }
 
+/* Fullscreen keeps the one canonical feedback owner, but anchors its shared
+   responsive shell to the game viewport rather than the scaled activity area. */
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] > .feedback-ribbon:not([hidden]) {
+  position: fixed !important;
+  right: 0 !important;
+  bottom: clamp(14px, 2vh, 24px) !important;
+  left: 0 !important;
+  width: min(calc(100vw - clamp(32px, 5vw, 96px)), 1299px) !important;
+  margin-inline: auto !important;
+  scale: 1 !important;
+  transform-origin: center bottom !important;
+  z-index: 51 !important;
+}
+
+#game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] > .feedback-ribbon:not([hidden]) .feedback-action {
+  scale: 1 !important;
+}
+
 /* Penpot: DUDUQ - HUD OPTIONS CARDS GROUP, positioned in the 1366x768 screen space. */
 .dnd-options-cards-group {
   position: absolute;

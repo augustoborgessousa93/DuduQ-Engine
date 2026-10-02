@@ -63,7 +63,11 @@
 /* Drag & Drop: fullscreen uses a real responsive reflow so hit testing and
    rendered geometry continue to share the same client rectangles. */
 #game.drag-drop-screen[data-duduq-fullscreen-enhanced="true"] {
-  --dnd-fullscreen-panel-top: clamp(210px, 25cqh, 270px);
+  /* The grouping panel starts below the canonical question HUD.  Its normal
+     artboard coordinate is 238px while the HUD ends at 216px; retain that
+     relationship in fullscreen instead of letting the panel rise into it. */
+  --dnd-fullscreen-question-to-panel-gap: clamp(22px, 3cqh, 34px);
+  --dnd-fullscreen-panel-top: calc(216px + var(--dnd-fullscreen-question-to-panel-gap));
   --dnd-fullscreen-panel-height: clamp(360px, 47.2cqh, 510px);
   --dnd-fullscreen-card-size: clamp(171px, 11vw, 210px);
   --dnd-fullscreen-card-gap: clamp(22px, 1.7vw, 34px);

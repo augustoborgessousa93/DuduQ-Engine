@@ -3,12 +3,16 @@ import { DuduqSound } from "/core/audio/duduq-sound-system.js";
 import { ResultFXLayer } from "/core/ui/result-fx.js";
 import { Feedback } from "/test/matching/gold-master-candidate-v1/src/core-components.js";
 import { createMultimediaRound } from "./drag-drop-multimedia-round.js";
+import { createDuduqDragDropLifecycle } from "../../core/duduq-drag-drop-lifecycle.js";
 
 const DRAG_THRESHOLD = 5;
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank, targets, items: itemElements }) {
+export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank, targets, items: itemElements, activity }) {
+  const activityItemsById = new Map((activity?.items || []).map(item => [item.id, item]));
+  const activityTargetsById = new Map((activity?.targets || []).map(target => [target.id, target]));
   const itemConfig = itemElements.map((element, order) => ({
+    ...(activityItemsById.get(element.dataset.itemId) || {}),
     id: element.dataset.itemId,
     type: element.dataset.itemType,
     answerKey: element.dataset.answerKey,
@@ -16,11 +20,14 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
     element,
     homeOrder: order
   }));
-  const targetConfig = targets.map(({ id, answerKey, slot, element }) => ({ id, answerKey, slot, element }));
-  const round = createMultimediaRound({
-    items: itemConfig.map(({ id, type, answerKey }) => ({ id, type, answerKey })),
-    targets: targetConfig.map(({ id, answerKey }) => ({ id, answerKey }))
-  });
+  const targetConfig = targets.map(({ id, answerKey, slot, element }) => ({
+    ...(activityTargetsById.get(id) || {}), id, answerKey, slot, element
+  }));
+  const round = createDuduqDragDropLifecycle(createMultimediaRound(activity || {
+    id: "drag-drop-multimedia", mechanic: "drag-drop", layout: "target-grid", validation: { strategy: "answerKey" },
+    items: itemConfig.map(({ id, type, answerKey, correctGroupId }) => ({ id, type, answerKey, correctGroupId })),
+    targets: targetConfig.map(({ id, type, answerKey, groupId, capacity }) => ({ id, type, answerKey, groupId, capacity }))
+  }));
   const itemsById = new Map(itemConfig.map(item => [item.id, item]));
   const targetsById = new Map(targetConfig.map(target => [target.id, target]));
   const removeButtonsByItemId = new Map();
@@ -77,23 +84,6 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
     <div class="feedback-copy"><h2 data-slot="feedback-title"></h2><p data-slot="feedback-detail"></p></div>
     <button class="feedback-action game-button" type="button"><span data-slot="feedback-action"></span></button>`;
   root.append(feedback);
-
-  // The game root is a size container, so fixed descendants use it as their
-  // containing block. Portal the same canonical footer to body only in the
-  // enhanced fullscreen state so its fixed geometry is viewport-based.
-  const syncFullscreenFeedbackOwner = () => {
-    const fullscreen = root.dataset.duduqFullscreenEnhanced === "true";
-    if (fullscreen && feedback.parentElement !== document.body) {
-      document.body.append(feedback);
-      feedback.dataset.fullscreenPortal = "true";
-    } else if (!fullscreen && feedback.parentElement !== root) {
-      delete feedback.dataset.fullscreenPortal;
-      root.append(feedback);
-    }
-  };
-  const fullscreenObserver = new MutationObserver(syncFullscreenFeedbackOwner);
-  fullscreenObserver.observe(root, { attributes: true, attributeFilter: ["data-duduq-fullscreen-enhanced"] });
-  syncFullscreenFeedbackOwner();
 
   const allPlaced = () => round.snapshot().placedCount === itemConfig.length;
   const updateConfirmVisibility = () => {
