@@ -4,7 +4,7 @@
 
 **Complete mode:** V1 homologated / frozen baseline
 
-**Order mode:** not implemented
+**Complete + Order:** V1 combined activity; explicit Continue connects the modes
 
 **UnScramble mode:** not implemented
 
@@ -16,7 +16,7 @@ Route: `/play/smart-sentence/`
 - Renderer: `play/smart-sentence/smart-sentence.js`
 - Screen/activity config and visual assets: `play/smart-sentence/`
 
-The activity config is the single pedagogical source of truth. The renderer consumes it for presentation and input; the engine validates semantic `answerKey` values, never displayed text, DOM order, or position.
+The activity config is the single pedagogical source of truth. The renderer consumes it for presentation and input; the engine validates semantic `answerKey` values, never displayed text, DOM order, or position. The default `/play/smart-sentence/` activity contains a Complete round followed by an Order round in the same engine instance. Each remains an explicitly configured round with its own prompt and answer; Continue is required to enter the next round. `?mode=complete` and `?mode=order` remain available as focused QA routes.
 
 ## Complete V1 contract
 
@@ -29,8 +29,15 @@ The activity config is the single pedagogical source of truth. The renderer cons
 
 The renderer owns drag gestures, snap/presentation, and DOM state. The engine owns selection, validation, retry, and continue lifecycle and does not depend on CSS, DOM selectors, or coordinates.
 
+## Order mode in the combined V1
+
+- Order places each selected option into a distinct sentence position; click/tap and pointer drag are supported, and the remove control returns an option to the bank.
+- Confirm is enabled only after every position is filled. The answer is checked in semantic order through each option's `answerKey`.
+- Incorrect answers use the canonical retry footer; correct answers use the canonical Continue footer. There is no automatic transition.
+- The renderer swaps only the play area between rounds while retaining the same canonical shell, HUD, feedback, and engine instance.
+
 ## Extension policy
 
-Future `order` and `unscramble` modes may extend the same engine. Any engine change must keep the Complete V1 regression suite passing. If an Order change risks changing Complete behavior, stop and report `COMPLETE_REGRESSION_RISK`; do not adapt the frozen mode to fit the new one.
+Future modes may extend the same engine. Any engine change must keep the Complete V1 regression suite passing. If an Order change risks changing Complete behavior, stop and report `COMPLETE_REGRESSION_RISK`; do not adapt the frozen mode to fit the new one.
 
 Regression test: `node --test test/smart-sentence/complete-v1-regression.test.mjs`.

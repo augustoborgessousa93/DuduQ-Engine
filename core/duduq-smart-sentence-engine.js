@@ -31,23 +31,40 @@ export class DuduQSmartSentenceEngine {
   get status() { return this.#status; }
   get activity() { return this.#activity; }
   onStateChange(listener) { this.#listeners.add(listener); return () => this.#listeners.delete(listener); }
-  start() { this.#roundIndex = 0; this.#status = SMART_SENTENCE_STATUS.PLAYING; this.#selected = []; return this.#emit(); }
+  start() { this.#roundIndex = 0; this.#status = SMART_SENTENCE_STATUS.PLAYING; this.#selected = this.#round().mode === SMART_SENTENCE_MODE.ORDER ? Array(this.#round().answer.length).fill(null) : []; return this.#emit(); }
   select(id) {
     if (this.#status !== SMART_SENTENCE_STATUS.PLAYING) return null;
     const round = this.#round(); const token = round.options.find((item) => item.id === id);
     if (!token || this.#selected.includes(id)) return null;
-    this.#selected = round.mode === SMART_SENTENCE_MODE.COMPLETE ? [id] : [...this.#selected, id];
+    if (round.mode === SMART_SENTENCE_MODE.COMPLETE) this.#selected = [id];
+    else if (round.mode === SMART_SENTENCE_MODE.ORDER) {
+      const firstEmpty = this.#selected.findIndex((selectedId) => !selectedId);
+      if (firstEmpty < 0) return null;
+      this.#selected[firstEmpty] = id;
+    } else this.#selected = [...this.#selected, id];
+    return this.#emit();
+  }
+  place(id, index) {
+    if (this.#status !== SMART_SENTENCE_STATUS.PLAYING || this.#round().mode !== SMART_SENTENCE_MODE.ORDER) return null;
+    const round = this.#round(); const targetIndex = Number(index);
+    if (!Number.isInteger(targetIndex) || targetIndex < 0 || targetIndex >= round.answer.length || !round.options.some((item) => item.id === id)) return null;
+    const sourceIndex = this.#selected.indexOf(id);
+    if (sourceIndex === targetIndex) return null;
+    const displacedId = this.#selected[targetIndex] || null;
+    if (sourceIndex >= 0) this.#selected[sourceIndex] = displacedId;
+    this.#selected[targetIndex] = id;
     return this.#emit();
   }
   remove(id) {
     if (this.#status !== SMART_SENTENCE_STATUS.PLAYING || !this.#selected.includes(id)) return null;
-    this.#selected = this.#selected.filter((selectedId) => selectedId !== id);
+    if (this.#round().mode === SMART_SENTENCE_MODE.ORDER) this.#selected[this.#selected.indexOf(id)] = null;
+    else this.#selected = this.#selected.filter((selectedId) => selectedId !== id);
     return this.#emit();
   }
   retry() { if (this.#status !== SMART_SENTENCE_STATUS.INCORRECT) return null; this.#status = SMART_SENTENCE_STATUS.PLAYING; return this.#emit(); }
   confirm() {
     if (this.#status !== SMART_SENTENCE_STATUS.PLAYING || !this.canConfirm()) return null;
-    const answer = this.#selected.map((id) => this.#round().options.find((token) => token.id === id)?.answerKey);
+    const answer = this.#selected.map((id) => id ? this.#round().options.find((token) => token.id === id)?.answerKey : null);
     const expected = this.#round().answer; const correct = answer.length === expected.length && answer.every((key, index) => key === expected[index]);
     this.#status = correct ? SMART_SENTENCE_STATUS.CORRECT : SMART_SENTENCE_STATUS.INCORRECT;
     return freeze({ correct, snapshot: this.#emit() });
@@ -55,11 +72,12 @@ export class DuduQSmartSentenceEngine {
   continue() {
     if (this.#status !== SMART_SENTENCE_STATUS.CORRECT) return null;
     if (this.#roundIndex >= this.#activity.rounds.length - 1) { this.#status = SMART_SENTENCE_STATUS.COMPLETED; return this.#emit(); }
-    this.#roundIndex += 1; this.#selected = []; this.#status = SMART_SENTENCE_STATUS.PLAYING; return this.#emit();
+    this.#roundIndex += 1; this.#selected = this.#round().mode === SMART_SENTENCE_MODE.ORDER ? Array(this.#round().answer.length).fill(null) : []; this.#status = SMART_SENTENCE_STATUS.PLAYING; return this.#emit();
   }
-  canConfirm() { return this.#status === SMART_SENTENCE_STATUS.PLAYING && this.#selected.length === this.#round().answer.length; }
+  canConfirm() { return this.#status === SMART_SENTENCE_STATUS.PLAYING && this.#selected.length === this.#round().answer.length && this.#selected.every(Boolean); }
   snapshot() {
-    const round = this.#round(); const selected = this.#selected.map((id) => round.options.find((option) => option.id === id)).filter(Boolean);
+    const round = this.#round(); const mapped = this.#selected.map((id) => id ? round.options.find((option) => option.id === id) || null : null);
+    const selected = round.mode === SMART_SENTENCE_MODE.ORDER ? mapped : mapped.filter(Boolean);
     return freeze({ activityId: this.#activity.id, status: this.#status, roundIndex: this.#roundIndex, roundNumber: this.#roundIndex + 1, totalRounds: this.#activity.rounds.length, round, selected: freeze(selected), available: freeze(round.options.filter((option) => !this.#selected.includes(option.id))), canConfirm: this.canConfirm(), complete: this.#status === SMART_SENTENCE_STATUS.COMPLETED });
   }
   #round() { return this.#activity.rounds[this.#roundIndex]; }

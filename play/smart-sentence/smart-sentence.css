@@ -2,6 +2,30 @@
 body{background:#87c95a;font-family:Nunito,system-ui,sans-serif}
 #game.smart-sentence-screen .smart-sentence-shell{position:relative;z-index:1;display:flex;flex-direction:column;min-height:0;height:100%;pointer-events:none}
 #game.smart-sentence-screen .duduq-canonical-header-hud,#game.smart-sentence-screen .duduq-canonical-question-hud{pointer-events:auto}
+#game.smart-sentence-screen .smart-sentence-order-panel-component{position:absolute;z-index:0;top:min(29.6875vh,16.69107vw);left:50%;display:block;width:min(93.41142vw,166.14583vh,calc(100vw - 24px));height:auto;max-width:none;aspect-ratio:1276/438;transform:translateX(calc(-50% + min(.512445vw,.911458vh)));object-fit:fill;pointer-events:none;user-select:none}
+#game.smart-sentence-screen .smart-sentence-order-drop-target-official{position:absolute;z-index:1;display:block;max-width:none;pointer-events:none;user-select:none}
+#game.smart-sentence-screen .smart-sentence-order-drop-target-official>img{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:fill;pointer-events:none}
+#game.smart-sentence-screen .smart-sentence-order-drop-target-official>span{position:absolute;inset:0;display:grid;place-items:center;color:rgba(177,127,0,.343137);font-family:Nunito,sans-serif;font-size:15px;font-weight:900;line-height:1;letter-spacing:normal;text-transform:uppercase;white-space:nowrap;pointer-events:none}
+#game.smart-sentence-screen .smart-sentence-order-drop-target-official>span[hidden],#game.smart-sentence-screen .smart-sentence-order-incorrect-icon[hidden],#game.smart-sentence-screen .smart-sentence-order-drag-card[hidden]{display:none!important}
+#game.smart-sentence-screen .smart-sentence-order-drop-target-official{overflow:visible}
+#game.smart-sentence-screen .smart-sentence-order-drop-target-official[data-visual-state="selected"]>img:first-child,#game.smart-sentence-screen .smart-sentence-order-drop-target-official[data-visual-state="correct"]>img:first-child,#game.smart-sentence-screen .smart-sentence-order-drop-target-official[data-visual-state="incorrect"]>img:first-child{object-fit:fill}
+#game.smart-sentence-screen .smart-sentence-order-drop-target-official[data-visual-state="correct"]>img:first-child{position:absolute;inset:auto auto auto 0;top:-48.275862%;width:117.073171%;height:auto;max-width:none;object-fit:fill}
+#game.smart-sentence-screen .smart-sentence-order-drop-target-official>.smart-sentence-order-placed-word{z-index:3;inset:0;display:grid;place-items:center;color:#364b43;font-family:Nunito,sans-serif;font-size:24px;font-weight:900;line-height:1;letter-spacing:normal;text-transform:uppercase;white-space:nowrap;pointer-events:auto;cursor:pointer;touch-action:none;user-select:none}
+#game.smart-sentence-screen .smart-sentence-order-drop-target-official[data-visual-state="incorrect"]>.smart-sentence-order-placed-word{color:#a84336}
+#game.smart-sentence-screen .smart-sentence-order-drop-target-official[data-visual-state="correct"]>.smart-sentence-order-placed-word{color:#267c4c}
+#game.smart-sentence-screen .smart-sentence-order-drop-target-official>img.smart-sentence-order-incorrect-icon{position:absolute;z-index:4;inset:auto auto auto auto;top:-31.66092%;right:auto;left:82.926829%;bottom:auto;display:block;width:27.642276%;height:auto;max-width:none;object-fit:contain;pointer-events:none}
+#game.smart-sentence-screen .smart-sentence-order-drag-card{pointer-events:auto;cursor:grab;touch-action:none}
+#game.smart-sentence-screen .smart-sentence-order-drag-card.is-dragging{z-index:8;cursor:grabbing;filter:drop-shadow(0 8px 9px rgba(25,54,48,.24))}
+#game.smart-sentence-screen .smart-sentence-order-drag-card:focus-visible{outline:3px solid #318fc0;outline-offset:3px;border-radius:24px}
+#game.smart-sentence-screen .smart-sentence-order-confirm-action{position:absolute;z-index:5;display:block;box-sizing:border-box;min-width:0;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:transparent;overflow:visible;aspect-ratio:315/94;pointer-events:auto;transform:translateX(-50%)}
+#game.smart-sentence-screen .smart-sentence-order-confirm-action{border:0!important;border-radius:0!important;padding:0!important;background:transparent!important;background-color:transparent!important;background-image:none!important;box-shadow:none!important;color:transparent!important;text-shadow:none!important}
+#game.smart-sentence-screen .smart-sentence-order-confirm-action::before{content:none!important;display:none!important}
+#game.smart-sentence-screen .smart-sentence-order-confirm-action:not(:disabled):not([hidden]){animation:duduq-confirm-ready-shake 2s ease-in-out infinite!important}
+#game.smart-sentence-screen .smart-sentence-order-confirm-action:not(:disabled):not([hidden]):hover{transform:translateX(-50%) scale(1.05)!important}
+#game.smart-sentence-screen .smart-sentence-order-confirm-action[hidden]{display:none!important}
+#game.smart-sentence-screen .smart-sentence-order-drag-card{position:absolute;z-index:2;display:block;max-width:none;pointer-events:auto;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+#game.smart-sentence-screen .smart-sentence-order-drag-card-visual{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:fill;pointer-events:none}
+#game.smart-sentence-screen .smart-sentence-order-drag-card>span{position:absolute;left:3.594771%;top:12%;display:grid;width:91.503268%;height:64%;place-items:center;color:#364b43;font-family:Nunito,sans-serif;font-size:24px;font-weight:900;line-height:1;letter-spacing:normal;text-transform:uppercase;white-space:nowrap;pointer-events:none}
 #game.smart-sentence-screen .smart-sentence-panel{position:relative;width:min(1210px,calc(100% - 48px));aspect-ratio:1210/360;margin:25px auto 0;pointer-events:none}
 #game.smart-sentence-screen .smart-sentence-panel-full{position:absolute;left:-2.231405%;top:-7.5%;display:block;width:105.454545%;max-width:none;height:auto;pointer-events:none}
 #game.smart-sentence-screen .smart-sentence-image-card{position:absolute;left:4.297521%;top:16.111111%;display:block;width:19.669421%;height:auto;pointer-events:none}
@@ -23,6 +47,7 @@ body{background:#87c95a;font-family:Nunito,system-ui,sans-serif}
 #game.smart-sentence-screen .smart-sentence-confirm-action:not(:disabled):not([hidden]):is(:hover,:active,:focus-visible){animation-play-state:paused!important;translate:0!important;rotate:0!important;scale:1!important}
 #game.smart-sentence-screen .smart-sentence-confirm-action:not(:disabled):not([hidden]):hover{transform:translateX(-50%) scale(1.05)!important;transform-origin:center center!important;z-index:6!important}
 #game.smart-sentence-screen .smart-sentence-remove-option{position:absolute;z-index:4;top:-18%;right:-3%;display:block;width:13.821139%;aspect-ratio:1;border:0;margin:0;padding:0;background:transparent;cursor:pointer;pointer-events:auto}
+#game.smart-sentence-screen .smart-sentence-order-remove-option{z-index:5}
 #game.smart-sentence-screen .smart-sentence-remove-option img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
 #game.smart-sentence-screen .smart-sentence-remove-option[hidden]{display:none!important}
 #game.smart-sentence-screen .smart-sentence-remove-option:focus-visible{outline:3px solid #318fc0;outline-offset:2px;border-radius:50%}
