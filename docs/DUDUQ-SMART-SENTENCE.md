@@ -6,6 +6,8 @@
 
 **Complete + Order:** V1 combined activity; explicit Continue connects the modes
 
+**Combined transition:** canonical DuduQ transition presentation between Complete and Order
+
 **UnScramble mode:** not implemented
 
 Route: `/play/smart-sentence/`
@@ -35,6 +37,8 @@ The renderer owns drag gestures, snap/presentation, and DOM state. The engine ow
 - Confirm is enabled only after every position is filled. The answer is checked in semantic order through each option's `answerKey`.
 - Incorrect answers use the canonical retry footer; correct answers use the canonical Continue footer. There is no automatic transition.
 - The renderer swaps only the play area between rounds while retaining the same canonical shell, HUD, feedback, and engine instance.
+- The explicit Complete-to-Order Continue uses the canonical transition cover/reveal service and official transition card, mascot, background, and progress styling. The route and engine instance remain in place.
+- The Smart Sentence header counter keeps the canonical 15.64px Nunito 900 typography and centers its text both horizontally and vertically within the counter pill using route-scoped styling.
 
 ## Extension policy
 

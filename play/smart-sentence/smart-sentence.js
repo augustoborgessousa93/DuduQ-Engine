@@ -1,5 +1,6 @@
 import { DuduQCanonicalHeaderHUD, DuduQCanonicalQuestionHUD, ResultFX } from "/core/ui/index.js";
 import { DuduqSound } from "/core/audio/duduq-sound-system.js";
+import "/core/duduq-transition.js";
 import { DuduQSmartSentenceEngine } from "/core/duduq-smart-sentence-engine.js";
 import { Feedback, PrimaryAction } from "/test/matching/gold-master-candidate-v1/src/core-components.js";
 
@@ -57,10 +58,11 @@ const combinedActivity = Object.freeze({
   mechanic: "smart-sentence",
   rounds: Object.freeze([activity.rounds[0], orderRound])
 });
+const SMART_SENTENCE_TRANSITION_TIMING = Object.freeze({ cover: 190, reveal: 230, preparation: 380, cardHold: 520 });
 
 if (mode === "combined") {
   root.className = "game-screen target-shooter-screen duduq-shared-gold-shell smart-sentence-screen";
-  root.innerHTML = `<div class="world-backdrop" aria-hidden="true"></div><div class="readability-veil" aria-hidden="true"></div><section class="game-shell smart-sentence-shell" aria-label="Smart Sentence activity"><div data-header-slot></div><div data-question-slot></div><div class="smart-sentence-combined-round" data-round-area></div></section><div class="result-fx-layer success-celebration-layer" aria-hidden="true"></div><section class="feedback-ribbon" data-feedback="" aria-live="polite" aria-atomic="true" hidden><img class="feedback-mascot" data-asset="feedback-mascot" alt=""><div class="feedback-copy"><h2 data-slot="feedback-title"></h2><p data-slot="feedback-detail"></p></div><button class="feedback-action game-button" type="button"><span data-slot="feedback-action"></span></button></section>`;
+  root.innerHTML = `<div class="world-backdrop" aria-hidden="true"></div><div class="readability-veil" aria-hidden="true"></div><section class="game-shell smart-sentence-shell" aria-label="Smart Sentence activity"><div data-header-slot></div><div data-question-slot></div><div class="smart-sentence-combined-round" data-round-area></div></section><div class="result-fx-layer success-celebration-layer" aria-hidden="true"></div><section class="feedback-ribbon" data-feedback="" aria-live="polite" aria-atomic="true" hidden><img class="feedback-mascot" data-asset="feedback-mascot" alt=""><div class="feedback-copy"><h2 data-slot="feedback-title"></h2><p data-slot="feedback-detail"></p></div><button class="feedback-action game-button" type="button"><span data-slot="feedback-action"></span></button></section><main class="official-transition smart-sentence-official-transition" aria-live="polite" aria-label="Transição para a próxima etapa" hidden><header class="transition-hud" aria-label="Progresso da atividade"><div class="transition-hud-brand"><img class="transition-hud-mascot" data-asset="transition-hud-mascot" alt=""><div><strong>SMART SENTENCE</strong><span>Complete a frase e organize as palavras.</span></div></div><div class="transition-hud-meter" role="progressbar" aria-label="Progresso da atividade" aria-valuemin="0" aria-valuemax="2" aria-valuenow="2"><i></i></div><b class="transition-hud-count">2 / 2</b><span class="transition-hud-fullscreen" aria-hidden="true">⌗</span></header><section class="official-transition-card"><div class="transition-mascot-scale"><img class="official-transition-mascot" data-asset="transition-mascot" alt="DuduQ celebrando"></div><h1 class="official-transition-title">Muito bem!</h1><p class="official-transition-copy">Preparando a próxima etapa...</p><div class="official-transition-progress" aria-label="Carregando a próxima etapa"><span></span></div><p class="official-transition-next">Sua próxima etapa está chegando!</p><div class="official-transition-dots" aria-hidden="true"><i></i><i></i><i></i></div></section></main>`;
   root.querySelector(".world-backdrop").style.backgroundImage = `url("${window.DuduQAssets?.assets?.backgrounds?.["1"] || ""}")`;
 
   const engine = new DuduQSmartSentenceEngine(combinedActivity);
@@ -72,6 +74,7 @@ if (mode === "combined") {
 
   const roundArea = root.querySelector("[data-round-area]");
   const feedback = root.querySelector(".feedback-ribbon");
+  const officialTransition = root.querySelector(".smart-sentence-official-transition");
   const resultFx = ResultFX(root.querySelector(".success-celebration-layer"));
   let mountedRound = "";
   let activeUi = null;
@@ -315,6 +318,8 @@ if (mode === "combined") {
         const current = engine.snapshot();
         if (current.round.mode === "complete") current.selected.forEach((option) => engine.remove(option.id));
         else current.selected.forEach((option, index) => { if (option && option.answerKey !== current.round.answer[index]) engine.remove(option.id); });
+      } else if (snapshot.roundIndex < snapshot.totalRounds - 1) {
+        void advanceToNextRound();
       } else engine.continue();
     });
     feedback.querySelector('[data-slot="feedback-title"]').textContent = outcome === "correct" ? "Correto!" : "Ops!";
@@ -322,6 +327,40 @@ if (mode === "combined") {
       ? snapshot.round.mode === "complete" ? "A frase está completa." : "As palavras estão na ordem correta."
       : snapshot.round.mode === "complete" ? "Escolha outra palavra e tente novamente." : "Reorganize as palavras e tente novamente.";
     feedback.querySelector('[data-slot="feedback-action"]').textContent = outcome === "correct" ? "CONTINUAR" : "TENTAR NOVAMENTE";
+  }
+
+  async function advanceToNextRound() {
+    const transition = window.DuduQTransition;
+    if (typeof transition?.swap !== "function") throw new Error("DuduQ canonical transition is unavailable.");
+    const options = {
+      target: root,
+      coverDurationMs: SMART_SENTENCE_TRANSITION_TIMING.cover,
+      revealDurationMs: SMART_SENTENCE_TRANSITION_TIMING.reveal,
+      soundEnabled: false
+    };
+    const transitionMascot = officialTransition.querySelector('[data-asset="transition-mascot"]');
+    const hudMascot = officialTransition.querySelector('[data-asset="transition-hud-mascot"]');
+    const progress = officialTransition.querySelector(".official-transition-progress span");
+    officialTransition.style.backgroundImage = `url("${window.DuduQAssets?.assets?.backgrounds?.["1"] || ""}")`;
+    transitionMascot.src = window.DuduQAssets?.assets?.mascots?.correct || "";
+    hudMascot.src = window.DuduQAssets?.assets?.mascots?.hud || window.DuduQAssets?.assets?.mascots?.correct || "";
+    progress.style.animation = "none";
+    progress.getBoundingClientRect();
+    progress.style.removeProperty("animation");
+
+    await transition.swap(async () => {
+      officialTransition.hidden = false;
+      await Promise.all([
+        transitionMascot.decode?.().catch(() => {}),
+        hudMascot.decode?.().catch(() => {}),
+        new Promise((resolve) => window.setTimeout(resolve, SMART_SENTENCE_TRANSITION_TIMING.preparation))
+      ]);
+    }, options);
+    await new Promise((resolve) => window.setTimeout(resolve, SMART_SENTENCE_TRANSITION_TIMING.cardHold));
+    return transition.swap(() => {
+      officialTransition.hidden = true;
+      engine.continue();
+    }, options);
   }
 
   function renderCombined(snapshot = engine.snapshot()) {
