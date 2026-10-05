@@ -1,0 +1,540 @@
+{
+  "source": "RECOVERED_LIVE_PENPOT_CAPTURE",
+  "questionHudNodeId": "50f514fe-4a8a-804d-8008-aa3ca706f229",
+  "questionHud": {
+    "penpotId": "50f514fe-4a8a-804d-8008-aa3ca706f229",
+    "semanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud",
+    "name": "02 — QUESTION HUD",
+    "type": "group",
+    "role": "element",
+    "pageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
+    "boardId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+    "screenId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+    "parentId": null,
+    "parentSemanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter",
+    "children": [
+      {
+        "penpotId": "50f514fe-4a8a-804d-8008-aa3ca706f22a",
+        "semanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud.02-question-hud",
+        "name": "02 — QUESTION HUD",
+        "type": "rectangle",
+        "role": "element",
+        "pageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
+        "boardId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+        "screenId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+        "parentId": null,
+        "parentSemanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud",
+        "children": [],
+        "componentId": null,
+        "componentRef": null,
+        "instanceOf": null,
+        "authoringSource": false,
+        "ownership": "UNKNOWN",
+        "geometry": {
+          "x": -21888,
+          "y": -20465,
+          "width": 720,
+          "height": 86,
+          "rotation": 0
+        },
+        "layout": {
+          "constraints": {
+            "horizontal": "left",
+            "vertical": "top"
+          }
+        },
+        "appearance": {
+          "fills": [
+            {
+              "fillColor": "#fffdf7",
+              "fillOpacity": 1,
+              "fillColorGradient": null,
+              "fillColorRefFile": null,
+              "fillColorRefId": null,
+              "fillImage": null
+            }
+          ],
+          "strokes": [
+            {
+              "strokeColor": "#e8d3a6",
+              "strokeColorRefFile": null,
+              "strokeColorRefId": null,
+              "strokeOpacity": 1,
+              "strokeStyle": "solid",
+              "strokeWidth": 0.888889,
+              "strokeAlignment": "inner",
+              "strokeCapStart": null,
+              "strokeCapEnd": null,
+              "strokeColorGradient": null,
+              "strokeImage": null
+            }
+          ],
+          "radius": 25,
+          "opacity": 1
+        },
+        "effects": {
+          "shadows": [
+            {
+              "id": "50f514fe-4a8a-804d-8008-aa3b1717c443",
+              "style": "drop-shadow",
+              "offsetX": 0,
+              "offsetY": 5,
+              "blur": 0,
+              "spread": 0,
+              "hidden": false,
+              "color": {
+                "color": "#b8a68e",
+                "opacity": 1
+              }
+            }
+          ],
+          "blur": null
+        },
+        "typography": {
+          "family": null,
+          "size": null,
+          "weight": null,
+          "lineHeight": null,
+          "letterSpacing": null,
+          "alignment": null
+        },
+        "asset": {
+          "type": null,
+          "reference": null,
+          "source": null
+        },
+        "visibility": true,
+        "state": null,
+        "metadata": {
+          "penpotProperties": {},
+          "fingerprint": "799b2b4174cb"
+        }
+      },
+      {
+        "penpotId": "50f514fe-4a8a-804d-8008-aa3ca706f22b",
+        "semanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud.instruction",
+        "name": "INSTRUCTION",
+        "type": "text",
+        "role": "label",
+        "pageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
+        "boardId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+        "screenId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+        "parentId": null,
+        "parentSemanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud",
+        "children": [],
+        "componentId": null,
+        "componentRef": null,
+        "instanceOf": null,
+        "authoringSource": false,
+        "ownership": "UNKNOWN",
+        "geometry": {
+          "x": -21843.109999999753,
+          "y": -20447.110000000015,
+          "width": 276,
+          "height": 15,
+          "rotation": 0
+        },
+        "layout": {
+          "constraints": {
+            "horizontal": "left",
+            "vertical": "top"
+          }
+        },
+        "appearance": {
+          "fills": [
+            {
+              "fillColor": "#7f9788",
+              "fillOpacity": 1,
+              "fillColorGradient": null,
+              "fillColorRefFile": null,
+              "fillColorRefId": null,
+              "fillImage": null
+            }
+          ],
+          "strokes": [],
+          "radius": null,
+          "opacity": 1
+        },
+        "effects": {
+          "shadows": [],
+          "blur": null
+        },
+        "typography": {
+          "family": "Inter",
+          "size": "12.953790921693384",
+          "weight": "600",
+          "lineHeight": "1.0979202219551534",
+          "letterSpacing": "0",
+          "alignment": "left"
+        },
+        "asset": {
+          "type": null,
+          "reference": null,
+          "source": null
+        },
+        "visibility": true,
+        "state": null,
+        "metadata": {
+          "penpotProperties": {},
+          "fingerprint": "c4d709582e19"
+        }
+      },
+      {
+        "penpotId": "50f514fe-4a8a-804d-8008-aa3ca706f22c",
+        "semanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud.question",
+        "name": "QUESTION",
+        "type": "text",
+        "role": "label",
+        "pageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
+        "boardId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+        "screenId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+        "parentId": null,
+        "parentSemanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud",
+        "children": [],
+        "componentId": null,
+        "componentRef": null,
+        "instanceOf": null,
+        "authoringSource": false,
+        "ownership": "UNKNOWN",
+        "geometry": {
+          "x": -21843.109999999753,
+          "y": -20428.670000000013,
+          "width": 535,
+          "height": 32,
+          "rotation": 0
+        },
+        "layout": {
+          "constraints": {
+            "horizontal": "left",
+            "vertical": "top"
+          }
+        },
+        "appearance": {
+          "fills": [
+            {
+              "fillColor": "#364b43",
+              "fillOpacity": 1,
+              "fillColorGradient": null,
+              "fillColorRefFile": null,
+              "fillColorRefId": null,
+              "fillImage": null
+            }
+          ],
+          "strokes": [],
+          "radius": null,
+          "opacity": 1
+        },
+        "effects": {
+          "shadows": [],
+          "blur": null
+        },
+        "typography": {
+          "family": "Inter",
+          "size": "21.963204549255728",
+          "weight": "900",
+          "lineHeight": "1.4165107114575133",
+          "letterSpacing": "0",
+          "alignment": "left"
+        },
+        "asset": {
+          "type": null,
+          "reference": null,
+          "source": null
+        },
+        "visibility": true,
+        "state": null,
+        "metadata": {
+          "penpotProperties": {},
+          "fingerprint": "c4d709582e19"
+        }
+      }
+    ],
+    "componentId": null,
+    "componentRef": null,
+    "instanceOf": null,
+    "authoringSource": false,
+    "ownership": "UNKNOWN",
+    "geometry": {
+      "x": -21888,
+      "y": -20465,
+      "width": 720,
+      "height": 86,
+      "rotation": 0
+    },
+    "layout": {
+      "constraints": {
+        "horizontal": "left",
+        "vertical": "top"
+      }
+    },
+    "appearance": {
+      "fills": [],
+      "strokes": [],
+      "radius": null,
+      "opacity": null
+    },
+    "effects": {
+      "shadows": [],
+      "blur": null
+    },
+    "typography": {
+      "family": null,
+      "size": null,
+      "weight": null,
+      "lineHeight": null,
+      "letterSpacing": null,
+      "alignment": null
+    },
+    "asset": {
+      "type": null,
+      "reference": null,
+      "source": null
+    },
+    "visibility": true,
+    "state": null,
+    "metadata": {
+      "penpotProperties": {},
+      "fingerprint": "0fd8bdea43a4"
+    }
+  },
+  "descendants": [
+    {
+      "penpotId": "50f514fe-4a8a-804d-8008-aa3ca706f22a",
+      "semanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud.02-question-hud",
+      "name": "02 — QUESTION HUD",
+      "type": "rectangle",
+      "role": "element",
+      "pageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
+      "boardId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+      "screenId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+      "parentId": "50f514fe-4a8a-804d-8008-aa3ca706f229",
+      "parentSemanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud",
+      "children": [],
+      "componentId": null,
+      "componentRef": null,
+      "instanceOf": null,
+      "authoringSource": false,
+      "ownership": "UNKNOWN",
+      "geometry": {
+        "x": -21888,
+        "y": -20465,
+        "width": 720,
+        "height": 86,
+        "rotation": 0
+      },
+      "layout": {
+        "constraints": {
+          "horizontal": "left",
+          "vertical": "top"
+        }
+      },
+      "appearance": {
+        "fills": [
+          {
+            "fillColor": "#fffdf7",
+            "fillOpacity": 1,
+            "fillColorGradient": null,
+            "fillColorRefFile": null,
+            "fillColorRefId": null,
+            "fillImage": null
+          }
+        ],
+        "strokes": [
+          {
+            "strokeColor": "#e8d3a6",
+            "strokeColorRefFile": null,
+            "strokeColorRefId": null,
+            "strokeOpacity": 1,
+            "strokeStyle": "solid",
+            "strokeWidth": 0.888889,
+            "strokeAlignment": "inner",
+            "strokeCapStart": null,
+            "strokeCapEnd": null,
+            "strokeColorGradient": null,
+            "strokeImage": null
+          }
+        ],
+        "radius": 25,
+        "opacity": 1
+      },
+      "effects": {
+        "shadows": [
+          {
+            "id": "50f514fe-4a8a-804d-8008-aa3b1717c443",
+            "style": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 5,
+            "blur": 0,
+            "spread": 0,
+            "hidden": false,
+            "color": {
+              "color": "#b8a68e",
+              "opacity": 1
+            }
+          }
+        ],
+        "blur": null
+      },
+      "typography": {
+        "family": null,
+        "size": null,
+        "weight": null,
+        "lineHeight": null,
+        "letterSpacing": null,
+        "alignment": null
+      },
+      "asset": {
+        "type": null,
+        "reference": null,
+        "source": null
+      },
+      "visibility": true,
+      "state": null,
+      "metadata": {
+        "penpotProperties": {},
+        "fingerprint": "799b2b4174cb"
+      },
+      "parentName": "02 — QUESTION HUD"
+    },
+    {
+      "penpotId": "50f514fe-4a8a-804d-8008-aa3ca706f22b",
+      "semanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud.instruction",
+      "name": "INSTRUCTION",
+      "type": "text",
+      "role": "label",
+      "pageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
+      "boardId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+      "screenId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+      "parentId": "50f514fe-4a8a-804d-8008-aa3ca706f229",
+      "parentSemanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud",
+      "children": [],
+      "componentId": null,
+      "componentRef": null,
+      "instanceOf": null,
+      "authoringSource": false,
+      "ownership": "UNKNOWN",
+      "geometry": {
+        "x": -21843.109999999753,
+        "y": -20447.110000000015,
+        "width": 276,
+        "height": 15,
+        "rotation": 0
+      },
+      "layout": {
+        "constraints": {
+          "horizontal": "left",
+          "vertical": "top"
+        }
+      },
+      "appearance": {
+        "fills": [
+          {
+            "fillColor": "#7f9788",
+            "fillOpacity": 1,
+            "fillColorGradient": null,
+            "fillColorRefFile": null,
+            "fillColorRefId": null,
+            "fillImage": null
+          }
+        ],
+        "strokes": [],
+        "radius": null,
+        "opacity": 1
+      },
+      "effects": {
+        "shadows": [],
+        "blur": null
+      },
+      "typography": {
+        "family": "Inter",
+        "size": "12.953790921693384",
+        "weight": "600",
+        "lineHeight": "1.0979202219551534",
+        "letterSpacing": "0",
+        "alignment": "left"
+      },
+      "asset": {
+        "type": null,
+        "reference": null,
+        "source": null
+      },
+      "visibility": true,
+      "state": null,
+      "metadata": {
+        "penpotProperties": {},
+        "fingerprint": "c4d709582e19"
+      },
+      "parentName": "02 — QUESTION HUD"
+    },
+    {
+      "penpotId": "50f514fe-4a8a-804d-8008-aa3ca706f22c",
+      "semanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud.question",
+      "name": "QUESTION",
+      "type": "text",
+      "role": "label",
+      "pageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
+      "boardId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+      "screenId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+      "parentId": "50f514fe-4a8a-804d-8008-aa3ca706f229",
+      "parentSemanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud",
+      "children": [],
+      "componentId": null,
+      "componentRef": null,
+      "instanceOf": null,
+      "authoringSource": false,
+      "ownership": "UNKNOWN",
+      "geometry": {
+        "x": -21843.109999999753,
+        "y": -20428.670000000013,
+        "width": 535,
+        "height": 32,
+        "rotation": 0
+      },
+      "layout": {
+        "constraints": {
+          "horizontal": "left",
+          "vertical": "top"
+        }
+      },
+      "appearance": {
+        "fills": [
+          {
+            "fillColor": "#364b43",
+            "fillOpacity": 1,
+            "fillColorGradient": null,
+            "fillColorRefFile": null,
+            "fillColorRefId": null,
+            "fillImage": null
+          }
+        ],
+        "strokes": [],
+        "radius": null,
+        "opacity": 1
+      },
+      "effects": {
+        "shadows": [],
+        "blur": null
+      },
+      "typography": {
+        "family": "Inter",
+        "size": "21.963204549255728",
+        "weight": "900",
+        "lineHeight": "1.4165107114575133",
+        "letterSpacing": "0",
+        "alignment": "left"
+      },
+      "asset": {
+        "type": null,
+        "reference": null,
+        "source": null
+      },
+      "visibility": true,
+      "state": null,
+      "metadata": {
+        "penpotProperties": {},
+        "fingerprint": "c4d709582e19"
+      },
+      "parentName": "02 — QUESTION HUD"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1366, initial-scale=1">
+  <title>DuduQ — Drag & Drop — Penpot Master Idle</title>
+  <style>
+    :root { --ink:#173b42; --cream:#fff7dc; --wood:#8d5832; --wood-dark:#5e3928; --gold:#ffc947; --blue:#3d9fe0; --green:#66b866; --coral:#ef7e70; }
+    * { box-sizing:border-box; }
+    html,body { margin:0; width:1366px; height:768px; overflow:hidden; font-family:"Trebuchet MS",sans-serif; color:var(--ink); }
+    .board { position:relative; width:1366px; height:768px; overflow:hidden; }
+    .background-image { position:absolute; inset:0; width:1366px; height:768px; object-fit:cover; }
+    .world-tint { position:absolute; inset:0; background:rgba(233,255,206,.15); }
+    .header-shell { position:absolute; left:155px; top:18px; width:1056px; height:94px; display:flex; align-items:center; gap:18px; padding:4px 20px; border:2px solid #e8f2d9; border-radius:28px; background:#fffdf5; box-shadow:0 6px 0 rgba(57,94,59,.28),0 13px 22px rgba(24,67,45,.20); }
+    .mascot-image { width:102px; height:86px; object-fit:contain; }
+    .activity-copy { width:205px; }
+    .activity-copy strong { display:block; font-size:24px; letter-spacing:.4px; }
+    .activity-copy span { display:block; margin-top:2px; color:#607e72; font-size:13px; font-weight:bold; }
+    .progress-group { width:350px; height:16px; padding:2px; border-radius:20px; background:#d6e8dd; box-shadow:inset 0 2px 2px rgba(50,94,73,.24); }
+    .progress-fill { width:42%; height:12px; border-radius:16px; background:var(--blue); border:1px solid #2584c3; }
+    .step-badge { margin-left:auto; padding:11px 15px; border:1px solid #d9b85b; border-radius:17px; background:#fff0b5; box-shadow:0 3px 0 #b9944d; font-weight:900; }
+    .icon-button { width:56px; height:56px; display:grid; place-items:center; border:0; border-radius:18px; background:var(--blue); color:#fff; box-shadow:0 5px 0 #196293; font-size:26px; font-weight:900; }
+    .question-hud { position:absolute; left:323px; top:138px; width:720px; height:86px; padding:10px 104px 10px 42px; border:2px solid #efd79f; border-radius:25px; background:#fff8e5; box-shadow:0 5px 0 rgba(100,72,46,.33),0 10px 18px rgba(33,70,49,.18); }
+    .question-hud p { margin:0; color:#668175; font-size:12px; font-weight:900; letter-spacing:.6px; }
+    .question-hud h1 { margin:5px 0 0; font-size:22px; letter-spacing:.2px; }
+    .audio-hud-button { position:absolute; right:14px; top:14px; }
+    .focus-stage { position:absolute; left:118px; top:254px; width:1130px; height:394px; padding:20px 28px 82px; border:3px solid #3c7548; border-radius:38px; background:#609a59; box-shadow:0 11px 0 rgba(48,76,39,.44),0 22px 34px rgba(18,65,40,.25); }
+    .stage-rim { position:absolute; left:20px; top:20px; width:1084px; height:286px; border:2px solid rgba(255,249,203,.42); border-radius:28px; background:#79ad66; }
+    .stage-title { position:relative; margin:1px 0 12px; text-align:center; color:#fff7d7; font-size:15px; letter-spacing:1px; font-weight:900; text-shadow:0 2px #477747; }
+    .destination-row { position:relative; display:flex; justify-content:center; gap:35px; }
+    .destination-group { position:relative; width:292px; height:242px; padding:14px 14px 0; border-radius:28px; background:#e3bf7d; box-shadow:0 8px 0 #7b4c30; }
+    .destination-group::before { content:""; position:absolute; left:14px; top:14px; width:264px; height:172px; border-radius:20px; background:#4a7b53; }
+    .scene-image, .farewell-scene { position:relative; width:264px; height:172px; display:block; border:4px solid #fff0c3; border-radius:20px; object-fit:cover; background:#d5edf0; }
+    .farewell-scene { overflow:hidden; }
+    .farewell-scene svg { width:264px; height:172px; display:block; }
+    .label-holder { position:absolute; left:37px; bottom:13px; width:218px; height:36px; display:grid; place-items:center; border-radius:11px; background:#f7db94; box-shadow:inset 0 2px 0 rgba(255,255,255,.55); color:#27454a; font-size:14px; font-weight:900; letter-spacing:.4px; }
+    .label-socket { position:absolute; left:24px; bottom:53px; width:244px; height:18px; border-radius:14px; background:#4c382b; box-shadow:inset 0 3px 0 rgba(0,0,0,.25); }
+    .item-tray { position:absolute; left:289px; bottom:18px; width:552px; height:76px; display:flex; align-items:center; justify-content:center; gap:16px; padding:10px 18px; border:2px solid #f3ce84; border-radius:24px; background:#a66a3b; box-shadow:0 7px 0 #5f3928; }
+    .audio-token { position:relative; width:154px; height:52px; display:flex; align-items:center; gap:11px; padding:0 15px; border:0; border-radius:15px; background:#fff3c4; box-shadow:0 6px 0 #71442e; color:var(--ink); font:900 20px "Trebuchet MS",sans-serif; }
+    .audio-token:nth-child(2) { background:#dff3ff; }
+    .audio-token:nth-child(3) { background:#ffd8a4; }
+    .token-grip { color:#9b613c; font-size:18px; letter-spacing:-4px; }
+    .token-speaker { width:24px; height:24px; display:grid; place-items:center; border-radius:50%; background:var(--blue); color:#fff; font-size:13px; }
+    .idle-note { position:absolute; left:26px; bottom:13px; padding:7px 10px; border-radius:10px; background:rgba(23,59,66,.78); color:#fff5d1; font-size:10px; font-weight:bold; letter-spacing:.35px; }
+  </style>
+</head>
+<body>
+  <main class="board" data-penpot-group="DUDUQ Drag Drop Master Idle">
+    <img class="background-image" data-penpot-layer="00 Background Image" src="https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Templates/1%C2%BA%20ano%20-whispering-woods.png" alt="Whispering Woods">
+    <div class="world-tint" data-penpot-layer="00 World Tint"></div>
+
+    <header class="header-shell" data-penpot-group="01 Header">
+      <img class="mascot-image" data-penpot-layer="Mascot Image" src="../../../../core/assets/duduq-hud-mascot.png" alt="Mascote DuduQ">
+      <div class="activity-copy" data-penpot-group="Activity Copy"><strong>ENGLISH</strong><span>Arraste cada áudio para a cena correspondente</span></div>
+      <div class="progress-group" data-penpot-group="Progress"><div class="progress-fill"></div></div>
+      <div class="step-badge" data-penpot-layer="Step Badge">4 / 10</div>
+      <button class="icon-button" data-penpot-group="Fullscreen Button" aria-label="Tela cheia">⛶</button>
+    </header>
+
+    <section class="question-hud" data-penpot-group="02 Question HUD">
+      <p>OUÇA E ARRASTE CADA ÁUDIO PARA A CENA CORRESPONDENTE</p><h1>I'M AUGUSTO.</h1>
+      <button class="icon-button audio-hud-button" data-penpot-group="Audio Button" aria-label="Ouvir instrução">♪</button>
+    </section>
+
+    <section class="focus-stage" data-penpot-group="03 Game World">
+      <div class="stage-rim" data-penpot-layer="Stage Inner Surface"></div>
+      <p class="stage-title" data-penpot-layer="Stage Title">ARRASTE AS PEÇAS PARA A CENA CERTA</p>
+      <div class="destination-row" data-penpot-group="04 Destination Scenes">
+        <article class="destination-group" data-penpot-group="Destination 01 — Apresentação">
+          <img class="scene-image" data-penpot-layer="Scene Image" src="https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/My%20name.png" alt="Criança se apresentando">
+          <div class="label-socket" data-penpot-layer="Drop Target Socket"></div><div class="label-holder" data-penpot-layer="Scene Label">APRESENTAÇÃO</div>
+        </article>
+        <article class="destination-group" data-penpot-group="Destination 02 — Despedida">
+          <div class="farewell-scene" data-penpot-group="Editable Farewell Illustration" aria-label="Cena de despedida">
+            <svg viewBox="0 0 264 172" role="img" aria-label="Criança acenando despedida"><rect width="264" height="172" fill="#9cdef1"/><circle cx="210" cy="33" r="18" fill="#ffe16d"/><path d="M0 130 Q48 92 95 130 T190 124 T264 118 V172 H0Z" fill="#79bb69"/><rect x="24" y="82" width="12" height="50" rx="6" fill="#80512e"/><circle cx="30" cy="67" r="29" fill="#5b9d53"/><circle cx="113" cy="73" r="30" fill="#f5b278"/><path d="M83 73 Q113 31 143 72 V82 H83Z" fill="#633c32"/><circle cx="102" cy="73" r="3" fill="#173b42"/><circle cx="124" cy="73" r="3" fill="#173b42"/><path d="M106 87 Q113 92 120 87" fill="none" stroke="#b55d54" stroke-width="3" stroke-linecap="round"/><path d="M87 103 Q113 92 140 104 L150 153 H77Z" fill="#f4d266"/><path d="M137 108 L167 73" fill="none" stroke="#f5b278" stroke-width="11" stroke-linecap="round"/><path d="M165 72 l6 -8 M166 75 l10 -1 M164 78 l5 7" stroke="#f5b278" stroke-width="4" stroke-linecap="round"/><text x="168" y="112" fill="#fff" font-family="Trebuchet MS" font-size="16" font-weight="900">BYE!</text></svg>
+          </div>
+          <div class="label-socket" data-penpot-layer="Drop Target Socket"></div><div class="label-holder" data-penpot-layer="Scene Label">DESPEDIDA</div>
+        </article>
+        <article class="destination-group" data-penpot-group="Destination 03 — Boa Tarde">
+          <img class="scene-image" data-penpot-layer="Scene Image" src="https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/Good%20Afternoon.png" alt="Cena de boa tarde">
+          <div class="label-socket" data-penpot-layer="Drop Target Socket"></div><div class="label-holder" data-penpot-layer="Scene Label">BOA TARDE</div>
+        </article>
+      </div>
+      <nav class="item-tray" data-penpot-group="07 Item Tray" aria-label="Áudios para arrastar">
+        <button class="audio-token" data-penpot-group="Audio Token 01"><span class="token-grip">••</span><span class="token-speaker">♪</span><span>1</span></button>
+        <button class="audio-token" data-penpot-group="Audio Token 02"><span class="token-grip">••</span><span class="token-speaker">♪</span><span>2</span></button>
+        <button class="audio-token" data-penpot-group="Audio Token 03"><span class="token-grip">••</span><span class="token-speaker">♪</span><span>3</span></button>
+      </nav>
+    </section>
+    <aside class="idle-note" data-penpot-layer="09 Idle Reference">MASTER IDLE · drop targets vazios · tokens prontos para arrastar</aside>
+  </main>
+</body>
+</html>

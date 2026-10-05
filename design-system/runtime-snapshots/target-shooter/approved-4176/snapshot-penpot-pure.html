@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1366, initial-scale=1">
+  <title>DuduQ Target Shooter — Penpot design bridge</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; width: 1366px; height: 768px; overflow: hidden; }
+    body { font-family: "Trebuchet MS", sans-serif; color: #364b43; }
+    .duduq-screen { position: relative; width: 1366px; height: 768px; overflow: hidden; margin: 0; }
+    .duduq-background { position: absolute; left: 0; top: 0; width: 1366px; height: 768px; object-fit: cover; }
+
+    .duduq-header { position: absolute; left: 155px; top: 12px; width: 1056px; height: 94px; border-radius: 28px; background: #fffdf7; box-shadow: 0 5px 0 rgba(117,145,123,.33), 0 12px 26px rgba(23,60,42,.20); }
+    .duduq-mascot { position: absolute; left: 16px; top: 8px; width: 82px; height: 76px; object-fit: contain; }
+    .duduq-title { position: absolute; left: 116px; top: 21px; width: 190px; margin: 0; font-family: "Trebuchet MS", sans-serif; font-size: 25px; font-weight: 900; line-height: 23px; letter-spacing: -.5px; }
+    .duduq-progress-track { position: absolute; left: 330px; top: 39px; width: 482px; height: 18px; overflow: hidden; border-radius: 20px; background: #dce8df; box-shadow: inset 0 1px 2px rgba(48,80,68,.22); }
+    .duduq-progress-fill { position: absolute; left: 0; top: 0; width: 193px; height: 18px; border-radius: 20px; background: linear-gradient(#6acbfb, #278fd2); }
+    .duduq-score { position: absolute; left: 879px; top: 27px; width: 76px; height: 42px; padding-top: 11px; border-radius: 18px; background: #fff0b5; box-shadow: 0 3px 0 #b49d50, 0 6px 10px rgba(66,63,37,.14); color: #586654; font-size: 16px; font-weight: 900; line-height: 18px; text-align: center; }
+    .duduq-fullscreen { position: absolute; left: 976px; top: 20px; width: 56px; height: 56px; border-radius: 18px; background: linear-gradient(#8fd6ff, #349fdf 50%, #2a82c0); box-shadow: 0 4px 0 #175c93, 0 8px 12px rgba(37,59,83,.35); }
+    .duduq-fullscreen-icon { position: absolute; left: 15px; top: 15px; width: 26px; height: 26px; }
+
+    .duduq-question { position: absolute; left: 273px; top: 130px; width: 820px; height: 86px; border-radius: 25px; background: #fffdf7; box-shadow: 0 5px 0 rgba(117,145,123,.33), 0 12px 26px rgba(23,60,42,.20); }
+    .duduq-question-label { position: absolute; left: 44px; top: 18px; margin: 0; color: #7f9788; font-size: 13px; font-weight: 900; line-height: 15px; }
+    .duduq-question-prompt { position: absolute; left: 44px; top: 39px; margin: 0; color: #364b43; font-family: "Trebuchet MS", sans-serif; font-size: 22px; font-weight: 900; line-height: 26px; letter-spacing: -.25px; }
+    .duduq-audio { position: absolute; left: 746px; top: 15px; width: 56px; height: 56px; border-radius: 18px; background: linear-gradient(#ffc64e, #e69426 57%, #cc7615); box-shadow: 0 4px 0 #ad6513, 0 8px 12px rgba(83,59,37,.25); }
+    .duduq-audio-icon { position: absolute; left: 14px; top: 14px; width: 28px; height: 28px; }
+
+    .target { position: absolute; width: 184px; height: 236px; }
+    .target-dog { left: 196px; top: 287px; }
+    .target-cat { left: 460px; top: 220px; }
+    .target-rabbit { left: 705px; top: 305px; }
+    .target-fish { left: 970px; top: 236px; }
+    .target-base { position: absolute; left: 0; top: 0; width: 184px; height: 236px; object-fit: contain; }
+    .target-animal { position: absolute; left: 45px; top: 53px; width: 93px; height: 105px; object-fit: contain; }
+    .target-dog .target-animal { top: 41px; }
+    .target-cat .target-animal { left: 44px; top: 53px; }
+    .target-rabbit .target-animal { left: 48px; top: 57px; width: 108px; height: 114px; }
+    .target-fish .target-animal { left: 45px; top: 58px; width: 98px; height: 98px; }
+
+    .magic-cannon { position: absolute; left: 503px; top: 542px; width: 360px; height: 220px; }
+    .magic-cannon-base { position: absolute; left: 26px; top: 88px; width: 308px; height: 132px; object-fit: contain; }
+    .magic-cannon-support { position: absolute; left: 28px; top: 68px; width: 304px; height: 152px; object-fit: contain; }
+    .magic-cannon-barrel { position: absolute; left: 86px; top: 0; width: 188px; height: 210px; object-fit: contain; }
+  </style>
+</head>
+<body>
+  <main class="duduq-screen" aria-label="DuduQ Target Shooter">
+    <img class="duduq-background" src="https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Templates/1%C2%BA%20ano%20-whispering-woods.png" alt="">
+    <header class="duduq-header" aria-label="Target Shooter header">
+      <img class="duduq-mascot" src="https://raw.githubusercontent.com/augustoborgessousa93/DuduQ-Engine/recovery/duduq-20260919-workbench-master/core/assets/duduq-hud-mascot.png" alt="DuduQ">
+      <h1 class="duduq-title">TARGET<br>SHOOTER</h1>
+      <div class="duduq-progress-track" aria-label="Progress 4 of 10"><div class="duduq-progress-fill"></div></div>
+      <div class="duduq-score">4 / 10</div>
+      <div class="duduq-fullscreen" aria-label="Fullscreen"><svg class="duduq-fullscreen-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg></div>
+    </header>
+    <section class="duduq-question" aria-label="Question">
+      <p class="duduq-question-label">OUÇA E ACERTE O ALVO CORRETO</p>
+      <p class="duduq-question-prompt">WHICH ONE IS ‘DOG’?</p>
+      <div class="duduq-audio" aria-label="Play audio"><svg class="duduq-audio-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h4l5 4V6L8 10H4z"/><path d="M16 9.5a4 4 0 0 1 0 5M18.7 6.8a8 8 0 0 1 0 10.4"/></svg></div>
+    </section>
+    <div class="target target-dog" aria-label="DOG target"><img class="target-base" src="https://raw.githubusercontent.com/augustoborgessousa93/DuduQ-Engine/recovery/duduq-20260919-workbench-master/asset-alvo.png" alt=""><img class="target-animal" src="https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/pet-dog-cachorro.png" alt="Dog"></div>
+    <div class="target target-cat" aria-label="CAT target"><img class="target-base" src="https://raw.githubusercontent.com/augustoborgessousa93/DuduQ-Engine/recovery/duduq-20260919-workbench-master/asset-alvo.png" alt=""><img class="target-animal" src="https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/pet-cat-gato.png" alt="Cat"></div>
+    <div class="target target-rabbit" aria-label="RABBIT target"><img class="target-base" src="https://raw.githubusercontent.com/augustoborgessousa93/DuduQ-Engine/recovery/duduq-20260919-workbench-master/asset-alvo.png" alt=""><img class="target-animal" src="https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/pet-rabbit-coelho.png" alt="Rabbit"></div>
+    <div class="target target-fish" aria-label="FISH target"><img class="target-base" src="https://raw.githubusercontent.com/augustoborgessousa93/DuduQ-Engine/recovery/duduq-20260919-workbench-master/asset-alvo.png" alt=""><img class="target-animal" src="https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/main/Imagens%20Ilustrativa/pet-fish-peixe.png" alt="Fish"></div>
+    <div class="magic-cannon" aria-label="Magic Cannon"><img class="magic-cannon-base" src="https://raw.githubusercontent.com/augustoborgessousa93/DuduQ-Engine/recovery/duduq-20260919-workbench-master/test/target-shooter/gold-master-clean-v2/assets/magic-launcher-front/launcher-base-front.png" alt=""><img class="magic-cannon-support" src="https://raw.githubusercontent.com/augustoborgessousa93/DuduQ-Engine/recovery/duduq-20260919-workbench-master/test/target-shooter/gold-master-clean-v2/assets/magic-launcher-front/launcher-support-front.png" alt=""><img class="magic-cannon-barrel" src="https://raw.githubusercontent.com/augustoborgessousa93/DuduQ-Engine/recovery/duduq-20260919-workbench-master/test/target-shooter/gold-master-clean-v2/assets/magic-launcher-front/launcher-barrel-front.png" alt="Magic Cannon"></div>
+  </main>
+</body>
+</html>

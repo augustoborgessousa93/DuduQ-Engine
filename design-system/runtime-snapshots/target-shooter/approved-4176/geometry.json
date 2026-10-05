@@ -1,0 +1,74 @@
+{
+  "source": "http://127.0.0.1:4176/test/target-shooter/gold-master-clean-v2/index.html",
+  "viewport": {
+    "width": 1366,
+    "height": 768
+  },
+  "capturedAt": "2026-09-19T15:03:04.072Z",
+  "layers": [
+    {
+      "name": "Background",
+      "selector": ".world-backdrop",
+      "x": 0,
+      "y": 0,
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "name": "Header instance",
+      "selector": ".duduq-canonical-header-hud",
+      "x": 155,
+      "y": 12,
+      "width": 1056,
+      "height": 94
+    },
+    {
+      "name": "Question HUD instance",
+      "selector": ".duduq-canonical-question-hud",
+      "x": 273,
+      "y": 130,
+      "width": 820,
+      "height": 86
+    },
+    {
+      "name": "DOG",
+      "selector": ".target-shooter-target--dog",
+      "x": 196,
+      "y": 287,
+      "width": 184,
+      "height": 236
+    },
+    {
+      "name": "CAT",
+      "selector": ".target-shooter-target--cat",
+      "x": 460,
+      "y": 220,
+      "width": 184,
+      "height": 236
+    },
+    {
+      "name": "RABBIT",
+      "selector": ".target-shooter-target--rabbit",
+      "x": 705,
+      "y": 305,
+      "width": 184,
+      "height": 236
+    },
+    {
+      "name": "FISH",
+      "selector": ".target-shooter-target--fish",
+      "x": 970,
+      "y": 236,
+      "width": 184,
+      "height": 236
+    },
+    {
+      "name": "Magic Launcher",
+      "selector": ".duduq-magic-launcher",
+      "x": 503,
+      "y": 542,
+      "width": 360,
+      "height": 220
+    }
+  ]
+}

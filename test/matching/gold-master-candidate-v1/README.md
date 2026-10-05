@@ -35,7 +35,7 @@ Motion tokens incluem `--motion-fast`, `--motion-normal`, `--motion-feedback`, `
 
 - `node --test test/matching/gold-master-candidate-v1/matching-engine.test.mjs`: 7 testes de domínio/progresso.
 - `node test/matching/gold-master-candidate-v1/verify.mjs`: estados Idle/Selected/Connected/Correct/Incorrect/Loading, mouse, touch, resize do SVG, host next, 40% de progresso, zero overflow e zero exceções JS nos tamanhos `1920×1080`, `1366×768`, `1280×720`, `640×360`, `480×320`, `390×844`.
-- Capturas em `artifacts/matching-gold-master-candidate-v1/`: seis tamanhos Idle e screenshots 1366×768 Selected, Selected+Connected, Correct, Incorrect, Loading. A fonte visual Penpot foi consultada somente em leitura; a candidate preserva estrutura/composição base. Restam diferenças inerentes ao fixture/estado Idle em relação às pranchas Penpot de feedback e a regra do progresso (91% na imagem aprovada versus 40% funcional).
+- As capturas QA intermediárias em `artifacts/matching-gold-master-candidate-v1/`, `artifacts/matching-phase1/` e `artifacts/matching-phase2/` foram removidas do workspace após arquivamento externo; o harness `test/visual/matching-phase1-viewports.mjs` continua disponível para regenerar capturas. A referência visual homologada atual permanece em `design-system/runtime/screens/matching-master/visual-reference.png`.
 - Nenhum runtime, release, módulo pedagógico, outro mecanismo, remote ou Cloudflare foi alterado.
 
 ## Execução e verificação

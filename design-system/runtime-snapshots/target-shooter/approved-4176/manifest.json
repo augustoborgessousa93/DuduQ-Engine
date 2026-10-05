@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "source": "http://127.0.0.1:4176/test/target-shooter/gold-master-clean-v2/index.html",
+  "selfContained": true,
+  "screenshot": "runtime-1366x768.png",
+  "snapshot": "snapshot.html",
+  "geometry": "geometry.json",
+  "editablePriorities": [
+    "Background",
+    "Header instance",
+    "Question HUD instance",
+    "DOG",
+    "CAT",
+    "RABBIT",
+    "FISH",
+    "Magic Launcher"
+  ],
+  "unresolvedAssets": []
+}

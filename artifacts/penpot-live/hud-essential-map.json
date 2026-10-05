@@ -1,0 +1,618 @@
+{
+  "source": "PENPOT_LIVE_PLUGIN",
+  "fileId": "d8ac01df-6646-81d2-8008-a2900d806e30",
+  "pageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
+  "frame": {
+    "penpotNodeId": "50f514fe-4a8a-804d-8008-aa23c3818e55",
+    "penpotName": "TARGET SHOOTER — MASTER / IDLE",
+    "parent": "DUDUQ DESIGN SYSTEM — CONTROL PANEL",
+    "geometry": {
+      "x": -22213,
+      "y": -20598,
+      "width": 1366,
+      "height": 768,
+      "rotation": 0
+    },
+    "appearance": {
+      "fills": [
+        {
+          "fillColor": "#ffffff",
+          "fillOpacity": 1,
+          "fillColorGradient": null,
+          "fillColorRefFile": null,
+          "fillColorRefId": null,
+          "fillImage": null
+        }
+      ],
+      "strokes": [],
+      "radius": 0,
+      "opacity": 1
+    },
+    "effects": {
+      "shadows": [],
+      "blur": null
+    },
+    "typography": {
+      "family": null,
+      "size": null,
+      "weight": null,
+      "lineHeight": null,
+      "letterSpacing": null,
+      "alignment": null
+    },
+    "layout": {
+      "constraints": {
+        "horizontal": null,
+        "vertical": null
+      }
+    }
+  },
+  "header": {
+    "penpotNodeId": "855af85f-faf4-8069-8008-a8ea68c23da7",
+    "penpotName": "DUDUQ / HUD / HEADER / DUDUQ / HUD / HEADER / GOLD MASTER",
+    "parent": "DUDUQ DESIGN SYSTEM — CONTROL PANEL",
+    "geometry": {
+      "x": -19383,
+      "y": -20359,
+      "width": 1056,
+      "height": 94,
+      "rotation": 0
+    },
+    "appearance": {
+      "fills": [
+        {
+          "fillColor": null,
+          "fillOpacity": 1,
+          "fillColorGradient": {
+            "type": "linear",
+            "startX": 0.5,
+            "startY": 0,
+            "endX": 0.5,
+            "endY": 1,
+            "width": 1,
+            "stops": [
+              {
+                "color": "#fffdf7",
+                "opacity": 1,
+                "offset": 0
+              },
+              {
+                "color": "#f7fcf7",
+                "opacity": 1,
+                "offset": 0.55
+              },
+              {
+                "color": "#edf7f1",
+                "opacity": 1,
+                "offset": 1
+              }
+            ]
+          },
+          "fillColorRefFile": null,
+          "fillColorRefId": null,
+          "fillImage": null
+        }
+      ],
+      "strokes": [
+        {
+          "strokeColor": "#c9ded2",
+          "strokeColorRefFile": null,
+          "strokeColorRefId": null,
+          "strokeOpacity": 1,
+          "strokeStyle": "solid",
+          "strokeWidth": 2,
+          "strokeAlignment": "inner",
+          "strokeCapStart": null,
+          "strokeCapEnd": null,
+          "strokeColorGradient": null,
+          "strokeImage": null
+        }
+      ],
+      "radius": 28,
+      "opacity": null
+    },
+    "effects": {
+      "shadows": [
+        {
+          "id": "881bb268-25e8-800a-8008-a376f68bfdc6",
+          "style": "drop-shadow",
+          "offsetX": 0,
+          "offsetY": 7,
+          "blur": 13,
+          "spread": 0,
+          "hidden": false,
+          "color": {
+            "color": "#315143",
+            "opacity": 0.2
+          }
+        }
+      ],
+      "blur": null
+    },
+    "typography": {
+      "family": null,
+      "size": null,
+      "weight": null,
+      "lineHeight": null,
+      "letterSpacing": null,
+      "alignment": null
+    },
+    "layout": {
+      "constraints": {
+        "horizontal": "center",
+        "vertical": "top"
+      }
+    }
+  },
+  "duduLogo": {
+    "penpotNodeId": "855af85f-faf4-8069-8008-a8ea68c23daa",
+    "penpotName": "DuduQ Mascot Slot — HUD Optical Anchor",
+    "parent": "DUDUQ / HUD / HEADER / DUDUQ / HUD / HEADER / GOLD MASTER",
+    "geometry": {
+      "x": -19375,
+      "y": -20358,
+      "width": 102,
+      "height": 86,
+      "rotation": 0
+    },
+    "appearance": {
+      "fills": [],
+      "strokes": [],
+      "radius": 0,
+      "opacity": null
+    },
+    "effects": {
+      "shadows": [],
+      "blur": null
+    },
+    "typography": {
+      "family": null,
+      "size": null,
+      "weight": null,
+      "lineHeight": null,
+      "letterSpacing": null,
+      "alignment": null
+    },
+    "layout": {
+      "constraints": {
+        "horizontal": "left",
+        "vertical": "top"
+      }
+    }
+  },
+  "progress": {
+    "track": {
+      "penpotNodeId": "855af85f-faf4-8069-8008-a8ea68c23dad",
+      "penpotName": "Progress Track Depth",
+      "parent": "Header / Progress",
+      "geometry": {
+        "x": -19012,
+        "y": -20318,
+        "width": 490,
+        "height": 14,
+        "rotation": 0
+      },
+      "appearance": {
+        "fills": [
+          {
+            "fillColor": "#9cbeb0",
+            "fillOpacity": 1,
+            "fillColorGradient": null,
+            "fillColorRefFile": null,
+            "fillColorRefId": null,
+            "fillImage": null
+          }
+        ],
+        "strokes": [],
+        "radius": 10,
+        "opacity": null
+      },
+      "effects": {
+        "shadows": [
+          {
+            "id": "881bb268-25e8-800a-8008-a38950fc5442",
+            "style": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 1,
+            "blur": 3,
+            "spread": 0,
+            "hidden": false,
+            "color": {
+              "color": "#667b8a",
+              "opacity": 0.14
+            }
+          }
+        ],
+        "blur": null
+      },
+      "typography": {
+        "family": null,
+        "size": null,
+        "weight": null,
+        "lineHeight": null,
+        "letterSpacing": null,
+        "alignment": null
+      },
+      "layout": {
+        "constraints": {
+          "horizontal": "left",
+          "vertical": "top"
+        }
+      }
+    },
+    "fill": {
+      "penpotNodeId": "855af85f-faf4-8069-8008-a8ea68c23daf",
+      "penpotName": "Progress Fill Depth",
+      "parent": "Header / Progress",
+      "geometry": {
+        "x": -19012,
+        "y": -20318,
+        "width": 318,
+        "height": 14,
+        "rotation": 0
+      },
+      "appearance": {
+        "fills": [
+          {
+            "fillColor": "#175c93",
+            "fillOpacity": 1,
+            "fillColorGradient": null,
+            "fillColorRefFile": null,
+            "fillColorRefId": null,
+            "fillImage": null
+          }
+        ],
+        "strokes": [],
+        "radius": 10,
+        "opacity": null
+      },
+      "effects": {
+        "shadows": [
+          {
+            "id": "881bb268-25e8-800a-8008-a38950fe2808",
+            "style": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 2,
+            "blur": 4,
+            "spread": 0,
+            "hidden": false,
+            "color": {
+              "color": "#4c2c9a",
+              "opacity": 0.22
+            }
+          }
+        ],
+        "blur": null
+      },
+      "typography": {
+        "family": null,
+        "size": null,
+        "weight": null,
+        "lineHeight": null,
+        "letterSpacing": null,
+        "alignment": null
+      },
+      "layout": {
+        "constraints": {
+          "horizontal": "left",
+          "vertical": "top"
+        }
+      }
+    }
+  },
+  "counter": {
+    "penpotNodeId": "855af85f-faf4-8069-8008-a8ea68c23db2",
+    "penpotName": "Header / Question Counter",
+    "parent": "DUDUQ / HUD / HEADER / DUDUQ / HUD / HEADER / GOLD MASTER",
+    "geometry": {
+      "x": -18571,
+      "y": -20331,
+      "width": 72,
+      "height": 38,
+      "rotation": 0
+    },
+    "appearance": {
+      "fills": [],
+      "strokes": [],
+      "radius": 15,
+      "opacity": null
+    },
+    "effects": {
+      "shadows": [],
+      "blur": null
+    },
+    "typography": {
+      "family": null,
+      "size": null,
+      "weight": null,
+      "lineHeight": null,
+      "letterSpacing": null,
+      "alignment": null
+    },
+    "layout": {
+      "constraints": {
+        "horizontal": "left",
+        "vertical": "top"
+      }
+    }
+  },
+  "fullscreen": {
+    "container": {
+      "penpotNodeId": "855af85f-faf4-8069-8008-a8ea68c23db6",
+      "penpotName": "Header / Fullscreen",
+      "parent": "DUDUQ / HUD / HEADER / DUDUQ / HUD / HEADER / GOLD MASTER",
+      "geometry": {
+        "x": -18407,
+        "y": -20340,
+        "width": 56,
+        "height": 56,
+        "rotation": 0
+      },
+      "appearance": {
+        "fills": [],
+        "strokes": [],
+        "radius": 0,
+        "opacity": null
+      },
+      "effects": {
+        "shadows": [],
+        "blur": null
+      },
+      "typography": {
+        "family": null,
+        "size": null,
+        "weight": null,
+        "lineHeight": null,
+        "letterSpacing": null,
+        "alignment": null
+      },
+      "layout": {
+        "constraints": {
+          "horizontal": "left",
+          "vertical": "top"
+        }
+      }
+    },
+    "icon": {
+      "penpotNodeId": "855af85f-faf4-8069-8008-a8ea68c23db7",
+      "penpotName": "DuduQ / Button / Icon / Fullscreen / Neutral / Default",
+      "parent": "Header / Fullscreen",
+      "geometry": {
+        "x": -18407,
+        "y": -20340,
+        "width": 56,
+        "height": 56,
+        "rotation": 0
+      },
+      "appearance": {
+        "fills": [],
+        "strokes": [],
+        "radius": null,
+        "opacity": null
+      },
+      "effects": {
+        "shadows": [],
+        "blur": null
+      },
+      "typography": {
+        "family": null,
+        "size": null,
+        "weight": null,
+        "lineHeight": null,
+        "letterSpacing": null,
+        "alignment": null
+      },
+      "layout": {
+        "constraints": {
+          "horizontal": "scale",
+          "vertical": "scale"
+        }
+      }
+    }
+  },
+  "question": {
+    "container": {
+      "penpotNodeId": "50f514fe-4a8a-804d-8008-aa3ca706f229",
+      "penpotName": "02 — QUESTION HUD",
+      "parent": "DuduQ Target Shooter",
+      "geometry": {
+        "x": -21888,
+        "y": -20465,
+        "width": 720,
+        "height": 86,
+        "rotation": 0
+      },
+      "appearance": {
+        "fills": [],
+        "strokes": [],
+        "radius": null,
+        "opacity": null
+      },
+      "effects": {
+        "shadows": [],
+        "blur": null
+      },
+      "typography": {
+        "family": null,
+        "size": null,
+        "weight": null,
+        "lineHeight": null,
+        "letterSpacing": null,
+        "alignment": null
+      },
+      "layout": {
+        "constraints": {
+          "horizontal": "left",
+          "vertical": "top"
+        }
+      }
+    },
+    "label": {
+      "penpotNodeId": "50f514fe-4a8a-804d-8008-aa3ca706f22b",
+      "penpotName": "INSTRUCTION",
+      "parent": "02 — QUESTION HUD",
+      "geometry": {
+        "x": -21843.109999999753,
+        "y": -20447.110000000015,
+        "width": 276,
+        "height": 15,
+        "rotation": 0
+      },
+      "appearance": {
+        "fills": [
+          {
+            "fillColor": "#7f9788",
+            "fillOpacity": 1,
+            "fillColorGradient": null,
+            "fillColorRefFile": null,
+            "fillColorRefId": null,
+            "fillImage": null
+          }
+        ],
+        "strokes": [],
+        "radius": null,
+        "opacity": 1
+      },
+      "effects": {
+        "shadows": [],
+        "blur": null
+      },
+      "typography": {
+        "family": "Inter",
+        "size": "12.953790921693384",
+        "weight": "600",
+        "lineHeight": "1.0979202219551534",
+        "letterSpacing": "0",
+        "alignment": "left"
+      },
+      "layout": {
+        "constraints": {
+          "horizontal": "left",
+          "vertical": "top"
+        }
+      }
+    },
+    "text": {
+      "penpotId": "50f514fe-4a8a-804d-8008-aa3ca706f22c",
+      "semanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud.question",
+      "name": "QUESTION",
+      "type": "text",
+      "role": "label",
+      "pageId": "855af85f-faf4-8069-8008-a8e75a3255fd",
+      "boardId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+      "screenId": "50f514fe-4a8a-804d-8008-aa23c388d10a",
+      "parentId": "50f514fe-4a8a-804d-8008-aa3ca706f229",
+      "parentSemanticId": "document.duduq-design-system-control-panel.target-shooter-master-idle.duduq-target-shooter.02-question-hud",
+      "children": [],
+      "componentId": null,
+      "componentRef": null,
+      "instanceOf": null,
+      "authoringSource": false,
+      "ownership": "UNKNOWN",
+      "geometry": {
+        "x": -21843.109999999753,
+        "y": -20428.670000000013,
+        "width": 535,
+        "height": 32,
+        "rotation": 0
+      },
+      "layout": {
+        "constraints": {
+          "horizontal": "left",
+          "vertical": "top"
+        }
+      },
+      "appearance": {
+        "fills": [
+          {
+            "fillColor": "#364b43",
+            "fillOpacity": 1,
+            "fillColorGradient": null,
+            "fillColorRefFile": null,
+            "fillColorRefId": null,
+            "fillImage": null
+          }
+        ],
+        "strokes": [],
+        "radius": null,
+        "opacity": 1
+      },
+      "effects": {
+        "shadows": [],
+        "blur": null
+      },
+      "typography": {
+        "family": "Inter",
+        "size": "21.963204549255728",
+        "weight": "900",
+        "lineHeight": "1.4165107114575133",
+        "letterSpacing": "0",
+        "alignment": "left"
+      },
+      "asset": {
+        "type": null,
+        "reference": null,
+        "source": null
+      },
+      "visibility": true,
+      "state": null,
+      "metadata": {
+        "penpotProperties": {},
+        "fingerprint": "c4d709582e19"
+      },
+      "parentName": "02 — QUESTION HUD"
+    }
+  },
+  "audio": {
+    "structure": "FLATTENED_SIBLINGS",
+    "face": {
+      "penpotNodeId": "7c518bfd-07e4-808a-8008-af53db7d14c8",
+      "penpotName": "Tela cheia",
+      "type": "group",
+      "geometry": {
+        "x": -21240,
+        "y": -20449,
+        "width": 56,
+        "height": 56,
+        "rotation": 0
+      },
+      "appearance": {
+        "fills": [],
+        "strokes": [],
+        "radius": null,
+        "opacity": null
+      },
+      "effects": {
+        "shadows": [],
+        "blur": null
+      },
+      "zOrder": 8
+    },
+    "depth": null,
+    "icon": {
+      "penpotNodeId": "7c518bfd-07e4-808a-8008-af53fbc6842d",
+      "penpotName": "lucide / volume-2",
+      "type": "group",
+      "geometry": {
+        "x": -21227,
+        "y": -20435,
+        "width": 31,
+        "height": 29,
+        "rotation": 0
+      },
+      "appearance": {
+        "fills": [],
+        "strokes": [],
+        "radius": null,
+        "opacity": null
+      },
+      "effects": {
+        "shadows": [],
+        "blur": null
+      },
+      "zOrder": 9,
+      "relativeX": 13,
+      "relativeY": 14
+    }
+  }
+}

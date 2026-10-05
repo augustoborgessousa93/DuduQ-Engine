@@ -1,0 +1,39 @@
+{
+  "source": "product routes only",
+  "routes": ["/play/matching/", "/play/transition/", "/play/target-shooter/"],
+  "MATCHING_BASELINE": "PASS",
+  "MATCHING_WRONG_STAYS": "PASS",
+  "MATCHING_CORRECT_TRANSITIONS": "PASS",
+  "TARGET_MISS_STAYS": "PASS",
+  "TARGET_HIT_TRANSITIONS": "PASS",
+  "TRANSITION_ENTER": "PASS",
+  "TRANSITION_EXIT": "PASS",
+  "DUDU_FEEDBACK_MATCHING": {
+    "status": "PASS",
+    "correctVisible": true,
+    "incorrectVisible": true,
+    "correctVisualSizePx": 70.92,
+    "incorrectVisualSizePx": 69.54
+  },
+  "DUDU_FEEDBACK_TARGET": {
+    "status": "PASS",
+    "correctVisible": true,
+    "incorrectVisible": true,
+    "correctVisualSizePx": 73.73,
+    "incorrectVisualSizePx": 72.82
+  },
+  "TRANSITION_GLOW": "PASS",
+  "TRANSITION_PROGRESS": "PASS (0→100; shimmer active)",
+  "WHITE_FLASH": "NOT_OBSERVED",
+  "IFRAMES": 0,
+  "PREVIEW_USED": false,
+  "CONSOLE_ERRORS": [],
+  "THREE_NATIVE_LOOPS": "PASS",
+  "screenshots": {
+    "matchingFeedback": "artifacts/final-flow/final-matching-feedback.png",
+    "targetFeedback": "artifacts/final-flow/final-target-feedback.png",
+    "transition": "artifacts/final-flow/final-transition.png",
+    "targetAfterTransition": "artifacts/final-flow/final-target-after-transition.png",
+    "matchingAfterReturn": "artifacts/final-flow/final-matching-after-return.png"
+  }
+}
