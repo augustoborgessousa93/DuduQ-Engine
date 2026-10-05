@@ -2,7 +2,7 @@
 
 ## Finalization status
 
-Repository cleanup and verification are complete with a **PARTIAL** interaction-certification result. Focused real-pointer smoke tests passed for representative flows, but the aggregate Playwright harness timed out waiting for Matching `networkidle`; full lifecycle certification is not claimed. `main` has not been changed.
+The clean baseline commit and tag were pushed to the current feature branch. Focused real-pointer smoke tests passed for representative flows, but the aggregate Playwright harness timed out waiting for Matching `networkidle`; the overall test suite is **PARTIAL**, and full lifecycle certification is not claimed. `main` has not been changed.
 
 ## Git / safety
 
@@ -13,6 +13,11 @@ Repository cleanup and verification are complete with a **PARTIAL** interaction-
 - Safety tag: `duduq-pre-repository-cleanup-2026-10-05` (remote).
 - Remote continuity tag: `duduq-remote-continuity-2026-09-22` → `3aa963c1af93175529d376dd95e2209cd23bb9a3` (remote).
 - Local reconciliation merge: `4cbaa052` (`ours` strategy; product tree preserved).
+- Clean baseline commit: `190bf555b8a17e905a1c47d0f48a08fd5364bc18` (`chore: finalize clean DuduQ production baseline`).
+- Clean baseline tag: `duduq-clean-baseline-2026-10-05` points to that commit.
+- The clean baseline commit was pushed normally; origin feature branch acknowledged `3aa963c1..190bf555`.
+- Official local DUDUQ tags were pushed; safety and continuity tags were already present on origin.
+- No force push was used. Current local and remote feature heads are synchronized at the cleanup baseline at the time of this report.
 - External backup: `C:\Users\augus\Documents\DuduQ_Backups\2026-10-05-pre-final-cleanup`; 3,722 files / 534,438,632 bytes / 0 SHA-256 mismatches.
 
 ## Current product map
@@ -45,4 +50,4 @@ See `DUDUQ-PRODUCTION-MAP.md` for owners, routes, and test notes.
 
 ## Final synchronization
 
-This report is updated after the cleanup commit/tag and branch push. `main` remains untouched. Any additional main promotion requires a separate ancestry review and fast-forward-only authorization.
+`main` was not pushed, merged, or otherwise changed. Its last observed remote head was `16494a41593d295defe7a465dad1d7e5a08a0140`, divergent from the feature baseline. Any promotion requires separate ancestry review and fast-forward-only authorization.

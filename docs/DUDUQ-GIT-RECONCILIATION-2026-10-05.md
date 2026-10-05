@@ -42,4 +42,11 @@
 
 ## Final GitHub status
 
-The exact cleanup commit, baseline tag, remote branch SHA, and current working-tree state are recorded in `DUDUQ-REPOSITORY-STATE-2026-10-05.md` after synchronization. `main` remains untouched.
+- Cleanup commit: `190bf555b8a17e905a1c47d0f48a08fd5364bc18`.
+- `duduq-clean-baseline-2026-10-05` points to the cleanup commit and is verified on origin.
+- Normal branch push succeeded: `3aa963c1..190bf555` to `feat/design-sync-primary-button-v1`.
+- `duduq-drag-drop-engine-v1`, `duduq-bubble-pop-v1`, `duduq-smart-sentence-complete-v1`, current Smart Sentence combined tags, and current DUDUQ checkpoint tags are on origin. The pre-cleanup and remote-continuity tags were already present and verified.
+- No force push was used. The post-push fetch confirmed local feature HEAD equals `origin/feat/design-sync-primary-button-v1` at the cleanup baseline; working tree was clean at that check.
+- `origin/main` was not modified; its observed SHA was `16494a41593d295defe7a465dad1d7e5a08a0140` and it is divergent.
+
+See `DUDUQ-REPOSITORY-STATE-2026-10-05.md` for the product/QA summary. `main` promotion remains a separate review.
