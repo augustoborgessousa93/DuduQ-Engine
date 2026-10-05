@@ -11,12 +11,27 @@ export function DuduQCanonicalAudioButton({ onPlay, ariaLabel = "Ouvir instru√ß√
   button.title = ariaLabel;
   button.innerHTML = `<span class="duduq-audio-depth" aria-hidden="true"></span><span class="duduq-audio-surface" aria-hidden="true"></span><span class="duduq-audio-highlight" aria-hidden="true"></span>${icon}`;
   button.dataset.component = "DUDUQ_CANONICAL_AUDIO_BUTTON";
-  button.addEventListener("click", async () => {
-    if (button.disabled || button.dataset.audioState === "playing") return;
+  let activePlayback = null;
+  let playHandler = onPlay;
+  button.setPlayHandler = handler => { playHandler = handler; };
+  button.playAudio = () => {
+    if (button.disabled || typeof playHandler !== "function") return Promise.resolve(false);
+    if (activePlayback) return activePlayback;
     button.dataset.audioState = "playing";
-    try { await onPlay?.(); }
-    catch (error) { console.error("[DUDUQ AUDIO]", error); }
-    finally { window.setTimeout(() => { if (button.isConnected) button.dataset.audioState = "idle"; }, 180); }
+    button.setAttribute("aria-busy", "true");
+    const playback = Promise.resolve().then(() => playHandler()).then(result => result !== false).finally(() => {
+      if (button.isConnected && activePlayback === playback) {
+        button.dataset.audioState = "idle";
+        button.setAttribute("aria-busy", "false");
+      }
+      if (activePlayback === playback) activePlayback = null;
+    });
+    activePlayback = playback;
+    return playback;
+  };
+  button.setAttribute("aria-busy", state === "playing" ? "true" : "false");
+  button.addEventListener("click", () => {
+    button.playAudio().catch(error => console.error("[DUDUQ AUDIO]", error));
   });
   return button;
 }

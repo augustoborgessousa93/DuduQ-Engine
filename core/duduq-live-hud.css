@@ -38,14 +38,18 @@
 #game .duduq-canonical-question-hud .audio-button{position:relative!important;z-index:3!important;display:block!important;width:50px!important;height:52px!important;min-width:50px!important;min-height:52px!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;color:#ffffff!important;overflow:visible!important;isolation:isolate!important;transform:translateY(0)!important;transition:transform 80ms ease-out!important;}
 #game .duduq-canonical-question-hud .audio-button::before,#game .duduq-canonical-question-hud .audio-button::after{content:none!important;display:none!important;}
 #game .duduq-canonical-question-hud .audio-button .duduq-audio-depth{position:absolute!important;z-index:0!important;left:0!important;top:4.64px!important;width:50px!important;height:47.36px!important;background:#175c93!important;border-radius:18px!important;pointer-events:none!important;}
-#game .duduq-canonical-question-hud .audio-button .duduq-audio-surface{position:absolute!important;z-index:1!important;left:0!important;top:0!important;width:50px!important;height:47.36px!important;background:linear-gradient(to bottom,rgba(143,214,255,1) 0%,rgba(52,159,223,1) 55%,rgba(42,130,192,1) 100%)!important;border-radius:15px!important;pointer-events:none!important;}
+#game .duduq-canonical-question-hud .audio-button .duduq-audio-surface{position:absolute!important;z-index:1!important;left:0!important;top:0!important;box-sizing:border-box!important;width:50px!important;height:47.36px!important;border:0!important;background:linear-gradient(to bottom,rgba(143,214,255,1) 0%,rgba(52,159,223,1) 55%,rgba(42,130,192,1) 100%)!important;border-radius:15px!important;pointer-events:none!important;}
 #game .duduq-canonical-question-hud .audio-button .duduq-audio-highlight{position:absolute!important;z-index:2!important;left:7px!important;top:5px!important;width:19px!important;height:4px!important;background:#BFE8FF87!important;border-radius:7px!important;opacity:.76!important;pointer-events:none!important;}
 #game .duduq-canonical-question-hud .audio-button .duduq-audio-icon-content{position:absolute!important;z-index:3!important;left:11px!important;top:12px!important;width:27px!important;height:27px!important;display:flex!important;align-items:center!important;align-content:stretch!important;justify-content:center!important;flex-direction:column!important;flex-wrap:nowrap!important;overflow:hidden!important;pointer-events:none!important;}
 #game .duduq-canonical-question-hud .audio-button .duduq-audio-icon{position:relative!important;width:23.5px!important;height:18px!important;display:block!important;flex-shrink:0!important;overflow:visible!important;pointer-events:none!important;}
-#game .duduq-canonical-question-hud .audio-button .duduq-audio-icon svg{display:block!important;width:23.5px!important;height:18px!important;max-width:none!important;transform:none!important;filter:none!important;}
+#game .duduq-canonical-question-hud .audio-button .duduq-audio-icon svg{display:block!important;width:23.5px!important;height:18px!important;max-width:none!important;overflow:visible!important;transform:none!important;filter:none!important;}
 #game .duduq-canonical-question-hud .audio-button:hover:not(:disabled),#game .duduq-canonical-question-hud .audio-button[data-audio-state="playing"]{filter:none!important;transform:translateY(0)!important;box-shadow:none!important;}
 #game .duduq-canonical-question-hud .audio-button:active:not(:disabled){transform:translateY(4.64px)!important;box-shadow:none!important;}
-#game .matching-card .matching-word{font-family:Inter!important;font-size:27.5908px!important;font-weight:900!important;font-style:normal!important;line-height:1.4497574!important;letter-spacing:0!important;}
+/* Canonical instruction-audio active state: green while speech/audio is truly playing. */
+#game .duduq-canonical-question-hud .audio-button[data-audio-state="playing"] .duduq-audio-depth{background:#177909!important;}
+#game .duduq-canonical-question-hud .audio-button[data-audio-state="playing"] .duduq-audio-surface{border:1px solid #2b9d12!important;background:linear-gradient(180deg,#79e533 0%,#49c91d 52%,#2eae13 100%)!important;box-shadow:0 0 0 3px rgba(120,229,50,.22),0 0 18px rgba(83,210,27,.36),inset 0 1px 0 rgba(255,255,255,.72)!important;}
+#game .duduq-canonical-question-hud .audio-button[data-audio-state="playing"] .duduq-audio-highlight{background:rgba(255,255,255,.72)!important;}
+#game .matching-card .matching-word{font-family:"Nunito",sans-serif!important;font-size:27.5908px!important;font-weight:900!important;font-style:normal!important;line-height:1.4497574!important;letter-spacing:0!important;}
 #game .matching-action-area{position:relative!important;box-sizing:border-box!important;width:280px!important;height:72px!important;min-width:280px!important;min-height:72px!important;}
 #game .matching-action-area .primary-action.matching-confirm-action.game-action-button--primary{position:absolute!important;isolation:isolate!important;display:block!important;left:-12px!important;top:-9.5px!important;bottom:auto!important;box-sizing:border-box!important;width:304px!important;min-width:304px!important;height:91px!important;min-height:91px!important;padding:0!important;transform:scale(1)!important;transform-origin:center center!important;transition:transform 160ms ease!important;border:0!important;border-radius:0!important;color:#fff!important;background:transparent!important;box-shadow:none!important;filter:none!important;overflow:visible!important;text-shadow:none!important;}
 #game .matching-action-area .primary-action.matching-confirm-action.game-action-button--primary::before,#game .matching-action-area .primary-action.matching-confirm-action.game-action-button--primary::after{content:none!important;display:none!important;}
@@ -57,11 +61,10 @@
 #game .matching-action-area .primary-action.matching-confirm-action.game-action-button--primary>.dnd-confirm-action__label{z-index:4!important;left:66px!important;top:22px!important;width:auto!important;height:36px!important;color:#fff!important;font-family:"Fredoka",sans-serif!important;font-size:30px!important;font-style:normal!important;font-weight:700!important;line-height:1.2!important;letter-spacing:.5px!important;text-align:left!important;white-space:nowrap!important;text-shadow:none!important;}
 #game .matching-action-area .primary-action.matching-confirm-action.game-action-button--primary>.dnd-confirm-action__label::before,#game .matching-action-area .primary-action.matching-confirm-action.game-action-button--primary>.dnd-confirm-action__label::after{content:none!important;display:none!important;}
 #game .matching-action-area .primary-action.matching-confirm-action.game-action-button--primary:disabled,#game .matching-action-area .primary-action.matching-confirm-action.game-action-button--primary[hidden]{opacity:0!important;visibility:hidden!important;pointer-events:none!important;animation:none!important;translate:0!important;rotate:0!important;scale:1!important;}
-#game .matching-action-area .primary-action.matching-confirm-action.game-action-button--primary:not(:disabled):not([hidden]):not(:hover):not(:active):not(:focus-visible){opacity:1!important;visibility:visible!important;pointer-events:auto!important;animation:duduq-confirm-ready-in 200ms ease-out both,duduq-confirm-ready-shake 2s ease-in-out 200ms infinite!important;}
-#game .matching-action-area .primary-action.matching-confirm-action.game-action-button--primary:not(:disabled):not([hidden]):is(:hover,:active,:focus-visible){animation:none!important;translate:0!important;rotate:0!important;scale:1!important;}
+#game .matching-action-area .primary-action.matching-confirm-action.game-action-button--primary:not(:disabled):not([hidden]){opacity:1!important;visibility:visible!important;pointer-events:auto!important;animation:duduq-confirm-ready-shake 2s ease-in-out infinite!important;}
+#game .matching-action-area .primary-action.matching-confirm-action.game-action-button--primary:not(:disabled):not([hidden]):is(:hover,:active,:focus-visible){animation-play-state:paused!important;translate:0!important;rotate:0!important;scale:1!important;}
 #game .matching-action-area .primary-action.matching-confirm-action.game-action-button--primary:not(:disabled):hover{transform:scale(1.05)!important;z-index:1!important;}
 #game .matching-action-area.cta-attention-wrapper[data-attention="cta-attention-shake"]{animation:none!important;}
-@keyframes duduq-confirm-ready-in{from{opacity:0;scale:.96}to{opacity:1;scale:1}}
 @keyframes duduq-confirm-ready-shake{0%,78%,100%{translate:0;rotate:0}82%{translate:-3px 0;rotate:-.8deg}86%{translate:3px 0;rotate:.8deg}90%{translate:-2px 0;rotate:-.5deg}94%{translate:2px 0;rotate:.5deg}97%{translate:-1px 0;rotate:0}}
 @media (prefers-reduced-motion:reduce){#game .matching-action-area .primary-action.game-action-button--primary:not(:disabled):not([hidden]){animation:none!important;translate:0!important;rotate:0!important;scale:1!important;}}
 #game.target-shooter-screen .duduq-canonical-header-hud.game-hud{width:1056px!important;height:94px!important;min-height:94px!important;}
@@ -346,4 +349,66 @@
   background:linear-gradient(180deg,#fff9f7 0%,#fff0ec 100%);
   border-color:#ef8b7f;
   box-shadow:0 5px 0 #d97d72,0 8px 16px rgba(34,56,41,.12),inset 0 1px 0 #fff;
+}
+
+/* Shared header refinement: center counter text inside its existing badge and
+   wrap activity titles inside their reserved identity lane. */
+#game .duduq-canonical-header-hud .hud-counter,
+#game[aria-label="DuduQ Matching"] .duduq-canonical-header-hud .hud-counter,
+#game.target-shooter-screen .duduq-canonical-header-hud .hud-counter {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+#game .duduq-canonical-header-hud .hud-counter > span,
+#game[aria-label="DuduQ Matching"] .duduq-canonical-header-hud .hud-counter > span,
+#game.target-shooter-screen .duduq-canonical-header-hud .hud-counter > span {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+#game .duduq-canonical-header-hud .hud-title {
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  text-wrap: balance !important;
+}
+#game.duduq-shared-gold-shell .duduq-canonical-header-hud .hud-title-group {
+  top: 22px !important;
+  width: 160px !important;
+  max-width: 160px !important;
+  height: 56px !important;
+  min-height: 56px !important;
+  max-height: 56px !important;
+  align-items: center !important;
+}
+#game.duduq-shared-gold-shell .duduq-canonical-header-hud .hud-title {
+  width: 160px !important;
+  max-width: 160px !important;
+  height: 56px !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  text-wrap: balance !important;
+  line-height: 1.02 !important;
+}
+
+@media (max-width: 640px) {
+  #game .duduq-canonical-header-hud .hud-counter,
+  #game[aria-label="DuduQ Matching"] .duduq-canonical-header-hud .hud-counter,
+  #game.target-shooter-screen .duduq-canonical-header-hud .hud-counter {
+    width: calc(76px * var(--duduq-gold-scale)) !important;
+    min-width: calc(76px * var(--duduq-gold-scale)) !important;
+    height: calc(42px * var(--duduq-gold-scale)) !important;
+  }
 }

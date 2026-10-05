@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1276" height="438" viewBox="-27 -27 1276 438" fill="none" aria-hidden="true">
+  <defs>
+    <filter id="panel-shadow" x="-4%" y="-5%" width="108%" height="120%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="5" stdDeviation="2" flood-color="#8f806d" flood-opacity=".2"/>
+    </filter>
+  </defs>
+  <rect x="0" y="0" width="1210" height="360" rx="25" fill="#fffdf7" stroke="#e8d3a6" stroke-width="4" stroke-dasharray="0 7" stroke-linecap="round" filter="url(#panel-shadow)"/>
+  <rect x="31" y="35" width="1139" height="289" rx="30" fill="#f6f3ed" stroke="#b17f00" stroke-width="6"/>
+</svg>

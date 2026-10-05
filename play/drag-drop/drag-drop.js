@@ -6,6 +6,7 @@ import { createDuduqDragDropEngine } from "/core/duduq-drag-drop-engine.js";
 import { createDuduqDragDropLifecycle } from "/core/duduq-drag-drop-lifecycle.js";
 
 const root = document.querySelector("#game");
+const DND_ARTBOARD = Object.freeze({ width: 1366, height: 768 });
 const background = window.DuduQAssets?.assets?.backgrounds?.["1"] || "";
 const activity = Object.freeze({
   id: "drag-drop-grouping-main",
@@ -109,6 +110,7 @@ root.innerHTML = `
     <img class="dnd-option-image-card__artwork" src="/core/assets/drag-drop/option-cat-card.png" alt="">
   </figure>
   </div>
+  </div>
   <section class="game-shell dnd-game-shell" data-dnd-owner="GameShell">
     <div data-canonical-header-slot></div>
     <div data-canonical-question-slot></div>
@@ -122,7 +124,6 @@ root.innerHTML = `
       </button>
     </div>
   </section>
-  </div>
   <div class="result-fx-layer success-celebration-layer" aria-hidden="true"></div>
   <section class="feedback-ribbon" data-feedback="" aria-live="polite" aria-atomic="true" hidden>
     <img class="feedback-mascot" data-asset="feedback-mascot" alt="">
@@ -238,12 +239,12 @@ const applyArtboardGeometry = () => {
     artboard.style.transform = "none";
     return;
   }
-  const scale = Math.min(root.clientWidth / 1366, root.clientHeight / 768);
-  artboard.style.width = "1366px";
-  artboard.style.height = "768px";
+  const scale = Math.min(1, root.clientWidth / DND_ARTBOARD.width, root.clientHeight / DND_ARTBOARD.height);
+  artboard.style.width = `${DND_ARTBOARD.width}px`;
+  artboard.style.height = `${DND_ARTBOARD.height}px`;
   artboard.style.left = "50%";
-  artboard.style.top = "50%";
-  artboard.style.transform = `translate(-50%, -50%) scale(${scale})`;
+  artboard.style.top = "0";
+  artboard.style.transform = `translateX(-50%) scale(${scale})`;
 };
 const rectMap = elements => new Map(elements.map(element => [element, element.getBoundingClientRect()]));
 const cardsIn = parent => [...parent.querySelectorAll(":scope > .dnd-option-image-card")];

@@ -238,6 +238,25 @@ body {
 
 /* Interaction overlays do not change the Penpot artwork underneath. */
 #game.drag-drop-multimedia-screen [data-item-id] { touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item,
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item {
+  transform-origin: center;
+  scale: 1;
+  transition: scale 150ms ease, filter 150ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  #game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item:hover:not([data-drag-state="dragging"]):not([data-state="correct"]),
+  #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item:hover:not([data-drag-state="dragging"]):not([data-state="correct"]) {
+    z-index: 5;
+    scale: 1.05;
+    filter: drop-shadow(0 6px 7px rgb(25 54 44 / 22%));
+  }
+}
+#game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item:active:not([data-drag-state="dragging"]):not([data-state="correct"]),
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item:active:not([data-drag-state="dragging"]):not([data-state="correct"]) { scale: 1.02; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item:focus-visible,
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item:focus-within { z-index: 5; scale: 1.05; filter: drop-shadow(0 0 5px rgb(49 143 192 / 72%)); }
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item:has(.dnd-multimedia-audio-item__play:focus-visible) { outline: 3px solid #fff; outline-offset: 3px; }
 #game.drag-drop-multimedia-screen [data-item-id][data-drag-state="dragging"] { cursor: grabbing; filter: drop-shadow(0 8px 10px rgb(25 56 44 / 22%)); }
 #game.drag-drop-multimedia-screen .dnd-multimedia-question-group[data-occupied="true"] .dnd-multimedia-question-group__label { visibility: hidden; }
 #game.drag-drop-multimedia-screen .dnd-multimedia-question-group > [data-item-id] {

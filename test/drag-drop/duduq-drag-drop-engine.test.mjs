@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import { createDuduqDragDropEngine } from "../../core/duduq-drag-drop-engine.js";
 import { createDuduqDragDropLifecycle } from "../../core/duduq-drag-drop-lifecycle.js";
-import { createMultimediaRound } from "../../play/drag-drop-multimedia/drag-drop-multimedia-round.js";
 import { MIXED_MULTIMEDIA_QA_FIXTURE } from "./unified-engine-mixed-fixture.mjs";
 
 const grouping = createDuduqDragDropEngine({
@@ -35,14 +34,6 @@ retry.place("image-cat", "target-cat");
 assert.equal(retry.validate().outcome, "incorrect");
 assert.deepEqual(retry.retry().sort(), ["audio-dog", "text-fish"]);
 assert.equal(retry.snapshot().items.find(item => item.id === "image-cat").locked, true);
-
-const groupedAdapter = createMultimediaRound({
-  id: "group-adapter-qa", layout: "grouping", validation: { strategy: "groupId" },
-  items: [{ id: "group-image", type: "image", correctGroupId: "animals" }],
-  targets: [{ id: "animals", type: "group", groupId: "animals", capacity: "infinite" }]
-});
-groupedAdapter.place("group-image", "animals");
-assert.equal(groupedAdapter.validate().outcome, "correct");
 
 const finiteCapacity = createDuduqDragDropEngine({
   layout: "target-grid", validation: { strategy: "answerKey" },

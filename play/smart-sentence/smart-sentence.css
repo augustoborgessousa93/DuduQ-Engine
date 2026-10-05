@@ -2,7 +2,8 @@
 body{background:#87c95a;font-family:Nunito,system-ui,sans-serif}
 #game.smart-sentence-screen .smart-sentence-shell{position:relative;z-index:1;display:flex;flex-direction:column;min-height:0;height:100%;pointer-events:none}
 #game.smart-sentence-screen .duduq-canonical-header-hud,#game.smart-sentence-screen .duduq-canonical-question-hud{pointer-events:auto}
-#game.smart-sentence-screen .smart-sentence-order-panel-component{position:absolute;z-index:0;top:min(29.6875vh,16.69107vw);left:50%;display:block;width:min(93.41142vw,166.14583vh,calc(100vw - 24px));height:auto;max-width:none;aspect-ratio:1276/438;transform:translateX(calc(-50% + min(.512445vw,.911458vh)));object-fit:fill;pointer-events:none;user-select:none}
+#game.smart-sentence-screen{--smart-sentence-panel-question-gap:25px}
+#game.smart-sentence-screen .smart-sentence-order-panel-component{position:absolute;z-index:0;top:0;left:50%;display:block;width:min(1276px,calc((100% - 48px)*1.0545454545));height:auto;max-width:none;aspect-ratio:1276/438;transform:translateX(calc(-50% + min(6px,calc((100% - 48px)*.00495868))));object-fit:fill;pointer-events:none;user-select:none}
 #game.smart-sentence-screen .smart-sentence-order-drop-target-official{position:absolute;z-index:1;display:block;max-width:none;pointer-events:none;user-select:none}
 #game.smart-sentence-screen .smart-sentence-order-drop-target-official>img{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:fill;pointer-events:none}
 #game.smart-sentence-screen .smart-sentence-order-drop-target-official>span{position:absolute;inset:0;display:grid;place-items:center;color:rgba(177,127,0,.343137);font-family:Nunito,sans-serif;font-size:15px;font-weight:900;line-height:1;letter-spacing:normal;text-transform:uppercase;white-space:nowrap;pointer-events:none}
@@ -14,9 +15,11 @@ body{background:#87c95a;font-family:Nunito,system-ui,sans-serif}
 #game.smart-sentence-screen .smart-sentence-order-drop-target-official[data-visual-state="incorrect"]>.smart-sentence-order-placed-word{color:#a84336}
 #game.smart-sentence-screen .smart-sentence-order-drop-target-official[data-visual-state="correct"]>.smart-sentence-order-placed-word{color:#267c4c}
 #game.smart-sentence-screen .smart-sentence-order-drop-target-official>img.smart-sentence-order-incorrect-icon{position:absolute;z-index:4;inset:auto auto auto auto;top:-31.66092%;right:auto;left:82.926829%;bottom:auto;display:block;width:27.642276%;height:auto;max-width:none;object-fit:contain;pointer-events:none}
-#game.smart-sentence-screen .smart-sentence-order-drag-card{pointer-events:auto;cursor:grab;touch-action:none}
+#game.smart-sentence-screen .smart-sentence-order-drag-card{pointer-events:auto;cursor:grab;touch-action:none;transform-origin:center;scale:1;transition:scale 150ms ease,filter 150ms ease}
+#game.smart-sentence-screen .smart-sentence-order-drag-card:hover:not(.is-dragging){z-index:4;scale:1.045;filter:drop-shadow(0 6px 7px rgba(25,54,48,.22))}
+#game.smart-sentence-screen .smart-sentence-order-drag-card:active:not(.is-dragging){scale:1.02}
 #game.smart-sentence-screen .smart-sentence-order-drag-card.is-dragging{z-index:8;cursor:grabbing;filter:drop-shadow(0 8px 9px rgba(25,54,48,.24))}
-#game.smart-sentence-screen .smart-sentence-order-drag-card:focus-visible{outline:3px solid #318fc0;outline-offset:3px;border-radius:24px}
+#game.smart-sentence-screen .smart-sentence-order-drag-card:focus-visible:not(.is-dragging){z-index:4;scale:1.045;filter:drop-shadow(0 0 5px rgba(49,143,192,.72));outline:3px solid #318fc0;outline-offset:3px;border-radius:24px}
 #game.smart-sentence-screen .smart-sentence-order-confirm-action{position:absolute;z-index:5;display:block;box-sizing:border-box;min-width:0;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:transparent;overflow:visible;aspect-ratio:315/94;pointer-events:auto;transform:translateX(-50%)}
 #game.smart-sentence-screen .smart-sentence-order-confirm-action{border:0!important;border-radius:0!important;padding:0!important;background:transparent!important;background-color:transparent!important;background-image:none!important;box-shadow:none!important;color:transparent!important;text-shadow:none!important}
 #game.smart-sentence-screen .smart-sentence-order-confirm-action::before{content:none!important;display:none!important}
@@ -58,11 +61,12 @@ body{background:#87c95a;font-family:Nunito,system-ui,sans-serif}
 #game.smart-sentence-screen .smart-sentence-confirm-action[hidden]{display:none!important}
 #game.smart-sentence-screen .feedback-ribbon[hidden]{display:none!important}
 #game.smart-sentence-screen .smart-sentence-options{position:absolute;left:12px;top:113.055556%;width:min(1186px,calc(100% - 24px));display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,1.82vw,22px);pointer-events:none}
-#game.smart-sentence-screen .smart-sentence-option{position:relative;display:block;box-sizing:border-box;width:100%;height:80px;min-width:0;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;font-size:0;line-height:0;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;pointer-events:auto;transition:filter 120ms ease,transform 120ms ease}
+#game.smart-sentence-screen .smart-sentence-option{position:relative;z-index:1;display:block;box-sizing:border-box;width:100%;height:80px;min-width:0;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;font-size:0;line-height:0;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;pointer-events:auto;transform-origin:center;scale:1;transition:filter 140ms ease,scale 140ms ease}
 #game.smart-sentence-screen .smart-sentence-option img{position:absolute;left:-4.642857%;top:-28.125%;display:block;width:109.285714%;height:auto;max-width:none;aspect-ratio:306/125;object-fit:fill;pointer-events:none;-webkit-user-drag:none}
 #game.smart-sentence-screen .smart-sentence-option[hidden]{display:none!important}
-#game.smart-sentence-screen .smart-sentence-option:hover:not(:disabled){filter:brightness(1.035)}
-#game.smart-sentence-screen .smart-sentence-option:focus-visible{outline:none;filter:drop-shadow(0 0 4px rgba(49,143,192,.85))}
+#game.smart-sentence-screen .smart-sentence-option:hover:not(:disabled):not(.is-dragging){z-index:4;scale:1.045;filter:brightness(1.035) drop-shadow(0 5px 6px rgba(25,54,48,.2))}
+#game.smart-sentence-screen .smart-sentence-option:active:not(:disabled):not(.is-dragging){scale:1.02}
+#game.smart-sentence-screen .smart-sentence-option:focus-visible:not(:disabled){z-index:4;outline:none;scale:1.045;filter:drop-shadow(0 0 4px rgba(49,143,192,.85))}
 #game.smart-sentence-screen .smart-sentence-option.is-dragging{z-index:20;cursor:grabbing;transition:none;filter:drop-shadow(0 8px 9px rgba(25,54,48,.24))}
 #game.smart-sentence-screen .smart-sentence-option.is-correct{cursor:default;filter:drop-shadow(0 0 5px rgba(74,166,99,.72))}
 #game.smart-sentence-screen .smart-sentence-option.is-incorrect{filter:drop-shadow(0 0 5px rgba(201,86,68,.7));animation:smart-sentence-wrong-answer 220ms ease-in-out 2}
@@ -70,12 +74,14 @@ body{background:#87c95a;font-family:Nunito,system-ui,sans-serif}
 #game.smart-sentence-screen .smart-sentence-announcement{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @keyframes smart-sentence-wrong-answer{25%{translate:-3px 0}75%{translate:3px 0}}
 @media(max-width:700px){
+  #game.smart-sentence-screen{--smart-sentence-panel-question-gap:8px}
+  #game.smart-sentence-screen .smart-sentence-order-panel-component{width:calc((100% - 24px)*1.0545454545);transform:translateX(calc(-50% + min(6px,calc((100% - 24px)*.00495868))))}
   #game.smart-sentence-screen .smart-sentence-panel{width:calc(100% - 24px);margin-top:8px}
   #game.smart-sentence-screen .smart-sentence-options{left:12px;top:106.666667%;width:calc(100% - 24px);grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   #game.smart-sentence-screen .smart-sentence-option{height:clamp(42px,calc((100vw - 84px)/7),80px)}
 }
 @media(prefers-reduced-motion:reduce){#game.smart-sentence-screen .smart-sentence-confirm-action:not(:disabled):not([hidden]){animation:none!important;translate:0!important;rotate:0!important;scale:1!important;transition:none!important}}
-@media(prefers-reduced-motion:reduce){#game.smart-sentence-screen .smart-sentence-option{transition:none}#game.smart-sentence-screen .smart-sentence-option.is-incorrect{animation:none}}
+@media(prefers-reduced-motion:reduce){#game.smart-sentence-screen .smart-sentence-option,#game.smart-sentence-screen .smart-sentence-order-drag-card{transition:none}#game.smart-sentence-screen .smart-sentence-option.is-incorrect{animation:none}}
 #game.smart-sentence-screen>.smart-sentence-official-transition[hidden]{display:none!important}
 #game.smart-sentence-screen>.smart-sentence-official-transition{z-index:1000}
 #game.smart-sentence-screen>.smart-sentence-official-transition .official-transition-mascot{animation:duduq-float-presence 2.8s ease-in-out infinite;transform-origin:center}

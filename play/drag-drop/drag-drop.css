@@ -2,6 +2,11 @@
 body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
 .drag-drop-screen { background: #87c95a; }
 .dnd-game-shell { position: relative; z-index: 1; }
+.dnd-artboard {
+  position: absolute;
+  z-index: 0;
+  transform-origin: center center;
+}
 
 /* Keep the canonical Matching footer above the DND shell/result layers.
    The shared Feedback component and its state-specific styling remain owners. */
@@ -39,8 +44,8 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
 .dnd-options-cards-group {
   position: absolute;
   z-index: 0;
-  left: 240px;
-  top: 238px;
+  left: 155px;
+  top: 241px;
   width: 1056px;
   height: 307px;
   background: transparent;
@@ -202,9 +207,18 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
 }
 .dnd-option-image-card:hover:not([data-drag-state]):not([data-state]):not([aria-disabled="true"]) {
   z-index: 5;
-  scale: 1.08;
+  scale: 1.12;
+  filter: drop-shadow(0 7px 8px rgba(28, 54, 35, .24));
   box-shadow: 2px 8px 4px 0px #ffffff33;
 }
+.dnd-option-image-card:focus-visible:not([data-drag-state]):not([data-state]):not([aria-disabled="true"]) {
+  z-index: 5;
+  scale: 1.12;
+  filter: drop-shadow(0 7px 8px rgba(28, 54, 35, .24));
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+.dnd-option-image-card:active:not([data-drag-state]):not([data-state]):not([aria-disabled="true"]) { scale: 1.06; }
 .dnd-option-image-card:hover:not([data-drag-state]):not([data-state]):not([aria-disabled="true"]) .dnd-option-image-card__hover-frame,
 .dnd-option-image-card:hover:not([data-drag-state]):not([data-state]):not([aria-disabled="true"]) .dnd-option-image-card__hover-pet {
   opacity: 1;
@@ -222,13 +236,13 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
 .dnd-option-image-card[data-drag-state="dragging"] {
   z-index: 1000;
   cursor: grabbing;
-  scale: 1.055;
-  translate: 0 -5px;
+  scale: 1;
+  translate: none;
   background: transparent;
   border: 0;
   outline: 0;
   box-shadow: none;
-  filter: none;
+  filter: drop-shadow(0 5px 0 #91D5FF);
 }
 .dnd-option-image-card[data-state="correct"] { pointer-events: none; cursor: default; }
 .dnd-option-image-card[data-feedback="success"] { filter: drop-shadow(0 0 5px rgba(51, 160, 103, .65)); }
@@ -264,6 +278,10 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
 }
 .dnd-option-image-card[data-state="correct"],
 .dnd-option-image-card[data-state="incorrect"] { pointer-events: auto; cursor: default; outline: none; filter: drop-shadow(2px 8px 4px rgba(255,255,255,.2)); }
+.dnd-option-image-card[data-state="correct"],
+.dnd-option-image-card[data-drag-state][data-state="correct"] { filter: drop-shadow(0 5px 0 #64D99C); }
+.dnd-option-image-card[data-state="incorrect"],
+.dnd-option-image-card[data-drag-state][data-state="incorrect"] { filter: drop-shadow(0 5px 0 #EC7C7C); }
 .dnd-option-image-card__state-art {
   position: absolute;
   z-index: 8;
@@ -489,3 +507,36 @@ body { background: #87c95a; font-family: Fredoka, ui-rounded, sans-serif; }
   background: #278fd2 !important; box-shadow: none !important;
 }
 #game[aria-label="DuduQ Drag and Drop"] .duduq-canonical-header-hud .hud-progress[data-artwork="penpot-official-board"] .hud-progress-fill::after { content: none !important; }
+
+/* The canonical shell is viewport-owned and is never scaled with the playfield. */
+#game.drag-drop-screen .dnd-game-shell {
+  position: absolute !important;
+  z-index: 10 !important;
+  inset: 0 !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 12px 0 22px !important;
+  pointer-events: none !important;
+}
+#game.drag-drop-screen .dnd-game-shell > .duduq-canonical-header-hud.game-hud {
+  position: relative !important;
+  box-sizing: border-box !important;
+  width: min(1056px, calc(100% - 32px)) !important;
+  min-width: 0 !important;
+  height: 94px !important;
+  min-height: 94px !important;
+  margin: 1px auto 0 !important;
+  transform: none !important;
+  pointer-events: auto !important;
+}
+#game.drag-drop-screen .dnd-game-shell > .duduq-canonical-question-hud.question-panel {
+  box-sizing: border-box !important;
+  width: min(720px, calc(100% - 32px)) !important;
+  min-width: 0 !important;
+  height: 86px !important;
+  min-height: 86px !important;
+  margin: 22px auto 0 !important;
+  pointer-events: none !important;
+}
+#game.drag-drop-screen .duduq-canonical-question-hud .audio-button { pointer-events: auto !important; }

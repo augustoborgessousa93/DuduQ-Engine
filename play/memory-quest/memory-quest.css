@@ -1,0 +1,423 @@
+:root,
+body,
+#game {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background: #87c95a;
+  font-family: Nunito, system-ui, sans-serif;
+}
+
+#game.memory-quest-screen {
+  --memory-card-float-duration: 4.8s;
+  --memory-card-float-distance: 5px;
+  --memory-card-flip-duration: 720ms;
+  --memory-correct-bubble-duration: 1500ms;
+  --memory-correct-bubble-rise: 82px;
+  --memory-correct-bubble-size: 108px;
+  --memory-card-back-visual-center-x: 150px;
+  --memory-card-back-visual-center-y: 147.5px;
+}
+
+#game.memory-quest-screen .memory-quest-shell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  pointer-events: none;
+}
+
+#game.memory-quest-screen .duduq-canonical-header-hud,
+#game.memory-quest-screen .duduq-canonical-question-hud {
+  pointer-events: auto;
+}
+
+#game.memory-quest-screen .memory-quest-play-area {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+#game.memory-quest-screen .memory-quest-card-grid {
+  position: absolute;
+  top: 43px;
+  left: calc(50% - 619px);
+  display: grid;
+  width: 1238px;
+  grid-template-columns: repeat(6, 202px);
+  grid-template-rows: repeat(2, 240px);
+  transform: scale(var(--memory-card-scale));
+  transform-origin: top left;
+}
+
+#game.memory-quest-screen .memory-quest-card-slot {
+  position: relative;
+  width: 202px;
+  height: 240px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  perspective: 900px;
+  animation: memory-card-float var(--memory-card-float-duration) ease-in-out infinite alternate;
+  animation-delay: var(--memory-card-float-delay, 0ms);
+  transform-origin: center;
+  scale: 1;
+  transition: scale 150ms ease, filter 150ms ease;
+}
+
+#game.memory-quest-screen .memory-quest-card-slot:hover:not(.is-flipped):not(.is-matched):not([aria-disabled="true"]) {
+  z-index: 4;
+  scale: 1.045;
+  filter: drop-shadow(0 7px 8px rgba(25, 54, 48, .22));
+}
+
+#game.memory-quest-screen .memory-quest-card-slot:active:not(.is-flipped):not(.is-matched):not([aria-disabled="true"]) {
+  scale: 1.02;
+}
+
+#game.memory-quest-screen .memory-quest-card-slot:focus-visible {
+  z-index: 4;
+  scale: 1.045;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, .85));
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+  border-radius: 18px;
+}
+
+#game.memory-quest-screen .memory-quest-card-slot.is-flipped {
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #game.memory-quest-screen .memory-quest-card-slot {
+    transition: none;
+  }
+}
+
+#game.memory-quest-screen .memory-quest-card-inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition:
+    transform var(--memory-card-flip-duration) cubic-bezier(.2, .78, .2, 1),
+    opacity 520ms ease-out;
+}
+
+#game.memory-quest-screen .memory-quest-card-slot.is-matched .memory-quest-card-inner {
+  /* A resolved pair is pinned to the subject face, independent of the flip handler. */
+  transform: none;
+}
+
+#game.memory-quest-screen .memory-quest-card-slot.is-matched .memory-quest-card-back {
+  visibility: hidden;
+}
+
+#game.memory-quest-screen .memory-quest-card-slot.is-matched .memory-quest-card-front {
+  transform: none;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  opacity: .62;
+}
+
+#game.memory-quest-screen .memory-quest-card-slot.is-flipped .memory-quest-card-inner {
+  transform: rotateY(180deg);
+}
+
+#game.memory-quest-screen .memory-quest-card-slot.is-flipped.is-matched .memory-quest-card-inner {
+  transform: none;
+}
+
+#game.memory-quest-screen .memory-quest-card-back,
+#game.memory-quest-screen .memory-quest-card-front {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+#game.memory-quest-screen .memory-quest-card-front {
+  transform: rotateY(180deg);
+  transform-style: preserve-3d;
+}
+
+#game.memory-quest-screen .memory-quest-card-back,
+#game.memory-quest-screen .memory-quest-card-front-art {
+  position: absolute;
+  display: block;
+  max-width: none;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#game.memory-quest-screen .memory-quest-card-back {
+  top: calc(50% - var(--memory-card-back-visual-center-y));
+  left: calc(50% - var(--memory-card-back-visual-center-x));
+  width: 318px;
+  height: 318px;
+}
+
+#game.memory-quest-screen .memory-quest-card-front-art {
+  top: 8px;
+  left: -14px;
+  width: 230px;
+  height: 230px;
+}
+
+#game.memory-quest-screen .memory-quest-card-subject {
+  position: absolute;
+  z-index: 1;
+  top: 56px;
+  left: 38px;
+  display: block;
+  width: 127px;
+  height: 129px;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#game.memory-quest-screen .memory-quest-correct-badge {
+  position: absolute;
+  z-index: 4;
+  top: -2px;
+  right: 4px;
+  display: block;
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+#game.memory-quest-screen .memory-quest-match-celebration {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: calc(var(--memory-correct-bubble-size) * var(--memory-card-scale, 1));
+  height: calc(var(--memory-correct-bubble-size) * .92 * var(--memory-card-scale, 1));
+  transform: translate(-50%, -50%) scale(.45);
+  transform-origin: center;
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation: memory-match-correct-bubble var(--memory-correct-bubble-duration)
+    cubic-bezier(.2, .72, .25, 1) both;
+}
+
+#game.memory-quest-screen .memory-quest-celebration-mascot {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#game.memory-quest-screen .memory-quest-celebration-icon {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  display: block;
+  width: 44%;
+  height: 44%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#game.memory-quest-screen .memory-quest-match-celebration--incorrect {
+  width: calc(119px * var(--memory-card-scale, 1));
+  height: calc(94px * var(--memory-card-scale, 1));
+}
+
+#game.memory-quest-screen .memory-quest-match-celebration--incorrect .memory-quest-celebration-mascot {
+  inset: 15% 0 0 33%;
+  width: 67%;
+  height: 85%;
+}
+
+#game.memory-quest-screen .memory-quest-match-celebration--incorrect .memory-quest-celebration-icon {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#game.memory-quest-screen .memory-quest-card-slot.is-flipped .memory-quest-card-front::after {
+  position: absolute;
+  z-index: 2;
+  inset: 45px 23px 42px;
+  border-radius: 24px;
+  background: linear-gradient(112deg, transparent 28%, rgb(255 255 255 / 72%) 48%, transparent 67%);
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  animation: memory-card-glint var(--memory-card-flip-duration) ease-out 1;
+}
+
+@keyframes memory-card-float {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-1 * var(--memory-card-float-distance))); }
+}
+
+@keyframes memory-card-glint {
+  0% { transform: translateX(-18px); opacity: 0; }
+  28% { opacity: .82; }
+  100% { transform: translateX(18px); opacity: 0; }
+}
+
+@keyframes memory-match-correct-bubble {
+  0% {
+    transform: translate(-50%, -50%) scale(.45);
+    opacity: 0;
+  }
+  16% {
+    transform: translate(-50%, -50%) scale(1.04);
+    opacity: 1;
+    visibility: visible;
+  }
+  34% {
+    transform: translate(-50%, calc(-50% - 10px)) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, calc(-50% - var(--memory-correct-bubble-rise))) scale(.72);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 1099px) {
+  #game.memory-quest-screen .memory-quest-card-grid {
+    top: 24px;
+    left: 50%;
+    width: 548px;
+    grid-template-columns: repeat(4, 137px);
+    grid-template-rows: repeat(3, 163px);
+    transform: translateX(-50%) scale(var(--memory-card-scale));
+    transform-origin: top center;
+  }
+
+  #game.memory-quest-screen .memory-quest-card-slot {
+    width: 137px;
+    height: 163px;
+  }
+
+  #game.memory-quest-screen {
+    --memory-card-back-visual-center-x: 101.9px;
+    --memory-card-back-visual-center-y: 100.2px;
+  }
+
+  #game.memory-quest-screen .memory-quest-card-back {
+    width: 216px;
+    height: 216px;
+  }
+
+  #game.memory-quest-screen .memory-quest-card-front-art {
+    top: 5px;
+    left: -9px;
+    width: 156px;
+    height: 156px;
+  }
+
+  #game.memory-quest-screen .memory-quest-card-subject {
+    top: 38px;
+    left: 26px;
+    width: 86px;
+    height: 87px;
+  }
+
+  #game.memory-quest-screen .memory-quest-correct-badge {
+    top: -1px;
+    right: 1px;
+    width: 36px;
+    height: 36px;
+  }
+
+  #game.memory-quest-screen {
+    --memory-correct-bubble-size: 86px;
+    --memory-correct-bubble-rise: 68px;
+  }
+}
+
+@media (max-width: 699px) {
+  #game.memory-quest-screen .memory-quest-card-grid {
+    top: 20px;
+    width: 333px;
+    grid-template-columns: repeat(3, 111px);
+    grid-template-rows: repeat(4, 132px);
+  }
+
+  #game.memory-quest-screen .memory-quest-card-slot {
+    width: 111px;
+    height: 132px;
+  }
+
+  #game.memory-quest-screen {
+    --memory-card-back-visual-center-x: 82.5px;
+    --memory-card-back-visual-center-y: 81.2px;
+  }
+
+  #game.memory-quest-screen .memory-quest-card-back {
+    width: 175px;
+    height: 175px;
+  }
+
+  #game.memory-quest-screen .memory-quest-card-front-art {
+    top: 4px;
+    left: -8px;
+    width: 126px;
+    height: 126px;
+  }
+
+  #game.memory-quest-screen .memory-quest-card-subject {
+    top: 31px;
+    left: 21px;
+    width: 70px;
+    height: 71px;
+  }
+
+  #game.memory-quest-screen .memory-quest-correct-badge {
+    top: -1px;
+    right: 0;
+    width: 29px;
+    height: 29px;
+  }
+
+  #game.memory-quest-screen {
+    --memory-correct-bubble-size: 70px;
+    --memory-correct-bubble-rise: 52px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #game.memory-quest-screen .memory-quest-card-slot {
+    animation: none;
+  }
+
+  #game.memory-quest-screen .memory-quest-card-inner {
+    transition-duration: 1ms;
+  }
+
+  #game.memory-quest-screen .memory-quest-card-slot.is-flipped .memory-quest-card-front::after {
+    animation-duration: 1ms;
+  }
+
+  #game.memory-quest-screen .memory-quest-match-celebration {
+    animation-duration: 1ms;
+  }
+}

@@ -140,7 +140,7 @@ if (mode === "combined") {
       bank.append(button);
       buttons.set(option.id, button);
     }
-    const choose = (id) => { if (engine.status === "playing") engine.select(id); };
+    const choose = (id) => engine.status === "playing" ? engine.select(id) : null;
     removeButton.addEventListener("click", () => {
       const selected = engine.snapshot().selected[0];
       if (selected && engine.status === "playing") engine.remove(selected.id);
@@ -170,7 +170,8 @@ if (mode === "combined") {
         const droppedInside = event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
         button.classList.remove("is-dragging");
         button.style.removeProperty("transform");
-        if (!gesture.moved || droppedInside) choose(optionId);
+        if (!gesture.moved) choose(optionId);
+        else if (droppedInside && choose(optionId)) DuduqSound.play("snap");
       });
       button.addEventListener("pointercancel", (event) => {
         gestures.delete(event.pointerId);
@@ -264,7 +265,7 @@ if (mode === "combined") {
         const moved = card.dataset.moved === "true"; const targetIndex = slotForPoint(event.clientX, event.clientY);
         card.releasePointerCapture?.(event.pointerId); card.classList.remove("is-dragging"); card.style.removeProperty("transform");
         card.dataset.suppressClick = "true"; window.setTimeout(() => { delete card.dataset.suppressClick; }, 0);
-        if (moved && targetIndex >= 0) engine.place(card.dataset.optionId, targetIndex);
+        if (moved && targetIndex >= 0 && engine.place(card.dataset.optionId, targetIndex)) DuduqSound.play("snap");
         else if (!moved) { const index = firstEmpty(); if (index >= 0) engine.place(card.dataset.optionId, index); }
       });
       card.addEventListener("pointercancel", (event) => { if (card.hasPointerCapture?.(event.pointerId)) card.releasePointerCapture(event.pointerId); card.classList.remove("is-dragging"); card.style.removeProperty("transform"); });
@@ -457,10 +458,18 @@ if (mode === "combined") {
     return card;
   });
   const positionOrderElements = () => {
-    const assetScale = orderPanel.getBoundingClientRect().width / 1276;
-    const panelArtboardTop = questionHud.getBoundingClientRect().bottom + 29;
+    const shell = root.querySelector(".smart-sentence-shell");
+    const shellRect = shell.getBoundingClientRect();
+    const compactLayout = window.matchMedia("(max-width: 700px)").matches;
+    const shellStyle = getComputedStyle(shell);
+    const shellContentWidth = shell.clientWidth - Number.parseFloat(shellStyle.paddingLeft) - Number.parseFloat(shellStyle.paddingRight);
+    const completePanelWidth = Math.max(0, Math.min(1210, shellContentWidth - (compactLayout ? 24 : 48)));
+    const assetScale = completePanelWidth / 1210;
+    orderPanel.style.width = `${1276 * assetScale}px`;
+    orderPanel.style.transform = `translateX(calc(-50% + ${completePanelWidth * (6 / 1210)}px))`;
+    const hudGap = Number.parseFloat(getComputedStyle(root).getPropertyValue("--smart-sentence-panel-question-gap")) || 25;
+    const panelArtboardTop = questionHud.getBoundingClientRect().bottom + hudGap;
     const panelRect = orderPanel.getBoundingClientRect();
-    const shellRect = root.querySelector(".smart-sentence-shell").getBoundingClientRect();
     orderPanel.style.top = `${panelArtboardTop - 27 * assetScale}px`;
     for (const dropTarget of dropTargets) {
       const x = Number(dropTarget.dataset.layoutX);
@@ -589,7 +598,7 @@ if (mode === "combined") {
       card.style.removeProperty("transform");
       card.dataset.handledPointerClick = "true";
       window.setTimeout(() => { delete card.dataset.handledPointerClick; }, 0);
-      if (moved && targetIndex >= 0) engine.place(card.dataset.optionId, targetIndex);
+      if (moved && targetIndex >= 0 && engine.place(card.dataset.optionId, targetIndex)) DuduqSound.play("snap");
       else if (!moved) selectFirstEmpty(card.dataset.optionId);
     });
     card.addEventListener("pointercancel", (event) => {
@@ -628,7 +637,7 @@ if (mode === "combined") {
       const moved = label.dataset.pointerMoved === "true"; const index = slotAtPoint(event.clientX, event.clientY); const id = label.dataset.optionId;
       label.releasePointerCapture?.(event.pointerId); label.style.removeProperty("transform");
       if (moved) label.dataset.suppressClick = "true";
-      if (moved && index >= 0) engine.place(id, index);
+      if (moved && index >= 0 && engine.place(id, index)) DuduqSound.play("snap");
       else if (!moved) engine.remove(id);
     });
     label.addEventListener("pointercancel", () => label.style.removeProperty("transform"));
@@ -750,8 +759,8 @@ PrimaryAction(confirmButton, "CONFIRMAR", confirmSelection);
 
 function chooseOption(optionId) {
   const current = engine.snapshot();
-  if (current.status !== "playing") return;
-  engine.select(optionId);
+  if (current.status !== "playing") return null;
+  return engine.select(optionId);
 }
 
 function confirmSelection() {
@@ -826,11 +835,12 @@ for (const [optionId, button] of buttons) {
     gestures.delete(event.pointerId);
     button.releasePointerCapture?.(event.pointerId);
     button.style.removeProperty("width");
-    if (!gesture.moved || pointIsInsideSlot(event.clientX, event.clientY)) {
+    if (!gesture.moved) {
       returnToRest(button, false);
       chooseOption(optionId);
       return;
     }
+    if (pointIsInsideSlot(event.clientX, event.clientY) && chooseOption(optionId)) DuduqSound.play("snap");
     returnToRest(button, true);
   });
 
