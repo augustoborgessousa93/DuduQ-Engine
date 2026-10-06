@@ -39,11 +39,19 @@ const report = { moduleId: moduleSpec.moduleId, items: questions.items.length, u
 try {
   const mediaManifest = await load("content/english/media/image-generation-manifest.json");
   const audioManifest = await load("content/english/audio/audio-generation-manifest.json");
+  const audioProduction = await load("content/english/year-1/module-01/audio-production-manifest.json");
   const all = [...mediaManifest.entries, ...audioManifest.entries];
   const ids = all.map((entry) => entry.mediaId || entry.audioId);
   const paths = all.map((entry) => entry.outputPath);
   if (new Set(ids).size !== ids.length || new Set(paths).size !== paths.length) fail("DUPLICATE_MEDIA_OR_AUDIO_ID_OR_PATH");
   if (new Set(audioManifest.entries.map((entry) => entry.dedupeKey)).size !== audioManifest.entries.length) fail("DUPLICATE_AUDIO_DEDUPE_KEY");
+  if (audioManifest.entries.some((entry) => !Array.isArray(entry.usedByItems) || entry.usedByItems.length === 0)) fail("AUDIO_USED_BY_ITEMS_MISSING");
+  if (audioManifest.entries.some((entry) => /Good morning! \/ Good afternoon! \/ Goodbye!|1: What's your name\? 2: My name is Ben\./.test(entry.transcript))) fail("INVALID_COMBINED_AUDIO_PRESENT");
+  const q009 = audioProduction.items?.["Y1M01-Q009"] ?? [];
+  const q015 = audioProduction.items?.["Y1M01-Q015"] ?? [];
+  if (q009.length !== 3 || new Set(q009.map((binding) => binding.audioId)).size !== 3) fail("Q009_MULTI_AUDIO_INVALID");
+  if (q015.length !== 2 || new Set(q015.map((binding) => binding.audioId)).size !== 2) fail("Q015_MULTI_AUDIO_INVALID");
+  if (mediaManifest.entries.some((entry) => !/^IMG-Y1M01-[A-Z0-9-]+$/.test(entry.mediaId))) fail("SEMANTIC_IMAGE_ID_INVALID");
   report.runtimeReady = all.every((entry) => entry.status === "APPROVED");
-} catch (error) { if (String(error?.message || error).startsWith("DUPLICATE_")) throw error; report.runtimeReady = false; }
+} catch (error) { if (/DUPLICATE_|AUDIO_USED_BY_ITEMS_MISSING|INVALID_COMBINED_AUDIO_PRESENT|Q009_MULTI_AUDIO_INVALID|Q015_MULTI_AUDIO_INVALID|SEMANTIC_IMAGE_ID_INVALID/.test(String(error?.message || error))) throw error; report.runtimeReady = false; }
 console.log(JSON.stringify(report, null, 2));

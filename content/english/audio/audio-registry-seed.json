@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "policy": "audio-policy.json",
-  "count": 24,
+  "count": 23,
   "entries": [
     {
       "audioId": "AUD-Y1M01-52B269EBB3AE",
@@ -65,19 +65,6 @@
       "prosodyProfile": "neutral_natural",
       "status": "TO_GENERATE",
       "reuseKey": "ce305ba925a9",
-      "urlOrPath": "",
-      "version": "1.0"
-    },
-    {
-      "audioId": "AUD-Y1M01-3A6A038E1E7F",
-      "type": "chunk",
-      "transcript": "Good morning! / Good afternoon! / Goodbye!",
-      "language": "en",
-      "speakerRole": "single",
-      "voiceProfile": "EN_CHILD_FRIENDLY_CLEAR",
-      "prosodyProfile": "neutral_natural",
-      "status": "TO_GENERATE",
-      "reuseKey": "3a6a038e1e7f",
       "urlOrPath": "",
       "version": "1.0"
     },
@@ -147,15 +134,15 @@
       "version": "1.0"
     },
     {
-      "audioId": "AUD-Y1M01-7EA8F8A1D918",
-      "type": "chunk",
-      "transcript": "1: What's your name? 2: My name is Ben.",
+      "audioId": "AUD-Y1M01-7BA4E76F0926",
+      "type": "context_sentence",
+      "transcript": "My name is Ben.",
       "language": "en",
       "speakerRole": "single",
       "voiceProfile": "EN_CHILD_FRIENDLY_CLEAR",
       "prosodyProfile": "neutral_natural",
       "status": "TO_GENERATE",
-      "reuseKey": "7ea8f8a1d918",
+      "reuseKey": "7ba4e76f0926",
       "urlOrPath": "",
       "version": "1.0"
     },

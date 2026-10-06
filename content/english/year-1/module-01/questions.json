@@ -204,8 +204,8 @@
       "requires_reading": "NO",
       "observacao": "Feedback pode animar aceno."
     },
-    {
-      "item_id": "Y1M01-Q009",
+  {
+    "item_id": "Y1M01-Q009",
       "bloco": "B Context",
       "nivel": "L2",
       "objetivo": "Associar três cumprimentos a três cenas",
@@ -220,8 +220,22 @@
       "resposta": "mapeamento 1:1",
       "mecanica_preferida": "drag-drop-multimedia",
       "mecanicas_alternativas": "matching",
-      "image_ref": null,
-      "audio_ref": null,
+    "image_ref": null,
+    "audio_ref": null,
+    "audioBindings": [
+      {
+        "role": "option_a",
+        "audioId": "AUD-Y1M01-685BAF0CD887"
+      },
+      {
+        "role": "option_b",
+        "audioId": "AUD-Y1M01-15C49EF914C3"
+      },
+      {
+        "role": "option_c",
+        "audioId": "AUD-Y1M01-CE305BA925A9"
+      }
+    ],
       "feedback_acerto": "Awesome!",
       "feedback_erro": "Try the scenes again.",
       "racional_pedagogico": "Integra três itens já conhecidos em classificação multimodal.",
@@ -354,8 +368,8 @@
       "requires_reading": "LOW",
       "observacao": "Sem frase escrita."
     },
-    {
-      "item_id": "Y1M01-Q015",
+  {
+    "item_id": "Y1M01-Q015",
       "bloco": "C Names",
       "nivel": "L2",
       "objetivo": "Identificar par pergunta-resposta",
@@ -370,8 +384,18 @@
       "resposta": "A",
       "mecanica_preferida": "matching",
       "mecanicas_alternativas": "drag-drop-multimedia",
-      "image_ref": null,
-      "audio_ref": null,
+    "image_ref": null,
+    "audio_ref": null,
+    "audioBindings": [
+      {
+        "role": "option_a",
+        "audioId": "AUD-Y1M01-61B336EB3A2B"
+      },
+      {
+        "role": "option_b",
+        "audioId": "AUD-Y1M01-7BA4E76F0926"
+      }
+    ],
       "feedback_acerto": "Great conversation!",
       "feedback_erro": "One asks. One answers.",
       "racional_pedagogico": "Trabalha turnos de fala com ícones de áudio.",

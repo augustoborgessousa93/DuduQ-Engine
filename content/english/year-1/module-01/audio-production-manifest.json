@@ -2,26 +2,138 @@
   "schemaVersion": "1.0",
   "moduleId": "Y1M01",
   "items": {
-    "Y1M01-Q001": "AUD-Y1M01-52B269EBB3AE",
-    "Y1M01-Q002": "AUD-Y1M01-CF7D2ED5DEB6",
-    "Y1M01-Q003": "AUD-Y1M01-685BAF0CD887",
-    "Y1M01-Q004": "AUD-Y1M01-15C49EF914C3",
-    "Y1M01-Q005": "AUD-Y1M01-CE305BA925A9",
-    "Y1M01-Q006": "AUD-Y1M01-685BAF0CD887",
-    "Y1M01-Q007": "AUD-Y1M01-15C49EF914C3",
-    "Y1M01-Q008": "AUD-Y1M01-CE305BA925A9",
-    "Y1M01-Q009": "AUD-Y1M01-3A6A038E1E7F",
-    "Y1M01-Q010": "AUD-Y1M01-A611610DB0F8",
-    "Y1M01-Q011": "AUD-Y1M01-61B336EB3A2B",
-    "Y1M01-Q012": "AUD-Y1M01-C07D80874CE7",
-    "Y1M01-Q013": "AUD-Y1M01-A28016380DE8",
-    "Y1M01-Q014": "AUD-Y1M01-61E1B8064128",
-    "Y1M01-Q015": "AUD-Y1M01-7EA8F8A1D918",
-    "Y1M01-Q016": "AUD-Y1M01-A625059AB21E",
-    "Y1M01-Q017": "AUD-Y1M01-84B9C53B6AC1",
-    "Y1M01-Q018": "AUD-Y1M01-301D62C40146",
-    "Y1M01-Q019": "AUD-Y1M01-08141B242251",
-    "Y1M01-Q020": "AUD-Y1M01-97345CB1900A"
+    "Y1M01-Q001": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-52B269EBB3AE"
+      }
+    ],
+    "Y1M01-Q002": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-CF7D2ED5DEB6"
+      }
+    ],
+    "Y1M01-Q003": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-685BAF0CD887"
+      }
+    ],
+    "Y1M01-Q004": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-15C49EF914C3"
+      }
+    ],
+    "Y1M01-Q005": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-CE305BA925A9"
+      }
+    ],
+    "Y1M01-Q006": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-685BAF0CD887"
+      }
+    ],
+    "Y1M01-Q007": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-15C49EF914C3"
+      }
+    ],
+    "Y1M01-Q008": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-CE305BA925A9"
+      }
+    ],
+    "Y1M01-Q009": [
+      {
+        "role": "option_a",
+        "audioId": "AUD-Y1M01-685BAF0CD887"
+      },
+      {
+        "role": "option_b",
+        "audioId": "AUD-Y1M01-15C49EF914C3"
+      },
+      {
+        "role": "option_c",
+        "audioId": "AUD-Y1M01-CE305BA925A9"
+      }
+    ],
+    "Y1M01-Q010": [
+      {
+        "role": "dialogue",
+        "audioId": "AUD-Y1M01-A611610DB0F8"
+      }
+    ],
+    "Y1M01-Q011": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-61B336EB3A2B"
+      }
+    ],
+    "Y1M01-Q012": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-C07D80874CE7"
+      }
+    ],
+    "Y1M01-Q013": [
+      {
+        "role": "dialogue",
+        "audioId": "AUD-Y1M01-A28016380DE8"
+      }
+    ],
+    "Y1M01-Q014": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-61E1B8064128"
+      }
+    ],
+    "Y1M01-Q015": [
+      {
+        "role": "option_a",
+        "audioId": "AUD-Y1M01-61B336EB3A2B"
+      },
+      {
+        "role": "option_b",
+        "audioId": "AUD-Y1M01-7BA4E76F0926"
+      }
+    ],
+    "Y1M01-Q016": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-A625059AB21E"
+      }
+    ],
+    "Y1M01-Q017": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-84B9C53B6AC1"
+      }
+    ],
+    "Y1M01-Q018": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-301D62C40146"
+      }
+    ],
+    "Y1M01-Q019": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-08141B242251"
+      }
+    ],
+    "Y1M01-Q020": [
+      {
+        "role": "stimulus",
+        "audioId": "AUD-Y1M01-97345CB1900A"
+      }
+    ]
   },
   "utterances": [
     {
@@ -66,7 +178,8 @@
       "prosodyProfile": "neutral_natural",
       "usedByItems": [
         "Y1M01-Q003",
-        "Y1M01-Q006"
+        "Y1M01-Q006",
+        "Y1M01-Q009"
       ],
       "reuseScope": "CROSS_MODULE",
       "dedupeKey": "8d9f2a35c01b06f3670d0179ff156d649db73a04631fa11d6beb225037a0d55f",
@@ -83,7 +196,8 @@
       "prosodyProfile": "neutral_natural",
       "usedByItems": [
         "Y1M01-Q004",
-        "Y1M01-Q007"
+        "Y1M01-Q007",
+        "Y1M01-Q009"
       ],
       "reuseScope": "CROSS_MODULE",
       "dedupeKey": "006e12ba09b8d109080faabf93db33c6c7c752b5ab8a6ec465b02e2aa33a4770",
@@ -100,26 +214,11 @@
       "prosodyProfile": "neutral_natural",
       "usedByItems": [
         "Y1M01-Q005",
-        "Y1M01-Q008"
+        "Y1M01-Q008",
+        "Y1M01-Q009"
       ],
       "reuseScope": "CROSS_MODULE",
       "dedupeKey": "d9bf5be44e4d2fbb8ef875c1f266936b58904ae15325ab956a95796a5fbfae49",
-      "status": "TO_GENERATE",
-      "urlOrPath": ""
-    },
-    {
-      "audioId": "AUD-Y1M01-3A6A038E1E7F",
-      "type": "chunk",
-      "transcript": "Good morning! / Good afternoon! / Goodbye!",
-      "language": "en",
-      "speakerRole": "single",
-      "voiceProfile": "EN_CHILD_FRIENDLY_CLEAR",
-      "prosodyProfile": "neutral_natural",
-      "usedByItems": [
-        "Y1M01-Q009"
-      ],
-      "reuseScope": "MODULE_OR_CROSS_MODULE_IF_EXACT_MATCH",
-      "dedupeKey": "c94280554ad18a316885bafcfb07a8df973fd87209eda23b1e42739c35eb9117",
       "status": "TO_GENERATE",
       "urlOrPath": ""
     },
@@ -148,9 +247,10 @@
       "voiceProfile": "EN_CHILD_FRIENDLY_CLEAR",
       "prosodyProfile": "neutral_natural",
       "usedByItems": [
-        "Y1M01-Q011"
+        "Y1M01-Q011",
+        "Y1M01-Q015"
       ],
-      "reuseScope": "MODULE_OR_CROSS_MODULE_IF_EXACT_MATCH",
+      "reuseScope": "CROSS_MODULE",
       "dedupeKey": "bad3fcbc2c01d579163b2a712a0c9cf81d0fd3a10d63fd4598d060f169b57c85",
       "status": "TO_GENERATE",
       "urlOrPath": ""
@@ -204,9 +304,9 @@
       "urlOrPath": ""
     },
     {
-      "audioId": "AUD-Y1M01-7EA8F8A1D918",
-      "type": "chunk",
-      "transcript": "1: What's your name? 2: My name is Ben.",
+      "audioId": "AUD-Y1M01-7BA4E76F0926",
+      "type": "context_sentence",
+      "transcript": "My name is Ben.",
       "language": "en",
       "speakerRole": "single",
       "voiceProfile": "EN_CHILD_FRIENDLY_CLEAR",
@@ -215,7 +315,7 @@
         "Y1M01-Q015"
       ],
       "reuseScope": "MODULE_OR_CROSS_MODULE_IF_EXACT_MATCH",
-      "dedupeKey": "aea69f68695c34a6d15141c6fdbb2b40eb7c2510287feceaf5cc44a292c4bd38",
+      "dedupeKey": "7ba4e76f092625a99ead6c2e88a6a34820c6de0479663000ebbf84fe6be7e2ea",
       "status": "TO_GENERATE",
       "urlOrPath": ""
     },
@@ -307,7 +407,28 @@
       "speakerRole": "teacher",
       "voiceProfile": "PT_BR_INSTRUCTION_WARM",
       "prosodyProfile": "neutral",
-      "usedByItems": [],
+      "usedByItems": [
+        "Y1M01-Q001",
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q009",
+        "Y1M01-Q010",
+        "Y1M01-Q011",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q015",
+        "Y1M01-Q016",
+        "Y1M01-Q017",
+        "Y1M01-Q018",
+        "Y1M01-Q019",
+        "Y1M01-Q020"
+      ],
       "reuseScope": "GLOBAL_COLLECTION",
       "dedupeKey": "f678403244f1494061398c51be2e97ee4b92df8eeaae257448080c693334f1b1",
       "status": "TO_GENERATE",
@@ -321,7 +442,28 @@
       "speakerRole": "teacher",
       "voiceProfile": "PT_BR_INSTRUCTION_WARM",
       "prosodyProfile": "neutral",
-      "usedByItems": [],
+      "usedByItems": [
+        "Y1M01-Q001",
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q009",
+        "Y1M01-Q010",
+        "Y1M01-Q011",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q015",
+        "Y1M01-Q016",
+        "Y1M01-Q017",
+        "Y1M01-Q018",
+        "Y1M01-Q019",
+        "Y1M01-Q020"
+      ],
       "reuseScope": "GLOBAL_COLLECTION",
       "dedupeKey": "1c06b55e9313e1c4a1dd84f2218433f6f6f08100f6601a9f4feae7414c330a5f",
       "status": "TO_GENERATE",
@@ -335,7 +477,28 @@
       "speakerRole": "teacher",
       "voiceProfile": "PT_BR_INSTRUCTION_WARM",
       "prosodyProfile": "neutral",
-      "usedByItems": [],
+      "usedByItems": [
+        "Y1M01-Q001",
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q009",
+        "Y1M01-Q010",
+        "Y1M01-Q011",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q015",
+        "Y1M01-Q016",
+        "Y1M01-Q017",
+        "Y1M01-Q018",
+        "Y1M01-Q019",
+        "Y1M01-Q020"
+      ],
       "reuseScope": "GLOBAL_COLLECTION",
       "dedupeKey": "1f3dce0793f51477b40b47adb445eb5caa909bacae8c562ba2e219a7f7aa2fe5",
       "status": "TO_GENERATE",
@@ -349,7 +512,28 @@
       "speakerRole": "teacher",
       "voiceProfile": "PT_BR_INSTRUCTION_WARM",
       "prosodyProfile": "neutral",
-      "usedByItems": [],
+      "usedByItems": [
+        "Y1M01-Q001",
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q009",
+        "Y1M01-Q010",
+        "Y1M01-Q011",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q015",
+        "Y1M01-Q016",
+        "Y1M01-Q017",
+        "Y1M01-Q018",
+        "Y1M01-Q019",
+        "Y1M01-Q020"
+      ],
       "reuseScope": "GLOBAL_COLLECTION",
       "dedupeKey": "26fb41ba689794996b7f40dbc9a053843264e8ecfe13440506d24d5323c9f9e2",
       "status": "TO_GENERATE",
@@ -363,7 +547,28 @@
       "speakerRole": "teacher",
       "voiceProfile": "PT_BR_INSTRUCTION_WARM",
       "prosodyProfile": "neutral",
-      "usedByItems": [],
+      "usedByItems": [
+        "Y1M01-Q001",
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q009",
+        "Y1M01-Q010",
+        "Y1M01-Q011",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q015",
+        "Y1M01-Q016",
+        "Y1M01-Q017",
+        "Y1M01-Q018",
+        "Y1M01-Q019",
+        "Y1M01-Q020"
+      ],
       "reuseScope": "GLOBAL_COLLECTION",
       "dedupeKey": "91e41c00da3ed02abf8680d69d232f6800fc892a14d16347452252eb890760e5",
       "status": "TO_GENERATE",
@@ -377,7 +582,28 @@
       "speakerRole": "teacher",
       "voiceProfile": "PT_BR_INSTRUCTION_WARM",
       "prosodyProfile": "neutral",
-      "usedByItems": [],
+      "usedByItems": [
+        "Y1M01-Q001",
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q009",
+        "Y1M01-Q010",
+        "Y1M01-Q011",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q015",
+        "Y1M01-Q016",
+        "Y1M01-Q017",
+        "Y1M01-Q018",
+        "Y1M01-Q019",
+        "Y1M01-Q020"
+      ],
       "reuseScope": "GLOBAL_COLLECTION",
       "dedupeKey": "65cf08f85b20d9470e50da1997b7aafbb3ae4d34db31d0db9216261d2b031f19",
       "status": "TO_GENERATE",
@@ -391,7 +617,28 @@
       "speakerRole": "teacher",
       "voiceProfile": "PT_BR_INSTRUCTION_WARM",
       "prosodyProfile": "neutral",
-      "usedByItems": [],
+      "usedByItems": [
+        "Y1M01-Q001",
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q009",
+        "Y1M01-Q010",
+        "Y1M01-Q011",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q015",
+        "Y1M01-Q016",
+        "Y1M01-Q017",
+        "Y1M01-Q018",
+        "Y1M01-Q019",
+        "Y1M01-Q020"
+      ],
       "reuseScope": "GLOBAL_COLLECTION",
       "dedupeKey": "51761fafa599a2316de1724c2d4f02ab628951e443a492c486a52bee9cbd530b",
       "status": "TO_GENERATE",

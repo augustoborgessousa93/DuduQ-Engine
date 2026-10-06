@@ -4,7 +4,7 @@
   "assets": [
     {
       "requirementId": "Y1M01-MEDIA-01",
-      "proposedMediaId": "MEDIA-MEDIA-01",
+      "proposedMediaId": "IMG-Y1M01-GREETING-GENERIC-001",
       "usedByItems": [
         "Y1M01-Q001"
       ],
@@ -27,7 +27,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-02",
-      "proposedMediaId": "MEDIA-MEDIA-02",
+      "proposedMediaId": "IMG-Y1M01-GREETING-INFORMAL-001",
       "usedByItems": [
         "Y1M01-Q002"
       ],
@@ -48,7 +48,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-03",
-      "proposedMediaId": "MEDIA-MEDIA-03",
+      "proposedMediaId": "IMG-Y1M01-GREETING-MORNING-001",
       "usedByItems": [
         "Y1M01-Q003",
         "Y1M01-Q006"
@@ -72,7 +72,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-04",
-      "proposedMediaId": "MEDIA-MEDIA-04",
+      "proposedMediaId": "IMG-Y1M01-GREETING-AFTERNOON-001",
       "usedByItems": [
         "Y1M01-Q004",
         "Y1M01-Q007"
@@ -96,7 +96,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-05",
-      "proposedMediaId": "MEDIA-MEDIA-05",
+      "proposedMediaId": "IMG-Y1M01-FAREWELL-GENERIC-001",
       "usedByItems": [
         "Y1M01-Q005",
         "Y1M01-Q008"
@@ -119,7 +119,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-06",
-      "proposedMediaId": "MEDIA-MEDIA-06",
+      "proposedMediaId": "IMG-Y1M01-GREETING-TIME-CONTRAST-001",
       "usedByItems": [
         "Y1M01-Q009"
       ],
@@ -140,7 +140,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-07",
-      "proposedMediaId": "MEDIA-MEDIA-07",
+      "proposedMediaId": "IMG-Y1M01-DIALOGUE-HELLO-HI-001",
       "usedByItems": [
         "Y1M01-Q010"
       ],
@@ -162,7 +162,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-08",
-      "proposedMediaId": "MEDIA-MEDIA-08",
+      "proposedMediaId": "IMG-Y1M01-NAME-QUESTION-001",
       "usedByItems": [
         "Y1M01-Q011"
       ],
@@ -184,7 +184,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-09",
-      "proposedMediaId": "MEDIA-MEDIA-09",
+      "proposedMediaId": "IMG-Y1M01-NAME-LEO-001",
       "usedByItems": [
         "Y1M01-Q012"
       ],
@@ -206,7 +206,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-10",
-      "proposedMediaId": "MEDIA-MEDIA-10",
+      "proposedMediaId": "IMG-Y1M01-NAME-MIA-001",
       "usedByItems": [
         "Y1M01-Q013"
       ],
@@ -228,7 +228,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-11",
-      "proposedMediaId": "MEDIA-MEDIA-11",
+      "proposedMediaId": "IMG-Y1M01-NAME-TAGS-001",
       "usedByItems": [
         "Y1M01-Q014"
       ],
@@ -249,7 +249,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-12",
-      "proposedMediaId": "MEDIA-MEDIA-12",
+      "proposedMediaId": "IMG-Y1M01-NAME-QUESTION-ANSWER-001",
       "usedByItems": [
         "Y1M01-Q015"
       ],
@@ -270,7 +270,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-13",
-      "proposedMediaId": "MEDIA-MEDIA-13",
+      "proposedMediaId": "IMG-Y1M01-BOY-GIRL-001",
       "usedByItems": [
         "Y1M01-Q016",
         "Y1M01-Q017"
@@ -294,7 +294,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-14",
-      "proposedMediaId": "MEDIA-MEDIA-14",
+      "proposedMediaId": "IMG-Y1M01-INTRODUCTION-MIA-001",
       "usedByItems": [
         "Y1M01-Q018"
       ],
@@ -316,7 +316,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-15",
-      "proposedMediaId": "MEDIA-MEDIA-15",
+      "proposedMediaId": "IMG-Y1M01-INTRODUCTION-LEO-MORNING-001",
       "usedByItems": [
         "Y1M01-Q019"
       ],
@@ -337,7 +337,7 @@
     },
     {
       "requirementId": "Y1M01-MEDIA-16",
-      "proposedMediaId": "MEDIA-MEDIA-16",
+      "proposedMediaId": "IMG-Y1M01-FAREWELL-ANA-001",
       "usedByItems": [
         "Y1M01-Q020"
       ],

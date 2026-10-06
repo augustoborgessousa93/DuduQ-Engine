@@ -15,12 +15,14 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "b18340e9fbf699b25b41f59d8620c50b96837029e28e343e2d200faf14188906",
+      "usedByItems": [
+        "Y1M01-Q001"
+      ],
       "category": "LEXICAL",
       "filename": "aud-y1m01-52b269ebb3ae-hello.mp3",
       "outputPath": "content/english/assets/audio/lexical/aud-y1m01-52b269ebb3ae-hello.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "CROSS_MODULE",
-      "usedByItems": [],
       "crossModuleCandidate": true
     },
     {
@@ -36,12 +38,14 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "0ea05ca712ed61e557a298115d81660d45c16dfc59f8fc2bdd91cf1ebd4a9dd1",
+      "usedByItems": [
+        "Y1M01-Q002"
+      ],
       "category": "LEXICAL",
       "filename": "aud-y1m01-cf7d2ed5deb6-hi.mp3",
       "outputPath": "content/english/assets/audio/lexical/aud-y1m01-cf7d2ed5deb6-hi.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "CROSS_MODULE",
-      "usedByItems": [],
       "crossModuleCandidate": true
     },
     {
@@ -57,12 +61,16 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "8d9f2a35c01b06f3670d0179ff156d649db73a04631fa11d6beb225037a0d55f",
+      "usedByItems": [
+        "Y1M01-Q003",
+        "Y1M01-Q006",
+        "Y1M01-Q009"
+      ],
       "category": "LEXICAL",
       "filename": "aud-y1m01-685baf0cd887-good-morning.mp3",
       "outputPath": "content/english/assets/audio/lexical/aud-y1m01-685baf0cd887-good-morning.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "CROSS_MODULE",
-      "usedByItems": [],
       "crossModuleCandidate": true
     },
     {
@@ -78,12 +86,16 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "006e12ba09b8d109080faabf93db33c6c7c752b5ab8a6ec465b02e2aa33a4770",
+      "usedByItems": [
+        "Y1M01-Q004",
+        "Y1M01-Q007",
+        "Y1M01-Q009"
+      ],
       "category": "LEXICAL",
       "filename": "aud-y1m01-15c49ef914c3-good-afternoon.mp3",
       "outputPath": "content/english/assets/audio/lexical/aud-y1m01-15c49ef914c3-good-afternoon.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "CROSS_MODULE",
-      "usedByItems": [],
       "crossModuleCandidate": true
     },
     {
@@ -99,33 +111,16 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "d9bf5be44e4d2fbb8ef875c1f266936b58904ae15325ab956a95796a5fbfae49",
+      "usedByItems": [
+        "Y1M01-Q005",
+        "Y1M01-Q008",
+        "Y1M01-Q009"
+      ],
       "category": "LEXICAL",
       "filename": "aud-y1m01-ce305ba925a9-goodbye.mp3",
       "outputPath": "content/english/assets/audio/lexical/aud-y1m01-ce305ba925a9-goodbye.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "CROSS_MODULE",
-      "usedByItems": [],
-      "crossModuleCandidate": true
-    },
-    {
-      "audioId": "AUD-Y1M01-3A6A038E1E7F",
-      "type": "chunk",
-      "transcript": "Good morning! / Good afternoon! / Goodbye!",
-      "language": "en",
-      "speakerRole": "single",
-      "voiceProfile": "EN_CHILD_FRIENDLY_CLEAR",
-      "prosodyProfile": "neutral_natural",
-      "status": "TO_GENERATE",
-      "reuseKey": "3a6a038e1e7f",
-      "urlOrPath": "",
-      "version": "1.0",
-      "dedupeKey": "c94280554ad18a316885bafcfb07a8df973fd87209eda23b1e42739c35eb9117",
-      "category": "FUNCTIONAL_CHUNK",
-      "filename": "aud-y1m01-3a6a038e1e7f-good-morning-good-afternoon-goodbye.mp3",
-      "outputPath": "content/english/assets/audio/chunks/aud-y1m01-3a6a038e1e7f-good-morning-good-afternoon-goodbye.mp3",
-      "speakingRate": "normal_clear",
-      "reuseScope": "CROSS_MODULE",
-      "usedByItems": [],
       "crossModuleCandidate": true
     },
     {
@@ -141,12 +136,14 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "ffb85e1648b301fcf18b89a6146e0bd5d0c84244623976b429d45abd907678bc",
+      "usedByItems": [
+        "Y1M01-Q010"
+      ],
       "category": "DIALOGUE",
       "filename": "aud-y1m01-a611610db0f8-a-hello-b-hi.mp3",
       "outputPath": "content/english/assets/audio/dialogues/aud-y1m01-a611610db0f8-a-hello-b-hi.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "MODULE_OR_CROSS_MODULE_IF_EXACT_MATCH",
-      "usedByItems": [],
       "crossModuleCandidate": false
     },
     {
@@ -162,12 +159,15 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "bad3fcbc2c01d579163b2a712a0c9cf81d0fd3a10d63fd4598d060f169b57c85",
+      "usedByItems": [
+        "Y1M01-Q011",
+        "Y1M01-Q015"
+      ],
       "category": "FUNCTIONAL_CHUNK",
       "filename": "aud-y1m01-61b336eb3a2b-what-s-your-name.mp3",
       "outputPath": "content/english/assets/audio/chunks/aud-y1m01-61b336eb3a2b-what-s-your-name.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "CROSS_MODULE",
-      "usedByItems": [],
       "crossModuleCandidate": true
     },
     {
@@ -183,12 +183,14 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "5103385fabc148b831d726aba064e71bb599f54549c5de37a7fbdc60bb919871",
+      "usedByItems": [
+        "Y1M01-Q012"
+      ],
       "category": "CONTEXT_SENTENCE",
       "filename": "aud-y1m01-c07d80874ce7-my-name-is-leo.mp3",
       "outputPath": "content/english/assets/audio/chunks/aud-y1m01-c07d80874ce7-my-name-is-leo.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "MODULE_OR_CROSS_MODULE_IF_EXACT_MATCH",
-      "usedByItems": [],
       "crossModuleCandidate": false
     },
     {
@@ -204,12 +206,14 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "bc1f3519802ba8764c0178910cfba32773250e6670658f94d95cf33382fe76ca",
+      "usedByItems": [
+        "Y1M01-Q013"
+      ],
       "category": "DIALOGUE",
       "filename": "aud-y1m01-a28016380de8-a-what-s-your-name-b-my-name-is-mia.mp3",
       "outputPath": "content/english/assets/audio/dialogues/aud-y1m01-a28016380de8-a-what-s-your-name-b-my-name-is-mia.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "MODULE_OR_CROSS_MODULE_IF_EXACT_MATCH",
-      "usedByItems": [],
       "crossModuleCandidate": false
     },
     {
@@ -225,33 +229,37 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "810552a62e3187986245983c25a8287d669d1ea386a200e8719c428a28cebeac",
+      "usedByItems": [
+        "Y1M01-Q014"
+      ],
       "category": "CONTEXT_SENTENCE",
       "filename": "aud-y1m01-61e1b8064128-my-name-is-ana.mp3",
       "outputPath": "content/english/assets/audio/chunks/aud-y1m01-61e1b8064128-my-name-is-ana.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "MODULE_OR_CROSS_MODULE_IF_EXACT_MATCH",
-      "usedByItems": [],
       "crossModuleCandidate": false
     },
     {
-      "audioId": "AUD-Y1M01-7EA8F8A1D918",
-      "type": "chunk",
-      "transcript": "1: What's your name? 2: My name is Ben.",
+      "audioId": "AUD-Y1M01-7BA4E76F0926",
+      "type": "context_sentence",
+      "transcript": "My name is Ben.",
       "language": "en",
       "speakerRole": "single",
       "voiceProfile": "EN_CHILD_FRIENDLY_CLEAR",
       "prosodyProfile": "neutral_natural",
       "status": "TO_GENERATE",
-      "reuseKey": "7ea8f8a1d918",
+      "reuseKey": "7ba4e76f0926",
       "urlOrPath": "",
       "version": "1.0",
-      "dedupeKey": "aea69f68695c34a6d15141c6fdbb2b40eb7c2510287feceaf5cc44a292c4bd38",
+      "dedupeKey": "7ba4e76f092625a99ead6c2e88a6a34820c6de0479663000ebbf84fe6be7e2ea",
+      "usedByItems": [
+        "Y1M01-Q015"
+      ],
       "category": "CONTEXT_SENTENCE",
-      "filename": "aud-y1m01-7ea8f8a1d918-1-what-s-your-name-2-my-name-is-ben.mp3",
-      "outputPath": "content/english/assets/audio/chunks/aud-y1m01-7ea8f8a1d918-1-what-s-your-name-2-my-name-is-ben.mp3",
+      "filename": "aud-y1m01-7ba4e76f0926-my-name-is-ben.mp3",
+      "outputPath": "content/english/assets/audio/chunks/aud-y1m01-7ba4e76f0926-my-name-is-ben.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "MODULE_OR_CROSS_MODULE_IF_EXACT_MATCH",
-      "usedByItems": [],
       "crossModuleCandidate": false
     },
     {
@@ -267,12 +275,14 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "4d1fe47af7a06ee67bb2e689723a6b59635bcb054b6a1ebc315a9867176bb5c1",
+      "usedByItems": [
+        "Y1M01-Q016"
+      ],
       "category": "LEXICAL",
       "filename": "aud-y1m01-a625059ab21e-boy.mp3",
       "outputPath": "content/english/assets/audio/lexical/aud-y1m01-a625059ab21e-boy.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "CROSS_MODULE",
-      "usedByItems": [],
       "crossModuleCandidate": true
     },
     {
@@ -288,12 +298,14 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "3a54710fc4f4690ede064ce7f860991035adbea03d7148b7abfc7cc43edb84d8",
+      "usedByItems": [
+        "Y1M01-Q017"
+      ],
       "category": "LEXICAL",
       "filename": "aud-y1m01-84b9c53b6ac1-girl.mp3",
       "outputPath": "content/english/assets/audio/lexical/aud-y1m01-84b9c53b6ac1-girl.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "CROSS_MODULE",
-      "usedByItems": [],
       "crossModuleCandidate": true
     },
     {
@@ -309,12 +321,14 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "686e105e0eac4d5e6f0d292ca2c727bf0a2dd52fc331bdcc7ca4ede63c1342e8",
+      "usedByItems": [
+        "Y1M01-Q018"
+      ],
       "category": "CONTEXT_SENTENCE",
       "filename": "aud-y1m01-301d62c40146-hello-my-name-is-mia.mp3",
       "outputPath": "content/english/assets/audio/chunks/aud-y1m01-301d62c40146-hello-my-name-is-mia.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "MODULE_OR_CROSS_MODULE_IF_EXACT_MATCH",
-      "usedByItems": [],
       "crossModuleCandidate": false
     },
     {
@@ -330,12 +344,14 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "b9ffa2cea980abeff99cfc7df8df6251b8a5d0449a5260e6d0e9a41cc8eab6a1",
+      "usedByItems": [
+        "Y1M01-Q019"
+      ],
       "category": "CONTEXT_SENTENCE",
       "filename": "aud-y1m01-08141b242251-good-morning-my-name-is-leo.mp3",
       "outputPath": "content/english/assets/audio/chunks/aud-y1m01-08141b242251-good-morning-my-name-is-leo.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "MODULE_OR_CROSS_MODULE_IF_EXACT_MATCH",
-      "usedByItems": [],
       "crossModuleCandidate": false
     },
     {
@@ -351,12 +367,14 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "518b0a6aff57b862260001f86b48204864cc7a1b8c35f812b2127d1330fa8f83",
+      "usedByItems": [
+        "Y1M01-Q020"
+      ],
       "category": "CONTEXT_SENTENCE",
       "filename": "aud-y1m01-97345cb1900a-goodbye-ana.mp3",
       "outputPath": "content/english/assets/audio/chunks/aud-y1m01-97345cb1900a-goodbye-ana.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "MODULE_OR_CROSS_MODULE_IF_EXACT_MATCH",
-      "usedByItems": [],
       "crossModuleCandidate": false
     },
     {
@@ -372,12 +390,33 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "f678403244f1494061398c51be2e97ee4b92df8eeaae257448080c693334f1b1",
+      "usedByItems": [
+        "Y1M01-Q001",
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q009",
+        "Y1M01-Q010",
+        "Y1M01-Q011",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q015",
+        "Y1M01-Q016",
+        "Y1M01-Q017",
+        "Y1M01-Q018",
+        "Y1M01-Q019",
+        "Y1M01-Q020"
+      ],
       "category": "GLOBAL_UI",
       "filename": "aud-ui-18d82bca83e4-ouca-e-escolha.mp3",
       "outputPath": "content/english/assets/audio/ui/aud-ui-18d82bca83e4-ouca-e-escolha.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "GLOBAL_COLLECTION",
-      "usedByItems": [],
       "crossModuleCandidate": false
     },
     {
@@ -393,12 +432,33 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "1c06b55e9313e1c4a1dd84f2218433f6f6f08100f6601a9f4feae7414c330a5f",
+      "usedByItems": [
+        "Y1M01-Q001",
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q009",
+        "Y1M01-Q010",
+        "Y1M01-Q011",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q015",
+        "Y1M01-Q016",
+        "Y1M01-Q017",
+        "Y1M01-Q018",
+        "Y1M01-Q019",
+        "Y1M01-Q020"
+      ],
       "category": "GLOBAL_UI",
       "filename": "aud-ui-43c6b897d5b6-ouca-e-escolha-a-cena-correta.mp3",
       "outputPath": "content/english/assets/audio/ui/aud-ui-43c6b897d5b6-ouca-e-escolha-a-cena-correta.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "GLOBAL_COLLECTION",
-      "usedByItems": [],
       "crossModuleCandidate": false
     },
     {
@@ -414,12 +474,33 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "1f3dce0793f51477b40b47adb445eb5caa909bacae8c562ba2e219a7f7aa2fe5",
+      "usedByItems": [
+        "Y1M01-Q001",
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q009",
+        "Y1M01-Q010",
+        "Y1M01-Q011",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q015",
+        "Y1M01-Q016",
+        "Y1M01-Q017",
+        "Y1M01-Q018",
+        "Y1M01-Q019",
+        "Y1M01-Q020"
+      ],
       "category": "GLOBAL_UI",
       "filename": "aud-ui-7c89974a49dd-veja-a-cena-e-escolha-o-audio.mp3",
       "outputPath": "content/english/assets/audio/ui/aud-ui-7c89974a49dd-veja-a-cena-e-escolha-o-audio.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "GLOBAL_COLLECTION",
-      "usedByItems": [],
       "crossModuleCandidate": false
     },
     {
@@ -435,12 +516,33 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "26fb41ba689794996b7f40dbc9a053843264e8ecfe13440506d24d5323c9f9e2",
+      "usedByItems": [
+        "Y1M01-Q001",
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q009",
+        "Y1M01-Q010",
+        "Y1M01-Q011",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q015",
+        "Y1M01-Q016",
+        "Y1M01-Q017",
+        "Y1M01-Q018",
+        "Y1M01-Q019",
+        "Y1M01-Q020"
+      ],
       "category": "GLOBAL_UI",
       "filename": "aud-ui-ed04e9d622c0-ouca-e-arraste-para-a-imagem-correta.mp3",
       "outputPath": "content/english/assets/audio/ui/aud-ui-ed04e9d622c0-ouca-e-arraste-para-a-imagem-correta.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "GLOBAL_COLLECTION",
-      "usedByItems": [],
       "crossModuleCandidate": false
     },
     {
@@ -456,12 +558,33 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "91e41c00da3ed02abf8680d69d232f6800fc892a14d16347452252eb890760e5",
+      "usedByItems": [
+        "Y1M01-Q001",
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q009",
+        "Y1M01-Q010",
+        "Y1M01-Q011",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q015",
+        "Y1M01-Q016",
+        "Y1M01-Q017",
+        "Y1M01-Q018",
+        "Y1M01-Q019",
+        "Y1M01-Q020"
+      ],
       "category": "GLOBAL_UI",
       "filename": "aud-ui-ee8d29d80a23-ouca-novamente.mp3",
       "outputPath": "content/english/assets/audio/ui/aud-ui-ee8d29d80a23-ouca-novamente.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "GLOBAL_COLLECTION",
-      "usedByItems": [],
       "crossModuleCandidate": false
     },
     {
@@ -477,12 +600,33 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "65cf08f85b20d9470e50da1997b7aafbb3ae4d34db31d0db9216261d2b031f19",
+      "usedByItems": [
+        "Y1M01-Q001",
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q009",
+        "Y1M01-Q010",
+        "Y1M01-Q011",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q015",
+        "Y1M01-Q016",
+        "Y1M01-Q017",
+        "Y1M01-Q018",
+        "Y1M01-Q019",
+        "Y1M01-Q020"
+      ],
       "category": "GLOBAL_UI",
       "filename": "aud-ui-dc2a19cf00f0-tente-outra-vez.mp3",
       "outputPath": "content/english/assets/audio/ui/aud-ui-dc2a19cf00f0-tente-outra-vez.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "GLOBAL_COLLECTION",
-      "usedByItems": [],
       "crossModuleCandidate": false
     },
     {
@@ -498,12 +642,33 @@
       "urlOrPath": "",
       "version": "1.0",
       "dedupeKey": "51761fafa599a2316de1724c2d4f02ab628951e443a492c486a52bee9cbd530b",
+      "usedByItems": [
+        "Y1M01-Q001",
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q009",
+        "Y1M01-Q010",
+        "Y1M01-Q011",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q015",
+        "Y1M01-Q016",
+        "Y1M01-Q017",
+        "Y1M01-Q018",
+        "Y1M01-Q019",
+        "Y1M01-Q020"
+      ],
       "category": "GLOBAL_UI",
       "filename": "aud-ui-4073952e1266-muito-bem.mp3",
       "outputPath": "content/english/assets/audio/ui/aud-ui-4073952e1266-muito-bem.mp3",
       "speakingRate": "normal_clear",
       "reuseScope": "GLOBAL_COLLECTION",
-      "usedByItems": [],
       "crossModuleCandidate": false
     }
   ]
