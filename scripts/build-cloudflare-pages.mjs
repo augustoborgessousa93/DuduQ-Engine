@@ -105,6 +105,7 @@ for (const route of routes) await copyRuntimeTree(`play/${route}`);
 await copyRuntimeTree("core");
 await copyFile("asset-alvo.png");
 await copyFile("fullscreen-official.svg");
+await copyFile("core/assets/duduq-hud-mascot.png", "play/matching/assets/duduq-hud-mascot.png");
 
 // Only the runtime-generated Penpot artifacts used by the product host are public.
 await copyRuntimeTree("design-system/runtime/screens", "design-system/runtime/screens");
