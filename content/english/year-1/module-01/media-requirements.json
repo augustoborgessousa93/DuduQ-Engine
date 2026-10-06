@@ -1,0 +1,409 @@
+{
+  "schemaVersion": "1.0",
+  "moduleId": "Y1M01",
+  "requirements": [
+    {
+      "requirementId": "Y1M01-MEDIA-01",
+      "usedByItems": [
+        "Y1M01-Q001"
+      ],
+      "concept": "greeting",
+      "action": "waving",
+      "setting": "school",
+      "timeOfDay": "day",
+      "characters": "two children",
+      "requiredAttributes": [
+        "two children waving",
+        "no visible text"
+      ],
+      "forbiddenAttributes": [
+        "farewell action",
+        "written answer"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "SINGLE_REQUIREMENT",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "single scene"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-02",
+      "usedByItems": [
+        "Y1M01-Q002"
+      ],
+      "concept": "informal greeting",
+      "action": "waving",
+      "setting": "school",
+      "timeOfDay": "day",
+      "characters": "one child",
+      "requiredAttributes": [
+        "friendly wave"
+      ],
+      "forbiddenAttributes": [
+        "farewell action"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "SINGLE_REQUIREMENT",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "single scene"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-03",
+      "usedByItems": [
+        "Y1M01-Q003",
+        "Y1M01-Q006"
+      ],
+      "concept": "morning greeting",
+      "action": "arrival",
+      "setting": "school gate",
+      "timeOfDay": "morning",
+      "characters": "two children",
+      "requiredAttributes": [
+        "low morning sun",
+        "school arrival"
+      ],
+      "forbiddenAttributes": [
+        "afternoon light",
+        "leaving"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "REUSE_ONLY_WITHIN_EQUIVALENT_CUE",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "single scene reusable only for morning items"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-04",
+      "usedByItems": [
+        "Y1M01-Q004",
+        "Y1M01-Q007"
+      ],
+      "concept": "afternoon greeting",
+      "action": "play",
+      "setting": "school playground",
+      "timeOfDay": "afternoon",
+      "characters": "children",
+      "requiredAttributes": [
+        "afternoon light",
+        "school context"
+      ],
+      "forbiddenAttributes": [
+        "morning sun",
+        "leaving"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "REUSE_ONLY_WITHIN_EQUIVALENT_CUE",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "single scene reusable only for afternoon items"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-05",
+      "usedByItems": [
+        "Y1M01-Q005",
+        "Y1M01-Q008"
+      ],
+      "concept": "farewell",
+      "action": "leaving and waving",
+      "setting": "school exit",
+      "timeOfDay": "day",
+      "characters": "child",
+      "requiredAttributes": [
+        "one child leaving",
+        "clear wave"
+      ],
+      "forbiddenAttributes": [
+        "arrival"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "REUSE_ONLY_WITHIN_EQUIVALENT_CUE",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "single scene reusable only for farewell items"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-06",
+      "usedByItems": [
+        "Y1M01-Q009"
+      ],
+      "concept": "time of day contrast",
+      "action": "three scenes",
+      "setting": "school",
+      "timeOfDay": "morning afternoon farewell",
+      "characters": "children",
+      "requiredAttributes": [
+        "three clearly separated scenes"
+      ],
+      "forbiddenAttributes": [
+        "ambiguous lighting"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "SINGLE_REQUIREMENT",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "three-panel sequence"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-07",
+      "usedByItems": [
+        "Y1M01-Q010"
+      ],
+      "concept": "hello hi dialogue",
+      "action": "greeting",
+      "setting": "school",
+      "timeOfDay": "day",
+      "characters": "two children",
+      "requiredAttributes": [
+        "two speakers",
+        "greeting gesture"
+      ],
+      "forbiddenAttributes": [
+        "visible dialogue transcript"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "SINGLE_REQUIREMENT",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "single scene"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-08",
+      "usedByItems": [
+        "Y1M01-Q011"
+      ],
+      "concept": "asking a name",
+      "action": "speaking",
+      "setting": "school",
+      "timeOfDay": "day",
+      "characters": "two children",
+      "requiredAttributes": [
+        "one speaker",
+        "question audio icon"
+      ],
+      "forbiddenAttributes": [
+        "written question"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "SINGLE_REQUIREMENT",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "single scene"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-09",
+      "usedByItems": [
+        "Y1M01-Q012"
+      ],
+      "concept": "name Leo",
+      "action": "introduction",
+      "setting": "school",
+      "timeOfDay": "day",
+      "characters": "three children",
+      "requiredAttributes": [
+        "one child clearly identified as Leo",
+        "short name tag"
+      ],
+      "forbiddenAttributes": [
+        "other name ambiguity"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "SINGLE_REQUIREMENT",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "single scene"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-10",
+      "usedByItems": [
+        "Y1M01-Q013"
+      ],
+      "concept": "name Mia",
+      "action": "introduction",
+      "setting": "school",
+      "timeOfDay": "day",
+      "characters": "three children",
+      "requiredAttributes": [
+        "Mia Leo Ana name tags",
+        "Mia identifiable"
+      ],
+      "forbiddenAttributes": [
+        "long text"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "SINGLE_REQUIREMENT",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "single scene"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-11",
+      "usedByItems": [
+        "Y1M01-Q014"
+      ],
+      "concept": "name tags",
+      "action": "identification",
+      "setting": "school",
+      "timeOfDay": "day",
+      "characters": "three children",
+      "requiredAttributes": [
+        "ANA MIA LEO tags"
+      ],
+      "forbiddenAttributes": [
+        "sentence text"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "SINGLE_REQUIREMENT",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "character card set"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-12",
+      "usedByItems": [
+        "Y1M01-Q015"
+      ],
+      "concept": "question answer turn",
+      "action": "speaking",
+      "setting": "school",
+      "timeOfDay": "day",
+      "characters": "two children",
+      "requiredAttributes": [
+        "question and response audio icons"
+      ],
+      "forbiddenAttributes": [
+        "written dialogue"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "SINGLE_REQUIREMENT",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "two-card scene"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-13",
+      "usedByItems": [
+        "Y1M01-Q016",
+        "Y1M01-Q017"
+      ],
+      "concept": "boy girl distinction",
+      "action": "standing",
+      "setting": "neutral school setting",
+      "timeOfDay": "day",
+      "characters": "boy girl adult",
+      "requiredAttributes": [
+        "diverse characters",
+        "neutral clothing"
+      ],
+      "forbiddenAttributes": [
+        "gender stereotypes",
+        "color-only clue"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "REUSE_ONLY_WITHIN_EQUIVALENT_CUE",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "reusable character trio"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-14",
+      "usedByItems": [
+        "Y1M01-Q018"
+      ],
+      "concept": "Mia introduction",
+      "action": "greeting",
+      "setting": "school",
+      "timeOfDay": "day",
+      "characters": "three children",
+      "requiredAttributes": [
+        "girl Mia identifiable",
+        "short tag"
+      ],
+      "forbiddenAttributes": [
+        "ambiguous identity"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "SINGLE_REQUIREMENT",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "single scene"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-15",
+      "usedByItems": [
+        "Y1M01-Q019"
+      ],
+      "concept": "Leo morning introduction",
+      "action": "arrival",
+      "setting": "school",
+      "timeOfDay": "morning afternoon farewell",
+      "characters": "Leo Mia Ana",
+      "requiredAttributes": [
+        "three time/name contrast scenes"
+      ],
+      "forbiddenAttributes": [
+        "shared time cues"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "SINGLE_REQUIREMENT",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "three-panel sequence"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-16",
+      "usedByItems": [
+        "Y1M01-Q020"
+      ],
+      "concept": "Ana farewell",
+      "action": "leaving",
+      "setting": "school exit",
+      "timeOfDay": "day",
+      "characters": "Ana and peers",
+      "requiredAttributes": [
+        "Ana leaving",
+        "peers staying"
+      ],
+      "forbiddenAttributes": [
+        "arrival"
+      ],
+      "aspectRatio": "16:9",
+      "transparentBackground": false,
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "reusePolicy": "SINGLE_REQUIREMENT",
+      "resolvedMediaId": null,
+      "status": "MISSING",
+      "composition": "single scene"
+    }
+  ]
+}

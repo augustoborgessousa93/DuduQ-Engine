@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "principle": "ONE_AUDIO_PER_UNIQUE_UTTERANCE_NOT_PER_ITEM",
+  "layers": [
+    {
+      "type": "ui_instruction",
+      "description": "Instruções de interface reutilizadas em centenas de itens.",
+      "reuse": "GLOBAL",
+      "examples": [
+        "Ouça e escolha.",
+        "Ouça e escolha a cena correta.",
+        "Veja a cena e escolha o áudio.",
+        "Ouça e arraste para a imagem correta.",
+        "Ouça novamente.",
+        "Tente outra vez.",
+        "Muito bem!"
+      ],
+      "language": "pt-BR_for_years_1_2_then_reduce_gradually"
+    },
+    {
+      "type": "lexeme",
+      "description": "Uma gravação canônica por palavra/expressão curta.",
+      "reuse": "ACROSS_MODULES_AND_YEARS",
+      "examples": [
+        "hello",
+        "good morning",
+        "dog",
+        "red",
+        "pencil",
+        "Monday"
+      ]
+    },
+    {
+      "type": "functional_chunk",
+      "description": "Uma gravação natural por chunk comunicativo recorrente.",
+      "reuse": "ACROSS_ITEMS_WHEN_TRANSCRIPT_AND_PROSODY_MATCH",
+      "examples": [
+        "What's your name?",
+        "My name is...",
+        "How old are you?",
+        "Where is the...?"
+      ]
+    },
+    {
+      "type": "sentence_or_dialogue",
+      "description": "Gerar automaticamente por texto único quando prosódia/contexto importam; não montar frase colando palavras isoladas.",
+      "reuse": "DEDUP_BY_NORMALIZED_TRANSCRIPT_VOICE_ROLE_AND_PROSODY",
+      "examples": [
+        "My name is Mia.",
+        "Good morning! My name is Leo.",
+        "A: What's your name? B: My name is Mia."
+      ]
+    }
+  ],
+  "rules": [
+    "No item receives a private audio file merely because it is a different item.",
+    "Normalize transcript, language, speaker role and prosody; reuse exact approved match.",
+    "Do not concatenate word clips to synthesize natural sentences.",
+    "If no approved exact utterance exists, create one new utterance automatically and register it.",
+    "An item without pedagogical need for audio does not require audio.",
+    "For years 1-2, prioritize audio as instructional/stimulus support; for years 4-5, audio is used when it contributes to the learning objective.",
+    "Never overwrite an approved audio file in place; create a new version and update registry pointer."
+  ],
+  "dedupeKey": "sha256(normalizedTranscript + language + speakerRole + voiceProfile + prosodyProfile)",
+  "recommendedVoiceProfiles": [
+    "EN_CHILD_FRIENDLY_CLEAR",
+    "EN_ADULT_TEACHER_CLEAR",
+    "PT_BR_INSTRUCTION_WARM"
+  ]
+}

@@ -1,0 +1,442 @@
+{
+  "schemaVersion": "1.0",
+  "provider": "NEUTRAL",
+  "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+  "entries": [
+    {
+      "requirementId": "Y1M01-MEDIA-01",
+      "proposedMediaId": "MEDIA-MEDIA-01",
+      "usedByItems": [
+        "Y1M01-Q001"
+      ],
+      "productionBrief": "DuduQ English Year 1 greeting: single scene; two children waving, no visible text.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "two children waving",
+        "no visible text"
+      ],
+      "mustNotShow": [
+        "farewell action",
+        "written answer"
+      ],
+      "composition": "single scene",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school",
+      "altTextDraft": "greeting scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-01",
+      "filename": "img-y1m01-1-greeting-single-001.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-greeting-single-001.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-02",
+      "proposedMediaId": "MEDIA-MEDIA-02",
+      "usedByItems": [
+        "Y1M01-Q002"
+      ],
+      "productionBrief": "DuduQ English Year 1 informal greeting: single scene; friendly wave.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "friendly wave"
+      ],
+      "mustNotShow": [
+        "farewell action"
+      ],
+      "composition": "single scene",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school",
+      "altTextDraft": "informal greeting scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-02",
+      "filename": "img-y1m01-1-informal-greeting-002.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-informal-greeting-002.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-03",
+      "proposedMediaId": "MEDIA-MEDIA-03",
+      "usedByItems": [
+        "Y1M01-Q003",
+        "Y1M01-Q006"
+      ],
+      "productionBrief": "DuduQ English Year 1 morning greeting: single scene reusable only for morning items; low morning sun, school arrival.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "low morning sun",
+        "school arrival"
+      ],
+      "mustNotShow": [
+        "afternoon light",
+        "leaving"
+      ],
+      "composition": "single scene reusable only for morning items",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school gate",
+      "altTextDraft": "morning greeting scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-03",
+      "filename": "img-y1m01-1-morning-greeting-003.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-morning-greeting-003.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-04",
+      "proposedMediaId": "MEDIA-MEDIA-04",
+      "usedByItems": [
+        "Y1M01-Q004",
+        "Y1M01-Q007"
+      ],
+      "productionBrief": "DuduQ English Year 1 afternoon greeting: single scene reusable only for afternoon items; afternoon light, school context.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "afternoon light",
+        "school context"
+      ],
+      "mustNotShow": [
+        "morning sun",
+        "leaving"
+      ],
+      "composition": "single scene reusable only for afternoon items",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school playground",
+      "altTextDraft": "afternoon greeting scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-04",
+      "filename": "img-y1m01-1-afternoon-greeting-004.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-afternoon-greeting-004.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-05",
+      "proposedMediaId": "MEDIA-MEDIA-05",
+      "usedByItems": [
+        "Y1M01-Q005",
+        "Y1M01-Q008"
+      ],
+      "productionBrief": "DuduQ English Year 1 farewell: single scene reusable only for farewell items; one child leaving, clear wave.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "one child leaving",
+        "clear wave"
+      ],
+      "mustNotShow": [
+        "arrival"
+      ],
+      "composition": "single scene reusable only for farewell items",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school exit",
+      "altTextDraft": "farewell scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-05",
+      "filename": "img-y1m01-1-farewell-single-005.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-farewell-single-005.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-06",
+      "proposedMediaId": "MEDIA-MEDIA-06",
+      "usedByItems": [
+        "Y1M01-Q009"
+      ],
+      "productionBrief": "DuduQ English Year 1 time of day contrast: three-panel sequence; three clearly separated scenes.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "three clearly separated scenes"
+      ],
+      "mustNotShow": [
+        "ambiguous lighting"
+      ],
+      "composition": "three-panel sequence",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school",
+      "altTextDraft": "time of day contrast scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-06",
+      "filename": "img-y1m01-1-time-of-006.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-time-of-006.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-07",
+      "proposedMediaId": "MEDIA-MEDIA-07",
+      "usedByItems": [
+        "Y1M01-Q010"
+      ],
+      "productionBrief": "DuduQ English Year 1 hello hi dialogue: single scene; two speakers, greeting gesture.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "two speakers",
+        "greeting gesture"
+      ],
+      "mustNotShow": [
+        "visible dialogue transcript"
+      ],
+      "composition": "single scene",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school",
+      "altTextDraft": "hello hi dialogue scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-07",
+      "filename": "img-y1m01-1-hello-hi-007.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-hello-hi-007.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-08",
+      "proposedMediaId": "MEDIA-MEDIA-08",
+      "usedByItems": [
+        "Y1M01-Q011"
+      ],
+      "productionBrief": "DuduQ English Year 1 asking a name: single scene; one speaker, question audio icon.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "one speaker",
+        "question audio icon"
+      ],
+      "mustNotShow": [
+        "written question"
+      ],
+      "composition": "single scene",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school",
+      "altTextDraft": "asking a name scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-08",
+      "filename": "img-y1m01-1-asking-a-008.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-asking-a-008.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-09",
+      "proposedMediaId": "MEDIA-MEDIA-09",
+      "usedByItems": [
+        "Y1M01-Q012"
+      ],
+      "productionBrief": "DuduQ English Year 1 name Leo: single scene; one child clearly identified as Leo, short name tag.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "one child clearly identified as Leo",
+        "short name tag"
+      ],
+      "mustNotShow": [
+        "other name ambiguity"
+      ],
+      "composition": "single scene",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school",
+      "altTextDraft": "name Leo scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-09",
+      "filename": "img-y1m01-1-name-leo-009.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-name-leo-009.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-10",
+      "proposedMediaId": "MEDIA-MEDIA-10",
+      "usedByItems": [
+        "Y1M01-Q013"
+      ],
+      "productionBrief": "DuduQ English Year 1 name Mia: single scene; Mia Leo Ana name tags, Mia identifiable.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "Mia Leo Ana name tags",
+        "Mia identifiable"
+      ],
+      "mustNotShow": [
+        "long text"
+      ],
+      "composition": "single scene",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school",
+      "altTextDraft": "name Mia scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-10",
+      "filename": "img-y1m01-1-name-mia-010.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-name-mia-010.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-11",
+      "proposedMediaId": "MEDIA-MEDIA-11",
+      "usedByItems": [
+        "Y1M01-Q014"
+      ],
+      "productionBrief": "DuduQ English Year 1 name tags: character card set; ANA MIA LEO tags.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "ANA MIA LEO tags"
+      ],
+      "mustNotShow": [
+        "sentence text"
+      ],
+      "composition": "character card set",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school",
+      "altTextDraft": "name tags scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-11",
+      "filename": "img-y1m01-1-name-tags-011.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-name-tags-011.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-12",
+      "proposedMediaId": "MEDIA-MEDIA-12",
+      "usedByItems": [
+        "Y1M01-Q015"
+      ],
+      "productionBrief": "DuduQ English Year 1 question answer turn: two-card scene; question and response audio icons.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "question and response audio icons"
+      ],
+      "mustNotShow": [
+        "written dialogue"
+      ],
+      "composition": "two-card scene",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school",
+      "altTextDraft": "question answer turn scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-12",
+      "filename": "img-y1m01-1-question-answer-012.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-question-answer-012.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-13",
+      "proposedMediaId": "MEDIA-MEDIA-13",
+      "usedByItems": [
+        "Y1M01-Q016",
+        "Y1M01-Q017"
+      ],
+      "productionBrief": "DuduQ English Year 1 boy girl distinction: reusable character trio; diverse characters, neutral clothing.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "diverse characters",
+        "neutral clothing"
+      ],
+      "mustNotShow": [
+        "gender stereotypes",
+        "color-only clue"
+      ],
+      "composition": "reusable character trio",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "neutral school setting",
+      "altTextDraft": "boy girl distinction scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-13",
+      "filename": "img-y1m01-1-boy-girl-013.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-boy-girl-013.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-14",
+      "proposedMediaId": "MEDIA-MEDIA-14",
+      "usedByItems": [
+        "Y1M01-Q018"
+      ],
+      "productionBrief": "DuduQ English Year 1 Mia introduction: single scene; girl Mia identifiable, short tag.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "girl Mia identifiable",
+        "short tag"
+      ],
+      "mustNotShow": [
+        "ambiguous identity"
+      ],
+      "composition": "single scene",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school",
+      "altTextDraft": "Mia introduction scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-14",
+      "filename": "img-y1m01-1-mia-introduction-014.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-mia-introduction-014.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-15",
+      "proposedMediaId": "MEDIA-MEDIA-15",
+      "usedByItems": [
+        "Y1M01-Q019"
+      ],
+      "productionBrief": "DuduQ English Year 1 Leo morning introduction: three-panel sequence; three time/name contrast scenes.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "three time/name contrast scenes"
+      ],
+      "mustNotShow": [
+        "shared time cues"
+      ],
+      "composition": "three-panel sequence",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school",
+      "altTextDraft": "Leo morning introduction scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-15",
+      "filename": "img-y1m01-1-leo-morning-015.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-leo-morning-015.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    },
+    {
+      "requirementId": "Y1M01-MEDIA-16",
+      "proposedMediaId": "MEDIA-MEDIA-16",
+      "usedByItems": [
+        "Y1M01-Q020"
+      ],
+      "productionBrief": "DuduQ English Year 1 Ana farewell: single scene; Ana leaving, peers staying.",
+      "pedagogicalPurpose": "Audio-visual discrimination without independent reading",
+      "mustShow": [
+        "Ana leaving",
+        "peers staying"
+      ],
+      "mustNotShow": [
+        "arrival"
+      ],
+      "composition": "single scene",
+      "ageAppropriateness": "Year 1, inclusive, calm, non-stereotyped",
+      "visualConsistencyRules": "Use established DuduQ child-friendly editorial style; no embedded answer text.",
+      "aspectRatio": "16:9",
+      "backgroundRequirement": "school exit",
+      "altTextDraft": "Ana farewell scene for English Year 1",
+      "mediaId": "MEDIA-MEDIA-16",
+      "filename": "img-y1m01-1-ana-farewell-016.webp",
+      "outputPath": "content/english/assets/images/year-1/module-01/img-y1m01-1-ana-farewell-016.webp",
+      "styleProfile": "DUDUQ_ENGLISH_EDITORIAL_V1",
+      "status": "TO_GENERATE"
+    }
+  ]
+}

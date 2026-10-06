@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0",
+  "moduleId": "Y1M01",
+  "year": 1,
+  "moduleNumber": 1,
+  "title": "Hello! My Name Is...",
+  "topic": "Greetings & Introductions",
+  "subtitle": "Listen, look and play!",
+  "sourceScope": "Basic Greetings; What's your name?; My name is...; boy; girl",
+  "functionalGoal": "Compreender e usar cumprimentos básicos; perguntar e dizer o nome; reconhecer boy/girl.",
+  "primaryModality": "audio_visual_action",
+  "readingPolicy": "NO_INDEPENDENT_READING",
+  "session": {
+    "recommendedItems": 8,
+    "audioVisualActionRatioMin": 0.7
+  },
+  "allowedMechanics": [
+    "drag-drop-multimedia",
+    "matching",
+    "bubble-pop",
+    "target-shooter",
+    "memory-quest"
+  ],
+  "blockedMechanics": [
+    "smart-sentence-order",
+    "unscramble"
+  ],
+  "status": "PILOT"
+}
