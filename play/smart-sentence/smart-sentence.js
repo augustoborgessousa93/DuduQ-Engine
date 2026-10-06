@@ -2,7 +2,7 @@ import { DuduQCanonicalHeaderHUD, DuduQCanonicalQuestionHUD, ResultFX } from "/c
 import { DuduqSound } from "/core/audio/duduq-sound-system.js";
 import "/core/duduq-transition.js";
 import { DuduQSmartSentenceEngine } from "/core/duduq-smart-sentence-engine.js";
-import { Feedback, PrimaryAction } from "/test/matching/gold-master-candidate-v1/src/core-components.js";
+import { Feedback, PrimaryAction } from "/runtime/gold-masters/matching/src/core-components.js";
 
 const root = document.querySelector("#game");
 if (!root) throw new Error("Smart Sentence root was not found.");

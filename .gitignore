@@ -2,6 +2,7 @@
 
 # Disposable runtime/browser artifacts (never delete automatically).
 node_modules/
+dist-pages/
 server*.log
 *.tmp
 *.temp

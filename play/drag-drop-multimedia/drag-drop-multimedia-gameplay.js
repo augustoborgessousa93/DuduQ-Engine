@@ -1,7 +1,7 @@
 import { GameActionButton, CTAAttention } from "/core/ui/index.js";
 import { DuduqSound } from "/core/audio/duduq-sound-system.js";
 import { ResultFXLayer } from "/core/ui/result-fx.js";
-import { Feedback } from "/test/matching/gold-master-candidate-v1/src/core-components.js";
+import { Feedback } from "/runtime/gold-masters/matching/src/core-components.js";
 import { createMultimediaRound } from "./drag-drop-multimedia-round.js";
 import { createDuduqDragDropLifecycle } from "/core/duduq-drag-drop-lifecycle.js";
 

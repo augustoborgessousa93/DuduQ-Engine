@@ -1,6 +1,6 @@
 import { DuduQCanonicalHeaderHUD, DuduQCanonicalQuestionHUD, ResultFX } from "/core/ui/index.js";
 import { DuduqSound } from "/core/audio/duduq-sound-system.js";
-import { Feedback } from "/test/matching/gold-master-candidate-v1/src/core-components.js";
+import { Feedback } from "/runtime/gold-masters/matching/src/core-components.js";
 
 const root = document.querySelector("#game");
 if (!root) throw new Error("Memory Quest root was not found.");

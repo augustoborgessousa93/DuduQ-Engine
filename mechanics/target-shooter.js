@@ -496,10 +496,10 @@
       }
     });
 
-    const runtimeUrl = getEngineBase() + "/test/target-shooter/gold-master-clean-v2/index.html";
+    const runtimeUrl = getEngineBase() + "/runtime/gold-masters/target-shooter/index.html";
     iframe.dataset.mechanicVersion = "gold-master-clean-v2";
     iframe.dataset.goldMasterCommit = "761127dddaed830ea4f77a0fa292b505577f0a37";
-    iframe.dataset.goldMasterPath = "test/target-shooter/gold-master-clean-v2";
+    iframe.dataset.goldMasterPath = "runtime/gold-masters/target-shooter";
 
     visualBridge?.setFrame?.(iframe);
 
