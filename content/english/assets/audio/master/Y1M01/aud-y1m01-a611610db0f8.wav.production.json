@@ -1,0 +1,46 @@
+{
+  "id": "AUD-Y1M01-A611610DB0F8",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "7573908bf832fb431facd6a2e0f3607d8ebc83ca69cea699050182dff635a6c4",
+  "sourceWorkWavSha256": "89b4ac0cefae904a4bc034567680a108f19603aca90b519e1592a6c7b33a62e9",
+  "masterSha256": "e480ac9703592e0a55730b8e080bc79d829bc13ca76324881fcb5262fc742962",
+  "audioSha256": "eac8c2c865e54b01cf8b2dfdd332d01979c810c1e9f7f6e5e6f7e48830826a1b",
+  "masterAudioPath": "content/english/assets/audio/master/Y1M01/aud-y1m01-a611610db0f8.wav",
+  "audioPath": "content/english/assets/audio/dialogues/aud-y1m01-a611610db0f8-a-hello-b-hi.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 3.04,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.834503173828125,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 32.566,
+    "decode": "PASS",
+    "bytes": 291884
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 3.04,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 49736,
+    "decode": "PASS"
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -20.34349822998047,
+    "measuredOutputLufs": -18.521459579467773,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.500000020140368,
+    "paddingMs": 80
+  },
+  "createdAt": "2026-10-06T18:11:11.407961+00:00",
+  "reused": false
+}

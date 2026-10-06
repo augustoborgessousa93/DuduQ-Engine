@@ -1,0 +1,46 @@
+{
+  "id": "AUD-Y1M01-61B336EB3A2B",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "385ff28cc5b4ff3d1223d67036928f94f31d834353895e5b6a7a8ab88a604659",
+  "sourceWorkWavSha256": "bad460b07828f98fa6eb6909a08d5a3dc96ddf226985bc62f12b87671ca7ed03",
+  "masterSha256": "b8dda15c06f53845110f2723c11aa03be58d3c854f1c1696c6bf84fb7bdbe01f",
+  "audioSha256": "ca51def62551db7ea69ab2228ce22ce511fed23e2900a1aaa3b201c5005e70e6",
+  "masterAudioPath": "content/english/assets/audio/master/Y1M01/aud-y1m01-61b336eb3a2b.wav",
+  "audioPath": "content/english/assets/audio/chunks/aud-y1m01-61b336eb3a2b-what-s-your-name.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 1.48,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.838470458984375,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 30.405,
+    "decode": "PASS",
+    "bytes": 142124
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 1.48,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 24658,
+    "decode": "PASS"
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -22.310909271240234,
+    "measuredOutputLufs": -17.116912841796875,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.499998789519212,
+    "paddingMs": 80
+  },
+  "createdAt": "2026-10-06T18:11:11.440895+00:00",
+  "reused": false
+}

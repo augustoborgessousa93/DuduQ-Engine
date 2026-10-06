@@ -1,0 +1,46 @@
+{
+  "id": "AUD-UI-43C6B897D5B6",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "9ac302e3259e2d60d7df0c137fb0d947aa716a575180ba60ae4665bb05dec3ed",
+  "sourceWorkWavSha256": "e6d43cd1bffde45ca49935bb18971ac25ce3fc09cc5b81dcb98d15c9bde2f947",
+  "masterSha256": "5025bdd8bdc51836f3233194c599f077c85d04e27c595cabe8c661f643217bb4",
+  "audioSha256": "9e8d465b0201d147afc72e239f53a2325fd96e8ee9906c8a60d38bf8dc5e7bfa",
+  "masterAudioPath": "content/english/assets/audio/master/Y1M01/aud-ui-43c6b897d5b6.wav",
+  "audioPath": "content/english/assets/audio/ui/aud-ui-43c6b897d5b6-ouca-e-escolha-a-cena-correta.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 2.76,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.839202880859375,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 28.986,
+    "decode": "PASS",
+    "bytes": 265004
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 2.76,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 45138,
+    "decode": "PASS"
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -19.83802604675293,
+    "measuredOutputLufs": -18.56943130493164,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.5000012507616982,
+    "paddingMs": 80
+  },
+  "createdAt": "2026-10-06T18:11:11.841448+00:00",
+  "reused": false
+}

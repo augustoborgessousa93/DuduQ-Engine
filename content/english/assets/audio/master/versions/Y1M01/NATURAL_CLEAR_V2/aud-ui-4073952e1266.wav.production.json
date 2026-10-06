@@ -1,0 +1,83 @@
+{
+  "id": "AUD-UI-4073952E1266",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "1c1caeb219f9b19f1430cfd4066bdcef398da7ca10c483c7173595b1ffcf5fba",
+  "sourceWorkWavSha256": "dad3ac92871f8147b4ff393fac127f506ec37e51ad1d23068ec104a41b2f9b9f",
+  "masterSha256": "b4446f317f924c38a24e1212875b56275dd0fd8caa0b852111278089d4704778",
+  "audioSha256": "b10c53c7b2355e9947a94acb64053279ec35a43c05d67455e7b722508a511474",
+  "masterAudioPath": "content/english/assets/audio/master/versions/Y1M01/NATURAL_CLEAR_V2/aud-ui-4073952e1266.wav",
+  "audioPath": "content/english/assets/audio/versions/Y1M01/NATURAL_CLEAR_V2/ui/aud-ui-4073952e1266-muito-bem.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 1.16,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.83203125,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 50.862,
+    "decode": "PASS",
+    "onset": {
+      "frameMs": 10,
+      "thresholdLinear": 0.016640625,
+      "firstActiveMs": 160,
+      "trailingMarginMs": 490,
+      "leadingSafetyMarginPass": true,
+      "endingMarginPass": true
+    },
+    "bytes": 111404
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 1.16,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 19643,
+    "decode": "PASS",
+    "onset": {
+      "frameMs": 10,
+      "thresholdLinear": 0.01583080768585205,
+      "firstActiveMs": 160,
+      "trailingMarginMs": 490,
+      "leadingSafetyMarginPass": true,
+      "endingMarginPass": true
+    }
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -22.367435455322266,
+    "measuredOutputLufs": -20.07330322265625,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.5000018660724288,
+    "paddingMs": 80,
+    "leadingPaddingMs": 120
+  },
+  "onsetQc": {
+    "required": true,
+    "master": {
+      "frameMs": 10,
+      "thresholdLinear": 0.016640625,
+      "firstActiveMs": 160,
+      "trailingMarginMs": 490,
+      "leadingSafetyMarginPass": true,
+      "endingMarginPass": true
+    },
+    "mp3": {
+      "frameMs": 10,
+      "thresholdLinear": 0.01583080768585205,
+      "firstActiveMs": 160,
+      "trailingMarginMs": 490,
+      "leadingSafetyMarginPass": true,
+      "endingMarginPass": true
+    },
+    "pass": true
+  },
+  "createdAt": "2026-10-06T19:45:18.627983+00:00",
+  "reused": false
+}

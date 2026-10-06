@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <title>DUDUQ · Y1M01 · Audio QA</title>
+    <link rel="stylesheet" href="./qa.css">
+    <script src="/core/duduq-content-audio.js" defer></script>
+    <script type="module" src="./qa.js"></script>
+  </head>
+  <body>
+    <main class="qa-shell" id="qa-shell" aria-busy="true">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark" aria-hidden="true">D</span><span>DUDUQ <small>QA LOCAL</small></span></div>
+        <span class="voice-pill"><i></i> DUDUQ GOLD VOICE v1 · CHATTERBOX</span>
+      </header>
+
+      <section class="intro">
+        <p class="eyebrow">TESTE HUMANO DE ÁUDIO · Y1M01</p>
+        <h1>Hello! My Name Is...</h1>
+        <p>Questões reais do módulo e arquivos oficiais do manifesto. Esta rota de QA não altera as telas nem o gameplay de produção.</p>
+      </section>
+
+      <section class="audit-strip" aria-live="polite">
+        <div><strong id="audit-count">Verificando…</strong><span>contratos oficiais</span></div>
+        <div><strong id="audit-http">—</strong><span>HTTP / MP3</span></div>
+        <div><strong id="audit-missing">—</strong><span>ausentes</span></div>
+        <button class="quiet-button" id="toggle-audit" type="button" aria-expanded="false">Auditoria</button>
+      </section>
+      <section class="audit-panel" id="audit-panel" hidden>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Contrato / item</th><th>Display text</th><th>Speech text</th><th>Tipo / locale / voz</th><th>Arquivo / duração</th><th>Existe / HTTP / content-type</th></tr></thead>
+            <tbody id="audit-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="game-card" aria-label="Questão Y1M01">
+        <div class="game-heading">
+          <div><span class="eyebrow" id="question-position">QUESTÃO 01 / 20</span><h2 id="question-title">Carregando questão…</h2></div>
+          <span class="mechanic-tag" id="mechanic-tag">—</span>
+        </div>
+        <div class="question-body">
+          <div class="prompt-block">
+            <div class="prompt-copy"><span class="section-label">ENUNCIADO</span><p id="question-prompt"></p></div>
+            <button class="play-button primary-play" type="button" id="play-prompt" aria-label="Reproduzir áudio da instrução">▶ <span>Ouvir instrução</span></button>
+          </div>
+          <div class="stimuli" id="stimuli"></div>
+          <div class="section-row"><span class="section-label">ALTERNATIVAS / CENAS</span><span class="helper">Toque no áudio quando disponível</span></div>
+          <div class="options" id="options"></div>
+          <div class="status-line" id="play-status" aria-live="polite"><span class="status-dot"></span><span id="status-text">Carregando manifesto oficial…</span><span class="status-id" id="status-id"></span></div>
+        </div>
+        <footer class="game-footer">
+          <button class="nav-button" id="previous" type="button">← Anterior</button>
+          <div class="progress-track"><span id="progress"></span></div>
+          <button class="nav-button next" id="next" type="button">Próxima →</button>
+        </footer>
+      </section>
+
+      <details class="extra-audio">
+        <summary>Outras narrações oficiais do módulo <span id="global-audio-count"></span></summary>
+        <p>Os contratos globais são disponibilizados para escuta, sem presumir uma associação por questão que o conteúdo não define.</p>
+        <div id="global-audio-list" class="global-audio-list"></div>
+      </details>
+
+      <footer class="page-footer">QA isolado · fonte: AUDIO_MANIFEST.json + questions.json · sem autoplay · uma reprodução por vez · loudness master registrado: −19,66 a −16,00 LUFS (relatório de produção)</footer>
+    </main>
+    <audio id="shared-audio" preload="none"></audio>
+  </body>
+</html>

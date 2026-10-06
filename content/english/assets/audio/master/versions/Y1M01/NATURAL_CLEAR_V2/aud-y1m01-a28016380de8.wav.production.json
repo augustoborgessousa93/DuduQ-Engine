@@ -1,0 +1,83 @@
+{
+  "id": "AUD-Y1M01-A28016380DE8",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "8fd21863efe7a5a93ad07cc8e9521d16e303aeba5cca5205eed0be5ab1e6903f",
+  "sourceWorkWavSha256": "c08984ba61f4ff0b329514dbb99407142b3ac4a79dd504d7b591244eb3458ba8",
+  "masterSha256": "e3767a00312afd5dc6b6adb03c3922ed3fa616225d75d0aa74a564b0c67bbe5c",
+  "audioSha256": "2a3246d56e0c34ce6091e13213bfa6517f941596197b5e700c663b5443298507",
+  "masterAudioPath": "content/english/assets/audio/master/versions/Y1M01/NATURAL_CLEAR_V2/aud-y1m01-a28016380de8.wav",
+  "audioPath": "content/english/assets/audio/versions/Y1M01/NATURAL_CLEAR_V2/dialogues/aud-y1m01-a28016380de8-a-what-s-your-name-b-my-name-is-mia.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 4.04,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.84136962890625,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 39.604,
+    "decode": "PASS",
+    "onset": {
+      "frameMs": 10,
+      "thresholdLinear": 0.016827392578125,
+      "firstActiveMs": 220,
+      "trailingMarginMs": 600,
+      "leadingSafetyMarginPass": true,
+      "endingMarginPass": true
+    },
+    "bytes": 387884
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 4.04,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 65618,
+    "decode": "PASS",
+    "onset": {
+      "frameMs": 10,
+      "thresholdLinear": 0.015881385803222656,
+      "firstActiveMs": 220,
+      "trailingMarginMs": 600,
+      "leadingSafetyMarginPass": true,
+      "endingMarginPass": true
+    }
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -21.300569534301758,
+    "measuredOutputLufs": -19.670656204223633,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.499999404829768,
+    "paddingMs": 80,
+    "leadingPaddingMs": 120
+  },
+  "onsetQc": {
+    "required": true,
+    "master": {
+      "frameMs": 10,
+      "thresholdLinear": 0.016827392578125,
+      "firstActiveMs": 220,
+      "trailingMarginMs": 600,
+      "leadingSafetyMarginPass": true,
+      "endingMarginPass": true
+    },
+    "mp3": {
+      "frameMs": 10,
+      "thresholdLinear": 0.015881385803222656,
+      "firstActiveMs": 220,
+      "trailingMarginMs": 600,
+      "leadingSafetyMarginPass": true,
+      "endingMarginPass": true
+    },
+    "pass": true
+  },
+  "createdAt": "2026-10-06T19:45:16.996596+00:00",
+  "reused": false
+}

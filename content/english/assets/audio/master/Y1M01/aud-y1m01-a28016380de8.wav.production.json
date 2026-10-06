@@ -1,0 +1,46 @@
+{
+  "id": "AUD-Y1M01-A28016380DE8",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "bd8c1457f6072450b5108344102831e1422fe809c88c49cebe85694f20bc4db2",
+  "sourceWorkWavSha256": "baff3f2ff346859ba3cbdf8443f0fd66904782b0d0899333aa8c2174e0f1e8e7",
+  "masterSha256": "c8dce1ffb621f797a017276826ab7634cb928603344191aa67bd4b1e309dce8d",
+  "audioSha256": "1fcedbe9ea8ca6cb8014efe0065db826bb1e7baea8a79ce8f8a79c14a8cabfff",
+  "masterAudioPath": "content/english/assets/audio/master/Y1M01/aud-y1m01-a28016380de8.wav",
+  "audioPath": "content/english/assets/audio/dialogues/aud-y1m01-a28016380de8-a-what-s-your-name-b-my-name-is-mia.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 3.88,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.838775634765625,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 30.67,
+    "decode": "PASS",
+    "bytes": 372524
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 3.88,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 63110,
+    "decode": "PASS"
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -20.70754623413086,
+    "measuredOutputLufs": -19.662830352783203,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.5000006354510111,
+    "paddingMs": 80
+  },
+  "createdAt": "2026-10-06T18:11:11.532647+00:00",
+  "reused": false
+}

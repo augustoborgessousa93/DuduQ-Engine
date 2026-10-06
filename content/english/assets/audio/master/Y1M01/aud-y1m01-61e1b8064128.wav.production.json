@@ -1,0 +1,46 @@
+{
+  "id": "AUD-Y1M01-61E1B8064128",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "43955cb99dc42f32e58ffd5015cf1ad48d950b7518318ef105bd406beee77320",
+  "sourceWorkWavSha256": "5282f0f8e235adcb0573831b127acfa67ae33ef1740ede6696cf926d7fff3a8b",
+  "masterSha256": "2752337892dff2758df0d7f0996ee735e91eb87771656420cacf6dbfb17a1142",
+  "audioSha256": "e74193c816869657d29acf5a8dbf1f845d99fdd98e2593e04f92a2b973bd0502",
+  "masterAudioPath": "content/english/assets/audio/master/Y1M01/aud-y1m01-61e1b8064128.wav",
+  "audioPath": "content/english/assets/audio/chunks/aud-y1m01-61e1b8064128-my-name-is-ana.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 1.2,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.84136962890625,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 42.5,
+    "decode": "PASS",
+    "bytes": 115244
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 1.2,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 20061,
+    "decode": "PASS"
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -19.145048141479492,
+    "measuredOutputLufs": -17.126792907714844,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.500000020140368,
+    "paddingMs": 80
+  },
+  "createdAt": "2026-10-06T18:11:11.560923+00:00",
+  "reused": false
+}

@@ -13,7 +13,8 @@ const index = await load("content/english/master/modules-index.json");
 const moduleSpec = await load("content/english/year-1/module-01/module.json");
 const questions = await load("content/english/year-1/module-01/questions.json");
 const policy = await load("content/english/audio/audio-policy.json");
-const audioRegistry = await load("content/english/audio/audio-registry-seed.json");
+const audioRegistry = await load("content/english/audio/audio-registry.json");
+const audioProduction = await load("content/english/year-1/module-01/audio-production-manifest.json");
 
 if (index.moduleCount !== 30 || index.modules.length !== 30) fail("MODULE_COUNT_INVALID");
 if (moduleSpec.moduleId !== "Y1M01" || questions.moduleId !== "Y1M01" || questions.items.length !== 20) fail("Y1M01_ITEM_COUNT_INVALID");
@@ -21,6 +22,7 @@ if (policy.principle !== "ONE_AUDIO_PER_UNIQUE_UTTERANCE_NOT_PER_ITEM") fail("AU
 const allowed = new Set(moduleSpec.allowedMechanics);
 const blocked = new Set(moduleSpec.blockedMechanics);
 const registryByKey = new Map(audioRegistry.entries.map((entry) => [audioKey(entry), entry]));
+const registryById = new Map(audioRegistry.entries.map((entry) => [entry.audioId, entry]));
 const utterances = new Map();
 const mechanics = {};
 const missingMedia = [];
@@ -32,14 +34,22 @@ for (const item of questions.items) {
   if (!item.image_ref) missingMedia.push(item.item_id);
   const key = audioKey({ transcript: item.audio_transcript, language: "en", speakerRole: item.audio_transcript.includes("A:") ? "multi" : "single", voiceProfile: "EN_CHILD_FRIENDLY_CLEAR", prosodyProfile: "neutral_natural" });
   utterances.set(key, item.audio_transcript);
-  const found = registryByKey.get(key);
-  if (!found || found.status !== "APPROVED" || !found.urlOrPath) missingAudio.push(item.item_id);
+  const multiBindings = audioProduction.items?.[item.item_id];
+  if (multiBindings?.length) {
+    if (multiBindings.some((binding) => {
+      const entry = registryById.get(binding.audioId);
+      return !entry || entry.status !== "APPROVED" || !entry.urlOrPath;
+    })) missingAudio.push(item.item_id);
+  } else {
+    const found = registryByKey.get(key);
+    if (!found || found.status !== "APPROVED" || !found.urlOrPath) missingAudio.push(item.item_id);
+  }
 }
 const report = { moduleId: moduleSpec.moduleId, items: questions.items.length, uniqueEnglishUtterances: utterances.size, globalUiAudioPrompts: audioRegistry.entries.filter((entry) => entry.type === "ui_instruction").length, mediaResolved: 0, mediaMissing: missingMedia.length, audioResolved: 0, audioMissing: missingAudio.length, mechanics, missingMedia, missingAudio, deterministic: true };
+report.audioResolved = questions.items.length - missingAudio.length;
 try {
   const mediaManifest = await load("content/english/media/image-generation-manifest.json");
   const audioManifest = await load("content/english/audio/audio-generation-manifest.json");
-  const audioProduction = await load("content/english/year-1/module-01/audio-production-manifest.json");
   const all = [...mediaManifest.entries, ...audioManifest.entries];
   const ids = all.map((entry) => entry.mediaId || entry.audioId);
   const paths = all.map((entry) => entry.outputPath);

@@ -17,7 +17,7 @@
 (function () {
   "use strict";
 
-  const VERSION = "1.0.4";
+  const VERSION = "1.0.5";
 
   if (
     window.DuduQContentAudio &&
@@ -30,6 +30,188 @@
     typeof window.fetch === "function"
       ? window.fetch.bind(window)
       : null;
+
+  const AUDIO_MANIFEST_URL =
+    "/duduq-audio/manifests/AUDIO_MANIFEST.json";
+  let audioManifestPromise = null;
+  let sharedVoiceAudio = null;
+  let sharedVoiceFinish = null;
+  let sharedVoiceToken = 0;
+  let activeVoiceId = "";
+  let activeQuestionId = "";
+
+  function emitVoiceState(state, detail = {}) {
+    try {
+      window.dispatchEvent(new CustomEvent("duduq:voice-state", {
+        detail: { state, audioId: detail.audioId || null, source: detail.source || null }
+      }));
+    } catch (_) {}
+  }
+
+  function loadAudioManifest() {
+    if (!audioManifestPromise) {
+      if (!nativeFetch) {
+        return Promise.reject(new Error("audio-manifest-fetch-unavailable"));
+      }
+
+      audioManifestPromise = nativeFetch(AUDIO_MANIFEST_URL, {
+        cache: "no-store"
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error(`audio-manifest-http-${response.status}`);
+        }
+        return response.json();
+      }).then(function (manifest) {
+        if (!Array.isArray(manifest?.items)) {
+          throw new Error("audio-manifest-invalid");
+        }
+        return manifest.items;
+      }).catch(function (error) {
+        audioManifestPromise = null;
+        throw error;
+      });
+    }
+
+    return audioManifestPromise;
+  }
+
+  async function resolveAudio(audioId) {
+    const id = asString(audioId);
+    if (!id) return { status: "MISSING_ID", audioId: id };
+
+    let entries;
+    try {
+      entries = await loadAudioManifest();
+    } catch (error) {
+      return { status: "MANIFEST_UNAVAILABLE", audioId: id, error: error.message };
+    }
+
+    const entry = entries.find(function (candidate) {
+      return candidate?.id === id || candidate?.audioId === id;
+    });
+    if (!entry || entry.status !== "APPROVED") {
+      return { status: "NOT_APPROVED_OR_MISSING", audioId: id };
+    }
+
+    const audioPath = asString(entry.audioPath);
+    if (!audioPath || !/\.mp3$/i.test(audioPath) || /\.wav(?:$|\?)/i.test(audioPath) || audioPath.split(/[\\/]/).includes("..")) {
+      return { status: "INVALID_RUNTIME_FORMAT", audioId: id };
+    }
+
+    let url;
+    try {
+      url = new URL(`/${audioPath.replace(/^\/+/, "")}`, window.location.href).href;
+    } catch (_) {
+      return { status: "INVALID_PATH", audioId: id };
+    }
+
+    return {
+      status: "READY",
+      audioId: id,
+      url,
+      locale: asString(entry.locale),
+      voiceVersion: asString(entry.voiceVersion),
+      deliveryProfile: asString(entry.deliveryProfile),
+      engine: asString(entry.engine),
+      model: asString(entry.model),
+      entry
+    };
+  }
+
+  function stopVoice() {
+    sharedVoiceToken += 1;
+    const audio = sharedVoiceAudio;
+    sharedVoiceAudio = null;
+    activeVoiceId = "";
+    const finish = sharedVoiceFinish;
+    sharedVoiceFinish = null;
+    if (audio) {
+      try { audio.pause(); } catch (_) {}
+      try { audio.currentTime = 0; } catch (_) {}
+    }
+    finish?.("stopped");
+    emitVoiceState("stopped");
+    return true;
+  }
+
+  function playSource(source, metadata = {}) {
+    const src = asString(source);
+    if (!src || typeof window.Audio !== "function") {
+      return Promise.reject(new Error("audio-source-unavailable"));
+    }
+
+    stopVoice();
+    const token = sharedVoiceToken;
+    const audio = new window.Audio(src);
+    sharedVoiceAudio = audio;
+    activeVoiceId = asString(metadata.audioId);
+    audio.preload = "auto";
+    audio.volume = 1;
+
+    return new Promise(function (resolve, reject) {
+      let settled = false;
+      const cleanup = function () {
+        audio.removeEventListener("ended", onEnded);
+        audio.removeEventListener("error", onError);
+      };
+      const finish = function (state, error) {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        if (sharedVoiceAudio === audio) {
+          sharedVoiceAudio = null;
+          activeVoiceId = "";
+        }
+        if (sharedVoiceFinish === finish) sharedVoiceFinish = null;
+        if (state === "error") reject(error || new Error("audio-load-failed"));
+        else resolve({ status: state, audioId: metadata.audioId || null });
+      };
+      const onEnded = function () { finish("ended"); };
+      const onError = function () { finish("error", new Error("audio-load-failed")); };
+      sharedVoiceFinish = finish;
+      emitVoiceState("loading", { audioId: metadata.audioId, source: src });
+      audio.addEventListener("ended", onEnded, { once: true });
+      audio.addEventListener("error", onError, { once: true });
+      audio.addEventListener("playing", function () {
+        if (sharedVoiceAudio === audio) emitVoiceState("playing", { audioId: metadata.audioId, source: src });
+      }, { once: true });
+      audio.addEventListener("ended", function () {
+        emitVoiceState("ended", { audioId: metadata.audioId, source: src });
+      }, { once: true });
+      audio.addEventListener("error", function () {
+        emitVoiceState("error", { audioId: metadata.audioId, source: src });
+      }, { once: true });
+      try {
+        const playOperation = audio.play();
+        playOperation?.catch?.(function (error) { finish("error", error); });
+      } catch (error) {
+        finish("error", error);
+      }
+      if (token !== sharedVoiceToken) finish("stopped");
+    });
+  }
+
+  async function playVoice(audioId) {
+    const resolved = await resolveAudio(audioId);
+    if (resolved.status !== "READY") return resolved;
+    try {
+      const playback = await playSource(resolved.url, { audioId: resolved.audioId });
+      return { ...resolved, playback };
+    } catch (error) {
+      return { ...resolved, status: "PLAYBACK_ERROR", error: error?.message || String(error) };
+    }
+  }
+
+  function setActiveQuestion(questionId) {
+    const next = asString(questionId);
+    if (activeQuestionId && next !== activeQuestionId) stopVoice();
+    activeQuestionId = next;
+    return activeQuestionId || null;
+  }
+
+  window.addEventListener("duduq:questionchange", function (event) {
+    setActiveQuestion(event.detail?.questionId || event.detail?.id || "");
+  });
 
   const RUNTIMES = Object.freeze({
     "duduq_target_shooter.html": "target-shooter",
@@ -123,6 +305,7 @@
                 moduleVersion: asString(value.version),
                 instruction: {
                   text: asString(instruction.text),
+                  audioId: asString(instruction.audioId),
                   language: asString(
                     instruction.language,
                     "pt-BR"
@@ -135,6 +318,7 @@
                     function (item) {
                       return {
                         text: asString(item.text),
+                        audioId: asString(item.audioId),
                         language: asString(
                           item.language,
                           "en-US"
@@ -145,7 +329,7 @@
                   )
                   .filter(
                     function (item) {
-                      return item.text && item.src;
+                      return item.text && (item.audioId || item.src);
                     }
                   )
               });
@@ -165,6 +349,7 @@
           entry.id &&
           entry.mechanic &&
           (
+            entry.instruction.audioId ||
             entry.instruction.src ||
             entry.stimuli.length > 0
           )
@@ -176,7 +361,7 @@
   function runtimeInstaller(payload) {
     "use strict";
 
-    const VERSION = "1.0.4";
+    const VERSION = "1.0.5";
 
     if (
       window.DuduQOfficialAudioRuntime &&
@@ -215,6 +400,14 @@
       typeof synth.cancel === "function"
         ? synth.cancel.bind(synth)
         : null;
+
+    try {
+      window.parent?.addEventListener?.("duduq:voice-state", function (event) {
+        if (event.detail?.state === "loading") {
+          try { nativeCancel?.(); } catch (_) {}
+        }
+      });
+    } catch (_) {}
 
     let currentAudio = null;
     let currentToken = 0;
@@ -278,6 +471,11 @@
     function stopMedia() {
       currentToken += 1;
 
+      try {
+        const owner = window.parent?.DuduQContentAudio;
+        owner?.stopVoice?.();
+      } catch (_) {}
+
       const audio = currentAudio;
       currentAudio = null;
 
@@ -336,6 +534,16 @@
     }
 
     function playSingleSource(src, token) {
+      try {
+        const owner = window.parent?.DuduQContentAudio;
+        if (owner && typeof owner.playSource === "function") {
+          if (!src || token !== currentToken) {
+            return Promise.reject(new Error("audio-cancelled"));
+          }
+          return owner.playSource(src);
+        }
+      } catch (_) {}
+
       return new Promise(
         function (resolve, reject) {
           if (!src || token !== currentToken) {
@@ -417,6 +625,24 @@
           }
         }
       );
+    }
+
+    async function playCanonicalAudio(audioId, utterance) {
+      stopMedia();
+      const token = currentToken;
+      const owner = window.parent?.DuduQContentAudio;
+      if (!owner || typeof owner.playVoice !== "function") {
+        try { utterance?.onerror?.({ type: "error", error: "canonical-audio-runtime-unavailable", utterance }); } catch (_) {}
+        return;
+      }
+      emitStart(utterance);
+      const result = await owner.playVoice(audioId);
+      if (token !== currentToken) return;
+      if (result?.status === "READY" && result.playback?.status === "ended") {
+        emitEnd(utterance);
+        return;
+      }
+      try { utterance?.onerror?.({ type: "error", error: result?.status || "canonical-audio-unavailable", utterance }); } catch (_) {}
     }
 
     function wait(milliseconds, token) {
@@ -513,7 +739,7 @@
             normalize(
               entry?.instruction?.text
             ) === normalized &&
-            entry?.instruction?.src
+            (entry?.instruction?.audioId || entry?.instruction?.src)
           );
         }
       ) || null;
@@ -538,7 +764,7 @@
             }
           );
 
-        if (item?.src) {
+        if (item?.src || item?.audioId) {
           return {
             question: active,
             stimulus: item
@@ -553,7 +779,7 @@
           entry.stimuli?.forEach(
             function (stimulus) {
               if (
-                stimulus?.src &&
+                (stimulus?.src || stimulus?.audioId) &&
                 normalize(stimulus.text) === normalized
               ) {
                 candidates.push({
@@ -684,13 +910,17 @@
         findInstruction(text);
 
       if (instruction) {
-        activeQuestionId =
-          instruction.id;
+        activeQuestionId = instruction.id;
 
-        playSequence(
-          [instruction.instruction.src],
-          utterance
-        );
+        try {
+          window.parent?.DuduQContentAudio?.setActiveQuestion?.(instruction.id);
+        } catch (_) {}
+
+        if (instruction.instruction.audioId) {
+          playCanonicalAudio(instruction.instruction.audioId, utterance);
+        } else {
+          playSequence([instruction.instruction.src], utterance);
+        }
 
         return;
 
@@ -699,13 +929,17 @@
       const resolved =
         findStimulus(text);
 
-      if (!resolved?.stimulus?.src) {
+      if (!resolved?.stimulus?.src && !resolved?.stimulus?.audioId) {
         nativeFallback(utterance);
         return;
       }
 
       activeQuestionId =
         resolved.question.id;
+
+      try {
+        window.parent?.DuduQContentAudio?.setActiveQuestion?.(resolved.question.id);
+      } catch (_) {}
 
       if (
         mechanic === "memory-quest" &&
@@ -727,6 +961,10 @@
       if (
         mechanic === "target-shooter"
       ) {
+        if (resolved.stimulus.audioId) {
+          playCanonicalAudio(resolved.stimulus.audioId, utterance);
+          return;
+        }
         const firstPresentation =
           !introducedTargets.has(
             resolved.question.id
@@ -765,6 +1003,11 @@
           }
         );
 
+        return;
+      }
+
+      if (resolved.stimulus.audioId) {
+        playCanonicalAudio(resolved.stimulus.audioId, utterance);
         return;
       }
 
@@ -1404,6 +1647,17 @@
   window.DuduQContentAudio =
     Object.freeze({
       version: VERSION,
+      resolveAudio,
+      playVoice,
+      stopVoice,
+      replayVoice: function (audioId) {
+        stopVoice();
+        return playVoice(audioId);
+      },
+      playSource,
+      setActiveQuestion,
+      getActiveQuestionId: function () { return activeQuestionId || null; },
+      getActiveVoiceId: function () { return activeVoiceId || null; },
       collectCatalog:
         collectModuleAudioCatalogs,
       patchRuntimeHTML,

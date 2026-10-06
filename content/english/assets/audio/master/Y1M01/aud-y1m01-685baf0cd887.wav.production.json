@@ -1,0 +1,46 @@
+{
+  "id": "AUD-Y1M01-685BAF0CD887",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "69d4c609201a7b5ce52a5aba24b21b9426279fb3c58576aeabe848eaff7c7218",
+  "sourceWorkWavSha256": "2a76bc2fb205b16b938f52fb3f604f554ea044096a5033395ab4d0cc25eb3c38",
+  "masterSha256": "0ee6c293831d34be2f65aa02473cd570512a9e493faec29b15be7fbefe672b73",
+  "audioSha256": "0a1651f9d11eb54f8042baaa07c6924cabad9f0a53c1fd2fea0a4a56149918f2",
+  "masterAudioPath": "content/english/assets/audio/master/Y1M01/aud-y1m01-685baf0cd887.wav",
+  "audioPath": "content/english/assets/audio/lexical/aud-y1m01-685baf0cd887-good-morning.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 1.04,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.841339111328125,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 39.423,
+    "decode": "PASS",
+    "bytes": 99884
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 1.04,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 17553,
+    "decode": "PASS"
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -22.994121551513672,
+    "measuredOutputLufs": -17.301828384399414,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.500000020140368,
+    "paddingMs": 80
+  },
+  "createdAt": "2026-10-06T18:11:11.302986+00:00",
+  "reused": false
+}

@@ -1,0 +1,46 @@
+{
+  "id": "AUD-Y1M01-08141B242251",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "6c5808f648b9cb607020390100a1aab0432b21704678d4900ecf16c7613c1ceb",
+  "sourceWorkWavSha256": "1357934ce52290d05a36960a812fed9759f1b47a50fc598bf83019e80250cdde",
+  "masterSha256": "ccf5480c11979788fc66ab97fcb19493d18d025122fc7cb76a48bc7f4a7bde20",
+  "audioSha256": "f592d9b8f956420c752f637e8d5c1daa13abbdc60fa2a77aa0616b067ca58ab4",
+  "masterAudioPath": "content/english/assets/audio/master/Y1M01/aud-y1m01-08141b242251.wav",
+  "audioPath": "content/english/assets/audio/chunks/aud-y1m01-08141b242251-good-morning-my-name-is-leo.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 2.4,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.838836669921875,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 27.5,
+    "decode": "PASS",
+    "bytes": 230444
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 2.4,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 39287,
+    "decode": "PASS"
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -19.511066436767578,
+    "measuredOutputLufs": -17.275602340698242,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.5000018660724288,
+    "paddingMs": 80
+  },
+  "createdAt": "2026-10-06T18:11:11.735954+00:00",
+  "reused": false
+}

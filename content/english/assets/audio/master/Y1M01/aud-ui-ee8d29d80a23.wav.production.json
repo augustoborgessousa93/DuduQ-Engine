@@ -1,0 +1,46 @@
+{
+  "id": "AUD-UI-EE8D29D80A23",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "5655dd297fa6aaf6e5d7f1bb2b26e0722617aba0166875e188e0673a52849220",
+  "sourceWorkWavSha256": "3cffb1bc9cbd8e74d241f6a5affe6130c5c7487a79343cd3e0c49bcd3625da4d",
+  "masterSha256": "c0b47abf6581293ca0b056cee84181202feae03aeb8c9d622d08c20ffae27797",
+  "audioSha256": "c54fb76c44806b6058d957f7e90d7004c1519cd8c027383b6cc5ca6bc2a0c31f",
+  "masterAudioPath": "content/english/assets/audio/master/Y1M01/aud-ui-ee8d29d80a23.wav",
+  "audioPath": "content/english/assets/audio/ui/aud-ui-ee8d29d80a23-ouca-novamente.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 1.68,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.840301513671875,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 27.381,
+    "decode": "PASS",
+    "bytes": 161324
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 1.68,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 28002,
+    "decode": "PASS"
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -20.940998077392578,
+    "measuredOutputLufs": -18.785573959350586,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.5000006354510111,
+    "paddingMs": 80
+  },
+  "createdAt": "2026-10-06T18:11:11.961451+00:00",
+  "reused": false
+}

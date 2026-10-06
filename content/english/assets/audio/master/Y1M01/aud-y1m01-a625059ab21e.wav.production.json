@@ -1,0 +1,46 @@
+{
+  "id": "AUD-Y1M01-A625059AB21E",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "15c2f30a21423e55e1edce54cb968d6696f19a28e581d202d3a2513e90c36232",
+  "sourceWorkWavSha256": "a8c85367a609141c47e4600d2c98216426021d1d043b1aabf10d2830d057f485",
+  "masterSha256": "e1642a8db5610797644c692350e4c048019fa264dabc41d876b52b178129191b",
+  "audioSha256": "c663c2fc4f1f0bcbda524362e02268e2d309ab01686768008abc04fc049376e0",
+  "masterAudioPath": "content/english/assets/audio/master/Y1M01/aud-y1m01-a625059ab21e.wav",
+  "audioPath": "content/english/assets/audio/lexical/aud-y1m01-a625059ab21e-boy.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 0.92,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.84002685546875,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 58.696,
+    "decode": "PASS",
+    "bytes": 88364
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 0.92,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 15881,
+    "decode": "PASS"
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -20.903242111206055,
+    "measuredOutputLufs": -16.099578857421875,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.500000020140368,
+    "paddingMs": 80
+  },
+  "createdAt": "2026-10-06T18:11:11.621949+00:00",
+  "reused": false
+}

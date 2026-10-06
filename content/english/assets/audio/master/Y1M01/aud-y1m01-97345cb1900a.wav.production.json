@@ -1,0 +1,46 @@
+{
+  "id": "AUD-Y1M01-97345CB1900A",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "a7c81fc2b4f07ae0ff2d9dd0c705c417719f4f74a93abccc720b4bad18e75ea1",
+  "sourceWorkWavSha256": "fa94af53e414c8813028001fa1e96fd392325491bc2013c10fc7235ac5b9f91e",
+  "masterSha256": "15f713969e1affac01ce80ec6f69f19a792e7a2856b593f66b0e19347e793321",
+  "audioSha256": "4166ce3783a77ea7a472a058dfab70bb10fb1a3d23ae1b122e805dcb1778611c",
+  "masterAudioPath": "content/english/assets/audio/master/Y1M01/aud-y1m01-97345cb1900a.wav",
+  "audioPath": "content/english/assets/audio/chunks/aud-y1m01-97345cb1900a-goodbye-ana.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 1.32,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.791412353515625,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 34.091,
+    "decode": "PASS",
+    "bytes": 126764
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 1.32,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 22150,
+    "decode": "PASS"
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -18.09499168395996,
+    "measuredOutputLufs": -15.999999046325684,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.9821828390079552,
+    "paddingMs": 80
+  },
+  "createdAt": "2026-10-06T18:11:11.764740+00:00",
+  "reused": false
+}

@@ -1,0 +1,46 @@
+{
+  "id": "AUD-Y1M01-15C49EF914C3",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "7439c7c7fe36f9cf47e266a48a36e01e9db4cac37a9f09850f38e4125982a306",
+  "sourceWorkWavSha256": "24836fce375d80bf231c9e6ee0c210147a73efe9f3dfdd27924f8d367df8b700",
+  "masterSha256": "592d10057e1b253e9b9e8dfa42847128d7763be0ca7306d5231cf67180249d64",
+  "audioSha256": "3f7b363d2a85c1561d50fa5d5e7b42e0d7a622c1931f0ccbe90d3aea5dbd6392",
+  "masterAudioPath": "content/english/assets/audio/master/Y1M01/aud-y1m01-15c49ef914c3.wav",
+  "audioPath": "content/english/assets/audio/lexical/aud-y1m01-15c49ef914c3-good-afternoon.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 1.36,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.84039306640625,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 41.176,
+    "decode": "PASS",
+    "bytes": 130604
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 1.36,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 22986,
+    "decode": "PASS"
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -22.43463897705078,
+    "measuredOutputLufs": -18.359275817871094,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.500000020140368,
+    "paddingMs": 80
+  },
+  "createdAt": "2026-10-06T18:11:11.332693+00:00",
+  "reused": false
+}

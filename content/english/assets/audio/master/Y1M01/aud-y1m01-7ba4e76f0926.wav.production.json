@@ -1,0 +1,46 @@
+{
+  "id": "AUD-Y1M01-7BA4E76F0926",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "92d8a06d0d0c8d594b3f20aceb3c4cc76bb257848ff50bac402e1e8b08475b27",
+  "sourceWorkWavSha256": "d073a29c5662127b0af0fa47021e39f880df9e67174a41af776be2c79fd8e7b9",
+  "masterSha256": "a6026b1c2bc8ebfd130c37a6285928eb12788be6131e937c67ac37c80d7de25c",
+  "audioSha256": "25bc05b3387f202c45627fc0d824784a5139cf8784eda9b7ee37fbd61926d703",
+  "masterAudioPath": "content/english/assets/audio/master/Y1M01/aud-y1m01-7ba4e76f0926.wav",
+  "audioPath": "content/english/assets/audio/chunks/aud-y1m01-7ba4e76f0926-my-name-is-ben.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 1.8,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.839080810546875,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 29.444,
+    "decode": "PASS",
+    "bytes": 172844
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 1.8,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 29674,
+    "decode": "PASS"
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -20.936220169067383,
+    "measuredOutputLufs": -19.446653366088867,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.5000006354510111,
+    "paddingMs": 80
+  },
+  "createdAt": "2026-10-06T18:11:11.596278+00:00",
+  "reused": false
+}

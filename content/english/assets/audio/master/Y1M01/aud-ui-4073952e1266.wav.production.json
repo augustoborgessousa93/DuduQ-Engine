@@ -1,0 +1,46 @@
+{
+  "id": "AUD-UI-4073952E1266",
+  "voiceVersion": "DUDUQ_GOLD_VOICE_v1",
+  "engine": "chatterbox-multilingual-v3",
+  "model": "Chatterbox Multilingual V3",
+  "cacheKey": "0355997054861992550ba024576b14863bb440e54cb64aa4e0f437f1c3f72d7e",
+  "sourceWorkWavSha256": "529d496d2aa91020a4d9a109e179f9b90cdf6f7f81cd270b7eaf69d319c0f559",
+  "masterSha256": "f1d3c4ea990a935c0756f1fd37b7434a3466d272374d89840ab913addaa3536b",
+  "audioSha256": "b8eb3877b9315c5f874f8b0cb2b3967e19a2d3c97200f503ec3387eb82067e9f",
+  "masterAudioPath": "content/english/assets/audio/master/Y1M01/aud-ui-4073952e1266.wav",
+  "audioPath": "content/english/assets/audio/ui/aud-ui-4073952e1266-muito-bem.mp3",
+  "masterQc": {
+    "pass": true,
+    "durationSeconds": 1.36,
+    "sampleRate": 48000,
+    "channels": 1,
+    "peakLinear": 0.84136962890625,
+    "clippedSamples": 0,
+    "silenceFramesBelowMinus60dBPercent": 38.235,
+    "decode": "PASS",
+    "bytes": 130604
+  },
+  "mp3Qc": {
+    "pass": true,
+    "codec": "MPEG Layer III",
+    "sampleRate": 44100,
+    "channels": 1,
+    "durationSeconds": 1.36,
+    "bitrateKbps": 128,
+    "frameBitratesKbps": [
+      128
+    ],
+    "bytes": 22986,
+    "decode": "PASS"
+  },
+  "normalization": {
+    "targetLufs": -16,
+    "measuredInputLufs": -21.58001708984375,
+    "measuredOutputLufs": -18.817115783691406,
+    "truePeakLimitDb": -1.5,
+    "measuredTruePeakDb": -1.499999404829768,
+    "paddingMs": 80
+  },
+  "createdAt": "2026-10-06T18:11:12.029456+00:00",
+  "reused": false
+}
