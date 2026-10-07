@@ -11,7 +11,9 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import process from "node:process";
 import { inflateSync } from "node:zlib";
-import { generateWithRetry } from "./openai-image-provider.mjs";
+import { generateWithRetry, requestImage as requestOpenAIImage, retryPrompt } from "./openai-image-provider.mjs";
+import { requestGeminiImage } from "./gemini-image-provider.mjs";
+import { DEFAULT_PROVIDER_HEALTH_PATH, circuitStateAfterFailure, normalizeProviderResult, providerMode, providerOrder, readProviderHealth, writeProviderHealth } from "./image-provider-router.mjs";
 
 const ROOT = process.cwd();
 const IMAGE_EXT = /\.(png|jpe?g|webp|gif|svg)$/i;
@@ -388,35 +390,74 @@ async function runBridge({ port = 4176, registryPath = DEFAULT_REGISTRY, request
   console.log(JSON.stringify({ status: "READY", bridge: `http://127.0.0.1:${port}/api/generated-image` }));
 }
 
-async function generateRequests({ requestPath = DEFAULT_REQUESTS, requestId = null, testOnly = false }) {
+async function generateRequests({ requestPath = DEFAULT_REQUESTS, requestId = null, testOnly = false, providerModeOverride, providerHealthPath = DEFAULT_PROVIDER_HEALTH_PATH, providerAdapters, smokeReportPath = "content/english/media/image-provider-smoke-report.json" } = {}) {
   const document = await readJson(requestPath);
   const needs = (document.needs || []).filter((need) => need.generationRequest &&
     (!requestId || need.generationRequest.requestId === requestId || need.generationRequest.mediaId === requestId) &&
     (testOnly ? need.generationRequest.testOnly === true : need.status === "NEEDS_CHATGPT_IMAGE_GENERATION" && need.generationRequest.testOnly !== true));
-  if (!process.env.OPENAI_API_KEY) return { status: "NOT_CONFIGURED", provider: "openai", requiredEnv: "OPENAI_API_KEY", generated: 0 };
-  if (!needs.length) return { status: "NO_PENDING_REQUESTS", provider: "openai", model: process.env.OPENAI_IMAGE_MODEL || "gpt-image-2", generated: 0 };
+  const mode = providerModeOverride || providerMode();
+  const health = await readProviderHealth(providerHealthPath);
+  const candidates = providerOrder({ mode, health });
+  if (!needs.length) return { status: "NO_PENDING_REQUESTS", providerMode: mode, activeProvider: "none", generated: 0 };
+  if (!candidates.length) {
+    const anyConfigured = Boolean(process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY);
+    return { status: anyConfigured ? "PROVIDERS_UNAVAILABLE" : "NOT_CONFIGURED", providerMode: mode, activeProvider: "none", requiredEnv: mode === "openai" ? "OPENAI_API_KEY" : mode === "gemini" ? "GEMINI_API_KEY" : "GEMINI_API_KEY_OR_OPENAI_API_KEY", generated: 0 };
+  }
   const completed = [], failures = [];
+  let activeProvider = "none", lastModel = "unknown";
   for (const need of needs) {
     const request = need.generationRequest;
-    let result = null, qc = null;
-    try {
-      result = await generateWithRetry(request, {
-        validate: (bytes) => {
-          qc = inspectPng(bytes);
-          if (!qc.valid) return qc;
-          const width = bytes.readUInt32BE(16), height = bytes.readUInt32BE(20);
-          if (bytes.length < 1024 || width !== 1024 || height !== 1024) return { valid: false, reason: "IMAGE_FILE_SIZE_OR_DIMENSIONS_INVALID" };
-          if (qc.subjectScaleQc !== "PASS") return { valid: false, reason: "SUBJECT_NEEDS_CLOSER_FRAMING" };
-          return qc;
+    let result = null, qc = null, providerFailure = null;
+    for (const provider of candidates) {
+      const adapter = providerAdapters?.[provider] || (provider === "gemini" ? requestGeminiImage : requestOpenAIImage);
+      try {
+        if (request.testOnly) {
+          result = await generateSmokeCandidate(request, provider, adapter);
+          qc = result.technicalQc;
+        } else {
+          result = await generateWithRetry(request, {
+            generate: async (generationRequest, promptOverride) => {
+              const raw = await adapter(generationRequest, { promptOverride });
+              const standard = normalizeProviderResult(raw);
+              return {
+                status: "GENERATED", bytes: standard.imageBytes, imageBytes: standard.imageBytes,
+                provider: standard.provider, model: standard.model, mimeType: standard.mimeType,
+                requestId: standard.requestId, generationMetadata: standard.generationMetadata,
+                metadata: { ...standard.generationMetadata, provider: standard.provider, model: standard.model, generationPrompt: promptOverride || generationRequest.prompt }
+              };
+            },
+            validate: (bytes) => validateGeneratedPng(bytes),
+            maxAttempts: 3
+          });
+          qc = result.technicalQc;
         }
-      });
-      if (result.status === "NOT_CONFIGURED") return { status: "NOT_CONFIGURED", provider: "openai", requiredEnv: "OPENAI_API_KEY", generated: 0 };
-      qc = result.technicalQc;
-    } catch (error) {
-      const safeCode = String(error.message || "GENERATION_ERROR").replace(/[^A-Z0-9_:-]/gi, "_").slice(0, 90);
-      failures.push({ requestId: request.requestId, error: safeCode, attempts: error.attempts || 3 });
+        if (!result || result.status !== "GENERATED") throw new Error("IMAGE_PROVIDER_EMPTY_RESULT");
+        result.bytes ||= result.imageBytes;
+        result.metadata ||= { ...result.generationMetadata, provider: result.provider, model: result.model };
+        result.metadata.generationPrompt ||= result.prompt || request.prompt;
+        result.metadata.generationAttempt ||= result.metadata.generationAttempts || 1;
+        result.technicalQc ||= qc;
+        activeProvider = provider;
+        lastModel = result.model;
+        health.providers ||= {};
+        health.providers[provider] = { state: "AVAILABLE", reason: "GENERATION_SUCCEEDED", updatedAt: new Date().toISOString() };
+        await writeProviderHealth(health, providerHealthPath);
+        break;
+      } catch (error) {
+        result = null;
+        providerFailure = error;
+        const prior = health.providers?.[provider] || {};
+        health.providers ||= {};
+        health.providers[provider] = circuitStateAfterFailure(provider, error, prior);
+        await writeProviderHealth(health, providerHealthPath);
+        if (mode !== "auto") break;
+      }
     }
-    if (!result) continue;
+    if (!result) {
+      const safeCode = String(providerFailure?.message || "GENERATION_ERROR").replace(/[^A-Z0-9_:-]/gi, "_").slice(0, 90);
+      failures.push({ requestId: request.requestId, error: safeCode, provider: providerFailure?.provider || candidates[0], attempts: providerFailure?.attempts || 1 });
+      continue;
+    }
     try {
       const registryPath = request.testOnly ? (request.testRegistryPath || DEFAULT_SMOKE_REGISTRY) : DEFAULT_REGISTRY;
       const requestSnapshot = request.testOnly ? JSON.stringify(document) : null;
@@ -451,19 +492,58 @@ async function generateRequests({ requestPath = DEFAULT_REQUESTS, requestId = nu
           await writeFile(abs(registryPath), registrySnapshot);
           await writeJson(requestPath, JSON.parse(requestSnapshot));
         }
-        await writeJson("content/english/media/image-provider-smoke-report.json", {
+        await writeJson(smokeReportPath, {
           schemaVersion: "1.0", status: "PASS_AND_CLEANED", requestId: request.requestId, provider: result.metadata.provider,
-          model: result.metadata.model, outputFormat: "png", requestedSize: "1024x1024", requestedQuality: "high",
+          model: result.metadata.model, outputFormat: "png", requestedSize: "1K", requestedQuality: "high",
           transparency: "PASS", technicalQc: imported.visualQc || "PASS", canonicalImport: imported.path,
           sha256: imported.sha256, runtimeHttp: "PASS", artifactRetained: false,
-          visualQc: "NEEDS_HUMAN_PEDAGOGICAL_REVIEW", generatedAt: result.metadata.createdAt
+          visualQc: "NEEDS_HUMAN_PEDAGOGICAL_REVIEW", generatedAt: result.metadata.createdAt,
+          providerRequestId: result.requestId || null, attempts: result.metadata.generationAttempt || 1
         });
       }
     } catch (error) {
       failures.push({ requestId: request.requestId, error: String(error.message || "IMPORT_ERROR").replace(/[^A-Z0-9_:-]/gi, "_").slice(0, 90), attempts: 1 });
     }
   }
-  return { status: failures.length ? "ISSUE" : "PASS", provider: "openai", model: process.env.OPENAI_IMAGE_MODEL || "gpt-image-2", generated: completed.length, completed, failures };
+  return { status: failures.length ? "ISSUE" : "PASS", providerMode: mode, activeProvider, model: lastModel, generated: completed.length, completed, failures };
+}
+
+async function generateSmokeCandidate(request, provider, adapter) {
+  let prompt = request.prompt;
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
+    const raw = await adapter(request, { promptOverride: prompt });
+    if (raw?.status === "NOT_CONFIGURED") throw Object.assign(new Error(`PROVIDER_NOT_CONFIGURED_${provider.toUpperCase()}`), { provider, retryable: false });
+    const standard = normalizeProviderResult(raw);
+    const qc = validateGeneratedPng(standard.imageBytes);
+    if (qc.valid) {
+      return {
+        status: "GENERATED", bytes: standard.imageBytes, imageBytes: standard.imageBytes,
+        provider: standard.provider, model: standard.model, mimeType: standard.mimeType,
+        prompt: standard.prompt, requestId: standard.requestId,
+        generationMetadata: standard.generationMetadata,
+        metadata: { ...standard.generationMetadata, provider: standard.provider, model: standard.model, generationPrompt: prompt, generationAttempt: attempt },
+        technicalQc: qc
+      };
+    }
+    const alphaFailure = /ALPHA|TRANSPARENT/.test(qc.reason || "");
+    if (attempt === 1 && alphaFailure) {
+      prompt = retryPrompt(request.prompt, "TRANSPARENT_ALPHA_REQUIRED");
+      continue;
+    }
+    const code = alphaFailure ? "TRANSPARENCY_UNSUPPORTED_OR_NOT_PRODUCED" : (qc.reason || "IMAGE_QC_FAILED");
+    throw Object.assign(new Error(code), { provider, attempts: attempt, retryable: false, technicalQc: qc });
+  }
+  throw Object.assign(new Error("IMAGE_QC_FAILED"), { provider, attempts: 2, retryable: false });
+}
+
+function validateGeneratedPng(bytes) {
+  if (!Buffer.isBuffer(bytes) || bytes.length < 1024) return { valid: false, reason: "IMAGE_FILE_SIZE_INVALID" };
+  const qc = inspectPng(bytes);
+  if (!qc.valid) return qc;
+  const width = bytes.readUInt32BE(16), height = bytes.readUInt32BE(20);
+  if (width !== 1024 || height !== 1024) return { valid: false, reason: "IMAGE_FILE_SIZE_OR_DIMENSIONS_INVALID" };
+  if (qc.subjectScaleQc !== "PASS") return { valid: false, reason: "SUBJECT_NEEDS_CLOSER_FRAMING" };
+  return qc;
 }
 
 async function verifySmokeAssetHttp(file, expectedHash, routePath) {
@@ -514,8 +594,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
       if (result.status === "NOT_CONFIGURED") process.exitCode = 2;
       else if (result.status === "ISSUE") process.exitCode = 1;
     } else if (cli.command === "smoke") {
-      const result = await generateRequests({ requestPath: cli.requests || DEFAULT_SMOKE_REQUESTS, requestId: "TEST-OPENAI-IMAGE-SMOKE-001", testOnly: true });
-      console.log(JSON.stringify({ ...result, ...(result.status === "NOT_CONFIGURED" ? { IMAGE_PROVIDER: "NOT_CONFIGURED", REQUIRED_ENV: "OPENAI_API_KEY" } : {}) }, null, 2));
+      const result = await generateRequests({ requestPath: cli.requests || DEFAULT_SMOKE_REQUESTS, requestId: "TEST-GEMINI-IMAGE-SMOKE-001", testOnly: true });
+      console.log(JSON.stringify({ ...result, ...(result.status === "NOT_CONFIGURED" ? { IMAGE_PROVIDER: "NOT_CONFIGURED", REQUIRED_ENV: result.requiredEnv } : {}) }, null, 2));
       if (result.status === "NOT_CONFIGURED") process.exitCode = 2;
       else if (result.status === "ISSUE") process.exitCode = 1;
     }

@@ -33,7 +33,9 @@ export async function requestImage(generationRequest, { apiKey = process.env.OPE
   if (!response.ok) {
     const error = new Error(`OPENAI_IMAGE_HTTP_${response.status}`);
     error.status = response.status;
-    error.retryable = response.status === 429 || response.status >= 500;
+    // 429 trips the provider circuit; do not spend repeated attempts on a likely quota/limit response.
+    error.retryable = response.status >= 500;
+    error.provider = "openai";
     throw error;
   }
   const payload = await response.json();
@@ -41,10 +43,12 @@ export async function requestImage(generationRequest, { apiKey = process.env.OPE
   if (typeof encoded !== "string" || !encoded.length || encoded.length > 40 * 1024 * 1024) throw new Error("OPENAI_IMAGE_BASE64_MISSING_OR_OVERSIZED");
   const bytes = Buffer.from(encoded, "base64");
   if (!bytes.length || bytes.toString("base64").replace(/=+$/, "") !== encoded.replace(/=+$/, "")) throw new Error("OPENAI_IMAGE_BASE64_INVALID");
+  const metadata = { provider: "openai", model, createdAt: payload.created ? new Date(payload.created * 1000).toISOString() : new Date().toISOString(), outputFormat: "png", requestedQuality: "high", requestedSize: "1024x1024", requestedBackground: "transparent" };
   return {
     status: "GENERATED",
     bytes,
-    metadata: { provider: "openai", model, createdAt: payload.created ? new Date(payload.created * 1000).toISOString() : new Date().toISOString(), outputFormat: "png", requestedQuality: "high", requestedSize: "1024x1024", requestedBackground: "transparent" }
+    provider: "openai", model, imageBytes: bytes, mimeType: "image/png", width: 1024, height: 1024,
+    prompt: request.body.prompt, requestId: null, generationMetadata: metadata, metadata
   };
 }
 
@@ -68,12 +72,14 @@ export async function generateWithRetry(generationRequest, { generate = requestI
       prompt = retryPrompt(prompt, error.message || "IMAGE_QC_FAILED");
     }
   }
-  throw Object.assign(new Error(lastError?.message || "IMAGE_GENERATION_FAILED"), { retryable: false, attempts });
+  throw Object.assign(new Error(lastError?.message || "IMAGE_GENERATION_FAILED"), {
+    retryable: false, attempts, status: lastError?.status, provider: lastError?.provider, requestId: lastError?.requestId
+  });
 }
 
 export function retryPrompt(basePrompt, reason) {
   const correction = String(reason).includes("TRANSPARENT") || String(reason).includes("ALPHA")
-    ? "Retry requirement: true transparent alpha background; no opaque or checkerboard backdrop."
+    ? "Retry requirement: true transparent alpha background, isolated cutout asset, no background pixels; no white backdrop, no colored backdrop, no environment."
     : String(reason).includes("FRAMING") || String(reason).includes("CLOSER")
       ? "Retry requirement: closer framing, subject occupying most of the canvas, centered and immediately recognizable."
       : String(reason).includes("TEXT")
