@@ -6,11 +6,12 @@
  */
 import { createHash } from "node:crypto";
 import { createServer } from "node:http";
-import { access, copyFile, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
+import { access, copyFile, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import process from "node:process";
 import { inflateSync } from "node:zlib";
+import { generateWithRetry } from "./openai-image-provider.mjs";
 
 const ROOT = process.cwd();
 const IMAGE_EXT = /\.(png|jpe?g|webp|gif|svg)$/i;
@@ -18,6 +19,8 @@ const DEFAULT_REGISTRY = "content/english/media/media-registry.json";
 const INBOX = "content/english/assets/images/generated-inbox";
 const OUTPUT_ROOT = "content/english/assets/images";
 const DEFAULT_REQUESTS = "content/english/media/image-request-manifest.json";
+const DEFAULT_SMOKE_REQUESTS = "content/english/media/image-provider-smoke-request.json";
+const DEFAULT_SMOKE_REGISTRY = "test/fixtures/image-provider-smoke-registry.json";
 const STYLE = "DUDUQ_ENGLISH_EDITORIAL_V1";
 
 const abs = (relative) => path.resolve(ROOT, relative);
@@ -236,7 +239,7 @@ async function scanModule(moduleDir, { registryPath = DEFAULT_REGISTRY, output =
       candidates.sort((a, b) => b.score - a.score || a.path.localeCompare(b.path));
     }
     const fileBase = (requirement.filename || `${requirement.mediaId || requirement.requirementId}.png`).replace(/\.(?:jpe?g|webp|gif|svg)$/i, ".png");
-    const outPath = requirement.outputPath || `${OUTPUT_ROOT}/${modulePath.split("/").slice(-2).join("/")}/${fileBase}`;
+    const outPath = requirement.outputPath || `${OUTPUT_ROOT}/${modulePath.split("/").slice(-2).join("/")}/generated/${fileBase}`;
     results.push({
       requirementId: requirement.requirementId,
       mediaId: requirement.mediaId || null,
@@ -293,6 +296,7 @@ async function importGenerated({ requestId, bytes, registryPath = DEFAULT_REGIST
   if (request.transparentBackground && !pngQc.transparent) throw new Error("PNG_BACKGROUND_NOT_TRANSPARENT");
   const destination = path.resolve(ROOT, request.outputPath);
   if (!isInside(abs(OUTPUT_ROOT), destination)) throw new Error(`UNSAFE_MEDIA_DESTINATION:${request.outputPath}`);
+  if (path.basename(destination) !== request.canonicalFilename) throw new Error("CANONICAL_FILENAME_MISMATCH");
   const questionPath = `content/english/year-${String(request.moduleId).match(/^Y(\d+)/)?.[1] || "1"}/module-${String(request.moduleId).match(/M(\d+)/)?.[1]?.padStart(2, "0") || "01"}/questions.json`;
   let questionDoc = null, questionChanged = false;
   if (await exists(abs(questionPath))) {
@@ -384,7 +388,110 @@ async function runBridge({ port = 4176, registryPath = DEFAULT_REGISTRY, request
   console.log(JSON.stringify({ status: "READY", bridge: `http://127.0.0.1:${port}/api/generated-image` }));
 }
 
-export { imageInfo, scanModule, importGenerated, validateRegistry };
+async function generateRequests({ requestPath = DEFAULT_REQUESTS, requestId = null, testOnly = false }) {
+  const document = await readJson(requestPath);
+  const needs = (document.needs || []).filter((need) => need.generationRequest &&
+    (!requestId || need.generationRequest.requestId === requestId || need.generationRequest.mediaId === requestId) &&
+    (testOnly ? need.generationRequest.testOnly === true : need.status === "NEEDS_CHATGPT_IMAGE_GENERATION" && need.generationRequest.testOnly !== true));
+  if (!process.env.OPENAI_API_KEY) return { status: "NOT_CONFIGURED", provider: "openai", requiredEnv: "OPENAI_API_KEY", generated: 0 };
+  if (!needs.length) return { status: "NO_PENDING_REQUESTS", provider: "openai", model: process.env.OPENAI_IMAGE_MODEL || "gpt-image-2", generated: 0 };
+  const completed = [], failures = [];
+  for (const need of needs) {
+    const request = need.generationRequest;
+    let result = null, qc = null;
+    try {
+      result = await generateWithRetry(request, {
+        validate: (bytes) => {
+          qc = inspectPng(bytes);
+          if (!qc.valid) return qc;
+          const width = bytes.readUInt32BE(16), height = bytes.readUInt32BE(20);
+          if (bytes.length < 1024 || width !== 1024 || height !== 1024) return { valid: false, reason: "IMAGE_FILE_SIZE_OR_DIMENSIONS_INVALID" };
+          if (qc.subjectScaleQc !== "PASS") return { valid: false, reason: "SUBJECT_NEEDS_CLOSER_FRAMING" };
+          return qc;
+        }
+      });
+      if (result.status === "NOT_CONFIGURED") return { status: "NOT_CONFIGURED", provider: "openai", requiredEnv: "OPENAI_API_KEY", generated: 0 };
+      qc = result.technicalQc;
+    } catch (error) {
+      const safeCode = String(error.message || "GENERATION_ERROR").replace(/[^A-Z0-9_:-]/gi, "_").slice(0, 90);
+      failures.push({ requestId: request.requestId, error: safeCode, attempts: error.attempts || 3 });
+    }
+    if (!result) continue;
+    try {
+      const registryPath = request.testOnly ? (request.testRegistryPath || DEFAULT_SMOKE_REGISTRY) : DEFAULT_REGISTRY;
+      const requestSnapshot = request.testOnly ? JSON.stringify(document) : null;
+      const registrySnapshot = request.testOnly ? await readFile(abs(registryPath)).catch(() => Buffer.from('{"schemaVersion":"1.0","entries":[]}\n')) : null;
+      const destination = path.resolve(ROOT, request.outputPath);
+      if (request.testOnly && await exists(destination)) throw new Error("SMOKE_OUTPUT_ALREADY_EXISTS");
+      const imported = await importGenerated({ requestId: request.requestId, bytes: result.bytes, registryPath, requestPath, provenance: result.metadata });
+      completed.push({ requestId: request.requestId, ...imported });
+      request.status = "GENERATED_OFFICIAL_CANDIDATE";
+      request.provider = result.metadata.provider; request.model = result.metadata.model;
+      request.createdAt = result.metadata.createdAt; request.generationPrompt = result.metadata.generationPrompt;
+      request.generationAttempts = result.metadata.generationAttempt;
+      await writeJson(requestPath, document);
+      if (!request.testOnly) {
+        const registryHealth = await validateRegistry(registryPath);
+        if (registryHealth.status !== "PASS") throw new Error("MEDIA_REGISTRY_QC_FAILED");
+        const moduleMediaHealth = await validateQuestionMediaBindings(`content/english/year-${String(request.moduleId).match(/^Y(\d+)/)?.[1] || "1"}/module-${String(request.moduleId).match(/M(\d+)/)?.[1]?.padStart(2, "0") || "01"}`);
+        if (moduleMediaHealth.status !== "PASS") throw new Error("MODULE_MEDIA_BINDING_VALIDATION_FAILED");
+        const { spawnSync } = await import("node:child_process");
+        const build = spawnSync(process.execPath, ["scripts/build-cloudflare-pages.mjs"], { cwd: ROOT, encoding: "utf8", windowsHide: true });
+        if (build.status !== 0) throw new Error("PRODUCT_BUILD_FAILED");
+        const assetPath = imported.path.replaceAll("\\", "/");
+        const base = process.env.DUDUQ_RUNTIME_BASE_URL || "http://127.0.0.1:4175";
+        const response = await fetch(`${base}/${assetPath}`);
+        if (!response.ok) throw new Error(`RUNTIME_HTTP_${response.status}`);
+        const served = Buffer.from(await response.arrayBuffer());
+        if (sha256(served) !== imported.sha256) throw new Error("RUNTIME_ASSET_HASH_MISMATCH");
+      } else {
+        try { await verifySmokeAssetHttp(destination, imported.sha256, imported.path); }
+        finally {
+          if (await exists(destination) && sha256(await readFile(destination)) === imported.sha256) await rm(destination);
+          await writeFile(abs(registryPath), registrySnapshot);
+          await writeJson(requestPath, JSON.parse(requestSnapshot));
+        }
+        await writeJson("content/english/media/image-provider-smoke-report.json", {
+          schemaVersion: "1.0", status: "PASS_AND_CLEANED", requestId: request.requestId, provider: result.metadata.provider,
+          model: result.metadata.model, outputFormat: "png", requestedSize: "1024x1024", requestedQuality: "high",
+          transparency: "PASS", technicalQc: imported.visualQc || "PASS", canonicalImport: imported.path,
+          sha256: imported.sha256, runtimeHttp: "PASS", artifactRetained: false,
+          visualQc: "NEEDS_HUMAN_PEDAGOGICAL_REVIEW", generatedAt: result.metadata.createdAt
+        });
+      }
+    } catch (error) {
+      failures.push({ requestId: request.requestId, error: String(error.message || "IMPORT_ERROR").replace(/[^A-Z0-9_:-]/gi, "_").slice(0, 90), attempts: 1 });
+    }
+  }
+  return { status: failures.length ? "ISSUE" : "PASS", provider: "openai", model: process.env.OPENAI_IMAGE_MODEL || "gpt-image-2", generated: completed.length, completed, failures };
+}
+
+async function verifySmokeAssetHttp(file, expectedHash, routePath) {
+  const { createReadStream } = await import("node:fs");
+  const server = createServer((req, res) => {
+    if (req.url !== `/${routePath.replaceAll("\\", "/")}`) { res.writeHead(404).end(); return; }
+    res.writeHead(200, { "content-type": "image/png" }); createReadStream(file).pipe(res);
+  });
+  await new Promise((resolve, reject) => { server.once("error", reject); server.listen(0, "127.0.0.1", resolve); });
+  try {
+    const { port } = server.address();
+    const response = await fetch(`http://127.0.0.1:${port}/${routePath.replaceAll("\\", "/")}`);
+    if (!response.ok) throw new Error(`SMOKE_HTTP_${response.status}`);
+    const served = Buffer.from(await response.arrayBuffer());
+    if (sha256(served) !== expectedHash) throw new Error("SMOKE_HTTP_HASH_MISMATCH");
+  } finally { await new Promise((resolve) => server.close(resolve)); }
+}
+
+async function validateQuestionMediaBindings(moduleDir) {
+  const questions = await readJson(`${moduleDir}/questions.json`);
+  const registry = await readJson(DEFAULT_REGISTRY);
+  const entries = new Map((registry.entries || []).map((entry) => [entry.mediaId, entry]));
+  const ids = new Set((questions.items || []).flatMap((item) => [item.image_ref, ...(item.mediaBindings || []).map((entry) => entry.mediaId), ...(item.options || []).map((entry) => entry.mediaId)]).filter(Boolean));
+  const missing = [...ids].filter((id) => !entries.has(id));
+  return { status: missing.length ? "ISSUE" : "PASS", moduleId: questions.moduleId, boundMediaIds: ids.size, missing };
+}
+
+export { imageInfo, inspectPng, scanModule, importGenerated, validateRegistry, validateQuestionMediaBindings, generateRequests };
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const cli = argsOf(process.argv.slice(2));
@@ -401,6 +508,17 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
       if (!info.valid) throw new Error(`INVALID_GENERATED_IMAGE:${info.reason}`);
       console.log(JSON.stringify(await importGenerated({ requestId: cli.request, bytes: await readFile(source), registryPath: cli.registry || DEFAULT_REGISTRY, requestPath: cli.requests || DEFAULT_REQUESTS, provenance: { provider: "ChatGPT Image Generation", sourceFile: path.basename(source) } }), null, 2));
     } else if (cli.command === "bridge") await runBridge({ port: cli.port || 4176, registryPath: cli.registry || DEFAULT_REGISTRY, requestPath: cli.requests || DEFAULT_REQUESTS });
-    else throw new Error("USAGE: node scripts/duduq-image-pipeline.mjs scan [--module content/english/year-1/module-01] | validate | import --request ID --file image.png | bridge");
+    else if (cli.command === "generate") {
+      const result = await generateRequests({ requestPath: cli.requests || DEFAULT_REQUESTS, requestId: cli.request || null });
+      console.log(JSON.stringify({ ...result, ...(result.status === "NOT_CONFIGURED" ? { IMAGE_PROVIDER: "NOT_CONFIGURED", REQUIRED_ENV: "OPENAI_API_KEY" } : {}) }, null, 2));
+      if (result.status === "NOT_CONFIGURED") process.exitCode = 2;
+      else if (result.status === "ISSUE") process.exitCode = 1;
+    } else if (cli.command === "smoke") {
+      const result = await generateRequests({ requestPath: cli.requests || DEFAULT_SMOKE_REQUESTS, requestId: "TEST-OPENAI-IMAGE-SMOKE-001", testOnly: true });
+      console.log(JSON.stringify({ ...result, ...(result.status === "NOT_CONFIGURED" ? { IMAGE_PROVIDER: "NOT_CONFIGURED", REQUIRED_ENV: "OPENAI_API_KEY" } : {}) }, null, 2));
+      if (result.status === "NOT_CONFIGURED") process.exitCode = 2;
+      else if (result.status === "ISSUE") process.exitCode = 1;
+    }
+    else throw new Error("USAGE: node scripts/duduq-image-pipeline.mjs scan | validate | import --request ID --file image.png | bridge | generate | smoke");
   } catch (error) { console.error(JSON.stringify({ status: "ISSUE", error: error.message })); process.exitCode = 1; }
 }

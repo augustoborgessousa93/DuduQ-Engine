@@ -112,6 +112,9 @@ await copyFile("content/english/year-1/module-01/module.json");
 await copyFile("content/english/year-1/module-01/questions.json");
 await copyFile("content/english/media/media-registry.json");
 await copyRuntimeTree("content/english/assets/images/year-1/module-01/temporary");
+if (await stat(sourcePath("content/english/assets/images/year-1/module-01/generated")).then(() => true, () => false)) {
+  await copyRuntimeTree("content/english/assets/images/year-1/module-01/generated");
+}
 await copyFile("duduq-audio/manifests/AUDIO_MANIFEST.json");
 const audioManifest = JSON.parse(await readFile(sourcePath("duduq-audio/manifests/AUDIO_MANIFEST.json"), "utf8"));
 for (const item of audioManifest.items || []) {

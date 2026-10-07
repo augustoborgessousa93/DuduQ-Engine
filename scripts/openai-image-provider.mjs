@@ -48,6 +48,29 @@ export async function requestImage(generationRequest, { apiKey = process.env.OPE
   };
 }
 
+export async function generateWithRetry(generationRequest, { generate = requestImage, validate, maxAttempts = 3 } = {}) {
+  let prompt = generationRequest.prompt;
+  let lastError = null;
+  const attempts = Math.min(3, Math.max(1, maxAttempts));
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      const output = await generate(generationRequest, prompt);
+      if (output.status === "NOT_CONFIGURED") return output;
+      const quality = validate ? await validate(output.bytes) : { valid: true };
+      if (quality?.valid === false) throw Object.assign(new Error(quality.reason || "IMAGE_QC_FAILED"), { retryable: true });
+      output.metadata.generationPrompt = prompt;
+      output.metadata.generationAttempt = attempt;
+      output.technicalQc = quality;
+      return output;
+    } catch (error) {
+      lastError = error;
+      if (attempt >= attempts || error.retryable === false) break;
+      prompt = retryPrompt(prompt, error.message || "IMAGE_QC_FAILED");
+    }
+  }
+  throw Object.assign(new Error(lastError?.message || "IMAGE_GENERATION_FAILED"), { retryable: false, attempts });
+}
+
 export function retryPrompt(basePrompt, reason) {
   const correction = String(reason).includes("TRANSPARENT") || String(reason).includes("ALPHA")
     ? "Retry requirement: true transparent alpha background; no opaque or checkerboard backdrop."
