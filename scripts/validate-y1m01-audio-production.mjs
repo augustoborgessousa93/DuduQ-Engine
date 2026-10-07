@@ -14,7 +14,8 @@ const registry = await readJson("content/english/audio/audio-registry.json");
 const bindingFile = await readJson("content/english/year-1/module-01/audio-production-manifest.json");
 const questions = await readJson("content/english/year-1/module-01/questions.json");
 const imageManifest = await readJson("content/english/media/image-generation-manifest.json");
-const moduleItems = manifest.items.filter((item) => item.module === "Y1M01");
+const moduleItems = manifest.items.filter((item) => item.module === "Y1M01" && item.type !== "INSTRUCTION_AUDIO");
+const instructionItems = manifest.items.filter((item) => item.module === "Y1M01" && item.type === "INSTRUCTION_AUDIO");
 const registryById = new Map(registry.entries.map((entry) => [entry.audioId, entry]));
 const byId = new Map(manifest.items.map((entry) => [entry.id, entry]));
 const bindings = bindingFile.items || {};
@@ -26,7 +27,8 @@ let questionChangePassed = false;
 let missingIdPassed = false;
 
 if (moduleItems.length !== 23) fail(`CONTRACT_COUNT:${moduleItems.length}`);
-for (const item of moduleItems) {
+if (instructionItems.length !== 20) fail(`INSTRUCTION_CONTRACT_COUNT:${instructionItems.length}`);
+for (const item of [...moduleItems, ...instructionItems]) {
   const registryEntry = registryById.get(item.id);
   const asset = path.resolve(root, item.audioPath || "");
   const registryPath = registryEntry?.urlOrPath?.replace(/^\/+/, "");
@@ -37,7 +39,12 @@ for (const item of moduleItems) {
   const audioBytes = await readFile(asset).catch(() => null);
   if (!audioBytes || audioBytes.length <= 1024) fail(`ASSET_MISSING:${item.id}`);
   else if (createHash("sha256").update(audioBytes).digest("hex") !== item.contentHash) fail(`ASSET_HASH_MISMATCH:${item.id}`);
-  if (item.id.startsWith("AUD-Y1M01-") && !boundIds.has(item.id)) fail(`NO_CONTENT_BINDING:${item.id}`);
+  if (item.type !== "INSTRUCTION_AUDIO" && item.id.startsWith("AUD-Y1M01-") && !boundIds.has(item.id)) fail(`NO_CONTENT_BINDING:${item.id}`);
+  if (item.type === "INSTRUCTION_AUDIO") {
+    const question = questions.items.find((entry) => entry.item_id === item.activity?.[0]);
+    if (!question || question.instruction?.instructionAudioId !== item.id || question.instruction?.spokenText !== item.speechText ||
+        item.locale !== "pt-BR" || item.humanPronunciationReview !== "NEEDS_HUMAN_REVIEW" || item.qcStatus !== "PASS") fail(`INSTRUCTION_BINDING_OR_QC:${item.id}`);
+  }
 }
 
 for (const [questionId, questionBindings] of Object.entries(bindings)) {
@@ -67,7 +74,7 @@ async function playwrightModule() {
 const baseUrl = "http://127.0.0.1:4175";
 let serverProcess = null;
 async function isServerReady() {
-  try { return (await fetch(`${baseUrl}/qa/y1m01-audio/`, { method: "HEAD" })).ok; }
+  try { return (await fetch(`${baseUrl}/play/target-shooter/`, { method: "HEAD" })).ok; }
   catch { return false; }
 }
 if (!await isServerReady()) {
@@ -79,7 +86,8 @@ let browser;
 const runtimeResults = [];
 try {
   assert(await isServerReady(), "PREVIEW_SERVER_UNAVAILABLE");
-  for (const item of moduleItems) {
+  const runtimeItems = [...moduleItems, ...instructionItems];
+  for (const item of runtimeItems) {
     const response = await fetch(`${baseUrl}/${item.audioPath.replace(/^\/+/, "")}`, { method: "HEAD", cache: "no-store" });
     const contentType = response.headers.get("content-type") || "";
     if (response.status !== 200 || !contentType.toLowerCase().includes("audio/mpeg")) fail(`HTTP_AUDIO_INVALID:${item.id}:${response.status}:${contentType}`);
@@ -91,9 +99,15 @@ try {
   const page = await browser.newPage({ acceptDownloads: false });
   const pageErrors = [];
   page.on("pageerror", (error) => pageErrors.push(error.message));
-  await page.goto(`${baseUrl}/qa/y1m01-audio/`, { waitUntil: "domcontentloaded" });
+  await page.addInitScript(() => {
+    window.__trackedAudio = [];
+    const NativeAudio = window.Audio;
+    window.Audio = function (src) { const instance = new NativeAudio(src); window.__trackedAudio.push(instance); return instance; };
+    window.Audio.prototype = NativeAudio.prototype;
+  });
+  await page.goto(`${baseUrl}/play/target-shooter/`, { waitUntil: "domcontentloaded" });
   await page.waitForFunction(() => window.DuduQContentAudio?.version === "1.0.5", null, { timeout: 10000 });
-  const resolved = await page.evaluate(async (ids) => Promise.all(ids.map((id) => window.DuduQContentAudio.resolveAudio(id))), moduleItems.map((item) => item.id));
+  const resolved = await page.evaluate(async (ids) => Promise.all(ids.map((id) => window.DuduQContentAudio.resolveAudio(id))), runtimeItems.map((item) => item.id));
   for (const result of resolved) {
     if (result.status !== "READY" || !result.url?.startsWith(`${baseUrl}/`) || !result.url.toLowerCase().endsWith(".mp3")) fail(`SHARED_RESOLVER:${result.audioId}:${result.status}`);
   }
@@ -103,13 +117,10 @@ try {
     window.addEventListener("duduq:voice-state", (event) => Object.assign(window.__audioRuntimeSmoke, event.detail));
     const root = document.createElement("div"); root.id = "shared-runtime-smoke-controls";
     document.body.append(root);
-    const NativeAudio = window.Audio;
-    window.__audioRuntimeSmoke.instances = [];
-    window.Audio = function (src) { const instance = new NativeAudio(src); window.__audioRuntimeSmoke.instances.push(instance); return instance; };
-    window.Audio.prototype = NativeAudio.prototype;
+    window.__audioRuntimeSmoke.instances = window.__trackedAudio;
   });
 
-  for (const item of moduleItems) {
+  for (const item of runtimeItems) {
     await page.evaluate((id) => {
       const button = document.createElement("button");
       button.id = "runtime-play-" + id;
@@ -129,11 +140,11 @@ try {
     await page.evaluate(() => window.DuduQContentAudio.stopVoice());
   }
 
-  const firstId = moduleItems[0].id;
+  const firstId = runtimeItems[0].id;
   const missing = await page.evaluate(async (id) => window.DuduQContentAudio.playVoice(`${id}-MISSING`), firstId);
   missingIdPassed = missing.status !== "READY" && !(await page.evaluate(() => window.DuduQContentAudio.getActiveVoiceId()));
   if (!missingIdPassed) fail("MISSING_ID_FAIL_SAFE");
-  const secondId = moduleItems[1].id;
+  const secondId = runtimeItems[1].id;
   for (const id of [firstId, secondId]) {
     await page.evaluate((audioId) => {
       const button = document.createElement("button"); button.id = "runtime-overlap-" + audioId;
@@ -155,6 +166,30 @@ try {
   await page.evaluate(() => window.DuduQContentAudio.setActiveQuestion("QA-TWO"));
   questionChangePassed = !(await page.evaluate(() => window.DuduQContentAudio.getActiveVoiceId()));
   if (!questionChangePassed) fail("QUESTION_CHANGE_DID_NOT_STOP");
+
+  const contentStopsFeedback = await page.evaluate(async (id) => {
+    const started = await window.DuduqSound.playVoice("error");
+    const errorVoice = window.__trackedAudio.find(audio => (audio.currentSrc || audio.src).includes("feedback-error-") && !audio.paused && !audio.ended);
+    void window.DuduQContentAudio.playVoice(id);
+    await new Promise(resolve => setTimeout(resolve, 100));
+    const active = window.__trackedAudio.filter(audio => !audio.paused && !audio.ended);
+    const passed = started && Boolean(errorVoice) && errorVoice.paused && active.length === 1 && active[0] !== errorVoice;
+    window.DuduQContentAudio.stopVoice();
+    return { passed, started, active: active.map(audio => audio.currentSrc || audio.src), errorPaused: errorVoice?.paused ?? null, hasStopApi: typeof window.DuduqSound.stopVoice === "function" };
+  }, firstId);
+  if (!contentStopsFeedback.passed) fail(`CONTENT_DID_NOT_STOP_FEEDBACK_VOICE:${JSON.stringify(contentStopsFeedback)}`);
+  const feedbackStopsContent = await page.evaluate(async (id) => {
+    void window.DuduQContentAudio.playVoice(id);
+    await new Promise(resolve => setTimeout(resolve, 100));
+    const contentVoice = window.__trackedAudio.find(audio => (audio.currentSrc || audio.src).toLowerCase().endsWith(".mp3") && !audio.paused && !audio.ended);
+    const started = await window.DuduqSound.playVoice("correct");
+    const correctVoice = window.__trackedAudio.find(audio => (audio.currentSrc || audio.src).includes("feedback-correct-") && !audio.paused && !audio.ended);
+    const active = window.__trackedAudio.filter(audio => !audio.paused && !audio.ended);
+    const passed = started && Boolean(contentVoice) && contentVoice.paused && Boolean(correctVoice) && active.length === 1;
+    window.DuduqSound.stopVoice();
+    return { passed, started, active: active.map(audio => audio.currentSrc || audio.src), contentPaused: contentVoice?.paused ?? null, hasStopApi: typeof window.DuduqSound.stopVoice === "function" };
+  }, firstId);
+  if (!feedbackStopsContent.passed) fail(`FEEDBACK_DID_NOT_STOP_CONTENT_VOICE:${JSON.stringify(feedbackStopsContent)}`);
   if (pageErrors.length) fail(`BROWSER_PAGE_ERRORS:${pageErrors.join("|")}`);
 } catch (error) {
   fail(`RUNTIME_SMOKE:${error?.message || String(error)}`);
@@ -172,6 +207,7 @@ const report = {
   imageDomain: imageItemBindingsMissing ? "PENDING" : "PASS",
   moduleRelease: imageItemBindingsMissing ? "NOT_READY" : "READY",
   approvedAudio: moduleItems.length,
+  instructionAudio: instructionItems.length,
   canonicalResolver: resolvedReadyCount(runtimeResults),
   sharedRuntimePlayback: runtimeResults,
   q009: q009.length === 3 && new Set(q009.map((item) => item.audioId)).size === 3 ? "PASS" : "ISSUE",
@@ -179,6 +215,7 @@ const report = {
   dialogues: ["Y1M01-Q010", "Y1M01-Q013"].every((id) => (bindings[id] || []).some((item) => item.role === "dialogue")) ? "PASS" : "ISSUE",
   globalPtBrUiAudioIds: globalPtBr.map((item) => item.id),
   voiceOverlapProtection: overlapPassed ? "PASS" : "ISSUE",
+  crossChannelVoiceExclusion: issues.some(issue => issue.includes("DID_NOT_STOP_")) ? "ISSUE" : "PASS",
   questionChangeStop: questionChangePassed ? "PASS" : "ISSUE",
   missingIdFailSafe: missingIdPassed ? "PASS" : "ISSUE",
   wavUsedByRuntime: "NO",

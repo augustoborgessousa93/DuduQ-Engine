@@ -12,7 +12,7 @@ const root = process.cwd();
 const output = path.resolve(root, "dist-pages");
 if (!output.startsWith(`${root}${path.sep}`)) throw new Error("Refusing unsafe output path.");
 
-const routes = ["matching", "target-shooter", "drag-drop", "drag-drop-multimedia", "bubble-pop", "smart-sentence", "memory-quest", "intro-module", "transition"];
+const routes = ["matching", "target-shooter", "drag-drop", "drag-drop-multimedia", "bubble-pop", "smart-sentence", "memory-quest", "intro-module", "transition", "english/year-1/module-01"];
 const textExtensions = new Set([".html", ".js", ".mjs", ".css", ".json", ".svg"]);
 const allowedExtensions = new Set([...textExtensions, ".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico", ".mp3", ".wav", ".woff", ".woff2"]);
 const forbiddenSegment = /(^|[\\/])(\.git|\.github|docs|test|tests|tools|artifacts|recovery|\.duduq)([\\/]|$)/i;
@@ -106,6 +106,19 @@ await copyRuntimeTree("core");
 await copyFile("asset-alvo.png");
 await copyFile("fullscreen-official.svg");
 await copyFile("core/assets/duduq-hud-mascot.png", "play/matching/assets/duduq-hud-mascot.png");
+
+// Y1M01 ships only its public product contract, canonical media registry and approved runtime media.
+await copyFile("content/english/year-1/module-01/module.json");
+await copyFile("content/english/year-1/module-01/questions.json");
+await copyFile("content/english/media/media-registry.json");
+await copyRuntimeTree("content/english/assets/images/year-1/module-01/temporary");
+await copyFile("duduq-audio/manifests/AUDIO_MANIFEST.json");
+const audioManifest = JSON.parse(await readFile(sourcePath("duduq-audio/manifests/AUDIO_MANIFEST.json"), "utf8"));
+for (const item of audioManifest.items || []) {
+  if (item.status !== "APPROVED") continue;
+  if (!/\.mp3$/i.test(String(item.audioPath || ""))) throw new Error(`Y1M01_RUNTIME_AUDIO_MUST_BE_MP3:${item.id}`);
+  await copyFile(item.audioPath);
+}
 
 // Only the runtime-generated Penpot artifacts used by the product host are public.
 await copyRuntimeTree("design-system/runtime/screens", "design-system/runtime/screens");

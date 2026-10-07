@@ -15,6 +15,7 @@ const questions = await load("content/english/year-1/module-01/questions.json");
 const policy = await load("content/english/audio/audio-policy.json");
 const audioRegistry = await load("content/english/audio/audio-registry.json");
 const audioProduction = await load("content/english/year-1/module-01/audio-production-manifest.json");
+const mediaRegistry = await load("content/english/media/media-registry.json");
 
 if (index.moduleCount !== 30 || index.modules.length !== 30) fail("MODULE_COUNT_INVALID");
 if (moduleSpec.moduleId !== "Y1M01" || questions.moduleId !== "Y1M01" || questions.items.length !== 20) fail("Y1M01_ITEM_COUNT_INVALID");
@@ -27,11 +28,27 @@ const utterances = new Map();
 const mechanics = {};
 const missingMedia = [];
 const missingAudio = [];
+const mediaById = new Map(mediaRegistry.entries.map(entry => [entry.mediaId, entry]));
+const mediaExists = async (mediaId, seen = new Set()) => {
+  if (!mediaId || seen.has(mediaId)) return false;
+  seen.add(mediaId);
+  const entry = mediaById.get(mediaId);
+  if (!entry || entry.status !== "APPROVED") return false;
+  const components = entry.components || [];
+  const assets = entry.assets || [];
+  for (const childId of components) if (!await mediaExists(childId, new Set(seen))) return false;
+  for (const asset of assets) {
+    if (!asset.path || asset.path.split(/[\\/]/).includes("..")) return false;
+    await readFile(path.join(root, asset.path)).catch(() => fail(`MEDIA_ASSET_MISSING:${asset.path}`));
+  }
+  if (entry.urlOrPath && !assets.length && !components.length) await readFile(path.join(root, entry.urlOrPath)).catch(() => fail(`MEDIA_ASSET_MISSING:${entry.urlOrPath}`));
+  return Boolean(components.length || assets.length || entry.urlOrPath);
+};
 for (const item of questions.items) {
   if (!allowed.has(item.mecanica_preferida) || blocked.has(item.mecanica_preferida)) fail(`MECHANIC_REJECTED:${item.item_id}`);
   if (moduleSpec.year <= 2 && item.requires_reading === "YES") fail(`YEAR_RULE_REJECTED:${item.item_id}`);
   mechanics[item.item_id] = item.mecanica_preferida;
-  if (!item.image_ref) missingMedia.push(item.item_id);
+  if (!item.image_ref || !await mediaExists(item.image_ref)) missingMedia.push(item.item_id);
   const key = audioKey({ transcript: item.audio_transcript, language: "en", speakerRole: item.audio_transcript.includes("A:") ? "multi" : "single", voiceProfile: "EN_CHILD_FRIENDLY_CLEAR", prosodyProfile: "neutral_natural" });
   utterances.set(key, item.audio_transcript);
   const multiBindings = audioProduction.items?.[item.item_id];
@@ -47,6 +64,7 @@ for (const item of questions.items) {
 }
 const report = { moduleId: moduleSpec.moduleId, items: questions.items.length, uniqueEnglishUtterances: utterances.size, globalUiAudioPrompts: audioRegistry.entries.filter((entry) => entry.type === "ui_instruction").length, mediaResolved: 0, mediaMissing: missingMedia.length, audioResolved: 0, audioMissing: missingAudio.length, mechanics, missingMedia, missingAudio, deterministic: true };
 report.audioResolved = questions.items.length - missingAudio.length;
+report.mediaResolved = questions.items.length - missingMedia.length;
 try {
   const mediaManifest = await load("content/english/media/image-generation-manifest.json");
   const audioManifest = await load("content/english/audio/audio-generation-manifest.json");
@@ -62,6 +80,8 @@ try {
   if (q009.length !== 3 || new Set(q009.map((binding) => binding.audioId)).size !== 3) fail("Q009_MULTI_AUDIO_INVALID");
   if (q015.length !== 2 || new Set(q015.map((binding) => binding.audioId)).size !== 2) fail("Q015_MULTI_AUDIO_INVALID");
   if (mediaManifest.entries.some((entry) => !/^IMG-Y1M01-[A-Z0-9-]+$/.test(entry.mediaId))) fail("SEMANTIC_IMAGE_ID_INVALID");
-  report.runtimeReady = all.every((entry) => entry.status === "APPROVED");
+  const runtimeMediaReady = mediaManifest.entries.every(entry => mediaById.get(entry.mediaId)?.status === "APPROVED");
+  const runtimeAudioReady = audioManifest.entries.every(entry => entry.status === "APPROVED");
+  report.runtimeReady = runtimeMediaReady && runtimeAudioReady && missingMedia.length === 0 && missingAudio.length === 0;
 } catch (error) { if (/DUPLICATE_|AUDIO_USED_BY_ITEMS_MISSING|INVALID_COMBINED_AUDIO_PRESENT|Q009_MULTI_AUDIO_INVALID|Q015_MULTI_AUDIO_INVALID|SEMANTIC_IMAGE_ID_INVALID/.test(String(error?.message || error))) throw error; report.runtimeReady = false; }
 console.log(JSON.stringify(report, null, 2));
