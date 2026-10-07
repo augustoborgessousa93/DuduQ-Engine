@@ -28,6 +28,8 @@ const utterances = new Map();
 const mechanics = {};
 const missingMedia = [];
 const missingAudio = [];
+const editorialViolations = [];
+let bilingualInstructionCoverage = 0;
 const mediaById = new Map(mediaRegistry.entries.map(entry => [entry.mediaId, entry]));
 const mediaExists = async (mediaId, seen = new Set()) => {
   if (!mediaId || seen.has(mediaId)) return false;
@@ -48,6 +50,16 @@ for (const item of questions.items) {
   if (!allowed.has(item.mecanica_preferida) || blocked.has(item.mecanica_preferida)) fail(`MECHANIC_REJECTED:${item.item_id}`);
   if (moduleSpec.year <= 2 && item.requires_reading === "YES") fail(`YEAR_RULE_REJECTED:${item.item_id}`);
   mechanics[item.item_id] = item.mecanica_preferida;
+  const instruction = item.instruction || {};
+  const editorialLimits = [['titleEn', 4], ['titlePt', 5], ['instructionEn', 6], ['instructionPt', 7]];
+  const hasBilingualInstruction = editorialLimits.every(([field]) => String(instruction[field] || '').trim()) &&
+    Boolean(instruction.instructionAudioEnId && instruction.instructionAudioPtId);
+  if (hasBilingualInstruction) bilingualInstructionCoverage += 1;
+  else missingAudio.push(item.item_id);
+  for (const [field, limit] of editorialLimits) {
+    const count = String(instruction[field] || '').trim().split(/\s+/u).filter(Boolean).length;
+    if (count > limit) editorialViolations.push({ itemId: item.item_id, field, count, limit, code: 'CONTENT_TOO_LONG' });
+  }
   if (!item.image_ref || !await mediaExists(item.image_ref)) missingMedia.push(item.item_id);
   const key = audioKey({ transcript: item.audio_transcript, language: "en", speakerRole: item.audio_transcript.includes("A:") ? "multi" : "single", voiceProfile: "EN_CHILD_FRIENDLY_CLEAR", prosodyProfile: "neutral_natural" });
   utterances.set(key, item.audio_transcript);
@@ -62,7 +74,7 @@ for (const item of questions.items) {
     if (!found || found.status !== "APPROVED" || !found.urlOrPath) missingAudio.push(item.item_id);
   }
 }
-const report = { moduleId: moduleSpec.moduleId, items: questions.items.length, uniqueEnglishUtterances: utterances.size, globalUiAudioPrompts: audioRegistry.entries.filter((entry) => entry.type === "ui_instruction").length, mediaResolved: 0, mediaMissing: missingMedia.length, audioResolved: 0, audioMissing: missingAudio.length, mechanics, missingMedia, missingAudio, deterministic: true };
+const report = { moduleId: moduleSpec.moduleId, items: questions.items.length, standard: 'DUDUQ_BILINGUAL_PEDAGOGICAL_INSTRUCTION_V2', bilingualInstructionCoverage, uniqueEnglishUtterances: utterances.size, globalUiAudioPrompts: audioRegistry.entries.filter((entry) => entry.type === "ui_instruction").length, mediaResolved: 0, mediaMissing: missingMedia.length, audioResolved: 0, audioMissing: new Set(missingAudio).size, editorialViolations, mechanics, missingMedia, missingAudio: [...new Set(missingAudio)], deterministic: true };
 report.audioResolved = questions.items.length - missingAudio.length;
 report.mediaResolved = questions.items.length - missingMedia.length;
 try {
@@ -75,13 +87,13 @@ try {
   if (new Set(audioManifest.entries.map((entry) => entry.dedupeKey)).size !== audioManifest.entries.length) fail("DUPLICATE_AUDIO_DEDUPE_KEY");
   if (audioManifest.entries.some((entry) => !Array.isArray(entry.usedByItems) || entry.usedByItems.length === 0)) fail("AUDIO_USED_BY_ITEMS_MISSING");
   if (audioManifest.entries.some((entry) => /Good morning! \/ Good afternoon! \/ Goodbye!|1: What's your name\? 2: My name is Ben\./.test(entry.transcript))) fail("INVALID_COMBINED_AUDIO_PRESENT");
-  const q009 = audioProduction.items?.["Y1M01-Q009"] ?? [];
-  const q015 = audioProduction.items?.["Y1M01-Q015"] ?? [];
+  const q009 = (audioProduction.items?.["Y1M01-Q009"] ?? []).filter(binding => !binding.role.startsWith('instruction_'));
+  const q015 = (audioProduction.items?.["Y1M01-Q015"] ?? []).filter(binding => !binding.role.startsWith('instruction_'));
   if (q009.length !== 3 || new Set(q009.map((binding) => binding.audioId)).size !== 3) fail("Q009_MULTI_AUDIO_INVALID");
   if (q015.length !== 2 || new Set(q015.map((binding) => binding.audioId)).size !== 2) fail("Q015_MULTI_AUDIO_INVALID");
   if (mediaManifest.entries.some((entry) => !/^IMG-Y1M01-[A-Z0-9-]+$/.test(entry.mediaId))) fail("SEMANTIC_IMAGE_ID_INVALID");
   const runtimeMediaReady = mediaManifest.entries.every(entry => mediaById.get(entry.mediaId)?.status === "APPROVED");
   const runtimeAudioReady = audioManifest.entries.every(entry => entry.status === "APPROVED");
-  report.runtimeReady = runtimeMediaReady && runtimeAudioReady && missingMedia.length === 0 && missingAudio.length === 0;
+  report.runtimeReady = runtimeMediaReady && runtimeAudioReady && missingMedia.length === 0 && missingAudio.length === 0 && bilingualInstructionCoverage === questions.items.length && editorialViolations.length === 0;
 } catch (error) { if (/DUPLICATE_|AUDIO_USED_BY_ITEMS_MISSING|INVALID_COMBINED_AUDIO_PRESENT|Q009_MULTI_AUDIO_INVALID|Q015_MULTI_AUDIO_INVALID|SEMANTIC_IMAGE_ID_INVALID/.test(String(error?.message || error))) throw error; report.runtimeReady = false; }
 console.log(JSON.stringify(report, null, 2));

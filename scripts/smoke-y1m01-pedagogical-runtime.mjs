@@ -36,7 +36,11 @@ for (let index = 0; index < questionDoc.items.length; index += 1) {
   const context = { window, URLSearchParams, fetch: async () => ({ ok: true, json: async () => questionDoc }) };
   vm.runInNewContext(runtimeSource, context, { filename: 'duduq-y1m01-module-runtime.js' });
   const activity = await window.DuduQY1M01.ready;
-  if (!activity.prompt.instruction?.title || !activity.prompt.instruction?.subtitle || !activity.prompt.question || !activity.prompt.instructionAudioId) throw new Error(`INSTRUCTION_PROMPT:${item.item_id}`);
+  const instruction = activity.prompt.instruction;
+  if (!instruction?.titleEn || !instruction?.titlePt || !instruction?.instructionEn || !instruction?.instructionPt ||
+      !activity.prompt.instructionAudioEnId || !activity.prompt.instructionAudioPtId ||
+      activity.prompt.instructionAudioIds?.join(',') !== `${activity.prompt.instructionAudioEnId},${activity.prompt.instructionAudioPtId}` ||
+      activity.prompt.question !== instruction.instructionEn) throw new Error(`BILINGUAL_INSTRUCTION_PROMPT:${item.item_id}`);
   if (activity.mechanic === 'target-shooter' && (activity.targets.length !== 4 || activity.targets.filter(target => target.id === activity.correctTargetIds[0]).length !== 1 || activity.targets.some(target => !target.imageSrc))) throw new Error(`TARGET_SHOOTER_BINDING:${item.item_id}`);
   if (activity.mechanic === 'bubble-pop' && (activity.incorrectPool.length !== 6 || activity.targetsToFind.length !== 1 || activity.incorrectPool.some(option => !option.src))) throw new Error(`BUBBLE_POOL_BINDING:${item.item_id}`);
   if (activity.mechanic === 'drag-drop-multimedia' && (activity.targets.length !== 3 || activity.items.length !== (item.item_id === 'Y1M01-Q009' ? 3 : 1) || activity.targets.some(target => !target.imageSrc))) throw new Error(`DRAG_DROP_BINDING:${item.item_id}`);

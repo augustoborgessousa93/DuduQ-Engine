@@ -33,6 +33,8 @@ const hashValidMedia = async (entry, seen = new Set()) => {
 };
 const resolvedMedia = new Set(); const resolvedAudio = new Set();
 let resolvedAudioContracts = 0; let spokenInstructions = 0; let completePedagogicalContracts = 0;
+let englishInstructionContracts = 0; let portugueseInstructionContracts = 0;
+const contentTooLong = [];
 const targetCorrectPositions = new Set();
 for (const item of questions.items) {
   if (!itemIds.has(item.item_id)) errors.push(`ITEM_ID:${item.item_id}`);
@@ -44,16 +46,29 @@ for (const item of questions.items) {
   else resolvedMedia.add(item.image_ref);
   const ids = [...(item.audio_ref ? [item.audio_ref] : []), ...(item.audioBindings || []).map(binding => binding.audioId)];
   const instruction = item.instruction;
-  if (!instruction?.title?.trim() || !instruction?.subtitle?.trim() || !instruction?.text?.trim() ||
-      instruction.language !== "pt-BR" || !instruction.instructionAudioId || !instruction.spokenText?.trim()) {
+  const bilingualFields = [instruction?.titleEn, instruction?.titlePt, instruction?.instructionEn, instruction?.instructionPt];
+  const completeBilingual = bilingualFields.every(value => String(value || '').trim()) &&
+    instruction?.version === '2.0' && instruction?.audioOrder?.join(',') === 'en,pt' &&
+    instruction?.instructionAudioEnId && instruction?.instructionAudioPtId &&
+    instruction?.spokenTextEn?.trim() && instruction?.spokenTextPt?.trim();
+  if (!completeBilingual) {
     errors.push(`INSTRUCTION_CONTRACT:${item.item_id}`);
   } else {
     completePedagogicalContracts += 1;
-    const spoken = audioById.get(instruction.instructionAudioId);
-    if (!spoken || spoken.status !== "APPROVED" || spoken.type !== "INSTRUCTION_AUDIO" ||
-        spoken.speechText !== instruction.spokenText || !spoken.audioPath?.endsWith(".mp3") ||
-        !await readFile(path.join(root, spoken.audioPath)).catch(() => null)) errors.push(`INSTRUCTION_AUDIO:${item.item_id}:${instruction.instructionAudioId}`);
-    else { spokenInstructions += 1; resolvedAudio.add(instruction.instructionAudioId); }
+    const limits = [['titleEn', 4], ['titlePt', 5], ['instructionEn', 6], ['instructionPt', 7]];
+    for (const [field, limit] of limits) {
+      const count = String(instruction[field]).trim().split(/\s+/u).filter(Boolean).length;
+      if (count > limit) contentTooLong.push({ itemId: item.item_id, field, count, limit, code: 'CONTENT_TOO_LONG' });
+    }
+    const en = audioById.get(instruction.instructionAudioEnId);
+    const pt = audioById.get(instruction.instructionAudioPtId);
+    const validEn = en?.status === 'APPROVED' && en.type === 'INSTRUCTION_AUDIO_EN' && en.locale === 'en-US' && en.speechText === instruction.spokenTextEn && en.audioPath?.endsWith('.mp3') && await readFile(path.join(root, en.audioPath)).catch(() => null);
+    const validPt = pt?.status === 'APPROVED' && pt.type === 'INSTRUCTION_AUDIO_PT' && pt.locale === 'pt-BR' && pt.speechText === instruction.spokenTextPt && pt.audioPath?.endsWith('.mp3') && await readFile(path.join(root, pt.audioPath)).catch(() => null);
+    if (!validEn) errors.push(`INSTRUCTION_AUDIO_EN:${item.item_id}:${instruction.instructionAudioEnId}`);
+    else { englishInstructionContracts += 1; resolvedAudio.add(instruction.instructionAudioEnId); }
+    if (!validPt) errors.push(`INSTRUCTION_AUDIO_PT:${item.item_id}:${instruction.instructionAudioPtId}`);
+    else { portugueseInstructionContracts += 1; resolvedAudio.add(instruction.instructionAudioPtId); }
+    if (validEn && validPt) spokenInstructions += 1;
   }
   if (!ids.length) errors.push(`AUDIO_BINDING:${item.item_id}`);
   resolvedAudioContracts += new Set(ids).size;
@@ -108,12 +123,15 @@ for (const item of questions.items) {
 if (questions.items.length !== 20) errors.push(`ITEM_COUNT:${questions.items.length}`);
 if (requirements.requirements.length !== 16 || resolvedMedia.size !== 16) errors.push(`MEDIA_REQUIREMENTS:${requirements.requirements.length}:${resolvedMedia.size}`);
 if (resolvedAudioContracts !== 23) errors.push(`CURRICULAR_AUDIO_CONTRACT_COUNT:${resolvedAudioContracts}`);
-if (spokenInstructions !== 20 || completePedagogicalContracts !== 20) errors.push(`INSTRUCTION_COVERAGE:${spokenInstructions}:${completePedagogicalContracts}`);
+if (spokenInstructions !== 20 || completePedagogicalContracts !== 20 || englishInstructionContracts !== 20 || portugueseInstructionContracts !== 20) errors.push(`INSTRUCTION_COVERAGE:${spokenInstructions}:${englishInstructionContracts}:${portugueseInstructionContracts}:${completePedagogicalContracts}`);
+if (contentTooLong.length) errors.push(...contentTooLong.map(entry => `${entry.code}:${entry.itemId}:${entry.field}:${entry.count}>${entry.limit}`));
 if (targetCorrectPositions.size < 3) errors.push(`TARGET_CORRECT_POSITION_VARIATION:${targetCorrectPositions.size}`);
 if (mechanics["target-shooter"] !== 12 || mechanics["bubble-pop"] !== 3 || mechanics.matching !== 0 || mechanics["drag-drop-multimedia"] !== 5) errors.push("MECHANIC_DISTRIBUTION");
-if ((audioBindings.items["Y1M01-Q009"] || []).length !== 3 || new Set((audioBindings.items["Y1M01-Q009"] || []).map(item => item.audioId)).size !== 3) errors.push("Q009_AUDIO");
-if ((audioBindings.items["Y1M01-Q015"] || []).length !== 2 || new Set((audioBindings.items["Y1M01-Q015"] || []).map(item => item.audioId)).size !== 2) errors.push("Q015_AUDIO");
+const q009ContentAudio = (audioBindings.items["Y1M01-Q009"] || []).filter(binding => !binding.role.startsWith('instruction_'));
+const q015ContentAudio = (audioBindings.items["Y1M01-Q015"] || []).filter(binding => !binding.role.startsWith('instruction_'));
+if (q009ContentAudio.length !== 3 || new Set(q009ContentAudio.map(item => item.audioId)).size !== 3) errors.push("Q009_AUDIO");
+if (q015ContentAudio.length !== 2 || new Set(q015ContentAudio.map(item => item.audioId)).size !== 2) errors.push("Q015_AUDIO");
 const media03 = mediaById.get("IMG-Y1M01-GREETING-MORNING-001");
 if (media03?.integrationStatus !== "ACCEPTED_FOR_V1_REPLACE_LATER") errors.push("MEDIA03_TEMPORARY_STATUS");
- console.log(JSON.stringify({ status: errors.length ? "ISSUE" : "PASS", questions: questions.items.length, uniqueMediaRequirements: resolvedMedia.size, itemMediaBindings: questions.items.filter(item => item.image_ref).length, approvedCurricularAudioContracts: resolvedAudioContracts, spokenInstructions, completePedagogicalContracts, uniqueApprovedAudioAssets: resolvedAudio.size, targetShooterFourFilledTargets: questions.items.filter(item => (item.runtimeMechanic || item.mecanica_preferida) === "target-shooter").length, targetCorrectPositionCount: targetCorrectPositions.size, bubbleItemsWithSixDistinctDistractors: questions.items.filter(item => (item.runtimeMechanic || item.mecanica_preferida) === "bubble-pop" && item.bubbleDistractorPool?.length >= 6).length, dragDropThreeMediaContract: questions.items.filter(item => (item.runtimeMechanic || item.mecanica_preferida) === "drag-drop-multimedia" && ((item.mediaBindings?.length || 0) === 3 || (item.item_id === "Y1M01-Q009" && new Set((item.audioBindings || []).map(binding => binding.mediaId)).size === 3))).length, mechanics, q009: "3 independent IDs", q015: "2 independent IDs", temporaryMediaRequirements: registry.entries.filter(entry => entry.temporary).length, semanticReview: questions.items.filter(item => item.semanticReview === "NEEDS_HUMAN_REVIEW").length, errors }, null, 2));
+ console.log(JSON.stringify({ status: errors.length ? "ISSUE" : "PASS", standard: 'DUDUQ_BILINGUAL_PEDAGOGICAL_INSTRUCTION_V2', questions: questions.items.length, titleEnglish: questions.items.filter(item => item.instruction?.titleEn).length, titlePortuguese: questions.items.filter(item => item.instruction?.titlePt).length, instructionEnglish: questions.items.filter(item => item.instruction?.instructionEn).length, instructionPortuguese: questions.items.filter(item => item.instruction?.instructionPt).length, subtitlesRequired: 0, englishInstructionAudio: englishInstructionContracts, portugueseInstructionAudio: portugueseInstructionContracts, spokenInstructionPairs: spokenInstructions, contentTooLong, uniqueMediaRequirements: resolvedMedia.size, itemMediaBindings: questions.items.filter(item => item.image_ref).length, approvedCurricularAudioContracts: resolvedAudioContracts, completePedagogicalContracts, uniqueApprovedAudioAssets: resolvedAudio.size, targetShooterFourFilledTargets: questions.items.filter(item => (item.runtimeMechanic || item.mecanica_preferida) === "target-shooter").length, targetCorrectPositionCount: targetCorrectPositions.size, bubbleItemsWithSixDistinctDistractors: questions.items.filter(item => (item.runtimeMechanic || item.mecanica_preferida) === "bubble-pop" && item.bubbleDistractorPool?.length >= 6).length, dragDropThreeMediaContract: questions.items.filter(item => (item.runtimeMechanic || item.mecanica_preferida) === "drag-drop-multimedia" && ((item.mediaBindings?.length || 0) === 3 || (item.item_id === "Y1M01-Q009" && new Set((item.audioBindings || []).map(binding => binding.mediaId)).size === 3))).length, mechanics, q009: "3 independent IDs", q015: "2 independent IDs", temporaryMediaRequirements: registry.entries.filter(entry => entry.temporary).length, semanticReview: questions.items.filter(item => item.semanticReview === "NEEDS_HUMAN_REVIEW").length, errors }, null, 2));
 if (errors.length) process.exitCode = 1;
