@@ -39,7 +39,7 @@ for (let index = 0; index < questionDoc.items.length; index += 1) {
   const instruction = activity.prompt.instruction;
   if (!instruction?.titleEn || !instruction?.titlePt || !instruction?.instructionEn || !instruction?.instructionPt ||
       !activity.prompt.instructionAudioEnId || !activity.prompt.instructionAudioPtId ||
-      activity.prompt.instructionAudioIds?.join(',') !== `${activity.prompt.instructionAudioEnId},${activity.prompt.instructionAudioPtId}` ||
+      activity.prompt.instructionAudioIds?.join(',') !== `${activity.prompt.instructionAudioPtId},${activity.prompt.instructionAudioEnId}` ||
       activity.prompt.question !== instruction.instructionEn) throw new Error(`BILINGUAL_INSTRUCTION_PROMPT:${item.item_id}`);
   if (activity.mechanic === 'target-shooter' && (activity.targets.length !== 4 || activity.targets.filter(target => target.id === activity.correctTargetIds[0]).length !== 1 || activity.targets.some(target => !target.imageSrc))) throw new Error(`TARGET_SHOOTER_BINDING:${item.item_id}`);
   if (activity.mechanic === 'bubble-pop' && (activity.incorrectPool.length !== 6 || activity.targetsToFind.length !== 1 || activity.incorrectPool.some(option => !option.src))) throw new Error(`BUBBLE_POOL_BINDING:${item.item_id}`);
