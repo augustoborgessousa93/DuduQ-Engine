@@ -13,7 +13,7 @@ export function buildGeminiImageRequest(generationRequest, model = process.env.G
     body: {
       model,
       input: [{ type: "text", text: prompt }],
-      response_format: { type: "image", mime_type: "image/png", aspect_ratio: "1:1", image_size: "1K" }
+      response_format: { type: "image", mime_type: "image/jpeg", aspect_ratio: "1:1", image_size: "1K" }
     }
   };
 }
@@ -56,7 +56,7 @@ export async function requestGeminiImage(generationRequest, {
   }
   const interaction = await response.json();
   const image = extractImageBlock(interaction);
-  if (image?.mime_type && image.mime_type !== "image/png") throw new Error("GEMINI_IMAGE_UNEXPECTED_MIME_TYPE");
+  if (image?.mime_type && image.mime_type !== "image/jpeg") throw new Error("GEMINI_IMAGE_UNEXPECTED_MIME_TYPE");
   const encoded = image?.data;
   if (typeof encoded !== "string" || !encoded.length || encoded.length > 40 * 1024 * 1024) throw new Error("GEMINI_IMAGE_DATA_MISSING_OR_OVERSIZED");
   const imageBytes = Buffer.from(encoded, "base64");
@@ -66,7 +66,9 @@ export async function requestGeminiImage(generationRequest, {
     provider: "gemini",
     model,
     imageBytes,
-    mimeType: image?.mime_type || "image/png",
+    mimeType: image?.mime_type || "image/jpeg",
+    providerMime: image?.mime_type || "image/jpeg",
+    finalMime: "image/png",
     width: null,
     height: null,
     prompt: request.prompt,
@@ -76,7 +78,10 @@ export async function requestGeminiImage(generationRequest, {
       model,
       interactionId: interaction?.id || null,
       createdAt: new Date().toISOString(),
-      outputFormat: "png",
+      outputFormat: "jpeg",
+      providerMime: image?.mime_type || "image/jpeg",
+      finalMime: "image/png",
+      backgroundRemoval: "local",
       requestedAspectRatio: "1:1",
       requestedImageSize: "1K",
       requestedTransparency: generationRequest.transparentBackground !== false
@@ -132,6 +137,9 @@ export function normalizeGeminiResult(result, dimensions = {}) {
     model: result.model,
     imageBytes: result.imageBytes,
     mimeType: result.mimeType,
+    providerMime: result.providerMime || result.mimeType,
+    finalMime: result.finalMime || "image/png",
+    backgroundRemoval: result.generationMetadata?.backgroundRemoval || "local",
     width: dimensions.width ?? result.width,
     height: dimensions.height ?? result.height,
     prompt: result.prompt,

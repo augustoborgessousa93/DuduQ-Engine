@@ -571,7 +571,7 @@ async function validateQuestionMediaBindings(moduleDir) {
   return { status: missing.length ? "ISSUE" : "PASS", moduleId: questions.moduleId, boundMediaIds: ids.size, missing };
 }
 
-export { imageInfo, inspectPng, scanModule, importGenerated, validateRegistry, validateQuestionMediaBindings, generateRequests };
+export { imageInfo, inspectPng, scanModule, importGenerated, verifySmokeAssetHttp, validateRegistry, validateQuestionMediaBindings, generateRequests };
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const cli = argsOf(process.argv.slice(2));

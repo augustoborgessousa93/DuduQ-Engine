@@ -19,6 +19,7 @@ const generationPath = 'content/english/audio/audio-generation-manifest.json';
 const audioBindingsPath = 'content/english/year-1/module-01/audio-production-manifest.json';
 const questionsPath = 'content/english/year-1/module-01/questions.json';
 const reportPath = 'duduq-audio/reports/runtime/y1m01-bilingual-instruction-audio-v2.json';
+const freezePath = 'duduq-audio/manifests/y1m01-bilingual-instruction-audio-v2.freeze.json';
 const voiceVersion = 'DUDUQ_GOLD_VOICE_v1';
 const engineId = 'chatterbox-multilingual-v3';
 const modelName = 'Chatterbox Multilingual V3';
@@ -47,6 +48,30 @@ for (const entry of audioManifest.items) {
 if (questions.items.length !== 20 || questions.items.some(item => !item.instruction?.instructionAudioEnId || !item.instruction?.instructionAudioPtId)) {
   throw new Error('BILINGUAL_INSTRUCTION_CONTRACTS_INCOMPLETE');
 }
+const editorialWords = (value) => String(value ?? '').trim().split(/\s+/u).filter(Boolean).length;
+const bilingualSource = await read('content/english/year-1/module-01/bilingual-instructions-v2.json');
+if (bilingualSource.items?.length !== 20) throw new Error('BILINGUAL_PEDAGOGICAL_SOURCE_EXPECTED_20');
+const bilingualById = new Map(bilingualSource.items.map(item => [item.itemId, item]));
+const contractIds = new Set();
+for (const item of questions.items) {
+  const instruction = item.instruction;
+  const source = bilingualById.get(item.item_id);
+  if (!source || ['titleEn', 'titlePt', 'instructionEn', 'instructionPt'].some(field => source[field] !== instruction[field])) {
+    throw new Error(`BILINGUAL_SOURCE_MISMATCH:${item.item_id}`);
+  }
+  const editorial = [
+    ['titleEn', 2, 4], ['titlePt', 2, 5], ['instructionEn', 2, 6], ['instructionPt', 2, 7]
+  ];
+  for (const [field, min, max] of editorial) {
+    const count = editorialWords(instruction[field]);
+    if (count < min || count > max) throw new Error(`CONTENT_TOO_LONG_OR_SHORT:${item.item_id}:${field}:${count}`);
+  }
+  for (const id of [instruction.instructionAudioEnId, instruction.instructionAudioPtId]) {
+    if (contractIds.has(id)) throw new Error(`DUPLICATE_INSTRUCTION_AUDIO_ID:${id}`);
+    contractIds.add(id);
+  }
+}
+if (contractIds.size !== 40) throw new Error(`INSTRUCTION_AUDIO_ID_COUNT:${contractIds.size}`);
 const settingsByLanguage = {
   English: goldVoice.approvedDeliveryProfiles?.[deliveryProfile]?.EN_FUNCTIONAL_CHUNK,
   Portuguese: goldVoice.approvedDeliveryProfiles?.[deliveryProfile]?.PT_BR_INSTRUCTION
@@ -77,6 +102,27 @@ const inputs = questions.items.flatMap((item, index) => {
     outputPath: path.join(workDir, `${item.item_id.toLowerCase()}-${job.languageConditioning}.wav`) }));
 });
 if (inputs.length !== 40) throw new Error(`BILINGUAL_INSTRUCTION_JOB_COUNT:${inputs.length}`);
+const freeze = {
+  schemaVersion: '1.0', standard: 'DUDUQ_BILINGUAL_PEDAGOGICAL_INSTRUCTION_V2', moduleId: 'Y1M01',
+  status: 'FROZEN_FOR_PRODUCTION', createdAt: new Date().toISOString(), voiceVersion,
+  engine: 'CHATTERBOX_MULTILINGUAL_V3', deliveryProfile,
+  items: inputs.map(job => ({ itemId: job.item.item_id,
+    language: job.languageConditioning === 'en' ? 'EN' : 'PT', spokenText: job.speechText,
+    instructionAudioId: job.id, outputFilename: `${job.id.toLowerCase()}.mp3`,
+    textSha256: hashText(job.speechText), profile: job.profile }))
+};
+if (freeze.items.length !== 40 || new Set(freeze.items.map(item => item.instructionAudioId)).size !== 40) {
+  throw new Error('FROZEN_INSTRUCTION_CONTRACT_INVALID');
+}
+await save(freezePath, freeze);
+if (process.argv.includes('--preflight-only')) {
+  console.log(JSON.stringify({ status: 'PREFLIGHT_PASS', scripts: freeze.items.length,
+    english: freeze.items.filter(item => item.language === 'EN').length,
+    portuguese: freeze.items.filter(item => item.language === 'PT').length,
+    uniqueIds: new Set(freeze.items.map(item => item.instructionAudioId)).size,
+    textHashes: freeze.items.every(item => /^[a-f0-9]{64}$/u.test(item.textSha256)) }, null, 2));
+  process.exit(0);
+}
 const engine = new ChatterboxEngine({ root: audioRoot,
   pythonPath: path.join(audioRoot, '.runtime/chatterbox-venv/Scripts/python.exe'),
   workerPath: path.join(audioRoot, 'engine/chatterbox_worker.py'),
@@ -95,21 +141,41 @@ try {
   await save(reportPath, { status: 'ISSUE', startedAt, error: error.message, stack: error.stack, events });
   throw error;
 } finally { await engine.close(); }
+if (!engine.loadInfo || engine.loadInfo.modelLoadCount !== engine.loadInfo.workerStartCount ||
+    engine.loadInfo.voicePromptBuildCount !== engine.loadInfo.workerStartCount) {
+  throw new Error(`CHATTERBOX_BATCH_LIFECYCLE_COUNT_MISMATCH:${JSON.stringify({
+    modelLoadCount: engine.loadInfo?.modelLoadCount ?? 0,
+    conditioningLoadCount: engine.loadInfo?.voicePromptBuildCount ?? 0,
+    workerStartCount: engine.loadInfo?.workerStartCount ?? 0,
+    recoveryStartCount: engine.loadInfo?.recoveryStartCount ?? 0,
+  })}`);
+}
 
-const postprocessItems = inputs.map(job => {
+const toWslPath = async value => {
+  const normalized = path.resolve(value).replaceAll('\\', '/');
+  const { stdout } = await execFile('wsl.exe', ['-d', 'Ubuntu', '-u', 'augus', '--', 'wslpath', '-a', normalized],
+    { windowsHide: true, encoding: 'utf8' });
+  const translated = stdout.trim();
+  if (!translated.startsWith('/')) throw new Error(`WSL_PATH_TRANSLATION_FAILED:${path.basename(value)}`);
+  return translated;
+};
+const postprocessItems = await Promise.all(inputs.map(async job => {
   const generated = batch.find(result => result.id === job.id);
   const basename = job.id.toLowerCase();
   return { id: job.id, activity: job.activity, locale: job.locale, languageConditioning: job.languageConditioning,
-    languageProfile: job.profile, cacheKey: generated.cacheKey,
-    sourceWav: path.resolve(root, generated.output),
-    masterPath: path.resolve(root, `${masterBase}/${basename}.wav`),
-    audioPath: path.resolve(root, `${mp3Base}/${basename}.mp3`),
+    languageProfile: job.profile, cacheKey: generated.cacheKey, voiceVersion, engine: engineId, model: modelName,
+    sourceWav: await toWslPath(path.resolve(root, generated.output)),
+    masterPath: await toWslPath(path.resolve(root, `${masterBase}/${basename}.wav`)),
+    audioPath: await toWslPath(path.resolve(root, `${mp3Base}/${basename}.mp3`)),
     masterAudioPath: `${masterBase}/${basename}.wav`, audioPathRelative: `${mp3Base}/${basename}.mp3` };
-});
+}));
 const processingInput = path.join(audioRoot, '.runtime/y1m01-bilingual-v2-postprocess.json');
 await save(path.relative(root, processingInput), { settings: processingSettings, items: postprocessItems });
-const python = path.join(audioRoot, '.runtime/chatterbox-venv/Scripts/python.exe');
-const processResult = await execFile(python, [path.join(audioRoot, 'scripts/process-production-audio.py'), processingInput],
+const [linuxProcessingScript, linuxProcessingInput] = await Promise.all([
+  toWslPath(path.join(audioRoot, 'scripts/process-production-audio.py')), toWslPath(processingInput)
+]);
+const processResult = await execFile('wsl.exe', ['-d', 'Ubuntu', '-u', 'augus', '--',
+  '/home/augus/.duduq/chatterbox-venv/bin/python', linuxProcessingScript, linuxProcessingInput],
   { windowsHide: true, maxBuffer: 8 * 1024 * 1024, encoding: 'utf8' });
 const processed = JSON.parse(processResult.stdout.trim().split(/\r?\n/u).at(-1));
 if (processed.failures.length || processed.results.length !== 40 || processed.results.some(result =>
@@ -191,7 +257,11 @@ const report = {
   status: 'PASS_TECHNICAL_QC', startedAt, completedAt: new Date().toISOString(),
   standard: 'DUDUQ_BILINGUAL_PEDAGOGICAL_INSTRUCTION_V2', voiceVersion,
   engine: 'CHATTERBOX_MULTILINGUAL_V3', model: modelName, deliveryProfile,
-  modelLoadCount: engine.loadInfo?.modelLoadCount ?? 1,
+  modelLoadCount: engine.loadInfo?.modelLoadCount ?? 0,
+  workerStartCount: engine.loadInfo?.workerStartCount ?? 0,
+  recoveryStartCount: engine.loadInfo?.recoveryStartCount ?? 0,
+  conditioningLoadCount: engine.loadInfo?.voicePromptBuildCount ?? 0,
+  workerLifecycle: 'ONE_PERSISTENT_WORKER_PER_BATCH; RECOVERY_STARTS_ARE_CUMULATIVELY_COUNTED',
   originalApprovedCurricularAudioCount: 23, originalAudioHashesPreserved: oldAudioPreserved.every(Boolean),
   englishInstructionCount: additions.filter(entry => entry.type === 'INSTRUCTION_AUDIO_EN').length,
   portugueseInstructionCount: additions.filter(entry => entry.type === 'INSTRUCTION_AUDIO_PT').length,
@@ -209,6 +279,8 @@ const report = {
 await save(reportPath, report);
 console.log(JSON.stringify({ status: report.status, english: report.englishInstructionCount,
   portuguese: report.portugueseInstructionCount, modelLoadCount: report.modelLoadCount,
+  workerStartCount: report.workerStartCount, recoveryStartCount: report.recoveryStartCount,
+  conditioningLoadCount: report.conditioningLoadCount,
   inference: report.englishGeneratedInferenceCount + report.portugueseGeneratedInferenceCount,
   cacheHits: report.cacheHits, qc: `${report.audioQcPass}/40`, onsetQc: `${report.onsetQcPass}/40`,
   originalsPreserved: report.originalAudioHashesPreserved }, null, 2));
