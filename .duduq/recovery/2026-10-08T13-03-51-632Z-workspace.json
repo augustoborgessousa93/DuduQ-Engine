@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-10-08T13:03:51.632Z",
+  "workspace": "C:\\Users\\augus\\Downloads\\workspace",
+  "fileCount": 386846,
+  "git": {
+    "available": true,
+    "branch": "feat/design-sync-primary-button-v1",
+    "head": "3defc0f2bd176c964e33ee1c34eb75281d566cbd",
+    "status": "M .duduq/AUTOPILOT_STATUS.json\n M .duduq/LAST_VALIDATION.json\n M .gitignore\n M DUDUQ_PROJECT_STATE.json\n M content/english/audio/audio-generation-manifest.json\n M content/english/audio/audio-registry.json\n M content/english/media/image-generation-manifest.json\n M content/english/media/media-registry.json\n M content/english/year-1/module-01/audio-production-manifest.json\n M content/english/year-1/module-01/media-requirements.json\n M content/english/year-1/module-01/questions.json\n M core/DUDUQ_CANONICAL_HUD_CONTRACT.md\n M core/audio/duduq-sound-system.js\n M core/duduq-canonical-question-hud.css\n M core/duduq-content-audio.js\n M core/ui/duduq-canonical-audio-button.js\n M core/ui/duduq-canonical-question-hud.js\n M docs/DUDUQ-GOLD-MASTER-BASELINES.md\n M duduq-audio/AUDIO_AUTOPILOT_STATUS.json\n M duduq-audio/manifests/AUDIO_MANIFEST.json\n M play/bubble-pop/bubble-pop.js\n M play/bubble-pop/index.html\n M play/drag-drop-multimedia/drag-drop-multimedia-gameplay.js\n M play/drag-drop-multimedia/drag-drop-multimedia.js\n M play/drag-drop-multimedia/index.html\n M play/target-shooter/index.html\n M test/target-shooter/gold-master-clean-v2/src/static-view.js\n M test/target-shooter/gold-master-clean-v2/src/target-shooter-gameplay.js\n M test/target-shooter/gold-master-clean-v2/styles/master.css\n?? PROMPT_CODEX_FIRST_IMPORT.txt\n?? content/english/assets/audio/master/versions/Y1M01/NATURAL_CLEAR_V2/bilingual-instructions-v2/\n?? content/english/assets/audio/master/versions/Y1M01/NATURAL_CLEAR_V2/instructions/\n?? content/english/assets/audio/versions/Y1M01/NATURAL_CLEAR_V2/bilingual-instructions-v2/\n?? content/english/assets/audio/versions/Y1M01/NATURAL_CLEAR_V2/instructions/\n?? content/english/assets/images/year-1/\n?? content/english/media/image-provider-health.json\n?? content/english/media/image-provider-smoke-request.json\n?? content/english/media/image-request-manifest.json\n?? content/english/year-1/module-01/bilingual-instructions-v2.json\n?? content/english/year-1/module-01/image-resolution-map.json\n?? content/english/year-1/module-01/media-replacement-backlog.json\n?? content/english/year-1/module-01/y1m01-image-review-decisions.json\n?? content/english/year-1/pedagogical-contract-v1.json\n?? content/english/year-1/pedagogical-contract-v2.json\n?? core/duduq-content-media.js\n?? core/duduq-target-shooter-content.js\n?? core/duduq-y1m01-module-runtime.js\n?? docs/DUDUQ-AUTO-IMAGE-PIPELINE.md\n?? docs/DUDUQ-BILINGUAL-PEDAGOGICAL-INSTRUCTION-V2.md\n?? docs/DUDUQ-MULTI-PROVIDER-IMAGE-PIPELINE.md\n?? docs/DUDUQ-UNIVERSAL-PEDAGOGICAL-STANDARD-V1.md\n?? duduq-audio/.gitignore\n?? duduq-audio/AUDIO_ENGINE_BENCHMARK.md\n?? duduq-audio/AUDIO_PRODUCTION_REPORT.md\n?? duduq-audio/DUDUQ_AUDIO_SYSTEM.md\n?? duduq-audio/PILOT_AUDIO_REPORT.md\n?? duduq-audio/artifacts/\n?? duduq-audio/config/\n?? duduq-audio/engine/\n?? duduq-audio/gold-voice/\n?? duduq-audio/manifests/y1m01-bilingual-instruction-audio-v2.freeze.json\n?? duduq-audio/pipeline/\n?? duduq-audio/reports/\n?? duduq-audio/scripts/\n?? duduq-audio/tests/\n?? play/english/\n?? qa/y1m01-image-bank/\n?? qa/y1m01-target-shooter-canonical/\n?? qa/y1m01-voice-tuning/\n?? test/content/\n?? test/fixtures/\n?? test/runtime/bilingual-instruction-audio-pilot.e2e.mjs\n?? test/runtime/y1m01-full-module.e2e.mjs",
+    "remote": "origin\thttps://github.com/augustoborgessousa93/DuduQ-Engine.git (fetch)\norigin\thttps://github.com/augustoborgessousa93/DuduQ-Engine.git (push)"
+  },
+  "importantFiles": [
+    "AGENTS.md",
+    "package.json"
+  ],
+  "protectedPenpot": {
+    "headerMain": "88954f25-7a86-800b-8008-a87e6f0d4e44",
+    "questionMain": "88954f25-7a86-800b-8008-a87e700a22e9",
+    "controlPanel": "855af85f-faf4-8069-8008-a8e75a3255fd"
+  },
+  "penpotSync": {
+    "status": "CONTROLLED_SYNC_READY",
+    "reason": "Penpot MCP write gate and native property reads verified for the connected Control Panel session; continuous live sync remains unavailable.",
+    "components": {},
+    "lastSyncTime": "2026-09-19T13:30:00-03:00",
+    "lastSyncDirection": "PENPOT_READ_TO_SNAPSHOT"
+  }
+}
