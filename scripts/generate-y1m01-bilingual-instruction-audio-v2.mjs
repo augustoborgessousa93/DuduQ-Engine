@@ -18,8 +18,8 @@ const registryPath = 'content/english/audio/audio-registry.json';
 const generationPath = 'content/english/audio/audio-generation-manifest.json';
 const audioBindingsPath = 'content/english/year-1/module-01/audio-production-manifest.json';
 const questionsPath = 'content/english/year-1/module-01/questions.json';
-const reportPath = 'duduq-audio/reports/runtime/y1m01-bilingual-instruction-audio-v2.json';
-const freezePath = 'duduq-audio/manifests/y1m01-bilingual-instruction-audio-v2.freeze.json';
+const reportPath = 'duduq-audio/reports/runtime/y1m01-instruction-standard-v1.1.json';
+const freezePath = 'duduq-audio/manifests/y1m01-instruction-standard-v1.1.freeze.json';
 const voiceVersion = 'DUDUQ_GOLD_VOICE_v1';
 const engineId = 'chatterbox-multilingual-v3';
 const modelName = 'Chatterbox Multilingual V3';
@@ -49,19 +49,22 @@ if (questions.items.length !== 20 || questions.items.some(item => !item.instruct
   throw new Error('BILINGUAL_INSTRUCTION_CONTRACTS_INCOMPLETE');
 }
 const editorialWords = (value) => String(value ?? '').trim().split(/\s+/u).filter(Boolean).length;
-const bilingualSource = await read('content/english/year-1/module-01/bilingual-instructions-v2.json');
-if (bilingualSource.items?.length !== 20) throw new Error('BILINGUAL_PEDAGOGICAL_SOURCE_EXPECTED_20');
-const bilingualById = new Map(bilingualSource.items.map(item => [item.itemId, item]));
+const approvedCopy = await read('content/english/year-1/module-01/instruction-copy-v1.1.proposed.json');
+if (approvedCopy.standardStatus !== 'APPROVED_FOR_PRODUCTION' || approvedCopy.items?.length !== 20) {
+  throw new Error('APPROVED_INSTRUCTION_COPY_V1_1_REQUIRED');
+}
+const approvedById = new Map(approvedCopy.items.map(item => [item.itemId, item]));
 const contractIds = new Set();
 for (const item of questions.items) {
   const instruction = item.instruction;
-  const source = bilingualById.get(item.item_id);
-  if (!source || ['titleEn', 'titlePt', 'instructionEn', 'instructionPt'].some(field => source[field] !== instruction[field])) {
-    throw new Error(`BILINGUAL_SOURCE_MISMATCH:${item.item_id}`);
+  const source = approvedById.get(item.item_id);
+  if (!source || source.primaryInstructionEn !== instruction.instructionEn ||
+      source.supportInstructionPt !== instruction.instructionPt ||
+      source.primaryInstructionEn !== instruction.spokenTextEn ||
+      source.supportInstructionPt !== instruction.spokenTextPt || instruction.subtitleSpoken !== false) {
+    throw new Error(`APPROVED_COPY_ACTIVE_CONTRACT_MISMATCH:${item.item_id}`);
   }
-  const editorial = [
-    ['titleEn', 2, 4], ['titlePt', 2, 5], ['instructionEn', 2, 6], ['instructionPt', 2, 7]
-  ];
+  const editorial = [['instructionEn', 4, 8], ['instructionPt', 5, 10]];
   for (const [field, min, max] of editorial) {
     const count = editorialWords(instruction[field]);
     if (count < min || count > max) throw new Error(`CONTENT_TOO_LONG_OR_SHORT:${item.item_id}:${field}:${count}`);
@@ -83,19 +86,19 @@ if (processingSettings?.targetLufs !== -16 || processingSettings?.truePeakDb !==
   throw new Error('APPROVED_GOLD_VOICE_POSTPROCESS_SETTINGS_MISSING');
 }
 
-const workDir = path.join(audioRoot, '.runtime/instruction-v2-work/Y1M01');
-const cacheDir = path.join(audioRoot, '.runtime/cache/chatterbox-gold-v1-NATURAL_CLEAR_V2-bilingual-instructions');
-const jobsPath = path.join(audioRoot, '.runtime/jobs/chatterbox-y1m01-bilingual-v2-jobs.json');
-const tempManifestPath = path.join(audioRoot, '.runtime/y1m01-bilingual-v2-generation-run.json');
-const masterBase = 'content/english/assets/audio/master/versions/Y1M01/NATURAL_CLEAR_V2/bilingual-instructions-v2';
-const mp3Base = 'content/english/assets/audio/versions/Y1M01/NATURAL_CLEAR_V2/bilingual-instructions-v2';
+const workDir = path.join(audioRoot, '.runtime/instruction-v1.1-work/Y1M01');
+const cacheDir = path.join(audioRoot, '.runtime/cache/chatterbox-gold-v1-NATURAL_CLEAR_V2-instruction-standard-v1.1');
+const jobsPath = path.join(audioRoot, '.runtime/jobs/chatterbox-y1m01-instruction-v1.1-jobs.json');
+const tempManifestPath = path.join(audioRoot, '.runtime/y1m01-instruction-v1.1-generation-run.json');
+const masterBase = 'content/english/assets/audio/master/versions/Y1M01/NATURAL_CLEAR_V2/instruction-standard-v1.1';
+const mp3Base = 'content/english/assets/audio/versions/Y1M01/NATURAL_CLEAR_V2/instruction-standard-v1.1';
 const inputs = questions.items.flatMap((item, index) => {
   const copy = item.instruction;
   return [
     { id: copy.instructionAudioEnId, item, index, locale: 'en-US', language: 'English', languageConditioning: 'en',
-      profile: 'EN_FUNCTIONAL_CHUNK', displayText: copy.spokenTextEn, speechText: copy.spokenTextEn },
+      profile: 'EN_FUNCTIONAL_CHUNK', displayText: copy.primaryInstructionEn, speechText: copy.primaryInstructionEn },
     { id: copy.instructionAudioPtId, item, index, locale: 'pt-BR', language: 'Portuguese', languageConditioning: 'pt',
-      profile: 'PT_BR_INSTRUCTION', displayText: copy.spokenTextPt, speechText: copy.spokenTextPt }
+      profile: 'PT_BR_INSTRUCTION', displayText: copy.supportInstructionPt, speechText: copy.supportInstructionPt }
   ].map(job => ({ ...job, module: 'Y1M01', activity: [item.item_id], type: `INSTRUCTION_AUDIO_${job.languageConditioning.toUpperCase()}`,
     voiceProfile: voiceVersion, voiceVersion, engine: engineId, model: modelName, deliveryProfile,
     settings: settingsByLanguage[job.language], referenceAudio: workerConfig.referenceAudio,
@@ -103,7 +106,7 @@ const inputs = questions.items.flatMap((item, index) => {
 });
 if (inputs.length !== 40) throw new Error(`BILINGUAL_INSTRUCTION_JOB_COUNT:${inputs.length}`);
 const freeze = {
-  schemaVersion: '1.0', standard: 'DUDUQ_BILINGUAL_PEDAGOGICAL_INSTRUCTION_V2', moduleId: 'Y1M01',
+  schemaVersion: '1.1', standard: 'DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_1', moduleId: 'Y1M01',
   status: 'FROZEN_FOR_PRODUCTION', createdAt: new Date().toISOString(), voiceVersion,
   engine: 'CHATTERBOX_MULTILINGUAL_V3', deliveryProfile,
   items: inputs.map(job => ({ itemId: job.item.item_id,
@@ -201,10 +204,11 @@ for (const job of inputs) {
     id: job.id, audioId: job.id, module: 'Y1M01', activity: job.activity, type: job.type,
     displayText: job.displayText, speechText: job.speechText, locale: job.locale,
     languageConditioning: job.languageConditioning, instructionField: side,
-    instruction: { titleEn: contract.titleEn, titlePt: contract.titlePt,
-      instructionEn: contract.instructionEn, instructionPt: contract.instructionPt },
+      instruction: { standard: 'DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_1',
+        primaryInstructionEn: contract.primaryInstructionEn, supportInstructionPt: contract.supportInstructionPt,
+        subtitleSpoken: false },
     voiceProfile: voiceVersion, voiceVersion, engine: engineId, model: modelName,
-    deliveryProfile, version: '2.0', audioPath, masterAudioPath, status: 'APPROVED',
+    deliveryProfile, version: '1.1', audioPath, masterAudioPath, status: 'APPROVED',
     approvalStatus: 'APPROVED_TECHNICAL_QC_HUMAN_PRONUNCIATION_PENDING',
     humanPronunciationReview: 'NEEDS_HUMAN_REVIEW', cache: pipelineResult.cache,
     cacheKey: pipelineResult.cacheKey, contentHash: result.audioSha256, masterContentHash: result.masterSha256,
@@ -221,7 +225,7 @@ for (const job of inputs) {
     voiceVersion, engine: 'CHATTERBOX_MULTILINGUAL_V3', model: modelName, deliveryProfile,
     status: 'APPROVED', approvalStatus: entry.approvalStatus, humanPronunciationReview: 'NEEDS_HUMAN_REVIEW',
     urlOrPath: audioPath, outputPath: audioPath, masterAudioPath, filename: path.posix.basename(audioPath),
-    version: '2.0', dedupeKey: hashText(`${job.speechText}|${job.locale}|${voiceVersion}|${engineId}|${deliveryProfile}|${job.profile}`),
+    version: '1.1', dedupeKey: hashText(`${job.speechText}|${job.locale}|${voiceVersion}|${engineId}|${deliveryProfile}|${job.profile}`),
     contentHash: result.audioSha256, sha256: result.audioSha256, masterContentHash: result.masterSha256,
     cacheKey: pipelineResult.cacheKey, qcStatus: 'PASS', qc: entry.qc, usedByItems: job.activity,
     reuseScope: 'ITEM_INSTRUCTION_LANGUAGE' };
@@ -229,13 +233,27 @@ for (const job of inputs) {
   generationAdditions.push({ ...registryEntry, category: 'INSTRUCTION', type: entry.type,
     displayText: entry.displayText, locale: job.locale, outputPath: audioPath });
 }
-for (const [entries, label] of [[audioManifest.items, 'AUDIO_MANIFEST'], [registry.entries, 'AUDIO_REGISTRY'], [generation.entries, 'GENERATION_MANIFEST']]) {
-  const existing = new Set(entries.map(entry => entry.id || entry.audioId));
-  for (const addition of additions) if (existing.has(addition.id)) throw new Error(`DUPLICATE_AUDIO_ID:${label}:${addition.id}`);
-}
-audioManifest.items.push(...additions);
-registry.entries.push(...registryAdditions);
-generation.entries.push(...generationAdditions);
+const preserveRevision = (previous, timestamp) => ({
+  ...previous,
+  archivedAt: timestamp,
+  archiveReason: 'Superseded by approved DUDUQ English instruction standard v1.1 copy.'
+});
+const upsertWithHistory = (entries, replacements, keyName) => {
+  const byId = new Map(entries.map((entry, index) => [entry[keyName], index]));
+  for (const replacement of replacements) {
+    const index = byId.get(replacement[keyName]);
+    if (index === undefined) {
+      entries.push(replacement);
+      continue;
+    }
+    const previous = entries[index];
+    replacement.revisionHistory = [...(previous.revisionHistory || []), preserveRevision(previous, new Date().toISOString())];
+    entries[index] = replacement;
+  }
+};
+upsertWithHistory(audioManifest.items, additions, 'id');
+upsertWithHistory(registry.entries, registryAdditions, 'audioId');
+upsertWithHistory(generation.entries, generationAdditions, 'audioId');
 for (const item of questions.items) {
   const bindings = audioBindings.items[item.item_id] || [];
   audioBindings.items[item.item_id] = [
@@ -255,7 +273,7 @@ const oldAudioPreserved = await Promise.all([...preservedHashes].map(async ([rel
 if (!oldAudioPreserved.every(Boolean)) throw new Error('PREEXISTING_Y1M01_AUDIO_HASH_CHANGED');
 const report = {
   status: 'PASS_TECHNICAL_QC', startedAt, completedAt: new Date().toISOString(),
-  standard: 'DUDUQ_BILINGUAL_PEDAGOGICAL_INSTRUCTION_V2', voiceVersion,
+  standard: 'DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_1', voiceVersion,
   engine: 'CHATTERBOX_MULTILINGUAL_V3', model: modelName, deliveryProfile,
   modelLoadCount: engine.loadInfo?.modelLoadCount ?? 0,
   workerStartCount: engine.loadInfo?.workerStartCount ?? 0,

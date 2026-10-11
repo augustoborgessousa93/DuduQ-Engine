@@ -39,11 +39,17 @@ for (let index = 0; index < questionDoc.items.length; index += 1) {
   const instruction = activity.prompt.instruction;
   if (!instruction?.titleEn || !instruction?.titlePt || !instruction?.instructionEn || !instruction?.instructionPt ||
       !activity.prompt.instructionAudioEnId || !activity.prompt.instructionAudioPtId ||
-      activity.prompt.instructionAudioIds?.join(',') !== `${activity.prompt.instructionAudioPtId},${activity.prompt.instructionAudioEnId}` ||
+      activity.prompt.titleEn !== item.topicEn || !item.topicEn ||
+      activity.prompt.instructionAudioIds?.join(',') !== `${activity.prompt.instructionAudioEnId},${activity.prompt.instructionAudioPtId}` ||
       activity.prompt.question !== instruction.instructionEn) throw new Error(`BILINGUAL_INSTRUCTION_PROMPT:${item.item_id}`);
   if (activity.mechanic === 'target-shooter' && (activity.targets.length !== 4 || activity.targets.filter(target => target.id === activity.correctTargetIds[0]).length !== 1 || activity.targets.some(target => !target.imageSrc))) throw new Error(`TARGET_SHOOTER_BINDING:${item.item_id}`);
   if (activity.mechanic === 'bubble-pop' && (activity.incorrectPool.length !== 6 || activity.targetsToFind.length !== 1 || activity.incorrectPool.some(option => !option.src))) throw new Error(`BUBBLE_POOL_BINDING:${item.item_id}`);
-  if (activity.mechanic === 'drag-drop-multimedia' && (activity.targets.length !== 3 || activity.items.length !== (item.item_id === 'Y1M01-Q009' ? 3 : 1) || activity.targets.some(target => !target.imageSrc))) throw new Error(`DRAG_DROP_BINDING:${item.item_id}`);
+  if (activity.mechanic === 'drag-drop-multimedia' && (activity.targets.length !== 4 || activity.items.length !== 4 || activity.targets.some(target => !target.imageSrc) || activity.items.some(entry => !entry.audioId))) throw new Error(`DRAG_DROP_BINDING:${item.item_id}`);
+  if (item.item_id === 'Y1M01-Q014' && (activity.items.length !== 4 || activity.targets.length !== 4 ||
+      activity.items.some(entry => !activity.targets.some(target => target.answerKey === entry.answerKey)) ||
+      activity.targets.filter(target => target.answerKey === 'ana' && target.title === 'ANA').length !== 1)) {
+    throw new Error('Q014_FOUR_BY_FOUR_NAME_BINDING');
+  }
   results.push({ itemId: item.item_id, mechanic: activity.mechanic, progress: `${activity.progress.current}/${activity.progress.total}`, targets: activity.targets?.length ?? activity.targetsToFind?.length, correct: 'PASS' });
 }
 console.log(JSON.stringify({ status: results.length === 20 ? 'PASS' : 'ISSUE', questions: results.length, mechanics: Object.fromEntries(['target-shooter', 'bubble-pop', 'drag-drop-multimedia'].map(name => [name, results.filter(item => item.mechanic === name).length])), allInstructionsMounted: results.length, allCanonicalContractsValid: results.length, results }, null, 2));

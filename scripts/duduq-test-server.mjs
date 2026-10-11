@@ -34,6 +34,21 @@ function safePath(urlPath) {
 }
 
 const server = http.createServer((req, res) => {
+  if (req.url === "/__duduq/status" && req.method === "GET") {
+    res.writeHead(200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+    res.end(JSON.stringify({ status: "ready", root: ROOT, pid: process.pid, port: PORT }));
+    return;
+  }
+  if (req.url === "/__duduq/shutdown" && req.method === "POST") {
+    res.writeHead(202, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" });
+    res.end(JSON.stringify({ status: "shutting-down", pid: process.pid }));
+    setTimeout(() => {
+      server.closeIdleConnections?.();
+      server.closeAllConnections?.();
+      server.close(() => process.exit(0));
+    }, 25);
+    return;
+  }
   const file = safePath(req.url);
   if (!file) {
     res.writeHead(403, { "Content-Type": "text/plain; charset=utf-8" });
