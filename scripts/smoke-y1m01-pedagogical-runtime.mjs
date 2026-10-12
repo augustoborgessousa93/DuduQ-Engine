@@ -33,7 +33,11 @@ for (let index = 0; index < questionDoc.items.length; index += 1) {
     DuduQContentAudio: { setActiveQuestion() {}, stopVoice() {} },
     DuduQContentMedia: { resolveMedia: resolveLocalMedia }
   };
-  const context = { window, URLSearchParams, fetch: async () => ({ ok: true, json: async () => questionDoc }) };
+  const context = { window, URLSearchParams, fetch: async path => ({
+    ok: true,
+    json: async () => String(path).includes('/content/mechanics/canonical-mechanics-registry.json') ?
+      JSON.parse(await readFile('content/mechanics/canonical-mechanics-registry.json', 'utf8')) : questionDoc
+  }) };
   vm.runInNewContext(runtimeSource, context, { filename: 'duduq-y1m01-module-runtime.js' });
   const activity = await window.DuduQY1M01.ready;
   const instruction = activity.prompt.instruction;

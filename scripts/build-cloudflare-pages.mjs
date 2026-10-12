@@ -38,7 +38,7 @@ console.log("MEMORY_QUEST_CONTENT_BUILD_GATE: PASS (three QA modes, semantic pai
 
 // Memory Quest QA modes now run through the approved Penpot-baseline shell;
 // the aborted experimental implementation is never included in public routes.
-const routes = ["matching", "target-shooter", "drag-drop", "drag-drop-multimedia", "bubble-pop", "smart-sentence", "memory-quest", "intro-module", "transition", "final-module", "english/year-1/module-01"];
+const routes = ["matching", "target-shooter", "drag-drop", "drag-drop-multimedia", "bubble-pop", "smart-sentence", "memory-quest", "intro-module", "transition", "final-module", "english/year-1/module-01", "english/year-1/module-02", "english/year-1/module-03", "english/year-1/module-04", "english/year-1/module-05", "english/year-1/module-06"];
 const textExtensions = new Set([".html", ".js", ".mjs", ".css", ".json", ".svg"]);
 const allowedExtensions = new Set([...textExtensions, ".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico", ".mp3", ".wav", ".woff", ".woff2"]);
 const forbiddenSegment = /(^|[\\/])(\.git|\.github|docs|test|tests|tools|artifacts|recovery|\.duduq)([\\/]|$)/i;
@@ -206,14 +206,18 @@ await copyFile("assets/ui/language-flags/brazil.png");
 await copyFile("assets/ui/language-flags/united-states.png");
 await copyFile("core/assets/duduq-hud-mascot.png", "play/matching/assets/duduq-hud-mascot.png");
 
-// Y1M01 ships only its public product contract, canonical media registry and approved runtime media.
-await copyFile("content/english/year-1/module-01/module.json");
-await copyFile("content/english/year-1/module-01/questions.json");
+// Public Year-1 question contracts are resolved by the shared route runtime.
+for (let moduleNumber = 1; moduleNumber <= 6; moduleNumber += 1) {
+  const modulePath = `content/english/year-1/module-0${moduleNumber}`;
+  await copyFile(`${modulePath}/module.json`);
+  await copyFile(`${modulePath}/questions.json`);
+}
 await copyFile("content/mechanics/canonical-mechanics-registry.json");
 await copyFile("content/mechanics/canonical-mechanics-lock-v1.json");
 await copyFile("content/mechanics/memory-quest-content-contract-v1.json");
 await copyFile("content/english/media/media-registry.json");
 await copyRuntimeTree("content/english/assets/images/year-1/module-01/temporary");
+await copyRuntimeTree("content/english/assets/images/year-1/provisional-semantic-v1");
 await copyRuntimeTree("qa/memory-quest/fixtures", "qa/memory-quest/fixtures");
 if (await stat(sourcePath("content/english/assets/images/year-1/module-01/generated")).then(() => true, () => false)) {
   await copyRuntimeTree("content/english/assets/images/year-1/module-01/generated");

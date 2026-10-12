@@ -6,6 +6,7 @@ import path from "node:path";
 const HOST = "127.0.0.1";
 const PORT = Number(process.env.DUDUQ_TEST_PORT || 4175);
 const ROOT = process.cwd();
+const SOURCE_PREVIEW = process.env.DUDUQ_SOURCE_PREVIEW === "1";
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -49,7 +50,11 @@ const server = http.createServer((req, res) => {
     }, 25);
     return;
   }
-  const file = safePath(req.url);
+  let requestUrl = req.url;
+  if (SOURCE_PREVIEW) {
+    requestUrl = requestUrl.replace(/^\/runtime\/gold-masters\/target-shooter(?=\/|\?|$)/, "/test/target-shooter/gold-master-clean-v2");
+  }
+  const file = safePath(requestUrl);
   if (!file) {
     res.writeHead(403, { "Content-Type": "text/plain; charset=utf-8" });
     res.end("Forbidden");
