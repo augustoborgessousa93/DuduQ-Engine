@@ -59,7 +59,10 @@ async function copyFile(relative, target = relative) {
     const migrated = original
       .replaceAll("/test/matching/gold-master-candidate-v1", "/runtime/gold-masters/matching")
       .replaceAll("/test/target-shooter/gold-master-clean-v2", "/runtime/gold-masters/target-shooter");
-    if (migrated !== original) await writeFile(to, migrated, "utf8");
+    const homeRoot = relative === "play/home/index.html" && target === "index.html"
+      ? migrated.replace('<base href="/play/home/">', '<base href="/home/">')
+      : migrated;
+    if (homeRoot !== original) await writeFile(to, homeRoot, "utf8");
   }
 }
 
