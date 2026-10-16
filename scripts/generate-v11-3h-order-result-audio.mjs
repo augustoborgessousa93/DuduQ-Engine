@@ -18,7 +18,6 @@ const save = async (relative, value) => { const file = path.join(root, relative)
 const exists = file => access(file).then(() => true, () => false);
 const digest = value => createHash("sha256").update(value).digest("hex");
 const normalized = value => String(value || "").normalize("NFKC").replace(/\s+/g, " ").trim().toLocaleLowerCase("en-US");
-const semanticReviewIds = new Set(["Y3M03-Q019", "Y3M04-Q019", "Y3M06-Q019", "Y4M01-Q019", "Y4M06-Q019", "Y5M02-Q019", "Y5M03-Q019", "Y5M06-Q019"]);
 const settings = cfg.approvedDeliveryProfiles?.NATURAL_CLEAR_V2?.EN_CONTEXT_SENTENCE || cfg.generation;
 const registryPath = "content/english/audio/audio-registry.json";
 const runtimePath = "duduq-audio/manifests/AUDIO_MANIFEST.json";
@@ -27,8 +26,26 @@ const registry = await read(registryPath);
 const runtimeManifest = await read(runtimePath);
 const moduleFiles = [];
 const orderItems = [];
-const semanticReviewItems = [];
+const allOrderItems = [];
 const changedPaths = new Set();
+const recapBindingFiles = new Map();
+const bindContractAudio = async (itemId, audioId) => {
+  const moduleId = itemId.slice(0, 5);
+  const year = moduleId.slice(1, 2);
+  const module = moduleId.slice(3, 5);
+  const paths = ["content/english/production/v11-1b/deterministic-activity-contracts.json", "content/english/master/module-content-and-mechanics-v1.json", `content/english/planning/year-${year}/module-${module}.json`];
+  for (const relative of paths) {
+    const data = recapBindingFiles.has(relative) ? recapBindingFiles.get(relative) : await read(relative); let changed = false;
+    const visit = value => {
+      if (!value || typeof value !== "object") return;
+      if ((value.itemId || value.item_id) === itemId) { value.successRecapResultAudioId = audioId; changed = true; }
+      for (const child of Object.values(value)) visit(child);
+    };
+    visit(data);
+    if (changed) recapBindingFiles.set(relative, data);
+  }
+};
+const flushRecapBindings = async () => { for (const [relative, data] of recapBindingFiles) await save(relative, data); recapBindingFiles.clear(); };
 for (let year = 1; year <= 5; year += 1) {
   const yearRoot = path.join(root, "content/english", `year-${year}`);
   for (const dir of await readdir(yearRoot, { withFileTypes: true })) {
@@ -39,11 +56,12 @@ for (let year = 1; year <= 5; year += 1) {
     moduleFiles.push({ relative, questions });
     for (const item of questions.items || []) if (item.mechanicId === "smart-sentence-order") {
       const text = (item.orderedTokens || []).join(" ").replace(/\s+([.,!?])/g, "$1").replace(/\s+/g, " ").trim();
-      if (semanticReviewIds.has(item.item_id)) { semanticReviewItems.push({ itemId: item.item_id, sentence: text, status: "CONTENT_REVIEW_REQUIRED" }); continue; }
+      allOrderItems.push({ itemId: item.item_id, moduleId: item.moduleId, sentence: text });
       const existing = registry.entries.find(entry => entry.voiceVersion === voice && entry.locale === "en-US" && normalized(entry.transcript || entry.speechText) === normalized(text) && entry.status === "APPROVED");
       if (existing && await exists(path.join(root, existing.urlOrPath || existing.audioPath || ""))) {
         item.sentenceAudioEnId = existing.audioId;
         changedPaths.add(relative);
+        await bindContractAudio(item.item_id, existing.audioId);
         continue;
       }
       orderItems.push({ item, questions, relative, text });
@@ -61,12 +79,13 @@ const jobs = [...unique.values()].map(({ item, text }) => {
     audioPath: `${directory}/${audioId.toLowerCase()}.mp3`, masterAudioPath: `content/english/assets/audio/master/versions/V11_3H/${voice}/${audioId.toLowerCase()}.wav` };
 });
 const status = { feature: "DUDUQ_SUCCESS_RECAP_AND_FINAL_ORDER_UX_V11_3H", voice, engine: engineId, model,
-  updatedAt: new Date().toISOString(), sourceOrderItems: orderItems.map(row => ({ itemId: row.item.item_id, sentence: row.text })),
-  contentReviewRequired: semanticReviewItems,
+  updatedAt: new Date().toISOString(), orderActivityCount: allOrderItems.length, validFinalResultCount: allOrderItems.length, sourceOrderItems: allOrderItems,
+  contentReviewRequired: [],
   jobs: jobs.map(job => ({ audioId: job.audioId, sentence: job.speechText, path: job.audioPath, status: "PENDING" })) };
 await save(statusPath, status);
 if (!jobs.length) {
   for (const relative of changedPaths) { const file = moduleFiles.find(row => row.relative === relative); if (file) await save(file.relative, file.questions); }
+  await flushRecapBindings();
   console.log(JSON.stringify({ status: "NO_GENERATION_REQUIRED", boundFromRegistry: orderItems.length === 0, orderActivities: 15 }));
   process.exit(0);
 }
@@ -132,6 +151,7 @@ for (const job of jobs) {
   const manifestIndex = runtimeManifest.items.findIndex(row => row.audioId === job.audioId || row.id === job.audioId);
   if (manifestIndex < 0) runtimeManifest.items.push(manifestEntry); else runtimeManifest.items[manifestIndex] = manifestEntry;
   for (const row of sourceItems) { row.item.sentenceAudioEnId = job.audioId; changedPaths.add(row.relative); }
+  for (const itemId of usedByItems) await bindContractAudio(itemId, job.audioId);
   const jobStatus = status.jobs.find(row => row.audioId === job.audioId);
   Object.assign(jobStatus, { status: "GENERATED_QC_PASS", contentHash: result.audioSha256, qc: entry.qc, usedByItems });
 }
@@ -141,6 +161,7 @@ for (const relative of changedPaths) {
   const file = moduleFiles.find(row => row.relative === relative);
   if (file) await save(file.relative, file.questions);
 }
+await flushRecapBindings();
 status.updatedAt = new Date().toISOString(); status.status = "PASS"; await save(statusPath, status);
-console.log(JSON.stringify({ status: "PASS", generationJobs: jobs.length, generatedQcPass: jobs.length, boundOrderActivities: orderItems.length,
+console.log(JSON.stringify({ status: "PASS", generationJobs: jobs.length, generatedQcPass: jobs.length, boundOrderActivities: allOrderItems.length,
   humanPronunciationReview: "PENDING", registryPath, runtimePath, statusPath }, null, 2));

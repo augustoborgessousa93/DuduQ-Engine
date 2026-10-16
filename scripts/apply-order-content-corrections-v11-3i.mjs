@@ -3,13 +3,13 @@ import path from "node:path";
 
 const root = process.cwd();
 const corrections = {
-  "Y3M03-Q019": { result: "She is my mother.", tokens: ["She", "is", "my", "mother."], bank: ["mother.", "my", "is", "She"] },
+  "Y3M03-Q019": { result: "She is my mother.", tokens: ["She", "is", "my", "mother."], bank: ["mother.", "my", "is", "She"], audioId: "AUD-V11-2B-172C0B69B5EB0378" },
   "Y3M04-Q019": { result: "I have one favorite toy.", tokens: ["I", "have", "one", "favorite", "toy."], bank: ["toy.", "one", "I", "favorite", "have"] },
   "Y3M06-Q019": { result: "I do not like carrots.", tokens: ["I", "do", "not", "like", "carrots."], bank: ["carrots.", "not", "I", "like", "do"] },
   "Y4M01-Q019": { result: "What day is it today? Today is Monday.", tokens: ["What", "day", "is", "it", "today?", "Today", "is", "Monday."], bank: ["Monday.", "today?", "What", "is", "Today", "day", "it", "is"] },
-  "Y4M06-Q019": { result: "Where is the TV? It is beside the sofa.", tokens: ["Where", "is", "the", "TV?", "It", "is", "beside", "the", "sofa."], bank: ["sofa.", "beside", "the", "TV?", "Where", "is", "It", "the", "is"] },
+  "Y4M06-Q019": { result: "Where is the bathroom? It is beside the kitchen.", tokens: ["Where", "is", "the", "bathroom?", "It", "is", "beside", "the", "kitchen."], bank: ["kitchen.", "beside", "the", "bathroom?", "Where", "is", "It", "the", "is"] },
   "Y5M02-Q019": { result: "I do not like carrots in the morning.", tokens: ["I", "do", "not", "like", "carrots", "in", "the", "morning."], bank: ["morning.", "the", "in", "carrots", "not", "I", "like", "do"] },
-  "Y5M03-Q019": { result: "He is a boy.", tokens: ["He", "is", "a", "boy."], bank: ["boy.", "a", "is", "He"] },
+  "Y5M03-Q019": { result: "He is a teacher.", tokens: ["He", "is", "a", "teacher."], bank: ["teacher.", "a", "is", "He"] },
   "Y5M06-Q019": { result: "There is a park in my city.", tokens: ["There", "is", "a", "park", "in", "my", "city."], bank: ["city.", "my", "in", "park", "a", "There", "is"] }
 };
 const touched = new Set();
@@ -33,6 +33,10 @@ function updateRecord(record, itemId, isQuestions) {
   record.orderedTokens = [...correction.tokens];
   record.correctAnswer = [...correction.tokens];
   record.answerKey = [...correction.tokens];
+  if (correction.audioId) {
+    record.successRecapResultAudioId = correction.audioId;
+    if (isQuestions) record.sentenceAudioEnId = correction.audioId;
+  }
   if (record.instruction && isQuestions) record.instruction.titleEn = correction.result;
   touched.add(id);
   changedInFile = true;
@@ -69,5 +73,23 @@ for (const relative of [...new Set(files)]) {
 
 for (const id of Object.keys(corrections)) {
   if (!touched.has(id)) throw new Error(`No source record updated for ${id}`);
+}
+const audioId = corrections["Y3M03-Q019"].audioId;
+const registryPath = path.join(root, "content/english/audio/audio-registry.json");
+const registry = JSON.parse(fs.readFileSync(registryPath, "utf8"));
+const registryEntry = registry.entries.find(entry => entry.audioId === audioId);
+if (!registryEntry || registryEntry.qcStatus !== "PASS" || registryEntry.status !== "APPROVED" ||
+    String(registryEntry.transcript || "").trim().toLowerCase() !== "she is my mother." ||
+    !fs.existsSync(path.join(root, registryEntry.urlOrPath))) throw new Error(`EXACT_RECAP_AUDIO_NOT_QC_READY:${audioId}`);
+registryEntry.usedByItems ||= [];
+if (!registryEntry.usedByItems.includes("Y3M03-Q019")) registryEntry.usedByItems.push("Y3M03-Q019");
+fs.writeFileSync(registryPath, `${JSON.stringify(registry, null, 2)}\n`, "utf8");
+const runtimeManifestPath = path.join(root, "duduq-audio/manifests/AUDIO_MANIFEST.json");
+const runtimeManifest = JSON.parse(fs.readFileSync(runtimeManifestPath, "utf8"));
+const runtimeEntry = runtimeManifest.items.find(entry => (entry.audioId || entry.id) === audioId);
+if (runtimeEntry) {
+  runtimeEntry.activity ||= [];
+  if (!runtimeEntry.activity.includes("Y3M03-Q019")) runtimeEntry.activity.push("Y3M03-Q019");
+  fs.writeFileSync(runtimeManifestPath, `${JSON.stringify(runtimeManifest, null, 2)}\n`, "utf8");
 }
 console.log(JSON.stringify({ status: "PASS", correctedIds: [...touched], files: [...new Set(files)] }, null, 2));
