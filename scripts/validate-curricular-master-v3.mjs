@@ -19,8 +19,13 @@ const numberWord = (n) => n < 20 ? wordNumbers[n] : n === 100 ? 'one hundred' : 
 const norm = (s) => String(s).toLowerCase().replace(/[’']/g, '').replace(/&/g, ' and ').replace(/[^a-z0-9-]+/g, ' ').trim().replace(/\s+/g, ' ');
 
 function expandDeclaration(value) {
-  const source = norm(value);
-  const terms = [source];
+  const raw = String(value);
+  // Curricular declarations may list authorized lexical variants as a slash
+  // pair (e.g. "autumn/fall") and may append scope notes such as "in two
+  // groups". Compare the lexical alternatives, not the presentation note.
+  const alternatives = raw.split("/").map((part) => norm(part));
+  const source = norm(raw).replace(/\s+in\s+(?:two|three|four|\d+)\s+groups?(?:\s+of\s+\d+\s*[-–]\s*\d+)?$/, "");
+  const terms = [...new Set([source, ...alternatives])];
   if (/\ba-z\b/.test(source)) terms.push(...'abcdefghijklmnopqrstuvwxyz'.split('').map((letter) => `letter ${letter}`));
   if (/january.*december/.test(source)) terms.push(...['january','february','march','april','may','june','july','august','september','october','november','december']);
   if (/monday.*sunday/.test(source)) terms.push(...['monday','tuesday','wednesday','thursday','friday','saturday','sunday']);

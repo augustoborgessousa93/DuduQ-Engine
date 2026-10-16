@@ -37,6 +37,13 @@ const mediaById = new Map(mediaRegistry.entries.map(row => [row.mediaId, row]));
 const audioManifest = await readJson("duduq-audio/manifests/AUDIO_MANIFEST.json");
 const audioById = new Map((audioManifest.items || []).filter(row => row.status === "APPROVED").map(row => [row.id, row]));
 const mediaIds = new Set(), audioIds = new Set(), mechanicCounts = new Map();
+const requestedModule = process.env.DUDUQ_MODULE_CHECK;
+const moduleNumbers = requestedModule
+  ? [Number(String(requestedModule).replace("Y1M0", ""))]
+  : [1, 2, 3, 4, 5, 6];
+if (moduleNumbers.some(number => !Number.isInteger(number) || number < 1 || number > 6)) {
+  throw new Error(`INVALID_DUDUQ_MODULE_CHECK:${requestedModule}`);
+}
 let resolvedCount = 0;
 function inspectBindings(value, key = "") {
   if (typeof value === "string") {
@@ -47,7 +54,7 @@ function inspectBindings(value, key = "") {
   if (value.assetId && value.status === "IMAGE_REFINEMENT_PENDING") mediaIds.add(value.assetId);
   for (const [childKey, child] of Object.entries(value)) inspectBindings(child, childKey);
 }
-for (let number = 1; number <= 6; number += 1) {
+for (const number of moduleNumbers) {
   const moduleId = `Y1M0${number}`;
   const key = `module-0${number}`;
   const routeFile = `play/english/year-1/${key}/index.html`;
@@ -82,14 +89,14 @@ for (const id of audioIds) {
   const entry = audioById.get(id);
   if (!entry?.audioPath || !await stat(entry.audioPath).then(() => true, () => false)) brokenAudio += 1;
 }
-for (let number = 2; number <= 6; number += 1) {
+for (const number of moduleNumbers.filter(value => value >= 2)) {
   const contract = await readJson(`content/english/year-1/module-0${number}/questions.json`);
   for (const question of contract.items) inspectBindings(question);
 }
-assert.equal(resolvedCount, 120);
+assert.equal(resolvedCount, moduleNumbers.length * 20);
 assert.equal(brokenMedia, 0, `broken semantic media bindings: ${brokenMedia}`);
 assert.equal(brokenAudio, 0, `broken audio bindings: ${brokenAudio}`);
 console.log(JSON.stringify({ status: "PASS", contracts: resolvedCount, routeSmoke: resolvedCount,
-  moduleEntryRoutes: 6, mechanicPageBridges: Object.keys(pageByMechanic).length,
+  moduleEntryRoutes: moduleNumbers.length, mechanicPageBridges: Object.keys(pageByMechanic).length,
   mechanicCounts: Object.fromEntries(mechanicCounts), semanticMediaIds: mediaIds.size,
   registeredSemanticMediaIds: mediaIds.size, brokenMedia, requiredAudioIds: audioIds.size, brokenAudio }, null, 2));

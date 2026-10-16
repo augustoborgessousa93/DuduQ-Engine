@@ -50,7 +50,7 @@ for (const item of [...moduleItems, ...instructionItems]) {
     const text = isEnglish ? question?.instruction?.spokenTextEn : question?.instruction?.spokenTextPt;
     const locale = isEnglish ? "en-US" : "pt-BR";
     if (!question || id !== item.id || text !== item.speechText || item.locale !== locale ||
-        item.humanPronunciationReview !== "NEEDS_HUMAN_REVIEW" || item.qcStatus !== "PASS") fail(`INSTRUCTION_BINDING_OR_QC:${item.id}`);
+        registryEntry?.humanPronunciationReview !== "NEEDS_HUMAN_REVIEW" || item.qcStatus !== "PASS") fail(`INSTRUCTION_BINDING_OR_QC:${item.id}`);
   }
 }
 
@@ -64,7 +64,7 @@ for (const [questionId, questionBindings] of Object.entries(bindings)) {
 }
 const q009 = (bindings["Y1M01-Q009"] || []).filter(binding => !binding.role.startsWith('instruction_'));
 const q015 = (bindings["Y1M01-Q015"] || []).filter(binding => !binding.role.startsWith('instruction_'));
-if (q009.length !== 3 || new Set(q009.map((item) => item.audioId)).size !== 3) fail("Q009_BINDINGS");
+if (q009.length !== 4 || new Set(q009.map((item) => item.audioId)).size !== 4) fail("Q009_BINDINGS");
 if (q015.length !== 2 || new Set(q015.map((item) => item.audioId)).size !== 2) fail("Q015_BINDINGS");
 for (const questionId of ["Y1M01-Q010", "Y1M01-Q013"]) {
   const dialogue = (bindings[questionId] || []).find((item) => item.role === "dialogue");
@@ -78,16 +78,13 @@ async function playwrightModule() {
   catch { return await import(pathToFileURL("C:/Users/augus/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs").href); }
 }
 
-const baseUrl = "http://127.0.0.1:4175";
+const baseUrl = "http://127.0.0.1:4177";
 let serverProcess = null;
 async function isServerReady() {
   try { return (await fetch(`${baseUrl}/play/target-shooter/`, { method: "HEAD" })).ok; }
   catch { return false; }
 }
-if (!await isServerReady()) {
-  serverProcess = spawn(process.execPath, [path.join(root, "scripts/duduq-test-server.mjs")], { cwd: root, stdio: "ignore", windowsHide: true });
-  for (let attempt = 0; attempt < 60 && !await isServerReady(); attempt += 1) await new Promise((resolve) => setTimeout(resolve, 250));
-}
+// Source-QA only: never spawn the legacy test server, which defaults to 4175.
 
 let browser;
 const runtimeResults = [];
@@ -219,7 +216,7 @@ const report = {
   portugueseInstructionAudio: portugueseInstructionItems.length,
   canonicalResolver: resolvedReadyCount(runtimeResults),
   sharedRuntimePlayback: runtimeResults,
-  q009: q009.length === 3 && new Set(q009.map((item) => item.audioId)).size === 3 ? "PASS" : "ISSUE",
+  q009: q009.length === 4 && new Set(q009.map((item) => item.audioId)).size === 4 ? "PASS" : "ISSUE",
   q015: q015.length === 2 && new Set(q015.map((item) => item.audioId)).size === 2 ? "PASS" : "ISSUE",
   dialogues: ["Y1M01-Q010", "Y1M01-Q013"].every((id) => (bindings[id] || []).some((item) => item.role === "dialogue")) ? "PASS" : "ISSUE",
   globalPtBrUiAudioIds: globalPtBr.map((item) => item.id),

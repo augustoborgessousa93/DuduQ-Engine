@@ -272,7 +272,10 @@ async function validate({ selfTest = false, selfTestUnscramble = false } = {}) {
     if (entry?.runtimeRoute && !routeTable.includes(`"${routeKey}": "${entry.runtimeRoute}"`) && !routeTable.includes(`${routeKey}: "${entry.runtimeRoute}"`)) errors.push(`PRODUCTION_ROUTE_NOT_CANONICAL:${item.item_id}:${entry.runtimeRoute}`);
   }
   const routeOwners = [
-    ["play/target-shooter/index.html", ["/runtime/gold-masters/target-shooter/src/static-view.js"]],
+    // Source QA intentionally loads the protected Gold Master from its
+    // repository source path. The official build copies that tree to the
+    // runtime-only path and rewrites source URLs during staging.
+    ["play/target-shooter/index.html", ["/test/target-shooter/gold-master-clean-v2/src/static-view.js"]],
     ["play/bubble-pop/index.html", ["./bubble-pop.js"]],
     ["play/drag-drop-multimedia/index.html", ["./drag-drop-multimedia.js"]]
   ];

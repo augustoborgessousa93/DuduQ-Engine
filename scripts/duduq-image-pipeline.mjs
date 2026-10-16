@@ -58,7 +58,7 @@ async function imageInfo(file) {
   let pngDetails = null;
   if (bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) {
     format = "png"; width = bytes.readUInt32BE(16); height = bytes.readUInt32BE(20); pngDetails = inspectPng(bytes);
-  } else if (bytes[0] === 0xff && bytes[1] === 0xd8) format = "jpeg";
+  } else if (bytes[0] === 0xff && bytes[1] === 0xd8) { format = "jpeg"; const dimensions = inspectJpeg(bytes); width = dimensions.width || 0; height = dimensions.height || 0; }
   else if (bytes.toString("ascii", 0, 4) === "RIFF" && bytes.toString("ascii", 8, 12) === "WEBP") format = "webp";
   else if (bytes.toString("ascii", 0, 6).startsWith("GIF8")) format = "gif";
   else if (ext === ".svg" && /^\s*(?:<\?xml[^>]*>\s*)?<svg\b/i.test(bytes.toString("utf8", 0, Math.min(bytes.length, 2048)))) format = "svg";
@@ -111,6 +111,39 @@ function inspectPng(bytes) {
     const coverage = ((maxX - minX + 1) * (maxY - minY + 1)) / (width * height);
     return { valid: true, transparent: true, alphaVisiblePixels: alphaVisible, alphaClearPixels: alphaClear, subjectBoundsCoverage: Number(coverage.toFixed(4)), subjectScaleQc: coverage >= 0.08 ? "PASS" : "NEEDS_CLOSER_FRAMING" };
   } catch { return { valid: false, reason: "PNG_DECODE_FAILED" }; }
+}
+
+function inspectJpeg(bytes) {
+  try {
+    let offset = 2;
+    while (offset + 4 < bytes.length) {
+      if (bytes[offset] !== 0xff) { offset++; continue; }
+      while (bytes[offset] === 0xff) offset++;
+      const marker = bytes[offset++];
+      if (marker === 0xd9 || marker === 0xda) break;
+      if ([0xd8,0x01,0xd0,0xd1,0xd2,0xd3,0xd4,0xd5,0xd6,0xd7].includes(marker)) continue;
+      if (offset + 2 > bytes.length) break;
+      const length = bytes.readUInt16BE(offset);
+      if (length < 2 || offset + length > bytes.length) break;
+      if ([0xc0,0xc1,0xc2,0xc3,0xc5,0xc6,0xc7,0xc9,0xca,0xcb,0xcd,0xce,0xcf].includes(marker)) {
+        const height = bytes.readUInt16BE(offset + 3), width = bytes.readUInt16BE(offset + 5);
+        return { valid: width > 0 && height > 0 && width * height <= 20_000_000, width, height };
+      }
+      offset += length;
+    }
+  } catch { /* malformed JPEG */ }
+  return { valid: false, width: 0, height: 0 };
+}
+
+function validateGeneratedImage(bytes, transparentBackground = true) {
+  if (!Buffer.isBuffer(bytes) || bytes.length < 1024) return { valid: false, reason: "IMAGE_FILE_SIZE_INVALID" };
+  if (bytes.subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10]))) return validateGeneratedPng(bytes);
+  if (!transparentBackground && bytes[0] === 0xff && bytes[1] === 0xd8) {
+    const qc = inspectJpeg(bytes);
+    if (!qc.valid || qc.width < 512 || qc.height < 512) return { valid: false, reason: "JPEG_DIMENSIONS_INVALID" };
+    return { ...qc, format: "jpeg", valid: true, transparent: false, semanticPresence: "NEEDS_HUMAN_PEDAGOGICAL_REVIEW" };
+  }
+  return { valid: false, reason: "UNSUPPORTED_IMAGE_FORMAT_OR_TRANSPARENCY" };
 }
 
 async function walkImages(directory, output = []) {
@@ -288,12 +321,14 @@ async function importGenerated({ requestId, bytes, registryPath = DEFAULT_REGIST
   const need = requests.needs.find((item) => item.generationRequest?.requestId === requestId || item.generationRequest?.mediaId === requestId);
   if (!need?.generationRequest) throw new Error(`UNKNOWN_IMAGE_REQUEST:${requestId}`);
   const request = need.generationRequest;
-  const signature = bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
-  if (!signature) throw new Error("GENERATED_IMAGE_MUST_BE_PNG");
+  const isPng = bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+  const isJpeg = bytes[0] === 0xff && bytes[1] === 0xd8;
+  if (!isPng && !isJpeg) throw new Error("GENERATED_IMAGE_FORMAT_UNSUPPORTED");
   if (bytes.length < 1024) throw new Error("GENERATED_IMAGE_TOO_SMALL");
-  const pngQc = inspectPng(bytes);
-  if (!pngQc.valid) throw new Error(pngQc.reason);
-  const width = bytes.readUInt32BE(16), height = bytes.readUInt32BE(20);
+  if (isJpeg && request.transparentBackground !== false) throw new Error("JPEG_NOT_ALLOWED_FOR_TRANSPARENT_REQUEST");
+  const pngQc = isPng ? inspectPng(bytes) : inspectJpeg(bytes);
+  if (!pngQc.valid) throw new Error(pngQc.reason || "IMAGE_DECODE_INVALID");
+  const width = isPng ? bytes.readUInt32BE(16) : pngQc.width, height = isPng ? bytes.readUInt32BE(20) : pngQc.height;
   if (width < 512 || height < 512) throw new Error(`GENERATED_IMAGE_RESOLUTION_TOO_LOW:${width}x${height}`);
   if (request.transparentBackground && !pngQc.transparent) throw new Error("PNG_BACKGROUND_NOT_TRANSPARENT");
   const destination = path.resolve(ROOT, request.outputPath);
@@ -321,7 +356,7 @@ async function importGenerated({ requestId, bytes, registryPath = DEFAULT_REGIST
     const currentHash = sha256(await readFile(destination));
     if (currentHash !== fileHash) throw new Error(`REFUSING_OVERWRITE_EXISTING_ASSET:${request.outputPath}`);
   } else await writeFile(destination, bytes);
-  const asset = { path: relativePosix(destination), sha256: fileHash, mediaType: "image/png", width, height, transparent: true, visualQc: { subjectBoundsCoverage: pngQc.subjectBoundsCoverage, subjectScaleQc: pngQc.subjectScaleQc, semanticPresence: "NEEDS_HUMAN_PEDAGOGICAL_REVIEW", textDetection: "NOT_AUTOMATED" }, provenance: { provider: provenance.provider || "openai", requestId, generatedAt: provenance.generatedAt || new Date().toISOString(), generationPrompt: request.prompt, model: provenance.model || request.model || process.env.OPENAI_IMAGE_MODEL || "gpt-image-2", ...provenance } };
+  const asset = { path: relativePosix(destination), sha256: fileHash, mediaType: isPng ? "image/png" : "image/jpeg", width, height, transparent: isPng && Boolean(pngQc.transparent), visualQc: { subjectBoundsCoverage: pngQc.subjectBoundsCoverage ?? null, subjectScaleQc: pngQc.subjectScaleQc ?? "NOT_APPLICABLE", semanticPresence: "NEEDS_HUMAN_PEDAGOGICAL_REVIEW", textDetection: "NOT_AUTOMATED" }, provenance: { provider: provenance.provider || "openai", requestId, generatedAt: provenance.generatedAt || new Date().toISOString(), generationPrompt: request.prompt, model: provenance.model || request.model || process.env.OPENAI_IMAGE_MODEL || "gpt-image-2", ...provenance } };
   const entry = {
     ...(existing || {}), mediaId: request.mediaId, requirementId: need.requirementId, status: "PENDING",
     kind: "image", urlOrPath: asset.path, assets: [asset], altText: request.semanticDescription,
@@ -390,7 +425,7 @@ async function runBridge({ port = 4176, registryPath = DEFAULT_REGISTRY, request
   console.log(JSON.stringify({ status: "READY", bridge: `http://127.0.0.1:${port}/api/generated-image` }));
 }
 
-async function generateRequests({ requestPath = DEFAULT_REQUESTS, requestId = null, testOnly = false, providerModeOverride, providerHealthPath = DEFAULT_PROVIDER_HEALTH_PATH, providerAdapters, smokeReportPath = "content/english/media/image-provider-smoke-report.json" } = {}) {
+async function generateRequests({ requestPath = DEFAULT_REQUESTS, requestId = null, testOnly = false, sourceOnly = false, providerModeOverride, providerHealthPath = DEFAULT_PROVIDER_HEALTH_PATH, providerAdapters, smokeReportPath = "content/english/media/image-provider-smoke-report.json" } = {}) {
   const document = await readJson(requestPath);
   const needs = (document.needs || []).filter((need) => need.generationRequest &&
     (!requestId || need.generationRequest.requestId === requestId || need.generationRequest.mediaId === requestId) &&
@@ -426,7 +461,7 @@ async function generateRequests({ requestPath = DEFAULT_REQUESTS, requestId = nu
                 metadata: { ...standard.generationMetadata, provider: standard.provider, model: standard.model, generationPrompt: promptOverride || generationRequest.prompt }
               };
             },
-            validate: (bytes) => validateGeneratedPng(bytes),
+            validate: (bytes) => validateGeneratedImage(bytes, request.transparentBackground !== false),
             maxAttempts: 3
           });
           qc = result.technicalQc;
@@ -471,7 +506,7 @@ async function generateRequests({ requestPath = DEFAULT_REQUESTS, requestId = nu
       request.createdAt = result.metadata.createdAt; request.generationPrompt = result.metadata.generationPrompt;
       request.generationAttempts = result.metadata.generationAttempt;
       await writeJson(requestPath, document);
-      if (!request.testOnly) {
+      if (!request.testOnly && !sourceOnly) {
         const registryHealth = await validateRegistry(registryPath);
         if (registryHealth.status !== "PASS") throw new Error("MEDIA_REGISTRY_QC_FAILED");
         const moduleMediaHealth = await validateQuestionMediaBindings(`content/english/year-${String(request.moduleId).match(/^Y(\d+)/)?.[1] || "1"}/module-${String(request.moduleId).match(/M(\d+)/)?.[1]?.padStart(2, "0") || "01"}`);
@@ -571,7 +606,7 @@ async function validateQuestionMediaBindings(moduleDir) {
   return { status: missing.length ? "ISSUE" : "PASS", moduleId: questions.moduleId, boundMediaIds: ids.size, missing };
 }
 
-export { imageInfo, inspectPng, scanModule, importGenerated, verifySmokeAssetHttp, validateRegistry, validateQuestionMediaBindings, generateRequests };
+export { imageInfo, inspectPng, inspectJpeg, validateGeneratedImage, scanModule, importGenerated, verifySmokeAssetHttp, validateRegistry, validateQuestionMediaBindings, generateRequests };
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const cli = argsOf(process.argv.slice(2));
@@ -589,7 +624,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
       console.log(JSON.stringify(await importGenerated({ requestId: cli.request, bytes: await readFile(source), registryPath: cli.registry || DEFAULT_REGISTRY, requestPath: cli.requests || DEFAULT_REQUESTS, provenance: { provider: "ChatGPT Image Generation", sourceFile: path.basename(source) } }), null, 2));
     } else if (cli.command === "bridge") await runBridge({ port: cli.port || 4176, registryPath: cli.registry || DEFAULT_REGISTRY, requestPath: cli.requests || DEFAULT_REQUESTS });
     else if (cli.command === "generate") {
-      const result = await generateRequests({ requestPath: cli.requests || DEFAULT_REQUESTS, requestId: cli.request || null });
+      const result = await generateRequests({ requestPath: cli.requests || DEFAULT_REQUESTS, requestId: cli.request || null, sourceOnly: Boolean(cli["source-only"]) });
       console.log(JSON.stringify({ ...result, ...(result.status === "NOT_CONFIGURED" ? { IMAGE_PROVIDER: "NOT_CONFIGURED", REQUIRED_ENV: "OPENAI_API_KEY" } : {}) }, null, 2));
       if (result.status === "NOT_CONFIGURED") process.exitCode = 2;
       else if (result.status === "ISSUE") process.exitCode = 1;

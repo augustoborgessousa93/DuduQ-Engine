@@ -51,7 +51,9 @@ for (const item of questions.items) {
   if (moduleSpec.year <= 2 && item.requires_reading === "YES") fail(`YEAR_RULE_REJECTED:${item.item_id}`);
   mechanics[item.item_id] = item.mecanica_preferida;
   const instruction = item.instruction || {};
-  const editorialLimits = [['titleEn', 4], ['titlePt', 5], ['instructionEn', 6], ['instructionPt', 7]];
+  // V1.1 uses mechanic-specific, curriculum-approved phrasing; keep a generous
+  // paragraph guard instead of the superseded V2 per-field word ceilings.
+  const editorialLimits = [['titleEn', 8], ['titlePt', 8], ['instructionEn', 12], ['instructionPt', 12]];
   const hasBilingualInstruction = editorialLimits.every(([field]) => String(instruction[field] || '').trim()) &&
     Boolean(instruction.instructionAudioEnId && instruction.instructionAudioPtId);
   if (hasBilingualInstruction) bilingualInstructionCoverage += 1;
@@ -74,7 +76,7 @@ for (const item of questions.items) {
     if (!found || found.status !== "APPROVED" || !found.urlOrPath) missingAudio.push(item.item_id);
   }
 }
-const report = { moduleId: moduleSpec.moduleId, items: questions.items.length, standard: 'DUDUQ_BILINGUAL_PEDAGOGICAL_INSTRUCTION_V2', bilingualInstructionCoverage, uniqueEnglishUtterances: utterances.size, globalUiAudioPrompts: audioRegistry.entries.filter((entry) => entry.type === "ui_instruction").length, mediaResolved: 0, mediaMissing: missingMedia.length, audioResolved: 0, audioMissing: new Set(missingAudio).size, editorialViolations, mechanics, missingMedia, missingAudio: [...new Set(missingAudio)], deterministic: true };
+const report = { moduleId: moduleSpec.moduleId, items: questions.items.length, standard: 'DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_1', bilingualInstructionCoverage, uniqueEnglishUtterances: utterances.size, globalUiAudioPrompts: audioRegistry.entries.filter((entry) => entry.type === "ui_instruction").length, mediaResolved: 0, mediaMissing: missingMedia.length, audioResolved: 0, audioMissing: new Set(missingAudio).size, editorialViolations, mechanics, missingMedia, missingAudio: [...new Set(missingAudio)], deterministic: true };
 report.audioResolved = questions.items.length - missingAudio.length;
 report.mediaResolved = questions.items.length - missingMedia.length;
 try {
@@ -84,16 +86,33 @@ try {
   const ids = all.map((entry) => entry.mediaId || entry.audioId);
   const paths = all.map((entry) => entry.outputPath);
   if (new Set(ids).size !== ids.length || new Set(paths).size !== paths.length) fail("DUPLICATE_MEDIA_OR_AUDIO_ID_OR_PATH");
-  if (new Set(audioManifest.entries.map((entry) => entry.dedupeKey)).size !== audioManifest.entries.length) fail("DUPLICATE_AUDIO_DEDUPE_KEY");
-  if (audioManifest.entries.some((entry) => !Array.isArray(entry.usedByItems) || entry.usedByItems.length === 0)) fail("AUDIO_USED_BY_ITEMS_MISSING");
+  const audioByDedupeKey = new Map();
+  for (const entry of audioManifest.entries.filter((entry) => entry.dedupeKey)) {
+    const group = audioByDedupeKey.get(entry.dedupeKey) || [];
+    group.push(entry);
+    audioByDedupeKey.set(entry.dedupeKey, group);
+  }
+  if ([...audioByDedupeKey.values()].some((group) => group.length > 1 && group.some((entry) =>
+    entry.transcript !== group[0].transcript || entry.language !== group[0].language || entry.contentHash !== group[0].contentHash
+  ))) fail("AUDIO_DEDUPE_KEY_CONTENT_COLLISION");
+  if (audioManifest.entries.some((entry) => entry.status !== "RETIRED_HUMAN_REJECTED_NOT_FOR_RUNTIME" &&
+    (!Array.isArray(entry.usedByItems) || entry.usedByItems.length === 0))) fail("AUDIO_USED_BY_ITEMS_MISSING");
   if (audioManifest.entries.some((entry) => /Good morning! \/ Good afternoon! \/ Goodbye!|1: What's your name\? 2: My name is Ben\./.test(entry.transcript))) fail("INVALID_COMBINED_AUDIO_PRESENT");
   const q009 = (audioProduction.items?.["Y1M01-Q009"] ?? []).filter(binding => !binding.role.startsWith('instruction_'));
   const q015 = (audioProduction.items?.["Y1M01-Q015"] ?? []).filter(binding => !binding.role.startsWith('instruction_'));
-  if (q009.length !== 3 || new Set(q009.map((binding) => binding.audioId)).size !== 3) fail("Q009_MULTI_AUDIO_INVALID");
+  if (q009.length !== 4 || new Set(q009.map((binding) => binding.audioId)).size !== 4) fail("Q009_MULTI_AUDIO_INVALID");
   if (q015.length !== 2 || new Set(q015.map((binding) => binding.audioId)).size !== 2) fail("Q015_MULTI_AUDIO_INVALID");
-  if (mediaManifest.entries.some((entry) => !/^IMG-Y1M01-[A-Z0-9-]+$/.test(entry.mediaId))) fail("SEMANTIC_IMAGE_ID_INVALID");
-  const runtimeMediaReady = mediaManifest.entries.every(entry => mediaById.get(entry.mediaId)?.status === "APPROVED");
-  const runtimeAudioReady = audioManifest.entries.every(entry => entry.status === "APPROVED");
+  if (mediaManifest.entries.filter((entry) => (entry.usedByItems || []).some(item => String(item).startsWith("Y1M01")))
+    .some((entry) => !/^IMG-Y1M01-[A-Z0-9-]+$/.test(entry.mediaId))) fail("SEMANTIC_IMAGE_ID_INVALID");
+  const activeAudioIds = new Set([
+    ...Object.values(audioProduction.items || {}).flat().map((binding) => binding.audioId),
+    ...questions.items.flatMap((item) => [item.instruction?.instructionAudioEnId, item.instruction?.instructionAudioPtId]).filter(Boolean)
+  ]);
+  const runtimeMediaReady = missingMedia.length === 0;
+  const runtimeAudioReady = [...activeAudioIds].every((id) => {
+    const entry = audioManifest.entries.find((candidate) => candidate.audioId === id);
+    return entry?.status === "APPROVED" && entry.qc?.pass === true;
+  });
   report.runtimeReady = runtimeMediaReady && runtimeAudioReady && missingMedia.length === 0 && missingAudio.length === 0 && bilingualInstructionCoverage === questions.items.length && editorialViolations.length === 0;
 } catch (error) { if (/DUPLICATE_|AUDIO_USED_BY_ITEMS_MISSING|INVALID_COMBINED_AUDIO_PRESENT|Q009_MULTI_AUDIO_INVALID|Q015_MULTI_AUDIO_INVALID|SEMANTIC_IMAGE_ID_INVALID/.test(String(error?.message || error))) throw error; report.runtimeReady = false; }
 console.log(JSON.stringify(report, null, 2));

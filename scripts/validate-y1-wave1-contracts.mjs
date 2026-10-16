@@ -8,7 +8,14 @@ const errors = [];
 const summary = [];
 const contentHashes = new Map();
 const banned = /\b(TODO|TBD|LOREM|DUMMY|PLACEHOLDER|SAMPLE)\b/i;
-for (let n = 2; n <= 6; n += 1) {
+const requestedModule = process.env.DUDUQ_MODULE_CHECK;
+const moduleNumbers = requestedModule
+  ? [Number(String(requestedModule).replace("Y1M0", ""))]
+  : [2, 3, 4, 5, 6];
+if (moduleNumbers.some(number => !Number.isInteger(number) || number < 2 || number > 6)) {
+  throw new Error(`INVALID_DUDUQ_MODULE_CHECK:${requestedModule}`);
+}
+for (const n of moduleNumbers) {
   const moduleId = `Y1M0${n}`;
   const rel = `content/english/year-1/module-0${n}`;
   const plan = await json(`content/english/planning/year-1/module-0${n}.json`);

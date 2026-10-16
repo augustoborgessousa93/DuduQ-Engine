@@ -38,7 +38,10 @@ console.log("MEMORY_QUEST_CONTENT_BUILD_GATE: PASS (three QA modes, semantic pai
 
 // Memory Quest QA modes now run through the approved Penpot-baseline shell;
 // the aborted experimental implementation is never included in public routes.
-const routes = ["matching", "target-shooter", "drag-drop", "drag-drop-multimedia", "bubble-pop", "smart-sentence", "memory-quest", "intro-module", "transition", "final-module", "english/year-1/module-01", "english/year-1/module-02", "english/year-1/module-03", "english/year-1/module-04", "english/year-1/module-05", "english/year-1/module-06"];
+const routes = [...new Set([
+  "matching", "target-shooter", "drag-drop", "drag-drop-multimedia", "bubble-pop", "smart-sentence", "memory-quest", "intro-module", "transition", "final-module",
+  ...Array.from({ length: 5 }, (_, year) => Array.from({ length: 6 }, (_, module) => `english/year-${year + 1}/module-${String(module + 1).padStart(2, "0")}`)).flat()
+])];
 const textExtensions = new Set([".html", ".js", ".mjs", ".css", ".json", ".svg"]);
 const allowedExtensions = new Set([...textExtensions, ".png", ".jpg", ".jpeg", ".webp", ".gif", ".ico", ".mp3", ".wav", ".woff", ".woff2"]);
 const forbiddenSegment = /(^|[\\/])(\.git|\.github|docs|test|tests|tools|artifacts|recovery|\.duduq)([\\/]|$)/i;
@@ -209,18 +212,66 @@ await copyFile("assets/ui/language-flags/brazil.png");
 await copyFile("assets/ui/language-flags/united-states.png");
 await copyFile("core/assets/duduq-hud-mascot.png", "play/matching/assets/duduq-hud-mascot.png");
 
-// Public Year-1 question contracts are resolved by the shared route runtime.
-for (let moduleNumber = 1; moduleNumber <= 6; moduleNumber += 1) {
-  const modulePath = `content/english/year-1/module-0${moduleNumber}`;
-  await copyFile(`${modulePath}/module.json`);
-  await copyFile(`${modulePath}/questions.json`);
+// Public production contracts are resolved by the shared route runtime.
+// Missing approved module contracts fail closed instead of falling back to demos.
+for (let year = 1; year <= 5; year += 1) {
+  for (let moduleNumber = 1; moduleNumber <= 6; moduleNumber += 1) {
+    const modulePath = `content/english/year-${year}/module-0${moduleNumber}`;
+    await copyFile(`${modulePath}/module.json`);
+    await copyFile(`${modulePath}/questions.json`);
+  }
 }
+await copyFile("content/english/master/curricular-master-v3.json");
 await copyFile("content/mechanics/canonical-mechanics-registry.json");
 await copyFile("content/mechanics/canonical-mechanics-lock-v1.json");
 await copyFile("content/mechanics/memory-quest-content-contract-v1.json");
 await copyFile("content/english/media/media-registry.json");
+// Include only the local media referenced by the 30 production question
+// contracts (and their composed media), rather than copying the repository's
+// entire asset library. This makes newly materialized Year 2–5 contracts
+// publishable while keeping the Pages boundary explicit.
+const mediaRegistry = JSON.parse(await readFile(sourcePath("content/english/media/media-registry.json"), "utf8"));
+const mediaById = new Map((mediaRegistry.entries || []).map((entry) => [entry.mediaId, entry]));
+const pendingMediaIds = new Set();
+function collectMediaIds(value) {
+  if (!value || typeof value !== "object") return;
+  if (typeof value.mediaId === "string") pendingMediaIds.add(value.mediaId);
+  if (typeof value.assetId === "string" && mediaById.has(value.assetId)) pendingMediaIds.add(value.assetId);
+  for (const child of Object.values(value)) collectMediaIds(child);
+}
+for (let year = 1; year <= 5; year += 1) {
+  for (let moduleNumber = 1; moduleNumber <= 6; moduleNumber += 1) {
+    const relative = `content/english/year-${year}/module-${String(moduleNumber).padStart(2, "0")}/questions.json`;
+    collectMediaIds(JSON.parse(await readFile(sourcePath(relative), "utf8")));
+  }
+}
+const copiedMediaPaths = new Set();
+while (pendingMediaIds.size) {
+  const [mediaId] = pendingMediaIds;
+  pendingMediaIds.delete(mediaId);
+  const entry = mediaById.get(mediaId);
+  if (!entry) throw new Error(`PRODUCTION_MEDIA_ID_NOT_IN_REGISTRY:${mediaId}`);
+  for (const componentId of entry.components || []) {
+    if (!mediaById.has(componentId)) throw new Error(`PRODUCTION_MEDIA_COMPONENT_NOT_IN_REGISTRY:${mediaId}:${componentId}`);
+    if (!copiedMediaPaths.has(`@id:${componentId}`)) {
+      copiedMediaPaths.add(`@id:${componentId}`);
+      pendingMediaIds.add(componentId);
+    }
+  }
+  const paths = [...(entry.urlOrPath ? [entry.urlOrPath] : []), ...(entry.assets || []).map((asset) => asset.path).filter(Boolean)];
+  if (!paths.length && !(entry.components || []).length) throw new Error(`PRODUCTION_MEDIA_HAS_NO_LOCAL_ASSET:${mediaId}`);
+  for (const assetPath of paths) {
+    const normalized = String(assetPath).replaceAll("\\", "/").replace(/^\/+/, "");
+    if (/^(?:https?:|data:)/i.test(normalized) || normalized.split("/").includes("..")) throw new Error(`PRODUCTION_MEDIA_PATH_NOT_LOCAL:${mediaId}:${assetPath}`);
+    if (!normalized.startsWith("content/english/assets/images/")) throw new Error(`PRODUCTION_MEDIA_PATH_OUTSIDE_APPROVED_ASSET_ROOT:${mediaId}:${assetPath}`);
+    if (copiedMediaPaths.has(normalized)) continue;
+    await copyFile(normalized);
+    copiedMediaPaths.add(normalized);
+  }
+}
 await copyRuntimeTree("content/english/assets/images/year-1/module-01/temporary");
 await copyRuntimeTree("content/english/assets/images/year-1/provisional-semantic-v1");
+await copyRuntimeTree("content/english/assets/images/shared/letters");
 await copyRuntimeTree("qa/memory-quest/fixtures", "qa/memory-quest/fixtures");
 if (await stat(sourcePath("content/english/assets/images/year-1/module-01/generated")).then(() => true, () => false)) {
   await copyRuntimeTree("content/english/assets/images/year-1/module-01/generated");
