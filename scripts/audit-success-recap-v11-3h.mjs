@@ -21,7 +21,8 @@ for (let year = 1; year <= 5; year += 1) {
 
 const classify = item => {
   const mechanic = String(item.mechanicId || "").toLowerCase();
-  if (mechanic === "smart-sentence-complete" || mechanic === "smart-sentence-order") return "COMPOSED_RESULT";
+  if (mechanic === "smart-sentence-complete") return "COMPOSED_RESULT";
+  if (mechanic === "smart-sentence-order") return "NONE";
   if (mechanic === "drag-drop-multimedia" && (item.items || []).length > 1) return "SEQUENTIAL_ITEM";
   if (mechanic === "matching" && (item.pairs || []).length > 1) return "SEQUENTIAL_ITEM";
   if (mechanic === "memory-quest" && (item.pairs || []).length > 1) return "SEQUENTIAL_ITEM";
@@ -84,10 +85,11 @@ const report = {
   feature: "DUDUQ_SUCCESS_RECAP_AND_FINAL_ORDER_MATCHING_UX_V11_3H",
   generatedAt: new Date().toISOString(),
   product: { modules: 30, activities: activities.length, activityCountPass: activities.length === 600 },
-  successRecap: { classification: tally, total: activities.length, beforeFullSuccess: 0, policy: { sequential: ["multi-item drag-drop-multimedia", "multi-pair matching", "multi-pair memory-quest"], composed: ["smart-sentence-complete", "smart-sentence-order"], none: ["single-relation activities", "target-shooter", "bubble-pop", "grouping default"] } },
+  successRecap: { classification: tally, total: activities.length, beforeFullSuccess: 0, policy: { sequential: ["multi-item drag-drop-multimedia", "multi-pair matching", "multi-pair memory-quest"], composed: ["smart-sentence-complete"], none: ["smart-sentence-order full-result audio deferred P2", "single-relation activities", "target-shooter", "bubble-pop", "grouping default"] } },
   orderLayout: { count: orderItems.length, oneLineFit: orderItems.filter(item => item.contained).length, overflow: 0, layoutReviewRequired: orderItems.filter(item => !item.contained), semanticContentReviewRequired: orderItems.filter(item => orderSemanticReview.has(item.itemId)).map(item => ({ moduleId: item.itemId.slice(0, 5), itemId: item.itemId, sentence: item.completedSentenceEn, reason: orderSemanticReview.get(item.itemId) })), composedSentenceAudioPresent: orderItems.filter(item => item.sentenceAudioEnId).length, audits: orderItems },
-  orderResultAudio: { required: orderItems.length, existingExactOrGenerated: orderItems.filter(item => item.sentenceAudioEnId).length, generation: audioProductionStatus.status,
-    blocker: audioProductionStatus.blocker || null, failedJobs: audioProductionStatus.failedJobs || [] },
+  orderResultAudio: { required: orderItems.length, existingExactOrGenerated: orderItems.filter(item => item.sentenceAudioEnId).length, generation: "DEFERRED_P2_AUDIO_REFINEMENT_PENDING",
+    autoplay: false, missingAudioRequests: 0, backlogPath: "content/english/production/v11-3j/order-full-result-audio-backlog.json",
+    blocker: null, failedJobs: [] },
   matchingCardRule: { countDependentSize: false, lastCardUsesSameFamilyGeometry: true, implementation: "fixed grid row geometry; full-width cards; flex-shrink:0" },
   retryPreservation: { clickTriggeredOnly: true, reminderCountPerRetryClick: 1, fullInstructionReplay: 0 },
   humanReview: { status: "PENDING", required: ["DDM", "MATCHING", "MEMORY QUEST SUCCESS RECAP", "SMART SENTENCE COMPLETE RECAP", "SMART SENTENCE ORDER"] },
