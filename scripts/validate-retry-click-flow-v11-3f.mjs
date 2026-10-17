@@ -41,10 +41,15 @@ const clickGated = [
 ];
 const q003 = (await json("content/english/production/v11-1b/deterministic-activity-contracts.json")).contracts.find(item => item.itemId === "Y2M02-Q003");
 const orderCss = await read("play/smart-sentence/smart-sentence.css");
-const orderLayoutAndEditing = source.smartSentence.includes("const wrappedOrder = tokenCount > 4")
+const orderLayoutAndEditing = source.smartSentence.includes('orderPanel.insertAdjacentElement("afterend", tokenBank)')
+  && source.smartSentence.includes('.smart-sentence-shell").append(clone)')
+  && source.smartSentence.includes("root.dataset.orderContentReviewRequired")
+  && source.smartSentence.includes("window.DuduQSmartSentenceOrderLayoutQA")
   && source.smartSentence.includes("label.addEventListener(\"click\", removePlaced)")
   && source.smartSentence.includes("if (moved && index >= 0 && engine.place(id, index))")
-  && orderCss.includes("overflow-wrap:anywhere");
+  && orderCss.includes("overflow-wrap:anywhere")
+  && source.smartSentence.includes("Math.max(17, Math.min(22,")
+  && source.smartSentence.includes("fitActualRow(dropTargets, slotWidth, slotGap, slotRowTop, \"slot\", 88)");
 const spokenRanges = q003.spokenInstructionPlan?.pt?.includes("de 1 a 5") && q003.spokenInstructionPlan?.pt?.includes("de 6 a 10");
 const q003Numbers = q003.studentStimuli?.items || [];
 const q003AudioUsable = q003Numbers.length === 6 && q003Numbers.every(item => {
