@@ -60,7 +60,16 @@ const audioId = (conceptId, itemId) => {
   if (!entry || entry.status !== 'APPROVED' || !runtimeAudioIds.has(binding.audioId) || !(entry.path || entry.urlOrPath || entry.outputPath || entry.assets?.[0]?.path)) throw new Error(`AUDIO_NOT_RUNTIME_READY:${itemId}:${binding.audioId}`);
   return binding.audioId;
 };
-const audioRefsFor = c => [...c.requiredAudio.instruction, ...c.requiredAudio.learnerTargets, ...(c.requiredAudio.completedSentence || []), ...(c.requiredAudio.optionTargets || [])];
+const audioIdForRef = (ref, itemId) => {
+  if (!ref?.audioId) return audioId(ref?.audioConceptId, itemId);
+  const entry = audioById.get(ref.audioId);
+  if (!entry || entry.status !== 'APPROVED' || !runtimeAudioIds.has(ref.audioId) || !(entry.path || entry.urlOrPath || entry.outputPath || entry.assets?.[0]?.path)) {
+    throw new Error(`AUDIO_NOT_RUNTIME_READY:${itemId}:${ref.audioId}`);
+  }
+  return ref.audioId;
+};
+const audioRefsFor = c => [...c.requiredAudio.instruction, ...c.requiredAudio.learnerTargets, ...(c.requiredAudio.completedSentence || []),
+  ...(c.requiredAudio.optionTargets || []), ...(c.requiredAudio.completedTranslationPt || [])];
 const mediaRefsFor = c => c.requiredMedia.filter(row => row.mediaConceptId !== 'NO_MEDIA');
 const conceptIdFor = ref => ref?.mediaConcept?.mediaConceptId || ref?.media?.mediaConceptId || ref?.mediaConceptId;
 const audioConceptIdFor = ref => ref?.audioConcept?.audioConceptId || ref?.audioConceptId;
@@ -117,8 +126,8 @@ for (const [moduleId, records] of byModule) {
       curricularObjective: c.curricularObjective, learningTarget: c.learningTarget,
       mechanicId: c.mechanicId, mechanicMode: mode, primaryInstructionEn: c.visibleInstructionEn, supportInstructionPt: c.supportInstructionPt,
       instruction: { version: '1.2', titleEn: c.targetContent, titlePt: c.supportInstructionPt,
-        instructionEn, instructionPt, instructionAudioEnId: audioId(instructionEnRef.audioConceptId, c.itemId),
-        instructionAudioPtId: audioId(instructionPtRef.audioConceptId, c.itemId), audioOrder: ['en', 'pt'],
+        instructionEn, instructionPt, instructionAudioEnId: audioIdForRef(instructionEnRef, c.itemId),
+        instructionAudioPtId: audioIdForRef(instructionPtRef, c.itemId), audioOrder: ['en', 'pt'],
         languageEn: 'English', languagePt: 'pt-BR', standard: 'DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2' },
       stimulus: null, options: [], targetsToFind: [], items: [], targets: [], groups: [], pairs: [], sentence: null,
       tokens: [], orderedTokens: [], answerKey: null, mappings: [], bubbleDistractorPool: [], audioBindings: [], mediaBindings: [],
@@ -208,7 +217,11 @@ for (const [moduleId, records] of byModule) {
       item.options = stim.options.map((value, i) => ({ optionId: `${c.itemId}-O${i + 1}`, label: value, answerKey: value }));
       item.answerKey = c.correctAnswer;
       item.completedSentenceEn = stim.sourceSentence;
-      item.completedSentencePt = instructionPt;
+      item.completedSentencePt = c.completedSentencePt || instructionPt;
+      if (c.successTranslationPt && c.successTranslationAudioId) {
+        item.successTranslationPt = c.successTranslationPt;
+        item.successTranslationAudioId = c.successTranslationAudioId;
+      }
       const normalizeSpeech = speech => String(speech || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[.!?]+$/g, '').trim().toLowerCase().replace(/\s+/g, ' ');
       const existingSpeech = speech => audioRegistry.entries.find(row => row.status === 'APPROVED' &&
         row.locale === 'en-US' && !/instruction/i.test(row.semanticRole || '') && normalizeSpeech(row.speechText || row.transcript) === normalizeSpeech(speech) &&
@@ -221,7 +234,7 @@ for (const [moduleId, records] of byModule) {
       const fullSentenceRef = c.requiredAudio.completedSentence?.find(row => row.language === 'en-US');
       if (!fullSentenceRef) throw new Error(`SMART_SENTENCE_COMPLETION_AUDIO_REQUIREMENT_MISSING:${c.itemId}`);
       item.sentenceAudioEnId = audioId(fullSentenceRef.audioConceptId, c.itemId);
-      item.sentenceAudioPtId = audioId(instructionPtRef.audioConceptId, c.itemId);
+      item.sentenceAudioPtId = item.successTranslationAudioId || audioIdForRef(instructionPtRef, c.itemId);
     } else if (c.mechanicId === 'smart-sentence-order') {
       item.tokens = c.studentStimuli.units;
       item.orderedTokens = c.studentStimuli.canonicalOrder;
@@ -251,7 +264,11 @@ if (errors.length) throw new Error(`MATERIALIZATION_RUNTIME_CONTRACT_ERRORS:${er
 
 const missing = [];
 for (const c of sourceItems) {
-  for (const ref of audioRefsFor(c)) if (!audioMap.bindings[ref.audioConceptId]?.audioId) missing.push(`${c.itemId}:${ref.audioConceptId}`);
+  for (const ref of audioRefsFor(c)) {
+    if (ref.audioId) {
+      try { audioIdForRef(ref, c.itemId); } catch (error) { missing.push(error.message); }
+    } else if (!audioMap.bindings[ref.audioConceptId]?.audioId) missing.push(`${c.itemId}:${ref.audioConceptId}`);
+  }
   for (const ref of mediaRefsFor(c)) if (!mediaMap.bindings[ref.mediaConceptId]?.mediaId) missing.push(`${c.itemId}:${ref.mediaConceptId}`);
 }
 if (missing.length) throw new Error(`SOURCE_READY_DEPENDENCIES_PENDING:${missing.slice(0, 50).join('|')}`);
@@ -284,7 +301,10 @@ for (const contract of sourceItems) {
       const binding = mediaMap.bindings[value.mediaConceptId];
       value.mediaId = binding.mediaId; value.assetPath = binding.assetPath; value.assetStatus = 'RESOLVED';
     }
-    if (value.audioConceptId && audioMap.bindings[value.audioConceptId]) {
+    if (value.audioId && audioById.has(value.audioId)) {
+      const entry = audioById.get(value.audioId);
+      if (entry.status !== 'APPROVED' || !runtimeAudioIds.has(value.audioId)) errors.push(`AUDIO_DIRECT_BINDING_NOT_RUNTIME_READY:${contract.itemId}:${value.audioId}`);
+    } else if (value.audioConceptId && audioMap.bindings[value.audioConceptId]) {
       const binding = audioMap.bindings[value.audioConceptId];
       value.audioId = binding.audioId; value.assetPath = binding.path; value.assetStatus = 'RESOLVED';
     }
@@ -295,8 +315,12 @@ for (const contract of sourceItems) {
   contract.resolvedAssetBindings = {
     media: contract.requiredMedia.filter(row => row.mediaConceptId !== 'NO_MEDIA').map(row => ({ mediaConceptId: row.mediaConceptId,
       mediaId: mediaMap.bindings[row.mediaConceptId].mediaId, assetPath: mediaMap.bindings[row.mediaConceptId].assetPath })),
-    audio: audioRefsFor(contract).map(row => ({ audioConceptId: row.audioConceptId,
-      audioId: audioMap.bindings[row.audioConceptId].audioId, assetPath: audioMap.bindings[row.audioConceptId].path }))
+    audio: audioRefsFor(contract).map(row => {
+      const boundAudioId = audioIdForRef(row, contract.itemId);
+      const entry = audioById.get(boundAudioId);
+      return { audioConceptId: row.audioConceptId || null, audioId: boundAudioId,
+        assetPath: entry?.path || entry?.urlOrPath || entry?.outputPath || entry?.assets?.[0]?.path || audioMap.bindings[row.audioConceptId]?.path };
+    })
   };
 }
 

@@ -9,6 +9,7 @@ const audioRegistry = JSON.parse(fs.readFileSync(path.join(contentRoot, "audio",
 const audioProductionStatusPath = path.join(contentRoot, "production", "v11-3h", "order-result-audio-production.json");
 const audioProductionStatus = fs.existsSync(audioProductionStatusPath) ? JSON.parse(fs.readFileSync(audioProductionStatusPath, "utf8")) : { status: "NOT_RUN" };
 const modules = [];
+const ORDER_MAX_UNITS = 6;
 for (let year = 1; year <= 5; year += 1) {
   const yearDir = path.join(contentRoot, `year-${year}`);
   for (const dir of fs.readdirSync(yearDir, { withFileTypes: true }).filter(entry => entry.isDirectory())) {
@@ -50,17 +51,17 @@ const orderAudit = item => {
   const textFits = longest * font * 0.62 <= width * 0.86 + 0.01;
   const completedSentenceEn = (item.orderedTokens || []).join(" ").replace(/\s+([.,!?])/g, "$1").replace(/\s+/g, " ").trim();
   const resolvedAudio = audioRegistry.entries.find(entry => String(entry.locale || "").toLowerCase() === "en-us" && [entry.transcript, entry.speechText].some(text => String(text || "").trim().toLowerCase() === completedSentenceEn.toLowerCase()) && entry.voiceVersion === "DUDUQ_GOLD_VOICE_v1" && ["GENERATED", "APPROVED"].includes(entry.status));
-  return { itemId: item.item_id, tokenCount: count, longestToken: labels.reduce((a, b) => b.length > a.length ? b : a, ""), completedSentenceEn, sentenceAudioEnId: item.sentenceAudioEnId || resolvedAudio?.audioId || "", slotWidthArtboardPx: Math.round(width * 10) / 10, gapArtboardPx: Math.round(gap * 10) / 10, fontPx: Math.round(font * 10) / 10, rows: 1, contained: count >= 3 && count <= 9 && width >= 56 && textFits };
+  return { itemId: item.item_id, tokenCount: count, longestToken: labels.reduce((a, b) => b.length > a.length ? b : a, ""), completedSentenceEn, sentenceAudioEnId: item.sentenceAudioEnId || resolvedAudio?.audioId || "", slotWidthArtboardPx: Math.round(width * 10) / 10, gapArtboardPx: Math.round(gap * 10) / 10, fontPx: Math.round(font * 10) / 10, rows: 1, contained: count >= 1 && count <= ORDER_MAX_UNITS && width >= 56 && textFits };
 };
 const orderContentCorrections = [
   { itemId: "Y3M03-Q019", old: "He is my mother.", current: "She is my mother.", reason: "Pronoun agrees with the existing family referent; family vocabulary and possessive structure are preserved." },
   { itemId: "Y3M04-Q019", old: "My favorite toy is a one.", current: "I have one favorite toy.", reason: "Repairs invalid article/number construction while retaining one + toy and the number-and-item objective." },
   { itemId: "Y3M06-Q019", old: "I like I do not like carrots.", current: "I do not like carrots.", reason: "Removes a contradictory fused fragment; preserves preference structure and source-listed food." },
-  { itemId: "Y4M01-Q019", old: "What's the day today? Today is favorite.", current: "What day is it today? Today is Monday.", reason: "Uses an approved weekday target and repairs question/response grammar." },
-  { itemId: "Y4M06-Q019", old: "Where is the beside?", current: "Where is the bathroom? It is beside the kitchen.", reason: "Uses only the module's approved room vocabulary to model the beside relation and stays within the one-line layout envelope." },
-  { itemId: "Y5M02-Q019", old: "I I do not like carrots in the morning.", current: "I do not like carrots in the morning.", reason: "Removes the duplicated subject; keeps the food preference and time phrase." },
+  { itemId: "Y4M01-Q019", old: "What's the day today? Today is favorite.", current: "Today is Monday.", reason: "Uses the approved weekday target in a concise natural sentence within the canonical six-unit limit." },
+  { itemId: "Y4M06-Q019", old: "Where is the beside?", current: "The bathroom is beside the kitchen.", reason: "Uses only approved room vocabulary to model the beside relation in six units." },
+  { itemId: "Y5M02-Q019", old: "I I do not like carrots in the morning.", current: "I dislike carrots in the morning.", reason: "Uses the approved preference verb dislike while retaining carrots and the time phrase in six units." },
   { itemId: "Y5M03-Q019", old: "I am a he.", current: "He is a teacher.", reason: "Repairs the pronoun/role phrase using an explicitly active occupation in the module vocabulary." },
-  { itemId: "Y5M06-Q019", old: "The There is a plate. is in my city.", current: "There is a park in my city.", reason: "Removes merged fragments and uses an approved city-place target." }
+  { itemId: "Y5M06-Q019", old: "The There is a plate. is in my city.", current: "There is a park.", reason: "Removes merged fragments and preserves the approved There is plus city-place target in four units." }
 ].map(row => ({ ...row, masterScopePreserved: true }));
 const activities = modules.map(item => ({ moduleId: item.moduleId, itemId: item.item_id, mechanicId: item.mechanicId, successRecapMode: classify(item), relationCount: item.mechanicId === "drag-drop-multimedia" ? (item.items || []).length : (item.pairs || []).length }));
 const routeByMechanic = { "drag-drop-multimedia": "/play/drag-drop-multimedia/", matching: "/play/matching/", "memory-quest": "/play/memory-quest/", "smart-sentence-complete": "/play/smart-sentence/", "smart-sentence-order": "/play/smart-sentence/" };

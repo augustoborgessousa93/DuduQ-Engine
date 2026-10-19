@@ -41,15 +41,20 @@ const clickGated = [
 ];
 const q003 = (await json("content/english/production/v11-1b/deterministic-activity-contracts.json")).contracts.find(item => item.itemId === "Y2M02-Q003");
 const orderCss = await read("play/smart-sentence/smart-sentence.css");
-const orderLayoutAndEditing = source.smartSentence.includes('orderPanel.insertAdjacentElement("afterend", tokenBank)')
-  && source.smartSentence.includes('.smart-sentence-shell").append(clone)')
-  && source.smartSentence.includes("root.dataset.orderContentReviewRequired")
-  && source.smartSentence.includes("window.DuduQSmartSentenceOrderLayoutQA")
-  && source.smartSentence.includes("label.addEventListener(\"click\", removePlaced)")
-  && source.smartSentence.includes("if (moved && index >= 0 && engine.place(id, index))")
-  && orderCss.includes("overflow-wrap:anywhere")
-  && source.smartSentence.includes("Math.max(17, Math.min(22,")
-  && source.smartSentence.includes("fitActualRow(dropTargets, slotWidth, slotGap, slotRowTop, \"slot\", 88)");
+// Runtime V11.3W freezes target geometry per activity and selectively
+// returns incorrect tokens on Try Again; keep this audit semantic rather
+// than coupled to a particular renderer's DOM construction syntax.
+const orderLayoutChecks = {
+  selectiveRetry: source.smartSentence.includes("retryOrderIncorrect()"),
+  correctSlotsRetained: source.smartSentence.includes("retainedCorrectSlots.has(index)"),
+  stableSourceIdentity: source.smartSentence.includes("card.dataset.sourceIndex = String(index)"),
+  geometryOnlyOnInitResize: source.smartSentence.includes("recalculateTargetGeometry = false") && source.smartSentence.includes("if (recalculateTargetGeometry) dropTargets.forEach"),
+  frozenGeometryDiagnostic: source.smartSentence.includes("root.dataset.orderFrozenSlotGeometry"),
+  stateDiagnostic: source.smartSentence.includes("window.DuduQSmartSentenceOrderStateQA"),
+  overflowVisibleForRemoveControl: orderCss.includes(".smart-sentence-order-drop-target-official{overflow:visible"),
+  correctStateDoesNotResizeArt: !/smart-sentence--order \.smart-sentence-order-drop-target-official\[data-visual-state="correct"\]>img:first-child\{[^}]*width:117/.test(orderCss)
+};
+const orderLayoutAndEditing = Object.values(orderLayoutChecks).every(Boolean);
 const spokenRanges = q003.spokenInstructionPlan?.pt?.includes("de 1 a 5") && q003.spokenInstructionPlan?.pt?.includes("de 6 a 10");
 const q003Numbers = q003.studentStimuli?.items || [];
 const q003AudioUsable = q003Numbers.length === 6 && q003Numbers.every(item => {
@@ -66,7 +71,7 @@ const report = {
   contracts: { total: contracts.length, target: targetCount, task: taskCount, none: noneCount, answerLeakCount },
   retryTiming: { autoReminderAfterWrong: 0, explicitTryAgainRequired: true, reminderCountPerClick: 1, fullInstructionReplay: 0, globalAutoReplayRemoved, clickGatedByMechanic: clickGated },
   grouping: { itemId: "Y2M02-Q003", group1: q003.studentStimuli.groups[0].label, group2: q003.studentStimuli.groups[1].label, spokenRanges, numberAudioIdsChecked: q003Numbers.length, numberAudiosRegistered: q003AudioUsable, humanPronunciationReview: "PENDING" },
-  smartSentenceOrder: { itemId: "Y3M01-Q019", route: "PASS", mode: "ORDER", layoutAndEditing: orderLayoutAndEditing, wrongFeedbackAudioId: "AUD-V11-3F-ORDER-WRONG-PT", successFeedbackAudioId: "AUD-V11-3F-ORDER-SUCCESS-PT", retryTaskAudioId: "AUD-V11-3F-RETRY-ORDER-PT", answerLeak: "PASS_TASK_DOES_NOT_SPEAK_ANSWER" },
+  smartSentenceOrder: { itemId: "Y3M01-Q019", route: "PASS", mode: "ORDER", layoutAndEditing: orderLayoutAndEditing, layoutChecks: orderLayoutChecks, wrongFeedbackAudioId: "AUD-V11-3F-ORDER-WRONG-PT", successFeedbackAudioId: "AUD-V11-3F-ORDER-SUCCESS-PT", retryTaskAudioId: "AUD-V11-3F-RETRY-ORDER-PT", answerLeak: "PASS_TASK_DOES_NOT_SPEAK_ANSWER" },
   requiredRetryAudio: { count: requiredAudio.length, missing: missingAudio },
   sourceProduct: { modules: "30/30", activities: "600/600", validationScript: "scripts/qa-v11-3-source-product.mjs", validationStatus: "PASS" },
   humanStatus: "PENDING",

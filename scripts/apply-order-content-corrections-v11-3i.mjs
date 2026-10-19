@@ -6,11 +6,11 @@ const corrections = {
   "Y3M03-Q019": { result: "She is my mother.", tokens: ["She", "is", "my", "mother."], bank: ["mother.", "my", "is", "She"], audioId: "AUD-V11-2B-172C0B69B5EB0378" },
   "Y3M04-Q019": { result: "I have one favorite toy.", tokens: ["I", "have", "one", "favorite", "toy."], bank: ["toy.", "one", "I", "favorite", "have"] },
   "Y3M06-Q019": { result: "I do not like carrots.", tokens: ["I", "do", "not", "like", "carrots."], bank: ["carrots.", "not", "I", "like", "do"] },
-  "Y4M01-Q019": { result: "What day is it today? Today is Monday.", tokens: ["What", "day", "is", "it", "today?", "Today", "is", "Monday."], bank: ["Monday.", "today?", "What", "is", "Today", "day", "it", "is"] },
-  "Y4M06-Q019": { result: "Where is the bathroom? It is beside the kitchen.", tokens: ["Where", "is", "the", "bathroom?", "It", "is", "beside", "the", "kitchen."], bank: ["kitchen.", "beside", "the", "bathroom?", "Where", "is", "It", "the", "is"] },
-  "Y5M02-Q019": { result: "I do not like carrots in the morning.", tokens: ["I", "do", "not", "like", "carrots", "in", "the", "morning."], bank: ["morning.", "the", "in", "carrots", "not", "I", "like", "do"] },
+  "Y4M01-Q019": { result: "Today is Monday.", tokens: ["Today", "is", "Monday."], bank: ["Monday.", "Today", "is"] },
+  "Y4M06-Q019": { result: "The bathroom is beside the kitchen.", tokens: ["The", "bathroom", "is", "beside", "the", "kitchen."], bank: ["kitchen.", "beside", "The", "bathroom", "the", "is"] },
+  "Y5M02-Q019": { result: "I dislike carrots in the morning.", tokens: ["I", "dislike", "carrots", "in", "the", "morning."], bank: ["morning.", "the", "carrots", "I", "in", "dislike"] },
   "Y5M03-Q019": { result: "He is a teacher.", tokens: ["He", "is", "a", "teacher."], bank: ["teacher.", "a", "is", "He"] },
-  "Y5M06-Q019": { result: "There is a park in my city.", tokens: ["There", "is", "a", "park", "in", "my", "city."], bank: ["city.", "my", "in", "park", "a", "There", "is"] }
+  "Y5M06-Q019": { result: "There is a park.", tokens: ["There", "is", "a", "park."], bank: ["park.", "a", "There", "is"] }
 };
 const touched = new Set();
 let changedInFile = false;
