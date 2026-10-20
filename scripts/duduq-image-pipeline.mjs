@@ -57,7 +57,11 @@ async function imageInfo(file) {
   let format = "unknown", width = 0, height = 0;
   let pngDetails = null;
   if (bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) {
-    format = "png"; width = bytes.readUInt32BE(16); height = bytes.readUInt32BE(20); pngDetails = inspectPng(bytes);
+    format = "png"; width = bytes.readUInt32BE(16); height = bytes.readUInt32BE(20);
+    // Registry integrity accepts ordinary opaque PNGs too. The stricter inspectPng()
+    // policy remains reserved for newly generated transparent artwork QC.
+    pngDetails = inspectPng(bytes);
+    if (!pngDetails.valid) pngDetails = inspectPngAsset(bytes);
   } else if (bytes[0] === 0xff && bytes[1] === 0xd8) { format = "jpeg"; const dimensions = inspectJpeg(bytes); width = dimensions.width || 0; height = dimensions.height || 0; }
   else if (bytes.toString("ascii", 0, 4) === "RIFF" && bytes.toString("ascii", 8, 12) === "WEBP") format = "webp";
   else if (bytes.toString("ascii", 0, 6).startsWith("GIF8")) format = "gif";
@@ -66,6 +70,29 @@ async function imageInfo(file) {
   if (format === "png" && (width < 1 || height < 1)) return { valid: false, reason: "INVALID_IMAGE_DIMENSIONS" };
   if (format === "png" && !pngDetails?.valid) return { valid: false, reason: pngDetails?.reason || "INVALID_PNG" };
   return { valid: true, format, width: width || null, height: height || null, bytes: bytes.length, sha256: sha256(bytes), ...(format === "png" ? pngDetails : {}), transparentCapable: format === "png" && [4, 6].includes(bytes[25]) };
+}
+
+function inspectPngAsset(bytes) {
+  const signature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
+  if (!Buffer.isBuffer(bytes) || bytes.length < 45 || !bytes.subarray(0, 8).equals(signature) || bytes.toString("ascii", 12, 16) !== "IHDR") {
+    return { valid: false, reason: "INVALID_PNG_IHDR" };
+  }
+  const width = bytes.readUInt32BE(16), height = bytes.readUInt32BE(20), bitDepth = bytes[24], colorType = bytes[25], interlace = bytes[28];
+  const validDepths = { 0: [1, 2, 4, 8, 16], 2: [8, 16], 3: [1, 2, 4, 8], 4: [8, 16], 6: [8, 16] };
+  if (!width || !height || width * height > 20_000_000 || !validDepths[colorType]?.includes(bitDepth) || bytes[26] !== 0 || bytes[27] !== 0 || ![0, 1].includes(interlace)) {
+    return { valid: false, reason: "INVALID_PNG_HEADER_FORMAT" };
+  }
+  let offset = 8, hasIDAT = false, hasIEND = false, hasPalette = colorType !== 3;
+  while (offset + 12 <= bytes.length) {
+    const length = bytes.readUInt32BE(offset), type = bytes.toString("ascii", offset + 4, offset + 8), end = offset + 12 + length;
+    if (end > bytes.length) return { valid: false, reason: "TRUNCATED_PNG_CHUNK" };
+    if (type === "PLTE") hasPalette = true;
+    if (type === "IDAT") hasIDAT = true;
+    if (type === "IEND") { hasIEND = length === 0; break; }
+    offset = end;
+  }
+  if (!hasPalette || !hasIDAT || !hasIEND) return { valid: false, reason: "INCOMPLETE_PNG_CHUNKS" };
+  return { valid: true, width, height, bitDepth, colorType, interlace, transparentCapable: [4, 6].includes(colorType), qcStatus: "EXISTING_ASSET_FORMAT_VALID" };
 }
 
 function inspectPng(bytes) {
