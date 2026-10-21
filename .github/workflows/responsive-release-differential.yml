@@ -140,6 +140,7 @@ jobs:
           path: |
             ci-run/
             harness/ci-run/
+            harness/differential-112-report.json
             ci-output-artifact.json
             harness/baseline-recovery.json
           if-no-files-found: warn

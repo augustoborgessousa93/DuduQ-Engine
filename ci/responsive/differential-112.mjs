@@ -71,7 +71,9 @@ try {
     else if (baseline.result !== 'PASS' && candidate.result === 'PASS') classification = 'CANDIDATE_IMPROVEMENT';
     else if (signature(baseline) === signature(candidate)) classification = 'PREEXISTING_IDENTICAL';
     else classification = 'INCONCLUSIVE';
-    rows.push({ activityId: item.activityId, moduleId: item.module, mechanic: item.mechanic, route: item.route, baseline, candidate, classification });
+    const row = { activityId: item.activityId, moduleId: item.module, mechanic: item.mechanic, route: item.route, baseline, candidate, classification };
+    rows.push(row);
+    if (classification === 'NEW_REGRESSION' || classification === 'INCONCLUSIVE') console.log(`DIFF_DETAIL ${JSON.stringify(row)}`);
     if ((index + 1) % 16 === 0) console.log(`DIFFERENTIAL ${index + 1}/${cases.length}`);
   }
 } finally { await browser.close(); }
@@ -81,7 +83,7 @@ const status = rows.length === 112 && counts.NEW_REGRESSION === 0 && counts.ENVI
 const report = { schema: 'DUDUQ_BASELINE_CANDIDATE_DIFFERENTIAL_CI_V1', testedAt: new Date().toISOString(), browser: 'Chromium', browserVersion,
   viewport: { width: 1366, height: 768 }, baseline: { origin: baselineOrigin, manifestSha256: 'd2155c9f546d3316774af3cea0476877fdf074a6cbebcbe04dedf7ebed7a29c6' },
   candidate: { origin: candidateOrigin, manifestSha256: expectedCandidateHash }, requested: 112, completed: rows.length, counts, rows, status };
-await writeFile('differential-112-report.json', JSON.stringify(report, null, 2) + '\n');
+await writeFile('ci-run/differential-112-report.json', JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify({ status, completed: rows.length, counts }, null, 2));
 assert.equal(status, 'PASS', 'no candidate regressions or inconclusive cases');
 
