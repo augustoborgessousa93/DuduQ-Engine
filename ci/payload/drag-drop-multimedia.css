@@ -1,0 +1,798 @@
+html,
+body {
+  width: 100%;
+  margin: 0;
+}
+
+body {
+  background: #87c95a;
+  font-family: Fredoka, ui-rounded, sans-serif;
+}
+
+#game.drag-drop-multimedia-screen {
+  display: block;
+  container: duduq-game / inline-size;
+  width: 100%;
+  margin: 0;
+  overflow: visible;
+  background: #87c95a;
+}
+
+#game.drag-drop-multimedia-screen > .world-backdrop,
+#game.drag-drop-multimedia-screen > .readability-veil {
+  position: fixed;
+  inset: 0;
+}
+
+#game.drag-drop-multimedia-screen > .dnd-game-shell {
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  padding: 12px 24px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Penpot board 6b1bdf21: empty central surface (1210 Ã— 360). */
+#game.drag-drop-multimedia-screen .dnd-multimedia-central-panel {
+  display: block;
+  box-sizing: border-box;
+  width: min(1210px, 100%);
+  aspect-ratio: 1210 / 360;
+  height: auto;
+  margin: 24px auto 0;
+  position: relative;
+  container-type: inline-size;
+  border: 2px dotted #e8d3a6;
+  border-radius: 25px;
+  background: #fffdf7;
+  box-shadow: 0 5px 0 #b8a68e;
+}
+
+/* Penpot component Rectangle 01 (board 6b1bdf21): translucent shell + official pet image. */
+#game.drag-drop-multimedia-screen .dnd-multimedia-image-option {
+  position: absolute;
+  box-sizing: border-box;
+  left: 4.0495868%;
+  top: 9.1666667%;
+  width: 21.1570248%;
+  height: 57.7777778%;
+  margin: 0;
+  border: 0;
+  border-radius: min(30px, 2.479cqi);
+  background: rgb(184 166 142 / 12.2549%);
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-image-option::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  box-sizing: border-box;
+  border: min(3px, 0.248cqi) solid #b17f00;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-image-option[data-state="correct"]::after { border-color: #64D99C; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-image-option[data-state="incorrect"]::after { border-color: #EC7C7C; }
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-image-option--02 {
+  left: 27.8512397%;
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-image-option--03 {
+  left: 51.6528926%;
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-image-option--04 {
+  left: 75.4545455%;
+}
+
+/* Penpot board 6b1bdf21: DUDUQ - RETÃ‚NGULO GROUP (246 Ã— 87). */
+#game.drag-drop-multimedia-screen .dnd-multimedia-question-group {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  left: 4.7107438%;
+  top: 71.3888889%;
+  width: min(246px, 20.3305785cqi);
+  aspect-ratio: 246 / 87;
+  margin: 0;
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-question-group img {
+  grid-area: 1 / 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-question-group__label {
+  position: absolute;
+  left: 26.4227642%;
+  top: 37.9310345%;
+  width: 47.1544715%;
+  height: 25.2873563%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  color: #b17f00;
+  opacity: 0.343137;
+  font-family: Nunito, sans-serif;
+  font-size: min(15px, 1.2396694cqi);
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.4165107115;
+  letter-spacing: 0;
+  text-align: left;
+  white-space: pre;
+  pointer-events: none;
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-question-group--02 {
+  left: 28.1818182%;
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-question-group--03 {
+  left: 51.6528926%;
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-question-group--04 {
+  left: 75.4545455%;
+}
+
+/* Penpot board e3b9056b: neutral draggable word item (280 Ã— 80). */
+#game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-bank {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  width: min(1186px, 100%);
+  margin: 24px auto 5px;
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item {
+  position: relative;
+  box-sizing: border-box;
+  width: min(280px, 100%);
+  aspect-ratio: 280 / 80;
+  flex: 0 1 280px;
+  margin: 0;
+  container-type: inline-size;
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item__surface {
+  position: absolute;
+  left: 1.4285714%;
+  top: 0;
+  box-sizing: border-box;
+  width: 98.5714286%;
+  height: 100%;
+  border: 2px solid #c6ad6d;
+  border-radius: 25px;
+  background: #fff;
+  box-shadow: 0 5px 0 #b8a68e;
+}
+
+/* Text and audio use the same Penpot-neutral item shell and depth layer. */
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play-art {
+  position: absolute;
+  z-index: 1;
+  left: -3.9285714%;
+  top: -18.75%;
+  display: none;
+  width: 109.2857143% !important;
+  height: 156.25% !important;
+  max-width: none !important;
+  /* Keep the full circle, the speaker glyph, and the small lower cast shadow. */
+  clip-path: inset(20.8% 40.2% 29.6% 40.2%);
+  pointer-events: none;
+  visibility: hidden;
+}
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play { z-index: 2; }
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item__grip {
+  position: absolute;
+  left: 0;
+  top: 16.25%;
+  width: 20%;
+  height: 67.5%;
+  overflow: visible;
+  fill: none;
+  stroke: #b8a68e;
+  stroke-width: 2;
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item__label {
+  position: absolute;
+  left: 40%;
+  top: 28.75%;
+  width: 20%;
+  height: 42.5%;
+  color: #364b43;
+  font-family: Nunito, sans-serif;
+  font-size: min(24px, 8.5714286cqi);
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.4165107115;
+  letter-spacing: 0;
+  text-align: left;
+  white-space: pre;
+  pointer-events: none;
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item {
+  position: relative;
+  box-sizing: border-box;
+  width: min(280px, 100%);
+  aspect-ratio: 280 / 80;
+  flex: 0 1 280px;
+  margin: 0;
+}
+
+
+/* Interaction overlays do not change the Penpot artwork underneath. */
+#game.drag-drop-multimedia-screen [data-item-id] { touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item,
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item {
+  transform-origin: center;
+  scale: 1;
+  transition: scale 150ms ease, filter 150ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  #game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item:hover:not([data-drag-state="dragging"]):not([data-state="correct"]),
+  #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item:hover:not([data-drag-state="dragging"]):not([data-state="correct"]) {
+    z-index: 5;
+    scale: 1.05;
+    filter: drop-shadow(0 6px 7px rgb(25 54 44 / 22%));
+  }
+}
+#game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item:active:not([data-drag-state="dragging"]):not([data-state="correct"]),
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item:active:not([data-drag-state="dragging"]):not([data-state="correct"]) { scale: 1.02; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item:focus-visible,
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item:focus-within { z-index: 5; scale: 1.05; filter: drop-shadow(0 0 5px rgb(49 143 192 / 72%)); }
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item:has(.dnd-multimedia-audio-item__play:focus-visible) { outline: 3px solid #fff; outline-offset: 3px; }
+#game.drag-drop-multimedia-screen [data-item-id][data-drag-state="dragging"] { cursor: grabbing; filter: drop-shadow(0 8px 10px rgb(25 56 44 / 22%)); }
+#game.drag-drop-multimedia-screen .dnd-multimedia-question-group[data-occupied="true"] .dnd-multimedia-question-group__label { visibility: hidden; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-question-group > [data-item-id] {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  width: 92%;
+  height: auto;
+  flex: none;
+  transform: translate(-50%, -50%);
+}
+#game.drag-drop-multimedia-screen .dnd-multimedia-question-group > .dnd-multimedia-drag-word-item { aspect-ratio: 280 / 80; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-question-group > .dnd-multimedia-audio-item { aspect-ratio: 280 / 80; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-remove-option {
+  position: absolute;
+  z-index: 6;
+  top: -18%;
+  right: -3%;
+  display: grid;
+  place-items: center;
+  width: min(34px, 15cqi);
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+#game.drag-drop-multimedia-screen .dnd-multimedia-remove-option[hidden] { display: none !important; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-remove-option img { display: block; width: 100%; height: 100%; pointer-events: none; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-remove-option:focus-visible { outline: 3px solid #175c93; outline-offset: 2px; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item[data-state="correct"] .dnd-multimedia-drag-word-item__surface { border-color: #3bb46b; box-shadow: 0 0 0 3px rgb(59 180 107 / 23%), 0 5px 0 #64D99C; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item[data-state="incorrect"] .dnd-multimedia-drag-word-item__surface { border-color: #e62b51; box-shadow: 0 0 0 3px rgb(230 43 81 / 20%), 0 5px 0 #EC7C7C; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item[data-state="correct"] .dnd-multimedia-drag-word-item__surface { border-color: #3bb46b; box-shadow: 0 0 0 3px rgb(59 180 107 / 23%), 0 5px 0 #64D99C; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item[data-state="incorrect"] .dnd-multimedia-drag-word-item__surface { border-color: #e62b51; box-shadow: 0 0 0 3px rgb(230 43 81 / 20%), 0 5px 0 #EC7C7C; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-question-group[data-state="correct"] { filter: drop-shadow(0 0 4px rgb(59 180 107 / 48%)); }
+#game.drag-drop-multimedia-screen .dnd-multimedia-question-group[data-state="incorrect"] { filter: drop-shadow(0 0 4px rgb(230 43 81 / 45%)); }
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  width: 18.9285714%;
+  height: auto;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+  transform: translate(-50%, -50%);
+}
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play[data-audio-state="playing"] { cursor: progress; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-audio-item__play:disabled { cursor: default; opacity: 1; }
+
+/* Existing official Confirmar component: same layers and measurements as D&D. */
+#game.drag-drop-multimedia-screen .dnd-multimedia-confirm-motion {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 24px auto 34px;
+  pointer-events: none;
+}
+#game.drag-drop-multimedia-screen .dnd-multimedia-confirm-motion[hidden] { display: none !important; }
+#game.drag-drop-multimedia-screen .dnd-confirm-action {
+  position: relative;
+  inset: auto !important;
+  isolation: isolate;
+  display: block;
+  box-sizing: border-box;
+  width: 304px;
+  min-width: 304px;
+  height: 91px;
+  min-height: 91px;
+  padding: 0;
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform 160ms ease;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: #fff;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  pointer-events: auto;
+  cursor: pointer;
+}
+#game.drag-drop-multimedia-screen .dnd-confirm-action:disabled { cursor: default; }
+#game.drag-drop-multimedia-screen .dnd-confirm-action::before,
+#game.drag-drop-multimedia-screen .dnd-confirm-action::after { content: none; display: none; }
+#game.drag-drop-multimedia-screen .dnd-confirm-action > .dnd-confirm-action__shadow,
+#game.drag-drop-multimedia-screen .dnd-confirm-action > .dnd-confirm-action__depth,
+#game.drag-drop-multimedia-screen .dnd-confirm-action > .dnd-confirm-action__surface,
+#game.drag-drop-multimedia-screen .dnd-confirm-action > .dnd-confirm-action__highlight,
+#game.drag-drop-multimedia-screen .dnd-confirm-action > .dnd-confirm-action__label {
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+#game.drag-drop-multimedia-screen .dnd-confirm-action__shadow { display: none !important; }
+#game.drag-drop-multimedia-screen .dnd-confirm-action__depth { z-index: 1; left: 0; top: 9.671498px; width: 304px; height: 73.745169px; border-radius: 19px; background: #175c93; }
+#game.drag-drop-multimedia-screen .dnd-confirm-action__surface { z-index: 2; left: 0; top: 0; width: 304px; height: 73.745169px; border-radius: 19px; background: #349fdf; box-shadow: 4px 4px 4px 0 #00000059; }
+#game.drag-drop-multimedia-screen .dnd-confirm-action__highlight { z-index: 3; left: 15.2px; top: 6.044686px; width: 59.714286px; height: 8.46256px; border-radius: 6px; background: #e1e0f5; opacity: .16; }
+#game.drag-drop-multimedia-screen .dnd-confirm-action__label { z-index: 4; left: 66px; top: 22px; width: auto; height: 36px; color: #fff; font-family: Fredoka, sans-serif; font-size: 30px; font-style: normal; font-weight: 700; line-height: 1.2; letter-spacing: .5px; text-align: left; white-space: nowrap; }
+#game.drag-drop-multimedia-screen .dnd-confirm-action:not(:disabled):hover { transform: scale(1.05); }
+#game.drag-drop-multimedia-screen .dnd-confirm-action:focus-visible { outline: 3px solid #175c93; outline-offset: 7px; }
+
+/* Canonical Matching / Drag & Drop result footer and FX layer. */
+#game.drag-drop-multimedia-screen .result-fx-layer { position: fixed; z-index: 50; inset: 0; display: none; overflow: hidden; pointer-events: none; contain: layout paint; }
+#game.drag-drop-multimedia-screen .result-fx-layer[data-effect="correct"] { display: block; }
+#game.drag-drop-multimedia-screen .result-fx-layer[data-effect=""] { display: none; }
+#game.drag-drop-multimedia-screen .feedback-ribbon {
+  --feedback-edge: #3a925d;
+  position: fixed;
+  z-index: 51;
+  right: 24px;
+  bottom: 10px;
+  left: 24px;
+  display: grid;
+  grid-template-columns: 82px minmax(0,1fr) auto;
+  align-items: center;
+  column-gap: 18px;
+  min-height: 92px;
+  padding: 10px 26px;
+  border: 1px solid #b9e1c5;
+  border-radius: 25px;
+  background: linear-gradient(135deg,rgba(250,255,250,.99),rgba(235,249,238,.98));
+  box-shadow: 0 5px 0 rgba(51,105,68,.2),0 12px 24px rgba(29,62,43,.14),inset 0 1px #fff;
+  animation: dnd-multimedia-feedback-enter 220ms ease-out both;
+}
+#game.drag-drop-multimedia-screen .feedback-ribbon[hidden] { display: none !important; }
+#game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] { --feedback-edge: #b75852; border-color: #f0c1b8; background: linear-gradient(135deg,rgba(255,251,249,.99),rgba(255,238,234,.99)); }
+#game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"],
+#game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] {
+  position: fixed !important;
+  top: auto !important;
+  right: 0 !important;
+  bottom: 10px !important;
+  left: 0 !important;
+  width: min(calc(100cqi - 48px), 1299px) !important;
+  height: auto !important;
+  min-height: 92px !important;
+  margin-inline: auto !important;
+  box-sizing: border-box !important;
+  transform: none !important;
+  transform-origin: initial !important;
+  scale: 1 !important;
+}
+#game.drag-drop-multimedia-screen .feedback-ribbon .feedback-mascot { grid-column: auto; width: 82px; height: 70px; margin: 0; object-fit: contain; }
+#game.drag-drop-multimedia-screen .feedback-copy h2 { margin: 0 0 3px; color: #318052; font: 700 24px/1.1 Fredoka, sans-serif; }
+#game.drag-drop-multimedia-screen .feedback-copy p { margin: 0; color: #5f806b; font: 700 14px/1.25 Nunito, sans-serif; }
+#game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-copy h2 { color: #ad5a55; }
+#game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-copy p { color: #92726d; }
+#game.drag-drop-multimedia-screen .feedback-action { align-self: center; }
+#game.drag-drop-multimedia-screen .feedback-action {
+  --button-face-top: #58dc88;
+  --button-face-mid: #2dc36a;
+  --button-face-base: #20a953;
+  --button-edge: #178347;
+  width: 152px;
+  min-width: 152px;
+  height: 60px;
+  min-height: 60px;
+  padding: 0 20px;
+  border: 1px solid rgba(255,255,255,.42);
+  border-radius: 18px;
+  color: white;
+  font: 700 17px/1 Fredoka, sans-serif;
+  background-color: var(--button-face-mid);
+  background-image: linear-gradient(180deg,rgba(255,255,255,.38) 0%,rgba(255,255,255,.13) 16%,rgba(255,255,255,0) 48%),linear-gradient(180deg,var(--button-face-top) 0%,var(--button-face-mid) 75%,var(--button-face-base) 100%);
+  box-shadow: 0 5px 0 var(--button-edge), 0 8px 15px rgba(26,87,47,.2), inset 0 1px 0 rgba(255,255,255,.68), inset 0 -2px 0 rgba(18,105,52,.14);
+  text-shadow: 0 1px 1px rgba(19,104,55,.2);
+  cursor: pointer;
+  transition: filter 140ms ease, transform 140ms ease, box-shadow 140ms ease;
+}
+#game.drag-drop-multimedia-screen .feedback-action:hover { filter: brightness(1.055) saturate(1.04); transform: translateY(-1px); box-shadow: 0 6px 0 var(--button-edge), 0 11px 18px rgba(26,87,47,.22), inset 0 1px 0 rgba(255,255,255,.75), inset 0 -2px 0 rgba(18,105,52,.14); }
+#game.drag-drop-multimedia-screen .feedback-action:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--button-edge), 0 4px 8px rgba(26,87,47,.16), inset 0 1px 0 rgba(255,255,255,.5), inset 0 -1px 0 rgba(18,105,52,.14); }
+#game.drag-drop-multimedia-screen .feedback-action:focus-visible { outline: 3px solid #175c93; outline-offset: 3px; }
+#game.drag-drop-multimedia-screen .feedback-action.is-correct { --button-face-top:#58dc88; --button-face-mid:#2dc36a; --button-face-base:#20a953; --button-edge:#178347; }
+#game.drag-drop-multimedia-screen .feedback-action.is-incorrect { --button-face-top:#f7aa9b; --button-face-mid:#e67c72; --button-face-base:#ce625d; --button-edge:#ad5954; border-color: rgba(255,255,255,.46); background-image: linear-gradient(180deg,rgba(255,255,255,.38) 0%,rgba(255,255,255,.13) 16%,rgba(255,255,255,0) 48%),linear-gradient(180deg,var(--button-face-top) 0%,var(--button-face-mid) 78%,var(--button-face-base) 100%); box-shadow: 0 5px 0 var(--button-edge), 0 8px 15px rgba(87,42,38,.17), inset 0 1px 0 rgba(255,255,255,.68), inset 0 -2px 0 rgba(119,48,45,.16); }
+
+/* DDM shares the Target Shooter skin class for its HUD, but its feedback CTA
+   belongs to the responsive DDM footer grid, not the fixed Target Shooter board. */
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"] .feedback-action,
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-action {
+  position: static !important;
+  inset: auto !important;
+  grid-column: 3 !important;
+  width: 152px !important;
+  min-width: 152px !important;
+  height: 60px !important;
+  min-height: 60px !important;
+  padding: 0 20px !important;
+  display: grid !important;
+  place-items: center !important;
+  align-self: center !important;
+  box-sizing: border-box !important;
+  border: 1px solid rgba(255,255,255,.42) !important;
+  border-radius: 18px !important;
+  background-color: var(--button-face-mid) !important;
+  background-image: linear-gradient(180deg,rgba(255,255,255,.38) 0%,rgba(255,255,255,.13) 16%,rgba(255,255,255,0) 48%),linear-gradient(180deg,var(--button-face-top) 0%,var(--button-face-mid) 75%,var(--button-face-base) 100%) !important;
+  box-shadow: 0 5px 0 var(--button-edge), 0 8px 15px rgba(26,87,47,.2), inset 0 1px 0 rgba(255,255,255,.68), inset 0 -2px 0 rgba(18,105,52,.14) !important;
+  color: #fff !important;
+  font: 700 17px/1 Fredoka, sans-serif !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  transform: none !important;
+}
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"] .feedback-action::before,
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"] .feedback-action::after,
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-action::before,
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-action::after {
+  content: none !important;
+  display: none !important;
+}
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"],
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] {
+  display: grid !important;
+  grid-template-columns: 82px minmax(0,1fr) auto !important;
+  align-items: center !important;
+  column-gap: 18px !important;
+  padding: 10px 26px !important;
+}
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"] .feedback-mascot,
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-mascot {
+  position: static !important;
+  inset: auto !important;
+  grid-column: 1 !important;
+  width: 82px !important;
+  height: 70px !important;
+  margin: 0 !important;
+  object-fit: contain !important;
+}
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"] .feedback-copy,
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-copy {
+  position: relative !important;
+  inset: auto !important;
+  grid-column: 2 !important;
+  min-width: 0 !important;
+  padding: 2px 0 !important;
+  z-index: 2 !important;
+}
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"] .feedback-copy h2,
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"] .feedback-copy p,
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-copy h2,
+#game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-copy p {
+  position: relative !important;
+  inset: auto !important;
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  white-space: normal !important;
+  z-index: 2 !important;
+}
+@media (max-width: 680px) {
+  #game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"],
+  #game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] {
+    grid-template-columns: 48px 56px minmax(0,1fr) !important;
+    column-gap: 10px !important;
+    padding: 7px 12px !important;
+  }
+  #game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"] .feedback-mascot,
+  #game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-mascot {
+    grid-column: 1 / 3 !important;
+    width: 56px !important;
+    height: 54px !important;
+  }
+  #game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"] .feedback-action,
+  #game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-action {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 44px !important;
+  }
+}
+@keyframes dnd-multimedia-feedback-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 680px) {
+  #game.drag-drop-multimedia-screen .feedback-ribbon { right: 10px; bottom: 8px; left: 10px; grid-template-columns: 48px 56px minmax(0,1fr); column-gap: 10px; min-height: 74px; padding: 7px 12px; }
+  #game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"],
+  #game.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] { right: 10px !important; bottom: 8px !important; left: 10px !important; width: auto !important; min-height: 74px !important; }
+  #game.drag-drop-multimedia-screen .feedback-ribbon .feedback-mascot { width: 56px; height: 54px; }
+  #game.drag-drop-multimedia-screen .feedback-copy h2 { font-size: 18px; }
+  #game.drag-drop-multimedia-screen .feedback-copy p { font-size: 11px; }
+  #game.drag-drop-multimedia-screen .feedback-action { grid-column: 1 / -1; justify-self: center; width: min(220px, 100%); min-width: 0; min-height: 44px; }
+  /* DDM shares a HUD class with Target Shooter; give its compact footer a
+     non-overlapping mascot/copy row and a bounded second-row action. */
+  #game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"],
+  #game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] {
+    grid-template-columns: 56px minmax(0,1fr) !important;
+    grid-template-rows: auto auto !important;
+    row-gap: 7px !important;
+    min-height: 122px !important;
+    height: auto !important;
+    padding: 7px 12px !important;
+  }
+  #game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"] .feedback-mascot,
+  #game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-mascot {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 56px !important;
+    height: 54px !important;
+  }
+  #game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"] .feedback-copy,
+  #game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-copy {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+  }
+  #game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="correct"] .feedback-action,
+  #game.target-shooter-screen.drag-drop-multimedia-screen .feedback-ribbon[data-feedback="incorrect"] .feedback-action {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    justify-self: center !important;
+    width: min(220px, 100%) !important;
+    min-width: 0 !important;
+    min-height: 44px !important;
+    height: 44px !important;
+  }
+}
+
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-image-option img {
+  position: absolute;
+  left: 24.609375%;
+  top: 19.2307692%;
+  display: block;
+  width: 51.171875%;
+  height: 63%;
+  object-fit: contain;
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-image-option__state-icon {
+  position: absolute;
+  z-index: 3;
+  left: 4%;
+  top: 4.8%;
+  width: min(34px, 13.28125%);
+  aspect-ratio: 1;
+  display: none;
+  pointer-events: none;
+}
+#game.drag-drop-multimedia-screen .dnd-multimedia-image-option[data-state="correct"] > .dnd-multimedia-image-option__state-icon--correct,
+#game.drag-drop-multimedia-screen .dnd-multimedia-image-option[data-state="incorrect"] > .dnd-multimedia-image-option__state-icon--incorrect { display: block; }
+#game.drag-drop-multimedia-screen .dnd-multimedia-image-option > .dnd-multimedia-image-option__state-icon img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+#game.drag-drop-multimedia-screen .dnd-multimedia-image-option__stroke {
+  display: none;
+}
+
+/* Preserve the established progress artwork on the retained canonical HUD. */
+#game[aria-label="DuduQ Drag and Drop"] .duduq-canonical-header-hud .hud-progress[data-artwork="penpot-official-board"] {
+  position: absolute !important;
+  left: calc(300px * var(--duduq-ui-scale, 1)) !important;
+  top: calc(40px * var(--duduq-ui-scale, 1)) !important;
+  width: calc(482px * var(--duduq-ui-scale, 1)) !important;
+  height: calc(18px * var(--duduq-ui-scale, 1)) !important;
+  box-sizing: border-box !important;
+  border: 0 !important;
+  border-radius: calc(9px * var(--duduq-ui-scale, 1)) !important;
+  background: #dce8df !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+#game[aria-label="DuduQ Drag and Drop"] .duduq-canonical-header-hud .hud-progress[data-artwork="penpot-official-board"]::before {
+  content: "" !important;
+  position: absolute !important;
+  z-index: 2 !important;
+  inset: 0 !important;
+  box-sizing: border-box !important;
+  border: calc(.888889px * var(--duduq-ui-scale, 1)) solid #c8d8cd !important;
+  border-radius: calc(9px * var(--duduq-ui-scale, 1)) !important;
+  pointer-events: none !important;
+}
+
+#game[aria-label="DuduQ Drag and Drop"] .duduq-canonical-header-hud .hud-progress[data-artwork="penpot-official-board"]::after {
+  content: "" !important;
+  position: absolute !important;
+  z-index: 3 !important;
+  left: calc(7px * var(--duduq-ui-scale, 1)) !important;
+  top: calc(2px * var(--duduq-ui-scale, 1)) !important;
+  width: var(--dnd-progress-highlight-width, 0px) !important;
+  height: calc(3px * var(--duduq-ui-scale, 1)) !important;
+  border-radius: calc(1.5px * var(--duduq-ui-scale, 1)) !important;
+  background: rgba(191, 232, 255, .416667) !important;
+  opacity: .76 !important;
+  pointer-events: none !important;
+}
+
+/* Multimedia fullscreen enhancement: grow real layout dimensions together so
+   the visible targets and their pointer hit areas remain the same geometry. */
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] {
+  --dnd-multimedia-fullscreen-panel-width: min(1580px, calc(100vw - 80px), calc(100dvh * 1.58));
+  --dnd-multimedia-fullscreen-item-width: clamp(280px, 18vw, 346px);
+  --dnd-multimedia-fullscreen-layout-gap: clamp(12px, 1.8vh, 22px);
+  /* Keep the question HUD and its playfield as separate reading surfaces.
+     This is deliberately independent from the tighter internal layout gap. */
+  --dnd-multimedia-fullscreen-question-panel-gap: clamp(20px, 2.8vh, 32px);
+  height: 100dvh;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] > .dnd-game-shell {
+  box-sizing: border-box;
+  height: auto;
+  min-height: 100dvh;
+  padding: clamp(8px, 1.2vh, 16px) clamp(24px, 3vw, 58px) clamp(10px, 1.5vh, 18px);
+}
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-central-panel {
+  width: var(--dnd-multimedia-fullscreen-panel-width);
+  max-width: 100%;
+  margin-top: var(--dnd-multimedia-fullscreen-question-panel-gap);
+  transition: width 180ms ease, margin 180ms ease;
+}
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-question-group {
+  width: min(318px, 20.3305785cqi);
+  transition: width 180ms ease;
+}
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-question-group__label {
+  font-size: clamp(15px, 1.05vw, 20px);
+}
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-drag-word-bank {
+  width: min(1540px, 100%);
+  gap: clamp(22px, 1.7vw, 32px);
+  margin-top: var(--dnd-multimedia-fullscreen-layout-gap);
+  transition: width 180ms ease, gap 180ms ease, margin 180ms ease;
+}
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-drag-word-item,
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-audio-item {
+  width: min(var(--dnd-multimedia-fullscreen-item-width), 100%);
+  flex-basis: var(--dnd-multimedia-fullscreen-item-width);
+  transition: width 180ms ease, flex-basis 180ms ease;
+}
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-drag-word-item__label {
+  font-size: clamp(24px, 1.45vw, 30px);
+}
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-image-option__state-icon {
+  width: min(38px, 13.28125%);
+}
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-confirm-motion {
+  margin-top: var(--dnd-multimedia-fullscreen-layout-gap);
+  margin-bottom: clamp(12px, 2vh, 22px);
+  transition: margin 180ms ease;
+}
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-confirm-action {
+  scale: 1.06;
+  transition: transform 160ms ease, scale 180ms ease;
+}
+
+/* Fullscreen keeps the same canonical footer node and visual composition.
+   Only its fixed, viewport-sized shell remains responsive. */
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] > .feedback-ribbon:not([hidden]),
+#game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] > .feedback-ribbon:not([hidden]) .feedback-action {
+  scale: 1 !important;
+}
+
+@media (max-height: 800px) {
+  #game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] {
+    --dnd-multimedia-fullscreen-layout-gap: clamp(8px, 1.2vh, 12px);
+  }
+  #game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-drag-word-bank { gap: clamp(18px, 1.5vw, 24px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-central-panel,
+  #game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-question-group,
+  #game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-drag-word-bank,
+  #game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-drag-word-item,
+  #game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-audio-item,
+  #game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-multimedia-confirm-motion,
+  #game.drag-drop-multimedia-screen[data-duduq-fullscreen-enhanced="true"] .dnd-confirm-action { transition-duration: 1ms; }
+}
+
+/* Four targets fit on one responsive row in the supported embedded widths.
+   Keeping the established 280Ã—80 item ratio preserves artwork and hitboxes. */
+@media (max-width: 1280px) {
+  #game.drag-drop-multimedia-screen .dnd-multimedia-central-panel {
+    margin-top: clamp(10px, 1.5vh, 18px);
+  }
+  #game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-bank {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(8px, 1.2vw, 14px);
+    width: min(1186px, 100%);
+    margin-top: clamp(10px, 1.5vh, 18px);
+    margin-bottom: 0;
+  }
+  #game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-item,
+  #game.drag-drop-multimedia-screen .dnd-multimedia-audio-item {
+    width: 100%;
+    min-width: 0;
+    flex: none;
+  }
+}
+
+#game[aria-label="DuduQ Drag and Drop"] .duduq-canonical-header-hud .hud-progress[data-artwork="penpot-official-board"] .hud-progress-fill {
+  position: absolute !important;
+  z-index: 1 !important;
+  left: calc(.89px * var(--duduq-ui-scale, 1)) !important;
+  top: calc(-.11px * var(--duduq-ui-scale, 1)) !important;
+  height: calc(18px * var(--duduq-ui-scale, 1)) !important;
+  border: 0 !important;
+  border-radius: calc(9px * var(--duduq-ui-scale, 1)) !important;
+  background: #278fd2 !important;
+  box-shadow: none !important;
+}
+
+#game[aria-label="DuduQ Drag and Drop"] .duduq-canonical-header-hud .hud-progress[data-artwork="penpot-official-board"] .hud-progress-fill::after {
+  content: none !important;
+}
+#game.drag-drop-multimedia-screen [data-success-recap="active"] {
+  z-index: 8;
+  outline: 4px solid #ffe078;
+  outline-offset: 3px;
+  filter: drop-shadow(0 0 10px rgba(255, 224, 120, .72));
+  scale: 1.08;
+  transform-origin: center;
+  transition: scale 160ms ease, filter 160ms ease;
+}
+

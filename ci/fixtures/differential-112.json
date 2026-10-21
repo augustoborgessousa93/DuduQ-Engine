@@ -1,0 +1,674 @@
+[
+  {
+    "activityId": "Y1M02-Q004",
+    "module": "Y1M02",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y1M02&duduqItem=Y1M02-Q004"
+  },
+  {
+    "activityId": "Y1M02-Q008",
+    "module": "Y1M02",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y1M02&duduqItem=Y1M02-Q008"
+  },
+  {
+    "activityId": "Y1M02-Q013",
+    "module": "Y1M02",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y1M02&duduqItem=Y1M02-Q013"
+  },
+  {
+    "activityId": "Y1M02-Q018",
+    "module": "Y1M02",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y1M02&duduqItem=Y1M02-Q018"
+  },
+  {
+    "activityId": "Y1M03-Q003",
+    "module": "Y1M03",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y1M03&duduqItem=Y1M03-Q003"
+  },
+  {
+    "activityId": "Y1M03-Q008",
+    "module": "Y1M03",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y1M03&duduqItem=Y1M03-Q008"
+  },
+  {
+    "activityId": "Y1M03-Q012",
+    "module": "Y1M03",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y1M03&duduqItem=Y1M03-Q012"
+  },
+  {
+    "activityId": "Y1M03-Q018",
+    "module": "Y1M03",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y1M03&duduqItem=Y1M03-Q018"
+  },
+  {
+    "activityId": "Y1M04-Q006",
+    "module": "Y1M04",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y1M04&duduqItem=Y1M04-Q006"
+  },
+  {
+    "activityId": "Y1M04-Q008",
+    "module": "Y1M04",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y1M04&duduqItem=Y1M04-Q008"
+  },
+  {
+    "activityId": "Y1M04-Q018",
+    "module": "Y1M04",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y1M04&duduqItem=Y1M04-Q018"
+  },
+  {
+    "activityId": "Y1M05-Q005",
+    "module": "Y1M05",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y1M05&duduqItem=Y1M05-Q005"
+  },
+  {
+    "activityId": "Y1M05-Q015",
+    "module": "Y1M05",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y1M05&duduqItem=Y1M05-Q015"
+  },
+  {
+    "activityId": "Y1M06-Q005",
+    "module": "Y1M06",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y1M06&duduqItem=Y1M06-Q005"
+  },
+  {
+    "activityId": "Y1M06-Q008",
+    "module": "Y1M06",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y1M06&duduqItem=Y1M06-Q008"
+  },
+  {
+    "activityId": "Y1M06-Q013",
+    "module": "Y1M06",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y1M06&duduqItem=Y1M06-Q013"
+  },
+  {
+    "activityId": "Y1M06-Q018",
+    "module": "Y1M06",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y1M06&duduqItem=Y1M06-Q018"
+  },
+  {
+    "activityId": "Y2M01-Q008",
+    "module": "Y2M01",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y2M01&duduqItem=Y2M01-Q008"
+  },
+  {
+    "activityId": "Y2M01-Q011",
+    "module": "Y2M01",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y2M01&duduqItem=Y2M01-Q011"
+  },
+  {
+    "activityId": "Y2M01-Q015",
+    "module": "Y2M01",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y2M01&duduqItem=Y2M01-Q015"
+  },
+  {
+    "activityId": "Y2M02-Q006",
+    "module": "Y2M02",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y2M02&duduqItem=Y2M02-Q006"
+  },
+  {
+    "activityId": "Y2M02-Q008",
+    "module": "Y2M02",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y2M02&duduqItem=Y2M02-Q008"
+  },
+  {
+    "activityId": "Y2M02-Q016",
+    "module": "Y2M02",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y2M02&duduqItem=Y2M02-Q016"
+  },
+  {
+    "activityId": "Y2M02-Q018",
+    "module": "Y2M02",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y2M02&duduqItem=Y2M02-Q018"
+  },
+  {
+    "activityId": "Y2M03-Q004",
+    "module": "Y2M03",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y2M03&duduqItem=Y2M03-Q004"
+  },
+  {
+    "activityId": "Y2M03-Q008",
+    "module": "Y2M03",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y2M03&duduqItem=Y2M03-Q008"
+  },
+  {
+    "activityId": "Y2M03-Q014",
+    "module": "Y2M03",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y2M03&duduqItem=Y2M03-Q014"
+  },
+  {
+    "activityId": "Y2M03-Q018",
+    "module": "Y2M03",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y2M03&duduqItem=Y2M03-Q018"
+  },
+  {
+    "activityId": "Y2M04-Q005",
+    "module": "Y2M04",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y2M04&duduqItem=Y2M04-Q005"
+  },
+  {
+    "activityId": "Y2M04-Q008",
+    "module": "Y2M04",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y2M04&duduqItem=Y2M04-Q008"
+  },
+  {
+    "activityId": "Y2M04-Q013",
+    "module": "Y2M04",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y2M04&duduqItem=Y2M04-Q013"
+  },
+  {
+    "activityId": "Y2M04-Q018",
+    "module": "Y2M04",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y2M04&duduqItem=Y2M04-Q018"
+  },
+  {
+    "activityId": "Y2M05-Q004",
+    "module": "Y2M05",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y2M05&duduqItem=Y2M05-Q004"
+  },
+  {
+    "activityId": "Y2M05-Q008",
+    "module": "Y2M05",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y2M05&duduqItem=Y2M05-Q008"
+  },
+  {
+    "activityId": "Y2M05-Q013",
+    "module": "Y2M05",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y2M05&duduqItem=Y2M05-Q013"
+  },
+  {
+    "activityId": "Y2M05-Q018",
+    "module": "Y2M05",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y2M05&duduqItem=Y2M05-Q018"
+  },
+  {
+    "activityId": "Y2M06-Q005",
+    "module": "Y2M06",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y2M06&duduqItem=Y2M06-Q005"
+  },
+  {
+    "activityId": "Y2M06-Q008",
+    "module": "Y2M06",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y2M06&duduqItem=Y2M06-Q008"
+  },
+  {
+    "activityId": "Y2M06-Q015",
+    "module": "Y2M06",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y2M06&duduqItem=Y2M06-Q015"
+  },
+  {
+    "activityId": "Y2M06-Q018",
+    "module": "Y2M06",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y2M06&duduqItem=Y2M06-Q018"
+  },
+  {
+    "activityId": "Y3M01-Q004",
+    "module": "Y3M01",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y3M01&duduqItem=Y3M01-Q004"
+  },
+  {
+    "activityId": "Y3M01-Q008",
+    "module": "Y3M01",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y3M01&duduqItem=Y3M01-Q008"
+  },
+  {
+    "activityId": "Y3M01-Q014",
+    "module": "Y3M01",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y3M01&duduqItem=Y3M01-Q014"
+  },
+  {
+    "activityId": "Y3M01-Q018",
+    "module": "Y3M01",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y3M01&duduqItem=Y3M01-Q018"
+  },
+  {
+    "activityId": "Y3M02-Q003",
+    "module": "Y3M02",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y3M02&duduqItem=Y3M02-Q003"
+  },
+  {
+    "activityId": "Y3M02-Q008",
+    "module": "Y3M02",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y3M02&duduqItem=Y3M02-Q008"
+  },
+  {
+    "activityId": "Y3M02-Q012",
+    "module": "Y3M02",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y3M02&duduqItem=Y3M02-Q012"
+  },
+  {
+    "activityId": "Y3M02-Q018",
+    "module": "Y3M02",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y3M02&duduqItem=Y3M02-Q018"
+  },
+  {
+    "activityId": "Y3M03-Q004",
+    "module": "Y3M03",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y3M03&duduqItem=Y3M03-Q004"
+  },
+  {
+    "activityId": "Y3M03-Q008",
+    "module": "Y3M03",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y3M03&duduqItem=Y3M03-Q008"
+  },
+  {
+    "activityId": "Y3M03-Q013",
+    "module": "Y3M03",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y3M03&duduqItem=Y3M03-Q013"
+  },
+  {
+    "activityId": "Y3M03-Q018",
+    "module": "Y3M03",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y3M03&duduqItem=Y3M03-Q018"
+  },
+  {
+    "activityId": "Y3M04-Q005",
+    "module": "Y3M04",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y3M04&duduqItem=Y3M04-Q005"
+  },
+  {
+    "activityId": "Y3M04-Q008",
+    "module": "Y3M04",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y3M04&duduqItem=Y3M04-Q008"
+  },
+  {
+    "activityId": "Y3M04-Q015",
+    "module": "Y3M04",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y3M04&duduqItem=Y3M04-Q015"
+  },
+  {
+    "activityId": "Y3M04-Q018",
+    "module": "Y3M04",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y3M04&duduqItem=Y3M04-Q018"
+  },
+  {
+    "activityId": "Y3M05-Q004",
+    "module": "Y3M05",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y3M05&duduqItem=Y3M05-Q004"
+  },
+  {
+    "activityId": "Y3M05-Q008",
+    "module": "Y3M05",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y3M05&duduqItem=Y3M05-Q008"
+  },
+  {
+    "activityId": "Y3M05-Q014",
+    "module": "Y3M05",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y3M05&duduqItem=Y3M05-Q014"
+  },
+  {
+    "activityId": "Y3M05-Q018",
+    "module": "Y3M05",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y3M05&duduqItem=Y3M05-Q018"
+  },
+  {
+    "activityId": "Y3M06-Q006",
+    "module": "Y3M06",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y3M06&duduqItem=Y3M06-Q006"
+  },
+  {
+    "activityId": "Y3M06-Q008",
+    "module": "Y3M06",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y3M06&duduqItem=Y3M06-Q008"
+  },
+  {
+    "activityId": "Y3M06-Q016",
+    "module": "Y3M06",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y3M06&duduqItem=Y3M06-Q016"
+  },
+  {
+    "activityId": "Y3M06-Q018",
+    "module": "Y3M06",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y3M06&duduqItem=Y3M06-Q018"
+  },
+  {
+    "activityId": "Y4M01-Q004",
+    "module": "Y4M01",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y4M01&duduqItem=Y4M01-Q004"
+  },
+  {
+    "activityId": "Y4M01-Q008",
+    "module": "Y4M01",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y4M01&duduqItem=Y4M01-Q008"
+  },
+  {
+    "activityId": "Y4M01-Q014",
+    "module": "Y4M01",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y4M01&duduqItem=Y4M01-Q014"
+  },
+  {
+    "activityId": "Y4M01-Q018",
+    "module": "Y4M01",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y4M01&duduqItem=Y4M01-Q018"
+  },
+  {
+    "activityId": "Y4M02-Q005",
+    "module": "Y4M02",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y4M02&duduqItem=Y4M02-Q005"
+  },
+  {
+    "activityId": "Y4M02-Q008",
+    "module": "Y4M02",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y4M02&duduqItem=Y4M02-Q008"
+  },
+  {
+    "activityId": "Y4M02-Q015",
+    "module": "Y4M02",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y4M02&duduqItem=Y4M02-Q015"
+  },
+  {
+    "activityId": "Y4M02-Q018",
+    "module": "Y4M02",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y4M02&duduqItem=Y4M02-Q018"
+  },
+  {
+    "activityId": "Y4M03-Q003",
+    "module": "Y4M03",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y4M03&duduqItem=Y4M03-Q003"
+  },
+  {
+    "activityId": "Y4M03-Q008",
+    "module": "Y4M03",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y4M03&duduqItem=Y4M03-Q008"
+  },
+  {
+    "activityId": "Y4M03-Q012",
+    "module": "Y4M03",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y4M03&duduqItem=Y4M03-Q012"
+  },
+  {
+    "activityId": "Y4M03-Q018",
+    "module": "Y4M03",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y4M03&duduqItem=Y4M03-Q018"
+  },
+  {
+    "activityId": "Y4M04-Q006",
+    "module": "Y4M04",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y4M04&duduqItem=Y4M04-Q006"
+  },
+  {
+    "activityId": "Y4M04-Q008",
+    "module": "Y4M04",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y4M04&duduqItem=Y4M04-Q008"
+  },
+  {
+    "activityId": "Y4M04-Q016",
+    "module": "Y4M04",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y4M04&duduqItem=Y4M04-Q016"
+  },
+  {
+    "activityId": "Y4M04-Q018",
+    "module": "Y4M04",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y4M04&duduqItem=Y4M04-Q018"
+  },
+  {
+    "activityId": "Y4M05-Q004",
+    "module": "Y4M05",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y4M05&duduqItem=Y4M05-Q004"
+  },
+  {
+    "activityId": "Y4M05-Q008",
+    "module": "Y4M05",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y4M05&duduqItem=Y4M05-Q008"
+  },
+  {
+    "activityId": "Y4M05-Q014",
+    "module": "Y4M05",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y4M05&duduqItem=Y4M05-Q014"
+  },
+  {
+    "activityId": "Y4M05-Q018",
+    "module": "Y4M05",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y4M05&duduqItem=Y4M05-Q018"
+  },
+  {
+    "activityId": "Y4M06-Q005",
+    "module": "Y4M06",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y4M06&duduqItem=Y4M06-Q005"
+  },
+  {
+    "activityId": "Y4M06-Q008",
+    "module": "Y4M06",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y4M06&duduqItem=Y4M06-Q008"
+  },
+  {
+    "activityId": "Y4M06-Q013",
+    "module": "Y4M06",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y4M06&duduqItem=Y4M06-Q013"
+  },
+  {
+    "activityId": "Y4M06-Q018",
+    "module": "Y4M06",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y4M06&duduqItem=Y4M06-Q018"
+  },
+  {
+    "activityId": "Y5M01-Q003",
+    "module": "Y5M01",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y5M01&duduqItem=Y5M01-Q003"
+  },
+  {
+    "activityId": "Y5M01-Q008",
+    "module": "Y5M01",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y5M01&duduqItem=Y5M01-Q008"
+  },
+  {
+    "activityId": "Y5M01-Q012",
+    "module": "Y5M01",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y5M01&duduqItem=Y5M01-Q012"
+  },
+  {
+    "activityId": "Y5M01-Q018",
+    "module": "Y5M01",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y5M01&duduqItem=Y5M01-Q018"
+  },
+  {
+    "activityId": "Y5M02-Q006",
+    "module": "Y5M02",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y5M02&duduqItem=Y5M02-Q006"
+  },
+  {
+    "activityId": "Y5M02-Q008",
+    "module": "Y5M02",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y5M02&duduqItem=Y5M02-Q008"
+  },
+  {
+    "activityId": "Y5M02-Q016",
+    "module": "Y5M02",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y5M02&duduqItem=Y5M02-Q016"
+  },
+  {
+    "activityId": "Y5M02-Q018",
+    "module": "Y5M02",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y5M02&duduqItem=Y5M02-Q018"
+  },
+  {
+    "activityId": "Y5M03-Q004",
+    "module": "Y5M03",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y5M03&duduqItem=Y5M03-Q004"
+  },
+  {
+    "activityId": "Y5M03-Q008",
+    "module": "Y5M03",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y5M03&duduqItem=Y5M03-Q008"
+  },
+  {
+    "activityId": "Y5M03-Q014",
+    "module": "Y5M03",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y5M03&duduqItem=Y5M03-Q014"
+  },
+  {
+    "activityId": "Y5M03-Q018",
+    "module": "Y5M03",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y5M03&duduqItem=Y5M03-Q018"
+  },
+  {
+    "activityId": "Y5M04-Q005",
+    "module": "Y5M04",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y5M04&duduqItem=Y5M04-Q005"
+  },
+  {
+    "activityId": "Y5M04-Q008",
+    "module": "Y5M04",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y5M04&duduqItem=Y5M04-Q008"
+  },
+  {
+    "activityId": "Y5M04-Q015",
+    "module": "Y5M04",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y5M04&duduqItem=Y5M04-Q015"
+  },
+  {
+    "activityId": "Y5M04-Q018",
+    "module": "Y5M04",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y5M04&duduqItem=Y5M04-Q018"
+  },
+  {
+    "activityId": "Y5M05-Q004",
+    "module": "Y5M05",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y5M05&duduqItem=Y5M05-Q004"
+  },
+  {
+    "activityId": "Y5M05-Q008",
+    "module": "Y5M05",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y5M05&duduqItem=Y5M05-Q008"
+  },
+  {
+    "activityId": "Y5M05-Q013",
+    "module": "Y5M05",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y5M05&duduqItem=Y5M05-Q013"
+  },
+  {
+    "activityId": "Y5M05-Q018",
+    "module": "Y5M05",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y5M05&duduqItem=Y5M05-Q018"
+  },
+  {
+    "activityId": "Y5M06-Q005",
+    "module": "Y5M06",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y5M06&duduqItem=Y5M06-Q005"
+  },
+  {
+    "activityId": "Y5M06-Q008",
+    "module": "Y5M06",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y5M06&duduqItem=Y5M06-Q008"
+  },
+  {
+    "activityId": "Y5M06-Q015",
+    "module": "Y5M06",
+    "mechanic": "memory-quest",
+    "route": "/play/memory-quest/?duduqModule=Y5M06&duduqItem=Y5M06-Q015"
+  },
+  {
+    "activityId": "Y5M06-Q018",
+    "module": "Y5M06",
+    "mechanic": "smart-sentence-complete",
+    "route": "/play/smart-sentence/?duduqModule=Y5M06&duduqItem=Y5M06-Q018"
+  }
+]
