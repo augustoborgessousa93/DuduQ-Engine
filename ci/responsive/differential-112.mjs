@@ -24,6 +24,17 @@ async function probe(origin, item) {
   let result;
   try {
     const response = await page.goto(new URL(item.route, origin).href, { waitUntil: 'domcontentloaded', timeout: 20000 });
+    await page.waitForFunction(() => {
+      const moduleId = new URL(location.href).searchParams.get('duduqModule') || '';
+      const api = moduleId === 'Y1M01' ? window.DuduQY1M01 : window.DuduQProductionQuestionBootstrap;
+      const root = document.querySelector('#game,#smart-sentence-root,#memory-quest-root');
+      if (!api?.ready || !root) return false;
+      const selector = 'canvas,svg,img,button,[role=button],.duduq-canonical-question-hud,.smart-sentence-instruction,.question-panel,[data-target-id],[data-bubble-id],[data-item-id],[data-drop-target-id]';
+      return [...root.querySelectorAll(selector)].some(node => {
+        const rect = node.getBoundingClientRect(), style = getComputedStyle(node);
+        return rect.width > 0 && rect.height > 0 && style.display !== 'none' && style.visibility !== 'hidden';
+      });
+    }, null, { timeout: 5000 }).catch(() => false);
     const sample = await page.evaluate(async () => {
       const moduleId = new URL(location.href).searchParams.get('duduqModule') || '';
       const api = moduleId === 'Y1M01' ? window.DuduQY1M01 : window.DuduQProductionQuestionBootstrap;
