@@ -34,7 +34,7 @@ body {
   z-index: 1;
 }
 
-/* Penpot board 6b1bdf21: empty central surface (1210 Ã— 360). */
+/* Penpot board 6b1bdf21: empty central surface (1210 × 360). */
 #game.drag-drop-multimedia-screen .dnd-multimedia-central-panel {
   display: block;
   box-sizing: border-box;
@@ -90,7 +90,7 @@ body {
   left: 75.4545455%;
 }
 
-/* Penpot board 6b1bdf21: DUDUQ - RETÃ‚NGULO GROUP (246 Ã— 87). */
+/* Penpot board 6b1bdf21: DUDUQ - RETÂNGULO GROUP (246 × 87). */
 #game.drag-drop-multimedia-screen .dnd-multimedia-question-group {
   position: absolute;
   display: grid;
@@ -144,7 +144,7 @@ body {
   left: 75.4545455%;
 }
 
-/* Penpot board e3b9056b: neutral draggable word item (280 Ã— 80). */
+/* Penpot board e3b9056b: neutral draggable word item (280 × 80). */
 #game.drag-drop-multimedia-screen .dnd-multimedia-drag-word-bank {
   display: flex;
   flex-wrap: wrap;
@@ -750,7 +750,7 @@ body {
 }
 
 /* Four targets fit on one responsive row in the supported embedded widths.
-   Keeping the established 280Ã—80 item ratio preserves artwork and hitboxes. */
+   Keeping the established 280×80 item ratio preserves artwork and hitboxes. */
 @media (max-width: 1280px) {
   #game.drag-drop-multimedia-screen .dnd-multimedia-central-panel {
     margin-top: clamp(10px, 1.5vh, 18px);
@@ -795,4 +795,3 @@ body {
   transform-origin: center;
   transition: scale 160ms ease, filter 160ms ease;
 }
-

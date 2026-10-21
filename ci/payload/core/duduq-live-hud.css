@@ -102,7 +102,7 @@
 }
 @media (max-width:640px){#game .game-hud{padding-inline:16px!important;column-gap:12px!important}#game .game-hud .fullscreen-button{width:52px!important;height:52px!important;min-width:52px!important;min-height:52px!important;border-radius:17px!important}#game .question-panel{padding:14px 18px!important}}
 
-/* Matching â€” Penpot Feedback Continuar / correct state only. */
+/* Matching — Penpot Feedback Continuar / correct state only. */
 #game[aria-label="DuduQ Matching"][data-feedback-legacy="true"] .feedback-ribbon[data-feedback="correct"]{
   position:absolute!important;
   left:50%!important;
@@ -693,4 +693,3 @@
   left: 109px !important;
   top: 48px !important;
 }
-
