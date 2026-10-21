@@ -126,6 +126,90 @@ jobs:
           DUDUQ_CANDIDATE_ORIGIN: http://127.0.0.1:4176
         run: node ci/responsive/release-smoke.mjs
 
+      - name: Deploy exact candidate to Cloudflare preview
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: a7e5cdd5d653da1b19a547024c1a4640
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "CLOUDFLARE_API_TOKEN secret unavailable; no deployment attempted"; exit 1; }
+          npx --yes wrangler@4 pages deploy candidate-dist --project-name duduq-engine --branch responsive-release-v3 --commit-hash "$GITHUB_SHA" --commit-message "Validated responsive CSS candidate a94b510c"
+          echo "DUDUQ_PREVIEW_ORIGIN=https://responsive-release-v3.duduq-engine-13a.pages.dev" >> "$GITHUB_ENV"
+
+      - name: Verify preview assets and all official routes
+        env:
+          DUDUQ_REMOTE_ORIGIN: https://responsive-release-v3.duduq-engine-13a.pages.dev
+        run: |
+          node --input-type=module <<'NODE'
+          import { createHash } from 'node:crypto';
+          const origin=process.env.DUDUQ_REMOTE_ORIGIN;
+          const expected={
+            '/core/duduq-live-hud.css':'a6e77a2de7b9928fe2fc5482e1e828edf6ec161773d3ad3d7e063d96c62da8ba',
+            '/play/drag-drop-multimedia/drag-drop-multimedia.css':'2a5aa9665c642ff5bb621d924e054b02a187cafcdba2ff7b3d8e15b09ca78175',
+            '/play/drag-drop/drag-drop.css':'4ed80343a9e24cff70b3b30b6dbe4a4833835f4beaa9c01b613c9e0a5c9a90f5',
+            '/play/intro-module/intro-module.css':'512a5daa57c0ea27e59737a15fb1a6d23073dd4397c7b258caf3eb35fdddd34f'
+          };
+          for(const [path,want] of Object.entries(expected)){const r=await fetch(origin+path);if(!r.ok)throw Error('preview CSS HTTP '+r.status+' '+path);const got=createHash('sha256').update(Buffer.from(await r.arrayBuffer())).digest('hex');if(got!==want)throw Error('preview CSS hash mismatch '+path+' '+got);}
+          let routes=0;for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){const p=`/play/english/year-${y}/module-${String(m).padStart(2,'0')}/`;const r=await fetch(origin+p);if(!r.ok)throw Error('preview route '+r.status+' '+p);routes++;}
+          console.log(JSON.stringify({preview:origin,css:4,routes:`${routes}/30`,status:'PASS'}));
+          NODE
+
+      - name: Preview browser E2E on Bubble Pop, Target Shooter and Grouping
+        working-directory: harness
+        env:
+          DUDUQ_REMOTE_QA: '1'
+          DUDUQ_EXPECTED_ROOT: ''
+          DUDUQ_EXPECTED_CORE_CSS_SHA256: a6e77a2de7b9928fe2fc5482e1e828edf6ec161773d3ad3d7e063d96c62da8ba
+          DUDUQ_CANDIDATE_BUILD_HASH: a94b510cf4178a4ae84aba352d15ea9fe1a0ed66545a8071822f3ec49434b829
+          DUDUQ_QA_ORIGIN: https://responsive-release-v3.duduq-engine-13a.pages.dev
+          DUDUQ_EVIDENCE_DIR: ${{ github.workspace }}/harness/ci-run/screenshots/preview-bubble-pop
+          DUDUQ_REPORT_PATH: ${{ github.workspace }}/harness/ci-run/preview-bubble-pop.json
+        run: |
+          node ci/responsive/bubble-pop.e2e.mjs
+          DUDUQ_EVIDENCE_DIR="$GITHUB_WORKSPACE/harness/ci-run/screenshots/preview-target-shooter" DUDUQ_REPORT_PATH="$GITHUB_WORKSPACE/harness/ci-run/preview-target-shooter.json" node ci/responsive/target-shooter.e2e.mjs
+          DUDUQ_EVIDENCE_DIR="$GITHUB_WORKSPACE/harness/ci-run/screenshots/preview-grouping" DUDUQ_REPORT_PATH="$GITHUB_WORKSPACE/harness/ci-run/preview-grouping.json" node ci/responsive/grouping.e2e.mjs
+
+      - name: Promote exact candidate to production and verify with rollback guard
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: a7e5cdd5d653da1b19a547024c1a4640
+          DUDUQ_PRODUCTION_ORIGIN: https://duduq-engine-13a.pages.dev
+        run: |
+          set -euo pipefail
+          previous="$(node --input-type=module -e 'const r=await fetch(`https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/pages/projects/duduq-engine`,{headers:{Authorization:`Bearer ${process.env.CLOUDFLARE_API_TOKEN}`}});const j=await r.json();if(!r.ok||!j.success)throw Error(JSON.stringify(j.errors));console.log(j.result.canonical_deployment?.id||"")')"
+          test "$previous" = "45db189f-a5a6-46af-9e89-220a44f97bf8" || { echo "Production deployment changed since verified baseline; refusing promotion."; exit 1; }
+          npx --yes wrangler@4 pages deploy candidate-dist --project-name duduq-engine --branch feat/design-sync-primary-button-v1 --commit-hash "$GITHUB_SHA" --commit-message "Validated responsive CSS candidate a94b510c"
+          deployment_id="$(node --input-type=module -e 'const base=`https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/pages/projects/duduq-engine/deployments?per_page=20`;for(let n=0;n<40;n++){const r=await fetch(base,{headers:{Authorization:`Bearer ${process.env.CLOUDFLARE_API_TOKEN}`}});const j=await r.json();if(!r.ok||!j.success)throw Error(JSON.stringify(j.errors));const d=(j.result||[]).find(x=>x.environment==="production"&&x.deployment_trigger?.metadata?.commit_hash===process.env.GITHUB_SHA);if(d){console.log(d.id);process.exit(0)}await new Promise(r=>setTimeout(r,3000))}throw Error("Production deployment id not found")')"
+          echo "RESPONSIVE_DEPLOYMENT_ID=$deployment_id" >> "$GITHUB_ENV"
+          echo "RESPONSIVE_PREVIOUS_DEPLOYMENT_ID=$previous" >> "$GITHUB_ENV"
+          set +e
+          DUDUQ_REMOTE_ORIGIN="$DUDUQ_PRODUCTION_ORIGIN" node --input-type=module <<'NODE'
+          import { createHash } from 'node:crypto';
+          const origin=process.env.DUDUQ_REMOTE_ORIGIN;
+          const expected={
+            '/core/duduq-live-hud.css':'a6e77a2de7b9928fe2fc5482e1e828edf6ec161773d3ad3d7e063d96c62da8ba',
+            '/play/drag-drop-multimedia/drag-drop-multimedia.css':'2a5aa9665c642ff5bb621d924e054b02a187cafcdba2ff7b3d8e15b09ca78175',
+            '/play/drag-drop/drag-drop.css':'4ed80343a9e24cff70b3b30b6dbe4a4833835f4beaa9c01b613c9e0a5c9a90f5',
+            '/play/intro-module/intro-module.css':'512a5daa57c0ea27e59737a15fb1a6d23073dd4397c7b258caf3eb35fdddd34f'
+          };
+          for(const [p,w] of Object.entries(expected)){const r=await fetch(origin+p);if(!r.ok)throw Error('production CSS HTTP '+r.status+' '+p);const h=createHash('sha256').update(Buffer.from(await r.arrayBuffer())).digest('hex');if(h!==w)throw Error('production CSS hash mismatch '+p+' '+h);}
+          let routes=0;for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){const p=`/play/english/year-${y}/module-${String(m).padStart(2,'0')}/`;const r=await fetch(origin+p);if(!r.ok)throw Error('production route '+r.status+' '+p);routes++;}
+          console.log(JSON.stringify({production:origin,css:4,routes:`${routes}/30`,status:'PASS'}));
+          NODE
+          smoke=$?
+          if [ "$smoke" -eq 0 ]; then
+            DUDUQ_REMOTE_QA=1 DUDUQ_EXPECTED_ROOT='' DUDUQ_EXPECTED_CORE_CSS_SHA256=a6e77a2de7b9928fe2fc5482e1e828edf6ec161773d3ad3d7e063d96c62da8ba DUDUQ_CANDIDATE_BUILD_HASH=a94b510cf4178a4ae84aba352d15ea9fe1a0ed66545a8071822f3ec49434b829 DUDUQ_QA_ORIGIN="$DUDUQ_PRODUCTION_ORIGIN" DUDUQ_EVIDENCE_DIR="$GITHUB_WORKSPACE/harness/ci-run/screenshots/production-bubble-pop" DUDUQ_REPORT_PATH="$GITHUB_WORKSPACE/harness/ci-run/production-bubble-pop.json" node harness/ci/responsive/bubble-pop.e2e.mjs || smoke=$?
+          fi
+          if [ "$smoke" -ne 0 ]; then
+            echo "Production smoke failed; rolling back to $previous"
+            curl -fsS -X POST "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/duduq-engine/deployments/$previous/rollback" -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" >/dev/null || exit 90
+            exit "$smoke"
+          fi
+          echo "Post-deploy smoke PASS; deployment $deployment_id"
+          echo "### Responsive release production deploy" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Deployment: $deployment_id" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Previous/rollback target: $previous" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Production: $DUDUQ_PRODUCTION_ORIGIN" >> "$GITHUB_STEP_SUMMARY"
+
       - name: Stop isolated servers
         if: always()
         run: |
