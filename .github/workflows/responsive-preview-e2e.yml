@@ -1,0 +1,61 @@
+name: Responsive Cloudflare Preview E2E
+on:
+  push:
+    branches:
+      - ci/responsive-release-differential-v3
+permissions:
+  contents: read
+concurrency:
+  group: duduq-responsive-preview-e2e
+  cancel-in-progress: true
+jobs:
+  preview-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install deterministic Playwright Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Verify preview CSS hashes and official routes
+        env:
+          ORIGIN: https://responsive-release-v3.duduq-engine-13a.pages.dev
+        run: |
+          node --input-type=module <<'NODE'
+          import {createHash} from 'node:crypto';
+          const origin=process.env.ORIGIN;
+          const expected={
+            '/core/duduq-live-hud.css':'a6e77a2de7b9928fe2fc5482e1e828edf6ec161773d3ad3d7e063d96c62da8ba',
+            '/play/drag-drop-multimedia/drag-drop-multimedia.css':'2a5aa9665c642ff5bb621d924e054b02a187cafcdba2ff7b3d8e15b09ca78175',
+            '/play/drag-drop/drag-drop.css':'4ed80343a9e24cff70b3b30b6dbe4a4833835f4beaa9c01b613c9e0a5c9a90f5',
+            '/play/intro-module/intro-module.css':'512a5daa57c0ea27e59737a15fb1a6d23073dd4397c7b258caf3eb35fdddd34f'
+          };
+          for(const[p,want]of Object.entries(expected)){const r=await fetch(origin+p);if(!r.ok)throw Error('CSS HTTP '+r.status+' '+p);const got=createHash('sha256').update(Buffer.from(await r.arrayBuffer())).digest('hex');if(got!==want)throw Error('CSS hash mismatch '+p+' '+got);}
+          let count=0;for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){const p=`/play/english/year-${y}/module-${String(m).padStart(2,'0')}/`;const r=await fetch(origin+p);if(!r.ok)throw Error('Route HTTP '+r.status+' '+p);count++;}
+          console.log(JSON.stringify({origin,css:'4/4',officialRoutes:count+'/30',status:'PASS'}));
+          NODE
+      - name: Browser E2E Bubble Pop, Target Shooter and Grouping
+        env:
+          DUDUQ_REMOTE_QA: '1'
+          DUDUQ_EXPECTED_ROOT: ''
+          DUDUQ_EXPECTED_CORE_CSS_SHA256: a6e77a2de7b9928fe2fc5482e1e828edf6ec161773d3ad3d7e063d96c62da8ba
+          DUDUQ_CANDIDATE_BUILD_HASH: a94b510cf4178a4ae84aba352d15ea9fe1a0ed66545a8071822f3ec49434b829
+          DUDUQ_QA_ORIGIN: https://responsive-release-v3.duduq-engine-13a.pages.dev
+          DUDUQ_EVIDENCE_DIR: ${{ github.workspace }}/ci-run/preview-bubble-pop
+          DUDUQ_REPORT_PATH: ${{ github.workspace }}/ci-run/preview-bubble-pop.json
+        run: |
+          node ci/responsive/bubble-pop.e2e.mjs
+          DUDUQ_EVIDENCE_DIR="$GITHUB_WORKSPACE/ci-run/preview-target-shooter" DUDUQ_REPORT_PATH="$GITHUB_WORKSPACE/ci-run/preview-target-shooter.json" node ci/responsive/target-shooter.e2e.mjs
+          DUDUQ_EVIDENCE_DIR="$GITHUB_WORKSPACE/ci-run/preview-grouping" DUDUQ_REPORT_PATH="$GITHUB_WORKSPACE/ci-run/preview-grouping.json" node ci/responsive/grouping.e2e.mjs
+      - name: Upload preview E2E evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-responsive-cloudflare-preview-${{ github.run_id }}
+          path: ci-run/
+          if-no-files-found: warn
+          retention-days: 30
