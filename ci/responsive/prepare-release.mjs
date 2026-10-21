@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 
 const root = process.cwd();
-const baseline = path.resolve(process.env.DUDUQ_BASELINE_ROOT || 'source/dist-pages');
+const baseline = path.resolve(process.env.DUDUQ_BASELINE_ROOT || 'baseline-dist');
 const candidate = path.resolve(process.env.DUDUQ_CANDIDATE_ROOT || 'candidate-dist');
 const payload = path.resolve('ci/payload');
 const baselineExpected = 'd2155c9f546d3316774af3cea0476877fdf074a6cbebcbe04dedf7ebed7a29c6';
@@ -35,7 +35,9 @@ assert.equal(baselineMap.size, 2641, 'unique baseline paths');
 await rm(candidate, { recursive: true, force: true });
 await cp(baseline, candidate, { recursive: true });
 for (const rel of allowed) {
-  const source = path.join(payload, path.basename(rel));
+  const source = rel === 'core/duduq-live-hud.css'
+    ? path.join(payload, 'core', 'duduq-live-hud.css')
+    : path.join(payload, path.basename(rel));
   const bytes = await readFile(source);
   assert.equal(hash(bytes), expectedCss[rel], `authorized payload hash: ${rel}`);
   await mkdir(path.dirname(path.join(candidate, rel)), { recursive: true });

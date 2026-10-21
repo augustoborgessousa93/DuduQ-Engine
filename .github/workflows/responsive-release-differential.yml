@@ -33,9 +33,11 @@ jobs:
         with:
           node-version: 22
 
-      - name: Build and verify exact production baseline
-        working-directory: source
-        run: node scripts/build-cloudflare-pages.mjs
+      - name: Recover exact production bytes and verify all 2,641 manifest entries
+        working-directory: harness
+        env:
+          DUDUQ_BASELINE_ROOT: ${{ github.workspace }}/baseline-dist
+        run: node ci/responsive/download-production-baseline.mjs
 
       - name: Reconstruct exact candidate from baseline plus four authorized CSS files
         run: node harness/ci/responsive/prepare-release.mjs
@@ -49,7 +51,7 @@ jobs:
       - name: Start isolated baseline and candidate servers
         run: |
           mkdir -p ci-run
-          (cd source/dist-pages && DUDUQ_TEST_PORT=4175 node ../scripts/duduq-test-server.mjs > "$GITHUB_WORKSPACE/ci-run/baseline-http.log" 2>&1 & echo $! > ci-run/baseline.pid)
+          (cd baseline-dist && DUDUQ_TEST_PORT=4175 node ../source/scripts/duduq-test-server.mjs > "$GITHUB_WORKSPACE/ci-run/baseline-http.log" 2>&1 & echo $! > ci-run/baseline.pid)
           (cd candidate-dist && DUDUQ_TEST_PORT=4176 node ../source/scripts/duduq-test-server.mjs > "$GITHUB_WORKSPACE/ci-run/candidate-http.log" 2>&1 & echo $! > ci-run/candidate.pid)
           for i in {1..60}; do
             b=$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:4175/__duduq/status || true)
@@ -137,7 +139,9 @@ jobs:
           name: duduq-responsive-differential-v3-${{ github.run_id }}
           path: |
             ci-run/
+            harness/ci-run/
             ci-output-artifact.json
+            harness/baseline-recovery.json
           if-no-files-found: warn
           retention-days: 30
 
