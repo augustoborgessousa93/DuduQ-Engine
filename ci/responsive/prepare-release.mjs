@@ -6,7 +6,7 @@ import path from 'node:path';
 const root = process.cwd();
 const baseline = path.resolve(process.env.DUDUQ_BASELINE_ROOT || 'baseline-dist');
 const candidate = path.resolve(process.env.DUDUQ_CANDIDATE_ROOT || 'candidate-dist');
-const payload = path.resolve('ci/payload');
+const payload = path.resolve(process.env.DUDUQ_PAYLOAD_ROOT || 'harness/ci/payload');
 const baselineExpected = 'd2155c9f546d3316774af3cea0476877fdf074a6cbebcbe04dedf7ebed7a29c6';
 const candidateExpected = 'a94b510cf4178a4ae84aba352d15ea9fe1a0ed66545a8071822f3ec49434b829';
 const allowed = [
