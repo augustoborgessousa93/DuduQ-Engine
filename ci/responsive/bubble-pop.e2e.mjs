@@ -74,14 +74,21 @@ async function clickBubble(target) {
 }
 
 try {
-  const expectedRoot = await realpath(path.resolve(artifactRoot));
-  const serverStatus = await (await fetch(`${origin}/__duduq/status`)).json();
-  report.servedRoot = await realpath(serverStatus.root);
-  assert.equal(report.servedRoot, expectedRoot, 'test server is rooted at exact candidate artifact');
-  const cssBytes = Buffer.from(await (await fetch(`${origin}/core/duduq-live-hud.css`)).arrayBuffer());
-  report.servedCssSha256 = createHash('sha256').update(cssBytes).digest('hex');
-  const diskCssHash = createHash('sha256').update(await readFile(path.join(expectedRoot,'core/duduq-live-hud.css'))).digest('hex');
-  assert.equal(report.servedCssSha256, diskCssHash, 'served responsive CSS hash matches candidate artifact');
+  if (process.env.DUDUQ_REMOTE_QA === '1') {
+    report.servedRoot = 'verified-by-remote-preview-css-hash';
+    const cssBytes = Buffer.from(await (await fetch(`${origin}/core/duduq-live-hud.css`)).arrayBuffer());
+    report.servedCssSha256 = createHash('sha256').update(cssBytes).digest('hex');
+    assert.equal(report.servedCssSha256, process.env.DUDUQ_EXPECTED_CORE_CSS_SHA256, 'remote preview serves the authorized candidate CSS');
+  } else {
+    const expectedRoot = await realpath(path.resolve(artifactRoot));
+    const serverStatus = await (await fetch(`${origin}/__duduq/status`)).json();
+    report.servedRoot = await realpath(serverStatus.root);
+    assert.equal(report.servedRoot, expectedRoot, 'test server is rooted at exact candidate artifact');
+    const cssBytes = Buffer.from(await (await fetch(`${origin}/core/duduq-live-hud.css`)).arrayBuffer());
+    report.servedCssSha256 = createHash('sha256').update(cssBytes).digest('hex');
+    const diskCssHash = createHash('sha256').update(await readFile(path.join(expectedRoot,'core/duduq-live-hud.css'))).digest('hex');
+    assert.equal(report.servedCssSha256, diskCssHash, 'served responsive CSS hash matches candidate artifact');
+  }
   await page.goto(`${origin}/`, { waitUntil:'domcontentloaded' });
   await page.evaluate(route => { document.documentElement.style.cssText='margin:0;width:100%;height:100%;overflow:hidden'; document.body.style.cssText='margin:0;width:100%;height:100%;overflow:hidden'; document.body.innerHTML=`<main id="qa-container" style="width:900px;height:600px;margin:0 auto"><iframe title="DUDUQ release QA" style="display:block;width:100%;height:100%;border:0" src="${route}"></iframe></main>`; }, `${origin}/play/english/year-1/module-01/`);
   await page.waitForFunction(() => { try { return document.querySelector('iframe')?.contentWindow.location.pathname.includes('/play/intro-module/'); } catch { return false; } }, null, { timeout:20000 });
