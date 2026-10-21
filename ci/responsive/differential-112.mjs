@@ -5,6 +5,7 @@ import { chromium } from 'playwright';
 const baselineOrigin = process.env.BASELINE_ORIGIN || 'http://127.0.0.1:4173';
 const candidateOrigin = process.env.CANDIDATE_ORIGIN || 'http://127.0.0.1:4174';
 const expectedCandidateHash = 'a94b510cf4178a4ae84aba352d15ea9fe1a0ed66545a8071822f3ec49434b829';
+const reportPath = process.env.DIFFERENTIAL_REPORT_PATH || 'differential-112-report.json';
 const cases = JSON.parse(await readFile('ci/fixtures/differential-112.json', 'utf8'));
 assert.equal(cases.length, 112, 'exact differential case count');
 const browser = await chromium.launch({ headless: true, args: ['--autoplay-policy=no-user-gesture-required'] });
@@ -94,7 +95,7 @@ const status = rows.length === 112 && counts.NEW_REGRESSION === 0 && counts.ENVI
 const report = { schema: 'DUDUQ_BASELINE_CANDIDATE_DIFFERENTIAL_CI_V1', testedAt: new Date().toISOString(), browser: 'Chromium', browserVersion,
   viewport: { width: 1366, height: 768 }, baseline: { origin: baselineOrigin, manifestSha256: 'd2155c9f546d3316774af3cea0476877fdf074a6cbebcbe04dedf7ebed7a29c6' },
   candidate: { origin: candidateOrigin, manifestSha256: expectedCandidateHash }, requested: 112, completed: rows.length, counts, rows, status };
-await writeFile('ci-run/differential-112-report.json', JSON.stringify(report, null, 2) + '\n');
+await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify({ status, completed: rows.length, counts }, null, 2));
 assert.equal(status, 'PASS', 'no candidate regressions or inconclusive cases');
 

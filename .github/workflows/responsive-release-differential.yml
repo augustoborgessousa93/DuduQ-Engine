@@ -68,6 +68,7 @@ jobs:
         env:
           BASELINE_ORIGIN: http://127.0.0.1:4175
           CANDIDATE_ORIGIN: http://127.0.0.1:4176
+          DIFFERENTIAL_REPORT_PATH: ${{ github.workspace }}/ci-run/differential-112-report.json
         run: node ci/responsive/differential-112.mjs
 
       - name: Responsive geometry matrix (90 cases) on exact candidate
