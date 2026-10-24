@@ -62,7 +62,7 @@ async function copyFile(relative, target = relative) {
     const migrated = original
       .replaceAll("/test/matching/gold-master-candidate-v1", "/runtime/gold-masters/matching")
       .replaceAll("/test/target-shooter/gold-master-clean-v2", "/runtime/gold-masters/target-shooter");
-    const homeRoot = relative === "play/home/index.html" && target === "index.html"
+    const homeRoot = relative === "play/home/index.html" && ["index.html", "home/index.html"].includes(target)
       ? migrated.replace('<base href="/play/home/">', '<base href="/home/">')
       : migrated;
     if (homeRoot !== original) await writeFile(to, homeRoot, "utf8");
@@ -121,12 +121,15 @@ async function validate() {
       const references = [...content.matchAll(/(?:src|href)\s*=\s*["']([^"']+)|(?:import|export)\s+(?:[^"']*?\s+from\s+)?["']([^"']+)["']/g)]
         .map((match) => match[1] || match[2])
         .filter(Boolean);
+      const baseHref = content.match(/<base\b[^>]*\bhref\s*=\s*["']([^"']+)["']/i)?.[1] || "";
       for (const reference of references) {
         const clean = reference.split(/[?#]/, 1)[0];
         if (!clean || clean.includes("${") || /^(?:https?:|data:|#|\/\/)/i.test(clean)) continue;
         const target = clean.startsWith("/")
           ? outputPath(clean.slice(1))
-          : path.resolve(path.dirname(file), clean);
+          : baseHref.startsWith("/")
+            ? outputPath(path.posix.join(baseHref.slice(1), clean))
+            : path.resolve(path.dirname(file), clean);
         if (!target.startsWith(`${output}${path.sep}`) || !await stat(target).then(() => true, () => false)) {
           throw new Error(`Missing local runtime dependency: ${relative} -> ${reference}`);
         }

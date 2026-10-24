@@ -1,0 +1,154 @@
+name: Responsive Release Differential QA
+
+on:
+  push:
+    branches:
+      - ci/responsive-release-differential-v3
+
+permissions:
+  contents: write
+
+concurrency:
+  group: duduq-responsive-release-v3
+  cancel-in-progress: false
+
+jobs:
+  differential-and-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout CI harness and authorized payload
+        uses: actions/checkout@v4
+        with:
+          path: harness
+
+      - name: Checkout exact production source baseline
+        uses: actions/checkout@v4
+        with:
+          ref: 617cdcd3f953c2915a116fac3dda3f6cc4df6c8f
+          path: source
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Recover exact production bytes and verify all 2,641 manifest entries
+        working-directory: harness
+        env:
+          DUDUQ_BASELINE_ROOT: ${{ github.workspace }}/baseline-dist
+        run: node ci/responsive/download-production-baseline.mjs
+
+      - name: Reconstruct exact candidate from baseline plus four authorized CSS files
+        run: node harness/ci/responsive/prepare-release.mjs
+
+      - name: Install deterministic Playwright Chromium
+        working-directory: harness
+        run: |
+          npm install --no-save --no-package-lock playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start isolated baseline and candidate servers
+        run: |
+          mkdir -p ci-run
+          (cd baseline-dist && DUDUQ_TEST_PORT=4175 node ../source/scripts/duduq-test-server.mjs > "$GITHUB_WORKSPACE/ci-run/baseline-http.log" 2>&1 & echo $! > ci-run/baseline.pid)
+          (cd candidate-dist && DUDUQ_TEST_PORT=4176 node ../source/scripts/duduq-test-server.mjs > "$GITHUB_WORKSPACE/ci-run/candidate-http.log" 2>&1 & echo $! > ci-run/candidate.pid)
+          for i in {1..60}; do
+            b=$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:4175/__duduq/status || true)
+            c=$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:4176/__duduq/status || true)
+            [ "$b" = 200 ] && [ "$c" = 200 ] && break
+            sleep 1
+          done
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:4175/__duduq/status)" = 200
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:4176/__duduq/status)" = 200
+          cat ci-run/baseline-http.log ci-run/candidate-http.log
+
+      - name: Differential QA for the 112 previously inconclusive boots
+        working-directory: harness
+        env:
+          BASELINE_ORIGIN: http://127.0.0.1:4175
+          CANDIDATE_ORIGIN: http://127.0.0.1:4176
+          DIFFERENTIAL_REPORT_PATH: ${{ github.workspace }}/ci-run/differential-112-report.json
+        run: node ci/responsive/differential-112.mjs
+
+      - name: Responsive geometry matrix (90 cases) on exact candidate
+        working-directory: harness
+        env:
+          DUDUQ_QA_ORIGIN: http://127.0.0.1:4176
+          DUDUQ_EXPECTED_ROOT: ${{ github.workspace }}/candidate-dist
+          DUDUQ_CANDIDATE_BUILD_HASH: a94b510cf4178a4ae84aba352d15ea9fe1a0ed66545a8071822f3ec49434b829
+          DUDUQ_RESPONSIVE_OUTPUT: ${{ github.workspace }}/harness/ci-run/candidate-geometry-90.json
+          DUDUQ_RESPONSIVE_EVIDENCE_DIR: ${{ github.workspace }}/harness/ci-run/screenshots/geometry-90
+        run: node ci/responsive/canonical-responsive-certification.mjs
+
+      - name: Bubble Pop responsive interaction regression on exact candidate
+        working-directory: harness
+        env:
+          DUDUQ_QA_ORIGIN: http://127.0.0.1:4176
+          DUDUQ_EXPECTED_ROOT: ${{ github.workspace }}/candidate-dist
+          DUDUQ_CANDIDATE_BUILD_HASH: a94b510cf4178a4ae84aba352d15ea9fe1a0ed66545a8071822f3ec49434b829
+          DUDUQ_EVIDENCE_DIR: ${{ github.workspace }}/harness/ci-run/screenshots/bubble-pop
+          DUDUQ_REPORT_PATH: ${{ github.workspace }}/harness/ci-run/bubble-pop.json
+        run: node ci/responsive/bubble-pop.e2e.mjs
+
+      - name: Target Shooter responsive interaction regression on exact candidate
+        working-directory: harness
+        env:
+          DUDUQ_QA_ORIGIN: http://127.0.0.1:4176
+          DUDUQ_EXPECTED_ROOT: ${{ github.workspace }}/candidate-dist
+          DUDUQ_CANDIDATE_BUILD_HASH: a94b510cf4178a4ae84aba352d15ea9fe1a0ed66545a8071822f3ec49434b829
+          DUDUQ_EVIDENCE_DIR: ${{ github.workspace }}/harness/ci-run/screenshots/target-shooter
+          DUDUQ_REPORT_PATH: ${{ github.workspace }}/harness/ci-run/target-shooter.json
+        run: node ci/responsive/target-shooter.e2e.mjs
+
+      - name: Grouping responsive interaction regression on exact candidate
+        working-directory: harness
+        env:
+          DUDUQ_QA_ORIGIN: http://127.0.0.1:4176
+          DUDUQ_EXPECTED_ROOT: ${{ github.workspace }}/candidate-dist
+          DUDUQ_CANDIDATE_BUILD_HASH: a94b510cf4178a4ae84aba352d15ea9fe1a0ed66545a8071822f3ec49434b829
+          DUDUQ_EVIDENCE_DIR: ${{ github.workspace }}/harness/ci-run/screenshots/grouping
+          DUDUQ_REPORT_PATH: ${{ github.workspace }}/harness/ci-run/grouping.json
+        run: node ci/responsive/grouping.e2e.mjs
+
+      - name: Run legitimate Y1M01 Intro-to-final journey against candidate
+        working-directory: harness
+        env:
+          DUDUQ_QA_ORIGIN: http://127.0.0.1:4176
+          DUDUQ_EXPECTED_ROOT: ${{ github.workspace }}/candidate-dist
+          DUDUQ_CANDIDATE_BUILD_HASH: a94b510cf4178a4ae84aba352d15ea9fe1a0ed66545a8071822f3ec49434b829
+          DUDUQ_REPORT_PATH: ${{ github.workspace }}/harness/ci-run/y1m01-sequential.json
+        run: node ci/responsive/y1m01-sequential.mjs
+
+      - name: Verify all official module routes and baseline contract evidence
+        working-directory: harness
+        env:
+          DUDUQ_CANDIDATE_ORIGIN: http://127.0.0.1:4176
+        run: node ci/responsive/release-smoke.mjs
+
+      - name: Stop isolated servers
+        if: always()
+        run: |
+          for f in ci-run/baseline.pid ci-run/candidate.pid; do
+            if [ -f "$f" ]; then kill "$(cat "$f")" 2>/dev/null || true; fi
+          done
+
+      - name: Upload differential and responsive evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-responsive-differential-v3-${{ github.run_id }}
+          path: |
+            ci-run/
+            harness/ci-run/
+            harness/differential-112-report.json
+            ci-output-artifact.json
+            harness/baseline-recovery.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Release gate summary
+        if: always()
+        run: |
+          echo 'Candidate remains isolated until the differential, responsive, route, and sequential-session gates have passed.'
+          echo 'Cloudflare preview and production are promoted only after this run is fully green.'

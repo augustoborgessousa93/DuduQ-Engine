@@ -1,0 +1,27 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+
+const root=process.cwd(),base=process.env.DUDUQ_QA_BASE_URL||'http://127.0.0.1:4177';
+const manifest=JSON.parse(await fs.readFile(path.join(root,'docs/qa/DUDUQ_ENGLISH_600_ACTIVITY_PRODUCTION_ROUTES_2026-10-20.json'),'utf8'));
+const {chromium}=await import(pathToFileURL('C:/Users/augus/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs').href);
+const browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+const context=await browser.newContext({viewport:{width:1366,height:768}});
+await context.addInitScript(()=>{const p=new URLSearchParams(location.search);const moduleId=p.get('duduqModule')||'';const itemId=p.get('duduqItem')||'';if(moduleId==='Y1M01'){const index=Number(itemId.match(/Q(\d{3})$/)?.[1])-1;if(index>=0&&index<20)sessionStorage.setItem('duduq-module:Y1M01',JSON.stringify({moduleId,index,itemId}))}});
+const page=await context.newPage();let active=null;const pageErrors=[],httpErrors=[],activities=[];
+page.on('pageerror',e=>pageErrors.push({activityId:active,message:e.message}));
+page.on('response',r=>{if(r.status()>=400)httpErrors.push({activityId:active,status:r.status(),url:r.url()})});
+for(const expected of manifest.activities){
+  active=expected.activityId;const errorsBefore=pageErrors.length,httpBefore=httpErrors.length;let row;
+  try{
+    const res=await page.goto(new URL(expected.route,base).href,{waitUntil:'domcontentloaded',timeout:20000});
+    await page.waitForFunction(()=>Boolean(window.DuduQY1M01?.ready||window.DuduQProductionQuestionBootstrap?.ready),null,{timeout:15000});
+    const actual=await page.evaluate(async()=>{const moduleId=new URL(location.href).searchParams.get('duduqModule')||'';const api=moduleId==='Y1M01'?window.DuduQY1M01:window.DuduQProductionQuestionBootstrap;const c=await api.ready;const root=document.querySelector('#game,#smart-sentence-root,#memory-quest-root');const visible=s=>{const n=document.querySelector(s);return !!n&&!!n.getClientRects().length&&getComputedStyle(n).visibility!=='hidden'};return {moduleId:c?.moduleId||api.moduleId,itemId:c?.item?.item_id||c?.item?.questionId||c?.item?.id,mechanic:c?.mechanic||c?.item?.mechanicId,apiEnabled:!!api.enabled,root:root?.id||root?.className||null,questionVisible:visible('.duduq-canonical-question-hud')||visible('.smart-sentence-instruction')||visible('.question-panel'),instructionAudioBound:!!window.DuduQInstructionAudioConfig?.instructionAudioEnId,interactionState:root?.dataset.duduqInteractionState||root?.dataset.interactionState||null,documentOverflowX:Math.max(0,document.documentElement.scrollWidth-document.documentElement.clientWidth),documentOverflowY:Math.max(0,document.documentElement.scrollHeight-document.documentElement.clientHeight),gameOverflowX:root?Math.max(0,root.scrollWidth-root.clientWidth):null,gameOverflowY:root?Math.max(0,root.scrollHeight-root.clientHeight):null,criticalAssets:[...document.images].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src)}});
+    const identity=actual.moduleId===expected.module&&actual.itemId===expected.activityId&&actual.mechanic===expected.mechanic;
+    row={moduleId:expected.module,questionId:expected.activityId,mechanic:expected.mechanic,route:expected.route,http:res?.status()===200?'PASS':'FAIL',identity:identity?'PASS':'FAIL',runtime:actual.apiEnabled&&actual.root?'PASS':'FAIL',question:actual.questionVisible?'PASS':'ISSUE',instructionAudio:actual.instructionAudioBound?'BOUND':'ISSUE',assets:actual.criticalAssets.length?actual.criticalAssets:'PASS',documentOverflowX:actual.documentOverflowX,documentOverflowY:actual.documentOverflowY,gameOverflowX:actual.gameOverflowX,gameOverflowY:actual.gameOverflowY,interaction:'NOT_TESTED',result:res?.status()===200&&identity&&actual.apiEnabled&&actual.root&&pageErrors.length===errorsBefore&&httpErrors.length===httpBefore?'BOOT_PASS_INTERACTION_NOT_TESTED':'BOOT_ISSUE',actual};
+  }catch(e){row={moduleId:expected.module,questionId:expected.activityId,mechanic:expected.mechanic,route:expected.route,http:'ISSUE',identity:'ISSUE',runtime:'ISSUE',question:'NOT_TESTED',instructionAudio:'NOT_TESTED',assets:'NOT_TESTED',documentOverflowX:null,documentOverflowY:null,gameOverflowX:null,gameOverflowY:null,interaction:'NOT_TESTED',result:'BOOT_ISSUE',error:e.message}}
+  activities.push(row);if(activities.length%100===0)console.log(`V4_BOOT ${activities.length}/600`);
+}
+await browser.close();
+const report={feature:'DUDUQ_FINAL_600_ACTIVITY_BROWSER_BOOT_V4',testedAt:new Date().toISOString(),source:base,requested:600,rendered:activities.length,bootPass:activities.filter(x=>x.result==='BOOT_PASS_INTERACTION_NOT_TESTED').length,bootIssue:activities.filter(x=>x.result==='BOOT_ISSUE').length,correctFlow:'NOT_TESTED',pageErrors,httpErrors,activities,status:activities.length===600&&activities.every(x=>x.result==='BOOT_PASS_INTERACTION_NOT_TESTED')?'PASS_BOOT_ONLY':'ISSUE'};
+const output=path.join(root,'docs/qa/DUDUQ_FINAL_600_ACTIVITY_BROWSER_BOOT_V4.json');await fs.writeFile(output,`${JSON.stringify(report,null,2)}\n`);console.log(JSON.stringify({status:report.status,requested:600,rendered:report.rendered,bootPass:report.bootPass,bootIssue:report.bootIssue,pageErrors:pageErrors.length,httpErrors:httpErrors.length,output},null,2));if(report.status==='ISSUE')process.exitCode=1;
