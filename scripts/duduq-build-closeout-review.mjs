@@ -29,19 +29,25 @@ const integrityEvidence = {
   manifestBytes: manifestBytes.length,
   verificationReport: await readJson(path.join(REPORT_DIR, 'DUDUQ_AUTONOMOUS_FINAL_CERTIFICATION.json')),
 };
+if (integrityEvidence.verificationReport.finalCandidateManifestSha256 !== EXPECTED_SHA) {
+  throw new Error('Final certification report does not match the frozen candidate SHA');
+}
 
 const fullscreen = await readJson(path.join(REPORT_DIR, 'DUDUQ_FULLSCREEN_13_FINAL.json'));
 const memoryTwoPair = await readJson(path.join(REPORT_DIR, 'DUDUQ_MEMORY_QUEST_TWO_PAIR_FIT_E2E.json'));
 const q020 = await readJson(path.join(REPORT_DIR, 'DUDUQ_FINAL_SEQUENTIAL_FULLSCREEN_AND_Q020.json'));
+for (const [name, report] of [['13-variant fullscreen', fullscreen], ['Memory Quest two-pair', memoryTwoPair], ['Q020/module completion', q020]]) {
+  if (report.candidateSha256 !== EXPECTED_SHA) throw new Error(`${name} evidence belongs to ${report.candidateSha256}, not the frozen candidate`);
+}
+if (fullscreen.status !== 'PASS' || fullscreen.variantPass !== 13 || fullscreen.variants?.length !== 13) throw new Error('The frozen candidate does not have a passing 13-variant report');
+if (memoryTwoPair.status !== 'PASS' || (memoryTwoPair.cases || []).length !== 2) throw new Error('The frozen candidate does not have both Memory Quest two-pair cases');
+if (q020.q020?.status !== 'PASS' || q020.moduleCompletion !== 'PASS') throw new Error('The frozen candidate Q020/module-completion report is not PASS');
 const reportHashes = {};
 for (const name of [
   'DUDUQ_AUTONOMOUS_FINAL_CERTIFICATION.json',
   'DUDUQ_FULLSCREEN_13_FINAL.json',
   'DUDUQ_MEMORY_QUEST_TWO_PAIR_FIT_E2E.json',
   'DUDUQ_FINAL_SEQUENTIAL_FULLSCREEN_AND_Q020.json',
-  'DUDUQ_FULLSCREEN_MEMORY_AUDIO_TEXT_FINAL.json',
-  'DUDUQ_FULLSCREEN_MEMORY_TEXT_IMAGE_FINAL.json',
-  'DUDUQ_Y1M01_DEFAULT_VARIANTS_V6_7.json',
 ]) {
   const bytes = await fs.readFile(path.join(REPORT_DIR, name));
   reportHashes[name] = sha256(bytes);
@@ -92,9 +98,9 @@ for (const name of screenshots) {
   else if (name.startsWith('variant-matching-')) group = 'Matching';
   else if (name.startsWith('variant-smart-sentence-complete-')) group = 'Smart Sentence Complete';
   else if (name.startsWith('variant-smart-sentence-order-')) group = 'Smart Sentence Order';
-  const record = fullscreen.variants.find(v => name.includes(`variant-${v.mechanicId}-`) && name.includes(v.variant.toLowerCase().replaceAll('_', '-')))
-    || fullscreen.variants.find(v => name.toLowerCase().includes(v.mechanicId) && name.toLowerCase().includes(v.variant.toLowerCase().replaceAll('_', '-')))
-    || fullscreen.variants.find(v => name.toLowerCase().includes(v.mechanicId));
+  const normalizedName = name.toLowerCase().replaceAll('_', '-');
+  const record = fullscreen.variants.find(v => normalizedName.includes(`variant-${v.mechanicId.toLowerCase()}-`) && normalizedName.includes(v.variant.toLowerCase().replaceAll('_', '-')));
+  if (!record) throw new Error(`Could not map screenshot to one of the 13 variants: ${name}`);
   const activityId = record?.activityId || 'UNMAPPED';
   const viewport = suffix.includes('1024') ? '1024×559 embed (captura 1024)' : suffix.includes('1366') ? '1366×768 embed/restored' : '1366×768 fullscreen';
   await addEvidence(path.join(variantDir, name), group, activityId, suffix, viewport, 'DUDUQ_FULLSCREEN_13_FINAL.json');
@@ -118,6 +124,8 @@ for (const entry of q020Files) {
   const viewport = /1920x1080/i.test(name) ? '1920×1080' : /1366x768/i.test(name) ? '1366×768' : /1024x559/i.test(name) ? '1024×559' : 'variável / legado';
   await addEvidence(path.join(q020Dir, name), 'Y1M01 Q020 e encerramento', activityId, state, viewport, 'DUDUQ_FINAL_SEQUENTIAL_FULLSCREEN_AND_Q020.json');
 }
+const primaryEvidenceActivities = new Set(evidenceRecords.filter(item => item.sourceReport === 'DUDUQ_FULLSCREEN_13_FINAL.json').map(item => item.activityId));
+for (const variant of fullscreen.variants) if (!primaryEvidenceActivities.has(variant.activityId)) throw new Error(`No primary screenshot copied for ${variant.mechanicId}::${variant.variant}`);
 
 // Read-only geometric indicators: they are flags for review, not an aesthetic verdict.
 function collectFlags(value, pathLabel, out) {
@@ -152,11 +160,17 @@ const geometry = (fullscreen.variants || []).map(variant => {
     geometryFlags: flags,
   };
 });
+const q020GeometryFlags = [];
+collectFlags(q020.q020?.incorrectFeedbackResponsive, 'q020.incorrectFeedbackResponsive', q020GeometryFlags);
+collectFlags(q020.q020?.correctFeedbackResponsive, 'q020.correctFeedbackResponsive', q020GeometryFlags);
 
 // Reconcile actual V3 media references against the frozen candidate's media registry.
 const englishRoot = path.join(CANDIDATE, 'dist-pages', 'content', 'english');
 const registryPath = path.join(englishRoot, 'media', 'media-registry.json');
 const registry = await readJson(registryPath);
+const masterV3Path = path.join(englishRoot, 'master', 'curricular-master-v3.json');
+const masterV3Bytes = await fs.readFile(masterV3Path);
+const masterV3 = JSON.parse(masterV3Bytes.toString('utf8'));
 const registryById = new Map();
 for (const entry of registry.entries || []) {
   const list = registryById.get(entry.mediaId) || [];
@@ -206,7 +220,8 @@ for (let year = 1; year <= 5; year++) {
           if (typeof value === 'string' && (/^(mediaId|media_id|image_ref|imageRef|imageId|illustrationId)$/i.test(key))) {
             const entry = (registryById.get(value) || [])[0];
             if (isImageMediaId(value, next, entry)) {
-              const use = { activityId, moduleId, year, role: next, prompt: prompts.map(p => p.value).join('\n') || null, semanticReview: obj.semanticReview || item.semanticReview || null };
+              const roleLabel = obj.role ? `${next} (${obj.role})` : obj.correct === true ? `${next} (${obj.optionId || 'option'}: correct)` : obj.correct === false ? `${next} (${obj.optionId || 'option'}: distractor)` : next;
+              const use = { activityId, moduleId, year, role: roleLabel, prompt: prompts.map(p => p.value).join('\n') || null, promptSourceFields: prompts.map(p => p.field), semanticReview: obj.semanticReview || item.semanticReview || null };
               const uses = mediaUses.get(value) || [];
               uses.push(use);
               mediaUses.set(value, uses);
@@ -227,11 +242,12 @@ for (const [mediaId, uses] of [...mediaUses.entries()].sort(([a], [b]) => a.loca
   const declaredAssets = entry?.assets?.length ? entry.assets : entry?.urlOrPath ? [{ path: entry.urlOrPath }] : [];
   for (const asset of declaredAssets) {
     const rel = asset.path || entry.urlOrPath;
-    const file = rel ? path.resolve(CANDIDATE, 'dist-pages', rel.replace(/^\/+/, '')) : null;
+    const isRemote = typeof rel === 'string' && /^https?:\/\//i.test(rel);
+    const file = rel && !isRemote ? path.resolve(CANDIDATE, 'dist-pages', rel.replace(/^\/+/, '')) : null;
     const exists = file ? await fs.access(file).then(() => true, () => false) : false;
     let actualSha = null;
     if (exists) actualSha = sha256(await fs.readFile(file));
-    assetRecords.push({ path: rel || null, exists, declaredSha256: asset.sha256 || null, actualSha256: actualSha, shaMatches: asset.sha256 ? actualSha?.toLowerCase() === asset.sha256.toLowerCase() : null, temporary: asset.temporary ?? entry?.temporary ?? false });
+    assetRecords.push({ path: rel || null, exists, remoteReference: isRemote, declaredSha256: asset.sha256 || null, actualSha256: actualSha, shaMatches: asset.sha256 ? actualSha?.toLowerCase() === asset.sha256.toLowerCase() : null, temporary: asset.temporary ?? entry?.temporary ?? false });
     if (actualSha) {
       const group = physicalBySha.get(actualSha) || new Set();
       group.add(mediaId);
@@ -241,13 +257,15 @@ for (const [mediaId, uses] of [...mediaUses.entries()].sort(([a], [b]) => a.loca
   let status;
   if (!entry) status = 'MISSING_FROM_MEDIA_REGISTRY';
   else if (entries.length > 1) status = 'DUPLICATE_MEDIA_ID_REGISTRY_ENTRIES';
-  else if (assetRecords.length && assetRecords.some(asset => !asset.exists || asset.shaMatches === false)) status = 'ASSET_MISSING_OR_HASH_MISMATCH';
+  else if (assetRecords.length && assetRecords.some(asset => !asset.remoteReference && (!asset.exists || asset.shaMatches === false))) status = 'ASSET_MISSING_OR_HASH_MISMATCH';
+  else if (assetRecords.some(asset => asset.remoteReference)) status = 'REMOTE_ASSET_NOT_VERIFIED';
   else if (entry.status !== 'APPROVED') status = `REGISTRY_${entry.status || 'STATUS_UNSET'}`;
   else if (entry.temporary || (entry.assets || []).some(asset => asset.temporary) || /REPLACE_LATER|TEMPORARY_ACCEPTED/i.test(`${entry.integrationStatus || ''} ${entry.humanResolutionStatus || ''}`)) status = 'PROVISIONAL_TEMPORARY_ASSET';
   else status = 'APPROVED_ASSET';
   const reviewFlags = [];
   if (uses.some(use => /NEEDS_HUMAN_REVIEW/i.test(use.prompt || ''))) reviewFlags.push('V3_SEMANTIC_REVIEW_FLAG');
   if (uses.some(use => /NEEDS_HUMAN_REVIEW/i.test(use.semanticReview || ''))) reviewFlags.push('V3_ACTIVITY_SEMANTIC_REVIEW_PENDING');
+  reviewFlags.push('NEEDS_HUMAN_REVIEW_V2_INVENTORY_RECONCILIATION_PENDING');
   if (!entries.length || entries.length > 1 || status === 'ASSET_MISSING_OR_HASH_MISMATCH') reviewFlags.push('NEEDS_HUMAN_REVIEW');
   const activities = [...new Set(uses.map(use => use.activityId))].sort();
   mediaManifest.push({
@@ -256,7 +274,9 @@ for (const [mediaId, uses] of [...mediaUses.entries()].sort(([a], [b]) => a.loca
     status,
     priority: status === 'MISSING_FROM_MEDIA_REGISTRY' || status === 'ASSET_MISSING_OR_HASH_MISMATCH' ? 'P0_CONTENT_BLOCKER' : status === 'PROVISIONAL_TEMPORARY_ASSET' ? 'P1_OFFICIAL_MEDIA_REPLACEMENT' : reviewFlags.length ? 'HUMAN_REVIEW' : 'NORMAL',
     v2InventoryComparison: 'NOT_AVAILABLE_SOURCE_WORKBOOK_NOT_FOUND',
+    semanticAssessment: uses.some(use => /NEEDS_HUMAN_REVIEW/i.test(use.semanticReview || '')) ? 'NEEDS_HUMAN_REVIEW' : 'NOT_RECONCILED_TO_V2_INVENTORY',
     prompt: [...new Set(uses.map(use => use.prompt).filter(Boolean))],
+    promptSourceFields: [...new Set(uses.flatMap(use => use.promptSourceFields || []))],
     activities,
     modules: [...new Set(uses.map(use => use.moduleId))].sort(),
     pedagogicalRoles: [...new Set(uses.map(use => use.role))].sort(),
@@ -269,31 +289,73 @@ for (const [mediaId, uses] of [...mediaUses.entries()].sort(([a], [b]) => a.loca
 const duplicatePhysicalAssets = [...physicalBySha.entries()]
   .filter(([, ids]) => ids.size > 1)
   .map(([assetSha256, ids]) => ({ assetSha256, mediaIds: [...ids].sort() }));
+const duplicatePhysicalMediaIds = new Set(duplicatePhysicalAssets.flatMap(group => group.mediaIds));
+for (const item of mediaManifest) item.duplicatePhysicalAsset = duplicatePhysicalMediaIds.has(item.mediaId);
+const provisionalItems = mediaManifest.filter(item => item.status === 'PROVISIONAL_TEMPORARY_ASSET');
+const provisionalPhysicalKeys = new Set(provisionalItems.flatMap(item => item.registry?.assets?.map(asset => asset.actualSha256).filter(Boolean) || [`MEDIAID:${item.mediaId}`]));
 const imageRegistryEntries = (registry.entries || []).filter(entry => entry.kind?.toLowerCase() === 'image');
+const mediaIdsWithPrompt = mediaManifest.filter(item => item.prompt?.length).length;
+const mediaIdsWithSemanticReview = mediaManifest.filter(item => item.reviewFlags?.some(flag => ['V3_ACTIVITY_SEMANTIC_REVIEW_PENDING', 'V3_SEMANTIC_REVIEW_FLAG'].includes(flag))).length;
+const moduleMediaPlan = modules.map(module => {
+  const items = mediaManifest.filter(item => item.modules.includes(module.moduleId));
+  const hashes = new Set(items.flatMap(item => item.registry?.assets?.map(asset => asset.actualSha256).filter(Boolean) || []));
+  return {
+    moduleId: module.moduleId,
+    activities: module.count,
+    distinctImageMediaIds: items.length,
+    approvedRegistryIds: items.filter(item => item.status === 'APPROVED_ASSET').length,
+    provisionalIds: items.filter(item => item.status === 'PROVISIONAL_TEMPORARY_ASSET').length,
+    distinctPhysicalSha256: hashes.size,
+    needsHumanReviewIds: items.filter(item => item.reviewFlags.length > 0).length,
+  };
+});
 const mediaSummary = {
   schema: 'DUDUQ_OFFICIAL_MEDIA_RECONCILIATION_V1',
   candidateManifestSha256: actualCandidateSha,
   source: 'Frozen compiled V3 curriculum contracts (30 questions.json files) and compiled media-registry.json',
+  v3Master: { path: 'dist-pages/content/english/master/curricular-master-v3.json', sha256: sha256(masterV3Bytes), rootKeys: Object.keys(masterV3), declaredActivityCount: masterV3.activityCount ?? masterV3.totalActivities ?? null },
   v2InventoryWorkbook: {
     expectedFilename: 'DUDUQ_English_Inventario_Imagens_e_Prompts_IA.xlsx',
-    status: 'NOT_FOUND_IN_WORKSPACE_OR_DOWNLOADS_INDEX',
+    status: 'NOT_FOUND_IN_WORKSPACE',
     comparisonStatus: 'BLOCKED_NO_SUBSTITUTION_MADE',
-    note: 'A separate V2 curricular master workbook is present, but it is not the named image/prompt inventory and was not substituted for it.',
+    availableRelatedWorkbook: 'content/english/source/DUDUQ_English_Master_Curricular_Pedagogico_V2.xlsx',
+    note: 'A V2 curricular master workbook is present, but it is not the named image/prompt inventory and was not substituted for it.',
   },
   coverage: { modules: modules.length, activities: modules.reduce((sum, module) => sum + module.count, 0), modulesDetail: modules },
+  productionPlan: {
+    recommendedPilot: moduleMediaPlan.find(item => item.moduleId === 'Y1M01'),
+    moduleBreakdown: moduleMediaPlan,
+    suggestedBatches: [
+      ['Y1M01'],
+      ['Y1M02', 'Y1M03', 'Y1M04', 'Y1M05', 'Y1M06'],
+      ...[2, 3, 4, 5].map(year => Array.from({ length: 6 }, (_, index) => `Y${year}M${String(index + 1).padStart(2, '0')}`)),
+    ],
+    strategy: 'Validate image prompt-to-contract mapping and actual use in Y1M01 first. After human approval of the pilot, process the remaining Year 1 modules as one batch and then each remaining year as a separate six-module batch. Reconcile after each batch before the next.',
+  },
   imageRequirements: {
     referenceOccurrences: [...mediaUses.values()].reduce((sum, uses) => sum + uses.length, 0),
     distinctReferencedMediaIds: mediaManifest.length,
     distinctPhysicalAssetsByVerifiedSha256: physicalBySha.size,
     distinctV3VisualRequirementBases: v3VisualBases.size,
+    distinctV3VisualRequirementBaseTexts: [...v3VisualBases].sort(),
+    referencedMediaIdsWithExplicitPromptOrVisualBrief: mediaIdsWithPrompt,
+    referencedMediaIdsWithoutExplicitPromptOrVisualBrief: mediaManifest.length - mediaIdsWithPrompt,
+    provisionalMediaIds: provisionalItems.length,
+    provisionalDistinctPhysicalAssetKeys: provisionalPhysicalKeys.size,
+    mediaIdsFlaggedForHumanSemanticReview: mediaIdsWithSemanticReview,
+    mediaIdsPendingV2InventoryComparison: mediaManifest.length,
+    referencesMissingFromRegistry: mediaManifest.filter(item => item.status === 'MISSING_FROM_MEDIA_REGISTRY').length,
+    referencedFilesMissingOrHashMismatched: mediaManifest.filter(item => item.status === 'ASSET_MISSING_OR_HASH_MISMATCH').length,
+    mediaIdsSharingPhysicalHashes: duplicatePhysicalMediaIds.size,
     imageRegistryEntries: imageRegistryEntries.length,
     duplicateMediaIdsInRegistry: [...registryById.entries()].filter(([, entries]) => entries.length > 1).map(([mediaId, entries]) => ({ mediaId, count: entries.length })),
     duplicatePhysicalAssets,
   },
   classifications: Object.fromEntries([...new Set(mediaManifest.map(item => item.status))].sort().map(status => [status, mediaManifest.filter(item => item.status === status).length])),
+  reviewFlagsSummary: Object.fromEntries([...new Set(mediaManifest.flatMap(item => item.reviewFlags))].sort().map(flag => [flag, mediaManifest.filter(item => item.reviewFlags.includes(flag)).length])),
   items: mediaManifest,
   limitations: [
-    'The named V2 image/prompt inventory workbook was unavailable, so V2 prompt/status reconciliation is not asserted.',
+    'The named V2 image/prompt inventory workbook was unavailable in the workspace, so V2 prompt/status reconciliation is not asserted.',
     'No prompt was generated or inferred; only prompt/visual requirement text present in the V3 contract is included.',
     'Registry status does not itself certify visual-semantic correctness; existing semantic-review flags remain visible.',
   ],
@@ -311,6 +373,7 @@ const visualManifest = {
   memoryTwoPair: { status: memoryTwoPair.status, passed: memoryTwoPair.summary?.passed ?? memoryTwoPair.cases?.filter(item => item.result === 'PASS').length ?? 0, expected: memoryTwoPair.summary?.expected ?? 2, activities: (memoryTwoPair.cases || []).map(item => item.activityId) },
   q020: { status: q020.q020?.status || q020.q020?.result || 'see report', moduleCompletion: q020.moduleCompletion, activityId: 'Y1M01-Q020' },
   geometryIndicators: geometry,
+  q020GeometryFlags,
   evidence: evidenceRecords,
   automatedInterpretation: 'Geometric indicators are a screening aid only. They do not equal human aesthetic approval.',
 };
@@ -323,15 +386,28 @@ const html = `<!doctype html>
 </style></head><body><header><h1>DUDUQ English · painel de homologação visual</h1><div class="meta"><span>Artefato: <code>${actualCandidateSha}</code></span><span>78/78 capturas principais verificadas por hash</span><span class="status">HUMAN_VISUAL_APPROVAL: PENDING</span></div></header><main><div class="note">As capturas são evidências de QA e não Gold Masters. Indicadores geométricos automatizados ajudam a localizar possíveis problemas, mas não emitem aprovação estética humana.</div><div id="summary" class="summary"></div><div class="toolbar"><input id="search" type="search" placeholder="Buscar variante, questão ou estado"><select id="mechanic"><option value="">Todas as mecânicas</option></select><select id="viewport"><option value="">Todos os contêineres</option><option>1024×559</option><option>1366×768</option><option>1920×1080</option><option>variável / legado</option></select><select id="state"><option value="">Todos os estados</option></select></div><div id="content"></div><div class="footer">Fonte técnica: candidata congelada e relatórios QA vinculados ao mesmo SHA. A prancha inclui estados prontos, feedbacks e retorno de fullscreen quando disponíveis. Casos sem captura correspondente não são sintetizados.</div></main><div id="modal" class="modal" role="dialog" aria-modal="true" aria-label="Zoom da captura"><button class="close" id="close">Fechar ×</button><img id="zoom" alt="Captura ampliada"></div><script>
 const data=${JSON.stringify(visualManifest)};const q=(s)=>document.querySelector(s);const ev=data.evidence;const groups=[...new Set(ev.map(x=>x.group))];const mechanic=q('#mechanic');groups.forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;mechanic.append(o)});const states=[...new Set(ev.map(x=>x.state))].sort();states.forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x; q('#state').append(o)});q('#summary').innerHTML=[['Variantes fullscreen',data.fullscreenVariantSummary.passed+'/'+data.fullscreenVariantSummary.expected],['Capturas principais',data.fullscreenVariantSummary.screenshotsCopied],['Memory Quest especiais',data.memoryTwoPair.passed+'/'+data.memoryTwoPair.expected],['Q020',data.q020.status],['Encerramento','Incluído'],['Aprovação visual humana','PENDENTE']].map(([a,b])=>'<div class="stat"><b>'+b+'</b><span>'+a+'</span></div>').join('');function render(){const term=q('#search').value.toLowerCase(),g=mechanic.value,v=q('#viewport').value,s=q('#state').value;const filtered=ev.filter(x=>(!g||x.group===g)&&(!v||x.viewport.includes(v))&&(!s||x.state===s)&&(!term||[x.group,x.activityId,x.state,x.file].join(' ').toLowerCase().includes(term)));const buckets=new Map();for(const e of filtered){const key=e.group+' · '+e.activityId;const arr=buckets.get(key)||[];arr.push(e);buckets.set(key,arr)}q('#content').innerHTML=[...buckets.entries()].map(([name,items])=>'<section class="group"><h2>'+name+'</h2><p class="sub">'+items.length+' captura(s) · '+items.map(x=>x.viewport).filter((x,i,a)=>a.indexOf(x)===i).join(' / ')+'</p><div class="grid">'+items.map(e=>'<article class="card"><img class="thumb" loading="lazy" src="'+e.file+'" alt="'+e.activityId+' — '+e.state+' — '+e.viewport+'" data-zoom="'+e.file+'"><div class="details"><strong>'+e.state.replaceAll('-',' ')+'</strong><small>'+e.viewport+'</small><small>SHA-256 da captura: '+e.sha256.slice(0,16)+'…</small><span class="pill">'+e.activityId+'</span><span class="pill">'+e.group+'</span></div></article>').join('')+'</div></section>').join('')||'<div class="empty">Nenhuma captura corresponde aos filtros.</div>';document.querySelectorAll('[data-zoom]').forEach(img=>img.onclick=()=>{q('#zoom').src=img.dataset.zoom;q('#modal').classList.add('open')})}['input','change'].forEach(ev=>{q('#search').addEventListener(ev,render);mechanic.addEventListener(ev,render);q('#viewport').addEventListener(ev,render);q('#state').addEventListener(ev,render)});function close(){q('#modal').classList.remove('open');q('#zoom').src=''}q('#close').onclick=close;q('#modal').onclick=e=>{if(e.target.id==='modal')close()};document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});render();
 </script></body></html>`;
-await fs.writeFile(path.join(PANEL, 'index.html'), html, 'utf8');
+const screeningRows = [
+  ...geometry.map(item => ({ label: `${item.mechanic} / ${item.variant} / ${item.activityId}`, status: item.reportStatus, flags: item.geometryFlags })),
+  { label: 'Y1M01-Q020 feedback', status: q020.q020?.status || 'PASS conforme relatório', flags: q020GeometryFlags },
+];
+const screeningHtml = `<details style="background:#18212d;border:1px solid #344254;border-radius:12px;margin:14px 0;padding:12px 14px"><summary style="cursor:pointer;font-weight:650">Triagem geométrica automática — ${screeningRows.reduce((sum, row) => sum + row.flags.length, 0)} sinais para interpretação contextual</summary><p style="color:#a6b5c4;font-size:12px">Sinais de scroll/text-clipping são triagem automatizada, não reprovação. Overflow intencional, arredondamento e relações pai/filho precisam de leitura contextual. A aprovação estética humana permanece pendente.</p>${screeningRows.map(row => `<details><summary>${row.label}: ${row.flags.length} sinal(is), reporte ${row.status}</summary><pre style="font:11px ui-monospace,Consolas,monospace;white-space:pre-wrap;max-height:180px;overflow:auto;color:#cbd7e4">${JSON.stringify(row.flags, null, 2)}</pre></details>`).join('')}</details>`;
+const finalHtml = html.replace('<div class="toolbar">', `${screeningHtml}<div class="toolbar">`);
+if (finalHtml === html) throw new Error('Could not inject automated geometry screening into the visual panel');
+await fs.writeFile(path.join(PANEL, 'index.html'), finalHtml, 'utf8');
+const inlineScripts = [...finalHtml.matchAll(/<script>([\s\S]*?)<\/script>/gi)].map(match => match[1]);
+if (inlineScripts.length !== 1) throw new Error(`Expected one panel script, found ${inlineScripts.length}`);
+new Function(inlineScripts[0]);
 
 const summary = {
   schema: 'DUDUQ_FINAL_QA_CLOSEOUT_SUMMARY_V1',
   candidateSha256: actualCandidateSha,
   candidateIntegrity: { status: integrityEvidence.verificationReport.candidateIntegrity.status, compiledFiles: integrityEvidence.verificationReport.candidateIntegrity.compiledFiles, manifestEntriesVerified: integrityEvidence.verificationReport.candidateIntegrity.manifestEntriesVerified },
   visualPanel: { path: path.join(PANEL, 'index.html'), screenshotCount: evidenceRecords.length, fullscreenVariantScreenshots: screenshots.length, humanVisualApproval: 'PENDING', reportSha256: reportHashes['DUDUQ_FULLSCREEN_13_FINAL.json'] },
-  mediaManifest: { path: path.join(OUTPUT, 'DUDUQ_OFFICIAL_MEDIA_RECONCILIATION.json'), activities: mediaSummary.coverage.activities, modules: mediaSummary.coverage.modules, distinctReferencedMediaIds: mediaSummary.imageRequirements.distinctReferencedMediaIds, distinctPhysicalAssetsByVerifiedSha256: mediaSummary.imageRequirements.distinctPhysicalAssetsByVerifiedSha256, v3VisualRequirementBases: mediaSummary.imageRequirements.distinctV3VisualRequirementBases, classifications: mediaSummary.classifications, duplicatePhysicalHashGroups: mediaSummary.imageRequirements.duplicatePhysicalAssets.length, v2InventoryComparison: mediaSummary.v2InventoryWorkbook.status },
-  geometricScreening: { variants: geometry.length, variantsWithFlags: geometry.filter(item => item.geometryFlags.length).length, flags: geometry.reduce((sum, item) => sum + item.geometryFlags.length, 0), countsByType: geometry.flatMap(item => item.geometryFlags).reduce((counts, flag) => { counts[flag.type] = (counts[flag.type] || 0) + 1; return counts; }, {}), note: 'Flags are locator indicators, not automatic visual failures.' },
+  mediaManifest: { path: path.join(OUTPUT, 'DUDUQ_OFFICIAL_MEDIA_RECONCILIATION.json'), activities: mediaSummary.coverage.activities, modules: mediaSummary.coverage.modules, distinctReferencedMediaIds: mediaSummary.imageRequirements.distinctReferencedMediaIds, distinctPhysicalAssetsByVerifiedSha256: mediaSummary.imageRequirements.distinctPhysicalAssetsByVerifiedSha256, v3VisualRequirementBases: mediaSummary.imageRequirements.distinctV3VisualRequirementBases, provisionalMediaIds: mediaSummary.imageRequirements.provisionalMediaIds, provisionalDistinctPhysicalAssetKeys: mediaSummary.imageRequirements.provisionalDistinctPhysicalAssetKeys, mediaIdsWithExplicitPrompt: mediaSummary.imageRequirements.referencedMediaIdsWithExplicitPromptOrVisualBrief, mediaIdsWithoutPrompt: mediaSummary.imageRequirements.referencedMediaIdsWithoutExplicitPromptOrVisualBrief, classifications: mediaSummary.classifications, duplicatePhysicalHashGroups: mediaSummary.imageRequirements.duplicatePhysicalAssets.length, v2InventoryComparison: mediaSummary.v2InventoryWorkbook.status },
+  pilotY1M01: mediaSummary.productionPlan.recommendedPilot,
+  humanVisualApproval: 'PENDING',
+  readyForDeploy: false,
+  geometricScreening: { variants: geometry.length, variantsWithFlags: geometry.filter(item => item.geometryFlags.length).length, flags: geometry.reduce((sum, item) => sum + item.geometryFlags.length, 0), countsByType: geometry.flatMap(item => item.geometryFlags).reduce((counts, flag) => { counts[flag.type] = (counts[flag.type] || 0) + 1; return counts; }, {}), q020Flags: q020GeometryFlags.length, panelScriptSyntax: 'PASS', reportHashBinding: 'PASS', screenshotHashCopy: 'PASS', browserRenderedPanel: 'NOT_VERIFIED_SPAWN_EPERM_AND_LOCAL_FILE_URL_POLICY', note: 'Flags are locator indicators, not automatic visual failures.' },
   deployment: 'NOT_PERFORMED',
 };
 await fs.writeFile(path.join(OUTPUT, 'DUDUQ_FINAL_QA_CLOSEOUT_SUMMARY.json'), JSON.stringify(summary, null, 2) + '\n', 'utf8');
