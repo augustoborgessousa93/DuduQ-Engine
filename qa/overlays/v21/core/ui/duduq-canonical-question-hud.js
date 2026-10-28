@@ -286,7 +286,7 @@ export function DuduQCanonicalQuestionHUD({ root, eyebrow = "", question = "", a
       const expectedKind = feedback.dataset.feedback === "correct" ? "correct" : "error";
       // Both Drag & Drop variants opt into immediate feedback. Other mechanics
       // retain their original required-audio gate and event-driven unlock.
-      if (/^\\/play\\/drag-drop(?:-multimedia)?\\//.test(window.location.pathname)) {
+      if (window.location.pathname.startsWith("/play/drag-drop/") || window.location.pathname.startsWith("/play/drag-drop-multimedia/")) {
         releaseFeedback(feedback, token);
         return;
       }
