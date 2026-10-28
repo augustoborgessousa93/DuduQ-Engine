@@ -28,7 +28,10 @@ const element = type => ({
   return child;
  }, setAttribute(key, value) { this[key] = value; }
 });
+const game = element('game');
+game.className = 'game-screen';
 const document = {
+ querySelector(selector) { return selector === '#game.game-screen' ? game : null; },
  head: element('head'), documentElement: element('html'), body: element('body'),
  fullscreenElement: null, createElement: element,
  createTextNode(value) { return {type:'text',textContent:value}; },
@@ -37,7 +40,7 @@ const document = {
 const window = {addEventListener(name, callback) {listeners.window[name]=callback;}};
 vm.runInNewContext(js, {document, window});
 assert.equal(window.__DUDUQ_EBC_ATTRIBUTION_ACTIVE__, true);
-const footer = document.body.children.find(x => x.dataset?.duduqAttribution === 'ebc-2026');
+const footer = game.children.find(x => x.dataset?.duduqAttribution === 'ebc-2026');
 assert.ok(footer,'footer exists');
 assert.equal(footer.children[0].textContent,'© 2026 Copyright | Desenvolvido por ');
 assert.equal(footer.children[1].textContent,'Editora Brasil Cultural');
@@ -48,6 +51,10 @@ const css = document.head.children.find(x => x.type === 'style').textContent;
 assert.match(css,/pointer-events:none !important/);
 assert.match(css,/pointer-events:auto !important/);
 assert.match(css,/position:fixed !important/);
+assert.match(css,/z-index:0 !important/);
+assert.match(css,/\.game-screen > \.duduq-ebc-attribution \{z-index:-1 !important;\}/);
+assert.match(css,/:has\(\.feedback-ribbon:not\(\[hidden\]\)\)/);
+assert.doesNotMatch(css,/2147483000/);
 assert.match(css,/left:50% !important/);
 assert.match(css,/bottom:calc\(4px/);
 assert.match(css,/@media\(max-width:480px\)/);
@@ -57,7 +64,14 @@ listeners.document.fullscreenchange();
 assert.equal(footer.parentNode,full,'show on fullscreen game root');
 document.fullscreenElement = null;
 listeners.document.fullscreenchange();
-assert.equal(footer.parentNode,document.body,'restore normal body');
+assert.equal(footer.parentNode,game,'restore to game layer behind UI');
+game.children = [];
+footer.parentNode = null;
+listeners.document.DOMContentLoaded();
+assert.equal(footer.parentNode,game,'reattach after game was rebuilt');
+document.querySelector = () => null;
+listeners.window.pageshow();
+assert.equal(footer.parentNode,document.body,'fallback on screens without game root');
 vm.runInNewContext(js, {document,window});
 assert.equal(document.body.children.filter(x => x.dataset?.duduqAttribution === 'ebc-2026').length,1,'never duplicate');
 console.log('V23_EBC_WATERMARK_TEXT_LINK=PASS');
