@@ -6,6 +6,7 @@ export EXPECTED_ARTIFACT_SHA256=CED5F33E2DCD0DB33D66B7602162FA3520AA88A9F605B655
 node --check qa/import-v19-immutable-cdn.mjs
 node qa/import-v19-immutable-cdn.mjs
 node qa/verify-artifact.mjs
+node qa/apply-editorial-media-overlays.mjs
 test "$(git hash-object functions/play/english/_middleware.js)" = "50f6739327744989c695bf6f4872cc4a96e93084"
 echo "V20_MIDDLEWARE_PINNED_GIT_BLOB=PASS:50f6739327744989c695bf6f4872cc4a96e93084"
 sha256sum functions/play/english/_middleware.js

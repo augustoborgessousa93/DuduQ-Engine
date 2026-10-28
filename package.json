@@ -7,6 +7,7 @@
         "duduq:resume": "node scripts/duduq-autopilot.mjs resume",
         "duduq:validate": "node scripts/duduq-autopilot.mjs validate",
         "duduq:media:scan": "node scripts/duduq-image-pipeline.mjs scan",
+    "duduq:content-studio": "node scripts/duduq-content-studio.mjs",
     "duduq:media:validate": "node scripts/duduq-image-pipeline.mjs validate",
     "duduq:validate:drag-drop": "node scripts/validate-drag-drop-multimedia-contract.mjs",
         "audio:list": "node duduq-audio/control/cli.mjs list",

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>DUDUQ · Estúdio de imagens</title>
+  <link rel="stylesheet" href="/tools/content-studio/studio.css">
+  <script type="module" src="/tools/content-studio/studio.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/studio/" aria-label="DUDUQ Estúdio de imagens">
+        <span class="brand-mark">D</span><span><strong>DUDUQ</strong><small>ESTÚDIO DE IMAGENS</small></span>
+      </a>
+      <div class="topbar-meta"><span class="env-pill"><i></i> QA LOCAL · V19 IMUTÁVEL</span><button id="refreshButton" class="icon-button" type="button" title="Atualizar inventário" aria-label="Atualizar inventário">↻</button></div>
+    </header>
+
+    <main>
+      <section class="welcome">
+        <div><p class="eyebrow">BIBLIOTECA PEDAGÓGICA · INGLÊS</p><h1>Imagens, com contexto.</h1><p class="lede">Encontre a arte usada na atividade, compare uma nova versão e decida exatamente onde ela deve ser aplicada.</p></div>
+        <div class="welcome-stat"><span class="stat-icon">✦</span><div><strong id="corpusStat">Conferindo biblioteca…</strong><small>base curricular verificada</small></div></div>
+      </section>
+
+      <section class="workspace-grid" aria-label="Substituição de imagem">
+        <aside class="panel navigator-panel">
+          <div class="panel-heading"><span class="step-number">01</span><div><h2>Escolha a atividade</h2><p>Localize uma imagem pelo currículo.</p></div></div>
+          <label class="field"><span>Ano</span><select id="yearSelect"><option value="">Todos os anos</option></select></label>
+          <label class="field"><span>Módulo</span><select id="moduleSelect" disabled><option value="">Todos os módulos</option></select></label>
+          <label class="field"><span>Atividade</span><select id="questionSelect" disabled><option value="">Selecione uma atividade</option></select></label>
+          <label class="field"><span>Imagem / posição</span><select id="imageSelect" disabled><option value="">Selecione uma atividade</option></select></label>
+
+          <div id="activityCard" class="activity-card empty-state"><span class="empty-icon">▧</span><strong>Sua atividade aparece aqui</strong><p>Escolha ano, módulo e questão para ver o contexto pedagógico.</p></div>
+          <section class="answer-key-panel" aria-labelledby="answerKeyHeading">
+            <div class="section-label"><span id="answerKeyHeading">GABARITO DA ATIVIDADE</span><span id="answerKeyStatus" class="answer-key-status">Selecione uma atividade</span></div>
+            <div id="answerKeyBody" class="answer-key-body"><p>O gabarito oficial aparecerá aqui, separado do jogo do aluno.</p></div>
+          </section>
+          <a id="activityPreview" class="activity-preview-link" href="#" target="_blank" rel="noopener" hidden>Pré-visualizar módulo no runtime QA <span>↗</span></a>
+          <p id="previewHint" class="preview-hint" hidden></p>
+          <div id="galleryBlock" class="gallery-block" hidden><div class="section-label"><span>IMAGENS DESTA ATIVIDADE</span><span id="galleryCount"></span></div><div id="gallery" class="thumbnail-gallery"></div></div>
+        </aside>
+
+        <section class="panel compare-panel">
+          <div class="panel-heading"><span class="step-number">02</span><div><h2>Compare as imagens</h2><p>O arquivo original nunca é sobrescrito.</p></div></div>
+          <div class="compare-grid">
+            <article class="image-card current-card"><div class="card-topline"><span class="tag tag-current">EM USO</span><button class="text-button" id="zoomCurrent" type="button" disabled>Ampliar ↗</button></div><div class="image-stage" id="currentStage"><div class="image-placeholder">▧</div></div><div class="image-info" id="currentInfo"><strong>Imagem atual</strong><small>Selecione uma referência no currículo.</small></div></article>
+            <div class="compare-arrow" aria-hidden="true">→</div>
+            <article class="image-card next-card"><div class="card-topline"><span class="tag tag-new">NOVA VERSÃO</span><span id="newStatus" class="muted-label">Aguardando arquivo</span></div><div class="image-stage" id="newStage"><div class="upload-prompt"><span>＋</span><strong>Adicionar imagem</strong><small>PNG ou WebP · até 40 MB</small></div></div><div class="image-info" id="newInfo"><strong>Nenhum arquivo selecionado</strong><small>Resolução original preservada · sem conversão</small></div></article>
+          </div>
+          <label class="drop-zone" id="dropZone"><input id="fileInput" type="file" accept="image/png,image/webp,.png,.webp"><span class="upload-symbol">↑</span><span><strong>Arraste uma imagem até aqui</strong><small>ou <u>escolha um arquivo</u> · PNG/WebP</small></span></label>
+          <div id="assetWarnings" class="notice info" hidden></div>
+          <div class="action-row"><button id="replaceButton" class="primary-button" type="button" disabled>Escolher onde substituir <span>→</span></button><span class="privacy-note">O arquivo fica local até sua confirmação.</span></div>
+        </section>
+      </section>
+
+      <section class="bottom-grid">
+        <article class="panel status-panel"><div class="panel-heading compact"><span class="status-icon">⌘</span><div><h2>Conexão editorial</h2><p>Sem acesso à produção.</p></div></div><div class="status-list"><div><span>GitHub</span><strong id="githubStatus" class="status-value pending">Verificando…</strong></div><div><span>Branch</span><strong id="branchStatus" class="status-value">—</strong></div><div><span>Última QA</span><strong id="qaStatus" class="status-value">Nenhuma execução</strong></div><div><span>Produção</span><strong class="status-value safe">Não publicada</strong></div></div></article>
+        <article class="panel history-panel"><div class="panel-heading compact"><span class="status-icon history-icon">↺</span><div><h2>Histórico de revisões</h2><p>Substituições e estados ficam rastreáveis.</p></div></div><div id="historyList" class="history-list"><div class="history-empty">Nenhuma revisão editorial neste computador.</div></div></article>
+      </section>
+      <footer><span>Base V19 · <span id="baseHash">validando integridade…</span></span><span>Conteúdo pedagógico e mecânicas protegidos</span></footer>
+    </main>
+  </div>
+
+  <dialog id="impactDialog" class="impact-dialog"><form method="dialog" class="dialog-head"><div><p class="eyebrow">CONFIRMAÇÃO DE ESCOPO</p><h2>Onde aplicar a nova imagem?</h2><p id="dialogContext" class="dialog-context"></p></div><button class="icon-button close-button" value="cancel" aria-label="Fechar">×</button></form>
+    <div class="scope-options"><label class="scope-card"><input type="radio" name="scope" value="ALL_USAGES"><span class="scope-radio"></span><span><strong>Em todas as atividades</strong><small>Atualiza usos deste mediaId. Veja a lista antes de confirmar.</small></span><b id="allCount">—</b></label><label class="scope-card"><input type="radio" name="scope" value="QUESTION_ONLY" checked><span class="scope-radio"></span><span><strong>Somente nesta questão</strong><small>Cria um mediaId novo; as outras questões permanecem intactas.</small></span><b id="oneCount">—</b></label></div>
+    <div id="roleChoice" class="role-choice" hidden><div class="section-label"><span>POSIÇÕES DESTA QUESTÃO</span><span>marque apenas o que deve mudar</span></div><div id="roleChecks" class="role-checks"></div></div>
+    <div id="aliasChoice" class="alias-choice" hidden><label><input id="includeAliases" type="checkbox"><span><strong>Incluir outras referências com o mesmo SHA-256</strong><small>Somente arquivos byte a byte idênticos; <span id="aliasCount">0</span> usos em referências distintas.</small></span></label></div>
+    <div id="semanticChoice" class="notice warning" hidden><label><input id="semanticConfirm" type="checkbox"><span>Confirmo que a imagem nova representa o mesmo conceito e preserva os gabaritos existentes (correto/distrator).</span></label></div>
+    <div class="impact-summary"><div class="impact-preview"><img id="impactBefore" alt="Imagem atualmente usada"><span>→</span><img id="impactAfter" alt="Nova imagem selecionada"></div><div><strong id="impactCounts">Escolha o escopo para ver o impacto.</strong><small id="impactFootnote">Nenhuma escrita é feita nesta etapa.</small></div></div>
+    <div class="affected-list-wrap"><div class="section-label"><span>ATIVIDADES AFETADAS · PAPEL E GABARITO</span><span id="affectedCount"></span></div><div class="affected-list affected-header"><span>Ano/módulo</span><span>Questão</span><span>Posição</span><span>Papel</span><span>Gabarito oficial</span></div><div id="affectedList" class="affected-list"></div></div>
+    <div id="impactError" class="notice error" hidden></div>
+    <div class="dialog-actions"><button id="cancelImpact" class="secondary-button" type="button">Voltar</button><button id="previewImpact" class="primary-button" type="button">Calcular impacto <span>→</span></button></div>
+  </dialog>
+
+  <dialog id="confirmDialog" class="impact-dialog confirm-dialog"><div class="dialog-head"><div><p class="eyebrow">ÚLTIMA VERIFICAÇÃO</p><h2>Revisar e preparar para QA</h2><p class="dialog-context">Isso cria um branch editorial, um commit e um pull request em rascunho. Não publica nem altera os links oficiais.</p></div><button class="icon-button close-button" id="closeConfirm" aria-label="Fechar">×</button></div><div id="confirmSummary" class="confirm-summary"></div><label class="confirm-input"><span>Digite <strong>CRIAR BRANCH E PR</strong> para confirmar</span><input id="confirmText" autocomplete="off" placeholder="CRIAR BRANCH E PR"></label><div id="stageError" class="notice error" hidden></div><div class="dialog-actions"><button id="cancelConfirm" class="secondary-button" type="button">Cancelar</button><button id="stageButton" class="primary-button" type="button" disabled>Criar revisão editorial <span>→</span></button></div></dialog>
+
+  <dialog id="zoomDialog" class="zoom-dialog"><button id="closeZoom" class="icon-button close-button" aria-label="Fechar">×</button><img id="zoomImage" alt="Prévia ampliada"><p id="zoomCaption"></p></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
