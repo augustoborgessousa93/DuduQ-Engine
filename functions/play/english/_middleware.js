@@ -1,7 +1,7 @@
 /**
  * DUDUQ Fit — Cloudflare Pages Function scoped to /play/english/*.
  * Single opt-in edge change: game URLs remain identical in EduQ Play.
- * Full game runs inside a fixed 1366x768 iframe and is scaled with one CSS transform.
+ * Real iframe embeds retain the fixed 1366x768 proportional Fit transform;\n * top-level browser navigations use the native full-bleed intro layout.
  * CAUTION: use preview first. Do not deploy without functional tests against real game.
  */
 const MODULE_ROUTE = /^\/play\/english\/year-[1-5]\/module-0[1-6]\/?$/;
@@ -64,8 +64,15 @@ export async function onRequest(context) {
   if (!MODULE_ROUTE.test(url.pathname) || url.searchParams.has(INNER_PARAM)) {
     return context.next();
   }
-  // Sec-Fetch-Dest: iframe is emitted by modern browsers. Explicit opt-in helps test tools.
-  const isIframe = request.headers.get('Sec-Fetch-Dest') === 'iframe';
+  // Full-browser navigation must enter the native, full-bleed intro screen.
+  // The public link keeps __duduq_fit=1 for embeds and compatibility, but a
+  // top-level browser tab is NOT an iframe and must never be letterboxed.
+  // Preserve the proportional 1366x768 Fit frame for real iframe embeds.
+  const destination = request.headers.get('Sec-Fetch-Dest');
+  if (destination === 'document') return context.next();
+
+  // Some QA/legacy callers omit Fetch Metadata. Preserve their explicit opt-in.
+  const isIframe = destination === 'iframe';
   const isExplicitFit = url.searchParams.get(FIT_PARAM) === '1';
   if (!isIframe && !isExplicitFit) return context.next();
 
