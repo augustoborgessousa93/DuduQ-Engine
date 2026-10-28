@@ -1,6 +1,6 @@
 import {strict as assert} from 'node:assert';
 import {mkdir,writeFile} from 'node:fs/promises';
-const origin='https://3167014e.duduq-v20-fullscreen-qa.pages.dev';
+const origin=process.env.DUDUQ_EDGE_ORIGIN || 'https://3167014e.duduq-v20-fullscreen-qa.pages.dev';
 const rows=[],problems=[];
 const cases=[];
 for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
