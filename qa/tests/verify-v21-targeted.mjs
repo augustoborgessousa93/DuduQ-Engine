@@ -45,6 +45,9 @@ for(const [width,height]of [[1500,785],[1395,785],[900,800],[768,1366],[1366,768
 }
 const match=get('dist-pages/play/matching/index.html');
 assert.match(match,/<button\s+class="primary-action matching-confirm-action"\s+type="button"\s+disabled\s+hidden\s+aria-hidden="true"/);
+assert.match(match,/#game \.matching-action-area \.matching-confirm-action\[hidden\] \{/);
+assert.match(match,/display: none !important;/);
+assert.match(match,/visibility: hidden !important;/);
 const hud=get('dist-pages/core/ui/duduq-canonical-question-hud.js');
 assert.match(hud,/window\.location\.pathname\.startsWith\("\/play\/drag-drop\/"\)/);
 assert.match(hud,/window\.location\.pathname\.startsWith\("\/play\/drag-drop-multimedia\/"\)/);
