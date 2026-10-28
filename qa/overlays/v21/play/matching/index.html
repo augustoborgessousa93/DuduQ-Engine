@@ -24,6 +24,15 @@
     />
     <link rel="stylesheet" href="/core/duduq-live-hud.css?v=HUD_FINAL_01" />
     <link rel="stylesheet" href="/core/duduq-page-transition.css" />
+    <style>
+      /* Before boot and whenever not all pairs are joined, the action must not
+         display even if legacy shell styles override the HTML hidden attribute. */
+      #game .matching-action-area .matching-confirm-action[hidden] {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+      }
+    </style>
     <link rel="stylesheet" href="/core/duduq-fullscreen-mode.css" />
   </head>
   <body>
