@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "revisionId": "2026-10-28T23-41-57-423Z-c761be9a",
+  "createdAt": "2026-10-28T23:41:57.423Z",
+  "author": "DUDUQ Media Studio",
+  "status": "STAGED_FOR_HUMAN_REVIEW",
+  "baseBranch": "feat/duduq-media-studio-smart-replace-20261028",
+  "v19ManifestSha256": "CED5F33E2DCD0DB33D66B7602162FA3520AA88A9F605B655A3E160726567F71E",
+  "scope": "ALL_USAGES",
+  "source": {
+    "mediaId": "IMG-Y1M01-GREETING-GENERIC-001",
+    "sha256": "5dc27965b3cf5544409912db51de70e2f0b9d3d90c49665180287307f14712dc",
+    "path": "content/english/assets/images/year-1/module-01/temporary/5dc27965b3cf-criancas-se-cumprimentando-children-greeting-hello.png",
+    "status": "APPROVED"
+  },
+  "targetMediaIds": [
+    "IMG-Y1M01-GREETING-GENERIC-001",
+    "IMG-Y1M01-DIALOGUE-HELLO-HI-001"
+  ],
+  "newMediaId": null,
+  "asset": {
+    "path": "content/english/assets/images/approved/Y1M01/Y1M01-Q001/890b2d23fbe0.png",
+    "sha256": "890b2d23fbe0ad37ec61c083c797a7dad9383f7b2319d2b4261460ba3e36b0a4",
+    "originalName": "Hello.png",
+    "mime": "image/png",
+    "width": 1402,
+    "height": 1122,
+    "bytes": 1648565,
+    "alpha": "PIXEL_ALPHA_CONFIRMED",
+    "altText": "Hello.png"
+  },
+  "affectedQuestions": [
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q001",
+      "roleId": "stimulus",
+      "roleLabel": "Imagem principal da questão",
+      "answerRole": "STIMULUS",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q001",
+      "roleId": "position:option_c",
+      "roleLabel": "option_c",
+      "answerRole": "UNSPECIFIED",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q001",
+      "roleId": "option:hello",
+      "roleLabel": "Duas crianças se cumprimentando",
+      "answerRole": "CORRECT",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q005",
+      "roleId": "position:option_b",
+      "roleLabel": "option_b",
+      "answerRole": "UNSPECIFIED",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q005",
+      "roleId": "option:distractor-1",
+      "roleLabel": "Hello greeting",
+      "answerRole": "DISTRACTOR",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q005",
+      "roleId": "item:Y1M01-Q005-distractor-1",
+      "roleLabel": "Hello greeting",
+      "answerRole": "UNSPECIFIED",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q006",
+      "roleId": "option:hello-scene",
+      "roleLabel": "Greeting scene",
+      "answerRole": "UNSPECIFIED",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q006",
+      "roleId": "option:hello",
+      "roleLabel": "Hello!",
+      "answerRole": "UNSPECIFIED",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q007",
+      "roleId": "option:hello",
+      "roleLabel": "Greeting scene",
+      "answerRole": "UNSPECIFIED",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q008",
+      "roleId": "option:hello",
+      "roleLabel": "Greeting scene",
+      "answerRole": "UNSPECIFIED",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q009",
+      "roleId": "option:hello",
+      "roleLabel": "Hello!",
+      "answerRole": "UNSPECIFIED",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q011",
+      "roleId": "position:option_c",
+      "roleLabel": "option_c",
+      "answerRole": "UNSPECIFIED",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q011",
+      "roleId": "option:greeting",
+      "roleLabel": "Cena de cumprimento",
+      "answerRole": "DISTRACTOR",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q020",
+      "roleId": "option:distractor-6",
+      "roleLabel": "Hello greeting",
+      "answerRole": "DISTRACTOR",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q020",
+      "roleId": "item:Y1M01-Q020-distractor-6",
+      "roleLabel": "Hello greeting",
+      "answerRole": "UNSPECIFIED",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y2M01",
+      "itemId": "Y2M01-Q018",
+      "roleId": "option:Y2M01-Q018-O2",
+      "roleLabel": "Y2M01-Q018-O2",
+      "answerRole": "DISTRACTOR",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y2M01",
+      "itemId": "Y2M01-Q018",
+      "roleId": "position:DISTRACTOR",
+      "roleLabel": "DISTRACTOR",
+      "answerRole": "UNSPECIFIED",
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q009",
+      "roleId": "option:hello-dialogue",
+      "roleLabel": "Hello! Hi!",
+      "answerRole": "UNSPECIFIED",
+      "mediaId": "IMG-Y1M01-DIALOGUE-HELLO-HI-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q009",
+      "roleId": "option:hello-dialogue-scene",
+      "roleLabel": "Greeting dialogue scene",
+      "answerRole": "UNSPECIFIED",
+      "mediaId": "IMG-Y1M01-DIALOGUE-HELLO-HI-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q010",
+      "roleId": "stimulus",
+      "roleLabel": "Imagem principal da questão",
+      "answerRole": "STIMULUS",
+      "mediaId": "IMG-Y1M01-DIALOGUE-HELLO-HI-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q010",
+      "roleId": "position:option_c",
+      "roleLabel": "option_c",
+      "answerRole": "UNSPECIFIED",
+      "mediaId": "IMG-Y1M01-DIALOGUE-HELLO-HI-001"
+    },
+    {
+      "moduleId": "Y1M01",
+      "itemId": "Y1M01-Q010",
+      "roleId": "option:greeting",
+      "roleLabel": "Duas crianças conversando e se cumprimentando",
+      "answerRole": "CORRECT",
+      "mediaId": "IMG-Y1M01-DIALOGUE-HELLO-HI-001"
+    }
+  ],
+  "questionPatches": [],
+  "beforeAfter": {
+    "beforeSha256": "5dc27965b3cf5544409912db51de70e2f0b9d3d90c49665180287307f14712dc",
+    "afterSha256": "890b2d23fbe0ad37ec61c083c797a7dad9383f7b2319d2b4261460ba3e36b0a4"
+  },
+  "counts": {
+    "positions": 22,
+    "questions": 10,
+    "modules": 2
+  },
+  "github": {
+    "branch": null,
+    "commit": null,
+    "pullRequest": null
+  },
+  "qa": {
+    "status": "NOT_RUN",
+    "url": null
+  },
+  "production": {
+    "published": false,
+    "deploymentId": null
+  }
+}
