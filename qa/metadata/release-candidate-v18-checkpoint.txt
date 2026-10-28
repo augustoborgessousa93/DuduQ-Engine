@@ -1,0 +1,1 @@
+V18 technical release QA only. Pinned manifest SHA-256 50E85BA7BAB172DE2892137F9A4F8DFE7B9768B4938E7FAFC4924A6130F34F7A; user-approved visual parity Target Shooter. No official production promotion until Cloudflare immutable candidate verification.
