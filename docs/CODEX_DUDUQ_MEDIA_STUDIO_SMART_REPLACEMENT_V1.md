@@ -29,6 +29,22 @@ Painel independente dos jogos, em português, profissional, claro e fácil de us
 - A confirmação mostra `N questões / M módulos / P posições` e miniaturas ANTES/DEPOIS. Nenhuma substituição silenciosa em outras questões.
 - Exibir fila de alterações, status GitHub/PR/QA/deploy, histórico com links de commit e botão de reversão por edição, sem precisar do terminal.
 
+## 2A. Gabarito visível no painel editorial — requisito obrigatório
+
+**O editor precisa saber qual alternativa está correta ANTES de decidir se a imagem deve ser trocada.** Na tela da atividade, exibir em destaque um painel permanente **GABARITO / RESPOSTA CORRETA**, exclusivo do administrativo, sem depender do upload:
+
+- Mostrar o **enunciado**, todas as **alternativas com seus textos e imagens**, e destacar visualmente a alternativa correta (por exemplo, ✅ CORRETA) e as distratoras (❌ INCORRETA), junto com o `mediaId/assetId`, papel, significado/objetivo semântico e a imagem atualmente utilizada.
+- Para questões com uma resposta única, exibir claramente `Resposta correta: [texto/valor]` e destacar a imagem/opção correta no contexto das demais.
+- Para jogos **sem alternativa única**, mostrar o **gabarito estruturado da mecânica**: Drag & Drop Grouping → cada item e seu grupo correto; Matching e Memory Quest → pares corretos; Drag & Drop Multimídia → associação áudio/item ↔ destino; Smart Sentence Complete/Order → palavra(s) ou sequência esperada; Bubble Pop → bolha-alvo correta; Target Shooter → alvo correto e os demais alvos/distratores.
+- **Fonte única da verdade:** ler `answerKey`, `targetsToFind`, `options`, `items`, `groups`, `pairs`, `mappings` e contratos existentes da questão, conforme a mecânica. Importante: `options[*].answerKey` pode ser o valor semântico da opção, **não** uma indicação booleana de acerto. Comparar com a chave de resposta no nível correto ou com o mapa oficial da mecânica. Não inferir o gabarito pelo nome da imagem ou por IA.
+- Sempre mostrar **a imagem selecionada e sua relação com a resposta**: `Imagem da alternativa correta`, `Imagem de alternativa incorreta (distrator)`, `Imagem de apoio/estímulo`, `Imagem de par` ou `Imagem de destino`. Assim o editor sabe se o arquivo condiz com o gabarito e evita trocar imagens que já estão boas.
+- Mostrar **comparação ANTES/DEPOIS no contexto da resposta correta**. Antes de confirmar qualquer troca, reexibir a opção correta, a imagem correspondente e o mapa de impacto nos dois escopos `ALL_USAGES` e `QUESTION_ONLY`.
+- Quando o asset for reutilizado em questões nas quais aparece com papéis pedagógicos diferentes (correta vs distratora, mesmo `assetId` com `semanticTarget` conflitante), apresentar os gabaritos de **todas** as questões afetadas; solicitar revisão explícita para cada conflito e bloquear substituição global perigosa.
+- Gabarito somente em **interface/admin autenticado**; nunca acrescentá-lo ao HTML do aluno, URLs públicas, embeds, metadados de imagens nem aos feedbacks do game. A consulta é **somente leitura**, não altera gabaritos, respostas, alternativas ou validação curricular.
+- Caso não seja possível resolver um gabarito a partir dos contratos oficiais, mostrar `GABARITO NÃO IDENTIFICADO — REVISÃO NECESSÁRIA`, bloquear o commit para aquela troca e oferecer o JSON da questão para diagnóstico. Nunca afirmar uma opção correta por suposição.
+
+**Teste de aceite adicional:** escolher `Y1M03-Q007` (Target Shooter, gabarito `purple`), destacar somente a opção `purple`, exibindo os demais distratores; escolher `Y1M03-Q002` (Grouping) e exibir as oito associações `item → grupo`. Verificar Matching/Memory em amostras; em todos os casos, o `answerKey` permanece byte a byte intacto após uma troca global e após uma troca individual.
+
 ## 3. Identidade, busca de usos e duas operações diferentes
 
 Construir um **índice determinístico de usos** que examine TODAS as 600 questões/30 módulos da distribuição aprovada, suas opções e contratos por mecânica; localizar `image_ref`, `imageRef`, `mediaBindings[*].mediaId`, `options[*].mediaId`, `dragDropContract.mapping[*].mediaId`, demais campos conhecidos de mídias e referências indiretas do asset resolver, evitando alterar `audioId` e dados não relacionados.
