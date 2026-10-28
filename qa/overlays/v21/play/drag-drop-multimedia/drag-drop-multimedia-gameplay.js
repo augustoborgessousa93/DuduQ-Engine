@@ -224,13 +224,15 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
     updateConfirmVisibility();
     animateToRect(drag.element, currentRect);
   };
-  const playSuccessRecap = async result => {
+  let successRecapGeneration = 0;
+  const playSuccessRecap = async (result, generation) => {
     const contract = await window.DuduQProductionQuestionBootstrap?.ready;
     const plan = contract?.successRecap;
     if (plan?.mode !== "SEQUENTIAL_ITEM") return;
     root.dataset.successRecapState = "playing";
     const ordered = [...(plan.items || [])].sort((a, b) => itemConfig.findIndex(row => row.id === a.id) - itemConfig.findIndex(row => row.id === b.id));
     for (const recapItem of ordered) {
+      if (generation !== successRecapGeneration || !root.isConnected) return;
       const itemState = result.state?.items?.find(row => row.id === recapItem.id);
       const item = itemsById.get(recapItem.id);
       const target = targetsById.get(itemState?.currentTargetId);
@@ -245,6 +247,7 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
       }
       if (item) delete item.element.dataset.successRecap;
       if (target?.element) delete target.element.dataset.successRecap;
+      if (generation !== successRecapGeneration) return;
       await new Promise(resolve => window.setTimeout(resolve, 180));
     }
     root.dataset.successRecapState = "complete";
@@ -302,11 +305,14 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
     feedback.querySelector('[data-slot="feedback-title"]').textContent = "Mandou bem!";
     feedback.querySelector('[data-slot="feedback-detail"]').textContent = "Todas as combinações deram certo.";
     feedback.querySelector('[data-slot="feedback-action"]').textContent = "CONTINUAR";
-    if (window.DuduQPedagogicalAudioInteraction?.enabled) {
-      void Promise.resolve().then(() => window.DuduQPedagogicalAudioInteraction.speakFeedback("SUCCESS_SHORT", { mechanic: "drag-drop-multimedia" })).catch(() => {});
-    } else window.setTimeout(() => DuduqSound.playVoice("correct"), 140);
-    // Recap may take several seconds; it cannot hold up the result button.
-    void playSuccessRecap(result).catch(() => {});
+    const generation = ++successRecapGeneration;
+    // Narration is sequential in the background and aborts if Continue advances.
+    void Promise.resolve().then(async () => {
+      if (window.DuduQPedagogicalAudioInteraction?.enabled) {
+        await window.DuduQPedagogicalAudioInteraction.speakFeedback("SUCCESS_SHORT", { mechanic: "drag-drop-multimedia" });
+      } else window.setTimeout(() => DuduqSound.playVoice("correct"), 140);
+      if (generation === successRecapGeneration) await playSuccessRecap(result, generation);
+    }).catch(() => {});
     root.dispatchEvent(new CustomEvent("dnd-multimedia:question-complete", { bubbles: true, detail: { ...result, questionComplete: true } }));
   };
   async function retryIncorrectItems(retryPlan = null, incorrectStimulus = null) {
@@ -338,6 +344,8 @@ export function initializeMultimediaDragDrop({ root, centralPanel, dragWordBank,
   }
   function continueActivity() {
     if (!round.continueActivity()) return;
+    successRecapGeneration++;
+    window.DuduQContentAudio?.stopVoice?.();
     DuduqSound.play("uiClick");
     const button = feedback.querySelector(".feedback-action");
     if (button) button.disabled = true;
