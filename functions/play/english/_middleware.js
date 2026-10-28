@@ -1,7 +1,7 @@
 /**
  * DUDUQ Fit — Cloudflare Pages Function scoped to /play/english/*.
  * Single opt-in edge change: game URLs remain identical in EduQ Play.
- * Real iframe embeds retain the fixed 1366x768 proportional Fit transform;\n * top-level browser navigations use the native full-bleed intro layout.
+ * Iframe embeds scale uniformly with an adaptive layout viewport (no gutters);\n * top-level browser navigations use the native full-bleed intro layout.
  * CAUTION: use preview first. Do not deploy without functional tests against real game.
  */
 const MODULE_ROUTE = /^\/play\/english\/year-[1-5]\/module-0[1-6]\/?$/;
@@ -41,11 +41,14 @@ function renderFitPage(pathAndSearch) {
     const w=viewport.clientWidth,h=viewport.clientHeight;
     if(w<=0||h<=0||(w===lastW&&h===lastH))return;
     lastW=w;lastH=h;
+    // Scale uniformly and adapt the logical document viewport to the host ratio.
+    // Never stretch X/Y separately and never crop HUD, footer or hit boxes.
     const s=Math.min(w/LOGICAL_W,h/LOGICAL_H);
-    const x=(w-LOGICAL_W*s)/2;
-    const y=(h-LOGICAL_H*s)/2;
-    frame.style.transform='translate3d('+x+'px,'+y+'px,0) scale('+s+')';
+    frame.style.width=(w/s)+'px';
+    frame.style.height=(h/s)+'px';
+    frame.style.transform='scale('+s+')';
     viewport.dataset.scale=s.toFixed(8);
+    viewport.dataset.fitMode='adaptive-fill';
   }
   new ResizeObserver(fit).observe(viewport);
   addEventListener('resize',fit,{passive:true});
