@@ -1,0 +1,4022 @@
+{
+  "audit": "DUDUQ_MEDIA_REFERENCES_20261029",
+  "sourceRepo": "augustoborgessousa93/duduq-fit-qa-private",
+  "sourcePath": "dist-pages/content/english/year-{year}/module-{mm}/questions.json",
+  "year": 4,
+  "modules": [
+    {
+      "moduleId": "Y4M01",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y4M01-Q001",
+          "mechanic": "matching",
+          "learningTarget": "teaching: Identify weekdays and organize selected fictional profile facts. Focus: Monday-Sunday in sequence.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M01-Q001-L1": "Y4M01-Q001-R1",
+            "Y4M01-Q001-L2": "Y4M01-Q001-R2",
+            "Y4M01-Q001-L3": "Y4M01-Q001-R3",
+            "Y4M01-Q001-L4": "Y4M01-Q001-R4",
+            "Y4M01-Q001-L5": "Y4M01-Q001-R5",
+            "Y4M01-Q001-L6": "Y4M01-Q001-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-02174158FE88B58B",
+            "IMG-V11-2B-1BB63E5A46562D1C",
+            "IMG-V11-2B-51F07C81B93BA436",
+            "IMG-V11-2B-71BBB7F3EB57C988",
+            "IMG-V11-2B-9B9E6D10506466D3",
+            "IMG-V11-2B-F81B3734A9EA4226"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M01-Q002",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Identify weekdays and organize selected fictional profile facts. Focus: name.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M01-Q002-I1": "Y4M01-Q002-T1",
+            "Y4M01-Q002-I2": "Y4M01-Q002-T2",
+            "Y4M01-Q002-I3": "Y4M01-Q002-T3",
+            "Y4M01-Q002-I4": "Y4M01-Q002-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-037A8C192583A82D",
+            "IMG-V11-2B-0C5EFBCFF3B72AB5",
+            "IMG-V11-2B-71ACB4E3ADFBDACD",
+            "IMG-V11-2B-92A2587B6E53B997"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "mechanic": "bubble-pop",
+          "learningTarget": "guided practice: Identify weekdays and organize selected fictional profile facts. Focus: weekday identification.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M01-Q003-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1BB63E5A46562D1C",
+            "IMG-V11-2B-3027B4C1C2E03558",
+            "IMG-V11-2B-71BBB7F3EB57C988",
+            "IMG-V11-2B-903CE8E0616D5239",
+            "IMG-V11-2B-98438188D7DB405E",
+            "IMG-V11-2B-D8AB8014378C4168"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M01-Q003-O1",
+              "label": "Wednesday",
+              "answerKey": "Y4M01-Q003-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-D8AB8014378C4168",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q003-O2",
+              "label": "Monday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-903CE8E0616D5239",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q003-O3",
+              "label": "Tuesday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-98438188D7DB405E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q003-O4",
+              "label": "Thursday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-3027B4C1C2E03558",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M01-Q004",
+          "mechanic": "memory-quest",
+          "learningTarget": "Written weekday labels map to the calendar context, directly supporting V3 primary reading without claiming independent writing. Curricular target: Monday; Tuesday; Wednesday; Thursday.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y4M01-Q004-P1",
+            "Y4M01-Q004-P2",
+            "Y4M01-Q004-P3",
+            "Y4M01-Q004-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-24AE8FD158FDB6BF",
+            "IMG-V11-2B-874482C576DC9DD7",
+            "IMG-V11-2B-9AAB100095051D64",
+            "IMG-V11-2B-ECBAE24445C899B2"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M01-Q005",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Identify weekdays and organize selected fictional profile facts. Focus: ask/state day.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M01-Q005-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-7DC045FB1CE9540B",
+            "IMG-V11-2B-903CE8E0616D5239",
+            "IMG-V11-2B-98438188D7DB405E",
+            "IMG-V11-2B-D8AB8014378C4168"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M01-Q005-O1",
+              "label": "Friday",
+              "answerKey": "Y4M01-Q005-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-7DC045FB1CE9540B",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q005-O2",
+              "label": "Monday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-903CE8E0616D5239",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q005-O3",
+              "label": "Tuesday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-98438188D7DB405E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q005-O4",
+              "label": "Wednesday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-D8AB8014378C4168",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M01-Q006",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "guided practice: Identify weekdays and organize selected fictional profile facts. Focus: Monday-Sunday in sequence.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M01-Q006-I1": "Y4M01-Q006-T1",
+            "Y4M01-Q006-I2": "Y4M01-Q006-T2",
+            "Y4M01-Q006-I3": "Y4M01-Q006-T3",
+            "Y4M01-Q006-I4": "Y4M01-Q006-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-035DABE1791AD949",
+            "IMG-V11-2B-0C5EFBCFF3B72AB5",
+            "IMG-V11-2B-5000D4791C83AE56",
+            "IMG-V11-2B-D5342DA12F205C1A"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M01-Q007",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Identify weekdays and organize selected fictional profile facts. Focus: age.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M01-Q007-L1": "Y4M01-Q007-R1",
+            "Y4M01-Q007-L2": "Y4M01-Q007-R2",
+            "Y4M01-Q007-L3": "Y4M01-Q007-R3",
+            "Y4M01-Q007-L4": "Y4M01-Q007-R4",
+            "Y4M01-Q007-L5": "Y4M01-Q007-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1389F64FD9E1215A",
+            "IMG-V11-2B-24EA15B949714E84",
+            "IMG-V11-2B-2585704D6AB32376",
+            "IMG-V11-2B-51F07C81B93BA436",
+            "IMG-V11-2B-EAD80736870B5584"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M01-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Complete the familiar weekday statement with the correct day. Focus: Today is...",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Monday",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-51F07C81B93BA436"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M01-Q008-O1",
+              "label": "Monday",
+              "answerKey": "Monday",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q008-O2",
+              "label": "Tuesday",
+              "answerKey": "Tuesday",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q008-O3",
+              "label": "Wednesday",
+              "answerKey": "Wednesday",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q008-O4",
+              "label": "Thursday",
+              "answerKey": "Thursday",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M01-Q009",
+          "mechanic": "target-shooter",
+          "learningTarget": "recognition: Identify weekdays and organize selected fictional profile facts. Focus: My name is....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M01-Q009-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-903CE8E0616D5239",
+            "IMG-V11-2B-98438188D7DB405E",
+            "IMG-V11-2B-D8AB8014378C4168",
+            "IMG-V11-2B-E5F5D9640ED65EA5"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M01-Q009-O1",
+              "label": "birthday",
+              "answerKey": "Y4M01-Q009-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-E5F5D9640ED65EA5",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q009-O2",
+              "label": "Monday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-903CE8E0616D5239",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q009-O3",
+              "label": "Tuesday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-98438188D7DB405E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q009-O4",
+              "label": "Wednesday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-D8AB8014378C4168",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M01-Q010",
+          "mechanic": "drag-drop",
+          "learningTarget": "comprehension: Identify weekdays and organize selected fictional profile facts. Focus: share fictional profile.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M01-Q010-I1": "days",
+            "Y4M01-Q010-I2": "days",
+            "Y4M01-Q010-I3": "days",
+            "Y4M01-Q010-I4": "days",
+            "Y4M01-Q010-I5": "profile",
+            "Y4M01-Q010-I6": "profile",
+            "Y4M01-Q010-I7": "profile",
+            "Y4M01-Q010-I8": "profile"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M01-Q011",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Identify weekdays and organize selected fictional profile facts. Focus: Monday-Sunday in sequence.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M01-Q011-L1": "Y4M01-Q011-R1",
+            "Y4M01-Q011-L2": "Y4M01-Q011-R2",
+            "Y4M01-Q011-L3": "Y4M01-Q011-R3",
+            "Y4M01-Q011-L4": "Y4M01-Q011-R4",
+            "Y4M01-Q011-L5": "Y4M01-Q011-R5",
+            "Y4M01-Q011-L6": "Y4M01-Q011-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1BB63E5A46562D1C",
+            "IMG-V11-2B-51F07C81B93BA436",
+            "IMG-V11-2B-71BBB7F3EB57C988",
+            "IMG-V11-2B-8FECB556425AE3C6",
+            "IMG-V11-2B-9B9E6D10506466D3",
+            "IMG-V11-2B-F81B3734A9EA4226"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M01-Q012",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Identify weekdays and organize selected fictional profile facts. Focus: birthday.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M01-Q012-I1": "Y4M01-Q012-T1",
+            "Y4M01-Q012-I2": "Y4M01-Q012-T2",
+            "Y4M01-Q012-I3": "Y4M01-Q012-T3",
+            "Y4M01-Q012-I4": "Y4M01-Q012-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-035DABE1791AD949",
+            "IMG-V11-2B-0C5EFBCFF3B72AB5",
+            "IMG-V11-2B-DD7EA966CFB7CFEC",
+            "IMG-V11-2B-EC10D9EEC0A5D08E"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M01-Q013",
+          "mechanic": "target-shooter",
+          "learningTarget": "listening: Identify weekdays and organize selected fictional profile facts. Focus: weekday identification.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M01-Q013-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-903CE8E0616D5239",
+            "IMG-V11-2B-98438188D7DB405E",
+            "IMG-V11-2B-C0C9F76D0988A785",
+            "IMG-V11-2B-D8AB8014378C4168"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M01-Q013-O1",
+              "label": "Saturday",
+              "answerKey": "Y4M01-Q013-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-C0C9F76D0988A785",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q013-O2",
+              "label": "Monday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-903CE8E0616D5239",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q013-O3",
+              "label": "Tuesday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-98438188D7DB405E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q013-O4",
+              "label": "Wednesday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-D8AB8014378C4168",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M01-Q014",
+          "mechanic": "memory-quest",
+          "learningTarget": "Sound-form mapping retrieves profile language from Y3M01 in a changed calendar/profile context; fictional information only. Curricular target: name; age; birthday; favorite.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y4M01-Q014-P1",
+            "Y4M01-Q014-P2",
+            "Y4M01-Q014-P3",
+            "Y4M01-Q014-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "mechanic": "bubble-pop",
+          "learningTarget": "retrieval: Identify weekdays and organize selected fictional profile facts. Focus: ask/state day.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M01-Q015-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1BB63E5A46562D1C",
+            "IMG-V11-2B-3027B4C1C2E03558",
+            "IMG-V11-2B-71BBB7F3EB57C988",
+            "IMG-V11-2B-903CE8E0616D5239",
+            "IMG-V11-2B-98438188D7DB405E",
+            "IMG-V11-2B-D8AB8014378C4168"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M01-Q015-O1",
+              "label": "Monday",
+              "answerKey": "Y4M01-Q015-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-903CE8E0616D5239",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q015-O2",
+              "label": "Tuesday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-98438188D7DB405E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q015-O3",
+              "label": "Wednesday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-D8AB8014378C4168",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q015-O4",
+              "label": "Thursday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-3027B4C1C2E03558",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M01-Q016",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "retrieval: Identify weekdays and organize selected fictional profile facts. Focus: Monday-Sunday in sequence.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M01-Q016-I1": "Y4M01-Q016-T1",
+            "Y4M01-Q016-I2": "Y4M01-Q016-T2",
+            "Y4M01-Q016-I3": "Y4M01-Q016-T3",
+            "Y4M01-Q016-I4": "Y4M01-Q016-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-037A8C192583A82D",
+            "IMG-V11-2B-0C5EFBCFF3B72AB5",
+            "IMG-V11-2B-71ACB4E3ADFBDACD",
+            "IMG-V11-2B-92A2587B6E53B997"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M01-Q017",
+          "mechanic": "matching",
+          "learningTarget": "review: Identify weekdays and organize selected fictional profile facts. Focus: favorites.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M01-Q017-L1": "Y4M01-Q017-R1",
+            "Y4M01-Q017-L2": "Y4M01-Q017-R2",
+            "Y4M01-Q017-L3": "Y4M01-Q017-R3",
+            "Y4M01-Q017-L4": "Y4M01-Q017-R4",
+            "Y4M01-Q017-L5": "Y4M01-Q017-R5",
+            "Y4M01-Q017-L6": "Y4M01-Q017-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1389F64FD9E1215A",
+            "IMG-V11-2B-24EA15B949714E84",
+            "IMG-V11-2B-2585704D6AB32376",
+            "IMG-V11-2B-71BBB7F3EB57C988",
+            "IMG-V11-2B-8FECB556425AE3C6",
+            "IMG-V11-2B-EAD80736870B5584"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M01-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Identify weekdays and organize selected fictional profile facts. Focus: weekday identification.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Thursday",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-9B9E6D10506466D3"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M01-Q018-O1",
+              "label": "Thursday",
+              "answerKey": "Thursday",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q018-O2",
+              "label": "Monday",
+              "answerKey": "Monday",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q018-O3",
+              "label": "Tuesday",
+              "answerKey": "Tuesday",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M01-Q018-O4",
+              "label": "Wednesday",
+              "answerKey": "Wednesday",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M01-Q019",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "consolidation: Identify weekdays and organize selected fictional profile facts. Focus: calendar/profile exchange.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Today",
+            "is",
+            "Monday."
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M01-Q020",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "consolidation: Identify weekdays and organize selected fictional profile facts. Focus: share fictional profile.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M01-Q020-I1": "Y4M01-Q020-T1",
+            "Y4M01-Q020-I2": "Y4M01-Q020-T2",
+            "Y4M01-Q020-I3": "Y4M01-Q020-T3",
+            "Y4M01-Q020-I4": "Y4M01-Q020-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-16B25DA2B15F3CBD",
+            "IMG-V11-2B-7C7462127E434210",
+            "IMG-V11-2B-DD7EA966CFB7CFEC",
+            "IMG-V11-2B-EC10D9EEC0A5D08E"
+          ],
+          "options": []
+        }
+      ]
+    },
+    {
+      "moduleId": "Y4M02",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y4M02-Q001",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Identify/read school subjects and state a favorite. Focus: English.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M02-Q001-I1": "Y4M02-Q001-T1",
+            "Y4M02-Q001-I2": "Y4M02-Q001-T2",
+            "Y4M02-Q001-I3": "Y4M02-Q001-T3",
+            "Y4M02-Q001-I4": "Y4M02-Q001-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-4B72C84EB092340A",
+            "IMG-V11-2B-7CEF9891D59562FE",
+            "IMG-V11-2B-C8365730261BA43A",
+            "IMG-V11-2B-CC82E066C948B4A2"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M02-Q002",
+          "mechanic": "bubble-pop",
+          "learningTarget": "teaching: Identify/read school subjects and state a favorite. Focus: alphabet/spelling.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M02-Q002-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-34691F7FF392D134",
+            "IMG-V11-2B-4B72C84EB092340A",
+            "IMG-V11-2B-5A685792F5F3892E",
+            "IMG-V11-2B-5FC56902AD57463A",
+            "IMG-V11-2B-7CEF9891D59562FE",
+            "IMG-V11-2B-B53AD4A3B76BCB34"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M02-Q002-O1",
+              "label": "B",
+              "answerKey": "Y4M02-Q002-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-B53AD4A3B76BCB34",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q002-O2",
+              "label": "A",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-34691F7FF392D134",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q002-O3",
+              "label": "C",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5FC56902AD57463A",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q002-O4",
+              "label": "D",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5A685792F5F3892E",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M02-Q003",
+          "mechanic": "drag-drop",
+          "learningTarget": "guided practice: Identify/read school subjects and state a favorite. Focus: six subject labels.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M02-Q003-I1": "language-arts",
+            "Y4M02-Q003-I2": "language-arts",
+            "Y4M02-Q003-I3": "OTHER-SUBJECTS",
+            "Y4M02-Q003-I4": "OTHER-SUBJECTS",
+            "Y4M02-Q003-I5": "OTHER-SUBJECTS",
+            "Y4M02-Q003-I6": "OTHER-SUBJECTS"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M02-Q004",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Identify/read school subjects and state a favorite. Focus: one favorite-subject response.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M02-Q004-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2662DECD66839419",
+            "IMG-V11-2B-925D0D65A4C27655",
+            "IMG-V11-2B-9C61EBB04E4F0405",
+            "IMG-V11-2B-F6B814EBB2AA67CB"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M02-Q004-O1",
+              "label": "Science",
+              "answerKey": "Y4M02-Q004-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-2662DECD66839419",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q004-O2",
+              "label": "English",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-925D0D65A4C27655",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q004-O3",
+              "label": "Geography",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-9C61EBB04E4F0405",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q004-O4",
+              "label": "Mathematics",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-F6B814EBB2AA67CB",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M02-Q005",
+          "mechanic": "memory-quest",
+          "learningTarget": "Written subject labels map to school-context images using only the six V3 items. Curricular target: English; Geography; Mathematics; Science; History; Art.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y4M02-Q005-P1",
+            "Y4M02-Q005-P2",
+            "Y4M02-Q005-P3",
+            "Y4M02-Q005-P4",
+            "Y4M02-Q005-P5",
+            "Y4M02-Q005-P6"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1651BBDF0637DE4E",
+            "IMG-V11-2B-3679D098470A87AF",
+            "IMG-V11-2B-61A2BC233D5DC6FA",
+            "IMG-V11-2B-BC972A558AE93D79",
+            "IMG-V11-2B-F30886117165DA8E",
+            "Y1M01-EMOJI-ART-001"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M02-Q006",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Identify/read school subjects and state a favorite. Focus: Geography.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M02-Q006-L1": "Y4M02-Q006-R1",
+            "Y4M02-Q006-L2": "Y4M02-Q006-R2",
+            "Y4M02-Q006-L3": "Y4M02-Q006-R3",
+            "Y4M02-Q006-L4": "Y4M02-Q006-R4",
+            "Y4M02-Q006-L5": "Y4M02-Q006-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-24AE191AA3634A76",
+            "IMG-V11-2B-CF361B72DB38F24E",
+            "IMG-V11-2B-D12AE70F693DD028",
+            "IMG-V11-2B-FA3CBDF0A99332B9",
+            "Y1M01-EMOJI-ART-001"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "mechanic": "bubble-pop",
+          "learningTarget": "recognition: Identify/read school subjects and state a favorite. Focus: school objects.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M02-Q007-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2662DECD66839419",
+            "IMG-V11-2B-34691F7FF392D134",
+            "IMG-V11-2B-925D0D65A4C27655",
+            "IMG-V11-2B-9C61EBB04E4F0405",
+            "IMG-V11-2B-B53AD4A3B76BCB34",
+            "IMG-V11-2B-F6B814EBB2AA67CB"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M02-Q007-O1",
+              "label": "English",
+              "answerKey": "Y4M02-Q007-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-925D0D65A4C27655",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q007-O2",
+              "label": "Geography",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-9C61EBB04E4F0405",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q007-O3",
+              "label": "Mathematics",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-F6B814EBB2AA67CB",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q007-O4",
+              "label": "Science",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-2662DECD66839419",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M02-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Identify/read school subjects and state a favorite. Focus: six subject labels.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Geography",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-4B72C84EB092340A"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M02-Q008-O1",
+              "label": "Geography",
+              "answerKey": "Geography",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q008-O2",
+              "label": "English",
+              "answerKey": "English",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q008-O3",
+              "label": "Mathematics",
+              "answerKey": "Mathematics",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q008-O4",
+              "label": "Science",
+              "answerKey": "Science",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M02-Q009",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Match familiar written school-subject labels to their classroom context. Focus: six subject labels.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M02-Q009-L1": "Y4M02-Q009-R1",
+            "Y4M02-Q009-L2": "Y4M02-Q009-R2",
+            "Y4M02-Q009-L3": "Y4M02-Q009-R3",
+            "Y4M02-Q009-L4": "Y4M02-Q009-R4",
+            "Y4M02-Q009-L5": "Y4M02-Q009-R5",
+            "Y4M02-Q009-L6": "Y4M02-Q009-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0B255AF22079ACF0",
+            "IMG-V11-2B-24AE191AA3634A76",
+            "IMG-V11-2B-CF361B72DB38F24E",
+            "IMG-V11-2B-D12AE70F693DD028",
+            "IMG-V11-2B-FA3CBDF0A99332B9",
+            "Y1M01-EMOJI-ART-001"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M02-Q010",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Identify/read school subjects and state a favorite. Focus: express preference.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M02-Q010-L1": "Y4M02-Q010-R1",
+            "Y4M02-Q010-L2": "Y4M02-Q010-R2",
+            "Y4M02-Q010-L3": "Y4M02-Q010-R3",
+            "Y4M02-Q010-L4": "Y4M02-Q010-R4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-20C32A7B846CD05A",
+            "IMG-V11-2B-8050E659DDF0AE39",
+            "IMG-V11-2B-9308452ECEE535F7",
+            "IMG-V11-2B-F2B1512D42DAD7B2"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M02-Q011",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Identify/read school subjects and state a favorite. Focus: Mathematics.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M02-Q011-I1": "Y4M02-Q011-T1",
+            "Y4M02-Q011-I2": "Y4M02-Q011-T2",
+            "Y4M02-Q011-I3": "Y4M02-Q011-T3",
+            "Y4M02-Q011-I4": "Y4M02-Q011-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-6FFE58151EAD0CA0",
+            "IMG-V11-2B-C1BC182FD8E80824",
+            "IMG-V11-2B-D479ABE00CDCCB74",
+            "IMG-V11-2B-D74453328D45A91B"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M02-Q012",
+          "mechanic": "target-shooter",
+          "learningTarget": "comprehension: Identify/read school subjects and state a favorite. Focus: favorite pattern.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M02-Q012-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-925D0D65A4C27655",
+            "IMG-V11-2B-9C61EBB04E4F0405",
+            "IMG-V11-2B-F6B814EBB2AA67CB",
+            "Y1M01-EMOJI-ART-001"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M02-Q012-O1",
+              "label": "Art",
+              "answerKey": "Y4M02-Q012-O1",
+              "correct": true,
+              "mediaId": "Y1M01-EMOJI-ART-001",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q012-O2",
+              "label": "English",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-925D0D65A4C27655",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q012-O3",
+              "label": "Geography",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-9C61EBB04E4F0405",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q012-O4",
+              "label": "Mathematics",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-F6B814EBB2AA67CB",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M02-Q013",
+          "mechanic": "matching",
+          "learningTarget": "listening: Identify/read school subjects and state a favorite. Focus: six subject labels.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M02-Q013-L1": "Y4M02-Q013-R1",
+            "Y4M02-Q013-L2": "Y4M02-Q013-R2",
+            "Y4M02-Q013-L3": "Y4M02-Q013-R3",
+            "Y4M02-Q013-L4": "Y4M02-Q013-R4",
+            "Y4M02-Q013-L5": "Y4M02-Q013-R5",
+            "Y4M02-Q013-L6": "Y4M02-Q013-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0B255AF22079ACF0",
+            "IMG-V11-2B-24AE191AA3634A76",
+            "IMG-V11-2B-CF361B72DB38F24E",
+            "IMG-V11-2B-D12AE70F693DD028",
+            "IMG-V11-2B-FA3CBDF0A99332B9",
+            "Y1M01-EMOJI-ART-001"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M02-Q014",
+          "mechanic": "bubble-pop",
+          "learningTarget": "listening: Identify/read school subjects and state a favorite. Focus: What's this?.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M02-Q014-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-4B72C84EB092340A",
+            "IMG-V11-2B-504674DEDCB9FDCE",
+            "IMG-V11-2B-6067E6DE84C0E5C7",
+            "IMG-V11-2B-7CEF9891D59562FE",
+            "IMG-V11-2B-8A1539773070D30D",
+            "IMG-V11-2B-C71E27A94D5A8AF0"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M02-Q014-O1",
+              "label": "blue square",
+              "answerKey": "Y4M02-Q014-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-8A1539773070D30D",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q014-O2",
+              "label": "red triangle",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-504674DEDCB9FDCE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q014-O3",
+              "label": "yellow rectangle",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-C71E27A94D5A8AF0",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q014-O4",
+              "label": "green circle",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-6067E6DE84C0E5C7",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M02-Q015",
+          "mechanic": "memory-quest",
+          "learningTarget": "Moves familiar subject labels from image-supported reading to sound-form retrieval without inventing a school timetable. Curricular target: English; Geography; Mathematics; Science; History; Art.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y4M02-Q015-P1",
+            "Y4M02-Q015-P2",
+            "Y4M02-Q015-P3",
+            "Y4M02-Q015-P4",
+            "Y4M02-Q015-P5",
+            "Y4M02-Q015-P6"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M02-Q016",
+          "mechanic": "matching",
+          "learningTarget": "retrieval: Identify/read school subjects and state a favorite. Focus: Science.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M02-Q016-L1": "Y4M02-Q016-R1",
+            "Y4M02-Q016-L2": "Y4M02-Q016-R2",
+            "Y4M02-Q016-L3": "Y4M02-Q016-R3",
+            "Y4M02-Q016-L4": "Y4M02-Q016-R4",
+            "Y4M02-Q016-L5": "Y4M02-Q016-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0B255AF22079ACF0",
+            "IMG-V11-2B-24AE191AA3634A76",
+            "IMG-V11-2B-D12AE70F693DD028",
+            "IMG-V11-2B-FA3CBDF0A99332B9",
+            "Y1M01-EMOJI-ART-001"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M02-Q017",
+          "mechanic": "target-shooter",
+          "learningTarget": "review: Identify/read school subjects and state a favorite. Focus: alphabet/spelling.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M02-Q017-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-34691F7FF392D134",
+            "IMG-V11-2B-5A685792F5F3892E",
+            "IMG-V11-2B-5FC56902AD57463A",
+            "IMG-V11-2B-B53AD4A3B76BCB34"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M02-Q017-O1",
+              "label": "A",
+              "answerKey": "Y4M02-Q017-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-34691F7FF392D134",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q017-O2",
+              "label": "B",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-B53AD4A3B76BCB34",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q017-O3",
+              "label": "C",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5FC56902AD57463A",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q017-O4",
+              "label": "D",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5A685792F5F3892E",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M02-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Identify/read school subjects and state a favorite. Focus: six subject labels.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Art",
+          "imageRef": null,
+          "mediaIds": [
+            "Y1M01-EMOJI-ART-001"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M02-Q018-O1",
+              "label": "Art",
+              "answerKey": "Art",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q018-O2",
+              "label": "English",
+              "answerKey": "English",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q018-O3",
+              "label": "Geography",
+              "answerKey": "Geography",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q018-O4",
+              "label": "Mathematics",
+              "answerKey": "Mathematics",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M02-Q019",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "consolidation: Identify/read school subjects and state a favorite. Focus: This is a/an....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "My",
+            "favorite",
+            "subject",
+            "is",
+            "English"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "mechanic": "bubble-pop",
+          "learningTarget": "consolidation: Identify/read school subjects and state a favorite. Focus: express preference.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M02-Q020-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-48CA6C8720A28B20",
+            "IMG-V11-2B-4B72C84EB092340A",
+            "IMG-V11-2B-5D2F313F53720CE9",
+            "IMG-V11-2B-7CEF9891D59562FE",
+            "IMG-V11-2B-8402FF71A9476919",
+            "IMG-V11-2B-97050C4338A5B73F"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M02-Q020-O1",
+              "label": "I like papaya",
+              "answerKey": "Y4M02-Q020-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q020-O2",
+              "label": "I like apples",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q020-O3",
+              "label": "I prefer grapes",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M02-Q020-O4",
+              "label": "I do not like carrots",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticReview": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleId": "Y4M03",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y4M03-Q001",
+          "mechanic": "bubble-pop",
+          "learningTarget": "teaching: Retrieve family description and identify months/seasons. Focus: January-December in groups of 3-4.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M03-Q001-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-26BD691DE7A92741",
+            "IMG-V11-2B-5B7C9682B340445E",
+            "IMG-V11-2B-61D5CBD6222B215F",
+            "IMG-V11-2B-AB542D436FC85665",
+            "IMG-V11-2B-C778AE6D3532895F",
+            "IMG-V11-2B-D812A5E34B881005"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M03-Q001-O1",
+              "label": "January",
+              "answerKey": "Y4M03-Q001-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-5B7C9682B340445E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q001-O2",
+              "label": "February",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-C778AE6D3532895F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q001-O3",
+              "label": "March",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-26BD691DE7A92741",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q001-O4",
+              "label": "April",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-AB542D436FC85665",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M03-Q002",
+          "mechanic": "drag-drop",
+          "learningTarget": "teaching: Retrieve family description and identify months/seasons. Focus: family.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M03-Q002-I1": "close-family",
+            "Y4M03-Q002-I2": "close-family",
+            "Y4M03-Q002-I3": "close-family",
+            "Y4M03-Q002-I4": "close-family",
+            "Y4M03-Q002-I5": "grandparents",
+            "Y4M03-Q002-I6": "grandparents"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M03-Q003",
+          "mechanic": "memory-quest",
+          "learningTarget": "Written month labels map to a calendar context; the list is staged in four-item batches. Curricular target: January; February; March; April.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y4M03-Q003-P1",
+            "Y4M03-Q003-P2",
+            "Y4M03-Q003-P3",
+            "Y4M03-Q003-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-749AC74243F46A8D",
+            "IMG-V11-2B-7F9A5E8DC3F03D40",
+            "IMG-V11-2B-A77A1E744EA6919B",
+            "IMG-V11-2B-D30CB86ECE2F3133"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M03-Q004",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "guided practice: Retrieve family description and identify months/seasons. Focus: It is [month/season] (modeled chunk).",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M03-Q004-I1": "Y4M03-Q004-T1",
+            "Y4M03-Q004-I2": "Y4M03-Q004-T2",
+            "Y4M03-Q004-I3": "Y4M03-Q004-T3",
+            "Y4M03-Q004-I4": "Y4M03-Q004-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-61D5CBD6222B215F",
+            "IMG-V11-2B-6B832DF36E5E9290",
+            "IMG-V11-2B-D812A5E34B881005",
+            "IMG-V11-2B-DE1C201E2F9D7993"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M03-Q005",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Retrieve family description and identify months/seasons. Focus: identify family.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M03-Q005-L1": "Y4M03-Q005-R1",
+            "Y4M03-Q005-L2": "Y4M03-Q005-R2",
+            "Y4M03-Q005-L3": "Y4M03-Q005-R3",
+            "Y4M03-Q005-L4": "Y4M03-Q005-R4",
+            "Y4M03-Q005-L5": "Y4M03-Q005-R5",
+            "Y4M03-Q005-L6": "Y4M03-Q005-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-054CD7A333F1E441",
+            "IMG-V11-2B-33FB993626EFE833",
+            "IMG-V11-2B-4CB297CF314C740C",
+            "IMG-V11-2B-69864A95CAB2E249",
+            "IMG-V11-2B-8E78DA1203B3356D",
+            "IMG-V11-2B-A1F9AD7F0C2B077C"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M03-Q006",
+          "mechanic": "bubble-pop",
+          "learningTarget": "guided practice: Retrieve family description and identify months/seasons. Focus: spring.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M03-Q006-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-5B7C9682B340445E",
+            "IMG-V11-2B-82E782E5BBD88C23",
+            "IMG-V11-2B-A8407B32EBD2465B",
+            "IMG-V11-2B-C778AE6D3532895F",
+            "IMG-V11-2B-D19DF2C30C83811A",
+            "IMG-V11-2B-F32FCC70EC5FA01C"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M03-Q006-O1",
+              "label": "spring",
+              "answerKey": "Y4M03-Q006-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-F32FCC70EC5FA01C",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q006-O2",
+              "label": "summer",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-D19DF2C30C83811A",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q006-O3",
+              "label": "autumn",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-82E782E5BBD88C23",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q006-O4",
+              "label": "fall",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-A8407B32EBD2465B",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M03-Q007",
+          "mechanic": "target-shooter",
+          "learningTarget": "recognition: Retrieve family description and identify months/seasons. Focus: he/she.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M03-Q007-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-26A528ACC06EB249",
+            "IMG-V11-2B-26BD691DE7A92741",
+            "IMG-V11-2B-5B7C9682B340445E",
+            "IMG-V11-2B-C778AE6D3532895F"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M03-Q007-O1",
+              "label": "July",
+              "answerKey": "Y4M03-Q007-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-26A528ACC06EB249",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q007-O2",
+              "label": "January",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5B7C9682B340445E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q007-O3",
+              "label": "February",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-C778AE6D3532895F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q007-O4",
+              "label": "March",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-26BD691DE7A92741",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M03-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Retrieve family description and identify months/seasons. Focus: cumulative calendar recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "August",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-A1F9AD7F0C2B077C"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M03-Q008-O1",
+              "label": "August",
+              "answerKey": "August",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q008-O2",
+              "label": "January",
+              "answerKey": "January",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q008-O3",
+              "label": "February",
+              "answerKey": "February",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q008-O4",
+              "label": "March",
+              "answerKey": "March",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M03-Q009",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Retrieve family description and identify months/seasons. Focus: Who's this?.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M03-Q009-L1": "Y4M03-Q009-R1",
+            "Y4M03-Q009-L2": "Y4M03-Q009-R2",
+            "Y4M03-Q009-L3": "Y4M03-Q009-R3",
+            "Y4M03-Q009-L4": "Y4M03-Q009-R4",
+            "Y4M03-Q009-L5": "Y4M03-Q009-R5",
+            "Y4M03-Q009-L6": "Y4M03-Q009-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-033A780DFB6944EE",
+            "IMG-V11-2B-4CB297CF314C740C",
+            "IMG-V11-2B-5AF60E3CDAAC8F49",
+            "IMG-V11-2B-69864A95CAB2E249",
+            "IMG-V11-2B-DD5F7E1C49B54786",
+            "IMG-V11-2B-EF645B1ADACEDB69"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M03-Q010",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Retrieve family description and identify months/seasons. Focus: identify calendar unit.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M03-Q010-I1": "Y4M03-Q010-T1",
+            "Y4M03-Q010-I2": "Y4M03-Q010-T2",
+            "Y4M03-Q010-I3": "Y4M03-Q010-T3",
+            "Y4M03-Q010-I4": "Y4M03-Q010-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1EE8D044F6334CE2",
+            "IMG-V11-2B-503D7AE71EE38AD4",
+            "IMG-V11-2B-BAAE81918DA30B2E",
+            "IMG-V11-2B-FEEB88C925580917"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M03-Q011",
+          "mechanic": "target-shooter",
+          "learningTarget": "comprehension: Retrieve family description and identify months/seasons. Focus: summer.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M03-Q011-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-02BF78748FF20FDF",
+            "IMG-V11-2B-82E782E5BBD88C23",
+            "IMG-V11-2B-A8407B32EBD2465B",
+            "IMG-V11-2B-D19DF2C30C83811A"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M03-Q011-O1",
+              "label": "summer",
+              "answerKey": "Y4M03-Q011-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-D19DF2C30C83811A",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q011-O2",
+              "label": "autumn",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-82E782E5BBD88C23",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q011-O3",
+              "label": "fall",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-A8407B32EBD2465B",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q011-O4",
+              "label": "winter",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-02BF78748FF20FDF",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M03-Q012",
+          "mechanic": "memory-quest",
+          "learningTarget": "Separately retrieves season words through sound-form mapping; imagery and examples must not assume one climate experience. Curricular target: spring; summer; autumn/fall; winter.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y4M03-Q012-P1",
+            "Y4M03-Q012-P2",
+            "Y4M03-Q012-P3",
+            "Y4M03-Q012-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M03-Q013",
+          "mechanic": "bubble-pop",
+          "learningTarget": "listening: Retrieve family description and identify months/seasons. Focus: cumulative calendar recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M03-Q013-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-26BD691DE7A92741",
+            "IMG-V11-2B-5B7C9682B340445E",
+            "IMG-V11-2B-61D5CBD6222B215F",
+            "IMG-V11-2B-AB542D436FC85665",
+            "IMG-V11-2B-C778AE6D3532895F",
+            "IMG-V11-2B-F32FCC70EC5FA01C"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M03-Q013-O1",
+              "label": "spring",
+              "answerKey": "Y4M03-Q013-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-F32FCC70EC5FA01C",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q013-O2",
+              "label": "January",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5B7C9682B340445E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q013-O3",
+              "label": "February",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-C778AE6D3532895F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q013-O4",
+              "label": "March",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-26BD691DE7A92741",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M03-Q014",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "listening: Retrieve family description and identify months/seasons. Focus: She's/He's my....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M03-Q014-I1": "Y4M03-Q014-T1",
+            "Y4M03-Q014-I2": "Y4M03-Q014-T2",
+            "Y4M03-Q014-I3": "Y4M03-Q014-T3",
+            "Y4M03-Q014-I4": "Y4M03-Q014-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-07B3D6634BA3FE98",
+            "IMG-V11-2B-46C759715E33A813",
+            "IMG-V11-2B-B47AC22E66692DB9",
+            "IMG-V11-2B-C0AA3950B05EEC35"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M03-Q015",
+          "mechanic": "matching",
+          "learningTarget": "retrieval: Retrieve family description and identify months/seasons. Focus: identify family.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M03-Q015-L1": "Y4M03-Q015-R1",
+            "Y4M03-Q015-L2": "Y4M03-Q015-R2",
+            "Y4M03-Q015-L3": "Y4M03-Q015-R3",
+            "Y4M03-Q015-L4": "Y4M03-Q015-R4",
+            "Y4M03-Q015-L5": "Y4M03-Q015-R5",
+            "Y4M03-Q015-L6": "Y4M03-Q015-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-01B39210E1570613",
+            "IMG-V11-2B-024C0D990F353FC0",
+            "IMG-V11-2B-05A5652BE97B359E",
+            "IMG-V11-2B-904F9A2444802FC6",
+            "IMG-V11-2B-C1FD9166A9409B19",
+            "IMG-V11-2B-F36A542977FFFABD"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M03-Q016",
+          "mechanic": "target-shooter",
+          "learningTarget": "retrieval: Retrieve family description and identify months/seasons. Focus: autumn/fall.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M03-Q016-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-82E782E5BBD88C23",
+            "IMG-V11-2B-A8407B32EBD2465B",
+            "IMG-V11-2B-D19DF2C30C83811A",
+            "IMG-V11-2B-F32FCC70EC5FA01C"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M03-Q016-O1",
+              "label": "fall",
+              "answerKey": "Y4M03-Q016-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-A8407B32EBD2465B",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q016-O2",
+              "label": "spring",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-F32FCC70EC5FA01C",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q016-O3",
+              "label": "summer",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-D19DF2C30C83811A",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q016-O4",
+              "label": "autumn",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-82E782E5BBD88C23",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M03-Q017",
+          "mechanic": "matching",
+          "learningTarget": "review: Retrieve family description and identify months/seasons. Focus: family.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M03-Q017-L1": "Y4M03-Q017-R1",
+            "Y4M03-Q017-L2": "Y4M03-Q017-R2",
+            "Y4M03-Q017-L3": "Y4M03-Q017-R3",
+            "Y4M03-Q017-L4": "Y4M03-Q017-R4",
+            "Y4M03-Q017-L5": "Y4M03-Q017-R5",
+            "Y4M03-Q017-L6": "Y4M03-Q017-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-01B39210E1570613",
+            "IMG-V11-2B-024C0D990F353FC0",
+            "IMG-V11-2B-56C61319B5EF40CF",
+            "IMG-V11-2B-8E78DA1203B3356D",
+            "IMG-V11-2B-904F9A2444802FC6",
+            "IMG-V11-2B-F36A542977FFFABD"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M03-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Retrieve family description and identify months/seasons. Focus: cumulative calendar recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "January",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-5B7C9682B340445E"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M03-Q018-O1",
+              "label": "January",
+              "answerKey": "January",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q018-O2",
+              "label": "February",
+              "answerKey": "February",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q018-O3",
+              "label": "March",
+              "answerKey": "March",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M03-Q018-O4",
+              "label": "April",
+              "answerKey": "April",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M03-Q019",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "consolidation: Retrieve family description and identify months/seasons. Focus: calendar/family description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "It",
+            "is",
+            "February"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M03-Q020",
+          "mechanic": "drag-drop",
+          "learningTarget": "consolidation: Retrieve family description and identify months/seasons. Focus: identify calendar unit.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M03-Q020-I1": "close-family",
+            "Y4M03-Q020-I2": "close-family",
+            "Y4M03-Q020-I3": "close-family",
+            "Y4M03-Q020-I4": "close-family",
+            "Y4M03-Q020-I5": "grandparents",
+            "Y4M03-Q020-I6": "grandparents"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        }
+      ]
+    },
+    {
+      "moduleId": "Y4M04",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y4M04-Q001",
+          "mechanic": "drag-drop",
+          "learningTarget": "teaching: Retrieve numbers/age and communicate sport preference/practice using a finite source-backed set; provide a receptive bridge toward action-in-progress comprehension. Focus: soccer.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M04-Q001-I1": "ball-sports",
+            "Y4M04-Q001-I2": "ball-sports",
+            "Y4M04-Q001-I3": "ball-sports",
+            "Y4M04-Q001-I4": "racket-sport"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M04-Q002",
+          "mechanic": "target-shooter",
+          "learningTarget": "teaching: Retrieve numbers/age and communicate sport preference/practice using a finite source-backed set; provide a receptive bridge toward action-in-progress comprehension. Focus: numbers 1-50.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M04-Q002-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q001-FOUR",
+            "IMG-Y1M02-Q001-ONE",
+            "IMG-Y1M02-Q001-THREE",
+            "IMG-Y1M02-Q001-TWO"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M04-Q002-O1",
+              "label": "two",
+              "answerKey": "Y4M04-Q002-O1",
+              "correct": true,
+              "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q002-O2",
+              "label": "one",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q002-O3",
+              "label": "three",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q002-O4",
+              "label": "four",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-FOUR",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M04-Q003",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "guided practice: Retrieve numbers/age and communicate sport preference/practice using a finite source-backed set; provide a receptive bridge toward action-in-progress comprehension. Focus: four sport labels in recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M04-Q003-I1": "Y4M04-Q003-T1",
+            "Y4M04-Q003-I2": "Y4M04-Q003-T2",
+            "Y4M04-Q003-I3": "Y4M04-Q003-T3",
+            "Y4M04-Q003-I4": "Y4M04-Q003-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1F29337461D6E938",
+            "IMG-V11-2B-A4950F377F6EB0EF",
+            "IMG-V11-2B-B5B5B86FFF24AE41",
+            "IMG-V11-2B-F8DAA4BC7576FC31"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M04-Q004",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Retrieve numbers/age and communicate sport preference/practice using a finite source-backed set; provide a receptive bridge toward action-in-progress comprehension. Focus: What's your favorite sport? / My favorite sport is... (modeled preference).",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M04-Q004-L1": "Y4M04-Q004-R1",
+            "Y4M04-Q004-L2": "Y4M04-Q004-R2",
+            "Y4M04-Q004-L3": "Y4M04-Q004-R3",
+            "Y4M04-Q004-L4": "Y4M04-Q004-R4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-8314D81C3B45C08B",
+            "IMG-V11-2B-8C5CBA1D3FC99D6F",
+            "IMG-V11-2B-B6BCF0D776C5D057",
+            "IMG-V11-2B-C777400BB6A2B48F"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M04-Q005",
+          "mechanic": "bubble-pop",
+          "learningTarget": "guided practice: Recognize the spoken name of a sport and its modeled preference phrase. Focus: favorite sport.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M04-Q005-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-31918A7FAD7D9DFC",
+            "IMG-V11-2B-45B3D0ADBD8A9EF6",
+            "IMG-V11-2B-53343A61B2F8DA93",
+            "IMG-V11-2B-6E901FE0C9B85D8B",
+            "IMG-Y1M02-Q001-ONE",
+            "IMG-Y1M02-Q001-TWO"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M04-Q005-O1",
+              "label": "soccer",
+              "answerKey": "Y4M04-Q005-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-6E901FE0C9B85D8B",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q005-O2",
+              "label": "basketball",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-31918A7FAD7D9DFC",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q005-O3",
+              "label": "tennis",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-53343A61B2F8DA93",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q005-O4",
+              "label": "volleyball",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-45B3D0ADBD8A9EF6",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M04-Q006",
+          "mechanic": "memory-quest",
+          "learningTarget": "Uses only the four V3-named receptive sports to support listening discrimination; does not make them productive targets. Curricular target: soccer; basketball; tennis; volleyball.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y4M04-Q006-P1",
+            "Y4M04-Q006-P2",
+            "Y4M04-Q006-P3",
+            "Y4M04-Q006-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2101259510314CD2",
+            "IMG-V11-2B-35918BE0AABA2E5B",
+            "IMG-V11-2B-7EEB7D68D93F7088",
+            "IMG-V11-2B-AAA3714A83AE3CAD"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M04-Q007",
+          "mechanic": "drag-drop",
+          "learningTarget": "recognition: Retrieve numbers/age and communicate sport preference/practice using a finite source-backed set; provide a receptive bridge toward action-in-progress comprehension. Focus: age.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M04-Q007-I1": "ball-sports",
+            "Y4M04-Q007-I2": "ball-sports",
+            "Y4M04-Q007-I3": "ball-sports",
+            "Y4M04-Q007-I4": "racket-sport"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M04-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "comprehension: Complete the modeled favorite-sport sentence with a taught sport. Focus: My favorite sport is...",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "volleyball",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-F8DAA4BC7576FC31"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M04-Q008-O1",
+              "label": "volleyball",
+              "answerKey": "volleyball",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q008-O2",
+              "label": "soccer",
+              "answerKey": "soccer",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q008-O3",
+              "label": "basketball",
+              "answerKey": "basketball",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q008-O4",
+              "label": "tennis",
+              "answerKey": "tennis",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M04-Q009",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "recognition: Retrieve numbers/age and communicate sport preference/practice using a finite source-backed set; provide a receptive bridge toward action-in-progress comprehension. Focus: I play... (modeled practice chunk).",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M04-Q009-I1": "Y4M04-Q009-T1",
+            "Y4M04-Q009-I2": "Y4M04-Q009-T2",
+            "Y4M04-Q009-I3": "Y4M04-Q009-T3",
+            "Y4M04-Q009-I4": "Y4M04-Q009-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q002-FIVE",
+            "IMG-Y1M02-Q002-SEVEN",
+            "IMG-Y1M02-Q002-SIX"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M04-Q010",
+          "mechanic": "target-shooter",
+          "learningTarget": "comprehension: Retrieve numbers/age and communicate sport preference/practice using a finite source-backed set; provide a receptive bridge toward action-in-progress comprehension. Focus: describe familiar practice.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M04-Q010-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-31918A7FAD7D9DFC",
+            "IMG-V11-2B-53343A61B2F8DA93",
+            "IMG-V11-2B-6E901FE0C9B85D8B",
+            "IMG-Y1M02-Q002-SIX"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M04-Q010-O1",
+              "label": "six",
+              "answerKey": "Y4M04-Q010-O1",
+              "correct": true,
+              "mediaId": "IMG-Y1M02-Q002-SIX",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q010-O2",
+              "label": "soccer",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-6E901FE0C9B85D8B",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q010-O3",
+              "label": "basketball",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-31918A7FAD7D9DFC",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q010-O4",
+              "label": "tennis",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-53343A61B2F8DA93",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M04-Q011",
+          "mechanic": "matching",
+          "learningTarget": "retrieval: Match each approved sport name to its clear sport image. Focus: four approved sports.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M04-Q011-L1": "Y4M04-Q011-R1",
+            "Y4M04-Q011-L2": "Y4M04-Q011-R2",
+            "Y4M04-Q011-L3": "Y4M04-Q011-R3",
+            "Y4M04-Q011-L4": "Y4M04-Q011-R4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-8314D81C3B45C08B",
+            "IMG-V11-2B-8C5CBA1D3FC99D6F",
+            "IMG-V11-2B-B6BCF0D776C5D057",
+            "IMG-V11-2B-C777400BB6A2B48F"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M04-Q012",
+          "mechanic": "bubble-pop",
+          "learningTarget": "recognition: Identify a number from a simple sports quantity. Focus: numbers 1-10.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M04-Q012-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-B5B5B86FFF24AE41",
+            "IMG-V11-2B-F8DAA4BC7576FC31",
+            "IMG-Y1M02-Q001-FOUR",
+            "IMG-Y1M02-Q001-ONE",
+            "IMG-Y1M02-Q001-THREE",
+            "IMG-Y1M02-Q001-TWO"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M04-Q012-O1",
+              "label": "two",
+              "answerKey": "Y4M04-Q012-O1",
+              "correct": true,
+              "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q012-O2",
+              "label": "one",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q012-O3",
+              "label": "three",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q012-O4",
+              "label": "four",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-FOUR",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M04-Q013",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "listening: Retrieve numbers/age and communicate sport preference/practice using a finite source-backed set; provide a receptive bridge toward action-in-progress comprehension. Focus: four sport labels in recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M04-Q013-I1": "Y4M04-Q013-T1",
+            "Y4M04-Q013-I2": "Y4M04-Q013-T2",
+            "Y4M04-Q013-I3": "Y4M04-Q013-T3",
+            "Y4M04-Q013-I4": "Y4M04-Q013-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1F29337461D6E938",
+            "IMG-V11-2B-A4950F377F6EB0EF",
+            "IMG-V11-2B-B5B5B86FFF24AE41",
+            "IMG-V11-2B-F8DAA4BC7576FC31"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M04-Q014",
+          "mechanic": "matching",
+          "learningTarget": "review: Match each approved sport to its corresponding context image. Focus: four approved sports.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M04-Q014-L1": "Y4M04-Q014-R1",
+            "Y4M04-Q014-L2": "Y4M04-Q014-R2",
+            "Y4M04-Q014-L3": "Y4M04-Q014-R3",
+            "Y4M04-Q014-L4": "Y4M04-Q014-R4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-8314D81C3B45C08B",
+            "IMG-V11-2B-8C5CBA1D3FC99D6F",
+            "IMG-V11-2B-B6BCF0D776C5D057",
+            "IMG-V11-2B-C777400BB6A2B48F"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M04-Q015",
+          "mechanic": "target-shooter",
+          "learningTarget": "consolidation: Recognize the spoken modeled phrase about playing a taught sport well. Focus: I play ... very well.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M04-Q015-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-31918A7FAD7D9DFC",
+            "IMG-V11-2B-45B3D0ADBD8A9EF6",
+            "IMG-V11-2B-53343A61B2F8DA93",
+            "IMG-V11-2B-6E901FE0C9B85D8B"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M04-Q015-O1",
+              "label": "soccer",
+              "answerKey": "Y4M04-Q015-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-6E901FE0C9B85D8B",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q015-O2",
+              "label": "basketball",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-31918A7FAD7D9DFC",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q015-O3",
+              "label": "tennis",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-53343A61B2F8DA93",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q015-O4",
+              "label": "volleyball",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-45B3D0ADBD8A9EF6",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M04-Q016",
+          "mechanic": "memory-quest",
+          "learningTarget": "recognition: Pair each spoken approved sport with its written label. Focus: four approved sports.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y4M04-Q016-P1",
+            "Y4M04-Q016-P2",
+            "Y4M04-Q016-P3",
+            "Y4M04-Q016-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M04-Q017",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "review: Retrieve numbers/age and communicate sport preference/practice using a finite source-backed set; provide a receptive bridge toward action-in-progress comprehension. Focus: numbers 1-50.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M04-Q017-I1": "Y4M04-Q017-T1",
+            "Y4M04-Q017-I2": "Y4M04-Q017-T2",
+            "Y4M04-Q017-I3": "Y4M04-Q017-T3",
+            "Y4M04-Q017-I4": "Y4M04-Q017-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q002-SEVEN",
+            "IMG-Y1M02-Q007-NINE",
+            "IMG-Y1M02-Q007-TEN"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M04-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Retrieve numbers/age and communicate sport preference/practice using a finite source-backed set; provide a receptive bridge toward action-in-progress comprehension. Focus: modeled favorite response.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "volleyball",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-F8DAA4BC7576FC31"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M04-Q018-O1",
+              "label": "volleyball",
+              "answerKey": "volleyball",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q018-O2",
+              "label": "soccer",
+              "answerKey": "soccer",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q018-O3",
+              "label": "basketball",
+              "answerKey": "basketball",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q018-O4",
+              "label": "tennis",
+              "answerKey": "tennis",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M04-Q019",
+          "mechanic": "drag-drop",
+          "learningTarget": "consolidation: Retrieve numbers/age and communicate sport preference/practice using a finite source-backed set; provide a receptive bridge toward action-in-progress comprehension. Focus: I play ... very well (phrase comprehension).",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M04-Q019-I1": "ball-sports",
+            "Y4M04-Q019-I2": "ball-sports",
+            "Y4M04-Q019-I3": "ball-sports",
+            "Y4M04-Q019-I4": "racket-sport"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M04-Q020",
+          "mechanic": "target-shooter",
+          "learningTarget": "consolidation: Recognize a familiar practice scene from a short English sports cue. Focus: describe familiar practice.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M04-Q020-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-31918A7FAD7D9DFC",
+            "IMG-V11-2B-45B3D0ADBD8A9EF6",
+            "IMG-V11-2B-53343A61B2F8DA93",
+            "IMG-V11-2B-6E901FE0C9B85D8B"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M04-Q020-O1",
+              "label": "volleyball",
+              "answerKey": "Y4M04-Q020-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-45B3D0ADBD8A9EF6",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q020-O2",
+              "label": "soccer",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-6E901FE0C9B85D8B",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q020-O3",
+              "label": "basketball",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-31918A7FAD7D9DFC",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M04-Q020-O4",
+              "label": "tennis",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-53343A61B2F8DA93",
+              "semanticReview": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleId": "Y4M05",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y4M05-Q001",
+          "mechanic": "target-shooter",
+          "learningTarget": "teaching: Describe clothing color and retrieve food preferences. Focus: jacket.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M05-Q001-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-3DA65911425B1F0A",
+            "IMG-V11-2B-6E361BB260D62CB6",
+            "IMG-V11-2B-946C6EFC936156EA",
+            "IMG-V11-2B-9FC2369A0CEEEEB0"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M05-Q001-O1",
+              "label": "jacket",
+              "answerKey": "Y4M05-Q001-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-6E361BB260D62CB6",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q001-O2",
+              "label": "dress",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-3DA65911425B1F0A",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q001-O3",
+              "label": "shirt",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-946C6EFC936156EA",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q001-O4",
+              "label": "T-shirt",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-9FC2369A0CEEEEB0",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M05-Q002",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Describe clothing color and retrieve food preferences. Focus: small.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M05-Q002-I1": "Y4M05-Q002-T1",
+            "Y4M05-Q002-I2": "Y4M05-Q002-T2",
+            "Y4M05-Q002-I3": "Y4M05-Q002-T3",
+            "Y4M05-Q002-I4": "Y4M05-Q002-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-8FA451D965C6EB75",
+            "IMG-V11-2B-C84E311AA3E3AF40",
+            "IMG-Y1M03-Q001-BLUE",
+            "IMG-Y1M03-Q001-RED"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M05-Q003",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Describe clothing color and retrieve food preferences. Focus: food/drink.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M05-Q003-L1": "Y4M05-Q003-R1",
+            "Y4M05-Q003-L2": "Y4M05-Q003-R2",
+            "Y4M05-Q003-L3": "Y4M05-Q003-R3",
+            "Y4M05-Q003-L4": "Y4M05-Q003-R4",
+            "Y4M05-Q003-L5": "Y4M05-Q003-R5",
+            "Y4M05-Q003-L6": "Y4M05-Q003-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0C2E37014FB8B5AF",
+            "IMG-V11-2B-1EABF9E8AAAB576B",
+            "IMG-V11-2B-3E8B870AE9E69B6A",
+            "IMG-V11-2B-BC3B9081178AE7A4",
+            "IMG-V11-2B-D1344634366B33A5",
+            "IMG-Y1M03-Q001-ORANGE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M05-Q004",
+          "mechanic": "memory-quest",
+          "learningTarget": "Written clothing labels map to garments; avoid body/size judgments. Curricular target: jacket; dress; shirt; T-shirt; pants/trousers; shoes.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y4M05-Q004-P1",
+            "Y4M05-Q004-P2",
+            "Y4M05-Q004-P3",
+            "Y4M05-Q004-P4",
+            "Y4M05-Q004-P5",
+            "Y4M05-Q004-P6"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-500B7CA70EE94EA9",
+            "IMG-V11-2B-B932F9C5DA901E52",
+            "IMG-V11-2B-BB75FBB04D7641DD",
+            "IMG-V11-2B-BCD95D77D8D2E855",
+            "IMG-V11-2B-BD7447F51CDEA5B8",
+            "IMG-V11-2B-E5DAEC3F8D2DDA4B"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M05-Q005",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Describe clothing color and retrieve food preferences. Focus: one color question/response.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M05-Q005-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M03-Q001-BLACK",
+            "IMG-Y1M03-Q001-BLUE",
+            "IMG-Y1M03-Q001-RED",
+            "IMG-Y1M03-Q001-YELLOW"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M05-Q005-O1",
+              "label": "black",
+              "answerKey": "Y4M05-Q005-O1",
+              "correct": true,
+              "mediaId": "IMG-Y1M03-Q001-BLACK",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q005-O2",
+              "label": "red",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M03-Q001-RED",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q005-O3",
+              "label": "blue",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M03-Q001-BLUE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q005-O4",
+              "label": "yellow",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M03-Q001-YELLOW",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M05-Q006",
+          "mechanic": "drag-drop",
+          "learningTarget": "guided practice: Describe clothing color and retrieve food preferences. Focus: describe clothing.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M05-Q006-I1": "clothes",
+            "Y4M05-Q006-I2": "clothes",
+            "Y4M05-Q006-I3": "clothes",
+            "Y4M05-Q006-I4": "foods",
+            "Y4M05-Q006-I5": "foods",
+            "Y4M05-Q006-I6": "foods"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-26D44842889AB747",
+            "IMG-V11-2B-4A0D07AA7BBF6562",
+            "IMG-V11-2B-4E8C7B72B1EE887C",
+            "IMG-V11-2B-54F22DA60F173DD1",
+            "IMG-V11-2B-5596327D2C423D85",
+            "IMG-V11-2B-7A8EE9CA12A18B37"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M05-Q007",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Describe clothing color and retrieve food preferences. Focus: dress.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M05-Q007-L1": "Y4M05-Q007-R1",
+            "Y4M05-Q007-L2": "Y4M05-Q007-R2",
+            "Y4M05-Q007-L3": "Y4M05-Q007-R3",
+            "Y4M05-Q007-L4": "Y4M05-Q007-R4",
+            "Y4M05-Q007-L5": "Y4M05-Q007-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-37D4A49BBE547EF2",
+            "IMG-V11-2B-55B8783BBC22D23D",
+            "IMG-V11-2B-F2722554CD82ACE3",
+            "IMG-V11-2B-F586E01965033EE8",
+            "IMG-V11-2B-FA05AA0B6003C6A5"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M05-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Describe clothing color and retrieve food preferences. Focus: medium.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "red",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M03-Q001-RED"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M05-Q008-O1",
+              "label": "red",
+              "answerKey": "red",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q008-O2",
+              "label": "blue",
+              "answerKey": "blue",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q008-O3",
+              "label": "green",
+              "answerKey": "green",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q008-O4",
+              "label": "yellow",
+              "answerKey": "yellow",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M05-Q009",
+          "mechanic": "target-shooter",
+          "learningTarget": "recognition: Describe clothing color and retrieve food preferences. Focus: colors.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M05-Q009-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M03-Q001-BLUE",
+            "IMG-Y1M03-Q001-RED",
+            "IMG-Y1M03-Q001-YELLOW",
+            "IMG-Y1M03-Q006-GRAY"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M05-Q009-O1",
+              "label": "gray",
+              "answerKey": "Y4M05-Q009-O1",
+              "correct": true,
+              "mediaId": "IMG-Y1M03-Q006-GRAY",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q009-O2",
+              "label": "red",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M03-Q001-RED",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q009-O3",
+              "label": "blue",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M03-Q001-BLUE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q009-O4",
+              "label": "yellow",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M03-Q001-YELLOW",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Describe clothing color and retrieve food preferences. Focus: clothing description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M05-Q010-L1": "Y4M05-Q010-R1",
+            "Y4M05-Q010-L2": "Y4M05-Q010-R2",
+            "Y4M05-Q010-L3": "Y4M05-Q010-R3",
+            "Y4M05-Q010-L4": "Y4M05-Q010-R4",
+            "Y4M05-Q010-L5": "Y4M05-Q010-R5",
+            "Y4M05-Q010-L6": "Y4M05-Q010-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-37D4A49BBE547EF2",
+            "IMG-V11-2B-55B8783BBC22D23D",
+            "IMG-V11-2B-9F1B693E24177567",
+            "IMG-V11-2B-E2B7CEC954F9AAA9",
+            "IMG-V11-2B-F2722554CD82ACE3",
+            "IMG-V11-2B-F586E01965033EE8"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "mechanic": "bubble-pop",
+          "learningTarget": "comprehension: Describe clothing color and retrieve food preferences. Focus: What size...?.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M05-Q011-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-3DA65911425B1F0A",
+            "IMG-V11-2B-6E361BB260D62CB6",
+            "IMG-V11-2B-946C6EFC936156EA",
+            "IMG-V11-2B-9FC2369A0CEEEEB0",
+            "IMG-V11-2B-B251C4169436B57F",
+            "IMG-V11-2B-C84E311AA3E3AF40"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M05-Q011-O1",
+              "label": "medium",
+              "answerKey": "Y4M05-Q011-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-B251C4169436B57F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q011-O2",
+              "label": "jacket",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-6E361BB260D62CB6",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q011-O3",
+              "label": "dress",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-3DA65911425B1F0A",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q011-O4",
+              "label": "shirt",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-946C6EFC936156EA",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M05-Q012",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Describe clothing color and retrieve food preferences. Focus: express preference.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M05-Q012-I1": "Y4M05-Q012-T1",
+            "Y4M05-Q012-I2": "Y4M05-Q012-T2",
+            "Y4M05-Q012-I3": "Y4M05-Q012-T3",
+            "Y4M05-Q012-I4": "Y4M05-Q012-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-3272A25234DFCFBA",
+            "IMG-V11-2B-719454C9113F5766",
+            "IMG-V11-2B-95FE0C0B6DED7EFB",
+            "IMG-V11-2B-D44395DF6FD6A093"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M05-Q013",
+          "mechanic": "matching",
+          "learningTarget": "listening: Describe clothing color and retrieve food preferences. Focus: shirt.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M05-Q013-L1": "Y4M05-Q013-R1",
+            "Y4M05-Q013-L2": "Y4M05-Q013-R2",
+            "Y4M05-Q013-L3": "Y4M05-Q013-R3",
+            "Y4M05-Q013-L4": "Y4M05-Q013-R4",
+            "Y4M05-Q013-L5": "Y4M05-Q013-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-37D4A49BBE547EF2",
+            "IMG-V11-2B-55B8783BBC22D23D",
+            "IMG-V11-2B-9F1B693E24177567",
+            "IMG-V11-2B-F2722554CD82ACE3",
+            "IMG-V11-2B-F586E01965033EE8"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M05-Q014",
+          "mechanic": "memory-quest",
+          "learningTarget": "Retrieves source foods in sound-form mode to support later Y5M02 preference/routine work; clothing is not mixed into the same pair set. Curricular target: apple; banana; pear; orange.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y4M05-Q014-P1",
+            "Y4M05-Q014-P2",
+            "Y4M05-Q014-P3",
+            "Y4M05-Q014-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M05-Q015",
+          "mechanic": "matching",
+          "learningTarget": "retrieval: Describe clothing color and retrieve food preferences. Focus: preferences.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M05-Q015-L1": "Y4M05-Q015-R1",
+            "Y4M05-Q015-L2": "Y4M05-Q015-R2",
+            "Y4M05-Q015-L3": "Y4M05-Q015-R3",
+            "Y4M05-Q015-L4": "Y4M05-Q015-R4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-20C32A7B846CD05A",
+            "IMG-V11-2B-8050E659DDF0AE39",
+            "IMG-V11-2B-9308452ECEE535F7",
+            "IMG-V11-2B-F2B1512D42DAD7B2"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M05-Q016",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "retrieval: Describe clothing color and retrieve food preferences. Focus: clothing description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M05-Q016-I1": "Y4M05-Q016-T1",
+            "Y4M05-Q016-I2": "Y4M05-Q016-T2",
+            "Y4M05-Q016-I3": "Y4M05-Q016-T3",
+            "Y4M05-Q016-I4": "Y4M05-Q016-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1DB896CF7FCECC4A",
+            "IMG-V11-2B-5BBD35AAD770FC3F",
+            "IMG-V11-2B-6ECEED6F29B3CD6A",
+            "IMG-V11-2B-B397BAF495CC8462"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "mechanic": "bubble-pop",
+          "learningTarget": "review: Describe clothing color and retrieve food preferences. Focus: I like/I don't like/I prefer.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M05-Q017-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-3DA65911425B1F0A",
+            "IMG-V11-2B-48CA6C8720A28B20",
+            "IMG-V11-2B-5D2F313F53720CE9",
+            "IMG-V11-2B-6E361BB260D62CB6",
+            "IMG-V11-2B-8402FF71A9476919",
+            "IMG-V11-2B-97050C4338A5B73F"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M05-Q017-O1",
+              "label": "I like apples",
+              "answerKey": "Y4M05-Q017-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q017-O2",
+              "label": "I prefer grapes",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q017-O3",
+              "label": "I do not like carrots",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q017-O4",
+              "label": "I like papaya",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M05-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Describe clothing color and retrieve food preferences. Focus: describe clothing.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "T-shirt",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-9FC2369A0CEEEEB0"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M05-Q018-O1",
+              "label": "T-shirt",
+              "answerKey": "T-shirt",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q018-O2",
+              "label": "jacket",
+              "answerKey": "jacket",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q018-O3",
+              "label": "dress",
+              "answerKey": "dress",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M05-Q018-O4",
+              "label": "shirt",
+              "answerKey": "shirt",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "mechanic": "drag-drop",
+          "learningTarget": "consolidation: Describe clothing color and retrieve food preferences. Focus: T-shirt.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M05-Q019-I1": "clothes",
+            "Y4M05-Q019-I2": "clothes",
+            "Y4M05-Q019-I3": "clothes",
+            "Y4M05-Q019-I4": "foods",
+            "Y4M05-Q019-I5": "foods",
+            "Y4M05-Q019-I6": "foods"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-26D44842889AB747",
+            "IMG-V11-2B-4A0D07AA7BBF6562",
+            "IMG-V11-2B-4E8C7B72B1EE887C",
+            "IMG-V11-2B-54F22DA60F173DD1",
+            "IMG-V11-2B-5596327D2C423D85",
+            "IMG-V11-2B-7A8EE9CA12A18B37"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M05-Q020",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "consolidation: Describe clothing color and retrieve food preferences. Focus: small.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M05-Q020-I1": "Y4M05-Q020-T1",
+            "Y4M05-Q020-I2": "Y4M05-Q020-T2",
+            "Y4M05-Q020-I3": "Y4M05-Q020-T3",
+            "Y4M05-Q020-I4": "Y4M05-Q020-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-8FA451D965C6EB75",
+            "IMG-V11-2B-C84E311AA3E3AF40",
+            "IMG-Y1M03-Q001-BLUE",
+            "IMG-Y1M06-Q014-SMALL"
+          ],
+          "options": []
+        }
+      ]
+    },
+    {
+      "moduleId": "Y4M06",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y4M06-Q001",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Locate familiar objects/people and recognize limited transport context. Focus: bedroom.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M06-Q001-I1": "Y4M06-Q001-T1",
+            "Y4M06-Q001-I2": "Y4M06-Q001-T2",
+            "Y4M06-Q001-I3": "Y4M06-Q001-T3",
+            "Y4M06-Q001-I4": "Y4M06-Q001-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-325D92BC370F05E7",
+            "IMG-V11-2B-88F7261163BCA3FC",
+            "IMG-V11-2B-9CE1BA3D8D7CFDA2",
+            "IMG-V11-2B-CA9EE10003E4F9D7"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M06-Q002",
+          "mechanic": "matching",
+          "learningTarget": "teaching: Locate familiar objects/people and recognize limited transport context. Focus: car.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M06-Q002-L1": "Y4M06-Q002-R1",
+            "Y4M06-Q002-L2": "Y4M06-Q002-R2",
+            "Y4M06-Q002-L3": "Y4M06-Q002-R3",
+            "Y4M06-Q002-L4": "Y4M06-Q002-R4",
+            "Y4M06-Q002-L5": "Y4M06-Q002-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-03B43F2307D9D5A5",
+            "IMG-V11-2B-0688CC24B81A968B",
+            "IMG-V11-2B-6329C1BA12C26F00",
+            "IMG-V11-2B-F6DE663C65523B40",
+            "IMG-V11-2B-FCAA15FC9A868DB5"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M06-Q003",
+          "mechanic": "bubble-pop",
+          "learningTarget": "guided practice: Locate familiar objects/people and recognize limited transport context. Focus: Where is...?.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M06-Q003-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-03B43F2307D9D5A5",
+            "IMG-V11-2B-2A804EA3C522A9E8",
+            "IMG-V11-2B-52C7A70497E1EF66",
+            "IMG-V11-2B-9FAEC5CA9D742F50",
+            "IMG-V11-2B-B31276A960464375",
+            "IMG-V11-2B-F6DE663C65523B40"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M06-Q003-O1",
+              "label": "kitchen",
+              "answerKey": "Y4M06-Q003-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-B31276A960464375",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q003-O2",
+              "label": "bedroom",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-9FAEC5CA9D742F50",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q003-O3",
+              "label": "bathroom",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-2A804EA3C522A9E8",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q003-O4",
+              "label": "living room",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-52C7A70497E1EF66",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M06-Q004",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Locate familiar objects/people and recognize limited transport context. Focus: spatial relations.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M06-Q004-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2A804EA3C522A9E8",
+            "IMG-V11-2B-52C7A70497E1EF66",
+            "IMG-V11-2B-9FAEC5CA9D742F50",
+            "IMG-V11-2B-B31276A960464375"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M06-Q004-O1",
+              "label": "living room",
+              "answerKey": "Y4M06-Q004-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-52C7A70497E1EF66",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q004-O2",
+              "label": "bedroom",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-9FAEC5CA9D742F50",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q004-O3",
+              "label": "bathroom",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-2A804EA3C522A9E8",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q004-O4",
+              "label": "kitchen",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-B31276A960464375",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M06-Q005",
+          "mechanic": "memory-quest",
+          "learningTarget": "Written room labels connect to distinct room-plan scenes; the new location relations remain separately practiced. Curricular target: bedroom; bathroom; kitchen; living room.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y4M06-Q005-P1",
+            "Y4M06-Q005-P2",
+            "Y4M06-Q005-P3",
+            "Y4M06-Q005-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-44E784D1E8FEAABA",
+            "IMG-V11-2B-85B53E33971ECBA2",
+            "IMG-V11-2B-90436B7E414055C9",
+            "IMG-V11-2B-D12D453E7202EA43"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M06-Q006",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Locate familiar objects/people and recognize limited transport context. Focus: ask/answer location.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M06-Q006-L1": "Y4M06-Q006-R1",
+            "Y4M06-Q006-L2": "Y4M06-Q006-R2",
+            "Y4M06-Q006-L3": "Y4M06-Q006-R3"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-7ECDC77FBF50FAB2",
+            "IMG-V11-2B-A396F1A45DF217E8",
+            "IMG-V11-2B-AD3495E9BCA08DFA"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M06-Q007",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "recognition: Locate familiar objects/people and recognize limited transport context. Focus: bathroom.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M06-Q007-I1": "Y4M06-Q007-T1",
+            "Y4M06-Q007-I2": "Y4M06-Q007-T2",
+            "Y4M06-Q007-I3": "Y4M06-Q007-T3",
+            "Y4M06-Q007-I4": "Y4M06-Q007-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-88F7261163BCA3FC",
+            "IMG-V11-2B-9CE1BA3D8D7CFDA2",
+            "IMG-V11-2B-9EB64C8ADF6704BF",
+            "IMG-V11-2B-FD91743C3E852894"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M06-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Locate familiar objects/people and recognize limited transport context. Focus: bus.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "train",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-BAFBBAC1C9A13EE8"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M06-Q008-O1",
+              "label": "train",
+              "answerKey": "train",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q008-O2",
+              "label": "bus",
+              "answerKey": "bus",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q008-O3",
+              "label": "truck",
+              "answerKey": "truck",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q008-O4",
+              "label": "bedroom",
+              "answerKey": "bedroom",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M06-Q009",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Locate familiar objects/people and recognize limited transport context. Focus: in/on.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M06-Q009-L1": "Y4M06-Q009-R1",
+            "Y4M06-Q009-L2": "Y4M06-Q009-R2",
+            "Y4M06-Q009-L3": "Y4M06-Q009-R3"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-7ECDC77FBF50FAB2",
+            "IMG-V11-2B-A396F1A45DF217E8",
+            "IMG-V11-2B-AD3495E9BCA08DFA"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M06-Q010",
+          "mechanic": "bubble-pop",
+          "learningTarget": "comprehension: Locate familiar objects/people and recognize limited transport context. Focus: spatial relations.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M06-Q010-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2A804EA3C522A9E8",
+            "IMG-V11-2B-88F7261163BCA3FC",
+            "IMG-V11-2B-98C4911F70539FFB",
+            "IMG-V11-2B-9FAEC5CA9D742F50",
+            "IMG-V11-2B-B31276A960464375",
+            "IMG-V11-2B-F6DE663C65523B40"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M06-Q010-O1",
+              "label": "truck",
+              "answerKey": "Y4M06-Q010-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-98C4911F70539FFB",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q010-O2",
+              "label": "bedroom",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-9FAEC5CA9D742F50",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q010-O3",
+              "label": "bathroom",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-2A804EA3C522A9E8",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q010-O4",
+              "label": "kitchen",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-B31276A960464375",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M06-Q011",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Locate familiar objects/people and recognize limited transport context. Focus: vehicle context labels.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M06-Q011-I1": "Y4M06-Q011-T1",
+            "Y4M06-Q011-I2": "Y4M06-Q011-T2",
+            "Y4M06-Q011-I3": "Y4M06-Q011-T3",
+            "Y4M06-Q011-I4": "Y4M06-Q011-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-35C6A38034BFEFD2",
+            "IMG-V11-2B-4CB524F8956AB39A",
+            "IMG-V11-2B-74D9FEE8F0757749",
+            "IMG-V11-2B-E710E110493577F1"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M06-Q012",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Locate familiar objects/people and recognize limited transport context. Focus: describe home.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M06-Q012-L1": "Y4M06-Q012-R1",
+            "Y4M06-Q012-L2": "Y4M06-Q012-R2",
+            "Y4M06-Q012-L3": "Y4M06-Q012-R3",
+            "Y4M06-Q012-L4": "Y4M06-Q012-R4",
+            "Y4M06-Q012-L5": "Y4M06-Q012-R5",
+            "Y4M06-Q012-L6": "Y4M06-Q012-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-01A4F8D868113193",
+            "IMG-V11-2B-A396F1A45DF217E8",
+            "IMG-V11-2B-AD3495E9BCA08DFA",
+            "IMG-V11-2B-AE9FF37E3D50268F",
+            "IMG-V11-2B-FBCC32A8A7652F7E",
+            "IMG-V11-2B-FCAA15FC9A868DB5"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M06-Q013",
+          "mechanic": "memory-quest",
+          "learningTarget": "A two-pair receptive review of previously staged in/on, with clear object placement; it does not claim new independent preposition production. Curricular target: in; on.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y4M06-Q013-P1",
+            "Y4M06-Q013-P2"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2B2031F917CD497F",
+            "IMG-V11-2B-F09E8D1F68B7BE17"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M06-Q014",
+          "mechanic": "matching",
+          "learningTarget": "listening: Locate familiar objects/people and recognize limited transport context. Focus: truck.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M06-Q014-L1": "Y4M06-Q014-R1",
+            "Y4M06-Q014-L2": "Y4M06-Q014-R2",
+            "Y4M06-Q014-L3": "Y4M06-Q014-R3",
+            "Y4M06-Q014-L4": "Y4M06-Q014-R4",
+            "Y4M06-Q014-L5": "Y4M06-Q014-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-03B43F2307D9D5A5",
+            "IMG-V11-2B-0688CC24B81A968B",
+            "IMG-V11-2B-AE9FF37E3D50268F",
+            "IMG-V11-2B-FBCC32A8A7652F7E",
+            "IMG-V11-2B-FCAA15FC9A868DB5"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M06-Q015",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "retrieval: Locate familiar objects/people and recognize limited transport context. Focus: Where is...?.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M06-Q015-I1": "Y4M06-Q015-T1",
+            "Y4M06-Q015-I2": "Y4M06-Q015-T2",
+            "Y4M06-Q015-I3": "Y4M06-Q015-T3",
+            "Y4M06-Q015-I4": "Y4M06-Q015-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-88F7261163BCA3FC",
+            "IMG-V11-2B-9EB64C8ADF6704BF",
+            "IMG-V11-2B-D998FEB01EA0AED5",
+            "IMG-V11-2B-FD91743C3E852894"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M06-Q016",
+          "mechanic": "bubble-pop",
+          "learningTarget": "retrieval: Locate familiar objects/people and recognize limited transport context. Focus: spatial relations.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y4M06-Q016-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2A804EA3C522A9E8",
+            "IMG-V11-2B-595EDFA01D8C409E",
+            "IMG-V11-2B-88F7261163BCA3FC",
+            "IMG-V11-2B-9FAEC5CA9D742F50",
+            "IMG-V11-2B-B31276A960464375",
+            "IMG-V11-2B-F6DE663C65523B40"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M06-Q016-O1",
+              "label": "under",
+              "answerKey": "Y4M06-Q016-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-595EDFA01D8C409E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q016-O2",
+              "label": "bedroom",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-9FAEC5CA9D742F50",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q016-O3",
+              "label": "bathroom",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-2A804EA3C522A9E8",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q016-O4",
+              "label": "kitchen",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-B31276A960464375",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M06-Q017",
+          "mechanic": "drag-drop",
+          "learningTarget": "review: Locate familiar objects/people and recognize limited transport context. Focus: in/on.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M06-Q017-I1": "in",
+            "Y4M06-Q017-I2": "in",
+            "Y4M06-Q017-I3": "in",
+            "Y4M06-Q017-I4": "on",
+            "Y4M06-Q017-I5": "on",
+            "Y4M06-Q017-I6": "on"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-4B810E2D1F77A5FA",
+            "IMG-V11-2B-7401C92DFBEC3620",
+            "IMG-V11-2B-D0221931D513B0BB",
+            "IMG-V11-2B-D50750F9CEE9F008",
+            "IMG-V11-2B-E4F8525604F1F803",
+            "IMG-V11-2B-EE60A75AB2BFACB7"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y4M06-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Locate familiar objects/people and recognize limited transport context. Focus: recognize transport context.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "bus",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-F6DE663C65523B40"
+          ],
+          "options": [
+            {
+              "optionId": "Y4M06-Q018-O1",
+              "label": "bus",
+              "answerKey": "bus",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q018-O2",
+              "label": "car",
+              "answerKey": "car",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q018-O3",
+              "label": "truck",
+              "answerKey": "truck",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y4M06-Q018-O4",
+              "label": "train",
+              "answerKey": "train",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y4M06-Q019",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "consolidation: Locate familiar objects/people and recognize limited transport context. Focus: living room.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "The",
+            "bathroom",
+            "is",
+            "beside",
+            "the",
+            "kitchen."
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y4M06-Q020",
+          "mechanic": "matching",
+          "learningTarget": "consolidation: Locate familiar objects/people and recognize limited transport context. Focus: train.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y4M06-Q020-L1": "Y4M06-Q020-R1",
+            "Y4M06-Q020-L2": "Y4M06-Q020-R2",
+            "Y4M06-Q020-L3": "Y4M06-Q020-R3",
+            "Y4M06-Q020-L4": "Y4M06-Q020-R4",
+            "Y4M06-Q020-L5": "Y4M06-Q020-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-01A4F8D868113193",
+            "IMG-V11-2B-0688CC24B81A968B",
+            "IMG-V11-2B-AE9FF37E3D50268F",
+            "IMG-V11-2B-FBCC32A8A7652F7E",
+            "IMG-V11-2B-FCAA15FC9A868DB5"
+          ],
+          "options": []
+        }
+      ]
+    }
+  ],
+  "errors": []
+}
