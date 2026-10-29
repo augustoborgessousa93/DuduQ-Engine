@@ -29,7 +29,7 @@ else:
         if response.status!=200 or not (response.headers.get("Content-Type","").lower().startswith("image/jpeg")):
             fail("JPEG_SOURCE_NOT_READY")
         raw=response.read(9*1024*1024)
-        if len(raw)>8*1024*1024 or not raw.startswith(b"\\xff\\xd8\\xff"): fail("INVALID_SOURCE_JPEG")
+        if len(raw)>8*1024*1024 or not raw.startswith(b"\xff\xd8\xff"): fail("INVALID_SOURCE_JPEG")
     original=Image.open(io.BytesIO(raw))
     if original.size!=(1920,1920): fail("NOT_NATIVE_1920_SQUARE")
     try:
