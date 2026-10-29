@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "DUDUQ_CHATGPT_MEDIA_BINDINGS_V1",
+  "created": "2026-10-29",
+  "productionSafe": false,
+  "policy": "One PNG per asset; only exact pedagogical option bindings; 1254 x 1254 native RGBA; deploy forbidden before QA.",
+  "assets": [
+    {
+      "assetKey": "BASE-Y1-003",
+      "file": "images/BASE-Y1-003.png",
+      "semanticTarget": "head",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "rgbaAlpha": true,
+      "sha256": "3c00647e61d7b7c8ee365454b1a349088254352988a0538e4cec348366db6401",
+      "bindings": [
+        {
+          "questionId": "Y1M05-Q001",
+          "mediaId": "IMG-Y1M05-Q001-HEAD"
+        }
+      ],
+      "review": "MODEL_SEMANTIC_PRECHECK_ONLY"
+    },
+    {
+      "assetKey": "BASE-Y1-007",
+      "file": "images/BASE-Y1-007.png",
+      "semanticTarget": "backpack",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "rgbaAlpha": true,
+      "sha256": "1b20ee60ea996463a9dccb811e284b184d51cade24b3237ad7eeccfabd20a511",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q020",
+          "mediaId": "IMG-Y1M04-Q020-BACKPACK"
+        },
+        {
+          "questionId": "Y1M04-Q010",
+          "mediaId": "IMG-Y1M04-Q010-BACKPACK"
+        },
+        {
+          "questionId": "Y1M04-Q015",
+          "mediaId": "IMG-Y1M04-Q015-BACKPACK"
+        }
+      ],
+      "review": "MODEL_SEMANTIC_PRECHECK_ONLY"
+    }
+  ]
+}
