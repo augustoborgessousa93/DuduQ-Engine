@@ -1,0 +1,93 @@
+{
+  "audit": "DUDUQ_MEDIA_CROSS_REFERENCE_AUDIT_20261029",
+  "sourceRepo": "augustoborgessousa93/duduq-fit-qa-private",
+  "sourceRegistry": "dist-pages/content/english/media/media-registry.json",
+  "sourceRegistryUpdatedAt": "2026-10-16T02:48:35.544Z",
+  "registryEntries": 1159,
+  "registryTemporaryFlagged": 491,
+  "registryUnclassified": 632,
+  "sourceModules": 30,
+  "sourceQuestions": 600,
+  "uniqueQuestionIds": 600,
+  "questionMediaReferenceCount": 1818,
+  "uniqueReferencedMediaIds": 694,
+  "referencedClassifications": {
+    "TEMPORARY": 57,
+    "EXPLICIT_NON_TEMPORARY": 5,
+    "UNCLASSIFIED": 632
+  },
+  "questionsWithMedia": 420,
+  "questionsWithoutMedia": 180,
+  "questionsWithTemporary": 133,
+  "questionsWithUnclassified": 356,
+  "questionsWithMissingRegistry": 0,
+  "byYear": [
+    {
+      "year": 1,
+      "modules": 6,
+      "questions": 120,
+      "uniqueReferencedMediaIds": 25,
+      "questionsWithMedia": 20,
+      "sourceErrors": [],
+      "classification": {
+        "TEMPORARY": 25
+      }
+    },
+    {
+      "year": 2,
+      "modules": 6,
+      "questions": 120,
+      "uniqueReferencedMediaIds": 193,
+      "questionsWithMedia": 92,
+      "sourceErrors": [],
+      "classification": {
+        "EXPLICIT_NON_TEMPORARY": 4,
+        "UNCLASSIFIED": 163,
+        "TEMPORARY": 26
+      }
+    },
+    {
+      "year": 3,
+      "modules": 6,
+      "questions": 120,
+      "uniqueReferencedMediaIds": 206,
+      "questionsWithMedia": 103,
+      "sourceErrors": [],
+      "classification": {
+        "UNCLASSIFIED": 186,
+        "TEMPORARY": 20
+      }
+    },
+    {
+      "year": 4,
+      "modules": 6,
+      "questions": 120,
+      "uniqueReferencedMediaIds": 228,
+      "questionsWithMedia": 104,
+      "sourceErrors": [],
+      "classification": {
+        "UNCLASSIFIED": 210,
+        "TEMPORARY": 18
+      }
+    },
+    {
+      "year": 5,
+      "modules": 6,
+      "questions": 120,
+      "uniqueReferencedMediaIds": 226,
+      "questionsWithMedia": 101,
+      "sourceErrors": [],
+      "classification": {
+        "UNCLASSIFIED": 220,
+        "TEMPORARY": 5,
+        "EXPLICIT_NON_TEMPORARY": 1
+      }
+    }
+  ],
+  "missingRegistryMediaIds": [],
+  "notes": [
+    "Source is the immutable/current artifact repository as read on 2026-10-29; this is an inventory, not a browser QA or pedagogical homologation.",
+    "temporary=true and provisional/temporary path are treated as provisional; absent temporary flag is ambiguous, not automatically provisional.",
+    "No gabarito, mechanics, Gold Master or production files modified."
+  ]
+}
