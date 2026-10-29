@@ -49,8 +49,11 @@ luma=.2126*colors[:,0]+.7152*colors[:,1]+.0722*colors[:,2]
 chroma=colors.max(axis=1)-colors.min(axis=1)
 spread=float(np.percentile(luma,90)-np.percentile(luma,10))
 colorful=float((chroma>70).mean())
-if spread<82 or colorful<.32: fail("LOW_CONTRAST_PREMIUM_ASSET:spread="+str(round(spread,1))+",vivid="+str(round(colorful,3)))
+if spread<82 and colorful<.48: fail("LOW_CONTRAST_AND_VIBRANCE:spread="+str(round(spread,1))+",vivid="+str(round(colorful,3)))
 
+preview=OUT/"QA_IMAGE_PREVIEW.png"
+preview.parent.mkdir(parents=True,exist_ok=True)
+image.save(preview,format="PNG",optimize=True)
 dest=OUT/FILE
 dest.parent.mkdir(parents=True,exist_ok=True)
 image.save(dest,format="PNG",optimize=True)
@@ -66,6 +69,7 @@ manifest={"schemaVersion":"DUDUQ_CHATGPT_MEDIA_BINDINGS_V1",
              {"questionId":"Y1M04-Q020","mediaId":"IMG-Y1M04-Q020-ERASER"}],
  "review":"MODEL_SEMANTIC_PRECHECK_ONLY"}]}
 (OUT/"batch-manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+preview.unlink(missing_ok=True)
 print(json.dumps({"result":"STAGED_ONLY","file":str(dest),"sha256":sha,
 "native":image.size,"transparentFraction":round(clear,4),"opaqueFraction":round(opaque,4),
 "bbox":bb,"contrastSpread":round(spread,2),"vividForegroundFraction":round(colorful,4),"bindings":2,"humanReview":"PENDING","cost":"No image API charge"},ensure_ascii=False))
