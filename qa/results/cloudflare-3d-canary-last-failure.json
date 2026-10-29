@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "DUDUQ_CLOUDFLARE_CANARY_FAILURE_V1",
+  "runId": "40950459696",
+  "runAttempt": "1",
+  "sourceCommit": "6d62265fe49fa235ff716ec865d5205c48b514d0",
+  "installOutcome": "success",
+  "generateOutcome": "failure",
+  "verifyOutcome": "skipped",
+  "candidatePngPresent": true,
+  "candidateSha256": "7412eda6fcf937f00ee8e222453604aa38de4a5634beb93b3a6f5c106c40ff9b",
+  "matchesPinnedReviewedSha256": false,
+  "pedagogicalQa": "PENDING",
+  "productionPublished": false
+}
