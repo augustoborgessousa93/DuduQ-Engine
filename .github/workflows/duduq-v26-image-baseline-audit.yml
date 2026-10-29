@@ -1,0 +1,57 @@
+name: DUDUQ English - V26 Image Baseline and Pending Media Audit
+
+on:
+  push:
+    branches:
+      - automation/duduq-media-source-only-fix-20261029
+    paths:
+      - ".github/workflows/duduq-v26-image-baseline-audit.yml"
+      - "qa/audit-media-completion.mjs"
+      - "qa/tests/duduq-exact-semantic-match.test.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duduq-media-baseline-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  image_baseline_audit:
+    name: V26 full build plus 600-question media inventory
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      CI: "true"
+      DUDUQ_QA_STATIC_PREVIEW: "1"
+    steps:
+      - name: Checkout isolated media branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify exact semantic matcher
+        run: |
+          node --check scripts/duduq-exact-semantic-match.mjs
+          node --test qa/tests/duduq-exact-semantic-match.test.mjs
+      - name: Build V26 immutable thirty-module artifact
+        run: bash qa/build-v26-topic-first-paint-qa.sh
+      - name: Inventory every referenced media ID without modifying artifact
+        run: |
+          node --check qa/audit-media-completion.mjs
+          node qa/audit-media-completion.mjs
+      - name: Report media backlog as QA-only artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-v26-media-baseline-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/media-closure-inventory.json
+            dist-pages/.duduq-pages-manifest
+      - name: Confirm no production action
+        run: echo "QA-only inventory. No image generation, uploads, merge, or deploy."
