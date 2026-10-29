@@ -12,6 +12,7 @@ import { createHash } from 'node:crypto';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { inspectPng } from './duduq-image-pipeline.mjs';
+import { isExactPedagogicalConcept } from './duduq-exact-semantic-match.mjs';
 const root=process.cwd();
 const bundle=path.resolve(process.argv[2]||'');
 const apply=process.argv.includes('--apply');
@@ -93,7 +94,7 @@ for(const asset of manifest.assets||[]){
     if(!imageIds(q).has(binding.mediaId))throw Error('Media not bound to question: '+binding.mediaId);
     const option=(q.options||[]).find(o=>o.media?.assetId===binding.mediaId||o.mediaId===binding.mediaId);
     const sem=String(option?.media?.semanticTarget||option?.semanticTarget||option?.label||'').trim().toLowerCase();
-    if(!option||!sem||!String(asset.semanticTarget).toLowerCase().includes(sem))
+    if(!option||!isExactPedagogicalConcept(asset.semanticTarget,sem))
       throw Error('Image must match exact answer option: '+binding.mediaId+':'+sem);
     const prior=index.has(binding.mediaId)?registry.entries[index.get(binding.mediaId)]:null;
     // APPROVED here is loader compatibility only; candidate remains temporary until real visual/pedagogical QA.
