@@ -32,7 +32,7 @@ const required='Choices Around Me: Food, School and Preferences';
 if(topics.get(required)!=='Choices Around Me')throw Error('V26_TARGET_Y3M06_MISSING');
 const rules=['/* V26 critical CSS: topic titles fit before JS or browser first paint. Generated from approved curriculum. */'];
 for(const [full,short] of [...topics].sort((a,b)=>a[0].localeCompare(b[0]))){
- const selector='#game .duduq-canonical-header-hud .hud-title[data-topic-en="'+cssString(full)+'"]';
+ const selector='#game.game-screen .duduq-canonical-header-hud .hud-title[data-topic-en="'+cssString(full)+'"]';
  const size=short.length<=16?20:short.length<=21?18:16;
  rules.push(selector+'{position:absolute!important;top:0!important;transform:none!important;display:block!important;width:160px!important;max-width:160px!important;height:56px!important;min-height:56px!important;max-height:56px!important;overflow:hidden!important;white-space:normal!important;font-size:0!important;color:transparent!important;}');
  rules.push(selector+'::before{content:"'+cssString(short)+'"!important;position:absolute!important;inset:0!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;width:160px!important;height:56px!important;overflow:hidden!important;color:#364b43!important;font-family:"Nunito",sans-serif!important;font-weight:900!important;font-size:'+size+'px!important;line-height:1.12!important;letter-spacing:0!important;text-align:left!important;white-space:normal!important;text-wrap:balance!important;}');
