@@ -43,7 +43,7 @@ for(const ref of references.values()){
  if(!p.length && e?.urlOrPath)p.push(e.urlOrPath);
  const states=[e?.integrationStatus,e?.refinementStatus,e?.backlogStatus,e?.humanReview].filter(Boolean).join('|');
  const flagged=e?.temporary===true || p.some(x=>tempPath.test(x)) || pending.test(states);
- let category=!e?'MISSING_REGISTRY':e.status!=='APPROVED'?'NOT_APPROVED':flagged?'PROVISIONAL':e.temporary!==false?'REVIEW_REQUIRED':'POSSIBLY_OFFICIAL';
+ let category=!e?'MISSING_REGISTRY':e.status!=='APPROVED'?'NOT_APPROVED':flagged?'PROVISIONAL':e.temporary!==false?'REVIEW_REQUIRED':'NON_TEMPORARY_UNVERIFIED';
  const badPaths=[];
  if(e)for(const asset of e.assets||[]){
   if(!inside(asset.path)){badPaths.push('UNSAFE:'+asset.path);continue;}
@@ -53,7 +53,7 @@ for(const ref of references.values()){
  if(badPaths.length)category='BROKEN_ASSET';
  listed.push({mediaId:ref.id,status:category,questions:[...ref.items].sort(),modules:[...ref.modules].sort(),usage:ref.items.size,semantic:e?.semantic||e?.altText||ref.examples.find(x=>x.semantic)?.semantic||ref.id.replace(/^IMG-(?:Y\dM\d\d-)?Q\d{3}-/,'').replaceAll('-',' ').toLowerCase(),temporary:e?.temporary??null,path:e?.urlOrPath||p[0]||null,badPaths,evidence:ref.examples});
 }
-const incomplete=listed.filter(x=>x.status!=='POSSIBLY_OFFICIAL');
+const incomplete=listed.filter(x=>x.status!=='NON_TEMPORARY_UNVERIFIED');
 const groups=new Map();
 for(const x of incomplete){
  const k=(x.modules[0]?.slice(0,2)||'SHARED')+'|'+String(x.semantic||'').trim().toLowerCase();
@@ -62,7 +62,7 @@ for(const x of incomplete){
 }
 const queue=[...groups.values()].sort((a,b)=>b.questions-a.questions||a.concept.localeCompare(b.concept));
 const byStatus={};for(const x of listed)byStatus[x.status]=(byStatus[x.status]||0)+1;
-const report={schemaVersion:'DUDUQ_MEDIA_COMPLETION_V1',generatedAt:new Date().toISOString(),modules,activities,registryEntries:index.size,referencedMediaIds:listed.length,byStatus,incompleteReferencedIds:incomplete.length,completionPassed:incomplete.length===0&&modules===30&&activities===600,queue,items:listed.sort((a,b)=>a.mediaId.localeCompare(b.mediaId))};
+const report={schemaVersion:'DUDUQ_MEDIA_COMPLETION_V1',generatedAt:new Date().toISOString(),modules,activities,registryEntries:index.size,referencedMediaIds:listed.length,byStatus,incompleteReferencedIds:incomplete.length,metadataClosurePassed:incomplete.length===0&&modules===30&&activities===600, finalPedagogicalQaApproved:false,queue,items:listed.sort((a,b)=>a.mediaId.localeCompare(b.mediaId))};
 await mkdir(path.dirname(out),{recursive:true});await writeFile(out,JSON.stringify(report,null,2)+'\n');
-console.log(JSON.stringify({modules,activities,registryEntries:index.size,referencedIds:listed.length,byStatus,incomplete:incomplete.length,queueGroups:queue.length,completionPassed:report.completionPassed,report:out}));
-if(requireComplete&&!report.completionPassed)process.exitCode=2;
+console.log(JSON.stringify({modules,activities,registryEntries:index.size,referencedIds:listed.length,byStatus,incomplete:incomplete.length,queueGroups:queue.length,metadataClosurePassed:report.metadataClosurePassed,finalPedagogicalQaApproved:report.finalPedagogicalQaApproved,report:out}));
+if(requireComplete&&!report.metadataClosurePassed)process.exitCode=2;
