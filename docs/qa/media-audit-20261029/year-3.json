@@ -1,0 +1,3912 @@
+{
+  "audit": "DUDUQ_MEDIA_REFERENCES_20261029",
+  "sourceRepo": "augustoborgessousa93/duduq-fit-qa-private",
+  "sourcePath": "dist-pages/content/english/year-{year}/module-{mm}/questions.json",
+  "year": 3,
+  "modules": [
+    {
+      "moduleId": "Y3M01",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y3M01-Q001",
+          "mechanic": "matching",
+          "learningTarget": "teaching: Exchange simple identity details and complete a fictional information card. Focus: age.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M01-Q001-L1": "Y3M01-Q001-R1",
+            "Y3M01-Q001-L2": "Y3M01-Q001-R2",
+            "Y3M01-Q001-L3": "Y3M01-Q001-R3",
+            "Y3M01-Q001-L4": "Y3M01-Q001-R4",
+            "Y3M01-Q001-L5": "Y3M01-Q001-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1389F64FD9E1215A",
+            "IMG-V11-2B-24EA15B949714E84",
+            "IMG-V11-2B-2585704D6AB32376",
+            "IMG-V11-2B-2BCFCABC841DE7EF",
+            "IMG-V11-2B-EAD80736870B5584"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M01-Q002",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Exchange simple identity details and complete a fictional information card. Focus: phone number.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M01-Q002-I1": "Y3M01-Q002-T1",
+            "Y3M01-Q002-I2": "Y3M01-Q002-T2",
+            "Y3M01-Q002-I3": "Y3M01-Q002-T3",
+            "Y3M01-Q002-I4": "Y3M01-Q002-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-D4CFA2214092FB6F",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q007-NINE",
+            "IMG-Y1M02-Q007-TEN"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M01-Q003",
+          "mechanic": "bubble-pop",
+          "learningTarget": "guided practice: Exchange simple identity details and complete a fictional information card. Focus: name.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M01-Q003-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-02A7D1D1FB69478E",
+            "IMG-V11-2B-1389F64FD9E1215A",
+            "IMG-V11-2B-20C1CD3B145B4CF6",
+            "IMG-V11-2B-24EA15B949714E84",
+            "IMG-V11-2B-BAE00C9EC541C6AF",
+            "Y1M01-EMOJI-BEN-001"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M01-Q003-O1",
+              "label": "Ana",
+              "answerKey": "Y3M01-Q003-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-02A7D1D1FB69478E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q003-O2",
+              "label": "Mia",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-BAE00C9EC541C6AF",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q003-O3",
+              "label": "Leo",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-20C1CD3B145B4CF6",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q003-O4",
+              "label": "Ben",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-BEN-001",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M01-Q004",
+          "mechanic": "memory-quest",
+          "learningTarget": "Pairs short spoken fictional profile details with unambiguous profile scenes; no real identifying data. Curricular target: age; birthday; favorite; best friend.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y3M01-Q004-P1",
+            "Y3M01-Q004-P2",
+            "Y3M01-Q004-P3",
+            "Y3M01-Q004-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-08895CC34CA83949",
+            "IMG-V11-2B-2EB51A6A5068AECB",
+            "IMG-V11-2B-76847F32F3872E6E",
+            "IMG-V11-2B-79F7CB6614489EC4"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M01-Q005",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Exchange simple identity details and complete a fictional information card. Focus: This is my friend....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M01-Q005-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-26148A5B0A23C6BB",
+            "IMG-V11-2B-922BB0F4119D6F51",
+            "IMG-V11-2B-DDDDA999F605827B",
+            "IMG-V11-2B-E5F5D9640ED65EA5"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M01-Q005-O1",
+              "label": "phone number",
+              "answerKey": "Y3M01-Q005-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-922BB0F4119D6F51",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q005-O2",
+              "label": "age",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-26148A5B0A23C6BB",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q005-O3",
+              "label": "birthday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-E5F5D9640ED65EA5",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q005-O4",
+              "label": "favorite",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-DDDDA999F605827B",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M01-Q006",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "guided practice: Exchange simple identity details and complete a fictional information card. Focus: introduce.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M01-Q006-I1": "Y3M01-Q006-T1",
+            "Y3M01-Q006-I2": "Y3M01-Q006-T2",
+            "Y3M01-Q006-I3": "Y3M01-Q006-T3",
+            "Y3M01-Q006-I4": "Y3M01-Q006-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-D4CFA2214092FB6F",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q007-NINE",
+            "IMG-Y1M02-Q007-TEN"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M01-Q007",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Exchange simple identity details and complete a fictional information card. Focus: birthday.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M01-Q007-L1": "Y3M01-Q007-R1",
+            "Y3M01-Q007-L2": "Y3M01-Q007-R2",
+            "Y3M01-Q007-L3": "Y3M01-Q007-R3",
+            "Y3M01-Q007-L4": "Y3M01-Q007-R4",
+            "Y3M01-Q007-L5": "Y3M01-Q007-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1389F64FD9E1215A",
+            "IMG-V11-2B-2585704D6AB32376",
+            "IMG-V11-2B-2BCFCABC841DE7EF",
+            "IMG-V11-2B-EAD80736870B5584",
+            "IMG-Y1M02-Q002-EIGHT"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M01-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Exchange simple identity details and complete a fictional information card. Focus: phone number.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "nine",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q007-NINE"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M01-Q008-O1",
+              "label": "nine",
+              "answerKey": "nine",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q008-O2",
+              "label": "phone number",
+              "answerKey": "phone number",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q008-O3",
+              "label": "eight",
+              "answerKey": "eight",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q008-O4",
+              "label": "ten",
+              "answerKey": "ten",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M01-Q009",
+          "mechanic": "target-shooter",
+          "learningTarget": "recognition: Exchange simple identity details and complete a fictional information card. Focus: greetings.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M01-Q009-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-26148A5B0A23C6BB",
+            "IMG-V11-2B-CECA24DA2BCB2FE3",
+            "IMG-V11-2B-DDDDA999F605827B",
+            "IMG-V11-2B-E5F5D9640ED65EA5"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M01-Q009-O1",
+              "label": "eleven",
+              "answerKey": "Y3M01-Q009-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-CECA24DA2BCB2FE3",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q009-O2",
+              "label": "age",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-26148A5B0A23C6BB",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q009-O3",
+              "label": "birthday",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-E5F5D9640ED65EA5",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q009-O4",
+              "label": "favorite",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-DDDDA999F605827B",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M01-Q010",
+          "mechanic": "drag-drop",
+          "learningTarget": "comprehension: Exchange simple identity details and complete a fictional information card. Focus: fictional profile.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M01-Q010-I1": "personal-details",
+            "Y3M01-Q010-I2": "personal-details",
+            "Y3M01-Q010-I3": "personal-details",
+            "Y3M01-Q010-I4": "people-and-preferences",
+            "Y3M01-Q010-I5": "people-and-preferences",
+            "Y3M01-Q010-I6": "people-and-preferences"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M01-Q011",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Exchange simple identity details and complete a fictional information card. Focus: Nice to meet you.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M01-Q011-L1": "Y3M01-Q011-R1",
+            "Y3M01-Q011-L2": "Y3M01-Q011-R2",
+            "Y3M01-Q011-L3": "Y3M01-Q011-R3",
+            "Y3M01-Q011-L4": "Y3M01-Q011-R4",
+            "Y3M01-Q011-L5": "Y3M01-Q011-R5",
+            "Y3M01-Q011-L6": "Y3M01-Q011-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1389F64FD9E1215A",
+            "IMG-V11-2B-24EA15B949714E84",
+            "IMG-V11-2B-62EE1349CFF35190",
+            "IMG-V11-2B-E5F916A8A2B58462",
+            "IMG-V11-2B-EAD80736870B5584",
+            "Y1M01-EMOJI-BEN-001"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M01-Q012",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Exchange simple identity details and complete a fictional information card. Focus: exchange selected profile facts.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M01-Q012-I1": "Y3M01-Q012-T1",
+            "Y3M01-Q012-I2": "Y3M01-Q012-T2",
+            "Y3M01-Q012-I3": "Y3M01-Q012-T3",
+            "Y3M01-Q012-I4": "Y3M01-Q012-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-05C218C17B6E155B",
+            "IMG-V11-2B-7C7462127E434210",
+            "IMG-V11-2B-DD7EA966CFB7CFEC",
+            "IMG-V11-2B-EC10D9EEC0A5D08E"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M01-Q013",
+          "mechanic": "target-shooter",
+          "learningTarget": "listening: Exchange simple identity details and complete a fictional information card. Focus: favorite.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M01-Q013-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-922BB0F4119D6F51",
+            "IMG-V11-2B-C4FCA6C3487B9795",
+            "IMG-V11-2B-DDDDA999F605827B",
+            "IMG-Y1M02-Q002-EIGHT"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M01-Q013-O1",
+              "label": "phone number",
+              "answerKey": "Y3M01-Q013-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-922BB0F4119D6F51",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q013-O2",
+              "label": "favorite",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-DDDDA999F605827B",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q013-O3",
+              "label": "best friend",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-C4FCA6C3487B9795",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q013-O4",
+              "label": "eight",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q002-EIGHT",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M01-Q014",
+          "mechanic": "memory-quest",
+          "learningTarget": "Changes the representation from scene comprehension to written-form recognition after familiar profile exposure; no phone number or private data. Curricular target: age; birthday; favorite; best friend.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y3M01-Q014-P1",
+            "Y3M01-Q014-P2",
+            "Y3M01-Q014-P3",
+            "Y3M01-Q014-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M01-Q015",
+          "mechanic": "bubble-pop",
+          "learningTarget": "retrieval: Exchange simple identity details and complete a fictional information card. Focus: alphabet/spelling.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M01-Q015-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1389F64FD9E1215A",
+            "IMG-V11-2B-24EA15B949714E84",
+            "IMG-V11-2B-34691F7FF392D134",
+            "IMG-V11-2B-5A685792F5F3892E",
+            "IMG-V11-2B-5FC56902AD57463A",
+            "IMG-V11-2B-B53AD4A3B76BCB34"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M01-Q015-O1",
+              "label": "C",
+              "answerKey": "Y3M01-Q015-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-5FC56902AD57463A",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q015-O2",
+              "label": "A",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-34691F7FF392D134",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q015-O3",
+              "label": "B",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-B53AD4A3B76BCB34",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q015-O4",
+              "label": "D",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5A685792F5F3892E",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M01-Q016",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "retrieval: Exchange simple identity details and complete a fictional information card. Focus: fictional profile.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M01-Q016-I1": "Y3M01-Q016-T1",
+            "Y3M01-Q016-I2": "Y3M01-Q016-T2",
+            "Y3M01-Q016-I3": "Y3M01-Q016-T3",
+            "Y3M01-Q016-I4": "Y3M01-Q016-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-16B25DA2B15F3CBD",
+            "IMG-V11-2B-7C7462127E434210",
+            "IMG-V11-2B-DD7EA966CFB7CFEC",
+            "IMG-V11-2B-EC10D9EEC0A5D08E"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M01-Q017",
+          "mechanic": "matching",
+          "learningTarget": "review: Exchange simple identity details and complete a fictional information card. Focus: I am ... years old.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M01-Q017-L1": "Y3M01-Q017-R1",
+            "Y3M01-Q017-L2": "Y3M01-Q017-R2",
+            "Y3M01-Q017-L3": "Y3M01-Q017-R3",
+            "Y3M01-Q017-L4": "Y3M01-Q017-R4",
+            "Y3M01-Q017-L5": "Y3M01-Q017-R5",
+            "Y3M01-Q017-L6": "Y3M01-Q017-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2585704D6AB32376",
+            "IMG-V11-2B-2BCFCABC841DE7EF",
+            "IMG-V11-2B-5CAF5C6C36D0085B",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q007-NINE",
+            "IMG-Y1M02-Q007-TEN"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M01-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Exchange simple identity details and complete a fictional information card. Focus: spell.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "B",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-B53AD4A3B76BCB34"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M01-Q018-O1",
+              "label": "B",
+              "answerKey": "B",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q018-O2",
+              "label": "A",
+              "answerKey": "A",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q018-O3",
+              "label": "C",
+              "answerKey": "C",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M01-Q018-O4",
+              "label": "D",
+              "answerKey": "D",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M01-Q019",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "consolidation: Exchange simple identity details and complete a fictional information card. Focus: best friend.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "I",
+            "am",
+            "nine",
+            "years",
+            "old"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M01-Q020",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "consolidation: Exchange simple identity details and complete a fictional information card. Focus: phone number.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M01-Q020-I1": "Y3M01-Q020-T1",
+            "Y3M01-Q020-I2": "Y3M01-Q020-T2",
+            "Y3M01-Q020-I3": "Y3M01-Q020-T3",
+            "Y3M01-Q020-I4": "Y3M01-Q020-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-05C218C17B6E155B",
+            "IMG-V11-2B-D4CFA2214092FB6F",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q007-NINE"
+          ],
+          "options": []
+        }
+      ]
+    },
+    {
+      "moduleId": "Y3M02",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y3M02-Q001",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Extend number recognition/use through 50 in age and quantity contexts. Focus: numbers 21-50 in batches.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M02-Q001-I1": "Y3M02-Q001-T1",
+            "Y3M02-Q001-I2": "Y3M02-Q001-T2",
+            "Y3M02-Q001-I3": "Y3M02-Q001-T3",
+            "Y3M02-Q001-I4": "Y3M02-Q001-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-3370EA4091BB06CA",
+            "IMG-V11-2B-3ADF37F90227AC2E",
+            "IMG-V11-2B-96E6E1E11C167F0A",
+            "IMG-V11-2B-C1794ED69B4ED549"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M02-Q002",
+          "mechanic": "bubble-pop",
+          "learningTarget": "teaching: Extend number recognition/use through 50 in age and quantity contexts. Focus: cumulative 1-50 recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M02-Q002-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1D4AA7A157680A7D",
+            "IMG-V11-2B-339138EDDB5B5101",
+            "IMG-V11-2B-78B875A84F4C413C",
+            "IMG-V11-2B-9268FCB63B9509DB",
+            "IMG-V11-2B-96E6E1E11C167F0A",
+            "IMG-V11-2B-DB8BB9A1E2908E87"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M02-Q002-O1",
+              "label": "5",
+              "answerKey": "Y3M02-Q002-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-78B875A84F4C413C",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q002-O2",
+              "label": "1",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-9268FCB63B9509DB",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q002-O3",
+              "label": "2",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-DB8BB9A1E2908E87",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q002-O4",
+              "label": "3",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-339138EDDB5B5101",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M02-Q003",
+          "mechanic": "memory-quest",
+          "learningTarget": "First V3 number-name batch links spoken numbers to supported quantity/age scenes; no number-word decoding assumed. Curricular target: 21; 22; 23; 24; 25.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y3M02-Q003-P1",
+            "Y3M02-Q003-P2",
+            "Y3M02-Q003-P3",
+            "Y3M02-Q003-P4",
+            "Y3M02-Q003-P5"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1D4AA7A157680A7D",
+            "IMG-V11-2B-9E2DFCFD8850D6B3",
+            "IMG-V11-2B-C704D30636CF78BB",
+            "IMG-V11-2B-C9E2DAC67B664659",
+            "IMG-V11-2B-F2653D7AC92E1719"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M02-Q004",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Extend number recognition/use through 50 in age and quantity contexts. Focus: 1-50 recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M02-Q004-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0E351DAB375F0999",
+            "IMG-V11-2B-339138EDDB5B5101",
+            "IMG-V11-2B-9268FCB63B9509DB",
+            "IMG-V11-2B-DB8BB9A1E2908E87"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M02-Q004-O1",
+              "label": "1",
+              "answerKey": "Y3M02-Q004-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-9268FCB63B9509DB",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q004-O2",
+              "label": "2",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-DB8BB9A1E2908E87",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q004-O3",
+              "label": "3",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-339138EDDB5B5101",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q004-O4",
+              "label": "4",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0E351DAB375F0999",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M02-Q005",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "guided practice: Extend number recognition/use through 50 in age and quantity contexts. Focus: How old are you? / I am ... years old.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M02-Q005-I1": "Y3M02-Q005-T1",
+            "Y3M02-Q005-I2": "Y3M02-Q005-T2",
+            "Y3M02-Q005-I3": "Y3M02-Q005-T3",
+            "Y3M02-Q005-I4": "Y3M02-Q005-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-32111F1F1CF73295",
+            "IMG-V11-2B-9ECECE129441E7FA",
+            "IMG-V11-2B-C81080A58E879B23",
+            "IMG-V11-2B-F3ED17D845C906CC"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M02-Q006",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Extend number recognition/use through 50 in age and quantity contexts. Focus: ask/state age.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M02-Q006-L1": "Y3M02-Q006-R1",
+            "Y3M02-Q006-L2": "Y3M02-Q006-R2",
+            "Y3M02-Q006-L3": "Y3M02-Q006-R3",
+            "Y3M02-Q006-L4": "Y3M02-Q006-R4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-5CAF5C6C36D0085B",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q007-NINE",
+            "IMG-Y1M02-Q007-TEN"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M02-Q007",
+          "mechanic": "bubble-pop",
+          "learningTarget": "recognition: Extend number recognition/use through 50 in age and quantity contexts. Focus: numbers 21-50 in batches.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M02-Q007-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-115F8F7EBAA343DC",
+            "IMG-V11-2B-339138EDDB5B5101",
+            "IMG-V11-2B-78B875A84F4C413C",
+            "IMG-V11-2B-9268FCB63B9509DB",
+            "IMG-V11-2B-96E6E1E11C167F0A",
+            "IMG-V11-2B-DB8BB9A1E2908E87"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M02-Q007-O1",
+              "label": "7",
+              "answerKey": "Y3M02-Q007-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-115F8F7EBAA343DC",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q007-O2",
+              "label": "1",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-9268FCB63B9509DB",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q007-O3",
+              "label": "2",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-DB8BB9A1E2908E87",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q007-O4",
+              "label": "3",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-339138EDDB5B5101",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M02-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Extend number recognition/use through 50 in age and quantity contexts. Focus: cumulative 1-50 recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "5",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-78B875A84F4C413C"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M02-Q008-O1",
+              "label": "5",
+              "answerKey": "5",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q008-O2",
+              "label": "1",
+              "answerKey": "1",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q008-O3",
+              "label": "50",
+              "answerKey": "50",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M02-Q009",
+          "mechanic": "drag-drop",
+          "learningTarget": "recognition: Extend number recognition/use through 50 in age and quantity contexts. Focus: age context.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M02-Q009-I1": "lower-range",
+            "Y3M02-Q009-I2": "lower-range",
+            "Y3M02-Q009-I3": "lower-range",
+            "Y3M02-Q009-I4": "upper-range",
+            "Y3M02-Q009-I5": "upper-range",
+            "Y3M02-Q009-I6": "upper-range"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M02-Q010",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Extend number recognition/use through 50 in age and quantity contexts. Focus: 1-50 recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M02-Q010-L1": "Y3M02-Q010-R1",
+            "Y3M02-Q010-L2": "Y3M02-Q010-R2",
+            "Y3M02-Q010-L3": "Y3M02-Q010-R3"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-5246E8751C073F4D",
+            "IMG-V11-2B-9553BD243B1E3A31",
+            "IMG-V11-2B-C5F7668B41FC5A55"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M02-Q011",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Extend number recognition/use through 50 in age and quantity contexts. Focus: profile age field.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M02-Q011-I1": "Y3M02-Q011-T1",
+            "Y3M02-Q011-I2": "Y3M02-Q011-T2",
+            "Y3M02-Q011-I3": "Y3M02-Q011-T3",
+            "Y3M02-Q011-I4": "Y3M02-Q011-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-D4CFA2214092FB6F",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q007-NINE",
+            "IMG-Y1M02-Q007-TEN"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M02-Q012",
+          "mechanic": "memory-quest",
+          "learningTarget": "A later non-overlapping batch supports sound-form recognition after oral staging; it does not claim broad independent decoding. Curricular target: 26; 27; 28; 29; 30.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y3M02-Q012-P1",
+            "Y3M02-Q012-P2",
+            "Y3M02-Q012-P3",
+            "Y3M02-Q012-P4",
+            "Y3M02-Q012-P5"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M02-Q013",
+          "mechanic": "matching",
+          "learningTarget": "listening: Extend number recognition/use through 50 in age and quantity contexts. Focus: numbers 21-50 in batches.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M02-Q013-L1": "Y3M02-Q013-R1",
+            "Y3M02-Q013-L2": "Y3M02-Q013-R2",
+            "Y3M02-Q013-L3": "Y3M02-Q013-R3",
+            "Y3M02-Q013-L4": "Y3M02-Q013-R4",
+            "Y3M02-Q013-L5": "Y3M02-Q013-R5",
+            "Y3M02-Q013-L6": "Y3M02-Q013-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-22C89AAB5FB47979",
+            "IMG-V11-2B-515C717F09D2BA14",
+            "IMG-V11-2B-5A662FF01F36226F",
+            "IMG-V11-2B-74614DDD6C5D40AF",
+            "IMG-V11-2B-CC64C7CED238EC6F",
+            "IMG-V11-2B-D25C92ACC3284C02"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M02-Q014",
+          "mechanic": "bubble-pop",
+          "learningTarget": "listening: Extend number recognition/use through 50 in age and quantity contexts. Focus: cumulative 1-50 recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M02-Q014-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1D4AA7A157680A7D",
+            "IMG-V11-2B-339138EDDB5B5101",
+            "IMG-V11-2B-78B875A84F4C413C",
+            "IMG-V11-2B-9268FCB63B9509DB",
+            "IMG-V11-2B-96E6E1E11C167F0A",
+            "IMG-V11-2B-DB8BB9A1E2908E87"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M02-Q014-O1",
+              "label": "5",
+              "answerKey": "Y3M02-Q014-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-78B875A84F4C413C",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q014-O2",
+              "label": "1",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-9268FCB63B9509DB",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q014-O3",
+              "label": "2",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-DB8BB9A1E2908E87",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q014-O4",
+              "label": "3",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-339138EDDB5B5101",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M02-Q015",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "retrieval: Extend number recognition/use through 50 in age and quantity contexts. Focus: 1-20.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M02-Q015-I1": "Y3M02-Q015-T1",
+            "Y3M02-Q015-I2": "Y3M02-Q015-T2",
+            "Y3M02-Q015-I3": "Y3M02-Q015-T3",
+            "Y3M02-Q015-I4": "Y3M02-Q015-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0FE17A65E071800F",
+            "IMG-V11-2B-3370EA4091BB06CA",
+            "IMG-V11-2B-3ADF37F90227AC2E",
+            "IMG-V11-2B-C1794ED69B4ED549"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M02-Q016",
+          "mechanic": "matching",
+          "learningTarget": "retrieval: Extend number recognition/use through 50 in age and quantity contexts. Focus: 1-50 recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M02-Q016-L1": "Y3M02-Q016-R1",
+            "Y3M02-Q016-L2": "Y3M02-Q016-R2",
+            "Y3M02-Q016-L3": "Y3M02-Q016-R3"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-5246E8751C073F4D",
+            "IMG-V11-2B-9553BD243B1E3A31",
+            "IMG-V11-2B-C5F7668B41FC5A55"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M02-Q017",
+          "mechanic": "target-shooter",
+          "learningTarget": "review: Extend number recognition/use through 50 in age and quantity contexts. Focus: age exchange.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M02-Q017-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-CECA24DA2BCB2FE3",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q007-NINE",
+            "IMG-Y1M02-Q007-TEN"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M02-Q017-O1",
+              "label": "eight",
+              "answerKey": "Y3M02-Q017-O1",
+              "correct": true,
+              "mediaId": "IMG-Y1M02-Q002-EIGHT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q017-O2",
+              "label": "nine",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q007-NINE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q017-O3",
+              "label": "ten",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q007-TEN",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q017-O4",
+              "label": "eleven",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-CECA24DA2BCB2FE3",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M02-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Extend number recognition/use through 50 in age and quantity contexts. Focus: ask/state age.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "nine",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q007-NINE"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M02-Q018-O1",
+              "label": "nine",
+              "answerKey": "nine",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q018-O2",
+              "label": "eight",
+              "answerKey": "eight",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q018-O3",
+              "label": "ten",
+              "answerKey": "ten",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q018-O4",
+              "label": "eleven",
+              "answerKey": "eleven",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M02-Q019",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "consolidation: Extend number recognition/use through 50 in age and quantity contexts. Focus: numbers 21-50 in batches.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "I",
+            "am",
+            "19",
+            "years",
+            "old"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M02-Q020",
+          "mechanic": "bubble-pop",
+          "learningTarget": "consolidation: Extend number recognition/use through 50 in age and quantity contexts. Focus: cumulative 1-50 recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M02-Q020-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1D4AA7A157680A7D",
+            "IMG-V11-2B-339138EDDB5B5101",
+            "IMG-V11-2B-78B875A84F4C413C",
+            "IMG-V11-2B-9268FCB63B9509DB",
+            "IMG-V11-2B-96E6E1E11C167F0A",
+            "IMG-V11-2B-DB8BB9A1E2908E87"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M02-Q020-O1",
+              "label": "5",
+              "answerKey": "Y3M02-Q020-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-78B875A84F4C413C",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q020-O2",
+              "label": "1",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-9268FCB63B9509DB",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q020-O3",
+              "label": "2",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-DB8BB9A1E2908E87",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M02-Q020-O4",
+              "label": "3",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-339138EDDB5B5101",
+              "semanticReview": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleId": "Y3M03",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y3M03-Q001",
+          "mechanic": "bubble-pop",
+          "learningTarget": "teaching: Describe fictional relatives by name, relation and age. Focus: he.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M03-Q001-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0E55AE94BCF4CC3E",
+            "IMG-V11-2B-243B96C39D99CAF8",
+            "IMG-V11-2B-2ECDF43BCA9F3C65",
+            "IMG-V11-2B-8C61F006F08947DB",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q007-NINE"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M03-Q001-O1",
+              "label": "he",
+              "answerKey": "Y3M03-Q001-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q001-O2",
+              "label": "she",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q001-O3",
+              "label": "eight",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q002-EIGHT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q001-O4",
+              "label": "nine",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q007-NINE",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M03-Q002",
+          "mechanic": "drag-drop",
+          "learningTarget": "teaching: Describe fictional relatives by name, relation and age. Focus: family.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M03-Q002-I1": "close-family",
+            "Y3M03-Q002-I2": "close-family",
+            "Y3M03-Q002-I3": "close-family",
+            "Y3M03-Q002-I4": "close-family",
+            "Y3M03-Q002-I5": "grandparents",
+            "Y3M03-Q002-I6": "grandparents"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M03-Q003",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Describe fictional relatives by name, relation and age. Focus: family description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M03-Q003-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0E55AE94BCF4CC3E",
+            "IMG-V11-2B-243B96C39D99CAF8",
+            "IMG-V11-2B-6ACC979A1C714F7F",
+            "IMG-V11-2B-E79FA90D33A3754B"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M03-Q003-O1",
+              "label": "brother",
+              "answerKey": "Y3M03-Q003-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q003-O2",
+              "label": "mother",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q003-O3",
+              "label": "father",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q003-O4",
+              "label": "sister",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M03-Q004",
+          "mechanic": "memory-quest",
+          "learningTarget": "Pairs short he/she family descriptions to clear fictional people; gender cues must be explicit and non-stereotyped. Curricular target: mother; father; brother; sister.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y3M03-Q004-P1",
+            "Y3M03-Q004-P2",
+            "Y3M03-Q004-P3",
+            "Y3M03-Q004-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-496D1E3286303401",
+            "IMG-V11-2B-72DD748C89819898",
+            "IMG-V11-2B-EB195E7418543F4E",
+            "IMG-V11-2B-F3663EB03B9FA720"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M03-Q005",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Describe fictional relatives by name, relation and age. Focus: introduce.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M03-Q005-L1": "Y3M03-Q005-R1",
+            "Y3M03-Q005-L2": "Y3M03-Q005-R2",
+            "Y3M03-Q005-L3": "Y3M03-Q005-R3",
+            "Y3M03-Q005-L4": "Y3M03-Q005-R4",
+            "Y3M03-Q005-L5": "Y3M03-Q005-R5",
+            "Y3M03-Q005-L6": "Y3M03-Q005-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-53C70478BC6A8DA7",
+            "IMG-V11-2B-9FFFCCD19B67697A",
+            "IMG-V11-2B-B55FEA574FE04262",
+            "IMG-V11-2B-FF1C87306E179ABE",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q007-NINE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mechanic": "bubble-pop",
+          "learningTarget": "guided practice: Describe fictional relatives by name, relation and age. Focus: she.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M03-Q006-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0E55AE94BCF4CC3E",
+            "IMG-V11-2B-2ECDF43BCA9F3C65",
+            "IMG-V11-2B-8C61F006F08947DB",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q007-NINE",
+            "IMG-Y1M02-Q007-TEN"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M03-Q006-O1",
+              "label": "she",
+              "answerKey": "Y3M03-Q006-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q006-O2",
+              "label": "eight",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q002-EIGHT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q006-O3",
+              "label": "nine",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q007-NINE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q006-O4",
+              "label": "ten",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q007-TEN",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M03-Q007",
+          "mechanic": "target-shooter",
+          "learningTarget": "recognition: Describe fictional relatives by name, relation and age. Focus: age.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M03-Q007-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q002-SEVEN",
+            "IMG-Y1M02-Q007-NINE",
+            "IMG-Y1M02-Q007-TEN"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M03-Q007-O1",
+              "label": "eight",
+              "answerKey": "Y3M03-Q007-O1",
+              "correct": true,
+              "mediaId": "IMG-Y1M02-Q002-EIGHT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q007-O2",
+              "label": "nine",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q007-NINE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q007-O3",
+              "label": "ten",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q007-TEN",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q007-O4",
+              "label": "seven",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q002-SEVEN",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M03-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Describe fictional relatives by name, relation and age. Focus: family description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "mother",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-243B96C39D99CAF8"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M03-Q008-O1",
+              "label": "father",
+              "answerKey": "father",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q008-O2",
+              "label": "mother",
+              "answerKey": "mother",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q008-O3",
+              "label": "brother",
+              "answerKey": "brother",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q008-O4",
+              "label": "sister",
+              "answerKey": "sister",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M03-Q009",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Describe fictional relatives by name, relation and age. Focus: He/She's my....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M03-Q009-L1": "Y3M03-Q009-R1",
+            "Y3M03-Q009-L2": "Y3M03-Q009-R2"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-3527CF12E6C57BF5",
+            "IMG-V11-2B-53C70478BC6A8DA7",
+            "IMG-V11-2B-B55FEA574FE04262"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M03-Q010",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Describe fictional relatives by name, relation and age. Focus: identify.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M03-Q010-I1": "Y3M03-Q010-T1",
+            "Y3M03-Q010-I2": "Y3M03-Q010-T2",
+            "Y3M03-Q010-I3": "Y3M03-Q010-T3",
+            "Y3M03-Q010-I4": "Y3M03-Q010-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-08FFAC2848B99BD1",
+            "IMG-V11-2B-D0E7A61F4C82CFF8",
+            "IMG-Y1M02-Q007-NINE",
+            "IMG-Y1M02-Q007-TEN"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M03-Q011",
+          "mechanic": "target-shooter",
+          "learningTarget": "comprehension: Describe fictional relatives by name, relation and age. Focus: he.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M03-Q011-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2ECDF43BCA9F3C65",
+            "IMG-V11-2B-8C61F006F08947DB",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q007-NINE"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M03-Q011-O1",
+              "label": "he",
+              "answerKey": "Y3M03-Q011-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q011-O2",
+              "label": "she",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q011-O3",
+              "label": "eight",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q002-EIGHT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q011-O4",
+              "label": "nine",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q007-NINE",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M03-Q012",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Describe fictional relatives by name, relation and age. Focus: family.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M03-Q012-L1": "Y3M03-Q012-R1",
+            "Y3M03-Q012-L2": "Y3M03-Q012-R2",
+            "Y3M03-Q012-L3": "Y3M03-Q012-R3",
+            "Y3M03-Q012-L4": "Y3M03-Q012-R4",
+            "Y3M03-Q012-L5": "Y3M03-Q012-R5",
+            "Y3M03-Q012-L6": "Y3M03-Q012-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2680DF6BE58F4B7E",
+            "IMG-V11-2B-9FFFCCD19B67697A",
+            "IMG-V11-2B-D2B2759DE5619C8A",
+            "IMG-V11-2B-E1B1A5B8AABB306D",
+            "IMG-V11-2B-F8F1532BA0C59828",
+            "IMG-V11-2B-FF1C87306E179ABE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M03-Q013",
+          "mechanic": "memory-quest",
+          "learningTarget": "A two-pair sound-form check supports the new he/she chunks after referents are established; not a standalone grammar test. Curricular target: he; she.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y3M03-Q013-P1",
+            "Y3M03-Q013-P2"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M03-Q014",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "listening: Describe fictional relatives by name, relation and age. Focus: He/She is ... years old.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M03-Q014-I1": "Y3M03-Q014-T1",
+            "Y3M03-Q014-I2": "Y3M03-Q014-T2",
+            "Y3M03-Q014-I3": "Y3M03-Q014-T3",
+            "Y3M03-Q014-I4": "Y3M03-Q014-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-243B96C39D99CAF8",
+            "IMG-V11-2B-363CA1C39A2A0FE6",
+            "IMG-V11-2B-9C574AA05B2196A8",
+            "IMG-V11-2B-E79FA90D33A3754B"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mechanic": "matching",
+          "learningTarget": "retrieval: Describe fictional relatives by name, relation and age. Focus: describe.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M03-Q015-L1": "Y3M03-Q015-R1",
+            "Y3M03-Q015-L2": "Y3M03-Q015-R2",
+            "Y3M03-Q015-L3": "Y3M03-Q015-R3",
+            "Y3M03-Q015-L4": "Y3M03-Q015-R4",
+            "Y3M03-Q015-L5": "Y3M03-Q015-R5",
+            "Y3M03-Q015-L6": "Y3M03-Q015-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2680DF6BE58F4B7E",
+            "IMG-V11-2B-D2B2759DE5619C8A",
+            "IMG-V11-2B-E1B1A5B8AABB306D",
+            "IMG-V11-2B-F8F1532BA0C59828",
+            "IMG-V11-2B-FF1C87306E179ABE",
+            "Y1M01-EMOJI-BEN-001"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M03-Q016",
+          "mechanic": "target-shooter",
+          "learningTarget": "retrieval: Describe fictional relatives by name, relation and age. Focus: she.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M03-Q016-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2ECDF43BCA9F3C65",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q007-NINE",
+            "IMG-Y1M02-Q007-TEN"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M03-Q016-O1",
+              "label": "she",
+              "answerKey": "Y3M03-Q016-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q016-O2",
+              "label": "eight",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q002-EIGHT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q016-O3",
+              "label": "nine",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q007-NINE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q016-O4",
+              "label": "ten",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q007-TEN",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M03-Q017",
+          "mechanic": "matching",
+          "learningTarget": "review: Describe fictional relatives by name, relation and age. Focus: age.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M03-Q017-L1": "Y3M03-Q017-R1",
+            "Y3M03-Q017-L2": "Y3M03-Q017-R2",
+            "Y3M03-Q017-L3": "Y3M03-Q017-R3"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q007-NINE",
+            "IMG-Y1M02-Q007-TEN"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M03-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Describe fictional relatives by name, relation and age. Focus: family description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "grandfather",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-40A6ADFB20D21B5C"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M03-Q018-O1",
+              "label": "grandfather",
+              "answerKey": "grandfather",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q018-O2",
+              "label": "mother",
+              "answerKey": "mother",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q018-O3",
+              "label": "father",
+              "answerKey": "father",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M03-Q018-O4",
+              "label": "brother",
+              "answerKey": "brother",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M03-Q019",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "consolidation: Describe fictional relatives by name, relation and age. Focus: This is my....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "She",
+            "is",
+            "my",
+            "mother."
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M03-Q020",
+          "mechanic": "drag-drop",
+          "learningTarget": "consolidation: Describe fictional relatives by name, relation and age. Focus: introduce.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M03-Q020-I1": "close-family",
+            "Y3M03-Q020-I2": "close-family",
+            "Y3M03-Q020-I3": "close-family",
+            "Y3M03-Q020-I4": "close-family",
+            "Y3M03-Q020-I5": "grandparents",
+            "Y3M03-Q020-I6": "grandparents"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        }
+      ]
+    },
+    {
+      "moduleId": "Y3M04",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y3M04-Q001",
+          "mechanic": "drag-drop",
+          "learningTarget": "teaching: Recontextualize familiar sets through number, color, plural and preference. Focus: toys.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M04-Q001-I1": "indoor-toys",
+            "Y3M04-Q001-I2": "indoor-toys",
+            "Y3M04-Q001-I3": "indoor-toys",
+            "Y3M04-Q001-I4": "outdoor-toys",
+            "Y3M04-Q001-I5": "outdoor-toys",
+            "Y3M04-Q001-I6": "outdoor-toys"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M04-Q002",
+          "mechanic": "target-shooter",
+          "learningTarget": "teaching: Recontextualize familiar sets through number, color, plural and preference. Focus: known noun/number relations.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M04-Q002-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q001-FOUR",
+            "IMG-Y1M02-Q001-ONE",
+            "IMG-Y1M02-Q001-THREE",
+            "IMG-Y1M02-Q001-TWO"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M04-Q002-O1",
+              "label": "two",
+              "answerKey": "Y3M04-Q002-O1",
+              "correct": true,
+              "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q002-O2",
+              "label": "one",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q002-O3",
+              "label": "three",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q002-O4",
+              "label": "four",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-FOUR",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M04-Q003",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "guided practice: Recontextualize familiar sets through number, color, plural and preference. Focus: What's your favorite toy? / My favorite toy is....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M04-Q003-I1": "Y3M04-Q003-T1",
+            "Y3M04-Q003-I2": "Y3M04-Q003-T2",
+            "Y3M04-Q003-I3": "Y3M04-Q003-T3",
+            "Y3M04-Q003-I4": "Y3M04-Q003-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-02FC4A40F1F9ED1E",
+            "IMG-V11-2B-74D9FEE8F0757749",
+            "IMG-V11-2B-9CF6281282372603",
+            "IMG-V11-2B-B49BEB44363DE72E"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M04-Q004",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Recontextualize familiar sets through number, color, plural and preference. Focus: ask/state preference.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M04-Q004-L1": "Y3M04-Q004-R1",
+            "Y3M04-Q004-L2": "Y3M04-Q004-R2",
+            "Y3M04-Q004-L3": "Y3M04-Q004-R3",
+            "Y3M04-Q004-L4": "Y3M04-Q004-R4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-20C32A7B846CD05A",
+            "IMG-V11-2B-8050E659DDF0AE39",
+            "IMG-V11-2B-9308452ECEE535F7",
+            "IMG-V11-2B-F2B1512D42DAD7B2"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M04-Q005",
+          "mechanic": "memory-quest",
+          "learningTarget": "Retrieves the familiar toy set through semantic image association before integrating count/plural language. Curricular target: doll; ball; train; plane; teddy bear; kite.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y3M04-Q005-P1",
+            "Y3M04-Q005-P2",
+            "Y3M04-Q005-P3",
+            "Y3M04-Q005-P4",
+            "Y3M04-Q005-P5",
+            "Y3M04-Q005-P6"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-013B1AC19F46EED7",
+            "IMG-V11-2B-35D62AB65B16D038",
+            "IMG-V11-2B-70ADABF6B02AC095",
+            "IMG-V11-2B-9A5DEED78F92809E",
+            "IMG-V11-2B-BAFBBAC1C9A13EE8",
+            "Y1M01-EMOJI-BALL-001"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M04-Q006",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Recontextualize familiar sets through number, color, plural and preference. Focus: known noun/number relations.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M04-Q006-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q001-ONE",
+            "IMG-Y1M02-Q001-THREE",
+            "IMG-Y1M02-Q001-TWO",
+            "IMG-Y1M02-Q002-FIVE"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M04-Q006-O1",
+              "label": "three",
+              "answerKey": "Y3M04-Q006-O1",
+              "correct": true,
+              "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q006-O2",
+              "label": "one",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q006-O3",
+              "label": "two",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q006-O4",
+              "label": "five",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q002-FIVE",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M04-Q007",
+          "mechanic": "drag-drop",
+          "learningTarget": "recognition: Recontextualize familiar sets through number, color, plural and preference. Focus: one fish/three turtles.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M04-Q007-I1": "one-animal",
+            "Y3M04-Q007-I2": "more-than-one",
+            "Y3M04-Q007-I3": "one-animal",
+            "Y3M04-Q007-I4": "more-than-one"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-4011E8FCDB0C1A32",
+            "IMG-V11-2B-5F39D5541126AD95",
+            "IMG-V11-2B-B4A1A90E2E55FDB2",
+            "IMG-V11-2B-E93FA35D818E7702"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M04-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Recontextualize familiar sets through number, color, plural and preference. Focus: count.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "two",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q001-TWO"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M04-Q008-O1",
+              "label": "two",
+              "answerKey": "two",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q008-O2",
+              "label": "one",
+              "answerKey": "one",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q008-O3",
+              "label": "three",
+              "answerKey": "three",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M04-Q009",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "recognition: Recontextualize familiar sets through number, color, plural and preference. Focus: colors.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M04-Q009-I1": "Y3M04-Q009-T1",
+            "Y3M04-Q009-I2": "Y3M04-Q009-T2",
+            "Y3M04-Q009-I3": "Y3M04-Q009-T3",
+            "Y3M04-Q009-I4": "Y3M04-Q009-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M03-Q001-BLUE",
+            "IMG-Y1M03-Q001-RED",
+            "IMG-Y1M03-Q006-BROWN",
+            "IMG-Y1M03-Q006-GRAY"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M04-Q010",
+          "mechanic": "target-shooter",
+          "learningTarget": "comprehension: Recontextualize familiar sets through number, color, plural and preference. Focus: known noun/number relations.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M04-Q010-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q001-FOUR",
+            "IMG-Y1M02-Q001-ONE",
+            "IMG-Y1M02-Q001-THREE",
+            "IMG-Y1M02-Q001-TWO"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M04-Q010-O1",
+              "label": "one",
+              "answerKey": "Y3M04-Q010-O1",
+              "correct": true,
+              "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q010-O2",
+              "label": "two",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q010-O3",
+              "label": "three",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q010-O4",
+              "label": "four",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-FOUR",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M04-Q011",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Recontextualize familiar sets through number, color, plural and preference. Focus: plural contrasts in familiar input.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M04-Q011-L1": "Y3M04-Q011-R1",
+            "Y3M04-Q011-L2": "Y3M04-Q011-R2",
+            "Y3M04-Q011-L3": "Y3M04-Q011-R3",
+            "Y3M04-Q011-L4": "Y3M04-Q011-R4",
+            "Y3M04-Q011-L5": "Y3M04-Q011-R5",
+            "Y3M04-Q011-L6": "Y3M04-Q011-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1AB77240D5EE2039",
+            "IMG-V11-2B-39E1001E17179D8E",
+            "IMG-V11-2B-6B58C7B77B2AEFA2",
+            "IMG-V11-2B-81A6D1F2BE1357EE",
+            "IMG-V11-2B-D0B4EE6FF953B6F3",
+            "IMG-V11-2B-F7B314A95FA14D5A"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M04-Q012",
+          "mechanic": "bubble-pop",
+          "learningTarget": "comprehension: Recontextualize familiar sets through number, color, plural and preference. Focus: describe.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M04-Q012-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-B553D1606006D229",
+            "IMG-V11-2B-C2F0FC7FDF270EB3",
+            "IMG-Y1M02-Q001-ONE",
+            "IMG-Y1M02-Q001-THREE",
+            "IMG-Y1M02-Q001-TWO",
+            "Y1M01-EMOJI-BALL-001"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M04-Q012-O1",
+              "label": "two",
+              "answerKey": "Y3M04-Q012-O1",
+              "correct": true,
+              "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q012-O2",
+              "label": "doll",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-B553D1606006D229",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q012-O3",
+              "label": "ball",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-BALL-001",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q012-O4",
+              "label": "train",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-C2F0FC7FDF270EB3",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M04-Q013",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "listening: Recontextualize familiar sets through number, color, plural and preference. Focus: numbers.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M04-Q013-I1": "Y3M04-Q013-T1",
+            "Y3M04-Q013-I2": "Y3M04-Q013-T2",
+            "Y3M04-Q013-I3": "Y3M04-Q013-T3",
+            "Y3M04-Q013-I4": "Y3M04-Q013-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q001-FOUR",
+            "IMG-Y1M02-Q001-ONE",
+            "IMG-Y1M02-Q001-THREE",
+            "IMG-Y1M02-Q001-TWO"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M04-Q014",
+          "mechanic": "matching",
+          "learningTarget": "listening: Recontextualize familiar sets through number, color, plural and preference. Focus: known noun/number relations.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M04-Q014-L1": "Y3M04-Q014-R1",
+            "Y3M04-Q014-L2": "Y3M04-Q014-R2",
+            "Y3M04-Q014-L3": "Y3M04-Q014-R3"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q001-ONE",
+            "IMG-Y1M02-Q001-THREE",
+            "IMG-Y1M02-Q001-TWO"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M04-Q015",
+          "mechanic": "memory-quest",
+          "learningTarget": "Sound-form mapping consolidates the new number-noun/plural relation after familiar noun recognition; keep language chunks modeled. Curricular target: one fish; three turtles; one/more than one.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y3M04-Q015-P1",
+            "Y3M04-Q015-P2",
+            "Y3M04-Q015-P3"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M04-Q016",
+          "mechanic": "matching",
+          "learningTarget": "retrieval: Recontextualize familiar sets through number, color, plural and preference. Focus: ask/state preference.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M04-Q016-L1": "Y3M04-Q016-R1",
+            "Y3M04-Q016-L2": "Y3M04-Q016-R2",
+            "Y3M04-Q016-L3": "Y3M04-Q016-R3",
+            "Y3M04-Q016-L4": "Y3M04-Q016-R4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-20C32A7B846CD05A",
+            "IMG-V11-2B-8050E659DDF0AE39",
+            "IMG-V11-2B-9308452ECEE535F7",
+            "IMG-V11-2B-F2B1512D42DAD7B2"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M04-Q017",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "review: Recontextualize familiar sets through number, color, plural and preference. Focus: toys.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M04-Q017-I1": "Y3M04-Q017-T1",
+            "Y3M04-Q017-I2": "Y3M04-Q017-T2",
+            "Y3M04-Q017-I3": "Y3M04-Q017-T3",
+            "Y3M04-Q017-I4": "Y3M04-Q017-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-549A83A3D9F08CCC",
+            "IMG-V11-2B-74D9FEE8F0757749",
+            "IMG-V11-2B-B49BEB44363DE72E",
+            "Y1M01-EMOJI-BALL-001"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M04-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Recontextualize familiar sets through number, color, plural and preference. Focus: known noun/number relations.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "three",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q001-THREE"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M04-Q018-O1",
+              "label": "three",
+              "answerKey": "three",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q018-O2",
+              "label": "one",
+              "answerKey": "one",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q018-O3",
+              "label": "two",
+              "answerKey": "two",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M04-Q019",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "consolidation: Recontextualize familiar sets through number, color, plural and preference. Focus: number + item.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "I",
+            "have",
+            "one",
+            "favorite",
+            "toy."
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M04-Q020",
+          "mechanic": "target-shooter",
+          "learningTarget": "consolidation: Recontextualize familiar sets through number, color, plural and preference. Focus: count.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M04-Q020-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q001-FOUR",
+            "IMG-Y1M02-Q001-ONE",
+            "IMG-Y1M02-Q001-THREE",
+            "IMG-Y1M02-Q001-TWO"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M04-Q020-O1",
+              "label": "two",
+              "answerKey": "Y3M04-Q020-O1",
+              "correct": true,
+              "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q020-O2",
+              "label": "one",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q020-O3",
+              "label": "three",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M04-Q020-O4",
+              "label": "four",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M02-Q001-FOUR",
+              "semanticReview": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleId": "Y3M05",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y3M05-Q001",
+          "mechanic": "target-shooter",
+          "learningTarget": "teaching: Understand simple arithmetic language and describe shapes. Focus: plus.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M05-Q001-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0C1635162CC65DF3",
+            "IMG-V11-2B-3465A65536CB1E46",
+            "IMG-V11-2B-BE34171D033BB875",
+            "IMG-V11-2B-CFBD6FF69645CF3F"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M05-Q001-O1",
+              "label": "two plus three equals five",
+              "answerKey": "Y3M05-Q001-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-CFBD6FF69645CF3F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q001-O2",
+              "label": "six minus two equals four",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-BE34171D033BB875",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q001-O3",
+              "label": "three plus four equals seven",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0C1635162CC65DF3",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q001-O4",
+              "label": "nine minus five equals four",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-3465A65536CB1E46",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M05-Q002",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Understand simple arithmetic language and describe shapes. Focus: times.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M05-Q002-I1": "Y3M05-Q002-T1",
+            "Y3M05-Q002-I2": "Y3M05-Q002-T2",
+            "Y3M05-Q002-I3": "Y3M05-Q002-T3",
+            "Y3M05-Q002-I4": "Y3M05-Q002-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0042C60C0B4DAA2B",
+            "IMG-V11-2B-380271DED3F3D31E",
+            "IMG-V11-2B-C59B066C6037FEE5",
+            "IMG-V11-2B-E38C0DE05DFDDD8F"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M05-Q003",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Understand simple arithmetic language and describe shapes. Focus: numbers.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M05-Q003-L1": "Y3M05-Q003-R1",
+            "Y3M05-Q003-L2": "Y3M05-Q003-R2",
+            "Y3M05-Q003-L3": "Y3M05-Q003-R3",
+            "Y3M05-Q003-L4": "Y3M05-Q003-R4",
+            "Y3M05-Q003-L5": "Y3M05-Q003-R5",
+            "Y3M05-Q003-L6": "Y3M05-Q003-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q001-FOUR",
+            "IMG-Y1M02-Q001-THREE",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q002-FIVE",
+            "IMG-Y1M02-Q002-SEVEN",
+            "IMG-Y1M02-Q002-SIX"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M05-Q004",
+          "mechanic": "memory-quest",
+          "learningTarget": "Pairs the source-named spoken operators with their visual equation symbols; language identification is scored separately from arithmetic computation. Curricular target: plus; minus; equals.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y3M05-Q004-P1",
+            "Y3M05-Q004-P2",
+            "Y3M05-Q004-P3"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-091647FA0E3E3E68",
+            "IMG-V11-2B-4E8B1F3C6B88B0EC",
+            "IMG-V11-2B-E2302199CB7460B5"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M05-Q005",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Understand simple arithmetic language and describe shapes. Focus: number plus/minus number equals result.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M05-Q005-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0C1635162CC65DF3",
+            "IMG-V11-2B-3465A65536CB1E46",
+            "IMG-V11-2B-BE34171D033BB875",
+            "IMG-V11-2B-CFBD6FF69645CF3F"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M05-Q005-O1",
+              "label": "two plus three equals five",
+              "answerKey": "Y3M05-Q005-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-CFBD6FF69645CF3F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q005-O2",
+              "label": "six minus two equals four",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-BE34171D033BB875",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q005-O3",
+              "label": "three plus four equals seven",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0C1635162CC65DF3",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q005-O4",
+              "label": "nine minus five equals four",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-3465A65536CB1E46",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M05-Q006",
+          "mechanic": "drag-drop",
+          "learningTarget": "guided practice: Understand simple arithmetic language and describe shapes. Focus: state practiced result.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M05-Q006-I1": "addition",
+            "Y3M05-Q006-I2": "addition",
+            "Y3M05-Q006-I3": "subtraction",
+            "Y3M05-Q006-I4": "subtraction"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M05-Q007",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Understand simple arithmetic language and describe shapes. Focus: minus.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M05-Q007-L1": "Y3M05-Q007-R1",
+            "Y3M05-Q007-L2": "Y3M05-Q007-R2",
+            "Y3M05-Q007-L3": "Y3M05-Q007-R3",
+            "Y3M05-Q007-L4": "Y3M05-Q007-R4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-13DCE385AE7A4FDD",
+            "IMG-V11-2B-2DF5CFF0C304AAF1",
+            "IMG-V11-2B-7717FDD290CE55EF",
+            "IMG-V11-2B-7C65FD581AACF741"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M05-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Understand simple arithmetic language and describe shapes. Focus: divided by.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "square",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-380271DED3F3D31E"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M05-Q008-O1",
+              "label": "square",
+              "answerKey": "square",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q008-O2",
+              "label": "divided by",
+              "answerKey": "divided by",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q008-O3",
+              "label": "triangle",
+              "answerKey": "triangle",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q008-O4",
+              "label": "rectangle",
+              "answerKey": "rectangle",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M05-Q009",
+          "mechanic": "target-shooter",
+          "learningTarget": "recognition: Understand simple arithmetic language and describe shapes. Focus: shapes.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M05-Q009-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0B8FB65CFC9F4ED3",
+            "IMG-V11-2B-77460DE9537EEBF0",
+            "IMG-V11-2B-ADC02C547ED88AAB",
+            "IMG-V11-2B-DD4F6C5D17D9EA26"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M05-Q009-O1",
+              "label": "star",
+              "answerKey": "Y3M05-Q009-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-ADC02C547ED88AAB",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q009-O2",
+              "label": "triangle",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-DD4F6C5D17D9EA26",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q009-O3",
+              "label": "square",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-77460DE9537EEBF0",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q009-O4",
+              "label": "rectangle",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0B8FB65CFC9F4ED3",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M05-Q010",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Understand simple arithmetic language and describe shapes. Focus: selected operation result.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M05-Q010-L1": "Y3M05-Q010-R1",
+            "Y3M05-Q010-L2": "Y3M05-Q010-R2",
+            "Y3M05-Q010-L3": "Y3M05-Q010-R3",
+            "Y3M05-Q010-L4": "Y3M05-Q010-R4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-13DCE385AE7A4FDD",
+            "IMG-V11-2B-2DF5CFF0C304AAF1",
+            "IMG-V11-2B-7717FDD290CE55EF",
+            "IMG-V11-2B-7C65FD581AACF741"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "mechanic": "bubble-pop",
+          "learningTarget": "comprehension: Understand simple arithmetic language and describe shapes. Focus: multiplication/division terms.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M05-Q011-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-37302AEA2B306D70",
+            "IMG-V11-2B-3C01681DAFE96F83",
+            "IMG-V11-2B-8138254DEC43D7BC",
+            "IMG-V11-2B-BE34171D033BB875",
+            "IMG-V11-2B-CFBD6FF69645CF3F",
+            "IMG-Y1M02-Q001-ONE"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M05-Q011-O1",
+              "label": "one",
+              "answerKey": "Y3M05-Q011-O1",
+              "correct": true,
+              "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q011-O2",
+              "label": "plus",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-8138254DEC43D7BC",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q011-O3",
+              "label": "minus",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-37302AEA2B306D70",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q011-O4",
+              "label": "equals",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-3C01681DAFE96F83",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M05-Q012",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Understand simple arithmetic language and describe shapes. Focus: describe shape.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M05-Q012-I1": "Y3M05-Q012-T1",
+            "Y3M05-Q012-I2": "Y3M05-Q012-T2",
+            "Y3M05-Q012-I3": "Y3M05-Q012-T3",
+            "Y3M05-Q012-I4": "Y3M05-Q012-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-380271DED3F3D31E",
+            "IMG-V11-2B-83F595D41CD1AEDF",
+            "IMG-V11-2B-8C9B8850C95A943E",
+            "IMG-V11-2B-E38C0DE05DFDDD8F"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M05-Q013",
+          "mechanic": "matching",
+          "learningTarget": "listening: Understand simple arithmetic language and describe shapes. Focus: equals.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M05-Q013-L1": "Y3M05-Q013-R1",
+            "Y3M05-Q013-L2": "Y3M05-Q013-R2",
+            "Y3M05-Q013-L3": "Y3M05-Q013-R3",
+            "Y3M05-Q013-L4": "Y3M05-Q013-R4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-13DCE385AE7A4FDD",
+            "IMG-V11-2B-2DF5CFF0C304AAF1",
+            "IMG-V11-2B-7717FDD290CE55EF",
+            "IMG-V11-2B-7C65FD581AACF741"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M05-Q014",
+          "mechanic": "memory-quest",
+          "learningTarget": "Orthographic recognition retrieves the finite shape set introduced in Y2M02 while the current module’s cognitive work remains the operation/result chunk. Curricular target: triangle; square; rectangle; star; circle.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y3M05-Q014-P1",
+            "Y3M05-Q014-P2",
+            "Y3M05-Q014-P3",
+            "Y3M05-Q014-P4",
+            "Y3M05-Q014-P5"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-8124DC99DF0EDFC5",
+            "IMG-V11-2B-D004AA4E54494A38",
+            "IMG-V11-2B-D3B7141F6BE01C58",
+            "IMG-V11-2B-E1AAAB4F605F42A1",
+            "IMG-V11-2B-FDB30064EAC5CF0E"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M05-Q015",
+          "mechanic": "matching",
+          "learningTarget": "retrieval: Understand simple arithmetic language and describe shapes. Focus: colors.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M05-Q015-L1": "Y3M05-Q015-R1",
+            "Y3M05-Q015-L2": "Y3M05-Q015-R2",
+            "Y3M05-Q015-L3": "Y3M05-Q015-R3",
+            "Y3M05-Q015-L4": "Y3M05-Q015-R4",
+            "Y3M05-Q015-L5": "Y3M05-Q015-R5",
+            "Y3M05-Q015-L6": "Y3M05-Q015-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M03-Q001-BLACK",
+            "IMG-Y1M03-Q001-ORANGE",
+            "IMG-Y1M03-Q001-WHITE",
+            "IMG-Y1M03-Q006-BROWN",
+            "IMG-Y1M03-Q006-GRAY",
+            "IMG-Y1M03-Q006-PURPLE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M05-Q016",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "retrieval: Understand simple arithmetic language and describe shapes. Focus: selected operation result.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M05-Q016-I1": "Y3M05-Q016-T1",
+            "Y3M05-Q016-I2": "Y3M05-Q016-T2",
+            "Y3M05-Q016-I3": "Y3M05-Q016-T3",
+            "Y3M05-Q016-I4": "Y3M05-Q016-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-6FFE58151EAD0CA0",
+            "IMG-V11-2B-C1BC182FD8E80824",
+            "IMG-V11-2B-D479ABE00CDCCB74",
+            "IMG-V11-2B-D74453328D45A91B"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "mechanic": "bubble-pop",
+          "learningTarget": "review: Understand simple arithmetic language and describe shapes. Focus: shape/attribute descriptions.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M05-Q017-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0B8FB65CFC9F4ED3",
+            "IMG-V11-2B-77460DE9537EEBF0",
+            "IMG-V11-2B-ADC02C547ED88AAB",
+            "IMG-V11-2B-BE34171D033BB875",
+            "IMG-V11-2B-CFBD6FF69645CF3F",
+            "IMG-V11-2B-DD4F6C5D17D9EA26"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M05-Q017-O1",
+              "label": "square",
+              "answerKey": "Y3M05-Q017-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-77460DE9537EEBF0",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q017-O2",
+              "label": "triangle",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-DD4F6C5D17D9EA26",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q017-O3",
+              "label": "rectangle",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0B8FB65CFC9F4ED3",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q017-O4",
+              "label": "star",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-ADC02C547ED88AAB",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M05-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Complete a practiced addition sentence with its result. Focus: two plus three equals five.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "five",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q002-FIVE"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M05-Q018-O1",
+              "label": "five",
+              "answerKey": "five",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q018-O2",
+              "label": "four",
+              "answerKey": "four",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q018-O3",
+              "label": "six",
+              "answerKey": "six",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M05-Q018-O4",
+              "label": "seven",
+              "answerKey": "seven",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M05-Q019",
+          "mechanic": "drag-drop",
+          "learningTarget": "consolidation: Understand simple arithmetic language and describe shapes. Focus: plus.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M05-Q019-I1": "addition",
+            "Y3M05-Q019-I2": "addition",
+            "Y3M05-Q019-I3": "subtraction",
+            "Y3M05-Q019-I4": "subtraction"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M05-Q020",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "consolidation: Understand simple arithmetic language and describe shapes. Focus: divided by.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M05-Q020-I1": "Y3M05-Q020-T1",
+            "Y3M05-Q020-I2": "Y3M05-Q020-T2",
+            "Y3M05-Q020-I3": "Y3M05-Q020-T3",
+            "Y3M05-Q020-I4": "Y3M05-Q020-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0042C60C0B4DAA2B",
+            "IMG-V11-2B-380271DED3F3D31E",
+            "IMG-V11-2B-8C9B8850C95A943E",
+            "IMG-V11-2B-C59B066C6037FEE5"
+          ],
+          "options": []
+        }
+      ]
+    },
+    {
+      "moduleId": "Y3M06",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y3M06-Q001",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Express preferences about source-listed foods and school objects. Focus: pear.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M06-Q001-I1": "Y3M06-Q001-T1",
+            "Y3M06-Q001-I2": "Y3M06-Q001-T2",
+            "Y3M06-Q001-I3": "Y3M06-Q001-T3",
+            "Y3M06-Q001-I4": "Y3M06-Q001-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-3D28EF67A404B88C",
+            "IMG-V11-2B-7A57E9CE5110738F",
+            "IMG-V11-2B-EB9A765F1CD87AC2",
+            "IMG-Y1M03-Q001-ORANGE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M06-Q002",
+          "mechanic": "matching",
+          "learningTarget": "teaching: Express preferences about source-listed foods and school objects. Focus: apple.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M06-Q002-L1": "Y3M06-Q002-R1",
+            "Y3M06-Q002-L2": "Y3M06-Q002-R2",
+            "Y3M06-Q002-L3": "Y3M06-Q002-R3",
+            "Y3M06-Q002-L4": "Y3M06-Q002-R4",
+            "Y3M06-Q002-L5": "Y3M06-Q002-R5",
+            "Y3M06-Q002-L6": "Y3M06-Q002-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0C2E37014FB8B5AF",
+            "IMG-V11-2B-1EABF9E8AAAB576B",
+            "IMG-V11-2B-59314A55011BCD3F",
+            "IMG-V11-2B-BC3B9081178AE7A4",
+            "IMG-V11-2B-D1344634366B33A5",
+            "IMG-Y1M03-Q001-ORANGE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M06-Q003",
+          "mechanic": "bubble-pop",
+          "learningTarget": "guided practice: Express preferences about source-listed foods and school objects. Focus: food preference set.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M06-Q003-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-48CA6C8720A28B20",
+            "IMG-V11-2B-5D2F313F53720CE9",
+            "IMG-V11-2B-8402FF71A9476919",
+            "IMG-V11-2B-97050C4338A5B73F",
+            "IMG-V11-2B-EB9A765F1CD87AC2",
+            "IMG-Y1M03-Q001-ORANGE"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M06-Q003-O1",
+              "label": "I do not like carrots",
+              "answerKey": "Y3M06-Q003-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q003-O2",
+              "label": "I like apples",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q003-O3",
+              "label": "I prefer grapes",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q003-O4",
+              "label": "I like papaya",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M06-Q004",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Express preferences about source-listed foods and school objects. Focus: I like/I don't like/I prefer/...but I prefer....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M06-Q004-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-48CA6C8720A28B20",
+            "IMG-V11-2B-5D2F313F53720CE9",
+            "IMG-V11-2B-8402FF71A9476919",
+            "IMG-V11-2B-97050C4338A5B73F"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M06-Q004-O1",
+              "label": "I like papaya",
+              "answerKey": "Y3M06-Q004-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q004-O2",
+              "label": "I like apples",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q004-O3",
+              "label": "I prefer grapes",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q004-O4",
+              "label": "I do not like carrots",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M06-Q005",
+          "mechanic": "drag-drop",
+          "learningTarget": "guided practice: Express preferences about source-listed foods and school objects. Focus: express preference.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M06-Q005-I1": "fruit",
+            "Y3M06-Q005-I2": "fruit",
+            "Y3M06-Q005-I3": "fruit",
+            "Y3M06-Q005-I4": "fruit",
+            "Y3M06-Q005-I5": "vegetables",
+            "Y3M06-Q005-I6": "vegetables"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-26D44842889AB747",
+            "IMG-V11-2B-339DA7527871F321",
+            "IMG-V11-2B-65717091CD9C0EC6",
+            "IMG-V11-2B-BE4D9E25DFED3EBE",
+            "IMG-V11-2B-FA56DF3AB66A9843",
+            "IMG-Y1M03-Q001-ORANGE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M06-Q006",
+          "mechanic": "memory-quest",
+          "learningTarget": "First retrieval group of the staged remaining V3 food set; use distinctive food images. Curricular target: pear; orange; grape; papaya.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y3M06-Q006-P1",
+            "Y3M06-Q006-P2",
+            "Y3M06-Q006-P3",
+            "Y3M06-Q006-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2AA1BB524D6DE909",
+            "IMG-V11-2B-619EED8199D4839A",
+            "IMG-V11-2B-DE27B488A8ABEE95",
+            "IMG-Y1M03-Q001-ORANGE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M06-Q007",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "recognition: Express preferences about source-listed foods and school objects. Focus: banana.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M06-Q007-I1": "Y3M06-Q007-T1",
+            "Y3M06-Q007-I2": "Y3M06-Q007-T2",
+            "Y3M06-Q007-I3": "Y3M06-Q007-T3",
+            "Y3M06-Q007-I4": "Y3M06-Q007-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0C92CA6CCAB76E56",
+            "IMG-V11-2B-70BBDE17423810DE",
+            "IMG-V11-2B-D859ED14475C1AE2",
+            "IMG-V11-2B-E46D075F39FD3887"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M06-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Complete a short food-preference sentence with a source-listed food. Focus: I like [food].",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "potato",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-178C9BC5F16D0575"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M06-Q008-O1",
+              "label": "potato",
+              "answerKey": "potato",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q008-O2",
+              "label": "pear",
+              "answerKey": "pear",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q008-O3",
+              "label": "orange",
+              "answerKey": "orange",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q008-O4",
+              "label": "grape",
+              "answerKey": "grape",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M06-Q009",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Express preferences about source-listed foods and school objects. Focus: What's this? / This is a/an....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M06-Q009-L1": "Y3M06-Q009-R1",
+            "Y3M06-Q009-L2": "Y3M06-Q009-R2",
+            "Y3M06-Q009-L3": "Y3M06-Q009-R3",
+            "Y3M06-Q009-L4": "Y3M06-Q009-R4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-541CAA8F2DB089FC",
+            "IMG-V11-2B-593652D334D2980A",
+            "IMG-V11-2B-61D6540EAA887069",
+            "IMG-V11-2B-D549CE8226285A2D"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M06-Q010",
+          "mechanic": "bubble-pop",
+          "learningTarget": "comprehension: Express preferences about source-listed foods and school objects. Focus: identify/describe.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M06-Q010-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1EABF9E8AAAB576B",
+            "IMG-V11-2B-249393BE62012CB7",
+            "IMG-V11-2B-6C28CE93AFE4F8BB",
+            "IMG-V11-2B-7A57E9CE5110738F",
+            "IMG-V11-2B-9013A5518AF15B59",
+            "IMG-Y1M03-Q001-ORANGE"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M06-Q010-O1",
+              "label": "like",
+              "answerKey": "Y3M06-Q010-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-9013A5518AF15B59",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q010-O2",
+              "label": "pear",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-6C28CE93AFE4F8BB",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q010-O3",
+              "label": "orange",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-Y1M03-Q001-ORANGE",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q010-O4",
+              "label": "grape",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-249393BE62012CB7",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M06-Q011",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Express preferences about source-listed foods and school objects. Focus: grape.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M06-Q011-I1": "Y3M06-Q011-T1",
+            "Y3M06-Q011-I2": "Y3M06-Q011-T2",
+            "Y3M06-Q011-I3": "Y3M06-Q011-T3",
+            "Y3M06-Q011-I4": "Y3M06-Q011-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-39932540A26700FA",
+            "IMG-V11-2B-3D28EF67A404B88C",
+            "IMG-V11-2B-7A57E9CE5110738F",
+            "IMG-V11-2B-AFCB71B3EDE762F8"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M06-Q012",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Express preferences about source-listed foods and school objects. Focus: school objects.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M06-Q012-L1": "Y3M06-Q012-R1",
+            "Y3M06-Q012-L2": "Y3M06-Q012-R2",
+            "Y3M06-Q012-L3": "Y3M06-Q012-R3",
+            "Y3M06-Q012-L4": "Y3M06-Q012-R4",
+            "Y3M06-Q012-L5": "Y3M06-Q012-R5",
+            "Y3M06-Q012-L6": "Y3M06-Q012-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1EABF9E8AAAB576B",
+            "IMG-V11-2B-3E8B870AE9E69B6A",
+            "IMG-V11-2B-BC3B9081178AE7A4",
+            "IMG-V11-2B-D1344634366B33A5",
+            "IMG-V11-2B-F48C3CE0D4681BE7",
+            "IMG-Y1M03-Q001-ORANGE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M06-Q013",
+          "mechanic": "target-shooter",
+          "learningTarget": "listening: Express preferences about source-listed foods and school objects. Focus: food preference set.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y3M06-Q013-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-48CA6C8720A28B20",
+            "IMG-V11-2B-5D2F313F53720CE9",
+            "IMG-V11-2B-8402FF71A9476919",
+            "IMG-V11-2B-97050C4338A5B73F"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M06-Q013-O1",
+              "label": "I like apples",
+              "answerKey": "Y3M06-Q013-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q013-O2",
+              "label": "I prefer grapes",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q013-O3",
+              "label": "I do not like carrots",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q013-O4",
+              "label": "I like papaya",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M06-Q014",
+          "mechanic": "matching",
+          "learningTarget": "listening: Express preferences about source-listed foods and school objects. Focus: preference response.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M06-Q014-L1": "Y3M06-Q014-R1",
+            "Y3M06-Q014-L2": "Y3M06-Q014-R2",
+            "Y3M06-Q014-L3": "Y3M06-Q014-R3",
+            "Y3M06-Q014-L4": "Y3M06-Q014-R4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-20C32A7B846CD05A",
+            "IMG-V11-2B-8050E659DDF0AE39",
+            "IMG-V11-2B-9308452ECEE535F7",
+            "IMG-V11-2B-F2B1512D42DAD7B2"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M06-Q015",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "retrieval: Express preferences about source-listed foods and school objects. Focus: express preference.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M06-Q015-I1": "Y3M06-Q015-T1",
+            "Y3M06-Q015-I2": "Y3M06-Q015-T2",
+            "Y3M06-Q015-I3": "Y3M06-Q015-T3",
+            "Y3M06-Q015-I4": "Y3M06-Q015-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-3272A25234DFCFBA",
+            "IMG-V11-2B-719454C9113F5766",
+            "IMG-V11-2B-95FE0C0B6DED7EFB",
+            "IMG-V11-2B-D44395DF6FD6A093"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M06-Q016",
+          "mechanic": "memory-quest",
+          "learningTarget": "A changed sound-to-written-form task retrieves school-object labels from Y1M04 while food preference remains the module’s new target. Curricular target: eraser; pencil; pencil case; backpack.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y3M06-Q016-P1",
+            "Y3M06-Q016-P2",
+            "Y3M06-Q016-P3",
+            "Y3M06-Q016-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M06-Q017",
+          "mechanic": "drag-drop",
+          "learningTarget": "review: Classify source-listed foods as fruit or vegetables while reviewing food vocabulary. Focus: fruit and vegetables.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M06-Q017-I1": "fruit",
+            "Y3M06-Q017-I2": "fruit",
+            "Y3M06-Q017-I3": "fruit",
+            "Y3M06-Q017-I4": "fruit",
+            "Y3M06-Q017-I5": "vegetables",
+            "Y3M06-Q017-I6": "vegetables"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-26D44842889AB747",
+            "IMG-V11-2B-339DA7527871F321",
+            "IMG-V11-2B-65717091CD9C0EC6",
+            "IMG-V11-2B-BE4D9E25DFED3EBE",
+            "IMG-V11-2B-FA56DF3AB66A9843",
+            "IMG-Y1M03-Q001-ORANGE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y3M06-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Complete a short food-preference sentence with a source-listed food. Focus: I like [food].",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "orange",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M03-Q001-ORANGE"
+          ],
+          "options": [
+            {
+              "optionId": "Y3M06-Q018-O1",
+              "label": "orange",
+              "answerKey": "orange",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q018-O2",
+              "label": "pear",
+              "answerKey": "pear",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q018-O3",
+              "label": "grape",
+              "answerKey": "grape",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y3M06-Q018-O4",
+              "label": "papaya",
+              "answerKey": "papaya",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y3M06-Q019",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "consolidation: Express preferences about source-listed foods and school objects. Focus: I like/I don't like/I prefer/...but I prefer....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "I",
+            "do",
+            "not",
+            "like",
+            "carrots."
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y3M06-Q020",
+          "mechanic": "matching",
+          "learningTarget": "consolidation: Express preferences about source-listed foods and school objects. Focus: identify/describe.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y3M06-Q020-L1": "Y3M06-Q020-R1",
+            "Y3M06-Q020-L2": "Y3M06-Q020-R2",
+            "Y3M06-Q020-L3": "Y3M06-Q020-R3",
+            "Y3M06-Q020-L4": "Y3M06-Q020-R4",
+            "Y3M06-Q020-L5": "Y3M06-Q020-R5",
+            "Y3M06-Q020-L6": "Y3M06-Q020-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-178C9BC5F16D0575",
+            "IMG-V11-2B-3E8B870AE9E69B6A",
+            "IMG-V11-2B-A849656CB01FB3B4",
+            "IMG-V11-2B-AE003BC56C00E15C",
+            "IMG-V11-2B-EA53A84B5A8D9356",
+            "IMG-V11-2B-F48C3CE0D4681BE7"
+          ],
+          "options": []
+        }
+      ]
+    }
+  ],
+  "errors": []
+}
