@@ -51,6 +51,7 @@ jobs:
           set -Eeuo pipefail
           bash qa/build-v26-topic-first-paint-qa.sh
           node --check scripts/duduq-import-chatgpt-bundle.mjs
+          node --test qa/tests/duduq-exact-semantic-match.test.mjs
           node scripts/duduq-import-chatgpt-bundle.mjs "$DUDUQ_CHATGPT_IMAGE_BUNDLE" > qa/results/chatgpt-native-batch10-preflight.json
           node scripts/duduq-import-chatgpt-bundle.mjs "$DUDUQ_CHATGPT_IMAGE_BUNDLE" --apply > qa/results/chatgpt-native-batch10-import.json
           node qa/tests/verify-chatgpt-native-batch-overlay.mjs
