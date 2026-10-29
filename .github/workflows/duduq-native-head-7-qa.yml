@@ -1,0 +1,82 @@
+name: DUDUQ - Native ChatGPT Head 7 Safe Bindings QA
+
+on:
+  push:
+    branches:
+      - automation/duduq-media-source-only-fix-20261029
+    paths:
+      - "qa/media-inbox/chatgpt-head-20261029/*.zip"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: duduq-native-head-20261029
+  cancel-in-progress: false
+
+jobs:
+  stage_head:
+    name: Validate native 3D HEAD PNG and integrate 7 QA candidates
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      CI: "true"
+      DUDUQ_QA_STATIC_PREVIEW: "1"
+      DUDUQ_CHATGPT_IMAGE_BUNDLE: /tmp/duduq-native-head
+    steps:
+      - name: Checkout isolated review branch
+        uses: actions/checkout@v4
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Pillow validator without paid generation plugins
+        run: python -m pip install --disable-pip-version-check --no-input 'Pillow>=10,<12'
+      - name: Verify source ZIP SHA, native PNG, seven safe bindings and no cross-module overwrite
+        run: |
+          set -Eeuo pipefail
+          python qa/verify-native-head-zip.py qa/media-inbox/chatgpt-head-20261029/DUDUQ_ChatGPT_Lote_Head_7_20261029.zip "$DUDUQ_CHATGPT_IMAGE_BUNDLE"
+      - name: Build V26, import head candidates and validate entire compiled release
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          bash qa/build-v26-topic-first-paint-qa.sh
+          node --check scripts/duduq-import-chatgpt-bundle.mjs
+          node scripts/duduq-import-chatgpt-bundle.mjs "$DUDUQ_CHATGPT_IMAGE_BUNDLE" > qa/results/native-head-preflight.json
+          node scripts/duduq-import-chatgpt-bundle.mjs "$DUDUQ_CHATGPT_IMAGE_BUNDLE" --apply > qa/results/native-head-import.json
+          node qa/tests/verify-native-head-overlay.mjs
+          node qa/audit-media-completion.mjs
+      - name: Save QA results and rendered review inputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-chatgpt-head-7-qa-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/native-head-preflight.json
+            qa/results/native-head-import.json
+            qa/results/media-closure-inventory.json
+            dist-pages/.duduq-pages-manifest
+      - name: Stage native original only on isolated review branch after pass
+        if: success()
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p qa/media-candidates/chatgpt-head-20261029/images
+          cp "$DUDUQ_CHATGPT_IMAGE_BUNDLE"/images/*.png qa/media-candidates/chatgpt-head-20261029/images/
+          cp "$DUDUQ_CHATGPT_IMAGE_BUNDLE"/batch-manifest.json qa/media-candidates/chatgpt-head-20261029/batch-manifest.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add qa/media-candidates/chatgpt-head-20261029
+          if ! git diff --cached --quiet; then
+            git commit -m "media(chatgpt): stage one native head PNG with seven safe IDs"
+            git push origin HEAD:automation/duduq-media-source-only-fix-20261029
+          fi
+      - name: Never publish candidate to production
+        if: always()
+        run: echo "No merge, no Cloudflare deployment, no pedagogical certification."
