@@ -36,11 +36,14 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install open-source background removal on free runner
+        id: install
         run: |
           python -m pip install --disable-pip-version-check --no-input "Pillow>=10,<12" "rembg[cpu]>=2.0.60,<3"
       - name: Download one existing free-quota 3D asset and create transparent PNG
+        id: generate
         run: python qa/cloudflare-3d-canary.py
       - name: Build pinned V26 and test exact image binding
+        id: verify
         shell: bash
         run: |
           set -Eeuo pipefail
@@ -62,6 +65,51 @@ jobs:
             qa/results/cloudflare-3d-canary-preflight.json
             qa/results/cloudflare-3d-canary-import.json
             qa/results/media-closure-inventory.json
+      # Failure evidence is metadata only. It does not bypass hash or semantic gates,
+      # does not stage PNGs, and does not trigger this workflow again (paths filter).
+      - name: Record failed canary gate on isolated branch
+        if: failure()
+        shell: bash
+        env:
+          INSTALL_OUTCOME: ${{ steps.install.outcome }}
+          GENERATE_OUTCOME: ${{ steps.generate.outcome }}
+          VERIFY_OUTCOME: ${{ steps.verify.outcome }}
+          CANARY_RUN_ID: ${{ github.run_id }}
+          CANARY_RUN_ATTEMPT: ${{ github.run_attempt }}
+          CANARY_SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -Eeuo pipefail
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib
+          p=pathlib.Path('qa/media-inbox/cloudflare-eraser-20261029/images/CF-Y1M04-ERASER-V2.png')
+          expected='aa9e4f93e83c0769d97f781be2ceee8bb9cf11950e668130cb5e5aba3bb5a5c2'
+          actual=hashlib.sha256(p.read_bytes()).hexdigest() if p.is_file() else None
+          report={
+              'schemaVersion':'DUDUQ_CLOUDFLARE_CANARY_FAILURE_V1',
+              'runId':os.environ.get('CANARY_RUN_ID'),
+              'runAttempt':os.environ.get('CANARY_RUN_ATTEMPT'),
+              'sourceCommit':os.environ.get('CANARY_SOURCE_SHA'),
+              'installOutcome':os.environ.get('INSTALL_OUTCOME'),
+              'generateOutcome':os.environ.get('GENERATE_OUTCOME'),
+              'verifyOutcome':os.environ.get('VERIFY_OUTCOME'),
+              'candidatePngPresent':actual is not None,
+              'candidateSha256':actual,
+              'matchesPinnedReviewedSha256':actual==expected if actual else False,
+              'pedagogicalQa':'PENDING',
+              'productionPublished':False
+          }
+          out=pathlib.Path('qa/results/cloudflare-3d-canary-last-failure.json')
+          out.parent.mkdir(parents=True,exist_ok=True)
+          out.write_text(json.dumps(report,indent=2)+'\\n',encoding='utf-8')
+          print(json.dumps(report))
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add qa/results/cloudflare-3d-canary-last-failure.json
+          if ! git diff --cached --quiet; then
+            git commit -m "qa(canary): record failure gate without staging image"
+            git push origin HEAD:automation/duduq-media-source-only-fix-20261029
+          fi
       - name: Commit QA-passed candidate PNG only to review branch
         if: success()
         shell: bash
