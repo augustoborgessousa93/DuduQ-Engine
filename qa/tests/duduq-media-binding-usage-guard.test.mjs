@@ -33,3 +33,24 @@ test('deduplicate assetId and mediaId on same media object',()=>{
  collectQuestionMediaUsages(q('Y1M04-Q010',id,'pen'),u);
  assert.equal(guard(u,id,'Y1M04-Q010','pen').usages,1);
 });
+
+test('accept real Y1M04 drag-drop mediaBindings without option list',()=>{
+ const id='IMG-Q001-ERASER',u=new Map();
+ collectQuestionMediaUsages({item_id:'Y1M04-Q001',mechanicId:'drag-drop',
+   mediaBindings:[{assetId:id,mediaId:id,semanticTarget:'eraser'}]},u);
+ assert.equal(guard(u,id,'Y1M04-Q001','eraser').distinctQuestions,1);
+});
+test('accept exact meaning in nested targets and bubble distractor pools',()=>{
+ const u=new Map();
+ const pencil='IMG-Y1M04-Q003-PENCIL',pen='IMG-Y1M04-Q005-PEN';
+ collectQuestionMediaUsages({item_id:'Y1M04-Q003',targets:[{media:{assetId:pencil,semanticTarget:'pencil'}}]},u);
+ collectQuestionMediaUsages({item_id:'Y1M04-Q005',bubbleDistractorPool:[{media:{assetId:pen,semanticTarget:'pen'}}]},u);
+ assert.equal(guard(u,pencil,'Y1M04-Q003','pencil').usages,1);
+ assert.equal(guard(u,pen,'Y1M04-Q005','pen').usages,1);
+});
+test('reject same generic media ID used outside Y1M04 even when words match',()=>{
+ const id='IMG-Q001-ERASER',u=new Map();
+ collectQuestionMediaUsages(q('Y1M04-Q001',id,'eraser'),u);
+ collectQuestionMediaUsages(q('Y2M04-Q001',id,'eraser'),u);
+ assert.throws(()=>guard(u,id,'Y1M04-Q001','eraser'),/CROSS_MODULE_MEDIA_ID/);
+});
