@@ -13,4 +13,6 @@ node scripts/duduq-import-chatgpt-bundle.mjs "$DUDUQ_CHATGPT_IMAGE_BUNDLE" > qa/
 node scripts/duduq-import-chatgpt-bundle.mjs "$DUDUQ_CHATGPT_IMAGE_BUNDLE" --apply > qa/results/v27-chatgpt-media-import.json
 node --check qa/tests/verify-v27-chatgpt-media-overlay.mjs
 node qa/tests/verify-v27-chatgpt-media-overlay.mjs
+node --check qa/audit-media-completion.mjs
+node qa/audit-media-completion.mjs
 echo "DUDUQ_V27_CHATGPT_MEDIA_RELEASE_CANDIDATE=PASS"
