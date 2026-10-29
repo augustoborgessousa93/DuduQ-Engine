@@ -43,7 +43,7 @@ function scan(node,qid){
  if(!Array.isArray(node)){
    for(const k of ['assetId','mediaId','image_ref','imageRef']){
      const v=node[k];
-     if(typeof v==='string' && v.startsWith('IMG-')){
+     if(typeof v==='string' && (byId.has(v)||v.startsWith('IMG-')||/-EMOJI-/.test(v))){
        if(!referenced.has(v))referenced.set(v,new Set());
        referenced.get(v).add(qid);
      }
@@ -89,6 +89,23 @@ for(const [id,e] of byId){
    candidatePaths.get(p).push(id);
  }
 }
+// The existing canonical audit remains authoritative, including legacy/emoji IDs.
+// A disagreement blocks deletion rather than falsely reporting zero references.
+const officialAuditPath=path.resolve(arg('official-audit','qa/results/media-closure-inventory.json'));
+let officialAudit=null;
+try{officialAudit=JSON.parse(await fs.readFile(officialAuditPath,'utf8'));}
+catch(e){if(e.code!=='ENOENT')throw e;}
+if(officialAudit){
+ if(officialAudit.modules!==30||officialAudit.activities!==600||
+    officialAudit.referencedMediaIds!==referenced.size)
+   fail('REFERENCE_DISAGREEMENT_WITH_CANONICAL_AUDIT');
+ if(!Number.isInteger(officialAudit.incompleteReferencedIds)||
+    !Number.isInteger(officialAudit.provisionalOrBlockedReferencedIds)||
+    !Number.isInteger(officialAudit.nonTemporaryUnverifiedReferencedIds))
+   fail('INVALID_CANONICAL_AUDIT_COUNTS');
+ provisional=officialAudit.provisionalOrBlockedReferencedIds;
+ unverified=officialAudit.nonTemporaryUnverifiedReferencedIds;
+}
 const candidates=[];
 for(const [p,ids] of candidatePaths){
  const full=await sourcePath(p);
@@ -101,7 +118,7 @@ for(const [p,ids] of candidatePaths){
 candidates.sort((a,b)=>a.path.localeCompare(b.path));
 const report={
  schemaVersion:'DUDUQ_SAFE_MEDIA_RETIREMENT_V1',root,modules,activities,
- referencedMediaIds:referenced.size,referenceFingerprint:fingerprint,
+ referencedMediaIds:referenced.size,referenceFingerprint:fingerprint,canonicalAuditPresent:Boolean(officialAudit),
  provisionalReferencedIds:provisional,nonTemporaryUnverifiedReferencedIds:unverified,
  closureBlockers:provisional+unverified,orphanCandidateFiles:candidates.length,
  candidates,rejected,applied:false,
