@@ -12,6 +12,8 @@ on:
       - "qa/media-binding-usage-guard.mjs"
       - "qa/expand-native-chatgpt-schoolbag.mjs"
       - "qa/tests/verify-chatgpt-native-batch-overlay.mjs"
+      - "qa/tests/verify-native-head-overlay.mjs"
+      - "qa/verify-native-head-zip.py"
       - "qa/tests/duduq-media-binding-usage-guard.test.mjs"
       - "scripts/duduq-import-chatgpt-bundle.mjs"
       - "qa/tests/duduq-exact-semantic-match.test.mjs"
@@ -47,6 +49,8 @@ jobs:
           node --check scripts/duduq-import-chatgpt-bundle.mjs
           node --check qa/expand-native-chatgpt-schoolbag.mjs
           node --check qa/tests/verify-chatgpt-native-batch-overlay.mjs
+          node --check qa/tests/verify-native-head-overlay.mjs
+          python3 -m py_compile qa/verify-native-head-zip.py
       - name: Build V26 immutable thirty-module artifact
         run: bash qa/build-v26-topic-first-paint-qa.sh
       - name: Inventory every referenced media ID without modifying artifact
