@@ -1,5 +1,5 @@
 {
-  "audit": "DUDUQ_MEDIA_REFERENCES_20261029",
+  "audit": "DUDUQ_MEDIA_REFERENCES_20261029_V2_INCLUDES_ASSETID",
   "sourceRepo": "augustoborgessousa93/duduq-fit-qa-private",
   "sourcePath": "dist-pages/content/english/year-{year}/module-{mm}/questions.json",
   "year": 2,
@@ -23,7 +23,12 @@
             "Y2M01-Q001-A4": "Y2M01-Q001-B4"
           },
           "imageRef": null,
-          "mediaIds": [],
+          "mediaIds": [
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y1M01-GREETING-INFORMAL-001",
+            "IMG-Y1M01-GREETING-MORNING-001",
+            "Y1M01-EMOJI-NIGHT-001"
+          ],
           "options": []
         },
         {
@@ -41,7 +46,12 @@
             "Y2M01-Q002-A4": "Y2M01-Q002-T4"
           },
           "imageRef": null,
-          "mediaIds": [],
+          "mediaIds": [
+            "MEDIA-LETTER-A",
+            "MEDIA-LETTER-B",
+            "MEDIA-LETTER-C",
+            "MEDIA-LETTER-D"
+          ],
           "options": []
         },
         {
@@ -54,7 +64,14 @@
           "semanticReview": null,
           "correctAnswer": "goodbye",
           "imageRef": null,
-          "mediaIds": [],
+          "mediaIds": [
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y1M01-GREETING-AFTERNOON-001",
+            "IMG-Y1M01-GREETING-INFORMAL-001",
+            "IMG-Y1M01-GREETING-MORNING-001",
+            "IMG-Y1M01-NAME-LEO-001",
+            "Y1M01-EMOJI-NIGHT-001"
+          ],
           "options": []
         },
         {
@@ -110,7 +127,12 @@
             "Y2M01-Q006-A4": "Y2M01-Q006-T4"
           },
           "imageRef": null,
-          "mediaIds": [],
+          "mediaIds": [
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y1M01-GREETING-AFTERNOON-001",
+            "IMG-Y1M01-GREETING-INFORMAL-001",
+            "IMG-Y1M01-GREETING-MORNING-001"
+          ],
           "options": []
         },
         {
@@ -128,7 +150,12 @@
             "Y2M01-Q007-A4": "Y2M01-Q007-B4"
           },
           "imageRef": null,
-          "mediaIds": [],
+          "mediaIds": [
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y1M01-GREETING-MORNING-001",
+            "IMG-Y2M01-SEE-YOU-001",
+            "Y1M01-EMOJI-NIGHT-001"
+          ],
           "options": []
         },
         {
@@ -148,6 +175,10 @@
               "label": "H",
               "answerKey": "H",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -155,6 +186,10 @@
               "label": "E",
               "answerKey": "E",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -162,6 +197,10 @@
               "label": "K",
               "answerKey": "K",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -169,6 +208,10 @@
               "label": "L",
               "answerKey": "L",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -183,34 +226,55 @@
           "semanticReview": null,
           "correctAnswer": "IMG-Y1M01-NAME-MIA-001",
           "imageRef": null,
-          "mediaIds": [],
+          "mediaIds": [
+            "IMG-Y1M01-NAME-LEO-001",
+            "IMG-Y1M01-NAME-MIA-001",
+            "IMG-Y1M01-NAME-QUESTION-ANSWER-001",
+            "IMG-Y1M01-NAME-TAGS-001"
+          ],
           "options": [
             {
               "optionId": "Y2M01-Q009-O1",
               "label": "Leo",
               "answerKey": "IMG-Y1M01-NAME-LEO-001",
-              "mediaId": null,
+              "mediaId": "IMG-Y1M01-NAME-LEO-001",
+              "semanticTarget": "Leo",
+              "mustInclude": "Leo",
+              "mustNotInclude": "unrelated labels or a written answer cue beyond the intended target",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
               "semanticReview": null
             },
             {
               "optionId": "Y2M01-Q009-O2",
               "label": "Mia",
               "answerKey": "IMG-Y1M01-NAME-MIA-001",
-              "mediaId": null,
+              "mediaId": "IMG-Y1M01-NAME-MIA-001",
+              "semanticTarget": "Mia",
+              "mustInclude": "Mia",
+              "mustNotInclude": "unrelated labels or a written answer cue beyond the intended target",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
               "semanticReview": null
             },
             {
               "optionId": "Y2M01-Q009-O3",
               "label": "Ana",
               "answerKey": "IMG-Y1M01-NAME-TAGS-001",
-              "mediaId": null,
+              "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+              "semanticTarget": "Ana",
+              "mustInclude": "Ana",
+              "mustNotInclude": "unrelated labels or a written answer cue beyond the intended target",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
               "semanticReview": null
             },
             {
               "optionId": "Y2M01-Q009-O4",
               "label": "Ben",
               "answerKey": "IMG-Y1M01-NAME-QUESTION-ANSWER-001",
-              "mediaId": null,
+              "mediaId": "IMG-Y1M01-NAME-QUESTION-ANSWER-001",
+              "semanticTarget": "Ben",
+              "mustInclude": "Ben",
+              "mustNotInclude": "unrelated labels or a written answer cue beyond the intended target",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
               "semanticReview": null
             }
           ]
@@ -268,7 +332,12 @@
             "Y2M01-Q012-A4": "Y2M01-Q012-T4"
           },
           "imageRef": null,
-          "mediaIds": [],
+          "mediaIds": [
+            "IMG-Y1M01-FAREWELL-ANA-001",
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y2M01-SEE-YOU-001",
+            "Y1M01-EMOJI-NIGHT-001"
+          ],
           "options": []
         },
         {
@@ -281,34 +350,55 @@
           "semanticReview": null,
           "correctAnswer": "Y1M01-EMOJI-NIGHT-001",
           "imageRef": null,
-          "mediaIds": [],
+          "mediaIds": [
+            "IMG-Y1M01-GREETING-AFTERNOON-001",
+            "IMG-Y1M01-GREETING-INFORMAL-001",
+            "IMG-Y1M01-GREETING-MORNING-001",
+            "Y1M01-EMOJI-NIGHT-001"
+          ],
           "options": [
             {
               "optionId": "Y2M01-Q013-O1",
               "label": "Good morning",
               "answerKey": "IMG-Y1M01-GREETING-MORNING-001",
-              "mediaId": null,
+              "mediaId": "IMG-Y1M01-GREETING-MORNING-001",
+              "semanticTarget": "Good morning",
+              "mustInclude": "Good morning",
+              "mustNotInclude": "unrelated labels or a written answer cue beyond the intended target",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
               "semanticReview": null
             },
             {
               "optionId": "Y2M01-Q013-O2",
               "label": "Good afternoon",
               "answerKey": "IMG-Y1M01-GREETING-AFTERNOON-001",
-              "mediaId": null,
+              "mediaId": "IMG-Y1M01-GREETING-AFTERNOON-001",
+              "semanticTarget": "Good afternoon",
+              "mustInclude": "Good afternoon",
+              "mustNotInclude": "unrelated labels or a written answer cue beyond the intended target",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
               "semanticReview": null
             },
             {
               "optionId": "Y2M01-Q013-O3",
               "label": "Good night",
               "answerKey": "Y1M01-EMOJI-NIGHT-001",
-              "mediaId": null,
+              "mediaId": "Y1M01-EMOJI-NIGHT-001",
+              "semanticTarget": "Good night",
+              "mustInclude": "Good night",
+              "mustNotInclude": "unrelated labels or a written answer cue beyond the intended target",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
               "semanticReview": null
             },
             {
               "optionId": "Y2M01-Q013-O4",
               "label": "Hello",
               "answerKey": "IMG-Y1M01-GREETING-INFORMAL-001",
-              "mediaId": null,
+              "mediaId": "IMG-Y1M01-GREETING-INFORMAL-001",
+              "semanticTarget": "Hello",
+              "mustInclude": "Hello",
+              "mustNotInclude": "unrelated labels or a written answer cue beyond the intended target",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
               "semanticReview": null
             }
           ]
@@ -370,7 +460,12 @@
             "Y2M01-Q016-A4": "Y2M01-Q016-T4"
           },
           "imageRef": null,
-          "mediaIds": [],
+          "mediaIds": [
+            "MEDIA-LETTER-S",
+            "MEDIA-LETTER-T",
+            "MEDIA-LETTER-U",
+            "MEDIA-LETTER-V"
+          ],
           "options": []
         },
         {
@@ -387,7 +482,11 @@
             "Y2M01-Q017-A3": "Y2M01-Q017-B3"
           },
           "imageRef": null,
-          "mediaIds": [],
+          "mediaIds": [
+            "IMG-Y1M01-NAME-LEO-001",
+            "IMG-Y1M01-NAME-MIA-001",
+            "IMG-Y1M01-NAME-TAGS-001"
+          ],
           "options": []
         },
         {
@@ -400,34 +499,55 @@
           "semanticReview": null,
           "correctAnswer": "IMG-Y2M01-Q018-NAME-QUESTION-SCENE-V1",
           "imageRef": null,
-          "mediaIds": [],
+          "mediaIds": [
+            "IMG-Y1M01-GREETING-GENERIC-001",
+            "IMG-Y2M01-Q018-NAME-QUESTION-SCENE-V1",
+            "IMG-Y2M01-SEE-YOU-001",
+            "Y1M01-EMOJI-NIGHT-001"
+          ],
           "options": [
             {
               "optionId": "Y2M01-Q018-O1",
               "label": "",
               "answerKey": "IMG-Y2M01-Q018-NAME-QUESTION-SCENE-V1",
-              "mediaId": null,
+              "mediaId": "IMG-Y2M01-Q018-NAME-QUESTION-SCENE-V1",
+              "semanticTarget": "one child asks another child's name",
+              "mustInclude": "two children in a clear name-question exchange",
+              "mustNotInclude": "written English answer or speech text",
+              "answerLeakRisk": "LOW_CONTEXTUAL",
               "semanticReview": null
             },
             {
               "optionId": "Y2M01-Q018-O2",
               "label": "",
               "answerKey": "IMG-Y1M01-GREETING-GENERIC-001",
-              "mediaId": null,
+              "mediaId": "IMG-Y1M01-GREETING-GENERIC-001",
+              "semanticTarget": "children greeting",
+              "mustInclude": "clear greeting context",
+              "mustNotInclude": "written phrase label",
+              "answerLeakRisk": "LOW_CONTEXTUAL",
               "semanticReview": null
             },
             {
               "optionId": "Y2M01-Q018-O3",
               "label": "",
               "answerKey": "IMG-Y2M01-SEE-YOU-001",
-              "mediaId": null,
+              "mediaId": "IMG-Y2M01-SEE-YOU-001",
+              "semanticTarget": "two people saying see you",
+              "mustInclude": "clear farewell context",
+              "mustNotInclude": "written phrase label",
+              "answerLeakRisk": "LOW_CONTEXTUAL",
               "semanticReview": null
             },
             {
               "optionId": "Y2M01-Q018-O4",
               "label": "",
               "answerKey": "Y1M01-EMOJI-NIGHT-001",
-              "mediaId": null,
+              "mediaId": "Y1M01-EMOJI-NIGHT-001",
+              "semanticTarget": "bedtime / good night",
+              "mustInclude": "clear bedtime context",
+              "mustNotInclude": "written phrase label",
+              "answerLeakRisk": "LOW_CONTEXTUAL",
               "semanticReview": null
             }
           ]
@@ -465,7 +585,12 @@
             "Y2M01-Q020-A4": "Y2M01-Q020-T4"
           },
           "imageRef": null,
-          "mediaIds": [],
+          "mediaIds": [
+            "MEDIA-LETTER-W",
+            "MEDIA-LETTER-X",
+            "MEDIA-LETTER-Y",
+            "MEDIA-LETTER-Z"
+          ],
           "options": []
         }
       ]
@@ -522,6 +647,10 @@
               "answerKey": "Y2M02-Q002-O1",
               "correct": true,
               "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticTarget": "two",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -530,6 +659,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticTarget": "one",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -538,6 +671,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticTarget": "three",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -546,6 +683,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-FOUR",
+              "semanticTarget": "four",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -593,6 +734,10 @@
               "answerKey": "Y2M02-Q004-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-ADC02C547ED88AAB",
+              "semanticTarget": "star",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -601,6 +746,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-DD4F6C5D17D9EA26",
+              "semanticTarget": "triangle",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -609,6 +758,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-77460DE9537EEBF0",
+              "semanticTarget": "square",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -617,6 +770,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0B8FB65CFC9F4ED3",
+              "semanticTarget": "rectangle",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -694,6 +851,10 @@
               "answerKey": "Y2M02-Q007-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-0B8FB65CFC9F4ED3",
+              "semanticTarget": "rectangle",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -702,6 +863,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-77460DE9537EEBF0",
+              "semanticTarget": "square",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -710,6 +875,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-ADC02C547ED88AAB",
+              "semanticTarget": "star",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -718,6 +887,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-426CFD6D989F0314",
+              "semanticTarget": "circle",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -741,6 +914,10 @@
               "label": "eight",
               "answerKey": "eight",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -748,6 +925,10 @@
               "label": "one",
               "answerKey": "one",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -755,6 +936,10 @@
               "label": "two",
               "answerKey": "two",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -762,6 +947,10 @@
               "label": "three",
               "answerKey": "three",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -857,6 +1046,10 @@
               "answerKey": "Y2M02-Q012-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-437D1333813BD325",
+              "semanticTarget": "twelve",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -865,6 +1058,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticTarget": "one",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -873,6 +1070,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticTarget": "two",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -881,6 +1082,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticTarget": "three",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -935,6 +1140,10 @@
               "answerKey": "Y2M02-Q014-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-CCFA1DE126FE66A7",
+              "semanticTarget": "fourteen",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -943,6 +1152,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticTarget": "one",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -951,6 +1164,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticTarget": "two",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -959,6 +1176,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticTarget": "three",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1034,6 +1255,10 @@
               "answerKey": "Y2M02-Q017-O1",
               "correct": true,
               "mediaId": "IMG-Y1M03-Q001-ORANGE",
+              "semanticTarget": "orange",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1042,6 +1267,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M03-Q001-RED",
+              "semanticTarget": "red",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1050,6 +1279,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M03-Q001-BLUE",
+              "semanticTarget": "blue",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1058,6 +1291,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M03-Q001-YELLOW",
+              "semanticTarget": "yellow",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1081,6 +1318,10 @@
               "label": "rectangle",
               "answerKey": "rectangle",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1088,6 +1329,10 @@
               "label": "triangle",
               "answerKey": "triangle",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1095,6 +1340,10 @@
               "label": "square",
               "answerKey": "square",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1102,6 +1351,10 @@
               "label": "star",
               "answerKey": "star",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1131,6 +1384,10 @@
               "answerKey": "Y2M02-Q019-O1",
               "correct": true,
               "mediaId": "IMG-Y1M03-Q001-BLUE",
+              "semanticTarget": "blue",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1139,6 +1396,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-ADC02C547ED88AAB",
+              "semanticTarget": "star",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1147,6 +1408,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-426CFD6D989F0314",
+              "semanticTarget": "circle",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1155,6 +1420,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M03-Q001-RED",
+              "semanticTarget": "red",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1184,6 +1453,10 @@
               "answerKey": "Y2M02-Q020-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-8440AA1CAD4E4933",
+              "semanticTarget": "twenty",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1192,6 +1465,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticTarget": "one",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1200,6 +1477,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticTarget": "two",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1208,6 +1489,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticTarget": "three",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1243,6 +1528,10 @@
               "answerKey": "Y2M03-Q001-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+              "semanticTarget": "mother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1251,6 +1540,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+              "semanticTarget": "father",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1259,6 +1552,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+              "semanticTarget": "brother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1267,6 +1564,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+              "semanticTarget": "sister",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1314,6 +1615,10 @@
               "answerKey": "Y2M03-Q003-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+              "semanticTarget": "brother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1322,6 +1627,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+              "semanticTarget": "mother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1330,6 +1639,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+              "semanticTarget": "father",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1338,6 +1651,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+              "semanticTarget": "sister",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1421,6 +1738,10 @@
               "answerKey": "Y2M03-Q006-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+              "semanticTarget": "father",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1429,6 +1750,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+              "semanticTarget": "brother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1437,6 +1762,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+              "semanticTarget": "sister",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1445,6 +1774,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0B3D9B91B561EC5C",
+              "semanticTarget": "grandmother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1472,6 +1805,10 @@
               "answerKey": "Y2M03-Q007-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+              "semanticTarget": "mother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1480,6 +1817,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+              "semanticTarget": "father",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1488,6 +1829,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+              "semanticTarget": "brother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1496,6 +1841,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+              "semanticTarget": "sister",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1519,6 +1868,10 @@
               "label": "father",
               "answerKey": "father",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1526,6 +1879,10 @@
               "label": "mother",
               "answerKey": "mother",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1533,6 +1890,10 @@
               "label": "brother",
               "answerKey": "brother",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1540,6 +1901,10 @@
               "label": "sister",
               "answerKey": "sister",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1617,6 +1982,10 @@
               "answerKey": "Y2M03-Q011-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+              "semanticTarget": "brother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1625,6 +1994,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+              "semanticTarget": "sister",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1633,6 +2006,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0B3D9B91B561EC5C",
+              "semanticTarget": "grandmother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1641,6 +2018,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-A96CAA1AD009D03D",
+              "semanticTarget": "grandfather",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1697,6 +2078,10 @@
               "answerKey": "Y2M03-Q013-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+              "semanticTarget": "mother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1705,6 +2090,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+              "semanticTarget": "father",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1713,6 +2102,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+              "semanticTarget": "brother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1721,6 +2114,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+              "semanticTarget": "sister",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1793,6 +2190,10 @@
               "answerKey": "Y2M03-Q016-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+              "semanticTarget": "sister",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1801,6 +2202,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0B3D9B91B561EC5C",
+              "semanticTarget": "grandmother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1809,6 +2214,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-A96CAA1AD009D03D",
+              "semanticTarget": "grandfather",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1817,6 +2226,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+              "semanticTarget": "mother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1867,6 +2280,10 @@
               "label": "grandfather",
               "answerKey": "grandfather",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1874,6 +2291,10 @@
               "label": "mother",
               "answerKey": "mother",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1881,6 +2302,10 @@
               "label": "father",
               "answerKey": "father",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1888,6 +2313,10 @@
               "label": "brother",
               "answerKey": "brother",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1981,6 +2410,10 @@
               "answerKey": "Y2M04-Q002-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-5C51F3A0B4CC0B7E",
+              "semanticTarget": "boat",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1989,6 +2422,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-2539101217793F3C",
+              "semanticTarget": "video game",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1997,6 +2434,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-E4060D2C0568ECD9",
+              "semanticTarget": "in",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2005,6 +2446,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-EE4B263993C464A8",
+              "semanticTarget": "on",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2109,6 +2554,10 @@
               "answerKey": "Y2M04-Q006-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-F065FA603CE03071",
+              "semanticTarget": "kite",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2117,6 +2566,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-B553D1606006D229",
+              "semanticTarget": "doll",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2125,6 +2578,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "Y1M01-EMOJI-BALL-001",
+              "semanticTarget": "ball",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2133,6 +2590,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-C2F0FC7FDF270EB3",
+              "semanticTarget": "train",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2176,6 +2637,10 @@
               "label": "on",
               "answerKey": "on",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2183,6 +2648,10 @@
               "label": "boat",
               "answerKey": "boat",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2190,6 +2659,10 @@
               "label": "in",
               "answerKey": "in",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2197,6 +2670,10 @@
               "label": "red",
               "answerKey": "red",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2247,6 +2724,10 @@
               "answerKey": "Y2M04-Q010-O1",
               "correct": true,
               "mediaId": "Y1M01-EMOJI-BALL-001",
+              "semanticTarget": "ball",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2255,6 +2736,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-B553D1606006D229",
+              "semanticTarget": "doll",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2263,6 +2748,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-C2F0FC7FDF270EB3",
+              "semanticTarget": "train",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2271,6 +2760,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-73EF781B82AA7F5D",
+              "semanticTarget": "plane",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2325,6 +2818,10 @@
               "answerKey": "Y2M04-Q012-O1",
               "correct": true,
               "mediaId": "IMG-Y1M03-Q001-BLUE",
+              "semanticTarget": "blue",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2333,6 +2830,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-B553D1606006D229",
+              "semanticTarget": "doll",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2341,6 +2842,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "Y1M01-EMOJI-BALL-001",
+              "semanticTarget": "ball",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2349,6 +2854,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-C2F0FC7FDF270EB3",
+              "semanticTarget": "train",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2424,6 +2933,10 @@
               "answerKey": "Y2M04-Q015-O1",
               "correct": true,
               "mediaId": "IMG-Y1M03-Q001-BLACK",
+              "semanticTarget": "black",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2432,6 +2945,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-B553D1606006D229",
+              "semanticTarget": "doll",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2440,6 +2957,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "Y1M01-EMOJI-BALL-001",
+              "semanticTarget": "ball",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2448,6 +2969,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-C2F0FC7FDF270EB3",
+              "semanticTarget": "train",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2521,6 +3046,10 @@
               "label": "ball",
               "answerKey": "ball",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2528,6 +3057,10 @@
               "label": "doll",
               "answerKey": "doll",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2535,6 +3068,10 @@
               "label": "train",
               "answerKey": "train",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2542,6 +3079,10 @@
               "label": "plane",
               "answerKey": "plane",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2589,6 +3130,10 @@
               "answerKey": "Y2M04-Q020-O1",
               "correct": true,
               "mediaId": "IMG-Y1M03-Q001-GREEN",
+              "semanticTarget": "green",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2597,6 +3142,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-EE4B263993C464A8",
+              "semanticTarget": "on",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2605,6 +3154,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M03-Q001-RED",
+              "semanticTarget": "red",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2613,6 +3166,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M03-Q001-BLUE",
+              "semanticTarget": "blue",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2646,6 +3203,10 @@
               "answerKey": "Y2M05-Q001-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-9ABA778B910E4266",
+              "semanticTarget": "duck",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2654,6 +3215,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-2751D3C7EFA0F2C0",
+              "semanticTarget": "horse",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2662,6 +3227,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-AE76B0B957CF18D7",
+              "semanticTarget": "cow",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2670,6 +3239,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6041412CE84A73C4",
+              "semanticTarget": "pig",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2768,6 +3341,10 @@
               "answerKey": "Y2M05-Q005-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-4094DCACA84565F7",
+              "semanticTarget": "sheep",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2776,6 +3353,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-9ABA778B910E4266",
+              "semanticTarget": "duck",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2784,6 +3365,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-2751D3C7EFA0F2C0",
+              "semanticTarget": "horse",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2792,6 +3377,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-AE76B0B957CF18D7",
+              "semanticTarget": "cow",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2869,6 +3458,10 @@
               "label": "two",
               "answerKey": "two",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2876,6 +3469,10 @@
               "label": "one",
               "answerKey": "one",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2883,6 +3480,10 @@
               "label": "three",
               "answerKey": "three",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2910,6 +3511,10 @@
               "answerKey": "Y2M05-Q009-O1",
               "correct": true,
               "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticTarget": "three",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2918,6 +3523,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticTarget": "one",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2926,6 +3535,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticTarget": "two",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2934,6 +3547,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-FOUR",
+              "semanticTarget": "four",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2984,6 +3601,10 @@
               "answerKey": "Y2M05-Q011-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-AE76B0B957CF18D7",
+              "semanticTarget": "cow",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2992,6 +3613,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6041412CE84A73C4",
+              "semanticTarget": "pig",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3000,6 +3625,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-4094DCACA84565F7",
+              "semanticTarget": "sheep",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3008,6 +3637,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-62CA7F8826BA3BC3",
+              "semanticTarget": "chicken",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3081,6 +3714,10 @@
               "answerKey": "Y2M05-Q014-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-E97CBF8EA098A30F",
+              "semanticTarget": "two ducks",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3089,6 +3726,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6AE2E468D56512D8",
+              "semanticTarget": "one duck",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3097,6 +3738,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-A03A06C935EC3C93",
+              "semanticTarget": "one horse",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3105,6 +3750,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-5FC97E87261A0214",
+              "semanticTarget": "three horses",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3184,6 +3833,10 @@
               "answerKey": "Y2M05-Q017-O1",
               "correct": true,
               "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticTarget": "two",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3192,6 +3845,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-9ABA778B910E4266",
+              "semanticTarget": "duck",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3200,6 +3857,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-2751D3C7EFA0F2C0",
+              "semanticTarget": "horse",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3208,6 +3869,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-AE76B0B957CF18D7",
+              "semanticTarget": "cow",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3231,6 +3896,10 @@
               "label": "three",
               "answerKey": "three",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3238,6 +3907,10 @@
               "label": "one",
               "answerKey": "one",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3245,6 +3918,10 @@
               "label": "two",
               "answerKey": "two",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3378,6 +4055,10 @@
               "answerKey": "Y2M06-Q003-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-689B471440B0B576",
+              "semanticTarget": "nose",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3386,6 +4067,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-857902711A3A0499",
+              "semanticTarget": "eye",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3394,6 +4079,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-30690D3C168DA49E",
+              "semanticTarget": "ear",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3402,6 +4091,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-372152A8B0B3430F",
+              "semanticTarget": "mouth",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3429,6 +4122,10 @@
               "answerKey": "Y2M06-Q004-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-372152A8B0B3430F",
+              "semanticTarget": "mouth",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3437,6 +4134,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-857902711A3A0499",
+              "semanticTarget": "eye",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3445,6 +4146,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-30690D3C168DA49E",
+              "semanticTarget": "ear",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3453,6 +4158,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-689B471440B0B576",
+              "semanticTarget": "nose",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3549,6 +4258,10 @@
               "label": "papaya",
               "answerKey": "papaya",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3556,6 +4269,10 @@
               "label": "orange",
               "answerKey": "orange",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3563,6 +4280,10 @@
               "label": "grape",
               "answerKey": "grape",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3570,6 +4291,10 @@
               "label": "melon",
               "answerKey": "melon",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3626,6 +4351,10 @@
               "answerKey": "Y2M06-Q010-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-249393BE62012CB7",
+              "semanticTarget": "grape",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3634,6 +4363,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-3C181EF0580BB69B",
+              "semanticTarget": "apple",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3642,6 +4375,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-42E0B7F7C0CBAA69",
+              "semanticTarget": "banana",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3650,6 +4387,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6C28CE93AFE4F8BB",
+              "semanticTarget": "pear",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3727,6 +4468,10 @@
               "answerKey": "Y2M06-Q013-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-A210FFD1BF96DDB4",
+              "semanticTarget": "finger",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3735,6 +4480,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-689B471440B0B576",
+              "semanticTarget": "nose",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3743,6 +4492,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-372152A8B0B3430F",
+              "semanticTarget": "mouth",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3751,6 +4504,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-7C7AC57571396DE1",
+              "semanticTarget": "knee",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3830,6 +4587,10 @@
               "answerKey": "Y2M06-Q016-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-42E0B7F7C0CBAA69",
+              "semanticTarget": "banana",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3838,6 +4599,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6C28CE93AFE4F8BB",
+              "semanticTarget": "pear",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3846,6 +4611,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M03-Q001-ORANGE",
+              "semanticTarget": "orange",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3854,6 +4623,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-249393BE62012CB7",
+              "semanticTarget": "grape",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3904,6 +4677,10 @@
               "label": "big",
               "answerKey": "big",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3911,6 +4688,10 @@
               "label": "small",
               "answerKey": "small",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3918,6 +4699,10 @@
               "label": "red",
               "answerKey": "red",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3925,6 +4710,10 @@
               "label": "green",
               "answerKey": "green",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
