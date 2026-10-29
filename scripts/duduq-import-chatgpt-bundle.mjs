@@ -63,6 +63,13 @@ async function questionFor(qid){
 }
 for(const asset of manifest.assets||[]){
   if(asset.review!=='MODEL_SEMANTIC_PRECHECK_PASSED')throw Error('SEMANTIC_PRECHECK_NOT_PASSED:'+asset.assetKey);
+  if(!asset.reviewEvidence)throw Error('MISSING_SEMANTIC_EVIDENCE:'+asset.assetKey);
+  const evidencePath=path.resolve(root,asset.reviewEvidence);
+  if(!safe(root,evidencePath))throw Error('UNSAFE_SEMANTIC_EVIDENCE_PATH:'+asset.assetKey);
+  const evidence=JSON.parse(await fs.readFile(evidencePath,'utf8'));
+  const visual=evidence.candidateAssets?.find(x=>x.assetKey===asset.assetKey);
+  if(visual?.semanticPrecheck!=='PASSED'||visual.sha256!==asset.sha256||visual.concept!==asset.semanticTarget)
+    throw Error('SEMANTIC_EVIDENCE_NOT_PASSED_OR_STALE:'+asset.assetKey);
   const png=path.resolve(bundle,asset.file||'');
   if(!safe(bundle,png))throw Error('Bundle path escape');
   const bytes=await fs.readFile(png);
