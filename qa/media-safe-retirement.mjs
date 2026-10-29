@@ -18,7 +18,7 @@ const apply=process.argv.includes('--apply');
 const sha=(b)=>createHash('sha256').update(b).digest('hex');
 const fail=(message)=>{throw Error('DUDUQ_RETIREMENT_BLOCKED:'+message);};
 const isSafePath=(p)=>typeof p==='string' &&
-  /^content\/english\/assets\/images\/(?:year-[1-5]\/)?(?:temporary|provisional[^/]*|placeholder[^/]*|draft[^/]*)\/[a-zA-Z0-9_./-]+\.(?:png|webp|jpe?g|svg)$/i.test(p) &&
+  /^content\/english\/assets\/images\/(?:year-[1-5]\/(?:module-0[1-6]\/)?)?(?:temporary|provisional[^/]*|placeholder[^/]*|draft[^/]*)\/[a-zA-Z0-9_./-]+\.(?:png|webp|jpe?g|svg)$/i.test(p) &&
   !p.split('/').some(x=>x==='..'||x==='.');
 async function sourcePath(p) {
   if(!isSafePath(p))fail('PATH_NOT_ALLOWED:'+p);
@@ -81,7 +81,7 @@ for(const id of referenced.keys()){
  else if(e.humanResolutionStatus!=='PEDAGOGICAL_QA_APPROVED')unverified++;
 }
 for(const [id,e] of byId){
- if(referenced.has(id)||e.temporary!==true)continue;
+ if(referenced.has(id))continue;
  for(const p of pathsById.get(id)||[]){
    if(!isSafePath(p)){rejected.push({mediaId:id,path:p,reason:'NOT_AN_ALLOWED_PROVISIONAL_FILE'});continue;}
    if(referencedPaths.has(p)){rejected.push({mediaId:id,path:p,reason:'STILL_REFERENCED_VIA_OTHER_MEDIA_ID'});continue;}
@@ -125,8 +125,14 @@ if(approval.schemaVersion!=='DUDUQ_RETIREMENT_APPROVAL_V1'||
    !/^[0-9a-f]{64}$/i.test(approval.rollbackSha256||'')||
    typeof approval.reviewer!=='string'||approval.reviewer.trim().length<3)
   fail('MISSING_OR_STALE_APPROVAL_AND_ROLLBACK_PROOF');
-const verifiedEvidence=await fs.readFile(path.resolve(approvalPath)).catch(()=>null);
-if(!verifiedEvidence)fail('APPROVAL_UNREADABLE');
+if(typeof approval.evidencePath!=='string'||!/^qa\/(?:results|evidence)\/[a-zA-Z0-9_.\/-]+\.json$/.test(approval.evidencePath)||
+   approval.evidencePath.includes('..'))fail('INVALID_QA_EVIDENCE_PATH');
+const evidence=await fs.readFile(path.resolve(approval.evidencePath));
+if(sha(evidence)!==approval.evidenceSha256)fail('QA_EVIDENCE_HASH_MISMATCH');
+if(typeof approval.rollbackPath!=='string'||!/^qa\/(?:results|backups)\/[a-zA-Z0-9_.\/-]+$/.test(approval.rollbackPath)||
+   approval.rollbackPath.includes('..'))fail('INVALID_ROLLBACK_PATH');
+const rollback=await fs.readFile(path.resolve(approval.rollbackPath));
+if(sha(rollback)!==approval.rollbackSha256)fail('ROLLBACK_HASH_MISMATCH');
 const removed=[];
 for(const c of candidates){
  const full=await sourcePath(c.path);
@@ -134,7 +140,17 @@ for(const c of candidates){
  if(!info.isFile()||info.isSymbolicLink()||sha(await fs.readFile(full))!==c.sha256)
    fail('FILE_CHANGED_SINCE_PLAN:'+c.path);
 }
-// Every file was hash-checked; remove only orphaned paths from this QA workspace.
+// Preserve an exact-byte backup inside the QA workspace before any removal.
+const backupDir=path.resolve(arg('backup-dir','qa/results/duduq-media-retirement-backup'));
+if(backupDir.startsWith(root+path.sep))fail('BACKUP_MUST_BE_OUTSIDE_ASSET_ROOT');
+for(const c of candidates){
+ const dest=path.resolve(backupDir,c.path);
+ if(!dest.startsWith(backupDir+path.sep))fail('BACKUP_PATH_ESCAPE');
+ await fs.mkdir(path.dirname(dest),{recursive:true});
+ await fs.copyFile(await sourcePath(c.path),dest);
+ if(sha(await fs.readFile(dest))!==c.sha256)fail('BACKUP_HASH_MISMATCH:'+c.path);
+}
+// Every original has a verified backup and was hash-checked immediately above.
 for(const c of candidates){await fs.unlink(await sourcePath(c.path));removed.push(c.path);}
 report.applied=true;
 report.status='QA_WORKSPACE_ORPHANS_RETIRED_WITH_EXPLICIT_RELEASE_APPROVAL';
