@@ -547,7 +547,8 @@ async function generateRequests({ requestPath = DEFAULT_REQUESTS, requestId = nu
         if (!response.ok) throw new Error(`RUNTIME_HTTP_${response.status}`);
         const served = Buffer.from(await response.arrayBuffer());
         if (sha256(served) !== imported.sha256) throw new Error("RUNTIME_ASSET_HASH_MISMATCH");
-      } else {
+      } else if (request.testOnly) {
+        // Smoke cleanup must NEVER run for --source-only production candidates.
         try { await verifySmokeAssetHttp(destination, imported.sha256, imported.path); }
         finally {
           if (await exists(destination) && sha256(await readFile(destination)) === imported.sha256) await rm(destination);
