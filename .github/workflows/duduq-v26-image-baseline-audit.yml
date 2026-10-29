@@ -9,6 +9,9 @@ on:
       - "qa/audit-media-completion.mjs"
       - "qa/plan-native-chatgpt-schoolbag-reuse.mjs"
       - "qa/audit-cross-context-media.mjs"
+      - "qa/media-binding-usage-guard.mjs"
+      - "qa/tests/duduq-media-binding-usage-guard.test.mjs"
+      - "scripts/duduq-import-chatgpt-bundle.mjs"
       - "qa/tests/duduq-exact-semantic-match.test.mjs"
 
 permissions:
@@ -38,7 +41,8 @@ jobs:
       - name: Verify exact semantic matcher
         run: |
           node --check scripts/duduq-exact-semantic-match.mjs
-          node --test qa/tests/duduq-exact-semantic-match.test.mjs
+          node --test qa/tests/duduq-exact-semantic-match.test.mjs qa/tests/duduq-media-binding-usage-guard.test.mjs
+          node --check scripts/duduq-import-chatgpt-bundle.mjs
       - name: Build V26 immutable thirty-module artifact
         run: bash qa/build-v26-topic-first-paint-qa.sh
       - name: Inventory every referenced media ID without modifying artifact
