@@ -1,0 +1,4034 @@
+{
+  "audit": "DUDUQ_MEDIA_REFERENCES_20261029",
+  "sourceRepo": "augustoborgessousa93/duduq-fit-qa-private",
+  "sourcePath": "dist-pages/content/english/year-{year}/module-{mm}/questions.json",
+  "year": 5,
+  "modules": [
+    {
+      "moduleId": "Y5M01",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y5M01-Q001",
+          "mechanic": "matching",
+          "learningTarget": "teaching: Introduce identity/origin using respectful fictional profiles. Focus: Brazil.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M01-Q001-L1": "Y5M01-Q001-R1",
+            "Y5M01-Q001-L2": "Y5M01-Q001-R2",
+            "Y5M01-Q001-L3": "Y5M01-Q001-R3",
+            "Y5M01-Q001-L4": "Y5M01-Q001-R4",
+            "Y5M01-Q001-L5": "Y5M01-Q001-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2C6FD84DC441D420",
+            "IMG-V11-2B-4738C9F7B580050B",
+            "IMG-V11-2B-B6CBF09B5F588995",
+            "IMG-V11-2B-CD0AD80DD2D8B6EB",
+            "IMG-V11-2B-ED7341A44317C7D1"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M01-Q002",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Introduce identity/origin using respectful fictional profiles. Focus: first name.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M01-Q002-I1": "Y5M01-Q002-T1",
+            "Y5M01-Q002-I2": "Y5M01-Q002-T2",
+            "Y5M01-Q002-I3": "Y5M01-Q002-T3",
+            "Y5M01-Q002-I4": "Y5M01-Q002-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-08FFAC2848B99BD1",
+            "IMG-V11-2B-88B411B7F5E4CDF1",
+            "IMG-V11-2B-B32C1B415C365658",
+            "IMG-V11-2B-D0E7A61F4C82CFF8"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M01-Q003",
+          "mechanic": "memory-quest",
+          "learningTarget": "Pairs source-named identity/map labels with contextual, non-stereotyped scenes; never use flag-label matching. Curricular target: Brazil; Brazilian; city; country; nationality.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y5M01-Q003-P1",
+            "Y5M01-Q003-P2",
+            "Y5M01-Q003-P3",
+            "Y5M01-Q003-P4",
+            "Y5M01-Q003-P5"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-10E7BDAD2881A5BF",
+            "IMG-V11-2B-411E323F67A2059F",
+            "IMG-V11-2B-94BC73650A1F4A58",
+            "IMG-V11-2B-B659C004CC1CEFAF",
+            "IMG-V11-2B-C33DAC5C40628F69"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M01-Q004",
+          "mechanic": "drag-drop",
+          "learningTarget": "guided practice: Introduce identity/origin using respectful fictional profiles. Focus: fictional profile.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M01-Q004-I1": "origin",
+            "Y5M01-Q004-I2": "origin",
+            "Y5M01-Q004-I3": "origin",
+            "Y5M01-Q004-I4": "origin",
+            "Y5M01-Q004-I5": "name-fields",
+            "Y5M01-Q004-I6": "name-fields",
+            "Y5M01-Q004-I7": "name-fields"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M01-Q005",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Introduce identity/origin using respectful fictional profiles. Focus: Where are you from? / I am from....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M01-Q005-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0ECC8CCCCE018799",
+            "IMG-V11-2B-A3B190D0719166CA",
+            "IMG-V11-2B-A8BFD29BD6311564",
+            "IMG-V11-2B-DAD093B44D74B06E"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M01-Q005-O1",
+              "label": "first name",
+              "answerKey": "Y5M01-Q005-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-DAD093B44D74B06E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q005-O2",
+              "label": "Brazil",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-A3B190D0719166CA",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q005-O3",
+              "label": "Brazilian",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-A8BFD29BD6311564",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q005-O4",
+              "label": "city",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0ECC8CCCCE018799",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M01-Q006",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "guided practice: Introduce identity/origin using respectful fictional profiles. Focus: introduce.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M01-Q006-I1": "Y5M01-Q006-T1",
+            "Y5M01-Q006-I2": "Y5M01-Q006-T2",
+            "Y5M01-Q006-I3": "Y5M01-Q006-T3",
+            "Y5M01-Q006-I4": "Y5M01-Q006-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-08FFAC2848B99BD1",
+            "IMG-V11-2B-88B411B7F5E4CDF1",
+            "IMG-V11-2B-B32C1B415C365658",
+            "IMG-V11-2B-D0E7A61F4C82CFF8"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M01-Q007",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Introduce identity/origin using respectful fictional profiles. Focus: Brazilian.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M01-Q007-L1": "Y5M01-Q007-R1",
+            "Y5M01-Q007-L2": "Y5M01-Q007-R2",
+            "Y5M01-Q007-L3": "Y5M01-Q007-R3",
+            "Y5M01-Q007-L4": "Y5M01-Q007-R4",
+            "Y5M01-Q007-L5": "Y5M01-Q007-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2232139E8440B9FE",
+            "IMG-V11-2B-2C6FD84DC441D420",
+            "IMG-V11-2B-4738C9F7B580050B",
+            "IMG-V11-2B-CD0AD80DD2D8B6EB",
+            "IMG-V11-2B-ED7341A44317C7D1"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M01-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Introduce identity/origin using respectful fictional profiles. Focus: middle name.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Mia",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-BAE00C9EC541C6AF"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M01-Q008-O1",
+              "label": "Mia",
+              "answerKey": "Mia",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q008-O2",
+              "label": "middle name",
+              "answerKey": "middle name",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q008-O3",
+              "label": "last name",
+              "answerKey": "last name",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q008-O4",
+              "label": "Leo",
+              "answerKey": "Leo",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M01-Q009",
+          "mechanic": "target-shooter",
+          "learningTarget": "recognition: Introduce identity/origin using respectful fictional profiles. Focus: profile.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M01-Q009-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0ECC8CCCCE018799",
+            "IMG-V11-2B-20C1CD3B145B4CF6",
+            "IMG-V11-2B-A3B190D0719166CA",
+            "IMG-V11-2B-A8BFD29BD6311564"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M01-Q009-O1",
+              "label": "Leo",
+              "answerKey": "Y5M01-Q009-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-20C1CD3B145B4CF6",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q009-O2",
+              "label": "Brazil",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-A3B190D0719166CA",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q009-O3",
+              "label": "Brazilian",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-A8BFD29BD6311564",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q009-O4",
+              "label": "city",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0ECC8CCCCE018799",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M01-Q010",
+          "mechanic": "drag-drop",
+          "learningTarget": "comprehension: Introduce identity/origin using respectful fictional profiles. Focus: fictional profile.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M01-Q010-I1": "origin",
+            "Y5M01-Q010-I2": "origin",
+            "Y5M01-Q010-I3": "origin",
+            "Y5M01-Q010-I4": "origin",
+            "Y5M01-Q010-I5": "name-fields",
+            "Y5M01-Q010-I6": "name-fields",
+            "Y5M01-Q010-I7": "name-fields"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M01-Q011",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Introduce identity/origin using respectful fictional profiles. Focus: I am Brazilian (modeled).",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M01-Q011-L1": "Y5M01-Q011-R1"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-B6CBF09B5F588995",
+            "IMG-V11-2B-BAE00C9EC541C6AF",
+            "IMG-V11-2B-CD0AD80DD2D8B6EB"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M01-Q012",
+          "mechanic": "memory-quest",
+          "learningTarget": "Retrieves profile fields across years through sound-form mapping; fictional profiles only and no real personal data. Curricular target: name; age; birthday; favorite.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y5M01-Q012-P1",
+            "Y5M01-Q012-P2",
+            "Y5M01-Q012-P3",
+            "Y5M01-Q012-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M01-Q013",
+          "mechanic": "target-shooter",
+          "learningTarget": "listening: Introduce identity/origin using respectful fictional profiles. Focus: city.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M01-Q013-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-01309F9279450B63",
+            "IMG-V11-2B-0ECC8CCCCE018799",
+            "IMG-V11-2B-C83F275FF632F1E9",
+            "IMG-V11-2B-DAD093B44D74B06E"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M01-Q013-O1",
+              "label": "first name",
+              "answerKey": "Y5M01-Q013-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-DAD093B44D74B06E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q013-O2",
+              "label": "city",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0ECC8CCCCE018799",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q013-O3",
+              "label": "country",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-01309F9279450B63",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q013-O4",
+              "label": "middle name",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-C83F275FF632F1E9",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M01-Q014",
+          "mechanic": "matching",
+          "learningTarget": "listening: Introduce identity/origin using respectful fictional profiles. Focus: last name.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M01-Q014-L1": "Y5M01-Q014-R1",
+            "Y5M01-Q014-L2": "Y5M01-Q014-R2",
+            "Y5M01-Q014-L3": "Y5M01-Q014-R3",
+            "Y5M01-Q014-L4": "Y5M01-Q014-R4",
+            "Y5M01-Q014-L5": "Y5M01-Q014-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-3478E99026D7D72F",
+            "IMG-V11-2B-62EE1349CFF35190",
+            "IMG-V11-2B-E5F916A8A2B58462",
+            "IMG-V11-2B-F112CA5251DC70C5",
+            "Y1M01-EMOJI-BEN-001"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M01-Q015",
+          "mechanic": "bubble-pop",
+          "learningTarget": "retrieval: Introduce identity/origin using respectful fictional profiles. Focus: favorites/likes.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M01-Q015-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-48CA6C8720A28B20",
+            "IMG-V11-2B-5D2F313F53720CE9",
+            "IMG-V11-2B-8402FF71A9476919",
+            "IMG-V11-2B-97050C4338A5B73F",
+            "IMG-V11-2B-B6CBF09B5F588995",
+            "IMG-V11-2B-CD0AD80DD2D8B6EB"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M01-Q015-O1",
+              "label": "I do not like carrots",
+              "answerKey": "Y5M01-Q015-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q015-O2",
+              "label": "I like apples",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q015-O3",
+              "label": "I prefer grapes",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q015-O4",
+              "label": "I like papaya",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M01-Q016",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "retrieval: Introduce identity/origin using respectful fictional profiles. Focus: fictional profile.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M01-Q016-I1": "Y5M01-Q016-T1",
+            "Y5M01-Q016-I2": "Y5M01-Q016-T2",
+            "Y5M01-Q016-I3": "Y5M01-Q016-T3",
+            "Y5M01-Q016-I4": "Y5M01-Q016-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-08FFAC2848B99BD1",
+            "IMG-V11-2B-88B411B7F5E4CDF1",
+            "IMG-V11-2B-B32C1B415C365658",
+            "IMG-V11-2B-D139E67A0CFB2FA8"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M01-Q017",
+          "mechanic": "matching",
+          "learningTarget": "review: Introduce identity/origin using respectful fictional profiles. Focus: third-person origin pattern.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M01-Q017-L1": "Y5M01-Q017-R1",
+            "Y5M01-Q017-L2": "Y5M01-Q017-R2",
+            "Y5M01-Q017-L3": "Y5M01-Q017-R3",
+            "Y5M01-Q017-L4": "Y5M01-Q017-R4",
+            "Y5M01-Q017-L5": "Y5M01-Q017-R5",
+            "Y5M01-Q017-L6": "Y5M01-Q017-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2232139E8440B9FE",
+            "IMG-V11-2B-3478E99026D7D72F",
+            "IMG-V11-2B-62EE1349CFF35190",
+            "IMG-V11-2B-E5F916A8A2B58462",
+            "IMG-V11-2B-F112CA5251DC70C5",
+            "Y1M01-EMOJI-BEN-001"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M01-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Introduce identity/origin using respectful fictional profiles. Focus: express identity.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Brazil",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-B6CBF09B5F588995"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M01-Q018-O1",
+              "label": "Brazil",
+              "answerKey": "Brazil",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q018-O2",
+              "label": "Brazilian",
+              "answerKey": "Brazilian",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q018-O3",
+              "label": "city",
+              "answerKey": "city",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M01-Q018-O4",
+              "label": "country",
+              "answerKey": "country",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M01-Q019",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "consolidation: Introduce identity/origin using respectful fictional profiles. Focus: country.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "My",
+            "last",
+            "name",
+            "is",
+            "Silva"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M01-Q020",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "consolidation: Introduce identity/origin using respectful fictional profiles. Focus: first name.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M01-Q020-I1": "Y5M01-Q020-T1",
+            "Y5M01-Q020-I2": "Y5M01-Q020-T2",
+            "Y5M01-Q020-I3": "Y5M01-Q020-T3",
+            "Y5M01-Q020-I4": "Y5M01-Q020-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-88B411B7F5E4CDF1",
+            "IMG-V11-2B-B32C1B415C365658",
+            "IMG-V11-2B-D0E7A61F4C82CFF8",
+            "IMG-V11-2B-D139E67A0CFB2FA8"
+          ],
+          "options": []
+        }
+      ]
+    },
+    {
+      "moduleId": "Y5M02",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y5M02-Q001",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Ask/answer food preference and sequence familiar daily routine chunks. Focus: wake up.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M02-Q001-I1": "Y5M02-Q001-T1",
+            "Y5M02-Q001-I2": "Y5M02-Q001-T2",
+            "Y5M02-Q001-I3": "Y5M02-Q001-T3",
+            "Y5M02-Q001-I4": "Y5M02-Q001-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-8B578CDE179BA4CC",
+            "IMG-V11-2B-B5BDC338FEACC324",
+            "IMG-V11-2B-D2113D49F597BC45",
+            "IMG-V11-2B-E584E52E9C22DA0B"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M02-Q002",
+          "mechanic": "bubble-pop",
+          "learningTarget": "teaching: Ask/answer food preference and sequence familiar daily routine chunks. Focus: food/preferences/school.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M02-Q002-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-48CA6C8720A28B20",
+            "IMG-V11-2B-5D2F313F53720CE9",
+            "IMG-V11-2B-8402FF71A9476919",
+            "IMG-V11-2B-97050C4338A5B73F",
+            "IMG-V11-2B-D2113D49F597BC45",
+            "IMG-V11-2B-E584E52E9C22DA0B"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M02-Q002-O1",
+              "label": "I prefer grapes",
+              "answerKey": "Y5M02-Q002-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q002-O2",
+              "label": "I like apples",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q002-O3",
+              "label": "I do not like carrots",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q002-O4",
+              "label": "I like papaya",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M02-Q003",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "guided practice: Put familiar daily routine chunks in the taught sequence. Focus: short routine sequence.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "I",
+            "go",
+            "to",
+            "school",
+            "every",
+            "day"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M02-Q004",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Ask/answer food preference and sequence familiar daily routine chunks. Focus: Do you like...? Yes, I do/No, I don't.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M02-Q004-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-48CA6C8720A28B20",
+            "IMG-V11-2B-5D2F313F53720CE9",
+            "IMG-V11-2B-8402FF71A9476919",
+            "IMG-V11-2B-97050C4338A5B73F"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M02-Q004-O1",
+              "label": "I like papaya",
+              "answerKey": "Y5M02-Q004-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q004-O2",
+              "label": "I like apples",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q004-O3",
+              "label": "I prefer grapes",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q004-O4",
+              "label": "I do not like carrots",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M02-Q005",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "guided practice: Ask/answer food preference and sequence familiar daily routine chunks. Focus: ask/answer preference.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M02-Q005-I1": "Y5M02-Q005-T1",
+            "Y5M02-Q005-I2": "Y5M02-Q005-T2",
+            "Y5M02-Q005-I3": "Y5M02-Q005-T3",
+            "Y5M02-Q005-I4": "Y5M02-Q005-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-3272A25234DFCFBA",
+            "IMG-V11-2B-719454C9113F5766",
+            "IMG-V11-2B-95FE0C0B6DED7EFB",
+            "IMG-V11-2B-D44395DF6FD6A093"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M02-Q006",
+          "mechanic": "memory-quest",
+          "learningTarget": "Maps spoken routine chunks to distinct timeline scenes before supported sequencing; routines remain source-listed only. Curricular target: wake up; have breakfast; go to school; lunch; study; play.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y5M02-Q006-P1",
+            "Y5M02-Q006-P2",
+            "Y5M02-Q006-P3",
+            "Y5M02-Q006-P4",
+            "Y5M02-Q006-P5",
+            "Y5M02-Q006-P6"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0CBA0AD452E49FF6",
+            "IMG-V11-2B-4C72623280637530",
+            "IMG-V11-2B-75270D9EA7E43C4E",
+            "IMG-V11-2B-852DB505AEF3DC59",
+            "IMG-V11-2B-932A0BC803750373",
+            "IMG-V11-2B-C2454C2AD1F2D109"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M02-Q007",
+          "mechanic": "bubble-pop",
+          "learningTarget": "recognition: Ask/answer food preference and sequence familiar daily routine chunks. Focus: food/preferences/school.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M02-Q007-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-48CA6C8720A28B20",
+            "IMG-V11-2B-5D2F313F53720CE9",
+            "IMG-V11-2B-8402FF71A9476919",
+            "IMG-V11-2B-97050C4338A5B73F",
+            "IMG-V11-2B-D2113D49F597BC45",
+            "IMG-V11-2B-E584E52E9C22DA0B"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M02-Q007-O1",
+              "label": "I do not like carrots",
+              "answerKey": "Y5M02-Q007-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q007-O2",
+              "label": "I like apples",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q007-O3",
+              "label": "I prefer grapes",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q007-O4",
+              "label": "I like papaya",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M02-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Ask/answer food preference and sequence familiar daily routine chunks. Focus: short routine sequence.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "sleep",
+          "imageRef": null,
+          "mediaIds": [
+            "Y1M01-EMOJI-SLEEP-001"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M02-Q008-O1",
+              "label": "sleep",
+              "answerKey": "sleep",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q008-O2",
+              "label": "wake up",
+              "answerKey": "wake up",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q008-O3",
+              "label": "have breakfast",
+              "answerKey": "have breakfast",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q008-O4",
+              "label": "go to school",
+              "answerKey": "go to school",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M02-Q009",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Match a familiar daily routine phrase to its clear context scene. Focus: wake up.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M02-Q009-L1": "Y5M02-Q009-R1",
+            "Y5M02-Q009-L2": "Y5M02-Q009-R2",
+            "Y5M02-Q009-L3": "Y5M02-Q009-R3",
+            "Y5M02-Q009-L4": "Y5M02-Q009-R4",
+            "Y5M02-Q009-L5": "Y5M02-Q009-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2BC6A03882091B75",
+            "IMG-V11-2B-80FDEAAE72185ED4",
+            "IMG-V11-2B-C43267231EC018B1",
+            "IMG-V11-2B-D7020F65FF988198",
+            "IMG-V11-2B-D8EBF7F3353B8013"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M02-Q010",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Ask/answer food preference and sequence familiar daily routine chunks. Focus: sequence routine.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M02-Q010-L1": "Y5M02-Q010-R1",
+            "Y5M02-Q010-L2": "Y5M02-Q010-R2",
+            "Y5M02-Q010-L3": "Y5M02-Q010-R3",
+            "Y5M02-Q010-L4": "Y5M02-Q010-R4",
+            "Y5M02-Q010-L5": "Y5M02-Q010-R5",
+            "Y5M02-Q010-L6": "Y5M02-Q010-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2BC6A03882091B75",
+            "IMG-V11-2B-584976ED9046080F",
+            "IMG-V11-2B-80FDEAAE72185ED4",
+            "IMG-V11-2B-C43267231EC018B1",
+            "IMG-V11-2B-D7020F65FF988198",
+            "IMG-V11-2B-E8A06D9E3C794FB6"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M02-Q011",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Ask/answer food preference and sequence familiar daily routine chunks. Focus: go to school.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M02-Q011-I1": "Y5M02-Q011-T1",
+            "Y5M02-Q011-I2": "Y5M02-Q011-T2",
+            "Y5M02-Q011-I3": "Y5M02-Q011-T3",
+            "Y5M02-Q011-I4": "Y5M02-Q011-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2E75F50FEBEA939F",
+            "IMG-V11-2B-8B578CDE179BA4CC",
+            "IMG-V11-2B-B5BDC338FEACC324",
+            "IMG-V11-2B-E0363C502981F8F9"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M02-Q012",
+          "mechanic": "target-shooter",
+          "learningTarget": "comprehension: Ask/answer food preference and sequence familiar daily routine chunks. Focus: food/preferences/school.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M02-Q012-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-48CA6C8720A28B20",
+            "IMG-V11-2B-5D2F313F53720CE9",
+            "IMG-V11-2B-8402FF71A9476919",
+            "IMG-V11-2B-97050C4338A5B73F"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M02-Q012-O1",
+              "label": "I like papaya",
+              "answerKey": "Y5M02-Q012-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q012-O2",
+              "label": "I like apples",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q012-O3",
+              "label": "I prefer grapes",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q012-O4",
+              "label": "I do not like carrots",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M02-Q013",
+          "mechanic": "matching",
+          "learningTarget": "listening: Ask/answer food preference and sequence familiar daily routine chunks. Focus: short routine sequence.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M02-Q013-L1": "Y5M02-Q013-R1",
+            "Y5M02-Q013-L2": "Y5M02-Q013-R2",
+            "Y5M02-Q013-L3": "Y5M02-Q013-R3",
+            "Y5M02-Q013-L4": "Y5M02-Q013-R4",
+            "Y5M02-Q013-L5": "Y5M02-Q013-R5",
+            "Y5M02-Q013-L6": "Y5M02-Q013-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2BC6A03882091B75",
+            "IMG-V11-2B-584976ED9046080F",
+            "IMG-V11-2B-D7020F65FF988198",
+            "IMG-V11-2B-D8EBF7F3353B8013",
+            "IMG-V11-2B-E8A06D9E3C794FB6",
+            "Y1M01-EMOJI-SLEEP-001"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M02-Q014",
+          "mechanic": "bubble-pop",
+          "learningTarget": "listening: Ask/answer food preference and sequence familiar daily routine chunks. Focus: I like/dislike/prefer.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M02-Q014-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-48CA6C8720A28B20",
+            "IMG-V11-2B-5D2F313F53720CE9",
+            "IMG-V11-2B-8402FF71A9476919",
+            "IMG-V11-2B-97050C4338A5B73F",
+            "IMG-V11-2B-D2113D49F597BC45",
+            "IMG-V11-2B-E584E52E9C22DA0B"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M02-Q014-O1",
+              "label": "I prefer grapes",
+              "answerKey": "Y5M02-Q014-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q014-O2",
+              "label": "I like apples",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q014-O3",
+              "label": "I do not like carrots",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q014-O4",
+              "label": "I like papaya",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M02-Q015",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "retrieval: Ask/answer food preference and sequence familiar daily routine chunks. Focus: ask/answer preference.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M02-Q015-I1": "Y5M02-Q015-T1",
+            "Y5M02-Q015-I2": "Y5M02-Q015-T2",
+            "Y5M02-Q015-I3": "Y5M02-Q015-T3",
+            "Y5M02-Q015-I4": "Y5M02-Q015-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-3272A25234DFCFBA",
+            "IMG-V11-2B-719454C9113F5766",
+            "IMG-V11-2B-95FE0C0B6DED7EFB",
+            "IMG-V11-2B-D44395DF6FD6A093"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M02-Q016",
+          "mechanic": "memory-quest",
+          "learningTarget": "Retrieves previously introduced food words through sound-form mapping in the daily-routine context; no new meal items are added. Curricular target: apple; banana; pear; orange; grape.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y5M02-Q016-P1",
+            "Y5M02-Q016-P2",
+            "Y5M02-Q016-P3",
+            "Y5M02-Q016-P4",
+            "Y5M02-Q016-P5"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M02-Q017",
+          "mechanic": "target-shooter",
+          "learningTarget": "review: Ask/answer food preference and sequence familiar daily routine chunks. Focus: food/preferences/school.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M02-Q017-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-48CA6C8720A28B20",
+            "IMG-V11-2B-5D2F313F53720CE9",
+            "IMG-V11-2B-8402FF71A9476919",
+            "IMG-V11-2B-97050C4338A5B73F"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M02-Q017-O1",
+              "label": "I like apples",
+              "answerKey": "Y5M02-Q017-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q017-O2",
+              "label": "I prefer grapes",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q017-O3",
+              "label": "I do not like carrots",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q017-O4",
+              "label": "I like papaya",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M02-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Complete a short routine sentence with one familiar routine chunk. Focus: daily routine sequence.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "sleep",
+          "imageRef": null,
+          "mediaIds": [
+            "Y1M01-EMOJI-SLEEP-001"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M02-Q018-O1",
+              "label": "sleep",
+              "answerKey": "sleep",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q018-O2",
+              "label": "wake up",
+              "answerKey": "wake up",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q018-O3",
+              "label": "have breakfast",
+              "answerKey": "have breakfast",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q018-O4",
+              "label": "go to school",
+              "answerKey": "go to school",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M02-Q019",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "consolidation: Ask/answer food preference and sequence familiar daily routine chunks. Focus: preference and routine chunk.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "I",
+            "dislike",
+            "carrots",
+            "in",
+            "the",
+            "morning."
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M02-Q020",
+          "mechanic": "bubble-pop",
+          "learningTarget": "consolidation: Ask/answer food preference and sequence familiar daily routine chunks. Focus: sequence routine.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M02-Q020-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-5D2F313F53720CE9",
+            "IMG-V11-2B-97050C4338A5B73F",
+            "IMG-V11-2B-A0AFA9669F1B5754",
+            "IMG-V11-2B-B43E1B61B1A52B95",
+            "IMG-V11-2B-BB358396CB4047B1",
+            "IMG-V11-2B-C2DDDB6706E1EAA5"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M02-Q020-O1",
+              "label": "lunch",
+              "answerKey": "Y5M02-Q020-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-A0AFA9669F1B5754",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q020-O2",
+              "label": "wake up",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-C2DDDB6706E1EAA5",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q020-O3",
+              "label": "have breakfast",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-BB358396CB4047B1",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M02-Q020-O4",
+              "label": "go to school",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-B43E1B61B1A52B95",
+              "semanticReview": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleId": "Y5M03",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y5M03-Q001",
+          "mechanic": "bubble-pop",
+          "learningTarget": "teaching: Describe fictional people/roles using family and pronoun review. Focus: doctor.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M03-Q001-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0085D5D1DA9CA742",
+            "IMG-V11-2B-0DC49CBE5B9DBF47",
+            "IMG-V11-2B-AC379EA36398F2B0",
+            "IMG-V11-2B-BD1D2AA4CD5BDE27",
+            "IMG-V11-2B-D10E5F395BAAD6A4",
+            "IMG-V11-2B-F8F1532BA0C59828"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M03-Q001-O1",
+              "label": "doctor",
+              "answerKey": "Y5M03-Q001-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-D10E5F395BAAD6A4",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q001-O2",
+              "label": "teacher",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q001-O3",
+              "label": "actor",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-AC379EA36398F2B0",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q001-O4",
+              "label": "actress",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M03-Q002",
+          "mechanic": "drag-drop",
+          "learningTarget": "teaching: Describe fictional people/roles using family and pronoun review. Focus: family.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M03-Q002-I1": "family",
+            "Y5M03-Q002-I2": "family",
+            "Y5M03-Q002-I3": "jobs",
+            "Y5M03-Q002-I4": "jobs",
+            "Y5M03-Q002-I5": "jobs",
+            "Y5M03-Q002-I6": "jobs"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M03-Q003",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Describe fictional people/roles using family and pronoun review. Focus: role/people description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M03-Q003-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0DC49CBE5B9DBF47",
+            "IMG-V11-2B-AC379EA36398F2B0",
+            "IMG-V11-2B-BD1D2AA4CD5BDE27",
+            "IMG-V11-2B-D10E5F395BAAD6A4"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M03-Q003-O1",
+              "label": "actor",
+              "answerKey": "Y5M03-Q003-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-AC379EA36398F2B0",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q003-O2",
+              "label": "doctor",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-D10E5F395BAAD6A4",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q003-O3",
+              "label": "teacher",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q003-O4",
+              "label": "actress",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M03-Q004",
+          "mechanic": "memory-quest",
+          "learningTarget": "Written role labels map to diverse fictional people without occupational stereotypes. Curricular target: doctor; teacher; actor/actress.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y5M03-Q004-P1",
+            "Y5M03-Q004-P2",
+            "Y5M03-Q004-P3"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0085D5D1DA9CA742",
+            "IMG-V11-2B-463CF4E0E91098D4",
+            "IMG-V11-2B-7756D74DDF81ECA8"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M03-Q005",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Describe fictional people/roles using family and pronoun review. Focus: identify/describe person and role.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M03-Q005-L1": "Y5M03-Q005-R1",
+            "Y5M03-Q005-L2": "Y5M03-Q005-R2",
+            "Y5M03-Q005-L3": "Y5M03-Q005-R3",
+            "Y5M03-Q005-L4": "Y5M03-Q005-R4",
+            "Y5M03-Q005-L5": "Y5M03-Q005-R5",
+            "Y5M03-Q005-L6": "Y5M03-Q005-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2680DF6BE58F4B7E",
+            "IMG-V11-2B-9FFFCCD19B67697A",
+            "IMG-V11-2B-D2B2759DE5619C8A",
+            "IMG-V11-2B-E1B1A5B8AABB306D",
+            "IMG-V11-2B-F8F1532BA0C59828",
+            "IMG-V11-2B-FF1C87306E179ABE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M03-Q006",
+          "mechanic": "bubble-pop",
+          "learningTarget": "guided practice: Describe fictional people/roles using family and pronoun review. Focus: teacher.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M03-Q006-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0085D5D1DA9CA742",
+            "IMG-V11-2B-0DC49CBE5B9DBF47",
+            "IMG-V11-2B-243B96C39D99CAF8",
+            "IMG-V11-2B-AC379EA36398F2B0",
+            "IMG-V11-2B-BD1D2AA4CD5BDE27",
+            "IMG-V11-2B-D10E5F395BAAD6A4"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M03-Q006-O1",
+              "label": "teacher",
+              "answerKey": "Y5M03-Q006-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q006-O2",
+              "label": "actor",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-AC379EA36398F2B0",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q006-O3",
+              "label": "actress",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q006-O4",
+              "label": "mother",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M03-Q007",
+          "mechanic": "target-shooter",
+          "learningTarget": "recognition: Describe fictional people/roles using family and pronoun review. Focus: he/she/they.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M03-Q007-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2ECDF43BCA9F3C65",
+            "IMG-V11-2B-3527CF12E6C57BF5",
+            "IMG-V11-2B-8C61F006F08947DB",
+            "MEDIA-LETTER-I"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M03-Q007-O1",
+              "label": "he",
+              "answerKey": "Y5M03-Q007-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q007-O2",
+              "label": "she",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q007-O3",
+              "label": "they",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-3527CF12E6C57BF5",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q007-O4",
+              "label": "I",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "MEDIA-LETTER-I",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M03-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Describe fictional people/roles using family and pronoun review. Focus: role/people description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "sister",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-6ACC979A1C714F7F"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M03-Q008-O1",
+              "label": "sister",
+              "answerKey": "sister",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q008-O2",
+              "label": "doctor",
+              "answerKey": "doctor",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q008-O3",
+              "label": "teacher",
+              "answerKey": "teacher",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q008-O4",
+              "label": "actor",
+              "answerKey": "actor",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M03-Q009",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Describe fictional people/roles using family and pronoun review. Focus: They are... plural guided after evidence.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M03-Q009-L1": "Y5M03-Q009-R1"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2ECDF43BCA9F3C65",
+            "IMG-V11-2B-8C61F006F08947DB",
+            "IMG-V11-2B-E52B973AF6FA8E6C"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M03-Q010",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Describe fictional people/roles using family and pronoun review. Focus: identify/describe person and role.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M03-Q010-I1": "Y5M03-Q010-T1",
+            "Y5M03-Q010-I2": "Y5M03-Q010-T2",
+            "Y5M03-Q010-I3": "Y5M03-Q010-T3",
+            "Y5M03-Q010-I4": "Y5M03-Q010-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2A98427C663DCF84",
+            "IMG-V11-2B-363CA1C39A2A0FE6",
+            "IMG-V11-2B-69701D3D6FDAD924",
+            "IMG-V11-2B-9C574AA05B2196A8"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M03-Q011",
+          "mechanic": "target-shooter",
+          "learningTarget": "comprehension: Describe fictional people/roles using family and pronoun review. Focus: actor/actress.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M03-Q011-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0DC49CBE5B9DBF47",
+            "IMG-V11-2B-AC379EA36398F2B0",
+            "IMG-V11-2B-BD1D2AA4CD5BDE27",
+            "IMG-V11-2B-D10E5F395BAAD6A4"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M03-Q011-O1",
+              "label": "actor",
+              "answerKey": "Y5M03-Q011-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-AC379EA36398F2B0",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q011-O2",
+              "label": "doctor",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-D10E5F395BAAD6A4",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q011-O3",
+              "label": "teacher",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q011-O4",
+              "label": "actress",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M03-Q012",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Describe fictional people/roles using family and pronoun review. Focus: plural awareness.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M03-Q012-L1": "Y5M03-Q012-R1",
+            "Y5M03-Q012-L2": "Y5M03-Q012-R2",
+            "Y5M03-Q012-L3": "Y5M03-Q012-R3",
+            "Y5M03-Q012-L4": "Y5M03-Q012-R4",
+            "Y5M03-Q012-L5": "Y5M03-Q012-R5",
+            "Y5M03-Q012-L6": "Y5M03-Q012-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1AB77240D5EE2039",
+            "IMG-V11-2B-39E1001E17179D8E",
+            "IMG-V11-2B-6B58C7B77B2AEFA2",
+            "IMG-V11-2B-81A6D1F2BE1357EE",
+            "IMG-V11-2B-D0B4EE6FF953B6F3",
+            "IMG-V11-2B-F7B314A95FA14D5A"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M03-Q013",
+          "mechanic": "bubble-pop",
+          "learningTarget": "listening: Describe fictional people/roles using family and pronoun review. Focus: role/people description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M03-Q013-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0085D5D1DA9CA742",
+            "IMG-V11-2B-0DC49CBE5B9DBF47",
+            "IMG-V11-2B-3527CF12E6C57BF5",
+            "IMG-V11-2B-AC379EA36398F2B0",
+            "IMG-V11-2B-BD1D2AA4CD5BDE27",
+            "IMG-V11-2B-D10E5F395BAAD6A4"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M03-Q013-O1",
+              "label": "they",
+              "answerKey": "Y5M03-Q013-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-3527CF12E6C57BF5",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q013-O2",
+              "label": "doctor",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-D10E5F395BAAD6A4",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q013-O3",
+              "label": "teacher",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q013-O4",
+              "label": "actor",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-AC379EA36398F2B0",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M03-Q014",
+          "mechanic": "memory-quest",
+          "learningTarget": "Retrieves family words from earlier modules through sound-form mapping in fictional descriptions; no family model is privileged. Curricular target: mother; father; brother; sister; grandfather; grandmother.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y5M03-Q014-P1",
+            "Y5M03-Q014-P2",
+            "Y5M03-Q014-P3",
+            "Y5M03-Q014-P4",
+            "Y5M03-Q014-P5",
+            "Y5M03-Q014-P6"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M03-Q015",
+          "mechanic": "matching",
+          "learningTarget": "retrieval: Describe fictional people/roles using family and pronoun review. Focus: identify/describe person and role.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M03-Q015-L1": "Y5M03-Q015-R1",
+            "Y5M03-Q015-L2": "Y5M03-Q015-R2",
+            "Y5M03-Q015-L3": "Y5M03-Q015-R3",
+            "Y5M03-Q015-L4": "Y5M03-Q015-R4",
+            "Y5M03-Q015-L5": "Y5M03-Q015-R5",
+            "Y5M03-Q015-L6": "Y5M03-Q015-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-64B832DE11714C76",
+            "IMG-V11-2B-9FC4F5E157BDFDC5",
+            "IMG-V11-2B-D2B2759DE5619C8A",
+            "IMG-V11-2B-D8573FA338C53D81",
+            "IMG-V11-2B-E1B1A5B8AABB306D",
+            "IMG-V11-2B-F8F1532BA0C59828"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M03-Q016",
+          "mechanic": "target-shooter",
+          "learningTarget": "retrieval: Describe fictional people/roles using family and pronoun review. Focus: doctor.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M03-Q016-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0DC49CBE5B9DBF47",
+            "IMG-V11-2B-AC379EA36398F2B0",
+            "IMG-V11-2B-BD1D2AA4CD5BDE27",
+            "IMG-V11-2B-D10E5F395BAAD6A4"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M03-Q016-O1",
+              "label": "doctor",
+              "answerKey": "Y5M03-Q016-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-D10E5F395BAAD6A4",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q016-O2",
+              "label": "teacher",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q016-O3",
+              "label": "actor",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-AC379EA36398F2B0",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q016-O4",
+              "label": "actress",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M03-Q017",
+          "mechanic": "matching",
+          "learningTarget": "review: Describe fictional people/roles using family and pronoun review. Focus: family.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M03-Q017-L1": "Y5M03-Q017-R1",
+            "Y5M03-Q017-L2": "Y5M03-Q017-R2",
+            "Y5M03-Q017-L3": "Y5M03-Q017-R3",
+            "Y5M03-Q017-L4": "Y5M03-Q017-R4",
+            "Y5M03-Q017-L5": "Y5M03-Q017-R5",
+            "Y5M03-Q017-L6": "Y5M03-Q017-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2680DF6BE58F4B7E",
+            "IMG-V11-2B-9FFFCCD19B67697A",
+            "IMG-V11-2B-D2B2759DE5619C8A",
+            "IMG-V11-2B-E1B1A5B8AABB306D",
+            "IMG-V11-2B-F8F1532BA0C59828",
+            "IMG-V11-2B-FF1C87306E179ABE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M03-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Describe fictional people/roles using family and pronoun review. Focus: role/people description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "mother",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-243B96C39D99CAF8"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M03-Q018-O1",
+              "label": "mother",
+              "answerKey": "mother",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q018-O2",
+              "label": "doctor",
+              "answerKey": "doctor",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q018-O3",
+              "label": "teacher",
+              "answerKey": "teacher",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M03-Q018-O4",
+              "label": "actor",
+              "answerKey": "actor",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M03-Q019",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "consolidation: Describe fictional people/roles using family and pronoun review. Focus: pronouns.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "He",
+            "is",
+            "a",
+            "teacher."
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M03-Q020",
+          "mechanic": "drag-drop",
+          "learningTarget": "consolidation: Describe fictional people/roles using family and pronoun review. Focus: identify/describe person and role.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M03-Q020-I1": "family",
+            "Y5M03-Q020-I2": "family",
+            "Y5M03-Q020-I3": "jobs",
+            "Y5M03-Q020-I4": "jobs",
+            "Y5M03-Q020-I5": "jobs",
+            "Y5M03-Q020-I6": "jobs"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        }
+      ]
+    },
+    {
+      "moduleId": "Y5M04",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y5M04-Q001",
+          "mechanic": "drag-drop",
+          "learningTarget": "teaching: Understand supported weather/calendar/health detail and number sequence. Focus: headache.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M04-Q001-I1": "health",
+            "Y5M04-Q001-I2": "health",
+            "Y5M04-Q001-I3": "health",
+            "Y5M04-Q001-I4": "health",
+            "Y5M04-Q001-I5": "weather",
+            "Y5M04-Q001-I6": "weather",
+            "Y5M04-Q001-I7": "weather",
+            "Y5M04-Q001-I8": "weather"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M04-Q002",
+          "mechanic": "target-shooter",
+          "learningTarget": "teaching: Understand supported weather/calendar/health detail and number sequence. Focus: numbers 51-100 in batches.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M04-Q002-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1AF66C94E68071AF",
+            "IMG-V11-2B-42EBF5105139E010",
+            "IMG-V11-2B-98572AF9240DEA11",
+            "IMG-V11-2B-CE549BD5435AA2DC"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M04-Q002-O1",
+              "label": "52",
+              "answerKey": "Y5M04-Q002-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-CE549BD5435AA2DC",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q002-O2",
+              "label": "51",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-1AF66C94E68071AF",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q002-O3",
+              "label": "53",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-42EBF5105139E010",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q002-O4",
+              "label": "54",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-98572AF9240DEA11",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M04-Q003",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "guided practice: Understand supported weather/calendar/health detail and number sequence. Focus: body.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M04-Q003-I1": "Y5M04-Q003-T1",
+            "Y5M04-Q003-I2": "Y5M04-Q003-T2",
+            "Y5M04-Q003-I3": "Y5M04-Q003-T3",
+            "Y5M04-Q003-I4": "Y5M04-Q003-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1B529733B1EA1369",
+            "IMG-V11-2B-76B60D5C7F5E0B66",
+            "IMG-V11-2B-8EC9B833A89D3BE7",
+            "IMG-V11-2B-E1399161067B2F14"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M04-Q004",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Understand supported weather/calendar/health detail and number sequence. Focus: number 1-100 recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M04-Q004-L1": "Y5M04-Q004-R1",
+            "Y5M04-Q004-L2": "Y5M04-Q004-R2",
+            "Y5M04-Q004-L3": "Y5M04-Q004-R3",
+            "Y5M04-Q004-L4": "Y5M04-Q004-R4",
+            "Y5M04-Q004-L5": "Y5M04-Q004-R5",
+            "Y5M04-Q004-L6": "Y5M04-Q004-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0A583F42EEEFCE28",
+            "IMG-V11-2B-1357F306D00AD3F7",
+            "IMG-V11-2B-2B25477144DCF8CB",
+            "IMG-V11-2B-74ACF04009A2B71B",
+            "IMG-V11-2B-83FF5AAE6134F6B2",
+            "IMG-V11-2B-C45AE07568B642EE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M04-Q005",
+          "mechanic": "memory-quest",
+          "learningTarget": "Direct sound-to-meaning retrieval of the module’s weather set; excludes health diagnosis or treatment inference. Curricular target: sunny; rainy; cloudy; windy.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y5M04-Q005-P1",
+            "Y5M04-Q005-P2",
+            "Y5M04-Q005-P3",
+            "Y5M04-Q005-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-17A1C3E1DB2192C0",
+            "IMG-V11-2B-3FF9CA2029B2B660",
+            "IMG-V11-2B-DC36218AFD429860",
+            "IMG-V11-2B-E4A2C3022C4689DD"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M04-Q006",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Understand supported weather/calendar/health detail and number sequence. Focus: identify number/weather/health detail.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M04-Q006-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1AF66C94E68071AF",
+            "IMG-V11-2B-379EDEF854626480",
+            "IMG-V11-2B-42EBF5105139E010",
+            "IMG-V11-2B-CE549BD5435AA2DC"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M04-Q006-O1",
+              "label": "56",
+              "answerKey": "Y5M04-Q006-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-379EDEF854626480",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q006-O2",
+              "label": "51",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-1AF66C94E68071AF",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q006-O3",
+              "label": "52",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-CE549BD5435AA2DC",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q006-O4",
+              "label": "53",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-42EBF5105139E010",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M04-Q007",
+          "mechanic": "drag-drop",
+          "learningTarget": "recognition: Understand supported weather/calendar/health detail and number sequence. Focus: stomachache.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M04-Q007-I1": "health",
+            "Y5M04-Q007-I2": "health",
+            "Y5M04-Q007-I3": "health",
+            "Y5M04-Q007-I4": "health",
+            "Y5M04-Q007-I5": "weather",
+            "Y5M04-Q007-I6": "weather",
+            "Y5M04-Q007-I7": "weather",
+            "Y5M04-Q007-I8": "weather"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M04-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Understand supported weather/calendar/health detail and number sequence. Focus: numbers 51-100 in batches.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "58",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-74ACF04009A2B71B"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M04-Q008-O1",
+              "label": "58",
+              "answerKey": "58",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q008-O2",
+              "label": "51",
+              "answerKey": "51",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q008-O3",
+              "label": "52",
+              "answerKey": "52",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q008-O4",
+              "label": "53",
+              "answerKey": "53",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M04-Q009",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "recognition: Understand supported weather/calendar/health detail and number sequence. Focus: months/seasons.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M04-Q009-I1": "Y5M04-Q009-T1",
+            "Y5M04-Q009-I2": "Y5M04-Q009-T2",
+            "Y5M04-Q009-I3": "Y5M04-Q009-T3",
+            "Y5M04-Q009-I4": "Y5M04-Q009-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-38589FF3F898BBE2",
+            "IMG-V11-2B-D30B642D9AA3D273",
+            "IMG-V11-2B-DCB77944B1615F69",
+            "IMG-V11-2B-DE1C201E2F9D7993"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M04-Q010",
+          "mechanic": "target-shooter",
+          "learningTarget": "comprehension: Understand supported weather/calendar/health detail and number sequence. Focus: selected weather/health meanings.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M04-Q010-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-5FF168A9953122AC",
+            "IMG-V11-2B-6A6303B6B4A8DC3C",
+            "IMG-V11-2B-6BEDDD5F7F26B766",
+            "IMG-V11-2B-82F9BC49138C2B92"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M04-Q010-O1",
+              "label": "fever",
+              "answerKey": "Y5M04-Q010-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-82F9BC49138C2B92",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q010-O2",
+              "label": "headache",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-6A6303B6B4A8DC3C",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q010-O3",
+              "label": "stomachache",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5FF168A9953122AC",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q010-O4",
+              "label": "toothache",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-6BEDDD5F7F26B766",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M04-Q011",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Understand supported weather/calendar/health detail and number sequence. Focus: he/she has (not required productive).",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M04-Q011-L1": "Y5M04-Q011-R1",
+            "Y5M04-Q011-L2": "Y5M04-Q011-R2",
+            "Y5M04-Q011-L3": "Y5M04-Q011-R3",
+            "Y5M04-Q011-L4": "Y5M04-Q011-R4",
+            "Y5M04-Q011-L5": "Y5M04-Q011-R5",
+            "Y5M04-Q011-L6": "Y5M04-Q011-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0A583F42EEEFCE28",
+            "IMG-V11-2B-1357F306D00AD3F7",
+            "IMG-V11-2B-28F7E2AC981A385B",
+            "IMG-V11-2B-2B25477144DCF8CB",
+            "IMG-V11-2B-80AAEF5A148232B4",
+            "IMG-V11-2B-83FF5AAE6134F6B2"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M04-Q012",
+          "mechanic": "bubble-pop",
+          "learningTarget": "comprehension: Understand supported weather/calendar/health detail and number sequence. Focus: state simple weather/health chunk.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M04-Q012-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1AF66C94E68071AF",
+            "IMG-V11-2B-5FF168A9953122AC",
+            "IMG-V11-2B-6A6303B6B4A8DC3C",
+            "IMG-V11-2B-6BEDDD5F7F26B766",
+            "IMG-V11-2B-ACB5DDF40D1C7796",
+            "IMG-V11-2B-CE549BD5435AA2DC"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M04-Q012-O1",
+              "label": "stomachache",
+              "answerKey": "Y5M04-Q012-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-5FF168A9953122AC",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q012-O2",
+              "label": "headache",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-6A6303B6B4A8DC3C",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q012-O3",
+              "label": "toothache",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-6BEDDD5F7F26B766",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q012-O4",
+              "label": "cold",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-ACB5DDF40D1C7796",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M04-Q013",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "listening: Understand supported weather/calendar/health detail and number sequence. Focus: toothache.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M04-Q013-I1": "Y5M04-Q013-T1",
+            "Y5M04-Q013-I2": "Y5M04-Q013-T2",
+            "Y5M04-Q013-I3": "Y5M04-Q013-T3",
+            "Y5M04-Q013-I4": "Y5M04-Q013-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1B529733B1EA1369",
+            "IMG-V11-2B-291C8EF1B0B101BA",
+            "IMG-V11-2B-76B60D5C7F5E0B66",
+            "IMG-V11-2B-E1399161067B2F14"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M04-Q014",
+          "mechanic": "matching",
+          "learningTarget": "listening: Understand supported weather/calendar/health detail and number sequence. Focus: numbers 51-100 in batches.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M04-Q014-L1": "Y5M04-Q014-R1",
+            "Y5M04-Q014-L2": "Y5M04-Q014-R2",
+            "Y5M04-Q014-L3": "Y5M04-Q014-R3",
+            "Y5M04-Q014-L4": "Y5M04-Q014-R4",
+            "Y5M04-Q014-L5": "Y5M04-Q014-R5",
+            "Y5M04-Q014-L6": "Y5M04-Q014-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-088FB17E9D1F09AB",
+            "IMG-V11-2B-1E72B004EC519007",
+            "IMG-V11-2B-28B5D3A11B641DEC",
+            "IMG-V11-2B-64F5CEC732DC2882",
+            "IMG-V11-2B-67E6D36FEFB45408",
+            "IMG-V11-2B-D1DD34B374920BF0"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M04-Q015",
+          "mechanic": "memory-quest",
+          "learningTarget": "A bounded first batch supports sound-form recognition without requiring independent spelling; do not expose the full 51–100 range at once. Curricular target: 51; 52; 53; 54; 55.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y5M04-Q015-P1",
+            "Y5M04-Q015-P2",
+            "Y5M04-Q015-P3",
+            "Y5M04-Q015-P4",
+            "Y5M04-Q015-P5"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M04-Q016",
+          "mechanic": "matching",
+          "learningTarget": "retrieval: Understand supported weather/calendar/health detail and number sequence. Focus: number 1-100 recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M04-Q016-L1": "Y5M04-Q016-R1",
+            "Y5M04-Q016-L2": "Y5M04-Q016-R2",
+            "Y5M04-Q016-L3": "Y5M04-Q016-R3",
+            "Y5M04-Q016-L4": "Y5M04-Q016-R4",
+            "Y5M04-Q016-L5": "Y5M04-Q016-R5",
+            "Y5M04-Q016-L6": "Y5M04-Q016-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1E72B004EC519007",
+            "IMG-V11-2B-28B5D3A11B641DEC",
+            "IMG-V11-2B-64BDAB40C8CC1DFD",
+            "IMG-V11-2B-67E6D36FEFB45408",
+            "IMG-V11-2B-9ED96256FAD26EAA",
+            "IMG-V11-2B-D1DD34B374920BF0"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M04-Q017",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "review: Understand supported weather/calendar/health detail and number sequence. Focus: age question.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M04-Q017-I1": "Y5M04-Q017-T1",
+            "Y5M04-Q017-I2": "Y5M04-Q017-T2",
+            "Y5M04-Q017-I3": "Y5M04-Q017-T3",
+            "Y5M04-Q017-I4": "Y5M04-Q017-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-D4CFA2214092FB6F",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q007-NINE",
+            "IMG-Y1M02-Q007-TEN"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M04-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Understand supported weather/calendar/health detail and number sequence. Focus: identify number/weather/health detail.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "68",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1E72B004EC519007"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M04-Q018-O1",
+              "label": "68",
+              "answerKey": "68",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q018-O2",
+              "label": "51",
+              "answerKey": "51",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q018-O3",
+              "label": "52",
+              "answerKey": "52",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q018-O4",
+              "label": "53",
+              "answerKey": "53",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M04-Q019",
+          "mechanic": "drag-drop",
+          "learningTarget": "consolidation: Understand supported weather/calendar/health detail and number sequence. Focus: cold.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M04-Q019-I1": "health",
+            "Y5M04-Q019-I2": "health",
+            "Y5M04-Q019-I3": "health",
+            "Y5M04-Q019-I4": "health",
+            "Y5M04-Q019-I5": "weather",
+            "Y5M04-Q019-I6": "weather",
+            "Y5M04-Q019-I7": "weather",
+            "Y5M04-Q019-I8": "weather"
+          },
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M04-Q020",
+          "mechanic": "target-shooter",
+          "learningTarget": "consolidation: Understand supported weather/calendar/health detail and number sequence. Focus: numbers 51-100 in batches.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M04-Q020-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-1AF66C94E68071AF",
+            "IMG-V11-2B-42EBF5105139E010",
+            "IMG-V11-2B-AFE7D45A37B4DE24",
+            "IMG-V11-2B-CE549BD5435AA2DC"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M04-Q020-O1",
+              "label": "70",
+              "answerKey": "Y5M04-Q020-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-AFE7D45A37B4DE24",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q020-O2",
+              "label": "51",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-1AF66C94E68071AF",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q020-O3",
+              "label": "52",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-CE549BD5435AA2DC",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M04-Q020-O4",
+              "label": "53",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-42EBF5105139E010",
+              "semanticReview": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleId": "Y5M05",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y5M05-Q001",
+          "mechanic": "target-shooter",
+          "learningTarget": "teaching: Describe furniture presence and location. Focus: table.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M05-Q001-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0B16159183B80E80",
+            "IMG-V11-2B-27524231B0FE1495",
+            "IMG-V11-2B-35D19BFFD2501DAC",
+            "IMG-V11-2B-A724B390350BFC51"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M05-Q001-O1",
+              "label": "table",
+              "answerKey": "Y5M05-Q001-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-A724B390350BFC51",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q001-O2",
+              "label": "TV",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-27524231B0FE1495",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q001-O3",
+              "label": "rug",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-35D19BFFD2501DAC",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q001-O4",
+              "label": "wardrobe",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0B16159183B80E80",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M05-Q002",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Describe furniture presence and location. Focus: rooms.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M05-Q002-I1": "Y5M05-Q002-T1",
+            "Y5M05-Q002-I2": "Y5M05-Q002-T2",
+            "Y5M05-Q002-I3": "Y5M05-Q002-T3",
+            "Y5M05-Q002-I4": "Y5M05-Q002-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-325D92BC370F05E7",
+            "IMG-V11-2B-88F7261163BCA3FC",
+            "IMG-V11-2B-9CE1BA3D8D7CFDA2",
+            "IMG-V11-2B-CA9EE10003E4F9D7"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M05-Q003",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Describe furniture presence and location. Focus: room/furniture description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M05-Q003-L1": "Y5M05-Q003-R1",
+            "Y5M05-Q003-L2": "Y5M05-Q003-R2",
+            "Y5M05-Q003-L3": "Y5M05-Q003-R3",
+            "Y5M05-Q003-L4": "Y5M05-Q003-R4",
+            "Y5M05-Q003-L5": "Y5M05-Q003-R5",
+            "Y5M05-Q003-L6": "Y5M05-Q003-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-251A21D95301D10B",
+            "IMG-V11-2B-25373254958234F2",
+            "IMG-V11-2B-535905C7AE99741F",
+            "IMG-V11-2B-8A45A18826BB9632",
+            "IMG-V11-2B-DE65A7FE261815A6",
+            "IMG-V11-2B-F67459B4C2D5777B"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M05-Q004",
+          "mechanic": "memory-quest",
+          "learningTarget": "Written furniture labels map to clear room-plan referents before guided existence/location descriptions. Curricular target: table; TV; rug; wardrobe; sofa; bed.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y5M05-Q004-P1",
+            "Y5M05-Q004-P2",
+            "Y5M05-Q004-P3",
+            "Y5M05-Q004-P4",
+            "Y5M05-Q004-P5",
+            "Y5M05-Q004-P6"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-08D5ACD67E93CA67",
+            "IMG-V11-2B-6CED50D9787DC9AD",
+            "IMG-V11-2B-741D5F7C867B279D",
+            "IMG-V11-2B-7C6F516E9ED222F2",
+            "IMG-V11-2B-981BF4BC7D9C4304",
+            "IMG-V11-2B-F1D2293AC202715B"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M05-Q005",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Describe furniture presence and location. Focus: describe presence/location.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M05-Q005-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-595EDFA01D8C409E",
+            "IMG-V11-2B-5B5870D5FA1CFFFA",
+            "IMG-V11-2B-7D352CC6EC5D862A",
+            "IMG-V11-2B-E4060D2C0568ECD9"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M05-Q005-O1",
+              "label": "behind",
+              "answerKey": "Y5M05-Q005-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-5B5870D5FA1CFFFA",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q005-O2",
+              "label": "under",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-595EDFA01D8C409E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q005-O3",
+              "label": "beside",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-7D352CC6EC5D862A",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q005-O4",
+              "label": "in",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-E4060D2C0568ECD9",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M05-Q006",
+          "mechanic": "drag-drop",
+          "learningTarget": "guided practice: Describe furniture presence and location. Focus: TV.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M05-Q006-I1": "living-room",
+            "Y5M05-Q006-I2": "living-room",
+            "Y5M05-Q006-I3": "living-room",
+            "Y5M05-Q006-I4": "kitchen",
+            "Y5M05-Q006-I5": "kitchen"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-0CD450743DE82442",
+            "IMG-V11-2B-3B92DC9EC5D66E60",
+            "IMG-V11-2B-54E2BF3F440312A6",
+            "IMG-V11-2B-6B3CAD3811A68061",
+            "IMG-V11-2B-E7E1213D0CCA4038"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M05-Q007",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Describe furniture presence and location. Focus: prepositions.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M05-Q007-L1": "Y5M05-Q007-R1",
+            "Y5M05-Q007-L2": "Y5M05-Q007-R2",
+            "Y5M05-Q007-L3": "Y5M05-Q007-R3"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-7ECDC77FBF50FAB2",
+            "IMG-V11-2B-A396F1A45DF217E8",
+            "IMG-V11-2B-AD3495E9BCA08DFA"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M05-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Describe furniture presence and location. Focus: room/furniture description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "plate",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-25373254958234F2"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M05-Q008-O1",
+              "label": "plate",
+              "answerKey": "plate",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q008-O2",
+              "label": "table",
+              "answerKey": "table",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q008-O3",
+              "label": "TV",
+              "answerKey": "TV",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q008-O4",
+              "label": "rug",
+              "answerKey": "rug",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M05-Q009",
+          "mechanic": "target-shooter",
+          "learningTarget": "recognition: Describe furniture presence and location. Focus: There are... plural before guided use.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M05-Q009-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-196B76C1A472E8CE",
+            "IMG-V11-2B-56ADE30F9C01FFD7",
+            "IMG-V11-2B-AD8C3930F382C54F",
+            "IMG-V11-2B-DF1ED31F1CA904F3"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M05-Q009-O1",
+              "label": "There is a table.",
+              "answerKey": "Y5M05-Q009-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-56ADE30F9C01FFD7",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q009-O2",
+              "label": "There are two pillows.",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-DF1ED31F1CA904F3",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q009-O3",
+              "label": "There is a plate.",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-AD8C3930F382C54F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q009-O4",
+              "label": "There are three chairs.",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-196B76C1A472E8CE",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M05-Q010",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Describe furniture presence and location. Focus: describe presence/location.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M05-Q010-L1": "Y5M05-Q010-R1",
+            "Y5M05-Q010-L2": "Y5M05-Q010-R2",
+            "Y5M05-Q010-L3": "Y5M05-Q010-R3"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-7ECDC77FBF50FAB2",
+            "IMG-V11-2B-A396F1A45DF217E8",
+            "IMG-V11-2B-AD3495E9BCA08DFA"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M05-Q011",
+          "mechanic": "bubble-pop",
+          "learningTarget": "comprehension: Describe furniture presence and location. Focus: rug.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M05-Q011-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-01BBFD495285C31F",
+            "IMG-V11-2B-0B16159183B80E80",
+            "IMG-V11-2B-27524231B0FE1495",
+            "IMG-V11-2B-35D19BFFD2501DAC",
+            "IMG-V11-2B-A724B390350BFC51",
+            "IMG-V11-2B-F11EE70DE1D4EFA2"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M05-Q011-O1",
+              "label": "rug",
+              "answerKey": "Y5M05-Q011-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-35D19BFFD2501DAC",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q011-O2",
+              "label": "wardrobe",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-0B16159183B80E80",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q011-O3",
+              "label": "sofa",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-01BBFD495285C31F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q011-O4",
+              "label": "bed",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-F11EE70DE1D4EFA2",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M05-Q012",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Describe furniture presence and location. Focus: rooms.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M05-Q012-I1": "Y5M05-Q012-T1",
+            "Y5M05-Q012-I2": "Y5M05-Q012-T2",
+            "Y5M05-Q012-I3": "Y5M05-Q012-T3",
+            "Y5M05-Q012-I4": "Y5M05-Q012-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-325D92BC370F05E7",
+            "IMG-V11-2B-88F7261163BCA3FC",
+            "IMG-V11-2B-9CE1BA3D8D7CFDA2",
+            "IMG-V11-2B-CA9EE10003E4F9D7"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M05-Q013",
+          "mechanic": "memory-quest",
+          "learningTarget": "Retrieves Y4M06 room words in sound-form mode while furniture presence/location remains the new focus. Curricular target: bedroom; bathroom; kitchen; living room.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y5M05-Q013-P1",
+            "Y5M05-Q013-P2",
+            "Y5M05-Q013-P3",
+            "Y5M05-Q013-P4"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M05-Q014",
+          "mechanic": "target-shooter",
+          "learningTarget": "listening: Describe furniture presence and location. Focus: in/on/under/behind/beside.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M05-Q014-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-595EDFA01D8C409E",
+            "IMG-V11-2B-5B5870D5FA1CFFFA",
+            "IMG-V11-2B-7D352CC6EC5D862A",
+            "IMG-V11-2B-EE4B263993C464A8"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M05-Q014-O1",
+              "label": "behind",
+              "answerKey": "Y5M05-Q014-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-5B5870D5FA1CFFFA",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q014-O2",
+              "label": "under",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-595EDFA01D8C409E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q014-O3",
+              "label": "beside",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-7D352CC6EC5D862A",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q014-O4",
+              "label": "on",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-EE4B263993C464A8",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M05-Q015",
+          "mechanic": "matching",
+          "learningTarget": "retrieval: Describe furniture presence and location. Focus: describe presence/location.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M05-Q015-L1": "Y5M05-Q015-R1",
+            "Y5M05-Q015-L2": "Y5M05-Q015-R2",
+            "Y5M05-Q015-L3": "Y5M05-Q015-R3"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-7ECDC77FBF50FAB2",
+            "IMG-V11-2B-A396F1A45DF217E8",
+            "IMG-V11-2B-AD3495E9BCA08DFA"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M05-Q016",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "retrieval: Describe furniture presence and location. Focus: wardrobe.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M05-Q016-I1": "Y5M05-Q016-T1",
+            "Y5M05-Q016-I2": "Y5M05-Q016-T2",
+            "Y5M05-Q016-I3": "Y5M05-Q016-T3",
+            "Y5M05-Q016-I4": "Y5M05-Q016-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-18E44378AF943578",
+            "IMG-V11-2B-78F62A3CFD3F4DB4",
+            "IMG-V11-2B-A8D9701E98D18E30",
+            "IMG-V11-2B-F435C8A80D3092E3"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M05-Q017",
+          "mechanic": "bubble-pop",
+          "learningTarget": "review: Describe furniture presence and location. Focus: prepositions.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M05-Q017-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-27524231B0FE1495",
+            "IMG-V11-2B-35D19BFFD2501DAC",
+            "IMG-V11-2B-595EDFA01D8C409E",
+            "IMG-V11-2B-5B5870D5FA1CFFFA",
+            "IMG-V11-2B-7D352CC6EC5D862A",
+            "IMG-V11-2B-A724B390350BFC51"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M05-Q017-O1",
+              "label": "behind",
+              "answerKey": "Y5M05-Q017-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-5B5870D5FA1CFFFA",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q017-O2",
+              "label": "under",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-595EDFA01D8C409E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q017-O3",
+              "label": "beside",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-7D352CC6EC5D862A",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M05-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Describe furniture presence and location. Focus: room/furniture description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "TV",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-27524231B0FE1495"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M05-Q018-O1",
+              "label": "TV",
+              "answerKey": "TV",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q018-O2",
+              "label": "table",
+              "answerKey": "table",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q018-O3",
+              "label": "rug",
+              "answerKey": "rug",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M05-Q018-O4",
+              "label": "wardrobe",
+              "answerKey": "wardrobe",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M05-Q019",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "consolidation: Describe furniture presence and location. Focus: existence/location.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "The",
+            "ball",
+            "is",
+            "under",
+            "the",
+            "table"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M05-Q020",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "consolidation: Describe furniture presence and location. Focus: describe presence/location.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M05-Q020-I1": "Y5M05-Q020-T1",
+            "Y5M05-Q020-I2": "Y5M05-Q020-T2",
+            "Y5M05-Q020-I3": "Y5M05-Q020-T3",
+            "Y5M05-Q020-I4": "Y5M05-Q020-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-9EB64C8ADF6704BF",
+            "IMG-V11-2B-D998FEB01EA0AED5",
+            "IMG-V11-2B-EE4B263993C464A8",
+            "IMG-V11-2B-FD91743C3E852894"
+          ],
+          "options": []
+        }
+      ]
+    },
+    {
+      "moduleId": "Y5M06",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y5M06-Q001",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Locate familiar city places and describe actions in a short guided message. Focus: bank.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M06-Q001-I1": "Y5M06-Q001-T1",
+            "Y5M06-Q001-I2": "Y5M06-Q001-T2",
+            "Y5M06-Q001-I3": "Y5M06-Q001-T3",
+            "Y5M06-Q001-I4": "Y5M06-Q001-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-5310995961ADDF9C",
+            "IMG-V11-2B-5CCB625351D66DA1",
+            "IMG-V11-2B-E46D075F39FD3887",
+            "IMG-V11-2B-FBF25721BE909178"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M06-Q002",
+          "mechanic": "matching",
+          "learningTarget": "teaching: Locate familiar city places and describe actions in a short guided message. Focus: play.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M06-Q002-L1": "Y5M06-Q002-R1",
+            "Y5M06-Q002-L2": "Y5M06-Q002-R2",
+            "Y5M06-Q002-L3": "Y5M06-Q002-R3",
+            "Y5M06-Q002-L4": "Y5M06-Q002-R4",
+            "Y5M06-Q002-L5": "Y5M06-Q002-R5",
+            "Y5M06-Q002-L6": "Y5M06-Q002-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-19F667809A892174",
+            "IMG-V11-2B-6019FD3EF36B6649",
+            "IMG-V11-2B-6C0C9384392A972C",
+            "IMG-V11-2B-7BA52CA4D5F196E3",
+            "IMG-V11-2B-A849656CB01FB3B4",
+            "IMG-V11-2B-E95DB51C28372E9D"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M06-Q003",
+          "mechanic": "bubble-pop",
+          "learningTarget": "guided practice: Locate familiar city places and describe actions in a short guided message. Focus: place/action description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M06-Q003-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-30AE918E26C66C62",
+            "IMG-V11-2B-55F3B7B7A481E819",
+            "IMG-V11-2B-5B9F259EB7128F83",
+            "IMG-V11-2B-6019FD3EF36B6649",
+            "IMG-V11-2B-AF6280CC072B5A5F",
+            "IMG-V11-2B-E95DB51C28372E9D"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M06-Q003-O1",
+              "label": "school",
+              "answerKey": "Y5M06-Q003-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-55F3B7B7A481E819",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q003-O2",
+              "label": "bank",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5B9F259EB7128F83",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q003-O3",
+              "label": "supermarket",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-AF6280CC072B5A5F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q003-O4",
+              "label": "shoe store",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-30AE918E26C66C62",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M06-Q004",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Locate familiar city places and describe actions in a short guided message. Focus: He/She is [play/study/wake up]-ing guided singular.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M06-Q004-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-5FC97E87261A0214",
+            "IMG-V11-2B-6AE2E468D56512D8",
+            "IMG-V11-2B-A03A06C935EC3C93",
+            "IMG-V11-2B-E97CBF8EA098A30F"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M06-Q004-O1",
+              "label": "three horses",
+              "answerKey": "Y5M06-Q004-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-5FC97E87261A0214",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q004-O2",
+              "label": "one duck",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-6AE2E468D56512D8",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q004-O3",
+              "label": "two ducks",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-E97CBF8EA098A30F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q004-O4",
+              "label": "one horse",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-A03A06C935EC3C93",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M06-Q005",
+          "mechanic": "memory-quest",
+          "learningTarget": "Spoken place names map to distinct, non-stereotyped city-map scenes before connected place/action comprehension. Curricular target: bank; supermarket; school; shoe store; park; hospital.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y5M06-Q005-P1",
+            "Y5M06-Q005-P2",
+            "Y5M06-Q005-P3",
+            "Y5M06-Q005-P4",
+            "Y5M06-Q005-P5",
+            "Y5M06-Q005-P6"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-66C2E05042189875",
+            "IMG-V11-2B-86508FA2B8348F9D",
+            "IMG-V11-2B-87D41B641E2F0AA6",
+            "IMG-V11-2B-AC77E06A0E017641",
+            "IMG-V11-2B-DEF69A365F45E3E2",
+            "IMG-V11-2B-FEC3752AA4BBC7CB"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M06-Q006",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Locate familiar city places and describe actions in a short guided message. Focus: supermarket.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M06-Q006-L1": "Y5M06-Q006-R1",
+            "Y5M06-Q006-L2": "Y5M06-Q006-R2",
+            "Y5M06-Q006-L3": "Y5M06-Q006-R3",
+            "Y5M06-Q006-L4": "Y5M06-Q006-R4",
+            "Y5M06-Q006-L5": "Y5M06-Q006-R5"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-19F667809A892174",
+            "IMG-V11-2B-6019FD3EF36B6649",
+            "IMG-V11-2B-6C0C9384392A972C",
+            "IMG-V11-2B-A849656CB01FB3B4",
+            "IMG-V11-2B-E95DB51C28372E9D"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M06-Q007",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "recognition: Locate familiar city places and describe actions in a short guided message. Focus: study.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M06-Q007-I1": "Y5M06-Q007-T1",
+            "Y5M06-Q007-I2": "Y5M06-Q007-T2",
+            "Y5M06-Q007-I3": "Y5M06-Q007-T3",
+            "Y5M06-Q007-I4": "Y5M06-Q007-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-250C87444BAA55F0",
+            "IMG-V11-2B-3EC1A705844B788C",
+            "IMG-V11-2B-7C44318C51D585E4",
+            "IMG-V11-2B-D50BF2D8F72E9E1D"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M06-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Locate familiar city places and describe actions in a short guided message. Focus: place/action description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "bank",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-5CCB625351D66DA1"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M06-Q008-O1",
+              "label": "bank",
+              "answerKey": "bank",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q008-O2",
+              "label": "supermarket",
+              "answerKey": "supermarket",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q008-O3",
+              "label": "school",
+              "answerKey": "school",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q008-O4",
+              "label": "shoe store",
+              "answerKey": "shoe store",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M06-Q009",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Locate familiar city places and describe actions in a short guided message. Focus: They are [verb]-ing after evidence.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M06-Q009-L1": "Y5M06-Q009-R1"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2ECDF43BCA9F3C65",
+            "IMG-V11-2B-8C61F006F08947DB",
+            "IMG-V11-2B-E52B973AF6FA8E6C"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M06-Q010",
+          "mechanic": "bubble-pop",
+          "learningTarget": "comprehension: Locate familiar city places and describe actions in a short guided message. Focus: describe action.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M06-Q010-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-147A281F23DD5657",
+            "IMG-V11-2B-5CCB625351D66DA1",
+            "IMG-V11-2B-654AB9DC01850D7D",
+            "IMG-V11-2B-94C364D81141839E",
+            "IMG-V11-2B-C2DDDB6706E1EAA5",
+            "IMG-V11-2B-FBF25721BE909178"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M06-Q010-O1",
+              "label": "playing",
+              "answerKey": "Y5M06-Q010-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-94C364D81141839E",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q010-O2",
+              "label": "play",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-654AB9DC01850D7D",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q010-O3",
+              "label": "study",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-147A281F23DD5657",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q010-O4",
+              "label": "wake up",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-C2DDDB6706E1EAA5",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M06-Q011",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Locate familiar city places and describe actions in a short guided message. Focus: school.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M06-Q011-I1": "Y5M06-Q011-T1",
+            "Y5M06-Q011-I2": "Y5M06-Q011-T2",
+            "Y5M06-Q011-I3": "Y5M06-Q011-T3",
+            "Y5M06-Q011-I4": "Y5M06-Q011-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-502E7D8816120901",
+            "IMG-V11-2B-5310995961ADDF9C",
+            "IMG-V11-2B-5608F49F6053D1F3",
+            "IMG-V11-2B-E46D075F39FD3887"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M06-Q012",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Locate familiar city places and describe actions in a short guided message. Focus: wake up.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M06-Q012-L1": "Y5M06-Q012-R1",
+            "Y5M06-Q012-L2": "Y5M06-Q012-R2",
+            "Y5M06-Q012-L3": "Y5M06-Q012-R3",
+            "Y5M06-Q012-L4": "Y5M06-Q012-R4",
+            "Y5M06-Q012-L5": "Y5M06-Q012-R5",
+            "Y5M06-Q012-L6": "Y5M06-Q012-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-19F667809A892174",
+            "IMG-V11-2B-2227313E52C983E9",
+            "IMG-V11-2B-53C70478BC6A8DA7",
+            "IMG-V11-2B-6C0C9384392A972C",
+            "IMG-V11-2B-A849656CB01FB3B4",
+            "IMG-V11-2B-B55FEA574FE04262"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M06-Q013",
+          "mechanic": "target-shooter",
+          "learningTarget": "listening: Locate familiar city places and describe actions in a short guided message. Focus: place/action description.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M06-Q013-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-55F3B7B7A481E819",
+            "IMG-V11-2B-5B9F259EB7128F83",
+            "IMG-V11-2B-6A7FACB84704D37D",
+            "IMG-V11-2B-AF6280CC072B5A5F"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M06-Q013-O1",
+              "label": "hospital",
+              "answerKey": "Y5M06-Q013-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-6A7FACB84704D37D",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q013-O2",
+              "label": "bank",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-5B9F259EB7128F83",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q013-O3",
+              "label": "supermarket",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-AF6280CC072B5A5F",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q013-O4",
+              "label": "school",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-55F3B7B7A481E819",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M06-Q014",
+          "mechanic": "matching",
+          "learningTarget": "listening: Locate familiar city places and describe actions in a short guided message. Focus: Where is...?.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M06-Q014-L1": "Y5M06-Q014-R1",
+            "Y5M06-Q014-L2": "Y5M06-Q014-R2",
+            "Y5M06-Q014-L3": "Y5M06-Q014-R3",
+            "Y5M06-Q014-L4": "Y5M06-Q014-R4",
+            "Y5M06-Q014-L5": "Y5M06-Q014-R5",
+            "Y5M06-Q014-L6": "Y5M06-Q014-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-19F667809A892174",
+            "IMG-V11-2B-2227313E52C983E9",
+            "IMG-V11-2B-6019FD3EF36B6649",
+            "IMG-V11-2B-6C0C9384392A972C",
+            "IMG-V11-2B-A849656CB01FB3B4",
+            "IMG-V11-2B-E95DB51C28372E9D"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M06-Q015",
+          "mechanic": "memory-quest",
+          "learningTarget": "Retrieves the three source-named verbs as sound-form mapping before/alongside the guided singular progressive; the app does not claim independent tense control. Curricular target: play; study; wake up.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y5M06-Q015-P1",
+            "Y5M06-Q015-P2",
+            "Y5M06-Q015-P3"
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M06-Q016",
+          "mechanic": "bubble-pop",
+          "learningTarget": "retrieval: Locate familiar city places and describe actions in a short guided message. Focus: shoe store.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "Y5M06-Q016-O1",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-30AE918E26C66C62",
+            "IMG-V11-2B-3C63D491F0FB2B90",
+            "IMG-V11-2B-5CCB625351D66DA1",
+            "IMG-V11-2B-6A7FACB84704D37D",
+            "IMG-V11-2B-8E3C880619E8EF69",
+            "IMG-V11-2B-FBF25721BE909178"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M06-Q016-O1",
+              "label": "shoe store",
+              "answerKey": "Y5M06-Q016-O1",
+              "correct": true,
+              "mediaId": "IMG-V11-2B-30AE918E26C66C62",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q016-O2",
+              "label": "park",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-8E3C880619E8EF69",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q016-O3",
+              "label": "hospital",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-6A7FACB84704D37D",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q016-O4",
+              "label": "library",
+              "answerKey": null,
+              "correct": false,
+              "mediaId": "IMG-V11-2B-3C63D491F0FB2B90",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M06-Q017",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Match a spoken city place to its corresponding city-map scene. Focus: location.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M06-Q017-L1": "Y5M06-Q017-R1",
+            "Y5M06-Q017-L2": "Y5M06-Q017-R2",
+            "Y5M06-Q017-L3": "Y5M06-Q017-R3",
+            "Y5M06-Q017-L4": "Y5M06-Q017-R4",
+            "Y5M06-Q017-L5": "Y5M06-Q017-R5",
+            "Y5M06-Q017-L6": "Y5M06-Q017-R6"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-2227313E52C983E9",
+            "IMG-V11-2B-6019FD3EF36B6649",
+            "IMG-V11-2B-6C0C9384392A972C",
+            "IMG-V11-2B-7BA52CA4D5F196E3",
+            "IMG-V11-2B-A849656CB01FB3B4",
+            "IMG-V11-2B-E95DB51C28372E9D"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y5M06-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Complete a short guided message with a familiar city place. Focus: city place.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "shoe store",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-5310995961ADDF9C"
+          ],
+          "options": [
+            {
+              "optionId": "Y5M06-Q018-O1",
+              "label": "shoe store",
+              "answerKey": "shoe store",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q018-O2",
+              "label": "bank",
+              "answerKey": "bank",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q018-O3",
+              "label": "supermarket",
+              "answerKey": "supermarket",
+              "mediaId": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y5M06-Q018-O4",
+              "label": "school",
+              "answerKey": "school",
+              "mediaId": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y5M06-Q019",
+          "mechanic": "smart-sentence-order",
+          "learningTarget": "consolidation: Locate familiar city places and describe actions in a short guided message. Focus: There is/are....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "There",
+            "is",
+            "a",
+            "park."
+          ],
+          "imageRef": null,
+          "mediaIds": [],
+          "options": []
+        },
+        {
+          "questionId": "Y5M06-Q020",
+          "mechanic": "matching",
+          "learningTarget": "consolidation: Locate familiar city places and describe actions in a short guided message. Focus: describe action.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y5M06-Q020-L1": "Y5M06-Q020-R1",
+            "Y5M06-Q020-L2": "Y5M06-Q020-R2",
+            "Y5M06-Q020-L3": "Y5M06-Q020-R3"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-V11-2B-5526211B72246718",
+            "IMG-V11-2B-8160F0F62724CABF",
+            "IMG-V11-2B-BC171EE0DE5C5D74"
+          ],
+          "options": []
+        }
+      ]
+    }
+  ],
+  "errors": []
+}
