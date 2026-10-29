@@ -32,6 +32,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Fail closed on rejected candidate images before costly build
+        run: |
+          node --check qa/tests/verify-v27-candidate-preflight.mjs
+          node qa/tests/verify-v27-candidate-preflight.mjs --require-eligible
       - name: Verify both PNG files and pinned SHA-256 values (no generation plugins)
         shell: bash
         run: |
