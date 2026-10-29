@@ -16,7 +16,7 @@ const references=new Map();
 function scan(node,qid,moduleId,field='item'){
  if(!node || typeof node!=='object')return;
  for(const [k,v] of Object.entries(node)){
-  if(['assetId','mediaId','image_ref'].includes(k) && typeof v==='string' && v.startsWith('IMG-')){
+  if(['assetId','mediaId','image_ref','imageRef'].includes(k) && typeof v==='string' && (index.has(v) || v.startsWith('IMG-') || /-EMOJI-/.test(v))){
    if(!references.has(v))references.set(v,{id:v,items:new Set(),modules:new Set(),examples:[]});
    const r=references.get(v);r.items.add(qid);r.modules.add(moduleId);
    if(r.examples.length<4)r.examples.push({question:qid,field:field+'.'+k,semantic:node.semanticTarget||node.answerKey||node.label||null});
@@ -62,7 +62,7 @@ for(const x of incomplete){
 }
 const queue=[...groups.values()].sort((a,b)=>b.questions-a.questions||a.concept.localeCompare(b.concept));
 const byStatus={};for(const x of listed)byStatus[x.status]=(byStatus[x.status]||0)+1;
-const report={schemaVersion:'DUDUQ_MEDIA_COMPLETION_V1',generatedAt:new Date().toISOString(),modules,activities,registryEntries:index.size,referencedMediaIds:listed.length,byStatus,incompleteReferencedIds:incomplete.length,metadataClosurePassed:incomplete.length===0&&modules===30&&activities===600, finalPedagogicalQaApproved:false,queue,items:listed.sort((a,b)=>a.mediaId.localeCompare(b.mediaId))};
+const report={schemaVersion:'DUDUQ_MEDIA_COMPLETION_V1',generatedAt:new Date().toISOString(),modules,activities,registryEntries:index.size,referencedMediaIds:listed.length,byStatus,incompleteReferencedIds:incomplete.length,metadataClosurePassed:incomplete.length===0&&modules===30&&activities===600, finalPedagogicalQaApproved:false,finalCompletionPassed:false,queue,items:listed.sort((a,b)=>a.mediaId.localeCompare(b.mediaId))};
 await mkdir(path.dirname(out),{recursive:true});await writeFile(out,JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({modules,activities,registryEntries:index.size,referencedIds:listed.length,byStatus,incomplete:incomplete.length,queueGroups:queue.length,metadataClosurePassed:report.metadataClosurePassed,finalPedagogicalQaApproved:report.finalPedagogicalQaApproved,report:out}));
-if(requireComplete&&!report.metadataClosurePassed)process.exitCode=2;
+if(requireComplete&&!report.finalCompletionPassed)process.exitCode=2;
