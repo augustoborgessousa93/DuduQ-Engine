@@ -59,6 +59,7 @@ dest.parent.mkdir(parents=True,exist_ok=True)
 image.save(dest,format="PNG",optimize=True)
 actual=dest.read_bytes()
 sha=hashlib.sha256(actual).hexdigest()
+if sha!='aa9e4f93e83c0769d97f781be2ceee8bb9cf11950e668130cb5e5aba3bb5a5c2': fail('REVIEWED_V2_ASSET_HASH_CHANGED')
 manifest={"schemaVersion":"DUDUQ_CHATGPT_MEDIA_BINDINGS_V1",
  "created":"2026-10-29","productionSafe":False,
  "source":"Cloudflare Workers AI free-quota 3D canary; generated at native 1920px, alpha from rembg",
@@ -67,7 +68,7 @@ manifest={"schemaVersion":"DUDUQ_CHATGPT_MEDIA_BINDINGS_V1",
  "pixelWidth":1920,"pixelHeight":1920,"rgbaAlpha":True,"sha256":sha,
  "bindings":[{"questionId":"Y1M04-Q015","mediaId":"IMG-Y1M04-Q015-ERASER"},
              {"questionId":"Y1M04-Q020","mediaId":"IMG-Y1M04-Q020-ERASER"}],
- "review":"MODEL_SEMANTIC_PRECHECK_ONLY"}]}
+ "review":"MODEL_SEMANTIC_PRECHECK_PASSED","reviewEvidence":"qa/semantic-evidence/CF-Y1M04-ERASER-V2.json"}]}
 (OUT/"batch-manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 preview.unlink(missing_ok=True)
 print(json.dumps({"result":"STAGED_ONLY","file":str(dest),"sha256":sha,
