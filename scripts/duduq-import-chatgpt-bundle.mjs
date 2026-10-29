@@ -42,7 +42,7 @@ const moduleCache=new Map(), actions=[];
 function imageIds(node, out=new Set()){
   if(!node||typeof node!=='object')return out;
   for(const [k,v] of Object.entries(node)){
-    if(typeof v==='string'&&['assetId','mediaId','image_ref'].includes(k)&&v.startsWith('IMG-'))out.add(v);
+    if(typeof v==='string'&&['assetId','mediaId','image_ref','imageRef'].includes(k)&&v.startsWith('IMG-'))out.add(v);
     else if(v&&typeof v==='object')imageIds(v,out);
   }
   return out;
