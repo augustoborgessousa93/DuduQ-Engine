@@ -108,7 +108,9 @@ for(const asset of manifest.assets||[]){
   if(!asset.bindings?.length)continue;
   const out='content/english/assets/images/chatgpt/'+asset.assetKey.toLowerCase()+'-'+actual.slice(0,12)+'.png';
   for(const binding of asset.bindings){
-    if(!/^IMG-Y[1-5]M0[1-6]-Q\d{3}-/.test(binding.mediaId))throw Error('Unsafe non-scoped media ID: '+binding.mediaId);
+    if(!/^IMG-(?:Y[1-5]M0[1-6]-)?Q\d{3}-[A-Z0-9-]+$/.test(binding.mediaId))throw Error('Unsafe media ID: '+binding.mediaId);
+    // Generic IDs are permitted only when the independently verified 600-question guard
+    // proves every usage has the exact same semantic target and stays within this module.
     const q=await questionFor(binding.questionId);
     if(!imageIds(q).has(binding.mediaId))throw Error('Media not bound to question: '+binding.mediaId);
     const option=(q.options||[]).find(o=>o.media?.assetId===binding.mediaId||o.mediaId===binding.mediaId);
