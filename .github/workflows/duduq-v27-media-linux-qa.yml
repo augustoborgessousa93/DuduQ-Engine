@@ -69,6 +69,7 @@ jobs:
           path: |
             qa/results/v27-chatgpt-media-preflight.json
             qa/results/v27-chatgpt-media-import.json
+            qa/results/media-closure-inventory.json
             dist-pages/.duduq-pages-manifest
       - name: Confirm preview-only behavior
         run: |
