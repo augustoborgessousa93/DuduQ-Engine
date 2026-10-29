@@ -32,7 +32,8 @@ for(let year=1;year<=5;year++)for(let n=1;n<=6;n++){
  const mm=String(n).padStart(2,'0');
  const route=`play/english/year-${year}/module-${mm}/index.html`;
  if(!map.has(route))throw Error('MODULE_ROUTE_MISSING:'+route);
- const data=JSON.parse(readFileSync(path.join(root,`content/english/year-${year}/module-${mm}/questions.json`,'utf8'));
+ const moduleQuestionsPath=path.join(root,`content/english/year-${year}/module-${mm}/questions.json`);
+ const data=JSON.parse(readFileSync(moduleQuestionsPath,'utf8'));
  if(data.items?.length!==20)throw Error('QUESTION_COUNT_INVALID:'+route);
  modules++;activities+=data.items.length;
 }
