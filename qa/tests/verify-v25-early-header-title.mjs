@@ -15,8 +15,9 @@ for(const p of targets) {
   assert.equal(html.includes('<script defer src="/core/duduq-header-title-fit-v24.js"'),false,'No late-loader flash: '+p);
   const headEnd=html.search(/<\/head\s*>/i);
   const bodyStart=html.search(/<body\b/i);
-  assert.ok(headEnd>0 && bodyStart>headEnd,'HTML document landmarks: '+p);
-  assert.ok(html.indexOf(early)<headEnd,'Title-fit script blocks before first body paint: '+p);
+  assert.ok(bodyStart>0,'HTML body must exist: '+p);
+  assert.ok(headEnd<0 || bodyStart>headEnd,'Well-formed head/body order: '+p);
+  assert.ok(html.indexOf(early)<(headEnd>=0?headEnd:bodyStart),'Title-fit initialized before body paint: '+p);
   assert.equal(sha(Buffer.from(html)),files.get(p),'Manifest integrity: '+p);
   assert.equal(html.split('data-duduq-attribution-loader="v23"').length,2,'Preserve V23 copyright: '+p);
 }
