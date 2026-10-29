@@ -1,0 +1,48 @@
+name: DUDUQ - Cloudflare free V3 eraser technical QA (no publish)
+
+on:
+  push:
+    branches:
+      - automation/duduq-media-source-only-fix-20261029
+    paths:
+      - ".github/workflows/duduq-cloudflare-3d-eraser-v3-qa.yml"
+      - "qa/cloudflare-3d-eraser-v3.py"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duduq-eraser-v3-qa
+  cancel-in-progress: true
+
+jobs:
+  validate_existing_kv_source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout isolated branch without write credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check script syntax
+        run: python -m py_compile qa/cloudflare-3d-eraser-v3.py
+      - name: Install open-source rembg and Pillow
+        run: python -m pip install --disable-pip-version-check --no-input "Pillow==11.3.0" "rembg[cpu]==2.0.69" "numpy==2.4.6"
+      - name: Validate existing V3 KV JPEG and create candidate RGBA PNG
+        run: python qa/cloudflare-3d-eraser-v3.py
+      - name: Preserve candidate and technical evidence for visual review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-eraser-v3-technical-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            qa/media-inbox/cloudflare-eraser-v3-20261029/images/
+            qa/results/cloudflare-eraser-v3-technical.json
+      - name: Do not integrate before actual visual and pedagogical QA
+        run: echo "No game changes, no merge, no deploy, no semantic approval, no new inference."
