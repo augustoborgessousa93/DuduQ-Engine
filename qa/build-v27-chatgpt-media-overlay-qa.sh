@@ -2,7 +2,7 @@
 # V27: stage the exact approved V26 release, then apply a strictly checked media overlay.
 # Never merge or publish on failure. No API keys or paid image-generation plugins.
 set -Eeuo pipefail
-: "${DUDUQ_CHATGPT_IMAGE_BUNDLE:?Set DUDUQ_CHATGPT_IMAGE_BUNDLE to the extracted ChatGPT PNG package}"
+export DUDUQ_CHATGPT_IMAGE_BUNDLE="${DUDUQ_CHATGPT_IMAGE_BUNDLE:-qa/media-inbox/batch-20261029}"
 if [[ ! -s "$DUDUQ_CHATGPT_IMAGE_BUNDLE/batch-manifest.json" ]]; then
   echo "DUDUQ_MEDIA_BUNDLE_MISSING_MANIFEST"
   exit 1
