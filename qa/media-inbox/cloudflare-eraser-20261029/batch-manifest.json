@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "DUDUQ_CHATGPT_MEDIA_BINDINGS_V1",
+  "created": "2026-10-29",
+  "productionSafe": false,
+  "source": "Cloudflare Workers AI free-quota 3D canary; generated at native 1920px, alpha from rembg",
+  "humanReview": "MODEL_SEMANTIC_PRECHECK_ONLY",
+  "assets": [
+    {
+      "assetKey": "CF-Y1M04-ERASER-V2",
+      "file": "images/CF-Y1M04-ERASER-V2.png",
+      "semanticTarget": "eraser",
+      "pixelWidth": 1920,
+      "pixelHeight": 1920,
+      "rgbaAlpha": true,
+      "sha256": "aa9e4f93e83c0769d97f781be2ceee8bb9cf11950e668130cb5e5aba3bb5a5c2",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q015",
+          "mediaId": "IMG-Y1M04-Q015-ERASER"
+        },
+        {
+          "questionId": "Y1M04-Q020",
+          "mediaId": "IMG-Y1M04-Q020-ERASER"
+        }
+      ],
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/semantic-evidence/CF-Y1M04-ERASER-V2.json"
+    }
+  ]
+}
