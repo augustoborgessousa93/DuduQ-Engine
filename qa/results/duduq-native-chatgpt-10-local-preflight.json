@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "DUDUQ_IMAGE_BATCH_QA_V1",
+  "verifiedAt": "2026-10-29",
+  "source": "Native ChatGPT image batch present in Google Drive",
+  "zipFilename": "DUDUQ_ChatGPT_Lote_Escolar_10_20261029.zip",
+  "sha256": "0a3d71d2b7ee127d702326d437dc13b8145ab58d1333b15819ebe8cb3b5ba280",
+  "bytes": 12391419,
+  "localPreflight": {
+    "pngsVerified": 10,
+    "dimensions": "1254x1254",
+    "colorMode": "RGBA",
+    "transparency": "real alpha extrema 0..255",
+    "sha256Matches": 10,
+    "declaredExactBindings": 12,
+    "unmappedCandidates": 3
+  },
+  "githubZipPresent": false,
+  "githubQaExecuted": false,
+  "productionDeployed": false,
+  "blockingIssue": "Cross-app 12.4 MB ZIP upload to GitHub failed; later transfer attempt was blocked by platform security settings. Do not bypass. The original ZIP remains preserved in Google Drive.",
+  "notes": [
+    "Technical PNG integrity only, not human pedagogical QA.",
+    "A new generated collage was rejected and is not part of the approved batch."
+  ]
+}
