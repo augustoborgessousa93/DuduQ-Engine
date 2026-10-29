@@ -62,6 +62,7 @@ async function questionFor(qid){
   return q;
 }
 for(const asset of manifest.assets||[]){
+  if(asset.review!=='MODEL_SEMANTIC_PRECHECK_PASSED')throw Error('SEMANTIC_PRECHECK_NOT_PASSED:'+asset.assetKey);
   const png=path.resolve(bundle,asset.file||'');
   if(!safe(bundle,png))throw Error('Bundle path escape');
   const bytes=await fs.readFile(png);
@@ -84,7 +85,9 @@ for(const asset of manifest.assets||[]){
     if(!option||!sem||!String(asset.semanticTarget).toLowerCase().includes(sem))
       throw Error('Image must match exact answer option: '+binding.mediaId+':'+sem);
     const prior=index.has(binding.mediaId)?registry.entries[index.get(binding.mediaId)]:null;
-    const entry={...(prior||{}),mediaId:binding.mediaId,status:'APPROVED',kind:'image',temporary:false,
+    // APPROVED here is loader compatibility only; candidate remains temporary until real visual/pedagogical QA.
+    const entry={...(prior||{}),mediaId:binding.mediaId,status:'APPROVED',kind:'image',temporary:true,
+      integrationStatus:'CANDIDATE_PREVIEW_ONLY_PEDAGOGICAL_QA_PENDING',humanResolutionStatus:'PEDAGOGICAL_QA_PENDING',
       urlOrPath:out,sha256:actual,assets:[{path:out,sha256:actual}],
       altText:asset.semanticTarget,
       provenance:{provider:'ChatGPT image generation',sourceAsset:asset.assetKey,nativeWidth:width,nativeHeight:height,sha256:actual},
@@ -101,7 +104,7 @@ for(const action of actions){
   if(!safe(artifactRoot,dest))throw Error('Unsafe media destination: '+action.out);
   if(await exists(dest) && hash(await fs.readFile(dest))!==hash(action.bytes))throw Error('Existing media hash conflict: '+action.out);
 }
-const result={mode:apply?'COMPILED_ARTIFACT_IMPORT':'DRY_RUN',assets:manifest.assets.length,bindings:actions.length,files:[...new Set(actions.map(a=>a.out))],changedIds:actions.map(a=>a.binding.mediaId)};
+const result={mode:apply?'COMPILED_ARTIFACT_IMPORT':'DRY_RUN',assets:manifest.assets.length,bindings:actions.length,files:[...new Set(actions.map(a=>a.out))],changedIds:actions.map(a=>a.binding.mediaId),candidateOnly:true,pedagogicalQaApproved:false,productionReleaseCertified:false};
 if(apply){
   const backup=path.join(root,'.duduq','media-backups','chatgpt-artifact-'+hash(originalIntegrityBytes).slice(0,12));
   await fs.mkdir(backup,{recursive:true});
