@@ -18,6 +18,7 @@ for(const p of routes){
  assert.ok(body>html.indexOf(marker)&&html.indexOf(loader)>html.indexOf(marker),'CSS precedes script and body: '+p);
  assert.ok(html.includes('[data-topic-en="Choices Around Me: Food, School and Preferences"]'),'Y3M06 title fallback: '+p);
  assert.ok(html.includes('content:"Choices Around Me"!important'),'visible concise title before JS: '+p);
+ assert.ok(html.includes('#game.game-screen .duduq-canonical-header-hud .hud-title[data-topic-en="Choices Around Me: Food, School and Preferences"]'),'title rule outranks V24 and canonical master: '+p);
  assert.equal(hash(Buffer.from(html)),entries.get(p),'manifest hash: '+p);
  assert.equal(html.split('data-duduq-attribution-loader="v23"').length,2,'copyright preserved: '+p);
 }
