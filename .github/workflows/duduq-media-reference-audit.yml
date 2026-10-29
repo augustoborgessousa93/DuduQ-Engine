@@ -1,0 +1,34 @@
+name: DUDUQ - 600 Activity Media Reference Audit
+
+on:
+  push:
+    branches:
+      - automation/duduq-media-source-only-fix-20261029
+    paths:
+      - "docs/qa/media-audit-20261029/**"
+      - "qa/tests/verify-media-audit-snapshot.mjs"
+      - ".github/workflows/duduq-media-reference-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout review branch without write credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check audit script syntax
+        run: node --check qa/tests/verify-media-audit-snapshot.mjs
+      - name: Verify 30 modules, 600 activities, all media references and exact V27 option bindings
+        run: node qa/tests/verify-media-audit-snapshot.mjs
+      - name: Scope note
+        run: echo "Read-only source snapshot QA. PNG transfer, visual QA and production release are not certified."
