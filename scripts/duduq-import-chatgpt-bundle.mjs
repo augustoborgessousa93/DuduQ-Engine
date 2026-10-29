@@ -62,6 +62,8 @@ async function questionFor(qid){
   return q;
 }
 for(const asset of manifest.assets||[]){
+  // Unmapped candidates remain in the inbox; they must never be imported into game options.
+  if(!asset.bindings?.length) continue;
   if(asset.review!=='MODEL_SEMANTIC_PRECHECK_PASSED')throw Error('SEMANTIC_PRECHECK_NOT_PASSED:'+asset.assetKey);
   if(!asset.reviewEvidence)throw Error('MISSING_SEMANTIC_EVIDENCE:'+asset.assetKey);
   const evidencePath=path.resolve(root,asset.reviewEvidence);
