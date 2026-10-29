@@ -87,7 +87,7 @@ async function surface(page, kind) {
         if (css.display === "none" || css.visibility === "hidden") return [];
         return [{
           element: el.tagName.toLowerCase() + (el.id ? "#" + el.id : "") +
-            (el.getAttribute("class") ? "." + el.getAttribute("class").trim().split(/\\s+/).slice(0, 3).join(".") : ""),
+            (el.getAttribute("class") ? "." + el.getAttribute("class").trim().split(/\s+/).slice(0, 3).join(".") : ""),
           outsidePx: Math.round(outside * 10) / 10,
           left: Math.round(rect.left),
           right: Math.round(rect.right),
