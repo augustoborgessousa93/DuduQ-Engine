@@ -1,0 +1,88 @@
+name: DUDUQ - Native ChatGPT 10 PNG Batch Linux QA
+
+on:
+  push:
+    branches:
+      - automation/duduq-media-source-only-fix-20261029
+    paths:
+      - "qa/media-inbox/chatgpt-batch-10-20261029/*.zip"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: duduq-native-chatgpt-batch-20261029
+  cancel-in-progress: false
+
+jobs:
+  verify_and_stage:
+    name: Safe intake, patch compiled QA artifact and stage approved candidate sources
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    env:
+      CI: "true"
+      DUDUQ_QA_STATIC_PREVIEW: "1"
+      DUDUQ_CHATGPT_IMAGE_BUNDLE: /tmp/duduq-native-chatgpt-10
+    steps:
+      - name: Check out isolated review branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Pillow (image validation only; no image-generation services)
+        run: python -m pip install --disable-pip-version-check --no-input 'Pillow>=10,<12'
+      - name: Unpack and verify all ten original ChatGPT PNGs
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python qa/verify-chatgpt-native-zip.py \
+            qa/media-inbox/chatgpt-batch-10-20261029/DUDUQ_ChatGPT_Lote_Escolar_10_20261029.zip \
+            "$DUDUQ_CHATGPT_IMAGE_BUNDLE"
+      - name: Build exact base V26 and import only seven mapped images
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          bash qa/build-v26-topic-first-paint-qa.sh
+          node --check scripts/duduq-import-chatgpt-bundle.mjs
+          node scripts/duduq-import-chatgpt-bundle.mjs "$DUDUQ_CHATGPT_IMAGE_BUNDLE" > qa/results/chatgpt-native-batch10-preflight.json
+          node scripts/duduq-import-chatgpt-bundle.mjs "$DUDUQ_CHATGPT_IMAGE_BUNDLE" --apply > qa/results/chatgpt-native-batch10-import.json
+          node qa/tests/verify-chatgpt-native-batch-overlay.mjs
+          node qa/audit-media-completion.mjs
+      - name: Preserve detailed QA results for rendered pedagogical review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-native-chatgpt-10-candidate-qa-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 21
+          path: |
+            qa/results/chatgpt-native-batch10-preflight.json
+            qa/results/chatgpt-native-batch10-import.json
+            qa/results/media-closure-inventory.json
+            dist-pages/.duduq-pages-manifest
+            /tmp/duduq-native-chatgpt-10/PREVIEW.jpg
+      - name: Save ten validated original PNGs to GitHub REVIEW branch only
+        if: success()
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p qa/media-candidates/chatgpt-batch-10-20261029/images
+          cp -a "$DUDUQ_CHATGPT_IMAGE_BUNDLE"/images/. qa/media-candidates/chatgpt-batch-10-20261029/images/
+          cp "$DUDUQ_CHATGPT_IMAGE_BUNDLE"/batch-manifest.json qa/media-candidates/chatgpt-batch-10-20261029/batch-manifest.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add qa/media-candidates/chatgpt-batch-10-20261029/
+          if ! git diff --cached --quiet; then
+            git commit -m "media(chatgpt): stage 10 validated original RGBA assets, 12 verified option links"
+            git push origin HEAD:automation/duduq-media-source-only-fix-20261029
+          fi
+      - name: Protect game deployment
+        if: always()
+        run: echo "QA candidates only. No merge, no Cloudflare production deploy, human pedagogical review pending."
