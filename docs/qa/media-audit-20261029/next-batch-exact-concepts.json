@@ -1,0 +1,324 @@
+{
+  "schemaVersion": "DUDUQ_MEDIA_NEXT_BATCH_PLAN_V1",
+  "created": "2026-10-29",
+  "sourceAudit": "docs/qa/media-audit-20261029/summary.json",
+  "generationProvider": "NOT_CONFIGURED_IN_GITHUB",
+  "status": "PLAN_ONLY_NO_BINARY_UPLOAD",
+  "policy": "No image generation or integration claimed. Only apply after actual PNG bytes and complete QA.",
+  "assets": [
+    {
+      "assetKey": "BASE-Y1-003",
+      "concept": "head",
+      "status": "GENERATED_EXTERNALLY_NOT_UPLOADED",
+      "mediaIds": [
+        "IMG-Y1M05-Q001-HEAD"
+      ],
+      "questionIds": [
+        "Y1M05-Q001",
+        "Y2M06-Q015"
+      ],
+      "expectedMediaIdCount": 1,
+      "prompt": "One single independent 3D cartoon educational asset for children ages 6-11; premium polished rounded forms, vivid but natural colors, crisp clear silhouette, large pedagogical zoom, transparent RGBA PNG background, square 1254x1254 minimum, no text, no watermark, no collage, no grid, no extra countable objects, no visible opaque backdrop. Friendly school-age child's head and upper shoulders, clear close-up frontal view emphasizing the head; one child only, no hands or unrelated objects.",
+      "semanticContract": {
+        "mustInclude": [
+          "head"
+        ],
+        "mustNotInclude": [
+          "unrelated object",
+          "written answer cue",
+          "extra countable targets"
+        ],
+        "mustMatchExactOptionLabel": true,
+        "requireNativeTransparentPng": true,
+        "requireSha256": true,
+        "requireHumanPedagogicalReview": true
+      }
+    },
+    {
+      "assetKey": "BASE-Y1-007",
+      "concept": "backpack",
+      "status": "GENERATED_EXTERNALLY_NOT_UPLOADED",
+      "mediaIds": [
+        "IMG-Y1M04-Q010-BACKPACK",
+        "IMG-Y1M04-Q015-BACKPACK",
+        "IMG-Y1M04-Q020-BACKPACK"
+      ],
+      "questionIds": [
+        "Y1M04-Q010",
+        "Y1M04-Q015",
+        "Y1M04-Q020"
+      ],
+      "expectedMediaIdCount": 3,
+      "prompt": "One single independent 3D cartoon educational asset for children ages 6-11; premium polished rounded forms, vivid but natural colors, crisp clear silhouette, large pedagogical zoom, transparent RGBA PNG background, square 1254x1254 minimum, no text, no watermark, no collage, no grid, no extra countable objects, no visible opaque backdrop. One blue school backpack with visible shoulder straps, zipper and front pocket, large close-up, unmistakably a backpack; no books, text, or other objects.",
+      "semanticContract": {
+        "mustInclude": [
+          "backpack"
+        ],
+        "mustNotInclude": [
+          "unrelated object",
+          "written answer cue",
+          "extra countable targets"
+        ],
+        "mustMatchExactOptionLabel": true,
+        "requireNativeTransparentPng": true,
+        "requireSha256": true,
+        "requireHumanPedagogicalReview": true
+      }
+    },
+    {
+      "assetKey": "NEXT-Y1-ERASER",
+      "concept": "eraser",
+      "status": "PENDING_GENERATION",
+      "mediaIds": [
+        "IMG-Y1M04-Q015-ERASER",
+        "IMG-Y1M04-Q020-ERASER"
+      ],
+      "questionIds": [
+        "Y1M04-Q015",
+        "Y1M04-Q020"
+      ],
+      "expectedMediaIdCount": 2,
+      "prompt": "One single independent 3D cartoon educational asset for children ages 6-11; premium polished rounded forms, vivid but natural colors, crisp clear silhouette, large pedagogical zoom, transparent RGBA PNG background, square 1254x1254 minimum, no text, no watermark, no collage, no grid, no extra countable objects, no visible opaque backdrop. One unmistakable pink-and-white rectangular school eraser, slightly angled, no pencil or writing, large centered close-up.",
+      "semanticContract": {
+        "mustInclude": [
+          "eraser"
+        ],
+        "mustNotInclude": [
+          "unrelated object",
+          "written answer cue",
+          "extra countable targets"
+        ],
+        "mustMatchExactOptionLabel": true,
+        "requireNativeTransparentPng": true,
+        "requireSha256": true,
+        "requireHumanPedagogicalReview": true
+      }
+    },
+    {
+      "assetKey": "NEXT-Y1-PENCIL",
+      "concept": "pencil",
+      "status": "PENDING_GENERATION",
+      "mediaIds": [
+        "IMG-Y1M04-Q020-PENCIL"
+      ],
+      "questionIds": [
+        "Y1M04-Q020"
+      ],
+      "expectedMediaIdCount": 1,
+      "prompt": "One single independent 3D cartoon educational asset for children ages 6-11; premium polished rounded forms, vivid but natural colors, crisp clear silhouette, large pedagogical zoom, transparent RGBA PNG background, square 1254x1254 minimum, no text, no watermark, no collage, no grid, no extra countable objects, no visible opaque backdrop. One sharpened yellow wooden graphite pencil with pink eraser at the opposite end, graphite tip clearly visible; not a pen or crayon.",
+      "semanticContract": {
+        "mustInclude": [
+          "pencil"
+        ],
+        "mustNotInclude": [
+          "unrelated object",
+          "written answer cue",
+          "extra countable targets"
+        ],
+        "mustMatchExactOptionLabel": true,
+        "requireNativeTransparentPng": true,
+        "requireSha256": true,
+        "requireHumanPedagogicalReview": true
+      }
+    },
+    {
+      "assetKey": "NEXT-Y1-PEN",
+      "concept": "pen",
+      "status": "PENDING_GENERATION",
+      "mediaIds": [
+        "IMG-Y1M04-Q010-PEN",
+        "IMG-Y1M04-Q015-PEN"
+      ],
+      "questionIds": [
+        "Y1M04-Q010",
+        "Y1M04-Q015"
+      ],
+      "expectedMediaIdCount": 2,
+      "prompt": "One single independent 3D cartoon educational asset for children ages 6-11; premium polished rounded forms, vivid but natural colors, crisp clear silhouette, large pedagogical zoom, transparent RGBA PNG background, square 1254x1254 minimum, no text, no watermark, no collage, no grid, no extra countable objects, no visible opaque backdrop. One blue capped ballpoint ink pen with visible plastic body and fine ballpoint tip, clearly not a wooden pencil or wax crayon.",
+      "semanticContract": {
+        "mustInclude": [
+          "pen"
+        ],
+        "mustNotInclude": [
+          "unrelated object",
+          "written answer cue",
+          "extra countable targets"
+        ],
+        "mustMatchExactOptionLabel": true,
+        "requireNativeTransparentPng": true,
+        "requireSha256": true,
+        "requireHumanPedagogicalReview": true
+      }
+    },
+    {
+      "assetKey": "NEXT-Y1-RULER",
+      "concept": "ruler",
+      "status": "PENDING_GENERATION",
+      "mediaIds": [
+        "IMG-Y1M04-Q010-RULER",
+        "IMG-Y1M04-Q015-RULER"
+      ],
+      "questionIds": [
+        "Y1M04-Q010",
+        "Y1M04-Q015"
+      ],
+      "expectedMediaIdCount": 2,
+      "prompt": "One single independent 3D cartoon educational asset for children ages 6-11; premium polished rounded forms, vivid but natural colors, crisp clear silhouette, large pedagogical zoom, transparent RGBA PNG background, square 1254x1254 minimum, no text, no watermark, no collage, no grid, no extra countable objects, no visible opaque backdrop. One straight yellow plastic school ruler with clear measuring tick marks, no words or large printed numerals, entire ruler visible.",
+      "semanticContract": {
+        "mustInclude": [
+          "ruler"
+        ],
+        "mustNotInclude": [
+          "unrelated object",
+          "written answer cue",
+          "extra countable targets"
+        ],
+        "mustMatchExactOptionLabel": true,
+        "requireNativeTransparentPng": true,
+        "requireSha256": true,
+        "requireHumanPedagogicalReview": true
+      }
+    },
+    {
+      "assetKey": "NEXT-Y1-PENCIL-CASE",
+      "concept": "pencil case",
+      "status": "PENDING_GENERATION",
+      "mediaIds": [
+        "IMG-Y1M04-Q020-PENCIL-CASE"
+      ],
+      "questionIds": [
+        "Y1M04-Q020"
+      ],
+      "expectedMediaIdCount": 1,
+      "prompt": "One single independent 3D cartoon educational asset for children ages 6-11; premium polished rounded forms, vivid but natural colors, crisp clear silhouette, large pedagogical zoom, transparent RGBA PNG background, square 1254x1254 minimum, no text, no watermark, no collage, no grid, no extra countable objects, no visible opaque backdrop. One closed colorful zippered school pencil case, rectangular fabric pouch, zipper visible; no pencils or other objects.",
+      "semanticContract": {
+        "mustInclude": [
+          "pencil case"
+        ],
+        "mustNotInclude": [
+          "unrelated object",
+          "written answer cue",
+          "extra countable targets"
+        ],
+        "mustMatchExactOptionLabel": true,
+        "requireNativeTransparentPng": true,
+        "requireSha256": true,
+        "requireHumanPedagogicalReview": true
+      }
+    },
+    {
+      "assetKey": "NEXT-Y1-CRAYON",
+      "concept": "crayon",
+      "status": "PENDING_GENERATION",
+      "mediaIds": [
+        "IMG-Y1M04-Q010-CRAYON"
+      ],
+      "questionIds": [
+        "Y1M04-Q010"
+      ],
+      "expectedMediaIdCount": 1,
+      "prompt": "One single independent 3D cartoon educational asset for children ages 6-11; premium polished rounded forms, vivid but natural colors, crisp clear silhouette, large pedagogical zoom, transparent RGBA PNG background, square 1254x1254 minimum, no text, no watermark, no collage, no grid, no extra countable objects, no visible opaque backdrop. One thick red wax crayon with blunt rounded tip, unmistakably a wax crayon rather than a pen or pencil, no text or labels.",
+      "semanticContract": {
+        "mustInclude": [
+          "crayon"
+        ],
+        "mustNotInclude": [
+          "unrelated object",
+          "written answer cue",
+          "extra countable targets"
+        ],
+        "mustMatchExactOptionLabel": true,
+        "requireNativeTransparentPng": true,
+        "requireSha256": true,
+        "requireHumanPedagogicalReview": true
+      }
+    },
+    {
+      "assetKey": "NEXT-Y1-CAT",
+      "concept": "cat",
+      "status": "PENDING_GENERATION",
+      "mediaIds": [
+        "IMG-Y1M06-Q004-CAT"
+      ],
+      "questionIds": [
+        "Y1M06-Q004"
+      ],
+      "expectedMediaIdCount": 1,
+      "prompt": "One single independent 3D cartoon educational asset for children ages 6-11; premium polished rounded forms, vivid but natural colors, crisp clear silhouette, large pedagogical zoom, transparent RGBA PNG background, square 1254x1254 minimum, no text, no watermark, no collage, no grid, no extra countable objects, no visible opaque backdrop. One friendly orange domestic cat, clear ears whiskers tail and paws, three-quarter close-up, no other animals.",
+      "semanticContract": {
+        "mustInclude": [
+          "cat"
+        ],
+        "mustNotInclude": [
+          "unrelated object",
+          "written answer cue",
+          "extra countable targets"
+        ],
+        "mustMatchExactOptionLabel": true,
+        "requireNativeTransparentPng": true,
+        "requireSha256": true,
+        "requireHumanPedagogicalReview": true
+      }
+    },
+    {
+      "assetKey": "NEXT-Y1-FISH",
+      "concept": "fish",
+      "status": "PENDING_GENERATION",
+      "mediaIds": [
+        "IMG-Y1M06-Q004-FISH"
+      ],
+      "questionIds": [
+        "Y1M06-Q004"
+      ],
+      "expectedMediaIdCount": 1,
+      "prompt": "One single independent 3D cartoon educational asset for children ages 6-11; premium polished rounded forms, vivid but natural colors, crisp clear silhouette, large pedagogical zoom, transparent RGBA PNG background, square 1254x1254 minimum, no text, no watermark, no collage, no grid, no extra countable objects, no visible opaque backdrop. One friendly orange goldfish with visible fins and tail, side view, no aquarium, water or other fish.",
+      "semanticContract": {
+        "mustInclude": [
+          "fish"
+        ],
+        "mustNotInclude": [
+          "unrelated object",
+          "written answer cue",
+          "extra countable targets"
+        ],
+        "mustMatchExactOptionLabel": true,
+        "requireNativeTransparentPng": true,
+        "requireSha256": true,
+        "requireHumanPedagogicalReview": true
+      }
+    },
+    {
+      "assetKey": "NEXT-Y1-RABBIT",
+      "concept": "rabbit",
+      "status": "PENDING_GENERATION",
+      "mediaIds": [
+        "IMG-Y1M06-Q004-RABBIT"
+      ],
+      "questionIds": [
+        "Y1M06-Q004"
+      ],
+      "expectedMediaIdCount": 1,
+      "prompt": "One single independent 3D cartoon educational asset for children ages 6-11; premium polished rounded forms, vivid but natural colors, crisp clear silhouette, large pedagogical zoom, transparent RGBA PNG background, square 1254x1254 minimum, no text, no watermark, no collage, no grid, no extra countable objects, no visible opaque backdrop. One friendly small brown rabbit with long upright ears, clear paws and tail, three-quarter close-up, no other animals.",
+      "semanticContract": {
+        "mustInclude": [
+          "rabbit"
+        ],
+        "mustNotInclude": [
+          "unrelated object",
+          "written answer cue",
+          "extra countable targets"
+        ],
+        "mustMatchExactOptionLabel": true,
+        "requireNativeTransparentPng": true,
+        "requireSha256": true,
+        "requireHumanPedagogicalReview": true
+      }
+    }
+  ],
+  "totals": {
+    "uniqueConcepts": 11,
+    "mediaIds": 16,
+    "pendingNewAssets": 9,
+    "existingGeneratedAssetsAwaitingTransfer": 2
+  }
+}
