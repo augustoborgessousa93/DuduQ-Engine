@@ -31,7 +31,7 @@ for(const [qid,id,sem] of checks){
   const option=question?.options?.find(x=>x.media?.assetId===id);
   if(option?.media?.semanticTarget!==sem)throw Error('V27_SEMANTIC_OPTION_MISMATCH:'+id);
   const media=index.get(id);
-  if(media?.status!=='APPROVED'||media?.kind!=='image'||media?.temporary!==false)throw Error('V27_MEDIA_NOT_APPROVED:'+id);
+  if(media?.status!=='APPROVED'||media?.kind!=='image'||media?.temporary!==true||media?.integrationStatus!=='CANDIDATE_PREVIEW_ONLY_PEDAGOGICAL_QA_PENDING'||media?.humanResolutionStatus!=='PEDAGOGICAL_QA_PENDING')throw Error('V27_MEDIA_NOT_QUARANTINED_CANDIDATE:'+id);
   const file=media.assets?.[0]?.path;
   if(!file?.startsWith('content/english/assets/images/chatgpt/')||entries.get(file)!==media.sha256)throw Error('V27_MEDIA_NOT_IN_ARTIFACT:'+id);
 }
@@ -39,4 +39,4 @@ for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
   const p='play/english/year-'+year+'/module-'+String(module).padStart(2,'0')+'/index.html';
   if(!entries.has(p))throw Error('V27_MISSING_OFFICIAL_MODULE:'+p);
 }
-console.log('DUDUQ_V27_CHATGPT_MEDIA=PASS; options=4; manifestEntries='+entries.size+'; modules=30');
+console.log('DUDUQ_V27_CHATGPT_MEDIA_CANDIDATE_QA=PASS; options=4; manifestEntries='+entries.size+'; modules=30; pedagogicalQA=false; deploy=false');
