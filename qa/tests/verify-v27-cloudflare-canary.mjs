@@ -22,7 +22,7 @@ for(const asset of manifest.assets){
  const opt=q?.options?.find(x=>x.media?.assetId===id);
  if(!opt||opt.media?.semanticTarget!==asset.semanticTarget)throw Error('SEMANTIC_OPTION_MISMATCH:'+id);
  const entry=index.get(id),p=entry?.assets?.[0]?.path;
- if(!p?.startsWith('content/english/assets/images/chatgpt/')||entry?.temporary!==false||entry?.sha256!==asset.sha256||map.get(p)!==asset.sha256)throw Error('CANDIDATE_NOT_RESOLVED:'+id);
+ if(!p?.startsWith('content/english/assets/images/chatgpt/')||entry?.temporary!==true||entry?.humanResolutionStatus!=='PEDAGOGICAL_QA_PENDING'||entry?.sha256!==asset.sha256||map.get(p)!==asset.sha256)throw Error('CANDIDATE_NOT_RESOLVED:'+id);
  count++;
  }
 }
