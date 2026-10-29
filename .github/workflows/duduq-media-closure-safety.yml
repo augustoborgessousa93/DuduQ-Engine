@@ -11,6 +11,16 @@ on:
       - "qa/media-inbox/**"
       - "qa/media-candidates/**"
       - "qa/audit-media-completion.mjs"
+  pull_request:
+    branches:
+      - release/duduq-v23-ebc-attribution-20261028
+    paths:
+      - "qa/media-safe-retirement.mjs"
+      - "qa/tests/duduq-media-safe-retirement.test.mjs"
+      - ".github/workflows/duduq-media-closure-safety.yml"
+      - "qa/media-inbox/**"
+      - "qa/media-candidates/**"
+      - "qa/audit-media-completion.mjs"
   workflow_dispatch:
 
 permissions:
