@@ -1,5 +1,5 @@
 {
-  "audit": "DUDUQ_MEDIA_CROSS_REFERENCE_AUDIT_20261029",
+  "audit": "DUDUQ_MEDIA_CROSS_REFERENCE_AUDIT_20261029_V2",
   "sourceRepo": "augustoborgessousa93/duduq-fit-qa-private",
   "sourceRegistry": "dist-pages/content/english/media/media-registry.json",
   "sourceRegistryUpdatedAt": "2026-10-16T02:48:35.544Z",
@@ -9,85 +9,106 @@
   "sourceModules": 30,
   "sourceQuestions": 600,
   "uniqueQuestionIds": 600,
-  "questionMediaReferenceCount": 1818,
-  "uniqueReferencedMediaIds": 694,
+  "uniqueReferencedMediaIds": 1133,
   "referencedClassifications": {
-    "TEMPORARY": 57,
-    "EXPLICIT_NON_TEMPORARY": 5,
-    "UNCLASSIFIED": 632
+    "PROVISIONAL": 1115,
+    "EXPLICIT_NON_TEMPORARY": 18
   },
-  "questionsWithMedia": 420,
-  "questionsWithoutMedia": 180,
-  "questionsWithTemporary": 133,
-  "questionsWithUnclassified": 356,
+  "questionsWithMedia": 532,
+  "questionsWithoutMedia": 68,
+  "questionsWithProvisional": 528,
+  "questionsWithReviewRequired": 0,
   "questionsWithMissingRegistry": 0,
   "byYear": [
     {
       "year": 1,
       "modules": 6,
-      "questions": 120,
-      "uniqueReferencedMediaIds": 25,
-      "questionsWithMedia": 20,
-      "sourceErrors": [],
+      "activities": 120,
+      "questionsWithMedia": 120,
+      "uniqueReferencedMediaIds": 481,
       "classification": {
-        "TEMPORARY": 25
+        "PROVISIONAL": 481
       }
     },
     {
       "year": 2,
       "modules": 6,
-      "questions": 120,
-      "uniqueReferencedMediaIds": 193,
-      "questionsWithMedia": 92,
-      "sourceErrors": [],
+      "activities": 120,
+      "questionsWithMedia": 104,
+      "uniqueReferencedMediaIds": 218,
       "classification": {
-        "EXPLICIT_NON_TEMPORARY": 4,
-        "UNCLASSIFIED": 163,
-        "TEMPORARY": 26
+        "PROVISIONAL": 201,
+        "EXPLICIT_NON_TEMPORARY": 17
       }
     },
     {
       "year": 3,
       "modules": 6,
-      "questions": 120,
-      "uniqueReferencedMediaIds": 206,
+      "activities": 120,
       "questionsWithMedia": 103,
-      "sourceErrors": [],
+      "uniqueReferencedMediaIds": 206,
       "classification": {
-        "UNCLASSIFIED": 186,
-        "TEMPORARY": 20
+        "PROVISIONAL": 206
       }
     },
     {
       "year": 4,
       "modules": 6,
-      "questions": 120,
-      "uniqueReferencedMediaIds": 228,
+      "activities": 120,
       "questionsWithMedia": 104,
-      "sourceErrors": [],
+      "uniqueReferencedMediaIds": 228,
       "classification": {
-        "UNCLASSIFIED": 210,
-        "TEMPORARY": 18
+        "PROVISIONAL": 228
       }
     },
     {
       "year": 5,
       "modules": 6,
-      "questions": 120,
-      "uniqueReferencedMediaIds": 226,
+      "activities": 120,
       "questionsWithMedia": 101,
-      "sourceErrors": [],
+      "uniqueReferencedMediaIds": 226,
       "classification": {
-        "UNCLASSIFIED": 220,
-        "TEMPORARY": 5,
+        "PROVISIONAL": 225,
         "EXPLICIT_NON_TEMPORARY": 1
       }
     }
   ],
   "missingRegistryMediaIds": [],
+  "v27Bindings": [
+    {
+      "mediaId": "IMG-Y1M05-Q001-HEAD",
+      "questions": [
+        "Y1M05-Q001",
+        "Y2M06-Q015"
+      ],
+      "registered": true
+    },
+    {
+      "mediaId": "IMG-Y1M04-Q010-BACKPACK",
+      "questions": [
+        "Y1M04-Q010"
+      ],
+      "registered": true
+    },
+    {
+      "mediaId": "IMG-Y1M04-Q015-BACKPACK",
+      "questions": [
+        "Y1M04-Q015"
+      ],
+      "registered": true
+    },
+    {
+      "mediaId": "IMG-Y1M04-Q020-BACKPACK",
+      "questions": [
+        "Y1M04-Q020"
+      ],
+      "registered": true
+    }
+  ],
   "notes": [
-    "Source is the immutable/current artifact repository as read on 2026-10-29; this is an inventory, not a browser QA or pedagogical homologation.",
-    "temporary=true and provisional/temporary path are treated as provisional; absent temporary flag is ambiguous, not automatically provisional.",
-    "No gabarito, mechanics, Gold Master or production files modified."
+    "V1 was incomplete because nested option.media.assetId was omitted; V2 fixes the undercount.",
+    "APPROVED alone is not a quality certification; pending/refinement states and provisional paths remain blockers.",
+    "Registry source timestamp is 2026-10-16. This is a source snapshot, not current production deploy or browser QA.",
+    "No binaries were transferred, merged or deployed."
   ]
 }
