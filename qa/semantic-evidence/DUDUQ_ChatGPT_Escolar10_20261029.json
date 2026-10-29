@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "DUDUQ_MODEL_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-10-29",
+  "reviewScope": "MODEL_SEMANTIC_PRECHECK_ONLY",
+  "productionApproved": false,
+  "candidateAssets": [
+    {
+      "assetKey": "DUDUQ-Y1M04-ERASER",
+      "concept": "eraser",
+      "sha256": "dec0bd351a48571f2c09c8bf05c76c99d883a6320d026e88f55410bf8be34f5a",
+      "semanticPrecheck": "PASSED",
+      "visualBasis": "Individual original image rendered in this ChatGPT conversation; user confirmed visual quality. Concept checked against real question option. This is not human pedagogical approval."
+    },
+    {
+      "assetKey": "DUDUQ-Y1M04-PENCIL",
+      "concept": "pencil",
+      "sha256": "860e2b4fc08eb6525998688f54532a63282153298c76c98ba2d03ab8ba992674",
+      "semanticPrecheck": "PASSED",
+      "visualBasis": "Individual original image rendered in this ChatGPT conversation; user confirmed visual quality. Concept checked against real question option. This is not human pedagogical approval."
+    },
+    {
+      "assetKey": "DUDUQ-Y1M04-RULER",
+      "concept": "ruler",
+      "sha256": "e7ff33fa2ab1823a29bfd2b1e8750af92cec2f04d97540ce0752b42bd1dda786",
+      "semanticPrecheck": "PASSED",
+      "visualBasis": "Individual original image rendered in this ChatGPT conversation; user confirmed visual quality. Concept checked against real question option. This is not human pedagogical approval."
+    },
+    {
+      "assetKey": "DUDUQ-Y1M04-PEN",
+      "concept": "pen",
+      "sha256": "543d6d3dba80288ec4db0616d633da36d86cedb0025e1af8b0a276dfdb2208d4",
+      "semanticPrecheck": "PASSED",
+      "visualBasis": "Individual original image rendered in this ChatGPT conversation; user confirmed visual quality. Concept checked against real question option. This is not human pedagogical approval."
+    },
+    {
+      "assetKey": "DUDUQ-Y1M04-CRAYON",
+      "concept": "crayon",
+      "sha256": "ccc73250790bcf74f40eda1c9a5fa4256a7303169ea1a90613182ec81dd3819e",
+      "semanticPrecheck": "PASSED",
+      "visualBasis": "Individual original image rendered in this ChatGPT conversation; user confirmed visual quality. Concept checked against real question option. This is not human pedagogical approval."
+    },
+    {
+      "assetKey": "DUDUQ-Y1M04-PENCIL-CASE",
+      "concept": "pencil case",
+      "sha256": "2851f95cd17960a33fe394952be270f890e35ac9f85a576c7faf18f38af8f201",
+      "semanticPrecheck": "PASSED",
+      "visualBasis": "Individual original image rendered in this ChatGPT conversation; user confirmed visual quality. Concept checked against real question option. This is not human pedagogical approval."
+    },
+    {
+      "assetKey": "DUDUQ-Y1M04-BACKPACK",
+      "concept": "backpack",
+      "sha256": "ff18468fa6225eed06dcae14aa7887867df7fdfd72815cc592b9d8351558f8ec",
+      "semanticPrecheck": "PASSED",
+      "visualBasis": "Individual original image rendered in this ChatGPT conversation; user confirmed visual quality. Concept checked against real question option. This is not human pedagogical approval."
+    }
+  ]
+}
