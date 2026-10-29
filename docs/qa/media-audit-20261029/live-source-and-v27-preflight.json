@@ -1,0 +1,207 @@
+{
+  "audit": "DUDUQ_MEDIA_LIVE_SOURCE_AND_V27_VISUAL_PRECHECK_20261029",
+  "sourceRepo": "augustoborgessousa93/duduq-fit-qa-private",
+  "sourceRef": "main",
+  "sourceHeadCommit": "caea303c887b228277662c55df04d20ce006e865",
+  "sourceRegistry": {
+    "path": "dist-pages/content/english/media/media-registry.json",
+    "gitBlobSha": "839a1f442384ad3502df8278440b1f808afb3d06",
+    "entries": 1159,
+    "updatedAt": "2026-10-16T02:48:35.544Z"
+  },
+  "liveQuestions": {
+    "modules": 30,
+    "activities": 600,
+    "questionIdMediaAndAnswerKeyMismatchesAgainstSnapshot": 0,
+    "checkedAt": "2026-10-29",
+    "paths": [
+      {
+        "moduleId": "Y1M01",
+        "path": "dist-pages/content/english/year-1/module-01/questions.json",
+        "gitBlobSha": "272f599a3de5e00fb4ea842ad71b7efc53346a11"
+      },
+      {
+        "moduleId": "Y1M02",
+        "path": "dist-pages/content/english/year-1/module-02/questions.json",
+        "gitBlobSha": "ad4a9f6156be589725b498191412bcdd74a86cd9"
+      },
+      {
+        "moduleId": "Y1M03",
+        "path": "dist-pages/content/english/year-1/module-03/questions.json",
+        "gitBlobSha": "29d39a65952dab814138ace59563d4e5aabe9701"
+      },
+      {
+        "moduleId": "Y1M04",
+        "path": "dist-pages/content/english/year-1/module-04/questions.json",
+        "gitBlobSha": "1bcaa38fbd0a572c8155a933c2ba8804eb01b599"
+      },
+      {
+        "moduleId": "Y1M05",
+        "path": "dist-pages/content/english/year-1/module-05/questions.json",
+        "gitBlobSha": "28dc7df3b6cac246cfccbba88a6ad90232022b1a"
+      },
+      {
+        "moduleId": "Y1M06",
+        "path": "dist-pages/content/english/year-1/module-06/questions.json",
+        "gitBlobSha": "abd69850dadb5606cd38654bf912dfa6a2218568"
+      },
+      {
+        "moduleId": "Y2M01",
+        "path": "dist-pages/content/english/year-2/module-01/questions.json",
+        "gitBlobSha": "0290b34abe78fc88ac06ca0f2612d3002aaac9d3"
+      },
+      {
+        "moduleId": "Y2M02",
+        "path": "dist-pages/content/english/year-2/module-02/questions.json",
+        "gitBlobSha": "2a0075166c5bfd49b8bd378c62b0d1c2f6d3dcfd"
+      },
+      {
+        "moduleId": "Y2M03",
+        "path": "dist-pages/content/english/year-2/module-03/questions.json",
+        "gitBlobSha": "b38aec63b1de0b5650f7687d208555110709598d"
+      },
+      {
+        "moduleId": "Y2M04",
+        "path": "dist-pages/content/english/year-2/module-04/questions.json",
+        "gitBlobSha": "8abc389462c8ed955a81605bb07d7ca5e31b4a65"
+      },
+      {
+        "moduleId": "Y2M05",
+        "path": "dist-pages/content/english/year-2/module-05/questions.json",
+        "gitBlobSha": "9c207ca6afa6d3203e93de57a015caae1a0102e7"
+      },
+      {
+        "moduleId": "Y2M06",
+        "path": "dist-pages/content/english/year-2/module-06/questions.json",
+        "gitBlobSha": "9814372b2fe4f6bb4e35af5e926a5184ae479e14"
+      },
+      {
+        "moduleId": "Y3M01",
+        "path": "dist-pages/content/english/year-3/module-01/questions.json",
+        "gitBlobSha": "bb1ff6e11c5c248687b8ef9f1b2123aa95f363ab"
+      },
+      {
+        "moduleId": "Y3M02",
+        "path": "dist-pages/content/english/year-3/module-02/questions.json",
+        "gitBlobSha": "816434b75906af024d0e0638b0a25c5e02cc7d44"
+      },
+      {
+        "moduleId": "Y3M03",
+        "path": "dist-pages/content/english/year-3/module-03/questions.json",
+        "gitBlobSha": "4aa87b2c31a79c1f51cacc9ac4dae8c5f7ce3519"
+      },
+      {
+        "moduleId": "Y3M04",
+        "path": "dist-pages/content/english/year-3/module-04/questions.json",
+        "gitBlobSha": "1a88005d6d00b180352a81641fa1bcf4d2fa2957"
+      },
+      {
+        "moduleId": "Y3M05",
+        "path": "dist-pages/content/english/year-3/module-05/questions.json",
+        "gitBlobSha": "2b4e5b9ad5bac54050102b5f70759c34c33b5cfa"
+      },
+      {
+        "moduleId": "Y3M06",
+        "path": "dist-pages/content/english/year-3/module-06/questions.json",
+        "gitBlobSha": "5127d44686e03e8556ec54114ab53732b1af4c2d"
+      },
+      {
+        "moduleId": "Y4M01",
+        "path": "dist-pages/content/english/year-4/module-01/questions.json",
+        "gitBlobSha": "f5c73d3f31a04e537a7e5f893ecdb26988bd961c"
+      },
+      {
+        "moduleId": "Y4M02",
+        "path": "dist-pages/content/english/year-4/module-02/questions.json",
+        "gitBlobSha": "b3ca10201b9dda0941e623ffb17b4d42d9df4b47"
+      },
+      {
+        "moduleId": "Y4M03",
+        "path": "dist-pages/content/english/year-4/module-03/questions.json",
+        "gitBlobSha": "7b4e6da02aa5fa9e84e469be92979d3c51daf8cb"
+      },
+      {
+        "moduleId": "Y4M04",
+        "path": "dist-pages/content/english/year-4/module-04/questions.json",
+        "gitBlobSha": "600d77bfa4d58ee0366817f9d587becea88d5898"
+      },
+      {
+        "moduleId": "Y4M05",
+        "path": "dist-pages/content/english/year-4/module-05/questions.json",
+        "gitBlobSha": "af3ca64da5ceb2ac3244333786f128f4e71838e8"
+      },
+      {
+        "moduleId": "Y4M06",
+        "path": "dist-pages/content/english/year-4/module-06/questions.json",
+        "gitBlobSha": "df59315c161c3b474f19297a0d27a91ed7d5d2a7"
+      },
+      {
+        "moduleId": "Y5M01",
+        "path": "dist-pages/content/english/year-5/module-01/questions.json",
+        "gitBlobSha": "9011dc2d64fd9d3a410f5c8966e67c143ed16639"
+      },
+      {
+        "moduleId": "Y5M02",
+        "path": "dist-pages/content/english/year-5/module-02/questions.json",
+        "gitBlobSha": "70779f66b9fce8ab415f62a072f0ddfd388fa6aa"
+      },
+      {
+        "moduleId": "Y5M03",
+        "path": "dist-pages/content/english/year-5/module-03/questions.json",
+        "gitBlobSha": "b2f90aaf4ad3621b65b304431fb84b4ab6b4d60e"
+      },
+      {
+        "moduleId": "Y5M04",
+        "path": "dist-pages/content/english/year-5/module-04/questions.json",
+        "gitBlobSha": "e79ecfddb6990506d46c6c4ad02601472e913a84"
+      },
+      {
+        "moduleId": "Y5M05",
+        "path": "dist-pages/content/english/year-5/module-05/questions.json",
+        "gitBlobSha": "bb1d6dc7ec5d6576b01ac7c83db6622bbea94266"
+      },
+      {
+        "moduleId": "Y5M06",
+        "path": "dist-pages/content/english/year-5/module-06/questions.json",
+        "gitBlobSha": "8d2fa5e767d1f3eada3befaec70b297eb79305bb"
+      }
+    ]
+  },
+  "candidateAssets": [
+    {
+      "assetKey": "BASE-Y1-003",
+      "concept": "head",
+      "sha256": "3c00647e61d7b7c8ee365454b1a349088254352988a0538e4cec348366db6401",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "bytes": 2031493,
+      "semanticPrecheck": "REJECTED",
+      "reason": "Image depicts a child with both hands pointing to the head. The exact generation contract explicitly forbids hands. Do not promote without a conforming replacement.",
+      "uploadedToGithub": false
+    },
+    {
+      "assetKey": "BASE-Y1-007",
+      "concept": "backpack",
+      "sha256": "1b20ee60ea996463a9dccb811e284b184d51cade24b3237ad7eeccfabd20a511",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "bytes": 1915214,
+      "semanticPrecheck": "REJECTED",
+      "reason": "Backpack contains several visible pencils, crayons, notebooks, a ruler and an eraser, contrary to the single-object contract; those are distractor concepts in the same questions. Unsafe answer cue.",
+      "uploadedToGithub": false
+    }
+  ],
+  "decision": "BLOCK_V27_IMPORT_UNTIL_INDIVIDUAL_SEMANTICALLY_CONFORMING_PNGS_AND_PRECHECK",
+  "noProductionChanges": true,
+  "notes": [
+    "Git blob SHAs are source provenance, not PNG SHA-256.",
+    "Read-only source verification; no browser or pedagogical QA passed.",
+    "Do not infer completeness from APPROVED status or a successful snapshot test."
+  ]
+}
