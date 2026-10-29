@@ -1,7 +1,7 @@
 {
   "schemaVersion": "DUDUQ_MODEL_SEMANTIC_EVIDENCE_V1",
   "createdAt": "2026-10-29",
-  "reviewScope": "MODEL_SEMANTIC_PRECHECK_ONLY",
+  "reviewScope": "MODEL_PRECHECK_PASSED_RENDERED_PEDAGOGICAL_REJECTED",
   "source": "Cloudflare FLUX.2 Klein 4B 1920px via Worker QA, rembg-generated RGBA",
   "visualReviewer": "assistant visual inspection of original 1920x1920 PNG composited on neutral background",
   "candidateAssets": [
@@ -23,5 +23,19 @@
         "Do not mark provisional status false or deploy production until full QA"
       ]
     }
-  ]
+  ],
+  "renderedReview": {
+    "status": "REJECTED_PEDAGOGICAL_SMALL_CARD_LEGIBILITY",
+    "reviewedAt": "2026-10-29",
+    "browserRun": "https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/40951515080",
+    "screenshotsArtifact": "duduq-eraser-v2-rendered-qa-40951515080",
+    "technicalBrowserGate": "PASS_4_OF_4",
+    "findings": [
+      "At 1366x768, eraser appears as a small blue-gray rectangular block inside the target; visually ambiguous as a school eraser.",
+      "At 390x844, the eraser is still tiny and adjacent target circles extend beyond the viewport; responsiveness is a separate pre-existing gameplay concern.",
+      "Technical image delivery, network SHA, native 1920x1920 and alpha are valid, but do not establish age-appropriate object recognition."
+    ],
+    "releaseDecision": "REJECT_THIS_ASSET_FOR_PEDAGOGICAL_PROMOTION",
+    "nextAction": "Generate a more iconic high-contrast pink-and-white school eraser with visible paper sleeve, and inspect it at actual in-game target size."
+  }
 }

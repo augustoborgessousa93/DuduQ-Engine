@@ -70,6 +70,8 @@ for(const asset of manifest.assets||[]){
   const visual=evidence.candidateAssets?.find(x=>x.assetKey===asset.assetKey);
   if(visual?.semanticPrecheck!=='PASSED'||visual.sha256!==asset.sha256||visual.concept!==asset.semanticTarget)
     throw Error('SEMANTIC_EVIDENCE_NOT_PASSED_OR_STALE:'+asset.assetKey);
+  if(/^REJECTED/.test(String(evidence.renderedReview?.status||'')))
+    throw Error('RENDERED_PEDAGOGICAL_QA_REJECTED:'+asset.assetKey);
   const png=path.resolve(bundle,asset.file||'');
   if(!safe(bundle,png))throw Error('Bundle path escape');
   const bytes=await fs.readFile(png);
