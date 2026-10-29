@@ -27,7 +27,7 @@ const manifest=JSON.parse(await fs.readFile(path.join(bundle,'batch-manifest.jso
 if(manifest.schemaVersion!=='DUDUQ_CHATGPT_MEDIA_BINDINGS_V1')throw Error('Invalid bundle schema');
 const originalRegistryBytes=await fs.readFile(registryPath);
 const originalIntegrityBytes=await fs.readFile(integrityPath);
-const originalIntegrityLines=originalIntegrityBytes.toString('utf8').trimEnd().split(/\\r?\\n/);
+const originalIntegrityLines=originalIntegrityBytes.toString('utf8').trimEnd().split(/\r?\n/);
 const integrity=new Map();
 originalIntegrityLines.forEach((line,i)=>{const k=line.lastIndexOf(' '),p=line.slice(0,k),sha=line.slice(k+1);
   if(k<1||integrity.has(p)||!/^[a-f0-9]{64}$/.test(sha))throw Error('Invalid immutable manifest entry: '+p);
@@ -119,7 +119,7 @@ if(apply){
       if(i===undefined){index.set(action.binding.mediaId,registry.entries.length);registry.entries.push(action.entry);}
       else registry.entries[i]=action.entry;
     }
-    const nextRegistry=Buffer.from(JSON.stringify(registry,null,2)+'\\n');
+    const nextRegistry=Buffer.from(JSON.stringify(registry,null,2)+'\n');
     await fs.writeFile(registryPath,nextRegistry);
     const lines=[...originalIntegrityLines];
     lines[integrity.get(registryRel).index]=registryRel+' '+hash(nextRegistry);
@@ -128,7 +128,7 @@ if(apply){
       if(integrity.has(item.out))lines[integrity.get(item.out).index]=line;
       else lines.push(line);
     }
-    const nextIntegrity=Buffer.from(lines.join('\\n')+'\\n');
+    const nextIntegrity=Buffer.from(lines.join('\n')+'\n');
     await fs.writeFile(integrityPath,nextIntegrity);
     if(hash(await fs.readFile(registryPath))!==hash(nextRegistry))throw Error('Written registry integrity failed');
     for(const item of new Map(actions.map(a=>[a.out,a])).values()){
