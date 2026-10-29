@@ -44,7 +44,15 @@ for a in assets:
     im.load()
     if im.mode!='RGBA' or im.size!=(1254,1254):
         raise SystemExit('NOT_NATIVE_RGBA_1254:'+name)
-    if im.getchannel('A').getextrema()!=(0,255): raise SystemExit('NO_REAL_ALPHA:'+name)
+    if (a.get('nativeWidth'),a.get('nativeHeight'))!=im.size or a.get('rgba') is not True or a.get('transparent') is not True:
+        raise SystemExit('MANIFEST_IMAGE_METADATA_MISMATCH:'+name)
+    alpha=im.getchannel('A')
+    if alpha.getextrema()!=(0,255): raise SystemExit('NO_REAL_ALPHA:'+name)
+    # The source manifest records the visible alpha footprint above level 32.
+    recorded_bounds=a.get('alphaBounds')
+    visible_bounds=alpha.point(lambda value: 255 if value>32 else 0).getbbox()
+    if not isinstance(recorded_bounds,list) or len(recorded_bounds)!=4 or list(visible_bounds or ())!=recorded_bounds:
+        raise SystemExit('ALPHA_BOUNDS_MANIFEST_MISMATCH:'+name)
     if a.get('bindings'):
         stats['boundAssets']+=1
         for b in a['bindings']:
