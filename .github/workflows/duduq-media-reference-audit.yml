@@ -7,6 +7,8 @@ on:
     paths:
       - "docs/qa/media-audit-20261029/**"
       - "qa/tests/verify-media-audit-snapshot.mjs"
+      - "qa/tests/verify-v27-candidate-preflight.mjs"
+      - "qa/media-inbox/batch-20261029/batch-manifest.json"
       - ".github/workflows/duduq-media-reference-audit.yml"
   workflow_dispatch:
 
@@ -30,5 +32,9 @@ jobs:
         run: node --check qa/tests/verify-media-audit-snapshot.mjs
       - name: Verify 30 modules, 600 activities, all media references and exact V27 option bindings
         run: node qa/tests/verify-media-audit-snapshot.mjs
+      - name: Verify live source provenance and quarantine rejected V27 candidates
+        run: |
+          node --check qa/tests/verify-v27-candidate-preflight.mjs
+          node qa/tests/verify-v27-candidate-preflight.mjs
       - name: Scope note
         run: echo "Read-only source snapshot QA. PNG transfer, visual QA and production release are not certified."
