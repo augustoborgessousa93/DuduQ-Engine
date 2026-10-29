@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "DUDUQ_MODEL_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-10-29",
+  "reviewScope": "MODEL_SEMANTIC_PRECHECK_ONLY",
+  "source": "Cloudflare FLUX.2 Klein 4B 1920px via Worker QA, rembg-generated RGBA",
+  "visualReviewer": "assistant visual inspection of original 1920x1920 PNG composited on neutral background",
+  "candidateAssets": [
+    {
+      "assetKey": "CF-Y1M04-ERASER-V2",
+      "sha256": "aa9e4f93e83c0769d97f781be2ceee8bb9cf11950e668130cb5e5aba3bb5a5c2",
+      "concept": "eraser",
+      "semanticPrecheck": "PASSED",
+      "evidence": [
+        "Exactly one rectangular two-tone rubber school eraser, cobalt blue body with orange ends",
+        "No other props, legs, hands, text, or collaged panels",
+        "Recognizable eraser at small card size, enlarged centered 3D CGI",
+        "RGBA 1920x1920, alpha >0 and zero in corners, native scale without upscaling",
+        "Source hash explicitly pinned to the exact inspected PNG"
+      ],
+      "limitations": [
+        "Atypical blue-orange eraser; evaluate clarity against other school objects in live game",
+        "This is model semantic precheck only, NOT teacher/human pedagogical approval",
+        "Do not mark provisional status false or deploy production until full QA"
+      ]
+    }
+  ]
+}
