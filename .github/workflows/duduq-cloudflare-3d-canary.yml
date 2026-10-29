@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: write
+  actions: read
 
 concurrency:
   group: duduq-cloudflare-eraser-qa
@@ -35,13 +36,23 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install open-source background removal on free runner
+      - name: Check V2 verifier syntax before expensive QA
+        id: syntax
+        run: node --check qa/tests/verify-v27-cloudflare-canary.mjs
+      - name: Install exact reviewed PNG QA dependencies
         id: install
-        run: |
-          python -m pip install --disable-pip-version-check --no-input "Pillow>=10,<12" "rembg[cpu]>=2.0.60,<3"
-      - name: Download one existing free-quota 3D asset and create transparent PNG
+        run: python -m pip install --disable-pip-version-check --no-input "Pillow==11.3.0" "numpy==2.4.6"
+      - name: Download exact previously rembg-generated V2 PNG from GitHub Actions
+        id: download
+        uses: actions/download-artifact@v4
+        with:
+          name: duduq-cloudflare-3d-canary-40945508846
+          run-id: 40945508846
+          github-token: ${{ github.token }}
+          path: qa/_canary_pinned
+      - name: Validate pinned native RGBA V2 and write candidate manifest
         id: generate
-        run: python qa/cloudflare-3d-canary.py
+        run: python qa/cloudflare-3d-canary.py --pinned-reviewed-artifact
       - name: Build pinned V26 and test exact image binding
         id: verify
         shell: bash
@@ -72,6 +83,7 @@ jobs:
         shell: bash
         env:
           INSTALL_OUTCOME: ${{ steps.install.outcome }}
+          DOWNLOAD_OUTCOME: ${{ steps.download.outcome }}
           GENERATE_OUTCOME: ${{ steps.generate.outcome }}
           VERIFY_OUTCOME: ${{ steps.verify.outcome }}
           CANARY_RUN_ID: ${{ github.run_id }}
@@ -90,6 +102,7 @@ jobs:
               'runAttempt':os.environ.get('CANARY_RUN_ATTEMPT'),
               'sourceCommit':os.environ.get('CANARY_SOURCE_SHA'),
               'installOutcome':os.environ.get('INSTALL_OUTCOME'),
+              'downloadOutcome':os.environ.get('DOWNLOAD_OUTCOME'),
               'generateOutcome':os.environ.get('GENERATE_OUTCOME'),
               'verifyOutcome':os.environ.get('VERIFY_OUTCOME'),
               'candidatePngPresent':actual is not None,
