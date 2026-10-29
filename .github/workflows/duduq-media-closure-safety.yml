@@ -1,0 +1,61 @@
+name: DUDUQ - Automatic Media Closure Safety
+
+on:
+  push:
+    branches:
+      - automation/duduq-media-source-only-fix-20261029
+    paths:
+      - "qa/media-safe-retirement.mjs"
+      - "qa/tests/duduq-media-safe-retirement.test.mjs"
+      - ".github/workflows/duduq-media-closure-safety.yml"
+      - "qa/media-inbox/**"
+      - "qa/media-candidates/**"
+      - "qa/audit-media-completion.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duduq-media-closure-safety-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify_retirement_safety:
+    name: Protect all referenced media from premature deletion
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout isolated QA branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify syntax and fail-closed retirement regression tests
+        run: |
+          node --check qa/media-safe-retirement.mjs
+          node --check qa/tests/duduq-media-safe-retirement.test.mjs
+          node --test qa/tests/duduq-media-safe-retirement.test.mjs
+      - name: Build all 30 modules and report actual provisional sources
+        run: |
+          bash qa/build-v26-topic-first-paint-qa.sh
+          node qa/audit-media-completion.mjs
+          node qa/media-safe-retirement.mjs --root=dist-pages --output=qa/results/media-safe-retirement-plan.json
+      - name: Retain QA closure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-media-safe-retirement-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/media-safe-retirement-plan.json
+            qa/results/media-closure-inventory.json
+      - name: Explicit security boundary
+        run: |
+          echo "READ-ONLY planning. No asset removal or registry change on this workflow."
+          echo "A signed release attestation and verified backups are mandatory for future --apply."
+          echo "No production promotion and no AI image generation are performed."
