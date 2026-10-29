@@ -1,5 +1,5 @@
 {
-  "audit": "DUDUQ_MEDIA_REFERENCES_20261029",
+  "audit": "DUDUQ_MEDIA_REFERENCES_20261029_V2_INCLUDES_ASSETID",
   "sourceRepo": "augustoborgessousa93/duduq-fit-qa-private",
   "sourcePath": "dist-pages/content/english/year-{year}/module-{mm}/questions.json",
   "year": 5,
@@ -125,6 +125,10 @@
               "answerKey": "Y5M01-Q005-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-DAD093B44D74B06E",
+              "semanticTarget": "first name",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -133,6 +137,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-A3B190D0719166CA",
+              "semanticTarget": "Brazil",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -141,6 +149,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-A8BFD29BD6311564",
+              "semanticTarget": "Brazilian",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -149,6 +161,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0ECC8CCCCE018799",
+              "semanticTarget": "city",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -220,6 +236,10 @@
               "label": "Mia",
               "answerKey": "Mia",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -227,6 +247,10 @@
               "label": "middle name",
               "answerKey": "middle name",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -234,6 +258,10 @@
               "label": "last name",
               "answerKey": "last name",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -241,6 +269,10 @@
               "label": "Leo",
               "answerKey": "Leo",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -268,6 +300,10 @@
               "answerKey": "Y5M01-Q009-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-20C1CD3B145B4CF6",
+              "semanticTarget": "Leo",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -276,6 +312,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-A3B190D0719166CA",
+              "semanticTarget": "Brazil",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -284,6 +324,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-A8BFD29BD6311564",
+              "semanticTarget": "Brazilian",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -292,6 +336,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0ECC8CCCCE018799",
+              "semanticTarget": "city",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -377,6 +425,10 @@
               "answerKey": "Y5M01-Q013-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-DAD093B44D74B06E",
+              "semanticTarget": "first name",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -385,6 +437,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0ECC8CCCCE018799",
+              "semanticTarget": "city",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -393,6 +449,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-01309F9279450B63",
+              "semanticTarget": "country",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -401,6 +461,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-C83F275FF632F1E9",
+              "semanticTarget": "middle name",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -455,6 +519,10 @@
               "answerKey": "Y5M01-Q015-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticTarget": "I do not like carrots",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -463,6 +531,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticTarget": "I like apples",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -471,6 +543,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticTarget": "I prefer grapes",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -479,6 +555,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticTarget": "I like papaya",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -552,6 +632,10 @@
               "label": "Brazil",
               "answerKey": "Brazil",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -559,6 +643,10 @@
               "label": "Brazilian",
               "answerKey": "Brazilian",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -566,6 +654,10 @@
               "label": "city",
               "answerKey": "city",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -573,6 +665,10 @@
               "label": "country",
               "answerKey": "country",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -673,6 +769,10 @@
               "answerKey": "Y5M02-Q002-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticTarget": "I prefer grapes",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -681,6 +781,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticTarget": "I like apples",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -689,6 +793,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticTarget": "I do not like carrots",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -697,6 +805,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticTarget": "I like papaya",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -744,6 +856,10 @@
               "answerKey": "Y5M02-Q004-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticTarget": "I like papaya",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -752,6 +868,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticTarget": "I like apples",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -760,6 +880,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticTarget": "I prefer grapes",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -768,6 +892,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticTarget": "I do not like carrots",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -847,6 +975,10 @@
               "answerKey": "Y5M02-Q007-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticTarget": "I do not like carrots",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -855,6 +987,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticTarget": "I like apples",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -863,6 +999,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticTarget": "I prefer grapes",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -871,6 +1011,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticTarget": "I like papaya",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -894,6 +1038,10 @@
               "label": "sleep",
               "answerKey": "sleep",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -901,6 +1049,10 @@
               "label": "wake up",
               "answerKey": "wake up",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -908,6 +1060,10 @@
               "label": "have breakfast",
               "answerKey": "have breakfast",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -915,6 +1071,10 @@
               "label": "go to school",
               "answerKey": "go to school",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1017,6 +1177,10 @@
               "answerKey": "Y5M02-Q012-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticTarget": "I like papaya",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1025,6 +1189,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticTarget": "I like apples",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1033,6 +1201,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticTarget": "I prefer grapes",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1041,6 +1213,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticTarget": "I do not like carrots",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1097,6 +1273,10 @@
               "answerKey": "Y5M02-Q014-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticTarget": "I prefer grapes",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1105,6 +1285,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticTarget": "I like apples",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1113,6 +1297,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticTarget": "I do not like carrots",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1121,6 +1309,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticTarget": "I like papaya",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1190,6 +1382,10 @@
               "answerKey": "Y5M02-Q017-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticTarget": "I like apples",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1198,6 +1394,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticTarget": "I prefer grapes",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1206,6 +1406,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticTarget": "I do not like carrots",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1214,6 +1418,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticTarget": "I like papaya",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1237,6 +1445,10 @@
               "label": "sleep",
               "answerKey": "sleep",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1244,6 +1456,10 @@
               "label": "wake up",
               "answerKey": "wake up",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1251,6 +1467,10 @@
               "label": "have breakfast",
               "answerKey": "have breakfast",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1258,6 +1478,10 @@
               "label": "go to school",
               "answerKey": "go to school",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1307,6 +1531,10 @@
               "answerKey": "Y5M02-Q020-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-A0AFA9669F1B5754",
+              "semanticTarget": "lunch",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1315,6 +1543,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-C2DDDB6706E1EAA5",
+              "semanticTarget": "wake up",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1323,6 +1555,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-BB358396CB4047B1",
+              "semanticTarget": "have breakfast",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1331,6 +1567,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-B43E1B61B1A52B95",
+              "semanticTarget": "go to school",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1366,6 +1606,10 @@
               "answerKey": "Y5M03-Q001-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-D10E5F395BAAD6A4",
+              "semanticTarget": "doctor",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1374,6 +1618,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+              "semanticTarget": "teacher",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1382,6 +1630,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-AC379EA36398F2B0",
+              "semanticTarget": "actor",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1390,6 +1642,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+              "semanticTarget": "actress",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1437,6 +1693,10 @@
               "answerKey": "Y5M03-Q003-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-AC379EA36398F2B0",
+              "semanticTarget": "actor",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1445,6 +1705,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-D10E5F395BAAD6A4",
+              "semanticTarget": "doctor",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1453,6 +1717,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+              "semanticTarget": "teacher",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1461,6 +1729,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+              "semanticTarget": "actress",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1538,6 +1810,10 @@
               "answerKey": "Y5M03-Q006-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+              "semanticTarget": "teacher",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1546,6 +1822,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-AC379EA36398F2B0",
+              "semanticTarget": "actor",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1554,6 +1834,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+              "semanticTarget": "actress",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1562,6 +1846,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+              "semanticTarget": "mother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1589,6 +1877,10 @@
               "answerKey": "Y5M03-Q007-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+              "semanticTarget": "he",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1597,6 +1889,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+              "semanticTarget": "she",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1605,6 +1901,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-3527CF12E6C57BF5",
+              "semanticTarget": "they",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1613,6 +1913,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "MEDIA-LETTER-I",
+              "semanticTarget": "I",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1636,6 +1940,10 @@
               "label": "sister",
               "answerKey": "sister",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1643,6 +1951,10 @@
               "label": "doctor",
               "answerKey": "doctor",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1650,6 +1962,10 @@
               "label": "teacher",
               "answerKey": "teacher",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1657,6 +1973,10 @@
               "label": "actor",
               "answerKey": "actor",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1726,6 +2046,10 @@
               "answerKey": "Y5M03-Q011-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-AC379EA36398F2B0",
+              "semanticTarget": "actor",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1734,6 +2058,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-D10E5F395BAAD6A4",
+              "semanticTarget": "doctor",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1742,6 +2070,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+              "semanticTarget": "teacher",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1750,6 +2082,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+              "semanticTarget": "actress",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1806,6 +2142,10 @@
               "answerKey": "Y5M03-Q013-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-3527CF12E6C57BF5",
+              "semanticTarget": "they",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1814,6 +2154,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-D10E5F395BAAD6A4",
+              "semanticTarget": "doctor",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1822,6 +2166,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+              "semanticTarget": "teacher",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1830,6 +2178,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-AC379EA36398F2B0",
+              "semanticTarget": "actor",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1904,6 +2256,10 @@
               "answerKey": "Y5M03-Q016-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-D10E5F395BAAD6A4",
+              "semanticTarget": "doctor",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1912,6 +2268,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+              "semanticTarget": "teacher",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1920,6 +2280,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-AC379EA36398F2B0",
+              "semanticTarget": "actor",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1928,6 +2292,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+              "semanticTarget": "actress",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1978,6 +2346,10 @@
               "label": "mother",
               "answerKey": "mother",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1985,6 +2357,10 @@
               "label": "doctor",
               "answerKey": "doctor",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1992,6 +2368,10 @@
               "label": "teacher",
               "answerKey": "teacher",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1999,6 +2379,10 @@
               "label": "actor",
               "answerKey": "actor",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2092,6 +2476,10 @@
               "answerKey": "Y5M04-Q002-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-CE549BD5435AA2DC",
+              "semanticTarget": "52",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2100,6 +2488,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-1AF66C94E68071AF",
+              "semanticTarget": "51",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2108,6 +2500,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-42EBF5105139E010",
+              "semanticTarget": "53",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2116,6 +2512,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-98572AF9240DEA11",
+              "semanticTarget": "54",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2216,6 +2616,10 @@
               "answerKey": "Y5M04-Q006-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-379EDEF854626480",
+              "semanticTarget": "56",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2224,6 +2628,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-1AF66C94E68071AF",
+              "semanticTarget": "51",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2232,6 +2640,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-CE549BD5435AA2DC",
+              "semanticTarget": "52",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2240,6 +2652,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-42EBF5105139E010",
+              "semanticTarget": "53",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2285,6 +2701,10 @@
               "label": "58",
               "answerKey": "58",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2292,6 +2712,10 @@
               "label": "51",
               "answerKey": "51",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2299,6 +2723,10 @@
               "label": "52",
               "answerKey": "52",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2306,6 +2734,10 @@
               "label": "53",
               "answerKey": "53",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2356,6 +2788,10 @@
               "answerKey": "Y5M04-Q010-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-82F9BC49138C2B92",
+              "semanticTarget": "fever",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2364,6 +2800,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6A6303B6B4A8DC3C",
+              "semanticTarget": "headache",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2372,6 +2812,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-5FF168A9953122AC",
+              "semanticTarget": "stomachache",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2380,6 +2824,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6BEDDD5F7F26B766",
+              "semanticTarget": "toothache",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2436,6 +2884,10 @@
               "answerKey": "Y5M04-Q012-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-5FF168A9953122AC",
+              "semanticTarget": "stomachache",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2444,6 +2896,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6A6303B6B4A8DC3C",
+              "semanticTarget": "headache",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2452,6 +2908,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6BEDDD5F7F26B766",
+              "semanticTarget": "toothache",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2460,6 +2920,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-ACB5DDF40D1C7796",
+              "semanticTarget": "cold",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2602,6 +3066,10 @@
               "label": "68",
               "answerKey": "68",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2609,6 +3077,10 @@
               "label": "51",
               "answerKey": "51",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2616,6 +3088,10 @@
               "label": "52",
               "answerKey": "52",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2623,6 +3099,10 @@
               "label": "53",
               "answerKey": "53",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2672,6 +3152,10 @@
               "answerKey": "Y5M04-Q020-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-AFE7D45A37B4DE24",
+              "semanticTarget": "70",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2680,6 +3164,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-1AF66C94E68071AF",
+              "semanticTarget": "51",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2688,6 +3176,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-CE549BD5435AA2DC",
+              "semanticTarget": "52",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2696,6 +3188,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-42EBF5105139E010",
+              "semanticTarget": "53",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2729,6 +3225,10 @@
               "answerKey": "Y5M05-Q001-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-A724B390350BFC51",
+              "semanticTarget": "table",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2737,6 +3237,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-27524231B0FE1495",
+              "semanticTarget": "TV",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2745,6 +3249,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-35D19BFFD2501DAC",
+              "semanticTarget": "rug",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2753,6 +3261,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0B16159183B80E80",
+              "semanticTarget": "wardrobe",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2857,6 +3369,10 @@
               "answerKey": "Y5M05-Q005-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-5B5870D5FA1CFFFA",
+              "semanticTarget": "behind",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2865,6 +3381,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-595EDFA01D8C409E",
+              "semanticTarget": "under",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2873,6 +3393,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-7D352CC6EC5D862A",
+              "semanticTarget": "beside",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2881,6 +3405,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-E4060D2C0568ECD9",
+              "semanticTarget": "in",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2950,6 +3478,10 @@
               "label": "plate",
               "answerKey": "plate",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2957,6 +3489,10 @@
               "label": "table",
               "answerKey": "table",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2964,6 +3500,10 @@
               "label": "TV",
               "answerKey": "TV",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2971,6 +3511,10 @@
               "label": "rug",
               "answerKey": "rug",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2998,6 +3542,10 @@
               "answerKey": "Y5M05-Q009-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-56ADE30F9C01FFD7",
+              "semanticTarget": "There is a table.",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3006,6 +3554,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-DF1ED31F1CA904F3",
+              "semanticTarget": "There are two pillows.",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3014,6 +3566,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-AD8C3930F382C54F",
+              "semanticTarget": "There is a plate.",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3022,6 +3578,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-196B76C1A472E8CE",
+              "semanticTarget": "There are three chairs.",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3072,6 +3632,10 @@
               "answerKey": "Y5M05-Q011-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-35D19BFFD2501DAC",
+              "semanticTarget": "rug",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3080,6 +3644,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0B16159183B80E80",
+              "semanticTarget": "wardrobe",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3088,6 +3656,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-01BBFD495285C31F",
+              "semanticTarget": "sofa",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3096,6 +3668,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-F11EE70DE1D4EFA2",
+              "semanticTarget": "bed",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3164,6 +3740,10 @@
               "answerKey": "Y5M05-Q014-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-5B5870D5FA1CFFFA",
+              "semanticTarget": "behind",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3172,6 +3752,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-595EDFA01D8C409E",
+              "semanticTarget": "under",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3180,6 +3764,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-7D352CC6EC5D862A",
+              "semanticTarget": "beside",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3188,6 +3776,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-EE4B263993C464A8",
+              "semanticTarget": "on",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3261,6 +3853,10 @@
               "answerKey": "Y5M05-Q017-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-5B5870D5FA1CFFFA",
+              "semanticTarget": "behind",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3269,6 +3865,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-595EDFA01D8C409E",
+              "semanticTarget": "under",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3277,6 +3877,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-7D352CC6EC5D862A",
+              "semanticTarget": "beside",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3300,6 +3904,10 @@
               "label": "TV",
               "answerKey": "TV",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3307,6 +3915,10 @@
               "label": "table",
               "answerKey": "table",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3314,6 +3926,10 @@
               "label": "rug",
               "answerKey": "rug",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3321,6 +3937,10 @@
               "label": "wardrobe",
               "answerKey": "wardrobe",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3449,6 +4069,10 @@
               "answerKey": "Y5M06-Q003-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-55F3B7B7A481E819",
+              "semanticTarget": "school",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3457,6 +4081,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-5B9F259EB7128F83",
+              "semanticTarget": "bank",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3465,6 +4093,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-AF6280CC072B5A5F",
+              "semanticTarget": "supermarket",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3473,6 +4105,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-30AE918E26C66C62",
+              "semanticTarget": "shoe store",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3500,6 +4136,10 @@
               "answerKey": "Y5M06-Q004-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-5FC97E87261A0214",
+              "semanticTarget": "three horses",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3508,6 +4148,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6AE2E468D56512D8",
+              "semanticTarget": "one duck",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3516,6 +4160,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-E97CBF8EA098A30F",
+              "semanticTarget": "two ducks",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3524,6 +4172,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-A03A06C935EC3C93",
+              "semanticTarget": "one horse",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3622,6 +4274,10 @@
               "label": "bank",
               "answerKey": "bank",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3629,6 +4285,10 @@
               "label": "supermarket",
               "answerKey": "supermarket",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3636,6 +4296,10 @@
               "label": "school",
               "answerKey": "school",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3643,6 +4307,10 @@
               "label": "shoe store",
               "answerKey": "shoe store",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3691,6 +4359,10 @@
               "answerKey": "Y5M06-Q010-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-94C364D81141839E",
+              "semanticTarget": "playing",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3699,6 +4371,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-654AB9DC01850D7D",
+              "semanticTarget": "play",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3707,6 +4383,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-147A281F23DD5657",
+              "semanticTarget": "study",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3715,6 +4395,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-C2DDDB6706E1EAA5",
+              "semanticTarget": "wake up",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3792,6 +4476,10 @@
               "answerKey": "Y5M06-Q013-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-6A7FACB84704D37D",
+              "semanticTarget": "hospital",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3800,6 +4488,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-5B9F259EB7128F83",
+              "semanticTarget": "bank",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3808,6 +4500,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-AF6280CC072B5A5F",
+              "semanticTarget": "supermarket",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3816,6 +4512,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-55F3B7B7A481E819",
+              "semanticTarget": "school",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3889,6 +4589,10 @@
               "answerKey": "Y5M06-Q016-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-30AE918E26C66C62",
+              "semanticTarget": "shoe store",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3897,6 +4601,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-8E3C880619E8EF69",
+              "semanticTarget": "park",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3905,6 +4613,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6A7FACB84704D37D",
+              "semanticTarget": "hospital",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3913,6 +4625,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-3C63D491F0FB2B90",
+              "semanticTarget": "library",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3963,6 +4679,10 @@
               "label": "shoe store",
               "answerKey": "shoe store",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3970,6 +4690,10 @@
               "label": "bank",
               "answerKey": "bank",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3977,6 +4701,10 @@
               "label": "supermarket",
               "answerKey": "supermarket",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3984,6 +4712,10 @@
               "label": "school",
               "answerKey": "school",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
