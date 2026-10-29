@@ -459,6 +459,7 @@ async function generateRequests({ requestPath = DEFAULT_REQUESTS, requestId = nu
     (testOnly ? need.generationRequest.testOnly === true : need.status === "NEEDS_CHATGPT_IMAGE_GENERATION" && need.generationRequest.testOnly !== true));
   // No additional image API expense is authorized: API keys alone must never trigger billing.
   // A future, separately approved budget may enable paid calls explicitly.
+  if (!needs.length) return { status: "NO_PENDING_REQUESTS", providerMode: "none", activeProvider: "none", generated: 0, paidApiCalls: 0, budgetUsd: 0 };
   const maxPerRunRaw = process.env.DUDUQ_IMAGE_MAX_PER_RUN ?? "10";
   const maxPerRun = Number(maxPerRunRaw);
   if (!Number.isInteger(maxPerRun) || maxPerRun < 1 || maxPerRun > 10) {
@@ -479,7 +480,6 @@ async function generateRequests({ requestPath = DEFAULT_REQUESTS, requestId = nu
   const mode = providerModeOverride || providerMode();
   const health = await readProviderHealth(providerHealthPath);
   const candidates = providerOrder({ mode, health });
-  if (!needs.length) return { status: "NO_PENDING_REQUESTS", providerMode: mode, activeProvider: "none", generated: 0 };
   if (!candidates.length) {
     const anyConfigured = Boolean(process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY);
     return { status: anyConfigured ? "PROVIDERS_UNAVAILABLE" : "NOT_CONFIGURED", providerMode: mode, activeProvider: "none", requiredEnv: mode === "openai" ? "OPENAI_API_KEY" : mode === "gemini" ? "GEMINI_API_KEY" : "GEMINI_API_KEY_OR_OPENAI_API_KEY", generated: 0 };
