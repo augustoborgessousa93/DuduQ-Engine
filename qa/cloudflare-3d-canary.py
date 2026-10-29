@@ -6,9 +6,9 @@ import hashlib, io, json, os, pathlib, sys, urllib.request
 from PIL import Image
 from rembg import remove, new_session
 
-URL = "https://duduq-media-qa-staging.brasilculturalgames.workers.dev/assets/duduq-3d-eraser-klein4b-20261029.jpg"
+URL = "https://duduq-media-qa-staging.brasilculturalgames.workers.dev/assets/duduq-3d-eraser-v2-klein4b-20261029.jpg"
 OUT = pathlib.Path("qa/media-inbox/cloudflare-eraser-20261029")
-FILE = "images/CF-Y1M04-ERASER-V1.png"
+FILE = "images/CF-Y1M04-ERASER-V2.png"
 def fail(reason): raise RuntimeError("DUDUQ_CANARY_REJECTED:" + reason)
 req = urllib.request.Request(URL, headers={"User-Agent":"DUDUQ-Image-QA/1.0"})
 with urllib.request.urlopen(req, timeout=45) as response:
@@ -60,7 +60,7 @@ manifest={"schemaVersion":"DUDUQ_CHATGPT_MEDIA_BINDINGS_V1",
  "created":"2026-10-29","productionSafe":False,
  "source":"Cloudflare Workers AI free-quota 3D canary; generated at native 1920px, alpha from rembg",
  "humanReview":"MODEL_SEMANTIC_PRECHECK_ONLY",
- "assets":[{"assetKey":"CF-Y1M04-ERASER-V1","file":FILE,"semanticTarget":"eraser",
+ "assets":[{"assetKey":"CF-Y1M04-ERASER-V2","file":FILE,"semanticTarget":"eraser",
  "pixelWidth":1920,"pixelHeight":1920,"rgbaAlpha":True,"sha256":sha,
  "bindings":[{"questionId":"Y1M04-Q015","mediaId":"IMG-Y1M04-Q015-ERASER"},
              {"questionId":"Y1M04-Q020","mediaId":"IMG-Y1M04-Q020-ERASER"}],
