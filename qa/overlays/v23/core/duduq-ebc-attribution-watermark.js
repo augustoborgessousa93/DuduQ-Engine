@@ -23,6 +23,9 @@
     // The game screen is an isolated stacking context. Keep this behind all game controls.
     ".game-screen > .duduq-ebc-attribution {z-index:-1 !important;}",
     // A visible result footer always takes precedence, including its lower edge.
+    // In the module host, feedback may be outside #game or the footer may still be under body.
+    // Scope feedback visibility to the whole document; results always outrank attribution.
+    "html:has(.feedback-ribbon:not([hidden]):not([aria-hidden='true'])) .duduq-ebc-attribution {visibility:hidden !important;opacity:0 !important;pointer-events:none !important;}",
     ".game-screen:has(.feedback-ribbon:not([hidden])) > .duduq-ebc-attribution {visibility:hidden !important;opacity:0 !important;}",
     ".duduq-ebc-attribution:hover,.duduq-ebc-attribution:focus-within {opacity:1 !important;}",
     ".duduq-ebc-attribution a {color:inherit !important;font:inherit !important;",
