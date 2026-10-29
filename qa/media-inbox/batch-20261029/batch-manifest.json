@@ -2,7 +2,7 @@
   "schemaVersion": "DUDUQ_CHATGPT_MEDIA_BINDINGS_V1",
   "created": "2026-10-29",
   "productionSafe": false,
-  "policy": "One PNG per asset; only exact pedagogical option bindings; 1254 x 1254 native RGBA; deploy forbidden before QA.",
+  "policy": "Individual 1254x1254 RGBA PNGs only; candidate previews must pass semantic precheck, checksum and real QA. Rejected assets must never be imported or published.",
   "assets": [
     {
       "assetKey": "BASE-Y1-003",
@@ -18,7 +18,9 @@
           "mediaId": "IMG-Y1M05-Q001-HEAD"
         }
       ],
-      "review": "MODEL_SEMANTIC_PRECHECK_ONLY"
+      "review": "REJECTED_SEMANTIC_PRECHECK",
+      "reviewEvidence": "docs/qa/media-audit-20261029/live-source-and-v27-preflight.json",
+      "reviewReason": "Both hands visibly point at the head; exact contract forbids hands."
     },
     {
       "assetKey": "BASE-Y1-007",
@@ -42,7 +44,9 @@
           "mediaId": "IMG-Y1M04-Q015-BACKPACK"
         }
       ],
-      "review": "MODEL_SEMANTIC_PRECHECK_ONLY"
+      "review": "REJECTED_SEMANTIC_PRECHECK",
+      "reviewEvidence": "docs/qa/media-audit-20261029/live-source-and-v27-preflight.json",
+      "reviewReason": "Visible pencils, crayons, notebooks, ruler and eraser inside the backpack; violates single-object contract and leaks distractors."
     }
   ]
 }
