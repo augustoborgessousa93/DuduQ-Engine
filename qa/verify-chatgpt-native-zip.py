@@ -33,7 +33,8 @@ for a in assets:
     name=a.get('file')
     if not isinstance(name,str) or not name.startswith('images/') or '/' in name[len('images/'):]:
         raise SystemExit('INVALID_ASSET_FILENAME')
-    if name in seen: raise SystemExit('DUPLICATE_FILE'); seen.add(name)
+    if name in seen: raise SystemExit('DUPLICATE_FILE')
+    seen.add(name)
     p=out/name
     raw=p.read_bytes()
     if hashlib.sha256(raw).hexdigest()!=a.get('sha256'):
