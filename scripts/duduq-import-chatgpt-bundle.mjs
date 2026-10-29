@@ -113,13 +113,17 @@ for(const asset of manifest.assets||[]){
     // proves every usage has the exact same semantic target and stays within this module.
     const q=await questionFor(binding.questionId);
     if(!imageIds(q).has(binding.mediaId))throw Error('Media not bound to question: '+binding.mediaId);
-    const option=(q.options||[]).find(o=>o.media?.assetId===binding.mediaId||o.mediaId===binding.mediaId);
-    const sem=String(option?.media?.semanticTarget||option?.semanticTarget||option?.label||'').trim().toLowerCase();
-    if(!option||!isExactPedagogicalConcept(asset.semanticTarget,sem))
-      throw Error('Image must match exact answer option: '+binding.mediaId+':'+sem);
+    // Images are not restricted to options: real drag-drop and bubble-pop contracts
+    // store them in targets, mediaBindings and distractor pools. Every usage must
+    // have an exact semanticTarget; the 600-question guard forbids shared-ID leakage.
+    const usages=(allQuestionUsages.get(binding.mediaId)||[]).filter(x=>x.questionId===binding.questionId);
+    if(!usages.length||usages.some(x=>!isExactPedagogicalConcept(asset.semanticTarget,x.semanticTarget)))
+      throw Error('IMAGE_CONTRACT_SEMANTIC_MISMATCH:'+binding.mediaId);
     assertBindingSafeAcrossQuestions({usages:allQuestionUsages,mediaId:binding.mediaId,
       questionId:binding.questionId,semanticTarget:asset.semanticTarget});
     const prior=index.has(binding.mediaId)?registry.entries[index.get(binding.mediaId)]:null;
+    if(!prior||prior.kind!=='image'||prior.temporary!==true)
+      throw Error('REUSE_ONLY_EXISTING_PROVISIONAL_IMAGES:'+binding.mediaId);
     // APPROVED here is loader compatibility only; candidate remains temporary until real visual/pedagogical QA.
     const entry={...(prior||{}),mediaId:binding.mediaId,status:'APPROVED',kind:'image',temporary:true,
       integrationStatus:'CANDIDATE_PREVIEW_ONLY_PEDAGOGICAL_QA_PENDING',humanResolutionStatus:'PEDAGOGICAL_QA_PENDING',
