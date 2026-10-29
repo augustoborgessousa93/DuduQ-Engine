@@ -53,7 +53,11 @@ for(const ref of references.values()){
  if(badPaths.length)category='BROKEN_ASSET';
  listed.push({mediaId:ref.id,status:category,questions:[...ref.items].sort(),modules:[...ref.modules].sort(),usage:ref.items.size,semantic:e?.semantic||e?.altText||ref.examples.find(x=>x.semantic)?.semantic||ref.id.replace(/^IMG-(?:Y\dM\d\d-)?Q\d{3}-/,'').replaceAll('-',' ').toLowerCase(),temporary:e?.temporary??null,path:e?.urlOrPath||p[0]||null,badPaths,evidence:ref.examples});
 }
+// Both provisional/broken references and apparently non-temporary but unverified
+// references block closure. Never equate absence of placeholders with QA approval.
 const incomplete=listed.filter(x=>x.status!=='NON_TEMPORARY_UNVERIFIED');
+const unverified=listed.filter(x=>x.status==='NON_TEMPORARY_UNVERIFIED');
+const closureBlockers=[...incomplete,...unverified];
 const groups=new Map();
 for(const x of incomplete){
  const k=(x.modules[0]?.slice(0,2)||'SHARED')+'|'+String(x.semantic||'').trim().toLowerCase();
@@ -62,7 +66,7 @@ for(const x of incomplete){
 }
 const queue=[...groups.values()].sort((a,b)=>b.questions-a.questions||a.concept.localeCompare(b.concept));
 const byStatus={};for(const x of listed)byStatus[x.status]=(byStatus[x.status]||0)+1;
-const report={schemaVersion:'DUDUQ_MEDIA_COMPLETION_V1',generatedAt:new Date().toISOString(),modules,activities,registryEntries:index.size,referencedMediaIds:listed.length,byStatus,incompleteReferencedIds:incomplete.length,metadataClosurePassed:incomplete.length===0&&modules===30&&activities===600, finalPedagogicalQaApproved:false,finalCompletionPassed:false,queue,items:listed.sort((a,b)=>a.mediaId.localeCompare(b.mediaId))};
+const report={schemaVersion:'DUDUQ_MEDIA_COMPLETION_V1',generatedAt:new Date().toISOString(),modules,activities,registryEntries:index.size,referencedMediaIds:listed.length,byStatus,incompleteReferencedIds:closureBlockers.length,provisionalOrBlockedReferencedIds:incomplete.length,nonTemporaryUnverifiedReferencedIds:unverified.length,metadataClosurePassed:closureBlockers.length===0&&modules===30&&activities===600, finalPedagogicalQaApproved:false,finalCompletionPassed:false,queue,items:listed.sort((a,b)=>a.mediaId.localeCompare(b.mediaId))};
 await mkdir(path.dirname(out),{recursive:true});await writeFile(out,JSON.stringify(report,null,2)+'\n');
-console.log(JSON.stringify({modules,activities,registryEntries:index.size,referencedIds:listed.length,byStatus,incomplete:incomplete.length,queueGroups:queue.length,metadataClosurePassed:report.metadataClosurePassed,finalPedagogicalQaApproved:report.finalPedagogicalQaApproved,report:out}));
+console.log(JSON.stringify({modules,activities,registryEntries:index.size,referencedIds:listed.length,byStatus,incomplete:closureBlockers.length,provisionalOrBlocked:incomplete.length,nonTemporaryUnverified:unverified.length,queueGroups:queue.length,metadataClosurePassed:report.metadataClosurePassed,finalPedagogicalQaApproved:report.finalPedagogicalQaApproved,report:out}));
 if(requireComplete&&!report.finalCompletionPassed)process.exitCode=2;
