@@ -3,13 +3,13 @@
   "created": "2026-10-29",
   "sourceAudit": "docs/qa/media-audit-20261029/summary.json",
   "generationProvider": "NOT_CONFIGURED_IN_GITHUB",
-  "status": "PLAN_ONLY_NO_BINARY_UPLOAD",
+  "status": "PLAN_ONLY_TWO_CANDIDATES_REJECTED_NO_BINARY_UPLOAD",
   "policy": "No image generation or integration claimed. Only apply after actual PNG bytes and complete QA.",
   "assets": [
     {
       "assetKey": "BASE-Y1-003",
       "concept": "head",
-      "status": "GENERATED_EXTERNALLY_NOT_UPLOADED",
+      "status": "REJECTED_VISUAL_PRECHECK_REGENERATE",
       "mediaIds": [
         "IMG-Y1M05-Q001-HEAD"
       ],
@@ -32,12 +32,13 @@
         "requireNativeTransparentPng": true,
         "requireSha256": true,
         "requireHumanPedagogicalReview": true
-      }
+      },
+      "rejectionEvidence": "docs/qa/media-audit-20261029/live-source-and-v27-preflight.json"
     },
     {
       "assetKey": "BASE-Y1-007",
       "concept": "backpack",
-      "status": "GENERATED_EXTERNALLY_NOT_UPLOADED",
+      "status": "REJECTED_VISUAL_PRECHECK_REGENERATE",
       "mediaIds": [
         "IMG-Y1M04-Q010-BACKPACK",
         "IMG-Y1M04-Q015-BACKPACK",
@@ -63,7 +64,8 @@
         "requireNativeTransparentPng": true,
         "requireSha256": true,
         "requireHumanPedagogicalReview": true
-      }
+      },
+      "rejectionEvidence": "docs/qa/media-audit-20261029/live-source-and-v27-preflight.json"
     },
     {
       "assetKey": "NEXT-Y1-ERASER",
@@ -318,7 +320,8 @@
   "totals": {
     "uniqueConcepts": 11,
     "mediaIds": 16,
-    "pendingNewAssets": 9,
-    "existingGeneratedAssetsAwaitingTransfer": 2
+    "pendingNewAssets": 11,
+    "existingGeneratedAssetsAwaitingTransfer": 0,
+    "rejectedExistingAssets": 2
   }
 }
