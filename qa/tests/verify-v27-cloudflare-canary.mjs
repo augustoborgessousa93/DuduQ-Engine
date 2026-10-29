@@ -18,7 +18,8 @@ for(const asset of manifest.assets){
  const id=binding.mediaId;
  const m=binding.questionId.match(/^Y([1-5])M(0[1-6])-Q\d{3}$/);
  if(!m)throw Error('INVALID_QUESTION_ID:'+binding.questionId);
- const q=JSON.parse(readFileSync(path.join(root,`content/english/year-${m[1]}/module-${m[2]}/questions.json`,'utf8')).items.find(x=>x.item_id===binding.questionId);
+ const questionPath=path.join(root,`content/english/year-${m[1]}/module-${m[2]}/questions.json`);
+ const q=JSON.parse(readFileSync(questionPath,'utf8')).items.find(x=>x.item_id===binding.questionId);
  const opt=q?.options?.find(x=>x.media?.assetId===id);
  if(!opt||opt.media?.semanticTarget!==asset.semanticTarget)throw Error('SEMANTIC_OPTION_MISMATCH:'+id);
  const entry=index.get(id),p=entry?.assets?.[0]?.path;
