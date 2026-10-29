@@ -7,6 +7,7 @@ if [[ ! -s "$DUDUQ_CHATGPT_IMAGE_BUNDLE/batch-manifest.json" ]]; then
   echo "DUDUQ_MEDIA_BUNDLE_MISSING_MANIFEST"
   exit 1
 fi
+node qa/tests/verify-v27-candidate-preflight.mjs --require-eligible
 bash qa/build-v26-topic-first-paint-qa.sh
 node --check scripts/duduq-import-chatgpt-bundle.mjs
 node scripts/duduq-import-chatgpt-bundle.mjs "$DUDUQ_CHATGPT_IMAGE_BUNDLE" > qa/results/v27-chatgpt-media-preflight.json
@@ -15,4 +16,4 @@ node --check qa/tests/verify-v27-chatgpt-media-overlay.mjs
 node qa/tests/verify-v27-chatgpt-media-overlay.mjs
 node --check qa/audit-media-completion.mjs
 node qa/audit-media-completion.mjs
-echo "DUDUQ_V27_CHATGPT_MEDIA_RELEASE_CANDIDATE=PASS"
+echo "DUDUQ_V27_CHATGPT_MEDIA_PREVIEW_CANDIDATE_QA=PASS; PEDAGOGICAL_QA=PENDING; DEPLOY=FORBIDDEN"
