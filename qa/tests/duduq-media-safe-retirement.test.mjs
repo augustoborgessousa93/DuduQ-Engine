@@ -104,10 +104,14 @@ test('only pinned verified sign-off can retire orphaned media with byte-identica
   const done=run(f,['--apply','--approval='+path.join(f.dir,'qa/results/final-signoff.json')]);
   assert.equal(done.r.status,0,done.r.stderr);
   assert.equal(done.report.applied,true);
-  assert.deepEqual(done.report.removed,[OLD]);
+  // With zero references, BOTH old provisional files are legitimate orphans.
+  assert.deepEqual(done.report.removed,[LIVE,OLD]);
   assert.equal(fs.existsSync(path.join(f.root,OLD)),false);
-  assert.ok(fs.existsSync(path.join(f.root,LIVE)));
+  assert.equal(fs.existsSync(path.join(f.root,LIVE)),false);
+  assert.ok(fs.existsSync(path.join(f.root,SAFE)), 'A still-referenced official asset must remain');
   const backup=path.join(f.dir,'qa/results/duduq-media-retirement-backup',OLD);
+  const liveBackup=path.join(f.dir,'qa/results/duduq-media-retirement-backup',LIVE);
   assert.equal(sha(fs.readFileSync(backup)),sha(Buffer.from('DUDUQ-ORPHAN-IMAGE-SAMPLE')));
+  assert.equal(sha(fs.readFileSync(liveBackup)),sha(Buffer.from('DUDUQ-LIVE-IMAGE-SAMPLE')));
  }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
 });
