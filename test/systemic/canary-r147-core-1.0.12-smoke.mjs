@@ -74,6 +74,30 @@ async function surface(page, kind) {
       const h = Math.max(0, Math.min(view.innerHeight, r.bottom) - Math.max(0, r.top));
       return (w * h) / Math.max(1, r.width * r.height);
     };
+    // Record *why* the width guard fails; never hide/clamp the overflow.
+    // Only element geometry and selectors are collected (no student content).
+    const overflowCandidates = (sourceDoc, viewportWidth) => {
+      if (!sourceDoc?.body || !sourceDoc.defaultView) return [];
+      const sourceView = sourceDoc.defaultView;
+      return [...sourceDoc.body.querySelectorAll("*")].flatMap((el) => {
+        const rect = el.getBoundingClientRect();
+        const outside = Math.max(0, rect.right - viewportWidth, -rect.left);
+        if (outside <= 6 || rect.width <= 1 || rect.height <= 1) return [];
+        const css = sourceView.getComputedStyle(el);
+        if (css.display === "none" || css.visibility === "hidden") return [];
+        return [{
+          element: el.tagName.toLowerCase() + (el.id ? "#" + el.id : "") +
+            (el.getAttribute("class") ? "." + el.getAttribute("class").trim().split(/\\s+/).slice(0, 3).join(".") : ""),
+          outsidePx: Math.round(outside * 10) / 10,
+          left: Math.round(rect.left),
+          right: Math.round(rect.right),
+          width: Math.round(rect.width),
+          cssWidth: css.width,
+          cssOverflowX: css.overflowX,
+          cssPosition: css.position
+        }];
+      }).sort((a, b) => b.outsidePx - a.outsidePx).slice(0, 12);
+    };
     const targets = mechanic === "ts" ? [...(doc?.querySelectorAll(".duduq-ts-target") || [])] : [...(doc?.querySelectorAll(".duduq-dd2-target[data-dd2-target-id]") || [])];
     const items = mechanic === "dd" ? [...(doc?.querySelectorAll(".duduq-dd2-bank-items .duduq-dd2-item") || [])] : [];
     return {
@@ -81,6 +105,12 @@ async function surface(page, kind) {
       iframeHeight: iframe?.getBoundingClientRect().height || 0,
       parentOverflowX: Math.max(0, document.documentElement.scrollWidth - innerWidth),
       runtimeOverflowX: Math.max(0, (doc?.body?.scrollWidth || 0) - (doc?.documentElement?.clientWidth || 0)),
+      parentScrollWidth: document.documentElement.scrollWidth,
+      parentViewportWidth: innerWidth,
+      runtimeScrollWidth: doc?.body?.scrollWidth || 0,
+      runtimeViewportWidth: doc?.documentElement?.clientWidth || 0,
+      parentOverflowCandidates: overflowCandidates(document, innerWidth),
+      runtimeOverflowCandidates: overflowCandidates(doc, doc?.documentElement?.clientWidth || 0),
       instructionRatio: visibleRatio(doc?.querySelector(mechanic === "ts" ? ".duduq-ts-instruction" : ".duduq-dd2-instruction,.duduq-dd-instruction")),
       targets: targets.map((el) => { const r = el.getBoundingClientRect(); return { width:r.width, height:r.height, ratio:visibleRatio(el), disabled:Boolean(el.disabled) }; }),
       items: items.map((el) => { const r = el.getBoundingClientRect(); return { width:r.width, height:r.height, ratio:visibleRatio(el), disabled:Boolean(el.disabled) }; })
@@ -92,6 +122,20 @@ function assertCompact(layout, viewport, label) {
   assert(layout.wrapperHeight > 150 && layout.iframeHeight > 150, `${label}: superfície ainda colapsada.`);
   assert(Math.abs(layout.wrapperHeight - viewport.height) <= 2, `${label}: wrapper ${layout.wrapperHeight} != viewport ${viewport.height}.`);
   assert(Math.abs(layout.iframeHeight - viewport.height) <= 2, `${label}: iframe ${layout.iframeHeight} != viewport ${viewport.height}.`);
+  if (layout.parentOverflowX > 6 || layout.runtimeOverflowX > 6) {
+    console.error("DUDUQ_HORIZONTAL_OVERFLOW_DIAGNOSTIC " + JSON.stringify({
+      label,
+      viewport,
+      parentOverflowX: layout.parentOverflowX,
+      parentScrollWidth: layout.parentScrollWidth,
+      parentViewportWidth: layout.parentViewportWidth,
+      runtimeOverflowX: layout.runtimeOverflowX,
+      runtimeScrollWidth: layout.runtimeScrollWidth,
+      runtimeViewportWidth: layout.runtimeViewportWidth,
+      parentOverflowCandidates: layout.parentOverflowCandidates,
+      runtimeOverflowCandidates: layout.runtimeOverflowCandidates
+    }, null, 2));
+  }
   assert(layout.parentOverflowX <= 6 && layout.runtimeOverflowX <= 6, `${label}: overflow horizontal.`);
   assert(layout.instructionRatio > 0.85, `${label}: instrução criticamente cortada.`);
 }
