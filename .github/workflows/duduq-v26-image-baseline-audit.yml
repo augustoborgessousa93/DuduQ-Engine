@@ -7,6 +7,7 @@ on:
     paths:
       - ".github/workflows/duduq-v26-image-baseline-audit.yml"
       - "qa/audit-media-completion.mjs"
+      - "qa/tests/duduq-media-closure-gate.test.mjs"
       - "qa/plan-native-chatgpt-schoolbag-reuse.mjs"
       - "qa/audit-cross-context-media.mjs"
       - "qa/media-binding-usage-guard.mjs"
@@ -51,6 +52,8 @@ jobs:
           node --check qa/tests/verify-chatgpt-native-batch-overlay.mjs
           node --check qa/tests/verify-native-head-overlay.mjs
           python3 -m py_compile qa/verify-native-head-zip.py
+      - name: Guard media closure against unverified non-temporary references
+        run: node --test qa/tests/duduq-media-closure-gate.test.mjs
       - name: Build V26 immutable thirty-module artifact
         run: bash qa/build-v26-topic-first-paint-qa.sh
       - name: Inventory every referenced media ID without modifying artifact
