@@ -8,6 +8,7 @@ on:
       - ".github/workflows/duduq-v26-image-baseline-audit.yml"
       - "qa/audit-media-completion.mjs"
       - "qa/plan-native-chatgpt-schoolbag-reuse.mjs"
+      - "qa/audit-cross-context-media.mjs"
       - "qa/tests/duduq-exact-semantic-match.test.mjs"
 
 permissions:
@@ -46,6 +47,8 @@ jobs:
           node qa/audit-media-completion.mjs
           node --check qa/plan-native-chatgpt-schoolbag-reuse.mjs
           node qa/plan-native-chatgpt-schoolbag-reuse.mjs
+          node --check qa/audit-cross-context-media.mjs
+          node qa/audit-cross-context-media.mjs
       - name: Report media backlog as QA-only artifact
         if: always()
         uses: actions/upload-artifact@v4
@@ -56,6 +59,7 @@ jobs:
           path: |
             qa/results/media-closure-inventory.json
             qa/results/duduq-school-bag-reuse-plan.json
+            qa/results/duduq-cross-context-media-audit.json
             dist-pages/.duduq-pages-manifest
       - name: Confirm no production action
         run: echo "QA-only inventory. No image generation, uploads, merge, or deploy."
