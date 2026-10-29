@@ -12,6 +12,7 @@ import json
 import os
 from pathlib import Path, PurePosixPath
 import struct
+import subprocess
 import sys
 import urllib.error
 import urllib.parse
@@ -115,6 +116,22 @@ def github_api(method, endpoint, token, obj=None):
         stop('GITHUB_HTTP_' + str(exc.code) + ' ' + endpoint)
 
 
+def authorized_github_token():
+    """Prefer injected credentials; optionally reuse the official gh CLI login.
+
+    Never read browser cookies, print the credential, or invoke a shell.
+    """
+    token = os.environ.get('GH_TOKEN') or os.environ.get('GITHUB_TOKEN')
+    if token:
+        return token.strip()
+    try:
+        result = subprocess.run(['gh', 'auth', 'token'], capture_output=True,
+                                text=True, timeout=15, check=False, shell=False)
+    except (FileNotFoundError, PermissionError, subprocess.TimeoutExpired):
+        return None
+    return result.stdout.strip() if result.returncode == 0 else None
+
+
 def publish_candidate_zip(blob, token):
     ref = '/git/ref/' + urllib.parse.quote('heads/' + BRANCH, safe='/')
     head = github_api('GET', ref, token)['object']['sha']
@@ -161,7 +178,7 @@ def main():
         blob = drive_download(args.drive_id)
     info = inspect_archive(blob, args.sha256)
     if args.apply:
-        token = os.environ.get('GH_TOKEN') or os.environ.get('GITHUB_TOKEN')
+        token = authorized_github_token()
         if not token:
             stop('GITHUB_TOKEN_NOT_AVAILABLE: use authorized GitHub connector/credential on Linux or Codex')
         info.update(publish_candidate_zip(blob, token))
