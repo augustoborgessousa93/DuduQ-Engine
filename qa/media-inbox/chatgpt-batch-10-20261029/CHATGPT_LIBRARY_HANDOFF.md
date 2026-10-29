@@ -2,6 +2,20 @@
 
 The browser host policy explicitly blocks automated observation of `https://chatgpt.com` (even with a signed-in tab in the same account). **Never bypass this restriction**, scrape credentials/cookies, use DevTools/CDP, or use another browser surface to obtain page content.
 
+## NOVO — Google Drive conectado e lote transferido, sem abrir a conversa
+
+A Biblioteca do ChatGPT está inacessível ao Codex, mas **o pacote original já foi enviado para o Google Drive conectado** por uma integração autorizada em 29/10/2026.
+
+- Pasta: [DUDUQ — Ponte de Imagens ChatGPT](https://drive.google.com/drive/folders/1U-Zo_-DZklIE5roTVKUsUQsR3FlhZYaC)
+- Arquivo: [DUDUQ_ChatGPT_Lote_Escolar_10_20261029.zip](https://drive.google.com/file/d/1DzXdNUpJkCrXGJCiqDscZmc2hjZPCCMh/view)
+- ID de arquivo do Drive: `1DzXdNUpJkCrXGJCiqDscZmc2hjZPCCMh`
+- SHA-256 verificado: `0a3d71d2b7ee127d702326d437dc13b8145ab58d1333b15819ebe8cb3b5ba280`
+- Script Python também enviado para a mesma pasta e versionado em `tools/image-factory/duduq_drive_github_bridge.py`.
+
+**Codex:** use o conector oficial do Google Drive, o Google Drive para computador já sincronizado, ou o navegador autorizado do Google Drive; *não* abra `chatgpt.com`. Leia o ZIP sem alterar seus bytes; utilize o script Python para validar o lote e, se houver credencial GitHub autorizada, enviar à branch QA sem Git Bash ou Selenium. O script foi testado em `--source ...` e retornou `DRY_RUN_PASS_NO_GITHUB_WRITES` para 10 originais / 12 vínculos, e bloqueou corretamente `--apply` sem token Github.
+
+**Pendente:** ainda não há confirmação de download pelo Codex, envio do ZIP ao repositório, QA GitHub Actions ou deploy. Não afirmar que a importação ocorreu só porque o arquivo está no Drive.
+
 ## Authorized source, independent of browsing the chat
 
 The **original** 10-PNG ZIP was saved directly to the account's ChatGPT Library:
