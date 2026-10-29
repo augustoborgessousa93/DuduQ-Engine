@@ -42,14 +42,19 @@ jobs:
         shell: bash
         run: |
           set -Eeuo pipefail
+          printf '%s  %s\n' '0a3d71d2b7ee127d702326d437dc13b8145ab58d1333b15819ebe8cb3b5ba280' 'qa/media-inbox/chatgpt-batch-10-20261029/DUDUQ_ChatGPT_Lote_Escolar_10_20261029.zip' | sha256sum -c -
           python qa/verify-chatgpt-native-zip.py \
             qa/media-inbox/chatgpt-batch-10-20261029/DUDUQ_ChatGPT_Lote_Escolar_10_20261029.zip \
             "$DUDUQ_CHATGPT_IMAGE_BUNDLE"
-      - name: Build exact base V26 and import only seven mapped images
+      - name: Build V26, validate all usages, expand seven assets to 62 IDs and import candidates
         shell: bash
         run: |
           set -Eeuo pipefail
           bash qa/build-v26-topic-first-paint-qa.sh
+          node qa/audit-media-completion.mjs
+          node qa/plan-native-chatgpt-schoolbag-reuse.mjs
+          node --check qa/expand-native-chatgpt-schoolbag.mjs
+          node qa/expand-native-chatgpt-schoolbag.mjs "$DUDUQ_CHATGPT_IMAGE_BUNDLE"
           node --check scripts/duduq-import-chatgpt-bundle.mjs
           node --test qa/tests/duduq-exact-semantic-match.test.mjs qa/tests/duduq-media-binding-usage-guard.test.mjs
           node scripts/duduq-import-chatgpt-bundle.mjs "$DUDUQ_CHATGPT_IMAGE_BUNDLE" > qa/results/chatgpt-native-batch10-preflight.json
@@ -67,6 +72,8 @@ jobs:
             qa/results/chatgpt-native-batch10-preflight.json
             qa/results/chatgpt-native-batch10-import.json
             qa/results/media-closure-inventory.json
+            qa/results/duduq-school-bag-reuse-plan.json
+            /tmp/duduq-native-chatgpt-10/original-12-bindings-manifest.json
             dist-pages/.duduq-pages-manifest
             /tmp/duduq-native-chatgpt-10/PREVIEW.jpg
       - name: Save ten validated original PNGs to GitHub REVIEW branch only
@@ -81,7 +88,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add qa/media-candidates/chatgpt-batch-10-20261029/
           if ! git diff --cached --quiet; then
-            git commit -m "media(chatgpt): stage 10 validated original RGBA assets, 12 verified option links"
+            git commit -m "media(chatgpt): stage 10 validated native RGBA assets, 62 verified media references"
             git push origin HEAD:automation/duduq-media-source-only-fix-20261029
           fi
       - name: Protect game deployment
