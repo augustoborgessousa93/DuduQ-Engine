@@ -26,10 +26,14 @@ for (const p of targets) {
   let html=originalHtml.toString('utf8');
   if(html.split(late).length!==2) throw Error('V25_EXPECTS_ONE_LATE_LOADER:'+p);
   const heads=[...html.matchAll(/<\/head\s*>/gi)];
-  if(heads.length!==1) throw Error('V25_EXPECTS_ONE_HEAD:'+p);
+  const bodyStarts=[...html.matchAll(/<body\b/gi)];
+  if(heads.length>1 || bodyStarts.length!==1) throw Error('V25_HTML_LANDMARKS_INVALID:'+p);
   html=html.replace(late,'');
-  const revisedHead=[...html.matchAll(/<\/head\s*>/gi)];
-  html=html.slice(0,revisedHead[0].index)+'    '+early+'\n'+html.slice(revisedHead[0].index);
+  // Legacy transition pages omit </head>; a script before <body> still belongs to the implicit head.
+  const landmark=heads.length?/<\/head\s*>/i:/<body\b/i;
+  const match=html.match(landmark);
+  if(!match) throw Error('V25_EARLY_INSERT_POINT_MISSING:'+p);
+  html=html.slice(0,match.index)+'    '+early+'\n'+html.slice(match.index);
   if(html.split(early).length!==2) throw Error('V25_DUPLICATE_LOADER:'+p);
   writeFileSync('dist-pages/'+p,html);
   lines[entries.get(p).index]=p+' '+hash(Buffer.from(html));
