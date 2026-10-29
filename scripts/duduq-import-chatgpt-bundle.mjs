@@ -13,6 +13,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { inspectPng } from './duduq-image-pipeline.mjs';
 import { isExactPedagogicalConcept } from './duduq-exact-semantic-match.mjs';
+import {collectQuestionMediaUsages,assertBindingSafeAcrossQuestions} from '../qa/media-binding-usage-guard.mjs';
 const root=process.cwd();
 const bundle=path.resolve(process.argv[2]||'');
 const apply=process.argv.includes('--apply');
@@ -62,6 +63,24 @@ async function questionFor(qid){
   if(!q)throw Error('Missing question: '+qid);
   return q;
 }
+// Verify all 30 immutable question contracts BEFORE any image import.
+ // A media ID may be reused elsewhere even when this binding is exact.
+ // Never silently overwrite another module's intended meaning.
+const allQuestionUsages=new Map();
+let verifiedQuestionCount=0;
+for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
+  const mm=String(module).padStart(2,'0'),prefix='Y'+year+'M'+mm;
+  await questionFor(prefix+'-Q001');
+  const relative='content/english/year-'+year+'/module-'+mm+'/questions.json';
+  const questions=moduleCache.get(relative);
+  if(questions?.size!==20)throw Error('INCOMPLETE_VERIFIED_MODULE:'+prefix);
+  for(const q of questions.values()){
+    if(!q.item_id?.startsWith(prefix+'-'))throw Error('INVALID_QUESTION_SCOPE:'+q.item_id);
+    collectQuestionMediaUsages(q,allQuestionUsages);
+    verifiedQuestionCount++;
+  }
+}
+if(verifiedQuestionCount!==600)throw Error('EXPECTED_600_VERIFIED_QUESTIONS');
 for(const asset of manifest.assets||[]){
   // Unmapped candidates remain in the inbox; they must never be imported into game options.
   if(!asset.bindings?.length) continue;
@@ -96,6 +115,8 @@ for(const asset of manifest.assets||[]){
     const sem=String(option?.media?.semanticTarget||option?.semanticTarget||option?.label||'').trim().toLowerCase();
     if(!option||!isExactPedagogicalConcept(asset.semanticTarget,sem))
       throw Error('Image must match exact answer option: '+binding.mediaId+':'+sem);
+    assertBindingSafeAcrossQuestions({usages:allQuestionUsages,mediaId:binding.mediaId,
+      questionId:binding.questionId,semanticTarget:asset.semanticTarget});
     const prior=index.has(binding.mediaId)?registry.entries[index.get(binding.mediaId)]:null;
     // APPROVED here is loader compatibility only; candidate remains temporary until real visual/pedagogical QA.
     const entry={...(prior||{}),mediaId:binding.mediaId,status:'APPROVED',kind:'image',temporary:true,
@@ -116,7 +137,7 @@ for(const action of actions){
   if(!safe(artifactRoot,dest))throw Error('Unsafe media destination: '+action.out);
   if(await exists(dest) && hash(await fs.readFile(dest))!==hash(action.bytes))throw Error('Existing media hash conflict: '+action.out);
 }
-const result={mode:apply?'COMPILED_ARTIFACT_IMPORT':'DRY_RUN',assets:manifest.assets.length,bindings:actions.length,files:[...new Set(actions.map(a=>a.out))],changedIds:actions.map(a=>a.binding.mediaId),candidateOnly:true,pedagogicalQaApproved:false,productionReleaseCertified:false};
+const result={mode:apply?'COMPILED_ARTIFACT_IMPORT':'DRY_RUN',assets:manifest.assets.length,bindings:actions.length,files:[...new Set(actions.map(a=>a.out))],changedIds:actions.map(a=>a.binding.mediaId),verifiedQuestionContracts:verifiedQuestionCount,candidateOnly:true,pedagogicalQaApproved:false,productionReleaseCertified:false};
 if(apply){
   const backup=path.join(root,'.duduq','media-backups','chatgpt-artifact-'+hash(originalIntegrityBytes).slice(0,12));
   await fs.mkdir(backup,{recursive:true});
