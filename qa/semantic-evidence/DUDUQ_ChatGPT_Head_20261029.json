@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "DUDUQ_MODEL_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-10-29",
+  "reviewScope": "MODEL_SEMANTIC_PRECHECK_ONLY",
+  "productionApproved": false,
+  "candidateAssets": [
+    {
+      "assetKey": "DUDUQ-Y1M05-HEAD-CLOSEUP",
+      "concept": "head",
+      "sha256": "3c00647e61d7b7c8ee365454b1a349088254352988a0538e4cec348366db6401",
+      "semanticPrecheck": "PASSED",
+      "visualBasis": "Visually reviewed in current conversation; isolated zoom close-up of smiling child pointing to the head; original PNG RGBA 1254; user previously approved ChatGPT visual quality. Pedagogical QA in real game pending."
+    }
+  ],
+  "rejectedMediaIds": [
+    {
+      "mediaId": "IMG-Y1M05-Q001-HEAD",
+      "reason": "CROSS_MODULE_SHARED_ID",
+      "modules": [
+        "Y1M05",
+        "Y2M06"
+      ],
+      "questions": [
+        "Y1M05-Q001",
+        "Y2M06-Q015"
+      ]
+    }
+  ]
+}
