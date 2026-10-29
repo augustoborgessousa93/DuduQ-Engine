@@ -1,0 +1,75 @@
+name: DUDUQ V27 - ChatGPT PNG media QA (Linux only)
+
+on:
+  push:
+    branches:
+      - automation/duduq-media-source-only-fix-20261029
+    paths:
+      - "qa/media-inbox/batch-20261029/images/*.png"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duduq-v27-media-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify_media_overlay:
+    name: Validate two native PNGs and the 30-module media overlay
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    env:
+      CI: "true"
+      DUDUQ_QA_STATIC_PREVIEW: "1"
+      DUDUQ_CHATGPT_IMAGE_BUNDLE: qa/media-inbox/batch-20261029
+    steps:
+      - name: Checkout only the protected review branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify both PNG files and pinned SHA-256 values (no generation plugins)
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test -s qa/media-inbox/batch-20261029/batch-manifest.json
+          test -s qa/media-inbox/batch-20261029/images/BASE-Y1-003.png
+          test -s qa/media-inbox/batch-20261029/images/BASE-Y1-007.png
+          printf '%s  %s\n' \
+            '3c00647e61d7b7c8ee365454b1a349088254352988a0538e4cec348366db6401' 'qa/media-inbox/batch-20261029/images/BASE-Y1-003.png' \
+            '1b20ee60ea996463a9dccb811e284b184d51cade24b3237ad7eeccfabd20a511' 'qa/media-inbox/batch-20261029/images/BASE-Y1-007.png' | sha256sum -c -
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          import {inspectPng} from './scripts/duduq-image-pipeline.mjs';
+          const root='qa/media-inbox/batch-20261029/';
+          const manifest=JSON.parse(readFileSync(root+'batch-manifest.json','utf8'));
+          if(manifest.schemaVersion!=='DUDUQ_CHATGPT_MEDIA_BINDINGS_V1'||manifest.assets?.length!==2)throw Error('INVALID_BATCH_MANIFEST');
+          if(manifest.assets.flatMap(a=>a.bindings||[]).length!==4)throw Error('INVALID_BATCH_BINDINGS');
+          for(const a of manifest.assets){
+            const b=readFileSync(root+a.file);
+            const p=inspectPng(b);
+            if(!p.valid||p.transparent!==true||b.readUInt32BE(16)!==1254||b.readUInt32BE(20)!==1254)throw Error('PNG_QA_FAILED:'+a.assetKey+':'+p.reason);
+            console.log('PNG_RGBA_VALID:'+a.assetKey+':1254x1254:coverage='+p.subjectBoundsCoverage);
+          }
+          NODE
+      - name: Build immutable V26, apply V27 replacement, verify full artifact
+        shell: bash
+        run: bash qa/build-v27-chatgpt-media-overlay-qa.sh
+      - name: Preserve audit reports, not a production deployment
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-v27-chatgpt-media-qa-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            qa/results/v27-chatgpt-media-preflight.json
+            qa/results/v27-chatgpt-media-import.json
+            dist-pages/.duduq-pages-manifest
+      - name: Confirm preview-only behavior
+        run: |
+          echo "QA only. No merge, production deployment, or repository write from this workflow."
