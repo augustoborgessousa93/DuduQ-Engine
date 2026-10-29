@@ -54,7 +54,7 @@ assert.match(css,/position:fixed !important/);
 assert.match(css,/z-index:0 !important/);
 assert.match(css,/\.game-screen > \.duduq-ebc-attribution \{z-index:-1 !important;\}/);
 assert.match(css,/:has\\(\\.feedback-ribbon:not\\(\\[hidden\\]\\)\\)/);
-assert.match(css,/html:has\\(\\.feedback-ribbon:not\\(\\[hidden\\]\\):not\\(\\[aria-hidden='true'\\]\\)\\) \\.duduq-ebc-attribution/);
+assert.ok(css.includes("html:has(.feedback-ribbon:not([hidden]):not([aria-hidden='true'])) .duduq-ebc-attribution"));
 assert.match(css,/visibility:hidden !important;opacity:0 !important;pointer-events:none !important/);
 assert.doesNotMatch(css,/2147483000/);
 assert.match(css,/left:50% !important/);
