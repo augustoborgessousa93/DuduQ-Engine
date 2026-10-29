@@ -1,5 +1,5 @@
 {
-  "audit": "DUDUQ_MEDIA_REFERENCES_20261029",
+  "audit": "DUDUQ_MEDIA_REFERENCES_20261029_V2_INCLUDES_ASSETID",
   "sourceRepo": "augustoborgessousa93/duduq-fit-qa-private",
   "sourcePath": "dist-pages/content/english/year-{year}/module-{mm}/questions.json",
   "year": 3,
@@ -81,6 +81,10 @@
               "answerKey": "Y3M01-Q003-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-02A7D1D1FB69478E",
+              "semanticTarget": "Ana",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -89,6 +93,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-BAE00C9EC541C6AF",
+              "semanticTarget": "Mia",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -97,6 +105,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-20C1CD3B145B4CF6",
+              "semanticTarget": "Leo",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -105,6 +117,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "Y1M01-EMOJI-BEN-001",
+              "semanticTarget": "Ben",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -155,6 +171,10 @@
               "answerKey": "Y3M01-Q005-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-922BB0F4119D6F51",
+              "semanticTarget": "phone number",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -163,6 +183,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-26148A5B0A23C6BB",
+              "semanticTarget": "age",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -171,6 +195,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-E5F5D9640ED65EA5",
+              "semanticTarget": "birthday",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -179,6 +207,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-DDDDA999F605827B",
+              "semanticTarget": "favorite",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -250,6 +282,10 @@
               "label": "nine",
               "answerKey": "nine",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -257,6 +293,10 @@
               "label": "phone number",
               "answerKey": "phone number",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -264,6 +304,10 @@
               "label": "eight",
               "answerKey": "eight",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -271,6 +315,10 @@
               "label": "ten",
               "answerKey": "ten",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -298,6 +346,10 @@
               "answerKey": "Y3M01-Q009-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-CECA24DA2BCB2FE3",
+              "semanticTarget": "eleven",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -306,6 +358,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-26148A5B0A23C6BB",
+              "semanticTarget": "age",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -314,6 +370,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-E5F5D9640ED65EA5",
+              "semanticTarget": "birthday",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -322,6 +382,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-DDDDA999F605827B",
+              "semanticTarget": "favorite",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -419,6 +483,10 @@
               "answerKey": "Y3M01-Q013-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-922BB0F4119D6F51",
+              "semanticTarget": "phone number",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -427,6 +495,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-DDDDA999F605827B",
+              "semanticTarget": "favorite",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -435,6 +507,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-C4FCA6C3487B9795",
+              "semanticTarget": "best friend",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -443,6 +519,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q002-EIGHT",
+              "semanticTarget": "eight",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -490,6 +570,10 @@
               "answerKey": "Y3M01-Q015-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-5FC56902AD57463A",
+              "semanticTarget": "C",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -498,6 +582,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-34691F7FF392D134",
+              "semanticTarget": "A",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -506,6 +594,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-B53AD4A3B76BCB34",
+              "semanticTarget": "B",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -514,6 +606,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-5A685792F5F3892E",
+              "semanticTarget": "D",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -587,6 +683,10 @@
               "label": "B",
               "answerKey": "B",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -594,6 +694,10 @@
               "label": "A",
               "answerKey": "A",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -601,6 +705,10 @@
               "label": "C",
               "answerKey": "C",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -608,6 +716,10 @@
               "label": "D",
               "answerKey": "D",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -708,6 +820,10 @@
               "answerKey": "Y3M02-Q002-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-78B875A84F4C413C",
+              "semanticTarget": "5",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -716,6 +832,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-9268FCB63B9509DB",
+              "semanticTarget": "1",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -724,6 +844,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-DB8BB9A1E2908E87",
+              "semanticTarget": "2",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -732,6 +856,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-339138EDDB5B5101",
+              "semanticTarget": "3",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -784,6 +912,10 @@
               "answerKey": "Y3M02-Q004-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-9268FCB63B9509DB",
+              "semanticTarget": "1",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -792,6 +924,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-DB8BB9A1E2908E87",
+              "semanticTarget": "2",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -800,6 +936,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-339138EDDB5B5101",
+              "semanticTarget": "3",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -808,6 +948,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0E351DAB375F0999",
+              "semanticTarget": "4",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -883,6 +1027,10 @@
               "answerKey": "Y3M02-Q007-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-115F8F7EBAA343DC",
+              "semanticTarget": "7",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -891,6 +1039,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-9268FCB63B9509DB",
+              "semanticTarget": "1",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -899,6 +1051,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-DB8BB9A1E2908E87",
+              "semanticTarget": "2",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -907,6 +1063,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-339138EDDB5B5101",
+              "semanticTarget": "3",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -930,6 +1090,10 @@
               "label": "5",
               "answerKey": "5",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -937,6 +1101,10 @@
               "label": "1",
               "answerKey": "1",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -944,6 +1112,10 @@
               "label": "50",
               "answerKey": "50",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1083,6 +1255,10 @@
               "answerKey": "Y3M02-Q014-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-78B875A84F4C413C",
+              "semanticTarget": "5",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1091,6 +1267,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-9268FCB63B9509DB",
+              "semanticTarget": "1",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1099,6 +1279,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-DB8BB9A1E2908E87",
+              "semanticTarget": "2",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1107,6 +1291,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-339138EDDB5B5101",
+              "semanticTarget": "3",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1178,6 +1366,10 @@
               "answerKey": "Y3M02-Q017-O1",
               "correct": true,
               "mediaId": "IMG-Y1M02-Q002-EIGHT",
+              "semanticTarget": "eight",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1186,6 +1378,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q007-NINE",
+              "semanticTarget": "nine",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1194,6 +1390,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q007-TEN",
+              "semanticTarget": "ten",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1202,6 +1402,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-CECA24DA2BCB2FE3",
+              "semanticTarget": "eleven",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1225,6 +1429,10 @@
               "label": "nine",
               "answerKey": "nine",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1232,6 +1440,10 @@
               "label": "eight",
               "answerKey": "eight",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1239,6 +1451,10 @@
               "label": "ten",
               "answerKey": "ten",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1246,6 +1462,10 @@
               "label": "eleven",
               "answerKey": "eleven",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1294,6 +1514,10 @@
               "answerKey": "Y3M02-Q020-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-78B875A84F4C413C",
+              "semanticTarget": "5",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1302,6 +1526,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-9268FCB63B9509DB",
+              "semanticTarget": "1",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1310,6 +1538,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-DB8BB9A1E2908E87",
+              "semanticTarget": "2",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1318,6 +1550,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-339138EDDB5B5101",
+              "semanticTarget": "3",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1353,6 +1589,10 @@
               "answerKey": "Y3M03-Q001-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+              "semanticTarget": "he",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1361,6 +1601,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+              "semanticTarget": "she",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1369,6 +1613,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q002-EIGHT",
+              "semanticTarget": "eight",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1377,6 +1625,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q007-NINE",
+              "semanticTarget": "nine",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1424,6 +1676,10 @@
               "answerKey": "Y3M03-Q003-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+              "semanticTarget": "brother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1432,6 +1688,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+              "semanticTarget": "mother",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1440,6 +1700,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+              "semanticTarget": "father",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1448,6 +1712,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+              "semanticTarget": "sister",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1527,6 +1795,10 @@
               "answerKey": "Y3M03-Q006-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+              "semanticTarget": "she",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1535,6 +1807,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q002-EIGHT",
+              "semanticTarget": "eight",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1543,6 +1819,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q007-NINE",
+              "semanticTarget": "nine",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1551,6 +1831,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q007-TEN",
+              "semanticTarget": "ten",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1578,6 +1862,10 @@
               "answerKey": "Y3M03-Q007-O1",
               "correct": true,
               "mediaId": "IMG-Y1M02-Q002-EIGHT",
+              "semanticTarget": "eight",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1586,6 +1874,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q007-NINE",
+              "semanticTarget": "nine",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1594,6 +1886,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q007-TEN",
+              "semanticTarget": "ten",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1602,6 +1898,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q002-SEVEN",
+              "semanticTarget": "seven",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1625,6 +1925,10 @@
               "label": "father",
               "answerKey": "father",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1632,6 +1936,10 @@
               "label": "mother",
               "answerKey": "mother",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1639,6 +1947,10 @@
               "label": "brother",
               "answerKey": "brother",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1646,6 +1958,10 @@
               "label": "sister",
               "answerKey": "sister",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1716,6 +2032,10 @@
               "answerKey": "Y3M03-Q011-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+              "semanticTarget": "he",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1724,6 +2044,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+              "semanticTarget": "she",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1732,6 +2056,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q002-EIGHT",
+              "semanticTarget": "eight",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1740,6 +2068,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q007-NINE",
+              "semanticTarget": "nine",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1860,6 +2192,10 @@
               "answerKey": "Y3M03-Q016-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+              "semanticTarget": "she",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1868,6 +2204,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q002-EIGHT",
+              "semanticTarget": "eight",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1876,6 +2216,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q007-NINE",
+              "semanticTarget": "nine",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1884,6 +2228,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q007-TEN",
+              "semanticTarget": "ten",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -1928,6 +2276,10 @@
               "label": "grandfather",
               "answerKey": "grandfather",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1935,6 +2287,10 @@
               "label": "mother",
               "answerKey": "mother",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1942,6 +2298,10 @@
               "label": "father",
               "answerKey": "father",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -1949,6 +2309,10 @@
               "label": "brother",
               "answerKey": "brother",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2040,6 +2404,10 @@
               "answerKey": "Y3M04-Q002-O1",
               "correct": true,
               "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticTarget": "two",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2048,6 +2416,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticTarget": "one",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2056,6 +2428,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticTarget": "three",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2064,6 +2440,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-FOUR",
+              "semanticTarget": "four",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2164,6 +2544,10 @@
               "answerKey": "Y3M04-Q006-O1",
               "correct": true,
               "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticTarget": "three",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2172,6 +2556,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticTarget": "one",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2180,6 +2568,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticTarget": "two",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2188,6 +2580,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q002-FIVE",
+              "semanticTarget": "five",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2234,6 +2630,10 @@
               "label": "two",
               "answerKey": "two",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2241,6 +2641,10 @@
               "label": "one",
               "answerKey": "one",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2248,6 +2652,10 @@
               "label": "three",
               "answerKey": "three",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2298,6 +2706,10 @@
               "answerKey": "Y3M04-Q010-O1",
               "correct": true,
               "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticTarget": "one",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2306,6 +2718,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticTarget": "two",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2314,6 +2730,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticTarget": "three",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2322,6 +2742,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-FOUR",
+              "semanticTarget": "four",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2378,6 +2802,10 @@
               "answerKey": "Y3M04-Q012-O1",
               "correct": true,
               "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticTarget": "two",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2386,6 +2814,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-B553D1606006D229",
+              "semanticTarget": "doll",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2394,6 +2826,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "Y1M01-EMOJI-BALL-001",
+              "semanticTarget": "ball",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2402,6 +2838,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-C2F0FC7FDF270EB3",
+              "semanticTarget": "train",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2532,6 +2972,10 @@
               "label": "three",
               "answerKey": "three",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2539,6 +2983,10 @@
               "label": "one",
               "answerKey": "one",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2546,6 +2994,10 @@
               "label": "two",
               "answerKey": "two",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2592,6 +3044,10 @@
               "answerKey": "Y3M04-Q020-O1",
               "correct": true,
               "mediaId": "IMG-Y1M02-Q001-TWO",
+              "semanticTarget": "two",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2600,6 +3056,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticTarget": "one",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2608,6 +3068,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-THREE",
+              "semanticTarget": "three",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2616,6 +3080,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M02-Q001-FOUR",
+              "semanticTarget": "four",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2649,6 +3117,10 @@
               "answerKey": "Y3M05-Q001-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-CFBD6FF69645CF3F",
+              "semanticTarget": "two plus three equals five",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2657,6 +3129,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-BE34171D033BB875",
+              "semanticTarget": "six minus two equals four",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2665,6 +3141,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0C1635162CC65DF3",
+              "semanticTarget": "three plus four equals seven",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2673,6 +3153,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-3465A65536CB1E46",
+              "semanticTarget": "nine minus five equals four",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2771,6 +3255,10 @@
               "answerKey": "Y3M05-Q005-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-CFBD6FF69645CF3F",
+              "semanticTarget": "two plus three equals five",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2779,6 +3267,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-BE34171D033BB875",
+              "semanticTarget": "six minus two equals four",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2787,6 +3279,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0C1635162CC65DF3",
+              "semanticTarget": "three plus four equals seven",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2795,6 +3291,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-3465A65536CB1E46",
+              "semanticTarget": "nine minus five equals four",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2859,6 +3359,10 @@
               "label": "square",
               "answerKey": "square",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2866,6 +3370,10 @@
               "label": "divided by",
               "answerKey": "divided by",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2873,6 +3381,10 @@
               "label": "triangle",
               "answerKey": "triangle",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2880,6 +3392,10 @@
               "label": "rectangle",
               "answerKey": "rectangle",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2907,6 +3423,10 @@
               "answerKey": "Y3M05-Q009-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-ADC02C547ED88AAB",
+              "semanticTarget": "star",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2915,6 +3435,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-DD4F6C5D17D9EA26",
+              "semanticTarget": "triangle",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2923,6 +3447,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-77460DE9537EEBF0",
+              "semanticTarget": "square",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2931,6 +3459,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0B8FB65CFC9F4ED3",
+              "semanticTarget": "rectangle",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -2983,6 +3515,10 @@
               "answerKey": "Y3M05-Q011-O1",
               "correct": true,
               "mediaId": "IMG-Y1M02-Q001-ONE",
+              "semanticTarget": "one",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2991,6 +3527,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-8138254DEC43D7BC",
+              "semanticTarget": "plus",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -2999,6 +3539,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-37302AEA2B306D70",
+              "semanticTarget": "minus",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3007,6 +3551,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-3C01681DAFE96F83",
+              "semanticTarget": "equals",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3157,6 +3705,10 @@
               "answerKey": "Y3M05-Q017-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-77460DE9537EEBF0",
+              "semanticTarget": "square",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3165,6 +3717,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-DD4F6C5D17D9EA26",
+              "semanticTarget": "triangle",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3173,6 +3729,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-0B8FB65CFC9F4ED3",
+              "semanticTarget": "rectangle",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3181,6 +3741,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-ADC02C547ED88AAB",
+              "semanticTarget": "star",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3204,6 +3768,10 @@
               "label": "five",
               "answerKey": "five",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3211,6 +3779,10 @@
               "label": "four",
               "answerKey": "four",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3218,6 +3790,10 @@
               "label": "six",
               "answerKey": "six",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3225,6 +3801,10 @@
               "label": "seven",
               "answerKey": "seven",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3351,6 +3931,10 @@
               "answerKey": "Y3M06-Q003-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticTarget": "I do not like carrots",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3359,6 +3943,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticTarget": "I like apples",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3367,6 +3955,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticTarget": "I prefer grapes",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3375,6 +3967,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticTarget": "I like papaya",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3402,6 +3998,10 @@
               "answerKey": "Y3M06-Q004-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticTarget": "I like papaya",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3410,6 +4010,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticTarget": "I like apples",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3418,6 +4022,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticTarget": "I prefer grapes",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3426,6 +4034,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticTarget": "I do not like carrots",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3522,6 +4134,10 @@
               "label": "potato",
               "answerKey": "potato",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3529,6 +4145,10 @@
               "label": "pear",
               "answerKey": "pear",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3536,6 +4156,10 @@
               "label": "orange",
               "answerKey": "orange",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3543,6 +4167,10 @@
               "label": "grape",
               "answerKey": "grape",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3595,6 +4223,10 @@
               "answerKey": "Y3M06-Q010-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-9013A5518AF15B59",
+              "semanticTarget": "like",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3603,6 +4235,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-6C28CE93AFE4F8BB",
+              "semanticTarget": "pear",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3611,6 +4247,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-Y1M03-Q001-ORANGE",
+              "semanticTarget": "orange",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3619,6 +4259,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-249393BE62012CB7",
+              "semanticTarget": "grape",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3696,6 +4340,10 @@
               "answerKey": "Y3M06-Q013-O1",
               "correct": true,
               "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+              "semanticTarget": "I like apples",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3704,6 +4352,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+              "semanticTarget": "I prefer grapes",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3712,6 +4364,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+              "semanticTarget": "I do not like carrots",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3720,6 +4376,10 @@
               "answerKey": null,
               "correct": false,
               "mediaId": "IMG-V11-2B-8402FF71A9476919",
+              "semanticTarget": "I like papaya",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
@@ -3834,6 +4494,10 @@
               "label": "orange",
               "answerKey": "orange",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3841,6 +4505,10 @@
               "label": "pear",
               "answerKey": "pear",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3848,6 +4516,10 @@
               "label": "grape",
               "answerKey": "grape",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             },
             {
@@ -3855,6 +4527,10 @@
               "label": "papaya",
               "answerKey": "papaya",
               "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
               "semanticReview": null
             }
           ]
