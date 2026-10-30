@@ -187,9 +187,10 @@ async function once(){
   const afterMod=after?.modulesDetail?.find(m=>m.moduleId===moduleId);
   const beforeCandidate=beforePlan.modules.find(m=>m.moduleId===moduleId)?.candidate;
   const afterCandidate=afterPlan.modules.find(m=>m.moduleId===moduleId)?.candidate;
+  // A second binding or manifest entry for identical bytes is not new image generation.
   const newImageEvidence=lane==='generation'&&
-   ((afterCandidate?.validAssetCount||0)>(beforeCandidate?.validAssetCount||0)||
-    ((afterCandidate?.validAssetCount||0)>0 && afterCandidate?.assetFingerprintSha256!==beforeCandidate?.assetFingerprintSha256));
+   ((afterCandidate?.validUniquePngCount||0)>(beforeCandidate?.validUniquePngCount||0)||
+    ((afterCandidate?.validUniquePngCount||0)>0 && afterCandidate?.assetFingerprintSha256!==beforeCandidate?.assetFingerprintSha256));
   const improved=newImageEvidence||
    (oldPending!==null&&newPending!==null&&newPending<oldPending)||
    (after?.completedModules??0)>(before?.completedModules??0)||
