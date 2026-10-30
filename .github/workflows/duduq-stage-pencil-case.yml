@@ -1,0 +1,44 @@
+name: DUDUQ - Stage exact pencil case PNG for Y1M04 review
+on:
+  push:
+    branches:
+      - integration/assets-duduq-resume-20261030
+    paths:
+      - ".github/workflows/duduq-stage-pencil-case.yml"
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: game
+      - uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: 658d94f08031820cfea5258a6f4e7c24f278df92
+          persist-credentials: false
+          path: source
+          sparse-checkout: |
+            Imagens Ilustrativa
+          sparse-checkout-cone-mode: false
+      - name: Verify original image SHA and stage single PNG only
+        working-directory: game
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          SOURCE="../source/Imagens Ilustrativa/school-object-pencil-case-estojo.png"
+          DEST="qa/assets-reuse-source/y1m04/Imagens Ilustrativa/school-object-pencil-case-estojo.png"
+          test "$(git -C ../source rev-parse HEAD)" = "658d94f08031820cfea5258a6f4e7c24f278df92"
+          test "$(git -C ../source hash-object "$SOURCE")" = "4d55cc06cb124bfd485f5bbc52b33f7e85cdc59c"
+          test -f "qa/assets-reuse-source/y1m04/.git-source-commit"
+          mkdir -p "$(dirname "$DEST")"
+          cp "$SOURCE" "$DEST"
+          git add "$DEST"
+          if git diff --cached --quiet; then echo 'ALREADY_STAGED';exit 0;fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "media(preview): stage hash-pinned pencil case PNG for school objects"
+          git push origin HEAD:integration/assets-duduq-resume-20261030
