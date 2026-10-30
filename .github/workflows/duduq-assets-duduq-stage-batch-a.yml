@@ -6,6 +6,7 @@ on:
       - integration/assets-duduq-resume-20261030
     paths:
       - ".github/workflows/duduq-assets-duduq-stage-batch-a.yml"
+      - "qa/browser-media-candidate-smoke.mjs"
   workflow_dispatch:
 
 permissions:
