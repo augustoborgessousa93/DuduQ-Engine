@@ -17,4 +17,10 @@ if [[ "${CF_PAGES_BRANCH:-}" == "integration/assets-duduq-resume-20261030" ]]; t
   }
   node qa/apply-assets-duduq-y1m04-review.mjs qa/assets-reuse-source/y1m04
   echo 'DUDUQ_ASSETS_REUSE_PREVIEW_PATCH=PASS:PRODUCTION_UNTOUCHED'
+
+  test -f qa/assets-reuse-source/batch-a/.git-source-commit || {
+    echo 'DUDUQ_ASSETS_BATCH_A_SOURCE_MISSING'; exit 2;
+  }
+  node qa/apply-assets-duduq-batch-a.mjs qa/assets-reuse-source/batch-a --apply
+  echo 'DUDUQ_ASSETS_BATCH_A_PREVIEW_PATCH=PASS:PRODUCTION_UNTOUCHED'
 fi
