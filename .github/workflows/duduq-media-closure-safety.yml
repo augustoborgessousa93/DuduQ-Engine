@@ -7,6 +7,8 @@ on:
     paths:
       - "qa/media-safe-retirement.mjs"
       - "qa/tests/duduq-media-safe-retirement.test.mjs"
+      - "qa/ingest-local-codex-candidates.mjs"
+      - "qa/tests/ingest-local-codex-candidates.test.mjs"
       - ".github/workflows/duduq-media-closure-safety.yml"
       - "qa/media-inbox/**"
       - "qa/media-candidates/**"
@@ -17,6 +19,8 @@ on:
     paths:
       - "qa/media-safe-retirement.mjs"
       - "qa/tests/duduq-media-safe-retirement.test.mjs"
+      - "qa/ingest-local-codex-candidates.mjs"
+      - "qa/tests/ingest-local-codex-candidates.test.mjs"
       - ".github/workflows/duduq-media-closure-safety.yml"
       - "qa/media-inbox/**"
       - "qa/media-candidates/**"
@@ -49,6 +53,9 @@ jobs:
           node --check qa/media-safe-retirement.mjs
           node --check qa/tests/duduq-media-safe-retirement.test.mjs
           node --test qa/tests/duduq-media-safe-retirement.test.mjs
+          node --check qa/ingest-local-codex-candidates.mjs
+          node --check qa/tests/ingest-local-codex-candidates.test.mjs
+          node --test qa/tests/ingest-local-codex-candidates.test.mjs
       - name: Build all 30 modules and report actual provisional sources
         run: |
           bash qa/build-v26-topic-first-paint-qa.sh
