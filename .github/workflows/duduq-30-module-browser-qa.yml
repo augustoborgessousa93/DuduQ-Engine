@@ -1,0 +1,83 @@
+name: DUDUQ - 30 Modules Browser QA (candidate only)
+
+on:
+  push:
+    branches:
+      - qa/strict-rendered-media-check-20261030
+    paths:
+      - ".github/workflows/duduq-30-module-browser-qa.yml"
+      - "qa/browser-media-candidate-smoke.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duduq-30-modules-candidate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  thirty-module-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    env:
+      CI: "true"
+      CF_PAGES_BRANCH: integration/assets-duduq-resume-20261030
+      BASE_URL: http://127.0.0.1:4175
+      DUDUQ_MEDIA_QA_MODULES: Y1M01,Y1M02,Y1M03,Y1M04,Y1M05,Y1M06,Y2M01,Y2M02,Y2M03,Y2M04,Y2M05,Y2M06,Y3M01,Y3M02,Y3M03,Y3M04,Y3M05,Y3M06,Y4M01,Y4M02,Y4M03,Y4M04,Y4M05,Y4M06,Y5M01,Y5M02,Y5M03,Y5M04,Y5M05,Y5M06
+    steps:
+      - name: Checkout QA branch (read-only token)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build isolated candidate with pinned official-reuse media
+        run: bash qa/build-v26-topic-first-paint-qa.sh
+
+      - name: Verify 30 contracts, 600 question references and media closure
+        run: |
+          node qa/audit-media-completion.mjs
+          node qa/check-media-module-closure.mjs
+          node --check qa/browser-media-candidate-smoke.mjs
+
+      - name: Install Playwright Chromium on Linux
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Serve exact candidate artifact
+        run: |
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages > /tmp/duduq-all-modules-browser.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4175/ > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-all-modules-browser.log
+          exit 1
+
+      - name: Open, interact with and capture all 30 modules at 3 viewports
+        run: node qa/browser-media-candidate-smoke.mjs
+
+      - name: Preserve per-module diagnosis and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-all-30-modules-browser-qa
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            qa/results/media-browser-qa/**
+            qa/results/media-closure-inventory.json
+            qa/results/media-module-closure.json
+
+      - name: Scope limitation
+        if: always()
+        run: |
+          echo "Tests 30 intros and first gameplay navigation on desktop/tablet/mobile."
+          echo "600 questions are checked statically for contract and media references; NOT 600 interactive gameplay E2E tests."
+          echo "No pedagogical QA, final media approval, publication or production changes."
