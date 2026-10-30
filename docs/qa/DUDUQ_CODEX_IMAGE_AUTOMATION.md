@@ -112,3 +112,15 @@ Um relatório do **Codex Windows**, emitido após 21m40s de execução, confirmo
 7. Continuar em checkpoint persistente, revisando primeiro o PR #118, e prosseguir com lote seguinte até 30/30 módulos sem mídia provisória nem sem homologação. Sem publicação ou limpeza antes dos gates finais.
 
 **Limite importante:** `qa/plan-shared-media-splits.mjs` é apenas um planejador; não modifica questões nem transfere PNGs, e não substitui a revisão semântica. Os arquivos locais da sessão Codex não estão automaticamente acessíveis ao executor do GitHub.
+
+
+## Atualização do Codex — Y1M04/Y1M05 e QA Chromium em Linux
+
+Relatório mais recente do executor Codex (29/10/2026): **17 PNGs candidatos apenas em QA**, incluindo 11 PNGs originais efetivamente copiados ao inbox local; 15 candidatos/78 vínculos de Y1M04 passaram apenas no *preflight* do importador (7 imagens/62 IDs; 8 imagens/16 IDs), sem integração ao runtime ou validação pedagógica. Y1M04 tem cinco usos ainda pendentes: `blue` Q002 e Q012, `white` Q012 e Q014, `pencil case` Q003; rejeitar `blue`/`white` com pixels soltos e não forçar associação de estojo que falhou no guard. Y1M05 tem 101 referências pendentes e quatro rascunhos de anatomia rejeitados, que não devem ser promovidos. A verificação V26 foi 2.673/2.673 entradas com SHA de manifesto `5993AACEAFF272626C863AEF07E1B33A909CA7F9FCC41D2D40890BAA6C08B822`; não confundir 2.674 arquivos físicos com erro de manifesto.
+
+**Novo runner Linux oficial na branch de revisão:**
+- `.github/workflows/duduq-media-browser-qa.yml` instala Playwright/Chromium de maneira autorizada, compila V26, inicializa preview HTTP isolado e realiza smoke de navegador nos módulos Y1M04 e Y1M05 em 1366×768, 768×1024 e 390×844.
+- `qa/browser-media-candidate-smoke.mjs` captura screenshots, erros JavaScript, HTTP/404 e estado visual inicial em `qa/results/media-browser-qa/`. **Não certifica gameplay completo, não examina PNGs locais ainda não transferidos, não muda runtime e nunca publica**.
+- O Codex deve usar esse padrão de CI para testar o **overlay QA efetivamente integrado** em um commit futuro: imagens precisam estar no artefato de preview antes do browser QA; executar a baseline isolada não conta como imagem substituída.
+- A saída de sessão Codex não inicia outro Codex sozinha. Configurar retomada real com executor autorizado e checkpoint quando for possível, sem usar cron apenas para repetir relatórios ou chamar ferramentas pagas sem autorização.
+- Prioridade operacional: resolver os cinco vínculos Y1M04 com PNG correto e sem artefatos, executar uma integração QA completa com semântica segura e registro+manifesto consistente, comprovar browser QA e registrar redução efetiva do backlog. Em seguida Y1M05 e restantes até 30/30.
