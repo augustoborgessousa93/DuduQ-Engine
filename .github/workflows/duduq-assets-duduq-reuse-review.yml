@@ -1,0 +1,131 @@
+name: DUDUQ - Reuse Assets-DuduQ Y1M04 (candidate browser QA)
+
+on:
+  push:
+    branches:
+      - integration/assets-duduq-resume-20261030
+    paths:
+      - "qa/apply-assets-duduq-y1m04-review.mjs"
+      - ".github/workflows/duduq-assets-duduq-reuse-review.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reuse-preview:
+    name: Build Y1M04 candidate and exercise 3 viewports
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    env:
+      CI: "true"
+      BASE_URL: http://127.0.0.1:4175
+      DUDUQ_MEDIA_QA_MODULES: Y1M04
+    steps:
+      - name: Checkout DUDUQ review branch (no write credentials)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          path: game
+
+      - name: Checkout exact Assets-DuduQ source commit (read only)
+        uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: 658d94f08031820cfea5258a6f4e7c24f278df92
+          path: game/source-assets
+          persist-credentials: false
+          sparse-checkout: |
+            Imagens Ilustrativa
+          sparse-checkout-cone-mode: false
+
+      - name: Verify source SHA
+        working-directory: game
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test "$(git -C source-assets rev-parse HEAD)" = "658d94f08031820cfea5258a6f4e7c24f278df92"
+          printf '%s\n' "658d94f08031820cfea5258a6f4e7c24f278df92" > source-assets/.git-source-commit
+          echo "EXACT_SOURCE_CHECKOUT=PASS"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install real Chromium for QA
+        working-directory: game
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Build canonical V26 and stage only safe semantic matches
+        working-directory: game
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          bash qa/build-v26-topic-first-paint-qa.sh
+          node --check qa/apply-assets-duduq-y1m04-review.mjs
+          node qa/apply-assets-duduq-y1m04-review.mjs source-assets
+          node qa/audit-media-completion.mjs --output=qa/results/assets-reuse-closure.json
+          node qa/check-media-module-closure.mjs --input=qa/results/assets-reuse-closure.json --output=qa/results/assets-reuse-module-closure.json
+          node --input-type=module <<'NODE'
+          import {readFileSync,existsSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const report=JSON.parse(readFileSync('qa/results/assets-duduq-y1m04-review.json','utf8'));
+          const registry=JSON.parse(readFileSync('dist-pages/content/english/media/media-registry.json','utf8'));
+          const items=new Map(registry.entries.map(x=>[x.mediaId,x]));
+          if(report.immutableQuestionContracts!==600||report.uniquePngs<1||report.bindingsUpdated<1)throw Error('NO_VERIFIED_PREVIEW_BINDINGS');
+          for(const a of report.accepted){
+            const entry=items.get(a.mediaId);
+            if(entry?.sha256!==a.sha256||entry?.urlOrPath!==a.destination||entry?.temporary!==true||
+              entry?.humanResolutionStatus!=='PEDAGOGICAL_QA_PENDING')throw Error('BAD_PREVIEW_STATUS:'+a.mediaId);
+            if(!existsSync('dist-pages/'+a.destination))throw Error('MISSING_PREVIEW_ASSET:'+a.destination);
+            const actual=createHash('sha256').update(readFileSync('dist-pages/'+a.destination)).digest('hex');
+            if(actual!==a.sha256)throw Error('ASSET_BYTES_CHANGED:'+a.destination);
+          }
+          console.log(JSON.stringify({status:'VERIFIED_PREVIEW_ONLY',pngs:report.uniquePngs,
+            updatedReferences:report.bindingsUpdated,questions:report.immutableQuestionContracts}));
+          NODE
+
+      - name: Start local HTTP server (no public deployment)
+        working-directory: game
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages > /tmp/duduq-assets-reuse-preview.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4175/ > /dev/null 2>&1; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-assets-reuse-preview.log
+          exit 1
+
+      - name: Real-browser boot and image transport on 3 viewports
+        working-directory: game
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node qa/browser-media-candidate-smoke.mjs
+          echo "PLAYWRIGHT_TRANSPORT_PASS_NOT_GAMEPLAY_CERTIFICATION"
+
+      - name: Retain candidate images, exact binding audit, browser screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-assets-reuse-y1m04-preview
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            game/qa/results/assets-duduq-y1m04-review.json
+            game/qa/results/assets-reuse-closure.json
+            game/qa/results/assets-reuse-module-closure.json
+            game/qa/results/media-browser-qa/**
+            game/dist-pages/content/english/assets/images/assets-duduq-review/**
+            game/dist-pages/content/english/media/media-registry.json
+            game/dist-pages/.duduq-pages-manifest
+
+      - name: Explicit release boundary
+        if: always()
+        run: |
+          echo "Review-only candidate. Human pedagogical approval, gameplay QA and release authorization are REQUIRED."
+          echo "No production deploy. No changes to Gold Masters or immutable source content."
