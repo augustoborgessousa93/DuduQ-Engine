@@ -20,6 +20,7 @@
   "legacyAuditSnapshot": {
     "path": "qa/results/media-closure-inventory-y1m05-before.json",
     "sha256": "540e01c0a847ded44e4845e4ae5877c59cfaf27d17cf4272f73efad7a6b7e062",
+    "canonicalLfSha256": "42fb1c757bea8d13935daa2c5e5654a9d9d41deeb38c09d091186b51ea75f938",
     "verifiedY1M04Ids": 84,
     "registryEntries": 1160
   },
