@@ -6,6 +6,7 @@ on:
     paths:
       - "qa/audit-assets-duduq-actual-render.mjs"
       - "qa/audit-mixed-mechanics-media.mjs"
+      - "qa/export-four-module-media-queue.mjs"
       - ".github/workflows/duduq-assets-rendered-media-qa.yml"
   push:
     branches:
@@ -33,6 +34,10 @@ jobs:
           node-version: "22"
       - name: Build current reviewed PNG + per occurrence rebasing
         run: bash qa/build-v26-topic-first-paint-qa.sh
+      - name: Export exact-concept media reuse / missing image queue
+        run: |
+          node --check qa/export-four-module-media-queue.mjs
+          node qa/export-four-module-media-queue.mjs
       - name: Install Chromium
         run: |
           npm install --no-save playwright@1.55.0
