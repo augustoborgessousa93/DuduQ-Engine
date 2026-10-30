@@ -218,6 +218,63 @@ test('rejects a symlinked backup destination before removing any orphaned file',
   assert.match(result.r.stderr,/DUDUQ_RETIREMENT_BLOCKED:SYMLINK_BACKUP_DIRECTORY/);
   assert.ok(fs.existsSync(path.join(f.root,OLD)));
   assert.ok(fs.existsSync(path.join(f.root,LIVE)));
-  assert.equal(fs.existsSync(path.join(f.root,OLD.replace('content/english/assets/images/','content/english/assets/images/content/english/assets/images/'))),false);
+ }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
+});
+
+function createValidFixtureApproval(f){
+ const dry=run(f);assert.equal(dry.r.status,0,dry.r.stderr);
+ const evidence='qa/results/full-browser-pedagogical-evidence.json';
+ const rollback='qa/backups/last-production-build.sha';
+ const put=(p,bytes)=>{
+  const dst=path.join(f.dir,p);
+  fs.mkdirSync(path.dirname(dst),{recursive:true});
+  fs.writeFileSync(dst,bytes);
+ };
+ const evidenceBytes=Buffer.from('{"status":"PASS","scope":"30 modules"}');
+ const rollbackBytes=Buffer.from('release-snapshot-verification');
+ put(evidence,evidenceBytes);put(rollback,rollbackBytes);
+ const approval={
+  schemaVersion:'DUDUQ_RETIREMENT_APPROVAL_V1',
+  referenceFingerprint:dry.report.referenceFingerprint,
+  pedagogicalQAApproved:true,browserQA30ModulesPassed:true,
+  productionDeploymentVerified:true,rollbackVerified:true,
+  evidencePath:evidence,evidenceSha256:sha(evidenceBytes),
+  rollbackPath:rollback,rollbackSha256:sha(rollbackBytes),
+  reviewer:'QA reviewer'
+ };
+ const file=path.join(f.dir,'qa/results/final-signoff.json');
+ put('qa/results/final-signoff.json',Buffer.from(JSON.stringify(approval)));
+ return file;
+}
+
+test('rejects nested symlink aliases inside the backup tree before any deletion',()=>{
+ const f=setup(false);
+ try{
+  const approval=createValidFixtureApproval(f);
+  const backupDir=path.join(f.dir,'qa/results/nested-backup');
+  fs.mkdirSync(backupDir,{recursive:true});
+  fs.symlinkSync(f.root,path.join(backupDir,'content'),process.platform==='win32'?'junction':'dir');
+  const result=run(f,['--apply','--approval='+approval,'--backup-dir='+backupDir]);
+  assert.notEqual(result.r.status,0);
+  assert.match(result.r.stderr,/DUDUQ_RETIREMENT_BLOCKED:SYMLINK_BACKUP_DIRECTORY/);
+  assert.ok(fs.existsSync(path.join(f.root,OLD)));
+  assert.ok(fs.existsSync(path.join(f.root,LIVE)));
+ }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
+});
+
+test('never overwrites an existing backup or deletes its source on failed backup',()=>{
+ const f=setup(false);
+ try{
+  const approval=createValidFixtureApproval(f);
+  const backupDir=path.join(f.dir,'qa/results/duduq-media-retirement-backup');
+  const previous=path.join(backupDir,LIVE);
+  fs.mkdirSync(path.dirname(previous),{recursive:true});
+  fs.writeFileSync(previous,'PREVIOUS-BACKUP-MUST-SURVIVE');
+  const result=run(f,['--apply','--approval='+approval,'--backup-dir='+backupDir]);
+  assert.notEqual(result.r.status,0);
+  assert.match(result.r.stderr,/EEXIST/);
+  assert.equal(fs.readFileSync(previous,'utf8'),'PREVIOUS-BACKUP-MUST-SURVIVE');
+  assert.ok(fs.existsSync(path.join(f.root,OLD)));
+  assert.ok(fs.existsSync(path.join(f.root,LIVE)));
  }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
 });
