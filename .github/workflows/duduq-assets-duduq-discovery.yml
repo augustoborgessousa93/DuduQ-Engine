@@ -1,0 +1,34 @@
+name: DUDUQ - Inspect 30 module media semantics (read-only)
+on:
+  push:
+    branches:
+      - integration/assets-duduq-resume-20261030
+    paths:
+      - "qa/audit-assets-duduq-semantics.mjs"
+      - ".github/workflows/duduq-assets-duduq-discovery.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Rebuild canonical 600 question contracts
+        run: bash qa/build-v26-topic-first-paint-qa.sh
+      - name: Audit real semantic image references by module
+        run: |
+          node --check qa/audit-assets-duduq-semantics.mjs
+          node qa/audit-assets-duduq-semantics.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: duduq-assets-semantics-30-modules
+          path: qa/results/assets-duduq-semantics-inventory.json
+          retention-days: 20
+      - run: echo "Read only. No changes to content, game, source art, or production."
