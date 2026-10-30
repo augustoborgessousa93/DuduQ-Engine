@@ -44,3 +44,21 @@ O proprietário permanecerá vários dias longe do computador, mas deixará o **
 Afirmar **AUTOMAÇÃO LOCAL ATIVA** apenas quando a tarefa existir no Task Scheduler, a CLI estiver autenticada, um ciclo `codex exec` tiver sido realmente lançado, o log correspondente existir e os testes iniciais forem executáveis. Afirmar **IMAGENS 100% AUTÔNOMAS** apenas depois de um módulo demonstrar **geração real → integração real → build → browser QA → checkpoint/commit**, sem intervenção manual.
 
 Estado anterior à instalação local: **HOST PREPARADO NO REPOSITÓRIO, AUTOMAÇÃO LOCAL NÃO VERIFICADA**.
+
+
+## Falha real no Windows: tarefa enfileirada, sem retomada (30/10/2026)
+
+**Relatório factual do Codex local, 09:27 BRT:** agendador foi instalado e já executou Codex/gerador nativo, gerou os pacotes Y1M04 e Y1M05 no worktree isolado, checkpoint 2/30 módulos e 954 mídias pendentes, mas a tarefa ficou **`Enfileirados` sem nova execução real** após reinstalação e acionamento manual. HEAD do worktree local permaneceu `58bac8c0`, **anterior à arquitetura de duas filas**. Um conserto local do lock de PID reutilizado passou apenas em sintaxe; ainda não foi validado em reinício real. Y1M02 tem overlay somente em QA e navegador bloqueado por `spawn EPERM`. Não publicar nem tratar agendamento como ativo.
+
+**Diagnóstico seguro obrigatório antes de mexer na tarefa:**
+
+1. Trabalhe no Windows via CLI Codex autenticada e proteja os checkpoints/arquivos não versionados e o checkout original. Não dar `git reset --hard`, `git clean`, `taskkill` global, `schtasks /End` às cegas, nem desabilitar política de segurança.
+2. No **worktree isolado**, verificar `git status`, `git rev-parse --short HEAD`, `git worktree list` e se o Agendador realmente aponta para o script **daquele** worktree. Não presumir que o GitHub atualizou o Windows quando um commit foi feito.
+3. Incorporar sem sobrepor as alterações locais a versão atual da branch, incluindo `qa/duduq-windows-scheduler-diagnostics.mjs`, `qa/validate-duduq-png.mjs`, `qa/duduq-two-lane-plan.mjs`. Validar as seis regressões no runner Linux; não contar PNG só por assinatura+hash, exigir PNG RGBA decodificável, transparente, IHDR/IDAT/IEND/CRC válidos.
+4. Executar localmente `node qa/duduq-windows-scheduler-diagnostics.mjs --doctor`. Ler a evidência gravada em `%LOCALAPPDATA%\DUDUQ-Codex-Watchdog\scheduler-diagnostics.json`: XML da tarefa, `MultipleInstancesPolicy`, Task Scheduler `/V`, processos Windows com linha de comando e data de criação, lock, state.json, logs recentes e possível backoff. **Este diagnóstico é read-only.**
+5. A Microsoft documenta a política `Queue` como iniciar outra instância **somente depois** que as anteriores terminarem; `IgnoreNew` não empilha novas instâncias. Entretanto, `Enfileirados` por si só não comprova a causa. Exigir evidência de instância anterior ativa e de sua identidade, inclusive guardando o ajuste local do lock por PID reutilizado, antes de escolher uma recuperação.
+6. Caso uma instância legítima do Codex **esteja rodando**, não interrompê-la. Se nenhum processo ou tarefa real estiver ativo e estiver provada uma instância enfileirada, restaurar configuração de instância única segura no Scheduler (`IgnoreNew` quando apropriado) e iniciar um único teste de retomada. Preserve/exporte o XML antes de qualquer alteração; não mexa na conta, credenciais, direitos, outras tarefas, serviços ou limites de sandbox.
+7. Confirmar **duas invocações reais e distintas**, com `lane=generation` e `lane=integration` registrados nos logs e PNGs efetivamente gerados/ligados ou blocker específico. Apenas o comando `schtasks /Run` ter retornado sucesso não prova execução. Registrar um novo checkpoint sem alterar produção.
+8. Se não houver acesso/permissão para reconfigurar, registrar `BLOCKED_SCHEDULER` com diagnóstico e aguardar intervenção autorizada; não declarar autonomia permanente.
+
+**Gate Linux:** Playwright/Chromium no Windows pode apresentar `spawn EPERM`; isso não autoriza redução de QA ou mudança de política. Use o runner Linux já conectado no PR para QA da candidata Y1M02; registre evidência e mantenha a filial de geração independente do bloqueio.
