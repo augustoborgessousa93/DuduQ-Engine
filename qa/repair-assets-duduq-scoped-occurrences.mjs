@@ -40,6 +40,29 @@ for(const e of reg.entries){
  if(previous && previous.sha256!==e.sha256)throw Error('DIVERGENT_ART_FOR_SAME_SEMANTIC:'+key);
  imported.set(key,e);
 }
+// QA-only cross-module reuse: a small explicit whitelist of exact, single-word
+// concepts. Never infer an animal adjective or rename a school object.
+// The source file/hash stays pinned to the original audited repository commit.
+const crossModuleExact=new Map([
+ ['Y1M04',new Map([
+  ...['red','blue','green','yellow','black','white'].map(c=>[c,'Y1M03']),
+  ...['one','two','three','four'].map(c=>[c,'Y1M02'])
+ ])],
+ ['Y1M06',new Map(
+  ['red','blue','green','yellow'].map(c=>[c,'Y1M03'])
+ )]
+]);
+const chooseAuditedAsset=(module,concept)=>{
+ const local=imported.get(module+'|'+concept);
+ if(local)return {asset:local,sourceModule:module,crossModule:false};
+ const sourceModule=crossModuleExact.get(module)?.get(concept);
+ if(!sourceModule)return null;
+ const asset=imported.get(sourceModule+'|'+concept);
+ if(!asset)return null;
+ if(String(asset.semantic||'').trim().toLowerCase()!==concept)
+  throw Error('CROSS_MODULE_NOT_IDENTICAL_SEMANTIC:'+module+':'+concept);
+ return {asset,sourceModule,crossModule:true};
+};
 const mediaMask=n=>{
  if(Array.isArray(n))return n.map(mediaMask);
  if(!n||typeof n!=='object')return n;
@@ -95,8 +118,17 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
    if(!concept||!isExactPedagogicalConcept(concept,regEntry.semantic)||!mustInclude||!isExactPedagogicalConcept(mustInclude,concept)){
      report.skippedCounts.UNPROVEN_CONTEXT_OR_SEMANTIC=(report.skippedCounts.UNPROVEN_CONTEXT_OR_SEMANTIC||0)+1;continue;
    }
-   const asset=imported.get(module+'|'+concept);
-   if(!asset){report.skippedCounts.NO_EXACT_PINNED_SOURCE=(report.skippedCounts.NO_EXACT_PINNED_SOURCE||0)+1;continue;}
+   const chosen=chooseAuditedAsset(module,concept);
+   if(!chosen){report.skippedCounts.NO_EXACT_PINNED_SOURCE=(report.skippedCounts.NO_EXACT_PINNED_SOURCE||0)+1;continue;}
+   const {asset,sourceModule,crossModule}=chosen;
+   // Exact matching on BOTH question context keys and the old registry entry
+   // is mandatory for cross-module reuse; never relax to fuzzy matching.
+   if(crossModule&&(
+     String(regEntry.semantic||'').trim().toLowerCase()!==concept ||
+     String(n.mustInclude||'').trim().toLowerCase()!==concept)){
+     report.skippedCounts.CROSS_MODULE_CONTEXT_NOT_EXACT=(report.skippedCounts.CROSS_MODULE_CONTEXT_NOT_EXACT||0)+1;
+     continue;
+   }
    // Same old ID can mean different things across other questions: split rather
    // than rewriting the shared registry entry. One new ID for each q+concept.
    const assignmentKey=qid+'|'+concept+'|'+from;
@@ -113,14 +145,14 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
       provenance:{...asset.provenance},
       splitAudit:{sourceMediaId:from,questionId:qid,semanticTarget:concept,
        sourceRegistrySemantic:regEntry.semantic,reason:'SAME_ID_USED_IN_MULTIPLE_CONTEXTS',
-       previewOnly:true,originalAsset:regEntry.urlOrPath}};
+       previewOnly:true,sourceModule,crossModuleExact:crossModule,originalAsset:regEntry.urlOrPath}};
     nextRegistry.entries.push(clone);
     known.add(replacement);
     newAssignments.set(assignmentKey,replacement);
-    report.createdIds.push({moduleId:module,questionId:qid,from,to:replacement,concept,sourceImage:asset.urlOrPath});
+    report.createdIds.push({moduleId:module,questionId:qid,from,to:replacement,concept,sourceModule,crossModule,sourceImage:asset.urlOrPath});
    }
    n[key]=replacement;
-   changes.push({questionId:qid,from,to:replacement,concept,field:key});
+   changes.push({questionId:qid,from,to:replacement,concept,sourceModule,crossModule,field:key});
   }
   for(const v of Object.values(n))if(v&&typeof v==='object')visit(v,qid);
  }
@@ -170,8 +202,10 @@ for(const [p,h] of manifest)assert.equal(sha(await readFile(path.join(DIST,p))),
 report.manifestSha256=sha(Buffer.from(nextManifest));
 report.totalNewMediaIds=report.createdIds.length;
 report.totalQuestionMediaOccurrencesRebound=report.modifiedReferences.length;
+report.crossModuleExactReuses=report.modifiedReferences.filter(x=>x.crossModule).length;
 await mkdir('qa/results',{recursive:true});
 await writeFile('qa/results/assets-duduq-occurrence-scoped-repair.json',JSON.stringify(report,null,2)+'\n');
 console.log('DUDUQ_OCCURRENCE_SCOPED_MEDIA_REPAIR='+JSON.stringify({status:'QA_PREVIEW_ONLY',sourcePngs:imported.size,
   newMediaIds:report.totalNewMediaIds,occurrences:report.totalQuestionMediaOccurrencesRebound,byModule:report.byModule,
+  crossModuleExactReuses:report.crossModuleExactReuses,
   forbiddenFieldsChanged:0,questionsChecked:count,productionUntouched:true}));
