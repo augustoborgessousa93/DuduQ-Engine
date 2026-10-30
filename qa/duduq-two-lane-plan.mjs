@@ -35,7 +35,7 @@ for(const d of dirs.filter(x=>x.isDirectory())){
  let m;try{m=JSON.parse(raw.toString('utf8'))}catch{fail('INVALID_CANDIDATE_MANIFEST:'+d.name)}
  if(!all.includes(m.moduleId))continue; // unrelated batches do not become official module evidence
  if(!Array.isArray(m.assets)||!m.assets.length)continue;
- const checked=[];
+ const checked=[],validBindingIds=new Set();
  for(const asset of m.assets){
   let verdict='VALID';
   if(typeof asset.file!=='string'||!/^images\/[a-zA-Z0-9_.-]+\.png$/i.test(asset.file))verdict='UNSAFE_FILENAME';
@@ -46,12 +46,14 @@ for(const d of dirs.filter(x=>x.isDirectory())){
   if(verdict==='VALID'&&(!Array.isArray(asset.bindings)||asset.bindings.length===0))verdict='NO_QUESTION_BINDINGS';
   if(verdict==='VALID'&&asset.bindings.some(b=>typeof b.questionId!=='string'||!b.questionId.startsWith(m.moduleId+'-Q')||typeof b.mediaId!=='string'||!b.mediaId))verdict='INVALID_BINDING_SCOPE';
   if(verdict==='VALID'&&/REJECTED|PENDING_REGEN/i.test(String(asset.review||'')))verdict='REQUIRES_REGENERATION';
+  if(verdict==='VALID')for(const bind of asset.bindings)validBindingIds.add(bind.mediaId);
   checked.push({assetKey:asset.assetKey||asset.file,sha256:asset.sha256||null,verdict});
  }
  const record={moduleId:m.moduleId,manifest:path.relative(root,manifestPath).replaceAll('\\','/'),
   manifestSha256:hash(raw),
   assetFingerprintSha256:hash(checked.filter(x=>x.verdict==='VALID').map(x=>x.sha256.toLowerCase()).sort().join('|')),
   assetCount:m.assets.length,validAssetCount:checked.filter(x=>x.verdict==='VALID').length,
+  verifiedBindingIds:validBindingIds.size,
   invalidAssets:checked.filter(x=>x.verdict!=='VALID'),questionContractsReviewed:m.questionContractsReviewed||0,
   productionApproved:m.productionApproved===true,generatedEvidenceOnly:true};
  const prev=candidates.get(m.moduleId);
@@ -71,7 +73,8 @@ const records=all.map(moduleId=>{
  // Until independently replayed with fresh source and hash-pinned overlays,
  // ready media requires integration/QA work, never auto-promotion.
  const hasBundle=Boolean(cand);
- const candidateComplete=hasBundle&&cand.validAssetCount===cand.assetCount&&cand.questionContractsReviewed===20;
+ const candidateComplete=hasBundle&&cand.validAssetCount===cand.assetCount&&cand.questionContractsReviewed===20&&
+  (pending===0||cand.verifiedBindingIds>=pending);
  const generatorNeeded=!localComplete && !candidateComplete;
  const integratorNeeded=hasBundle && cand.validAssetCount>0;
  const stage=integratorNeeded?(candidateComplete?'CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA':'PARTIAL_CANDIDATES_QA'):
