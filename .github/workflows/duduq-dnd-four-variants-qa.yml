@@ -1,0 +1,58 @@
+name: DUDUQ - Four DnD Variants After Real Audio
+
+on:
+  push:
+    branches:
+      - qa/strict-rendered-media-check-20261030
+    paths:
+      - ".github/workflows/duduq-dnd-four-variants-qa.yml"
+      - "qa/probe-dnd-four-variants.mjs"
+      - "qa/repair-assets-duduq-scoped-occurrences.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-four-drag-drop-variants:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      CF_PAGES_BRANCH: integration/assets-duduq-resume-20261030
+      BASE_URL: http://127.0.0.1:4175
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build source-pinned preview candidate
+        run: bash qa/build-v26-topic-first-paint-qa.sh
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Serve candidate, never production
+        run: |
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages >/tmp/duduq-dnd4-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          exit 1
+      - name: Click real audio control and inspect four DnD cases
+        run: |
+          node --check qa/probe-dnd-four-variants.mjs
+          node qa/probe-dnd-four-variants.mjs
+      - name: Upload screenshots and detailed visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-dnd-four-variant-evidence
+          retention-days: 14
+          if-no-files-found: warn
+          path: qa/results/drag-drop-variant-review/**
+      - name: No publication
+        if: always()
+        run: echo "Read-only diagnosis, no approval of semantic media, no production deploy."
