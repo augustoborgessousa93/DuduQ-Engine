@@ -1,0 +1,422 @@
+{
+  "schemaVersion": "DUDUQ_Y1M06_IMAGE_GENERATION_PROVENANCE_V1",
+  "createdOn": "2026-10-30",
+  "moduleId": "Y1M06",
+  "provider": "Codex built-in image_gen",
+  "tool": "image_gen.imagegen",
+  "nativeGeneratorWasEnabledAndUsed": true,
+  "generatorBlocked": false,
+  "totalFinalConcepts": 22,
+  "nativeGenerationsRetained": 20,
+  "reusedVerifiedNativeOriginals": 2,
+  "originalsRetainedUnderBatch": true,
+  "records": [
+    {
+      "assetKey": "Y1M06-CANDIDATE-BIG",
+      "semanticTarget": "big",
+      "finalFile": "images/DUDUQ-Y1M06-BIG.png",
+      "finalSha256": "71ef4290fd60783cc62684b21d498c6ecd41b6cbc35ce08eccf2e9d4fd159291",
+      "originalFile": "provenance/originals/BIG-ORIGINAL.png",
+      "originalSha256": "7aabd44b08f905fec40685e1e7463887b9357daa2eb5f60d61bf02dcfcfa7c8e",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable visual teaching the size word \"big\" without using an animal\nSubject: exactly one smooth rounded toy cube in neutral medium gray, with no markings, shown very large\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered single cube occupying about 82% of the canvas with a transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one object; neutral gray only, not a red, blue, yellow or green color-vocabulary object; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-BIG-SPIDER",
+      "semanticTarget": "big spider",
+      "finalFile": "images/DUDUQ-Y1M06-BIG-SPIDER.png",
+      "finalSha256": "57eb92db864178aef6a274b2820bfb6e3e20055326029fc20e3f26c16db00a32",
+      "originalFile": "provenance/originals/BIG-SPIDER-ORIGINAL.png",
+      "originalSha256": "9db2070353168f46c3debf3afaf1e5ea2e121846ed2074be1b9902d6390e3cc7",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: compositing\nPrimary request: show \"a big spider\" for the sentence-completion image clue\nReference: Image 1 is the exact approved friendly dark charcoal-gray spider with exactly eight legs\nComposition: preserve the spider and enlarge it to occupy about 78% of the canvas; keep the full spider inside the frame with at least 7% transparent margin\nScale reference: add exactly one tiny plain light-gray rounded cube at lower-right, no larger than 10% of the canvas\nConstraints: exactly one spider plus one small neutral cube; preserve exactly eight complete separated legs; no web; no insects; no extra animals; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbol; no logo; no watermark; genuinely transparent background",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 2,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-BIRD",
+      "semanticTarget": "bird",
+      "finalFile": "images/DUDUQ-Y1M06-BIRD.png",
+      "finalSha256": "f5ed701122220ae38f1d1527f9349c6d3e0310182365530546e49957e4ee24f7",
+      "originalFile": "provenance/originals/BIRD-ORIGINAL.png",
+      "originalSha256": "39b2947e5373de4e60e6493d541c5f5dcc9425df20f9fecfa7adaea89b5c626a",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable friendly pet bird\nSubject: one small cheerful blue-and-yellow songbird standing in three-quarter pose, with a clear beak, two eyes, two folded wings, two feet and a complete tail\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered whole bird filling about 75–82% of the canvas with at least 10% transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one bird; no branch; no cage; no nest; no egg; no other animals; no props; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-BLUE",
+      "semanticTarget": "blue",
+      "finalFile": "images/DUDUQ-Y1M06-BLUE.png",
+      "finalSha256": "0978e94bcd22a928f3ccb50d5c7c0fabd8cf5bc80b24a522edd87381914e60a0",
+      "originalFile": "provenance/originals/BLUE-ORIGINAL.png",
+      "originalSha256": "7311583037946a294df7af2737839a4b44d57f1dcb0fe94ff94b8e13b0c76ef3",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: precise-object-edit\nPrimary request: change only the red sphere to saturated primary blue\nReference: Image 1 is the exact smooth rounded toy sphere used by the color set\nChange: replace the red material with uniform vivid primary blue while retaining subtle studio highlights\nPreserve: the exact sphere, size, position, shape, lighting, framing and alpha silhouette\nConstraints: one sphere only; no red, yellow or green material; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-BLUE-TURTLE",
+      "semanticTarget": "blue turtle",
+      "finalFile": "images/DUDUQ-Y1M06-BLUE-TURTLE.png",
+      "finalSha256": "0050915f675b777b496e14a94c1773a6ce2e0de35bdc29453cf09efac26d2093",
+      "originalFile": "provenance/originals/BLUE-TURTLE-ORIGINAL.png",
+      "originalSha256": "567dedb39bc7ad265611892e7f797e4f9dddfac65f468d0a8c345e5917d8ff31",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: precise-object-edit\nPrimary request: recolor the turtle saturated primary blue and remove any halo\nReference: Image 1 is the exact friendly turtle\nChange: make the head, legs, tail and shell vivid blue with slightly darker blue outlines\nPreserve: the turtle identity, pose, domed shell, anatomy, silhouette, framing and transparent alpha background\nConstraints: blue must be dominant; no green or brown dominant material; no added object; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-CAT",
+      "semanticTarget": "cat",
+      "finalFile": "images/DUDUQ-Y1M06-CAT.png",
+      "finalSha256": "ae313d94c808584864a1906fce902181520749654223235966db4ad8e9cffcca",
+      "originalFile": "provenance/originals/CAT-ORIGINAL.png",
+      "originalSha256": "3f0818fc4a1920a70e464ac89e941686e27c309bfc9732989d143053bb769e38",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "REUSED_VERIFIED_NATIVE_ORIGINAL_20261029",
+      "prompt": "One friendly orange domestic cat, recognizable ears, whiskers, tail and paws, three-quarter view. Premium polished 3D cartoon for children ages 6–11. Square transparent PNG, whole cat silhouette fully visible. No other animals, props, text, watermark, collage, grid or opaque background.",
+      "reusedFrom": "qa/media-inbox/codex-local-20261029/001-CAT-CANDIDATE.png",
+      "sourceManifest": "qa/media-candidates/y1m04-official-20261030/provenance/CANDIDATE_BATCH_MANIFEST-20261029.json",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-DOG",
+      "semanticTarget": "dog",
+      "finalFile": "images/DUDUQ-Y1M06-DOG.png",
+      "finalSha256": "67cdfd3584dc1f864ccdb51a45fdfbecf6ce0e0b77cb29c790942004a653846e",
+      "originalFile": "provenance/originals/DOG-ORIGINAL.png",
+      "originalSha256": "1cfbd399562a35f3b930dec27cd0443d6002a633dec06955c73c4cabd239988b",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable friendly domestic dog\nSubject: one cheerful golden-brown puppy in a natural standing three-quarter pose, with clearly visible floppy ears, muzzle, four paws and wagging tail\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered single subject, whole dog fully visible, filling about 78–84% of the canvas while retaining at least 8% transparent safe margin on every side\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one dog; no collar tag; no clothes; no other animals; no toy; no bowl; no bone; no props; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-FISH",
+      "semanticTarget": "fish",
+      "finalFile": "images/DUDUQ-Y1M06-FISH.png",
+      "finalSha256": "5f161f9aef0d5de5141fc9bf423527bb0fce91540aa27e48287f9f74c37d2b23",
+      "originalFile": "provenance/originals/FISH-ORIGINAL.png",
+      "originalSha256": "db90baca459c9a40cd9bf65ee13e7e8f0eb2b9ca0bf008c3f7296c5b288b6ebf",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable friendly pet fish\nSubject: one orange-and-gold freshwater fish in clean side view, with one body, two eyes naturally placed, clear fins, scales and a complete flowing tail\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered whole fish filling about 76–82% of the canvas with at least 10% transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one fish; no aquarium; no bowl; no water; no bubbles; no plants; no other fish; no props; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-GREEN",
+      "semanticTarget": "green",
+      "finalFile": "images/DUDUQ-Y1M06-GREEN.png",
+      "finalSha256": "a806672a42a3fae0334b846d7173fd14c42ff034b398b79df2a8911f5911a8ee",
+      "originalFile": "provenance/originals/GREEN-ORIGINAL.png",
+      "originalSha256": "58597f817242de204327263d17937b248d1f009f42d9022afd55dc4c49b2e3a3",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: precise-object-edit\nPrimary request: change only the red sphere to saturated grass green\nReference: Image 1 is the exact smooth rounded toy sphere used by the color set\nChange: replace the red material with uniform vivid grass green while retaining subtle studio highlights\nPreserve: the exact sphere, size, position, shape, lighting, framing and alpha silhouette\nConstraints: one sphere only; no red, blue or yellow material; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-GREEN-RABBIT",
+      "semanticTarget": "green rabbit",
+      "finalFile": "images/DUDUQ-Y1M06-GREEN-RABBIT.png",
+      "finalSha256": "1c281d00fc4ae637c18f6fee5a0a62a683c79db6128fe64f9a29b3daeba27159",
+      "originalFile": "provenance/originals/GREEN-RABBIT-ORIGINAL.png",
+      "originalSha256": "72abffbc354c61a68b219f5c0a3136130862078526c4a80b1b3ae0c3bb89cd68",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: precise-object-edit\nPrimary request: recolor only the rabbit fur saturated clear grass green\nReference: Image 1 is the exact friendly rabbit\nChange: make the brown fur vivid green while preserving neutral eye, nose and inner-ear details\nPreserve: the exact rabbit identity, pose, anatomy, silhouette, framing and transparent alpha background\nConstraints: one rabbit only; no other animal; no prop; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-GREEN-SPIDER",
+      "semanticTarget": "green spider",
+      "finalFile": "images/DUDUQ-Y1M06-GREEN-SPIDER.png",
+      "finalSha256": "161c65f0afe4b78307501975f6d8c44fcd3b61acaadc74b99824247cd8529ac5",
+      "originalFile": "provenance/originals/GREEN-SPIDER-ORIGINAL.png",
+      "originalSha256": "ac4bf5d110d0749741121eebed3b61bf881adbb2d6918ad5d4e84627b166108b",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: precise-object-edit\nPrimary request: recolor the spider saturated primary green and remove any halo\nReference: Image 1 is the exact friendly spider\nChange: make the body and exactly eight legs vivid green\nPreserve: the spider identity, non-scary anatomy, exactly eight complete separated legs, silhouette, framing and transparent alpha background\nConstraints: one spider only; no web; no insect; no added object; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-HAMSTER",
+      "semanticTarget": "hamster",
+      "finalFile": "images/DUDUQ-Y1M06-HAMSTER.png",
+      "finalSha256": "47b773f80615dd7e621c4c9e878b8f3eed6dbe75c6532665352a8fce92528418",
+      "originalFile": "provenance/originals/HAMSTER-ORIGINAL.png",
+      "originalSha256": "36712ec604ef7ad094dc265b0d5641e53a8692e3738508f262e86ae76bcbd01b",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable friendly pet hamster\nSubject: one golden-brown-and-white hamster sitting upright, with round ears, muzzle, whiskers, two front paws and two hind feet\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered whole hamster filling about 76–82% of the canvas with at least 10% transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one hamster; no food; no wheel; no cage; no bedding; no other animal; no props; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-RABBIT",
+      "semanticTarget": "rabbit",
+      "finalFile": "images/DUDUQ-Y1M06-RABBIT.png",
+      "finalSha256": "6e14f5b48e75c1f00f32e81bf312c2569897caedb3a8b6acd859023892eb3f4e",
+      "originalFile": "provenance/originals/RABBIT-ORIGINAL.png",
+      "originalSha256": "68109e015c89991527ca9d8096b8260757daeeb152bd19fbb45becac823f0669",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "REUSED_VERIFIED_NATIVE_ORIGINAL_20261029",
+      "prompt": "One friendly small brown rabbit with long upright ears, clearly visible paws and tail, three-quarter view. Premium polished 3D cartoon for children ages 6–11. Square transparent PNG, fully visible and centered. No other animals, props, text, watermark, collage, grid or opaque background.",
+      "reusedFrom": "qa/media-inbox/codex-local-20261029/010-RABBIT-CANDIDATE.png",
+      "sourceManifest": "qa/media-candidates/y1m04-official-20261030/provenance/CANDIDATE_BATCH_MANIFEST-20261029.json",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-RED",
+      "semanticTarget": "red",
+      "finalFile": "images/DUDUQ-Y1M06-RED.png",
+      "finalSha256": "7109b53486fed140809537a0fd05c1ed49707677c49cf67e62e874bff1067632",
+      "originalFile": "provenance/originals/RED-ORIGINAL.png",
+      "originalSha256": "08e30ec5135613242c2e013960657059d71cca1c8feea4fe58263ba52de2fb48",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable pure red color object\nSubject: exactly one smooth rounded toy sphere uniformly primary red with subtle studio highlights\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered sphere filling about 72% of the canvas with generous transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one sphere; no face; no pattern; no letters; no numbers; no symbols; no other objects; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-RED-BIRD",
+      "semanticTarget": "red bird",
+      "finalFile": "images/DUDUQ-Y1M06-RED-BIRD.png",
+      "finalSha256": "bcc4de422e6179289ef51c74a9997c7ff7e7e9990c5357877484844ca392fa4b",
+      "originalFile": "provenance/originals/RED-BIRD-ORIGINAL.png",
+      "originalSha256": "8c3d4b3efb616c4cd684a5125f561890778d8d9c72b73cc300314256cd30b41b",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: precise-object-edit\nPrimary request: recolor the bird feathers saturated primary red\nReference: Image 1 is the exact friendly bird\nChange: make the blue and yellow feather areas vivid red while preserving neutral eyes, beak and feet\nPreserve: the bird identity, pose, anatomy, silhouette, framing and transparent alpha background\nConstraints: one bird only; no branch; no cage; no nest; no added object; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-RED-DOG",
+      "semanticTarget": "red dog",
+      "finalFile": "images/DUDUQ-Y1M06-RED-DOG.png",
+      "finalSha256": "c196273284ea49ace27590cfc36a13d3cd082864cb6247d3259ddee404b84cc9",
+      "originalFile": "provenance/originals/RED-DOG-ORIGINAL.png",
+      "originalSha256": "c6243c596da044dbf6e7976f38a9f370fe5c2a44e8863aff5c2432adf7a72109",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: precise-object-edit\nPrimary request: recolor the dog fur saturated primary red\nReference: Image 1 is the exact friendly dog\nChange: make the golden-brown and cream fur vivid red while preserving neutral eye, nose and mouth details\nPreserve: the exact dog identity, pose, anatomy, silhouette, framing and transparent alpha background\nConstraints: one dog only; no other animal; no prop; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-SMALL",
+      "semanticTarget": "small",
+      "finalFile": "images/DUDUQ-Y1M06-SMALL.png",
+      "finalSha256": "1fc7d977aa858df0350df3394bc145f3669f830fd827efb6c1ab6f9ba2b1b7f6",
+      "originalFile": "provenance/originals/SMALL-ORIGINAL.png",
+      "originalSha256": "8b07c45e2ff21c581cdf286c1f945fe69a241d866e5c570bb450352b7431a97d",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: precise-object-edit\nPrimary request: teach the size word \"small\" by making the exact same neutral gray cube much smaller\nReference: Image 1 is the exact big neutral gray cube\nChange: the exact same smooth rounded neutral medium-gray toy cube as the big reference should occupy about 30% of the canvas, leaving large transparent margins\nPreserve: the material, neutral gray color, viewpoint, lighting, shape and alpha silhouette of the reference cube\nConstraints: exactly one gray cube; do not recolor it; no red, blue, yellow or green material; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-SPIDER",
+      "semanticTarget": "spider",
+      "finalFile": "images/DUDUQ-Y1M06-SPIDER.png",
+      "finalSha256": "dad58d7bba5260f7ed7655e26d86c8545dc3306e1fc18ec792e801f3ece5e886",
+      "originalFile": "provenance/originals/SPIDER-ORIGINAL.png",
+      "originalSha256": "66cd8db172a008824cf73368a331b8f6614ebbee30042447a50c3dfe8d933558",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable friendly spider\nSubject: one non-scary dark charcoal-gray spider in an elevated three-quarter view, with exactly eight complete clearly separated legs, one abdomen, a smaller head and two main eyes\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered whole spider filling about 74–80% of the canvas with at least 10% transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one spider and exactly eight legs; no web; no insects; no other animals; no props; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-TURTLE",
+      "semanticTarget": "turtle",
+      "finalFile": "images/DUDUQ-Y1M06-TURTLE.png",
+      "finalSha256": "74a0dc4ba34d02139984dd2aaea501ff625c6ee9e583bd69c004ab0ab5d73326",
+      "originalFile": "provenance/originals/TURTLE-ORIGINAL.png",
+      "originalSha256": "f032b8c2d982cd7c8d13586d983e50e51781968d0e3ae4a5483edd9069407d2a",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable friendly pet turtle\nSubject: one cheerful small green land turtle in three-quarter side view, with a clear domed patterned shell, head, four short legs and a tiny tail\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered whole turtle filling about 76–82% of the canvas with at least 10% transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one turtle; no water; no aquarium; no pond; no plants; no rock; no other animals; no props; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-YELLOW",
+      "semanticTarget": "yellow",
+      "finalFile": "images/DUDUQ-Y1M06-YELLOW.png",
+      "finalSha256": "ca91d91266a27f2b9d25af7a743502f22768ddd35c528575914e97aa259d75e8",
+      "originalFile": "provenance/originals/YELLOW-ORIGINAL.png",
+      "originalSha256": "1f4d2d855992ea3dea039235370707e15f1c0c045f3d41821680e9a9916b05d8",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: precise-object-edit\nPrimary request: change only the red sphere to saturated primary yellow\nReference: Image 1 is the exact smooth rounded toy sphere used by the color set\nChange: replace the red material with uniform vivid primary yellow while retaining subtle studio highlights\nPreserve: the exact sphere, size, position, shape, lighting, framing and alpha silhouette\nConstraints: one sphere only; no red, blue or green material; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-YELLOW-FISH",
+      "semanticTarget": "yellow fish",
+      "finalFile": "images/DUDUQ-Y1M06-YELLOW-FISH.png",
+      "finalSha256": "03a4d66b177b98e93f1dcde9fdfb3e42d9491e6f3f641ef7c83143ab2837418f",
+      "originalFile": "provenance/originals/YELLOW-FISH-ORIGINAL.png",
+      "originalSha256": "c701478274a32f314dd913ddc7edbc8d913d8c50e519151769af3ca6185a90e3",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable bright yellow fish teaching the phrase \"yellow fish\"\nSubject: one lemon-yellow freshwater fish in clean side view, with one body, two eyes naturally placed, clear fins, scales and a complete tail; yellow is the dominant color\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered whole fish filling about 76–82% of the canvas with at least 10% transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: primary yellow, not orange, red, green or blue; exactly one fish; no aquarium; no bowl; no water; no bubbles; no plants; no other fish; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-YELLOW-HAMSTER",
+      "semanticTarget": "yellow hamster",
+      "finalFile": "images/DUDUQ-Y1M06-YELLOW-HAMSTER.png",
+      "finalSha256": "1e16e58420f90bf15ce115f0f7fef2b8c4974ecde1b89aaf5872d118719b01c2",
+      "originalFile": "provenance/originals/YELLOW-HAMSTER-ORIGINAL.png",
+      "originalSha256": "275ee8ab31f2dd9d65eaa830ac027b7841c77467be83ba135af1b485ea1e01bb",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "prompt": "Use case: precise-object-edit\nPrimary request: recolor the hamster fur saturated primary yellow\nReference: Image 1 is the exact friendly hamster\nChange: make the golden-brown and white fur bright yellow while preserving neutral eye, nose, mouth and whisker details\nPreserve: the exact hamster identity, pose, anatomy, silhouette, framing and transparent alpha background\nConstraints: one hamster only; no cage; no wheel; no food; no prop; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+      }
+    }
+  ],
+  "excludedAttempts": [
+    {
+      "semanticTarget": "small",
+      "retainedInBatch": false,
+      "reason": "An earlier conversational edit resolved to a green cube instead of the neutral-gray BIG reference. It was rejected before batch capture; the final SMALL was regenerated from BIG-ORIGINAL with the correct gray material and scale-only change."
+    }
+  ]
+}
