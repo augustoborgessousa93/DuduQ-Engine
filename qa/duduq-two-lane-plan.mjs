@@ -8,6 +8,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {validateDuduqRgbaPng} from './validate-duduq-png.mjs';
 const param=(k,d)=>process.argv.find(x=>x.startsWith('--'+k+'='))?.slice(k.length+3)??d;
 const root=path.resolve(param('root','.'));
 const output=path.resolve(root,param('output','qa/results/media-two-lane-plan.json'));
@@ -15,7 +16,6 @@ const all=Array.from({length:5},(_,i)=>i+1).flatMap(y=>Array.from({length:6},(_,
 const priority=['Y1M04','Y1M05','Y1M06',...all.filter(x=>!['Y1M04','Y1M05','Y1M06'].includes(x))];
 const priorityRank=new Map(priority.map((x,i)=>[x,i]));
 const hash=b=>createHash('sha256').update(b).digest('hex');
-const pngSignature=Buffer.from('89504e470d0a1a0a','hex');
 function fail(code){throw Error('DUDUQ_TWO_LANE_INVALID:'+code)}
 const ledgerFile=path.join(root,'qa/results/media-module-closure.json');
 let ledger;
@@ -42,7 +42,14 @@ for(const d of dirs.filter(x=>x.isDirectory())){
   if(!/^[a-f0-9]{64}$/i.test(asset.sha256||''))verdict='MISSING_SHA256';
   let bytes;
   if(verdict==='VALID')try{bytes=await fs.readFile(path.join(base,asset.file))}catch{verdict='MISSING_FILE'}
-  if(bytes&&verdict==='VALID'&&(!bytes.subarray(0,8).equals(pngSignature)||hash(bytes)!==asset.sha256.toLowerCase()))verdict='PNG_HASH_OR_SIGNATURE_MISMATCH';
+  if(bytes&&verdict==='VALID'){
+   if(hash(bytes)!==asset.sha256.toLowerCase())verdict='PNG_HASH_MISMATCH';
+   else try{
+    const decoded=validateDuduqRgbaPng(bytes);
+    if(asset.pixelWidth&&Number(asset.pixelWidth)!==decoded.width||
+       asset.pixelHeight&&Number(asset.pixelHeight)!==decoded.height)verdict='MANIFEST_DIMENSIONS_MISMATCH';
+   }catch(e){verdict='PNG_DECODE_FAILED:'+String(e.message).slice(0,90)}
+  }
   if(verdict==='VALID'&&(!Array.isArray(asset.bindings)||asset.bindings.length===0))verdict='NO_QUESTION_BINDINGS';
   if(verdict==='VALID'&&asset.bindings.some(b=>typeof b.questionId!=='string'||!b.questionId.startsWith(m.moduleId+'-Q')||typeof b.mediaId!=='string'||!b.mediaId))verdict='INVALID_BINDING_SCOPE';
   if(verdict==='VALID'&&/REJECTED|PENDING_REGEN/i.test(String(asset.review||'')))verdict='REQUIRES_REGENERATION';
