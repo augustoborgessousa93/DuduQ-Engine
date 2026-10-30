@@ -184,3 +184,40 @@ test('rejects a substituted Q999 question in both inventory and retirement plann
   assert.match(audit.stderr,/INVALID_QUESTION:Y1M01/);
  }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
 });
+
+test('rejects a symlinked backup destination before removing any orphaned file',()=>{
+ const f=setup(false);
+ try{
+  const dry=run(f);assert.equal(dry.r.status,0,dry.r.stderr);
+  const evidence='qa/results/full-browser-pedagogical-evidence.json';
+  const rollback='qa/backups/last-production-build.sha';
+  const put=(p,bytes)=>{
+   const dst=path.join(f.dir,p);fs.mkdirSync(path.dirname(dst),{recursive:true});fs.writeFileSync(dst,bytes);
+  };
+  const evidenceBytes=Buffer.from('{"status":"PASS","scope":"30 modules"}');
+  const rollbackBytes=Buffer.from('release-snapshot-verification');
+  put(evidence,evidenceBytes);put(rollback,rollbackBytes);
+  const approval={
+   schemaVersion:'DUDUQ_RETIREMENT_APPROVAL_V1',
+   referenceFingerprint:dry.report.referenceFingerprint,
+   pedagogicalQAApproved:true,browserQA30ModulesPassed:true,
+   productionDeploymentVerified:true,rollbackVerified:true,
+   evidencePath:evidence,evidenceSha256:sha(evidenceBytes),
+   rollbackPath:rollback,rollbackSha256:sha(rollbackBytes),
+   reviewer:'QA reviewer'
+  };
+  put('qa/results/final-signoff.json',Buffer.from(JSON.stringify(approval)));
+  const alias=path.join(f.dir,'qa/results/backup-alias');
+  fs.symlinkSync(f.root,alias,process.platform==='win32'?'junction':'dir');
+  const result=run(f,[
+   '--apply',
+   '--approval='+path.join(f.dir,'qa/results/final-signoff.json'),
+   '--backup-dir='+alias
+  ]);
+  assert.notEqual(result.r.status,0);
+  assert.match(result.r.stderr,/DUDUQ_RETIREMENT_BLOCKED:SYMLINK_BACKUP_DIRECTORY/);
+  assert.ok(fs.existsSync(path.join(f.root,OLD)));
+  assert.ok(fs.existsSync(path.join(f.root,LIVE)));
+  assert.equal(fs.existsSync(path.join(f.root,OLD.replace('content/english/assets/images/','content/english/assets/images/content/english/assets/images/'))),false);
+ }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
+});
