@@ -23,6 +23,6 @@ if [[ "${CF_PAGES_BRANCH:-}" == "integration/assets-duduq-resume-20261030" ]]; t
   }
   node qa/apply-assets-duduq-batch-a.mjs qa/assets-reuse-source/batch-a --apply
   echo 'DUDUQ_ASSETS_BATCH_A_PREVIEW_PATCH=PASS:PRODUCTION_UNTOUCHED'
-  node qa/repair-assets-duduq-destination-bindings.mjs
-  echo 'DUDUQ_DESTINATION_BINDINGS_PREVIEW_REPAIRED=PASS'
+  node qa/repair-assets-duduq-scoped-occurrences.mjs
+  echo 'DUDUQ_SCOPED_BINDINGS_PREVIEW_REPAIRED=PASS'
 fi
