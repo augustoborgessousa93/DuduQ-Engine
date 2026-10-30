@@ -80,6 +80,13 @@ jobs:
           node qa/finalize-y1m04-official-media.mjs --apply
           node qa/tests/verify-y1m04-official-media-overlay.mjs --require-official
 
+      - name: Restore clean V26 source before independent Y1M05 replay
+        run: |
+          # Y1M05 semantic evidence is hash-bound to the original V26 registry.
+          # Running it on Y1M04's modified registry is an invalid test.
+          # Reimport the pinned V19 source and reapply V20-V26 in this ephemeral runner.
+          bash qa/build-v26-topic-first-paint-qa.sh
+
       - name: Reproduce Y1M05 candidate integration and all 20 Chromium question routes
         id: replay_y1m05
         continue-on-error: true
@@ -106,16 +113,18 @@ jobs:
             assert.equal(inv.activities,600);
             assert.equal(c.modules,30);
             assert.equal(c.activities,600);
-            assert.equal(c.distinctPendingMediaIds,954,"Independent Linux replay must match Codex checkpoint");
-            assert.equal(c.distinctVerifiedMediaIds,185);
-            assert.equal(c.completedModules,2);
-            assert.deepEqual(c.modulesDetail.filter(m=>m.complete).map(m=>m.moduleId).sort(),["Y1M04","Y1M05"]);
+            // This is the isolated Y1M05 replay snapshot, NOT a combined two-module build.
+            // Never claim the Codex 185/954 checkpoint from separate independent overlays.
+            assert.equal(c.completedModules,1,"Only Y1M05 may be complete in the isolated V26 snapshot");
+            assert.deepEqual(c.modulesDetail.filter(m=>m.complete).map(m=>m.moduleId),["Y1M05"]);
+            assert.equal(c.modulesDetail.find(m=>m.moduleId==="Y1M05").verifiedReferencedIds,101);
+            assert.ok(c.distinctPendingMediaIds>0,"Project must remain incomplete");
             assert.equal(inv.byStatus?.BROKEN_ASSET||0,0);
             assert.equal(inv.byStatus?.MISSING_REGISTRY||0,0);
             assert.equal(plan.applied,false,"No retirement may occur");
             assert.equal(c.status,"INCOMPLETE");
             assert.equal(inv.finalCompletionPassed,false);
-            console.log(JSON.stringify({status:"PASS_REVIEW_ONLY",modules:30,activities:600,verified:185,pending:954,completedModules:2,productionDeployed:false}));
+            console.log(JSON.stringify({status:"PASS_INDEPENDENT_Y1M05_ONLY",modules:30,activities:600,verifiedInIsolatedSnapshot:c.distinctVerifiedMediaIds,pendingInIsolatedSnapshot:c.distinctPendingMediaIds,completedModulesInSnapshot:c.completedModules,combinedY1M04Y1M05IntegrationVerified:false,productionDeployed:false}));
           '
           git diff --exit-code -- content/english functions/play/english core
           echo "NO_PRODUCTION_DEPLOY_NO_MEDIA_DELETION_NO_GOLD_MASTER_CHANGE"
@@ -156,4 +165,4 @@ jobs:
         if: always()
         run: |
           echo "Only ephemeral runner dist-pages is modified. No commit, merge, release, production deploy or deletion."
-          echo "This is independent technical/browser QA; it does not replace owner final pedagogical approval."
+          echo "Each module is replayed against a fresh V26 registry. This does not verify a combined two-module integration or replace pedagogical approval."
