@@ -57,9 +57,11 @@ for(const d of dirs.filter(x=>x.isDirectory())){
   if(verdict==='VALID')for(const bind of asset.bindings)validBindingIds.add(bind.mediaId);
   checked.push({assetKey:asset.assetKey||asset.file,sha256:asset.sha256||null,verdict});
  }
+ const validPngHashes=[...new Set(checked.filter(x=>x.verdict==='VALID').map(x=>x.sha256.toLowerCase()))].sort();
  const record={moduleId:m.moduleId,manifest:path.relative(root,manifestPath).replaceAll('\\','/'),
   manifestSha256:hash(raw),
-  assetFingerprintSha256:hash(checked.filter(x=>x.verdict==='VALID').map(x=>x.sha256.toLowerCase()).sort().join('|')),
+  assetFingerprintSha256:hash(validPngHashes.join('|')),
+  validPngHashes,validUniquePngCount:validPngHashes.length,
   assetCount:m.assets.length,validAssetCount:checked.filter(x=>x.verdict==='VALID').length,
   verifiedBindingIds:validBindingIds.size,
   invalidAssets:checked.filter(x=>x.verdict!=='VALID'),questionContractsReviewed:m.questionContractsReviewed||0,
@@ -95,7 +97,8 @@ const pick=xs=>xs.sort((a,b)=>(priorityRank.get(a.moduleId)??99)-(priorityRank.g
 // module. Prefer moving beyond prepared Y1M04/Y1M05 to Y1M06.
 const producerNext=pick(records.filter(m=>m.needsGeneration));
 const integratorNext=pick(records.filter(m=>m.needsIntegrationOrQA));
-const candidateAssetCount=records.reduce((n,x)=>n+(x.candidate?.validAssetCount||0),0);
+const candidateAssetCount=new Set(records.flatMap(x=>x.candidate?.validPngHashes||[])).size;
+const candidateManifestEntriesCount=records.reduce((n,x)=>n+(x.candidate?.validAssetCount||0),0);
 const payload={
  schemaVersion:'DUDUQ_MEDIA_TWO_LANE_PLAN_V1',mode:'READ_ONLY_PLANNING_NO_AUTOMATIC_APPROVAL',
  moduleCount:30,activityCount:600,
@@ -108,7 +111,7 @@ const payload={
  integrator:{nextModule:integratorNext,queuedModules:records.filter(x=>x.needsIntegrationOrQA).length,
   role:'ONLY_REVIEW_INTEGRATE_QA_CANDIDATES_IN_ISOLATED_REVIEW',
   deployAllowed:false,independentLinuxQARequired:true},
- candidateAssetCount,
+ candidateAssetCount,candidateManifestEntriesCount,
  independentQaGreen:false, // Never infer from locally written counters or CI of untouched V26.
  finished:false,
  caveat:'Separate persistent queues; a single Codex runner may interleave roles without simultaneous shared-worktree writes. A QA failure must not block the generator.',
@@ -119,5 +122,6 @@ await fs.writeFile(output,JSON.stringify(payload,null,2)+'\n');
 console.log(JSON.stringify({status:'TWO_LANES_READY_FOR_ORCHESTRATION',
  producerNext,integratorNext,producerQueued:payload.producer.queuedModules,
  integrationQueued:payload.integrator.queuedModules,candidateAssets:payload.candidateAssetCount,
+ candidateManifestEntries:payload.candidateManifestEntriesCount,
  moduleCount:30,activityCount:600,pendingIds:payload.globallyPendingMediaIds,
  releaseApproved:false,output}));
