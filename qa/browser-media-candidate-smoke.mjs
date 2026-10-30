@@ -33,7 +33,8 @@ try {
   const route='/play/english/year-'+match[1]+'/module-'+match[2]+'/';
   for(const view of views){
    const page=await browser.newPage({viewport:{width:view.width,height:view.height},reducedMotion:'reduce'});
-   const errors=[],badHttp=[],networkFailures=[];
+   const errors=[],badHttp=[],networkFailures=[],canceledDuringNavigation=[];
+   let navigationInitiated=false;
    const baseOrigin=new URL(base).origin;
    page.on('pageerror',e=>errors.push(String(e?.message||e)));
    page.on('response',r=>{
@@ -46,6 +47,14 @@ try {
     // Browsers legitimately abort preloaded audio requests when the page
     // switches between intro/game states. Do not hide actual HTTP errors.
     if(failure.includes('ERR_ABORTED') && /\/core\/assets\/audio\//.test(new URL(r.url()).pathname))return;
+    // A user click starts a real page navigation. Chromium cancels any
+    // outstanding requests belonging to the old intro document. Keep
+    // their details in evidence but distinguish from a failed new-game
+    // request; real 4xx/5xx and post-load failures remain hard failures.
+    if(failure.includes('ERR_ABORTED') && navigationInitiated) {
+     canceledDuringNavigation.push({url:r.url(),failure});
+     return;
+    }
     networkFailures.push({url:r.url(),failure});
    });
    const record={moduleId,viewport:view.name,route,url:base+route,
@@ -86,6 +95,7 @@ try {
     if(!record.introStartVisible)errors.push('INTRO_START_NOT_VISIBLE_IN_PRODUCT_ROUTE');
     if(record.introStartVisible){
      try {
+      navigationInitiated=true;
       await introTarget.click({timeout:6000});
       await page.waitForFunction(()=>{
        const frames=[...document.querySelectorAll('iframe')];
@@ -124,6 +134,7 @@ try {
    record.pageErrors=errors;
    record.httpFailures=badHttp;
    record.networkFailures=networkFailures;
+   record.canceledDuringNavigation=canceledDuringNavigation;
    record.screenshot=moduleId+'-'+view.name+'.png';
    await page.screenshot({path:path.join(dir,record.screenshot),fullPage:true,timeout:20000}).catch(e=>{
     errors.push('SCREENSHOT_FAILED:'+String(e.message).slice(0,200));
@@ -131,7 +142,7 @@ try {
    });
    results.push(record);
    console.log(JSON.stringify({moduleId,viewport:view.name,boot:record.boot,httpStatus:record.httpStatus,
-    pageErrors:errors.length,httpFailures:badHttp.length,networkFailures:networkFailures.length,
+    pageErrors:errors.length,httpFailures:badHttp.length,networkFailures:networkFailures.length,canceledDuringNavigation:canceledDuringNavigation.length,
     brokenVisibleImages:record.after?.brokenVisibleImages?.length||0,
     imagesWithEmptySource:record.after?.imagesWithEmptySource||0,
     diagnosticErrors:errors.slice(0,2),route}));
