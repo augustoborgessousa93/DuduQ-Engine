@@ -8,6 +8,7 @@ on:
       - ".github/workflows/duduq-30-module-browser-qa.yml"
       - "qa/browser-media-candidate-smoke.mjs"
       - "qa/export-four-module-media-queue.mjs"
+      - "qa/repair-assets-duduq-scoped-occurrences.mjs"
   workflow_dispatch:
 
 permissions:
