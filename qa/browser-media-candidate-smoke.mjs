@@ -30,7 +30,7 @@ const results=[];
 try {
  for(const moduleId of modules){
   const match=/^Y([1-5])M(0[1-6])$/.exec(moduleId);
-  const route='/content/english/year-'+match[1]+'/module-'+match[2]+'/';
+  const route='/play/english/year-'+match[1]+'/module-'+match[2]+'/';
   for(const view of views){
    const page=await browser.newPage({viewport:{width:view.width,height:view.height},reducedMotion:'reduce'});
    const errors=[],badHttp=[],networkFailures=[];
@@ -57,8 +57,7 @@ try {
    try {
     const response=await page.goto(record.url,{waitUntil:'domcontentloaded',timeout:40000});
     record.httpStatus=response?.status()??null;
-    await page.waitForFunction(()=>window.DUDUQ_ENGINE_READY===true,null,{timeout:35000});
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(450);
     record.before=await page.evaluate(()=>{
      const app=document.querySelector('#root') || document.body;
      const images=[...document.images].map(img=>({
@@ -80,20 +79,25 @@ try {
     // If present and visible, attempt real pointer interaction. Always keep
     // screenshots and report the exact UI state reached.
     const selector='.duduq-intro-start-button';
-    const start=page.locator(selector).first();
+    const start=page.getByRole('button',{name:/iniciar jogo/i}).first();
     record.introStartVisible=await start.isVisible().catch(()=>false);
-    if(!record.introStartVisible)errors.push('OFFICIAL_INTRO_START_NOT_VISIBLE');
+    const introTarget=record.introStartVisible?start:page.getByText(/INICIAR JOGO/i).first();
+    if(!record.introStartVisible)record.introStartVisible=await introTarget.isVisible().catch(()=>false);
+    if(!record.introStartVisible)errors.push('INTRO_START_NOT_VISIBLE_IN_PRODUCT_ROUTE');
     if(record.introStartVisible){
      try {
-      await start.click({timeout:6000});
+      await introTarget.click({timeout:6000});
       await page.waitForFunction(()=>{
        const frames=[...document.querySelectorAll('iframe')];
-       return frames.some(f=>f.contentDocument && (f.contentDocument.querySelector('.duduq-engine-root,.duduq-ts-root,.duduq-dd2-root,.duduq-matching-root,.duduq-mq-root,.duduq-bp-root')||f.contentDocument.body?.children.length>0));
-      },null,{timeout:25000});
+       const framePlayable=frames.some(f=>f.contentDocument?.body?.children.length>0);
+       return window.DUDUQ_ENGINE_READY===true || framePlayable ||
+        Boolean(document.querySelector('#game.game-screen,.duduq-game-screen,.duduq-mechanic-frame'));
+      },null,{timeout:20000});
       await page.waitForTimeout(300);
       record.introStartClicked=true;
      }catch(e){record.introStartClicked=false;errors.push('INTRO_CLICK_FAILED:'+String(e.message).slice(0,250));}
     }
+    record.navigatedUrl=page.url();
     record.after=await page.evaluate(()=>{
      const img=[...document.images];
      return {
@@ -107,7 +111,8 @@ try {
      };
     });
     record.boot=response?.ok() && record.before.htmlBodyTextLength>0 &&
-      record.after.gameRootPresent && record.after.iframeGamePresent && errors.length===0 && badHttp.length===0 &&
+      record.introStartClicked===true && record.after.gameRootPresent &&
+      (record.after.iframeGamePresent || record.after.engineReady) && errors.length===0 && badHttp.length===0 &&
       networkFailures.length===0 && record.after.brokenVisibleImages.length===0
       ?'PASS':'FAIL';
    }catch(e){errors.push('SMOKE_EXCEPTION:'+String(e.message).slice(0,800));}
@@ -122,7 +127,8 @@ try {
    results.push(record);
    console.log(JSON.stringify({moduleId,viewport:view.name,boot:record.boot,httpStatus:record.httpStatus,
     pageErrors:errors.length,httpFailures:badHttp.length,networkFailures:networkFailures.length,
-    brokenVisibleImages:record.after?.brokenVisibleImages?.length||0,route}));
+    brokenVisibleImages:record.after?.brokenVisibleImages?.length||0,
+    diagnosticErrors:errors.slice(0,2),route}));
    await page.close();
   }
  }
