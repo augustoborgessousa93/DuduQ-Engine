@@ -46,7 +46,7 @@ try {
   report.results.push(item);
   await page.screenshot({path:path.join('qa/results/assets-duduq-rendered-media',mod+'-q001.png'),fullPage:true}).catch(()=>{});
   console.log('RENDERED_GAME_MEDIA='+JSON.stringify({module:mod,pinned: pinned.length,pinnedNetwork:pinnedNetwork.length,placeholders:placeholder.length,
-   url:item.firstQuestionUrl,examples:pinned.slice(0,5).map(x=>x.src),placeholderSamples:placeholder.slice(0,4).map(x=>x.src),otherImgs:item.firstOtherImgs.slice(0,6).map(x=>x.src),err:errors}));
+   url:item.firstQuestionUrl,examples:pinned.slice(0,5).map(x=>x.src),placeholderSamples:placeholder.slice(0,4).map(x=>x.src),otherImgs:item.firstOtherImgs.slice(0,6).map(x=>x.src),gameText:item.gameText,backgrounds:item.firstBackgrounds.slice(0,10),err:errors}));
   await page.close();
  }
 }finally{await browser.close()}
