@@ -107,6 +107,10 @@ try{
       brokenCandidateImages:relevant.length-loaded.length,placeholderCount:placeholders.length,
       playableBubbleCount:document.querySelectorAll('.bubble-pop-playable').length,
       bubbleImageCount:document.querySelectorAll('.bubble-pop-content--image img').length,
+      bubbleLikeNodes:[...document.querySelectorAll('[class*="bubble"],[data-bubble]')]
+        .slice(0,14).map(el=>({tag:el.tagName,cls:String(el.className||'').slice(0,90),
+          visible:Boolean(el.getClientRects().length),children:el.childElementCount})),
+      frameCount:document.querySelectorAll('iframe').length,
       pageText:String(document.body?.innerText||'').slice(0,160)};
    });
    const row={module:q.module,id:q.id,mechanic:q.mechanic,
