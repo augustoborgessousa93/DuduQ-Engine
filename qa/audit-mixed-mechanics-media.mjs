@@ -85,7 +85,7 @@ const browser=await chromium.launch({headless:true});
 try{
  for(const q of result.questions){
   if(!mechanisms.has(q.mechanic))continue;
-  const page=await browser.newPage({viewport:{width:1280,height:800},reducedMotion:'reduce'});
+  const page=await browser.newPage({viewport:{width:1280,height:800},reducedMotion:q.mechanic==='bubble-pop'?'no-preference':'reduce'});
   const errors=[],brokenImages=[];
   page.on('pageerror',e=>errors.push(String(e.message||e)));
   page.on('response',r=>{
