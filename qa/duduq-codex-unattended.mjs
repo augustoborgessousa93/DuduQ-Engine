@@ -75,6 +75,9 @@ function complete(v){return v?.status==='PROJECT_COMPLETE'&&v.completedModules==
 function choose(c,s){
  const map=new Map((c?.modulesDetail||[]).map(x=>[x.moduleId,x]));
  const pending=order.filter(x=>map.get(x)?.complete!==true);
+ // Finish one module before moving on; skip only after three consecutive
+ // rounds with no measurable global pending reduction.
+ if(s.lastModule&&pending.includes(s.lastModule)&&(s.stalled?.[s.lastModule]||0)<3)return s.lastModule;
  return (pending.length?pending:order).sort((a,b)=>
   (s.stalled?.[a]||0)-(s.stalled?.[b]||0)||order.indexOf(a)-order.indexOf(b))[0];
 }
@@ -139,6 +142,13 @@ async function once(){
    stalled,lastFinishedAt:now(),notBefore:backoff?new Date(Date.now()+backoff*60000).toISOString():null,
    logs:{outFile,errFile},moduleClosure:after?.completedModules??null});
   console.log(JSON.stringify({moduleId,exitCode:result.code,oldPending,newPending,improved,logs:[outFile,errFile]}));
+ }catch(e){
+  const prev=await load();
+  const prior=Number(prev.failedAttempts||0)+1;
+  await save({...prev,status:'BLOCKED_RETRY',lastError:String(e.message||e).slice(0,600),
+   failedAttempts:prior,notBefore:new Date(Date.now()+Math.min(360,30*prior)*60000).toISOString()});
+  console.error('CODEX_UNATTENDED_FAILED:'+String(e.message||e).slice(0,600));
+  process.exitCode=2;
  }finally{await fs.unlink(lockPath).catch(()=>{})}
 }
 async function install(){
