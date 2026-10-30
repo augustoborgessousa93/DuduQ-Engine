@@ -5,6 +5,8 @@ on:
       - automation/duduq-media-source-only-fix-20261029
     paths:
       - qa/duduq-codex-unattended.mjs
+      - qa/validate-duduq-png.mjs
+      - qa/duduq-windows-scheduler-diagnostics.mjs
       - qa/duduq-two-lane-plan.mjs
       - qa/tests/duduq-two-lane-plan.test.mjs
       - .github/workflows/duduq-codex-host-static.yml
@@ -29,6 +31,8 @@ jobs:
       - name: Syntax and read-only status on Linux
         run: |
           node --check qa/duduq-codex-unattended.mjs
+          node --check qa/duduq-windows-scheduler-diagnostics.mjs
+          node --check qa/validate-duduq-png.mjs
           node --check qa/duduq-two-lane-plan.mjs
           node --check qa/tests/duduq-two-lane-plan.test.mjs
           node --test qa/tests/duduq-two-lane-plan.test.mjs
