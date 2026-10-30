@@ -46,7 +46,8 @@ for(const d of dirs.filter(x=>x.isDirectory())){
    if(hash(bytes)!==asset.sha256.toLowerCase())verdict='PNG_HASH_MISMATCH';
    else try{
     const decoded=validateDuduqRgbaPng(bytes);
-    if(asset.pixelWidth&&Number(asset.pixelWidth)!==decoded.width||
+    if(decoded.width<1024||decoded.height<1024)verdict='PNG_RESOLUTION_BELOW_MINIMUM';
+    else if(asset.pixelWidth&&Number(asset.pixelWidth)!==decoded.width||
        asset.pixelHeight&&Number(asset.pixelHeight)!==decoded.height)verdict='MANIFEST_DIMENSIONS_MISMATCH';
    }catch(e){verdict='PNG_DECODE_FAILED:'+String(e.message).slice(0,90)}
   }
