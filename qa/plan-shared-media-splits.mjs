@@ -20,13 +20,13 @@ const mediaFields=new Set(['assetId','mediaId','image_ref','imageRef']);
 const normalized=s=>String(s??'').normalize('NFKC').trim().replace(/\s+/g,' ').toLocaleLowerCase('en-US');
 const digest=s=>createHash('sha256').update(s).digest('hex');
 function err(code){throw Error('DUDUQ_SHARED_MEDIA_SPLIT_PLAN_INVALID:'+code)}
-const byId=new Map(),usedIds=new Set(),questionChecksums=[],questionIds=new Set();
+const byId=new Map(),usedIds=new Set(),registryIds=new Set(),questionChecksums=[],questionIds=new Set();
 let activityCount=0;
 let registry;
 try{
  registry=JSON.parse(await fs.readFile(path.join(root,'content/english/media/media-registry.json'),'utf8'));
  if(!Array.isArray(registry.entries))err('MISSING_REGISTRY_ENTRIES');
- for(const e of registry.entries)if(e.mediaId){if(usedIds.has(e.mediaId))err('DUPLICATE_REGISTRY_ID:'+e.mediaId);usedIds.add(e.mediaId)}
+ for(const e of registry.entries)if(e.mediaId){if(usedIds.has(e.mediaId))err('DUPLICATE_REGISTRY_ID:'+e.mediaId);usedIds.add(e.mediaId);registryIds.add(e.mediaId)}
 }catch(e){if(e.message?.startsWith('DUDUQ_SHARED_MEDIA'))throw e;err('REGISTRY_UNAVAILABLE')}
 function escapePointer(s){return String(s).replaceAll('~','~0').replaceAll('/','~1')}
 for(let year=1;year<=5;year++)for(let m=1;m<=6;m++){
@@ -45,7 +45,9 @@ for(let year=1;year<=5;year++)for(let m=1;m<=6;m++){
    if(Array.isArray(node)){for(let k=0;k<node.length;k++)traverse(node[k],pointer+'/'+k);return}
    for(const [key,val] of Object.entries(node)){
     const childPath=pointer+'/'+escapePointer(key);
-    if(mediaFields.has(key)&&typeof val==='string'&&val.startsWith('IMG-')){
+    // Track every registered visual asset, including legacy EMOJI and MEDIA-LETTER IDs.
+    // Otherwise cross-module semantic collisions outside IMG-* evade the split gate.
+    if(mediaFields.has(key)&&typeof val==='string'&&(val.startsWith('IMG-')||registryIds.has(val))){
      usedIds.add(val);
      const semanticTarget=typeof node.semanticTarget==='string'?node.semanticTarget:null;
      const record={moduleId,questionId:qid,file,path:childPath,sourceMediaId:val,
@@ -96,7 +98,10 @@ for(const mediaId of [...byId.keys()].sort()){
 const result={
  schemaVersion:'DUDUQ_SHARED_MEDIA_SPLIT_PLAN_V1',mode:'READ_ONLY_NO_MUTATION',
  sourceRoot:root,modules:30,activities:600,
- registryEntries:registry.entries.length,referencedImgIds:byId.size,
+ registryEntries:registry.entries.length,
+ referencedImgIds:[...byId.keys()].filter(id=>id.startsWith('IMG-')).length,
+ referencedVisualMediaIds:byId.size,
+ referencedNonImgMediaIds:[...byId.keys()].filter(id=>!id.startsWith('IMG-')).length,
  conflictsRequiringSplit:proposed.length,splitOccurrenceCount:proposed.reduce((n,p)=>n+p.occurrences,0),
  proposedNewMediaIds:proposed.reduce((n,p)=>n+p.createdIds,0),
  blockedSharedMediaIds:blocked.length,
