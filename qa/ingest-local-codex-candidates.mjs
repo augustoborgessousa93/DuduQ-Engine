@@ -13,6 +13,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 import {inspectPng} from '../scripts/duduq-image-pipeline.mjs';
 
 function option(name, fallback) {
@@ -21,6 +22,11 @@ function option(name, fallback) {
 }
 function blocked(reason){throw Error('DUDUQ_CODEX_LOCAL_INGEST_BLOCKED:'+reason);}
 const root=await fs.realpath(process.cwd());
+const targetBranch='automation/duduq-media-source-only-fix-20261029';
+let currentBranch;
+try {currentBranch=execFileSync('git',['branch','--show-current'],{cwd:root,encoding:'utf8'}).trim();}
+catch {blocked('REQUIRES_GIT_WORKTREE');}
+if(currentBranch!==targetBranch)blocked('WRONG_BRANCH:'+currentBranch+':NEEDS_ISOLATED_WORKTREE');
 const srcArg=option('source');
 if(!srcArg)blocked('SOURCE_REQUIRED');
 const source=await fs.realpath(path.resolve(srcArg));
@@ -94,7 +100,7 @@ for(let i=0;i<candidates.length;i++){
 }
 const manifest={
  schemaVersion:'DUDUQ_CODEX_LOCAL_CANDIDATES_QA_V1',
- provenance:'CODEX_LOCAL_ARTIFACTS',qaOnly:true,eligibleForProduction:false,
+ provenance:'CODEX_LOCAL_ARTIFACTS',qaOnly:true,eligibleForProduction:false,originalImageGenerationProvenanceVerified:false,
  note:'Staged candidates only. No semantic certification, question bindings or deployment.',
  count:candidates.length,otherSourceFiles:other.filter(x=>/\.json$/i.test(x)).sort(),
  candidates
