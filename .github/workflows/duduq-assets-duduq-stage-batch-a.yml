@@ -1,0 +1,127 @@
+name: DUDUQ - Stage and verify 25 exact Y1 image assets (review-only)
+
+on:
+  push:
+    branches:
+      - integration/assets-duduq-resume-20261030
+    paths:
+      - ".github/workflows/duduq-assets-duduq-stage-batch-a.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: duduq-assets-duduq-stage-batch-a
+  cancel-in-progress: false
+
+jobs:
+  stage-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      DUDUQ_ASSETS_SAFE_QA: "1"
+      CI: "true"
+      BASE_URL: "http://127.0.0.1:4175"
+      DUDUQ_MEDIA_QA_MODULES: "Y1M02,Y1M03,Y1M06"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          path: game
+      - uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: 658d94f08031820cfea5258a6f4e7c24f278df92
+          persist-credentials: false
+          path: assets-source
+          sparse-checkout: |
+            Imagens Ilustrativa
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Stage exact 25 SHA-pinned images, not the entire 316-file catalogue
+        working-directory: game
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test "$(git -C ../assets-source rev-parse HEAD)" = "658d94f08031820cfea5258a6f4e7c24f278df92"
+          node --input-type=module <<'NODE'
+          import {readFile,mkdir,writeFile} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          import path from 'node:path';
+          const c=JSON.parse(await readFile('qa/assets-duduq-batch-a.json','utf8'));
+          if(c.assets?.length!==25)throw Error('EXPECTED_EXACTLY_25_REVIEW_ASSETS');
+          const origin=path.resolve('../assets-source/Imagens Ilustrativa');
+          const destination=path.resolve('qa/assets-reuse-source/batch-a/Imagens Ilustrativa');
+          await mkdir(destination,{recursive:true});
+          for(const a of c.assets){
+            if(a.file.includes('/')||a.file.includes('\\')||a.file.includes('..'))throw Error('UNSAFE_SOURCE_NAME');
+            const bytes=await readFile(path.join(origin,a.file));
+            const gitSha=createHash('sha1').update(Buffer.from('blob '+bytes.length+'\0')).update(bytes).digest('hex');
+            if(gitSha!==a.gitBlob)throw Error('SOURCE_BYTES_DIFFER:'+a.file);
+            await writeFile(path.join(destination,a.file),bytes);
+            console.log('PINNED_ASSET='+a.moduleId+':'+a.concept+':'+a.file+':'+bytes.length);
+          }
+          await writeFile('qa/assets-reuse-source/batch-a/.git-source-commit',c.sourceCommit+'\n');
+          NODE
+      - name: Build canonical V26 and apply Y1M02, Y1M03, Y1M06 safe image overlay
+        working-directory: game
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          bash qa/build-v26-topic-first-paint-qa.sh
+          node --check qa/apply-assets-duduq-batch-a.mjs
+          node qa/apply-assets-duduq-batch-a.mjs qa/assets-reuse-source/batch-a --apply
+          node qa/audit-media-completion.mjs dist-pages --output=qa/results/assets-batch-a-closure.json
+          node qa/check-media-module-closure.mjs --input=qa/results/assets-batch-a-closure.json --output=qa/results/assets-batch-a-module-closure.json
+
+      - name: Install browser QA without changing mechanics
+        working-directory: game
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Open the three updated modules in real browser / desktop tablet mobile
+        working-directory: game
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages >/tmp/duduq-batch-a-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null 2>&1; then break; fi
+            sleep 1
+          done
+          node qa/browser-media-candidate-smoke.mjs
+
+      - name: Publish candidate files to isolated Git review branch only, never production
+        working-directory: game
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          git add qa/assets-reuse-source/batch-a
+          if git diff --cached --quiet; then
+            echo "NO_NEW_ASSET_CHANGES_TO_COMMIT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "media(preview): stage 25 SHA-pinned visual candidates for Y1M02/03/06"
+          git push origin HEAD:integration/assets-duduq-resume-20261030
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-assets-batch-a-verification
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            game/qa/results/assets-duduq-batch-a-integration.json
+            game/qa/results/assets-batch-a-closure.json
+            game/qa/results/assets-batch-a-module-closure.json
+            game/qa/results/media-browser-qa/**
+
+      - name: Explicitly preserve production boundary
+        if: always()
+        run: echo "Only public preview review branch is changed. Final pediatric/educational content QA still required."
