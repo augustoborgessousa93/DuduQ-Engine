@@ -49,7 +49,9 @@ for(const d of dirs.filter(x=>x.isDirectory())){
   checked.push({assetKey:asset.assetKey||asset.file,sha256:asset.sha256||null,verdict});
  }
  const record={moduleId:m.moduleId,manifest:path.relative(root,manifestPath).replaceAll('\\','/'),
-  manifestSha256:hash(raw),assetCount:m.assets.length,validAssetCount:checked.filter(x=>x.verdict==='VALID').length,
+  manifestSha256:hash(raw),
+  assetFingerprintSha256:hash(checked.filter(x=>x.verdict==='VALID').map(x=>x.sha256.toLowerCase()).sort().join('|')),
+  assetCount:m.assets.length,validAssetCount:checked.filter(x=>x.verdict==='VALID').length,
   invalidAssets:checked.filter(x=>x.verdict!=='VALID'),questionContractsReviewed:m.questionContractsReviewed||0,
   productionApproved:m.productionApproved===true,generatedEvidenceOnly:true};
  const prev=candidates.get(m.moduleId);
