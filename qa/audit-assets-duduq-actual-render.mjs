@@ -25,12 +25,12 @@ try {
   await start.waitFor({state:'visible',timeout:20000});
   await start.click({timeout:10000});
   await page.waitForURL(url=>url.pathname.includes('/play/')&&!url.pathname.includes('/english/year-1/module-'),{timeout:20000});
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(mod==='Y1M03'?4500:2000);
   const dom=await page.evaluate(()=>{
     const imgs=[...document.images].map(e=>({src:e.currentSrc||e.getAttribute('src')||'',alt:e.alt||'',visible:!!(e.offsetWidth||e.offsetHeight||e.getClientRects().length),loaded:e.complete&&e.naturalWidth>0}));
     const backgrounds=[...document.querySelectorAll('*')].map(e=>({el:e.tagName,cls:typeof e.className==='string'?e.className.slice(0,70):'',bg:getComputedStyle(e).backgroundImage})).filter(x=>/url\(/.test(x.bg)).slice(0,90);
     return {title:document.title,url:location.href,text:(document.body?.innerText||'').slice(0,500),
-      imgs,backgrounds};
+      imgs,backgrounds,bubbleCount:document.querySelectorAll('.bubble-pop-playable').length,bubbleText:[...document.querySelectorAll('.bubble-pop-playable')].slice(0,12).map(e=>e.innerText)};
   });
   let pinned=dom.imgs.filter(x=>x.src.includes('assets-duduq-review/')),placeholder=dom.imgs.filter(x=>/provisional-semantic|placeholder/.test(x.src));
   let pinnedNetwork=networkImages.filter(x=>x.url.includes('assets-duduq-review/'));
@@ -42,11 +42,28 @@ try {
     firstOtherImgs:dom.imgs.filter(x=>!x.src.includes('core/assets/')).slice(0,30),
     firstBackgrounds:dom.backgrounds.slice(0,20),errorCount:errors.length,
     errors:errors.slice(0,5),networkFailureCount:failures.length,
-    gameText:dom.text};
+    gameText:dom.text,bubbleCount:dom.bubbleCount,bubbleText:dom.bubbleText};
   report.results.push(item);
   await page.screenshot({path:path.join('qa/results/assets-duduq-rendered-media',mod+'-q001.png'),fullPage:true}).catch(()=>{});
   console.log('RENDERED_GAME_MEDIA='+JSON.stringify({module:mod,pinned: pinned.length,pinnedNetwork:pinnedNetwork.length,placeholders:placeholder.length,
-   url:item.firstQuestionUrl,examples:pinned.slice(0,5).map(x=>x.src),placeholderSamples:placeholder.slice(0,4).map(x=>x.src),otherImgs:item.firstOtherImgs.slice(0,6).map(x=>x.src),gameText:item.gameText,backgrounds:item.firstBackgrounds.slice(0,10),err:errors}));
+   url:item.firstQuestionUrl,examples:pinned.slice(0,5).map(x=>x.src),placeholderSamples:placeholder.slice(0,4).map(x=>x.src),otherImgs:item.firstOtherImgs.slice(0,6).map(x=>x.src),gameText:item.gameText,bubbleCount:item.bubbleCount,bubbleText:item.bubbleText,backgrounds:item.firstBackgrounds.slice(0,10),err:errors}));
+  await page.close();
+ }
+
+ // Verify a color question that uses an image-capable Drag & Drop mechanic;
+ // Bubble Pop may display color discs without requesting its media images.
+ {
+  const page=await browser.newPage({viewport:{width:1366,height:768},reducedMotion:'reduce'});
+  const url=base+'/play/drag-drop-multimedia/?duduqModule=Y1M03&duduqItem=Y1M03-Q004';
+  await page.goto(url,{waitUntil:'domcontentloaded',timeout:30000});
+  await page.waitForTimeout(2600);
+  const q=await page.evaluate(()=>({text:(document.body?.innerText||'').slice(0,350),
+    urls:[...document.images].map(e=>e.currentSrc||e.getAttribute('src')||''),
+    title:document.title}));
+  const pngs=q.urls.filter(u=>u.includes('assets-duduq-review/'));
+  const placeholders=q.urls.filter(u=>/provisional-semantic/.test(u));
+  console.log('COLORS_IMAGE_MECHANIC_Q004='+JSON.stringify({url:page.url(),pngs:pngs.length,placeholders:placeholders.length,samples:pngs.slice(0,8),text:q.text}));
+  report.additionalColorsQ004={url:page.url(),pngs,placeholders,text:q.text};
   await page.close();
  }
 }finally{await browser.close()}
