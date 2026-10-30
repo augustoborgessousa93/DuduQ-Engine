@@ -67,3 +67,10 @@ O arquivo de instruções no GitHub **não inicia por si só uma sessão do Code
 **Encerramento de uma sessão não é conclusão do projeto.** Se o tempo/limite do Codex terminar, gravar checkpoint e fila persistentes, preparar retomada pela infraestrutura oficialmente disponível e registrar `INCOMPLETE`/bloqueio específico. Um cron que só repete a mesma falha não conta como progresso. Não prometer execução contínua quando falta agente, credencial, integração, capacidade de geração ou aprovação humana; preservar a segurança e executar o trabalho independente possível. Não pedir "CONTINUE" nem transformar o usuário em operador manual.
 
 **Somente dar status `PROJECT_COMPLETE` com evidência rastreável** para todos os módulos e mídias; a validação técnica de PNG isolado não equivale a substituição no jogo ou homologação. Todo deploy/remoção exige os gates existentes e rollback, sem falsificar aprovações.
+
+
+### Execução autônoma com PC ligado — bootstrap obrigatório
+
+**O responsável deixará o Windows ligado por vários dias e não responderá comandos.** Leia imediatamente `docs/qa/DUDUQ_CODEX_UNATTENDED_WINDOWS.md` e, no worktree isolado correto, instale e **COMPROVE** a tarefa Windows persistente usando `qa/duduq-codex-unattended.mjs`. Não confundir documentação e agendamento GitHub com processo local ativo. Configurar uma única vez a continuidade por Task Scheduler, autenticação Codex CLI, lock, logs e checkpoint. Testar ao menos um `codex exec` real e verificar capacidade de geração de imagem nativa **antes de declarar automação funcionando**. Sem `--yolo`, sem desativar segurança PowerShell, sem custos/API novos, sem manipular workspace original.
+
+Use ciclos por módulo: gerar imagens faltantes (não só os 17 PNGs de QA), corrigir media IDs por contexto, integrar assets legítimos no jogo, executar build+browser+respostas, salvar hash/commit no PR e partir para o próximo módulo. Se qualquer permissão/imagem/API bloquear, preservar segurança, registrar bloqueio específico e avançar no trabalho independente. O Task Scheduler não é certificado como ativo até sua instalação e primeira execução terem sido observadas no Windows.
