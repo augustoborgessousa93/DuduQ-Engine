@@ -1,0 +1,796 @@
+{
+  "schemaVersion": "DUDUQ_Y1M04_OFFICIAL_MEDIA_BINDING_PLAN_V1",
+  "moduleId": "Y1M04",
+  "status": "PASS",
+  "sourceQuestionContractSha256": "44607f7ec2ed5e2b902af8fdef4b52e9516699cde32e4b20e5e72b94423e740c",
+  "inputMediaIds": 83,
+  "outputMediaIds": 84,
+  "usageRecords": 85,
+  "split": {
+    "questionId": "Y1M04-Q008",
+    "field": "mediaBindings[0].assetId",
+    "from": "IMG-Y1M04-Q003-PENCIL-CASE",
+    "to": "IMG-Y1M04-Q008-PENCIL-CASE",
+    "semanticTarget": "pencil-case"
+  },
+  "concepts": [
+    "backpack",
+    "black",
+    "blue",
+    "crayon",
+    "eraser",
+    "four",
+    "green",
+    "one",
+    "pen",
+    "pencil",
+    "pencil case",
+    "pencil-case",
+    "red",
+    "ruler",
+    "three",
+    "two",
+    "white",
+    "yellow"
+  ],
+  "bindings": [
+    {
+      "assetKey": "Y1M04-OFFICIAL-ERASER",
+      "semanticTarget": "eraser",
+      "questionId": "Y1M04-Q001",
+      "mediaId": "IMG-Q001-ERASER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q001"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RED",
+      "semanticTarget": "red",
+      "questionId": "Y1M04-Q002",
+      "mediaId": "IMG-Q002-RED",
+      "verifiedQuestionIds": [
+        "Y1M04-Q002"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL-CASE",
+      "semanticTarget": "pencil case",
+      "questionId": "Y1M04-Q003",
+      "mediaId": "IMG-Q003-PENCIL-CASE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q003"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-CRAYON",
+      "semanticTarget": "crayon",
+      "questionId": "Y1M04-Q004",
+      "mediaId": "IMG-Q004-CRAYON",
+      "verifiedQuestionIds": [
+        "Y1M04-Q004"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL",
+      "semanticTarget": "pencil",
+      "questionId": "Y1M04-Q005",
+      "mediaId": "IMG-Q005-PENCIL",
+      "verifiedQuestionIds": [
+        "Y1M04-Q005"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PEN",
+      "semanticTarget": "pen",
+      "questionId": "Y1M04-Q006",
+      "mediaId": "IMG-Q006-PEN",
+      "verifiedQuestionIds": [
+        "Y1M04-Q006"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BACKPACK",
+      "semanticTarget": "backpack",
+      "questionId": "Y1M04-Q007",
+      "mediaId": "IMG-Q007-BACKPACK",
+      "verifiedQuestionIds": [
+        "Y1M04-Q007"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL",
+      "semanticTarget": "pencil",
+      "questionId": "Y1M04-Q009",
+      "mediaId": "IMG-Q009-PENCIL",
+      "verifiedQuestionIds": [
+        "Y1M04-Q009"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-CRAYON",
+      "semanticTarget": "crayon",
+      "questionId": "Y1M04-Q010",
+      "mediaId": "IMG-Q010-CRAYON",
+      "verifiedQuestionIds": [
+        "Y1M04-Q010"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-CRAYON",
+      "semanticTarget": "crayon",
+      "questionId": "Y1M04-Q011",
+      "mediaId": "IMG-Q011-CRAYON",
+      "verifiedQuestionIds": [
+        "Y1M04-Q011"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-GREEN",
+      "semanticTarget": "green",
+      "questionId": "Y1M04-Q012",
+      "mediaId": "IMG-Q012-GREEN",
+      "verifiedQuestionIds": [
+        "Y1M04-Q012"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PEN",
+      "semanticTarget": "pen",
+      "questionId": "Y1M04-Q013",
+      "mediaId": "IMG-Q013-PEN",
+      "verifiedQuestionIds": [
+        "Y1M04-Q013"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BACKPACK",
+      "semanticTarget": "backpack",
+      "questionId": "Y1M04-Q014",
+      "mediaId": "IMG-Q014-BACKPACK",
+      "verifiedQuestionIds": [
+        "Y1M04-Q014"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RULER",
+      "semanticTarget": "ruler",
+      "questionId": "Y1M04-Q015",
+      "mediaId": "IMG-Q015-RULER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q015"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL",
+      "semanticTarget": "pencil",
+      "questionId": "Y1M04-Q016",
+      "mediaId": "IMG-Q016-PENCIL",
+      "verifiedQuestionIds": [
+        "Y1M04-Q016"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL-CASE",
+      "semanticTarget": "pencil case",
+      "questionId": "Y1M04-Q017",
+      "mediaId": "IMG-Q017-PENCIL-CASE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q017"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RULER",
+      "semanticTarget": "ruler",
+      "questionId": "Y1M04-Q019",
+      "mediaId": "IMG-Q019-RULER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q019"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BACKPACK",
+      "semanticTarget": "backpack",
+      "questionId": "Y1M04-Q020",
+      "mediaId": "IMG-Q020-BACKPACK",
+      "verifiedQuestionIds": [
+        "Y1M04-Q020"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BLUE",
+      "semanticTarget": "blue",
+      "questionId": "Y1M04-Q002",
+      "mediaId": "IMG-Y1M04-Q002-BLUE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q002"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-GREEN",
+      "semanticTarget": "green",
+      "questionId": "Y1M04-Q002",
+      "mediaId": "IMG-Y1M04-Q002-GREEN",
+      "verifiedQuestionIds": [
+        "Y1M04-Q002"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RED",
+      "semanticTarget": "red",
+      "questionId": "Y1M04-Q002",
+      "mediaId": "IMG-Y1M04-Q002-RED",
+      "verifiedQuestionIds": [
+        "Y1M04-Q002"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-YELLOW",
+      "semanticTarget": "yellow",
+      "questionId": "Y1M04-Q002",
+      "mediaId": "IMG-Y1M04-Q002-YELLOW",
+      "verifiedQuestionIds": [
+        "Y1M04-Q002"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-CRAYON",
+      "semanticTarget": "crayon",
+      "questionId": "Y1M04-Q003",
+      "mediaId": "IMG-Y1M04-Q003-CRAYON",
+      "verifiedQuestionIds": [
+        "Y1M04-Q003"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-ERASER",
+      "semanticTarget": "eraser",
+      "questionId": "Y1M04-Q003",
+      "mediaId": "IMG-Y1M04-Q003-ERASER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q003"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL",
+      "semanticTarget": "pencil",
+      "questionId": "Y1M04-Q003",
+      "mediaId": "IMG-Y1M04-Q003-PENCIL",
+      "verifiedQuestionIds": [
+        "Y1M04-Q003"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL-CASE",
+      "semanticTarget": "pencil case",
+      "questionId": "Y1M04-Q003",
+      "mediaId": "IMG-Y1M04-Q003-PENCIL-CASE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q003"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-CRAYON",
+      "semanticTarget": "crayon",
+      "questionId": "Y1M04-Q004",
+      "mediaId": "IMG-Y1M04-Q004-CRAYON",
+      "verifiedQuestionIds": [
+        "Y1M04-Q004"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL",
+      "semanticTarget": "pencil",
+      "questionId": "Y1M04-Q004",
+      "mediaId": "IMG-Y1M04-Q004-PENCIL",
+      "verifiedQuestionIds": [
+        "Y1M04-Q004"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL-CASE",
+      "semanticTarget": "pencil case",
+      "questionId": "Y1M04-Q004",
+      "mediaId": "IMG-Y1M04-Q004-PENCIL-CASE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q004"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RULER",
+      "semanticTarget": "ruler",
+      "questionId": "Y1M04-Q004",
+      "mediaId": "IMG-Y1M04-Q004-RULER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q004"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BACKPACK",
+      "semanticTarget": "backpack",
+      "questionId": "Y1M04-Q005",
+      "mediaId": "IMG-Y1M04-Q005-BACKPACK",
+      "verifiedQuestionIds": [
+        "Y1M04-Q005"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-CRAYON",
+      "semanticTarget": "crayon",
+      "questionId": "Y1M04-Q005",
+      "mediaId": "IMG-Y1M04-Q005-CRAYON",
+      "verifiedQuestionIds": [
+        "Y1M04-Q005"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-ERASER",
+      "semanticTarget": "eraser",
+      "questionId": "Y1M04-Q005",
+      "mediaId": "IMG-Y1M04-Q005-ERASER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q005"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PEN",
+      "semanticTarget": "pen",
+      "questionId": "Y1M04-Q005",
+      "mediaId": "IMG-Y1M04-Q005-PEN",
+      "verifiedQuestionIds": [
+        "Y1M04-Q005",
+        "Y1M04-Q018"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL",
+      "semanticTarget": "pencil",
+      "questionId": "Y1M04-Q005",
+      "mediaId": "IMG-Y1M04-Q005-PENCIL",
+      "verifiedQuestionIds": [
+        "Y1M04-Q005"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL-CASE",
+      "semanticTarget": "pencil case",
+      "questionId": "Y1M04-Q005",
+      "mediaId": "IMG-Y1M04-Q005-PENCIL-CASE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q005"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RULER",
+      "semanticTarget": "ruler",
+      "questionId": "Y1M04-Q005",
+      "mediaId": "IMG-Y1M04-Q005-RULER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q005"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-CRAYON",
+      "semanticTarget": "crayon",
+      "questionId": "Y1M04-Q006",
+      "mediaId": "IMG-Y1M04-Q006-CRAYON",
+      "verifiedQuestionIds": [
+        "Y1M04-Q006"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-ERASER",
+      "semanticTarget": "eraser",
+      "questionId": "Y1M04-Q006",
+      "mediaId": "IMG-Y1M04-Q006-ERASER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q006"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL",
+      "semanticTarget": "pencil",
+      "questionId": "Y1M04-Q006",
+      "mediaId": "IMG-Y1M04-Q006-PENCIL",
+      "verifiedQuestionIds": [
+        "Y1M04-Q006"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL-CASE",
+      "semanticTarget": "pencil case",
+      "questionId": "Y1M04-Q006",
+      "mediaId": "IMG-Y1M04-Q006-PENCIL-CASE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q006"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL-CASE-Q008",
+      "semanticTarget": "pencil-case",
+      "questionId": "Y1M04-Q008",
+      "mediaId": "IMG-Y1M04-Q008-PENCIL-CASE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q008"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-CRAYON",
+      "semanticTarget": "crayon",
+      "questionId": "Y1M04-Q009",
+      "mediaId": "IMG-Y1M04-Q009-CRAYON",
+      "verifiedQuestionIds": [
+        "Y1M04-Q009"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PEN",
+      "semanticTarget": "pen",
+      "questionId": "Y1M04-Q009",
+      "mediaId": "IMG-Y1M04-Q009-PEN",
+      "verifiedQuestionIds": [
+        "Y1M04-Q009"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL-CASE",
+      "semanticTarget": "pencil case",
+      "questionId": "Y1M04-Q009",
+      "mediaId": "IMG-Y1M04-Q009-PENCIL-CASE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q009"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RULER",
+      "semanticTarget": "ruler",
+      "questionId": "Y1M04-Q009",
+      "mediaId": "IMG-Y1M04-Q009-RULER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q009"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BACKPACK",
+      "semanticTarget": "backpack",
+      "questionId": "Y1M04-Q010",
+      "mediaId": "IMG-Y1M04-Q010-BACKPACK",
+      "verifiedQuestionIds": [
+        "Y1M04-Q010"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-CRAYON",
+      "semanticTarget": "crayon",
+      "questionId": "Y1M04-Q010",
+      "mediaId": "IMG-Y1M04-Q010-CRAYON",
+      "verifiedQuestionIds": [
+        "Y1M04-Q010"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PEN",
+      "semanticTarget": "pen",
+      "questionId": "Y1M04-Q010",
+      "mediaId": "IMG-Y1M04-Q010-PEN",
+      "verifiedQuestionIds": [
+        "Y1M04-Q010"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RULER",
+      "semanticTarget": "ruler",
+      "questionId": "Y1M04-Q010",
+      "mediaId": "IMG-Y1M04-Q010-RULER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q010"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BACKPACK",
+      "semanticTarget": "backpack",
+      "questionId": "Y1M04-Q011",
+      "mediaId": "IMG-Y1M04-Q011-BACKPACK",
+      "verifiedQuestionIds": [
+        "Y1M04-Q011"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-CRAYON",
+      "semanticTarget": "crayon",
+      "questionId": "Y1M04-Q011",
+      "mediaId": "IMG-Y1M04-Q011-CRAYON",
+      "verifiedQuestionIds": [
+        "Y1M04-Q011"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PEN",
+      "semanticTarget": "pen",
+      "questionId": "Y1M04-Q011",
+      "mediaId": "IMG-Y1M04-Q011-PEN",
+      "verifiedQuestionIds": [
+        "Y1M04-Q011"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RULER",
+      "semanticTarget": "ruler",
+      "questionId": "Y1M04-Q011",
+      "mediaId": "IMG-Y1M04-Q011-RULER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q011"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BLACK",
+      "semanticTarget": "black",
+      "questionId": "Y1M04-Q012",
+      "mediaId": "IMG-Y1M04-Q012-BLACK",
+      "verifiedQuestionIds": [
+        "Y1M04-Q012"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BLUE",
+      "semanticTarget": "blue",
+      "questionId": "Y1M04-Q012",
+      "mediaId": "IMG-Y1M04-Q012-BLUE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q012"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-GREEN",
+      "semanticTarget": "green",
+      "questionId": "Y1M04-Q012",
+      "mediaId": "IMG-Y1M04-Q012-GREEN",
+      "verifiedQuestionIds": [
+        "Y1M04-Q012"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RED",
+      "semanticTarget": "red",
+      "questionId": "Y1M04-Q012",
+      "mediaId": "IMG-Y1M04-Q012-RED",
+      "verifiedQuestionIds": [
+        "Y1M04-Q012"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-WHITE",
+      "semanticTarget": "white",
+      "questionId": "Y1M04-Q012",
+      "mediaId": "IMG-Y1M04-Q012-WHITE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q012"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-YELLOW",
+      "semanticTarget": "yellow",
+      "questionId": "Y1M04-Q012",
+      "mediaId": "IMG-Y1M04-Q012-YELLOW",
+      "verifiedQuestionIds": [
+        "Y1M04-Q012"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BACKPACK",
+      "semanticTarget": "backpack",
+      "questionId": "Y1M04-Q013",
+      "mediaId": "IMG-Y1M04-Q013-BACKPACK",
+      "verifiedQuestionIds": [
+        "Y1M04-Q013"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-ERASER",
+      "semanticTarget": "eraser",
+      "questionId": "Y1M04-Q013",
+      "mediaId": "IMG-Y1M04-Q013-ERASER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q013"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PEN",
+      "semanticTarget": "pen",
+      "questionId": "Y1M04-Q013",
+      "mediaId": "IMG-Y1M04-Q013-PEN",
+      "verifiedQuestionIds": [
+        "Y1M04-Q013"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RULER",
+      "semanticTarget": "ruler",
+      "questionId": "Y1M04-Q013",
+      "mediaId": "IMG-Y1M04-Q013-RULER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q013"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BLACK",
+      "semanticTarget": "black",
+      "questionId": "Y1M04-Q014",
+      "mediaId": "IMG-Y1M04-Q014-BLACK",
+      "verifiedQuestionIds": [
+        "Y1M04-Q014"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-GREEN",
+      "semanticTarget": "green",
+      "questionId": "Y1M04-Q014",
+      "mediaId": "IMG-Y1M04-Q014-GREEN",
+      "verifiedQuestionIds": [
+        "Y1M04-Q014"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RED",
+      "semanticTarget": "red",
+      "questionId": "Y1M04-Q014",
+      "mediaId": "IMG-Y1M04-Q014-RED",
+      "verifiedQuestionIds": [
+        "Y1M04-Q014"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-WHITE",
+      "semanticTarget": "white",
+      "questionId": "Y1M04-Q014",
+      "mediaId": "IMG-Y1M04-Q014-WHITE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q014"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BACKPACK",
+      "semanticTarget": "backpack",
+      "questionId": "Y1M04-Q015",
+      "mediaId": "IMG-Y1M04-Q015-BACKPACK",
+      "verifiedQuestionIds": [
+        "Y1M04-Q015"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-ERASER",
+      "semanticTarget": "eraser",
+      "questionId": "Y1M04-Q015",
+      "mediaId": "IMG-Y1M04-Q015-ERASER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q015"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PEN",
+      "semanticTarget": "pen",
+      "questionId": "Y1M04-Q015",
+      "mediaId": "IMG-Y1M04-Q015-PEN",
+      "verifiedQuestionIds": [
+        "Y1M04-Q015"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RULER",
+      "semanticTarget": "ruler",
+      "questionId": "Y1M04-Q015",
+      "mediaId": "IMG-Y1M04-Q015-RULER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q015"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-FOUR",
+      "semanticTarget": "four",
+      "questionId": "Y1M04-Q016",
+      "mediaId": "IMG-Y1M04-Q016-FOUR",
+      "verifiedQuestionIds": [
+        "Y1M04-Q016"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-ONE",
+      "semanticTarget": "one",
+      "questionId": "Y1M04-Q016",
+      "mediaId": "IMG-Y1M04-Q016-ONE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q016"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-THREE",
+      "semanticTarget": "three",
+      "questionId": "Y1M04-Q016",
+      "mediaId": "IMG-Y1M04-Q016-THREE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q016"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-TWO",
+      "semanticTarget": "two",
+      "questionId": "Y1M04-Q016",
+      "mediaId": "IMG-Y1M04-Q016-TWO",
+      "verifiedQuestionIds": [
+        "Y1M04-Q016"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BACKPACK",
+      "semanticTarget": "backpack",
+      "questionId": "Y1M04-Q017",
+      "mediaId": "IMG-Y1M04-Q017-BACKPACK",
+      "verifiedQuestionIds": [
+        "Y1M04-Q017"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-ERASER",
+      "semanticTarget": "eraser",
+      "questionId": "Y1M04-Q017",
+      "mediaId": "IMG-Y1M04-Q017-ERASER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q017"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PEN",
+      "semanticTarget": "pen",
+      "questionId": "Y1M04-Q017",
+      "mediaId": "IMG-Y1M04-Q017-PEN",
+      "verifiedQuestionIds": [
+        "Y1M04-Q017"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL",
+      "semanticTarget": "pencil",
+      "questionId": "Y1M04-Q017",
+      "mediaId": "IMG-Y1M04-Q017-PENCIL",
+      "verifiedQuestionIds": [
+        "Y1M04-Q017"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BACKPACK",
+      "semanticTarget": "backpack",
+      "questionId": "Y1M04-Q020",
+      "mediaId": "IMG-Y1M04-Q020-BACKPACK",
+      "verifiedQuestionIds": [
+        "Y1M04-Q020"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-ERASER",
+      "semanticTarget": "eraser",
+      "questionId": "Y1M04-Q020",
+      "mediaId": "IMG-Y1M04-Q020-ERASER",
+      "verifiedQuestionIds": [
+        "Y1M04-Q020"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL",
+      "semanticTarget": "pencil",
+      "questionId": "Y1M04-Q020",
+      "mediaId": "IMG-Y1M04-Q020-PENCIL",
+      "verifiedQuestionIds": [
+        "Y1M04-Q020"
+      ]
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL-CASE",
+      "semanticTarget": "pencil case",
+      "questionId": "Y1M04-Q020",
+      "mediaId": "IMG-Y1M04-Q020-PENCIL-CASE",
+      "verifiedQuestionIds": [
+        "Y1M04-Q020"
+      ]
+    }
+  ],
+  "productionApproved": false
+}

@@ -38,9 +38,10 @@ function preflight(){
  if(!binary)throw Error('CODEX_CLI_NOT_FOUND');
  const isCmd=/\.cmd$/i.test(binary);
  const auth=isCmd?
-  spawnSync(process.env.ComSpec||'cmd.exe',['/d','/s','/c',q(binary)+' login status'],{encoding:'utf8',windowsHide:true}):
+  spawnSync(process.env.ComSpec||'cmd.exe',['/d','/s','/c','""'+binary+'" login status"'],{encoding:'utf8',windowsHide:true,windowsVerbatimArguments:true}):
   spawnSync(binary,['login','status'],{encoding:'utf8',windowsHide:true});
- if(auth.status!==0||auth.error)throw Error('CODEX_CLI_LOGIN_REQUIRED: authenticated Codex CLI must be available to Scheduled Task');
+ if(auth.status!==0||auth.error)throw Error('CODEX_CLI_LOGIN_REQUIRED: authenticated Codex CLI must be available to Scheduled Task ('+
+  JSON.stringify({binary,status:auth.status,error:auth.error?.code||null,loggedIn:/Logged in using ChatGPT/i.test(auth.stdout||'')})+')');
  return binary;
 }
 async function ensure(){await fs.mkdir(logs,{recursive:true})}
@@ -106,16 +107,16 @@ function instruction(mod,c){
  ].join('\n');
 }
 async function codex(binary,taskPrompt,stdoutPath,stderrPath){
- const args=['exec','--json','--sandbox','workspace-write','--ask-for-approval','never',
+ const args=['exec','--json','--approve-for-me',
   '-C',root,'-c','sandbox_workspace_write.network_access=true','-'];
  let exe=binary,params=args;
  if(/\.cmd$/i.test(binary)){
   exe=process.env.ComSpec||'cmd.exe';
-  params=['/d','/s','/c',q(binary)+' '+args.map(q).join(' ')];
+  params=['/d','/s','/c','""'+binary+'" '+args.map(q).join(' ')+'"'];
  }
  const out=fsSync.createWriteStream(stdoutPath,{flags:'wx'});
  const err=fsSync.createWriteStream(stderrPath,{flags:'wx'});
- const p=spawn(exe,params,{cwd:root,windowsHide:true,stdio:['pipe','pipe','pipe']});
+ const p=spawn(exe,params,{cwd:root,windowsHide:true,stdio:['pipe','pipe','pipe'],windowsVerbatimArguments:/\.cmd$/i.test(binary)});
  p.stdout.pipe(out);p.stderr.pipe(err);p.stdin.end(taskPrompt);
  await fs.writeFile(lockPath,JSON.stringify({pid:process.pid,childPid:p.pid,startedAt:now()}));
  const exit=await new Promise((resolve,reject)=>{p.once('error',reject);p.once('close',(code,signal)=>resolve({code:code??1,signal}))});
@@ -176,11 +177,20 @@ async function install(){
  console.log(JSON.stringify({task,installed:true,command,result,
   warning:'Requires Windows signed-in session, valid Codex auth, official image generation capability and successful first real run'}));
 }
+async function clearBackoff(){
+ let existing={};
+ try{existing=JSON.parse(await fs.readFile(lockPath,'utf8'))}catch(e){if(e.code!=='ENOENT')throw e}
+ if(alive(existing.pid)||alive(existing.childPid))throw Error('CANNOT_CLEAR_BACKOFF_WHILE_RUNNER_ACTIVE');
+ const state=await load();
+ await save({...state,notBefore:null,backoffResetAt:now(),backoffResetReason:'retry after CLI compatibility fix'});
+ console.log(JSON.stringify({status:'RETRY_READY',task,previousNotBefore:state.notBefore||null}));
+}
 const cmd=process.argv[2];
 if(cmd==='--doctor'){
  try{const x=preflight();console.log(JSON.stringify({status:'READY_FOR_INSTALL',root,binary:x,task}))}
  catch(e){console.error('PREFLIGHT_BLOCKED:'+e.message);process.exitCode=2}
 }else if(cmd==='--install')await install();
 else if(cmd==='--once')await once();
+else if(cmd==='--clear-backoff')await clearBackoff();
 else if(cmd==='--status'){console.log(JSON.stringify({state:await load(),closure:await closure()},null,2))}
 else throw Error('Usage: node qa/duduq-codex-unattended.mjs --doctor|--install|--once|--status');

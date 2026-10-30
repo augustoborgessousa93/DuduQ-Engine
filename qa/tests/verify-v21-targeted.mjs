@@ -56,7 +56,7 @@ assert.ok(hud.includes('feedbackTimer = window.setTimeout(() => releaseFeedback(
 const grouping=get('dist-pages/play/drag-drop/drag-drop.js');
 assert.ok(grouping.indexOf('showValidationFeedback("correct");')<grouping.indexOf('speakFeedback("PLACEMENT_CORRECT"'),'Grouping Continue must precede voice');
 assert.ok(grouping.indexOf('showValidationFeedback("incorrect");')<grouping.indexOf('speakGroupingWrong(incorrectCount)'),'Grouping Retry must precede voice');
-assert.ok(grouping.includes('retryIncorrectItems();\n      // The reminder remains audible'),'retry should start without waiting for reminder');
+assert.ok(grouping.replace(/\r\n/g,'\n').includes('retryIncorrectItems();\n      // The reminder remains audible'),'retry should start without waiting for reminder');
 const multimedia=get('dist-pages/play/drag-drop-multimedia/drag-drop-multimedia-gameplay.js');
 assert.ok(multimedia.indexOf('Feedback(feedback, window.DuduQAssets?.assets, "correct", continueActivity)')<multimedia.indexOf('speakFeedback("SUCCESS_SHORT"'),'Multimedia Continue must precede narration');
 assert.ok(multimedia.indexOf('Feedback(feedback, window.DuduQAssets?.assets, "incorrect"')<multimedia.indexOf('speakFeedback("ERROR_SHORT"'),'Multimedia Retry must precede narration');

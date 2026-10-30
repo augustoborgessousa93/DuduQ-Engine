@@ -37,25 +37,49 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
 }
 const tempPath=/(?:^|\/)(?:temporary|provisional[^/]*|placeholder[^/]*|generated-inbox|draft[^/]*)(?:\/|$)/i;
 const pending=/PENDING|PROVISIONAL|TEMPORARY|PLACEHOLDER|REPLACE_LATER/i;
+const evidenceCache=new Map();
+async function officialEvidence(entry,mediaId,modules){
+ const verification=entry?.verification,pathRel=verification?.evidencePath;
+ if(entry?.temporary!==false||entry?.status!=='APPROVED'||entry?.integrationStatus!=='OFFICIAL_MEDIA_QA_PASSED_REVIEW_BRANCH'||
+    entry?.humanResolutionStatus!=='PEDAGOGICAL_QA_APPROVED'||verification?.schemaVersion!=='DUDUQ_MEDIA_OFFICIAL_QA_V1'||
+    !inside(pathRel)||!/^content\/english\/media\/qa-evidence\/[A-Za-z0-9_.\/-]+\.json$/.test(pathRel)||
+    !/^[a-f0-9]{64}$/.test(verification?.evidenceSha256||''))return {pass:false,reason:'OFFICIAL_METADATA_INCOMPLETE'};
+ try{
+  if(!evidenceCache.has(pathRel)){
+   const bytes=await readFile(path.join(root,pathRel)),actual=createHash('sha256').update(bytes).digest('hex');
+   evidenceCache.set(pathRel,{bytes,actual,json:JSON.parse(bytes.toString('utf8'))});
+  }
+  const cached=evidenceCache.get(pathRel),proof=cached.json;
+  if(cached.actual!==verification.evidenceSha256||proof.schemaVersion!=='DUDUQ_MEDIA_OFFICIAL_QA_V1'||proof.status!=='PASS'||
+     proof.pedagogicalQaApproved!==true||proof.visualQaApproved!==true||proof.browserQaApproved!==true||
+     proof.browserQa?.status!=='PASS'||proof.semanticQa?.status!=='PASS'||proof.buildQa?.status!=='PASS'||
+     !proof.mediaIds?.includes(mediaId)||modules.some(moduleId=>moduleId!==proof.moduleId)||
+     !proof.assets?.some(asset=>asset.sha256===entry.sha256))return {pass:false,reason:'OFFICIAL_EVIDENCE_STALE_OR_INCOMPLETE'};
+  for(const asset of entry.assets||[]){const bytes=await readFile(path.join(root,asset.path));
+   if(createHash('sha256').update(bytes).digest('hex')!==asset.sha256||asset.sha256!==entry.sha256)return {pass:false,reason:'OFFICIAL_ASSET_HASH_MISMATCH'};}
+  return {pass:true,evidencePath:pathRel,evidenceSha256:cached.actual,reviewAuthority:proof.reviewAuthority};
+ }catch(error){return {pass:false,reason:'OFFICIAL_EVIDENCE_UNREADABLE:'+String(error?.code||error?.message||error)};}
+}
 const listed=[];
 for(const ref of references.values()){
  const e=index.get(ref.id), p=e?.assets?.map(a=>a.path).filter(Boolean)||[];
  if(!p.length && e?.urlOrPath)p.push(e.urlOrPath);
  const states=[e?.integrationStatus,e?.refinementStatus,e?.backlogStatus,e?.humanReview].filter(Boolean).join('|');
  const flagged=e?.temporary===true || p.some(x=>tempPath.test(x)) || pending.test(states);
- let category=!e?'MISSING_REGISTRY':e.status!=='APPROVED'?'NOT_APPROVED':flagged?'PROVISIONAL':e.temporary!==false?'REVIEW_REQUIRED':'NON_TEMPORARY_UNVERIFIED';
  const badPaths=[];
  if(e)for(const asset of e.assets||[]){
   if(!inside(asset.path)){badPaths.push('UNSAFE:'+asset.path);continue;}
   try{const info=await stat(path.join(root,asset.path));if(!info.isFile()||!info.size)badPaths.push('EMPTY:'+asset.path);}
   catch{badPaths.push('MISSING:'+asset.path);}
  }
- if(badPaths.length)category='BROKEN_ASSET';
- listed.push({mediaId:ref.id,status:category,questions:[...ref.items].sort(),modules:[...ref.modules].sort(),usage:ref.items.size,semantic:e?.semantic||e?.altText||ref.examples.find(x=>x.semantic)?.semantic||ref.id.replace(/^IMG-(?:Y\dM\d\d-)?Q\d{3}-/,'').replaceAll('-',' ').toLowerCase(),temporary:e?.temporary??null,path:e?.urlOrPath||p[0]||null,badPaths,evidence:ref.examples});
+ const verification=await officialEvidence(e,ref.id,[...ref.modules]);
+ let category=!e?'MISSING_REGISTRY':badPaths.length?'BROKEN_ASSET':e.status!=='APPROVED'?'NOT_APPROVED':
+   flagged?'PROVISIONAL':e.temporary!==false?'REVIEW_REQUIRED':verification.pass?'OFFICIAL_PEDAGOGICALLY_VERIFIED':'NON_TEMPORARY_UNVERIFIED';
+ listed.push({mediaId:ref.id,status:category,questions:[...ref.items].sort(),modules:[...ref.modules].sort(),usage:ref.items.size,semantic:e?.semantic||e?.altText||ref.examples.find(x=>x.semantic)?.semantic||ref.id.replace(/^IMG-(?:Y\dM\d\d-)?Q\d{3}-/,'').replaceAll('-',' ').toLowerCase(),temporary:e?.temporary??null,path:e?.urlOrPath||p[0]||null,badPaths,verification,evidence:ref.examples});
 }
 // Both provisional/broken references and apparently non-temporary but unverified
 // references block closure. Never equate absence of placeholders with QA approval.
-const incomplete=listed.filter(x=>x.status!=='NON_TEMPORARY_UNVERIFIED');
+const incomplete=listed.filter(x=>!['NON_TEMPORARY_UNVERIFIED','OFFICIAL_PEDAGOGICALLY_VERIFIED'].includes(x.status));
 const unverified=listed.filter(x=>x.status==='NON_TEMPORARY_UNVERIFIED');
 const closureBlockers=[...incomplete,...unverified];
 const groups=new Map();

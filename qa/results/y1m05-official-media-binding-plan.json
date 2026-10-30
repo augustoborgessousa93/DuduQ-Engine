@@ -1,0 +1,971 @@
+{
+  "schemaVersion": "DUDUQ_Y1M05_OFFICIAL_MEDIA_BINDING_PLAN_V1",
+  "moduleId": "Y1M05",
+  "status": "PASS",
+  "sourceQuestionContractSha256": "7ceb00996bfe518fb92a61d9a34fa8ed7b0da0718a111d108ef04dba84ddbdd3",
+  "sourceQuestionInvariantSha256": "c5a715570f4ddf49209ec8020a538aba809811ad755498b13039511af8f53b0a",
+  "inputMediaIds": 101,
+  "outputMediaIds": 101,
+  "usageRecords": 101,
+  "splits": [
+    {
+      "questionId": "Y1M05-Q001",
+      "field": "options[0].media.assetId",
+      "from": "IMG-Y1M05-Q001-HEAD",
+      "to": "IMG-Y1M05-Q001-O1-HEAD",
+      "semanticTarget": "head"
+    },
+    {
+      "questionId": "Y1M05-Q001",
+      "field": "options[1].media.assetId",
+      "from": "IMG-Y1M05-Q001-HANDS",
+      "to": "IMG-Y1M05-Q001-O2-HANDS",
+      "semanticTarget": "hands"
+    },
+    {
+      "questionId": "Y1M05-Q001",
+      "field": "options[2].media.assetId",
+      "from": "IMG-Y1M05-Q001-LEGS",
+      "to": "IMG-Y1M05-Q001-O3-LEGS",
+      "semanticTarget": "legs"
+    },
+    {
+      "questionId": "Y1M05-Q001",
+      "field": "options[3].media.assetId",
+      "from": "IMG-Y1M05-Q001-ARMS",
+      "to": "IMG-Y1M05-Q001-O4-ARMS",
+      "semanticTarget": "arms"
+    },
+    {
+      "questionId": "Y1M05-Q003",
+      "field": "pairs[3].b.media.assetId",
+      "from": "IMG-Y1M05-Q003-FEET",
+      "to": "IMG-Y1M05-Q003-B4-FEET",
+      "semanticTarget": "feet"
+    }
+  ],
+  "concepts": [
+    "arms",
+    "come in",
+    "feet",
+    "hands",
+    "head",
+    "legs",
+    "silence, please",
+    "sit down",
+    "stand up",
+    "thank you"
+  ],
+  "bindings": [
+    {
+      "assetKey": "Y1M05-OFFICIAL-HEAD",
+      "semanticTarget": "head",
+      "questionId": "Y1M05-Q001",
+      "mediaId": "IMG-Q001-HEAD",
+      "verifiedQuestionIds": [
+        "Y1M05-Q001"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HANDS",
+      "semanticTarget": "hands",
+      "questionId": "Y1M05-Q002",
+      "mediaId": "IMG-Q002-HANDS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q002"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-LEGS",
+      "semanticTarget": "legs",
+      "questionId": "Y1M05-Q003",
+      "mediaId": "IMG-Q003-LEGS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q003"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HANDS",
+      "semanticTarget": "hands",
+      "questionId": "Y1M05-Q004",
+      "mediaId": "IMG-Q004-HANDS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q004"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-FEET",
+      "semanticTarget": "feet",
+      "questionId": "Y1M05-Q005",
+      "mediaId": "IMG-Q005-FEET",
+      "verifiedQuestionIds": [
+        "Y1M05-Q005"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SIT-DOWN",
+      "semanticTarget": "sit down",
+      "questionId": "Y1M05-Q006",
+      "mediaId": "IMG-Q006-SIT-DOWN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q006"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-STAND-UP",
+      "semanticTarget": "stand up",
+      "questionId": "Y1M05-Q007",
+      "mediaId": "IMG-Q007-STAND-UP",
+      "verifiedQuestionIds": [
+        "Y1M05-Q007"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-COME-IN",
+      "semanticTarget": "come in",
+      "questionId": "Y1M05-Q008",
+      "mediaId": "IMG-Q008-COME-IN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q008"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-FEET",
+      "semanticTarget": "feet",
+      "questionId": "Y1M05-Q009",
+      "mediaId": "IMG-Q009-FEET",
+      "verifiedQuestionIds": [
+        "Y1M05-Q009"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-THANK-YOU",
+      "semanticTarget": "thank you",
+      "questionId": "Y1M05-Q010",
+      "mediaId": "IMG-Q010-THANK-YOU",
+      "verifiedQuestionIds": [
+        "Y1M05-Q010"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-LEGS",
+      "semanticTarget": "legs",
+      "questionId": "Y1M05-Q011",
+      "mediaId": "IMG-Q011-LEGS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q011"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HANDS",
+      "semanticTarget": "hands",
+      "questionId": "Y1M05-Q012",
+      "mediaId": "IMG-Q012-HANDS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q012"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-LEGS",
+      "semanticTarget": "legs",
+      "questionId": "Y1M05-Q013",
+      "mediaId": "IMG-Q013-LEGS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q013"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-STAND-UP",
+      "semanticTarget": "stand up",
+      "questionId": "Y1M05-Q014",
+      "mediaId": "IMG-Q014-STAND-UP",
+      "verifiedQuestionIds": [
+        "Y1M05-Q014"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-FEET",
+      "semanticTarget": "feet",
+      "questionId": "Y1M05-Q015",
+      "mediaId": "IMG-Q015-FEET",
+      "verifiedQuestionIds": [
+        "Y1M05-Q015"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SIT-DOWN",
+      "semanticTarget": "sit down",
+      "questionId": "Y1M05-Q016",
+      "mediaId": "IMG-Q016-SIT-DOWN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q016"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SILENCE-PLEASE",
+      "semanticTarget": "silence, please",
+      "questionId": "Y1M05-Q017",
+      "mediaId": "IMG-Q017-SILENCE-PLEASE",
+      "verifiedQuestionIds": [
+        "Y1M05-Q017"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-COME-IN",
+      "semanticTarget": "come in",
+      "questionId": "Y1M05-Q018",
+      "mediaId": "IMG-Q018-COME-IN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q018"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SILENCE-PLEASE",
+      "semanticTarget": "silence, please",
+      "questionId": "Y1M05-Q019",
+      "mediaId": "IMG-Q019-SILENCE-PLEASE",
+      "verifiedQuestionIds": [
+        "Y1M05-Q019"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-THANK-YOU",
+      "semanticTarget": "thank you",
+      "questionId": "Y1M05-Q020",
+      "mediaId": "IMG-Q020-THANK-YOU",
+      "verifiedQuestionIds": [
+        "Y1M05-Q020"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HEAD",
+      "semanticTarget": "head",
+      "questionId": "Y1M05-Q001",
+      "mediaId": "IMG-Y1M05-Q001-O1-HEAD",
+      "verifiedQuestionIds": [
+        "Y1M05-Q001"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HANDS",
+      "semanticTarget": "hands",
+      "questionId": "Y1M05-Q001",
+      "mediaId": "IMG-Y1M05-Q001-O2-HANDS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q001"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-LEGS",
+      "semanticTarget": "legs",
+      "questionId": "Y1M05-Q001",
+      "mediaId": "IMG-Y1M05-Q001-O3-LEGS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q001"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-ARMS",
+      "semanticTarget": "arms",
+      "questionId": "Y1M05-Q001",
+      "mediaId": "IMG-Y1M05-Q001-O4-ARMS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q001"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-ARMS",
+      "semanticTarget": "arms",
+      "questionId": "Y1M05-Q002",
+      "mediaId": "IMG-Y1M05-Q002-ARMS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q002"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HANDS",
+      "semanticTarget": "hands",
+      "questionId": "Y1M05-Q002",
+      "mediaId": "IMG-Y1M05-Q002-HANDS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q002"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HEAD",
+      "semanticTarget": "head",
+      "questionId": "Y1M05-Q002",
+      "mediaId": "IMG-Y1M05-Q002-HEAD",
+      "verifiedQuestionIds": [
+        "Y1M05-Q002"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-LEGS",
+      "semanticTarget": "legs",
+      "questionId": "Y1M05-Q002",
+      "mediaId": "IMG-Y1M05-Q002-LEGS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q002"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-ARMS",
+      "semanticTarget": "arms",
+      "questionId": "Y1M05-Q003",
+      "mediaId": "IMG-Y1M05-Q003-ARMS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q003"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-FEET",
+      "semanticTarget": "feet",
+      "questionId": "Y1M05-Q003",
+      "mediaId": "IMG-Y1M05-Q003-B4-FEET",
+      "verifiedQuestionIds": [
+        "Y1M05-Q003"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HANDS",
+      "semanticTarget": "hands",
+      "questionId": "Y1M05-Q003",
+      "mediaId": "IMG-Y1M05-Q003-HANDS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q003"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-LEGS",
+      "semanticTarget": "legs",
+      "questionId": "Y1M05-Q003",
+      "mediaId": "IMG-Y1M05-Q003-LEGS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q003"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-COME-IN",
+      "semanticTarget": "come in",
+      "questionId": "Y1M05-Q004",
+      "mediaId": "IMG-Y1M05-Q004-COME-IN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q004"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-FEET",
+      "semanticTarget": "feet",
+      "questionId": "Y1M05-Q004",
+      "mediaId": "IMG-Y1M05-Q004-FEET",
+      "verifiedQuestionIds": [
+        "Y1M05-Q004"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HANDS",
+      "semanticTarget": "hands",
+      "questionId": "Y1M05-Q004",
+      "mediaId": "IMG-Y1M05-Q004-HANDS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q004"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SILENCE-PLEASE",
+      "semanticTarget": "silence, please",
+      "questionId": "Y1M05-Q004",
+      "mediaId": "IMG-Y1M05-Q004-SILENCE-PLEASE",
+      "verifiedQuestionIds": [
+        "Y1M05-Q004"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SIT-DOWN",
+      "semanticTarget": "sit down",
+      "questionId": "Y1M05-Q004",
+      "mediaId": "IMG-Y1M05-Q004-SIT-DOWN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q004"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-STAND-UP",
+      "semanticTarget": "stand up",
+      "questionId": "Y1M05-Q004",
+      "mediaId": "IMG-Y1M05-Q004-STAND-UP",
+      "verifiedQuestionIds": [
+        "Y1M05-Q004"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-THANK-YOU",
+      "semanticTarget": "thank you",
+      "questionId": "Y1M05-Q004",
+      "mediaId": "IMG-Y1M05-Q004-THANK-YOU",
+      "verifiedQuestionIds": [
+        "Y1M05-Q004"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-ARMS",
+      "semanticTarget": "arms",
+      "questionId": "Y1M05-Q005",
+      "mediaId": "IMG-Y1M05-Q005-ARMS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q005"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-FEET",
+      "semanticTarget": "feet",
+      "questionId": "Y1M05-Q005",
+      "mediaId": "IMG-Y1M05-Q005-FEET",
+      "verifiedQuestionIds": [
+        "Y1M05-Q005"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HANDS",
+      "semanticTarget": "hands",
+      "questionId": "Y1M05-Q005",
+      "mediaId": "IMG-Y1M05-Q005-HANDS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q005"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HEAD",
+      "semanticTarget": "head",
+      "questionId": "Y1M05-Q005",
+      "mediaId": "IMG-Y1M05-Q005-HEAD",
+      "verifiedQuestionIds": [
+        "Y1M05-Q005"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-LEGS",
+      "semanticTarget": "legs",
+      "questionId": "Y1M05-Q005",
+      "mediaId": "IMG-Y1M05-Q005-LEGS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q005"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-ARMS",
+      "semanticTarget": "arms",
+      "questionId": "Y1M05-Q007",
+      "mediaId": "IMG-Y1M05-Q007-ARMS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q007"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-FEET",
+      "semanticTarget": "feet",
+      "questionId": "Y1M05-Q007",
+      "mediaId": "IMG-Y1M05-Q007-FEET",
+      "verifiedQuestionIds": [
+        "Y1M05-Q007"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SIT-DOWN",
+      "semanticTarget": "sit down",
+      "questionId": "Y1M05-Q007",
+      "mediaId": "IMG-Y1M05-Q007-SIT-DOWN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q007"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-STAND-UP",
+      "semanticTarget": "stand up",
+      "questionId": "Y1M05-Q007",
+      "mediaId": "IMG-Y1M05-Q007-STAND-UP",
+      "verifiedQuestionIds": [
+        "Y1M05-Q007"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-ARMS",
+      "semanticTarget": "arms",
+      "questionId": "Y1M05-Q008",
+      "mediaId": "IMG-Y1M05-Q008-ARMS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q008"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-FEET",
+      "semanticTarget": "feet",
+      "questionId": "Y1M05-Q008",
+      "mediaId": "IMG-Y1M05-Q008-FEET",
+      "verifiedQuestionIds": [
+        "Y1M05-Q008"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SIT-DOWN",
+      "semanticTarget": "sit down",
+      "questionId": "Y1M05-Q008",
+      "mediaId": "IMG-Y1M05-Q008-SIT-DOWN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q008"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-STAND-UP",
+      "semanticTarget": "stand up",
+      "questionId": "Y1M05-Q008",
+      "mediaId": "IMG-Y1M05-Q008-STAND-UP",
+      "verifiedQuestionIds": [
+        "Y1M05-Q008"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-COME-IN",
+      "semanticTarget": "come in",
+      "questionId": "Y1M05-Q009",
+      "mediaId": "IMG-Y1M05-Q009-COME-IN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q009"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-FEET",
+      "semanticTarget": "feet",
+      "questionId": "Y1M05-Q009",
+      "mediaId": "IMG-Y1M05-Q009-FEET",
+      "verifiedQuestionIds": [
+        "Y1M05-Q009"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SIT-DOWN",
+      "semanticTarget": "sit down",
+      "questionId": "Y1M05-Q009",
+      "mediaId": "IMG-Y1M05-Q009-SIT-DOWN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q009"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-STAND-UP",
+      "semanticTarget": "stand up",
+      "questionId": "Y1M05-Q009",
+      "mediaId": "IMG-Y1M05-Q009-STAND-UP",
+      "verifiedQuestionIds": [
+        "Y1M05-Q009"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-COME-IN",
+      "semanticTarget": "come in",
+      "questionId": "Y1M05-Q010",
+      "mediaId": "IMG-Y1M05-Q010-COME-IN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q010"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-FEET",
+      "semanticTarget": "feet",
+      "questionId": "Y1M05-Q010",
+      "mediaId": "IMG-Y1M05-Q010-FEET",
+      "verifiedQuestionIds": [
+        "Y1M05-Q010"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SIT-DOWN",
+      "semanticTarget": "sit down",
+      "questionId": "Y1M05-Q010",
+      "mediaId": "IMG-Y1M05-Q010-SIT-DOWN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q010"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-STAND-UP",
+      "semanticTarget": "stand up",
+      "questionId": "Y1M05-Q010",
+      "mediaId": "IMG-Y1M05-Q010-STAND-UP",
+      "verifiedQuestionIds": [
+        "Y1M05-Q010"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-ARMS",
+      "semanticTarget": "arms",
+      "questionId": "Y1M05-Q011",
+      "mediaId": "IMG-Y1M05-Q011-ARMS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q011"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-COME-IN",
+      "semanticTarget": "come in",
+      "questionId": "Y1M05-Q011",
+      "mediaId": "IMG-Y1M05-Q011-COME-IN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q011"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-FEET",
+      "semanticTarget": "feet",
+      "questionId": "Y1M05-Q011",
+      "mediaId": "IMG-Y1M05-Q011-FEET",
+      "verifiedQuestionIds": [
+        "Y1M05-Q011"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HANDS",
+      "semanticTarget": "hands",
+      "questionId": "Y1M05-Q011",
+      "mediaId": "IMG-Y1M05-Q011-HANDS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q011"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-LEGS",
+      "semanticTarget": "legs",
+      "questionId": "Y1M05-Q011",
+      "mediaId": "IMG-Y1M05-Q011-LEGS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q011"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SIT-DOWN",
+      "semanticTarget": "sit down",
+      "questionId": "Y1M05-Q011",
+      "mediaId": "IMG-Y1M05-Q011-SIT-DOWN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q011"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-STAND-UP",
+      "semanticTarget": "stand up",
+      "questionId": "Y1M05-Q011",
+      "mediaId": "IMG-Y1M05-Q011-STAND-UP",
+      "verifiedQuestionIds": [
+        "Y1M05-Q011"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-COME-IN",
+      "semanticTarget": "come in",
+      "questionId": "Y1M05-Q012",
+      "mediaId": "IMG-Y1M05-Q012-COME-IN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q012"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SILENCE-PLEASE",
+      "semanticTarget": "silence, please",
+      "questionId": "Y1M05-Q012",
+      "mediaId": "IMG-Y1M05-Q012-SILENCE-PLEASE",
+      "verifiedQuestionIds": [
+        "Y1M05-Q012"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SIT-DOWN",
+      "semanticTarget": "sit down",
+      "questionId": "Y1M05-Q012",
+      "mediaId": "IMG-Y1M05-Q012-SIT-DOWN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q012"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-STAND-UP",
+      "semanticTarget": "stand up",
+      "questionId": "Y1M05-Q012",
+      "mediaId": "IMG-Y1M05-Q012-STAND-UP",
+      "verifiedQuestionIds": [
+        "Y1M05-Q012"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-COME-IN",
+      "semanticTarget": "come in",
+      "questionId": "Y1M05-Q013",
+      "mediaId": "IMG-Y1M05-Q013-COME-IN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q013"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SILENCE-PLEASE",
+      "semanticTarget": "silence, please",
+      "questionId": "Y1M05-Q013",
+      "mediaId": "IMG-Y1M05-Q013-SILENCE-PLEASE",
+      "verifiedQuestionIds": [
+        "Y1M05-Q013"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-STAND-UP",
+      "semanticTarget": "stand up",
+      "questionId": "Y1M05-Q013",
+      "mediaId": "IMG-Y1M05-Q013-STAND-UP",
+      "verifiedQuestionIds": [
+        "Y1M05-Q013"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-THANK-YOU",
+      "semanticTarget": "thank you",
+      "questionId": "Y1M05-Q013",
+      "mediaId": "IMG-Y1M05-Q013-THANK-YOU",
+      "verifiedQuestionIds": [
+        "Y1M05-Q013"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-COME-IN",
+      "semanticTarget": "come in",
+      "questionId": "Y1M05-Q014",
+      "mediaId": "IMG-Y1M05-Q014-COME-IN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q014"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SILENCE-PLEASE",
+      "semanticTarget": "silence, please",
+      "questionId": "Y1M05-Q014",
+      "mediaId": "IMG-Y1M05-Q014-SILENCE-PLEASE",
+      "verifiedQuestionIds": [
+        "Y1M05-Q014"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-STAND-UP",
+      "semanticTarget": "stand up",
+      "questionId": "Y1M05-Q014",
+      "mediaId": "IMG-Y1M05-Q014-STAND-UP",
+      "verifiedQuestionIds": [
+        "Y1M05-Q014"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-THANK-YOU",
+      "semanticTarget": "thank you",
+      "questionId": "Y1M05-Q014",
+      "mediaId": "IMG-Y1M05-Q014-THANK-YOU",
+      "verifiedQuestionIds": [
+        "Y1M05-Q014"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-COME-IN",
+      "semanticTarget": "come in",
+      "questionId": "Y1M05-Q015",
+      "mediaId": "IMG-Y1M05-Q015-COME-IN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q015"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SIT-DOWN",
+      "semanticTarget": "sit down",
+      "questionId": "Y1M05-Q015",
+      "mediaId": "IMG-Y1M05-Q015-SIT-DOWN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q015"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-STAND-UP",
+      "semanticTarget": "stand up",
+      "questionId": "Y1M05-Q015",
+      "mediaId": "IMG-Y1M05-Q015-STAND-UP",
+      "verifiedQuestionIds": [
+        "Y1M05-Q015"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-COME-IN",
+      "semanticTarget": "come in",
+      "questionId": "Y1M05-Q016",
+      "mediaId": "IMG-Y1M05-Q016-COME-IN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q016"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HEAD",
+      "semanticTarget": "head",
+      "questionId": "Y1M05-Q016",
+      "mediaId": "IMG-Y1M05-Q016-HEAD",
+      "verifiedQuestionIds": [
+        "Y1M05-Q016"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SILENCE-PLEASE",
+      "semanticTarget": "silence, please",
+      "questionId": "Y1M05-Q016",
+      "mediaId": "IMG-Y1M05-Q016-SILENCE-PLEASE",
+      "verifiedQuestionIds": [
+        "Y1M05-Q016"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-THANK-YOU",
+      "semanticTarget": "thank you",
+      "questionId": "Y1M05-Q016",
+      "mediaId": "IMG-Y1M05-Q016-THANK-YOU",
+      "verifiedQuestionIds": [
+        "Y1M05-Q016"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-ARMS",
+      "semanticTarget": "arms",
+      "questionId": "Y1M05-Q017",
+      "mediaId": "IMG-Y1M05-Q017-ARMS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q017"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-COME-IN",
+      "semanticTarget": "come in",
+      "questionId": "Y1M05-Q017",
+      "mediaId": "IMG-Y1M05-Q017-COME-IN",
+      "verifiedQuestionIds": [
+        "Y1M05-Q017"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HANDS",
+      "semanticTarget": "hands",
+      "questionId": "Y1M05-Q017",
+      "mediaId": "IMG-Y1M05-Q017-HANDS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q017"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HEAD",
+      "semanticTarget": "head",
+      "questionId": "Y1M05-Q017",
+      "mediaId": "IMG-Y1M05-Q017-HEAD",
+      "verifiedQuestionIds": [
+        "Y1M05-Q017"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-LEGS",
+      "semanticTarget": "legs",
+      "questionId": "Y1M05-Q017",
+      "mediaId": "IMG-Y1M05-Q017-LEGS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q017"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SILENCE-PLEASE",
+      "semanticTarget": "silence, please",
+      "questionId": "Y1M05-Q017",
+      "mediaId": "IMG-Y1M05-Q017-SILENCE-PLEASE",
+      "verifiedQuestionIds": [
+        "Y1M05-Q017"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-THANK-YOU",
+      "semanticTarget": "thank you",
+      "questionId": "Y1M05-Q017",
+      "mediaId": "IMG-Y1M05-Q017-THANK-YOU",
+      "verifiedQuestionIds": [
+        "Y1M05-Q017"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HANDS",
+      "semanticTarget": "hands",
+      "questionId": "Y1M05-Q018",
+      "mediaId": "IMG-Y1M05-Q018-HANDS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q018"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HEAD",
+      "semanticTarget": "head",
+      "questionId": "Y1M05-Q018",
+      "mediaId": "IMG-Y1M05-Q018-HEAD",
+      "verifiedQuestionIds": [
+        "Y1M05-Q018"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SILENCE-PLEASE",
+      "semanticTarget": "silence, please",
+      "questionId": "Y1M05-Q018",
+      "mediaId": "IMG-Y1M05-Q018-SILENCE-PLEASE",
+      "verifiedQuestionIds": [
+        "Y1M05-Q018"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-THANK-YOU",
+      "semanticTarget": "thank you",
+      "questionId": "Y1M05-Q018",
+      "mediaId": "IMG-Y1M05-Q018-THANK-YOU",
+      "verifiedQuestionIds": [
+        "Y1M05-Q018"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HANDS",
+      "semanticTarget": "hands",
+      "questionId": "Y1M05-Q020",
+      "mediaId": "IMG-Y1M05-Q020-HANDS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q020"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HEAD",
+      "semanticTarget": "head",
+      "questionId": "Y1M05-Q020",
+      "mediaId": "IMG-Y1M05-Q020-HEAD",
+      "verifiedQuestionIds": [
+        "Y1M05-Q020"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-LEGS",
+      "semanticTarget": "legs",
+      "questionId": "Y1M05-Q020",
+      "mediaId": "IMG-Y1M05-Q020-LEGS",
+      "verifiedQuestionIds": [
+        "Y1M05-Q020"
+      ]
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-THANK-YOU",
+      "semanticTarget": "thank you",
+      "questionId": "Y1M05-Q020",
+      "mediaId": "IMG-Y1M05-Q020-THANK-YOU",
+      "verifiedQuestionIds": [
+        "Y1M05-Q020"
+      ]
+    }
+  ],
+  "productionApproved": false
+}

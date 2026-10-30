@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "DUDUQ_V26_CROSS_PLATFORM_BUILD_V1",
+  "status": "PASS",
+  "platform": "win32",
+  "source": "qa/build-v26-topic-first-paint-qa.sh command-equivalent",
+  "initialArtifactSha256": "CED5F33E2DCD0DB33D66B7602162FA3520AA88A9F605B655A3E160726567F71E",
+  "modules": 30,
+  "activities": 600,
+  "steps": [
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check qa/import-v19-immutable-cdn.mjs",
+      "exitCode": 0,
+      "durationMs": 575
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe qa/import-v19-immutable-cdn.mjs",
+      "exitCode": 0,
+      "durationMs": 7206
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe qa/verify-artifact.mjs",
+      "exitCode": 0,
+      "durationMs": 1277
+    },
+    {
+      "command": "git hash-object functions/play/english/_middleware.js",
+      "exitCode": 0,
+      "durationMs": 241
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check qa/apply-v21-approved-content-overlay.mjs",
+      "exitCode": 0,
+      "durationMs": 571
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe qa/apply-v21-approved-content-overlay.mjs",
+      "exitCode": 0,
+      "durationMs": 73
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check functions/play/english/_middleware.js",
+      "exitCode": 0,
+      "durationMs": 59
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check dist-pages/play/drag-drop/drag-drop.js",
+      "exitCode": 0,
+      "durationMs": 60
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check dist-pages/play/drag-drop-multimedia/drag-drop-multimedia-gameplay.js",
+      "exitCode": 0,
+      "durationMs": 74
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check dist-pages/core/ui/duduq-canonical-question-hud.js",
+      "exitCode": 0,
+      "durationMs": 69
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check qa/tests/verify-v21-targeted.mjs",
+      "exitCode": 0,
+      "durationMs": 72
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe qa/tests/verify-v21-targeted.mjs",
+      "exitCode": 0,
+      "durationMs": 108
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check qa/apply-v22-matching-feedback.mjs",
+      "exitCode": 0,
+      "durationMs": 61
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe qa/apply-v22-matching-feedback.mjs",
+      "exitCode": 0,
+      "durationMs": 99
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check dist-pages/core/matching/duduq-matching-runtime-v22.js",
+      "exitCode": 0,
+      "durationMs": 80
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check dist-pages/core/ui/duduq-canonical-question-hud.js",
+      "exitCode": 0,
+      "durationMs": 69
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check dist-pages/core/duduq-matching-production-bridge.js",
+      "exitCode": 0,
+      "durationMs": 71
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check qa/tests/verify-v22-matching-feedback.mjs",
+      "exitCode": 0,
+      "durationMs": 71
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe qa/tests/verify-v22-matching-feedback.mjs",
+      "exitCode": 0,
+      "durationMs": 78
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check qa/apply-v23-ebc-watermark.mjs",
+      "exitCode": 0,
+      "durationMs": 64
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe qa/apply-v23-ebc-watermark.mjs",
+      "exitCode": 0,
+      "durationMs": 96
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check dist-pages/core/duduq-ebc-attribution-watermark.js",
+      "exitCode": 0,
+      "durationMs": 58
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check qa/tests/verify-v23-ebc-watermark.mjs",
+      "exitCode": 0,
+      "durationMs": 62
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe qa/tests/verify-v23-ebc-watermark.mjs",
+      "exitCode": 0,
+      "durationMs": 83
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check qa/apply-v24-header-title.mjs",
+      "exitCode": 0,
+      "durationMs": 69
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe qa/apply-v24-header-title.mjs",
+      "exitCode": 0,
+      "durationMs": 108
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check dist-pages/core/duduq-header-title-fit-v24.js",
+      "exitCode": 0,
+      "durationMs": 71
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check qa/tests/verify-v24-header-title.mjs",
+      "exitCode": 0,
+      "durationMs": 64
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe qa/tests/verify-v24-header-title.mjs",
+      "exitCode": 0,
+      "durationMs": 81
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check qa/apply-v25-early-header-title.mjs",
+      "exitCode": 0,
+      "durationMs": 133
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe qa/apply-v25-early-header-title.mjs",
+      "exitCode": 0,
+      "durationMs": 121
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check qa/tests/verify-v25-early-header-title.mjs",
+      "exitCode": 0,
+      "durationMs": 73
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe qa/tests/verify-v25-early-header-title.mjs",
+      "exitCode": 0,
+      "durationMs": 80
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check qa/apply-v26-topic-first-paint.mjs",
+      "exitCode": 0,
+      "durationMs": 57
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe qa/apply-v26-topic-first-paint.mjs",
+      "exitCode": 0,
+      "durationMs": 123
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe --check qa/tests/verify-v26-topic-first-paint.mjs",
+      "exitCode": 0,
+      "durationMs": 62
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe qa/tests/verify-v26-topic-first-paint.mjs",
+      "exitCode": 0,
+      "durationMs": 81
+    }
+  ],
+  "finalCompiledManifestSha256": "5993aaceaff272626c863aef07e1b33a909ca7f9fcc41d2d40890baa6c08b822",
+  "productionDeployed": false
+}

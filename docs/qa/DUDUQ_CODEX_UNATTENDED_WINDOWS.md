@@ -32,7 +32,7 @@ O proprietário permanecerá vários dias longe do computador, mas deixará o **
 
 ## Regras de segurança do agendador
 
-- Usa o próprio `codex exec --sandbox workspace-write --ask-for-approval never` com rede habilitada **apenas no sandbox do worktree**. Não usa `--yolo`, `danger-full-access`, alteração da política do PowerShell ou credenciais exportadas.
+- Usa `codex exec --approve-for-me` com rede habilitada **apenas no sandbox `workspace-write` escolhido por essa opção**. O CLI instalado nesta máquina não aceita mais `--ask-for-approval never` e rejeita combinar `--approve-for-me` com `--sandbox`; `--approve-for-me` já configura `workspace-write` e encaminha solicitações elegíveis à revisão automática. Não usa `--yolo`, `danger-full-access`, alteração da política do PowerShell ou credenciais exportadas.
 - O launcher cria um lock por PID e evita que duas execuções concorram pela mesma branch/arquivos.
 - Logs e estado de host ficam no perfil local do Windows, não no GitHub nem na pasta de produção.
 - Se a execução acabar com falha, há backoff registrado. Se um módulo estagnar, o agendador pode tentar outros módulos; a falha não vira conclusão.
