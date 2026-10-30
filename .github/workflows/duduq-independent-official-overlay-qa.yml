@@ -84,7 +84,10 @@ jobs:
         run: |
           # Y1M05 semantic evidence is hash-bound to the original V26 registry.
           # Running it on Y1M04's modified registry is an invalid test.
-          # Reimport the pinned V19 source and reapply V20-V26 in this ephemeral runner.
+          # Preserve the previous ephemeral QA build without deleting referenced files.
+          # A V19 reimport alone cannot remove V26/Y1M04-added paths from dist-pages.
+          test ! -e dist-pages-y1m04-qa
+          mv dist-pages dist-pages-y1m04-qa
           bash qa/build-v26-topic-first-paint-qa.sh
 
       - name: Reproduce Y1M05 candidate integration and all 20 Chromium question routes
