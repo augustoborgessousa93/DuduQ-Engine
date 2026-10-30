@@ -137,14 +137,24 @@ async function once(){
    startedAt:now(),beforePending:before?.distinctPendingMediaIds??null});
   const result=await codex(binary,instruction(moduleId,before),outFile,errFile);
   const after=await closure(),oldPending=before?.distinctPendingMediaIds??null,newPending=after?.distinctPendingMediaIds??null;
-  const improved=oldPending!==null&&newPending!==null&&newPending<oldPending;
+  const beforeMod=before?.modulesDetail?.find(m=>m.moduleId===moduleId);
+  const afterMod=after?.modulesDetail?.find(m=>m.moduleId===moduleId);
+  const improved=(oldPending!==null&&newPending!==null&&newPending<oldPending)||
+   (after?.completedModules??0)>(before?.completedModules??0)||
+   (Number(afterMod?.verifiedReferencedIds)||0)>(Number(beforeMod?.verifiedReferencedIds)||0);
   const updated=await load(),stalled={...(updated.stalled||{})};
   stalled[moduleId]=improved?0:(stalled[moduleId]||0)+1;
-  const retry=result.code!==0,backoff=retry?Math.min(360,30*stalled[moduleId]):0;
+  const noProgress=improved?0:(Number(updated.consecutiveNoProgress)||0)+1;
+  // Try another module if one is blocked. If a complete pass over 30
+  // modules makes no measurable progress, slow down rather than burn quota.
+  const retry=result.code!==0;
+  const backoff=retry?Math.min(360,30*stalled[moduleId]):
+   noProgress>=30?Math.min(240,30*Math.ceil((noProgress-29)/10)):0;
   await save({...updated,status:complete(after)?'PROJECT_COMPLETE_VERIFIED':retry?'BLOCKED_RETRY':'IN_PROGRESS',
    activeModule:null,lastModule:moduleId,lastExitCode:result.code,
    pendingBefore:oldPending,pendingAfter:newPending,reduced:improved,
-   stalled,lastFinishedAt:now(),notBefore:backoff?new Date(Date.now()+backoff*60000).toISOString():null,
+   stalled,consecutiveNoProgress:noProgress,lastFinishedAt:now(),
+   notBefore:backoff?new Date(Date.now()+backoff*60000).toISOString():null,
    logs:{outFile,errFile},moduleClosure:after?.completedModules??null});
   console.log(JSON.stringify({moduleId,exitCode:result.code,oldPending,newPending,improved,logs:[outFile,errFile]}));
  }catch(e){
