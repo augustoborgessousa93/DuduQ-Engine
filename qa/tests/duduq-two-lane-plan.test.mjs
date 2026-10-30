@@ -68,7 +68,8 @@ test('QA blockage in Y1M04 does not prevent independent Y1M06 generation',()=>{
   assert.equal(status,0,stderr);
   assert.equal(report.producer.nextModule,'Y1M06');
   assert.equal(report.integrator.nextModule,'Y1M04');
-  assert.equal(report.candidateAssetCount,2);
+  assert.equal(report.candidateAssetCount,1); // identical test PNG bytes across two manifests
+  assert.equal(report.candidateManifestEntriesCount,2);
   assert.equal(report.independentQaGreen,false);
   assert.equal(report.finished,false);
   assert.equal(report.integrator.deployAllowed,false);
@@ -101,6 +102,26 @@ test('decodable 16px RGBA PNG with matching SHA cannot count as official high-re
   assert.equal(row.candidate.validAssetCount,0);
   assert.equal(row.candidate.invalidAssets[0].verdict,'PNG_RESOLUTION_BELOW_MINIMUM');
   assert.equal(x.report.integrator.nextModule,'Y1M05');
+ }finally{fs.rmSync(root,{recursive:true,force:true})}
+});
+test('duplicate hash-bound bindings do not inflate generated-image progress',()=>{
+ const root=fixture();
+ try{
+  candidate(root,'Y1M04');
+  const before=run(root);assert.equal(before.status,0,before.stderr);
+  const p=path.join(root,'qa/media-candidates/y1m04-official-20261030/batch-manifest.json');
+  const manifest=JSON.parse(fs.readFileSync(p,'utf8'));
+  manifest.assets.push({...manifest.assets[0],assetKey:'duplicate-binding-only',
+   bindings:[{questionId:'Y1M04-Q002',mediaId:'IMG-Y1M04-Q002-A'}]});
+  fs.writeFileSync(p,JSON.stringify(manifest));
+  const after=run(root);assert.equal(after.status,0,after.stderr);
+  assert.equal(after.report.candidateAssetCount,1);
+  assert.equal(after.report.candidateManifestEntriesCount,2);
+  const b=before.report.modules.find(m=>m.moduleId==='Y1M04').candidate;
+  const a=after.report.modules.find(m=>m.moduleId==='Y1M04').candidate;
+  assert.equal(a.validAssetCount,2);
+  assert.equal(a.validUniquePngCount,1);
+  assert.equal(a.assetFingerprintSha256,b.assetFingerprintSha256);
  }finally{fs.rmSync(root,{recursive:true,force:true})}
 });
 test('candidate file hash mismatch never becomes a ready-to-integrate asset',()=>{
