@@ -145,6 +145,45 @@ try{
       null,{timeout:12500}).catch(()=>{});
     lateBubbleCount=await page.locator('.bubble-pop-playable').count();
    }
+   // Drag & Drop image tags can remain lazy or incomplete while the first
+   // mandatory spoken instruction is locked. Exercise the *existing* button
+   // and wait for the actual images to finish, rather than treating "1.85s
+   // after DOMContentLoaded" as proof that six PNGs are broken.
+   // A real 404, broken image after readiness, JS error or locked gate fails.
+   const dndRecovery={attempted:false,clicked:false,ready:false,clickError:null};
+   let dndVisual=null;
+   if(q.mechanic.startsWith('drag-drop')){
+    const initialState=visual.interactionState;
+    if(!['READY','ACTIVE'].includes(initialState)){
+     dndRecovery.attempted=true;
+     const btn=page.locator('.audio-button:visible:not([disabled])').first();
+     try{
+      await btn.click({timeout:3500});
+      dndRecovery.clicked=true;
+     }catch(e){dndRecovery.clickError=String(e.message||e).slice(0,200);}
+    }
+    await page.waitForFunction(()=>['READY','ACTIVE'].includes(
+      document.querySelector('#game')?.dataset?.duduqInteractionState||''
+    ),null,{timeout:12500}).catch(()=>{});
+    dndRecovery.ready=await page.evaluate(()=>['READY','ACTIVE'].includes(
+      document.querySelector('#game')?.dataset?.duduqInteractionState||''
+    ));
+    await page.waitForFunction(()=>{
+      const tags=[...document.images].filter(el=>
+        (el.currentSrc||el.getAttribute('src')||'').includes('/assets-duduq-review/'));
+      return tags.every(el=>el.complete&&el.naturalWidth>0);
+    },null,{timeout:9500}).catch(()=>{});
+    dndVisual=await page.evaluate(()=>{
+      const tags=[...document.images].filter(el=>
+        (el.currentSrc||el.getAttribute('src')||'').includes('/assets-duduq-review/'));
+      const loaded=tags.filter(el=>el.complete&&el.naturalWidth>0);
+      return {imageCount:tags.length,loadedImageCount:loaded.length,
+        brokenCandidateImages:tags.length-loaded.length,
+        unfinishedImages:tags.filter(el=>!(el.complete&&el.naturalWidth>0))
+         .slice(0,8).map(el=>({src:el.currentSrc||el.src,complete:el.complete,
+           naturalWidth:el.naturalWidth}))};
+    });
+   }
    const gateAfterWait=await page.evaluate(()=>document.querySelector('#game')?.dataset?.duduqInteractionState||'UNSET');
    audioRecovery.gateAfterClick=gateAfterWait;
    const row={module:q.module,id:q.id,mechanic:q.mechanic,
@@ -152,12 +191,12 @@ try{
      lateBubbleCount,gateAfterWait,audioRecovery,
      ...visual,errors:errors.slice(0,3),brokenImages:brokenImages.slice(0,8)};
    result.render.push(row);result.checkedMechanicRoutes++;
-   if(!response?.ok()||errors.length||brokenImages.length||visual.brokenCandidateImages){
+   if(!response?.ok()||errors.length||brokenImages.length||row.brokenCandidateImages){
     result.findings.push({module:q.module,question:q.id,kind:'BROWSER_IMAGE_OR_JS_ERROR',
       detail:{http:row.status,errors:row.errors,brokenImages:row.brokenImages,
         brokenCandidateImages:row.brokenCandidateImages}});
    }
-   if(q.mechanic.startsWith('drag-drop')&&q.pinnedCandidateReferences>0&&visual.loadedImageCount===0)
+   if(q.mechanic.startsWith('drag-drop')&&q.pinnedCandidateReferences>0&&row.loadedImageCount===0)
     result.findings.push({module:q.module,question:q.id,kind:'DND_REFERENCE_NOT_VISIBLE_NEEDS_VARIANT_REVIEW',
       detail:{pinnedRefs:q.pinnedCandidateReferences,route}});
    // Zero PNGs is NORMAL for Bubble Pop text/color bubbles. Empty interaction
@@ -185,7 +224,7 @@ console.log('DUDUQ_MIXED_MECHANICS_80_QUESTIONS='+JSON.stringify({checked:result
  probed:result.checkedMechanicRoutes,uniqueCandidateFiles:result.checkedUniqueImageFiles,
  summary:result.summary,findings:result.findings.slice(0,70)}));
 const critical=new Set(['MISSING_MEDIA_ID','CANDIDATE_WITHOUT_SHA256','IMAGE_HASH_MISMATCH','BROWSER_IMAGE_OR_JS_ERROR',
- 'BUBBLE_EMPTY_AFTER_READY','BUBBLE_STUCK_BEFORE_READY','BROWSER_PROBE_EXCEPTION']);
+ 'BUBBLE_EMPTY_AFTER_READY','BUBBLE_STUCK_BEFORE_READY','DND_AUDIO_GATE_NOT_READY','BROWSER_PROBE_EXCEPTION']);
 const fails=result.findings.filter(f=>critical.has(f.kind)||f.kind.startsWith('IMAGE_UNREADABLE:'));
 if(fails.length){
  console.error('DUDUQ_MIXED_MECHANICS_GATE_FAILED='+JSON.stringify({count:fails.length,examples:fails.slice(0,25)}));
