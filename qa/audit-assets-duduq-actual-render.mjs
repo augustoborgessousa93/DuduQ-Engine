@@ -21,8 +21,9 @@ try {
   page.on('requestfailed',r=>{if(!r.failure()?.errorText?.includes('ERR_ABORTED'))failures.push(r.url());});
   const route='/play/english/year-1/module-'+mm+'/';
   const response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:30000});
-  await page.locator('.duduq-intro-start-button').waitFor({timeout:20000});
-  await page.locator('.duduq-intro-start-button').click({timeout:10000});
+  const start=page.getByRole('button',{name:/iniciar jogo/i}).first();
+  await start.waitFor({state:'visible',timeout:20000});
+  await start.click({timeout:10000});
   await page.waitForURL(url=>url.pathname.includes('/play/')&&!url.pathname.includes('/english/year-1/module-'),{timeout:20000});
   await page.waitForTimeout(2000);
   const dom=await page.evaluate(()=>{
