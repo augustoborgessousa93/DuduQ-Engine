@@ -4,16 +4,31 @@
  */
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import path from 'node:path';
-import {collectQuestionMediaUsages} from './media-binding-usage-guard.mjs';
+// All registry media IDs, including Y2–Y5 IDs without IMG- prefix, are audited.
 const root=process.cwd(),dist=path.join(root,'dist-pages');
 const usage=new Map(),registry=JSON.parse(await readFile(path.join(dist,'content/english/media/media-registry.json'),'utf8'));
 const idx=new Map(registry.entries.map(e=>[e.mediaId,e]));
+function collectAll(q){
+  const moduleId=q.item_id.slice(0,5);
+  function walk(node){
+    if(!node||typeof node!=='object')return;
+    if(!Array.isArray(node)){
+      const ids=[...new Set(['assetId','mediaId','image_ref','imageRef'].map(k=>node[k]).filter(v=>typeof v==='string'&&idx.has(v)))];
+      for(const id of ids){
+        if(!usage.has(id))usage.set(id,[]);
+        usage.get(id).push({questionId:q.item_id,moduleId,semanticTarget:String(node.semanticTarget||'').trim().toLowerCase()});
+      }
+    }
+    for(const v of Object.values(node))if(v&&typeof v==='object')walk(v);
+  }
+  walk(q);
+}
 let questions=0;
 for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
  const mm=String(m).padStart(2,'0'),file=path.join(dist,'content/english/year-'+y+'/module-'+mm+'/questions.json');
  const doc=JSON.parse(await readFile(file,'utf8'));
  if(doc.moduleId!=='Y'+y+'M'+mm||doc.items?.length!==20)throw Error('NOT_CANONICAL_30x600');
- for(const item of doc.items){questions++;collectQuestionMediaUsages(item,usage);}
+ for(const item of doc.items){questions++;collectAll(item);}
 }
 if(questions!==600)throw Error('EXPECTED_600_QUESTIONS');
 const m=new Map(),missing=[];
