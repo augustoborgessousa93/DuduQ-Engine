@@ -58,3 +58,12 @@ O proprietário atribuiu ao **Codex** a execução completa das imagens oficiais
 **Leia `docs/qa/DUDUQ_CODEX_IMAGE_AUTOMATION.md` e cumpra seu contrato antes de alterar qualquer imagem, registro de mídias ou pipeline de geração.** Preserve integralmente as regras acima sobre Penpot, Gold Masters e homologação. Não transfira ao usuário tarefas manuais de geração no ChatGPT, download de imagens, cópia para o workspace ou comandos "CONTINUE". Não assuma acesso a APIs pagas, permissões ou ferramentas que a sessão não possui. Se geração nativa ou origem de arquivos estiver bloqueada, registre o impedimento, avance em trabalho independente e não declare integração ou conclusão falsas.
 
 O arquivo de instruções no GitHub **não inicia por si só uma sessão do Codex**. Execução de geração real deve ser verificada pelos PNGs gerados no workspace e pelos manifests, hashes, testes e commits.
+
+
+### Regra de encerramento: 30 módulos completos ou tarefa em andamento
+
+**EXIGÊNCIA EXPRESSA DO RESPONSÁVEL:** o Codex **não pode declarar missão concluída, encerrar o backlog ou abandonar a execução** enquanto existir **qualquer imagem provisória, não homologada ou referência quebrada em qualquer um dos 30 módulos/600 atividades**. Fazer o trabalho por lotes, mas não declarar um lote concluído como conclusão geral. Usar inventário canônico atualizado em cada rodada e verificar **todos os módulos**; meta final: `30/30` módulos sem pendência, `600/600` atividades íntegras, `provisionalOrBlockedReferencedIds=0`, `nonTemporaryUnverifiedReferencedIds=0` e QA pedagógica/visual e publicação verificadas.
+
+**Encerramento de uma sessão não é conclusão do projeto.** Se o tempo/limite do Codex terminar, gravar checkpoint e fila persistentes, preparar retomada pela infraestrutura oficialmente disponível e registrar `INCOMPLETE`/bloqueio específico. Um cron que só repete a mesma falha não conta como progresso. Não prometer execução contínua quando falta agente, credencial, integração, capacidade de geração ou aprovação humana; preservar a segurança e executar o trabalho independente possível. Não pedir "CONTINUE" nem transformar o usuário em operador manual.
+
+**Somente dar status `PROJECT_COMPLETE` com evidência rastreável** para todos os módulos e mídias; a validação técnica de PNG isolado não equivale a substituição no jogo ou homologação. Todo deploy/remoção exige os gates existentes e rollback, sem falsificar aprovações.
