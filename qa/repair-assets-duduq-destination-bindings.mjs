@@ -115,6 +115,7 @@ for(const [id,records] of occurrences){
  registry.entries[ri.get(id).i]=clone;
  report.applied.push({id,question,concept,path:asset.urlOrPath,hash:asset.sha256});
 }
+console.log('DUDUQ_REPAIR_DIAGNOSTIC='+JSON.stringify({sources:sourceMap.size,sourceKeys:[...sourceMap.keys()].slice(0,35),applied:report.applied.length,skipped:report.skipped.length,skippedSample:report.skipped.slice(0,40)}));
 if(!report.applied.length)throw Error('NO_UNPATCHED_DESTINATION_IDS_FOUND');
 const bytes=Buffer.from(JSON.stringify(registry,null,2)+'\n');
 await writeFile(path.join(DIST,registryRel),bytes);
