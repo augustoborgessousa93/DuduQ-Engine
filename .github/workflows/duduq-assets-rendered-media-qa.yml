@@ -1,0 +1,45 @@
+name: DUDUQ - Actual rendered image browser QA
+on:
+  push:
+    branches:
+      - integration/assets-duduq-resume-20261030
+    paths:
+      - "qa/audit-assets-duduq-actual-render.mjs"
+      - ".github/workflows/duduq-assets-rendered-media-qa.yml"
+permissions:
+  contents: read
+jobs:
+  rendered:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      CI: "true"
+      CF_PAGES_BRANCH: integration/assets-duduq-resume-20261030
+      BASE_URL: http://127.0.0.1:4175
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build current reviewed PNG + per occurrence rebasing
+        run: bash qa/build-v26-topic-first-paint-qa.sh
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local candidate artifact
+        run: |
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages >/tmp/duduq-image-render.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4175/ >/dev/null 2>&1 && break; sleep 1; done
+      - name: Inspect actual visuals on the first activity in all 4 modules
+        run: node qa/audit-assets-duduq-actual-render.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-real-rendered-media-diagnostic
+          retention-days: 21
+          if-no-files-found: warn
+          path: qa/results/assets-duduq-rendered-media/**
+      - run: echo "Media QA evidence only; production unchanged."

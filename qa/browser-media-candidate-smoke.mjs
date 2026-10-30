@@ -148,7 +148,7 @@ try {
     });
     record.boot=response?.ok() && record.before.htmlBodyTextLength>0 &&
       record.introStartClicked===true && record.after.gameRootPresent &&
-      (/\/play\/(drag-drop|target-shooter|matching|memory-quest|bubble-pop|smart-sentence)\//.test(new URL(record.navigatedUrl).pathname) ||
+      (/\/play\/(drag-drop-multimedia|drag-drop|target-shooter|matching|memory-quest|bubble-pop|smart-sentence)\//.test(new URL(record.navigatedUrl).pathname) ||
        record.after.iframeGamePresent || record.after.engineReady) &&
       errors.length===0 && badHttp.length===0 &&
       networkFailures.length===0 && record.after.brokenVisibleImages.length===0

@@ -1,0 +1,90 @@
+name: DUDUQ - Verify corrected public 4-module image mappings
+
+on:
+  push:
+    branches:
+      - integration/assets-duduq-resume-20261030
+    paths:
+      - ".github/workflows/duduq-corrected-media-live-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compare-live-questions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Read-only verify published preview media ID scopes and exact PNG bytes
+        env:
+          BASE_URL: https://82ba5ab0.duduq-engine-13a.pages.dev
+        run: |
+          node --input-type=module <<'NODE'
+          import {createHash} from 'node:crypto';
+          import assert from 'node:assert/strict';
+          const base=process.env.BASE_URL;
+          const fetchBytes=async(rel)=>{
+            const url=new URL(rel,base+'/');
+            const res=await fetch(url,{signal:AbortSignal.timeout(40000)});
+            if(!res.ok)throw Error('PUBLIC_QA_HTTP_'+res.status+':'+url);
+            return Buffer.from(await res.arrayBuffer());
+          };
+          const fetchJson=async rel=>JSON.parse((await fetchBytes(rel)).toString('utf8'));
+          const reg=await fetchJson('content/english/media/media-registry.json');
+          const registry=new Map(reg.entries.map(e=>[e.mediaId,e]));
+          assert.equal(registry.size,reg.entries.length,'DUPLICATED_MEDIA_ID');
+          let modules={Y1M02:0,Y1M03:0,Y1M04:0,Y1M06:0};
+          for(const module of Object.keys(modules)){
+            const y=module[1],m=module.slice(3);
+            const document=await fetchJson('content/english/year-'+y+'/module-'+m+'/questions.json');
+            assert.equal(document.moduleId,module,'MODULE_PAGE_WRONG');
+            assert.equal(document.items.length,20,'NOT_20_QUESTIONS');
+            const touched=[];
+            for(const q of document.items){
+              function walk(node){
+                if(!node||typeof node!=='object')return;
+                if(!Array.isArray(node)){
+                  for(const k of ['assetId','mediaId','image_ref','imageRef']){
+                    const id=node[k];
+                    if(typeof id!=='string'||!id.includes('-CTX-'))continue;
+                    const e=registry.get(id);
+                    assert(e?.temporary===true&&e?.provenance?.sourceRepository==='augustoborgessousa93/Assets-DuduQ','BROKEN_SCOPED_BINDING:'+id);
+                    assert(e.urlOrPath?.endsWith('.png'),'NOT_PNG:'+id);
+                    touched.push(id);
+                  }
+                }
+                for(const x of Object.values(node))if(x&&typeof x==='object')walk(x);
+              }
+              walk(q);
+            }
+            modules[module]=touched.length;
+            const route=await fetchBytes('play/english/year-'+y+'/module-'+m+'/');
+            assert(route.length>1000,'EMPTY_GAME_ROUTE:'+module);
+          }
+          for(const mod of ['Y1M02','Y1M03','Y1M06'])assert(modules[mod]>0,'NO_SCOPED_MEDIA_UPDATE:'+mod);
+          const caseEntry=registry.get('IMG-Y1M04-Q003-PENCIL-CASE');
+          assert(caseEntry?.provenance?.sourceRepository==='augustoborgessousa93/Assets-DuduQ'
+            && caseEntry?.urlOrPath?.endsWith('.png'),'PENCIL_CASE_STILL_PROVISIONAL');
+          const relevant=reg.entries.filter(e=>e.provenance?.sourceRepository==='augustoborgessousa93/Assets-DuduQ'
+            && e.integrationStatus==='CANDIDATE_PREVIEW_ONLY_PEDAGOGICAL_QA_PENDING');
+          const images=new Map();
+          for(const e of relevant){
+            if(!images.has(e.urlOrPath))images.set(e.urlOrPath,e.sha256);
+            assert.equal(images.get(e.urlOrPath),e.sha256,'HASH_CONFLICT');
+            assert(e.temporary===true,'CANDIDATE_MARKED_PRODUCTION');
+          }
+          assert.equal(images.size,32,'WRONG_UNIQUE_IMAGES');
+          for(const [path,expected] of images){
+            const data=await fetchBytes(path);
+            assert.equal(createHash('sha256').update(data).digest('hex'),expected,'PUBLIC_IMAGE_HASH_MISMATCH:'+path);
+          }
+          console.log('DUDUQ_PUBLIC_MEDIA_MAPPING_VERIFIED='+JSON.stringify({url:base,modules,
+            sourcePngs:images.size,mediaEntries:relevant.length,
+            pencilCase:caseEntry.urlOrPath,status:'TECHNICAL_PASS_PEDAGOGICAL_REVIEW_REQUIRED',
+            productionUntouched:true}));
+          NODE
+      - run: echo "No merge, no production deploy, no claim of pedagogical approval."

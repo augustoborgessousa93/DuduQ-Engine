@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "DUDUQ_ASSETS_EXACT_MODULE_BATCH_V1",
+  "sourceRepository": "augustoborgessousa93/Assets-DuduQ",
+  "sourceCommit": "658d94f08031820cfea5258a6f4e7c24f278df92",
+  "assets": [
+    {
+      "moduleId": "Y1M02",
+      "concept": "one",
+      "file": "number-01-one-um.png",
+      "gitBlob": "69797d76b6691c5a041a1eb58a70d6b198090893"
+    },
+    {
+      "moduleId": "Y1M02",
+      "concept": "two",
+      "file": "number-02-two-dois.png",
+      "gitBlob": "6cd661861d3c66e2e22826fd81040d97336d4a8e"
+    },
+    {
+      "moduleId": "Y1M02",
+      "concept": "three",
+      "file": "number-03-three-tres.png",
+      "gitBlob": "35df6fa3cf3af45a92a6c4e47a1e86fd3548abd4"
+    },
+    {
+      "moduleId": "Y1M02",
+      "concept": "four",
+      "file": "number-04-four-quatro.png",
+      "gitBlob": "c7d0f655038e7d33ea489a7a93209b9e757d4ed3"
+    },
+    {
+      "moduleId": "Y1M02",
+      "concept": "five",
+      "file": "number-05-five-cinco.png",
+      "gitBlob": "e09e3cc58271c667ba1c3f93eb03e76e22495ce3"
+    },
+    {
+      "moduleId": "Y1M02",
+      "concept": "six",
+      "file": "number-06-six-seis.png",
+      "gitBlob": "89e5d7c65b53c8b0afe102e42819cdff010c68b2"
+    },
+    {
+      "moduleId": "Y1M02",
+      "concept": "seven",
+      "file": "number-07-seven-sete.png",
+      "gitBlob": "5be78da55a68ba352537e08838442cf01a13e8d9"
+    },
+    {
+      "moduleId": "Y1M02",
+      "concept": "eight",
+      "file": "number-08-eight-oito.png",
+      "gitBlob": "604dc435bc2c26abaa71a715406fd8dcca79fcc5"
+    },
+    {
+      "moduleId": "Y1M02",
+      "concept": "nine",
+      "file": "number-09-nine-nove.png",
+      "gitBlob": "5b5effc4d24e4c5ee24ef9f4b3387cca023191f9"
+    },
+    {
+      "moduleId": "Y1M02",
+      "concept": "ten",
+      "file": "number-10-ten-dez.png",
+      "gitBlob": "734081fc405be227f02f6b0b4e95d8f4af2f86ec"
+    },
+    {
+      "moduleId": "Y1M03",
+      "concept": "red",
+      "file": "color-red-vermelho.png",
+      "gitBlob": "9c5fd365ad6fee630f695d2c403e6a02ba5fb4d6"
+    },
+    {
+      "moduleId": "Y1M03",
+      "concept": "blue",
+      "file": "color-blue-azul.png",
+      "gitBlob": "d1c5c6980118941b1f43131214a6dcc7d7e39761"
+    },
+    {
+      "moduleId": "Y1M03",
+      "concept": "green",
+      "file": "color-green-verde.png",
+      "gitBlob": "425907d66db6bd1e8fefb6846f3f17e9a86eece1"
+    },
+    {
+      "moduleId": "Y1M03",
+      "concept": "yellow",
+      "file": "color-yellow-amarelo.png",
+      "gitBlob": "d641e8582975e926fe49ea04c32f4817114f53f0"
+    },
+    {
+      "moduleId": "Y1M03",
+      "concept": "black",
+      "file": "color-black-preto.png",
+      "gitBlob": "e97d277f7df8fdb73b611f919fec34fca836bd8d"
+    },
+    {
+      "moduleId": "Y1M03",
+      "concept": "white",
+      "file": "color-white-branco.png",
+      "gitBlob": "d8b2da519e574a0c7c08e3d85a4e2db4348972c1"
+    },
+    {
+      "moduleId": "Y1M03",
+      "concept": "brown",
+      "file": "color-brown-marrom.png",
+      "gitBlob": "4ba5334007c4a8ac4ef4de3d87b03723e0523588"
+    },
+    {
+      "moduleId": "Y1M03",
+      "concept": "orange",
+      "file": "color orange-cor laranja.png",
+      "gitBlob": "364c9ccfda05f4440da566495b47c5c6a2993532"
+    },
+    {
+      "moduleId": "Y1M06",
+      "concept": "cat",
+      "file": "pet-cat-gato.png",
+      "gitBlob": "a78d1430c8a62a83b52726312c10f494d6491155"
+    },
+    {
+      "moduleId": "Y1M06",
+      "concept": "dog",
+      "file": "pet-dog-cachorro.png",
+      "gitBlob": "b2c39c9abd7e113e093151a1780cde0fc79a5d3c"
+    },
+    {
+      "moduleId": "Y1M06",
+      "concept": "fish",
+      "file": "pet-fish-peixe.png",
+      "gitBlob": "29b60c4e87bcd6cc0a5a4f2e7b7f4fada03a01fc"
+    },
+    {
+      "moduleId": "Y1M06",
+      "concept": "bird",
+      "file": "pet-bird-passaro.png",
+      "gitBlob": "1128475a8de84c4dbeb613fb798164f03d432342"
+    },
+    {
+      "moduleId": "Y1M06",
+      "concept": "rabbit",
+      "file": "pet-rabbit-coelho.png",
+      "gitBlob": "9421450b4ec44d4c39104d59e0e287a2b1c2ef7b"
+    },
+    {
+      "moduleId": "Y1M06",
+      "concept": "hamster",
+      "file": "pet-hamster.png",
+      "gitBlob": "c0f63853e7c1ab26360983f97c33fa2067ca1fc1"
+    },
+    {
+      "moduleId": "Y1M06",
+      "concept": "turtle",
+      "file": "pet-turtle-tartaruga.png",
+      "gitBlob": "c7cdf176515a397825a988064103a6c01a20030f"
+    }
+  ],
+  "policy": {
+    "imageModifications": "candidate-only",
+    "humanQA": "pending",
+    "productionDeploy": false,
+    "sourceProtected": true
+  }
+}
