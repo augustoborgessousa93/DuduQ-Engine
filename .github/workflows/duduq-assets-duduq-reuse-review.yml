@@ -66,7 +66,7 @@ jobs:
           bash qa/build-v26-topic-first-paint-qa.sh
           node --check qa/apply-assets-duduq-y1m04-review.mjs
           node qa/apply-assets-duduq-y1m04-review.mjs source-assets
-          node qa/audit-media-completion.mjs --output=qa/results/assets-reuse-closure.json
+          node qa/audit-media-completion.mjs dist-pages --output=qa/results/assets-reuse-closure.json
           node qa/check-media-module-closure.mjs --input=qa/results/assets-reuse-closure.json --output=qa/results/assets-reuse-module-closure.json
           node --input-type=module <<'NODE'
           import {readFileSync,existsSync} from 'node:fs';
