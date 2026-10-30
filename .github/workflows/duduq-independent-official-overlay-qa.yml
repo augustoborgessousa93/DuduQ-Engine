@@ -1,0 +1,141 @@
+name: DUDUQ - Independent Official Media Overlay QA
+
+on:
+  push:
+    branches:
+      - automation/duduq-media-source-only-fix-20261029
+    paths:
+      - ".github/workflows/duduq-independent-official-overlay-qa.yml"
+      - "qa/media-candidates/y1m04-official-20261030/**"
+      - "qa/media-candidates/y1m05-official-20261030/**"
+      - "qa/apply-y1m04-official-media-overlay.mjs"
+      - "qa/apply-y1m05-official-media-overlay.mjs"
+      - "qa/finalize-y1m04-official-media.mjs"
+      - "qa/finalize-y1m05-official-media.mjs"
+      - "qa/y1m04-official-media-browser-qa.mjs"
+      - "qa/y1m05-official-media-browser-qa.mjs"
+      - "qa/tests/verify-y1m04-official-media-overlay.mjs"
+      - "qa/tests/verify-y1m05-official-media-overlay.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duduq-independent-official-overlay-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  reproduce-two-reviewed-modules:
+    name: Rebuild and replay both Codex media overlays on Linux
+    runs-on: ubuntu-latest
+    timeout-minutes: 85
+    env:
+      CI: "true"
+      BASE_URL: http://127.0.0.1:4175
+    steps:
+      - name: Checkout isolated review branch without write credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install independent Chromium QA dependencies
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Build clean V26 from immutable source
+        run: |
+          bash qa/build-v26-topic-first-paint-qa.sh
+          node qa/verify-artifact.mjs
+
+      - name: Start isolated review-only HTTP server
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages > /tmp/duduq-overlay-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then
+              echo "ISOLATED_QA_HTTP_READY"
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/duduq-overlay-http.log
+          exit 1
+
+      - name: Reproduce Y1M04 candidate integration and all 20 Chromium question routes
+        run: |
+          node qa/apply-y1m04-official-media-overlay.mjs --apply
+          node qa/tests/verify-y1m04-official-media-overlay.mjs
+          node qa/y1m04-official-media-browser-qa.mjs
+          node qa/finalize-y1m04-official-media.mjs --apply
+          node qa/tests/verify-y1m04-official-media-overlay.mjs --require-official
+
+      - name: Reproduce Y1M05 candidate integration and all 20 Chromium question routes
+        run: |
+          node qa/apply-y1m05-official-media-overlay.mjs --apply
+          node qa/tests/verify-y1m05-official-media-overlay.mjs
+          node qa/verify-y1m05-official-media-build.mjs
+          node qa/y1m05-official-media-browser-qa.mjs
+          node qa/finalize-y1m05-official-media.mjs --apply
+          node qa/tests/verify-y1m05-official-media-overlay.mjs --require-official
+
+      - name: Reaudit all 30 modules and assert no false project completion
+        run: |
+          node qa/audit-media-completion.mjs
+          node qa/check-media-module-closure.mjs
+          node qa/media-safe-retirement.mjs --root=dist-pages --output=qa/results/media-safe-retirement-plan.json
+          node --input-type=module -e '
+            import {readFileSync} from "node:fs";
+            import assert from "node:assert/strict";
+            const inv=JSON.parse(readFileSync("qa/results/media-closure-inventory.json"));
+            const c=JSON.parse(readFileSync("qa/results/media-module-closure.json"));
+            const plan=JSON.parse(readFileSync("qa/results/media-safe-retirement-plan.json"));
+            assert.equal(inv.modules,30);
+            assert.equal(inv.activities,600);
+            assert.equal(c.modules,30);
+            assert.equal(c.activities,600);
+            assert.equal(c.distinctPendingMediaIds,954,"Independent Linux replay must match Codex checkpoint");
+            assert.equal(c.distinctVerifiedMediaIds,185);
+            assert.equal(c.completedModules,2);
+            assert.deepEqual(c.modulesDetail.filter(m=>m.complete).map(m=>m.moduleId).sort(),["Y1M04","Y1M05"]);
+            assert.equal(inv.byStatus?.BROKEN_ASSET||0,0);
+            assert.equal(inv.byStatus?.MISSING_REGISTRY||0,0);
+            assert.equal(plan.applied,false,"No retirement may occur");
+            assert.equal(c.status,"INCOMPLETE");
+            assert.equal(inv.finalCompletionPassed,false);
+            console.log(JSON.stringify({status:"PASS_REVIEW_ONLY",modules:30,activities:600,verified:185,pending:954,completedModules:2,productionDeployed:false}));
+          '
+          git diff --exit-code -- content/english functions/play/english core
+          echo "NO_PRODUCTION_DEPLOY_NO_MEDIA_DELETION_NO_GOLD_MASTER_CHANGE"
+
+      - name: Retain independent QA reports and real-browser screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-independent-overlay-qa-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/media-closure-inventory.json
+            qa/results/media-module-closure.json
+            qa/results/media-safe-retirement-plan.json
+            qa/results/y1m04-official-media-browser/**
+            qa/results/y1m05-official-media-browser/**
+            qa/results/y1m04-official-media-evidence.json
+            qa/results/y1m05-official-media-evidence.json
+            qa/results/y1m04-official-media-finalization.json
+            qa/results/y1m05-official-media-finalization.json
+            /tmp/duduq-overlay-http.log
+
+      - name: Explicit release boundary
+        if: always()
+        run: |
+          echo "Only ephemeral runner dist-pages is modified. No commit, merge, release, production deploy or deletion."
+          echo "This is independent technical/browser QA; it does not replace owner final pedagogical approval."
