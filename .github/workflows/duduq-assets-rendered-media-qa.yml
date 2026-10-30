@@ -1,5 +1,11 @@
 name: DUDUQ - Actual rendered image browser QA
 on:
+  pull_request:
+    branches:
+      - integration/assets-duduq-resume-20261030
+    paths:
+      - "qa/audit-assets-duduq-actual-render.mjs"
+      - ".github/workflows/duduq-assets-rendered-media-qa.yml"
   push:
     branches:
       - integration/assets-duduq-resume-20261030
