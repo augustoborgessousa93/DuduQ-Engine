@@ -14,12 +14,18 @@ const tab=Array.from({length:256},(_,i)=>{let v=i;for(let j=0;j<8;j++)v=(v&1)?(0
 function crc(b){let c=0xffffffff;for(const x of b)c=tab[(c^x)&255]^(c>>>8);return (c^0xffffffff)>>>0}
 function chunk(t,b){const h=Buffer.alloc(4),tail=Buffer.alloc(4),body=Buffer.concat([Buffer.from(t),b]);
  h.writeUInt32BE(b.length);tail.writeUInt32BE(crc(body));return Buffer.concat([h,body,tail])}
-function realPng(){
- const ih=Buffer.alloc(13);ih.writeUInt32BE(16,0);ih.writeUInt32BE(16,4);ih[8]=8;ih[9]=6;
- const lines=[];for(let yy=0;yy<16;yy++){lines.push(0);for(let xx=0;xx<16;xx++)
-  lines.push(133,52,22,xx>=4&&xx<12&&yy>=4&&yy<12?255:0)}
+function realPng(size=1024){
+ const ih=Buffer.alloc(13);ih.writeUInt32BE(size,0);ih.writeUInt32BE(size,4);ih[8]=8;ih[9]=6;
+ const pixels=Buffer.alloc(size*(size*4+1));let p=0;
+ for(let y=0;y<size;y++){
+  pixels[p++]=0;
+  for(let x=0;x<size;x++){
+   pixels[p++]=133;pixels[p++]=52;pixels[p++]=22;
+   pixels[p++]=x>=size/4&&x<3*size/4&&y>=size/4&&y<3*size/4?255:0;
+  }
+ }
  return Buffer.concat([Buffer.from('89504e470d0a1a0a','hex'),
-  chunk('IHDR',ih),chunk('IDAT',deflateSync(Buffer.from(lines))),chunk('IEND',Buffer.alloc(0))]);
+  chunk('IHDR',ih),chunk('IDAT',deflateSync(pixels)),chunk('IEND',Buffer.alloc(0))]);
 }
 
 const all=Array.from({length:5},(_,i)=>i+1).flatMap(y=>Array.from({length:6},(_,j)=>'Y'+y+'M'+String(j+1).padStart(2,'0')));
@@ -37,10 +43,10 @@ function fixture(){
   distinctPendingMediaIds:84,modulesDetail}));
  return root;
 }
-function candidate(root,mod,{shaWrong=false,truncated=false,review='MODEL_SEMANTIC_PRECHECK_PASSED',questionCount=20}={}){
+function candidate(root,mod,{shaWrong=false,truncated=false,size=1024,review='MODEL_SEMANTIC_PRECHECK_PASSED',questionCount=20}={}){
  const dir=path.join(root,'qa/media-candidates',mod.toLowerCase()+'-official-20261030');
  fs.mkdirSync(path.join(dir,'images'),{recursive:true});
- const png=truncated?Buffer.concat([Buffer.from('89504e470d0a1a0a','hex'),Buffer.alloc(18)]):realPng();
+ const png=truncated?Buffer.concat([Buffer.from('89504e470d0a1a0a','hex'),Buffer.alloc(18)]):realPng(size);
  fs.writeFileSync(path.join(dir,'images','A.png'),png);
  fs.writeFileSync(path.join(dir,'batch-manifest.json'),JSON.stringify({
   moduleId:mod,questionContractsReviewed:questionCount,productionApproved:false,
@@ -70,7 +76,7 @@ test('QA blockage in Y1M04 does not prevent independent Y1M06 generation',()=>{
  }finally{fs.rmSync(root,{recursive:true,force:true})}
 });
 test('positive fixture decodes a real transparent RGBA PNG with CRCs',()=>{
- const result=validateDuduqRgbaPng(realPng());assert.equal(result.width,16);
+ const result=validateDuduqRgbaPng(realPng(16));assert.equal(result.width,16);
  assert.ok(result.opaquePixels>0&&result.transparentPixels>0);
 });
 test('signature-only 26-byte fake PNG is rejected even when its SHA matches',()=>{
@@ -82,6 +88,18 @@ test('signature-only 26-byte fake PNG is rejected even when its SHA matches',()=
   const row=x.report.modules.find(m=>m.moduleId==='Y1M04');
   assert.equal(row.candidate.validAssetCount,0);
   assert.match(row.candidate.invalidAssets[0].verdict,/PNG_DECODE_FAILED/);
+  assert.equal(x.report.integrator.nextModule,'Y1M05');
+ }finally{fs.rmSync(root,{recursive:true,force:true})}
+});
+test('decodable 16px RGBA PNG with matching SHA cannot count as official high-resolution image',()=>{
+ const root=fixture();
+ try{
+  candidate(root,'Y1M04',{size:16});candidate(root,'Y1M05');
+  const x=run(root);assert.equal(x.status,0,x.stderr);
+  assert.equal(x.report.candidateAssetCount,1);
+  const row=x.report.modules.find(m=>m.moduleId==='Y1M04');
+  assert.equal(row.candidate.validAssetCount,0);
+  assert.equal(row.candidate.invalidAssets[0].verdict,'PNG_RESOLUTION_BELOW_MINIMUM');
   assert.equal(x.report.integrator.nextModule,'Y1M05');
  }finally{fs.rmSync(root,{recursive:true,force:true})}
 });
