@@ -83,3 +83,16 @@ Um relatório do **Codex Windows**, emitido após 21m40s de execução, confirmo
 - A ferramenta de ingestão é uma etapa de QA técnica (e não um gerador nem um importador para produção).
 - Se a sessão do Codex terminar, as instruções acima ficam no GitHub; **nenhum arquivo local é movido por esta documentação**. É preciso uma execução real do Codex ou outro agente com acesso ao Windows para operar aqueles arquivos.
 
+
+
+## Regra final de execução contínua — todos os 30 módulos
+
+**Determinação do proprietário (29/10/2026):** o Codex deve prosseguir por lotes, com retomada automática autorizada, **até remover/substituir todas as imagens provisórias REFERENCIADAS de todos os 30 módulos**. A conclusão de um lote, ano, QA técnico ou geração de PNGs não encerra a missão.
+
+**Protocolo de progresso por módulo:** em cada execução, gerar inventário canônico novo e apresentar `Y1M01` a `Y5M06` individualmente com `atividadeCount=20`, `provisionalReferencedCount`, `unverifiedReferencedCount`, `brokenReferencedCount`, `officialApprovedCount`. Um módulo só é `DONE` se as imagens referenciadas em suas 20 questões estiverem substituídas/validadas com evidência; IDs reutilizados devem ser auditados em todas as questões. Registrar alteração real de contagem antes/depois por lote, hashes e screenshots.
+
+**Estado global:** use `IN_PROGRESS` enquanto houver substituições executáveis; `BLOCKED` com diagnóstico e checkpoint somente quando não houver nenhuma ação segura possível com os acessos existentes; `PROJECT_COMPLETE` **somente** com 30/30 módulos `DONE`, 600/600 atividades válidas, 0 referências provisórias ou pendentes, 0 imagens sem QA, 0 caminhos quebrados, QA visual/pedagógica real, regressões e deploy verificados, rollback e limpeza segura documentados. Nunca transformar `BLOCKED` em `PROJECT_COMPLETE`.
+
+**Retomada:** antes de cada saída de sessão por orçamento de tempo, limite do agente ou interrupção, salvar checkpoint persistente, SHA da branch, último lote validado, próximo conceito/ID, contagens por módulo, logs, hashes, bloqueios precisos e comando interno do orquestrador. Implementar continuação pelas ferramentas e infraestrutura com permissão, sem loops infinitos, sem quedas silenciosas e **sem pedir ao usuário "CONTINUE" ou comandos manuais**. Uma sessão do Codex não pode permanecer rodando indefinidamente por simples instrução; a continuidade depende de agendamento/serviço real e deve ser evidenciada.
+
+**Priorização operacional:** aproveitar primeiro os 11 PNGs locais existentes, depois gerar novos conceitos seguros com ferramenta nativa de imagens disponível, integrar e validar por lote, atualizar todos os registros afetados, repetir até zerar. A ausência de conector do Drive não deve bloquear a produção dos demais conceitos. Nunca apagar provisórias ainda referenciadas, inventar QA, contornar autenticação ou publicar regressões.
