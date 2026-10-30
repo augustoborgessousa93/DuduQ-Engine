@@ -115,13 +115,15 @@ for(const d of dirs.filter(x=>x.isDirectory())){
   checked.push({assetKey:asset.assetKey||asset.file,sha256:asset.sha256||null,verdict});
  }
  for(const id of conflictingIds)validBindingIds.delete(id);
+ const pendingIds=new Set((byModule.get(m.moduleId)?.blockers||[]).map(x=>x.mediaId));
+ const verifiedPendingBindingIds=[...validBindingIds].filter(id=>pendingIds.has(id)).length;
  const validPngHashes=[...new Set(checked.filter(x=>x.verdict==='VALID').map(x=>x.sha256.toLowerCase()))].sort();
  const record={moduleId:m.moduleId,manifest:path.relative(root,manifestPath).replaceAll('\\','/'),
   manifestSha256:hash(raw),
   assetFingerprintSha256:hash(validPngHashes.join('|')),
   validPngHashes,validUniquePngCount:validPngHashes.length,
   assetCount:m.assets.length,validAssetCount:checked.filter(x=>x.verdict==='VALID').length,
-  verifiedBindingIds:validBindingIds.size,sourceBindingsTrusted:canonicalSourceTrusted,sourceBindingProblemCount:sourceBindingProblems.length,sourceBindingProblems:sourceBindingProblems.slice(0,50),
+  verifiedBindingIds:validBindingIds.size,verifiedPendingBindingIds,sourceBindingsTrusted:canonicalSourceTrusted,sourceBindingProblemCount:sourceBindingProblems.length,sourceBindingProblems:sourceBindingProblems.slice(0,50),
   invalidAssets:checked.filter(x=>x.verdict!=='VALID'),questionContractsReviewed:m.questionContractsReviewed||0,
   productionApproved:m.productionApproved===true,generatedEvidenceOnly:true};
  const prev=candidates.get(m.moduleId);
@@ -142,7 +144,7 @@ const records=all.map(moduleId=>{
  // ready media requires integration/QA work, never auto-promotion.
  const hasBundle=Boolean(cand);
  const candidateComplete=hasBundle&&cand.validAssetCount===cand.assetCount&&cand.questionContractsReviewed===20&&
-  cand.sourceBindingsTrusted&&(pending===0||cand.verifiedBindingIds>=pending);
+  cand.sourceBindingsTrusted&&(pending===0||cand.verifiedPendingBindingIds===pending);
  const generatorNeeded=!localComplete && !candidateComplete;
  const integratorNeeded=hasBundle && cand.validAssetCount>0;
  const stage=integratorNeeded?(candidateComplete?'CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA':'PARTIAL_CANDIDATES_QA'):
