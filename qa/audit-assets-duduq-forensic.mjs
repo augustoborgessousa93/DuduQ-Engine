@@ -22,7 +22,7 @@ for(const mod of mods){
        for(const id of ids){
          const e=ri.get(id);
          refs.push({id,concept:node.semanticTarget||null,nodeKeys:Object.keys(node),nodeContext:JSON.stringify(node).slice(0,500),
-           parentKeys:parent?Object.keys(parent).slice(0,14):[],temporary:e?.temporary??null,
+           parentKeys:parent?Object.keys(parent).slice(0,14):[],temporary:e?.temporary??null,kind:e?.kind||null,registryStatus:e?.status||null,entryKeys:e?Object.keys(e):[],registryPath:e?.urlOrPath||null,
            state:e?.integrationStatus||null,registrySemantic:e?.semantic||null,
            output:e?.urlOrPath||null,source:e?.provenance?.sourcePath||null});
        }
