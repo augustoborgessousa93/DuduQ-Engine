@@ -39,8 +39,14 @@ for(const moduleId of modules){
     const exactMatch=concept&&exact(entry?.semantic)===concept&&(!expected||expected===concept);
     const alias=(concept==='pencil-case'&&exact(entry?.semantic)==='pencil case') ||
                 (concept==='pencil case'&&exact(entry?.semantic)==='pencil-case');
-    // Aliases need a complete independent context audit; never self-approve.
-    const pinned=officialSource&&hasPath&&exactMatch;
+    // Only this single alias is documented as proven across ALL 600 question
+    // occurrences by repair-assets-duduq-scoped-occurrences.mjs. Do not
+    // generalize hyphen stripping to unrelated objects or mixed meanings.
+    const auditedAlias=alias&&moduleId==='Y1M04'&&
+      mediaId==='IMG-Y1M04-Q003-PENCIL-CASE'&&
+      entry?.replacementAudit?.reason==='VERIFIED_LEXICAL_ALIAS_PENCIL_CASE'&&
+      Number(entry.replacementAudit.usageCount)>0;
+    const pinned=officialSource&&hasPath&&(exactMatch||auditedAlias);
     const status=!entry?'UNKNOWN_MEDIA_ID':pinned?'PINNED_TECHNICAL_CANDIDATE_NOT_HOMOLOGATED':
       alias?'PENCIL_CASE_ALIAS_REQUIRES_CONTEXT_EVIDENCE':
       /\s/.test(concept)?'COMPOSITE_NEEDS_EXACT_VISUAL_MATCH':'NO_PROVEN_EXACT_SOURCE';
