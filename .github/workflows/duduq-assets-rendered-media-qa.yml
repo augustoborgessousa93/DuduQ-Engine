@@ -5,12 +5,14 @@ on:
       - integration/assets-duduq-resume-20261030
     paths:
       - "qa/audit-assets-duduq-actual-render.mjs"
+      - "qa/audit-mixed-mechanics-media.mjs"
       - ".github/workflows/duduq-assets-rendered-media-qa.yml"
   push:
     branches:
       - integration/assets-duduq-resume-20261030
     paths:
       - "qa/audit-assets-duduq-actual-render.mjs"
+      - "qa/audit-mixed-mechanics-media.mjs"
       - ".github/workflows/duduq-assets-rendered-media-qa.yml"
 permissions:
   contents: read
@@ -41,11 +43,17 @@ jobs:
           for i in {1..30}; do curl -fsS http://127.0.0.1:4175/ >/dev/null 2>&1 && break; sleep 1; done
       - name: Inspect actual visuals on the first activity in all 4 modules
         run: node qa/audit-assets-duduq-actual-render.mjs
+      - name: Audit all Bubble Pop and Drag Drop variants, 80-question matrix
+        run: |
+          node --check qa/audit-mixed-mechanics-media.mjs
+          node qa/audit-mixed-mechanics-media.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: duduq-real-rendered-media-diagnostic
           retention-days: 21
           if-no-files-found: warn
-          path: qa/results/assets-duduq-rendered-media/**
+          path: |
+            qa/results/assets-duduq-rendered-media/**
+            qa/results/assets-duduq-mixed-mechanics/**
       - run: echo "Media QA evidence only; production unchanged."
