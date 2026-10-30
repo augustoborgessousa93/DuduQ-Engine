@@ -26,12 +26,16 @@ if(semantic.moduleId!=='Y1M05'||semantic.reviewedQuestionCount!==20||semantic.po
 if(build.status!=='PASS'||build.modules!==30||build.activities!==600||build.y1m05?.bindingIds!==101||build.y1m05?.runtimePaths?.length!==10||
    build.sourceQuestionFilesModified!==false||build.goldMastersModified!==false||build.productionDeployed!==false)
   throw Error('Y1M05_REVIEW_BUILD_NOT_PASSED');
-if(browser.status!=='PASS'||browser.routes?.length!==20||browser.routes.some(x=>!x.pass)||browser.transport?.length!==10||browser.transport.some(x=>!x.pass)||
+if(browser.schemaVersion!=='DUDUQ_Y1M05_OFFICIAL_MEDIA_BROWSER_QA_V2'||browser.status!=='PASS'||
+   browser.routes?.length!==20||browser.routes.some(x=>!x.pass)||browser.transport?.length!==10||browser.transport.some(x=>!x.pass)||
    browser.gameplay?.pass!==true||browser.gameplay.incorrect?.state!=='incorrect'||browser.gameplay.correct?.state!=='correct'||
    browser.gameplay.incorrect?.observed?.targetVisible!==true||browser.gameplay.correct?.observed?.targetVisible!==true||
+   browser.responsiveGameplay?.length!==2||browser.responsiveGameplay.some(x=>!x.pass||x.input!=='native Playwright locator touch tap'||
+     x.hasTouch!==true||x.incorrect?.observed?.targetVisible!==true||x.correct?.observed?.targetVisible!==true||
+     x.fullyContainedOfficialImages!==x.officialImages?.length||x.overflowX!==0||x.iframeCount!==0)||
    browser.screenshots?.length!==3||browser.screenshots.some(x=>!x.pass||x.fullyContainedOfficialImages!==x.officialImageCount))
   throw Error('REAL_BROWSER_QA_NOT_PASSED');
-for(const item of [...browser.screenshots,...Object.values(browser.artifacts)]){
+for(const item of [...browser.screenshots,...Object.values(browser.artifacts),...browser.responsiveGameplay.map(x=>x.screenshot)]){
   const file=path.join(root,item.path),bytes=await readFile(file);
   if(hash(bytes)!==item.sha256||(await stat(file)).size!==item.bytes)throw Error('BROWSER_EVIDENCE_HASH_MISMATCH:'+item.path);
 }
@@ -62,7 +66,8 @@ const evidence={
   buildQa:{status:'PASS',path:path.relative(root,buildPath).replaceAll('\\','/'),sha256:hash(buildBytes),strategy:build.buildStrategy,
     compiledManifestEntries:build.compiledManifestEntries,modules:30,activities:600},
   browserQa:{status:'PASS',path:path.relative(root,browserPath).replaceAll('\\','/'),sha256:hash(browserBytes),
-    routes:20,transportPaths:10,nativePointerInput:true,incorrectTransition:true,correctTransition:true,zeroIframes:true,
+    routes:20,transportPaths:10,nativePointerInput:true,nativeTouchInput:true,incorrectTransition:true,correctTransition:true,zeroIframes:true,
+    touchViewports:browser.responsiveGameplay.map(x=>({name:x.name,viewport:x.viewport,input:x.input,pass:x.pass,screenshot:x.screenshot})),
     screenshots:browser.screenshots,video:browser.artifacts.video,trace:browser.artifacts.trace},
   goldMastersModified:false,sourceQuestionsModified:false,productionDeployed:false,
   rollback:'Rebuild the immutable V26 review artifact; this Y1M05 media overlay is compiled-review-only.'
@@ -89,7 +94,7 @@ if(entries.has(evidenceRel))lines[entries.get(evidenceRel).i]=evidenceRel+' '+ev
 const nextIntegrity=Buffer.from(lines.join('\n')+'\n');
 const result={schemaVersion:'DUDUQ_Y1M05_OFFICIAL_MEDIA_FINALIZATION_V1',status:apply?'READY_TO_APPLY':'PREFLIGHT_PASS',
   moduleId:'Y1M05',mediaIds:101,uniquePngs:10,runtimePaths:10,questions:20,occurrenceScopedSplits:5,globalActivitiesVerified:600,
-  browserRoutes:20,screenshots:3,nativePointerGameplay:true,evidenceSha256,productionDeployed:false,goldMastersModified:false};
+  browserRoutes:20,screenshots:3,nativePointerGameplay:true,nativeTouchGameplay:true,evidenceSha256,productionDeployed:false,goldMastersModified:false};
 if(!apply){console.log(JSON.stringify(result,null,2));process.exit(0);}
 
 let evidenceCreated=false;

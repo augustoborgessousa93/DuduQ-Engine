@@ -48,6 +48,8 @@
   "questionContractsReviewed": 20,
   "preservesAnswerKeysAndMechanics": true,
   "productionApproved": false,
+  "sourceRegistryRebaseEvidence": "source-registry-rebase.json",
+  "sourceRegistryRebaseEvidenceSha256": "adfec1c7da9636205f43ae57966342b84520ccdd0df10ca8892c867220d3bf42",
   "assets": [
     {
       "assetKey": "Y1M05-OFFICIAL-HEAD",

@@ -25,10 +25,10 @@ if(questions.length!==20||bindingIds.size!==101||expectedPaths.size!==10||new Se
 await mkdir(out,{recursive:true});
 const views={desktop:{width:1366,height:768},tablet:{width:768,height:1024},mobile:{width:390,height:844}};
 const routeFor=q=>'/play/'+(q.mechanicId==='smart-sentence-complete'?'smart-sentence':q.mechanicId)+'/?duduqModule=Y1M05&duduqItem='+q.item_id+'&qaSeed=20261030';
-const report={schemaVersion:'DUDUQ_Y1M05_OFFICIAL_MEDIA_BROWSER_QA_V1',createdAt:new Date().toISOString(),
-  status:'RUNNING',base,moduleId:'Y1M05',actualBrowser:'PLAYWRIGHT_CHROMIUM',nativePointerInput:true,
+const report={schemaVersion:'DUDUQ_Y1M05_OFFICIAL_MEDIA_BROWSER_QA_V2',createdAt:new Date().toISOString(),
+  status:'RUNNING',base,moduleId:'Y1M05',actualBrowser:'PLAYWRIGHT_CHROMIUM',nativePointerInput:true,nativeTouchInput:true,
   sourcePendingIds:101,postSplitIds:101,usageRecords:101,uniquePngHashes:10,runtimePngPaths:10,
-  productionDeployed:false,goldMastersModified:false,routes:[],transport:[],gameplay:null,screenshots:[],artifacts:{}};
+  productionDeployed:false,goldMastersModified:false,routes:[],transport:[],gameplay:null,responsiveGameplay:[],screenshots:[],artifacts:{}};
 let browser;
 
 function diagnostics(page){
@@ -45,6 +45,15 @@ async function pointerClick(page,locator,label,events){
   const point={x:box.x+box.width/2,y:box.y+box.height/2};
   await page.mouse.move(point.x,point.y,{steps:3});await page.mouse.down();await page.mouse.up();
   events?.push({label,point:{x:Number(point.x.toFixed(1)),y:Number(point.y.toFixed(1))},input:'Playwright mouse pointer'});
+}
+async function touchTap(page,locator,label,events){
+  await locator.waitFor({state:'visible',timeout:10000});
+  await locator.scrollIntoViewIfNeeded();
+  const box=await locator.boundingBox();
+  if(!box||box.width<2||box.height<2)throw Error('TOUCH_TARGET_NOT_VISIBLE:'+label);
+  const point={x:box.x+box.width/2,y:box.y+box.height/2};
+  await locator.tap({position:{x:box.width/2,y:box.height/2}});
+  events?.push({label,point:{x:Number(point.x.toFixed(1)),y:Number(point.y.toFixed(1))},input:'Playwright locator touch tap'});
 }
 const targetByAlt=(page,alt)=>page.locator('.target-shooter-target').filter({has:page.locator(`img[alt="${alt}"]`)});
 async function observeVisibleResult(page,answerAlt,expectedState,label){
@@ -66,10 +75,10 @@ async function observeVisibleResult(page,answerAlt,expectedState,label){
     [expectedState,observerKey],{timeout:25000});
   return page.evaluate(key=>{const item=window.__duduqQaVisibleMutationLog[key];item.observer.disconnect();return item.log;},observerKey);
 }
-async function unlockTargetShooter(page,events){
+async function unlockTargetShooter(page,events,activate=pointerClick){
   const audio=page.locator('.audio-button').first();
-  await pointerClick(page,audio,'instruction-audio-recovery',events);await page.waitForTimeout(700);
-  await pointerClick(page,audio,'instruction-audio-play',events);
+  await activate(page,audio,'instruction-audio-recovery',events);await page.waitForTimeout(700);
+  await activate(page,audio,'instruction-audio-play',events);
   await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY'&&
     !document.querySelector('.target-shooter-target')?.hasAttribute('inert'),null,{timeout:25000});
 }
@@ -97,6 +106,60 @@ async function officialImages(page){
       visible:img.complete&&img.naturalWidth>0&&cs.display!=='none'&&cs.visibility!=='hidden'&&Number(cs.opacity)>0&&r.width>=20&&r.height>=20,
       intersectsViewport:r.right>0&&r.bottom>0&&r.left<innerWidth&&r.top<innerHeight,objectFit:cs.objectFit};
   }));
+}
+
+async function runTouchGameplay(browser,{name,viewport,route}){
+  const context=await browser.newContext({viewport,hasTouch:true});
+  const page=await context.newPage(),diag=diagnostics(page),events=[];
+  try{
+    const response=await page.goto(route,{waitUntil:'domcontentloaded',timeout:40000});
+    await page.waitForTimeout(700);await unlockTargetShooter(page,events,touchTap);
+    const images=await officialImages(page);
+
+    await touchTap(page,targetByAlt(page,'hands'),name+'-select-incorrect-hands',events);
+    await page.waitForFunction(()=>{
+      const target=[...document.querySelectorAll('.target-shooter-target')].find(x=>x.querySelector('.target-shooter-target__animal')?.alt==='hands');
+      return target&&['selected','incorrect'].includes(target.dataset.gameplayState||'');
+    },null,{timeout:10000});
+    const incorrectTransitions=await observeVisibleResult(page,'hands','incorrect',name+'-observe-incorrect-hands');
+    const incorrectObserved=[...incorrectTransitions].reverse().find(x=>x.targetState==='incorrect'&&x.targetVisible&&x.feedback==='incorrect'&&!x.ribbonHidden);
+    if(!incorrectObserved)throw Error('TOUCH_VISIBLE_INCORRECT_TRANSITION_NOT_OBSERVED:'+name);
+    const incorrect={state:'incorrect',observed:incorrectObserved,transitions:incorrectTransitions,
+      currentState:await targetByAlt(page,'hands').getAttribute('data-gameplay-state'),
+      feedback:await page.locator('.feedback-ribbon').evaluate(e=>({hidden:e.hidden,type:e.dataset.feedback,text:e.textContent.replace(/\s+/g,' ').trim()})),
+      interactionState:await page.locator('#game').getAttribute('data-duduq-interaction-state')};
+    if(incorrect.interactionState==='AWAITING_RETRY'&&!incorrect.feedback.hidden)
+      await touchTap(page,page.locator('.feedback-action'),name+'-retry-after-incorrect',events);
+    await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY'&&
+      ![...document.querySelectorAll('.target-shooter-target')].some(x=>x.dataset.gameplayState==='incorrect'),null,{timeout:15000});
+
+    await touchTap(page,targetByAlt(page,'head'),name+'-select-correct-head',events);
+    await page.waitForFunction(()=>{
+      const target=[...document.querySelectorAll('.target-shooter-target')].find(x=>x.querySelector('.target-shooter-target__animal')?.alt==='head');
+      return target&&['selected','correct'].includes(target.dataset.gameplayState||'');
+    },null,{timeout:10000});
+    const correctTransitions=await observeVisibleResult(page,'head','correct',name+'-observe-correct-head');
+    const correctObserved=[...correctTransitions].reverse().find(x=>x.targetState==='correct'&&x.targetVisible&&x.feedback==='correct'&&!x.ribbonHidden);
+    if(!correctObserved)throw Error('TOUCH_VISIBLE_CORRECT_TRANSITION_NOT_OBSERVED:'+name);
+    const correct={state:'correct',observed:correctObserved,transitions:correctTransitions,
+      currentState:await targetByAlt(page,'head').getAttribute('data-gameplay-state'),
+      feedback:await page.locator('.feedback-ribbon').evaluate(e=>({hidden:e.hidden,type:e.dataset.feedback,text:e.textContent.replace(/\s+/g,' ').trim()})),
+      interactionState:await page.locator('#game').getAttribute('data-duduq-interaction-state')};
+    const overflowX=await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth)),iframeCount=await page.locator('iframe').count();
+    const screenshotPath=path.join(out,name+'-touch-y1m05-q001-correct.png');
+    await page.screenshot({path:screenshotPath,fullPage:false});
+    const screenshotBytes=await readFile(screenshotPath);
+    const fullyContainedOfficialImages=images.filter(x=>x.rect.x>=0&&x.rect.y>=0&&x.rect.right<=viewport.width&&x.rect.bottom<=viewport.height).length;
+    const result={name,viewport,questionId:'Y1M05-Q001',mechanicId:'target-shooter',input:'native Playwright locator touch tap',
+      hasTouch:true,httpStatus:response?.status()??null,incorrect,correct,touchEvents:events,officialImages:images,overflowX,iframeCount,
+      fullyContainedOfficialImages,
+      pageErrors:diag.pageErrors,httpFailures:diag.httpFailures,requestFailures:diag.requestFailures,
+      screenshot:{path:path.relative(root,screenshotPath).replaceAll('\\','/'),sha256:hash(screenshotBytes),bytes:screenshotBytes.length}};
+    result.pass=response?.status()===200&&incorrect.observed.targetVisible===true&&correct.observed.targetVisible===true&&events.length>=5&&
+      images.length>=4&&fullyContainedOfficialImages===images.length&&images.some(x=>x.alt==='head')&&images.some(x=>x.alt==='hands')&&overflowX===0&&iframeCount===0&&
+      !diag.pageErrors.length&&!diag.httpFailures.length&&!diag.requestFailures.length;
+    return result;
+  }finally{await page.close().catch(()=>{});await context.close().catch(()=>{});}
 }
 
 try{
@@ -174,6 +237,14 @@ try{
   await page.close();const videoPath=path.join(out,'y1m05-q001-pointer-gameplay.webm');await video.saveAs(videoPath);await gameContext.close();
   report.artifacts.video={path:path.relative(root,videoPath).replaceAll('\\','/'),sha256:hash(await readFile(videoPath)),bytes:(await stat(videoPath)).size};
 
+  for(const touchCase of [
+    {name:'tablet-768x1024',viewport:views.tablet},
+    {name:'mobile-390x844',viewport:views.mobile}
+  ]){
+    const touchResult=await runTouchGameplay(browser,{...touchCase,route:gameplayRoute});report.responsiveGameplay.push(touchResult);
+    if(!touchResult.pass)throw Error('REAL_TOUCH_GAMEPLAY_QA_FAILED:'+touchCase.name+':'+JSON.stringify(touchResult).slice(0,2400));
+  }
+
   const traceContext=await browser.newContext({viewport:views.desktop});
   await traceContext.tracing.start({screenshots:false,snapshots:false,sources:false,title:'Y1M05 Q001 companion pointer action trace'});
   const tracePage=await traceContext.newPage(),traceEvents=[];
@@ -214,5 +285,6 @@ finally{
   await browser?.close().catch(()=>{});report.finishedAt=new Date().toISOString();await writeFile(reportPath,JSON.stringify(report,null,2)+'\n');
   console.log(JSON.stringify({status:report.status,report:path.relative(root,reportPath).replaceAll('\\','/'),routes:report.routes.length,
     passedRoutes:report.routes.filter(x=>x.pass).length,transport:report.transport.filter(x=>x.pass).length,
-    gameplay:report.gameplay?.pass||false,screenshots:report.screenshots.length,error:report.error||null}));
+    gameplay:report.gameplay?.pass||false,touchGameplay:report.responsiveGameplay.filter(x=>x.pass).length,
+    screenshots:report.screenshots.length,error:report.error||null}));
 }
