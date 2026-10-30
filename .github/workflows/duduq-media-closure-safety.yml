@@ -77,6 +77,12 @@ jobs:
           node qa/media-safe-retirement.mjs --root=dist-pages --output=qa/results/media-safe-retirement-plan.json
           node qa/check-media-module-closure.mjs --input=qa/results/media-closure-inventory.json --output=qa/results/media-module-closure.json
           node qa/plan-shared-media-splits.mjs --root=dist-pages --output=qa/results/shared-media-split-plan.json
+      - name: Verify Y1M05 source-registry rebase against immutable V26
+        run: |
+          node --check qa/verify-y1m05-source-registry-rebase.mjs
+          node --check qa/tests/verify-y1m05-source-registry-rebase.test.mjs
+          node --test qa/tests/verify-y1m05-source-registry-rebase.test.mjs
+          node qa/verify-y1m05-source-registry-rebase.mjs
       - name: Retain QA closure evidence
         if: always()
         uses: actions/upload-artifact@v4
