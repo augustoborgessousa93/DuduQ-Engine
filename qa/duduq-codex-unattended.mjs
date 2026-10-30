@@ -87,23 +87,54 @@ function choose(c,s){
  return (pending.length?pending:order).sort((a,b)=>
   (s.stalled?.[a]||0)-(s.stalled?.[b]||0)||order.indexOf(a)-order.indexOf(b))[0];
 }
-function instruction(mod,c){
- return [
-  'DUDUQ ENGLISH: UNATTENDED MODULE EXECUTION. Current module: '+mod+'.',
-  'Reference current audited pending IDs: '+(c?.distinctPendingMediaIds??'UNKNOWN')+'.',
-  'Read AGENTS.md, docs/qa/DUDUQ_CODEX_IMAGE_AUTOMATION.md and latest local Codex checkpoint.',
-  'Work only in this isolated review worktree, preserving source files, Gold Masters and production.',
-  'FIRST PRIORITY: create and INTEGRATE actual new official images into the playable game for ALL pending question usages of module '+mod+'.',
-  'Use legitimate, enabled native OpenAI image generator; never claim a fake, technical-only or unverified asset is official.',
-  'Preserve all 600 questions, answer keys and mechanics. Split shared IDs only at actual question/option occurrence after semantic review.',
-  'Do not redo existing PNGs or preflights. Reuse candidate files when quality and original source are demonstrated.',
-  'Fix visible pixels, cutoffs, empty images, wrong semantics; update authoritative registry/manifest/QA overlay consistently.',
-  'Run semantic guards, build, real browser QA including correct/incorrect gameplay and 3 viewport screenshots.',
-  'When full QA passes for real media, checkpoint/commit/push ONLY to review branch; do not merge, deploy production or delete referenced images.',
-  'If a gate is blocked, save exact reason; continue independent useful module work. Never ask owner to copy files or send CONTINUE.',
-  'After each run write qa/results/media-module-closure.json from a fresh canonical audit and persist detailed checkpoint.',
-  'Only say PROJECT_COMPLETE if 30/30, 600/600, zero provisórias/unverified, QA, rollback and release are genuinely proven.',
-  'The Windows Task Scheduler will start another attempt. Work as far as possible this time, then exit normally.'
+function queuePlan(){
+ // Recalculate available candidates and independent module queues on every
+ // attempt; if a queue cannot be verified, fail closed rather than guess.
+ const report=run(process.execPath,['qa/duduq-two-lane-plan.mjs']);
+ const parsed=JSON.parse(report);
+ if(parsed.status!=='TWO_LANES_READY_FOR_ORCHESTRATION')throw Error('INVALID_TWO_LANE_PLANNER_STATUS');
+ return JSON.parse(fsSync.readFileSync(path.join(root,'qa/results/media-two-lane-plan.json'),'utf8'));
+}
+function pickFromLane(plan,lane,state){
+ const work=plan.modules.filter(x=>lane==='generation'?x.needsGeneration:x.needsIntegrationOrQA);
+ if(!work.length)return null;
+ const remembered=lane==='generation'?state.lastGeneratedModule:state.lastIntegratedModule;
+ const stalled=state.stalled||{};
+ if(remembered&&work.some(x=>x.moduleId===remembered)&&(stalled[remembered]||0)<3)return remembered;
+ const priority=lane==='generation'?
+  ['Y1M06',...order.filter(x=>x!=='Y1M06')]:['Y1M04','Y1M05',...order.filter(x=>!['Y1M04','Y1M05'].includes(x))];
+ return work.sort((a,b)=>(stalled[a.moduleId]||0)-(stalled[b.moduleId]||0)||
+  priority.indexOf(a.moduleId)-priority.indexOf(b.moduleId))[0].moduleId;
+}
+function instruction(mod,c,lane){
+ const header=[
+  'DUDUQ ENGLISH: UNATTENDED TWO-LANE EXECUTION. ACTIVE LANE: '+lane+'. Current module: '+mod+'.',
+  'Last audited global pending media IDs: '+(c?.distinctPendingMediaIds??'UNKNOWN')+'.',
+  'Read AGENTS.md, docs/qa/DUDUQ_CODEX_IMAGE_AUTOMATION.md and latest local checkpoint.',
+  'Protect Gold Masters, source question contracts, production and the original dirty workspace.',
+  'No manual CONTINUE, no subscription/API purchases, no false approval, no production merge/deploy.',
+  'Do not run a second Codex process: the Windows scheduler serializes both independent lanes in this safe rollout.'
+ ];
+ const producer=[
+  'PRODUCTION LANE ONLY: generate EVERY remaining needed pedagogical PNG for '+mod+' using the real enabled Codex image generator.',
+  'Inventory the actual 20 questions and all semantic targets first. Reuse pre-existing original PNGs when verified. Never create ungrounded or duplicate concepts.',
+  'Generate 3D premium child-friendly concept assets with real alpha and subject filling the canvas; one file per concept, no wrong distractors.',
+  'Write candidate PNGs, original generation provenance, SHA-256, semantic evidence and per-question binding plans ONLY under qa/media-candidates/ in a module-specific batch.',
+  'Do NOT apply or finalize media overlays, modify runtime/registry/question JSON, set approval flags, run deployment, or remove existing referenced assets.',
+  'A candidate is not an integrated official image. Save an idempotent checkpoint, record generated assets, commit/push safe candidate files to the isolated review branch.',
+  'On image generation limits, record BLOCKED_GENERATOR, proceed with unblocked concepts and exit normally for future resumption.'
+ ];
+ const integrator=[
+  'INTEGRATION/QA LANE ONLY: take already-generated, hash-verified PNG candidates for '+mod+'. Do not spend time creating next-module PNGs in this lane.',
+  'Fix semantic per-occurrence shared media IDs, keep all answer keys and mechanics, integrate QA overlay and registry/manifest in the isolated compiled game.',
+  'Run semantic validators and real browser gameplay with mouse/touch at desktop/tablet/mobile; verify both correct and incorrect feedback and transport hashes.',
+  'Investigate the known Y1M04 Target Shooter Q002 CONFIRMAR/CONTINUAR race and Y1M05 source registry hash pin WITHOUT weakening gates or forging source hashes.',
+  'Use Linux GitHub Actions independent replay after committing QA changes. A green baseline V26 is NOT proof of integrated PNGs.',
+  'Commit/push safe QA corrections to review only; save precise checkpoint of module, verified PNG hashes, tests, CI URL, blockers and next integration target.',
+  'If the QA lane is blocked, record the exact failure and EXIT this invocation without stopping the independent generation queue.'
+ ];
+ return [...header,...(lane==='generation'?producer:integrator),
+ 'After the invocation, the scheduler will plan the OTHER lane. Do not report PROJECT_COMPLETE unless 30/30 modules, 600 activities, zero provisional/unverified media and release gates are independently proven.'
  ].join('\n');
 }
 async function codex(binary,taskPrompt,stdoutPath,stderrPath){
@@ -132,15 +163,35 @@ async function once(){
   if(state.notBefore&&Date.now()<Date.parse(state.notBefore)){
    console.log('BACKOFF_UNTIL:'+state.notBefore);return;
   }
-  const moduleId=choose(before,state),id=now().replace(/[^0-9]/g,'').slice(0,14)+'-'+String(state.runs+1);
+  const beforePlan=queuePlan();
+  const hasGeneration=beforePlan.producer.queuedModules>0;
+  const hasIntegration=beforePlan.integrator.queuedModules>0;
+  if(!hasGeneration&&!hasIntegration){
+   await save({...state,status:'NO_QUEUED_WORK_NEEDS_INDEPENDENT_RELEASE_QA',notBefore:
+    new Date(Date.now()+60*60*1000).toISOString()});
+   console.log('NO_TWO_LANE_WORK: independent QA and release completion require separate proof');return;
+  }
+  const lane=hasGeneration&&hasIntegration?
+   (state.lastLane==='generation'?'integration':'generation'):
+   (hasGeneration?'generation':'integration');
+  const moduleId=pickFromLane(beforePlan,lane,state);
+  if(!moduleId)throw Error('TWO_LANE_QUEUE_EMPTY_INCONSISTENT');
+  const id=now().replace(/[^0-9]/g,'').slice(0,14)+'-'+String(state.runs+1);
   const outFile=path.join(logs,id+'.jsonl'),errFile=path.join(logs,id+'.stderr.log');
-  await save({...state,status:'IN_PROGRESS',runs:state.runs+1,activeModule:moduleId,
+  await save({...state,status:'IN_PROGRESS',runs:state.runs+1,activeModule:moduleId,activeLane:lane,
    startedAt:now(),beforePending:before?.distinctPendingMediaIds??null});
-  const result=await codex(binary,instruction(moduleId,before),outFile,errFile);
+  const result=await codex(binary,instruction(moduleId,before,lane),outFile,errFile);
   const after=await closure(),oldPending=before?.distinctPendingMediaIds??null,newPending=after?.distinctPendingMediaIds??null;
+  const afterPlan=queuePlan();
   const beforeMod=before?.modulesDetail?.find(m=>m.moduleId===moduleId);
   const afterMod=after?.modulesDetail?.find(m=>m.moduleId===moduleId);
-  const improved=(oldPending!==null&&newPending!==null&&newPending<oldPending)||
+  const beforeCandidate=beforePlan.modules.find(m=>m.moduleId===moduleId)?.candidate;
+  const afterCandidate=afterPlan.modules.find(m=>m.moduleId===moduleId)?.candidate;
+  const newImageEvidence=lane==='generation'&&
+   ((afterCandidate?.validAssetCount||0)>(beforeCandidate?.validAssetCount||0)||
+    ((afterCandidate?.validAssetCount||0)>0 && afterCandidate?.manifestSha256!==beforeCandidate?.manifestSha256));
+  const improved=newImageEvidence||
+   (oldPending!==null&&newPending!==null&&newPending<oldPending)||
    (after?.completedModules??0)>(before?.completedModules??0)||
    (Number(afterMod?.verifiedReferencedIds)||0)>(Number(beforeMod?.verifiedReferencedIds)||0);
   const updated=await load(),stalled={...(updated.stalled||{})};
@@ -152,12 +203,17 @@ async function once(){
   const backoff=retry?Math.min(360,30*stalled[moduleId]):
    noProgress>=30?Math.min(240,30*Math.ceil((noProgress-29)/10)):0;
   await save({...updated,status:complete(after)?'PROJECT_COMPLETE_VERIFIED':retry?'BLOCKED_RETRY':'IN_PROGRESS',
-   activeModule:null,lastModule:moduleId,lastExitCode:result.code,
+   activeModule:null,activeLane:null,lastLane:lane,
+   lastGeneratedModule:lane==='generation'?moduleId:updated.lastGeneratedModule,
+   lastIntegratedModule:lane==='integration'?moduleId:updated.lastIntegratedModule,
+   lastModule:moduleId,lastExitCode:result.code,
    pendingBefore:oldPending,pendingAfter:newPending,reduced:improved,
    stalled,consecutiveNoProgress:noProgress,lastFinishedAt:now(),
    notBefore:backoff?new Date(Date.now()+backoff*60000).toISOString():null,
    logs:{outFile,errFile},moduleClosure:after?.completedModules??null});
-  console.log(JSON.stringify({moduleId,exitCode:result.code,oldPending,newPending,improved,logs:[outFile,errFile]}));
+  console.log(JSON.stringify({lane,moduleId,exitCode:result.code,oldPending,newPending,
+   candidateAssetsBefore:beforePlan.candidateAssetCount,
+   candidateAssetsAfter:afterPlan.candidateAssetCount,newImageEvidence,improved,logs:[outFile,errFile]}));
  }catch(e){
   const prev=await load();
   const prior=Number(prev.failedAttempts||0)+1;
