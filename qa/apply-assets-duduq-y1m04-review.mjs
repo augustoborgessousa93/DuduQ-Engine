@@ -26,7 +26,8 @@ const ASSETS=[
  {concept:'pencil',filename:'school-object-pencil-lapis.png',gitBlob:'37a383e05c3c1bff123818b171c3bb9dc4a33c11'},
  {concept:'ruler',filename:'school-object-ruler-regua.png',gitBlob:'2276abbd4f90caf142df84062c86d770ba394399'},
  {concept:'pen',filename:'school-object-blue-pen-caneta-azul.png',gitBlob:'a16e625f8f4d6e45e77542065946f81c69ac9e52'},
- {concept:'crayon',filename:'school-object-orange-crayon-giz-laranja.png',gitBlob:'766e48fd1a750a0ceb723a4333e1515456a8d1f7'}
+ {concept:'crayon',filename:'school-object-orange-crayon-giz-laranja.png',gitBlob:'766e48fd1a750a0ceb723a4333e1515456a8d1f7'},
+ {concept:'pencil case',filename:'school-object-pencil-case-estojo.png',gitBlob:'4d55cc06cb124bfd485f5bbc52b33f7e85cdc59c'}
 ];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const blobSha=b=>createHash('sha1').update(Buffer.from('blob '+b.length+'\0')).update(b).digest('hex');
@@ -80,7 +81,7 @@ for(const asset of ASSETS){
  const original=reviewed.assets.find(x=>x.semanticTarget===asset.concept&&x.bindings?.length);
  if(!original)throw Error('UNSUPPORTED_REVIEWED_CONCEPT:'+asset.concept);
  const digest=sha(bytes);
- const dest='content/english/assets/images/assets-duduq-review/y1m04-'+asset.concept+'-'+digest.slice(0,12)+'.png';
+ const dest='content/english/assets/images/assets-duduq-review/y1m04-'+asset.concept.replaceAll(' ','-')+'-'+digest.slice(0,12)+'.png';
  outFiles.set(dest,bytes);
  let accepted=0;
  for(const b of original.bindings){
