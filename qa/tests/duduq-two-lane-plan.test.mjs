@@ -241,3 +241,38 @@ test('different PNG bytes bound to the same mediaId never count as verified cove
   assert.equal(x.report.modules.find(m=>m.moduleId==='Y1M06').needsGeneration,true);
  }finally{fs.rmSync(root,{recursive:true,force:true})}
 });
+
+test('approved media bindings cannot disguise missing provisional media in candidate readiness',()=>{
+ const root=fixture();
+ try{
+  canonicalFixture(root);candidate(root,'Y1M06');
+  const ledgerPath=path.join(root,'qa/results/media-module-closure.json');
+  const invPath=path.join(root,'qa/results/media-closure-inventory.json');
+  const ledger=JSON.parse(fs.readFileSync(ledgerPath,'utf8'));
+  const inv=JSON.parse(fs.readFileSync(invPath,'utf8'));
+  const module=ledger.modulesDetail.find(m=>m.moduleId==='Y1M06');
+  const approved=['X','Y','Z'].map(x=>'IMG-Y1M06-Q001-APPROVED-'+x);
+  for(const mediaId of approved)inv.items.push({
+   mediaId,modules:['Y1M06'],questions:['Y1M06-Q001'],
+   status:'OFFICIAL_PEDAGOGICALLY_VERIFIED'
+  });
+  inv.referencedMediaIds+=approved.length;
+  module.referencedMediaIds+=approved.length;
+  module.verifiedReferencedIds+=approved.length;
+  ledger.referencedMediaIds+=approved.length;
+  fs.writeFileSync(invPath,JSON.stringify(inv));
+  fs.writeFileSync(ledgerPath,JSON.stringify(ledger));
+  const manifestPath=path.join(root,'qa/media-candidates/y1m06-official-20261030/batch-manifest.json');
+  const manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8'));
+  manifest.assets[0].bindings=approved.map(mediaId=>({questionId:'Y1M06-Q001',mediaId}));
+  fs.writeFileSync(manifestPath,JSON.stringify(manifest));
+  const x=run(root);assert.equal(x.status,0,x.stderr);
+  assert.equal(x.report.canonicalSourceTrusted,true);
+  const row=x.report.modules.find(m=>m.moduleId==='Y1M06');
+  assert.equal(row.pendingMediaReferences,3);
+  assert.equal(row.candidate.verifiedBindingIds,3);
+  assert.equal(row.candidate.verifiedPendingBindingIds,0);
+  assert.equal(row.needsGeneration,true);
+  assert.equal(x.report.producer.nextModule,'Y1M06');
+ }finally{fs.rmSync(root,{recursive:true,force:true})}
+});
