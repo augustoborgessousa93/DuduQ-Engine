@@ -36,6 +36,11 @@ function preflight(){
  const bins=run('where.exe',['codex']).split(/\r?\n/).filter(Boolean);
  const binary=bins.find(x=>/codex\.exe$/i.test(x))||bins.find(x=>/codex\.cmd$/i.test(x));
  if(!binary)throw Error('CODEX_CLI_NOT_FOUND');
+ const isCmd=/\.cmd$/i.test(binary);
+ const auth=isCmd?
+  spawnSync(process.env.ComSpec||'cmd.exe',['/d','/s','/c',q(binary)+' login status'],{encoding:'utf8',windowsHide:true}):
+  spawnSync(binary,['login','status'],{encoding:'utf8',windowsHide:true});
+ if(auth.status!==0||auth.error)throw Error('CODEX_CLI_LOGIN_REQUIRED: authenticated Codex CLI must be available to Scheduled Task');
  return binary;
 }
 async function ensure(){await fs.mkdir(logs,{recursive:true})}
