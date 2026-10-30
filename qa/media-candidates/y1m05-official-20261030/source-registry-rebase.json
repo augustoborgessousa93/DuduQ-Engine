@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "DUDUQ_Y1M05_SOURCE_REGISTRY_REBASE_V2",
+  "createdAt": "2026-10-30",
+  "moduleId": "Y1M05",
+  "status": "PASS_REBASE_TO_CLEAN_V26_WITH_SCOPE_IDENTITY",
+  "reason": "The original Y1M05 semantic review was recorded after Y1M04 finalization, so its whole-registry SHA identifies a valid composed predecessor rather than the pristine V26 registry. This attestation preserves that legacy hash while independently pinning pristine V26 and the complete Y1M05 source-entry projection.",
+  "legacyReviewedRegistrySha256": "c56f3ecc5dd608228ccb6d7ba5237ed8da5676cd4fa6f655a9eeb27ce268400c",
+  "cleanV26RegistrySha256": "aa615a3ed307b0e8cae6abf6901a1582c22ab59aa7f95c6339a635ca7d35fc89",
+  "cleanV26RegistryEntries": 1159,
+  "sourceQuestionContractSha256": "7ceb00996bfe518fb92a61d9a34fa8ed7b0da0718a111d108ef04dba84ddbdd3",
+  "sourceQuestionInvariantSha256": "c5a715570f4ddf49209ec8020a538aba809811ad755498b13039511af8f53b0a",
+  "sourceUsageProjectionSha256": "9378f156a72e8547f02b3c18f6163517fc3d9c004bb565b10795fc62d6334361",
+  "sourceRegistryEntryProjectionSha256": "89904f133cba19a8777a40bfe69539def84663953ac5be9522dd1106139609e8",
+  "sourceRegistryEntryCount": 101,
+  "sourceQuestionUsageRecords": 101,
+  "registryEntriesOutsideY1M04Count": 1076,
+  "registryEntriesOutsideY1M04Sha256": "e1e444bdffaf308d38bcb22bd0a950468c6c95c3bd88bf2ecb7d4b35b6c0af92",
+  "cleanV26Y1M04SourceEntries": 83,
+  "officialY1M04PredecessorEntries": 84,
+  "legacyAuditSnapshot": {
+    "path": "qa/results/media-closure-inventory-y1m05-before.json",
+    "sha256": "540e01c0a847ded44e4845e4ae5877c59cfaf27d17cf4272f73efad7a6b7e062",
+    "verifiedY1M04Ids": 84,
+    "registryEntries": 1160
+  },
+  "acceptedRegistryContexts": [
+    "PRISTINE_V26_EXACT_WHOLE_REGISTRY_PIN",
+    "Y1M04_OFFICIAL_PREDECESSOR_WITH_HASH_BOUND_EVIDENCE_AND_EXACT_Y1M05_SCOPE_PIN"
+  ],
+  "answerKeysChanged": 0,
+  "mechanicsChanged": 0,
+  "sourceQuestionFilesModified": false,
+  "goldMastersModified": false,
+  "productionApproved": false
+}

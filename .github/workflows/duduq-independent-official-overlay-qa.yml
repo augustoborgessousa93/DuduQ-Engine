@@ -12,6 +12,8 @@ on:
       - "qa/apply-y1m05-official-media-overlay.mjs"
       - "qa/finalize-y1m04-official-media.mjs"
       - "qa/finalize-y1m05-official-media.mjs"
+      - "qa/verify-y1m05-source-registry-rebase.mjs"
+      - "qa/tests/verify-y1m05-source-registry-rebase.test.mjs"
       - "qa/y1m04-official-media-browser-qa.mjs"
       - "qa/y1m05-official-media-browser-qa.mjs"
       - "qa/tests/verify-y1m04-official-media-overlay.mjs"
@@ -68,6 +70,11 @@ jobs:
           # Rechecking the V19 pin after V26 would falsely reject the correctly changed manifest.
           bash qa/build-v26-topic-first-paint-qa.sh
 
+      - name: Verify Y1M05 pristine V26 registry rebase without rewriting legacy evidence
+        run: |
+          node qa/verify-y1m05-source-registry-rebase.mjs
+          node --test qa/tests/verify-y1m05-source-registry-rebase.test.mjs
+
       - name: Start isolated review-only HTTP server
         shell: bash
         run: |
@@ -91,19 +98,11 @@ jobs:
           node qa/finalize-y1m04-official-media.mjs --apply
           node qa/tests/verify-y1m04-official-media-overlay.mjs --require-official
 
-      - name: Restore original V26 registry for standalone Y1M05 source-hash verification
-        shell: bash
+      - name: Reproduce Y1M05 on the independently verified Y1M04 predecessor
         run: |
-          set -Eeuo pipefail
-          # The Y1M05 signed source evidence pins the original V26 registry.
-          # Do not rewrite its SHA to pretend that the Y1M04-composed registry
-          # has been semantically reviewed. Rebuild a separate, clean candidate.
-          rm -rf -- dist-pages
-          bash qa/build-v26-topic-first-paint-qa.sh
-          echo "Y1M05_STANDALONE_BASE_REBUILT_COMPOSED_MEDIA_NOT_PROVEN"
-
-      - name: Reproduce Y1M05 candidate integration and all 20 Chromium question routes
-        run: |
+          # apply-y1m05 fails closed unless the current registry is either the
+          # exact pristine V26 pin or a fully hash-bound Y1M04 official
+          # predecessor whose 101-entry Y1M05 source projection is unchanged.
           node qa/apply-y1m05-official-media-overlay.mjs --apply
           node qa/tests/verify-y1m05-official-media-overlay.mjs
           node qa/verify-y1m05-official-media-build.mjs
@@ -111,7 +110,7 @@ jobs:
           node qa/finalize-y1m05-official-media.mjs --apply
           node qa/tests/verify-y1m05-official-media-overlay.mjs --require-official
 
-      - name: Require independent proof of combined 185-ID integration (expected BLOCK until revalidated)
+      - name: Require independent proof of combined 185-ID integration
         run: |
           node qa/audit-media-completion.mjs
           node qa/check-media-module-closure.mjs

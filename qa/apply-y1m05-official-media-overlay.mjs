@@ -9,6 +9,7 @@ import {readFile,writeFile} from 'node:fs/promises';
 import {spawnSync} from 'node:child_process';
 import path from 'node:path';
 import {collectQuestionMediaUsages} from './media-binding-usage-guard.mjs';
+import {verifyY1M05SourceRegistryContext} from './verify-y1m05-source-registry-rebase.mjs';
 import {isExactPedagogicalConcept} from '../scripts/duduq-exact-semantic-match.mjs';
 
 const root=process.cwd(),apply=process.argv.includes('--apply');
@@ -57,8 +58,9 @@ if(manifest.schemaVersion!=='DUDUQ_CHATGPT_MEDIA_BINDINGS_V1'||manifest.moduleId
    manifest.originalAuditedPendingIds!==101||manifest.finalBindingIds!==101||manifest.totalQuestionUsageRecords!==101||
    manifest.occurrenceScopedSplits?.length!==5||manifest.assets?.length!==10)
   throw Error('STALE_OR_INVALID_Y1M05_BUNDLE');
-if(evidence.sourceQuestionContractSha256!==hash(original.q)||evidence.sourceRegistrySha256!==hash(original.reg))
-  throw Error('Y1M05_SOURCE_EVIDENCE_HASH_MISMATCH');
+if(evidence.sourceQuestionContractSha256!==hash(original.q))throw Error('Y1M05_SOURCE_QUESTION_EVIDENCE_HASH_MISMATCH');
+const sourceRegistryGate=await verifyY1M05SourceRegistryContext({root,questionsBytes:original.q,
+  registryBytes:original.reg,integrityBytes:original.integrity});
 
 const questions=JSON.parse(original.q.toString('utf8'));
 const registry=JSON.parse(original.reg.toString('utf8'));
@@ -113,6 +115,7 @@ const nextQ=Buffer.from(JSON.stringify(questions,null,2)+'\n');
 const nextReg=Buffer.from(JSON.stringify(nextRegistry,null,2)+'\n');
 const result={status:'Y1M05_OFFICIAL_MEDIA_OVERLAY_PREFLIGHT_PASS',mode:apply?'APPLY':'DRY_RUN',questions:20,
   sourcePendingIds:101,postSplitIds:101,occurrenceScopedSplits:5,pngSourceImages:10,manifestAssets:10,
+  sourceRegistryContext:sourceRegistryGate.context,sourceRegistryGate,
   onlyQuestionDiffs:expectedDiffs,answerKeysChanged:0,mechanicsChanged:0,goldMastersModified:false,productionModified:false};
 if(!apply){console.log(JSON.stringify(result,null,2));process.exit(0);}
 
