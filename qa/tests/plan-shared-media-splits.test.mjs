@@ -93,3 +93,40 @@ test('refuses incomplete 600-question contracts',()=>{
   assert.match(x.process.stderr,/DUDUQ_SHARED_MEDIA_SPLIT_PLAN_INVALID:NOT_20_QUESTIONS/);
  }finally{fs.rmSync(f.dir,{recursive:true,force:true})}
 });
+
+test('registered legacy EMOJI media shared across modules is not silently omitted',()=>{
+ const f=fixture();
+ try{
+  const registryPath=path.join(f.root,'content/english/media/media-registry.json');
+  const reg=JSON.parse(fs.readFileSync(registryPath,'utf8'));
+  reg.entries.push({mediaId:'Y1M01-EMOJI-BALL-001',temporary:true});
+  fs.writeFileSync(registryPath,JSON.stringify(reg));
+  mutate(f,1,1,0,q=>q.options.push({mediaId:'Y1M01-EMOJI-BALL-001',semanticTarget:'play'}));
+  mutate(f,2,1,0,q=>q.options.push({mediaId:'Y1M01-EMOJI-BALL-001',semanticTarget:'ball'}));
+  const x=run(f);
+  assert.equal(x.process.status,0,x.process.stderr);
+  assert.equal(x.plan.referencedNonImgMediaIds,1);
+  assert.equal(x.plan.referencedVisualMediaIds,1);
+  assert.equal(x.plan.referencedImgIds,0);
+  assert.equal(x.plan.conflictsRequiringSplit,1);
+  assert.equal(x.plan.proposed[0].mediaId,'Y1M01-EMOJI-BALL-001');
+  assert.equal(x.plan.proposedNewMediaIds,2);
+ }finally{fs.rmSync(f.dir,{recursive:true,force:true})}
+});
+test('legacy shared media without semanticTarget is blocked, never guessed',()=>{
+ const f=fixture();
+ try{
+  const registryPath=path.join(f.root,'content/english/media/media-registry.json');
+  const reg=JSON.parse(fs.readFileSync(registryPath,'utf8'));
+  reg.entries.push({mediaId:'Y1M01-EMOJI-BEN-001',temporary:true});
+  fs.writeFileSync(registryPath,JSON.stringify(reg));
+  mutate(f,1,1,0,q=>q.options.push({mediaId:'Y1M01-EMOJI-BEN-001',semanticTarget:'ben'}));
+  mutate(f,3,1,0,q=>q.options.push({mediaId:'Y1M01-EMOJI-BEN-001'}));
+  const x=run(f);
+  assert.equal(x.process.status,0,x.process.stderr);
+  assert.equal(x.plan.blockedSharedMediaIds,1);
+  assert.equal(x.plan.conflictsRequiringSplit,0);
+  assert.ok(x.plan.blocked[0].reasons.includes('MISSING_NODE_SEMANTIC_TARGET'));
+  assert.equal(x.plan.blocked[0].unresolved[0].questionId,'Y3M01-Q001');
+ }finally{fs.rmSync(f.dir,{recursive:true,force:true})}
+});
