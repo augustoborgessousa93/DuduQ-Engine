@@ -55,3 +55,31 @@ O projeto só está completo quando `30/30` módulos e `600/600` atividades pass
 **Primeira ação do Codex ao ler este arquivo:** checar as fontes e os relatórios reais, descobrir se consegue criar e salvar PNGs nativamente, implementar o menor lote ponta a ponta no próprio workspace, subir somente o commit de revisão e executar QA. Só expandir para os demais lotes depois do primeiro fluxo demonstravelmente funcional.
 
 Referências oficiais: https://help.openai.com/pt-br/articles/11084440-images-in-chatgpt e https://developers.openai.com/api/docs/guides/tools-image-generation .
+
+
+## Estado recuperado do Codex local (29/10/2026) — avançar sem Google Drive
+
+Um relatório do **Codex Windows**, emitido após 21m40s de execução, confirmou:
+
+- O checkout local ativo é `feat/design-sync-primary-button-v1` **com alterações não relacionadas**. Não mudar de branch nesse checkout, não descartar alterações e não fazer `git reset --hard`, `git clean` ou `stash` sem escopo explícito.
+- Existem **11 PNGs RGBA candidatos** fora do runtime, na pasta `Downloads/workspace/artifacts/generated-image-candidates/20261029/`, com `CANDIDATE_BATCH_MANIFEST.json` e `EXECUTION_REPORT.json` em sua própria pasta. Esses arquivos não dependem do Drive. O Codex deve localizá-los no disco sem solicitar que o usuário os transfira.
+- A qualidade do **estojo** exige revisão de elementos decorativos (foguete/planetas/estrelas); o **peixe** exige revisão de margem. Os demais candidatos continuam com QA técnico apenas. Não atribuir equivalência semântica ou origem de gerador nativo por inferência; inspecionar metadados e imagens reais.
+- Testes locais `duduq-image-pipeline` e `openai-image-provider` passaram (16 verificações) sem chamadas externas; isso **não prova** que a geração nativa de OpenAI ocorreu, nem que os candidatos estão integrados, homologados ou publicados.
+- Google Drive não tinha conector oficial naquela sessão Codex; **isso não deve bloquear o início com os 11 PNGs locais**. Trate os ZIPs antigos como uma fila paralela opcional, não pré-requisito universal.
+
+### Próxima ação automática obrigatória do Codex
+
+1. Descobrir o caminho real do repositório Git local e o diretório dos 11 PNGs. Inspecionar `git status` e `git worktree list` **sem escrever** na branch de design suja.
+2. Criar **um Git worktree separado e limpo** numa nova pasta, associado à branch de revisão `automation/duduq-media-source-only-fix-20261029` e origin correto. Se essa branch já estiver ativa em outro worktree, reutilizar o worktree limpo ou criar uma branch de QA derivada dela — jamais tomar controle ou resetar o checkout sujo. Fazer fetch somente por caminho autorizado; não forçar sobrescrita.
+3. Nesse worktree executar `node qa/ingest-local-codex-candidates.mjs --source="<caminho absoluto da pasta de candidatos>"`. O script recusa a branch errada, verifica PNG/transparência/tamanho, copia apenas para `qa/media-inbox/codex-local-20261029/` e gera `codex-local-candidates.json` com SHA-256. Se estiver numa branch de QA derivada, trazer as alterações para a branch de revisão via PR de integração **antes** de rodar este script; não desativar o guard da branch.
+4. Revisar as **11 imagens e o manifesto local** visualmente. O arquivo `codex-local-candidates.json` marca `originalImageGenerationProvenanceVerified=false` e `semanticQA=PENDING` por definição: é quarentena e não aprovação. Verificar se a origem da geração corresponde à política antes de oficializar.
+5. Relacionar cada conceito seguro às questões, executar os guards de semântica/cross-context, construir overlay isolado e rodar QA real em desktop/tablet/mobile. **Nunca substituir todas as referências só porque os PNGs foram importados.**
+6. Integrar a primeira substituição **realmente segura** ao PR de revisão somente após provas. Executar novo inventário e comunicar apenas progresso mensurável: número exato de media IDs antes/depois. Não fazer deploy e não retirar as provisórias enquanto houver bloqueios.
+
+### Dependências e responsabilidade
+
+- O Codex deve preferir seus **11 arquivos locais já disponíveis** antes de pedir transferência de ZIP, geração de imagem adicional ou autenticação no Drive.
+- Não exigir do responsável nenhum `git`, PowerShell, download, upload, "CONTINUE" ou troca manual de branch.
+- A ferramenta de ingestão é uma etapa de QA técnica (e não um gerador nem um importador para produção).
+- Se a sessão do Codex terminar, as instruções acima ficam no GitHub; **nenhum arquivo local é movido por esta documentação**. É preciso uma execução real do Codex ou outro agente com acesso ao Windows para operar aqueles arquivos.
+
