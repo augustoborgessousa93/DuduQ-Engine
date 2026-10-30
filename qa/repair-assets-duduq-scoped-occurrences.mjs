@@ -61,6 +61,20 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
  assert.equal(originalDoc.moduleId,module,'BAD_MODULE_ID');
  assert.equal(originalDoc.items?.length,20,'NOT_20_QUESTIONS');
  count+=20;
+ for(const q of originalDoc.items){
+   // Special-case a known canonical alias: pencil case / pencil-case.
+   // Scan ALL 600 source questions, to prove this shared ID does not cross
+   // module boundaries or carry any unrelated visual meaning.
+   function scanPencil(node){
+     if(!node||typeof node!=='object')return;
+     if(!Array.isArray(node) && mediaKeys.some(key=>node[key]===pencilCaseId)){
+       pencilCaseUsages.push({moduleId:module,questionId:q.item_id,
+        semantic:String(node.semanticTarget||''),mustInclude:String(node.mustInclude||'')});
+     }
+     for(const v of Object.values(node))if(v&&typeof v==='object')scanPencil(v);
+   }
+   scanPencil(q);
+ }
  if(!scoped.has(module))continue;
  const doc=structuredClone(originalDoc),changes=[];
  function visit(n,qid){
@@ -110,20 +124,6 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
   }
   for(const v of Object.values(n))if(v&&typeof v==='object')visit(v,qid);
  }
- for(const q of originalDoc.items){
-   // Special-case a known canonical alias: pencil case / pencil-case.
-   // Scan ALL 600 source questions, to prove this shared ID does not cross
-   // module boundaries or carry any unrelated visual meaning.
-   function scanPencil(node){
-     if(!node||typeof node!=='object')return;
-     if(!Array.isArray(node) && mediaKeys.some(key=>node[key]===pencilCaseId)){
-       pencilCaseUsages.push({moduleId:module,questionId:q.item_id,
-        semantic:String(node.semanticTarget||''),mustInclude:String(node.mustInclude||'')});
-     }
-     for(const v of Object.values(node))if(v&&typeof v==='object')scanPencil(v);
-   }
-   scanPencil(q);
- }
  for(const q of doc.items)visit(q,q.item_id);
  if(changes.length){
   assert.deepEqual(mediaMask(doc),mediaMask(originalDoc),'NON_MEDIA_FIELD_CHANGED:'+module);
@@ -139,7 +139,7 @@ if(!report.createdIds.length)throw Error('NO_SEMANTICALLY_VERIFIED_DESTINATION_O
 // The single legacy Y1M04 pencil-case shared ID can be reused safely only
 // after proving every actual usage in all 600 questions is the exact same noun.
 // This is NOT a general-purpose alias or cross-module registry substitution.
-const normalizeCase=v=>String(v||'').normalize('NFKC').toLowerCase().trim().replaceAll('-',' ').replace(/\\s+/g,' ');
+const normalizeCase=v=>String(v||'').normalize('NFKC').toLowerCase().trim().replaceAll('-',' ').replace(/\s+/g,' ');
 const originalCase=originalById.get(pencilCaseId),mappedCase=imported.get('Y1M04|pencil case');
 if(originalCase?.temporary===true&&mappedCase){
  if(!pencilCaseUsages.length||pencilCaseUsages.some(u=>u.moduleId!=='Y1M04'||
