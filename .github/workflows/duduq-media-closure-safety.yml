@@ -12,6 +12,8 @@ on:
       - ".github/workflows/duduq-media-closure-safety.yml"
       - "qa/media-inbox/**"
       - "qa/media-candidates/**"
+      - "qa/check-media-module-closure.mjs"
+      - "qa/tests/check-media-module-closure.test.mjs"
       - "qa/audit-media-completion.mjs"
   pull_request:
     branches:
@@ -24,6 +26,8 @@ on:
       - ".github/workflows/duduq-media-closure-safety.yml"
       - "qa/media-inbox/**"
       - "qa/media-candidates/**"
+      - "qa/check-media-module-closure.mjs"
+      - "qa/tests/check-media-module-closure.test.mjs"
       - "qa/audit-media-completion.mjs"
   workflow_dispatch:
 
@@ -56,11 +60,15 @@ jobs:
           node --check qa/ingest-local-codex-candidates.mjs
           node --check qa/tests/ingest-local-codex-candidates.test.mjs
           node --test qa/tests/ingest-local-codex-candidates.test.mjs
+          node --check qa/check-media-module-closure.mjs
+          node --check qa/tests/check-media-module-closure.test.mjs
+          node --test qa/tests/check-media-module-closure.test.mjs
       - name: Build all 30 modules and report actual provisional sources
         run: |
           bash qa/build-v26-topic-first-paint-qa.sh
           node qa/audit-media-completion.mjs
           node qa/media-safe-retirement.mjs --root=dist-pages --output=qa/results/media-safe-retirement-plan.json
+          node qa/check-media-module-closure.mjs --input=qa/results/media-closure-inventory.json --output=qa/results/media-module-closure.json
       - name: Retain QA closure evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -71,6 +79,7 @@ jobs:
           path: |
             qa/results/media-safe-retirement-plan.json
             qa/results/media-closure-inventory.json
+            qa/results/media-module-closure.json
       - name: Explicit security boundary
         run: |
           echo "READ-ONLY planning. No asset removal or registry change on this workflow."
