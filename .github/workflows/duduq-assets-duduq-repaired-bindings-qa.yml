@@ -5,6 +5,7 @@ on:
       - integration/assets-duduq-resume-20261030
     paths:
       - "qa/repair-assets-duduq-scoped-occurrences.mjs"
+      - "qa/apply-assets-duduq-y1m04-review.mjs"
       - "qa/build-v26-topic-first-paint-qa.sh"
       - ".github/workflows/duduq-assets-duduq-repaired-bindings-qa.yml"
 permissions:
