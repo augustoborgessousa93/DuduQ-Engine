@@ -182,19 +182,26 @@ if(backupDir===root||backupDir.startsWith(root+path.sep))fail('BACKUP_MUST_BE_OU
 // A backup directory that is (or contains) a symlink can resolve back into
 // the asset tree despite the lexical path check above. Fail closed before
 // creating any backup or deleting any original.
-let backupAncestor=path.parse(backupDir).root;
-for(const component of path.relative(backupAncestor,backupDir).split(path.sep).filter(Boolean)){
-  backupAncestor=path.join(backupAncestor,component);
+async function rejectBackupSymlinks(target){
+ let ancestor=path.parse(target).root;
+ for(const component of path.relative(ancestor,target).split(path.sep).filter(Boolean)){
+  ancestor=path.join(ancestor,component);
   let info;
-  try{info=await fs.lstat(backupAncestor)}
+  try{info=await fs.lstat(ancestor)}
   catch(e){if(e.code==='ENOENT')break;throw e;}
-  if(info.isSymbolicLink())fail('SYMLINK_BACKUP_DIRECTORY:'+backupDir);
+  if(info.isSymbolicLink())fail('SYMLINK_BACKUP_DIRECTORY:'+target);
+ }
 }
+await rejectBackupSymlinks(backupDir);
 for(const c of candidates){
  const dest=path.resolve(backupDir,c.path);
  if(!dest.startsWith(backupDir+path.sep))fail('BACKUP_PATH_ESCAPE');
+ // Check nested directories before mkdir (which follows symlinks), then again
+ // before copy. Never overwrite an existing backup, even one with matching bytes.
+ await rejectBackupSymlinks(dest);
  await fs.mkdir(path.dirname(dest),{recursive:true});
- await fs.copyFile(await sourcePath(c.path),dest);
+ await rejectBackupSymlinks(dest);
+ await fs.copyFile(await sourcePath(c.path),dest,fs.constants.COPYFILE_EXCL);
  if(sha(await fs.readFile(dest))!==c.sha256)fail('BACKUP_HASH_MISMATCH:'+c.path);
 }
 // Every original has a verified backup and was hash-checked immediately above.
