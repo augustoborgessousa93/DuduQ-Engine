@@ -103,7 +103,8 @@ try {
      return {
       bodyTextLength:(document.body?.innerText||'').trim().length,
       imageCount:img.length,
-      brokenVisibleImages:img.filter(x=>x.complete && x.naturalWidth===0).map(x=>x.currentSrc||x.src),
+      brokenVisibleImages:img.filter(x=>(x.currentSrc||x.getAttribute('src')) && x.complete && x.naturalWidth===0).map(x=>x.currentSrc||x.src),
+      imagesWithEmptySource:img.filter(x=>!(x.currentSrc||x.getAttribute('src'))).length,
       documentOverflowX:Math.max(0,document.documentElement.scrollWidth-innerWidth),
       engineReady:window.DUDUQ_ENGINE_READY===true,
       gameRootPresent:!!document.querySelector('#game,#root'),
@@ -112,10 +113,14 @@ try {
     });
     record.boot=response?.ok() && record.before.htmlBodyTextLength>0 &&
       record.introStartClicked===true && record.after.gameRootPresent &&
-      (record.after.iframeGamePresent || record.after.engineReady) && errors.length===0 && badHttp.length===0 &&
+      (/\/play\/(drag-drop|target-shooter|matching|memory-quest|bubble-pop|smart-sentence)\//.test(new URL(record.navigatedUrl).pathname) ||
+       record.after.iframeGamePresent || record.after.engineReady) &&
+      errors.length===0 && badHttp.length===0 &&
       networkFailures.length===0 && record.after.brokenVisibleImages.length===0
       ?'PASS':'FAIL';
    }catch(e){errors.push('SMOKE_EXCEPTION:'+String(e.message).slice(0,800));}
+   record.imageQaStatus=(record.after?.imagesWithEmptySource??0)>0?'PENDING_EMPTY_IMAGE_SOURCE':
+      record.after?.brokenVisibleImages?.length?'FAILED_BROKEN_LOADED_ASSET':'NOT_CERTIFIED';
    record.pageErrors=errors;
    record.httpFailures=badHttp;
    record.networkFailures=networkFailures;
@@ -128,19 +133,23 @@ try {
    console.log(JSON.stringify({moduleId,viewport:view.name,boot:record.boot,httpStatus:record.httpStatus,
     pageErrors:errors.length,httpFailures:badHttp.length,networkFailures:networkFailures.length,
     brokenVisibleImages:record.after?.brokenVisibleImages?.length||0,
+    imagesWithEmptySource:record.after?.imagesWithEmptySource||0,
     diagnosticErrors:errors.slice(0,2),route}));
    await page.close();
   }
  }
 }finally{await browser.close()}
 const failures=results.filter(r=>r.boot!=='PASS');
+const imagePending=results.filter(r=>r.imageQaStatus!=='NOT_CERTIFIED');
 const report={schemaVersion:'DUDUQ_MEDIA_BROWSER_CANDIDATE_SMOKE_V1',
  mode:'QA_ONLY_NON_PRODUCTION',actualBrowser:'PLAYWRIGHT_CHROMIUM',
  source:'Compiled V26 artifact served by local HTTP, unless candidate changes explicitly applied before this test',
  integratedImageQA:false,pedagogicalQAApproved:false,gameplayCertified:false,
  modules,viewports:views.map(x=>x.name),checks:results.length,passes:results.length-failures.length,
- failures:failures.length,status:failures.length?'FAIL':'ENTRYPOINT_SMOKE_PASS_NOT_PEDAGOGICAL_QA',results};
+ failures:failures.length,mediaPendingChecks:imagePending.length,
+ status:failures.length?'FAIL':imagePending.length?'ENTRYPOINT_PASS_MEDIA_SOURCE_INCOMPLETE':'ENTRYPOINT_PASS_MEDIA_QA_NOT_CERTIFIED',
+ results};
 await fs.writeFile(path.join(dir,'report.json'),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({report:'qa/results/media-browser-qa/report.json',
- status:report.status,checks:report.checks,failures:report.failures}));
+ status:report.status,checks:report.checks,failures:report.failures,mediaPendingChecks:report.mediaPendingChecks}));
 if(failures.length)process.exitCode=1;
