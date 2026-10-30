@@ -7,6 +7,7 @@ on:
       - "qa/audit-assets-duduq-actual-render.mjs"
       - "qa/audit-mixed-mechanics-media.mjs"
       - "qa/export-four-module-media-queue.mjs"
+      - "qa/repair-assets-duduq-scoped-occurrences.mjs"
       - ".github/workflows/duduq-assets-rendered-media-qa.yml"
   push:
     branches:
