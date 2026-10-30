@@ -7,7 +7,7 @@ Maintaining a credit-independent DUDUQ workflow: GitHub technical source, Penpot
 Autopilot continuity metadata and guarded validation/checkpoint commands are installed. The Penpot Control Panel SVG underlay is removed; native linked components remain.
 
 ## Validation
-PASS at 2026-10-30T09:28:35.214Z.
+PASS at 2026-10-30T09:34:40.753Z.
 
 ## Approved / frozen
 Header Main 88954f25-7a86-800b-8008-a87e6f0d4e44; Question Main 88954f25-7a86-800b-8008-a87e700a22e9; Control Panel 855af85f-faf4-8069-8008-a8e75a3255fd; gameplay and Magic Cannon / Magic Launcher protected.
@@ -19,7 +19,7 @@ Review the checkpoint diff, then push the active development branch with duduq:c
 PENPOT_SYNC_REQUIRED: live API/export is unavailable; human browser review remains authority.
 
 ## Branch / commit
-feat/design-sync-primary-button-v1 / 64163a8a174a382b208d8c90c4ec36de58bb3b83
+feat/design-sync-primary-button-v1 / 883a3c1a87166a16ee8075b2dab3ad22c44dd6ff
 
 ## Remote
 origin	https://github.com/augustoborgessousa93/DuduQ-Engine.git (fetch)
