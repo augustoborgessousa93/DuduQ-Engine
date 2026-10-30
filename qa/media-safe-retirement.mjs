@@ -178,7 +178,18 @@ for(const c of candidates){
 }
 // Preserve an exact-byte backup inside the QA workspace before any removal.
 const backupDir=path.resolve(arg('backup-dir','qa/results/duduq-media-retirement-backup'));
-if(backupDir.startsWith(root+path.sep))fail('BACKUP_MUST_BE_OUTSIDE_ASSET_ROOT');
+if(backupDir===root||backupDir.startsWith(root+path.sep))fail('BACKUP_MUST_BE_OUTSIDE_ASSET_ROOT');
+// A backup directory that is (or contains) a symlink can resolve back into
+// the asset tree despite the lexical path check above. Fail closed before
+// creating any backup or deleting any original.
+let backupAncestor=path.parse(backupDir).root;
+for(const component of path.relative(backupAncestor,backupDir).split(path.sep).filter(Boolean)){
+  backupAncestor=path.join(backupAncestor,component);
+  let info;
+  try{info=await fs.lstat(backupAncestor)}
+  catch(e){if(e.code==='ENOENT')break;throw e;}
+  if(info.isSymbolicLink())fail('SYMLINK_BACKUP_DIRECTORY:'+backupDir);
+}
 for(const c of candidates){
  const dest=path.resolve(backupDir,c.path);
  if(!dest.startsWith(backupDir+path.sep))fail('BACKUP_PATH_ESCAPE');
