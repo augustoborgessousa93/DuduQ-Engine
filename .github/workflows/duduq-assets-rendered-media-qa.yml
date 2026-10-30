@@ -57,6 +57,12 @@ jobs:
               find "dist-pages/play/$mech" -maxdepth 1 -type f \( -name '*.js' -o -name 'index.html' \) -exec cp -t "qa/results/assets-duduq-mixed-mechanics/renderers/$mech" {} +
             fi
           done
+          mkdir -p qa/results/assets-duduq-mixed-mechanics/renderers/core
+          for name in duduq-production-question-bootstrap.js duduq-pedagogical-audio-interaction.js duduq-canonical-mechanic-adapter-registry.js duduq-shared-module-route-runtime.js; do
+            if test -f "dist-pages/core/$name"; then
+              cp "dist-pages/core/$name" "qa/results/assets-duduq-mixed-mechanics/renderers/core/$name"
+            fi
+          done
       - uses: actions/upload-artifact@v4
         if: always()
         with:
