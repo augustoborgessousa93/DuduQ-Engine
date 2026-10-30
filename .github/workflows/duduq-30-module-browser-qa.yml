@@ -7,6 +7,7 @@ on:
     paths:
       - ".github/workflows/duduq-30-module-browser-qa.yml"
       - "qa/browser-media-candidate-smoke.mjs"
+      - "qa/export-four-module-media-queue.mjs"
   workflow_dispatch:
 
 permissions:
@@ -45,6 +46,11 @@ jobs:
           node qa/check-media-module-closure.mjs
           node --check qa/browser-media-candidate-smoke.mjs
 
+      - name: Export unresolved exact image concepts across the four priority modules
+        run: |
+          node --check qa/export-four-module-media-queue.mjs
+          node qa/export-four-module-media-queue.mjs
+
       - name: Install Playwright Chromium on Linux
         run: |
           npm install --no-save playwright@1.55.0
@@ -74,6 +80,7 @@ jobs:
             qa/results/media-browser-qa/**
             qa/results/media-closure-inventory.json
             qa/results/media-module-closure.json
+            qa/results/assets-duduq-mixed-mechanics/four-module-image-queue.json
 
       - name: Scope limitation
         if: always()
