@@ -276,3 +276,37 @@ test('approved media bindings cannot disguise missing provisional media in candi
   assert.equal(x.report.producer.nextModule,'Y1M06');
  }finally{fs.rmSync(root,{recursive:true,force:true})}
 });
+
+test('shared media ID needs explicit coverage of every canonical question occurrence',()=>{
+ const root=fixture();
+ try{
+  canonicalFixture(root);candidate(root,'Y1M06');
+  const invPath=path.join(root,'qa/results/media-closure-inventory.json');
+  const inv=JSON.parse(fs.readFileSync(invPath,'utf8'));
+  const shared='IMG-Y1M06-Q001-A';
+  inv.items.find(x=>x.mediaId===shared).questions.push('Y1M06-Q002');
+  fs.writeFileSync(invPath,JSON.stringify(inv));
+  const manifestPath=path.join(root,'qa/media-candidates/y1m06-official-20261030/batch-manifest.json');
+  const manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8'));
+  manifest.assets[0].bindings=['A','B','C'].map(x=>({
+   questionId:'Y1M06-Q001',mediaId:'IMG-Y1M06-Q001-'+x
+  }));
+  fs.writeFileSync(manifestPath,JSON.stringify(manifest));
+  const incomplete=run(root);assert.equal(incomplete.status,0,incomplete.stderr);
+  const first=incomplete.report.modules.find(x=>x.moduleId==='Y1M06');
+  assert.equal(incomplete.report.canonicalSourceTrusted,true);
+  assert.equal(first.candidate.verifiedBindingIds,3);
+  assert.equal(first.candidate.verifiedPendingBindingIds,2);
+  assert.equal(first.needsGeneration,true);
+  assert.ok(first.candidate.sourceBindingProblems.some(x=>
+   x.mediaId===shared&&x.reason==='INCOMPLETE_OCCURRENCE_COVERAGE'&&
+   x.missingQuestions.includes('Y1M06-Q002')));
+  manifest.assets[0].bindings.push({questionId:'Y1M06-Q002',mediaId:shared});
+  fs.writeFileSync(manifestPath,JSON.stringify(manifest));
+  const complete=run(root);assert.equal(complete.status,0,complete.stderr);
+  const second=complete.report.modules.find(x=>x.moduleId==='Y1M06');
+  assert.equal(second.candidate.verifiedPendingBindingIds,3);
+  assert.equal(second.needsGeneration,false);
+  assert.equal(second.stage,'CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA');
+ }finally{fs.rmSync(root,{recursive:true,force:true})}
+});
