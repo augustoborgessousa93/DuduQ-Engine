@@ -166,3 +166,21 @@ test('rejects an orphan whose ancestor directory is a symlink, preserving outsid
   assert.equal(fs.readFileSync(path.join(external,'live.png'),'utf8'),'EXTERNAL-VICTIM-LIVE');
  }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
 });
+
+test('rejects a substituted Q999 question in both inventory and retirement planning',()=>{
+ const f=setup(false);
+ try{
+  const file=path.join(f.root,'content/english/year-1/module-01/questions.json');
+  const data=JSON.parse(fs.readFileSync(file,'utf8'));
+  data.items[19].item_id='Y1M01-Q999';
+  fs.writeFileSync(file,JSON.stringify(data));
+  const retirement=run(f);
+  assert.notEqual(retirement.r.status,0);
+  assert.match(retirement.r.stderr,/INVALID_QUESTION:Y1M01/);
+  assert.ok(fs.existsSync(path.join(f.root,OLD)));
+  const output=path.join(f.dir,'inventory.json');
+  const audit=spawnSync(process.execPath,[path.resolve('qa/audit-media-completion.mjs'),f.root,'--output='+output],{encoding:'utf8'});
+  assert.notEqual(audit.status,0);
+  assert.match(audit.stderr,/INVALID_QUESTION:Y1M01/);
+ }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
+});
