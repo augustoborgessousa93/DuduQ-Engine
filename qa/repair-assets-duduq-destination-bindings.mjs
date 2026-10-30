@@ -88,8 +88,8 @@ for(const [id,records] of occurrences){
    continue;
  }
  if(!records.some(x=>x.moduleId===module&&x.questionId===question)||
-    records.some(x=>x.moduleId!==module||x.questionId!==question)){
-   report.skipped.push({id,reason:'CROSS_QUESTION_OR_MODULE_SHARING'});continue;
+    records.some(x=>x.moduleId!==module)){
+   report.skipped.push({id,reason:'CROSS_MODULE_OR_MISSING_OWNER_QUESTION'});continue;
  }
  const semantics=[...new Set(records.map(r=>r.semanticTarget.toLowerCase()).filter(Boolean))];
  if(semantics.length!==1 || !isExactPedagogicalConcept(semantics[0],existing.semantic)){
