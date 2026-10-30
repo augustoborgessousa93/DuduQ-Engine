@@ -39,6 +39,19 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Remove stale checked-in QA output from this ephemeral runner
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          # Historical PASS files exist in the review branch. Never include them
+          # in a fresh run artifact when the current browser stage was skipped.
+          rm -rf -- qa/results/y1m04-official-media-browser qa/results/y1m05-official-media-browser
+          rm -f -- qa/results/y1m04-official-media-evidence.json qa/results/y1m05-official-media-evidence.json
+          rm -f -- qa/results/y1m04-official-media-finalization.json qa/results/y1m05-official-media-finalization.json
+          rm -f -- qa/results/media-closure-inventory.json qa/results/media-module-closure.json
+          rm -f -- qa/results/media-safe-retirement-plan.json qa/results/y1m05-review-build.json
+          echo "STALE_QA_EVIDENCE_CLEARED_FROM_EPHEMERAL_CHECKOUT"
+
       - name: Install Node.js 22
         uses: actions/setup-node@v4
         with:
@@ -78,6 +91,17 @@ jobs:
           node qa/finalize-y1m04-official-media.mjs --apply
           node qa/tests/verify-y1m04-official-media-overlay.mjs --require-official
 
+      - name: Restore original V26 registry for standalone Y1M05 source-hash verification
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          # The Y1M05 signed source evidence pins the original V26 registry.
+          # Do not rewrite its SHA to pretend that the Y1M04-composed registry
+          # has been semantically reviewed. Rebuild a separate, clean candidate.
+          rm -rf -- dist-pages
+          bash qa/build-v26-topic-first-paint-qa.sh
+          echo "Y1M05_STANDALONE_BASE_REBUILT_COMPOSED_MEDIA_NOT_PROVEN"
+
       - name: Reproduce Y1M05 candidate integration and all 20 Chromium question routes
         run: |
           node qa/apply-y1m05-official-media-overlay.mjs --apply
@@ -87,7 +111,7 @@ jobs:
           node qa/finalize-y1m05-official-media.mjs --apply
           node qa/tests/verify-y1m05-official-media-overlay.mjs --require-official
 
-      - name: Reaudit all 30 modules and assert no false project completion
+      - name: Require independent proof of combined 185-ID integration (expected BLOCK until revalidated)
         run: |
           node qa/audit-media-completion.mjs
           node qa/check-media-module-closure.mjs
