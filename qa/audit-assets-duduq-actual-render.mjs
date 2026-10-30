@@ -59,14 +59,48 @@ try {
   await page.waitForTimeout(2600);
   const q=await page.evaluate(()=>({text:(document.body?.innerText||'').slice(0,350),
     urls:[...document.images].map(e=>e.currentSrc||e.getAttribute('src')||''),
+    loadedPngs:[...document.images].filter(e=>(e.currentSrc||e.getAttribute('src')||'').includes('assets-duduq-review/')&&e.complete&&e.naturalWidth>0).length,
     title:document.title}));
   const pngs=q.urls.filter(u=>u.includes('assets-duduq-review/'));
   const placeholders=q.urls.filter(u=>/provisional-semantic/.test(u));
   console.log('COLORS_IMAGE_MECHANIC_Q004='+JSON.stringify({url:page.url(),pngs:pngs.length,placeholders:placeholders.length,samples:pngs.slice(0,8),text:q.text}));
-  report.additionalColorsQ004={url:page.url(),pngs,placeholders,text:q.text};
+  report.additionalColorsQ004={url:page.url(),pngs,loadedPngs:q.loadedPngs,placeholders,text:q.text};
   await page.close();
  }
 }finally{await browser.close()}
 await writeFile('qa/results/assets-duduq-rendered-media/report.json',JSON.stringify(report,null,2)+'\n');
 console.log('DUDUQ_RENDERED_MEDIA_SUMMARY='+JSON.stringify(report.results.map(x=>({module:x.module,pngInDOM:x.actualPinnedImagesInDOM,
  pngRequests:x.actualPinnedNetworkRequests,placeholders:x.placeholderImageURLsInDOM,errors:x.errorCount}))));
+
+
+// A diagnostic workflow must not finish green when its sampled gameplay images
+// are missing, broken, or still showing placeholders. These are *technical*
+// thresholds for the sampled questions, NOT pedagogical approval or 80-question QA.
+// Y1M03-Q001 uses colored bubbles rather than IMG elements, so assert Q004 instead.
+const expectedFirstQuestion = new Map([['Y1M02',4],['Y1M04',7],['Y1M06',4]]);
+const failures=[];
+for(const item of report.results){
+ const expected=expectedFirstQuestion.get(item.module);
+ if(item.httpStatus!==200)failures.push(item.module+':MODULE_HTTP_'+item.httpStatus);
+ if(item.errorCount>0||item.networkFailureCount>0)
+  failures.push(item.module+':BROWSER_OR_NETWORK_ERRORS');
+ if(item.placeholderImageURLsInDOM!==0)
+  failures.push(item.module+':PLACEHOLDER_VISIBLE');
+ if(item.pinned.some(x=>!x.loaded)||item.networkPinned.some(x=>x.status!==200))
+  failures.push(item.module+':PINNED_IMAGE_NOT_LOADED');
+ if(expected!==undefined){
+  if(item.actualPinnedImagesInDOM<expected)
+   failures.push(item.module+':INSUFFICIENT_PINNED_IMAGES_'+item.actualPinnedImagesInDOM+'_OF_'+expected);
+  if(item.actualPinnedNetworkRequests<expected)
+   failures.push(item.module+':INSUFFICIENT_PINNED_REQUESTS_'+item.actualPinnedNetworkRequests+'_OF_'+expected);
+ }
+}
+const colors=report.additionalColorsQ004;
+if(!colors||colors.pngs.length<4||colors.loadedPngs<4||colors.placeholders.length!==0)
+ failures.push('Y1M03-Q004:COLORS_IMAGES_MISSING_OR_UNLOADED');
+if(failures.length){
+ console.error('DUDUQ_RENDERED_MEDIA_GATE_FAIL='+JSON.stringify(failures));
+ process.exitCode=1;
+}else{
+ console.log('DUDUQ_RENDERED_MEDIA_GATE_PASS=sampled PNGs loaded, no sampled placeholders or JS/network errors; PEDAGOGICAL_QA_PENDING');
+}

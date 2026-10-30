@@ -1,10 +1,20 @@
 name: DUDUQ - Actual rendered image browser QA
 on:
+  pull_request:
+    branches:
+      - integration/assets-duduq-resume-20261030
+    paths:
+      - "qa/audit-assets-duduq-actual-render.mjs"
+      - "qa/audit-mixed-mechanics-media.mjs"
+      - "qa/export-four-module-media-queue.mjs"
+      - "qa/repair-assets-duduq-scoped-occurrences.mjs"
+      - ".github/workflows/duduq-assets-rendered-media-qa.yml"
   push:
     branches:
       - integration/assets-duduq-resume-20261030
     paths:
       - "qa/audit-assets-duduq-actual-render.mjs"
+      - "qa/audit-mixed-mechanics-media.mjs"
       - ".github/workflows/duduq-assets-rendered-media-qa.yml"
 permissions:
   contents: read
@@ -25,6 +35,10 @@ jobs:
           node-version: "22"
       - name: Build current reviewed PNG + per occurrence rebasing
         run: bash qa/build-v26-topic-first-paint-qa.sh
+      - name: Export exact-concept media reuse / missing image queue
+        run: |
+          node --check qa/export-four-module-media-queue.mjs
+          node qa/export-four-module-media-queue.mjs
       - name: Install Chromium
         run: |
           npm install --no-save playwright@1.55.0
@@ -35,11 +49,33 @@ jobs:
           for i in {1..30}; do curl -fsS http://127.0.0.1:4175/ >/dev/null 2>&1 && break; sleep 1; done
       - name: Inspect actual visuals on the first activity in all 4 modules
         run: node qa/audit-assets-duduq-actual-render.mjs
+      - name: Audit all Bubble Pop and Drag Drop variants, 80-question matrix
+        run: |
+          node --check qa/audit-mixed-mechanics-media.mjs
+          node qa/audit-mixed-mechanics-media.mjs
+      - name: Preserve compiled preview renderer scripts for non-invasive triage
+        if: always()
+        run: |
+          mkdir -p qa/results/assets-duduq-mixed-mechanics/renderers
+          for mech in bubble-pop drag-drop drag-drop-multimedia; do
+            if test -d "dist-pages/play/$mech"; then
+              mkdir -p "qa/results/assets-duduq-mixed-mechanics/renderers/$mech"
+              find "dist-pages/play/$mech" -maxdepth 1 -type f \( -name '*.js' -o -name 'index.html' \) -exec cp -t "qa/results/assets-duduq-mixed-mechanics/renderers/$mech" {} +
+            fi
+          done
+          mkdir -p qa/results/assets-duduq-mixed-mechanics/renderers/core
+          for name in duduq-production-question-bootstrap.js duduq-pedagogical-audio-interaction.js duduq-canonical-mechanic-adapter-registry.js duduq-shared-module-route-runtime.js; do
+            if test -f "dist-pages/core/$name"; then
+              cp "dist-pages/core/$name" "qa/results/assets-duduq-mixed-mechanics/renderers/core/$name"
+            fi
+          done
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: duduq-real-rendered-media-diagnostic
           retention-days: 21
           if-no-files-found: warn
-          path: qa/results/assets-duduq-rendered-media/**
+          path: |
+            qa/results/assets-duduq-rendered-media/**
+            qa/results/assets-duduq-mixed-mechanics/**
       - run: echo "Media QA evidence only; production unchanged."
