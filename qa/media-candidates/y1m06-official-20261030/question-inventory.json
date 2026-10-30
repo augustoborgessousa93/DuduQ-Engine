@@ -1,0 +1,2052 @@
+{
+  "schemaVersion": "DUDUQ_Y1M06_QUESTION_INVENTORY_V1",
+  "createdOn": "2026-10-30",
+  "moduleId": "Y1M06",
+  "source": "dist-pages/content/english/year-1/module-06/questions.json",
+  "sourceSha256": "31d4cc0be48882dfd405cca0f8cb2b708c6f6d3d201fab71ad94e757e771e4b5",
+  "sourceSelectionEvidence": "This compiled contract contains the actual current 20 activities used for the Y1M06 inventory; no question source was changed.",
+  "questionCount": 20,
+  "mediaOccurrenceCount": 93,
+  "distinctMediaIdCount": 93,
+  "distinctSemanticTargets": [
+    "big",
+    "bird",
+    "blue",
+    "blue turtle",
+    "cat",
+    "dog",
+    "fish",
+    "green",
+    "green rabbit",
+    "green spider",
+    "hamster",
+    "rabbit",
+    "red",
+    "red bird",
+    "red dog",
+    "small",
+    "spider",
+    "turtle",
+    "yellow",
+    "yellow fish",
+    "yellow hamster"
+  ],
+  "questions": [
+    {
+      "questionId": "Y1M06-Q001",
+      "sequencePosition": 1,
+      "topicEn": "Pets and their features",
+      "pedagogicalPhase": "TEACHING",
+      "learningTarget": "teaching: Name familiar pets and describe color/size/possession in chunks. Focus: dog.",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "instructionEn": "Drag the audio to the matching scene.",
+      "instructionPt": "Arraste o áudio até a cena correspondente.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "cat",
+        "dog",
+        "fish",
+        "rabbit"
+      ],
+      "mediaSemanticTargets": [
+        "cat",
+        "dog",
+        "fish",
+        "rabbit"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q001-DOG",
+        "IMG-Y1M06-Q001-CAT",
+        "IMG-Y1M06-Q001-FISH",
+        "IMG-Y1M06-Q001-RABBIT",
+        "IMG-Q001-DOG"
+      ],
+      "mediaOccurrenceCount": 5,
+      "answerKey": {
+        "Y1M06-Q001-A1": "Y1M06-Q001-T1",
+        "Y1M06-Q001-A2": "Y1M06-Q001-T2",
+        "Y1M06-Q001-A3": "Y1M06-Q001-T3",
+        "Y1M06-Q001-A4": "Y1M06-Q001-T4"
+      },
+      "questionContractSha256": "cf6a0578e09da7e216ac84fb9a444ae8ed1835b994122b0ec995f1f2863527b8",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q001",
+          "mediaId": "IMG-Y1M06-Q001-DOG",
+          "contractPath": "targets[0].media",
+          "role": "DESTINATION",
+          "semanticTarget": "dog",
+          "mustInclude": "dog",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-DOG",
+          "candidateFile": "images/DUDUQ-Y1M06-DOG.png"
+        },
+        {
+          "questionId": "Y1M06-Q001",
+          "mediaId": "IMG-Y1M06-Q001-CAT",
+          "contractPath": "targets[1].media",
+          "role": "DESTINATION",
+          "semanticTarget": "cat",
+          "mustInclude": "cat",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-CAT",
+          "candidateFile": "images/DUDUQ-Y1M06-CAT.png"
+        },
+        {
+          "questionId": "Y1M06-Q001",
+          "mediaId": "IMG-Y1M06-Q001-FISH",
+          "contractPath": "targets[2].media",
+          "role": "DESTINATION",
+          "semanticTarget": "fish",
+          "mustInclude": "fish",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-FISH",
+          "candidateFile": "images/DUDUQ-Y1M06-FISH.png"
+        },
+        {
+          "questionId": "Y1M06-Q001",
+          "mediaId": "IMG-Y1M06-Q001-RABBIT",
+          "contractPath": "targets[3].media",
+          "role": "DESTINATION",
+          "semanticTarget": "rabbit",
+          "mustInclude": "rabbit",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-RABBIT",
+          "candidateFile": "images/DUDUQ-Y1M06-RABBIT.png"
+        },
+        {
+          "questionId": "Y1M06-Q001",
+          "mediaId": "IMG-Q001-DOG",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "dog",
+          "mustInclude": "dog",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-DOG",
+          "candidateFile": "images/DUDUQ-Y1M06-DOG.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q002",
+      "sequencePosition": 2,
+      "topicEn": "Animals around us",
+      "pedagogicalPhase": "TEACHING",
+      "learningTarget": "teaching: Name familiar pets and describe color/size/possession in chunks. Focus: hamster.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "instructionEn": "Match each card to its pair.",
+      "instructionPt": "Combine os pares.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "cat",
+        "dog",
+        "fish",
+        "rabbit"
+      ],
+      "mediaSemanticTargets": [
+        "cat",
+        "dog",
+        "fish",
+        "rabbit"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q002-DOG",
+        "IMG-Y1M06-Q002-CAT",
+        "IMG-Y1M06-Q002-FISH",
+        "IMG-Y1M06-Q002-RABBIT",
+        "IMG-Q002-CAT"
+      ],
+      "mediaOccurrenceCount": 5,
+      "answerKey": {
+        "Y1M06-Q002-A1": "Y1M06-Q002-B1",
+        "Y1M06-Q002-A2": "Y1M06-Q002-B2",
+        "Y1M06-Q002-A3": "Y1M06-Q002-B3",
+        "Y1M06-Q002-A4": "Y1M06-Q002-B4"
+      },
+      "questionContractSha256": "2af87005367b6f20ca6791360641e1d67e739c0202077285391c8d1961d9a2da",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q002",
+          "mediaId": "IMG-Y1M06-Q002-DOG",
+          "contractPath": "pairs[0].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "dog",
+          "mustInclude": "dog",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-DOG",
+          "candidateFile": "images/DUDUQ-Y1M06-DOG.png"
+        },
+        {
+          "questionId": "Y1M06-Q002",
+          "mediaId": "IMG-Y1M06-Q002-CAT",
+          "contractPath": "pairs[1].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "cat",
+          "mustInclude": "cat",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-CAT",
+          "candidateFile": "images/DUDUQ-Y1M06-CAT.png"
+        },
+        {
+          "questionId": "Y1M06-Q002",
+          "mediaId": "IMG-Y1M06-Q002-FISH",
+          "contractPath": "pairs[2].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "fish",
+          "mustInclude": "fish",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-FISH",
+          "candidateFile": "images/DUDUQ-Y1M06-FISH.png"
+        },
+        {
+          "questionId": "Y1M06-Q002",
+          "mediaId": "IMG-Y1M06-Q002-RABBIT",
+          "contractPath": "pairs[3].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "rabbit",
+          "mustInclude": "rabbit",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-RABBIT",
+          "candidateFile": "images/DUDUQ-Y1M06-RABBIT.png"
+        },
+        {
+          "questionId": "Y1M06-Q002",
+          "mediaId": "IMG-Q002-CAT",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "cat",
+          "mustInclude": "cat",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-CAT",
+          "candidateFile": "images/DUDUQ-Y1M06-CAT.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q003",
+      "sequencePosition": 3,
+      "topicEn": "Pets and their features",
+      "pedagogicalPhase": "GUIDED_PRACTICE",
+      "learningTarget": "guided practice: Name familiar pets and describe color/size/possession in chunks. Focus: colors.",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "instructionEn": "Listen and pop the matching bubble.",
+      "instructionPt": "Ouça e estoure a bolha correspondente.",
+      "stimulusTarget": "yellow fish",
+      "semanticTargets": [
+        "blue turtle",
+        "green rabbit",
+        "green spider",
+        "red bird",
+        "red dog",
+        "yellow fish",
+        "yellow hamster"
+      ],
+      "mediaSemanticTargets": [
+        "blue turtle",
+        "green rabbit",
+        "green spider",
+        "red bird",
+        "red dog",
+        "yellow fish",
+        "yellow hamster"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q003-YELLOW-FISH",
+        "IMG-Y1M06-Q003-GREEN-RABBIT",
+        "IMG-Y1M06-Q003-RED-BIRD",
+        "IMG-Y1M06-Q003-BLUE-TURTLE",
+        "IMG-Y1M06-Q003-YELLOW-HAMSTER",
+        "IMG-Y1M06-Q003-GREEN-SPIDER",
+        "IMG-Y1M06-Q003-RED-DOG",
+        "IMG-Q003-YELLOW-FISH"
+      ],
+      "mediaOccurrenceCount": 8,
+      "answerKey": "yellow-fish",
+      "questionContractSha256": "df25a65ef3776202d900f09b31fc6b7a955af02728c7b05a5ff591899d961703",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Y1M06-Q003-YELLOW-FISH",
+          "contractPath": "targetsToFind[0].media",
+          "role": "CORRECT_BUBBLE",
+          "semanticTarget": "yellow fish",
+          "mustInclude": "yellow fish",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-YELLOW-FISH",
+          "candidateFile": "images/DUDUQ-Y1M06-YELLOW-FISH.png"
+        },
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Y1M06-Q003-GREEN-RABBIT",
+          "contractPath": "bubbleDistractorPool[0].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "green rabbit",
+          "mustInclude": "green rabbit",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-GREEN-RABBIT",
+          "candidateFile": "images/DUDUQ-Y1M06-GREEN-RABBIT.png"
+        },
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Y1M06-Q003-RED-BIRD",
+          "contractPath": "bubbleDistractorPool[1].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "red bird",
+          "mustInclude": "red bird",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-RED-BIRD",
+          "candidateFile": "images/DUDUQ-Y1M06-RED-BIRD.png"
+        },
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Y1M06-Q003-BLUE-TURTLE",
+          "contractPath": "bubbleDistractorPool[2].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "blue turtle",
+          "mustInclude": "blue turtle",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BLUE-TURTLE",
+          "candidateFile": "images/DUDUQ-Y1M06-BLUE-TURTLE.png"
+        },
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Y1M06-Q003-YELLOW-HAMSTER",
+          "contractPath": "bubbleDistractorPool[3].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "yellow hamster",
+          "mustInclude": "yellow hamster",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-YELLOW-HAMSTER",
+          "candidateFile": "images/DUDUQ-Y1M06-YELLOW-HAMSTER.png"
+        },
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Y1M06-Q003-GREEN-SPIDER",
+          "contractPath": "bubbleDistractorPool[4].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "green spider",
+          "mustInclude": "green spider",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-GREEN-SPIDER",
+          "candidateFile": "images/DUDUQ-Y1M06-GREEN-SPIDER.png"
+        },
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Y1M06-Q003-RED-DOG",
+          "contractPath": "bubbleDistractorPool[5].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "red dog",
+          "mustInclude": "red dog",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-RED-DOG",
+          "candidateFile": "images/DUDUQ-Y1M06-RED-DOG.png"
+        },
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Q003-YELLOW-FISH",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "yellow fish",
+          "mustInclude": "yellow fish",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-YELLOW-FISH",
+          "candidateFile": "images/DUDUQ-Y1M06-YELLOW-FISH.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q004",
+      "sequencePosition": 4,
+      "topicEn": "Animals around us",
+      "pedagogicalPhase": "GUIDED_PRACTICE",
+      "learningTarget": "guided practice: Name familiar pets and describe color/size/possession in chunks. Focus: six active pets.",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "instructionEn": "Listen and shoot the matching picture.",
+      "instructionPt": "Ouça e acerte a figura correspondente.",
+      "stimulusTarget": "cat",
+      "semanticTargets": [
+        "bird",
+        "cat",
+        "fish",
+        "rabbit"
+      ],
+      "mediaSemanticTargets": [
+        "bird",
+        "cat",
+        "fish",
+        "rabbit"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q004-CAT",
+        "IMG-Y1M06-Q004-FISH",
+        "IMG-Y1M06-Q004-RABBIT",
+        "IMG-Y1M06-Q004-BIRD",
+        "IMG-Q004-CAT"
+      ],
+      "mediaOccurrenceCount": 5,
+      "answerKey": "cat",
+      "questionContractSha256": "30c4761bcf14550722b56f8d03b9a926bec768d5a4ad2a571288f885cd791fec",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q004",
+          "mediaId": "IMG-Y1M06-Q004-CAT",
+          "contractPath": "options[0].media",
+          "role": "TARGET",
+          "semanticTarget": "cat",
+          "mustInclude": "cat",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-CAT",
+          "candidateFile": "images/DUDUQ-Y1M06-CAT.png"
+        },
+        {
+          "questionId": "Y1M06-Q004",
+          "mediaId": "IMG-Y1M06-Q004-FISH",
+          "contractPath": "options[1].media",
+          "role": "TARGET",
+          "semanticTarget": "fish",
+          "mustInclude": "fish",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-FISH",
+          "candidateFile": "images/DUDUQ-Y1M06-FISH.png"
+        },
+        {
+          "questionId": "Y1M06-Q004",
+          "mediaId": "IMG-Y1M06-Q004-RABBIT",
+          "contractPath": "options[2].media",
+          "role": "TARGET",
+          "semanticTarget": "rabbit",
+          "mustInclude": "rabbit",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-RABBIT",
+          "candidateFile": "images/DUDUQ-Y1M06-RABBIT.png"
+        },
+        {
+          "questionId": "Y1M06-Q004",
+          "mediaId": "IMG-Y1M06-Q004-BIRD",
+          "contractPath": "options[3].media",
+          "role": "TARGET",
+          "semanticTarget": "bird",
+          "mustInclude": "bird",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIRD",
+          "candidateFile": "images/DUDUQ-Y1M06-BIRD.png"
+        },
+        {
+          "questionId": "Y1M06-Q004",
+          "mediaId": "IMG-Q004-CAT",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "cat",
+          "mustInclude": "cat",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-CAT",
+          "candidateFile": "images/DUDUQ-Y1M06-CAT.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q005",
+      "sequencePosition": 5,
+      "topicEn": "Pets and their features",
+      "pedagogicalPhase": "RECOGNITION",
+      "learningTarget": "First active-pet sound-to-image retrieval with familiar visual referents. Curricular target: dog; cat; fish; rabbit.",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_IMAGE",
+      "instructionEn": "Listen and find the matching picture.",
+      "instructionPt": "Ouça e encontre a imagem correspondente.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "bird",
+        "cat",
+        "dog",
+        "fish",
+        "rabbit"
+      ],
+      "mediaSemanticTargets": [
+        "bird",
+        "cat",
+        "dog",
+        "fish",
+        "rabbit"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q005-DOG",
+        "IMG-Y1M06-Q005-CAT",
+        "IMG-Y1M06-Q005-FISH",
+        "IMG-Y1M06-Q005-RABBIT",
+        "IMG-Q005-BIRD"
+      ],
+      "mediaOccurrenceCount": 5,
+      "answerKey": [
+        "Y1M06-Q005-dog",
+        "Y1M06-Q005-cat",
+        "Y1M06-Q005-fish",
+        "Y1M06-Q005-rabbit"
+      ],
+      "questionContractSha256": "893591605be5c4b22fcb6bea7f77296045486098a0c72a0a441de2e24115f84c",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q005",
+          "mediaId": "IMG-Y1M06-Q005-DOG",
+          "contractPath": "pairs[0].cards[1].media",
+          "role": "MEMORY_CARD",
+          "semanticTarget": "dog",
+          "mustInclude": "dog",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-DOG",
+          "candidateFile": "images/DUDUQ-Y1M06-DOG.png"
+        },
+        {
+          "questionId": "Y1M06-Q005",
+          "mediaId": "IMG-Y1M06-Q005-CAT",
+          "contractPath": "pairs[1].cards[1].media",
+          "role": "MEMORY_CARD",
+          "semanticTarget": "cat",
+          "mustInclude": "cat",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-CAT",
+          "candidateFile": "images/DUDUQ-Y1M06-CAT.png"
+        },
+        {
+          "questionId": "Y1M06-Q005",
+          "mediaId": "IMG-Y1M06-Q005-FISH",
+          "contractPath": "pairs[2].cards[1].media",
+          "role": "MEMORY_CARD",
+          "semanticTarget": "fish",
+          "mustInclude": "fish",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-FISH",
+          "candidateFile": "images/DUDUQ-Y1M06-FISH.png"
+        },
+        {
+          "questionId": "Y1M06-Q005",
+          "mediaId": "IMG-Y1M06-Q005-RABBIT",
+          "contractPath": "pairs[3].cards[1].media",
+          "role": "MEMORY_CARD",
+          "semanticTarget": "rabbit",
+          "mustInclude": "rabbit",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-RABBIT",
+          "candidateFile": "images/DUDUQ-Y1M06-RABBIT.png"
+        },
+        {
+          "questionId": "Y1M06-Q005",
+          "mediaId": "IMG-Q005-BIRD",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "bird",
+          "mustInclude": "bird",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIRD",
+          "candidateFile": "images/DUDUQ-Y1M06-BIRD.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q006",
+      "sequencePosition": 6,
+      "topicEn": "Animals around us",
+      "pedagogicalPhase": "GUIDED_PRACTICE",
+      "learningTarget": "guided practice: Name familiar pets and describe color/size/possession in chunks. Focus: identify.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "instructionEn": "Match each card to its pair.",
+      "instructionPt": "Combine os pares.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "bird",
+        "fish",
+        "rabbit",
+        "turtle"
+      ],
+      "mediaSemanticTargets": [
+        "bird",
+        "fish",
+        "rabbit",
+        "turtle"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q006-FISH",
+        "IMG-Y1M06-Q006-RABBIT",
+        "IMG-Y1M06-Q006-BIRD",
+        "IMG-Y1M06-Q006-TURTLE",
+        "IMG-Q006-TURTLE"
+      ],
+      "mediaOccurrenceCount": 5,
+      "answerKey": {
+        "Y1M06-Q006-A1": "Y1M06-Q006-B1",
+        "Y1M06-Q006-A2": "Y1M06-Q006-B2",
+        "Y1M06-Q006-A3": "Y1M06-Q006-B3",
+        "Y1M06-Q006-A4": "Y1M06-Q006-B4"
+      },
+      "questionContractSha256": "47217bb377ba0d78cec259a55528fb70e5993bd5e24167e60331b4bc13cedc30",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q006",
+          "mediaId": "IMG-Y1M06-Q006-FISH",
+          "contractPath": "pairs[0].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "fish",
+          "mustInclude": "fish",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-FISH",
+          "candidateFile": "images/DUDUQ-Y1M06-FISH.png"
+        },
+        {
+          "questionId": "Y1M06-Q006",
+          "mediaId": "IMG-Y1M06-Q006-RABBIT",
+          "contractPath": "pairs[1].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "rabbit",
+          "mustInclude": "rabbit",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-RABBIT",
+          "candidateFile": "images/DUDUQ-Y1M06-RABBIT.png"
+        },
+        {
+          "questionId": "Y1M06-Q006",
+          "mediaId": "IMG-Y1M06-Q006-BIRD",
+          "contractPath": "pairs[2].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "bird",
+          "mustInclude": "bird",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIRD",
+          "candidateFile": "images/DUDUQ-Y1M06-BIRD.png"
+        },
+        {
+          "questionId": "Y1M06-Q006",
+          "mediaId": "IMG-Y1M06-Q006-TURTLE",
+          "contractPath": "pairs[3].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "turtle",
+          "mustInclude": "turtle",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-TURTLE",
+          "candidateFile": "images/DUDUQ-Y1M06-TURTLE.png"
+        },
+        {
+          "questionId": "Y1M06-Q006",
+          "mediaId": "IMG-Q006-TURTLE",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "turtle",
+          "mustInclude": "turtle",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-TURTLE",
+          "candidateFile": "images/DUDUQ-Y1M06-TURTLE.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q007",
+      "sequencePosition": 7,
+      "topicEn": "Pets and their features",
+      "pedagogicalPhase": "RECOGNITION",
+      "learningTarget": "recognition: Name familiar pets and describe color/size/possession in chunks. Focus: cat.",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "instructionEn": "Drag the audio to the matching scene.",
+      "instructionPt": "Arraste o áudio até a cena correspondente.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "bird",
+        "hamster",
+        "rabbit",
+        "turtle"
+      ],
+      "mediaSemanticTargets": [
+        "bird",
+        "hamster",
+        "rabbit",
+        "turtle"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q007-RABBIT",
+        "IMG-Y1M06-Q007-BIRD",
+        "IMG-Y1M06-Q007-TURTLE",
+        "IMG-Y1M06-Q007-HAMSTER",
+        "IMG-Q007-HAMSTER"
+      ],
+      "mediaOccurrenceCount": 5,
+      "answerKey": {
+        "Y1M06-Q007-A1": "Y1M06-Q007-T1",
+        "Y1M06-Q007-A2": "Y1M06-Q007-T2",
+        "Y1M06-Q007-A3": "Y1M06-Q007-T3",
+        "Y1M06-Q007-A4": "Y1M06-Q007-T4"
+      },
+      "questionContractSha256": "8ad4ad7d72666c4598210df3ce98dfb404864bf255092c8c0c6ccfca85b498f0",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q007",
+          "mediaId": "IMG-Y1M06-Q007-RABBIT",
+          "contractPath": "targets[0].media",
+          "role": "DESTINATION",
+          "semanticTarget": "rabbit",
+          "mustInclude": "rabbit",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-RABBIT",
+          "candidateFile": "images/DUDUQ-Y1M06-RABBIT.png"
+        },
+        {
+          "questionId": "Y1M06-Q007",
+          "mediaId": "IMG-Y1M06-Q007-BIRD",
+          "contractPath": "targets[1].media",
+          "role": "DESTINATION",
+          "semanticTarget": "bird",
+          "mustInclude": "bird",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIRD",
+          "candidateFile": "images/DUDUQ-Y1M06-BIRD.png"
+        },
+        {
+          "questionId": "Y1M06-Q007",
+          "mediaId": "IMG-Y1M06-Q007-TURTLE",
+          "contractPath": "targets[2].media",
+          "role": "DESTINATION",
+          "semanticTarget": "turtle",
+          "mustInclude": "turtle",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-TURTLE",
+          "candidateFile": "images/DUDUQ-Y1M06-TURTLE.png"
+        },
+        {
+          "questionId": "Y1M06-Q007",
+          "mediaId": "IMG-Y1M06-Q007-HAMSTER",
+          "contractPath": "targets[3].media",
+          "role": "DESTINATION",
+          "semanticTarget": "hamster",
+          "mustInclude": "hamster",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-HAMSTER",
+          "candidateFile": "images/DUDUQ-Y1M06-HAMSTER.png"
+        },
+        {
+          "questionId": "Y1M06-Q007",
+          "mediaId": "IMG-Q007-HAMSTER",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "hamster",
+          "mustInclude": "hamster",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-HAMSTER",
+          "candidateFile": "images/DUDUQ-Y1M06-HAMSTER.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q008",
+      "sequencePosition": 8,
+      "topicEn": "Animals around us",
+      "pedagogicalPhase": "RECOGNITION",
+      "learningTarget": "recognition: Name familiar pets and describe color/size/possession in chunks. Focus: spider.",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "instructionEn": "Look at the picture and complete the sentence.",
+      "instructionPt": "De acordo com a imagem, complete a frase.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "spider"
+      ],
+      "mediaSemanticTargets": [
+        "spider"
+      ],
+      "mediaIds": [
+        "IMG-Q008-SPIDER"
+      ],
+      "mediaOccurrenceCount": 1,
+      "answerKey": "spider",
+      "questionContractSha256": "c67d7c888cb9df33aa7a8bc323c9d8107b6f914851e7200532ca9c81a9e7acce",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q008",
+          "mediaId": "IMG-Q008-SPIDER",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "spider",
+          "mustInclude": "spider",
+          "mustNotInclude": "unrelated object or written answer cue",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-SPIDER",
+          "candidateFile": "images/DUDUQ-Y1M06-SPIDER.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q009",
+      "sequencePosition": 9,
+      "topicEn": "Pets and their features",
+      "pedagogicalPhase": "RECOGNITION",
+      "learningTarget": "recognition: Name familiar pets and describe color/size/possession in chunks. Focus: numbers.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "instructionEn": "Match each card to its pair.",
+      "instructionPt": "Combine os pares.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "big",
+        "bird",
+        "hamster",
+        "spider",
+        "turtle"
+      ],
+      "mediaSemanticTargets": [
+        "big",
+        "bird",
+        "hamster",
+        "spider",
+        "turtle"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q009-BIRD",
+        "IMG-Y1M06-Q009-TURTLE",
+        "IMG-Y1M06-Q009-HAMSTER",
+        "IMG-Y1M06-Q009-SPIDER",
+        "IMG-Q009-BIG"
+      ],
+      "mediaOccurrenceCount": 5,
+      "answerKey": {
+        "Y1M06-Q009-A1": "Y1M06-Q009-B1",
+        "Y1M06-Q009-A2": "Y1M06-Q009-B2",
+        "Y1M06-Q009-A3": "Y1M06-Q009-B3",
+        "Y1M06-Q009-A4": "Y1M06-Q009-B4"
+      },
+      "questionContractSha256": "ab17d22c6c398ad42d8a0a79e8f03ae78f7d70760ef76c025756448be47e7dff",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q009",
+          "mediaId": "IMG-Y1M06-Q009-BIRD",
+          "contractPath": "pairs[0].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "bird",
+          "mustInclude": "bird",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIRD",
+          "candidateFile": "images/DUDUQ-Y1M06-BIRD.png"
+        },
+        {
+          "questionId": "Y1M06-Q009",
+          "mediaId": "IMG-Y1M06-Q009-TURTLE",
+          "contractPath": "pairs[1].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "turtle",
+          "mustInclude": "turtle",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-TURTLE",
+          "candidateFile": "images/DUDUQ-Y1M06-TURTLE.png"
+        },
+        {
+          "questionId": "Y1M06-Q009",
+          "mediaId": "IMG-Y1M06-Q009-HAMSTER",
+          "contractPath": "pairs[2].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "hamster",
+          "mustInclude": "hamster",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-HAMSTER",
+          "candidateFile": "images/DUDUQ-Y1M06-HAMSTER.png"
+        },
+        {
+          "questionId": "Y1M06-Q009",
+          "mediaId": "IMG-Y1M06-Q009-SPIDER",
+          "contractPath": "pairs[3].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "spider",
+          "mustInclude": "spider",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-SPIDER",
+          "candidateFile": "images/DUDUQ-Y1M06-SPIDER.png"
+        },
+        {
+          "questionId": "Y1M06-Q009",
+          "mediaId": "IMG-Q009-BIG",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "big",
+          "mustInclude": "big",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIG",
+          "candidateFile": "images/DUDUQ-Y1M06-BIG.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q010",
+      "sequencePosition": 10,
+      "topicEn": "Animals around us",
+      "pedagogicalPhase": "COMPREHENSION",
+      "learningTarget": "comprehension: Name familiar pets and describe color/size/possession in chunks. Focus: six active pets.",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "instructionEn": "Listen and pop the matching bubble.",
+      "instructionPt": "Ouça e estoure a bolha correspondente.",
+      "stimulusTarget": "bird",
+      "semanticTargets": [
+        "bird",
+        "cat",
+        "dog",
+        "fish",
+        "hamster",
+        "rabbit",
+        "turtle"
+      ],
+      "mediaSemanticTargets": [
+        "bird",
+        "cat",
+        "dog",
+        "fish",
+        "hamster",
+        "rabbit",
+        "turtle"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q010-BIRD",
+        "IMG-Y1M06-Q010-DOG",
+        "IMG-Y1M06-Q010-CAT",
+        "IMG-Y1M06-Q010-FISH",
+        "IMG-Y1M06-Q010-RABBIT",
+        "IMG-Y1M06-Q010-TURTLE",
+        "IMG-Y1M06-Q010-HAMSTER",
+        "IMG-Q010-BIRD"
+      ],
+      "mediaOccurrenceCount": 8,
+      "answerKey": "bird",
+      "questionContractSha256": "56fcc3de7a02db2cd882293343bf30ecbd603f794a5e74959b7f77a89b7cb947",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Y1M06-Q010-BIRD",
+          "contractPath": "targetsToFind[0].media",
+          "role": "CORRECT_BUBBLE",
+          "semanticTarget": "bird",
+          "mustInclude": "bird",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIRD",
+          "candidateFile": "images/DUDUQ-Y1M06-BIRD.png"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Y1M06-Q010-DOG",
+          "contractPath": "bubbleDistractorPool[0].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "dog",
+          "mustInclude": "dog",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-DOG",
+          "candidateFile": "images/DUDUQ-Y1M06-DOG.png"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Y1M06-Q010-CAT",
+          "contractPath": "bubbleDistractorPool[1].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "cat",
+          "mustInclude": "cat",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-CAT",
+          "candidateFile": "images/DUDUQ-Y1M06-CAT.png"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Y1M06-Q010-FISH",
+          "contractPath": "bubbleDistractorPool[2].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "fish",
+          "mustInclude": "fish",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-FISH",
+          "candidateFile": "images/DUDUQ-Y1M06-FISH.png"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Y1M06-Q010-RABBIT",
+          "contractPath": "bubbleDistractorPool[3].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "rabbit",
+          "mustInclude": "rabbit",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-RABBIT",
+          "candidateFile": "images/DUDUQ-Y1M06-RABBIT.png"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Y1M06-Q010-TURTLE",
+          "contractPath": "bubbleDistractorPool[4].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "turtle",
+          "mustInclude": "turtle",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-TURTLE",
+          "candidateFile": "images/DUDUQ-Y1M06-TURTLE.png"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Y1M06-Q010-HAMSTER",
+          "contractPath": "bubbleDistractorPool[5].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "hamster",
+          "mustInclude": "hamster",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-HAMSTER",
+          "candidateFile": "images/DUDUQ-Y1M06-HAMSTER.png"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Q010-BIRD",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "bird",
+          "mustInclude": "bird",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIRD",
+          "candidateFile": "images/DUDUQ-Y1M06-BIRD.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q011",
+      "sequencePosition": 11,
+      "topicEn": "Pets and their features",
+      "pedagogicalPhase": "COMPREHENSION",
+      "learningTarget": "comprehension: Name familiar pets and describe color/size/possession in chunks. Focus: I have a....",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "instructionEn": "Drag the audio to the matching scene.",
+      "instructionPt": "Arraste o áudio até a cena correspondente.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "big",
+        "dog",
+        "hamster",
+        "spider",
+        "turtle"
+      ],
+      "mediaSemanticTargets": [
+        "big",
+        "dog",
+        "hamster",
+        "spider",
+        "turtle"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q011-TURTLE",
+        "IMG-Y1M06-Q011-HAMSTER",
+        "IMG-Y1M06-Q011-SPIDER",
+        "IMG-Y1M06-Q011-BIG",
+        "IMG-Q011-DOG"
+      ],
+      "mediaOccurrenceCount": 5,
+      "answerKey": {
+        "Y1M06-Q011-A1": "Y1M06-Q011-T1",
+        "Y1M06-Q011-A2": "Y1M06-Q011-T2",
+        "Y1M06-Q011-A3": "Y1M06-Q011-T3",
+        "Y1M06-Q011-A4": "Y1M06-Q011-T4"
+      },
+      "questionContractSha256": "496701159e82957aaaf2397dc857a20274cf38994dbe5dcca019ebaa5edaf8ef",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q011",
+          "mediaId": "IMG-Y1M06-Q011-TURTLE",
+          "contractPath": "targets[0].media",
+          "role": "DESTINATION",
+          "semanticTarget": "turtle",
+          "mustInclude": "turtle",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-TURTLE",
+          "candidateFile": "images/DUDUQ-Y1M06-TURTLE.png"
+        },
+        {
+          "questionId": "Y1M06-Q011",
+          "mediaId": "IMG-Y1M06-Q011-HAMSTER",
+          "contractPath": "targets[1].media",
+          "role": "DESTINATION",
+          "semanticTarget": "hamster",
+          "mustInclude": "hamster",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-HAMSTER",
+          "candidateFile": "images/DUDUQ-Y1M06-HAMSTER.png"
+        },
+        {
+          "questionId": "Y1M06-Q011",
+          "mediaId": "IMG-Y1M06-Q011-SPIDER",
+          "contractPath": "targets[2].media",
+          "role": "DESTINATION",
+          "semanticTarget": "spider",
+          "mustInclude": "spider",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-SPIDER",
+          "candidateFile": "images/DUDUQ-Y1M06-SPIDER.png"
+        },
+        {
+          "questionId": "Y1M06-Q011",
+          "mediaId": "IMG-Y1M06-Q011-BIG",
+          "contractPath": "targets[3].media",
+          "role": "DESTINATION",
+          "semanticTarget": "big",
+          "mustInclude": "big",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIG",
+          "candidateFile": "images/DUDUQ-Y1M06-BIG.png"
+        },
+        {
+          "questionId": "Y1M06-Q011",
+          "mediaId": "IMG-Q011-DOG",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "dog",
+          "mustInclude": "dog",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-DOG",
+          "candidateFile": "images/DUDUQ-Y1M06-DOG.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q012",
+      "sequencePosition": 12,
+      "topicEn": "Animals around us",
+      "pedagogicalPhase": "COMPREHENSION",
+      "learningTarget": "comprehension: Name familiar pets and describe color/size/possession in chunks. Focus: possess.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "instructionEn": "Match each card to its pair.",
+      "instructionPt": "Combine os pares.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "big",
+        "cat",
+        "hamster",
+        "spider",
+        "turtle"
+      ],
+      "mediaSemanticTargets": [
+        "big",
+        "cat",
+        "hamster",
+        "spider",
+        "turtle"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q012-TURTLE",
+        "IMG-Y1M06-Q012-HAMSTER",
+        "IMG-Y1M06-Q012-SPIDER",
+        "IMG-Y1M06-Q012-BIG",
+        "IMG-Q012-CAT"
+      ],
+      "mediaOccurrenceCount": 5,
+      "answerKey": {
+        "Y1M06-Q012-A1": "Y1M06-Q012-B1",
+        "Y1M06-Q012-A2": "Y1M06-Q012-B2",
+        "Y1M06-Q012-A3": "Y1M06-Q012-B3",
+        "Y1M06-Q012-A4": "Y1M06-Q012-B4"
+      },
+      "questionContractSha256": "35cc325f0b0b63bc78d19d249da18c3443793cf0e9682bca6ba2bcf217a54865",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q012",
+          "mediaId": "IMG-Y1M06-Q012-TURTLE",
+          "contractPath": "pairs[0].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "turtle",
+          "mustInclude": "turtle",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-TURTLE",
+          "candidateFile": "images/DUDUQ-Y1M06-TURTLE.png"
+        },
+        {
+          "questionId": "Y1M06-Q012",
+          "mediaId": "IMG-Y1M06-Q012-HAMSTER",
+          "contractPath": "pairs[1].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "hamster",
+          "mustInclude": "hamster",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-HAMSTER",
+          "candidateFile": "images/DUDUQ-Y1M06-HAMSTER.png"
+        },
+        {
+          "questionId": "Y1M06-Q012",
+          "mediaId": "IMG-Y1M06-Q012-SPIDER",
+          "contractPath": "pairs[2].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "spider",
+          "mustInclude": "spider",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-SPIDER",
+          "candidateFile": "images/DUDUQ-Y1M06-SPIDER.png"
+        },
+        {
+          "questionId": "Y1M06-Q012",
+          "mediaId": "IMG-Y1M06-Q012-BIG",
+          "contractPath": "pairs[3].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "big",
+          "mustInclude": "big",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIG",
+          "candidateFile": "images/DUDUQ-Y1M06-BIG.png"
+        },
+        {
+          "questionId": "Y1M06-Q012",
+          "mediaId": "IMG-Q012-CAT",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "cat",
+          "mustInclude": "cat",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-CAT",
+          "candidateFile": "images/DUDUQ-Y1M06-CAT.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q013",
+      "sequencePosition": 13,
+      "topicEn": "Pets and their features",
+      "pedagogicalPhase": "CONSOLIDATION",
+      "learningTarget": "Changes the semantic focus from animal identity to previously taught color attributes; avoid color/animal stereotypes and preserve color vocabulary status. Curricular target: red; blue; yellow; green.",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_IMAGE",
+      "instructionEn": "Listen and find the matching picture.",
+      "instructionPt": "Ouça e encontre a imagem correspondente.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "blue",
+        "fish",
+        "green",
+        "red",
+        "yellow"
+      ],
+      "mediaSemanticTargets": [
+        "blue",
+        "fish",
+        "green",
+        "red",
+        "yellow"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q013-RED",
+        "IMG-Y1M06-Q013-BLUE",
+        "IMG-Y1M06-Q013-YELLOW",
+        "IMG-Y1M06-Q013-GREEN",
+        "IMG-Q013-FISH"
+      ],
+      "mediaOccurrenceCount": 5,
+      "answerKey": [
+        "Y1M06-Q013-red",
+        "Y1M06-Q013-blue",
+        "Y1M06-Q013-yellow",
+        "Y1M06-Q013-green"
+      ],
+      "questionContractSha256": "cfc8ed10f48e6ed13875b2145c4a25afa8d070ce5f367862e9cb69ead122898c",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q013",
+          "mediaId": "IMG-Y1M06-Q013-RED",
+          "contractPath": "pairs[0].cards[1].media",
+          "role": "MEMORY_CARD",
+          "semanticTarget": "red",
+          "mustInclude": "red",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-RED",
+          "candidateFile": "images/DUDUQ-Y1M06-RED.png"
+        },
+        {
+          "questionId": "Y1M06-Q013",
+          "mediaId": "IMG-Y1M06-Q013-BLUE",
+          "contractPath": "pairs[1].cards[1].media",
+          "role": "MEMORY_CARD",
+          "semanticTarget": "blue",
+          "mustInclude": "blue",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BLUE",
+          "candidateFile": "images/DUDUQ-Y1M06-BLUE.png"
+        },
+        {
+          "questionId": "Y1M06-Q013",
+          "mediaId": "IMG-Y1M06-Q013-YELLOW",
+          "contractPath": "pairs[2].cards[1].media",
+          "role": "MEMORY_CARD",
+          "semanticTarget": "yellow",
+          "mustInclude": "yellow",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-YELLOW",
+          "candidateFile": "images/DUDUQ-Y1M06-YELLOW.png"
+        },
+        {
+          "questionId": "Y1M06-Q013",
+          "mediaId": "IMG-Y1M06-Q013-GREEN",
+          "contractPath": "pairs[3].cards[1].media",
+          "role": "MEMORY_CARD",
+          "semanticTarget": "green",
+          "mustInclude": "green",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-GREEN",
+          "candidateFile": "images/DUDUQ-Y1M06-GREEN.png"
+        },
+        {
+          "questionId": "Y1M06-Q013",
+          "mediaId": "IMG-Q013-FISH",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "fish",
+          "mustInclude": "fish",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-FISH",
+          "candidateFile": "images/DUDUQ-Y1M06-FISH.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q014",
+      "sequencePosition": 14,
+      "topicEn": "Animals around us",
+      "pedagogicalPhase": "LISTENING",
+      "learningTarget": "listening: Name familiar pets and describe color/size/possession in chunks. Focus: hamster.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "instructionEn": "Match each card to its pair.",
+      "instructionPt": "Combine os pares.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "big",
+        "hamster",
+        "rabbit",
+        "small",
+        "spider"
+      ],
+      "mediaSemanticTargets": [
+        "big",
+        "hamster",
+        "rabbit",
+        "small",
+        "spider"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q014-HAMSTER",
+        "IMG-Y1M06-Q014-SPIDER",
+        "IMG-Y1M06-Q014-BIG",
+        "IMG-Y1M06-Q014-SMALL",
+        "IMG-Q014-RABBIT"
+      ],
+      "mediaOccurrenceCount": 5,
+      "answerKey": {
+        "Y1M06-Q014-A1": "Y1M06-Q014-B1",
+        "Y1M06-Q014-A2": "Y1M06-Q014-B2",
+        "Y1M06-Q014-A3": "Y1M06-Q014-B3",
+        "Y1M06-Q014-A4": "Y1M06-Q014-B4"
+      },
+      "questionContractSha256": "98c6e11d2edff54c4a1a25450713365174223022760d234d4bdab3791804e146",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q014",
+          "mediaId": "IMG-Y1M06-Q014-HAMSTER",
+          "contractPath": "pairs[0].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "hamster",
+          "mustInclude": "hamster",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-HAMSTER",
+          "candidateFile": "images/DUDUQ-Y1M06-HAMSTER.png"
+        },
+        {
+          "questionId": "Y1M06-Q014",
+          "mediaId": "IMG-Y1M06-Q014-SPIDER",
+          "contractPath": "pairs[1].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "spider",
+          "mustInclude": "spider",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-SPIDER",
+          "candidateFile": "images/DUDUQ-Y1M06-SPIDER.png"
+        },
+        {
+          "questionId": "Y1M06-Q014",
+          "mediaId": "IMG-Y1M06-Q014-BIG",
+          "contractPath": "pairs[2].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "big",
+          "mustInclude": "big",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIG",
+          "candidateFile": "images/DUDUQ-Y1M06-BIG.png"
+        },
+        {
+          "questionId": "Y1M06-Q014",
+          "mediaId": "IMG-Y1M06-Q014-SMALL",
+          "contractPath": "pairs[3].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "small",
+          "mustInclude": "small",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-SMALL",
+          "candidateFile": "images/DUDUQ-Y1M06-SMALL.png"
+        },
+        {
+          "questionId": "Y1M06-Q014",
+          "mediaId": "IMG-Q014-RABBIT",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "rabbit",
+          "mustInclude": "rabbit",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-RABBIT",
+          "candidateFile": "images/DUDUQ-Y1M06-RABBIT.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q015",
+      "sequencePosition": 15,
+      "topicEn": "Pets and their features",
+      "pedagogicalPhase": "RETRIEVAL",
+      "learningTarget": "retrieval: Name familiar pets and describe color/size/possession in chunks. Focus: colors.",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "instructionEn": "Drag the audio to the matching scene.",
+      "instructionPt": "Arraste o áudio até a cena correspondente.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "bird",
+        "blue",
+        "green",
+        "red",
+        "yellow"
+      ],
+      "mediaSemanticTargets": [
+        "bird",
+        "blue",
+        "green",
+        "red",
+        "yellow"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q015-YELLOW",
+        "IMG-Y1M06-Q015-GREEN",
+        "IMG-Y1M06-Q015-RED",
+        "IMG-Y1M06-Q015-BLUE",
+        "IMG-Q015-BIRD"
+      ],
+      "mediaOccurrenceCount": 5,
+      "answerKey": {
+        "Y1M06-Q015-A1": "Y1M06-Q015-T1",
+        "Y1M06-Q015-A2": "Y1M06-Q015-T2",
+        "Y1M06-Q015-A3": "Y1M06-Q015-T3",
+        "Y1M06-Q015-A4": "Y1M06-Q015-T4"
+      },
+      "questionContractSha256": "856af2cecaead625641e0d5862de0d7ebd3cc6e6edcb4be3a2e0a23d47eba873",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q015",
+          "mediaId": "IMG-Y1M06-Q015-YELLOW",
+          "contractPath": "targets[0].media",
+          "role": "DESTINATION",
+          "semanticTarget": "yellow",
+          "mustInclude": "yellow",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-YELLOW",
+          "candidateFile": "images/DUDUQ-Y1M06-YELLOW.png"
+        },
+        {
+          "questionId": "Y1M06-Q015",
+          "mediaId": "IMG-Y1M06-Q015-GREEN",
+          "contractPath": "targets[1].media",
+          "role": "DESTINATION",
+          "semanticTarget": "green",
+          "mustInclude": "green",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-GREEN",
+          "candidateFile": "images/DUDUQ-Y1M06-GREEN.png"
+        },
+        {
+          "questionId": "Y1M06-Q015",
+          "mediaId": "IMG-Y1M06-Q015-RED",
+          "contractPath": "targets[2].media",
+          "role": "DESTINATION",
+          "semanticTarget": "red",
+          "mustInclude": "red",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-RED",
+          "candidateFile": "images/DUDUQ-Y1M06-RED.png"
+        },
+        {
+          "questionId": "Y1M06-Q015",
+          "mediaId": "IMG-Y1M06-Q015-BLUE",
+          "contractPath": "targets[3].media",
+          "role": "DESTINATION",
+          "semanticTarget": "blue",
+          "mustInclude": "blue",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BLUE",
+          "candidateFile": "images/DUDUQ-Y1M06-BLUE.png"
+        },
+        {
+          "questionId": "Y1M06-Q015",
+          "mediaId": "IMG-Q015-BIRD",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "bird",
+          "mustInclude": "bird",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIRD",
+          "candidateFile": "images/DUDUQ-Y1M06-BIRD.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q016",
+      "sequencePosition": 16,
+      "topicEn": "Animals around us",
+      "pedagogicalPhase": "RETRIEVAL",
+      "learningTarget": "retrieval: Name familiar pets and describe color/size/possession in chunks. Focus: six active pets.",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "instructionEn": "Listen and pop the matching bubble.",
+      "instructionPt": "Ouça e estoure a bolha correspondente.",
+      "stimulusTarget": "spider",
+      "semanticTargets": [
+        "big",
+        "cat",
+        "dog",
+        "fish",
+        "hamster",
+        "small",
+        "spider"
+      ],
+      "mediaSemanticTargets": [
+        "big",
+        "cat",
+        "dog",
+        "fish",
+        "hamster",
+        "small",
+        "spider"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q016-SPIDER",
+        "IMG-Y1M06-Q016-HAMSTER",
+        "IMG-Y1M06-Q016-BIG",
+        "IMG-Y1M06-Q016-SMALL",
+        "IMG-Y1M06-Q016-DOG",
+        "IMG-Y1M06-Q016-CAT",
+        "IMG-Y1M06-Q016-FISH",
+        "IMG-Q016-SPIDER"
+      ],
+      "mediaOccurrenceCount": 8,
+      "answerKey": "spider",
+      "questionContractSha256": "c0b7252500d97fcf7f9043ecb4b9d91779db993490362e1ad665e233bce9c799",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Y1M06-Q016-SPIDER",
+          "contractPath": "targetsToFind[0].media",
+          "role": "CORRECT_BUBBLE",
+          "semanticTarget": "spider",
+          "mustInclude": "spider",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-SPIDER",
+          "candidateFile": "images/DUDUQ-Y1M06-SPIDER.png"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Y1M06-Q016-HAMSTER",
+          "contractPath": "bubbleDistractorPool[0].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "hamster",
+          "mustInclude": "hamster",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-HAMSTER",
+          "candidateFile": "images/DUDUQ-Y1M06-HAMSTER.png"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Y1M06-Q016-BIG",
+          "contractPath": "bubbleDistractorPool[1].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "big",
+          "mustInclude": "big",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIG",
+          "candidateFile": "images/DUDUQ-Y1M06-BIG.png"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Y1M06-Q016-SMALL",
+          "contractPath": "bubbleDistractorPool[2].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "small",
+          "mustInclude": "small",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-SMALL",
+          "candidateFile": "images/DUDUQ-Y1M06-SMALL.png"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Y1M06-Q016-DOG",
+          "contractPath": "bubbleDistractorPool[3].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "dog",
+          "mustInclude": "dog",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-DOG",
+          "candidateFile": "images/DUDUQ-Y1M06-DOG.png"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Y1M06-Q016-CAT",
+          "contractPath": "bubbleDistractorPool[4].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "cat",
+          "mustInclude": "cat",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-CAT",
+          "candidateFile": "images/DUDUQ-Y1M06-CAT.png"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Y1M06-Q016-FISH",
+          "contractPath": "bubbleDistractorPool[5].media",
+          "role": "DISTRACTOR_BUBBLE",
+          "semanticTarget": "fish",
+          "mustInclude": "fish",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-FISH",
+          "candidateFile": "images/DUDUQ-Y1M06-FISH.png"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Q016-SPIDER",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "spider",
+          "mustInclude": "spider",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-SPIDER",
+          "candidateFile": "images/DUDUQ-Y1M06-SPIDER.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q017",
+      "sequencePosition": 17,
+      "topicEn": "Pets and their features",
+      "pedagogicalPhase": "REVIEW",
+      "learningTarget": "review: Name familiar pets and describe color/size/possession in chunks. Focus: big/small + animal.",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "instructionEn": "Drag each card to the correct group.",
+      "instructionPt": "Arraste cada cartão para o grupo certo.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "bird",
+        "cat",
+        "dog",
+        "fish",
+        "hamster",
+        "rabbit",
+        "turtle"
+      ],
+      "mediaSemanticTargets": [
+        "hamster"
+      ],
+      "mediaIds": [
+        "IMG-Q017-HAMSTER"
+      ],
+      "mediaOccurrenceCount": 1,
+      "answerKey": {
+        "Y1M06-Q017-I1": "big",
+        "Y1M06-Q017-I2": "small",
+        "Y1M06-Q017-I3": "small",
+        "Y1M06-Q017-I4": "small",
+        "Y1M06-Q017-I5": "small",
+        "Y1M06-Q017-I6": "small"
+      },
+      "questionContractSha256": "4f5889c073748b3f3bed414662a01ad945c9dad98a1e3bb71d78823e22478b93",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q017",
+          "mediaId": "IMG-Q017-HAMSTER",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "hamster",
+          "mustInclude": "hamster",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-HAMSTER",
+          "candidateFile": "images/DUDUQ-Y1M06-HAMSTER.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q018",
+      "sequencePosition": 18,
+      "topicEn": "Animals around us",
+      "pedagogicalPhase": "REVIEW",
+      "learningTarget": "review: Name familiar pets and describe color/size/possession in chunks. Focus: describe.",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "instructionEn": "Look at the picture and complete the sentence.",
+      "instructionPt": "De acordo com a imagem, complete a frase.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "big"
+      ],
+      "mediaSemanticTargets": [
+        "big"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q018-BIG-SPIDER"
+      ],
+      "mediaOccurrenceCount": 1,
+      "answerKey": "big",
+      "questionContractSha256": "5d954476ff6938fc4e8996697459b295f4f4f23d53c7f4c20d43b9c02ed4d53d",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q018",
+          "mediaId": "IMG-Y1M06-Q018-BIG-SPIDER",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "big",
+          "mustInclude": "a visibly large spider with a small neutral scale reference",
+          "mustNotInclude": "unrelated object or written answer cue",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIG-SPIDER",
+          "candidateFile": "images/DUDUQ-Y1M06-BIG-SPIDER.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q019",
+      "sequencePosition": 19,
+      "topicEn": "Pets and their features",
+      "pedagogicalPhase": "CONSOLIDATION",
+      "learningTarget": "consolidation: Name familiar pets and describe color/size/possession in chunks. Focus: rabbit.",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "instructionEn": "Drag each card to the correct group.",
+      "instructionPt": "Arraste cada cartão para o grupo certo.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "big",
+        "bird",
+        "cat",
+        "dog",
+        "fish",
+        "rabbit",
+        "turtle"
+      ],
+      "mediaSemanticTargets": [
+        "big"
+      ],
+      "mediaIds": [
+        "IMG-Q019-BIG"
+      ],
+      "mediaOccurrenceCount": 1,
+      "answerKey": {
+        "Y1M06-Q019-I1": "big",
+        "Y1M06-Q019-I2": "small",
+        "Y1M06-Q019-I3": "small",
+        "Y1M06-Q019-I4": "small",
+        "Y1M06-Q019-I5": "small",
+        "Y1M06-Q019-I6": "small"
+      },
+      "questionContractSha256": "29e6ddee137488a5344830cd66d6a833dd4dd0d033ddd943e5b60a08b88f3e63",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q019",
+          "mediaId": "IMG-Q019-BIG",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "big",
+          "mustInclude": "big",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-BIG",
+          "candidateFile": "images/DUDUQ-Y1M06-BIG.png"
+        }
+      ]
+    },
+    {
+      "questionId": "Y1M06-Q020",
+      "sequencePosition": 20,
+      "topicEn": "Animals around us",
+      "pedagogicalPhase": "CONSOLIDATION",
+      "learningTarget": "consolidation: Name familiar pets and describe color/size/possession in chunks. Focus: spider.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "instructionEn": "Match each card to its pair.",
+      "instructionPt": "Combine os pares.",
+      "stimulusTarget": null,
+      "semanticTargets": [
+        "cat",
+        "dog",
+        "fish",
+        "small"
+      ],
+      "mediaSemanticTargets": [
+        "cat",
+        "dog",
+        "fish",
+        "small"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q020-SMALL",
+        "IMG-Y1M06-Q020-DOG",
+        "IMG-Y1M06-Q020-CAT",
+        "IMG-Y1M06-Q020-FISH",
+        "IMG-Q020-SMALL"
+      ],
+      "mediaOccurrenceCount": 5,
+      "answerKey": {
+        "Y1M06-Q020-A1": "Y1M06-Q020-B1",
+        "Y1M06-Q020-A2": "Y1M06-Q020-B2",
+        "Y1M06-Q020-A3": "Y1M06-Q020-B3",
+        "Y1M06-Q020-A4": "Y1M06-Q020-B4"
+      },
+      "questionContractSha256": "ae639cd168a95ee7bda81db158355b4722cad238ae8a6120a5844ae454ea2f23",
+      "mediaOccurrences": [
+        {
+          "questionId": "Y1M06-Q020",
+          "mediaId": "IMG-Y1M06-Q020-SMALL",
+          "contractPath": "pairs[0].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "small",
+          "mustInclude": "small",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-SMALL",
+          "candidateFile": "images/DUDUQ-Y1M06-SMALL.png"
+        },
+        {
+          "questionId": "Y1M06-Q020",
+          "mediaId": "IMG-Y1M06-Q020-DOG",
+          "contractPath": "pairs[1].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "dog",
+          "mustInclude": "dog",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-DOG",
+          "candidateFile": "images/DUDUQ-Y1M06-DOG.png"
+        },
+        {
+          "questionId": "Y1M06-Q020",
+          "mediaId": "IMG-Y1M06-Q020-CAT",
+          "contractPath": "pairs[2].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "cat",
+          "mustInclude": "cat",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-CAT",
+          "candidateFile": "images/DUDUQ-Y1M06-CAT.png"
+        },
+        {
+          "questionId": "Y1M06-Q020",
+          "mediaId": "IMG-Y1M06-Q020-FISH",
+          "contractPath": "pairs[3].b.media",
+          "role": "PAIR_IMAGE",
+          "semanticTarget": "fish",
+          "mustInclude": "fish",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-FISH",
+          "candidateFile": "images/DUDUQ-Y1M06-FISH.png"
+        },
+        {
+          "questionId": "Y1M06-Q020",
+          "mediaId": "IMG-Q020-SMALL",
+          "contractPath": "mediaBindings[0]",
+          "role": "stimulus",
+          "semanticTarget": "small",
+          "mustInclude": "small",
+          "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+          "answerLeakRisk": "LOW_WITH_CONTEXT",
+          "sourceStatus": "IMAGE_REFINEMENT_PENDING",
+          "assetKey": "Y1M06-CANDIDATE-SMALL",
+          "candidateFile": "images/DUDUQ-Y1M06-SMALL.png"
+        }
+      ]
+    }
+  ]
+}
