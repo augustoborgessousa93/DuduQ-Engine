@@ -27,6 +27,7 @@ const report={schemaVersion:'DUDUQ_Y1M04_OFFICIAL_MEDIA_BROWSER_QA_V1',createdAt
   sourcePendingIds:83,postSplitIds:84,usageRecords:85,uniquePngHashes:17,runtimePngPaths:18,
   productionDeployed:false,goldMastersModified:false,routes:[],transport:[],gameplay:null,screenshots:[],artifacts:{}};
 let browser;
+let diagnosticGameplayPage=null;
 
 function diagnostics(page){
   const pageErrors=[],httpFailures=[],requestFailures=[];
@@ -154,9 +155,13 @@ try{
   // the same timing path a learner sees.
   const gameContext=await browser.newContext({viewport:views.desktop,recordVideo:{dir:rawVideoDir,size:views.desktop}});
   const page=await gameContext.newPage(),diag=diagnostics(page),events=[];
+  diagnosticGameplayPage=page;
   const video=page.video();
   await page.goto(base+'/play/target-shooter/?duduqModule=Y1M04&duduqItem=Y1M04-Q002&qaSeed=20261030',{waitUntil:'domcontentloaded',timeout:40000});
   await page.waitForTimeout(700);await unlockTargetShooter(page,events);
+  const gameplayStartUrl=page.url(),mainFrameNavigations=[];
+  page.on('framenavigated',frame=>{if(frame===page.mainFrame())mainFrameNavigations.push({url:frame.url(),at:new Date().toISOString()});});
+  report.gameplayNavigation={initialUrl:gameplayStartUrl,mainFrameNavigations};
   const gameplayInitialImages=await officialImages(page);
   const target=alt=>page.locator('.target-shooter-target').filter({has:page.locator('img[alt='+alt+']')});
   await pointerClick(page,target('blue'),'select-incorrect-blue',events);
@@ -177,7 +182,15 @@ try{
     ![...document.querySelectorAll('.target-shooter-target')].some(x=>x.dataset.gameplayState==='incorrect'),null,{timeout:15000});
   await pointerClick(page,target('red'),'select-correct-red',events);
   await page.waitForFunction(()=>document.querySelector('.target-shooter-target[data-gameplay-state="selected"]'));
-  const correctTransitions=await confirmWithPointerRetry(page,'red','correct','confirm-correct-red',events);
+  let correctTransitions;
+  try{correctTransitions=await confirmWithPointerRetry(page,'red','correct','confirm-correct-red',events);}
+  catch(error){
+    if(mainFrameNavigations.length||page.url()!==gameplayStartUrl)
+      throw Error('UNEXPECTED_GAMEPLAY_NAVIGATION_AFTER_CORRECT_CONFIRM:'+JSON.stringify({from:gameplayStartUrl,to:page.url(),navigations:mainFrameNavigations,underlyingError:String(error)}));
+    throw error;
+  }
+  if(mainFrameNavigations.length||page.url()!==gameplayStartUrl)
+    throw Error('UNEXPECTED_GAMEPLAY_NAVIGATION_AFTER_CORRECT_CONFIRM:'+JSON.stringify({from:gameplayStartUrl,to:page.url(),navigations:mainFrameNavigations}));
   const correctObserved=[...correctTransitions].reverse().find(x=>x.targetState==='correct'&&x.targetVisible);
   if(!correctObserved)throw Error('VISIBLE_CORRECT_TRANSITION_NOT_OBSERVED');
   const correct={state:'correct',observed:correctObserved,transitions:correctTransitions,
@@ -240,7 +253,22 @@ try{
     if(!record.pass)throw Error('RESPONSIVE_SCREENSHOT_QA_FAILED:'+test.name);
   }
   report.status='PASS';report.passedRoutes=report.routes.filter(x=>x.pass).length;
-}catch(error){report.status='FAIL';report.error=String(error?.stack||error).slice(0,5000);process.exitCode=1;}
+}catch(error){
+  report.status='FAIL';report.error=String(error?.stack||error).slice(0,5000);process.exitCode=1;
+  if(diagnosticGameplayPage&&!diagnosticGameplayPage.isClosed()){
+    report.failurePage={url:diagnosticGameplayPage.url()};
+    try{
+      report.failurePage.dom=await diagnosticGameplayPage.evaluate(()=>({href:location.href,readyState:document.readyState,
+        gameState:document.querySelector('#game')?.dataset.duduqInteractionState||null,
+        feedback:document.querySelector('.feedback-ribbon')?.dataset.feedback||null}));
+    }catch(e){report.failurePage.domError=String(e);}
+    try{
+      const file=path.join(out,'failure-gameplay-page.png');
+      await diagnosticGameplayPage.screenshot({path:file,timeout:7000});
+      report.failurePage.screenshot={path:path.relative(root,file).replaceAll('\\\\','/'),sha256:hash(await readFile(file))};
+    }catch(e){report.failurePage.screenshotError=String(e);}
+  }
+}
 finally{await browser?.close().catch(()=>{});report.finishedAt=new Date().toISOString();await writeFile(reportPath,JSON.stringify(report,null,2)+'\n');
   console.log(JSON.stringify({status:report.status,report:path.relative(root,reportPath).replaceAll('\\','/'),routes:report.routes.length,
     passedRoutes:report.routes.filter(x=>x.pass).length,transport:report.transport.filter(x=>x.pass).length,
