@@ -1,0 +1,98 @@
+name: DUDUQ - Isolated Media Browser QA (Linux)
+
+on:
+  push:
+    branches:
+      - automation/duduq-media-source-only-fix-20261029
+    paths:
+      - ".github/workflows/duduq-media-browser-qa.yml"
+      - "qa/browser-media-candidate-smoke.mjs"
+      - "qa/media-candidates/**"
+      - "qa/media-inbox/**"
+      - "qa/semantic-evidence/**"
+  pull_request:
+    branches:
+      - release/duduq-v23-ebc-attribution-20261028
+    paths:
+      - ".github/workflows/duduq-media-browser-qa.yml"
+      - "qa/browser-media-candidate-smoke.mjs"
+      - "qa/media-candidates/**"
+      - "qa/media-inbox/**"
+      - "qa/semantic-evidence/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duduq-media-browser-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  media-entrypoint-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      CI: "true"
+      BASE_URL: http://127.0.0.1:4175
+      DUDUQ_MEDIA_QA_MODULES: Y1M04,Y1M05
+    steps:
+      - name: Checkout isolated QA candidate
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Playwright and Chromium on authorized Linux runner
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Build immutable-source V26 artifact for browser baseline
+        run: |
+          bash qa/build-v26-topic-first-paint-qa.sh
+          node qa/audit-media-completion.mjs
+          node qa/check-media-module-closure.mjs
+
+      - name: Launch isolated HTTP preview of compiled artifact
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages > /tmp/duduq-media-browser-http.log 2>&1 &
+          echo $! > /tmp/duduq-media-browser-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4175/ > /dev/null; then
+              echo "QA_PREVIEW_HTTP_READY"; exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/duduq-media-browser-http.log
+          exit 1
+
+      - name: Exercise Y1M04 and Y1M05 in real Chromium, 3 viewports
+        run: |
+          node --check qa/browser-media-candidate-smoke.mjs
+          node qa/browser-media-candidate-smoke.mjs
+
+      - name: Preserve browser screenshots, runtime diagnostics and closure counts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-media-browser-qa-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/media-browser-qa/**
+            qa/results/media-closure-inventory.json
+            qa/results/media-module-closure.json
+            /tmp/duduq-media-browser-http.log
+
+      - name: Explicitly forbid false image certification
+        if: always()
+        run: |
+          echo "Compiled V26 entrypoint browser smoke only. No Codex-local PNGs were uploaded to this job."
+          echo "No imported candidate media, no complete 600-gameplay QA, no pedagogical approval, no deploy."
