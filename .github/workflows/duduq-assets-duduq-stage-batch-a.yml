@@ -95,6 +95,20 @@ jobs:
           done
           node qa/browser-media-candidate-smoke.mjs
 
+      - name: Record browser regression failures before candidate staging
+        if: failure()
+        working-directory: game
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test -f qa/results/media-browser-qa/report.json || exit 0
+          cp qa/results/media-browser-qa/report.json qa/results/assets-batch-a-browser-failure.json
+          git add -f qa/results/assets-batch-a-browser-failure.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "qa(media): preserve failed browser evidence for Y1M02/03/06 (candidate blocked)"
+          git push origin HEAD:integration/assets-duduq-resume-20261030
+
       - name: Publish candidate files to isolated Git review branch only, never production
         working-directory: game
         shell: bash
