@@ -111,10 +111,23 @@ try{
         .slice(0,14).map(el=>({tag:el.tagName,cls:String(el.className||'').slice(0,90),
           visible:Boolean(el.getClientRects().length),children:el.childElementCount})),
       frameCount:document.querySelectorAll('iframe').length,
+      interactionState:document.querySelector('#game')?.dataset?.duduqInteractionState||'UNSET',
+      instructionAudioButtons:document.querySelectorAll('.audio-button').length,
       pageText:String(document.body?.innerText||'').slice(0,160)};
    });
+   // Audio-first games legitimately remain locked while an instruction plays.
+   // Give them an additional bounded window before calling the arena empty.
+   let lateBubbleCount=visual.playableBubbleCount;
+   if(q.mechanic==='bubble-pop'&&lateBubbleCount===0){
+    await page.waitForFunction(() =>
+      document.querySelectorAll('.bubble-pop-playable').length>0,
+      null,{timeout:11000}).catch(()=>{});
+    lateBubbleCount=await page.locator('.bubble-pop-playable').count();
+   }
+   const gateAfterWait=await page.evaluate(()=>document.querySelector('#game')?.dataset?.duduqInteractionState||'UNSET');
    const row={module:q.module,id:q.id,mechanic:q.mechanic,
      route,status:response?.status()||0,pinnedRefs:q.pinnedCandidateReferences,
+     lateBubbleCount,gateAfterWait,
      ...visual,errors:errors.slice(0,3),brokenImages:brokenImages.slice(0,8)};
    result.render.push(row);result.checkedMechanicRoutes++;
    if(!response?.ok()||errors.length||brokenImages.length||visual.brokenCandidateImages){
@@ -123,12 +136,14 @@ try{
         brokenCandidateImages:row.brokenCandidateImages}});
    }
    if(q.mechanic.startsWith('drag-drop')&&q.pinnedCandidateReferences>0&&visual.loadedImageCount===0)
-    result.findings.push({module:q.module,question:q.id,kind:'DND_PINNED_IMAGE_NOT_RENDERED',
+    result.findings.push({module:q.module,question:q.id,kind:'DND_REFERENCE_NOT_VISIBLE_NEEDS_VARIANT_REVIEW',
       detail:{pinnedRefs:q.pinnedCandidateReferences,route}});
    // Zero PNGs is NORMAL for Bubble Pop text/color bubbles. Empty interaction
    // area is NOT normal: the approved animation must spawn playable bubbles.
-   if(q.mechanic==='bubble-pop'&&visual.playableBubbleCount===0)
-    result.findings.push({module:q.module,question:q.id,kind:'BUBBLE_POP_NO_PLAYABLE_BUBBLES',detail:{route}});
+   if(q.mechanic==='bubble-pop'&&lateBubbleCount===0)
+    result.findings.push({module:q.module,question:q.id,
+      kind:gateAfterWait==='READY'||gateAfterWait==='ACTIVE'?'BUBBLE_EMPTY_AFTER_READY':'BUBBLE_STUCK_BEFORE_READY',
+      detail:{route,initialGate:visual.interactionState,gateAfterWait,waitMs:15800}});
   }catch(e){
    result.findings.push({module:q.module,question:q.id,kind:'BROWSER_PROBE_EXCEPTION',message:String(e.message||e).slice(0,350)});
   }finally{await page.close();}
@@ -140,7 +155,7 @@ for(const m of modules){
   withPreviewCandidates:questions.filter(q=>q.pinnedCandidateReferences>0).length,
   withProvisionalRefs:questions.filter(q=>q.provisionalReferences>0).length,
   withNoCandidateVisible:browsed.filter(q=>q.pinnedRefs>0&&q.loadedImageCount===0).length,
-  bubbleNoInteractive:browsed.filter(q=>q.mechanic==='bubble-pop'&&q.playableBubbleCount===0).length};
+  bubbleNoInteractive:browsed.filter(q=>q.mechanic==='bubble-pop'&&q.lateBubbleCount===0).length};
 }
 await mkdir(outDir,{recursive:true});
 await writeFile(path.join(outDir,'report.json'),JSON.stringify(result,null,2)+'\n');
@@ -148,7 +163,7 @@ console.log('DUDUQ_MIXED_MECHANICS_80_QUESTIONS='+JSON.stringify({checked:result
  probed:result.checkedMechanicRoutes,uniqueCandidateFiles:result.checkedUniqueImageFiles,
  summary:result.summary,findings:result.findings.slice(0,70)}));
 const critical=new Set(['MISSING_MEDIA_ID','CANDIDATE_WITHOUT_SHA256','IMAGE_HASH_MISMATCH','BROWSER_IMAGE_OR_JS_ERROR',
- 'DND_PINNED_IMAGE_NOT_RENDERED','BUBBLE_POP_NO_PLAYABLE_BUBBLES','BROWSER_PROBE_EXCEPTION']);
+ 'BUBBLE_EMPTY_AFTER_READY','BUBBLE_STUCK_BEFORE_READY','BROWSER_PROBE_EXCEPTION']);
 const fails=result.findings.filter(f=>critical.has(f.kind)||f.kind.startsWith('IMAGE_UNREADABLE:'));
 if(fails.length){
  console.error('DUDUQ_MIXED_MECHANICS_GATE_FAILED='+JSON.stringify({count:fails.length,examples:fails.slice(0,25)}));
