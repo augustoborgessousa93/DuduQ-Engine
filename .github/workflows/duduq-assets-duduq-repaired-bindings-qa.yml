@@ -4,7 +4,7 @@ on:
     branches:
       - integration/assets-duduq-resume-20261030
     paths:
-      - "qa/repair-assets-duduq-destination-bindings.mjs"
+      - "qa/repair-assets-duduq-scoped-occurrences.mjs"
       - "qa/build-v26-topic-first-paint-qa.sh"
       - ".github/workflows/duduq-assets-duduq-repaired-bindings-qa.yml"
 permissions:
@@ -27,26 +27,47 @@ jobs:
           node-version: "22"
       - name: Rebuild candidate preview with destination correction
         run: |
-          node --check qa/repair-assets-duduq-destination-bindings.mjs
+          node --check qa/repair-assets-duduq-scoped-occurrences.mjs
           bash qa/build-v26-topic-first-paint-qa.sh
       - name: Confirm corrected destination/media references and immutable source
         run: |
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
-          const c=JSON.parse(fs.readFileSync('qa/results/assets-duduq-destination-recovery.json','utf8'));
+          const c=JSON.parse(fs.readFileSync('qa/results/assets-duduq-occurrence-scoped-repair.json','utf8'));
           const r=JSON.parse(fs.readFileSync('dist-pages/content/english/media/media-registry.json','utf8'));
           const lookup=new Map(r.entries.map(e=>[e.mediaId,e]));
-          assert(c.recoveredCount>=12,'UNEXPECTEDLY_FEW_RECOVERED_DESTINATIONS');
-          for(const id of ['IMG-Y1M02-Q001-ONE','IMG-Y1M02-Q001-TWO','IMG-Y1M02-Q001-THREE',
-                          'IMG-Y1M02-Q001-FOUR','IMG-Y1M03-Q001-RED','IMG-Y1M03-Q001-BLUE',
-                          'IMG-Y1M06-Q001-DOG','IMG-Y1M06-Q001-CAT']){
-             const entry=lookup.get(id);
-             assert(entry?.provenance?.sourceRepository==='augustoborgessousa93/Assets-DuduQ','STILL_PROVISIONAL:'+id);
-             assert(entry.urlOrPath?.endsWith('.png'),'NOT_OFFICIAL_SOURCE_PNG:'+id);
-             assert(entry.temporary===true,'PREVIEW_MUST_STILL_REQUIRE_HUMAN_APPROVAL:'+id);
+          assert(c.totalNewMediaIds>=12,'INSUFFICIENT_SCOPED_MEDIA_IDENTIFIERS');
+          assert(c.questionFilesModified.length>=3,'QUESTION_REFERENCE_FILES_NOT_UPDATED');
+          const cases=[
+            ['Y1M02','01',['one','two','three','four']],
+            ['Y1M03','01',['red','blue','yellow','green']],
+            ['Y1M06','01',['dog','cat','fish','rabbit']]
+          ];
+          for(const [module,unused,concepts] of cases){
+            const m=module.slice(3);
+            const q=JSON.parse(fs.readFileSync('dist-pages/content/english/year-1/module-'+m+'/questions.json','utf8')).items[0];
+            const found=new Map();
+            function walk(node){
+              if(!node||typeof node!=='object')return;
+              if(!Array.isArray(node)){
+                for(const key of ['assetId','mediaId','image_ref','imageRef']){
+                  const id=node[key];
+                  if(typeof id!=='string'||!id.includes('-CTX-'))continue;
+                  const concept=String(node.semanticTarget||'').toLowerCase().trim();
+                  const e=lookup.get(id);
+                  assert(e?.provenance?.sourceRepository==='augustoborgessousa93/Assets-DuduQ','MISSING_SOURCE_BINDING:'+id);
+                  assert(e.urlOrPath?.endsWith('.png'),'WRONG_ASSET_TYPE:'+id);
+                  assert(e.temporary===true,'MUST_STAY_PENDING_HUMAN_APPROVAL:'+id);
+                  found.set(concept,(found.get(concept)||0)+1);
+                }
+              }
+              for(const v of Object.values(node))if(v&&typeof v==='object')walk(v);
+            }
+            walk(q);
+            for(const concept of concepts)assert(found.has(concept),'QUESTION_DESTINATION_STILL_PROVISIONAL:'+module+':'+concept);
           }
-          console.log('DUDUQ_QUESTION_DESTINATION_BINDINGS='+JSON.stringify({status:'PASS',recovered:c.recoveredCount,modules:c.byModule,sourceQuestionContracts:600,pedagogicalQA:'PENDING'}));
+          console.log('DUDUQ_MEDIA_OCCURRENCE_RECOVERY='+JSON.stringify({status:'PASS',newIds:c.totalNewMediaIds,mediaFieldsChanged:c.totalQuestionMediaOccurrencesRebound,byModule:c.byModule,sourceQuestionCount:600,production:'UNTOUCHED'}));
           NODE
       - name: Install browser and check all four module routes
         run: |
@@ -63,6 +84,6 @@ jobs:
           name: duduq-recovered-destination-qa-report
           retention-days: 21
           path: |
-            qa/results/assets-duduq-destination-recovery.json
+            qa/results/assets-duduq-occurrence-scoped-repair.json
             qa/results/media-browser-qa/**
       - run: echo "Strictly isolated QA preview. No official promotion or pedagogical approval."
