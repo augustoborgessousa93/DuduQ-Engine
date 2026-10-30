@@ -1,0 +1,791 @@
+{
+  "schemaVersion": "DUDUQ_MEDIA_BROWSER_CANDIDATE_SMOKE_V1",
+  "mode": "QA_ONLY_NON_PRODUCTION",
+  "actualBrowser": "PLAYWRIGHT_CHROMIUM",
+  "source": "Compiled V26 artifact served by local HTTP, unless candidate changes explicitly applied before this test",
+  "integratedImageQA": false,
+  "pedagogicalQAApproved": false,
+  "gameplayCertified": false,
+  "modules": [
+    "Y1M02",
+    "Y1M03",
+    "Y1M06"
+  ],
+  "viewports": [
+    "desktop-1366x768",
+    "tablet-768x1024",
+    "mobile-390x844"
+  ],
+  "checks": 9,
+  "passes": 3,
+  "failures": 6,
+  "mediaPendingChecks": 9,
+  "status": "FAIL",
+  "results": [
+    {
+      "moduleId": "Y1M02",
+      "viewport": "desktop-1366x768",
+      "route": "/play/english/year-1/module-02/",
+      "url": "http://127.0.0.1:4175/play/english/year-1/module-02/",
+      "testScope": "REAL_BROWSER_ENTRYPOINT_AND_IMAGE_TRANSPORT_ONLY",
+      "contentQuestionCountNotTested": true,
+      "candidatesFromLocalOnlyNotTested": true,
+      "browserGameplayQA": "NOT_CERTIFIED",
+      "pedagogicalQA": "NOT_CERTIFIED",
+      "boot": "FAIL",
+      "httpStatus": 200,
+      "introWaitMs": 30,
+      "before": {
+        "title": "EduQ Play — Início do módulo",
+        "htmlBodyTextLength": 245,
+        "rootTextLength": 740,
+        "documentWidth": 1366,
+        "viewportWidth": 1366,
+        "images": [
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/mascote-duduq-intro.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-ano-serie.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-modulo.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-disciplina.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          }
+        ]
+      },
+      "introStartVisible": true,
+      "introStartClicked": true,
+      "navigatedUrl": "http://127.0.0.1:4175/play/drag-drop-multimedia/?duduqModule=Y1M02&duduqItem=Y1M02-Q001",
+      "after": {
+        "bodyTextLength": 234,
+        "imageCount": 31,
+        "brokenVisibleImages": [],
+        "imagesWithEmptySource": 1,
+        "emptySourceImageDetails": [
+          {
+            "alt": "",
+            "className": "feedback-mascot",
+            "srcAttribute": null,
+            "dataMediaId": null,
+            "dataTestId": null,
+            "parentTag": "SECTION",
+            "parentClass": "feedback-ribbon dnd-multimedia-feedback",
+            "outerHTML": "<img class=\"feedback-mascot\" data-asset=\"feedback-mascot\" alt=\"\">",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "documentOverflowX": 0,
+        "engineReady": false,
+        "gameRootPresent": true,
+        "iframeGamePresent": false
+      },
+      "imageQaStatus": "PENDING_EMPTY_IMAGE_SOURCE",
+      "pageErrors": [],
+      "httpFailures": [],
+      "networkFailures": [],
+      "canceledDuringNavigation": [],
+      "screenshot": "Y1M02-desktop-1366x768.png"
+    },
+    {
+      "moduleId": "Y1M02",
+      "viewport": "tablet-768x1024",
+      "route": "/play/english/year-1/module-02/",
+      "url": "http://127.0.0.1:4175/play/english/year-1/module-02/",
+      "testScope": "REAL_BROWSER_ENTRYPOINT_AND_IMAGE_TRANSPORT_ONLY",
+      "contentQuestionCountNotTested": true,
+      "candidatesFromLocalOnlyNotTested": true,
+      "browserGameplayQA": "NOT_CERTIFIED",
+      "pedagogicalQA": "NOT_CERTIFIED",
+      "boot": "FAIL",
+      "httpStatus": 200,
+      "introWaitMs": 28,
+      "before": {
+        "title": "EduQ Play — Início do módulo",
+        "htmlBodyTextLength": 245,
+        "rootTextLength": 740,
+        "documentWidth": 768,
+        "viewportWidth": 768,
+        "images": [
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/mascote-duduq-intro.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-ano-serie.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-modulo.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-disciplina.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          }
+        ]
+      },
+      "introStartVisible": true,
+      "introStartClicked": true,
+      "navigatedUrl": "http://127.0.0.1:4175/play/drag-drop-multimedia/?duduqModule=Y1M02&duduqItem=Y1M02-Q001",
+      "after": {
+        "bodyTextLength": 234,
+        "imageCount": 31,
+        "brokenVisibleImages": [],
+        "imagesWithEmptySource": 1,
+        "emptySourceImageDetails": [
+          {
+            "alt": "",
+            "className": "feedback-mascot",
+            "srcAttribute": null,
+            "dataMediaId": null,
+            "dataTestId": null,
+            "parentTag": "SECTION",
+            "parentClass": "feedback-ribbon dnd-multimedia-feedback",
+            "outerHTML": "<img class=\"feedback-mascot\" data-asset=\"feedback-mascot\" alt=\"\">",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "documentOverflowX": 0,
+        "engineReady": false,
+        "gameRootPresent": true,
+        "iframeGamePresent": false
+      },
+      "imageQaStatus": "PENDING_EMPTY_IMAGE_SOURCE",
+      "pageErrors": [],
+      "httpFailures": [],
+      "networkFailures": [],
+      "canceledDuringNavigation": [],
+      "screenshot": "Y1M02-tablet-768x1024.png"
+    },
+    {
+      "moduleId": "Y1M02",
+      "viewport": "mobile-390x844",
+      "route": "/play/english/year-1/module-02/",
+      "url": "http://127.0.0.1:4175/play/english/year-1/module-02/",
+      "testScope": "REAL_BROWSER_ENTRYPOINT_AND_IMAGE_TRANSPORT_ONLY",
+      "contentQuestionCountNotTested": true,
+      "candidatesFromLocalOnlyNotTested": true,
+      "browserGameplayQA": "NOT_CERTIFIED",
+      "pedagogicalQA": "NOT_CERTIFIED",
+      "boot": "FAIL",
+      "httpStatus": 200,
+      "introWaitMs": 22,
+      "before": {
+        "title": "EduQ Play — Início do módulo",
+        "htmlBodyTextLength": 245,
+        "rootTextLength": 740,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "images": [
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/mascote-duduq-intro.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-ano-serie.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-modulo.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-disciplina.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          }
+        ]
+      },
+      "introStartVisible": true,
+      "introStartClicked": true,
+      "navigatedUrl": "http://127.0.0.1:4175/play/drag-drop-multimedia/?duduqModule=Y1M02&duduqItem=Y1M02-Q001",
+      "after": {
+        "bodyTextLength": 234,
+        "imageCount": 31,
+        "brokenVisibleImages": [],
+        "imagesWithEmptySource": 1,
+        "emptySourceImageDetails": [
+          {
+            "alt": "",
+            "className": "feedback-mascot",
+            "srcAttribute": null,
+            "dataMediaId": null,
+            "dataTestId": null,
+            "parentTag": "SECTION",
+            "parentClass": "feedback-ribbon dnd-multimedia-feedback",
+            "outerHTML": "<img class=\"feedback-mascot\" data-asset=\"feedback-mascot\" alt=\"\">",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "documentOverflowX": 0,
+        "engineReady": false,
+        "gameRootPresent": true,
+        "iframeGamePresent": false
+      },
+      "imageQaStatus": "PENDING_EMPTY_IMAGE_SOURCE",
+      "pageErrors": [],
+      "httpFailures": [],
+      "networkFailures": [],
+      "canceledDuringNavigation": [],
+      "screenshot": "Y1M02-mobile-390x844.png"
+    },
+    {
+      "moduleId": "Y1M03",
+      "viewport": "desktop-1366x768",
+      "route": "/play/english/year-1/module-03/",
+      "url": "http://127.0.0.1:4175/play/english/year-1/module-03/",
+      "testScope": "REAL_BROWSER_ENTRYPOINT_AND_IMAGE_TRANSPORT_ONLY",
+      "contentQuestionCountNotTested": true,
+      "candidatesFromLocalOnlyNotTested": true,
+      "browserGameplayQA": "NOT_CERTIFIED",
+      "pedagogicalQA": "NOT_CERTIFIED",
+      "boot": "PASS",
+      "httpStatus": 200,
+      "introWaitMs": 22,
+      "before": {
+        "title": "EduQ Play — Início do módulo",
+        "htmlBodyTextLength": 245,
+        "rootTextLength": 740,
+        "documentWidth": 1366,
+        "viewportWidth": 1366,
+        "images": [
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/mascote-duduq-intro.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-ano-serie.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-modulo.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-disciplina.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          }
+        ]
+      },
+      "introStartVisible": true,
+      "introStartClicked": true,
+      "navigatedUrl": "http://127.0.0.1:4175/play/bubble-pop/?duduqModule=Y1M03&duduqItem=Y1M03-Q001",
+      "after": {
+        "bodyTextLength": 160,
+        "imageCount": 7,
+        "brokenVisibleImages": [],
+        "imagesWithEmptySource": 1,
+        "emptySourceImageDetails": [
+          {
+            "alt": "",
+            "className": "feedback-mascot",
+            "srcAttribute": null,
+            "dataMediaId": null,
+            "dataTestId": null,
+            "parentTag": "SECTION",
+            "parentClass": "feedback-ribbon",
+            "outerHTML": "<img class=\"feedback-mascot\" data-asset=\"feedback-mascot\" alt=\"\">",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "documentOverflowX": 0,
+        "engineReady": false,
+        "gameRootPresent": true,
+        "iframeGamePresent": false
+      },
+      "imageQaStatus": "PENDING_EMPTY_IMAGE_SOURCE",
+      "pageErrors": [],
+      "httpFailures": [],
+      "networkFailures": [],
+      "canceledDuringNavigation": [],
+      "screenshot": "Y1M03-desktop-1366x768.png"
+    },
+    {
+      "moduleId": "Y1M03",
+      "viewport": "tablet-768x1024",
+      "route": "/play/english/year-1/module-03/",
+      "url": "http://127.0.0.1:4175/play/english/year-1/module-03/",
+      "testScope": "REAL_BROWSER_ENTRYPOINT_AND_IMAGE_TRANSPORT_ONLY",
+      "contentQuestionCountNotTested": true,
+      "candidatesFromLocalOnlyNotTested": true,
+      "browserGameplayQA": "NOT_CERTIFIED",
+      "pedagogicalQA": "NOT_CERTIFIED",
+      "boot": "PASS",
+      "httpStatus": 200,
+      "introWaitMs": 22,
+      "before": {
+        "title": "EduQ Play — Início do módulo",
+        "htmlBodyTextLength": 245,
+        "rootTextLength": 740,
+        "documentWidth": 768,
+        "viewportWidth": 768,
+        "images": [
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/mascote-duduq-intro.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-ano-serie.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-modulo.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-disciplina.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          }
+        ]
+      },
+      "introStartVisible": true,
+      "introStartClicked": true,
+      "navigatedUrl": "http://127.0.0.1:4175/play/bubble-pop/?duduqModule=Y1M03&duduqItem=Y1M03-Q001",
+      "after": {
+        "bodyTextLength": 160,
+        "imageCount": 7,
+        "brokenVisibleImages": [],
+        "imagesWithEmptySource": 1,
+        "emptySourceImageDetails": [
+          {
+            "alt": "",
+            "className": "feedback-mascot",
+            "srcAttribute": null,
+            "dataMediaId": null,
+            "dataTestId": null,
+            "parentTag": "SECTION",
+            "parentClass": "feedback-ribbon",
+            "outerHTML": "<img class=\"feedback-mascot\" data-asset=\"feedback-mascot\" alt=\"\">",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "documentOverflowX": 0,
+        "engineReady": false,
+        "gameRootPresent": true,
+        "iframeGamePresent": false
+      },
+      "imageQaStatus": "PENDING_EMPTY_IMAGE_SOURCE",
+      "pageErrors": [],
+      "httpFailures": [],
+      "networkFailures": [],
+      "canceledDuringNavigation": [],
+      "screenshot": "Y1M03-tablet-768x1024.png"
+    },
+    {
+      "moduleId": "Y1M03",
+      "viewport": "mobile-390x844",
+      "route": "/play/english/year-1/module-03/",
+      "url": "http://127.0.0.1:4175/play/english/year-1/module-03/",
+      "testScope": "REAL_BROWSER_ENTRYPOINT_AND_IMAGE_TRANSPORT_ONLY",
+      "contentQuestionCountNotTested": true,
+      "candidatesFromLocalOnlyNotTested": true,
+      "browserGameplayQA": "NOT_CERTIFIED",
+      "pedagogicalQA": "NOT_CERTIFIED",
+      "boot": "PASS",
+      "httpStatus": 200,
+      "introWaitMs": 22,
+      "before": {
+        "title": "EduQ Play — Início do módulo",
+        "htmlBodyTextLength": 245,
+        "rootTextLength": 740,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "images": [
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/mascote-duduq-intro.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-ano-serie.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-modulo.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-disciplina.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          }
+        ]
+      },
+      "introStartVisible": true,
+      "introStartClicked": true,
+      "navigatedUrl": "http://127.0.0.1:4175/play/bubble-pop/?duduqModule=Y1M03&duduqItem=Y1M03-Q001",
+      "after": {
+        "bodyTextLength": 160,
+        "imageCount": 7,
+        "brokenVisibleImages": [],
+        "imagesWithEmptySource": 1,
+        "emptySourceImageDetails": [
+          {
+            "alt": "",
+            "className": "feedback-mascot",
+            "srcAttribute": null,
+            "dataMediaId": null,
+            "dataTestId": null,
+            "parentTag": "SECTION",
+            "parentClass": "feedback-ribbon",
+            "outerHTML": "<img class=\"feedback-mascot\" data-asset=\"feedback-mascot\" alt=\"\">",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "documentOverflowX": 0,
+        "engineReady": false,
+        "gameRootPresent": true,
+        "iframeGamePresent": false
+      },
+      "imageQaStatus": "PENDING_EMPTY_IMAGE_SOURCE",
+      "pageErrors": [],
+      "httpFailures": [],
+      "networkFailures": [],
+      "canceledDuringNavigation": [],
+      "screenshot": "Y1M03-mobile-390x844.png"
+    },
+    {
+      "moduleId": "Y1M06",
+      "viewport": "desktop-1366x768",
+      "route": "/play/english/year-1/module-06/",
+      "url": "http://127.0.0.1:4175/play/english/year-1/module-06/",
+      "testScope": "REAL_BROWSER_ENTRYPOINT_AND_IMAGE_TRANSPORT_ONLY",
+      "contentQuestionCountNotTested": true,
+      "candidatesFromLocalOnlyNotTested": true,
+      "browserGameplayQA": "NOT_CERTIFIED",
+      "pedagogicalQA": "NOT_CERTIFIED",
+      "boot": "FAIL",
+      "httpStatus": 200,
+      "introWaitMs": 26,
+      "before": {
+        "title": "EduQ Play — Início do módulo",
+        "htmlBodyTextLength": 245,
+        "rootTextLength": 740,
+        "documentWidth": 1366,
+        "viewportWidth": 1366,
+        "images": [
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/mascote-duduq-intro.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-ano-serie.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-modulo.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-disciplina.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          }
+        ]
+      },
+      "introStartVisible": true,
+      "introStartClicked": true,
+      "navigatedUrl": "http://127.0.0.1:4175/play/drag-drop-multimedia/?duduqModule=Y1M06&duduqItem=Y1M06-Q001",
+      "after": {
+        "bodyTextLength": 225,
+        "imageCount": 31,
+        "brokenVisibleImages": [],
+        "imagesWithEmptySource": 1,
+        "emptySourceImageDetails": [
+          {
+            "alt": "",
+            "className": "feedback-mascot",
+            "srcAttribute": null,
+            "dataMediaId": null,
+            "dataTestId": null,
+            "parentTag": "SECTION",
+            "parentClass": "feedback-ribbon dnd-multimedia-feedback",
+            "outerHTML": "<img class=\"feedback-mascot\" data-asset=\"feedback-mascot\" alt=\"\">",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "documentOverflowX": 0,
+        "engineReady": false,
+        "gameRootPresent": true,
+        "iframeGamePresent": false
+      },
+      "imageQaStatus": "PENDING_EMPTY_IMAGE_SOURCE",
+      "pageErrors": [],
+      "httpFailures": [],
+      "networkFailures": [],
+      "canceledDuringNavigation": [],
+      "screenshot": "Y1M06-desktop-1366x768.png"
+    },
+    {
+      "moduleId": "Y1M06",
+      "viewport": "tablet-768x1024",
+      "route": "/play/english/year-1/module-06/",
+      "url": "http://127.0.0.1:4175/play/english/year-1/module-06/",
+      "testScope": "REAL_BROWSER_ENTRYPOINT_AND_IMAGE_TRANSPORT_ONLY",
+      "contentQuestionCountNotTested": true,
+      "candidatesFromLocalOnlyNotTested": true,
+      "browserGameplayQA": "NOT_CERTIFIED",
+      "pedagogicalQA": "NOT_CERTIFIED",
+      "boot": "FAIL",
+      "httpStatus": 200,
+      "introWaitMs": 25,
+      "before": {
+        "title": "EduQ Play — Início do módulo",
+        "htmlBodyTextLength": 245,
+        "rootTextLength": 740,
+        "documentWidth": 768,
+        "viewportWidth": 768,
+        "images": [
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/mascote-duduq-intro.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-ano-serie.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-modulo.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-disciplina.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          }
+        ]
+      },
+      "introStartVisible": true,
+      "introStartClicked": true,
+      "navigatedUrl": "http://127.0.0.1:4175/play/drag-drop-multimedia/?duduqModule=Y1M06&duduqItem=Y1M06-Q001",
+      "after": {
+        "bodyTextLength": 225,
+        "imageCount": 31,
+        "brokenVisibleImages": [],
+        "imagesWithEmptySource": 1,
+        "emptySourceImageDetails": [
+          {
+            "alt": "",
+            "className": "feedback-mascot",
+            "srcAttribute": null,
+            "dataMediaId": null,
+            "dataTestId": null,
+            "parentTag": "SECTION",
+            "parentClass": "feedback-ribbon dnd-multimedia-feedback",
+            "outerHTML": "<img class=\"feedback-mascot\" data-asset=\"feedback-mascot\" alt=\"\">",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "documentOverflowX": 0,
+        "engineReady": false,
+        "gameRootPresent": true,
+        "iframeGamePresent": false
+      },
+      "imageQaStatus": "PENDING_EMPTY_IMAGE_SOURCE",
+      "pageErrors": [],
+      "httpFailures": [],
+      "networkFailures": [],
+      "canceledDuringNavigation": [],
+      "screenshot": "Y1M06-tablet-768x1024.png"
+    },
+    {
+      "moduleId": "Y1M06",
+      "viewport": "mobile-390x844",
+      "route": "/play/english/year-1/module-06/",
+      "url": "http://127.0.0.1:4175/play/english/year-1/module-06/",
+      "testScope": "REAL_BROWSER_ENTRYPOINT_AND_IMAGE_TRANSPORT_ONLY",
+      "contentQuestionCountNotTested": true,
+      "candidatesFromLocalOnlyNotTested": true,
+      "browserGameplayQA": "NOT_CERTIFIED",
+      "pedagogicalQA": "NOT_CERTIFIED",
+      "boot": "FAIL",
+      "httpStatus": 200,
+      "introWaitMs": 21,
+      "before": {
+        "title": "EduQ Play — Início do módulo",
+        "htmlBodyTextLength": 245,
+        "rootTextLength": 740,
+        "documentWidth": 390,
+        "viewportWidth": 390,
+        "images": [
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/mascote-duduq-intro.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-ano-serie.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-modulo.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          },
+          {
+            "src": "http://127.0.0.1:4175/core/assets/intro/icon-disciplina.png",
+            "complete": true,
+            "naturalWidth": 1254,
+            "naturalHeight": 1254
+          }
+        ]
+      },
+      "introStartVisible": true,
+      "introStartClicked": true,
+      "navigatedUrl": "http://127.0.0.1:4175/play/drag-drop-multimedia/?duduqModule=Y1M06&duduqItem=Y1M06-Q001",
+      "after": {
+        "bodyTextLength": 225,
+        "imageCount": 31,
+        "brokenVisibleImages": [],
+        "imagesWithEmptySource": 1,
+        "emptySourceImageDetails": [
+          {
+            "alt": "",
+            "className": "feedback-mascot",
+            "srcAttribute": null,
+            "dataMediaId": null,
+            "dataTestId": null,
+            "parentTag": "SECTION",
+            "parentClass": "feedback-ribbon dnd-multimedia-feedback",
+            "outerHTML": "<img class=\"feedback-mascot\" data-asset=\"feedback-mascot\" alt=\"\">",
+            "visible": false,
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            }
+          }
+        ],
+        "documentOverflowX": 0,
+        "engineReady": false,
+        "gameRootPresent": true,
+        "iframeGamePresent": false
+      },
+      "imageQaStatus": "PENDING_EMPTY_IMAGE_SOURCE",
+      "pageErrors": [],
+      "httpFailures": [],
+      "networkFailures": [],
+      "canceledDuringNavigation": [],
+      "screenshot": "Y1M06-mobile-390x844.png"
+    }
+  ]
+}
