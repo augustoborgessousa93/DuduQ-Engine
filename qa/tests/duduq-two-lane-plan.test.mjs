@@ -6,8 +6,22 @@ import path from 'node:path';
 import os from 'node:os';
 import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
+import {deflateSync} from 'node:zlib';
+import {validateDuduqRgbaPng} from '../validate-duduq-png.mjs';
 const script=path.resolve('qa/duduq-two-lane-plan.mjs');
 const sum=b=>createHash('sha256').update(b).digest('hex');
+const tab=Array.from({length:256},(_,i)=>{let v=i;for(let j=0;j<8;j++)v=(v&1)?(0xedb88320^(v>>>1)):(v>>>1);return v>>>0});
+function crc(b){let c=0xffffffff;for(const x of b)c=tab[(c^x)&255]^(c>>>8);return (c^0xffffffff)>>>0}
+function chunk(t,b){const h=Buffer.alloc(4),tail=Buffer.alloc(4),body=Buffer.concat([Buffer.from(t),b]);
+ h.writeUInt32BE(b.length);tail.writeUInt32BE(crc(body));return Buffer.concat([h,body,tail])}
+function realPng(){
+ const ih=Buffer.alloc(13);ih.writeUInt32BE(16,0);ih.writeUInt32BE(16,4);ih[8]=8;ih[9]=6;
+ const lines=[];for(let yy=0;yy<16;yy++){lines.push(0);for(let xx=0;xx<16;xx++)
+  lines.push(133,52,22,xx>=4&&xx<12&&yy>=4&&yy<12?255:0)}
+ return Buffer.concat([Buffer.from('89504e470d0a1a0a','hex'),
+  chunk('IHDR',ih),chunk('IDAT',deflateSync(Buffer.from(lines))),chunk('IEND',Buffer.alloc(0))]);
+}
+
 const all=Array.from({length:5},(_,i)=>i+1).flatMap(y=>Array.from({length:6},(_,j)=>'Y'+y+'M'+String(j+1).padStart(2,'0')));
 function fixture(){
  const root=fs.mkdtempSync(path.join(os.tmpdir(),'duduq-lanes-'));
@@ -23,10 +37,10 @@ function fixture(){
   distinctPendingMediaIds:84,modulesDetail}));
  return root;
 }
-function candidate(root,mod,{shaWrong=false,review='MODEL_SEMANTIC_PRECHECK_PASSED',questionCount=20}={}){
+function candidate(root,mod,{shaWrong=false,truncated=false,review='MODEL_SEMANTIC_PRECHECK_PASSED',questionCount=20}={}){
  const dir=path.join(root,'qa/media-candidates',mod.toLowerCase()+'-official-20261030');
  fs.mkdirSync(path.join(dir,'images'),{recursive:true});
- const png=Buffer.concat([Buffer.from('89504e470d0a1a0a','hex'),Buffer.alloc(18)]);
+ const png=truncated?Buffer.concat([Buffer.from('89504e470d0a1a0a','hex'),Buffer.alloc(18)]):realPng();
  fs.writeFileSync(path.join(dir,'images','A.png'),png);
  fs.writeFileSync(path.join(dir,'batch-manifest.json'),JSON.stringify({
   moduleId:mod,questionContractsReviewed:questionCount,productionApproved:false,
@@ -53,6 +67,22 @@ test('QA blockage in Y1M04 does not prevent independent Y1M06 generation',()=>{
   assert.equal(report.finished,false);
   assert.equal(report.integrator.deployAllowed,false);
   assert.equal(report.moduleCount,30);
+ }finally{fs.rmSync(root,{recursive:true,force:true})}
+});
+test('positive fixture decodes a real transparent RGBA PNG with CRCs',()=>{
+ const result=validateDuduqRgbaPng(realPng());assert.equal(result.width,16);
+ assert.ok(result.opaquePixels>0&&result.transparentPixels>0);
+});
+test('signature-only 26-byte fake PNG is rejected even when its SHA matches',()=>{
+ const root=fixture();
+ try{
+  candidate(root,'Y1M04',{truncated:true});candidate(root,'Y1M05');
+  const x=run(root);assert.equal(x.status,0,x.stderr);
+  assert.equal(x.report.candidateAssetCount,1);
+  const row=x.report.modules.find(m=>m.moduleId==='Y1M04');
+  assert.equal(row.candidate.validAssetCount,0);
+  assert.match(row.candidate.invalidAssets[0].verdict,/PNG_DECODE_FAILED/);
+  assert.equal(x.report.integrator.nextModule,'Y1M05');
  }finally{fs.rmSync(root,{recursive:true,force:true})}
 });
 test('candidate file hash mismatch never becomes a ready-to-integrate asset',()=>{
