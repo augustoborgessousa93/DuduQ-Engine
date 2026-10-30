@@ -1,0 +1,68 @@
+name: DUDUQ - Verify recovered destination media in QA preview
+on:
+  push:
+    branches:
+      - integration/assets-duduq-resume-20261030
+    paths:
+      - "qa/repair-assets-duduq-destination-bindings.mjs"
+      - "qa/build-v26-topic-first-paint-qa.sh"
+      - ".github/workflows/duduq-assets-duduq-repaired-bindings-qa.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      CI: "true"
+      CF_PAGES_BRANCH: integration/assets-duduq-resume-20261030
+      BASE_URL: http://127.0.0.1:4175
+      DUDUQ_MEDIA_QA_MODULES: Y1M02,Y1M03,Y1M04,Y1M06
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Rebuild candidate preview with destination correction
+        run: |
+          node --check qa/repair-assets-duduq-destination-bindings.mjs
+          bash qa/build-v26-topic-first-paint-qa.sh
+      - name: Confirm corrected destination/media references and immutable source
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          const c=JSON.parse(fs.readFileSync('qa/results/assets-duduq-destination-recovery.json','utf8'));
+          const r=JSON.parse(fs.readFileSync('dist-pages/content/english/media/media-registry.json','utf8'));
+          const lookup=new Map(r.entries.map(e=>[e.mediaId,e]));
+          assert(c.recoveredCount>=12,'UNEXPECTEDLY_FEW_RECOVERED_DESTINATIONS');
+          for(const id of ['IMG-Y1M02-Q001-ONE','IMG-Y1M02-Q001-TWO','IMG-Y1M02-Q001-THREE',
+                          'IMG-Y1M02-Q001-FOUR','IMG-Y1M03-Q001-RED','IMG-Y1M03-Q001-BLUE',
+                          'IMG-Y1M06-Q001-DOG','IMG-Y1M06-Q001-CAT']){
+             const entry=lookup.get(id);
+             assert(entry?.provenance?.sourceRepository==='augustoborgessousa93/Assets-DuduQ','STILL_PROVISIONAL:'+id);
+             assert(entry.urlOrPath?.endsWith('.png'),'NOT_OFFICIAL_SOURCE_PNG:'+id);
+             assert(entry.temporary===true,'PREVIEW_MUST_STILL_REQUIRE_HUMAN_APPROVAL:'+id);
+          }
+          console.log('DUDUQ_QUESTION_DESTINATION_BINDINGS='+JSON.stringify({status:'PASS',recovered:c.recoveredCount,modules:c.byModule,sourceQuestionContracts:600,pedagogicalQA:'PENDING'}));
+          NODE
+      - name: Install browser and check all four module routes
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Boot all four modules, screen sizes 3
+        run: |
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages >/tmp/duduq-reviewed-qa.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4175/ >/dev/null 2>&1 && break; sleep 1; done
+          node qa/browser-media-candidate-smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-recovered-destination-qa-report
+          retention-days: 21
+          path: |
+            qa/results/assets-duduq-destination-recovery.json
+            qa/results/media-browser-qa/**
+      - run: echo "Strictly isolated QA preview. No official promotion or pedagogical approval."
