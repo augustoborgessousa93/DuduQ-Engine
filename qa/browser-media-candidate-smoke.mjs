@@ -30,7 +30,7 @@ const results=[];
 try {
  for(const moduleId of modules){
   const match=/^Y([1-5])M(0[1-6])$/.exec(moduleId);
-  const route='/play/english/year-'+match[1]+'/module-'+match[2]+'/';
+  const route='/content/english/year-'+match[1]+'/module-'+match[2]+'/';
   for(const view of views){
    const page=await browser.newPage({viewport:{width:view.width,height:view.height},reducedMotion:'reduce'});
    const errors=[],badHttp=[],networkFailures=[];
@@ -41,7 +41,12 @@ try {
        !/favicon\.ico(?:\?|$)/.test(r.url()))badHttp.push({url:r.url(),status:r.status()});
    });
    page.on('requestfailed',r=>{
-    if(new URL(r.url()).origin===baseOrigin)networkFailures.push({url:r.url(),failure:r.failure()?.errorText||''});
+    if(new URL(r.url()).origin!==baseOrigin)return;
+    const failure=r.failure()?.errorText||'';
+    // Browsers legitimately abort preloaded audio requests when the page
+    // switches between intro/game states. Do not hide actual HTTP errors.
+    if(failure.includes('ERR_ABORTED') && /\/core\/assets\/audio\//.test(new URL(r.url()).pathname))return;
+    networkFailures.push({url:r.url(),failure});
    });
    const record={moduleId,viewport:view.name,route,url:base+route,
      testScope:'REAL_BROWSER_ENTRYPOINT_AND_IMAGE_TRANSPORT_ONLY',
@@ -52,7 +57,8 @@ try {
    try {
     const response=await page.goto(record.url,{waitUntil:'domcontentloaded',timeout:40000});
     record.httpStatus=response?.status()??null;
-    await page.waitForTimeout(900);
+    await page.waitForFunction(()=>window.DUDUQ_ENGINE_READY===true,null,{timeout:35000});
+    await page.waitForTimeout(300);
     record.before=await page.evaluate(()=>{
      const app=document.querySelector('#root') || document.body;
      const images=[...document.images].map(img=>({
@@ -76,10 +82,15 @@ try {
     const selector='.duduq-intro-start-button';
     const start=page.locator(selector).first();
     record.introStartVisible=await start.isVisible().catch(()=>false);
+    if(!record.introStartVisible)errors.push('OFFICIAL_INTRO_START_NOT_VISIBLE');
     if(record.introStartVisible){
      try {
       await start.click({timeout:6000});
-      await page.waitForTimeout(700);
+      await page.waitForFunction(()=>{
+       const frames=[...document.querySelectorAll('iframe')];
+       return frames.some(f=>f.contentDocument && (f.contentDocument.querySelector('.duduq-engine-root,.duduq-ts-root,.duduq-dd2-root,.duduq-matching-root,.duduq-mq-root,.duduq-bp-root')||f.contentDocument.body?.children.length>0));
+      },null,{timeout:25000});
+      await page.waitForTimeout(300);
       record.introStartClicked=true;
      }catch(e){record.introStartClicked=false;errors.push('INTRO_CLICK_FAILED:'+String(e.message).slice(0,250));}
     }
@@ -91,11 +102,12 @@ try {
       brokenVisibleImages:img.filter(x=>x.complete && x.naturalWidth===0).map(x=>x.currentSrc||x.src),
       documentOverflowX:Math.max(0,document.documentElement.scrollWidth-innerWidth),
       engineReady:window.DUDUQ_ENGINE_READY===true,
-      gameRootPresent:!!document.querySelector('#game,#root')
+      gameRootPresent:!!document.querySelector('#game,#root'),
+      iframeGamePresent:[...document.querySelectorAll('iframe')].some(f=>f.contentDocument?.body?.children.length>0)
      };
     });
     record.boot=response?.ok() && record.before.htmlBodyTextLength>0 &&
-      record.after.gameRootPresent && errors.length===0 && badHttp.length===0 &&
+      record.after.gameRootPresent && record.after.iframeGamePresent && errors.length===0 && badHttp.length===0 &&
       networkFailures.length===0 && record.after.brokenVisibleImages.length===0
       ?'PASS':'FAIL';
    }catch(e){errors.push('SMOKE_EXCEPTION:'+String(e.message).slice(0,800));}
