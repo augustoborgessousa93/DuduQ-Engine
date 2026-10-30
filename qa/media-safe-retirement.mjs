@@ -24,6 +24,17 @@ async function sourcePath(p) {
   if(!isSafePath(p))fail('PATH_NOT_ALLOWED:'+p);
   const full=path.resolve(root,p);
   if(!full.startsWith(root+path.sep))fail('PATH_ESCAPE:'+p);
+  // lstat of the leaf alone does not detect a symlink in an ancestor directory.
+  // Never follow an orphan candidate through a directory alias, even if the
+  // final file looks regular. This also protects the backup/unlink paths.
+  let directory=root;
+  for(const component of p.split('/').slice(0,-1)){
+    directory=path.join(directory,component);
+    let info;
+    try{info=await fs.lstat(directory)}
+    catch(e){if(e.code==='ENOENT')break;throw e;}
+    if(info.isSymbolicLink())fail('SYMLINK_DIRECTORY:'+p);
+  }
   return full;
 }
 const registryPath=path.join(root,'content/english/media/media-registry.json');
