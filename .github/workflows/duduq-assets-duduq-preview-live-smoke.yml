@@ -1,0 +1,81 @@
+name: DUDUQ - Confirm public preview serves six reused PNGs
+
+on:
+  push:
+    branches:
+      - integration/assets-duduq-resume-20261030
+    paths:
+      - ".github/workflows/duduq-assets-duduq-preview-live-smoke.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-media:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      BASE_URL: https://d8b0afae.duduq-engine-13a.pages.dev
+      DUDUQ_MEDIA_QA_MODULES: Y1M04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate 55 live bindings and fetch all six images from public Cloudflare preview
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {createHash} from 'node:crypto';
+          const base=process.env.BASE_URL;
+          const get=async p=>{
+            const url=new URL(p,base+'/');
+            const r=await fetch(url,{signal:AbortSignal.timeout(25000)});
+            if(!r.ok)throw Error('PUBLIC_PREVIEW_HTTP_'+r.status+':'+url);
+            return Buffer.from(await r.arrayBuffer());
+          };
+          const registry=JSON.parse((await get('/content/english/media/media-registry.json')).toString('utf8'));
+          const scoped=(registry.entries||[]).filter(e=>e.provenance?.sourceRepository==='augustoborgessousa93/Assets-DuduQ'
+            && e.integrationStatus==='CANDIDATE_PREVIEW_ONLY_PEDAGOGICAL_QA_PENDING');
+          assert.equal(scoped.length,55,'WRONG_LIVE_BINDING_COUNT');
+          assert(scoped.every(x=>x.temporary===true&&x.humanResolutionStatus==='PEDAGOGICAL_QA_PENDING'),'PREVIEW_SHOULD_REMAIN_PROVISIONAL');
+          const unique=new Map(scoped.map(x=>[x.urlOrPath,x.sha256]));
+          assert.equal(unique.size,6,'WRONG_UNIQUE_PNG_COUNT');
+          for(const [rel,sha] of unique){
+            assert(rel.startsWith('content/english/assets/images/assets-duduq-review/'));
+            const bytes=await get('/'+rel);
+            const got=createHash('sha256').update(bytes).digest('hex');
+            assert.equal(got,sha,'LIVE_PNG_SHA_MISMATCH:'+rel);
+            assert(bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),'NOT_PNG:'+rel);
+          }
+          const page=await get('/play/english/year-1/module-04/');
+          assert(page.length>1000,'EMPTY_LIVE_MODULE');
+          console.log(JSON.stringify({status:'LIVE_PREVIEW_SERVED_VERIFIED',images:unique.size,
+            references:scoped.length,gamePath:'/play/english/year-1/module-04/',pageBytes:page.length}));
+          NODE
+
+      - name: Install Chromium and Playwright for public browser navigation
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Open actual public preview in desktop tablet mobile
+        run: |
+          node qa/browser-media-candidate-smoke.mjs
+
+      - name: Preserve read-only public QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-assets-reuse-public-preview-smoke
+          retention-days: 14
+          if-no-files-found: warn
+          path: qa/results/media-browser-qa/**
+
+      - name: Never merge or deploy to production
+        run: echo "Read-only HTTP and browser verification of a pinned Cloudflare preview, production domain unchanged."
