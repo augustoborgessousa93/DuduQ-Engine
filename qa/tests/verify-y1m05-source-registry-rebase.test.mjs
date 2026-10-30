@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
-import {verifyY1M05SourceRegistryContext} from '../verify-y1m05-source-registry-rebase.mjs';
+import {canonicalLfSha256,verifyY1M05SourceRegistryContext} from '../verify-y1m05-source-registry-rebase.mjs';
 
 const root=process.cwd(),dist=path.join(root,'dist-pages');
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -20,12 +20,21 @@ function repinRegistry(integrityBytes,registryBytes){
   return Buffer.from(lines.join('\n')+'\n');
 }
 
+test('canonical evidence SHA permits only the same LF or CRLF text',()=>{
+  const lf=Buffer.from('{\n  "status": "PASS"\n}\n');
+  const crlf=Buffer.from('{\r\n  "status": "PASS"\r\n}\r\n');
+  const changed=Buffer.from('{\n  "status": "FAIL"\n}\n');
+  assert.equal(canonicalLfSha256(lf),canonicalLfSha256(crlf));
+  assert.notEqual(canonicalLfSha256(lf),canonicalLfSha256(changed));
+});
+
 test('accepts the exact pristine V26 registry and preserves both historical hashes',async()=>{
   const result=await verifyY1M05SourceRegistryContext({root,dist});
   assert.equal(result.context,'PRISTINE_V26_EXACT_WHOLE_REGISTRY_PIN');
   assert.equal(result.actualRegistrySha256,result.cleanV26RegistrySha256);
   assert.notEqual(result.actualRegistrySha256,result.legacyReviewedRegistrySha256);
   assert.equal(result.registryEntriesOutsideY1M04,1076);
+  assert.equal(result.legacyAudit.canonicalLfSha256,'42fb1c757bea8d13935daa2c5e5654a9d9d41deeb38c09d091186b51ea75f938');
   assert.equal(result.sourceHashesRewritten,false);
 });
 

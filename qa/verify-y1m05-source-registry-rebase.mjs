@@ -20,6 +20,7 @@ import {collectQuestionMediaUsages} from './media-binding-usage-guard.mjs';
 import {isExactPedagogicalConcept} from '../scripts/duduq-exact-semantic-match.mjs';
 
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
+export const canonicalLfSha256=bytes=>hash(Buffer.from(bytes.toString('utf8').replace(/\r\n/g,'\n')));
 const fail=code=>{throw Error('Y1M05_SOURCE_REGISTRY_REBASE_FAILED:'+code)};
 
 function parseIntegrity(bytes){
@@ -72,7 +73,10 @@ function outsideY1M04Projection(registry,bundle){
 async function verifyLegacyAuditSnapshot(root,rebase,projection){
   const snapshotPath=path.join(root,rebase.legacyAuditSnapshot?.path||'');
   const snapshotBytes=await readFile(snapshotPath);
-  if(hash(snapshotBytes)!==rebase.legacyAuditSnapshot.sha256)fail('LEGACY_AUDIT_SNAPSHOT_HASH');
+  const rawSha256=hash(snapshotBytes),canonicalSha256=canonicalLfSha256(snapshotBytes);
+  if(canonicalSha256!==rebase.legacyAuditSnapshot.canonicalLfSha256||
+     ![rebase.legacyAuditSnapshot.sha256,rebase.legacyAuditSnapshot.canonicalLfSha256].includes(rawSha256))
+    fail('LEGACY_AUDIT_SNAPSHOT_HASH');
   const snapshot=JSON.parse(snapshotBytes);
   if(snapshot.modules!==30||snapshot.activities!==600||snapshot.registryEntries!==rebase.legacyAuditSnapshot.registryEntries||
      snapshot.byStatus?.OFFICIAL_PEDAGOGICALLY_VERIFIED!==rebase.legacyAuditSnapshot.verifiedY1M04Ids)
@@ -83,7 +87,8 @@ async function verifyLegacyAuditSnapshot(root,rebase,projection){
     if(!audit||audit.status!=='PROVISIONAL'||audit.temporary!==true||audit.path!==entry.urlOrPath||
        !isExactPedagogicalConcept(audit.semantic,entry.semantic))fail('LEGACY_AUDIT_SCOPE_MISMATCH:'+id);
   }
-  return {path:rebase.legacyAuditSnapshot.path,sha256:hash(snapshotBytes),sourceEntriesMatched:projection.ids.length};
+  return {path:rebase.legacyAuditSnapshot.path,rawSha256,canonicalLfSha256:canonicalSha256,
+    sourceEntriesMatched:projection.ids.length};
 }
 
 async function verifyY1M04OfficialPredecessor({root,dist,registry,integrity,projection,rebase,y1m04Bundle,outsideY1M04}){
@@ -132,7 +137,7 @@ export async function verifyY1M05SourceRegistryContext(options={}){
   if(manifest.moduleId!=='Y1M05'||manifest.sourceRegistryRebaseEvidence!=='source-registry-rebase.json'||
      !/^[a-f0-9]{64}$/.test(manifest.sourceRegistryRebaseEvidenceSha256||''))fail('BUNDLE_REBASE_REFERENCE');
   const rebaseBytes=await readFile(path.join(bundleDir,manifest.sourceRegistryRebaseEvidence));
-  if(hash(rebaseBytes)!==manifest.sourceRegistryRebaseEvidenceSha256)fail('REBASE_EVIDENCE_HASH');
+  if(canonicalLfSha256(rebaseBytes)!==manifest.sourceRegistryRebaseEvidenceSha256)fail('REBASE_EVIDENCE_HASH');
   const rebase=JSON.parse(rebaseBytes),integrity=parseIntegrity(integrityBytes);
   if(rebase.schemaVersion!=='DUDUQ_Y1M05_SOURCE_REGISTRY_REBASE_V2'||rebase.moduleId!=='Y1M05'||
      rebase.status!=='PASS_REBASE_TO_CLEAN_V26_WITH_SCOPE_IDENTITY'||rebase.productionApproved!==false)
