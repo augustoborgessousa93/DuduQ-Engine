@@ -115,19 +115,41 @@ try{
       instructionAudioButtons:document.querySelectorAll('.audio-button').length,
       pageText:String(document.body?.innerText||'').slice(0,160)};
    });
-   // Audio-first games legitimately remain locked while an instruction plays.
-   // Give them an additional bounded window before calling the arena empty.
+   // Browser autoplay policies can require a real student gesture.
+   // Exercise the existing approved audio/recovery UI; never spoof READY
+   // or bypass the audio gate just to turn the test green.
    let lateBubbleCount=visual.playableBubbleCount;
+   const audioRecovery={attempted:false,clicked:false,reason:null,buttonCount:0,
+    gateBeforeClick:visual.interactionState,gateAfterClick:null};
    if(q.mechanic==='bubble-pop'&&lateBubbleCount===0){
+    if(visual.interactionState==='AUDIO_RECOVERABLE'){
+     audioRecovery.attempted=true;
+     const selectors=['.audio-button','[data-action="retry-audio"]',
+       'button[aria-label*="áudio" i]','button[aria-label*="ouvir" i]',
+       'button[aria-label*="audio" i]'];
+     const available=await page.evaluate((selectors)=>selectors.flatMap(selector=>
+       [...document.querySelectorAll(selector)].filter(el=>el.getClientRects().length>0)
+        .map(el=>({selector,label:el.getAttribute('aria-label')||el.textContent?.trim()||'',
+          disabled:el.disabled===true}))),selectors);
+     audioRecovery.buttons=available.slice(0,8);
+     const target=available.find(x=>!x.disabled);
+     audioRecovery.buttonCount=available.length;
+     if(target){
+      try{await page.locator(target.selector).first().click({timeout:3500});
+       audioRecovery.clicked=true;
+      }catch(e){audioRecovery.reason='GESTURE_FAILED:'+String(e.message||e).slice(0,150);}
+     }else audioRecovery.reason='NO_VISIBLE_ACTIVE_AUDIO_CONTROL';
+    }
     await page.waitForFunction(() =>
       document.querySelectorAll('.bubble-pop-playable').length>0,
-      null,{timeout:11000}).catch(()=>{});
+      null,{timeout:12500}).catch(()=>{});
     lateBubbleCount=await page.locator('.bubble-pop-playable').count();
    }
    const gateAfterWait=await page.evaluate(()=>document.querySelector('#game')?.dataset?.duduqInteractionState||'UNSET');
+   audioRecovery.gateAfterClick=gateAfterWait;
    const row={module:q.module,id:q.id,mechanic:q.mechanic,
      route,status:response?.status()||0,pinnedRefs:q.pinnedCandidateReferences,
-     lateBubbleCount,gateAfterWait,
+     lateBubbleCount,gateAfterWait,audioRecovery,
      ...visual,errors:errors.slice(0,3),brokenImages:brokenImages.slice(0,8)};
    result.render.push(row);result.checkedMechanicRoutes++;
    if(!response?.ok()||errors.length||brokenImages.length||visual.brokenCandidateImages){
