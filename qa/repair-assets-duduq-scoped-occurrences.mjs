@@ -50,7 +50,8 @@ const report={schemaVersion:'DUDUQ_PER_OCCURRENCE_MEDIA_REPAIR_V1',sourceBranch:
  candidateOnly:true,productionUntouched:true,humanPedagogicalQA:'PENDING',questionFilesModified:[],createdIds:[],
  modifiedReferences:[],byModule:{},skippedCounts:{},sourcePngsAlreadyPinned:imported.size};
 const nextRegistry=structuredClone(reg),known=new Set(nextRegistry.entries.map(x=>x.mediaId));
-const newAssignments=new Map(),updates=new Map();
+const newAssignments=new Map(),updates=new Map(),pencilCaseUsages=[];
+const pencilCaseId='IMG-Y1M04-Q003-PENCIL-CASE';
 let count=0;
 for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
  const mm=String(m).padStart(2,'0'),module='Y'+y+'M'+mm;
@@ -109,6 +110,20 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
   }
   for(const v of Object.values(n))if(v&&typeof v==='object')visit(v,qid);
  }
+ for(const q of originalDoc.items){
+   // Special-case a known canonical alias: pencil case / pencil-case.
+   // Scan ALL 600 source questions, to prove this shared ID does not cross
+   // module boundaries or carry any unrelated visual meaning.
+   function scanPencil(node){
+     if(!node||typeof node!=='object')return;
+     if(!Array.isArray(node) && mediaKeys.some(key=>node[key]===pencilCaseId)){
+       pencilCaseUsages.push({moduleId:module,questionId:q.item_id,
+        semantic:String(node.semanticTarget||''),mustInclude:String(node.mustInclude||'')});
+     }
+     for(const v of Object.values(node))if(v&&typeof v==='object')scanPencil(v);
+   }
+   scanPencil(q);
+ }
  for(const q of doc.items)visit(q,q.item_id);
  if(changes.length){
   assert.deepEqual(mediaMask(doc),mediaMask(originalDoc),'NON_MEDIA_FIELD_CHANGED:'+module);
@@ -121,6 +136,30 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
 }
 assert.equal(count,600);
 if(!report.createdIds.length)throw Error('NO_SEMANTICALLY_VERIFIED_DESTINATION_OCCURRENCES');
+// The single legacy Y1M04 pencil-case shared ID can be reused safely only
+// after proving every actual usage in all 600 questions is the exact same noun.
+// This is NOT a general-purpose alias or cross-module registry substitution.
+const normalizeCase=v=>String(v||'').normalize('NFKC').toLowerCase().trim().replaceAll('-',' ').replace(/\\s+/g,' ');
+const originalCase=originalById.get(pencilCaseId),mappedCase=imported.get('Y1M04|pencil case');
+if(originalCase?.temporary===true&&mappedCase){
+ if(!pencilCaseUsages.length||pencilCaseUsages.some(u=>u.moduleId!=='Y1M04'||
+  normalizeCase(u.semantic)!=='pencil case'||normalizeCase(u.mustInclude)!=='pencil case'))
+   throw Error('PENCIL_CASE_SHARED_ID_HAS_AMBIGUOUS_MEANING');
+ const pos=nextRegistry.entries.findIndex(e=>e.mediaId===pencilCaseId);
+ if(pos<0)throw Error('PENCIL_CASE_REGISTRY_ID_MISSING');
+ const existing=nextRegistry.entries[pos];
+ if(existing.provenance)throw Error('PENCIL_CASE_ALREADY_REPLACED');
+ nextRegistry.entries[pos]={...existing,urlOrPath:mappedCase.urlOrPath,
+  status:'APPROVED',temporary:true,sha256:mappedCase.sha256,
+  assets:[{path:mappedCase.urlOrPath,sha256:mappedCase.sha256}],
+  provenance:{...mappedCase.provenance},
+  humanResolutionStatus:'PEDAGOGICAL_QA_PENDING',
+  integrationStatus:'CANDIDATE_PREVIEW_ONLY_PEDAGOGICAL_QA_PENDING',
+  replacementAudit:{previewOnly:true,reason:'VERIFIED_LEXICAL_ALIAS_PENCIL_CASE',
+   sourceMediaId:pencilCaseId,usageCount:pencilCaseUsages.length}};
+ report.globalAliasFixes=[{mediaId:pencilCaseId,verifiedOccurrences:pencilCaseUsages.length,
+  semantic:'pencil case',image:mappedCase.urlOrPath}];
+}
 const regBytes=Buffer.from(JSON.stringify(nextRegistry,null,2)+'\n');updates.set(registryRel,regBytes);
 for(const [rel,data] of updates){
   await writeFile(path.join(DIST,rel),data);manifest.set(rel,sha(data));
