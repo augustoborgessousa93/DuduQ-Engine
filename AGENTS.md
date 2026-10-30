@@ -49,3 +49,12 @@ When the user says **“Atualize o Core”**:
 - REA findings are research input, not authority to change DUDUQ. Penpot remains visual authority; Codex implements only when authorized; preserve approved mechanics, Gold Masters, runtime architecture, and production flows.
 - Any prototype inspired by research must be isolated, reversible, and separately tested. Human homologation is required before integration into production.
 - If REA/MCP is missing or unavailable, report that limit and continue with authorized documentation/visual observation where suitable; do not block unrelated development.
+
+
+## DUDUQ — imagens oficiais com Codex
+
+O proprietário atribuiu ao **Codex** a execução completa das imagens oficiais do DUDUQ English: pesquisar as questões reais, gerar PNGs individuais transparentes com o gerador de imagens oficialmente disponível no Codex, importar os arquivos, substituir provisórias, testar 30 módulos/600 atividades, fazer QA e preparar publicação segura.
+
+**Leia `docs/qa/DUDUQ_CODEX_IMAGE_AUTOMATION.md` e cumpra seu contrato antes de alterar qualquer imagem, registro de mídias ou pipeline de geração.** Preserve integralmente as regras acima sobre Penpot, Gold Masters e homologação. Não transfira ao usuário tarefas manuais de geração no ChatGPT, download de imagens, cópia para o workspace ou comandos "CONTINUE". Não assuma acesso a APIs pagas, permissões ou ferramentas que a sessão não possui. Se geração nativa ou origem de arquivos estiver bloqueada, registre o impedimento, avance em trabalho independente e não declare integração ou conclusão falsas.
+
+O arquivo de instruções no GitHub **não inicia por si só uma sessão do Codex**. Execução de geração real deve ser verificada pelos PNGs gerados no workspace e pelos manifests, hashes, testes e commits.
