@@ -62,6 +62,39 @@ test('plans a detached image but never an image still referenced by a question o
   assert.ok(report.rejected.some(x=>x.reason==='STILL_REFERENCED_VIA_OTHER_MEDIA_ID'));
  }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
 });
+test('rejects a stale canonical audit claiming zero blockers while live media remains',()=>{
+ const f=setup(true);
+ try{
+  const audit=path.join(f.dir,'qa/results/media-closure-inventory.json');
+  fs.mkdirSync(path.dirname(audit),{recursive:true});
+  fs.writeFileSync(audit,JSON.stringify({
+   modules:30,activities:600,referencedMediaIds:2,
+   incompleteReferencedIds:0,provisionalOrBlockedReferencedIds:0,
+   nonTemporaryUnverifiedReferencedIds:0
+  }));
+  const {r}=run(f);
+  assert.notEqual(r.status,0);
+  assert.match(r.stderr,/CANONICAL_AUDIT_UNDERCOUNTS_LIVE_MEDIA/);
+  assert.ok(fs.existsSync(path.join(f.root,OLD)));
+  assert.ok(fs.existsSync(path.join(f.root,LIVE)));
+ }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
+});
+test('rejects internally inconsistent canonical blocker totals',()=>{
+ const f=setup(true);
+ try{
+  const audit=path.join(f.dir,'qa/results/media-closure-inventory.json');
+  fs.mkdirSync(path.dirname(audit),{recursive:true});
+  fs.writeFileSync(audit,JSON.stringify({
+   modules:30,activities:600,referencedMediaIds:2,
+   incompleteReferencedIds:0,provisionalOrBlockedReferencedIds:1,
+   nonTemporaryUnverifiedReferencedIds:0
+  }));
+  const {r}=run(f);
+  assert.notEqual(r.status,0);
+  assert.match(r.stderr,/CANONICAL_AUDIT_INTERNAL_COUNT_MISMATCH/);
+  assert.ok(fs.existsSync(path.join(f.root,OLD)));
+ }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
+});
 test('cannot retire while even one referenced provisional media ID exists',()=>{
  const f=setup(true);
  try{
