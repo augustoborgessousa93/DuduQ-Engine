@@ -2,7 +2,7 @@
 // Browser-only diagnosis for four Drag & Drop cases flagged for variant review.
 // Uses the actual audio button. No mutation of source, rules, answers or Gold Masters.
 import {chromium} from 'playwright';
-import {mkdir,writeFile} from 'node:fs/promises';
+import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import path from 'node:path';
 const base=(process.env.BASE_URL||'http://127.0.0.1:4175').replace(/\/+$/,'');
 const pairs=[
@@ -45,6 +45,11 @@ try{
   });
   const route='/play/'+row.mechanic+'/?duduqModule='+row.module+'&duduqItem='+row.id;
   const record={...row,route,gestureAttempted:false,gestureSucceeded:false};
+  // Include only this question's exact compiled payload as forensic evidence:
+  // the visible eight-color cards might not be represented in mediaBindings.
+  const qDoc=JSON.parse(await readFile(path.resolve('dist-pages/content/english/year-'+row.module[1]+'/module-'+row.module.slice(3)+'/questions.json'),'utf8'));
+  record.questionDefinition=qDoc.items.find(q=>q.item_id===row.id)||null;
+  if(!record.questionDefinition)throw Error('QUESTION_NOT_FOUND_IN_COMPILED_BUILD:'+row.id);
   try{
    const res=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:30000});
    record.http=res?.status()||0;
