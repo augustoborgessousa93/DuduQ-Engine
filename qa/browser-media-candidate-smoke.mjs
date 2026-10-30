@@ -110,11 +110,29 @@ try {
     record.navigatedUrl=page.url();
     record.after=await page.evaluate(()=>{
      const img=[...document.images];
+     const emptySourceImages=img.filter(x=>!(x.currentSrc||x.getAttribute('src')));
      return {
       bodyTextLength:(document.body?.innerText||'').trim().length,
       imageCount:img.length,
       brokenVisibleImages:img.filter(x=>(x.currentSrc||x.getAttribute('src')) && x.complete && x.naturalWidth===0).map(x=>x.currentSrc||x.src),
-      imagesWithEmptySource:img.filter(x=>!(x.currentSrc||x.getAttribute('src'))).length,
+      imagesWithEmptySource:emptySourceImages.length,
+      emptySourceImageDetails:emptySourceImages.map(x=>{
+       const rect=x.getBoundingClientRect();
+       const parent=x.parentElement;
+       const style=getComputedStyle(x);
+       return {
+        alt:x.getAttribute('alt')||'',
+        className:typeof x.className==='string'?x.className:'',
+        srcAttribute:x.getAttribute('src'),
+        dataMediaId:x.closest('[data-media-id]')?.getAttribute('data-media-id')||null,
+        dataTestId:x.closest('[data-testid]')?.getAttribute('data-testid')||null,
+        parentTag:parent?.tagName||null,
+        parentClass:typeof parent?.className==='string'?parent.className:'',
+        outerHTML:x.outerHTML.slice(0,500),
+        visible:rect.width>0&&rect.height>0&&style.visibility!=='hidden'&&style.display!=='none',
+        rect:{x:Math.round(rect.x),y:Math.round(rect.y),width:Math.round(rect.width),height:Math.round(rect.height)}
+       };
+      }),
       documentOverflowX:Math.max(0,document.documentElement.scrollWidth-innerWidth),
       engineReady:window.DUDUQ_ENGINE_READY===true,
       gameRootPresent:!!document.querySelector('#game,#root'),
@@ -145,6 +163,7 @@ try {
     pageErrors:errors.length,httpFailures:badHttp.length,networkFailures:networkFailures.length,canceledDuringNavigation:canceledDuringNavigation.length,
     brokenVisibleImages:record.after?.brokenVisibleImages?.length||0,
     imagesWithEmptySource:record.after?.imagesWithEmptySource||0,
+    emptySourceImageDetails:record.after?.emptySourceImageDetails?.slice(0,2)||[],
     diagnosticErrors:errors.slice(0,2),route}));
    await page.close();
   }
