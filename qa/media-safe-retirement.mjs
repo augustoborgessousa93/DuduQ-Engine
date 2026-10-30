@@ -70,7 +70,7 @@ for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
  if(q.moduleId!==id||q.items?.length!==20)fail('BAD_MODULE:'+id);
  const ids=new Set();
  for(const item of q.items){
-   if(!/^Y[1-5]M0[1-6]-Q\d{3}$/.test(item.item_id||'')||!item.item_id.startsWith(id+'-')||ids.has(item.item_id))
+   if(!/^Y[1-5]M0[1-6]-Q(?:00[1-9]|01[0-9]|020)$/.test(item.item_id||'')||!item.item_id.startsWith(id+'-')||ids.has(item.item_id))
      fail('INVALID_QUESTION:'+id);
    ids.add(item.item_id);scan(item,item.item_id);activities++;
  }
