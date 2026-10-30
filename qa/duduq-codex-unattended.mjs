@@ -189,7 +189,7 @@ async function once(){
   const afterCandidate=afterPlan.modules.find(m=>m.moduleId===moduleId)?.candidate;
   const newImageEvidence=lane==='generation'&&
    ((afterCandidate?.validAssetCount||0)>(beforeCandidate?.validAssetCount||0)||
-    ((afterCandidate?.validAssetCount||0)>0 && afterCandidate?.manifestSha256!==beforeCandidate?.manifestSha256));
+    ((afterCandidate?.validAssetCount||0)>0 && afterCandidate?.assetFingerprintSha256!==beforeCandidate?.assetFingerprintSha256));
   const improved=newImageEvidence||
    (oldPending!==null&&newPending!==null&&newPending<oldPending)||
    (after?.completedModules??0)>(before?.completedModules??0)||
