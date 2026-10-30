@@ -68,7 +68,7 @@ async function confirmWithPointerRetry(page,answerAlt,expectedState,label,events
     const action=document.querySelector('.feedback-action');
     return {targetState:target?.dataset.gameplayState||null,
       interactionState:document.querySelector('#game')?.dataset.duduqInteractionState||null,
-      actionText:action?.textContent?.replace(/\\s+/g,' ').trim()||''};
+      actionText:action?.textContent?.replace(/\s+/g,' ').trim()||''};
   },answerAlt);
   events?.push({label:label+'-before-confirm',...beforeConfirm,input:'read-only visible DOM observation'});
   if(beforeConfirm.targetState!==expectedState){
@@ -85,7 +85,7 @@ async function confirmWithPointerRetry(page,answerAlt,expectedState,label,events
     if(current===expectedState){/* MutationObserver callback will run next. */}
     if(current==='selected'){
       const retryAction=await page.locator('.feedback-action').evaluate(el=>({
-        text:el.textContent?.replace(/\\s+/g,' ').trim()||'',
+        text:el.textContent?.replace(/\s+/g,' ').trim()||'',
         interactionState:document.querySelector('#game')?.dataset.duduqInteractionState||null}));
       if(retryAction.interactionState==='AWAITING_CONTINUE'||/continuar/i.test(retryAction.text))
         throw Error('QA_RETRY_ACTION_ALREADY_CONTINUE:'+JSON.stringify(retryAction));
