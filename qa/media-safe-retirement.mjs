@@ -114,6 +114,14 @@ if(officialAudit){
     !Number.isInteger(officialAudit.provisionalOrBlockedReferencedIds)||
     !Number.isInteger(officialAudit.nonTemporaryUnverifiedReferencedIds))
    fail('INVALID_CANONICAL_AUDIT_COUNTS');
+ // A stale or edited canonical report must never reduce blockers that are
+ // independently visible in the current registry and question contracts.
+ // Status categories may differ (e.g. a broken asset), so compare totals.
+ if(officialAudit.incompleteReferencedIds!==
+    officialAudit.provisionalOrBlockedReferencedIds+officialAudit.nonTemporaryUnverifiedReferencedIds)
+   fail('CANONICAL_AUDIT_INTERNAL_COUNT_MISMATCH');
+ if(officialAudit.incompleteReferencedIds<provisional+unverified)
+   fail('CANONICAL_AUDIT_UNDERCOUNTS_LIVE_MEDIA');
  provisional=officialAudit.provisionalOrBlockedReferencedIds;
  unverified=officialAudit.nonTemporaryUnverifiedReferencedIds;
 }
