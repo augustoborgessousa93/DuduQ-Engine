@@ -115,3 +115,21 @@ test('only pinned verified sign-off can retire orphaned media with byte-identica
   assert.equal(sha(fs.readFileSync(liveBackup)),sha(Buffer.from('DUDUQ-LIVE-IMAGE-SAMPLE')));
  }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
 });
+
+test('rejects an orphan whose ancestor directory is a symlink, preserving outside files',()=>{
+ const f=setup(false);
+ try{
+  const ancestor=path.dirname(path.join(f.root,OLD));
+  const external=path.join(f.dir,'external-images');
+  fs.mkdirSync(external,{recursive:true});
+  fs.writeFileSync(path.join(external,'obsolete.png'),'EXTERNAL-VICTIM-OBSOLETE');
+  fs.writeFileSync(path.join(external,'live.png'),'EXTERNAL-VICTIM-LIVE');
+  fs.rmSync(ancestor,{recursive:true,force:true});
+  fs.symlinkSync(external,ancestor,process.platform==='win32'?'junction':'dir');
+  const {r}=run(f,['--apply']);
+  assert.notEqual(r.status,0);
+  assert.match(r.stderr,/DUDUQ_RETIREMENT_BLOCKED:SYMLINK_DIRECTORY/);
+  assert.equal(fs.readFileSync(path.join(external,'obsolete.png'),'utf8'),'EXTERNAL-VICTIM-OBSOLETE');
+  assert.equal(fs.readFileSync(path.join(external,'live.png'),'utf8'),'EXTERNAL-VICTIM-LIVE');
+ }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
+});
