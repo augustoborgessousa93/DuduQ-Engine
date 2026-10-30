@@ -36,7 +36,7 @@ try {
   canonical=parsed;canonicalSha256=hash(raw);
  }
 } catch(e) {if(e.code!=='ENOENT'&&!(e instanceof SyntaxError))throw e}
-const canonicalPairs=new Set();
+const canonicalPairs=new Set(),canonicalOccurrences=new Map();
 let canonicalSourceTrusted=Boolean(canonical);
 if(canonical){
  const perModule=new Map(all.map(id=>[id,[]]));
@@ -47,7 +47,12 @@ if(canonical){
    if(typeof qid!=='string'||!/^Y[1-5]M0[1-6]-Q(?:00[1-9]|01[0-9]|020)$/.test(qid)){
     canonicalSourceTrusted=false;continue;
    }
-   if(qid.startsWith(id+'-'))canonicalPairs.add(qid+'|'+item.mediaId);
+   if(qid.startsWith(id+'-')){
+    canonicalPairs.add(qid+'|'+item.mediaId);
+    const key=id+'|'+item.mediaId;
+    if(!canonicalOccurrences.has(key))canonicalOccurrences.set(key,new Set());
+    canonicalOccurrences.get(key).add(qid);
+   }
   }
  }
  for(const id of all){
@@ -78,7 +83,7 @@ for(const d of dirs.filter(x=>x.isDirectory())){
  let m;try{m=JSON.parse(raw.toString('utf8'))}catch{fail('INVALID_CANDIDATE_MANIFEST:'+d.name)}
  if(!all.includes(m.moduleId))continue; // unrelated batches do not become official module evidence
  if(!Array.isArray(m.assets)||!m.assets.length)continue;
- const checked=[],validBindingIds=new Set(),sourceBindingProblems=[],sourceAssignments=new Map(),conflictingIds=new Set();
+ const checked=[],validBindingIds=new Set(),sourceBindingProblems=[],sourceAssignments=new Map(),conflictingIds=new Set(),boundQuestionsById=new Map();
  for(const asset of m.assets){
   let verdict='VALID';
   if(typeof asset.file!=='string'||!/^images\/[a-zA-Z0-9_.-]+\.png$/i.test(asset.file))verdict='UNSAFE_FILENAME';
@@ -110,13 +115,28 @@ for(const d of dirs.filter(x=>x.isDirectory())){
    if(old&&old!==asset.sha256.toLowerCase()){
     conflictingIds.add(bind.mediaId);
     sourceBindingProblems.push({questionId:bind.questionId,mediaId:bind.mediaId,reason:'CONFLICTING_PNG_SHA256'});
-   } else {sourceAssignments.set(bind.mediaId,asset.sha256.toLowerCase());validBindingIds.add(bind.mediaId)}
+   } else {
+    sourceAssignments.set(bind.mediaId,asset.sha256.toLowerCase());validBindingIds.add(bind.mediaId);
+    if(!boundQuestionsById.has(bind.mediaId))boundQuestionsById.set(bind.mediaId,new Set());
+    boundQuestionsById.get(bind.mediaId).add(bind.questionId);
+   }
   }
   checked.push({assetKey:asset.assetKey||asset.file,sha256:asset.sha256||null,verdict});
  }
  for(const id of conflictingIds)validBindingIds.delete(id);
  const pendingIds=new Set((byModule.get(m.moduleId)?.blockers||[]).map(x=>x.mediaId));
- const verifiedPendingBindingIds=[...validBindingIds].filter(id=>pendingIds.has(id)).length;
+ // A shared media ID is covered only when EVERY canonical question occurrence
+ // in this module has an explicit binding. One Q001 binding cannot silently
+ // stand in for Q002 or any other use of the same ID.
+ const verifiedPendingBindingIds=[...validBindingIds].filter(id=>{
+  if(!pendingIds.has(id))return false;
+  const required=canonicalOccurrences.get(m.moduleId+'|'+id);
+  const observed=boundQuestionsById.get(id);
+  if(!required||!observed)return false;
+  const missing=[...required].filter(qid=>!observed.has(qid));
+  if(missing.length){sourceBindingProblems.push({mediaId:id,reason:'INCOMPLETE_OCCURRENCE_COVERAGE',missingQuestions:missing.slice(0,20)});return false;}
+  return true;
+ }).length;
  const validPngHashes=[...new Set(checked.filter(x=>x.verdict==='VALID').map(x=>x.sha256.toLowerCase()))].sort();
  const record={moduleId:m.moduleId,manifest:path.relative(root,manifestPath).replaceAll('\\','/'),
   manifestSha256:hash(raw),
