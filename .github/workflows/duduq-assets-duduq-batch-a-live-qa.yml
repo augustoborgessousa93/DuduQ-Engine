@@ -1,0 +1,88 @@
+name: DUDUQ - Verify public Cloudflare preview 31 PNGs / 253 media references
+on:
+  push:
+    branches:
+      - integration/assets-duduq-resume-20261030
+    paths:
+      - ".github/workflows/duduq-assets-duduq-batch-a-live-qa.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      BASE_URL: "https://a81fb190.duduq-engine-13a.pages.dev"
+      DUDUQ_MEDIA_QA_MODULES: "Y1M02,Y1M03,Y1M04,Y1M06"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Read-only verify 31 public PNG hashes and every one of 253 exact references
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import {createHash} from 'node:crypto';
+          import assert from 'node:assert/strict';
+          const base=process.env.BASE_URL;
+          async function get(rel){
+            const url=new URL(rel,base+'/');
+            const response=await fetch(url,{signal:AbortSignal.timeout(45000)});
+            if(!response.ok)throw Error('PREVIEW_HTTP_'+response.status+':'+url);
+            return Buffer.from(await response.arrayBuffer());
+          }
+          const r=JSON.parse((await get('/content/english/media/media-registry.json')).toString('utf8'));
+          assert(Array.isArray(r.entries));
+          const expected={Y1M02:82,Y1M03:61,Y1M04:55,Y1M06:55};
+          const selected=r.entries.filter(e=>e.provenance?.sourceRepository==='augustoborgessousa93/Assets-DuduQ'
+            && e.integrationStatus==='CANDIDATE_PREVIEW_ONLY_PEDAGOGICAL_QA_PENDING'
+            && Object.keys(expected).some(m=>e.replacementAudit?.questionId?.startsWith(m+'-')));
+          assert.equal(selected.length,253,'WRONG_PUBLIC_MEDIA_REFERENCE_COUNT');
+          const observed={Y1M02:0,Y1M03:0,Y1M04:0,Y1M06:0};
+          const files=new Map();
+          for(const e of selected){
+            const scope=e.replacementAudit.questionId.slice(0,5);
+            observed[scope]++;
+            assert.equal(e.temporary,true,'PREVIEW_MUST_NOT_BE_MARKED_OFFICIAL:'+e.mediaId);
+            assert.equal(e.humanResolutionStatus,'PEDAGOGICAL_QA_PENDING');
+            assert.equal(e.provenance.sourceCommit,'658d94f08031820cfea5258a6f4e7c24f278df92');
+            assert(e.urlOrPath.startsWith('content/english/assets/images/assets-duduq-review/'));
+            assert(/^[a-f0-9]{64}$/.test(e.sha256));
+            if(files.has(e.urlOrPath)&&files.get(e.urlOrPath)!==e.sha256)throw Error('MULTIPLE_HASHES_SAME_ASSET');
+            files.set(e.urlOrPath,e.sha256);
+          }
+          assert.deepEqual(observed,expected);
+          assert.equal(files.size,31,'EXACTLY_31_REUSED_SOURCE_PNGS');
+          for(const [rel,sha] of files){
+            const bytes=await get('/'+rel);
+            assert.equal(createHash('sha256').update(bytes).digest('hex'),sha,'LIVE_MEDIA_BYTES_WRONG:'+rel);
+            assert(bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),'NON_PNG_ASSET:'+rel);
+          }
+          for(const mod of Object.keys(expected)){
+            const url='/play/english/year-1/module-'+mod.slice(3)+'/';
+            const html=await get(url);
+            assert(html.length>1000,'LIVE_MODULE_ROUTE_EMPTY:'+mod);
+          }
+          console.log('PUBLIC_DUDUQ_MEDIA_HASH_VERIFIED='+JSON.stringify({images:files.size,bindings:selected.length,byModule:observed,sourceCommit:'658d94f08031820cfea5258a6f4e7c24f278df92',productionUnchanged:true}));
+          NODE
+      - name: Install real Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Open all four publicly deployed module routes at three sizes
+        run: node qa/browser-media-candidate-smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-assets-public-four-module-browser-report
+          if-no-files-found: warn
+          retention-days: 20
+          path: qa/results/media-browser-qa/**
+      - name: Production release remains unchanged
+        if: always()
+        run: echo "Public preview QA only; no merge, prod deploy, final human approval or gameplay certification."
