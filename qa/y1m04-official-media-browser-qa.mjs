@@ -59,16 +59,38 @@ async function confirmWithPointerRetry(page,answerAlt,expectedState,label,events
     const observer=new MutationObserver(snapshot);observer.observe(target,{attributes:true,subtree:true});observer.observe(ribbon,{attributes:true,subtree:true});
     store[key]={log,observer};snapshot();
   },{alt:answerAlt,key:observerKey});
-  await page.waitForTimeout(250);
-  await pointerClick(page,page.locator('.feedback-action'),label,events);
-  const waitOutcome=timeout=>page.waitForFunction(([expected,key])=>window.__duduqQaVisibleMutationLog?.[key]?.log?.some(x=>x.targetState===expected),
+  // The same action node changes from CONFIRMAR to CONTINUAR after success.
+  // Never click CONTINUAR while attempting to confirm: that would navigate to
+  // the next question and could be mistaken for a gameplay regression.
+  const beforeConfirm=await page.evaluate(alt=>{
+    const target=[...document.querySelectorAll('.target-shooter-target')]
+      .find(x=>x.querySelector('.target-shooter-target__animal')?.alt===alt);
+    const action=document.querySelector('.feedback-action');
+    return {targetState:target?.dataset.gameplayState||null,
+      interactionState:document.querySelector('#game')?.dataset.duduqInteractionState||null,
+      actionText:action?.textContent?.replace(/\\s+/g,' ').trim()||''};
+  },answerAlt);
+  events?.push({label:label+'-before-confirm',...beforeConfirm,input:'read-only visible DOM observation'});
+  if(beforeConfirm.targetState!==expectedState){
+    if(beforeConfirm.interactionState==='AWAITING_CONTINUE'||/continuar/i.test(beforeConfirm.actionText))
+      throw Error('QA_CONFIRM_ACTION_ALREADY_CONTINUE:'+JSON.stringify(beforeConfirm));
+    await pointerClick(page,page.locator('.feedback-action'),label,events);
+  }else events?.push({label:label+'-already-resolved',input:'no click after visible result'});
+  const waitOutcome=timeout=>page.waitForFunction(([expected,key])=>window.__duduqQaVisibleMutationLog?.[key]?.log?.some(x=>
+    x.targetState===expected&&x.targetVisible===true&&x.feedback===expected&&x.ribbonHidden===false),
     [expectedState,observerKey],{timeout});
   try{await waitOutcome(3000);}
   catch(error){
     const current=await state();
     if(current===expectedState){/* MutationObserver callback will run next. */}
-    if(current==='selected')await pointerClick(page,page.locator('.feedback-action'),label+'-pointer-retry',events);
-    else events?.push({label:label+'-processing',observedState:current,input:'no additional click while gameplay resolves'});
+    if(current==='selected'){
+      const retryAction=await page.locator('.feedback-action').evaluate(el=>({
+        text:el.textContent?.replace(/\\s+/g,' ').trim()||'',
+        interactionState:document.querySelector('#game')?.dataset.duduqInteractionState||null}));
+      if(retryAction.interactionState==='AWAITING_CONTINUE'||/continuar/i.test(retryAction.text))
+        throw Error('QA_RETRY_ACTION_ALREADY_CONTINUE:'+JSON.stringify(retryAction));
+      await pointerClick(page,page.locator('.feedback-action'),label+'-pointer-retry',events);
+    }else events?.push({label:label+'-processing',observedState:current,input:'no additional click while gameplay resolves'});
     await waitOutcome(15000);
   }
   return page.evaluate(key=>{const item=window.__duduqQaVisibleMutationLog[key];item.observer.disconnect();return item.log;},observerKey);
