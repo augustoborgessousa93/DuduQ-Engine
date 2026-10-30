@@ -67,6 +67,14 @@ try {
     const response=await page.goto(record.url,{waitUntil:'domcontentloaded',timeout:40000});
     record.httpStatus=response?.status()??null;
     await page.waitForTimeout(450);
+    // Intro content can hydrate after DOMContentLoaded on the first Chromium page.
+    // Wait a bounded time for the actual start control, not a fixed delay;
+    // absence still fails the existing boot gate and is recorded for diagnosis.
+    const start=page.getByRole('button',{name:/iniciar jogo/i}).first();
+    const introWaitStarted=Date.now();
+    try {await start.waitFor({state:'visible',timeout:10000});}
+    catch(e){record.introWaitFailure=String(e.message).slice(0,250);}
+    record.introWaitMs=Date.now()-introWaitStarted;
     record.before=await page.evaluate(()=>{
      const app=document.querySelector('#root') || document.body;
      const images=[...document.images].map(img=>({
@@ -88,7 +96,6 @@ try {
     // If present and visible, attempt real pointer interaction. Always keep
     // screenshots and report the exact UI state reached.
     const selector='.duduq-intro-start-button';
-    const start=page.getByRole('button',{name:/iniciar jogo/i}).first();
     record.introStartVisible=await start.isVisible().catch(()=>false);
     const introTarget=record.introStartVisible?start:page.getByText(/INICIAR JOGO/i).first();
     if(!record.introStartVisible)record.introStartVisible=await introTarget.isVisible().catch(()=>false);
