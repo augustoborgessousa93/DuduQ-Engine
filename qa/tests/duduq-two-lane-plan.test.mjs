@@ -92,7 +92,7 @@ test('candidate file hash mismatch never becomes a ready-to-integrate asset',()=
   const x=run(root);assert.equal(x.status,0,x.stderr);
   assert.equal(x.report.candidateAssetCount,1);
   assert.equal(x.report.integrator.nextModule,'Y1M05');
-  assert.equal(x.report.modules.find(m=>m.moduleId==='Y1M04').candidate.invalidAssets[0].verdict,'PNG_HASH_OR_SIGNATURE_MISMATCH');
+  assert.equal(x.report.modules.find(m=>m.moduleId==='Y1M04').candidate.invalidAssets[0].verdict,'PNG_HASH_MISMATCH');
  }finally{fs.rmSync(root,{recursive:true,force:true})}
 });
 test('a partial candidate bundle still needs generation and does not certify module',()=>{
