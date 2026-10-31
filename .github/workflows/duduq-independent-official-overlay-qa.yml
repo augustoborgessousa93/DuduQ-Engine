@@ -17,6 +17,7 @@ on:
       - "qa/verify-y1m05-source-registry-rebase.mjs"
       - "qa/tests/verify-y1m05-source-registry-rebase.test.mjs"
       - "qa/y1m04-official-media-browser-qa.mjs"
+      - "qa/y1m06-official-media-model.mjs"
       - "qa/y1m05-official-media-browser-qa.mjs"
       - "qa/tests/verify-y1m04-official-media-overlay.mjs"
       - "qa/tests/verify-y1m05-official-media-overlay.mjs"
