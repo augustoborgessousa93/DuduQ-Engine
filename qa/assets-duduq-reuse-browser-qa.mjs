@@ -82,8 +82,24 @@ try{
   await page.waitForFunction(expected=>[...document.images].some(i=>new URL(i.src).pathname.replace(/^\//,'')===expected&&i.complete&&i.naturalWidth>0),crayonPath,{timeout:20000});
   const initialImages=await visibleCandidateImages(page);
   if(!initialImages.some(i=>i.path===crayonPath&&i.visible))throw Error('Q010_CANDIDATE_CRAYON_NOT_VISIBLE');
-  await click(page,target(wrong.semanticTarget||wrong.answerKey),'select-wrong-'+wrong.answerKey,events);
-  await page.waitForFunction(a=>[...document.querySelectorAll('.target-shooter-target')].some(t=>t.querySelector('img')?.alt===a&&t.dataset.gameplayState==='selected'),wrong.semanticTarget||wrong.answerKey,{timeout:10000});
+  const wrongSemantic=wrong.semanticTarget||wrong.answerKey;
+  await click(page,target(wrongSemantic),'select-wrong-'+wrong.answerKey,events);
+  try {
+    await page.waitForFunction(a=>[...document.querySelectorAll('.target-shooter-target')].some(t=>t.querySelector('img')?.alt===a&&t.dataset.gameplayState==='selected'),wrongSemantic,{timeout:10000});
+  } catch(error) {
+    const state=await page.evaluate(expected=>({
+      expected,
+      gameState:document.querySelector('#game')?.dataset.duduqInteractionState||null,
+      targets:[...document.querySelectorAll('.target-shooter-target')].map(t=>({alt:t.querySelector('img')?.alt||null,state:t.dataset.gameplayState||null,text:t.innerText,
+        rect:(r=>({x:r.x,y:r.y,width:r.width,height:r.height}))(t.getBoundingClientRect()),
+        hit:(r=>{const e=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return e?{tag:e.tagName,alt:e.closest('.target-shooter-target')?.querySelector('img')?.alt||null,className:String(e.className||'')}:null})(t.getBoundingClientRect())})),
+      audio:[...document.querySelectorAll('.audio-button')].map(b=>({text:b.innerText,state:b.dataset.state||null,disabled:b.disabled}))
+    }),wrongSemantic);
+    const shot=path.join(output,'y1m04-q010-after-wrong-pointer-timeout.png');await page.screenshot({path:shot,fullPage:false}).catch(()=>{});
+    report.gameplayDiagnostics={stage:'after-wrong-target-pointer',selectedSemantic:wrongSemantic,wrongOption:wrong,state,events:[...events],pageErrors:diag.errors,requestFailures:diag.failed,
+      screenshot:path.relative(root,shot).replaceAll('\\\\','/'),screenshotSha256:await readFile(shot).then(sha).catch(()=>null)};
+    throw new Error('WRONG_TARGET_SELECTION_TIMEOUT:'+JSON.stringify(report.gameplayDiagnostics));
+  }
   const confirm=page.locator('.feedback-action');await click(page,confirm,'confirm-wrong-answer',events);
   await page.waitForFunction(a=>[...document.querySelectorAll('.target-shooter-target')].some(t=>t.querySelector('img')?.alt===a&&t.dataset.gameplayState==='incorrect')&&document.querySelector('.feedback-ribbon')?.dataset.feedback==='incorrect',wrong.semanticTarget||wrong.answerKey,{timeout:15000});
   const incorrectShot=path.join(output,'y1m04-q010-incorrect.png');await page.screenshot({path:incorrectShot,fullPage:false});
