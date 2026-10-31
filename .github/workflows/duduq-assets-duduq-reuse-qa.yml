@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - integration/assets-duduq-reuse-20261031
+      # QA-only proof branch; do not cherry-pick this trigger into release.
+      - qa/mobile-target-unlock-user-flow-20261031
     paths:
       - ".github/workflows/duduq-assets-duduq-reuse-qa.yml"
       - "qa/audit-assets-duduq-source.mjs"
@@ -26,6 +28,9 @@ on:
   pull_request:
     branches:
       - automation/duduq-media-source-only-fix-20261029
+      # Independent QA-only PRs against the isolated integration branch must
+      # exercise the real Chromium gate before any proposed cherry-pick.
+      - integration/assets-duduq-reuse-20261031
     types: [opened, synchronize, reopened]
     paths:
       - ".github/workflows/duduq-assets-duduq-reuse-qa.yml"
