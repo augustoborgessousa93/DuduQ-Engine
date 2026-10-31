@@ -33,16 +33,16 @@ if(!/<\/head>/i.test(html)||html.includes(marker))
 // The CSS individual 'scale' composes with the Gold Master 'transform'.
 const style=`<style ${marker}>
 /* Isolated QA candidate: not a Gold Master edit, not a release approval. */
-@container game (max-width: 430px) and (min-height: 421px) {
+@container game (min-width: 360px) and (max-width: 430px) and (min-height: 421px) {
   #game.target-shooter-screen .target-shooter-arena {
+    /*
+     * Keep the full four-target row visible after the independent CSS scale.
+     * Pure scale shifts the absolute 1366px stage right; re-anchor it as a unit.
+     * This is a QA hypothesis until real Chromium containment assertions pass.
+     */
     scale: .78;
-    top: 76px;
-  }
-}
-@container game (max-width: 359px) and (min-height: 421px) {
-  #game.target-shooter-screen .target-shooter-arena {
-    scale: .65;
-    top: 105px;
+    left: calc(50% - 150px);
+    top: 236px;
   }
 }
 </style>
@@ -54,7 +54,7 @@ const nextIntegrity=lines.join('\n')+'\n';
 const plan={status:apply?'QA_COMPILED_HTML_OVERLAY_APPLIED':'READ_ONLY_PLAN',
   file:relative,sourceSha256:currentSha,candidateSha256:nextSha,
   integrityChanged:true,sourceModified:false,goldMastersModified:false,
-  productionDeployed:false,scope:'portrait-mobile-only',
+  productionDeployed:false,scope:'portrait-360-430-only',
   gates:'existing independent Y1M04/Y1M05 Chromium gameplay and geometry must pass'};
 if(!apply){console.log(JSON.stringify(plan));process.exit(0);}
 try{
