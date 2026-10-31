@@ -32,8 +32,18 @@ for(const q of report.questions)for(const opt of q.options){
    if(['one','two','three','four','five','six','seven','eight','nine','ten','1','2','3','4','5','6','7','8','9','10'].includes(semantic))
      assert(!/y3-(?:one|two|three|four|five|six|seven|eight|nine|ten)-/.test(name),
        'number-only alternative cannot use pictured quantity: '+q.questionId+' '+candidate.sourcePath);
-   if(['red','blue','green','yellow','orange','white','black','brown','pink'].includes(semantic))
+   if(['red','blue','green','yellow','white','black','brown','pink'].includes(semantic))
      assert(/^(?:cor|color)[ _-]/.test(name),'pure color cannot reuse an object of that color: '+q.questionId+' '+candidate.sourcePath);
+   if(semantic==='orange'){
+     const context=[q.learningTarget,q.instructionPt,q.visualRequirement]
+       .filter(x=>typeof x==='string').join(' ').normalize('NFD')
+       .replace(/[\\u0300-\\u036f]/g,'').toLowerCase();
+     const color=/(?:^|[^a-z])(?:color|colors|cor|cores)(?:[^a-z]|$)/.test(context);
+     const fruit=/(?:^|[^a-z])(?:fruit|fruits|fruta|frutas|food|foods|alimento|alimentos|comida|comidas)(?:[^a-z]|$)/.test(context);
+     assert.notEqual(color,fruit,'ambiguous orange should have zero name-only candidates: '+q.questionId);
+     assert((color?/^(?:cor|color)[ _-]/:/^orange[ _-]fruit[ _-]/).test(name),
+       'orange semantic domain mismatch: '+q.questionId+' '+candidate.sourcePath);
+   }
    if(semantic==='grandmother')
      assert(!name.includes('grandfather'),'ambiguous avó/avô reuse: '+candidate.sourcePath);
    if(semantic==='grandfather')
