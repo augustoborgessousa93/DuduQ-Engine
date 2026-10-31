@@ -8,7 +8,7 @@ import {inspectPng} from '../scripts/duduq-image-pipeline.mjs';
 const sourceRoot=path.resolve(process.argv[2]||'');
 const sourceDir=path.join(sourceRoot,'Imagens Ilustrativa');
 const output=path.resolve(process.argv.find(x=>x.startsWith('--out='))?.slice(6)||'docs/qa/assets-duduq-source-inventory-20261030.json');
-const expectedCommit=process.env.ASSETS_DUDUQ_SOURCE_COMMIT||'ef9551b075cc60e42408e02eb3f52752dc179297';
+const expectedCommit=process.env.ASSETS_DUDUQ_SOURCE_COMMIT||'50fb80a89a5779d73f81c96aab35f6e86193d769';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const safe=(base,target)=>target===base||target.startsWith(base+path.sep);
 if(!process.argv[2]||!safe(process.cwd(),output))throw Error('SOURCE_AND_IN_REPOSITORY_OUTPUT_REQUIRED');
