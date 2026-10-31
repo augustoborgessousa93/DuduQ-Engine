@@ -1491,6 +1491,7 @@
   "sourceRegistryPinEvidenceSha256": "9c5d741bd603db8b126968a58baea2f8aa931ebae3f1b7267223126d80a7b1c5",
   "generationManifestEvidence": "generation-batch-manifest.json",
   "generationManifestSha256": "8f79609976a5987b2787d461856c8d78b759496b7b44c5e298a9a3bf503c5796",
+  "generationManifestHashNormalization": "UTF8_LF",
   "sourceQuestionContractSha256": "31d4cc0be48882dfd405cca0f8cb2b708c6f6d3d201fab71ad94e757e771e4b5",
   "sourceQuestionInvariantSha256": "1ce8860d805daf65293951183eb1a461b65a1c93c3c9b2ce8c1b34912d33b15d"
 }

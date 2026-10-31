@@ -21,7 +21,8 @@ export const EXPECTED={
   sourceUsageProjectionSha256:'302d698ca908d2e204d90d21ef80531cd7a666c78a91f7328973d103f51d0e28',
   registryEntriesOutsideY1M04:1076,
   registryEntriesOutsideY1M04Sha256:'e1e444bdffaf308d38bcb22bd0a950468c6c95c3bd88bf2ecb7d4b35b6c0af92',
-  generationManifestSha256:'8f79609976a5987b2787d461856c8d78b759496b7b44c5e298a9a3bf503c5796'
+  generationManifestSha256:'8f79609976a5987b2787d461856c8d78b759496b7b44c5e298a9a3bf503c5796',
+  generationSemanticSha256:'d7be56d12bc6f4faaf2882b5661c353c817b4b7156852695f3625914938f723f'
 };
 
 export const SPLITS=[
@@ -34,6 +35,7 @@ export const SPLITS=[
 ];
 
 export const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
+export const canonicalLfSha256=bytes=>sha256(Buffer.from(bytes.toString('utf8').replace(/\r\n/g,'\n')));
 
 export function withoutMediaIds(node){
   if(Array.isArray(node))return node.map(withoutMediaIds);

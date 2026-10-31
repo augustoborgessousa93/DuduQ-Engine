@@ -11,7 +11,7 @@ import {isExactPedagogicalConcept} from '../scripts/duduq-exact-semantic-match.m
 import {validateDuduqRgbaPng} from './validate-duduq-png.mjs';
 import {
   BUNDLE_REL,EXPECTED,MODULE_ID,MODULE_PATH,REGISTRY_PATH,SPLITS,
-  locate,sha256,withoutMediaIds
+  canonicalLfSha256,locate,sha256,withoutMediaIds
 } from './y1m06-official-media-model.mjs';
 
 const root=process.cwd(),dist=path.join(root,'dist-pages'),bundle=path.join(root,BUNDLE_REL);
@@ -26,12 +26,12 @@ let generationManifestBytes;
 try{generationManifestBytes=await readFile(generationManifestPath);}
 catch(error){
   if(error.code!=='ENOENT')throw error;
-  if(sha256(sourceManifestBytes)!==EXPECTED.generationManifestSha256)
+  if(canonicalLfSha256(sourceManifestBytes)!==EXPECTED.generationManifestSha256)
     throw Error('Y1M06_GENERATION_MANIFEST_HASH_MISMATCH_BEFORE_PREPARATION');
   generationManifestBytes=sourceManifestBytes;
   await writeFile(generationManifestPath,generationManifestBytes);
 }
-if(sha256(generationManifestBytes)!==EXPECTED.generationManifestSha256)
+if(canonicalLfSha256(generationManifestBytes)!==EXPECTED.generationManifestSha256)
   throw Error('Y1M06_GENERATION_MANIFEST_PROVENANCE_MISMATCH');
 const generated=JSON.parse(generationManifestBytes);
 if(generated.schemaVersion!=='DUDUQ_CHATGPT_MEDIA_BINDINGS_V1'||generated.moduleId!==MODULE_ID||
@@ -52,6 +52,8 @@ catch(error){
   await writeFile(generationSemanticPath,generationSemanticBytes);
 }
 const generationSemantic=JSON.parse(generationSemanticBytes);
+if(canonicalLfSha256(generationSemanticBytes)!==EXPECTED.generationSemanticSha256)
+  throw Error('Y1M06_GENERATION_SEMANTIC_PROVENANCE_MISMATCH');
 
 const [questionBytes,registryBytes,integrityBytes]=await Promise.all([
   readFile(questionPath),readFile(registryPath),readFile(path.join(dist,'.duduq-pages-manifest'))
@@ -150,6 +152,7 @@ manifest.sourceRegistryPinEvidence='source-registry-pin.json';
 manifest.sourceRegistryPinEvidenceSha256=pinSha256;
 manifest.generationManifestEvidence='generation-batch-manifest.json';
 manifest.generationManifestSha256=EXPECTED.generationManifestSha256;
+manifest.generationManifestHashNormalization='UTF8_LF';
 manifest.sourceQuestionContractSha256=EXPECTED.cleanV26QuestionSha256;
 manifest.sourceQuestionInvariantSha256=EXPECTED.cleanV26QuestionInvariantSha256;
 manifest.assets=manifest.assets.map(asset=>{
@@ -200,7 +203,8 @@ const semantic={
   schemaVersion:'DUDUQ_Y1M06_NATIVE_MEDIA_SEMANTIC_EVIDENCE_V2',createdAt:'2026-10-30',moduleId:MODULE_ID,
   provider:'Codex built-in image_gen',reviewAuthority:'CODEX_DELEGATED_BY_OWNER_REQUEST',
   evidenceBoundary:'Independent Codex visual/semantic review for isolated compiled QA; no owner homologation or production approval claimed.',
-  generationSemanticEvidence:'generation-semantic-evidence.json',generationSemanticEvidenceSha256:sha256(generationSemanticBytes),
+  generationSemanticEvidence:'generation-semantic-evidence.json',
+  generationSemanticEvidenceSha256:EXPECTED.generationSemanticSha256,generationSemanticHashNormalization:'UTF8_LF',
   sourceQuestionContractSha256:EXPECTED.cleanV26QuestionSha256,
   sourceQuestionInvariantSha256:EXPECTED.cleanV26QuestionInvariantSha256,
   sourceRegistrySha256:EXPECTED.cleanV26RegistrySha256,reviewedQuestionCount:EXPECTED.questions,

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
-import {sha256} from '../y1m06-official-media-model.mjs';
+import {canonicalLfSha256,EXPECTED,sha256} from '../y1m06-official-media-model.mjs';
 import {verifyY1M06SourceRegistryContext} from '../verify-y1m06-source-registry-pin.mjs';
 
 const root=process.cwd(),dist=path.join(root,'dist-pages');
@@ -17,6 +17,20 @@ function repin(integrityBytes,relative,bytes){
   lines[index]=relative+' '+sha256(bytes);
   return Buffer.from(lines.join('\n')+'\n');
 }
+
+test('pins generation provenance canonically across LF and CRLF checkouts',async()=>{
+  const files=[
+    ['generation-batch-manifest.json',EXPECTED.generationManifestSha256],
+    ['generation-semantic-evidence.json',EXPECTED.generationSemanticSha256]
+  ];
+  for(const [name,expected] of files){
+    const bytes=await readFile(path.join(root,'qa/media-candidates/y1m06-official-20261030',name));
+    const lf=Buffer.from(bytes.toString('utf8').replace(/\r\n/g,'\n'));
+    const crlf=Buffer.from(lf.toString('utf8').replace(/\n/g,'\r\n'));
+    assert.equal(canonicalLfSha256(lf),expected,name+' LF pin');
+    assert.equal(canonicalLfSha256(crlf),expected,name+' CRLF pin');
+  }
+});
 
 test('accepts the exact clean V26 source without rewriting a hash',async()=>{
   const result=await verifyY1M06SourceRegistryContext({root,dist});

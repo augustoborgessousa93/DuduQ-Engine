@@ -7,6 +7,7 @@
   "evidenceBoundary": "Independent Codex visual/semantic review for isolated compiled QA; no owner homologation or production approval claimed.",
   "generationSemanticEvidence": "generation-semantic-evidence.json",
   "generationSemanticEvidenceSha256": "d7be56d12bc6f4faaf2882b5661c353c817b4b7156852695f3625914938f723f",
+  "generationSemanticHashNormalization": "UTF8_LF",
   "sourceQuestionContractSha256": "31d4cc0be48882dfd405cca0f8cb2b708c6f6d3d201fab71ad94e757e771e4b5",
   "sourceQuestionInvariantSha256": "1ce8860d805daf65293951183eb1a461b65a1c93c3c9b2ce8c1b34912d33b15d",
   "sourceRegistrySha256": "aa615a3ed307b0e8cae6abf6901a1582c22ab59aa7f95c6339a635ca7d35fc89",
