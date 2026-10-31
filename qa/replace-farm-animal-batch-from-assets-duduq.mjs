@@ -82,7 +82,11 @@ for(const a of animals){
   assert(/^IMG-V11-2B-[A-Z0-9]+$/.test(row.mediaId),'UNEXPECTED_ASSET_ID');
   const matches=usages.get(row.mediaId)||[],questionIds=[...new Set(matches.map(x=>x.questionId))].sort();
   assert.deepEqual(questionIds,[...row.exampleQuestions].sort(),'MEDIA_ID_USED_OUTSIDE_EXACT_AUDIT:'+row.mediaId);
-  assert.equal(matches.length,row.usage,'MEDIA_ID_USAGE_COUNT_CHANGED:'+row.mediaId);
+  // The 600-question walker records nested references (e.g. Target Shooter
+  // question + option + target + mediaBindings) independently. Queue usage is
+  // the number of DISTINCT questions, not the number of nested DOM bindings.
+  // Still inspect every occurrence below for semantic conflicts.
+  assert.equal(questionIds.length,row.usage,'MEDIA_ID_DISTINCT_QUESTION_USAGE_CHANGED:'+row.mediaId);
   assert(questionIds.every(x=>x.startsWith('Y2M05-Q')),'PIG_MODULE_SCOPE_VIOLATION:'+row.mediaId);
   const current=reg.entries[index.get(row.mediaId)];
   assert(current?.kind==='image'&&current.urlOrPath?.endsWith('.svg')&&
@@ -94,16 +98,28 @@ for(const a of animals){
   for(const occurrence of implicit){
    assert(!String(occurrence.semanticTarget||'').trim(),'SEMANTIC_CONFLICT:'+row.mediaId);
    const q=y2m05.questions.find(q=>q.questionId===occurrence.questionId);
-   assert(q?.mediaIds?.includes(row.mediaId)&&
-     ['memory-quest','drag-drop-multimedia','matching','bubble-pop'].includes(q.mechanic),
-     'UNVERIFIED_NESTED_MEDIA_SEMANTIC:'+row.mediaId+':'+occurrence.questionId);
-   if(q.mechanic==='memory-quest')
-    assert(memoryQ.mediaIds.includes(row.mediaId)&&
-      new RegExp('(?:^|\\W)'+a.concept+'(?:\\W|$)','i').test(memoryQ.learningTarget),
-      'MEMORY_CONCEPT_NOT_BOUND_TO_LEARNING_TARGET:'+row.mediaId);
-   skipped.push({id:row.mediaId,questionId:occurrence.questionId,
-     reason:'LEAF_SEMANTIC_ABSENT_REQUIRES_INDEPENDENT_PEDAGOGICAL_APPROVAL',
-     supportingEvidence:'Exact source registry and audited curricular mediaIds'});
+   assert(q?.mediaIds?.includes(row.mediaId),
+     'UNVERIFIED_NESTED_MEDIA_USAGE:'+row.mediaId+':'+occurrence.questionId);
+   // The audited option is authoritative for Target Shooter and explicit
+   // Bubble Pop choices. The same ID may also appear in top-level lists with
+   // no leaf semantic; require a matching explicit option, never guess.
+   const explicit=(q.options||[]).filter(o=>o.mediaId===row.mediaId);
+   if(explicit.length){
+    assert(explicit.every(o=>isExactPedagogicalConcept(a.concept,o.semanticTarget)),
+      'AUDITED_OPTION_SEMANTIC_CONFLICT:'+row.mediaId);
+   }else{
+    assert(['memory-quest','drag-drop-multimedia','matching','bubble-pop'].includes(q.mechanic),
+     'IMPLICIT_SEMANTIC_NOT_SUPPORTED_FOR_MECHANIC:'+row.mediaId+':'+q.mechanic);
+    if(q.mechanic==='memory-quest')
+     assert(memoryQ.mediaIds.includes(row.mediaId)&&
+       new RegExp('(?:^|\\W)'+a.concept+'(?:\\W|$)','i').test(memoryQ.learningTarget),
+       'MEMORY_CONCEPT_NOT_BOUND_TO_LEARNING_TARGET:'+row.mediaId);
+   }
+   if(!skipped.some(x=>x.id===row.mediaId&&x.questionId===occurrence.questionId))
+    skipped.push({id:row.mediaId,questionId:occurrence.questionId,
+     reason:'NESTED_SEMANTIC_ABSENT_REQUIRES_PEDAGOGICAL_REVIEW',
+     supportingEvidence:explicit.length?'Same question audited option':
+       'Exact source registry and audited curriculum mediaIds'});
   }
   bindings.push({concept:a.concept,mediaId:row.mediaId,questionIds,
    former:current.urlOrPath,assetPath:a.assetPath,sha256:a.sha256,
