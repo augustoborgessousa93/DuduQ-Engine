@@ -9,6 +9,7 @@ on:
       - "qa/audit-assets-duduq-source.mjs"
       - "qa/catalog-assets-duduq-matches.mjs"
       - "qa/tests/verify-assets-duduq-crosswalk.mjs"
+      - "qa/tests/verify-30-route-browser-smoke.mjs"
       - "qa/prepare-assets-duduq-reuse.mjs"
       - "qa/verify-assets-duduq-reuse-preparation.mjs"
       - "qa/verify-assets-duduq-import.mjs"
@@ -28,6 +29,7 @@ on:
       - "qa/audit-assets-duduq-source.mjs"
       - "qa/catalog-assets-duduq-matches.mjs"
       - "qa/tests/verify-assets-duduq-crosswalk.mjs"
+      - "qa/tests/verify-30-route-browser-smoke.mjs"
       - "qa/prepare-assets-duduq-reuse.mjs"
       - "qa/verify-assets-duduq-reuse-preparation.mjs"
       - "qa/verify-assets-duduq-import.mjs"
@@ -45,7 +47,9 @@ permissions:
 
 concurrency:
   group: duduq-assets-duduq-reuse-${{ github.ref }}
-  cancel-in-progress: true
+  # Preserve the in-flight Chromium audit when new QA commits arrive.
+  # GitHub may replace a pending run, but must not cancel the running evidence.
+  cancel-in-progress: false
 
 jobs:
   isolated-v26-media-reuse:
@@ -193,6 +197,12 @@ jobs:
           node --check qa/target-shooter-mobile-containment-probe.mjs
           node qa/target-shooter-mobile-containment-probe.mjs
           echo "Browser CSS experiment only; any PASS here DOES NOT certify a release."
+
+      - name: Enforce 90 of 90 curricular entrypoint boots as a hard gate
+        if: ${{ !cancelled() }}
+        run: |
+          node --check qa/tests/verify-30-route-browser-smoke.mjs
+          node qa/tests/verify-30-route-browser-smoke.mjs qa/results/media-browser-qa/report.json
 
       - name: Test all affected questions in desktop, tablet and mobile, plus real Target Shooter input
         run: |
