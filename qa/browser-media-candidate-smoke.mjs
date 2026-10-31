@@ -148,7 +148,7 @@ try {
     });
     record.boot=response?.ok() && record.before.htmlBodyTextLength>0 &&
       record.introStartClicked===true && record.after.gameRootPresent &&
-      (/\/play\/(drag-drop|target-shooter|matching|memory-quest|bubble-pop|smart-sentence)\//.test(new URL(record.navigatedUrl).pathname) ||
+      (/\/play\/(drag-drop|drag-drop-multimedia|target-shooter|matching|memory-quest|bubble-pop|smart-sentence)\//.test(new URL(record.navigatedUrl).pathname) ||
        record.after.iframeGamePresent || record.after.engineReady) &&
       errors.length===0 && badHttp.length===0 &&
       networkFailures.length===0 && record.after.brokenVisibleImages.length===0
@@ -167,6 +167,9 @@ try {
    });
    results.push(record);
    console.log(JSON.stringify({moduleId,viewport:view.name,boot:record.boot,httpStatus:record.httpStatus,
+    navigatedUrl:record.navigatedUrl||null,introStartClicked:record.introStartClicked||false,
+    gameRootPresent:record.after?.gameRootPresent||false,iframeGamePresent:record.after?.iframeGamePresent||false,
+    engineReady:record.after?.engineReady||false,
     pageErrors:errors.length,httpFailures:badHttp.length,networkFailures:networkFailures.length,canceledDuringNavigation:canceledDuringNavigation.length,
     brokenVisibleImages:record.after?.brokenVisibleImages?.length||0,
     imagesWithEmptySource:record.after?.imagesWithEmptySource||0,
