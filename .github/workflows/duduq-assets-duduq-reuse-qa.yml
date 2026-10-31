@@ -16,6 +16,7 @@ on:
       - "qa/verify-assets-duduq-reuse-preparation.mjs"
       - "qa/verify-assets-duduq-import.mjs"
       - "qa/assets-duduq-reuse-browser-qa.mjs"
+      - "qa/assets-duduq-reuse-affected-gameplay.e2e.mjs"
       - "qa/assert-media-closure-coherence.mjs"
       - "qa/audit-non-temporary-media-browser.mjs"
       - "qa/target-shooter-mobile-containment-probe.mjs"
@@ -220,6 +221,11 @@ jobs:
         run: |
           node --check qa/assets-duduq-reuse-browser-qa.mjs
           node qa/assets-duduq-reuse-browser-qa.mjs
+
+      - name: Verify affected media questions with full real gameplay
+        run: |
+          node --check qa/assets-duduq-reuse-affected-gameplay.e2e.mjs
+          node qa/assets-duduq-reuse-affected-gameplay.e2e.mjs
 
       - name: Enforce real mobile target visibility and pointer-readiness gate
         if: ${{ !cancelled() }}
