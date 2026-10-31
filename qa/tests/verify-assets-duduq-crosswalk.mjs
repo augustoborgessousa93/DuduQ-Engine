@@ -26,9 +26,9 @@ assert.equal(options,report.optionCount);
 // a color into a colored object, or a grandmother into a grandfather. These
 // are lexical crosswalk preconditions, NOT pedagogical approval.
 for(const q of report.questions)for(const opt of q.options){
- const semantic=String(opt.semanticTarget||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().trim();
+ const semantic=String(opt.semanticTarget||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
  for(const candidate of opt.candidates){
-   const name=String(candidate.sourcePath||'').split('/').pop().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase();
+   const name=String(candidate.sourcePath||'').split('/').pop().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
    if(['one','two','three','four','five','six','seven','eight','nine','ten','1','2','3','4','5','6','7','8','9','10'].includes(semantic))
      assert(!/y3-(?:one|two|three|four|five|six|seven|eight|nine|ten)-/.test(name),
        'number-only alternative cannot use pictured quantity: '+q.questionId+' '+candidate.sourcePath);
@@ -37,7 +37,7 @@ for(const q of report.questions)for(const opt of q.options){
    if(semantic==='orange'){
      const context=[q.learningTarget,q.instructionPt,q.visualRequirement]
        .filter(x=>typeof x==='string').join(' ').normalize('NFD')
-       .replace(/[\\u0300-\\u036f]/g,'').toLowerCase();
+       .replace(/[\u0300-\u036f]/g,'').toLowerCase();
      const color=/(?:^|[^a-z])(?:color|colors|cor|cores)(?:[^a-z]|$)/.test(context);
      const fruit=/(?:^|[^a-z])(?:fruit|fruits|fruta|frutas|food|foods|alimento|alimentos|comida|comidas)(?:[^a-z]|$)/.test(context);
      assert.notEqual(color,fruit,'ambiguous orange should have zero name-only candidates: '+q.questionId);
