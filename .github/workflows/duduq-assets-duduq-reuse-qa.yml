@@ -13,6 +13,8 @@ on:
       - "qa/tests/verify-assets-duduq-crosswalk.mjs"
       - "qa/tests/verify-30-route-browser-smoke.mjs"
       - "qa/prepare-assets-duduq-reuse.mjs"
+      - "qa/replace-pig-from-assets-duduq.mjs"
+      - "qa/verify-pig-direct-reuse-browser.mjs"
       - "qa/verify-assets-duduq-reuse-preparation.mjs"
       - "qa/verify-assets-duduq-import.mjs"
       - "qa/assets-duduq-reuse-browser-qa.mjs"
@@ -241,3 +243,105 @@ jobs:
         run: |
           echo "This workflow builds and serves only an ephemeral local Pages candidate; it does not authenticate, upload, deploy, merge or change production."
           echo "Imported assets remain temporary and pedagogical QA pending until owner review."
+  pig-exact-source-qa:
+    name: One exact pig PNG to 3 media IDs and 7 Y2M05 questions
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    env:
+      CI: "true"
+      DUDUQ_QA_ONLY: "1"
+      BASE_URL: http://127.0.0.1:4175
+      ASSETS_DUDUQ_SOURCE_COMMIT: 50fb80a89a5779d73f81c96aab35f6e86193d769
+    steps:
+      - name: Checkout QA branch without write access
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Checkout pinned Assets-DuduQ source read-only
+        uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: 50fb80a89a5779d73f81c96aab35f6e86193d769
+          path: assets-source
+          persist-credentials: false
+
+      - name: Install Node 22, Cloudflare local runtime and Chromium
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install real-browser QA
+        run: |
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+
+      - name: Compile pristine V26 Pages product with 600 immutable questions
+        run: bash qa/build-v26-topic-first-paint-qa.sh
+
+      - name: Verify immutable source and replace pig only in ephemeral compiled registry
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test "$(git -C assets-source rev-parse HEAD)" = "$ASSETS_DUDUQ_SOURCE_COMMIT"
+          test -z "$(git -C assets-source status --porcelain)"
+          node --check qa/replace-pig-from-assets-duduq.mjs
+          node qa/replace-pig-from-assets-duduq.mjs assets-source
+          node qa/replace-pig-from-assets-duduq.mjs assets-source --apply
+          test -f qa/results/pig-source-direct-reuse.json
+          echo "ONE_REAL_ASSETS_DUDUQ_PIG_PNG_HASH_BOUND_TO_3_IDS_7_QUESTIONS"
+
+      - name: Boot the exact compiled candidate on local Cloudflare Pages runtime
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npx wrangler pages dev dist-pages --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 > /tmp/duduq-pig-pages.log 2>&1 &
+          echo $! > /tmp/duduq-pig-server.pid
+          for i in {1..35}; do
+            if curl -fsS http://127.0.0.1:4175/ > /dev/null; then
+              echo "PIG_PAGES_COMPILED_RUNTIME_READY"
+              exit 0
+            fi
+            if ! kill -0 "$(cat /tmp/duduq-pig-server.pid)" 2>/dev/null; then
+              cat /tmp/duduq-pig-pages.log; exit 1
+            fi
+            sleep 1
+          done
+          cat /tmp/duduq-pig-pages.log
+          exit 1
+
+      - name: Validate pig asset SHA and 14 real Chromium curricular route boots
+        run: |
+          node --check qa/verify-pig-direct-reuse-browser.mjs
+          node qa/verify-pig-direct-reuse-browser.mjs
+          echo "PIG_REAL_IMAGE_AND_7_QUESTION_BOOT_PASS_CANDIDATE_ONLY"
+
+      - name: Preserve actual compiled pig-containing distribution for review
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          tar -czf "$RUNNER_TEMP/duduq-pig-direct-v26-qa.tar.gz" -C dist-pages .
+          sha256sum "$RUNNER_TEMP/duduq-pig-direct-v26-qa.tar.gz" > qa/results/pig-distribution-tar.sha256
+          test -s "$RUNNER_TEMP/duduq-pig-direct-v26-qa.tar.gz"
+          echo "COMPILED_CANDIDATE_RETAINED_NOT_DEPLOYED"
+
+      - name: Upload source-verifiable evidence and compiled QA artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-direct-pig-source-candidate-\${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          compression-level: 0
+          path: |
+            qa/results/pig-source-direct-reuse.json
+            qa/results/pig-source-direct-browser.json
+            qa/results/pig-distribution-tar.sha256
+            \${{ runner.temp }}/duduq-pig-direct-v26-qa.tar.gz
+            /tmp/duduq-pig-pages.log
+
+      - name: Explicit no-production boundary
+        if: always()
+        run: |
+          echo "Only disposable compiled QA output changed. Source questions and answer keys unchanged."
+          echo "The pig candidate remains PEDAGOGICAL_QA_PENDING, without merge or production deploy."
