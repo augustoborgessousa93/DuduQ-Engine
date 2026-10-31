@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 const file=process.argv[2]||'qa/results/assets-duduq-question-crosswalk.json';
 const report=JSON.parse(await readFile(file,'utf8'));
 assert.equal(report.schemaVersion,'ASSETS_DUDUQ_BILINGUAL_600_QUESTION_CROSSWALK_V1');
-assert.equal(report.inventoryFiles,308);
+assert.equal(report.inventoryFiles,349);
 assert.equal(report.questionCount,600);
 assert.equal(report.humanPedagogicalApproval,'PENDING');
 assert.match(report.matchingRule,/filename-only match is approved/i);
