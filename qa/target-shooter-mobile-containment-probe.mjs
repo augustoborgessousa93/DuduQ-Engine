@@ -42,9 +42,31 @@ try{
     const cssMediaBefore=await page.evaluate(()=>matchMedia('(max-width:520px)').matches);
     await page.addStyleTag({content:candidateCSS});
     await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
-    // The app may briefly lock target input during its own transition.
-    // Do not call a fully visible target 'unclickable' before observing the
-    // interaction unlock; capture persistent locks as independent evidence.
+    // Target Shooter intentionally locks choices until the instruction audio
+    // completes. The previous probe never used the visible audio control, so
+    // it reported LOCKED even when desktop real-pointer gameplay passed.
+    // Follow the same real-user audio entry flow; never remove the lock class,
+    // dispatch synthetic events, or call engine internals to manufacture READY.
+    const audioActions=[];
+    const waitReady=timeout=>page.waitForFunction(()=>{
+      const game=document.querySelector('#game');
+      return game?.dataset.duduqInteractionState==='READY';
+    },null,{timeout}).then(()=>true,()=>false);
+    let userFlowReady=await waitReady(1000);
+    if(!userFlowReady){
+      const audio=page.locator('.audio-button').first();
+      for(let attempt=1;attempt<=2&&!userFlowReady;attempt++){
+        try{
+          await audio.waitFor({state:'visible',timeout:10000});
+          await audio.click({timeout:10000}); // Playwright native pointer input
+          audioActions.push({attempt,input:'PLAYWRIGHT_NATIVE_POINTER',visibleControl:true});
+          userFlowReady=await waitReady(12000);
+        }catch(error){
+          audioActions.push({attempt,input:'PLAYWRIGHT_NATIVE_POINTER',error:String(error?.message||error)});
+          break;
+        }
+      }
+    }
     const unlocked=await page.waitForFunction(()=>{
       const nodes=[...document.querySelectorAll('.target-shooter-target')];
       return nodes.length===4&&nodes.every(n=>!n.classList.contains('duduq-interaction-locked'));
@@ -55,10 +77,10 @@ try{
     await page.screenshot({path:path.join(output,qid+'-after.png'),fullPage:false});
     const visualFit=after.length===4 && after.every(t=>t.visibleRatio>=0.98 &&
       t.width>=44 && t.height>=44);
-    const interactiveFit=unlocked&&after.every(t=>t.centerHit&&t.pointerEvents!=='none');
+    const interactiveFit=userFlowReady&&unlocked&&after.every(t=>t.centerHit&&t.pointerEvents!=='none');
     const fit=visualFit&&interactiveFit;
     report.questions.push({questionId:qid,route,httpStatus:response?.status()||null,
-      before,after,fit,visualFit,interactiveFit,unlocked,engineState,
+      before,after,fit,visualFit,interactiveFit,unlocked,userFlowReady,audioActions,engineState,
       cssMediaBefore,cssMediaAfter,cssActuallyChanged:after.some((t,i)=>Math.abs(t.x-before[i].x)>1),
       errors,screenshotBefore:qid+'-before.png',screenshotAfter:qid+'-after.png'});
     await context.close();
@@ -73,7 +95,7 @@ try{
   await writeFile(path.join(output,'report.json'),JSON.stringify(report,null,2)+'\n');
   console.log(JSON.stringify({status:report.status,questions:report.questions.map(q=>({
     id:q.questionId,beforeMinRatio:Math.min(...q.before.map(t=>t.visibleRatio)),cssActuallyChanged:q.cssActuallyChanged,
-    afterMinRatio:Math.min(...q.after.map(t=>t.visibleRatio)),afterAllTargetsClickable:q.interactiveFit,visualFit:q.visualFit,unlocked:q.unlocked,engineState:q.engineState
+    afterMinRatio:Math.min(...q.after.map(t=>t.visibleRatio)),afterAllTargetsClickable:q.interactiveFit,visualFit:q.visualFit,unlocked:q.unlocked,userFlowReady:q.userFlowReady,audioActions:q.audioActions,engineState:q.engineState
   })),error:report.error||null}));
 }
 if(report.status!=='PASS_EXPERIMENT_NOT_RELEASE')process.exitCode=1;
