@@ -85,11 +85,28 @@ const pigIds=Object.keys(targets),allQuestions=new Set();
 for(const id of pigIds){
  const rows=usages.get(id)||[],names=[...new Set(rows.map(x=>x.questionId))];
  assert.deepEqual(names.sort(),[...targets[id]].sort(),'PIG_REAL_600_CONTRACT_USAGE_MISMATCH:'+id);
- assert(rows.every(x=>isExactPedagogicalConcept('pig',x.semanticTarget)),
-  'PIG_SEMANTIC_CONFLICT_OR_MISSING_TARGET:'+id);
- for(const q of names)allQuestions.add(q);
  const current=registry.entries[indexed.get(id)];
  assert(current?.kind==='image','MISSING_IMAGE_REGISTRY:'+id);
+ const missingSemantic=rows.filter(x=>!isExactPedagogicalConcept('pig',x.semanticTarget));
+ // Memory Quest Q004 stores the image ID without a leaf-level semanticTarget.
+ // Fail closed except for this one explicitly audited memory pair: its
+ // canonical registry describes it as pig, audit queue says no conflict and
+ // the curricular memory question explicitly contains pig in its six animals.
+ if(missingSemantic.length){
+  const specificallyScoped=id==='IMG-V11-2B-F61F39A60C6F1C46'&&
+   missingSemantic.length===1&&
+   missingSemantic[0].questionId==='Y2M05-Q004'&&
+   !String(missingSemantic[0].semanticTarget||'').trim()&&
+   current.semantic==='pig';
+  assert(specificallyScoped,'PIG_SEMANTIC_CONFLICT_OR_MISSING_TARGET:'+id);
+  const year2=JSON.parse(await readFile(path.join(root,'docs/qa/media-audit-20261029/year-2.json'),'utf8'));
+  const memory=year2.modules.find(m=>m.moduleId==='Y2M05')?.questions.find(q=>q.questionId==='Y2M05-Q004');
+  assert(memory?.mechanic==='memory-quest'&&
+   memory.mediaIds?.includes(id)&&
+   /(?:^|\W)pig(?:\W|$)/i.test(memory.learningTarget||''),
+   'PIG_MEMORY_CURRICULUM_NOT_INDEPENDENTLY_AUDITED');
+ }
+ for(const q of names)allQuestions.add(q);
  assert(current.urlOrPath?.endsWith('.svg'),'PIG_NOT_SOURCE_SVG_OR_ALREADY_REPLACED:'+id);
  assert(!['OFFICIAL_MEDIA_QA_PASSED_REVIEW_BRANCH','RELEASE_APPROVED'].includes(current.integrationStatus) &&
    current.humanResolutionStatus!=='PEDAGOGICAL_QA_APPROVED',
@@ -104,7 +121,9 @@ const plan={schemaVersion:'DUDUQ_EXACT_PIG_REUSE_V1',
  sourceCommit,sourcePath,sourceGitBlob,sha256:actualHash,width:w,height:h,
  sourceUniquePngs:1,changedMediaIds:pigIds,affectedQuestionIds:[...allQuestions].sort(),
  affectedQuestions:7,verifiedQuestionContracts:600,mediaBindings:3,
- semantics:'PIG_EXACT_NO_CONFLICT',answerKeysChanged:0,questionsChanged:0,
+ semantics:'PIG_EXACT_NO_CONFLICT_WITH_SINGLE_SCOPED_MEMORY_REGISTRY_AUDIT_FALLBACK',
+ semanticFallback:'Y2M05-Q004_MEMORY_PIG_ONLY_NOT_RELEASE_APPROVAL',
+ answerKeysChanged:0,questionsChanged:0,
  goldMastersModified:false,humanPedagogicalApproval:false,
  releaseApproved:false,productionDeployed:false};
 if(!apply){console.log(JSON.stringify(plan));process.exit(0);}
