@@ -154,7 +154,12 @@ try {
       networkFailures.length===0 && record.after.brokenVisibleImages.length===0
       ?'PASS':'FAIL';
    }catch(e){errors.push('SMOKE_EXCEPTION:'+String(e.message).slice(0,800));}
-   record.imageQaStatus=(record.after?.imagesWithEmptySource??0)>0?'PENDING_EMPTY_IMAGE_SOURCE':
+   // An IMG in a hidden feedback ribbon often intentionally has no src until
+   // the learner submits a response. It is not evidence of broken boot media.
+   // Still report all placeholders and retain separate gameplay/media gates.
+   record.visibleEmptyImageSources=(record.after?.emptySourceImageDetails||[]).filter(x=>x.visible).length;
+   record.hiddenEmptyImagePlaceholders=(record.after?.emptySourceImageDetails||[]).filter(x=>!x.visible).length;
+   record.imageQaStatus=record.visibleEmptyImageSources>0?'PENDING_VISIBLE_EMPTY_IMAGE_SOURCE':
       record.after?.brokenVisibleImages?.length?'FAILED_BROKEN_LOADED_ASSET':'NOT_CERTIFIED';
    record.pageErrors=errors;
    record.httpFailures=badHttp;
@@ -181,15 +186,18 @@ try {
 }finally{await browser.close()}
 const failures=results.filter(r=>r.boot!=='PASS');
 const imagePending=results.filter(r=>r.imageQaStatus!=='NOT_CERTIFIED');
+const hiddenPlaceholderChecks=results.filter(r=>r.hiddenEmptyImagePlaceholders>0).length;
 const report={schemaVersion:'DUDUQ_MEDIA_BROWSER_CANDIDATE_SMOKE_V1',
  mode:'QA_ONLY_NON_PRODUCTION',actualBrowser:'PLAYWRIGHT_CHROMIUM',
  source:'Compiled V26 artifact served by local HTTP, unless candidate changes explicitly applied before this test',
  integratedImageQA:false,pedagogicalQAApproved:false,gameplayCertified:false,
  modules,viewports:views.map(x=>x.name),checks:results.length,passes:results.length-failures.length,
  failures:failures.length,mediaPendingChecks:imagePending.length,
+ hiddenPlaceholderChecks,
  status:failures.length?'FAIL':imagePending.length?'ENTRYPOINT_PASS_MEDIA_SOURCE_INCOMPLETE':'ENTRYPOINT_PASS_MEDIA_QA_NOT_CERTIFIED',
  results};
 await fs.writeFile(path.join(dir,'report.json'),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({report:'qa/results/media-browser-qa/report.json',
- status:report.status,checks:report.checks,failures:report.failures,mediaPendingChecks:report.mediaPendingChecks}));
+ status:report.status,checks:report.checks,failures:report.failures,mediaPendingChecks:report.mediaPendingChecks,
+ hiddenPlaceholderChecks:report.hiddenPlaceholderChecks}));
 if(failures.length)process.exitCode=1;
