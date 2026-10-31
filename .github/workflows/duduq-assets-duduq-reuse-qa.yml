@@ -26,30 +26,6 @@ on:
       - "scripts/duduq-import-chatgpt-bundle.mjs"
       - "scripts/duduq-image-pipeline.mjs"
       - "docs/qa/media-audit-20261029/**"
-  pull_request:
-    branches:
-      - automation/duduq-media-source-only-fix-20261029
-    types: [opened, synchronize, reopened]
-    paths:
-      - ".github/workflows/duduq-assets-duduq-reuse-qa.yml"
-      - ".github/workflows/duduq-independent-official-overlay-qa.yml"
-      - "qa/audit-assets-duduq-source.mjs"
-      - "qa/catalog-assets-duduq-matches.mjs"
-      - "qa/tests/verify-assets-duduq-crosswalk.mjs"
-      - "qa/tests/verify-30-route-browser-smoke.mjs"
-      - "qa/prepare-assets-duduq-reuse.mjs"
-      - "qa/verify-assets-duduq-reuse-preparation.mjs"
-      - "qa/verify-assets-duduq-import.mjs"
-      - "qa/assets-duduq-reuse-browser-qa.mjs"
-      - "qa/assert-media-closure-coherence.mjs"
-      - "qa/audit-non-temporary-media-browser.mjs"
-      - "qa/target-shooter-mobile-containment-probe.mjs"
-      - "qa/tests/verify-target-shooter-mobile-containment.mjs"
-      - "qa/apply-target-shooter-mobile-containment-qa.mjs"
-      - "qa/overlays/target-shooter-mobile-hitbox-reflow-v2.css"
-      - "scripts/duduq-import-chatgpt-bundle.mjs"
-      - "scripts/duduq-image-pipeline.mjs"
-      - "docs/qa/media-audit-20261029/**"
   workflow_dispatch:
 
 permissions:
@@ -72,6 +48,7 @@ jobs:
       ASSETS_DUDUQ_SOURCE_COMMIT: 50fb80a89a5779d73f81c96aab35f6e86193d769
       DUDUQ_MEDIA_CANDIDATE_BUNDLE: qa/media-candidates/assets-duduq-reuse-20261030
       DUDUQ_MEDIA_BROWSER_OUT: qa/results/assets-duduq-browser
+      DUDUQ_AFFECTED_GAMEPLAY_OUT: qa/results/assets-duduq-browser/affected-gameplay
       DUDUQ_QA_ONLY: "1"
     steps:
       - name: Checkout isolated DUDUQ review branch

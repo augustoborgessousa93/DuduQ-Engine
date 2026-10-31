@@ -8,7 +8,7 @@ import path from 'node:path';
 const root = process.cwd();
 const base = (process.env.BASE_URL || 'http://127.0.0.1:4175').replace(/\/+$/, '');
 const bundlePath = path.resolve(process.env.DUDUQ_MEDIA_CANDIDATE_BUNDLE || 'qa/media-candidates/assets-duduq-reuse-20261030');
-const output = path.resolve(process.env.DUDUQ_MEDIA_BROWSER_OUT || 'qa/results/assets-duduq-browser/affected-gameplay');
+const output = path.resolve(process.env.DUDUQ_AFFECTED_GAMEPLAY_OUT || path.join(process.env.DUDUQ_MEDIA_BROWSER_OUT || 'qa/results/assets-duduq-browser', 'affected-gameplay'));
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const norm = value => String(value ?? '').trim().toLocaleLowerCase('en-US');
 const manifest = JSON.parse(await readFile(path.join(bundlePath, 'batch-manifest.json'), 'utf8'));
@@ -88,7 +88,7 @@ try {
     const result = { questionId, pass: false, events: [], screenshots: [], errors: [] };
     report.questions.push(result);
     await persist();
-    let context;
+    let context, traceFile;
     try {
       const question = questionById.get(questionId), cross = crossById.get(questionId);
       assert(question && cross && question.mechanicId === 'target-shooter' && cross.mechanic === 'target-shooter',
@@ -114,6 +114,8 @@ try {
         result.candidateBindings.push({ mediaId: binding.mediaId, semanticTarget: asset.semanticTarget, sha256: asset.sha256 });
       }
       context = await browser.newContext({ viewport: view });
+      traceFile = path.join(output, questionId.toLowerCase() + '-trace.zip');
+      await context.tracing.start({ screenshots: true, snapshots: true, sources: true });
       const page = await context.newPage();
       const diag = attachDiagnostics(page);
       const route = '/play/target-shooter/?duduqModule=Y1M04&duduqItem=' + encodeURIComponent(questionId) + '&qaSeed=20261031';
@@ -207,6 +209,15 @@ try {
       result.pageErrors ??= [];
       result.requestFailures ??= [];
     } finally {
+      if (context && traceFile) {
+        try {
+          await context.tracing.stop({ path: traceFile });
+          result.trace = { path: path.relative(root, traceFile).replaceAll('\\\\', '/'), sha256: await sha(traceFile) };
+        } catch (traceError) {
+          result.pass = false;
+          result.traceError = String(traceError?.stack || traceError);
+        }
+      }
       await context?.close().catch(() => {});
       await persist();
     }
