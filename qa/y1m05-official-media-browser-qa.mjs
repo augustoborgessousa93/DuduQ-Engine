@@ -8,11 +8,14 @@ const root=process.cwd();
 const moduleId=process.env.DUDUQ_BROWSER_QA_MODULE||'Y1M05';
 const configurations={
   Y1M05:{modulePath:'year-1/module-05',bundle:'y1m05-official-20261030',slug:'y1m05',schemaVersion:'DUDUQ_Y1M05_OFFICIAL_MEDIA_BROWSER_QA_V2',
-    sourcePendingIds:101,postSplitIds:101,usageRecords:101,uniquePngs:10,gameplayQuestionId:'Y1M05-Q001',
+    sourcePendingIds:101,postSplitIds:101,usageRecords:101,uniquePngs:10,runtimePaths:10,requireEveryQuestionMedia:true,gameplayQuestionId:'Y1M05-Q001',
     incorrectAlt:'hands',correctAlt:'head',screenshots:['Y1M05-Q001','Y1M05-Q003','Y1M05-Q006']},
   Y1M06:{modulePath:'year-1/module-06',bundle:'y1m06-official-20261030',slug:'y1m06',schemaVersion:'DUDUQ_Y1M06_OFFICIAL_MEDIA_BROWSER_QA_V1',
-    sourcePendingIds:93,postSplitIds:93,usageRecords:93,uniquePngs:22,gameplayQuestionId:'Y1M06-Q004',
-    incorrectAlt:'fish',correctAlt:'cat',screenshots:['Y1M06-Q004','Y1M06-Q014','Y1M06-Q008']}
+    sourcePendingIds:93,postSplitIds:93,usageRecords:93,uniquePngs:22,runtimePaths:22,requireEveryQuestionMedia:true,gameplayQuestionId:'Y1M06-Q004',
+    incorrectAlt:'fish',correctAlt:'cat',screenshots:['Y1M06-Q004','Y1M06-Q014','Y1M06-Q008']},
+  Y2M01:{modulePath:'year-2/module-01',bundle:'y2m01-official-20261031',slug:'y2m01',schemaVersion:'DUDUQ_Y2M01_OFFICIAL_MEDIA_BROWSER_QA_V1',
+    sourcePendingIds:29,postSplitIds:57,usageRecords:93,uniquePngs:28,runtimePaths:43,requireEveryQuestionMedia:false,gameplayQuestionId:'Y2M01-Q009',
+    incorrectAlt:'Leo',correctAlt:'Mia',screenshots:['Y2M01-Q009','Y2M01-Q014','Y2M01-Q018']}
 };
 const qa=configuration(moduleId);
 function configuration(id){const value=configurations[id];if(!value)throw Error('UNSUPPORTED_MEDIA_BROWSER_QA_MODULE:'+id);return value;}
@@ -33,16 +36,17 @@ for(const asset of bundle.assets)for(const binding of asset.bindings){
   if(!questionPaths)throw Error('BINDING_QUESTION_OUTSIDE_MODULE:'+binding.questionId);
   questionPaths.add(entry.urlOrPath);
 }
-if(questions.length!==20||bindingIds.size!==qa.postSplitIds||expectedPaths.size!==qa.uniquePngs||new Set(expectedPaths.values()).size!==qa.uniquePngs)
+if(questions.length!==20||bindingIds.size!==qa.postSplitIds||expectedPaths.size!==qa.runtimePaths||new Set(expectedPaths.values()).size!==qa.uniquePngs)
   throw Error('STALE_'+moduleId+'_BROWSER_QA_INPUT');
-if([...expectedPathsByQuestion.values()].some(paths=>paths.size===0))throw Error('QUESTION_WITHOUT_EXPECTED_OFFICIAL_MEDIA');
+if(qa.requireEveryQuestionMedia&&[...expectedPathsByQuestion.values()].some(paths=>paths.size===0))
+  throw Error('QUESTION_WITHOUT_EXPECTED_OFFICIAL_MEDIA');
 
 await mkdir(out,{recursive:true});
 const views={desktop:{width:1366,height:768},tablet:{width:768,height:1024},mobile:{width:390,height:844}};
 const routeFor=(q,seed='20261030')=>'/play/'+(q.mechanicId==='smart-sentence-complete'?'smart-sentence':q.mechanicId)+`/?duduqModule=${moduleId}&duduqItem=${q.item_id}&qaSeed=${seed}`;
 const report={schemaVersion:qa.schemaVersion,createdAt:new Date().toISOString(),
   status:'RUNNING',base,moduleId,actualBrowser:'PLAYWRIGHT_CHROMIUM',nativePointerInput:true,nativeTouchInput:true,
-  sourcePendingIds:qa.sourcePendingIds,postSplitIds:qa.postSplitIds,usageRecords:qa.usageRecords,uniquePngHashes:qa.uniquePngs,runtimePngPaths:qa.uniquePngs,
+  sourcePendingIds:qa.sourcePendingIds,postSplitIds:qa.postSplitIds,usageRecords:qa.usageRecords,uniquePngHashes:qa.uniquePngs,runtimePngPaths:qa.runtimePaths,
   productionDeployed:false,goldMastersModified:false,routes:[],dynamicCoverage:[],transport:[],gameplay:null,responsiveGameplay:[],screenshots:[],artifacts:{}};
 let browser;
 
@@ -211,21 +215,25 @@ try{
     const route=routeFor(question),response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:40000});
     await page.waitForTimeout(650);
     const expectedQuestionPaths=[...(expectedPathsByQuestion.get(question.item_id)||[])].sort();
-    const dynamicVisibility=question.mechanicId==='bubble-pop'?await unlockBubble(page,events,expectedQuestionPaths):null;
-    await page.waitForFunction(()=>[...document.images].some(x=>x.src.includes('/chatgpt/')&&x.complete&&x.naturalWidth>0),null,{timeout:15000});
+    const dynamicVisibility=question.mechanicId==='bubble-pop'&&expectedQuestionPaths.length?
+      await unlockBubble(page,events,expectedQuestionPaths):null;
+    if(expectedQuestionPaths.length)
+      await page.waitForFunction(()=>[...document.images].some(x=>x.src.includes('/chatgpt/')&&x.complete&&x.naturalWidth>0),null,{timeout:15000});
     const images=await officialImages(page);for(const image of images)observed.add(image.path);
     for(const observation of dynamicVisibility?.observations||[])if(expectedPaths.has(observation.path))observed.add(observation.path);
     const iframeCount=await page.locator('iframe').count();
     const overflowX=await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth));
-    const unknown=images.filter(x=>!expectedPaths.has(x.path)),broken=images.filter(x=>!x.visible),
+    const expectedForQuestion=new Set(expectedQuestionPaths),unknown=images.filter(x=>!expectedForQuestion.has(x.path)),broken=images.filter(x=>!x.visible),
       unloaded=images.filter(x=>x.naturalWidth<1||x.naturalHeight<1),intersecting=images.filter(x=>x.intersectsViewport);
     const temporalDynamic=question.mechanicId==='bubble-pop'&&dynamicVisibility?.allFullyContained===true&&
       dynamicVisibility.expectedPaths.length===expectedQuestionPaths.length&&dynamicVisibility.missingPaths.length===0;
-    const staticVisibility=question.mechanicId!=='bubble-pop'&&intersecting.length>0&&!broken.length;
+    const staticVisibility=expectedQuestionPaths.length>0&&question.mechanicId!=='bubble-pop'&&intersecting.length>0&&!broken.length;
+    const noMediaExpected=expectedQuestionPaths.length===0&&images.length===0;
     const check={questionId:question.item_id,mechanicId:question.mechanicId,route,httpStatus:response?.status()??null,
       expectedQuestionPaths,officialImageCount:images.length,intersectingImageCount:intersecting.length,images,dynamicVisibility,iframeCount,overflowX,
       pointerEvents:events,pageErrors:diag.pageErrors,httpFailures:diag.httpFailures,requestFailures:diag.requestFailures,
-      pass:response?.status()===200&&images.length>0&&(question.mechanicId==='bubble-pop'?temporalDynamic:staticVisibility)&&
+      pass:response?.status()===200&&(expectedQuestionPaths.length===0?noMediaExpected:
+        (question.mechanicId==='bubble-pop'?temporalDynamic:staticVisibility))&&
         !unknown.length&&!unloaded.length&&iframeCount===0&&overflowX===0&&!diag.pageErrors.length&&!diag.httpFailures.length&&!diag.requestFailures.length};
     if(dynamicVisibility)report.dynamicCoverage.push({questionId:question.item_id,route,...dynamicVisibility});
     report.routes.push(check);await page.close();
