@@ -1,5 +1,8 @@
 # DUDUQ Sync
 
+> **ATUALIZAÇÃO PREVALENTE DO PROPRIETÁRIO — 31/10/2026:** O Codex **NÃO PODE GERAR NOVAS IMAGENS** para DUDUQ English. Missão 1 = inventariar e reaproveitar semanticamente todo o acervo atual de `augustoborgessousa93/Assets-DuduQ/Imagens Ilustrativa`, homologar alterações nos 30 módulos/600 questões e publicar os links oficiais APENAS com gates reais PASS e rollback. O proprietário criará futuras imagens no ChatGPT e fará upload ao repositório; o Codex atuará como **integrador/QA/publicador**, nunca como gerador. As seções antigas abaixo que determinavam geração nativa, fila Generator, execução de prompts de imagens ou proibição do usuário criar artes foram **revogadas**. Não iniciar geração mesmo se uma ferramenta estiver disponível. A Missão 1 pode encerrar com backlog provisório após deploy autorizado; PROJECT_COMPLETE exige zero provisórias referenciadas, zero não homologadas, 30/30 módulos e QA completa. O agendador local deve operar somente a fila de integração. Esta mudança NÃO autoriza ignorar a homologação ou apagar temporárias em uso.
+
+
 ## Mandatory Penpot preflight
 
 Before every Penpot operation—live read, compilation, `Atualize o Core`, mutation, reverse, or production certification—run `scripts/duduq-penpot-bootstrap.mjs`. It must report 4400, 4401, and 4402 healthy, `PLUGIN_CONNECTED`, and `LIVE_PENPOT_DOCUMENT_READ` as `PASS`. Restart missing project-local services automatically through this bootstrap; never substitute a cached graph for a failed live read and never require a user to launch Git Bash.
