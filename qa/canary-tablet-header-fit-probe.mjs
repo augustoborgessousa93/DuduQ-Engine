@@ -12,7 +12,7 @@ const OUT='qa/results/canary-tablet-header-fit';
 const viewport={width:768,height:1024};
 const patch=`
 @media (min-width: 721px) and (max-width: 900px) {
-  .duduq-engine-header.duduq-global-progress-header {
+  .duduq-engine-header {
     box-sizing:border-box !important;
     display:grid !important;
     grid-template-columns:minmax(0, 1fr) auto !important;
@@ -24,21 +24,21 @@ const patch=`
     min-width:0 !important;
     height:auto !important;
   }
-  .duduq-engine-header.duduq-global-progress-header > .duduq-engine-header-main {
+  .duduq-engine-header > .duduq-engine-header-main {
     grid-column:1 !important;
     grid-row:1 !important;
     min-width:0 !important;
     position:relative !important;
     max-width:100% !important;
   }
-  .duduq-engine-header.duduq-global-progress-header > .duduq-engine-toolbar {
+  .duduq-engine-header > .duduq-engine-toolbar {
     grid-column:2 !important;
     grid-row:1 !important;
     position:relative !important;
     justify-self:end !important;
     max-width:100% !important;
   }
-  .duduq-engine-header.duduq-global-progress-header > .duduq-progress-trail {
+  .duduq-engine-header > .duduq-progress-trail {
     box-sizing:border-box !important;
     position:relative !important;
     grid-column:1 / -1 !important;
@@ -52,7 +52,7 @@ const patch=`
     margin:0 !important;
     justify-self:stretch !important;
   }
-  .duduq-engine-header.duduq-global-progress-header .duduq-engine-fullscreen-button {
+  .duduq-engine-header .duduq-engine-fullscreen-button {
     position:relative !important;
     left:auto !important; right:auto !important;
     top:auto !important; bottom:auto !important;
