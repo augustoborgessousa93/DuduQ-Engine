@@ -28,6 +28,8 @@ on:
       - "qa/prepare-y1m06-official-media-bundle.mjs"
       - "qa/verify-y1m06-official-media-build.mjs"
       - "qa/verify-y1m06-source-registry-pin.mjs"
+      - "qa/export-verified-media-distribution-candidate.mjs"
+      - "engine/adapters/r148/duduq-hud-responsive.css"
       - "qa/y1m06-official-media-browser-qa.mjs"
       - "qa/y1m06-official-media-model.mjs"
       - "qa/tests/verify-y1m06-official-media-overlay.mjs"
@@ -280,6 +282,32 @@ jobs:
           '
           git diff --exit-code -- content/english functions/play/english core
           echo "NO_PRODUCTION_DEPLOY_NO_MEDIA_DELETION_NO_GOLD_MASTER_CHANGE"
+
+      # This is a product-shaped compiled distribution containing all 185
+      # media-ID substitutions, NOT another empty QA report. The temporary
+      # injected Target Shooter style is stripped and re-hashed; only R148
+      # versioned CSS remains. Release approval is deliberately FALSE.
+      - name: Export single hash-bound 185-ID distributable candidate
+        run: |
+          set -Eeuo pipefail
+          node --check qa/export-verified-media-distribution-candidate.mjs
+          node qa/export-verified-media-distribution-candidate.mjs
+          tar -czf "$RUNNER_TEMP/duduq-review-distribution.tar.gz" -C dist-pages .
+          sha256sum "$RUNNER_TEMP/duduq-review-distribution.tar.gz" | sed 's#  .*/#  #' > qa/results/duduq-review-distribution.sha256
+          test -s "$RUNNER_TEMP/duduq-review-distribution.tar.gz"
+          echo "BUNDLED_COMPILED_PRODUCT_WITH_185_REVIEWED_MEDIA_IDS_NOT_APPROVED_FOR_PRODUCTION"
+
+      - name: Keep compiled product artifact for release review without deploying
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-media-distribution-candidate-${{ github.run_id }}
+          retention-days: 14
+          compression-level: 0
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/duduq-review-distribution.tar.gz
+            qa/results/duduq-review-distribution.sha256
+            qa/results/duduq-distribution-candidate.json
 
       - name: Retain independent QA reports and real-browser screenshots
         if: always()
