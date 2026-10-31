@@ -22,5 +22,25 @@ for(const q of report.questions){
 assert.equal(modules.size,30);
 for(const [moduleId,items] of modules)assert.equal(items.length,20,moduleId);
 assert.equal(options,report.optionCount);
+// Reuse discoveries must not turn a number into a picture of that many items,
+// a color into a colored object, or a grandmother into a grandfather. These
+// are lexical crosswalk preconditions, NOT pedagogical approval.
+for(const q of report.questions)for(const opt of q.options){
+ const semantic=String(opt.semanticTarget||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().trim();
+ for(const candidate of opt.candidates){
+   const name=String(candidate.sourcePath||'').split('/').pop().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase();
+   if(['one','two','three','four','five','six','seven','eight','nine','ten','1','2','3','4','5','6','7','8','9','10'].includes(semantic))
+     assert(!/y3-(?:one|two|three|four|five|six|seven|eight|nine|ten)-/.test(name),
+       'number-only alternative cannot use pictured quantity: '+q.questionId+' '+candidate.sourcePath);
+   if(['red','blue','green','yellow','orange','white','black','brown','pink'].includes(semantic))
+     assert(/^(?:cor|color)[ _-]/.test(name),'pure color cannot reuse an object of that color: '+q.questionId+' '+candidate.sourcePath);
+   if(semantic==='grandmother')
+     assert(!name.includes('grandfather'),'ambiguous avó/avô reuse: '+candidate.sourcePath);
+   if(semantic==='grandfather')
+     assert(!name.includes('grandmother'),'ambiguous avó/avô reuse: '+candidate.sourcePath);
+   if(semantic==='play')assert(!/logo[ _-]/.test(name),'logo is not the action play: '+candidate.sourcePath);
+ }
+}
+
 console.log(JSON.stringify({status:'PASS_CROSSWALK_COMPLETE_REVIEW_PENDING',files:report.inventoryFiles,modules:modules.size,questions:report.questionCount,options,
   candidateOptions:report.candidateOptions,visualExactPrechecks:report.optionsWithVisuallyReviewedExactConcept},null,2));
