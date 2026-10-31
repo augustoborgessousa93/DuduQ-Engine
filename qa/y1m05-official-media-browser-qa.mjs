@@ -5,30 +5,45 @@ import {mkdir,readFile,writeFile,stat} from 'node:fs/promises';
 import path from 'node:path';
 
 const root=process.cwd();
+const moduleId=process.env.DUDUQ_BROWSER_QA_MODULE||'Y1M05';
+const configurations={
+  Y1M05:{modulePath:'year-1/module-05',bundle:'y1m05-official-20261030',slug:'y1m05',schemaVersion:'DUDUQ_Y1M05_OFFICIAL_MEDIA_BROWSER_QA_V2',
+    sourcePendingIds:101,postSplitIds:101,usageRecords:101,uniquePngs:10,gameplayQuestionId:'Y1M05-Q001',
+    incorrectAlt:'hands',correctAlt:'head',screenshots:['Y1M05-Q001','Y1M05-Q003','Y1M05-Q006']},
+  Y1M06:{modulePath:'year-1/module-06',bundle:'y1m06-official-20261030',slug:'y1m06',schemaVersion:'DUDUQ_Y1M06_OFFICIAL_MEDIA_BROWSER_QA_V1',
+    sourcePendingIds:93,postSplitIds:93,usageRecords:93,uniquePngs:22,gameplayQuestionId:'Y1M06-Q004',
+    incorrectAlt:'fish',correctAlt:'cat',screenshots:['Y1M06-Q004','Y1M06-Q014','Y1M06-Q008']}
+};
+const qa=configuration(moduleId);
+function configuration(id){const value=configurations[id];if(!value)throw Error('UNSUPPORTED_MEDIA_BROWSER_QA_MODULE:'+id);return value;}
 const base=(process.env.BASE_URL||'http://127.0.0.1:4175').replace(/\/+$/,'');
-const out=path.join(root,'qa/results/y1m05-official-media-browser');
+const out=path.join(root,`qa/results/${qa.slug}-official-media-browser`);
 const reportPath=path.join(out,'report.json');
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
-const questions=JSON.parse(await readFile(path.join(root,'dist-pages/content/english/year-1/module-05/questions.json'),'utf8')).items;
+const questions=JSON.parse(await readFile(path.join(root,`dist-pages/content/english/${qa.modulePath}/questions.json`),'utf8')).items;
 const registry=JSON.parse(await readFile(path.join(root,'dist-pages/content/english/media/media-registry.json'),'utf8'));
-const bundle=JSON.parse(await readFile(path.join(root,'qa/media-candidates/y1m05-official-20261030/batch-manifest.json'),'utf8'));
+const bundle=JSON.parse(await readFile(path.join(root,`qa/media-candidates/${qa.bundle}/batch-manifest.json`),'utf8'));
 const bindingIds=new Set(bundle.assets.flatMap(x=>x.bindings.map(b=>b.mediaId)));
 const registryById=new Map(registry.entries.map(x=>[x.mediaId,x]));
-const expectedPaths=new Map();
-for(const id of bindingIds){
-  const entry=registryById.get(id);if(!entry)throw Error('MISSING_REGISTRY_ID:'+id);
+const expectedPaths=new Map(),expectedPathsByQuestion=new Map(questions.map(question=>[question.item_id,new Set()]));
+for(const asset of bundle.assets)for(const binding of asset.bindings){
+  const entry=registryById.get(binding.mediaId);if(!entry)throw Error('MISSING_REGISTRY_ID:'+binding.mediaId);
   expectedPaths.set(entry.urlOrPath,entry.sha256);
+  const questionPaths=expectedPathsByQuestion.get(binding.questionId);
+  if(!questionPaths)throw Error('BINDING_QUESTION_OUTSIDE_MODULE:'+binding.questionId);
+  questionPaths.add(entry.urlOrPath);
 }
-if(questions.length!==20||bindingIds.size!==101||expectedPaths.size!==10||new Set(expectedPaths.values()).size!==10)
-  throw Error('STALE_Y1M05_BROWSER_QA_INPUT');
+if(questions.length!==20||bindingIds.size!==qa.postSplitIds||expectedPaths.size!==qa.uniquePngs||new Set(expectedPaths.values()).size!==qa.uniquePngs)
+  throw Error('STALE_'+moduleId+'_BROWSER_QA_INPUT');
+if([...expectedPathsByQuestion.values()].some(paths=>paths.size===0))throw Error('QUESTION_WITHOUT_EXPECTED_OFFICIAL_MEDIA');
 
 await mkdir(out,{recursive:true});
 const views={desktop:{width:1366,height:768},tablet:{width:768,height:1024},mobile:{width:390,height:844}};
-const routeFor=q=>'/play/'+(q.mechanicId==='smart-sentence-complete'?'smart-sentence':q.mechanicId)+'/?duduqModule=Y1M05&duduqItem='+q.item_id+'&qaSeed=20261030';
-const report={schemaVersion:'DUDUQ_Y1M05_OFFICIAL_MEDIA_BROWSER_QA_V2',createdAt:new Date().toISOString(),
-  status:'RUNNING',base,moduleId:'Y1M05',actualBrowser:'PLAYWRIGHT_CHROMIUM',nativePointerInput:true,nativeTouchInput:true,
-  sourcePendingIds:101,postSplitIds:101,usageRecords:101,uniquePngHashes:10,runtimePngPaths:10,
-  productionDeployed:false,goldMastersModified:false,routes:[],transport:[],gameplay:null,responsiveGameplay:[],screenshots:[],artifacts:{}};
+const routeFor=(q,seed='20261030')=>'/play/'+(q.mechanicId==='smart-sentence-complete'?'smart-sentence':q.mechanicId)+`/?duduqModule=${moduleId}&duduqItem=${q.item_id}&qaSeed=${seed}`;
+const report={schemaVersion:qa.schemaVersion,createdAt:new Date().toISOString(),
+  status:'RUNNING',base,moduleId,actualBrowser:'PLAYWRIGHT_CHROMIUM',nativePointerInput:true,nativeTouchInput:true,
+  sourcePendingIds:qa.sourcePendingIds,postSplitIds:qa.postSplitIds,usageRecords:qa.usageRecords,uniquePngHashes:qa.uniquePngs,runtimePngPaths:qa.uniquePngs,
+  productionDeployed:false,goldMastersModified:false,routes:[],dynamicCoverage:[],transport:[],gameplay:null,responsiveGameplay:[],screenshots:[],artifacts:{}};
 let browser;
 
 function diagnostics(page){
@@ -66,13 +81,15 @@ async function observeVisibleResult(page,answerAlt,expectedState,label){
       targetClass:target.className,badge:target.querySelector('.target-status-badge')?.getAttribute('aria-label')||null,
       targetVisible:r.width>20&&r.height>20&&r.right>0&&r.bottom>0&&r.left<innerWidth&&r.top<innerHeight,
       ribbonHidden:ribbon.hidden,feedback:ribbon.dataset.feedback||null,feedbackText:ribbon.textContent.replace(/\s+/g,' ').trim(),
+      actionText:ribbon.querySelector('.feedback-action')?.textContent.replace(/\s+/g,' ').trim()||null,
       rootState:document.querySelector('#game')?.dataset.duduqInteractionState||null});};
     const observer=new MutationObserver(snapshot);observer.observe(target,{attributes:true,subtree:true});observer.observe(ribbon,{attributes:true,subtree:true});
     store[key]={log,observer};snapshot();
   },{alt:answerAlt,key:observerKey});
-  await page.waitForFunction(([expected,key])=>window.__duduqQaVisibleMutationLog?.[key]?.log?.some(x=>
-    x.targetState===expected&&x.targetVisible===true&&x.feedback===expected&&x.ribbonHidden===false),
-    [expectedState,observerKey],{timeout:25000});
+  const expectedAction=expectedState==='correct'?'CONTINUAR':'TENTAR DE NOVO';
+  await page.waitForFunction(([expected,action,key])=>window.__duduqQaVisibleMutationLog?.[key]?.log?.some(x=>
+    x.targetState===expected&&x.targetVisible===true&&x.feedback===expected&&x.ribbonHidden===false&&x.actionText===action),
+    [expectedState,expectedAction,observerKey],{timeout:25000});
   return page.evaluate(key=>{const item=window.__duduqQaVisibleMutationLog[key];item.observer.disconnect();return item.log;},observerKey);
 }
 async function unlockTargetShooter(page,events,activate=pointerClick){
@@ -82,21 +99,37 @@ async function unlockTargetShooter(page,events,activate=pointerClick){
   await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY'&&
     !document.querySelector('.target-shooter-target')?.hasAttribute('inert'),null,{timeout:25000});
 }
-async function unlockBubble(page,events){
+async function unlockBubble(page,events,expectedQuestionPaths){
+  await page.evaluate(expected=>{
+    const state={expected:[...expected],loaded:{},observations:{}};
+    window.__duduqQaBubbleCoverage=state;
+    window.__duduqQaSampleBubbleCoverage=()=>{
+      for(const image of document.querySelectorAll('.bubble-pop-playable img[src*="/chatgpt/"]')){
+        const path=new URL(image.src).pathname.replace(/^\//,''),rect=image.getBoundingClientRect(),style=getComputedStyle(image);
+        if(!state.expected.includes(path))continue;
+        state.loaded[path]={naturalWidth:image.naturalWidth,naturalHeight:image.naturalHeight};
+        const fullyContained=image.complete&&image.naturalWidth>0&&style.display!=='none'&&style.visibility!=='hidden'&&Number(style.opacity)>0&&
+          rect.width>=20&&rect.height>=20&&rect.left>=0&&rect.top>=0&&rect.right<=innerWidth&&rect.bottom<=innerHeight;
+        if(fullyContained&&!state.observations[path])state.observations[path]={path,alt:image.alt,
+          rect:{x:rect.x,y:rect.y,width:rect.width,height:rect.height,right:rect.right,bottom:rect.bottom},
+          observedWhileFullyContained:true,at:performance.now()};
+      }
+      return state.expected.every(path=>state.observations[path]);
+    };
+  },expectedQuestionPaths);
   const audio=page.locator('.audio-button').first();
   await pointerClick(page,audio,'instruction-audio-recovery',events);await page.waitForTimeout(700);
   await pointerClick(page,audio,'instruction-audio-play',events);
   await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY'&&
     document.querySelector('.bubble-pop-playable img[src*="/chatgpt/"]'),null,{timeout:25000});
-  const observation=await page.waitForFunction(()=>{
-    const img=[...document.querySelectorAll('.bubble-pop-playable img[src*="/chatgpt/"]')].find(candidate=>{
-      const r=candidate.getBoundingClientRect();return r.right>0&&r.bottom>0&&r.left<innerWidth&&r.top<innerHeight;
-    });
-    if(!img)return false;const r=img.getBoundingClientRect();
-    return {path:new URL(img.src).pathname.replace(/^\//,''),alt:img.alt,
-      rect:{x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom},observedWhileIntersectingViewport:true};
-  },null,{timeout:20000});
-  return observation.jsonValue();
+  await page.waitForFunction(()=>window.__duduqQaSampleBubbleCoverage?.(),null,{timeout:50000,polling:100}).catch(()=>null);
+  return page.evaluate(()=>{
+    window.__duduqQaSampleBubbleCoverage?.();
+    const state=window.__duduqQaBubbleCoverage,observations=Object.values(state?.observations||{});
+    const missingPaths=(state?.expected||[]).filter(path=>!state.observations[path]);
+    return {expectedPaths:state?.expected||[],observations,loaded:state?.loaded||{},missingPaths,
+      allFullyContained:missingPaths.length===0&&observations.every(item=>item.observedWhileFullyContained===true)};
+  });
 }
 async function officialImages(page){
   return page.locator('img').evaluateAll(images=>images.filter(img=>img.src.includes('/chatgpt/')).map(img=>{
@@ -116,16 +149,16 @@ async function runTouchGameplay(browser,{name,viewport,route}){
     await page.waitForTimeout(700);await unlockTargetShooter(page,events,touchTap);
     const images=await officialImages(page);
 
-    await touchTap(page,targetByAlt(page,'hands'),name+'-select-incorrect-hands',events);
-    await page.waitForFunction(()=>{
-      const target=[...document.querySelectorAll('.target-shooter-target')].find(x=>x.querySelector('.target-shooter-target__animal')?.alt==='hands');
+    await touchTap(page,targetByAlt(page,qa.incorrectAlt),name+'-select-incorrect-'+qa.incorrectAlt,events);
+    await page.waitForFunction(alt=>{
+      const target=[...document.querySelectorAll('.target-shooter-target')].find(x=>x.querySelector('.target-shooter-target__animal')?.alt===alt);
       return target&&['selected','incorrect'].includes(target.dataset.gameplayState||'');
-    },null,{timeout:10000});
-    const incorrectTransitions=await observeVisibleResult(page,'hands','incorrect',name+'-observe-incorrect-hands');
+    },qa.incorrectAlt,{timeout:10000});
+    const incorrectTransitions=await observeVisibleResult(page,qa.incorrectAlt,'incorrect',name+'-observe-incorrect-'+qa.incorrectAlt);
     const incorrectObserved=[...incorrectTransitions].reverse().find(x=>x.targetState==='incorrect'&&x.targetVisible&&x.feedback==='incorrect'&&!x.ribbonHidden);
     if(!incorrectObserved)throw Error('TOUCH_VISIBLE_INCORRECT_TRANSITION_NOT_OBSERVED:'+name);
     const incorrect={state:'incorrect',observed:incorrectObserved,transitions:incorrectTransitions,
-      currentState:await targetByAlt(page,'hands').getAttribute('data-gameplay-state'),
+      currentState:await targetByAlt(page,qa.incorrectAlt).getAttribute('data-gameplay-state'),
       feedback:await page.locator('.feedback-ribbon').evaluate(e=>({hidden:e.hidden,type:e.dataset.feedback,text:e.textContent.replace(/\s+/g,' ').trim()})),
       interactionState:await page.locator('#game').getAttribute('data-duduq-interaction-state')};
     if(incorrect.interactionState==='AWAITING_RETRY'&&!incorrect.feedback.hidden)
@@ -133,30 +166,30 @@ async function runTouchGameplay(browser,{name,viewport,route}){
     await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY'&&
       ![...document.querySelectorAll('.target-shooter-target')].some(x=>x.dataset.gameplayState==='incorrect'),null,{timeout:15000});
 
-    await touchTap(page,targetByAlt(page,'head'),name+'-select-correct-head',events);
-    await page.waitForFunction(()=>{
-      const target=[...document.querySelectorAll('.target-shooter-target')].find(x=>x.querySelector('.target-shooter-target__animal')?.alt==='head');
+    await touchTap(page,targetByAlt(page,qa.correctAlt),name+'-select-correct-'+qa.correctAlt,events);
+    await page.waitForFunction(alt=>{
+      const target=[...document.querySelectorAll('.target-shooter-target')].find(x=>x.querySelector('.target-shooter-target__animal')?.alt===alt);
       return target&&['selected','correct'].includes(target.dataset.gameplayState||'');
-    },null,{timeout:10000});
-    const correctTransitions=await observeVisibleResult(page,'head','correct',name+'-observe-correct-head');
+    },qa.correctAlt,{timeout:10000});
+    const correctTransitions=await observeVisibleResult(page,qa.correctAlt,'correct',name+'-observe-correct-'+qa.correctAlt);
     const correctObserved=[...correctTransitions].reverse().find(x=>x.targetState==='correct'&&x.targetVisible&&x.feedback==='correct'&&!x.ribbonHidden);
     if(!correctObserved)throw Error('TOUCH_VISIBLE_CORRECT_TRANSITION_NOT_OBSERVED:'+name);
     const correct={state:'correct',observed:correctObserved,transitions:correctTransitions,
-      currentState:await targetByAlt(page,'head').getAttribute('data-gameplay-state'),
+      currentState:await targetByAlt(page,qa.correctAlt).getAttribute('data-gameplay-state'),
       feedback:await page.locator('.feedback-ribbon').evaluate(e=>({hidden:e.hidden,type:e.dataset.feedback,text:e.textContent.replace(/\s+/g,' ').trim()})),
       interactionState:await page.locator('#game').getAttribute('data-duduq-interaction-state')};
     const overflowX=await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth)),iframeCount=await page.locator('iframe').count();
-    const screenshotPath=path.join(out,name+'-touch-y1m05-q001-correct.png');
+    const screenshotPath=path.join(out,name+'-touch-'+qa.gameplayQuestionId.toLowerCase()+'-correct.png');
     await page.screenshot({path:screenshotPath,fullPage:false});
     const screenshotBytes=await readFile(screenshotPath);
     const fullyContainedOfficialImages=images.filter(x=>x.rect.x>=0&&x.rect.y>=0&&x.rect.right<=viewport.width&&x.rect.bottom<=viewport.height).length;
-    const result={name,viewport,questionId:'Y1M05-Q001',mechanicId:'target-shooter',input:'native Playwright locator touch tap',
+    const result={name,viewport,questionId:qa.gameplayQuestionId,mechanicId:'target-shooter',input:'native Playwright locator touch tap',
       hasTouch:true,httpStatus:response?.status()??null,incorrect,correct,touchEvents:events,officialImages:images,overflowX,iframeCount,
       fullyContainedOfficialImages,
       pageErrors:diag.pageErrors,httpFailures:diag.httpFailures,requestFailures:diag.requestFailures,
       screenshot:{path:path.relative(root,screenshotPath).replaceAll('\\','/'),sha256:hash(screenshotBytes),bytes:screenshotBytes.length}};
     result.pass=response?.status()===200&&incorrect.observed.targetVisible===true&&correct.observed.targetVisible===true&&events.length>=5&&
-      images.length>=4&&fullyContainedOfficialImages===images.length&&images.some(x=>x.alt==='head')&&images.some(x=>x.alt==='hands')&&overflowX===0&&iframeCount===0&&
+      images.length>=4&&fullyContainedOfficialImages===images.length&&images.some(x=>x.alt===qa.correctAlt)&&images.some(x=>x.alt===qa.incorrectAlt)&&overflowX===0&&iframeCount===0&&
       !diag.pageErrors.length&&!diag.httpFailures.length&&!diag.requestFailures.length;
     return result;
   }finally{await page.close().catch(()=>{});await context.close().catch(()=>{});}
@@ -177,22 +210,32 @@ try{
     const page=await auditContext.newPage(),diag=diagnostics(page),events=[];
     const route=routeFor(question),response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:40000});
     await page.waitForTimeout(650);
-    const dynamicVisibility=question.mechanicId==='bubble-pop'?await unlockBubble(page,events):null;
+    const expectedQuestionPaths=[...(expectedPathsByQuestion.get(question.item_id)||[])].sort();
+    const dynamicVisibility=question.mechanicId==='bubble-pop'?await unlockBubble(page,events,expectedQuestionPaths):null;
     await page.waitForFunction(()=>[...document.images].some(x=>x.src.includes('/chatgpt/')&&x.complete&&x.naturalWidth>0),null,{timeout:15000});
     const images=await officialImages(page);for(const image of images)observed.add(image.path);
+    for(const observation of dynamicVisibility?.observations||[])if(expectedPaths.has(observation.path))observed.add(observation.path);
     const iframeCount=await page.locator('iframe').count();
     const overflowX=await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth));
-    const unknown=images.filter(x=>!expectedPaths.has(x.path)),broken=images.filter(x=>!x.visible),intersecting=images.filter(x=>x.intersectsViewport);
+    const unknown=images.filter(x=>!expectedPaths.has(x.path)),broken=images.filter(x=>!x.visible),
+      unloaded=images.filter(x=>x.naturalWidth<1||x.naturalHeight<1),intersecting=images.filter(x=>x.intersectsViewport);
+    const temporalDynamic=question.mechanicId==='bubble-pop'&&dynamicVisibility?.allFullyContained===true&&
+      dynamicVisibility.expectedPaths.length===expectedQuestionPaths.length&&dynamicVisibility.missingPaths.length===0;
+    const staticVisibility=question.mechanicId!=='bubble-pop'&&intersecting.length>0&&!broken.length;
     const check={questionId:question.item_id,mechanicId:question.mechanicId,route,httpStatus:response?.status()??null,
-      officialImageCount:images.length,intersectingImageCount:intersecting.length,images,dynamicVisibility,iframeCount,overflowX,
+      expectedQuestionPaths,officialImageCount:images.length,intersectingImageCount:intersecting.length,images,dynamicVisibility,iframeCount,overflowX,
       pointerEvents:events,pageErrors:diag.pageErrors,httpFailures:diag.httpFailures,requestFailures:diag.requestFailures,
-      pass:response?.status()===200&&images.length>0&&(intersecting.length>0||dynamicVisibility?.observedWhileIntersectingViewport===true)&&
-        !unknown.length&&!broken.length&&iframeCount===0&&overflowX===0&&!diag.pageErrors.length&&!diag.httpFailures.length&&!diag.requestFailures.length};
+      pass:response?.status()===200&&images.length>0&&(question.mechanicId==='bubble-pop'?temporalDynamic:staticVisibility)&&
+        !unknown.length&&!unloaded.length&&iframeCount===0&&overflowX===0&&!diag.pageErrors.length&&!diag.httpFailures.length&&!diag.requestFailures.length};
+    if(dynamicVisibility)report.dynamicCoverage.push({questionId:question.item_id,route,...dynamicVisibility});
     report.routes.push(check);await page.close();
+    await writeFile(reportPath,JSON.stringify(report,null,2)+'\n');
+    console.log(JSON.stringify({stage:'QUESTION_ROUTE',moduleId,questionId:question.item_id,pass:check.pass,
+      dynamicObserved:dynamicVisibility?.observations?.length||0,dynamicExpected:dynamicVisibility?.expectedPaths?.length||0}));
     if(!check.pass)throw Error('QUESTION_ROUTE_MEDIA_QA_FAILED:'+question.item_id+':'+JSON.stringify(check).slice(0,1200));
   }
-  await auditContext.close();
   const missing=[...expectedPaths.keys()].filter(x=>!observed.has(x));
+  await auditContext.close();
   if(missing.length)throw Error('RUNTIME_PATHS_NOT_OBSERVED_ACROSS_20_QUESTIONS:'+missing.join(','));
   report.observedRuntimePaths=[...observed].sort();
 
@@ -200,41 +243,41 @@ try{
   const rawVideoDir=path.join(out,'video-raw');await mkdir(rawVideoDir,{recursive:true});
   const gameContext=await browser.newContext({viewport:views.desktop,recordVideo:{dir:rawVideoDir,size:views.desktop}});
   const page=await gameContext.newPage(),diag=diagnostics(page),events=[],video=page.video();
-  const gameplayRoute=base+'/play/target-shooter/?duduqModule=Y1M05&duduqItem=Y1M05-Q001&qaSeed=20261030';
+  const gameplayRoute=base+`/play/target-shooter/?duduqModule=${moduleId}&duduqItem=${qa.gameplayQuestionId}&qaSeed=20261030`;
   await page.goto(gameplayRoute,{waitUntil:'domcontentloaded',timeout:40000});
   await page.waitForTimeout(700);await unlockTargetShooter(page,events);
   const gameplayInitialImages=await officialImages(page);
-  await pointerClick(page,targetByAlt(page,'hands'),'select-incorrect-hands',events);
+  await pointerClick(page,targetByAlt(page,qa.incorrectAlt),'select-incorrect-'+qa.incorrectAlt,events);
   await page.waitForFunction(()=>document.querySelector('.target-shooter-target[data-gameplay-state="selected"]'));
-  const incorrectTransitions=await observeVisibleResult(page,'hands','incorrect','observe-incorrect-hands');
+  const incorrectTransitions=await observeVisibleResult(page,qa.incorrectAlt,'incorrect','observe-incorrect-'+qa.incorrectAlt);
   const incorrectObserved=[...incorrectTransitions].reverse().find(x=>x.targetState==='incorrect'&&x.targetVisible&&x.feedback==='incorrect'&&!x.ribbonHidden);
   if(!incorrectObserved)throw Error('VISIBLE_INCORRECT_TRANSITION_NOT_OBSERVED');
   await page.waitForFunction(()=>document.querySelector('.feedback-ribbon')?.dataset.feedback==='incorrect'||
     document.querySelector('#game')?.dataset.duduqInteractionState==='AWAITING_RETRY',null,{timeout:18000});
   const incorrect={state:'incorrect',observed:incorrectObserved,transitions:incorrectTransitions,
-    currentState:await targetByAlt(page,'hands').getAttribute('data-gameplay-state'),
+    currentState:await targetByAlt(page,qa.incorrectAlt).getAttribute('data-gameplay-state'),
     feedback:await page.locator('.feedback-ribbon').evaluate(e=>({hidden:e.hidden,type:e.dataset.feedback,text:e.textContent.replace(/\s+/g,' ').trim()})),
     interactionState:await page.locator('#game').getAttribute('data-duduq-interaction-state')};
   if(incorrect.interactionState==='AWAITING_RETRY'&&!incorrect.feedback.hidden)await pointerClick(page,page.locator('.feedback-action'),'retry-after-incorrect',events);
   await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY'&&
     ![...document.querySelectorAll('.target-shooter-target')].some(x=>x.dataset.gameplayState==='incorrect'),null,{timeout:15000});
-  await pointerClick(page,targetByAlt(page,'head'),'select-correct-head',events);
+  await pointerClick(page,targetByAlt(page,qa.correctAlt),'select-correct-'+qa.correctAlt,events);
   await page.waitForFunction(()=>document.querySelector('.target-shooter-target[data-gameplay-state="selected"]'));
-  const correctTransitions=await observeVisibleResult(page,'head','correct','observe-correct-head');
+  const correctTransitions=await observeVisibleResult(page,qa.correctAlt,'correct','observe-correct-'+qa.correctAlt);
   const correctObserved=[...correctTransitions].reverse().find(x=>x.targetState==='correct'&&x.targetVisible&&x.feedback==='correct'&&!x.ribbonHidden);
   if(!correctObserved)throw Error('VISIBLE_CORRECT_TRANSITION_NOT_OBSERVED');
   const correct={state:'correct',observed:correctObserved,transitions:correctTransitions,
-    currentState:await targetByAlt(page,'head').getAttribute('data-gameplay-state')};
+    currentState:await targetByAlt(page,qa.correctAlt).getAttribute('data-gameplay-state')};
   correct.feedback=await page.locator('.feedback-ribbon').evaluate(e=>({hidden:e.hidden,type:e.dataset.feedback,text:e.textContent.replace(/\s+/g,' ').trim()}));
   correct.interactionState=await page.locator('#game').getAttribute('data-duduq-interaction-state');
-  report.gameplay={questionId:'Y1M05-Q001',mechanicId:'target-shooter',input:'native Playwright mouse move/down/up',
+  report.gameplay={questionId:qa.gameplayQuestionId,mechanicId:'target-shooter',input:'native Playwright mouse move/down/up',
     incorrect,correct,pointerEvents:events,officialImages:gameplayInitialImages,iframeCount:await page.locator('iframe').count(),
     pageErrors:diag.pageErrors,httpFailures:diag.httpFailures,requestFailures:diag.requestFailures,
     pass:incorrect.observed.targetVisible===true&&correct.observed.targetVisible===true&&events.length>=5&&
-      gameplayInitialImages.length>=4&&gameplayInitialImages.some(x=>x.alt==='head')&&gameplayInitialImages.some(x=>x.alt==='hands')&&
+      gameplayInitialImages.length>=4&&gameplayInitialImages.some(x=>x.alt===qa.correctAlt)&&gameplayInitialImages.some(x=>x.alt===qa.incorrectAlt)&&
       !diag.pageErrors.length&&!diag.httpFailures.length&&!diag.requestFailures.length};
   if(!report.gameplay.pass)throw Error('REAL_POINTER_GAMEPLAY_QA_FAILED');
-  await page.close();const videoPath=path.join(out,'y1m05-q001-pointer-gameplay.webm');await video.saveAs(videoPath);await gameContext.close();
+  await page.close();const videoPath=path.join(out,qa.gameplayQuestionId.toLowerCase()+'-pointer-gameplay.webm');await video.saveAs(videoPath);await gameContext.close();
   report.artifacts.video={path:path.relative(root,videoPath).replaceAll('\\','/'),sha256:hash(await readFile(videoPath)),bytes:(await stat(videoPath)).size};
 
   for(const touchCase of [
@@ -246,23 +289,23 @@ try{
   }
 
   const traceContext=await browser.newContext({viewport:views.desktop});
-  await traceContext.tracing.start({screenshots:false,snapshots:false,sources:false,title:'Y1M05 Q001 companion pointer action trace'});
+  await traceContext.tracing.start({screenshots:false,snapshots:false,sources:false,title:qa.gameplayQuestionId+' companion pointer action trace'});
   const tracePage=await traceContext.newPage(),traceEvents=[];
   await tracePage.goto(gameplayRoute,{waitUntil:'domcontentloaded',timeout:40000});await tracePage.waitForTimeout(700);
   await unlockTargetShooter(tracePage,traceEvents);
-  await pointerClick(tracePage,targetByAlt(tracePage,'hands'),'trace-select-incorrect-hands',traceEvents);
+  await pointerClick(tracePage,targetByAlt(tracePage,qa.incorrectAlt),'trace-select-incorrect-'+qa.incorrectAlt,traceEvents);
   await tracePage.waitForFunction(()=>document.querySelector('.target-shooter-target[data-gameplay-state="selected"]'));
-  await observeVisibleResult(tracePage,'hands','incorrect','trace-observe-incorrect-hands');
+  await observeVisibleResult(tracePage,qa.incorrectAlt,'incorrect','trace-observe-incorrect-'+qa.incorrectAlt);
   await pointerClick(tracePage,tracePage.locator('.feedback-action'),'trace-retry-after-incorrect',traceEvents);
-  const tracePath=path.join(out,'y1m05-q001-pointer-trace.zip');
+  const tracePath=path.join(out,qa.gameplayQuestionId.toLowerCase()+'-pointer-trace.zip');
   await traceContext.tracing.stop({path:tracePath});await tracePage.close();await traceContext.close();
   report.artifacts.trace={path:path.relative(root,tracePath).replaceAll('\\','/'),sha256:hash(await readFile(tracePath)),bytes:(await stat(tracePath)).size,
     scope:'Companion clean-context pointer trace through visible incorrect state',pointerEvents:traceEvents};
 
   const screenshotCases=[
-    {name:'desktop-1366x768',viewport:views.desktop,questionId:'Y1M05-Q001',unlock:true},
-    {name:'tablet-768x1024',viewport:views.tablet,questionId:'Y1M05-Q003'},
-    {name:'mobile-390x844',viewport:views.mobile,questionId:'Y1M05-Q006'}
+    {name:'desktop-1366x768',viewport:views.desktop,questionId:qa.screenshots[0],unlock:true},
+    {name:'tablet-768x1024',viewport:views.tablet,questionId:qa.screenshots[1]},
+    {name:'mobile-390x844',viewport:views.mobile,questionId:qa.screenshots[2]}
   ];
   for(const test of screenshotCases){
     const q=questions.find(x=>x.item_id===test.questionId),ctx=await browser.newContext({viewport:test.viewport,reducedMotion:'reduce'}),p=await ctx.newPage();

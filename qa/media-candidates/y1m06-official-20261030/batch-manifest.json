@@ -4,7 +4,7 @@
   "moduleId": "Y1M06",
   "source": "Codex native OpenAI image generation plus verified native-original reuse",
   "provider": "Codex built-in image_gen",
-  "status": "HASH_BOUND_GENERATION_CANDIDATES_READY_FOR_INDEPENDENT_REVIEW_NOT_INTEGRATED",
+  "status": "HASH_BOUND_OCCURRENCE_SCOPED_REVIEW_BUNDLE_READY_FOR_QA_OVERLAY",
   "questionSource": "dist-pages/content/english/year-1/module-06/questions.json",
   "questionSourceSha256": "31d4cc0be48882dfd405cca0f8cb2b708c6f6d3d201fab71ad94e757e771e4b5",
   "originalAuditedPendingIds": 93,
@@ -28,12 +28,13 @@
       "bindings": [
         {
           "questionId": "Y1M06-Q009",
-          "mediaId": "IMG-Q009-BIG",
+          "mediaId": "IMG-Y1M06-Q009-M1-BIG",
           "verifiedQuestionIds": [
             "Y1M06-Q009"
           ],
           "contractPath": "mediaBindings[0]",
-          "contractSemanticTarget": "big"
+          "contractSemanticTarget": "big",
+          "splitFromMediaId": "IMG-Q009-BIG"
         },
         {
           "questionId": "Y1M06-Q011",
@@ -99,7 +100,7 @@
     {
       "assetKey": "Y1M06-CANDIDATE-BIG-SPIDER",
       "file": "images/DUDUQ-Y1M06-BIG-SPIDER.png",
-      "semanticTarget": "big spider",
+      "semanticTarget": "big",
       "sha256": "57eb92db864178aef6a274b2820bfb6e3e20055326029fc20e3f26c16db00a32",
       "pixelWidth": 1536,
       "pixelHeight": 1024,
@@ -129,7 +130,8 @@
           "expectedCoreComponents": 2,
           "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
         }
-      }
+      },
+      "visualSemanticTarget": "big spider"
     },
     {
       "assetKey": "Y1M06-CANDIDATE-BIRD",
@@ -320,12 +322,13 @@
       "bindings": [
         {
           "questionId": "Y1M06-Q001",
-          "mediaId": "IMG-Y1M06-Q001-CAT",
+          "mediaId": "IMG-Y1M06-Q001-T2-CAT",
           "verifiedQuestionIds": [
             "Y1M06-Q001"
           ],
           "contractPath": "targets[1].media",
-          "contractSemanticTarget": "cat"
+          "contractSemanticTarget": "cat",
+          "splitFromMediaId": "IMG-Y1M06-Q001-CAT"
         },
         {
           "questionId": "Y1M06-Q002",
@@ -438,12 +441,13 @@
       "bindings": [
         {
           "questionId": "Y1M06-Q001",
-          "mediaId": "IMG-Y1M06-Q001-DOG",
+          "mediaId": "IMG-Y1M06-Q001-T1-DOG",
           "verifiedQuestionIds": [
             "Y1M06-Q001"
           ],
           "contractPath": "targets[0].media",
-          "contractSemanticTarget": "dog"
+          "contractSemanticTarget": "dog",
+          "splitFromMediaId": "IMG-Y1M06-Q001-DOG"
         },
         {
           "questionId": "Y1M06-Q001",
@@ -536,12 +540,13 @@
       "bindings": [
         {
           "questionId": "Y1M06-Q001",
-          "mediaId": "IMG-Y1M06-Q001-FISH",
+          "mediaId": "IMG-Y1M06-Q001-T3-FISH",
           "verifiedQuestionIds": [
             "Y1M06-Q001"
           ],
           "contractPath": "targets[2].media",
-          "contractSemanticTarget": "fish"
+          "contractSemanticTarget": "fish",
+          "splitFromMediaId": "IMG-Y1M06-Q001-FISH"
         },
         {
           "questionId": "Y1M06-Q002",
@@ -864,12 +869,13 @@
       "bindings": [
         {
           "questionId": "Y1M06-Q001",
-          "mediaId": "IMG-Y1M06-Q001-RABBIT",
+          "mediaId": "IMG-Y1M06-Q001-T4-RABBIT",
           "verifiedQuestionIds": [
             "Y1M06-Q001"
           ],
           "contractPath": "targets[3].media",
-          "contractSemanticTarget": "rabbit"
+          "contractSemanticTarget": "rabbit",
+          "splitFromMediaId": "IMG-Y1M06-Q001-RABBIT"
         },
         {
           "questionId": "Y1M06-Q002",
@@ -1078,12 +1084,13 @@
       "bindings": [
         {
           "questionId": "Y1M06-Q014",
-          "mediaId": "IMG-Y1M06-Q014-SMALL",
+          "mediaId": "IMG-Y1M06-Q014-B4-SMALL",
           "verifiedQuestionIds": [
             "Y1M06-Q014"
           ],
           "contractPath": "pairs[3].b.media",
-          "contractSemanticTarget": "small"
+          "contractSemanticTarget": "small",
+          "splitFromMediaId": "IMG-Y1M06-Q014-SMALL"
         },
         {
           "questionId": "Y1M06-Q016",
@@ -1429,5 +1436,61 @@
         }
       }
     }
-  ]
+  ],
+  "occurrenceScopedSplits": [
+    {
+      "questionId": "Y1M06-Q001",
+      "field": "targets[0].media.assetId",
+      "from": "IMG-Y1M06-Q001-DOG",
+      "to": "IMG-Y1M06-Q001-T1-DOG",
+      "semanticTarget": "dog",
+      "externalModule": "Y2M05"
+    },
+    {
+      "questionId": "Y1M06-Q001",
+      "field": "targets[1].media.assetId",
+      "from": "IMG-Y1M06-Q001-CAT",
+      "to": "IMG-Y1M06-Q001-T2-CAT",
+      "semanticTarget": "cat",
+      "externalModule": "Y2M05"
+    },
+    {
+      "questionId": "Y1M06-Q001",
+      "field": "targets[2].media.assetId",
+      "from": "IMG-Y1M06-Q001-FISH",
+      "to": "IMG-Y1M06-Q001-T3-FISH",
+      "semanticTarget": "fish",
+      "externalModule": "Y2M05"
+    },
+    {
+      "questionId": "Y1M06-Q001",
+      "field": "targets[3].media.assetId",
+      "from": "IMG-Y1M06-Q001-RABBIT",
+      "to": "IMG-Y1M06-Q001-T4-RABBIT",
+      "semanticTarget": "rabbit",
+      "externalModule": "Y2M05"
+    },
+    {
+      "questionId": "Y1M06-Q009",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-Q009-BIG",
+      "to": "IMG-Y1M06-Q009-M1-BIG",
+      "semanticTarget": "big",
+      "externalModule": "Y2M06"
+    },
+    {
+      "questionId": "Y1M06-Q014",
+      "field": "pairs[3].b.media.assetId",
+      "from": "IMG-Y1M06-Q014-SMALL",
+      "to": "IMG-Y1M06-Q014-B4-SMALL",
+      "semanticTarget": "small",
+      "externalModule": "Y4M05"
+    }
+  ],
+  "sourceRegistryPinEvidence": "source-registry-pin.json",
+  "sourceRegistryPinEvidenceSha256": "9c5d741bd603db8b126968a58baea2f8aa931ebae3f1b7267223126d80a7b1c5",
+  "generationManifestEvidence": "generation-batch-manifest.json",
+  "generationManifestSha256": "8f79609976a5987b2787d461856c8d78b759496b7b44c5e298a9a3bf503c5796",
+  "sourceQuestionContractSha256": "31d4cc0be48882dfd405cca0f8cb2b708c6f6d3d201fab71ad94e757e771e4b5",
+  "sourceQuestionInvariantSha256": "1ce8860d805daf65293951183eb1a461b65a1c93c3c9b2ce8c1b34912d33b15d"
 }
