@@ -22,7 +22,7 @@ const aliases={
   ruler:['ruler','rulers','regua','reguas'],pen:['pen','pens','caneta','canetas'],crayon:['crayon','crayons','giz de cera'],
   book:['book','books','livro','livros'],notebook:['notebook','notebooks','caderno','cadernos'],school:['school','escola'],
   red:['red','vermelho','vermelha','vermelhos','vermelhas'],blue:['blue','azul'],green:['green','verde'],yellow:['yellow','amarelo','amarela'],
-  orange:['orange','laranja'],purple:['purple','roxo','roxa'],black:['black','preto','preta'],white:['white','branco','branca'],
+  orange:['orange','laranja'],orange_fruit:['orange fruit','laranja fruta'],purple:['purple','roxo','roxa'],black:['black','preto','preta'],white:['white','branco','branca'],
   hello:['hello','oi','ola'],goodbye:['goodbye','bye','tchau','adeus'],
   boy:['boy','menino','garoto'],girl:['girl','menina','garota'],head:['head','cabeca'],hand:['hand','mao'],hands:['hands','maos'],
   leg:['leg','perna'],legs:['legs','pernas'],eye:['eye','olho'],eyes:['eyes','olhos'],ear:['ear','orelha'],ears:['ears','orelhas'],
@@ -117,7 +117,18 @@ for(let year=1;year<=5;year++){
   for(const mod of data.modules)for(const q of mod.questions){
     const options=[];
     for(const option of q.options||[]){
-      const semantic=norm(option.semanticTarget),concept=aliasToConcept.get(semantic)||null;
+      const semantic=norm(option.semanticTarget);
+      let concept=aliasToConcept.get(semantic)||null;
+      // Orange is both a fruit and a color. Select a candidate domain ONLY
+      // when the actual question provides unambiguous contextual evidence.
+      // Conflicting or absent domain evidence stays unassigned.
+      if(semantic==='orange'||semantic==='laranja'){
+        const context=norm([q.learningTarget,q.instructionPt,q.visualRequirement]
+          .filter(x=>typeof x==='string').join(' '));
+        const colorDomain=/(?:^| )(?:color|colors|cor|cores)(?: |$)/.test(context);
+        const fruitDomain=/(?:^| )(?:fruit|fruits|fruta|frutas|food|foods|alimento|alimentos|comida|comidas)(?: |$)/.test(context);
+        concept=colorDomain!==fruitDomain?(colorDomain?'orange':'orange_fruit'):null;
+      }
       const candidates=concept?(mediaByConcept.get(concept)||[]).map(file=>({sourcePath:file.path,sha256:file.sha256,dimensions:file.dimensions,
         format:file.detectedType,technicalStatus:file.technicalStatus,visualReview:file.visualReview.status,
         associationStatus:visuallyReviewed.get(file.path)===concept?'VISUAL_EXACT_PRECHECK_HUMAN_QA_PENDING':'SEMANTIC_REVIEW_REQUIRED'})):[];
