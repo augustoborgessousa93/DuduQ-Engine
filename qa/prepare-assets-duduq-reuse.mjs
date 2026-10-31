@@ -13,7 +13,7 @@ import path from 'node:path';
 import {inspectPng} from '../scripts/duduq-image-pipeline.mjs';
 
 const ROOT=process.cwd();
-const EXPECTED_SOURCE_COMMIT='ef9551b075cc60e42408e02eb3f52752dc179297';
+const EXPECTED_SOURCE_COMMIT='50fb80a89a5779d73f81c96aab35f6e86193d769';
 const SOURCE_REPOSITORY='augustoborgessousa93/Assets-DuduQ';
 const SOURCE_DIR=path.resolve(process.argv[2]||'');
 const outArg=process.argv.find(x=>x.startsWith('--out='))?.slice(6);
