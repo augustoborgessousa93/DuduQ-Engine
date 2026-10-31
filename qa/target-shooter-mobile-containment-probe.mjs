@@ -30,7 +30,9 @@ const assess=page=>page.locator('.target-shooter-target').evaluateAll(targets=>t
   const hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
   return {x:r.x,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height,
     visibleRatio:intersection/Math.max(1,r.width*r.height),computedLeft:style.left,
-    className:el.className,
+    className:el.className,locked:el.classList.contains('duduq-interaction-locked'),
+    pointerEvents:style.pointerEvents,hitTag:hit?.tagName||null,
+    hitClassName:typeof hit?.className==='string'?hit.className:'',
     centerHit:hit===el||el.contains(hit),display:style.display,visibility:style.visibility,
     semanticAlts:[...el.querySelectorAll('img')].map(x=>x.alt)};
 }));
@@ -48,14 +50,24 @@ try{
     const cssMediaBefore=await page.evaluate(()=>matchMedia('(max-width:520px)').matches);
     await page.addStyleTag({content:candidateCSS});
     await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+    // The app may briefly lock target input during its own transition.
+    // Do not call a fully visible target 'unclickable' before observing the
+    // interaction unlock; capture persistent locks as independent evidence.
+    const unlocked=await page.waitForFunction(()=>{
+      const nodes=[...document.querySelectorAll('.target-shooter-target')];
+      return nodes.length===4&&nodes.every(n=>!n.classList.contains('duduq-interaction-locked'));
+    },null,{timeout:6000}).then(()=>true,()=>false);
     const after=await assess(page);
     const cssMediaAfter=await page.evaluate(()=>matchMedia('(max-width:520px)').matches);
+    const engineState=await page.locator('#game').getAttribute('data-duduq-interaction-state');
     await page.screenshot({path:path.join(output,qid+'-after.png'),fullPage:false});
-    const fit=after.length===4 && after.every(t=>t.visibleRatio>=0.98 &&
-      t.width>=44 && t.height>=44 && t.centerHit);
+    const visualFit=after.length===4 && after.every(t=>t.visibleRatio>=0.98 &&
+      t.width>=44 && t.height>=44);
+    const interactiveFit=unlocked&&after.every(t=>t.centerHit&&t.pointerEvents!=='none');
+    const fit=visualFit&&interactiveFit;
     report.questions.push({questionId:qid,route,httpStatus:response?.status()||null,
-      before,after,fit,cssMediaBefore,cssMediaAfter,
-      cssActuallyChanged:after.some((t,i)=>Math.abs(t.x-before[i].x)>1),
+      before,after,fit,visualFit,interactiveFit,unlocked,engineState,
+      cssMediaBefore,cssMediaAfter,cssActuallyChanged:after.some((t,i)=>Math.abs(t.x-before[i].x)>1),
       errors,screenshotBefore:qid+'-before.png',screenshotAfter:qid+'-after.png'});
     await context.close();
   }
@@ -69,7 +81,7 @@ try{
   await writeFile(path.join(output,'report.json'),JSON.stringify(report,null,2)+'\n');
   console.log(JSON.stringify({status:report.status,questions:report.questions.map(q=>({
     id:q.questionId,beforeMinRatio:Math.min(...q.before.map(t=>t.visibleRatio)),cssActuallyChanged:q.cssActuallyChanged,
-    afterMinRatio:Math.min(...q.after.map(t=>t.visibleRatio)),afterAllTargetsClickable:q.fit
+    afterMinRatio:Math.min(...q.after.map(t=>t.visibleRatio)),afterAllTargetsClickable:q.interactiveFit,visualFit:q.visualFit,unlocked:q.unlocked,engineState:q.engineState
   })),error:report.error||null}));
 }
 if(report.status!=='PASS_EXPERIMENT_NOT_RELEASE')process.exitCode=1;
