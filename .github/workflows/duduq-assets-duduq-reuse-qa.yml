@@ -14,6 +14,7 @@ on:
       - "qa/verify-assets-duduq-import.mjs"
       - "qa/assets-duduq-reuse-browser-qa.mjs"
       - "qa/assert-media-closure-coherence.mjs"
+      - "qa/audit-non-temporary-media-browser.mjs"
       - "qa/target-shooter-mobile-containment-probe.mjs"
       - "scripts/duduq-import-chatgpt-bundle.mjs"
       - "scripts/duduq-image-pipeline.mjs"
@@ -32,6 +33,7 @@ on:
       - "qa/verify-assets-duduq-import.mjs"
       - "qa/assets-duduq-reuse-browser-qa.mjs"
       - "qa/assert-media-closure-coherence.mjs"
+      - "qa/audit-non-temporary-media-browser.mjs"
       - "qa/target-shooter-mobile-containment-probe.mjs"
       - "scripts/duduq-import-chatgpt-bundle.mjs"
       - "scripts/duduq-image-pipeline.mjs"
@@ -160,6 +162,12 @@ jobs:
       # /play/target-shooter/ Gold Master demonstration route. This probe can
       # fail without blessing the candidate; the gameplay gate below still
       # remains strict and prevents release.
+      - name: Independent browser QA for non-temporary media still lacking approval
+        run: |
+          node --check qa/audit-non-temporary-media-browser.mjs
+          node qa/audit-non-temporary-media-browser.mjs
+          echo "Letter/scene rendering and hash PASS never implies pedagogical approval."
+
       - name: Probe Y1M04 real curricular entrypoint before mechanic gameplay
         continue-on-error: true
         env:
@@ -210,6 +218,7 @@ jobs:
             qa/results/media-closure-inventory.json
             qa/results/media-module-closure.json
             qa/results/media-closure-consistency.json
+            qa/results/non-temporary-media-review/**
             qa/results/y1m04-v26-build.json
             qa/results/asset-integrity-report.json
             qa/results/assets-duduq-fit-route.headers
