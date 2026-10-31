@@ -70,7 +70,7 @@ try {
     // Intro content can hydrate after DOMContentLoaded on the first Chromium page.
     // Wait a bounded time for the actual start control, not a fixed delay;
     // absence still fails the existing boot gate and is recorded for diagnosis.
-    const start=page.getByRole('button',{name:/iniciar jogo/i}).first();
+    const start=page.getByRole('button',{name:/iniciar (?:jogo|missão)/i}).first();
     const introWaitStarted=Date.now();
     try {await start.waitFor({state:'visible',timeout:10000});}
     catch(e){record.introWaitFailure=String(e.message).slice(0,250);}
@@ -97,7 +97,7 @@ try {
     // screenshots and report the exact UI state reached.
     const selector='.duduq-intro-start-button';
     record.introStartVisible=await start.isVisible().catch(()=>false);
-    const introTarget=record.introStartVisible?start:page.getByText(/INICIAR JOGO/i).first();
+    const introTarget=record.introStartVisible?start:page.getByText(/INICIAR (?:JOGO|MISSÃO)/i).first();
     if(!record.introStartVisible)record.introStartVisible=await introTarget.isVisible().catch(()=>false);
     if(!record.introStartVisible)errors.push('INTRO_START_NOT_VISIBLE_IN_PRODUCT_ROUTE');
     if(record.introStartVisible){
