@@ -181,6 +181,19 @@ if(!apply){
  process.exit(0);
 }
 if(provisional||unverified)fail('REFERENCED_MEDIA_NOT_PEDAGOGICALLY_VERIFIED');
+// A hand-written signoff alone must never override the canonical 30-module
+// closure gate. The inventory currently keeps final QA flags false until
+// independently verified final release evidence is incorporated.
+if(!officialAudit)fail('CANONICAL_AUDIT_REQUIRED_FOR_APPLY');
+if(officialAudit.schemaVersion!=='DUDUQ_MEDIA_COMPLETION_V1'||
+   officialAudit.metadataClosurePassed!==true||
+   officialAudit.finalPedagogicalQaApproved!==true||
+   officialAudit.finalCompletionPassed!==true||
+   !Array.isArray(officialAudit.items)||
+   officialAudit.items.length!==referenced.size||
+   officialAudit.items.some(x=>x.status!=='OFFICIAL_PEDAGOGICALLY_VERIFIED'||
+      !referenced.has(x.mediaId)))
+  fail('FINAL_CANONICAL_CLOSURE_NOT_PROVEN');
 if(!approvalPath)fail('NO_FINAL_QA_APPROVAL');
 const approval=JSON.parse(await fs.readFile(approvalPath,'utf8'));
 if(approval.schemaVersion!=='DUDUQ_RETIREMENT_APPROVAL_V1'||
