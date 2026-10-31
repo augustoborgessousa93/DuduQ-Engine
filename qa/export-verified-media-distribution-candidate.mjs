@@ -5,7 +5,7 @@
  * changes source questions, accesses Cloudflare or deploys.
  *
  * Critical: drop the temporary inline QA-only HTML patch after proving the
- * same tested mobile geometry is available in the versioned R148 CSS.
+ * identical tested mobile geometry is packaged as a versioned V27 Pages CSS.
  * Every modified compiled path is immediately rehashed in the manifest.
  */
 import assert from 'node:assert/strict';
@@ -59,27 +59,33 @@ const css=await readFile(path.join(root,'qa/overlays/target-shooter-mobile-hitbo
 const injected='<style '+marker+'>\n'+css+'\n</style>\n';
 const html=before.toString('utf8');
 assert.equal(html.split(injected).length,2,'EXPECTED_EXACTLY_ONE_QA_ONLY_STYLE_INJECTION');
-const clean=html.replace(injected,'');
-assert(!clean.includes(marker),'QA_INJECTION_NOT_FULLY_REMOVED');
-
-const r148Path='engine/adapters/r148/duduq-hud-responsive.css';
-const r148Bytes=await readFile(path.join(dist,r148Path));
-assert.equal(sha(r148Bytes),hashes.get(r148Path)?.sha,'R148_STYLE_NOT_IN_COMPILED_MANIFEST');
-const r148=r148Bytes.toString('utf8');
+// V26 Pages and Canary Core R148 are separate output formats.
+ // Do NOT invent a Canary manifest inside compiled Pages. Promote the exact
+ // QA-tested mobile rules through a new versioned V27 Pages adapter instead.
+const cssRel='core/adapters/v27/target-shooter-mobile-containment.css';
+assert(!hashes.has(cssRel),'V27_ADAPTER_ALREADY_IN_COMPILED_MANIFEST');
+const productCss=await readFile(path.join(root,cssRel));
+const qaMedia=css.slice(css.indexOf('@media (max-width:520px)')).trim();
+const productText=productCss.toString('utf8');
+const productMedia=productText.slice(productText.indexOf('@media (max-width:520px)')).trim();
+assert(qaMedia===productMedia,'V27_MOBILE_RULES_DIFFER_FROM_TESTED_QA');
 for(const key of ['dog','cat','rabbit','fish']){
  const selector='.target-shooter-screen .target-shooter-target--'+key;
- assert(r148.includes(selector),'MISSING_VERSIONED_MOBILE_HITBOX:'+key);
- assert(css.includes(selector),'TESTED_QA_RULE_MISSING:'+key);
+ assert(qaMedia.includes(selector),'TESTED_MOBILE_TARGET_RULE_MISSING:'+key);
 }
-const channel=await load('dist-pages/engine/channels/canary-v1.json');
-assert.equal(channel.revision,148,'EXPECTED_R148_DISTRIBUTION');
-assert(channel.core.styles.some(x=>x.href==='/engine/adapters/r148/duduq-hud-responsive.css'));
-assert(channel.core.preMechanicScripts.some(x=>x.src==='/engine/adapters/r148/duduq-hud-responsive.js'));
-
-await writeFile(htmlFile,clean);
-rows[record.index]=rel+' '+sha(Buffer.from(clean));
+const link='<link rel="stylesheet" href="/'+cssRel+'" data-duduq-release="v27-target-shooter-mobile">\n';
+const compiled=html.replace(injected,link);
+assert(!compiled.includes(marker),'QA_INJECTION_NOT_FULLY_REMOVED');
+assert(compiled.split('data-duduq-release="v27-target-shooter-mobile"').length===2,'RELEASE_LINK_NOT_UNIQUE');
+const targetCss=path.join(dist,cssRel);
+await mkdir(path.dirname(targetCss),{recursive:true});
+await writeFile(targetCss,productCss,{flag:'wx'});
+await writeFile(htmlFile,compiled);
+rows[record.index]=rel+' '+sha(Buffer.from(compiled));
+rows.push(cssRel+' '+sha(productCss));
 await writeFile(manifestFile,rows.join('\n')+'\n');
-hashes.set(rel,{sha:sha(Buffer.from(clean)),index:record.index});
+hashes.set(rel,{sha:sha(Buffer.from(compiled)),index:record.index});
+hashes.set(cssRel,{sha:sha(productCss),index:rows.length-1});
 
 // Check EVERY compiled asset referenced by the immutable manifest.
 for(const [relative,expected] of hashes){
@@ -111,12 +117,12 @@ const report={
  sourceCommit:process.env.GITHUB_SHA||null,
  candidateManifestSha256:sha(await readFile(manifestFile)),
  manifestEntryCount:hashes.size,
- channelRevision:148,immutableCoreRelease:'1.0.12',
+ pagesFitAdapter:'v27-target-shooter-mobile',canaryR148IsSeparateArtifact:true,
  modules:30,activities:600,reviewedModules:['Y1M04','Y1M05'],
  sourceMediaIdsIntegrated:185,
  pendingMediaIds:954,
  qaOnlyInlineCssRemoved:true,
- mobileContainmentLoadedFromVersionedR148:true,
+ mobileContainmentLoadedFromVersionedV27:true,
  semanticApprovalLimitedToReviewedModules:true,
  releaseApproved:false,productionDeployed:false,
  rollback:'Retain prior canonical production deployment; never promote without separate release gate.'

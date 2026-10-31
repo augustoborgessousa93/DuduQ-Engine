@@ -28,6 +28,8 @@ on:
       - "qa/prepare-y1m06-official-media-bundle.mjs"
       - "qa/verify-y1m06-official-media-build.mjs"
       - "qa/verify-y1m06-source-registry-pin.mjs"
+      - "qa/verify-compiled-media-distribution-browser.mjs"
+      - "core/adapters/v27/target-shooter-mobile-containment.css"
       - "qa/export-verified-media-distribution-candidate.mjs"
       - "engine/adapters/r148/duduq-hud-responsive.css"
       - "qa/y1m06-official-media-browser-qa.mjs"
@@ -292,6 +294,8 @@ jobs:
           set -Eeuo pipefail
           node --check qa/export-verified-media-distribution-candidate.mjs
           node qa/export-verified-media-distribution-candidate.mjs
+          node --check qa/verify-compiled-media-distribution-browser.mjs
+          node qa/verify-compiled-media-distribution-browser.mjs
           tar -czf "$RUNNER_TEMP/duduq-review-distribution.tar.gz" -C dist-pages .
           sha256sum "$RUNNER_TEMP/duduq-review-distribution.tar.gz" | sed 's#  .*/#  #' > qa/results/duduq-review-distribution.sha256
           test -s "$RUNNER_TEMP/duduq-review-distribution.tar.gz"
