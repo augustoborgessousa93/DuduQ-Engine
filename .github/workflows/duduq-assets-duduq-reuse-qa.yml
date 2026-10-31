@@ -17,6 +17,8 @@ on:
       - "qa/assert-media-closure-coherence.mjs"
       - "qa/audit-non-temporary-media-browser.mjs"
       - "qa/target-shooter-mobile-containment-probe.mjs"
+      - "qa/apply-target-shooter-mobile-containment-qa.mjs"
+      - "qa/overlays/target-shooter-mobile-hitbox-reflow-v2.css"
       - "scripts/duduq-import-chatgpt-bundle.mjs"
       - "scripts/duduq-image-pipeline.mjs"
       - "docs/qa/media-audit-20261029/**"
@@ -37,6 +39,8 @@ on:
       - "qa/assert-media-closure-coherence.mjs"
       - "qa/audit-non-temporary-media-browser.mjs"
       - "qa/target-shooter-mobile-containment-probe.mjs"
+      - "qa/apply-target-shooter-mobile-containment-qa.mjs"
+      - "qa/overlays/target-shooter-mobile-hitbox-reflow-v2.css"
       - "scripts/duduq-import-chatgpt-bundle.mjs"
       - "scripts/duduq-image-pipeline.mjs"
       - "docs/qa/media-audit-20261029/**"
@@ -62,6 +66,7 @@ jobs:
       ASSETS_DUDUQ_SOURCE_COMMIT: 50fb80a89a5779d73f81c96aab35f6e86193d769
       DUDUQ_MEDIA_CANDIDATE_BUNDLE: qa/media-candidates/assets-duduq-reuse-20261030
       DUDUQ_MEDIA_BROWSER_OUT: qa/results/assets-duduq-browser
+      DUDUQ_QA_ONLY: "1"
     steps:
       - name: Checkout isolated DUDUQ review branch
         uses: actions/checkout@v4
@@ -120,6 +125,8 @@ jobs:
         run: |
           node scripts/duduq-import-chatgpt-bundle.mjs qa/media-candidates/assets-duduq-reuse-20261030 --apply
           node qa/verify-assets-duduq-import.mjs verify qa/media-candidates/assets-duduq-reuse-20261030
+          node --check qa/apply-target-shooter-mobile-containment-qa.mjs
+          node qa/apply-target-shooter-mobile-containment-qa.mjs --apply
           export EXPECTED_ARTIFACT_SHA256="$(sha256sum dist-pages/.duduq-pages-manifest | awk '{print toupper($1)}')"
           export EXPECTED_COMPILED_FILE_COUNT=2680
           echo "CANDIDATE_WITH_MEDIA_OVERLAY_MANIFEST_SHA256=$EXPECTED_ARTIFACT_SHA256 EXPECTED_FILES=$EXPECTED_COMPILED_FILE_COUNT"

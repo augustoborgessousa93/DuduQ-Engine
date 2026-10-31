@@ -12,6 +12,7 @@ import path from 'node:path';
 const apply=process.argv.includes('--apply');
 const root=process.cwd();
 const relative='play/target-shooter/index.html';
+if(apply&&process.env.DUDUQ_QA_ONLY!=='1')throw Error('QA_ONLY_OVERLAY_REQUIRES_EXPLICIT_ENV_GATE');
 const htmlPath=path.join(root,'dist-pages',relative);
 const integrityPath=path.join(root,'dist-pages/.duduq-pages-manifest');
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -23,30 +24,16 @@ if(matches.length!==1)throw Error('COMPILED_TARGET_SHOOTER_NOT_UNIQUELY_HASH_BOU
 const target=matches[0],currentSha=target.line.slice(relative.length+1);
 if(!/^[0-9a-f]{64}$/.test(currentSha)||currentSha!==sha(originalHtml))
   throw Error('COMPILED_TARGET_SHOOTER_HASH_MISMATCH');
-const marker='data-duduq-review="target-shooter-mobile-containment-v1"';
+const marker='data-duduq-review="target-shooter-mobile-hitbox-reflow-v2"';
 if(!/<\/head>/i.test(html)||html.includes(marker))
   throw Error('MOBILE_CONTAINMENT_ALREADY_APPLIED_OR_INVALID_HTML');
 
-// The stage remains authored and approved at 1366x768. In portrait mobile,
-// reduce its VISUAL and HIT-AREA scale together around its center, rather than
-// clipping image boundaries or changing the target/order/content geometry.
-// The CSS individual 'scale' composes with the Gold Master 'transform'.
-const style=`<style ${marker}>
-/* Isolated QA candidate: not a Gold Master edit, not a release approval. */
-@container game (min-width: 360px) and (max-width: 430px) and (min-height: 421px) {
-  #game.target-shooter-screen .target-shooter-arena {
-    /*
-     * Keep the full four-target row visible after the independent CSS scale.
-     * Pure scale shifts the absolute 1366px stage right; re-anchor it as a unit.
-     * This is a QA hypothesis until real Chromium containment assertions pass.
-     */
-    scale: .78;
-    left: calc(50% - 150px);
-    top: 236px;
-  }
-}
-</style>
-`;
+// This exact QA stylesheet is also used by the independent Chromium probe.
+const cssPath=path.join(root,'qa/overlays/target-shooter-mobile-hitbox-reflow-v2.css');
+const css=await readFile(cssPath,'utf8');
+if(!css.includes('target-shooter-target--dog')||!css.includes('target-shooter-target--fish'))
+ throw Error('INVALID_SHARED_QA_CSS');
+const style=`<style ${marker}>\n${css}\n</style>\n`;
 const nextHtml=html.replace(/<\/head>/i,style+'</head>');
 const nextSha=sha(Buffer.from(nextHtml));
 lines[target.i]=relative+' '+nextSha;
@@ -54,7 +41,7 @@ const nextIntegrity=lines.join('\n')+'\n';
 const plan={status:apply?'QA_COMPILED_HTML_OVERLAY_APPLIED':'READ_ONLY_PLAN',
   file:relative,sourceSha256:currentSha,candidateSha256:nextSha,
   integrityChanged:true,sourceModified:false,goldMastersModified:false,
-  productionDeployed:false,scope:'portrait-360-430-only',
+  productionDeployed:false,scope:'mobile-viewport-max-520-only',qaCssSha256:sha(Buffer.from(css)),
   gates:'existing independent Y1M04/Y1M05 Chromium gameplay and geometry must pass'};
 if(!apply){console.log(JSON.stringify(plan));process.exit(0);}
 try{

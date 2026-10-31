@@ -1,0 +1,11 @@
+/* QA candidate only: versioned mobile Target Shooter hitboxes.
+ * Chromium screenshot #41223045058 proved full 4/4 visual containment
+ * at 390x844; interactive unlock still requires real gameplay QA.
+ * Never edit source Gold Masters or immutable releases.
+ */
+@media (max-width:520px) {
+  .target-shooter-screen .target-shooter-target--dog { left:317px !important; }
+  .target-shooter-screen .target-shooter-target--cat { left:505px !important; }
+  .target-shooter-screen .target-shooter-target--rabbit { left:693px !important; }
+  .target-shooter-screen .target-shooter-target--fish { left:869px !important; }
+}

@@ -2,22 +2,14 @@
 // Read-only QA experiment: centered mobile targets without Gold Master edits.
 // An experimental pass NEVER changes a release gate or media approval.
 import {chromium} from 'playwright';
-import {mkdir,writeFile} from 'node:fs/promises';
+import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import path from 'node:path';
 
 const base=(process.env.BASE_URL||'http://127.0.0.1:4175').replace(/\/+$/,'');
 const output=path.resolve('qa/results/target-shooter-mobile-containment');
 await mkdir(output,{recursive:true});
-// Mobile variant: move the four existing target hitboxes closer together,
-// preserving their dimensions. Never scale the entire world or Gold Master.
-// Measured 390px baseline: x=-8.5,106,224.5,338.5, target width=92.
-// Expected with left offsets 317/505/693/869: x~12,106,200,288.
-const candidateCSS=`@media (max-width:520px) {
-  .target-shooter-screen .target-shooter-target--dog { left:317px !important; }
-  .target-shooter-screen .target-shooter-target--cat { left:505px !important; }
-  .target-shooter-screen .target-shooter-target--rabbit { left:693px !important; }
-  .target-shooter-screen .target-shooter-target--fish { left:869px !important; }
-}`;
+// Keep the live-browser hypothesis and QA-only compiled candidate byte-identical.
+const candidateCSS=await readFile('qa/overlays/target-shooter-mobile-hitbox-reflow-v2.css','utf8');
 const report={schemaVersion:'DUDUQ_TARGET_SHOOTER_MOBILE_CONTAINMENT_PROBE_V1',
   mode:'EPHEMERAL_CSS_QA_ONLY',width:390,height:844,candidateCSS,
   immutableGoldMastersChanged:false,productionDeployed:false,questions:[],status:'RUNNING'};
