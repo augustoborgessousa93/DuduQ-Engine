@@ -44,6 +44,9 @@ for(const q of report.questions)for(const opt of q.options){
      assert((color?/^(?:cor|color)[ _-]/:/^orange[ _-]fruit[ _-]/).test(name),
        'orange semantic domain mismatch: '+q.questionId+' '+candidate.sourcePath);
    }
+   if(semantic==='pencil')
+     assert(!/(?:pencil[ _-]case|estojo)/.test(name),
+       'pencil case cannot be offered as pencil: '+q.questionId+' '+candidate.sourcePath);
    if(semantic==='grandmother')
      assert(!name.includes('grandfather'),'ambiguous avó/avô reuse: '+candidate.sourcePath);
    if(semantic==='grandfather')
@@ -51,6 +54,15 @@ for(const q of report.questions)for(const opt of q.options){
    if(semantic==='play')assert(!/logo[ _-]/.test(name),'logo is not the action play: '+candidate.sourcePath);
  }
 }
+
+// This option previously remained a tiny fallback despite a candidate
+// pencil-case source already available. This asserts discovery only;
+// source PNG still requires full semantic visual and pedagogical review.
+const schoolCase=report.questions.find(q=>q.questionId==='Y1M04-Q020')?.options
+  .find(o=>String(o.semanticTarget||'').toLowerCase()==='pencil case');
+assert(schoolCase,'Expected Y1M04-Q020 pencil case option in canonical question');
+assert(schoolCase.candidates.some(x=>/school-object-pencil-case-estojo\\.png$/i.test(x.sourcePath)),
+  'Existing school-object pencil case must be discoverable as QA candidate');
 
 console.log(JSON.stringify({status:'PASS_CROSSWALK_COMPLETE_REVIEW_PENDING',files:report.inventoryFiles,modules:modules.size,questions:report.questionCount,options,
   candidateOptions:report.candidateOptions,visualExactPrechecks:report.optionsWithVisuallyReviewedExactConcept},null,2));
