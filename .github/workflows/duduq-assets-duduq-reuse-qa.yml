@@ -40,7 +40,7 @@ jobs:
       - name: Checkout isolated DUDUQ review branch
         uses: actions/checkout@v4
         with:
-          ref: integration/assets-duduq-reuse-20261030
+          ref: ${{ github.ref_name }}
           persist-credentials: false
 
       - name: Checkout read-only Assets-DuduQ source at pinned commit
