@@ -175,6 +175,15 @@ jobs:
           node --check qa/assets-duduq-reuse-browser-qa.mjs
           node qa/assets-duduq-reuse-browser-qa.mjs
 
+      # The 30-route smoke runs in diagnostic mode to preserve screenshots even
+      # when some routes fail. A separate strict gate MUST turn any diagnostic
+      # failure into a failed workflow; continue-on-error is not certification.
+      - name: Verify all 90 route-viewport boots are hard PASS
+        if: ${{ !cancelled() }}
+        run: |
+          node --check qa/tests/verify-30-route-browser-smoke.mjs
+          node qa/tests/verify-30-route-browser-smoke.mjs qa/results/media-browser-qa/report.json
+
       - name: Persist full source catalog, 600-question crosswalk, build and browser evidence
         if: always()
         uses: actions/upload-artifact@v4
