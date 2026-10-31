@@ -144,14 +144,11 @@ jobs:
           for logfile in "$HOME"/.config/.wrangler/logs/*.log; do [ -f "$logfile" ] && { echo "WRANGLER_INTERNAL_LOG=$logfile"; cat "$logfile"; }; done
           exit 1
 
-      - name: Probe tablet HUD overflow with isolated browser-only CSS hypothesis
-        continue-on-error: true
-        env:
-          BASE_URL: http://127.0.0.1:4175
-        run: |
-          node --check qa/canary-tablet-header-fit-probe.mjs
-          node qa/canary-tablet-header-fit-probe.mjs
-
+      # Tablet Canary validation must run against the source Canary host at
+      # localhost:4173, not against the compiled V26 Pages preview at :4175.
+      # See duduq-tablet-hud-candidate-qa.yml for the independent real-browser
+      # CSS-only experiment and its failure evidence. Never count this V26
+      # candidate workflow as systemic Core 1.0.12 certification.
       # Collect real curricular entrypoint evidence independently from the
       # /play/target-shooter/ Gold Master demonstration route. This probe can
       # fail without blessing the candidate; the gameplay gate below still
@@ -193,7 +190,6 @@ jobs:
             qa/results/assets-duduq-safe-retirement-plan.json
             qa/results/assets-duduq-browser/**
             qa/results/media-browser-qa/**
-            qa/results/canary-tablet-header-fit/**
             qa/results/media-closure-inventory.json
             qa/results/media-module-closure.json
             qa/results/y1m04-v26-build.json
