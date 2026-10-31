@@ -55,9 +55,14 @@ try{
     const clipY=Math.max(0,Math.min(r.bottom,innerHeight)-Math.max(r.top,0));
     return {w:r.width,h:r.height,ratio:clipX*clipY/Math.max(1,r.width*r.height)};
    });
-   const images=[...document.querySelectorAll('.target-shooter-target img')].map(img=>({
-    alt:img.alt,loaded:img.complete&&img.naturalWidth>0
-   }));
+   // Exactly one pedagogical choice image per target. Decorative/sprite
+   // images nested inside a target are not the question's four options.
+   // Use the SAME four primary images already required by the hydration wait.
+   const images=[...document.querySelectorAll('.target-shooter-target')].map(target=>{
+    const img=target.querySelector('img');
+    return {alt:img?.alt||'',loaded:Boolean(img?.complete&&img.naturalWidth>0),
+      source:img?.currentSrc||img?.src||null};
+   });
    return {cssLoaded,targets,images,qaInlineStylePresent:Boolean(document.querySelector('style[data-duduq-review]')),
     scrollOverflow:Math.max(0,document.documentElement.scrollWidth-innerWidth)};
   });
