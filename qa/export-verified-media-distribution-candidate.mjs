@@ -147,7 +147,10 @@ for(const binding of farm.bindings){
   'FARM_SOURCE_MUST_REMAIN_PROVISIONAL:'+binding.mediaId);
  assert(x.sha256===binding.sha256&&x.urlOrPath===binding.assetPath,'FARM_SOURCE_REGISTRY_MISMATCH');
 }
-assert(!farm.changedMediaIds.some(x=>pig.changedMediaIds.includes(x)),'DUPLICATE_FARM_PIG_ID');
+const farmIds=farm.bindings.map(binding=>binding.mediaId);
+assert.equal(farmIds.length,farm.changedMediaIds,'FARM_BINDING_COUNT_MISMATCH');
+assert.equal(new Set(farmIds).size,farmIds.length,'DUPLICATE_FARM_BINDING_ID');
+assert(!farmIds.some(id=>pig.changedMediaIds.includes(id)),'DUPLICATE_FARM_PIG_ID');
 const report={
  schemaVersion:'DUDUQ_DISTRIBUTABLE_MEDIA_CANDIDATE_V1',
  status:'COMPILED_DISTRIBUTION_READY_FOR_RELEASE_GATES_NOT_APPROVED',

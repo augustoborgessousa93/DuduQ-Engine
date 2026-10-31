@@ -48,13 +48,25 @@ try{
    const nav=await page.goto(url,{waitUntil:'domcontentloaded',timeout:40000});
    assert.equal(nav?.status(),200,'QUESTION_ROUTE_HTTP:'+id+':'+nav?.status());
    await page.waitForTimeout(400);
-   const dom=await page.evaluate(assetPath=>({
+   const readDom=()=>page.evaluate(assetPath=>({
     title:document.title,
     questionVisible:document.body?.innerText?.length>30,
     mediaImages:[...document.images].filter(img=>{
      try{return new URL(img.currentSrc||img.src).pathname.endsWith('/'+assetPath);}catch{return false;}
     }).map(img=>({loaded:img.complete&&img.naturalWidth>0,alt:img.alt,rect:img.getBoundingClientRect().toJSON()}))
    }),report.assetPath);
+   let dom=await readDom();
+   // Large source PNGs can still be decoding after domcontentloaded.
+   // Wait for the same DOM images to decode; never force, hide or suppress a broken image.
+   if(dom.mediaImages.some(im=>!im.loaded)){
+    await page.waitForFunction(assetPath=>{
+     const visible=[...document.images].filter(img=>{
+      try{return new URL(img.currentSrc||img.src).pathname.endsWith('/'+assetPath);}catch{return false;}
+     });
+     return visible.length>0&&visible.every(img=>img.complete&&img.naturalWidth>0);
+    },report.assetPath,{timeout:15000,polling:100});
+    dom=await readDom();
+   }
    assert(dom.questionVisible||dom.mediaImages.length,'QUESTION_EMPTY_RENDER:'+id+':'+view.name);
    assert.equal(pageErrors.length,0,'QUESTION_JS_ERRORS:'+id+':'+pageErrors.join('|'));
    assert.equal(badResponses.length,0,'QUESTION_HTTP_ERRORS:'+id+':'+JSON.stringify(badResponses));
