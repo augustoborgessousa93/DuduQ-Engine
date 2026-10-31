@@ -217,11 +217,17 @@ async function m01(browser, viewport) {
     assert(layout.targets.length === 3 && layout.targets.every((t) => t.width >= 44 && t.height >= 44 && t.ratio > 0.85), `M01 TS/${viewport.name}: targets inválidos.`);
 
     const frame = page.frameLocator("#root > .duduq-mechanic-frame iframe");
-    await frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]').first().click();
+    // The balloon artwork animates continuously, so Playwright's normal
+    // stability wait cannot settle. We already assert 44px hitboxes and
+    // native elementFromPoint() ownership above; force only skips the
+    // impossible 'stable for two frames' precondition. Real pointer events,
+    // wrong-answer feedback and retry progression remain mandatory below.
+    await frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]').first().click({force:true,timeout:10000});
     await waitFeedback(page, "retry");
     let session = await page.evaluate(() => window.DuduQ.getSession());
     assert(session.stepIndex === 0 && !session.completed, `M01 TS/${viewport.name}: retry avançou.`);
-    await frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo B"]').first().click();
+    await assertNativeHitboxes(page, ".duduq-ts-target", 3, `M01 TS/${viewport.name}/retry`);
+    await frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo B"]').first().click({force:true,timeout:10000});
     await waitStep(page, 1, 20_000);
 
     const progress = [];
