@@ -28,6 +28,16 @@ const aliases={
   leg:['leg','perna'],legs:['legs','pernas'],eye:['eye','olho'],eyes:['eyes','olhos'],ear:['ear','orelha'],ears:['ears','orelhas'],
   shirt:['shirt','camisa'],jacket:['jacket','jaqueta'],cap:['cap','bone'],hat:['hat','chapeu'],glasses:['glasses','oculos'],
   car:['car','carro'],ball:['ball','bola'],doll:['doll','boneca'],kite:['kite','pipa'],
+  // Newly uploaded 31-Oct concepts are discovery leads only; visually unreviewed
+  // images remain SEMANTIC_REVIEW_REQUIRED, especially contextual compositions.
+  bathroom:['bathroom','banheiro'],bedroom:['bedroom','quarto'],kitchen:['kitchen','cozinha'],
+  living_room:['living room','sala de estar'],dining_room:['dining room','sala de jantar'],
+  dress:['dress','vestido'],sneakers:['sneakers','tenis','tenis esportivo'],
+  blue_jacket:['blue jacket','jaqueta azul'],red_cap:['red cap','bone vermelho'],
+  dining:['dining','jantar'],sleeping:['sleeping','sleep','dormindo','dormir'],
+  eating:['eating','comendo','comer'],mouth:['mouth','boca'],nose:['nose','nariz'],arm:['arm','braco','braços','bracos'],
+  bus:['bus','onibus'],train:['train','trem'],plane:['plane','airplane','aviao'],
+  truck:['truck','caminhao'],carrot:['carrot','cenoura'],
 };
 const aliasToConcept=new Map();for(const [concept,terms] of Object.entries(aliases))for(const term of terms)aliasToConcept.set(norm(term),concept);
 for(const [concept] of Object.entries(aliases))aliasToConcept.set(norm(concept),concept);
