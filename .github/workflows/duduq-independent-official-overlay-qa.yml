@@ -73,11 +73,35 @@ jobs:
       - name: Build clean V26 from immutable source
         run: bash qa/build-v26-topic-first-paint-qa.sh
 
-      - name: Rebuild and verify the hash-pinned Y1M06 review bundle
+      - name: Prepare the hash-pinned Y1M06 review bundle
+        shell: bash
         run: |
-          node qa/prepare-y1m06-official-media-bundle.mjs
-          node qa/verify-y1m06-source-registry-pin.mjs
-          node --test qa/tests/verify-y1m06-source-registry-pin.test.mjs
+          set -o pipefail
+          node qa/prepare-y1m06-official-media-bundle.mjs 2>&1 | tee /tmp/duduq-y1m06-prepare.log
+
+      - name: Verify the Y1M06 clean-source registry pin
+        shell: bash
+        run: |
+          set -o pipefail
+          node qa/verify-y1m06-source-registry-pin.mjs 2>&1 | tee /tmp/duduq-y1m06-pin.log
+
+      - name: Exercise Y1M06 source-pin tamper rejection
+        shell: bash
+        run: |
+          set -o pipefail
+          node --test qa/tests/verify-y1m06-source-registry-pin.test.mjs 2>&1 | tee /tmp/duduq-y1m06-pin-test.log
+
+      - name: Annotate a fail-closed Y1M06 preparation error
+        if: failure()
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          for log in /tmp/duduq-y1m06-prepare.log /tmp/duduq-y1m06-pin.log /tmp/duduq-y1m06-pin-test.log; do
+            if [[ -s "$log" ]]; then
+              message="$(tail -n 12 "$log" | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g; s/::/%3A%3A/g')"
+              echo "::error title=Y1M06 fail-closed replay diagnostic::$message"
+            fi
+          done
 
       - name: Apply scoped mobile geometry fix ONLY to ephemeral Y1M06 compiled QA preview
         run: |
@@ -123,6 +147,9 @@ jobs:
             qa/results/y1m06-review-build.json
             qa/results/y1m06-official-media-browser/**
             qa/media-candidates/y1m06-official-20261030/source-registry-pin.json
+            /tmp/duduq-y1m06-prepare.log
+            /tmp/duduq-y1m06-pin.log
+            /tmp/duduq-y1m06-pin-test.log
             /tmp/duduq-y1m06-overlay-http.log
 
       - name: Explicit Y1M06 release boundary
