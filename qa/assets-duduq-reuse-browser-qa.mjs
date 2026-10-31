@@ -10,6 +10,7 @@ const output=path.resolve(process.env.DUDUQ_MEDIA_BROWSER_OUT||'qa/results/asset
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const manifest=JSON.parse(await readFile(path.join(bundlePath,'batch-manifest.json'),'utf8'));
 const questions=JSON.parse(await readFile(path.join(root,'dist-pages/content/english/year-1/module-04/questions.json'),'utf8')).items;
+const crosswalk=JSON.parse(await readFile(path.join(root,'qa/results/assets-duduq-question-crosswalk.json'),'utf8'));
 const registry=JSON.parse(await readFile(path.join(root,'dist-pages/content/english/media/media-registry.json'),'utf8'));
 const registryById=new Map(registry.entries.map(e=>[e.mediaId,e]));
 const routeQuestions=['Y1M04-Q010','Y1M04-Q015','Y1M04-Q020'];
@@ -63,9 +64,12 @@ try{
 
   // A real error -> Retry -> correct answer round-trip on a question that uses
   // the just-imported crayon PNG. No direct engine API or synthetic events.
-  const qid='Y1M04-Q010',q=questions.find(x=>x.item_id===qid),crayon=q.options.find(o=>o.mediaId==='IMG-Y1M04-Q010-CRAYON');
-  if(!crayon||crayon.answerKey!=='crayon')throw Error('CANONICAL_Q010_CRAYON_CONTRACT_CHANGED');
-  const wrong=q.options.find(o=>o.answerKey!=='crayon');if(!wrong)throw Error('Q010_WRONG_TARGET_MISSING');
+  const qid='Y1M04-Q010',q=questions.find(x=>x.item_id===qid),qCross=crosswalk.questions.find(x=>x.questionId===qid);
+  if(!q||!qCross||q.mechanicId!=='target-shooter'||qCross.mechanic!=='target-shooter')throw Error('CANONICAL_Q010_MECHANIC_CONTRACT_CHANGED');
+  const norm=value=>String(value??'').trim().toLocaleLowerCase('en-US');
+  const crayon=qCross.options.find(o=>o.mediaId==='IMG-Y1M04-Q010-CRAYON');
+  if(!crayon||norm(qCross.correctAnswer)!==norm(crayon.answerKey))throw Error('CANONICAL_Q010_CRAYON_CONTRACT_CHANGED:'+JSON.stringify({correctAnswer:qCross.correctAnswer,option:crayon||null}));
+  const wrong=qCross.options.find(o=>norm(o.answerKey)!==norm(qCross.correctAnswer));if(!wrong)throw Error('Q010_WRONG_TARGET_MISSING');
   const videoDir=path.join(output,'video');await mkdir(videoDir,{recursive:true});
   const context=activeContext=await browser.newContext({viewport:{width:1366,height:768},recordVideo:{dir:videoDir}}),page=await context.newPage(),diag=attachDiagnostics(page),events=[];
   const tracePath=path.join(output,'y1m04-q010-playwright-trace.zip');await context.tracing.start({screenshots:true,snapshots:true,sources:false});
