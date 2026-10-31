@@ -7,6 +7,7 @@ on:
       - integration/duduq-m1-qa-consolidated-20261031
     paths:
       - ".github/workflows/duduq-assets-duduq-reuse-qa.yml"
+      - ".github/workflows/duduq-independent-official-overlay-qa.yml"
       - "qa/audit-assets-duduq-source.mjs"
       - "qa/catalog-assets-duduq-matches.mjs"
       - "qa/tests/verify-assets-duduq-crosswalk.mjs"
@@ -30,6 +31,7 @@ on:
     types: [opened, synchronize, reopened]
     paths:
       - ".github/workflows/duduq-assets-duduq-reuse-qa.yml"
+      - ".github/workflows/duduq-independent-official-overlay-qa.yml"
       - "qa/audit-assets-duduq-source.mjs"
       - "qa/catalog-assets-duduq-matches.mjs"
       - "qa/tests/verify-assets-duduq-crosswalk.mjs"
