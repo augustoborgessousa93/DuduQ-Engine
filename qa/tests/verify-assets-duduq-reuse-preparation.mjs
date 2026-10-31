@@ -12,7 +12,7 @@ const report=JSON.parse(await readFile(path.join(bundle,'preparation-report.json
 const evidence=JSON.parse(await readFile(path.join(bundle,'semantic-evidence.json'),'utf8'));
 assert.equal(manifest.schemaVersion,'DUDUQ_ASSETS_DUDUQ_SOURCE_REUSE_V1');
 assert.equal(manifest.sourceRepository,'augustoborgessousa93/Assets-DuduQ');
-assert.equal(manifest.sourceCommit,'ef9551b075cc60e42408e02eb3f52752dc179297');
+assert.equal(manifest.sourceCommit,'50fb80a89a5779d73f81c96aab35f6e86193d769');
 assert.equal(manifest.productionApproved,false);
 assert.equal(manifest.humanPedagogicalApproval,false);
 assert.equal(report.status,'PREPARED_NOT_IMPORTED');
