@@ -164,6 +164,15 @@ jobs:
           node --check qa/browser-media-candidate-smoke.mjs
           node qa/browser-media-candidate-smoke.mjs
 
+      - name: Audit 30 curricular module entrypoints in Chromium across desktop tablet mobile
+        continue-on-error: true
+        env:
+          DUDUQ_MEDIA_QA_MODULES: Y1M01,Y1M02,Y1M03,Y1M04,Y1M05,Y1M06,Y2M01,Y2M02,Y2M03,Y2M04,Y2M05,Y2M06,Y3M01,Y3M02,Y3M03,Y3M04,Y3M05,Y3M06,Y4M01,Y4M02,Y4M03,Y4M04,Y4M05,Y4M06,Y5M01,Y5M02,Y5M03,Y5M04,Y5M05,Y5M06
+        run: |
+          node --check qa/browser-media-candidate-smoke.mjs
+          node qa/browser-media-candidate-smoke.mjs
+          echo "This verifies 90 real module-entrypoint boots only; NOT 600 interactions, semantic correctness, or production approval."
+
       - name: Test all affected questions in desktop, tablet and mobile, plus real Target Shooter input
         run: |
           node --check qa/assets-duduq-reuse-browser-qa.mjs
