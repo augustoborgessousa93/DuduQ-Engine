@@ -1,38 +1,11 @@
 name: DUDUQ - Automatic Media Closure Safety
 
 on:
-  push:
-    branches:
-      - automation/duduq-media-source-only-fix-20261029
-    paths:
-      - "qa/media-safe-retirement.mjs"
-      - "qa/tests/duduq-media-safe-retirement.test.mjs"
-      - "qa/ingest-local-codex-candidates.mjs"
-      - "qa/tests/ingest-local-codex-candidates.test.mjs"
-      - ".github/workflows/duduq-media-closure-safety.yml"
-      - "qa/media-inbox/**"
-      - "qa/media-candidates/**"
-      - "qa/plan-shared-media-splits.mjs"
-      - "qa/tests/plan-shared-media-splits.test.mjs"
-      - "qa/check-media-module-closure.mjs"
-      - "qa/tests/check-media-module-closure.test.mjs"
-      - "qa/audit-media-completion.mjs"
+  # Every PR head change can alter canonical media references or evidence.
+  # Path filters could leave a stale green check after media-only commits.
   pull_request:
     branches:
       - release/duduq-v23-ebc-attribution-20261028
-    paths:
-      - "qa/media-safe-retirement.mjs"
-      - "qa/tests/duduq-media-safe-retirement.test.mjs"
-      - "qa/ingest-local-codex-candidates.mjs"
-      - "qa/tests/ingest-local-codex-candidates.test.mjs"
-      - ".github/workflows/duduq-media-closure-safety.yml"
-      - "qa/media-inbox/**"
-      - "qa/media-candidates/**"
-      - "qa/plan-shared-media-splits.mjs"
-      - "qa/tests/plan-shared-media-splits.test.mjs"
-      - "qa/check-media-module-closure.mjs"
-      - "qa/tests/check-media-module-closure.test.mjs"
-      - "qa/audit-media-completion.mjs"
   workflow_dispatch:
 
 permissions:
