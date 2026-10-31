@@ -1,11 +1,11 @@
 /*
  * ISOLATED CANDIDATE ONLY - not production nor a Gold Master edit.
- * Reproduced on Canary R147 Core 1.0.12 in Chromium at 768x1024.
+ * Reproduced on Canary R147 Core 1.0.12 at 768x1024; mobile 390x844 needs the same header containment.
  * The Target Shooter sometimes mounts without the global-progress class,
  * so every .duduq-engine-header must fit without that transient dependency.
  * Strict viewport/interaction gates remain in the existing Canary smoke.
  */
-@media (min-width: 721px) and (max-width: 900px) {
+@media (max-width: 900px) {
   .duduq-engine-header {
     box-sizing: border-box !important;
     display: grid !important;
@@ -55,5 +55,17 @@
     top: auto !important;
     bottom: auto !important;
     transform: none !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .duduq-engine-header {
+    gap: 3px 6px !important;
+  }
+  .duduq-engine-header > .duduq-engine-header-main {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
   }
 }
