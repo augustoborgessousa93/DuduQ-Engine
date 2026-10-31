@@ -275,7 +275,7 @@ try{
   // Three distinct responsive viewport screenshots, each with real official pixels.
   const screenshotCases=[
     {name:'desktop-1366x768',viewport:views.desktop,questionId:'Y1M04-Q002',unlock:true},
-    {name:'tablet-768x1024',viewport:views.tablet,questionId:'Y1M04-Q007'},
+    {name:'tablet-768x1024',viewport:views.tablet,questionId:'Y1M04-Q007',unlockAudio:true},
     {name:'mobile-390x844',viewport:views.mobile,questionId:'Y1M04-Q008'}
   ];
   for(const test of screenshotCases){
@@ -284,13 +284,40 @@ try{
       const q=questions.find(x=>x.item_id===test.questionId),ctx=await browser.newContext({viewport:test.viewport,reducedMotion:'reduce'}),p=await ctx.newPage();
       await p.goto(base+routeFor(q),{waitUntil:'domcontentloaded',timeout:40000});await p.waitForTimeout(700);
       if(test.unlock)await unlockTargetShooter(p,[]);
+      // The tablet DnD example was captured while the instruction gate was
+      // still LOCKED and its cards faded. Exercise the real audio controls
+      // (same learner path as Target Shooter), rather than accepting an
+      // incomplete first-paint screenshot as a responsive certification.
+      if(test.unlockAudio){
+        const events=[],audio=p.locator('.audio-button').first();
+        await pointerClick(p,audio,'instruction-audio-recovery-tablet',events);
+        await p.waitForTimeout(700);
+        await pointerClick(p,audio,'instruction-audio-play-tablet',events);
+        await p.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',
+          null,{timeout:25000});
+        test.audioUnlockEvents=events;
+      }
       await p.waitForFunction(()=>[...document.images].some(x=>x.src.includes('/chatgpt/')&&x.complete&&x.naturalWidth>0),null,{timeout:15000});
+      // Require every official PNG to become fully accessible after the
+      // response layout settles. This is a wait, NOT a reduced QA threshold.
+      // On timeout, capture image rectangles and keep the gate failed.
+      test.fullImageContainmentReady=await p.waitForFunction(()=>{
+        const images=[...document.images].filter(x=>x.src.includes('/chatgpt/'));
+        return images.length>0&&images.every(i=>{
+          const r=i.getBoundingClientRect(),s=getComputedStyle(i);
+          return i.complete&&i.naturalWidth>0&&r.width>=20&&r.height>=20&&
+            r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight&&
+            s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)>0;
+        });
+      },null,{timeout:6500}).then(()=>true,()=>false);
       images=await officialImages(p);overflowX=await p.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth));iframeCount=await p.locator('iframe').count();
       file=path.join(out,test.name+'-'+test.questionId.toLowerCase()+'.png');await p.screenshot({path:file,fullPage:false});await ctx.close();
     }
     const bytes=await readFile(file),record={name:test.name,viewport:test.viewport,questionId:test.questionId,
       path:path.relative(root,file).replaceAll('\\','/'),sha256:hash(bytes),bytes:bytes.length,officialImageCount:images.length,
-      visibleOfficialImages:images.filter(x=>x.visible&&x.intersectsViewport).length,overflowX,iframeCount};
+      visibleOfficialImages:images.filter(x=>x.visible&&x.intersectsViewport).length,overflowX,iframeCount,
+      audioUnlockEvents:test.audioUnlockEvents||[],fullImageContainmentReady:test.fullImageContainmentReady??null,
+      imageRects:images.map(i=>({alt:i.alt,rect:i.rect,visible:i.visible,intersectsViewport:i.intersectsViewport}))};
     record.fullyContainedOfficialImages=images.filter(x=>x.rect.x>=0&&x.rect.y>=0&&x.rect.right<=test.viewport.width&&x.rect.bottom<=test.viewport.height).length;
     record.pass=record.officialImageCount>0&&record.visibleOfficialImages===record.officialImageCount&&
       record.fullyContainedOfficialImages===record.officialImageCount&&overflowX===0&&iframeCount===0;report.screenshots.push(record);
