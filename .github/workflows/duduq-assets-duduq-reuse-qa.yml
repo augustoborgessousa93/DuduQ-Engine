@@ -144,6 +144,18 @@ jobs:
           for logfile in "$HOME"/.config/.wrangler/logs/*.log; do [ -f "$logfile" ] && { echo "WRANGLER_INTERNAL_LOG=$logfile"; cat "$logfile"; }; done
           exit 1
 
+      # Collect real curricular entrypoint evidence independently from the
+      # /play/target-shooter/ Gold Master demonstration route. This probe can
+      # fail without blessing the candidate; the gameplay gate below still
+      # remains strict and prevents release.
+      - name: Probe Y1M04 real curricular entrypoint before mechanic gameplay
+        continue-on-error: true
+        env:
+          DUDUQ_MEDIA_QA_MODULES: Y1M04
+        run: |
+          node --check qa/browser-media-candidate-smoke.mjs
+          node qa/browser-media-candidate-smoke.mjs
+
       - name: Test all affected questions in desktop, tablet and mobile, plus real Target Shooter input
         run: |
           node --check qa/assets-duduq-reuse-browser-qa.mjs
@@ -163,6 +175,7 @@ jobs:
             qa/results/assets-duduq-pre-import-baseline.json
             qa/results/assets-duduq-safe-retirement-plan.json
             qa/results/assets-duduq-browser/**
+            qa/results/media-browser-qa/**
             qa/results/media-closure-inventory.json
             qa/results/media-module-closure.json
             qa/results/y1m04-v26-build.json
