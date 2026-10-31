@@ -38,10 +38,62 @@ const aliases={
   eating:['eating','comendo','comer'],mouth:['mouth','boca'],nose:['nose','nariz'],arm:['arm','braco','braços','bracos'],
   bus:['bus','onibus'],train:['train','trem'],plane:['plane','airplane','aviao'],
   truck:['truck','caminhao'],carrot:['carrot','cenoura'],
+  // Exact bilingual lead discovery; NO automatic pedagogical approval.
+  one:['one','um','1'],two:['two','dois','2'],three:['three','tres','3'],
+  four:['four','quatro','4'],five:['five','cinco','5'],six:['six','seis','6'],
+  seven:['seven','sete','7'],eight:['eight','oito','8'],nine:['nine','nove','9'],
+  ten:['ten','dez','10'],eleven:['eleven','onze','11'],twelve:['twelve','doze','12'],
+  thirteen:['thirteen','treze','13'],fourteen:['fourteen','quatorze','14'],
+  fifteen:['fifteen','quinze','15'],sixteen:['sixteen','dezesseis','16'],
+  seventeen:['seventeen','dezessete','17'],eighteen:['eighteen','dezoito','18'],
+  nineteen:['nineteen','dezenove','19'],twenty:['twenty','vinte','20'],
+  thirty:['thirty','trinta','30'],forty:['forty','quarenta','40'],
+  cow:['cow','vaca'],duck:['duck','pato'],horse:['horse','cavalo'],pig:['pig','porco'],
+  sheep:['sheep','ovelha'],rabbit:['rabbit','coelho'],hamster:['hamster','hamister'],
+  mother:['mother','mae'],father:['father','pai'],sister:['sister','irma'],
+  brother:['brother','irmao'],grandmother:['grandmother','avo'],grandfather:['grandfather','avo'],
+  spring:['spring','primavera'],summer:['summer','verao'],autumn:['autumn','fall','outono'],
+  winter:['winter','inverno'],pink:['pink','rosa'],brown:['brown','marrom'],gray:['gray','grey','cinza'],
+  wake_up:['wake up','acordar','acordando'],go_to_school:['go to school','indo para a escola','ir para escola'],
+  go_to_sleep:['go to sleep','go to bed','ir dormir','indo dormir'],have_lunch:['have lunch','almocar','almocando'],
+  read:['read','reading','ler','lendo'],draw:['draw','drawing','desenhar','desenhando'],
+  play:['play','playing','brincar','brincando'],rest:['rest','resting','descansar','descansando'],
+  brush_teeth:['brush teeth','brushing teeth','escovar dentes','escovando os dentes'],
+  stand_up:['stand up','em pe','levantar'],sit_down:['sit down','sentar','sentada'],
+  quiet:['quiet','silence','silencio'],
+ 
 };
 const aliasToConcept=new Map();for(const [concept,terms] of Object.entries(aliases))for(const term of terms)aliasToConcept.set(norm(term),concept);
 for(const [concept] of Object.entries(aliases))aliasToConcept.set(norm(concept),concept);
 const sourceRows=inventory.files.map(f=>({...f,filenameNormalized:norm(path.basename(f.path,path.extname(f.path)))}));
+// Numeric alternatives require numeral-only assets. A scene named
+// "y3-two-brown-rabbits" is NOT an illustration of the numeral two.
+const numeralConcepts=new Set([
+  'one','two','three','four','five','six','seven','eight','nine','ten',
+  'eleven','twelve','thirteen','fourteen','fifteen','sixteen',
+  'seventeen','eighteen','nineteen','twenty','thirty','forty'
+]);
+const pureColorConcepts=new Set(['red','blue','green','yellow','orange','purple','black','white','pink','brown','gray']);
+const isolatedBodyParts=new Set(['head','hand','hands','leg','legs','eye','eyes','ear','ears','mouth','nose','arm']);
+// Reject false-positive lexical leads before pedagogical review. This does
+// not infer what an image depicts: the manual/visual review gate still applies.
+function eligibleFilenameForConcept(file,concept){
+  const tokens=file.filenameNormalized.split(' ');
+  if(numeralConcepts.has(concept)){
+    const terms=new Set(aliases[concept].flatMap(v=>norm(v).split(' ')));
+    return tokens.every(t=>t==='number'||terms.has(t)||
+      (/^\\d+$/.test(t)&&terms.has(String(Number(t)))));
+  }
+  if(pureColorConcepts.has(concept))
+    return tokens[0]==='cor'||tokens[0]==='color';
+  if(isolatedBodyParts.has(concept)){
+    const terms=new Set(aliases[concept].flatMap(v=>norm(v).split(' ')));
+    return tokens.every(t=>terms.has(t));
+  }
+  if(['apple','banana','pear','carrot'].includes(concept))
+    return !/(?:^| )(?:like|prefer|gosta|rejeitando|eating|comendo)(?: |$)/.test(file.filenameNormalized);
+  return true;
+}
 const mediaByConcept=new Map();
 for(const f of sourceRows){
   const concepts=new Set();
@@ -51,7 +103,7 @@ for(const f of sourceRows){
     if(a.length&&a.length<=tokens.length&&tokens.some((_,i)=>tokens.slice(i,i+a.length).join(' ')===alias))concepts.add(concept);
   }
   f.filenameConceptHints=[...concepts].sort();
-  for(const concept of concepts){const list=mediaByConcept.get(concept)||[];list.push(f);mediaByConcept.set(concept,list);}
+  for(const concept of concepts){if(!eligibleFilenameForConcept(f,concept))continue;const list=mediaByConcept.get(concept)||[];list.push(f);mediaByConcept.set(concept,list);}
 }
 const visuallyReviewed=new Map(sourceRows.filter(f=>f.visualReview?.status==='CODEX_VISUALLY_INSPECTED').map(f=>[f.path,f.visualReview.semantic]));
 const questions=[];
