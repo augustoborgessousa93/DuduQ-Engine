@@ -1,0 +1,59 @@
+/*
+ * ISOLATED CANDIDATE ONLY - not production nor a Gold Master edit.
+ * Reproduced on Canary R147 Core 1.0.12 in Chromium at 768x1024.
+ * The Target Shooter sometimes mounts without the global-progress class,
+ * so every .duduq-engine-header must fit without that transient dependency.
+ * Strict viewport/interaction gates remain in the existing Canary smoke.
+ */
+@media (min-width: 721px) and (max-width: 900px) {
+  .duduq-engine-header {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: auto auto !important;
+    align-items: center !important;
+    gap: 4px 10px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+  }
+  .duduq-engine-header > .duduq-engine-header-main {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    min-width: 0 !important;
+    position: relative !important;
+    max-width: 100% !important;
+  }
+  .duduq-engine-header > .duduq-engine-toolbar {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    position: relative !important;
+    justify-self: end !important;
+    max-width: 100% !important;
+  }
+  .duduq-engine-header > .duduq-progress-trail {
+    box-sizing: border-box !important;
+    position: relative !important;
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    justify-self: stretch !important;
+  }
+  .duduq-engine-header .duduq-engine-fullscreen-button {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+  }
+}
