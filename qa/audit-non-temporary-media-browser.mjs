@@ -40,9 +40,9 @@ for(const item of pending){
    record.letter=item.mediaId.slice(-1);
    if(!p.toLowerCase().endsWith('/'+record.letter.toLowerCase()+'.svg'))throw Error('LETTER_FILENAME_MISMATCH');
    const svg=bytes.toString('utf8');
-   if(!/<svg(?:\\s|>)/i.test(svg)||!/<\\/svg>/i.test(svg))throw Error('INVALID_SVG_STRUCTURE');
-   if(/<script(?:\\s|>)/i.test(svg)||/<foreignObject(?:\\s|>)/i.test(svg)||
-    /(?:href|xlink:href)\\s*=\\s*['"](?:https?:|javascript:|data:)/i.test(svg))
+   if(!/<svg(?:\s|>)/i.test(svg)||!/<\/svg>/i.test(svg))throw Error('INVALID_SVG_STRUCTURE');
+   if(/<script(?:\s|>)/i.test(svg)||/<foreignObject(?:\s|>)/i.test(svg)||
+    /(?:href|xlink:href)\s*=\s*['"](?:https?:|javascript:|data:)/i.test(svg))
     throw Error('SVG_UNSAFE_EMBED');
    record.mediaType='image/svg+xml';
   }else{
