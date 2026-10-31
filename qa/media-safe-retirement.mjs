@@ -100,6 +100,36 @@ for(const [id,e] of byId){
    candidatePaths.get(p).push(id);
  }
 }
+// A registry entry can be unused by questions but its file can still be used
+// directly by compiled HTML, CSS, JS or another runtime JSON document.
+// Never retire such a file solely because it is absent from question bindings.
+// This is intentionally conservative: false positives retain bytes safely.
+const runtimeReferences=new Map();
+const runtimeTextFile=/\.(?:html?|css|m?js|json)$/i;
+async function checkRuntimeReferences(directory,relative=''){
+ for(const entry of await fs.readdir(directory,{withFileTypes:true})){
+  const rel=relative?relative+'/'+entry.name:entry.name;
+  const full=path.join(directory,entry.name);
+  if(entry.isDirectory()){await checkRuntimeReferences(full,rel);continue;}
+  if(!entry.isFile()||!runtimeTextFile.test(entry.name))continue;
+  if(rel==='content/english/media/media-registry.json'||
+     /^content\/english\/year-[1-5]\/module-0[1-6]\/questions\.json$/.test(rel))continue;
+  const body=await fs.readFile(full,'utf8');
+  for(const candidate of candidatePaths.keys()){
+   const suffix=candidate.slice(candidate.indexOf('images/'));
+   if(body.includes(candidate)||body.includes(suffix)){
+    if(!runtimeReferences.has(candidate))runtimeReferences.set(candidate,[]);
+    runtimeReferences.get(candidate).push(rel);
+   }
+  }
+ }
+}
+if(candidatePaths.size)await checkRuntimeReferences(root);
+for(const [candidate,files] of runtimeReferences){
+ rejected.push({path:candidate,mediaIds:candidatePaths.get(candidate),
+  reason:'REFERENCED_BY_COMPILED_RUNTIME',runtimeFiles:files.slice(0,20)});
+ candidatePaths.delete(candidate);
+}
 // The existing canonical audit remains authoritative, including legacy/emoji IDs.
 // A disagreement blocks deletion rather than falsely reporting zero references.
 const officialAuditPath=path.resolve(arg('official-audit','qa/results/media-closure-inventory.json'));
