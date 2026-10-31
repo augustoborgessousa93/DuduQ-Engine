@@ -158,6 +158,42 @@ function assertCompact(layout, viewport, label) {
   assert(layout.instructionRatio > 0.85, `${label}: instrução criticamente cortada.`);
 }
 
+async function assertNativeHitboxes(page, selector, expected, label) {
+  const hits = await page.evaluate((cssSelector) => {
+    const doc = document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument;
+    if (!doc) return [];
+    return [...doc.querySelectorAll(cssSelector)].map((el) => {
+      const rect = el.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      const top = doc.elementFromPoint(x, y);
+      return {
+        element: el.getAttribute("aria-label") || el.getAttribute("data-dd2-item-id") || el.className,
+        width: rect.width, height: rect.height,
+        hit: Boolean(top && (el === top || el.contains(top))),
+        pointerEvents: doc.defaultView.getComputedStyle(el).pointerEvents
+      };
+    });
+  }, selector);
+  assert(hits.length === expected && hits.every((hit) =>
+    hit.width >= 44 && hit.height >= 44 && hit.hit && hit.pointerEvents !== "none"
+  ), `${label}: native pointer hit-test failed ${JSON.stringify(hits)}`);
+}
+
+async function assertR148FrameStylesheet(page, label) {
+  await page.waitForFunction(() => {
+    const doc = document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument;
+    const link = doc?.getElementById("duduq-header-r148-frame-style");
+    return Boolean(link?.href?.includes("/engine/adapters/r148/duduq-hud-responsive.css") && link.sheet);
+  }, null, { timeout: 10_000 });
+  const loaded = await page.evaluate(() => {
+    const doc = document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument;
+    const link = doc?.getElementById("duduq-header-r148-frame-style");
+    return Boolean(link?.sheet && link.sheet.cssRules?.length > 0);
+  });
+  assert(loaded, `${label}: R148 stylesheet not applied in the real mechanic iframe.`);
+}
+
 async function waitInstructionAudioIdle(page) {
   await page.waitForFunction(() => {
     const doc = document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument;
@@ -173,17 +209,19 @@ async function m01(browser, viewport) {
     await waitStep(page, 0, 35_000);
     await page.waitForFunction(() => document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument?.querySelectorAll(".duduq-ts-target").length === 3, null, { timeout: 15_000 });
     await waitInstructionAudioIdle(page);
+    await assertR148FrameStylesheet(page, `M01 TS/${viewport.name}`);
+    await assertNativeHitboxes(page, ".duduq-ts-target", 3, `M01 TS/${viewport.name}`);
     if (QA_HEADER_FIT_CSS) assert(candidateCssApplied() > 0, "Y1M01 candidate CSS was not loaded by Chromium.");
     const layout = await surface(page, "ts");
     assertCompact(layout, viewport, `M01 TS/${viewport.name}`);
     assert(layout.targets.length === 3 && layout.targets.every((t) => t.width >= 44 && t.height >= 44 && t.ratio > 0.85), `M01 TS/${viewport.name}: targets inválidos.`);
 
     const frame = page.frameLocator("#root > .duduq-mechanic-frame iframe");
-    await frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]').first().click({ force:true });
+    await frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]').first().click();
     await waitFeedback(page, "retry");
     let session = await page.evaluate(() => window.DuduQ.getSession());
     assert(session.stepIndex === 0 && !session.completed, `M01 TS/${viewport.name}: retry avançou.`);
-    await frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo B"]').first().click({ force:true });
+    await frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo B"]').first().click();
     await waitStep(page, 1, 20_000);
 
     const progress = [];
@@ -221,9 +259,9 @@ async function waitDDReady(page) {
 
 async function clickDD(page, id) {
   const frame = page.frameLocator("#root > .duduq-mechanic-frame iframe");
-  await frame.locator(`.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="${id}"]`).first().click({ force:true });
+  await frame.locator(`.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="${id}"]`).first().click();
   await page.waitForFunction(() => !document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument?.querySelector(".duduq-dd2-item[data-audio-playing='true']"), null, { timeout:7_000 }).catch(() => {});
-  await frame.locator(".duduq-dd2-zone").first().click({ force:true });
+  await frame.locator(".duduq-dd2-zone").first().click();
 }
 
 async function m03(browser, viewport) {
@@ -232,6 +270,8 @@ async function m03(browser, viewport) {
     await page.locator(".duduq-intro-start-button").click();
     await waitStep(page, 0, 35_000);
     await waitDDReady(page);
+    await assertR148FrameStylesheet(page, `M03 DD/${viewport.name}`);
+    await assertNativeHitboxes(page, ".duduq-dd2-bank-items .duduq-dd2-item", 3, `M03 DD/${viewport.name}`);
     if (QA_HEADER_FIT_CSS) assert(candidateCssApplied() > 0, "Y1M03 candidate CSS was not loaded by Chromium.");
     const layout = await surface(page, "dd");
     assertCompact(layout, viewport, `M03 DD/${viewport.name}`);
