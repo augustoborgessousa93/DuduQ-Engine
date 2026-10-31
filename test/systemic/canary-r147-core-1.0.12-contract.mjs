@@ -1,40 +1,33 @@
 import fs from "node:fs";
 import path from "node:path";
-
-const root = process.cwd();
-const readJson = (file) => JSON.parse(fs.readFileSync(path.join(root, file), "utf8"));
-const assert = (condition, message) => { if (!condition) throw new Error(message); };
-
-const current = readJson("engine/channels/canary-v1.json");
-const rollback = readJson("engine/channels/canary-r146-rollback.json");
-
-assert(rollback.revision === 146, `Rollback revision ${rollback.revision}.`);
-assert(rollback.core?.release === "1.0.11", `Rollback Core ${rollback.core?.release}.`);
-assert(rollback.mechanics?.["drag-drop"]?.release === "2.0.24", `Rollback DD ${rollback.mechanics?.["drag-drop"]?.release}.`);
-assert(rollback.mechanics?.["target-shooter"]?.release === "1.0.21", `Rollback TS ${rollback.mechanics?.["target-shooter"]?.release}.`);
-assert(rollback.policy?.rollbackViaManifest === true, "Rollback R146 perdeu rollbackViaManifest.");
-
-assert(current.revision === 147, `Canary revision ${current.revision}.`);
-assert(current.core?.release === "1.0.12", `Canary Core ${current.core?.release}.`);
-assert(current.channel === "canary-v1", `Canal ${current.channel}.`);
-assert(current.policy?.rollbackViaManifest === true, "Canary R147 perdeu rollbackViaManifest.");
-
-const coreJson = JSON.stringify(current.core);
-assert(!coreJson.includes("/engine/releases/core/1.0.11/"), "R147 ainda referencia path Core 1.0.11.");
-assert(!coreJson.includes('"release":"1.0.11"'), "R147 ainda declara release Core 1.0.11.");
-assert(coreJson.includes("/engine/releases/core/1.0.12/"), "R147 não referencia Core 1.0.12.");
-
-assert(JSON.stringify(current.mechanics) === JSON.stringify(rollback.mechanics), "Mechanics mudaram durante promoção R147.");
-assert(JSON.stringify(current.policy) === JSON.stringify(rollback.policy), "Policy mudou durante promoção R147.");
-assert(current.policy?.canonicalAssetRuntimeCommit === rollback.policy?.canonicalAssetRuntimeCommit, "Pin de assets mudou em R147.");
-
-const expectedRollback = { ...current, revision: 146, core: rollback.core, status: rollback.status };
-assert(JSON.stringify({ ...rollback }) === JSON.stringify(expectedRollback), "Snapshot R146 não corresponde exatamente ao estado pré-promoção exceto Core/revision/status esperados.");
-
-console.log(JSON.stringify({
-  contract: "DUDUQ_CANARY_R147_CORE_1_0_12",
-  status: "PASS",
-  rollback: { revision: rollback.revision, core: rollback.core.release, dd: rollback.mechanics["drag-drop"].release, ts: rollback.mechanics["target-shooter"].release },
-  current: { revision: current.revision, core: current.core.release, dd: current.mechanics["drag-drop"].release, ts: current.mechanics["target-shooter"].release },
-  canonicalAssetRuntimeCommit: current.policy.canonicalAssetRuntimeCommit
-}, null, 2));
+import assert from "node:assert/strict";
+const root=process.cwd(),read=f=>JSON.parse(fs.readFileSync(path.join(root,f),"utf8"));
+const r146=read("engine/channels/canary-r146-rollback.json");
+const r147=read("engine/channels/canary-r147-rollback.json");
+const current=read("engine/channels/canary-v1.json");
+assert.equal(r146.revision,146);
+assert.equal(r146.core.release,"1.0.11");
+assert.equal(r147.revision,147);
+assert.equal(r147.core.release,"1.0.12");
+assert.deepEqual(r146,{...r147,revision:146,core:r146.core,status:r146.status},"R147 rollback must remain the historical R146 baseline");
+assert.equal(current.revision,148);
+assert.equal(current.core.release,"1.0.12","Core source stays immutable");
+assert.equal(current.channel,"canary-v1");
+assert.equal(current.policy.releasesImmutable,true);
+assert.equal(current.policy.rollbackViaManifest,true);
+assert.deepEqual(current.mechanics,r147.mechanics,"No mechanic/Gold Master change");
+assert.deepEqual(current.policy,r147.policy,"No runtime/asset pin change");
+assert.deepEqual(current.core.router,r147.core.router,"No router change");
+const cssItem={id:"duduq-header-r148-style",href:"/engine/adapters/r148/duduq-hud-responsive.css",release:"r148"};
+const jsItem={id:"duduq-header-r148-frame-bridge",src:"/engine/adapters/r148/duduq-hud-responsive.js",release:"r148"};
+assert.deepEqual(current.core.styles,[...r147.core.styles,cssItem],"Must add exactly one versioned responsive CSS");
+const scriptIndex=r147.core.preMechanicScripts.findIndex(x=>x.id==="duduq-world-fusion-core-script");
+assert(scriptIndex>=0);
+const scripts=[...r147.core.preMechanicScripts];scripts.splice(scriptIndex+1,0,jsItem);
+assert.deepEqual(current.core.preMechanicScripts,scripts,"Versioned bridge must load after World Fusion");
+const css=fs.readFileSync(path.join(root,"engine/adapters/r148/duduq-hud-responsive.css"),"utf8");
+const js=fs.readFileSync(path.join(root,"engine/adapters/r148/duduq-hud-responsive.js"),"utf8");
+assert(css.includes("grid-template-rows: auto auto")&&css.includes(".duduq-progress-trail"));
+assert(!css.includes("overflow: hidden"),"Do not mask tablet overflow");
+assert(js.includes('frame.addEventListener("load",connect)')&&js.includes("frame.contentDocument"),"Bridge must load CSS in real same-origin iframes");
+console.log(JSON.stringify({status:"PASS",contract:"DUDUQ_R148_RESPONSIVE_HEADER_WITH_R147_ROLLBACK",revision:148,core:"1.0.12",rollback:147,candidate:true,productionDeployed:false}));

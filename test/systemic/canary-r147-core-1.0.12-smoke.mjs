@@ -56,7 +56,10 @@ async function openModule(browser, viewport, moduleNumber) {
     transitionApi: typeof window.DuduQTransition?.getState === "function",
     playerApi: typeof window.DuduQ?.getSession === "function"
   }));
-  assert(boot.revision === 147 && boot.core === "1.0.12", `M${moduleNumber}/${viewport.name}: Canary ${boot.revision}/Core ${boot.core}.`);
+  assert(boot.revision === 148 && boot.core === "1.0.12", `M${moduleNumber}/${viewport.name}: R148 manifest ${boot.revision}/Core ${boot.core}.`);
+  assert(boot.scripts.some((src) => src.includes("/engine/adapters/r148/duduq-hud-responsive.js")), `M${moduleNumber}/${viewport.name}: Versioned R148 script missing.`);
+  assert(await page.locator("#duduq-header-r148-style").count() === 1, `M${moduleNumber}/${viewport.name}: R148 CSS not loaded through Loader.`);
+  assert(await page.evaluate(() => window.DuduQResponsiveHeaderR148?.version === "r148.1"), `M${moduleNumber}/${viewport.name}: R148 iframe bridge not initialized.`);
   assert(boot.dd === "2.0.24" && boot.ts === "1.0.21", `M${moduleNumber}/${viewport.name}: mechanics mudaram.`);
   assert(boot.scripts.some((src) => src.includes("/engine/duduq-loader-v1.js")), `M${moduleNumber}/${viewport.name}: Loader ausente.`);
   assert(boot.playerApi && boot.transitionApi, `M${moduleNumber}/${viewport.name}: Player/Transition API ausente.`);
@@ -256,7 +259,7 @@ async function m03(browser, viewport) {
 }
 
 const browser = await chromium.launch({ headless:true });
-const report = { contract:"CANARY_R147_CORE_1_0_12_PROPORTIONAL_SMOKE", status:"PASS", m01:[], m03:[] };
+const report = { contract:"CANARY_R148_ADDITIVE_HEADER_PROPORTIONAL_SMOKE", status:"PASS", m01:[], m03:[] };
 try {
   for (const viewport of VIEWPORTS) report.m01.push(await m01(browser, viewport));
   for (const viewport of VIEWPORTS) report.m03.push(await m03(browser, viewport));
