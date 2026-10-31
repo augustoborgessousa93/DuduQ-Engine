@@ -58,9 +58,12 @@ if(canonicalLfSha256(generationSemanticBytes)!==EXPECTED.generationSemanticSha25
 const [questionBytes,registryBytes,integrityBytes]=await Promise.all([
   readFile(questionPath),readFile(registryPath),readFile(path.join(dist,'.duduq-pages-manifest'))
 ]);
-if(sha256(questionBytes)!==EXPECTED.cleanV26QuestionSha256||sha256(registryBytes)!==EXPECTED.cleanV26RegistrySha256||
-   sha256(integrityBytes)!==EXPECTED.cleanV26ManifestSha256)
-  throw Error('Y1M06_PREPARATION_REQUIRES_EXACT_CLEAN_V26');
+const cleanActual={questionSha256:sha256(questionBytes),registrySha256:sha256(registryBytes),
+  manifestSha256:sha256(integrityBytes)};
+const cleanExpected={questionSha256:EXPECTED.cleanV26QuestionSha256,registrySha256:EXPECTED.cleanV26RegistrySha256,
+  manifestSha256:EXPECTED.cleanV26ManifestSha256};
+if(Object.keys(cleanExpected).some(key=>cleanActual[key]!==cleanExpected[key]))
+  throw Error('Y1M06_PREPARATION_REQUIRES_EXACT_CLEAN_V26:'+JSON.stringify({actual:cleanActual,expected:cleanExpected}));
 const questions=JSON.parse(questionBytes),registry=JSON.parse(registryBytes);
 if(questions.moduleId!==MODULE_ID||questions.items?.length!==EXPECTED.questions||registry.entries?.length!==EXPECTED.cleanV26RegistryEntries)
   throw Error('Y1M06_CLEAN_V26_SHAPE_MISMATCH');
