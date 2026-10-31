@@ -17,6 +17,13 @@ for(const q of report.questions){
  assert.equal(q.httpStatus,200,q.questionId+' failed HTTP');
  assert.equal(q.cssMediaAfter,true,q.questionId+' mobile CSS media not active');
  assert.equal(q.visualFit,true,q.questionId+' targets clipped');
+ assert.equal(q.userFlowReady,true,q.questionId+' instruction audio did not reach READY through real user flow');
+ assert(Array.isArray(q.audioActions),q.questionId+' missing audio user-flow evidence');
+ for(const action of q.audioActions){
+  assert.equal(action.input,'PLAYWRIGHT_NATIVE_POINTER',q.questionId+' synthetic audio interaction');
+  assert.equal(action.visibleControl,true,q.questionId+' audio control not visibly clicked');
+  assert.equal(action.error,undefined,q.questionId+' audio pointer action failed');
+ }
  assert.equal(q.unlocked,true,q.questionId+' gameplay targets remain locked');
  assert.equal(q.interactiveFit,true,q.questionId+' pointer hit-testing failed');
  assert.equal(q.fit,true);
