@@ -19,6 +19,7 @@ const aliases={
   apple:['apple','apples','maca','macas'],banana:['banana','bananas'],pear:['pear','pears','pera','peras'],
   backpack:['backpack','backpacks','school bag','schoolbag','school bags','schoolbags','mochila','mochilas'],
   eraser:['eraser','erasers','rubber','borracha','borrachas'],pencil:['pencil','pencils','lapis'],
+  pencil_case:['pencil case','pencilcase','estojo'],
   ruler:['ruler','rulers','regua','reguas'],pen:['pen','pens','caneta','canetas'],crayon:['crayon','crayons','giz de cera'],
   book:['book','books','livro','livros'],notebook:['notebook','notebooks','caderno','cadernos'],school:['school','escola'],
   red:['red','vermelho','vermelha','vermelhos','vermelhas'],blue:['blue','azul'],green:['green','verde'],yellow:['yellow','amarelo','amarela'],
@@ -93,6 +94,10 @@ function eligibleFilenameForConcept(file,concept){
     const terms=new Set(aliases[concept].flatMap(v=>norm(v).split(' ')));
     return tokens.every(t=>terms.has(t));
   }
+  // A pencil case is NOT a pencil. This collision had hidden the fourth
+  // Y1M04-Q020 option despite a case image already existing in Assets-DuduQ.
+  if(concept==='pencil'&&tokens.some(t=>['case','pencilcase','estojo'].includes(t)))
+    return false;
   if(concept==='play'&&tokens.some(t=>['logo','eduq','duduq'].includes(t)))
     return false;
   if(['apple','banana','pear','carrot'].includes(concept))
