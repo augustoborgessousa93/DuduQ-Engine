@@ -180,6 +180,35 @@ async function assertNativeHitboxes(page, selector, expected, label) {
   ), `${label}: native pointer hit-test failed ${JSON.stringify(hits)}`);
 }
 
+// The balloon target moves continuously. Dispatch a true native mouse event
+// at its verified current visual center, without Playwright's impossible
+// "wait until all animations stop" precondition or force-click bypass.
+async function clickAnimatedTargetAtVisibleCenter(page, label) {
+  const point=await page.evaluate((name)=>{
+    const iframe=document.querySelector("#root > .duduq-mechanic-frame iframe");
+    const doc=iframe?.contentDocument;
+    const target=[...(doc?.querySelectorAll(".duduq-ts-target")||[])]
+      .find(n=>n.getAttribute("aria-label")===name);
+    if(!target||target.disabled)return null;
+    const r=target.getBoundingClientRect(),f=iframe.getBoundingClientRect();
+    const cx=r.left+r.width/2,cy=r.top+r.height/2;
+    const top=doc.elementFromPoint(cx,cy);
+    const css=doc.defaultView.getComputedStyle(target);
+    const sx=f.width/Math.max(1,iframe.clientWidth),sy=f.height/Math.max(1,iframe.clientHeight);
+    const x=f.left+cx*sx,y=f.top+cy*sy;
+    return {x,y,width:r.width*sx,height:r.height*sy,
+      ownsCenter:top===target||target.contains(top),
+      pointerEvents:css.pointerEvents,
+      viewportWidth:innerWidth,viewportHeight:innerHeight};
+  },label);
+  assert(point&&point.ownsCenter&&point.pointerEvents!=="none"&&
+    point.width>=44&&point.height>=44&&
+    point.x>=8&&point.x<=point.viewportWidth-8&&
+    point.y>=8&&point.y<=point.viewportHeight-8,
+    "TARGET_POINTER_NOT_NATIVE_REACHABLE:"+label+":"+JSON.stringify(point));
+  await page.mouse.click(point.x,point.y,{button:"left"});
+}
+
 async function assertR148FrameStylesheet(page, label) {
   await page.waitForFunction(() => {
     const doc = document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument;
@@ -217,17 +246,12 @@ async function m01(browser, viewport) {
     assert(layout.targets.length === 3 && layout.targets.every((t) => t.width >= 44 && t.height >= 44 && t.ratio > 0.85), `M01 TS/${viewport.name}: targets inválidos.`);
 
     const frame = page.frameLocator("#root > .duduq-mechanic-frame iframe");
-    // The balloon artwork animates continuously, so Playwright's normal
-    // stability wait cannot settle. We already assert 44px hitboxes and
-    // native elementFromPoint() ownership above; force only skips the
-    // impossible 'stable for two frames' precondition. Real pointer events,
-    // wrong-answer feedback and retry progression remain mandatory below.
-    await frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]').first().click({force:true,timeout:10000});
+    await clickAnimatedTargetAtVisibleCenter(page,"Lançar estrela no alvo A");
     await waitFeedback(page, "retry");
     let session = await page.evaluate(() => window.DuduQ.getSession());
     assert(session.stepIndex === 0 && !session.completed, `M01 TS/${viewport.name}: retry avançou.`);
     await assertNativeHitboxes(page, ".duduq-ts-target", 3, `M01 TS/${viewport.name}/retry`);
-    await frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo B"]').first().click({force:true,timeout:10000});
+    await clickAnimatedTargetAtVisibleCenter(page,"Lançar estrela no alvo B");
     await waitStep(page, 1, 20_000);
 
     const progress = [];
