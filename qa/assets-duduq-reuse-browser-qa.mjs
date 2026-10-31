@@ -80,25 +80,41 @@ try{
   const target=semantic=>page.locator('.target-shooter-target').filter({has:page.locator('img[alt="'+semantic+'"]')});
   const crayonPath=registryById.get(crayon.mediaId)?.urlOrPath;if(!crayonPath)throw Error('Q010_CRAYON_MEDIA_NOT_REGISTERED');
   await page.waitForFunction(expected=>[...document.images].some(i=>new URL(i.src).pathname.replace(/^\//,'')===expected&&i.complete&&i.naturalWidth>0),crayonPath,{timeout:20000});
-  // A direct mechanic route may silently load its demo animal question. Never
-  // count clicks on that session as curricular Y1M04-Q010 gameplay evidence.
+  // Target backgrounds have decorative IMG alt text like "Alvo com gato";
+  // the _playable foreground_ image carries the curricular semantic. The old
+  // check counted both and incorrectly rejected real 4-option sessions.
   const expectedSemantics=qCross.options.map(o=>norm(o.semanticTarget||o.answerKey)).sort();
-  const actualSemantics=await page.locator('.target-shooter-target img').evaluateAll(imgs=>imgs.map(img=>String(img.alt||'').trim().toLocaleLowerCase('en-US')).sort());
-  const actualMatches=actualSemantics.length===expectedSemantics.length&&actualSemantics.every((v,i)=>v===expectedSemantics[i]);
-  if(!actualMatches){
+  const identity=await page.locator('.target-shooter-target').evaluateAll((targets,expected)=>{
+    const norm=s=>String(s||'').trim().toLocaleLowerCase('en-US');
+    return targets.map(t=>{
+      const r=t.getBoundingClientRect(),imgs=[...t.querySelectorAll('img')],foreground=imgs.filter(i=>expected.includes(norm(i.alt)));
+      const cs=getComputedStyle(t),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
+      return {optionSemantics:foreground.map(i=>norm(i.alt)),allImageAlts:imgs.map(i=>i.alt),
+        visible:r.width>10&&r.height>10&&r.right>0&&r.bottom>0&&r.left<innerWidth&&r.top<innerHeight&&cs.visibility!=='hidden'&&cs.display!=='none',
+        centerHitsSelf:hit===t||t.contains(hit),hitTag:hit?.tagName||null,hitClass:String(hit?.className||''),
+        rect:{x:r.x,y:r.y,width:r.width,height:r.height}};
+    });
+  },expectedSemantics);
+  const actualSemantics=identity.flatMap(x=>x.optionSemantics).sort();
+  if(actualSemantics.length!==expectedSemantics.length||actualSemantics.some((v,i)=>v!==expectedSemantics[i])||
+     identity.filter(x=>x.optionSemantics.length===1&&x.visible).length!==expectedSemantics.length){
     const shot=path.join(output,'y1m04-q010-curricular-session-mismatch.png');
     await page.screenshot({path:shot,fullPage:false});
-    report.gameplayDiagnostics={stage:'curricular-session-identity',requestedQuestionId:qid,requestedModule:'Y1M04',
-      route:page.url(),expectedSemantics,actualSemantics,reason:'DIRECT_MECHANIC_ROUTE_DID_NOT_LOAD_REQUESTED_CURRICULAR_QUESTION',
+    report.gameplayDiagnostics={stage:'curricular-options-identity',requestedQuestionId:qid,requestedModule:'Y1M04',
+      route:page.url(),expectedSemantics,actualSemantics,identity,
+      reason:'VISIBLE_PLAYABLE_OPTIONS_DO_NOT_MATCH_CURRICULAR_QUESTION',
       screenshot:path.relative(root,shot).replaceAll('\\','/'),screenshotSha256:sha(await readFile(shot))};
     throw Error('CURRICULAR_SESSION_IDENTITY_MISMATCH:'+JSON.stringify(report.gameplayDiagnostics));
   }
+  report.curricularOptionPreflight={questionId:qid,expectedSemantics,actualSemantics,
+    targetCount:identity.length,targets:identity,pass:true,scope:'foreground playable option images only; not full pedagogy approval'};
   const initialImages=await visibleCandidateImages(page);
   if(!initialImages.some(i=>i.path===crayonPath&&i.visible))throw Error('Q010_CANDIDATE_CRAYON_NOT_VISIBLE');
   const wrongSemantic=wrong.semanticTarget||wrong.answerKey;
   await click(page,target(wrongSemantic),'select-wrong-'+wrong.answerKey,events);
   try {
-    await page.waitForFunction(a=>[...document.querySelectorAll('.target-shooter-target')].some(t=>t.querySelector('img')?.alt===a&&t.dataset.gameplayState==='selected'),wrongSemantic,{timeout:10000});
+    await page.waitForFunction(a=>[...document.querySelectorAll('.target-shooter-target')].some(t=>
+      [...t.querySelectorAll('img')].some(i=>i.alt===a)&&['selected','incorrect'].includes(t.dataset.gameplayState)),wrongSemantic,{timeout:10000});
   } catch(error) {
     const state=await page.evaluate(expected=>({
       expected,
@@ -113,8 +129,18 @@ try{
       screenshot:path.relative(root,shot).replaceAll('\\\\','/'),screenshotSha256:await readFile(shot).then(sha).catch(()=>null)};
     throw new Error('WRONG_TARGET_SELECTION_TIMEOUT:'+JSON.stringify(report.gameplayDiagnostics));
   }
-  const confirm=page.locator('.feedback-action');await click(page,confirm,'confirm-wrong-answer',events);
-  await page.waitForFunction(a=>[...document.querySelectorAll('.target-shooter-target')].some(t=>t.querySelector('img')?.alt===a&&t.dataset.gameplayState==='incorrect')&&document.querySelector('.feedback-ribbon')?.dataset.feedback==='incorrect',wrong.semanticTarget||wrong.answerKey,{timeout:15000});
+  // Some approved Target Shooter builds evaluate the choice immediately.
+  // Do not press CONTINUAR as though it were CONFIRMAR.
+  const stateWrong=await target(wrongSemantic).getAttribute('data-gameplay-state');
+  if(stateWrong==='selected'){
+    const action=page.locator('.feedback-action'),label=(await action.innerText()).replace(/\\s+/g,' ').trim();
+    if(!/confirmar/i.test(label))throw Error('WRONG_CONFIRM_CONTROL_UNEXPECTED:'+label);
+    await click(page,action,'confirm-wrong-answer',events);
+  }else events.push({label:'wrong-answer-auto-resolved',observedState:stateWrong,input:'read-only DOM observation'});
+  await page.waitForFunction(a=>[...document.querySelectorAll('.target-shooter-target')].some(t=>
+    [...t.querySelectorAll('img')].some(i=>i.alt===a)&&t.dataset.gameplayState==='incorrect')&&
+    document.querySelector('.feedback-ribbon')?.dataset.feedback==='incorrect'&&!document.querySelector('.feedback-ribbon')?.hidden,
+    wrong.semanticTarget||wrong.answerKey,{timeout:15000});
   const incorrectShot=path.join(output,'y1m04-q010-incorrect.png');await page.screenshot({path:incorrectShot,fullPage:false});
   const retry=page.locator('.feedback-action'),retryLabel=(await retry.innerText()).replace(/\s+/g,' ').trim();
   if(!/tentar novamente|tentar de novo|try again|retry/i.test(retryLabel))throw Error('VISIBLE_RETRY_CONTROL_MISSING:'+retryLabel);
@@ -136,9 +162,17 @@ try{
     throw new Error('RETRY_RESET_STATE_TIMEOUT:'+JSON.stringify(retryState)+'; '+String(error?.message||error));
   }
   await click(page,target('crayon'),'select-correct-crayon',events);
-  await page.waitForFunction(()=>[...document.querySelectorAll('.target-shooter-target')].some(t=>t.querySelector('img')?.alt==='crayon'&&t.dataset.gameplayState==='selected'),null,{timeout:10000});
-  await click(page,page.locator('.feedback-action'),'confirm-correct-answer',events);
-  await page.waitForFunction(()=>[...document.querySelectorAll('.target-shooter-target')].some(t=>t.querySelector('img')?.alt==='crayon'&&t.dataset.gameplayState==='correct')&&document.querySelector('.feedback-ribbon')?.dataset.feedback==='correct',null,{timeout:15000});
+  await page.waitForFunction(()=>[...document.querySelectorAll('.target-shooter-target')].some(t=>
+    [...t.querySelectorAll('img')].some(i=>i.alt==='crayon')&&['selected','correct'].includes(t.dataset.gameplayState)),null,{timeout:10000});
+  const stateCorrect=await target('crayon').getAttribute('data-gameplay-state');
+  if(stateCorrect==='selected'){
+    const action=page.locator('.feedback-action'),label=(await action.innerText()).replace(/\\s+/g,' ').trim();
+    if(!/confirmar/i.test(label))throw Error('CORRECT_CONFIRM_CONTROL_UNEXPECTED:'+label);
+    await click(page,action,'confirm-correct-answer',events);
+  }else events.push({label:'correct-answer-auto-resolved',observedState:stateCorrect,input:'read-only DOM observation'});
+  await page.waitForFunction(()=>[...document.querySelectorAll('.target-shooter-target')].some(t=>
+    [...t.querySelectorAll('img')].some(i=>i.alt==='crayon')&&t.dataset.gameplayState==='correct')&&
+    document.querySelector('.feedback-ribbon')?.dataset.feedback==='correct'&&!document.querySelector('.feedback-ribbon')?.hidden,null,{timeout:15000});
   const correctShot=path.join(output,'y1m04-q010-correct.png');await page.screenshot({path:correctShot,fullPage:false});
   const gameplay={questionId:qid,mechanicId:'target-shooter',candidateMediaId:crayon.mediaId,candidatePath:crayonPath,
     incorrectOption:wrong.answerKey,correctOption:'crayon',events,initialCandidateImages:initialImages,
@@ -146,7 +180,7 @@ try{
     finalFeedback:await page.locator('.feedback-ribbon').getAttribute('data-feedback'),
     retryVisible:await page.locator('.feedback-action').isVisible(),pageErrors:diag.errors,requestFailures:diag.failed,
     screenshots:await Promise.all([incorrectShot,correctShot].map(async p=>({path:path.relative(root,p).replaceAll('\\','/'),sha256:sha(await readFile(p))})))};
-  gameplay.pass=gameplay.finalFeedback==='correct'&&events.length>=6&&!diag.errors.length&&!diag.failed.length;
+  gameplay.pass=gameplay.finalFeedback==='correct'&&events.filter(e=>e.realMouse).length>=4&&!diag.errors.length&&!diag.failed.length;
   report.gameplay=gameplay;if(!gameplay.pass)throw Error('REAL_Q010_POINTER_GAMEPLAY_FAILED');
   await context.tracing.stop({path:tracePath});traceStopped=true;
   const video=page.video();await page.close();await context.close();
