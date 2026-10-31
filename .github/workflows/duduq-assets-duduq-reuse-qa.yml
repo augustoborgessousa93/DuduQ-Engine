@@ -81,7 +81,8 @@ jobs:
         run: |
           bash qa/build-v26-topic-first-paint-qa.sh
           export EXPECTED_ARTIFACT_SHA256="$(sha256sum dist-pages/.duduq-pages-manifest | awk '{print toupper($1)}')"
-          echo "CANDIDATE_MANIFEST_SHA256=$EXPECTED_ARTIFACT_SHA256"
+          export EXPECTED_COMPILED_FILE_COUNT=2674
+          echo "CANDIDATE_MANIFEST_SHA256=$EXPECTED_ARTIFACT_SHA256 EXPECTED_FILES=$EXPECTED_COMPILED_FILE_COUNT"
           node qa/verify-artifact.mjs
 
       - name: Snapshot contracts and dry-run guarded 600-question import
@@ -94,7 +95,8 @@ jobs:
           node scripts/duduq-import-chatgpt-bundle.mjs qa/media-candidates/assets-duduq-reuse-20261030 --apply
           node qa/verify-assets-duduq-import.mjs verify qa/media-candidates/assets-duduq-reuse-20261030
           export EXPECTED_ARTIFACT_SHA256="$(sha256sum dist-pages/.duduq-pages-manifest | awk '{print toupper($1)}')"
-          echo "CANDIDATE_WITH_MEDIA_OVERLAY_MANIFEST_SHA256=$EXPECTED_ARTIFACT_SHA256"
+          export EXPECTED_COMPILED_FILE_COUNT=2680
+          echo "CANDIDATE_WITH_MEDIA_OVERLAY_MANIFEST_SHA256=$EXPECTED_ARTIFACT_SHA256 EXPECTED_FILES=$EXPECTED_COMPILED_FILE_COUNT"
           node qa/verify-artifact.mjs
           node qa/audit-media-completion.mjs
           node qa/media-safe-retirement.mjs --root=dist-pages --output=qa/results/assets-duduq-safe-retirement-plan.json
