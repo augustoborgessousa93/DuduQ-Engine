@@ -107,6 +107,7 @@ function pickFromLane(plan,lane,state){
   priority.indexOf(a.moduleId)-priority.indexOf(b.moduleId))[0].moduleId;
 }
 function instruction(mod,c,lane){
+ if(lane!=='integration')throw Error('GENERATION_DISABLED_BY_OWNER_2026_10_31');
  const header=[
   'DUDUQ ENGLISH: UNATTENDED TWO-LANE EXECUTION. ACTIVE LANE: '+lane+'. Current module: '+mod+'.',
   'Last audited global pending media IDs: '+(c?.distinctPendingMediaIds??'UNKNOWN')+'.',
@@ -114,15 +115,6 @@ function instruction(mod,c,lane){
   'Protect Gold Masters, source question contracts, production and the original dirty workspace.',
   'No manual CONTINUE, no subscription/API purchases, no false approval, no production merge/deploy.',
   'Do not run a second Codex process: the Windows scheduler serializes both independent lanes in this safe rollout.'
- ];
- const producer=[
-  'PRODUCTION LANE ONLY: generate EVERY remaining needed pedagogical PNG for '+mod+' using the real enabled Codex image generator.',
-  'Inventory the actual 20 questions and all semantic targets first. Reuse pre-existing original PNGs when verified. Never create ungrounded or duplicate concepts.',
-  'Generate 3D premium child-friendly concept assets with real alpha and subject filling the canvas; one file per concept, no wrong distractors.',
-  'Write candidate PNGs, original generation provenance, SHA-256, semantic evidence and per-question binding plans ONLY under qa/media-candidates/ in a module-specific batch.',
-  'Do NOT apply or finalize media overlays, modify runtime/registry/question JSON, set approval flags, run deployment, or remove existing referenced assets.',
-  'A candidate is not an integrated official image. Save an idempotent checkpoint, record generated assets, commit/push safe candidate files to the isolated review branch.',
-  'On image generation limits, record BLOCKED_GENERATOR, proceed with unblocked concepts and exit normally for future resumption.'
  ];
  const integrator=[
   'INTEGRATION/QA LANE ONLY: take already-generated, hash-verified PNG candidates for '+mod+'. Do not spend time creating next-module PNGs in this lane.',
@@ -133,7 +125,7 @@ function instruction(mod,c,lane){
   'Commit/push safe QA corrections to review only; save precise checkpoint of module, verified PNG hashes, tests, CI URL, blockers and next integration target.',
   'If the QA lane is blocked, record the exact failure and EXIT this invocation without stopping the independent generation queue.'
  ];
- return [...header,...(lane==='generation'?producer:integrator),
+ return [...header,...integrator,
  'After the invocation, the scheduler will plan the OTHER lane. Do not report PROJECT_COMPLETE unless 30/30 modules, 600 activities, zero provisional/unverified media and release gates are independently proven.'
  ].join('\n');
 }
@@ -164,16 +156,15 @@ async function once(){
    console.log('BACKOFF_UNTIL:'+state.notBefore);return;
   }
   const beforePlan=queuePlan();
-  const hasGeneration=beforePlan.producer.queuedModules>0;
+  // 31-Oct owner override: Codex may integrate images uploaded to Assets-DuduQ,
+  // but must never create new images. The legacy generation queue is ignored.
   const hasIntegration=beforePlan.integrator.queuedModules>0;
-  if(!hasGeneration&&!hasIntegration){
-   await save({...state,status:'NO_QUEUED_WORK_NEEDS_INDEPENDENT_RELEASE_QA',notBefore:
+  if(!hasIntegration){
+   await save({...state,status:'WAITING_FOR_OWNER_ASSETS_OR_INDEPENDENT_RELEASE_QA',notBefore:
     new Date(Date.now()+60*60*1000).toISOString()});
-   console.log('NO_TWO_LANE_WORK: independent QA and release completion require separate proof');return;
+   console.log('INTEGRATION_QUEUE_EMPTY: generation is disabled by owner; await repository assets or verified QA');return;
   }
-  const lane=hasGeneration&&hasIntegration?
-   (state.lastLane==='generation'?'integration':'generation'):
-   (hasGeneration?'generation':'integration');
+  const lane='integration';
   const moduleId=pickFromLane(beforePlan,lane,state);
   if(!moduleId)throw Error('TWO_LANE_QUEUE_EMPTY_INCONSISTENT');
   const id=now().replace(/[^0-9]/g,'').slice(0,14)+'-'+String(state.runs+1);
