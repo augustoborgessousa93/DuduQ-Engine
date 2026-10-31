@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - integration/assets-duduq-reuse-20261031
+      # QA-only proof branch; do not cherry-pick this trigger into release.
+      - qa/mobile-target-unlock-user-flow-20261031
     paths:
       - ".github/workflows/duduq-assets-duduq-reuse-qa.yml"
       - "qa/audit-assets-duduq-source.mjs"
