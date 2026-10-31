@@ -1,0 +1,2068 @@
+{
+  "schemaVersion": "DUDUQ_Y1M05_OFFICIAL_MEDIA_BROWSER_QA_V1",
+  "createdAt": "2026-10-30T06:31:48.914Z",
+  "status": "PASS",
+  "base": "http://127.0.0.1:4175",
+  "moduleId": "Y1M05",
+  "actualBrowser": "PLAYWRIGHT_CHROMIUM",
+  "nativePointerInput": true,
+  "sourcePendingIds": 101,
+  "postSplitIds": 101,
+  "usageRecords": 101,
+  "uniquePngHashes": 10,
+  "runtimePngPaths": 10,
+  "productionDeployed": false,
+  "goldMastersModified": false,
+  "routes": [
+    {
+      "questionId": "Y1M05-Q001",
+      "mechanicId": "target-shooter",
+      "route": "/play/target-shooter/?duduqModule=Y1M05&duduqItem=Y1M05-Q001&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 4,
+      "intersectingImageCount": 4,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-legs-688b7842435f.png",
+          "alt": "legs",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 324.5,
+            "y": 325.5,
+            "width": 87,
+            "height": 95,
+            "right": 411.5,
+            "bottom": 420.5
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-head-3cfe7135cc6e.png",
+          "alt": "head",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 553.5,
+            "y": 275.5,
+            "width": 87,
+            "height": 95,
+            "right": 640.5,
+            "bottom": 370.5
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-hands-c56ae4711b50.png",
+          "alt": "hands",
+          "naturalWidth": 1792,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 790.5,
+            "y": 338.5,
+            "width": 87,
+            "height": 97,
+            "right": 877.5,
+            "bottom": 435.5
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-arms-ba4d3cfa789b.png",
+          "alt": "arms",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 1018.5,
+            "y": 280.5,
+            "width": 87,
+            "height": 97,
+            "right": 1105.5,
+            "bottom": 377.5
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q002",
+      "mechanicId": "drag-drop-multimedia",
+      "route": "/play/drag-drop-multimedia/?duduqModule=Y1M05&duduqItem=Y1M05-Q002&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 4,
+      "intersectingImageCount": 4,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-head-3cfe7135cc6e.png",
+          "alt": "head",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 191.6,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 322.2,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-arms-ba4d3cfa789b.png",
+          "alt": "arms",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 478.7,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 609.2,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-legs-688b7842435f.png",
+          "alt": "legs",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 765.7,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 896.3,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-hands-c56ae4711b50.png",
+          "alt": "hands",
+          "naturalWidth": 1792,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 1052.8,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 1183.3,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q003",
+      "mechanicId": "matching",
+      "route": "/play/matching/?duduqModule=Y1M05&duduqItem=Y1M05-Q003&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 4,
+      "intersectingImageCount": 4,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-arms-ba4d3cfa789b.png",
+          "alt": "arms",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 252,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 322
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-legs-688b7842435f.png",
+          "alt": "legs",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 350,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 420
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-feet-162628c45871.png",
+          "alt": "feet",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 448,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 518
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-hands-c56ae4711b50.png",
+          "alt": "hands",
+          "naturalWidth": 1792,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 546,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 616
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q004",
+      "mechanicId": "bubble-pop",
+      "route": "/play/bubble-pop/?duduqModule=Y1M05&duduqItem=Y1M05-Q004&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 1,
+      "intersectingImageCount": 1,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-sit-down-8c7edde7833d.png",
+          "alt": "sit down",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 52,
+            "y": 52,
+            "width": 96,
+            "height": 96,
+            "right": 148,
+            "bottom": 148
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": {
+        "path": "content/english/assets/images/chatgpt/y1m05-official-sit-down-8c7edde7833d.png",
+        "alt": "sit down",
+        "rect": {
+          "x": 52,
+          "y": 52,
+          "width": 96,
+          "height": 96,
+          "right": 148,
+          "bottom": 148
+        },
+        "observedWhileIntersectingViewport": true
+      },
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [
+        {
+          "label": "instruction-audio-recovery",
+          "point": {
+            "x": 1004,
+            "y": 173
+          },
+          "input": "Playwright mouse pointer"
+        },
+        {
+          "label": "instruction-audio-play",
+          "point": {
+            "x": 1004,
+            "y": 173
+          },
+          "input": "Playwright mouse pointer"
+        }
+      ],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q005",
+      "mechanicId": "memory-quest",
+      "route": "/play/memory-quest/?duduqModule=Y1M05&duduqItem=Y1M05-Q005&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 5,
+      "intersectingImageCount": 5,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-feet-162628c45871.png",
+          "alt": "",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 404.6,
+            "y": 325.4,
+            "width": 120.4,
+            "height": 122.3,
+            "right": 524.9,
+            "bottom": 447.6
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-hands-c56ae4711b50.png",
+          "alt": "",
+          "naturalWidth": 1792,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 596,
+            "y": 325.4,
+            "width": 120.4,
+            "height": 122.3,
+            "right": 716.4,
+            "bottom": 447.6
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-legs-688b7842435f.png",
+          "alt": "",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 787.5,
+            "y": 325.4,
+            "width": 120.4,
+            "height": 122.3,
+            "right": 907.9,
+            "bottom": 447.6
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-head-3cfe7135cc6e.png",
+          "alt": "",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 787.5,
+            "y": 552.9,
+            "width": 120.4,
+            "height": 122.3,
+            "right": 907.9,
+            "bottom": 675.1
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-arms-ba4d3cfa789b.png",
+          "alt": "",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 979,
+            "y": 552.9,
+            "width": 120.4,
+            "height": 122.3,
+            "right": 1099.4,
+            "bottom": 675.1
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q006",
+      "mechanicId": "drag-drop",
+      "route": "/play/drag-drop/?duduqModule=Y1M05&duduqItem=Y1M05-Q006&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 3,
+      "intersectingImageCount": 3,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-come-in-7c975b666b94.png",
+          "alt": "come in",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 709.6,
+            "y": 582.6,
+            "width": 116.8,
+            "height": 116.8,
+            "right": 826.4,
+            "bottom": 699.4
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-stand-up-ecb312a23309.png",
+          "alt": "stand up",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 879.6,
+            "y": 582.6,
+            "width": 116.8,
+            "height": 116.8,
+            "right": 996.4,
+            "bottom": 699.4
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-sit-down-8c7edde7833d.png",
+          "alt": "sit down",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 1219.6,
+            "y": 582.6,
+            "width": 116.8,
+            "height": 116.8,
+            "right": 1336.4,
+            "bottom": 699.4
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q007",
+      "mechanicId": "matching",
+      "route": "/play/matching/?duduqModule=Y1M05&duduqItem=Y1M05-Q007&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 4,
+      "intersectingImageCount": 4,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-arms-ba4d3cfa789b.png",
+          "alt": "arms",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 252,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 322
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-feet-162628c45871.png",
+          "alt": "feet",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 350,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 420
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-stand-up-ecb312a23309.png",
+          "alt": "stand up",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 448,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 518
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-sit-down-8c7edde7833d.png",
+          "alt": "sit down",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 963,
+            "y": 546,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 616
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q008",
+      "mechanicId": "matching",
+      "route": "/play/matching/?duduqModule=Y1M05&duduqItem=Y1M05-Q008&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 4,
+      "intersectingImageCount": 4,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-feet-162628c45871.png",
+          "alt": "feet",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 252,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 322
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-arms-ba4d3cfa789b.png",
+          "alt": "arms",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 350,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 420
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-sit-down-8c7edde7833d.png",
+          "alt": "sit down",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 963,
+            "y": 448,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 518
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-stand-up-ecb312a23309.png",
+          "alt": "stand up",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 546,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 616
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q009",
+      "mechanicId": "target-shooter",
+      "route": "/play/target-shooter/?duduqModule=Y1M05&duduqItem=Y1M05-Q009&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 4,
+      "intersectingImageCount": 4,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-feet-162628c45871.png",
+          "alt": "feet",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 324.5,
+            "y": 325.5,
+            "width": 87,
+            "height": 95,
+            "right": 411.5,
+            "bottom": 420.5
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-stand-up-ecb312a23309.png",
+          "alt": "stand up",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 553.5,
+            "y": 275.5,
+            "width": 87,
+            "height": 95,
+            "right": 640.5,
+            "bottom": 370.5
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-come-in-7c975b666b94.png",
+          "alt": "come in",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 790.5,
+            "y": 338.5,
+            "width": 87,
+            "height": 97,
+            "right": 877.5,
+            "bottom": 435.5
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-sit-down-8c7edde7833d.png",
+          "alt": "sit down",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 1018.5,
+            "y": 280.5,
+            "width": 87,
+            "height": 97,
+            "right": 1105.5,
+            "bottom": 377.5
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q010",
+      "mechanicId": "matching",
+      "route": "/play/matching/?duduqModule=Y1M05&duduqItem=Y1M05-Q010&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 4,
+      "intersectingImageCount": 4,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-come-in-7c975b666b94.png",
+          "alt": "come in",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 963,
+            "y": 252,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 322
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-sit-down-8c7edde7833d.png",
+          "alt": "sit down",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 963,
+            "y": 350,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 420
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-stand-up-ecb312a23309.png",
+          "alt": "stand up",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 448,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 518
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-feet-162628c45871.png",
+          "alt": "feet",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 546,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 616
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q011",
+      "mechanicId": "bubble-pop",
+      "route": "/play/bubble-pop/?duduqModule=Y1M05&duduqItem=Y1M05-Q011&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 1,
+      "intersectingImageCount": 1,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-come-in-7c975b666b94.png",
+          "alt": "come in",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 52,
+            "y": 52,
+            "width": 96,
+            "height": 96,
+            "right": 148,
+            "bottom": 148
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": {
+        "path": "content/english/assets/images/chatgpt/y1m05-official-come-in-7c975b666b94.png",
+        "alt": "come in",
+        "rect": {
+          "x": 52,
+          "y": 52,
+          "width": 96,
+          "height": 96,
+          "right": 148,
+          "bottom": 148
+        },
+        "observedWhileIntersectingViewport": true
+      },
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [
+        {
+          "label": "instruction-audio-recovery",
+          "point": {
+            "x": 1004,
+            "y": 173
+          },
+          "input": "Playwright mouse pointer"
+        },
+        {
+          "label": "instruction-audio-play",
+          "point": {
+            "x": 1004,
+            "y": 173
+          },
+          "input": "Playwright mouse pointer"
+        }
+      ],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q012",
+      "mechanicId": "drag-drop-multimedia",
+      "route": "/play/drag-drop-multimedia/?duduqModule=Y1M05&duduqItem=Y1M05-Q012&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 4,
+      "intersectingImageCount": 4,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-come-in-7c975b666b94.png",
+          "alt": "come in",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 191.6,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 322.2,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-sit-down-8c7edde7833d.png",
+          "alt": "sit down",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 478.7,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 609.2,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-stand-up-ecb312a23309.png",
+          "alt": "stand up",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 765.7,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 896.3,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-silence-please-bf694ec13a01.png",
+          "alt": "silence, please",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 1052.8,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 1183.3,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q013",
+      "mechanicId": "matching",
+      "route": "/play/matching/?duduqModule=Y1M05&duduqItem=Y1M05-Q013&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 4,
+      "intersectingImageCount": 4,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-come-in-7c975b666b94.png",
+          "alt": "come in",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 963,
+            "y": 252,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 322
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-thank-you-37028ba73596.png",
+          "alt": "thank you",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 963,
+            "y": 350,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 420
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-silence-please-bf694ec13a01.png",
+          "alt": "silence, please",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 448,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 518
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-stand-up-ecb312a23309.png",
+          "alt": "stand up",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 546,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 616
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q014",
+      "mechanicId": "target-shooter",
+      "route": "/play/target-shooter/?duduqModule=Y1M05&duduqItem=Y1M05-Q014&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 4,
+      "intersectingImageCount": 4,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-thank-you-37028ba73596.png",
+          "alt": "thank you",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 324.5,
+            "y": 325.5,
+            "width": 87,
+            "height": 95,
+            "right": 411.5,
+            "bottom": 420.5
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-come-in-7c975b666b94.png",
+          "alt": "come in",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 553.5,
+            "y": 275.5,
+            "width": 87,
+            "height": 95,
+            "right": 640.5,
+            "bottom": 370.5
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-stand-up-ecb312a23309.png",
+          "alt": "stand up",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 790.5,
+            "y": 338.5,
+            "width": 87,
+            "height": 97,
+            "right": 877.5,
+            "bottom": 435.5
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-silence-please-bf694ec13a01.png",
+          "alt": "silence, please",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 1018.5,
+            "y": 280.5,
+            "width": 87,
+            "height": 97,
+            "right": 1105.5,
+            "bottom": 377.5
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q015",
+      "mechanicId": "memory-quest",
+      "route": "/play/memory-quest/?duduqModule=Y1M05&duduqItem=Y1M05-Q015&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 3,
+      "intersectingImageCount": 3,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-sit-down-8c7edde7833d.png",
+          "alt": "",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 415.1,
+            "y": 325.4,
+            "width": 120.4,
+            "height": 122.3,
+            "right": 535.5,
+            "bottom": 447.6
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-stand-up-ecb312a23309.png",
+          "alt": "",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 606.6,
+            "y": 325.4,
+            "width": 120.4,
+            "height": 122.3,
+            "right": 726.9,
+            "bottom": 447.6
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-come-in-7c975b666b94.png",
+          "alt": "",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 606.6,
+            "y": 552.9,
+            "width": 120.4,
+            "height": 122.3,
+            "right": 726.9,
+            "bottom": 675.1
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q016",
+      "mechanicId": "drag-drop-multimedia",
+      "route": "/play/drag-drop-multimedia/?duduqModule=Y1M05&duduqItem=Y1M05-Q016&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 4,
+      "intersectingImageCount": 4,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-thank-you-37028ba73596.png",
+          "alt": "thank you",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 191.6,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 322.2,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-silence-please-bf694ec13a01.png",
+          "alt": "silence, please",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 478.7,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 609.2,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-come-in-7c975b666b94.png",
+          "alt": "come in",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 765.7,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 896.3,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-head-3cfe7135cc6e.png",
+          "alt": "head",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 1052.8,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 1183.3,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q017",
+      "mechanicId": "bubble-pop",
+      "route": "/play/bubble-pop/?duduqModule=Y1M05&duduqItem=Y1M05-Q017&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 1,
+      "intersectingImageCount": 1,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-hands-c56ae4711b50.png",
+          "alt": "hands",
+          "naturalWidth": 1792,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 52,
+            "y": 52,
+            "width": 96,
+            "height": 96,
+            "right": 148,
+            "bottom": 148
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": {
+        "path": "content/english/assets/images/chatgpt/y1m05-official-hands-c56ae4711b50.png",
+        "alt": "hands",
+        "rect": {
+          "x": 52,
+          "y": 52,
+          "width": 96,
+          "height": 96,
+          "right": 148,
+          "bottom": 148
+        },
+        "observedWhileIntersectingViewport": true
+      },
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [
+        {
+          "label": "instruction-audio-recovery",
+          "point": {
+            "x": 1004,
+            "y": 173
+          },
+          "input": "Playwright mouse pointer"
+        },
+        {
+          "label": "instruction-audio-play",
+          "point": {
+            "x": 1004,
+            "y": 173
+          },
+          "input": "Playwright mouse pointer"
+        }
+      ],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q018",
+      "mechanicId": "matching",
+      "route": "/play/matching/?duduqModule=Y1M05&duduqItem=Y1M05-Q018&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 4,
+      "intersectingImageCount": 4,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-hands-c56ae4711b50.png",
+          "alt": "hands",
+          "naturalWidth": 1792,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 252,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 322
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-head-3cfe7135cc6e.png",
+          "alt": "head",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 350,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 420
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-thank-you-37028ba73596.png",
+          "alt": "thank you",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 963,
+            "y": 448,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 518
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-silence-please-bf694ec13a01.png",
+          "alt": "silence, please",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 963,
+            "y": 546,
+            "width": 70,
+            "height": 70,
+            "right": 1033,
+            "bottom": 616
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q019",
+      "mechanicId": "drag-drop",
+      "route": "/play/drag-drop/?duduqModule=Y1M05&duduqItem=Y1M05-Q019&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 3,
+      "intersectingImageCount": 3,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-come-in-7c975b666b94.png",
+          "alt": "come in",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 369.6,
+            "y": 582.6,
+            "width": 116.8,
+            "height": 116.8,
+            "right": 486.4,
+            "bottom": 699.4
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-stand-up-ecb312a23309.png",
+          "alt": "stand up",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 879.6,
+            "y": 582.6,
+            "width": 116.8,
+            "height": 116.8,
+            "right": 996.4,
+            "bottom": 699.4
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-sit-down-8c7edde7833d.png",
+          "alt": "sit down",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 1219.6,
+            "y": 582.6,
+            "width": 116.8,
+            "height": 116.8,
+            "right": 1336.4,
+            "bottom": 699.4
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    },
+    {
+      "questionId": "Y1M05-Q020",
+      "mechanicId": "drag-drop-multimedia",
+      "route": "/play/drag-drop-multimedia/?duduqModule=Y1M05&duduqItem=Y1M05-Q020&qaSeed=20261030",
+      "httpStatus": 200,
+      "officialImageCount": 4,
+      "intersectingImageCount": 4,
+      "images": [
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-legs-688b7842435f.png",
+          "alt": "legs",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 191.6,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 322.2,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-hands-c56ae4711b50.png",
+          "alt": "hands",
+          "naturalWidth": 1792,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 478.7,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 609.2,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-head-3cfe7135cc6e.png",
+          "alt": "head",
+          "naturalWidth": 1536,
+          "naturalHeight": 1536,
+          "rect": {
+            "x": 765.7,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 896.3,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        },
+        {
+          "path": "content/english/assets/images/chatgpt/y1m05-official-thank-you-37028ba73596.png",
+          "alt": "thank you",
+          "naturalWidth": 1536,
+          "naturalHeight": 1792,
+          "rect": {
+            "x": 1052.8,
+            "y": 313.2,
+            "width": 130.5,
+            "height": 129.6,
+            "right": 1183.3,
+            "bottom": 442.8
+          },
+          "visible": true,
+          "intersectsViewport": true,
+          "objectFit": "contain"
+        }
+      ],
+      "dynamicVisibility": null,
+      "iframeCount": 0,
+      "overflowX": 0,
+      "pointerEvents": [],
+      "pageErrors": [],
+      "httpFailures": [],
+      "requestFailures": [],
+      "pass": true
+    }
+  ],
+  "transport": [
+    {
+      "path": "content/english/assets/images/chatgpt/y1m05-official-arms-ba4d3cfa789b.png",
+      "status": 200,
+      "sha256": "ba4d3cfa789b050c22e752afde0868726b7cf37e806063bd25ec902b007c8acb",
+      "expectedSha256": "ba4d3cfa789b050c22e752afde0868726b7cf37e806063bd25ec902b007c8acb",
+      "contentType": "image/png",
+      "pass": true
+    },
+    {
+      "path": "content/english/assets/images/chatgpt/y1m05-official-come-in-7c975b666b94.png",
+      "status": 200,
+      "sha256": "7c975b666b9416daee5a73468fb57a83a5ec50aa2222a8a35e94f20cc65faad2",
+      "expectedSha256": "7c975b666b9416daee5a73468fb57a83a5ec50aa2222a8a35e94f20cc65faad2",
+      "contentType": "image/png",
+      "pass": true
+    },
+    {
+      "path": "content/english/assets/images/chatgpt/y1m05-official-feet-162628c45871.png",
+      "status": 200,
+      "sha256": "162628c4587183735ac0a6841d70c6830142278cb25599fb8f63f1a6e1c56fa0",
+      "expectedSha256": "162628c4587183735ac0a6841d70c6830142278cb25599fb8f63f1a6e1c56fa0",
+      "contentType": "image/png",
+      "pass": true
+    },
+    {
+      "path": "content/english/assets/images/chatgpt/y1m05-official-hands-c56ae4711b50.png",
+      "status": 200,
+      "sha256": "c56ae4711b50d5ee41d46253f168e1e46ab09321123d22c085ef6db175364828",
+      "expectedSha256": "c56ae4711b50d5ee41d46253f168e1e46ab09321123d22c085ef6db175364828",
+      "contentType": "image/png",
+      "pass": true
+    },
+    {
+      "path": "content/english/assets/images/chatgpt/y1m05-official-head-3cfe7135cc6e.png",
+      "status": 200,
+      "sha256": "3cfe7135cc6e3f44a5e3a9f84475e4da902bfe5a1948605e6b822ca434764c8c",
+      "expectedSha256": "3cfe7135cc6e3f44a5e3a9f84475e4da902bfe5a1948605e6b822ca434764c8c",
+      "contentType": "image/png",
+      "pass": true
+    },
+    {
+      "path": "content/english/assets/images/chatgpt/y1m05-official-legs-688b7842435f.png",
+      "status": 200,
+      "sha256": "688b7842435f0fa02797da3d8433edb88dff09f79373e2f2f7de89365933674a",
+      "expectedSha256": "688b7842435f0fa02797da3d8433edb88dff09f79373e2f2f7de89365933674a",
+      "contentType": "image/png",
+      "pass": true
+    },
+    {
+      "path": "content/english/assets/images/chatgpt/y1m05-official-silence-please-bf694ec13a01.png",
+      "status": 200,
+      "sha256": "bf694ec13a017859f7fa6ba7080952cec3d46fcf9b4e060827889dd50ada951f",
+      "expectedSha256": "bf694ec13a017859f7fa6ba7080952cec3d46fcf9b4e060827889dd50ada951f",
+      "contentType": "image/png",
+      "pass": true
+    },
+    {
+      "path": "content/english/assets/images/chatgpt/y1m05-official-sit-down-8c7edde7833d.png",
+      "status": 200,
+      "sha256": "8c7edde7833d27e747e73dba64028c1b1a3fe35c27b01f957622416d239670ac",
+      "expectedSha256": "8c7edde7833d27e747e73dba64028c1b1a3fe35c27b01f957622416d239670ac",
+      "contentType": "image/png",
+      "pass": true
+    },
+    {
+      "path": "content/english/assets/images/chatgpt/y1m05-official-stand-up-ecb312a23309.png",
+      "status": 200,
+      "sha256": "ecb312a233096d2c7424f161f38bfeb69478b78cda1ea50e817d400de0b4dc67",
+      "expectedSha256": "ecb312a233096d2c7424f161f38bfeb69478b78cda1ea50e817d400de0b4dc67",
+      "contentType": "image/png",
+      "pass": true
+    },
+    {
+      "path": "content/english/assets/images/chatgpt/y1m05-official-thank-you-37028ba73596.png",
+      "status": 200,
+      "sha256": "37028ba73596681aad007d6421bc87af96de1f619032aa31a953d2d16b6c678d",
+      "expectedSha256": "37028ba73596681aad007d6421bc87af96de1f619032aa31a953d2d16b6c678d",
+      "contentType": "image/png",
+      "pass": true
+    }
+  ],
+  "gameplay": {
+    "questionId": "Y1M05-Q001",
+    "mechanicId": "target-shooter",
+    "input": "native Playwright mouse move/down/up",
+    "incorrect": {
+      "state": "incorrect",
+      "observed": {
+        "at": 15604.099999904633,
+        "targetState": "incorrect",
+        "targetClass": "target-shooter-target target-shooter-target--rabbit is-incorrect target-feedback-shake",
+        "badge": "Resposta incorreta",
+        "targetVisible": true,
+        "ribbonHidden": false,
+        "feedback": "incorrect",
+        "feedbackText": "Quase! Try again. Look and listen carefully. TENTAR DE NOVO",
+        "rootState": "AWAITING_RETRY"
+      },
+      "transitions": [
+        {
+          "at": 9390.699999809265,
+          "targetState": "selected",
+          "targetClass": "target-shooter-target target-shooter-target--rabbit is-selected",
+          "badge": "Indicador de resposta",
+          "targetVisible": true,
+          "ribbonHidden": true,
+          "feedback": "correct",
+          "feedbackText": "Correto! Você acertou o alvo correto. CONTINUAR",
+          "rootState": "READY"
+        },
+        {
+          "at": 10978.599999904633,
+          "targetState": "incorrect",
+          "targetClass": "target-shooter-target target-shooter-target--rabbit is-incorrect target-feedback-shake",
+          "badge": "Resposta incorreta",
+          "targetVisible": true,
+          "ribbonHidden": true,
+          "feedback": "correct",
+          "feedbackText": "Correto! Você acertou o alvo correto. CONTINUAR",
+          "rootState": "READY"
+        },
+        {
+          "at": 15604.099999904633,
+          "targetState": "incorrect",
+          "targetClass": "target-shooter-target target-shooter-target--rabbit is-incorrect target-feedback-shake",
+          "badge": "Resposta incorreta",
+          "targetVisible": true,
+          "ribbonHidden": false,
+          "feedback": "incorrect",
+          "feedbackText": "Quase! Try again. Look and listen carefully. TENTAR DE NOVO",
+          "rootState": "AWAITING_RETRY"
+        }
+      ],
+      "currentState": "incorrect",
+      "feedback": {
+        "hidden": false,
+        "type": "incorrect",
+        "text": "Quase! Try again. Look and listen carefully. TENTAR DE NOVO"
+      },
+      "interactionState": "AWAITING_RETRY"
+    },
+    "correct": {
+      "state": "correct",
+      "observed": {
+        "at": 20193.599999904633,
+        "targetState": "correct",
+        "targetClass": "target-shooter-target target-shooter-target--cat is-correct target-feedback-pulse",
+        "badge": "Resposta correta",
+        "targetVisible": true,
+        "ribbonHidden": false,
+        "feedback": "correct",
+        "feedbackText": "Correto! Great work! CONTINUAR",
+        "rootState": "AWAITING_CONTINUE"
+      },
+      "transitions": [
+        {
+          "at": 15769.5,
+          "targetState": "selected",
+          "targetClass": "target-shooter-target target-shooter-target--cat is-selected",
+          "badge": "Indicador de resposta",
+          "targetVisible": true,
+          "ribbonHidden": true,
+          "feedback": "incorrect",
+          "feedbackText": "Quase! Try again. Look and listen carefully. TENTAR DE NOVO",
+          "rootState": "READY"
+        },
+        {
+          "at": 17369.39999985695,
+          "targetState": "correct",
+          "targetClass": "target-shooter-target target-shooter-target--cat is-correct target-feedback-pulse",
+          "badge": "Resposta correta",
+          "targetVisible": true,
+          "ribbonHidden": true,
+          "feedback": "incorrect",
+          "feedbackText": "Quase! Try again. Look and listen carefully. TENTAR DE NOVO",
+          "rootState": "READY"
+        },
+        {
+          "at": 20193.599999904633,
+          "targetState": "correct",
+          "targetClass": "target-shooter-target target-shooter-target--cat is-correct target-feedback-pulse",
+          "badge": "Resposta correta",
+          "targetVisible": true,
+          "ribbonHidden": false,
+          "feedback": "correct",
+          "feedbackText": "Correto! Great work! CONTINUAR",
+          "rootState": "AWAITING_CONTINUE"
+        }
+      ],
+      "currentState": "correct",
+      "feedback": {
+        "hidden": false,
+        "type": "correct",
+        "text": "Correto! Great work! CONTINUAR"
+      },
+      "interactionState": "AWAITING_CONTINUE"
+    },
+    "pointerEvents": [
+      {
+        "label": "instruction-audio-recovery",
+        "point": {
+          "x": 1004,
+          "y": 173
+        },
+        "input": "Playwright mouse pointer"
+      },
+      {
+        "label": "instruction-audio-play",
+        "point": {
+          "x": 1004,
+          "y": 173
+        },
+        "input": "Playwright mouse pointer"
+      },
+      {
+        "label": "select-incorrect-hands",
+        "point": {
+          "x": 834,
+          "y": 412
+        },
+        "input": "Playwright mouse pointer"
+      },
+      {
+        "label": "retry-after-incorrect",
+        "point": {
+          "x": 1226,
+          "y": 714.6
+        },
+        "input": "Playwright mouse pointer"
+      },
+      {
+        "label": "select-correct-head",
+        "point": {
+          "x": 597,
+          "y": 348
+        },
+        "input": "Playwright mouse pointer"
+      }
+    ],
+    "officialImages": [
+      {
+        "path": "content/english/assets/images/chatgpt/y1m05-official-legs-688b7842435f.png",
+        "alt": "legs",
+        "naturalWidth": 1536,
+        "naturalHeight": 1536,
+        "rect": {
+          "x": 324.5,
+          "y": 325.5,
+          "width": 87,
+          "height": 95,
+          "right": 411.5,
+          "bottom": 420.5
+        },
+        "visible": true,
+        "intersectsViewport": true,
+        "objectFit": "contain"
+      },
+      {
+        "path": "content/english/assets/images/chatgpt/y1m05-official-head-3cfe7135cc6e.png",
+        "alt": "head",
+        "naturalWidth": 1536,
+        "naturalHeight": 1536,
+        "rect": {
+          "x": 553.5,
+          "y": 275.5,
+          "width": 87,
+          "height": 95,
+          "right": 640.5,
+          "bottom": 370.5
+        },
+        "visible": true,
+        "intersectsViewport": true,
+        "objectFit": "contain"
+      },
+      {
+        "path": "content/english/assets/images/chatgpt/y1m05-official-hands-c56ae4711b50.png",
+        "alt": "hands",
+        "naturalWidth": 1792,
+        "naturalHeight": 1536,
+        "rect": {
+          "x": 790.5,
+          "y": 338.5,
+          "width": 87,
+          "height": 97,
+          "right": 877.5,
+          "bottom": 435.5
+        },
+        "visible": true,
+        "intersectsViewport": true,
+        "objectFit": "contain"
+      },
+      {
+        "path": "content/english/assets/images/chatgpt/y1m05-official-arms-ba4d3cfa789b.png",
+        "alt": "arms",
+        "naturalWidth": 1536,
+        "naturalHeight": 1536,
+        "rect": {
+          "x": 1018.5,
+          "y": 280.5,
+          "width": 87,
+          "height": 97,
+          "right": 1105.5,
+          "bottom": 377.5
+        },
+        "visible": true,
+        "intersectsViewport": true,
+        "objectFit": "contain"
+      }
+    ],
+    "iframeCount": 0,
+    "pageErrors": [],
+    "httpFailures": [],
+    "requestFailures": [],
+    "pass": true
+  },
+  "screenshots": [
+    {
+      "name": "desktop-1366x768",
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "questionId": "Y1M05-Q001",
+      "path": "qa/results/y1m05-official-media-browser/desktop-1366x768-y1m05-q001.png",
+      "sha256": "b6c360ce90e88771cce7699940be2d9a281fbae88cd3131007e3c07b47f916ab",
+      "bytes": 1340607,
+      "officialImageCount": 4,
+      "visibleOfficialImages": 4,
+      "overflowX": 0,
+      "iframeCount": 0,
+      "fullyContainedOfficialImages": 4,
+      "pass": true
+    },
+    {
+      "name": "tablet-768x1024",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "questionId": "Y1M05-Q003",
+      "path": "qa/results/y1m05-official-media-browser/tablet-768x1024-y1m05-q003.png",
+      "sha256": "9d5c84529fa51d6606afe01ec3c309f02357c48fdf0649beb2d3d23ebde2255c",
+      "bytes": 798817,
+      "officialImageCount": 4,
+      "visibleOfficialImages": 4,
+      "overflowX": 0,
+      "iframeCount": 0,
+      "fullyContainedOfficialImages": 4,
+      "pass": true
+    },
+    {
+      "name": "mobile-390x844",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "questionId": "Y1M05-Q006",
+      "path": "qa/results/y1m05-official-media-browser/mobile-390x844-y1m05-q006.png",
+      "sha256": "91ce91ecb30dd1561b0f0471b06d38469183f7ec61307b514f3fd37132baaeb7",
+      "bytes": 354082,
+      "officialImageCount": 3,
+      "visibleOfficialImages": 3,
+      "overflowX": 0,
+      "iframeCount": 0,
+      "fullyContainedOfficialImages": 3,
+      "pass": true
+    }
+  ],
+  "artifacts": {
+    "video": {
+      "path": "qa/results/y1m05-official-media-browser/y1m05-q001-pointer-gameplay.webm",
+      "sha256": "ad9cf06abcd72ecc8d706837408fbb8cba0d1fc639b2d4044d30e688f854fdc5",
+      "bytes": 2113399
+    },
+    "trace": {
+      "path": "qa/results/y1m05-official-media-browser/y1m05-q001-pointer-trace.zip",
+      "sha256": "16756f1c9f02e6a79563f16a532269d72a515d8d63704811b3f6772eb4343f65",
+      "bytes": 4654,
+      "scope": "Companion clean-context pointer trace through visible incorrect state",
+      "pointerEvents": [
+        {
+          "label": "instruction-audio-recovery",
+          "point": {
+            "x": 1004,
+            "y": 173
+          },
+          "input": "Playwright mouse pointer"
+        },
+        {
+          "label": "instruction-audio-play",
+          "point": {
+            "x": 1004,
+            "y": 173
+          },
+          "input": "Playwright mouse pointer"
+        },
+        {
+          "label": "trace-select-incorrect-hands",
+          "point": {
+            "x": 834,
+            "y": 412
+          },
+          "input": "Playwright mouse pointer"
+        },
+        {
+          "label": "trace-retry-after-incorrect",
+          "point": {
+            "x": 1226,
+            "y": 714.6
+          },
+          "input": "Playwright mouse pointer"
+        }
+      ]
+    }
+  },
+  "observedRuntimePaths": [
+    "content/english/assets/images/chatgpt/y1m05-official-arms-ba4d3cfa789b.png",
+    "content/english/assets/images/chatgpt/y1m05-official-come-in-7c975b666b94.png",
+    "content/english/assets/images/chatgpt/y1m05-official-feet-162628c45871.png",
+    "content/english/assets/images/chatgpt/y1m05-official-hands-c56ae4711b50.png",
+    "content/english/assets/images/chatgpt/y1m05-official-head-3cfe7135cc6e.png",
+    "content/english/assets/images/chatgpt/y1m05-official-legs-688b7842435f.png",
+    "content/english/assets/images/chatgpt/y1m05-official-silence-please-bf694ec13a01.png",
+    "content/english/assets/images/chatgpt/y1m05-official-sit-down-8c7edde7833d.png",
+    "content/english/assets/images/chatgpt/y1m05-official-stand-up-ecb312a23309.png",
+    "content/english/assets/images/chatgpt/y1m05-official-thank-you-37028ba73596.png"
+  ],
+  "passedRoutes": 20,
+  "finishedAt": "2026-10-30T06:33:26.145Z"
+}

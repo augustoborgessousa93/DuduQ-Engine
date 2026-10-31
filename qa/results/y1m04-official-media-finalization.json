@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "DUDUQ_Y1M04_OFFICIAL_MEDIA_FINALIZATION_V1",
+  "status": "OFFICIAL_MEDIA_QA_FINALIZED_ON_REVIEW_BRANCH",
+  "moduleId": "Y1M04",
+  "mediaIds": 84,
+  "uniquePngs": 17,
+  "runtimePaths": 18,
+  "questions": 20,
+  "globalActivitiesVerified": 600,
+  "browserRoutes": 20,
+  "screenshots": 3,
+  "nativePointerGameplay": true,
+  "evidenceSha256": "0b25298d0ba2a9da359be87ef52421d85f0924df1a4b61f20baa9bc516215c04",
+  "productionDeployed": false,
+  "goldMastersModified": false,
+  "compiledManifestSha256": "14c94bd9fb861f389531bc9a9c8612bbbcaa211a9aa3a5460e753c2dec4413e6"
+}

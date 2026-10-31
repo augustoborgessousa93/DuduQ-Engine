@@ -1,0 +1,83 @@
+name: DUDUQ - V2 eraser real browser QA (review only)
+
+on:
+  push:
+    branches:
+      - automation/duduq-media-source-only-fix-20261029
+    paths:
+      - ".github/workflows/duduq-cloudflare-eraser-browser-qa.yml"
+      - "qa/tests/verify-v27-cloudflare-browser.mjs"
+      - "qa/media-inbox/cloudflare-eraser-20261029/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duduq-eraser-browser-qa
+  cancel-in-progress: true
+
+jobs:
+  rendered_asset_qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      CI: "true"
+      DUDUQ_QA_STATIC_PREVIEW: "1"
+      DUDUQ_CHATGPT_IMAGE_BUNDLE: qa/media-inbox/cloudflare-eraser-20261029
+    steps:
+      - name: Checkout isolated branch without write credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check script syntax and pinned image hash
+        run: |
+          node --check qa/tests/verify-v27-cloudflare-browser.mjs
+          printf '%s  %s\n' 'aa9e4f93e83c0769d97f781be2ceee8bb9cf11950e668130cb5e5aba3bb5a5c2' 'qa/media-inbox/cloudflare-eraser-20261029/images/CF-Y1M04-ERASER-V2.png' | sha256sum -c -
+      - name: Build immutable V26 and import V2 into temporary QA artifact only
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          bash qa/build-v26-topic-first-paint-qa.sh
+          node scripts/duduq-import-chatgpt-bundle.mjs "$DUDUQ_CHATGPT_IMAGE_BUNDLE" > qa/results/cloudflare-eraser-browser-preflight.json
+          node scripts/duduq-import-chatgpt-bundle.mjs "$DUDUQ_CHATGPT_IMAGE_BUNDLE" --apply > qa/results/cloudflare-eraser-browser-import.json
+          node qa/tests/verify-v27-cloudflare-canary.mjs
+      - name: Install open-source Playwright Chromium
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Render Q015 and Q020 in Chromium at desktop and mobile sizes
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages >/tmp/duduq-canary-browser-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4175/play/target-shooter/ >/dev/null; then break; fi
+            sleep 1
+          done
+          node qa/tests/verify-v27-cloudflare-browser.mjs
+      - name: Upload screenshots and browser QA report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-eraser-v2-rendered-qa-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            qa/results/cloudflare-eraser-browser-qa.json
+            qa/results/cloudflare-eraser-browser-preflight.json
+            qa/results/cloudflare-eraser-browser-import.json
+            qa/results/cloudflare-eraser-browser-screenshots/
+      - name: No pedagogical approval or production deploy
+        run: echo "Browser-only candidate QA; human pedagogical review still required; no merge or deploy."

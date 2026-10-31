@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "DUDUQ_Y1M05_REVIEW_BUILD_V1",
+  "status": "PASS",
+  "createdAt": "2026-10-30T06:27:35.885Z",
+  "buildStrategy": "REUSE_VERIFIED_V26_BASE_AND_APPLY_HASH_BOUND_MEDIA_OVERLAY",
+  "baseBuildEvidence": "qa/results/y1m04-v26-build.json",
+  "baseBuildEvidenceSha256": "64cffc294b12e7a03b85e61215a1e481f9e151df744f6c877a9b8117fbd0ffbf",
+  "baseBuildManifestSha256": "5993aaceaff272626c863aef07e1b33a909ca7f9fcc41d2d40890baa6c08b822",
+  "currentCompiledManifestSha256": "47392ab4597893a0f9dfd1004d14f0ca536158dc90bb9879e63d407c871e8649",
+  "compiledManifestEntries": 2702,
+  "modules": 30,
+  "activities": 600,
+  "mechanics": [
+    "bubble-pop",
+    "drag-drop",
+    "drag-drop-multimedia",
+    "matching",
+    "memory-quest",
+    "smart-sentence-complete",
+    "smart-sentence-order",
+    "target-shooter"
+  ],
+  "y1m05": {
+    "questions": 20,
+    "bindingIds": 101,
+    "usageRecords": 101,
+    "uniquePngs": 10,
+    "runtimePaths": [
+      "content/english/assets/images/chatgpt/y1m05-official-arms-ba4d3cfa789b.png",
+      "content/english/assets/images/chatgpt/y1m05-official-come-in-7c975b666b94.png",
+      "content/english/assets/images/chatgpt/y1m05-official-feet-162628c45871.png",
+      "content/english/assets/images/chatgpt/y1m05-official-hands-c56ae4711b50.png",
+      "content/english/assets/images/chatgpt/y1m05-official-head-3cfe7135cc6e.png",
+      "content/english/assets/images/chatgpt/y1m05-official-legs-688b7842435f.png",
+      "content/english/assets/images/chatgpt/y1m05-official-silence-please-bf694ec13a01.png",
+      "content/english/assets/images/chatgpt/y1m05-official-sit-down-8c7edde7833d.png",
+      "content/english/assets/images/chatgpt/y1m05-official-stand-up-ecb312a23309.png",
+      "content/english/assets/images/chatgpt/y1m05-official-thank-you-37028ba73596.png"
+    ]
+  },
+  "sourceQuestionFilesModified": false,
+  "goldMastersModified": false,
+  "productionDeployed": false
+}

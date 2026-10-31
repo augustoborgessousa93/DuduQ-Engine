@@ -1,0 +1,632 @@
+{
+  "schemaVersion": "DUDUQ_SAFE_SCHOOL_BAG_REUSE_V1",
+  "scope": "Y1M04",
+  "generatedAt": "2026-10-29T22:15:52.965Z",
+  "source": "Actual V26 compiled question contracts, all 30 modules/600 questions",
+  "assetEvidence": "qa/semantic-evidence/DUDUQ_ChatGPT_Escolar10_20261029.json",
+  "productionApproved": false,
+  "applied": false,
+  "pedagogicalQaApproved": false,
+  "assets": [
+    {
+      "assetKey": "DUDUQ-Y1M04-ERASER",
+      "semanticTarget": "eraser",
+      "sha256": "dec0bd351a48571f2c09c8bf05c76c99d883a6320d026e88f55410bf8be34f5a",
+      "candidateStatus": "MODEL_SEMANTIC_PRECHECK_ONLY",
+      "references": [
+        {
+          "mediaId": "IMG-Q001-ERASER",
+          "questionIds": [
+            "Y1M04-Q001"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "eraser"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q003-ERASER",
+          "questionIds": [
+            "Y1M04-Q003"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "eraser"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q005-ERASER",
+          "questionIds": [
+            "Y1M04-Q005"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "eraser"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q006-ERASER",
+          "questionIds": [
+            "Y1M04-Q006"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "eraser"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q013-ERASER",
+          "questionIds": [
+            "Y1M04-Q013"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "eraser"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q015-ERASER",
+          "questionIds": [
+            "Y1M04-Q015"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "eraser"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q017-ERASER",
+          "questionIds": [
+            "Y1M04-Q017"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "eraser"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q020-ERASER",
+          "questionIds": [
+            "Y1M04-Q020"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "eraser"
+        }
+      ]
+    },
+    {
+      "assetKey": "DUDUQ-Y1M04-PENCIL",
+      "semanticTarget": "pencil",
+      "sha256": "860e2b4fc08eb6525998688f54532a63282153298c76c98ba2d03ab8ba992674",
+      "candidateStatus": "MODEL_SEMANTIC_PRECHECK_ONLY",
+      "references": [
+        {
+          "mediaId": "IMG-Q005-PENCIL",
+          "questionIds": [
+            "Y1M04-Q005"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "pencil"
+        },
+        {
+          "mediaId": "IMG-Q009-PENCIL",
+          "questionIds": [
+            "Y1M04-Q009"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "pencil"
+        },
+        {
+          "mediaId": "IMG-Q016-PENCIL",
+          "questionIds": [
+            "Y1M04-Q016"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "pencil"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q003-PENCIL",
+          "questionIds": [
+            "Y1M04-Q003"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pencil"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q004-PENCIL",
+          "questionIds": [
+            "Y1M04-Q004"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pencil"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q005-PENCIL",
+          "questionIds": [
+            "Y1M04-Q005"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pencil"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q006-PENCIL",
+          "questionIds": [
+            "Y1M04-Q006"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pencil"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q017-PENCIL",
+          "questionIds": [
+            "Y1M04-Q017"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pencil"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q020-PENCIL",
+          "questionIds": [
+            "Y1M04-Q020"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pencil"
+        }
+      ]
+    },
+    {
+      "assetKey": "DUDUQ-Y1M04-RULER",
+      "semanticTarget": "ruler",
+      "sha256": "e7ff33fa2ab1823a29bfd2b1e8750af92cec2f04d97540ce0752b42bd1dda786",
+      "candidateStatus": "MODEL_SEMANTIC_PRECHECK_ONLY",
+      "references": [
+        {
+          "mediaId": "IMG-Q015-RULER",
+          "questionIds": [
+            "Y1M04-Q015"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "ruler"
+        },
+        {
+          "mediaId": "IMG-Q019-RULER",
+          "questionIds": [
+            "Y1M04-Q019"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "ruler"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q004-RULER",
+          "questionIds": [
+            "Y1M04-Q004"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "ruler"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q005-RULER",
+          "questionIds": [
+            "Y1M04-Q005"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "ruler"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q009-RULER",
+          "questionIds": [
+            "Y1M04-Q009"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "ruler"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q010-RULER",
+          "questionIds": [
+            "Y1M04-Q010"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "ruler"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q011-RULER",
+          "questionIds": [
+            "Y1M04-Q011"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "ruler"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q013-RULER",
+          "questionIds": [
+            "Y1M04-Q013"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "ruler"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q015-RULER",
+          "questionIds": [
+            "Y1M04-Q015"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "ruler"
+        }
+      ]
+    },
+    {
+      "assetKey": "DUDUQ-Y1M04-PEN",
+      "semanticTarget": "pen",
+      "sha256": "543d6d3dba80288ec4db0616d633da36d86cedb0025e1af8b0a276dfdb2208d4",
+      "candidateStatus": "MODEL_SEMANTIC_PRECHECK_ONLY",
+      "references": [
+        {
+          "mediaId": "IMG-Q006-PEN",
+          "questionIds": [
+            "Y1M04-Q006"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "pen"
+        },
+        {
+          "mediaId": "IMG-Q013-PEN",
+          "questionIds": [
+            "Y1M04-Q013"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "pen"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q005-PEN",
+          "questionIds": [
+            "Y1M04-Q005",
+            "Y1M04-Q018"
+          ],
+          "usages": 2,
+          "scopedId": true,
+          "semanticTarget": "pen"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q009-PEN",
+          "questionIds": [
+            "Y1M04-Q009"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pen"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q010-PEN",
+          "questionIds": [
+            "Y1M04-Q010"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pen"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q011-PEN",
+          "questionIds": [
+            "Y1M04-Q011"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pen"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q013-PEN",
+          "questionIds": [
+            "Y1M04-Q013"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pen"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q015-PEN",
+          "questionIds": [
+            "Y1M04-Q015"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pen"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q017-PEN",
+          "questionIds": [
+            "Y1M04-Q017"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pen"
+        }
+      ]
+    },
+    {
+      "assetKey": "DUDUQ-Y1M04-CRAYON",
+      "semanticTarget": "crayon",
+      "sha256": "ccc73250790bcf74f40eda1c9a5fa4256a7303169ea1a90613182ec81dd3819e",
+      "candidateStatus": "MODEL_SEMANTIC_PRECHECK_ONLY",
+      "references": [
+        {
+          "mediaId": "IMG-Q004-CRAYON",
+          "questionIds": [
+            "Y1M04-Q004"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "crayon"
+        },
+        {
+          "mediaId": "IMG-Q010-CRAYON",
+          "questionIds": [
+            "Y1M04-Q010"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "crayon"
+        },
+        {
+          "mediaId": "IMG-Q011-CRAYON",
+          "questionIds": [
+            "Y1M04-Q011"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "crayon"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q003-CRAYON",
+          "questionIds": [
+            "Y1M04-Q003"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "crayon"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q004-CRAYON",
+          "questionIds": [
+            "Y1M04-Q004"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "crayon"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q005-CRAYON",
+          "questionIds": [
+            "Y1M04-Q005"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "crayon"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q006-CRAYON",
+          "questionIds": [
+            "Y1M04-Q006"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "crayon"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q009-CRAYON",
+          "questionIds": [
+            "Y1M04-Q009"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "crayon"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q010-CRAYON",
+          "questionIds": [
+            "Y1M04-Q010"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "crayon"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q011-CRAYON",
+          "questionIds": [
+            "Y1M04-Q011"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "crayon"
+        }
+      ]
+    },
+    {
+      "assetKey": "DUDUQ-Y1M04-PENCIL-CASE",
+      "semanticTarget": "pencil case",
+      "sha256": "2851f95cd17960a33fe394952be270f890e35ac9f85a576c7faf18f38af8f201",
+      "candidateStatus": "MODEL_SEMANTIC_PRECHECK_ONLY",
+      "references": [
+        {
+          "mediaId": "IMG-Q003-PENCIL-CASE",
+          "questionIds": [
+            "Y1M04-Q003"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "pencil case"
+        },
+        {
+          "mediaId": "IMG-Q017-PENCIL-CASE",
+          "questionIds": [
+            "Y1M04-Q017"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "pencil case"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q004-PENCIL-CASE",
+          "questionIds": [
+            "Y1M04-Q004"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pencil case"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q005-PENCIL-CASE",
+          "questionIds": [
+            "Y1M04-Q005"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pencil case"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q006-PENCIL-CASE",
+          "questionIds": [
+            "Y1M04-Q006"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pencil case"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q009-PENCIL-CASE",
+          "questionIds": [
+            "Y1M04-Q009"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pencil case"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q020-PENCIL-CASE",
+          "questionIds": [
+            "Y1M04-Q020"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "pencil case"
+        }
+      ]
+    },
+    {
+      "assetKey": "DUDUQ-Y1M04-BACKPACK",
+      "semanticTarget": "backpack",
+      "sha256": "ff18468fa6225eed06dcae14aa7887867df7fdfd72815cc592b9d8351558f8ec",
+      "candidateStatus": "MODEL_SEMANTIC_PRECHECK_ONLY",
+      "references": [
+        {
+          "mediaId": "IMG-Q007-BACKPACK",
+          "questionIds": [
+            "Y1M04-Q007"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "backpack"
+        },
+        {
+          "mediaId": "IMG-Q014-BACKPACK",
+          "questionIds": [
+            "Y1M04-Q014"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "backpack"
+        },
+        {
+          "mediaId": "IMG-Q020-BACKPACK",
+          "questionIds": [
+            "Y1M04-Q020"
+          ],
+          "usages": 1,
+          "scopedId": false,
+          "semanticTarget": "backpack"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q005-BACKPACK",
+          "questionIds": [
+            "Y1M04-Q005"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "backpack"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q010-BACKPACK",
+          "questionIds": [
+            "Y1M04-Q010"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "backpack"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q011-BACKPACK",
+          "questionIds": [
+            "Y1M04-Q011"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "backpack"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q013-BACKPACK",
+          "questionIds": [
+            "Y1M04-Q013"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "backpack"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q015-BACKPACK",
+          "questionIds": [
+            "Y1M04-Q015"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "backpack"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q017-BACKPACK",
+          "questionIds": [
+            "Y1M04-Q017"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "backpack"
+        },
+        {
+          "mediaId": "IMG-Y1M04-Q020-BACKPACK",
+          "questionIds": [
+            "Y1M04-Q020"
+          ],
+          "usages": 1,
+          "scopedId": true,
+          "semanticTarget": "backpack"
+        }
+      ]
+    }
+  ],
+  "totalEligibleIds": 62,
+  "totalQuestionUsages": 63,
+  "rejectedByReason": {
+    "MISSING_OR_MISMATCHED_SEMANTIC": 1
+  }
+}

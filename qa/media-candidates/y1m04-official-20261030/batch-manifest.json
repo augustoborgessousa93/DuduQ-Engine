@@ -1,0 +1,1021 @@
+{
+  "schemaVersion": "DUDUQ_CHATGPT_MEDIA_BINDINGS_V1",
+  "createdAt": "2026-10-30",
+  "moduleId": "Y1M04",
+  "source": "Native ChatGPT image generation (not Cloudflare)",
+  "provider": "Codex built-in image_gen",
+  "status": "HASH_BOUND_REVIEWED_BUNDLE_READY_FOR_QA_OVERLAY",
+  "originalAuditedPendingIds": 83,
+  "occurrenceScopedSplit": {
+    "questionId": "Y1M04-Q008",
+    "field": "mediaBindings[0].assetId",
+    "from": "IMG-Y1M04-Q003-PENCIL-CASE",
+    "to": "IMG-Y1M04-Q008-PENCIL-CASE",
+    "semanticTarget": "pencil-case"
+  },
+  "finalBindingIds": 84,
+  "totalQuestionUsageRecords": 85,
+  "questionContractsReviewed": 20,
+  "preservesAnswerKeysAndMechanics": true,
+  "productionApproved": false,
+  "assets": [
+    {
+      "assetKey": "Y1M04-OFFICIAL-BACKPACK",
+      "file": "images/DUDUQ-Y1M04-BACKPACK.png",
+      "semanticTarget": "backpack",
+      "sha256": "737a1973f855f725aecf07d4f39b83fe82cf9e585a6fdde63b4fc638c64cba71",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q007",
+          "mediaId": "IMG-Q007-BACKPACK",
+          "verifiedQuestionIds": [
+            "Y1M04-Q007"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q014",
+          "mediaId": "IMG-Q014-BACKPACK",
+          "verifiedQuestionIds": [
+            "Y1M04-Q014"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q020",
+          "mediaId": "IMG-Q020-BACKPACK",
+          "verifiedQuestionIds": [
+            "Y1M04-Q020"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q005",
+          "mediaId": "IMG-Y1M04-Q005-BACKPACK",
+          "verifiedQuestionIds": [
+            "Y1M04-Q005"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q010",
+          "mediaId": "IMG-Y1M04-Q010-BACKPACK",
+          "verifiedQuestionIds": [
+            "Y1M04-Q010"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q011",
+          "mediaId": "IMG-Y1M04-Q011-BACKPACK",
+          "verifiedQuestionIds": [
+            "Y1M04-Q011"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q013",
+          "mediaId": "IMG-Y1M04-Q013-BACKPACK",
+          "verifiedQuestionIds": [
+            "Y1M04-Q013"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q015",
+          "mediaId": "IMG-Y1M04-Q015-BACKPACK",
+          "verifiedQuestionIds": [
+            "Y1M04-Q015"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q017",
+          "mediaId": "IMG-Y1M04-Q017-BACKPACK",
+          "verifiedQuestionIds": [
+            "Y1M04-Q017"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q020",
+          "mediaId": "IMG-Y1M04-Q020-BACKPACK",
+          "verifiedQuestionIds": [
+            "Y1M04-Q020"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "REUSED_NATIVE_20261029",
+        "promptRecord": "VERBATIM_FROM_20261029_NATIVE_MANIFEST",
+        "prompt": "One unmistakable blue school backpack with two shoulder straps, top carry handle, zipper and front pocket; polished premium rounded 3D cartoon illustration, natural blue fabric, crisp silhouette. Square transparent canvas; whole backpack centered within central 70% height and 76% width with clear margin. Backpack alone, no contents, books, pencils, crayons, ruler, eraser, text, logos, watermark, collage, grid or opaque background.",
+        "reusedSourceManifest": "provenance/CANDIDATE_BATCH_MANIFEST-20261029.json",
+        "alphaNormalization": null
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BLACK",
+      "file": "images/DUDUQ-Y1M04-BLACK.png",
+      "semanticTarget": "black",
+      "sha256": "26f14f9c23067dd533ecf1cdb10d0626c3a2f42d82e3d7c281611104c23dc3ed",
+      "pixelWidth": 1287,
+      "pixelHeight": 1222,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q012",
+          "mediaId": "IMG-Y1M04-Q012-BLACK",
+          "verifiedQuestionIds": [
+            "Y1M04-Q012"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q014",
+          "mediaId": "IMG-Y1M04-Q014-BLACK",
+          "verifiedQuestionIds": [
+            "Y1M04-Q014"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "promptRecord": "SESSION_PROMPT_SUMMARY",
+        "prompt": "One unmistakable solid black rounded color token, isolated and fully visible with a clean silhouette; no object cue, text, logo, watermark, collage, grid, or opaque background.",
+        "reusedSourceManifest": null,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "operation": "remove detached low-alpha background pixels; preserve opaque subject and 3px antialias edge"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-BLUE",
+      "file": "images/DUDUQ-Y1M04-BLUE.png",
+      "semanticTarget": "blue",
+      "sha256": "af47ea2a8ce91f4544b3626157f7e64bb64498b981014a42383ff2798029a584",
+      "pixelWidth": 1287,
+      "pixelHeight": 1222,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q002",
+          "mediaId": "IMG-Y1M04-Q002-BLUE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q002"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q012",
+          "mediaId": "IMG-Y1M04-Q012-BLUE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q012"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "promptRecord": "SESSION_PROMPT_SUMMARY",
+        "prompt": "One unmistakable solid blue rounded color token, isolated and fully visible; no object cue, text, logo, watermark, collage, grid, or opaque background.",
+        "reusedSourceManifest": null,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "operation": "remove detached low-alpha background pixels; preserve opaque subject and 3px antialias edge"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-CRAYON",
+      "file": "images/DUDUQ-Y1M04-CRAYON.png",
+      "semanticTarget": "crayon",
+      "sha256": "e4e1c9625422913441362b7e20d61eb0709b040f91c54dea20c303b0a648a838",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q004",
+          "mediaId": "IMG-Q004-CRAYON",
+          "verifiedQuestionIds": [
+            "Y1M04-Q004"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q010",
+          "mediaId": "IMG-Q010-CRAYON",
+          "verifiedQuestionIds": [
+            "Y1M04-Q010"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q011",
+          "mediaId": "IMG-Q011-CRAYON",
+          "verifiedQuestionIds": [
+            "Y1M04-Q011"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q003",
+          "mediaId": "IMG-Y1M04-Q003-CRAYON",
+          "verifiedQuestionIds": [
+            "Y1M04-Q003"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q004",
+          "mediaId": "IMG-Y1M04-Q004-CRAYON",
+          "verifiedQuestionIds": [
+            "Y1M04-Q004"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q005",
+          "mediaId": "IMG-Y1M04-Q005-CRAYON",
+          "verifiedQuestionIds": [
+            "Y1M04-Q005"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q006",
+          "mediaId": "IMG-Y1M04-Q006-CRAYON",
+          "verifiedQuestionIds": [
+            "Y1M04-Q006"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q009",
+          "mediaId": "IMG-Y1M04-Q009-CRAYON",
+          "verifiedQuestionIds": [
+            "Y1M04-Q009"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q010",
+          "mediaId": "IMG-Y1M04-Q010-CRAYON",
+          "verifiedQuestionIds": [
+            "Y1M04-Q010"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q011",
+          "mediaId": "IMG-Y1M04-Q011-CRAYON",
+          "verifiedQuestionIds": [
+            "Y1M04-Q011"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "REUSED_NATIVE_20261029",
+        "promptRecord": "VERBATIM_FROM_20261029_NATIVE_MANIFEST",
+        "prompt": "One thick red wax crayon with blunt rounded tip, unmistakably a wax crayon rather than a pen or pencil. Premium polished 3D cartoon for children ages 6–11. Square transparent PNG, centered and fully visible. No text or labels, watermark, collage, grid or opaque background.",
+        "reusedSourceManifest": "provenance/CANDIDATE_BATCH_MANIFEST-20261029.json",
+        "alphaNormalization": null
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-ERASER",
+      "file": "images/DUDUQ-Y1M04-ERASER.png",
+      "semanticTarget": "eraser",
+      "sha256": "14ccad6be0b97389d4cc4ffbba79aad00a77cc5365e8484a8d074dbd33155757",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q001",
+          "mediaId": "IMG-Q001-ERASER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q001"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q003",
+          "mediaId": "IMG-Y1M04-Q003-ERASER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q003"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q005",
+          "mediaId": "IMG-Y1M04-Q005-ERASER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q005"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q006",
+          "mediaId": "IMG-Y1M04-Q006-ERASER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q006"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q013",
+          "mediaId": "IMG-Y1M04-Q013-ERASER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q013"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q015",
+          "mediaId": "IMG-Y1M04-Q015-ERASER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q015"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q017",
+          "mediaId": "IMG-Y1M04-Q017-ERASER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q017"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q020",
+          "mediaId": "IMG-Y1M04-Q020-ERASER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q020"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "REUSED_NATIVE_20261029",
+        "promptRecord": "VERBATIM_FROM_20261029_NATIVE_MANIFEST",
+        "prompt": "One unmistakable pink-and-white rectangular school eraser, slightly angled, premium rounded 3D cartoon educational illustration for children ages 6–11. Square transparent PNG, centered and fully visible. Eraser alone; no pencil, writing, text, watermark, collage, grid or opaque background.",
+        "reusedSourceManifest": "provenance/CANDIDATE_BATCH_MANIFEST-20261029.json",
+        "alphaNormalization": null
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-FOUR",
+      "file": "images/DUDUQ-Y1M04-FOUR.png",
+      "semanticTarget": "four",
+      "sha256": "3b71abf1319ff9a01876356cf589148fdfc6fe622b82ee116a56d9397c4a4d62",
+      "pixelWidth": 1774,
+      "pixelHeight": 1024,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q016",
+          "mediaId": "IMG-Y1M04-Q016-FOUR",
+          "verifiedQuestionIds": [
+            "Y1M04-Q016"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "promptRecord": "SESSION_PROMPT_SUMMARY",
+        "prompt": "Exactly four identical yellow wooden school pencils, separated and fully visible; no extra objects, numerals, text, watermark, collage, grid, or opaque background.",
+        "reusedSourceManifest": null,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "operation": "remove detached low-alpha background pixels; preserve opaque subject and 3px antialias edge"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-GREEN",
+      "file": "images/DUDUQ-Y1M04-GREEN.png",
+      "semanticTarget": "green",
+      "sha256": "696c76402fd7ac4eb94c71b7e2b20b2528fb784a1d42167f9d31cb7d60ccb9a3",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q012",
+          "mediaId": "IMG-Q012-GREEN",
+          "verifiedQuestionIds": [
+            "Y1M04-Q012"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q002",
+          "mediaId": "IMG-Y1M04-Q002-GREEN",
+          "verifiedQuestionIds": [
+            "Y1M04-Q002"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q012",
+          "mediaId": "IMG-Y1M04-Q012-GREEN",
+          "verifiedQuestionIds": [
+            "Y1M04-Q012"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q014",
+          "mediaId": "IMG-Y1M04-Q014-GREEN",
+          "verifiedQuestionIds": [
+            "Y1M04-Q014"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "promptRecord": "SESSION_PROMPT_SUMMARY",
+        "prompt": "One unmistakable solid green rounded color token, isolated and fully visible; no object cue, text, logo, watermark, collage, grid, or opaque background.",
+        "reusedSourceManifest": null,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "operation": "remove detached low-alpha background pixels; preserve opaque subject and 3px antialias edge"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-ONE",
+      "file": "images/DUDUQ-Y1M04-ONE.png",
+      "semanticTarget": "one",
+      "sha256": "fb16f57c29fcbbfcd4f4882e115fbf8f86f3ca9b022a4fb02b0c7bee5b645873",
+      "pixelWidth": 1536,
+      "pixelHeight": 1024,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q016",
+          "mediaId": "IMG-Y1M04-Q016-ONE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q016"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "promptRecord": "SESSION_PROMPT_SUMMARY",
+        "prompt": "Exactly one yellow wooden school pencil, fully visible and isolated; no extra objects, numerals, text, watermark, collage, grid, or opaque background.",
+        "reusedSourceManifest": null,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "operation": "remove detached low-alpha background pixels; preserve opaque subject and 3px antialias edge"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PEN",
+      "file": "images/DUDUQ-Y1M04-PEN.png",
+      "semanticTarget": "pen",
+      "sha256": "c3b4d8eb85608abf057f132b46898e6761f88fe3c9d623d7dc812410abd87652",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q006",
+          "mediaId": "IMG-Q006-PEN",
+          "verifiedQuestionIds": [
+            "Y1M04-Q006"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q013",
+          "mediaId": "IMG-Q013-PEN",
+          "verifiedQuestionIds": [
+            "Y1M04-Q013"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q005",
+          "mediaId": "IMG-Y1M04-Q005-PEN",
+          "verifiedQuestionIds": [
+            "Y1M04-Q005",
+            "Y1M04-Q018"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q009",
+          "mediaId": "IMG-Y1M04-Q009-PEN",
+          "verifiedQuestionIds": [
+            "Y1M04-Q009"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q010",
+          "mediaId": "IMG-Y1M04-Q010-PEN",
+          "verifiedQuestionIds": [
+            "Y1M04-Q010"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q011",
+          "mediaId": "IMG-Y1M04-Q011-PEN",
+          "verifiedQuestionIds": [
+            "Y1M04-Q011"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q013",
+          "mediaId": "IMG-Y1M04-Q013-PEN",
+          "verifiedQuestionIds": [
+            "Y1M04-Q013"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q015",
+          "mediaId": "IMG-Y1M04-Q015-PEN",
+          "verifiedQuestionIds": [
+            "Y1M04-Q015"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q017",
+          "mediaId": "IMG-Y1M04-Q017-PEN",
+          "verifiedQuestionIds": [
+            "Y1M04-Q017"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "REUSED_NATIVE_20261029",
+        "promptRecord": "VERBATIM_FROM_20261029_NATIVE_MANIFEST",
+        "prompt": "One blue capped ballpoint ink pen with visible plastic body and fine ballpoint tip; clearly not a wooden pencil or wax crayon. Premium polished 3D cartoon for children ages 6–11. Square transparent PNG, centered and fully visible. No text, labels, watermark, collage, grid or opaque background.",
+        "reusedSourceManifest": "provenance/CANDIDATE_BATCH_MANIFEST-20261029.json",
+        "alphaNormalization": null
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL-CASE",
+      "file": "images/DUDUQ-Y1M04-PENCIL-CASE.png",
+      "semanticTarget": "pencil case",
+      "sha256": "4fb868c4a50b596dc2b9441de83452c9e93048a63657e49dc0cc3522f2994d26",
+      "pixelWidth": 1536,
+      "pixelHeight": 1024,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q003",
+          "mediaId": "IMG-Q003-PENCIL-CASE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q003"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q017",
+          "mediaId": "IMG-Q017-PENCIL-CASE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q017"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q003",
+          "mediaId": "IMG-Y1M04-Q003-PENCIL-CASE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q003"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q004",
+          "mediaId": "IMG-Y1M04-Q004-PENCIL-CASE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q004"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q005",
+          "mediaId": "IMG-Y1M04-Q005-PENCIL-CASE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q005"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q006",
+          "mediaId": "IMG-Y1M04-Q006-PENCIL-CASE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q006"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q009",
+          "mediaId": "IMG-Y1M04-Q009-PENCIL-CASE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q009"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q020",
+          "mediaId": "IMG-Y1M04-Q020-PENCIL-CASE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q020"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "promptRecord": "SESSION_PROMPT_SUMMARY",
+        "prompt": "One plain closed blue zippered school pencil case, fully visible and isolated; no contents, decorative symbols, text, logo, watermark, collage, grid, or opaque background.",
+        "reusedSourceManifest": null,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "operation": "remove detached low-alpha background pixels; preserve opaque subject and 3px antialias edge"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL",
+      "file": "images/DUDUQ-Y1M04-PENCIL.png",
+      "semanticTarget": "pencil",
+      "sha256": "c50de9fd94c416d5a5ee9b4fee5682e48e0dc1e8c5eab8e260e3443b12cbd439",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q005",
+          "mediaId": "IMG-Q005-PENCIL",
+          "verifiedQuestionIds": [
+            "Y1M04-Q005"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q009",
+          "mediaId": "IMG-Q009-PENCIL",
+          "verifiedQuestionIds": [
+            "Y1M04-Q009"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q016",
+          "mediaId": "IMG-Q016-PENCIL",
+          "verifiedQuestionIds": [
+            "Y1M04-Q016"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q003",
+          "mediaId": "IMG-Y1M04-Q003-PENCIL",
+          "verifiedQuestionIds": [
+            "Y1M04-Q003"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q004",
+          "mediaId": "IMG-Y1M04-Q004-PENCIL",
+          "verifiedQuestionIds": [
+            "Y1M04-Q004"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q005",
+          "mediaId": "IMG-Y1M04-Q005-PENCIL",
+          "verifiedQuestionIds": [
+            "Y1M04-Q005"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q006",
+          "mediaId": "IMG-Y1M04-Q006-PENCIL",
+          "verifiedQuestionIds": [
+            "Y1M04-Q006"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q017",
+          "mediaId": "IMG-Y1M04-Q017-PENCIL",
+          "verifiedQuestionIds": [
+            "Y1M04-Q017"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q020",
+          "mediaId": "IMG-Y1M04-Q020-PENCIL",
+          "verifiedQuestionIds": [
+            "Y1M04-Q020"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "REUSED_NATIVE_20261029",
+        "promptRecord": "VERBATIM_FROM_20261029_NATIVE_MANIFEST",
+        "prompt": "One sharpened yellow wooden graphite pencil with pink eraser on the opposite end and visible graphite tip; unmistakably a pencil, not a pen or crayon. Premium polished 3D cartoon for children ages 6–11. Square transparent PNG, whole pencil diagonally centered and visible. No text, watermark, collage, grid or opaque background.",
+        "reusedSourceManifest": "provenance/CANDIDATE_BATCH_MANIFEST-20261029.json",
+        "alphaNormalization": null
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RED",
+      "file": "images/DUDUQ-Y1M04-RED.png",
+      "semanticTarget": "red",
+      "sha256": "484622d91bc0cba9e422a3fcfe990e5ea3c97297b0a97f3e084cb5a92022c3eb",
+      "pixelWidth": 1265,
+      "pixelHeight": 1243,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q002",
+          "mediaId": "IMG-Q002-RED",
+          "verifiedQuestionIds": [
+            "Y1M04-Q002"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q002",
+          "mediaId": "IMG-Y1M04-Q002-RED",
+          "verifiedQuestionIds": [
+            "Y1M04-Q002"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q012",
+          "mediaId": "IMG-Y1M04-Q012-RED",
+          "verifiedQuestionIds": [
+            "Y1M04-Q012"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q014",
+          "mediaId": "IMG-Y1M04-Q014-RED",
+          "verifiedQuestionIds": [
+            "Y1M04-Q014"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "promptRecord": "SESSION_PROMPT_SUMMARY",
+        "prompt": "One unmistakable solid red rounded color token, isolated and fully visible; no object cue, text, logo, watermark, collage, grid, or opaque background.",
+        "reusedSourceManifest": null,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "operation": "remove detached low-alpha background pixels; preserve opaque subject and 3px antialias edge"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-RULER",
+      "file": "images/DUDUQ-Y1M04-RULER.png",
+      "semanticTarget": "ruler",
+      "sha256": "3d64411179006343166b53fea1f3e81810e13436761c2f9521238d71c51f9d3e",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q015",
+          "mediaId": "IMG-Q015-RULER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q015"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q019",
+          "mediaId": "IMG-Q019-RULER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q019"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q004",
+          "mediaId": "IMG-Y1M04-Q004-RULER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q004"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q005",
+          "mediaId": "IMG-Y1M04-Q005-RULER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q005"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q009",
+          "mediaId": "IMG-Y1M04-Q009-RULER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q009"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q010",
+          "mediaId": "IMG-Y1M04-Q010-RULER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q010"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q011",
+          "mediaId": "IMG-Y1M04-Q011-RULER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q011"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q013",
+          "mediaId": "IMG-Y1M04-Q013-RULER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q013"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q015",
+          "mediaId": "IMG-Y1M04-Q015-RULER",
+          "verifiedQuestionIds": [
+            "Y1M04-Q015"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "REUSED_NATIVE_20261029",
+        "promptRecord": "VERBATIM_FROM_20261029_NATIVE_MANIFEST",
+        "prompt": "One straight yellow plastic school ruler with clear measuring tick marks, no words or large printed numerals, entire ruler visible. Premium polished 3D cartoon for children ages 6–11. Square transparent PNG, ruler diagonal and centered. No other objects, text, watermark, collage, grid or opaque background.",
+        "reusedSourceManifest": "provenance/CANDIDATE_BATCH_MANIFEST-20261029.json",
+        "alphaNormalization": null
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-THREE",
+      "file": "images/DUDUQ-Y1M04-THREE.png",
+      "semanticTarget": "three",
+      "sha256": "fd258a4dce186e7a4f72a002c369ec96fc9d0e296dce8bc249ba3bc728779bc3",
+      "pixelWidth": 1536,
+      "pixelHeight": 1024,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q016",
+          "mediaId": "IMG-Y1M04-Q016-THREE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q016"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "promptRecord": "SESSION_PROMPT_SUMMARY",
+        "prompt": "Exactly three identical yellow wooden school pencils, separated and fully visible; no extra objects, numerals, text, watermark, collage, grid, or opaque background.",
+        "reusedSourceManifest": null,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "operation": "remove detached low-alpha background pixels; preserve opaque subject and 3px antialias edge"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-TWO",
+      "file": "images/DUDUQ-Y1M04-TWO.png",
+      "semanticTarget": "two",
+      "sha256": "06f495130a68559d6e3ae3fdfa314a225527880c29d9e47e41e55193b4459708",
+      "pixelWidth": 1536,
+      "pixelHeight": 1024,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q016",
+          "mediaId": "IMG-Y1M04-Q016-TWO",
+          "verifiedQuestionIds": [
+            "Y1M04-Q016"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "promptRecord": "SESSION_PROMPT_SUMMARY",
+        "prompt": "Exactly two identical yellow wooden school pencils, separated and fully visible; no extra objects, numerals, text, watermark, collage, grid, or opaque background.",
+        "reusedSourceManifest": null,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "operation": "remove detached low-alpha background pixels; preserve opaque subject and 3px antialias edge"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-WHITE",
+      "file": "images/DUDUQ-Y1M04-WHITE.png",
+      "semanticTarget": "white",
+      "sha256": "d5f415a9a15f3a20236b6fb8b1e5f2feb9069873c86074159a2f8a2e2731e6ca",
+      "pixelWidth": 1283,
+      "pixelHeight": 1226,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q012",
+          "mediaId": "IMG-Y1M04-Q012-WHITE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q012"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q014",
+          "mediaId": "IMG-Y1M04-Q014-WHITE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q014"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "promptRecord": "SESSION_PROMPT_SUMMARY",
+        "prompt": "One unmistakable solid white rounded color token with a subtle neutral outline for visibility, isolated and fully visible; no object cue, text, logo, watermark, collage, grid, or opaque background.",
+        "reusedSourceManifest": null,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "operation": "remove detached low-alpha background pixels; preserve opaque subject and 3px antialias edge"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-YELLOW",
+      "file": "images/DUDUQ-Y1M04-YELLOW.png",
+      "semanticTarget": "yellow",
+      "sha256": "5951ca4746171d3ec5c8a96588a3b288eb6ea075f9ea5977fb5bc91c45e31803",
+      "pixelWidth": 1330,
+      "pixelHeight": 1183,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q002",
+          "mediaId": "IMG-Y1M04-Q002-YELLOW",
+          "verifiedQuestionIds": [
+            "Y1M04-Q002"
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q012",
+          "mediaId": "IMG-Y1M04-Q012-YELLOW",
+          "verifiedQuestionIds": [
+            "Y1M04-Q012"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "promptRecord": "SESSION_PROMPT_SUMMARY",
+        "prompt": "One unmistakable solid yellow rounded color token, isolated and fully visible; no object cue, text, logo, watermark, collage, grid, or opaque background.",
+        "reusedSourceManifest": null,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "operation": "remove detached low-alpha background pixels; preserve opaque subject and 3px antialias edge"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M04-OFFICIAL-PENCIL-CASE-Q008",
+      "file": "images/DUDUQ-Y1M04-PENCIL-CASE.png",
+      "semanticTarget": "pencil-case",
+      "sha256": "4fb868c4a50b596dc2b9441de83452c9e93048a63657e49dc0cc3522f2994d26",
+      "pixelWidth": 1536,
+      "pixelHeight": 1024,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m04-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q008",
+          "mediaId": "IMG-Y1M04-Q008-PENCIL-CASE",
+          "verifiedQuestionIds": [
+            "Y1M04-Q008"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "promptRecord": "SESSION_PROMPT_SUMMARY",
+        "prompt": "One plain closed blue zippered school pencil case, fully visible and isolated; no contents, decorative symbols, text, logo, watermark, collage, grid, or opaque background.",
+        "reusedSourceManifest": null,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "operation": "remove detached low-alpha background pixels; preserve opaque subject and 3px antialias edge"
+        },
+        "semanticAliasReason": "Authored Q008 semanticTarget is hyphenated; scoped media ID split prevents cross-question ambiguity."
+      }
+    }
+  ]
+}

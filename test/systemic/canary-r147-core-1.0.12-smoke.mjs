@@ -1,4 +1,10 @@
 import { chromium } from "playwright";
+import { readFileSync } from "node:fs";
+
+// Opt-in CSS is served from an ephemeral browser route before first paint.
+// The default systemic release test retains all original requirements.
+const QA_HEADER_FIT_CSS = process.env.DUDUQ_QA_HEADER_FIT_CSS
+  ? readFileSync(process.env.DUDUQ_QA_HEADER_FIT_CSS, "utf8") : null;
 
 const BASE = process.env.BASE_URL || "http://127.0.0.1:4173";
 const VIEWPORTS = [
@@ -29,6 +35,15 @@ async function openModule(browser, viewport, moduleNumber) {
   if (viewport.mobile) await page.emulateMedia({ reducedMotion: "reduce" });
   const modulePath = `/content/english/year-1/module-${String(moduleNumber).padStart(2, "0")}/`;
   const diag = diagnostics(page, modulePath);
+  let candidateCssLoads = 0;
+  if (QA_HEADER_FIT_CSS) {
+    await page.route("**/engine/releases/core/1.0.12/duduq-world-fusion.css*", async (route) => {
+      const response = await route.fetch();
+      assert(response.status() === 200, "Candidate stylesheet source is not HTTP 200.");
+      await route.fulfill({ response, contentType: "text/css", body: (await response.text()) + "\n" + QA_HEADER_FIT_CSS });
+      candidateCssLoads++;
+    });
+  }
   const response = await page.goto(`${BASE}${modulePath}?qa=canary-r147-core-1.0.12-${viewport.name}`, { waitUntil: "domcontentloaded", timeout: 35_000 });
   assert(response?.ok(), `M${moduleNumber}/${viewport.name}: HTTP ${response?.status()}.`);
   await page.waitForFunction(() => window.DUDUQ_ENGINE_READY === true, null, { timeout: 35_000 });
@@ -45,7 +60,7 @@ async function openModule(browser, viewport, moduleNumber) {
   assert(boot.dd === "2.0.24" && boot.ts === "1.0.21", `M${moduleNumber}/${viewport.name}: mechanics mudaram.`);
   assert(boot.scripts.some((src) => src.includes("/engine/duduq-loader-v1.js")), `M${moduleNumber}/${viewport.name}: Loader ausente.`);
   assert(boot.playerApi && boot.transitionApi, `M${moduleNumber}/${viewport.name}: Player/Transition API ausente.`);
-  return { page, ...diag };
+  return { page, candidateCssApplied: () => candidateCssLoads, ...diag };
 }
 
 async function waitStep(page, expected, timeout = 20_000) {
@@ -74,6 +89,30 @@ async function surface(page, kind) {
       const h = Math.max(0, Math.min(view.innerHeight, r.bottom) - Math.max(0, r.top));
       return (w * h) / Math.max(1, r.width * r.height);
     };
+    // Record *why* the width guard fails; never hide/clamp the overflow.
+    // Only element geometry and selectors are collected (no student content).
+    const overflowCandidates = (sourceDoc, viewportWidth) => {
+      if (!sourceDoc?.body || !sourceDoc.defaultView) return [];
+      const sourceView = sourceDoc.defaultView;
+      return [...sourceDoc.body.querySelectorAll("*")].flatMap((el) => {
+        const rect = el.getBoundingClientRect();
+        const outside = Math.max(0, rect.right - viewportWidth, -rect.left);
+        if (outside <= 6 || rect.width <= 1 || rect.height <= 1) return [];
+        const css = sourceView.getComputedStyle(el);
+        if (css.display === "none" || css.visibility === "hidden") return [];
+        return [{
+          element: el.tagName.toLowerCase() + (el.id ? "#" + el.id : "") +
+            (el.getAttribute("class") ? "." + el.getAttribute("class").trim().split(/\s+/).slice(0, 3).join(".") : ""),
+          outsidePx: Math.round(outside * 10) / 10,
+          left: Math.round(rect.left),
+          right: Math.round(rect.right),
+          width: Math.round(rect.width),
+          cssWidth: css.width,
+          cssOverflowX: css.overflowX,
+          cssPosition: css.position
+        }];
+      }).sort((a, b) => b.outsidePx - a.outsidePx).slice(0, 12);
+    };
     const targets = mechanic === "ts" ? [...(doc?.querySelectorAll(".duduq-ts-target") || [])] : [...(doc?.querySelectorAll(".duduq-dd2-target[data-dd2-target-id]") || [])];
     const items = mechanic === "dd" ? [...(doc?.querySelectorAll(".duduq-dd2-bank-items .duduq-dd2-item") || [])] : [];
     return {
@@ -81,6 +120,12 @@ async function surface(page, kind) {
       iframeHeight: iframe?.getBoundingClientRect().height || 0,
       parentOverflowX: Math.max(0, document.documentElement.scrollWidth - innerWidth),
       runtimeOverflowX: Math.max(0, (doc?.body?.scrollWidth || 0) - (doc?.documentElement?.clientWidth || 0)),
+      parentScrollWidth: document.documentElement.scrollWidth,
+      parentViewportWidth: innerWidth,
+      runtimeScrollWidth: doc?.body?.scrollWidth || 0,
+      runtimeViewportWidth: doc?.documentElement?.clientWidth || 0,
+      parentOverflowCandidates: overflowCandidates(document, innerWidth),
+      runtimeOverflowCandidates: overflowCandidates(doc, doc?.documentElement?.clientWidth || 0),
       instructionRatio: visibleRatio(doc?.querySelector(mechanic === "ts" ? ".duduq-ts-instruction" : ".duduq-dd2-instruction,.duduq-dd-instruction")),
       targets: targets.map((el) => { const r = el.getBoundingClientRect(); return { width:r.width, height:r.height, ratio:visibleRatio(el), disabled:Boolean(el.disabled) }; }),
       items: items.map((el) => { const r = el.getBoundingClientRect(); return { width:r.width, height:r.height, ratio:visibleRatio(el), disabled:Boolean(el.disabled) }; })
@@ -92,6 +137,20 @@ function assertCompact(layout, viewport, label) {
   assert(layout.wrapperHeight > 150 && layout.iframeHeight > 150, `${label}: superfície ainda colapsada.`);
   assert(Math.abs(layout.wrapperHeight - viewport.height) <= 2, `${label}: wrapper ${layout.wrapperHeight} != viewport ${viewport.height}.`);
   assert(Math.abs(layout.iframeHeight - viewport.height) <= 2, `${label}: iframe ${layout.iframeHeight} != viewport ${viewport.height}.`);
+  if (layout.parentOverflowX > 6 || layout.runtimeOverflowX > 6) {
+    console.error("DUDUQ_HORIZONTAL_OVERFLOW_DIAGNOSTIC " + JSON.stringify({
+      label,
+      viewport,
+      parentOverflowX: layout.parentOverflowX,
+      parentScrollWidth: layout.parentScrollWidth,
+      parentViewportWidth: layout.parentViewportWidth,
+      runtimeOverflowX: layout.runtimeOverflowX,
+      runtimeScrollWidth: layout.runtimeScrollWidth,
+      runtimeViewportWidth: layout.runtimeViewportWidth,
+      parentOverflowCandidates: layout.parentOverflowCandidates,
+      runtimeOverflowCandidates: layout.runtimeOverflowCandidates
+    }, null, 2));
+  }
   assert(layout.parentOverflowX <= 6 && layout.runtimeOverflowX <= 6, `${label}: overflow horizontal.`);
   assert(layout.instructionRatio > 0.85, `${label}: instrução criticamente cortada.`);
 }
@@ -105,12 +164,13 @@ async function waitInstructionAudioIdle(page) {
 }
 
 async function m01(browser, viewport) {
-  const { page, pageErrors, critical404 } = await openModule(browser, viewport, 1);
+  const { page, pageErrors, critical404, candidateCssApplied } = await openModule(browser, viewport, 1);
   try {
     await page.locator(".duduq-intro-start-button").click();
     await waitStep(page, 0, 35_000);
     await page.waitForFunction(() => document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument?.querySelectorAll(".duduq-ts-target").length === 3, null, { timeout: 15_000 });
     await waitInstructionAudioIdle(page);
+    if (QA_HEADER_FIT_CSS) assert(candidateCssApplied() > 0, "Y1M01 candidate CSS was not loaded by Chromium.");
     const layout = await surface(page, "ts");
     assertCompact(layout, viewport, `M01 TS/${viewport.name}`);
     assert(layout.targets.length === 3 && layout.targets.every((t) => t.width >= 44 && t.height >= 44 && t.ratio > 0.85), `M01 TS/${viewport.name}: targets inválidos.`);
@@ -164,11 +224,12 @@ async function clickDD(page, id) {
 }
 
 async function m03(browser, viewport) {
-  const { page, pageErrors, critical404 } = await openModule(browser, viewport, 3);
+  const { page, pageErrors, critical404, candidateCssApplied } = await openModule(browser, viewport, 3);
   try {
     await page.locator(".duduq-intro-start-button").click();
     await waitStep(page, 0, 35_000);
     await waitDDReady(page);
+    if (QA_HEADER_FIT_CSS) assert(candidateCssApplied() > 0, "Y1M03 candidate CSS was not loaded by Chromium.");
     const layout = await surface(page, "dd");
     assertCompact(layout, viewport, `M03 DD/${viewport.name}`);
     assert(layout.targets.length === 1 && layout.targets[0].ratio > 0.85, `M03 DD/${viewport.name}: destino inválido.`);

@@ -457,29 +457,49 @@ async function generateRequests({ requestPath = DEFAULT_REQUESTS, requestId = nu
   const needs = (document.needs || []).filter((need) => need.generationRequest &&
     (!requestId || need.generationRequest.requestId === requestId || need.generationRequest.mediaId === requestId) &&
     (testOnly ? need.generationRequest.testOnly === true : need.status === "NEEDS_CHATGPT_IMAGE_GENERATION" && need.generationRequest.testOnly !== true));
+  // No additional image API expense is authorized: API keys alone must never trigger billing.
+  // A future, separately approved budget may enable paid calls explicitly.
+  if (!needs.length) return { status: "NO_PENDING_REQUESTS", providerMode: "none", activeProvider: "none", generated: 0, paidApiCalls: 0, budgetUsd: 0 };
+  const maxPerRunRaw = process.env.DUDUQ_IMAGE_MAX_PER_RUN ?? "10";
+  const maxPerRun = Number(maxPerRunRaw);
+  if (!Number.isInteger(maxPerRun) || maxPerRun < 1 || maxPerRun > 10) {
+    throw new Error("DUDUQ_IMAGE_MAX_PER_RUN_MUST_BE_BETWEEN_1_AND_10");
+  }
+  const deferred = Math.max(0, needs.length - maxPerRun);
+  const selectedNeeds = needs.slice(0, maxPerRun);
+  if (!providerAdapters && process.env.DUDUQ_ENABLE_BILLABLE_IMAGE_API !== "I_ACCEPT_API_CHARGES") {
+    return { status: "ZERO_COST_POLICY_API_BLOCKED", paidApiCalls: 0, budgetUsd: 0, generationRequestLimit: maxPerRun,
+      pending: needs.length, selected: selectedNeeds.length, deferred, generated: 0 };
+  }
+  let providerCalls = 0;
+  const guardedAdapter = async (adapter, request, options) => {
+    if (providerCalls >= maxPerRun) throw Object.assign(new Error("DUDUQ_IMAGE_MAX_PER_RUN_REACHED"), { retryable: false });
+    providerCalls += 1; // Count attempted calls, including retry/failure. Never call a provider 11th time.
+    return adapter(request, options);
+  };
   const mode = providerModeOverride || providerMode();
   const health = await readProviderHealth(providerHealthPath);
   const candidates = providerOrder({ mode, health });
-  if (!needs.length) return { status: "NO_PENDING_REQUESTS", providerMode: mode, activeProvider: "none", generated: 0 };
   if (!candidates.length) {
     const anyConfigured = Boolean(process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY);
     return { status: anyConfigured ? "PROVIDERS_UNAVAILABLE" : "NOT_CONFIGURED", providerMode: mode, activeProvider: "none", requiredEnv: mode === "openai" ? "OPENAI_API_KEY" : mode === "gemini" ? "GEMINI_API_KEY" : "GEMINI_API_KEY_OR_OPENAI_API_KEY", generated: 0 };
   }
   const completed = [], failures = [];
   let activeProvider = "none", lastModel = "unknown";
-  for (const need of needs) {
+  for (const need of selectedNeeds) {
+    if (providerCalls >= maxPerRun) break;
     const request = need.generationRequest;
     let result = null, qc = null, providerFailure = null;
     for (const provider of candidates) {
       const adapter = providerAdapters?.[provider] || (provider === "gemini" ? requestGeminiImage : requestOpenAIImage);
       try {
         if (request.testOnly) {
-          result = await generateSmokeCandidate(request, provider, adapter);
+          result = await generateSmokeCandidate(request, provider, (req, opts) => guardedAdapter(adapter, req, opts));
           qc = result.technicalQc;
         } else {
           result = await generateWithRetry(request, {
             generate: async (generationRequest, promptOverride) => {
-              const raw = await adapter(generationRequest, { promptOverride });
+              const raw = await guardedAdapter(adapter, generationRequest, { promptOverride });
               const standard = normalizeProviderResult(raw);
               return {
                 status: "GENERATED", bytes: standard.imageBytes, imageBytes: standard.imageBytes,
@@ -547,7 +567,8 @@ async function generateRequests({ requestPath = DEFAULT_REQUESTS, requestId = nu
         if (!response.ok) throw new Error(`RUNTIME_HTTP_${response.status}`);
         const served = Buffer.from(await response.arrayBuffer());
         if (sha256(served) !== imported.sha256) throw new Error("RUNTIME_ASSET_HASH_MISMATCH");
-      } else {
+      } else if (request.testOnly) {
+        // Smoke cleanup must NEVER run for --source-only production candidates.
         try { await verifySmokeAssetHttp(destination, imported.sha256, imported.path); }
         finally {
           if (await exists(destination) && sha256(await readFile(destination)) === imported.sha256) await rm(destination);
@@ -567,7 +588,8 @@ async function generateRequests({ requestPath = DEFAULT_REQUESTS, requestId = nu
       failures.push({ requestId: request.requestId, error: String(error.message || "IMPORT_ERROR").replace(/[^A-Z0-9_:-]/gi, "_").slice(0, 90), attempts: 1 });
     }
   }
-  return { status: failures.length ? "ISSUE" : "PASS", providerMode: mode, activeProvider, model: lastModel, generated: completed.length, completed, failures };
+  return { status: failures.length ? "ISSUE" : "PASS", providerMode: mode, activeProvider, model: lastModel,
+    generationRequestLimit: maxPerRun, providerCalls, deferred, generated: completed.length, completed, failures };
 }
 
 async function generateSmokeCandidate(request, provider, adapter) {

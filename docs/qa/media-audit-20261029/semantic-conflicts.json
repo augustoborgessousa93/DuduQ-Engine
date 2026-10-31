@@ -1,0 +1,198 @@
+{
+  "audit": "DUDUQ_MEDIA_SEMANTIC_CONFLICTS_20261029",
+  "count": 8,
+  "reason": "A single mediaId has multiple distinct pedagogical semanticTarget values across options. One generic replacement may corrupt the meaning of another question.",
+  "policy": "Do not reuse a generated image solely because mediaId or filename matches. Preserve all answer keys and Gold Masters.",
+  "conflicts": [
+    {
+      "mediaId": "IMG-Y1M01-GREETING-MORNING-001",
+      "usage": 14,
+      "kind": "image",
+      "semanticTargets": [
+        "morning greeting",
+        "Leo morning introduction",
+        "Good morning"
+      ],
+      "labels": [
+        "Good morning greeting",
+        "Chegada à escola pela manhã",
+        "Cena de manhã",
+        "Good morning!",
+        "Good morning, my name is Leo.",
+        "Good morning"
+      ],
+      "questions": [
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006"
+      ],
+      "decision": "HOLD_SINGLE_ASSET_REPLACEMENT_UNTIL_CONTRACTS_SPLIT_OR_VISUAL_REUSE_PROVEN_SAFE"
+    },
+    {
+      "mediaId": "IMG-Y1M01-GREETING-AFTERNOON-001",
+      "usage": 12,
+      "kind": "image",
+      "semanticTargets": [
+        "afternoon greeting",
+        "Good afternoon"
+      ],
+      "labels": [
+        "Good afternoon greeting",
+        "Cena de tarde",
+        "Good afternoon!",
+        "Good afternoon"
+      ],
+      "questions": [
+        "Y1M01-Q002",
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y1M01-Q005",
+        "Y1M01-Q006"
+      ],
+      "decision": "HOLD_SINGLE_ASSET_REPLACEMENT_UNTIL_CONTRACTS_SPLIT_OR_VISUAL_REUSE_PROVEN_SAFE"
+    },
+    {
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001",
+      "usage": 9,
+      "kind": "image",
+      "semanticTargets": [
+        "hello greeting",
+        "children greeting"
+      ],
+      "labels": [
+        "Duas crianças se cumprimentando",
+        "Hello greeting",
+        "Hello!",
+        "Cena de cumprimento"
+      ],
+      "questions": [
+        "Y1M01-Q001",
+        "Y1M01-Q005",
+        "Y1M01-Q006",
+        "Y1M01-Q007",
+        "Y1M01-Q008"
+      ],
+      "decision": "HOLD_SINGLE_ASSET_REPLACEMENT_UNTIL_CONTRACTS_SPLIT_OR_VISUAL_REUSE_PROVEN_SAFE"
+    },
+    {
+      "mediaId": "IMG-Y1M01-GREETING-INFORMAL-001",
+      "usage": 9,
+      "kind": "image",
+      "semanticTargets": [
+        "hello greeting",
+        "Hello"
+      ],
+      "labels": [
+        "Reconhecer Hi",
+        "Hi greeting",
+        "Hello!",
+        "Duas pessoas se cumprimentando",
+        "Hello"
+      ],
+      "questions": [
+        "Y1M01-Q002",
+        "Y1M01-Q005",
+        "Y1M01-Q007",
+        "Y1M01-Q015",
+        "Y1M01-Q020"
+      ],
+      "decision": "HOLD_SINGLE_ASSET_REPLACEMENT_UNTIL_CONTRACTS_SPLIT_OR_VISUAL_REUSE_PROVEN_SAFE"
+    },
+    {
+      "mediaId": "Y1M01-EMOJI-BEN-001",
+      "usage": 9,
+      "kind": "image",
+      "semanticTargets": [
+        "ben introduction",
+        "Ben"
+      ],
+      "labels": [
+        "Ben",
+        "My name is Ben."
+      ],
+      "questions": [
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014",
+        "Y1M01-Q018",
+        "Y3M01-Q003"
+      ],
+      "decision": "HOLD_SINGLE_ASSET_REPLACEMENT_UNTIL_CONTRACTS_SPLIT_OR_VISUAL_REUSE_PROVEN_SAFE"
+    },
+    {
+      "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+      "usage": 8,
+      "kind": "composite",
+      "semanticTargets": [
+        "Ana introduction",
+        "Leo introduction",
+        "ana introduction",
+        "mia introduction",
+        "leo introduction",
+        "Ana"
+      ],
+      "labels": [
+        "My name is Ana.",
+        "My name is Leo.",
+        "Mia",
+        "Ana",
+        "Leo",
+        "My name is Mia."
+      ],
+      "questions": [
+        "Y1M01-Q007",
+        "Y1M01-Q008",
+        "Y1M01-Q012",
+        "Y1M01-Q013",
+        "Y1M01-Q014"
+      ],
+      "decision": "HOLD_SINGLE_ASSET_REPLACEMENT_UNTIL_CONTRACTS_SPLIT_OR_VISUAL_REUSE_PROVEN_SAFE"
+    },
+    {
+      "mediaId": "Y1M01-EMOJI-NIGHT-001",
+      "usage": 8,
+      "kind": "image",
+      "semanticTargets": [
+        "Good night",
+        "bedtime / good night"
+      ],
+      "labels": [
+        "Cena noturna",
+        "Good night"
+      ],
+      "questions": [
+        "Y1M01-Q003",
+        "Y1M01-Q004",
+        "Y2M01-Q001",
+        "Y2M01-Q003",
+        "Y2M01-Q007"
+      ],
+      "decision": "HOLD_SINGLE_ASSET_REPLACEMENT_UNTIL_CONTRACTS_SPLIT_OR_VISUAL_REUSE_PROVEN_SAFE"
+    },
+    {
+      "mediaId": "IMG-Y1M01-BOY-GIRL-001",
+      "usage": 4,
+      "kind": "composite",
+      "semanticTargets": [
+        "boy",
+        "girl"
+      ],
+      "labels": [
+        "Boy or girl",
+        "Boy.",
+        "Girl.",
+        "Menina",
+        "Menino"
+      ],
+      "questions": [
+        "Y1M01-Q002",
+        "Y1M01-Q008",
+        "Y1M01-Q016",
+        "Y1M01-Q017"
+      ],
+      "decision": "HOLD_SINGLE_ASSET_REPLACEMENT_UNTIL_CONTRACTS_SPLIT_OR_VISUAL_REUSE_PROVEN_SAFE"
+    }
+  ]
+}

@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "DUDUQ_CODEX_IMAGE_CLOSURE_CHECKPOINT_V1",
+  "createdAt": "2026-10-30T06:35:15.8409061Z",
+  "status": "MODULE_COMPLETE_REVIEW_BRANCH_PROJECT_INCOMPLETE",
+  "moduleId": "Y1M05",
+  "branch": "automation/duduq-media-source-only-fix-20261029",
+  "headAtRunStart": "440ab3847acdc023676b70fb91bda4c16e982d32",
+  "worktree": "C:/Users/augus/Downloads/workspace/.codex-worktrees/duduq-image-closure",
+  "scope": {
+    "isolatedReviewWorktree": true,
+    "sourceQuestionFilesModified": false,
+    "goldMastersModified": false,
+    "productionDeployed": false,
+    "productionMerged": false,
+    "referencedMediaDeleted": false
+  },
+  "progress": {
+    "schedulerReferencePendingAtLaunch": 1133,
+    "freshCanonicalPendingBeforeY1M05": 1050,
+    "freshCanonicalPendingAfterY1M05": 954,
+    "freshY1M05Reduction": 96,
+    "completedModulesBefore": 1,
+    "completedModulesAfter": 2,
+    "pendingModulesAfter": 28,
+    "completedModuleIds": [
+      "Y1M04",
+      "Y1M05"
+    ],
+    "activitiesPreserved": 600,
+    "modulesPreserved": 30,
+    "projectStatus": "INCOMPLETE"
+  },
+  "freshCanonicalAudit": {
+    "inventory": "qa/results/media-closure-inventory.json",
+    "inventorySha256": "4e93a2778e5ad678ea23e408be425b2b81c2f1b536c78bcf6c4244dc8e77591c",
+    "closure": "qa/results/media-module-closure.json",
+    "closureSha256": "2e147f2dba8324479892056fe87ecad537ad244214c790652da5fe10c4760ad1",
+    "referencedMediaIds": 1139,
+    "officialPedagogicallyVerifiedReferencedIds": 185,
+    "provisionalOrBlockedReferencedIds": 936,
+    "nonTemporaryUnverifiedReferencedIds": 18,
+    "distinctPendingMediaIds": 954,
+    "y1m05": {
+      "referencedMediaIds": 101,
+      "verifiedReferencedIds": 101,
+      "provisionalOrBlockedReferencedIds": 0,
+      "unverifiedReferencedIds": 0,
+      "brokenReferencedIds": 0,
+      "complete": true
+    }
+  },
+  "mediaIntegration": {
+    "provider": "Codex built-in image_gen",
+    "legitimateNativeGenerationVerified": true,
+    "newNativeImagesGeneratedThisRun": 9,
+    "nativeCandidateReusedWithOriginalProvenance": 1,
+    "uniqueOfficialPngs": 10,
+    "finalMediaIds": 101,
+    "questionUsageRecords": 101,
+    "questionContractsReviewed": 20,
+    "batchManifest": "qa/media-candidates/y1m05-official-20261030/batch-manifest.json",
+    "batchManifestSha256": "000cbee80a4f0f15373b01d5bc3268df981ee6ca747ca1e479d3ed9d0a921460",
+    "exactPromptsAndOriginalProvenanceRecordedInBatchManifest": true,
+    "semanticEvidence": "qa/media-candidates/y1m05-official-20261030/semantic-evidence.json",
+    "semanticEvidenceSha256": "1ec03ad70982419cc28ea99e2167944d8315fd26dc02022fa7d872964f018eed",
+    "assets": [
+      {
+        "concept": "head",
+        "file": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-HEAD.png",
+        "sha256": "3cfe7135cc6e3f44a5e3a9f84475e4da902bfe5a1948605e6b822ca434764c8c",
+        "dimensions": "1536x1536",
+        "generationClass": "REUSED_NATIVE_20261029",
+        "originalSha256": "02f4b0a096e8433efdfb5f3f210ead571ec74c84cba41dc05cead6db6f318068",
+        "bindingCount": 8
+      },
+      {
+        "concept": "hands",
+        "file": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-HANDS.png",
+        "sha256": "c56ae4711b50d5ee41d46253f168e1e46ab09321123d22c085ef6db175364828",
+        "dimensions": "1792x1536",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "originalSha256": "99322110b54172bfe1b10cba62bd0cba6eff628ab20dd5a5a1c62c18bd5079d3",
+        "bindingCount": 12
+      },
+      {
+        "concept": "arms",
+        "file": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-ARMS.png",
+        "sha256": "ba4d3cfa789b050c22e752afde0868726b7cf37e806063bd25ec902b007c8acb",
+        "dimensions": "1536x1536",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "originalSha256": "a2f604b8b4a7068f48f0ce0ac362bf05c509795624c466ab9fe38237a2d3c560",
+        "bindingCount": 8
+      },
+      {
+        "concept": "legs",
+        "file": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-LEGS.png",
+        "sha256": "688b7842435f0fa02797da3d8433edb88dff09f79373e2f2f7de89365933674a",
+        "dimensions": "1536x1536",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "originalSha256": "e3c4115d78b4917321bfcfcee22c2b66bce6e7b7a71ec2304664e7d017db56a6",
+        "bindingCount": 10
+      },
+      {
+        "concept": "feet",
+        "file": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-FEET.png",
+        "sha256": "162628c4587183735ac0a6841d70c6830142278cb25599fb8f63f1a6e1c56fa0",
+        "dimensions": "1536x1536",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "originalSha256": "8ca6d7e7c6cac005aa7d1f1895bf83d9f667bae3a36f1a9a1f1ccf3e1340c16c",
+        "bindingCount": 11
+      },
+      {
+        "concept": "sit down",
+        "file": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-SIT-DOWN.png",
+        "sha256": "8c7edde7833d27e747e73dba64028c1b1a3fe35c27b01f957622416d239670ac",
+        "dimensions": "1536x1792",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "originalSha256": "5ec6fe61c58477f6b6ff4c275e9ea0d3871d32aca6adbea9fb3481b64b6cf9c8",
+        "bindingCount": 10
+      },
+      {
+        "concept": "stand up",
+        "file": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-STAND-UP.png",
+        "sha256": "ecb312a233096d2c7424f161f38bfeb69478b78cda1ea50e817d400de0b4dc67",
+        "dimensions": "1536x1536",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "originalSha256": "793f12590fbb69d0de47eb2d25ff0b4a6923da32933434fa3568fe91131df8d0",
+        "bindingCount": 12
+      },
+      {
+        "concept": "come in",
+        "file": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-COME-IN.png",
+        "sha256": "7c975b666b9416daee5a73468fb57a83a5ec50aa2222a8a35e94f20cc65faad2",
+        "dimensions": "1536x1792",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "originalSha256": "9d8617cfdae99c85b09f318bfe4dd79c9d98b9503b0feac7ccde67dacd44eeba",
+        "bindingCount": 12
+      },
+      {
+        "concept": "silence, please",
+        "file": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-SILENCE-PLEASE.png",
+        "sha256": "bf694ec13a017859f7fa6ba7080952cec3d46fcf9b4e060827889dd50ada951f",
+        "dimensions": "1536x1536",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "originalSha256": "c7a761561edc0dd0f976acdbf1c91c8f9d7f6e215e5a90b259c26c04cc70f385",
+        "bindingCount": 9
+      },
+      {
+        "concept": "thank you",
+        "file": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-THANK-YOU.png",
+        "sha256": "37028ba73596681aad007d6421bc87af96de1f619032aa31a953d2d16b6c678d",
+        "dimensions": "1536x1792",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "originalSha256": "4c9dd9d0fcdc7f400e83d791446156e9b9a73bf6b5e5f3956d08468fd09a7495",
+        "bindingCount": 9
+      }
+    ]
+  },
+  "occurrenceScopedSplits": [
+    {
+      "questionId": "Y1M05-Q001",
+      "field": "options[0].media.assetId",
+      "from": "IMG-Y1M05-Q001-HEAD",
+      "to": "IMG-Y1M05-Q001-O1-HEAD",
+      "semanticTarget": "head"
+    },
+    {
+      "questionId": "Y1M05-Q001",
+      "field": "options[1].media.assetId",
+      "from": "IMG-Y1M05-Q001-HANDS",
+      "to": "IMG-Y1M05-Q001-O2-HANDS",
+      "semanticTarget": "hands"
+    },
+    {
+      "questionId": "Y1M05-Q001",
+      "field": "options[2].media.assetId",
+      "from": "IMG-Y1M05-Q001-LEGS",
+      "to": "IMG-Y1M05-Q001-O3-LEGS",
+      "semanticTarget": "legs"
+    },
+    {
+      "questionId": "Y1M05-Q001",
+      "field": "options[3].media.assetId",
+      "from": "IMG-Y1M05-Q001-ARMS",
+      "to": "IMG-Y1M05-Q001-O4-ARMS",
+      "semanticTarget": "arms"
+    },
+    {
+      "questionId": "Y1M05-Q003",
+      "field": "pairs[3].b.media.assetId",
+      "from": "IMG-Y1M05-Q003-FEET",
+      "to": "IMG-Y1M05-Q003-B4-FEET",
+      "semanticTarget": "feet"
+    }
+  ],
+  "invariants": {
+    "questionContractChangesBeyondScopedSplits": 0,
+    "answerKeyChanges": 0,
+    "mechanicChanges": 0,
+    "sharedSourceIdsRemainProvisionalOnlyForY2M06Q015": true,
+    "allRuntimePngsHashBound": true,
+    "compiledManifestEntries": 2703,
+    "compiledManifestSha256": "780ee8d3d9a3e1a770e8cab12b80322be467fc09590df55aa305d8d326e20d74"
+  },
+  "qa": {
+    "semanticOverlayGate": "PASS_OFFICIAL_QA_FINALIZED",
+    "semanticGuardTests": {
+      "status": "PASS",
+      "tests": 12
+    },
+    "foundationArchitectureAudit": "PASS",
+    "build": {
+      "status": "PASS",
+      "path": "qa/results/y1m05-review-build.json",
+      "sha256": "9973f5c317c655586f116efc0841f6cd8eaf8e2bc0339bde973daaf9cfee3450",
+      "strategy": "REUSE_VERIFIED_V26_BASE_AND_APPLY_HASH_BOUND_MEDIA_OVERLAY",
+      "modules": 30,
+      "activities": 600
+    },
+    "browser": {
+      "status": "PASS",
+      "path": "qa/results/y1m05-official-media-browser/report.json",
+      "sha256": "883fe0751c9af6f83d52edcb5d069dfaa440e510d61b2fb06fa6dba689283f78",
+      "questionRoutesPassed": 20,
+      "runtimePngTransportHashesPassed": 10,
+      "zeroIframes": true,
+      "nativePointerInput": true,
+      "incorrectVisibleTransition": true,
+      "correctVisibleTransition": true,
+      "video": "qa/results/y1m05-official-media-browser/y1m05-q001-pointer-gameplay.webm",
+      "trace": "qa/results/y1m05-official-media-browser/y1m05-q001-pointer-trace.zip",
+      "screenshots": [
+        "qa/results/y1m05-official-media-browser/desktop-1366x768-y1m05-q001.png",
+        "qa/results/y1m05-official-media-browser/tablet-768x1024-y1m05-q003.png",
+        "qa/results/y1m05-official-media-browser/mobile-390x844-y1m05-q006.png"
+      ],
+      "delegatedVisualInspection": "PASS_NO_EMPTY_OR_CUTOFF_OFFICIAL_MEDIA"
+    },
+    "officialEvidence": {
+      "path": "qa/results/y1m05-official-media-evidence.json",
+      "sha256": "8ea9c43b38edb4beb4e38fe0d0ad0890ff643c6b261543f88dd8866655ee2a2c"
+    },
+    "finalization": {
+      "path": "qa/results/y1m05-official-media-finalization.json",
+      "sha256": "1c36c7109530c005f9e9ac0421c4b2ce4e26e0faf8538a8e00add3ca713dc5c2",
+      "status": "OFFICIAL_MEDIA_QA_FINALIZED_ON_REVIEW_BRANCH"
+    }
+  },
+  "continuation": {
+    "schedulerStateManagedByActiveRunner": true,
+    "doNotManuallyClearActiveRunnerState": true,
+    "expectedNextModuleSelectionAfterNormalExit": "Y1M01",
+    "remainingProjectWork": "28 modules; 936 provisional/blocked referenced IDs and 18 non-temporary unverified referenced IDs",
+    "projectComplete": false
+  }
+}

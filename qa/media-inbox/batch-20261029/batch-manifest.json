@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "DUDUQ_CHATGPT_MEDIA_BINDINGS_V1",
+  "created": "2026-10-29",
+  "productionSafe": false,
+  "policy": "Individual 1254x1254 RGBA PNGs only; candidate previews must pass semantic precheck, checksum and real QA. Rejected assets must never be imported or published.",
+  "assets": [
+    {
+      "assetKey": "BASE-Y1-003",
+      "file": "images/BASE-Y1-003.png",
+      "semanticTarget": "head",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "rgbaAlpha": true,
+      "sha256": "3c00647e61d7b7c8ee365454b1a349088254352988a0538e4cec348366db6401",
+      "bindings": [
+        {
+          "questionId": "Y1M05-Q001",
+          "mediaId": "IMG-Y1M05-Q001-HEAD"
+        }
+      ],
+      "review": "REJECTED_SEMANTIC_PRECHECK",
+      "reviewEvidence": "docs/qa/media-audit-20261029/live-source-and-v27-preflight.json",
+      "reviewReason": "Both hands visibly point at the head; exact contract forbids hands."
+    },
+    {
+      "assetKey": "BASE-Y1-007",
+      "file": "images/BASE-Y1-007.png",
+      "semanticTarget": "backpack",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "rgbaAlpha": true,
+      "sha256": "1b20ee60ea996463a9dccb811e284b184d51cade24b3237ad7eeccfabd20a511",
+      "bindings": [
+        {
+          "questionId": "Y1M04-Q020",
+          "mediaId": "IMG-Y1M04-Q020-BACKPACK"
+        },
+        {
+          "questionId": "Y1M04-Q010",
+          "mediaId": "IMG-Y1M04-Q010-BACKPACK"
+        },
+        {
+          "questionId": "Y1M04-Q015",
+          "mediaId": "IMG-Y1M04-Q015-BACKPACK"
+        }
+      ],
+      "review": "REJECTED_SEMANTIC_PRECHECK",
+      "reviewEvidence": "docs/qa/media-audit-20261029/live-source-and-v27-preflight.json",
+      "reviewReason": "Visible pencils, crayons, notebooks, ruler and eraser inside the backpack; violates single-object contract and leaks distractors."
+    }
+  ]
+}
