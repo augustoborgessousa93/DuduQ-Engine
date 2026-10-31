@@ -19,7 +19,9 @@ async function filesUnder(root) {
 }
 
 const files = await filesUnder('dist-pages');
-if (files.length !== 2671) throw new Error(`Expected 2671 compiled files, found ${files.length}`);
+const expectedFileCount = Number(process.env.EXPECTED_COMPILED_FILE_COUNT || 2671);
+if (!Number.isInteger(expectedFileCount) || expectedFileCount < 2) throw new Error('Invalid EXPECTED_COMPILED_FILE_COUNT');
+if (files.length !== expectedFileCount) throw new Error(`Expected ${expectedFileCount} compiled files, found ${files.length}`);
 const manifestEntries = manifestBytes.toString('utf8').trimEnd().split(/\r?\n/).map((line, index) => {
   const match = /^(.*) ([a-f0-9]{64})$/i.exec(line);
   if (!match) throw new Error(`Malformed compiled manifest line ${index + 1}`);
@@ -42,6 +44,7 @@ const report = {
   manifestSha256,
   manifestBytes: manifestBytes.length,
   compiledFileCount: files.length,
+  expectedCompiledFileCount: expectedFileCount,
   compiledByteCount: (await Promise.all(files.map(async file => (await stat(file)).size))).reduce((a, b) => a + b, 0),
   manifestEntriesVerified: manifestEntries.length,
   fileHashesVerified: manifestEntries.length,
