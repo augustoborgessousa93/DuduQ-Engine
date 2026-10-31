@@ -61,7 +61,7 @@ for(const q of report.questions)for(const opt of q.options){
 const schoolCase=report.questions.find(q=>q.questionId==='Y1M04-Q020')?.options
   .find(o=>String(o.semanticTarget||'').toLowerCase()==='pencil case');
 assert(schoolCase,'Expected Y1M04-Q020 pencil case option in canonical question');
-assert(schoolCase.candidates.some(x=>/school-object-pencil-case-estojo\\.png$/i.test(x.sourcePath)),
+assert(schoolCase.candidates.some(x=>/school-object-pencil-case-estojo\.png$/i.test(x.sourcePath)),
   'Existing school-object pencil case must be discoverable as QA candidate');
 
 console.log(JSON.stringify({status:'PASS_CROSSWALK_COMPLETE_REVIEW_PENDING',files:report.inventoryFiles,modules:modules.size,questions:report.questionCount,options,
