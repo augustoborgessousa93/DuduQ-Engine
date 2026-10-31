@@ -29,7 +29,10 @@ let browser,activeContext,traceStopped=false;
 function attachDiagnostics(page){const errors=[],failed=[];page.on('pageerror',e=>errors.push(String(e?.stack||e)));page.on('requestfailed',r=>{const failure=String(r.failure()?.errorText||'');if(!failure.includes('ERR_ABORTED'))failed.push({url:r.url(),failure});});return{errors,failed};}
 async function visibleCandidateImages(page){return page.locator('img').evaluateAll((imgs,paths)=>imgs.filter(img=>paths.includes(new URL(img.src).pathname.replace(/^\//,''))).map(img=>{
   const r=img.getBoundingClientRect(),css=getComputedStyle(img);return{path:new URL(img.src).pathname.replace(/^\//,''),alt:img.alt,complete:img.complete,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,
-    rect:{x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom},visible:img.complete&&img.naturalWidth>0&&r.width>5&&r.height>5&&r.right>0&&r.bottom>0&&r.left<innerWidth&&r.top<innerHeight&&css.display!=='none'&&css.visibility!=='hidden'&&Number(css.opacity)>0};
+    rect:{x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom},
+    viewportVisibleRatio:(Math.max(0,Math.min(innerWidth,r.right)-Math.max(0,r.left))*
+      Math.max(0,Math.min(innerHeight,r.bottom)-Math.max(0,r.top)))/Math.max(1,r.width*r.height),
+    visible:img.complete&&img.naturalWidth>0&&r.width>5&&r.height>5&&r.right>0&&r.bottom>0&&r.left<innerWidth&&r.top<innerHeight&&css.display!=='none'&&css.visibility!=='hidden'&&Number(css.opacity)>0};
 }),[...expectedHashes.keys()]);}
 async function click(page,locator,label,events){await locator.waitFor({state:'visible',timeout:10000});const box=await locator.boundingBox();if(!box)throw Error('POINTER_TARGET_NOT_VISIBLE:'+label);await page.mouse.move(box.x+box.width/2,box.y+box.height/2,{steps:3});await page.mouse.down();await page.mouse.up();events.push({label,x:box.x+box.width/2,y:box.y+box.height/2,realMouse:true});}
 try{
@@ -52,13 +55,32 @@ try{
         return paths.every(assetPath=>candidates.some(img=>new URL(img.src).pathname.replace(/^\//,'')===assetPath&&img.complete));
       },{paths},{timeout:20000});
       const images=await visibleCandidateImages(page),missing=paths.filter(p=>!images.some(i=>i.path===p&&i.visible));
+      // A loaded image intersecting the viewport by a single pixel is NOT a
+      // usable target. Verify all target hitboxes, including a fallback that
+      // is still provisional and therefore absent from "expectedPaths".
+      const targets=await page.locator('.target-shooter-target').evaluateAll(nodes=>nodes.map(el=>{
+        const r=el.getBoundingClientRect(),css=getComputedStyle(el);
+        const area=Math.max(0,Math.min(innerWidth,r.right)-Math.max(0,r.left))*
+          Math.max(0,Math.min(innerHeight,r.bottom)-Math.max(0,r.top));
+        return {width:r.width,height:r.height,x:r.x,right:r.right,top:r.top,bottom:r.bottom,
+          viewportVisibleRatio:area/Math.max(1,r.width*r.height),
+          display:css.display,visibility:css.visibility};
+      }));
+      const clippedAssets=images.filter(i=>i.visible&&i.viewportVisibleRatio<0.98);
+      const clippedTargets=targets.filter(t=>t.width>=44&&t.height>=44&&t.viewportVisibleRatio<0.98);
       const overflow=await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth));
       const screenshot=path.join(output,`${qid.toLowerCase()}-${view.name}.png`);await page.screenshot({path:screenshot,fullPage:false});
-      const check={questionId:qid,mechanicId:q.mechanicId,view,route,httpStatus:response?.status()||null,expectedPaths:paths,missing,images,overflow,
+      const check={questionId:qid,mechanicId:q.mechanicId,view,route,httpStatus:response?.status()||null,expectedPaths:paths,missing,images,
+        targets,clippedAssets,clippedTargets,overflow,
         iframeCount:await page.locator('iframe').count(),pageErrors:diag.errors,requestFailures:diag.failed,
         screenshot:path.relative(root,screenshot).replaceAll('\\','/'),screenshotSha256:sha(await readFile(screenshot))};
-      check.pass=check.httpStatus===200&&!missing.length&&images.length===paths.length&&images.every(i=>i.visible)&&overflow===0&&check.iframeCount===0&&!diag.errors.length&&!diag.failed.length;
-      report.questions.push(check);await context.close();if(!check.pass)throw Error('CANDIDATE_IMAGE_RENDER_FAILED:'+qid+':'+view.name+':'+JSON.stringify(check));
+      check.pass=check.httpStatus===200&&!missing.length&&images.length===paths.length&&
+        images.every(i=>i.visible&&i.viewportVisibleRatio>=0.98)&&
+        targets.length>=4&&targets.every(t=>t.width>=44&&t.height>=44&&t.viewportVisibleRatio>=0.98)&&
+        overflow===0&&check.iframeCount===0&&!diag.errors.length&&!diag.failed.length;
+      report.questions.push(check);await context.close();if(!check.pass)throw Error((clippedAssets.length||clippedTargets.length?
+        'CANDIDATE_TARGET_CLIPPED:':'CANDIDATE_IMAGE_RENDER_FAILED:')+
+        qid+':'+view.name+':'+JSON.stringify(check));
     }
   }
 
