@@ -26,7 +26,7 @@ const report={schemaVersion:'ASSETS_DUDUQ_REUSE_BROWSER_QA_V1',status:'RUNNING',
   candidateDistinctAssets:manifest.assets.length,candidateBindings:manifest.assets.reduce((n,a)=>n+a.bindings.length,0),
   questions:[],transport:[],gameplay:null,screenshots:[],errors:[],productionDeployed:false};
 let browser,activeContext,traceStopped=false;
-function attachDiagnostics(page){const errors=[],failed=[];page.on('pageerror',e=>errors.push(String(e?.stack||e)));page.on('requestfailed',r=>{if(!r.url().startsWith(base)||!String(r.failure()?.errorText).includes('ERR_ABORTED'))failed.push({url:r.url(),failure:r.failure()?.errorText});});return{errors,failed};}
+function attachDiagnostics(page){const errors=[],failed=[];page.on('pageerror',e=>errors.push(String(e?.stack||e)));page.on('requestfailed',r=>{const failure=String(r.failure()?.errorText||'');if(!failure.includes('ERR_ABORTED'))failed.push({url:r.url(),failure});});return{errors,failed};}
 async function visibleCandidateImages(page){return page.locator('img').evaluateAll((imgs,paths)=>imgs.filter(img=>paths.includes(new URL(img.src).pathname.replace(/^\//,''))).map(img=>{
   const r=img.getBoundingClientRect(),css=getComputedStyle(img);return{path:new URL(img.src).pathname.replace(/^\//,''),alt:img.alt,complete:img.complete,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,
     rect:{x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom},visible:img.complete&&img.naturalWidth>0&&r.width>5&&r.height>5&&r.right>0&&r.bottom>0&&r.left<innerWidth&&r.top<innerHeight&&css.display!=='none'&&css.visibility!=='hidden'&&Number(css.opacity)>0};
