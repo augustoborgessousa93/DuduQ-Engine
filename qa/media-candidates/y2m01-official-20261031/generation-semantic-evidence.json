@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "DUDUQ_MEDIA_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-10-31T19:21:56.1401776Z",
+  "moduleId": "Y2M01",
+  "reviewAuthority": "Codex model visual precheck only",
+  "reviewStatus": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_REVIEW_PENDING",
+  "approvalGranted": false,
+  "questionContractsReviewed": 20,
+  "questionInventory": "question-inventory.json",
+  "bindingPlan": "binding-plan.json",
+  "globalRulesChecked": [
+    "one pedagogical concept per PNG",
+    "no unintended written answer, label, logo, watermark, frame, collage, or background",
+    "transparent canvas with a large legible subject",
+    "no candidate introduces an ungrounded semantic target",
+    "distinct letter concepts are not duplicated or substituted",
+    "candidate-only evidence does not imply integration, approval, publication, or production readiness"
+  ],
+  "rejectedExistingSource": {
+    "path": "dist-pages/content/english/year-2/module-01/assets/q018-name-question-scene-v1.png",
+    "reason": "Existing scene was visually inspected but rejected for this candidate batch because it is an opaque scene and fails the required RGBA8 transparent-candidate validator with NOT_RGBA8_NONINTERLACED.",
+    "reused": false
+  },
+  "assets": [
+    {
+      "file": "images/DUDUQ-Y2M01-SEE-YOU.png",
+      "semanticTarget": "See you / farewell",
+      "visualObservation": "Exactly two children move in opposite directions while looking back and waving to each other; the gesture and separation clearly encode a friendly temporary farewell.",
+      "wrongDistractorsAbsent": ["greeting-only pose", "name exchange", "bedtime", "text"]
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-WHATS-YOUR-NAME.png",
+      "semanticTarget": "What's your name? social question",
+      "visualObservation": "Exactly two children face each other; the left child uses an open-palms questioning gesture and the right child points to their own chest, creating a clear name-question exchange without written words.",
+      "wrongDistractorsAbsent": ["farewell", "generic greeting", "bedtime", "name tag", "question-mark text"]
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-GREETING-GENERIC.png",
+      "semanticTarget": "children greeting",
+      "visualObservation": "Two friendly children face one another and wave; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": ["parting movement", "bedtime", "written label"]
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-GREETING-INFORMAL.png",
+      "semanticTarget": "Hello",
+      "visualObservation": "One cheerful child gives an unmistakable informal wave; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": ["farewell context", "time-of-day cue", "written label"]
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-GOOD-MORNING.png",
+      "semanticTarget": "Good morning",
+      "visualObservation": "Leo waves in a bright morning context with a clear rising-sun/daybreak cue; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": ["night cue", "afternoon cue", "written label"]
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-GOOD-AFTERNOON.png",
+      "semanticTarget": "Good afternoon",
+      "visualObservation": "Mia waves in a warm daylight/afternoon context; verified reuse of the Y1M01 native original and visually distinct from morning and night.",
+      "wrongDistractorsAbsent": ["night cue", "bedtime", "written label"]
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-GOODBYE.png",
+      "semanticTarget": "Goodbye / Goodbye, Ana",
+      "visualObservation": "Ana gives a clear farewell wave with a friendly departing pose; the same grounded farewell concept supports the generic and named bindings without duplicating artwork.",
+      "wrongDistractorsAbsent": ["name question", "bedtime", "written label"]
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-GOOD-NIGHT.png",
+      "semanticTarget": "Good night / bedtime",
+      "visualObservation": "A sleeping child with night cues unmistakably communicates bedtime/good night; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": ["morning", "afternoon", "greeting wave", "written label"]
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-ANA.png",
+      "semanticTarget": "Ana",
+      "visualObservation": "The canonical Ana character portrait is visually distinct and consistent with the existing Y1M01 name set.",
+      "wrongDistractorsAbsent": ["other person", "name text", "extra character"]
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-BEN.png",
+      "semanticTarget": "Ben",
+      "visualObservation": "The canonical Ben character portrait is visually distinct and consistent with the existing Y1M01 name set.",
+      "wrongDistractorsAbsent": ["other person", "name text", "extra character"]
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LEO.png",
+      "semanticTarget": "Leo",
+      "visualObservation": "The canonical Leo character portrait is visually distinct and consistent with the existing Y1M01 name set.",
+      "wrongDistractorsAbsent": ["other person", "name text", "extra character"]
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-MIA.png",
+      "semanticTarget": "Mia",
+      "visualObservation": "The canonical Mia character portrait is visually distinct and consistent with the existing Y1M01 name set.",
+      "wrongDistractorsAbsent": ["other person", "name text", "extra character"]
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-A.png",
+      "semanticTarget": "uppercase A",
+      "visualObservation": "One unambiguous uppercase A with two diagonal stems, crossbar, and single counter; no additional glyph."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-B.png",
+      "semanticTarget": "uppercase B",
+      "visualObservation": "One unambiguous uppercase B with a vertical stem and two bowls; no additional glyph."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-C.png",
+      "semanticTarget": "uppercase C",
+      "visualObservation": "One unambiguous open uppercase C; it is not an O and contains no additional glyph."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-D.png",
+      "semanticTarget": "uppercase D",
+      "visualObservation": "One unambiguous uppercase D with a vertical stem and one rounded bowl; no additional glyph."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-O.png",
+      "semanticTarget": "uppercase O",
+      "visualObservation": "One closed oval uppercase O with one counter and no tail; it is visually distinct from Q."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-P.png",
+      "semanticTarget": "uppercase P",
+      "visualObservation": "One uppercase P with a stem and upper bowl only; no lower bowl or diagonal leg."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-Q.png",
+      "semanticTarget": "uppercase Q",
+      "visualObservation": "One closed uppercase Q with a clear short lower-right tail; visually distinct from O."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-R.png",
+      "semanticTarget": "uppercase R",
+      "visualObservation": "One uppercase R with stem, upper bowl, and diagonal leg; visually distinct from P."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-S.png",
+      "semanticTarget": "uppercase S",
+      "visualObservation": "One classic uppercase S formed by two smooth opposing curves; no additional glyph."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-T.png",
+      "semanticTarget": "uppercase T",
+      "visualObservation": "One uppercase T with a wide top bar and centered vertical stem; no additional glyph."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-U.png",
+      "semanticTarget": "uppercase U",
+      "visualObservation": "One uppercase U with open top and rounded bottom; no additional glyph."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-V.png",
+      "semanticTarget": "uppercase V",
+      "visualObservation": "One uppercase V with two diagonal stems meeting at the bottom; visually distinct from U and Y."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-W.png",
+      "semanticTarget": "uppercase W",
+      "visualObservation": "One upright uppercase W with a clear double-V structure; it is not an M."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-X.png",
+      "semanticTarget": "uppercase X",
+      "visualObservation": "One uppercase X formed by two diagonal strokes crossing at center; no additional glyph."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-Y.png",
+      "semanticTarget": "uppercase Y",
+      "visualObservation": "One uppercase Y with two upper arms and one lower vertical stem; visually distinct from V."
+    },
+    {
+      "file": "images/DUDUQ-Y2M01-LETTER-Z.png",
+      "semanticTarget": "uppercase Z",
+      "visualObservation": "One uppercase Z with top and bottom bars joined by a descending diagonal; no additional glyph."
+    }
+  ],
+  "candidateCount": 28,
+  "nativeGeneratedCount": 18,
+  "verifiedOriginalReuseCount": 10,
+  "humanHomologationStatus": "PENDING",
+  "integrationStatus": "NOT_STARTED",
+  "productionStatus": "NOT_APPROVED"
+}
