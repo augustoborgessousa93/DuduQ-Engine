@@ -39,7 +39,10 @@ permissions:
 
 concurrency:
   group: duduq-assets-duduq-reuse-${{ github.ref }}
-  cancel-in-progress: true
+  # A 90-route real-browser audit can outlast a short Codex commit interval.
+  # Keep one running audit and let GitHub replace older pending audits; do not
+  # repeatedly cancel the only in-flight browser evidence.
+  cancel-in-progress: false
 
 jobs:
   isolated-v26-media-reuse:
