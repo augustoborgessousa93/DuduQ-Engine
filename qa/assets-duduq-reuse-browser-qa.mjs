@@ -93,7 +93,8 @@ try{
   if(!crayon||norm(qCross.correctAnswer)!==norm(crayon.answerKey))throw Error('CANONICAL_Q010_CRAYON_CONTRACT_CHANGED:'+JSON.stringify({correctAnswer:qCross.correctAnswer,option:crayon||null}));
   const wrong=qCross.options.find(o=>norm(o.answerKey)!==norm(qCross.correctAnswer));if(!wrong)throw Error('Q010_WRONG_TARGET_MISSING');
   const videoDir=path.join(output,'video');await mkdir(videoDir,{recursive:true});
-  const context=activeContext=await browser.newContext({viewport:{width:1366,height:768},recordVideo:{dir:videoDir}}),page=await context.newPage(),diag=attachDiagnostics(page),events=[];
+  const gameplayViewport={width:390,height:844};
+  const context=activeContext=await browser.newContext({viewport:gameplayViewport,recordVideo:{dir:videoDir}}),page=await context.newPage(),diag=attachDiagnostics(page),events=[];
   const tracePath=path.join(output,'y1m04-q010-playwright-trace.zip');await context.tracing.start({screenshots:true,snapshots:true,sources:false});
   await page.goto(base+'/play/target-shooter/?duduqModule=Y1M04&duduqItem='+qid+'&qaSeed=20261031',{waitUntil:'domcontentloaded',timeout:45000});
   await page.waitForSelector('#game',{timeout:20000});
@@ -130,6 +131,22 @@ try{
   }
   report.curricularOptionPreflight={questionId:qid,expectedSemantics,actualSemantics,
     targetCount:identity.length,targets:identity,pass:true,scope:'foreground playable option images only; not full pedagogy approval'};
+  // This test is the real interaction path, unlike the locked Gold Master
+  // demonstration probe. Require full mobile target hitboxes AFTER the
+  // documented instruction-audio recovery has entered READY state.
+  const mobileHitboxes=await page.locator('.target-shooter-target').evaluateAll(nodes=>nodes.map(t=>{
+    const r=t.getBoundingClientRect(),hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);
+    const x=Math.max(0,Math.min(innerWidth,r.right)-Math.max(0,r.left));
+    const y=Math.max(0,Math.min(innerHeight,r.bottom)-Math.max(0,r.top));
+    return {width:r.width,height:r.height,x:r.x,right:r.right,visibleRatio:x*y/Math.max(1,r.width*r.height),
+      hit:hit===t||t.contains(hit),locked:t.classList.contains('duduq-interaction-locked'),
+      pointerEvents:getComputedStyle(t).pointerEvents};
+  }));
+  report.gameplayMobilePreflight={viewport:gameplayViewport,engineState:'READY',hitboxes:mobileHitboxes,
+    pass:mobileHitboxes.length===4&&mobileHitboxes.every(t=>t.visibleRatio>=0.98&&t.width>=44&&t.height>=44&&
+      t.hit&&!t.locked&&t.pointerEvents!=='none')};
+  if(!report.gameplayMobilePreflight.pass)throw Error('MOBILE_TARGET_NOT_READY_OR_NOT_CLICKABLE:'+
+    JSON.stringify(report.gameplayMobilePreflight));
   const initialImages=await visibleCandidateImages(page);
   if(!initialImages.some(i=>i.path===crayonPath&&i.visible))throw Error('Q010_CANDIDATE_CRAYON_NOT_VISIBLE');
   const wrongSemantic=wrong.semanticTarget||wrong.answerKey;
@@ -222,7 +239,8 @@ try{
     [...t.querySelectorAll('img')].some(i=>i.alt==='crayon')&&t.dataset.gameplayState==='correct')&&
     document.querySelector('.feedback-ribbon')?.dataset.feedback==='correct'&&!document.querySelector('.feedback-ribbon')?.hidden,null,{timeout:15000});
   const correctShot=path.join(output,'y1m04-q010-correct.png');await page.screenshot({path:correctShot,fullPage:false});
-  const gameplay={questionId:qid,mechanicId:'target-shooter',candidateMediaId:crayon.mediaId,candidatePath:crayonPath,
+  const gameplay={questionId:qid,mechanicId:'target-shooter',viewport:gameplayViewport,
+    mobilePreflight:report.gameplayMobilePreflight,candidateMediaId:crayon.mediaId,candidatePath:crayonPath,
     incorrectOption:wrong.answerKey,correctOption:'crayon',events,initialCandidateImages:initialImages,
     retryLabel,
     finalFeedback:await page.locator('.feedback-ribbon').getAttribute('data-feedback'),
