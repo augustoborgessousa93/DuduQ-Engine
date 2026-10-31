@@ -127,6 +127,27 @@ const pigEntries=pig.changedMediaIds.map(id=>index.get(id));
 assert(pigEntries.every(x=>x&&x.temporary===true&&x.sha256===pig.sha256
  &&x.humanResolutionStatus==='PEDAGOGICAL_QA_PENDING'), 'PIG_PREVIEW_MUST_STAY_PROVISIONAL');
 assert.equal(hashes.get(pig.assetPath)?.sha,pig.sha256,'PIG_PNG_NOT_HASH_BOUND');
+const farm=await load('qa/results/farm-animal-source-batch.json');
+const farmBrowser=await load('qa/results/farm-animal-batch-browser.json');
+assert.equal(farm.status,'FOUR_FARM_ANIMAL_PNGS_APPLIED_EPHEMERAL_QA');
+assert.equal(farmBrowser.status,'PASS_FOUR_SOURCE_PNGS_AND_18_CURRICULAR_BOOTS');
+assert.equal(farm.sourceUniquePngs,4);
+assert.equal(farm.changedMediaIds,13);
+assert.equal(farm.changedQuestionMediaUsages,28);
+assert.equal(farmBrowser.browserRouteBoots,18);
+assert(!farm.releaseApproved&&!farm.pedagogicalQAApproved);
+assert(!farmBrowser.releaseApproved&&!farmBrowser.pedagogicalQAApproved);
+for(const item of farm.images){
+ assert.equal(hashes.get(item.assetPath)?.sha,item.sha256,'FARM_IMAGE_NOT_HASH_BOUND:'+item.concept);
+ assert(farmBrowser.sources.some(x=>x.concept===item.concept&&x.sha256===item.sha256),'FARM_SOURCE_BROWSER_MISMATCH');
+}
+for(const binding of farm.bindings){
+ const x=index.get(binding.mediaId);
+ assert(x&&x.temporary===true&&x.humanResolutionStatus==='PEDAGOGICAL_QA_PENDING',
+  'FARM_SOURCE_MUST_REMAIN_PROVISIONAL:'+binding.mediaId);
+ assert(x.sha256===binding.sha256&&x.urlOrPath===binding.assetPath,'FARM_SOURCE_REGISTRY_MISMATCH');
+}
+assert(!farm.changedMediaIds.some(x=>pig.changedMediaIds.includes(x)),'DUPLICATE_FARM_PIG_ID');
 const report={
  schemaVersion:'DUDUQ_DISTRIBUTABLE_MEDIA_CANDIDATE_V1',
  status:'COMPILED_DISTRIBUTION_READY_FOR_RELEASE_GATES_NOT_APPROVED',
@@ -142,6 +163,11 @@ const report={
  additionalSourcePigAssetSha256:pig.sha256,
  additionalSourcePigAssetPath:pig.assetPath,
  pigPedagogicalApprovalPending:true,
+ additionalFarmAnimalPngs:4,
+ additionalFarmAnimalCandidateIds:13,
+ additionalFarmAnimalQuestionMediaUsages:28,
+ additionalFarmAnimalQuestionRoutes:18,
+ farmPedagogicalApprovalPending:true,
  pendingMediaIds:954,
  qaOnlyInlineCssRemoved:true,
  mobileContainmentLoadedFromVersionedV27:true,

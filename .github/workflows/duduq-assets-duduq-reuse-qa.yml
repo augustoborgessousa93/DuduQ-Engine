@@ -14,6 +14,8 @@ on:
       - "qa/tests/verify-30-route-browser-smoke.mjs"
       - "qa/prepare-assets-duduq-reuse.mjs"
       - "qa/replace-pig-from-assets-duduq.mjs"
+      - "qa/replace-farm-animal-batch-from-assets-duduq.mjs"
+      - "qa/verify-farm-animal-source-batch-browser.mjs"
       - "qa/verify-pig-direct-reuse-browser.mjs"
       - "qa/verify-assets-duduq-reuse-preparation.mjs"
       - "qa/verify-assets-duduq-import.mjs"
@@ -316,6 +318,17 @@ jobs:
           node qa/verify-pig-direct-reuse-browser.mjs
           echo "PIG_REAL_IMAGE_AND_7_QUESTION_BOOT_PASS_CANDIDATE_ONLY"
 
+      - name: Add four farm animals from exact source to the same Y2M05 QA product
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/replace-farm-animal-batch-from-assets-duduq.mjs
+          node qa/replace-farm-animal-batch-from-assets-duduq.mjs assets-source
+          node qa/replace-farm-animal-batch-from-assets-duduq.mjs assets-source --apply
+          node --check qa/verify-farm-animal-source-batch-browser.mjs
+          node qa/verify-farm-animal-source-batch-browser.mjs
+          echo "FOUR_MORE_PNGS_REUSED_FOR_13_ADDITIONAL_PROVISIONAL_IDS"
+
       - name: Preserve actual compiled pig-containing distribution for review
         shell: bash
         run: |
@@ -336,6 +349,8 @@ jobs:
           path: |
             qa/results/pig-source-direct-reuse.json
             qa/results/pig-source-direct-browser.json
+            qa/results/farm-animal-source-batch.json
+            qa/results/farm-animal-batch-browser.json
             qa/results/pig-distribution-tar.sha256
             ${{ runner.temp }}/duduq-pig-direct-v26-qa.tar.gz
             /tmp/duduq-pig-pages.log

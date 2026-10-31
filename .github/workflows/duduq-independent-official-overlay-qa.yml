@@ -30,6 +30,8 @@ on:
       - "qa/verify-y1m06-source-registry-pin.mjs"
       - "qa/verify-compiled-media-distribution-browser.mjs"
       - "qa/replace-pig-from-assets-duduq.mjs"
+      - "qa/replace-farm-animal-batch-from-assets-duduq.mjs"
+      - "qa/verify-farm-animal-source-batch-browser.mjs"
       - "qa/verify-pig-direct-reuse-browser.mjs"
       - "core/adapters/v27/target-shooter-mobile-containment.css"
       - "qa/export-verified-media-distribution-candidate.mjs"
@@ -308,6 +310,13 @@ jobs:
           node qa/verify-pig-direct-reuse-browser.mjs
           echo "185_APPROVED_IDS_PLUS_3_PIG_PREVIEW_IDS_VERIFIED_ON_ONE_COMPILED_ARTIFACT"
 
+          node --check qa/replace-farm-animal-batch-from-assets-duduq.mjs
+          node qa/replace-farm-animal-batch-from-assets-duduq.mjs assets-source
+          node qa/replace-farm-animal-batch-from-assets-duduq.mjs assets-source --apply
+          node --check qa/verify-farm-animal-source-batch-browser.mjs
+          node qa/verify-farm-animal-source-batch-browser.mjs
+          echo "185_APPROVED_IDS_PLUS_16_PROVISIONAL_FARM_ANIMAL_IDS_ON_ONE_COMPILED_PRODUCT"
+
       # This is a product-shaped compiled distribution containing all 185
       # media-ID substitutions, NOT another empty QA report. The temporary
       # injected Target Shooter style is stripped and re-hashed; only V27
@@ -338,6 +347,8 @@ jobs:
             qa/results/duduq-distribution-candidate.json
             qa/results/pig-source-direct-reuse.json
             qa/results/pig-source-direct-browser.json
+            qa/results/farm-animal-source-batch.json
+            qa/results/farm-animal-batch-browser.json
 
       - name: Retain independent QA reports and real-browser screenshots
         if: always()
