@@ -10,6 +10,7 @@ on:
       - "qa/media-candidates/y1m05-official-20261030/**"
       - "qa/apply-y1m04-official-media-overlay.mjs"
       - "qa/apply-y1m05-official-media-overlay.mjs"
+      - "qa/apply-target-shooter-mobile-containment-qa.mjs"
       - "qa/finalize-y1m04-official-media.mjs"
       - "qa/finalize-y1m05-official-media.mjs"
       - "qa/verify-y1m05-source-registry-rebase.mjs"
@@ -69,6 +70,12 @@ jobs:
           # The V19 base SHA pin is checked inside the build chain before V21-V26 overlays.
           # Rechecking the V19 pin after V26 would falsely reject the correctly changed manifest.
           bash qa/build-v26-topic-first-paint-qa.sh
+
+      - name: Apply scoped mobile geometry fix ONLY to ephemeral compiled QA preview
+        run: |
+          node --check qa/apply-target-shooter-mobile-containment-qa.mjs
+          node qa/apply-target-shooter-mobile-containment-qa.mjs --apply
+          echo "QA_PATCH_ONLY_NO_GOLD_MASTER_OR_SOURCE_MODIFICATION"
 
       - name: Verify Y1M05 pristine V26 registry rebase without rewriting legacy evidence
         run: |
