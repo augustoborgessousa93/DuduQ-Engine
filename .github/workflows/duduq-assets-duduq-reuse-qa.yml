@@ -107,7 +107,7 @@ jobs:
         shell: bash
         run: |
           set -Eeuo pipefail
-          npx wrangler pages dev dist-pages --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-31 > /tmp/duduq-assets-reuse-pages.log 2>&1 &
+          npx wrangler pages dev dist-pages --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-31 --log-level debug > /tmp/duduq-assets-reuse-pages.log 2>&1 &
           echo $! > /tmp/duduq-assets-reuse-pages.pid
           for i in {1..30}; do
             if curl -fsS http://127.0.0.1:4175/ >/dev/null; then
@@ -115,9 +115,17 @@ jobs:
               grep -Eiq '^X-DUDUQ-Fit:[[:space:]]*1' qa/results/assets-duduq-fit-route.headers
               echo QA_PAGES_RUNTIME_AND_FIT_MIDDLEWARE_READY; exit 0
             fi
+            if ! kill -0 "$(cat /tmp/duduq-assets-reuse-pages.pid)" 2>/dev/null; then
+              echo 'WRANGLER_EXITED_BEFORE_HTTP_READY'
+              cat /tmp/duduq-assets-reuse-pages.log
+              for logfile in "$HOME"/.config/.wrangler/logs/*.log; do [ -f "$logfile" ] && { echo "WRANGLER_INTERNAL_LOG=$logfile"; cat "$logfile"; }; done
+              exit 1
+            fi
             sleep 1
           done
+          echo 'WRANGLER_HTTP_READY_TIMEOUT'
           cat /tmp/duduq-assets-reuse-pages.log
+          for logfile in "$HOME"/.config/.wrangler/logs/*.log; do [ -f "$logfile" ] && { echo "WRANGLER_INTERNAL_LOG=$logfile"; cat "$logfile"; }; done
           exit 1
 
       - name: Test all affected questions in desktop, tablet and mobile, plus real Target Shooter input
