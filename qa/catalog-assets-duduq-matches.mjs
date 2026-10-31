@@ -51,7 +51,10 @@ const aliases={
   cow:['cow','vaca'],duck:['duck','pato'],horse:['horse','cavalo'],pig:['pig','porco'],
   sheep:['sheep','ovelha'],rabbit:['rabbit','coelho'],hamster:['hamster','hamister'],
   mother:['mother','mae'],father:['father','pai'],sister:['sister','irma'],
-  brother:['brother','irmao'],grandmother:['grandmother','avo'],grandfather:['grandfather','avo'],
+  brother:['brother','irmao'],
+  // Remove Portuguese avó/avô from exact aliases: accent folding makes both
+  // indistinguishable ('avo'). The English labels in the assets disambiguate.
+  grandmother:['grandmother'],grandfather:['grandfather'],
   spring:['spring','primavera'],summer:['summer','verao'],autumn:['autumn','fall','outono'],
   winter:['winter','inverno'],pink:['pink','rosa'],brown:['brown','marrom'],gray:['gray','grey','cinza'],
   wake_up:['wake up','acordar','acordando'],go_to_school:['go to school','indo para a escola','ir para escola'],
@@ -90,6 +93,8 @@ function eligibleFilenameForConcept(file,concept){
     const terms=new Set(aliases[concept].flatMap(v=>norm(v).split(' ')));
     return tokens.every(t=>terms.has(t));
   }
+  if(concept==='play'&&tokens.some(t=>['logo','eduq','duduq'].includes(t)))
+    return false;
   if(['apple','banana','pear','carrot'].includes(concept))
     return !/(?:^| )(?:like|prefer|gosta|rejeitando|eating|comendo)(?: |$)/.test(file.filenameNormalized);
   return true;
