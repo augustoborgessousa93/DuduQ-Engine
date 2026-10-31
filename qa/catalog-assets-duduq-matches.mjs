@@ -85,7 +85,7 @@ function eligibleFilenameForConcept(file,concept){
   if(numeralConcepts.has(concept)){
     const terms=new Set(aliases[concept].flatMap(v=>norm(v).split(' ')));
     return tokens.every(t=>t==='number'||terms.has(t)||
-      (/^\\d+$/.test(t)&&terms.has(String(Number(t)))));
+      (/^\d+$/.test(t)&&terms.has(String(Number(t)))));
   }
   if(pureColorConcepts.has(concept))
     return tokens[0]==='cor'||tokens[0]==='color';
