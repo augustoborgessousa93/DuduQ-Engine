@@ -8,6 +8,7 @@ on:
       - ".github/workflows/duduq-independent-official-overlay-qa.yml"
       - "qa/media-candidates/y1m04-official-20261030/**"
       - "qa/media-candidates/y1m05-official-20261030/**"
+      - "qa/media-candidates/y1m06-official-20261030/**"
       - "qa/apply-y1m04-official-media-overlay.mjs"
       - "qa/apply-y1m05-official-media-overlay.mjs"
       - "qa/apply-target-shooter-mobile-containment-qa.mjs"
@@ -19,6 +20,14 @@ on:
       - "qa/y1m05-official-media-browser-qa.mjs"
       - "qa/tests/verify-y1m04-official-media-overlay.mjs"
       - "qa/tests/verify-y1m05-official-media-overlay.mjs"
+      - "qa/apply-y1m06-official-media-overlay.mjs"
+      - "qa/prepare-y1m06-official-media-bundle.mjs"
+      - "qa/verify-y1m06-official-media-build.mjs"
+      - "qa/verify-y1m06-source-registry-pin.mjs"
+      - "qa/y1m06-official-media-browser-qa.mjs"
+      - "qa/y1m06-official-media-model.mjs"
+      - "qa/tests/verify-y1m06-official-media-overlay.mjs"
+      - "qa/tests/verify-y1m06-source-registry-pin.test.mjs"
   workflow_dispatch:
 
 permissions:
@@ -29,6 +38,93 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  reproduce-y1m06-review-overlay:
+    name: Rebuild and replay Y1M06 review overlay on Linux
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    env:
+      CI: "true"
+      BASE_URL: http://127.0.0.1:4175
+    steps:
+      - name: Checkout isolated review branch without write credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Remove stale Y1M06 QA output from this ephemeral runner
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          rm -rf -- qa/results/y1m06-official-media-browser
+          rm -f -- qa/results/y1m06-official-media-evidence.json qa/results/y1m06-official-media-finalization.json
+          rm -f -- qa/results/y1m06-official-media-binding-plan.json qa/results/y1m06-review-build.json
+          echo "STALE_Y1M06_QA_EVIDENCE_CLEARED_FROM_EPHEMERAL_CHECKOUT"
+
+      - name: Install Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install independent Chromium QA dependencies
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Build clean V26 from immutable source
+        run: bash qa/build-v26-topic-first-paint-qa.sh
+
+      - name: Rebuild and verify the hash-pinned Y1M06 review bundle
+        run: |
+          node qa/prepare-y1m06-official-media-bundle.mjs
+          node qa/verify-y1m06-source-registry-pin.mjs
+          node --test qa/tests/verify-y1m06-source-registry-pin.test.mjs
+
+      - name: Start isolated review-only HTTP server
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages > /tmp/duduq-y1m06-overlay-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then
+              echo "ISOLATED_Y1M06_QA_HTTP_READY"
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/duduq-y1m06-overlay-http.log
+          exit 1
+
+      - name: Apply and statically verify the Y1M06 candidate overlay
+        run: |
+          node qa/apply-y1m06-official-media-overlay.mjs --apply
+          node qa/tests/verify-y1m06-official-media-overlay.mjs
+          node qa/verify-y1m06-official-media-build.mjs
+          git diff --exit-code -- content/english functions/play/english core
+          echo "NO_SOURCE_QUESTION_NO_PRODUCTION_NO_GOLD_MASTER_CHANGE"
+
+      - name: Exercise all Y1M06 routes and native mouse and touch gameplay
+        run: node qa/y1m06-official-media-browser-qa.mjs
+
+      - name: Retain independent Y1M06 reports, trace, video and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-independent-y1m06-overlay-qa-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/y1m06-official-media-binding-plan.json
+            qa/results/y1m06-review-build.json
+            qa/results/y1m06-official-media-browser/**
+            qa/media-candidates/y1m06-official-20261030/source-registry-pin.json
+            /tmp/duduq-y1m06-overlay-http.log
+
+      - name: Explicit Y1M06 release boundary
+        if: always()
+        run: |
+          echo "Only ephemeral runner dist-pages is modified. No commit, merge, release, production deploy or deletion."
+          echo "A red browser step remains a blocker; this job never converts technical evidence into owner approval."
+
   reproduce-two-reviewed-modules:
     name: Rebuild and replay both Codex media overlays on Linux
     runs-on: ubuntu-latest

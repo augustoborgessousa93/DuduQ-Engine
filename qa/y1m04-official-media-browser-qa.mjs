@@ -51,10 +51,15 @@ async function confirmWithPointerRetry(page,answerAlt,expectedState,label,events
     const target=[...document.querySelectorAll('.target-shooter-target')].find(x=>x.querySelector('.target-shooter-target__animal')?.alt===alt);
     const ribbon=document.querySelector('.feedback-ribbon');if(!target||!ribbon)throw Error('QA_VISIBLE_NODES_MISSING');
     const store=window.__duduqQaVisibleMutationLog ||= {},log=[];
-    const snapshot=()=>{const r=target.getBoundingClientRect();log.push({at:performance.now(),targetState:target.dataset.gameplayState||null,
+    const snapshot=()=>{const r=target.getBoundingClientRect(),action=ribbon.querySelector('.feedback-action'),
+      actionRect=action?.getBoundingClientRect(),actionStyle=action?getComputedStyle(action):null;
+      log.push({at:performance.now(),targetState:target.dataset.gameplayState||null,
       targetClass:target.className,badge:target.querySelector('.target-status-badge')?.getAttribute('aria-label')||null,
       targetVisible:r.width>20&&r.height>20&&r.right>0&&r.bottom>0&&r.left<innerWidth&&r.top<innerHeight,
       ribbonHidden:ribbon.hidden,feedback:ribbon.dataset.feedback||null,feedbackText:ribbon.textContent.replace(/\s+/g,' ').trim(),
+      actionText:action?.textContent?.replace(/\s+/g,' ').trim()||'',
+      actionVisible:!!(actionRect&&actionRect.width>1&&actionRect.height>1&&actionStyle?.visibility!=='hidden'&&actionStyle?.display!=='none'&&
+        actionRect.right>0&&actionRect.bottom>0&&actionRect.left<innerWidth&&actionRect.top<innerHeight),
       rootState:document.querySelector('#game')?.dataset.duduqInteractionState||null});};
     const observer=new MutationObserver(snapshot);observer.observe(target,{attributes:true,subtree:true});observer.observe(ribbon,{attributes:true,subtree:true});
     store[key]={log,observer};snapshot();
@@ -62,9 +67,11 @@ async function confirmWithPointerRetry(page,answerAlt,expectedState,label,events
   // A target may resolve asynchronously before the shared action changes
   // from CONFIRMAR to CONTINUAR. Observe the *visible* result first; never
   // press CONTINUAR as a surrogate confirmation or approve a hidden ribbon.
-  const waitOutcome=timeout=>page.waitForFunction(([expected,key])=>window.__duduqQaVisibleMutationLog?.[key]?.log?.some(x=>
-    x.targetState===expected&&x.targetVisible===true&&x.feedback===expected&&x.ribbonHidden===false),
-    [expectedState,observerKey],{timeout});
+  const expectedAction=expectedState==='correct'?'CONTINUAR':'TENTAR DE NOVO';
+  const waitOutcome=timeout=>page.waitForFunction(([expected,action,key])=>window.__duduqQaVisibleMutationLog?.[key]?.log?.some(x=>
+    x.targetState===expected&&x.targetVisible===true&&x.feedback===expected&&x.ribbonHidden===false&&
+      x.actionVisible===true&&x.actionText===action),
+    [expectedState,expectedAction,observerKey],{timeout});
   const readAction=()=>page.evaluate(alt=>{
     const target=[...document.querySelectorAll('.target-shooter-target')]
       .find(x=>x.querySelector('.target-shooter-target__animal')?.alt===alt);

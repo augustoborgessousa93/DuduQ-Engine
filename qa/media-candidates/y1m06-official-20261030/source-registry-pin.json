@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "DUDUQ_Y1M06_SOURCE_REGISTRY_PIN_V1",
+  "status": "PASS_EXACT_CLEAN_V26_AND_SCOPED_Y1M04_PREDECESSOR",
+  "moduleId": "Y1M06",
+  "createdAt": "2026-10-30",
+  "cleanV26QuestionSha256": "31d4cc0be48882dfd405cca0f8cb2b708c6f6d3d201fab71ad94e757e771e4b5",
+  "cleanV26QuestionInvariantSha256": "1ce8860d805daf65293951183eb1a461b65a1c93c3c9b2ce8c1b34912d33b15d",
+  "cleanV26RegistrySha256": "aa615a3ed307b0e8cae6abf6901a1582c22ab59aa7f95c6339a635ca7d35fc89",
+  "cleanV26RegistryEntries": 1159,
+  "cleanV26ManifestSha256": "5993aaceaff272626c863aef07e1b33a909ca7f9fcc41d2d40890baa6c08b822",
+  "sourceRegistryEntryCount": 93,
+  "sourceQuestionUsageRecords": 93,
+  "sourceRegistryEntryProjectionSha256": "be6d7f0d999d1c0c7081315df4b26a0fd41309a401da7253434c5a2828cd0e38",
+  "sourceUsageProjectionSha256": "302d698ca908d2e204d90d21ef80531cd7a666c78a91f7328973d103f51d0e28",
+  "registryEntriesOutsideY1M04": 1076,
+  "registryEntriesOutsideY1M04Sha256": "e1e444bdffaf308d38bcb22bd0a950468c6c95c3bd88bf2ecb7d4b35b6c0af92",
+  "occurrenceScopedSplits": [
+    {
+      "questionId": "Y1M06-Q001",
+      "field": "targets[0].media.assetId",
+      "from": "IMG-Y1M06-Q001-DOG",
+      "to": "IMG-Y1M06-Q001-T1-DOG",
+      "semanticTarget": "dog",
+      "externalModule": "Y2M05"
+    },
+    {
+      "questionId": "Y1M06-Q001",
+      "field": "targets[1].media.assetId",
+      "from": "IMG-Y1M06-Q001-CAT",
+      "to": "IMG-Y1M06-Q001-T2-CAT",
+      "semanticTarget": "cat",
+      "externalModule": "Y2M05"
+    },
+    {
+      "questionId": "Y1M06-Q001",
+      "field": "targets[2].media.assetId",
+      "from": "IMG-Y1M06-Q001-FISH",
+      "to": "IMG-Y1M06-Q001-T3-FISH",
+      "semanticTarget": "fish",
+      "externalModule": "Y2M05"
+    },
+    {
+      "questionId": "Y1M06-Q001",
+      "field": "targets[3].media.assetId",
+      "from": "IMG-Y1M06-Q001-RABBIT",
+      "to": "IMG-Y1M06-Q001-T4-RABBIT",
+      "semanticTarget": "rabbit",
+      "externalModule": "Y2M05"
+    },
+    {
+      "questionId": "Y1M06-Q009",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-Q009-BIG",
+      "to": "IMG-Y1M06-Q009-M1-BIG",
+      "semanticTarget": "big",
+      "externalModule": "Y2M06"
+    },
+    {
+      "questionId": "Y1M06-Q014",
+      "field": "pairs[3].b.media.assetId",
+      "from": "IMG-Y1M06-Q014-SMALL",
+      "to": "IMG-Y1M06-Q014-B4-SMALL",
+      "semanticTarget": "small",
+      "externalModule": "Y4M05"
+    }
+  ],
+  "sharedSourceEvidence": [
+    {
+      "mediaId": "IMG-Y1M06-Q001-DOG",
+      "localQuestionId": "Y1M06-Q001",
+      "externalModules": [
+        "Y2M05"
+      ],
+      "externalQuestionIds": [
+        "Y2M05-Q013"
+      ],
+      "externalUsageRecords": 3
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q001-CAT",
+      "localQuestionId": "Y1M06-Q001",
+      "externalModules": [
+        "Y2M05"
+      ],
+      "externalQuestionIds": [
+        "Y2M05-Q013"
+      ],
+      "externalUsageRecords": 3
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q001-FISH",
+      "localQuestionId": "Y1M06-Q001",
+      "externalModules": [
+        "Y2M05"
+      ],
+      "externalQuestionIds": [
+        "Y2M05-Q013"
+      ],
+      "externalUsageRecords": 3
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q001-RABBIT",
+      "localQuestionId": "Y1M06-Q001",
+      "externalModules": [
+        "Y2M05"
+      ],
+      "externalQuestionIds": [
+        "Y2M05-Q013"
+      ],
+      "externalUsageRecords": 3
+    },
+    {
+      "mediaId": "IMG-Q009-BIG",
+      "localQuestionId": "Y1M06-Q009",
+      "externalModules": [
+        "Y2M06"
+      ],
+      "externalQuestionIds": [
+        "Y2M06-Q018"
+      ],
+      "externalUsageRecords": 1
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q014-SMALL",
+      "localQuestionId": "Y1M06-Q014",
+      "externalModules": [
+        "Y4M05"
+      ],
+      "externalQuestionIds": [
+        "Y4M05-Q020"
+      ],
+      "externalUsageRecords": 3
+    }
+  ],
+  "sourceHashesRewritten": false,
+  "productionApproved": false,
+  "goldMastersModified": false
+}
