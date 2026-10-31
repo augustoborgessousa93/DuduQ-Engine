@@ -70,7 +70,7 @@ try {
     // Intro content can hydrate after DOMContentLoaded on the first Chromium page.
     // Wait a bounded time for the actual start control, not a fixed delay;
     // absence still fails the existing boot gate and is recorded for diagnosis.
-    const start=page.getByRole('button',{name:/iniciar jogo/i}).first();
+    const start=page.getByRole('button',{name:/iniciar (?:jogo|missão)/i}).first();
     const introWaitStarted=Date.now();
     try {await start.waitFor({state:'visible',timeout:10000});}
     catch(e){record.introWaitFailure=String(e.message).slice(0,250);}
@@ -97,7 +97,7 @@ try {
     // screenshots and report the exact UI state reached.
     const selector='.duduq-intro-start-button';
     record.introStartVisible=await start.isVisible().catch(()=>false);
-    const introTarget=record.introStartVisible?start:page.getByText(/INICIAR JOGO/i).first();
+    const introTarget=record.introStartVisible?start:page.getByText(/INICIAR (?:JOGO|MISSÃO)/i).first();
     if(!record.introStartVisible)record.introStartVisible=await introTarget.isVisible().catch(()=>false);
     if(!record.introStartVisible)errors.push('INTRO_START_NOT_VISIBLE_IN_PRODUCT_ROUTE');
     if(record.introStartVisible){
@@ -148,13 +148,18 @@ try {
     });
     record.boot=response?.ok() && record.before.htmlBodyTextLength>0 &&
       record.introStartClicked===true && record.after.gameRootPresent &&
-      (/\/play\/(drag-drop|target-shooter|matching|memory-quest|bubble-pop|smart-sentence)\//.test(new URL(record.navigatedUrl).pathname) ||
+      (/\/play\/(drag-drop|drag-drop-multimedia|target-shooter|matching|memory-quest|bubble-pop|smart-sentence)\//.test(new URL(record.navigatedUrl).pathname) ||
        record.after.iframeGamePresent || record.after.engineReady) &&
       errors.length===0 && badHttp.length===0 &&
       networkFailures.length===0 && record.after.brokenVisibleImages.length===0
       ?'PASS':'FAIL';
    }catch(e){errors.push('SMOKE_EXCEPTION:'+String(e.message).slice(0,800));}
-   record.imageQaStatus=(record.after?.imagesWithEmptySource??0)>0?'PENDING_EMPTY_IMAGE_SOURCE':
+   // An IMG in a hidden feedback ribbon often intentionally has no src until
+   // the learner submits a response. It is not evidence of broken boot media.
+   // Still report all placeholders and retain separate gameplay/media gates.
+   record.visibleEmptyImageSources=(record.after?.emptySourceImageDetails||[]).filter(x=>x.visible).length;
+   record.hiddenEmptyImagePlaceholders=(record.after?.emptySourceImageDetails||[]).filter(x=>!x.visible).length;
+   record.imageQaStatus=record.visibleEmptyImageSources>0?'PENDING_VISIBLE_EMPTY_IMAGE_SOURCE':
       record.after?.brokenVisibleImages?.length?'FAILED_BROKEN_LOADED_ASSET':'NOT_CERTIFIED';
    record.pageErrors=errors;
    record.httpFailures=badHttp;
@@ -167,6 +172,9 @@ try {
    });
    results.push(record);
    console.log(JSON.stringify({moduleId,viewport:view.name,boot:record.boot,httpStatus:record.httpStatus,
+    navigatedUrl:record.navigatedUrl||null,introStartClicked:record.introStartClicked||false,
+    gameRootPresent:record.after?.gameRootPresent||false,iframeGamePresent:record.after?.iframeGamePresent||false,
+    engineReady:record.after?.engineReady||false,
     pageErrors:errors.length,httpFailures:badHttp.length,networkFailures:networkFailures.length,canceledDuringNavigation:canceledDuringNavigation.length,
     brokenVisibleImages:record.after?.brokenVisibleImages?.length||0,
     imagesWithEmptySource:record.after?.imagesWithEmptySource||0,
@@ -178,15 +186,18 @@ try {
 }finally{await browser.close()}
 const failures=results.filter(r=>r.boot!=='PASS');
 const imagePending=results.filter(r=>r.imageQaStatus!=='NOT_CERTIFIED');
+const hiddenPlaceholderChecks=results.filter(r=>r.hiddenEmptyImagePlaceholders>0).length;
 const report={schemaVersion:'DUDUQ_MEDIA_BROWSER_CANDIDATE_SMOKE_V1',
  mode:'QA_ONLY_NON_PRODUCTION',actualBrowser:'PLAYWRIGHT_CHROMIUM',
  source:'Compiled V26 artifact served by local HTTP, unless candidate changes explicitly applied before this test',
  integratedImageQA:false,pedagogicalQAApproved:false,gameplayCertified:false,
  modules,viewports:views.map(x=>x.name),checks:results.length,passes:results.length-failures.length,
  failures:failures.length,mediaPendingChecks:imagePending.length,
+ hiddenPlaceholderChecks,
  status:failures.length?'FAIL':imagePending.length?'ENTRYPOINT_PASS_MEDIA_SOURCE_INCOMPLETE':'ENTRYPOINT_PASS_MEDIA_QA_NOT_CERTIFIED',
  results};
 await fs.writeFile(path.join(dir,'report.json'),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({report:'qa/results/media-browser-qa/report.json',
- status:report.status,checks:report.checks,failures:report.failures,mediaPendingChecks:report.mediaPendingChecks}));
+ status:report.status,checks:report.checks,failures:report.failures,mediaPendingChecks:report.mediaPendingChecks,
+ hiddenPlaceholderChecks:report.hiddenPlaceholderChecks}));
 if(failures.length)process.exitCode=1;

@@ -1,0 +1,71 @@
+name: DUDUQ Tablet HUD - isolated candidate QA
+on:
+  push:
+    branches: [integration/assets-duduq-reuse-20261031]
+    paths:
+      - qa/overlays/tablet-hud-r147-candidate.css
+      - qa/canary-tablet-header-fit-probe.mjs
+      - .github/workflows/duduq-tablet-hud-candidate-qa.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duduq-tablet-hud-candidate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  r147-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install real Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start isolated read-only source host (not production)
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-tablet-source-host.log 2>&1 &
+          echo $! > /tmp/duduq-tablet-host.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-tablet-source-host.log
+          exit 1
+      - name: Collect genuine before/after tablet DOM and screenshots
+        env:
+          BASE_URL: http://127.0.0.1:4173
+        run: |
+          node --check qa/canary-tablet-header-fit-probe.mjs
+          node qa/canary-tablet-header-fit-probe.mjs
+      - name: Prove touchscreen geometry, retry, progress, and gameplay in Canary with CSS appended only inside Chromium
+        env:
+          BASE_URL: http://127.0.0.1:4173
+          DUDUQ_QA_HEADER_FIT_CSS: qa/overlays/tablet-hud-r147-candidate.css
+        run: |
+          test -s "$DUDUQ_QA_HEADER_FIT_CSS"
+          node --check test/systemic/canary-r147-core-1.0.12-smoke.mjs
+          node test/systemic/canary-r147-core-1.0.12-smoke.mjs
+      - name: Persist source-only QA evidence even when hypothesis fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-r147-tablet-candidate-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            qa/results/canary-tablet-header-fit/**
+            qa/overlays/tablet-hud-r147-candidate.css
+            /tmp/duduq-tablet-source-host.log
+      - name: State safety boundary
+        if: always()
+        run: |
+          echo "Candidate CSS was injected into local Chromium or ephemeral page only. Immutable Core, Gold Masters, QA baselines, and official Pages production were not changed."

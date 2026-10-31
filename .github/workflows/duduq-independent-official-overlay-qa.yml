@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - automation/duduq-media-source-only-fix-20261029
+      - integration/duduq-m1-qa-consolidated-20261031
     paths:
       - ".github/workflows/duduq-independent-official-overlay-qa.yml"
       - "qa/media-candidates/y1m04-official-20261030/**"
@@ -45,6 +46,7 @@ jobs:
     timeout-minutes: 55
     env:
       CI: "true"
+      DUDUQ_QA_ONLY: "1"
       BASE_URL: http://127.0.0.1:4175
     steps:
       - name: Checkout isolated review branch without write credentials
@@ -165,6 +167,7 @@ jobs:
     timeout-minutes: 85
     env:
       CI: "true"
+      DUDUQ_QA_ONLY: "1"
       BASE_URL: http://127.0.0.1:4175
     steps:
       - name: Checkout isolated review branch without write credentials
