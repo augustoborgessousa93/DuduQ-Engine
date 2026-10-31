@@ -46,7 +46,10 @@ try{
       const context=await browser.newContext({viewport:{width:view.width,height:view.height}}),page=await context.newPage(),diag=attachDiagnostics(page);
       const route='/play/'+q.mechanicId+'/?duduqModule=Y1M04&duduqItem='+qid+'&qaSeed=20261031';
       const response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:45000});
-      await page.waitForFunction(({paths})=>[...document.images].some(img=>paths.includes(new URL(img.src).pathname.replace(/^\//,''))&&img.complete&&img.naturalWidth>0),{paths},{timeout:20000});
+      await page.waitForFunction(({paths})=>{
+        const candidates=[...document.images].filter(img=>paths.includes(new URL(img.src).pathname.replace(/^\//,'')));
+        return paths.every(assetPath=>candidates.some(img=>new URL(img.src).pathname.replace(/^\//,'')===assetPath&&img.complete));
+      },{paths},{timeout:20000});
       const images=await visibleCandidateImages(page),missing=paths.filter(p=>!images.some(i=>i.path===p&&i.visible));
       const overflow=await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth));
       const screenshot=path.join(output,`${qid.toLowerCase()}-${view.name}.png`);await page.screenshot({path:screenshot,fullPage:false});
