@@ -60,7 +60,7 @@ try{
    const response=await page.goto(url,{waitUntil:'domcontentloaded',timeout:40000});
    assert.equal(response?.status(),200,'CURRICULAR_ROUTE_NOT_200:'+id);
    await page.waitForTimeout(360);
-   const result=await page.evaluate(paths=>{
+   const readDom=()=>page.evaluate(paths=>{
     const assetPaths=new Set(paths),matched=[...document.images].filter(img=>{
       try{return assetPaths.has(new URL(img.currentSrc||img.src).pathname.replace(/^\/+/,''));}catch{return false;}
     });
@@ -68,6 +68,19 @@ try{
       loaded:img.complete&&img.naturalWidth>0,alt:img.alt||''
     }))};
    },provenImages.map(x=>x.path));
+   let result=await readDom();
+   if(result.matchedImages.some(img=>!img.loaded)){
+    // A source PNG may be correctly served but still decoding after DOM load.
+    // Preserve an actual failed-image rejection; wait only for pending decode.
+    await page.waitForFunction(paths=>{
+     const assetPaths=new Set(paths);
+     const matched=[...document.images].filter(img=>{
+      try{return assetPaths.has(new URL(img.currentSrc||img.src).pathname.replace(/^\/+/,''));}catch{return false;}
+     });
+     return matched.length>0&&matched.every(img=>img.complete&&img.naturalWidth>0);
+    },provenImages.map(x=>x.path),{timeout:15000,polling:100});
+    result=await readDom();
+   }
    assert(result.bodyText>20||result.matchedImages.length,'EMPTY_CURRICULAR_RENDER:'+id);
    assert(result.matchedImages.every(x=>x.loaded),'LOADED_ANIMAL_PNG_BROKEN:'+id);
    assert.equal(errors.length,0,'BROWSER_JS_ERROR:'+id+':'+errors.join('|'));
