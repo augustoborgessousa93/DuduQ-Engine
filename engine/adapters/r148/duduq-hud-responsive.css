@@ -108,3 +108,15 @@
     transform: none !important;
   }
 }
+
+/* R148 mobile Target Shooter: port the separately tested 4-target containment
+ * rule to a versioned runtime adapter. No Gold Master or question data edits.
+ * This must be revalidated in the non-QA compiled distribution artifact.
+ */
+@media (max-width:520px) {
+  .target-shooter-screen .target-shooter-target--dog { left:317px !important; }
+  .target-shooter-screen .target-shooter-target--cat { left:505px !important; }
+  .target-shooter-screen .target-shooter-target--rabbit { left:693px !important; }
+  .target-shooter-screen .target-shooter-target--fish { left:869px !important; }
+}
+
