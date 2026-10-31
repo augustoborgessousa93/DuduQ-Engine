@@ -80,6 +80,19 @@ try{
   const target=semantic=>page.locator('.target-shooter-target').filter({has:page.locator('img[alt="'+semantic+'"]')});
   const crayonPath=registryById.get(crayon.mediaId)?.urlOrPath;if(!crayonPath)throw Error('Q010_CRAYON_MEDIA_NOT_REGISTERED');
   await page.waitForFunction(expected=>[...document.images].some(i=>new URL(i.src).pathname.replace(/^\//,'')===expected&&i.complete&&i.naturalWidth>0),crayonPath,{timeout:20000});
+  // A direct mechanic route may silently load its demo animal question. Never
+  // count clicks on that session as curricular Y1M04-Q010 gameplay evidence.
+  const expectedSemantics=qCross.options.map(o=>norm(o.semanticTarget||o.answerKey)).sort();
+  const actualSemantics=await page.locator('.target-shooter-target img').evaluateAll(imgs=>imgs.map(img=>String(img.alt||'').trim().toLocaleLowerCase('en-US')).sort());
+  const actualMatches=actualSemantics.length===expectedSemantics.length&&actualSemantics.every((v,i)=>v===expectedSemantics[i]);
+  if(!actualMatches){
+    const shot=path.join(output,'y1m04-q010-curricular-session-mismatch.png');
+    await page.screenshot({path:shot,fullPage:false});
+    report.gameplayDiagnostics={stage:'curricular-session-identity',requestedQuestionId:qid,requestedModule:'Y1M04',
+      route:page.url(),expectedSemantics,actualSemantics,reason:'DIRECT_MECHANIC_ROUTE_DID_NOT_LOAD_REQUESTED_CURRICULAR_QUESTION',
+      screenshot:path.relative(root,shot).replaceAll('\\','/'),screenshotSha256:sha(await readFile(shot))};
+    throw Error('CURRICULAR_SESSION_IDENTITY_MISMATCH:'+JSON.stringify(report.gameplayDiagnostics));
+  }
   const initialImages=await visibleCandidateImages(page);
   if(!initialImages.some(i=>i.path===crayonPath&&i.visible))throw Error('Q010_CANDIDATE_CRAYON_NOT_VISIBLE');
   const wrongSemantic=wrong.semanticTarget||wrong.answerKey;
