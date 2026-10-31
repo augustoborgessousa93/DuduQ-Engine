@@ -46,6 +46,20 @@ function run(fixture,args=[]){
   {encoding:'utf8',cwd:fixture.dir});
  return {r,report:fs.existsSync(output)?JSON.parse(fs.readFileSync(output,'utf8')):null};
 }
+function writeCanonical(f,{complete=true}={}){
+ const file=path.join(f.dir,'qa/results/media-closure-inventory.json');
+ fs.mkdirSync(path.dirname(file),{recursive:true});
+ fs.writeFileSync(file,JSON.stringify({
+  schemaVersion:'DUDUQ_MEDIA_COMPLETION_V1',
+  modules:30,activities:600,referencedMediaIds:1,
+  incompleteReferencedIds:0,provisionalOrBlockedReferencedIds:0,
+  nonTemporaryUnverifiedReferencedIds:0,
+  metadataClosurePassed:true,finalPedagogicalQaApproved:complete,
+  finalCompletionPassed:complete,
+  items:[{mediaId:'IMG-LIVE-OK',status:'OFFICIAL_PEDAGOGICALLY_VERIFIED'}]
+ }));
+}
+
 test('plans a detached image but never an image still referenced by a question or another ID',()=>{
  const f=setup(true);
  try{
@@ -107,6 +121,7 @@ test('cannot retire while even one referenced provisional media ID exists',()=>{
 test('zero provisionals without release QA attestation still cannot remove files',()=>{
  const f=setup(false);
  try{
+  writeCanonical(f);
   const {r,report}=run(f,['--apply']);
   assert.equal(report.provisionalReferencedIds,0);
   assert.notEqual(r.status,0);
@@ -117,6 +132,7 @@ test('zero provisionals without release QA attestation still cannot remove files
 test('only pinned verified sign-off can retire orphaned media with byte-identical backup',()=>{
  const f=setup(false);
  try{
+  writeCanonical(f);
   const dry=run(f);assert.equal(dry.r.status,0,dry.r.stderr);
   const evidence='qa/results/full-browser-pedagogical-evidence.json';
   const rollback='qa/backups/last-production-build.sha';
@@ -222,6 +238,7 @@ test('rejects a symlinked backup destination before removing any orphaned file',
 });
 
 function createValidFixtureApproval(f){
+ writeCanonical(f);
  const dry=run(f);assert.equal(dry.r.status,0,dry.r.stderr);
  const evidence='qa/results/full-browser-pedagogical-evidence.json';
  const rollback='qa/backups/last-production-build.sha';
@@ -274,6 +291,31 @@ test('never overwrites an existing backup or deletes its source on failed backup
   assert.notEqual(result.r.status,0);
   assert.match(result.r.stderr,/EEXIST/);
   assert.equal(fs.readFileSync(previous,'utf8'),'PREVIOUS-BACKUP-MUST-SURVIVE');
+  assert.ok(fs.existsSync(path.join(f.root,OLD)));
+  assert.ok(fs.existsSync(path.join(f.root,LIVE)));
+ }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
+});
+
+test('refuses apply without a canonical completion audit even when all referenced media are locally approved',()=>{
+ const f=setup(false);
+ try{
+  const {r,report}=run(f,['--apply']);
+  assert.notEqual(r.status,0);
+  assert.match(r.stderr,/CANONICAL_AUDIT_REQUIRED_FOR_APPLY/);
+  assert.equal(report.applied,false);
+  assert.ok(fs.existsSync(path.join(f.root,OLD)));
+  assert.ok(fs.existsSync(path.join(f.root,LIVE)));
+ }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
+});
+
+test('rejects a synthetic signed-off release when the canonical final QA gate remains false',()=>{
+ const f=setup(false);
+ try{
+  const approval=createValidFixtureApproval(f);
+  writeCanonical(f,{complete:false});
+  const {r}=run(f,['--apply','--approval='+approval]);
+  assert.notEqual(r.status,0);
+  assert.match(r.stderr,/FINAL_CANONICAL_CLOSURE_NOT_PROVEN/);
   assert.ok(fs.existsSync(path.join(f.root,OLD)));
   assert.ok(fs.existsSync(path.join(f.root,LIVE)));
  }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
