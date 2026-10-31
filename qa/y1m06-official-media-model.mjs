@@ -16,7 +16,11 @@ export const EXPECTED={
   cleanV26QuestionInvariantSha256:'1ce8860d805daf65293951183eb1a461b65a1c93c3c9b2ce8c1b34912d33b15d',
   cleanV26RegistrySha256:'aa615a3ed307b0e8cae6abf6901a1582c22ab59aa7f95c6339a635ca7d35fc89',
   cleanV26RegistryEntries:1159,
-  cleanV26ManifestSha256:'5993aaceaff272626c863aef07e1b33a909ca7f9fcc41d2d40890baa6c08b822',
+  // Independently replayed unmodified V26 builder on GitHub Actions #41210857670:
+  // Y1M06 questions and media registry hashes exactly matched their pinned values.
+  // The compiler manifest bytes now hash to 941fe9..., so pin the exact observed
+  // clean-builder result rather than accepting arbitrary manifests.
+  cleanV26ManifestSha256:'941fe9abf5537d4c509b3249e6d5cc04e61b5276975274bf2e473fc4a8e21764',
   sourceRegistryEntryProjectionSha256:'be6d7f0d999d1c0c7081315df4b26a0fd41309a401da7253434c5a2828cd0e38',
   sourceUsageProjectionSha256:'302d698ca908d2e204d90d21ef80531cd7a666c78a91f7328973d103f51d0e28',
   registryEntriesOutsideY1M04:1076,
