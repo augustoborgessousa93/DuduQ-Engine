@@ -131,12 +131,26 @@ try{
   }
   // Some approved Target Shooter builds evaluate the choice immediately.
   // Do not press CONTINUAR as though it were CONFIRMAR.
-  const stateWrong=await target(wrongSemantic).getAttribute('data-gameplay-state');
-  if(stateWrong==='selected'){
-    const action=page.locator('.feedback-action'),label=(await action.innerText()).replace(/\\s+/g,' ').trim();
-    if(!/confirmar/i.test(label))throw Error('WRONG_CONFIRM_CONTROL_UNEXPECTED:'+label);
-    await click(page,action,'confirm-wrong-answer',events);
-  }else events.push({label:'wrong-answer-auto-resolved',observedState:stateWrong,input:'read-only DOM observation'});
+  // Feedback may be asynchronous and the visible action can be intentionally
+  // empty while the shot resolves. Never click an empty/invisible button.
+  const wrongResolved=await page.waitForFunction(a=>{
+    const t=[...document.querySelectorAll('.target-shooter-target')].find(x=>[...x.querySelectorAll('img')].some(i=>i.alt===a));
+    const ribbon=document.querySelector('.feedback-ribbon');
+    return t?.dataset.gameplayState==='incorrect'&&ribbon?.dataset.feedback==='incorrect'&&!ribbon.hidden;
+  },wrongSemantic,{timeout:3000}).then(()=>true,()=>false);
+  if(wrongResolved)events.push({label:'wrong-answer-auto-resolved',input:'visible target and ribbon DOM observation'});
+  else {
+    const action=page.locator('.feedback-action');
+    const actionReady=await page.waitForFunction(()=>{
+      const a=document.querySelector('.feedback-action');
+      if(!a)return false;
+      const s=getComputedStyle(a),r=a.getBoundingClientRect(),label=a.textContent?.trim()||'';
+      return r.width>4&&r.height>4&&s.display!=='none'&&s.visibility!=='hidden'&&
+        (document.querySelector('#game')?.dataset.duduqInteractionState==='AWAITING_CONFIRM')&&/confirmar/i.test(label);
+    },null,{timeout:3000}).then(()=>true,()=>false);
+    if(actionReady)await click(page,action,'confirm-wrong-answer',events);
+    else events.push({label:'no-confirm-while-processing',input:'read-only DOM observation'});
+  }
   await page.waitForFunction(a=>[...document.querySelectorAll('.target-shooter-target')].some(t=>
     [...t.querySelectorAll('img')].some(i=>i.alt===a)&&t.dataset.gameplayState==='incorrect')&&
     document.querySelector('.feedback-ribbon')?.dataset.feedback==='incorrect'&&!document.querySelector('.feedback-ribbon')?.hidden,
@@ -164,12 +178,24 @@ try{
   await click(page,target('crayon'),'select-correct-crayon',events);
   await page.waitForFunction(()=>[...document.querySelectorAll('.target-shooter-target')].some(t=>
     [...t.querySelectorAll('img')].some(i=>i.alt==='crayon')&&['selected','correct'].includes(t.dataset.gameplayState)),null,{timeout:10000});
-  const stateCorrect=await target('crayon').getAttribute('data-gameplay-state');
-  if(stateCorrect==='selected'){
-    const action=page.locator('.feedback-action'),label=(await action.innerText()).replace(/\\s+/g,' ').trim();
-    if(!/confirmar/i.test(label))throw Error('CORRECT_CONFIRM_CONTROL_UNEXPECTED:'+label);
-    await click(page,action,'confirm-correct-answer',events);
-  }else events.push({label:'correct-answer-auto-resolved',observedState:stateCorrect,input:'read-only DOM observation'});
+  const correctResolved=await page.waitForFunction(()=>{
+    const t=[...document.querySelectorAll('.target-shooter-target')].find(x=>[...x.querySelectorAll('img')].some(i=>i.alt==='crayon'));
+    const ribbon=document.querySelector('.feedback-ribbon');
+    return t?.dataset.gameplayState==='correct'&&ribbon?.dataset.feedback==='correct'&&!ribbon.hidden;
+  },null,{timeout:3000}).then(()=>true,()=>false);
+  if(correctResolved)events.push({label:'correct-answer-auto-resolved',input:'visible target and ribbon DOM observation'});
+  else {
+    const action=page.locator('.feedback-action');
+    const actionReady=await page.waitForFunction(()=>{
+      const a=document.querySelector('.feedback-action');
+      if(!a)return false;
+      const s=getComputedStyle(a),r=a.getBoundingClientRect(),label=a.textContent?.trim()||'';
+      return r.width>4&&r.height>4&&s.display!=='none'&&s.visibility!=='hidden'&&
+        document.querySelector('#game')?.dataset.duduqInteractionState==='AWAITING_CONFIRM'&&/confirmar/i.test(label);
+    },null,{timeout:3000}).then(()=>true,()=>false);
+    if(actionReady)await click(page,action,'confirm-correct-answer',events);
+    else events.push({label:'no-confirm-while-processing',input:'read-only DOM observation'});
+  }
   await page.waitForFunction(()=>[...document.querySelectorAll('.target-shooter-target')].some(t=>
     [...t.querySelectorAll('img')].some(i=>i.alt==='crayon')&&t.dataset.gameplayState==='correct')&&
     document.querySelector('.feedback-ribbon')?.dataset.feedback==='correct'&&!document.querySelector('.feedback-ribbon')?.hidden,null,{timeout:15000});
