@@ -107,7 +107,7 @@ jobs:
         shell: bash
         run: |
           set -Eeuo pipefail
-          npx wrangler pages dev dist-pages --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-31 --log-level debug > /tmp/duduq-assets-reuse-pages.log 2>&1 &
+          npx wrangler pages dev dist-pages --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 --log-level debug > /tmp/duduq-assets-reuse-pages.log 2>&1 &
           echo $! > /tmp/duduq-assets-reuse-pages.pid
           for i in {1..30}; do
             if curl -fsS http://127.0.0.1:4175/ >/dev/null; then
