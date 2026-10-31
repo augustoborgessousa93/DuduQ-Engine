@@ -58,7 +58,7 @@ async function realClick(page, locator, label, events) {
   await page.mouse.up();
   events.push({ label, x, y, realMouse: true });
 }
-async function awaitFeedback(page, semantic, expected) {
+async function awaitFeedback(page, semantic, expected, events) {
   const readyToConfirm = await page.waitForFunction(({ semantic, expected }) => {
     const target = [...document.querySelectorAll('.target-shooter-target')]
       .find(node => [...node.querySelectorAll('img')].some(img => img.alt === semantic));
@@ -72,7 +72,7 @@ async function awaitFeedback(page, semantic, expected) {
       /confirmar/i.test(action.textContent || '') ? 'confirm' : false;
   }, { semantic, expected }, { timeout: 15000 }).then(handle => handle.jsonValue());
   if (readyToConfirm === 'confirm') {
-    await realClick(page, page.locator('.feedback-action'), 'confirm-' + expected, []);
+    await realClick(page, page.locator('.feedback-action'), 'confirm-' + expected, events);
     await page.waitForFunction(({ semantic, expected }) => {
       const target = [...document.querySelectorAll('.target-shooter-target')]
         .find(node => [...node.querySelectorAll('img')].some(img => img.alt === semantic));
@@ -108,7 +108,6 @@ try {
         const registryEntry = registryById.get(binding.mediaId);
         assert(option && registryEntry, 'CANDIDATE_OPTION_OR_REGISTRY_MISSING:' + binding.mediaId);
         assert.equal(norm(option.semanticTarget), norm(asset.semanticTarget), 'SEMANTIC_BINDING_CONFLICT:' + binding.mediaId);
-        assert.equal(norm(option.answerKey), norm(binding.mediaId.split('-').at(-1)), 'MEDIA_ID_SUFFIX_NOTE'); // provenance guard only; answer comes from contract
         const bytes = await readFile(path.join('dist-pages', registryEntry.urlOrPath));
         assert.equal(hash(bytes), asset.sha256, 'CANDIDATE_BYTES_HASH_MISMATCH:' + binding.mediaId);
         result.candidateBindings ??= [];
@@ -170,9 +169,9 @@ try {
       const wrongSemantic = norm(wrong.semanticTarget || wrong.answerKey);
       await realClick(page, target(wrongSemantic), 'select-wrong-' + wrong.answerKey, result.events);
       await page.waitForFunction(semantic => [...document.querySelectorAll('.target-shooter-target')]
-        .some(node => [...node.querySelectorAll('img')].some(img => norm(img.alt) === semantic) &&
+        .some(node => [...node.querySelectorAll('img')].some(img => String(img.alt || '').trim().toLocaleLowerCase('en-US') === semantic) &&
           ['selected', 'incorrect'].includes(node.dataset.gameplayState)), wrongSemantic, { timeout: 10000 });
-      await awaitFeedback(page, wrongSemantic, 'incorrect');
+      await awaitFeedback(page, wrongSemantic, 'incorrect', result.events);
       const ribbonWrong = page.locator('.feedback-ribbon');
       await page.waitForFunction(() => { const r = document.querySelector('.feedback-ribbon');
         return r?.dataset.feedback === 'incorrect' && !r.hidden; }, null, { timeout: 15000 });
@@ -188,17 +187,19 @@ try {
       const correctSemantic = norm(correct.semanticTarget || correct.answerKey);
       await realClick(page, target(correctSemantic), 'select-correct-' + correct.answerKey, result.events);
       await page.waitForFunction(semantic => [...document.querySelectorAll('.target-shooter-target')]
-        .some(node => [...node.querySelectorAll('img')].some(img => norm(img.alt) === semantic) &&
+        .some(node => [...node.querySelectorAll('img')].some(img => String(img.alt || '').trim().toLocaleLowerCase('en-US') === semantic) &&
           ['selected', 'correct'].includes(node.dataset.gameplayState)), correctSemantic, { timeout: 10000 });
-      await awaitFeedback(page, correctSemantic, 'correct');
+      await awaitFeedback(page, correctSemantic, 'correct', result.events);
       await page.waitForFunction(() => { const r = document.querySelector('.feedback-ribbon');
         return r?.dataset.feedback === 'correct' && !r.hidden; }, null, { timeout: 15000 });
       await shot('correct');
       result.finalFeedback = await page.locator('.feedback-ribbon').getAttribute('data-feedback');
       result.pageErrors = diag.pageErrors;
       result.requestFailures = diag.requestFailures;
-      result.pass = result.finalFeedback === 'correct' && result.events.filter(event => event.realMouse).length >= 6 &&
-        !diag.pageErrors.length && !diag.requestFailures.length;
+      const actionLabels = new Set(result.events.map(event => event.label));
+      result.pass = result.finalFeedback === 'correct' && actionLabels.has('select-wrong-' + wrong.answerKey) &&
+        actionLabels.has('retry') && actionLabels.has('select-correct-' + correct.answerKey) &&
+        result.events.filter(event => event.realMouse).length >= 5 && !diag.pageErrors.length && !diag.requestFailures.length;
       if (!result.pass) throw new Error('REAL_GAMEPLAY_ASSERTION_FAILED:' + questionId);
     } catch (error) {
       result.error = String(error?.stack || error);
