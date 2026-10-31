@@ -1,0 +1,147 @@
+name: DUDUQ - Reuse exact Assets-DuduQ media in isolated QA
+
+on:
+  push:
+    branches:
+      - integration/assets-duduq-reuse-20261030
+    paths:
+      - ".github/workflows/duduq-assets-duduq-reuse-qa.yml"
+      - "qa/audit-assets-duduq-source.mjs"
+      - "qa/catalog-assets-duduq-matches.mjs"
+      - "qa/tests/verify-assets-duduq-crosswalk.mjs"
+      - "qa/prepare-assets-duduq-reuse.mjs"
+      - "qa/verify-assets-duduq-reuse-preparation.mjs"
+      - "qa/verify-assets-duduq-import.mjs"
+      - "qa/assets-duduq-reuse-browser-qa.mjs"
+      - "scripts/duduq-import-chatgpt-bundle.mjs"
+      - "scripts/duduq-image-pipeline.mjs"
+      - "docs/qa/media-audit-20261029/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duduq-assets-duduq-reuse-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  isolated-v26-media-reuse:
+    name: Inventory, guarded import and real-browser Y1M04 verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      CI: "true"
+      BASE_URL: http://127.0.0.1:4175
+      ASSETS_DUDUQ_SOURCE_COMMIT: ef9551b075cc60e42408e02eb3f52752dc179297
+      DUDUQ_MEDIA_CANDIDATE_BUNDLE: qa/media-candidates/assets-duduq-reuse-20261030
+      DUDUQ_MEDIA_BROWSER_OUT: qa/results/assets-duduq-browser
+    steps:
+      - name: Checkout isolated DUDUQ review branch
+        uses: actions/checkout@v4
+        with:
+          ref: integration/assets-duduq-reuse-20261030
+          persist-credentials: false
+
+      - name: Checkout read-only Assets-DuduQ source at pinned commit
+        uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: ef9551b075cc60e42408e02eb3f52752dc179297
+          path: assets-source
+          persist-credentials: false
+
+      - name: Node.js 22 and real Chromium
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: |
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler --version
+
+      - name: Verify the exact read-only source revision and audit all files
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test "$(git -C assets-source rev-parse HEAD)" = "$ASSETS_DUDUQ_SOURCE_COMMIT"
+          test -z "$(git -C assets-source status --porcelain)"
+          mkdir -p qa/results
+          node qa/audit-assets-duduq-source.mjs assets-source --out=qa/results/assets-duduq-source-inventory.json
+          node qa/catalog-assets-duduq-matches.mjs qa/results/assets-duduq-source-inventory.json --out=qa/results/assets-duduq-question-crosswalk.json
+          node qa/tests/verify-assets-duduq-crosswalk.mjs qa/results/assets-duduq-question-crosswalk.json
+
+      - name: Prepare only exact, pre-reviewed temporary bindings
+        run: |
+          node --check qa/prepare-assets-duduq-reuse.mjs
+          node qa/prepare-assets-duduq-reuse.mjs assets-source --out=qa/media-candidates/assets-duduq-reuse-20261030
+          node qa/tests/verify-assets-duduq-reuse-preparation.mjs qa/media-candidates/assets-duduq-reuse-20261030
+
+      - name: Build official V26 QA artifact and verify all 30 modules / 600 contracts
+        run: |
+          bash qa/build-v26-topic-first-paint-qa.sh
+          node qa/verify-artifact.mjs
+
+      - name: Snapshot contracts and dry-run guarded 600-question import
+        run: |
+          node qa/verify-assets-duduq-import.mjs snapshot qa/media-candidates/assets-duduq-reuse-20261030
+          node scripts/duduq-import-chatgpt-bundle.mjs qa/media-candidates/assets-duduq-reuse-20261030
+
+      - name: Apply candidate-only media registry overlay and verify no question changes
+        run: |
+          node scripts/duduq-import-chatgpt-bundle.mjs qa/media-candidates/assets-duduq-reuse-20261030 --apply
+          node qa/verify-assets-duduq-import.mjs verify qa/media-candidates/assets-duduq-reuse-20261030
+          node qa/verify-artifact.mjs
+          node qa/audit-media-completion.mjs
+          node qa/media-safe-retirement.mjs --root=dist-pages --output=qa/results/assets-duduq-safe-retirement-plan.json
+          node --test qa/tests/duduq-media-binding-usage-guard.test.mjs
+          node --test qa/tests/duduq-media-safe-retirement.test.mjs
+
+      - name: Run exact compiled candidate with Cloudflare Pages Functions locally
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npx wrangler pages dev dist-pages --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-31 > /tmp/duduq-assets-reuse-pages.log 2>&1 &
+          echo $! > /tmp/duduq-assets-reuse-pages.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then
+              curl -fsS -D qa/results/assets-duduq-fit-route.headers -o /dev/null 'http://127.0.0.1:4175/play/english/year-1/module-04/?duduqModule=Y1M04&duduqItem=Y1M04-Q010&__duduq_fit=1'
+              grep -Eiq '^X-DUDUQ-Fit:[[:space:]]*1' qa/results/assets-duduq-fit-route.headers
+              echo QA_PAGES_RUNTIME_AND_FIT_MIDDLEWARE_READY; exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/duduq-assets-reuse-pages.log
+          exit 1
+
+      - name: Test all affected questions in desktop, tablet and mobile, plus real Target Shooter input
+        run: |
+          node --check qa/assets-duduq-reuse-browser-qa.mjs
+          node qa/assets-duduq-reuse-browser-qa.mjs
+
+      - name: Persist full source catalog, 600-question crosswalk, build and browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-assets-source-reuse-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            qa/results/assets-duduq-source-inventory.json
+            qa/results/assets-duduq-question-crosswalk.json
+            qa/results/assets-duduq-import-verification.json
+            qa/results/assets-duduq-pre-import-baseline.json
+            qa/results/assets-duduq-safe-retirement-plan.json
+            qa/results/assets-duduq-browser/**
+            qa/results/media-closure-inventory.json
+            qa/results/media-module-closure.json
+            qa/results/y1m04-v26-build.json
+            qa/results/asset-integrity-report.json
+            qa/results/assets-duduq-fit-route.headers
+            /tmp/duduq-assets-reuse-pages.log
+
+      - name: State the publication boundary
+        if: always()
+        run: |
+          echo "This workflow builds and serves only an ephemeral local Pages candidate; it does not authenticate, upload, deploy, merge or change production."
+          echo "Imported assets remain temporary and pedagogical QA pending until owner review."

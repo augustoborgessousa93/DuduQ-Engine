@@ -26,7 +26,12 @@ const hash=b=>createHash('sha256').update(b).digest('hex');
 const safe=(base,target)=>target===base||target.startsWith(base+path.sep);
 if(!process.argv[2]||!safe(root,root))throw Error('Provide bundle folder');
 const manifest=JSON.parse(await fs.readFile(path.join(bundle,'batch-manifest.json'),'utf8'));
-if(manifest.schemaVersion!=='DUDUQ_CHATGPT_MEDIA_BINDINGS_V1')throw Error('Invalid bundle schema');
+const chatgptSchema='DUDUQ_CHATGPT_MEDIA_BINDINGS_V1';
+const assetsReuseSchema='DUDUQ_ASSETS_DUDUQ_SOURCE_REUSE_V1';
+if(![chatgptSchema,assetsReuseSchema].includes(manifest.schemaVersion))throw Error('Invalid bundle schema');
+const isAssetsReuse=manifest.schemaVersion===assetsReuseSchema;
+if(isAssetsReuse&&(!manifest.sourceRepository||!/^([a-f0-9]{40})$/.test(manifest.sourceCommit||'')||manifest.provider!=='Assets-DuduQ repository'))
+  throw Error('INVALID_ASSETS_DUDUQ_PROVENANCE');
 const originalRegistryBytes=await fs.readFile(registryPath);
 const originalIntegrityBytes=await fs.readFile(integrityPath);
 const originalIntegrityLines=originalIntegrityBytes.toString('utf8').trimEnd().split(/\r?\n/);
@@ -106,7 +111,8 @@ for(const asset of manifest.assets||[]){
   const alpha=inspectPng(bytes);
   if(!alpha.valid||!alpha.transparent)throw Error('PNG alpha validation failed: '+asset.assetKey+':'+alpha.reason);
   if(!asset.bindings?.length)continue;
-  const out='content/english/assets/images/chatgpt/'+asset.assetKey.toLowerCase()+'-'+actual.slice(0,12)+'.png';
+  const namespace=isAssetsReuse?'assets-duduq':'chatgpt';
+  const out='content/english/assets/images/'+namespace+'/'+asset.assetKey.toLowerCase()+'-'+actual.slice(0,12)+'.png';
   for(const binding of asset.bindings){
     if(!/^IMG-(?:Y[1-5]M0[1-6]-)?Q\d{3}-[A-Z0-9-]+$/.test(binding.mediaId))throw Error('Unsafe media ID: '+binding.mediaId);
     // Generic IDs are permitted only when the independently verified 600-question guard
@@ -129,7 +135,15 @@ for(const asset of manifest.assets||[]){
       integrationStatus:'CANDIDATE_PREVIEW_ONLY_PEDAGOGICAL_QA_PENDING',humanResolutionStatus:'PEDAGOGICAL_QA_PENDING',
       urlOrPath:out,sha256:actual,assets:[{path:out,sha256:actual}],
       altText:asset.semanticTarget,
-      provenance:{provider:'ChatGPT image generation',sourceAsset:asset.assetKey,nativeWidth:width,nativeHeight:height,sha256:actual},
+      provenance:isAssetsReuse?{
+        provider:manifest.provider,
+        sourceAsset:asset.assetKey,
+        sourceRepository:manifest.sourceRepository,
+        sourceCommit:manifest.sourceCommit,
+        sourcePath:asset.sourcePath||null,
+        sourceGitBlob:asset.sourceGitBlob||null,
+        nativeWidth:width,nativeHeight:height,sha256:actual
+      }:{provider:manifest.provider||'ChatGPT image generation',sourceAsset:asset.assetKey,nativeWidth:width,nativeHeight:height,sha256:actual},
       replacementAudit:{questionId:binding.questionId,previousPath:prior?.urlOrPath||null}};
     actions.push({binding,entry,bytes,out});
   }

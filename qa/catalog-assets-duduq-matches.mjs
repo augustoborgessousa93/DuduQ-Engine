@@ -1,0 +1,75 @@
+#!/usr/bin/env node
+/** Crosswalk all available source files against the audited 600 questions.
+ * Filename/translation matches are leads only; only visually reviewed exact
+ * concepts become preview candidates, and none receive human approval here.
+ */
+import {readFile,writeFile} from 'node:fs/promises';
+import path from 'node:path';
+
+const root=process.cwd();
+const inventoryPath=path.resolve(process.argv[2]||'docs/qa/assets-duduq-source-inventory-20261030.json');
+const output=path.resolve(process.argv.find(x=>x.startsWith('--out='))?.slice(6)||'qa/results/assets-duduq-question-crosswalk.json');
+const safe=(base,target)=>target===base||target.startsWith(base+path.sep);
+if(!safe(root,output))throw Error('OUTPUT_MUST_REMAIN_IN_REPOSITORY');
+const inventory=JSON.parse(await readFile(inventoryPath,'utf8'));
+const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
+const aliases={
+  dog:['dog','dogs','cachorro','cachorros','cao','caes'],cat:['cat','cats','gato','gata','gatos','gatas'],
+  fish:['fish','peixe','peixes'],bird:['bird','birds','passaro','passaros','ave','aves'],turtle:['turtle','tortoise','tartaruga','tartarugas'],
+  apple:['apple','apples','maca','macas'],banana:['banana','bananas'],pear:['pear','pears','pera','peras'],
+  backpack:['backpack','backpacks','school bag','schoolbag','school bags','schoolbags','mochila','mochilas'],
+  eraser:['eraser','erasers','rubber','borracha','borrachas'],pencil:['pencil','pencils','lapis'],
+  ruler:['ruler','rulers','regua','reguas'],pen:['pen','pens','caneta','canetas'],crayon:['crayon','crayons','giz de cera'],
+  book:['book','books','livro','livros'],notebook:['notebook','notebooks','caderno','cadernos'],school:['school','escola'],
+  red:['red','vermelho','vermelha','vermelhos','vermelhas'],blue:['blue','azul'],green:['green','verde'],yellow:['yellow','amarelo','amarela'],
+  orange:['orange','laranja'],purple:['purple','roxo','roxa'],black:['black','preto','preta'],white:['white','branco','branca'],
+  hello:['hello','oi','ola'],goodbye:['goodbye','bye','tchau','adeus'],
+  boy:['boy','menino','garoto'],girl:['girl','menina','garota'],head:['head','cabeca'],hand:['hand','mao'],hands:['hands','maos'],
+  leg:['leg','perna'],legs:['legs','pernas'],eye:['eye','olho'],eyes:['eyes','olhos'],ear:['ear','orelha'],ears:['ears','orelhas'],
+  shirt:['shirt','camisa'],jacket:['jacket','jaqueta'],cap:['cap','bone'],hat:['hat','chapeu'],glasses:['glasses','oculos'],
+  car:['car','carro'],ball:['ball','bola'],doll:['doll','boneca'],kite:['kite','pipa'],
+};
+const aliasToConcept=new Map();for(const [concept,terms] of Object.entries(aliases))for(const term of terms)aliasToConcept.set(norm(term),concept);
+for(const [concept] of Object.entries(aliases))aliasToConcept.set(norm(concept),concept);
+const sourceRows=inventory.files.map(f=>({...f,filenameNormalized:norm(path.basename(f.path,path.extname(f.path)))}));
+const mediaByConcept=new Map();
+for(const f of sourceRows){
+  const concepts=new Set();
+  // Match only complete normalized alias phrases, never substrings (e.g. dog != doghouse).
+  for(const [alias,concept] of aliasToConcept){
+    const tokens=f.filenameNormalized.split(' '),a=alias.split(' ');
+    if(a.length&&a.length<=tokens.length&&tokens.some((_,i)=>tokens.slice(i,i+a.length).join(' ')===alias))concepts.add(concept);
+  }
+  f.filenameConceptHints=[...concepts].sort();
+  for(const concept of concepts){const list=mediaByConcept.get(concept)||[];list.push(f);mediaByConcept.set(concept,list);}
+}
+const visuallyReviewed=new Map(sourceRows.filter(f=>f.visualReview?.status==='CODEX_VISUALLY_INSPECTED').map(f=>[f.path,f.visualReview.semantic]));
+const questions=[];
+for(let year=1;year<=5;year++){
+  const data=JSON.parse(await readFile(path.join(root,`docs/qa/media-audit-20261029/year-${year}.json`),'utf8'));
+  for(const mod of data.modules)for(const q of mod.questions){
+    const options=[];
+    for(const option of q.options||[]){
+      const semantic=norm(option.semanticTarget),concept=aliasToConcept.get(semantic)||null;
+      const candidates=concept?(mediaByConcept.get(concept)||[]).map(file=>({sourcePath:file.path,sha256:file.sha256,dimensions:file.dimensions,
+        format:file.detectedType,technicalStatus:file.technicalStatus,visualReview:file.visualReview.status,
+        associationStatus:visuallyReviewed.get(file.path)===concept?'VISUAL_EXACT_PRECHECK_HUMAN_QA_PENDING':'SEMANTIC_REVIEW_REQUIRED'})):[];
+      options.push({optionId:option.optionId,label:option.label,answerKey:option.answerKey,correct:option.correct===true,
+        semanticTarget:option.semanticTarget,mediaId:option.mediaId,candidateCount:candidates.length,candidates});
+    }
+    questions.push({year,moduleId:mod.moduleId,questionId:q.questionId,mechanic:q.mechanic,learningTarget:q.learningTarget,
+      instructionPt:q.instructionPt,audioTranscript:q.audioTranscript||null,visualRequirement:q.visualRequirement||null,
+      correctAnswer:q.correctAnswer,semanticReview:q.semanticReview,mediaIds:q.mediaIds||[],primaryMediaId:q.imageRef||null,options});
+  }
+}
+if(questions.length!==600)throw Error('EXPECTED_600_QUESTIONS:'+questions.length);
+const allOptions=questions.flatMap(q=>q.options),candidateOptions=allOptions.filter(o=>o.candidateCount>0);
+const reviewedOptions=candidateOptions.filter(o=>o.candidates.some(c=>c.associationStatus==='VISUAL_EXACT_PRECHECK_HUMAN_QA_PENDING'));
+const report={schemaVersion:'ASSETS_DUDUQ_BILINGUAL_600_QUESTION_CROSSWALK_V1',sourceRepository:inventory.sourceRepository,sourceCommit:inventory.sourceCommit,
+  inventoryPath:path.relative(root,inventoryPath).replaceAll('\\','/'),inventoryFiles:inventory.fileCount,uniqueSourceHashes:inventory.uniqueSha256,
+  inventoryStatus:inventory.status,questionCount:questions.length,optionCount:allOptions.length,
+  candidateOptions:candidateOptions.length,optionsWithVisuallyReviewedExactConcept:reviewedOptions.length,
+  humanPedagogicalApproval:'PENDING',matchingRule:'Bilingual exact normalized aliases are discovery hints only. No filename-only match is approved.',questions};
+const bytes=Buffer.from(JSON.stringify(report,null,2)+'\n');await writeFile(output,bytes);
+console.log(JSON.stringify({status:'CROSSWALK_COMPLETE_REVIEW_REQUIRED',inventoryFiles:inventory.fileCount,questions:questions.length,options:allOptions.length,
+  optionsWithCandidates:candidateOptions.length,visuallyReviewedExactCandidateOptions:reviewedOptions.length,output:path.relative(root,output).replaceAll('\\','/')},null,2));
