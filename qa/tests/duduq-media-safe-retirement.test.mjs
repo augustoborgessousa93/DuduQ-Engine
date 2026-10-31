@@ -204,6 +204,7 @@ test('rejects a substituted Q999 question in both inventory and retirement plann
 test('rejects a symlinked backup destination before removing any orphaned file',()=>{
  const f=setup(false);
  try{
+  writeCanonical(f);
   const dry=run(f);assert.equal(dry.r.status,0,dry.r.stderr);
   const evidence='qa/results/full-browser-pedagogical-evidence.json';
   const rollback='qa/backups/last-production-build.sha';
