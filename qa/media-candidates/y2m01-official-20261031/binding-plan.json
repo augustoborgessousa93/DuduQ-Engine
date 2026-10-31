@@ -1,0 +1,269 @@
+{
+  "schemaVersion": "DUDUQ_MEDIA_BINDING_PLAN_V1",
+  "createdAt": "2026-10-31T19:21:56.1401776Z",
+  "moduleId": "Y2M01",
+  "mode": "CANDIDATE_ONLY_DO_NOT_APPLY",
+  "questionSource": "dist-pages/content/english/year-2/module-01/questions.json",
+  "questionSourceSha256": "257776f3d2a896a929db2233d3d238ba2f2881d652cdab0be82dae5c3519f432",
+  "pendingMediaIdCount": 29,
+  "candidateConceptCount": 28,
+  "coverage": "29/29 pending media IDs have an occurrence-scoped candidate plan. One verified farewell concept intentionally covers both the generic Goodbye and Goodbye, Ana media IDs; no duplicate concept was generated.",
+  "bindings": [
+    {
+      "mediaId": "IMG-Y1M01-FAREWELL-ANA-001",
+      "ledgerStatus": "PROVISIONAL",
+      "candidateFile": "images/DUDUQ-Y2M01-GOODBYE.png",
+      "semanticTarget": "Goodbye, Ana!",
+      "questionUsages": [
+        {"questionId": "Y2M01-Q012", "contractPath": "targets[3].media", "role": "DESTINATION", "semanticTarget": "Goodbye, Ana!"}
+      ]
+    },
+    {
+      "mediaId": "IMG-Y1M01-FAREWELL-GENERIC-001",
+      "ledgerStatus": "PROVISIONAL",
+      "candidateFile": "images/DUDUQ-Y2M01-GOODBYE.png",
+      "semanticTarget": "Goodbye!",
+      "questionUsages": [
+        {"questionId": "Y2M01-Q001", "contractPath": "pairs[3].b.media", "role": "PAIR_IMAGE", "semanticTarget": "Goodbye!"},
+        {"questionId": "Y2M01-Q003", "contractPath": "targetsToFind[0].media", "role": "CORRECT_BUBBLE", "semanticTarget": "Goodbye!"},
+        {"questionId": "Y2M01-Q006", "contractPath": "targets[3].media", "role": "DESTINATION", "semanticTarget": "Goodbye!"},
+        {"questionId": "Y2M01-Q007", "contractPath": "pairs[1].b.media", "role": "PAIR_IMAGE", "semanticTarget": "Goodbye!"},
+        {"questionId": "Y2M01-Q012", "contractPath": "targets[0].media", "role": "DESTINATION", "semanticTarget": "Goodbye!"}
+      ]
+    },
+    {
+      "mediaId": "IMG-Y1M01-GREETING-AFTERNOON-001",
+      "ledgerStatus": "PROVISIONAL",
+      "candidateFile": "images/DUDUQ-Y2M01-GOOD-AFTERNOON.png",
+      "semanticTarget": "Good afternoon!",
+      "questionUsages": [
+        {"questionId": "Y2M01-Q003", "contractPath": "bubbleDistractorPool[2].media", "role": "DISTRACTOR_BUBBLE", "semanticTarget": "Good afternoon!"},
+        {"questionId": "Y2M01-Q006", "contractPath": "targets[2].media", "role": "DESTINATION", "semanticTarget": "Good afternoon!"},
+        {"questionId": "Y2M01-Q013", "contractPath": "options[1].media", "role": "TARGET_OPTION", "semanticTarget": "Good afternoon"}
+      ]
+    },
+    {
+      "mediaId": "IMG-Y1M01-GREETING-GENERIC-001",
+      "ledgerStatus": "PROVISIONAL",
+      "candidateFile": "images/DUDUQ-Y2M01-GREETING-GENERIC.png",
+      "semanticTarget": "children greeting",
+      "questionUsages": [
+        {"questionId": "Y2M01-Q018", "contractPath": "options[1].media", "role": "DISTRACTOR", "semanticTarget": "children greeting"}
+      ]
+    },
+    {
+      "mediaId": "IMG-Y1M01-GREETING-INFORMAL-001",
+      "ledgerStatus": "PROVISIONAL",
+      "candidateFile": "images/DUDUQ-Y2M01-GREETING-INFORMAL.png",
+      "semanticTarget": "Hello!",
+      "questionUsages": [
+        {"questionId": "Y2M01-Q001", "contractPath": "pairs[0].b.media", "role": "PAIR_IMAGE", "semanticTarget": "Hello!"},
+        {"questionId": "Y2M01-Q003", "contractPath": "bubbleDistractorPool[0].media", "role": "DISTRACTOR_BUBBLE", "semanticTarget": "Hello!"},
+        {"questionId": "Y2M01-Q006", "contractPath": "targets[0].media", "role": "DESTINATION", "semanticTarget": "Hello!"},
+        {"questionId": "Y2M01-Q013", "contractPath": "options[3].media", "role": "TARGET_OPTION", "semanticTarget": "Hello"}
+      ]
+    },
+    {
+      "mediaId": "IMG-Y1M01-GREETING-MORNING-001",
+      "ledgerStatus": "PROVISIONAL",
+      "candidateFile": "images/DUDUQ-Y2M01-GOOD-MORNING.png",
+      "semanticTarget": "Good morning!",
+      "questionUsages": [
+        {"questionId": "Y2M01-Q001", "contractPath": "pairs[1].b.media", "role": "PAIR_IMAGE", "semanticTarget": "Good morning!"},
+        {"questionId": "Y2M01-Q003", "contractPath": "bubbleDistractorPool[1].media", "role": "DISTRACTOR_BUBBLE", "semanticTarget": "Good morning!"},
+        {"questionId": "Y2M01-Q006", "contractPath": "targets[1].media", "role": "DESTINATION", "semanticTarget": "Good morning!"},
+        {"questionId": "Y2M01-Q007", "contractPath": "pairs[2].b.media", "role": "PAIR_IMAGE", "semanticTarget": "Good morning!"},
+        {"questionId": "Y2M01-Q013", "contractPath": "options[0].media", "role": "TARGET_OPTION", "semanticTarget": "Good morning"}
+      ]
+    },
+    {
+      "mediaId": "IMG-Y1M01-NAME-LEO-001",
+      "ledgerStatus": "PROVISIONAL",
+      "candidateFile": "images/DUDUQ-Y2M01-LEO.png",
+      "semanticTarget": "Leo",
+      "questionUsages": [
+        {"questionId": "Y2M01-Q003", "contractPath": "bubbleDistractorPool[4].media", "role": "DISTRACTOR_BUBBLE", "semanticTarget": "Leo"},
+        {"questionId": "Y2M01-Q009", "contractPath": "options[0].media", "role": "TARGET_OPTION", "semanticTarget": "Leo"},
+        {"questionId": "Y2M01-Q017", "contractPath": "pairs[0].b.media", "role": "PAIR_IMAGE", "semanticTarget": "My name is Leo."}
+      ]
+    },
+    {
+      "mediaId": "IMG-Y1M01-NAME-MIA-001",
+      "ledgerStatus": "PROVISIONAL",
+      "candidateFile": "images/DUDUQ-Y2M01-MIA.png",
+      "semanticTarget": "Mia",
+      "questionUsages": [
+        {"questionId": "Y2M01-Q009", "contractPath": "options[1].media", "role": "TARGET_OPTION", "semanticTarget": "Mia"},
+        {"questionId": "Y2M01-Q017", "contractPath": "pairs[1].b.media", "role": "PAIR_IMAGE", "semanticTarget": "My name is Mia."}
+      ]
+    },
+    {
+      "mediaId": "IMG-Y1M01-NAME-QUESTION-ANSWER-001",
+      "ledgerStatus": "PROVISIONAL",
+      "candidateFile": "images/DUDUQ-Y2M01-BEN.png",
+      "semanticTarget": "Ben",
+      "questionUsages": [
+        {"questionId": "Y2M01-Q009", "contractPath": "options[3].media", "role": "TARGET_OPTION", "semanticTarget": "Ben"}
+      ]
+    },
+    {
+      "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+      "ledgerStatus": "PROVISIONAL",
+      "candidateFile": "images/DUDUQ-Y2M01-ANA.png",
+      "semanticTarget": "Ana",
+      "questionUsages": [
+        {"questionId": "Y2M01-Q009", "contractPath": "options[2].media", "role": "TARGET_OPTION", "semanticTarget": "Ana"},
+        {"questionId": "Y2M01-Q017", "contractPath": "pairs[2].b.media", "role": "PAIR_IMAGE", "semanticTarget": "My name is Ana."}
+      ]
+    },
+    {
+      "mediaId": "IMG-Y2M01-Q018-NAME-QUESTION-SCENE-V1",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-WHATS-YOUR-NAME.png",
+      "semanticTarget": "one child asks another child's name / What's your name?",
+      "questionUsages": [
+        {"questionId": "Y2M01-Q018", "contractPath": "options[0].media", "role": "TARGET", "semanticTarget": "one child asks another child's name"}
+      ]
+    },
+    {
+      "mediaId": "IMG-Y2M01-SEE-YOU-001",
+      "ledgerStatus": "PROVISIONAL",
+      "candidateFile": "images/DUDUQ-Y2M01-SEE-YOU.png",
+      "semanticTarget": "See you.",
+      "questionUsages": [
+        {"questionId": "Y2M01-Q007", "contractPath": "pairs[0].b.media", "role": "PAIR_IMAGE", "semanticTarget": "See you."},
+        {"questionId": "Y2M01-Q012", "contractPath": "targets[2].media", "role": "DESTINATION", "semanticTarget": "See you."},
+        {"questionId": "Y2M01-Q018", "contractPath": "options[2].media", "role": "DISTRACTOR", "semanticTarget": "two people saying see you"}
+      ]
+    },
+    {
+      "mediaId": "Y1M01-EMOJI-NIGHT-001",
+      "ledgerStatus": "PROVISIONAL",
+      "candidateFile": "images/DUDUQ-Y2M01-GOOD-NIGHT.png",
+      "semanticTarget": "Good night / bedtime",
+      "questionUsages": [
+        {"questionId": "Y2M01-Q001", "contractPath": "pairs[2].b.media", "role": "PAIR_IMAGE", "semanticTarget": "Good night."},
+        {"questionId": "Y2M01-Q003", "contractPath": "bubbleDistractorPool[3].media", "role": "DISTRACTOR_BUBBLE", "semanticTarget": "Night"},
+        {"questionId": "Y2M01-Q007", "contractPath": "pairs[3].b.media", "role": "PAIR_IMAGE", "semanticTarget": "Good night."},
+        {"questionId": "Y2M01-Q012", "contractPath": "targets[1].media", "role": "DESTINATION", "semanticTarget": "Good night."},
+        {"questionId": "Y2M01-Q013", "contractPath": "options[2].media", "role": "CORRECT_TARGET", "semanticTarget": "Good night"},
+        {"questionId": "Y2M01-Q018", "contractPath": "options[3].media", "role": "DISTRACTOR", "semanticTarget": "bedtime / good night"}
+      ]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-A",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-A.png",
+      "semanticTarget": "A",
+      "questionUsages": [{"questionId": "Y2M01-Q002", "contractPath": "targets[0].media", "role": "DESTINATION", "semanticTarget": "A"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-B",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-B.png",
+      "semanticTarget": "B",
+      "questionUsages": [{"questionId": "Y2M01-Q002", "contractPath": "targets[1].media", "role": "DESTINATION", "semanticTarget": "B"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-C",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-C.png",
+      "semanticTarget": "C",
+      "questionUsages": [{"questionId": "Y2M01-Q002", "contractPath": "targets[2].media", "role": "DESTINATION", "semanticTarget": "C"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-D",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-D.png",
+      "semanticTarget": "D",
+      "questionUsages": [{"questionId": "Y2M01-Q002", "contractPath": "targets[3].media", "role": "DESTINATION", "semanticTarget": "D"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-O",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-O.png",
+      "semanticTarget": "O",
+      "questionUsages": [{"questionId": "Y2M01-Q014", "contractPath": "targets[0].media", "role": "DESTINATION", "semanticTarget": "O"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-P",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-P.png",
+      "semanticTarget": "P",
+      "questionUsages": [{"questionId": "Y2M01-Q014", "contractPath": "targets[1].media", "role": "DESTINATION", "semanticTarget": "P"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-Q",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-Q.png",
+      "semanticTarget": "Q",
+      "questionUsages": [{"questionId": "Y2M01-Q014", "contractPath": "targets[2].media", "role": "DESTINATION", "semanticTarget": "Q"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-R",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-R.png",
+      "semanticTarget": "R",
+      "questionUsages": [{"questionId": "Y2M01-Q014", "contractPath": "targets[3].media", "role": "DESTINATION", "semanticTarget": "R"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-S",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-S.png",
+      "semanticTarget": "S",
+      "questionUsages": [{"questionId": "Y2M01-Q016", "contractPath": "targets[0].media", "role": "DESTINATION", "semanticTarget": "S"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-T",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-T.png",
+      "semanticTarget": "T",
+      "questionUsages": [{"questionId": "Y2M01-Q016", "contractPath": "targets[1].media", "role": "DESTINATION", "semanticTarget": "T"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-U",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-U.png",
+      "semanticTarget": "U",
+      "questionUsages": [{"questionId": "Y2M01-Q016", "contractPath": "targets[2].media", "role": "DESTINATION", "semanticTarget": "U"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-V",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-V.png",
+      "semanticTarget": "V",
+      "questionUsages": [{"questionId": "Y2M01-Q016", "contractPath": "targets[3].media", "role": "DESTINATION", "semanticTarget": "V"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-W",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-W.png",
+      "semanticTarget": "W",
+      "questionUsages": [{"questionId": "Y2M01-Q020", "contractPath": "targets[0].media", "role": "DESTINATION", "semanticTarget": "W"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-X",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-X.png",
+      "semanticTarget": "X",
+      "questionUsages": [{"questionId": "Y2M01-Q020", "contractPath": "targets[1].media", "role": "DESTINATION", "semanticTarget": "X"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-Y",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-Y.png",
+      "semanticTarget": "Y",
+      "questionUsages": [{"questionId": "Y2M01-Q020", "contractPath": "targets[2].media", "role": "DESTINATION", "semanticTarget": "Y"}]
+    },
+    {
+      "mediaId": "MEDIA-LETTER-Z",
+      "ledgerStatus": "NON_TEMPORARY_UNVERIFIED",
+      "candidateFile": "images/DUDUQ-Y2M01-LETTER-Z.png",
+      "semanticTarget": "Z",
+      "questionUsages": [{"questionId": "Y2M01-Q020", "contractPath": "targets[3].media", "role": "DESTINATION", "semanticTarget": "Z"}]
+    }
+  ],
+  "applicationStatus": "NOT_APPLIED",
+  "integrationStatus": "NOT_STARTED",
+  "productionStatus": "NOT_APPROVED"
+}
