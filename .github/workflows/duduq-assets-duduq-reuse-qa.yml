@@ -56,7 +56,7 @@ jobs:
       - name: Checkout isolated DUDUQ review branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref_name }}
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
           persist-credentials: false
 
       - name: Checkout read-only Assets-DuduQ source at pinned commit
