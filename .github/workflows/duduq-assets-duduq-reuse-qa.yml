@@ -13,6 +13,7 @@ on:
       - "qa/verify-assets-duduq-reuse-preparation.mjs"
       - "qa/verify-assets-duduq-import.mjs"
       - "qa/assets-duduq-reuse-browser-qa.mjs"
+      - "qa/assert-media-closure-coherence.mjs"
       - "qa/target-shooter-mobile-containment-probe.mjs"
       - "scripts/duduq-import-chatgpt-bundle.mjs"
       - "scripts/duduq-image-pipeline.mjs"
@@ -30,6 +31,7 @@ on:
       - "qa/verify-assets-duduq-reuse-preparation.mjs"
       - "qa/verify-assets-duduq-import.mjs"
       - "qa/assets-duduq-reuse-browser-qa.mjs"
+      - "qa/assert-media-closure-coherence.mjs"
       - "qa/target-shooter-mobile-containment-probe.mjs"
       - "scripts/duduq-import-chatgpt-bundle.mjs"
       - "scripts/duduq-image-pipeline.mjs"
@@ -117,6 +119,9 @@ jobs:
           echo "CANDIDATE_WITH_MEDIA_OVERLAY_MANIFEST_SHA256=$EXPECTED_ARTIFACT_SHA256 EXPECTED_FILES=$EXPECTED_COMPILED_FILE_COUNT"
           node qa/verify-artifact.mjs
           node qa/audit-media-completion.mjs
+          node qa/check-media-module-closure.mjs --input=qa/results/media-closure-inventory.json --output=qa/results/media-module-closure.json
+          node --check qa/assert-media-closure-coherence.mjs
+          node qa/assert-media-closure-coherence.mjs
           node qa/media-safe-retirement.mjs --root=dist-pages --output=qa/results/assets-duduq-safe-retirement-plan.json
           node --test qa/tests/duduq-media-binding-usage-guard.test.mjs
           node --test qa/tests/duduq-media-safe-retirement.test.mjs
@@ -204,6 +209,7 @@ jobs:
             qa/results/media-browser-qa/**
             qa/results/media-closure-inventory.json
             qa/results/media-module-closure.json
+            qa/results/media-closure-consistency.json
             qa/results/y1m04-v26-build.json
             qa/results/asset-integrity-report.json
             qa/results/assets-duduq-fit-route.headers
