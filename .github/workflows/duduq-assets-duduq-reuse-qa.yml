@@ -39,7 +39,10 @@ permissions:
 
 concurrency:
   group: duduq-assets-duduq-reuse-${{ github.ref }}
-  cancel-in-progress: true
+  # A 90-route real-browser audit can outlast a short Codex commit interval.
+  # Keep one running audit and let GitHub replace older pending audits; do not
+  # repeatedly cancel the only in-flight browser evidence.
+  cancel-in-progress: false
 
 jobs:
   isolated-v26-media-reuse:
@@ -174,6 +177,15 @@ jobs:
         run: |
           node --check qa/assets-duduq-reuse-browser-qa.mjs
           node qa/assets-duduq-reuse-browser-qa.mjs
+
+      # The 30-route smoke runs in diagnostic mode to preserve screenshots even
+      # when some routes fail. A separate strict gate MUST turn any diagnostic
+      # failure into a failed workflow; continue-on-error is not certification.
+      - name: Verify all 90 route-viewport boots are hard PASS
+        if: ${{ !cancelled() }}
+        run: |
+          node --check qa/tests/verify-30-route-browser-smoke.mjs
+          node qa/tests/verify-30-route-browser-smoke.mjs qa/results/media-browser-qa/report.json
 
       - name: Persist full source catalog, 600-question crosswalk, build and browser evidence
         if: always()
