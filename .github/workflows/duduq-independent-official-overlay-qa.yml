@@ -29,6 +29,8 @@ on:
       - "qa/verify-y1m06-official-media-build.mjs"
       - "qa/verify-y1m06-source-registry-pin.mjs"
       - "qa/verify-compiled-media-distribution-browser.mjs"
+      - "qa/replace-pig-from-assets-duduq.mjs"
+      - "qa/verify-pig-direct-reuse-browser.mjs"
       - "core/adapters/v27/target-shooter-mobile-containment.css"
       - "qa/export-verified-media-distribution-candidate.mjs"
       - "engine/adapters/r148/duduq-hud-responsive.css"
@@ -285,10 +287,32 @@ jobs:
           git diff --exit-code -- content/english functions/play/english core
           echo "NO_PRODUCTION_DEPLOY_NO_MEDIA_DELETION_NO_GOLD_MASTER_CHANGE"
 
+      - name: Checkout pinned official Assets-DuduQ source for exact pig reuse
+        uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: 50fb80a89a5779d73f81c96aab35f6e86193d769
+          path: assets-source
+          persist-credentials: false
+
+      - name: Integrate exactly one pig PNG into three provisional IDs after the 185 approved replacements
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test "$(git -C assets-source rev-parse HEAD)" = "50fb80a89a5779d73f81c96aab35f6e86193d769"
+          test -z "$(git -C assets-source status --porcelain)"
+          node --check qa/replace-pig-from-assets-duduq.mjs
+          node qa/replace-pig-from-assets-duduq.mjs assets-source
+          node qa/replace-pig-from-assets-duduq.mjs assets-source --apply
+          node --check qa/verify-pig-direct-reuse-browser.mjs
+          node qa/verify-pig-direct-reuse-browser.mjs
+          echo "185_APPROVED_IDS_PLUS_3_PIG_PREVIEW_IDS_VERIFIED_ON_ONE_COMPILED_ARTIFACT"
+
       # This is a product-shaped compiled distribution containing all 185
       # media-ID substitutions, NOT another empty QA report. The temporary
-      # injected Target Shooter style is stripped and re-hashed; only R148
-      # versioned CSS remains. Release approval is deliberately FALSE.
+      # injected Target Shooter style is stripped and re-hashed; only V27
+      # versioned Pages CSS remains. Pig is a separately guarded QA candidate.
+      # Release approval is deliberately FALSE.
       - name: Export single hash-bound 185-ID distributable candidate
         run: |
           set -Eeuo pipefail
@@ -312,6 +336,8 @@ jobs:
             ${{ runner.temp }}/duduq-review-distribution.tar.gz
             qa/results/duduq-review-distribution.sha256
             qa/results/duduq-distribution-candidate.json
+            qa/results/pig-source-direct-reuse.json
+            qa/results/pig-source-direct-browser.json
 
       - name: Retain independent QA reports and real-browser screenshots
         if: always()

@@ -329,7 +329,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: duduq-direct-pig-source-candidate-\${{ github.run_id }}
+          name: duduq-direct-pig-source-candidate-${{ github.run_id }}
           retention-days: 21
           if-no-files-found: warn
           compression-level: 0
@@ -337,7 +337,7 @@ jobs:
             qa/results/pig-source-direct-reuse.json
             qa/results/pig-source-direct-browser.json
             qa/results/pig-distribution-tar.sha256
-            \${{ runner.temp }}/duduq-pig-direct-v26-qa.tar.gz
+            ${{ runner.temp }}/duduq-pig-direct-v26-qa.tar.gz
             /tmp/duduq-pig-pages.log
 
       - name: Explicit no-production boundary

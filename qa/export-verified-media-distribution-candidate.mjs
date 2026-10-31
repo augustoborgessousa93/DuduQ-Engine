@@ -111,6 +111,22 @@ for(const moduleId of ['Y1M04','Y1M05']){
  }
 }
 assert.equal(sourceIds.size,185);
+// The same compiled tree must also include the source-proven one-pig image
+// without falsely labeling its 3 provisional bindings as pedagogically approved.
+const pig=await load('qa/results/pig-source-direct-reuse.json');
+const pigBrowser=await load('qa/results/pig-source-direct-browser.json');
+assert.equal(pig.status,'EXACT_PIG_MEDIA_PATCHED_EPHEMERAL_QA');
+assert.equal(pigBrowser.status,'PASS_HTTP_REGISTRY_AND_14_REAL_QUESTION_ROUTE_BOOTS');
+assert.equal(pigBrowser.routesTested,14);
+assert.equal(pig.affectedQuestions,7);
+assert.equal(pig.changedMediaIds.length,3);
+assert.equal(pigBrowser.sha256,pig.sha256);
+assert.equal(pig.productionDeployed,false);
+assert.equal(pig.releaseApproved,false);
+const pigEntries=pig.changedMediaIds.map(id=>index.get(id));
+assert(pigEntries.every(x=>x&&x.temporary===true&&x.sha256===pig.sha256
+ &&x.humanResolutionStatus==='PEDAGOGICAL_QA_PENDING'), 'PIG_PREVIEW_MUST_STAY_PROVISIONAL');
+assert.equal(hashes.get(pig.assetPath)?.sha,pig.sha256,'PIG_PNG_NOT_HASH_BOUND');
 const report={
  schemaVersion:'DUDUQ_DISTRIBUTABLE_MEDIA_CANDIDATE_V1',
  status:'COMPILED_DISTRIBUTION_READY_FOR_RELEASE_GATES_NOT_APPROVED',
@@ -120,6 +136,12 @@ const report={
  pagesFitAdapter:'v27-target-shooter-mobile',canaryR148IsSeparateArtifact:true,
  modules:30,activities:600,reviewedModules:['Y1M04','Y1M05'],
  sourceMediaIdsIntegrated:185,
+ additionalSourcePigCandidateIds:3,
+ additionalSourcePigQuestions:7,
+ additionalSourcePigRouteBootsVerified:14,
+ additionalSourcePigAssetSha256:pig.sha256,
+ additionalSourcePigAssetPath:pig.assetPath,
+ pigPedagogicalApprovalPending:true,
  pendingMediaIds:954,
  qaOnlyInlineCssRemoved:true,
  mobileContainmentLoadedFromVersionedV27:true,
