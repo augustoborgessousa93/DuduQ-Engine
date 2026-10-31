@@ -3,7 +3,7 @@ name: DUDUQ - Reuse exact Assets-DuduQ media in isolated QA
 on:
   push:
     branches:
-      - integration/assets-duduq-reuse-20261030
+      - integration/assets-duduq-reuse-20261031
     paths:
       - ".github/workflows/duduq-assets-duduq-reuse-qa.yml"
       - "qa/audit-assets-duduq-source.mjs"
