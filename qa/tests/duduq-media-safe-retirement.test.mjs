@@ -278,3 +278,34 @@ test('never overwrites an existing backup or deletes its source on failed backup
   assert.ok(fs.existsSync(path.join(f.root,LIVE)));
  }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
 });
+
+test('keeps an orphan file referenced directly by a compiled HTML page',()=>{
+ const f=setup(true);
+ try{
+  const html=path.join(f.root,'play/english/year-1/module-01/index.html');
+  fs.mkdirSync(path.dirname(html),{recursive:true});
+  fs.writeFileSync(html,'<img src="/'+OLD+'">');
+  const {r,report}=run(f);
+  assert.equal(r.status,0,r.stderr);
+  assert.equal(report.candidates.some(x=>x.path===OLD),false);
+  assert.ok(report.rejected.some(x=>x.path===OLD &&
+    x.reason==='REFERENCED_BY_COMPILED_RUNTIME' &&
+    x.runtimeFiles.includes('play/english/year-1/module-01/index.html')));
+  assert.ok(fs.existsSync(path.join(f.root,OLD)));
+ }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
+});
+
+test('keeps an orphan file referenced through an images/ suffix in compiled CSS',()=>{
+ const f=setup(true);
+ try{
+  const css=path.join(f.root,'play/english/year-1/module-01/style.css');
+  fs.mkdirSync(path.dirname(css),{recursive:true});
+  fs.writeFileSync(css,'body{background:url("../'+OLD.slice(OLD.indexOf('images/'))+'")}');
+  const {r,report}=run(f);
+  assert.equal(r.status,0,r.stderr);
+  assert.equal(report.candidates.some(x=>x.path===OLD),false);
+  assert.ok(report.rejected.some(x=>x.path===OLD &&
+    x.reason==='REFERENCED_BY_COMPILED_RUNTIME'));
+  assert.ok(fs.existsSync(path.join(f.root,OLD)));
+ }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
+});
