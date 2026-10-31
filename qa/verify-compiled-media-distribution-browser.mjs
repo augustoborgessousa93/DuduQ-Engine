@@ -37,8 +37,13 @@ try{
   await page.waitForFunction(()=>{
    const link=document.querySelector('link[data-duduq-release="v27-target-shooter-mobile"]');
    const targets=[...document.querySelectorAll('.target-shooter-target')];
+   // A target's box can render before its PNG finishes loading. Wait for
+   // ALL four images, not just the first successful asset or the geometry.
+   // Missing/broken images must still FAIL after the timeout.
+   const images=targets.map(target=>target.querySelector('img'));
    return Boolean(link?.sheet&&targets.length===4&&
-       targets.every(x=>x.getBoundingClientRect().width>20));
+       targets.every(x=>x.getBoundingClientRect().width>20)&&
+       images.length===4&&images.every(img=>img?.complete&&img.naturalWidth>0));
   },null,{timeout:20000});
   const result=await page.evaluate(()=>{
    const link=document.querySelector('link[data-duduq-release="v27-target-shooter-mobile"]');
