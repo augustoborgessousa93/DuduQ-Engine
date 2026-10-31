@@ -90,7 +90,22 @@ try{
   const retry=page.locator('.feedback-action'),retryLabel=(await retry.innerText()).replace(/\s+/g,' ').trim();
   if(!/tentar novamente|tentar de novo|try again|retry/i.test(retryLabel))throw Error('VISIBLE_RETRY_CONTROL_MISSING:'+retryLabel);
   await click(page,retry,'retry-after-wrong-answer',events);
-  await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY'&&![...document.querySelectorAll('.target-shooter-target')].some(t=>t.dataset.gameplayState==='incorrect'),null,{timeout:15000});
+  try {
+    await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY'&&![...document.querySelectorAll('.target-shooter-target')].some(t=>t.dataset.gameplayState==='incorrect'),null,{timeout:15000});
+  } catch(error) {
+    const retryState=await page.evaluate(()=>({
+      interactionState:document.querySelector('#game')?.dataset.duduqInteractionState||null,
+      gameAttributes:document.querySelector('#game')?Object.fromEntries([...document.querySelector('#game').attributes].map(a=>[a.name,a.value])):{},
+      targets:[...document.querySelectorAll('.target-shooter-target')].map(t=>({text:t.innerText,alt:t.querySelector('img')?.alt||null,state:t.dataset.gameplayState||null,rect:(r=>({x:r.x,y:r.y,width:r.width,height:r.height}))(t.getBoundingClientRect())})),
+      feedback:document.querySelector('.feedback-ribbon')?{state:document.querySelector('.feedback-ribbon').dataset.feedback,text:document.querySelector('.feedback-ribbon').innerText}:null,
+      actions:[...document.querySelectorAll('.feedback-action')].map(b=>({text:b.innerText,disabled:b.disabled,visible:!!(b.offsetWidth||b.offsetHeight||b.getClientRects().length)})),
+      audio:[...document.querySelectorAll('.audio-button')].map(b=>({text:b.innerText,state:b.dataset.state||null,disabled:b.disabled}))
+    }));
+    const shot=path.join(output,'y1m04-q010-after-retry-timeout.png');await page.screenshot({path:shot,fullPage:false}).catch(()=>{});
+    report.gameplayDiagnostics={stage:'after-retry-reset-wait',state:retryState,events:[...events],pageErrors:diag.errors,requestFailures:diag.failed,
+      screenshot:path.relative(root,shot).replaceAll('\\\\','/'),screenshotSha256:await readFile(shot).then(sha).catch(()=>null)};
+    throw new Error('RETRY_RESET_STATE_TIMEOUT:'+JSON.stringify(retryState)+'; '+String(error?.message||error));
+  }
   await click(page,target('crayon'),'select-correct-crayon',events);
   await page.waitForFunction(()=>[...document.querySelectorAll('.target-shooter-target')].some(t=>t.querySelector('img')?.alt==='crayon'&&t.dataset.gameplayState==='selected'),null,{timeout:10000});
   await click(page,page.locator('.feedback-action'),'confirm-correct-answer',events);
