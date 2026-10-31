@@ -79,6 +79,12 @@ jobs:
           node qa/verify-y1m06-source-registry-pin.mjs
           node --test qa/tests/verify-y1m06-source-registry-pin.test.mjs
 
+      - name: Apply scoped mobile geometry fix ONLY to ephemeral Y1M06 compiled QA preview
+        run: |
+          node --check qa/apply-target-shooter-mobile-containment-qa.mjs
+          node qa/apply-target-shooter-mobile-containment-qa.mjs --apply
+          echo "Y1M06_QA_PATCH_ONLY_NO_GOLD_MASTER_OR_SOURCE_MODIFICATION"
+
       - name: Start isolated review-only HTTP server
         shell: bash
         run: |

@@ -3,7 +3,7 @@
  * QA-only candidate for Target Shooter 390px mobile horizontal containment.
  * Edits ONLY the compiled review HTML and its integrity-manifest hash.
  * Never writes source questions, media registry, Gold Masters, or releases.
- * The existing real-browser Y1M04/Y1M05 gate must independently prove it.
+ * The existing real-browser Y1M04/Y1M05/Y1M06 gates must independently prove it.
  */
 import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
@@ -55,7 +55,7 @@ const plan={status:apply?'QA_COMPILED_HTML_OVERLAY_APPLIED':'READ_ONLY_PLAN',
   file:relative,sourceSha256:currentSha,candidateSha256:nextSha,
   integrityChanged:true,sourceModified:false,goldMastersModified:false,
   productionDeployed:false,scope:'portrait-360-430-only',
-  gates:'existing independent Y1M04/Y1M05 Chromium gameplay and geometry must pass'};
+  gates:'existing independent Y1M04/Y1M05/Y1M06 Chromium gameplay and geometry must pass'};
 if(!apply){console.log(JSON.stringify(plan));process.exit(0);}
 try{
   await writeFile(htmlPath,nextHtml);
