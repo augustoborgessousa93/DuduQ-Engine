@@ -45,10 +45,19 @@ jobs:
           gh run download "$ARTIFACT_RUN" -R "$GITHUB_REPOSITORY" \
             --name "duduq-media-distribution-candidate-$ARTIFACT_RUN" \
             --dir "$RUNNER_TEMP/duduq-verified"
-          TAR="$RUNNER_TEMP/duduq-verified/duduq-review-distribution.tar.gz"
-          SUM="$RUNNER_TEMP/duduq-verified/duduq-review-distribution.sha256"
+          # upload-artifact@v4 preserves paths relative to its least common
+          # ancestor (/home/runner/work), not the individual input directories.
+          # Resolve both exact filenames once; never guess or accept duplicates.
+          mapfile -d '' TARS < <(find "$RUNNER_TEMP/duduq-verified" -type f -name duduq-review-distribution.tar.gz -print0)
+          mapfile -d '' SUMS < <(find "$RUNNER_TEMP/duduq-verified" -type f -name duduq-review-distribution.sha256 -print0)
+          test "${#TARS[@]}" -eq 1 && test "${#SUMS[@]}" -eq 1
+          TAR="${TARS[0]}"
+          SUM="${SUMS[0]}"
           test -s "$TAR" && test -s "$SUM"
-          (cd "$RUNNER_TEMP/duduq-verified" && sha256sum --check duduq-review-distribution.sha256)
+          read -r EXPECTED FILENAME < "$SUM"
+          [[ "$EXPECTED" =~ ^[a-f0-9]{64}$ ]]
+          test "$FILENAME" = duduq-review-distribution.tar.gz
+          test "$(sha256sum "$TAR" | cut -d' ' -f1)" = "$EXPECTED"
           tar -xzf "$TAR" -C dist-pages
           test -s dist-pages/.duduq-pages-manifest
           test -s dist-pages/content/english/media/media-registry.json
