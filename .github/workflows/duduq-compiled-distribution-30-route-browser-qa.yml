@@ -10,6 +10,22 @@ on:
       - qa/apply-intro-mobile-touch-target-v28.mjs
       - qa/tests/verify-intro-mobile-touch-target-v28.test.mjs
   workflow_dispatch:
+    inputs:
+      artifact_run_id:
+        description: Exact successful candidate artifact run
+        required: true
+        type: string
+        default: "41317907501"
+      source_run_id:
+        description: Exact successful independent source QA run
+        required: true
+        type: string
+        default: "41317907548"
+      artifact_source_sha:
+        description: Commit SHA shared by both runs
+        required: true
+        type: string
+        default: "9f9d83e8ecf946e4f37051b38ceb718d61d5a5b2"
 
 permissions:
   contents: read
@@ -25,9 +41,9 @@ jobs:
     timeout-minutes: 45
     env:
       GH_TOKEN: ${{ github.token }}
-      ARTIFACT_RUN: "41258948433"
-      SOURCE_RUN: "41258948442"
-      ARTIFACT_SOURCE_SHA: "a0aa607e0a205641f9a876889bd5f1ed6c620a00"
+      ARTIFACT_RUN: ${{ inputs.artifact_run_id || '41258948433' }}
+      SOURCE_RUN: ${{ inputs.source_run_id || '41258948442' }}
+      ARTIFACT_SOURCE_SHA: ${{ inputs.artifact_source_sha || 'a0aa607e0a205641f9a876889bd5f1ed6c620a00' }}
       BASE_URL: "http://127.0.0.1:4175"
     steps:
       - uses: actions/checkout@v4
@@ -66,7 +82,11 @@ jobs:
           test -s dist-pages/content/english/media/media-registry.json
           node --check qa/apply-intro-mobile-touch-target-v28.mjs
           node --test qa/tests/verify-intro-mobile-touch-target-v28.test.mjs
-          DUDUQ_COMPILED_RELEASE_HOTFIX=1 node qa/apply-intro-mobile-touch-target-v28.mjs --apply
+          if grep -q 'data-duduq-release="v28-intro-mobile-touch-target"' dist-pages/play/intro-module/index.html; then
+            test -s dist-pages/core/adapters/v28/intro-mobile-touch-target.css
+          else
+            DUDUQ_COMPILED_RELEASE_HOTFIX=1 node qa/apply-intro-mobile-touch-target-v28.mjs --apply
+          fi
       - name: Verify all manifest bytes and 600 curricular contracts before browser
         shell: bash
         run: |

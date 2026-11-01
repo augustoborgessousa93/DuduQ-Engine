@@ -333,13 +333,13 @@ jobs:
           node qa/verify-vocabulary-source-browser.mjs
           echo "SOURCE_VOCAB_REUSE_PREVIEW_ONLY_NO_PEDAGOGICAL_RELEASE"
 
-      # This is a product-shaped compiled distribution containing all 358
+      # This is a product-shaped compiled distribution containing 342
       # media-ID substitutions, NOT another empty QA report. The temporary
       # injected Target Shooter style is stripped and re-hashed; only V27
       # versioned Pages CSS remains. V28 expands only the transparent Intro
       # hit area; the CTA artwork and all curriculum/media bytes stay unchanged.
       # Release approval is deliberately FALSE.
-      - name: Export single hash-bound 358-ID distributable candidate with V28 touch target
+      - name: Export single hash-bound 342-ID distributable candidate with V28 touch target
         run: |
           set -Eeuo pipefail
           node --check qa/apply-intro-mobile-touch-target-v28.mjs
@@ -352,7 +352,7 @@ jobs:
           tar -czf "$RUNNER_TEMP/duduq-review-distribution.tar.gz" -C dist-pages .
           sha256sum "$RUNNER_TEMP/duduq-review-distribution.tar.gz" | sed 's#  .*/#  #' > qa/results/duduq-review-distribution.sha256
           test -s "$RUNNER_TEMP/duduq-review-distribution.tar.gz"
-          echo "BUNDLED_COMPILED_PRODUCT_WITH_358_MEDIA_IDS_AND_V28_TOUCH_TARGET_NOT_PEDAGOGICALLY_APPROVED"
+          echo "BUNDLED_COMPILED_PRODUCT_WITH_342_MEDIA_IDS_AND_V28_TOUCH_TARGET_NOT_PEDAGOGICALLY_APPROVED"
 
       - name: Keep compiled product artifact for release review without deploying
         uses: actions/upload-artifact@v4
