@@ -1,0 +1,73 @@
+name: DUDUQ V28 - Publish Immutable QA Package for Cloudflare Preview
+
+on:
+  push:
+    branches:
+      - integration/duduq-m1-qa-consolidated-20261031
+    paths:
+      - .github/workflows/duduq-v28-publish-qa-release.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: duduq-v28-publish-immutable-qa-release
+  cancel-in-progress: false
+
+jobs:
+  publish-prebuilt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SOURCE_RUN: "41342961320"
+      SOURCE_SHA: "c6bdc2f9f4f356a6670ca48311f4a91d6fe003fa"
+      PREBUILT_SHA256: "9014d34492659d27961772495a27b02e4556d4ebe95522b350f3ee2740970830"
+      TAG: "duduq-v28-qa-41342961320"
+
+    steps:
+      - name: Verify signed CI source and completed V28 browser gates
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN" --jq .conclusion)" = "success"
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN" --jq .head_sha)" = "$SOURCE_SHA"
+          echo "IMMUTABLE_COMPILED_V28_WORKFLOW_PASS"
+
+      - name: Download exact compiled site, inspect archive integrity
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p "$RUNNER_TEMP/v28"
+          gh run download "$SOURCE_RUN" -R "$GITHUB_REPOSITORY" \
+            --name "duduq-v28-compiled-qa-candidate-$SOURCE_RUN" \
+            --dir "$RUNNER_TEMP/v28"
+          mapfile -d '' FILES < <(find "$RUNNER_TEMP/v28" -type f -name 'duduq-v28-compiled-candidate.tar.gz' -print0)
+          mapfile -d '' SUMS < <(find "$RUNNER_TEMP/v28" -type f -name 'duduq-v28-compiled-candidate.sha256' -print0)
+          test "${#FILES[@]}" -eq 1 && test "${#SUMS[@]}" -eq 1
+          TAR="${FILES[0]}"; SUM="${SUMS[0]}"
+          test -s "$TAR" && test -s "$SUM"
+          [[ "$(head -1 "$SUM" | cut -d' ' -f1)" == "$PREBUILT_SHA256" ]]
+          [[ "$(sha256sum "$TAR" | cut -d' ' -f1)" == "$PREBUILT_SHA256" ]]
+          echo "TAR=$TAR" >> "$GITHUB_ENV"
+          echo "SUM=$SUM" >> "$GITHUB_ENV"
+          echo "EXACT_V28_SHA256_PASS"
+
+      - name: Publish as prerelease, never change Cloudflare production
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          if gh release view "$TAG" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "QA_RELEASE_ALREADY_EXISTS:$TAG"
+            gh release view "$TAG" -R "$GITHUB_REPOSITORY" --json assets,isPrerelease --jq '{prerelease:.isPrerelease,assetNames:[.assets[].name]}'
+            exit 0
+          fi
+          gh release create "$TAG" "$TAR" "$SUM" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$SOURCE_SHA" \
+            --title "DUDUQ V28 compiled QA package — not production" \
+            --notes "Compiled artifact pinned to successful Chromium run #$SOURCE_RUN and SHA-256 $PREBUILT_SHA256. QA-only; pedagogical approval pending. Do not deploy to production until confirmed." \
+            --prerelease
+          echo "IMMUTABLE_QA_PRE_RELEASE_PUBLISHED"
