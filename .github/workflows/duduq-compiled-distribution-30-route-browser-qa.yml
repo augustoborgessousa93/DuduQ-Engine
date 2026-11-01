@@ -421,6 +421,45 @@ jobs:
             firstFailures:failures.slice(0,12)}));
           if(records.length!==12||failures.length)process.exitCode=1;
           NODE
+      - name: Package exact V28 compiled QA candidate only after all Chromium gates PASS
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          const v28=JSON.parse(readFileSync('qa/results/intro-mobile-touch-target-v28.json','utf8'));
+          const touch=JSON.parse(readFileSync('qa/results/compiled-year3-touch-intro-qa.json','utf8'));
+          const boots=JSON.parse(readFileSync('qa/results/compiled-30-route-browser-qa.json','utf8'));
+          const pointer=JSON.parse(readFileSync('qa/results/compiled-intro-pointer-year3-qa.json','utf8'));
+          assert.equal(v28.status,'HASH_BOUND_COMPILED_ADAPTER_APPLIED');
+          assert.equal(v28.releaseApproved,false);
+          assert.equal(v28.productionDeployed,false);
+          assert.equal(v28.mediaChanged,false);
+          assert.equal(boots.passed,90);assert.equal(boots.failed,0);
+          assert.equal(pointer.passed,42);assert.equal(pointer.failed,0);
+          assert.equal(touch.passed,12);assert.equal(touch.failed,0);
+          assert.equal(touch.realTouchscreenTap,true);
+          assert.equal(touch.releaseApproved,false);
+          console.log('V28_QA_ARCHIVE_GUARDS_PASS: 90 boots, 42 mouse, 12 touch, no release approval');
+          NODE
+          mkdir -p qa/results/v28-compiled-candidate
+          tar -czf qa/results/v28-compiled-candidate/duduq-v28-compiled-candidate.tar.gz -C dist-pages .
+          (
+            cd qa/results/v28-compiled-candidate
+            sha256sum duduq-v28-compiled-candidate.tar.gz > duduq-v28-compiled-candidate.sha256
+            sha256sum -c duduq-v28-compiled-candidate.sha256
+          )
+      - name: Preserve V28 compiled QA candidate with hash and release boundary
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-v28-compiled-qa-candidate-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            qa/results/v28-compiled-candidate/duduq-v28-compiled-candidate.tar.gz
+            qa/results/v28-compiled-candidate/duduq-v28-compiled-candidate.sha256
+            qa/results/intro-mobile-touch-target-v28.json
       - name: Preserve exact-artifact Chromium evidence even on failure
         if: always()
         uses: actions/upload-artifact@v4
