@@ -1,0 +1,117 @@
+name: DUDUQ V28 - Real Y1M05 Gameplay on Archived Distribution
+
+on:
+  push:
+    branches: [integration/duduq-m1-qa-consolidated-20261031]
+    paths:
+      - .github/workflows/duduq-v28-y1m05-real-gameplay-qa.yml
+      - qa/y1m05-official-media-browser-qa.mjs
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: duduq-v28-y1m05-real-gameplay
+  cancel-in-progress: true
+
+jobs:
+  real-gameplay-on-exact-v28:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BASE_URL: http://127.0.0.1:4175
+    steps:
+      - name: Checkout QA-only branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Recover exact successful V28 compiled bytes, not a fresh Git build
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          RUN=41328246008
+          SHA=c6c3d5db28596328ad52e0192ce4c62d7d169800
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN" --jq .conclusion)" = success
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN" --jq .head_sha)" = "$SHA"
+          mkdir -p "$RUNNER_TEMP/v28" dist-pages qa/results
+          gh run download "$RUN" -R "$GITHUB_REPOSITORY" \
+            --name "duduq-v28-compiled-qa-candidate-$RUN" --dir "$RUNNER_TEMP/v28"
+          mapfile -d '' TARS < <(find "$RUNNER_TEMP/v28" -type f -name duduq-v28-compiled-candidate.tar.gz -print0)
+          mapfile -d '' SUMS < <(find "$RUNNER_TEMP/v28" -type f -name duduq-v28-compiled-candidate.sha256 -print0)
+          test "${#TARS[@]}" -eq 1 && test "${#SUMS[@]}" -eq 1
+          test -s "${TARS[0]}" && test -s "${SUMS[0]}"
+          read -r EXPECTED FILENAME < "${SUMS[0]}"
+          test "$FILENAME" = duduq-v28-compiled-candidate.tar.gz
+          [[ "$EXPECTED" =~ ^[a-f0-9]{64}$ ]]
+          test "$(sha256sum "${TARS[0]}" | cut -d' ' -f1)" = "$EXPECTED"
+          tar -xzf "${TARS[0]}" -C dist-pages
+          test -s dist-pages/.duduq-pages-manifest
+          test -s dist-pages/content/english/year-1/module-04/questions.json
+          test -s dist-pages/content/english/media/media-registry.json
+          test -s dist-pages/core/adapters/v28/intro-mobile-touch-target.css
+          node --check qa/y1m05-official-media-browser-qa.mjs
+          echo "V28_EXACT_ARCHIVE_RESTORED_FOR_GAMEPLAY_ONLY"
+
+      - name: Install real Chromium for mouse and touchscreen
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Serve archived V28 distribution on loopback
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages > "$RUNNER_TEMP/v28-gameplay-http.log" 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS "$BASE_URL/" >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat "$RUNNER_TEMP/v28-gameplay-http.log"
+          exit 1
+
+      - name: Exercise Y1M05 all 20 question routes, 10 real media PNGs, feedback, mouse and touch
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node qa/y1m05-official-media-browser-qa.mjs
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          const r=JSON.parse(readFileSync('qa/results/y1m05-official-media-browser/report.json','utf8'));
+          assert.equal(r.status,'PASS','REAL_GAMEPLAY_FAILED');
+          assert.equal(r.routes.length,20,'NOT_ALL_20_ROUTES_TESTED');
+          assert.equal(r.passedRoutes,20,'NOT_ALL_20_ROUTES_PASSED');
+          assert.equal(r.gameplay?.pass,true,'WRONG_RETRY_CORRECT_NOT_PROVEN');
+          assert.equal(r.uniquePngHashes,10,'MEDIA_HASH_COUNT_CHANGED');
+          assert.equal(r.transport.filter(x=>x.pass).length,10,'SOURCE_PNG_HTTP_HASH_NOT_VERIFIED');
+          assert.equal(r.responsiveGameplay.length,2,'MOBILE_TABLET_TOUCH_CASES_MISSING');
+          assert.equal(r.responsiveGameplay.filter(x=>x.pass).length,2,'MOBILE_TABLET_TOUCH_CASE_FAILED');
+          assert.equal(r.productionDeployed,false);
+          console.log('V28_Y1M05_REAL_GAMEPLAY_GATE_PASS_NOT_RELEASE_APPROVAL');
+          NODE
+
+      - name: Preserve gameplay report, screenshots, trace and failure diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-v28-y1m05-real-gameplay-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            qa/results/y1m05-official-media-browser/**
+
+      - name: Explicit release boundary
+        if: always()
+        run: |
+          echo "One module's real gameplay and audio-control interactions only."
+          echo "Not audio intelligibility, 173-source pedagogical approval, 30-module gameplay, or production release."
+          echo "No media mutation, Gold Master change, Cloudflare credential, or deployment."
