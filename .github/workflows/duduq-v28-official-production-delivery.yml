@@ -1,0 +1,215 @@
+name: DUDUQ V28 - Verify Actual Cloudflare Official Production Delivery
+
+on:
+  push:
+    branches:
+      - integration/duduq-m1-qa-consolidated-20261031
+    paths:
+      - .github/workflows/duduq-v28-official-production-delivery.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  published-production-http:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      V28_PRODUCTION: https://duduq-engine-13a.pages.dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate all thirty CDN module routes, sixty data requests and exact source PNG hashes
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p qa/results
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {createHash} from 'node:crypto';
+          import {writeFileSync} from 'node:fs';
+          const base=process.env.V28_PRODUCTION;
+          const sha=b=>createHash('sha256').update(b).digest('hex');
+          async function get(route){
+            let error;
+            for(let n=0;n<4;n++){
+              try{
+                const res=await fetch(base+route,{redirect:'follow',signal:AbortSignal.timeout(35000)});
+                assert.equal(res.status,200,'HTTP_'+res.status+':'+route);
+                return {buffer:Buffer.from(await res.arrayBuffer()),type:res.headers.get('content-type')||''};
+              }catch(e){error=e;if(n<3)await new Promise(r=>setTimeout(r,1000*(n+1)));}
+            }
+            throw error;
+          }
+          const checks={deploymentUrl:base,compileRunId:41342961320,sourceArchiveSha256:'9014d34492659d27961772495a27b02e4556d4ebe95522b350f3ee2740970830',routes:[],questionFiles:[],imageFiles:[],sourceMediaIds:0,releaseApproved:false,productionDeployed:true,status:'RUNNING'};
+          try{
+            for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
+              const mm=String(module).padStart(2,'0'),prefix='/play/english/year-'+year+'/module-'+mm+'/';
+              const html=await get(prefix);
+              assert(html.type.includes('text/html'),'NOT_HTML:'+prefix);
+              assert(html.buffer.length>500,'EMPTY_MODULE_HTML:'+prefix);
+              checks.routes.push({route:prefix,status:200,htmlBytes:html.buffer.length});
+              const dataRoute='/content/english/year-'+year+'/module-'+mm+'/questions.json';
+              const q=JSON.parse((await get(dataRoute)).buffer.toString('utf8'));
+              assert.equal(q.items?.length,20,'MISSING_QUESTIONS:'+dataRoute);
+              assert.equal(q.moduleId,'Y'+year+'M'+mm,'WRONG_QUESTION_MODULE:'+dataRoute);
+              checks.questionFiles.push({route:dataRoute,questions:q.items.length});
+            }
+            const reg=JSON.parse((await get('/content/english/media/media-registry.json')).buffer.toString('utf8'));
+            const matched=reg.entries.filter(x=>String(x.urlOrPath||'').startsWith('content/english/assets/images/assets-duduq/'));
+            assert.equal(matched.length,157,'SOURCE_MEDIA_COUNT_CHANGED');
+            checks.sourceMediaIds=matched.length;
+            const imgs=new Map();
+            for(const e of matched){
+              assert(e.temporary===true&&e.humanResolutionStatus==='PEDAGOGICAL_QA_PENDING','PEDAGOGICAL_STATUS_CHANGED:'+e.mediaId);
+              const prev=imgs.get(e.urlOrPath);
+              if(prev)assert.equal(prev,e.sha256,'IMAGE_HASH_AMBIGUOUS:'+e.urlOrPath);
+              else imgs.set(e.urlOrPath,e.sha256);
+            }
+            assert.equal(imgs.size,21,'SOURCE_IMAGE_COUNT_CHANGED');
+            for(const [rel,expected]of imgs){
+              const route='/'+rel;
+              const d=await get(route);
+              assert(d.buffer.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),'INVALID_IMAGE:'+route);
+              assert.equal(sha(d.buffer),expected,'CDN_IMAGE_BYTES_DIFFER:'+route);
+              checks.imageFiles.push({route,sha256:expected,bytes:d.buffer.length});
+            }
+            assert.equal(checks.routes.length,30);
+            assert.equal(checks.questionFiles.length,30);
+            checks.status='PASS_LIVE_CLOUDFLARE_PRODUCTION_DELIVERY';
+            console.log(JSON.stringify({status:checks.status,liveRoutes:checks.routes.length,questionFiles:checks.questionFiles.length,questions:600,originalPngs:checks.imageFiles.length,sourceMediaIds:checks.sourceMediaIds,productionDeployed:true}));
+          }catch(e){checks.status='FAIL_LIVE_CLOUDFLARE_PRODUCTION_DELIVERY';checks.error=String(e?.stack||e);process.exitCode=1;}
+          finally{writeFileSync('qa/results/v28-live-cloudflare-production-delivery.json',JSON.stringify(checks,null,2)+'\n');}
+          NODE
+      - name: Install Chromium for affected Y2M05 farm-animal gameplay only
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Exercise affected Y2M05 farm-animal gameplay on the exact live V28 CDN production
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {chromium} from 'playwright';
+          import {createHash} from 'node:crypto';
+          import {mkdir,writeFile} from 'node:fs/promises';
+          const base=process.env.V28_PRODUCTION,dir='qa/results/v28-y2m05-farm-gameplay';
+          await mkdir(dir,{recursive:true});
+          const sha=b=>createHash('sha256').update(b).digest('hex');
+          const get=async p=>{const r=await fetch(base+p,{signal:AbortSignal.timeout(30000)});assert.equal(r.status,200,'CDN_HTTP:'+p);return Buffer.from(await r.arrayBuffer());};
+          const questions=JSON.parse((await get('/content/english/year-2/module-05/questions.json')).toString()).items;
+          const registry=JSON.parse((await get('/content/english/media/media-registry.json')).toString());
+          const byId=new Map(registry.entries.map(x=>[x.mediaId,x]));
+          const cases=[
+            {id:'Y2M05-Q001',view:'desktop',width:1366,height:768,touch:false},
+            {id:'Y2M05-Q001',view:'mobile',width:390,height:844,touch:true},
+            {id:'Y2M05-Q005',view:'tablet',width:768,height:1024,touch:true}
+          ];
+          const report={schemaVersion:'DUDUQ_V28_Y2M05_LIVE_FARM_GAMEPLAY_V1',base,results:[],
+            status:'RUNNING',pedagogicalQAApproved:false,releaseApproved:false,productionDeployed:true};
+          const browser=await chromium.launch({headless:true});
+          const verified=new Map();
+          async function act(page,locator,touch){
+            await locator.waitFor({state:'visible',timeout:15000});
+            if(touch)await locator.tap({timeout:15000});
+            else {const b=await locator.boundingBox();assert(b&&b.width>10&&b.height>10,'MOUSE_TARGET_MISSING');
+              await page.mouse.move(b.x+b.width/2,b.y+b.height/2,{steps:3});await page.mouse.down();await page.mouse.up();}
+          }
+          async function feedback(page,expected,touch){
+            await page.waitForFunction(type=>{
+              const r=document.querySelector('.feedback-ribbon'),s=document.querySelector('#game')?.dataset.duduqInteractionState;
+              return (r?.dataset.feedback===type&&!r.hidden)||s==='AWAITING_CONFIRM';
+            },expected,{timeout:30000});
+            const current=await page.locator('#game').getAttribute('data-duduq-interaction-state');
+            if(current==='AWAITING_CONFIRM'){
+              const button=page.locator('.feedback-action');
+              assert(/confirmar/i.test(await button.innerText()),'CONFIRM_BUTTON_MISSING');
+              await act(page,button,touch);
+            }
+            await page.waitForFunction(type=>{
+              const r=document.querySelector('.feedback-ribbon');
+              return r?.dataset.feedback===type&&!r.hidden;
+            },expected,{timeout:25000});
+            return (await page.locator('.feedback-action').innerText()).trim();
+          }
+          try{
+            for(const test of cases){
+              const q=questions.find(x=>x.item_id===test.id);
+              assert(q&&q.mechanicId==='target-shooter'&&q.options?.length===4,'QUESTION_CONTRACT_MISMATCH:'+test.id);
+              const correct=q.options.find(x=>x.correct===true),wrong=q.options.find(x=>x.correct===false);
+              assert(correct&&wrong&&correct.semanticTarget!==wrong.semanticTarget,'ANSWER_CONTRACT_MISMATCH');
+              for(const opt of q.options){
+                const entry=byId.get(opt.mediaId);
+                assert(entry?.urlOrPath?.includes('/assets-duduq/')&&/^[a-f0-9]{64}$/.test(entry.sha256),'SOURCE_NOT_REUSED:'+opt.mediaId);
+                assert(entry.temporary===true&&entry.humanResolutionStatus==='PEDAGOGICAL_QA_PENDING','PEDAGOGICAL_STATUS_CHANGED');
+                if(!verified.has(entry.urlOrPath)){
+                  const bytes=await get('/'+entry.urlOrPath);
+                  assert.equal(sha(bytes),entry.sha256,'SOURCE_PNG_HASH_MISMATCH:'+opt.mediaId);
+                  verified.set(entry.urlOrPath,entry.sha256);
+                }
+              }
+              const context=await browser.newContext({viewport:{width:test.width,height:test.height},hasTouch:test.touch});
+              const page=await context.newPage(),errors=[],bad=[];
+              page.on('pageerror',e=>errors.push(String(e.message||e)));
+              page.on('response',r=>{if(r.url().startsWith(base)&&r.status()>=400&&!r.url().includes('favicon.ico'))bad.push(r.status()+':'+r.url());});
+              const item={questionId:test.id,viewport:test.view,input:test.touch?'native-touch':'native-mouse',pass:false};
+              report.results.push(item);
+              try{
+                const route='/play/target-shooter/?duduqModule=Y2M05&duduqItem='+test.id+'&qaSeed=v28-farm-live';
+                const response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:40000});
+                assert.equal(response?.status(),200,'GAME_ROUTE_HTTP');
+                await page.waitForTimeout(700);
+                const audio=page.locator('.audio-button').first();
+                await act(page,audio,test.touch);await page.waitForTimeout(700);await act(page,audio,test.touch);
+                await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY'&&
+                  !document.querySelector('.target-shooter-target')?.hasAttribute('inert'),null,{timeout:30000});
+                const targets=page.locator('.target-shooter-target');
+                assert.equal(await targets.count(),4,'NOT_FOUR_FARM_TARGETS');
+                const images=await page.locator('.target-shooter-target__animal').evaluateAll(xs=>xs.map(x=>{
+                  const r=x.getBoundingClientRect();return {alt:x.alt,src:new URL(x.src).pathname,loaded:x.complete&&x.naturalWidth>0,
+                    visible:r.width>10&&r.height>10&&r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight};
+                }));
+                assert.deepEqual(images.map(x=>x.alt).sort(),q.options.map(x=>x.semanticTarget).sort(),'RENDERED_ANIMAL_SEMANTICS_DIFFER');
+                assert(images.every(x=>x.loaded&&x.visible),'FARM_IMAGE_BROKEN_OR_CLIPPED');
+                const target=semantic=>targets.filter({has:page.locator('.target-shooter-target__animal[alt="'+semantic+'"]')});
+                await page.screenshot({path:dir+'/'+test.id+'-'+test.view+'-ready.png'});
+                await act(page,target(wrong.semanticTarget),test.touch);
+                const retry=await feedback(page,'incorrect',test.touch);
+                assert(/tentar de novo|tentar novamente|retry|try again/i.test(retry),'RETRY_LABEL_MISSING:'+retry);
+                await page.screenshot({path:dir+'/'+test.id+'-'+test.view+'-wrong.png'});
+                await act(page,page.locator('.feedback-action'),test.touch);
+                await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:20000});
+                await act(page,target(correct.semanticTarget),test.touch);
+                const next=await feedback(page,'correct',test.touch);
+                assert(/continuar|continue/i.test(next),'CONTINUE_LABEL_MISSING:'+next);
+                await page.screenshot({path:dir+'/'+test.id+'-'+test.view+'-correct.png'});
+                const overflow=await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth));
+                assert(overflow<=2,'HORIZONTAL_OVERFLOW:'+overflow);
+                assert.deepEqual(errors,[],'BROWSER_ERRORS');assert.deepEqual(bad,[],'CDN_ASSET_ERRORS');
+                Object.assign(item,{pass:true,correct:correct.semanticTarget,wrong:wrong.semanticTarget,images,overflow,retry,next});
+              }finally{await context.close();}
+            }
+            assert.equal(report.results.filter(x=>x.pass).length,3,'FARM_GAMEPLAY_CASES_INCOMPLETE');
+            assert(verified.size>=4,'FARM_SOURCE_PNG_COVERAGE_TOO_LOW');
+            report.sourcePngHashes=Object.fromEntries(verified);
+            report.status='PASS_REAL_CDN_FARM_GAMEPLAY';
+            console.log(JSON.stringify({status:report.status,realInteractions:3,sourcePngs:verified.size,productionDeployed:true}));
+          }catch(e){report.status='FAIL_REAL_CDN_FARM_GAMEPLAY';report.error=String(e?.stack||e);throw e;}
+          finally{await browser.close();await writeFile(dir+'/report.json',JSON.stringify(report,null,2)+'\n');}
+          NODE
+
+      - name: Archive HTTP and source-hash verification from Cloudflare CDN
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-v28-live-cloudflare-production-verified-${{ github.run_id }}
+          path: |
+            qa/results/v28-live-cloudflare-production-delivery.json
+            qa/results/v28-y2m05-farm-gameplay/**
+          if-no-files-found: error
+          retention-days: 21
