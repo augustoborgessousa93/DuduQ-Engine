@@ -1,0 +1,413 @@
+{
+  "schemaVersion": "DUDUQ_Y1M02_NATIVE_MEDIA_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-10-30",
+  "moduleId": "Y1M02",
+  "provider": "Codex built-in image_gen",
+  "sourceQuestionContractSha256": "f230e65de323b0182243f34038f3b17659785427c6fc05e29c893b624fb4061a",
+  "sourceRegistrySha256": "3527932cc326e35b5396b88e789b2d86cab9bf5fc9eb60efe1cb7b8648c08f36",
+  "sourceQuestionInvariantSha256": "93a6e8294499c6a27d748ba42d283acdc10d533800c03f1eb2215c17a5dbf858",
+  "sourceCanonicalClosureSha256": "775bd72bc8b9caaa13fb4f4afb2682fd44a7b2f20c60fab4c3511e9bfd29c8d2",
+  "reviewedQuestionCount": 20,
+  "auditedPendingIds": 92,
+  "sourceUsageRecords": 94,
+  "postSplitIds": 93,
+  "usageRecords": 94,
+  "uniqueNativePngs": 10,
+  "splitReview": {
+    "status": "APPROVED_OCCURRENCE_SCOPED_SPLITS",
+    "count": 11,
+    "distinctSharedSourceIds": 10,
+    "splits": [
+      {
+        "questionId": "Y1M02-Q001",
+        "field": "targets[0].media.assetId",
+        "from": "IMG-Y1M02-Q001-ONE",
+        "to": "IMG-Y1M02-Q001-T1-ONE",
+        "semanticTarget": "one"
+      },
+      {
+        "questionId": "Y1M02-Q001",
+        "field": "targets[1].media.assetId",
+        "from": "IMG-Y1M02-Q001-TWO",
+        "to": "IMG-Y1M02-Q001-T2-TWO",
+        "semanticTarget": "two"
+      },
+      {
+        "questionId": "Y1M02-Q001",
+        "field": "targets[2].media.assetId",
+        "from": "IMG-Y1M02-Q001-THREE",
+        "to": "IMG-Y1M02-Q001-T3-THREE",
+        "semanticTarget": "three"
+      },
+      {
+        "questionId": "Y1M02-Q001",
+        "field": "targets[3].media.assetId",
+        "from": "IMG-Y1M02-Q001-FOUR",
+        "to": "IMG-Y1M02-Q001-T4-FOUR",
+        "semanticTarget": "four"
+      },
+      {
+        "questionId": "Y1M02-Q002",
+        "field": "bubbleDistractorPool[2].media.assetId",
+        "from": "IMG-Y1M02-Q002-FIVE",
+        "to": "IMG-Y1M02-Q002-D3-FIVE",
+        "semanticTarget": "five"
+      },
+      {
+        "questionId": "Y1M02-Q002",
+        "field": "bubbleDistractorPool[3].media.assetId",
+        "from": "IMG-Y1M02-Q002-SIX",
+        "to": "IMG-Y1M02-Q002-D4-SIX",
+        "semanticTarget": "six"
+      },
+      {
+        "questionId": "Y1M02-Q002",
+        "field": "bubbleDistractorPool[4].media.assetId",
+        "from": "IMG-Y1M02-Q002-SEVEN",
+        "to": "IMG-Y1M02-Q002-D5-SEVEN",
+        "semanticTarget": "seven"
+      },
+      {
+        "questionId": "Y1M02-Q002",
+        "field": "bubbleDistractorPool[5].media.assetId",
+        "from": "IMG-Y1M02-Q002-EIGHT",
+        "to": "IMG-Y1M02-Q002-D6-EIGHT",
+        "semanticTarget": "eight"
+      },
+      {
+        "questionId": "Y1M02-Q007",
+        "field": "bubbleDistractorPool[1].media.assetId",
+        "from": "IMG-Y1M02-Q007-NINE",
+        "to": "IMG-Y1M02-Q007-D2-NINE",
+        "semanticTarget": "nine"
+      },
+      {
+        "questionId": "Y1M02-Q007",
+        "field": "bubbleDistractorPool[2].media.assetId",
+        "from": "IMG-Y1M02-Q007-TEN",
+        "to": "IMG-Y1M02-Q007-D3-TEN",
+        "semanticTarget": "ten"
+      },
+      {
+        "questionId": "Y1M02-Q018",
+        "field": "mediaBindings[0].assetId",
+        "from": "IMG-Y1M02-Q007-NINE",
+        "to": "IMG-Y1M02-Q018-M1-NINE",
+        "semanticTarget": "nine"
+      }
+    ],
+    "sourceModules": {
+      "IMG-Y1M02-Q001-FOUR": [
+        "Y1M02",
+        "Y2M02",
+        "Y2M05",
+        "Y3M04",
+        "Y3M05",
+        "Y4M04"
+      ],
+      "IMG-Y1M02-Q001-ONE": [
+        "Y1M02",
+        "Y2M02",
+        "Y2M05",
+        "Y3M04",
+        "Y3M05",
+        "Y4M04"
+      ],
+      "IMG-Y1M02-Q001-THREE": [
+        "Y1M02",
+        "Y2M02",
+        "Y2M05",
+        "Y3M04",
+        "Y3M05",
+        "Y4M04"
+      ],
+      "IMG-Y1M02-Q001-TWO": [
+        "Y1M02",
+        "Y2M02",
+        "Y2M05",
+        "Y3M04",
+        "Y4M04"
+      ],
+      "IMG-Y1M02-Q002-EIGHT": [
+        "Y1M02",
+        "Y2M02",
+        "Y3M01",
+        "Y3M02",
+        "Y3M03",
+        "Y3M05",
+        "Y4M04",
+        "Y5M04"
+      ],
+      "IMG-Y1M02-Q002-FIVE": [
+        "Y1M02",
+        "Y3M04",
+        "Y3M05",
+        "Y4M04"
+      ],
+      "IMG-Y1M02-Q002-SEVEN": [
+        "Y1M02",
+        "Y3M03",
+        "Y3M05",
+        "Y4M04"
+      ],
+      "IMG-Y1M02-Q002-SIX": [
+        "Y1M02",
+        "Y3M05",
+        "Y4M04"
+      ],
+      "IMG-Y1M02-Q007-NINE": [
+        "Y1M02",
+        "Y3M01",
+        "Y3M02",
+        "Y3M03",
+        "Y4M04",
+        "Y5M04"
+      ],
+      "IMG-Y1M02-Q007-TEN": [
+        "Y1M02",
+        "Y3M01",
+        "Y3M02",
+        "Y3M03",
+        "Y4M04",
+        "Y5M04"
+      ]
+    },
+    "reason": "Ten source IDs have consumers outside Y1M02. Eleven exact Y1M02 occurrences are isolated; every external consumer and original registry entry remains provisional and untouched."
+  },
+  "renderedReview": {
+    "status": "PASSED_BY_CODEX_DELEGATED_VISUAL_REVIEW",
+    "criteria": [
+      "exact quantity of one through ten glossy red apples",
+      "all apples complete, individually countable and fully visible",
+      "no cutoff or empty image",
+      "no unrelated countable object, embedded text, numeral, watermark or opaque backdrop",
+      "genuine transparency and small-card readability"
+    ]
+  },
+  "candidateAssets": [
+    {
+      "assetKey": "Y1M02-OFFICIAL-ONE",
+      "concept": "one",
+      "count": 1,
+      "file": "images/DUDUQ-Y1M02-ONE.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "e65ad687b4d68c317b065a9fce4a7d3dfbd7cffbe45835899dd9826ccaf4d8f5",
+      "sourceSha256": "db5c25dc3d048532af972dba45f58faf2158093beae6f3fb48ae3041f5900eec",
+      "nativeSourceExactHashMatch": true,
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 791364,
+        "alphaClearPixels": 1567932,
+        "subjectBoundsCoverage": 0.4588,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_EXACT_COUNT_FULL_SUBJECT_NO_CUTOFF_NONEMPTY_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-TWO",
+      "concept": "two",
+      "count": 2,
+      "file": "images/DUDUQ-Y1M02-TWO.png",
+      "width": 1774,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "f81a55d609c8318622a798e554f19e564fd23690bf5a117a1418a06a934a74df",
+      "sourceSha256": "fe388324cd87df4ccab5791ffdb4e6b9e1dbe86306d4c44ffcdb24f2deb6fe6a",
+      "nativeSourceExactHashMatch": true,
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 687623,
+        "alphaClearPixels": 2037241,
+        "subjectBoundsCoverage": 0.3784,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_EXACT_COUNT_FULL_SUBJECT_NO_CUTOFF_NONEMPTY_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-THREE",
+      "concept": "three",
+      "count": 3,
+      "file": "images/DUDUQ-Y1M02-THREE.png",
+      "width": 2172,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "346c0cd7a52c9c2685187551e1fcb6a71721f2c53639e37f2a06fdb857939398",
+      "sourceSha256": "f7d841143ad970661a842e33385aae4cc765860834b4e0cfc85761079da4ad4b",
+      "nativeSourceExactHashMatch": true,
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 967174,
+        "alphaClearPixels": 2369018,
+        "subjectBoundsCoverage": 0.4282,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_EXACT_COUNT_FULL_SUBJECT_NO_CUTOFF_NONEMPTY_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-FOUR",
+      "concept": "four",
+      "count": 4,
+      "file": "images/DUDUQ-Y1M02-FOUR.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "d7e0f1fd9f5b565a62b75b0dcf8f07fb257096a33947c6ec6ee1fadd87c61505",
+      "sourceSha256": "eb9a66a2a51d34c01bb660918d1a30a43e80b92f539bb06bed8b8976ea4b148a",
+      "nativeSourceExactHashMatch": true,
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 825847,
+        "alphaClearPixels": 1533449,
+        "subjectBoundsCoverage": 0.541,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_EXACT_COUNT_FULL_SUBJECT_NO_CUTOFF_NONEMPTY_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-FIVE",
+      "concept": "five",
+      "count": 5,
+      "file": "images/DUDUQ-Y1M02-FIVE.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "b12f817867e3fa002e1468cadbfdda80932b8965ae74e1255db41016f9b57eee",
+      "sourceSha256": "3f7bfb852d53dd43ed1aa0e9051ff4f9f6cd36971da3470467d61b525b3eb4a5",
+      "nativeSourceExactHashMatch": true,
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 764896,
+        "alphaClearPixels": 1594400,
+        "subjectBoundsCoverage": 0.5761,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_EXACT_COUNT_FULL_SUBJECT_NO_CUTOFF_NONEMPTY_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-SIX",
+      "concept": "six",
+      "count": 6,
+      "file": "images/DUDUQ-Y1M02-SIX.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "d6482204a9c9caf61913193ac2369abd3e3681226568a0b4262fed3460faef66",
+      "sourceSha256": "2a4e1df89aac1d90b8652fc98047f3b900213da886355e57ca2ea630c3f3ac90",
+      "nativeSourceExactHashMatch": true,
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 953974,
+        "alphaClearPixels": 1405322,
+        "subjectBoundsCoverage": 0.5864,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_EXACT_COUNT_FULL_SUBJECT_NO_CUTOFF_NONEMPTY_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-SEVEN",
+      "concept": "seven",
+      "count": 7,
+      "file": "images/DUDUQ-Y1M02-SEVEN.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "b675fb761c6054b737cf35ba6b9d36e9fe50ed7a317ae07e4a3dc30000272667",
+      "sourceSha256": "cf8eaa0b36b46893e4b8ef2962f2ac42c5e806ef81d4426f907484fc0c3270cb",
+      "nativeSourceExactHashMatch": true,
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 869975,
+        "alphaClearPixels": 1489321,
+        "subjectBoundsCoverage": 0.6252,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_EXACT_COUNT_FULL_SUBJECT_NO_CUTOFF_NONEMPTY_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-EIGHT",
+      "concept": "eight",
+      "count": 8,
+      "file": "images/DUDUQ-Y1M02-EIGHT.png",
+      "width": 1774,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "f1f51c261a1662616fcdc24eff0cab7761aa886c48189ed48adee1c81129bf23",
+      "sourceSha256": "63fb7f3eb46635f62903a2790c7fdf3353433a0c738e1cd19b0f683455e19fe2",
+      "nativeSourceExactHashMatch": true,
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 863878,
+        "alphaClearPixels": 1860986,
+        "subjectBoundsCoverage": 0.4518,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_EXACT_COUNT_FULL_SUBJECT_NO_CUTOFF_NONEMPTY_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-NINE",
+      "concept": "nine",
+      "count": 9,
+      "file": "images/DUDUQ-Y1M02-NINE.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "a49f122a9e0967699c4602ce5cd294ad228dff16bd644e9d906b26e9d87eae5c",
+      "sourceSha256": "d606b31ad47da7e85f5294252146a6d682429f45f2db551f6b588bd4147ca23a",
+      "nativeSourceExactHashMatch": true,
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 907116,
+        "alphaClearPixels": 1452180,
+        "subjectBoundsCoverage": 0.5276,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_EXACT_COUNT_FULL_SUBJECT_NO_CUTOFF_NONEMPTY_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-TEN",
+      "concept": "ten",
+      "count": 10,
+      "file": "images/DUDUQ-Y1M02-TEN.png",
+      "width": 1983,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "2fd76a2d23ed7d7f835876bd92de3f079943ea10b3829ed8c880970f2e9b8d3b",
+      "sourceSha256": "018be7f295443648fb6138b8f8aafedc3bd700badf550740a4a10ee819f1453f",
+      "nativeSourceExactHashMatch": true,
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 880537,
+        "alphaClearPixels": 2165351,
+        "subjectBoundsCoverage": 0.417,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_EXACT_COUNT_FULL_SUBJECT_NO_CUTOFF_NONEMPTY_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    }
+  ],
+  "globalModulesVerified": 30,
+  "globalActivitiesVerified": 600,
+  "productionReleaseCertified": false,
+  "goldMastersModified": false
+}

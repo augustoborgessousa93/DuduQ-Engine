@@ -1,0 +1,1031 @@
+{
+  "schemaVersion": "DUDUQ_CHATGPT_MEDIA_BINDINGS_V1",
+  "createdAt": "2026-10-30",
+  "moduleId": "Y1M02",
+  "source": "Codex native OpenAI image generation",
+  "provider": "Codex built-in image_gen",
+  "status": "HASH_BOUND_REVIEWED_BUNDLE_READY_FOR_QA_OVERLAY",
+  "sourceRegistryPinEvidence": "source-registry-pin.json",
+  "sourceRegistryPinEvidenceSha256": "5b0f87f5442699e84eea914fb508d03c5e8ecb8e325d9236fdeb6a91a6647a20",
+  "originalAuditedPendingIds": 92,
+  "originalQuestionUsageRecords": 94,
+  "occurrenceScopedSplits": [
+    {
+      "questionId": "Y1M02-Q001",
+      "field": "targets[0].media.assetId",
+      "from": "IMG-Y1M02-Q001-ONE",
+      "to": "IMG-Y1M02-Q001-T1-ONE",
+      "semanticTarget": "one"
+    },
+    {
+      "questionId": "Y1M02-Q001",
+      "field": "targets[1].media.assetId",
+      "from": "IMG-Y1M02-Q001-TWO",
+      "to": "IMG-Y1M02-Q001-T2-TWO",
+      "semanticTarget": "two"
+    },
+    {
+      "questionId": "Y1M02-Q001",
+      "field": "targets[2].media.assetId",
+      "from": "IMG-Y1M02-Q001-THREE",
+      "to": "IMG-Y1M02-Q001-T3-THREE",
+      "semanticTarget": "three"
+    },
+    {
+      "questionId": "Y1M02-Q001",
+      "field": "targets[3].media.assetId",
+      "from": "IMG-Y1M02-Q001-FOUR",
+      "to": "IMG-Y1M02-Q001-T4-FOUR",
+      "semanticTarget": "four"
+    },
+    {
+      "questionId": "Y1M02-Q002",
+      "field": "bubbleDistractorPool[2].media.assetId",
+      "from": "IMG-Y1M02-Q002-FIVE",
+      "to": "IMG-Y1M02-Q002-D3-FIVE",
+      "semanticTarget": "five"
+    },
+    {
+      "questionId": "Y1M02-Q002",
+      "field": "bubbleDistractorPool[3].media.assetId",
+      "from": "IMG-Y1M02-Q002-SIX",
+      "to": "IMG-Y1M02-Q002-D4-SIX",
+      "semanticTarget": "six"
+    },
+    {
+      "questionId": "Y1M02-Q002",
+      "field": "bubbleDistractorPool[4].media.assetId",
+      "from": "IMG-Y1M02-Q002-SEVEN",
+      "to": "IMG-Y1M02-Q002-D5-SEVEN",
+      "semanticTarget": "seven"
+    },
+    {
+      "questionId": "Y1M02-Q002",
+      "field": "bubbleDistractorPool[5].media.assetId",
+      "from": "IMG-Y1M02-Q002-EIGHT",
+      "to": "IMG-Y1M02-Q002-D6-EIGHT",
+      "semanticTarget": "eight"
+    },
+    {
+      "questionId": "Y1M02-Q007",
+      "field": "bubbleDistractorPool[1].media.assetId",
+      "from": "IMG-Y1M02-Q007-NINE",
+      "to": "IMG-Y1M02-Q007-D2-NINE",
+      "semanticTarget": "nine"
+    },
+    {
+      "questionId": "Y1M02-Q007",
+      "field": "bubbleDistractorPool[2].media.assetId",
+      "from": "IMG-Y1M02-Q007-TEN",
+      "to": "IMG-Y1M02-Q007-D3-TEN",
+      "semanticTarget": "ten"
+    },
+    {
+      "questionId": "Y1M02-Q018",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-Y1M02-Q007-NINE",
+      "to": "IMG-Y1M02-Q018-M1-NINE",
+      "semanticTarget": "nine"
+    }
+  ],
+  "finalBindingIds": 93,
+  "totalQuestionUsageRecords": 94,
+  "uniqueNativePngs": 10,
+  "questionContractsReviewed": 20,
+  "preservesAllQuestionsAnswerKeysAndMechanics": true,
+  "productionApproved": false,
+  "assets": [
+    {
+      "assetKey": "Y1M02-OFFICIAL-ONE",
+      "file": "images/DUDUQ-Y1M02-ONE.png",
+      "semanticTarget": "one",
+      "sha256": "e65ad687b4d68c317b065a9fce4a7d3dfbd7cffbe45835899dd9826ccaf4d8f5",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m02-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M02-Q001",
+          "mediaId": "IMG-Q001-ONE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q001"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q002",
+          "mediaId": "IMG-Q002-ONE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q002"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q011",
+          "mediaId": "IMG-Q011-ONE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q011"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q001",
+          "mediaId": "IMG-Y1M02-Q001-T1-ONE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q001"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q002",
+          "mediaId": "IMG-Y1M02-Q002-ONE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q002"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q004",
+          "mediaId": "IMG-Y1M02-Q004-ONE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q004"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q007",
+          "mediaId": "IMG-Y1M02-Q007-ONE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q007"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q014",
+          "mediaId": "IMG-Y1M02-Q014-ONE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q014"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q015",
+          "mediaId": "IMG-Y1M02-Q015-ONE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q015"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q016",
+          "mediaId": "IMG-Y1M02-Q016-ONE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q016"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q017",
+          "mediaId": "IMG-Y1M02-Q017-ONE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q017"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "REUSED_NATIVE_20261030_PROVEN_BY_CODEX_HOME_EXACT_HASH",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 1 matching glossy red apple, complete and individually countable, teaching the English quantity one\nComposition: one centered apple, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+        "originalPromptRecordStatus": "ORIGINAL_PROMPT_NOT_PERSISTED_CANONICAL_SPEC_RECONSTRUCTED",
+        "originalFile": "provenance/originals/ONE-ORIGINAL.png",
+        "originalSha256": "db5c25dc3d048532af972dba45f58faf2158093beae6f3fb48ae3041f5900eec",
+        "nativeSourceLocalPathAtReview": "C:/Users/augus/.codex/generated_images/01a0ed15-a760-74f1-bc93-8b78f2b31b92/exec-615c1d8c-d53a-410b-92d3-810b5e307ead.png",
+        "nativeSourceExactHashMatch": true,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-TWO",
+      "file": "images/DUDUQ-Y1M02-TWO.png",
+      "semanticTarget": "two",
+      "sha256": "f81a55d609c8318622a798e554f19e564fd23690bf5a117a1418a06a934a74df",
+      "pixelWidth": 1774,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m02-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M02-Q001",
+          "mediaId": "IMG-Y1M02-Q001-T2-TWO",
+          "verifiedQuestionIds": [
+            "Y1M02-Q001"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q004",
+          "mediaId": "IMG-Y1M02-Q004-TWO",
+          "verifiedQuestionIds": [
+            "Y1M02-Q004"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q007",
+          "mediaId": "IMG-Y1M02-Q007-TWO",
+          "verifiedQuestionIds": [
+            "Y1M02-Q007"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q017",
+          "mediaId": "IMG-Y1M02-Q017-TWO",
+          "verifiedQuestionIds": [
+            "Y1M02-Q017"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q020",
+          "mediaId": "IMG-Y1M02-Q020-TWO",
+          "verifiedQuestionIds": [
+            "Y1M02-Q020"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "REUSED_NATIVE_20261030_PROVEN_BY_CODEX_HOME_EXACT_HASH",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 2 matching glossy red apples, complete and individually countable, teaching the English quantity two\nComposition: one row of two, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+        "originalPromptRecordStatus": "ORIGINAL_PROMPT_NOT_PERSISTED_CANONICAL_SPEC_RECONSTRUCTED",
+        "originalFile": "provenance/originals/TWO-ORIGINAL.png",
+        "originalSha256": "fe388324cd87df4ccab5791ffdb4e6b9e1dbe86306d4c44ffcdb24f2deb6fe6a",
+        "nativeSourceLocalPathAtReview": "C:/Users/augus/.codex/generated_images/01a0ed15-a760-74f1-bc93-8b78f2b31b92/exec-507518ac-630d-4899-837c-9887309f1c9d.png",
+        "nativeSourceExactHashMatch": true,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 2,
+          "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-THREE",
+      "file": "images/DUDUQ-Y1M02-THREE.png",
+      "semanticTarget": "three",
+      "sha256": "346c0cd7a52c9c2685187551e1fcb6a71721f2c53639e37f2a06fdb857939398",
+      "pixelWidth": 2172,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m02-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M02-Q003",
+          "mediaId": "IMG-Q003-THREE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q003"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q013",
+          "mediaId": "IMG-Q013-THREE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q013"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q001",
+          "mediaId": "IMG-Y1M02-Q001-T3-THREE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q001"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q002",
+          "mediaId": "IMG-Y1M02-Q002-THREE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q002"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q004",
+          "mediaId": "IMG-Y1M02-Q004-THREE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q004"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q005",
+          "mediaId": "IMG-Y1M02-Q005-THREE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q005"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q006",
+          "mediaId": "IMG-Y1M02-Q006-THREE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q006"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q007",
+          "mediaId": "IMG-Y1M02-Q007-THREE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q007"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q020",
+          "mediaId": "IMG-Y1M02-Q020-THREE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q020"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "REUSED_NATIVE_20261030_PROVEN_BY_CODEX_HOME_EXACT_HASH",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 3 matching glossy red apples, complete and individually countable, teaching the English quantity three\nComposition: one row of three, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+        "originalPromptRecordStatus": "ORIGINAL_PROMPT_NOT_PERSISTED_CANONICAL_SPEC_RECONSTRUCTED",
+        "originalFile": "provenance/originals/THREE-ORIGINAL.png",
+        "originalSha256": "f7d841143ad970661a842e33385aae4cc765860834b4e0cfc85761079da4ad4b",
+        "nativeSourceLocalPathAtReview": "C:/Users/augus/.codex/generated_images/01a0ed15-a760-74f1-bc93-8b78f2b31b92/exec-973f8377-462f-413a-a3ee-6f63192036c0.png",
+        "nativeSourceExactHashMatch": true,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 3,
+          "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-FOUR",
+      "file": "images/DUDUQ-Y1M02-FOUR.png",
+      "semanticTarget": "four",
+      "sha256": "d7e0f1fd9f5b565a62b75b0dcf8f07fb257096a33947c6ec6ee1fadd87c61505",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m02-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M02-Q004",
+          "mediaId": "IMG-Q004-FOUR",
+          "verifiedQuestionIds": [
+            "Y1M02-Q004"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q007",
+          "mediaId": "IMG-Q007-FOUR",
+          "verifiedQuestionIds": [
+            "Y1M02-Q007"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q001",
+          "mediaId": "IMG-Y1M02-Q001-T4-FOUR",
+          "verifiedQuestionIds": [
+            "Y1M02-Q001"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q002",
+          "mediaId": "IMG-Y1M02-Q002-FOUR",
+          "verifiedQuestionIds": [
+            "Y1M02-Q002"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q004",
+          "mediaId": "IMG-Y1M02-Q004-FOUR",
+          "verifiedQuestionIds": [
+            "Y1M02-Q004",
+            "Y1M02-Q008"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q005",
+          "mediaId": "IMG-Y1M02-Q005-FOUR",
+          "verifiedQuestionIds": [
+            "Y1M02-Q005"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q006",
+          "mediaId": "IMG-Y1M02-Q006-FOUR",
+          "verifiedQuestionIds": [
+            "Y1M02-Q006"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q007",
+          "mediaId": "IMG-Y1M02-Q007-FOUR",
+          "verifiedQuestionIds": [
+            "Y1M02-Q007"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q020",
+          "mediaId": "IMG-Y1M02-Q020-FOUR",
+          "verifiedQuestionIds": [
+            "Y1M02-Q020"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "REUSED_NATIVE_20261030_PROVEN_BY_CODEX_HOME_EXACT_HASH",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 4 matching glossy red apples, complete and individually countable, teaching the English quantity four\nComposition: two rows of two, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+        "originalPromptRecordStatus": "ORIGINAL_PROMPT_NOT_PERSISTED_CANONICAL_SPEC_RECONSTRUCTED",
+        "originalFile": "provenance/originals/FOUR-ORIGINAL.png",
+        "originalSha256": "eb9a66a2a51d34c01bb660918d1a30a43e80b92f539bb06bed8b8976ea4b148a",
+        "nativeSourceLocalPathAtReview": "C:/Users/augus/.codex/generated_images/01a0ed15-a760-74f1-bc93-8b78f2b31b92/exec-75ec55e9-377e-44ff-9c23-2d7cb5699747.png",
+        "nativeSourceExactHashMatch": true,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 4,
+          "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-FIVE",
+      "file": "images/DUDUQ-Y1M02-FIVE.png",
+      "semanticTarget": "five",
+      "sha256": "b12f817867e3fa002e1468cadbfdda80932b8965ae74e1255db41016f9b57eee",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m02-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M02-Q005",
+          "mediaId": "IMG-Q005-FIVE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q005"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q015",
+          "mediaId": "IMG-Q015-FIVE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q015"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q002",
+          "mediaId": "IMG-Y1M02-Q002-D3-FIVE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q002"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q004",
+          "mediaId": "IMG-Y1M02-Q004-FIVE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q004"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q005",
+          "mediaId": "IMG-Y1M02-Q005-FIVE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q005"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q006",
+          "mediaId": "IMG-Y1M02-Q006-FIVE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q006"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q010",
+          "mediaId": "IMG-Y1M02-Q010-FIVE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q010"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q014",
+          "mediaId": "IMG-Y1M02-Q014-FIVE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q014"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q020",
+          "mediaId": "IMG-Y1M02-Q020-FIVE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q020"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 5 matching glossy red apples, complete and individually countable, teaching the English quantity five\nComposition: three apples above two, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+        "originalPromptRecordStatus": "EXACT_SESSION_PROMPT_RECORDED",
+        "originalFile": "provenance/originals/FIVE-ORIGINAL.png",
+        "originalSha256": "3f7bfb852d53dd43ed1aa0e9051ff4f9f6cd36971da3470467d61b525b3eb4a5",
+        "nativeSourceLocalPathAtReview": "C:/Users/augus/.codex/generated_images/01a18c9c-1db8-70d1-8e0e-489a267a01d0/exec-e37a788c-eb54-40eb-be4d-d1226579f7c8.png",
+        "nativeSourceExactHashMatch": true,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 5,
+          "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-SIX",
+      "file": "images/DUDUQ-Y1M02-SIX.png",
+      "semanticTarget": "six",
+      "sha256": "d6482204a9c9caf61913193ac2369abd3e3681226568a0b4262fed3460faef66",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m02-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M02-Q006",
+          "mediaId": "IMG-Q006-SIX",
+          "verifiedQuestionIds": [
+            "Y1M02-Q006"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q012",
+          "mediaId": "IMG-Q012-SIX",
+          "verifiedQuestionIds": [
+            "Y1M02-Q012"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q016",
+          "mediaId": "IMG-Q016-SIX",
+          "verifiedQuestionIds": [
+            "Y1M02-Q016"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q002",
+          "mediaId": "IMG-Y1M02-Q002-D4-SIX",
+          "verifiedQuestionIds": [
+            "Y1M02-Q002"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q005",
+          "mediaId": "IMG-Y1M02-Q005-SIX",
+          "verifiedQuestionIds": [
+            "Y1M02-Q005"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q006",
+          "mediaId": "IMG-Y1M02-Q006-SIX",
+          "verifiedQuestionIds": [
+            "Y1M02-Q006"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q010",
+          "mediaId": "IMG-Y1M02-Q010-SIX",
+          "verifiedQuestionIds": [
+            "Y1M02-Q010"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q011",
+          "mediaId": "IMG-Y1M02-Q011-SIX",
+          "verifiedQuestionIds": [
+            "Y1M02-Q011"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q012",
+          "mediaId": "IMG-Y1M02-Q012-SIX",
+          "verifiedQuestionIds": [
+            "Y1M02-Q012"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q013",
+          "mediaId": "IMG-Y1M02-Q013-SIX",
+          "verifiedQuestionIds": [
+            "Y1M02-Q013"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q014",
+          "mediaId": "IMG-Y1M02-Q014-SIX",
+          "verifiedQuestionIds": [
+            "Y1M02-Q014"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q020",
+          "mediaId": "IMG-Y1M02-Q020-SIX",
+          "verifiedQuestionIds": [
+            "Y1M02-Q020"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 6 matching glossy red apples, complete and individually countable, teaching the English quantity six\nComposition: two rows of three, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+        "originalPromptRecordStatus": "EXACT_SESSION_PROMPT_RECORDED",
+        "originalFile": "provenance/originals/SIX-ORIGINAL.png",
+        "originalSha256": "2a4e1df89aac1d90b8652fc98047f3b900213da886355e57ca2ea630c3f3ac90",
+        "nativeSourceLocalPathAtReview": "C:/Users/augus/.codex/generated_images/01a18c9c-1db8-70d1-8e0e-489a267a01d0/exec-060beb1e-0529-4d2a-9f5e-7b78eb029ba1.png",
+        "nativeSourceExactHashMatch": true,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 6,
+          "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-SEVEN",
+      "file": "images/DUDUQ-Y1M02-SEVEN.png",
+      "semanticTarget": "seven",
+      "sha256": "b675fb761c6054b737cf35ba6b9d36e9fe50ed7a317ae07e4a3dc30000272667",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m02-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M02-Q014",
+          "mediaId": "IMG-Q014-SEVEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q014"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q002",
+          "mediaId": "IMG-Y1M02-Q002-D5-SEVEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q002"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q010",
+          "mediaId": "IMG-Y1M02-Q010-SEVEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q010"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q011",
+          "mediaId": "IMG-Y1M02-Q011-SEVEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q011"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q012",
+          "mediaId": "IMG-Y1M02-Q012-SEVEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q012"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q013",
+          "mediaId": "IMG-Y1M02-Q013-SEVEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q013"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q014",
+          "mediaId": "IMG-Y1M02-Q014-SEVEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q014"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q020",
+          "mediaId": "IMG-Y1M02-Q020-SEVEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q020"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 7 matching glossy red apples, complete and individually countable, teaching the English quantity seven\nComposition: two above three above two, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+        "originalPromptRecordStatus": "EXACT_SESSION_PROMPT_RECORDED",
+        "originalFile": "provenance/originals/SEVEN-ORIGINAL.png",
+        "originalSha256": "cf8eaa0b36b46893e4b8ef2962f2ac42c5e806ef81d4426f907484fc0c3270cb",
+        "nativeSourceLocalPathAtReview": "C:/Users/augus/.codex/generated_images/01a18c9c-1db8-70d1-8e0e-489a267a01d0/exec-9552a280-02f8-4596-a6e9-7be977b063cd.png",
+        "nativeSourceExactHashMatch": true,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 7,
+          "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-EIGHT",
+      "file": "images/DUDUQ-Y1M02-EIGHT.png",
+      "semanticTarget": "eight",
+      "sha256": "f1f51c261a1662616fcdc24eff0cab7761aa886c48189ed48adee1c81129bf23",
+      "pixelWidth": 1774,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m02-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M02-Q002",
+          "mediaId": "IMG-Y1M02-Q002-D6-EIGHT",
+          "verifiedQuestionIds": [
+            "Y1M02-Q002"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q007",
+          "mediaId": "IMG-Y1M02-Q007-EIGHT",
+          "verifiedQuestionIds": [
+            "Y1M02-Q007"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q010",
+          "mediaId": "IMG-Y1M02-Q010-EIGHT",
+          "verifiedQuestionIds": [
+            "Y1M02-Q010"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q011",
+          "mediaId": "IMG-Y1M02-Q011-EIGHT",
+          "verifiedQuestionIds": [
+            "Y1M02-Q011"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q012",
+          "mediaId": "IMG-Y1M02-Q012-EIGHT",
+          "verifiedQuestionIds": [
+            "Y1M02-Q012"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q013",
+          "mediaId": "IMG-Y1M02-Q013-EIGHT",
+          "verifiedQuestionIds": [
+            "Y1M02-Q013"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q014",
+          "mediaId": "IMG-Y1M02-Q014-EIGHT",
+          "verifiedQuestionIds": [
+            "Y1M02-Q014"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q015",
+          "mediaId": "IMG-Y1M02-Q015-EIGHT",
+          "verifiedQuestionIds": [
+            "Y1M02-Q015"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q016",
+          "mediaId": "IMG-Y1M02-Q016-EIGHT",
+          "verifiedQuestionIds": [
+            "Y1M02-Q016"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 8 matching glossy red apples, complete and individually countable, teaching the English quantity eight\nComposition: two rows of four, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+        "originalPromptRecordStatus": "EXACT_SESSION_PROMPT_RECORDED",
+        "originalFile": "provenance/originals/EIGHT-ORIGINAL.png",
+        "originalSha256": "63fb7f3eb46635f62903a2790c7fdf3353433a0c738e1cd19b0f683455e19fe2",
+        "nativeSourceLocalPathAtReview": "C:/Users/augus/.codex/generated_images/01a18c9c-1db8-70d1-8e0e-489a267a01d0/exec-f1ebda1e-7abe-434b-a0d0-3376a523ef45.png",
+        "nativeSourceExactHashMatch": true,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 8,
+          "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-NINE",
+      "file": "images/DUDUQ-Y1M02-NINE.png",
+      "semanticTarget": "nine",
+      "sha256": "a49f122a9e0967699c4602ce5cd294ad228dff16bd644e9d906b26e9d87eae5c",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m02-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M02-Q009",
+          "mediaId": "IMG-Q009-NINE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q009"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q017",
+          "mediaId": "IMG-Q017-NINE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q017"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q019",
+          "mediaId": "IMG-Q019-NINE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q019"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q007",
+          "mediaId": "IMG-Y1M02-Q007-D2-NINE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q007"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q011",
+          "mediaId": "IMG-Y1M02-Q011-NINE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q011"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q012",
+          "mediaId": "IMG-Y1M02-Q012-NINE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q012"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q013",
+          "mediaId": "IMG-Y1M02-Q013-NINE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q013"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q014",
+          "mediaId": "IMG-Y1M02-Q014-NINE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q014"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q015",
+          "mediaId": "IMG-Y1M02-Q015-NINE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q015"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q016",
+          "mediaId": "IMG-Y1M02-Q016-NINE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q016"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q017",
+          "mediaId": "IMG-Y1M02-Q017-NINE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q017"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q018",
+          "mediaId": "IMG-Y1M02-Q018-M1-NINE",
+          "verifiedQuestionIds": [
+            "Y1M02-Q018"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 9 matching glossy red apples, complete and individually countable, teaching the English quantity nine\nComposition: three rows of three, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+        "originalPromptRecordStatus": "EXACT_SESSION_PROMPT_RECORDED",
+        "originalFile": "provenance/originals/NINE-ORIGINAL.png",
+        "originalSha256": "d606b31ad47da7e85f5294252146a6d682429f45f2db551f6b588bd4147ca23a",
+        "nativeSourceLocalPathAtReview": "C:/Users/augus/.codex/generated_images/01a18c9c-1db8-70d1-8e0e-489a267a01d0/exec-5394898d-fd15-4d67-b233-d8f729543bc3.png",
+        "nativeSourceExactHashMatch": true,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 9,
+          "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M02-OFFICIAL-TEN",
+      "file": "images/DUDUQ-Y1M02-TEN.png",
+      "semanticTarget": "ten",
+      "sha256": "2fd76a2d23ed7d7f835876bd92de3f079943ea10b3829ed8c880970f2e9b8d3b",
+      "pixelWidth": 1983,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m02-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M02-Q010",
+          "mediaId": "IMG-Q010-TEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q010"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q020",
+          "mediaId": "IMG-Q020-TEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q020"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q007",
+          "mediaId": "IMG-Y1M02-Q007-D3-TEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q007"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q013",
+          "mediaId": "IMG-Y1M02-Q013-TEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q013"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q014",
+          "mediaId": "IMG-Y1M02-Q014-TEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q014"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q015",
+          "mediaId": "IMG-Y1M02-Q015-TEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q015"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q016",
+          "mediaId": "IMG-Y1M02-Q016-TEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q016"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q017",
+          "mediaId": "IMG-Y1M02-Q017-TEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q017"
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q020",
+          "mediaId": "IMG-Y1M02-Q020-TEN",
+          "verifiedQuestionIds": [
+            "Y1M02-Q020"
+          ]
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 10 matching glossy red apples, complete and individually countable, teaching the English quantity ten\nComposition: two rows of five, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+        "originalPromptRecordStatus": "EXACT_SESSION_PROMPT_RECORDED",
+        "originalFile": "provenance/originals/TEN-ORIGINAL.png",
+        "originalSha256": "018be7f295443648fb6138b8f8aafedc3bd700badf550740a4a10ee819f1453f",
+        "nativeSourceLocalPathAtReview": "C:/Users/augus/.codex/generated_images/01a18c9c-1db8-70d1-8e0e-489a267a01d0/exec-b015a75b-c773-4db5-995c-f0b65b2ac683.png",
+        "nativeSourceExactHashMatch": true,
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 10,
+          "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+        }
+      }
+    }
+  ]
+}
