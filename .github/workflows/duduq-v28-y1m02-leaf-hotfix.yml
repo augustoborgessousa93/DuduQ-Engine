@@ -69,7 +69,7 @@ jobs:
               page.on('pageerror',e=>errors.push(String(e)));
               const response=await page.goto('http://127.0.0.1:4175/play/drag-drop-multimedia/?duduqModule=Y1M02&duduqItem=Y1M02-Q001&qaSeed=numeral-leaf-v29',{waitUntil:'domcontentloaded',timeout:45000});
               assert.equal(response?.status(),200);
-              await page.waitForFunction(expected=>expected.every(u=>[...document.images].some(im=>new URL(im.currentSrc||im.src).pathname===u&&im.complete&&im.naturalWidth>0&&im.getBoundingClientRect().width>20)),urls,{timeout:30000});
+              await page.waitForFunction(expected=>expected.every(u=>[...document.images].some(im=>(()=>{try{return new URL(im.currentSrc||im.src,location.href).pathname===u;}catch{return false;}})()&&im.complete&&im.naturalWidth>0&&im.getBoundingClientRect().width>20)),urls,{timeout:30000});
               assert.deepEqual(errors,[]);
               const screenshot='qa/results/y1m02-numeral-hotfix/Q001-'+viewport.width+'.png';
               await page.screenshot({path:screenshot});
