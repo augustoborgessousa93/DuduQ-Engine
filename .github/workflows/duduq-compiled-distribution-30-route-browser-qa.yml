@@ -57,8 +57,20 @@ jobs:
         run: |
           set -Eeuo pipefail
           for RUN in "$ARTIFACT_RUN" "$SOURCE_RUN"; do
-            test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN" --jq .conclusion)" = success
-            test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN" --jq .head_sha)" = "$ARTIFACT_SOURCE_SHA"
+            # Fail immediately if the workflow was triggered with an unrelated
+            # run ID; wait only for the exact same-commit approved dependency.
+            ACTUAL_SHA="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN" --jq .head_sha)"
+            test "$ACTUAL_SHA" = "$ARTIFACT_SOURCE_SHA" || {
+              echo "::error::DEPENDENCY_SHA_MISMATCH: run=$RUN actual=$ACTUAL_SHA expected=$ARTIFACT_SOURCE_SHA"
+              exit 1
+            }
+            echo "Waiting for same-SHA dependency $RUN (up to 25 minutes)"
+            timeout 25m gh run watch "$RUN" -R "$GITHUB_REPOSITORY" --exit-status --interval 15
+            CONCLUSION="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN" --jq .conclusion)"
+            test "$CONCLUSION" = success || {
+              echo "::error::DEPENDENCY_NOT_SUCCESS: run=$RUN conclusion=$CONCLUSION"
+              exit 1
+            }
           done
           mkdir -p "$RUNNER_TEMP/duduq-verified" dist-pages qa/results
           gh run download "$ARTIFACT_RUN" -R "$GITHUB_REPOSITORY" \
