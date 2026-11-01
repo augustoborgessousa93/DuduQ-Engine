@@ -1,0 +1,94 @@
+name: DUDUQ V28 - Verify Actual Cloudflare Preview Delivery
+
+on:
+  push:
+    branches:
+      - integration/duduq-m1-qa-consolidated-20261031
+    paths:
+      - .github/workflows/duduq-v28-cloudflare-preview-delivery.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  published-preview-http:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      V28_PREVIEW: https://87d57097.duduq-engine-13a.pages.dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate all thirty CDN module routes, sixty data requests and exact source PNG hashes
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p qa/results
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {createHash} from 'node:crypto';
+          import {writeFileSync} from 'node:fs';
+          const base=process.env.V28_PREVIEW;
+          const sha=b=>createHash('sha256').update(b).digest('hex');
+          async function get(route){
+            let error;
+            for(let n=0;n<4;n++){
+              try{
+                const res=await fetch(base+route,{redirect:'follow',signal:AbortSignal.timeout(35000)});
+                assert.equal(res.status,200,'HTTP_'+res.status+':'+route);
+                return {buffer:Buffer.from(await res.arrayBuffer()),type:res.headers.get('content-type')||''};
+              }catch(e){error=e;if(n<3)await new Promise(r=>setTimeout(r,1000*(n+1)));}
+            }
+            throw error;
+          }
+          const checks={deploymentUrl:base,compileRunId:41342961320,sourceArchiveSha256:'9014d34492659d27961772495a27b02e4556d4ebe95522b350f3ee2740970830',routes:[],questionFiles:[],imageFiles:[],sourceMediaIds:0,releaseApproved:false,productionDeployed:false,status:'RUNNING'};
+          try{
+            for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
+              const mm=String(module).padStart(2,'0'),prefix='/play/english/year-'+year+'/module-'+mm+'/';
+              const html=await get(prefix);
+              assert(html.type.includes('text/html'),'NOT_HTML:'+prefix);
+              assert(html.buffer.length>500,'EMPTY_MODULE_HTML:'+prefix);
+              checks.routes.push({route:prefix,status:200,htmlBytes:html.buffer.length});
+              const dataRoute='/content/english/year-'+year+'/module-'+mm+'/questions.json';
+              const q=JSON.parse((await get(dataRoute)).buffer.toString('utf8'));
+              assert.equal(q.items?.length,20,'MISSING_QUESTIONS:'+dataRoute);
+              assert.equal(q.moduleId,'Y'+year+'M'+mm,'WRONG_QUESTION_MODULE:'+dataRoute);
+              checks.questionFiles.push({route:dataRoute,questions:q.items.length});
+            }
+            const reg=JSON.parse((await get('/content/english/media/media-registry.json')).buffer.toString('utf8'));
+            const matched=reg.entries.filter(x=>String(x.urlOrPath||'').startsWith('content/english/assets/images/assets-duduq/'));
+            assert.equal(matched.length,157,'SOURCE_MEDIA_COUNT_CHANGED');
+            checks.sourceMediaIds=matched.length;
+            const imgs=new Map();
+            for(const e of matched){
+              assert(e.temporary===true&&e.humanResolutionStatus==='PEDAGOGICAL_QA_PENDING','PEDAGOGICAL_STATUS_CHANGED:'+e.mediaId);
+              const prev=imgs.get(e.urlOrPath);
+              if(prev)assert.equal(prev,e.sha256,'IMAGE_HASH_AMBIGUOUS:'+e.urlOrPath);
+              else imgs.set(e.urlOrPath,e.sha256);
+            }
+            assert.equal(imgs.size,21,'SOURCE_IMAGE_COUNT_CHANGED');
+            for(const [rel,expected]of imgs){
+              const route='/'+rel;
+              const d=await get(route);
+              assert(d.buffer.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),'INVALID_IMAGE:'+route);
+              assert.equal(sha(d.buffer),expected,'CDN_IMAGE_BYTES_DIFFER:'+route);
+              checks.imageFiles.push({route,sha256:expected,bytes:d.buffer.length});
+            }
+            assert.equal(checks.routes.length,30);
+            assert.equal(checks.questionFiles.length,30);
+            checks.status='PASS_LIVE_CLOUDFLARE_PREVIEW_DELIVERY';
+            console.log(JSON.stringify({status:checks.status,liveRoutes:checks.routes.length,questionFiles:checks.questionFiles.length,questions:600,originalPngs:checks.imageFiles.length,sourceMediaIds:checks.sourceMediaIds,productionDeployed:false}));
+          }catch(e){checks.status='FAIL_LIVE_CLOUDFLARE_PREVIEW_DELIVERY';checks.error=String(e?.stack||e);process.exitCode=1;}
+          finally{writeFileSync('qa/results/v28-live-cloudflare-preview-delivery.json',JSON.stringify(checks,null,2)+'\n');}
+          NODE
+      - name: Archive HTTP and source-hash verification from Cloudflare CDN
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-v28-live-cloudflare-preview-verified-${{ github.run_id }}
+          path: qa/results/v28-live-cloudflare-preview-delivery.json
+          if-no-files-found: error
+          retention-days: 21
