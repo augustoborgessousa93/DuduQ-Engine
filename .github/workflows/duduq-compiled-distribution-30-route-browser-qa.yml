@@ -308,9 +308,13 @@ jobs:
                       errors.push('HTTP_'+r.status()+':'+r.url());
                   });
                   await page.addInitScript(()=>{
-                    window.__duduqTouchObserved=false;
+                    // Persist real pointerdown evidence across the intro -> game navigation.
+                    window.__duduqTouchObserved=sessionStorage.getItem('duduq-touch-pointerdown')==='true';
                     document.addEventListener('pointerdown',e=>{
-                      if(e.pointerType==='touch')window.__duduqTouchObserved=true;
+                      if(e.pointerType==='touch'){
+                        sessionStorage.setItem('duduq-touch-pointerdown','true');
+                        window.__duduqTouchObserved=true;
+                      }
                     },true);
                   });
                   try {
@@ -344,12 +348,12 @@ jobs:
                         try{return (f.contentDocument?.body?.children.length||0)>0;}catch{return false;}
                       });
                       const visibleGame=[...document.querySelectorAll('#game.game-screen,.duduq-game-screen,.duduq-mechanic-frame')].some(visible);
-                      return window.__duduqTouchObserved===true&&!startStillHittable&&
+                      return sessionStorage.getItem('duduq-touch-pointerdown')==='true'&&!startStillHittable&&
                         (mechanicRoute||playableFrame||visibleGame);
                     },null,{timeout:20000});
                     const geometry=await page.evaluate(()=>({
                       hostOverflow:Math.max(0,document.documentElement.scrollWidth-innerWidth),
-                      touchObserved:window.__duduqTouchObserved===true
+                      touchObserved:sessionStorage.getItem('duduq-touch-pointerdown')==='true'
                     }));
                     if(geometry.hostOverflow>2)throw Error('TOUCH_HOST_OVERFLOW:'+geometry.hostOverflow);
                     if(errors.length)throw Error('TOUCH_BROWSER_ERRORS:'+errors.join('|'));
@@ -377,7 +381,7 @@ jobs:
                             centerHit:hit===b||b.contains(hit),
                             hitTag:hit?.tagName||null,hitClass:String(hit?.className||'').slice(0,100)};
                         });
-                        return {url:location.href,touchObserved:window.__duduqTouchObserved===true,
+                        return {url:location.href,touchObserved:sessionStorage.getItem('duduq-touch-pointerdown')==='true',
                           viewport:{width:innerWidth,height:innerHeight},
                           hostOverflow:Math.max(0,document.documentElement.scrollWidth-innerWidth),
                           startButtons:starts,visibleGameNodes:[...document.querySelectorAll(
