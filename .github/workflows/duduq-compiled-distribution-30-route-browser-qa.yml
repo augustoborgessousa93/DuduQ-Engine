@@ -196,6 +196,81 @@ jobs:
             firstFailures:failures.slice(0,8)}));
           if(records.length!==90||failures.length)process.exitCode=1;
           NODE
+      - name: Real pointer interaction through compiled module intros and Year3 responsive entries
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import {chromium} from 'playwright';
+          import {writeFileSync} from 'node:fs';
+          const base=process.env.BASE_URL,records=[],cases=[];
+          for(let year=1;year<=5;year++)for(let module=1;module<=6;module++)
+            cases.push({year,module,viewport:{width:1440,height:900}});
+          for(const width of [390,768])for(let module=1;module<=6;module++)
+            cases.push({year:3,module,viewport:{width,height:width===390?844:1024}});
+          const browser=await chromium.launch({headless:true});
+          try {
+            for(const test of cases){
+              const {year,module,viewport}=test;
+              const route='/play/english/year-'+year+'/module-'+String(module).padStart(2,'0')+'/';
+              const context=await browser.newContext({viewport,reducedMotion:'reduce'});
+              const page=await context.newPage(),errors=[];
+              page.on('pageerror',e=>errors.push('JS:'+String(e.message||e)));
+              page.on('response',r=>{
+                if(r.url().startsWith(base)&&r.status()>=400&&!r.url().includes('favicon.ico'))
+                  errors.push('HTTP_'+r.status()+':'+r.url());
+              });
+              const record={year,module,viewport:viewport.width,route,status:'FAIL'};
+              try {
+                const nav=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:30000});
+                if(nav?.status()!==200)throw Error('INTRO_HTTP_'+nav?.status());
+                const start=page.getByRole('button',{name:/iniciar (?:jogo|missão)/i}).first();
+                await start.waitFor({state:'visible',timeout:15000});
+                const bounds=await start.boundingBox();
+                if(!bounds||bounds.width<20||bounds.height<20)throw Error('INTRO_START_TOO_SMALL');
+                const x=bounds.x+bounds.width/2,y=bounds.y+bounds.height/2;
+                const hit=await start.evaluate((el,p)=>{
+                  const node=document.elementFromPoint(p.x,p.y);
+                  return node===el||el.contains(node);
+                },{x,y});
+                if(!hit)throw Error('INTRO_START_NOT_POINTER_HITTABLE');
+                record.beforeUrl=page.url();
+                await page.mouse.click(x,y);
+                await page.waitForFunction(()=>{
+                  const playable=[...document.querySelectorAll('iframe')].some(f=>{
+                    try{return (f.contentDocument?.body?.children.length||0)>0;}catch{return false;}
+                  });
+                  return window.DUDUQ_ENGINE_READY===true||playable||
+                    Boolean(document.querySelector('#game.game-screen,.duduq-game-screen,.duduq-mechanic-frame'))||
+                    /\/play\/(drag-drop|drag-drop-multimedia|target-shooter|matching|memory-quest|bubble-pop|smart-sentence)\//.test(location.pathname);
+                },null,{timeout:20000});
+                record.afterUrl=page.url();
+                if(errors.length)throw Error('BROWSER_ERRORS:'+errors.join('|'));
+                record.status='PASS';
+                record.realMouseClick=true;
+              }catch(e){
+                record.error=String(e.message||e);
+                record.browserErrors=errors;
+              }finally{
+                records.push(record);
+                await page.close();
+                await context.close();
+              }
+            }
+          }finally{await browser.close();}
+          const failures=records.filter(r=>r.status!=='PASS');
+          const report={schemaVersion:'DUDUQ_COMPILED_INTRO_POINTER_AND_YEAR3_ENTRY_QA_V1',
+            artifactRun:Number(process.env.ARTIFACT_RUN),
+            artifactSourceSha:process.env.ARTIFACT_SOURCE_SHA,
+            expectedCases:42,observedCases:records.length,passed:records.length-failures.length,
+            failed:failures.length,cases:records,realPointerIntroOnly:true,
+            gameplayCertified:false,year3GameplayCertified:false,
+            pedagogicalApproval:false,releaseApproved:false,productionDeployed:false};
+          writeFileSync('qa/results/compiled-intro-pointer-year3-qa.json',JSON.stringify(report,null,2)+'\n');
+          console.log(JSON.stringify({observed:records.length,passed:report.passed,failed:report.failed,
+            firstFailures:failures.slice(0,10)}));
+          if(records.length!==42||failures.length)process.exitCode=1;
+          NODE
       - name: Preserve exact-artifact Chromium evidence even on failure
         if: always()
         uses: actions/upload-artifact@v4
@@ -203,9 +278,11 @@ jobs:
           name: duduq-compiled-30-route-browser-qa-${{ github.run_id }}
           retention-days: 14
           if-no-files-found: warn
-          path: qa/results/compiled-30-route-browser-qa.json
+          path: |
+            qa/results/compiled-30-route-browser-qa.json
+            qa/results/compiled-intro-pointer-year3-qa.json
       - name: Explicit release boundary
         if: always()
         run: |
-          echo "Boot, image loading and horizontal responsive geometry only; NOT gameplay, pedagogical approval, Year3 certification, or production deployment."
+          echo "Boot, image loading, responsive geometry and intro pointer entry only; NOT full gameplay, pedagogical approval, Year3 gameplay certification, or production deployment."
           echo "No Cloudflare credentials or production mutation used."
