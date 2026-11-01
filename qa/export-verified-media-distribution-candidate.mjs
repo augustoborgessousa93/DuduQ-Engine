@@ -151,6 +151,25 @@ const farmIds=farm.bindings.map(binding=>binding.mediaId);
 assert.equal(farmIds.length,farm.changedMediaIds,'FARM_BINDING_COUNT_MISMATCH');
 assert.equal(new Set(farmIds).size,farmIds.length,'DUPLICATE_FARM_BINDING_ID');
 assert(!farmIds.some(id=>pig.changedMediaIds.includes(id)),'DUPLICATE_FARM_PIG_ID');
+const vocab=await load('qa/results/vocabulary-source-batch.json');
+const vocabBrowser=await load('qa/results/vocabulary-source-browser.json');
+assert.equal(vocab.status,'EXACT_VOCAB_SOURCE_REUSED_EPHEMERAL_QA');
+assert.equal(vocabBrowser.status,'PASS_HASH_HTTP_AND_REPRESENTATIVE_ROUTE_BOOTS_QA_ONLY');
+assert.equal(vocab.changedMediaIds,vocab.bindings.length);
+assert.equal(vocabBrowser.changedMediaIds,vocab.changedMediaIds);
+assert.equal(vocabBrowser.images,vocab.usedUniquePngs);
+assert(!vocab.releaseApproved&&!vocab.humanPedagogicalApproval);
+const farmSet=new Set([...farmIds,...pig.changedMediaIds]);
+assert(vocab.bindings.every(b=>!farmSet.has(b.mediaId)),'DUPLICATE_ANIMAL_VOCAB_ID');
+for(const img of vocab.images){
+ assert.equal(hashes.get(img.assetPath)?.sha,img.sha256,'VOCAB_ASSET_NOT_HASH_BOUND:'+img.concept);
+}
+for(const binding of vocab.bindings){
+ const entry=index.get(binding.mediaId);
+ assert(entry?.urlOrPath===binding.sourcePath&&entry.sha256===binding.sha256&&
+  entry.temporary===true&&entry.humanResolutionStatus==='PEDAGOGICAL_QA_PENDING',
+  'VOCAB_MEDIA_NOT_CORRECTLY_BOUND:'+binding.mediaId);
+}
 const report={
  schemaVersion:'DUDUQ_DISTRIBUTABLE_MEDIA_CANDIDATE_V1',
  status:'COMPILED_DISTRIBUTION_READY_FOR_RELEASE_GATES_NOT_APPROVED',
@@ -171,6 +190,12 @@ const report={
  additionalFarmAnimalQuestionMediaUsages:28,
  additionalFarmAnimalQuestionRoutes:18,
  farmPedagogicalApprovalPending:true,
+ additionalExactVocabularyPngs:vocab.usedUniquePngs,
+ additionalExactVocabularyCandidateIds:vocab.changedMediaIds,
+ additionalExactVocabularyAffectedQuestions:vocab.affectedQuestions,
+ additionalExactVocabularyBrowserRouteBoots:vocabBrowser.browserRoutes,
+ exactVocabularyPedagogicalApprovalPending:true,
+ pendingMediaIdsBeforeDirectSourcePreview:954,
  pendingMediaIds:954,
  qaOnlyInlineCssRemoved:true,
  mobileContainmentLoadedFromVersionedV27:true,

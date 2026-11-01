@@ -32,6 +32,8 @@ on:
       - "qa/replace-pig-from-assets-duduq.mjs"
       - "qa/replace-farm-animal-batch-from-assets-duduq.mjs"
       - "qa/verify-farm-animal-source-batch-browser.mjs"
+      - "qa/replace-safe-vocabulary-from-assets-duduq.mjs"
+      - "qa/verify-vocabulary-source-browser.mjs"
       - "qa/verify-pig-direct-reuse-browser.mjs"
       - "core/adapters/v27/target-shooter-mobile-containment.css"
       - "qa/export-verified-media-distribution-candidate.mjs"
@@ -317,6 +319,17 @@ jobs:
           node qa/verify-farm-animal-source-batch-browser.mjs
           echo "185_APPROVED_IDS_PLUS_16_PROVISIONAL_FARM_ANIMAL_IDS_ON_ONE_COMPILED_PRODUCT"
 
+      - name: Integrate safe bilingual numerals colors and pets from pinned source in ephemeral compiled QA only
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/replace-safe-vocabulary-from-assets-duduq.mjs
+          node qa/replace-safe-vocabulary-from-assets-duduq.mjs assets-source
+          node qa/replace-safe-vocabulary-from-assets-duduq.mjs assets-source --apply
+          node --check qa/verify-vocabulary-source-browser.mjs
+          node qa/verify-vocabulary-source-browser.mjs
+          echo "SOURCE_VOCAB_REUSE_PREVIEW_ONLY_NO_PEDAGOGICAL_RELEASE"
+
       # This is a product-shaped compiled distribution containing all 185
       # media-ID substitutions, NOT another empty QA report. The temporary
       # injected Target Shooter style is stripped and re-hashed; only V27
@@ -349,6 +362,8 @@ jobs:
             qa/results/pig-source-direct-browser.json
             qa/results/farm-animal-source-batch.json
             qa/results/farm-animal-batch-browser.json
+            qa/results/vocabulary-source-batch.json
+            qa/results/vocabulary-source-browser.json
 
       - name: Retain independent QA reports and real-browser screenshots
         if: always()
