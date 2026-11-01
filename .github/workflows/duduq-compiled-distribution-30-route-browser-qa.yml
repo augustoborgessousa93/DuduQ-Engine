@@ -319,6 +319,7 @@ jobs:
                     const start=page.getByRole('button',{name:/iniciar (?:jogo|missão)/i}).first();
                     await start.waitFor({state:'visible',timeout:15000});
                     const bounds=await start.boundingBox();
+                    record.startBounds=bounds;
                     if(!bounds||bounds.width<44||bounds.height<44)throw Error('TOUCH_START_TOO_SMALL');
                     const x=bounds.x+bounds.width/2,y=bounds.y+bounds.height/2;
                     const hit=await start.evaluate((el,p)=>{
@@ -358,6 +359,41 @@ jobs:
                   }catch(e){
                     record.error=String(e.message||e);
                     record.browserErrors=errors;
+                    // Diagnostics only: preserve the strict 44px and actual-touch assertions.
+                    try {
+                      record.diagnostics=await page.evaluate(()=>{
+                        const visible=el=>{
+                          const r=el.getBoundingClientRect(),s=getComputedStyle(el);
+                          return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden';
+                        };
+                        const buttons=[...document.querySelectorAll('button')].filter(
+                          b=>/iniciar (?:jogo|missão)/i.test(b.textContent||''));
+                        const starts=buttons.map(b=>{
+                          const r=b.getBoundingClientRect(),s=getComputedStyle(b);
+                          const hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+                          return {text:(b.textContent||'').trim().slice(0,80),
+                            x:r.x,y:r.y,width:r.width,height:r.height,
+                            visible:visible(b),pointerEvents:s.pointerEvents,
+                            centerHit:hit===b||b.contains(hit),
+                            hitTag:hit?.tagName||null,hitClass:String(hit?.className||'').slice(0,100)};
+                        });
+                        return {url:location.href,touchObserved:window.__duduqTouchObserved===true,
+                          viewport:{width:innerWidth,height:innerHeight},
+                          hostOverflow:Math.max(0,document.documentElement.scrollWidth-innerWidth),
+                          startButtons:starts,visibleGameNodes:[...document.querySelectorAll(
+                            '#game.game-screen,.duduq-game-screen,.duduq-mechanic-frame')].filter(visible).length,
+                          frames:[...document.querySelectorAll('iframe')].map(f=>({
+                            src:f.getAttribute('src'),visible:visible(f),
+                            width:f.getBoundingClientRect().width,height:f.getBoundingClientRect().height}))};
+                      });
+                      if(module===1) {
+                        const shot='qa/results/compiled-year3-touch-diagnostic-'+viewport.width+'.png';
+                        await page.screenshot({path:shot,animations:'disabled'});
+                        record.screenshot=shot;
+                      }
+                    }catch(diagnosticError){
+                      record.diagnosticCaptureError=String(diagnosticError.message||diagnosticError);
+                    }
                   }finally{records.push(record);await page.close();}
                 }
               }finally{await context.close();}
@@ -386,6 +422,7 @@ jobs:
             qa/results/compiled-30-route-browser-qa.json
             qa/results/compiled-intro-pointer-year3-qa.json
             qa/results/compiled-year3-touch-intro-qa.json
+            qa/results/compiled-year3-touch-diagnostic-*.png
       - name: Explicit release boundary
         if: always()
         run: |
