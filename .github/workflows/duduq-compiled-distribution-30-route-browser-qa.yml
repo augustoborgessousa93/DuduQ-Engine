@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
-      GH_TOKEN: \${{ github.token }}
+      GH_TOKEN: ${{ github.token }}
       ARTIFACT_RUN: "41258948433"
       SOURCE_RUN: "41258948442"
       ARTIFACT_SOURCE_SHA: "a0aa607e0a205641f9a876889bd5f1ed6c620a00"
@@ -169,7 +169,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: duduq-compiled-30-route-browser-qa-\${{ github.run_id }}
+          name: duduq-compiled-30-route-browser-qa-${{ github.run_id }}
           retention-days: 14
           if-no-files-found: warn
           path: qa/results/compiled-30-route-browser-qa.json
