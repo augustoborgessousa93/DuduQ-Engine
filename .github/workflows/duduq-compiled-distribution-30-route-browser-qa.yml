@@ -475,7 +475,7 @@ jobs:
           const touch=JSON.parse(readFileSync('qa/results/compiled-year3-touch-intro-qa.json','utf8'));
           const boots=JSON.parse(readFileSync('qa/results/compiled-30-route-browser-qa.json','utf8'));
           const pointer=JSON.parse(readFileSync('qa/results/compiled-intro-pointer-year3-qa.json','utf8'));
-          assert.equal(v28.status,'HASH_BOUND_COMPILED_ADAPTER_APPLIED');
+          assert.equal(v28.status,'HASH_BOUND_COMPILED_ADAPTER_VERIFIED_IN_EXACT_ARTIFACT');
           assert.equal(v28.releaseApproved,false);
           assert.equal(v28.productionDeployed,false);
           assert.equal(v28.mediaChanged,false);
