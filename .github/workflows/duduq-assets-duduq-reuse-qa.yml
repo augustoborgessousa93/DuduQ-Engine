@@ -16,6 +16,8 @@ on:
       - "qa/replace-pig-from-assets-duduq.mjs"
       - "qa/replace-farm-animal-batch-from-assets-duduq.mjs"
       - "qa/verify-farm-animal-source-batch-browser.mjs"
+      - "qa/replace-safe-vocabulary-from-assets-duduq.mjs"
+      - "qa/verify-vocabulary-source-browser.mjs"
       - "qa/verify-pig-direct-reuse-browser.mjs"
       - "qa/verify-assets-duduq-reuse-preparation.mjs"
       - "qa/verify-assets-duduq-import.mjs"
@@ -329,6 +331,17 @@ jobs:
           node qa/verify-farm-animal-source-batch-browser.mjs
           echo "FOUR_MORE_PNGS_REUSED_FOR_13_ADDITIONAL_PROVISIONAL_IDS"
 
+      - name: Independently validate exact bilingual vocabulary reuse on the SAME compiled source QA product
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/replace-safe-vocabulary-from-assets-duduq.mjs
+          node qa/replace-safe-vocabulary-from-assets-duduq.mjs assets-source
+          node qa/replace-safe-vocabulary-from-assets-duduq.mjs assets-source --apply
+          node --check qa/verify-vocabulary-source-browser.mjs
+          node qa/verify-vocabulary-source-browser.mjs
+          node -e 'const r=require("./qa/results/vocabulary-source-batch.json"); const b=require("./qa/results/vocabulary-source-browser.json"); if(r.changedMediaIds!==141||r.usedUniquePngs!==16||r.affectedQuestions!==56||b.changedMediaIds!==141||b.images!==16||b.browserRoutes!==44||r.releaseApproved!==false||r.humanPedagogicalApproval!==false)process.exit(1); console.log("INDEPENDENT_VOCAB_QA_PASS_NOT_RELEASE_APPROVED")'
+
       - name: Preserve actual compiled pig-containing distribution for review
         shell: bash
         run: |
@@ -351,6 +364,8 @@ jobs:
             qa/results/pig-source-direct-browser.json
             qa/results/farm-animal-source-batch.json
             qa/results/farm-animal-batch-browser.json
+            qa/results/vocabulary-source-batch.json
+            qa/results/vocabulary-source-browser.json
             qa/results/pig-distribution-tar.sha256
             ${{ runner.temp }}/duduq-pig-direct-v26-qa.tar.gz
             /tmp/duduq-pig-pages.log
