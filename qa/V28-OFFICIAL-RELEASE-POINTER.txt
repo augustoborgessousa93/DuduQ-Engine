@@ -1,0 +1,9 @@
+DUDUQ ENGLISH — V28 OFFICIAL MEDIA UPDATE
+Authorized by project owner 2026-11-01.
+Immutable compiled asset: GitHub prerelease duduq-v28-qa-41342961320
+SHA256 tar: 9014d34492659d27961772495a27b02e4556d4ebe95522b350f3ee2740970830
+QA preview deployment: 87d57097-ee60-4b43-8dec-7ca956b67c5c
+Live preview QA: 41355742544 PASS 30 modules 600 contracts 21 original PNG SHA 157 mediaIds
+Scope: approved release of current verified media update; remaining provisional media tracked separately
+Do not treat existing QA-only reports as proof of 100% pedagogical completion.
+Production build must use qa/cloudflare-preview-v28-prebuilt.sh and its pinned immutable archive.
