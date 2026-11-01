@@ -1,0 +1,6 @@
+DUDUQ V28 COMPILED QA PREVIEW ONLY
+GitHub release: duduq-v28-qa-41342961320
+Archive SHA256: 9014d34492659d27961772495a27b02e4556d4ebe95522b350f3ee2740970830
+Actual deployment build: bash qa/cloudflare-preview-v28-prebuilt.sh
+Curricular content: 30 modules / 600 questions
+Do not change production until preview review and approval.
