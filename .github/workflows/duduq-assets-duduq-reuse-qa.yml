@@ -340,7 +340,7 @@ jobs:
           node qa/replace-safe-vocabulary-from-assets-duduq.mjs assets-source --apply
           node --check qa/verify-vocabulary-source-browser.mjs
           node qa/verify-vocabulary-source-browser.mjs
-          node -e 'const r=require("./qa/results/vocabulary-source-batch.json"); const b=require("./qa/results/vocabulary-source-browser.json"); if(r.changedMediaIds!==141||r.usedUniquePngs!==16||r.affectedQuestions!==56||b.changedMediaIds!==141||b.images!==16||b.browserRoutes!==44||r.releaseApproved!==false||r.humanPedagogicalApproval!==false)process.exit(1); console.log("INDEPENDENT_VOCAB_QA_PASS_NOT_RELEASE_APPROVED")'
+          node -e 'const r=require("./qa/results/vocabulary-source-batch.json"); const b=require("./qa/results/vocabulary-source-browser.json"); if(r.changedMediaIds!==157||r.usedUniquePngs!==16||r.affectedQuestions!==60||b.changedMediaIds!==157||b.images!==16||b.browserRoutes!==46||r.releaseApproved!==false||r.humanPedagogicalApproval!==false)process.exit(1); console.log("INDEPENDENT_VOCAB_QA_PASS_NOT_RELEASE_APPROVED")'
 
       - name: Preserve actual compiled pig-containing distribution for review
         shell: bash
