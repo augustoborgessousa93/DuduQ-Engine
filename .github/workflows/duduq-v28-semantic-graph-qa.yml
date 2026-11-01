@@ -1,0 +1,48 @@
+name: DUDUQ V28 Source Semantic Graph QA
+on:
+  workflow_dispatch:
+  push:
+    branches: [integration/duduq-m1-qa-consolidated-20261031]
+    paths:
+      - qa/verify-v28-semantic-graph.mjs
+      - .github/workflows/duduq-v28-semantic-graph-qa.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify original V28 build and recover actual artifact
+        run: |
+          set -Eeuo pipefail
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/41328246008" --jq .conclusion)" = success
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/41328246008" --jq .head_sha)" = c6c3d5db28596328ad52e0192ce4c62d7d169800
+          mkdir -p "$RUNNER_TEMP/v28" dist-pages
+          gh run download 41328246008 -R "$GITHUB_REPOSITORY" --name duduq-v28-compiled-qa-candidate-41328246008 --dir "$RUNNER_TEMP/v28"
+          TAR="$RUNNER_TEMP/v28/v28-compiled-candidate/duduq-v28-compiled-candidate.tar.gz"
+          SUM="$RUNNER_TEMP/v28/v28-compiled-candidate/duduq-v28-compiled-candidate.sha256"
+          test -s "$TAR" && test -s "$SUM"
+          test "$(head -1 "$SUM" | cut -d' ' -f1)" = "$(sha256sum "$TAR" | cut -d' ' -f1)"
+          tar -xzf "$TAR" -C dist-pages
+      - name: Verify 21 visual source assets 157 IDs and 600 immutable questions
+        run: |
+          node --check qa/verify-v28-semantic-graph.mjs
+          node qa/verify-v28-semantic-graph.mjs
+      - name: Preserve precise semantic evidence (not a pedagogical approval)
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-v28-source-semantic-evidence
+          path: qa/results/v28-semantic-graph.json
+          if-no-files-found: error
+          retention-days: 21
+      - name: Keep production unchanged
+        if: always()
+        run: echo "Technical source semantic QA only; pedagogical approval and production release remain separate."
