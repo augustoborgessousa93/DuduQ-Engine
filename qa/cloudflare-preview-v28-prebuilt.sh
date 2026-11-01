@@ -4,9 +4,9 @@ set -Eeuo pipefail
 # QA-preview ONLY. This script downloads a public, immutable, verified GitHub
 # release asset. It does not need a Cloudflare token or GitHub Actions secrets.
 # Production must remain on the existing release branch.
-TAG="duduq-v28-qa-41342961320"
-NAME="duduq-v28-compiled-candidate.tar.gz"
-SHA256="9014d34492659d27961772495a27b02e4556d4ebe95522b350f3ee2740970830"
+TAG="duduq-v28-y1m02-seven-numeral-leaf-hotfix-20261101"
+NAME="duduq-v28-y1m02-seven-leaf-hotfix.tar.gz"
+SHA256="2f7c72381dbab18eeb3f2c6a9771e636cbacc46aa04232a762f13ca5730c2f0e"
 URL="https://github.com/augustoborgessousa93/DuduQ-Engine/releases/download/${TAG}/${NAME}"
 FILE="$(mktemp -t duduq-v28-XXXXXX.tar.gz)"
 trap 'rm -f "$FILE"' EXIT
@@ -40,5 +40,5 @@ for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
  count+=20;
 }
 assert.equal(count,600,'BAD_CURRICULUM_TOTAL');
-console.log(JSON.stringify({status:'PREBUILT_V28_CLOUDFLARE_PREVIEW_READY',manifestEntries:manifest.length,questions:count,releaseApproved:false,productionDeployed:false}));
+console.log(JSON.stringify({status:'PREBUILT_V28_Y1M02_NUMERAL_LEAF_HOTFIX_READY',manifestEntries:manifest.length,questions:count,releaseApproved:false,productionDeployed:false}));
 NODE
