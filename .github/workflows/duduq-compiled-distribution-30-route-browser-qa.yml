@@ -149,11 +149,33 @@ jobs:
                       visibleButtons:[...document.querySelectorAll('button')].filter(visible).length,
                       visibleImages:images.length,
                       brokenVisibleImages:images.filter(i=>i.complete&&i.naturalWidth===0).map(i=>i.currentSrc||i.src),
+                      viewportWidth:window.innerWidth,
+                      documentScrollWidth:Math.max(document.documentElement.scrollWidth,document.body?.scrollWidth||0),
                       title:document.title};
                   });
+                  // R147/R148 responsive regression: test the actual compiled product,
+                  // including visible same-origin game frames, not just the host shell.
+                  const horizontalOverflowPx=Math.max(0,state.documentScrollWidth-state.viewportWidth);
+                  const frameOverflows=[];
+                  for(const frame of page.frames()){
+                    if(frame===page.mainFrame()||!frame.url().startsWith(base))continue;
+                    const frameElement=await frame.frameElement();
+                    if(!(await frameElement.isVisible()))continue;
+                    const geometry=await frame.evaluate(()=>{
+                      const doc=document.documentElement;
+                      return {viewportWidth:window.innerWidth,
+                        scrollWidth:Math.max(doc.scrollWidth,document.body?.scrollWidth||0)};
+                    });
+                    const overflowPx=Math.max(0,geometry.scrollWidth-geometry.viewportWidth);
+                    if(overflowPx>2)frameOverflows.push({url:frame.url(),overflowPx});
+                  }
+                  if(horizontalOverflowPx>2||frameOverflows.length)
+                    throw Error('COMPILED_RESPONSIVE_HORIZONTAL_OVERFLOW:'+JSON.stringify({
+                      hostOverflowPx:horizontalOverflowPx,frameOverflows}));
                   if(state.brokenVisibleImages.length)throw Error('BROKEN_VISIBLE_IMAGE:'+state.brokenVisibleImages.join(','));
                   if(errors.length)throw Error('BROWSER_ERRORS:'+errors.join('|'));
-                  records.push({year,module,viewport:viewport.width,status:'PASS',...state});
+                  records.push({year,module,viewport:viewport.width,status:'PASS',...state,
+                    horizontalOverflowPx,frameOverflows});
                 }catch(e){
                   records.push({year,module,viewport:viewport.width,status:'FAIL',error:String(e.message||e),browserErrors:errors});
                 }finally{await page.close();}
@@ -162,11 +184,11 @@ jobs:
             }
           }finally{await browser.close();}
           const failures=records.filter(r=>r.status==='FAIL');
-          const report={schemaVersion:'DUDUQ_COMPILED_30_MODULE_3_VIEWPORT_BOOT_V1',
+          const report={schemaVersion:'DUDUQ_COMPILED_30_MODULE_3_VIEWPORT_BOOT_AND_RESPONSIVE_V2',
             artifactRun:Number(process.env.ARTIFACT_RUN),sourceRun:Number(process.env.SOURCE_RUN),
             artifactSourceSha:process.env.ARTIFACT_SOURCE_SHA,
             expectedCases:90,observedCases:records.length,passed:records.length-failures.length,
-            failed:failures.length,cases:records,technicalBootOnly:true,
+            failed:failures.length,cases:records,technicalBootAndResponsiveGeometryOnly:true,
             pedagogicalApproval:false,gameplayCertified:false,year3GameplayCertified:false,
             productionReleaseApproved:false,productionDeployed:false};
           writeFileSync('qa/results/compiled-30-route-browser-qa.json',JSON.stringify(report,null,2)+'\n');
@@ -185,5 +207,5 @@ jobs:
       - name: Explicit release boundary
         if: always()
         run: |
-          echo "Boot and image loading only; NOT gameplay, pedagogical approval, Year3 certification, or production deployment."
+          echo "Boot, image loading and horizontal responsive geometry only; NOT gameplay, pedagogical approval, Year3 certification, or production deployment."
           echo "No Cloudflare credentials or production mutation used."
