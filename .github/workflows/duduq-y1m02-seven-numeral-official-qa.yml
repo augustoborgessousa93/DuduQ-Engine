@@ -4,7 +4,7 @@ on:
   push:
     branches: [integration/duduq-m1-qa-consolidated-20261031]
     paths:
-      - .github/workflows/duduq-y1m02-seven-numeral-live-preview-qa.yml
+      - .github/workflows/duduq-y1m02-seven-numeral-official-qa.yml
 permissions:
   contents: read
 jobs:
