@@ -1,0 +1,53 @@
+/* DUDUQ V28 — preserve the Intro artwork while keeping its primary action touchable.
+   The 1366x768 Intro artboard is uniformly scaled inside the real viewport. These
+   component metrics enlarge only the transparent button hit area; the rendered
+   CTA remains at its approved size and position. */
+@media (max-width: 680px) {
+  .duduq-module-intro {
+    --duduq-intro-start-visual-height: 6.516cqw;
+    --duduq-intro-start-touch-height: 8.5cqw;
+    --duduq-intro-start-touch-offset: calc(
+      (var(--duduq-intro-start-touch-height) - var(--duduq-intro-start-visual-height)) / 2
+    );
+  }
+
+  .duduq-start-button-motion {
+    top: calc(45.754cqw - var(--duduq-intro-start-touch-offset));
+    height: var(--duduq-intro-start-touch-height);
+    touch-action: manipulation;
+  }
+
+  .duduq-start-button-motion .intro-start {
+    height: 100%;
+    touch-action: manipulation;
+  }
+
+  .duduq-start-button-motion .intro-start__motion {
+    inset: auto 0 auto 0;
+    top: var(--duduq-intro-start-touch-offset);
+    width: 100%;
+    height: var(--duduq-intro-start-visual-height);
+  }
+
+  .intro-start-hint {
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .duduq-module-intro {
+    --duduq-intro-start-touch-height: 11cqw;
+  }
+}
+
+@media (max-width: 400px) {
+  .duduq-module-intro {
+    --duduq-intro-start-touch-height: 13.75cqw;
+  }
+}
+
+@media (max-width: 320px) {
+  .duduq-module-intro {
+    --duduq-intro-start-touch-height: 16cqw;
+  }
+}

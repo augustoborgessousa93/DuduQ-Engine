@@ -6,6 +6,9 @@ on:
       - integration/duduq-m1-qa-consolidated-20261031
     paths:
       - .github/workflows/duduq-compiled-distribution-30-route-browser-qa.yml
+      - core/adapters/v28/intro-mobile-touch-target.css
+      - qa/apply-intro-mobile-touch-target-v28.mjs
+      - qa/tests/verify-intro-mobile-touch-target-v28.test.mjs
   workflow_dispatch:
 
 permissions:
@@ -61,6 +64,9 @@ jobs:
           tar -xzf "$TAR" -C dist-pages
           test -s dist-pages/.duduq-pages-manifest
           test -s dist-pages/content/english/media/media-registry.json
+          node --check qa/apply-intro-mobile-touch-target-v28.mjs
+          node --test qa/tests/verify-intro-mobile-touch-target-v28.test.mjs
+          DUDUQ_COMPILED_RELEASE_HOTFIX=1 node qa/apply-intro-mobile-touch-target-v28.mjs --apply
       - name: Verify all manifest bytes and 600 curricular contracts before browser
         shell: bash
         run: |
@@ -427,6 +433,7 @@ jobs:
             qa/results/compiled-intro-pointer-year3-qa.json
             qa/results/compiled-year3-touch-intro-qa.json
             qa/results/compiled-year3-touch-diagnostic-*.png
+            qa/results/intro-mobile-touch-target-v28.json
       - name: Explicit release boundary
         if: always()
         run: |
