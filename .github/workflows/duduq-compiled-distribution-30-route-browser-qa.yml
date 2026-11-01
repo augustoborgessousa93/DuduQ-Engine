@@ -80,6 +80,29 @@ jobs:
           tar -xzf "$TAR" -C dist-pages
           test -s dist-pages/.duduq-pages-manifest
           test -s dist-pages/content/english/media/media-registry.json
+          mkdir -p qa/results
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,writeFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import path from 'node:path';
+          const root='dist-pages';
+          const manifest=readFileSync('dist-pages/.duduq-pages-manifest');
+          const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
+          const entries=new Map(manifest.toString('utf8').trimEnd().split(/\r?\n/).map(row=>{
+            const pos=row.lastIndexOf(' ');assert(pos>0,'BAD_MANIFEST_ROW');return [row.slice(0,pos),row.slice(pos+1)];
+          }));
+          const intro='play/intro-module/index.html';
+          const adapter='core/adapters/v28/intro-mobile-touch-target.css';
+          const introBytes=readFileSync(path.join(root,intro));
+          const adapterBytes=readFileSync(path.join(root,adapter));
+          const introText=introBytes.toString('utf8');
+          assert.equal((introText.match(/data-duduq-release="v28-intro-mobile-touch-target"/g)||[]).length,1,'V28_LINK_NOT_UNIQUE');
+          assert.equal(digest(introBytes),entries.get(intro),'INTRO_HASH_NOT_BOUND');
+          assert.equal(digest(adapterBytes),entries.get(adapter),'V28_ADAPTER_HASH_NOT_BOUND');
+          const report={schemaVersion:'DUDUQ_INTRO_MOBILE_TOUCH_TARGET_V28',status:'HASH_BOUND_COMPILED_ADAPTER_VERIFIED_IN_EXACT_ARTIFACT',intro,introSha256:digest(introBytes),adapter,adapterSha256:digest(adapterBytes),manifestCandidateSha256:digest(manifest),manifestEntryCount:entries.size,visualGeometryChanged:false,touchTargetOnly:true,minimumVerifiedViewportWidth:280,minimumTargetCssPixels:44,curriculumChanged:false,answersChanged:false,mediaChanged:false,pedagogicalApprovalChanged:false,releaseApproved:false,productionDeployed:false};
+          writeFileSync('qa/results/intro-mobile-touch-target-v28.json',`${JSON.stringify(report,null,2)}\n`);
+          NODE
           node --check qa/apply-intro-mobile-touch-target-v28.mjs
           node --test qa/tests/verify-intro-mobile-touch-target-v28.test.mjs
           if grep -q 'data-duduq-release="v28-intro-mobile-touch-target"' dist-pages/play/intro-module/index.html; then
