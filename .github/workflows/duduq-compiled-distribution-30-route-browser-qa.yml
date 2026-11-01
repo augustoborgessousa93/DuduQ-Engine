@@ -1,0 +1,180 @@
+name: DUDUQ Compiled Distribution - 30 Curricular Route Browser QA
+
+on:
+  push:
+    branches:
+      - integration/duduq-m1-qa-consolidated-20261031
+    paths:
+      - .github/workflows/duduq-compiled-distribution-30-route-browser-qa.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: duduq-compiled-30-route-artifact-gate
+  cancel-in-progress: true
+
+jobs:
+  compiled-30-route-boot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      GH_TOKEN: \${{ github.token }}
+      ARTIFACT_RUN: "41258948433"
+      SOURCE_RUN: "41258948442"
+      ARTIFACT_SOURCE_SHA: "a0aa607e0a205641f9a876889bd5f1ed6c620a00"
+      BASE_URL: "http://127.0.0.1:4175"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify archived candidate and independent source QA on identical SHA
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          for RUN in "$ARTIFACT_RUN" "$SOURCE_RUN"; do
+            test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN" --jq .conclusion)" = success
+            test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN" --jq .head_sha)" = "$ARTIFACT_SOURCE_SHA"
+          done
+          mkdir -p "$RUNNER_TEMP/duduq-verified" dist-pages qa/results
+          gh run download "$ARTIFACT_RUN" -R "$GITHUB_REPOSITORY" \
+            --name "duduq-media-distribution-candidate-$ARTIFACT_RUN" \
+            --dir "$RUNNER_TEMP/duduq-verified"
+          TAR="$RUNNER_TEMP/duduq-verified/duduq-review-distribution.tar.gz"
+          SUM="$RUNNER_TEMP/duduq-verified/duduq-review-distribution.sha256"
+          test -s "$TAR" && test -s "$SUM"
+          (cd "$RUNNER_TEMP/duduq-verified" && sha256sum --check duduq-review-distribution.sha256)
+          tar -xzf "$TAR" -C dist-pages
+          test -s dist-pages/.duduq-pages-manifest
+          test -s dist-pages/content/english/media/media-registry.json
+      - name: Verify all manifest bytes and 600 curricular contracts before browser
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import path from 'node:path';
+          const root=path.resolve('dist-pages');
+          const rows=readFileSync(path.join(root,'.duduq-pages-manifest'),'utf8').trimEnd().split(/\r?\n/);
+          assert(rows.length>2700,'INCOMPLETE_COMPILED_MANIFEST');
+          const seen=new Set();
+          for(const row of rows){
+            const pos=row.lastIndexOf(' '),rel=row.slice(0,pos),expected=row.slice(pos+1);
+            assert(pos>0 && /^[a-f0-9]{64}$/.test(expected) && !seen.has(rel),'BAD_MANIFEST_ROW');
+            seen.add(rel);
+            const p=path.resolve(root,rel);
+            assert(p.startsWith(root+path.sep),'UNSAFE_MANIFEST_PATH');
+            assert.equal(createHash('sha256').update(readFileSync(p)).digest('hex'),expected,'HASH_MISMATCH:'+rel);
+          }
+          let total=0;
+          for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
+            const mm=String(m).padStart(2,'0');
+            const rel='content/english/year-'+y+'/module-'+mm+'/questions.json';
+            assert(seen.has(rel),'QUESTION_CONTRACT_NOT_IN_MANIFEST:'+rel);
+            const data=JSON.parse(readFileSync(path.join(root,rel),'utf8'));
+            assert.equal(data.items.length,20,'QUESTION_COUNT_CHANGED:'+rel);
+            total+=data.items.length;
+          }
+          assert.equal(total,600);
+          console.log('PASS_ARCHIVED_ARTIFACT_MANIFEST_AND_600_QUESTIONS');
+          NODE
+      - name: Install real Chromium for compiled product boot tests
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local server serving the extracted immutable candidate
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages > "$RUNNER_TEMP/duduq-compiled-http.log" 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS "$BASE_URL/" >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat "$RUNNER_TEMP/duduq-compiled-http.log"
+          exit 1
+      - name: Real Chromium boot of all 30 curricular module entrypoints on three viewports
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import {chromium} from 'playwright';
+          import {writeFileSync} from 'node:fs';
+          const base=process.env.BASE_URL,records=[];
+          const views=[{width:390,height:844},{width:768,height:1024},{width:1440,height:900}];
+          const browser=await chromium.launch({headless:true});
+          try {
+            for(const viewport of views){
+              const context=await browser.newContext({viewport});
+              for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
+                const mm=String(module).padStart(2,'0');
+                const route='/play/english/year-'+year+'/module-'+mm+'/';
+                const page=await context.newPage(),errors=[];
+                page.on('pageerror',e=>errors.push('JS:'+String(e.message||e)));
+                page.on('response',r=>{
+                  if(r.url().startsWith(base)&&r.status()>=400&&!r.url().includes('favicon.ico'))
+                    errors.push('HTTP_'+r.status()+':'+r.url());
+                });
+                try{
+                  const nav=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:30000});
+                  if(nav?.status()!==200)throw Error('MODULE_ROUTE_HTTP_'+nav?.status());
+                  await page.waitForFunction(()=>{
+                    const text=document.body?.innerText?.trim()||'';
+                    return text.length>=20||[...document.querySelectorAll('button')].some(b=>b.getBoundingClientRect().width>0);
+                  },null,{timeout:10000});
+                  await page.waitForTimeout(700);
+                  const state=await page.evaluate(()=>{
+                    const visible=e=>{
+                      const r=e.getBoundingClientRect(),s=getComputedStyle(e);
+                      return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden';
+                    };
+                    const images=[...document.images].filter(visible);
+                    return {bodyTextLength:document.body?.innerText?.trim().length||0,
+                      visibleButtons:[...document.querySelectorAll('button')].filter(visible).length,
+                      visibleImages:images.length,
+                      brokenVisibleImages:images.filter(i=>i.complete&&i.naturalWidth===0).map(i=>i.currentSrc||i.src),
+                      title:document.title};
+                  });
+                  if(state.brokenVisibleImages.length)throw Error('BROKEN_VISIBLE_IMAGE:'+state.brokenVisibleImages.join(','));
+                  if(errors.length)throw Error('BROWSER_ERRORS:'+errors.join('|'));
+                  records.push({year,module,viewport:viewport.width,status:'PASS',...state});
+                }catch(e){
+                  records.push({year,module,viewport:viewport.width,status:'FAIL',error:String(e.message||e),browserErrors:errors});
+                }finally{await page.close();}
+              }
+              await context.close();
+            }
+          }finally{await browser.close();}
+          const failures=records.filter(r=>r.status==='FAIL');
+          const report={schemaVersion:'DUDUQ_COMPILED_30_MODULE_3_VIEWPORT_BOOT_V1',
+            artifactRun:Number(process.env.ARTIFACT_RUN),sourceRun:Number(process.env.SOURCE_RUN),
+            artifactSourceSha:process.env.ARTIFACT_SOURCE_SHA,
+            expectedCases:90,observedCases:records.length,passed:records.length-failures.length,
+            failed:failures.length,cases:records,technicalBootOnly:true,
+            pedagogicalApproval:false,gameplayCertified:false,year3GameplayCertified:false,
+            productionReleaseApproved:false,productionDeployed:false};
+          writeFileSync('qa/results/compiled-30-route-browser-qa.json',JSON.stringify(report,null,2)+'\n');
+          console.log(JSON.stringify({observed:records.length,passed:report.passed,failed:failures.length,
+            firstFailures:failures.slice(0,8)}));
+          if(records.length!==90||failures.length)process.exitCode=1;
+          NODE
+      - name: Preserve exact-artifact Chromium evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-compiled-30-route-browser-qa-\${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: qa/results/compiled-30-route-browser-qa.json
+      - name: Explicit release boundary
+        if: always()
+        run: |
+          echo "Boot and image loading only; NOT gameplay, pedagogical approval, Year3 certification, or production deployment."
+          echo "No Cloudflare credentials or production mutation used."
