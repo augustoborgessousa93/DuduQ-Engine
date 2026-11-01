@@ -236,13 +236,26 @@ jobs:
                 if(!hit)throw Error('INTRO_START_NOT_POINTER_HITTABLE');
                 record.beforeUrl=page.url();
                 await page.mouse.click(x,y);
+                // Do not accept a pre-existing ENGINE_READY flag or hidden game DOM
+                // as proof that the learner's real pointer click entered gameplay.
                 await page.waitForFunction(()=>{
-                  const playable=[...document.querySelectorAll('iframe')].some(f=>{
+                  const visible=el=>{
+                    const r=el.getBoundingClientRect(),s=getComputedStyle(el);
+                    return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden';
+                  };
+                  const startStillHittable=[...document.querySelectorAll('button')].some(b=>{
+                    if(!/iniciar (?:jogo|missão)/i.test(b.textContent||'')||!visible(b))return false;
+                    const r=b.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;
+                    const hit=document.elementFromPoint(x,y);
+                    return hit===b||b.contains(hit);
+                  });
+                  const mechanicRoute=/\/play\/(drag-drop|drag-drop-multimedia|target-shooter|matching|memory-quest|bubble-pop|smart-sentence)\//.test(location.pathname);
+                  const playableFrame=[...document.querySelectorAll('iframe')].some(f=>{
+                    if(!visible(f))return false;
                     try{return (f.contentDocument?.body?.children.length||0)>0;}catch{return false;}
                   });
-                  return window.DUDUQ_ENGINE_READY===true||playable||
-                    Boolean(document.querySelector('#game.game-screen,.duduq-game-screen,.duduq-mechanic-frame'))||
-                    /\/play\/(drag-drop|drag-drop-multimedia|target-shooter|matching|memory-quest|bubble-pop|smart-sentence)\//.test(location.pathname);
+                  const visibleGame=[...document.querySelectorAll('#game.game-screen,.duduq-game-screen,.duduq-mechanic-frame')].some(visible);
+                  return !startStillHittable&&(mechanicRoute||playableFrame||visibleGame);
                 },null,{timeout:20000});
                 record.afterUrl=page.url();
                 if(errors.length)throw Error('BROWSER_ERRORS:'+errors.join('|'));
@@ -259,11 +272,11 @@ jobs:
             }
           }finally{await browser.close();}
           const failures=records.filter(r=>r.status!=='PASS');
-          const report={schemaVersion:'DUDUQ_COMPILED_INTRO_POINTER_AND_YEAR3_ENTRY_QA_V1',
+          const report={schemaVersion:'DUDUQ_COMPILED_INTRO_POINTER_AND_YEAR3_ENTRY_QA_V2',
             artifactRun:Number(process.env.ARTIFACT_RUN),
             artifactSourceSha:process.env.ARTIFACT_SOURCE_SHA,
             expectedCases:42,observedCases:records.length,passed:records.length-failures.length,
-            failed:failures.length,cases:records,realPointerIntroOnly:true,
+            failed:failures.length,cases:records,realPointerIntroOnly:true,transitionRequiresVisibleGameAndDismissedStart:true,
             gameplayCertified:false,year3GameplayCertified:false,
             pedagogicalApproval:false,releaseApproved:false,productionDeployed:false};
           writeFileSync('qa/results/compiled-intro-pointer-year3-qa.json',JSON.stringify(report,null,2)+'\n');
