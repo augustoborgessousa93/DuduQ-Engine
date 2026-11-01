@@ -284,6 +284,97 @@ jobs:
             firstFailures:failures.slice(0,10)}));
           if(records.length!==42||failures.length)process.exitCode=1;
           NODE
+      - name: Real touchscreen entry for Year3 modules on mobile and tablet
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import {chromium} from 'playwright';
+          import {writeFileSync} from 'node:fs';
+          const base=process.env.BASE_URL,records=[];
+          const views=[{width:390,height:844},{width:768,height:1024}];
+          const browser=await chromium.launch({headless:true});
+          try {
+            for(const viewport of views) {
+              const context=await browser.newContext({viewport,hasTouch:true,reducedMotion:'reduce'});
+              try {
+                for(let module=1;module<=6;module++) {
+                  const route='/play/english/year-3/module-'+String(module).padStart(2,'0')+'/';
+                  const page=await context.newPage(),errors=[];
+                  const record={module,viewport:viewport.width,route,status:'FAIL'};
+                  page.on('pageerror',e=>errors.push('JS:'+String(e.message||e)));
+                  page.on('response',r=>{
+                    if(r.url().startsWith(base)&&r.status()>=400&&!r.url().includes('favicon.ico'))
+                      errors.push('HTTP_'+r.status()+':'+r.url());
+                  });
+                  await page.addInitScript(()=>{
+                    window.__duduqTouchObserved=false;
+                    document.addEventListener('pointerdown',e=>{
+                      if(e.pointerType==='touch')window.__duduqTouchObserved=true;
+                    },true);
+                  });
+                  try {
+                    const nav=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:30000});
+                    if(nav?.status()!==200)throw Error('TOUCH_INTRO_HTTP_'+nav?.status());
+                    const start=page.getByRole('button',{name:/iniciar (?:jogo|missão)/i}).first();
+                    await start.waitFor({state:'visible',timeout:15000});
+                    const bounds=await start.boundingBox();
+                    if(!bounds||bounds.width<44||bounds.height<44)throw Error('TOUCH_START_TOO_SMALL');
+                    const x=bounds.x+bounds.width/2,y=bounds.y+bounds.height/2;
+                    const hit=await start.evaluate((el,p)=>{
+                      const node=document.elementFromPoint(p.x,p.y);
+                      return node===el||el.contains(node);
+                    },{x,y});
+                    if(!hit)throw Error('TOUCH_START_OBSTRUCTED');
+                    await page.touchscreen.tap(x,y);
+                    await page.waitForFunction(()=>{
+                      const visible=el=>{
+                        const r=el.getBoundingClientRect(),s=getComputedStyle(el);
+                        return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden';
+                      };
+                      const startStillHittable=[...document.querySelectorAll('button')].some(b=>{
+                        if(!/iniciar (?:jogo|missão)/i.test(b.textContent||'')||!visible(b))return false;
+                        const r=b.getBoundingClientRect(),hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
+                        return hit===b||b.contains(hit);
+                      });
+                      const mechanicRoute=/\/play\/(drag-drop|drag-drop-multimedia|target-shooter|matching|memory-quest|bubble-pop|smart-sentence)\//.test(location.pathname);
+                      const playableFrame=[...document.querySelectorAll('iframe')].some(f=>{
+                        if(!visible(f))return false;
+                        try{return (f.contentDocument?.body?.children.length||0)>0;}catch{return false;}
+                      });
+                      const visibleGame=[...document.querySelectorAll('#game.game-screen,.duduq-game-screen,.duduq-mechanic-frame')].some(visible);
+                      return window.__duduqTouchObserved===true&&!startStillHittable&&
+                        (mechanicRoute||playableFrame||visibleGame);
+                    },null,{timeout:20000});
+                    const geometry=await page.evaluate(()=>({
+                      hostOverflow:Math.max(0,document.documentElement.scrollWidth-innerWidth),
+                      touchObserved:window.__duduqTouchObserved===true
+                    }));
+                    if(geometry.hostOverflow>2)throw Error('TOUCH_HOST_OVERFLOW:'+geometry.hostOverflow);
+                    if(errors.length)throw Error('TOUCH_BROWSER_ERRORS:'+errors.join('|'));
+                    record.status='PASS';
+                    record.touchObserved=geometry.touchObserved;
+                    record.afterUrl=page.url();
+                  }catch(e){
+                    record.error=String(e.message||e);
+                    record.browserErrors=errors;
+                  }finally{records.push(record);await page.close();}
+                }
+              }finally{await context.close();}
+            }
+          }finally{await browser.close();}
+          const failures=records.filter(r=>r.status!=='PASS');
+          const report={schemaVersion:'DUDUQ_YEAR3_REAL_TOUCH_INTRO_QA_V1',
+            artifactRun:Number(process.env.ARTIFACT_RUN),artifactSourceSha:process.env.ARTIFACT_SOURCE_SHA,
+            expectedCases:12,observedCases:records.length,passed:records.length-failures.length,
+            failed:failures.length,cases:records,realTouchscreenTap:true,
+            gameplayCertified:false,year3GameplayCertified:false,
+            pedagogicalApproval:false,releaseApproved:false,productionDeployed:false};
+          writeFileSync('qa/results/compiled-year3-touch-intro-qa.json',JSON.stringify(report,null,2)+'\n');
+          console.log(JSON.stringify({observed:records.length,passed:report.passed,failed:report.failed,
+            firstFailures:failures.slice(0,12)}));
+          if(records.length!==12||failures.length)process.exitCode=1;
+          NODE
       - name: Preserve exact-artifact Chromium evidence even on failure
         if: always()
         uses: actions/upload-artifact@v4
@@ -294,6 +385,7 @@ jobs:
           path: |
             qa/results/compiled-30-route-browser-qa.json
             qa/results/compiled-intro-pointer-year3-qa.json
+            qa/results/compiled-year3-touch-intro-qa.json
       - name: Explicit release boundary
         if: always()
         run: |
