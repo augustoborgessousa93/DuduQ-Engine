@@ -80,6 +80,13 @@ jobs:
           tar -xzf "$TAR" -C dist-pages
           test -s dist-pages/.duduq-pages-manifest
           test -s dist-pages/content/english/media/media-registry.json
+          node --check qa/apply-intro-mobile-touch-target-v28.mjs
+          node --test qa/tests/verify-intro-mobile-touch-target-v28.test.mjs
+          if grep -q 'data-duduq-release="v28-intro-mobile-touch-target"' dist-pages/play/intro-module/index.html; then
+            test -s dist-pages/core/adapters/v28/intro-mobile-touch-target.css
+          else
+            DUDUQ_COMPILED_RELEASE_HOTFIX=1 node qa/apply-intro-mobile-touch-target-v28.mjs --apply
+          fi
           mkdir -p qa/results
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
@@ -103,13 +110,6 @@ jobs:
           const report={schemaVersion:'DUDUQ_INTRO_MOBILE_TOUCH_TARGET_V28',status:'HASH_BOUND_COMPILED_ADAPTER_VERIFIED_IN_EXACT_ARTIFACT',intro,introSha256:digest(introBytes),adapter,adapterSha256:digest(adapterBytes),manifestCandidateSha256:digest(manifest),manifestEntryCount:entries.size,visualGeometryChanged:false,touchTargetOnly:true,minimumVerifiedViewportWidth:280,minimumTargetCssPixels:44,curriculumChanged:false,answersChanged:false,mediaChanged:false,pedagogicalApprovalChanged:false,releaseApproved:false,productionDeployed:false};
           writeFileSync('qa/results/intro-mobile-touch-target-v28.json',`${JSON.stringify(report,null,2)}\n`);
           NODE
-          node --check qa/apply-intro-mobile-touch-target-v28.mjs
-          node --test qa/tests/verify-intro-mobile-touch-target-v28.test.mjs
-          if grep -q 'data-duduq-release="v28-intro-mobile-touch-target"' dist-pages/play/intro-module/index.html; then
-            test -s dist-pages/core/adapters/v28/intro-mobile-touch-target.css
-          else
-            DUDUQ_COMPILED_RELEASE_HOTFIX=1 node qa/apply-intro-mobile-touch-target-v28.mjs --apply
-          fi
       - name: Verify all manifest bytes and 600 curricular contracts before browser
         shell: bash
         run: |
