@@ -54,39 +54,76 @@ try{
     errors.push('HTTP_'+r.status()+':'+r.url())});
    const response=await page.goto(base+'/play/'+slug+'/?duduqModule='+questionId.slice(0,5)+
     '&duduqItem='+questionId+'&qaSeed=phase2-new-source',{waitUntil:'domcontentloaded',timeout:45000});
-   const probe=()=>page.evaluate(paths=>{
-    const loaded=[...document.images].filter(img=>{
+   // The released Bubble Pop Gold Master renders inside a child iframe, and its
+   // bubbles animate into view. A top-document-only, instantaneous screenshot
+   // produces false "missing image" results. Accumulate real visibility over
+   // time across ALL frames, without changing the mechanic or audio gates.
+   const isBubble=q.mechanicId==='bubble-pop';
+   const seenLoaded=new Set(),seenVisible=new Set(),frameDiagnostics=[];
+   const probe=async()=>{
+    const frames=page.frames(),snapshots=[];
+    for(const frame of frames){
      try{
-      const url=new URL(img.currentSrc||img.src);
-      const box=img.getBoundingClientRect(),css=getComputedStyle(img);
-      return paths.includes(decodeURI(url.pathname).replace(/^\/+/,''))&&img.complete&&
-       img.naturalWidth>0&&box.width>12&&box.height>12&&
-       box.left>=-1&&box.right<=innerWidth+1&&box.top>=-1&&box.bottom<=innerHeight+1&&
-       css.visibility!=='hidden'&&css.display!=='none'&&Number(css.opacity)>0;
-     }catch{return false}
-    });
-    return {visiblePaths:[...new Set(loaded.map(img=>decodeURI(new URL(img.currentSrc||img.src).pathname).replace(/^\/+/,'')))],
-     textLength:document.body?.innerText?.length||0};
-   },required);
-   let state=await probe();
-   if(required.some(p=>!state.visiblePaths.includes(p))){
-    try{await page.waitForFunction(paths=>paths.every(p=>
-     [...document.images].some(img=>{
-      try{
-       const url=decodeURI(new URL(img.currentSrc||img.src).pathname).replace(/^\/+/,'');
-       const box=img.getBoundingClientRect(),css=getComputedStyle(img);
-       return url===p&&img.complete&&img.naturalWidth>0&&box.width>12&&box.height>12&&
-        box.left>=-1&&box.right<=innerWidth+1&&box.top>=-1&&box.bottom<=innerHeight+1&&
-        css.display!=='none'&&css.visibility!=='hidden'&&Number(css.opacity)>0;
-      }catch{return false}
-     })
-    ),required,{timeout:10000,polling:250})}catch{}
-    state=await probe();
+      const snapshot=await frame.evaluate(paths=>{
+       const matched=[];
+       for(const img of document.images){
+        try{
+         const url=new URL(img.currentSrc||img.src,document.baseURI);
+         const found=decodeURI(url.pathname).replace(/^\/+/,'');
+         if(!paths.includes(found))continue;
+         const box=img.getBoundingClientRect(),css=getComputedStyle(img);
+         const loaded=img.complete&&img.naturalWidth>0;
+         const visible=loaded&&box.width>12&&box.height>12&&
+          box.right>0&&box.bottom>0&&box.left<innerWidth&&box.top<innerHeight&&
+          css.display!=='none'&&css.visibility!=='hidden'&&Number(css.opacity)>0&&
+          img.checkVisibility({checkOpacity:true,checkVisibilityCSS:true});
+         matched.push({path:found,loaded,visible,box:{x:Math.round(box.x),
+          y:Math.round(box.y),width:Math.round(box.width),height:Math.round(box.height)}});
+        }catch{}
+       }
+       return {url:location.href,matching:matched,
+        stageState:document.querySelector('#game')?.dataset.duduqInteractionState||null,
+        bubbleImages:document.querySelectorAll('.duduq-bp-media').length,
+        bubbleArena:document.querySelectorAll('.duduq-bp-arena').length};
+      },required);
+      snapshots.push(snapshot);
+     }catch(e){snapshots.push({url:frame.url(),error:String(e.message||e).slice(0,160),matching:[]});}
+    }
+    for(const f of snapshots)for(const m of f.matching||[]){
+     if(m.loaded)seenLoaded.add(m.path);
+     if(m.visible)seenVisible.add(m.path);
+    }
+    frameDiagnostics.splice(0,frameDiagnostics.length,...snapshots);
+    return {loadedPaths:[...seenLoaded],visiblePaths:[...seenVisible],
+     frames:snapshots.length,bubbleFrameSeen:snapshots.some(f=>f.bubbleArena>0),
+     bubbleImageElements:snapshots.reduce((a,f)=>a+(f.bubbleImages||0),0),
+     mainInteractionState:snapshots[0]?.stageState||null,
+     textLength:await page.evaluate(()=>document.body?.innerText?.length||0)};
+   };
+   // The required instruction narration may temporarily lock the board. Do
+   // not mistake the audio gate for a blank mechanic. This only waits; it does
+   // not skip, mute or alter the student's instructional audio.
+   if(isBubble){
+    try{
+     await page.waitForFunction(()=>
+      document.querySelector('#game')?.dataset.duduqInteractionState==='READY',
+      null,{timeout:12000,polling:250});
+    }catch{}
    }
+   const deadline=Date.now()+(isBubble?18000:10000);
+   let state;
+   do{
+    state=await probe();
+    const allLoaded=required.every(p=>seenLoaded.has(p));
+    const allVisible=required.every(p=>seenVisible.has(p));
+    if(allLoaded&&allVisible)break;
+    if(Date.now()>=deadline)break;
+    await page.waitForTimeout(isBubble?300:250);
+   }while(true);
    const filename=out+'/'+questionId+'-'+viewport.width+'.png';
    await page.screenshot({path:filename,fullPage:false});
    checks.push({questionId,mechanic:q.mechanicId,viewport:viewport.width,status:response?.status(),
-    required,errors,...state,screenshot:filename});
+    required,errors,...state,frameDiagnostics,screenshot:filename});
    await page.close();
   }
   await context.close();
