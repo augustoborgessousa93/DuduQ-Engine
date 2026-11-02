@@ -15,8 +15,8 @@ const [distArg='qa/dist-pages-food-candidate',sourceArg='assets-source-expansion
 const dist=path.resolve(distArg),source=path.resolve(sourceArg);
 const manifest=JSON.parse(await readFile('docs/qa/media-audit-20261029/phase2-new-source-delta-20261102.json','utf8'));
 const sha256=b=>createHash('sha256').update(b).digest('hex');
-const gitBlob=b=>createHash('sha1').update(Buffer.from('blob '+b.length+'\\0')).update(b).digest('hex');
-const normalize=x=>String(x??'').trim().replace(/\\s+/g,' ').toLowerCase();
+const gitBlob=b=>createHash('sha1').update(Buffer.from('blob '+b.length+'\0')).update(b).digest('hex');
+const normalize=x=>String(x??'').trim().replace(/\s+/g,' ').toLowerCase();
 const failClosed=(reasons,condition,code)=>{if(!condition)reasons.push(code)};
 assert.equal(manifest.schemaVersion,'DUDUQ_PHASE2_NEW_SOURCE_DELTA_V1');
 assert.equal(manifest.assets.length,39);
@@ -26,7 +26,7 @@ assert.equal(manifest.productionDeployed,false);
 assert.equal(execFileSync('git',['-C',source,'rev-parse','HEAD'],{encoding:'utf8'}).trim(),manifest.sourceCommit,'SOURCE_COMMIT_CHANGED');
 const regRel='content/english/media/media-registry.json';
 const manifestText=await readFile(path.join(dist,'.duduq-pages-manifest'),'utf8');
-const integrity=new Map(manifestText.trimEnd().split(/\\r?\\n/).map(line=>{
+const integrity=new Map(manifestText.trimEnd().split(/\r?\n/).map(line=>{
  const i=line.lastIndexOf(' ');assert(i>0,'BAD_MANIFEST_LINE');
  return [line.slice(0,i),line.slice(i+1)];
 }));
@@ -109,7 +109,7 @@ const report={schemaVersion:'DUDUQ_PHASE2_NEW_SOURCE_PREFLIGHT_V1',
  visualQaPassed:false,audioQaPassed:false,humanPedagogicalApproval:false,
  questionsChanged:0,answerKeysChanged:0,productionDeployed:false};
 await mkdir('qa/results',{recursive:true});
-await writeFile('qa/results/phase2-new-source-preflight.json',JSON.stringify(report,null,2)+'\\n');
+await writeFile('qa/results/phase2-new-source-preflight.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({status:report.status,sourceCommit:report.sourceCommit,
  files:assets.length,explicitBindings:candidates.length,distinctIds:uniqueIds.size,
  structural:report.structurallyEligibleBindings,blocked:report.blockedBindings,contracts:questions.size}));
