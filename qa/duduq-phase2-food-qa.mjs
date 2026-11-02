@@ -43,7 +43,23 @@ const sourceSpecs=[
  {concept:'doll',file:'doll - boneca.png',blob:'ab152cd40e458c436df4390bb31478119a746af1'},
  {concept:'kite',file:'kite - pipa.png',blob:'70e9a17b5a827c64b2e54ac57ee9bd63fc88b9a5'},
  // New exact room concept: all shared occurrences still require leaf-semantic and provisional guards.
- {concept:'living room',file:'Living room — Sala de estar.png',blob:'518127541034f86f152366bc31b405205e5dfc40'}
+ {concept:'living room',file:'Living room — Sala de estar.png',blob:'518127541034f86f152366bc31b405205e5dfc40'},
+ // Next isolated source-expansion candidates: all are pinned exact bilingual concepts.
+ // These remain provisional until every compiled leaf occurrence passes semantic QA.
+ {concept:'mother',file:'mother - mãe.png',blob:'3032e1e28a559cc532eb794f622ae2ec34d4c740'},
+ {concept:'father',file:'father-pai.png',blob:'0dc9fd620b03ecdf15479608d09ac9e9acd5be49'},
+ {concept:'sister',file:'sister-irmã.png',blob:'4a446d5d8ba9e22ae0eb1fa6891af61e126a1fed'},
+ {concept:'brother',file:'brother-irmão.png',blob:'d208db5d9c79f732fe06fa4f2e3e5fe05ca4c5f8'},
+ {concept:'grandmother',file:'grandmother - avó.png',blob:'5d23fd1f82bb0f188288f116c930a55011c422f0'},
+ {concept:'grandfather',file:'grandfather - avô.png',blob:'8be01577675ae458e42764fc7477f3c4a3af04b7'},
+ {concept:'truck',file:'Truck - caminhão.png',blob:'8befac675644e1b82a8f2c9bc1a66234e29d6ff7'},
+ {concept:'teddy bear',file:'teddy bear.png',blob:'cb81b0e2abc2fb0600f59856e30e1d5f4b2873fa'},
+ {concept:'video game',file:'video game.png',blob:'ee634827dcf23a5774f25588a28a39e842f2802f'},
+ // English numeral identity is lexical (eleven -> 11); counting scenes remain unchanged.
+ {concept:'eleven',file:'eleven-onze.png',blob:'8ce071a8b737e8a2ac69cbb040477ed93fab824d'},
+ {concept:'twelve',file:'Twelve-doze.png',blob:'f50a7286b829bc4083b50068d62c7f037ad0f1fd'},
+ {concept:'thirteen',file:'Thirteen-treze.png',blob:'5d190eb83d1d365840f3d97154bbf3108091e93c'},
+ {concept:'fourteen',file:'Fourteen-quatorze.png',blob:'4f2e2aaa91dd1a189531b58ae08880bef265c3e1'}
 ];
 // Grapes deliberately excluded: a bunch of grapes is not an exact singular "grape" proof.
 const queue=(await readJson('docs/qa/media-audit-20261029/replacement-queue.json')).queue;
