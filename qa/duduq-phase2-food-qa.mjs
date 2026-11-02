@@ -34,7 +34,9 @@ const sourceSpecs=[
  {concept:'dress',file:'Dress — Vestido.png',blob:'f8c1d3801b5cdf014f0c131d0ce9b98a3ae3a542'},
  {concept:'bedroom',file:'Bedroom — Quarto.png',blob:'1f5d55444fd018a8a38584bc70a0ae5314ade8f3'},
  {concept:'bathroom',file:'Bathroom — Banheiro.png',blob:'3d56badbe196f9d5150cb17dc0c3f8a1ff3572a1'},
- {concept:'kitchen',file:'Kitchen — Cozinha.png',blob:'2dca8e82e188ee27abb7f505275b2f1b987a2f10'}
+ {concept:'kitchen',file:'Kitchen — Cozinha.png',blob:'2dca8e82e188ee27abb7f505275b2f1b987a2f10'},
+ // New exact room concept: all shared occurrences still require leaf-semantic and provisional guards.
+ {concept:'living room',file:'Living room — Sala de estar.png',blob:'518127541034f86f152366bc31b405205e5dfc40'}
 ];
 // Grapes deliberately excluded: a bunch of grapes is not an exact singular "grape" proof.
 const queue=(await readJson('docs/qa/media-audit-20261029/replacement-queue.json')).queue;
