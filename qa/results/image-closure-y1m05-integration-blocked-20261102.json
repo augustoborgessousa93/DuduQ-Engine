@@ -252,19 +252,16 @@
       "gateWeakened": false,
       "goldMasterChanged": false,
       "nextSafeAction": "Resolve the screen-wide uniform host scale through the existing visual-sync/host architecture. Do not move one target or add a component/property-specific adapter. Before any Penpot operation, run scripts/duduq-penpot-bootstrap.mjs and require 4400/4401/4402, PLUGIN_CONNECTED and LIVE_PENPOT_DOCUMENT_READ PASS."
-    },
-    {
-      "code": "GITHUB_REPLAY_NOT_DISPATCHED_NO_NONINTERACTIVE_CREDENTIAL",
-      "description": "GitHub CLI is not installed and Git HTTPS returned SEC_E_NO_CREDENTIALS through the configured credential manager. No current branch push or workflow_dispatch was possible without inventing credentials or requiring manual input.",
-      "pushAttempted": false,
-      "authenticationPromptStarted": false
     }
   ],
   "independentLinuxQa": {
     "currentCorrection": {
-      "status": "NOT_DISPATCHED_BLOCKED_BY_GITHUB_AUTH",
+      "status": "READY_FOR_WORKFLOW_DISPATCH",
       "url": null,
-      "headSha": null
+      "headSha": "d7c88d08d7fba798a0c2b05e50b3984b983acf3f",
+      "reviewBranch": "automation/y1m05-integration-qa-20261102",
+      "pushStatus": "PASS",
+      "mergeOrDeployPerformed": false
     },
     "lastAuditedPredecessorRun": {
       "runNumber": 13,
