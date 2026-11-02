@@ -118,6 +118,25 @@ try{
        entry.drag=entry.dragAttempts[entry.dragAttempts.length-1];
        break;
       }
+      // A wrong category can legitimately lock input until feedback/retry.
+      // Recover through the visible game control; never bypass its state gate.
+      let readyAgain=false;
+      try{
+       await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:2200});
+       readyAgain=true;
+      }catch{
+       const retry=page.getByRole('button',{name:/tentar de novo|try again|tente novamente/i}).first();
+       try{
+        await retry.waitFor({state:'visible',timeout:5500});
+        await retry.click({timeout:5000});
+        entry.retryClicks=(entry.retryClicks||0)+1;
+        await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:9000});
+        readyAgain=true;
+       }catch(e){
+        entry.limitations.push('WRONG_DROP_RETRY_NOT_READY:'+String(e.message||e).slice(0,150));
+       }
+      }
+      if(!readyAgain)break;
      }
      if(!entry.inputObserved)entry.limitations.push('POINTER_DRAG_DID_NOT_PROVE_PLACEMENT');
     }catch(e){entry.limitations.push('DRAG_PROBE_ERROR:'+String(e.message||e).slice(0,220))}
@@ -172,7 +191,7 @@ const totals={questions:cases.length,mechanics:[...new Set(cases.map(x=>x.mechan
  incomplete:cases.filter(x=>!x.inputObserved).map(x=>({id:x.questionId,mechanic:x.mechanic,limitations:x.limitations,error:x.error||null}))};
 const report={schemaVersion:'DUDUQ_PHASE2_DIRECTED_INTERACTION_RECON_V1',status:'DIAGNOSTIC_ONLY_NOT_GAMEPLAY_CERTIFICATION',...totals,cases,productionDeployed:false,pedagogicalQaApproved:false};
 await writeFile(out+'/report.json',JSON.stringify(report,null,2)+'\n');
-console.log(JSON.stringify({status:report.status,questions:totals.questions,mechanics:totals.mechanics,realPointerAttempts:totals.realPointerAttempts,observableStateChanges:totals.observableStateChanges,occlusions:totals.targetOcclusions,pageErrors:totals.pageErrors,incomplete:totals.incomplete}));
+console.log(JSON.stringify({status:report.status,questions:totals.questions,mechanics:totals.mechanics,realPointerAttempts:totals.realPointerAttempts,observableStateChanges:totals.observableStateChanges,dragTargetAttempts:totals.dragTargetAttempts,exactDragPlacements:totals.exactDragPlacements,occlusions:totals.targetOcclusions,pageErrors:totals.pageErrors,incomplete:totals.incomplete}));
 assert.equal(totals.questions,ids.length);
 assert.equal(totals.pageErrors,0,'JS_ERRORS_IN_AFFECTED_QUESTIONS');
 assert.equal(totals.targetOcclusions,0,'POINTER_OCCLUSION_IN_AFFECTED_QUESTIONS');
