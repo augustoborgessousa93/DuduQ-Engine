@@ -1,0 +1,98 @@
+name: DUDUQ Y1M02 Numeral Hotfix - Verify Official Production
+on:
+  workflow_dispatch:
+  push:
+    branches: [integration/duduq-m1-qa-consolidated-20261031]
+    paths:
+      - .github/workflows/duduq-y1m02-seven-numeral-official-qa.yml
+permissions:
+  contents: read
+jobs:
+  verify-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    env:
+      URL: https://duduq-engine-13a.pages.dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium for actual CDN visual tests
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Verify all 30 CDN routes, 600 questions, 7 corrected IDs and 4 Q001 visual PNGs
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {chromium} from 'playwright';
+          import {createHash} from 'node:crypto';
+          import {mkdirSync,writeFileSync} from 'node:fs';
+          const base=process.env.URL,hash=b=>createHash('sha256').update(b).digest('hex');
+          mkdirSync('qa/results/y1m02-hotfix-official',{recursive:true});
+          async function get(path){
+            let last;
+            for(let i=0;i<8;i++){
+              try{const r=await fetch(base+path,{signal:AbortSignal.timeout(25000)});
+                assert.equal(r.status,200,'HTTP_'+r.status+':'+path);
+                return {bytes:Buffer.from(await r.arrayBuffer()),type:r.headers.get('content-type')||''};
+              }catch(e){last=e;if(i<7)await new Promise(r=>setTimeout(r,3000));}
+            }throw last;
+          }
+          const report={status:'INCOMPLETE',base,modules:[],pngs:[],checks:[],releaseApproved:false};
+          const browser=await chromium.launch({headless:true});
+          try{
+            for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
+              const mm=String(m).padStart(2,'0'),prefix='/play/english/year-'+y+'/module-'+mm+'/';
+              const r=await get(prefix);
+              assert(r.type.includes('text/html')&&r.bytes.length>200);
+              const q=JSON.parse((await get('/content/english/year-'+y+'/module-'+mm+'/questions.json')).bytes);
+              assert.equal(q.moduleId,'Y'+y+'M'+mm);assert.equal(q.items.length,20);
+              report.modules.push(prefix);
+            }
+            const registry=JSON.parse((await get('/content/english/media/media-registry.json')).bytes);
+            const ids=new Map(registry.entries.map(x=>[x.mediaId,x]));
+            const q=JSON.parse((await get('/content/english/year-1/module-02/questions.json')).bytes).items[0];
+            assert.equal(q.item_id,'Y1M02-Q001');assert.equal(q.targets.length,4);
+            const mediaIds=['IMG-Y1M02-Q001-ONE','IMG-Y1M02-Q001-TWO','IMG-Y1M02-Q001-THREE','IMG-Y1M02-Q001-FOUR','IMG-Y1M02-Q002-EIGHT','IMG-Y1M02-Q007-NINE','IMG-Y1M02-Q007-TEN'];
+            for(const id of mediaIds){
+              const e=ids.get(id);
+              assert(e?.urlOrPath?.includes('/assets-duduq/number-')&&e.urlOrPath.endsWith('.png'),'LEAF_NOT_UPDATED:'+id);
+              assert(e.temporary===true&&e.humanResolutionStatus==='PEDAGOGICAL_QA_PENDING','UNEXPECTED_SEMANTIC_STATUS:'+id);
+              const d=(await get('/'+e.urlOrPath)).bytes;
+              assert.equal(hash(d),e.sha256,'SOURCE_SHA_MISMATCH:'+id);
+              report.pngs.push({id,path:e.urlOrPath,sha256:e.sha256});
+            }
+            const paths=q.targets.map(x=>'/'+ids.get(x.media.assetId).urlOrPath);
+            assert.equal(paths.length,4);
+            for(const viewport of [{width:1280,height:800},{width:844,height:390}]){
+              const context=await browser.newContext({viewport,hasTouch:viewport.width===844});
+              const page=await context.newPage(),errors=[];
+              page.on('pageerror',e=>errors.push(String(e.message||e)));
+              const route=base+'/play/drag-drop-multimedia/?duduqModule=Y1M02&duduqItem=Y1M02-Q001&qaSeed=hotfix-live';
+              const res=await page.goto(route,{waitUntil:'domcontentloaded',timeout:45000});
+              assert.equal(res?.status(),200);
+              await page.waitForFunction(want=>want.every(p=>[...document.images].some(im=>{try{
+                return new URL(im.currentSrc||im.src,location.href).pathname===p&&im.complete&&im.naturalWidth>0&&im.getBoundingClientRect().width>20;
+              }catch{return false;}})),paths,{timeout:35000});
+              assert.deepEqual(errors,[]);
+              const screenshot='qa/results/y1m02-hotfix-official/Q001-'+viewport.width+'.png';
+              await page.screenshot({path:screenshot});
+              report.checks.push({viewport,imagesVisible:4,screenshot});
+              await context.close();
+            }
+            report.status='PASS_Y1M02_NUMERAL_HOTFIX_LIVE_CDN';
+            console.log(JSON.stringify({status:report.status,modules:30,questions:600,sevenFixedIds:report.pngs.length,q001VisibleImages:4,realBrowserViewports:2}));
+          }catch(e){report.status='FAIL';report.error=String(e.stack||e);throw e;}
+          finally{await browser.close();writeFileSync('qa/results/y1m02-hotfix-official/report.json',JSON.stringify(report,null,2)+'\n');}
+          NODE
+      - name: Preserve live-CDN screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-y1m02-seven-numeral-official-qa
+          path: qa/results/y1m02-hotfix-official/**
+          if-no-files-found: error
+          retention-days: 21

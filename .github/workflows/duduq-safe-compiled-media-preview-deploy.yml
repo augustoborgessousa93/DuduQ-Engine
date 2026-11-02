@@ -1,0 +1,149 @@
+name: DUDUQ V28 Compiled Media Manual Preview Deploy
+
+on:
+  # Manual-only while the Github Actions Cloudflare Pages credential is absent.
+  # Never run a doomed deploy on each change to a workflow file.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: duduq-safe-compiled-media-qa-preview
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN || secrets.CF_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: a7e5cdd5d653da1b19a547024c1a4640
+      QA_ARTIFACT_RUN_ID: "41342961320"
+      QA_COMMIT_SHA: "c6bdc2f9f4f356a6670ca48311f4a91d6fe003fa"
+      QA_SOURCE_1_RUN_ID: "41338660273"
+      QA_SOURCE_2_RUN_ID: "41339368312"
+      QA_SOURCE_SHA: "0e9c307f0b6edff9ca5e7c9138c5ae91cbbac3d1"
+      CF_PAGES_PROJECT: duduq-engine
+      CF_PREVIEW_BRANCH: qa/duduq-compiled-media-review-20261031
+
+    steps:
+      - name: Fail closed if Cloudflare Pages deploy secret is unavailable
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          if [[ -z "${CLOUDFLARE_API_TOKEN:-}" ]]; then
+            echo "::error::NO_CLOUDFLARE_DEPLOY_TOKEN_IN_GITHUB_ACTIONS: preview upload not attempted"
+            exit 1
+          fi
+
+      - name: Pin the exact PASS V28 compiled release candidate and both independent source audits
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          for ENTRY in "$QA_ARTIFACT_RUN_ID:$QA_COMMIT_SHA" "$QA_SOURCE_1_RUN_ID:$QA_SOURCE_SHA" "$QA_SOURCE_2_RUN_ID:$QA_SOURCE_SHA"; do
+            RUN="${ENTRY%%:*}"
+            EXPECTED_SHA="${ENTRY#*:}"
+            ACTUAL_SHA=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN" --jq .head_sha)
+            STATE=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN" --jq .conclusion)
+            test "$ACTUAL_SHA" = "$EXPECTED_SHA" || { echo "::error::SOURCE_SHA_MISMATCH:$RUN"; exit 1; }
+            test "$STATE" = "success" || { echo "::error::SOURCE_QA_NOT_PASS:$RUN"; exit 1; }
+          done
+          echo "V28_PREVIEW_SOURCE_AND_BROWSER_QA_PASS"
+
+      - name: Download only previously verified immutable compiled product
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p "$RUNNER_TEMP/duduq-artifact" dist-pages
+          gh run download "$QA_ARTIFACT_RUN_ID" -R "$GITHUB_REPOSITORY" \
+            --name "duduq-v28-compiled-qa-candidate-$QA_ARTIFACT_RUN_ID" \
+            --dir "$RUNNER_TEMP/duduq-artifact"
+          mapfile -d '' TARS < <(find "$RUNNER_TEMP/duduq-artifact" -type f -name 'duduq-v28-compiled-candidate.tar.gz' -print0)
+          mapfile -d '' SUMS < <(find "$RUNNER_TEMP/duduq-artifact" -type f -name 'duduq-v28-compiled-candidate.sha256' -print0)
+          test "${#TARS[@]}" -eq 1 && test "${#SUMS[@]}" -eq 1 || { echo "::error::V28_ARCHIVE_AMBIGUOUS"; exit 1; }
+          TAR="${TARS[0]}"; SUM="${SUMS[0]}"
+          test -s "$TAR" && test -s "$SUM"
+          read -r EXPECTED NAME < "$SUM"
+          test "$NAME" = 'duduq-v28-compiled-candidate.tar.gz' || { echo "::error::UNEXPECTED_V28_TAR_NAME"; exit 1; }
+          [[ "$EXPECTED" =~ ^[0-9a-f]{64}$ ]]
+          ACTUAL=$(sha256sum "$TAR" | cut -d' ' -f1)
+          test "$ACTUAL" = "$EXPECTED" || { echo "::error::V28_TAR_HASH_CHANGED"; exit 1; }
+          tar -xzf "$TAR" -C dist-pages
+          test -s dist-pages/.duduq-pages-manifest
+          test -s dist-pages/content/english/media/media-registry.json
+          test -s dist-pages/content/english/year-5/module-06/questions.json
+          echo "COMPILED_BUNDLE_HASH_AND_DIST_PAGES_PRESENT"
+
+      - name: Audit all compiled file hashes and reject unsupported release claims
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import assert from 'node:assert/strict';
+          import path from 'node:path';
+          const root=path.resolve('dist-pages');
+          const sha=b=>createHash('sha256').update(b).digest('hex');
+          const raw=readFileSync(path.join(root,'.duduq-pages-manifest'),'utf8');
+          const lines=raw.trimEnd().split(/\r?\n/);
+          assert(lines.length>=2709,'INCOMPLETE_COMPILED_PRODUCT');
+          for(const line of lines){
+            const i=line.lastIndexOf(' '),name=line.slice(0,i),hash=line.slice(i+1);
+            assert(i>0&&/^[a-f0-9]{64}$/.test(hash),'BAD_MANIFEST');
+            const file=path.resolve(root,name);
+            assert(file.startsWith(root+path.sep),'PATH_TRAVERSAL');
+            assert.equal(sha(readFileSync(file)),hash,'MANIFEST_MISMATCH:'+name);
+          }
+          let n=0;
+          for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
+            const mm=String(module).padStart(2,'0');
+            const p=path.join(root,'content/english/year-'+year+'/module-'+mm+'/questions.json');
+            const q=JSON.parse(readFileSync(p));
+            assert.equal(q.items.length,20,'MISSING_CURRICULAR_QUESTIONS:'+year+':'+module);n+=20;
+          }
+          assert.equal(n,600);
+          console.log(JSON.stringify({manifestEntries:lines.length,questions:n,verify:'PASS_HASHES_NOT_PEDAGOGICAL_APPROVAL'}));
+          NODE
+
+      - name: Deploy verified compiled bundle to unlisted QA preview branch ONLY
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm exec --yes --package wrangler@4 -- \
+            wrangler pages deploy dist-pages \
+              --project-name="$CF_PAGES_PROJECT" \
+              --branch="$CF_PREVIEW_BRANCH" \
+              --commit-hash="$QA_COMMIT_SHA" \
+            | tee "$RUNNER_TEMP/duduq-pages-preview-deploy.log"
+          URL=$(grep -Eo 'https://[a-zA-Z0-9-]+\.duduq-engine-13a\.pages\.dev' \
+            "$RUNNER_TEMP/duduq-pages-preview-deploy.log" | head -n 1 || true)
+          test -n "$URL"
+          echo "DEPLOY_URL=$URL" >> "$GITHUB_ENV"
+          echo "V28_QA_PREVIEW_DEPLOYED_NOT_PRODUCTION=$URL"
+
+      - name: Smoke all 30 curricular module routes on actual Pages preview
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test -n "${DEPLOY_URL:-}"
+          for Y in 1 2 3 4 5; do
+            for M in 01 02 03 04 05 06; do
+              URL="${DEPLOY_URL%/}/play/english/year-$Y/module-$M/"
+              HTTP=$(curl --location --silent --output /dev/null \
+                --write-out '%{http_code}' --max-time 35 "$URL")
+              test "$HTTP" = "200" || { echo "::error::PUBLIC_MODULE_HTTP_${HTTP}:$URL"; exit 1; }
+              echo "PASS ${URL}"
+            done
+          done
+          echo "30_OF_30_PUBLIC_PREVIEW_MODULE_HTTP_200"
+
+      - name: Explicit production prohibition until semantic and pedagogical gate
+        if: always()
+        run: |
+          echo "This workflow deploys to QA PREVIEW only, never the release branch."
+          echo "No pedagogical signoff is inferred from HTTP/CI PASS."
+          echo "Production remains on its prior verified deployment."

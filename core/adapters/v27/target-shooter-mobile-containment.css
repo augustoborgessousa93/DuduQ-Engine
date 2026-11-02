@@ -1,0 +1,10 @@
+/* DUDUQ V27 versioned compact Target Shooter layout.
+ * Source: QA Chromium-proven exact mobile 4-target positions.
+ * Non-Gold-Master adapter; requires real-browser release testing.
+ */
+@media (max-width:520px) {
+  .target-shooter-screen .target-shooter-target--dog { left:317px !important; }
+  .target-shooter-screen .target-shooter-target--cat { left:505px !important; }
+  .target-shooter-screen .target-shooter-target--rabbit { left:693px !important; }
+  .target-shooter-screen .target-shooter-target--fish { left:869px !important; }
+}

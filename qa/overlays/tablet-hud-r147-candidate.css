@@ -1,0 +1,118 @@
+/* QA-ONLY hypothesis: reflow header in portrait tablet; NOT an approved Core release.
+ * Tested by Playwright against the same Canary Core 1.0.12 with an ephemeral
+ * stylesheet-response append. Gold Masters and release hashes remain intact.
+ */
+@media (min-width: 721px) and (max-width: 900px) {
+  html.duduq-world-fusion .duduq-engine-header {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: auto auto !important;
+    align-items: center !important;
+    gap: 4px 10px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header > .duduq-engine-header-main {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    min-width: 0 !important;
+    position: relative !important;
+    max-width: 100% !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header > .duduq-engine-toolbar {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    position: relative !important;
+    justify-self: end !important;
+    max-width: 100% !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header > .duduq-progress-trail {
+    box-sizing: border-box !important;
+    position: relative !important;
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    justify-self: stretch !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header .duduq-engine-fullscreen-button {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+  }
+}
+
+/* Additional QA hypothesis after tablet PASS: the 390px Canary
+ * header still positioned the 348px trail at x=131, yielding 89px
+ * runtime overflow. Reflow it within the header, preserving visible
+ * progress and controls rather than clipping horizontal overflow.
+ * This file is NEVER an immutable Core release.
+ */
+@media (max-width: 720px) {
+  html.duduq-world-fusion .duduq-engine-header {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: auto auto !important;
+    align-items: center !important;
+    column-gap: 5px !important;
+    row-gap: 4px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header > .duduq-engine-header-main {
+    position: relative !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header > .duduq-engine-toolbar {
+    position: relative !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header > .duduq-progress-trail {
+    box-sizing: border-box !important;
+    position: relative !important;
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    justify-self: stretch !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header .duduq-engine-fullscreen-button {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+}

@@ -4,8 +4,11 @@ on:
   push:
     branches:
       - automation/duduq-media-source-only-fix-20261029
+      - integration/duduq-m1-qa-consolidated-20261031
     paths:
       - ".github/workflows/duduq-independent-official-overlay-qa.yml"
+      - ".github/workflows/duduq-assets-duduq-reuse-qa.yml"
+      - "scripts/duduq-import-chatgpt-bundle.mjs"
       - "qa/media-candidates/y1m04-official-20261030/**"
       - "qa/media-candidates/y1m05-official-20261030/**"
       - "qa/media-candidates/y1m06-official-20261030/**"
@@ -26,6 +29,19 @@ on:
       - "qa/prepare-y1m06-official-media-bundle.mjs"
       - "qa/verify-y1m06-official-media-build.mjs"
       - "qa/verify-y1m06-source-registry-pin.mjs"
+      - "qa/verify-compiled-media-distribution-browser.mjs"
+      - "qa/replace-pig-from-assets-duduq.mjs"
+      - "qa/replace-farm-animal-batch-from-assets-duduq.mjs"
+      - "qa/verify-farm-animal-source-batch-browser.mjs"
+      - "qa/replace-safe-vocabulary-from-assets-duduq.mjs"
+      - "qa/verify-vocabulary-source-browser.mjs"
+      - "qa/verify-pig-direct-reuse-browser.mjs"
+      - "core/adapters/v27/target-shooter-mobile-containment.css"
+      - "core/adapters/v28/intro-mobile-touch-target.css"
+      - "qa/apply-intro-mobile-touch-target-v28.mjs"
+      - "qa/tests/verify-intro-mobile-touch-target-v28.test.mjs"
+      - "qa/export-verified-media-distribution-candidate.mjs"
+      - "engine/adapters/r148/duduq-hud-responsive.css"
       - "qa/y1m06-official-media-browser-qa.mjs"
       - "qa/y1m06-official-media-model.mjs"
       - "qa/tests/verify-y1m06-official-media-overlay.mjs"
@@ -144,6 +160,7 @@ jobs:
     timeout-minutes: 55
     env:
       CI: "true"
+      DUDUQ_QA_ONLY: "1"
       BASE_URL: http://127.0.0.1:4175
     steps:
       - name: Checkout isolated review branch without write credentials
@@ -264,6 +281,7 @@ jobs:
     timeout-minutes: 85
     env:
       CI: "true"
+      DUDUQ_QA_ONLY: "1"
       BASE_URL: http://127.0.0.1:4175
     steps:
       - name: Checkout isolated review branch without write credentials
@@ -375,6 +393,85 @@ jobs:
           git diff --exit-code -- content/english functions/play/english core
           echo "NO_PRODUCTION_DEPLOY_NO_MEDIA_DELETION_NO_GOLD_MASTER_CHANGE"
 
+      - name: Checkout pinned official Assets-DuduQ source for exact pig reuse
+        uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: 50fb80a89a5779d73f81c96aab35f6e86193d769
+          path: assets-source
+          persist-credentials: false
+
+      - name: Integrate exactly one pig PNG into three provisional IDs after the 185 approved replacements
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test "$(git -C assets-source rev-parse HEAD)" = "50fb80a89a5779d73f81c96aab35f6e86193d769"
+          test -z "$(git -C assets-source status --porcelain)"
+          node --check qa/replace-pig-from-assets-duduq.mjs
+          node qa/replace-pig-from-assets-duduq.mjs assets-source
+          node qa/replace-pig-from-assets-duduq.mjs assets-source --apply
+          node --check qa/verify-pig-direct-reuse-browser.mjs
+          node qa/verify-pig-direct-reuse-browser.mjs
+          echo "185_APPROVED_IDS_PLUS_3_PIG_PREVIEW_IDS_VERIFIED_ON_ONE_COMPILED_ARTIFACT"
+
+          node --check qa/replace-farm-animal-batch-from-assets-duduq.mjs
+          node qa/replace-farm-animal-batch-from-assets-duduq.mjs assets-source
+          node qa/replace-farm-animal-batch-from-assets-duduq.mjs assets-source --apply
+          node --check qa/verify-farm-animal-source-batch-browser.mjs
+          node qa/verify-farm-animal-source-batch-browser.mjs
+          echo "185_APPROVED_IDS_PLUS_16_PROVISIONAL_FARM_ANIMAL_IDS_ON_ONE_COMPILED_PRODUCT"
+
+      - name: Integrate safe bilingual numerals colors and pets from pinned source in ephemeral compiled QA only
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/replace-safe-vocabulary-from-assets-duduq.mjs
+          node qa/replace-safe-vocabulary-from-assets-duduq.mjs assets-source
+          node qa/replace-safe-vocabulary-from-assets-duduq.mjs assets-source --apply
+          node --check qa/verify-vocabulary-source-browser.mjs
+          node qa/verify-vocabulary-source-browser.mjs
+          echo "SOURCE_VOCAB_REUSE_PREVIEW_ONLY_NO_PEDAGOGICAL_RELEASE"
+
+      # This is a product-shaped compiled distribution containing 342
+      # media-ID substitutions, NOT another empty QA report. The temporary
+      # injected Target Shooter style is stripped and re-hashed; only V27
+      # versioned Pages CSS remains. V28 expands only the transparent Intro
+      # hit area; the CTA artwork and all curriculum/media bytes stay unchanged.
+      # Release approval is deliberately FALSE.
+      - name: Export single hash-bound 342-ID distributable candidate with V28 touch target
+        run: |
+          set -Eeuo pipefail
+          node --check qa/apply-intro-mobile-touch-target-v28.mjs
+          node --test qa/tests/verify-intro-mobile-touch-target-v28.test.mjs
+          DUDUQ_COMPILED_RELEASE_HOTFIX=1 node qa/apply-intro-mobile-touch-target-v28.mjs --apply
+          node --check qa/export-verified-media-distribution-candidate.mjs
+          node qa/export-verified-media-distribution-candidate.mjs
+          node --check qa/verify-compiled-media-distribution-browser.mjs
+          node qa/verify-compiled-media-distribution-browser.mjs
+          tar -czf "$RUNNER_TEMP/duduq-review-distribution.tar.gz" -C dist-pages .
+          sha256sum "$RUNNER_TEMP/duduq-review-distribution.tar.gz" | sed 's#  .*/#  #' > qa/results/duduq-review-distribution.sha256
+          test -s "$RUNNER_TEMP/duduq-review-distribution.tar.gz"
+          echo "BUNDLED_COMPILED_PRODUCT_WITH_342_MEDIA_IDS_AND_V28_TOUCH_TARGET_NOT_PEDAGOGICALLY_APPROVED"
+
+      - name: Keep compiled product artifact for release review without deploying
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-media-distribution-candidate-${{ github.run_id }}
+          retention-days: 14
+          compression-level: 0
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/duduq-review-distribution.tar.gz
+            qa/results/duduq-review-distribution.sha256
+            qa/results/duduq-distribution-candidate.json
+            qa/results/intro-mobile-touch-target-v28.json
+            qa/results/pig-source-direct-reuse.json
+            qa/results/pig-source-direct-browser.json
+            qa/results/farm-animal-source-batch.json
+            qa/results/farm-animal-batch-browser.json
+            qa/results/vocabulary-source-batch.json
+            qa/results/vocabulary-source-browser.json
+
       - name: Retain independent QA reports and real-browser screenshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -392,6 +489,7 @@ jobs:
             qa/results/y1m05-official-media-evidence.json
             qa/results/y1m04-official-media-finalization.json
             qa/results/y1m05-official-media-finalization.json
+            qa/results/intro-mobile-touch-target-v28.json
             /tmp/duduq-overlay-http.log
 
       - name: Explicit release boundary

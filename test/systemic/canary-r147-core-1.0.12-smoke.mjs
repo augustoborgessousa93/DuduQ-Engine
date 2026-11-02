@@ -56,7 +56,10 @@ async function openModule(browser, viewport, moduleNumber) {
     transitionApi: typeof window.DuduQTransition?.getState === "function",
     playerApi: typeof window.DuduQ?.getSession === "function"
   }));
-  assert(boot.revision === 147 && boot.core === "1.0.12", `M${moduleNumber}/${viewport.name}: Canary ${boot.revision}/Core ${boot.core}.`);
+  assert(boot.revision === 148 && boot.core === "1.0.12", `M${moduleNumber}/${viewport.name}: R148 manifest ${boot.revision}/Core ${boot.core}.`);
+  assert(boot.scripts.some((src) => src.includes("/engine/adapters/r148/duduq-hud-responsive.js")), `M${moduleNumber}/${viewport.name}: Versioned R148 script missing.`);
+  assert(await page.locator("#duduq-header-r148-style").count() === 1, `M${moduleNumber}/${viewport.name}: R148 CSS not loaded through Loader.`);
+  assert(await page.evaluate(() => window.DuduQResponsiveHeaderR148?.version === "r148.1"), `M${moduleNumber}/${viewport.name}: R148 iframe bridge not initialized.`);
   assert(boot.dd === "2.0.24" && boot.ts === "1.0.21", `M${moduleNumber}/${viewport.name}: mechanics mudaram.`);
   assert(boot.scripts.some((src) => src.includes("/engine/duduq-loader-v1.js")), `M${moduleNumber}/${viewport.name}: Loader ausente.`);
   assert(boot.playerApi && boot.transitionApi, `M${moduleNumber}/${viewport.name}: Player/Transition API ausente.`);
@@ -155,6 +158,71 @@ function assertCompact(layout, viewport, label) {
   assert(layout.instructionRatio > 0.85, `${label}: instrução criticamente cortada.`);
 }
 
+async function assertNativeHitboxes(page, selector, expected, label) {
+  const hits = await page.evaluate((cssSelector) => {
+    const doc = document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument;
+    if (!doc) return [];
+    return [...doc.querySelectorAll(cssSelector)].map((el) => {
+      const rect = el.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      const top = doc.elementFromPoint(x, y);
+      return {
+        element: el.getAttribute("aria-label") || el.getAttribute("data-dd2-item-id") || el.className,
+        width: rect.width, height: rect.height,
+        hit: Boolean(top && (el === top || el.contains(top))),
+        pointerEvents: doc.defaultView.getComputedStyle(el).pointerEvents
+      };
+    });
+  }, selector);
+  assert(hits.length === expected && hits.every((hit) =>
+    hit.width >= 44 && hit.height >= 44 && hit.hit && hit.pointerEvents !== "none"
+  ), `${label}: native pointer hit-test failed ${JSON.stringify(hits)}`);
+}
+
+// The balloon target moves continuously. Dispatch a true native mouse event
+// at its verified current visual center, without Playwright's impossible
+// "wait until all animations stop" precondition or force-click bypass.
+async function clickAnimatedTargetAtVisibleCenter(page, label) {
+  const point=await page.evaluate((name)=>{
+    const iframe=document.querySelector("#root > .duduq-mechanic-frame iframe");
+    const doc=iframe?.contentDocument;
+    const target=[...(doc?.querySelectorAll(".duduq-ts-target")||[])]
+      .find(n=>n.getAttribute("aria-label")===name);
+    if(!target||target.disabled)return null;
+    const r=target.getBoundingClientRect(),f=iframe.getBoundingClientRect();
+    const cx=r.left+r.width/2,cy=r.top+r.height/2;
+    const top=doc.elementFromPoint(cx,cy);
+    const css=doc.defaultView.getComputedStyle(target);
+    const sx=f.width/Math.max(1,iframe.clientWidth),sy=f.height/Math.max(1,iframe.clientHeight);
+    const x=f.left+cx*sx,y=f.top+cy*sy;
+    return {x,y,width:r.width*sx,height:r.height*sy,
+      ownsCenter:top===target||target.contains(top),
+      pointerEvents:css.pointerEvents,
+      viewportWidth:innerWidth,viewportHeight:innerHeight};
+  },label);
+  assert(point&&point.ownsCenter&&point.pointerEvents!=="none"&&
+    point.width>=44&&point.height>=44&&
+    point.x>=8&&point.x<=point.viewportWidth-8&&
+    point.y>=8&&point.y<=point.viewportHeight-8,
+    "TARGET_POINTER_NOT_NATIVE_REACHABLE:"+label+":"+JSON.stringify(point));
+  await page.mouse.click(point.x,point.y,{button:"left"});
+}
+
+async function assertR148FrameStylesheet(page, label) {
+  await page.waitForFunction(() => {
+    const doc = document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument;
+    const link = doc?.getElementById("duduq-header-r148-frame-style");
+    return Boolean(link?.href?.includes("/engine/adapters/r148/duduq-hud-responsive.css") && link.sheet);
+  }, null, { timeout: 10_000 });
+  const loaded = await page.evaluate(() => {
+    const doc = document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument;
+    const link = doc?.getElementById("duduq-header-r148-frame-style");
+    return Boolean(link?.sheet && link.sheet.cssRules?.length > 0);
+  });
+  assert(loaded, `${label}: R148 stylesheet not applied in the real mechanic iframe.`);
+}
+
 async function waitInstructionAudioIdle(page) {
   await page.waitForFunction(() => {
     const doc = document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument;
@@ -170,17 +238,20 @@ async function m01(browser, viewport) {
     await waitStep(page, 0, 35_000);
     await page.waitForFunction(() => document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument?.querySelectorAll(".duduq-ts-target").length === 3, null, { timeout: 15_000 });
     await waitInstructionAudioIdle(page);
+    await assertR148FrameStylesheet(page, `M01 TS/${viewport.name}`);
+    await assertNativeHitboxes(page, ".duduq-ts-target", 3, `M01 TS/${viewport.name}`);
     if (QA_HEADER_FIT_CSS) assert(candidateCssApplied() > 0, "Y1M01 candidate CSS was not loaded by Chromium.");
     const layout = await surface(page, "ts");
     assertCompact(layout, viewport, `M01 TS/${viewport.name}`);
     assert(layout.targets.length === 3 && layout.targets.every((t) => t.width >= 44 && t.height >= 44 && t.ratio > 0.85), `M01 TS/${viewport.name}: targets inválidos.`);
 
     const frame = page.frameLocator("#root > .duduq-mechanic-frame iframe");
-    await frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo A"]').first().click({ force:true });
+    await clickAnimatedTargetAtVisibleCenter(page,"Lançar estrela no alvo A");
     await waitFeedback(page, "retry");
     let session = await page.evaluate(() => window.DuduQ.getSession());
     assert(session.stepIndex === 0 && !session.completed, `M01 TS/${viewport.name}: retry avançou.`);
-    await frame.locator('.duduq-ts-target[aria-label="Lançar estrela no alvo B"]').first().click({ force:true });
+    await assertNativeHitboxes(page, ".duduq-ts-target", 3, `M01 TS/${viewport.name}/retry`);
+    await clickAnimatedTargetAtVisibleCenter(page,"Lançar estrela no alvo B");
     await waitStep(page, 1, 20_000);
 
     const progress = [];
@@ -218,9 +289,9 @@ async function waitDDReady(page) {
 
 async function clickDD(page, id) {
   const frame = page.frameLocator("#root > .duduq-mechanic-frame iframe");
-  await frame.locator(`.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="${id}"]`).first().click({ force:true });
+  await frame.locator(`.duduq-dd2-bank-items .duduq-dd2-item[data-dd2-item-id="${id}"]`).first().click();
   await page.waitForFunction(() => !document.querySelector("#root > .duduq-mechanic-frame iframe")?.contentDocument?.querySelector(".duduq-dd2-item[data-audio-playing='true']"), null, { timeout:7_000 }).catch(() => {});
-  await frame.locator(".duduq-dd2-zone").first().click({ force:true });
+  await frame.locator(".duduq-dd2-zone").first().click();
 }
 
 async function m03(browser, viewport) {
@@ -229,6 +300,8 @@ async function m03(browser, viewport) {
     await page.locator(".duduq-intro-start-button").click();
     await waitStep(page, 0, 35_000);
     await waitDDReady(page);
+    await assertR148FrameStylesheet(page, `M03 DD/${viewport.name}`);
+    await assertNativeHitboxes(page, ".duduq-dd2-bank-items .duduq-dd2-item", 3, `M03 DD/${viewport.name}`);
     if (QA_HEADER_FIT_CSS) assert(candidateCssApplied() > 0, "Y1M03 candidate CSS was not loaded by Chromium.");
     const layout = await surface(page, "dd");
     assertCompact(layout, viewport, `M03 DD/${viewport.name}`);
@@ -256,7 +329,7 @@ async function m03(browser, viewport) {
 }
 
 const browser = await chromium.launch({ headless:true });
-const report = { contract:"CANARY_R147_CORE_1_0_12_PROPORTIONAL_SMOKE", status:"PASS", m01:[], m03:[] };
+const report = { contract:"CANARY_R148_ADDITIVE_HEADER_PROPORTIONAL_SMOKE", status:"PASS", m01:[], m03:[] };
 try {
   for (const viewport of VIEWPORTS) report.m01.push(await m01(browser, viewport));
   for (const viewport of VIEWPORTS) report.m03.push(await m03(browser, viewport));

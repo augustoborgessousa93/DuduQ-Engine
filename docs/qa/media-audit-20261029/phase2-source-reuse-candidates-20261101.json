@@ -1,0 +1,602 @@
+{
+  "schemaVersion": "DUDUQ_PHASE2_SOURCE_REUSE_CANDIDATES_V1",
+  "purpose": "Machine-readable QA candidate mapping only; never apply or deploy from this manifest without complete compiled artifact verification.",
+  "sourceRepository": "augustoborgessousa93/Assets-DuduQ",
+  "sourceCommit": "50fb80a89a5779d73f81c96aab35f6e86193d769",
+  "sourceFolder": "Imagens Ilustrativa",
+  "sourceFolderEntries": 349,
+  "sourceDistinctGitBlobs": 275,
+  "auditSource": "docs/qa/media-audit-20261029/replacement-queue.json",
+  "auditBlob": "5040f1a0531f3ff297ab655bad97eca8f33e113e",
+  "baseline": "V28 Y1M02 seven-leaf production hotfix, release duduq-v28-y1m02-seven-numeral-leaf-hotfix-20261101",
+  "candidateAssets": [
+    {
+      "concept": "black",
+      "sourceFile": "Imagens Ilustrativa/color-black-preto.png",
+      "sourceGitBlob": "e97d277f7df8fdb73b611f919fec34fca836bd8d",
+      "bytes": 885925
+    },
+    {
+      "concept": "white",
+      "sourceFile": "Imagens Ilustrativa/color-white-branco.png",
+      "sourceGitBlob": "d8b2da519e574a0c7c08e3d85a4e2db4348972c1",
+      "bytes": 819113
+    },
+    {
+      "concept": "brown",
+      "sourceFile": "Imagens Ilustrativa/color-brown-marrom.png",
+      "sourceGitBlob": "4ba5334007c4a8ac4ef4de3d87b03723e0523588",
+      "bytes": 1110027
+    },
+    {
+      "concept": "rabbit",
+      "sourceFile": "Imagens Ilustrativa/pet-rabbit-coelho.png",
+      "sourceGitBlob": "9421450b4ec44d4c39104d59e0e287a2b1c2ef7b",
+      "bytes": 979429
+    },
+    {
+      "concept": "banana",
+      "sourceFile": "Imagens Ilustrativa/banana.png",
+      "sourceGitBlob": "14f858bef72073c5489557904d22d564f186f393",
+      "bytes": 795064
+    }
+  ],
+  "candidateMediaIds": 38,
+  "queueReportedQuestionUsages": 54,
+  "distinctListedQuestions": 38,
+  "distinctListedModules": [
+    "Y1M03",
+    "Y1M06",
+    "Y2M02",
+    "Y2M04",
+    "Y2M05",
+    "Y2M06",
+    "Y3M04",
+    "Y3M05",
+    "Y4M05"
+  ],
+  "modules": [
+    "Y1M03",
+    "Y1M06",
+    "Y2M02",
+    "Y2M04",
+    "Y2M05",
+    "Y2M06",
+    "Y3M04",
+    "Y3M05",
+    "Y4M05"
+  ],
+  "sourceRows": [
+    {
+      "mediaId": "IMG-Y1M03-Q001-BLACK",
+      "concept": "black",
+      "sourceGitBlob": "e97d277f7df8fdb73b611f919fec34fca836bd8d",
+      "sourceFile": "Imagens Ilustrativa/color-black-preto.png",
+      "queueUsage": 6,
+      "exampleQuestions": [
+        "Y1M03-Q001",
+        "Y2M02-Q015",
+        "Y2M04-Q003",
+        "Y2M04-Q015",
+        "Y3M05-Q015"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q006-BROWN",
+      "concept": "brown",
+      "sourceGitBlob": "4ba5334007c4a8ac4ef4de3d87b03723e0523588",
+      "sourceFile": "Imagens Ilustrativa/color-brown-marrom.png",
+      "queueUsage": 5,
+      "exampleQuestions": [
+        "Y1M03-Q006",
+        "Y2M04-Q017",
+        "Y2M05-Q007",
+        "Y3M04-Q009",
+        "Y3M05-Q015"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q001-WHITE",
+      "concept": "white",
+      "sourceGitBlob": "d8b2da519e574a0c7c08e3d85a4e2db4348972c1",
+      "sourceFile": "Imagens Ilustrativa/color-white-branco.png",
+      "queueUsage": 4,
+      "exampleQuestions": [
+        "Y1M03-Q001",
+        "Y2M02-Q015",
+        "Y2M04-Q003",
+        "Y3M05-Q015"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-V11-2B-5596327D2C423D85",
+      "concept": "banana",
+      "sourceGitBlob": "14f858bef72073c5489557904d22d564f186f393",
+      "sourceFile": "Imagens Ilustrativa/banana.png",
+      "queueUsage": 3,
+      "exampleQuestions": [
+        "Y2M06-Q019",
+        "Y4M05-Q006",
+        "Y4M05-Q019"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "concept": "banana",
+      "sourceGitBlob": "14f858bef72073c5489557904d22d564f186f393",
+      "sourceFile": "Imagens Ilustrativa/banana.png",
+      "queueUsage": 2,
+      "exampleQuestions": [
+        "Y2M06-Q010",
+        "Y2M06-Q016"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q001-RABBIT",
+      "concept": "rabbit",
+      "sourceGitBlob": "9421450b4ec44d4c39104d59e0e287a2b1c2ef7b",
+      "sourceFile": "Imagens Ilustrativa/pet-rabbit-coelho.png",
+      "queueUsage": 2,
+      "exampleQuestions": [
+        "Y1M06-Q001",
+        "Y2M05-Q013"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Q005-BLACK",
+      "concept": "black",
+      "sourceGitBlob": "e97d277f7df8fdb73b611f919fec34fca836bd8d",
+      "sourceFile": "Imagens Ilustrativa/color-black-preto.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q005"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Q010-BROWN",
+      "concept": "brown",
+      "sourceGitBlob": "4ba5334007c4a8ac4ef4de3d87b03723e0523588",
+      "sourceFile": "Imagens Ilustrativa/color-brown-marrom.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q010"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Q014-RABBIT",
+      "concept": "rabbit",
+      "sourceGitBlob": "9421450b4ec44d4c39104d59e0e287a2b1c2ef7b",
+      "sourceFile": "Imagens Ilustrativa/pet-rabbit-coelho.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M06-Q014"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Q015-BLACK",
+      "concept": "black",
+      "sourceGitBlob": "e97d277f7df8fdb73b611f919fec34fca836bd8d",
+      "sourceFile": "Imagens Ilustrativa/color-black-preto.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q015"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Q020-BROWN",
+      "concept": "brown",
+      "sourceGitBlob": "4ba5334007c4a8ac4ef4de3d87b03723e0523588",
+      "sourceFile": "Imagens Ilustrativa/color-brown-marrom.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q020"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-V11-2B-2C6DC2C54EF9FE82",
+      "concept": "banana",
+      "sourceGitBlob": "14f858bef72073c5489557904d22d564f186f393",
+      "sourceFile": "Imagens Ilustrativa/banana.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y2M06-Q009"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-V11-2B-53B01C40B9C5E915",
+      "concept": "banana",
+      "sourceGitBlob": "14f858bef72073c5489557904d22d564f186f393",
+      "sourceFile": "Imagens Ilustrativa/banana.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y2M06-Q011"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q004-BLACK",
+      "concept": "black",
+      "sourceGitBlob": "e97d277f7df8fdb73b611f919fec34fca836bd8d",
+      "sourceFile": "Imagens Ilustrativa/color-black-preto.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q004"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q005-BLACK",
+      "concept": "black",
+      "sourceGitBlob": "e97d277f7df8fdb73b611f919fec34fca836bd8d",
+      "sourceFile": "Imagens Ilustrativa/color-black-preto.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q005"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q005-WHITE",
+      "concept": "white",
+      "sourceGitBlob": "d8b2da519e574a0c7c08e3d85a4e2db4348972c1",
+      "sourceFile": "Imagens Ilustrativa/color-white-branco.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q005"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q007-BROWN",
+      "concept": "brown",
+      "sourceGitBlob": "4ba5334007c4a8ac4ef4de3d87b03723e0523588",
+      "sourceFile": "Imagens Ilustrativa/color-brown-marrom.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q007"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q009-BLACK",
+      "concept": "black",
+      "sourceGitBlob": "e97d277f7df8fdb73b611f919fec34fca836bd8d",
+      "sourceFile": "Imagens Ilustrativa/color-black-preto.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q009"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q009-WHITE",
+      "concept": "white",
+      "sourceGitBlob": "d8b2da519e574a0c7c08e3d85a4e2db4348972c1",
+      "sourceFile": "Imagens Ilustrativa/color-white-branco.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q009"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q010-BLACK",
+      "concept": "black",
+      "sourceGitBlob": "e97d277f7df8fdb73b611f919fec34fca836bd8d",
+      "sourceFile": "Imagens Ilustrativa/color-black-preto.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q010"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q010-WHITE",
+      "concept": "white",
+      "sourceGitBlob": "d8b2da519e574a0c7c08e3d85a4e2db4348972c1",
+      "sourceFile": "Imagens Ilustrativa/color-white-branco.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q010"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q011-BLACK",
+      "concept": "black",
+      "sourceGitBlob": "e97d277f7df8fdb73b611f919fec34fca836bd8d",
+      "sourceFile": "Imagens Ilustrativa/color-black-preto.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q011"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q011-WHITE",
+      "concept": "white",
+      "sourceGitBlob": "d8b2da519e574a0c7c08e3d85a4e2db4348972c1",
+      "sourceFile": "Imagens Ilustrativa/color-white-branco.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q011"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q012-BROWN",
+      "concept": "brown",
+      "sourceGitBlob": "4ba5334007c4a8ac4ef4de3d87b03723e0523588",
+      "sourceFile": "Imagens Ilustrativa/color-brown-marrom.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q012"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q013-BLACK",
+      "concept": "black",
+      "sourceGitBlob": "e97d277f7df8fdb73b611f919fec34fca836bd8d",
+      "sourceFile": "Imagens Ilustrativa/color-black-preto.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q013"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q013-BROWN",
+      "concept": "brown",
+      "sourceGitBlob": "4ba5334007c4a8ac4ef4de3d87b03723e0523588",
+      "sourceFile": "Imagens Ilustrativa/color-brown-marrom.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q013"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q013-WHITE",
+      "concept": "white",
+      "sourceGitBlob": "d8b2da519e574a0c7c08e3d85a4e2db4348972c1",
+      "sourceFile": "Imagens Ilustrativa/color-white-branco.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q013"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q014-BROWN",
+      "concept": "brown",
+      "sourceGitBlob": "4ba5334007c4a8ac4ef4de3d87b03723e0523588",
+      "sourceFile": "Imagens Ilustrativa/color-brown-marrom.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q014"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q015-BROWN",
+      "concept": "brown",
+      "sourceGitBlob": "4ba5334007c4a8ac4ef4de3d87b03723e0523588",
+      "sourceFile": "Imagens Ilustrativa/color-brown-marrom.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q015"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q016-BLACK",
+      "concept": "black",
+      "sourceGitBlob": "e97d277f7df8fdb73b611f919fec34fca836bd8d",
+      "sourceFile": "Imagens Ilustrativa/color-black-preto.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q016"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q016-WHITE",
+      "concept": "white",
+      "sourceGitBlob": "d8b2da519e574a0c7c08e3d85a4e2db4348972c1",
+      "sourceFile": "Imagens Ilustrativa/color-white-branco.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q016"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M03-Q017-BROWN",
+      "concept": "brown",
+      "sourceGitBlob": "4ba5334007c4a8ac4ef4de3d87b03723e0523588",
+      "sourceFile": "Imagens Ilustrativa/color-brown-marrom.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M03-Q017"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q002-RABBIT",
+      "concept": "rabbit",
+      "sourceGitBlob": "9421450b4ec44d4c39104d59e0e287a2b1c2ef7b",
+      "sourceFile": "Imagens Ilustrativa/pet-rabbit-coelho.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M06-Q002"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q004-RABBIT",
+      "concept": "rabbit",
+      "sourceGitBlob": "9421450b4ec44d4c39104d59e0e287a2b1c2ef7b",
+      "sourceFile": "Imagens Ilustrativa/pet-rabbit-coelho.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M06-Q004"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q005-RABBIT",
+      "concept": "rabbit",
+      "sourceGitBlob": "9421450b4ec44d4c39104d59e0e287a2b1c2ef7b",
+      "sourceFile": "Imagens Ilustrativa/pet-rabbit-coelho.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M06-Q005"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q006-RABBIT",
+      "concept": "rabbit",
+      "sourceGitBlob": "9421450b4ec44d4c39104d59e0e287a2b1c2ef7b",
+      "sourceFile": "Imagens Ilustrativa/pet-rabbit-coelho.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M06-Q006"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q007-RABBIT",
+      "concept": "rabbit",
+      "sourceGitBlob": "9421450b4ec44d4c39104d59e0e287a2b1c2ef7b",
+      "sourceFile": "Imagens Ilustrativa/pet-rabbit-coelho.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M06-Q007"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q010-RABBIT",
+      "concept": "rabbit",
+      "sourceGitBlob": "9421450b4ec44d4c39104d59e0e287a2b1c2ef7b",
+      "sourceFile": "Imagens Ilustrativa/pet-rabbit-coelho.png",
+      "queueUsage": 1,
+      "exampleQuestions": [
+        "Y1M06-Q010"
+      ],
+      "semanticConflict": false,
+      "sourceStatus": "PROVISIONAL",
+      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+    }
+  ],
+  "knownAuditDiscrepancies": [
+    {
+      "mediaId": "IMG-Y1M03-Q001-BLACK",
+      "queueUsage": 6,
+      "listedExamples": 5,
+      "reason": "Audit exampleQuestions is not a complete occurrence list; derive authoritative usage from the 600 compiled question JSON files"
+    }
+  ],
+  "hardGates": [
+    "Inspect actual current V28 hotfix media-registry: only provisional SVG entries; never overwrite an already approved PNG.",
+    "Traverse all 600 compiled questions and every nested mediaId/assetId occurrence; compare exact concept and every affected option, not just queue examples.",
+    "Fail closed on unlisted usages, missing semanticTarget, mismatched concept, color-vs-object ambiguity, or protected approved media.",
+    "Verify each source PNG actual bytes against sourceGitBlob and transparent PNG properties, then verify every compiled asset hash and manifest.",
+    "Keep all 600 questions.json byte-identical, preserve answer keys/audio/Gold Masters; QA affected mechanics desktop/touch; no release until independently verified."
+  ],
+  "compiledRegistryVerified": false,
+  "sourcePngBytesVerified": false,
+  "semanticGraphVerified": false,
+  "qaPassed": false,
+  "pedagogicalQAApproved": false,
+  "releaseApproved": false,
+  "productionDeployed": false
+}

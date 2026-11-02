@@ -1,0 +1,122 @@
+/* R148 additive versioned header CSS. Core 1.0.12 immutable; R147 rollback preserved. */
+@media (min-width: 721px) and (max-width: 900px) {
+  html.duduq-world-fusion .duduq-engine-header {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: auto auto !important;
+    align-items: center !important;
+    gap: 4px 10px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header > .duduq-engine-header-main {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    min-width: 0 !important;
+    position: relative !important;
+    max-width: 100% !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header > .duduq-engine-toolbar {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    position: relative !important;
+    justify-self: end !important;
+    max-width: 100% !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header > .duduq-progress-trail {
+    box-sizing: border-box !important;
+    position: relative !important;
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    justify-self: stretch !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header .duduq-engine-fullscreen-button {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+  }
+}
+
+/* Mobile progress remains visible and accessible without clipping. */
+@media (max-width: 720px) {
+  html.duduq-world-fusion .duduq-engine-header {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: auto auto !important;
+    align-items: center !important;
+    column-gap: 5px !important;
+    row-gap: 4px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header > .duduq-engine-header-main {
+    position: relative !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header > .duduq-engine-toolbar {
+    position: relative !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header > .duduq-progress-trail {
+    box-sizing: border-box !important;
+    position: relative !important;
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    justify-self: stretch !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  html.duduq-world-fusion .duduq-engine-header .duduq-engine-fullscreen-button {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+}
+
+/* R148 mobile Target Shooter: port the separately tested 4-target containment
+ * rule to a versioned runtime adapter. No Gold Master or question data edits.
+ * This must be revalidated in the non-QA compiled distribution artifact.
+ */
+@media (max-width:520px) {
+  .target-shooter-screen .target-shooter-target--dog { left:317px !important; }
+  .target-shooter-screen .target-shooter-target--cat { left:505px !important; }
+  .target-shooter-screen .target-shooter-target--rabbit { left:693px !important; }
+  .target-shooter-screen .target-shooter-target--fish { left:869px !important; }
+}
+

@@ -1,0 +1,103 @@
+name: DUDUQ V28 - Repair Seven Visible Numeral Leaf Cards
+on:
+  workflow_dispatch:
+  push:
+    branches: [integration/duduq-m1-qa-consolidated-20261031]
+    paths:
+      - qa/patch-v28-y1m02-seven-leaf.mjs
+      - .github/workflows/duduq-v28-y1m02-leaf-hotfix.yml
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  hotfix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ORIGINAL_RELEASE: duduq-v28-qa-41342961320
+      ORIGINAL_SHA256: 9014d34492659d27961772495a27b02e4556d4ebe95522b350f3ee2740970830
+      HOTFIX_TAG: duduq-v28-y1m02-seven-numeral-leaf-hotfix-20261101
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Recover exact published V28 compiled site
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p "$RUNNER_TEMP/original" dist-pages
+          gh release download "$ORIGINAL_RELEASE" -R "$GITHUB_REPOSITORY" --pattern duduq-v28-compiled-candidate.tar.gz --dir "$RUNNER_TEMP/original"
+          echo "$ORIGINAL_SHA256  $RUNNER_TEMP/original/duduq-v28-compiled-candidate.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/original/duduq-v28-compiled-candidate.tar.gz" -C dist-pages
+      - name: Replace 7 old SVG leaf bindings with the original PNGs already in V28
+        run: |
+          node --check qa/patch-v28-y1m02-seven-leaf.mjs
+          node qa/patch-v28-y1m02-seven-leaf.mjs
+      - name: Install real Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start the patched compiled game locally
+        run: |
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages > /tmp/y1m02-numeral-hotfix.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4175/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/y1m02-numeral-hotfix.log
+          exit 1
+      - name: Prove all four Q001 numeral pictures actually render in mobile and desktop
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+          import {chromium} from 'playwright';
+          const reg=JSON.parse(readFileSync('dist-pages/content/english/media/media-registry.json'));
+          const entries=new Map(reg.entries.map(e=>[e.mediaId,e]));
+          const q1=JSON.parse(readFileSync('dist-pages/content/english/year-1/module-02/questions.json')).items[0];
+          const urls=q1.targets.map(t=>'/'+entries.get(t.media.assetId)?.urlOrPath);
+          assert(urls.length===4&&new Set(urls).size===4);
+          assert(urls.every(u=>u.includes('/assets-duduq/')&&u.endsWith('.png')));
+          mkdirSync('qa/results/y1m02-numeral-hotfix',{recursive:true});
+          const b=await chromium.launch({headless:true}),results=[];
+          try{
+            for(const viewport of [{width:1280,height:800},{width:844,height:390}]){
+              const c=await b.newContext({viewport,hasTouch:viewport.width===844});
+              const page=await c.newPage(),errors=[];
+              page.on('pageerror',e=>errors.push(String(e)));
+              const response=await page.goto('http://127.0.0.1:4175/play/drag-drop-multimedia/?duduqModule=Y1M02&duduqItem=Y1M02-Q001&qaSeed=numeral-leaf-v29',{waitUntil:'domcontentloaded',timeout:45000});
+              assert.equal(response?.status(),200);
+              await page.waitForFunction(expected=>expected.every(u=>[...document.images].some(im=>(()=>{try{return new URL(im.currentSrc||im.src,location.href).pathname===u;}catch{return false;}})()&&im.complete&&im.naturalWidth>0&&im.getBoundingClientRect().width>20)),urls,{timeout:30000});
+              assert.deepEqual(errors,[]);
+              const screenshot='qa/results/y1m02-numeral-hotfix/Q001-'+viewport.width+'.png';
+              await page.screenshot({path:screenshot});
+              results.push({viewport,renderedPngs:4,screenshot});
+              await c.close();
+            }
+          }finally{await b.close();}
+          writeFileSync('qa/results/y1m02-numeral-hotfix/browser.json',JSON.stringify({status:'PASS_4_VISIBLE_SOURCE_PNGS',checks:results,productionDeployed:false},null,2)+'\n');
+          console.log(JSON.stringify({status:'PASS_4_VISIBLE_SOURCE_PNGS',viewports:2,visibleMedia:4}));
+          NODE
+      - name: Create single hash-bound corrected prerelease
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          tar -czf "$RUNNER_TEMP/duduq-v28-y1m02-seven-leaf-hotfix.tar.gz" -C dist-pages .
+          (cd "$RUNNER_TEMP" && sha256sum duduq-v28-y1m02-seven-leaf-hotfix.tar.gz > duduq-v28-y1m02-seven-leaf-hotfix.sha256)
+          cat "$RUNNER_TEMP/duduq-v28-y1m02-seven-leaf-hotfix.sha256"
+          if gh release view "$HOTFIX_TAG" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "::error::RELEASE_TAG_EXISTS"; exit 1
+          fi
+          gh release create "$HOTFIX_TAG" "$RUNNER_TEMP/duduq-v28-y1m02-seven-leaf-hotfix.tar.gz" "$RUNNER_TEMP/duduq-v28-y1m02-seven-leaf-hotfix.sha256" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "DUDUQ V28 Q001 & Number Leaf Visual Correction" --notes "Seven source PNG references fixed for actual visible Y1M02 cards, same 600 contracts. QA preview required before live deploy." --prerelease
+      - name: Archive screenshots and inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-y1m02-seven-leaf-qa
+          path: |
+            qa/results/v28-y1m02-seven-leaf-hotfix.json
+            qa/results/y1m02-numeral-hotfix/**
+          retention-days: 21
+          if-no-files-found: warn
