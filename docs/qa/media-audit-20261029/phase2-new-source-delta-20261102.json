@@ -1,0 +1,671 @@
+{
+  "schemaVersion": "DUDUQ_PHASE2_NEW_SOURCE_DELTA_V1",
+  "purpose": "Pinned source delta and explicit-option audit crosswalk; no replacement authorization, no production changes.",
+  "sourceRepository": "augustoborgessousa93/Assets-DuduQ",
+  "sourceCommit": "7c9cc83c33d2fe41b27e5bbeb7facc7fed37595f",
+  "previousSourceCommit": "50fb80a89a5779d73f81c96aab35f6e86193d769",
+  "sourceFolder": "Imagens Ilustrativa",
+  "previousFolderEntries": 349,
+  "previousDistinctGitBlobs": 275,
+  "currentFolderEntries": 388,
+  "currentDistinctGitBlobs": 314,
+  "sourceTreeTruncated": false,
+  "addedFolderPngs": 39,
+  "addedOutsideFolder": 20,
+  "explicitOptionCandidateAssets": 14,
+  "questionContractsToVerify": 600,
+  "integratedMediaIds": 0,
+  "productionDeployed": false,
+  "humanPedagogicalApproval": false,
+  "notes": [
+    "All 39 new files are only filename/option-semantic candidates; no visual content or SHA256 yet verified.",
+    "Shared media IDs, full compiled question graph, registry temporary flags and contrast must be checked before any replacement.",
+    "20 additional PNGs outside Imagens Ilustrativa are deliberately out of scope."
+  ],
+  "assets": [
+    {
+      "path": "Imagens Ilustrativa/Actress — Atriz.png",
+      "gitBlob": "80b0e0a362bd18c54711f34a56a003278370ec13",
+      "bytes": 2707755,
+      "conceptHint": "actress",
+      "explicitAuditBindings": [
+        {
+          "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+          "questionId": "Y5M03-Q001",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+          "questionId": "Y5M03-Q003",
+          "mechanic": "target-shooter"
+        },
+        {
+          "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+          "questionId": "Y5M03-Q006",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+          "questionId": "Y5M03-Q011",
+          "mechanic": "target-shooter"
+        },
+        {
+          "mediaId": "IMG-V11-2B-0DC49CBE5B9DBF47",
+          "questionId": "Y5M03-Q016",
+          "mechanic": "target-shooter"
+        }
+      ],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/August.png",
+      "gitBlob": "f78f344bbf1dc68a945b5bf2877560abaa6c6cff",
+      "bytes": 2574638,
+      "conceptHint": "August",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Brother — Irmão.png",
+      "gitBlob": "e1744643b9da30998c3896791d41c95c64a558bd",
+      "bytes": 1474708,
+      "conceptHint": "brother",
+      "explicitAuditBindings": [
+        {
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "questionId": "Y2M03-Q001",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "questionId": "Y2M03-Q003",
+          "mechanic": "target-shooter"
+        },
+        {
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "questionId": "Y2M03-Q006",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "questionId": "Y2M03-Q007",
+          "mechanic": "target-shooter"
+        },
+        {
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "questionId": "Y2M03-Q011",
+          "mechanic": "target-shooter"
+        },
+        {
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "questionId": "Y2M03-Q013",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "questionId": "Y3M03-Q003",
+          "mechanic": "target-shooter"
+        }
+      ],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Carrot + apple + water.png",
+      "gitBlob": "c50dc7baa6a2455b0eb2ce77c8f454e004b1c076",
+      "bytes": 1766562,
+      "conceptHint": null,
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Chocolate + cookies + juice.png",
+      "gitBlob": "681126bd1de5e9dab562794226ca70ee7556a56a",
+      "bytes": 2029662,
+      "conceptHint": null,
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Daily routine.png",
+      "gitBlob": "498c706a9dfca3eb8d2ebee1b954949725a0452e",
+      "bytes": 1466615,
+      "conceptHint": null,
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/December.png",
+      "gitBlob": "a23d9499581f916bbf8e37eadcb4a46cd53e1b5d",
+      "bytes": 2510733,
+      "conceptHint": "December",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Dentist — Dentista.png",
+      "gitBlob": "3e00b489df1d07e5bedb473b9edbfe865b220481",
+      "bytes": 1704454,
+      "conceptHint": "dentist",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/February.png",
+      "gitBlob": "d6a8eff81eb3f464b4c173e78d345b8e85ccc159",
+      "bytes": 1805523,
+      "conceptHint": "February",
+      "explicitAuditBindings": [
+        {
+          "mediaId": "IMG-V11-2B-C778AE6D3532895F",
+          "questionId": "Y4M03-Q001",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-C778AE6D3532895F",
+          "questionId": "Y4M03-Q007",
+          "mechanic": "target-shooter"
+        },
+        {
+          "mediaId": "IMG-V11-2B-C778AE6D3532895F",
+          "questionId": "Y4M03-Q013",
+          "mechanic": "bubble-pop"
+        }
+      ],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Go to school — 7-30.png",
+      "gitBlob": "def0749c9ea7ebc1bae50ff83a362bbbcc5b0866",
+      "bytes": 1757440,
+      "conceptHint": "go to school",
+      "explicitAuditBindings": [
+        {
+          "mediaId": "IMG-V11-2B-B43E1B61B1A52B95",
+          "questionId": "Y5M02-Q020",
+          "mechanic": "bubble-pop"
+        }
+      ],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Hamburger + pizza + soda.png",
+      "gitBlob": "d33e5ceffbf84e6eaeca65053fd635e5248c2dd8",
+      "bytes": 2013973,
+      "conceptHint": null,
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Hands — Mão.png",
+      "gitBlob": "9943c09e6eb7402a43bf2d618337a10e3ad1a84e",
+      "bytes": 2141495,
+      "conceptHint": "hands",
+      "explicitAuditBindings": [
+        {
+          "mediaId": "IMG-Y1M05-Q001-HANDS",
+          "questionId": "Y1M05-Q001",
+          "mechanic": "target-shooter"
+        }
+      ],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Have breakfast.png",
+      "gitBlob": "0cc6cc55b5f9c4b966088c0f4c5a76f6e2472d71",
+      "bytes": 1847243,
+      "conceptHint": "have breakfast",
+      "explicitAuditBindings": [
+        {
+          "mediaId": "IMG-V11-2B-BB358396CB4047B1",
+          "questionId": "Y5M02-Q020",
+          "mechanic": "bubble-pop"
+        }
+      ],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Have lunch — 12-30.png",
+      "gitBlob": "aa67ed6d800d3aff6ceae7a3622c27216ed8d331",
+      "bytes": 2061768,
+      "conceptHint": null,
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Head — Cabeça.png",
+      "gitBlob": "68f4a3d9e3b1ad820faa6a22dd25e699e25d8ca6",
+      "bytes": 2009888,
+      "conceptHint": "head",
+      "explicitAuditBindings": [
+        {
+          "mediaId": "IMG-Y1M05-Q001-HEAD",
+          "questionId": "Y1M05-Q001",
+          "mechanic": "target-shooter"
+        }
+      ],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/I don't like pizza.png",
+      "gitBlob": "6cbff573fec68e03a54ac989d64083ecfe3e4695",
+      "bytes": 2248265,
+      "conceptHint": "I don't like pizza",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/I have a cold — Estou resfriado(a).png",
+      "gitBlob": "c639f1d8ef89850d5b0bd522adb893f70a3759c6",
+      "bytes": 2226192,
+      "conceptHint": "I have a cold",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/I have a headache — Estou com dor de cabeça.png",
+      "gitBlob": "46ef14d449db6dc12e1e38b4422adda7f44697e6",
+      "bytes": 2551765,
+      "conceptHint": "I have a headache",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/I like apples.png",
+      "gitBlob": "2b26bad293f231330f254c87812c03fc0157b8ba",
+      "bytes": 2287223,
+      "conceptHint": "I like apples",
+      "explicitAuditBindings": [
+        {
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "questionId": "Y3M06-Q003",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "questionId": "Y3M06-Q004",
+          "mechanic": "target-shooter"
+        },
+        {
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "questionId": "Y3M06-Q013",
+          "mechanic": "target-shooter"
+        },
+        {
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "questionId": "Y4M02-Q020",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "questionId": "Y4M05-Q017",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "questionId": "Y5M01-Q015",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "questionId": "Y5M02-Q002",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "questionId": "Y5M02-Q004",
+          "mechanic": "target-shooter"
+        },
+        {
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "questionId": "Y5M02-Q007",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "questionId": "Y5M02-Q012",
+          "mechanic": "target-shooter"
+        },
+        {
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "questionId": "Y5M02-Q014",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "questionId": "Y5M02-Q017",
+          "mechanic": "target-shooter"
+        }
+      ],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Imagem do ChatGPT 2 de nov. de 2026, 16_57_53.png",
+      "gitBlob": "f4744d38802e526be62c0babf5cefd14f6046cc1",
+      "bytes": 2324293,
+      "conceptHint": null,
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/January.png",
+      "gitBlob": "d780041575eff16edf07ddee69a4e4c7cc1b2a92",
+      "bytes": 1785993,
+      "conceptHint": "January",
+      "explicitAuditBindings": [
+        {
+          "mediaId": "IMG-V11-2B-5B7C9682B340445E",
+          "questionId": "Y4M03-Q001",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-5B7C9682B340445E",
+          "questionId": "Y4M03-Q007",
+          "mechanic": "target-shooter"
+        },
+        {
+          "mediaId": "IMG-V11-2B-5B7C9682B340445E",
+          "questionId": "Y4M03-Q013",
+          "mechanic": "bubble-pop"
+        }
+      ],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/July.png",
+      "gitBlob": "004f784b0ef473000ea2ede96c084c2a223d116f",
+      "bytes": 2482760,
+      "conceptHint": "July",
+      "explicitAuditBindings": [
+        {
+          "mediaId": "IMG-V11-2B-26A528ACC06EB249",
+          "questionId": "Y4M03-Q007",
+          "mechanic": "target-shooter"
+        }
+      ],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/June.png",
+      "gitBlob": "271025ec0323bf256b72071003d280a23c2a3065",
+      "bytes": 1851034,
+      "conceptHint": "June",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/March.png",
+      "gitBlob": "5b79b17a7492a9ced7196674b34b77434e9756bb",
+      "bytes": 1886350,
+      "conceptHint": "March",
+      "explicitAuditBindings": [
+        {
+          "mediaId": "IMG-V11-2B-26BD691DE7A92741",
+          "questionId": "Y4M03-Q001",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-26BD691DE7A92741",
+          "questionId": "Y4M03-Q007",
+          "mechanic": "target-shooter"
+        },
+        {
+          "mediaId": "IMG-V11-2B-26BD691DE7A92741",
+          "questionId": "Y4M03-Q013",
+          "mechanic": "bubble-pop"
+        }
+      ],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/May.png",
+      "gitBlob": "349211a468f23011061b53af0e0f864d8dee6db2",
+      "bytes": 1824496,
+      "conceptHint": "May",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Maya — Personal profile.png",
+      "gitBlob": "2f2d10fd4a968488c68e8c72184f15ff91b8228d",
+      "bytes": 2464250,
+      "conceptHint": null,
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Menina sorridente com maçã e joinha.png",
+      "gitBlob": "9f63ae15abf34876e8b996936af033cd44b72446",
+      "bytes": 2245555,
+      "conceptHint": null,
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/November.png",
+      "gitBlob": "1874565beea4ca2e16087a4ef5b00277046dab35",
+      "bytes": 2455731,
+      "conceptHint": "November",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Nurse — Enfermeiro(a).png",
+      "gitBlob": "15939864930e786b452683cbe6a2eda66cc7837a",
+      "bytes": 1409968,
+      "conceptHint": "nurse",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/October.png",
+      "gitBlob": "336f4be7583e30062597455f2f3c77be5b6a0b1b",
+      "bytes": 2519160,
+      "conceptHint": "October",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Parents — Responsáveis.png",
+      "gitBlob": "e767bab46c52d3e334b46e070c9267fbb1568f10",
+      "bytes": 2549034,
+      "conceptHint": "parents",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Pilot — Piloto.png",
+      "gitBlob": "334a114c86253417b108a14f6e06ef80ab13578e",
+      "bytes": 1957660,
+      "conceptHint": "pilot",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Pizza + apple + soda.png",
+      "gitBlob": "52e7a572f0f2f49a9e4fcf54c8e3b2eddef47fb4",
+      "bytes": 1892140,
+      "conceptHint": null,
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/September.png",
+      "gitBlob": "88685729f037ab4ca16686fd26f762dc0a3b3e69",
+      "bytes": 2589141,
+      "conceptHint": "September",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Spring.png",
+      "gitBlob": "163d2cf5b9afdeb28fed6cd68662dc3f9dfafb9f",
+      "bytes": 2576190,
+      "conceptHint": "spring",
+      "explicitAuditBindings": [
+        {
+          "mediaId": "IMG-V11-2B-F32FCC70EC5FA01C",
+          "questionId": "Y4M03-Q006",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-F32FCC70EC5FA01C",
+          "questionId": "Y4M03-Q013",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-F32FCC70EC5FA01C",
+          "questionId": "Y4M03-Q016",
+          "mechanic": "target-shooter"
+        }
+      ],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Teacher — Professor(a).png",
+      "gitBlob": "e976152a52d32e44ad2b0709c086fc6484a92247",
+      "bytes": 2341283,
+      "conceptHint": "teacher",
+      "explicitAuditBindings": [
+        {
+          "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+          "questionId": "Y5M03-Q001",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+          "questionId": "Y5M03-Q003",
+          "mechanic": "target-shooter"
+        },
+        {
+          "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+          "questionId": "Y5M03-Q006",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+          "questionId": "Y5M03-Q011",
+          "mechanic": "target-shooter"
+        },
+        {
+          "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+          "questionId": "Y5M03-Q013",
+          "mechanic": "bubble-pop"
+        },
+        {
+          "mediaId": "IMG-V11-2B-BD1D2AA4CD5BDE27",
+          "questionId": "Y5M03-Q016",
+          "mechanic": "target-shooter"
+        }
+      ],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Two teachers — Dois professores.png",
+      "gitBlob": "83032ab0e739bcb55382f51dce5932bbb73c5412",
+      "bytes": 2295930,
+      "conceptHint": null,
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/Veterinarian — Veterinário(a).png",
+      "gitBlob": "fea9910263b5dc72e80e7ff68ad559e7487058e2",
+      "bytes": 2029773,
+      "conceptHint": "veterinarian",
+      "explicitAuditBindings": [],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    },
+    {
+      "path": "Imagens Ilustrativa/april.png",
+      "gitBlob": "5856c9f3cc1b15c6a79e467d17b13303ce1f0d89",
+      "bytes": 1813894,
+      "conceptHint": "April",
+      "explicitAuditBindings": [
+        {
+          "mediaId": "IMG-V11-2B-AB542D436FC85665",
+          "questionId": "Y4M03-Q001",
+          "mechanic": "bubble-pop"
+        }
+      ],
+      "decision": "PREFLIGHT_ONLY_NOT_APPROVED",
+      "visualReviewRequired": true,
+      "sha256": null
+    }
+  ]
+}
