@@ -23,6 +23,7 @@ on:
       - "qa/duduq-phase2-food-qa.mjs"
       - "qa/verify-phase2-food-browser.mjs"
       - "qa/verify-phase2-directed-interactions.mjs"
+      - "qa/audit-phase2-new-source-delta.mjs"
       - "qa/verify-phase2-source-browser.mjs"
       - "qa/verify-farm-animal-source-batch-browser.mjs"
       - "qa/replace-safe-vocabulary-from-assets-duduq.mjs"
@@ -682,6 +683,13 @@ jobs:
           ref: 50fb80a89a5779d73f81c96aab35f6e86193d769
           path: assets-source
           persist-credentials: false
+      - name: Checkout newly uploaded Assets-DuduQ source at immutable SHA for read-only audit
+        uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: 7c9cc83c33d2fe41b27e5bbeb7facc7fed37595f
+          path: assets-source-expansion
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -696,6 +704,23 @@ jobs:
           echo "$BASELINE_SHA256  $RUNNER_TEMP/phase2-food-baseline/duduq-phase2-safe-contrast-qa.tar.gz" | sha256sum --check
           tar -xzf "$RUNNER_TEMP/phase2-food-baseline/duduq-phase2-safe-contrast-qa.tar.gz" -C dist-pages
           cp -a dist-pages/. qa/dist-pages-food-candidate/
+      - name: Audit 39 new source PNGs against all 600 immutable compiled questions (read-only)
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/audit-phase2-new-source-delta.mjs
+          node qa/audit-phase2-new-source-delta.mjs qa/dist-pages-food-candidate assets-source-expansion
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          const r=JSON.parse(readFileSync('qa/results/phase2-new-source-preflight.json'));
+          assert.equal(r.verifiedContracts,600);
+          assert.equal(r.sourcePngsInspected,39);
+          assert.equal(r.sourceCommit,'7c9cc83c33d2fe41b27e5bbeb7facc7fed37595f');
+          assert.equal(r.productionDeployed,false);
+          assert.equal(r.humanPedagogicalApproval,false);
+          console.log('NEW_SOURCE_INVENTORY_ONLY_NO_BINDINGS_APPLIED');
+          NODE
       - name: Reapply two independently verified banana IDs in the SAME isolated candidate
         shell: bash
         run: |
@@ -841,6 +866,7 @@ jobs:
           compression-level: 0
           path: |
             qa/results/phase2-combined-qa.json
+            qa/results/phase2-new-source-preflight.json
             qa/results/phase2-banana-preflight.json
             qa/results/phase2-banana-qa-patch.json
             qa/results/phase2-banana-browser.json
