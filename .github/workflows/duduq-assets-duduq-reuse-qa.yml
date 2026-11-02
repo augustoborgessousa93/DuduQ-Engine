@@ -656,7 +656,7 @@ jobs:
             /tmp/duduq-banana-pages.log
 
   phase2-food-compiled-qa:
-    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[food-preflight]') }}
+    if: ${{ github.event_name == 'push' && (contains(github.event.head_commit.message, '[food-preflight]') || contains(github.event.head_commit.message, '[phase2-qa]')) }}
     name: Phase 2 food - isolated compiled media QA, no production deploy
     runs-on: ubuntu-latest
     timeout-minutes: 55
