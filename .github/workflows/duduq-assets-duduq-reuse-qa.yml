@@ -19,6 +19,8 @@ on:
       - "qa/replace-phase2-source-reuse-from-assets-duduq.mjs"
       - "qa/duduq-phase2-banana-preflight.mjs"
       - "qa/verify-phase2-banana-browser.mjs"
+      - "qa/duduq-phase2-food-qa.mjs"
+      - "qa/verify-phase2-food-browser.mjs"
       - "qa/verify-phase2-source-browser.mjs"
       - "qa/verify-farm-animal-source-batch-browser.mjs"
       - "qa/replace-safe-vocabulary-from-assets-duduq.mjs"
@@ -650,3 +652,141 @@ jobs:
             qa/results/duduq-phase2-banana-qa.sha256
             qa/results/phase2-banana-browser/*.png
             /tmp/duduq-banana-pages.log
+
+  phase2-food-compiled-qa:
+    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[food-preflight]') }}
+    name: Phase 2 food - isolated compiled media QA, no production deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    permissions:
+      contents: read
+    env:
+      CI: "true"
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+      BASE_URL: http://127.0.0.1:4175
+      SOURCE_COMMIT: 50fb80a89a5779d73f81c96aab35f6e86193d769
+      BASELINE_TAG: duduq-phase2-safe-contrast-qa-20261102
+      BASELINE_SHA256: 63e145aa13b4cc1b07a4549eadd7b5dee31d259340bef90b3392a6a48a6cd23f
+    steps:
+      - name: Checkout QA code without persistent credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout pinned original media source read-only
+        uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: 50fb80a89a5779d73f81c96aab35f6e86193d769
+          path: assets-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Recover exact approved Phase 2 production-equivalent baseline
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test "$(git -C assets-source rev-parse HEAD)" = "$SOURCE_COMMIT"
+          test -z "$(git -C assets-source status --porcelain)"
+          mkdir -p "$RUNNER_TEMP/phase2-food-baseline" dist-pages qa/dist-pages-food-candidate qa/results
+          gh release download "$BASELINE_TAG" -R "$GITHUB_REPOSITORY" --pattern duduq-phase2-safe-contrast-qa.tar.gz --dir "$RUNNER_TEMP/phase2-food-baseline"
+          echo "$BASELINE_SHA256  $RUNNER_TEMP/phase2-food-baseline/duduq-phase2-safe-contrast-qa.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/phase2-food-baseline/duduq-phase2-safe-contrast-qa.tar.gz" -C dist-pages
+          cp -a dist-pages/. qa/dist-pages-food-candidate/
+      - name: Audit four new food concepts against exact compiled 600-question graph
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/duduq-phase2-food-qa.mjs
+          node qa/duduq-phase2-food-qa.mjs qa/dist-pages-food-candidate assets-source
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          const r=JSON.parse(readFileSync('qa/results/phase2-food-preflight.json'));
+          assert.equal(r.verifiedQuestionContracts,600);
+          assert.equal(r.eligibleIds+r.blockedIds,r.candidateIds);
+          assert.equal(r.productionDeployed,false);
+          console.log(JSON.stringify({eligible:r.eligibleIds,blocked:r.blockedIds,modules:r.affectedModules}));
+          NODE
+      - name: Patch only fully explicit provisional bindings in disposable QA copy
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          ELIGIBLE="$(node -p "require('./qa/results/phase2-food-preflight.json').eligibleIds")"
+          if [ "$ELIGIBLE" -eq 0 ]; then
+            echo "NO_SAFE_FOOD_BINDINGS_NO_MUTATION"
+            exit 0
+          fi
+          node qa/duduq-phase2-food-qa.mjs qa/dist-pages-food-candidate assets-source --apply
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import path from 'node:path';
+          const hash=b=>createHash('sha256').update(b).digest('hex');
+          const before='dist-pages',after='qa/dist-pages-food-candidate';
+          const p=JSON.parse(readFileSync('qa/results/phase2-food-qa-patch.json'));
+          const parse=s=>new Map(s.trimEnd().split(/\r?\n/).map(l=>{const i=l.lastIndexOf(' ');return [l.slice(0,i),l.slice(i+1)]}));
+          const a=parse(readFileSync(path.join(before,'.duduq-pages-manifest'),'utf8'));
+          const b=parse(readFileSync(path.join(after,'.duduq-pages-manifest'),'utf8'));
+          const registry='content/english/media/media-registry.json';
+          assert.equal(b.size,a.size+p.images.length);
+          for(const [rel,digest] of a){
+            if(rel!==registry)assert.equal(b.get(rel),digest,'UNEXPECTED_MUTATION:'+rel);
+            assert.equal(hash(readFileSync(path.join(after,rel))),b.get(rel),'BAD_SHA:'+rel);
+          }
+          for(const img of p.images)assert.equal(hash(readFileSync(path.join(after,img.path))),img.sha256);
+          assert.equal(p.questionsChanged,0);assert.equal(p.answerKeysChanged,0);
+          assert.equal(p.audioChanged,0);assert.equal(p.mechanicsChanged,0);
+          console.log(JSON.stringify({QA_ONLY:true,mediaIds:p.changedMediaIds,images:p.images.length,questions:600}));
+          NODE
+      - name: Real mobile and desktop Chromium QA for changed food questions
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          ELIGIBLE="$(node -p "require('./qa/results/phase2-food-preflight.json').eligibleIds")"
+          if [ "$ELIGIBLE" -eq 0 ]; then
+            echo "NO_ELIGIBLE_BINDINGS_NO_BROWSER"
+            exit 0
+          fi
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev qa/dist-pages-food-candidate --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 > /tmp/duduq-food-pages.log 2>&1 &
+          echo $! > /tmp/duduq-food-pages.pid
+          for i in {1..40}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then break; fi
+            if ! kill -0 "$(cat /tmp/duduq-food-pages.pid)" 2>/dev/null; then
+              cat /tmp/duduq-food-pages.log; exit 1
+            fi
+            sleep 2
+          done
+          node --check qa/verify-phase2-food-browser.mjs
+          node qa/verify-phase2-food-browser.mjs
+      - name: Retain isolated QA package only if visual and immutable-contract gates pass
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          if [ ! -f qa/results/phase2-food-qa-patch.json ]; then
+            echo "NO_PATCH_NO_PACKAGE"; exit 0
+          fi
+          test "$(node -p "require('./qa/results/phase2-food-browser.json').status")" = "PASS_VISUAL_GATE_QA_ONLY"
+          tar -czf qa/results/duduq-phase2-food-qa.tar.gz -C qa/dist-pages-food-candidate .
+          (cd qa/results && sha256sum duduq-phase2-food-qa.tar.gz > duduq-phase2-food-qa.sha256)
+          echo "FOOD_QA_ARTIFACT_CREATED_NOT_RELEASED_NOT_DEPLOYED"
+      - name: Preserve compiled-graph decisions, visual evidence and candidate for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-phase2-food-qa-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          compression-level: 0
+          path: |
+            qa/results/phase2-food-preflight.json
+            qa/results/phase2-food-qa-patch.json
+            qa/results/phase2-food-browser.json
+            qa/results/phase2-food-browser/*.png
+            qa/results/duduq-phase2-food-qa.tar.gz
+            qa/results/duduq-phase2-food-qa.sha256
+            /tmp/duduq-food-pages.log
