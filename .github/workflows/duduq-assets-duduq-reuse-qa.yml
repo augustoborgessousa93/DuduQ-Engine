@@ -50,7 +50,7 @@ concurrency:
 
 jobs:
   isolated-v26-media-reuse:
-    if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[phase2]') }}
+    if: ${{ github.ref_name != 'qa/duduq-phase2-banana-preflight-20261102' && (github.event_name != 'push' || !contains(github.event.head_commit.message, '[phase2]')) }}
     name: Inventory, guarded import and real-browser Y1M04 verification
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -254,7 +254,7 @@ jobs:
           echo "This workflow builds and serves only an ephemeral local Pages candidate; it does not authenticate, upload, deploy, merge or change production."
           echo "Imported assets remain temporary and pedagogical QA pending until owner review."
   pig-exact-source-qa:
-    if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[phase2]') }}
+    if: ${{ github.ref_name != 'qa/duduq-phase2-banana-preflight-20261102' && (github.event_name != 'push' || !contains(github.event.head_commit.message, '[phase2]')) }}
     name: One exact pig PNG to 3 media IDs and 7 Y2M05 questions
     runs-on: ubuntu-latest
     timeout-minutes: 55
@@ -514,7 +514,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 35
     permissions:
-      contents: read
+      contents: write
     env:
       GH_TOKEN: ${{ github.token }}
       DUDUQ_QA_ONLY: "1"
@@ -620,6 +620,22 @@ jobs:
           done
           node --check qa/verify-phase2-banana-browser.mjs
           node qa/verify-phase2-banana-browser.mjs
+      - name: Retain one immutable QA prerelease after 600-contract and visual gates
+        shell: bash
+        env:
+          QA_TAG: duduq-phase2-banana-qa-20261102
+        run: |
+          set -Eeuo pipefail
+          test "$(node -p "require('./qa/results/phase2-banana-qa-patch.json').changedMediaIds")" = "2"
+          test "$(node -p "require('./qa/results/phase2-banana-browser.json').status")" = "PASS_VISUAL_GATE_QA_ONLY"
+          if gh release view "$QA_TAG" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "::error::QA_PRERELEASE_ALREADY_EXISTS"; exit 1
+          fi
+          tar -czf "$RUNNER_TEMP/duduq-phase2-banana-qa.tar.gz" -C qa/dist-pages-banana-candidate .
+          (cd "$RUNNER_TEMP" && sha256sum duduq-phase2-banana-qa.tar.gz > duduq-phase2-banana-qa.sha256)
+          cp "$RUNNER_TEMP/duduq-phase2-banana-qa.sha256" qa/results/
+          gh release create "$QA_TAG" "$RUNNER_TEMP/duduq-phase2-banana-qa.tar.gz" "$RUNNER_TEMP/duduq-phase2-banana-qa.sha256" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "DUDUQ Phase 2 banana - 2 bindings / 4 questions QA candidate" --notes "QA-only immutable candidate. Two verified banana bindings, four affected questions, 600 unchanged question contracts, 8/8 real-browser visibility checks on mobile and desktop. Bubble Pop shared ID and implicit-semantic ID deliberately held. Not approved for production; no Cloudflare deploy." --prerelease
+          echo "QA_PRERELEASE_CREATED_WITHOUT_PRODUCTION_DEPLOY"
       - name: Preserve QA-only evidence; no release, preview or production deploy
         if: always()
         uses: actions/upload-artifact@v4
@@ -631,5 +647,6 @@ jobs:
             qa/results/phase2-banana-preflight.json
             qa/results/phase2-banana-qa-patch.json
             qa/results/phase2-banana-browser.json
+            qa/results/duduq-phase2-banana-qa.sha256
             qa/results/phase2-banana-browser/*.png
             /tmp/duduq-banana-pages.log
