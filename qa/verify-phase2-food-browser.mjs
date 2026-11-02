@@ -37,8 +37,8 @@ try{
   const context=await browser.newContext({viewport,deviceScaleFactor:1});
   for(const questionId of patch.changedQuestionIds){
    const y=Number(questionId[1]),mm=questionId.slice(3,5);
-   const q=JSON.parse(await readFile(path.join(root,'content/english/year-'+y+'/module-'+mm+'/questions.json'),'utf8'))
-    .then(x=>x.items.find(item=>item.item_id===questionId));
+   const questionData=JSON.parse(await readFile(path.join(root,'content/english/year-'+y+'/module-'+mm+'/questions.json'),'utf8'));
+   const q=questionData.items.find(item=>item.item_id===questionId);
    assert(q?.mechanicId,'MECHANIC_MISSING:'+questionId);
    assert.notEqual(q.mechanicId,'bubble-pop','KNOWN_EMPTY_BUBBLE_POP_NOT_ELIGIBLE');
    const slug=q.mechanicId.startsWith('smart-sentence')?'smart-sentence':q.mechanicId;
