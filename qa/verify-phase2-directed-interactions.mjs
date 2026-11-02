@@ -53,6 +53,15 @@ try{
     try{await audio.click({timeout:5000});entry.audioControlClicked=true}
     catch(e){entry.limitations.push('AUDIO_CONTROL_NOT_CLICKABLE:'+String(e.message||e).slice(0,160))}
    }else entry.limitations.push('NO_VISIBLE_AUDIO_CONTROL');
+   // The required instruction narration locks ALL mechanic input until READY.
+   // Clicking during audio playback produces a false pointer-occlusion diagnosis.
+   try{
+    await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:35000});
+    entry.audioGateReady=true;
+   }catch{
+    entry.limitations.push('REQUIRED_AUDIO_GATE_NOT_READY');
+    continue;
+   }
    // A click is not proof of audio playback or pronunciation quality.
    const selector=Object.entries(selectors).find(([name])=>mechanic===name||mechanic.startsWith(name+'-'))?.[1];
    if(!selector){
@@ -68,7 +77,9 @@ try{
      await destination.waitFor({state:'visible',timeout:10000});
      const from=await source.boundingBox(),to=await destination.boundingBox();
      assert(from&&to&&from.width>15&&to.width>15,'DRAG_SOURCE_OR_TARGET_NOT_VISIBLE');
-     const start={x:from.x+from.width/2,y:from.y+from.height/2};
+     // Audio-item centers contain a separate play button that intentionally
+     // cancels drag; begin on the card surface, away from that control.
+     const start={x:from.x+from.width*0.2,y:from.y+from.height/2};
      const end={x:to.x+to.width/2,y:to.y+to.height/2};
      const before=await destination.locator('[data-item-id]').count();
      await page.mouse.move(start.x,start.y,{steps:3});
@@ -83,15 +94,6 @@ try{
      if(!entry.inputObserved)entry.limitations.push('POINTER_DRAG_DID_NOT_PROVE_PLACEMENT');
     }catch(e){entry.limitations.push('DRAG_PROBE_ERROR:'+String(e.message||e).slice(0,220))}
     continue;
-   }
-   if(mechanic==='target-shooter'){
-    try{
-     await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:30000});
-     entry.audioGateReady=true;
-    }catch{
-     entry.limitations.push('AUDIO_GATE_NOT_READY_AFTER_30_SECONDS');
-     continue;
-    }
    }
    const targets=page.locator(selector);
    const deadline=Date.now()+9000;
