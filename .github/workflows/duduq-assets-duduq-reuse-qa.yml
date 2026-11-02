@@ -1143,3 +1143,73 @@ jobs:
           path: |
             qa/results/phase2-mobile-three.json
             qa/results/phase2-mobile-three-*.png
+
+
+  phase2-persist-safe-candidate:
+    if: ${{ github.ref_name == 'qa/duduq-phase2-source-expansion-20261102' && github.event_name == 'push' && contains(github.event.head_commit.message, '[safe-candidate]') }}
+    name: Persist safe compiled media candidate with ONLY proven brother binding held
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    permissions:
+      contents: read
+      actions: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Reuse original compiled candidate + evidence without rebuilding game
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/phase2-prior qa/dist-pages-food-candidate qa/results
+          gh run download 41542079899 --repo augustoborgessousa93/DuduQ-Engine \
+            --name duduq-phase2-combined-food-banana-qa-41542079899 \
+            --dir /tmp/phase2-prior
+          TAR="$(find /tmp/phase2-prior -name duduq-phase2-integrated-unapproved.tar.gz -print -quit)"
+          test -n "$TAR"
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+          for name in phase2-banana-qa-patch.json phase2-food-qa-patch.json \
+              phase2-new-source-qa-patch.json phase2-multilingual-source-qa-patch.json \
+              phase2-new-source-browser.json phase2-multilingual-source-preflight.json; do
+            SRC="$(find /tmp/phase2-prior -name "$name" -print -quit)"
+            test -n "$SRC"
+            cp "$SRC" "qa/results/$name"
+          done
+          node --check qa/hold-phase2-unproven-brother.mjs
+          node qa/hold-phase2-unproven-brother.mjs qa/dist-pages-food-candidate
+      - name: Archive and hash SAFE unapproved compiled candidate for review
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          tar -czf qa/results/duduq-phase2-safe-141-qa-candidate.tar.gz \
+            -C qa/dist-pages-food-candidate .
+          (cd qa/results && sha256sum duduq-phase2-safe-141-qa-candidate.tar.gz \
+            > duduq-phase2-safe-141-qa-candidate.sha256)
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          const r=JSON.parse(readFileSync('qa/results/phase2-persisted-visual-hold.json','utf8'));
+          assert.equal(r.changedMediaIds,141);
+          assert.equal(r.verifiedContracts,600);
+          assert.equal(r.heldMediaIds.length,1);
+          assert.equal(r.productionDeployed,false);
+          assert.equal(r.releaseApproved,false);
+          console.log('SAFE_UNAPPROVED_COMPILED_CANDIDATE='+JSON.stringify(r));
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: duduq-phase2-safe-141-ids-unapproved-candidate
+          path: |
+            qa/results/phase2-persisted-visual-hold.json
+            qa/results/phase2-new-source-qa-patch.json
+            qa/results/duduq-phase2-safe-141-qa-candidate.tar.gz
+            qa/results/duduq-phase2-safe-141-qa-candidate.sha256
+          retention-days: 90
+          if-no-files-found: error
+          compression-level: 0
