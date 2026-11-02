@@ -1072,3 +1072,74 @@ jobs:
           name: duduq-phase2-only-three-failures
           path: qa-diag/only-three-failures.json
           retention-days: 60
+
+
+  phase2-mobile-three-reuse:
+    if: ${{ github.ref_name == 'qa/duduq-phase2-source-expansion-20261102' && github.event_name == 'push' && contains(github.event.head_commit.message, '[mobile-three-qa]') }}
+    name: Validate only three remaining Bubble Pop mobile cases using prior QA build
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: read
+      actions: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BASE_URL: http://127.0.0.1:4175
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Reuse exact unchanged previous QA media package, do NOT rebuild 600 questions
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/phase2-prev qa/dist-pages-food-candidate qa/results
+          gh run download 41542079899 --repo augustoborgessousa93/DuduQ-Engine \
+            --name duduq-phase2-combined-food-banana-qa-41542079899 \
+            --dir /tmp/phase2-prev
+          TAR="$(find /tmp/phase2-prev -name duduq-phase2-integrated-unapproved.tar.gz -print -quit)"
+          REPORT="$(find /tmp/phase2-prev -name phase2-new-source-browser.json -print -quit)"
+          test -n "$TAR" && test -n "$REPORT"
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+          cp "$REPORT" qa/results/phase2-new-source-browser.json
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const old=JSON.parse(readFileSync('qa/results/phase2-new-source-browser.json'));
+          assert.equal(old.failed.length,3);
+          const r=readFileSync('qa/dist-pages-food-candidate/content/english/media/media-registry.json');
+          const manifest=readFileSync('qa/dist-pages-food-candidate/.duduq-pages-manifest','utf8');
+          const digest=createHash('sha256').update(r).digest('hex');
+          assert(manifest.includes('content/english/media/media-registry.json '+digest));
+          console.log('EXACT_PREVIOUS_CANDIDATE_ARCHIVE_HASH_BOUND');
+          NODE
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Three real mobile screens and natural scroll proof (no runtime edits)
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev qa/dist-pages-food-candidate --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 > /tmp/duduq-phase2-mobile.log 2>&1 &
+          echo $! > /tmp/duduq-phase2-mobile.pid
+          for i in {1..45}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then break; fi
+            if ! kill -0 "$(cat /tmp/duduq-phase2-mobile.pid)" 2>/dev/null; then
+              cat /tmp/duduq-phase2-mobile.log; exit 1
+            fi
+            sleep 2
+          done
+          node --check qa/diagnose-phase2-mobile-three.mjs
+          node qa/diagnose-phase2-mobile-three.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-targeted-three-mobile-evidence
+          retention-days: 45
+          if-no-files-found: warn
+          path: |
+            qa/results/phase2-mobile-three.json
+            qa/results/phase2-mobile-three-*.png
