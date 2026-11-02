@@ -24,6 +24,7 @@ on:
       - "qa/verify-phase2-food-browser.mjs"
       - "qa/verify-phase2-directed-interactions.mjs"
       - "qa/audit-phase2-new-source-delta.mjs"
+      - "qa/verify-phase2-new-source-browser.mjs"
       - "qa/verify-phase2-source-browser.mjs"
       - "qa/verify-farm-animal-source-batch-browser.mjs"
       - "qa/replace-safe-vocabulary-from-assets-duduq.mjs"
@@ -788,6 +789,24 @@ jobs:
           assert.equal(p.audioChanged,0);assert.equal(p.mechanicsChanged,0);
           console.log(JSON.stringify({QA_ONLY:true,mediaIds:p.changedMediaIds,images:p.images.length,questions:600}));
           NODE
+      - name: Integrate newly uploaded exact-source PNGs in SAME disposable QA candidate
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/audit-phase2-new-source-delta.mjs
+          DUDUQ_QA_ONLY=1 node qa/audit-phase2-new-source-delta.mjs qa/dist-pages-food-candidate assets-source-expansion --apply
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          const r=JSON.parse(readFileSync('qa/results/phase2-new-source-qa-patch.json'));
+          assert.equal(r.verifiedContracts,600);
+          assert(r.changedMediaIds>0,'NO_REAL_NEW_SOURCE_MEDIA_APPLIED');
+          assert.equal(r.questionsChanged,0);
+          assert.equal(r.answerKeysChanged,0);
+          assert.equal(r.audioChanged,0);
+          assert.equal(r.productionDeployed,false);
+          console.log(JSON.stringify({NEW_SOURCE_QA_ONLY:true,changedMediaIds:r.changedMediaIds,images:r.images.length,questions:r.changedQuestionCount}));
+          NODE
       - name: Real mobile and desktop Chromium QA for changed food questions
         shell: bash
         run: |
@@ -812,6 +831,8 @@ jobs:
           node qa/verify-phase2-food-browser.mjs
           node --check qa/verify-phase2-banana-browser.mjs
           DUDUQ_QA_DIST=qa/dist-pages-food-candidate node qa/verify-phase2-banana-browser.mjs
+          node --check qa/verify-phase2-new-source-browser.mjs
+          node qa/verify-phase2-new-source-browser.mjs
       - name: Probe actual pointer input on changed Phase 2 questions (not answer certification)
         shell: bash
         run: |
@@ -867,6 +888,9 @@ jobs:
           path: |
             qa/results/phase2-combined-qa.json
             qa/results/phase2-new-source-preflight.json
+            qa/results/phase2-new-source-qa-patch.json
+            qa/results/phase2-new-source-browser.json
+            qa/results/phase2-new-source-browser/*.png
             qa/results/phase2-banana-preflight.json
             qa/results/phase2-banana-qa-patch.json
             qa/results/phase2-banana-browser.json
