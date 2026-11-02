@@ -244,7 +244,7 @@ try{
          .slice(0,15).map(el=>({text:(el.innerText||'').slice(0,120),rect:rect(el)}))};
       }).catch(e=>({captureError:String(e)}));
       await writeFile(out+'/'+id+'-pointer-chain.json',JSON.stringify({contractPair:entry.verifiedContractPair,
-       attempts:entry.dragAttempts,diagnostic:entry.q011DragDiagnostic},null,2)+'\\n');
+       attempts:entry.dragAttempts,diagnostic:entry.q011DragDiagnostic},null,2)+'\n');
       try{await page.screenshot({path:out+'/'+id+'-pointer-chain.png',fullPage:true})}catch{}
      }
      if(!entry.inputObserved)entry.limitations.push('POINTER_DRAG_DID_NOT_PROVE_PLACEMENT');
