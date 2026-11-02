@@ -65,14 +65,20 @@ try{
      sourcePathsVisible:[...new Set(visible.map(img=>new URL(img.currentSrc||img.src).pathname.replace(/^\/+/,'')))]};
    },required);
    let state=await sample();
-   if(!state.visibleSourceImages){
-    try{await page.waitForFunction(paths=>[...document.images].some(img=>{
-     try{const p=new URL(img.currentSrc||img.src).pathname.replace(/^\/+/,'');
-      const b=img.getBoundingClientRect(),css=getComputedStyle(img);
-      return paths.includes(p)&&img.complete&&img.naturalWidth>0&&b.width>12&&b.height>12&&
-       css.display!=='none'&&css.visibility!=='hidden'&&Number(css.opacity)>0;
-     }catch{return false}
-    }),required,{timeout:9000,polling:250})}catch{}
+   // Wait for EVERY required source image, not merely the first loaded image.
+   // Previously, partial asynchronous image loading caused false negatives.
+   if(required.some(p=>!state.sourcePathsVisible.includes(p))){
+    try{await page.waitForFunction(paths=>paths.every(requiredPath=>
+     [...document.images].some(img=>{
+      try{
+       const p=new URL(img.currentSrc||img.src).pathname.replace(/^\\/+/, '');
+       const b=img.getBoundingClientRect(),css=getComputedStyle(img);
+       return p===requiredPath&&img.complete&&img.naturalWidth>0&&
+        b.width>12&&b.height>12&&css.display!=='none'&&
+        css.visibility!=='hidden'&&Number(css.opacity)>0;
+      }catch{return false}
+     })
+    ),required,{timeout:12000,polling:250})}catch{}
     state=await sample();
    }
    const screenshot=out+'/'+questionId+'-'+viewport.width+'.png';
