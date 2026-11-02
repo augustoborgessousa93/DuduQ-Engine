@@ -25,6 +25,7 @@ on:
       - "qa/verify-phase2-directed-interactions.mjs"
       - "qa/audit-phase2-new-source-delta.mjs"
       - "qa/verify-phase2-new-source-browser.mjs"
+      - "qa/apply-phase2-multilingual-assets.mjs"
       - "qa/verify-phase2-source-browser.mjs"
       - "qa/verify-farm-animal-source-batch-browser.mjs"
       - "qa/replace-safe-vocabulary-from-assets-duduq.mjs"
@@ -691,6 +692,13 @@ jobs:
           ref: 7c9cc83c33d2fe41b27e5bbeb7facc7fed37595f
           path: assets-source-expansion
           persist-credentials: false
+      - name: Checkout latest Assets-DuduQ upload at immutable commit for multilingual reuse
+        uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: a51e0958d0c68941701b8373ccf30acf88aaf7d0
+          path: assets-source-latest
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -807,6 +815,23 @@ jobs:
           assert.equal(r.productionDeployed,false);
           console.log(JSON.stringify({NEW_SOURCE_QA_ONLY:true,changedMediaIds:r.changedMediaIds,images:r.images.length,questions:r.changedQuestionCount}));
           NODE
+      - name: Apply multilingual exact-source matches from LATEST uploaded repository into disposable QA candidate
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/apply-phase2-multilingual-assets.mjs
+          DUDUQ_QA_ONLY=1 node qa/apply-phase2-multilingual-assets.mjs qa/dist-pages-food-candidate assets-source-latest --apply
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          const r=JSON.parse(readFileSync('qa/results/phase2-multilingual-source-qa-patch.json'));
+          assert.equal(r.sourceCommit,'a51e0958d0c68941701b8373ccf30acf88aaf7d0');
+          assert.equal(r.verifiedContracts,600);
+          assert(r.changedMediaIds>0,'LATEST_SOURCE_IMAGES_NOT_INTEGRATED');
+          assert.equal(r.answerKeysChanged,0);
+          assert.equal(r.productionDeployed,false);
+          console.log(JSON.stringify({LATEST_ASSETS_INTEGRATED_IN_QA_ONLY:true,ids:r.changedMediaIds,images:r.images.length,questions:r.changedQuestionCount}));
+          NODE
       - name: Real mobile and desktop Chromium QA for changed food questions
         shell: bash
         run: |
@@ -833,6 +858,7 @@ jobs:
           DUDUQ_QA_DIST=qa/dist-pages-food-candidate node qa/verify-phase2-banana-browser.mjs
           node --check qa/verify-phase2-new-source-browser.mjs
           node qa/verify-phase2-new-source-browser.mjs
+          DUDUQ_PHASE2_BATCH=multilingual node qa/verify-phase2-new-source-browser.mjs
       - name: Probe actual pointer input on changed Phase 2 questions (not answer certification)
         shell: bash
         run: |
@@ -891,6 +917,10 @@ jobs:
             qa/results/phase2-new-source-qa-patch.json
             qa/results/phase2-new-source-browser.json
             qa/results/phase2-new-source-browser/*.png
+            qa/results/phase2-multilingual-source-preflight.json
+            qa/results/phase2-multilingual-source-qa-patch.json
+            qa/results/phase2-multilingual-source-browser.json
+            qa/results/phase2-multilingual-source-browser/*.png
             qa/results/phase2-banana-preflight.json
             qa/results/phase2-banana-qa-patch.json
             qa/results/phase2-banana-browser.json
