@@ -96,14 +96,20 @@ for(const planned of rows){
   actualNestedReferences:found.length,explicitReferences:explicit.length,
   implicitReferences:implicit.length,checks,
   decision:safe?'ELIGIBLE_FOR_ISOLATED_QA_PATCH':'HOLD_PROVISIONAL_REVIEW_REQUIRED',
-  currentPath:current?.urlOrPath||null});
+  currentPath:current?.urlOrPath||null,
+  registryEvidence:current?{
+   kind:current.kind,semantic:current.semantic,temporary:current.temporary??null,
+   integrationStatus:current.integrationStatus??null,
+   humanResolutionStatus:current.humanResolutionStatus??null,
+   pathMatchesAudit:current.urlOrPath===row?.sourcePath
+  }:null});
 }
 const sharedId='IMG-Y1M03-Q001-BLACK';
 const shared=[...new Set((occurrences.get(sharedId)||[]).map(x=>x.questionId))].sort();
 const sharedRow=queue.queue.find(x=>x.mediaId===sharedId);
 const sharedBlack={mediaId:sharedId,queueUsage:sharedRow?.usage,
  listedQuestions:sharedRow?.exampleQuestions||[],actualQuestionIds:shared,
- actualQuestionCount:shared.length,needsAuditCorrection:shared.length!==sharedRow?.usage||
+ actualQuestionCount:shared.length,occurrenceSemantics:(occurrences.get(sharedId)||[]).map(x=>({questionId:x.questionId,semanticTarget:x.semanticTarget})),needsAuditCorrection:shared.length!==sharedRow?.usage||
  JSON.stringify(shared)!==JSON.stringify([...(sharedRow?.exampleQuestions||[])].sort())};
 const result={schemaVersion:'DUDUQ_PHASE2_BANANA_PREFLIGHT_V1',
  status:'READ_ONLY_PREFLIGHT_COMPLETE',sourceCommit:phase2.sourceCommit,
