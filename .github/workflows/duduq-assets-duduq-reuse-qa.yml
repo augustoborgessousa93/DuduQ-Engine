@@ -22,6 +22,7 @@ on:
       - "qa/verify-phase2-banana-browser.mjs"
       - "qa/duduq-phase2-food-qa.mjs"
       - "qa/verify-phase2-food-browser.mjs"
+      - "qa/verify-phase2-directed-interactions.mjs"
       - "qa/verify-phase2-source-browser.mjs"
       - "qa/verify-farm-animal-source-batch-browser.mjs"
       - "qa/replace-safe-vocabulary-from-assets-duduq.mjs"
@@ -786,6 +787,13 @@ jobs:
           node qa/verify-phase2-food-browser.mjs
           node --check qa/verify-phase2-banana-browser.mjs
           DUDUQ_QA_DIST=qa/dist-pages-food-candidate node qa/verify-phase2-banana-browser.mjs
+      - name: Probe actual pointer input on changed Phase 2 questions (not answer certification)
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/verify-phase2-directed-interactions.mjs
+          node qa/verify-phase2-directed-interactions.mjs
+          echo "POINTER_DIAGNOSTICS_ONLY_FULL_WRONG_RETRY_CORRECT_AND_AUDIO_LISTENING_STILL_PENDING"
       - name: Retain isolated QA package only if visual and immutable-contract gates pass
         shell: bash
         run: |
@@ -841,6 +849,7 @@ jobs:
             qa/results/phase2-food-qa-patch.json
             qa/results/phase2-food-browser.json
             qa/results/phase2-food-browser/*.png
+            qa/results/phase2-directed-interactions/**
             qa/results/duduq-phase2-food-qa.tar.gz
             qa/results/duduq-phase2-food-qa.sha256
             /tmp/duduq-food-pages.log
