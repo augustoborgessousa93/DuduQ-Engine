@@ -84,9 +84,11 @@ for(const planned of rows){
    current.integrationStatus!=='OFFICIAL_MEDIA_QA_PASSED_REVIEW_BRANCH'),
   usageMatches:Boolean(questionIds.length===planned.queueUsage&&
    JSON.stringify(questionIds)===JSON.stringify(expected)),
-  explicitSemanticsConsistent:explicit.every(x=>isExactPedagogicalConcept('banana',x.semanticTarget)),
-  everyQuestionHasExplicitProof:questionIds.every(id=>
-   explicit.some(x=>x.questionId===id&&isExactPedagogicalConcept('banana',x.semanticTarget)))
+  explicitSemanticsConsistent:found.length>0&&implicit.length===0&&
+   found.every(x=>isExactPedagogicalConcept('banana',x.semanticTarget)),
+  everyQuestionHasExplicitProof:questionIds.length>0&&questionIds.every(id=>
+   found.filter(x=>x.questionId===id).every(x=>
+    String(x.semanticTarget||'').trim()&&isExactPedagogicalConcept('banana',x.semanticTarget)))
  };
  const safe=Object.values(checks).every(Boolean);
  results.push({mediaId:planned.mediaId,sourceConcept:'banana',questionIds,
