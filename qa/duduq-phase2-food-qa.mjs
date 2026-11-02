@@ -26,7 +26,15 @@ const sourceSpecs=[
  {concept:'apple',file:'apple.png',blob:'a523513041f45fa01660e2e539217329d9744a4d'},
  {concept:'pear',file:'Pear - pera.png',blob:'36833a42a891ac34311228532c0043b6576d88a7'},
  {concept:'carrot',file:'carrot.png',blob:'4fa03312965af56f69e6cc603a2cf12c996858c7'},
- {concept:'papaya',file:'Papaya - mamão.png',blob:'512b8577b233e243f034806552ae2e523bea6fbf'}
+ {concept:'papaya',file:'Papaya - mamão.png',blob:'512b8577b233e243f034806552ae2e523bea6fbf'},
+ {concept:'potato',file:'Potato - batata.png',blob:'d2b66cd3d56918e3105d4a5ab75e15297a074d23'},
+ {concept:'tomato',file:'Tomato - tomate.png',blob:'2264f1613186236d6655166e2e0cffe4d57a55c0'},
+ {concept:'melon',file:'Melon - melão.png',blob:'0ec3595c300f08bd18df23816fb237af5e78e441'},
+ {concept:'jacket',file:'Jacket — Jaqueta.png',blob:'73b2c1bc562e9303e64ce1c6f563663ac61c83eb'},
+ {concept:'dress',file:'Dress — Vestido.png',blob:'f8c1d3801b5cdf014f0c131d0ce9b98a3ae3a542'},
+ {concept:'bedroom',file:'Bedroom — Quarto.png',blob:'1f5d55444fd018a8a38584bc70a0ae5314ade8f3'},
+ {concept:'bathroom',file:'Bathroom — Banheiro.png',blob:'3d56badbe196f9d5150cb17dc0c3f8a1ff3572a1'},
+ {concept:'kitchen',file:'Kitchen — Cozinha.png',blob:'2dca8e82e188ee27abb7f505275b2f1b987a2f10'}
 ];
 // Grapes deliberately excluded: a bunch of grapes is not an exact singular "grape" proof.
 const queue=(await readJson('docs/qa/media-audit-20261029/replacement-queue.json')).queue;

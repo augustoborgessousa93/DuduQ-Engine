@@ -6,6 +6,7 @@ on:
       - integration/assets-duduq-reuse-20261031
       - integration/duduq-m1-qa-consolidated-20261031
       - qa/duduq-phase2-banana-preflight-20261102
+      - qa/duduq-phase2-source-expansion-20261102
     paths:
       - ".github/workflows/duduq-assets-duduq-reuse-qa.yml"
       - ".github/workflows/duduq-independent-official-overlay-qa.yml"
@@ -52,7 +53,7 @@ concurrency:
 
 jobs:
   isolated-v26-media-reuse:
-    if: ${{ github.ref_name != 'qa/duduq-phase2-banana-preflight-20261102' && (github.event_name != 'push' || !contains(github.event.head_commit.message, '[phase2]')) }}
+    if: ${{ !startsWith(github.ref_name, 'qa/duduq-phase2-') && (github.event_name != 'push' || !contains(github.event.head_commit.message, '[phase2]')) }}
     name: Inventory, guarded import and real-browser Y1M04 verification
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -256,7 +257,7 @@ jobs:
           echo "This workflow builds and serves only an ephemeral local Pages candidate; it does not authenticate, upload, deploy, merge or change production."
           echo "Imported assets remain temporary and pedagogical QA pending until owner review."
   pig-exact-source-qa:
-    if: ${{ github.ref_name != 'qa/duduq-phase2-banana-preflight-20261102' && (github.event_name != 'push' || !contains(github.event.head_commit.message, '[phase2]')) }}
+    if: ${{ !startsWith(github.ref_name, 'qa/duduq-phase2-') && (github.event_name != 'push' || !contains(github.event.head_commit.message, '[phase2]')) }}
     name: One exact pig PNG to 3 media IDs and 7 Y2M05 questions
     runs-on: ubuntu-latest
     timeout-minutes: 55
@@ -704,7 +705,7 @@ jobs:
           node qa/duduq-phase2-banana-preflight.mjs qa/dist-pages-food-candidate assets-source --apply
           test "$(node -p "require('./qa/results/phase2-banana-qa-patch.json').changedMediaIds")" = "2"
           echo "BANANA_AND_FOOD_SHARE_ONE_QA_CANDIDATE_NO_PRODUCTION_DEPLOY"
-      - name: Audit four new food concepts against exact compiled 600-question graph
+      - name: Audit twelve exact source concepts against compiled 600-question graph
         shell: bash
         run: |
           set -Eeuo pipefail
@@ -715,6 +716,9 @@ jobs:
           import {readFileSync} from 'node:fs';
           const r=JSON.parse(readFileSync('qa/results/phase2-food-preflight.json'));
           assert.equal(r.verifiedQuestionContracts,600);
+          assert.equal(r.eligibleIds,16,'EXPANSION_MUST_ADD_TEN_EXACT_BINDINGS');
+          assert.equal(r.affectedQuestions,13,'EXPANSION_QUESTION_COUNT_MISMATCH');
+          assert.deepEqual(r.affectedModules,['Y2M06','Y3M06','Y4M05','Y4M06','Y5M05']);
           assert.equal(r.eligibleIds+r.blockedIds,r.candidateIds);
           assert.equal(r.productionDeployed,false);
           console.log(JSON.stringify({eligible:r.eligibleIds,blocked:r.blockedIds,modules:r.affectedModules}));
@@ -744,8 +748,8 @@ jobs:
           const banana=JSON.parse(readFileSync('qa/results/phase2-banana-qa-patch.json'));
           assert.equal(b.size,a.size+p.images.length+1);
           assert.equal(banana.changedMediaIds,2);
-          assert.equal(p.changedMediaIds,6);
-          assert.equal(new Set([...banana.bindings.map(x=>x.mediaId),...p.bindings.map(x=>x.mediaId)]).size,8);
+          assert.equal(p.changedMediaIds,16);
+          assert.equal(new Set([...banana.bindings.map(x=>x.mediaId),...p.bindings.map(x=>x.mediaId)]).size,18);
           assert.equal(hash(readFileSync(path.join(after,banana.assetPath))),banana.sourceSha256);
           for(const [rel,digest] of a){
             if(rel!==registry)assert.equal(b.get(rel),digest,'UNEXPECTED_MUTATION:'+rel);
@@ -798,14 +802,14 @@ jobs:
           const fv=JSON.parse(readFileSync('qa/results/phase2-food-browser.json'));
           const ids=new Set([...b.bindings.map(x=>x.mediaId),...f.bindings.map(x=>x.mediaId)]);
           const questions=new Set([...b.changedQuestionIds,...f.changedQuestionIds]);
-          assert.equal(ids.size,8);assert.equal(questions.size,7);
-          assert.equal(bv.checks,8);assert.equal(fv.checks,14);
+          assert.equal(ids.size,18);assert.equal(questions.size,13);
+          assert.equal(bv.checks,8);assert.equal(fv.checks,26);
           assert.equal(bv.status,'PASS_VISUAL_GATE_QA_ONLY');
           assert.equal(fv.status,'PASS_VISUAL_GATE_QA_ONLY');
           const report={schemaVersion:'DUDUQ_PHASE2_COMBINED_BANANA_FOOD_QA_V1',
-           status:'ISOLATED_QA_PASS_NOT_PEDAGOGICALLY_APPROVED',mediaIds:8,
-           images:5,affectedQuestions:7,affectedModules:['Y2M06','Y3M06','Y4M05'],
-           mobileDesktopVisibilityChecks:22,failedVisibilityChecks:0,
+           status:'ISOLATED_QA_PASS_NOT_PEDAGOGICALLY_APPROVED',mediaIds:18,
+           images:13,affectedQuestions:13,affectedModules:['Y2M06','Y3M06','Y4M05','Y4M06','Y5M05'],
+           mobileDesktopVisibilityChecks:34,failedVisibilityChecks:0,
            questionContractsPreserved:600,answerKeysChanged:0,audioChanged:0,
            mechanicsChanged:0,productionDeployed:false,releaseApproved:false};
           writeFileSync('qa/results/phase2-combined-qa.json',JSON.stringify(report,null,2)+'\n');
