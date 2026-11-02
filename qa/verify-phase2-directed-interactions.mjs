@@ -2,6 +2,7 @@
 /**
  * Directed, QA-only interaction reconnaissance for the actual changed Phase 2 questions.
  * This does not certify answers or audio pronunciation. It never changes the build.
+ * Q011 unresolved drag: capture passive native event chain and hit targets as QA evidence.
  */
 import assert from 'node:assert/strict';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
