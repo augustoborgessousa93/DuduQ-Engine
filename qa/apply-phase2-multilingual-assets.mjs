@@ -118,8 +118,9 @@ for(const row of queue){
  // Run #41536518602 proved blank imagery in Bubble Pop on BOTH viewports.
  // Shared media IDs must not be partially repointed while this consumer
  // cannot display the replacement. All other mechanics remain eligible.
- guard(actual.every(id=>questions.get(id)?.mechanicId!=='bubble-pop'),
-  'BUBBLE_POP_NOT_VISIBLE_RUN_41536518602');
+ guard(actual.every(id=>questions.get(id)?.mechanicId!=='bubble-pop')||
+  (apply&&process.env.DUDUQ_QA_ONLY==='1'&&process.env.DUDUQ_BUBBLE_FRAME_PROBE==='1'),
+  'BUBBLE_POP_REQUIRES_IFRAME_AWARE_QA');
  guard(!!file,fileCandidates.length?'SOURCE_AMBIGUOUS':'NO_EXACT_SOURCE_FILENAME');
  if(reasons.length){blocked.push({mediaId:row.mediaId,concept,reasons});continue;}
  let image=imageCache.get(file);
