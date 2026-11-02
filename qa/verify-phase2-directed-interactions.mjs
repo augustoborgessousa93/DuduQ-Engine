@@ -118,11 +118,11 @@ try{
        entry.drag=entry.dragAttempts[entry.dragAttempts.length-1];
        break;
       }
-      // A wrong category can legitimately lock input until feedback/retry.
+      // A wrong category can temporarily lock input without showing retry; await READY before probing the next category.
       // Recover through the visible game control; never bypass its state gate.
       let readyAgain=false;
       try{
-       await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:2200});
+       await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:12000});
        readyAgain=true;
       }catch{
        const retry=page.getByRole('button',{name:/tentar de novo|try again|tente novamente/i}).first();
@@ -163,10 +163,8 @@ try{
          dropTargets:[...document.querySelectorAll('.dnd-options-cards-group__category,[data-drop-target-id]')].filter(visible).slice(0,12).map(describe)
         };
        }).catch(e=>({captureError:String(e)}));
-       if(id==='Y3M06-Q017'){
-        await writeFile(out+'/'+id+'-failed-drop-dom.json',JSON.stringify(entry.failedDropDiagnostic,null,2)+'\n');
-        try{await page.screenshot({path:out+'/'+id+'-failed-drop.png',fullPage:true})}catch{}
-       }
+       await writeFile(out+'/'+id+'-failed-drop-dom.json',JSON.stringify(entry.failedDropDiagnostic,null,2)+'\n');
+       try{await page.screenshot({path:out+'/'+id+'-failed-drop.png',fullPage:true})}catch{}
        break;
       }
      }
