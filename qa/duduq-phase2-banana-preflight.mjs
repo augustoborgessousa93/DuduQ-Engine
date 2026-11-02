@@ -62,6 +62,9 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
  }
 }
 assert.equal(questions.size,600,'NOT_600_QUESTIONS');
+// Real Chromium QA run 41393492998: both Bubble Pop screens remained empty
+// on mobile and desktop after 9 seconds. Hold their shared media ID.
+const visuallyBlockedIds=new Set(['IMG-V11-2B-42E0B7F7C0CBAA69']);
 const rows=phase2.sourceRows.filter(x=>x.concept==='banana');
 assert.equal(rows.length,4,'BANANA_CANDIDATE_COUNT_CHANGED');
 const results=[];
@@ -87,6 +90,7 @@ for(const planned of rows){
    current.integrationStatus!=='OFFICIAL_MEDIA_QA_PASSED_REVIEW_BRANCH'),
   usageMatches:Boolean(questionIds.length===planned.queueUsage&&
    JSON.stringify(questionIds)===JSON.stringify(expected)),
+  knownVisualFailureAbsent:!visuallyBlockedIds.has(planned.mediaId),
   explicitSemanticsConsistent:found.length>0&&implicit.length===0&&
    found.every(x=>isExactPedagogicalConcept('banana',x.semanticTarget)),
   everyQuestionHasExplicitProof:questionIds.length>0&&questionIds.every(id=>
@@ -99,6 +103,8 @@ for(const planned of rows){
   actualNestedReferences:found.length,explicitReferences:explicit.length,
   implicitReferences:implicit.length,checks,
   decision:safe?'ELIGIBLE_FOR_ISOLATED_QA_PATCH':'HOLD_PROVISIONAL_REVIEW_REQUIRED',
+  visualHoldReason:visuallyBlockedIds.has(planned.mediaId)?
+   'BUBBLE_POP_EMPTY_ON_MOBILE_AND_DESKTOP_RUN_41393492998':null,
   currentPath:current?.urlOrPath||null,
   registryEvidence:current?{
    kind:current.kind,semantic:current.semantic,temporary:current.temporary??null,
