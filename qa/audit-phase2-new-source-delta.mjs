@@ -73,10 +73,13 @@ for(const asset of manifest.assets){
   const q=questions.get(binding.questionId);
   failClosed(reasons,!!q,'QUESTION_NOT_IN_COMPILED_GRAPH');
   failClosed(reasons,q?.mechanicId===binding.mechanic,'MECHANIC_DIFFERS_FROM_AUDIT');
-  const option=q?.options?.find(o=>o.mediaId===binding.mediaId&&normalize(o.semanticTarget)===normalize(asset.conceptHint));
-  // Compiled contracts can nest option arrays differently; a missing explicit
-  // option is a BLOCK, never permission to infer from filenames.
-  failClosed(reasons,!!option,'EXPLICIT_OPTION_NOT_CONFIRMED_IN_COMPILED_QUESTION');
+  // Options are nested differently across Gold Master mechanics. Verify the
+  // actual leaf references collected from the complete compiled question tree,
+  // not a hypothetical top-level q.options array.
+  const leafUsages=(usages.get(binding.mediaId)||[]).filter(o=>o.questionId===binding.questionId);
+  failClosed(reasons,leafUsages.length>0&&leafUsages.every(o=>
+    normalize(o.semanticTarget)===normalize(asset.conceptHint)),
+    'EXPLICIT_LEAF_NOT_CONFIRMED_IN_COMPILED_QUESTION');
   const occurrences=usages.get(binding.mediaId)||[];
   const actualQuestions=[...new Set(occurrences.map(o=>o.questionId))].sort();
   const auditedQuestions=[...new Set(manifest.assets.flatMap(a=>a.explicitAuditBindings.filter(b=>b.mediaId===binding.mediaId).map(b=>b.questionId)))].sort();
@@ -98,6 +101,10 @@ for(const asset of manifest.assets){
  }
 }
 const uniqueIds=new Set(candidates.map(c=>c.mediaId));
+// Show every actual blocker so the next integration pass can prioritize
+// verified missing semantics/flags without weakening any fail-closed gate.
+const reasonCounts=Object.fromEntries([...new Set(candidates.flatMap(c=>c.reasons))]
+  .sort().map(reason=>[reason,candidates.filter(c=>c.reasons.includes(reason)).length]));
 const report={schemaVersion:'DUDUQ_PHASE2_NEW_SOURCE_PREFLIGHT_V1',
  status:'INVENTORY_ONLY_NO_MEDIA_APPLIED',sourceCommit:manifest.sourceCommit,
  folderEntries:manifest.currentFolderEntries,folderDistinctGitBlobs:manifest.currentDistinctGitBlobs,
@@ -105,6 +112,7 @@ const report={schemaVersion:'DUDUQ_PHASE2_NEW_SOURCE_PREFLIGHT_V1',
  explicitAuditBindings:candidates.length,distinctCandidateMediaIds:uniqueIds.size,
  structurallyEligibleBindings:candidates.filter(c=>c.structuralEligible).length,
  blockedBindings:candidates.filter(c=>!c.structuralEligible).length,
+ blockingReasonCounts:reasonCounts,
  sourceAssets:assets,candidates,
  visualQaPassed:false,audioQaPassed:false,humanPedagogicalApproval:false,
  questionsChanged:0,answerKeysChanged:0,productionDeployed:false};
@@ -112,4 +120,5 @@ await mkdir('qa/results',{recursive:true});
 await writeFile('qa/results/phase2-new-source-preflight.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({status:report.status,sourceCommit:report.sourceCommit,
  files:assets.length,explicitBindings:candidates.length,distinctIds:uniqueIds.size,
- structural:report.structurallyEligibleBindings,blocked:report.blockedBindings,contracts:questions.size}));
+ structural:report.structurallyEligibleBindings,blocked:report.blockedBindings,
+ reasons:report.blockingReasonCounts,contracts:questions.size}));
