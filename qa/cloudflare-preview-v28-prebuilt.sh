@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# QA-preview ONLY. This script downloads a public, immutable, verified GitHub
+# Phase 2 prebuilt candidate. This script downloads a public, immutable, verified GitHub
 # release asset. It does not need a Cloudflare token or GitHub Actions secrets.
-# Production must remain on the existing release branch.
-TAG="duduq-v28-y1m02-seven-numeral-leaf-hotfix-20261101"
-NAME="duduq-v28-y1m02-seven-leaf-hotfix.tar.gz"
-SHA256="2f7c72381dbab18eeb3f2c6a9771e636cbacc46aa04232a762f13ca5730c2f0e"
+# Preview deployment first; production requires separate verified promotion.
+TAG="duduq-phase2-safe-contrast-qa-20261102"
+NAME="duduq-phase2-safe-contrast-qa.tar.gz"
+SHA256="63e145aa13b4cc1b07a4549eadd7b5dee31d259340bef90b3392a6a48a6cd23f"
 URL="https://github.com/augustoborgessousa93/DuduQ-Engine/releases/download/${TAG}/${NAME}"
 FILE="$(mktemp -t duduq-v28-XXXXXX.tar.gz)"
 trap 'rm -f "$FILE"' EXIT
 curl -fLSs --retry 3 --retry-delay 3 --connect-timeout 20 --max-time 360 "$URL" -o "$FILE"
-echo "${SHA256}  ${FILE}" | sha256sum --check --status || { echo "V28_RELEASE_TAR_SHA_CHANGED"; exit 1; }
+echo "${SHA256}  ${FILE}" | sha256sum --check --status || { echo "PHASE2_RELEASE_TAR_SHA_CHANGED"; exit 1; }
 mkdir -p dist-pages
 tar -xzf "$FILE" -C dist-pages
 test -s dist-pages/.duduq-pages-manifest
@@ -40,5 +40,5 @@ for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
  count+=20;
 }
 assert.equal(count,600,'BAD_CURRICULUM_TOTAL');
-console.log(JSON.stringify({status:'PREBUILT_V28_Y1M02_NUMERAL_LEAF_HOTFIX_READY',manifestEntries:manifest.length,questions:count,releaseApproved:false,productionDeployed:false}));
+console.log(JSON.stringify({status:'PREBUILT_PHASE2_EXACT_SOURCE_READY',manifestEntries:manifest.length,questions:count,releaseApproved:false,productionDeployed:false}));
 NODE
