@@ -1559,3 +1559,57 @@ jobs:
           name: duduq-structured-source-root-causes
           path: qa-diag/structured-blockers-and-six-failures.json
           retention-days: 30
+
+
+  phase2-find-registry-disagreement:
+    if: ${{ github.ref_name == 'qa/duduq-phase2-structured-bilingual-20261102' && github.event_name == 'push' && contains(github.event.head_commit.message, '[registry-root]') }}
+    name: Resolve compiled registry versus provisional queue mismatch before bulk reuse
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+      actions: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Compare actual compiled registry against all provisional source rows
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq-registry-root qa/dist-pages-food-candidate
+          gh run download 41546708766 --repo augustoborgessousa93/DuduQ-Engine \
+            --name duduq-phase2-safe-141-ids-unapproved-candidate \
+            --dir /tmp/duduq-registry-root
+          TAR="$(find /tmp/duduq-registry-root -name duduq-phase2-safe-141-qa-candidate.tar.gz -print -quit)"
+          test -n "$TAR"
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+          python3 - <<'PY'
+          import json,collections
+          reg=json.load(open('qa/dist-pages-food-candidate/content/english/media/media-registry.json'))
+          rows=json.load(open('docs/qa/media-audit-20261029/replacement-queue.json'))['queue']
+          index={x['mediaId']:x for x in reg['entries']}
+          examples=[]
+          aggregate=collections.Counter()
+          for r in rows:
+           if r.get('classification')!='PROVISIONAL' or r.get('kind')!='image' or r.get('semanticConflict') is not False:continue
+           c=index.get(r['mediaId'])
+           reason=[]
+           if not c:reason.append('ID_ABSENT')
+           else:
+            if c.get('kind')!='image':reason.append('KIND')
+            if c.get('urlOrPath')!=r.get('sourcePath'):reason.append('PATH')
+            if (c.get('semantic') or '').strip().lower()!=(r.get('semantic') or '').strip().lower():reason.append('SEMANTIC')
+            if not (c.get('urlOrPath') or '').endswith('.svg'):reason.append('NOT_SVG')
+           if not reason:continue
+           aggregate.update(reason)
+           if len(examples)<40:
+            examples.append({'id':r['mediaId'],'semantic':r['semantic'],'reasons':reason,
+             'queuePath':r.get('sourcePath'),'registryPath':c.get('urlOrPath') if c else None,
+             'registryKind':c.get('kind') if c else None,'registrySemantic':c.get('semantic') if c else None,
+             'registryTemporary':c.get('temporary') if c else None,'status':c.get('integrationStatus') if c else None})
+          out={'registrySize':len(reg['entries']),'queueSize':len(rows),'reasonCounts':dict(aggregate),'examples':examples}
+          print('REGISTRY_REAL_MISMATCH='+json.dumps(out,ensure_ascii=False))
+          PY
