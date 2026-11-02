@@ -164,6 +164,8 @@ try{
 const totals={questions:cases.length,mechanics:[...new Set(cases.map(x=>x.mechanic))].sort(),
  realPointerAttempts:cases.filter(x=>x.inputAttempted).length,
  observableStateChanges:cases.filter(x=>x.inputObserved).length,
+ dragTargetAttempts:cases.reduce((n,x)=>n+(x.dragAttempts?.length||0),0),
+ exactDragPlacements:cases.filter(x=>x.drag?.placed===true).length,
  targetOcclusions:cases.filter(x=>x.limitations.includes('TARGET_OCCLUDED_AT_CENTER')).length,
  pageErrors:cases.reduce((n,x)=>n+x.pageErrors.length,0),
  requestFailures:cases.reduce((n,x)=>n+x.requestFailures.length,0),
