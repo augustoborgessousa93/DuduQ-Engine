@@ -101,7 +101,7 @@ try{
      if(verifiedQ011)entry.verifiedContractPair={sourceId,targetId:verifiedTarget,evidence:'artifact-13161047415'};
      // Other questions still receive exploratory probes, NOT answer certification.
      const probeIndices=verifiedQ011?[verifiedIndex]:Array.from({length:count},(_,i)=>i);
-     if(id==='Y3M06-Q005')entry.compiledQuestionForDiagnosis=q;
+     if(id==='Y3M06-Q005'||id==='Y4M05-Q006')entry.compiledQuestionForDiagnosis=q;
      for(const i of probeIndices){
       const destination=destinations.nth(i);
       if(!await destination.isVisible().catch(()=>false))continue;
@@ -137,6 +137,17 @@ try{
        entry.drag=entry.dragAttempts[entry.dragAttempts.length-1];
        break;
       }
+      // A rejected category can leave the game READY with no feedback button.
+      // In that case try the next visible category: missing "Tentar de novo"
+      // is NOT evidence of a broken drag-drop mechanic. Y4M05-Q006's
+      // first source was probed against CLOTHES, but FOODS is also visible.
+      const gateAfterDrop=await page.locator('#game').getAttribute('data-duduq-interaction-state');
+      const sourceStillVisible=await source.isVisible().catch(()=>false);
+      entry.dragAttempts[entry.dragAttempts.length-1].gateAfterDrop=gateAfterDrop;
+      if(gateAfterDrop==='READY'&&sourceStillVisible){
+       entry.dragAttempts[entry.dragAttempts.length-1].nextCategoryProbe='READY_NO_RETRY_REQUIRED';
+       continue;
+      }
       // A wrong category can temporarily lock input without showing retry; await READY before probing the next category.
       // Recover through the visible game control; never bypass its state gate.
       let readyAgain=false;
@@ -156,6 +167,13 @@ try{
        }
       }
       if(!readyAgain){
+       // A late READY transition can happen after the retry-label timeout.
+       // Inspect the real state before treating the probe as blocked.
+       const lateGate=await page.locator('#game').getAttribute('data-duduq-interaction-state');
+       if(lateGate==='READY'&&await source.isVisible().catch(()=>false)){
+        entry.dragAttempts[entry.dragAttempts.length-1].nextCategoryProbe='LATE_READY_NO_RETRY_REQUIRED';
+        continue;
+       }
        // Capture actual DOM evidence instead of equating a missing retry label
        // with a mechanic failure. This is diagnostic only, never a PASS.
        entry.failedDropDiagnostic=await page.evaluate(()=>{
