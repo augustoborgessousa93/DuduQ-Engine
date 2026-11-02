@@ -802,7 +802,7 @@ jobs:
         run: |
           set -Eeuo pipefail
           node --check qa/audit-phase2-new-source-delta.mjs
-          DUDUQ_QA_ONLY=1 node qa/audit-phase2-new-source-delta.mjs qa/dist-pages-food-candidate assets-source-expansion --apply
+          DUDUQ_QA_ONLY=1 DUDUQ_BUBBLE_FRAME_PROBE=1 node qa/audit-phase2-new-source-delta.mjs qa/dist-pages-food-candidate assets-source-expansion --apply
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
           import {readFileSync} from 'node:fs';
@@ -821,7 +821,7 @@ jobs:
         run: |
           set -Eeuo pipefail
           node --check qa/apply-phase2-multilingual-assets.mjs
-          DUDUQ_QA_ONLY=1 node qa/apply-phase2-multilingual-assets.mjs qa/dist-pages-food-candidate assets-source-latest --apply
+          DUDUQ_QA_ONLY=1 DUDUQ_BUBBLE_FRAME_PROBE=1 node qa/apply-phase2-multilingual-assets.mjs qa/dist-pages-food-candidate assets-source-latest --apply
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
           import {readFileSync} from 'node:fs';
