@@ -6,7 +6,7 @@
  */
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {readFile, mkdir, writeFile} from 'node:fs/promises';
+import {readFile, mkdir, writeFile, rm} from 'node:fs/promises';
 import path from 'node:path';
 import {collectQuestionMediaUsages} from './media-binding-usage-guard.mjs';
 import {isExactPedagogicalConcept} from '../scripts/duduq-exact-semantic-match.mjs';
@@ -117,3 +117,103 @@ await writeFile(path.join(root,'qa/results/phase2-banana-preflight.json'),JSON.s
 console.log(JSON.stringify({status:result.status,contracts:result.verifiedQuestionContracts,
  bananaCandidates:result.candidates,eligible:result.eligibleIds,blocked:result.blockedIds,
  blackAuditNeedsCorrection:sharedBlack.needsAuditCorrection,productionDeployed:false}));
+
+/**
+ * QA-only apply mode. Uses the same complete-graph preflight above; the
+ * production package, source curriculum and approved media are immutable.
+ * Usage: DUDUQ_QA_ONLY=1 node qa/duduq-phase2-banana-preflight.mjs dist-pages assets-source --apply
+ * The result is an isolated, unapproved candidate, NOT a release.
+ */
+if(process.argv.includes('--apply')){
+ assert.equal(process.env.DUDUQ_QA_ONLY,'1','APPLY_REQUIRES_EXPLICIT_EPHEMERAL_QA');
+ assert.equal(result.verifiedQuestionContracts,600,'QUESTION_COUNT_CHANGED');
+ const eligible=results.filter(x=>x.decision==='ELIGIBLE_FOR_ISOLATED_QA_PATCH');
+ assert(eligible.length>0,'NO_SEMANTICALLY_VERIFIED_BANANA_BINDINGS');
+ assert(!manifestMap.has(imagePath),'BANANA_ASSET_ALREADY_IN_COMPILED_MANIFEST');
+ const byId=new Map(rows.map(x=>[x.mediaId,x]));
+ const selected=[];
+ for(const item of eligible){
+  const planned=byId.get(item.mediaId),current=registryMap.get(item.mediaId);
+  assert(planned&&current&&item.checks.everyQuestionHasExplicitProof&&
+   item.checks.explicitSemanticsConsistent&&item.checks.usageMatches,
+   'UNVERIFIED_BINDING:'+item.mediaId);
+  assert.equal(current.temporary,true,'MISSING_EXPLICIT_PROVISIONAL_FLAG:'+item.mediaId);
+  assert.equal(current.urlOrPath,planned.sourceFile===banana.sourceFile?
+   queue.queue.find(x=>x.mediaId===item.mediaId)?.sourcePath:null,
+   'REGISTRY_SOURCE_PATH_CHANGED:'+item.mediaId);
+  assert(current.urlOrPath.endsWith('.svg')&&current.kind==='image'&&
+   current.semantic==='banana'&&current.humanResolutionStatus!=='PEDAGOGICAL_QA_APPROVED',
+   'IMMUTABLE_OR_NON_BANANA_BINDING:'+item.mediaId);
+  selected.push({mediaId:item.mediaId,questionIds:item.questionIds,
+   previousPath:current.urlOrPath});
+ }
+ const updated=structuredClone(registry);
+ const indices=new Map(updated.entries.map((entry,i)=>[entry.mediaId,i]));
+ for(const binding of selected){
+  const index=indices.get(binding.mediaId);
+  assert(Number.isInteger(index),'MEDIA_ID_NOT_IN_REGISTRY:'+binding.mediaId);
+  const previous=updated.entries[index];
+  updated.entries[index]={...previous,status:'APPROVED',kind:'image',
+   temporary:true,integrationStatus:'CANDIDATE_PREVIEW_ONLY_PEDAGOGICAL_QA_PENDING',
+   humanResolutionStatus:'PEDAGOGICAL_QA_PENDING',
+   urlOrPath:imagePath,sha256:imageSha,
+   assets:[{path:imagePath,sha256:imageSha}],altText:'banana',
+   provenance:{provider:'Assets-DuduQ repository',
+    sourceRepository:phase2.sourceRepository,sourceCommit:phase2.sourceCommit,
+    sourcePath:banana.sourceFile,sourceGitBlob:banana.sourceGitBlob,
+    nativeWidth:png.readUInt32BE(16),nativeHeight:png.readUInt32BE(20),sha256:imageSha},
+   replacementAudit:{source:'600 compiled questions with explicit semantic proof',
+    verifiedQuestionIds:binding.questionIds,previousPath:binding.previousPath,qaOnly:true}};
+ }
+ assert.equal(updated.entries.length,registry.entries.length,'REGISTRY_ENTRY_COUNT_CHANGED');
+ const newRegistryBytes=Buffer.from(JSON.stringify(updated,null,2)+'\n');
+ const newManifestBytes=Buffer.from(manifest.trimEnd()+'\n'+
+  regRel+' '+sha256(newRegistryBytes)+'\n'); // rebuilt below to replace the old registry hash
+ const manifestLines=manifest.trimEnd().split(/\r?\n/);
+ const oldRegistryLines=manifestLines.filter(line=>line.startsWith(regRel+' '));
+ assert.equal(oldRegistryLines.length,1,'REGISTRY_MANIFEST_ENTRY_NOT_UNIQUE');
+ const newLines=manifestLines.map(line=>line.startsWith(regRel+' ')?
+  regRel+' '+sha256(newRegistryBytes):line);
+ newLines.push(imagePath+' '+imageSha);
+ const finalManifestBytes=Buffer.from(newLines.join('\n')+'\n');
+ const registryFile=path.join(dist,regRel),manifestFile=path.join(dist,'.duduq-pages-manifest');
+ const assetFile=path.join(dist,imagePath);
+ assert(assetFile.startsWith(dist+path.sep),'ASSET_PATH_OUTSIDE_QA_DIST');
+ let assetCreated=false;
+ try{
+  await mkdir(path.dirname(assetFile),{recursive:true});
+  await writeFile(assetFile,png,{flag:'wx'});assetCreated=true;
+  await writeFile(registryFile,newRegistryBytes);
+  await writeFile(manifestFile,finalManifestBytes);
+  assert.equal(sha256(await readFile(assetFile)),imageSha,'WRITTEN_PNG_MISMATCH');
+  assert.equal(sha256(await readFile(registryFile)),sha256(newRegistryBytes),'WRITTEN_REGISTRY_MISMATCH');
+  assert.equal(sha256(await readFile(manifestFile)),sha256(finalManifestBytes),'WRITTEN_MANIFEST_MISMATCH');
+  for(const [rel,digest] of manifestMap){
+   if(/^content\/english\/year-[1-5]\/module-0[1-6]\/questions\.json$/.test(rel))
+    assert.equal(sha256(await readFile(path.join(dist,rel))),digest,
+     'QUESTION_CHANGED_DURING_PATCH:'+rel);
+  }
+  const changedQuestions=[...new Set(selected.flatMap(x=>x.questionIds))].sort();
+  const applied={schemaVersion:'DUDUQ_PHASE2_BANANA_QA_PATCH_V1',
+   status:'ISOLATED_QA_PATCH_REQUIRES_PEDAGOGICAL_AND_VISUAL_APPROVAL',
+   sourceCommit:phase2.sourceCommit,sourceGitBlob:banana.sourceGitBlob,
+   sourceSha256:imageSha,assetPath:imagePath,
+   changedMediaIds:selected.length,changedQuestionCount:changedQuestions.length,
+   changedQuestionIds:changedQuestions,bindings:selected,
+   verifiedQuestionContracts:600,questionsChanged:0,answerKeysChanged:0,
+   audioChanged:0,mechanicsChanged:0,productionDeployed:false,
+   releaseApproved:false,pedagogicalQAApproved:false,
+   registrySha256:sha256(newRegistryBytes),manifestSha256:sha256(finalManifestBytes)};
+  await writeFile(path.join(root,'qa/results/phase2-banana-qa-patch.json'),
+   JSON.stringify(applied,null,2)+'\n');
+  console.log(JSON.stringify({status:applied.status,
+   changedMediaIds:applied.changedMediaIds,changedQuestions:applied.changedQuestionCount,
+   productionDeployed:false}));
+ }catch(error){
+  await writeFile(registryFile,regBytes);
+  await writeFile(manifestFile,manifest);
+  if(assetCreated)await rm(assetFile,{force:true});
+  throw error;
+ }
+}
+
