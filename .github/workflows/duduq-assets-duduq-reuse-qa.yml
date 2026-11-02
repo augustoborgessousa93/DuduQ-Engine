@@ -15,6 +15,8 @@ on:
       - "qa/prepare-assets-duduq-reuse.mjs"
       - "qa/replace-pig-from-assets-duduq.mjs"
       - "qa/replace-farm-animal-batch-from-assets-duduq.mjs"
+      - "qa/replace-phase2-source-reuse-from-assets-duduq.mjs"
+      - "qa/verify-phase2-source-browser.mjs"
       - "qa/verify-farm-animal-source-batch-browser.mjs"
       - "qa/replace-safe-vocabulary-from-assets-duduq.mjs"
       - "qa/verify-vocabulary-source-browser.mjs"
@@ -45,6 +47,7 @@ concurrency:
 
 jobs:
   isolated-v26-media-reuse:
+    if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[phase2]') }}
     name: Inventory, guarded import and real-browser Y1M04 verification
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -248,6 +251,7 @@ jobs:
           echo "This workflow builds and serves only an ephemeral local Pages candidate; it does not authenticate, upload, deploy, merge or change production."
           echo "Imported assets remain temporary and pedagogical QA pending until owner review."
   pig-exact-source-qa:
+    if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[phase2]') }}
     name: One exact pig PNG to 3 media IDs and 7 Y2M05 questions
     runs-on: ubuntu-latest
     timeout-minutes: 55
@@ -375,3 +379,128 @@ jobs:
         run: |
           echo "Only disposable compiled QA output changed. Source questions and answer keys unchanged."
           echo "The pig candidate remains PEDAGOGICAL_QA_PENDING, without merge or production deploy."
+
+  phase2-v28-source-reuse:
+    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[phase2]') }}
+    name: Phase 2 - exact source reuse on immutable V28 hotfix
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+      actions: read
+    env:
+      CI: "true"
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+      BASE_URL: http://127.0.0.1:4175
+      SOURCE_COMMIT: 50fb80a89a5779d73f81c96aab35f6e86193d769
+      BASELINE_TAG: duduq-v28-y1m02-seven-numeral-leaf-hotfix-20261101
+      BASELINE_SHA256: 2f7c72381dbab18eeb3f2c6a9771e636cbacc46aa04232a762f13ca5730c2f0e
+      PHASE2_TAG: duduq-phase2-exact-source-qa-20261102
+    steps:
+      - name: Checkout review code and pinned original image repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: 50fb80a89a5779d73f81c96aab35f6e86193d769
+          path: assets-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Recover exactly the deployed and approved V28 hotfix build
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test "$(git -C assets-source rev-parse HEAD)" = "$SOURCE_COMMIT"
+          test -z "$(git -C assets-source status --porcelain)"
+          mkdir -p "$RUNNER_TEMP/phase2-original" dist-pages
+          gh release download "$BASELINE_TAG" -R "$GITHUB_REPOSITORY" --pattern duduq-v28-y1m02-seven-leaf-hotfix.tar.gz --dir "$RUNNER_TEMP/phase2-original"
+          echo "$BASELINE_SHA256  $RUNNER_TEMP/phase2-original/duduq-v28-y1m02-seven-leaf-hotfix.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/phase2-original/duduq-v28-y1m02-seven-leaf-hotfix.tar.gz" -C dist-pages
+          test -s dist-pages/.duduq-pages-manifest
+      - name: Preflight and apply only safe, exact, previously provisional bindings
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/replace-phase2-source-reuse-from-assets-duduq.mjs
+          node qa/replace-phase2-source-reuse-from-assets-duduq.mjs assets-source
+          node qa/replace-phase2-source-reuse-from-assets-duduq.mjs assets-source --apply
+      - name: Verify every manifest hash and all 600 unchanged curricular contracts
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import path from 'node:path';
+          const root=path.resolve('dist-pages');
+          const sha=b=>createHash('sha256').update(b).digest('hex');
+          const lines=readFileSync(root+'/.duduq-pages-manifest','utf8').trimEnd().split(/\r?\n/);
+          assert(lines.length>=2709,'MANIFEST_INCOMPLETE');
+          const names=new Set();
+          for(const line of lines){
+            const pos=line.lastIndexOf(' '),rel=line.slice(0,pos),expected=line.slice(pos+1);
+            assert(pos>0&&/^[a-f0-9]{64}$/.test(expected)&&!names.has(rel),'BAD_MANIFEST_ENTRY');
+            names.add(rel);
+            const full=path.resolve(root,rel);assert(full.startsWith(root+path.sep),'UNSAFE_MANIFEST_PATH');
+            assert.equal(sha(readFileSync(full)),expected,'BAD_FILE_SHA:'+rel);
+          }
+          let n=0;
+          for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
+            const mm=String(m).padStart(2,'0'),rel='content/english/year-'+y+'/module-'+mm+'/questions.json';
+            const q=JSON.parse(readFileSync(root+'/'+rel));
+            assert.equal(q.moduleId,'Y'+y+'M'+mm);assert.equal(q.items?.length,20);
+            n+=20;
+          }
+          assert.equal(n,600);
+          const r=JSON.parse(readFileSync('qa/results/phase2-source-reuse-batch.json'));
+          assert(r.changedMediaIds>0&&r.changedMediaIds<=38,'NO_VERIFIED_PHASE2_CHANGES');
+          assert(r.images.length>0&&r.images.length<=5,'BAD_PHASE2_IMAGE_COUNT');
+          assert.equal(r.questionsChanged,0);assert.equal(r.answerKeysChanged,0);
+          assert.equal(r.releaseApproved,false);assert.equal(r.productionDeployed,false);
+          console.log(JSON.stringify({status:'PASS_PHASE2_ALL_HASHES_AND_600_CONTRACTS',entries:lines.length,mediaIds:r.changedMediaIds,images:r.images.length,questions:600,skipped:r.skipped.length}));
+          NODE
+      - name: Install real Chromium and boot the exact compiled candidate
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages > /tmp/duduq-phase2-pages.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-phase2-pages.log
+          exit 1
+      - name: Verify original PNG bytes and real mobile/tablet question rendering
+        run: |
+          node --check qa/verify-phase2-source-browser.mjs
+          node qa/verify-phase2-source-browser.mjs
+      - name: Publish ONE immutable QA package only after all gates pass
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          if gh release view "$PHASE2_TAG" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "::error::PHASE2_TAG_ALREADY_EXISTS"; exit 1
+          fi
+          tar -czf "$RUNNER_TEMP/duduq-phase2-exact-source-qa.tar.gz" -C dist-pages .
+          (cd "$RUNNER_TEMP" && sha256sum duduq-phase2-exact-source-qa.tar.gz > duduq-phase2-exact-source-qa.sha256)
+          gh release create "$PHASE2_TAG" "$RUNNER_TEMP/duduq-phase2-exact-source-qa.tar.gz" "$RUNNER_TEMP/duduq-phase2-exact-source-qa.sha256" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "DUDUQ Phase 2 - exact source QA candidate" --notes "Actual source-image replacements in V28 hotfix baseline, 600 immutable questions, hashes and real-browser QA. This is a QA-only package; not a production deploy." --prerelease
+          echo "ONE_NEW_PHASE2_QA_PACKAGE_CREATED_NO_PRODUCTION_DEPLOY"
+      - name: Retain Phase 2 audit and real-browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-phase2-exact-source-evidence-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/phase2-source-reuse-batch.json
+            qa/results/phase2-source-browser.json
+            /tmp/duduq-phase2-pages.log
