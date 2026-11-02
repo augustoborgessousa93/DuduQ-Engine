@@ -47,6 +47,40 @@ const glossary={
  'futebol':'soccer','basquete':'basketball','natacao':'swimming',
  'desenhando no parque':'drawing in the park','jogando futebol':'playing soccer'
 };
+const structuredByConcept=new Map([
+ ['one',{file:'Imagens Ilustrativa/number-01-one-um.png',blob:'69797d76b6691c5a041a1eb58a70d6b198090893'}],
+ ['two',{file:'Imagens Ilustrativa/number-02-two-dois.png',blob:'6cd661861d3c66e2e22826fd81040d97336d4a8e'}],
+ ['three',{file:'Imagens Ilustrativa/number-03-three-tres.png',blob:'35df6fa3cf3af45a92a6c4e47a1e86fd3548abd4'}],
+ ['four',{file:'Imagens Ilustrativa/number-04-four-quatro.png',blob:'c7d0f655038e7d33ea489a7a93209b9e757d4ed3'}],
+ ['five',{file:'Imagens Ilustrativa/number-05-five-cinco.png',blob:'e09e3cc58271c667ba1c3f93eb03e76e22495ce3'}],
+ ['six',{file:'Imagens Ilustrativa/number-06-six-seis.png',blob:'89e5d7c65b53c8b0afe102e42819cdff010c68b2'}],
+ ['seven',{file:'Imagens Ilustrativa/number-07-seven-sete.png',blob:'5be78da55a68ba352537e08838442cf01a13e8d9'}],
+ ['eight',{file:'Imagens Ilustrativa/number-08-eight-oito.png',blob:'604dc435bc2c26abaa71a715406fd8dcca79fcc5'}],
+ ['nine',{file:'Imagens Ilustrativa/number-09-nine-nove.png',blob:'5b5effc4d24e4c5ee24ef9f4b3387cca023191f9'}],
+ ['ten',{file:'Imagens Ilustrativa/number-10-ten-dez.png',blob:'734081fc405be227f02f6b0b4e95d8f4af2f86ec'}],
+ ['black',{file:'Imagens Ilustrativa/color-black-preto.png',blob:'e97d277f7df8fdb73b611f919fec34fca836bd8d'}],
+ ['blue',{file:'Imagens Ilustrativa/color-blue-azul.png',blob:'d1c5c6980118941b1f43131214a6dcc7d7e39761'}],
+ ['brown',{file:'Imagens Ilustrativa/color-brown-marrom.png',blob:'4ba5334007c4a8ac4ef4de3d87b03723e0523588'}],
+ ['green',{file:'Imagens Ilustrativa/color-green-verde.png',blob:'425907d66db6bd1e8fefb6846f3f17e9a86eece1'}],
+ ['red',{file:'Imagens Ilustrativa/color-red-vermelho.png',blob:'9c5fd365ad6fee630f695d2c403e6a02ba5fb4d6'}],
+ ['yellow',{file:'Imagens Ilustrativa/color-yellow-amarelo.png',blob:'d641e8582975e926fe49ea04c32f4817114f53f0'}],
+ ['backpack',{file:'Imagens Ilustrativa/school-object-backpack-mochila.png',blob:'f2f4ac58d70b8f25877e2fa3249a3bbc981e6da4'}],
+ ['eraser',{file:'Imagens Ilustrativa/school-object-eraser-borracha.png',blob:'334a1fecdf362c6a19d50edb0ccc50db68606cb9'}],
+ ['pencil case',{file:'Imagens Ilustrativa/school-object-pencil-case-estojo.png',blob:'4d55cc06cb124bfd485f5bbc52b33f7e85cdc59c'}],
+ ['pencil',{file:'Imagens Ilustrativa/school-object-pencil-lapis.png',blob:'37a383e05c3c1bff123818b171c3bb9dc4a33c11'}],
+ ['ruler',{file:'Imagens Ilustrativa/school-object-ruler-regua.png',blob:'2276abbd4f90caf142df84062c86d770ba394399'}],
+ ['bird',{file:'Imagens Ilustrativa/pet-bird-passaro.png',blob:'1128475a8de84c4dbeb613fb798164f03d432342'}],
+ ['cat',{file:'Imagens Ilustrativa/pet-cat-gato.png',blob:'a78d1430c8a62a83b52726312c10f494d6491155'}],
+ ['dog',{file:'Imagens Ilustrativa/pet-dog-cachorro.png',blob:'b2c39c9abd7e113e093151a1780cde0fc79a5d3c'}],
+ ['fish',{file:'Imagens Ilustrativa/pet-fish-peixe.png',blob:'29b60c4e87bcd6cc0a5a4f2e7b7f4fada03a01fc'}],
+ ['hamster',{file:'Imagens Ilustrativa/pet-hamster.png',blob:'c0f63853e7c1ab26360983f97c33fa2067ca1fc1'}],
+ ['rabbit',{file:'Imagens Ilustrativa/pet-rabbit-coelho.png',blob:'9421450b4ec44d4c39104d59e0e287a2b1c2ef7b'}],
+ ['turtle',{file:'Imagens Ilustrativa/pet-turtle-tartaruga.png',blob:'c7cdf176515a397825a988064103a6c01a20030f'}]
+]);
+// These 28 explicit bilingual assets are anchored to the immutable source commit.
+// White is intentionally excluded pending visibility contrast verification.
+const structuredOnly=process.env.DUDUQ_STRUCTURED_ONLY==='1';
+const heldSharedMediaIds=new Set(['IMG-V11-2B-0E55AE94BCF4CC3E']);
 const candidateNames=new Map();
 async function scan(dir,rel='Imagens Ilustrativa'){
  for(const e of await readdir(dir,{withFileTypes:true})){
@@ -95,12 +129,16 @@ assert.equal(questions.size,600,'NOT_600_CONTRACTS');
 const eligible=[],blocked=[],imageCache=new Map();
 for(const row of queue){
  if(row.classification!=='PROVISIONAL'||row.kind!=='image'||row.semanticConflict!==false)continue;
+ if(heldSharedMediaIds.has(row.mediaId))continue;
+ if(structuredOnly&&!structuredByConcept.has(norm(row.semantic)))continue;
  const current=byId.get(row.mediaId)?.entry;
  const occurrences=usages.get(row.mediaId)||[];
  const actual=[...new Set(occurrences.map(x=>x.questionId))].sort();
  const concept=norm(row.semantic),fileCandidates=[...(candidateNames.get(concept)||[])].sort();
  const exactFile=fileCandidates.filter(f=>norm(path.basename(f,'.png'))===concept);
- const file=exactFile.length===1?exactFile[0]:fileCandidates.length===1?fileCandidates[0]:null;
+ const structured=structuredByConcept.get(concept);
+ const file=structured?.file||
+  (exactFile.length===1?exactFile[0]:fileCandidates.length===1?fileCandidates[0]:null);
  const reasons=[];
  const guard=(pass,reason)=>{if(!pass)reasons.push(reason)};
  guard(!!current&&current.kind==='image'&&current.urlOrPath===row.sourcePath&&
@@ -132,9 +170,14 @@ for(const row of queue){
    bytes[24]===8&&bytes[25]===6;
   const slug=norm(path.basename(file,'.png')).replace(/[^a-z0-9]+/g,'-').slice(0,65).replace(/-+$/,'');
   const dest='content/english/assets/images/assets-duduq/auto-'+slug+'-'+sha.slice(0,12)+'.png';
-  image={sourcePath:file,sha,blob:gitBlob(bytes),dest,bytes,valid};
+  const actualBlob=gitBlob(bytes);
+  if(structured&&actualBlob!==structured.blob)
+   throw Error('PINNED_BILINGUAL_SOURCE_BLOB_MISMATCH:'+file);
+  image={sourcePath:file,sha,blob:actualBlob,dest,bytes,valid};
   imageCache.set(file,image);
  }
+ if(structured&&file!==structured.file)
+  throw Error('STRUCTURED_SOURCE_MAPPING_DRIFT:'+concept);
  if(!image.valid||integrity.has(image.dest)){
   blocked.push({mediaId:row.mediaId,concept,reasons:[!image.valid?'INVALID_OR_NONTRANSPARENT_PNG':'IMAGE_ALREADY_IN_MANIFEST']});
   continue;
