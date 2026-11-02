@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      V28_PREVIEW: https://b4a47e47.duduq-engine-13a.pages.dev
+      V28_PREVIEW: https://54a81a67.duduq-engine-13a.pages.dev
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -44,7 +44,7 @@ jobs:
             }
             throw error;
           }
-          const checks={deploymentUrl:base,compileRunId:41372781774,sourceArchiveSha256:'fba8ba2cb9e0b90ae1db51806829ddc42bbd8235e1304e267bd4172e7734bb42',routes:[],questionFiles:[],imageFiles:[],sourceMediaIds:0,releaseApproved:false,productionDeployed:false,status:'RUNNING'};
+          const checks={deploymentUrl:base,compileRunId:41373477360,sourceArchiveSha256:'63e145aa13b4cc1b07a4549eadd7b5dee31d259340bef90b3392a6a48a6cd23f',routes:[],questionFiles:[],imageFiles:[],sourceMediaIds:0,releaseApproved:false,productionDeployed:false,status:'RUNNING'};
           try{
             for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
               const mm=String(module).padStart(2,'0'),prefix='/play/english/year-'+year+'/module-'+mm+'/';
@@ -60,11 +60,11 @@ jobs:
             }
             const reg=JSON.parse((await get('/content/english/media/media-registry.json')).buffer.toString('utf8'));
             const matched=reg.entries.filter(x=>String(x.urlOrPath||'').startsWith('content/english/assets/images/assets-duduq/'));
-            assert.equal(matched.length,197,'SOURCE_MEDIA_COUNT_CHANGED');
-            const phase2Paths=new Set(['Imagens Ilustrativa/color-black-preto.png','Imagens Ilustrativa/color-white-branco.png','Imagens Ilustrativa/color-brown-marrom.png','Imagens Ilustrativa/pet-rabbit-coelho.png']);
+            assert.equal(matched.length,190,'SOURCE_MEDIA_COUNT_CHANGED');
+            const phase2Paths=new Set(['Imagens Ilustrativa/color-black-preto.png','Imagens Ilustrativa/color-brown-marrom.png','Imagens Ilustrativa/pet-rabbit-coelho.png']);
             const phase2=matched.filter(x=>phase2Paths.has(x.provenance?.sourcePath));
-            assert.equal(phase2.length,33,'PHASE2_ID_COUNT_CHANGED');
-            assert.equal(new Set(phase2.map(x=>x.urlOrPath)).size,4,'PHASE2_PNG_COUNT_CHANGED');
+            assert.equal(phase2.length,26,'PHASE2_ID_COUNT_CHANGED');
+            assert.equal(new Set(phase2.map(x=>x.urlOrPath)).size,3,'PHASE2_PNG_COUNT_CHANGED');
             checks.phase2MediaIds=phase2.length;
             checks.preexistingV28Ids=157;
             checks.sevenLeafHotfixIds=7;
@@ -76,7 +76,8 @@ jobs:
               if(prev)assert.equal(prev,e.sha256,'IMAGE_HASH_AMBIGUOUS:'+e.urlOrPath);
               else imgs.set(e.urlOrPath,e.sha256);
             }
-            assert.equal(imgs.size,25,'SOURCE_IMAGE_COUNT_CHANGED');
+            assert.equal(imgs.size,24,'SOURCE_IMAGE_COUNT_CHANGED');
+            assert(![...imgs.keys()].some(x=>x.includes('color-white-branco')),'LOW_CONTRAST_WHITE_PNG_MUST_BE_DEFERRED');
             for(const [rel,expected]of imgs){
               const route='/'+rel;
               const d=await get(route);
@@ -219,7 +220,7 @@ jobs:
           import {chromium} from 'playwright';
           import {mkdir,writeFile} from 'node:fs/promises';
           const base=process.env.V28_PREVIEW;
-          const cases=[{id:'Y1M03-Q005',concepts:['color-black-preto','color-white-branco']},
+          const cases=[{id:'Y1M03-Q005',concepts:['color-black-preto']},
             {id:'Y1M06-Q001',concepts:['pet-rabbit-coelho']}];
           const out='qa/results/phase2-live-source-visibility';
           await mkdir(out,{recursive:true});
