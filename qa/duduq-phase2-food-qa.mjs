@@ -42,6 +42,16 @@ const sourceSpecs=[
  {concept:'plane',file:'plane.png',blob:'2cdd01ac70391d8695364fa6f314918978fdd5f1'},
  {concept:'doll',file:'doll - boneca.png',blob:'ab152cd40e458c436df4390bb31478119a746af1'},
  {concept:'kite',file:'kite - pipa.png',blob:'70e9a17b5a827c64b2e54ac57ee9bd63fc88b9a5'},
+ // Farm animals: distinct exact source blobs; only SOURCE_READY and explicit compiled leaf semantics may pass.
+ {concept:'horse',file:'Cavalo-Horse.png',blob:'b70502487d880b0784443831916821cb458e2c53'},
+ {concept:'cow',file:'Vaca.png',blob:'e18d43b0011fb3b63f6addb47c5c85aec1a2a8db'},
+ {concept:'pig',file:'Porco-Pig.png',blob:'35a0445417a58d901d8e4661254889905d7b7c8b'},
+ {concept:'sheep',file:'Ovelha.png',blob:'b9d8cce39afc874c3f12c2f1fd5e0adfb8960d90'},
+ {concept:'duck',file:'Pato.png',blob:'4db13d08b9c3813fd096dc768cd297b0ca34003b'},
+ // Body parts: do not substitute scene-specific gestures or plural eyes with singular anatomy.
+ {concept:'mouth',file:'Boca.png',blob:'ddce294fb2bf3b29cf9c38d1441b62d40c0141a4'},
+ {concept:'ear',file:'Orelha.png',blob:'691f55927ad1f0a449610eaa7a589fe881294135'},
+ {concept:'nose',file:'Nariz.png',blob:'edf6c957880286a215ed2de8d165d8467b929a4'},
  // New exact room concept: all shared occurrences still require leaf-semantic and provisional guards.
  {concept:'living room',file:'Living room — Sala de estar.png',blob:'518127541034f86f152366bc31b405205e5dfc40'},
  // Next isolated source-expansion candidates: all are pinned exact bilingual concepts.
