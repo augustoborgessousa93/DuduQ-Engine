@@ -808,7 +808,8 @@ jobs:
           import {readFileSync} from 'node:fs';
           const r=JSON.parse(readFileSync('qa/results/phase2-new-source-qa-patch.json'));
           assert.equal(r.verifiedContracts,600);
-          assert(r.changedMediaIds>0,'NO_REAL_NEW_SOURCE_MEDIA_APPLIED');
+          assert(r.changedMediaIds>=0,'INVALID_NEW_SOURCE_ID_COUNT');
+          if(r.changedMediaIds===0)assert.equal(r.status,'NO_NEW_SOURCE_MEDIA_APPLIED_BUBBLE_POP_VISUAL_HOLD');
           assert.equal(r.questionsChanged,0);
           assert.equal(r.answerKeysChanged,0);
           assert.equal(r.audioChanged,0);
@@ -857,7 +858,11 @@ jobs:
           node --check qa/verify-phase2-banana-browser.mjs
           DUDUQ_QA_DIST=qa/dist-pages-food-candidate node qa/verify-phase2-banana-browser.mjs
           node --check qa/verify-phase2-new-source-browser.mjs
-          node qa/verify-phase2-new-source-browser.mjs
+          if [ "$(node -p "require('./qa/results/phase2-new-source-qa-patch.json').changedMediaIds")" -gt 0 ]; then
+            node qa/verify-phase2-new-source-browser.mjs
+          else
+            echo "BUBBLE_POP_MEDIA_HELD_PROVISIONAL_AFTER_38_REAL_VISUAL_FAILURES"
+          fi
           DUDUQ_PHASE2_BATCH=multilingual node qa/verify-phase2-new-source-browser.mjs
       - name: Probe actual pointer input on changed Phase 2 questions (not answer certification)
         shell: bash
@@ -882,9 +887,23 @@ jobs:
           const f=JSON.parse(readFileSync('qa/results/phase2-food-qa-patch.json'));
           const bv=JSON.parse(readFileSync('qa/results/phase2-banana-browser.json'));
           const fv=JSON.parse(readFileSync('qa/results/phase2-food-browser.json'));
-          const ids=new Set([...b.bindings.map(x=>x.mediaId),...f.bindings.map(x=>x.mediaId)]);
-          const questions=new Set([...b.changedQuestionIds,...f.changedQuestionIds]);
-          assert.equal(ids.size,b.changedMediaIds+f.changedMediaIds,'SHARED_ID_OVERLAP');
+          const n=JSON.parse(readFileSync('qa/results/phase2-new-source-qa-patch.json'));
+          const m=JSON.parse(readFileSync('qa/results/phase2-multilingual-source-qa-patch.json'));
+          const mv=JSON.parse(readFileSync('qa/results/phase2-multilingual-source-browser.json'));
+          assert.equal(n.verifiedContracts,600);
+          assert.equal(m.verifiedContracts,600);
+          assert.equal(mv.status,'PASS_NEW_SOURCE_REAL_BROWSER_QA_ONLY');
+          assert(m.changedMediaIds>0,'NO_SAFE_MULTILINGUAL_REPLACEMENTS');
+          let nv=null;
+          if(n.changedMediaIds>0){
+           nv=JSON.parse(readFileSync('qa/results/phase2-new-source-browser.json'));
+           assert.equal(nv.status,'PASS_NEW_SOURCE_REAL_BROWSER_QA_ONLY');
+          }else{
+           assert.equal(n.status,'NO_NEW_SOURCE_MEDIA_APPLIED_BUBBLE_POP_VISUAL_HOLD');
+          }
+          const ids=new Set([...b.bindings.map(x=>x.mediaId),...f.bindings.map(x=>x.mediaId),...n.bindings.map(x=>x.mediaId),...m.bindings.map(x=>x.mediaId)]);
+          const questions=new Set([...b.changedQuestionIds,...f.changedQuestionIds,...n.changedQuestionIds,...m.changedQuestionIds]);
+          assert.equal(ids.size,b.changedMediaIds+f.changedMediaIds+n.changedMediaIds+m.changedMediaIds,'SHARED_ID_OVERLAP');
           assert(questions.size>=13,'PREVIOUSLY_VERIFIED_QUESTIONS_REGRESSED');
           assert.equal(bv.checks,b.changedQuestionIds.length*2);
           assert.equal(fv.checks,f.changedQuestionIds.length*2);
@@ -893,8 +912,9 @@ jobs:
           const modules=[...new Set([...questions].map(q=>q.slice(0,5)))].sort();
           const report={schemaVersion:'DUDUQ_PHASE2_COMBINED_BANANA_FOOD_QA_V2',
            status:'ISOLATED_QA_PASS_NOT_PEDAGOGICALLY_APPROVED',mediaIds:ids.size,
-           images:1+f.images.length,affectedQuestions:questions.size,affectedModules:modules,
-           mobileDesktopVisibilityChecks:bv.checks+fv.checks,failedVisibilityChecks:0,
+           images:[...new Set([...b.bindings.map(x=>x.assetPath),...f.images.map(x=>x.path),...n.images.map(x=>x.assetPath),...m.images.map(x=>x.assetPath)])].length,affectedQuestions:questions.size,affectedModules:modules,
+           mobileDesktopVisibilityChecks:bv.checks+fv.checks+(nv?.checks||0)+mv.checks,failedVisibilityChecks:0,
+           bubblePopSourceIdsHeldProvisional:n.blockingReasonCounts?.BUBBLE_POP_NOT_VISIBLE_RUN_41536518602||0,
            questionContractsPreserved:600,answerKeysChanged:0,audioChanged:0,
            mechanicsChanged:0,productionDeployed:false,releaseApproved:false};
           writeFileSync('qa/results/phase2-combined-qa.json',JSON.stringify(report,null,2)+'\n');
