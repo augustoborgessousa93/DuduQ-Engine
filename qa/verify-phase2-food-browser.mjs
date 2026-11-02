@@ -71,7 +71,7 @@ try{
     try{await page.waitForFunction(paths=>paths.every(requiredPath=>
      [...document.images].some(img=>{
       try{
-       const p=new URL(img.currentSrc||img.src).pathname.replace(/^\\/+/, '');
+       const p=new URL(img.currentSrc||img.src).pathname.replace(/^\/+/,'');
        const b=img.getBoundingClientRect(),css=getComputedStyle(img);
        return p===requiredPath&&img.complete&&img.naturalWidth>0&&
         b.width>12&&b.height>12&&css.display!=='none'&&
