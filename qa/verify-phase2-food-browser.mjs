@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Real Chromium source-image visibility for a strictly guarded food QA candidate. */
+/** Real Chromium source-image visibility and viewport containment for isolated Phase 2 QA. */
 import assert from 'node:assert/strict';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
@@ -56,8 +56,9 @@ try{
       const p=new URL(img.currentSrc||img.src).pathname.replace(/^\/+/,'');
       const box=img.getBoundingClientRect(),css=getComputedStyle(img);
       return paths.includes(p)&&img.complete&&img.naturalWidth>0&&
-       box.width>12&&box.height>12&&css.display!=='none'&&
-       css.visibility!=='hidden'&&Number(css.opacity)>0;
+       box.width>12&&box.height>12&&
+       box.left>=-1&&box.top>=-1&&box.right<=innerWidth+1&&box.bottom<=innerHeight+1&&
+       css.display!=='none'&&css.visibility!=='hidden'&&Number(css.opacity)>0;
      }catch{return false}
     });
     return {visibleSourceImages:visible.length,
@@ -74,8 +75,9 @@ try{
        const p=new URL(img.currentSrc||img.src).pathname.replace(/^\/+/,'');
        const b=img.getBoundingClientRect(),css=getComputedStyle(img);
        return p===requiredPath&&img.complete&&img.naturalWidth>0&&
-        b.width>12&&b.height>12&&css.display!=='none'&&
-        css.visibility!=='hidden'&&Number(css.opacity)>0;
+        b.width>12&&b.height>12&&
+        b.left>=-1&&b.top>=-1&&b.right<=innerWidth+1&&b.bottom<=innerHeight+1&&
+        css.display!=='none'&&css.visibility!=='hidden'&&Number(css.opacity)>0;
       }catch{return false}
      })
     ),required,{timeout:12000,polling:250})}catch{}
@@ -92,7 +94,7 @@ try{
 }finally{await browser.close()}
 const failures=cases.filter(c=>c.httpStatus!==200||c.errors.length||
  c.bodyTextLength<20||c.required.some(p=>!c.sourcePathsVisible.includes(p)));
-const report={schemaVersion:'DUDUQ_PHASE2_FOOD_BROWSER_V1',
+const report={schemaVersion:'DUDUQ_PHASE2_FOOD_BROWSER_V2',
  status:failures.length?'FAIL_VISUAL_GATE':'PASS_VISUAL_GATE_QA_ONLY',
  checkedQuestions:patch.changedQuestionCount,checks:cases.length,
  visibleCases:cases.filter(c=>c.visibleSourceImages>0).length,
