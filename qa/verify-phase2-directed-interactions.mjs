@@ -70,27 +70,55 @@ try{
    }
    if(mechanic.startsWith('drag-drop')){
     const multi=mechanic==='drag-drop-multimedia';
-    const source=page.locator(multi?'.dnd-multimedia-drag-word-bank [data-item-id]':'.dnd-image-card-row .dnd-option-image-card[data-item-id]').first();
-    const destination=page.locator(multi?'[data-drop-target-id]':'.dnd-options-cards-group__category').first();
+    const sources=page.locator(multi?'.dnd-multimedia-drag-word-bank [data-item-id]':'.dnd-image-card-row .dnd-option-image-card[data-item-id]');
+    const destinations=page.locator(multi?'[data-drop-target-id]':'.dnd-options-cards-group__category');
+    entry.dragAttempts=[];
     try{
-     await source.waitFor({state:'visible',timeout:10000});
-     await destination.waitFor({state:'visible',timeout:10000});
-     const from=await source.boundingBox(),to=await destination.boundingBox();
-     assert(from&&to&&from.width>15&&to.width>15,'DRAG_SOURCE_OR_TARGET_NOT_VISIBLE');
-     // Audio-item centers contain a separate play button that intentionally
-     // cancels drag; begin on the card surface, away from that control.
-     const start={x:from.x+from.width*0.2,y:from.y+from.height/2};
-     const end={x:to.x+to.width/2,y:to.y+to.height/2};
-     const before=await destination.locator('[data-item-id]').count();
-     await page.mouse.move(start.x,start.y,{steps:3});
-     await page.mouse.down();
-     await page.mouse.move(end.x,end.y,{steps:16});
-     await page.mouse.up();
-     entry.inputAttempted=true;
-     await page.waitForTimeout(650);
-     const after=await destination.locator('[data-item-id]').count();
-     entry.drag={source:start,destination:end,before,after};
-     entry.inputObserved=after>before;
+     await sources.first().waitFor({state:'visible',timeout:10000});
+     await destinations.first().waitFor({state:'visible',timeout:10000});
+     // A category's first drop zone is not necessarily correct for the first
+     // source. Probe other visible zones before diagnosing a broken mechanic.
+     // No answer key is inferred; this only establishes a real DOM placement.
+     const source=sources.first();
+     const sourceId=await source.getAttribute('data-item-id');
+     assert(sourceId,'DRAG_SOURCE_MISSING_ITEM_ID');
+     const count=Math.min(await destinations.count(),8);
+     for(let i=0;i<count;i++){
+      const destination=destinations.nth(i);
+      if(!await destination.isVisible().catch(()=>false))continue;
+      const ready=await page.locator('#game').getAttribute('data-duduq-interaction-state');
+      if(ready!=='READY'){
+       entry.limitations.push('DRAG_RETRY_BLOCKED_BY_INTERACTION_GATE:'+String(ready));
+       break;
+      }
+      if(!await source.isVisible().catch(()=>false)){
+       entry.limitations.push('DRAG_SOURCE_NO_LONGER_VISIBLE');
+       break;
+      }
+      const from=await source.boundingBox(),to=await destination.boundingBox();
+      if(!from||!to||from.width<=15||to.width<=15)continue;
+      const start={x:from.x+from.width*0.2,y:from.y+from.height/2};
+      const finish={x:to.x+to.width/2,y:to.y+to.height/2};
+      const hit=await page.evaluate(p=>{
+       const el=document.elementFromPoint(p.x,p.y);
+       return {tag:el?.tagName||null,className:String(el?.className||'').slice(0,120)};
+      },finish);
+      const idsBefore=await destination.locator('[data-item-id]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('data-item-id')));
+      await page.mouse.move(start.x,start.y,{steps:3});
+      await page.mouse.down();
+      await page.mouse.move(finish.x,finish.y,{steps:20});
+      await page.mouse.up();
+      entry.inputAttempted=true;
+      await page.waitForTimeout(650);
+      const idsAfter=await destination.locator('[data-item-id]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('data-item-id')));
+      const placed=!idsBefore.includes(sourceId)&&idsAfter.includes(sourceId);
+      entry.dragAttempts.push({sourceId,destinationIndex:i,destinationId:await destination.getAttribute('data-drop-target-id'),source:start,destination:finish,hit,idsBefore,idsAfter,placed});
+      if(placed){
+       entry.inputObserved=true;
+       entry.drag=entry.dragAttempts[entry.dragAttempts.length-1];
+       break;
+      }
+     }
      if(!entry.inputObserved)entry.limitations.push('POINTER_DRAG_DID_NOT_PROVE_PLACEMENT');
     }catch(e){entry.limitations.push('DRAG_PROBE_ERROR:'+String(e.message||e).slice(0,220))}
     continue;
