@@ -115,6 +115,11 @@ for(const row of queue){
   (row.exampleQuestions||[]).every(id=>actual.includes(id)),'SHARED_USAGE_NOT_VERIFIED');
  guard(occurrences.length>0&&occurrences.every(o=>norm(o.semanticTarget)===concept),
   'LEAF_SEMANTICS_NOT_EXPLICIT_EXACT');
+ // Run #41536518602 proved blank imagery in Bubble Pop on BOTH viewports.
+ // Shared media IDs must not be partially repointed while this consumer
+ // cannot display the replacement. All other mechanics remain eligible.
+ guard(actual.every(id=>questions.get(id)?.mechanicId!=='bubble-pop'),
+  'BUBBLE_POP_NOT_VISIBLE_RUN_41536518602');
  guard(!!file,fileCandidates.length?'SOURCE_AMBIGUOUS':'NO_EXACT_SOURCE_FILENAME');
  if(reasons.length){blocked.push({mediaId:row.mediaId,concept,reasons});continue;}
  let image=imageCache.get(file);
