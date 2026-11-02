@@ -138,8 +138,8 @@ if(process.argv.includes('--apply')){
    item.checks.explicitSemanticsConsistent&&item.checks.usageMatches,
    'UNVERIFIED_BINDING:'+item.mediaId);
   assert.equal(current.temporary,true,'MISSING_EXPLICIT_PROVISIONAL_FLAG:'+item.mediaId);
-  assert.equal(current.urlOrPath,planned.sourceFile===banana.sourceFile?
-   queue.queue.find(x=>x.mediaId===item.mediaId)?.sourcePath:null,
+  assert.equal(planned.sourceFile,banana.sourceFile,'SOURCE_CONCEPT_MISMATCH:'+item.mediaId);
+  assert.equal(current.urlOrPath,queue.queue.find(x=>x.mediaId===item.mediaId)?.sourcePath,
    'REGISTRY_SOURCE_PATH_CHANGED:'+item.mediaId);
   assert(current.urlOrPath.endsWith('.svg')&&current.kind==='image'&&
    current.semantic==='banana'&&current.humanResolutionStatus!=='PEDAGOGICAL_QA_APPROVED',
@@ -167,8 +167,6 @@ if(process.argv.includes('--apply')){
  }
  assert.equal(updated.entries.length,registry.entries.length,'REGISTRY_ENTRY_COUNT_CHANGED');
  const newRegistryBytes=Buffer.from(JSON.stringify(updated,null,2)+'\n');
- const newManifestBytes=Buffer.from(manifest.trimEnd()+'\n'+
-  regRel+' '+sha256(newRegistryBytes)+'\n'); // rebuilt below to replace the old registry hash
  const manifestLines=manifest.trimEnd().split(/\r?\n/);
  const oldRegistryLines=manifestLines.filter(line=>line.startsWith(regRel+' '));
  assert.equal(oldRegistryLines.length,1,'REGISTRY_MANIFEST_ENTRY_NOT_UNIQUE');
