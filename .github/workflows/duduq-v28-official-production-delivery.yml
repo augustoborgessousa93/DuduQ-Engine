@@ -1,4 +1,4 @@
-name: DUDUQ V28 - Verify Actual Cloudflare Official Production Delivery
+name: DUDUQ Phase 2 - Verify Actual Cloudflare Official Production Delivery
 
 on:
   push:
@@ -44,7 +44,7 @@ jobs:
             }
             throw error;
           }
-          const checks={deploymentUrl:base,compileRunId:41342961320,sourceArchiveSha256:'9014d34492659d27961772495a27b02e4556d4ebe95522b350f3ee2740970830',routes:[],questionFiles:[],imageFiles:[],sourceMediaIds:0,releaseApproved:false,productionDeployed:true,status:'RUNNING'};
+          const checks={deploymentUrl:base,compileRunId:41373477360,sourceArchiveSha256:'63e145aa13b4cc1b07a4549eadd7b5dee31d259340bef90b3392a6a48a6cd23f',routes:[],questionFiles:[],imageFiles:[],sourceMediaIds:0,releaseApproved:false,productionDeployed:true,status:'RUNNING'};
           try{
             for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
               const mm=String(module).padStart(2,'0'),prefix='/play/english/year-'+year+'/module-'+mm+'/';
@@ -60,7 +60,15 @@ jobs:
             }
             const reg=JSON.parse((await get('/content/english/media/media-registry.json')).buffer.toString('utf8'));
             const matched=reg.entries.filter(x=>String(x.urlOrPath||'').startsWith('content/english/assets/images/assets-duduq/'));
-            assert.equal(matched.length,157,'SOURCE_MEDIA_COUNT_CHANGED');
+            assert.equal(matched.length,190,'SOURCE_MEDIA_COUNT_CHANGED');
+            const phase2Paths=new Set(['Imagens Ilustrativa/color-black-preto.png','Imagens Ilustrativa/color-brown-marrom.png','Imagens Ilustrativa/pet-rabbit-coelho.png']);
+            const phase2=matched.filter(x=>phase2Paths.has(x.provenance?.sourcePath));
+            assert.equal(phase2.length,26,'PHASE2_ID_COUNT_CHANGED');
+            assert.equal(new Set(phase2.map(x=>x.urlOrPath)).size,3,'PHASE2_PNG_COUNT_CHANGED');
+            const leaves=['IMG-Y1M02-Q001-ONE','IMG-Y1M02-Q001-TWO','IMG-Y1M02-Q001-THREE','IMG-Y1M02-Q001-FOUR','IMG-Y1M02-Q002-EIGHT','IMG-Y1M02-Q007-NINE','IMG-Y1M02-Q007-TEN'];
+            assert(leaves.every(id=>matched.some(e=>e.mediaId===id)),'SEVEN_LEAF_HOTFIX_NOT_PRESERVED');
+            checks.phase2MediaIds=phase2.length;
+            checks.sevenLeafHotfixIds=7;
             checks.sourceMediaIds=matched.length;
             const imgs=new Map();
             for(const e of matched){
@@ -69,7 +77,8 @@ jobs:
               if(prev)assert.equal(prev,e.sha256,'IMAGE_HASH_AMBIGUOUS:'+e.urlOrPath);
               else imgs.set(e.urlOrPath,e.sha256);
             }
-            assert.equal(imgs.size,21,'SOURCE_IMAGE_COUNT_CHANGED');
+            assert.equal(imgs.size,24,'SOURCE_IMAGE_COUNT_CHANGED');
+            assert(![...imgs.keys()].some(x=>x.includes('color-white-branco')),'LOW_CONTRAST_WHITE_PNG_MUST_BE_DEFERRED');
             for(const [rel,expected]of imgs){
               const route='/'+rel;
               const d=await get(route);
@@ -82,7 +91,7 @@ jobs:
             checks.status='PASS_LIVE_CLOUDFLARE_PRODUCTION_DELIVERY';
             console.log(JSON.stringify({status:checks.status,liveRoutes:checks.routes.length,questionFiles:checks.questionFiles.length,questions:600,originalPngs:checks.imageFiles.length,sourceMediaIds:checks.sourceMediaIds,productionDeployed:true}));
           }catch(e){checks.status='FAIL_LIVE_CLOUDFLARE_PRODUCTION_DELIVERY';checks.error=String(e?.stack||e);process.exitCode=1;}
-          finally{writeFileSync('qa/results/v28-live-cloudflare-production-delivery.json',JSON.stringify(checks,null,2)+'\n');}
+          finally{writeFileSync('qa/results/phase2-live-cloudflare-production-delivery.json',JSON.stringify(checks,null,2)+'\n');}
           NODE
       - name: Install Chromium for affected Y2M05 farm-animal gameplay only
         run: |
@@ -203,13 +212,59 @@ jobs:
           finally{await browser.close();await writeFile(dir+'/report.json',JSON.stringify(report,null,2)+'\n');}
           NODE
 
+      - name: Prove new color and rabbit PNGs visibly render on the official Cloudflare production
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {chromium} from 'playwright';
+          import {mkdir,writeFile} from 'node:fs/promises';
+          const base=process.env.V28_PRODUCTION;
+          const cases=[{id:'Y1M03-Q005',concepts:['color-black-preto']},
+            {id:'Y1M06-Q001',concepts:['pet-rabbit-coelho']}];
+          const out='qa/results/phase2-live-production-visibility';
+          await mkdir(out,{recursive:true});
+          const b=await chromium.launch({headless:true}),results=[];
+          try{
+            for(const test of cases){
+              const id=test.id,year=Number(id[1]),mod=id.slice(3,5);
+              const response=await fetch(base+'/content/english/year-'+year+'/module-'+mod+'/questions.json');
+              assert.equal(response.status,200);
+              const data=await response.json(),q=data.items.find(x=>x.item_id===id);
+              assert(q?.mechanicId,'QUESTION_NOT_FOUND:'+id);
+              const slug=q.mechanicId.startsWith('smart-sentence')?'smart-sentence':q.mechanicId;
+              for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
+                const ctx=await b.newContext({viewport}),page=await ctx.newPage(),errors=[];
+                page.on('pageerror',e=>errors.push(String(e)));
+                page.on('response',r=>{if(r.url().startsWith(base)&&r.status()>=400&&!r.url().includes('favicon.ico'))errors.push('HTTP_'+r.status()+':'+r.url())});
+                const r=await page.goto(base+'/play/'+slug+'/?duduqModule='+id.slice(0,5)+'&duduqItem='+id+'&qaSeed=phase2-live-source',{waitUntil:'domcontentloaded',timeout:45000});
+                assert.equal(r?.status(),200,'GAME_ROUTE_NOT_200:'+id);
+                await page.waitForFunction(concepts=>concepts.every(concept=>[...document.images].some(img=>{
+                  const src=img.currentSrc||img.src,rect=img.getBoundingClientRect();
+                  return src.includes(concept)&&img.complete&&img.naturalWidth>0&&rect.width>10&&rect.height>10&&
+                    rect.right>0&&rect.bottom>0&&rect.left<innerWidth&&rect.top<innerHeight;
+                })),test.concepts,{timeout:30000});
+                assert.deepEqual(errors,[],'PHASE2_BROWSER_ERRORS:'+id);
+                const screenshot=out+'/'+id+'-'+viewport.width+'.png';
+                await page.screenshot({path:screenshot});
+                results.push({id,viewport:viewport.width,visibleConcepts:test.concepts,screenshot});
+                await ctx.close();
+              }
+            }
+            assert.equal(results.length,4);
+            console.log(JSON.stringify({status:'PASS_PHASE2_LIVE_PNG_VISIBLE',cases:results.length}));
+          }finally{await b.close();await writeFile(out+'/report.json',JSON.stringify({status:results.length===4?'PASS':'INCOMPLETE',cases:results},null,2)+'\n');}
+          NODE
+
       - name: Archive HTTP and source-hash verification from Cloudflare CDN
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: duduq-v28-live-cloudflare-production-verified-${{ github.run_id }}
           path: |
-            qa/results/v28-live-cloudflare-production-delivery.json
+            qa/results/phase2-live-cloudflare-production-delivery.json
             qa/results/v28-y2m05-farm-gameplay/**
+            qa/results/phase2-live-production-visibility/**
           if-no-files-found: error
           retention-days: 21
