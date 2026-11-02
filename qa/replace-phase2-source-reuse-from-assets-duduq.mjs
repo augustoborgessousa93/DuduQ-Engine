@@ -18,10 +18,8 @@ const sourceRoot=path.resolve(process.argv[2]||'assets-source');
 const sourceCommit='50fb80a89a5779d73f81c96aab35f6e86193d769';
 const sources=[
  ['black','color-black-preto.png','e97d277f7df8fdb73b611f919fec34fca836bd8d'],
- ['white','color-white-branco.png','d8b2da519e574a0c7c08e3d85a4e2db4348972c1'],
  ['brown','color-brown-marrom.png','4ba5334007c4a8ac4ef4de3d87b03723e0523588'],
- ['rabbit','pet-rabbit-coelho.png','9421450b4ec44d4c39104d59e0e287a2b1c2ef7b'],
- ['banana','banana.png','14f858bef72073c5489557904d22d564f186f393']
+ ['rabbit','pet-rabbit-coelho.png','9421450b4ec44d4c39104d59e0e287a2b1c2ef7b']
 ];
 const hash=b=>createHash('sha256').update(b).digest('hex');
 const blob=b=>createHash('sha1').update(Buffer.from('blob '+b.length+'\0')).update(b).digest('hex');
@@ -112,12 +110,19 @@ for(const [concept,file,expectedBlob]of sources){
 }
 assert(candidates.length>0,'NO_SAFE_VOCABULARY_REUSE_FOUND');
 const used=images.filter(x=>x.bindings>0),changedQuestions=[...new Set(candidates.flatMap(x=>x.questionIds))].sort();
-assert.equal(candidates.length+skipped.length,38,'PHASE2_CANDIDATES_NOT_FULLY_ACCOUNTED');
-const report={schemaVersion:'DUDUQ_PHASE2_EXACT_SOURCE_REUSE_V1',
+const selected=new Set(sources.map(x=>x[0]));
+const plannedCount=phase2.sourceRows.filter(x=>selected.has(x.concept)).length;
+assert.equal(candidates.length+skipped.length,plannedCount,'PHASE2_CANDIDATES_NOT_FULLY_ACCOUNTED');
+const deferred=phase2.sourceRows.filter(x=>!selected.has(x.concept)).map(x=>({
+ mediaId:x.mediaId,concept:x.concept,reason:x.concept==='white'?
+ 'WHITE_PNG_INSUFFICIENT_CONTRAST_IN_REAL_MOBILE_AND_DESKTOP_SCREENSHOTS':
+ 'BANANA_AUDIT_MISSING_TEMPORARY_FLAG_REQUIRES_REVIEW'
+}));
+const report={schemaVersion:'DUDUQ_PHASE2_SAFE_CONTRAST_SOURCE_REUSE_V1',
  status:apply?'APPLYING_EPHEMERAL_QA':'PREFLIGHT_PASS',
  sourceRepository:'augustoborgessousa93/Assets-DuduQ',sourceCommit,
  usedUniquePngs:used.length,changedMediaIds:candidates.length,affectedQuestions:changedQuestions.length,
- affectedQuestionIds:changedQuestions,verifiedContracts:600,images:used,bindings:candidates,skipped,
+ affectedQuestionIds:changedQuestions,verifiedContracts:600,images:used,bindings:candidates,skipped,deferred,
  missingSemanticReviewRequired:candidates.filter(x=>x.missingSemanticOccurrences>0).map(x=>({mediaId:x.mediaId,concept:x.concept,questionIds:x.questionIds})),
  questionsChanged:0,answerKeysChanged:0,mechanicsChanged:0,
  humanPedagogicalApproval:false,releaseApproved:false,productionDeployed:false};

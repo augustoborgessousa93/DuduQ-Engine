@@ -396,7 +396,7 @@ jobs:
       SOURCE_COMMIT: 50fb80a89a5779d73f81c96aab35f6e86193d769
       BASELINE_TAG: duduq-v28-y1m02-seven-numeral-leaf-hotfix-20261101
       BASELINE_SHA256: 2f7c72381dbab18eeb3f2c6a9771e636cbacc46aa04232a762f13ca5730c2f0e
-      PHASE2_TAG: duduq-phase2-exact-source-qa-20261102
+      PHASE2_TAG: duduq-phase2-safe-contrast-qa-20261102
     steps:
       - name: Checkout review code and pinned original image repository
         uses: actions/checkout@v4
@@ -489,9 +489,9 @@ jobs:
           if gh release view "$PHASE2_TAG" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             echo "::error::PHASE2_TAG_ALREADY_EXISTS"; exit 1
           fi
-          tar -czf "$RUNNER_TEMP/duduq-phase2-exact-source-qa.tar.gz" -C dist-pages .
-          (cd "$RUNNER_TEMP" && sha256sum duduq-phase2-exact-source-qa.tar.gz > duduq-phase2-exact-source-qa.sha256)
-          gh release create "$PHASE2_TAG" "$RUNNER_TEMP/duduq-phase2-exact-source-qa.tar.gz" "$RUNNER_TEMP/duduq-phase2-exact-source-qa.sha256" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "DUDUQ Phase 2 - exact source QA candidate" --notes "Actual source-image replacements in V28 hotfix baseline, 600 immutable questions, hashes and real-browser QA. This is a QA-only package; not a production deploy." --prerelease
+          tar -czf "$RUNNER_TEMP/duduq-phase2-safe-contrast-qa.tar.gz" -C dist-pages .
+          (cd "$RUNNER_TEMP" && sha256sum duduq-phase2-safe-contrast-qa.tar.gz > duduq-phase2-safe-contrast-qa.sha256)
+          gh release create "$PHASE2_TAG" "$RUNNER_TEMP/duduq-phase2-safe-contrast-qa.tar.gz" "$RUNNER_TEMP/duduq-phase2-safe-contrast-qa.sha256" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "DUDUQ Phase 2 - contrast-safe source QA candidate" --notes "Contrast-safe source-image replacements on V28 hotfix baseline, 600 immutable questions and real-browser QA. White deliberately deferred after screenshot review. QA-only package; not production." --prerelease
           echo "ONE_NEW_PHASE2_QA_PACKAGE_CREATED_NO_PRODUCTION_DEPLOY"
       - name: Retain Phase 2 audit and real-browser evidence
         if: always()
