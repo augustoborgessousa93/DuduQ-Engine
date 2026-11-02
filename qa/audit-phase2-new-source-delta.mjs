@@ -97,6 +97,12 @@ for(const asset of manifest.assets){
    (queueById.get(binding.mediaId)?.exampleQuestions||[]).every(id=>actualQuestions.includes(id)),
    'COMPLETE_SHARED_ID_USAGE_NOT_CONFIRMED');
   failClosed(reasons,occurrences.length>0,'NO_REAL_MEDIA_USAGE');
+  // Chromium evidence (run #41536518602): every one of 38 missing-image
+  // checks came from bubble-pop, on both viewports. Do NOT repoint shared
+  // media IDs until that mechanic renders this media in actual gameplay.
+  // A shared ID can be reused safely only if every consumer mechanic works.
+  failClosed(reasons,actualQuestions.every(id=>questions.get(id)?.mechanicId!=='bubble-pop'),
+   'BUBBLE_POP_NOT_VISIBLE_RUN_41536518602');
   failClosed(reasons,occurrences.every(o=>normalize(o.semanticTarget)===normalize(asset.conceptHint)),'MISSING_OR_CONFLICTING_LEAF_SEMANTICS');
   const reg=registryMap.get(binding.mediaId);
   const queueRow=queueById.get(binding.mediaId);
@@ -162,6 +168,18 @@ if(apply){
   assert(actual.length===queueById.get(x.mediaId).usage,'SHARED_USAGE_COUNT_CHANGED:'+x.mediaId);
   assert((usages.get(x.mediaId)||[]).every(o=>normalize(o.semanticTarget)===normalize(x.asset.conceptHint)),
    'SHARED_SEMANTICS_CHANGED:'+x.mediaId);
+ }
+
+ if(selected.length===0){
+  const hold={status:'NO_NEW_SOURCE_MEDIA_APPLIED_BUBBLE_POP_VISUAL_HOLD',
+   sourceCommit:manifest.sourceCommit,verifiedContracts:600,changedMediaIds:0,
+   images:[],bindings:[],changedQuestionIds:[],changedQuestionCount:0,
+   questionsChanged:0,answerKeysChanged:0,audioChanged:0,mechanicsChanged:0,
+   productionDeployed:false,releaseApproved:false,pedagogicalQAApproved:false,
+   blockingReasonCounts:reasonCounts};
+  await writeFile('qa/results/phase2-new-source-qa-patch.json',JSON.stringify(hold,null,2)+'\n');
+  console.log(JSON.stringify({status:hold.status,changedMediaIds:0,reason:'bubble-pop missing source imagery on both viewports'}));
+  process.exit(0);
  }
  const usedAssets=[...new Map(selected.map(x=>[x.asset.path,x.asset])).values()];
  const sourceImageMap=new Map();
