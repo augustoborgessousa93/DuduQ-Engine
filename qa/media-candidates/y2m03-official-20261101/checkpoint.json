@@ -123,8 +123,14 @@
   "git": {
     "branch": "automation/duduq-media-source-only-fix-20261029",
     "headBefore": "a65b1f8cf489105d714517ce6a01691975ee9c82",
-    "commitStatusAtCheckpointWrite": "PENDING_SAFE_PATH_SCOPED_COMMIT",
-    "pushStatusAtCheckpointWrite": "PENDING"
+    "candidateBatchCommit": "59ce0e4124cf3e38463a8848ea2187d508dfad90",
+    "commitStatusAtCheckpointWrite": "LOCAL_PATH_SCOPED_COMMIT_CREATED",
+    "pushStatusAtCheckpointWrite": "BLOCKED_BY_REMOTE_EGRESS_APPROVAL",
+    "verifiedRemote": "https://github.com/augustoborgessousa93/DuduQ-Engine.git",
+    "requestedRemoteBranch": "automation/duduq-media-source-only-fix-20261029",
+    "pushAttempted": true,
+    "pushCompleted": false,
+    "pushBlocker": "The execution safety layer rejected sensitive egress of generated assets and internal candidate metadata until the user explicitly approves this verified GitHub destination after disclosure."
   },
   "globalStateAtAudit": {
     "modules": 30,
