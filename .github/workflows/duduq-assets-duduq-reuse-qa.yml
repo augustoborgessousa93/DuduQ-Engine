@@ -5,6 +5,7 @@ on:
     branches:
       - integration/assets-duduq-reuse-20261031
       - integration/duduq-m1-qa-consolidated-20261031
+      - qa/duduq-phase2-banana-preflight-20261102
     paths:
       - ".github/workflows/duduq-assets-duduq-reuse-qa.yml"
       - ".github/workflows/duduq-independent-official-overlay-qa.yml"
@@ -16,6 +17,7 @@ on:
       - "qa/replace-pig-from-assets-duduq.mjs"
       - "qa/replace-farm-animal-batch-from-assets-duduq.mjs"
       - "qa/replace-phase2-source-reuse-from-assets-duduq.mjs"
+      - "qa/duduq-phase2-banana-preflight.mjs"
       - "qa/verify-phase2-source-browser.mjs"
       - "qa/verify-farm-animal-source-batch-browser.mjs"
       - "qa/replace-safe-vocabulary-from-assets-duduq.mjs"
@@ -381,7 +383,7 @@ jobs:
           echo "The pig candidate remains PEDAGOGICAL_QA_PENDING, without merge or production deploy."
 
   phase2-v28-source-reuse:
-    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[phase2]') }}
+    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[phase2]') && !contains(github.event.head_commit.message, '[banana-preflight]') }}
     name: Phase 2 - exact source reuse on immutable V28 hotfix
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -504,3 +506,103 @@ jobs:
             qa/results/phase2-source-reuse-batch.json
             qa/results/phase2-source-browser.json
             /tmp/duduq-phase2-pages.log
+
+  phase2-banana-compiled-preflight:
+    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[banana-preflight]') }}
+    name: Phase 2 banana - check published candidate, isolated QA only
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    permissions:
+      contents: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+      SOURCE_COMMIT: 50fb80a89a5779d73f81c96aab35f6e86193d769
+      PUBLISHED_PHASE2_TAG: duduq-phase2-safe-contrast-qa-20261102
+      PUBLISHED_PHASE2_SHA256: 63e145aa13b4cc1b07a4549eadd7b5dee31d259340bef90b3392a6a48a6cd23f
+    steps:
+      - name: Checkout QA-only scripts, no write credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout exact original image source
+        uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: 50fb80a89a5779d73f81c96aab35f6e86193d769
+          path: assets-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify current source revision and immutable production-equivalent package
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test "$(git -C assets-source rev-parse HEAD)" = "$SOURCE_COMMIT"
+          mkdir -p "$RUNNER_TEMP/phase2-published" dist-pages qa/dist-pages-banana-candidate qa/results
+          gh release download "$PUBLISHED_PHASE2_TAG" -R "$GITHUB_REPOSITORY" --pattern duduq-phase2-safe-contrast-qa.tar.gz --dir "$RUNNER_TEMP/phase2-published"
+          echo "$PUBLISHED_PHASE2_SHA256  $RUNNER_TEMP/phase2-published/duduq-phase2-safe-contrast-qa.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/phase2-published/duduq-phase2-safe-contrast-qa.tar.gz" -C dist-pages
+          test -s dist-pages/.duduq-pages-manifest
+          cp -a dist-pages/. qa/dist-pages-banana-candidate/
+      - name: Validate all 600 compiled questions and four deferred banana IDs
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/duduq-phase2-banana-preflight.mjs
+          node qa/duduq-phase2-banana-preflight.mjs qa/dist-pages-banana-candidate assets-source
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          const r=JSON.parse(readFileSync('qa/results/phase2-banana-preflight.json','utf8'));
+          assert.equal(r.verifiedQuestionContracts,600);
+          assert.equal(r.candidates,4);
+          assert.equal(r.eligibleIds+r.blockedIds,4);
+          assert.equal(r.productionDeployed,false);
+          console.log(JSON.stringify({eligible:r.eligibleIds,blocked:r.blockedIds,blackAudit:r.sharedBlack}));
+          NODE
+      - name: Apply only verified banana bindings to isolated QA copy, if any
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          ELIGIBLE="$(node -p "require('./qa/results/phase2-banana-preflight.json').eligibleIds")"
+          if [ "$ELIGIBLE" -eq 0 ]; then
+            echo "NO_VERIFIED_BANANA_BINDINGS_KEEP_ALL_PROVISIONAL"
+            exit 0
+          fi
+          node qa/duduq-phase2-banana-preflight.mjs qa/dist-pages-banana-candidate assets-source --apply
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import path from 'node:path';
+          const sha=b=>createHash('sha256').update(b).digest('hex');
+          const before='dist-pages',after='qa/dist-pages-banana-candidate';
+          const p=JSON.parse(readFileSync('qa/results/phase2-banana-qa-patch.json','utf8'));
+          assert(p.changedMediaIds>0&&p.changedMediaIds<=4);
+          assert.equal(p.productionDeployed,false);
+          const oldManifest=readFileSync(path.join(before,'.duduq-pages-manifest'),'utf8');
+          const newManifest=readFileSync(path.join(after,'.duduq-pages-manifest'),'utf8');
+          const parse=s=>new Map(s.trimEnd().split(/\r?\n/).map(line=>{const i=line.lastIndexOf(' ');return [line.slice(0,i),line.slice(i+1)]}));
+          const a=parse(oldManifest),b=parse(newManifest);
+          const registry='content/english/media/media-registry.json';
+          assert.equal(b.size,a.size+1);
+          for(const [rel,digest] of a){
+            if(rel!==registry)assert.equal(b.get(rel),digest,'UNEXPECTED_MODIFIED_ASSET:'+rel);
+            assert.equal(sha(readFileSync(path.join(after,rel))),b.get(rel),'MANIFEST_HASH_MISMATCH:'+rel);
+          }
+          assert.equal(sha(readFileSync(path.join(after,p.assetPath))),b.get(p.assetPath));
+          assert.equal(sha(readFileSync(path.join(after,registry))),b.get(registry));
+          console.log(JSON.stringify({isolatedQAOnly:true,changedMediaIds:p.changedMediaIds,questionsUnchanged:600}));
+          NODE
+      - name: Preserve QA-only evidence; no release, preview or production deploy
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-phase2-banana-preflight-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/phase2-banana-preflight.json
+            qa/results/phase2-banana-qa-patch.json
