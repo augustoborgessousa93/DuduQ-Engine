@@ -51,7 +51,7 @@ const sourceSpecs=[
  // Body parts: do not substitute scene-specific gestures or plural eyes with singular anatomy.
  {concept:'mouth',file:'Boca.png',blob:'ddce294fb2bf3b29cf9c38d1441b62d40c0141a4'},
  {concept:'ear',file:'Orelha.png',blob:'691f55927ad1f0a449610eaa7a589fe881294135'},
- {concept:'nose',file:'Nariz.png',blob:'edf6c957880286a215ed2de8d165d8467b929a4'},
+ {concept:'nose',file:'Nariz.png',blob:'edf6c957880286a215ed2de8d165d8467b929a4a'},
  // New exact room concept: all shared occurrences still require leaf-semantic and provisional guards.
  {concept:'living room',file:'Living room — Sala de estar.png',blob:'518127541034f86f152366bc31b405205e5dfc40'},
  // Next isolated source-expansion candidates: all are pinned exact bilingual concepts.
