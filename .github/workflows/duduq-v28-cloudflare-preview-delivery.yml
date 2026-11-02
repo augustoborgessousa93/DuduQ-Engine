@@ -60,12 +60,14 @@ jobs:
             }
             const reg=JSON.parse((await get('/content/english/media/media-registry.json')).buffer.toString('utf8'));
             const matched=reg.entries.filter(x=>String(x.urlOrPath||'').startsWith('content/english/assets/images/assets-duduq/'));
-            assert.equal(matched.length,190,'SOURCE_MEDIA_COUNT_CHANGED');
+            assert.equal(matched.length,197,'SOURCE_MEDIA_COUNT_CHANGED');
             const phase2Paths=new Set(['Imagens Ilustrativa/color-black-preto.png','Imagens Ilustrativa/color-white-branco.png','Imagens Ilustrativa/color-brown-marrom.png','Imagens Ilustrativa/pet-rabbit-coelho.png']);
             const phase2=matched.filter(x=>phase2Paths.has(x.provenance?.sourcePath));
             assert.equal(phase2.length,33,'PHASE2_ID_COUNT_CHANGED');
             assert.equal(new Set(phase2.map(x=>x.urlOrPath)).size,4,'PHASE2_PNG_COUNT_CHANGED');
             checks.phase2MediaIds=phase2.length;
+            checks.preexistingV28Ids=157;
+            checks.sevenLeafHotfixIds=7;
             checks.sourceMediaIds=matched.length;
             const imgs=new Map();
             for(const e of matched){
