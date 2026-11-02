@@ -1338,3 +1338,167 @@ jobs:
             qa/results/phase2-multilingual-source-qa-patch.json
             qa/results/phase2-multilingual-source-browser.json
             qa/results/phase2-multilingual-source-browser/*.png
+
+
+  phase2-structured-bilingual-qa:
+    if: ${{ github.ref_name == 'qa/duduq-phase2-source-expansion-20261102' && github.event_name == 'push' && contains(github.event.head_commit.message, '[structured-bilingual-qa]') }}
+    name: Extend the PERSISTED approved-integrity 141-ID candidate using 28 pinned PT/EN aliases
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    permissions:
+      contents: read
+      actions: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+      BASE_URL: http://127.0.0.1:4175
+    steps:
+      - name: Checkout existing QA integration branch without credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout immutable source of 28 explicitly mapped bilingual assets
+        uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: a51e0958d0c68941701b8373ccf30acf88aaf7d0
+          path: assets-source-structured
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Recover EXACT safe 141-ID compiled candidate; apply remaining structured bilingual PNGs
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/phase2-safe-structured qa/dist-pages-food-candidate qa/results
+          gh run download 41546708766 --repo augustoborgessousa93/DuduQ-Engine \
+            --name duduq-phase2-safe-141-ids-unapproved-candidate \
+            --dir /tmp/phase2-safe-structured
+          TAR="$(find /tmp/phase2-safe-structured -name 'duduq-phase2-safe-141-qa-candidate.tar.gz' -print -quit)"
+          SHA="$(find /tmp/phase2-safe-structured -name 'duduq-phase2-safe-141-qa-candidate.sha256' -print -quit)"
+          PREVIOUS="$(find /tmp/phase2-safe-structured -name 'phase2-persisted-visual-hold.json' -print -quit)"
+          test -n "$TAR" && test -n "$SHA" && test -n "$PREVIOUS"
+          (cd "$(dirname "$TAR")" && sha256sum -c "$(basename "$SHA")")
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+          cp "$PREVIOUS" qa/results/phase2-persisted-visual-hold.json
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const prev=JSON.parse(readFileSync('qa/results/phase2-persisted-visual-hold.json'));
+          assert.equal(prev.changedMediaIds,141);
+          assert.equal(prev.verifiedContracts,600);
+          assert(prev.heldMediaIds.includes('IMG-V11-2B-0E55AE94BCF4CC3E'));
+          const bytes=readFileSync('qa/dist-pages-food-candidate/content/english/media/media-registry.json');
+          assert.equal(createHash('sha256').update(bytes).digest('hex'),prev.registrySha256);
+          console.log('SAFE_141_SOURCE_PACKAGE_IS_IMMUTABLE_SHA_VERIFIED');
+          NODE
+          node --check qa/apply-phase2-multilingual-assets.mjs
+          DUDUQ_STRUCTURED_ONLY=1 DUDUQ_BUBBLE_FRAME_PROBE=1 \
+            node qa/apply-phase2-multilingual-assets.mjs qa/dist-pages-food-candidate \
+              assets-source-structured --apply
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,writeFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const hash=b=>createHash('sha256').update(b).digest('hex');
+          const before=JSON.parse(readFileSync('qa/results/phase2-persisted-visual-hold.json'));
+          const p=JSON.parse(readFileSync('qa/results/phase2-multilingual-source-qa-patch.json'));
+          assert.equal(p.verifiedContracts,600);
+          assert(p.changedMediaIds>=1,'STRUCTURED_BILINGUAL_MEDIA_NOT_APPLIED');
+          assert(p.changedMediaIds<=300,'UNEXPECTED_IMPORT_SCOPE');
+          assert.equal(p.questionsChanged,0);
+          assert.equal(p.answerKeysChanged,0);
+          assert.equal(p.audioChanged,0);
+          assert.equal(p.mechanicsChanged,0);
+          assert.equal(p.productionDeployed,false);
+          assert(p.bindings.every(x=>x.mediaId!=='IMG-V11-2B-0E55AE94BCF4CC3E'),'BROTHER_MUST_STAY_PROVISIONAL');
+          const root='qa/dist-pages-food-candidate/';
+          const lines=readFileSync(root+'.duduq-pages-manifest','utf8').trimEnd().split(/\r?\n/);
+          const entries=new Map(lines.map(l=>{const i=l.lastIndexOf(' ');assert(i>0);return [l.slice(0,i),l.slice(i+1)];}));
+          assert.equal(entries.size,lines.length,'DUPLICATE_MANIFEST_ENTRIES');
+          for(const [file,digest] of entries)assert.equal(hash(readFileSync(root+file)),digest,'WRONG_MANIFEST_HASH:'+file);
+          let contracts=0;
+          for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
+           const rel='content/english/year-'+y+'/module-'+String(m).padStart(2,'0')+'/questions.json';
+           const data=JSON.parse(readFileSync(root+rel));
+           assert.equal(data.items.length,20,'CONTRACT_MODULE_INCOMPLETE');
+           contracts+=data.items.length;
+          }
+          assert.equal(contracts,600);
+          const q=[...new Set([...before.changedModules,...p.changedModules])];
+          const result={schemaVersion:'DUDUQ_PHASE2_PT_EN_STRUCTURED_EXTENSION_V1',
+           status:'PERSISTED_QA_ONLY_VISUAL_AND_INTERACTION_PENDING',
+           sourceCommit:p.sourceCommit,baselineMediaIds:before.changedMediaIds,
+           newlyReplacedMediaIds:p.changedMediaIds,totalChangedMediaIds:before.changedMediaIds+p.changedMediaIds,
+           addedUniquePNGs:p.images.length,priorModules:before.changedModules.length,
+           affectedModules:q.length,newlyAffectedQuestions:p.changedQuestionCount,
+           verifiedContracts:600,heldMediaIds:before.heldMediaIds,
+           baselineRegistrySha256:before.registrySha256,
+           registrySha256:entries.get('content/english/media/media-registry.json'),
+           manifestSha256:hash(readFileSync(root+'.duduq-pages-manifest')),
+           answerKeysChanged:0,mechanicsChanged:0,audioChanged:0,
+           productionDeployed:false,releaseApproved:false,pedagogicalQAApproved:false};
+          writeFileSync('qa/results/phase2-structured-integration.json',JSON.stringify(result,null,2)+'\n');
+          console.log('REAL_STRUCTURED_BILINGUAL_INTEGRATION='+JSON.stringify(result));
+          NODE
+      - name: Persist all new PNGs and manifests BEFORE the visual browser gate
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          tar -czf qa/results/duduq-phase2-structured-bilingual-unapproved.tar.gz \
+            -C qa/dist-pages-food-candidate .
+          (cd qa/results && sha256sum duduq-phase2-structured-bilingual-unapproved.tar.gz \
+            > duduq-phase2-structured-bilingual-unapproved.sha256)
+      - name: Real selected image x mechanic visibility on mobile and desktop
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev qa/dist-pages-food-candidate --ip 127.0.0.1 \
+            --port 4175 --compatibility-date 2026-10-30 > /tmp/duduq-structured-visual.log 2>&1 &
+          echo $! > /tmp/duduq-structured-visual.pid
+          for i in {1..45}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then break; fi
+            if ! kill -0 "$(cat /tmp/duduq-structured-visual.pid)" 2>/dev/null; then
+              cat /tmp/duduq-structured-visual.log; exit 1
+            fi
+            sleep 2
+          done
+          DUDUQ_PHASE2_BATCH=multilingual DUDUQ_QA_SAMPLE_MODE=source-mechanic \
+            node qa/verify-phase2-new-source-browser.mjs
+      - name: Save precise QA result; never label smoke as completed certification
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,writeFileSync} from 'node:fs';
+          const actual=JSON.parse(readFileSync('qa/results/phase2-multilingual-source-browser.json'));
+          const prev=JSON.parse(readFileSync('qa/results/phase2-structured-integration.json'));
+          assert.equal(actual.status,'PASS_NEW_SOURCE_REAL_BROWSER_QA_ONLY');
+          assert.equal(actual.verificationMode,'REPRESENTATIVE_SOURCE_AND_MECHANIC_QA_ONLY');
+          assert.equal(actual.failed.length,0);
+          const report={...prev,status:'STRUCTURED_MEDIA_VISUAL_SAMPLE_PASS_FULL_QA_PENDING',
+           visualChecks:actual.checks,productionDeployed:false,pedagogicalQAApproved:false,releaseApproved:false};
+          writeFileSync('qa/results/phase2-structured-visual-summary.json',JSON.stringify(report,null,2)+'\n');
+          console.log('VERIFIED_STRUCTURED_VISUAL='+JSON.stringify(report));
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-structured-bilingual-qa-package
+          retention-days: 90
+          if-no-files-found: warn
+          compression-level: 0
+          path: |
+            qa/results/phase2-structured-integration.json
+            qa/results/phase2-structured-visual-summary.json
+            qa/results/phase2-multilingual-source-qa-patch.json
+            qa/results/phase2-multilingual-source-preflight.json
+            qa/results/phase2-multilingual-source-browser.json
+            qa/results/phase2-multilingual-source-browser/*.png
+            qa/results/duduq-phase2-structured-bilingual-unapproved.tar.gz
+            qa/results/duduq-phase2-structured-bilingual-unapproved.sha256
