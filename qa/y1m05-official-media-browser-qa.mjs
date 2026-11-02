@@ -240,12 +240,13 @@ try{
     await writeFile(reportPath,JSON.stringify(report,null,2)+'\n');
     console.log(JSON.stringify({stage:'QUESTION_ROUTE',moduleId,questionId:question.item_id,pass:check.pass,
       dynamicObserved:dynamicVisibility?.observations?.length||0,dynamicExpected:dynamicVisibility?.expectedPaths?.length||0}));
-    if(!check.pass)throw Error('QUESTION_ROUTE_MEDIA_QA_FAILED:'+question.item_id+':'+JSON.stringify(check).slice(0,1200));
   }
   const missing=[...expectedPaths.keys()].filter(x=>!observed.has(x));
   await auditContext.close();
-  if(missing.length)throw Error('RUNTIME_PATHS_NOT_OBSERVED_ACROSS_20_QUESTIONS:'+missing.join(','));
   report.observedRuntimePaths=[...observed].sort();
+  report.routeFailures=report.routes.filter(x=>!x.pass).map(x=>({questionId:x.questionId,mechanicId:x.mechanicId,
+    expectedQuestionPaths:x.expectedQuestionPaths,observedPaths:x.images.map(image=>image.path)}));
+  report.missingRuntimePaths=missing;
 
   await browser.close();browser=await chromium.launch({headless:true});
   const rawVideoDir=path.join(out,'video-raw');await mkdir(rawVideoDir,{recursive:true});
@@ -293,7 +294,8 @@ try{
     {name:'mobile-390x844',viewport:views.mobile}
   ]){
     const touchResult=await runTouchGameplay(browser,{...touchCase,route:gameplayRoute});report.responsiveGameplay.push(touchResult);
-    if(!touchResult.pass)throw Error('REAL_TOUCH_GAMEPLAY_QA_FAILED:'+touchCase.name+':'+JSON.stringify(touchResult).slice(0,2400));
+    console.log(JSON.stringify({stage:'TOUCH_GAMEPLAY',moduleId,name:touchCase.name,pass:touchResult.pass,
+      fullyContainedOfficialImages:touchResult.fullyContainedOfficialImages,officialImageCount:touchResult.officialImages.length}));
   }
 
   const traceContext=await browser.newContext({viewport:views.desktop});
@@ -328,9 +330,22 @@ try{
     record.fullyContainedOfficialImages=images.filter(x=>x.rect.x>=0&&x.rect.y>=0&&x.rect.right<=test.viewport.width&&x.rect.bottom<=test.viewport.height).length;
     record.pass=record.officialImageCount>0&&record.visibleOfficialImages===record.officialImageCount&&
       record.fullyContainedOfficialImages===record.officialImageCount&&overflowX===0&&iframeCount===0;
-    report.screenshots.push(record);if(!record.pass)throw Error('RESPONSIVE_SCREENSHOT_QA_FAILED:'+test.name);
+    report.screenshots.push(record);
+    console.log(JSON.stringify({stage:'RESPONSIVE_SCREENSHOT',moduleId,name:test.name,questionId:test.questionId,pass:record.pass,
+      fullyContainedOfficialImages:record.fullyContainedOfficialImages,officialImageCount:record.officialImageCount}));
   }
-  report.status='PASS';report.passedRoutes=report.routes.filter(x=>x.pass).length;
+  report.passedRoutes=report.routes.filter(x=>x.pass).length;
+  report.gateFailures=[];
+  if(report.routes.length!==20||report.routeFailures.length)report.gateFailures.push({gate:'QUESTION_ROUTES',
+    passed:report.passedRoutes,total:report.routes.length,failedQuestionIds:report.routeFailures.map(x=>x.questionId)});
+  if(report.missingRuntimePaths.length)report.gateFailures.push({gate:'RUNTIME_PATH_COVERAGE',missing:report.missingRuntimePaths});
+  if(report.gameplay?.pass!==true)report.gateFailures.push({gate:'DESKTOP_POINTER_GAMEPLAY'});
+  if(report.responsiveGameplay.length!==2||report.responsiveGameplay.some(x=>!x.pass))report.gateFailures.push({gate:'RESPONSIVE_TOUCH_GAMEPLAY',
+    failed:report.responsiveGameplay.filter(x=>!x.pass).map(x=>x.name)});
+  if(report.screenshots.length!==3||report.screenshots.some(x=>!x.pass))report.gateFailures.push({gate:'RESPONSIVE_SCREENSHOTS',
+    failed:report.screenshots.filter(x=>!x.pass).map(x=>x.name)});
+  if(report.gateFailures.length){report.status='FAIL';report.error='QA_GATE_FAILURES:'+JSON.stringify(report.gateFailures);process.exitCode=1;}
+  else report.status='PASS';
 }catch(error){report.status='FAIL';report.error=String(error?.stack||error).slice(0,5000);process.exitCode=1;}
 finally{
   await browser?.close().catch(()=>{});report.finishedAt=new Date().toISOString();await writeFile(reportPath,JSON.stringify(report,null,2)+'\n');
