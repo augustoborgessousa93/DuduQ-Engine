@@ -1018,3 +1018,57 @@ jobs:
             qa/results/duduq-phase2-food-qa.tar.gz
             qa/results/duduq-phase2-food-qa.sha256
             /tmp/duduq-food-pages.log
+
+
+  phase2-inspect-prior-evidence:
+    if: ${{ github.ref_name == 'qa/duduq-phase2-source-expansion-20261102' && github.event_name == 'push' && contains(github.event.head_commit.message, '[diagnostic-only]') }}
+    name: Read three failed image cases from EXISTING immutable QA artifact
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+      actions: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Reuse previous artifact, never rebuild or run Chromium
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/phase2-last qa-diag
+          gh run download 41542079899 --repo augustoborgessousa93/DuduQ-Engine \
+            --name duduq-phase2-combined-food-banana-qa-41542079899 \
+            --dir /tmp/phase2-last
+          python3 - <<'PY'
+          import glob,json,os
+          files=glob.glob('/tmp/phase2-last/**/phase2-new-source-browser.json',recursive=True)
+          assert len(files)==1, 'NEW_SOURCE_REPORT_NOT_IN_OLD_ARTIFACT'
+          report=json.load(open(files[0],encoding='utf-8'))
+          failed=report.get('failed',[])
+          assert len(failed)==3, 'OLD_RUN_FAILURE_COUNT_CHANGED'
+          cases=report.get('cases',[])
+          focus=[]
+          for f in failed:
+              matches=[c for c in cases if c.get('questionId')==f.get('questionId') and c.get('viewport')==f.get('viewport')]
+              assert len(matches)==1, 'FAILURE_CASE_DETAIL_MISSING'
+              c=matches[0]
+              focus.append({'questionId':f.get('questionId'),'viewport':f.get('viewport'),
+               'mechanic':c.get('mechanic'),'required':c.get('required'),
+               'visiblePaths':c.get('visiblePaths'),'loadedPaths':c.get('loadedPaths'),
+               'errors':c.get('errors'),'frames':c.get('frames'),
+               'bubbleFrameSeen':c.get('bubbleFrameSeen'),
+               'bubbleImageElements':c.get('bubbleImageElements'),
+               'mainInteractionState':c.get('mainInteractionState'),
+               'frameDiagnostics':c.get('frameDiagnostics')})
+          data={'sourceRun':41542079899,'totalChecks':report.get('checks'),
+           'failedCases':len(failed),'cases':focus}
+          os.makedirs('qa-diag',exist_ok=True)
+          with open('qa-diag/only-three-failures.json','w',encoding='utf-8') as out:
+              json.dump(data,out,indent=2,ensure_ascii=False)
+          print('REAL_THREE_CASES_JSON='+json.dumps(data,ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: duduq-phase2-only-three-failures
+          path: qa-diag/only-three-failures.json
+          retention-days: 60
