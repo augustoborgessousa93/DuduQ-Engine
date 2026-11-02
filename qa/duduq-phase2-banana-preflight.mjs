@@ -79,7 +79,7 @@ for(const planned of rows){
    row.kind==='image'&&row.integrationStatus==='SOURCE_READY'&&row.temporary==null),
   registryIsUnapprovedSvg:Boolean(current&&current.kind==='image'&&
    current.urlOrPath===row?.sourcePath&&current.urlOrPath.endsWith('.svg')&&
-   current.semantic==='banana'&&current.temporary!==false&&
+   current.semantic==='banana'&&current.temporary===true&&
    current.humanResolutionStatus!=='PEDAGOGICAL_QA_APPROVED'&&
    current.integrationStatus!=='OFFICIAL_MEDIA_QA_PASSED_REVIEW_BRANCH'),
   usageMatches:Boolean(questionIds.length===planned.queueUsage&&
@@ -121,11 +121,15 @@ console.log(JSON.stringify({status:result.status,contracts:result.verifiedQuesti
 /**
  * QA-only apply mode. Uses the same complete-graph preflight above; the
  * production package, source curriculum and approved media are immutable.
- * Usage: DUDUQ_QA_ONLY=1 node qa/duduq-phase2-banana-preflight.mjs dist-pages assets-source --apply
+ * Usage: copy the verified dist-pages into qa/dist-pages-banana-candidate, then run:
+ * DUDUQ_QA_ONLY=1 node qa/duduq-phase2-banana-preflight.mjs qa/dist-pages-banana-candidate assets-source --apply
+ * Never patch the canonical dist-pages tree in place.
  * The result is an isolated, unapproved candidate, NOT a release.
  */
 if(process.argv.includes('--apply')){
  assert.equal(process.env.DUDUQ_QA_ONLY,'1','APPLY_REQUIRES_EXPLICIT_EPHEMERAL_QA');
+ assert.notEqual(dist,path.resolve(root,'dist-pages'),'REFUSE_TO_MUTATE_CANONICAL_DIST_PAGES');
+ assert(dist.startsWith(path.resolve(root,'qa')+path.sep),'APPLY_REQUIRES_ISOLATED_QA_DIST');
  assert.equal(result.verifiedQuestionContracts,600,'QUESTION_COUNT_CHANGED');
  const eligible=results.filter(x=>x.decision==='ELIGIBLE_FOR_ISOLATED_QA_PATCH');
  assert(eligible.length>0,'NO_SEMANTICALLY_VERIFIED_BANANA_BINDINGS');
@@ -153,7 +157,7 @@ if(process.argv.includes('--apply')){
   const index=indices.get(binding.mediaId);
   assert(Number.isInteger(index),'MEDIA_ID_NOT_IN_REGISTRY:'+binding.mediaId);
   const previous=updated.entries[index];
-  updated.entries[index]={...previous,status:'APPROVED',kind:'image',
+  updated.entries[index]={...previous,status:previous.status,kind:'image',
    temporary:true,integrationStatus:'CANDIDATE_PREVIEW_ONLY_PEDAGOGICAL_QA_PENDING',
    humanResolutionStatus:'PEDAGOGICAL_QA_PENDING',
    urlOrPath:imagePath,sha256:imageSha,
