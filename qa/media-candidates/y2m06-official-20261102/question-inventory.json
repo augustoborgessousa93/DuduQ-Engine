@@ -1,0 +1,1751 @@
+{
+  "schemaVersion": "DUDUQ_MEDIA_QUESTION_INVENTORY_V1",
+  "createdAt": "2026-11-02T19:46:07.533Z",
+  "moduleId": "Y2M06",
+  "questionCount": 20,
+  "source": "dist-pages/content/english/year-2/module-06/questions.json",
+  "sourceSha256": "b3199e7be552ca42ce01138eacf96967cd245be79557cace8d39e3a3fcc0cc62",
+  "registrySource": "dist-pages/content/english/media/media-registry.json",
+  "registrySha256": "ce8b74d3087e513622ff1efc9a999536c98744578d1989b0222b427b33f9d1c2",
+  "scope": "READ_ONLY_CONTRACT_AND_SEMANTIC_TARGET_INVENTORY_BEFORE_GENERATION_BINDING",
+  "contractResolution": {
+    "activities": 20,
+    "questionsWithVisualMedia": 20,
+    "questionsWithoutVisualMedia": 0,
+    "visibleMediaUsageRecords": 106,
+    "distinctOccurrenceScopedBindings": 94,
+    "distinctSourceMediaIds": 56
+  },
+  "canonicalSemanticTargets": [
+    "eye",
+    "ear",
+    "nose",
+    "mouth",
+    "orange",
+    "grape",
+    "papaya",
+    "melon",
+    "pear",
+    "knee",
+    "shoulders",
+    "finger",
+    "banana",
+    "apple",
+    "carrot",
+    "tomato",
+    "potato",
+    "feet",
+    "head",
+    "hands",
+    "legs",
+    "arms",
+    "big apple",
+    "big melon",
+    "big banana",
+    "small grape",
+    "small pear",
+    "small carrot",
+    "big"
+  ],
+  "generationPlan": {
+    "nativeGenerationConcepts": [
+      "eye",
+      "ear",
+      "nose",
+      "mouth",
+      "orange",
+      "grape",
+      "papaya",
+      "melon",
+      "pear",
+      "knee",
+      "shoulders",
+      "finger",
+      "banana",
+      "apple",
+      "carrot",
+      "tomato",
+      "potato",
+      "big apple",
+      "big melon",
+      "big banana",
+      "small grape",
+      "small pear",
+      "small carrot"
+    ],
+    "verifiedReusableConcepts": [
+      "feet",
+      "head",
+      "hands",
+      "legs",
+      "arms",
+      "big"
+    ],
+    "totalCandidateConcepts": 29,
+    "productionApproved": false,
+    "integrationApplied": false
+  },
+  "questions": [
+    {
+      "questionId": "Y2M06-Q001",
+      "sequencePosition": 1,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "instructionTitleEn": "eye, ear, nose, mouth",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "teaching: Extend body terms and introduce a small active food core. Focus: eye.",
+      "answerKey": {
+        "Y2M06-Q001-I1": "Y2M06-Q001-T1",
+        "Y2M06-Q001-I2": "Y2M06-Q001-T2",
+        "Y2M06-Q001-I3": "Y2M06-Q001-T3",
+        "Y2M06-Q001-I4": "Y2M06-Q001-T4"
+      },
+      "semanticTargets": [
+        "eye",
+        "ear",
+        "nose",
+        "mouth"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-26139F65B6D3AAFA",
+        "IMG-V11-2B-54E44F386CF7B470",
+        "IMG-V11-2B-B23C054704E6158D",
+        "IMG-V11-2B-B4BC475E5A5F026F"
+      ],
+      "visibleMediaUsageCount": 4,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q001",
+          "mediaId": "IMG-V11-2B-B4BC475E5A5F026F",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "eye",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q001-T1"
+        },
+        {
+          "questionId": "Y2M06-Q001",
+          "mediaId": "IMG-V11-2B-54E44F386CF7B470",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "ear",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q001-T2"
+        },
+        {
+          "questionId": "Y2M06-Q001",
+          "mediaId": "IMG-V11-2B-B23C054704E6158D",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "nose",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q001-T3"
+        },
+        {
+          "questionId": "Y2M06-Q001",
+          "mediaId": "IMG-V11-2B-26139F65B6D3AAFA",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "mouth",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q001-T4"
+        }
+      ],
+      "questionContractSha256": "331afcc2ff919adda7d93c5c59cbfe7e12f24225a77e64be214427a5e0effef9",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "sequencePosition": 2,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "instructionTitleEn": "orange, grape, papaya, melon, pear",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "teaching: Extend body terms and introduce a small active food core. Focus: pear.",
+      "answerKey": {
+        "Y2M06-Q002-L1": "Y2M06-Q002-R1",
+        "Y2M06-Q002-L2": "Y2M06-Q002-R2",
+        "Y2M06-Q002-L3": "Y2M06-Q002-R3",
+        "Y2M06-Q002-L4": "Y2M06-Q002-R4",
+        "Y2M06-Q002-L5": "Y2M06-Q002-R5"
+      },
+      "semanticTargets": [
+        "orange",
+        "grape",
+        "papaya",
+        "melon",
+        "pear"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-1EABF9E8AAAB576B",
+        "IMG-V11-2B-3E8B870AE9E69B6A",
+        "IMG-V11-2B-BC3B9081178AE7A4",
+        "IMG-V11-2B-D1344634366B33A5",
+        "IMG-Y1M03-Q001-ORANGE"
+      ],
+      "visibleMediaUsageCount": 5,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q002",
+          "mediaId": "IMG-Y1M03-Q001-ORANGE",
+          "contractPath": "pairs[0].b",
+          "role": "CONTENT",
+          "semanticTarget": "orange",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q002-R1"
+        },
+        {
+          "questionId": "Y2M06-Q002",
+          "mediaId": "IMG-V11-2B-BC3B9081178AE7A4",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "grape",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q002-R2"
+        },
+        {
+          "questionId": "Y2M06-Q002",
+          "mediaId": "IMG-V11-2B-D1344634366B33A5",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "papaya",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q002-R3"
+        },
+        {
+          "questionId": "Y2M06-Q002",
+          "mediaId": "IMG-V11-2B-1EABF9E8AAAB576B",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "melon",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q002-R4"
+        },
+        {
+          "questionId": "Y2M06-Q002",
+          "mediaId": "IMG-V11-2B-3E8B870AE9E69B6A",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "pear",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q002-R5"
+        }
+      ],
+      "questionContractSha256": "44ccac63a998c1cd7cb46bf3ec0b8fcd3c1b57268b188fca605471831744a2c1",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "sequencePosition": 3,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "instructionTitleEn": "nose",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "guided practice: Extend body terms and introduce a small active food core. Focus: head.",
+      "answerKey": "Y2M06-Q003-O1",
+      "semanticTargets": [
+        "nose",
+        "eye",
+        "ear",
+        "mouth",
+        "orange",
+        "grape"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-30690D3C168DA49E",
+        "IMG-V11-2B-372152A8B0B3430F",
+        "IMG-V11-2B-689B471440B0B576",
+        "IMG-V11-2B-857902711A3A0499",
+        "IMG-V11-2B-BC3B9081178AE7A4",
+        "IMG-Y1M03-Q001-ORANGE"
+      ],
+      "visibleMediaUsageCount": 10,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q003",
+          "mediaId": "IMG-V11-2B-689B471440B0B576",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "nose",
+          "correct": true,
+          "optionOrCardId": "Y2M06-Q003-O1"
+        },
+        {
+          "questionId": "Y2M06-Q003",
+          "mediaId": "IMG-V11-2B-857902711A3A0499",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "eye",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q003-O2"
+        },
+        {
+          "questionId": "Y2M06-Q003",
+          "mediaId": "IMG-V11-2B-30690D3C168DA49E",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "ear",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q003-O3"
+        },
+        {
+          "questionId": "Y2M06-Q003",
+          "mediaId": "IMG-V11-2B-372152A8B0B3430F",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "mouth",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q003-O4"
+        },
+        {
+          "questionId": "Y2M06-Q003",
+          "mediaId": "IMG-V11-2B-689B471440B0B576",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "nose",
+          "correct": true,
+          "optionOrCardId": "Y2M06-Q003-O1"
+        },
+        {
+          "questionId": "Y2M06-Q003",
+          "mediaId": "IMG-V11-2B-857902711A3A0499",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "eye",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q003-D1"
+        },
+        {
+          "questionId": "Y2M06-Q003",
+          "mediaId": "IMG-V11-2B-30690D3C168DA49E",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "ear",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q003-D2"
+        },
+        {
+          "questionId": "Y2M06-Q003",
+          "mediaId": "IMG-V11-2B-372152A8B0B3430F",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "mouth",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q003-D3"
+        },
+        {
+          "questionId": "Y2M06-Q003",
+          "mediaId": "IMG-Y1M03-Q001-ORANGE",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "orange",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q003-D4"
+        },
+        {
+          "questionId": "Y2M06-Q003",
+          "mediaId": "IMG-V11-2B-BC3B9081178AE7A4",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "grape",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q003-D5"
+        }
+      ],
+      "questionContractSha256": "db4052cafece10e12b54e80cda8fd9ecde9393382536cb9144c6b0834f5e21c9",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "sequencePosition": 4,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "instructionTitleEn": "mouth",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "guided practice: Extend body terms and introduce a small active food core. Focus: body command set.",
+      "answerKey": "Y2M06-Q004-O1",
+      "semanticTargets": [
+        "mouth",
+        "eye",
+        "ear",
+        "nose"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-30690D3C168DA49E",
+        "IMG-V11-2B-372152A8B0B3430F",
+        "IMG-V11-2B-689B471440B0B576",
+        "IMG-V11-2B-857902711A3A0499"
+      ],
+      "visibleMediaUsageCount": 4,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q004",
+          "mediaId": "IMG-V11-2B-372152A8B0B3430F",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "mouth",
+          "correct": true,
+          "optionOrCardId": "Y2M06-Q004-O1"
+        },
+        {
+          "questionId": "Y2M06-Q004",
+          "mediaId": "IMG-V11-2B-857902711A3A0499",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "eye",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q004-O2"
+        },
+        {
+          "questionId": "Y2M06-Q004",
+          "mediaId": "IMG-V11-2B-30690D3C168DA49E",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "ear",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q004-O3"
+        },
+        {
+          "questionId": "Y2M06-Q004",
+          "mediaId": "IMG-V11-2B-689B471440B0B576",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "nose",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q004-O4"
+        }
+      ],
+      "questionContractSha256": "f574be44f420c107dff42dcd54037614c3d47037d899250f71062b812fe2839a",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "sequencePosition": 5,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_IMAGE",
+      "instructionTitleEn": "eye, ear, nose, mouth",
+      "primaryInstructionEn": "Find the matching pairs.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "Body block stays separate from food block and supports sound-to-referent recognition. Curricular target: eye; ear; nose; mouth.",
+      "answerKey": [
+        "Y2M06-Q005-P1",
+        "Y2M06-Q005-P2",
+        "Y2M06-Q005-P3",
+        "Y2M06-Q005-P4"
+      ],
+      "semanticTargets": [
+        "eye",
+        "ear",
+        "nose",
+        "mouth"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0D4D258A62F7709C",
+        "IMG-V11-2B-7E8EB0BB1DCBBF01",
+        "IMG-V11-2B-C806365B55CB438A",
+        "IMG-V11-2B-FA6FB43D25AF5A2C"
+      ],
+      "visibleMediaUsageCount": 4,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q005",
+          "mediaId": "IMG-V11-2B-FA6FB43D25AF5A2C",
+          "contractPath": "pairs[0].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "eye",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y2M06-Q005",
+          "mediaId": "IMG-V11-2B-0D4D258A62F7709C",
+          "contractPath": "pairs[1].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "ear",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y2M06-Q005",
+          "mediaId": "IMG-V11-2B-C806365B55CB438A",
+          "contractPath": "pairs[2].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "nose",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y2M06-Q005",
+          "mediaId": "IMG-V11-2B-7E8EB0BB1DCBBF01",
+          "contractPath": "pairs[3].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "mouth",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "questionContractSha256": "6999233dc9bc1adfc3fb43b9e346649dd69a57594ea52923a7fcd1d0a1c7751a",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "sequencePosition": 6,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "instructionTitleEn": "knee, shoulders, eye, ear, nose, mouth",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "guided practice: Extend body terms and introduce a small active food core. Focus: identify body/food.",
+      "answerKey": {
+        "Y2M06-Q006-L1": "Y2M06-Q006-R1",
+        "Y2M06-Q006-L2": "Y2M06-Q006-R2",
+        "Y2M06-Q006-L3": "Y2M06-Q006-R3",
+        "Y2M06-Q006-L4": "Y2M06-Q006-R4",
+        "Y2M06-Q006-L5": "Y2M06-Q006-R5",
+        "Y2M06-Q006-L6": "Y2M06-Q006-R6"
+      },
+      "semanticTargets": [
+        "knee",
+        "shoulders",
+        "eye",
+        "ear",
+        "nose",
+        "mouth"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-1BD9271CB0107E95",
+        "IMG-V11-2B-938708DB14D30D4B",
+        "IMG-V11-2B-AD538F3601F0D40A",
+        "IMG-V11-2B-D633F5E3AD9165C8",
+        "IMG-V11-2B-F08A6487F6240A45",
+        "IMG-V11-2B-F3FAB54D046C94A0"
+      ],
+      "visibleMediaUsageCount": 6,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q006",
+          "mediaId": "IMG-V11-2B-D633F5E3AD9165C8",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "knee",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q006-R1"
+        },
+        {
+          "questionId": "Y2M06-Q006",
+          "mediaId": "IMG-V11-2B-F3FAB54D046C94A0",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "shoulders",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q006-R2"
+        },
+        {
+          "questionId": "Y2M06-Q006",
+          "mediaId": "IMG-V11-2B-AD538F3601F0D40A",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "eye",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q006-R3"
+        },
+        {
+          "questionId": "Y2M06-Q006",
+          "mediaId": "IMG-V11-2B-938708DB14D30D4B",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "ear",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q006-R4"
+        },
+        {
+          "questionId": "Y2M06-Q006",
+          "mediaId": "IMG-V11-2B-1BD9271CB0107E95",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "nose",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q006-R5"
+        },
+        {
+          "questionId": "Y2M06-Q006",
+          "mediaId": "IMG-V11-2B-F08A6487F6240A45",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "mouth",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q006-R6"
+        }
+      ],
+      "questionContractSha256": "8a0f49209261cde70ea0e5b2b86a21367013c24fbd5576a7f41ee64e5e3d17b9",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "sequencePosition": 7,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "instructionTitleEn": "nose, mouth, finger, knee",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "recognition: Extend body terms and introduce a small active food core. Focus: ear.",
+      "answerKey": {
+        "Y2M06-Q007-I1": "Y2M06-Q007-T1",
+        "Y2M06-Q007-I2": "Y2M06-Q007-T2",
+        "Y2M06-Q007-I3": "Y2M06-Q007-T3",
+        "Y2M06-Q007-I4": "Y2M06-Q007-T4"
+      },
+      "semanticTargets": [
+        "nose",
+        "mouth",
+        "finger",
+        "knee"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-26139F65B6D3AAFA",
+        "IMG-V11-2B-554E165910572343",
+        "IMG-V11-2B-7948E91B1FE60FC8",
+        "IMG-V11-2B-B23C054704E6158D"
+      ],
+      "visibleMediaUsageCount": 4,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q007",
+          "mediaId": "IMG-V11-2B-B23C054704E6158D",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "nose",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q007-T1"
+        },
+        {
+          "questionId": "Y2M06-Q007",
+          "mediaId": "IMG-V11-2B-26139F65B6D3AAFA",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "mouth",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q007-T2"
+        },
+        {
+          "questionId": "Y2M06-Q007",
+          "mediaId": "IMG-V11-2B-7948E91B1FE60FC8",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "finger",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q007-T3"
+        },
+        {
+          "questionId": "Y2M06-Q007",
+          "mediaId": "IMG-V11-2B-554E165910572343",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "knee",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q007-T4"
+        }
+      ],
+      "questionContractSha256": "2abb46761389ec4c87780c61208900ba0105a5fc9664321227a468b7d99d9b6f",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q008",
+      "sequencePosition": 8,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "instructionTitleEn": "It's a papaya.",
+      "primaryInstructionEn": "Look at the picture and complete the sentence.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "recognition: Extend body terms and introduce a small active food core. Focus: orange.",
+      "answerKey": "papaya",
+      "semanticTargets": [
+        "papaya"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-D1344634366B33A5"
+      ],
+      "visibleMediaUsageCount": 1,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q008",
+          "mediaId": "IMG-V11-2B-D1344634366B33A5",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "papaya",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "questionContractSha256": "9686ba53c98db4e71a1dabe2b8857c45e8ef5adde56432b48ab27f8fddc3fec6",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "sequencePosition": 9,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "instructionTitleEn": "banana, pear, orange, grape, papaya, melon",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "recognition: Extend body terms and introduce a small active food core. Focus: hands.",
+      "answerKey": {
+        "Y2M06-Q009-L1": "Y2M06-Q009-R1",
+        "Y2M06-Q009-L2": "Y2M06-Q009-R2",
+        "Y2M06-Q009-L3": "Y2M06-Q009-R3",
+        "Y2M06-Q009-L4": "Y2M06-Q009-R4",
+        "Y2M06-Q009-L5": "Y2M06-Q009-R5",
+        "Y2M06-Q009-L6": "Y2M06-Q009-R6"
+      },
+      "semanticTargets": [
+        "banana",
+        "pear",
+        "orange",
+        "grape",
+        "papaya",
+        "melon"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-1EABF9E8AAAB576B",
+        "IMG-V11-2B-2C6DC2C54EF9FE82",
+        "IMG-V11-2B-3E8B870AE9E69B6A",
+        "IMG-V11-2B-BC3B9081178AE7A4",
+        "IMG-V11-2B-D1344634366B33A5",
+        "IMG-Y1M03-Q001-ORANGE"
+      ],
+      "visibleMediaUsageCount": 6,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q009",
+          "mediaId": "IMG-V11-2B-2C6DC2C54EF9FE82",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "banana",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q009-R1"
+        },
+        {
+          "questionId": "Y2M06-Q009",
+          "mediaId": "IMG-V11-2B-3E8B870AE9E69B6A",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "pear",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q009-R2"
+        },
+        {
+          "questionId": "Y2M06-Q009",
+          "mediaId": "IMG-Y1M03-Q001-ORANGE",
+          "contractPath": "pairs[2].b",
+          "role": "CONTENT",
+          "semanticTarget": "orange",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q009-R3"
+        },
+        {
+          "questionId": "Y2M06-Q009",
+          "mediaId": "IMG-V11-2B-BC3B9081178AE7A4",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "grape",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q009-R4"
+        },
+        {
+          "questionId": "Y2M06-Q009",
+          "mediaId": "IMG-V11-2B-D1344634366B33A5",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "papaya",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q009-R5"
+        },
+        {
+          "questionId": "Y2M06-Q009",
+          "mediaId": "IMG-V11-2B-1EABF9E8AAAB576B",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "melon",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q009-R6"
+        }
+      ],
+      "questionContractSha256": "0963f453a3a1a671e3bb8ace9c9e66f955384572e0024bededdc96ce360ac6a8",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "sequencePosition": 10,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "instructionTitleEn": "grape",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "comprehension: Extend body terms and introduce a small active food core. Focus: apple.",
+      "answerKey": "Y2M06-Q010-O1",
+      "semanticTargets": [
+        "grape",
+        "apple",
+        "banana",
+        "pear",
+        "eye",
+        "ear"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-249393BE62012CB7",
+        "IMG-V11-2B-3C181EF0580BB69B",
+        "IMG-V11-2B-42E0B7F7C0CBAA69",
+        "IMG-V11-2B-54E44F386CF7B470",
+        "IMG-V11-2B-6C28CE93AFE4F8BB",
+        "IMG-V11-2B-B4BC475E5A5F026F"
+      ],
+      "visibleMediaUsageCount": 10,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q010",
+          "mediaId": "IMG-V11-2B-249393BE62012CB7",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "grape",
+          "correct": true,
+          "optionOrCardId": "Y2M06-Q010-O1"
+        },
+        {
+          "questionId": "Y2M06-Q010",
+          "mediaId": "IMG-V11-2B-3C181EF0580BB69B",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "apple",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q010-O2"
+        },
+        {
+          "questionId": "Y2M06-Q010",
+          "mediaId": "IMG-V11-2B-42E0B7F7C0CBAA69",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "banana",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q010-O3"
+        },
+        {
+          "questionId": "Y2M06-Q010",
+          "mediaId": "IMG-V11-2B-6C28CE93AFE4F8BB",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "pear",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q010-O4"
+        },
+        {
+          "questionId": "Y2M06-Q010",
+          "mediaId": "IMG-V11-2B-249393BE62012CB7",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "grape",
+          "correct": true,
+          "optionOrCardId": "Y2M06-Q010-O1"
+        },
+        {
+          "questionId": "Y2M06-Q010",
+          "mediaId": "IMG-V11-2B-3C181EF0580BB69B",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "apple",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q010-D1"
+        },
+        {
+          "questionId": "Y2M06-Q010",
+          "mediaId": "IMG-V11-2B-42E0B7F7C0CBAA69",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "banana",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q010-D2"
+        },
+        {
+          "questionId": "Y2M06-Q010",
+          "mediaId": "IMG-V11-2B-6C28CE93AFE4F8BB",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "pear",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q010-D3"
+        },
+        {
+          "questionId": "Y2M06-Q010",
+          "mediaId": "IMG-V11-2B-B4BC475E5A5F026F",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "eye",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q010-D4"
+        },
+        {
+          "questionId": "Y2M06-Q010",
+          "mediaId": "IMG-V11-2B-54E44F386CF7B470",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "ear",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q010-D5"
+        }
+      ],
+      "questionContractSha256": "80975620ed035c7fdd537b1bb7eaac83f089e97b123b39c2b57efa427d22f055",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "sequencePosition": 11,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "instructionTitleEn": "apple, banana, pear, orange",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "comprehension: Extend body terms and introduce a small active food core. Focus: It's a [color] [food] only as guided chunk.",
+      "answerKey": {
+        "Y2M06-Q011-I1": "Y2M06-Q011-T1",
+        "Y2M06-Q011-I2": "Y2M06-Q011-T2",
+        "Y2M06-Q011-I3": "Y2M06-Q011-T3",
+        "Y2M06-Q011-I4": "Y2M06-Q011-T4"
+      },
+      "semanticTargets": [
+        "apple",
+        "banana",
+        "pear",
+        "orange"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-47E739917EEB3083",
+        "IMG-V11-2B-53B01C40B9C5E915",
+        "IMG-V11-2B-EB9A765F1CD87AC2",
+        "IMG-Y1M03-Q001-ORANGE"
+      ],
+      "visibleMediaUsageCount": 4,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q011",
+          "mediaId": "IMG-V11-2B-47E739917EEB3083",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "apple",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q011-T1"
+        },
+        {
+          "questionId": "Y2M06-Q011",
+          "mediaId": "IMG-V11-2B-53B01C40B9C5E915",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "banana",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q011-T2"
+        },
+        {
+          "questionId": "Y2M06-Q011",
+          "mediaId": "IMG-V11-2B-EB9A765F1CD87AC2",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "pear",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q011-T3"
+        },
+        {
+          "questionId": "Y2M06-Q011",
+          "mediaId": "IMG-Y1M03-Q001-ORANGE",
+          "contractPath": "targets[3]",
+          "role": "CONTENT",
+          "semanticTarget": "orange",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q011-T4"
+        }
+      ],
+      "questionContractSha256": "7b58c076b87d4bbed145d330a2dd067db129c453a9ac4c1b2a5d3ed98e7be9dc",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "sequencePosition": 12,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "instructionTitleEn": "grape, papaya, melon, carrot, tomato, potato",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "comprehension: Extend body terms and introduce a small active food core. Focus: describe.",
+      "answerKey": {
+        "Y2M06-Q012-L1": "Y2M06-Q012-R1",
+        "Y2M06-Q012-L2": "Y2M06-Q012-R2",
+        "Y2M06-Q012-L3": "Y2M06-Q012-R3",
+        "Y2M06-Q012-L4": "Y2M06-Q012-R4",
+        "Y2M06-Q012-L5": "Y2M06-Q012-R5",
+        "Y2M06-Q012-L6": "Y2M06-Q012-R6"
+      },
+      "semanticTargets": [
+        "grape",
+        "papaya",
+        "melon",
+        "carrot",
+        "tomato",
+        "potato"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0C2E37014FB8B5AF",
+        "IMG-V11-2B-178C9BC5F16D0575",
+        "IMG-V11-2B-1EABF9E8AAAB576B",
+        "IMG-V11-2B-59314A55011BCD3F",
+        "IMG-V11-2B-BC3B9081178AE7A4",
+        "IMG-V11-2B-D1344634366B33A5"
+      ],
+      "visibleMediaUsageCount": 6,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q012",
+          "mediaId": "IMG-V11-2B-BC3B9081178AE7A4",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "grape",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q012-R1"
+        },
+        {
+          "questionId": "Y2M06-Q012",
+          "mediaId": "IMG-V11-2B-D1344634366B33A5",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "papaya",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q012-R2"
+        },
+        {
+          "questionId": "Y2M06-Q012",
+          "mediaId": "IMG-V11-2B-1EABF9E8AAAB576B",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "melon",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q012-R3"
+        },
+        {
+          "questionId": "Y2M06-Q012",
+          "mediaId": "IMG-V11-2B-0C2E37014FB8B5AF",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "carrot",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q012-R4"
+        },
+        {
+          "questionId": "Y2M06-Q012",
+          "mediaId": "IMG-V11-2B-59314A55011BCD3F",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "tomato",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q012-R5"
+        },
+        {
+          "questionId": "Y2M06-Q012",
+          "mediaId": "IMG-V11-2B-178C9BC5F16D0575",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "potato",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q012-R6"
+        }
+      ],
+      "questionContractSha256": "9ead74193afb75840c4fd401ad2d999ce9b9e741b5b6cf34398142c943cf28d1",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "sequencePosition": 13,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "instructionTitleEn": "finger",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "listening: Extend body terms and introduce a small active food core. Focus: nose.",
+      "answerKey": "Y2M06-Q013-O1",
+      "semanticTargets": [
+        "finger",
+        "nose",
+        "mouth",
+        "knee"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-372152A8B0B3430F",
+        "IMG-V11-2B-689B471440B0B576",
+        "IMG-V11-2B-7C7AC57571396DE1",
+        "IMG-V11-2B-A210FFD1BF96DDB4"
+      ],
+      "visibleMediaUsageCount": 4,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q013",
+          "mediaId": "IMG-V11-2B-A210FFD1BF96DDB4",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "finger",
+          "correct": true,
+          "optionOrCardId": "Y2M06-Q013-O1"
+        },
+        {
+          "questionId": "Y2M06-Q013",
+          "mediaId": "IMG-V11-2B-689B471440B0B576",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "nose",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q013-O2"
+        },
+        {
+          "questionId": "Y2M06-Q013",
+          "mediaId": "IMG-V11-2B-372152A8B0B3430F",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "mouth",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q013-O3"
+        },
+        {
+          "questionId": "Y2M06-Q013",
+          "mediaId": "IMG-V11-2B-7C7AC57571396DE1",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "knee",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q013-O4"
+        }
+      ],
+      "questionContractSha256": "7fac05fafc43177e345237205393dd69918502e24a34cbe6138e80d13073571e",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "sequencePosition": 14,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "instructionTitleEn": "carrot, tomato, grape, papaya, melon",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "listening: Extend body terms and introduce a small active food core. Focus: grape.",
+      "answerKey": {
+        "Y2M06-Q014-L1": "Y2M06-Q014-R1",
+        "Y2M06-Q014-L2": "Y2M06-Q014-R2",
+        "Y2M06-Q014-L3": "Y2M06-Q014-R3",
+        "Y2M06-Q014-L4": "Y2M06-Q014-R4",
+        "Y2M06-Q014-L5": "Y2M06-Q014-R5"
+      },
+      "semanticTargets": [
+        "carrot",
+        "tomato",
+        "grape",
+        "papaya",
+        "melon"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0C2E37014FB8B5AF",
+        "IMG-V11-2B-1EABF9E8AAAB576B",
+        "IMG-V11-2B-59314A55011BCD3F",
+        "IMG-V11-2B-BC3B9081178AE7A4",
+        "IMG-V11-2B-D1344634366B33A5"
+      ],
+      "visibleMediaUsageCount": 5,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q014",
+          "mediaId": "IMG-V11-2B-0C2E37014FB8B5AF",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "carrot",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q014-R1"
+        },
+        {
+          "questionId": "Y2M06-Q014",
+          "mediaId": "IMG-V11-2B-59314A55011BCD3F",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "tomato",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q014-R2"
+        },
+        {
+          "questionId": "Y2M06-Q014",
+          "mediaId": "IMG-V11-2B-BC3B9081178AE7A4",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "grape",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q014-R3"
+        },
+        {
+          "questionId": "Y2M06-Q014",
+          "mediaId": "IMG-V11-2B-D1344634366B33A5",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "papaya",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q014-R4"
+        },
+        {
+          "questionId": "Y2M06-Q014",
+          "mediaId": "IMG-V11-2B-1EABF9E8AAAB576B",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "melon",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q014-R5"
+        }
+      ],
+      "questionContractSha256": "2d7c251375d814a06959953b652730841ff46959eef148fca6a8c798241cacde",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "sequencePosition": 15,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_IMAGE",
+      "instructionTitleEn": "feet, head, hands, legs, arms",
+      "primaryInstructionEn": "Find the matching pairs.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "Retrieves Y1M05 body targets after the new body block; does not combine body and food into one overloaded set. Curricular target: head; hands; legs; arms; feet.",
+      "answerKey": [
+        "Y2M06-Q015-P1",
+        "Y2M06-Q015-P2",
+        "Y2M06-Q015-P3",
+        "Y2M06-Q015-P4",
+        "Y2M06-Q015-P5"
+      ],
+      "semanticTargets": [
+        "feet",
+        "head",
+        "hands",
+        "legs",
+        "arms"
+      ],
+      "referencedMediaIds": [
+        "IMG-Y1M05-Q001-ARMS",
+        "IMG-Y1M05-Q001-HANDS",
+        "IMG-Y1M05-Q001-HEAD",
+        "IMG-Y1M05-Q001-LEGS",
+        "IMG-Y1M05-Q003-FEET"
+      ],
+      "visibleMediaUsageCount": 5,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q015",
+          "mediaId": "IMG-Y1M05-Q003-FEET",
+          "contractPath": "pairs[0].cards[1]",
+          "role": "CONTENT",
+          "semanticTarget": "feet",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y2M06-Q015",
+          "mediaId": "IMG-Y1M05-Q001-HEAD",
+          "contractPath": "pairs[1].cards[1]",
+          "role": "CONTENT",
+          "semanticTarget": "head",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y2M06-Q015",
+          "mediaId": "IMG-Y1M05-Q001-HANDS",
+          "contractPath": "pairs[2].cards[1]",
+          "role": "CONTENT",
+          "semanticTarget": "hands",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y2M06-Q015",
+          "mediaId": "IMG-Y1M05-Q001-LEGS",
+          "contractPath": "pairs[3].cards[1]",
+          "role": "CONTENT",
+          "semanticTarget": "legs",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y2M06-Q015",
+          "mediaId": "IMG-Y1M05-Q001-ARMS",
+          "contractPath": "pairs[4].cards[1]",
+          "role": "CONTENT",
+          "semanticTarget": "arms",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "questionContractSha256": "ebb8239b539d1d4eaae5c66fb2f1002a8f6c9d8b3238af10f201cdb1cf68ee08",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "sequencePosition": 16,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "instructionTitleEn": "banana",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "retrieval: Extend body terms and introduce a small active food core. Focus: banana.",
+      "answerKey": "Y2M06-Q016-O1",
+      "semanticTargets": [
+        "banana",
+        "pear",
+        "orange",
+        "grape",
+        "eye",
+        "ear"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-249393BE62012CB7",
+        "IMG-V11-2B-42E0B7F7C0CBAA69",
+        "IMG-V11-2B-54E44F386CF7B470",
+        "IMG-V11-2B-6C28CE93AFE4F8BB",
+        "IMG-V11-2B-B4BC475E5A5F026F",
+        "IMG-Y1M03-Q001-ORANGE"
+      ],
+      "visibleMediaUsageCount": 10,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q016",
+          "mediaId": "IMG-V11-2B-42E0B7F7C0CBAA69",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "banana",
+          "correct": true,
+          "optionOrCardId": "Y2M06-Q016-O1"
+        },
+        {
+          "questionId": "Y2M06-Q016",
+          "mediaId": "IMG-V11-2B-6C28CE93AFE4F8BB",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "pear",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q016-O2"
+        },
+        {
+          "questionId": "Y2M06-Q016",
+          "mediaId": "IMG-Y1M03-Q001-ORANGE",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "orange",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q016-O3"
+        },
+        {
+          "questionId": "Y2M06-Q016",
+          "mediaId": "IMG-V11-2B-249393BE62012CB7",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "grape",
+          "correct": false,
+          "optionOrCardId": "Y2M06-Q016-O4"
+        },
+        {
+          "questionId": "Y2M06-Q016",
+          "mediaId": "IMG-V11-2B-42E0B7F7C0CBAA69",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "banana",
+          "correct": true,
+          "optionOrCardId": "Y2M06-Q016-O1"
+        },
+        {
+          "questionId": "Y2M06-Q016",
+          "mediaId": "IMG-V11-2B-6C28CE93AFE4F8BB",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "pear",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q016-D1"
+        },
+        {
+          "questionId": "Y2M06-Q016",
+          "mediaId": "IMG-Y1M03-Q001-ORANGE",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "CONTENT",
+          "semanticTarget": "orange",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q016-D2"
+        },
+        {
+          "questionId": "Y2M06-Q016",
+          "mediaId": "IMG-V11-2B-249393BE62012CB7",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "grape",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q016-D3"
+        },
+        {
+          "questionId": "Y2M06-Q016",
+          "mediaId": "IMG-V11-2B-B4BC475E5A5F026F",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "eye",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q016-D4"
+        },
+        {
+          "questionId": "Y2M06-Q016",
+          "mediaId": "IMG-V11-2B-54E44F386CF7B470",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "ear",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q016-D5"
+        }
+      ],
+      "questionContractSha256": "9af16db6ff343d0d6f227dedcc07175ad09ce9c4eb232bb2c562c34cb5262cd1",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "sequencePosition": 17,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "instructionTitleEn": "big apple, big melon, big banana, small grape, small pear, small carrot",
+      "primaryInstructionEn": "Sort each item: big or small.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "review: Extend body terms and introduce a small active food core. Focus: big/small + food.",
+      "answerKey": {
+        "Y2M06-Q017-I1": "big",
+        "Y2M06-Q017-I2": "big",
+        "Y2M06-Q017-I3": "big",
+        "Y2M06-Q017-I4": "small",
+        "Y2M06-Q017-I5": "small",
+        "Y2M06-Q017-I6": "small"
+      },
+      "semanticTargets": [
+        "big apple",
+        "big melon",
+        "big banana",
+        "small grape",
+        "small pear",
+        "small carrot"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-06480218CC9BB101",
+        "IMG-V11-2B-48ABF3A913FF63A0",
+        "IMG-V11-2B-64F65B6254CDA0AF",
+        "IMG-V11-2B-8C45DA566BF3CD91",
+        "IMG-V11-2B-A0A8A7AAF4DD84D8",
+        "IMG-V11-2B-EAAF1FABD1844321"
+      ],
+      "visibleMediaUsageCount": 6,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q017",
+          "mediaId": "IMG-V11-2B-A0A8A7AAF4DD84D8",
+          "contractPath": "items[0]",
+          "role": "grouping_card",
+          "semanticTarget": "big apple",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q017-I1"
+        },
+        {
+          "questionId": "Y2M06-Q017",
+          "mediaId": "IMG-V11-2B-EAAF1FABD1844321",
+          "contractPath": "items[1]",
+          "role": "grouping_card",
+          "semanticTarget": "big melon",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q017-I2"
+        },
+        {
+          "questionId": "Y2M06-Q017",
+          "mediaId": "IMG-V11-2B-64F65B6254CDA0AF",
+          "contractPath": "items[2]",
+          "role": "grouping_card",
+          "semanticTarget": "big banana",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q017-I3"
+        },
+        {
+          "questionId": "Y2M06-Q017",
+          "mediaId": "IMG-V11-2B-48ABF3A913FF63A0",
+          "contractPath": "items[3]",
+          "role": "grouping_card",
+          "semanticTarget": "small grape",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q017-I4"
+        },
+        {
+          "questionId": "Y2M06-Q017",
+          "mediaId": "IMG-V11-2B-06480218CC9BB101",
+          "contractPath": "items[4]",
+          "role": "grouping_card",
+          "semanticTarget": "small pear",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q017-I5"
+        },
+        {
+          "questionId": "Y2M06-Q017",
+          "mediaId": "IMG-V11-2B-8C45DA566BF3CD91",
+          "contractPath": "items[5]",
+          "role": "grouping_card",
+          "semanticTarget": "small carrot",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q017-I6"
+        }
+      ],
+      "questionContractSha256": "3253a1cef86dec3526fc3677bf218b8b1db88c92de15ad431f52dac2e9c62324",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q018",
+      "sequencePosition": 18,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "instructionTitleEn": "I see a big banana.",
+      "primaryInstructionEn": "Look at the picture and complete the sentence.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "review: Extend body terms and introduce a small active food core. Focus: count.",
+      "answerKey": "big",
+      "semanticTargets": [
+        "big"
+      ],
+      "referencedMediaIds": [
+        "IMG-Q009-BIG"
+      ],
+      "visibleMediaUsageCount": 1,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q018",
+          "mediaId": "IMG-Q009-BIG",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "big",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "questionContractSha256": "00ef3e2e262bf736820a54f8afce203579fc235eeda99319e03ad53ad48bf5f5",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "sequencePosition": 19,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "instructionTitleEn": "mouth, eye, ear, apple, banana, carrot",
+      "primaryInstructionEn": "Sort each item: body or food.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "consolidation: Extend body terms and introduce a small active food core. Focus: mouth.",
+      "answerKey": {
+        "Y2M06-Q019-I1": "body",
+        "Y2M06-Q019-I2": "body",
+        "Y2M06-Q019-I3": "body",
+        "Y2M06-Q019-I4": "food",
+        "Y2M06-Q019-I5": "food",
+        "Y2M06-Q019-I6": "food"
+      },
+      "semanticTargets": [
+        "mouth",
+        "eye",
+        "ear",
+        "apple",
+        "banana",
+        "carrot"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-20F90DE290CFA9E8",
+        "IMG-V11-2B-3496550C7BE55739",
+        "IMG-V11-2B-4E8C7B72B1EE887C",
+        "IMG-V11-2B-5596327D2C423D85",
+        "IMG-V11-2B-74052139C0D44F03",
+        "IMG-V11-2B-BE4D9E25DFED3EBE"
+      ],
+      "visibleMediaUsageCount": 6,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q019",
+          "mediaId": "IMG-V11-2B-74052139C0D44F03",
+          "contractPath": "items[0]",
+          "role": "grouping_card",
+          "semanticTarget": "mouth",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q019-I1"
+        },
+        {
+          "questionId": "Y2M06-Q019",
+          "mediaId": "IMG-V11-2B-20F90DE290CFA9E8",
+          "contractPath": "items[1]",
+          "role": "grouping_card",
+          "semanticTarget": "eye",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q019-I2"
+        },
+        {
+          "questionId": "Y2M06-Q019",
+          "mediaId": "IMG-V11-2B-3496550C7BE55739",
+          "contractPath": "items[2]",
+          "role": "grouping_card",
+          "semanticTarget": "ear",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q019-I3"
+        },
+        {
+          "questionId": "Y2M06-Q019",
+          "mediaId": "IMG-V11-2B-4E8C7B72B1EE887C",
+          "contractPath": "items[3]",
+          "role": "grouping_card",
+          "semanticTarget": "apple",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q019-I4"
+        },
+        {
+          "questionId": "Y2M06-Q019",
+          "mediaId": "IMG-V11-2B-5596327D2C423D85",
+          "contractPath": "items[4]",
+          "role": "grouping_card",
+          "semanticTarget": "banana",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q019-I5"
+        },
+        {
+          "questionId": "Y2M06-Q019",
+          "mediaId": "IMG-V11-2B-BE4D9E25DFED3EBE",
+          "contractPath": "items[5]",
+          "role": "grouping_card",
+          "semanticTarget": "carrot",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q019-I6"
+        }
+      ],
+      "questionContractSha256": "85f33a5069fae95dd3ec2c98c42a18ad715d68ae2eb4e62387da24fd3754dc97",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "sequencePosition": 20,
+      "topicEn": "My Body and Everyday Foods",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "instructionTitleEn": "potato, papaya, melon, carrot, tomato",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Follow safe command and identify food in audio/image.",
+      "curricularObjective": "Extend body terms and introduce a small active food core.",
+      "learningTarget": "consolidation: Extend body terms and introduce a small active food core. Focus: papaya.",
+      "answerKey": {
+        "Y2M06-Q020-L1": "Y2M06-Q020-R1",
+        "Y2M06-Q020-L2": "Y2M06-Q020-R2",
+        "Y2M06-Q020-L3": "Y2M06-Q020-R3",
+        "Y2M06-Q020-L4": "Y2M06-Q020-R4",
+        "Y2M06-Q020-L5": "Y2M06-Q020-R5"
+      },
+      "semanticTargets": [
+        "potato",
+        "papaya",
+        "melon",
+        "carrot",
+        "tomato"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0C2E37014FB8B5AF",
+        "IMG-V11-2B-178C9BC5F16D0575",
+        "IMG-V11-2B-1EABF9E8AAAB576B",
+        "IMG-V11-2B-59314A55011BCD3F",
+        "IMG-V11-2B-D1344634366B33A5"
+      ],
+      "visibleMediaUsageCount": 5,
+      "visualUsages": [
+        {
+          "questionId": "Y2M06-Q020",
+          "mediaId": "IMG-V11-2B-178C9BC5F16D0575",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "potato",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q020-R1"
+        },
+        {
+          "questionId": "Y2M06-Q020",
+          "mediaId": "IMG-V11-2B-D1344634366B33A5",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "papaya",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q020-R2"
+        },
+        {
+          "questionId": "Y2M06-Q020",
+          "mediaId": "IMG-V11-2B-1EABF9E8AAAB576B",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "melon",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q020-R3"
+        },
+        {
+          "questionId": "Y2M06-Q020",
+          "mediaId": "IMG-V11-2B-0C2E37014FB8B5AF",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "carrot",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q020-R4"
+        },
+        {
+          "questionId": "Y2M06-Q020",
+          "mediaId": "IMG-V11-2B-59314A55011BCD3F",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "tomato",
+          "correct": null,
+          "optionOrCardId": "Y2M06-Q020-R5"
+        }
+      ],
+      "questionContractSha256": "1c9f714f690071629cda56b0d888f7a7e8297156104de670a22a6add81d54d0e",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    }
+  ]
+}
