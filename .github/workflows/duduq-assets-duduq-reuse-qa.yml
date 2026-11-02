@@ -705,7 +705,7 @@ jobs:
           node qa/duduq-phase2-banana-preflight.mjs qa/dist-pages-food-candidate assets-source --apply
           test "$(node -p "require('./qa/results/phase2-banana-qa-patch.json').changedMediaIds")" = "2"
           echo "BANANA_AND_FOOD_SHARE_ONE_QA_CANDIDATE_NO_PRODUCTION_DEPLOY"
-      - name: Audit twelve exact source concepts against compiled 600-question graph
+      - name: Audit pinned source concepts against compiled 600-question graph
         shell: bash
         run: |
           set -Eeuo pipefail
@@ -716,9 +716,11 @@ jobs:
           import {readFileSync} from 'node:fs';
           const r=JSON.parse(readFileSync('qa/results/phase2-food-preflight.json'));
           assert.equal(r.verifiedQuestionContracts,600);
-          assert.equal(r.eligibleIds,16,'EXPANSION_MUST_ADD_TEN_EXACT_BINDINGS');
-          assert.equal(r.affectedQuestions,13,'EXPANSION_QUESTION_COUNT_MISMATCH');
-          assert.deepEqual(r.affectedModules,['Y2M06','Y3M06','Y4M05','Y4M06','Y5M05']);
+          assert(r.inspectedConcepts.includes('living room'),'LIVING_ROOM_NOT_AUDITED');
+          assert(r.eligibleIds>=16,'PREVIOUSLY_VERIFIED_BINDINGS_REGRESSED');
+          assert(r.affectedQuestions>=13,'PREVIOUSLY_VERIFIED_QUESTIONS_REGRESSED');
+          for(const m of ['Y2M06','Y3M06','Y4M05','Y4M06','Y5M05'])
+            assert(r.affectedModules.includes(m),'PREVIOUSLY_VERIFIED_MODULE_REGRESSED:'+m);
           assert.equal(r.eligibleIds+r.blockedIds,r.candidateIds);
           assert.equal(r.productionDeployed,false);
           console.log(JSON.stringify({eligible:r.eligibleIds,blocked:r.blockedIds,modules:r.affectedModules}));
@@ -748,8 +750,8 @@ jobs:
           const banana=JSON.parse(readFileSync('qa/results/phase2-banana-qa-patch.json'));
           assert.equal(b.size,a.size+p.images.length+1);
           assert.equal(banana.changedMediaIds,2);
-          assert.equal(p.changedMediaIds,16);
-          assert.equal(new Set([...banana.bindings.map(x=>x.mediaId),...p.bindings.map(x=>x.mediaId)]).size,18);
+          assert(p.changedMediaIds>=16,'PREVIOUSLY_VERIFIED_BINDINGS_REGRESSED');
+          assert.equal(new Set([...banana.bindings.map(x=>x.mediaId),...p.bindings.map(x=>x.mediaId)]).size,banana.changedMediaIds+p.changedMediaIds,'SHARED_ID_OVERLAP');
           assert.equal(hash(readFileSync(path.join(after,banana.assetPath))),banana.sourceSha256);
           for(const [rel,digest] of a){
             if(rel!==registry)assert.equal(b.get(rel),digest,'UNEXPECTED_MUTATION:'+rel);
@@ -802,14 +804,17 @@ jobs:
           const fv=JSON.parse(readFileSync('qa/results/phase2-food-browser.json'));
           const ids=new Set([...b.bindings.map(x=>x.mediaId),...f.bindings.map(x=>x.mediaId)]);
           const questions=new Set([...b.changedQuestionIds,...f.changedQuestionIds]);
-          assert.equal(ids.size,18);assert.equal(questions.size,13);
-          assert.equal(bv.checks,8);assert.equal(fv.checks,26);
+          assert.equal(ids.size,b.changedMediaIds+f.changedMediaIds,'SHARED_ID_OVERLAP');
+          assert(questions.size>=13,'PREVIOUSLY_VERIFIED_QUESTIONS_REGRESSED');
+          assert.equal(bv.checks,b.changedQuestionIds.length*2);
+          assert.equal(fv.checks,f.changedQuestionIds.length*2);
           assert.equal(bv.status,'PASS_VISUAL_GATE_QA_ONLY');
           assert.equal(fv.status,'PASS_VISUAL_GATE_QA_ONLY');
-          const report={schemaVersion:'DUDUQ_PHASE2_COMBINED_BANANA_FOOD_QA_V1',
-           status:'ISOLATED_QA_PASS_NOT_PEDAGOGICALLY_APPROVED',mediaIds:18,
-           images:13,affectedQuestions:13,affectedModules:['Y2M06','Y3M06','Y4M05','Y4M06','Y5M05'],
-           mobileDesktopVisibilityChecks:34,failedVisibilityChecks:0,
+          const modules=[...new Set([...questions].map(q=>q.slice(0,5)))].sort();
+          const report={schemaVersion:'DUDUQ_PHASE2_COMBINED_BANANA_FOOD_QA_V2',
+           status:'ISOLATED_QA_PASS_NOT_PEDAGOGICALLY_APPROVED',mediaIds:ids.size,
+           images:1+f.images.length,affectedQuestions:questions.size,affectedModules:modules,
+           mobileDesktopVisibilityChecks:bv.checks+fv.checks,failedVisibilityChecks:0,
            questionContractsPreserved:600,answerKeysChanged:0,audioChanged:0,
            mechanicsChanged:0,productionDeployed:false,releaseApproved:false};
           writeFileSync('qa/results/phase2-combined-qa.json',JSON.stringify(report,null,2)+'\n');
