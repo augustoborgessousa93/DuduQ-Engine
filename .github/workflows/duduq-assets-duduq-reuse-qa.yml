@@ -46,7 +46,7 @@ concurrency:
   group: duduq-assets-duduq-reuse-${{ github.ref }}
   # Preserve the in-flight Chromium audit when new QA commits arrive.
   # GitHub may replace a pending run, but must not cancel the running evidence.
-  cancel-in-progress: false
+  cancel-in-progress: ${{ github.ref_name == 'qa/duduq-phase2-banana-preflight-20261102' }}
 
 jobs:
   isolated-v26-media-reuse:
