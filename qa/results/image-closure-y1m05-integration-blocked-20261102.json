@@ -256,9 +256,13 @@
   ],
   "independentLinuxQa": {
     "currentCorrection": {
-      "status": "READY_FOR_WORKFLOW_DISPATCH",
-      "url": null,
-      "headSha": "d7c88d08d7fba798a0c2b05e50b3984b983acf3f",
+      "status": "queued",
+      "conclusion": null,
+      "runNumber": 47,
+      "runId": 41476391273,
+      "url": "https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/41476391273",
+      "headSha": "f1fdc4f7220331a4900781cc365496420443a507",
+      "dispatchedAt": "2026-11-02T15:55:38Z",
       "reviewBranch": "automation/y1m05-integration-qa-20261102",
       "pushStatus": "PASS",
       "mergeOrDeployPerformed": false
