@@ -105,7 +105,11 @@ for(const spec of sourceSpecs){
  const qc=inspectPng(bytes);
  const valid=qc.valid&&qc.transparent&&bytes.readUInt32BE(16)>=1024&&bytes.readUInt32BE(20)>=1024&&bytes[24]===8&&bytes[25]===6;
  const digest=sha256(bytes);
- const rel='content/english/assets/images/assets-duduq/food-'+spec.concept+'-'+digest.slice(0,12)+'.png';
+ // Keep asset URLs canonical: spaces in "teddy bear" / "video game" become %20
+ // in browser URL.pathname, which made valid images invisible to strict path QA.
+ const slug=spec.concept.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+ assert(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug),'UNSAFE_CONCEPT_SLUG');
+ const rel='content/english/assets/images/assets-duduq/food-'+slug+'-'+digest.slice(0,12)+'.png';
  const asset={...spec,sourceCommit,sha256:digest,path:rel,bytes,valid};
  assets.push(asset);
  const rows=queue.filter(r=>r.semantic===spec.concept&&r.classification==='PROVISIONAL');
