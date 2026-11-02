@@ -1,0 +1,295 @@
+{
+  "schemaVersion": "DUDUQ_PREEXISTING_ORIGINAL_PNG_AUDIT_V1",
+  "createdAt": "2026-11-02T19:46:07.533Z",
+  "moduleId": "Y2M06",
+  "searchScope": [
+    "qa/media-candidates/y1m05-official-20261030",
+    "qa/media-candidates/y1m06-official-20261030"
+  ],
+  "concepts": [
+    "eye",
+    "ear",
+    "nose",
+    "mouth",
+    "orange",
+    "grape",
+    "papaya",
+    "melon",
+    "pear",
+    "knee",
+    "shoulders",
+    "finger",
+    "banana",
+    "apple",
+    "carrot",
+    "tomato",
+    "potato",
+    "big apple",
+    "big melon",
+    "big banana",
+    "small grape",
+    "small pear",
+    "small carrot",
+    "feet",
+    "head",
+    "hands",
+    "legs",
+    "arms",
+    "big"
+  ],
+  "namedPngMatches": [
+    {
+      "concept": "feet",
+      "sourceManifest": "qa/media-candidates/y1m05-official-20261030/batch-manifest.json",
+      "sourceManifestSha256": "a1fb983cd41132cfe851d0a84af8b08aec11796ee373c19e50b3352606ee1f56",
+      "sourceFile": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-FEET.png",
+      "sourceSha256": "162628c4587183735ac0a6841d70c6830142278cb25599fb8f63f1a6e1c56fa0",
+      "manifestHashMatches": true,
+      "sourceReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "sourceProvider": "Codex built-in image_gen",
+      "sourceProvenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational game vocabulary-card image for children ages 6–11\nPrimary request: a clear visual teaching the English word \"feet\"\nSubject: exactly two friendly child feet wearing simple matching blue-and-white sneakers, shown together from just above the ankles; the two feet are the unmistakable focus\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette\nComposition/framing: compact nearly square centered close-up, both shoes and ankles fully visible and separated, generous safe margin on every side\nLighting/mood: soft bright studio lighting, cheerful and neutral\nConstraints: one individual image; genuinely transparent background with every background pixel fully transparent; accurate anatomy; exactly two feet; no legs above short ankles; no extra limbs; no floor; no cast shadow; no glow; no halo; no vignette; no text; no letters; no symbols; no logos; no watermark; no collage; no grid; no frame",
+        "originalFile": "provenance/originals/FEET-ORIGINAL.png",
+        "originalSha256": "8ca6d7e7c6cac005aa7d1f1895bf83d9f667bae3a36f1a9a1f1ccf3e1340c16c",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      },
+      "preservedSource": {
+        "path": "qa/media-candidates/y1m05-official-20261030/provenance/originals/FEET-ORIGINAL.png",
+        "sha256": "8ca6d7e7c6cac005aa7d1f1895bf83d9f667bae3a36f1a9a1f1ccf3e1340c16c",
+        "exists": true
+      },
+      "technical": {
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1620538,
+        "opaquePixels": 716937,
+        "valid": true,
+        "alphaThreshold": 64,
+        "componentCount": 1,
+        "microOpaqueIslandCount": 0
+      },
+      "reusable": true
+    },
+    {
+      "concept": "head",
+      "sourceManifest": "qa/media-candidates/y1m05-official-20261030/batch-manifest.json",
+      "sourceManifestSha256": "a1fb983cd41132cfe851d0a84af8b08aec11796ee373c19e50b3352606ee1f56",
+      "sourceFile": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-HEAD.png",
+      "sourceSha256": "3cfe7135cc6e3f44a5e3a9f84475e4da902bfe5a1948605e6b822ca434764c8c",
+      "manifestHashMatches": true,
+      "sourceReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "sourceProvider": "Codex built-in image_gen",
+      "sourceProvenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "REUSED_NATIVE_20261029",
+        "prompt": "One friendly school-age child's head and upper shoulders, clear frontal close-up emphasizing the head; premium rounded 3D cartoon for children ages 6–11, vivid natural colors, crisp silhouette. Square transparent PNG, subject fully visible with clear margin. One child only; no hands, extra people, unrelated objects, text, watermark, collage, grid or opaque background.",
+        "originalFile": "provenance/originals/HEAD-ORIGINAL.png",
+        "originalSha256": "02f4b0a096e8433efdfb5f3f210ead571ec74c84cba41dc05cead6db6f318068",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      },
+      "preservedSource": {
+        "path": "qa/media-candidates/y1m05-official-20261030/provenance/originals/HEAD-ORIGINAL.png",
+        "sha256": "02f4b0a096e8433efdfb5f3f210ead571ec74c84cba41dc05cead6db6f318068",
+        "exists": true
+      },
+      "technical": {
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1582816,
+        "opaquePixels": 748754,
+        "valid": true,
+        "alphaThreshold": 64,
+        "componentCount": 6,
+        "microOpaqueIslandCount": 0
+      },
+      "reusable": true
+    },
+    {
+      "concept": "hands",
+      "sourceManifest": "qa/media-candidates/y1m05-official-20261030/batch-manifest.json",
+      "sourceManifestSha256": "a1fb983cd41132cfe851d0a84af8b08aec11796ee373c19e50b3352606ee1f56",
+      "sourceFile": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-HANDS.png",
+      "sourceSha256": "c56ae4711b50d5ee41d46253f168e1e46ab09321123d22c085ef6db175364828",
+      "manifestHashMatches": true,
+      "sourceReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "sourceProvider": "Codex built-in image_gen",
+      "sourceProvenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational game vocabulary-card image for children ages 6–11\nPrimary request: exactly two open human hands, clearly teaching the English word \"hands\"\nSubject: a matched pair of friendly child hands with five natural fingers each, palms facing forward, wrists included, no other body parts\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, vivid natural skin tones\nComposition/framing: centered close-up, both hands fully visible and separated, large readable subject with generous safe margin\nLighting/mood: soft bright studio lighting, cheerful and neutral\nConstraints: one individual image; genuinely transparent background; accurate anatomy; no cutoff; no extra fingers; no missing fingers; no arms beyond short wrists; no face; no text; no letters; no symbols; no logos; no watermark; no collage; no grid; no frame; no floor shadow",
+        "originalFile": "provenance/originals/HANDS-ORIGINAL.png",
+        "originalSha256": "99322110b54172bfe1b10cba62bd0cba6eff628ab20dd5a5a1c62c18bd5079d3",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 2,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      },
+      "preservedSource": {
+        "path": "qa/media-candidates/y1m05-official-20261030/provenance/originals/HANDS-ORIGINAL.png",
+        "sha256": "99322110b54172bfe1b10cba62bd0cba6eff628ab20dd5a5a1c62c18bd5079d3",
+        "exists": true
+      },
+      "technical": {
+        "width": 1792,
+        "height": 1536,
+        "transparentPixels": 2140984,
+        "opaquePixels": 581434,
+        "valid": true,
+        "alphaThreshold": 64,
+        "componentCount": 2,
+        "microOpaqueIslandCount": 0
+      },
+      "reusable": true
+    },
+    {
+      "concept": "legs",
+      "sourceManifest": "qa/media-candidates/y1m05-official-20261030/batch-manifest.json",
+      "sourceManifestSha256": "a1fb983cd41132cfe851d0a84af8b08aec11796ee373c19e50b3352606ee1f56",
+      "sourceFile": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-LEGS.png",
+      "sourceSha256": "688b7842435f0fa02797da3d8433edb88dff09f79373e2f2f7de89365933674a",
+      "manifestHashMatches": true,
+      "sourceReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "sourceProvider": "Codex built-in image_gen",
+      "sourceProvenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational game vocabulary-card image for children ages 6–11\nPrimary request: a clear visual teaching the English word \"legs\"\nSubject: one friendly school-age child lower body from shorts to simple sneakers, standing naturally with exactly two complete legs; thighs, knees and lower legs are the unmistakable focus\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, simple blue shorts and neutral sneakers\nComposition/framing: centered front view, both legs fully visible from shorts to shoes with generous safe margin, no cropped limbs\nLighting/mood: soft bright studio lighting, cheerful and neutral\nConstraints: one individual image; genuinely transparent background; accurate anatomy; exactly two legs; no extra limbs; no torso above the waist; no text; no letters; no symbols; no logos; no watermark; no collage; no grid; no frame; no props; no opaque backdrop; no floor shadow",
+        "originalFile": "provenance/originals/LEGS-ORIGINAL.png",
+        "originalSha256": "e3c4115d78b4917321bfcfcee22c2b66bce6e7b7a71ec2304664e7d017db56a6",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      },
+      "preservedSource": {
+        "path": "qa/media-candidates/y1m05-official-20261030/provenance/originals/LEGS-ORIGINAL.png",
+        "sha256": "e3c4115d78b4917321bfcfcee22c2b66bce6e7b7a71ec2304664e7d017db56a6",
+        "exists": true
+      },
+      "technical": {
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1933255,
+        "opaquePixels": 409709,
+        "valid": true,
+        "alphaThreshold": 64,
+        "componentCount": 1,
+        "microOpaqueIslandCount": 0
+      },
+      "reusable": true
+    },
+    {
+      "concept": "arms",
+      "sourceManifest": "qa/media-candidates/y1m05-official-20261030/batch-manifest.json",
+      "sourceManifestSha256": "a1fb983cd41132cfe851d0a84af8b08aec11796ee373c19e50b3352606ee1f56",
+      "sourceFile": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-ARMS.png",
+      "sourceSha256": "ba4d3cfa789b050c22e752afde0868726b7cf37e806063bd25ec902b007c8acb",
+      "manifestHashMatches": true,
+      "sourceReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "sourceProvider": "Codex built-in image_gen",
+      "sourceProvenance": {
+        "provider": "Codex built-in image_gen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational game vocabulary-card image for children ages 6–11\nPrimary request: a compact clear visual teaching the English word \"arms\"\nSubject: one friendly school-age child shown from chest upward with exactly two complete arms raised diagonally in a wide joyful V, elbows softly bent; both upper arms and forearms are fully visible and unmistakably emphasized, hands small and relaxed at the endpoints\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, simple blue short-sleeve shirt\nComposition/framing: compact nearly square centered front view, both arms entirely inside the canvas with at least 10 percent transparent safe margin on every side\nLighting/mood: soft bright studio lighting, cheerful and neutral\nConstraints: one child only; one individual image; genuinely transparent background with every background pixel fully transparent; accurate anatomy; exactly two arms; no extra limbs; no props; no floor; no cast shadow; no glow; no halo; no vignette; no text; no letters; no symbols; no logos; no watermark; no collage; no grid; no frame",
+        "originalFile": "provenance/originals/ARMS-ORIGINAL.png",
+        "originalSha256": "a2f604b8b4a7068f48f0ce0ac362bf05c509795624c466ab9fe38237a2d3c560",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      },
+      "preservedSource": {
+        "path": "qa/media-candidates/y1m05-official-20261030/provenance/originals/ARMS-ORIGINAL.png",
+        "sha256": "a2f604b8b4a7068f48f0ce0ac362bf05c509795624c466ab9fe38237a2d3c560",
+        "exists": true
+      },
+      "technical": {
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1864738,
+        "opaquePixels": 464120,
+        "valid": true,
+        "alphaThreshold": 64,
+        "componentCount": 4,
+        "microOpaqueIslandCount": 0
+      },
+      "reusable": true
+    },
+    {
+      "concept": "big",
+      "sourceManifest": "qa/media-candidates/y1m06-official-20261030/batch-manifest.json",
+      "sourceManifestSha256": "3f9e41ef3d00594856cddf29a732ff58f98792a9d60ed9b6260d9164513a03e1",
+      "sourceFile": "qa/media-candidates/y1m06-official-20261030/images/DUDUQ-Y1M06-BIG.png",
+      "sourceSha256": "71ef4290fd60783cc62684b21d498c6ecd41b6cbc35ce08eccf2e9d4fd159291",
+      "manifestHashMatches": true,
+      "sourceReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "sourceProvider": "Codex built-in image_gen",
+      "sourceProvenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable visual teaching the size word \"big\" without using an animal\nSubject: exactly one smooth rounded toy cube in neutral medium gray, with no markings, shown very large\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered single cube occupying about 82% of the canvas with a transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one object; neutral gray only, not a red, blue, yellow or green color-vocabulary object; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/BIG-ORIGINAL.png",
+        "originalSha256": "7aabd44b08f905fec40685e1e7463887b9357daa2eb5f60d61bf02dcfcfa7c8e",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      },
+      "preservedSource": {
+        "path": "qa/media-candidates/y1m06-official-20261030/provenance/originals/BIG-ORIGINAL.png",
+        "sha256": "7aabd44b08f905fec40685e1e7463887b9357daa2eb5f60d61bf02dcfcfa7c8e",
+        "exists": true
+      },
+      "technical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 488418,
+        "opaquePixels": 1071885,
+        "valid": true,
+        "alphaThreshold": 64,
+        "componentCount": 1,
+        "microOpaqueIslandCount": 0
+      },
+      "reusable": true
+    }
+  ],
+  "priorManifestExactSemanticMatches": 6,
+  "verifiedReusableOriginalPngCount": 6,
+  "reusedOriginalPngCount": 6,
+  "generatedConceptCountRequired": 23,
+  "rejectedNearMatches": [
+    {
+      "concept": "orange",
+      "reason": "Prior Y2M02/Y2M04 orange candidates are color tokens; Y2M06 requires citrus fruit."
+    },
+    {
+      "concept": "apple",
+      "reason": "Prior counting-apple source has unverified original generation provenance and was not reused."
+    }
+  ],
+  "decision": "REUSE_6_EXACT_HASH_VERIFIED_CANDIDATES_AND_GENERATE_23_UNCOVERED_BODY_OR_FOOD_CONCEPTS",
+  "currentRegistryAssetsAreProvisional": true,
+  "currentRegistryStatus": "56_OF_56_CANONICAL_BLOCKERS_PROVISIONAL",
+  "canonicalClosureStatus": "CANDIDATE_GENERATION_ONLY_NOT_INTEGRATED"
+}

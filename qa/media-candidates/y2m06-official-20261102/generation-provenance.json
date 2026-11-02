@@ -1,0 +1,397 @@
+{
+  "schemaVersion": "DUDUQ_CODEX_NATIVE_IMAGE_PROVENANCE_V1",
+  "createdAt": "2026-11-02T19:46:07.533Z",
+  "moduleId": "Y2M06",
+  "provider": "OpenAI Codex image_gen.imagegen",
+  "tool": "real enabled Codex native image generator",
+  "apiPurchaseOrExternalCredentialUsed": false,
+  "transparentBackgroundRequested": true,
+  "generationResult": "COMPLETE_FOR_Y2M06_CANDIDATE_SCOPE_NO_GENERATOR_BLOCK",
+  "promptCatalog": {
+    "eye": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable isolated human eye teaching the English word eye\nSubject: exactly one friendly stylized child eye with clear eyelids, white sclera, warm brown iris, black pupil, and small natural eyelashes; no second eye\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: front-facing close-up of the complete eye centered and fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no face; no eyebrow; no nose; no glasses; no tears; no makeup; no other body part",
+      "transparentBackground": true
+    },
+    "ear": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable isolated human ear teaching the English word ear\nSubject: exactly one external child ear in a gentle three-quarter side view with clear natural outer-ear folds\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: close-up of the complete ear centered and fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no head; no face; no hair; no earring; no headphones; no second ear; no other body part",
+      "transparentBackground": true
+    },
+    "nose": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable isolated human nose teaching the English word nose\nSubject: exactly one friendly stylized child nose with a short bridge, rounded tip, and two natural nostrils\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: front three-quarter close-up of the complete nose centered and fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no face; no eyes; no mouth; no moustache; no glasses; no other body part",
+      "transparentBackground": true
+    },
+    "mouth": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable isolated human mouth teaching the English word mouth\nSubject: exactly one friendly smiling child mouth with soft natural lips and a small visible row of clean teeth\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: front-facing close-up of the complete mouth centered and fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no face; no nose; no chin; no tongue sticking out; no food; no speech bubble; no other body part",
+      "transparentBackground": true
+    },
+    "orange": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable orange fruit teaching the food word orange, never the color-only concept\nSubject: exactly one whole ripe orange citrus fruit with dimpled peel, tiny green stem, and one attached green leaf\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single whole fruit in a clear three-quarter view, centered and fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no color swatch; no sliced fruit; no second orange; no juice; no plate; no other food",
+      "transparentBackground": true
+    },
+    "grape": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable bunch of grapes teaching the English food word grape\nSubject: exactly one compact bunch of ripe purple grapes connected to one short green stem with one green leaf\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single grape bunch centered, every grape inside the canvas, clear bunch silhouette; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no loose extra grapes; no second bunch; no wine; no bottle; no bowl; no other fruit",
+      "transparentBackground": true
+    },
+    "papaya": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable papaya fruit teaching the English food word papaya\nSubject: exactly one lengthwise half of a ripe papaya with orange flesh, green-yellow skin, and a central cavity of glossy black seeds\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single papaya half in a slight three-quarter view, centered and fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no second half; no whole extra fruit; no mango; no plate; no knife; no other food",
+      "transparentBackground": true
+    },
+    "melon": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable melon teaching the English food word melon\nSubject: exactly one whole round cantaloupe melon with distinctive beige netted rind and a tiny stem\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single whole melon in a clear three-quarter view, centered and fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no watermelon stripes; no sliced fruit; no second melon; no plate; no other food",
+      "transparentBackground": true
+    },
+    "pear": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable pear fruit teaching the English food word pear\nSubject: exactly one ripe green-yellow pear with classic narrow neck, rounded base, brown stem, and one green leaf\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single whole pear upright, centered and fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no apple shape; no sliced fruit; no second pear; no plate; no other food",
+      "transparentBackground": true
+    },
+    "knee": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable human knee teaching the English body word knee\nSubject: one child leg bent about ninety degrees, cropped only from mid-thigh to mid-calf, with the rounded knee joint clearly prominent and anatomically natural\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: side three-quarter close-up centered on the complete visible knee joint; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no full child; no face; no foot; no hand; no injury; no bandage; no medical diagram; no other body part",
+      "transparentBackground": true
+    },
+    "shoulders": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable pair of human shoulders teaching the plural English body word shoulders\nSubject: front view of a child upper torso cropped from the base of the neck to mid-upper arms, wearing a simple blue sleeveless shirt so both rounded shoulders are fully exposed and symmetrical\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: both shoulders span the centered frame and are fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no face; no head; no hands; no lower torso; no backpack; no labels; no other body focus",
+      "transparentBackground": true
+    },
+    "finger": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable finger teaching the English body word finger\nSubject: one child hand posed with exactly one index finger extended straight upward while the other four fingers are gently folded into the palm\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: close-up centered on the single raised index finger, entire fingertip and supporting hand fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no second hand; no pointing at an object; no nail polish; no jewelry; no face; no extra prop",
+      "transparentBackground": true
+    },
+    "banana": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable banana fruit teaching the English food word banana\nSubject: exactly one ripe curved yellow banana with brown stem tips, clean peel, and no face\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single whole banana in a gentle diagonal curve, centered and fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no bunch; no peeled section; no second banana; no plate; no other food",
+      "transparentBackground": true
+    },
+    "apple": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable apple fruit teaching the English food word apple\nSubject: exactly one glossy red apple with a natural round-lobed shape, short brown stem, and one green leaf\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single whole apple upright, centered and fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no bite; no sliced fruit; no second apple; no plate; no other food",
+      "transparentBackground": true
+    },
+    "carrot": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable carrot vegetable teaching the English food word carrot\nSubject: exactly one fresh orange carrot with tapered root, subtle ridges, and a compact leafy green top\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single whole carrot on a slight diagonal, root tip and greens fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no bunch; no sliced pieces; no rabbit; no plate; no soil; no other food",
+      "transparentBackground": true
+    },
+    "tomato": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable tomato teaching the English food word tomato\nSubject: exactly one ripe round red tomato with a small green star-shaped calyx and short stem\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single whole tomato in a clear three-quarter view, centered and fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no apple leaf; no sliced pieces; no second tomato; no plate; no other food",
+      "transparentBackground": true
+    },
+    "potato": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one unmistakable potato teaching the English food word potato\nSubject: exactly one whole light-brown oval potato with natural shallow eyes and gently irregular skin\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single whole potato in a clear three-quarter view, centered and fully visible; the subject occupies about 78-86% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no sweet potato; no fries; no chips; no soil; no sprouts; no second potato; no other food",
+      "transparentBackground": true
+    },
+    "big apple": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one visibly very big red apple teaching the exact phrase big apple\nSubject: exactly one oversized glossy red apple with short brown stem and one green leaf; exaggerate its broad heavy volume while keeping natural apple anatomy\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single oversized apple centered and almost filling the canvas, complete silhouette visible; the subject occupies about 90-94% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no small apple; no comparison object; no bite; no sliced fruit; no other food",
+      "transparentBackground": true
+    },
+    "big melon": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one visibly very big cantaloupe teaching the exact phrase big melon\nSubject: exactly one oversized round cantaloupe with beige netted rind and tiny stem; exaggerate its broad heavy volume\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single oversized melon centered and almost filling the canvas, complete silhouette visible; the subject occupies about 90-94% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no small melon; no comparison object; no watermelon; no sliced fruit; no other food",
+      "transparentBackground": true
+    },
+    "big banana": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one visibly very big banana teaching the exact phrase big banana\nSubject: exactly one oversized thick curved ripe yellow banana with brown stem tips; exaggerate its robust volume while keeping natural banana anatomy\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single oversized banana spans the canvas diagonally and almost fills it, complete silhouette visible; the subject occupies about 90-94% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no small banana; no comparison object; no bunch; no peeled section; no other food",
+      "transparentBackground": true
+    },
+    "small grape": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one visibly small grape teaching the exact phrase small grape\nSubject: exactly one single purple grape berry with tiny stem, not a bunch; it must look miniature yet remain crisp and readable\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single small grape centered with visibly wider transparent margin than the big-fruit assets; the subject occupies about 48-54% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no grape bunch; no second grape; no comparison object; no wine; no other food",
+      "transparentBackground": true
+    },
+    "small pear": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one visibly small pear teaching the exact phrase small pear\nSubject: exactly one miniature green-yellow pear with classic narrow neck, rounded base, stem, and one tiny leaf\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single small pear centered with visibly wider transparent margin than the big-fruit assets; the subject occupies about 48-54% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no large pear; no second pear; no comparison object; no apple shape; no other food",
+      "transparentBackground": true
+    },
+    "small carrot": {
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English Y2M06 educational vocabulary-card PNG for children ages 6-11\nPrimary request: one visibly small carrot teaching the exact phrase small carrot\nSubject: exactly one miniature orange carrot with tapered root and compact leafy green top\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, realistic-enough educational anatomy or food materials\nComposition/framing: single small carrot centered with root and greens fully visible and wider transparent margin than the big-fruit assets; the subject occupies about 48-54% of a square canvas with a safe transparent margin\nLighting/mood: soft bright studio lighting, cheerful, calm, and child-friendly\nConstraints: genuinely transparent alpha background; no floor; no cast shadow; no glow; no halo; no text; no letters; no number; no symbol; no arrow; no logo; no watermark; no collage; no grid; no frame; no cutoff; no bunch; no second carrot; no comparison object; no rabbit; no other food",
+      "transparentBackground": true
+    }
+  },
+  "nativeGeneratedAssets": [
+    {
+      "concept": "eye",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-be77ba84-baf5-4c5d-906b-ac4870b03a4e.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-EYE-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-EYE.png",
+      "originalSha256": "5365ac311e695049de110b1329d1fd43ed070308455bc9986c02aa707b20c385",
+      "sha256": "5365ac311e695049de110b1329d1fd43ed070308455bc9986c02aa707b20c385",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "ear",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-60f97ea7-25b3-46be-b50a-4adb368c1ac7.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-EAR-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-EAR.png",
+      "originalSha256": "7edc349b604f319d61bbbbeecc520f49c94555a6e68f7910c16d00148c692696",
+      "sha256": "7edc349b604f319d61bbbbeecc520f49c94555a6e68f7910c16d00148c692696",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "nose",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-21b16a70-ae89-463e-90e4-51c58a792eca.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-NOSE-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-NOSE.png",
+      "originalSha256": "a5b24b766b8dfd4dd4cc1a513bfde063146f71f8da6bfacfa253acda2d991aa6",
+      "sha256": "a5b24b766b8dfd4dd4cc1a513bfde063146f71f8da6bfacfa253acda2d991aa6",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "mouth",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-6b88bcee-b785-45a5-8443-c4eaeb7fcf33.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-MOUTH-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-MOUTH.png",
+      "originalSha256": "7a9f6de2d160a55352dc6fc31a37a4cf2c12e85272aeadce052cbb7c3b42db7c",
+      "sha256": "7a9f6de2d160a55352dc6fc31a37a4cf2c12e85272aeadce052cbb7c3b42db7c",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "orange",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-5e0630f0-f21d-4719-8077-60d259f1d3b3.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-ORANGE-FRUIT-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-ORANGE-FRUIT.png",
+      "originalSha256": "e3e755f38c2efb6c8637bc9f9def0bd706e0f5cf6821b3efdab454666ecaee77",
+      "sha256": "e3e755f38c2efb6c8637bc9f9def0bd706e0f5cf6821b3efdab454666ecaee77",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "grape",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-2b676701-ebb3-426b-a09e-176f3aa3dcf3.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-GRAPE-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-GRAPE.png",
+      "originalSha256": "535d16680693e2ff3c8e20ce085b6e6976382f62fb795e28fc9c30eedc5789f6",
+      "sha256": "535d16680693e2ff3c8e20ce085b6e6976382f62fb795e28fc9c30eedc5789f6",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "papaya",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-de8f2291-9cc5-498f-8cf9-4b2652a74fae.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-PAPAYA-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-PAPAYA.png",
+      "originalSha256": "5908f5addad74506639b2d9211ee30852ea3dba7934d109b1edae4a90f26e748",
+      "sha256": "5908f5addad74506639b2d9211ee30852ea3dba7934d109b1edae4a90f26e748",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "melon",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-a3275597-76d6-4b63-ab40-05099bd50039.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-MELON-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-MELON.png",
+      "originalSha256": "0388cc1982c09a48f96152330b2ced86d41a0b0c6b6dadc4b21ca4a589278d4c",
+      "sha256": "0388cc1982c09a48f96152330b2ced86d41a0b0c6b6dadc4b21ca4a589278d4c",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "pear",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-6651c16a-0888-42cd-9532-cf3140306dc3.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-PEAR-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-PEAR.png",
+      "originalSha256": "9ba03aac4d3d8383a8bb2fe038f23668f02cc4b68aeb99d0148915485087fd3b",
+      "sha256": "9ba03aac4d3d8383a8bb2fe038f23668f02cc4b68aeb99d0148915485087fd3b",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "knee",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-05d97121-e293-495b-ab19-5ce6cc3765d0.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-KNEE-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-KNEE.png",
+      "originalSha256": "0a511e0fa3fcd711f9c5a4a8ee3a7a039368335c99f64ee00fcd8ff85e082190",
+      "sha256": "0a511e0fa3fcd711f9c5a4a8ee3a7a039368335c99f64ee00fcd8ff85e082190",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "shoulders",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-e4070f5b-b77e-461b-b8e3-e1ffe7d60ef1.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-SHOULDERS-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-SHOULDERS.png",
+      "originalSha256": "328568e477aad5245d21245022411a99bc4043c375bef856d42a9c044c31e3dd",
+      "sha256": "328568e477aad5245d21245022411a99bc4043c375bef856d42a9c044c31e3dd",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "finger",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-ba79441a-1cca-4c6e-8cac-e3a48ff55bff.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-FINGER-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-FINGER.png",
+      "originalSha256": "cac3cda6743a446e1bea24be538fa3a530d76d2679bf3a70cf0a147257296732",
+      "sha256": "cac3cda6743a446e1bea24be538fa3a530d76d2679bf3a70cf0a147257296732",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "banana",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-44c328c4-5f12-4dd0-b3ef-82bb1aaa28ae.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-BANANA-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-BANANA.png",
+      "originalSha256": "184fbc78aa409e71a4d6f0242082c84c9c6c573ca900037670489e84814c010e",
+      "sha256": "184fbc78aa409e71a4d6f0242082c84c9c6c573ca900037670489e84814c010e",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "apple",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-43169505-b9fe-4d9f-a891-1c7db79d862e.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-APPLE-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-APPLE.png",
+      "originalSha256": "979dccae9a68c40ae43693c8d99dbe3362c02827b518a820cf704270b2389805",
+      "sha256": "979dccae9a68c40ae43693c8d99dbe3362c02827b518a820cf704270b2389805",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "carrot",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-54103984-1b56-450d-9cdb-069dcf45f401.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-CARROT-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-CARROT.png",
+      "originalSha256": "1522fa92079f8412040ba7a206533bb4bd4cd6bf5ed0f62cdd449e2e254bc0a5",
+      "sha256": "1522fa92079f8412040ba7a206533bb4bd4cd6bf5ed0f62cdd449e2e254bc0a5",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "tomato",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-23cc2526-d9ee-4a3b-a831-288b0568aef7.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-TOMATO-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-TOMATO.png",
+      "originalSha256": "972ecec72f6689630fc7e9a5636262b44955d84ca4226a78f8ae262faa0c08eb",
+      "sha256": "972ecec72f6689630fc7e9a5636262b44955d84ca4226a78f8ae262faa0c08eb",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "potato",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-b74458d5-2c11-4d25-8578-705c17e96987.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-POTATO-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-POTATO.png",
+      "originalSha256": "40c273a8cab7b5b202cbb511692cc413a4e7963c10b2527f010eace4a6168627",
+      "sha256": "40c273a8cab7b5b202cbb511692cc413a4e7963c10b2527f010eace4a6168627",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "big apple",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-ed1cbb90-44d2-432d-8892-162b39c019a2.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-BIG-APPLE-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-BIG-APPLE.png",
+      "originalSha256": "5160d5c1cbfe1f11852d402c7cfef37f203df5d4ff73b6a6695c8a90ffdc2407",
+      "sha256": "5160d5c1cbfe1f11852d402c7cfef37f203df5d4ff73b6a6695c8a90ffdc2407",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "big melon",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-5808bdde-09e2-42d3-a766-b49af9d08760.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-BIG-MELON-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-BIG-MELON.png",
+      "originalSha256": "7821f89e13fa78ca45a2b175da24085326a23afef90657b3e947aa9bd6e7c9ca",
+      "sha256": "7821f89e13fa78ca45a2b175da24085326a23afef90657b3e947aa9bd6e7c9ca",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "big banana",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-20c7df84-add4-46cf-8809-fd7fa3c8b675.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-BIG-BANANA-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-BIG-BANANA.png",
+      "originalSha256": "6b2cbba74949d1126b2d28463f6199b2a93e419264909fbb53f3e570ea7816ec",
+      "sha256": "6b2cbba74949d1126b2d28463f6199b2a93e419264909fbb53f3e570ea7816ec",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "small grape",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-a7bf6c81-fd76-4a15-819a-62b2fdfcaa74.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-SMALL-GRAPE-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-SMALL-GRAPE.png",
+      "originalSha256": "faa908a67e0f6cfa12c28ade9ab032be1aae5db9f94e7b83808e8b4b2658a2dc",
+      "sha256": "faa908a67e0f6cfa12c28ade9ab032be1aae5db9f94e7b83808e8b4b2658a2dc",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "small pear",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-1ffc22ed-dc47-4977-823f-54750e6a5018.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-SMALL-PEAR-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-SMALL-PEAR.png",
+      "originalSha256": "f3415f7bdec104248b321c8721070273c8624e90a236a48fd416b460b305c8d7",
+      "sha256": "f3415f7bdec104248b321c8721070273c8624e90a236a48fd416b460b305c8d7",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    },
+    {
+      "concept": "small carrot",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-4f39209a-d2e8-42ec-95b1-ffec39e91ef7.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M06-SMALL-CARROT-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M06-SMALL-CARROT.png",
+      "originalSha256": "ae6d205b6c8eadca35f27158f3112f2376ffebb3690759d6aed55e47c241ddaf",
+      "sha256": "ae6d205b6c8eadca35f27158f3112f2376ffebb3690759d6aed55e47c241ddaf",
+      "transparentBackgroundRequested": true,
+      "candidateMatchesPreservedOriginal": true
+    }
+  ],
+  "reusedVerifiedOriginalAssets": [
+    {
+      "concept": "feet",
+      "sourceManifest": "qa/media-candidates/y1m05-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-FEET.png",
+      "preservedSourceCopy": "provenance/reused-sources/DUDUQ-Y2M06-FEET-SOURCE.png",
+      "candidateFile": "images/DUDUQ-Y2M06-FEET.png",
+      "sha256": "162628c4587183735ac0a6841d70c6830142278cb25599fb8f63f1a6e1c56fa0",
+      "sourceHashMatches": true
+    },
+    {
+      "concept": "head",
+      "sourceManifest": "qa/media-candidates/y1m05-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-HEAD.png",
+      "preservedSourceCopy": "provenance/reused-sources/DUDUQ-Y2M06-HEAD-SOURCE.png",
+      "candidateFile": "images/DUDUQ-Y2M06-HEAD.png",
+      "sha256": "3cfe7135cc6e3f44a5e3a9f84475e4da902bfe5a1948605e6b822ca434764c8c",
+      "sourceHashMatches": true
+    },
+    {
+      "concept": "hands",
+      "sourceManifest": "qa/media-candidates/y1m05-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-HANDS.png",
+      "preservedSourceCopy": "provenance/reused-sources/DUDUQ-Y2M06-HANDS-SOURCE.png",
+      "candidateFile": "images/DUDUQ-Y2M06-HANDS.png",
+      "sha256": "c56ae4711b50d5ee41d46253f168e1e46ab09321123d22c085ef6db175364828",
+      "sourceHashMatches": true
+    },
+    {
+      "concept": "legs",
+      "sourceManifest": "qa/media-candidates/y1m05-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-LEGS.png",
+      "preservedSourceCopy": "provenance/reused-sources/DUDUQ-Y2M06-LEGS-SOURCE.png",
+      "candidateFile": "images/DUDUQ-Y2M06-LEGS.png",
+      "sha256": "688b7842435f0fa02797da3d8433edb88dff09f79373e2f2f7de89365933674a",
+      "sourceHashMatches": true
+    },
+    {
+      "concept": "arms",
+      "sourceManifest": "qa/media-candidates/y1m05-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m05-official-20261030/images/DUDUQ-Y1M05-ARMS.png",
+      "preservedSourceCopy": "provenance/reused-sources/DUDUQ-Y2M06-ARMS-SOURCE.png",
+      "candidateFile": "images/DUDUQ-Y2M06-ARMS.png",
+      "sha256": "ba4d3cfa789b050c22e752afde0868726b7cf37e806063bd25ec902b007c8acb",
+      "sourceHashMatches": true
+    },
+    {
+      "concept": "big",
+      "sourceManifest": "qa/media-candidates/y1m06-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m06-official-20261030/images/DUDUQ-Y1M06-BIG.png",
+      "preservedSourceCopy": "provenance/reused-sources/DUDUQ-Y2M06-BIG-SOURCE.png",
+      "candidateFile": "images/DUDUQ-Y2M06-BIG.png",
+      "sha256": "71ef4290fd60783cc62684b21d498c6ecd41b6cbc35ce08eccf2e9d4fd159291",
+      "sourceHashMatches": true
+    }
+  ],
+  "missingGeneratedConcepts": [],
+  "failedAttempts": [],
+  "blocker": null,
+  "humanApproval": "PENDING_NOT_CLAIMED",
+  "integrationApplied": false
+}
