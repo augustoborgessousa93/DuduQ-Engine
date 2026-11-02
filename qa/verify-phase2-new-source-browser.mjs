@@ -9,7 +9,9 @@ import {chromium} from 'playwright';
 const dist=path.resolve('qa/dist-pages-food-candidate');
 const base=(process.env.BASE_URL||'http://127.0.0.1:4175').replace(/\/+$/,'');
 const hash=b=>createHash('sha256').update(b).digest('hex');
-const patch=JSON.parse(await readFile('qa/results/phase2-new-source-qa-patch.json','utf8'));
+const batch=process.env.DUDUQ_PHASE2_BATCH==='multilingual'?'multilingual':'new-source';
+const reportPrefix=batch==='multilingual'?'phase2-multilingual-source':'phase2-new-source';
+const patch=JSON.parse(await readFile('qa/results/'+reportPrefix+'-qa-patch.json','utf8'));
 assert.equal(patch.status,'ISOLATED_MEDIA_UPDATED_VISUAL_AND_PEDAGOGICAL_QA_PENDING');
 assert.equal(patch.verifiedContracts,600);
 assert(!patch.releaseApproved&&!patch.pedagogicalQAApproved&&!patch.productionDeployed);
@@ -31,13 +33,15 @@ for(const image of patch.images){
  assert((response.headers.get('content-type')||'').includes('image/png'),'NEW_SOURCE_NOT_PNG:'+image.assetPath);
  assert.equal(hash(Buffer.from(await response.arrayBuffer())),image.sha256,'NEW_SOURCE_HTTP_HASH_MISMATCH');
 }
-const out='qa/results/phase2-new-source-browser';
+const out='qa/results/'+reportPrefix+'-browser';
 await mkdir(out,{recursive:true});
 const browser=await chromium.launch({headless:true}),checks=[];
 try{
  for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
   const context=await browser.newContext({viewport,deviceScaleFactor:1});
-  for(const questionId of patch.changedQuestionIds){
+  const ids=batch==='multilingual'?
+   [...new Set(patch.bindings.map(b=>b.questionIds[0]))].sort():patch.changedQuestionIds;
+  for(const questionId of ids){
    const data=JSON.parse(await readFile(path.join(dist,
     'content/english/year-'+questionId[1]+'/module-'+questionId.slice(3,5)+'/questions.json'),'utf8'));
    const q=data.items.find(x=>x.item_id===questionId);
@@ -96,7 +100,7 @@ const report={status:failed.length?'FAIL_NEW_SOURCE_REAL_BROWSER':'PASS_NEW_SOUR
  questionId:c.questionId,viewport:c.viewport,errors:c.errors,
  missing:c.required.filter(p=>!c.visiblePaths.includes(p))})),
  cases:checks,productionDeployed:false,releaseApproved:false,pedagogicalQAApproved:false};
-await writeFile('qa/results/phase2-new-source-browser.json',JSON.stringify(report,null,2)+'\n');
+await writeFile('qa/results/'+reportPrefix+'-browser.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({status:report.status,mediaIds:report.mediaIds,images:report.images,
  checks:report.checks,failures:failed.length}));
 assert.equal(failed.length,0,'NEW_SOURCE_VISIBILITY_NOT_FULLY_VERIFIED');
