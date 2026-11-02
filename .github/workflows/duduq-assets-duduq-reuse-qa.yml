@@ -18,6 +18,7 @@ on:
       - "qa/replace-farm-animal-batch-from-assets-duduq.mjs"
       - "qa/replace-phase2-source-reuse-from-assets-duduq.mjs"
       - "qa/duduq-phase2-banana-preflight.mjs"
+      - "qa/verify-phase2-banana-browser.mjs"
       - "qa/verify-phase2-source-browser.mjs"
       - "qa/verify-farm-animal-source-batch-browser.mjs"
       - "qa/replace-safe-vocabulary-from-assets-duduq.mjs"
@@ -596,6 +597,29 @@ jobs:
           assert.equal(sha(readFileSync(path.join(after,registry))),b.get(registry));
           console.log(JSON.stringify({isolatedQAOnly:true,changedMediaIds:p.changedMediaIds,questionsUnchanged:600}));
           NODE
+      - name: Real Chromium checks for every changed banana question on mobile and desktop
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          ELIGIBLE="$(node -p "require('./qa/results/phase2-banana-preflight.json').eligibleIds")"
+          if [ "$ELIGIBLE" -eq 0 ]; then
+            echo "NO_ELIGIBLE_BINDINGS_SKIP_BROWSER"
+            exit 0
+          fi
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev qa/dist-pages-banana-candidate --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 > /tmp/duduq-banana-pages.log 2>&1 &
+          echo $! > /tmp/duduq-banana-pages.pid
+          for i in {1..40}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then break; fi
+            if ! kill -0 "$(cat /tmp/duduq-banana-pages.pid)" 2>/dev/null; then
+              cat /tmp/duduq-banana-pages.log
+              exit 1
+            fi
+            sleep 2
+          done
+          node --check qa/verify-phase2-banana-browser.mjs
+          node qa/verify-phase2-banana-browser.mjs
       - name: Preserve QA-only evidence; no release, preview or production deploy
         if: always()
         uses: actions/upload-artifact@v4
@@ -606,3 +630,6 @@ jobs:
           path: |
             qa/results/phase2-banana-preflight.json
             qa/results/phase2-banana-qa-patch.json
+            qa/results/phase2-banana-browser.json
+            qa/results/phase2-banana-browser/*.png
+            /tmp/duduq-banana-pages.log
