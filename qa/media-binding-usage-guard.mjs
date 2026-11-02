@@ -15,7 +15,16 @@ export function collectQuestionMediaUsages(question, usages=new Map()){
    const ids=[...new Set(['assetId','mediaId','image_ref','imageRef'].map(k=>node[k]).filter(v=>typeof v==='string'&&v.startsWith('IMG-')))];
    for(const id of ids){
     if(!usages.has(id))usages.set(id,[]);
-    usages.get(id).push({questionId:qid,moduleId,semanticTarget:normalize(node.semanticTarget)});
+    // V11 contracts retain loader aliases such as pair.b.assetId beside
+    // pair.b.media.assetId. The outer alias has no semanticTarget of its own,
+    // but it is safe to inherit the nested semantic only when that exact ID is
+    // also present on the nested media object. A mismatched alias remains
+    // semantic-less and is rejected by assertBindingSafeAcrossQuestions.
+    const nestedIds=node.media&&typeof node.media==='object'
+      ?new Set(['assetId','mediaId','image_ref','imageRef'].map(k=>node.media[k]).filter(v=>typeof v==='string'))
+      :new Set();
+    const semantic=node.semanticTarget??(nestedIds.has(id)?node.media.semanticTarget:null);
+    usages.get(id).push({questionId:qid,moduleId,semanticTarget:normalize(semantic)});
    }
   }
   for(const v of Object.values(node))if(v&&typeof v==='object')walk(v);

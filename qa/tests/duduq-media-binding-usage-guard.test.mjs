@@ -34,6 +34,20 @@ test('deduplicate assetId and mediaId on same media object',()=>{
  assert.equal(guard(u,id,'Y1M04-Q010','pen').usages,1);
 });
 
+test('accept an exact outer loader alias only when nested media carries the same ID and semantic',()=>{
+ const id='IMG-Y2M06-Q002-CTX-ORANGE',u=new Map();
+ collectQuestionMediaUsages({item_id:'Y2M06-Q002',pairs:[{b:{assetId:id,
+   media:{assetId:id,mediaId:id,semanticTarget:'orange'}}}]},u);
+ assert.equal(guard(u,id,'Y2M06-Q002','orange').usages,2);
+});
+
+test('do not borrow nested semantics for a different outer loader alias',()=>{
+ const outer='IMG-Y2M06-Q002-CTX-OUTER',nested='IMG-Y2M06-Q002-CTX-INNER',u=new Map();
+ collectQuestionMediaUsages({item_id:'Y2M06-Q002',pairs:[{b:{assetId:outer,
+   media:{assetId:nested,mediaId:nested,semanticTarget:'orange'}}}]},u);
+ assert.throws(()=>guard(u,outer,'Y2M06-Q002','orange'),/AMBIGUOUS_OR_MISSING_SEMANTIC/);
+});
+
 test('accept real Y1M04 drag-drop mediaBindings without option list',()=>{
  const id='IMG-Q001-ERASER',u=new Map();
  collectQuestionMediaUsages({item_id:'Y1M04-Q001',mechanicId:'drag-drop',

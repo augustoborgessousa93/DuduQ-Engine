@@ -4,7 +4,7 @@
   "moduleId": "Y2M06",
   "source": "Codex generation lane with native image generation plus verified exact prior originals",
   "provider": "Codex built-in image_gen",
-  "status": "HASH_BOUND_CANDIDATE_GENERATION_BUNDLE_READY_FOR_INDEPENDENT_INTEGRATION_QA",
+  "status": "HASH_BOUND_OCCURRENCE_SCOPED_REVIEW_BUNDLE_READY_FOR_QA_OVERLAY",
   "questionSource": "dist-pages/content/english/year-2/module-06/questions.json",
   "questionSourceSha256": "b3199e7be552ca42ce01138eacf96967cd245be79557cace8d39e3a3fcc0cc62",
   "originalAuditedPendingIds": 56,
@@ -25,7 +25,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q001-CTX-DA3EA4DFEB31",
@@ -143,7 +143,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q001-CTX-A8167BBFA098",
@@ -261,7 +261,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q001-CTX-FDC8B91E4D73",
@@ -367,7 +367,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q001-CTX-C401AA4B0B81",
@@ -485,7 +485,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q002-CTX-7B73DFFCF61B",
@@ -568,7 +568,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q002-CTX-E7DF639867E9",
@@ -676,7 +676,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q002-CTX-16D8D3082FB9",
@@ -769,7 +769,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q002-CTX-5A7DF37002C7",
@@ -851,7 +851,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q002-CTX-5D6754A903D2",
@@ -939,7 +939,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q006-CTX-212920ED1B38",
@@ -999,7 +999,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q006-CTX-3B8BF6900857",
@@ -1035,7 +1035,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q007-CTX-DEEAE429C8D7",
@@ -1083,7 +1083,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q009-CTX-7FF59901EA9A",
@@ -1170,7 +1170,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q010-CTX-8471233F96DD",
@@ -1233,7 +1233,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q012-CTX-EF102307092D",
@@ -1306,7 +1306,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q012-CTX-080D7E7FD927",
@@ -1366,7 +1366,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q012-CTX-B2B011A56A4B",
@@ -1415,7 +1415,7 @@
       "pixelWidth": 1536,
       "pixelHeight": 1536,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q015-CTX-8E66C04E11E8",
@@ -1449,7 +1449,7 @@
       "pixelWidth": 1536,
       "pixelHeight": 1536,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q015-CTX-7F52B9297732",
@@ -1483,7 +1483,7 @@
       "pixelWidth": 1792,
       "pixelHeight": 1536,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q015-CTX-6FA6C1231003",
@@ -1517,7 +1517,7 @@
       "pixelWidth": 1536,
       "pixelHeight": 1536,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q015-CTX-CCFD524FE455",
@@ -1551,7 +1551,7 @@
       "pixelWidth": 1536,
       "pixelHeight": 1536,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q015-CTX-397E6F1CC19A",
@@ -1585,7 +1585,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q017-CTX-795A7D35DF1C",
@@ -1621,7 +1621,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q017-CTX-5F31C071BAF4",
@@ -1657,7 +1657,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q017-CTX-2571B3FB8382",
@@ -1693,7 +1693,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q017-CTX-87BD41E231B9",
@@ -1729,7 +1729,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q017-CTX-8D6E49B2FA5B",
@@ -1765,7 +1765,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q017-CTX-9C29A8DD789E",
@@ -1801,7 +1801,7 @@
       "pixelWidth": 1254,
       "pixelHeight": 1254,
       "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
-      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/generation-semantic-evidence.json",
+      "reviewEvidence": "qa/media-candidates/y2m06-official-20261102/semantic-evidence.json",
       "bindings": [
         {
           "mediaId": "IMG-Y2M06-Q018-CTX-C6A49157CEED",
@@ -1829,5 +1829,21 @@
         "IMG-Q009-BIG"
       ]
     }
-  ]
+  ],
+  "sourceRegistryPinEvidence": "source-registry-pin.json",
+  "sourceRegistryPinEvidenceSha256": "ec8d78ada0a337006523f69f5a3c4854fa89fd947bc1335e79acdaefb1d97260",
+  "sourceRegistryRebaseEvidence": "source-registry-rebase.json",
+  "sourceRegistryRebaseEvidenceSha256": "87db9a7a974f98cdd572dc969ca5e3a6daa3812e19ea39f77716eab1cf8008c1",
+  "generationManifestEvidence": "generation-batch-manifest.json",
+  "generationManifestSha256": "7bd9ae25c57c72cb7aae085daf047b9e57a0a927b580999634b4f4530c9bc416",
+  "generationSemanticEvidence": "generation-semantic-evidence.json",
+  "generationSemanticSha256": "2b7481249bb855bbb984fbec26b2d0b9b4061ef5a14831a808d85e3b8a838347",
+  "integrationAlphaAudit": "integration-alpha-component-audit.json",
+  "integrationAlphaAuditSha256": "0a375f357051413733ba6e13ed2c4b82f27fa7cb36388237403e05e8c353f18c",
+  "integrationBindingPlan": "qa/results/y2m06-official-media-binding-plan.json",
+  "integrationBindingPlanSha256": "d20e5d48e0326029740e95b1ffbf53b59c967294946ebbc059efcc1cccbbc845",
+  "sourceQuestionContractSha256": "b3199e7be552ca42ce01138eacf96967cd245be79557cace8d39e3a3fcc0cc62",
+  "sourceQuestionInvariantSha256": "ddb5c5ecda9fb85994c5c3529c26be9f73b9a5696e1458d8bb7881fc72f62ad1",
+  "actualMediaFieldSplits": 488,
+  "guardedUsageRecords": 296
 }

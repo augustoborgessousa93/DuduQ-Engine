@@ -15,7 +15,10 @@ const configurations={
     incorrectAlt:'fish',correctAlt:'cat',screenshots:['Y1M06-Q004','Y1M06-Q014','Y1M06-Q008']},
   Y2M01:{modulePath:'year-2/module-01',bundle:'y2m01-official-20261031',slug:'y2m01',schemaVersion:'DUDUQ_Y2M01_OFFICIAL_MEDIA_BROWSER_QA_V1',
     sourcePendingIds:29,postSplitIds:57,usageRecords:93,uniquePngs:28,runtimePaths:43,requireEveryQuestionMedia:false,gameplayQuestionId:'Y2M01-Q009',
-    incorrectAlt:'Leo',correctAlt:'Mia',screenshots:['Y2M01-Q009','Y2M01-Q014','Y2M01-Q018']}
+    incorrectAlt:'Leo',correctAlt:'Mia',screenshots:['Y2M01-Q009','Y2M01-Q014','Y2M01-Q018']},
+  Y2M06:{modulePath:'year-2/module-06',bundle:'y2m06-official-20261102',slug:'y2m06',schemaVersion:'DUDUQ_Y2M06_OFFICIAL_MEDIA_BROWSER_QA_V1',
+    sourcePendingIds:56,postSplitIds:94,usageRecords:106,uniquePngs:29,runtimePaths:29,requireEveryQuestionMedia:true,gameplayQuestionId:'Y2M06-Q004',
+    incorrectAlt:'eye',correctAlt:'mouth',screenshots:['Y2M06-Q004','Y2M06-Q015','Y2M06-Q016']}
 };
 const qa=configuration(moduleId);
 function configuration(id){const value=configurations[id];if(!value)throw Error('UNSUPPORTED_MEDIA_BROWSER_QA_MODULE:'+id);return value;}
@@ -75,25 +78,60 @@ async function touchTap(page,locator,label,events){
   events?.push({label,point:{x:Number(point.x.toFixed(1)),y:Number(point.y.toFixed(1))},input:'Playwright locator touch tap'});
 }
 const targetByAlt=(page,alt)=>page.locator('.target-shooter-target').filter({has:page.locator(`img[alt="${alt}"]`)});
-async function observeVisibleResult(page,answerAlt,expectedState,label){
+async function observeVisibleResult(page,answerAlt,expectedState,label,events,activate=pointerClick){
   const observerKey=label.replace(/[^a-z0-9-]/gi,'-');
   await page.evaluate(({alt,key})=>{
     const target=[...document.querySelectorAll('.target-shooter-target')].find(x=>x.querySelector('.target-shooter-target__animal')?.alt===alt);
     const ribbon=document.querySelector('.feedback-ribbon');if(!target||!ribbon)throw Error('QA_VISIBLE_NODES_MISSING');
     const store=window.__duduqQaVisibleMutationLog ||= {},log=[];
-    const snapshot=()=>{const r=target.getBoundingClientRect();log.push({at:performance.now(),targetState:target.dataset.gameplayState||null,
+    const snapshot=()=>{const r=target.getBoundingClientRect(),action=ribbon.querySelector('.feedback-action'),
+      actionRect=action?.getBoundingClientRect(),actionStyle=action?getComputedStyle(action):null;
+      log.push({at:performance.now(),targetState:target.dataset.gameplayState||null,
       targetClass:target.className,badge:target.querySelector('.target-status-badge')?.getAttribute('aria-label')||null,
       targetVisible:r.width>20&&r.height>20&&r.right>0&&r.bottom>0&&r.left<innerWidth&&r.top<innerHeight,
       ribbonHidden:ribbon.hidden,feedback:ribbon.dataset.feedback||null,feedbackText:ribbon.textContent.replace(/\s+/g,' ').trim(),
-      actionText:ribbon.querySelector('.feedback-action')?.textContent.replace(/\s+/g,' ').trim()||null,
+      actionText:action?.textContent.replace(/\s+/g,' ').trim()||null,
+      actionVisible:!!(actionRect&&actionRect.width>1&&actionRect.height>1&&actionStyle?.visibility!=='hidden'&&
+        actionStyle?.display!=='none'&&actionRect.right>0&&actionRect.bottom>0&&actionRect.left<innerWidth&&actionRect.top<innerHeight),
       rootState:document.querySelector('#game')?.dataset.duduqInteractionState||null});};
     const observer=new MutationObserver(snapshot);observer.observe(target,{attributes:true,subtree:true});observer.observe(ribbon,{attributes:true,subtree:true});
     store[key]={log,observer};snapshot();
   },{alt:answerAlt,key:observerKey});
   const expectedAction=expectedState==='correct'?'CONTINUAR':'TENTAR DE NOVO';
-  await page.waitForFunction(([expected,action,key])=>window.__duduqQaVisibleMutationLog?.[key]?.log?.some(x=>
-    x.targetState===expected&&x.targetVisible===true&&x.feedback===expected&&x.ribbonHidden===false&&x.actionText===action),
-    [expectedState,expectedAction,observerKey],{timeout:25000});
+  const waitOutcome=timeout=>page.waitForFunction(([expected,action,key])=>window.__duduqQaVisibleMutationLog?.[key]?.log?.some(x=>
+    x.targetState===expected&&x.targetVisible===true&&x.feedback===expected&&x.ribbonHidden===false&&
+      x.actionVisible===true&&x.actionText===action),[expectedState,expectedAction,observerKey],{timeout});
+  const readAction=()=>page.evaluate(alt=>{
+    const target=[...document.querySelectorAll('.target-shooter-target')]
+      .find(x=>x.querySelector('.target-shooter-target__animal')?.alt===alt);
+    const action=document.querySelector('.feedback-action'),ribbon=document.querySelector('.feedback-ribbon'),
+      rect=action?.getBoundingClientRect(),style=action?getComputedStyle(action):null;
+    return {targetState:target?.dataset.gameplayState||null,
+      interactionState:document.querySelector('#game')?.dataset.duduqInteractionState||null,
+      actionText:action?.textContent?.replace(/\s+/g,' ').trim()||'',
+      actionVisible:!!(rect&&rect.width>1&&rect.height>1&&style?.visibility!=='hidden'&&style?.display!=='none'&&
+        rect.right>0&&rect.bottom>0&&rect.left<innerWidth&&rect.top<innerHeight),
+      ribbonHidden:ribbon?.hidden??null,feedback:ribbon?.dataset.feedback||null};
+  },answerAlt);
+  const autoResolved=await waitOutcome(8000).then(()=>true,()=>false);
+  if(autoResolved)events?.push({label:label+'-auto-resolved',input:'observed complete visible feedback without confirmation click'});
+  else {
+    const beforeConfirm=await readAction();
+    events?.push({label:label+'-before-confirm',...beforeConfirm,input:'read-only visible DOM observation'});
+    if(beforeConfirm.targetState==='selected'){
+      if(beforeConfirm.interactionState==='AWAITING_CONTINUE'||
+        (beforeConfirm.actionVisible&&/continuar/i.test(beforeConfirm.actionText)))
+        throw Error('QA_CONFIRM_ACTION_ALREADY_CONTINUE:'+JSON.stringify(beforeConfirm));
+      if(beforeConfirm.actionVisible){
+        if(!/^confirmar$/i.test(beforeConfirm.actionText))
+          throw Error('QA_CONFIRM_ACTION_UNEXPECTED_LABEL:'+JSON.stringify(beforeConfirm));
+        await activate(page,page.locator('.feedback-action'),label+'-confirm-selected',events);
+      }else events?.push({label:label+'-awaiting-auto-resolution',input:'no click on hidden action'});
+    }else if(beforeConfirm.targetState!==expectedState){
+      throw Error('QA_TARGET_LEFT_SELECTED_WITHOUT_EXPECTED_RESULT:'+JSON.stringify(beforeConfirm));
+    }
+  }
+  await waitOutcome(20000);
   return page.evaluate(key=>{const item=window.__duduqQaVisibleMutationLog[key];item.observer.disconnect();return item.log;},observerKey);
 }
 async function unlockTargetShooter(page,events,activate=pointerClick){
@@ -158,7 +196,7 @@ async function runTouchGameplay(browser,{name,viewport,route}){
       const target=[...document.querySelectorAll('.target-shooter-target')].find(x=>x.querySelector('.target-shooter-target__animal')?.alt===alt);
       return target&&['selected','incorrect'].includes(target.dataset.gameplayState||'');
     },qa.incorrectAlt,{timeout:10000});
-    const incorrectTransitions=await observeVisibleResult(page,qa.incorrectAlt,'incorrect',name+'-observe-incorrect-'+qa.incorrectAlt);
+    const incorrectTransitions=await observeVisibleResult(page,qa.incorrectAlt,'incorrect',name+'-observe-incorrect-'+qa.incorrectAlt,events,touchTap);
     const incorrectObserved=[...incorrectTransitions].reverse().find(x=>x.targetState==='incorrect'&&x.targetVisible&&x.feedback==='incorrect'&&!x.ribbonHidden);
     if(!incorrectObserved)throw Error('TOUCH_VISIBLE_INCORRECT_TRANSITION_NOT_OBSERVED:'+name);
     const incorrect={state:'incorrect',observed:incorrectObserved,transitions:incorrectTransitions,
@@ -175,7 +213,7 @@ async function runTouchGameplay(browser,{name,viewport,route}){
       const target=[...document.querySelectorAll('.target-shooter-target')].find(x=>x.querySelector('.target-shooter-target__animal')?.alt===alt);
       return target&&['selected','correct'].includes(target.dataset.gameplayState||'');
     },qa.correctAlt,{timeout:10000});
-    const correctTransitions=await observeVisibleResult(page,qa.correctAlt,'correct',name+'-observe-correct-'+qa.correctAlt);
+    const correctTransitions=await observeVisibleResult(page,qa.correctAlt,'correct',name+'-observe-correct-'+qa.correctAlt,events,touchTap);
     const correctObserved=[...correctTransitions].reverse().find(x=>x.targetState==='correct'&&x.targetVisible&&x.feedback==='correct'&&!x.ribbonHidden);
     if(!correctObserved)throw Error('TOUCH_VISIBLE_CORRECT_TRANSITION_NOT_OBSERVED:'+name);
     const correct={state:'correct',observed:correctObserved,transitions:correctTransitions,
@@ -257,7 +295,7 @@ try{
   const gameplayInitialImages=await officialImages(page);
   await pointerClick(page,targetByAlt(page,qa.incorrectAlt),'select-incorrect-'+qa.incorrectAlt,events);
   await page.waitForFunction(()=>document.querySelector('.target-shooter-target[data-gameplay-state="selected"]'));
-  const incorrectTransitions=await observeVisibleResult(page,qa.incorrectAlt,'incorrect','observe-incorrect-'+qa.incorrectAlt);
+  const incorrectTransitions=await observeVisibleResult(page,qa.incorrectAlt,'incorrect','observe-incorrect-'+qa.incorrectAlt,events);
   const incorrectObserved=[...incorrectTransitions].reverse().find(x=>x.targetState==='incorrect'&&x.targetVisible&&x.feedback==='incorrect'&&!x.ribbonHidden);
   if(!incorrectObserved)throw Error('VISIBLE_INCORRECT_TRANSITION_NOT_OBSERVED');
   await page.waitForFunction(()=>document.querySelector('.feedback-ribbon')?.dataset.feedback==='incorrect'||
@@ -271,7 +309,7 @@ try{
     ![...document.querySelectorAll('.target-shooter-target')].some(x=>x.dataset.gameplayState==='incorrect'),null,{timeout:15000});
   await pointerClick(page,targetByAlt(page,qa.correctAlt),'select-correct-'+qa.correctAlt,events);
   await page.waitForFunction(()=>document.querySelector('.target-shooter-target[data-gameplay-state="selected"]'));
-  const correctTransitions=await observeVisibleResult(page,qa.correctAlt,'correct','observe-correct-'+qa.correctAlt);
+  const correctTransitions=await observeVisibleResult(page,qa.correctAlt,'correct','observe-correct-'+qa.correctAlt,events);
   const correctObserved=[...correctTransitions].reverse().find(x=>x.targetState==='correct'&&x.targetVisible&&x.feedback==='correct'&&!x.ribbonHidden);
   if(!correctObserved)throw Error('VISIBLE_CORRECT_TRANSITION_NOT_OBSERVED');
   const correct={state:'correct',observed:correctObserved,transitions:correctTransitions,
@@ -303,7 +341,7 @@ try{
   await unlockTargetShooter(tracePage,traceEvents);
   await pointerClick(tracePage,targetByAlt(tracePage,qa.incorrectAlt),'trace-select-incorrect-'+qa.incorrectAlt,traceEvents);
   await tracePage.waitForFunction(()=>document.querySelector('.target-shooter-target[data-gameplay-state="selected"]'));
-  await observeVisibleResult(tracePage,qa.incorrectAlt,'incorrect','trace-observe-incorrect-'+qa.incorrectAlt);
+  await observeVisibleResult(tracePage,qa.incorrectAlt,'incorrect','trace-observe-incorrect-'+qa.incorrectAlt,traceEvents);
   await pointerClick(tracePage,tracePage.locator('.feedback-action'),'trace-retry-after-incorrect',traceEvents);
   const tracePath=path.join(out,qa.gameplayQuestionId.toLowerCase()+'-pointer-trace.zip');
   await traceContext.tracing.stop({path:tracePath});await tracePage.close();await traceContext.close();

@@ -1,0 +1,4668 @@
+{
+  "schemaVersion": "DUDUQ_Y2M06_OFFICIAL_MEDIA_BINDING_PLAN_V1",
+  "moduleId": "Y2M06",
+  "createdAt": "2026-11-02",
+  "status": "PASS",
+  "sourceQuestionContractSha256": "b3199e7be552ca42ce01138eacf96967cd245be79557cace8d39e3a3fcc0cc62",
+  "sourceQuestionInvariantSha256": "ddb5c5ecda9fb85994c5c3529c26be9f73b9a5696e1458d8bb7881fc72f62ad1",
+  "sourceRegistryRebaseSha256": "87db9a7a974f98cdd572dc969ca5e3a6daa3812e19ea39f77716eab1cf8008c1",
+  "sourceIds": 56,
+  "finalIds": 94,
+  "logicalUsageRecords": 106,
+  "guardedUsageRecords": 296,
+  "actualMediaFieldSplits": [
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-B4BC475E5A5F026F",
+      "to": "IMG-Y2M06-Q001-CTX-DA3EA4DFEB31",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-B4BC475E5A5F026F",
+      "to": "IMG-Y2M06-Q001-CTX-DA3EA4DFEB31",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-54E44F386CF7B470",
+      "to": "IMG-Y2M06-Q001-CTX-A8167BBFA098",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-54E44F386CF7B470",
+      "to": "IMG-Y2M06-Q001-CTX-A8167BBFA098",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-B23C054704E6158D",
+      "to": "IMG-Y2M06-Q001-CTX-FDC8B91E4D73",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-B23C054704E6158D",
+      "to": "IMG-Y2M06-Q001-CTX-FDC8B91E4D73",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-26139F65B6D3AAFA",
+      "to": "IMG-Y2M06-Q001-CTX-C401AA4B0B81",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-26139F65B6D3AAFA",
+      "to": "IMG-Y2M06-Q001-CTX-C401AA4B0B81",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "targets[0].media.assetId",
+      "from": "IMG-V11-2B-B4BC475E5A5F026F",
+      "to": "IMG-Y2M06-Q001-CTX-DA3EA4DFEB31",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "targets[0].media.mediaId",
+      "from": "IMG-V11-2B-B4BC475E5A5F026F",
+      "to": "IMG-Y2M06-Q001-CTX-DA3EA4DFEB31",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "targets[0].mediaId",
+      "from": "IMG-V11-2B-B4BC475E5A5F026F",
+      "to": "IMG-Y2M06-Q001-CTX-DA3EA4DFEB31",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "targets[1].media.assetId",
+      "from": "IMG-V11-2B-54E44F386CF7B470",
+      "to": "IMG-Y2M06-Q001-CTX-A8167BBFA098",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "targets[1].media.mediaId",
+      "from": "IMG-V11-2B-54E44F386CF7B470",
+      "to": "IMG-Y2M06-Q001-CTX-A8167BBFA098",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "targets[1].mediaId",
+      "from": "IMG-V11-2B-54E44F386CF7B470",
+      "to": "IMG-Y2M06-Q001-CTX-A8167BBFA098",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "targets[2].media.assetId",
+      "from": "IMG-V11-2B-B23C054704E6158D",
+      "to": "IMG-Y2M06-Q001-CTX-FDC8B91E4D73",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "targets[2].media.mediaId",
+      "from": "IMG-V11-2B-B23C054704E6158D",
+      "to": "IMG-Y2M06-Q001-CTX-FDC8B91E4D73",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "targets[2].mediaId",
+      "from": "IMG-V11-2B-B23C054704E6158D",
+      "to": "IMG-Y2M06-Q001-CTX-FDC8B91E4D73",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "targets[3].media.assetId",
+      "from": "IMG-V11-2B-26139F65B6D3AAFA",
+      "to": "IMG-Y2M06-Q001-CTX-C401AA4B0B81",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "targets[3].media.mediaId",
+      "from": "IMG-V11-2B-26139F65B6D3AAFA",
+      "to": "IMG-Y2M06-Q001-CTX-C401AA4B0B81",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q001",
+      "field": "targets[3].mediaId",
+      "from": "IMG-V11-2B-26139F65B6D3AAFA",
+      "to": "IMG-Y2M06-Q001-CTX-C401AA4B0B81",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q002-CTX-7B73DFFCF61B",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q002-CTX-7B73DFFCF61B",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q002-CTX-E7DF639867E9",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q002-CTX-E7DF639867E9",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q002-CTX-16D8D3082FB9",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q002-CTX-16D8D3082FB9",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q002-CTX-5A7DF37002C7",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q002-CTX-5A7DF37002C7",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "mediaBindings[4].assetId",
+      "from": "IMG-V11-2B-3E8B870AE9E69B6A",
+      "to": "IMG-Y2M06-Q002-CTX-5D6754A903D2",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "mediaBindings[4].mediaId",
+      "from": "IMG-V11-2B-3E8B870AE9E69B6A",
+      "to": "IMG-Y2M06-Q002-CTX-5D6754A903D2",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[0].b.assetId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q002-CTX-7B73DFFCF61B",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[0].b.media.assetId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q002-CTX-7B73DFFCF61B",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[0].b.media.mediaId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q002-CTX-7B73DFFCF61B",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[1].b.assetId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q002-CTX-E7DF639867E9",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[1].b.media.assetId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q002-CTX-E7DF639867E9",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[1].b.media.mediaId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q002-CTX-E7DF639867E9",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[2].b.assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q002-CTX-16D8D3082FB9",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[2].b.media.assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q002-CTX-16D8D3082FB9",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[2].b.media.mediaId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q002-CTX-16D8D3082FB9",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[3].b.assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q002-CTX-5A7DF37002C7",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[3].b.media.assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q002-CTX-5A7DF37002C7",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[3].b.media.mediaId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q002-CTX-5A7DF37002C7",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[4].b.assetId",
+      "from": "IMG-V11-2B-3E8B870AE9E69B6A",
+      "to": "IMG-Y2M06-Q002-CTX-5D6754A903D2",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[4].b.media.assetId",
+      "from": "IMG-V11-2B-3E8B870AE9E69B6A",
+      "to": "IMG-Y2M06-Q002-CTX-5D6754A903D2",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "field": "pairs[4].b.media.mediaId",
+      "from": "IMG-V11-2B-3E8B870AE9E69B6A",
+      "to": "IMG-Y2M06-Q002-CTX-5D6754A903D2",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[0].media.assetId",
+      "from": "IMG-V11-2B-857902711A3A0499",
+      "to": "IMG-Y2M06-Q003-CTX-B4867D277C4B",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[0].media.mediaId",
+      "from": "IMG-V11-2B-857902711A3A0499",
+      "to": "IMG-Y2M06-Q003-CTX-B4867D277C4B",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[0].mediaId",
+      "from": "IMG-V11-2B-857902711A3A0499",
+      "to": "IMG-Y2M06-Q003-CTX-B4867D277C4B",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[1].media.assetId",
+      "from": "IMG-V11-2B-30690D3C168DA49E",
+      "to": "IMG-Y2M06-Q003-CTX-1AAAF76EE25B",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[1].media.mediaId",
+      "from": "IMG-V11-2B-30690D3C168DA49E",
+      "to": "IMG-Y2M06-Q003-CTX-1AAAF76EE25B",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[1].mediaId",
+      "from": "IMG-V11-2B-30690D3C168DA49E",
+      "to": "IMG-Y2M06-Q003-CTX-1AAAF76EE25B",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[2].media.assetId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q003-CTX-4F9413523A99",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[2].media.mediaId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q003-CTX-4F9413523A99",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[2].mediaId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q003-CTX-4F9413523A99",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[3].media.assetId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q003-CTX-169A673BC6E8",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[3].media.mediaId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q003-CTX-169A673BC6E8",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[3].mediaId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q003-CTX-169A673BC6E8",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[4].media.assetId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q003-CTX-7B03896E238A",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[4].media.mediaId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q003-CTX-7B03896E238A",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "bubbleDistractorPool[4].mediaId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q003-CTX-7B03896E238A",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q003-CTX-C51EF03D1DC0",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q003-CTX-C51EF03D1DC0",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-857902711A3A0499",
+      "to": "IMG-Y2M06-Q003-CTX-B4867D277C4B",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-857902711A3A0499",
+      "to": "IMG-Y2M06-Q003-CTX-B4867D277C4B",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-30690D3C168DA49E",
+      "to": "IMG-Y2M06-Q003-CTX-1AAAF76EE25B",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-30690D3C168DA49E",
+      "to": "IMG-Y2M06-Q003-CTX-1AAAF76EE25B",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q003-CTX-4F9413523A99",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q003-CTX-4F9413523A99",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "options[0].media.assetId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q003-CTX-C51EF03D1DC0",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "options[0].media.mediaId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q003-CTX-C51EF03D1DC0",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "options[0].mediaId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q003-CTX-C51EF03D1DC0",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "options[1].media.assetId",
+      "from": "IMG-V11-2B-857902711A3A0499",
+      "to": "IMG-Y2M06-Q003-CTX-B4867D277C4B",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "options[1].media.mediaId",
+      "from": "IMG-V11-2B-857902711A3A0499",
+      "to": "IMG-Y2M06-Q003-CTX-B4867D277C4B",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "options[1].mediaId",
+      "from": "IMG-V11-2B-857902711A3A0499",
+      "to": "IMG-Y2M06-Q003-CTX-B4867D277C4B",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "options[2].media.assetId",
+      "from": "IMG-V11-2B-30690D3C168DA49E",
+      "to": "IMG-Y2M06-Q003-CTX-1AAAF76EE25B",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "options[2].media.mediaId",
+      "from": "IMG-V11-2B-30690D3C168DA49E",
+      "to": "IMG-Y2M06-Q003-CTX-1AAAF76EE25B",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "options[2].mediaId",
+      "from": "IMG-V11-2B-30690D3C168DA49E",
+      "to": "IMG-Y2M06-Q003-CTX-1AAAF76EE25B",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "options[3].media.assetId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q003-CTX-4F9413523A99",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "options[3].media.mediaId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q003-CTX-4F9413523A99",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "options[3].mediaId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q003-CTX-4F9413523A99",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "targetsToFind[0].media.assetId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q003-CTX-C51EF03D1DC0",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "targetsToFind[0].media.mediaId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q003-CTX-C51EF03D1DC0",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "field": "targetsToFind[0].mediaId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q003-CTX-C51EF03D1DC0",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q004-CTX-0AD1F104E9D4",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q004-CTX-0AD1F104E9D4",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-857902711A3A0499",
+      "to": "IMG-Y2M06-Q004-CTX-C585876600EB",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-857902711A3A0499",
+      "to": "IMG-Y2M06-Q004-CTX-C585876600EB",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-30690D3C168DA49E",
+      "to": "IMG-Y2M06-Q004-CTX-005A1AAEFBA3",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-30690D3C168DA49E",
+      "to": "IMG-Y2M06-Q004-CTX-005A1AAEFBA3",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q004-CTX-EF468CAF6ADD",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q004-CTX-EF468CAF6ADD",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "options[0].media.assetId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q004-CTX-0AD1F104E9D4",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "options[0].media.mediaId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q004-CTX-0AD1F104E9D4",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "options[0].mediaId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q004-CTX-0AD1F104E9D4",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "options[1].media.assetId",
+      "from": "IMG-V11-2B-857902711A3A0499",
+      "to": "IMG-Y2M06-Q004-CTX-C585876600EB",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "options[1].media.mediaId",
+      "from": "IMG-V11-2B-857902711A3A0499",
+      "to": "IMG-Y2M06-Q004-CTX-C585876600EB",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "options[1].mediaId",
+      "from": "IMG-V11-2B-857902711A3A0499",
+      "to": "IMG-Y2M06-Q004-CTX-C585876600EB",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "options[2].media.assetId",
+      "from": "IMG-V11-2B-30690D3C168DA49E",
+      "to": "IMG-Y2M06-Q004-CTX-005A1AAEFBA3",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "options[2].media.mediaId",
+      "from": "IMG-V11-2B-30690D3C168DA49E",
+      "to": "IMG-Y2M06-Q004-CTX-005A1AAEFBA3",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "options[2].mediaId",
+      "from": "IMG-V11-2B-30690D3C168DA49E",
+      "to": "IMG-Y2M06-Q004-CTX-005A1AAEFBA3",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "options[3].media.assetId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q004-CTX-EF468CAF6ADD",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "options[3].media.mediaId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q004-CTX-EF468CAF6ADD",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "field": "options[3].mediaId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q004-CTX-EF468CAF6ADD",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-FA6FB43D25AF5A2C",
+      "to": "IMG-Y2M06-Q005-CTX-4EFF4469C221",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-FA6FB43D25AF5A2C",
+      "to": "IMG-Y2M06-Q005-CTX-4EFF4469C221",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-0D4D258A62F7709C",
+      "to": "IMG-Y2M06-Q005-CTX-FC91DBEFD524",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-0D4D258A62F7709C",
+      "to": "IMG-Y2M06-Q005-CTX-FC91DBEFD524",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-C806365B55CB438A",
+      "to": "IMG-Y2M06-Q005-CTX-C471D435CF7D",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-C806365B55CB438A",
+      "to": "IMG-Y2M06-Q005-CTX-C471D435CF7D",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-7E8EB0BB1DCBBF01",
+      "to": "IMG-Y2M06-Q005-CTX-BD9E6A690115",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-7E8EB0BB1DCBBF01",
+      "to": "IMG-Y2M06-Q005-CTX-BD9E6A690115",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "pairs[0].cards[1].assetId",
+      "from": "IMG-V11-2B-FA6FB43D25AF5A2C",
+      "to": "IMG-Y2M06-Q005-CTX-4EFF4469C221",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "pairs[0].cards[1].media.assetId",
+      "from": "IMG-V11-2B-FA6FB43D25AF5A2C",
+      "to": "IMG-Y2M06-Q005-CTX-4EFF4469C221",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "pairs[0].cards[1].media.mediaId",
+      "from": "IMG-V11-2B-FA6FB43D25AF5A2C",
+      "to": "IMG-Y2M06-Q005-CTX-4EFF4469C221",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "pairs[1].cards[1].assetId",
+      "from": "IMG-V11-2B-0D4D258A62F7709C",
+      "to": "IMG-Y2M06-Q005-CTX-FC91DBEFD524",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "pairs[1].cards[1].media.assetId",
+      "from": "IMG-V11-2B-0D4D258A62F7709C",
+      "to": "IMG-Y2M06-Q005-CTX-FC91DBEFD524",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "pairs[1].cards[1].media.mediaId",
+      "from": "IMG-V11-2B-0D4D258A62F7709C",
+      "to": "IMG-Y2M06-Q005-CTX-FC91DBEFD524",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "pairs[2].cards[1].assetId",
+      "from": "IMG-V11-2B-C806365B55CB438A",
+      "to": "IMG-Y2M06-Q005-CTX-C471D435CF7D",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "pairs[2].cards[1].media.assetId",
+      "from": "IMG-V11-2B-C806365B55CB438A",
+      "to": "IMG-Y2M06-Q005-CTX-C471D435CF7D",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "pairs[2].cards[1].media.mediaId",
+      "from": "IMG-V11-2B-C806365B55CB438A",
+      "to": "IMG-Y2M06-Q005-CTX-C471D435CF7D",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "pairs[3].cards[1].assetId",
+      "from": "IMG-V11-2B-7E8EB0BB1DCBBF01",
+      "to": "IMG-Y2M06-Q005-CTX-BD9E6A690115",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "pairs[3].cards[1].media.assetId",
+      "from": "IMG-V11-2B-7E8EB0BB1DCBBF01",
+      "to": "IMG-Y2M06-Q005-CTX-BD9E6A690115",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "field": "pairs[3].cards[1].media.mediaId",
+      "from": "IMG-V11-2B-7E8EB0BB1DCBBF01",
+      "to": "IMG-Y2M06-Q005-CTX-BD9E6A690115",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-D633F5E3AD9165C8",
+      "to": "IMG-Y2M06-Q006-CTX-212920ED1B38",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-D633F5E3AD9165C8",
+      "to": "IMG-Y2M06-Q006-CTX-212920ED1B38",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-F3FAB54D046C94A0",
+      "to": "IMG-Y2M06-Q006-CTX-3B8BF6900857",
+      "semanticTarget": "shoulders"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-F3FAB54D046C94A0",
+      "to": "IMG-Y2M06-Q006-CTX-3B8BF6900857",
+      "semanticTarget": "shoulders"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-AD538F3601F0D40A",
+      "to": "IMG-Y2M06-Q006-CTX-CE64C4B23D1A",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-AD538F3601F0D40A",
+      "to": "IMG-Y2M06-Q006-CTX-CE64C4B23D1A",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-938708DB14D30D4B",
+      "to": "IMG-Y2M06-Q006-CTX-47417120AD4E",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-938708DB14D30D4B",
+      "to": "IMG-Y2M06-Q006-CTX-47417120AD4E",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "mediaBindings[4].assetId",
+      "from": "IMG-V11-2B-1BD9271CB0107E95",
+      "to": "IMG-Y2M06-Q006-CTX-EDE0EFC9A970",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "mediaBindings[4].mediaId",
+      "from": "IMG-V11-2B-1BD9271CB0107E95",
+      "to": "IMG-Y2M06-Q006-CTX-EDE0EFC9A970",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "mediaBindings[5].assetId",
+      "from": "IMG-V11-2B-F08A6487F6240A45",
+      "to": "IMG-Y2M06-Q006-CTX-0F10B780D4F7",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "mediaBindings[5].mediaId",
+      "from": "IMG-V11-2B-F08A6487F6240A45",
+      "to": "IMG-Y2M06-Q006-CTX-0F10B780D4F7",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[0].b.assetId",
+      "from": "IMG-V11-2B-D633F5E3AD9165C8",
+      "to": "IMG-Y2M06-Q006-CTX-212920ED1B38",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[0].b.media.assetId",
+      "from": "IMG-V11-2B-D633F5E3AD9165C8",
+      "to": "IMG-Y2M06-Q006-CTX-212920ED1B38",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[0].b.media.mediaId",
+      "from": "IMG-V11-2B-D633F5E3AD9165C8",
+      "to": "IMG-Y2M06-Q006-CTX-212920ED1B38",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[1].b.assetId",
+      "from": "IMG-V11-2B-F3FAB54D046C94A0",
+      "to": "IMG-Y2M06-Q006-CTX-3B8BF6900857",
+      "semanticTarget": "shoulders"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[1].b.media.assetId",
+      "from": "IMG-V11-2B-F3FAB54D046C94A0",
+      "to": "IMG-Y2M06-Q006-CTX-3B8BF6900857",
+      "semanticTarget": "shoulders"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[1].b.media.mediaId",
+      "from": "IMG-V11-2B-F3FAB54D046C94A0",
+      "to": "IMG-Y2M06-Q006-CTX-3B8BF6900857",
+      "semanticTarget": "shoulders"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[2].b.assetId",
+      "from": "IMG-V11-2B-AD538F3601F0D40A",
+      "to": "IMG-Y2M06-Q006-CTX-CE64C4B23D1A",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[2].b.media.assetId",
+      "from": "IMG-V11-2B-AD538F3601F0D40A",
+      "to": "IMG-Y2M06-Q006-CTX-CE64C4B23D1A",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[2].b.media.mediaId",
+      "from": "IMG-V11-2B-AD538F3601F0D40A",
+      "to": "IMG-Y2M06-Q006-CTX-CE64C4B23D1A",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[3].b.assetId",
+      "from": "IMG-V11-2B-938708DB14D30D4B",
+      "to": "IMG-Y2M06-Q006-CTX-47417120AD4E",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[3].b.media.assetId",
+      "from": "IMG-V11-2B-938708DB14D30D4B",
+      "to": "IMG-Y2M06-Q006-CTX-47417120AD4E",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[3].b.media.mediaId",
+      "from": "IMG-V11-2B-938708DB14D30D4B",
+      "to": "IMG-Y2M06-Q006-CTX-47417120AD4E",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[4].b.assetId",
+      "from": "IMG-V11-2B-1BD9271CB0107E95",
+      "to": "IMG-Y2M06-Q006-CTX-EDE0EFC9A970",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[4].b.media.assetId",
+      "from": "IMG-V11-2B-1BD9271CB0107E95",
+      "to": "IMG-Y2M06-Q006-CTX-EDE0EFC9A970",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[4].b.media.mediaId",
+      "from": "IMG-V11-2B-1BD9271CB0107E95",
+      "to": "IMG-Y2M06-Q006-CTX-EDE0EFC9A970",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[5].b.assetId",
+      "from": "IMG-V11-2B-F08A6487F6240A45",
+      "to": "IMG-Y2M06-Q006-CTX-0F10B780D4F7",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[5].b.media.assetId",
+      "from": "IMG-V11-2B-F08A6487F6240A45",
+      "to": "IMG-Y2M06-Q006-CTX-0F10B780D4F7",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "field": "pairs[5].b.media.mediaId",
+      "from": "IMG-V11-2B-F08A6487F6240A45",
+      "to": "IMG-Y2M06-Q006-CTX-0F10B780D4F7",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-B23C054704E6158D",
+      "to": "IMG-Y2M06-Q007-CTX-1C5F39530920",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-B23C054704E6158D",
+      "to": "IMG-Y2M06-Q007-CTX-1C5F39530920",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-26139F65B6D3AAFA",
+      "to": "IMG-Y2M06-Q007-CTX-E79997858975",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-26139F65B6D3AAFA",
+      "to": "IMG-Y2M06-Q007-CTX-E79997858975",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-7948E91B1FE60FC8",
+      "to": "IMG-Y2M06-Q007-CTX-DEEAE429C8D7",
+      "semanticTarget": "finger"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-7948E91B1FE60FC8",
+      "to": "IMG-Y2M06-Q007-CTX-DEEAE429C8D7",
+      "semanticTarget": "finger"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-554E165910572343",
+      "to": "IMG-Y2M06-Q007-CTX-61A3EF3A2B20",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-554E165910572343",
+      "to": "IMG-Y2M06-Q007-CTX-61A3EF3A2B20",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "targets[0].media.assetId",
+      "from": "IMG-V11-2B-B23C054704E6158D",
+      "to": "IMG-Y2M06-Q007-CTX-1C5F39530920",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "targets[0].media.mediaId",
+      "from": "IMG-V11-2B-B23C054704E6158D",
+      "to": "IMG-Y2M06-Q007-CTX-1C5F39530920",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "targets[0].mediaId",
+      "from": "IMG-V11-2B-B23C054704E6158D",
+      "to": "IMG-Y2M06-Q007-CTX-1C5F39530920",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "targets[1].media.assetId",
+      "from": "IMG-V11-2B-26139F65B6D3AAFA",
+      "to": "IMG-Y2M06-Q007-CTX-E79997858975",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "targets[1].media.mediaId",
+      "from": "IMG-V11-2B-26139F65B6D3AAFA",
+      "to": "IMG-Y2M06-Q007-CTX-E79997858975",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "targets[1].mediaId",
+      "from": "IMG-V11-2B-26139F65B6D3AAFA",
+      "to": "IMG-Y2M06-Q007-CTX-E79997858975",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "targets[2].media.assetId",
+      "from": "IMG-V11-2B-7948E91B1FE60FC8",
+      "to": "IMG-Y2M06-Q007-CTX-DEEAE429C8D7",
+      "semanticTarget": "finger"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "targets[2].media.mediaId",
+      "from": "IMG-V11-2B-7948E91B1FE60FC8",
+      "to": "IMG-Y2M06-Q007-CTX-DEEAE429C8D7",
+      "semanticTarget": "finger"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "targets[2].mediaId",
+      "from": "IMG-V11-2B-7948E91B1FE60FC8",
+      "to": "IMG-Y2M06-Q007-CTX-DEEAE429C8D7",
+      "semanticTarget": "finger"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "targets[3].media.assetId",
+      "from": "IMG-V11-2B-554E165910572343",
+      "to": "IMG-Y2M06-Q007-CTX-61A3EF3A2B20",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "targets[3].media.mediaId",
+      "from": "IMG-V11-2B-554E165910572343",
+      "to": "IMG-Y2M06-Q007-CTX-61A3EF3A2B20",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "field": "targets[3].mediaId",
+      "from": "IMG-V11-2B-554E165910572343",
+      "to": "IMG-Y2M06-Q007-CTX-61A3EF3A2B20",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q008",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q008-CTX-AD924DD54260",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q008",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q008-CTX-AD924DD54260",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-2C6DC2C54EF9FE82",
+      "to": "IMG-Y2M06-Q009-CTX-7FF59901EA9A",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-2C6DC2C54EF9FE82",
+      "to": "IMG-Y2M06-Q009-CTX-7FF59901EA9A",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-3E8B870AE9E69B6A",
+      "to": "IMG-Y2M06-Q009-CTX-EF13293E72DA",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-3E8B870AE9E69B6A",
+      "to": "IMG-Y2M06-Q009-CTX-EF13293E72DA",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q009-CTX-653C2FA2345B",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q009-CTX-653C2FA2345B",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q009-CTX-86417FEF9F24",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q009-CTX-86417FEF9F24",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "mediaBindings[4].assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q009-CTX-6469F8DD3A3A",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "mediaBindings[4].mediaId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q009-CTX-6469F8DD3A3A",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "mediaBindings[5].assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q009-CTX-2827C0A15259",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "mediaBindings[5].mediaId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q009-CTX-2827C0A15259",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[0].b.assetId",
+      "from": "IMG-V11-2B-2C6DC2C54EF9FE82",
+      "to": "IMG-Y2M06-Q009-CTX-7FF59901EA9A",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[0].b.media.assetId",
+      "from": "IMG-V11-2B-2C6DC2C54EF9FE82",
+      "to": "IMG-Y2M06-Q009-CTX-7FF59901EA9A",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[0].b.media.mediaId",
+      "from": "IMG-V11-2B-2C6DC2C54EF9FE82",
+      "to": "IMG-Y2M06-Q009-CTX-7FF59901EA9A",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[1].b.assetId",
+      "from": "IMG-V11-2B-3E8B870AE9E69B6A",
+      "to": "IMG-Y2M06-Q009-CTX-EF13293E72DA",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[1].b.media.assetId",
+      "from": "IMG-V11-2B-3E8B870AE9E69B6A",
+      "to": "IMG-Y2M06-Q009-CTX-EF13293E72DA",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[1].b.media.mediaId",
+      "from": "IMG-V11-2B-3E8B870AE9E69B6A",
+      "to": "IMG-Y2M06-Q009-CTX-EF13293E72DA",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[2].b.assetId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q009-CTX-653C2FA2345B",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[2].b.media.assetId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q009-CTX-653C2FA2345B",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[2].b.media.mediaId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q009-CTX-653C2FA2345B",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[3].b.assetId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q009-CTX-86417FEF9F24",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[3].b.media.assetId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q009-CTX-86417FEF9F24",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[3].b.media.mediaId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q009-CTX-86417FEF9F24",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[4].b.assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q009-CTX-6469F8DD3A3A",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[4].b.media.assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q009-CTX-6469F8DD3A3A",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[4].b.media.mediaId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q009-CTX-6469F8DD3A3A",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[5].b.assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q009-CTX-2827C0A15259",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[5].b.media.assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q009-CTX-2827C0A15259",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "field": "pairs[5].b.media.mediaId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q009-CTX-2827C0A15259",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[0].media.assetId",
+      "from": "IMG-V11-2B-3C181EF0580BB69B",
+      "to": "IMG-Y2M06-Q010-CTX-8471233F96DD",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[0].media.mediaId",
+      "from": "IMG-V11-2B-3C181EF0580BB69B",
+      "to": "IMG-Y2M06-Q010-CTX-8471233F96DD",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[0].mediaId",
+      "from": "IMG-V11-2B-3C181EF0580BB69B",
+      "to": "IMG-Y2M06-Q010-CTX-8471233F96DD",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[1].media.assetId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q010-CTX-F98B5BDBACCF",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[1].media.mediaId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q010-CTX-F98B5BDBACCF",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[1].mediaId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q010-CTX-F98B5BDBACCF",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[2].media.assetId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q010-CTX-1747D75C6F5B",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[2].media.mediaId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q010-CTX-1747D75C6F5B",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[2].mediaId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q010-CTX-1747D75C6F5B",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[3].media.assetId",
+      "from": "IMG-V11-2B-B4BC475E5A5F026F",
+      "to": "IMG-Y2M06-Q010-CTX-CC29B3F82C21",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[3].media.mediaId",
+      "from": "IMG-V11-2B-B4BC475E5A5F026F",
+      "to": "IMG-Y2M06-Q010-CTX-CC29B3F82C21",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[3].mediaId",
+      "from": "IMG-V11-2B-B4BC475E5A5F026F",
+      "to": "IMG-Y2M06-Q010-CTX-CC29B3F82C21",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[4].media.assetId",
+      "from": "IMG-V11-2B-54E44F386CF7B470",
+      "to": "IMG-Y2M06-Q010-CTX-2AF12A0138D5",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[4].media.mediaId",
+      "from": "IMG-V11-2B-54E44F386CF7B470",
+      "to": "IMG-Y2M06-Q010-CTX-2AF12A0138D5",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "bubbleDistractorPool[4].mediaId",
+      "from": "IMG-V11-2B-54E44F386CF7B470",
+      "to": "IMG-Y2M06-Q010-CTX-2AF12A0138D5",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q010-CTX-DCC9D7E45EF7",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q010-CTX-DCC9D7E45EF7",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-3C181EF0580BB69B",
+      "to": "IMG-Y2M06-Q010-CTX-8471233F96DD",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-3C181EF0580BB69B",
+      "to": "IMG-Y2M06-Q010-CTX-8471233F96DD",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q010-CTX-F98B5BDBACCF",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q010-CTX-F98B5BDBACCF",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q010-CTX-1747D75C6F5B",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q010-CTX-1747D75C6F5B",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "options[0].media.assetId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q010-CTX-DCC9D7E45EF7",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "options[0].media.mediaId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q010-CTX-DCC9D7E45EF7",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "options[0].mediaId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q010-CTX-DCC9D7E45EF7",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "options[1].media.assetId",
+      "from": "IMG-V11-2B-3C181EF0580BB69B",
+      "to": "IMG-Y2M06-Q010-CTX-8471233F96DD",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "options[1].media.mediaId",
+      "from": "IMG-V11-2B-3C181EF0580BB69B",
+      "to": "IMG-Y2M06-Q010-CTX-8471233F96DD",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "options[1].mediaId",
+      "from": "IMG-V11-2B-3C181EF0580BB69B",
+      "to": "IMG-Y2M06-Q010-CTX-8471233F96DD",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "options[2].media.assetId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q010-CTX-F98B5BDBACCF",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "options[2].media.mediaId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q010-CTX-F98B5BDBACCF",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "options[2].mediaId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q010-CTX-F98B5BDBACCF",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "options[3].media.assetId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q010-CTX-1747D75C6F5B",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "options[3].media.mediaId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q010-CTX-1747D75C6F5B",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "options[3].mediaId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q010-CTX-1747D75C6F5B",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "targetsToFind[0].media.assetId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q010-CTX-DCC9D7E45EF7",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "targetsToFind[0].media.mediaId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q010-CTX-DCC9D7E45EF7",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "field": "targetsToFind[0].mediaId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q010-CTX-DCC9D7E45EF7",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-47E739917EEB3083",
+      "to": "IMG-Y2M06-Q011-CTX-FD233548E912",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-47E739917EEB3083",
+      "to": "IMG-Y2M06-Q011-CTX-FD233548E912",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-53B01C40B9C5E915",
+      "to": "IMG-Y2M06-Q011-CTX-C4CAA1729CD6",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-53B01C40B9C5E915",
+      "to": "IMG-Y2M06-Q011-CTX-C4CAA1729CD6",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-EB9A765F1CD87AC2",
+      "to": "IMG-Y2M06-Q011-CTX-22DD1D5CCCD8",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-EB9A765F1CD87AC2",
+      "to": "IMG-Y2M06-Q011-CTX-22DD1D5CCCD8",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q011-CTX-49C50FE33136",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q011-CTX-49C50FE33136",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "targets[0].media.assetId",
+      "from": "IMG-V11-2B-47E739917EEB3083",
+      "to": "IMG-Y2M06-Q011-CTX-FD233548E912",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "targets[0].media.mediaId",
+      "from": "IMG-V11-2B-47E739917EEB3083",
+      "to": "IMG-Y2M06-Q011-CTX-FD233548E912",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "targets[0].mediaId",
+      "from": "IMG-V11-2B-47E739917EEB3083",
+      "to": "IMG-Y2M06-Q011-CTX-FD233548E912",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "targets[1].media.assetId",
+      "from": "IMG-V11-2B-53B01C40B9C5E915",
+      "to": "IMG-Y2M06-Q011-CTX-C4CAA1729CD6",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "targets[1].media.mediaId",
+      "from": "IMG-V11-2B-53B01C40B9C5E915",
+      "to": "IMG-Y2M06-Q011-CTX-C4CAA1729CD6",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "targets[1].mediaId",
+      "from": "IMG-V11-2B-53B01C40B9C5E915",
+      "to": "IMG-Y2M06-Q011-CTX-C4CAA1729CD6",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "targets[2].media.assetId",
+      "from": "IMG-V11-2B-EB9A765F1CD87AC2",
+      "to": "IMG-Y2M06-Q011-CTX-22DD1D5CCCD8",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "targets[2].media.mediaId",
+      "from": "IMG-V11-2B-EB9A765F1CD87AC2",
+      "to": "IMG-Y2M06-Q011-CTX-22DD1D5CCCD8",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "targets[2].mediaId",
+      "from": "IMG-V11-2B-EB9A765F1CD87AC2",
+      "to": "IMG-Y2M06-Q011-CTX-22DD1D5CCCD8",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "targets[3].media.assetId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q011-CTX-49C50FE33136",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "targets[3].media.mediaId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q011-CTX-49C50FE33136",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "field": "targets[3].mediaId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q011-CTX-49C50FE33136",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q012-CTX-0BFE030B80DE",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q012-CTX-0BFE030B80DE",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q012-CTX-44BF2A5FF613",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q012-CTX-44BF2A5FF613",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q012-CTX-39BA33524F29",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q012-CTX-39BA33524F29",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q012-CTX-EF102307092D",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q012-CTX-EF102307092D",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "mediaBindings[4].assetId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q012-CTX-080D7E7FD927",
+      "semanticTarget": "tomato"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "mediaBindings[4].mediaId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q012-CTX-080D7E7FD927",
+      "semanticTarget": "tomato"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "mediaBindings[5].assetId",
+      "from": "IMG-V11-2B-178C9BC5F16D0575",
+      "to": "IMG-Y2M06-Q012-CTX-B2B011A56A4B",
+      "semanticTarget": "potato"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "mediaBindings[5].mediaId",
+      "from": "IMG-V11-2B-178C9BC5F16D0575",
+      "to": "IMG-Y2M06-Q012-CTX-B2B011A56A4B",
+      "semanticTarget": "potato"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[0].b.assetId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q012-CTX-0BFE030B80DE",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[0].b.media.assetId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q012-CTX-0BFE030B80DE",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[0].b.media.mediaId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q012-CTX-0BFE030B80DE",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[1].b.assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q012-CTX-44BF2A5FF613",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[1].b.media.assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q012-CTX-44BF2A5FF613",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[1].b.media.mediaId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q012-CTX-44BF2A5FF613",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[2].b.assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q012-CTX-39BA33524F29",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[2].b.media.assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q012-CTX-39BA33524F29",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[2].b.media.mediaId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q012-CTX-39BA33524F29",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[3].b.assetId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q012-CTX-EF102307092D",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[3].b.media.assetId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q012-CTX-EF102307092D",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[3].b.media.mediaId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q012-CTX-EF102307092D",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[4].b.assetId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q012-CTX-080D7E7FD927",
+      "semanticTarget": "tomato"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[4].b.media.assetId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q012-CTX-080D7E7FD927",
+      "semanticTarget": "tomato"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[4].b.media.mediaId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q012-CTX-080D7E7FD927",
+      "semanticTarget": "tomato"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[5].b.assetId",
+      "from": "IMG-V11-2B-178C9BC5F16D0575",
+      "to": "IMG-Y2M06-Q012-CTX-B2B011A56A4B",
+      "semanticTarget": "potato"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[5].b.media.assetId",
+      "from": "IMG-V11-2B-178C9BC5F16D0575",
+      "to": "IMG-Y2M06-Q012-CTX-B2B011A56A4B",
+      "semanticTarget": "potato"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "field": "pairs[5].b.media.mediaId",
+      "from": "IMG-V11-2B-178C9BC5F16D0575",
+      "to": "IMG-Y2M06-Q012-CTX-B2B011A56A4B",
+      "semanticTarget": "potato"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-A210FFD1BF96DDB4",
+      "to": "IMG-Y2M06-Q013-CTX-44A861CED6DE",
+      "semanticTarget": "finger"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-A210FFD1BF96DDB4",
+      "to": "IMG-Y2M06-Q013-CTX-44A861CED6DE",
+      "semanticTarget": "finger"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q013-CTX-058BF46C0F31",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q013-CTX-058BF46C0F31",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q013-CTX-425200B7A587",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q013-CTX-425200B7A587",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-7C7AC57571396DE1",
+      "to": "IMG-Y2M06-Q013-CTX-8B92E133569E",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-7C7AC57571396DE1",
+      "to": "IMG-Y2M06-Q013-CTX-8B92E133569E",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "options[0].media.assetId",
+      "from": "IMG-V11-2B-A210FFD1BF96DDB4",
+      "to": "IMG-Y2M06-Q013-CTX-44A861CED6DE",
+      "semanticTarget": "finger"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "options[0].media.mediaId",
+      "from": "IMG-V11-2B-A210FFD1BF96DDB4",
+      "to": "IMG-Y2M06-Q013-CTX-44A861CED6DE",
+      "semanticTarget": "finger"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "options[0].mediaId",
+      "from": "IMG-V11-2B-A210FFD1BF96DDB4",
+      "to": "IMG-Y2M06-Q013-CTX-44A861CED6DE",
+      "semanticTarget": "finger"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "options[1].media.assetId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q013-CTX-058BF46C0F31",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "options[1].media.mediaId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q013-CTX-058BF46C0F31",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "options[1].mediaId",
+      "from": "IMG-V11-2B-689B471440B0B576",
+      "to": "IMG-Y2M06-Q013-CTX-058BF46C0F31",
+      "semanticTarget": "nose"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "options[2].media.assetId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q013-CTX-425200B7A587",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "options[2].media.mediaId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q013-CTX-425200B7A587",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "options[2].mediaId",
+      "from": "IMG-V11-2B-372152A8B0B3430F",
+      "to": "IMG-Y2M06-Q013-CTX-425200B7A587",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "options[3].media.assetId",
+      "from": "IMG-V11-2B-7C7AC57571396DE1",
+      "to": "IMG-Y2M06-Q013-CTX-8B92E133569E",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "options[3].media.mediaId",
+      "from": "IMG-V11-2B-7C7AC57571396DE1",
+      "to": "IMG-Y2M06-Q013-CTX-8B92E133569E",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "field": "options[3].mediaId",
+      "from": "IMG-V11-2B-7C7AC57571396DE1",
+      "to": "IMG-Y2M06-Q013-CTX-8B92E133569E",
+      "semanticTarget": "knee"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q014-CTX-94ED006D9B57",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q014-CTX-94ED006D9B57",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q014-CTX-1806CD391F47",
+      "semanticTarget": "tomato"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q014-CTX-1806CD391F47",
+      "semanticTarget": "tomato"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q014-CTX-60562DFDBBAC",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q014-CTX-60562DFDBBAC",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q014-CTX-FA06B8BB7D89",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q014-CTX-FA06B8BB7D89",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "mediaBindings[4].assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q014-CTX-F03C6627BAAD",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "mediaBindings[4].mediaId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q014-CTX-F03C6627BAAD",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[0].b.assetId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q014-CTX-94ED006D9B57",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[0].b.media.assetId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q014-CTX-94ED006D9B57",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[0].b.media.mediaId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q014-CTX-94ED006D9B57",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[1].b.assetId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q014-CTX-1806CD391F47",
+      "semanticTarget": "tomato"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[1].b.media.assetId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q014-CTX-1806CD391F47",
+      "semanticTarget": "tomato"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[1].b.media.mediaId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q014-CTX-1806CD391F47",
+      "semanticTarget": "tomato"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[2].b.assetId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q014-CTX-60562DFDBBAC",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[2].b.media.assetId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q014-CTX-60562DFDBBAC",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[2].b.media.mediaId",
+      "from": "IMG-V11-2B-BC3B9081178AE7A4",
+      "to": "IMG-Y2M06-Q014-CTX-60562DFDBBAC",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[3].b.assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q014-CTX-FA06B8BB7D89",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[3].b.media.assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q014-CTX-FA06B8BB7D89",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[3].b.media.mediaId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q014-CTX-FA06B8BB7D89",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[4].b.assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q014-CTX-F03C6627BAAD",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[4].b.media.assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q014-CTX-F03C6627BAAD",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "field": "pairs[4].b.media.mediaId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q014-CTX-F03C6627BAAD",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-Y1M05-Q003-FEET",
+      "to": "IMG-Y2M06-Q015-CTX-8E66C04E11E8",
+      "semanticTarget": "feet"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-Y1M05-Q003-FEET",
+      "to": "IMG-Y2M06-Q015-CTX-8E66C04E11E8",
+      "semanticTarget": "feet"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-Y1M05-Q001-HEAD",
+      "to": "IMG-Y2M06-Q015-CTX-7F52B9297732",
+      "semanticTarget": "head"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-Y1M05-Q001-HEAD",
+      "to": "IMG-Y2M06-Q015-CTX-7F52B9297732",
+      "semanticTarget": "head"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-Y1M05-Q001-HANDS",
+      "to": "IMG-Y2M06-Q015-CTX-6FA6C1231003",
+      "semanticTarget": "hands"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-Y1M05-Q001-HANDS",
+      "to": "IMG-Y2M06-Q015-CTX-6FA6C1231003",
+      "semanticTarget": "hands"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-Y1M05-Q001-LEGS",
+      "to": "IMG-Y2M06-Q015-CTX-CCFD524FE455",
+      "semanticTarget": "legs"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-Y1M05-Q001-LEGS",
+      "to": "IMG-Y2M06-Q015-CTX-CCFD524FE455",
+      "semanticTarget": "legs"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "mediaBindings[4].assetId",
+      "from": "IMG-Y1M05-Q001-ARMS",
+      "to": "IMG-Y2M06-Q015-CTX-397E6F1CC19A",
+      "semanticTarget": "arms"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "mediaBindings[4].mediaId",
+      "from": "IMG-Y1M05-Q001-ARMS",
+      "to": "IMG-Y2M06-Q015-CTX-397E6F1CC19A",
+      "semanticTarget": "arms"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[0].cards[1].assetId",
+      "from": "IMG-Y1M05-Q003-FEET",
+      "to": "IMG-Y2M06-Q015-CTX-8E66C04E11E8",
+      "semanticTarget": "feet"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[0].cards[1].media.assetId",
+      "from": "IMG-Y1M05-Q003-FEET",
+      "to": "IMG-Y2M06-Q015-CTX-8E66C04E11E8",
+      "semanticTarget": "feet"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[0].cards[1].media.mediaId",
+      "from": "IMG-Y1M05-Q003-FEET",
+      "to": "IMG-Y2M06-Q015-CTX-8E66C04E11E8",
+      "semanticTarget": "feet"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[1].cards[1].assetId",
+      "from": "IMG-Y1M05-Q001-HEAD",
+      "to": "IMG-Y2M06-Q015-CTX-7F52B9297732",
+      "semanticTarget": "head"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[1].cards[1].media.assetId",
+      "from": "IMG-Y1M05-Q001-HEAD",
+      "to": "IMG-Y2M06-Q015-CTX-7F52B9297732",
+      "semanticTarget": "head"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[1].cards[1].media.mediaId",
+      "from": "IMG-Y1M05-Q001-HEAD",
+      "to": "IMG-Y2M06-Q015-CTX-7F52B9297732",
+      "semanticTarget": "head"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[2].cards[1].assetId",
+      "from": "IMG-Y1M05-Q001-HANDS",
+      "to": "IMG-Y2M06-Q015-CTX-6FA6C1231003",
+      "semanticTarget": "hands"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[2].cards[1].media.assetId",
+      "from": "IMG-Y1M05-Q001-HANDS",
+      "to": "IMG-Y2M06-Q015-CTX-6FA6C1231003",
+      "semanticTarget": "hands"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[2].cards[1].media.mediaId",
+      "from": "IMG-Y1M05-Q001-HANDS",
+      "to": "IMG-Y2M06-Q015-CTX-6FA6C1231003",
+      "semanticTarget": "hands"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[3].cards[1].assetId",
+      "from": "IMG-Y1M05-Q001-LEGS",
+      "to": "IMG-Y2M06-Q015-CTX-CCFD524FE455",
+      "semanticTarget": "legs"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[3].cards[1].media.assetId",
+      "from": "IMG-Y1M05-Q001-LEGS",
+      "to": "IMG-Y2M06-Q015-CTX-CCFD524FE455",
+      "semanticTarget": "legs"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[3].cards[1].media.mediaId",
+      "from": "IMG-Y1M05-Q001-LEGS",
+      "to": "IMG-Y2M06-Q015-CTX-CCFD524FE455",
+      "semanticTarget": "legs"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[4].cards[1].assetId",
+      "from": "IMG-Y1M05-Q001-ARMS",
+      "to": "IMG-Y2M06-Q015-CTX-397E6F1CC19A",
+      "semanticTarget": "arms"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[4].cards[1].media.assetId",
+      "from": "IMG-Y1M05-Q001-ARMS",
+      "to": "IMG-Y2M06-Q015-CTX-397E6F1CC19A",
+      "semanticTarget": "arms"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "field": "pairs[4].cards[1].media.mediaId",
+      "from": "IMG-Y1M05-Q001-ARMS",
+      "to": "IMG-Y2M06-Q015-CTX-397E6F1CC19A",
+      "semanticTarget": "arms"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[0].media.assetId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q016-CTX-67F4FC4C3F79",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[0].media.mediaId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q016-CTX-67F4FC4C3F79",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[0].mediaId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q016-CTX-67F4FC4C3F79",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[1].media.assetId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q016-CTX-CF694AE0A3D5",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[1].media.mediaId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q016-CTX-CF694AE0A3D5",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[1].mediaId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q016-CTX-CF694AE0A3D5",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[2].media.assetId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q016-CTX-AA3F5CF458B3",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[2].media.mediaId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q016-CTX-AA3F5CF458B3",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[2].mediaId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q016-CTX-AA3F5CF458B3",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[3].media.assetId",
+      "from": "IMG-V11-2B-B4BC475E5A5F026F",
+      "to": "IMG-Y2M06-Q016-CTX-00F71D8132F9",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[3].media.mediaId",
+      "from": "IMG-V11-2B-B4BC475E5A5F026F",
+      "to": "IMG-Y2M06-Q016-CTX-00F71D8132F9",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[3].mediaId",
+      "from": "IMG-V11-2B-B4BC475E5A5F026F",
+      "to": "IMG-Y2M06-Q016-CTX-00F71D8132F9",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[4].media.assetId",
+      "from": "IMG-V11-2B-54E44F386CF7B470",
+      "to": "IMG-Y2M06-Q016-CTX-1E0B314F0F2F",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[4].media.mediaId",
+      "from": "IMG-V11-2B-54E44F386CF7B470",
+      "to": "IMG-Y2M06-Q016-CTX-1E0B314F0F2F",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "bubbleDistractorPool[4].mediaId",
+      "from": "IMG-V11-2B-54E44F386CF7B470",
+      "to": "IMG-Y2M06-Q016-CTX-1E0B314F0F2F",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q016-CTX-F9CD173F581C",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q016-CTX-F9CD173F581C",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q016-CTX-67F4FC4C3F79",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q016-CTX-67F4FC4C3F79",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q016-CTX-CF694AE0A3D5",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q016-CTX-CF694AE0A3D5",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q016-CTX-AA3F5CF458B3",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q016-CTX-AA3F5CF458B3",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "options[0].media.assetId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q016-CTX-F9CD173F581C",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "options[0].media.mediaId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q016-CTX-F9CD173F581C",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "options[0].mediaId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q016-CTX-F9CD173F581C",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "options[1].media.assetId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q016-CTX-67F4FC4C3F79",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "options[1].media.mediaId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q016-CTX-67F4FC4C3F79",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "options[1].mediaId",
+      "from": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "to": "IMG-Y2M06-Q016-CTX-67F4FC4C3F79",
+      "semanticTarget": "pear"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "options[2].media.assetId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q016-CTX-CF694AE0A3D5",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "options[2].media.mediaId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q016-CTX-CF694AE0A3D5",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "options[2].mediaId",
+      "from": "IMG-Y1M03-Q001-ORANGE",
+      "to": "IMG-Y2M06-Q016-CTX-CF694AE0A3D5",
+      "semanticTarget": "orange"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "options[3].media.assetId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q016-CTX-AA3F5CF458B3",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "options[3].media.mediaId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q016-CTX-AA3F5CF458B3",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "options[3].mediaId",
+      "from": "IMG-V11-2B-249393BE62012CB7",
+      "to": "IMG-Y2M06-Q016-CTX-AA3F5CF458B3",
+      "semanticTarget": "grape"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "targetsToFind[0].media.assetId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q016-CTX-F9CD173F581C",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "targetsToFind[0].media.mediaId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q016-CTX-F9CD173F581C",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "field": "targetsToFind[0].mediaId",
+      "from": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "to": "IMG-Y2M06-Q016-CTX-F9CD173F581C",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[0].assetId",
+      "from": "IMG-V11-2B-A0A8A7AAF4DD84D8",
+      "to": "IMG-Y2M06-Q017-CTX-795A7D35DF1C",
+      "semanticTarget": "big apple"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[0].media.assetId",
+      "from": "IMG-V11-2B-A0A8A7AAF4DD84D8",
+      "to": "IMG-Y2M06-Q017-CTX-795A7D35DF1C",
+      "semanticTarget": "big apple"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[0].media.mediaId",
+      "from": "IMG-V11-2B-A0A8A7AAF4DD84D8",
+      "to": "IMG-Y2M06-Q017-CTX-795A7D35DF1C",
+      "semanticTarget": "big apple"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[1].assetId",
+      "from": "IMG-V11-2B-EAAF1FABD1844321",
+      "to": "IMG-Y2M06-Q017-CTX-5F31C071BAF4",
+      "semanticTarget": "big melon"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[1].media.assetId",
+      "from": "IMG-V11-2B-EAAF1FABD1844321",
+      "to": "IMG-Y2M06-Q017-CTX-5F31C071BAF4",
+      "semanticTarget": "big melon"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[1].media.mediaId",
+      "from": "IMG-V11-2B-EAAF1FABD1844321",
+      "to": "IMG-Y2M06-Q017-CTX-5F31C071BAF4",
+      "semanticTarget": "big melon"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[2].assetId",
+      "from": "IMG-V11-2B-64F65B6254CDA0AF",
+      "to": "IMG-Y2M06-Q017-CTX-2571B3FB8382",
+      "semanticTarget": "big banana"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[2].media.assetId",
+      "from": "IMG-V11-2B-64F65B6254CDA0AF",
+      "to": "IMG-Y2M06-Q017-CTX-2571B3FB8382",
+      "semanticTarget": "big banana"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[2].media.mediaId",
+      "from": "IMG-V11-2B-64F65B6254CDA0AF",
+      "to": "IMG-Y2M06-Q017-CTX-2571B3FB8382",
+      "semanticTarget": "big banana"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[3].assetId",
+      "from": "IMG-V11-2B-48ABF3A913FF63A0",
+      "to": "IMG-Y2M06-Q017-CTX-87BD41E231B9",
+      "semanticTarget": "small grape"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[3].media.assetId",
+      "from": "IMG-V11-2B-48ABF3A913FF63A0",
+      "to": "IMG-Y2M06-Q017-CTX-87BD41E231B9",
+      "semanticTarget": "small grape"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[3].media.mediaId",
+      "from": "IMG-V11-2B-48ABF3A913FF63A0",
+      "to": "IMG-Y2M06-Q017-CTX-87BD41E231B9",
+      "semanticTarget": "small grape"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[4].assetId",
+      "from": "IMG-V11-2B-06480218CC9BB101",
+      "to": "IMG-Y2M06-Q017-CTX-8D6E49B2FA5B",
+      "semanticTarget": "small pear"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[4].media.assetId",
+      "from": "IMG-V11-2B-06480218CC9BB101",
+      "to": "IMG-Y2M06-Q017-CTX-8D6E49B2FA5B",
+      "semanticTarget": "small pear"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[4].media.mediaId",
+      "from": "IMG-V11-2B-06480218CC9BB101",
+      "to": "IMG-Y2M06-Q017-CTX-8D6E49B2FA5B",
+      "semanticTarget": "small pear"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[5].assetId",
+      "from": "IMG-V11-2B-8C45DA566BF3CD91",
+      "to": "IMG-Y2M06-Q017-CTX-9C29A8DD789E",
+      "semanticTarget": "small carrot"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[5].media.assetId",
+      "from": "IMG-V11-2B-8C45DA566BF3CD91",
+      "to": "IMG-Y2M06-Q017-CTX-9C29A8DD789E",
+      "semanticTarget": "small carrot"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "items[5].media.mediaId",
+      "from": "IMG-V11-2B-8C45DA566BF3CD91",
+      "to": "IMG-Y2M06-Q017-CTX-9C29A8DD789E",
+      "semanticTarget": "small carrot"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-A0A8A7AAF4DD84D8",
+      "to": "IMG-Y2M06-Q017-CTX-795A7D35DF1C",
+      "semanticTarget": "big apple"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-A0A8A7AAF4DD84D8",
+      "to": "IMG-Y2M06-Q017-CTX-795A7D35DF1C",
+      "semanticTarget": "big apple"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-EAAF1FABD1844321",
+      "to": "IMG-Y2M06-Q017-CTX-5F31C071BAF4",
+      "semanticTarget": "big melon"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-EAAF1FABD1844321",
+      "to": "IMG-Y2M06-Q017-CTX-5F31C071BAF4",
+      "semanticTarget": "big melon"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-64F65B6254CDA0AF",
+      "to": "IMG-Y2M06-Q017-CTX-2571B3FB8382",
+      "semanticTarget": "big banana"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-64F65B6254CDA0AF",
+      "to": "IMG-Y2M06-Q017-CTX-2571B3FB8382",
+      "semanticTarget": "big banana"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-48ABF3A913FF63A0",
+      "to": "IMG-Y2M06-Q017-CTX-87BD41E231B9",
+      "semanticTarget": "small grape"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-48ABF3A913FF63A0",
+      "to": "IMG-Y2M06-Q017-CTX-87BD41E231B9",
+      "semanticTarget": "small grape"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "mediaBindings[4].assetId",
+      "from": "IMG-V11-2B-06480218CC9BB101",
+      "to": "IMG-Y2M06-Q017-CTX-8D6E49B2FA5B",
+      "semanticTarget": "small pear"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "mediaBindings[4].mediaId",
+      "from": "IMG-V11-2B-06480218CC9BB101",
+      "to": "IMG-Y2M06-Q017-CTX-8D6E49B2FA5B",
+      "semanticTarget": "small pear"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "mediaBindings[5].assetId",
+      "from": "IMG-V11-2B-8C45DA566BF3CD91",
+      "to": "IMG-Y2M06-Q017-CTX-9C29A8DD789E",
+      "semanticTarget": "small carrot"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "field": "mediaBindings[5].mediaId",
+      "from": "IMG-V11-2B-8C45DA566BF3CD91",
+      "to": "IMG-Y2M06-Q017-CTX-9C29A8DD789E",
+      "semanticTarget": "small carrot"
+    },
+    {
+      "questionId": "Y2M06-Q018",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-Q009-BIG",
+      "to": "IMG-Y2M06-Q018-CTX-C6A49157CEED",
+      "semanticTarget": "big"
+    },
+    {
+      "questionId": "Y2M06-Q018",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-Q009-BIG",
+      "to": "IMG-Y2M06-Q018-CTX-C6A49157CEED",
+      "semanticTarget": "big"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[0].assetId",
+      "from": "IMG-V11-2B-74052139C0D44F03",
+      "to": "IMG-Y2M06-Q019-CTX-52FF539D8B06",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[0].media.assetId",
+      "from": "IMG-V11-2B-74052139C0D44F03",
+      "to": "IMG-Y2M06-Q019-CTX-52FF539D8B06",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[0].media.mediaId",
+      "from": "IMG-V11-2B-74052139C0D44F03",
+      "to": "IMG-Y2M06-Q019-CTX-52FF539D8B06",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[1].assetId",
+      "from": "IMG-V11-2B-20F90DE290CFA9E8",
+      "to": "IMG-Y2M06-Q019-CTX-AA064F17523F",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[1].media.assetId",
+      "from": "IMG-V11-2B-20F90DE290CFA9E8",
+      "to": "IMG-Y2M06-Q019-CTX-AA064F17523F",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[1].media.mediaId",
+      "from": "IMG-V11-2B-20F90DE290CFA9E8",
+      "to": "IMG-Y2M06-Q019-CTX-AA064F17523F",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[2].assetId",
+      "from": "IMG-V11-2B-3496550C7BE55739",
+      "to": "IMG-Y2M06-Q019-CTX-6A3F47C3C9C3",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[2].media.assetId",
+      "from": "IMG-V11-2B-3496550C7BE55739",
+      "to": "IMG-Y2M06-Q019-CTX-6A3F47C3C9C3",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[2].media.mediaId",
+      "from": "IMG-V11-2B-3496550C7BE55739",
+      "to": "IMG-Y2M06-Q019-CTX-6A3F47C3C9C3",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[3].assetId",
+      "from": "IMG-V11-2B-4E8C7B72B1EE887C",
+      "to": "IMG-Y2M06-Q019-CTX-B1AA7DD0BCD6",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[3].media.assetId",
+      "from": "IMG-V11-2B-4E8C7B72B1EE887C",
+      "to": "IMG-Y2M06-Q019-CTX-B1AA7DD0BCD6",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[3].media.mediaId",
+      "from": "IMG-V11-2B-4E8C7B72B1EE887C",
+      "to": "IMG-Y2M06-Q019-CTX-B1AA7DD0BCD6",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[4].assetId",
+      "from": "IMG-V11-2B-5596327D2C423D85",
+      "to": "IMG-Y2M06-Q019-CTX-DFED56E04910",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[4].media.assetId",
+      "from": "IMG-V11-2B-5596327D2C423D85",
+      "to": "IMG-Y2M06-Q019-CTX-DFED56E04910",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[4].media.mediaId",
+      "from": "IMG-V11-2B-5596327D2C423D85",
+      "to": "IMG-Y2M06-Q019-CTX-DFED56E04910",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[5].assetId",
+      "from": "IMG-V11-2B-BE4D9E25DFED3EBE",
+      "to": "IMG-Y2M06-Q019-CTX-4756C6C7D479",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[5].media.assetId",
+      "from": "IMG-V11-2B-BE4D9E25DFED3EBE",
+      "to": "IMG-Y2M06-Q019-CTX-4756C6C7D479",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "items[5].media.mediaId",
+      "from": "IMG-V11-2B-BE4D9E25DFED3EBE",
+      "to": "IMG-Y2M06-Q019-CTX-4756C6C7D479",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-74052139C0D44F03",
+      "to": "IMG-Y2M06-Q019-CTX-52FF539D8B06",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-74052139C0D44F03",
+      "to": "IMG-Y2M06-Q019-CTX-52FF539D8B06",
+      "semanticTarget": "mouth"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-20F90DE290CFA9E8",
+      "to": "IMG-Y2M06-Q019-CTX-AA064F17523F",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-20F90DE290CFA9E8",
+      "to": "IMG-Y2M06-Q019-CTX-AA064F17523F",
+      "semanticTarget": "eye"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-3496550C7BE55739",
+      "to": "IMG-Y2M06-Q019-CTX-6A3F47C3C9C3",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-3496550C7BE55739",
+      "to": "IMG-Y2M06-Q019-CTX-6A3F47C3C9C3",
+      "semanticTarget": "ear"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-4E8C7B72B1EE887C",
+      "to": "IMG-Y2M06-Q019-CTX-B1AA7DD0BCD6",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-4E8C7B72B1EE887C",
+      "to": "IMG-Y2M06-Q019-CTX-B1AA7DD0BCD6",
+      "semanticTarget": "apple"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "mediaBindings[4].assetId",
+      "from": "IMG-V11-2B-5596327D2C423D85",
+      "to": "IMG-Y2M06-Q019-CTX-DFED56E04910",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "mediaBindings[4].mediaId",
+      "from": "IMG-V11-2B-5596327D2C423D85",
+      "to": "IMG-Y2M06-Q019-CTX-DFED56E04910",
+      "semanticTarget": "banana"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "mediaBindings[5].assetId",
+      "from": "IMG-V11-2B-BE4D9E25DFED3EBE",
+      "to": "IMG-Y2M06-Q019-CTX-4756C6C7D479",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "field": "mediaBindings[5].mediaId",
+      "from": "IMG-V11-2B-BE4D9E25DFED3EBE",
+      "to": "IMG-Y2M06-Q019-CTX-4756C6C7D479",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-V11-2B-178C9BC5F16D0575",
+      "to": "IMG-Y2M06-Q020-CTX-42D76F5FDD18",
+      "semanticTarget": "potato"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "mediaBindings[0].mediaId",
+      "from": "IMG-V11-2B-178C9BC5F16D0575",
+      "to": "IMG-Y2M06-Q020-CTX-42D76F5FDD18",
+      "semanticTarget": "potato"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q020-CTX-C6C38CDDFF33",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "mediaBindings[1].mediaId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q020-CTX-C6C38CDDFF33",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q020-CTX-66A5C32B9A6B",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "mediaBindings[2].mediaId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q020-CTX-66A5C32B9A6B",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q020-CTX-1236046DAE7B",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "mediaBindings[3].mediaId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q020-CTX-1236046DAE7B",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "mediaBindings[4].assetId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q020-CTX-B147FFA7021B",
+      "semanticTarget": "tomato"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "mediaBindings[4].mediaId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q020-CTX-B147FFA7021B",
+      "semanticTarget": "tomato"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[0].b.assetId",
+      "from": "IMG-V11-2B-178C9BC5F16D0575",
+      "to": "IMG-Y2M06-Q020-CTX-42D76F5FDD18",
+      "semanticTarget": "potato"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[0].b.media.assetId",
+      "from": "IMG-V11-2B-178C9BC5F16D0575",
+      "to": "IMG-Y2M06-Q020-CTX-42D76F5FDD18",
+      "semanticTarget": "potato"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[0].b.media.mediaId",
+      "from": "IMG-V11-2B-178C9BC5F16D0575",
+      "to": "IMG-Y2M06-Q020-CTX-42D76F5FDD18",
+      "semanticTarget": "potato"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[1].b.assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q020-CTX-C6C38CDDFF33",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[1].b.media.assetId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q020-CTX-C6C38CDDFF33",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[1].b.media.mediaId",
+      "from": "IMG-V11-2B-D1344634366B33A5",
+      "to": "IMG-Y2M06-Q020-CTX-C6C38CDDFF33",
+      "semanticTarget": "papaya"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[2].b.assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q020-CTX-66A5C32B9A6B",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[2].b.media.assetId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q020-CTX-66A5C32B9A6B",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[2].b.media.mediaId",
+      "from": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "to": "IMG-Y2M06-Q020-CTX-66A5C32B9A6B",
+      "semanticTarget": "melon"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[3].b.assetId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q020-CTX-1236046DAE7B",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[3].b.media.assetId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q020-CTX-1236046DAE7B",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[3].b.media.mediaId",
+      "from": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "to": "IMG-Y2M06-Q020-CTX-1236046DAE7B",
+      "semanticTarget": "carrot"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[4].b.assetId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q020-CTX-B147FFA7021B",
+      "semanticTarget": "tomato"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[4].b.media.assetId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q020-CTX-B147FFA7021B",
+      "semanticTarget": "tomato"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "field": "pairs[4].b.media.mediaId",
+      "from": "IMG-V11-2B-59314A55011BCD3F",
+      "to": "IMG-Y2M06-Q020-CTX-B147FFA7021B",
+      "semanticTarget": "tomato"
+    }
+  ],
+  "logicalBindings": [
+    {
+      "assetKey": "Y2M06-CANDIDATE-EYE",
+      "semanticTarget": "eye",
+      "mediaId": "IMG-Y2M06-Q001-CTX-DA3EA4DFEB31",
+      "questionId": "Y2M06-Q001",
+      "splitFromMediaId": "IMG-V11-2B-B4BC475E5A5F026F",
+      "verifiedQuestionIds": [
+        "Y2M06-Q001"
+      ],
+      "contractPaths": [
+        "targets[0]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EYE",
+      "semanticTarget": "eye",
+      "mediaId": "IMG-Y2M06-Q003-CTX-B4867D277C4B",
+      "questionId": "Y2M06-Q003",
+      "splitFromMediaId": "IMG-V11-2B-857902711A3A0499",
+      "verifiedQuestionIds": [
+        "Y2M06-Q003"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EYE",
+      "semanticTarget": "eye",
+      "mediaId": "IMG-Y2M06-Q004-CTX-C585876600EB",
+      "questionId": "Y2M06-Q004",
+      "splitFromMediaId": "IMG-V11-2B-857902711A3A0499",
+      "verifiedQuestionIds": [
+        "Y2M06-Q004"
+      ],
+      "contractPaths": [
+        "options[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EYE",
+      "semanticTarget": "eye",
+      "mediaId": "IMG-Y2M06-Q005-CTX-4EFF4469C221",
+      "questionId": "Y2M06-Q005",
+      "splitFromMediaId": "IMG-V11-2B-FA6FB43D25AF5A2C",
+      "verifiedQuestionIds": [
+        "Y2M06-Q005"
+      ],
+      "contractPaths": [
+        "pairs[0].cards[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EYE",
+      "semanticTarget": "eye",
+      "mediaId": "IMG-Y2M06-Q006-CTX-CE64C4B23D1A",
+      "questionId": "Y2M06-Q006",
+      "splitFromMediaId": "IMG-V11-2B-AD538F3601F0D40A",
+      "verifiedQuestionIds": [
+        "Y2M06-Q006"
+      ],
+      "contractPaths": [
+        "pairs[2].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EYE",
+      "semanticTarget": "eye",
+      "mediaId": "IMG-Y2M06-Q010-CTX-CC29B3F82C21",
+      "questionId": "Y2M06-Q010",
+      "splitFromMediaId": "IMG-V11-2B-B4BC475E5A5F026F",
+      "verifiedQuestionIds": [
+        "Y2M06-Q010"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EYE",
+      "semanticTarget": "eye",
+      "mediaId": "IMG-Y2M06-Q016-CTX-00F71D8132F9",
+      "questionId": "Y2M06-Q016",
+      "splitFromMediaId": "IMG-V11-2B-B4BC475E5A5F026F",
+      "verifiedQuestionIds": [
+        "Y2M06-Q016"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EYE",
+      "semanticTarget": "eye",
+      "mediaId": "IMG-Y2M06-Q019-CTX-AA064F17523F",
+      "questionId": "Y2M06-Q019",
+      "splitFromMediaId": "IMG-V11-2B-20F90DE290CFA9E8",
+      "verifiedQuestionIds": [
+        "Y2M06-Q019"
+      ],
+      "contractPaths": [
+        "items[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EAR",
+      "semanticTarget": "ear",
+      "mediaId": "IMG-Y2M06-Q001-CTX-A8167BBFA098",
+      "questionId": "Y2M06-Q001",
+      "splitFromMediaId": "IMG-V11-2B-54E44F386CF7B470",
+      "verifiedQuestionIds": [
+        "Y2M06-Q001"
+      ],
+      "contractPaths": [
+        "targets[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EAR",
+      "semanticTarget": "ear",
+      "mediaId": "IMG-Y2M06-Q003-CTX-1AAAF76EE25B",
+      "questionId": "Y2M06-Q003",
+      "splitFromMediaId": "IMG-V11-2B-30690D3C168DA49E",
+      "verifiedQuestionIds": [
+        "Y2M06-Q003"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EAR",
+      "semanticTarget": "ear",
+      "mediaId": "IMG-Y2M06-Q004-CTX-005A1AAEFBA3",
+      "questionId": "Y2M06-Q004",
+      "splitFromMediaId": "IMG-V11-2B-30690D3C168DA49E",
+      "verifiedQuestionIds": [
+        "Y2M06-Q004"
+      ],
+      "contractPaths": [
+        "options[2]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EAR",
+      "semanticTarget": "ear",
+      "mediaId": "IMG-Y2M06-Q005-CTX-FC91DBEFD524",
+      "questionId": "Y2M06-Q005",
+      "splitFromMediaId": "IMG-V11-2B-0D4D258A62F7709C",
+      "verifiedQuestionIds": [
+        "Y2M06-Q005"
+      ],
+      "contractPaths": [
+        "pairs[1].cards[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EAR",
+      "semanticTarget": "ear",
+      "mediaId": "IMG-Y2M06-Q006-CTX-47417120AD4E",
+      "questionId": "Y2M06-Q006",
+      "splitFromMediaId": "IMG-V11-2B-938708DB14D30D4B",
+      "verifiedQuestionIds": [
+        "Y2M06-Q006"
+      ],
+      "contractPaths": [
+        "pairs[3].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EAR",
+      "semanticTarget": "ear",
+      "mediaId": "IMG-Y2M06-Q010-CTX-2AF12A0138D5",
+      "questionId": "Y2M06-Q010",
+      "splitFromMediaId": "IMG-V11-2B-54E44F386CF7B470",
+      "verifiedQuestionIds": [
+        "Y2M06-Q010"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EAR",
+      "semanticTarget": "ear",
+      "mediaId": "IMG-Y2M06-Q016-CTX-1E0B314F0F2F",
+      "questionId": "Y2M06-Q016",
+      "splitFromMediaId": "IMG-V11-2B-54E44F386CF7B470",
+      "verifiedQuestionIds": [
+        "Y2M06-Q016"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EAR",
+      "semanticTarget": "ear",
+      "mediaId": "IMG-Y2M06-Q019-CTX-6A3F47C3C9C3",
+      "questionId": "Y2M06-Q019",
+      "splitFromMediaId": "IMG-V11-2B-3496550C7BE55739",
+      "verifiedQuestionIds": [
+        "Y2M06-Q019"
+      ],
+      "contractPaths": [
+        "items[2]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-NOSE",
+      "semanticTarget": "nose",
+      "mediaId": "IMG-Y2M06-Q001-CTX-FDC8B91E4D73",
+      "questionId": "Y2M06-Q001",
+      "splitFromMediaId": "IMG-V11-2B-B23C054704E6158D",
+      "verifiedQuestionIds": [
+        "Y2M06-Q001"
+      ],
+      "contractPaths": [
+        "targets[2]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-NOSE",
+      "semanticTarget": "nose",
+      "mediaId": "IMG-Y2M06-Q003-CTX-C51EF03D1DC0",
+      "questionId": "Y2M06-Q003",
+      "splitFromMediaId": "IMG-V11-2B-689B471440B0B576",
+      "verifiedQuestionIds": [
+        "Y2M06-Q003"
+      ],
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-NOSE",
+      "semanticTarget": "nose",
+      "mediaId": "IMG-Y2M06-Q004-CTX-EF468CAF6ADD",
+      "questionId": "Y2M06-Q004",
+      "splitFromMediaId": "IMG-V11-2B-689B471440B0B576",
+      "verifiedQuestionIds": [
+        "Y2M06-Q004"
+      ],
+      "contractPaths": [
+        "options[3]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-NOSE",
+      "semanticTarget": "nose",
+      "mediaId": "IMG-Y2M06-Q005-CTX-C471D435CF7D",
+      "questionId": "Y2M06-Q005",
+      "splitFromMediaId": "IMG-V11-2B-C806365B55CB438A",
+      "verifiedQuestionIds": [
+        "Y2M06-Q005"
+      ],
+      "contractPaths": [
+        "pairs[2].cards[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-NOSE",
+      "semanticTarget": "nose",
+      "mediaId": "IMG-Y2M06-Q006-CTX-EDE0EFC9A970",
+      "questionId": "Y2M06-Q006",
+      "splitFromMediaId": "IMG-V11-2B-1BD9271CB0107E95",
+      "verifiedQuestionIds": [
+        "Y2M06-Q006"
+      ],
+      "contractPaths": [
+        "pairs[4].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-NOSE",
+      "semanticTarget": "nose",
+      "mediaId": "IMG-Y2M06-Q007-CTX-1C5F39530920",
+      "questionId": "Y2M06-Q007",
+      "splitFromMediaId": "IMG-V11-2B-B23C054704E6158D",
+      "verifiedQuestionIds": [
+        "Y2M06-Q007"
+      ],
+      "contractPaths": [
+        "targets[0]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-NOSE",
+      "semanticTarget": "nose",
+      "mediaId": "IMG-Y2M06-Q013-CTX-058BF46C0F31",
+      "questionId": "Y2M06-Q013",
+      "splitFromMediaId": "IMG-V11-2B-689B471440B0B576",
+      "verifiedQuestionIds": [
+        "Y2M06-Q013"
+      ],
+      "contractPaths": [
+        "options[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MOUTH",
+      "semanticTarget": "mouth",
+      "mediaId": "IMG-Y2M06-Q001-CTX-C401AA4B0B81",
+      "questionId": "Y2M06-Q001",
+      "splitFromMediaId": "IMG-V11-2B-26139F65B6D3AAFA",
+      "verifiedQuestionIds": [
+        "Y2M06-Q001"
+      ],
+      "contractPaths": [
+        "targets[3]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MOUTH",
+      "semanticTarget": "mouth",
+      "mediaId": "IMG-Y2M06-Q003-CTX-4F9413523A99",
+      "questionId": "Y2M06-Q003",
+      "splitFromMediaId": "IMG-V11-2B-372152A8B0B3430F",
+      "verifiedQuestionIds": [
+        "Y2M06-Q003"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MOUTH",
+      "semanticTarget": "mouth",
+      "mediaId": "IMG-Y2M06-Q004-CTX-0AD1F104E9D4",
+      "questionId": "Y2M06-Q004",
+      "splitFromMediaId": "IMG-V11-2B-372152A8B0B3430F",
+      "verifiedQuestionIds": [
+        "Y2M06-Q004"
+      ],
+      "contractPaths": [
+        "options[0]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MOUTH",
+      "semanticTarget": "mouth",
+      "mediaId": "IMG-Y2M06-Q005-CTX-BD9E6A690115",
+      "questionId": "Y2M06-Q005",
+      "splitFromMediaId": "IMG-V11-2B-7E8EB0BB1DCBBF01",
+      "verifiedQuestionIds": [
+        "Y2M06-Q005"
+      ],
+      "contractPaths": [
+        "pairs[3].cards[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MOUTH",
+      "semanticTarget": "mouth",
+      "mediaId": "IMG-Y2M06-Q006-CTX-0F10B780D4F7",
+      "questionId": "Y2M06-Q006",
+      "splitFromMediaId": "IMG-V11-2B-F08A6487F6240A45",
+      "verifiedQuestionIds": [
+        "Y2M06-Q006"
+      ],
+      "contractPaths": [
+        "pairs[5].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MOUTH",
+      "semanticTarget": "mouth",
+      "mediaId": "IMG-Y2M06-Q007-CTX-E79997858975",
+      "questionId": "Y2M06-Q007",
+      "splitFromMediaId": "IMG-V11-2B-26139F65B6D3AAFA",
+      "verifiedQuestionIds": [
+        "Y2M06-Q007"
+      ],
+      "contractPaths": [
+        "targets[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MOUTH",
+      "semanticTarget": "mouth",
+      "mediaId": "IMG-Y2M06-Q013-CTX-425200B7A587",
+      "questionId": "Y2M06-Q013",
+      "splitFromMediaId": "IMG-V11-2B-372152A8B0B3430F",
+      "verifiedQuestionIds": [
+        "Y2M06-Q013"
+      ],
+      "contractPaths": [
+        "options[2]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MOUTH",
+      "semanticTarget": "mouth",
+      "mediaId": "IMG-Y2M06-Q019-CTX-52FF539D8B06",
+      "questionId": "Y2M06-Q019",
+      "splitFromMediaId": "IMG-V11-2B-74052139C0D44F03",
+      "verifiedQuestionIds": [
+        "Y2M06-Q019"
+      ],
+      "contractPaths": [
+        "items[0]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-ORANGE-FRUIT",
+      "semanticTarget": "orange",
+      "mediaId": "IMG-Y2M06-Q002-CTX-7B73DFFCF61B",
+      "questionId": "Y2M06-Q002",
+      "splitFromMediaId": "IMG-Y1M03-Q001-ORANGE",
+      "verifiedQuestionIds": [
+        "Y2M06-Q002"
+      ],
+      "contractPaths": [
+        "pairs[0].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-ORANGE-FRUIT",
+      "semanticTarget": "orange",
+      "mediaId": "IMG-Y2M06-Q003-CTX-169A673BC6E8",
+      "questionId": "Y2M06-Q003",
+      "splitFromMediaId": "IMG-Y1M03-Q001-ORANGE",
+      "verifiedQuestionIds": [
+        "Y2M06-Q003"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-ORANGE-FRUIT",
+      "semanticTarget": "orange",
+      "mediaId": "IMG-Y2M06-Q009-CTX-653C2FA2345B",
+      "questionId": "Y2M06-Q009",
+      "splitFromMediaId": "IMG-Y1M03-Q001-ORANGE",
+      "verifiedQuestionIds": [
+        "Y2M06-Q009"
+      ],
+      "contractPaths": [
+        "pairs[2].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-ORANGE-FRUIT",
+      "semanticTarget": "orange",
+      "mediaId": "IMG-Y2M06-Q011-CTX-49C50FE33136",
+      "questionId": "Y2M06-Q011",
+      "splitFromMediaId": "IMG-Y1M03-Q001-ORANGE",
+      "verifiedQuestionIds": [
+        "Y2M06-Q011"
+      ],
+      "contractPaths": [
+        "targets[3]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-ORANGE-FRUIT",
+      "semanticTarget": "orange",
+      "mediaId": "IMG-Y2M06-Q016-CTX-CF694AE0A3D5",
+      "questionId": "Y2M06-Q016",
+      "splitFromMediaId": "IMG-Y1M03-Q001-ORANGE",
+      "verifiedQuestionIds": [
+        "Y2M06-Q016"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-GRAPE",
+      "semanticTarget": "grape",
+      "mediaId": "IMG-Y2M06-Q002-CTX-E7DF639867E9",
+      "questionId": "Y2M06-Q002",
+      "splitFromMediaId": "IMG-V11-2B-BC3B9081178AE7A4",
+      "verifiedQuestionIds": [
+        "Y2M06-Q002"
+      ],
+      "contractPaths": [
+        "pairs[1].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-GRAPE",
+      "semanticTarget": "grape",
+      "mediaId": "IMG-Y2M06-Q003-CTX-7B03896E238A",
+      "questionId": "Y2M06-Q003",
+      "splitFromMediaId": "IMG-V11-2B-BC3B9081178AE7A4",
+      "verifiedQuestionIds": [
+        "Y2M06-Q003"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-GRAPE",
+      "semanticTarget": "grape",
+      "mediaId": "IMG-Y2M06-Q009-CTX-86417FEF9F24",
+      "questionId": "Y2M06-Q009",
+      "splitFromMediaId": "IMG-V11-2B-BC3B9081178AE7A4",
+      "verifiedQuestionIds": [
+        "Y2M06-Q009"
+      ],
+      "contractPaths": [
+        "pairs[3].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-GRAPE",
+      "semanticTarget": "grape",
+      "mediaId": "IMG-Y2M06-Q010-CTX-DCC9D7E45EF7",
+      "questionId": "Y2M06-Q010",
+      "splitFromMediaId": "IMG-V11-2B-249393BE62012CB7",
+      "verifiedQuestionIds": [
+        "Y2M06-Q010"
+      ],
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-GRAPE",
+      "semanticTarget": "grape",
+      "mediaId": "IMG-Y2M06-Q012-CTX-0BFE030B80DE",
+      "questionId": "Y2M06-Q012",
+      "splitFromMediaId": "IMG-V11-2B-BC3B9081178AE7A4",
+      "verifiedQuestionIds": [
+        "Y2M06-Q012"
+      ],
+      "contractPaths": [
+        "pairs[0].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-GRAPE",
+      "semanticTarget": "grape",
+      "mediaId": "IMG-Y2M06-Q014-CTX-60562DFDBBAC",
+      "questionId": "Y2M06-Q014",
+      "splitFromMediaId": "IMG-V11-2B-BC3B9081178AE7A4",
+      "verifiedQuestionIds": [
+        "Y2M06-Q014"
+      ],
+      "contractPaths": [
+        "pairs[2].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-GRAPE",
+      "semanticTarget": "grape",
+      "mediaId": "IMG-Y2M06-Q016-CTX-AA3F5CF458B3",
+      "questionId": "Y2M06-Q016",
+      "splitFromMediaId": "IMG-V11-2B-249393BE62012CB7",
+      "verifiedQuestionIds": [
+        "Y2M06-Q016"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-PAPAYA",
+      "semanticTarget": "papaya",
+      "mediaId": "IMG-Y2M06-Q002-CTX-16D8D3082FB9",
+      "questionId": "Y2M06-Q002",
+      "splitFromMediaId": "IMG-V11-2B-D1344634366B33A5",
+      "verifiedQuestionIds": [
+        "Y2M06-Q002"
+      ],
+      "contractPaths": [
+        "pairs[2].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-PAPAYA",
+      "semanticTarget": "papaya",
+      "mediaId": "IMG-Y2M06-Q008-CTX-AD924DD54260",
+      "questionId": "Y2M06-Q008",
+      "splitFromMediaId": "IMG-V11-2B-D1344634366B33A5",
+      "verifiedQuestionIds": [
+        "Y2M06-Q008"
+      ],
+      "contractPaths": [
+        "mediaBindings[0]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-PAPAYA",
+      "semanticTarget": "papaya",
+      "mediaId": "IMG-Y2M06-Q009-CTX-6469F8DD3A3A",
+      "questionId": "Y2M06-Q009",
+      "splitFromMediaId": "IMG-V11-2B-D1344634366B33A5",
+      "verifiedQuestionIds": [
+        "Y2M06-Q009"
+      ],
+      "contractPaths": [
+        "pairs[4].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-PAPAYA",
+      "semanticTarget": "papaya",
+      "mediaId": "IMG-Y2M06-Q012-CTX-44BF2A5FF613",
+      "questionId": "Y2M06-Q012",
+      "splitFromMediaId": "IMG-V11-2B-D1344634366B33A5",
+      "verifiedQuestionIds": [
+        "Y2M06-Q012"
+      ],
+      "contractPaths": [
+        "pairs[1].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-PAPAYA",
+      "semanticTarget": "papaya",
+      "mediaId": "IMG-Y2M06-Q014-CTX-FA06B8BB7D89",
+      "questionId": "Y2M06-Q014",
+      "splitFromMediaId": "IMG-V11-2B-D1344634366B33A5",
+      "verifiedQuestionIds": [
+        "Y2M06-Q014"
+      ],
+      "contractPaths": [
+        "pairs[3].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-PAPAYA",
+      "semanticTarget": "papaya",
+      "mediaId": "IMG-Y2M06-Q020-CTX-C6C38CDDFF33",
+      "questionId": "Y2M06-Q020",
+      "splitFromMediaId": "IMG-V11-2B-D1344634366B33A5",
+      "verifiedQuestionIds": [
+        "Y2M06-Q020"
+      ],
+      "contractPaths": [
+        "pairs[1].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MELON",
+      "semanticTarget": "melon",
+      "mediaId": "IMG-Y2M06-Q002-CTX-5A7DF37002C7",
+      "questionId": "Y2M06-Q002",
+      "splitFromMediaId": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "verifiedQuestionIds": [
+        "Y2M06-Q002"
+      ],
+      "contractPaths": [
+        "pairs[3].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MELON",
+      "semanticTarget": "melon",
+      "mediaId": "IMG-Y2M06-Q009-CTX-2827C0A15259",
+      "questionId": "Y2M06-Q009",
+      "splitFromMediaId": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "verifiedQuestionIds": [
+        "Y2M06-Q009"
+      ],
+      "contractPaths": [
+        "pairs[5].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MELON",
+      "semanticTarget": "melon",
+      "mediaId": "IMG-Y2M06-Q012-CTX-39BA33524F29",
+      "questionId": "Y2M06-Q012",
+      "splitFromMediaId": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "verifiedQuestionIds": [
+        "Y2M06-Q012"
+      ],
+      "contractPaths": [
+        "pairs[2].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MELON",
+      "semanticTarget": "melon",
+      "mediaId": "IMG-Y2M06-Q014-CTX-F03C6627BAAD",
+      "questionId": "Y2M06-Q014",
+      "splitFromMediaId": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "verifiedQuestionIds": [
+        "Y2M06-Q014"
+      ],
+      "contractPaths": [
+        "pairs[4].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MELON",
+      "semanticTarget": "melon",
+      "mediaId": "IMG-Y2M06-Q020-CTX-66A5C32B9A6B",
+      "questionId": "Y2M06-Q020",
+      "splitFromMediaId": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "verifiedQuestionIds": [
+        "Y2M06-Q020"
+      ],
+      "contractPaths": [
+        "pairs[2].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-PEAR",
+      "semanticTarget": "pear",
+      "mediaId": "IMG-Y2M06-Q002-CTX-5D6754A903D2",
+      "questionId": "Y2M06-Q002",
+      "splitFromMediaId": "IMG-V11-2B-3E8B870AE9E69B6A",
+      "verifiedQuestionIds": [
+        "Y2M06-Q002"
+      ],
+      "contractPaths": [
+        "pairs[4].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-PEAR",
+      "semanticTarget": "pear",
+      "mediaId": "IMG-Y2M06-Q009-CTX-EF13293E72DA",
+      "questionId": "Y2M06-Q009",
+      "splitFromMediaId": "IMG-V11-2B-3E8B870AE9E69B6A",
+      "verifiedQuestionIds": [
+        "Y2M06-Q009"
+      ],
+      "contractPaths": [
+        "pairs[1].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-PEAR",
+      "semanticTarget": "pear",
+      "mediaId": "IMG-Y2M06-Q010-CTX-1747D75C6F5B",
+      "questionId": "Y2M06-Q010",
+      "splitFromMediaId": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "verifiedQuestionIds": [
+        "Y2M06-Q010"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-PEAR",
+      "semanticTarget": "pear",
+      "mediaId": "IMG-Y2M06-Q011-CTX-22DD1D5CCCD8",
+      "questionId": "Y2M06-Q011",
+      "splitFromMediaId": "IMG-V11-2B-EB9A765F1CD87AC2",
+      "verifiedQuestionIds": [
+        "Y2M06-Q011"
+      ],
+      "contractPaths": [
+        "targets[2]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-PEAR",
+      "semanticTarget": "pear",
+      "mediaId": "IMG-Y2M06-Q016-CTX-67F4FC4C3F79",
+      "questionId": "Y2M06-Q016",
+      "splitFromMediaId": "IMG-V11-2B-6C28CE93AFE4F8BB",
+      "verifiedQuestionIds": [
+        "Y2M06-Q016"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-KNEE",
+      "semanticTarget": "knee",
+      "mediaId": "IMG-Y2M06-Q006-CTX-212920ED1B38",
+      "questionId": "Y2M06-Q006",
+      "splitFromMediaId": "IMG-V11-2B-D633F5E3AD9165C8",
+      "verifiedQuestionIds": [
+        "Y2M06-Q006"
+      ],
+      "contractPaths": [
+        "pairs[0].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-KNEE",
+      "semanticTarget": "knee",
+      "mediaId": "IMG-Y2M06-Q007-CTX-61A3EF3A2B20",
+      "questionId": "Y2M06-Q007",
+      "splitFromMediaId": "IMG-V11-2B-554E165910572343",
+      "verifiedQuestionIds": [
+        "Y2M06-Q007"
+      ],
+      "contractPaths": [
+        "targets[3]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-KNEE",
+      "semanticTarget": "knee",
+      "mediaId": "IMG-Y2M06-Q013-CTX-8B92E133569E",
+      "questionId": "Y2M06-Q013",
+      "splitFromMediaId": "IMG-V11-2B-7C7AC57571396DE1",
+      "verifiedQuestionIds": [
+        "Y2M06-Q013"
+      ],
+      "contractPaths": [
+        "options[3]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-SHOULDERS",
+      "semanticTarget": "shoulders",
+      "mediaId": "IMG-Y2M06-Q006-CTX-3B8BF6900857",
+      "questionId": "Y2M06-Q006",
+      "splitFromMediaId": "IMG-V11-2B-F3FAB54D046C94A0",
+      "verifiedQuestionIds": [
+        "Y2M06-Q006"
+      ],
+      "contractPaths": [
+        "pairs[1].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-FINGER",
+      "semanticTarget": "finger",
+      "mediaId": "IMG-Y2M06-Q007-CTX-DEEAE429C8D7",
+      "questionId": "Y2M06-Q007",
+      "splitFromMediaId": "IMG-V11-2B-7948E91B1FE60FC8",
+      "verifiedQuestionIds": [
+        "Y2M06-Q007"
+      ],
+      "contractPaths": [
+        "targets[2]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-FINGER",
+      "semanticTarget": "finger",
+      "mediaId": "IMG-Y2M06-Q013-CTX-44A861CED6DE",
+      "questionId": "Y2M06-Q013",
+      "splitFromMediaId": "IMG-V11-2B-A210FFD1BF96DDB4",
+      "verifiedQuestionIds": [
+        "Y2M06-Q013"
+      ],
+      "contractPaths": [
+        "options[0]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-BANANA",
+      "semanticTarget": "banana",
+      "mediaId": "IMG-Y2M06-Q009-CTX-7FF59901EA9A",
+      "questionId": "Y2M06-Q009",
+      "splitFromMediaId": "IMG-V11-2B-2C6DC2C54EF9FE82",
+      "verifiedQuestionIds": [
+        "Y2M06-Q009"
+      ],
+      "contractPaths": [
+        "pairs[0].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-BANANA",
+      "semanticTarget": "banana",
+      "mediaId": "IMG-Y2M06-Q010-CTX-F98B5BDBACCF",
+      "questionId": "Y2M06-Q010",
+      "splitFromMediaId": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "verifiedQuestionIds": [
+        "Y2M06-Q010"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-BANANA",
+      "semanticTarget": "banana",
+      "mediaId": "IMG-Y2M06-Q011-CTX-C4CAA1729CD6",
+      "questionId": "Y2M06-Q011",
+      "splitFromMediaId": "IMG-V11-2B-53B01C40B9C5E915",
+      "verifiedQuestionIds": [
+        "Y2M06-Q011"
+      ],
+      "contractPaths": [
+        "targets[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-BANANA",
+      "semanticTarget": "banana",
+      "mediaId": "IMG-Y2M06-Q016-CTX-F9CD173F581C",
+      "questionId": "Y2M06-Q016",
+      "splitFromMediaId": "IMG-V11-2B-42E0B7F7C0CBAA69",
+      "verifiedQuestionIds": [
+        "Y2M06-Q016"
+      ],
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-BANANA",
+      "semanticTarget": "banana",
+      "mediaId": "IMG-Y2M06-Q019-CTX-DFED56E04910",
+      "questionId": "Y2M06-Q019",
+      "splitFromMediaId": "IMG-V11-2B-5596327D2C423D85",
+      "verifiedQuestionIds": [
+        "Y2M06-Q019"
+      ],
+      "contractPaths": [
+        "items[4]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-APPLE",
+      "semanticTarget": "apple",
+      "mediaId": "IMG-Y2M06-Q010-CTX-8471233F96DD",
+      "questionId": "Y2M06-Q010",
+      "splitFromMediaId": "IMG-V11-2B-3C181EF0580BB69B",
+      "verifiedQuestionIds": [
+        "Y2M06-Q010"
+      ],
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-APPLE",
+      "semanticTarget": "apple",
+      "mediaId": "IMG-Y2M06-Q011-CTX-FD233548E912",
+      "questionId": "Y2M06-Q011",
+      "splitFromMediaId": "IMG-V11-2B-47E739917EEB3083",
+      "verifiedQuestionIds": [
+        "Y2M06-Q011"
+      ],
+      "contractPaths": [
+        "targets[0]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-APPLE",
+      "semanticTarget": "apple",
+      "mediaId": "IMG-Y2M06-Q019-CTX-B1AA7DD0BCD6",
+      "questionId": "Y2M06-Q019",
+      "splitFromMediaId": "IMG-V11-2B-4E8C7B72B1EE887C",
+      "verifiedQuestionIds": [
+        "Y2M06-Q019"
+      ],
+      "contractPaths": [
+        "items[3]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-CARROT",
+      "semanticTarget": "carrot",
+      "mediaId": "IMG-Y2M06-Q012-CTX-EF102307092D",
+      "questionId": "Y2M06-Q012",
+      "splitFromMediaId": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "verifiedQuestionIds": [
+        "Y2M06-Q012"
+      ],
+      "contractPaths": [
+        "pairs[3].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-CARROT",
+      "semanticTarget": "carrot",
+      "mediaId": "IMG-Y2M06-Q014-CTX-94ED006D9B57",
+      "questionId": "Y2M06-Q014",
+      "splitFromMediaId": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "verifiedQuestionIds": [
+        "Y2M06-Q014"
+      ],
+      "contractPaths": [
+        "pairs[0].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-CARROT",
+      "semanticTarget": "carrot",
+      "mediaId": "IMG-Y2M06-Q019-CTX-4756C6C7D479",
+      "questionId": "Y2M06-Q019",
+      "splitFromMediaId": "IMG-V11-2B-BE4D9E25DFED3EBE",
+      "verifiedQuestionIds": [
+        "Y2M06-Q019"
+      ],
+      "contractPaths": [
+        "items[5]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-CARROT",
+      "semanticTarget": "carrot",
+      "mediaId": "IMG-Y2M06-Q020-CTX-1236046DAE7B",
+      "questionId": "Y2M06-Q020",
+      "splitFromMediaId": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "verifiedQuestionIds": [
+        "Y2M06-Q020"
+      ],
+      "contractPaths": [
+        "pairs[3].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-TOMATO",
+      "semanticTarget": "tomato",
+      "mediaId": "IMG-Y2M06-Q012-CTX-080D7E7FD927",
+      "questionId": "Y2M06-Q012",
+      "splitFromMediaId": "IMG-V11-2B-59314A55011BCD3F",
+      "verifiedQuestionIds": [
+        "Y2M06-Q012"
+      ],
+      "contractPaths": [
+        "pairs[4].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-TOMATO",
+      "semanticTarget": "tomato",
+      "mediaId": "IMG-Y2M06-Q014-CTX-1806CD391F47",
+      "questionId": "Y2M06-Q014",
+      "splitFromMediaId": "IMG-V11-2B-59314A55011BCD3F",
+      "verifiedQuestionIds": [
+        "Y2M06-Q014"
+      ],
+      "contractPaths": [
+        "pairs[1].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-TOMATO",
+      "semanticTarget": "tomato",
+      "mediaId": "IMG-Y2M06-Q020-CTX-B147FFA7021B",
+      "questionId": "Y2M06-Q020",
+      "splitFromMediaId": "IMG-V11-2B-59314A55011BCD3F",
+      "verifiedQuestionIds": [
+        "Y2M06-Q020"
+      ],
+      "contractPaths": [
+        "pairs[4].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-POTATO",
+      "semanticTarget": "potato",
+      "mediaId": "IMG-Y2M06-Q012-CTX-B2B011A56A4B",
+      "questionId": "Y2M06-Q012",
+      "splitFromMediaId": "IMG-V11-2B-178C9BC5F16D0575",
+      "verifiedQuestionIds": [
+        "Y2M06-Q012"
+      ],
+      "contractPaths": [
+        "pairs[5].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-POTATO",
+      "semanticTarget": "potato",
+      "mediaId": "IMG-Y2M06-Q020-CTX-42D76F5FDD18",
+      "questionId": "Y2M06-Q020",
+      "splitFromMediaId": "IMG-V11-2B-178C9BC5F16D0575",
+      "verifiedQuestionIds": [
+        "Y2M06-Q020"
+      ],
+      "contractPaths": [
+        "pairs[0].b"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-FEET",
+      "semanticTarget": "feet",
+      "mediaId": "IMG-Y2M06-Q015-CTX-8E66C04E11E8",
+      "questionId": "Y2M06-Q015",
+      "splitFromMediaId": "IMG-Y1M05-Q003-FEET",
+      "verifiedQuestionIds": [
+        "Y2M06-Q015"
+      ],
+      "contractPaths": [
+        "pairs[0].cards[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-HEAD",
+      "semanticTarget": "head",
+      "mediaId": "IMG-Y2M06-Q015-CTX-7F52B9297732",
+      "questionId": "Y2M06-Q015",
+      "splitFromMediaId": "IMG-Y1M05-Q001-HEAD",
+      "verifiedQuestionIds": [
+        "Y2M06-Q015"
+      ],
+      "contractPaths": [
+        "pairs[1].cards[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-HANDS",
+      "semanticTarget": "hands",
+      "mediaId": "IMG-Y2M06-Q015-CTX-6FA6C1231003",
+      "questionId": "Y2M06-Q015",
+      "splitFromMediaId": "IMG-Y1M05-Q001-HANDS",
+      "verifiedQuestionIds": [
+        "Y2M06-Q015"
+      ],
+      "contractPaths": [
+        "pairs[2].cards[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-LEGS",
+      "semanticTarget": "legs",
+      "mediaId": "IMG-Y2M06-Q015-CTX-CCFD524FE455",
+      "questionId": "Y2M06-Q015",
+      "splitFromMediaId": "IMG-Y1M05-Q001-LEGS",
+      "verifiedQuestionIds": [
+        "Y2M06-Q015"
+      ],
+      "contractPaths": [
+        "pairs[3].cards[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-ARMS",
+      "semanticTarget": "arms",
+      "mediaId": "IMG-Y2M06-Q015-CTX-397E6F1CC19A",
+      "questionId": "Y2M06-Q015",
+      "splitFromMediaId": "IMG-Y1M05-Q001-ARMS",
+      "verifiedQuestionIds": [
+        "Y2M06-Q015"
+      ],
+      "contractPaths": [
+        "pairs[4].cards[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-BIG-APPLE",
+      "semanticTarget": "big apple",
+      "mediaId": "IMG-Y2M06-Q017-CTX-795A7D35DF1C",
+      "questionId": "Y2M06-Q017",
+      "splitFromMediaId": "IMG-V11-2B-A0A8A7AAF4DD84D8",
+      "verifiedQuestionIds": [
+        "Y2M06-Q017"
+      ],
+      "contractPaths": [
+        "items[0]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-BIG-MELON",
+      "semanticTarget": "big melon",
+      "mediaId": "IMG-Y2M06-Q017-CTX-5F31C071BAF4",
+      "questionId": "Y2M06-Q017",
+      "splitFromMediaId": "IMG-V11-2B-EAAF1FABD1844321",
+      "verifiedQuestionIds": [
+        "Y2M06-Q017"
+      ],
+      "contractPaths": [
+        "items[1]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-BIG-BANANA",
+      "semanticTarget": "big banana",
+      "mediaId": "IMG-Y2M06-Q017-CTX-2571B3FB8382",
+      "questionId": "Y2M06-Q017",
+      "splitFromMediaId": "IMG-V11-2B-64F65B6254CDA0AF",
+      "verifiedQuestionIds": [
+        "Y2M06-Q017"
+      ],
+      "contractPaths": [
+        "items[2]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-SMALL-GRAPE",
+      "semanticTarget": "small grape",
+      "mediaId": "IMG-Y2M06-Q017-CTX-87BD41E231B9",
+      "questionId": "Y2M06-Q017",
+      "splitFromMediaId": "IMG-V11-2B-48ABF3A913FF63A0",
+      "verifiedQuestionIds": [
+        "Y2M06-Q017"
+      ],
+      "contractPaths": [
+        "items[3]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-SMALL-PEAR",
+      "semanticTarget": "small pear",
+      "mediaId": "IMG-Y2M06-Q017-CTX-8D6E49B2FA5B",
+      "questionId": "Y2M06-Q017",
+      "splitFromMediaId": "IMG-V11-2B-06480218CC9BB101",
+      "verifiedQuestionIds": [
+        "Y2M06-Q017"
+      ],
+      "contractPaths": [
+        "items[4]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-SMALL-CARROT",
+      "semanticTarget": "small carrot",
+      "mediaId": "IMG-Y2M06-Q017-CTX-9C29A8DD789E",
+      "questionId": "Y2M06-Q017",
+      "splitFromMediaId": "IMG-V11-2B-8C45DA566BF3CD91",
+      "verifiedQuestionIds": [
+        "Y2M06-Q017"
+      ],
+      "contractPaths": [
+        "items[5]"
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-BIG",
+      "semanticTarget": "big",
+      "mediaId": "IMG-Y2M06-Q018-CTX-C6A49157CEED",
+      "questionId": "Y2M06-Q018",
+      "splitFromMediaId": "IMG-Q009-BIG",
+      "verifiedQuestionIds": [
+        "Y2M06-Q018"
+      ],
+      "contractPaths": [
+        "mediaBindings[0]"
+      ]
+    }
+  ],
+  "productionApproved": false
+}

@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "DUDUQ_Y2M06_SOURCE_REGISTRY_REBASE_V1",
+  "moduleId": "Y2M06",
+  "createdAt": "2026-11-02",
+  "status": "PASS_REBASE_TO_EXACT_CLEAN_V26_WITH_SOURCE_SCOPE_IDENTITY",
+  "legacyReviewedRegistrySha256": "ce8b74d3087e513622ff1efc9a999536c98744578d1989b0222b427b33f9d1c2",
+  "legacyReviewedRegistryEntries": 1235,
+  "cleanV26RegistrySha256": "aa615a3ed307b0e8cae6abf6901a1582c22ab59aa7f95c6339a635ca7d35fc89",
+  "cleanV26RegistryEntries": 1159,
+  "cleanV26ManifestSha256": "5993aaceaff272626c863aef07e1b33a909ca7f9fcc41d2d40890baa6c08b822",
+  "sourceQuestionContractSha256": "b3199e7be552ca42ce01138eacf96967cd245be79557cace8d39e3a3fcc0cc62",
+  "sourceQuestionInvariantSha256": "ddb5c5ecda9fb85994c5c3529c26be9f73b9a5696e1458d8bb7881fc72f62ad1",
+  "sourceRegistryPinCanonicalLfSha256": "ec8d78ada0a337006523f69f5a3c4854fa89fd947bc1335e79acdaefb1d97260",
+  "sourceRegistryEntryCount": 56,
+  "sourceRegistryEntryProjectionSha256": "6f6fd68e79af7946404c07b8b46b817bb510b51d1b6e355f4cd6ffc7b2940270",
+  "sourceQuestionContractHashes": [
+    {
+      "questionId": "Y2M06-Q001",
+      "sha256": "331afcc2ff919adda7d93c5c59cbfe7e12f24225a77e64be214427a5e0effef9"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "sha256": "44ccac63a998c1cd7cb46bf3ec0b8fcd3c1b57268b188fca605471831744a2c1"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "sha256": "db4052cafece10e12b54e80cda8fd9ecde9393382536cb9144c6b0834f5e21c9"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "sha256": "f574be44f420c107dff42dcd54037614c3d47037d899250f71062b812fe2839a"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "sha256": "6999233dc9bc1adfc3fb43b9e346649dd69a57594ea52923a7fcd1d0a1c7751a"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "sha256": "8a0f49209261cde70ea0e5b2b86a21367013c24fbd5576a7f41ee64e5e3d17b9"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "sha256": "2abb46761389ec4c87780c61208900ba0105a5fc9664321227a468b7d99d9b6f"
+    },
+    {
+      "questionId": "Y2M06-Q008",
+      "sha256": "9686ba53c98db4e71a1dabe2b8857c45e8ef5adde56432b48ab27f8fddc3fec6"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "sha256": "0963f453a3a1a671e3bb8ace9c9e66f955384572e0024bededdc96ce360ac6a8"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "sha256": "80975620ed035c7fdd537b1bb7eaac83f089e97b123b39c2b57efa427d22f055"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "sha256": "7b58c076b87d4bbed145d330a2dd067db129c453a9ac4c1b2a5d3ed98e7be9dc"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "sha256": "9ead74193afb75840c4fd401ad2d999ce9b9e741b5b6cf34398142c943cf28d1"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "sha256": "7fac05fafc43177e345237205393dd69918502e24a34cbe6138e80d13073571e"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "sha256": "2d7c251375d814a06959953b652730841ff46959eef148fca6a8c798241cacde"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "sha256": "ebb8239b539d1d4eaae5c66fb2f1002a8f6c9d8b3238af10f201cdb1cf68ee08"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "sha256": "9af16db6ff343d0d6f227dedcc07175ad09ce9c4eb232bb2c562c34cb5262cd1"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "sha256": "3253a1cef86dec3526fc3677bf218b8b1db88c92de15ad431f52dac2e9c62324"
+    },
+    {
+      "questionId": "Y2M06-Q018",
+      "sha256": "00ef3e2e262bf736820a54f8afce203579fc235eeda99319e03ad53ad48bf5f5"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "sha256": "85f33a5069fae95dd3ec2c98c42a18ad715d68ae2eb4e62387da24fd3754dc97"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "sha256": "1c9f714f690071629cda56b0d888f7a7e8297156104de670a22a6add81d54d0e"
+    }
+  ],
+  "sourceHashesRewritten": false,
+  "productionApproved": false,
+  "scopeNote": "The older composed whole-registry hash is retained as provenance; only exact pristine V26 plus the identical 56-entry source projection is accepted for this review overlay."
+}

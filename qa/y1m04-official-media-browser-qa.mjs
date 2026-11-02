@@ -83,7 +83,13 @@ async function confirmWithPointerRetry(page,answerAlt,expectedState,label,events
       actionVisible:!!(rect&&rect.width>1&&rect.height>1&&css?.visibility!=='hidden'&&css?.display!=='none'&&rect.right>0&&rect.bottom>0&&rect.left<innerWidth&&rect.top<innerHeight),
       ribbonHidden:ribbon?.hidden??null,feedback:ribbon?.dataset.feedback||null};
   },answerAlt);
-  const alreadyResolved=await waitOutcome(1800).then(()=>true,()=>false);
+  // The runtime resolves the selected target before narration finishes and
+  // before the shared action visibly changes from CONFIRMAR. The historical
+  // 1.8 s probe landed inside that transition and could click the action just
+  // as it became CONTINUAR. Give the complete visible outcome a full grace
+  // window; a native confirmation click remains available only for a target
+  // that is still selected behind a visibly labelled CONFIRMAR action.
+  const alreadyResolved=await waitOutcome(8000).then(()=>true,()=>false);
   if(alreadyResolved)events?.push({label:label+'-auto-resolved',input:'observed visible feedback without a second click'});
   else {
     const beforeConfirm=await readAction();
