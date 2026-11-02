@@ -1,0 +1,639 @@
+{
+  "schemaVersion": "DUDUQ_RGBA_PNG_VALIDATION_V1",
+  "createdAt": "2026-11-02T07:16:47.255Z",
+  "moduleId": "Y2M04",
+  "validator": "qa/validate-duduq-png.mjs",
+  "requirements": {
+    "format": "PNG RGBA8 non-interlaced",
+    "minimumWidth": 1024,
+    "minimumHeight": 1024,
+    "meaningfulTransparentMargin": true,
+    "visibleSubject": true
+  },
+  "candidateCount": 23,
+  "validCount": 23,
+  "invalidCount": 0,
+  "assets": [
+    {
+      "file": "images/DUDUQ-Y2M04-DOLL.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-DOLL-ORIGINAL.png",
+      "sha256": "ba2aecca9a80491ecdde06c4fc5988ebe612752f6707e25586d3c12c545030f5",
+      "bytes": 2049070,
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 777915,
+      "opaquePixels": 739324,
+      "subjectBoundingBox": {
+        "x": 94,
+        "y": 28,
+        "width": 1060,
+        "height": 1202
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.81024295,
+      "transparentMargins": {
+        "left": 94,
+        "top": 28,
+        "right": 100,
+        "bottom": 24
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-BALL.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-BALL-ORIGINAL.png",
+      "sha256": "cb3401fc2675683294302a0e80c2924d70cf03e032138ff3b08c453115bd6f5c",
+      "bytes": 1387227,
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 575841,
+      "opaquePixels": 981480,
+      "subjectBoundingBox": {
+        "x": 64,
+        "y": 71,
+        "width": 1129,
+        "height": 1117
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.80195877,
+      "transparentMargins": {
+        "left": 64,
+        "top": 71,
+        "right": 61,
+        "bottom": 66
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-TRAIN.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-TRAIN-ORIGINAL.png",
+      "sha256": "9eaaa0f2ca054fe0deb40a5c402dd88382e471b390c2de734c0c7e3a6a74b2d6",
+      "bytes": 1708074,
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 696396,
+      "opaquePixels": 848963,
+      "subjectBoundingBox": {
+        "x": 27,
+        "y": 161,
+        "width": 1201,
+        "height": 951
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.72632075,
+      "transparentMargins": {
+        "left": 27,
+        "top": 161,
+        "right": 26,
+        "bottom": 142
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-PLANE.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-PLANE-ORIGINAL.png",
+      "sha256": "7ef7be8b9770d70527768016bcd48b66dae179fb1ccf366d5d120688a1cf2092",
+      "bytes": 1003178,
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 960106,
+      "opaquePixels": 588018,
+      "subjectBoundingBox": {
+        "x": 26,
+        "y": 223,
+        "width": 1212,
+        "height": 842
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.64896255,
+      "transparentMargins": {
+        "left": 26,
+        "top": 223,
+        "right": 16,
+        "bottom": 189
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-TEDDY-BEAR.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-TEDDY-BEAR-ORIGINAL.png",
+      "sha256": "7f3a83c5f00d81423b4875fb329b40fab5f910b1add1db472d98f3c1b03b7a21",
+      "bytes": 2421435,
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 638846,
+      "opaquePixels": 874959,
+      "subjectBoundingBox": {
+        "x": 103,
+        "y": 38,
+        "width": 1071,
+        "height": 1176
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.8009432,
+      "transparentMargins": {
+        "left": 103,
+        "top": 38,
+        "right": 80,
+        "bottom": 40
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-KITE.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-KITE-ORIGINAL.png",
+      "sha256": "71a71d4d087d5df23298faddc260247f2402624d68f8ab02039d96ce5fabdd95",
+      "bytes": 829080,
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1199022,
+      "opaquePixels": 333620,
+      "subjectBoundingBox": {
+        "x": 209,
+        "y": 35,
+        "width": 835,
+        "height": 1177
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.62498251,
+      "transparentMargins": {
+        "left": 209,
+        "top": 35,
+        "right": 210,
+        "bottom": 42
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-VIDEO-GAME.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-VIDEO-GAME-ORIGINAL.png",
+      "sha256": "322a877027f7bbe467ffa5436980ad92b9e2622287c95f8cde925b0728135c10",
+      "bytes": 1081248,
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 859966,
+      "opaquePixels": 699295,
+      "subjectBoundingBox": {
+        "x": 19,
+        "y": 251,
+        "width": 1222,
+        "height": 746
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.57971556,
+      "transparentMargins": {
+        "left": 19,
+        "top": 251,
+        "right": 13,
+        "bottom": 257
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-BOAT.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-BOAT-ORIGINAL.png",
+      "sha256": "a2dda1a87d92fa7a8ebd910f7a61734e0fd110e380416b4b444a2f4a77df4e19",
+      "bytes": 1324719,
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 841446,
+      "opaquePixels": 678249,
+      "subjectBoundingBox": {
+        "x": 78,
+        "y": 15,
+        "width": 1120,
+        "height": 1225
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.87248715,
+      "transparentMargins": {
+        "left": 78,
+        "top": 15,
+        "right": 56,
+        "bottom": 14
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-RED.png",
+      "originalFile": "provenance/reused-sources/DUDUQ-Y1M04-RED-SOURCE.png",
+      "sha256": "484622d91bc0cba9e422a3fcfe990e5ea3c97297b0a97f3e084cb5a92022c3eb",
+      "bytes": 1187878,
+      "width": 1265,
+      "height": 1243,
+      "transparentPixels": 704170,
+      "opaquePixels": 857303,
+      "subjectBoundingBox": {
+        "x": 108,
+        "y": 106,
+        "width": 1050,
+        "height": 1033
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.68980759,
+      "transparentMargins": {
+        "left": 108,
+        "top": 106,
+        "right": 107,
+        "bottom": 104
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-BLUE.png",
+      "originalFile": "provenance/reused-sources/DUDUQ-Y1M04-BLUE-SOURCE.png",
+      "sha256": "af47ea2a8ce91f4544b3626157f7e64bb64498b981014a42383ff2798029a584",
+      "bytes": 1271516,
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 649570,
+      "opaquePixels": 912236,
+      "subjectBoundingBox": {
+        "x": 103,
+        "y": 94,
+        "width": 1086,
+        "height": 1056
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.72919552,
+      "transparentMargins": {
+        "left": 103,
+        "top": 94,
+        "right": 98,
+        "bottom": 72
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-YELLOW.png",
+      "originalFile": "provenance/reused-sources/DUDUQ-Y1M04-YELLOW-SOURCE.png",
+      "sha256": "5951ca4746171d3ec5c8a96588a3b288eb6ea075f9ea5977fb5bc91c45e31803",
+      "bytes": 1110441,
+      "width": 1330,
+      "height": 1183,
+      "transparentPixels": 706633,
+      "opaquePixels": 855568,
+      "subjectBoundingBox": {
+        "x": 133,
+        "y": 71,
+        "width": 1058,
+        "height": 1031
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.69327884,
+      "transparentMargins": {
+        "left": 133,
+        "top": 71,
+        "right": 139,
+        "bottom": 81
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-GREEN.png",
+      "originalFile": "provenance/reused-sources/DUDUQ-Y1M04-GREEN-SOURCE.png",
+      "sha256": "696c76402fd7ac4eb94c71b7e2b20b2528fb784a1d42167f9d31cb7d60ccb9a3",
+      "bytes": 1145915,
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 879003,
+      "opaquePixels": 683387,
+      "subjectBoundingBox": {
+        "x": 156,
+        "y": 169,
+        "width": 943,
+        "height": 919
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.55110218,
+      "transparentMargins": {
+        "left": 156,
+        "top": 169,
+        "right": 155,
+        "bottom": 166
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-BLACK.png",
+      "originalFile": "provenance/reused-sources/DUDUQ-Y1M04-BLACK-SOURCE.png",
+      "sha256": "26f14f9c23067dd533ecf1cdb10d0626c3a2f42d82e3d7c281611104c23dc3ed",
+      "bytes": 1028244,
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 822796,
+      "opaquePixels": 740388,
+      "subjectBoundingBox": {
+        "x": 154,
+        "y": 137,
+        "width": 977,
+        "height": 955
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.59326426,
+      "transparentMargins": {
+        "left": 154,
+        "top": 137,
+        "right": 156,
+        "bottom": 130
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-WHITE.png",
+      "originalFile": "provenance/reused-sources/DUDUQ-Y1M04-WHITE-SOURCE.png",
+      "sha256": "d5f415a9a15f3a20236b6fb8b1e5f2feb9069873c86074159a2f8a2e2731e6ca",
+      "bytes": 890491,
+      "width": 1283,
+      "height": 1226,
+      "transparentPixels": 818249,
+      "opaquePixels": 744588,
+      "subjectBoundingBox": {
+        "x": 162,
+        "y": 133,
+        "width": 958,
+        "height": 980
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.59686273,
+      "transparentMargins": {
+        "left": 162,
+        "top": 133,
+        "right": 163,
+        "bottom": 113
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-ORANGE.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-ORANGE-ORIGINAL.png",
+      "sha256": "273f0b5d5f124f2880b1164a9aa19d4c5f9f55a1e29e57b2125563363b521195",
+      "bytes": 1105344,
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 643352,
+      "opaquePixels": 917716,
+      "subjectBoundingBox": {
+        "x": 100,
+        "y": 91,
+        "width": 1090,
+        "height": 1060
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.7346536,
+      "transparentMargins": {
+        "left": 100,
+        "top": 91,
+        "right": 97,
+        "bottom": 71
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-PURPLE.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-PURPLE-ORIGINAL.png",
+      "sha256": "a6d34d1ea1e3b72b967ae2ff0ac7224aa4f39b32af9ee0990bc6520b6fba1394",
+      "bytes": 1353619,
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 642162,
+      "opaquePixels": 921223,
+      "subjectBoundingBox": {
+        "x": 99,
+        "y": 92,
+        "width": 1092,
+        "height": 1060
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.73600159,
+      "transparentMargins": {
+        "left": 99,
+        "top": 92,
+        "right": 96,
+        "bottom": 70
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": null,
+      "normalizationPreservedOriginal": true,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-GRAY.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-GRAY-ORIGINAL.png",
+      "sha256": "a495b16ffedf658cee6e8e4c9c48f2ba051d6d5d664317c9a7545b1956c8e904",
+      "bytes": 1229507,
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 641541,
+      "opaquePixels": 917704,
+      "subjectBoundingBox": {
+        "x": 102,
+        "y": 94,
+        "width": 1088,
+        "height": 1058
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.73192202,
+      "transparentMargins": {
+        "left": 102,
+        "top": 94,
+        "right": 97,
+        "bottom": 70
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-BROWN.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-BROWN-ORIGINAL.png",
+      "sha256": "21b68caf46fe4984d6109b7e3f015c6824e7a4ebc43a8ebe9fdea2e509a42d48",
+      "bytes": 1232884,
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 639981,
+      "opaquePixels": 917082,
+      "subjectBoundingBox": {
+        "x": 101,
+        "y": 92,
+        "width": 1089,
+        "height": 1059
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.73328717,
+      "transparentMargins": {
+        "left": 101,
+        "top": 92,
+        "right": 97,
+        "bottom": 71
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": true,
+      "normalizationPreservedOriginal": false,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-IN.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-IN-ORIGINAL.png",
+      "sha256": "729afabfaff3bca360b0ec2e4020ae66fcb068f26fb8dfd87e51b40489cbf5e5",
+      "bytes": 1376789,
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 667512,
+      "opaquePixels": 894097,
+      "subjectBoundingBox": {
+        "x": 70,
+        "y": 202,
+        "width": 1115,
+        "height": 880
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.62396821,
+      "transparentMargins": {
+        "left": 70,
+        "top": 202,
+        "right": 69,
+        "bottom": 172
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": null,
+      "normalizationPreservedOriginal": true,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-ON.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-ON-ORIGINAL.png",
+      "sha256": "779e6f35475d16b04bfed92e5dd349dd8f1046fc4af7fe88c7ecece8b45bacab",
+      "bytes": 1194554,
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 788177,
+      "opaquePixels": 773734,
+      "subjectBoundingBox": {
+        "x": 73,
+        "y": 123,
+        "width": 1110,
+        "height": 1035
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.7305808,
+      "transparentMargins": {
+        "left": 73,
+        "top": 123,
+        "right": 71,
+        "bottom": 96
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": null,
+      "normalizationPreservedOriginal": true,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-UNDER.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-UNDER-ORIGINAL.png",
+      "sha256": "74139594e3f0ba0787d8757b3956c0b0641634997d7b04ea04c09239d797740a",
+      "bytes": 1515962,
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 864345,
+      "opaquePixels": 686099,
+      "subjectBoundingBox": {
+        "x": 51,
+        "y": 219,
+        "width": 1153,
+        "height": 875
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.6415674,
+      "transparentMargins": {
+        "left": 51,
+        "top": 219,
+        "right": 50,
+        "bottom": 160
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": null,
+      "normalizationPreservedOriginal": true,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-BEHIND.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-BEHIND-ORIGINAL.png",
+      "sha256": "406553c27042df23c050432033ffc33d1e03f04ac79c9ba1d16beb25e431c5b1",
+      "bytes": 1152848,
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 861546,
+      "opaquePixels": 701776,
+      "subjectBoundingBox": {
+        "x": 123,
+        "y": 188,
+        "width": 1058,
+        "height": 906
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.60956327,
+      "transparentMargins": {
+        "left": 123,
+        "top": 188,
+        "right": 73,
+        "bottom": 160
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": null,
+      "normalizationPreservedOriginal": true,
+      "valid": true
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-BESIDE.png",
+      "originalFile": "provenance/originals/DUDUQ-Y2M04-BESIDE-ORIGINAL.png",
+      "sha256": "26b3f2343ed69845da3dea245333ecd657156dfb8d3df586dc65217bc91337e3",
+      "bytes": 756701,
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1102117,
+      "opaquePixels": 461491,
+      "subjectBoundingBox": {
+        "x": 73,
+        "y": 382,
+        "width": 1111,
+        "height": 554
+      },
+      "subjectBoundingBoxCanvasCoverage": 0.39140715,
+      "transparentMargins": {
+        "left": 73,
+        "top": 382,
+        "right": 70,
+        "bottom": 318
+      },
+      "originalCopyHashMatches": true,
+      "nativeOutputHashMatches": null,
+      "normalizationPreservedOriginal": true,
+      "valid": true
+    }
+  ]
+}

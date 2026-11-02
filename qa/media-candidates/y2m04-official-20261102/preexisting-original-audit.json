@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "DUDUQ_PREEXISTING_ORIGINAL_PNG_AUDIT_V1",
+  "createdAt": "2026-11-02T07:16:47.255Z",
+  "moduleId": "Y2M04",
+  "searchScope": [
+    "content/english/assets/images/**/*.png with exact concept token in filename",
+    "qa/media-candidates/*/batch-manifest.json with exact normalized semanticTarget and hash-bound technical evidence"
+  ],
+  "concepts": [
+    "doll",
+    "ball",
+    "train",
+    "plane",
+    "teddy bear",
+    "kite",
+    "video game",
+    "boat",
+    "red",
+    "blue",
+    "yellow",
+    "green",
+    "black",
+    "white",
+    "orange",
+    "purple",
+    "gray",
+    "brown",
+    "in",
+    "on",
+    "under",
+    "behind",
+    "beside"
+  ],
+  "namedPngMatches": [],
+  "priorManifestExactSemanticMatches": [
+    {
+      "semanticTarget": "red",
+      "sourceManifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-RED.png",
+      "sha256": "484622d91bc0cba9e422a3fcfe990e5ea3c97297b0a97f3e084cb5a92022c3eb",
+      "technicalValidation": "PASS",
+      "reuseDecision": "REUSED_WITHOUT_REGENERATION"
+    },
+    {
+      "semanticTarget": "blue",
+      "sourceManifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-BLUE.png",
+      "sha256": "af47ea2a8ce91f4544b3626157f7e64bb64498b981014a42383ff2798029a584",
+      "technicalValidation": "PASS",
+      "reuseDecision": "REUSED_WITHOUT_REGENERATION"
+    },
+    {
+      "semanticTarget": "yellow",
+      "sourceManifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-YELLOW.png",
+      "sha256": "5951ca4746171d3ec5c8a96588a3b288eb6ea075f9ea5977fb5bc91c45e31803",
+      "technicalValidation": "PASS",
+      "reuseDecision": "REUSED_WITHOUT_REGENERATION"
+    },
+    {
+      "semanticTarget": "green",
+      "sourceManifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-GREEN.png",
+      "sha256": "696c76402fd7ac4eb94c71b7e2b20b2528fb784a1d42167f9d31cb7d60ccb9a3",
+      "technicalValidation": "PASS",
+      "reuseDecision": "REUSED_WITHOUT_REGENERATION"
+    },
+    {
+      "semanticTarget": "black",
+      "sourceManifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-BLACK.png",
+      "sha256": "26f14f9c23067dd533ecf1cdb10d0626c3a2f42d82e3d7c281611104c23dc3ed",
+      "technicalValidation": "PASS",
+      "reuseDecision": "REUSED_WITHOUT_REGENERATION"
+    },
+    {
+      "semanticTarget": "white",
+      "sourceManifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-WHITE.png",
+      "sha256": "d5f415a9a15f3a20236b6fb8b1e5f2feb9069873c86074159a2f8a2e2731e6ca",
+      "technicalValidation": "PASS",
+      "reuseDecision": "REUSED_WITHOUT_REGENERATION"
+    }
+  ],
+  "verifiedReusableOriginalPngCount": 6,
+  "reusedOriginalPngCount": 6,
+  "nonReusedPriorNamedCandidatesNote": "Unverified or semantically ambiguous prior files were not treated as originals and were not reused.",
+  "decision": "REUSED_6_HASH_VERIFIED_EXACT_COLOR_TOKENS; GENERATED_17_REMAINING_EXACT_CONCEPTS_ONCE",
+  "currentRegistrySourceFormat": "MIXED_SVG_AND_PROVISIONAL_PNG",
+  "currentRegistryAssetsAreProvisional": true,
+  "currentRegistryStatus": "SOURCE_ENTRIES_PRESENT",
+  "canonicalClosureStatus": "38_PROVISIONAL_REFERENCED_IDS"
+}

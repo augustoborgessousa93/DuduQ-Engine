@@ -1,0 +1,697 @@
+{
+  "schemaVersion": "DUDUQ_MEDIA_QUESTION_INVENTORY_V1",
+  "createdAt": "2026-11-02T07:16:47.255Z",
+  "moduleId": "Y2M04",
+  "questionCount": 20,
+  "source": "dist-pages/content/english/year-2/module-04/questions.json",
+  "sourceSha256": "9f4c0a5e44d4beb29abd9594cc8a8a79832e3f31fa3741b7f3498cc7463c3d87",
+  "scope": "READ_ONLY_CONTRACT_AND_SEMANTIC_TARGET_INVENTORY_BEFORE_GENERATION_BINDING",
+  "contractResolution": {
+    "activities": 20,
+    "questionsWithVisualMedia": 17,
+    "questionsWithoutVisualMedia": 3,
+    "visibleMediaUsageRecords": 76,
+    "distinctOccurrenceScopedBindings": 72,
+    "distinctSourceMediaIds": 38
+  },
+  "canonicalSemanticTargets": [
+    "doll",
+    "ball",
+    "train",
+    "plane",
+    "teddy bear",
+    "kite",
+    "video game",
+    "boat",
+    "red",
+    "blue",
+    "yellow",
+    "green",
+    "black",
+    "white",
+    "orange",
+    "purple",
+    "gray",
+    "brown",
+    "in",
+    "on",
+    "under",
+    "behind",
+    "beside"
+  ],
+  "questions": [
+    {
+      "questionId": "Y2M04-Q001",
+      "sequencePosition": 1,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "phase": "TEACHING",
+      "instructionTitleEn": "doll, teddy bear, video game, ball, kite, boat",
+      "primaryInstructionEn": "Sort each item: play indoors or play outdoors.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "teaching: Describe toys, express preference, and bridge location comprehension. Focus: doll.",
+      "answerKey": {
+        "Y2M04-Q001-I1": "indoor-toys",
+        "Y2M04-Q001-I2": "indoor-toys",
+        "Y2M04-Q001-I3": "indoor-toys",
+        "Y2M04-Q001-I4": "outdoor-toys",
+        "Y2M04-Q001-I5": "outdoor-toys",
+        "Y2M04-Q001-I6": "outdoor-toys"
+      },
+      "semanticTargets": [
+        "doll",
+        "teddy bear",
+        "video game",
+        "ball",
+        "kite",
+        "boat"
+      ],
+      "referencedMediaIds": [],
+      "visibleMediaUsageCount": 0,
+      "questionContractSha256": "82708811468240bbb91d548ce83f2efc57111665137e9d522e3594035b78fb41",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q002",
+      "sequencePosition": 2,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "phase": "TEACHING",
+      "instructionTitleEn": "boat",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "teaching: Describe toys, express preference, and bridge location comprehension. Focus: video game.",
+      "answerKey": "Y2M04-Q002-O1",
+      "semanticTargets": [
+        "boat",
+        "video game",
+        "in",
+        "on"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-2539101217793F3C",
+        "IMG-V11-2B-5C51F3A0B4CC0B7E",
+        "IMG-V11-2B-E4060D2C0568ECD9",
+        "IMG-V11-2B-EE4B263993C464A8"
+      ],
+      "visibleMediaUsageCount": 4,
+      "questionContractSha256": "d01c34313413a34dbdfcabeedaba6fe538a8e2e3cb1c1c6e120d34ccb9770169",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q003",
+      "sequencePosition": 3,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "phase": "GUIDED PRACTICE",
+      "instructionTitleEn": "yellow, green, black, white",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "guided practice: Describe toys, express preference, and bridge location comprehension. Focus: colors.",
+      "answerKey": {
+        "Y2M04-Q003-I1": "Y2M04-Q003-T1",
+        "Y2M04-Q003-I2": "Y2M04-Q003-T2",
+        "Y2M04-Q003-I3": "Y2M04-Q003-T3",
+        "Y2M04-Q003-I4": "Y2M04-Q003-T4"
+      },
+      "semanticTargets": [
+        "yellow",
+        "green",
+        "black",
+        "white"
+      ],
+      "referencedMediaIds": [
+        "IMG-Y1M03-Q001-BLACK",
+        "IMG-Y1M03-Q001-GREEN",
+        "IMG-Y1M03-Q001-WHITE",
+        "IMG-Y1M03-Q001-YELLOW"
+      ],
+      "visibleMediaUsageCount": 4,
+      "questionContractSha256": "837fce54d7d91e6982e7fe79274071b3f40f0e007cfa0d488bc98b3dd674bed9",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q004",
+      "sequencePosition": 4,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "phase": "GUIDED PRACTICE",
+      "instructionTitleEn": "plane, teddy bear, kite, video game, boat, doll",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "guided practice: Describe toys, express preference, and bridge location comprehension. Focus: six active toy terms.",
+      "answerKey": {
+        "Y2M04-Q004-L1": "Y2M04-Q004-R1",
+        "Y2M04-Q004-L2": "Y2M04-Q004-R2",
+        "Y2M04-Q004-L3": "Y2M04-Q004-R3",
+        "Y2M04-Q004-L4": "Y2M04-Q004-R4",
+        "Y2M04-Q004-L5": "Y2M04-Q004-R5",
+        "Y2M04-Q004-L6": "Y2M04-Q004-R6"
+      },
+      "semanticTargets": [
+        "plane",
+        "teddy bear",
+        "kite",
+        "video game",
+        "boat",
+        "doll"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0E180669AB040575",
+        "IMG-V11-2B-26EA1DD3ADF05EF6",
+        "IMG-V11-2B-3EE67D56516F4B7E",
+        "IMG-V11-2B-50F7239EF9569533",
+        "IMG-V11-2B-B7292A7A021E2069",
+        "IMG-V11-2B-DD7204B7045AFC59"
+      ],
+      "visibleMediaUsageCount": 6,
+      "questionContractSha256": "6f7fd32589770f1e992293d002a6a55896afb4a6dc84731fc0404f49affa257f",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q005",
+      "sequencePosition": 5,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "TEXT_IMAGE",
+      "phase": "WRITTEN FAMILIAR TOY LABELS MAP TO CONCRETE OBJECTS AFTER ORAL/VISUAL INTRODUCTION. CURRICULAR TARGET",
+      "instructionTitleEn": "teddy bear, kite, doll, ball, train, plane",
+      "primaryInstructionEn": "Find the matching pairs.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "Written familiar toy labels map to concrete objects after oral/visual introduction. Curricular target: doll; ball; train; plane; teddy bear; kite.",
+      "answerKey": [
+        "Y2M04-Q005-P1",
+        "Y2M04-Q005-P2",
+        "Y2M04-Q005-P3",
+        "Y2M04-Q005-P4",
+        "Y2M04-Q005-P5",
+        "Y2M04-Q005-P6"
+      ],
+      "semanticTargets": [
+        "teddy bear",
+        "kite",
+        "doll",
+        "ball",
+        "train",
+        "plane"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-013B1AC19F46EED7",
+        "IMG-V11-2B-35D62AB65B16D038",
+        "IMG-V11-2B-70ADABF6B02AC095",
+        "IMG-V11-2B-9A5DEED78F92809E",
+        "IMG-V11-2B-BAFBBAC1C9A13EE8",
+        "Y1M01-EMOJI-BALL-001"
+      ],
+      "visibleMediaUsageCount": 6,
+      "questionContractSha256": "9516f0ea492b46b947325e3d60c706952fec160a81de02a11dbc957ecd5d7ad0",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q006",
+      "sequencePosition": 6,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "phase": "GUIDED PRACTICE",
+      "instructionTitleEn": "kite",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "guided practice: Describe toys, express preference, and bridge location comprehension. Focus: identify.",
+      "answerKey": "Y2M04-Q006-O1",
+      "semanticTargets": [
+        "kite",
+        "doll",
+        "ball",
+        "train"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-B553D1606006D229",
+        "IMG-V11-2B-C2F0FC7FDF270EB3",
+        "IMG-V11-2B-F065FA603CE03071",
+        "Y1M01-EMOJI-BALL-001"
+      ],
+      "visibleMediaUsageCount": 4,
+      "questionContractSha256": "5da24e8c0bfdbd51c104bc020854dff7675a20dc93ab225cd2f729289eed6b53",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q007",
+      "sequencePosition": 7,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "phase": "RECOGNITION",
+      "instructionTitleEn": "doll, teddy bear, video game, ball, kite, boat",
+      "primaryInstructionEn": "Sort each item: play indoors or play outdoors.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "recognition: Describe toys, express preference, and bridge location comprehension. Focus: ball.",
+      "answerKey": {
+        "Y2M04-Q007-I1": "indoor-toys",
+        "Y2M04-Q007-I2": "indoor-toys",
+        "Y2M04-Q007-I3": "indoor-toys",
+        "Y2M04-Q007-I4": "outdoor-toys",
+        "Y2M04-Q007-I5": "outdoor-toys",
+        "Y2M04-Q007-I6": "outdoor-toys"
+      },
+      "semanticTargets": [
+        "doll",
+        "teddy bear",
+        "video game",
+        "ball",
+        "kite",
+        "boat"
+      ],
+      "referencedMediaIds": [],
+      "visibleMediaUsageCount": 0,
+      "questionContractSha256": "ecb681de56fa112b7cf325894e3c48603240d9afcc2b1bea98c3b95cb749fe60",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q008",
+      "sequencePosition": 8,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "phase": "RECOGNITION",
+      "instructionTitleEn": "The ball is on the box.",
+      "primaryInstructionEn": "Look at the picture and complete the sentence.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "recognition: Describe toys, express preference, and bridge location comprehension. Focus: boat.",
+      "answerKey": "on",
+      "semanticTargets": [
+        "on"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-EE4B263993C464A8"
+      ],
+      "visibleMediaUsageCount": 1,
+      "questionContractSha256": "d247f54954aef6235f1349993b38bd60c0a688b911dd5391d67cd7f504e2397a",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q009",
+      "sequencePosition": 9,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "phase": "RECOGNITION",
+      "instructionTitleEn": "in, on, red, blue",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "recognition: Describe toys, express preference, and bridge location comprehension. Focus: numbers.",
+      "answerKey": {
+        "Y2M04-Q009-I1": "Y2M04-Q009-T1",
+        "Y2M04-Q009-I2": "Y2M04-Q009-T2",
+        "Y2M04-Q009-I3": "Y2M04-Q009-T3",
+        "Y2M04-Q009-I4": "Y2M04-Q009-T4"
+      },
+      "semanticTargets": [
+        "in",
+        "on",
+        "red",
+        "blue"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-17985C80DA61E810",
+        "IMG-V11-2B-315681FD6D092A10",
+        "IMG-Y1M03-Q001-BLUE",
+        "IMG-Y1M03-Q001-RED"
+      ],
+      "visibleMediaUsageCount": 4,
+      "questionContractSha256": "972220bc19e1ad68a87ea9172997a799a08747dd090b848653ceba26e69bb831",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q010",
+      "sequencePosition": 10,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "phase": "COMPREHENSION",
+      "instructionTitleEn": "ball",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "comprehension: Describe toys, express preference, and bridge location comprehension. Focus: six active toy terms.",
+      "answerKey": "Y2M04-Q010-O1",
+      "semanticTargets": [
+        "ball",
+        "doll",
+        "train",
+        "plane"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-73EF781B82AA7F5D",
+        "IMG-V11-2B-B553D1606006D229",
+        "IMG-V11-2B-C2F0FC7FDF270EB3",
+        "Y1M01-EMOJI-BALL-001"
+      ],
+      "visibleMediaUsageCount": 4,
+      "questionContractSha256": "d73c7da7675b923b2d30da54376d2fcc0b7d56a2bf4589730b3c58d2743b3ac6",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q011",
+      "sequencePosition": 11,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "phase": "COMPREHENSION",
+      "instructionTitleEn": "in, on, under, behind, beside",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "comprehension: Describe toys, express preference, and bridge location comprehension. Focus: in/on in visual placement.",
+      "answerKey": {
+        "Y2M04-Q011-L1": "Y2M04-Q011-R1",
+        "Y2M04-Q011-L2": "Y2M04-Q011-R2",
+        "Y2M04-Q011-L3": "Y2M04-Q011-R3",
+        "Y2M04-Q011-L4": "Y2M04-Q011-R4",
+        "Y2M04-Q011-L5": "Y2M04-Q011-R5"
+      },
+      "semanticTargets": [
+        "in",
+        "on",
+        "under",
+        "behind",
+        "beside"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-7ECDC77FBF50FAB2",
+        "IMG-V11-2B-A396F1A45DF217E8",
+        "IMG-V11-2B-AD3495E9BCA08DFA",
+        "IMG-V11-2B-C6B9BDFF91EC7E6B",
+        "IMG-V11-2B-D2D9708A4AE1156E"
+      ],
+      "visibleMediaUsageCount": 5,
+      "questionContractSha256": "2f1b5d0a31affca2c081992e1d1d70259d0af8bff5d4b60d981762bfdaf805a9",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q012",
+      "sequencePosition": 12,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "phase": "COMPREHENSION",
+      "instructionTitleEn": "blue",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "comprehension: Describe toys, express preference, and bridge location comprehension. Focus: describe.",
+      "answerKey": "Y2M04-Q012-O1",
+      "semanticTargets": [
+        "blue",
+        "doll",
+        "ball",
+        "train",
+        "boat",
+        "video game"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-2539101217793F3C",
+        "IMG-V11-2B-5C51F3A0B4CC0B7E",
+        "IMG-V11-2B-B553D1606006D229",
+        "IMG-V11-2B-C2F0FC7FDF270EB3",
+        "IMG-Y1M03-Q001-BLUE",
+        "Y1M01-EMOJI-BALL-001"
+      ],
+      "visibleMediaUsageCount": 10,
+      "questionContractSha256": "9e1c7824fa906dccdf7ea645ccdfc3d7790cb1617849f2d5293e7da5a25e49e9",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q013",
+      "sequencePosition": 13,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_IMAGE",
+      "phase": "A SEPARATE AUDIO-TO-ATTRIBUTE RETRIEVAL ROLE REVIEWS COLORS IN A CHANGED TOY CONTEXT; IN/ON REMAIN RECEPTIVE AND ARE NOT REDUCED TO ISOLATED PAIRS. CURRICULAR TARGET",
+      "instructionTitleEn": "red, blue, yellow, green",
+      "primaryInstructionEn": "Find the matching pairs.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "A separate audio-to-attribute retrieval role reviews colors in a changed toy context; in/on remain receptive and are not reduced to isolated pairs. Curricular target: red; blue; yellow; green.",
+      "answerKey": [
+        "Y2M04-Q013-P1",
+        "Y2M04-Q013-P2",
+        "Y2M04-Q013-P3",
+        "Y2M04-Q013-P4"
+      ],
+      "semanticTargets": [
+        "red",
+        "blue",
+        "yellow",
+        "green"
+      ],
+      "referencedMediaIds": [
+        "IMG-Y1M03-Q001-BLUE",
+        "IMG-Y1M03-Q001-GREEN",
+        "IMG-Y1M03-Q001-RED",
+        "IMG-Y1M03-Q001-YELLOW"
+      ],
+      "visibleMediaUsageCount": 4,
+      "questionContractSha256": "1fd8a40a6532ab0b007261bfebb0f08d9e92502bf7e9628325609469db4d1b7e",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q014",
+      "sequencePosition": 14,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "phase": "LISTENING",
+      "instructionTitleEn": "blue, yellow, in, on, red",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "listening: Describe toys, express preference, and bridge location comprehension. Focus: in.",
+      "answerKey": {
+        "Y2M04-Q014-L1": "Y2M04-Q014-R1",
+        "Y2M04-Q014-L2": "Y2M04-Q014-R2",
+        "Y2M04-Q014-L3": "Y2M04-Q014-R3",
+        "Y2M04-Q014-L4": "Y2M04-Q014-R4",
+        "Y2M04-Q014-L5": "Y2M04-Q014-R5"
+      },
+      "semanticTargets": [
+        "blue",
+        "yellow",
+        "in",
+        "on",
+        "red"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-C6B9BDFF91EC7E6B",
+        "IMG-V11-2B-D2D9708A4AE1156E",
+        "IMG-Y1M03-Q001-BLUE",
+        "IMG-Y1M03-Q001-RED",
+        "IMG-Y1M03-Q001-YELLOW"
+      ],
+      "visibleMediaUsageCount": 5,
+      "questionContractSha256": "69a4364c05c88679a1f7e95465fe8845d831c6564c11de2b8ce61cd801f22c31",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q015",
+      "sequencePosition": 15,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "phase": "RETRIEVAL",
+      "instructionTitleEn": "black",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "retrieval: Describe toys, express preference, and bridge location comprehension. Focus: It's a....",
+      "answerKey": "Y2M04-Q015-O1",
+      "semanticTargets": [
+        "black",
+        "doll",
+        "ball",
+        "train"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-B553D1606006D229",
+        "IMG-V11-2B-C2F0FC7FDF270EB3",
+        "IMG-Y1M03-Q001-BLACK",
+        "Y1M01-EMOJI-BALL-001"
+      ],
+      "visibleMediaUsageCount": 4,
+      "questionContractSha256": "e4daab2d7c1eacfd6f1dc444cf14e7cae20edcdd3258fd868049fdbcabdebe89",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q016",
+      "sequencePosition": 16,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "phase": "RETRIEVAL",
+      "instructionTitleEn": "boat, doll, ball, train, plane, teddy bear",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "retrieval: Describe toys, express preference, and bridge location comprehension. Focus: six active toy terms.",
+      "answerKey": {
+        "Y2M04-Q016-L1": "Y2M04-Q016-R1",
+        "Y2M04-Q016-L2": "Y2M04-Q016-R2",
+        "Y2M04-Q016-L3": "Y2M04-Q016-R3",
+        "Y2M04-Q016-L4": "Y2M04-Q016-R4",
+        "Y2M04-Q016-L5": "Y2M04-Q016-R5",
+        "Y2M04-Q016-L6": "Y2M04-Q016-R6"
+      },
+      "semanticTargets": [
+        "boat",
+        "doll",
+        "ball",
+        "train",
+        "plane",
+        "teddy bear"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0688CC24B81A968B",
+        "IMG-V11-2B-0E180669AB040575",
+        "IMG-V11-2B-26EA1DD3ADF05EF6",
+        "IMG-V11-2B-B7292A7A021E2069",
+        "IMG-V11-2B-DD7204B7045AFC59",
+        "Y1M01-EMOJI-BALL-001"
+      ],
+      "visibleMediaUsageCount": 6,
+      "questionContractSha256": "e5520924ed0f571a6a0e6361457f005742897136635418d229b6984f9d54cccf",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q017",
+      "sequencePosition": 17,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "phase": "REVIEW",
+      "instructionTitleEn": "orange, purple, gray, brown",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "review: Describe toys, express preference, and bridge location comprehension. Focus: Where is...?.",
+      "answerKey": {
+        "Y2M04-Q017-I1": "Y2M04-Q017-T1",
+        "Y2M04-Q017-I2": "Y2M04-Q017-T2",
+        "Y2M04-Q017-I3": "Y2M04-Q017-T3",
+        "Y2M04-Q017-I4": "Y2M04-Q017-T4"
+      },
+      "semanticTargets": [
+        "orange",
+        "purple",
+        "gray",
+        "brown"
+      ],
+      "referencedMediaIds": [
+        "IMG-Y1M03-Q001-ORANGE",
+        "IMG-Y1M03-Q006-BROWN",
+        "IMG-Y1M03-Q006-GRAY",
+        "IMG-Y1M03-Q006-PURPLE"
+      ],
+      "visibleMediaUsageCount": 4,
+      "questionContractSha256": "65319a264204af3f8673ebfb215b0c609b1b84e098d6b1ead20e511ef6c4d15a",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q018",
+      "sequencePosition": 18,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "phase": "REVIEW",
+      "instructionTitleEn": "My favorite toy is a ball.",
+      "primaryInstructionEn": "Look at the picture and complete the sentence.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "review: Complete a short sentence to express a favorite toy. Focus: favorite toy.",
+      "answerKey": "ball",
+      "semanticTargets": [
+        "ball"
+      ],
+      "referencedMediaIds": [
+        "Y1M01-EMOJI-BALL-001"
+      ],
+      "visibleMediaUsageCount": 1,
+      "questionContractSha256": "0cfc4712d3da160fd5855245bd5d41d1790b738593a6bbcc9d244b8f1e795683",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q019",
+      "sequencePosition": 19,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "phase": "CONSOLIDATION",
+      "instructionTitleEn": "doll, teddy bear, video game, ball, kite, boat",
+      "primaryInstructionEn": "Sort each item: play indoors or play outdoors.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "consolidation: Describe toys, express preference, and bridge location comprehension. Focus: plane.",
+      "answerKey": {
+        "Y2M04-Q019-I1": "indoor-toys",
+        "Y2M04-Q019-I2": "indoor-toys",
+        "Y2M04-Q019-I3": "indoor-toys",
+        "Y2M04-Q019-I4": "outdoor-toys",
+        "Y2M04-Q019-I5": "outdoor-toys",
+        "Y2M04-Q019-I6": "outdoor-toys"
+      },
+      "semanticTargets": [
+        "doll",
+        "teddy bear",
+        "video game",
+        "ball",
+        "kite",
+        "boat"
+      ],
+      "referencedMediaIds": [],
+      "visibleMediaUsageCount": 0,
+      "questionContractSha256": "aa78fe9ca70763b266c0ac8abc9b0d563edf4ddfd1d42b21aee4fae1c9f48030",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M04-Q020",
+      "sequencePosition": 20,
+      "topicEn": "Toys, Favorites and Where?",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "phase": "CONSOLIDATION",
+      "instructionTitleEn": "green",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "targetSkill": "Understand toy/favorite/location cue.",
+      "curricularObjective": "Describe toys, express preference, and bridge location comprehension.",
+      "learningTarget": "consolidation: Describe toys, express preference, and bridge location comprehension. Focus: on.",
+      "answerKey": "Y2M04-Q020-O1",
+      "semanticTargets": [
+        "green",
+        "on",
+        "red",
+        "blue"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-EE4B263993C464A8",
+        "IMG-Y1M03-Q001-BLUE",
+        "IMG-Y1M03-Q001-GREEN",
+        "IMG-Y1M03-Q001-RED"
+      ],
+      "visibleMediaUsageCount": 4,
+      "questionContractSha256": "5e22c7555078a79d534ec5ecbc90373cfa2ee8aa52dfac0eedb54923482dd09d",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    }
+  ]
+}

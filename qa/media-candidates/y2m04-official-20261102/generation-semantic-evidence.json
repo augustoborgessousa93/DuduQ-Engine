@@ -1,0 +1,402 @@
+{
+  "schemaVersion": "DUDUQ_MEDIA_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-11-02T07:16:47.255Z",
+  "moduleId": "Y2M04",
+  "reviewAuthority": "CODEX_MODEL_SEMANTIC_PRECHECK_ONLY",
+  "reviewStatus": "PASS_CANDIDATE_PRECHECK_NOT_HUMAN_APPROVAL",
+  "approvalGranted": false,
+  "questionContractsReviewed": 20,
+  "questionInventory": "question-inventory.json",
+  "bindingPlan": "binding-plan.json",
+  "globalRulesChecked": [
+    "one file per exact concept",
+    "no wrong distractor encoded in asset",
+    "transparent alpha",
+    "subject fills canvas",
+    "source answer keys unchanged",
+    "mechanics unchanged",
+    "Gold Masters unchanged",
+    "production untouched"
+  ],
+  "preexistingOriginalAudit": "preexisting-original-audit.json",
+  "assets": [
+    {
+      "file": "images/DUDUQ-Y2M04-DOLL.png",
+      "semanticTarget": "doll",
+      "visualObservation": "Exactly one soft 3D rag doll with yarn hair, fabric dress, stitched friendly face, and no competing toy or person.",
+      "wrongDistractorsAbsent": [
+        "real child",
+        "teddy bear",
+        "ball",
+        "text",
+        "second toy"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-BALL.png",
+      "semanticTarget": "ball",
+      "visualObservation": "Exactly one round multicolor panel play ball; it is visually distinct from the single-color vocabulary tokens.",
+      "wrongDistractorsAbsent": [
+        "color token",
+        "sports logo",
+        "second ball",
+        "text",
+        "extra object"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-TRAIN.png",
+      "semanticTarget": "train",
+      "visualObservation": "Exactly one compact wooden toy steam locomotive with wheels, chimney, and no detached carriage or track.",
+      "wrongDistractorsAbsent": [
+        "real train",
+        "track",
+        "carriage",
+        "plane",
+        "text"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-PLANE.png",
+      "semanticTarget": "plane",
+      "visualObservation": "Exactly one toy propeller airplane with a clear fuselage, wings, tail, and no sky scene.",
+      "wrongDistractorsAbsent": [
+        "real aircraft scene",
+        "train",
+        "sky",
+        "clouds",
+        "text"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-TEDDY-BEAR.png",
+      "semanticTarget": "teddy bear",
+      "visualObservation": "Exactly one seated brown plush teddy bear with visible bear ears, arms, paws, and no clothing or doll cues.",
+      "wrongDistractorsAbsent": [
+        "doll",
+        "real bear",
+        "clothes",
+        "bow",
+        "second toy",
+        "text"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-KITE.png",
+      "semanticTarget": "kite",
+      "visualObservation": "Exactly one complete diamond kite with four panels, short visible string, and three ribbon tails fully inside the canvas.",
+      "wrongDistractorsAbsent": [
+        "cropped string",
+        "cropped tail",
+        "ball",
+        "child",
+        "text"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-VIDEO-GAME.png",
+      "semanticTarget": "video game",
+      "visualObservation": "Exactly one handheld game console with left directional pad, right buttons, and a harmless abstract game screen without branding or text.",
+      "wrongDistractorsAbsent": [
+        "television",
+        "phone",
+        "brand",
+        "controller pair",
+        "text"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-BOAT.png",
+      "semanticTarget": "boat",
+      "visualObservation": "Exactly one toy sailboat with blue hull and two clearly separated sails; no water or competing vehicle.",
+      "wrongDistractorsAbsent": [
+        "airplane",
+        "water scene",
+        "second boat",
+        "text"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-RED.png",
+      "semanticTarget": "red",
+      "visualObservation": "Exactly one rounded 3D color token whose complete surface is clearly red, with no text, symbol, or object cue.",
+      "wrongDistractorsAbsent": [
+        "doll",
+        "ball",
+        "train",
+        "plane",
+        "teddy bear",
+        "text",
+        "extra object"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-BLUE.png",
+      "semanticTarget": "blue",
+      "visualObservation": "Exactly one rounded 3D color token whose complete surface is clearly blue, with no text, symbol, or object cue.",
+      "wrongDistractorsAbsent": [
+        "doll",
+        "ball",
+        "train",
+        "plane",
+        "teddy bear",
+        "text",
+        "extra object"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-YELLOW.png",
+      "semanticTarget": "yellow",
+      "visualObservation": "Exactly one rounded 3D color token whose complete surface is clearly yellow, with no text, symbol, or object cue.",
+      "wrongDistractorsAbsent": [
+        "doll",
+        "ball",
+        "train",
+        "plane",
+        "teddy bear",
+        "text",
+        "extra object"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-GREEN.png",
+      "semanticTarget": "green",
+      "visualObservation": "Exactly one rounded 3D color token whose complete surface is clearly green, with no text, symbol, or object cue.",
+      "wrongDistractorsAbsent": [
+        "doll",
+        "ball",
+        "train",
+        "plane",
+        "teddy bear",
+        "text",
+        "extra object"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-BLACK.png",
+      "semanticTarget": "black",
+      "visualObservation": "Exactly one rounded 3D color token whose complete surface is clearly black, with no text, symbol, or object cue.",
+      "wrongDistractorsAbsent": [
+        "doll",
+        "ball",
+        "train",
+        "plane",
+        "teddy bear",
+        "text",
+        "extra object"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-WHITE.png",
+      "semanticTarget": "white",
+      "visualObservation": "Exactly one rounded 3D color token whose complete surface is clearly white, with a subtle edge/highlight that preserves the white concept on transparency.",
+      "wrongDistractorsAbsent": [
+        "doll",
+        "ball",
+        "train",
+        "plane",
+        "teddy bear",
+        "text",
+        "extra object"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-ORANGE.png",
+      "semanticTarget": "orange",
+      "visualObservation": "Exactly one rounded 3D color token whose complete surface is clearly orange, with no blue residue, text, symbol, or object cue.",
+      "wrongDistractorsAbsent": [
+        "doll",
+        "ball",
+        "train",
+        "plane",
+        "teddy bear",
+        "text",
+        "extra object"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-PURPLE.png",
+      "semanticTarget": "purple",
+      "visualObservation": "Exactly one rounded 3D color token whose complete surface is clearly purple; detached low-alpha generator residue was removed without changing the token.",
+      "wrongDistractorsAbsent": [
+        "doll",
+        "ball",
+        "train",
+        "plane",
+        "teddy bear",
+        "text",
+        "extra object"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-GRAY.png",
+      "semanticTarget": "gray",
+      "visualObservation": "Exactly one rounded 3D color token whose complete surface is neutral medium gray, with no blue residue, text, or object cue.",
+      "wrongDistractorsAbsent": [
+        "doll",
+        "ball",
+        "train",
+        "plane",
+        "teddy bear",
+        "text",
+        "extra object"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-BROWN.png",
+      "semanticTarget": "brown",
+      "visualObservation": "Exactly one rounded 3D color token whose complete surface is warm medium brown, with no blue residue, text, or object cue.",
+      "wrongDistractorsAbsent": [
+        "doll",
+        "ball",
+        "train",
+        "plane",
+        "teddy bear",
+        "text",
+        "extra object"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-IN.png",
+      "semanticTarget": "in",
+      "visualObservation": "One orange ball is unmistakably inside an open blue box, with its lower half occluded by the front rim.",
+      "wrongDistractorsAbsent": [
+        "on",
+        "under",
+        "behind",
+        "beside",
+        "arrows",
+        "text"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-ON.png",
+      "semanticTarget": "on",
+      "visualObservation": "One orange ball rests on and visibly contacts the flat top of one closed blue box.",
+      "wrongDistractorsAbsent": [
+        "in",
+        "under",
+        "behind",
+        "beside",
+        "arrows",
+        "text"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-UNDER.png",
+      "semanticTarget": "under",
+      "visualObservation": "One orange ball is fully visible underneath the center of one blue table, between its legs.",
+      "wrongDistractorsAbsent": [
+        "in",
+        "on",
+        "behind",
+        "beside",
+        "arrows",
+        "text"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-BEHIND.png",
+      "semanticTarget": "behind",
+      "visualObservation": "One orange ball is mostly occluded behind one upright blue box, with only a portion peeking out.",
+      "wrongDistractorsAbsent": [
+        "in",
+        "on",
+        "under",
+        "beside",
+        "arrows",
+        "text"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M04-BESIDE.png",
+      "semanticTarget": "beside",
+      "visualObservation": "One orange ball sits to the right of one blue box on the same baseline, separated by a clear transparent gap with no contact.",
+      "wrongDistractorsAbsent": [
+        "in",
+        "on",
+        "under",
+        "behind",
+        "contact",
+        "overlap",
+        "arrows",
+        "text"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "semanticPrecheck": "PASS_EXACT_CONCEPT",
+      "humanHomologation": "PENDING"
+    }
+  ],
+  "candidateCount": 23,
+  "nativeGeneratedCount": 17,
+  "verifiedOriginalReuseCount": 6,
+  "humanHomologationStatus": "PENDING",
+  "integrationStatus": "NOT_APPLIED",
+  "productionStatus": "NOT_APPROVED"
+}

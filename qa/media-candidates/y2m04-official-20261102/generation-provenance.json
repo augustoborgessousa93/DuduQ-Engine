@@ -1,0 +1,437 @@
+{
+  "schemaVersion": "DUDUQ_CODEX_NATIVE_IMAGE_PROVENANCE_V1",
+  "createdAt": "2026-11-02T07:16:47.255Z",
+  "moduleId": "Y2M04",
+  "provider": "OpenAI Codex image_gen.imagegen",
+  "tool": "real enabled Codex native image generator",
+  "apiPurchaseOrExternalCredentialUsed": false,
+  "transparentBackgroundRequested": true,
+  "generationResult": "COMPLETE_FOR_Y2M04_CANDIDATE_SCOPE_NO_GENERATOR_BLOCK",
+  "promptCatalog": {
+    "doll": {
+      "prompt": "Create a premium child-friendly 3D educational concept asset: exactly one child-safe rag doll with yarn hair, a simple fabric dress, stitched friendly face, and soft rounded proportions. Isolated centered cutout, subject fills most of the square canvas, real transparent alpha background, no floor, no text, no extra toy, no child, no teddy bear.",
+      "transparentBackground": true,
+      "referenceImage": null
+    },
+    "ball": {
+      "prompt": "Create a premium child-friendly 3D educational concept asset: exactly one round rubber play ball with broad red, blue, and yellow curved panels. Isolated centered cutout, subject fills most of the square canvas, real transparent alpha background, no floor, no text, no brand, no sports logo, no extra object, and do not make it a single-color token.",
+      "transparentBackground": true,
+      "referenceImage": null
+    },
+    "train": {
+      "prompt": "Create a premium child-friendly 3D educational concept asset: exactly one compact wooden toy steam locomotive with a red body, blue roof, yellow details, and clearly visible wheels. Isolated centered cutout, real transparent alpha background, no tracks, no carriage, no smoke, no text, no extra toy.",
+      "transparentBackground": true,
+      "referenceImage": null
+    },
+    "plane": {
+      "prompt": "Create a premium child-friendly 3D educational concept asset: exactly one toy airplane with blue fuselage, red wings, and yellow propeller, viewed in a clear three-quarter angle. Isolated centered cutout, real transparent alpha background, no sky, no clouds, no text, no extra object.",
+      "transparentBackground": true,
+      "referenceImage": null
+    },
+    "teddy bear": {
+      "prompt": "Create a premium child-friendly 3D educational concept asset: exactly one seated brown plush teddy bear with a friendly stitched face and clearly visible ears, arms, and paws. Isolated centered cutout, real transparent alpha background, no bow, no clothes, no doll, no text, no extra toy.",
+      "transparentBackground": true,
+      "referenceImage": null
+    },
+    "kite": {
+      "prompt": "Create a premium child-friendly 3D educational concept asset: exactly one compact diamond kite with four colorful panels, a short fully visible coiled string, and three short ribbon tails. Keep the complete kite, tails, and string within the central 78 percent of the square canvas with no cutoff. Real transparent alpha background, no child, no sky, no text, no extra object.",
+      "transparentBackground": true,
+      "referenceImage": null
+    },
+    "video game": {
+      "prompt": "Create a premium child-friendly 3D educational concept asset: exactly one handheld video game console with a directional pad on the left, two buttons on the right, and a harmless abstract platform scene on the screen. Isolated centered cutout, real transparent alpha background, no text, no logo, no brand, no hands, no extra controller.",
+      "transparentBackground": true,
+      "referenceImage": null
+    },
+    "boat": {
+      "prompt": "Create a premium child-friendly 3D educational concept asset: exactly one toy sailboat with a blue hull, one large yellow sail, and one smaller red sail. Isolated centered cutout, real transparent alpha background, no water, no waves, no text, no extra object.",
+      "transparentBackground": true,
+      "referenceImage": null
+    },
+    "orange": {
+      "prompt": "Precise object edit using the supplied verified blue color-token PNG as geometry reference. Change only the complete token surface to a clear saturated orange. Preserve the exact rounded 3D token geometry, camera, perspective, highlights, soft material, scale, centered composition, and transparent alpha. No blue residue, no text, no symbol, no additional object.",
+      "transparentBackground": true,
+      "referenceImage": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-BLUE.png"
+    },
+    "purple": {
+      "prompt": "Precise object edit using the supplied verified blue color-token PNG as geometry reference. Change only the complete token surface to a clear saturated purple. Preserve the exact rounded 3D token geometry, camera, perspective, highlights, soft material, scale, centered composition, and transparent alpha. No blue residue, no stray pixels, no text, no symbol, no additional object.",
+      "transparentBackground": true,
+      "referenceImage": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-BLUE.png"
+    },
+    "gray": {
+      "prompt": "Precise object edit using the supplied verified blue color-token PNG as geometry reference. Change only the complete token surface to a neutral medium gray. Preserve the exact rounded 3D token geometry, camera, perspective, highlights, soft material, scale, centered composition, and transparent alpha. No blue residue, no text, no symbol, no additional object.",
+      "transparentBackground": true,
+      "referenceImage": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-BLUE.png"
+    },
+    "brown": {
+      "prompt": "Precise object edit using the supplied verified blue color-token PNG as geometry reference. Change only the complete token surface to a warm medium brown. Preserve the exact rounded 3D token geometry, camera, perspective, highlights, soft material, scale, centered composition, and transparent alpha. No blue residue, no text, no symbol, no additional object.",
+      "transparentBackground": true,
+      "referenceImage": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-BLUE.png"
+    },
+    "in": {
+      "prompt": "Create a premium child-friendly 3D educational spatial-relation asset: exactly one orange toy ball clearly inside an open-top blue toy storage box. The lower half of the ball must be hidden by the front rim so INSIDE is unmistakable. Isolated centered cutout, real transparent alpha background, no text, no arrows, no extra object, show only the IN relation.",
+      "transparentBackground": true,
+      "referenceImage": null
+    },
+    "on": {
+      "prompt": "Create a premium child-friendly 3D educational spatial-relation asset: exactly one orange toy ball resting on the flat top of one closed blue toy box with a clear contact point. Isolated centered cutout, real transparent alpha background, no text, no arrows, no extra object, show only the ON relation.",
+      "transparentBackground": true,
+      "referenceImage": null
+    },
+    "under": {
+      "prompt": "Create a premium child-friendly 3D educational spatial-relation asset: exactly one orange toy ball clearly underneath the center of one blue toy table, with the whole ball visible between the table legs. Isolated centered cutout, real transparent alpha background, no text, no arrows, no extra object, show only the UNDER relation.",
+      "transparentBackground": true,
+      "referenceImage": null
+    },
+    "behind": {
+      "prompt": "Create a premium child-friendly 3D educational spatial-relation asset: exactly one orange toy ball clearly behind one upright closed blue toy box. Most of the ball must be occluded, with only an upper-left portion peeking out, making depth and overlap unmistakable. Isolated centered cutout, real transparent alpha background, no text, no arrows, no extra object, show only the BEHIND relation.",
+      "transparentBackground": true,
+      "referenceImage": null
+    },
+    "beside": {
+      "prompt": "Create a premium child-friendly 3D educational spatial-relation asset: one upright closed blue toy box on the left and exactly one orange toy ball on the right, aligned on the same depth and baseline. Leave an explicit transparent gap of about one quarter ball width between them: no overlap and no contact. Isolated centered cutout, real transparent alpha background, no text, no arrows, no extra object, show only the BESIDE relation.",
+      "transparentBackground": true,
+      "referenceImage": null
+    }
+  },
+  "nativeGeneratedAssets": [
+    {
+      "concept": "doll",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-74988a52-f144-468b-bbf1-d0ae4d836c46.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-DOLL-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-DOLL.png",
+      "originalSha256": "ba2aecca9a80491ecdde06c4fc5988ebe612752f6707e25586d3c12c545030f5",
+      "sha256": "ba2aecca9a80491ecdde06c4fc5988ebe612752f6707e25586d3c12c545030f5",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": true,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": false,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "ball",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-cacd242e-f65f-4c12-9ade-525e01dbbf75.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-BALL-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-BALL.png",
+      "originalSha256": "cb3401fc2675683294302a0e80c2924d70cf03e032138ff3b08c453115bd6f5c",
+      "sha256": "cb3401fc2675683294302a0e80c2924d70cf03e032138ff3b08c453115bd6f5c",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": true,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": false,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "train",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-1d419ac1-eae4-4dda-a975-9f6b7034872c.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-TRAIN-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-TRAIN.png",
+      "originalSha256": "9eaaa0f2ca054fe0deb40a5c402dd88382e471b390c2de734c0c7e3a6a74b2d6",
+      "sha256": "9eaaa0f2ca054fe0deb40a5c402dd88382e471b390c2de734c0c7e3a6a74b2d6",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": true,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": false,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "plane",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-0576a4cc-b885-4072-9438-844aa25b8b5d.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-PLANE-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-PLANE.png",
+      "originalSha256": "7ef7be8b9770d70527768016bcd48b66dae179fb1ccf366d5d120688a1cf2092",
+      "sha256": "7ef7be8b9770d70527768016bcd48b66dae179fb1ccf366d5d120688a1cf2092",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": true,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": false,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "teddy bear",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-f66ec8f9-2913-4cc6-aea3-46056fcbc344.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-TEDDY-BEAR-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-TEDDY-BEAR.png",
+      "originalSha256": "7f3a83c5f00d81423b4875fb329b40fab5f910b1add1db472d98f3c1b03b7a21",
+      "sha256": "7f3a83c5f00d81423b4875fb329b40fab5f910b1add1db472d98f3c1b03b7a21",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": true,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": false,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "kite",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-e1281967-e2be-4821-ae71-417098fe1311.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-KITE-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-KITE.png",
+      "originalSha256": "71a71d4d087d5df23298faddc260247f2402624d68f8ab02039d96ce5fabdd95",
+      "sha256": "71a71d4d087d5df23298faddc260247f2402624d68f8ab02039d96ce5fabdd95",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": true,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": false,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "video game",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-bf829bd9-f647-47f9-9374-b9521d6067d0.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-VIDEO-GAME-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-VIDEO-GAME.png",
+      "originalSha256": "322a877027f7bbe467ffa5436980ad92b9e2622287c95f8cde925b0728135c10",
+      "sha256": "322a877027f7bbe467ffa5436980ad92b9e2622287c95f8cde925b0728135c10",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": true,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": false,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "boat",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-907cd1e5-bd47-484e-9a74-19091af597e7.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-BOAT-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-BOAT.png",
+      "originalSha256": "a2dda1a87d92fa7a8ebd910f7a61734e0fd110e380416b4b444a2f4a77df4e19",
+      "sha256": "a2dda1a87d92fa7a8ebd910f7a61734e0fd110e380416b4b444a2f4a77df4e19",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": true,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": false,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "orange",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-94712528-97bd-4509-af76-4c520f0ffbbe.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-ORANGE-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-ORANGE.png",
+      "originalSha256": "273f0b5d5f124f2880b1164a9aa19d4c5f9f55a1e29e57b2125563363b521195",
+      "sha256": "273f0b5d5f124f2880b1164a9aa19d4c5f9f55a1e29e57b2125563363b521195",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": true,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": false,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "purple",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-02beff8a-2e0c-47bc-b13c-67e58bb0e4bf.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-PURPLE-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-PURPLE.png",
+      "originalSha256": "7fa798cbf3f3f22c6f2a508ab073de7ec2f9209c3dd2c989c5c3643fa99c9d69",
+      "sha256": "a6d34d1ea1e3b72b967ae2ff0ac7224aa4f39b32af9ee0990bc6520b6fba1394",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": false,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": true,
+      "alphaNormalizationApplied": true
+    },
+    {
+      "concept": "gray",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-062274e2-794e-4a9a-b61e-36ea3a4ff5e5.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-GRAY-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-GRAY.png",
+      "originalSha256": "a495b16ffedf658cee6e8e4c9c48f2ba051d6d5d664317c9a7545b1956c8e904",
+      "sha256": "a495b16ffedf658cee6e8e4c9c48f2ba051d6d5d664317c9a7545b1956c8e904",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": true,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": false,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "brown",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-b55bcefd-947b-474e-baf1-31c6b8f01e02.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-BROWN-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-BROWN.png",
+      "originalSha256": "21b68caf46fe4984d6109b7e3f015c6824e7a4ebc43a8ebe9fdea2e509a42d48",
+      "sha256": "21b68caf46fe4984d6109b7e3f015c6824e7a4ebc43a8ebe9fdea2e509a42d48",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": true,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": false,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "in",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-9f18250d-8869-433c-85b2-8e21214aed4e.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-IN-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-IN.png",
+      "originalSha256": "fbfb5b6e181e805f37e55c7d757581ae95e5b53839c259cbbe3716873f9111d3",
+      "sha256": "729afabfaff3bca360b0ec2e4020ae66fcb068f26fb8dfd87e51b40489cbf5e5",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": false,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": true,
+      "alphaNormalizationApplied": true
+    },
+    {
+      "concept": "on",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-952c36bd-5215-4d25-bc68-64dc3a4ade31.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-ON-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-ON.png",
+      "originalSha256": "3756588a8f86d4c3bdb43441ff9633447d1d7a9fbaf2603fbe2feeef8bdded89",
+      "sha256": "779e6f35475d16b04bfed92e5dd349dd8f1046fc4af7fe88c7ecece8b45bacab",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": false,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": true,
+      "alphaNormalizationApplied": true
+    },
+    {
+      "concept": "under",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-fafd080d-956c-44ce-a489-827e6c1e6c9b.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-UNDER-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-UNDER.png",
+      "originalSha256": "4a199e569e9fc9bf1ba2a380ffa4f5fe55de20cae662e47abde4d1b407bf91e2",
+      "sha256": "74139594e3f0ba0787d8757b3956c0b0641634997d7b04ea04c09239d797740a",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": false,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": true,
+      "alphaNormalizationApplied": true
+    },
+    {
+      "concept": "behind",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-260801af-d8af-4695-9ead-f31872696954.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-BEHIND-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-BEHIND.png",
+      "originalSha256": "6acf07b79ae5fb5ca8b942b1e71c526a0fd9a8a090f1e0790e71d0db568913dc",
+      "sha256": "406553c27042df23c050432033ffc33d1e03f04ac79c9ba1d16beb25e431c5b1",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": false,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": true,
+      "alphaNormalizationApplied": true
+    },
+    {
+      "concept": "beside",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-76fc72f0-2c27-4360-81b4-8b13b6a574b4.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M04-BESIDE-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M04-BESIDE.png",
+      "originalSha256": "22494de97e8e964166cefe9f23cb3ce9d1ecbf5b675578bb1db88590e62671ba",
+      "sha256": "26b3f2343ed69845da3dea245333ecd657156dfb8d3df586dc65217bc91337e3",
+      "originalCopyHashMatches": true,
+      "candidateMatchesPreservedOriginal": false,
+      "candidateDiffersOnlyDueToRecordedAlphaNormalization": true,
+      "alphaNormalizationApplied": true
+    }
+  ],
+  "reusedVerifiedOriginalAssets": [
+    {
+      "concept": "red",
+      "sourceManifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-RED.png",
+      "preservedSourceCopy": "provenance/reused-sources/DUDUQ-Y1M04-RED-SOURCE.png",
+      "candidateFile": "images/DUDUQ-Y2M04-RED.png",
+      "sha256": "484622d91bc0cba9e422a3fcfe990e5ea3c97297b0a97f3e084cb5a92022c3eb",
+      "sourceHashMatches": true
+    },
+    {
+      "concept": "blue",
+      "sourceManifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-BLUE.png",
+      "preservedSourceCopy": "provenance/reused-sources/DUDUQ-Y1M04-BLUE-SOURCE.png",
+      "candidateFile": "images/DUDUQ-Y2M04-BLUE.png",
+      "sha256": "af47ea2a8ce91f4544b3626157f7e64bb64498b981014a42383ff2798029a584",
+      "sourceHashMatches": true
+    },
+    {
+      "concept": "yellow",
+      "sourceManifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-YELLOW.png",
+      "preservedSourceCopy": "provenance/reused-sources/DUDUQ-Y1M04-YELLOW-SOURCE.png",
+      "candidateFile": "images/DUDUQ-Y2M04-YELLOW.png",
+      "sha256": "5951ca4746171d3ec5c8a96588a3b288eb6ea075f9ea5977fb5bc91c45e31803",
+      "sourceHashMatches": true
+    },
+    {
+      "concept": "green",
+      "sourceManifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-GREEN.png",
+      "preservedSourceCopy": "provenance/reused-sources/DUDUQ-Y1M04-GREEN-SOURCE.png",
+      "candidateFile": "images/DUDUQ-Y2M04-GREEN.png",
+      "sha256": "696c76402fd7ac4eb94c71b7e2b20b2528fb784a1d42167f9d31cb7d60ccb9a3",
+      "sourceHashMatches": true
+    },
+    {
+      "concept": "black",
+      "sourceManifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-BLACK.png",
+      "preservedSourceCopy": "provenance/reused-sources/DUDUQ-Y1M04-BLACK-SOURCE.png",
+      "candidateFile": "images/DUDUQ-Y2M04-BLACK.png",
+      "sha256": "26f14f9c23067dd533ecf1cdb10d0626c3a2f42d82e3d7c281611104c23dc3ed",
+      "sourceHashMatches": true
+    },
+    {
+      "concept": "white",
+      "sourceManifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+      "sourceFile": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-WHITE.png",
+      "preservedSourceCopy": "provenance/reused-sources/DUDUQ-Y1M04-WHITE-SOURCE.png",
+      "candidateFile": "images/DUDUQ-Y2M04-WHITE.png",
+      "sha256": "d5f415a9a15f3a20236b6fb8b1e5f2feb9069873c86074159a2f8a2e2731e6ca",
+      "sourceHashMatches": true
+    }
+  ],
+  "failedAttempts": [
+    {
+      "concept": "kite",
+      "file": "provenance/originals/DUDUQ-Y2M04-KITE-ATTEMPT-1-REJECTED.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-0ac74d25-2cc6-4e84-abeb-a9bc02385d21.png",
+      "reason": "String left the frame and was visibly cropped; never promoted as a candidate."
+    },
+    {
+      "concept": "purple",
+      "file": "provenance/originals/DUDUQ-Y2M04-PURPLE-ATTEMPT-1-REJECTED.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-0956e5b5-7d60-43e6-8ee4-1e46ca6d4c65.png",
+      "reason": "Detached blue/purple residue pixels; never promoted as a candidate."
+    },
+    {
+      "concept": "beside",
+      "file": "provenance/originals/DUDUQ-Y2M04-BESIDE-ATTEMPT-1-REJECTED.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19b03-f7fe-7321-a8ce-9ccdbdcb9dbd/exec-11deffb1-b791-481c-b516-99904701be2f.png",
+      "reason": "Ball contacted/overlapped the box, weakening the BESIDE relation; never promoted as a candidate."
+    }
+  ],
+  "alphaNormalization": [
+    {
+      "concept": "purple",
+      "tool": "qa/normalize-transparent-png-alpha.mjs",
+      "purpose": "Remove detached or low-alpha generator residue only; preserve semantic geometry and original file.",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M04-PURPLE-ORIGINAL.png",
+      "removedVisiblePixels": 2906,
+      "expectedComponents": 1,
+      "finalSha256": "a6d34d1ea1e3b72b967ae2ff0ac7224aa4f39b32af9ee0990bc6520b6fba1394"
+    },
+    {
+      "concept": "in",
+      "tool": "qa/normalize-transparent-png-alpha.mjs",
+      "purpose": "Remove detached or low-alpha generator residue only; preserve semantic geometry and original file.",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M04-IN-ORIGINAL.png",
+      "removedVisiblePixels": 15598,
+      "expectedComponents": 1,
+      "finalSha256": "729afabfaff3bca360b0ec2e4020ae66fcb068f26fb8dfd87e51b40489cbf5e5"
+    },
+    {
+      "concept": "on",
+      "tool": "qa/normalize-transparent-png-alpha.mjs",
+      "purpose": "Remove detached or low-alpha generator residue only; preserve semantic geometry and original file.",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M04-ON-ORIGINAL.png",
+      "removedVisiblePixels": 10375,
+      "expectedComponents": 1,
+      "finalSha256": "779e6f35475d16b04bfed92e5dd349dd8f1046fc4af7fe88c7ecece8b45bacab"
+    },
+    {
+      "concept": "under",
+      "tool": "qa/normalize-transparent-png-alpha.mjs",
+      "purpose": "Remove detached or low-alpha generator residue only; preserve semantic geometry and original file.",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M04-UNDER-ORIGINAL.png",
+      "removedVisiblePixels": 18497,
+      "expectedComponents": 2,
+      "finalSha256": "74139594e3f0ba0787d8757b3956c0b0641634997d7b04ea04c09239d797740a"
+    },
+    {
+      "concept": "behind",
+      "tool": "qa/normalize-transparent-png-alpha.mjs",
+      "purpose": "Remove detached or low-alpha generator residue only; preserve semantic geometry and original file.",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M04-BEHIND-ORIGINAL.png",
+      "removedVisiblePixels": 12969,
+      "expectedComponents": 1,
+      "finalSha256": "406553c27042df23c050432033ffc33d1e03f04ac79c9ba1d16beb25e431c5b1"
+    },
+    {
+      "concept": "beside",
+      "tool": "qa/normalize-transparent-png-alpha.mjs",
+      "purpose": "Remove detached or low-alpha generator residue only; preserve semantic geometry and original file.",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M04-BESIDE-ORIGINAL.png",
+      "removedVisiblePixels": 9128,
+      "expectedComponents": 2,
+      "finalSha256": "26b3f2343ed69845da3dea245333ecd657156dfb8d3df586dc65217bc91337e3"
+    }
+  ],
+  "humanApproval": "PENDING",
+  "integrationApplied": false
+}
