@@ -39,8 +39,26 @@ const browser=await chromium.launch({headless:true}),checks=[];
 try{
  for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
   const context=await browser.newContext({viewport,deviceScaleFactor:1});
-  const ids=batch==='multilingual'?
+  let ids=batch==='multilingual'?
    [...new Set(patch.bindings.map(b=>b.questionIds[0]))].sort():patch.changedQuestionIds;
+  // Optional single representative for each official PNG x mechanic. This is
+  // a directed visual smoke gate, never mislabeled as complete gameplay QA.
+  if(batch==='multilingual'&&process.env.DUDUQ_QA_SAMPLE_MODE==='source-mechanic'){
+   const sample=new Map(),cached=new Map();
+   for(const b of patch.bindings)for(const id of b.questionIds){
+    const key=id.slice(0,5);
+    if(!cached.has(key)){
+     const rel='content/english/year-'+id[1]+'/module-'+id.slice(3,5)+'/questions.json';
+     cached.set(key,JSON.parse(await readFile(path.join(dist,rel),'utf8')));
+    }
+    const q=cached.get(key).items.find(x=>x.item_id===id);
+    assert(q?.mechanicId,'MISSING_COMPILED_MECHANIC:'+id);
+    const sampleKey=b.sourcePath+'|'+q.mechanicId;
+    if(!sample.has(sampleKey))sample.set(sampleKey,id);
+   }
+   ids=[...new Set(sample.values())].sort();
+   assert(ids.length>=patch.images.length/2,'TOO_FEW_DISTINCT_VISUAL_SAMPLES');
+  }
   for(const questionId of ids){
    const data=JSON.parse(await readFile(path.join(dist,
     'content/english/year-'+questionId[1]+'/module-'+questionId.slice(3,5)+'/questions.json'),'utf8'));
@@ -133,7 +151,11 @@ const failed=checks.filter(c=>c.status!==200||c.errors.length>0||c.textLength<20
  c.required.some(p=>!c.visiblePaths.includes(p)));
 const report={status:failed.length?'FAIL_NEW_SOURCE_REAL_BROWSER':'PASS_NEW_SOURCE_REAL_BROWSER_QA_ONLY',
  sourceCommit:patch.sourceCommit,mediaIds:patch.changedMediaIds,images:patch.images.length,
- questions:patch.changedQuestionCount,checks:checks.length,failed:failed.map(c=>({
+ questions:patch.changedQuestionCount,checks:checks.length,
+ verificationMode:process.env.DUDUQ_QA_SAMPLE_MODE==='source-mechanic'?
+  'REPRESENTATIVE_SOURCE_AND_MECHANIC_QA_ONLY':'FULL_SELECTED_QUESTION_BROWSER_QA',
+ sampledQuestionCount:checks.length/2,
+ failed:failed.map(c=>({
  questionId:c.questionId,viewport:c.viewport,errors:c.errors,
  missing:c.required.filter(p=>!c.visiblePaths.includes(p))})),
  cases:checks,productionDeployed:false,releaseApproved:false,pedagogicalQAApproved:false};
