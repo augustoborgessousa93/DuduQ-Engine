@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "DUDUQ_CODEX_NATIVE_IMAGE_PROVENANCE_V1",
+  "createdAt": "2026-11-02T00:27:30.280Z",
+  "moduleId": "Y2M03",
+  "provider": "OpenAI Codex native image generation",
+  "tool": "image_gen.imagegen",
+  "apiPurchaseOrExternalCredentialUsed": false,
+  "transparentBackgroundRequested": true,
+  "generationResult": "COMPLETE_FOR_Y2M03_CANDIDATE_SCOPE",
+  "promptCatalog": [
+    {
+      "concept": "mother",
+      "successfulPrompt": "Use case: stylized-concept\nAsset type: DUDUQ English pedagogical game flashcard cutout\nPrimary request: create exactly one fictional MOTHER character for the English family vocabulary concept \"mother\"\nSubject: one friendly adult woman, clearly a mature parent around 35–45 years old rather than a child, teen, sister, or grandmother; warm confident expression; head, shoulders, torso, and hands naturally visible; contemporary modest colorful clothing\nStyle/medium: premium polished child-friendly 3D animated-film character render, rounded appealing forms, clean high-quality materials, expressive but anatomically coherent face\nComposition/framing: single centered character, front-facing slight three-quarter pose, subject fills about 82–88% of a square canvas, tight readable silhouette with safe transparent margin, no cropping of hair or hands\nLighting/mood: soft bright studio key light, gentle rim light, cheerful and welcoming\nScene/backdrop: genuinely transparent background with clean alpha edges and no floor, platform, shadow box, border, card, halo, or scenery\nConstraints: exactly one person; concept must read as an adult mother through age and presentation; one file for one concept; no additional people, children, babies, animals, props, toys, furniture, icons, letters, labels, words, numbers, logos, watermark, frame, or colored backdrop; preserve true alpha transparency; premium production quality; minimum 1024 px square\nAvoid: generic emoji look, flat vector art, photorealism, elderly appearance, teenage appearance, sexualization, stereotypes, text, extra limbs, malformed hands, detached pixels, white or checkerboard background",
+      "transparentBackground": true,
+      "attempts": [
+        {
+          "toolCallAt": "2026-11-02T00:20:56.360Z",
+          "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English pedagogical game flashcard cutout\nPrimary request: create exactly one fictional MOTHER character for the English family vocabulary concept \"mother\"\nSubject: one friendly adult woman, clearly a mature parent around 35–45 years old rather than a child, teen, sister, or grandmother; warm confident expression; head, shoulders, torso, and hands naturally visible; contemporary modest colorful clothing\nStyle/medium: premium polished child-friendly 3D animated-film character render, rounded appealing forms, clean high-quality materials, expressive but anatomically coherent face\nComposition/framing: single centered character, front-facing slight three-quarter pose, subject fills about 82–88% of a square canvas, tight readable silhouette with safe transparent margin, no cropping of hair or hands\nLighting/mood: soft bright studio key light, gentle rim light, cheerful and welcoming\nScene/backdrop: genuinely transparent background with clean alpha edges and no floor, platform, shadow box, border, card, halo, or scenery\nConstraints: exactly one person; concept must read as an adult mother through age and presentation; one file for one concept; no additional people, children, babies, animals, props, toys, furniture, icons, letters, labels, words, numbers, logos, watermark, frame, or colored backdrop; preserve true alpha transparency; premium production quality; minimum 1024 px square\nAvoid: generic emoji look, flat vector art, photorealism, elderly appearance, teenage appearance, sexualization, stereotypes, text, extra limbs, malformed hands, detached pixels, white or checkerboard background",
+          "outcome": "SUCCESS",
+          "generatorOutput": "C:/Users/augus/.codex/generated_images/01a1999e-ee5d-7bd0-979b-396d524fb216/exec-81daa851-4888-4332-ad72-2665e7b6e98c.png",
+          "candidateProduced": true
+        }
+      ]
+    },
+    {
+      "concept": "father",
+      "successfulPrompt": "Use case: stylized-concept\nAsset type: DUDUQ English pedagogical game flashcard cutout\nPrimary request: create exactly one fictional FATHER character for the English family vocabulary concept \"father\"\nSubject: one friendly adult man, clearly a mature parent around 35–45 years old rather than a child, teen, brother, or grandfather; warm confident expression; head, shoulders, torso, and hands naturally visible; contemporary modest colorful clothing\nStyle/medium: premium polished child-friendly 3D animated-film character render, rounded appealing forms, clean high-quality materials, expressive but anatomically coherent face; match a cohesive family-vocabulary asset set\nComposition/framing: single centered character, front-facing slight three-quarter pose, subject fills about 82–88% of a square canvas, tight readable silhouette with safe transparent margin, no cropping of hair or hands\nLighting/mood: soft bright studio key light, gentle rim light, cheerful and welcoming\nScene/backdrop: genuinely transparent background with clean alpha edges and no floor, platform, shadow box, border, card, halo, or scenery\nConstraints: exactly one person; concept must read as an adult father through age and presentation; one file for one concept; no additional people, children, babies, animals, props, toys, furniture, icons, letters, labels, words, numbers, logos, watermark, frame, or colored backdrop; preserve true alpha transparency; premium production quality; minimum 1024 px square\nAvoid: generic emoji look, flat vector art, photorealism, elderly appearance, teenage appearance, hypermasculine stereotypes, text, extra limbs, malformed hands, detached pixels, white or checkerboard background",
+      "transparentBackground": true,
+      "attempts": [
+        {
+          "toolCallAt": "2026-11-02T00:21:32.003Z",
+          "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English pedagogical game flashcard cutout\nPrimary request: create exactly one fictional FATHER character for the English family vocabulary concept \"father\"\nSubject: one friendly adult man, clearly a mature parent around 35–45 years old rather than a child, teen, brother, or grandfather; warm confident expression; head, shoulders, torso, and hands naturally visible; contemporary modest colorful clothing\nStyle/medium: premium polished child-friendly 3D animated-film character render, rounded appealing forms, clean high-quality materials, expressive but anatomically coherent face; match a cohesive family-vocabulary asset set\nComposition/framing: single centered character, front-facing slight three-quarter pose, subject fills about 82–88% of a square canvas, tight readable silhouette with safe transparent margin, no cropping of hair or hands\nLighting/mood: soft bright studio key light, gentle rim light, cheerful and welcoming\nScene/backdrop: genuinely transparent background with clean alpha edges and no floor, platform, shadow box, border, card, halo, or scenery\nConstraints: exactly one person; concept must read as an adult father through age and presentation; one file for one concept; no additional people, children, babies, animals, props, toys, furniture, icons, letters, labels, words, numbers, logos, watermark, frame, or colored backdrop; preserve true alpha transparency; premium production quality; minimum 1024 px square\nAvoid: generic emoji look, flat vector art, photorealism, elderly appearance, teenage appearance, hypermasculine stereotypes, text, extra limbs, malformed hands, detached pixels, white or checkerboard background",
+          "outcome": "SUCCESS",
+          "generatorOutput": "C:/Users/augus/.codex/generated_images/01a1999e-ee5d-7bd0-979b-396d524fb216/exec-1ac24be3-bb37-4f67-a230-1d00daf0583e.png",
+          "candidateProduced": true
+        }
+      ]
+    },
+    {
+      "concept": "brother",
+      "successfulPrompt": "Use case: stylized-concept\nAsset type: DUDUQ English pedagogical game flashcard cutout\nPrimary request: create exactly one fictional BROTHER character for the English family vocabulary concept \"brother\"\nSubject: one friendly school-age boy around 8–10 years old, unmistakably a child rather than an adult father or grandfather; cheerful natural expression; head, shoulders, torso, and hands naturally visible; contemporary modest colorful child clothing\nStyle/medium: premium polished child-friendly 3D animated-film character render, rounded appealing forms, clean high-quality materials, expressive but anatomically coherent face; match a cohesive family-vocabulary asset set\nComposition/framing: single centered character, front-facing slight three-quarter pose, subject fills about 82–88% of a square canvas, tight readable silhouette with safe transparent margin, no cropping of hair or hands\nLighting/mood: soft bright studio key light, gentle rim light, cheerful and welcoming\nScene/backdrop: genuinely transparent background with clean alpha edges and no floor, platform, shadow box, border, card, halo, or scenery\nConstraints: exactly one person; concept must read as a young brother through clear child age and presentation; one file for one concept; no additional people, siblings, parents, babies, animals, props, toys, furniture, school supplies, icons, letters, labels, words, numbers, logos, watermark, frame, or colored backdrop; preserve true alpha transparency; premium production quality; minimum 1024 px square\nAvoid: generic emoji look, flat vector art, photorealism, adult appearance, elderly appearance, toddler appearance, text, extra limbs, malformed hands, detached pixels, white or checkerboard background",
+      "transparentBackground": true,
+      "attempts": [
+        {
+          "toolCallAt": "2026-11-02T00:22:12.945Z",
+          "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English pedagogical game flashcard cutout\nPrimary request: create exactly one fictional BROTHER character for the English family vocabulary concept \"brother\"\nSubject: one friendly school-age boy around 8–10 years old, unmistakably a child rather than an adult father or grandfather; cheerful natural expression; head, shoulders, torso, and hands naturally visible; contemporary modest colorful child clothing\nStyle/medium: premium polished child-friendly 3D animated-film character render, rounded appealing forms, clean high-quality materials, expressive but anatomically coherent face; match a cohesive family-vocabulary asset set\nComposition/framing: single centered character, front-facing slight three-quarter pose, subject fills about 82–88% of a square canvas, tight readable silhouette with safe transparent margin, no cropping of hair or hands\nLighting/mood: soft bright studio key light, gentle rim light, cheerful and welcoming\nScene/backdrop: genuinely transparent background with clean alpha edges and no floor, platform, shadow box, border, card, halo, or scenery\nConstraints: exactly one person; concept must read as a young brother through clear child age and presentation; one file for one concept; no additional people, siblings, parents, babies, animals, props, toys, furniture, school supplies, icons, letters, labels, words, numbers, logos, watermark, frame, or colored backdrop; preserve true alpha transparency; premium production quality; minimum 1024 px square\nAvoid: generic emoji look, flat vector art, photorealism, adult appearance, elderly appearance, toddler appearance, text, extra limbs, malformed hands, detached pixels, white or checkerboard background",
+          "outcome": "SUCCESS",
+          "generatorOutput": "C:/Users/augus/.codex/generated_images/01a1999e-ee5d-7bd0-979b-396d524fb216/exec-e120dfd0-943d-4ab0-b633-0db145487a6d.png",
+          "candidateProduced": true
+        }
+      ]
+    },
+    {
+      "concept": "sister",
+      "successfulPrompt": "Use case: stylized-concept\nAsset type: DUDUQ English pedagogical game flashcard cutout\nPrimary request: create exactly one fictional SISTER character for the English family vocabulary concept \"sister\"\nSubject: one friendly school-age girl around 8–10 years old, unmistakably a child rather than an adult mother or grandmother; cheerful natural expression; head, shoulders, torso, and hands naturally visible; contemporary modest colorful child clothing\nStyle/medium: premium polished child-friendly 3D animated-film character render, rounded appealing forms, clean high-quality materials, expressive but anatomically coherent face; match a cohesive family-vocabulary asset set\nComposition/framing: single centered character, front-facing slight three-quarter pose, subject fills about 82–88% of a square canvas, tight readable silhouette with safe transparent margin, no cropping of hair or hands\nLighting/mood: soft bright studio key light, gentle rim light, cheerful and welcoming\nScene/backdrop: genuinely transparent background with clean alpha edges and no floor, platform, shadow box, border, card, halo, or scenery\nConstraints: exactly one person; concept must read as a young sister through clear child age and presentation; one file for one concept; no additional people, siblings, parents, babies, animals, props, toys, furniture, school supplies, icons, letters, labels, words, numbers, logos, watermark, frame, or colored backdrop; preserve true alpha transparency; premium production quality; minimum 1024 px square\nAvoid: generic emoji look, flat vector art, photorealism, adult appearance, elderly appearance, toddler appearance, sexualization, text, extra limbs, malformed hands, detached pixels, white or checkerboard background",
+      "transparentBackground": true,
+      "attempts": [
+        {
+          "toolCallAt": "2026-11-02T00:22:41.867Z",
+          "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English pedagogical game flashcard cutout\nPrimary request: create exactly one fictional SISTER character for the English family vocabulary concept \"sister\"\nSubject: one friendly school-age girl around 8–10 years old, unmistakably a child rather than an adult mother or grandmother; cheerful natural expression; head, shoulders, torso, and hands naturally visible; contemporary modest colorful child clothing\nStyle/medium: premium polished child-friendly 3D animated-film character render, rounded appealing forms, clean high-quality materials, expressive but anatomically coherent face; match a cohesive family-vocabulary asset set\nComposition/framing: single centered character, front-facing slight three-quarter pose, subject fills about 82–88% of a square canvas, tight readable silhouette with safe transparent margin, no cropping of hair or hands\nLighting/mood: soft bright studio key light, gentle rim light, cheerful and welcoming\nScene/backdrop: genuinely transparent background with clean alpha edges and no floor, platform, shadow box, border, card, halo, or scenery\nConstraints: exactly one person; concept must read as a young sister through clear child age and presentation; one file for one concept; no additional people, siblings, parents, babies, animals, props, toys, furniture, school supplies, icons, letters, labels, words, numbers, logos, watermark, frame, or colored backdrop; preserve true alpha transparency; premium production quality; minimum 1024 px square\nAvoid: generic emoji look, flat vector art, photorealism, adult appearance, elderly appearance, toddler appearance, sexualization, text, extra limbs, malformed hands, detached pixels, white or checkerboard background",
+          "outcome": "SUCCESS",
+          "generatorOutput": "C:/Users/augus/.codex/generated_images/01a1999e-ee5d-7bd0-979b-396d524fb216/exec-bc8a286a-ddac-4bbf-9b5d-662519559b41.png",
+          "candidateProduced": true
+        }
+      ]
+    },
+    {
+      "concept": "grandmother",
+      "successfulPrompt": "Use case: stylized-concept asset for a DUDUQ English vocabulary flashcard.\n\nCreate exactly one fictional GRANDMOTHER as a premium child-friendly 3D animated-film character. Show one elderly woman about 65–75 years old with clearly silver-gray hair, gentle age lines, a warm caring expression, and an unmistakably older-adult appearance. Frame her from head through upper legs so the complete silhouette, shoulders, torso, arms, and both hands are visible. Give her a simple elegant lavender cardigan over a light blouse and a modest skirt; no patterns, logos, badges, text, jewelry, glasses, handbag, food, furniture, toys, or other props. Make her visually distinct from a generic adult mother through age-appropriate facial structure, silver hair, and subtle wrinkles while remaining friendly and respectful.\n\nComposition: one centered character only, front-facing or slight three-quarter view, natural relaxed pose, subject filling about 82–88% of a square canvas, generous but narrow transparent margins, no cropping, no contact with canvas edges. Premium polished 3D render, soft studio lighting, rounded appealing forms, crisp clean silhouette, rich but tasteful colors, suitable for children ages 6–11.\n\nBackground: true transparent alpha only. No floor, shadow plane, halo, vignette, scenery, room, gradient, colored backdrop, border, frame, labels, letters, numbers, watermark, or extra people. Do not depict a mother-age adult, grandfather, father, children, babies, pets, or any distractor concept.\n\nOutput: one PNG, minimum 1024×1024, real transparency, subject isolated and filling the canvas.",
+      "transparentBackground": true,
+      "attempts": [
+        {
+          "toolCallAt": "2026-11-02T00:23:50.393Z",
+          "prompt": "Use case: stylized-concept asset for a DUDUQ English vocabulary flashcard.\n\nCreate exactly one fictional GRANDMOTHER as a premium child-friendly 3D animated-film character. Show one elderly woman about 65–75 years old with clearly silver-gray hair, gentle age lines, a warm caring expression, and an unmistakably older-adult appearance. Frame her from head through upper legs so the complete silhouette, shoulders, torso, arms, and both hands are visible. Give her a simple elegant lavender cardigan over a light blouse and a modest skirt; no patterns, logos, badges, text, jewelry, glasses, handbag, food, furniture, toys, or other props. Make her visually distinct from a generic adult mother through age-appropriate facial structure, silver hair, and subtle wrinkles while remaining friendly and respectful.\n\nComposition: one centered character only, front-facing or slight three-quarter view, natural relaxed pose, subject filling about 82–88% of a square canvas, generous but narrow transparent margins, no cropping, no contact with canvas edges. Premium polished 3D render, soft studio lighting, rounded appealing forms, crisp clean silhouette, rich but tasteful colors, suitable for children ages 6–11.\n\nBackground: true transparent alpha only. No floor, shadow plane, halo, vignette, scenery, room, gradient, colored backdrop, border, frame, labels, letters, numbers, watermark, or extra people. Do not depict a mother-age adult, grandfather, father, children, babies, pets, or any distractor concept.\n\nOutput: one PNG, minimum 1024×1024, real transparency, subject isolated and filling the canvas.",
+          "outcome": "SUCCESS",
+          "generatorOutput": "C:/Users/augus/.codex/generated_images/01a1999e-ee5d-7bd0-979b-396d524fb216/exec-73e0f831-67c6-4332-9ff5-30f64a0553e5.png",
+          "candidateProduced": true
+        }
+      ]
+    },
+    {
+      "concept": "grandfather",
+      "successfulPrompt": "Create one original, fictional vocabulary-card character representing the concept \"grandfather\": a friendly elderly man around 70 years old, with silver-gray hair, subtle wrinkles, and a warm smile. He wears a forest-green cardigan, a pale blue collared shirt, and neutral trousers. Show one person only, from head through upper legs, with both arms and hands visible in a relaxed pose.\n\nStyle: polished premium 3D family-animation aesthetic, rounded forms, soft studio lighting, crisp silhouette, tasteful colors. Center the single character on a square canvas and make the figure fill roughly 85% of the image while leaving a narrow clear margin on every edge.\n\nUse a true transparent alpha background. No scenery, floor, shadow plane, border, text, letters, numbers, logos, watermark, glasses, cane, hat, newspaper, furniture, props, animals, or additional people. Do not crop the figure. Output one isolated PNG at least 1024×1024.",
+      "transparentBackground": true,
+      "attempts": [
+        {
+          "toolCallAt": "2026-11-02T00:24:17.939Z",
+          "prompt": "Use case: stylized-concept asset for a DUDUQ English vocabulary flashcard.\n\nCreate exactly one fictional GRANDFATHER as a premium child-friendly 3D animated-film character. Show one elderly man about 65–75 years old with clearly silver-gray hair, gentle age lines, a warm caring expression, and an unmistakably older-adult appearance. Frame him from head through upper legs so the complete silhouette, shoulders, torso, arms, and both hands are visible. Give him a simple forest-green cardigan over a light blue collared shirt and neutral trousers; no patterns, logos, badges, text, jewelry, glasses, cane, hat, newspaper, furniture, toys, or other props. Make him visually distinct from a generic adult father through age-appropriate facial structure, silver hair, and subtle wrinkles while remaining friendly and respectful.\n\nComposition: one centered character only, front-facing or slight three-quarter view, natural relaxed pose, subject filling about 82–88% of a square canvas, generous but narrow transparent margins, no cropping, no contact with canvas edges. Premium polished 3D render, soft studio lighting, rounded appealing forms, crisp clean silhouette, rich but tasteful colors, suitable for children ages 6–11.\n\nBackground: true transparent alpha only. No floor, shadow plane, halo, vignette, scenery, room, gradient, colored backdrop, border, frame, labels, letters, numbers, watermark, or extra people. Do not depict a father-age adult, grandmother, mother, children, babies, pets, or any distractor concept.\n\nOutput: one PNG, minimum 1024×1024, real transparency, subject isolated and filling the canvas.",
+          "outcome": "FAILED_OUTPUT_MODERATION_NO_FILE",
+          "generatorErrorCode": "moderation_blocked",
+          "candidateProduced": false
+        },
+        {
+          "toolCallAt": "2026-11-02T00:24:49.858Z",
+          "prompt": "Create one original, fictional vocabulary-card character representing the concept \"grandfather\": a friendly elderly man around 70 years old, with silver-gray hair, subtle wrinkles, and a warm smile. He wears a forest-green cardigan, a pale blue collared shirt, and neutral trousers. Show one person only, from head through upper legs, with both arms and hands visible in a relaxed pose.\n\nStyle: polished premium 3D family-animation aesthetic, rounded forms, soft studio lighting, crisp silhouette, tasteful colors. Center the single character on a square canvas and make the figure fill roughly 85% of the image while leaving a narrow clear margin on every edge.\n\nUse a true transparent alpha background. No scenery, floor, shadow plane, border, text, letters, numbers, logos, watermark, glasses, cane, hat, newspaper, furniture, props, animals, or additional people. Do not crop the figure. Output one isolated PNG at least 1024×1024.",
+          "outcome": "SUCCESS",
+          "generatorOutput": "C:/Users/augus/.codex/generated_images/01a1999e-ee5d-7bd0-979b-396d524fb216/exec-c34873fb-0012-4346-b016-b55f4cb5e19f.png",
+          "candidateProduced": true
+        }
+      ]
+    }
+  ],
+  "nativeGeneratedAssets": [
+    {
+      "concept": "mother",
+      "generatedAt": "2026-11-02T00:21:27.2908357Z",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1999e-ee5d-7bd0-979b-396d524fb216/exec-81daa851-4888-4332-ad72-2665e7b6e98c.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M03-MOTHER-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M03-MOTHER.png",
+      "sha256": "98dd64f1bbad289e1c8452b3050e0cfab61a866639199d2aed102c39db53c288",
+      "originalCopyHashMatches": true,
+      "candidateCopyHashMatches": true,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "father",
+      "generatedAt": "2026-11-02T00:22:07.6990592Z",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1999e-ee5d-7bd0-979b-396d524fb216/exec-1ac24be3-bb37-4f67-a230-1d00daf0583e.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M03-FATHER-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M03-FATHER.png",
+      "sha256": "7ae7af1c89c49e2f0ae612617f60c3bd52a9d2119ae5d9a73376d52b078f5b2a",
+      "originalCopyHashMatches": true,
+      "candidateCopyHashMatches": true,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "brother",
+      "generatedAt": "2026-11-02T00:22:36.5480686Z",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1999e-ee5d-7bd0-979b-396d524fb216/exec-e120dfd0-943d-4ab0-b633-0db145487a6d.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M03-BROTHER-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M03-BROTHER.png",
+      "sha256": "f0edf17ac932976cd1244cdd9f05e88e69fa84edb47f54b00586e461f0b4f293",
+      "originalCopyHashMatches": true,
+      "candidateCopyHashMatches": true,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "sister",
+      "generatedAt": "2026-11-02T00:23:05.3752462Z",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1999e-ee5d-7bd0-979b-396d524fb216/exec-bc8a286a-ddac-4bbf-9b5d-662519559b41.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M03-SISTER-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M03-SISTER.png",
+      "sha256": "47202566b4bc3953cd795f9e3a73747191d8990bf6f6bf1f50794e2dfe443bf9",
+      "originalCopyHashMatches": true,
+      "candidateCopyHashMatches": true,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "grandmother",
+      "generatedAt": "2026-11-02T00:24:13.4007736Z",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1999e-ee5d-7bd0-979b-396d524fb216/exec-73e0f831-67c6-4332-9ff5-30f64a0553e5.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M03-GRANDMOTHER-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M03-GRANDMOTHER.png",
+      "sha256": "38d22c25034f0e878b259945c1a21fc444d02a5fca45865701a5044c91317d4d",
+      "originalCopyHashMatches": true,
+      "candidateCopyHashMatches": true,
+      "alphaNormalizationApplied": false
+    },
+    {
+      "concept": "grandfather",
+      "generatedAt": "2026-11-02T00:25:12.8433195Z",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1999e-ee5d-7bd0-979b-396d524fb216/exec-c34873fb-0012-4346-b016-b55f4cb5e19f.png",
+      "preservedOriginalCopy": "provenance/originals/DUDUQ-Y2M03-GRANDFATHER-ORIGINAL.png",
+      "candidateFile": "images/DUDUQ-Y2M03-GRANDFATHER.png",
+      "sha256": "2a70dece6f55080a8e407f69ee9850316b7919fff438a608645f34975fd90058",
+      "originalCopyHashMatches": true,
+      "candidateCopyHashMatches": true,
+      "alphaNormalizationApplied": false
+    }
+  ],
+  "reusedVerifiedOriginalAssets": [],
+  "failedAttempts": [
+    {
+      "concept": "grandfather",
+      "toolCallAt": "2026-11-02T00:24:17.939Z",
+      "outcome": "FAILED_OUTPUT_MODERATION_NO_FILE",
+      "generatorErrorCode": "moderation_blocked",
+      "followedBySuccessfulNativeRetry": true
+    }
+  ],
+  "alphaNormalization": {
+    "performed": false,
+    "reason": "Native outputs already decode as valid RGBA8 PNGs with meaningful transparent margins."
+  },
+  "humanApproval": "PENDING_NOT_CLAIMED",
+  "integrationApplied": false
+}

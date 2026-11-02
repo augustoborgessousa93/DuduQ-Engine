@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "DUDUQ_Y2M03_NATIVE_MEDIA_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-11-02T00:27:30.280Z",
+  "moduleId": "Y2M03",
+  "provider": "OpenAI Codex native image generation",
+  "reviewAuthority": "CODEX_GENERATION_LANE_PRECHECK_ONLY",
+  "evidenceBoundary": "Candidate semantic and technical evidence only; not human homologation, integration, production certification, or approval.",
+  "generationSemanticEvidence": "generation-semantic-evidence.json",
+  "generationSemanticEvidenceSha256": "db47b947c19eb9634bc385c29396ae9ed8c5c75f328a3e0276ac88ed3c5d7d8c",
+  "alphaComponentAudit": "alpha-component-audit.json",
+  "alphaComponentAuditSha256": "9d52acc85b15444ccc14046579348d46509df6f6c4ac73d16850f7ab039d37de",
+  "sourceRegistryPin": "source-registry-pin.json",
+  "sourceRegistryPinSha256": "0c3fa6ff6f5b3525fa11e0c386c7266b31646df23fe3f242274402e6cf2fe02c",
+  "sourceQuestionContractSha256": "7327f42a04ad686ac83dc4267901b368e6aab7ab1f3294e2421dfc278b134d13",
+  "sourceQuestionInvariantSha256": "fb15e941fcae25be7afbd42aa743e8908937cfd0d8b22dad75d495fc18df1420",
+  "sourceRegistrySha256": "36d8a4c140cf2d3e146bb056a81528993ee13d70b33b3d05419a0ec39101b670",
+  "reviewedQuestionCount": 20,
+  "auditedPendingIds": 22,
+  "candidateBindingIds": 22,
+  "usageRecords": 86,
+  "renderedReview": "MODEL_VISUAL_PRECHECK_PASSED_FOR_SIX_ISOLATED_CONCEPTS",
+  "candidateAssets": [
+    {
+      "file": "images/DUDUQ-Y2M03-MOTHER.png",
+      "semanticTarget": "mother",
+      "visualObservation": "Exactly one friendly adult woman with mature-parent proportions, brown hair, a pink cardigan, visible hands, and no competing person or prop.",
+      "wrongDistractorsAbsent": [
+        "child",
+        "teen sister",
+        "grandmother",
+        "father",
+        "baby",
+        "text",
+        "prop"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M03-FATHER.png",
+      "semanticTarget": "father",
+      "visualObservation": "Exactly one friendly adult man with mature-parent proportions, beard, blue clothing, visible hands, and no competing person or prop.",
+      "wrongDistractorsAbsent": [
+        "child",
+        "teen brother",
+        "grandfather",
+        "mother",
+        "baby",
+        "text",
+        "prop"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M03-BROTHER.png",
+      "semanticTarget": "brother",
+      "visualObservation": "Exactly one school-age boy with child proportions, a blue hoodie, visible hands, and no adult or sibling distractor.",
+      "wrongDistractorsAbsent": [
+        "adult father",
+        "grandfather",
+        "sister",
+        "baby",
+        "text",
+        "prop"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M03-SISTER.png",
+      "semanticTarget": "sister",
+      "visualObservation": "Exactly one school-age girl with child proportions, pink-and-denim clothing, clasped visible hands, and no adult or sibling distractor.",
+      "wrongDistractorsAbsent": [
+        "adult mother",
+        "grandmother",
+        "brother",
+        "baby",
+        "text",
+        "prop"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M03-GRANDMOTHER.png",
+      "semanticTarget": "grandmother",
+      "visualObservation": "Exactly one visibly elderly woman with silver-gray hair, gentle age lines, lavender clothing, clasped visible hands, and no mother-age or other-person distractor.",
+      "wrongDistractorsAbsent": [
+        "mother-age adult",
+        "grandfather",
+        "child",
+        "baby",
+        "text",
+        "prop"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M03-GRANDFATHER.png",
+      "semanticTarget": "grandfather",
+      "visualObservation": "Exactly one visibly elderly man with silver-gray hair and eyebrows, gentle age lines, a green cardigan, visible hands, and no father-age or other-person distractor.",
+      "wrongDistractorsAbsent": [
+        "father-age adult",
+        "grandmother",
+        "child",
+        "baby",
+        "text",
+        "prop"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "humanHomologation": "PENDING"
+    }
+  ],
+  "productionReleaseCertified": false,
+  "humanHomologationClaimed": false,
+  "answerKeysModified": false,
+  "mechanicsModified": false,
+  "goldMastersModified": false
+}

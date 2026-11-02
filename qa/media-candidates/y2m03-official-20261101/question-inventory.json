@@ -1,0 +1,696 @@
+{
+  "schemaVersion": "DUDUQ_MEDIA_QUESTION_INVENTORY_V1",
+  "createdAt": "2026-11-02T00:27:30.280Z",
+  "moduleId": "Y2M03",
+  "questionCount": 20,
+  "source": "dist-pages/content/english/year-2/module-03/questions.json",
+  "sourceSha256": "7327f42a04ad686ac83dc4267901b368e6aab7ab1f3294e2421dfc278b134d13",
+  "scope": "ACTIVE_COMPILED_20_QUESTION_CONTRACT_READ_ONLY",
+  "contractResolution": {
+    "activeCompiledContract": "dist-pages/content/english/year-2/module-03/questions.json",
+    "declaredUpstreamContract": "content/english/production/v11-1b/deterministic-activity-contracts.json",
+    "declaredUpstreamPresent": false,
+    "legacyModuleFile": "content/english/year-2/module-03/module-03-v23-multimodal.js",
+    "legacyModuleFileSha256": "50a905671ba0651b5e669dbedda323e9acaccfd7b7f0c8424cfd6c2e93e881d6",
+    "warning": "The legacy module source describes a different 15-item Toys, Colors & Favorites set. This generation batch follows the active compiled 20-item My Family contract and changes neither source."
+  },
+  "canonicalSemanticTargets": [
+    "mother",
+    "father",
+    "brother",
+    "sister",
+    "grandmother",
+    "grandfather"
+  ],
+  "questions": [
+    {
+      "questionId": "Y2M03-Q001",
+      "sequencePosition": 1,
+      "topicEn": "My Family",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "phase": "TEACHING",
+      "instructionTitleEn": "mother",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "teaching: Identify and introduce fictional relatives. Focus: mother.",
+      "answerKey": "Y2M03-Q001-O1",
+      "semanticTargets": [
+        "mother",
+        "father",
+        "brother",
+        "sister",
+        "grandfather",
+        "grandmother"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0E55AE94BCF4CC3E",
+        "IMG-V11-2B-243B96C39D99CAF8",
+        "IMG-V11-2B-40A6ADFB20D21B5C",
+        "IMG-V11-2B-6ACC979A1C714F7F",
+        "IMG-V11-2B-E5BCAF6E35391096",
+        "IMG-V11-2B-E79FA90D33A3754B"
+      ],
+      "visibleMediaUsageCount": 10,
+      "questionContractSha256": "438d07a53621eab066a92c6eb6890cf50786242892b3664827a349604f106d38",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q002",
+      "sequencePosition": 2,
+      "topicEn": "My Family",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "phase": "TEACHING",
+      "instructionTitleEn": "mother, father, brother, sister, grandmother, grandfather",
+      "primaryInstructionEn": "Sort each item: close family or grandparents.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "teaching: Identify and introduce fictional relatives. Focus: name exchange.",
+      "answerKey": {
+        "Y2M03-Q002-I1": "close-family",
+        "Y2M03-Q002-I2": "close-family",
+        "Y2M03-Q002-I3": "close-family",
+        "Y2M03-Q002-I4": "close-family",
+        "Y2M03-Q002-I5": "extended-family",
+        "Y2M03-Q002-I6": "extended-family"
+      },
+      "semanticTargets": [
+        "mother",
+        "father",
+        "brother",
+        "sister",
+        "grandmother",
+        "grandfather"
+      ],
+      "referencedMediaIds": [],
+      "visibleMediaUsageCount": 0,
+      "questionContractSha256": "405edc62edb4c8d81b4c2773c870c6654eb8435891b783f851c58d8e7eb046f6",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q003",
+      "sequencePosition": 3,
+      "topicEn": "My Family",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "phase": "GUIDED PRACTICE",
+      "instructionTitleEn": "brother",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "guided practice: Identify and introduce fictional relatives. Focus: family recognition/introduction.",
+      "answerKey": "Y2M03-Q003-O1",
+      "semanticTargets": [
+        "brother",
+        "mother",
+        "father",
+        "sister"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0E55AE94BCF4CC3E",
+        "IMG-V11-2B-243B96C39D99CAF8",
+        "IMG-V11-2B-6ACC979A1C714F7F",
+        "IMG-V11-2B-E79FA90D33A3754B"
+      ],
+      "visibleMediaUsageCount": 4,
+      "questionContractSha256": "cdc88928ea72619a8e3850270ba6acd5f24c409e09c0c0c6dbb65a23f55e1e58",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q004",
+      "sequencePosition": 4,
+      "topicEn": "My Family",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_IMAGE",
+      "phase": "SEMANTIC LISTENING WITH INCLUSIVE FICTIONAL FAMILY PORTRAITS; NO PERSONAL DATA REQUIRED. CURRICULAR TARGET",
+      "instructionTitleEn": "sister, grandfather, grandmother, mother, father, brother",
+      "primaryInstructionEn": "Find the matching pairs.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "Semantic listening with inclusive fictional family portraits; no personal data required. Curricular target: mother; father; brother; sister; grandfather; grandmother.",
+      "answerKey": [
+        "Y2M03-Q004-P1",
+        "Y2M03-Q004-P2",
+        "Y2M03-Q004-P3",
+        "Y2M03-Q004-P4",
+        "Y2M03-Q004-P5",
+        "Y2M03-Q004-P6"
+      ],
+      "semanticTargets": [
+        "sister",
+        "grandfather",
+        "grandmother",
+        "mother",
+        "father",
+        "brother"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-40A6ADFB20D21B5C",
+        "IMG-V11-2B-496D1E3286303401",
+        "IMG-V11-2B-72DD748C89819898",
+        "IMG-V11-2B-E5BCAF6E35391096",
+        "IMG-V11-2B-EB195E7418543F4E",
+        "IMG-V11-2B-F3663EB03B9FA720"
+      ],
+      "visibleMediaUsageCount": 6,
+      "questionContractSha256": "b967bdd7abb6a1722edf2af18088a3d4e82db10bb27ca45419ad4fb2bb906f26",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q005",
+      "sequencePosition": 5,
+      "topicEn": "My Family",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "phase": "GUIDED PRACTICE",
+      "instructionTitleEn": "grandmother, grandfather, mother, father, brother, sister",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "guided practice: Identify and introduce fictional relatives. Focus: identify/introduce relative.",
+      "answerKey": {
+        "Y2M03-Q005-L1": "Y2M03-Q005-R1",
+        "Y2M03-Q005-L2": "Y2M03-Q005-R2",
+        "Y2M03-Q005-L3": "Y2M03-Q005-R3",
+        "Y2M03-Q005-L4": "Y2M03-Q005-R4",
+        "Y2M03-Q005-L5": "Y2M03-Q005-R5",
+        "Y2M03-Q005-L6": "Y2M03-Q005-R6"
+      },
+      "semanticTargets": [
+        "grandmother",
+        "grandfather",
+        "mother",
+        "father",
+        "brother",
+        "sister"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-2680DF6BE58F4B7E",
+        "IMG-V11-2B-9FFFCCD19B67697A",
+        "IMG-V11-2B-D2B2759DE5619C8A",
+        "IMG-V11-2B-E1B1A5B8AABB306D",
+        "IMG-V11-2B-F8F1532BA0C59828",
+        "IMG-V11-2B-FF1C87306E179ABE"
+      ],
+      "visibleMediaUsageCount": 6,
+      "questionContractSha256": "9ca90926b5ac766520e9446c83e6fc825e67c3ae66f3d2830f89f1b6f7a44571",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q006",
+      "sequencePosition": 6,
+      "topicEn": "My Family",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "phase": "GUIDED PRACTICE",
+      "instructionTitleEn": "father",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "guided practice: Identify and introduce fictional relatives. Focus: father.",
+      "answerKey": "Y2M03-Q006-O1",
+      "semanticTargets": [
+        "father",
+        "brother",
+        "sister",
+        "grandmother",
+        "mother",
+        "grandfather"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0B3D9B91B561EC5C",
+        "IMG-V11-2B-0E55AE94BCF4CC3E",
+        "IMG-V11-2B-243B96C39D99CAF8",
+        "IMG-V11-2B-40A6ADFB20D21B5C",
+        "IMG-V11-2B-6ACC979A1C714F7F",
+        "IMG-V11-2B-E79FA90D33A3754B"
+      ],
+      "visibleMediaUsageCount": 10,
+      "questionContractSha256": "b2e74d948c5e9c484b1e91b12e98e073d7dfb8ca9e7a469b87a8f4ae83a4e506",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q007",
+      "sequencePosition": 7,
+      "topicEn": "My Family",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "phase": "RECOGNITION",
+      "instructionTitleEn": "mother",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "recognition: Identify and introduce fictional relatives. Focus: I have chunk.",
+      "answerKey": "Y2M03-Q007-O1",
+      "semanticTargets": [
+        "mother",
+        "father",
+        "brother",
+        "sister"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0E55AE94BCF4CC3E",
+        "IMG-V11-2B-243B96C39D99CAF8",
+        "IMG-V11-2B-6ACC979A1C714F7F",
+        "IMG-V11-2B-E79FA90D33A3754B"
+      ],
+      "visibleMediaUsageCount": 4,
+      "questionContractSha256": "2a5a1f323f77de00658941e0ea63255aba2fb9c6dbaa6da9964f510cde0d533d",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q008",
+      "sequencePosition": 8,
+      "topicEn": "My Family",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "phase": "RECOGNITION",
+      "instructionTitleEn": "He is my father.",
+      "primaryInstructionEn": "Look at the picture and complete the sentence.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "recognition: Identify and introduce fictional relatives. Focus: family recognition/introduction.",
+      "answerKey": "father",
+      "semanticTargets": [
+        "father",
+        "mother",
+        "brother",
+        "sister"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-E79FA90D33A3754B"
+      ],
+      "visibleMediaUsageCount": 1,
+      "questionContractSha256": "0538f279d3a9f6e217c51c0d9141b38bc6df9dddbc94650b7d94f8b652df8b50",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q009",
+      "sequencePosition": 9,
+      "topicEn": "My Family",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "phase": "RECOGNITION",
+      "instructionTitleEn": "brother, sister, grandmother, grandfather, mother, father",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "recognition: Identify and introduce fictional relatives. Focus: I have a... retrieval.",
+      "answerKey": {
+        "Y2M03-Q009-L1": "Y2M03-Q009-R1",
+        "Y2M03-Q009-L2": "Y2M03-Q009-R2",
+        "Y2M03-Q009-L3": "Y2M03-Q009-R3",
+        "Y2M03-Q009-L4": "Y2M03-Q009-R4",
+        "Y2M03-Q009-L5": "Y2M03-Q009-R5",
+        "Y2M03-Q009-L6": "Y2M03-Q009-R6"
+      },
+      "semanticTargets": [
+        "brother",
+        "sister",
+        "grandmother",
+        "grandfather",
+        "mother",
+        "father"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-2680DF6BE58F4B7E",
+        "IMG-V11-2B-9FFFCCD19B67697A",
+        "IMG-V11-2B-D2B2759DE5619C8A",
+        "IMG-V11-2B-E1B1A5B8AABB306D",
+        "IMG-V11-2B-F8F1532BA0C59828",
+        "IMG-V11-2B-FF1C87306E179ABE"
+      ],
+      "visibleMediaUsageCount": 6,
+      "questionContractSha256": "859c837f8597580dcecc3317637e66a938ffbb69fe86b6a0881f1520df7418a8",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q010",
+      "sequencePosition": 10,
+      "topicEn": "My Family",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "phase": "COMPREHENSION",
+      "instructionTitleEn": "sister, grandmother, grandfather, mother",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "comprehension: Identify and introduce fictional relatives. Focus: identify/introduce relative.",
+      "answerKey": {
+        "Y2M03-Q010-I1": "Y2M03-Q010-T1",
+        "Y2M03-Q010-I2": "Y2M03-Q010-T2",
+        "Y2M03-Q010-I3": "Y2M03-Q010-T3",
+        "Y2M03-Q010-I4": "Y2M03-Q010-T4"
+      },
+      "semanticTargets": [
+        "sister",
+        "grandmother",
+        "grandfather",
+        "mother"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-1548F798460AFEA3",
+        "IMG-V11-2B-2A98427C663DCF84",
+        "IMG-V11-2B-4E340696427A4167",
+        "IMG-V11-2B-D0EB658ED5021195"
+      ],
+      "visibleMediaUsageCount": 4,
+      "questionContractSha256": "bb1aedf84190fdb9b537d5d4a0e5d62c491572c7410720452c8abfa9e79bfc0b",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q011",
+      "sequencePosition": 11,
+      "topicEn": "My Family",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "phase": "COMPREHENSION",
+      "instructionTitleEn": "brother",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "comprehension: Identify and introduce fictional relatives. Focus: brother.",
+      "answerKey": "Y2M03-Q011-O1",
+      "semanticTargets": [
+        "brother",
+        "sister",
+        "grandmother",
+        "grandfather"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0B3D9B91B561EC5C",
+        "IMG-V11-2B-0E55AE94BCF4CC3E",
+        "IMG-V11-2B-6ACC979A1C714F7F",
+        "IMG-V11-2B-A96CAA1AD009D03D"
+      ],
+      "visibleMediaUsageCount": 4,
+      "questionContractSha256": "80c5fc83eb06284756d7cae7a889296ee5253c7df5c713bff0b788b91760e3f7",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q012",
+      "sequencePosition": 12,
+      "topicEn": "My Family",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "phase": "COMPREHENSION",
+      "instructionTitleEn": "grandfather, mother, father, brother, sister, grandmother",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "comprehension: Identify and introduce fictional relatives. Focus: name exchange.",
+      "answerKey": {
+        "Y2M03-Q012-L1": "Y2M03-Q012-R1",
+        "Y2M03-Q012-L2": "Y2M03-Q012-R2",
+        "Y2M03-Q012-L3": "Y2M03-Q012-R3",
+        "Y2M03-Q012-L4": "Y2M03-Q012-R4",
+        "Y2M03-Q012-L5": "Y2M03-Q012-R5",
+        "Y2M03-Q012-L6": "Y2M03-Q012-R6"
+      },
+      "semanticTargets": [
+        "grandfather",
+        "mother",
+        "father",
+        "brother",
+        "sister",
+        "grandmother"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-2680DF6BE58F4B7E",
+        "IMG-V11-2B-9FFFCCD19B67697A",
+        "IMG-V11-2B-D2B2759DE5619C8A",
+        "IMG-V11-2B-E1B1A5B8AABB306D",
+        "IMG-V11-2B-F8F1532BA0C59828",
+        "IMG-V11-2B-FF1C87306E179ABE"
+      ],
+      "visibleMediaUsageCount": 6,
+      "questionContractSha256": "870dc5c6dc00c8275170a9d3145d771ad034307675bbe330d34d6de4275e00bb",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q013",
+      "sequencePosition": 13,
+      "topicEn": "My Family",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "phase": "LISTENING",
+      "instructionTitleEn": "mother",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "listening: Identify and introduce fictional relatives. Focus: family recognition/introduction.",
+      "answerKey": "Y2M03-Q013-O1",
+      "semanticTargets": [
+        "mother",
+        "father",
+        "brother",
+        "sister",
+        "grandfather",
+        "grandmother"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0E55AE94BCF4CC3E",
+        "IMG-V11-2B-243B96C39D99CAF8",
+        "IMG-V11-2B-40A6ADFB20D21B5C",
+        "IMG-V11-2B-6ACC979A1C714F7F",
+        "IMG-V11-2B-E5BCAF6E35391096",
+        "IMG-V11-2B-E79FA90D33A3754B"
+      ],
+      "visibleMediaUsageCount": 10,
+      "questionContractSha256": "a5a19901102ff3a1287a3982f51ed45ddc6201aaec7a2c6e13048f6ca1af370d",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q014",
+      "sequencePosition": 14,
+      "topicEn": "My Family",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_TEXT",
+      "phase": "LATER SOUND-TO-WRITTEN-FORM RETRIEVAL FOLLOWS THE MODULE’S SUPPORTED LABEL EXPOSURE; IT IS DISTINCT FROM IMAGE-BASED SEMANTIC RECOGNITION. CURRICULAR TARGET",
+      "instructionTitleEn": "father, brother, sister, mother",
+      "primaryInstructionEn": "Find the matching pairs.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "Later sound-to-written-form retrieval follows the module’s supported label exposure; it is distinct from image-based semantic recognition. Curricular target: mother; father; brother; sister.",
+      "answerKey": [
+        "Y2M03-Q014-P1",
+        "Y2M03-Q014-P2",
+        "Y2M03-Q014-P3",
+        "Y2M03-Q014-P4"
+      ],
+      "semanticTargets": [
+        "father",
+        "brother",
+        "sister",
+        "mother"
+      ],
+      "referencedMediaIds": [],
+      "visibleMediaUsageCount": 0,
+      "questionContractSha256": "0a76881b57f9c5ca81eb086f9bf9b331778babdab674d44af3399a8e329e2b17",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q015",
+      "sequencePosition": 15,
+      "topicEn": "My Family",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "phase": "RETRIEVAL",
+      "instructionTitleEn": "brother, sister, grandmother, grandfather, mother, father",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "retrieval: Identify and introduce fictional relatives. Focus: identify/introduce relative.",
+      "answerKey": {
+        "Y2M03-Q015-L1": "Y2M03-Q015-R1",
+        "Y2M03-Q015-L2": "Y2M03-Q015-R2",
+        "Y2M03-Q015-L3": "Y2M03-Q015-R3",
+        "Y2M03-Q015-L4": "Y2M03-Q015-R4",
+        "Y2M03-Q015-L5": "Y2M03-Q015-R5",
+        "Y2M03-Q015-L6": "Y2M03-Q015-R6"
+      },
+      "semanticTargets": [
+        "brother",
+        "sister",
+        "grandmother",
+        "grandfather",
+        "mother",
+        "father"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-2680DF6BE58F4B7E",
+        "IMG-V11-2B-9FFFCCD19B67697A",
+        "IMG-V11-2B-D2B2759DE5619C8A",
+        "IMG-V11-2B-E1B1A5B8AABB306D",
+        "IMG-V11-2B-F8F1532BA0C59828",
+        "IMG-V11-2B-FF1C87306E179ABE"
+      ],
+      "visibleMediaUsageCount": 6,
+      "questionContractSha256": "2cbe5c67cf8c22245f781a6aa628805c1ad7561ae1bd3c50b9d82d39295db084",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q016",
+      "sequencePosition": 16,
+      "topicEn": "My Family",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "phase": "RETRIEVAL",
+      "instructionTitleEn": "sister",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "retrieval: Identify and introduce fictional relatives. Focus: sister.",
+      "answerKey": "Y2M03-Q016-O1",
+      "semanticTargets": [
+        "sister",
+        "grandmother",
+        "grandfather",
+        "mother"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0B3D9B91B561EC5C",
+        "IMG-V11-2B-243B96C39D99CAF8",
+        "IMG-V11-2B-6ACC979A1C714F7F",
+        "IMG-V11-2B-A96CAA1AD009D03D"
+      ],
+      "visibleMediaUsageCount": 4,
+      "questionContractSha256": "32d5afeb91b992eba5da04a1493cf6d7bf4d6ec34f000e4095f73204bc6b5bcf",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q017",
+      "sequencePosition": 17,
+      "topicEn": "My Family",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "phase": "REVIEW",
+      "instructionTitleEn": "grandmother, grandfather, mother, father, brother, sister",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "review: Identify and introduce fictional relatives. Focus: I have chunk.",
+      "answerKey": {
+        "Y2M03-Q017-L1": "Y2M03-Q017-R1",
+        "Y2M03-Q017-L2": "Y2M03-Q017-R2",
+        "Y2M03-Q017-L3": "Y2M03-Q017-R3",
+        "Y2M03-Q017-L4": "Y2M03-Q017-R4",
+        "Y2M03-Q017-L5": "Y2M03-Q017-R5",
+        "Y2M03-Q017-L6": "Y2M03-Q017-R6"
+      },
+      "semanticTargets": [
+        "grandmother",
+        "grandfather",
+        "mother",
+        "father",
+        "brother",
+        "sister"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-2680DF6BE58F4B7E",
+        "IMG-V11-2B-9FFFCCD19B67697A",
+        "IMG-V11-2B-D2B2759DE5619C8A",
+        "IMG-V11-2B-E1B1A5B8AABB306D",
+        "IMG-V11-2B-F8F1532BA0C59828",
+        "IMG-V11-2B-FF1C87306E179ABE"
+      ],
+      "visibleMediaUsageCount": 6,
+      "questionContractSha256": "18c14fb7095894a35548b0f89902e353516beb487609ac3a24fd51ecf694a948",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q018",
+      "sequencePosition": 18,
+      "topicEn": "My Family",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "phase": "REVIEW",
+      "instructionTitleEn": "He is my grandfather.",
+      "primaryInstructionEn": "Look at the picture and complete the sentence.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "review: Identify and introduce fictional relatives. Focus: family recognition/introduction.",
+      "answerKey": "grandfather",
+      "semanticTargets": [
+        "grandfather",
+        "mother",
+        "father",
+        "brother"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-40A6ADFB20D21B5C"
+      ],
+      "visibleMediaUsageCount": 1,
+      "questionContractSha256": "6db09c1e73fbec6727a55d61238f8bf161dc13d38153e55047e46ddc273aaa14",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q019",
+      "sequencePosition": 19,
+      "topicEn": "My Family",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "phase": "CONSOLIDATION",
+      "instructionTitleEn": "mother, father, brother, sister, grandmother, grandfather",
+      "primaryInstructionEn": "Sort each item: close family or grandparents.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "consolidation: Identify and introduce fictional relatives. Focus: This is my....",
+      "answerKey": {
+        "Y2M03-Q019-I1": "close-family",
+        "Y2M03-Q019-I2": "close-family",
+        "Y2M03-Q019-I3": "close-family",
+        "Y2M03-Q019-I4": "close-family",
+        "Y2M03-Q019-I5": "extended-family",
+        "Y2M03-Q019-I6": "extended-family"
+      },
+      "semanticTargets": [
+        "mother",
+        "father",
+        "brother",
+        "sister",
+        "grandmother",
+        "grandfather"
+      ],
+      "referencedMediaIds": [],
+      "visibleMediaUsageCount": 0,
+      "questionContractSha256": "7d4b6b20209c0b2c12da89c8f5fa4b8c0ccdc77c4845c403171475907591a42c",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y2M03-Q020",
+      "sequencePosition": 20,
+      "topicEn": "My Family",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "phase": "CONSOLIDATION",
+      "instructionTitleEn": "mother, father, brother, sister, grandmother, grandfather",
+      "primaryInstructionEn": "Sort each item: close family or grandparents.",
+      "targetSkill": "Identify family term in short exchange.",
+      "curricularObjective": "Identify and introduce fictional relatives.",
+      "learningTarget": "consolidation: Identify and introduce fictional relatives. Focus: identify/introduce relative.",
+      "answerKey": {
+        "Y2M03-Q020-I1": "close-family",
+        "Y2M03-Q020-I2": "close-family",
+        "Y2M03-Q020-I3": "close-family",
+        "Y2M03-Q020-I4": "close-family",
+        "Y2M03-Q020-I5": "extended-family",
+        "Y2M03-Q020-I6": "extended-family"
+      },
+      "semanticTargets": [
+        "mother",
+        "father",
+        "brother",
+        "sister",
+        "grandmother",
+        "grandfather"
+      ],
+      "referencedMediaIds": [],
+      "visibleMediaUsageCount": 0,
+      "questionContractSha256": "a0369010cab5b1e84d0976642a731d20e15613023a15331c5eb048bd166543c1",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    }
+  ]
+}

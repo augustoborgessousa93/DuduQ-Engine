@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "DUDUQ_MEDIA_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-11-02T00:27:30.280Z",
+  "moduleId": "Y2M03",
+  "reviewAuthority": "CODEX_GENERATION_LANE_TECHNICAL_AND_SEMANTIC_PRECHECK_ONLY",
+  "reviewStatus": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_REVIEW_PENDING",
+  "approvalGranted": false,
+  "questionContractsReviewed": 20,
+  "questionInventory": "question-inventory.json",
+  "bindingPlan": "binding-plan.json",
+  "globalRulesChecked": [
+    "one file per unique exact concept",
+    "exactly one isolated subject per image",
+    "premium child-friendly 3D presentation",
+    "real alpha transparency",
+    "no text, watermark, extra person, prop, or wrong distractor",
+    "adult/child/older-adult age distinction remains pedagogically readable",
+    "no answer key, mechanic, runtime, registry, Gold Master, or production mutation"
+  ],
+  "preexistingOriginalAudit": "preexisting-original-audit.json",
+  "assets": [
+    {
+      "file": "images/DUDUQ-Y2M03-MOTHER.png",
+      "semanticTarget": "mother",
+      "visualObservation": "Exactly one friendly adult woman with mature-parent proportions, brown hair, a pink cardigan, visible hands, and no competing person or prop.",
+      "wrongDistractorsAbsent": [
+        "child",
+        "teen sister",
+        "grandmother",
+        "father",
+        "baby",
+        "text",
+        "prop"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M03-FATHER.png",
+      "semanticTarget": "father",
+      "visualObservation": "Exactly one friendly adult man with mature-parent proportions, beard, blue clothing, visible hands, and no competing person or prop.",
+      "wrongDistractorsAbsent": [
+        "child",
+        "teen brother",
+        "grandfather",
+        "mother",
+        "baby",
+        "text",
+        "prop"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M03-BROTHER.png",
+      "semanticTarget": "brother",
+      "visualObservation": "Exactly one school-age boy with child proportions, a blue hoodie, visible hands, and no adult or sibling distractor.",
+      "wrongDistractorsAbsent": [
+        "adult father",
+        "grandfather",
+        "sister",
+        "baby",
+        "text",
+        "prop"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M03-SISTER.png",
+      "semanticTarget": "sister",
+      "visualObservation": "Exactly one school-age girl with child proportions, pink-and-denim clothing, clasped visible hands, and no adult or sibling distractor.",
+      "wrongDistractorsAbsent": [
+        "adult mother",
+        "grandmother",
+        "brother",
+        "baby",
+        "text",
+        "prop"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M03-GRANDMOTHER.png",
+      "semanticTarget": "grandmother",
+      "visualObservation": "Exactly one visibly elderly woman with silver-gray hair, gentle age lines, lavender clothing, clasped visible hands, and no mother-age or other-person distractor.",
+      "wrongDistractorsAbsent": [
+        "mother-age adult",
+        "grandfather",
+        "child",
+        "baby",
+        "text",
+        "prop"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "humanHomologation": "PENDING"
+    },
+    {
+      "file": "images/DUDUQ-Y2M03-GRANDFATHER.png",
+      "semanticTarget": "grandfather",
+      "visualObservation": "Exactly one visibly elderly man with silver-gray hair and eyebrows, gentle age lines, a green cardigan, visible hands, and no father-age or other-person distractor.",
+      "wrongDistractorsAbsent": [
+        "father-age adult",
+        "grandmother",
+        "child",
+        "baby",
+        "text",
+        "prop"
+      ],
+      "technicalAlphaStatus": "PASS",
+      "humanHomologation": "PENDING"
+    }
+  ],
+  "candidateCount": 6,
+  "nativeGeneratedCount": 6,
+  "verifiedOriginalReuseCount": 0,
+  "humanHomologationStatus": "PENDING_NOT_CLAIMED",
+  "integrationStatus": "NOT_INTEGRATED",
+  "productionStatus": "NOT_APPROVED_NOT_DEPLOYED"
+}

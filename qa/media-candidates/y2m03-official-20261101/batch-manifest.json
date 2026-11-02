@@ -1,0 +1,809 @@
+{
+  "schemaVersion": "DUDUQ_CHATGPT_MEDIA_BINDINGS_V1",
+  "createdAt": "2026-11-02T00:27:30.280Z",
+  "moduleId": "Y2M03",
+  "source": "Codex native image generation lane; candidate evidence only",
+  "provider": "OpenAI Codex image_gen.imagegen",
+  "status": "HASH_BOUND_CANDIDATE_BUNDLE_READY_FOR_INDEPENDENT_INTEGRATION_QA",
+  "questionSource": "dist-pages/content/english/year-2/module-03/questions.json",
+  "questionSourceSha256": "7327f42a04ad686ac83dc4267901b368e6aab7ab1f3294e2421dfc278b134d13",
+  "originalAuditedPendingIds": 22,
+  "finalBindingIds": 22,
+  "totalQuestionUsageRecords": 88,
+  "questionContractsReviewed": 20,
+  "preservesAnswerKeysAndMechanics": true,
+  "productionApproved": false,
+  "integrated": false,
+  "approvalFlagsChanged": false,
+  "assets": [
+    {
+      "assetKey": "Y2M03-CANDIDATE-MOTHER",
+      "file": "images/DUDUQ-Y2M03-MOTHER.png",
+      "semanticTarget": "mother",
+      "sha256": "98dd64f1bbad289e1c8452b3050e0cfab61a866639199d2aed102c39db53c288",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_REVIEW_PENDING",
+      "reviewEvidence": "semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y2M03-Q010",
+          "mediaId": "IMG-V11-2B-1548F798460AFEA3",
+          "contractSemanticTarget": "mother",
+          "occurrencePaths": [
+            "targets[3].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q001",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractSemanticTarget": "mother",
+          "occurrencePaths": [
+            "options[0].media",
+            "targetsToFind[0].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q003",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractSemanticTarget": "mother",
+          "occurrencePaths": [
+            "options[1].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q006",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractSemanticTarget": "mother",
+          "occurrencePaths": [
+            "bubbleDistractorPool[3].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q007",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractSemanticTarget": "mother",
+          "occurrencePaths": [
+            "options[0].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q013",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractSemanticTarget": "mother",
+          "occurrencePaths": [
+            "options[0].media",
+            "targetsToFind[0].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q016",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractSemanticTarget": "mother",
+          "occurrencePaths": [
+            "options[3].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q004",
+          "mediaId": "IMG-V11-2B-EB195E7418543F4E",
+          "contractSemanticTarget": "mother",
+          "occurrencePaths": [
+            "pairs[3].cards[1].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q005",
+          "mediaId": "IMG-V11-2B-F8F1532BA0C59828",
+          "contractSemanticTarget": "mother",
+          "occurrencePaths": [
+            "pairs[2].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q009",
+          "mediaId": "IMG-V11-2B-F8F1532BA0C59828",
+          "contractSemanticTarget": "mother",
+          "occurrencePaths": [
+            "pairs[4].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q012",
+          "mediaId": "IMG-V11-2B-F8F1532BA0C59828",
+          "contractSemanticTarget": "mother",
+          "occurrencePaths": [
+            "pairs[1].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q015",
+          "mediaId": "IMG-V11-2B-F8F1532BA0C59828",
+          "contractSemanticTarget": "mother",
+          "occurrencePaths": [
+            "pairs[4].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q017",
+          "mediaId": "IMG-V11-2B-F8F1532BA0C59828",
+          "contractSemanticTarget": "mother",
+          "occurrencePaths": [
+            "pairs[2].b.media"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/originals/DUDUQ-Y2M03-MOTHER-ORIGINAL.png"
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-1548F798460AFEA3",
+        "IMG-V11-2B-243B96C39D99CAF8",
+        "IMG-V11-2B-EB195E7418543F4E",
+        "IMG-V11-2B-F8F1532BA0C59828"
+      ],
+      "crossModuleSharedMediaIds": [
+        "IMG-V11-2B-243B96C39D99CAF8",
+        "IMG-V11-2B-EB195E7418543F4E",
+        "IMG-V11-2B-F8F1532BA0C59828"
+      ]
+    },
+    {
+      "assetKey": "Y2M03-CANDIDATE-FATHER",
+      "file": "images/DUDUQ-Y2M03-FATHER.png",
+      "semanticTarget": "father",
+      "sha256": "7ae7af1c89c49e2f0ae612617f60c3bd52a9d2119ae5d9a73376d52b078f5b2a",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_REVIEW_PENDING",
+      "reviewEvidence": "semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y2M03-Q005",
+          "mediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+          "contractSemanticTarget": "father",
+          "occurrencePaths": [
+            "pairs[3].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q009",
+          "mediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+          "contractSemanticTarget": "father",
+          "occurrencePaths": [
+            "pairs[5].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q012",
+          "mediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+          "contractSemanticTarget": "father",
+          "occurrencePaths": [
+            "pairs[2].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q015",
+          "mediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+          "contractSemanticTarget": "father",
+          "occurrencePaths": [
+            "pairs[5].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q017",
+          "mediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+          "contractSemanticTarget": "father",
+          "occurrencePaths": [
+            "pairs[3].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q001",
+          "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+          "contractSemanticTarget": "father",
+          "occurrencePaths": [
+            "options[1].media",
+            "bubbleDistractorPool[0].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q003",
+          "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+          "contractSemanticTarget": "father",
+          "occurrencePaths": [
+            "options[2].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q006",
+          "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+          "contractSemanticTarget": "father",
+          "occurrencePaths": [
+            "options[0].media",
+            "targetsToFind[0].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q007",
+          "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+          "contractSemanticTarget": "father",
+          "occurrencePaths": [
+            "options[1].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q013",
+          "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+          "contractSemanticTarget": "father",
+          "occurrencePaths": [
+            "options[1].media",
+            "bubbleDistractorPool[0].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q004",
+          "mediaId": "IMG-V11-2B-F3663EB03B9FA720",
+          "contractSemanticTarget": "father",
+          "occurrencePaths": [
+            "pairs[4].cards[1].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q008",
+          "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+          "contractSemanticTarget": "father",
+          "occurrencePaths": [
+            "mediaBindings[0]"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/originals/DUDUQ-Y2M03-FATHER-ORIGINAL.png"
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-D2B2759DE5619C8A",
+        "IMG-V11-2B-E79FA90D33A3754B",
+        "IMG-V11-2B-F3663EB03B9FA720"
+      ],
+      "crossModuleSharedMediaIds": [
+        "IMG-V11-2B-D2B2759DE5619C8A",
+        "IMG-V11-2B-E79FA90D33A3754B",
+        "IMG-V11-2B-F3663EB03B9FA720"
+      ]
+    },
+    {
+      "assetKey": "Y2M03-CANDIDATE-BROTHER",
+      "file": "images/DUDUQ-Y2M03-BROTHER.png",
+      "semanticTarget": "brother",
+      "sha256": "f0edf17ac932976cd1244cdd9f05e88e69fa84edb47f54b00586e461f0b4f293",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_REVIEW_PENDING",
+      "reviewEvidence": "semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y2M03-Q001",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractSemanticTarget": "brother",
+          "occurrencePaths": [
+            "options[2].media",
+            "bubbleDistractorPool[1].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q003",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractSemanticTarget": "brother",
+          "occurrencePaths": [
+            "options[0].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q006",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractSemanticTarget": "brother",
+          "occurrencePaths": [
+            "options[1].media",
+            "bubbleDistractorPool[0].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q007",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractSemanticTarget": "brother",
+          "occurrencePaths": [
+            "options[2].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q011",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractSemanticTarget": "brother",
+          "occurrencePaths": [
+            "options[0].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q013",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractSemanticTarget": "brother",
+          "occurrencePaths": [
+            "options[2].media",
+            "bubbleDistractorPool[1].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q004",
+          "mediaId": "IMG-V11-2B-72DD748C89819898",
+          "contractSemanticTarget": "brother",
+          "occurrencePaths": [
+            "pairs[5].cards[1].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q005",
+          "mediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+          "contractSemanticTarget": "brother",
+          "occurrencePaths": [
+            "pairs[4].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q009",
+          "mediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+          "contractSemanticTarget": "brother",
+          "occurrencePaths": [
+            "pairs[0].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q012",
+          "mediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+          "contractSemanticTarget": "brother",
+          "occurrencePaths": [
+            "pairs[3].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q015",
+          "mediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+          "contractSemanticTarget": "brother",
+          "occurrencePaths": [
+            "pairs[0].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q017",
+          "mediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+          "contractSemanticTarget": "brother",
+          "occurrencePaths": [
+            "pairs[4].b.media"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/originals/DUDUQ-Y2M03-BROTHER-ORIGINAL.png"
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-0E55AE94BCF4CC3E",
+        "IMG-V11-2B-72DD748C89819898",
+        "IMG-V11-2B-E1B1A5B8AABB306D"
+      ],
+      "crossModuleSharedMediaIds": [
+        "IMG-V11-2B-0E55AE94BCF4CC3E",
+        "IMG-V11-2B-72DD748C89819898",
+        "IMG-V11-2B-E1B1A5B8AABB306D"
+      ]
+    },
+    {
+      "assetKey": "Y2M03-CANDIDATE-SISTER",
+      "file": "images/DUDUQ-Y2M03-SISTER.png",
+      "semanticTarget": "sister",
+      "sha256": "47202566b4bc3953cd795f9e3a73747191d8990bf6f6bf1f50794e2dfe443bf9",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_REVIEW_PENDING",
+      "reviewEvidence": "semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y2M03-Q005",
+          "mediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+          "contractSemanticTarget": "sister",
+          "occurrencePaths": [
+            "pairs[5].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q009",
+          "mediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+          "contractSemanticTarget": "sister",
+          "occurrencePaths": [
+            "pairs[1].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q012",
+          "mediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+          "contractSemanticTarget": "sister",
+          "occurrencePaths": [
+            "pairs[4].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q015",
+          "mediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+          "contractSemanticTarget": "sister",
+          "occurrencePaths": [
+            "pairs[1].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q017",
+          "mediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+          "contractSemanticTarget": "sister",
+          "occurrencePaths": [
+            "pairs[5].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q004",
+          "mediaId": "IMG-V11-2B-496D1E3286303401",
+          "contractSemanticTarget": "sister",
+          "occurrencePaths": [
+            "pairs[0].cards[1].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q010",
+          "mediaId": "IMG-V11-2B-4E340696427A4167",
+          "contractSemanticTarget": "sister",
+          "occurrencePaths": [
+            "targets[0].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q001",
+          "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+          "contractSemanticTarget": "sister",
+          "occurrencePaths": [
+            "options[3].media",
+            "bubbleDistractorPool[2].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q003",
+          "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+          "contractSemanticTarget": "sister",
+          "occurrencePaths": [
+            "options[3].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q006",
+          "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+          "contractSemanticTarget": "sister",
+          "occurrencePaths": [
+            "options[2].media",
+            "bubbleDistractorPool[1].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q007",
+          "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+          "contractSemanticTarget": "sister",
+          "occurrencePaths": [
+            "options[3].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q011",
+          "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+          "contractSemanticTarget": "sister",
+          "occurrencePaths": [
+            "options[1].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q013",
+          "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+          "contractSemanticTarget": "sister",
+          "occurrencePaths": [
+            "options[3].media",
+            "bubbleDistractorPool[2].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q016",
+          "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+          "contractSemanticTarget": "sister",
+          "occurrencePaths": [
+            "options[0].media"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/originals/DUDUQ-Y2M03-SISTER-ORIGINAL.png"
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-2680DF6BE58F4B7E",
+        "IMG-V11-2B-496D1E3286303401",
+        "IMG-V11-2B-4E340696427A4167",
+        "IMG-V11-2B-6ACC979A1C714F7F"
+      ],
+      "crossModuleSharedMediaIds": [
+        "IMG-V11-2B-2680DF6BE58F4B7E",
+        "IMG-V11-2B-496D1E3286303401",
+        "IMG-V11-2B-6ACC979A1C714F7F"
+      ]
+    },
+    {
+      "assetKey": "Y2M03-CANDIDATE-GRANDMOTHER",
+      "file": "images/DUDUQ-Y2M03-GRANDMOTHER.png",
+      "semanticTarget": "grandmother",
+      "sha256": "38d22c25034f0e878b259945c1a21fc444d02a5fca45865701a5044c91317d4d",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_REVIEW_PENDING",
+      "reviewEvidence": "semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y2M03-Q006",
+          "mediaId": "IMG-V11-2B-0B3D9B91B561EC5C",
+          "contractSemanticTarget": "grandmother",
+          "occurrencePaths": [
+            "options[3].media",
+            "bubbleDistractorPool[2].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q011",
+          "mediaId": "IMG-V11-2B-0B3D9B91B561EC5C",
+          "contractSemanticTarget": "grandmother",
+          "occurrencePaths": [
+            "options[2].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q016",
+          "mediaId": "IMG-V11-2B-0B3D9B91B561EC5C",
+          "contractSemanticTarget": "grandmother",
+          "occurrencePaths": [
+            "options[1].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q010",
+          "mediaId": "IMG-V11-2B-D0EB658ED5021195",
+          "contractSemanticTarget": "grandmother",
+          "occurrencePaths": [
+            "targets[1].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q001",
+          "mediaId": "IMG-V11-2B-E5BCAF6E35391096",
+          "contractSemanticTarget": "grandmother",
+          "occurrencePaths": [
+            "bubbleDistractorPool[4].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q004",
+          "mediaId": "IMG-V11-2B-E5BCAF6E35391096",
+          "contractSemanticTarget": "grandmother",
+          "occurrencePaths": [
+            "pairs[2].cards[1].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q013",
+          "mediaId": "IMG-V11-2B-E5BCAF6E35391096",
+          "contractSemanticTarget": "grandmother",
+          "occurrencePaths": [
+            "bubbleDistractorPool[4].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q005",
+          "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "contractSemanticTarget": "grandmother",
+          "occurrencePaths": [
+            "pairs[0].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q009",
+          "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "contractSemanticTarget": "grandmother",
+          "occurrencePaths": [
+            "pairs[2].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q012",
+          "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "contractSemanticTarget": "grandmother",
+          "occurrencePaths": [
+            "pairs[5].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q015",
+          "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "contractSemanticTarget": "grandmother",
+          "occurrencePaths": [
+            "pairs[2].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q017",
+          "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "contractSemanticTarget": "grandmother",
+          "occurrencePaths": [
+            "pairs[0].b.media"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/originals/DUDUQ-Y2M03-GRANDMOTHER-ORIGINAL.png"
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-0B3D9B91B561EC5C",
+        "IMG-V11-2B-D0EB658ED5021195",
+        "IMG-V11-2B-E5BCAF6E35391096",
+        "IMG-V11-2B-FF1C87306E179ABE"
+      ],
+      "crossModuleSharedMediaIds": [
+        "IMG-V11-2B-FF1C87306E179ABE"
+      ]
+    },
+    {
+      "assetKey": "Y2M03-CANDIDATE-GRANDFATHER",
+      "file": "images/DUDUQ-Y2M03-GRANDFATHER.png",
+      "semanticTarget": "grandfather",
+      "sha256": "2a70dece6f55080a8e407f69ee9850316b7919fff438a608645f34975fd90058",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_REVIEW_PENDING",
+      "reviewEvidence": "semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y2M03-Q010",
+          "mediaId": "IMG-V11-2B-2A98427C663DCF84",
+          "contractSemanticTarget": "grandfather",
+          "occurrencePaths": [
+            "targets[2].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q001",
+          "mediaId": "IMG-V11-2B-40A6ADFB20D21B5C",
+          "contractSemanticTarget": "grandfather",
+          "occurrencePaths": [
+            "bubbleDistractorPool[3].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q004",
+          "mediaId": "IMG-V11-2B-40A6ADFB20D21B5C",
+          "contractSemanticTarget": "grandfather",
+          "occurrencePaths": [
+            "pairs[1].cards[1].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q006",
+          "mediaId": "IMG-V11-2B-40A6ADFB20D21B5C",
+          "contractSemanticTarget": "grandfather",
+          "occurrencePaths": [
+            "bubbleDistractorPool[4].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q013",
+          "mediaId": "IMG-V11-2B-40A6ADFB20D21B5C",
+          "contractSemanticTarget": "grandfather",
+          "occurrencePaths": [
+            "bubbleDistractorPool[3].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q005",
+          "mediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+          "contractSemanticTarget": "grandfather",
+          "occurrencePaths": [
+            "pairs[1].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q009",
+          "mediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+          "contractSemanticTarget": "grandfather",
+          "occurrencePaths": [
+            "pairs[3].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q012",
+          "mediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+          "contractSemanticTarget": "grandfather",
+          "occurrencePaths": [
+            "pairs[0].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q015",
+          "mediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+          "contractSemanticTarget": "grandfather",
+          "occurrencePaths": [
+            "pairs[3].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q017",
+          "mediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+          "contractSemanticTarget": "grandfather",
+          "occurrencePaths": [
+            "pairs[1].b.media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q011",
+          "mediaId": "IMG-V11-2B-A96CAA1AD009D03D",
+          "contractSemanticTarget": "grandfather",
+          "occurrencePaths": [
+            "options[3].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q016",
+          "mediaId": "IMG-V11-2B-A96CAA1AD009D03D",
+          "contractSemanticTarget": "grandfather",
+          "occurrencePaths": [
+            "options[2].media"
+          ]
+        },
+        {
+          "questionId": "Y2M03-Q018",
+          "mediaId": "IMG-V11-2B-40A6ADFB20D21B5C",
+          "contractSemanticTarget": "grandfather",
+          "occurrencePaths": [
+            "mediaBindings[0]"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/originals/DUDUQ-Y2M03-GRANDFATHER-ORIGINAL.png"
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-2A98427C663DCF84",
+        "IMG-V11-2B-40A6ADFB20D21B5C",
+        "IMG-V11-2B-9FFFCCD19B67697A",
+        "IMG-V11-2B-A96CAA1AD009D03D"
+      ],
+      "crossModuleSharedMediaIds": [
+        "IMG-V11-2B-2A98427C663DCF84",
+        "IMG-V11-2B-40A6ADFB20D21B5C",
+        "IMG-V11-2B-9FFFCCD19B67697A"
+      ]
+    }
+  ],
+  "sourceRegistryPinEvidence": "source-registry-pin.json",
+  "generationProvenanceEvidence": "generation-provenance.json",
+  "generationSemanticEvidence": "generation-semantic-evidence.json",
+  "alphaComponentAudit": "alpha-component-audit.json",
+  "preexistingOriginalAudit": "preexisting-original-audit.json"
+}

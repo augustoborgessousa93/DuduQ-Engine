@@ -1,0 +1,572 @@
+{
+  "schemaVersion": "DUDUQ_Y2M03_SOURCE_REGISTRY_PIN_V1",
+  "status": "SOURCE_AND_REGISTRY_HASHES_PINNED_UNCHANGED",
+  "moduleId": "Y2M03",
+  "createdAt": "2026-11-02T00:27:30.280Z",
+  "activeQuestionSource": "dist-pages/content/english/year-2/module-03/questions.json",
+  "activeQuestionSourceSha256Before": "7327f42a04ad686ac83dc4267901b368e6aab7ab1f3294e2421dfc278b134d13",
+  "activeQuestionSourceSha256After": "7327f42a04ad686ac83dc4267901b368e6aab7ab1f3294e2421dfc278b134d13",
+  "questionInvariantSha256": "fb15e941fcae25be7afbd42aa743e8908937cfd0d8b22dad75d495fc18df1420",
+  "registrySource": "dist-pages/content/english/media/media-registry.json",
+  "registrySha256Before": "36d8a4c140cf2d3e146bb056a81528993ee13d70b33b3d05419a0ec39101b670",
+  "registrySha256After": "36d8a4c140cf2d3e146bb056a81528993ee13d70b33b3d05419a0ec39101b670",
+  "sourceRegistryEntryCount": 22,
+  "sourceQuestionUsageRecords": 88,
+  "sourceMediaIds": [
+    "IMG-V11-2B-0B3D9B91B561EC5C",
+    "IMG-V11-2B-0E55AE94BCF4CC3E",
+    "IMG-V11-2B-1548F798460AFEA3",
+    "IMG-V11-2B-243B96C39D99CAF8",
+    "IMG-V11-2B-2680DF6BE58F4B7E",
+    "IMG-V11-2B-2A98427C663DCF84",
+    "IMG-V11-2B-40A6ADFB20D21B5C",
+    "IMG-V11-2B-496D1E3286303401",
+    "IMG-V11-2B-4E340696427A4167",
+    "IMG-V11-2B-6ACC979A1C714F7F",
+    "IMG-V11-2B-72DD748C89819898",
+    "IMG-V11-2B-9FFFCCD19B67697A",
+    "IMG-V11-2B-A96CAA1AD009D03D",
+    "IMG-V11-2B-D0EB658ED5021195",
+    "IMG-V11-2B-D2B2759DE5619C8A",
+    "IMG-V11-2B-E1B1A5B8AABB306D",
+    "IMG-V11-2B-E5BCAF6E35391096",
+    "IMG-V11-2B-E79FA90D33A3754B",
+    "IMG-V11-2B-EB195E7418543F4E",
+    "IMG-V11-2B-F3663EB03B9FA720",
+    "IMG-V11-2B-F8F1532BA0C59828",
+    "IMG-V11-2B-FF1C87306E179ABE"
+  ],
+  "registryEntryProjectionSha256": "6f6f8e5980baecaf697db2e90817de4b8aa3da26cabcecdd7aec5b71f084fe75",
+  "sourceUsageProjectionSha256": "7da341180c1b782950591834ad0f30ed675c3bf411b581a3e48be1869ba6c8cb",
+  "relevantRegistryEntries": [
+    {
+      "mediaId": "IMG-V11-2B-0B3D9B91B561EC5C",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-0b3d9b91b561ec5c.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-0b3d9b91b561ec5c.svg",
+          "sha256": "67f963929dfb8a41863c389be3d9fa2c1ca4356a75b553d42097f68c5739abbb",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-0e55ae94bcf4cc3e.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-0e55ae94bcf4cc3e.svg",
+          "sha256": "f8eddb8c910ea496cc2e2b431e855e37d67447d4da763ac91f8f00c7130bc7d3",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-1548F798460AFEA3",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-1548f798460afea3.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-1548f798460afea3.svg",
+          "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-243b96c39d99caf8.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-243b96c39d99caf8.svg",
+          "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-2680df6be58f4b7e.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-2680df6be58f4b7e.svg",
+          "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-2A98427C663DCF84",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-2a98427c663dcf84.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-2a98427c663dcf84.svg",
+          "sha256": "e07f6183b5c92ad38d96d4c68455a92b1b6048964de9a4f04cfc774de3ace759",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-40A6ADFB20D21B5C",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-40a6adfb20d21b5c.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-40a6adfb20d21b5c.svg",
+          "sha256": "e07f6183b5c92ad38d96d4c68455a92b1b6048964de9a4f04cfc774de3ace759",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-496D1E3286303401",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-496d1e3286303401.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-496d1e3286303401.svg",
+          "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-4E340696427A4167",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-4e340696427a4167.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-4e340696427a4167.svg",
+          "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-6acc979a1c714f7f.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-6acc979a1c714f7f.svg",
+          "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-72DD748C89819898",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-72dd748c89819898.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-72dd748c89819898.svg",
+          "sha256": "f8eddb8c910ea496cc2e2b431e855e37d67447d4da763ac91f8f00c7130bc7d3",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-9fffccd19b67697a.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-9fffccd19b67697a.svg",
+          "sha256": "e07f6183b5c92ad38d96d4c68455a92b1b6048964de9a4f04cfc774de3ace759",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-A96CAA1AD009D03D",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-a96caa1ad009d03d.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-a96caa1ad009d03d.svg",
+          "sha256": "e07f6183b5c92ad38d96d4c68455a92b1b6048964de9a4f04cfc774de3ace759",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-D0EB658ED5021195",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-d0eb658ed5021195.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-d0eb658ed5021195.svg",
+          "sha256": "67f963929dfb8a41863c389be3d9fa2c1ca4356a75b553d42097f68c5739abbb",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-d2b2759de5619c8a.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-d2b2759de5619c8a.svg",
+          "sha256": "351edb13913cfc06e2018872dba10c4468f0eecff1dafb7db3083f4106e39204",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-e1b1a5b8aabb306d.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-e1b1a5b8aabb306d.svg",
+          "sha256": "f8eddb8c910ea496cc2e2b431e855e37d67447d4da763ac91f8f00c7130bc7d3",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-E5BCAF6E35391096",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-e5bcaf6e35391096.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-e5bcaf6e35391096.svg",
+          "sha256": "67f963929dfb8a41863c389be3d9fa2c1ca4356a75b553d42097f68c5739abbb",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-e79fa90d33a3754b.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-e79fa90d33a3754b.svg",
+          "sha256": "351edb13913cfc06e2018872dba10c4468f0eecff1dafb7db3083f4106e39204",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-EB195E7418543F4E",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-eb195e7418543f4e.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-eb195e7418543f4e.svg",
+          "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-F3663EB03B9FA720",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-f3663eb03b9fa720.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-f3663eb03b9fa720.svg",
+          "sha256": "351edb13913cfc06e2018872dba10c4468f0eecff1dafb7db3083f4106e39204",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-F8F1532BA0C59828",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-f8f1532ba0c59828.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-f8f1532ba0c59828.svg",
+          "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    },
+    {
+      "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+      "registryStatus": "APPROVED",
+      "canonicalClosureStatus": "PROVISIONAL",
+      "kind": "image",
+      "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-ff1c87306e179abe.svg",
+      "assets": [
+        {
+          "path": "content/english/assets/images/v11-2b/img-v11-2b-ff1c87306e179abe.svg",
+          "sha256": "67f963929dfb8a41863c389be3d9fa2c1ca4356a75b553d42097f68c5739abbb",
+          "temporary": false
+        }
+      ],
+      "temporary": false,
+      "integrationStatus": "SOURCE_READY",
+      "humanResolutionStatus": null
+    }
+  ],
+  "crossModuleSharedIds": [
+    {
+      "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+      "semanticTarget": "brother",
+      "modules": [
+        "Y2M03",
+        "Y3M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+      "semanticTarget": "mother",
+      "modules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+      "semanticTarget": "sister",
+      "modules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-2A98427C663DCF84",
+      "semanticTarget": "grandfather",
+      "modules": [
+        "Y2M03",
+        "Y5M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-40A6ADFB20D21B5C",
+      "semanticTarget": "grandfather",
+      "modules": [
+        "Y2M03",
+        "Y3M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-496D1E3286303401",
+      "semanticTarget": "sister",
+      "modules": [
+        "Y2M03",
+        "Y3M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+      "semanticTarget": "sister",
+      "modules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-72DD748C89819898",
+      "semanticTarget": "brother",
+      "modules": [
+        "Y2M03",
+        "Y3M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+      "semanticTarget": "grandfather",
+      "modules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+      "semanticTarget": "father",
+      "modules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+      "semanticTarget": "brother",
+      "modules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+      "semanticTarget": "father",
+      "modules": [
+        "Y2M03",
+        "Y3M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-EB195E7418543F4E",
+      "semanticTarget": "mother",
+      "modules": [
+        "Y2M03",
+        "Y3M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-F3663EB03B9FA720",
+      "semanticTarget": "father",
+      "modules": [
+        "Y2M03",
+        "Y3M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-F8F1532BA0C59828",
+      "semanticTarget": "mother",
+      "modules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ]
+    },
+    {
+      "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+      "semanticTarget": "grandmother",
+      "modules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ]
+    }
+  ],
+  "evidenceHashes": {
+    "batch-manifest.json": "fc65535065f362f5f2c16b462ff55fd665923bed7c84f8e091c5159550942e0c",
+    "generation-batch-manifest.json": "fc65535065f362f5f2c16b462ff55fd665923bed7c84f8e091c5159550942e0c",
+    "question-inventory.json": "33300b063efcccc1574e829e0f0ef621ccf5a18fe8940f679fd7cc02b2f51bbf",
+    "binding-plan.json": "496de9486258ab655cbbc819acc4c8657254c972e9159c8028a128f878e9f091",
+    "generation-provenance.json": "090e0dfbbb6c39318036cc4ce9c5c032a9bcf1ab32642b80d043e8b14e6fd80a",
+    "generation-semantic-evidence.json": "db47b947c19eb9634bc385c29396ae9ed8c5c75f328a3e0276ac88ed3c5d7d8c",
+    "png-validation.json": "bda32fd8ef66132b8a0410fe142a7ba400addae0743494ef6331985e0353030b",
+    "alpha-component-audit.json": "9d52acc85b15444ccc14046579348d46509df6f6c4ac73d16850f7ab039d37de",
+    "preexisting-original-audit.json": "454cf000b2f25f7e2c33ecc2a642c140581d1bbc5d7702d8a1643d435553b6b8"
+  },
+  "sourceHashesRewritten": false,
+  "answerKeysModified": false,
+  "mechanicsModified": false,
+  "runtimeModified": false,
+  "productionApproved": false,
+  "goldMastersModified": false
+}

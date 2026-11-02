@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "DUDUQ_PREEXISTING_ORIGINAL_PNG_AUDIT_V1",
+  "createdAt": "2026-11-02T00:27:30.280Z",
+  "moduleId": "Y2M03",
+  "searchScope": [
+    "content/english/assets/images/**/*.png with exact concept token in filename",
+    "qa/media-candidates/*/batch-manifest.json with exact normalized semanticTarget"
+  ],
+  "concepts": [
+    "mother",
+    "father",
+    "brother",
+    "sister",
+    "grandmother",
+    "grandfather"
+  ],
+  "namedPngMatches": [],
+  "priorManifestExactSemanticMatches": [],
+  "verifiedReusableOriginalPngCount": 0,
+  "reusedOriginalPngCount": 0,
+  "decision": "NO_PREEXISTING_VERIFIED_EXACT_ORIGINAL_PNG_FOUND; SIX UNIQUE CONCEPTS GENERATED ONCE",
+  "currentRegistrySourceFormat": "SVG",
+  "currentRegistryAssetsAreProvisional": false,
+  "currentRegistryStatus": "APPROVED_SOURCE_READY",
+  "canonicalClosureStatus": "PROVISIONAL_DUE_IMAGE_REFINEMENT_PENDING"
+}
