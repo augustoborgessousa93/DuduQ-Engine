@@ -102,6 +102,22 @@ try{
      // Other questions still receive exploratory probes, NOT answer certification.
      const probeIndices=verifiedQ011?[verifiedIndex]:Array.from({length:count},(_,i)=>i);
      if(id==='Y3M06-Q005'||id==='Y4M05-Q006')entry.compiledQuestionForDiagnosis=q;
+     // Observe the real event chain for the unresolved multimedia case. Passive
+     // capture listeners are diagnostic only: they never prevent or synthesize input.
+     if(id==='Y2M02-Q011')await page.evaluate(()=>{
+      window.__duduqQaDragEvents=[];
+      const types=['pointerdown','pointermove','pointerup','dragstart','dragenter','dragover','drop','dragend','touchstart','touchend'];
+      for(const type of types)document.addEventListener(type,event=>{
+       const events=window.__duduqQaDragEvents;
+       if(events.length>=100)return;
+       if(type==='pointermove'&&events.filter(e=>e.type==='pointermove').length>=5)return;
+       const el=event.target;
+       events.push({type,tag:el?.tagName||null,
+        itemId:el?.closest?.('[data-item-id]')?.getAttribute('data-item-id')||null,
+        dropId:el?.closest?.('[data-drop-target-id]')?.getAttribute('data-drop-target-id')||null,
+        trusted:event.isTrusted,at:Math.round(performance.now())});
+      },{capture:true,passive:true});
+     });
      for(const i of probeIndices){
       const destination=destinations.nth(i);
       if(!await destination.isVisible().catch(()=>false))continue;
@@ -122,6 +138,13 @@ try{
        const el=document.elementFromPoint(p.x,p.y);
        return {tag:el?.tagName||null,className:String(el?.className||'').slice(0,120)};
       },finish);
+      const sourceHit=await page.evaluate(p=>{
+       const el=document.elementFromPoint(p.x,p.y);
+       return {tag:el?.tagName||null,className:String(el?.className||'').slice(0,120),
+        itemId:el?.closest?.('[data-item-id]')?.getAttribute('data-item-id')||null,
+        insideAudioControl:!!el?.closest?.('.audio-button,button,[role="button"]'),
+        draggable:el?.closest?.('[draggable]')?.getAttribute('draggable')||null};
+      },start);
       const idsBefore=await destination.locator('[data-item-id]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('data-item-id')));
       await page.mouse.move(start.x,start.y,{steps:3});
       await page.mouse.down();
@@ -131,7 +154,7 @@ try{
       await page.waitForTimeout(650);
       const idsAfter=await destination.locator('[data-item-id]').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('data-item-id')));
       const placed=!idsBefore.includes(sourceId)&&idsAfter.includes(sourceId);
-      entry.dragAttempts.push({sourceId,destinationIndex:i,destinationId:await destination.getAttribute('data-drop-target-id'),source:start,destination:finish,hit,idsBefore,idsAfter,placed});
+      entry.dragAttempts.push({sourceId,destinationIndex:i,destinationId:await destination.getAttribute('data-drop-target-id'),source:start,destination:finish,sourceHit,hit,idsBefore,idsAfter,placed});
       if(placed){
        entry.inputObserved=true;
        entry.drag=entry.dragAttempts[entry.dragAttempts.length-1];
@@ -204,6 +227,25 @@ try{
        try{await page.screenshot({path:out+'/'+id+'-failed-drop.png',fullPage:true})}catch{}
        break;
       }
+     }
+     if(!entry.inputObserved&&id==='Y2M02-Q011'){
+      // Capture the unresolved case even if the game remains READY and no retry
+      // control appears. Prior QA captured the DOM only after a gate timeout.
+      entry.q011DragDiagnostic=await page.evaluate(()=>{
+       const rect=el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}};
+       const describe=el=>({id:el.getAttribute('data-item-id'),targetId:el.getAttribute('data-drop-target-id'),
+        text:(el.innerText||'').slice(0,120),rect:rect(el)});
+       return {gameState:document.querySelector('#game')?.dataset.duduqInteractionState||null,
+        events:window.__duduqQaDragEvents||[],
+        sources:[...document.querySelectorAll('.dnd-multimedia-drag-word-bank [data-item-id]')].map(describe),
+        destinations:[...document.querySelectorAll('[data-drop-target-id]')].map(describe),
+        visibleFeedback:[...document.querySelectorAll('[class*="feedback"]')]
+         .filter(el=>{const r=el.getBoundingClientRect();return r.width>0&&r.height>0})
+         .slice(0,15).map(el=>({text:(el.innerText||'').slice(0,120),rect:rect(el)}))};
+      }).catch(e=>({captureError:String(e)}));
+      await writeFile(out+'/'+id+'-pointer-chain.json',JSON.stringify({contractPair:entry.verifiedContractPair,
+       attempts:entry.dragAttempts,diagnostic:entry.q011DragDiagnostic},null,2)+'\\n');
+      try{await page.screenshot({path:out+'/'+id+'-pointer-chain.png',fullPage:true})}catch{}
      }
      if(!entry.inputObserved)entry.limitations.push('POINTER_DRAG_DID_NOT_PROVE_PLACEMENT');
     }catch(e){entry.limitations.push('DRAG_PROBE_ERROR:'+String(e.message||e).slice(0,220))}
