@@ -136,7 +136,39 @@ try{
         entry.limitations.push('WRONG_DROP_RETRY_NOT_READY:'+String(e.message||e).slice(0,150));
        }
       }
-      if(!readyAgain)break;
+      if(!readyAgain){
+       // Capture actual DOM evidence instead of equating a missing retry label
+       // with a mechanic failure. This is diagnostic only, never a PASS.
+       entry.failedDropDiagnostic=await page.evaluate(()=>{
+        const game=document.querySelector('#game');
+        const visible=el=>{
+         const r=el.getBoundingClientRect(),cs=getComputedStyle(el);
+         return r.width>0&&r.height>0&&cs.display!=='none'&&cs.visibility!=='hidden';
+        };
+        const describe=el=>({
+         tag:el.tagName,
+         text:(el.innerText||el.textContent||'').trim().slice(0,160),
+         className:String(el.className||'').slice(0,180),
+         role:el.getAttribute('role'),
+         ariaLabel:el.getAttribute('aria-label'),
+         disabled:el.disabled===true,
+         bounds:(()=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}})()
+        });
+        return {
+         gameState:game?.dataset.duduqInteractionState||null,
+         gameAttributes:game?Object.fromEntries([...game.attributes].map(a=>[a.name,a.value])):{},
+         controls:[...document.querySelectorAll('button,[role="button"],input[type="button"],input[type="submit"]')].filter(visible).slice(0,50).map(describe),
+         feedback:[...document.querySelectorAll('[class*="feedback"],[role="dialog"],[aria-live]')].filter(visible).slice(0,35).map(describe),
+         draggableCount:[...document.querySelectorAll('[data-item-id]')].filter(visible).length,
+         dropTargets:[...document.querySelectorAll('.dnd-options-cards-group__category,[data-drop-target-id]')].filter(visible).slice(0,12).map(describe)
+        };
+       }).catch(e=>({captureError:String(e)}));
+       if(id==='Y3M06-Q017'){
+        await writeFile(out+'/'+id+'-failed-drop-dom.json',JSON.stringify(entry.failedDropDiagnostic,null,2)+'\\n');
+        try{await page.screenshot({path:out+'/'+id+'-failed-drop.png',fullPage:true})}catch{}
+       }
+       break;
+      }
      }
      if(!entry.inputObserved)entry.limitations.push('POINTER_DRAG_DID_NOT_PROVE_PLACEMENT');
     }catch(e){entry.limitations.push('DRAG_PROBE_ERROR:'+String(e.message||e).slice(0,220))}
