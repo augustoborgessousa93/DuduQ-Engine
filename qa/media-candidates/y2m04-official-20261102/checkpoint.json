@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "DUDUQ_CODEX_IMAGE_GENERATION_CHECKPOINT_V1",
+  "createdAt": "2026-11-02T07:18:00.410Z",
+  "lane": "generation",
+  "moduleId": "Y2M04",
+  "status": "GENERATION_CANDIDATES_COMPLETE_PROJECT_INCOMPLETE",
+  "idempotencyKey": "21653f6dca488080640089335215584f79e5a76e68ac910c5560a8b09ae4b8b6",
+  "sourceState": {
+    "questionSource": "dist-pages/content/english/year-2/module-04/questions.json",
+    "questionSourceSha256": "9f4c0a5e44d4beb29abd9594cc8a8a79832e3f31fa3741b7f3498cc7463c3d87",
+    "registrySource": "dist-pages/content/english/media/media-registry.json",
+    "registrySha256": "ce8b74d3087e513622ff1efc9a999536c98744578d1989b0222b427b33f9d1c2",
+    "activeContractQuestionCount": 20,
+    "sourceAndRegistryHashesUnchanged": true
+  },
+  "inventory": {
+    "actualQuestions": 20,
+    "pendingMediaIds": 38,
+    "uniqueExactConcepts": 23,
+    "concepts": [
+      "doll",
+      "ball",
+      "train",
+      "plane",
+      "teddy bear",
+      "kite",
+      "video game",
+      "boat",
+      "red",
+      "blue",
+      "yellow",
+      "green",
+      "black",
+      "white",
+      "orange",
+      "purple",
+      "gray",
+      "brown",
+      "in",
+      "on",
+      "under",
+      "behind",
+      "beside"
+    ],
+    "visibleUsageRecords": 76,
+    "occurrenceScopedBindingIds": 72,
+    "preexistingVerifiedOriginalPngs": 6
+  },
+  "generation": {
+    "nativeGeneratedConcepts": 17,
+    "successfulCandidates": 23,
+    "reusedVerifiedOriginals": 6,
+    "rejectedAttemptsPreserved": 3,
+    "generatorBlocked": false,
+    "allRemainingY2M04ConceptsCovered": true,
+    "assetFingerprintSha256": "61dc7b71c2f13c79f943dd4c588b15957c2bf6729069069ade23fe1c27242e92"
+  },
+  "validation": {
+    "validRgbaPngs": 23,
+    "invalidPngs": 0,
+    "realAlphaPassed": 23,
+    "noMicroOpaqueIslandsPassed": 23,
+    "semanticPrecheckPassed": 23,
+    "humanHomologation": "PENDING_NOT_CLAIMED",
+    "bindingCoverage": {
+      "pendingMediaIds": 38,
+      "candidateBoundMediaIds": 38,
+      "uncovered": 0,
+      "occurrenceScopedBindingIds": 72
+    },
+    "questionContractsReviewed": 20,
+    "testExecution": [
+      {
+        "command": "node qa/tests/png-alpha-component-audit.test.mjs",
+        "status": "PASS",
+        "tests": 3,
+        "failures": 0
+      },
+      {
+        "command": "node qa/duduq-two-lane-plan.mjs --output=qa/media-candidates/y2m04-official-20261102/two-lane-verification.json",
+        "status": "PASS_CANDIDATES_READY",
+        "candidateAssets": 23,
+        "verifiedBindingIds": 72
+      }
+    ]
+  },
+  "twoLaneVerification": {
+    "status": "PASS_CANDIDATES_READY",
+    "output": "two-lane-verification.json",
+    "outputSha256": "48525dd2a41b467eb48a49107a61e01841c658de5c02dce699dfe2d5ab36c9cc",
+    "y2m04": {
+      "moduleId": "Y2M04",
+      "pendingMediaReferences": 38,
+      "localComplete": false,
+      "candidate": {
+        "moduleId": "Y2M04",
+        "manifest": "qa/media-candidates/y2m04-official-20261102/batch-manifest.json",
+        "manifestSha256": "17333175db61524e4ffee84d3baae92b4f3f49488f504ef147dc40b10d2f334a",
+        "assetFingerprintSha256": "61dc7b71c2f13c79f943dd4c588b15957c2bf6729069069ade23fe1c27242e92",
+        "assetCount": 23,
+        "validAssetCount": 23,
+        "verifiedBindingIds": 72,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    }
+  },
+  "integrityGuards": {
+    "candidateWritesRestrictedTo": "qa/media-candidates/y2m04-official-20261102/",
+    "questionJsonModified": false,
+    "runtimeModified": false,
+    "registryModified": false,
+    "mediaOverlayApplied": false,
+    "approvalFlagsChanged": false,
+    "existingReferencedAssetsRemoved": false,
+    "goldMastersModified": false,
+    "productionModified": false,
+    "productionMergeOrDeployRun": false,
+    "secondCodexProcessStarted": false,
+    "apiOrSubscriptionPurchaseMade": false,
+    "originalDirtyWorkspaceModified": false
+  },
+  "evidenceHashes": {
+    "batch-manifest.json": "17333175db61524e4ffee84d3baae92b4f3f49488f504ef147dc40b10d2f334a",
+    "generation-batch-manifest.json": "17333175db61524e4ffee84d3baae92b4f3f49488f504ef147dc40b10d2f334a",
+    "question-inventory.json": "e44afe64bd04a399b20251f6f1709b96c85999b279c31abc0b2579ad3c52cd5e",
+    "binding-plan.json": "564141b8b32e1a2aa32ee957cafd718dae2d812a83d6e95c158fc8bbd23335f4",
+    "generation-provenance.json": "cc5b38588f5c1ab21e6bcc80727d6f4fd966a898f48e331cacad4a410f2c87ba",
+    "generation-semantic-evidence.json": "80f7b1567297095eb5c66d428499848d66cacceb1787f389b0424c1582b4d9bf",
+    "png-validation.json": "bdb8cc60369132ded5534ee469117c74a58ac7b393d60df3d5746594cfd1f40b",
+    "alpha-component-audit.json": "16f6a72f5cf83ab37369f3b3491b19ae16001856ae743ea5e202662b8a1932b6",
+    "preexisting-original-audit.json": "eba9ecf82b86862a1e1582c7d29d9c1f6040333337601c25f2ee7efb3aaae3a5",
+    "source-registry-pin.json": "2695bf88e1cade3a0739620d561964a967bd811328eaf2fd419171c4c9039afc",
+    "semantic-evidence.json": "eb30631858804e25913594f698328290ee53a24856a84f6e27e3cf2c9fbd158e",
+    "two-lane-verification.json": "48525dd2a41b467eb48a49107a61e01841c658de5c02dce699dfe2d5ab36c9cc"
+  },
+  "git": {
+    "branch": "automation/duduq-media-source-only-fix-20261029",
+    "headBefore": "71f6acdc4e0b28dd7fe230a4ad99d02bd88fdcbb",
+    "candidateBatchCommit": "19430200dca14bfe47d713c87ca1487aa174f0f0",
+    "commitStatusAtCheckpointWrite": "LOCAL_PATH_SCOPED_COMMIT_CREATED",
+    "pushStatusAtCheckpointWrite": "BLOCKED_BY_REMOTE_EGRESS_SAFETY_REVIEW",
+    "verifiedRemote": "https://github.com/augustoborgessousa93/DuduQ-Engine.git",
+    "requestedRemoteBranch": "automation/duduq-media-source-only-fix-20261029",
+    "pushAttempted": true,
+    "pushCompleted": false,
+    "pushBlocker": "The execution safety layer rejected transmission of generated assets and internal candidate metadata to the external Git remote because the trusted instructions did not explicitly authorize this exact destination after risk disclosure. No workaround was attempted and no files were transmitted."
+  },
+  "globalStateAtAudit": {
+    "modules": 30,
+    "activities": 600,
+    "completedModules": 1,
+    "distinctPendingMediaIds": 1055
+  },
+  "projectComplete": false,
+  "projectStatus": "IN_PROGRESS",
+  "projectCompletionReason": "Y2M04 has a complete candidate-only generation bundle, but it is not integrated, independently QA-approved, or human-homologated; the global ledger still reports 1055 pending media IDs and release gates are not proven."
+}
