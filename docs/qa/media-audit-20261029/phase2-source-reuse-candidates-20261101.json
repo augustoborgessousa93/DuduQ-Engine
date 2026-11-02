@@ -43,7 +43,7 @@
   ],
   "candidateMediaIds": 38,
   "queueReportedQuestionUsages": 54,
-  "distinctListedQuestions": 38,
+  "distinctListedQuestions": 39,
   "distinctListedModules": [
     "Y1M03",
     "Y1M06",
@@ -78,11 +78,13 @@
         "Y2M02-Q015",
         "Y2M04-Q003",
         "Y2M04-Q015",
-        "Y3M05-Q015"
+        "Y3M05-Q015",
+        "Y4M05-Q005"
       ],
       "semanticConflict": false,
       "sourceStatus": "PROVISIONAL",
-      "candidateStatus": "PEDAGOGICAL_QA_PENDING"
+      "candidateStatus": "HOLD_SHARED_ID_EXPLICIT_SEMANTIC_REVIEW",
+      "implicitSemanticOccurrences": 1
     },
     {
       "mediaId": "IMG-Y1M03-Q006-BROWN",
@@ -598,5 +600,15 @@
   "qaPassed": false,
   "pedagogicalQAApproved": false,
   "releaseApproved": false,
-  "productionDeployed": false
+  "productionDeployed": false,
+  "auditCorrections": [
+    {
+      "mediaId": "IMG-Y1M03-Q001-BLACK",
+      "evidenceRun": 41393231292,
+      "actualDistinctQuestions": 6,
+      "missingQuestionAdded": "Y4M05-Q005",
+      "implicitNestedSemanticAt": "Y3M05-Q015",
+      "decision": "HOLD_PROVISIONAL_UNTIL_ALL_NESTED_SEMANTICS_VERIFIED"
+    }
+  ]
 }
