@@ -1338,3 +1338,54 @@ jobs:
             qa/results/phase2-multilingual-source-qa-patch.json
             qa/results/phase2-multilingual-source-browser.json
             qa/results/phase2-multilingual-source-browser/*.png
+
+
+  phase2-diagnose-six-141:
+    if: ${{ github.ref_name == 'qa/duduq-phase2-source-expansion-20261102' && github.event_name == 'push' && contains(github.event.head_commit.message, '[diagnostic-141]') }}
+    name: Extract SIX actual failed visual checks from existing 141-ID immutable QA
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+      actions: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Read existing QA artifact, do not rebuild, retest or modify source
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/phase2-six qa-diag
+          gh run download 41547068602 --repo augustoborgessousa93/DuduQ-Engine \
+            --name duduq-phase2-safe-141-representative-visual-qa \
+            --dir /tmp/phase2-six
+          python3 - <<'PY'
+          import glob,json
+          matches=glob.glob('/tmp/phase2-six/**/phase2-multilingual-source-browser.json',recursive=True)
+          assert len(matches)==1, 'EXPECTED_PREVIOUS_141_VISUAL_REPORT'
+          report=json.load(open(matches[0],encoding='utf8'))
+          failed=report['failed']
+          assert len(failed)==6, 'FAILED_COUNT_CHANGED'
+          focused=[]
+          for issue in failed:
+           matches=[c for c in report['cases'] if c['questionId']==issue['questionId'] and c['viewport']==issue['viewport']]
+           assert len(matches)==1,'MISSING_FAILED_DIAGNOSTIC'
+           c=matches[0]
+           focused.append({'questionId':c['questionId'],'mechanic':c['mechanic'],
+            'viewport':c['viewport'],'required':c['required'],
+            'visiblePaths':c['visiblePaths'],'loadedPaths':c['loadedPaths'],
+            'errors':c['errors'],'frames':c['frames'],
+            'bubbleFrameSeen':c['bubbleFrameSeen'],
+            'bubbleImageElements':c['bubbleImageElements'],
+            'mainInteractionState':c['mainInteractionState'],
+            'frameDiagnostics':c['frameDiagnostics']})
+          summary={'sourceRun':41547068602,'totalChecks':112,'failed':focused}
+          with open('qa-diag/six-141-visual-failures.json','w',encoding='utf8') as f:
+           json.dump(summary,f,ensure_ascii=False,indent=2)
+          print('SIX_REAL_VISUAL_FAILURES='+json.dumps(summary,ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: duduq-phase2-six-visual-failures-from-141
+          path: qa-diag/six-141-visual-failures.json
+          retention-days: 45
