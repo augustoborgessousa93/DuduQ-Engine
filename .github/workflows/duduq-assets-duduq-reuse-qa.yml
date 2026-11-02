@@ -1503,3 +1503,59 @@ jobs:
             qa/results/phase2-multilingual-source-browser/*.png
             qa/results/duduq-phase2-structured-bilingual-unapproved.tar.gz
             qa/results/duduq-phase2-structured-bilingual-unapproved.sha256
+
+
+  phase2-inspect-structured-source:
+    if: ${{ github.ref_name == 'qa/duduq-phase2-structured-bilingual-20261102' && github.event_name == 'push' && contains(github.event.head_commit.message, '[diagnostic-structured]') }}
+    name: Read structured PT/EN candidate blockers and six failing views, no re-render
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+      actions: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Read preflight and browser results in existing artifact only
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/phase2-structured-info qa-diag
+          gh run download 41548613613 --repo augustoborgessousa93/DuduQ-Engine \
+            --name duduq-phase2-structured-bilingual-qa-package \
+            --dir /tmp/phase2-structured-info
+          python3 - <<'PY'
+          import glob,json,collections
+          def load(name):
+           matches=glob.glob('/tmp/phase2-structured-info/**/'+name,recursive=True)
+           assert len(matches)==1,(name,len(matches))
+           return json.load(open(matches[0],encoding='utf8'))
+          pre=load('phase2-multilingual-source-preflight.json')
+          browser=load('phase2-multilingual-source-browser.json')
+          patch=load('phase2-multilingual-source-qa-patch.json')
+          byreason=collections.Counter(r for x in pre.get('blocked',[]) for r in x.get('reasons',[]))
+          concepts=collections.Counter(x['concept'] for x in pre.get('blocked',[]))
+          source=collections.Counter(x.get('sourcePath') for x in patch.get('bindings',[]))
+          cases=[]
+          for f in browser.get('failed',[]):
+           found=[c for c in browser['cases'] if c['questionId']==f['questionId'] and c['viewport']==f['viewport']]
+           assert len(found)==1
+           c=found[0]
+           cases.append({'id':c['questionId'],'mechanic':c['mechanic'],'viewport':c['viewport'],
+            'required':c['required'],'visiblePaths':c['visiblePaths'],
+            'loadedPaths':c['loadedPaths'],'errors':c['errors'],
+            'frameDiagnostics':c['frameDiagnostics']})
+          out={'sourceRun':41548613613,'eligibleIds':pre['eligibleMediaIds'],
+           'uniqueImages':pre['uniqueImages'],'blockedIds':pre['blockedMediaIds'],
+           'blockedReasons':dict(byreason),'blockedConcepts':dict(concepts),
+           'selectedMediaConcepts':sorted(set(b['concept'] for b in patch['bindings'])),
+           'selectedSourcePaths':dict(source),'visualChecks':browser['checks'],
+           'failures':cases}
+          with open('qa-diag/structured-blockers-and-six-failures.json','w',encoding='utf8') as f:json.dump(out,f,ensure_ascii=False,indent=2)
+          print('STRUCTURED_EXACT_RESULTS='+json.dumps(out,ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: duduq-structured-source-root-causes
+          path: qa-diag/structured-blockers-and-six-failures.json
+          retention-days: 30
