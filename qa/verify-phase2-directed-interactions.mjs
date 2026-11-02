@@ -60,8 +60,38 @@ try{
     continue;
    }
    if(mechanic.startsWith('drag-drop')){
-    entry.limitations.push('DRAG_DROP_REQUIRES_SEPARATE_POINTER_DRAG_AND_DROP_ASSERTION');
+    const multi=mechanic==='drag-drop-multimedia';
+    const source=page.locator(multi?'.dnd-multimedia-drag-word-bank [data-item-id]':'.dnd-image-card-row .dnd-option-image-card[data-item-id]').first();
+    const destination=page.locator(multi?'[data-drop-target-id]':'.dnd-options-cards-group__category').first();
+    try{
+     await source.waitFor({state:'visible',timeout:10000});
+     await destination.waitFor({state:'visible',timeout:10000});
+     const from=await source.boundingBox(),to=await destination.boundingBox();
+     assert(from&&to&&from.width>15&&to.width>15,'DRAG_SOURCE_OR_TARGET_NOT_VISIBLE');
+     const start={x:from.x+from.width/2,y:from.y+from.height/2};
+     const end={x:to.x+to.width/2,y:to.y+to.height/2};
+     const before=await destination.locator('[data-item-id]').count();
+     await page.mouse.move(start.x,start.y,{steps:3});
+     await page.mouse.down();
+     await page.mouse.move(end.x,end.y,{steps:16});
+     await page.mouse.up();
+     entry.inputAttempted=true;
+     await page.waitForTimeout(650);
+     const after=await destination.locator('[data-item-id]').count();
+     entry.drag={source:start,destination:end,before,after};
+     entry.inputObserved=after>before;
+     if(!entry.inputObserved)entry.limitations.push('POINTER_DRAG_DID_NOT_PROVE_PLACEMENT');
+    }catch(e){entry.limitations.push('DRAG_PROBE_ERROR:'+String(e.message||e).slice(0,220))}
     continue;
+   }
+   if(mechanic==='target-shooter'){
+    try{
+     await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:30000});
+     entry.audioGateReady=true;
+    }catch{
+     entry.limitations.push('AUDIO_GATE_NOT_READY_AFTER_30_SECONDS');
+     continue;
+    }
    }
    const targets=page.locator(selector);
    const deadline=Date.now()+9000;
@@ -77,9 +107,9 @@ try{
    const box=await target.boundingBox();
    if(!box||box.width<16||box.height<16){entry.limitations.push('TARGET_TOO_SMALL');continue}
    const x=box.x+box.width/2,y=box.y+box.height/2;
-   const hit=await target.evaluate((el,p)=>{const n=document.elementFromPoint(p.x,p.y);return !!n&&(n===el||el.contains(n))},{x,y});
+   const hit=await target.evaluate((el,p)=>{const n=document.elementFromPoint(p.x,p.y);return {valid:!!n&&(n===el||el.contains(n)),hitTag:n?.tagName||null,hitClass:String(n?.className||'').slice(0,150),targetPointer:getComputedStyle(el).pointerEvents,hitPointer:n?getComputedStyle(n).pointerEvents:null}},{x,y});
    entry.pointerHitTest=hit;
-   if(!hit){entry.limitations.push('TARGET_OCCLUDED_AT_CENTER');continue}
+   if(!hit.valid){entry.limitations.push('TARGET_OCCLUDED_AT_CENTER');continue}
    const before=await target.evaluate(el=>({className:String(el.className),state:el.getAttribute('data-gameplay-state'),selected:el.getAttribute('aria-selected'),game:document.querySelector('#game')?.getAttribute('data-duduq-interaction-state'),feedback:document.querySelector('.feedback-ribbon')?.getAttribute('data-feedback')}));
    await page.mouse.move(x,y,{steps:3});
    await page.mouse.down();
