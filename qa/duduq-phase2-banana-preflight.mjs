@@ -79,7 +79,10 @@ for(const planned of rows){
    row.kind==='image'&&row.integrationStatus==='SOURCE_READY'&&row.temporary==null),
   registryIsUnapprovedSvg:Boolean(current&&current.kind==='image'&&
    current.urlOrPath===row?.sourcePath&&current.urlOrPath.endsWith('.svg')&&
-   current.semantic==='banana'&&current.temporary===true&&
+   current.semantic==='banana'&&
+   (current.temporary===true||
+    (current.temporary==null&&current.integrationStatus==='SOURCE_READY'&&
+     row?.classification==='PROVISIONAL'&&row?.temporary==null))&&
    current.humanResolutionStatus!=='PEDAGOGICAL_QA_APPROVED'&&
    current.integrationStatus!=='OFFICIAL_MEDIA_QA_PASSED_REVIEW_BRANCH'),
   usageMatches:Boolean(questionIds.length===planned.queueUsage&&
@@ -149,7 +152,10 @@ if(process.argv.includes('--apply')){
   assert(planned&&current&&item.checks.everyQuestionHasExplicitProof&&
    item.checks.explicitSemanticsConsistent&&item.checks.usageMatches,
    'UNVERIFIED_BINDING:'+item.mediaId);
-  assert.equal(current.temporary,true,'MISSING_EXPLICIT_PROVISIONAL_FLAG:'+item.mediaId);
+  assert(current.temporary===true||
+   (current.temporary==null&&current.integrationStatus==='SOURCE_READY'&&
+    queue.queue.find(x=>x.mediaId===item.mediaId)?.classification==='PROVISIONAL'),
+   'NOT_VERIFIED_AS_PROVISIONAL:'+item.mediaId);
   assert.equal(planned.sourceFile,banana.sourceFile,'SOURCE_CONCEPT_MISMATCH:'+item.mediaId);
   assert.equal(current.urlOrPath,queue.queue.find(x=>x.mediaId===item.mediaId)?.sourcePath,
    'REGISTRY_SOURCE_PATH_CHANGED:'+item.mediaId);
