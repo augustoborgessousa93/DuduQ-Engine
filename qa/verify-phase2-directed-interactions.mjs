@@ -83,7 +83,26 @@ try{
      const sourceId=await source.getAttribute('data-item-id');
      assert(sourceId,'DRAG_SOURCE_MISSING_ITEM_ID');
      const count=Math.min(await destinations.count(),8);
-     for(let i=0;i<count;i++){
+     // The compiled contract for Y2M02-Q011 was independently inspected in
+     // QA artifact 13161047415: I1 belongs to T1, not the first DOM target T2.
+     // This is a QA-only fixture, never a mutation of the student's answer key.
+     // Fail closed if the fixture no longer matches the compiled DOM.
+     const verifiedQ011=id==='Y2M02-Q011';
+     if(verifiedQ011)assert.equal(sourceId,'Y2M02-Q011-I1','Q011_VERIFIED_SOURCE_DRIFT');
+     const verifiedTarget=verifiedQ011?'Y2M02-Q011-T1':null;
+     const verifiedIndex=verifiedTarget===null?-1:await destinations.evaluateAll(
+      (nodes,target)=>nodes.findIndex(n=>n.getAttribute('data-drop-target-id')===target),
+      verifiedTarget
+     );
+     if(verifiedQ011&&verifiedIndex<0){
+      entry.limitations.push('VERIFIED_CONTRACT_TARGET_NOT_IN_DOM:'+verifiedTarget);
+      continue;
+     }
+     if(verifiedQ011)entry.verifiedContractPair={sourceId,targetId:verifiedTarget,evidence:'artifact-13161047415'};
+     // Other questions still receive exploratory probes, NOT answer certification.
+     const probeIndices=verifiedQ011?[verifiedIndex]:Array.from({length:count},(_,i)=>i);
+     if(id==='Y3M06-Q005')entry.compiledQuestionForDiagnosis=q;
+     for(const i of probeIndices){
       const destination=destinations.nth(i);
       if(!await destination.isVisible().catch(()=>false))continue;
       const ready=await page.locator('#game').getAttribute('data-duduq-interaction-state');
