@@ -1,0 +1,287 @@
+{
+  "schemaVersion": "DUDUQ_CODEX_IMAGE_CLOSURE_INTEGRATION_CHECKPOINT_V3",
+  "createdAt": "2026-11-02T15:53:15.1559872Z",
+  "status": "BLOCKED_QA_PROJECT_INCOMPLETE",
+  "lane": "integration",
+  "moduleId": "Y1M05",
+  "branch": "automation/y1m05-integration-qa-20261102",
+  "baseHead": "d98d9841e8e3eb12f80c3dc9ca305717cf4ff45a",
+  "qaCorrectionCommit": "071a55c14ac6cad01e0fcace323451dbeba9dd2e",
+  "scopeProtection": {
+    "isolatedReviewWorktree": true,
+    "originalDirtyWorkspaceModified": false,
+    "sourceQuestionFilesModified": false,
+    "answerKeysModified": false,
+    "mechanicsModified": false,
+    "goldMastersModified": false,
+    "productionMerged": false,
+    "productionDeployed": false,
+    "referencedMediaDeleted": false,
+    "paidApiOrSubscriptionAdded": false,
+    "secondCodexProcessStarted": false,
+    "generationLaneFilesModified": false
+  },
+  "qaCorrection": {
+    "path": "qa/y1m05-official-media-browser-qa.mjs",
+    "purpose": "Accumulate every question-route, pointer, touch and responsive screenshot failure before returning a fail-closed result.",
+    "gateWeakened": false,
+    "approvalForged": false,
+    "behaviorChanged": false,
+    "productChanged": false,
+    "proof": "The complete replay exited 1 with QUESTION_ROUTES and RESPONSIVE_TOUCH_GAMEPLAY failures. Finalization remained blocked."
+  },
+  "sourceRegistryGate": {
+    "status": "PASS_BEFORE_OVERLAY",
+    "context": "PRISTINE_V26_EXACT_WHOLE_REGISTRY_PIN",
+    "cleanV26RegistrySha256": "aa615a3ed307b0e8cae6abf6901a1582c22ab59aa7f95c6339a635ca7d35fc89",
+    "legacyReviewedRegistrySha256": "c56f3ecc5dd608228ccb6d7ba5237ed8da5676cd4fa6f655a9eeb27ce268400c",
+    "sourceQuestionContractSha256": "7ceb00996bfe518fb92a61d9a34fa8ed7b0da0718a111d108ef04dba84ddbdd3",
+    "sourceQuestionInvariantSha256": "c5a715570f4ddf49209ec8020a538aba809811ad755498b13039511af8f53b0a",
+    "sourceRegistryEntryProjectionSha256": "89904f133cba19a8777a40bfe69539def84663953ac5be9522dd1106139609e8",
+    "sourceUsageProjectionSha256": "9378f156a72e8547f02b3c18f6163517fc3d9c004bb565b10795fc62d6334361",
+    "sourceEntries": 101,
+    "sourceUsageRecords": 101,
+    "sourceHashesRewritten": false,
+    "tests": {
+      "passed": 4,
+      "failed": 0,
+      "tamperCasesRejected": 2,
+      "lineEndingCanonicalizationPassed": true
+    },
+    "postOverlayVerifierNote": "A redundant direct invocation after the five scoped IDs were applied rejected SOURCE_QUESTION_CONTRACT as designed. The apply command had already consumed and embedded the successful pristine/predecessor gate."
+  },
+  "candidateBundle": {
+    "batchManifest": "qa/media-candidates/y1m05-official-20261030/batch-manifest.json",
+    "batchManifestSha256": "a1fb983cd41132cfe851d0a84af8b08aec11796ee373c19e50b3352606ee1f56",
+    "semanticEvidence": "qa/media-candidates/y1m05-official-20261030/semantic-evidence.json",
+    "semanticEvidenceSha256": "958d939c86a55c00b031ad8a4180d65a2e67b137c4328d5573755ee6d4eade96",
+    "sourceRegistryRebaseEvidence": "qa/media-candidates/y1m05-official-20261030/source-registry-rebase.json",
+    "sourceRegistryRebaseEvidenceSha256": "11dbb36ec242e559d74b044e642d432c32e8d3362cd967edc524b6ef8ca1e993",
+    "sourceMediaIds": 101,
+    "finalBindingIds": 101,
+    "questionUsageRecords": 101,
+    "occurrenceScopedSplits": 5,
+    "uniquePngs": 10,
+    "assets": [
+      {
+        "concept": "head",
+        "sha256": "3cfe7135cc6e3f44a5e3a9f84475e4da902bfe5a1948605e6b822ca434764c8c"
+      },
+      {
+        "concept": "hands",
+        "sha256": "c56ae4711b50d5ee41d46253f168e1e46ab09321123d22c085ef6db175364828"
+      },
+      {
+        "concept": "arms",
+        "sha256": "ba4d3cfa789b050c22e752afde0868726b7cf37e806063bd25ec902b007c8acb"
+      },
+      {
+        "concept": "legs",
+        "sha256": "688b7842435f0fa02797da3d8433edb88dff09f79373e2f2f7de89365933674a"
+      },
+      {
+        "concept": "feet",
+        "sha256": "162628c4587183735ac0a6841d70c6830142278cb25599fb8f63f1a6e1c56fa0"
+      },
+      {
+        "concept": "sit down",
+        "sha256": "8c7edde7833d27e747e73dba64028c1b1a3fe35c27b01f957622416d239670ac"
+      },
+      {
+        "concept": "stand up",
+        "sha256": "ecb312a233096d2c7424f161f38bfeb69478b78cda1ea50e817d400de0b4dc67"
+      },
+      {
+        "concept": "come in",
+        "sha256": "7c975b666b9416daee5a73468fb57a83a5ec50aa2222a8a35e94f20cc65faad2"
+      },
+      {
+        "concept": "silence, please",
+        "sha256": "bf694ec13a017859f7fa6ba7080952cec3d46fcf9b4e060827889dd50ada951f"
+      },
+      {
+        "concept": "thank you",
+        "sha256": "37028ba73596681aad007d6421bc87af96de1f619032aa31a953d2d16b6c678d"
+      }
+    ],
+    "splits": [
+      "Y1M05-Q001 options[0] IMG-Y1M05-Q001-HEAD -> IMG-Y1M05-Q001-O1-HEAD",
+      "Y1M05-Q001 options[1] IMG-Y1M05-Q001-HANDS -> IMG-Y1M05-Q001-O2-HANDS",
+      "Y1M05-Q001 options[2] IMG-Y1M05-Q001-LEGS -> IMG-Y1M05-Q001-O3-LEGS",
+      "Y1M05-Q001 options[3] IMG-Y1M05-Q001-ARMS -> IMG-Y1M05-Q001-O4-ARMS",
+      "Y1M05-Q003 pairs[3].b IMG-Y1M05-Q003-FEET -> IMG-Y1M05-Q003-B4-FEET"
+    ]
+  },
+  "localQa": {
+    "cleanV26Build": {
+      "status": "PASS",
+      "baseManifestSha256": "5993aaceaff272626c863aef07e1b33a909ca7f9fcc41d2d40890baa6c08b822",
+      "modules": 30,
+      "activities": 600,
+      "goldMastersModified": false
+    },
+    "candidateOverlay": {
+      "status": "PASS_CANDIDATE_ONLY",
+      "compiledManifestSha256": "9fdf39899cc2ae2d5665c32da8579a4c79fdc9f0ed5bdbedb06ccb560e4102a0",
+      "compiledManifestEntries": 2702,
+      "buildReport": "qa/results/y1m05-review-build.json",
+      "buildReportSha256": "15eaa06cc94495138613c9c00ea082f4e21d24e6edc77c8d867a7874ce0cbd5b",
+      "answerKeyChanges": 0,
+      "mechanicChanges": 0,
+      "goldMastersModified": false,
+      "productionDeployed": false
+    },
+    "semanticValidators": {
+      "overlayStaticGate": "PASS",
+      "mediaBindingUsageGuard": "8/8 PASS",
+      "crossContextAudit": "PASS_READ_ONLY; 165 cross-module IDs; 1 homonym quarantined",
+      "retirement": "READ_ONLY_PLAN; applied=false; 9 orphan candidates; no deletion"
+    },
+    "y1m04TargetShooterRace": {
+      "status": "PASS_NO_RUNTIME_CHANGE_REQUIRED",
+      "report": "qa/results/y1m04-official-media-browser/report.json",
+      "reportSha256": "b7a1dfdf8e6820b94b3804e26f7a8e9250dcbcdc81ec7443e732780a2b182524",
+      "routesPassed": "20/20",
+      "transportHashesPassed": "18/18",
+      "screenshotsPassed": "3/3",
+      "input": "native Playwright mouse move/down/up",
+      "incorrectVisibleState": "AWAITING_RETRY / incorrect / TENTAR DE NOVO",
+      "correctVisibleState": "AWAITING_CONTINUE / correct / CONTINUAR",
+      "finding": "The stale opposite action copy exists only while the ribbon is hidden; no stale visible action was observed or clicked.",
+      "runtimeChanged": false
+    },
+    "y1m05Browser": {
+      "status": "FAIL",
+      "report": "qa/results/y1m05-official-media-browser/report.json",
+      "reportSha256": "74980fb8d7315d374c4435c0ea5454e2520a2f08f1936254f3d812d33af44016",
+      "routesPassed": "18/20",
+      "transportHashesPassed": "10/10",
+      "missingRuntimePaths": [],
+      "desktopMouseGameplay": {
+        "pass": true,
+        "input": "native Playwright mouse move/down/up",
+        "incorrectVisibleState": "AWAITING_RETRY / incorrect / TENTAR DE NOVO",
+        "correctVisibleState": "AWAITING_CONTINUE / correct / CONTINUAR"
+      },
+      "tabletTouchGameplay": {
+        "viewport": "768x1024",
+        "pass": true,
+        "input": "native Playwright locator touch tap",
+        "incorrectVisibleState": "AWAITING_RETRY / incorrect / TENTAR DE NOVO",
+        "correctVisibleState": "AWAITING_CONTINUE / correct / CONTINUAR",
+        "fullyContainedOfficialImages": "4/4"
+      },
+      "mobileTouchGameplay": {
+        "viewport": "390x844",
+        "pass": false,
+        "input": "native Playwright locator touch tap",
+        "incorrectVisibleState": "AWAITING_RETRY / incorrect / TENTAR DE NOVO",
+        "correctVisibleState": "AWAITING_CONTINUE / correct / CONTINUAR",
+        "fullyContainedOfficialImages": "3/4",
+        "offendingImage": {
+          "semantic": "arms",
+          "sha256": "ba4d3cfa789b050c22e752afde0868726b7cf37e806063bd25ec902b007c8acb",
+          "x": 361.3,
+          "width": 46.5,
+          "right": 407.8,
+          "viewportRight": 390,
+          "clippedPixels": 17.8
+        }
+      },
+      "questionRouteFailures": [
+        {
+          "questionId": "Y1M05-Q006",
+          "mechanicId": "drag-drop",
+          "explicitExpected": [
+            "sit down"
+          ],
+          "runtimeObserved": [
+            "come in",
+            "stand up",
+            "sit down"
+          ]
+        },
+        {
+          "questionId": "Y1M05-Q019",
+          "mechanicId": "drag-drop",
+          "explicitExpected": [
+            "silence, please"
+          ],
+          "runtimeObserved": [
+            "come in",
+            "stand up",
+            "sit down"
+          ]
+        }
+      ],
+      "pointerVideoSha256": "e577a419e96767d834b29471e7c6e981612bf1d4971f7333b4ea1c0e061c78b3",
+      "pointerTraceSha256": "647f7c3509e00484dc2acb07e233cd99f109ad8a5c3930fd6b7b67f653a4e831",
+      "finalization": "REFUSED_BY_REAL_BROWSER_QA_GATE"
+    }
+  },
+  "globalAudit": {
+    "inventory": "qa/results/media-closure-inventory.json",
+    "inventorySha256": "f5df53637a5e48e09dbbfc616c3564fbf493b5130a6a3779768e8f6e9b03d0bb",
+    "closure": "qa/results/media-module-closure.json",
+    "closureSha256": "c3a09e97318dd9551d8d000ee7d3e2db599742141311e266ea3e105e08816b7d",
+    "modules": 30,
+    "activities": 600,
+    "referencedMediaIds": 1139,
+    "officialPedagogicallyVerifiedReferencedIds": 84,
+    "provisionalOrBlockedReferencedIds": 1037,
+    "nonTemporaryUnverifiedReferencedIds": 18,
+    "distinctPendingMediaIds": 1055,
+    "completedModules": 1,
+    "pendingModules": 29,
+    "completedModuleIds": [
+      "Y1M04"
+    ],
+    "projectComplete": false
+  },
+  "blockers": [
+    {
+      "code": "Y1M05_DRAG_DROP_EXPLICIT_VS_RUNTIME_SEMANTIC_OCCURRENCE_DIVERGENCE",
+      "description": "Q006 and Q019 resolve action-card PNGs through the generic semantic registry path, but their explicit per-question candidate evidence declares a different exact set. The strict route gate correctly rejects the extra/missing occurrence mapping.",
+      "gateWeakened": false,
+      "sourceContractChanged": false,
+      "nextSafeAction": "Reconcile per-occurrence runtime semantics with the existing generic registry/host contract. Do not whitelist observed extras and do not rewrite source hashes."
+    },
+    {
+      "code": "Y1M05_Q001_MOBILE_TARGET_SHOOTER_OFFICIAL_IMAGE_CUTOFF",
+      "description": "At 390x844, the official arms image ends at x=407.8 and is clipped 17.8 px beyond the viewport. The host's uniform 1366x768 fit is clamped to a minimum scale of .5, producing a 683 px stage in a 390 px viewport.",
+      "gateWeakened": false,
+      "goldMasterChanged": false,
+      "nextSafeAction": "Resolve the screen-wide uniform host scale through the existing visual-sync/host architecture. Do not move one target or add a component/property-specific adapter. Before any Penpot operation, run scripts/duduq-penpot-bootstrap.mjs and require 4400/4401/4402, PLUGIN_CONNECTED and LIVE_PENPOT_DOCUMENT_READ PASS."
+    },
+    {
+      "code": "GITHUB_REPLAY_NOT_DISPATCHED_NO_NONINTERACTIVE_CREDENTIAL",
+      "description": "GitHub CLI is not installed and Git HTTPS returned SEC_E_NO_CREDENTIALS through the configured credential manager. No current branch push or workflow_dispatch was possible without inventing credentials or requiring manual input.",
+      "pushAttempted": false,
+      "authenticationPromptStarted": false
+    }
+  ],
+  "independentLinuxQa": {
+    "currentCorrection": {
+      "status": "NOT_DISPATCHED_BLOCKED_BY_GITHUB_AUTH",
+      "url": null,
+      "headSha": null
+    },
+    "lastAuditedPredecessorRun": {
+      "runNumber": 13,
+      "runId": 41115314550,
+      "url": "https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/41115314550",
+      "headSha": "561058dfcbb5ed67b8abb7612e71a3b415010f40",
+      "status": "completed",
+      "conclusion": "failure",
+      "evidenceBoundary": "This predecessor Linux run is not proof of commit 071a55c1. It remains evidence only for the earlier clean build, source pin, Y1M04 replay and Y1M05-stage failure."
+    }
+  },
+  "continuation": {
+    "y1m05Finalized": false,
+    "nextIntegrationTarget": "Y1M05",
+    "schedulerWillPlanOtherLaneAfterExit": true,
+    "generationQueueStopped": false,
+    "manualContinueRequired": false,
+    "projectComplete": false
+  }
+}
