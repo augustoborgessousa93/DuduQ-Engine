@@ -387,7 +387,7 @@ jobs:
           echo "The pig candidate remains PEDAGOGICAL_QA_PENDING, without merge or production deploy."
 
   phase2-v28-source-reuse:
-    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[phase2]') && !contains(github.event.head_commit.message, '[banana-preflight]') }}
+    if: ${{ github.event_name == 'push' && !startsWith(github.ref_name, 'qa/duduq-phase2-') && contains(github.event.head_commit.message, '[phase2]') && !contains(github.event.head_commit.message, '[banana-preflight]') }}
     name: Phase 2 - exact source reuse on immutable V28 hotfix
     runs-on: ubuntu-latest
     timeout-minutes: 60
