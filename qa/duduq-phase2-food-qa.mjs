@@ -35,6 +35,13 @@ const sourceSpecs=[
  {concept:'bedroom',file:'Bedroom — Quarto.png',blob:'1f5d55444fd018a8a38584bc70a0ae5314ade8f3'},
  {concept:'bathroom',file:'Bathroom — Banheiro.png',blob:'3d56badbe196f9d5150cb17dc0c3f8a1ff3572a1'},
  {concept:'kitchen',file:'Kitchen — Cozinha.png',blob:'2dca8e82e188ee27abb7f505275b2f1b987a2f10'},
+ // Phase 2 transport and toys: exact, standalone source concepts. No automatic pedagogical approval.
+ {concept:'train',file:'train.png',blob:'fa02d244aea64c4d4c74becd5a44916012a303f9'},
+ {concept:'car',file:'car.png',blob:'16fa20c493c32d3fa6ece36f7cba91fbe433a92b'},
+ {concept:'bus',file:'bus.png',blob:'801f3630db89eb3b143df6379e6259eda654f57e'},
+ {concept:'plane',file:'plane.png',blob:'2cdd01ac70391d8695364fa6f314918978fdd5f1'},
+ {concept:'doll',file:'doll - boneca.png',blob:'ab152cd40e458c436df4390bb31478119a746af1'},
+ {concept:'kite',file:'kite - pipa.png',blob:'70e9a17b5a827c64b2e54ac57ee9bd63fc88b9a5'},
  // New exact room concept: all shared occurrences still require leaf-semantic and provisional guards.
  {concept:'living room',file:'Living room — Sala de estar.png',blob:'518127541034f86f152366bc31b405205e5dfc40'}
 ];
