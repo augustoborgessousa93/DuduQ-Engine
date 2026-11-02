@@ -164,7 +164,7 @@ try{
         };
        }).catch(e=>({captureError:String(e)}));
        if(id==='Y3M06-Q017'){
-        await writeFile(out+'/'+id+'-failed-drop-dom.json',JSON.stringify(entry.failedDropDiagnostic,null,2)+'\\n');
+        await writeFile(out+'/'+id+'-failed-drop-dom.json',JSON.stringify(entry.failedDropDiagnostic,null,2)+'\n');
         try{await page.screenshot({path:out+'/'+id+'-failed-drop.png',fullPage:true})}catch{}
        }
        break;
