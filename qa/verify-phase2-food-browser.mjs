@@ -85,13 +85,14 @@ try{
  }
 }finally{await browser.close()}
 const failures=cases.filter(c=>c.httpStatus!==200||c.errors.length||
- c.bodyTextLength<20||c.visibleSourceImages<1);
+ c.bodyTextLength<20||c.required.some(p=>!c.sourcePathsVisible.includes(p)));
 const report={schemaVersion:'DUDUQ_PHASE2_FOOD_BROWSER_V1',
  status:failures.length?'FAIL_VISUAL_GATE':'PASS_VISUAL_GATE_QA_ONLY',
  checkedQuestions:patch.changedQuestionCount,checks:cases.length,
  visibleCases:cases.filter(c=>c.visibleSourceImages>0).length,
  failures:failures.map(c=>({questionId:c.questionId,viewport:c.viewport,errors:c.errors,
-  visibleSourceImages:c.visibleSourceImages})),
+  visibleSourceImages:c.visibleSourceImages,
+  missingRequiredPaths:c.required.filter(p=>!c.sourcePathsVisible.includes(p))})),
  cases,productionDeployed:false,releaseApproved:false,pedagogicalQAApproved:false};
 await writeFile('qa/results/phase2-food-browser.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({status:report.status,questions:report.checkedQuestions,
