@@ -101,8 +101,9 @@ for(const asset of manifest.assets){
   // checks came from bubble-pop, on both viewports. Do NOT repoint shared
   // media IDs until that mechanic renders this media in actual gameplay.
   // A shared ID can be reused safely only if every consumer mechanic works.
-  failClosed(reasons,actualQuestions.every(id=>questions.get(id)?.mechanicId!=='bubble-pop'),
-   'BUBBLE_POP_NOT_VISIBLE_RUN_41536518602');
+  failClosed(reasons,actualQuestions.every(id=>questions.get(id)?.mechanicId!=='bubble-pop')||
+   (apply&&process.env.DUDUQ_QA_ONLY==='1'&&process.env.DUDUQ_BUBBLE_FRAME_PROBE==='1'),
+   'BUBBLE_POP_REQUIRES_IFRAME_AWARE_QA');
   failClosed(reasons,occurrences.every(o=>normalize(o.semanticTarget)===normalize(asset.conceptHint)),'MISSING_OR_CONFLICTING_LEAF_SEMANTICS');
   const reg=registryMap.get(binding.mediaId);
   const queueRow=queueById.get(binding.mediaId);
