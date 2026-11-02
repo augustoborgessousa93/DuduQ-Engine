@@ -1213,3 +1213,128 @@ jobs:
           retention-days: 90
           if-no-files-found: error
           compression-level: 0
+
+
+  phase2-safe-multilingual-visual-review:
+    if: ${{ github.ref_name == 'qa/duduq-phase2-source-expansion-20261102' && github.event_name == 'push' && contains(github.event.head_commit.message, '[safe-visual-qa]') }}
+    name: Verify representative official media x mechanic using persisted 141-ID compiled candidate
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    permissions:
+      contents: read
+      actions: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BASE_URL: http://127.0.0.1:4175
+      DUDUQ_QA_ONLY: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Restore exact verified 141-ID package, NO source or runtime edits
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/phase2-safe qa/dist-pages-food-candidate qa/results
+          gh run download 41546708766 --repo augustoborgessousa93/DuduQ-Engine \
+            --name duduq-phase2-safe-141-ids-unapproved-candidate \
+            --dir /tmp/phase2-safe
+          TAR="$(find /tmp/phase2-safe -name duduq-phase2-safe-141-qa-candidate.tar.gz -print -quit)"
+          DIGEST="$(find /tmp/phase2-safe -name duduq-phase2-safe-141-qa-candidate.sha256 -print -quit)"
+          META="$(find /tmp/phase2-safe -name phase2-persisted-visual-hold.json -print -quit)"
+          test -n "$TAR" && test -n "$DIGEST" && test -n "$META"
+          (cd "$(dirname "$TAR")" && sha256sum -c "$(basename "$DIGEST")")
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+          cp "$META" qa/results/phase2-persisted-visual-hold.json
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,writeFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const prior=JSON.parse(readFileSync('qa/results/phase2-persisted-visual-hold.json'));
+          assert.equal(prior.changedMediaIds,141);
+          assert.equal(prior.verifiedContracts,600);
+          assert.equal(prior.heldMediaIds.length,1);
+          const reg=JSON.parse(readFileSync('qa/dist-pages-food-candidate/content/english/media/media-registry.json','utf8'));
+          const sourceCommit='a51e0958d0c68941701b8373ccf30acf88aaf7d0';
+          const bindings=reg.entries.filter(e=>e.provenance?.sourceCommit===sourceCommit&&
+            e.replacementAudit?.qaOnly===true);
+          assert.equal(bindings.length,87,'EXPECTED_87_MULTILINGUAL_IDS');
+          const prepared=bindings.map(e=>({
+            mediaId:e.mediaId,concept:e.semantic,sourcePath:e.urlOrPath,
+            questionIds:e.replacementAudit.verifiedQuestionIds
+          }));
+          const images=[...new Map(bindings.map(e=>[e.urlOrPath,{
+            assetPath:e.urlOrPath,sha256:e.sha256
+          }])).values()];
+          assert.equal(images.length,53,'EXPECTED_53_UNIQUE_OFFICIAL_PNGS');
+          const questionIds=[...new Set(prepared.flatMap(b=>b.questionIds))].sort();
+          assert.equal(questionIds.length,100,'EXPECTED_100_MULTILINGUAL_QUESTIONS');
+          const report={
+            schemaVersion:'DUDUQ_PHASE2_MULTILINGUAL_VISUAL_FROM_PERSISTED_QA',
+            status:'ISOLATED_MEDIA_UPDATED_VISUAL_AND_PEDAGOGICAL_QA_PENDING',
+            sourceCommit,verifiedContracts:600,changedMediaIds:prepared.length,
+            changedQuestionCount:questionIds.length,changedQuestionIds:questionIds,
+            images,bindings:prepared,
+            questionsChanged:0,answerKeysChanged:0,audioChanged:0,mechanicsChanged:0,
+            productionDeployed:false,pedagogicalQAApproved:false,releaseApproved:false
+          };
+          writeFileSync('qa/results/phase2-multilingual-source-qa-patch.json',JSON.stringify(report,null,2)+'\n');
+          const digest=createHash('sha256').update(readFileSync(
+            'qa/dist-pages-food-candidate/content/english/media/media-registry.json')).digest('hex');
+          const lines=readFileSync('qa/dist-pages-food-candidate/.duduq-pages-manifest','utf8');
+          assert(lines.includes('content/english/media/media-registry.json '+digest));
+          console.log(JSON.stringify({PERSISTED_MULTILINGUAL_MEDIA:prepared.length,
+            images:images.length,questions:questionIds.length,contracts:600}));
+          NODE
+      - name: Real Chromium visibility per distinct official image and mechanic, both viewport sizes
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev qa/dist-pages-food-candidate --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 > /tmp/duduq-safe-visual.log 2>&1 &
+          echo $! > /tmp/duduq-safe-visual.pid
+          for i in {1..45}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then break; fi
+            if ! kill -0 "$(cat /tmp/duduq-safe-visual.pid)" 2>/dev/null; then
+              cat /tmp/duduq-safe-visual.log; exit 1
+            fi
+            sleep 2
+          done
+          node --check qa/verify-phase2-new-source-browser.mjs
+          DUDUQ_PHASE2_BATCH=multilingual DUDUQ_QA_SAMPLE_MODE=source-mechanic \
+            node qa/verify-phase2-new-source-browser.mjs
+      - name: Report representative QA truth without premature release certification
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,writeFileSync} from 'node:fs';
+          const v=JSON.parse(readFileSync('qa/results/phase2-multilingual-source-browser.json'));
+          assert.equal(v.status,'PASS_NEW_SOURCE_REAL_BROWSER_QA_ONLY');
+          assert.equal(v.verificationMode,'REPRESENTATIVE_SOURCE_AND_MECHANIC_QA_ONLY');
+          assert(v.sampledQuestionCount>=26,'SAMPLE_COVERAGE_TOO_SMALL');
+          const r=JSON.parse(readFileSync('qa/results/phase2-persisted-visual-hold.json'));
+          const status={status:'REPRESENTATIVE_VISUAL_PASS_FULL_INTERACTION_AND_PEDAGOGICAL_QA_PENDING',
+           candidateMediaIds:r.changedMediaIds,affectedQuestions:r.changedQuestionCount,
+           affectedModules:r.changedModules.length,verifiedContracts:600,
+           uniqueMultilingualImages:53,representativeMobileDesktopChecks:v.checks,
+           visualFailures:v.failed.length,productionDeployed:false,releaseApproved:false};
+          writeFileSync('qa/results/phase2-safe-visual-review.json',JSON.stringify(status,null,2)+'\n');
+          console.log(JSON.stringify(status));
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-safe-141-representative-visual-qa
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            qa/results/phase2-safe-visual-review.json
+            qa/results/phase2-multilingual-source-qa-patch.json
+            qa/results/phase2-multilingual-source-browser.json
+            qa/results/phase2-multilingual-source-browser/*.png
