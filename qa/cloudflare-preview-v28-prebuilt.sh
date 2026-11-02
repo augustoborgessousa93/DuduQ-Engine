@@ -4,9 +4,9 @@ set -Eeuo pipefail
 # Phase 2 prebuilt candidate. This script downloads a public, immutable, verified GitHub
 # release asset. It does not need a Cloudflare token or GitHub Actions secrets.
 # Preview deployment first; production requires separate verified promotion.
-TAG="duduq-phase2-exact-source-qa-20261102"
-NAME="duduq-phase2-exact-source-qa.tar.gz"
-SHA256="fba8ba2cb9e0b90ae1db51806829ddc42bbd8235e1304e267bd4172e7734bb42"
+TAG="duduq-phase2-safe-contrast-qa-20261102"
+NAME="duduq-phase2-safe-contrast-qa.tar.gz"
+SHA256="63e145aa13b4cc1b07a4549eadd7b5dee31d259340bef90b3392a6a48a6cd23f"
 URL="https://github.com/augustoborgessousa93/DuduQ-Engine/releases/download/${TAG}/${NAME}"
 FILE="$(mktemp -t duduq-v28-XXXXXX.tar.gz)"
 trap 'rm -f "$FILE"' EXIT
