@@ -104,7 +104,7 @@ const result={
  baselineReleaseTarSha256:'cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800',
  sourceAssetsCommit:'a62c07c075a4a744f81dee2eea3a6b93108f9d08',
  sourceUniquePNGs:images.length,changedMediaIds:changes.length,questionIds:[...affected].sort(),questionCount:affected.size,
- 600QuestionsVerified:numberOfQuestions,questionsChanged:0,answersChanged:0,audioChanged:0,
+ questionsVerified:numberOfQuestions,questionsChanged:0,answersChanged:0,audioChanged:0,
  GoldMastersChanged:0,runtimeChanged:0,productionDeployed:false,humanApproval:false,
  images,changes,
  humanReviewRequired:'Source PNGs are below preferred 1024px; require effective 2x density at displayed dimensions, full gameplay and pedagogical approval before homologation'};
