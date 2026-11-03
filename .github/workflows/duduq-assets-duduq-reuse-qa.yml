@@ -13,6 +13,7 @@ on:
       - "qa/catalog-assets-duduq-matches.mjs"
       - "qa/phase2-y4m03-seasons-batch.mjs"
       - "qa/phase2-y4m03-seasons-browser-qa.mjs"
+      - "qa/phase2-y4m03-bubble-iframe-pointer-qa.mjs"
       - "qa/tests/verify-assets-duduq-crosswalk.mjs"
       - "qa/tests/verify-30-route-browser-smoke.mjs"
       - "qa/prepare-assets-duduq-reuse.mjs"
@@ -411,7 +412,7 @@ jobs:
 
   y4m03-season-lifecycle-browser-recheck:
     name: Seasons 8-ID browser lifecycle recheck from existing immutable QA delta (NO deploy)
-    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha != 'b8e5ff2f4bf1573a7b731c331779f2427b08b374' && github.sha != 'b4016fb56501848edee3778f2799bf3367ffec12' && github.sha != '8b4cee86baeea4b33b45753ed7dc947b6f7bbaed' && github.sha != '1358eff07f83ccb31ce6fdfcad653f42805ca907' && github.sha != 'bf4976d9a28b6b23566a75722d1ef9af8713e2ce' }}
+    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha == 'd3b05a40c845ab1d74143cdd0330f912d8440a5c' }}
     runs-on: ubuntu-latest
     timeout-minutes: 28
     env:
@@ -471,6 +472,66 @@ jobs:
           path: |
             qa/results/y4m03-seasons-browser/
             /tmp/duduq-seasons-pages.log
+
+  y4m03-bubble-inner-iframe-real-pointer:
+    name: Bubble Pop Q006 real mouse/touch inside nested iframe (no production deploy)
+    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha != 'd3b05a40c845ab1d74143cdd0330f912d8440a5c' && github.sha != 'b8e5ff2f4bf1573a7b731c331779f2427b08b374' && github.sha != 'b4016fb56501848edee3778f2799bf3367ffec12' && github.sha != '8b4cee86baeea4b33b45753ed7dc947b6f7bbaed' && github.sha != '1358eff07f83ccb31ce6fdfcad653f42805ca907' && github.sha != 'bf4976d9a28b6b23566a75722d1ef9af8713e2ce' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            qa/phase2-y4m03-bubble-iframe-pointer-qa.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Reuse EXACT previous 3 PNG / 8 binding delta and its evidence
+        run: |
+          set -Eeuo pipefail
+          mkdir -p qa/results
+          gh run download 41736151817 -R "$GITHUB_REPOSITORY" --name duduq-y4m03-seasons-8ids-qa-41736151817 --dir qa/results
+          test -s qa/results/y4m03-seasons-delta-only.tar.gz
+          test -s qa/results/y4m03-seasons-evidence.json
+      - name: Unpack immutable Orange production build in QA only; apply audited overlay
+        run: |
+          set -Eeuo pipefail
+          T="$RUNNER_TEMP/orange-prod-base.tar.gz"
+          curl -fLSs --retry 3 --connect-timeout 20 --max-time 480             "https://github.com/$GITHUB_REPOSITORY/releases/download/duduq-phase2-orange-fruit-color-corrected-20261103/duduq-phase2-orange-fruit-color-corrected.tar.gz" -o "$T"
+          echo "cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800  $T" | sha256sum --check --status
+          mkdir -p dist-pages
+          tar -xzf "$T" -C dist-pages
+          tar -xzf qa/results/y4m03-seasons-delta-only.tar.gz -C dist-pages
+          node --input-type=module -e "import fs from 'node:fs';import crypto from 'node:crypto';const r=JSON.parse(fs.readFileSync('qa/results/y4m03-seasons-evidence.json'));const h=crypto.createHash('sha256').update(fs.readFileSync('dist-pages/.duduq-pages-manifest')).digest('hex');if(h!==r.candidateManifestSha256)process.exit(2);console.log('EXACT_ORANGE_QA_OVERLAY_REUSED')"
+      - name: Start isolated local Pages and Playwright; no Cloudflare credentials
+        run: |
+          set -Eeuo pipefail
+          node --check qa/phase2-y4m03-bubble-iframe-pointer-qa.mjs
+          npm install --no-save --no-audit --no-fund playwright@1.55.0 wrangler@4
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev dist-pages --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 >/tmp/duduq-iframe-qa.log 2>&1 &
+          for i in $(seq 1 50); do
+            if curl -fsS -o /dev/null http://127.0.0.1:4175/play/bubble-pop/; then break; fi
+            sleep 2
+          done
+          node qa/phase2-y4m03-bubble-iframe-pointer-qa.mjs
+      - name: Retain nested-frame image proof, real input events and screenshots even on gate failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-y4m03-bubble-real-input-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/y4m03-iframe-pointer/
+            /tmp/duduq-iframe-qa.log
 
   isolated-v26-media-reuse:
     if: ${{ github.ref_name != 'qa/duduq-phase2-crosswalk-head-20261103' }}
