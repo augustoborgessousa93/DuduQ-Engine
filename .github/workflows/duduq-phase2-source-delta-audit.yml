@@ -9,6 +9,9 @@ on:
 permissions:
   contents: read
   actions: read
+concurrency:
+  group: duduq-phase2-source-batch-isolated
+  cancel-in-progress: true
 jobs:
   source-batch:
     runs-on: ubuntu-latest
@@ -20,6 +23,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          sparse-checkout: |
+            qa/integrate-phase2-source-batch.mjs
+            qa/media-binding-usage-guard.mjs
+            scripts/duduq-exact-semantic-match.mjs
+            docs/qa/media-audit-20261029/phase2-source-head-delta-20261103.json
+            docs/qa/media-audit-20261029/replacement-queue.json
+          sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
