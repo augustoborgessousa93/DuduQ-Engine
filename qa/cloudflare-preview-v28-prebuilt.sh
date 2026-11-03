@@ -4,9 +4,9 @@ set -Eeuo pipefail
 # Phase 2 prebuilt candidate. This script downloads a public, immutable, verified GitHub
 # release asset. It does not need a Cloudflare token or GitHub Actions secrets.
 # Preview deployment first; production requires separate verified promotion.
-TAG="duduq-phase2-orange-fruit-color-corrected-20261103"
-NAME="duduq-phase2-orange-fruit-color-corrected.tar.gz"
-SHA256="cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800"
+TAG="duduq-y1-greetings-corrected-qa-20261103"
+NAME="duduq-y1-greetings-corrected-qa-20261103.tar.gz"
+SHA256="4d049a78c4d5e4e31bc9c3aca6d4103a40a914ccc7add19a8a3202b84097c86b"
 URL="https://github.com/augustoborgessousa93/DuduQ-Engine/releases/download/${TAG}/${NAME}"
 FILE="$(mktemp -t duduq-v28-XXXXXX.tar.gz)"
 trap 'rm -f "$FILE"' EXIT
@@ -24,7 +24,7 @@ import assert from 'node:assert/strict';
 const root=path.resolve('dist-pages');
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const manifest=readFileSync(path.join(root,'.duduq-pages-manifest'),'utf8').trimEnd().split(/\r?\n/);
-assert(manifest.length===2891,'PARTIAL_DUDUQ_DISTRIBUTION');
+assert(manifest.length===2896,'PARTIAL_DUDUQ_DISTRIBUTION');
 for(const item of manifest){
  const n=item.lastIndexOf(' '),rel=item.slice(0,n),expected=item.slice(n+1);
  assert(n>0&&/^[a-f0-9]{64}$/.test(expected),'INVALID_MANIFEST');
@@ -46,5 +46,13 @@ const color=media.entries.find(e=>e.mediaId==='IMG-Y1M03-Q001-ORANGE');
 assert(fruit&&color&&fruit.urlOrPath!==color.urlOrPath,'ORANGE_CONTEXT_SPLIT_MISSING');
 assert.equal(fruit.provenance?.sourcePath,'Imagens Ilustrativa/Orange Fruit -laranja fruta.png');
 assert.equal(sha(readFileSync(path.join(root,fruit.urlOrPath))),fruit.sha256);
+const greetings=['IMG-Y1M01-GREETING-MORNING-ORIGINAL-20261103',
+ 'IMG-Y1M01-MORNING-SCHOOL-ARRIVAL-20261103',
+ 'IMG-Y1M01-GREETING-AFTERNOON-OFFICIAL-20261103',
+ 'IMG-Y1M01-NIGHT-OFFICIAL-20261103',
+ 'IMG-Y1M01-SLEEP-OFFICIAL-20261103',
+ 'IMG-Y1M03-Q016-ORANGE'];
+assert(greetings.every(id=>media.entries.some(e=>e.mediaId===id)),'Y1_GREETINGS_SOURCE_MEDIA_MISSING');
+
 console.log(JSON.stringify({status:'PREBUILT_PHASE2_EXACT_SOURCE_READY',manifestEntries:manifest.length,questions:count,releaseApproved:false,productionDeployed:false}));
 NODE
