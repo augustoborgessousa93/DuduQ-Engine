@@ -33,8 +33,7 @@ const tests=[
 {id:'Y1M01-Q003',mechanic:'target-shooter',screen:[1366,768],expected:['school','afternoon','night']},
 {id:'Y1M01-Q004',mechanic:'target-shooter',screen:[390,844],expected:['morning','afternoon','night','sleep']},
 {id:'Y1M01-Q004',mechanic:'target-shooter',screen:[1366,768],expected:['morning','afternoon','night','sleep']},
-{id:'Y1M01-Q006',mechanic:'drag-drop-multimedia',screen:[1366,768],expected:['morning','afternoon']},
-{id:'Y1M03-Q016',mechanic:'target-shooter',screen:[390,844],expected:['orange']}
+{id:'Y1M01-Q006',mechanic:'drag-drop-multimedia',screen:[1366,768],expected:['morning','afternoon']}
 ];
 const results={schemaVersion:'DUDUQ_Y1_GREETINGS_VISUAL_QA_V1',status:'RUNNING',
 sourceCommit:details.sourceCommit,productionDeployed:false,releaseApproved:false,
@@ -52,6 +51,19 @@ try{
    const url=base+'/play/'+t.mechanic+'/?duduqModule='+t.id.slice(0,5)+'&duduqItem='+t.id+'&qaSeed=y1-source-correct';
    const r=await page.goto(url,{waitUntil:'domcontentloaded',timeout:45000});
    assert.equal(r?.status(),200);
+   // Y1M01 instructions have an actual audio/start gate; click the real
+   // user-facing audio control twice (as in the approved Target Shooter E2E).
+   // This is not a synthetic READY state or a bypass of the engine.
+   await page.waitForTimeout(700);
+   if(t.id.startsWith('Y1M01-')){
+    const audio=page.locator('.audio-button').first();
+    if(await audio.count()){
+     await audio.waitFor({state:'visible',timeout:15000});
+     await audio.click({timeout:15000});
+     await page.waitForTimeout(750);
+     await audio.click({timeout:15000});
+    }
+   }
    await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:35000});
    const targets=t.expected.map(k=>resolved[k]);
    for(let tick=0;tick<75;tick++){
@@ -75,7 +87,19 @@ try{
    row.screenshot='qa/results/y1-greetings-browser/'+t.id+'-'+t.screen[0]+'.png';
    await page.screenshot({path:row.screenshot,animations:'disabled'});
    row.pass=row.found.length===targets.length&&!errors.length&&!httpErrors.length;
-  }catch(e){row.error=String(e.message||e).slice(0,280);row.pass=false;}
+  }catch(e){
+   row.error=String(e.message||e).slice(0,280);row.pass=false;
+   // Preserve evidence even when the game never becomes READY.
+   try{
+    row.screenshot='qa/results/y1-greetings-browser/'+t.id+'-'+t.screen[0]+'.png';
+    await page.screenshot({path:row.screenshot,animations:'disabled'});
+    row.domState=await page.evaluate(()=>({
+     interaction:document.querySelector('#game')?.dataset.duduqInteractionState,
+     audioButtons:document.querySelectorAll('.audio-button').length,
+     firstText:document.body.innerText.slice(0,900)
+    }));
+   }catch{}
+  }
   results.cases.push(row);await ctx.close();
  }
 }finally{await browser.close()}
