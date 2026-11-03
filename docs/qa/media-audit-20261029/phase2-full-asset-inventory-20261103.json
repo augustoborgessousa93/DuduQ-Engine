@@ -1,0 +1,2095 @@
+{
+  "schemaVersion": "DUDUQ_PHASE2_FULL_SOURCE_INVENTORY_V1",
+  "sourceRepository": "augustoborgessousa93/Assets-DuduQ",
+  "sourceCommit": "a51e0958d0c68941701b8373ccf30acf88aaf7d0",
+  "folder": "Imagens Ilustrativa",
+  "allBlobEntries": 420,
+  "sourcePngCount": 417,
+  "assets": [
+    {
+      "path": "Imagens Ilustrativa/Actress — Atriz.png",
+      "gitBlob": "80b0e0a362bd18c54711f34a56a003278370ec13",
+      "bytes": 2707755
+    },
+    {
+      "path": "Imagens Ilustrativa/Alex.png",
+      "gitBlob": "7b3d8776fba3c5af6c5825fded0baba0623f0e10",
+      "bytes": 934769
+    },
+    {
+      "path": "Imagens Ilustrativa/Almoçando.png",
+      "gitBlob": "fe588f884dfe17cfa94345aea58e47809cb9f875",
+      "bytes": 2203484
+    },
+    {
+      "path": "Imagens Ilustrativa/Ana.png",
+      "gitBlob": "8b82e15dfb72683fce13998197459e76f1f15f7b",
+      "bytes": 1037323
+    },
+    {
+      "path": "Imagens Ilustrativa/Apple - maçã.png",
+      "gitBlob": "f781233efd1c1f888c720540d9b760c7b9a541db",
+      "bytes": 1812602
+    },
+    {
+      "path": "Imagens Ilustrativa/Armchair.png",
+      "gitBlob": "cd9c88d0c6bb04719b2419f8e4de39f0061538c1",
+      "bytes": 1680364
+    },
+    {
+      "path": "Imagens Ilustrativa/August.png",
+      "gitBlob": "f78f344bbf1dc68a945b5bf2877560abaa6c6cff",
+      "bytes": 2574638
+    },
+    {
+      "path": "Imagens Ilustrativa/Autumn - outono.PNG",
+      "gitBlob": "3801879e526ffda7f3b5b1da72c5aaa2e9793a09",
+      "bytes": 532747
+    },
+    {
+      "path": "Imagens Ilustrativa/Banana.png",
+      "gitBlob": "c503d5a2da6ffab84913e613f94daf414861b256",
+      "bytes": 685306
+    },
+    {
+      "path": "Imagens Ilustrativa/Bank beside shoe store — Banco ao lado da loja de calçados.png",
+      "gitBlob": "5b1d4670c95768fb8d4479e1da30451afeb80d47",
+      "bytes": 1234112
+    },
+    {
+      "path": "Imagens Ilustrativa/Bank on the map — Banco no mapa.png",
+      "gitBlob": "23dea82716da61022f8ffdec2c3b78fd04853df0",
+      "bytes": 1734964
+    },
+    {
+      "path": "Imagens Ilustrativa/Bank — Banco.png",
+      "gitBlob": "ecc63e1cf1e8147b745faf8609eb5527bada7c3c",
+      "bytes": 1794247
+    },
+    {
+      "path": "Imagens Ilustrativa/Basketball — Basquete.png",
+      "gitBlob": "e2b824384b9d4d747c5be457e2a7b033619026be",
+      "bytes": 1553847
+    },
+    {
+      "path": "Imagens Ilustrativa/Bathroom — Banheiro.png",
+      "gitBlob": "3d56badbe196f9d5150cb17dc0c3f8a1ff3572a1",
+      "bytes": 2329054
+    },
+    {
+      "path": "Imagens Ilustrativa/Bathroom.png",
+      "gitBlob": "963aba195fc58f306a755b58a856bcb4a4ec4b2a",
+      "bytes": 1764557
+    },
+    {
+      "path": "Imagens Ilustrativa/Bed beside brown wardrobe.png",
+      "gitBlob": "23f57e0510f74ffcbd42f25466820464bcc8baec",
+      "bytes": 1344689
+    },
+    {
+      "path": "Imagens Ilustrativa/Bed.png",
+      "gitBlob": "bd7b52a6243acb9ed041ac3c58d32d4ceddd3e3f",
+      "bytes": 1331353
+    },
+    {
+      "path": "Imagens Ilustrativa/Bedroom — Quarto.png",
+      "gitBlob": "1f5d55444fd018a8a38584bc70a0ae5314ade8f3",
+      "bytes": 2276541
+    },
+    {
+      "path": "Imagens Ilustrativa/Bedroom.png",
+      "gitBlob": "680ea45b47ee1677914e2afd098fbb9d7979bf7e",
+      "bytes": 1921144
+    },
+    {
+      "path": "Imagens Ilustrativa/Blue jacket — Jaqueta azul.png",
+      "gitBlob": "0aaf75b3e91d7a52c9fb045901e2cce2ee499ef7",
+      "bytes": 1588438
+    },
+    {
+      "path": "Imagens Ilustrativa/Boca.png",
+      "gitBlob": "ddce294fb2bf3b29cf9c38d1441b62d40c0141a4",
+      "bytes": 1607749
+    },
+    {
+      "path": "Imagens Ilustrativa/Bookcase.png",
+      "gitBlob": "a4506f5de4958e24fe99c1af0497ea2b0d19dfc9",
+      "bytes": 1416863
+    },
+    {
+      "path": "Imagens Ilustrativa/Borracha.png",
+      "gitBlob": "334a1fecdf362c6a19d50edb0ccc50db68606cb9",
+      "bytes": 849046
+    },
+    {
+      "path": "Imagens Ilustrativa/Braço.png",
+      "gitBlob": "395a1101f15f44bd376415987c2c78f4fc92c36f",
+      "bytes": 787029
+    },
+    {
+      "path": "Imagens Ilustrativa/Brother — Irmão.png",
+      "gitBlob": "e1744643b9da30998c3896791d41c95c64a558bd",
+      "bytes": 1474708
+    },
+    {
+      "path": "Imagens Ilustrativa/Bus - ônibus.png",
+      "gitBlob": "6980e8b6316cabf13a002b8383b724997d8ad36f",
+      "bytes": 1345958
+    },
+    {
+      "path": "Imagens Ilustrativa/Bye - tchau.png",
+      "gitBlob": "d0e2e7490cbf6f39a6771f7f4a67027f9a9ea744",
+      "bytes": 1686018
+    },
+    {
+      "path": "Imagens Ilustrativa/Bye-tchau.png",
+      "gitBlob": "048b07d61dcb9e181025192bc3d47b577285850b",
+      "bytes": 7551387
+    },
+    {
+      "path": "Imagens Ilustrativa/Cabeça.png",
+      "gitBlob": "2da18388a610f4ec0e555574576a6ecb67b3866a",
+      "bytes": 2054444
+    },
+    {
+      "path": "Imagens Ilustrativa/Cachorro - dog - dentro da caixa.png",
+      "gitBlob": "ed0e6e15763c8e400015526202bb909ab63d1ebe",
+      "bytes": 1624105
+    },
+    {
+      "path": "Imagens Ilustrativa/Cachorro - dog.png",
+      "gitBlob": "b2c39c9abd7e113e093151a1780cde0fc79a5d3c",
+      "bytes": 1448608
+    },
+    {
+      "path": "Imagens Ilustrativa/Cachorro dentro de uma caixa.png",
+      "gitBlob": "6c6471838b80d0a4637054487912a3628ba4cb87",
+      "bytes": 1399246
+    },
+    {
+      "path": "Imagens Ilustrativa/Cachorro embaixo da mesa.png",
+      "gitBlob": "7a5669fdc359686342b41b9071dcfcb9216845b9",
+      "bytes": 1196641
+    },
+    {
+      "path": "Imagens Ilustrativa/Cachorro embaixo de uma mesa.png",
+      "gitBlob": "bdf8f73f7aac1bf93073c58ce149073758f4e8f1",
+      "bytes": 996352
+    },
+    {
+      "path": "Imagens Ilustrativa/Cama ao lado do guarda-roupa marrom.png",
+      "gitBlob": "db01c3792098e68a7a2934b063c943bb738ed5ca",
+      "bytes": 1173395
+    },
+    {
+      "path": "Imagens Ilustrativa/Caminhão preto atrás do ônibus.png",
+      "gitBlob": "3a270c1db51c67f2965cd6fc5f5cf009b201e2e4",
+      "bytes": 1539492
+    },
+    {
+      "path": "Imagens Ilustrativa/Caneta azul.png",
+      "gitBlob": "a16e625f8f4d6e45e77542065946f81c69ac9e52",
+      "bytes": 549668
+    },
+    {
+      "path": "Imagens Ilustrativa/Car - carro.png",
+      "gitBlob": "1b8a3c0f6cb9c62115d64ea83287bb8edf526679",
+      "bytes": 1338773
+    },
+    {
+      "path": "Imagens Ilustrativa/Carrot + apple + water.png",
+      "gitBlob": "c50dc7baa6a2455b0eb2ce77c8f454e004b1c076",
+      "bytes": 1766562
+    },
+    {
+      "path": "Imagens Ilustrativa/Carrot - cenoura.png",
+      "gitBlob": "7d47869a70563190768af3f25f1f3475cd570994",
+      "bytes": 1089600
+    },
+    {
+      "path": "Imagens Ilustrativa/Cavalo-Horse.png",
+      "gitBlob": "b70502487d880b0784443831916821cb458e2c53",
+      "bytes": 1193835
+    },
+    {
+      "path": "Imagens Ilustrativa/Chocolate + cookies + juice.png",
+      "gitBlob": "681126bd1de5e9dab562794226ca70ee7556a56a",
+      "bytes": 2029662
+    },
+    {
+      "path": "Imagens Ilustrativa/Coelho-rabbit.png",
+      "gitBlob": "9421450b4ec44d4c39104d59e0e287a2b1c2ef7b",
+      "bytes": 979429
+    },
+    {
+      "path": "Imagens Ilustrativa/Comendo.png",
+      "gitBlob": "cf1ff855753deb9dca721b99c49a1581f9de1a65",
+      "bytes": 1899841
+    },
+    {
+      "path": "Imagens Ilustrativa/Cor - Amarelo - Yellow.png",
+      "gitBlob": "d641e8582975e926fe49ea04c32f4817114f53f0",
+      "bytes": 884087
+    },
+    {
+      "path": "Imagens Ilustrativa/Cor - Azul - Blue.png",
+      "gitBlob": "d1c5c6980118941b1f43131214a6dcc7d7e39761",
+      "bytes": 1097211
+    },
+    {
+      "path": "Imagens Ilustrativa/Cor - Preto - Black.png",
+      "gitBlob": "e97d277f7df8fdb73b611f919fec34fca836bd8d",
+      "bytes": 885925
+    },
+    {
+      "path": "Imagens Ilustrativa/Cor - Rosa - Pink.png",
+      "gitBlob": "6b1035b8d0c8259d971eab77b94da4cce7483923",
+      "bytes": 989398
+    },
+    {
+      "path": "Imagens Ilustrativa/Cor - Verde - Green.png",
+      "gitBlob": "425907d66db6bd1e8fefb6846f3f17e9a86eece1",
+      "bytes": 1050617
+    },
+    {
+      "path": "Imagens Ilustrativa/Cor - vermelho - Red.png",
+      "gitBlob": "9c5fd365ad6fee630f695d2c403e6a02ba5fb4d6",
+      "bytes": 949380
+    },
+    {
+      "path": "Imagens Ilustrativa/Cor Laranja - Orange Color.png",
+      "gitBlob": "364c9ccfda05f4440da566495b47c5c6a2993532",
+      "bytes": 1054385
+    },
+    {
+      "path": "Imagens Ilustrativa/Cor_Branca.png",
+      "gitBlob": "d8b2da519e574a0c7c08e3d85a4e2db4348972c1",
+      "bytes": 819113
+    },
+    {
+      "path": "Imagens Ilustrativa/Cor_Marrom.png",
+      "gitBlob": "4ba5334007c4a8ac4ef4de3d87b03723e0523588",
+      "bytes": 1110027
+    },
+    {
+      "path": "Imagens Ilustrativa/DUDUQ_ACERTO.png",
+      "gitBlob": "0a12bb4d8f934b3c50fb69d023682265c1ddcb9b",
+      "bytes": 1195938
+    },
+    {
+      "path": "Imagens Ilustrativa/DUDUQ_ERRO.png",
+      "gitBlob": "e8903b1e96bb3d105a7e76e4875591d16c90cfa1",
+      "bytes": 1348396
+    },
+    {
+      "path": "Imagens Ilustrativa/DUDUQ_IDLE.png",
+      "gitBlob": "f4b9cc6764cf09e694729f7a8611f8ed581b8c0a",
+      "bytes": 1156810
+    },
+    {
+      "path": "Imagens Ilustrativa/Daily routine.png",
+      "gitBlob": "498c706a9dfca3eb8d2ebee1b954949725a0452e",
+      "bytes": 1466615
+    },
+    {
+      "path": "Imagens Ilustrativa/December.png",
+      "gitBlob": "a23d9499581f916bbf8e37eadcb4a46cd53e1b5d",
+      "bytes": 2510733
+    },
+    {
+      "path": "Imagens Ilustrativa/Dentist — Dentista.png",
+      "gitBlob": "3e00b489df1d07e5bedb473b9edbfe865b220481",
+      "bytes": 1704454
+    },
+    {
+      "path": "Imagens Ilustrativa/Dezenove-nineteen.png",
+      "gitBlob": "214f31ca500c7f575242034d6848d192c2a964c7",
+      "bytes": 1386006
+    },
+    {
+      "path": "Imagens Ilustrativa/Diego.png",
+      "gitBlob": "b6eed2ba3314aef4e6a15c1fe10542d7d3f586ff",
+      "bytes": 966562
+    },
+    {
+      "path": "Imagens Ilustrativa/Dining room scene — Cena na sala de jantar.png",
+      "gitBlob": "dccd01267c2ffa36cbea94f0c4370bb6156b0032",
+      "bytes": 2432722
+    },
+    {
+      "path": "Imagens Ilustrativa/Drawing in the park — Desenhando no parque.png",
+      "gitBlob": "16316f03d2d2e61dcc94d650dcbdfc20fd6047ac",
+      "bytes": 2319227
+    },
+    {
+      "path": "Imagens Ilustrativa/Dress - Size medium.png",
+      "gitBlob": "6e825d84b251ffb0b04b86317c3ea0cc2f65f2be",
+      "bytes": 1602663
+    },
+    {
+      "path": "Imagens Ilustrativa/Dress — Vestido.png",
+      "gitBlob": "f8c1d3801b5cdf014f0c131d0ce9b98a3ae3a542",
+      "bytes": 1704397
+    },
+    {
+      "path": "Imagens Ilustrativa/Duduq_Lição concluida.png",
+      "gitBlob": "4463ebd1457cb73992d14e2755a24f4af5bc4a28",
+      "bytes": 833830
+    },
+    {
+      "path": "Imagens Ilustrativa/Eighteen-dezoito.png",
+      "gitBlob": "7cc673beab90865fa56ff0f43ef9b1fba2300c56",
+      "bytes": 1387964
+    },
+    {
+      "path": "Imagens Ilustrativa/Em pé.png",
+      "gitBlob": "33b447fce9495471ceda0f3ac08af8cd83b215dd",
+      "bytes": 923493
+    },
+    {
+      "path": "Imagens Ilustrativa/Escovando os dentes.png",
+      "gitBlob": "4ca0a8e56ddf1d7290010477a49f29bc99882b2b",
+      "bytes": 2031227
+    },
+    {
+      "path": "Imagens Ilustrativa/Estojo rosa.png",
+      "gitBlob": "b3690d5feaa4adfb9ab8b1970387231e2a85ba3c",
+      "bytes": 1267890
+    },
+    {
+      "path": "Imagens Ilustrativa/Estojo.png",
+      "gitBlob": "4d55cc06cb124bfd485f5bbc52b33f7e85cdc59c",
+      "bytes": 1313317
+    },
+    {
+      "path": "Imagens Ilustrativa/February.png",
+      "gitBlob": "d6a8eff81eb3f464b4c173e78d345b8e85ccc159",
+      "bytes": 1805523
+    },
+    {
+      "path": "Imagens Ilustrativa/Fifteen-quinze.png",
+      "gitBlob": "723749cc75982a2b2cccddadad206f29891a1b60",
+      "bytes": 1362823
+    },
+    {
+      "path": "Imagens Ilustrativa/Fish_Girl.png",
+      "gitBlob": "3e82e31eb31dab70b1979cd85bce6519aa2e93de",
+      "bytes": 1983678
+    },
+    {
+      "path": "Imagens Ilustrativa/Fourteen-quatorze.png",
+      "gitBlob": "4f2e2aaa91dd1a189531b58ae08880bef265c3e1",
+      "bytes": 1335945
+    },
+    {
+      "path": "Imagens Ilustrativa/Girl - menina.png",
+      "gitBlob": "f48cfd97ec1bc69e4033b973f009cbf3c2042f57",
+      "bytes": 1980947
+    },
+    {
+      "path": "Imagens Ilustrativa/Giz de cera laranja.png",
+      "gitBlob": "766e48fd1a750a0ceb723a4333e1515456a8d1f7",
+      "bytes": 657931
+    },
+    {
+      "path": "Imagens Ilustrativa/Giz de cera vermelho.png",
+      "gitBlob": "d022f741b3a4ec39348372f1a2ed0f79f0a520a2",
+      "bytes": 694896
+    },
+    {
+      "path": "Imagens Ilustrativa/Glasses — Óculos.png",
+      "gitBlob": "9cb686e70e6be71d165fa5f5c15b85fabefba780",
+      "bytes": 776564
+    },
+    {
+      "path": "Imagens Ilustrativa/Go to school — 7-30.png",
+      "gitBlob": "def0749c9ea7ebc1bae50ff83a362bbbcc5b0866",
+      "bytes": 1757440
+    },
+    {
+      "path": "Imagens Ilustrativa/Good Afternoon.png",
+      "gitBlob": "493c16e576cb0ae065cab0cdb97316b3a7503405",
+      "bytes": 1915132
+    },
+    {
+      "path": "Imagens Ilustrativa/Good Morning.png",
+      "gitBlob": "c17fc4fef70d9251d45a6f44d649126aa852c8d2",
+      "bytes": 1982659
+    },
+    {
+      "path": "Imagens Ilustrativa/Good Night.png",
+      "gitBlob": "3f4ffba44955ebd37f2da378e8d14a9ea4665396",
+      "bytes": 2382954
+    },
+    {
+      "path": "Imagens Ilustrativa/Grapes - uvas.png",
+      "gitBlob": "28220749c1f5c607970dcc1bdfc683d3b4082fb5",
+      "bytes": 1456074
+    },
+    {
+      "path": "Imagens Ilustrativa/Hamburger + pizza + soda.png",
+      "gitBlob": "d33e5ceffbf84e6eaeca65053fd635e5248c2dd8",
+      "bytes": 2013973
+    },
+    {
+      "path": "Imagens Ilustrativa/Hamister.png",
+      "gitBlob": "c0f63853e7c1ab26360983f97c33fa2067ca1fc1",
+      "bytes": 1325304
+    },
+    {
+      "path": "Imagens Ilustrativa/Hands — Mão.png",
+      "gitBlob": "9943c09e6eb7402a43bf2d618337a10e3ad1a84e",
+      "bytes": 2141495
+    },
+    {
+      "path": "Imagens Ilustrativa/Hat — Chapéu.png",
+      "gitBlob": "129bb4dd6d2d12e279ce7c4b86cdc43028a75d63",
+      "bytes": 1585822
+    },
+    {
+      "path": "Imagens Ilustrativa/Have breakfast.png",
+      "gitBlob": "0cc6cc55b5f9c4b966088c0f4c5a76f6e2472d71",
+      "bytes": 1847243
+    },
+    {
+      "path": "Imagens Ilustrativa/Have lunch — 12-30.png",
+      "gitBlob": "aa67ed6d800d3aff6ceae7a3622c27216ed8d331",
+      "bytes": 2061768
+    },
+    {
+      "path": "Imagens Ilustrativa/Head — Cabeça.png",
+      "gitBlob": "68f4a3d9e3b1ad820faa6a22dd25e699e25d8ca6",
+      "bytes": 2009888
+    },
+    {
+      "path": "Imagens Ilustrativa/Hello - oi.png",
+      "gitBlob": "70e74ce5db1853ee0da7a93ab1f96da7bf457ab0",
+      "bytes": 1915128
+    },
+    {
+      "path": "Imagens Ilustrativa/Hospital — Hospital.png",
+      "gitBlob": "13c05a2b9e57dfdf3dfe8c4359e0b6e4363724ac",
+      "bytes": 1613964
+    },
+    {
+      "path": "Imagens Ilustrativa/I don't like pizza.png",
+      "gitBlob": "6cbff573fec68e03a54ac989d64083ecfe3e4695",
+      "bytes": 2248265
+    },
+    {
+      "path": "Imagens Ilustrativa/I have a cold — Estou resfriado(a).png",
+      "gitBlob": "c639f1d8ef89850d5b0bd522adb893f70a3759c6",
+      "bytes": 2226192
+    },
+    {
+      "path": "Imagens Ilustrativa/I have a headache — Estou com dor de cabeça.png",
+      "gitBlob": "46ef14d449db6dc12e1e38b4422adda7f44697e6",
+      "bytes": 2551765
+    },
+    {
+      "path": "Imagens Ilustrativa/I like apples, but I prefer bananas.png",
+      "gitBlob": "a7f50f38cfee69cd0d77b3ce96aa1385d23c4f27",
+      "bytes": 1530972
+    },
+    {
+      "path": "Imagens Ilustrativa/I like apples.png",
+      "gitBlob": "2b26bad293f231330f254c87812c03fc0157b8ba",
+      "bytes": 2287223
+    },
+    {
+      "path": "Imagens Ilustrativa/Imagem do ChatGPT 2 de nov. de 2026, 16_57_53.png",
+      "gitBlob": "f4744d38802e526be62c0babf5cefd14f6046cc1",
+      "bytes": 2324293
+    },
+    {
+      "path": "Imagens Ilustrativa/Imagem do ChatGPT 31 de out. de 2026, 10_16_07-4.png",
+      "gitBlob": "39001848599fde9426314eab91c8a66d3e5ba3e9",
+      "bytes": 1064497
+    },
+    {
+      "path": "Imagens Ilustrativa/Jacket — Jaqueta.png",
+      "gitBlob": "73b2c1bc562e9303e64ce1c6f563663ac61c83eb",
+      "bytes": 1734097
+    },
+    {
+      "path": "Imagens Ilustrativa/January.png",
+      "gitBlob": "d780041575eff16edf07ddee69a4e4c7cc1b2a92",
+      "bytes": 1785993
+    },
+    {
+      "path": "Imagens Ilustrativa/July.png",
+      "gitBlob": "004f784b0ef473000ea2ede96c084c2a223d116f",
+      "bytes": 2482760
+    },
+    {
+      "path": "Imagens Ilustrativa/June.png",
+      "gitBlob": "271025ec0323bf256b72071003d280a23c2a3065",
+      "bytes": 1851034
+    },
+    {
+      "path": "Imagens Ilustrativa/Kitchen — Cozinha.png",
+      "gitBlob": "2dca8e82e188ee27abb7f505275b2f1b987a2f10",
+      "bytes": 2066418
+    },
+    {
+      "path": "Imagens Ilustrativa/Kitchen.png",
+      "gitBlob": "4d6832fa029ef555d538eb1759aca997cef9336b",
+      "bytes": 1850071
+    },
+    {
+      "path": "Imagens Ilustrativa/LOGO DA EMPRESA_COLORIDO.png",
+      "gitBlob": "bedd714eff810f00565d97d32aae4e45fd3b93ed",
+      "bytes": 4748246
+    },
+    {
+      "path": "Imagens Ilustrativa/Leo in the living room — Leo na sala de estar.png",
+      "gitBlob": "07057d94bb41d0157edc6fdbb2e3142191fe9e1e",
+      "bytes": 2342722
+    },
+    {
+      "path": "Imagens Ilustrativa/Leo.png",
+      "gitBlob": "82bc5a8a4d9ec435b23b5486acfa642b7cde8caa",
+      "bytes": 892301
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra A - EI.png",
+      "gitBlob": "2ca2a7832d18a4c805584557bdc5d8cd2d118062",
+      "bytes": 1016675
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra B - BI.png",
+      "gitBlob": "a130edb613dc4bdb761d409b74fb1e953cc5cd94",
+      "bytes": 996703
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra C - SI.png",
+      "gitBlob": "a4d63888505d62a75913fb6ff0296866ad817f27",
+      "bytes": 1072666
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra D - DI.png",
+      "gitBlob": "965922a509639241928f360bd502e622ef4362a8",
+      "bytes": 1024406
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra E - I.png",
+      "gitBlob": "8c0e365317b6abf7868d6e10644fba34001baf57",
+      "bytes": 979485
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra J.png",
+      "gitBlob": "19e1535ef261e836e7aab6ed39c50ed580dafd9c",
+      "bytes": 995261
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra K.png",
+      "gitBlob": "9573a8d859073350f3476c8ecd76fae8b58b872b",
+      "bytes": 1028090
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra L.png",
+      "gitBlob": "5fb223cd745a6550c5ed6e0f5680d273da997abf",
+      "bytes": 959619
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra M - EM.png",
+      "gitBlob": "440df17aa40b279cbf10d678fc1a265bc70f17a2",
+      "bytes": 1033409
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra N.png",
+      "gitBlob": "46b63a1471ff1f4ec83b5bab96cc7e523cbab1ac",
+      "bytes": 974156
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra O.png",
+      "gitBlob": "28ee9a54223ff39bd8479c17261c791fc122dbff",
+      "bytes": 1039162
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra P.png",
+      "gitBlob": "dcd04668a825ec6818e63d0ac19381b21685f1d3",
+      "bytes": 996868
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra Q.png",
+      "gitBlob": "dacc8c28c2340e814ca6328afdb72922acd3dc1b",
+      "bytes": 1054113
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra R.png",
+      "gitBlob": "f731048b4b28cc88e0ab3f9f8c41271901b455dd",
+      "bytes": 1010041
+    },
+    {
+      "path": "Imagens Ilustrativa/Letra S - ES.png",
+      "gitBlob": "403f150638b8918dae64f5a4096ad3a13e1db51a",
+      "bytes": 1118775
+    },
+    {
+      "path": "Imagens Ilustrativa/Library — Biblioteca.png",
+      "gitBlob": "14b0b0717d30752bcba6914ae427c4f700af450b",
+      "bytes": 1835141
+    },
+    {
+      "path": "Imagens Ilustrativa/Living room — Sala de estar.png",
+      "gitBlob": "518127541034f86f152366bc31b405205e5dfc40",
+      "bytes": 2004701
+    },
+    {
+      "path": "Imagens Ilustrativa/Living room.png",
+      "gitBlob": "1c8b62ccdac7b62b21f40a448217913e3a12a5eb",
+      "bytes": 1837836
+    },
+    {
+      "path": "Imagens Ilustrativa/Logo EduQ Play.png",
+      "gitBlob": "a6c71f1d91a8e6319512e4abd1e55de06ea0df4e",
+      "bytes": 1485452
+    },
+    {
+      "path": "Imagens Ilustrativa/Lápis azul.png",
+      "gitBlob": "aa2dfa6937415f3f1b2428f1d474983757d2b784",
+      "bytes": 578712
+    },
+    {
+      "path": "Imagens Ilustrativa/Lápis vermelho.png",
+      "gitBlob": "76224074b5b67a5e6d78dbcef7f5d4b74dc24108",
+      "bytes": 602428
+    },
+    {
+      "path": "Imagens Ilustrativa/Lápis.png",
+      "gitBlob": "37a383e05c3c1bff123818b171c3bb9dc4a33c11",
+      "bytes": 581403
+    },
+    {
+      "path": "Imagens Ilustrativa/Léa.png",
+      "gitBlob": "441d2b5caadbaca8863a9d549f2b9522f05bd9e6",
+      "bytes": 965557
+    },
+    {
+      "path": "Imagens Ilustrativa/March.png",
+      "gitBlob": "5b79b17a7492a9ced7196674b34b77434e9756bb",
+      "bytes": 1886350
+    },
+    {
+      "path": "Imagens Ilustrativa/May.png",
+      "gitBlob": "349211a468f23011061b53af0e0f864d8dee6db2",
+      "bytes": 1824496
+    },
+    {
+      "path": "Imagens Ilustrativa/Maya in the kitchen — Maya na cozinha.png",
+      "gitBlob": "4f1e23dd460b1b7f4c620eb5bc2fe7971363fd3f",
+      "bytes": 2163727
+    },
+    {
+      "path": "Imagens Ilustrativa/Maya rejeitando bananas — I don't like.png",
+      "gitBlob": "02426746ac04ba8dd44ec99046905ae8d0829428",
+      "bytes": 1789928
+    },
+    {
+      "path": "Imagens Ilustrativa/Maya — Personal profile.png",
+      "gitBlob": "2f2d10fd4a968488c68e8c72184f15ff91b8228d",
+      "bytes": 2464250
+    },
+    {
+      "path": "Imagens Ilustrativa/Maya.png",
+      "gitBlob": "3580f6389e419d449c866f11ddc67ec559259c9f",
+      "bytes": 1114552
+    },
+    {
+      "path": "Imagens Ilustrativa/Maçãs — preferência positiva.png",
+      "gitBlob": "e4717a76858f2a097643d733ce69a1ca8bb73b7c",
+      "bytes": 1592070
+    },
+    {
+      "path": "Imagens Ilustrativa/Melon - melão.png",
+      "gitBlob": "0ec3595c300f08bd18df23816fb237af5e78e441",
+      "bytes": 2117543
+    },
+    {
+      "path": "Imagens Ilustrativa/Menina sorridente com maçã e joinha.png",
+      "gitBlob": "9f63ae15abf34876e8b996936af033cd44b72446",
+      "bytes": 2245555
+    },
+    {
+      "path": "Imagens Ilustrativa/Mia.png",
+      "gitBlob": "f9c71cd8e22550f62feaf71c2110de7b8e330824",
+      "bytes": 1078981
+    },
+    {
+      "path": "Imagens Ilustrativa/Mochila ao lado da cadeira.png",
+      "gitBlob": "fcb37ecc9b871b476537bad368e24f78e42e2ad4",
+      "bytes": 1177561
+    },
+    {
+      "path": "Imagens Ilustrativa/Mochila ao lado de uma cadeira.png",
+      "gitBlob": "75359190eb5d9358d3129e7402c767c699057b99",
+      "bytes": 1113708
+    },
+    {
+      "path": "Imagens Ilustrativa/Mochila vermelha e amarela.png",
+      "gitBlob": "def817dae95a96177f834c97f6887f1664b32cad",
+      "bytes": 1824855
+    },
+    {
+      "path": "Imagens Ilustrativa/Mochila.png",
+      "gitBlob": "f2f4ac58d70b8f25877e2fa3249a3bbc981e6da4",
+      "bytes": 1891818
+    },
+    {
+      "path": "Imagens Ilustrativa/My name.png",
+      "gitBlob": "6b4d68bd8ccf01dd2b083b70b5bc9ea08f8efe80",
+      "bytes": 1795024
+    },
+    {
+      "path": "Imagens Ilustrativa/Mãos.png",
+      "gitBlob": "4e6d4bd3f1b624eb159934873c7658ace546ddfa",
+      "bytes": 1134372
+    },
+    {
+      "path": "Imagens Ilustrativa/Nariz.png",
+      "gitBlob": "edf6c957880286a215ed2de8d165d8467b929a4a",
+      "bytes": 1069375
+    },
+    {
+      "path": "Imagens Ilustrativa/Noah.png",
+      "gitBlob": "becb46efc64cc28ca6a7663b701b1ebc72a9f7c3",
+      "bytes": 899562
+    },
+    {
+      "path": "Imagens Ilustrativa/Noite.png",
+      "gitBlob": "5815c2b5b240f84ff20b532e6c481414567873e5",
+      "bytes": 1498551
+    },
+    {
+      "path": "Imagens Ilustrativa/November.png",
+      "gitBlob": "1874565beea4ca2e16087a4ef5b00277046dab35",
+      "bytes": 2455731
+    },
+    {
+      "path": "Imagens Ilustrativa/Nurse — Enfermeiro(a).png",
+      "gitBlob": "15939864930e786b452683cbe6a2eda66cc7837a",
+      "bytes": 1409968
+    },
+    {
+      "path": "Imagens Ilustrativa/October.png",
+      "gitBlob": "336f4be7583e30062597455f2f3c77be5b6a0b1b",
+      "bytes": 2519160
+    },
+    {
+      "path": "Imagens Ilustrativa/Olhos.png",
+      "gitBlob": "b5fe43edc36fc3fd8590e8dfc3013f5166f498c2",
+      "bytes": 1659147
+    },
+    {
+      "path": "Imagens Ilustrativa/One book in the bookcase.png",
+      "gitBlob": "0bb021d0005e5812ac2421e45d5e73547c91ab15",
+      "bytes": 1515888
+    },
+    {
+      "path": "Imagens Ilustrativa/One white plate in the kitchen.png",
+      "gitBlob": "0824e2a82011921985fae28b31c9737c9028bb2e",
+      "bytes": 2222940
+    },
+    {
+      "path": "Imagens Ilustrativa/Orange Fruit -laranja fruta.png",
+      "gitBlob": "dfdf5ba61bac0c7b1c2c6efc9d1f800f3fa9461e",
+      "bytes": 1847904
+    },
+    {
+      "path": "Imagens Ilustrativa/Orelha.png",
+      "gitBlob": "691f55927ad1f0a449610eaa7a589fe881294135",
+      "bytes": 1067449
+    },
+    {
+      "path": "Imagens Ilustrativa/Ovelha.png",
+      "gitBlob": "b9d8cce39afc874c3f12c2f1fd5e0adfb8960d90",
+      "bytes": 1270245
+    },
+    {
+      "path": "Imagens Ilustrativa/Papaya - mamão.png",
+      "gitBlob": "512b8577b233e243f034806552ae2e523bea6fbf",
+      "bytes": 1885310
+    },
+    {
+      "path": "Imagens Ilustrativa/Parents — Responsáveis.png",
+      "gitBlob": "e767bab46c52d3e334b46e070c9267fbb1568f10",
+      "bytes": 2549034
+    },
+    {
+      "path": "Imagens Ilustrativa/Passáro.png",
+      "gitBlob": "1128475a8de84c4dbeb613fb798164f03d432342",
+      "bytes": 1245909
+    },
+    {
+      "path": "Imagens Ilustrativa/Pato.png",
+      "gitBlob": "4db13d08b9c3813fd096dc768cd297b0ca34003b",
+      "bytes": 864075
+    },
+    {
+      "path": "Imagens Ilustrativa/Pear - pera.png",
+      "gitBlob": "36833a42a891ac34311228532c0043b6576d88a7",
+      "bytes": 1254404
+    },
+    {
+      "path": "Imagens Ilustrativa/Peixe-fish.png",
+      "gitBlob": "29b60c4e87bcd6cc0a5a4f2e7b7f4fada03a01fc",
+      "bytes": 1240470
+    },
+    {
+      "path": "Imagens Ilustrativa/Perna.png",
+      "gitBlob": "dcef48496ef282878577ccebe4758968c80de405",
+      "bytes": 522483
+    },
+    {
+      "path": "Imagens Ilustrativa/Pilot — Piloto.png",
+      "gitBlob": "334a114c86253417b108a14f6e06ef80ab13578e",
+      "bytes": 1957660
+    },
+    {
+      "path": "Imagens Ilustrativa/Pizza + apple + soda.png",
+      "gitBlob": "52e7a572f0f2f49a9e4fcf54c8e3b2eddef47fb4",
+      "bytes": 1892140
+    },
+    {
+      "path": "Imagens Ilustrativa/Plane - avião.png",
+      "gitBlob": "387a02727c64aea3073478e58842512e2c94ea0a",
+      "bytes": 822861
+    },
+    {
+      "path": "Imagens Ilustrativa/Playing soccer — Jogando futebol.png",
+      "gitBlob": "7f10e1295844e8da19b39cc931d2a26e5373ac0a",
+      "bytes": 1451410
+    },
+    {
+      "path": "Imagens Ilustrativa/Porco-Pig.png",
+      "gitBlob": "35a0445417a58d901d8e4661254889905d7b7c8b",
+      "bytes": 1318377
+    },
+    {
+      "path": "Imagens Ilustrativa/Post office — Correios.png",
+      "gitBlob": "fab3351633d59f3da6a1a49e9bc19cafa5f75b0a",
+      "bytes": 1706736
+    },
+    {
+      "path": "Imagens Ilustrativa/Potato - batata.png",
+      "gitBlob": "d2b66cd3d56918e3105d4a5ab75e15297a074d23",
+      "bytes": 1809344
+    },
+    {
+      "path": "Imagens Ilustrativa/Rain.png",
+      "gitBlob": "aed46eeeff0e389efc2534618dc8484416477e05",
+      "bytes": 1658323
+    },
+    {
+      "path": "Imagens Ilustrativa/Reading — Lendo.png",
+      "gitBlob": "52019f75341009c2e3900e1581e7da1baac2c036",
+      "bytes": 1500527
+    },
+    {
+      "path": "Imagens Ilustrativa/Red cap — Boné vermelho.png",
+      "gitBlob": "185c85290f548875bcc05003970b6f12e39366c0",
+      "bytes": 1639793
+    },
+    {
+      "path": "Imagens Ilustrativa/Relógio marcando 7-30_ ida para a escola.png",
+      "gitBlob": "901c58e5c9ce4c235013bfc1b193af56ba3f7298",
+      "bytes": 2143905
+    },
+    {
+      "path": "Imagens Ilustrativa/Rug under the wardrobe.png",
+      "gitBlob": "cabfeabf6ac782e8f7f9dcbe396c783cee465479",
+      "bytes": 1648492
+    },
+    {
+      "path": "Imagens Ilustrativa/Rug.png",
+      "gitBlob": "6019628588d049a037d8937d7e2cd99fdbf7cdf8",
+      "bytes": 2621813
+    },
+    {
+      "path": "Imagens Ilustrativa/Régua.png",
+      "gitBlob": "2276abbd4f90caf142df84062c86d770ba394399",
+      "bytes": 520890
+    },
+    {
+      "path": "Imagens Ilustrativa/Sam.png",
+      "gitBlob": "d14ebadf4ab217c77694da25f29c060ce410f3f0",
+      "bytes": 882096
+    },
+    {
+      "path": "Imagens Ilustrativa/Sentada.png",
+      "gitBlob": "f69702dc0050b6db121b69d4905be377ff5d7fad",
+      "bytes": 1648751
+    },
+    {
+      "path": "Imagens Ilustrativa/September.png",
+      "gitBlob": "88685729f037ab4ca16686fd26f762dc0a3b3e69",
+      "bytes": 2589141
+    },
+    {
+      "path": "Imagens Ilustrativa/Seventeen-dezessete.png",
+      "gitBlob": "7d27b32275a3ca26ad88c98e2ac35e38ee184a9e",
+      "bytes": 1337832
+    },
+    {
+      "path": "Imagens Ilustrativa/Silêncio.png",
+      "gitBlob": "f3ac00747309e51f0cabdfa62ea8607f4e3666a7",
+      "bytes": 1013096
+    },
+    {
+      "path": "Imagens Ilustrativa/Sixteen-dezesseis.png",
+      "gitBlob": "977a3656b1a4627e8d8f937fbf12b61c641035cf",
+      "bytes": 1364390
+    },
+    {
+      "path": "Imagens Ilustrativa/Sneakers — Tênis.png",
+      "gitBlob": "b469490047f9c7142a47c65b8856157e7fd40046",
+      "bytes": 1642385
+    },
+    {
+      "path": "Imagens Ilustrativa/Soccer — Futebol.png",
+      "gitBlob": "c43145ae0b89a029899e73c5d1ed1ad641177adb",
+      "bytes": 1817422
+    },
+    {
+      "path": "Imagens Ilustrativa/Sofa.png",
+      "gitBlob": "970dbd3960ef255769a93ab0643a94aea08854f7",
+      "bytes": 1211546
+    },
+    {
+      "path": "Imagens Ilustrativa/Spring - primavera.PNG",
+      "gitBlob": "db11769c0590ad035ccfac7dd64b8cc4a78326d7",
+      "bytes": 535423
+    },
+    {
+      "path": "Imagens Ilustrativa/Spring.png",
+      "gitBlob": "163d2cf5b9afdeb28fed6cd68662dc3f9dfafb9f",
+      "bytes": 2576190
+    },
+    {
+      "path": "Imagens Ilustrativa/Summer - verão.PNG",
+      "gitBlob": "458fc26126c67264b611c1d89a94ac4c8a928d79",
+      "bytes": 520159
+    },
+    {
+      "path": "Imagens Ilustrativa/Supermarket — Supermercado.png",
+      "gitBlob": "724ac2b0585c97a0ba4cda3ff528807cba2c9073",
+      "bytes": 1863366
+    },
+    {
+      "path": "Imagens Ilustrativa/Swimming — Natação.png",
+      "gitBlob": "e70f2af5557adcd39433a56eccb6d396928077d8",
+      "bytes": 1817362
+    },
+    {
+      "path": "Imagens Ilustrativa/TV on the table.png",
+      "gitBlob": "77eefbef4c1530c0cb655a7e815ecdc22cef7d55",
+      "bytes": 1403831
+    },
+    {
+      "path": "Imagens Ilustrativa/TV sobre a mesa.png",
+      "gitBlob": "2fd74988345651916fa79164e1fd05241f3052b0",
+      "bytes": 1007790
+    },
+    {
+      "path": "Imagens Ilustrativa/Tapete embaixo do guarda-roupa.png",
+      "gitBlob": "ba38de687f369bee8f90ae8333b05bf9ccfe184c",
+      "bytes": 1537144
+    },
+    {
+      "path": "Imagens Ilustrativa/Tartaruga.png",
+      "gitBlob": "c7cdf176515a397825a988064103a6c01a20030f",
+      "bytes": 1528934
+    },
+    {
+      "path": "Imagens Ilustrativa/Teacher — Professor(a).png",
+      "gitBlob": "e976152a52d32e44ad2b0709c086fc6484a92247",
+      "bytes": 2341283
+    },
+    {
+      "path": "Imagens Ilustrativa/Tennis — Tênis.png",
+      "gitBlob": "6b4a567c679ab46752cebd0ae2ebcefc07c179e5",
+      "bytes": 1649651
+    },
+    {
+      "path": "Imagens Ilustrativa/The black truck is behind the bus.png",
+      "gitBlob": "7c2783ffa06182184f34a9216a9668774de4e572",
+      "bytes": 834838
+    },
+    {
+      "path": "Imagens Ilustrativa/Thirteen-treze.png",
+      "gitBlob": "5d190eb83d1d365840f3d97154bbf3108091e93c",
+      "bytes": 1376463
+    },
+    {
+      "path": "Imagens Ilustrativa/Three books in the bookcase.png",
+      "gitBlob": "1bfc80e7eba0049cdac8400fc39876bf7391621e",
+      "bytes": 1427243
+    },
+    {
+      "path": "Imagens Ilustrativa/Three books on the sofa.png",
+      "gitBlob": "ec83fd834c66205ee7609426b18b30e4a2eba6a0",
+      "bytes": 1371270
+    },
+    {
+      "path": "Imagens Ilustrativa/Three books on the table.png",
+      "gitBlob": "08a2a1164a14db55661967fc49c451fe3f4caefe",
+      "bytes": 897071
+    },
+    {
+      "path": "Imagens Ilustrativa/Tocando as mãos.png",
+      "gitBlob": "3117dc34c710216b486b9cf587b6153eb48159c8",
+      "bytes": 907173
+    },
+    {
+      "path": "Imagens Ilustrativa/Tocando na cabeça.png",
+      "gitBlob": "1e83f419519ac098d06cf20c23a488f86aa049ce",
+      "bytes": 1121722
+    },
+    {
+      "path": "Imagens Ilustrativa/Tocando os braços.png",
+      "gitBlob": "f88fc5c0a63a9692bf404cbddacd22a304896e8c",
+      "bytes": 839678
+    },
+    {
+      "path": "Imagens Ilustrativa/Tocando os joelhos.png",
+      "gitBlob": "e0d3fa4f108b5e4eabb535b5df024d62b2191c9f",
+      "bytes": 1114660
+    },
+    {
+      "path": "Imagens Ilustrativa/Tocando os pés.png",
+      "gitBlob": "00021c9bc4762e43608108754c582f91bc36a75d",
+      "bytes": 1132732
+    },
+    {
+      "path": "Imagens Ilustrativa/Tomato - tomate.png",
+      "gitBlob": "2264f1613186236d6655166e2e0cffe4d57a55c0",
+      "bytes": 1626841
+    },
+    {
+      "path": "Imagens Ilustrativa/Train - trem.png",
+      "gitBlob": "8bc5c2e42e019276f512d7d4d2c5310d28416473",
+      "bytes": 1395563
+    },
+    {
+      "path": "Imagens Ilustrativa/Truck - caminhão.png",
+      "gitBlob": "8befac675644e1b82a8f2c9bc1a66234e29d6ff7",
+      "bytes": 1377931
+    },
+    {
+      "path": "Imagens Ilustrativa/Twelve-doze.png",
+      "gitBlob": "f50a7286b829bc4083b50068d62c7f037ad0f1fd",
+      "bytes": 1363557
+    },
+    {
+      "path": "Imagens Ilustrativa/Two green pillows on the sofa.png",
+      "gitBlob": "11ef10f9145c7a9d4911737761461c0dabf73d21",
+      "bytes": 1413044
+    },
+    {
+      "path": "Imagens Ilustrativa/Two schools — Duas escolas.png",
+      "gitBlob": "702e16240ccdfd138d545e6725487b0cc3bc2848",
+      "bytes": 1511197
+    },
+    {
+      "path": "Imagens Ilustrativa/Two teachers — Dois professores.png",
+      "gitBlob": "83032ab0e739bcb55382f51dce5932bbb73c5412",
+      "bytes": 2295930
+    },
+    {
+      "path": "Imagens Ilustrativa/Vaca.png",
+      "gitBlob": "e18d43b0011fb3b63f6addb47c5c85aec1a2a8db",
+      "bytes": 1203651
+    },
+    {
+      "path": "Imagens Ilustrativa/Veterinarian — Veterinário(a).png",
+      "gitBlob": "fea9910263b5dc72e80e7ff68ad559e7487058e2",
+      "bytes": 2029773
+    },
+    {
+      "path": "Imagens Ilustrativa/Veterinário cuidando de um animal.png",
+      "gitBlob": "597759751ca19f016638fdb1fa9a9c1a686cb4c9",
+      "bytes": 1777471
+    },
+    {
+      "path": "Imagens Ilustrativa/Winter - inverno.PNG",
+      "gitBlob": "f2356ca0a8c30f7ea84730e3c9a6301cf5f00ffb",
+      "bytes": 540150
+    },
+    {
+      "path": "Imagens Ilustrativa/Yuki.png",
+      "gitBlob": "a5f9b45ffc6bbf8931dc1b6210e8e3821691b502",
+      "bytes": 936155
+    },
+    {
+      "path": "Imagens Ilustrativa/acolhida_aluno_novo_welcome_new_student.png",
+      "gitBlob": "70e27dba1a110f994314e5c466daeb87e6b4a4ad",
+      "bytes": 2039721
+    },
+    {
+      "path": "Imagens Ilustrativa/acordando.png",
+      "gitBlob": "158d1ed680e617eb7d849e511c303297010af13b",
+      "bytes": 2085812
+    },
+    {
+      "path": "Imagens Ilustrativa/animal-cow-vaca.png",
+      "gitBlob": "e18d43b0011fb3b63f6addb47c5c85aec1a2a8db",
+      "bytes": 1203651
+    },
+    {
+      "path": "Imagens Ilustrativa/animal-duck-pato.png",
+      "gitBlob": "4db13d08b9c3813fd096dc768cd297b0ca34003b",
+      "bytes": 864075
+    },
+    {
+      "path": "Imagens Ilustrativa/animal-horse-cavalo.png",
+      "gitBlob": "b70502487d880b0784443831916821cb458e2c53",
+      "bytes": 1193835
+    },
+    {
+      "path": "Imagens Ilustrativa/animal-pig-porco.png",
+      "gitBlob": "35a0445417a58d901d8e4661254889905d7b7c8b",
+      "bytes": 1318377
+    },
+    {
+      "path": "Imagens Ilustrativa/animal-sheep-ovelha.png",
+      "gitBlob": "b9d8cce39afc874c3f12c2f1fd5e0adfb8960d90",
+      "bytes": 1270245
+    },
+    {
+      "path": "Imagens Ilustrativa/apple.png",
+      "gitBlob": "a523513041f45fa01660e2e539217329d9744a4d",
+      "bytes": 2137036
+    },
+    {
+      "path": "Imagens Ilustrativa/april.png",
+      "gitBlob": "5856c9f3cc1b15c6a79e467d17b13303ce1f0d89",
+      "bytes": 1813894
+    },
+    {
+      "path": "Imagens Ilustrativa/asset alvo.png",
+      "gitBlob": "83b8c6da9fdbd5713795b438b79810adf9468844",
+      "bytes": 1276616
+    },
+    {
+      "path": "Imagens Ilustrativa/banana.png",
+      "gitBlob": "14f858bef72073c5489557904d22d564f186f393",
+      "bytes": 795064
+    },
+    {
+      "path": "Imagens Ilustrativa/big cat - gato grande.png",
+      "gitBlob": "b7b512a6c298fb33b52f635f86b8f2291fa70033",
+      "bytes": 1797442
+    },
+    {
+      "path": "Imagens Ilustrativa/big dog -cachorro grande.png",
+      "gitBlob": "667cd7e9605be62d85aa2798f7b1931ca3b45fad",
+      "bytes": 1628695
+    },
+    {
+      "path": "Imagens Ilustrativa/blue ball - bola azul.png",
+      "gitBlob": "55469cce1e17eee06b7d2581e0e2f85e6af39958",
+      "bytes": 1148352
+    },
+    {
+      "path": "Imagens Ilustrativa/body-part-touch-arms-tocar-bracos.png",
+      "gitBlob": "f88fc5c0a63a9692bf404cbddacd22a304896e8c",
+      "bytes": 839678
+    },
+    {
+      "path": "Imagens Ilustrativa/body-part-touch-feet-tocar-pes.png",
+      "gitBlob": "00021c9bc4762e43608108754c582f91bc36a75d",
+      "bytes": 1132732
+    },
+    {
+      "path": "Imagens Ilustrativa/body-part-touch-hands-tocar-maos.png",
+      "gitBlob": "3117dc34c710216b486b9cf587b6153eb48159c8",
+      "bytes": 907173
+    },
+    {
+      "path": "Imagens Ilustrativa/body-part-touch-head-tocar-cabeca.png",
+      "gitBlob": "1e83f419519ac098d06cf20c23a488f86aa049ce",
+      "bytes": 1121722
+    },
+    {
+      "path": "Imagens Ilustrativa/body-part-touch-knees-tocar-joelhos.png",
+      "gitBlob": "e0d3fa4f108b5e4eabb535b5df024d62b2191c9f",
+      "bytes": 1114660
+    },
+    {
+      "path": "Imagens Ilustrativa/boy - menino.png",
+      "gitBlob": "142905ae371453b2ec6b72f9019271b9fade00a8",
+      "bytes": 1599961
+    },
+    {
+      "path": "Imagens Ilustrativa/boy_crianca_chegando_child_arriving_arrival.png",
+      "gitBlob": "c16d9267b2f41c88e7c80ba704e496be8ddfac56",
+      "bytes": 922414
+    },
+    {
+      "path": "Imagens Ilustrativa/boy_manha_morning_sunrise_sol_nascendo.png",
+      "gitBlob": "3c8c9b65700d93f5648deab9f008f441e7923f9f",
+      "bytes": 2267163
+    },
+    {
+      "path": "Imagens Ilustrativa/boy_noite_night_bedtime_rotina_de_sono.png",
+      "gitBlob": "b06361382e3ecbe0d49927f4d295bbb94a08e35f",
+      "bytes": 1832570
+    },
+    {
+      "path": "Imagens Ilustrativa/boy_tarde_afternoon_periodo_da_tarde.png",
+      "gitBlob": "914f7cb080fef15e0ae376673f4ad0f1ff2b9f31",
+      "bytes": 1988835
+    },
+    {
+      "path": "Imagens Ilustrativa/brincando.png",
+      "gitBlob": "e1e4f716f142914153de90cb4cc576ebe2dfcb76",
+      "bytes": 1712951
+    },
+    {
+      "path": "Imagens Ilustrativa/brother-irmão.png",
+      "gitBlob": "d208db5d9c79f732fe06fa4f2e3e5fe05ca4c5f8",
+      "bytes": 800365
+    },
+    {
+      "path": "Imagens Ilustrativa/bus.png",
+      "gitBlob": "801f3630db89eb3b143df6379e6259eda654f57e",
+      "bytes": 1502932
+    },
+    {
+      "path": "Imagens Ilustrativa/car.png",
+      "gitBlob": "16fa20c493c32d3fa6ece36f7cba91fbe433a92b",
+      "bytes": 1190050
+    },
+    {
+      "path": "Imagens Ilustrativa/carrot.png",
+      "gitBlob": "4fa03312965af56f69e6cc603a2cf12c996858c7",
+      "bytes": 1088312
+    },
+    {
+      "path": "Imagens Ilustrativa/chegada_escola_manha_arriving_at_school_morning.png",
+      "gitBlob": "ea9d3d76b7b9be96e26acd071cce4ba3b6bab0eb",
+      "bytes": 2075329
+    },
+    {
+      "path": "Imagens Ilustrativa/cinco - five - 5.png",
+      "gitBlob": "e09e3cc58271c667ba1c3f93eb03e76e22495ce3",
+      "bytes": 1350163
+    },
+    {
+      "path": "Imagens Ilustrativa/classroom-command-quiet-silencio.png",
+      "gitBlob": "f3ac00747309e51f0cabdfa62ea8607f4e3666a7",
+      "bytes": 1013096
+    },
+    {
+      "path": "Imagens Ilustrativa/classroom-command-sit-down-sentar.png",
+      "gitBlob": "f69702dc0050b6db121b69d4905be377ff5d7fad",
+      "bytes": 1648751
+    },
+    {
+      "path": "Imagens Ilustrativa/classroom-command-stand-up-em-pe.png",
+      "gitBlob": "33b447fce9495471ceda0f3ac08af8cd83b215dd",
+      "bytes": 923493
+    },
+    {
+      "path": "Imagens Ilustrativa/color orange-cor laranja.png",
+      "gitBlob": "364c9ccfda05f4440da566495b47c5c6a2993532",
+      "bytes": 1054385
+    },
+    {
+      "path": "Imagens Ilustrativa/color-black-preto.png",
+      "gitBlob": "e97d277f7df8fdb73b611f919fec34fca836bd8d",
+      "bytes": 885925
+    },
+    {
+      "path": "Imagens Ilustrativa/color-blue-azul.png",
+      "gitBlob": "d1c5c6980118941b1f43131214a6dcc7d7e39761",
+      "bytes": 1097211
+    },
+    {
+      "path": "Imagens Ilustrativa/color-brown-marrom.png",
+      "gitBlob": "4ba5334007c4a8ac4ef4de3d87b03723e0523588",
+      "bytes": 1110027
+    },
+    {
+      "path": "Imagens Ilustrativa/color-green-verde.png",
+      "gitBlob": "425907d66db6bd1e8fefb6846f3f17e9a86eece1",
+      "bytes": 1050617
+    },
+    {
+      "path": "Imagens Ilustrativa/color-pink-rosa.png",
+      "gitBlob": "6b1035b8d0c8259d971eab77b94da4cce7483923",
+      "bytes": 989398
+    },
+    {
+      "path": "Imagens Ilustrativa/color-red-vermelho.png",
+      "gitBlob": "9c5fd365ad6fee630f695d2c403e6a02ba5fb4d6",
+      "bytes": 949380
+    },
+    {
+      "path": "Imagens Ilustrativa/color-white-branco.png",
+      "gitBlob": "d8b2da519e574a0c7c08e3d85a4e2db4348972c1",
+      "bytes": 819113
+    },
+    {
+      "path": "Imagens Ilustrativa/color-yellow-amarelo.png",
+      "gitBlob": "d641e8582975e926fe49ea04c32f4817114f53f0",
+      "bytes": 884087
+    },
+    {
+      "path": "Imagens Ilustrativa/criancas_se_cumprimentando_children_greeting_hello.png",
+      "gitBlob": "bb87444336caccc3c910592960cd283095818bb5",
+      "bytes": 1615319
+    },
+    {
+      "path": "Imagens Ilustrativa/descansando.png",
+      "gitBlob": "6a921ad7b2a5fec3e98015d646d95a2c17cac739",
+      "bytes": 1479161
+    },
+    {
+      "path": "Imagens Ilustrativa/desenhando no parque.png",
+      "gitBlob": "20ab6bf43eef61db78f2f8d0924e31f0eb9e0d57",
+      "bytes": 2156291
+    },
+    {
+      "path": "Imagens Ilustrativa/desenhando.png",
+      "gitBlob": "bb0307c978030cc50d148102443d0c450f9109f6",
+      "bytes": 1744482
+    },
+    {
+      "path": "Imagens Ilustrativa/dez  - ten - 10.png",
+      "gitBlob": "734081fc405be227f02f6b0b4e95d8f4af2f86ec",
+      "bytes": 1378725
+    },
+    {
+      "path": "Imagens Ilustrativa/dois - two - 2.png",
+      "gitBlob": "6cd661861d3c66e2e22826fd81040d97336d4a8e",
+      "bytes": 1355563
+    },
+    {
+      "path": "Imagens Ilustrativa/doll - boneca.png",
+      "gitBlob": "ab152cd40e458c436df4390bb31478119a746af1",
+      "bytes": 2180636
+    },
+    {
+      "path": "Imagens Ilustrativa/dormindo.png",
+      "gitBlob": "fec2dea320a5a6a43ceeb0c7bde8f612ac831e6d",
+      "bytes": 1790634
+    },
+    {
+      "path": "Imagens Ilustrativa/eleven-onze.png",
+      "gitBlob": "8ce071a8b737e8a2ac69cbb040477ed93fab824d",
+      "bytes": 1308991
+    },
+    {
+      "path": "Imagens Ilustrativa/emotion-nervous-nervoso.png",
+      "gitBlob": "32dc2118a7163d71aa8ad8f005bff8f5534df697",
+      "bytes": 2006876
+    },
+    {
+      "path": "Imagens Ilustrativa/father-pai.png",
+      "gitBlob": "0dc9fd620b03ecdf15479608d09ac9e9acd5be49",
+      "bytes": 664938
+    },
+    {
+      "path": "Imagens Ilustrativa/fim_da_aula_end_of_class_class_finished.png",
+      "gitBlob": "5c93a1c0673b5639f0282858d21e0aabdf03d8dd",
+      "bytes": 2055110
+    },
+    {
+      "path": "Imagens Ilustrativa/forty.png",
+      "gitBlob": "0fd2043b64930d3639b1f29257a0a56a72ed2e6e",
+      "bytes": 1384940
+    },
+    {
+      "path": "Imagens Ilustrativa/gato - cat.png",
+      "gitBlob": "a78d1430c8a62a83b52726312c10f494d6491155",
+      "bytes": 1539480
+    },
+    {
+      "path": "Imagens Ilustrativa/girl_crianca_chegando_child_arriving_arrival.png",
+      "gitBlob": "f5f988f908cfa70466876e8810d89bf7eb6a9849",
+      "bytes": 926269
+    },
+    {
+      "path": "Imagens Ilustrativa/girl_manha_morning_sunrise_sol_nascendo.png",
+      "gitBlob": "9e4c37a1128a524da786b50347263afc1c7024cc",
+      "bytes": 2103391
+    },
+    {
+      "path": "Imagens Ilustrativa/girl_noite_night_bedtime_rotina_de_sono.png",
+      "gitBlob": "b8107120a6ee14d0df78653c362fa7ded38b464d",
+      "bytes": 1926892
+    },
+    {
+      "path": "Imagens Ilustrativa/grandfather - avô.png",
+      "gitBlob": "8be01577675ae458e42764fc7477f3c4a3af04b7",
+      "bytes": 833800
+    },
+    {
+      "path": "Imagens Ilustrativa/grandmother - avó.png",
+      "gitBlob": "5d23fd1f82bb0f188288f116c930a55011c422f0",
+      "bytes": 803120
+    },
+    {
+      "path": "Imagens Ilustrativa/greeting-good-afternoon-boa-tarde.png",
+      "gitBlob": "493c16e576cb0ae065cab0cdb97316b3a7503405",
+      "bytes": 1915132
+    },
+    {
+      "path": "Imagens Ilustrativa/greeting-good-morning-bom-dia.png",
+      "gitBlob": "c17fc4fef70d9251d45a6f44d649126aa852c8d2",
+      "bytes": 1982659
+    },
+    {
+      "path": "Imagens Ilustrativa/greeting-good-night-boa-noite.png",
+      "gitBlob": "3f4ffba44955ebd37f2da378e8d14a9ea4665396",
+      "bytes": 2382954
+    },
+    {
+      "path": "Imagens Ilustrativa/greeting-goodbye-tchau.png",
+      "gitBlob": "d0e2e7490cbf6f39a6771f7f4a67027f9a9ea744",
+      "bytes": 1686018
+    },
+    {
+      "path": "Imagens Ilustrativa/greeting-hello-oi.png",
+      "gitBlob": "70e74ce5db1853ee0da7a93ab1f96da7bf457ab0",
+      "bytes": 1915128
+    },
+    {
+      "path": "Imagens Ilustrativa/indo dormir.png",
+      "gitBlob": "24bcf6f5758bec268eceaedb50a1b890d07151dc",
+      "bytes": 2080149
+    },
+    {
+      "path": "Imagens Ilustrativa/indo para a escola.png",
+      "gitBlob": "622e8cb16857faa19323c9b117a27184c90e26e2",
+      "bytes": 1757684
+    },
+    {
+      "path": "Imagens Ilustrativa/introduction-my-name-meu-nome.png",
+      "gitBlob": "6b4d68bd8ccf01dd2b083b70b5bc9ea08f8efe80",
+      "bytes": 1795024
+    },
+    {
+      "path": "Imagens Ilustrativa/kit modular.png",
+      "gitBlob": "a15bf56c27a880e6d43bef0cb88e11c4188ede72",
+      "bytes": 2015622
+    },
+    {
+      "path": "Imagens Ilustrativa/kite - pipa.png",
+      "gitBlob": "70e9a17b5a827c64b2e54ac57ee9bd63fc88b9a5",
+      "bytes": 1146055
+    },
+    {
+      "path": "Imagens Ilustrativa/launcher-barrel-front.png",
+      "gitBlob": "6ea8eb6413caefbbd25c00ba5eba63ba2f0d73dd",
+      "bytes": 1425126
+    },
+    {
+      "path": "Imagens Ilustrativa/launcher-base-front.png",
+      "gitBlob": "81973e61eab33df58ad99f51c182d981f0af4bad",
+      "bytes": 1093273
+    },
+    {
+      "path": "Imagens Ilustrativa/launcher-core-front.png.png",
+      "gitBlob": "906b15a5184db81790b3fe80a0e43eb72805b9eb",
+      "bytes": 940730
+    },
+    {
+      "path": "Imagens Ilustrativa/launcher-impact-front.png",
+      "gitBlob": "a31e183e2f0f3724f1559db45953948bf2d65070",
+      "bytes": 1132766
+    },
+    {
+      "path": "Imagens Ilustrativa/launcher-muzzle-front.png",
+      "gitBlob": "20e04967aefb9ff73d79de75a20037dde032c410",
+      "bytes": 1174294
+    },
+    {
+      "path": "Imagens Ilustrativa/launcher-particles-front.png",
+      "gitBlob": "25b31bf79850e65ae264a6f380ead015c2b10faa",
+      "bytes": 1402791
+    },
+    {
+      "path": "Imagens Ilustrativa/launcher-portal-front.png",
+      "gitBlob": "e3ca62ce78fe610777a7e065353228d1295425b0",
+      "bytes": 1580776
+    },
+    {
+      "path": "Imagens Ilustrativa/launcher-projectile-front.png",
+      "gitBlob": "fd89cccb8279f626aad124b2a2ac075f3dc068f7",
+      "bytes": 1046695
+    },
+    {
+      "path": "Imagens Ilustrativa/launcher-support-front.png",
+      "gitBlob": "9ef3bad9e5d3f9ee7624b14b8d5f90c83bd08bb9",
+      "bytes": 1153873
+    },
+    {
+      "path": "Imagens Ilustrativa/launcher-trail-front.png",
+      "gitBlob": "4555d262af5f4ae5b6533654d08499a711446631",
+      "bytes": 1130458
+    },
+    {
+      "path": "Imagens Ilustrativa/lendo.png",
+      "gitBlob": "844b7bbd27b717a91c651cd36a00d3b26a237e3b",
+      "bytes": 1458614
+    },
+    {
+      "path": "Imagens Ilustrativa/lendo2.png",
+      "gitBlob": "4f932ffa061de8c6c1e2fbce37043f19af8dbc7c",
+      "bytes": 1330924
+    },
+    {
+      "path": "Imagens Ilustrativa/moldura.png",
+      "gitBlob": "0752f7fdf4f578129431b3e3346205314829f33d",
+      "bytes": 1414677
+    },
+    {
+      "path": "Imagens Ilustrativa/mother - mãe.png",
+      "gitBlob": "3032e1e28a559cc532eb794f622ae2ec34d4c740",
+      "bytes": 630008
+    },
+    {
+      "path": "Imagens Ilustrativa/nervous.png",
+      "gitBlob": "32dc2118a7163d71aa8ad8f005bff8f5534df697",
+      "bytes": 2006876
+    },
+    {
+      "path": "Imagens Ilustrativa/nove - nine - 9.png",
+      "gitBlob": "5b5effc4d24e4c5ee24ef9f4b3387cca023191f9",
+      "bytes": 1374991
+    },
+    {
+      "path": "Imagens Ilustrativa/number-01-one-um.png",
+      "gitBlob": "69797d76b6691c5a041a1eb58a70d6b198090893",
+      "bytes": 1289089
+    },
+    {
+      "path": "Imagens Ilustrativa/number-02-two-dois.png",
+      "gitBlob": "6cd661861d3c66e2e22826fd81040d97336d4a8e",
+      "bytes": 1355563
+    },
+    {
+      "path": "Imagens Ilustrativa/number-03-three-tres.png",
+      "gitBlob": "35df6fa3cf3af45a92a6c4e47a1e86fd3548abd4",
+      "bytes": 1382558
+    },
+    {
+      "path": "Imagens Ilustrativa/number-04-four-quatro.png",
+      "gitBlob": "c7d0f655038e7d33ea489a7a93209b9e757d4ed3",
+      "bytes": 1319882
+    },
+    {
+      "path": "Imagens Ilustrativa/number-05-five-cinco.png",
+      "gitBlob": "e09e3cc58271c667ba1c3f93eb03e76e22495ce3",
+      "bytes": 1350163
+    },
+    {
+      "path": "Imagens Ilustrativa/number-06-six-seis.png",
+      "gitBlob": "89e5d7c65b53c8b0afe102e42819cdff010c68b2",
+      "bytes": 1390371
+    },
+    {
+      "path": "Imagens Ilustrativa/number-07-seven-sete.png",
+      "gitBlob": "5be78da55a68ba352537e08838442cf01a13e8d9",
+      "bytes": 1293519
+    },
+    {
+      "path": "Imagens Ilustrativa/number-08-eight-oito.png",
+      "gitBlob": "604dc435bc2c26abaa71a715406fd8dcca79fcc5",
+      "bytes": 1376576
+    },
+    {
+      "path": "Imagens Ilustrativa/number-09-nine-nove.png",
+      "gitBlob": "5b5effc4d24e4c5ee24ef9f4b3387cca023191f9",
+      "bytes": 1374991
+    },
+    {
+      "path": "Imagens Ilustrativa/number-10-ten-dez.png",
+      "gitBlob": "734081fc405be227f02f6b0b4e95d8f4af2f86ec",
+      "bytes": 1378725
+    },
+    {
+      "path": "Imagens Ilustrativa/oito - eight - 8.png",
+      "gitBlob": "604dc435bc2c26abaa71a715406fd8dcca79fcc5",
+      "bytes": 1376576
+    },
+    {
+      "path": "Imagens Ilustrativa/person-boy-menino.png",
+      "gitBlob": "142905ae371453b2ec6b72f9019271b9fade00a8",
+      "bytes": 1599961
+    },
+    {
+      "path": "Imagens Ilustrativa/person-girl-menina.png",
+      "gitBlob": "f48cfd97ec1bc69e4033b973f009cbf3c2042f57",
+      "bytes": 1980947
+    },
+    {
+      "path": "Imagens Ilustrativa/person-girl-with-fish-menina-com-peixe.png",
+      "gitBlob": "3e82e31eb31dab70b1979cd85bce6519aa2e93de",
+      "bytes": 1983678
+    },
+    {
+      "path": "Imagens Ilustrativa/person-wheelchair-boy-menino-cadeirante.png",
+      "gitBlob": "c3116fe59effdad7516326ac24e0e3ea1df7dab0",
+      "bytes": 2045228
+    },
+    {
+      "path": "Imagens Ilustrativa/pet-bird-passaro.png",
+      "gitBlob": "1128475a8de84c4dbeb613fb798164f03d432342",
+      "bytes": 1245909
+    },
+    {
+      "path": "Imagens Ilustrativa/pet-cat-gato.png",
+      "gitBlob": "a78d1430c8a62a83b52726312c10f494d6491155",
+      "bytes": 1539480
+    },
+    {
+      "path": "Imagens Ilustrativa/pet-dog-cachorro.png",
+      "gitBlob": "b2c39c9abd7e113e093151a1780cde0fc79a5d3c",
+      "bytes": 1448608
+    },
+    {
+      "path": "Imagens Ilustrativa/pet-fish-peixe.png",
+      "gitBlob": "29b60c4e87bcd6cc0a5a4f2e7b7f4fada03a01fc",
+      "bytes": 1240470
+    },
+    {
+      "path": "Imagens Ilustrativa/pet-hamster.png",
+      "gitBlob": "c0f63853e7c1ab26360983f97c33fa2067ca1fc1",
+      "bytes": 1325304
+    },
+    {
+      "path": "Imagens Ilustrativa/pet-rabbit-coelho.png",
+      "gitBlob": "9421450b4ec44d4c39104d59e0e287a2b1c2ef7b",
+      "bytes": 979429
+    },
+    {
+      "path": "Imagens Ilustrativa/pet-turtle-tartaruga.png",
+      "gitBlob": "c7cdf176515a397825a988064103a6c01a20030f",
+      "bytes": 1528934
+    },
+    {
+      "path": "Imagens Ilustrativa/plane.png",
+      "gitBlob": "2cdd01ac70391d8695364fa6f314918978fdd5f1",
+      "bytes": 823902
+    },
+    {
+      "path": "Imagens Ilustrativa/quatro - four - 4.png",
+      "gitBlob": "c7d0f655038e7d33ea489a7a93209b9e757d4ed3",
+      "bytes": 1319882
+    },
+    {
+      "path": "Imagens Ilustrativa/red boat - barco vermelho.png",
+      "gitBlob": "fd5ed164839b6ce758918867078afe9e9a612527",
+      "bytes": 1305120
+    },
+    {
+      "path": "Imagens Ilustrativa/routine-brush-teeth-escovar-dentes.png",
+      "gitBlob": "4ca0a8e56ddf1d7290010477a49f29bc99882b2b",
+      "bytes": 2031227
+    },
+    {
+      "path": "Imagens Ilustrativa/routine-draw-desenhar.png",
+      "gitBlob": "bb0307c978030cc50d148102443d0c450f9109f6",
+      "bytes": 1744482
+    },
+    {
+      "path": "Imagens Ilustrativa/routine-go-to-school-ir-para-escola.png",
+      "gitBlob": "622e8cb16857faa19323c9b117a27184c90e26e2",
+      "bytes": 1757684
+    },
+    {
+      "path": "Imagens Ilustrativa/routine-go-to-sleep-ir-dormir.png",
+      "gitBlob": "24bcf6f5758bec268eceaedb50a1b890d07151dc",
+      "bytes": 2080149
+    },
+    {
+      "path": "Imagens Ilustrativa/routine-have-lunch-almocar.png",
+      "gitBlob": "fe588f884dfe17cfa94345aea58e47809cb9f875",
+      "bytes": 2203484
+    },
+    {
+      "path": "Imagens Ilustrativa/routine-play-brincar.png",
+      "gitBlob": "e1e4f716f142914153de90cb4cc576ebe2dfcb76",
+      "bytes": 1712951
+    },
+    {
+      "path": "Imagens Ilustrativa/routine-read-ler.png",
+      "gitBlob": "844b7bbd27b717a91c651cd36a00d3b26a237e3b",
+      "bytes": 1458614
+    },
+    {
+      "path": "Imagens Ilustrativa/routine-rest-descansar.png",
+      "gitBlob": "6a921ad7b2a5fec3e98015d646d95a2c17cac739",
+      "bytes": 1479161
+    },
+    {
+      "path": "Imagens Ilustrativa/routine-wake-up-acordar.png",
+      "gitBlob": "158d1ed680e617eb7d849e511c303297010af13b",
+      "bytes": 2085812
+    },
+    {
+      "path": "Imagens Ilustrativa/saida_da_escola_leaving_school_school_exit.png",
+      "gitBlob": "6e6c41417b78520303e9ff8217c21e1744bde963",
+      "bytes": 2229503
+    },
+    {
+      "path": "Imagens Ilustrativa/school-object-backpack-mochila.png",
+      "gitBlob": "f2f4ac58d70b8f25877e2fa3249a3bbc981e6da4",
+      "bytes": 1891818
+    },
+    {
+      "path": "Imagens Ilustrativa/school-object-blue-pen-caneta-azul.png",
+      "gitBlob": "a16e625f8f4d6e45e77542065946f81c69ac9e52",
+      "bytes": 549668
+    },
+    {
+      "path": "Imagens Ilustrativa/school-object-blue-pencil-lapis-azul.png",
+      "gitBlob": "aa2dfa6937415f3f1b2428f1d474983757d2b784",
+      "bytes": 578712
+    },
+    {
+      "path": "Imagens Ilustrativa/school-object-eraser-borracha.png",
+      "gitBlob": "334a1fecdf362c6a19d50edb0ccc50db68606cb9",
+      "bytes": 849046
+    },
+    {
+      "path": "Imagens Ilustrativa/school-object-orange-crayon-giz-laranja.png",
+      "gitBlob": "766e48fd1a750a0ceb723a4333e1515456a8d1f7",
+      "bytes": 657931
+    },
+    {
+      "path": "Imagens Ilustrativa/school-object-pencil-case-estojo.png",
+      "gitBlob": "4d55cc06cb124bfd485f5bbc52b33f7e85cdc59c",
+      "bytes": 1313317
+    },
+    {
+      "path": "Imagens Ilustrativa/school-object-pencil-lapis.png",
+      "gitBlob": "37a383e05c3c1bff123818b171c3bb9dc4a33c11",
+      "bytes": 581403
+    },
+    {
+      "path": "Imagens Ilustrativa/school-object-pink-pencil-case-estojo-rosa.png",
+      "gitBlob": "b3690d5feaa4adfb9ab8b1970387231e2a85ba3c",
+      "bytes": 1267890
+    },
+    {
+      "path": "Imagens Ilustrativa/school-object-red-crayon-giz-vermelho.png",
+      "gitBlob": "d022f741b3a4ec39348372f1a2ed0f79f0a520a2",
+      "bytes": 694896
+    },
+    {
+      "path": "Imagens Ilustrativa/school-object-red-pencil-lapis-vermelho.png",
+      "gitBlob": "76224074b5b67a5e6d78dbcef7f5d4b74dc24108",
+      "bytes": 602428
+    },
+    {
+      "path": "Imagens Ilustrativa/school-object-red-yellow-backpack-mochila-vermelha-amarela.png",
+      "gitBlob": "def817dae95a96177f834c97f6887f1664b32cad",
+      "bytes": 1824855
+    },
+    {
+      "path": "Imagens Ilustrativa/school-object-ruler-regua.png",
+      "gitBlob": "2276abbd4f90caf142df84062c86d770ba394399",
+      "bytes": 520890
+    },
+    {
+      "path": "Imagens Ilustrativa/seis - six - 6.png",
+      "gitBlob": "89e5d7c65b53c8b0afe102e42819cdff010c68b2",
+      "bytes": 1390371
+    },
+    {
+      "path": "Imagens Ilustrativa/sete - seven - 7.png",
+      "gitBlob": "5be78da55a68ba352537e08838442cf01a13e8d9",
+      "bytes": 1293519
+    },
+    {
+      "path": "Imagens Ilustrativa/sister-irmã.png",
+      "gitBlob": "4a446d5d8ba9e22ae0eb1fa6891af61e126a1fed",
+      "bytes": 889215
+    },
+    {
+      "path": "Imagens Ilustrativa/small cat -gato pequeno.png",
+      "gitBlob": "ce49218f8fc19879daeb17cdd9d6725bcdb0812e",
+      "bytes": 1318442
+    },
+    {
+      "path": "Imagens Ilustrativa/small dog -cachorro pequeno.png",
+      "gitBlob": "b3985102bc80273395eb21a327fabeb95f41a0c3",
+      "bytes": 1097906
+    },
+    {
+      "path": "Imagens Ilustrativa/teddy bear.png",
+      "gitBlob": "cb81b0e2abc2fb0600f59856e30e1d5f4b2873fa",
+      "bytes": 1944156
+    },
+    {
+      "path": "Imagens Ilustrativa/thirty-eight.png",
+      "gitBlob": "1bd6d2e2bf4d186b044a1897d83502edef9db68a",
+      "bytes": 1466186
+    },
+    {
+      "path": "Imagens Ilustrativa/thirty-five.png",
+      "gitBlob": "037767057f7feb9ca97adf61dacc7bd6d0ec5726",
+      "bytes": 1443202
+    },
+    {
+      "path": "Imagens Ilustrativa/thirty-four.png",
+      "gitBlob": "18beeef49774fb9f0d42c29496732d82bc3da309",
+      "bytes": 1416139
+    },
+    {
+      "path": "Imagens Ilustrativa/thirty-nine.png",
+      "gitBlob": "010e0c3c3953c59efed197b77bae7c7ba81d9001",
+      "bytes": 1458246
+    },
+    {
+      "path": "Imagens Ilustrativa/thirty-one.png",
+      "gitBlob": "abd0db63e409c5ad4a8fe986dccb80fa8ee11527",
+      "bytes": 1406582
+    },
+    {
+      "path": "Imagens Ilustrativa/thirty-seven.png",
+      "gitBlob": "c846ed83058124cf3504e02bd3b630a18a302207",
+      "bytes": 1405304
+    },
+    {
+      "path": "Imagens Ilustrativa/thirty-six.png",
+      "gitBlob": "4cbbb3d1865ed2a1312d904cbc41788eab70485e",
+      "bytes": 1448665
+    },
+    {
+      "path": "Imagens Ilustrativa/thirty-three.png",
+      "gitBlob": "3e6339647e9ad9880d45cb9d1945ca743ac8b1db",
+      "bytes": 1448671
+    },
+    {
+      "path": "Imagens Ilustrativa/thirty-two.png",
+      "gitBlob": "5f30de5fd9101271a79bab8c62726bd6c4e216cc",
+      "bytes": 1440523
+    },
+    {
+      "path": "Imagens Ilustrativa/thirty.png",
+      "gitBlob": "2650a48ec8d65f342fe44bd289d6b312b91ca93c",
+      "bytes": 1431318
+    },
+    {
+      "path": "Imagens Ilustrativa/train.png",
+      "gitBlob": "fa02d244aea64c4d4c74becd5a44916012a303f9",
+      "bytes": 1369723
+    },
+    {
+      "path": "Imagens Ilustrativa/três - three - 3.png",
+      "gitBlob": "35df6fa3cf3af45a92a6c4e47a1e86fd3548abd4",
+      "bytes": 1382558
+    },
+    {
+      "path": "Imagens Ilustrativa/twenty-eight.png",
+      "gitBlob": "ac233d428bef18c171766f73fa195032af602ee0",
+      "bytes": 1452459
+    },
+    {
+      "path": "Imagens Ilustrativa/twenty-five.png",
+      "gitBlob": "11cef2fefbe262f0278a26d84d05c32721c3ab50",
+      "bytes": 1452610
+    },
+    {
+      "path": "Imagens Ilustrativa/twenty-four.png",
+      "gitBlob": "895a1d643809e782d45f4c88e39b2f1555a5d14b",
+      "bytes": 1410470
+    },
+    {
+      "path": "Imagens Ilustrativa/twenty-nine.png",
+      "gitBlob": "a2aa6400c89476805e443132e042bd127dbb20ea",
+      "bytes": 1434097
+    },
+    {
+      "path": "Imagens Ilustrativa/twenty-one.png",
+      "gitBlob": "c5c9c7d24d78a6c030b63e6acd7ea256c2f9fb2e",
+      "bytes": 1381874
+    },
+    {
+      "path": "Imagens Ilustrativa/twenty-seven.png",
+      "gitBlob": "fabb13ff957d2f8547f77040135bbf318f33deaf",
+      "bytes": 1400939
+    },
+    {
+      "path": "Imagens Ilustrativa/twenty-six.png",
+      "gitBlob": "cd49733df78f3a9822ca7dddde26e376ebc4cc20",
+      "bytes": 1431782
+    },
+    {
+      "path": "Imagens Ilustrativa/twenty-three.png",
+      "gitBlob": "591d01d0edae2d05cbe264974ef42b0e4f46143b",
+      "bytes": 1441238
+    },
+    {
+      "path": "Imagens Ilustrativa/twenty-two.png",
+      "gitBlob": "2a58c12cb3411ecf188d86213a9f7c0aff46c8b2",
+      "bytes": 1441584
+    },
+    {
+      "path": "Imagens Ilustrativa/um - one - 1.png",
+      "gitBlob": "69797d76b6691c5a041a1eb58a70d6b198090893",
+      "bytes": 1289089
+    },
+    {
+      "path": "Imagens Ilustrativa/video game.png",
+      "gitBlob": "ee634827dcf23a5774f25588a28a39e842f2802f",
+      "bytes": 1357088
+    },
+    {
+      "path": "Imagens Ilustrativa/weather-rain-chuva.png",
+      "gitBlob": "aed46eeeff0e389efc2534618dc8484416477e05",
+      "bytes": 1658323
+    },
+    {
+      "path": "Imagens Ilustrativa/wenty-vinte.png",
+      "gitBlob": "21e69fc05ff3f1eb102cefaa868a1b098209323f",
+      "bytes": 1397936
+    },
+    {
+      "path": "Imagens Ilustrativa/wheelchair_boy.png",
+      "gitBlob": "c3116fe59effdad7516326ac24e0e3ea1df7dab0",
+      "bytes": 2045228
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-big-blue-pencil.png",
+      "gitBlob": "4ee9f07611b3135684f2ce4a106d557cffe8f021",
+      "bytes": 1338287
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-big-truck.png",
+      "gitBlob": "90c624733a0e24f4e28cfa2505fe470e4ff5531a",
+      "bytes": 1790956
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-brother-character.png",
+      "gitBlob": "721c21424e4a8c7bab889b375496608587513237",
+      "bytes": 853464
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-brown-hair.png",
+      "gitBlob": "ac066a00c5be0810be8e661214a54a073af84dc6",
+      "bytes": 1345855
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-duo-leo-maya-context.png",
+      "gitBlob": "4d6ac5c42b2e60425df9dac13ea9acc13b2c4b6b",
+      "bytes": 1670293
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-duo-leo-mia-context.png",
+      "gitBlob": "5dfdd9977b42997bc79cd17fed0ea2b302841243",
+      "bytes": 1421747
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-five-small-stars.png",
+      "gitBlob": "d79e0fc807c2ade0746da8d0dedfbf14b234f262",
+      "bytes": 1461597
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-grandfather-character.png",
+      "gitBlob": "916a6aa068886bb3335533e484f194be5bb2b8e3",
+      "bytes": 970406
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-green-car.png",
+      "gitBlob": "657cbf07207ff006d06ef40832dddc815afe50ee",
+      "bytes": 1807347
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-kite.png",
+      "gitBlob": "e3900b63e1086dbf6a618bc05aaf8aaa651a1438",
+      "bytes": 601248
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-math-2-plus-3-equals-5.png",
+      "gitBlob": "9e4cb8fbc5bd7228c3c69fb538ff8ed2517133a7",
+      "bytes": 692096
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-math-3-times-2-equals-6.png",
+      "gitBlob": "b695432382385b805fcb93a64fcbfe9141497a61",
+      "bytes": 946556
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-math-5-minus-2-equals-3.png",
+      "gitBlob": "c66191e00e378e8518f77ff9531fe04d74381672",
+      "bytes": 805910
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-mother-character.png",
+      "gitBlob": "d9c0f1901f6333f6f29dc2f61807ab8e8d3a3179",
+      "bytes": 714830
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-one-big-circle.png",
+      "gitBlob": "44b482fae766af4a91002de795c571a795608d1c",
+      "bytes": 919829
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-one-red-circle.png",
+      "gitBlob": "da27d3afa340bafe2ce13d881c631c27c212d2aa",
+      "bytes": 720644
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-red-blue-bus.png",
+      "gitBlob": "5ed98edfbfac8b1683f57220c98aef0a475134cc",
+      "bytes": 1677652
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-seven-white-cats.png",
+      "gitBlob": "7f33952bbab5bcf299a7dc5e4520b2da4534f908",
+      "bytes": 1411443
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-sister-character.png",
+      "gitBlob": "49338e59b54fb77cdff6e995d3b4d9d53c1424ea",
+      "bytes": 951467
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-six-blue-rectangles.png",
+      "gitBlob": "18039e8c219f9a400ad1634061ca9694d1f75b33",
+      "bytes": 1214183
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-three-small-circles.png",
+      "gitBlob": "91e1778b8cf137118e79757c9ede0e106c2f77d6",
+      "bytes": 683358
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-three-yellow-ducks.png",
+      "gitBlob": "8f5661ec8e9801aa95c51a769545ed413d28c23c",
+      "bytes": 954010
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-turtle.png",
+      "gitBlob": "142ee6680e7333912ab820ab64c7697f27b8207e",
+      "bytes": 1186279
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-two-big-hands.png",
+      "gitBlob": "4ce9746705be26b9179a74fc5a58d523e3e0accb",
+      "bytes": 1603533
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-two-brown-rabbits.png",
+      "gitBlob": "3549856df816e6b56f5f0338e647f8c182687de4",
+      "bytes": 1487908
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-two-green-eyes.png",
+      "gitBlob": "688999a94c6bfb6d9ccb8e5eca5dc92ca2a5884b",
+      "bytes": 696248
+    },
+    {
+      "path": "Imagens Ilustrativa/y3-two-yellow-stars.png",
+      "gitBlob": "380bd253d7df38bd9df90968a895c2dc6e0cbf52",
+      "bytes": 740913
+    }
+  ]
+}

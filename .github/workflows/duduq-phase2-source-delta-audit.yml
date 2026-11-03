@@ -27,7 +27,8 @@ jobs:
             qa/integrate-phase2-source-batch.mjs
             qa/media-binding-usage-guard.mjs
             scripts/duduq-exact-semantic-match.mjs
-            docs/qa/media-audit-20261029/phase2-source-head-delta-20261103.json
+            docs/qa/media-audit-20261029/phase2-full-asset-inventory-20261103.json
+            docs/qa/media-audit-20261029/phase2-canonical-semantic-map-20261103.json
             docs/qa/media-audit-20261029/replacement-queue.json
           sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4

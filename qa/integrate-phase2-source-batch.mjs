@@ -12,7 +12,9 @@ import {collectQuestionMediaUsages} from './media-binding-usage-guard.mjs';
 
 assert.equal(process.env.DUDUQ_QA_ONLY,'1','QA_ONLY_REQUIRED');
 const dist=path.resolve(process.env.DUDUQ_QA_DIST||'qa/dist-pages-food-candidate');
-const source=JSON.parse(await readFile('docs/qa/media-audit-20261029/phase2-source-head-delta-20261103.json','utf8'));
+const source=JSON.parse(await readFile('docs/qa/media-audit-20261029/phase2-full-asset-inventory-20261103.json','utf8'));
+const pinned=JSON.parse(await readFile('docs/qa/media-audit-20261029/phase2-canonical-semantic-map-20261103.json','utf8'));
+assert.equal(source.sourceCommit,pinned.sourceCommit,'SOURCE_PIN_COMMIT_DRIFT');
 const queue=JSON.parse(await readFile('docs/qa/media-audit-20261029/replacement-queue.json','utf8'));
 const queueById=new Map(queue.queue.map(x=>[x.mediaId,x]));
 const regRel='content/english/media/media-registry.json', regFile=path.join(dist,regRel);
@@ -25,15 +27,14 @@ assert.equal(byId.size,registry.entries.length,'DUPLICATE_REGISTRY_ID');
 const sha256=b=>createHash('sha256').update(b).digest('hex');
 const gitBlob=b=>createHash('sha1').update(Buffer.from('blob '+b.length+'\0')).update(b).digest('hex');
 const normalize=x=>String(x||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
-const safeWords=new Set(['bank','basketball','bathroom','bed','bedroom','hospital','kitchen','library','living room','rug','soccer','sofa','supermarket','tennis','swimming','post office','armchair','bookcase']);
-const basename=f=>path.posix.basename(f).replace(/\.png$/i,'');
-const conceptOfFile=f=>normalize(basename(f).split(/\s+[—–]\s+/)[0]);
+const assetByPath=new Map(source.assets.map(a=>[a.path,a]));
+assert.equal(assetByPath.size,source.assets.length,'DUPLICATE_SOURCE_PATH');
 const sourceByConcept=new Map();
-for(const a of source.assets){
- const concept=conceptOfFile(a.path);
- if(!safeWords.has(concept))continue;
- if(sourceByConcept.has(concept))sourceByConcept.set(concept,null);
- else sourceByConcept.set(concept,a);
+for(const [rawConcept,sourcePath] of Object.entries(pinned.pins)){
+ const concept=normalize(rawConcept), asset=assetByPath.get(sourcePath);
+ assert(asset&&asset.gitBlob&&asset.bytes>0,'INVALID_PINNED_SOURCE:'+sourcePath);
+ assert(!sourceByConcept.has(concept),'DUPLICATE_PINNED_CONCEPT:'+concept);
+ sourceByConcept.set(concept,asset);
 }
 const manifestLines=manifestOriginal.toString('utf8').trimEnd().split(/\r?\n/);
 const manifest=new Map();
@@ -139,7 +140,7 @@ try{
  for(const [rel,h] of questionHashes)assert.equal(sha256(await readFile(path.join(dist,rel))),h,'QUESTION_CHANGED:'+rel);
  for(const c of changedAssets){const a=loaded.get(c);assert.equal(sha256(await readFile(path.join(dist,a.path))),a.sha256);}
  const report={schemaVersion:'DUDUQ_PHASE2_BATCH_INTEGRATION_V1',mode:'ISOLATED_QA_CANDIDATE_ONLY',
-  sourceCommit:source.sourceCommit,baseline:'immutable 127-ID approved technical QA package',
+  sourceCommit:source.sourceCommit,baseline:'immutable 127-ID approved technical QA package',sourcePngCatalog:source.assets.length,pinnedConcepts:sourceByConcept.size,
   questionContracts:600,answerKeysChanged:0,audioChanged:0,runtimeChanged:0,
   newMediaIds:applied.length,newPngs:changedAssets.size,
   affectedQuestionIds:[...new Set(applied.flatMap(x=>x.questionIds))].sort(),
@@ -147,7 +148,7 @@ try{
   createdImages:[...changedAssets].map(c=>loaded.get(c).path),
   sha256Registry:sha256(newRegistry),sha256Manifest:sha256(newManifest),
   skippedSources,held,releaseApproved:false,productionDeployed:false,
-  note:'Question content and every answer key are byte-identical. Semantic matching is exact across all actual uses. Visual QA still required.'};
+  note:'All 600 question files byte-identical; source names manually mapped to exact English concepts. Visual/browser QA remains pending before release.'};
  await mkdir('qa/results',{recursive:true});
  await writeFile('qa/results/phase2-batch-source-integration.json',JSON.stringify(report,null,2)+'\n');
  console.log('DUDUQ_BATCH_INTEGRATED='+JSON.stringify({mediaIds:report.newMediaIds,pngs:report.newPngs,questions:report.affectedQuestionIds.length,held:held.length,productionDeployed:false}));
