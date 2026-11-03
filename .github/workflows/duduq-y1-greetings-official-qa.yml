@@ -1,0 +1,74 @@
+name: DUDUQ Y1 - Replace official greetings night sleep and color, QA only
+on:
+  push:
+    branches: [qa/duduq-y1-greetings-official-media-20261103]
+    paths:
+      - qa/replace-y1-greetings-real-sources.mjs
+      - .github/workflows/duduq-y1-greetings-official-qa.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: duduq-y1-official-greetings-batch
+  cancel-in-progress: true
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      DUDUQ_QA_ONLY: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            qa/replace-y1-greetings-real-sources.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with: {node-version: "22"}
+      - name: Restore EXACT 03-Nov last successful official distribution by SHA
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p dist-pages qa/results/y1-greetings-batch
+          URL='https://github.com/augustoborgessousa93/DuduQ-Engine/releases/download/duduq-phase2-orange-fruit-color-corrected-20261103/duduq-phase2-orange-fruit-color-corrected.tar.gz'
+          curl -fLSs --retry 4 --retry-delay 3 --connect-timeout 20 --max-time 720 "$URL" -o /tmp/y1-current-prod-base.tar.gz
+          echo 'cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800  /tmp/y1-current-prod-base.tar.gz' | sha256sum -c -
+          tar -xzf /tmp/y1-current-prod-base.tar.gz -C dist-pages
+          test -s dist-pages/content/english/year-1/module-01/questions.json
+      - name: Apply only real confirmed source image changes and preserve exact answer keys
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/replace-y1-greetings-real-sources.mjs
+          node qa/replace-y1-greetings-real-sources.mjs
+      - name: Verify each compiled manifest SHA and unchanged 600 question contracts
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,copyFileSync,mkdirSync} from 'node:fs';
+          import path from 'node:path';
+          import {createHash} from 'node:crypto';
+          const root=path.resolve('dist-pages'),sha=b=>createHash('sha256').update(b).digest('hex');
+          const rows=readFileSync(path.join(root,'.duduq-pages-manifest'),'utf8').trimEnd().split(/\r?\n/);
+          for(const row of rows){const k=row.lastIndexOf(' ');assert(k>0);const rel=row.slice(0,k),hash=row.slice(k+1),file=path.resolve(root,rel);assert(file.startsWith(root+path.sep));assert.equal(sha(readFileSync(file)),hash,'MANIFEST_MISMATCH:'+rel);}
+          let count=0;for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){const rel='content/english/year-'+y+'/module-'+String(m).padStart(2,'0')+'/questions.json';const data=JSON.parse(readFileSync(path.join(root,rel)));assert.equal(data.items.length,20);count+=20}assert.equal(count,600);
+          const paths=JSON.parse(readFileSync('qa/results/y1-greetings-batch/changed-paths.json'));
+          for(const p of paths){const dest=path.join('/tmp/y1-qa-overlay',p);mkdirSync(path.dirname(dest),{recursive:true});copyFileSync(path.join(root,p),dest);}
+          console.log('Y1_REAL_SOURCES_AND_CONTRACTS_PASS='+JSON.stringify({manifestEntries:rows.length,questions:count,overlayFiles:paths.length}));
+          NODE
+          tar -czf qa/results/y1-greetings-batch/overlay.tar.gz -C /tmp/y1-qa-overlay .
+          (cd qa/results/y1-greetings-batch && sha256sum overlay.tar.gz > overlay.sha256)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-y1-official-greetings-media-qa-candidate
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            qa/results/y1-greetings-batch/report.json
+            qa/results/y1-greetings-batch/changed-paths.json
+            qa/results/y1-greetings-batch/overlay.tar.gz
+            qa/results/y1-greetings-batch/overlay.sha256
