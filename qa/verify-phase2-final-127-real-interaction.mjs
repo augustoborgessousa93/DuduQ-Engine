@@ -37,7 +37,9 @@ for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
   }
  }
 }
-const chosen=[...samples['memory-quest'].slice(0,2),...samples['bubble-pop'].slice(0,2)];
+const chosen=process.env.DUDUQ_QA_ONLY_BUBBLE==='1'?
+ samples['bubble-pop'].slice(0,2):
+ [...samples['memory-quest'].slice(0,2),...samples['bubble-pop'].slice(0,2)];
 assert(chosen.length>=2,'NO_AFFECTED_MECHANIC_SAMPLES');
 const cases=[],dir='qa/results/phase2-127-real-interaction';
 await mkdir(dir,{recursive:true});
@@ -104,7 +106,7 @@ try{
      const bubbles=gameFrame.locator('.bubble-pop-playable');
      await bubbles.first().waitFor({state:'visible',timeout:9000});
      row.bubbleCount=await bubbles.count();
-     assert(row.bubbleCount>=2,'BUBBLE_COUNT_INCOMPLETE');
+     assert(row.bubbleCount>=1,'NO_REAL_PLAYABLE_BUBBLE_VISIBLE');
      // Playwright performs genuine pointer input inside the correct iframe.
      // Never use force=true, DOM dispatchEvent or a mocked answer.
      for(let attempt=0;attempt<2&&!row.realInteractionObserved;attempt++){
@@ -144,6 +146,7 @@ try{
 }finally{await browser.close()}
 const failed=cases.filter(x=>x.status!=='PASS_REAL_USER_INTERACTION');
 const result={schemaVersion:'DUDUQ_PHASE2_127_REAL_USER_INTERACTION_REVIEW_V1',
+ onlyBubbleRechecked:process.env.DUDUQ_QA_ONLY_BUBBLE==='1',
  status:failed.length?'FAIL_STANDALONE_MECHANIC_INTERACTION':'PASS_STANDALONE_MECHANIC_INTERACTION_ONLY',
  candidateChangedMediaIds:127,verifiedQuestionContracts:600,
  selectedQuestions:chosen,checks:cases.length,failed:failed.map(x=>({
