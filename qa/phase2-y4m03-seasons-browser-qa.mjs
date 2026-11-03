@@ -11,7 +11,7 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 const dist=path.resolve('dist-pages'),base='http://127.0.0.1:4175';
 const evidence=JSON.parse(await readFile('qa/results/y4m03-seasons-evidence.json','utf8'));
 assert.equal(evidence.status,'SEASON_IMAGES_APPLIED_IN_ISOLATED_QA_NO_DEPLOY');
-assert.equal(evidence.600QuestionsVerified,600);
+assert.equal(evidence['600QuestionsVerified'],600);
 assert.equal(evidence.sourceUniquePNGs,3);
 assert.equal(evidence.changedMediaIds,8);
 const changes=evidence.changes;
