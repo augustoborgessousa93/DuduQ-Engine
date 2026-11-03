@@ -25,6 +25,7 @@ on:
       - "qa/verify-phase2-directed-interactions.mjs"
       - "qa/audit-phase2-new-source-delta.mjs"
       - "qa/verify-phase2-new-source-browser.mjs"
+      - "qa/verify-phase2-visual-hold-regression.mjs"
       - "qa/apply-phase2-multilingual-assets.mjs"
       - "qa/verify-phase2-source-browser.mjs"
       - "qa/verify-farm-animal-source-batch-browser.mjs"
