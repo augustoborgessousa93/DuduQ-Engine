@@ -57,7 +57,38 @@ try{
     row.ready=true;
     const rect=await page.locator('#game').boundingBox();
     assert(rect&&rect.width>240&&rect.height>210);
-    await page.waitForTimeout(600);
+    const expected=[...new Set(meta.bindings.filter(b=>b.questionIds.includes(id)).map(b=>'/'+b.destination))];
+    row.expectedSourceCount=expected.length;
+    if(mech==='bubble-pop'){
+     let evidence=null;
+     for(let tick=0;tick<55&&!evidence;tick++){
+      for(const frame of page.frames()){
+       const state=await frame.evaluate(paths=>{
+        const buttons=[...document.querySelectorAll('.bubble-pop-playable')].filter(b=>{
+         const r=b.getBoundingClientRect(),s=getComputedStyle(b);
+         const cx=r.left+r.width/2,cy=r.top+r.height/2;
+         return r.width>30&&r.height>30&&cx>20&&cy>20&&cx<innerWidth-20&&cy<innerHeight-20&&s.visibility!=='hidden'&&s.display!=='none';
+        });
+        const imgs=buttons.flatMap(b=>[...b.querySelectorAll('.bubble-pop-content img')]).filter(im=>im.complete&&im.naturalWidth>0);
+        const hits=imgs.filter(im=>{try{return paths.includes(new URL(im.currentSrc||im.src,location.href).pathname)}catch{return false}});
+        return {playable:buttons.length,images:imgs.length,expectedSourceImages:hits.length};
+       },expected).catch(()=>null);
+       if(state?.expectedSourceImages>0){evidence=state;break}
+      }
+      if(!evidence)await page.waitForTimeout(250);
+     }
+     row.bubbleEvidence=evidence;
+     if(!evidence)errors.push('BUBBLE_PNG_NOT_VISIBLE_ON_PLAYABLE_BUBBLE');
+    }else if(mech==='memory-quest'){
+     let flipped=false;
+     for(const frame of page.frames()){
+      const cards=frame.locator('.memory-quest-card-slot');
+      if(await cards.count().catch(()=>0)<4)continue;
+      try{await cards.first().click({timeout:3500});flipped=await cards.first().evaluate(el=>el.dataset.flipped==='true'||el.getAttribute('aria-pressed')==='true');if(flipped)break}catch{}
+     }
+     row.flippedRealCard=flipped;
+     if(!flipped)errors.push('MEMORY_FLIP_NOT_CONFIRMED');
+    }else await page.waitForTimeout(600);
     for(const f of page.frames())row.visibleImages+=await f.evaluate(()=>[...document.images].filter(im=>{const r=im.getBoundingClientRect(),css=getComputedStyle(im);return im.complete&&im.naturalWidth>0&&r.width>=14&&r.height>=14&&css.display!=='none'&&css.visibility!=='hidden'}).length).catch(()=>0);
     row.loaded=true;
     row.screenshot='qa/results/phase2-153-directed-visual/'+id+'-'+viewport.width+'.png';
@@ -69,7 +100,7 @@ try{
   await ctx.close();
  }
 }finally{await browser.close()}
-out.status=out.browser.every(x=>x.pass)?'PASS_DIRECTED_DELTA_SMOKE_ONLY':'FAIL_DIRECTED_DELTA_SMOKE';
+out.status=out.browser.every(x=>x.pass)?'PASS_DIRECTED_DELTA_RENDERED_MEDIA':'FAIL_DIRECTED_DELTA_RENDERED_MEDIA';
 await writeFile('qa/results/phase2-153-directed-visual-qa.json',JSON.stringify(out,null,2)+'\n');
 console.log('PHASE2_DIRECTED_VISUAL='+JSON.stringify({status:out.status,pngs:out.delivery.length,browserPassed:out.browser.filter(x=>x.pass).length,total:out.browser.length,productionDeployed:false}));
-assert.equal(out.status,'PASS_DIRECTED_DELTA_SMOKE_ONLY');
+assert.equal(out.status,'PASS_DIRECTED_DELTA_RENDERED_MEDIA');
