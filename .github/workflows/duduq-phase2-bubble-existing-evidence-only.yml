@@ -1,0 +1,46 @@
+name: DUDUQ Phase 2 - inspect existing four Bubble input failures ONLY
+
+on:
+  push:
+    branches:
+      - qa/duduq-phase2-releasegate-127-20261103
+    paths:
+      - .github/workflows/duduq-phase2-bubble-existing-evidence-only.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  read-existing-data:
+    name: Inspect archived native pointer events without any new browser or build
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Recover existing JSON only and print four pointer outcomes
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq-bubble-pointer
+          gh run download 41650553028 -R "$GITHUB_REPOSITORY" \
+            --name duduq-phase2-127-real-input-evidence \
+            --dir /tmp/duduq-bubble-pointer
+          python3 - <<'PY'
+          import json,glob
+          paths=glob.glob('/tmp/duduq-bubble-pointer/**/phase2-127-real-interaction.json',recursive=True)
+          assert len(paths)==1,(paths,len(paths))
+          report=json.load(open(paths[0]))
+          assert report['checks']==4
+          for x in report['cases']:
+           print('BUBBLE_REAL_POINTER_EVIDENCE='+json.dumps({
+             'questionId':x['questionId'],'viewport':x['viewport'],
+             'frame':x.get('mechanicFrame'),'frameCount':x.get('frameCount'),
+             'bubbleCount':x.get('bubbleCount'),'clickAttempts':x.get('clickAttempts'),
+             'lastPointer':x.get('lastPointer'),
+             'lastClickError':x.get('lastClickError'),
+             'ready':x.get('ready'),'error':x.get('limitation'),
+             'realInteractionObserved':x.get('realInteractionObserved'),
+             'pageErrors':x.get('pageErrors')},ensure_ascii=False))
+          PY
