@@ -121,7 +121,9 @@ try{
         x:event.clientX,y:event.clientY});
       },{capture:true,passive:true});
      });
-     for(let attempt=0;attempt<4&&!row.realInteractionObserved;attempt++){
+     // Spawn starts OUTSIDE the arena; an 8200ms trajectory needs time
+     // before a real pupil can click the moving bubble. Observe up to 12s.
+     for(let attempt=0;attempt<48&&!row.realInteractionObserved;attempt++){
       const target=await gameFrame.evaluate(()=>{
        for(const button of document.querySelectorAll('.bubble-pop-playable')){
         if(button.disabled)continue;
@@ -134,7 +136,7 @@ try{
        }
        return null;
       });
-      if(!target){await page.waitForTimeout(220);continue;}
+      if(!target){await page.waitForTimeout(250);continue;}
       const frameOffset=gameFrame===page.mainFrame()?
        {x:0,y:0}:(await (await gameFrame.frameElement()).boundingBox())||{x:0,y:0};
       await page.mouse.move(target.x+frameOffset.x,target.y+frameOffset.y);
