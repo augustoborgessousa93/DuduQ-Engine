@@ -25,8 +25,11 @@ const morningGeneric='IMG-Y1M01-GREETING-MORNING-ORIGINAL-20261103';
 const morningSchool='IMG-Y1M01-MORNING-SCHOOL-ARRIVAL-20261103';
 const afternoon='IMG-Y1M01-GREETING-AFTERNOON-001';
 const night='Y1M01-EMOJI-NIGHT-001',sleep='Y1M01-EMOJI-SLEEP-001',orange='IMG-Y1M03-Q016-ORANGE';
+const officialAfternoon='IMG-Y1M01-GREETING-AFTERNOON-OFFICIAL-20261103';
+const officialNight='IMG-Y1M01-NIGHT-OFFICIAL-20261103';
+const officialSleep='IMG-Y1M01-SLEEP-OFFICIAL-20261103';
 for(const id of [oldMorning,afternoon,night,sleep,orange])assert(byId.has(id),'MISSING_REGISTRY_'+id);
-for(const id of [morningGeneric,morningSchool])assert(!byId.has(id),'NEW_ID_COLLISION');
+for(const id of [morningGeneric,morningSchool,officialAfternoon,officialNight,officialSleep])assert(!byId.has(id),'NEW_ID_COLLISION');
 const oldMorningEntry=structuredClone(reg.entries[byId.get(oldMorning)]);
 assert(oldMorningEntry.urlOrPath.includes('relogio'),'LEGACY_MORNING_SOURCE_CHANGED');
 assert(reg.entries[byId.get(night)].urlOrPath.endsWith('.svg'));
@@ -66,8 +69,11 @@ const touch=(entry,concept)=>{
 const orig=reg.entries[byId.get(oldMorning)];
 const generic=structuredClone(orig);generic.mediaId=morningGeneric;generic.semantic='good morning';touch(generic,'morning');
 const school=structuredClone(orig);school.mediaId=morningSchool;school.semantic='arriving at school in the morning';touch(school,'school');
-reg.entries.push(generic,school);
-for(const [id,concept] of [[afternoon,'afternoon'],[night,'night'],[sleep,'sleep'],[orange,'orange']])touch(reg.entries[byId.get(id)],concept);
+const afternoonEntry=structuredClone(reg.entries[byId.get(afternoon)]);afternoonEntry.mediaId=officialAfternoon;afternoonEntry.semantic='good afternoon';touch(afternoonEntry,'afternoon');
+const nightEntry=structuredClone(reg.entries[byId.get(night)]);nightEntry.mediaId=officialNight;nightEntry.semantic='night';touch(nightEntry,'night');
+const sleepEntry=structuredClone(reg.entries[byId.get(sleep)]);sleepEntry.mediaId=officialSleep;sleepEntry.semantic='sleep';touch(sleepEntry,'sleep');
+reg.entries.push(generic,school,afternoonEntry,nightEntry,sleepEntry);
+touch(reg.entries[byId.get(orange)],'orange');
 const recast=(value,oldId,newId)=>{
  if(Array.isArray(value))return value.map(x=>recast(x,oldId,newId));
  if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([k,v])=>[k,
@@ -84,20 +90,35 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
  const data=JSON.parse(original);assert.equal(data.items?.length,20,'CONTRACTS_INCOMPLETE:'+rel);
  let updated=false;
  for(let qindex=0;qindex<data.items.length;qindex++){
-  let q=data.items[qindex],before=JSON.stringify(q),id=q.item_id;
+  const q=data.items[qindex],before=JSON.stringify(q),id=q.item_id;
   const has=mid=>before.includes('"'+mid+'"');
+  let revised=q;
   if(has(oldMorning)){
-   assert(id.startsWith('Y1M01-'),'CROSS_MODULE_MORNING_SHARED_CONFLICT:'+id);
    morningUses.push(id);
-   const isLeo=id==='Y1M01-Q009',isSchool=id==='Y1M01-Q003';
-   if(!isLeo){
-    const replacement=isSchool?morningSchool:morningGeneric;
-    const revised=recast(q,oldMorning,replacement);
-    assert.deepEqual(restore(revised,replacement,oldMorning),q,'NON_MEDIA_QUESTION_DRIFT:'+id);
-    data.items[qindex]=revised;updated=true;
+   if(id.startsWith('Y1M01-')&&id!=='Y1M01-Q009'){
+    const replacement=id==='Y1M01-Q003'?morningSchool:morningGeneric;
+    revised=recast(revised,oldMorning,replacement);
    }
   }
-  for(const [mid,arr] of [[afternoon,afternoonUses],[night,nightUses],[sleep,sleepUses],[orange,orangeUses]])if(has(mid))arr.push(id);
+  for(const [mid,replacement,arr] of [
+   [afternoon,officialAfternoon,afternoonUses],
+   [night,officialNight,nightUses],
+   [sleep,officialSleep,sleepUses]
+  ]){
+   if(!has(mid))continue;
+   arr.push(id);
+   if(id.startsWith('Y1M01-'))revised=recast(revised,mid,replacement);
+  }
+  if(has(orange))orangeUses.push(id);
+  if(revised!==q){
+   let recovered=revised;
+   for(const [oldId,newId] of [
+    [oldMorning,morningGeneric],[oldMorning,morningSchool],
+    [afternoon,officialAfternoon],[night,officialNight],[sleep,officialSleep]
+   ])recovered=restore(recovered,newId,oldId);
+   assert.deepEqual(recovered,q,'UNAUTHORIZED_QUESTION_CHANGE:'+id);
+   data.items[qindex]=revised;updated=true;
+  }
  }
  if(updated){const bytes=Buffer.from(JSON.stringify(data,null,2)+'\n');touched.push({rel,bytes,previous:original});}
  if(y===1)Y1.set(m,data);
@@ -107,7 +128,7 @@ assert(morningUses.length>=7&&morningUses.includes('Y1M01-Q009')&&morningUses.in
 assert(nightUses.includes('Y1M01-Q003')&&nightUses.includes('Y1M01-Q004'),'NIGHT_OCCURRENCES_MISSING');
 assert(afternoonUses.length>=7,'AFTERNOON_OCCURRENCES_MISSING');
 assert(orangeUses.includes('Y1M03-Q016'),'ORANGE_OCCURRENCE_MISSING');
-const apples=JSON.stringify([...Y1.values()].flatMap(m=>m.items)).match(/\\bapple\\b/gi)||[];
+const apples=JSON.stringify([...Y1.values()].flatMap(m=>m.items)).match(/\bapple\b/gi)||[];
 assert.equal(apples.length,0,'APPLE_NOW_IN_Y1_CONTRACTS_REVIEW_REQUIRED');
 const registryNew=Buffer.from(JSON.stringify(reg,null,2)+'\n');
 touched.push({rel:regRel,bytes:registryNew,previous:regOriginal});
@@ -116,8 +137,8 @@ for(const f of savedFiles)lines.push(f.rel+' '+sha(f.bytes));
 const manNew=Buffer.from(lines.join('\n')+'\n');
 const report={schemaVersion:'DUDUQ_Y1_GREETINGS_OFFICIAL_REUSE_V1',candidateOnly:true,productionDeployed:false,
  sourceCommit:COMMIT,sourceRepository:REPO,questions:600,year1Questions:120,answerKeysChanged:0,
- registeredBefore:reg.entries.length-2,registeredAfter:reg.entries.length,
- replacedMediaIds:[morningGeneric,morningSchool,afternoon,night,sleep,orange],
+ registeredBefore:reg.entries.length-5,registeredAfter:reg.entries.length,
+ replacedMediaIds:[morningGeneric,morningSchool,officialAfternoon,officialNight,officialSleep,orange],
  schoolQuestion:'Y1M01-Q003',leoSpecialCasePreserved:'Y1M01-Q009',
  morningOccurrences:morningUses,nightOccurrences:nightUses,afternoonOccurrences:afternoonUses,
  sleepOccurrences:sleepUses,orangeOccurrences:orangeUses,
