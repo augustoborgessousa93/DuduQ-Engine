@@ -4,9 +4,9 @@ set -Eeuo pipefail
 # Phase 2 prebuilt candidate. This script downloads a public, immutable, verified GitHub
 # release asset. It does not need a Cloudflare token or GitHub Actions secrets.
 # Preview deployment first; production requires separate verified promotion.
-TAG="duduq-phase2-safe-contrast-qa-20261102"
-NAME="duduq-phase2-safe-contrast-qa.tar.gz"
-SHA256="63e145aa13b4cc1b07a4549eadd7b5dee31d259340bef90b3392a6a48a6cd23f"
+TAG="duduq-phase2-orange-fruit-color-corrected-20261103"
+NAME="duduq-phase2-orange-fruit-color-corrected.tar.gz"
+SHA256="cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800"
 URL="https://github.com/augustoborgessousa93/DuduQ-Engine/releases/download/${TAG}/${NAME}"
 FILE="$(mktemp -t duduq-v28-XXXXXX.tar.gz)"
 trap 'rm -f "$FILE"' EXIT
@@ -24,7 +24,7 @@ import assert from 'node:assert/strict';
 const root=path.resolve('dist-pages');
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const manifest=readFileSync(path.join(root,'.duduq-pages-manifest'),'utf8').trimEnd().split(/\r?\n/);
-assert(manifest.length>=2709,'PARTIAL_DUDUQ_DISTRIBUTION');
+assert(manifest.length===2891,'PARTIAL_DUDUQ_DISTRIBUTION');
 for(const item of manifest){
  const n=item.lastIndexOf(' '),rel=item.slice(0,n),expected=item.slice(n+1);
  assert(n>0&&/^[a-f0-9]{64}$/.test(expected),'INVALID_MANIFEST');
@@ -40,5 +40,11 @@ for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
  count+=20;
 }
 assert.equal(count,600,'BAD_CURRICULUM_TOTAL');
+const media=JSON.parse(readFileSync(path.join(root,'content/english/media/media-registry.json')));
+const fruit=media.entries.find(e=>e.mediaId==='IMG-ASSETS-DUDUQ-ORANGE-FRUIT-PHASE2');
+const color=media.entries.find(e=>e.mediaId==='IMG-Y1M03-Q001-ORANGE');
+assert(fruit&&color&&fruit.urlOrPath!==color.urlOrPath,'ORANGE_CONTEXT_SPLIT_MISSING');
+assert.equal(fruit.provenance?.sourcePath,'Imagens Ilustrativa/Orange Fruit -laranja fruta.png');
+assert.equal(sha(readFileSync(path.join(root,fruit.urlOrPath))),fruit.sha256);
 console.log(JSON.stringify({status:'PREBUILT_PHASE2_EXACT_SOURCE_READY',manifestEntries:manifest.length,questions:count,releaseApproved:false,productionDeployed:false}));
 NODE
