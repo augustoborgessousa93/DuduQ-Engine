@@ -45,16 +45,28 @@ for(const [id,rows] of usages){
 const black=records.find(x=>x.mediaId==='IMG-Y1M03-Q001-BLACK');
 assert(black,'SHARED_BLACK_MEDIA_ID_NOT_FOUND');
 const banana=records.filter(x=>/BANANA/i.test(x.mediaId));
+const bananaRegistry=registry.entries.filter(x=>/banana/i.test(JSON.stringify(x))).map(x=>({
+ mediaId:x.mediaId,temporary:x.temporary??null,path:x.urlOrPath||null,
+ referenced:usages.has(x.mediaId),questionIds:[...new Set((usages.get(x.mediaId)||[]).map(y=>y.questionId))]
+}));
+const bananaQuestionText=questions.filter(q=>/banana/i.test(JSON.stringify(q))).map(q=>({
+ questionId:q.item_id,mechanicId:q.mechanicId,
+ mediaIds:[...new Set([...JSON.stringify(q).matchAll(/(?:IMG|AUD)-[A-Z0-9-]+/g)].map(m=>m[0]))],
+ rawBananaMentions:(JSON.stringify(q).match(/banana/gi)||[]).length
+}));
+const bananaUnreferenced=bananaRegistry.filter(x=>!x.referenced);
+const bananaMissingTemporary=bananaRegistry.filter(x=>x.temporary!==true);
+
 const white=records.filter(x=>/WHITE/i.test(x.mediaId));
 const candidate=records.filter(x=>x.exactFilenameHintPaths.length===1&&x.temporary===true&&x.missingSemanticQuestionIds.length===0);
 const report={
- schemaVersion:'DUDUQ_PHASE2_DELTA_OCCURRENCE_AUDIT_V1',
+ schemaVersion:'DUDUQ_PHASE2_DELTA_OCCURRENCE_AUDIT_V2',
  sourceCommit:source.sourceCommit,sourceAssets:assets.length,modules:30,contracts:600,
  registryEntries:registry.entries.length,mediaIdsReferenced:records.length,
  sharedMediaIds:records.filter(x=>x.questions.length>1).length,
  candidatesRequiringHumanReview:candidate.length,
  blackSharedActualOccurrences:black,
- bananaRecords:banana,whiteRecords:white,
+ bananaRecords:banana,bananaRegistry,bananaQuestionText,bananaUnreferenced,bananaMissingTemporary,whiteRecords:white,
  candidates:candidate,missingRegistryRecords:records.filter(x=>!x.registryPresent),
  missingSemanticRecords:records.filter(x=>x.missingSemanticQuestionIds.length),
  mediaIdsApplied:0,productionDeployed:false,releaseApproved:false,
@@ -68,7 +80,7 @@ console.log('PHASE2_DELTA_OCCURRENCE_AUDIT='+JSON.stringify({
  referenced:report.mediaIdsReferenced,shared:report.sharedMediaIds,
  candidateHints:report.candidatesRequiringHumanReview,
  blackOccurrences:black.occurrences,blackQuestions:black.questions,
- bananaRecords:banana.length,whiteRecords:white.length,
+ bananaRecords:banana.length,bananaRegistry:bananaRegistry.length,bananaQuestionText:bananaQuestionText.length,bananaMissingTemporary:bananaMissingTemporary.length,whiteRecords:white.length,
  missingRegistry:report.missingRegistryRecords.length,
  productionDeployed:false,mediaIdsApplied:0
 }));
