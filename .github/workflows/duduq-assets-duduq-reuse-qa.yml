@@ -5,6 +5,7 @@ on:
     branches:
       - integration/assets-duduq-reuse-20261031
       - integration/duduq-m1-qa-consolidated-20261031
+      - qa/duduq-phase2-crosswalk-head-20261103
     paths:
       - ".github/workflows/duduq-assets-duduq-reuse-qa.yml"
       - ".github/workflows/duduq-independent-official-overlay-qa.yml"
@@ -44,7 +45,48 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  source-head-crosswalk:
+    name: QA-only bilingual crosswalk at pinned Assets-DuduQ HEAD
+    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ASSETS_DUDUQ_SOURCE_COMMIT: a62c07c075a4a744f81dee2eea3a6b93108f9d08
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: a62c07c075a4a744f81dee2eea3a6b93108f9d08
+          path: assets-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Audit the complete HEAD and all 600 historical QA question entries
+        run: |
+          set -Eeuo pipefail
+          test "$(git -C assets-source rev-parse HEAD)" = "$ASSETS_DUDUQ_SOURCE_COMMIT"
+          mkdir -p qa/results
+          node --check qa/catalog-assets-duduq-matches.mjs
+          node --check qa/tests/verify-assets-duduq-crosswalk.mjs
+          node qa/audit-assets-duduq-source.mjs assets-source --out=qa/results/assets-duduq-source-inventory.json
+          node qa/catalog-assets-duduq-matches.mjs qa/results/assets-duduq-source-inventory.json --out=qa/results/assets-duduq-question-crosswalk.json
+          node qa/tests/verify-assets-duduq-crosswalk.mjs qa/results/assets-duduq-question-crosswalk.json
+      - name: Retain SHA-pinned inventory and suggestion graph
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-phase2-source-head-crosswalk-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 21
+          path: |
+            qa/results/assets-duduq-source-inventory.json
+            qa/results/assets-duduq-question-crosswalk.json
+
   isolated-v26-media-reuse:
+    if: ${{ github.ref_name != 'qa/duduq-phase2-crosswalk-head-20261103' }}
     name: Inventory, guarded import and real-browser Y1M04 verification
     runs-on: ubuntu-latest
     timeout-minutes: 60

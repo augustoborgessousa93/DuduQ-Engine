@@ -67,9 +67,17 @@ const aliases={
   quiet:['quiet','silence','silencio'],
  
 };
+// Phrase-level multilingual discovery for greetings, not automatic approval.
+aliases.good_morning=['good morning','bom dia','morning greeting'];
+aliases.good_afternoon=['good afternoon','boa tarde','afternoon greeting'];
+aliases.good_night=['good night','boa noite','night farewell'];
+aliases.good_evening=['good evening','boa noite ao chegar'];
 const aliasToConcept=new Map();for(const [concept,terms] of Object.entries(aliases))for(const term of terms)aliasToConcept.set(norm(term),concept);
 for(const [concept] of Object.entries(aliases))aliasToConcept.set(norm(concept),concept);
-const sourceRows=inventory.files.map(f=>({...f,filenameNormalized:norm(path.basename(f.path,path.extname(f.path)))}));
+// Only validated PNGs are considered as candidate game images; all source files
+// remain present in the original inventory and are never discarded.
+const sourceRows=inventory.files.filter(f=>f.detectedType==='PNG' && f.technicalStatus==='PASS')
+  .map(f=>({...f,filenameNormalized:norm(path.basename(f.path,path.extname(f.path)))}));
 // Numeric alternatives require numeral-only assets. A scene named
 // "y3-two-brown-rabbits" is NOT an illustration of the numeral two.
 const numeralConcepts=new Set([
@@ -146,13 +154,81 @@ for(let year=1;year<=5;year++){
   }
 }
 if(questions.length!==600)throw Error('EXPECTED_600_QUESTIONS:'+questions.length);
+// Full reverse binding graph, including shared media IDs and question-level media.
+// This is an audit index: candidate paths are lexical leads, never image approval.
+const mediaById=new Map();
+function addBinding(rawMediaId,q,slot,option){
+  const mediaId=typeof rawMediaId==='string'?rawMediaId.trim():'';
+  if(!mediaId)return;
+  let row=mediaById.get(mediaId);
+  if(!row){row={mediaId,uses:[],candidatePaths:new Set(),semantics:new Set()};mediaById.set(mediaId,row);}
+  const semantic=typeof option?.semanticTarget==='string'?norm(option.semanticTarget):null;
+  if(semantic)row.semantics.add(semantic);
+  for(const candidate of option?.candidates||[])row.candidatePaths.add(candidate.sourcePath);
+  row.uses.push({questionId:q.questionId,moduleId:q.moduleId,slot,
+    optionId:option?.optionId||null,semanticTarget:option?.semanticTarget||null,
+    correct:option?.correct===true,answerKey:option?.answerKey??null});
+}
+for(const q of questions){
+  const coveredByOptions=new Set();
+  for(const o of q.options){
+    if(typeof o.mediaId==='string'&&o.mediaId.trim()){
+      addBinding(o.mediaId,q,'OPTION',o);coveredByOptions.add(o.mediaId.trim());
+    }
+  }
+  const otherIds=[...(Array.isArray(q.mediaIds)?q.mediaIds:[]),q.primaryMediaId];
+  for(const id of new Set(otherIds)){
+    if(typeof id==='string'&&id.trim()&&!coveredByOptions.has(id.trim()))
+      addBinding(id,q,'QUESTION_LEVEL',null);
+  }
+}
+const bindingIndex=[...mediaById.values()].map(entry=>{
+  const questions=[...new Set(entry.uses.map(x=>x.questionId))].sort();
+  const semantics=[...entry.semantics].sort();
+  const candidatePaths=[...entry.candidatePaths].sort();
+  const flags=[];
+  if(semantics.length>1)flags.push('MULTIPLE_OPTION_SEMANTICS_REVIEW');
+  if(semantics.includes('orange')||/ORANGE/i.test(entry.mediaId))flags.push('ORANGE_COLOR_VS_FRUIT_REVIEW');
+  if(semantics.includes('white')||/WHITE/i.test(entry.mediaId))flags.push('WHITE_CONTRAST_BLOCK');
+  if(semantics.includes('banana')||/BANANA/i.test(entry.mediaId))flags.push('BANANA_TEMPORARY_FIELD_AUDIT');
+  if(questions.length>1)flags.push('SHARED_MEDIA_ID_ALL_USES_REQUIRED');
+  const classification=flags.some(x=>x==='WHITE_CONTRAST_BLOCK'||x==='BANANA_TEMPORARY_FIELD_AUDIT')
+    ?'QUARANTINED_FOR_TARGETED_QA'
+    :candidatePaths.length?'SOURCE_HINT_REVIEW_REQUIRED':'NO_SOURCE_HINT';
+  return {mediaId:entry.mediaId,questionCount:questions.length,occurrenceCount:entry.uses.length,
+    questions,semantics,candidatePaths,flags,classification,uses:entry.uses};
+}).sort((a,b)=>b.questionCount-a.questionCount||a.mediaId.localeCompare(b.mediaId));
+const candidateSources=new Map();
+for(const item of bindingIndex)for(const sourcePath of item.candidatePaths){
+  let row=candidateSources.get(sourcePath);
+  if(!row){row={path:sourcePath,mediaIds:new Set(),questions:new Set(),flags:new Set()};candidateSources.set(sourcePath,row);}
+  row.mediaIds.add(item.mediaId);
+  for(const q of item.questions)row.questions.add(q);
+  for(const flag of item.flags)row.flags.add(flag);
+}
+const sourceIndex=[...candidateSources.values()].map(row=>({
+  sourcePath:row.path,mediaIds:[...row.mediaIds].sort(),
+  possibleQuestionCount:row.questions.size,questionIds:[...row.questions].sort(),
+  riskFlags:[...row.flags].sort(),status:'DISCOVERY_ONLY_PEDAGOGICAL_QA_REQUIRED'
+})).sort((a,b)=>b.possibleQuestionCount-a.possibleQuestionCount||a.sourcePath.localeCompare(b.sourcePath));
+const bindingsSummary={
+  uniqueMediaIds:bindingIndex.length,
+  totalOccurrences:bindingIndex.reduce((n,x)=>n+x.occurrenceCount,0),
+  sharedMediaIds:bindingIndex.filter(x=>x.questionCount>1).length,
+  conflictedMediaIds:bindingIndex.filter(x=>x.flags.includes('MULTIPLE_OPTION_SEMANTICS_REVIEW')).length,
+  quarantinedMediaIds:bindingIndex.filter(x=>x.classification==='QUARANTINED_FOR_TARGETED_QA').length,
+  mediaIdsWithCandidateHints:bindingIndex.filter(x=>x.candidatePaths.length).length
+};
 const allOptions=questions.flatMap(q=>q.options),candidateOptions=allOptions.filter(o=>o.candidateCount>0);
 const reviewedOptions=candidateOptions.filter(o=>o.candidates.some(c=>c.associationStatus==='VISUAL_EXACT_PRECHECK_HUMAN_QA_PENDING'));
 const report={schemaVersion:'ASSETS_DUDUQ_BILINGUAL_600_QUESTION_CROSSWALK_V1',sourceRepository:inventory.sourceRepository,sourceCommit:inventory.sourceCommit,
   inventoryPath:path.relative(root,inventoryPath).replaceAll('\\','/'),inventoryFiles:inventory.fileCount,uniqueSourceHashes:inventory.uniqueSha256,
   inventoryStatus:inventory.status,questionCount:questions.length,optionCount:allOptions.length,
   candidateOptions:candidateOptions.length,optionsWithVisuallyReviewedExactConcept:reviewedOptions.length,
-  humanPedagogicalApproval:'PENDING',matchingRule:'Bilingual exact normalized aliases are discovery hints only. No filename-only match is approved.',questions};
+  humanPedagogicalApproval:'PENDING',matchingRule:'Bilingual exact normalized aliases are discovery hints only. No filename-only match is approved.',
+  sourceImageFiles:sourceRows.length,sourceCandidateCount:sourceIndex.length,bindingsSummary,mediaBindingIndex:bindingIndex,sourceCandidateIndex:sourceIndex,
+  provenanceWarning:'20261029 questions are historical QA snapshots. Confirm against current compiled 600 contracts and registry before any change.',questions};
 const bytes=Buffer.from(JSON.stringify(report,null,2)+'\n');await writeFile(output,bytes);
 console.log(JSON.stringify({status:'CROSSWALK_COMPLETE_REVIEW_REQUIRED',inventoryFiles:inventory.fileCount,questions:questions.length,options:allOptions.length,
-  optionsWithCandidates:candidateOptions.length,visuallyReviewedExactCandidateOptions:reviewedOptions.length,output:path.relative(root,output).replaceAll('\\','/')},null,2));
+  optionsWithCandidates:candidateOptions.length,visuallyReviewedExactCandidateOptions:reviewedOptions.length,sourceImageFiles:sourceRows.length,
+  sourceCandidateCount:sourceIndex.length,bindingsSummary,output:path.relative(root,output).replaceAll('\\','/')},null,2));
