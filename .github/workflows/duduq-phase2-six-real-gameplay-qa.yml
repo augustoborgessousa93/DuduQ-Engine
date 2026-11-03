@@ -1,0 +1,101 @@
+name: DUDUQ Phase 2 - Six Actual User-Interaction Media Proofs
+
+on:
+  push:
+    branches:
+      - qa/duduq-phase2-six-real-gameplay-20261102
+    paths:
+      - .github/workflows/duduq-phase2-six-real-gameplay-qa.yml
+      - qa/verify-phase2-six-real-gameplay.mjs
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  six-real-user-gameplay:
+    name: Six actual failed visual checks - real accessible gameplay
+    runs-on: ubuntu-latest
+    timeout-minutes: 32
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BASE_URL: http://127.0.0.1:4175
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Restore exact archived 141-ID build and six actual failed cases
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq-six-real/base /tmp/duduq-six-real/failures qa/dist-pages-food-candidate qa/results
+          gh run download 41546708766 -R "$GITHUB_REPOSITORY" \
+            --name duduq-phase2-safe-141-ids-unapproved-candidate \
+            --dir /tmp/duduq-six-real/base
+          gh run download 41547068602 -R "$GITHUB_REPOSITORY" \
+            --name duduq-phase2-safe-141-representative-visual-qa \
+            --dir /tmp/duduq-six-real/failures
+          TAR="$(find /tmp/duduq-six-real/base -name duduq-phase2-safe-141-qa-candidate.tar.gz -print -quit)"
+          SUM="$(find /tmp/duduq-six-real/base -name duduq-phase2-safe-141-qa-candidate.sha256 -print -quit)"
+          META="$(find /tmp/duduq-six-real/base -name phase2-persisted-visual-hold.json -print -quit)"
+          OLD="$(find /tmp/duduq-six-real/failures -name phase2-multilingual-source-browser.json -print -quit)"
+          test -n "$TAR" && test -n "$SUM" && test -n "$META" && test -n "$OLD"
+          (cd "$(dirname "$TAR")" && sha256sum -c "$(basename "$SUM")")
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+          cp "$META" qa/results/phase2-persisted-visual-hold.json
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,writeFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import {execFileSync} from 'node:child_process';
+          const evidence=JSON.parse(readFileSync(execFileSync('find',
+           ['/tmp/duduq-six-real/failures','-name','phase2-multilingual-source-browser.json','-print','-quit'],
+           {encoding:'utf8'}).trim()));
+          const meta=JSON.parse(readFileSync('qa/results/phase2-persisted-visual-hold.json','utf8'));
+          assert.equal(meta.verifiedContracts,600);
+          assert.equal(meta.changedMediaIds,141);
+          const bytes=readFileSync('qa/dist-pages-food-candidate/content/english/media/media-registry.json');
+          assert.equal(createHash('sha256').update(bytes).digest('hex'),meta.registrySha256);
+          assert.equal(evidence.checks,112);
+          assert.equal(evidence.failed.length,6);
+          const failures=evidence.failed.map(f=>{
+           const match=evidence.cases.filter(c=>c.questionId===f.questionId&&c.viewport===f.viewport);
+           assert.equal(match.length,1,'CASE_NOT_UNIQUE');
+           return {questionId:f.questionId,viewport:f.viewport,mechanic:match[0].mechanic,
+            required:match[0].required};
+          });
+          writeFileSync('qa/results/phase2-six-real-failures.json',
+            JSON.stringify({sourceRun:41547068602,failed:failures},null,2)+'\n');
+          console.log('IMMUTABLE_141_MEDIA_AND_SIX_PROOFS_READY');
+          NODE
+      - name: Install real Chromium and expose exact compiled game without mutations
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev qa/dist-pages-food-candidate --ip 127.0.0.1 \
+            --port 4175 --compatibility-date 2026-10-30 > /tmp/duduq-six-accessible.log 2>&1 &
+          echo $! >/tmp/duduq-six-accessible.pid
+          for i in {1..45}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then break; fi
+            kill -0 "$(cat /tmp/duduq-six-accessible.pid)" 2>/dev/null || {
+              cat /tmp/duduq-six-accessible.log; exit 1;
+            }
+            sleep 2
+          done
+          node --check qa/verify-phase2-six-real-gameplay.mjs
+          node qa/verify-phase2-six-real-gameplay.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-six-real-user-media-gameplay
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            qa/results/phase2-six-real-failures.json
+            qa/results/phase2-six-real-gameplay.json
+            qa/results/phase2-six-real-gameplay/*.png
