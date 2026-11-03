@@ -67,10 +67,10 @@ for(const entry of imgs){
  assert.equal(blob(bytes),entry.gitBlob,'GIT_BLOB_NOT_PINNED:'+entry.name);
  assert(bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),'NOT_PNG:'+entry.name);
  const width=bytes.readUInt32BE(16),height=bytes.readUInt32BE(20);
- assert(width>=1024&&height>=1024&&bytes[24]===8&&bytes[25]===6,'REQUIRE_SOURCE_RGBA_1024:'+entry.name);
+ assert(width>=512&&height>=512&&bytes[24]===8&&bytes[25]===6,'REQUIRE_SOURCE_RGBA_512_QA_ONLY:'+entry.name);
  const digest=sha256(bytes),assetPath='content/english/assets/images/assets-duduq/original-season-'+entry.name+'-'+digest.slice(0,12)+'.png';
  assert(!mf.has(assetPath),'ALREADY_IN_DISTRIBUTION:'+entry.name);
- assetBytes.set(assetPath,bytes);images.push({...entry,width,height,sha256:digest,assetPath});
+ assetBytes.set(assetPath,bytes);images.push({...entry,width,height,sha256:digest,assetPath,belowPreferred1024:width<1024||height<1024,productionResolutionApproval:false});
 }
 const changes=[],affected=new Set();
 for(const [id,semantic] of semantics){
@@ -107,7 +107,7 @@ const result={
  600QuestionsVerified:numberOfQuestions,questionsChanged:0,answersChanged:0,audioChanged:0,
  GoldMastersChanged:0,runtimeChanged:0,productionDeployed:false,humanApproval:false,
  images,changes,
- humanReviewRequired:'Confirm image labels, contrast and all target options in real browser before homologation'};
+ humanReviewRequired:'Source PNGs are below preferred 1024px; require effective 2x density at displayed dimensions, full gameplay and pedagogical approval before homologation'};
 if(!apply){console.log(JSON.stringify({status:result.status,sourcePNGs:images.length,changedMediaIds:changes.length,questions:affected.size}));process.exit(0);}
 const next=structuredClone(reg);
 for(const c of changes){const i=regById.get(c.mediaId),prior=next.entries[i];

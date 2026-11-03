@@ -311,6 +311,7 @@ jobs:
           filter: blob:none
           sparse-checkout: |
             qa/phase2-y4m03-seasons-batch.mjs
+            qa/phase2-y4m03-seasons-browser-qa.mjs
           sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
@@ -352,10 +353,10 @@ jobs:
           canvas.save('qa/results/y4m03-seasons-review.png')
           Path('qa/results/y4m03-season-source-dimensions.json').write_text(json.dumps(facts,indent=2))
           print('SOURCE_SEASON_FACTS='+json.dumps(facts),flush=True)
-          if not all(f['minimum1024'] and f['visibleBoundingBox'] and
-                     f['alphaExtrema'][0]==0 and f['alphaExtrema'][1]>0 for f in facts):
-            raise SystemExit('SOURCE_LOW_RES_OR_ALPHA_INSUFFICIENT_PENDING_VISUAL_REVIEW')
-          print('SOURCE_PIXEL_PRECHECK_PASS_MANUAL_PEDAGOGICAL_REVIEW_PENDING')
+          if not all(f['width']>=512 and f['height']>=512 and
+                     f['visibleBoundingBox'] and f['alphaExtrema'][0]==0 and f['alphaExtrema'][1]>0 for f in facts):
+            raise SystemExit('SOURCE_UNUSABLE_EVEN_AT_DISPLAY_RESOLUTION')
+          print('SOURCE_560PX_IMAGES_ACCEPTED_FOR_QA_RENDER_DENSITY_CHECK_ONLY')
           PY
       - name: Fetch EXACT latest Orange prod package, verify immutable SHA256
         shell: bash
@@ -379,6 +380,19 @@ jobs:
             cd dist-pages
             tar -czf ../qa/results/y4m03-seasons-delta-only.tar.gz               .duduq-pages-manifest content/english/media/media-registry.json               content/english/assets/images/assets-duduq/original-season-*.png
           )
+      - name: Run exact-season QA in local Pages browser at desktop and mobile
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save --no-audit --no-fund playwright@1.55.0 wrangler@4
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev dist-pages --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 >/tmp/duduq-seasons-pages.log 2>&1 &
+          for i in $(seq 1 50); do
+            if curl -fsS -o /dev/null http://127.0.0.1:4175/play/target-shooter/; then break; fi
+            sleep 2
+          done
+          node --check qa/phase2-y4m03-seasons-browser-qa.mjs
+          node qa/phase2-y4m03-seasons-browser-qa.mjs
       - name: Preserve QA and source quality evidence even if blocked
         if: always()
         uses: actions/upload-artifact@v4
@@ -391,6 +405,7 @@ jobs:
             qa/results/y4m03-seasons-evidence.json
             qa/results/y4m03-seasons-review.png
             qa/results/y4m03-seasons-delta-only.tar.gz
+            qa/results/y4m03-seasons-browser/
 
   isolated-v26-media-reuse:
     if: ${{ github.ref_name != 'qa/duduq-phase2-crosswalk-head-20261103' }}
