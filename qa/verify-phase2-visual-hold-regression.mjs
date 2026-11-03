@@ -65,12 +65,31 @@ try{
    // interaction must flip a real card before evaluating its visual contents.
    let memoryCardFlipped=null;
    if(q.mechanicId==='memory-quest'&&ready){
-    const card=page.locator('[data-memory-card-id]').first();
+    // The released Gold Master renders Memory Quest in a child iframe.
+    // Parent document has 0 cards even when the real board is fully ready.
+    // Locate and click the actual frame's card; never inject test DOM.
+    let gameFrame=null;
+    for(let attempt=0;attempt<60&&!gameFrame;attempt++){
+     for(const frame of page.frames()){
+      try{
+       if(await frame.locator('[data-memory-card-id]').count()>0){
+        gameFrame=frame;break;
+       }
+      }catch{}
+     }
+     if(!gameFrame)await page.waitForTimeout(200);
+    }
     try{
+     assert(gameFrame,'MEMORY_QUEST_FRAME_NOT_FOUND');
+     const card=gameFrame.locator('[data-memory-card-id]').first();
      await card.waitFor({state:'visible',timeout:5000});
      const before=await card.getAttribute('data-face-up');
+     assert.equal(before,'false','CARD_ALREADY_FACE_UP');
+     const cardId=await card.getAttribute('data-memory-card-id');
      await card.click({timeout:7000});
-     await page.waitForTimeout(700);
+     await gameFrame.waitForFunction(id=>
+      document.querySelector('[data-memory-card-id="'+id+'"]')?.getAttribute('data-face-up')==='true',
+      cardId,{timeout:3000,polling:100});
      const after=await card.getAttribute('data-face-up');
      memoryCardFlipped=before==='false'&&after==='true';
     }catch{memoryCardFlipped=false;}
