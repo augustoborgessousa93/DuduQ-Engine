@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "DUDUQ_PHASE2_127_MEDIA_DIRECTED_COMPOSITE_QA_V1",
+  "status": "PASS_42_DIRECTED_CHECKS_COMPOSITE_QA_ONLY",
+  "sourceRepository": "augustoborgessousa93/DuduQ-Engine",
+  "compiledCandidateArtifactRun": 41549957803,
+  "compiledCandidateArtifactName": "duduq-phase2-conservative-source-reuse-qa",
+  "sourceAssetsCommit": "a51e0958d0c68941701b8373ccf30acf88aaf7d0",
+  "verifiedContracts": 600,
+  "qaOnlyMediaIds": 127,
+  "restoredProvisionalPaths": 14,
+  "affectedQuestions": 21,
+  "viewports": [
+    390,
+    1280
+  ],
+  "originalDirectedRun": {
+    "runId": 41551815580,
+    "artifactId": 13192642104,
+    "reportSha256": "62a605b3e59487ed168933c700d645a71be452ef3c9ce20556fe4e8a48788bf8",
+    "checks": 42,
+    "passes": 40,
+    "invalidSelectorFailures": 2,
+    "failedQuestionId": "Y1M06-Q005",
+    "reason": "Test used selectors from a newer Memory Quest release; compiled Gold Master uses button.memory-quest-card-slot[data-memory-card-component], data-flipped, aria-pressed. Other 40 checks passed."
+  },
+  "replacementDirectedRun": {
+    "runId": 41552474452,
+    "artifactId": 13193691413,
+    "reportSha256": "9415ee635448c60f44fdd25205232479c69f65070862a0007db3603c41f85b3c",
+    "checks": 2,
+    "passes": 2,
+    "questionId": "Y1M06-Q005",
+    "testedViewports": [
+      390,
+      1280
+    ],
+    "realPointerClicks": true,
+    "observedCardCount": 12,
+    "observedDataFlipped": "true",
+    "observedAriaPressed": "true",
+    "sourceCandidateArtifactRun": 41549957803
+  },
+  "compositeVerifiedChecks": 42,
+  "compositePasses": 42,
+  "remainingOriginalUnresolvedCases": 0,
+  "sourceImageBirdCertified": false,
+  "semanticPedagogicalApproval": false,
+  "fullInteractionQaApproved": false,
+  "productionDeployed": false,
+  "releaseApproved": false,
+  "notes": "Composite attestation only; no new build or retest of 40 previously passing cases. Two false-negative selector checks were independently replaced by real card-flip verification against the same SHA-bound 127-ID candidate. This does not certify the held bird PNG or authorize production."
+}
