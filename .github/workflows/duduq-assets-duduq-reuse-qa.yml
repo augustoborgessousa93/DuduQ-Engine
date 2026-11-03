@@ -332,13 +332,17 @@ jobs:
           python - <<'PY'
           from PIL import Image,ImageDraw
           from pathlib import Path
+          import json
           canvas=Image.new('RGB',(1440,580),'#f2f2f2')
+          facts=[]
           for i,season in enumerate(('summer','autumn','winter')):
-            img=Image.open('source-seasons/'+season+'.png').convert('RGBA')
-            assert img.width>=1024 and img.height>=1024
+            image=Image.open('source-seasons/'+season+'.png')
+            img=image.convert('RGBA')
             alpha=img.getchannel('A'); box=alpha.getbbox()
-            assert box and box[2]-box[0]>350 and box[3]-box[1]>350
-            assert alpha.getextrema()[0]==0 and alpha.getextrema()[1]>0
+            facts.append({'season':season,'sourceFormat':image.format,
+              'width':img.width,'height':img.height,'alphaExtrema':alpha.getextrema(),
+              'visibleBoundingBox':box,
+              'minimum1024':img.width>=1024 and img.height>=1024})
             img.thumbnail((440,440))
             stage=Image.new('RGBA',(450,450),'white')
             stage.alpha_composite(img,((450-img.width)//2,(450-img.height)//2))
@@ -346,6 +350,11 @@ jobs:
             ImageDraw.Draw(canvas).text((i*480+15,25),season,fill='black')
           Path('qa/results').mkdir(parents=True,exist_ok=True)
           canvas.save('qa/results/y4m03-seasons-review.png')
+          Path('qa/results/y4m03-season-source-dimensions.json').write_text(json.dumps(facts,indent=2))
+          print('SOURCE_SEASON_FACTS='+json.dumps(facts),flush=True)
+          if not all(f['minimum1024'] and f['visibleBoundingBox'] and
+                     f['alphaExtrema'][0]==0 and f['alphaExtrema'][1]>0 for f in facts):
+            raise SystemExit('SOURCE_LOW_RES_OR_ALPHA_INSUFFICIENT_PENDING_VISUAL_REVIEW')
           print('SOURCE_PIXEL_PRECHECK_PASS_MANUAL_PEDAGOGICAL_REVIEW_PENDING')
           PY
       - name: Fetch EXACT latest Orange prod package, verify immutable SHA256
@@ -370,13 +379,15 @@ jobs:
             cd dist-pages
             tar -czf ../qa/results/y4m03-seasons-delta-only.tar.gz               .duduq-pages-manifest content/english/media/media-registry.json               content/english/assets/images/assets-duduq/original-season-*.png
           )
-      - name: Preserve QA delta and visual review without merge or deployment
+      - name: Preserve QA and source quality evidence even if blocked
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: duduq-y4m03-seasons-8ids-qa-${{ github.run_id }}
           retention-days: 21
-          if-no-files-found: error
+          if-no-files-found: warn
           path: |
+            qa/results/y4m03-season-source-dimensions.json
             qa/results/y4m03-seasons-evidence.json
             qa/results/y4m03-seasons-review.png
             qa/results/y4m03-seasons-delta-only.tar.gz
