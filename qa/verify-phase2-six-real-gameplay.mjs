@@ -127,16 +127,34 @@ try{
     });
     assert(live.x>0&&live.x<live.viewportWidth&&live.y>0&&live.y<live.viewportHeight,
       'MOVING_BUBBLE_NOT_IN_VIEWPORT_AT_CLICK');
-    const before=await match.frame.evaluate(()=>[...document.querySelectorAll('.duduq-bp-bubble-shell')]
-      .map(x=>x.getAttribute('data-popped')+'|'+x.getAttribute('data-wrong')));
-    await page.mouse.click(live.x,live.y);
+    // Translate the image's frame-local coordinates to the main viewport.
+    // page.mouse.click() always uses TOP-LEVEL viewport coordinates; clicking
+    // child-frame coordinates directly previously hit the wrong position.
+    const frameElement=match.frame===page.mainFrame()?null:await match.frame.frameElement();
+    const frameBox=frameElement?await frameElement.boundingBox():null;
+    assert(!frameElement||frameBox,'CHILD_FRAME_BOUNDING_BOX_MISSING');
+    const clickX=live.x+(frameBox?.x||0),clickY=live.y+(frameBox?.y||0);
+    const viewport=page.viewportSize();
+    assert(clickX>0&&clickX<viewport.width&&clickY>0&&clickY<viewport.height,
+      'BUBBLE_OUTSIDE_TOP_LEVEL_VIEWPORT_AT_CLICK');
+    const before=await match.frame.evaluate(()=>({
+      shells:[...document.querySelectorAll('.duduq-bp-bubble-shell')]
+       .map(x=>x.getAttribute('data-popped')+'|'+x.getAttribute('data-wrong')),
+      visibleFeedback:document.body?.innerText||''
+    }));
+    await page.mouse.click(clickX,clickY);
     await page.waitForTimeout(500);
-    const after=await match.frame.evaluate(()=>[...document.querySelectorAll('.duduq-bp-bubble-shell')]
-      .map(x=>x.getAttribute('data-popped')+'|'+x.getAttribute('data-wrong')));
-    c.actionObserved=before.join(',')!==after.join(',');
-    c.actionType='ACTUAL_POINTER_CLICK_WITH_BUBBLE_FEEDBACK';
-    c.pointer={x:live.x,y:live.y};
-    c.feedbackBefore=before;c.feedbackAfter=after;
+    const after=await match.frame.evaluate(()=>({
+      shells:[...document.querySelectorAll('.duduq-bp-bubble-shell')]
+       .map(x=>x.getAttribute('data-popped')+'|'+x.getAttribute('data-wrong')),
+      visibleFeedback:document.body?.innerText||''
+    }));
+    c.actionObserved=before.shells.join(',')!==after.shells.join(',')||
+      before.visibleFeedback!==after.visibleFeedback;
+    c.actionType='REAL_TOP_LEVEL_POINTER_CLICK_FRAME_COORDINATES_CORRECTED';
+    c.pointer={x:clickX,y:clickY,frameX:live.x,frameY:live.y,
+      frameOffset:{x:frameBox?.x||0,y:frameBox?.y||0}};
+    c.feedbackBefore=before.shells;c.feedbackAfter=after.shells;
    }else throw Error('UNEXPECTED_MECHANIC');
    c.status=c.ready&&c.actionObserved&&f.required.every(p=>c.visiblePaths.includes(p))&&
     !errors.length&&!httpErrors.length?'PASS_REAL_GAMEPLAY_QA_ONLY':'FAIL_REAL_GAMEPLAY_QA';
