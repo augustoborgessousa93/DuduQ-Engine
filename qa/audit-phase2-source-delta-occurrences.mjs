@@ -63,6 +63,13 @@ const bananaExplicitFalse=bananaRegistry.filter(x=>x.temporaryFieldPresent&&x.te
 
 const white=records.filter(x=>/WHITE/i.test(x.mediaId));
 const candidate=records.filter(x=>x.exactFilenameHintPaths.length===1&&x.temporary===true&&x.missingSemanticQuestionIds.length===0);
+const remainingTemporary=records.filter(x=>x.temporary===true);
+const unresolvedBacklog=remainingTemporary.filter(x=>!candidate.includes(x)).map(x=>({
+ mediaId:x.mediaId,questions:x.questions,occurrences:x.occurrences,
+ semanticTargets:x.semanticTargets,reason:x.reason,reviewHold:x.reviewHold,
+ sourceHintCount:x.sourceCandidates.length
+}));
+const heldCandidateIds=candidate.filter(x=>x.reviewHold!==null).map(x=>x.mediaId);
 const reviewQueue=candidate.map(x=>({mediaId:x.mediaId,questions:x.questions,occurrences:x.occurrences,semanticTargets:x.semanticTargets,source:x.sourceCandidates[0],reviewHold:x.reviewHold,sha256Verified:false,visualApproved:false,pedagogicalApproved:false,eligibleForIntegration:false}));
 const report={
  schemaVersion:'DUDUQ_PHASE2_DELTA_OCCURRENCE_AUDIT_V4',
@@ -72,7 +79,7 @@ const report={
  candidatesRequiringHumanReview:candidate.length,
  blackSharedActualOccurrences:black,
  bananaRecords:banana,bananaRegistry,bananaQuestionText,bananaUnreferenced,bananaMissingTemporary,bananaNotExplicitTemporary,bananaExplicitFalse,whiteRecords:white,
- candidates:candidate,reviewQueue,missingRegistryRecords:records.filter(x=>!x.registryPresent),
+ candidates:candidate,reviewQueue,unresolvedBacklog,heldCandidateIds,remainingTemporaryCount:remainingTemporary.length,missingRegistryRecords:records.filter(x=>!x.registryPresent),
  missingSemanticRecords:records.filter(x=>x.missingSemanticQuestionIds.length),
  mediaIdsApplied:0,productionDeployed:false,releaseApproved:false,
  rule:'Exact filename hint is NOT proof. Do not apply until source PNG SHA256, complete occurrence semantics, contrast and mechanic browser QA are approved.'
@@ -83,7 +90,7 @@ console.log('PHASE2_DELTA_OCCURRENCE_AUDIT='+JSON.stringify({
  sourceCommit:report.sourceCommit,sourceAssets:report.sourceAssets,
  modules:report.modules,contracts:report.contracts,
  referenced:report.mediaIdsReferenced,shared:report.sharedMediaIds,
- candidateHints:report.candidatesRequiringHumanReview,
+ candidateHints:report.candidatesRequiringHumanReview,remainingTemporary:report.remainingTemporaryCount,unresolvedBacklog:report.unresolvedBacklog.length,heldCandidates:report.heldCandidateIds.length,
  blackOccurrences:black.occurrences,blackQuestions:black.questions,
  bananaRecords:banana.length,bananaRegistry:bananaRegistry.length,bananaQuestionText:bananaQuestionText.length,bananaMissingTemporary:bananaMissingTemporary.length,bananaExplicitFalse:bananaExplicitFalse.length,bananaNotExplicitTemporary:bananaNotExplicitTemporary.length,whiteRecords:white.length,
  missingRegistry:report.missingRegistryRecords.length,
