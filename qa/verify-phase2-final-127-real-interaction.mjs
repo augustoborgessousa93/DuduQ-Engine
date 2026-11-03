@@ -37,7 +37,9 @@ for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
   }
  }
 }
-const chosen=process.env.DUDUQ_QA_ONLY_BUBBLE==='1'?
+const chosen=process.env.DUDUQ_QA_ALL_MECHANICS==='1'?
+ [...samples['memory-quest'].slice(0,2),...samples['bubble-pop'].slice(0,2)]:
+ process.env.DUDUQ_QA_ONLY_BUBBLE==='1'?
  samples['bubble-pop'].slice(0,2):
  [...samples['memory-quest'].slice(0,2),...samples['bubble-pop'].slice(0,2)];
 assert(chosen.length>=2,'NO_AFFECTED_MECHANIC_SAMPLES');
@@ -107,30 +109,49 @@ try{
      await bubbles.first().waitFor({state:'visible',timeout:9000});
      row.bubbleCount=await bubbles.count();
      assert(row.bubbleCount>=1,'NO_REAL_PLAYABLE_BUBBLE_VISIBLE');
-     // Playwright performs genuine pointer input inside the correct iframe.
-     // Never use force=true, DOM dispatchEvent or a mocked answer.
-     for(let attempt=0;attempt<2&&!row.realInteractionObserved;attempt++){
-      const count=await bubbles.count();
-      for(let i=0;i<count&&!row.realInteractionObserved;i++){
-       const button=bubbles.nth(i);
-       if(!await button.isVisible().catch(()=>false))continue;
-       if(await button.isDisabled().catch(()=>true))continue;
-       try{await button.click({timeout:2200});}
-       catch(e){row.lastClickError=String(e.message||e).slice(0,180);continue;}
-       try{
-        // The standalone Bubble demo responds to native pointerdown by
-        // disabling the clicked button immediately (beginPop).
-        const bubbleId=await button.getAttribute('data-bubble-id');
-        await gameFrame.waitForFunction(id=>{
-         const item=[...document.querySelectorAll('.bubble-pop-playable')]
-          .find(x=>x.dataset.bubbleId===id);
-         return item?.disabled===true&&item?.style.pointerEvents==='none';
-        },bubbleId,{timeout:1400,polling:30});
-        row.realInteractionObserved=true;
-       }catch{}
-       row.clickAttempts=(row.clickAttempts||0)+1;
-      }
-      if(!row.realInteractionObserved)await page.waitForTimeout(250);
+     // Moving bubbles never become "stable" for locator.click().
+     // Target the rendered center and send genuine Playwright mouse input.
+     // Track a trusted pointerdown plus the immediate beginPop state.
+     await gameFrame.evaluate(()=>{
+      window.__duduqQaPointerEvents=[];
+      document.addEventListener('pointerdown',event=>{
+       const button=event.target?.closest?.('.bubble-pop-playable');
+       if(button)window.__duduqQaPointerEvents.push({
+        bubbleId:button.dataset.bubbleId,isTrusted:event.isTrusted,
+        x:event.clientX,y:event.clientY});
+      },{capture:true,passive:true});
+     });
+     for(let attempt=0;attempt<4&&!row.realInteractionObserved;attempt++){
+      const target=await gameFrame.evaluate(()=>{
+       for(const button of document.querySelectorAll('.bubble-pop-playable')){
+        if(button.disabled)continue;
+        const b=button.getBoundingClientRect();
+        if(b.width<30||b.height<30)continue;
+        const x=b.x+b.width/2,y=b.y+b.height/2;
+        if(x<24||y<24||x>innerWidth-24||y>innerHeight-24)continue;
+        const hit=document.elementFromPoint(x,y);
+        if(hit===button||button.contains(hit))return {bubbleId:button.dataset.bubbleId,x,y};
+       }
+       return null;
+      });
+      if(!target){await page.waitForTimeout(220);continue;}
+      const frameOffset=gameFrame===page.mainFrame()?
+       {x:0,y:0}:(await (await gameFrame.frameElement()).boundingBox())||{x:0,y:0};
+      await page.mouse.move(target.x+frameOffset.x,target.y+frameOffset.y);
+      await page.mouse.down();
+      const changed=await gameFrame.evaluate(id=>{
+       const item=[...document.querySelectorAll('.bubble-pop-playable')]
+        .find(e=>e.dataset.bubbleId===id);
+       const events=window.__duduqQaPointerEvents||[];
+       return {trustedPointer:events.some(e=>e.bubbleId===id&&e.isTrusted===true),
+        disabled:!!item?.disabled,pointerNone:item?.style.pointerEvents==='none',
+        stillPresent:!!item,
+        events:events.length};
+      },target.bubbleId);
+      await page.mouse.up();
+      row.clickAttempts=attempt+1;row.lastPointer=changed;
+      row.realInteractionObserved=changed.trustedPointer&&changed.disabled&&changed.pointerNone;
+      if(!row.realInteractionObserved)await page.waitForTimeout(270);
      }
      row.interactionType='REAL_STANDALONE_BUBBLE_POINTER_DOWN_BEGIN_POP';
      if(!row.realInteractionObserved)row.limitation='NO_VERIFIED_DISABLED_POP_STATE_AFTER_GENUINE_BUBBLE_CLICKS';
@@ -151,11 +172,11 @@ const result={schemaVersion:'DUDUQ_PHASE2_127_REAL_USER_INTERACTION_REVIEW_V1',
  candidateChangedMediaIds:127,verifiedQuestionContracts:600,
  selectedQuestions:chosen,checks:cases.length,failed:failed.map(x=>({
   id:x.questionId,mechanic:x.mechanic,viewport:x.viewport,limitation:x.limitation,
-  pageErrors:x.pageErrors,failedRequests:x.failedRequests})),
+  pageErrors:x.pageErrors,failedRequests:x.failedRequests,lastPointer:x.lastPointer,clickAttempts:x.clickAttempts})),
  cases,sourceArchiveRunId:41549957803,
  pedagogicalApproved:false,fullGameplayCertified:false,productionDeployed:false,releaseApproved:false,
  curricularQuestionGameplayCertified:false,
- scope:'Standalone /play/<mechanic>/ demos test actual browser mechanics only, not compiled curricular option semantics'};
+ scope:'Standalone demo pointer/flip behavior only; not the 600 curricular game answers or pedagogy'};
 await writeFile('qa/results/phase2-127-real-interaction.json',JSON.stringify(result,null,2)+'\n');
 console.log('PHASE2_REAL_USER_INTERACTION='+JSON.stringify({
  status:result.status,checks:result.checks,affectedQuestionSamples:chosen,
