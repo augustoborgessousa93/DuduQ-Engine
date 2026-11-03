@@ -1,19 +1,21 @@
-name: DUDUQ Phase 2 - Source delta occurrence audit ONLY (no deploy)
+name: DUDUQ Phase 2 - Reuse verified source images in isolated QA (NO deploy)
 on:
   push:
     branches: [qa/duduq-phase2-releasegate-127-20261103]
     paths:
       - qa/audit-phase2-source-delta-occurrences.mjs
+      - qa/integrate-phase2-source-batch.mjs
       - .github/workflows/duduq-phase2-source-delta-audit.yml
 permissions:
   contents: read
   actions: read
 jobs:
-  audit:
+  source-batch:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 35
     env:
       GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -21,26 +23,50 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Restore existing 127-ID immutable QA package, no rebuild or browser retest
+      - name: Restore immutable 127-ID QA build with exact SHA; no rebuild
+        shell: bash
         run: |
           set -Eeuo pipefail
-          mkdir -p /tmp/qa127 qa/dist-pages-food-candidate
-          gh run download 41549957803 -R augustoborgessousa93/DuduQ-Engine \
-            -n duduq-phase2-conservative-source-reuse-qa -D /tmp/qa127
-          TAR="$(find /tmp/qa127 -name duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz -print -quit)"
-          SUM="$(find /tmp/qa127 -name duduq-phase2-proven-safe-visual-hold-unapproved.sha256 -print -quit)"
+          mkdir -p /tmp/duduq-qa127 qa/dist-pages-food-candidate qa/results
+          gh run download 41549957803 -R augustoborgessousa93/DuduQ-Engine -n duduq-phase2-conservative-source-reuse-qa -D /tmp/duduq-qa127
+          TAR="$(find /tmp/duduq-qa127 -name duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz -print -quit)"
+          SUM="$(find /tmp/duduq-qa127 -name duduq-phase2-proven-safe-visual-hold-unapproved.sha256 -print -quit)"
           test -n "$TAR" && test -n "$SUM"
           (cd "$(dirname "$TAR")" && sha256sum -c "$(basename "$SUM")")
           tar -xzf "$TAR" -C qa/dist-pages-food-candidate
-      - name: Audit real media occurrence graph and source filename hints
+      - name: Apply all unambiguous semantic matches and validate unchanged 600 contracts
+        shell: bash
         run: |
           set -Eeuo pipefail
-          node --check qa/audit-phase2-source-delta-occurrences.mjs
-          node qa/audit-phase2-source-delta-occurrences.mjs
+          node --check qa/integrate-phase2-source-batch.mjs
+          node qa/integrate-phase2-source-batch.mjs
+      - name: Package only changed assets and registry as a reconstructable QA overlay
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq-qa-overlay/content/english/media
+          cp qa/dist-pages-food-candidate/content/english/media/media-registry.json /tmp/duduq-qa-overlay/content/english/media/
+          cp qa/dist-pages-food-candidate/.duduq-pages-manifest /tmp/duduq-qa-overlay/
+          node --input-type=module <<'NODE'
+          import {readFileSync,cpSync,mkdirSync} from 'node:fs';
+          import path from 'node:path';
+          const report=JSON.parse(readFileSync('qa/results/phase2-batch-source-integration.json','utf8'));
+          if(report.newMediaIds<1||report.productionDeployed!==false)throw Error('INVALID_QA_BATCH');
+          for(const rel of report.createdImages){
+            const dest=path.join('/tmp/duduq-qa-overlay',rel);
+            mkdirSync(path.dirname(dest),{recursive:true});
+            cpSync(path.join('qa/dist-pages-food-candidate',rel),dest);
+          }
+          NODE
+          tar -czf qa/results/duduq-phase2-batch-qa-overlay.tar.gz -C /tmp/duduq-qa-overlay .
+          (cd qa/results && sha256sum duduq-phase2-batch-qa-overlay.tar.gz > duduq-phase2-batch-qa-overlay.sha256)
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: duduq-phase2-source-delta-occurrence-audit
+          name: duduq-phase2-batch-source-integration-qa-only
           retention-days: 90
           if-no-files-found: warn
-          path: qa/results/phase2-source-delta-occurrence-audit.json
+          path: |
+            qa/results/phase2-batch-source-integration.json
+            qa/results/duduq-phase2-batch-qa-overlay.tar.gz
+            qa/results/duduq-phase2-batch-qa-overlay.sha256
