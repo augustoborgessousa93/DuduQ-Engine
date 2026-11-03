@@ -1389,3 +1389,73 @@ jobs:
           name: duduq-phase2-six-visual-failures-from-141
           path: qa-diag/six-141-visual-failures.json
           retention-days: 45
+
+
+  phase2-hold-visual-for-final-candidate:
+    if: ${{ github.ref_name == 'qa/duduq-phase2-source-expansion-20261102' && github.event_name == 'push' && contains(github.event.head_commit.message, '[visual-hold-qa]') }}
+    name: Persist compiled safe candidate after targeted hold of five unverified PNGs
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      actions: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Restore original immutable 141-ID package and its baseline registry
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq-safe-regression qa/dist-pages-food-candidate qa/results
+          gh run download 41546708766 --repo augustoborgessousa93/DuduQ-Engine \
+            --name duduq-phase2-safe-141-ids-unapproved-candidate \
+            --dir /tmp/duduq-safe-regression
+          TAR="$(find /tmp/duduq-safe-regression -name duduq-phase2-safe-141-qa-candidate.tar.gz -print -quit)"
+          SHA="$(find /tmp/duduq-safe-regression -name duduq-phase2-safe-141-qa-candidate.sha256 -print -quit)"
+          META="$(find /tmp/duduq-safe-regression -name phase2-persisted-visual-hold.json -print -quit)"
+          test -n "$TAR" && test -n "$SHA" && test -n "$META"
+          (cd "$(dirname "$TAR")" && sha256sum -c "$(basename "$SHA")")
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+          cp "$META" qa/results/phase2-persisted-visual-hold.json
+          node --check qa/hold-phase2-unverified-visual-media.mjs
+          node qa/hold-phase2-unverified-visual-media.mjs qa/dist-pages-food-candidate
+      - name: Persist exact changed QA build with hash and immutable content files
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          tar -czf qa/results/duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz \
+            -C qa/dist-pages-food-candidate .
+          (cd qa/results && sha256sum duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz \
+            > duduq-phase2-proven-safe-visual-hold-unapproved.sha256)
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          const r=JSON.parse(readFileSync('qa/results/phase2-visual-quarantine.json'));
+          assert.equal(r.verifiedContracts,600);
+          assert(r.newlyHeldBindings>=5);
+          assert(r.remainingChangedMediaIds>=80);
+          assert.equal(r.heldPaths.length,5);
+          assert.equal(r.productionDeployed,false);
+          assert.equal(r.releaseApproved,false);
+          console.log('PERSISTED_SAFE_QA_VISUAL_HOLD='+JSON.stringify({
+           remainingChangedMediaIds:r.remainingChangedMediaIds,heldMediaIds:r.newlyHeldBindings,
+           affectedModules:r.affectedModules,changedQuestionsNeedingDirectedRegression:r.changedQuestionsNeedingDirectedRegression.length,
+           productionDeployed:false}));
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: duduq-phase2-conservative-source-reuse-qa
+          retention-days: 90
+          if-no-files-found: error
+          compression-level: 0
+          path: |
+            qa/results/duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz
+            qa/results/duduq-phase2-proven-safe-visual-hold-unapproved.sha256
+            qa/results/phase2-visual-quarantine.json
