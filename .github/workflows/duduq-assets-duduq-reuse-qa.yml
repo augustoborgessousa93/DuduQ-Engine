@@ -217,7 +217,7 @@ jobs:
           node --check qa/phase2-y1m06-fish-bird-overlay.mjs
           node qa/phase2-y1m06-fish-bird-overlay.mjs
           node qa/phase2-y1m06-fish-bird-overlay.mjs --apply
-          tar -czf qa/results/y1m06-fish-bird-delta-only.tar.gz -C dist-pages             .duduq-pages-manifest content/english/media/media-registry.json             content/english/assets/images/assets-duduq/pet-bird-passaro-*.png             content/english/assets/images/assets-duduq/pet-fish-peixe-*.png
+          tar -czf qa/results/y1m06-fish-bird-delta-only.tar.gz -C dist-pages             .duduq-pages-manifest content/english/media/media-registry.json             content/english/assets/images/assets-duduq/pet-bird-passaro-046b76b9215c.png             content/english/assets/images/assets-duduq/pet-fish-peixe-1fc64569b170.png
       - name: Publish QA-only delta and visual review, not a production package
         uses: actions/upload-artifact@v4
         with:
