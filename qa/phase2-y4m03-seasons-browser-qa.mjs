@@ -55,28 +55,42 @@ try{
    try{response=await p.goto(base+route,{waitUntil:'domcontentloaded',timeout:45000});}
    catch(e){fail=String(e);}
    const expected=[...new Set(changes.filter(c=>c.affectedQuestionIds.includes(qid)).map(c=>c.assetPath))];
-   if(response?.status()===200){
-    await p.waitForFunction(paths=>[...document.images].some(img=>{try{
-       return paths.includes(new URL(img.currentSrc||img.src).pathname.replace(/^\/+/,''))&&img.complete&&img.naturalWidth>0;
-     }catch{return false;}}),expected,{timeout:10000}).catch(()=>{});
-   }
-   const visible=await p.evaluate(paths=>[...document.images].map(img=>{
-    let uri;try{uri=new URL(img.currentSrc||img.src).pathname.replace(/^\/+/,'');}catch{return null;}
-    if(!paths.includes(uri))return null;
-    const r=img.getBoundingClientRect(),css=getComputedStyle(img);
-    const inViewport=r.right>0&&r.bottom>0&&r.left<innerWidth&&r.top<innerHeight;
-    const loaded=img.complete&&img.naturalWidth>0;
-    return {path:uri,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,
-     renderWidth:r.width,renderHeight:r.height,
-     density:Math.min(img.naturalWidth/Math.max(1,r.width),img.naturalHeight/Math.max(1,r.height)),
-     visible:loaded&&r.width>5&&r.height>5&&inViewport&&css.display!=='none'&&css.visibility!=='hidden'&&Number(css.opacity)>0};
-   }).filter(Boolean),expected);
+   // Games may animate choice images into the stage after initial page load.
+   // Observe the actual lifecycle, not one transient DOM frame. Accumulate
+   // visibility of different season options even if shown sequentially.
+   const observed=new Map(),samples=[],maxMs=qid==='Y4M03-Q006'?15000:6500;
+   const start=Date.now();
+   do{
+    const now=await p.evaluate(paths=>[...document.images].map(img=>{
+      let uri;try{uri=new URL(img.currentSrc||img.src).pathname.replace(/^\/+/,'');}catch{return null;}
+      if(!paths.includes(uri))return null;
+      const r=img.getBoundingClientRect(),css=getComputedStyle(img);
+      const inViewport=r.right>0&&r.bottom>0&&r.left<innerWidth&&r.top<innerHeight;
+      const loaded=img.complete&&img.naturalWidth>0;
+      return {path:uri,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,
+       renderWidth:r.width,renderHeight:r.height,
+       display:css.display,visibility:css.visibility,opacity:css.opacity,
+       x:r.x,y:r.y,
+       density:Math.min(img.naturalWidth/Math.max(1,r.width),img.naturalHeight/Math.max(1,r.height)),
+       visible:loaded&&r.width>5&&r.height>5&&inViewport&&css.display!=='none'&&css.visibility!=='hidden'&&Number(css.opacity)>0};
+    }).filter(Boolean),expected);
+    for(const img of now){
+      const prior=observed.get(img.path);
+      if(!prior||(!prior.visible&&img.visible))observed.set(img.path,img);
+    }
+    samples.push({ms:Date.now()-start,visible:now.filter(x=>x.visible).map(x=>x.path),
+      present:now.map(x=>x.path),count:now.length});
+    if(expected.every(x=>observed.get(x)?.visible))break;
+    await p.waitForTimeout(400);
+   }while(Date.now()-start<maxMs);
+   const visible=[...observed.values()];
    await p.screenshot({path:'qa/results/y4m03-seasons-browser/'+view.name+'-'+qid+'.png',fullPage:true}).catch(()=>{});
    const missing=expected.filter(x=>!visible.some(y=>y.path===x&&y.visible));
    const below2x=visible.filter(y=>y.visible&&y.density<2).map(y=>({path:y.path,density:y.density}));
    const passed=response?.status()===200&&errors.length===0&&missing.length===0&&below2x.length===0;
    report.views.push({questionId:qid,view:view.name,route,http:response?.status()??null,
-    expectedImagePaths:expected,visibleImages:visible,missing,below2x,errors,pass:passed,error:fail});
+    expectedImagePaths:expected,visibleImages:visible,missing,below2x,errors,pass:passed,error:fail,
+    lifecycleSamples:samples});
    if(!passed)allPassed=false;
    await p.close();
   }
