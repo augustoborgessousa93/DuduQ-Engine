@@ -71,7 +71,7 @@ try{
     // These Gold Masters can render in nested iframes. The host #game
     // reaches READY before we search the child frame's actual DOM. A
     // document-only locator is not evidence that the mechanic is missing.
-    const selector=mech==='memory-quest'?'[data-memory-card-id]':'.duduq-bp-bubble';
+    const selector=mech==='memory-quest'?'.memory-quest-card-slot':'.bubble-pop-playable';
     let gameFrame=null;
     for(let tick=0;tick<35&&!gameFrame;tick++){
      for(const frame of page.frames()){
@@ -84,23 +84,24 @@ try{
     }
     assert(gameFrame,'REAL_MECHANIC_FRAME_NOT_FOUND:'+mech);
     row.mechanicFrame=gameFrame.url();
+    row.scope='STANDALONE_MECHANIC_DEMO_NOT_CURRICULAR_QUESTION_ANSWER_CERTIFICATION';
     row.frameCount=page.frames().length;
     if(mech==='memory-quest'){
-     const cards=gameFrame.locator('[data-memory-card-id]');
+     const cards=gameFrame.locator('.memory-quest-card-slot');
      await cards.first().waitFor({state:'visible',timeout:9000});
      row.cards=await cards.count();
      assert(row.cards>=6,'MEMORY_CARDS_MISSING');
-     const first=cards.first(),idAttr=await first.getAttribute('data-memory-card-id');
+     const first=cards.first(),idAttr=await first.getAttribute('data-memory-card-component');
      await first.click({timeout:8000});
      await gameFrame.waitForFunction(cardId=>{
-      const el=[...document.querySelectorAll('[data-memory-card-id]')]
-       .find(x=>x.getAttribute('data-memory-card-id')===cardId);
-      return el?.getAttribute('data-face-up')==='true'||el?.getAttribute('aria-pressed')==='true';
+      const el=[...document.querySelectorAll('.memory-quest-card-slot')]
+       .find(x=>x.getAttribute('data-memory-card-component')===cardId);
+      return el?.dataset.flipped==='true'&&el?.getAttribute('aria-pressed')==='true';
      },idAttr,{timeout:3500,polling:80});
      row.realInteractionObserved=true;
      row.interactionType='REAL_MEMORY_CARD_FLIP';
     }else if(mech==='bubble-pop'){
-     const bubbles=gameFrame.locator('.duduq-bp-bubble');
+     const bubbles=gameFrame.locator('.bubble-pop-playable');
      await bubbles.first().waitFor({state:'visible',timeout:9000});
      row.bubbleCount=await bubbles.count();
      assert(row.bubbleCount>=2,'BUBBLE_COUNT_INCOMPLETE');
@@ -115,18 +116,22 @@ try{
        try{await button.click({timeout:2200});}
        catch(e){row.lastClickError=String(e.message||e).slice(0,180);continue;}
        try{
-        await gameFrame.waitForFunction(()=>
-         [...document.querySelectorAll('.duduq-bp-bubble-shell')]
-          .some(x=>x.dataset.popped==='true'||x.dataset.wrong==='true'),
-         null,{timeout:1100,polling:25});
+        // The standalone Bubble demo responds to native pointerdown by
+        // disabling the clicked button immediately (beginPop).
+        const bubbleId=await button.getAttribute('data-bubble-id');
+        await gameFrame.waitForFunction(id=>{
+         const item=[...document.querySelectorAll('.bubble-pop-playable')]
+          .find(x=>x.dataset.bubbleId===id);
+         return item?.disabled===true&&item?.style.pointerEvents==='none';
+        },bubbleId,{timeout:1400,polling:30});
         row.realInteractionObserved=true;
        }catch{}
        row.clickAttempts=(row.clickAttempts||0)+1;
       }
       if(!row.realInteractionObserved)await page.waitForTimeout(250);
      }
-     row.interactionType='REAL_IFRAME_BUBBLE_POINTER_CLICK_WITH_FEEDBACK';
-     if(!row.realInteractionObserved)row.limitation='NO_VERIFIED_FEEDBACK_AFTER_GENUINE_IFRAME_BUBBLE_CLICKS';
+     row.interactionType='REAL_STANDALONE_BUBBLE_POINTER_DOWN_BEGIN_POP';
+     if(!row.realInteractionObserved)row.limitation='NO_VERIFIED_DISABLED_POP_STATE_AFTER_GENUINE_BUBBLE_CLICKS';
     }else throw Error('UNSUPPORTED_MECHANIC:'+mech);
    }catch(e){row.limitation=String(e.message||e).slice(0,290);}
    row.status=row.ready&&row.realInteractionObserved&&row.pageErrors.length===0&&
@@ -139,13 +144,15 @@ try{
 }finally{await browser.close()}
 const failed=cases.filter(x=>x.status!=='PASS_REAL_USER_INTERACTION');
 const result={schemaVersion:'DUDUQ_PHASE2_127_REAL_USER_INTERACTION_REVIEW_V1',
- status:failed.length?'FAIL_DIRECTED_REAL_INTERACTION':'PASS_DIRECTED_REAL_INTERACTION_QA_ONLY',
+ status:failed.length?'FAIL_STANDALONE_MECHANIC_INTERACTION':'PASS_STANDALONE_MECHANIC_INTERACTION_ONLY',
  candidateChangedMediaIds:127,verifiedQuestionContracts:600,
  selectedQuestions:chosen,checks:cases.length,failed:failed.map(x=>({
   id:x.questionId,mechanic:x.mechanic,viewport:x.viewport,limitation:x.limitation,
   pageErrors:x.pageErrors,failedRequests:x.failedRequests})),
  cases,sourceArchiveRunId:41549957803,
- pedagogicalApproved:false,fullGameplayCertified:false,productionDeployed:false,releaseApproved:false};
+ pedagogicalApproved:false,fullGameplayCertified:false,productionDeployed:false,releaseApproved:false,
+ curricularQuestionGameplayCertified:false,
+ scope:'Standalone /play/<mechanic>/ demos test actual browser mechanics only, not compiled curricular option semantics'};
 await writeFile('qa/results/phase2-127-real-interaction.json',JSON.stringify(result,null,2)+'\n');
 console.log('PHASE2_REAL_USER_INTERACTION='+JSON.stringify({
  status:result.status,checks:result.checks,affectedQuestionSamples:chosen,
