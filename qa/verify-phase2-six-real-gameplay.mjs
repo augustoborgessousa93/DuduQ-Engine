@@ -118,10 +118,25 @@ try{
     // Moving bubbles never satisfy Playwright's "stable" requirement.
     // Force only that stability gate: Playwright still sends a real pointer click
     // to the already verified, loaded, on-screen media-bearing element.
-    await match.frame.locator('img').nth(image.index).click({timeout:9000,force:true});
-    c.actionObserved=true;
-    c.actionType='ACTUAL_VISIBLE_BUBBLE_IMAGE_CLICK';
-    await page.waitForTimeout(450);
+    // Playwright force:true still waits for an animated element to stabilize.
+    // A real mouse click at the observed visible image center does not.
+    const live=await match.frame.locator('img').nth(image.index).evaluate(im=>{
+      const r=im.getBoundingClientRect();
+      return {x:r.left+r.width/2,y:r.top+r.height/2,
+        viewportWidth:innerWidth,viewportHeight:innerHeight};
+    });
+    assert(live.x>0&&live.x<live.viewportWidth&&live.y>0&&live.y<live.viewportHeight,
+      'MOVING_BUBBLE_NOT_IN_VIEWPORT_AT_CLICK');
+    const before=await match.frame.evaluate(()=>[...document.querySelectorAll('.duduq-bp-bubble-shell')]
+      .map(x=>x.getAttribute('data-popped')+'|'+x.getAttribute('data-wrong')));
+    await page.mouse.click(live.x,live.y);
+    await page.waitForTimeout(500);
+    const after=await match.frame.evaluate(()=>[...document.querySelectorAll('.duduq-bp-bubble-shell')]
+      .map(x=>x.getAttribute('data-popped')+'|'+x.getAttribute('data-wrong')));
+    c.actionObserved=before.join(',')!==after.join(',');
+    c.actionType='ACTUAL_POINTER_CLICK_WITH_BUBBLE_FEEDBACK';
+    c.pointer={x:live.x,y:live.y};
+    c.feedbackBefore=before;c.feedbackAfter=after;
    }else throw Error('UNEXPECTED_MECHANIC');
    c.status=c.ready&&c.actionObserved&&f.required.every(p=>c.visiblePaths.includes(p))&&
     !errors.length&&!httpErrors.length?'PASS_REAL_GAMEPLAY_QA_ONLY':'FAIL_REAL_GAMEPLAY_QA';
