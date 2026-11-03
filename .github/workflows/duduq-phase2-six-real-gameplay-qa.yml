@@ -14,6 +14,7 @@ permissions:
 
 jobs:
   six-real-user-gameplay:
+    if: ${{ contains(github.event.head_commit.message, '[six-real-e2e]') }}
     name: Six actual failed visual checks - real accessible gameplay
     runs-on: ubuntu-latest
     timeout-minutes: 32
@@ -99,3 +100,39 @@ jobs:
             qa/results/phase2-six-real-failures.json
             qa/results/phase2-six-real-gameplay.json
             qa/results/phase2-six-real-gameplay/*.png
+
+
+  extract-existing-errors-only:
+    if: ${{ contains(github.event.head_commit.message, '[diagnose-prior]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Use archived immutable QA results, no browser or product edits
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq-two /tmp/duduq-six
+          gh run download 41550354236 -R "$GITHUB_REPOSITORY" \
+            --name duduq-phase2-127-ids-directed-restoration-regression \
+            --dir /tmp/duduq-two
+          gh run download 41551304061 -R "$GITHUB_REPOSITORY" \
+            --name duduq-phase2-six-real-user-media-gameplay \
+            --dir /tmp/duduq-six
+          python3 - <<'PY'
+          import glob,json
+          def read(root,pattern):
+           p=glob.glob(root+'/**/'+pattern,recursive=True)
+           assert len(p)==1,(root,pattern,p)
+           return json.load(open(p[0],encoding='utf8'))
+          restored=read('/tmp/duduq-two','phase2-visual-hold-regression.json')
+          six=read('/tmp/duduq-six','phase2-six-real-gameplay.json')
+          assert restored['checks']==42 and len(restored['failed'])==2
+          print('EXACT_TWO_RESTORATION_ERRORS='+json.dumps(restored['failed'],ensure_ascii=False))
+          print('EXACT_SIX_WRONG_SELECTOR_FAILURES='+json.dumps([{
+           'questionId':x['questionId'],'mechanic':x['mechanic'],'viewport':x['viewport'],
+           'status':x['status'],'exception':x.get('exception'),'ready':x['ready'],
+           'errors':x['errors'],'http':x['failedHttp']
+           } for x in six['checks']],ensure_ascii=False))
+          PY
