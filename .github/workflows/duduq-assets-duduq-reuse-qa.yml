@@ -1459,3 +1459,76 @@ jobs:
             qa/results/duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz
             qa/results/duduq-phase2-proven-safe-visual-hold-unapproved.sha256
             qa/results/phase2-visual-quarantine.json
+
+
+  phase2-directed-restoration-regression:
+    if: ${{ github.ref_name == 'qa/duduq-phase2-source-expansion-20261102' && github.event_name == 'push' && contains(github.event.head_commit.message, '[regression-hold]') }}
+    name: Browser-check ONLY 21 restored provisional media questions in mobile and desktop
+    runs-on: ubuntu-latest
+    timeout-minutes: 32
+    permissions:
+      contents: read
+      actions: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BASE_URL: http://127.0.0.1:4175
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Restore exact saved 127-ID QA candidate and verify sha
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq-hold-regression qa/dist-pages-food-candidate qa/results
+          gh run download 41549957803 --repo augustoborgessousa93/DuduQ-Engine \
+            --name duduq-phase2-conservative-source-reuse-qa \
+            --dir /tmp/duduq-hold-regression
+          TAR="$(find /tmp/duduq-hold-regression -name duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz -print -quit)"
+          SHA="$(find /tmp/duduq-hold-regression -name duduq-phase2-proven-safe-visual-hold-unapproved.sha256 -print -quit)"
+          META="$(find /tmp/duduq-hold-regression -name phase2-visual-quarantine.json -print -quit)"
+          test -n "$TAR" && test -n "$SHA" && test -n "$META"
+          (cd "$(dirname "$TAR")" && sha256sum -c "$(basename "$SHA")")
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+          cp "$META" qa/results/phase2-visual-quarantine.json
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const report=JSON.parse(readFileSync('qa/results/phase2-visual-quarantine.json'));
+          const reg=readFileSync('qa/dist-pages-food-candidate/content/english/media/media-registry.json');
+          assert.equal(createHash('sha256').update(reg).digest('hex'),report.registrySha256);
+          assert.equal(report.remainingChangedMediaIds,127);
+          assert.equal(report.verifiedContracts,600);
+          assert.equal(report.productionDeployed,false);
+          NODE
+      - name: Directed Chromium regression, never rebuild published game
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev qa/dist-pages-food-candidate --ip 127.0.0.1 \
+            --port 4175 --compatibility-date 2026-10-30 > /tmp/duduq-hold-regression.log 2>&1 &
+          echo $! > /tmp/duduq-hold-regression.pid
+          for i in {1..45}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then break; fi
+            if ! kill -0 "$(cat /tmp/duduq-hold-regression.pid)" 2>/dev/null; then
+              cat /tmp/duduq-hold-regression.log; exit 1
+            fi
+            sleep 2
+          done
+          node --check qa/verify-phase2-visual-hold-regression.mjs
+          node qa/verify-phase2-visual-hold-regression.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-127-ids-directed-restoration-regression
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            qa/results/phase2-visual-hold-regression.json
+            qa/results/phase2-visual-hold-regression/*.png
