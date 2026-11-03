@@ -1,0 +1,46 @@
+name: DUDUQ Phase 2 - Source delta occurrence audit ONLY (no deploy)
+on:
+  push:
+    branches: [qa/duduq-phase2-releasegate-127-20261103]
+    paths:
+      - qa/audit-phase2-source-delta-occurrences.mjs
+      - .github/workflows/duduq-phase2-source-delta-audit.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Restore existing 127-ID immutable QA package, no rebuild or browser retest
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/qa127 qa/dist-pages-food-candidate
+          gh run download 41549957803 -R augustoborgessousa93/DuduQ-Engine \
+            -n duduq-phase2-conservative-source-reuse-qa -D /tmp/qa127
+          TAR="$(find /tmp/qa127 -name duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz -print -quit)"
+          SUM="$(find /tmp/qa127 -name duduq-phase2-proven-safe-visual-hold-unapproved.sha256 -print -quit)"
+          test -n "$TAR" && test -n "$SUM"
+          (cd "$(dirname "$TAR")" && sha256sum -c "$(basename "$SUM")")
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+      - name: Audit real media occurrence graph and source filename hints
+        run: |
+          set -Eeuo pipefail
+          node --check qa/audit-phase2-source-delta-occurrences.mjs
+          node qa/audit-phase2-source-delta-occurrences.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-source-delta-occurrence-audit
+          retention-days: 90
+          if-no-files-found: warn
+          path: qa/results/phase2-source-delta-occurrence-audit.json
