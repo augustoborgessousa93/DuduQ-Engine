@@ -1,0 +1,43 @@
+name: DUDUQ Phase2 - Live Cloudflare orange fruit/color release-gate (NO deploy)
+on:
+  push:
+    branches: [qa/duduq-phase2-releasegate-127-20261103]
+    paths:
+      - qa/verify-orange-cloudflare-preview.mjs
+      - .github/workflows/duduq-phase2-orange-cdn-gate.yml
+permissions:
+  contents: read
+concurrency:
+  group: duduq-phase2-orange-cdn-gate
+  cancel-in-progress: true
+jobs:
+  real-cdn-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DUDUQ_PREVIEW_ONLY: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: qa/verify-orange-cloudflare-preview.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with: {node-version: "22"}
+      - name: Check actual CDN modules, image hashes and representative interactions
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+          node --check qa/verify-orange-cloudflare-preview.mjs
+          node qa/verify-orange-cloudflare-preview.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-real-cloudflare-orange-fruit-color-cdn
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            qa/results/orange-cdn-delivery.json
+            qa/results/orange-cdn-browser/*.png
