@@ -1,0 +1,108 @@
+name: DUDUQ Phase 2 - Permanent 127-ID Audited QA Draft (NO Deploy)
+
+on:
+  push:
+    branches:
+      - qa/duduq-phase2-six-real-gameplay-20261102
+    paths:
+      - .github/workflows/duduq-phase2-127-preserve-qa-release.yml
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  immutable-qa-archive-only:
+    name: Draft GitHub QA archive only; never deploy to Cloudflare
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SOURCE_RUN: "41549957803"
+      SOURCE_SHA: "51b1a51285f1273bbdf98316ab67a2c6895ef9da"
+      MEMORY_RUN: "41552474452"
+      MEMORY_SHA: "8d9df2db801afe4d1688e03024c27f179bacc1b9"
+      TAG: duduq-phase2-127-safe-qa-20261102
+    steps:
+      - name: Require two exact successful QA results from immutable SHAs
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN" --jq .conclusion)" = success
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN" --jq .head_sha)" = "$SOURCE_SHA"
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$MEMORY_RUN" --jq .conclusion)" = success
+          test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$MEMORY_RUN" --jq .head_sha)" = "$MEMORY_SHA"
+          echo "PINNED_COMPILED_AND_MEMORY_QA_SUCCESS"
+
+      - name: Download exact 127-ID compiled QA package and verify full file manifest
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq-finalqa /tmp/duduq-finalqa-dist
+          gh run download "$SOURCE_RUN" -R "$GITHUB_REPOSITORY" \
+            --name duduq-phase2-conservative-source-reuse-qa \
+            --dir /tmp/duduq-finalqa
+          TAR="$(find /tmp/duduq-finalqa -type f -name duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz -print -quit)"
+          SUM="$(find /tmp/duduq-finalqa -type f -name duduq-phase2-proven-safe-visual-hold-unapproved.sha256 -print -quit)"
+          META="$(find /tmp/duduq-finalqa -type f -name phase2-visual-quarantine.json -print -quit)"
+          test -s "$TAR" && test -s "$SUM" && test -s "$META"
+          (cd "$(dirname "$TAR")" && sha256sum -c "$(basename "$SUM")")
+          tar -xzf "$TAR" -C /tmp/duduq-finalqa-dist
+          META_PATH="$META" node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import path from 'node:path';
+          const root='/tmp/duduq-finalqa-dist',meta=JSON.parse(readFileSync(process.env.META_PATH,'utf8'));
+          const sha=b=>createHash('sha256').update(b).digest('hex');
+          assert.equal(meta.remainingChangedMediaIds,127);
+          assert.equal(meta.newlyHeldBindings,14);
+          assert.equal(meta.verifiedContracts,600);
+          for(const field of ['questionsChanged','answerKeysChanged','audioChanged','mechanicsChanged'])
+           assert.equal(meta[field],0,'UNEXPECTED_PRODUCT_EDIT:'+field);
+          assert.equal(meta.productionDeployed,false);
+          assert.equal(meta.releaseApproved,false);
+          const manifest=readFileSync(root+'/.duduq-pages-manifest');
+          assert.equal(sha(manifest),meta.manifestSha256);
+          let count=0;
+          for(const line of manifest.toString('utf8').trimEnd().split(/\r?\n/)){
+           const i=line.lastIndexOf(' ');
+           assert(i>0,'BAD_MANIFEST_ENTRY');
+           const file=line.slice(0,i),digest=line.slice(i+1);
+           assert(file&&!file.startsWith('/')&&!file.includes('..'),'UNSAFE_MANIFEST_ENTRY');
+           assert.equal(sha(readFileSync(path.join(root,file))),digest,'SHA_MISMATCH:'+file);
+           count++;
+          }
+          let questions=0;
+          for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
+           const file=root+'/content/english/year-'+y+'/module-'+String(m).padStart(2,'0')+'/questions.json';
+           const doc=JSON.parse(readFileSync(file,'utf8'));
+           assert.equal(doc.items?.length,20,'INCOMPLETE_QUESTION_MODULE');
+           questions+=doc.items.length;
+          }
+          assert.equal(questions,600);
+          console.log(JSON.stringify({QA_PACKAGE_INTEGRITY_PASS:true,manifestEntries:count,
+           updatedMediaIds:127,heldUnverifiedIds:14,questions:600,productionDeployed:false,
+           releaseApproved:false}));
+          NODE
+          echo "TAR=$TAR" >> "$GITHUB_ENV"
+          echo "SUM=$SUM" >> "$GITHUB_ENV"
+          echo "META=$META" >> "$GITHUB_ENV"
+
+      - name: Create ONLY draft QA prerelease, no production deploy or automatic release
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          if gh release view "$TAG" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "::error::EXISTING_QA_RELEASE_REQUIRES_MANUAL_RECONCILIATION"
+            exit 1
+          fi
+          gh release create "$TAG" "$TAR" "$SUM" "$META" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$SOURCE_SHA" \
+            --title "DUDUQ Phase 2 - 127 official-media bindings [DRAFT QA ONLY]" \
+            --notes "NOT AN APPROVED PRODUCT RELEASE. This permanent QA archive contains the exact compiled 127-media-ID candidate from successful run 41549957803; 600 question contracts and all gabaritos unchanged; 14 unsafe bindings deliberately remain provisional. The real two-viewport Memory Quest card-flip QA (run 41552474452) passed. Full pedagogical, audio and mechanics QA are NOT yet certified. No production deployment is authorized. Cloudflare official website stays unchanged." \
+            --draft --prerelease
+          gh release view "$TAG" -R "$GITHUB_REPOSITORY" --json isDraft,isPrerelease,assets,url \
+            --jq '{draft:.isDraft,prerelease:.isPrerelease,files:[.assets[].name],url:.url}'
+          echo "DRAFT_QA_ARCHIVED_NO_DEPLOY"
