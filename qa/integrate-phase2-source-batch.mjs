@@ -78,10 +78,18 @@ for(const [id,rows] of usages){
  if((q.mustInclude||[]).length||(q.mustNotInclude||[]).length){block(id,'VISUAL_CONSTRAINTS_REQUIRE_INSPECTION');continue;}
  // An image shared by many questions may only be replaced if EVERY occurrence
  // has the same explicit meaning; missing meaning cannot be guessed.
- if(!rows.length||rows.some(x=>normalize(x.semanticTarget)!==concept)){
-   block(id,'SHARED_OR_MISSING_LEAF_SEMANTICS');continue;
+ const realQuestions=[...new Set(rows.map(x=>x.questionId))].sort();
+ // Leaf semanticTarget can be absent in older mechanics. Only infer it from the
+ // audited PROVISIONAL queue if EVERY nonempty leaf agrees, the exact number
+ // of real questions agrees, and every sampled question also matches.
+ if(!rows.length||rows.some(x=>normalize(x.semanticTarget)&&normalize(x.semanticTarget)!==concept)||
+    q.usage!==realQuestions.length||
+    (q.exampleQuestions||[]).some(x=>!realQuestions.includes(x))){
+   block(id,'REAL_OCCURRENCE_OR_EXPLICIT_LEAF_CONFLICT');continue;
  }
- selected.set(id,{mediaId:id,concept,asset:sourceAsset,questionIds:[...new Set(rows.map(x=>x.questionId))].sort(),occurrences:rows.length,previousPath:entry.urlOrPath});
+ selected.set(id,{mediaId:id,concept,asset:sourceAsset,questionIds:realQuestions,
+  occurrences:rows.length,missingLeafSemantics:rows.filter(x=>!normalize(x.semanticTarget)).length,
+  previousPath:entry.urlOrPath});
 }
 assert(selected.size>0,'NO_UNAMBIGUOUS_SOURCE_REPLACEMENTS');
 const assets=[...new Map([...selected.values()].map(x=>[x.concept,x.asset])).entries()];
