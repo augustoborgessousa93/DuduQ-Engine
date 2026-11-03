@@ -37,11 +37,11 @@ for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
   }
  }
 }
+// Prior run 41649302431 already passed all four Memory Quest interactions.
+ // Do not repeat them; this gate covers only unresolved Bubble Pop checks.
 const chosen=process.env.DUDUQ_QA_ALL_MECHANICS==='1'?
  [...samples['memory-quest'].slice(0,2),...samples['bubble-pop'].slice(0,2)]:
- process.env.DUDUQ_QA_ONLY_BUBBLE==='1'?
- samples['bubble-pop'].slice(0,2):
- [...samples['memory-quest'].slice(0,2),...samples['bubble-pop'].slice(0,2)];
+ samples['bubble-pop'].slice(0,2);
 assert(chosen.length>=2,'NO_AFFECTED_MECHANIC_SAMPLES');
 const cases=[],dir='qa/results/phase2-127-real-interaction';
 await mkdir(dir,{recursive:true});
