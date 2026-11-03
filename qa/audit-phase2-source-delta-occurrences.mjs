@@ -37,6 +37,8 @@ for(const [id,rows] of usages){
   questions:[...new Set(rows.map(x=>x.questionId))].sort(),
   occurrences:rows.length,semanticTargets:semantics,missingSemanticQuestionIds:[...new Set(absent)].sort(),
   exactFilenameHintPaths:matches.map(x=>x.path),
+  sourceCandidates:matches.map(x=>({path:x.path,gitBlob:x.gitBlob,bytes:x.bytes,sha256:x.sha256??null})),
+  reviewHold:/WHITE/i.test(id)?'WHITE_CONTRAST_UNVERIFIED':/BANANA/i.test(id)?'BANANA_TEMPORARY_AND_SEMANTIC_AUDIT':id==='IMG-Y1M03-Q001-BLACK'?'BLACK_SHARED_OCCURRENCE_REVIEW':null,
   safeToAutoApply:false,
   reason:!entry?'MISSING_REGISTRY_ENTRY':entry.temporary!==true?'NOT_EXPLICITLY_TEMPORARY':
     !same?'AMBIGUOUS_OR_MISSING_SEMANTIC':matches.length===0?'NO_EXACT_FILENAME_HINT':
@@ -61,15 +63,16 @@ const bananaExplicitFalse=bananaRegistry.filter(x=>x.temporaryFieldPresent&&x.te
 
 const white=records.filter(x=>/WHITE/i.test(x.mediaId));
 const candidate=records.filter(x=>x.exactFilenameHintPaths.length===1&&x.temporary===true&&x.missingSemanticQuestionIds.length===0);
+const reviewQueue=candidate.map(x=>({mediaId:x.mediaId,questions:x.questions,occurrences:x.occurrences,semanticTargets:x.semanticTargets,source:x.sourceCandidates[0],reviewHold:x.reviewHold,sha256Verified:false,visualApproved:false,pedagogicalApproved:false,eligibleForIntegration:false}));
 const report={
- schemaVersion:'DUDUQ_PHASE2_DELTA_OCCURRENCE_AUDIT_V3',
+ schemaVersion:'DUDUQ_PHASE2_DELTA_OCCURRENCE_AUDIT_V4',
  sourceCommit:source.sourceCommit,sourceAssets:assets.length,modules:30,contracts:600,
  registryEntries:registry.entries.length,mediaIdsReferenced:records.length,
  sharedMediaIds:records.filter(x=>x.questions.length>1).length,
  candidatesRequiringHumanReview:candidate.length,
  blackSharedActualOccurrences:black,
  bananaRecords:banana,bananaRegistry,bananaQuestionText,bananaUnreferenced,bananaMissingTemporary,bananaNotExplicitTemporary,bananaExplicitFalse,whiteRecords:white,
- candidates:candidate,missingRegistryRecords:records.filter(x=>!x.registryPresent),
+ candidates:candidate,reviewQueue,missingRegistryRecords:records.filter(x=>!x.registryPresent),
  missingSemanticRecords:records.filter(x=>x.missingSemanticQuestionIds.length),
  mediaIdsApplied:0,productionDeployed:false,releaseApproved:false,
  rule:'Exact filename hint is NOT proof. Do not apply until source PNG SHA256, complete occurrence semantics, contrast and mechanic browser QA are approved.'
