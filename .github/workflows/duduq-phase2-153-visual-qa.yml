@@ -1,0 +1,68 @@
+name: DUDUQ Phase 2 - 153-ID directed browser QA, no deploy
+on:
+  push:
+    branches: [qa/duduq-phase2-releasegate-127-20261103]
+    paths:
+      - qa/verify-phase2-batch-153-browser.mjs
+      - .github/workflows/duduq-phase2-153-visual-qa.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: duduq-phase2-153-directed-qa
+  cancel-in-progress: true
+jobs:
+  directed-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+      BASE_URL: http://127.0.0.1:4175
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            qa/verify-phase2-batch-153-browser.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Restore exact 127-ID baseline and 153-ID QA overlay
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/qa127 /tmp/qa153 qa/dist-pages-food-candidate qa/results/phase2-153-directed-visual
+          gh run download 41549957803 -R "$GITHUB_REPOSITORY" -n duduq-phase2-conservative-source-reuse-qa -D /tmp/qa127
+          TAR="$(find /tmp/qa127 -name duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz -print -quit)"
+          SUM="$(find /tmp/qa127 -name duduq-phase2-proven-safe-visual-hold-unapproved.sha256 -print -quit)"
+          test -n "$TAR" && test -n "$SUM"
+          (cd "$(dirname "$TAR")" && sha256sum -c "$(basename "$SUM")")
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+          gh run download 41682938356 -R "$GITHUB_REPOSITORY" -n duduq-phase2-batch-source-integration-qa-only -D /tmp/qa153
+          (cd /tmp/qa153 && sha256sum -c duduq-phase2-batch-qa-overlay.sha256)
+          cp /tmp/qa153/phase2-batch-source-integration.json qa/results/
+          tar -xzf /tmp/qa153/duduq-phase2-batch-qa-overlay.tar.gz -C qa/dist-pages-food-candidate
+      - name: QA changed PNGs over HTTP and representative mobile/desktop game frames
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev qa/dist-pages-food-candidate --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 >/tmp/phase2-153-pages.log 2>&1 &
+          echo $! >/tmp/phase2-153-pages.pid
+          for i in {1..60}; do
+            if curl -fsS "$BASE_URL/" >/dev/null; then break; fi
+            if ! kill -0 "$(cat /tmp/phase2-153-pages.pid)" 2>/dev/null; then cat /tmp/phase2-153-pages.log; exit 1; fi
+            sleep 2
+          done
+          node --check qa/verify-phase2-batch-153-browser.mjs
+          node qa/verify-phase2-batch-153-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-153-directed-browser-evidence
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            qa/results/phase2-153-directed-visual-qa.json
+            qa/results/phase2-153-directed-visual/*.png
