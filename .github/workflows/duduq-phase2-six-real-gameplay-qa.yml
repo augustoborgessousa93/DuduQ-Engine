@@ -7,6 +7,7 @@ on:
     paths:
       - .github/workflows/duduq-phase2-six-real-gameplay-qa.yml
       - qa/verify-phase2-six-real-gameplay.mjs
+      - qa/verify-phase2-memory-real-card.mjs
 
 permissions:
   contents: read
@@ -136,3 +137,72 @@ jobs:
            'errors':x['errors'],'http':x['failedHttp']
            } for x in six['checks']],ensure_ascii=False))
           PY
+
+
+  real-restored-memory-card-only:
+    if: ${{ contains(github.event.head_commit.message, '[memory-true-qa]') }}
+    name: Check only real card flips for Y1M06-Q005 in 390 and 1280 viewport
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BASE_URL: http://127.0.0.1:4175
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Restore exact SHA-bound 127 media IDs from archived build
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq-mq qa/dist-pages-food-candidate qa/results
+          gh run download 41549957803 -R "$GITHUB_REPOSITORY" \
+            --name duduq-phase2-conservative-source-reuse-qa \
+            --dir /tmp/duduq-mq
+          TAR="$(find /tmp/duduq-mq -name duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz -print -quit)"
+          SUM="$(find /tmp/duduq-mq -name duduq-phase2-proven-safe-visual-hold-unapproved.sha256 -print -quit)"
+          META="$(find /tmp/duduq-mq -name phase2-visual-quarantine.json -print -quit)"
+          test -n "$TAR" && test -n "$SUM" && test -n "$META"
+          (cd "$(dirname "$TAR")" && sha256sum -c "$(basename "$SUM")")
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+          cp "$META" qa/results/phase2-visual-quarantine.json
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const r=JSON.parse(readFileSync('qa/results/phase2-visual-quarantine.json','utf8'));
+          assert.equal(r.remainingChangedMediaIds,127);
+          assert.equal(r.verifiedContracts,600);
+          const bytes=readFileSync('qa/dist-pages-food-candidate/content/english/media/media-registry.json');
+          assert.equal(createHash('sha256').update(bytes).digest('hex'),r.registrySha256);
+          console.log('RESTORED_CANDIDATE_BYTES_VERIFIED');
+          NODE
+      - name: Real Chromium mobile and desktop card-flip events, original build untouched
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev qa/dist-pages-food-candidate --ip 127.0.0.1 \
+            --port 4175 --compatibility-date 2026-10-30 > /tmp/duduq-memory-true.log 2>&1 &
+          echo $! >/tmp/duduq-memory-true.pid
+          for i in {1..45}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then break; fi
+            kill -0 "$(cat /tmp/duduq-memory-true.pid)" 2>/dev/null || {
+              cat /tmp/duduq-memory-true.log; exit 1;
+            }
+            sleep 2
+          done
+          node --check qa/verify-phase2-memory-real-card.mjs
+          node qa/verify-phase2-memory-real-card.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-memory-real-390-1280
+          path: |
+            qa/results/phase2-memory-true-qa.json
+            qa/results/phase2-memory-true-qa/*.png
+          retention-days: 45
