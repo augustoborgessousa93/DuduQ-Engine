@@ -1,0 +1,85 @@
+name: DUDUQ Phase 2 - REAL user interactions on immutable 127-ID candidate
+
+on:
+  push:
+    branches:
+      - qa/duduq-phase2-releasegate-127-20261103
+    paths:
+      - .github/workflows/duduq-phase2-final-127-real-interactions.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  real-interaction:
+    name: Targeted authentic Bubble Pop and Memory Quest interactions in mobile and desktop
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BASE_URL: http://127.0.0.1:4175
+      DUDUQ_QA_ONLY: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Restore EXACT 127-ID package, verify SHA, never rebuild or deploy
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq-final-interactions qa/dist-pages-food-candidate qa/results
+          gh run download 41549957803 -R "$GITHUB_REPOSITORY" \
+            --name duduq-phase2-conservative-source-reuse-qa \
+            --dir /tmp/duduq-final-interactions
+          TAR="$(find /tmp/duduq-final-interactions -name duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz -print -quit)"
+          SUM="$(find /tmp/duduq-final-interactions -name duduq-phase2-proven-safe-visual-hold-unapproved.sha256 -print -quit)"
+          META="$(find /tmp/duduq-final-interactions -name phase2-visual-quarantine.json -print -quit)"
+          test -n "$TAR" && test -n "$SUM" && test -n "$META"
+          (cd "$(dirname "$TAR")" && sha256sum -c "$(basename "$SUM")")
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+          cp "$META" qa/results/phase2-visual-quarantine.json
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const r=JSON.parse(readFileSync('qa/results/phase2-visual-quarantine.json'));
+          assert.equal(r.remainingChangedMediaIds,127);
+          assert.equal(r.verifiedContracts,600);
+          assert.equal(r.releaseApproved,false);
+          const base='qa/dist-pages-food-candidate/';
+          const h=b=>createHash('sha256').update(b).digest('hex');
+          assert.equal(h(readFileSync(base+'.duduq-pages-manifest')),r.manifestSha256);
+          assert.equal(h(readFileSync(base+'content/english/media/media-registry.json')),r.registrySha256);
+          console.log('IMMUTABLE_COMPILED_QA_REUSED_127_IDS_600_QUESTIONS');
+          NODE
+      - name: Run directed real input, no forced or injected events
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev qa/dist-pages-food-candidate --ip 127.0.0.1 \
+            --port 4175 --compatibility-date 2026-10-30 > /tmp/duduq-real-final.log 2>&1 &
+          echo $! >/tmp/duduq-real-final.pid
+          for i in {1..45}; do
+            if curl -fsS "$BASE_URL/" > /dev/null; then break; fi
+            if ! kill -0 "$(cat /tmp/duduq-real-final.pid)" 2>/dev/null; then
+              cat /tmp/duduq-real-final.log; exit 1
+            fi
+            sleep 2
+          done
+          node --check qa/verify-phase2-final-127-real-interaction.mjs
+          node qa/verify-phase2-final-127-real-interaction.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-127-real-input-evidence
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            qa/results/phase2-127-real-interaction.json
+            qa/results/phase2-127-real-interaction/*.png
