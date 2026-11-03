@@ -37,6 +37,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: duduq-assets-duduq-reuse-${{ github.ref }}
@@ -47,7 +48,7 @@ concurrency:
 jobs:
   source-head-crosswalk:
     name: QA-only bilingual crosswalk at pinned Assets-DuduQ HEAD
-    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' }}
+    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha == 'bf4976d9a28b6b23566a75722d1ef9af8713e2ce' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -85,6 +86,60 @@ jobs:
           path: |
             qa/results/assets-duduq-source-inventory.json
             qa/results/assets-duduq-question-crosswalk.json
+
+  production-orange-gap-qa:
+    name: Canonical orange production 600-contract gap audit (NO deploy)
+    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha != 'bf4976d9a28b6b23566a75722d1ef9af8713e2ce' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 32
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            qa/phase2-canonical-production-gap.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Reuse completed pinned source crosswalk, do not rebuild it
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p qa/results
+          gh run download 41729187694 -R "$GITHUB_REPOSITORY" --name duduq-phase2-source-head-crosswalk-41729187694 --dir qa/results
+          test -s qa/results/assets-duduq-source-inventory.json
+          test -s qa/results/assets-duduq-question-crosswalk.json
+      - name: Download and verify EXACT latest production Orange release (NO deploy)
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          TAG=duduq-phase2-orange-fruit-color-corrected-20261103
+          ASSET=duduq-phase2-orange-fruit-color-corrected.tar.gz
+          SHA=cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800
+          FILE="$RUNNER_TEMP/orange-prod-base.tar.gz"
+          curl -fLSs --retry 3 --retry-delay 3 --connect-timeout 20 --max-time 500             "https://github.com/$GITHUB_REPOSITORY/releases/download/$TAG/$ASSET" -o "$FILE"
+          echo "$SHA  $FILE" | sha256sum --check --status
+          mkdir -p dist-pages
+          tar -xzf "$FILE" -C dist-pages
+          test -s dist-pages/.duduq-pages-manifest
+          test -s dist-pages/content/english/media/media-registry.json
+      - name: Cross-reference canonical 600 question files and all shared IDs
+        run: |
+          node --check qa/phase2-canonical-production-gap.mjs
+          node qa/phase2-canonical-production-gap.mjs
+      - name: Keep immutable QA report only
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-phase2-canonical-production-gap-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: error
+          path: qa/results/phase2-production-gap.json
 
   isolated-v26-media-reuse:
     if: ${{ github.ref_name != 'qa/duduq-phase2-crosswalk-head-20261103' }}
