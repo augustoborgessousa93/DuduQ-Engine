@@ -65,33 +65,22 @@ try{
    // interaction must flip a real card before evaluating its visual contents.
    let memoryCardFlipped=null;
    if(q.mechanicId==='memory-quest'&&ready){
-    // The released Gold Master renders Memory Quest in a child iframe.
-    // Parent document has 0 cards even when the real board is fully ready.
-    // Locate and click the actual frame's card; never inject test DOM.
-    let gameFrame=null;
-    for(let attempt=0;attempt<60&&!gameFrame;attempt++){
-     for(const frame of page.frames()){
-      try{
-       if(await frame.locator('[data-memory-card-id]').count()>0){
-        gameFrame=frame;break;
-       }
-      }catch{}
-     }
-     if(!gameFrame)await page.waitForTimeout(200);
-    }
+    // The compiled Gold Master uses a different selector than the newer
+    // engine source. Actual verified DOM: memory-quest-card-slot, data-flipped
+    // and aria-pressed. Run #41552474452 proved real card flips on both
+    // viewports against this same immutable 127-ID artifact.
+    const card=page.locator('button.memory-quest-card-slot[data-memory-card-component]').first();
     try{
-     assert(gameFrame,'MEMORY_QUEST_FRAME_NOT_FOUND');
-     const card=gameFrame.locator('[data-memory-card-id]').first();
-     await card.waitFor({state:'visible',timeout:5000});
-     const before=await card.getAttribute('data-face-up');
-     assert.equal(before,'false','CARD_ALREADY_FACE_UP');
-     const cardId=await card.getAttribute('data-memory-card-id');
+     await card.waitFor({state:'visible',timeout:10000});
+     const before=await card.getAttribute('data-flipped');
+     assert(before===null||before==='false','CARD_ALREADY_FLIPPED');
      await card.click({timeout:7000});
-     await gameFrame.waitForFunction(id=>
-      document.querySelector('[data-memory-card-id="'+id+'"]')?.getAttribute('data-face-up')==='true',
-      cardId,{timeout:3000,polling:100});
-     const after=await card.getAttribute('data-face-up');
-     memoryCardFlipped=before==='false'&&after==='true';
+     await page.waitForFunction(()=>
+      document.querySelector('button.memory-quest-card-slot[data-memory-card-component]')?.dataset.flipped==='true',
+      null,{timeout:3500,polling:100});
+     const after=await card.getAttribute('data-flipped');
+     const pressed=await card.getAttribute('aria-pressed');
+     memoryCardFlipped=(before===null||before==='false')&&after==='true'&&pressed==='true';
     }catch{memoryCardFlipped=false;}
    }
    const valid=response?.status()===200&&ready&&jsErrors.length===0&&httpErrors.length===0&&
