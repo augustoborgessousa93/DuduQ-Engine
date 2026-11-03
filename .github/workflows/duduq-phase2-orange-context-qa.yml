@@ -1,0 +1,96 @@
+name: DUDUQ Phase2 — split orange fruit/color in 21 real contracts, QA only
+on:
+  push:
+    branches: [qa/duduq-phase2-releasegate-127-20261103]
+    paths:
+      - qa/repair-phase2-orange-contexts.mjs
+      - .github/workflows/duduq-phase2-orange-context-qa.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: duduq-phase2-orange-context-qa-only
+  cancel-in-progress: true
+jobs:
+  correct-orange:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: qa/repair-phase2-orange-contexts.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with: {node-version: "22"}
+      - name: Restore immutable 127 baseline plus validated 153-media overlay
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq127 /tmp/duduq153 qa/dist-pages-food-candidate qa/results
+          gh run download 41549957803 -R "$GITHUB_REPOSITORY" -n duduq-phase2-conservative-source-reuse-qa -D /tmp/duduq127
+          TAR="$(find /tmp/duduq127 -name duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz -print -quit)"
+          SUM="$(find /tmp/duduq127 -name duduq-phase2-proven-safe-visual-hold-unapproved.sha256 -print -quit)"
+          test -n "$TAR" && test -n "$SUM"
+          (cd "$(dirname "$TAR")" && sha256sum -c "$(basename "$SUM")")
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+          gh run download 41682938356 -R "$GITHUB_REPOSITORY" -n duduq-phase2-batch-source-integration-qa-only -D /tmp/duduq153
+          (cd /tmp/duduq153 && sha256sum -c duduq-phase2-batch-qa-overlay.sha256)
+          cp /tmp/duduq153/phase2-batch-source-integration.json qa/results/
+          tar -xzf /tmp/duduq153/duduq-phase2-batch-qa-overlay.tar.gz -C qa/dist-pages-food-candidate
+      - name: Correct all 21 orange contexts using exact source fruit PNG
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/repair-phase2-orange-contexts.mjs
+          node qa/repair-phase2-orange-contexts.mjs
+      - name: Verify 600 contracts, registry and source hashes; package exact QA overlay
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,cpSync,mkdirSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import path from 'node:path';
+          const dir='qa/dist-pages-food-candidate',out='/tmp/qa-orange-split';
+          const r=JSON.parse(readFileSync('qa/results/orange-fruit-context-split/split-report.json','utf8'));
+          const changes=JSON.parse(readFileSync('qa/results/orange-fruit-context-split/changed-paths.json','utf8'));
+          const sha=x=>createHash('sha256').update(x).digest('hex');
+          assert.equal(r.changedQuestionMediaRefs,15);
+          assert.equal(r.questionContractsPreserved,600);
+          assert.equal(r.answersAndNonMediaFieldsUnchanged,true);
+          assert.equal(sha(readFileSync(path.join(dir,r.fruitAsset))),r.sourceSha256);
+          assert.equal(sha(readFileSync(path.join(dir,'content/english/media/media-registry.json'))),r.registrySha256);
+          assert.equal(sha(readFileSync(path.join(dir,'.duduq-pages-manifest'))),r.manifestSha256);
+          let count=0;
+          for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
+           const rel='content/english/year-'+y+'/module-'+String(m).padStart(2,'0')+'/questions.json';
+           const j=JSON.parse(readFileSync(path.join(dir,rel),'utf8'));
+           assert.equal(j.items.length,20);
+           count+=20;
+          }
+          assert.equal(count,600);
+          for(const rel of changes){
+           const dest=path.join(out,rel);
+           mkdirSync(path.dirname(dest),{recursive:true});
+           cpSync(path.join(dir,rel),dest);
+          }
+          console.log('QA_SPLIT_PASS='+JSON.stringify({contracts:count,fruitQuestions:15,colorQuestions:6,newImages:1}));
+          NODE
+          tar -czf qa/results/orange-fruit-context-split/overlay.tar.gz -C /tmp/qa-orange-split .
+          (cd qa/results/orange-fruit-context-split && sha256sum overlay.tar.gz > overlay.sha256)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-orange-fruit-color-context-qa
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            qa/results/orange-fruit-context-split/split-report.json
+            qa/results/orange-fruit-context-split/changed-paths.json
+            qa/results/orange-fruit-context-split/overlay.tar.gz
+            qa/results/orange-fruit-context-split/overlay.sha256
