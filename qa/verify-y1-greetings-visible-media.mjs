@@ -44,6 +44,15 @@ try{
  for(const t of tests){
   const ctx=await browser.newContext({viewport:{width:t.screen[0],height:t.screen[1]},hasTouch:t.screen[0]<500,reducedMotion:'reduce'});
   const page=await ctx.newPage(),errors=[],httpErrors=[];
+  if(t.id.startsWith('Y1M01-')){
+   const index=Number(t.id.split('-Q')[1])-1;
+   assert(Number.isInteger(index)&&index>=0&&index<20,'Y1M01_INVALID_SESSION_INDEX');
+   // Official Y1M01 flow stores this state before navigating to the Gold
+   // Master route. Direct test URLs must reproduce the exact same contract.
+   await page.addInitScript(({id,index})=>{
+    sessionStorage.setItem('duduq-module:Y1M01',JSON.stringify({moduleId:'Y1M01',index,itemId:id}));
+   },{id:t.id,index});
+  }
   page.on('pageerror',e=>errors.push(String(e.message||e).slice(0,180)));
   page.on('response',r=>{if(r.url().startsWith(base)&&r.status()>=400&&!r.url().includes('favicon'))httpErrors.push(r.status()+':'+r.url())});
   const row={id:t.id,mechanic:t.mechanic,viewport:t.screen[0],expected:t.expected,found:[],errors,httpErrors};
