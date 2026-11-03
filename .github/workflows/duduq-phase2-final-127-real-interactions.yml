@@ -6,6 +6,7 @@ on:
       - qa/duduq-phase2-releasegate-127-20261103
     paths:
       - .github/workflows/duduq-phase2-final-127-real-interactions.yml
+      - qa/verify-phase2-final-127-real-interaction.mjs
 
 permissions:
   contents: read
