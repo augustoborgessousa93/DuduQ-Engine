@@ -115,6 +115,15 @@ for(const row of queue){
   (row.exampleQuestions||[]).every(id=>actual.includes(id)),'SHARED_USAGE_NOT_VERIFIED');
  guard(occurrences.length>0&&occurrences.every(o=>norm(o.semanticTarget)===concept),
   'LEAF_SEMANTICS_NOT_EXPLICIT_EXACT');
+ // Run #41547068602, extracted in #41549138071: the official bird PNG
+ // for Y1M06-Q005 (Memory Quest) was never loaded on either viewport, even
+ // while the game was READY. A valid registry binding is NOT proof that the
+ // Gold Master displays the picture. Keep this exact media ID provisional
+ // until a real card-reveal/browser check proves its rendering. Do not
+ // generalize the hold to other birds or alter any gameplay contract.
+ if(row.mediaId==='IMG-Q005-BIRD'&&actual.length===1&&
+    actual[0]==='Y1M06-Q005'&&questions.get(actual[0])?.mechanicId==='memory-quest')
+  reasons.push('MEMORY_QUEST_BIRD_NOT_RENDERED_RUN_41547068602');
  // Run #41536518602 proved blank imagery in Bubble Pop on BOTH viewports.
  // Shared media IDs must not be partially repointed while this consumer
  // cannot display the replacement. All other mechanics remain eligible.
