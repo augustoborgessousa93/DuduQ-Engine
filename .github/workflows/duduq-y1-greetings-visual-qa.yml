@@ -1,0 +1,65 @@
+name: DUDUQ Y1 - Real gameplay visual QA for official images (NO deploy)
+on:
+  push:
+    branches: [qa/duduq-y1-greetings-official-media-20261103]
+    paths:
+      - qa/verify-y1-greetings-visible-media.mjs
+      - .github/workflows/duduq-y1-greetings-visual-qa.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: duduq-y1-greetings-visual-qa-only
+  cancel-in-progress: true
+jobs:
+  directed-visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      DUDUQ_QA_ONLY: "1"
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: qa/verify-y1-greetings-visible-media.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with: {node-version: "22"}
+      - name: Restore frozen official build and Y1 overlay, verify exact SHA
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p dist-pages /tmp/y1-overlay qa/results/y1-greetings-browser qa/results/y1-greetings-batch
+          URL='https://github.com/augustoborgessousa93/DuduQ-Engine/releases/download/duduq-phase2-orange-fruit-color-corrected-20261103/duduq-phase2-orange-fruit-color-corrected.tar.gz'
+          curl -fLSs --retry 3 --retry-delay 3 --connect-timeout 20 --max-time 720 "$URL" -o /tmp/y1-official-base.tar.gz
+          echo 'cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800  /tmp/y1-official-base.tar.gz' | sha256sum -c -
+          tar -xzf /tmp/y1-official-base.tar.gz -C dist-pages
+          gh run download 41721480687 -R "$GITHUB_REPOSITORY" -n duduq-y1-official-greetings-media-qa-candidate -D /tmp/y1-overlay
+          (cd /tmp/y1-overlay && sha256sum -c overlay.sha256)
+          cp /tmp/y1-overlay/report.json qa/results/y1-greetings-batch/
+          tar -xzf /tmp/y1-overlay/overlay.tar.gz -C dist-pages
+      - name: Check real images visible in targeted Y1 browser scenes
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev dist-pages --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 >/tmp/y1-greetings-pages.log 2>&1 &
+          echo $! >/tmp/y1-greetings-pages.pid
+          for i in {1..60};do
+            if curl -fsS 'http://127.0.0.1:4175/' >/dev/null;then break;fi
+            if ! kill -0 "$(cat /tmp/y1-greetings-pages.pid)" 2>/dev/null;then cat /tmp/y1-greetings-pages.log;exit 1;fi
+            sleep 2
+          done
+          node --check qa/verify-y1-greetings-visible-media.mjs
+          node qa/verify-y1-greetings-visible-media.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-y1-greetings-visual-browser-qa
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            qa/results/y1-greetings-browser.json
+            qa/results/y1-greetings-browser/*.png
