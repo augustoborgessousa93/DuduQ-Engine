@@ -1,0 +1,114 @@
+name: DUDUQ Phase 2 - ONE consolidated candidate release gate (NO production)
+
+on:
+  push:
+    branches:
+      - qa/duduq-phase2-releasegate-127-20261103
+    paths:
+      - .github/workflows/duduq-phase2-final-127-gate.yml
+      - qa/verify-phase2-final-candidate-127.mjs
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  phase2-release-gate:
+    name: Immutable 127-ID QA, 30 routes, 600 contracts, delivery and real mechanic smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BASE_URL: http://127.0.0.1:4175
+      DUDUQ_QA_ONLY: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Recover EXACT known SHA-bound compiled candidate; no rebuild
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq-phase2-final qa/dist-pages-food-candidate qa/results
+          gh run download 41549957803 --repo augustoborgessousa93/DuduQ-Engine \
+            --name duduq-phase2-conservative-source-reuse-qa \
+            --dir /tmp/duduq-phase2-final
+          TAR="$(find /tmp/duduq-phase2-final -name duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz -print -quit)"
+          SUM="$(find /tmp/duduq-phase2-final -name duduq-phase2-proven-safe-visual-hold-unapproved.sha256 -print -quit)"
+          META="$(find /tmp/duduq-phase2-final -name phase2-visual-quarantine.json -print -quit)"
+          test -n "$TAR" && test -n "$SUM" && test -n "$META"
+          (cd "$(dirname "$TAR")" && sha256sum -c "$(basename "$SUM")")
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+          cp "$META" qa/results/phase2-visual-quarantine.json
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const meta=JSON.parse(readFileSync('qa/results/phase2-visual-quarantine.json','utf8'));
+          assert.equal(meta.remainingChangedMediaIds,127);
+          assert.equal(meta.verifiedContracts,600);
+          assert.equal(meta.heldPaths.length,5);
+          assert.equal(meta.newlyHeldBindings,14);
+          assert.equal(meta.productionDeployed,false);
+          assert.equal(meta.releaseApproved,false);
+          for(const [file,expected] of [
+           ['content/english/media/media-registry.json',meta.registrySha256],
+           ['.duduq-pages-manifest',meta.manifestSha256]]){
+           const digest=createHash('sha256').update(readFileSync('qa/dist-pages-food-candidate/'+file)).digest('hex');
+           assert.equal(digest,expected,'MISMATCH_ARCHIVE_'+file);
+          }
+          console.log('ONE_IMMUTABLE_127_MEDIA_PACKAGE_RESTORED');
+          NODE
+      - name: Run ONE actual local Pages serving and Chromium smoke
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev qa/dist-pages-food-candidate --ip 127.0.0.1 \
+            --port 4175 --compatibility-date 2026-10-30 > /tmp/duduq-final-127-pages.log 2>&1 &
+          echo $! >/tmp/duduq-final-127-pages.pid
+          for i in {1..45}; do
+            if curl -fsS "$BASE_URL/" > /dev/null; then break; fi
+            if ! kill -0 "$(cat /tmp/duduq-final-127-pages.pid)" 2>/dev/null; then
+              cat /tmp/duduq-final-127-pages.log; exit 1
+            fi
+            sleep 2
+          done
+          node --check qa/verify-phase2-final-candidate-127.mjs
+          node qa/verify-phase2-final-candidate-127.mjs
+      - name: Preserve truthful approval status, never promote on CI PASS alone
+        if: always()
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          if test -s qa/results/phase2-final-candidate-127-gate.json; then
+            node --input-type=module <<'NODE'
+            import assert from 'node:assert/strict';
+            import {readFileSync} from 'node:fs';
+            const r=JSON.parse(readFileSync('qa/results/phase2-final-candidate-127-gate.json','utf8'));
+            assert.equal(r.modules,30);
+            assert.equal(r.contracts,600);
+            assert.equal(r.changedMediaIds,127);
+            assert.equal(r.productionDeployed,false);
+            assert.equal(r.releaseApproved,false);
+            console.log('FINAL_127_CANDIDATE_GATE='+JSON.stringify({
+             status:r.status,modules:r.modules,contracts:r.contracts,
+             mediaIds:r.changedMediaIds,sourcePNG:r.uniqueSourceImages,
+             browserChecks:r.browserChecks.length,blocked:r.errors,
+             productionDeployed:false,semanticsHumanApproved:false,
+             sourceBundleArtifactUrl:'https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/41549957803/artifacts/13191760260'}));
+            NODE
+          else
+            echo "NO_REPORT: browser process failed before report; release remains blocked."
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-single-candidate-gate-127
+          retention-days: 90
+          if-no-files-found: warn
+          path: qa/results/phase2-final-candidate-127-gate.json
