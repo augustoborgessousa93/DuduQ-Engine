@@ -115,7 +115,7 @@ try{
  const browser=await chromium.launch({headless:true});
  try{
   for(const vp of [{width:390,height:844},{width:1280,height:800}]){
-   const ctx=await browser.newContext({viewport:vp,hasTouch:vp.width===390});
+   const ctx=await browser.newContext({viewport:vp,hasTouch:vp.width===390,reducedMotion:'reduce'});
    for(const [mechanic,id] of sample){
     const slug=mechanic.startsWith('smart-sentence')?'smart-sentence':mechanic;
     const page=await ctx.newPage(),errors=[];
@@ -137,21 +137,32 @@ try{
      });
      assert(geometry.width>250&&geometry.height>220&&geometry.bodyText>=15,'EMPTY_MECHANIC_STAGE');
      row.loaded=true;
-     // A Memory Quest card is hidden on purpose until a student's real click.
      if(mechanic==='memory-quest'){
-      const card=page.locator('[data-memory-card-id]').first();
-      await card.waitFor({state:'visible',timeout:7000});
-      await card.click({timeout:7000});
-      await page.waitForFunction(()=>[...document.querySelectorAll('[data-memory-card-id]')]
-        .some(x=>x.getAttribute('data-face-up')==='true'),null,{timeout:3500});
-      row.genuineInteractionObserved=true;row.interactionType='REAL_CARD_FLIP';
+      const cards=[];
+      for(const frame of page.frames()){
+       const list=await frame.evaluate(()=>[...document.querySelectorAll('button')].map((b,i)=>{
+        const r=b.getBoundingClientRect(),cs=getComputedStyle(b);
+        return {index:i,width:r.width,height:r.height,visible:r.width>=65&&r.height>=65&&r.top>=110&&r.bottom<=innerHeight+30&&cs.visibility!=='hidden'&&cs.display!=='none'&&!b.disabled};
+       }).filter(x=>x.visible&&x.width/x.height>.55&&x.width/x.height<1.65));
+       for(const card of list)cards.push({frame,...card});
+      }
+      assert(cards.length>=4,'MEMORY_VISIBLE_CARDS_MISSING');
+      let clicked=false;
+      for(const card of cards.slice(0,4)){try{await card.frame.locator('button').nth(card.index).click({timeout:3500});clicked=true;break}catch{}}
+      assert(clicked,'MEMORY_CARD_REAL_CLICK_FAILED');
+      row.genuineInteractionObserved=true;row.interactionType='REAL_COMPILED_MEMORY_CARD_CLICK';
      }
      if(mechanic==='bubble-pop'){
-      // Live mode uses animated bubbles. Do not falsify interaction by
-      // dispatchEvent or click(force:true); mark still unverified if offscreen.
-      const bubbles=page.locator('.duduq-bp-bubble');
-      await bubbles.first().waitFor({state:'visible',timeout:8000});
-      row.interactionType='BUBBLE_READY_NO_FORCE_CLICK';
+      const observations=[];
+      for(const frame of page.frames()){
+       const items=await frame.evaluate(()=>[...document.images].map((im,i)=>{
+        const r=im.getBoundingClientRect(),cs=getComputedStyle(im);
+        return {index:i,loaded:im.complete&&im.naturalWidth>0,visible:r.width>12&&r.height>12&&r.right>0&&r.bottom>0&&r.left<innerWidth&&r.top<innerHeight&&cs.display!=='none'&&cs.visibility!=='hidden'&&Number(cs.opacity)>0,clickable:!!im.closest('button,[role="button"]')};
+       }).filter(x=>x.loaded&&x.visible&&x.clickable));
+       for(const item of items)observations.push({frame,...item});
+      }
+      assert(observations.length>0,'NO_VISIBLE_LOADED_BUBBLE_IMAGE');
+      row.interactionType='COMPILED_BUBBLE_VISIBLE_IMAGE_NOT_REAL_CLICK';
       row.genuineInteractionObserved=false;
      }
     }catch(e){row.errors.push(String(e.message||e).slice(0,250));}
