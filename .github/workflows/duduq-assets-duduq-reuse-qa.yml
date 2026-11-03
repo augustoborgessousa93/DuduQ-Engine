@@ -143,7 +143,7 @@ jobs:
 
   y1m06-fish-bird-candidate-qa:
     name: Native Y1M06 fish and bird original PNG overlay (NO deploy)
-    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha != '1358eff07f83ccb31ce6fdfcad653f42805ca907' && github.sha != 'bf4976d9a28b6b23566a75722d1ef9af8713e2ce' }}
+    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha == '8b4cee86baeea4b33b45753ed7dc947b6f7bbaed' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -228,6 +228,73 @@ jobs:
             qa/results/y1m06-fish-bird-evidence.json
             qa/results/y1m06-fish-bird-review.png
             qa/results/y1m06-fish-bird-delta-only.tar.gz
+
+  y1m06-pets-real-browser-qa:
+    name: Y1M06 Q004 local Pages desktop/mobile source PNG QA (NO deploy)
+    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha != '8b4cee86baeea4b33b45753ed7dc947b6f7bbaed' && github.sha != '1358eff07f83ccb31ce6fdfcad653f42805ca907' && github.sha != 'bf4976d9a28b6b23566a75722d1ef9af8713e2ce' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            qa/phase2-y1m06-pets-browser-qa.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Reuse exact 2-image tested overlay from successful immutable QA
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p qa/results
+          gh run download 41732259527 -R "$GITHUB_REPOSITORY" --name duduq-phase2-y1m06-two-pets-qa-41732259527 --dir qa/results
+          test -s qa/results/y1m06-fish-bird-delta-only.tar.gz
+          test -s qa/results/y1m06-fish-bird-evidence.json
+      - name: Boot exact canonical Orange build and apply only verified overlay
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          T="$RUNNER_TEMP/orange-prod.tar.gz"
+          curl -fLSs --retry 3 --connect-timeout 20 --max-time 480             "https://github.com/$GITHUB_REPOSITORY/releases/download/duduq-phase2-orange-fruit-color-corrected-20261103/duduq-phase2-orange-fruit-color-corrected.tar.gz" -o "$T"
+          echo "cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800  $T" | sha256sum --check --status
+          mkdir -p dist-pages
+          tar -xzf "$T" -C dist-pages
+          tar -xzf qa/results/y1m06-fish-bird-delta-only.tar.gz -C dist-pages
+          echo "485998402116e4049c7884dcf6843e5a2a1674ec7c0a95402019465477b2b8d0  dist-pages/.duduq-pages-manifest" | sha256sum --check --status
+      - name: Install local browser and Pages runtime, never use production deploy credentials
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save --no-audit --no-fund playwright@1.55.0 wrangler@4
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev dist-pages --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 >/tmp/duduq-pages-local.log 2>&1 &
+          for i in $(seq 1 45); do
+            if curl -fsS -o /dev/null http://127.0.0.1:4175/play/target-shooter/; then exit 0; fi
+            sleep 2
+          done
+          tail -60 /tmp/duduq-pages-local.log
+          exit 1
+      - name: Verify both original PNGs visibly render in real Q004 gameplay
+        run: |
+          node --check qa/phase2-y1m06-pets-browser-qa.mjs
+          node qa/phase2-y1m06-pets-browser-qa.mjs
+      - name: Archive real screenshots even if visual QA fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-y1m06-fish-bird-real-browser-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/y1m06-pets-browser/
+            /tmp/duduq-pages-local.log
 
   isolated-v26-media-reuse:
     if: ${{ github.ref_name != 'qa/duduq-phase2-crosswalk-head-20261103' }}
