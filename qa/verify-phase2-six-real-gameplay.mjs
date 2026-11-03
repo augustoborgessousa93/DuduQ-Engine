@@ -3,7 +3,8 @@
  * Real DOM and click verification of the six previously ambiguous source-media
  * cases. Compiled Gold Masters can use older selectors; never assume current
  * source-release class names exist in the immutable compiled candidate.
- * QA ONLY. Does not alter images, questions, audio, mechanics or production.
+ * QA ONLY. Uses actual compiled DOM, not newer Gold Master selectors.
+ * Does not alter images, questions, audio, mechanics or production.
  */
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
