@@ -11,6 +11,8 @@ on:
       - ".github/workflows/duduq-independent-official-overlay-qa.yml"
       - "qa/audit-assets-duduq-source.mjs"
       - "qa/catalog-assets-duduq-matches.mjs"
+      - "qa/phase2-y4m03-seasons-batch.mjs"
+      - "qa/phase2-y4m03-seasons-browser-qa.mjs"
       - "qa/tests/verify-assets-duduq-crosswalk.mjs"
       - "qa/tests/verify-30-route-browser-smoke.mjs"
       - "qa/prepare-assets-duduq-reuse.mjs"
