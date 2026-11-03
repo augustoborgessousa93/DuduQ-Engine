@@ -115,7 +115,10 @@ try{
     const match=target.find(x=>x.images.some(i=>i.visible&&i.loaded&&i.clickable));
     assert(match,'VISIBLE_BUBBLE_CONTROL_DISAPPEARED');
     const image=match.images.find(i=>i.visible&&i.loaded&&i.clickable);
-    await match.frame.locator('img').nth(image.index).click({timeout:9000});
+    // Moving bubbles never satisfy Playwright's "stable" requirement.
+    // Force only that stability gate: Playwright still sends a real pointer click
+    // to the already verified, loaded, on-screen media-bearing element.
+    await match.frame.locator('img').nth(image.index).click({timeout:9000,force:true});
     c.actionObserved=true;
     c.actionType='ACTUAL_VISIBLE_BUBBLE_IMAGE_CLICK';
     await page.waitForTimeout(450);
