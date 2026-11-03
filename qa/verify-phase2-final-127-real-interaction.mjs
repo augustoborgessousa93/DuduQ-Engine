@@ -68,14 +68,31 @@ try{
     await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',
        null,{timeout:38000,polling:250});
     row.ready=true;
+    // These Gold Masters can render in nested iframes. The host #game
+    // reaches READY before we search the child frame's actual DOM. A
+    // document-only locator is not evidence that the mechanic is missing.
+    const selector=mech==='memory-quest'?'[data-memory-card-id]':'.duduq-bp-bubble';
+    let gameFrame=null;
+    for(let tick=0;tick<35&&!gameFrame;tick++){
+     for(const frame of page.frames()){
+      if(await frame.locator(selector).count().catch(()=>0)>0){
+       gameFrame=frame;
+       break;
+      }
+     }
+     if(!gameFrame)await page.waitForTimeout(250);
+    }
+    assert(gameFrame,'REAL_MECHANIC_FRAME_NOT_FOUND:'+mech);
+    row.mechanicFrame=gameFrame.url();
+    row.frameCount=page.frames().length;
     if(mech==='memory-quest'){
-     const cards=page.locator('[data-memory-card-id]');
+     const cards=gameFrame.locator('[data-memory-card-id]');
      await cards.first().waitFor({state:'visible',timeout:9000});
      row.cards=await cards.count();
      assert(row.cards>=6,'MEMORY_CARDS_MISSING');
      const first=cards.first(),idAttr=await first.getAttribute('data-memory-card-id');
      await first.click({timeout:8000});
-     await page.waitForFunction(cardId=>{
+     await gameFrame.waitForFunction(cardId=>{
       const el=[...document.querySelectorAll('[data-memory-card-id]')]
        .find(x=>x.getAttribute('data-memory-card-id')===cardId);
       return el?.getAttribute('data-face-up')==='true'||el?.getAttribute('aria-pressed')==='true';
@@ -83,37 +100,33 @@ try{
      row.realInteractionObserved=true;
      row.interactionType='REAL_MEMORY_CARD_FLIP';
     }else if(mech==='bubble-pop'){
-     const bubbles=page.locator('.duduq-bp-bubble');
+     const bubbles=gameFrame.locator('.duduq-bp-bubble');
      await bubbles.first().waitFor({state:'visible',timeout:9000});
      row.bubbleCount=await bubbles.count();
      assert(row.bubbleCount>=2,'BUBBLE_COUNT_INCOMPLETE');
-     // An animated bubble moves; click ONLY if a real student could hit it.
-     // Two bounded attempts, no force click or synthetic event dispatch.
+     // Playwright performs genuine pointer input inside the correct iframe.
+     // Never use force=true, DOM dispatchEvent or a mocked answer.
      for(let attempt=0;attempt<2&&!row.realInteractionObserved;attempt++){
-      const point=await page.evaluate(()=>{
-       for(const button of document.querySelectorAll('.duduq-bp-bubble')){
-        const b=button.getBoundingClientRect(),style=getComputedStyle(button);
-        if(button.disabled||b.width<28||b.height<28||style.display==='none')continue;
-        const x=b.left+b.width/2,y=b.top+b.height/2;
-        if(x<15||y<25||x>innerWidth-15||y>innerHeight-15)continue;
-        const hit=document.elementFromPoint(x,y);
-        if(hit&&(hit===button||button.contains(hit)))return {x,y};
-       }
-       return null;
-      });
-      if(!point){await page.waitForTimeout(420);continue;}
-      await page.mouse.click(point.x,point.y,{delay:50});
-      try{
-       await page.waitForFunction(()=>
-        [...document.querySelectorAll('.duduq-bp-bubble-shell')]
-         .some(x=>x.dataset.popped==='true'||x.dataset.wrong==='true'),
-        null,{timeout:900,polling:30});
-       row.realInteractionObserved=true;
-      }catch{}
-      row.attempts=attempt+1;
+      const count=await bubbles.count();
+      for(let i=0;i<count&&!row.realInteractionObserved;i++){
+       const button=bubbles.nth(i);
+       if(!await button.isVisible().catch(()=>false))continue;
+       if(await button.isDisabled().catch(()=>true))continue;
+       try{await button.click({timeout:2200});}
+       catch(e){row.lastClickError=String(e.message||e).slice(0,180);continue;}
+       try{
+        await gameFrame.waitForFunction(()=>
+         [...document.querySelectorAll('.duduq-bp-bubble-shell')]
+          .some(x=>x.dataset.popped==='true'||x.dataset.wrong==='true'),
+         null,{timeout:1100,polling:25});
+        row.realInteractionObserved=true;
+       }catch{}
+       row.clickAttempts=(row.clickAttempts||0)+1;
+      }
+      if(!row.realInteractionObserved)await page.waitForTimeout(250);
      }
-     row.interactionType='REAL_BUBBLE_POINTER_CLICK_WITH_FEEDBACK';
-     if(!row.realInteractionObserved)row.limitation='ANIMATED_BUBBLE_FEEDBACK_NOT_PROVED_AFTER_TWO_REAL_POINTER_ATTEMPTS';
+     row.interactionType='REAL_IFRAME_BUBBLE_POINTER_CLICK_WITH_FEEDBACK';
+     if(!row.realInteractionObserved)row.limitation='NO_VERIFIED_FEEDBACK_AFTER_GENUINE_IFRAME_BUBBLE_CLICKS';
     }else throw Error('UNSUPPORTED_MECHANIC:'+mech);
    }catch(e){row.limitation=String(e.message||e).slice(0,290);}
    row.status=row.ready&&row.realInteractionObserved&&row.pageErrors.length===0&&
