@@ -1,0 +1,68 @@
+name: DUDUQ Phase 2 - ONLY missing Y3M06-Q003 mobile bubble image (NO deploy)
+on:
+  push:
+    branches: [qa/duduq-phase2-releasegate-127-20261103]
+    paths:
+      - qa/verify-phase2-mobile-bubble-focus.mjs
+      - .github/workflows/duduq-phase2-mobile-bubble-focus.yml
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: duduq-phase2-single-mobile-bubble-only
+  cancel-in-progress: true
+jobs:
+  only-failed-case:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+      BASE_URL: http://127.0.0.1:4175
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            qa/verify-phase2-mobile-bubble-focus.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Restore exact existing QA baseline and overlay, never rebuild
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq127 /tmp/duduq153 qa/dist-pages-food-candidate qa/results
+          gh run download 41549957803 -R "$GITHUB_REPOSITORY" -n duduq-phase2-conservative-source-reuse-qa -D /tmp/duduq127
+          TAR="$(find /tmp/duduq127 -name duduq-phase2-proven-safe-visual-hold-unapproved.tar.gz -print -quit)"
+          SUM="$(find /tmp/duduq127 -name duduq-phase2-proven-safe-visual-hold-unapproved.sha256 -print -quit)"
+          test -n "$TAR" && test -n "$SUM"
+          (cd "$(dirname "$TAR")" && sha256sum -c "$(basename "$SUM")")
+          tar -xzf "$TAR" -C qa/dist-pages-food-candidate
+          gh run download 41682938356 -R "$GITHUB_REPOSITORY" -n duduq-phase2-batch-source-integration-qa-only -D /tmp/duduq153
+          (cd /tmp/duduq153 && sha256sum -c duduq-phase2-batch-qa-overlay.sha256)
+          cp /tmp/duduq153/phase2-batch-source-integration.json qa/results/
+          tar -xzf /tmp/duduq153/duduq-phase2-batch-qa-overlay.tar.gz -C qa/dist-pages-food-candidate
+      - name: Check ONLY missing mobile source bubble with real rendering
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev qa/dist-pages-food-candidate --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 >/tmp/mobile-bubble-qa.log 2>&1 &
+          echo $! >/tmp/mobile-bubble-qa.pid
+          for i in {1..60}; do
+            if curl -fsS "$BASE_URL/" >/dev/null; then break; fi
+            if ! kill -0 "$(cat /tmp/mobile-bubble-qa.pid)" 2>/dev/null; then cat /tmp/mobile-bubble-qa.log; exit 1; fi
+            sleep 2
+          done
+          node --check qa/verify-phase2-mobile-bubble-focus.mjs
+          node qa/verify-phase2-mobile-bubble-focus.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-single-mobile-bubble-evidence
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            qa/results/phase2-mobile-bubble-focus.json
+            qa/results/phase2-mobile-bubble-focus/*.png
