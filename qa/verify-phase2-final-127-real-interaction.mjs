@@ -1,0 +1,140 @@
+#!/usr/bin/env node
+/**
+ * ONE directed real-interaction gate against archived 127-ID compiled QA bundle.
+ * User gestures only. No runtime mutation, no forced clicks, no invented gabaritos.
+ * Memory: real flip. Bubble: real pointer hit and feedback.
+ * Deliberately does NOT certify all 600 gameplay cycles or pedagogy.
+ */
+import assert from 'node:assert/strict';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import path from 'node:path';
+import {chromium} from 'playwright';
+import {collectQuestionMediaUsages} from './media-binding-usage-guard.mjs';
+
+const root=path.resolve('qa/dist-pages-food-candidate');
+const base=(process.env.BASE_URL||'http://127.0.0.1:4175').replace(/\/+$/,'');
+const meta=JSON.parse(await readFile('qa/results/phase2-visual-quarantine.json','utf8'));
+assert.equal(meta.verifiedContracts,600);
+assert.equal(meta.remainingChangedMediaIds,127);
+const registry=JSON.parse(await readFile(path.join(root,'content/english/media/media-registry.json'),'utf8'));
+const updated=new Set(registry.entries.filter(e=>e.replacementAudit?.qaOnly===true).map(e=>e.mediaId));
+assert(updated.size>=127,'NOT_THE_127_ID_CANDIDATE');
+const samples={'memory-quest':[],'bubble-pop':[]};
+const seenIds=new Set(),usages=new Map();
+for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
+ const mm=String(module).padStart(2,'0');
+ const p='content/english/year-'+year+'/module-'+mm+'/questions.json';
+ const doc=JSON.parse(await readFile(path.join(root,p),'utf8'));
+ assert.equal(doc.items?.length,20,'NOT_20_QUESTIONS:'+p);
+ for(const q of doc.items){
+  collectQuestionMediaUsages(q,usages);
+  const inMechanic=samples[q.mechanicId];
+  if(!inMechanic||seenIds.has(q.item_id))continue;
+  const raw=JSON.stringify(q);
+  if([...updated].some(id=>raw.includes(id))){
+   seenIds.add(q.item_id);
+   inMechanic.push(q.item_id);
+  }
+ }
+}
+const chosen=[...samples['memory-quest'].slice(0,2),...samples['bubble-pop'].slice(0,2)];
+assert(chosen.length>=2,'NO_AFFECTED_MECHANIC_SAMPLES');
+const cases=[],dir='qa/results/phase2-127-real-interaction';
+await mkdir(dir,{recursive:true});
+const browser=await chromium.launch({headless:true});
+try{
+ for(const vp of [{width:390,height:844},{width:1280,height:800}]){
+  const context=await browser.newContext({viewport:vp,hasTouch:vp.width===390,deviceScaleFactor:1});
+  for(const id of chosen){
+   const qYear=id[1],mm=id.slice(3,5);
+   const doc=JSON.parse(await readFile(path.join(root,'content/english/year-'+qYear+
+      '/module-'+mm+'/questions.json'),'utf8'));
+   const q=doc.items.find(x=>x.item_id===id);
+   assert(q,'QUESTION_MISSING:'+id);
+   const mech=q.mechanicId;
+   const row={questionId:id,mechanic:mech,viewport:vp.width,
+    route:'/play/'+mech+'/?duduqModule='+id.slice(0,5)+'&duduqItem='+id+
+     '&qaSeed=phase2-final-real-interaction',
+    ready:false,realInteractionObserved:false,status:'RUNNING',
+    pageErrors:[],failedRequests:[],limitation:null};
+   cases.push(row);
+   const page=await context.newPage();
+   page.on('pageerror',e=>row.pageErrors.push(String(e.message||e)));
+   page.on('response',r=>{if(r.url().startsWith(base)&&r.status()>=400&&!r.url().includes('favicon.ico'))
+     row.failedRequests.push(r.status()+' '+r.url())});
+   try{
+    const resp=await page.goto(base+row.route,{waitUntil:'domcontentloaded',timeout:45000});
+    assert.equal(resp?.status(),200,'GAME_HTTP_NOT_200');
+    await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',
+       null,{timeout:38000,polling:250});
+    row.ready=true;
+    if(mech==='memory-quest'){
+     const cards=page.locator('[data-memory-card-id]');
+     await cards.first().waitFor({state:'visible',timeout:9000});
+     row.cards=await cards.count();
+     assert(row.cards>=6,'MEMORY_CARDS_MISSING');
+     const first=cards.first(),idAttr=await first.getAttribute('data-memory-card-id');
+     await first.click({timeout:8000});
+     await page.waitForFunction(cardId=>{
+      const el=[...document.querySelectorAll('[data-memory-card-id]')]
+       .find(x=>x.getAttribute('data-memory-card-id')===cardId);
+      return el?.getAttribute('data-face-up')==='true'||el?.getAttribute('aria-pressed')==='true';
+     },idAttr,{timeout:3500,polling:80});
+     row.realInteractionObserved=true;
+     row.interactionType='REAL_MEMORY_CARD_FLIP';
+    }else if(mech==='bubble-pop'){
+     const bubbles=page.locator('.duduq-bp-bubble');
+     await bubbles.first().waitFor({state:'visible',timeout:9000});
+     row.bubbleCount=await bubbles.count();
+     assert(row.bubbleCount>=2,'BUBBLE_COUNT_INCOMPLETE');
+     // An animated bubble moves; click ONLY if a real student could hit it.
+     // Two bounded attempts, no force click or synthetic event dispatch.
+     for(let attempt=0;attempt<2&&!row.realInteractionObserved;attempt++){
+      const point=await page.evaluate(()=>{
+       for(const button of document.querySelectorAll('.duduq-bp-bubble')){
+        const b=button.getBoundingClientRect(),style=getComputedStyle(button);
+        if(button.disabled||b.width<28||b.height<28||style.display==='none')continue;
+        const x=b.left+b.width/2,y=b.top+b.height/2;
+        if(x<15||y<25||x>innerWidth-15||y>innerHeight-15)continue;
+        const hit=document.elementFromPoint(x,y);
+        if(hit&&(hit===button||button.contains(hit)))return {x,y};
+       }
+       return null;
+      });
+      if(!point){await page.waitForTimeout(420);continue;}
+      await page.mouse.click(point.x,point.y,{delay:50});
+      try{
+       await page.waitForFunction(()=>
+        [...document.querySelectorAll('.duduq-bp-bubble-shell')]
+         .some(x=>x.dataset.popped==='true'||x.dataset.wrong==='true'),
+        null,{timeout:900,polling:30});
+       row.realInteractionObserved=true;
+      }catch{}
+      row.attempts=attempt+1;
+     }
+     row.interactionType='REAL_BUBBLE_POINTER_CLICK_WITH_FEEDBACK';
+     if(!row.realInteractionObserved)row.limitation='ANIMATED_BUBBLE_FEEDBACK_NOT_PROVED_AFTER_TWO_REAL_POINTER_ATTEMPTS';
+    }else throw Error('UNSUPPORTED_MECHANIC:'+mech);
+   }catch(e){row.limitation=String(e.message||e).slice(0,290);}
+   row.status=row.ready&&row.realInteractionObserved&&row.pageErrors.length===0&&
+    row.failedRequests.length===0?'PASS_REAL_USER_INTERACTION':'FAIL_REAL_USER_INTERACTION';
+   try{await page.screenshot({path:dir+'/'+id+'-'+vp.width+'.png',fullPage:false})}catch{}
+   await page.close();
+  }
+  await context.close();
+ }
+}finally{await browser.close()}
+const failed=cases.filter(x=>x.status!=='PASS_REAL_USER_INTERACTION');
+const result={schemaVersion:'DUDUQ_PHASE2_127_REAL_USER_INTERACTION_REVIEW_V1',
+ status:failed.length?'FAIL_DIRECTED_REAL_INTERACTION':'PASS_DIRECTED_REAL_INTERACTION_QA_ONLY',
+ candidateChangedMediaIds:127,verifiedQuestionContracts:600,
+ selectedQuestions:chosen,checks:cases.length,failed:failed.map(x=>({
+  id:x.questionId,mechanic:x.mechanic,viewport:x.viewport,limitation:x.limitation,
+  pageErrors:x.pageErrors,failedRequests:x.failedRequests})),
+ cases,sourceArchiveRunId:41549957803,
+ pedagogicalApproved:false,fullGameplayCertified:false,productionDeployed:false,releaseApproved:false};
+await writeFile('qa/results/phase2-127-real-interaction.json',JSON.stringify(result,null,2)+'\n');
+console.log('PHASE2_REAL_USER_INTERACTION='+JSON.stringify({
+ status:result.status,checks:result.checks,affectedQuestionSamples:chosen,
+ failed:result.failed,productionDeployed:false}));
+assert.equal(failed.length,0,'REAL_USER_INTERACTION_NOT_CONFIRMED');
