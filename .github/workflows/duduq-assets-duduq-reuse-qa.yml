@@ -57,6 +57,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            qa
+            docs/qa/media-audit-20261029
+          sparse-checkout-cone-mode: true
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
