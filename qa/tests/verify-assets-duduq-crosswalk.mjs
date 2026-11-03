@@ -16,6 +16,12 @@ assert.equal(inventory.files.length,report.inventoryFiles);
 assert(report.inventoryFiles>0);
 assert(report.sourceImageFiles>0);
 assert(report.sourceImageFiles<=report.inventoryFiles);
+if(inventory.status==='SOURCE_GIT_TREE_METADATA_ONLY'){
+  assert.equal(report.sourceProvenanceLevel,'GIT_TREE_METADATA_ONLY');
+  assert(Number.isInteger(report.uniqueGitBlobShas)&&report.uniqueGitBlobShas>0);
+  assert.equal(report.uniqueSourceHashes,null,'A Git blob SHA is not a SHA-256 of PNG bytes');
+  assert(inventory.files.every(f=>f.sha256===null),'No invented byte hash allowed');
+}
 assert.equal(report.questionCount,600);
 assert.equal(report.humanPedagogicalApproval,'PENDING');
 assert.match(report.matchingRule,/filename-only match is approved/i);

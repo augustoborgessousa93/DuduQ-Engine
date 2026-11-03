@@ -76,7 +76,7 @@ const aliasToConcept=new Map();for(const [concept,terms] of Object.entries(alias
 for(const [concept] of Object.entries(aliases))aliasToConcept.set(norm(concept),concept);
 // Only validated PNGs are considered as candidate game images; all source files
 // remain present in the original inventory and are never discarded.
-const sourceRows=inventory.files.filter(f=>f.detectedType==='PNG' && f.technicalStatus==='PASS')
+const sourceRows=inventory.files.filter(f=>f.detectedType==='PNG' && ['PASS','METADATA_ONLY'].includes(f.technicalStatus))
   .map(f=>({...f,filenameNormalized:norm(path.basename(f.path,path.extname(f.path)))}));
 // Numeric alternatives require numeral-only assets. A scene named
 // "y3-two-brown-rabbits" is NOT an illustration of the numeral two.
@@ -226,7 +226,9 @@ const report={schemaVersion:'ASSETS_DUDUQ_BILINGUAL_600_QUESTION_CROSSWALK_V1',s
   inventoryStatus:inventory.status,questionCount:questions.length,optionCount:allOptions.length,
   candidateOptions:candidateOptions.length,optionsWithVisuallyReviewedExactConcept:reviewedOptions.length,
   humanPedagogicalApproval:'PENDING',matchingRule:'Bilingual exact normalized aliases are discovery hints only. No filename-only match is approved.',
-  sourceImageFiles:sourceRows.length,sourceCandidateCount:sourceIndex.length,bindingsSummary,mediaBindingIndex:bindingIndex,sourceCandidateIndex:sourceIndex,
+  sourceImageFiles:sourceRows.length,sourceCandidateCount:sourceIndex.length,
+  sourceProvenanceLevel:inventory.status==='SOURCE_GIT_TREE_METADATA_ONLY'?'GIT_TREE_METADATA_ONLY':'FILE_BYTES_INSPECTED',
+  uniqueGitBlobShas:inventory.uniqueGitBlobShas??null,bindingsSummary,mediaBindingIndex:bindingIndex,sourceCandidateIndex:sourceIndex,
   provenanceWarning:'20261029 questions are historical QA snapshots. Confirm against current compiled 600 contracts and registry before any change.',questions};
 const bytes=Buffer.from(JSON.stringify(report,null,2)+'\n');await writeFile(output,bytes);
 console.log(JSON.stringify({status:'CROSSWALK_COMPLETE_REVIEW_REQUIRED',inventoryFiles:inventory.fileCount,questions:questions.length,options:allOptions.length,

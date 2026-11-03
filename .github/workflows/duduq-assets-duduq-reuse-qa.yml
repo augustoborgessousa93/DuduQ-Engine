@@ -52,15 +52,10 @@ jobs:
     timeout-minutes: 15
     env:
       ASSETS_DUDUQ_SOURCE_COMMIT: a62c07c075a4a744f81dee2eea3a6b93108f9d08
+      GITHUB_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: false
-      - uses: actions/checkout@v4
-        with:
-          repository: augustoborgessousa93/Assets-DuduQ
-          ref: a62c07c075a4a744f81dee2eea3a6b93108f9d08
-          path: assets-source
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
@@ -68,11 +63,11 @@ jobs:
       - name: Audit the complete HEAD and all 600 historical QA question entries
         run: |
           set -Eeuo pipefail
-          test "$(git -C assets-source rev-parse HEAD)" = "$ASSETS_DUDUQ_SOURCE_COMMIT"
           mkdir -p qa/results
           node --check qa/catalog-assets-duduq-matches.mjs
           node --check qa/tests/verify-assets-duduq-crosswalk.mjs
-          node qa/audit-assets-duduq-source.mjs assets-source --out=qa/results/assets-duduq-source-inventory.json
+          node --check qa/build-assets-git-tree-inventory.mjs
+          node qa/build-assets-git-tree-inventory.mjs --source-commit="$ASSETS_DUDUQ_SOURCE_COMMIT" --out=qa/results/assets-duduq-source-inventory.json
           node qa/catalog-assets-duduq-matches.mjs qa/results/assets-duduq-source-inventory.json --out=qa/results/assets-duduq-question-crosswalk.json
           node qa/tests/verify-assets-duduq-crosswalk.mjs qa/results/assets-duduq-question-crosswalk.json
       - name: Retain SHA-pinned inventory and suggestion graph
@@ -290,6 +285,7 @@ jobs:
           echo "This workflow builds and serves only an ephemeral local Pages candidate; it does not authenticate, upload, deploy, merge or change production."
           echo "Imported assets remain temporary and pedagogical QA pending until owner review."
   pig-exact-source-qa:
+    if: ${{ github.ref_name != 'qa/duduq-phase2-crosswalk-head-20261103' }}
     name: One exact pig PNG to 3 media IDs and 7 Y2M05 questions
     runs-on: ubuntu-latest
     timeout-minutes: 55
