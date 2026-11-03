@@ -48,12 +48,28 @@ try{
    entry.ready=true;
    const isReduced=await page.evaluate(()=>matchMedia('(prefers-reduced-motion: reduce)').matches);
    assert(isReduced,'BROWSER_A11Y_REDUCED_MOTION_NOT_ACTIVE');
+   // Compiled mechanics are hosted inside an iframe. READY belongs to the
+   // parent wrapper, whereas all interactive card/bubble DOM belongs to
+   // the child frame. Never infer missing images from top-document selectors.
+   let gameplayFrame=null;
+   for(let attempt=0;attempt<70&&!gameplayFrame;attempt++){
+    for(const frame of page.frames()){
+     try{
+      if(await frame.locator('.duduq-mq-card,.duduq-bp-root').count()>0){
+       gameplayFrame=frame;break;
+      }
+     }catch{}
+    }
+    if(!gameplayFrame)await page.waitForTimeout(250);
+   }
+   assert(gameplayFrame,'REAL_MECHANIC_CHILD_FRAME_NOT_FOUND');
+   entry.gameplayFrame=gameplayFrame.url();
    // All image bytes are fetched and hash-bound separately by the original
    // source-media QA; here we prove rendered meaning AFTER actual gameplay.
    if(f.mechanic==='memory-quest'){
     for(const p of f.required){
      let found=false,details=null;
-     const cards=page.locator('[data-memory-card-id]');
+     const cards=gameplayFrame.locator('[data-memory-card-id]');
      await cards.first().waitFor({state:'visible',timeout:12000});
      const count=await cards.count();
      for(let i=0;i<count;i++){
@@ -67,7 +83,7 @@ try{
       const before=await card.getAttribute('data-face-up');
       assert.equal(before,'false','CARD_FACE_STATE_PRECONDITION');
       await card.click({timeout:9000});
-      await page.waitForFunction(id=>
+      await gameplayFrame.waitForFunction(id=>
        document.querySelector('[data-memory-card-id="'+id+'"]')?.getAttribute('data-face-up')==='true',
        await card.getAttribute('data-memory-card-id'),{timeout:3000});
       const img=card.locator('img').first();
@@ -86,15 +102,15 @@ try{
      entry.seen.push({path:p,found,details});
     }
    }else if(f.mechanic==='bubble-pop'){
-    const actualMode=await page.locator('.duduq-bp-root').first().getAttribute('data-mode');
+    const actualMode=await gameplayFrame.locator('.duduq-bp-root').first().getAttribute('data-mode');
     entry.actualMode=actualMode;
     assert.equal(actualMode,'static-grid','ACCESSIBLE_BUBBLE_GRID_NOT_AVAILABLE');
-    const balls=page.locator('.duduq-bp-bubble');
+    const balls=gameplayFrame.locator('.duduq-bp-bubble');
     await balls.first().waitFor({state:'visible',timeout:12000});
     entry.bubbleCount=await balls.count();
     assert(entry.bubbleCount>=f.required.length,'BUBBLE_COUNT_INCOMPLETE');
     for(const p of f.required){
-     const img=page.locator('.duduq-bp-bubble img').filter({visible:true});
+     const img=gameplayFrame.locator('.duduq-bp-bubble img').filter({visible:true});
      let target=null;
      for(let i=0;i<await img.count();i++){
       const loc=img.nth(i);
@@ -120,7 +136,7 @@ try{
     const button=balls.first();
     const shell=button.locator('xpath=..');
     await button.click({timeout:9000});
-    await page.waitForFunction(()=>{
+    await gameplayFrame.waitForFunction(()=>{
      return [...document.querySelectorAll('.duduq-bp-bubble-shell')]
       .some(b=>b.getAttribute('data-popped')==='true'||b.getAttribute('data-wrong')==='true');
     },null,{timeout:2500,polling:50});
