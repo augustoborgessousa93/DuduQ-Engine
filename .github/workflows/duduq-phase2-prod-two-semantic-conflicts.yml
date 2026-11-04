@@ -1,0 +1,49 @@
+name: DUDUQ Phase 2 - Two exact conflicts and reusable bilingual filenames (NO rebuild)
+
+on:
+  push:
+    branches:
+      - qa/duduq-phase2-prod-closure-20261104
+    paths:
+      - .github/workflows/duduq-phase2-prod-two-semantic-conflicts.yml
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  inspect:
+    name: Read two semantic conflicts, original filenames and sample missing pins (existing artifacts only)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read existing immutable production reconciliation and reuse preflight
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq-current-preflight /tmp/duduq-current-prod qa/results
+          gh run download 41829953439 -R "$GITHUB_REPOSITORY" \
+            -n duduq-phase2-current-orange-production-media-reconciliation \
+            -D /tmp/duduq-current-prod
+          gh run download 41830591578 -R "$GITHUB_REPOSITORY" \
+            -n duduq-phase2-current-production-existing-png-reuse-preflight \
+            -D /tmp/duduq-current-preflight
+          python3 - <<'PY'
+          import json,collections,re,unicodedata
+          p=json.load(open('/tmp/duduq-current-prod/phase2-prod-current-source-closure.json'))
+          q=json.load(open('/tmp/duduq-current-preflight/phase2-prod-existing-png-reuse-preflight.json'))
+          print('EXACT_PRODUCTION_SEMANTIC_CONFLICTS='+json.dumps(p['semanticConflicts'],ensure_ascii=False))
+          print('EXACT_GOOD_AFTERNOON_CURRENT='+json.dumps(p['afternoonBindings'],ensure_ascii=False))
+          blocked=[x for x in q['heldSamples'] if x['reason']=='NO_VERIFIED_PIN_FOR_CONCEPT']
+          groups=collections.Counter(x.get('concept') or 'EMPTY' for x in blocked)
+          print('MISSING_PINS_SAMPLE_CONCEPTS='+json.dumps(groups.most_common(35),ensure_ascii=False))
+          assets=json.load(open('docs/qa/media-audit-20261029/phase2-full-asset-inventory-20261103.json'))
+          print('SOURCE_INVENTORY='+json.dumps({'commit':assets.get('sourceCommit'),'uniqueAssets':len(assets.get('assets',[]))}))
+          names=[x['path'].rsplit('/',1)[-1] for x in assets.get('assets',[])]
+          print('SOURCE_FILENAMES_SAMPLES='+json.dumps(names[:85],ensure_ascii=False))
+          PY
