@@ -27,6 +27,10 @@ on:
       - "qa/tests/target-shooter-confirmation-gate.test.mjs"
       - "qa/runtime-png-coverage-gate.mjs"
       - "qa/tests/runtime-png-coverage-gate.test.mjs"
+      - "qa/official-text-asset-bytes.mjs"
+      - "qa/tests/official-text-asset-bytes.test.mjs"
+      - "qa/apply-v23-ebc-watermark.mjs"
+      - "qa/apply-v24-header-title.mjs"
       - "qa/tests/verify-y1m04-official-media-overlay.mjs"
       - "qa/tests/verify-y1m05-official-media-overlay.mjs"
       - "qa/apply-y1m06-official-media-overlay.mjs"
@@ -198,6 +202,7 @@ jobs:
           node qa/verify-y2m01-source-registry-pin.mjs
           node --test qa/tests/verify-y2m01-source-registry-pin.test.mjs
           node --test qa/tests/png-alpha-component-audit.test.mjs
+          node --test qa/tests/official-text-asset-bytes.test.mjs
           node --test qa/tests/duduq-exact-semantic-match.test.mjs qa/tests/duduq-media-binding-usage-guard.test.mjs
           node --test qa/tests/target-shooter-confirmation-gate.test.mjs qa/tests/runtime-png-coverage-gate.test.mjs
 
