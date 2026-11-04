@@ -122,7 +122,7 @@ assert.deepEqual(docs.items.filter(x=>x.item_id!=='Y1M01-Q001'),
 for(const item of entries){
  registry.entries.push({
   mediaId:item.newId,requirementId:'Y1M01-Q001-SCOPED-VISUAL-20261104',
-  kind:'image',status:'QA_PENDING',semantic:item.concept,
+  kind:'image',status:'APPROVED',semantic:item.concept,
   description:item.concept==='hello'?'Hello visual close-up':'Reading, unambiguous non-greeting distractor',
   urlOrPath:item.dest,sha256:item.digest,temporary:false,
   assets:[{path:item.dest,sha256:item.digest,temporary:false,mediaType:'image/png'}],
