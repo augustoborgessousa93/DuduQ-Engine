@@ -1,0 +1,58 @@
+name: DUDUQ Phase 2 - Reuse already published PNGs for remaining SVGs (QA preflight)
+
+on:
+  push:
+    branches:
+      - qa/duduq-phase2-prod-closure-20261104
+    paths:
+      - qa/reuse-phase2-existing-pngs-prod-current.mjs
+      - .github/workflows/duduq-phase2-current-existing-png-reuse.yml
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: duduq-phase2-existing-official-png-reuse-prod-current
+  cancel-in-progress: true
+
+jobs:
+  inspect:
+    name: Count proven real 600-question occurrences for reuse of already published PNGs
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Restore exact immutable current production bytes and preceding CDN-confirmed report
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p qa/production-orange-immutable qa/results /tmp/duduq-media-qa
+          curl -fLSs --retry 3 --retry-delay 2 --connect-timeout 25 --max-time 360 \
+            "https://github.com/augustoborgessousa93/DuduQ-Engine/releases/download/duduq-phase2-orange-fruit-color-corrected-20261103/duduq-phase2-orange-fruit-color-corrected.tar.gz" \
+            -o /tmp/duduq-media-qa/orange-current.tar.gz
+          printf '%s  %s\n' \
+            cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800 \
+            /tmp/duduq-media-qa/orange-current.tar.gz | sha256sum -c
+          tar -xzf /tmp/duduq-media-qa/orange-current.tar.gz -C qa/production-orange-immutable
+          gh run download 41829953439 -R "$GITHUB_REPOSITORY" \
+            --name duduq-phase2-current-orange-production-media-reconciliation \
+            --dir /tmp/duduq-media-qa
+          cp /tmp/duduq-media-qa/phase2-prod-current-source-closure.json qa/results/
+          node --check qa/reuse-phase2-existing-pngs-prod-current.mjs
+          node qa/reuse-phase2-existing-pngs-prod-current.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-current-production-existing-png-reuse-preflight
+          retention-days: 90
+          if-no-files-found: warn
+          path: qa/results/phase2-prod-existing-png-reuse-preflight.json
