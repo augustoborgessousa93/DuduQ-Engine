@@ -1,0 +1,154 @@
+name: DUDUQ - BULK bilingual 417 originals x 600 questions (one-pass QA only)
+
+on:
+  push:
+    branches:
+      - qa/duduq-phase2-fast-bilingual-bulk-20261104
+    paths:
+      - .github/workflows/duduq-phase2-fast-bilingual-bulk.yml
+      - qa/phase2-fast-bilingual-bulk.mjs
+      - qa/phase2-fast-bilingual-aliases.mjs
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: duduq-fast-bilingual-bulk-single-candidate
+  cancel-in-progress: true
+
+jobs:
+  bulk:
+    name: Single pass, bilingual filename matching, 600 actual contracts, immutable source SHA
+    runs-on: ubuntu-latest
+    timeout-minutes: 52
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Restore ONLY current live release, verify known exact 2891-file tar SHA
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p qa/fast-bilingual-immutable-candidate qa/results /tmp/fast-bilingual
+          curl -fLSs --retry 3 --retry-delay 2 --connect-timeout 25 --max-time 360 \
+            "https://github.com/augustoborgessousa93/DuduQ-Engine/releases/download/duduq-phase2-orange-fruit-color-corrected-20261103/duduq-phase2-orange-fruit-color-corrected.tar.gz" \
+            -o /tmp/fast-bilingual/current-production.tar.gz
+          printf '%s  %s\n' \
+            cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800 \
+            /tmp/fast-bilingual/current-production.tar.gz | sha256sum -c
+          tar -xzf /tmp/fast-bilingual/current-production.tar.gz -C qa/fast-bilingual-immutable-candidate
+          echo CURRENT_REAL_PRODUCTION_BASELINE_HASH_VERIFIED
+      - name: Index ALL original PNG filenames at immutable Assets-DuduQ HEAD (no full clone)
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          ASSET_SHA=a62c07c075a4a744f81dee2eea3a6b93108f9d08
+          gh api "repos/augustoborgessousa93/Assets-DuduQ/git/trees/$ASSET_SHA?recursive=1" \
+            > /tmp/fast-bilingual/assets-tree.json
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,writeFileSync} from 'node:fs';
+          const sha='a62c07c075a4a744f81dee2eea3a6b93108f9d08';
+          const tree=JSON.parse(readFileSync('/tmp/fast-bilingual/assets-tree.json'));
+          assert.equal(tree.truncated,false);
+          const pngs=tree.tree.filter(x=>x.type==='blob'&&x.path.startsWith('Imagens Ilustrativa/')&&/\.png$/i.test(x.path));
+          assert(pngs.length>=400&&pngs.length<550,'EXPECTED_ALL_417_SOURCE_IMAGES');
+          writeFileSync('qa/results/assets-duduq-current-head-tree.json',
+           JSON.stringify({sha,tree:tree.tree,truncated:tree.truncated},null,2)+'\n');
+          console.log('SOURCE_PNG_ENTRIES='+pngs.length+' UNIQUE_BLOBS='+new Set(pngs.map(x=>x.sha)).size);
+          NODE
+      - name: ONE PASS semantic crosswalk and automatic SAFE bulk reuse in disposable QA
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/phase2-fast-bilingual-aliases.mjs
+          node --check qa/phase2-fast-bilingual-bulk.mjs
+          node qa/phase2-fast-bilingual-bulk.mjs
+          node qa/phase2-fast-bilingual-bulk.mjs --apply
+      - name: Strong post-apply verification of ALL manifest entries + 600 exact original contracts
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,writeFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const h=b=>createHash('sha256').update(b).digest('hex');
+          const root='qa/fast-bilingual-immutable-candidate/';
+          const old=JSON.parse(readFileSync('qa/results/phase2-fast-bilingual-bulk-plan.json'));
+          const now=JSON.parse(readFileSync('qa/results/phase2-fast-bilingual-bulk-applied.json'));
+          assert(now.appliedMediaIds>0,'NOTHING_WAS_INTEGRATED');
+          assert.equal(now.realContracts,600);
+          assert.equal(now.changedQuestionJsonFiles,0);
+          assert.equal(now.changedAudioFiles,0);
+          assert.equal(now.changedGoldMasters,0);
+          assert.equal(now.changedRuntimeFiles,0);
+          assert.equal(now.productionDeployed,false);
+          const man=readFileSync(root+'.duduq-pages-manifest','utf8').trimEnd().split(/\r?\n/);
+          const entries=new Map();
+          for(const line of man){
+           const i=line.lastIndexOf(' ');assert(i>0,'BAD_MANIFEST');
+           const path=line.slice(0,i),sha=line.slice(i+1);
+           assert(!entries.has(path)&&!path.startsWith('/')&&!path.includes('..'));
+           assert.equal(h(readFileSync(root+path)),sha,'BAD_SHA:'+path);
+           entries.set(path,sha);
+          }
+          assert.equal(man.length,old.baseManifestFiles+now.actuallyAddedPngs);
+          let questions=0;
+          for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
+           const p='content/english/year-'+year+'/module-'+String(module).padStart(2,'0')+'/questions.json';
+           const q=JSON.parse(readFileSync(root+p));
+           assert.equal(q.items.length,20);
+           questions+=q.items.length;
+          }
+          assert.equal(questions,600);
+          const reg=JSON.parse(readFileSync(root+'content/english/media/media-registry.json'));
+          const byId=new Map(reg.entries.map(e=>[e.mediaId,e]));
+          assert.equal(byId.size,reg.entries.length,'DUPLICATE_MEDIA');
+          for(const x of now.applied){
+           const e=byId.get(x.mediaId);
+           assert.equal(e.provenance.sourceCommit,now.sourceCommit);
+           assert.equal(e.replacementAudit.qaOnly,true);
+           assert.equal(e.replacementAudit.verifiedQuestionIds.length,x.questionIds.length);
+           assert.equal(e.humanResolutionStatus,'PEDAGOGICAL_QA_PENDING');
+           assert.equal(e.sha256,entries.get(e.urlOrPath));
+          }
+          const summary={status:'FAST_BULK_ARTIFACT_INTEGRITY_PASS_VISUAL_AND_PEDAGOGICAL_QA_PENDING',
+           sourcePngs:now.imagesInSource,matchedIds:now.appliedMediaIds,
+           affectedQuestions:now.appliedQuestionIds.length,
+           affectedModules:new Set(now.appliedQuestionIds.map(x=>x.slice(0,5))).size,
+           newPngs:now.actuallyAddedPngs,
+           preexistingPngs:now.reusedAlreadyPublishedPngs,
+           allHashesVerified:entries.size,contracts:600,
+           curriculumChanged:false,productionDeployed:false,releaseApproved:false};
+          writeFileSync('qa/results/phase2-fast-bulk-verification.json',JSON.stringify(summary,null,2)+'\n');
+          console.log('BULK_QA_PASS='+JSON.stringify(summary));
+          NODE
+      - name: Archive ONE revised candidate only, SHA256; no release, commit or deploy
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          tar -czf qa/results/duduq-fast-bilingual-qa-only.tar.gz \
+            -C qa/fast-bilingual-immutable-candidate .
+          (cd qa/results && sha256sum duduq-fast-bilingual-qa-only.tar.gz \
+            > duduq-fast-bilingual-qa-only.sha256)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-fast-bilingual-600-question-bulk-qa
+          path: |
+            qa/results/phase2-fast-bilingual-bulk-plan.json
+            qa/results/phase2-fast-bilingual-bulk-applied.json
+            qa/results/phase2-fast-bulk-verification.json
+            qa/results/duduq-fast-bilingual-qa-only.tar.gz
+            qa/results/duduq-fast-bilingual-qa-only.sha256
+          retention-days: 90
+          if-no-files-found: warn
+          compression-level: 0
