@@ -19,6 +19,34 @@ node --input-type=module <<'DUDUQ_SCENE_DIAGNOSTIC'
 import {readFileSync} from 'node:fs';
 const p=JSON.parse(readFileSync('qa/results/phase2-fast-bilingual-bulk-plan.json','utf8'));
 const q=JSON.parse(readFileSync('docs/qa/media-audit-20261029/replacement-queue.json','utf8'));
+const releaseRoot='qa/fast-bilingual-immutable-candidate';
+const reg=JSON.parse(readFileSync(releaseRoot+'/content/english/media/media-registry.json','utf8'));
+const registry=new Map(reg.entries.map(e=>[e.mediaId,e]));
+const queueById=new Map(q.queue.map(e=>[e.mediaId,e]));
+for(const id of ['Y1M01-Q001','Y1M03-Q001','Y1M06-Q003']){
+ const moduleId=id.slice(0,5);
+ const questionPath=releaseRoot+'/content/english/year-'+id[1]+'/module-'+id.slice(3,5)+'/questions.json';
+ const question=JSON.parse(readFileSync(questionPath,'utf8')).items.find(x=>x.item_id===id);
+ const graphRefs=[];
+ const visit=(node,location)=>{
+  if(!node||typeof node!=='object')return;
+  if(Array.isArray(node)){node.forEach((item,index)=>visit(item,location+'['+index+']'));return}
+  for(const [key,value] of Object.entries(node)){
+   if(['mediaId','assetId','image_ref','imageRef'].includes(key)&&typeof value==='string'){
+    const e=registry.get(value),audit=queueById.get(value);
+    graphRefs.push({location:location+'.'+key,mediaId:value,
+      semanticTarget:node.semanticTarget||null,semantic:e?.semantic||null,
+      urlOrPath:e?.urlOrPath||null,temporary:e?.temporary,
+      resolution:e?.humanResolutionStatus||null,source:e?.provenance?.sourcePath||null,
+      auditSemantic:audit?.semantic||null});
+   }
+   if(value&&typeof value==='object')visit(value,location+'.'+key);
+  }
+ };
+ visit(question,'question');
+ console.log('DUDUQ_ACTUAL_COMPILED_MEDIA='+JSON.stringify({id,moduleId,mechanic:question?.mechanicId,
+  graphRefs}));
+}
 for(const id of ['Y1M01-Q001','Y1M03-Q001','Y1M06-Q003']){
  const refs=q.queue.filter(x=>x.exampleQuestions?.includes(id));
  const chosen=new Map((p.proposed||[]).map(x=>[x.mediaId,x]));
