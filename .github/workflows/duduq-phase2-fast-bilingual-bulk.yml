@@ -14,6 +14,9 @@ on:
       - qa/patch-y1m01-q001-hello-focus.mjs
       - qa/verify-y1m01-q001-focus-browser.mjs
       - qa/verify-approved-q001-lock.mjs
+      - qa/patch-y1m01-daypart-q003-q004.mjs
+      - qa/verify-y1m01-daypart-browser.mjs
+      - qa/cloudflare-preview-v28-prebuilt.sh
 
 permissions:
   contents: read
@@ -150,6 +153,14 @@ jobs:
           set -Eeuo pipefail
           node --check qa/verify-approved-q001-lock.mjs
           node qa/verify-approved-q001-lock.mjs
+      - name: Apply isolated Q003/Q004 daypart media without changing answer keys or Q001
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/patch-y1m01-daypart-q003-q004.mjs
+          node qa/patch-y1m01-daypart-q003-q004.mjs
+          node qa/verify-approved-q001-lock.mjs
+          test -s qa/results/y1m01-daypart-q003-q004.json
       - name: Directed REAL Chromium proof of affected media in isolated local Pages (no deploy)
         shell: bash
         env:
@@ -170,6 +181,8 @@ jobs:
           node --check qa/verify-fast-bilingual-browser.mjs
           node --check qa/verify-y1m01-q001-focus-browser.mjs
           node qa/verify-y1m01-q001-focus-browser.mjs
+          node --check qa/verify-y1m01-daypart-browser.mjs
+          node qa/verify-y1m01-daypart-browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -179,6 +192,7 @@ jobs:
             qa/results/phase2-fast-bulk-browser/*.png
             qa/results/y1m01-q001-browser.json
             qa/results/y1m01-q001-browser/*.png
+            qa/results/y1m01-daypart-q003-q004-browser.json
           retention-days: 90
           if-no-files-found: warn
           compression-level: 6
@@ -191,6 +205,7 @@ jobs:
             qa/results/phase2-fast-bilingual-bulk-applied.json
             qa/results/phase2-fast-bulk-verification.json
             qa/results/y1m01-q001-focused-preview.json
+            qa/results/y1m01-daypart-q003-q004.json
           retention-days: 90
           if-no-files-found: warn
           compression-level: 6
