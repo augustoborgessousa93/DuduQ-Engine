@@ -3,6 +3,8 @@ import {chromium} from 'playwright';
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile,stat} from 'node:fs/promises';
 import path from 'node:path';
+import {expectedVisibleFeedbackAction,findVisibleFeedbackOutcome} from './target-shooter-confirmation-gate.mjs';
+import {classifyRuntimePngCoverage} from './runtime-png-coverage-gate.mjs';
 
 const root=process.cwd();
 const moduleId=process.env.DUDUQ_BROWSER_QA_MODULE||'Y1M05';
@@ -197,7 +199,7 @@ async function runTouchGameplay(browser,{name,viewport,route}){
       return target&&['selected','incorrect'].includes(target.dataset.gameplayState||'');
     },qa.incorrectAlt,{timeout:10000});
     const incorrectTransitions=await observeVisibleResult(page,qa.incorrectAlt,'incorrect',name+'-observe-incorrect-'+qa.incorrectAlt,events,touchTap);
-    const incorrectObserved=[...incorrectTransitions].reverse().find(x=>x.targetState==='incorrect'&&x.targetVisible&&x.feedback==='incorrect'&&!x.ribbonHidden);
+    const incorrectObserved=findVisibleFeedbackOutcome(incorrectTransitions,'incorrect');
     if(!incorrectObserved)throw Error('TOUCH_VISIBLE_INCORRECT_TRANSITION_NOT_OBSERVED:'+name);
     const incorrect={state:'incorrect',observed:incorrectObserved,transitions:incorrectTransitions,
       currentState:await targetByAlt(page,qa.incorrectAlt).getAttribute('data-gameplay-state'),
@@ -214,7 +216,7 @@ async function runTouchGameplay(browser,{name,viewport,route}){
       return target&&['selected','correct'].includes(target.dataset.gameplayState||'');
     },qa.correctAlt,{timeout:10000});
     const correctTransitions=await observeVisibleResult(page,qa.correctAlt,'correct',name+'-observe-correct-'+qa.correctAlt,events,touchTap);
-    const correctObserved=[...correctTransitions].reverse().find(x=>x.targetState==='correct'&&x.targetVisible&&x.feedback==='correct'&&!x.ribbonHidden);
+    const correctObserved=findVisibleFeedbackOutcome(correctTransitions,'correct');
     if(!correctObserved)throw Error('TOUCH_VISIBLE_CORRECT_TRANSITION_NOT_OBSERVED:'+name);
     const correct={state:'correct',observed:correctObserved,transitions:correctTransitions,
       currentState:await targetByAlt(page,qa.correctAlt).getAttribute('data-gameplay-state'),
@@ -230,7 +232,10 @@ async function runTouchGameplay(browser,{name,viewport,route}){
       fullyContainedOfficialImages,
       pageErrors:diag.pageErrors,httpFailures:diag.httpFailures,requestFailures:diag.requestFailures,
       screenshot:{path:path.relative(root,screenshotPath).replaceAll('\\','/'),sha256:hash(screenshotBytes),bytes:screenshotBytes.length}};
-    result.pass=response?.status()===200&&incorrect.observed.targetVisible===true&&correct.observed.targetVisible===true&&events.length>=5&&
+    result.pass=response?.status()===200&&incorrect.observed.actionText===expectedVisibleFeedbackAction('incorrect')&&
+      correct.observed.actionText===expectedVisibleFeedbackAction('correct')&&incorrect.feedback.hidden===false&&incorrect.feedback.type==='incorrect'&&
+      correct.feedback.hidden===false&&correct.feedback.type==='correct'&&incorrect.interactionState==='AWAITING_RETRY'&&
+      correct.interactionState==='AWAITING_CONTINUE'&&events.length>=5&&
       images.length>=4&&fullyContainedOfficialImages===images.length&&images.some(x=>x.alt===qa.correctAlt)&&images.some(x=>x.alt===qa.incorrectAlt)&&overflowX===0&&iframeCount===0&&
       !diag.pageErrors.length&&!diag.httpFailures.length&&!diag.requestFailures.length;
     return result;
@@ -257,7 +262,8 @@ try{
       await unlockBubble(page,events,expectedQuestionPaths):null;
     if(expectedQuestionPaths.length)
       await page.waitForFunction(()=>[...document.images].some(x=>x.src.includes('/chatgpt/')&&x.complete&&x.naturalWidth>0),null,{timeout:15000});
-    const images=await officialImages(page);for(const image of images)observed.add(image.path);
+    const images=await officialImages(page);
+    for(const image of images)if(image.visible&&image.intersectsViewport)observed.add(image.path);
     for(const observation of dynamicVisibility?.observations||[])if(expectedPaths.has(observation.path))observed.add(observation.path);
     const iframeCount=await page.locator('iframe').count();
     const overflowX=await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-innerWidth));
@@ -280,10 +286,11 @@ try{
       dynamicObserved:dynamicVisibility?.observations?.length||0,dynamicExpected:dynamicVisibility?.expectedPaths?.length||0}));
     if(!check.pass)throw Error('QUESTION_ROUTE_MEDIA_QA_FAILED:'+question.item_id+':'+JSON.stringify(check).slice(0,1200));
   }
-  const missing=[...expectedPaths.keys()].filter(x=>!observed.has(x));
+  const runtimeCoverage=classifyRuntimePngCoverage(expectedPaths,observed);
   await auditContext.close();
-  if(missing.length)throw Error('RUNTIME_PATHS_NOT_OBSERVED_ACROSS_20_QUESTIONS:'+missing.join(','));
-  report.observedRuntimePaths=[...observed].sort();
+  report.runtimeCoverage=runtimeCoverage;
+  report.observedRuntimePaths=runtimeCoverage.observedRuntimePaths;
+  if(!runtimeCoverage.pass)throw Error('RUNTIME_PNG_HASHES_NOT_VISUALLY_OBSERVED:'+runtimeCoverage.missingVisualHashes.join(','));
 
   await browser.close();browser=await chromium.launch({headless:true});
   const rawVideoDir=path.join(out,'video-raw');await mkdir(rawVideoDir,{recursive:true});
@@ -296,7 +303,7 @@ try{
   await pointerClick(page,targetByAlt(page,qa.incorrectAlt),'select-incorrect-'+qa.incorrectAlt,events);
   await page.waitForFunction(()=>document.querySelector('.target-shooter-target[data-gameplay-state="selected"]'));
   const incorrectTransitions=await observeVisibleResult(page,qa.incorrectAlt,'incorrect','observe-incorrect-'+qa.incorrectAlt,events);
-  const incorrectObserved=[...incorrectTransitions].reverse().find(x=>x.targetState==='incorrect'&&x.targetVisible&&x.feedback==='incorrect'&&!x.ribbonHidden);
+  const incorrectObserved=findVisibleFeedbackOutcome(incorrectTransitions,'incorrect');
   if(!incorrectObserved)throw Error('VISIBLE_INCORRECT_TRANSITION_NOT_OBSERVED');
   await page.waitForFunction(()=>document.querySelector('.feedback-ribbon')?.dataset.feedback==='incorrect'||
     document.querySelector('#game')?.dataset.duduqInteractionState==='AWAITING_RETRY',null,{timeout:18000});
@@ -310,7 +317,7 @@ try{
   await pointerClick(page,targetByAlt(page,qa.correctAlt),'select-correct-'+qa.correctAlt,events);
   await page.waitForFunction(()=>document.querySelector('.target-shooter-target[data-gameplay-state="selected"]'));
   const correctTransitions=await observeVisibleResult(page,qa.correctAlt,'correct','observe-correct-'+qa.correctAlt,events);
-  const correctObserved=[...correctTransitions].reverse().find(x=>x.targetState==='correct'&&x.targetVisible&&x.feedback==='correct'&&!x.ribbonHidden);
+  const correctObserved=findVisibleFeedbackOutcome(correctTransitions,'correct');
   if(!correctObserved)throw Error('VISIBLE_CORRECT_TRANSITION_NOT_OBSERVED');
   const correct={state:'correct',observed:correctObserved,transitions:correctTransitions,
     currentState:await targetByAlt(page,qa.correctAlt).getAttribute('data-gameplay-state')};
@@ -319,7 +326,10 @@ try{
   report.gameplay={questionId:qa.gameplayQuestionId,mechanicId:'target-shooter',input:'native Playwright mouse move/down/up',
     incorrect,correct,pointerEvents:events,officialImages:gameplayInitialImages,iframeCount:await page.locator('iframe').count(),
     pageErrors:diag.pageErrors,httpFailures:diag.httpFailures,requestFailures:diag.requestFailures,
-    pass:incorrect.observed.targetVisible===true&&correct.observed.targetVisible===true&&events.length>=5&&
+    pass:incorrect.observed.actionText===expectedVisibleFeedbackAction('incorrect')&&
+      correct.observed.actionText===expectedVisibleFeedbackAction('correct')&&incorrect.feedback.hidden===false&&incorrect.feedback.type==='incorrect'&&
+      correct.feedback.hidden===false&&correct.feedback.type==='correct'&&incorrect.interactionState==='AWAITING_RETRY'&&
+      correct.interactionState==='AWAITING_CONTINUE'&&events.length>=5&&
       gameplayInitialImages.length>=4&&gameplayInitialImages.some(x=>x.alt===qa.correctAlt)&&gameplayInitialImages.some(x=>x.alt===qa.incorrectAlt)&&
       !diag.pageErrors.length&&!diag.httpFailures.length&&!diag.requestFailures.length};
   if(!report.gameplay.pass)throw Error('REAL_POINTER_GAMEPLAY_QA_FAILED');

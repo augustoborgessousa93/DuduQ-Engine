@@ -5,7 +5,7 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {
   BUNDLE_REL,EXPECTED,MODULE_ID,MODULE_PATH,REGISTRY_PATH,
-  collectVisualUsages,parseIntegrity,sha256,withoutVisualMediaIds
+  canonicalLfSha256,collectVisualUsages,parseIntegrity,sha256,withoutVisualMediaIds
 } from './y2m01-official-media-model.mjs';
 
 const fail=code=>{throw Error('Y2M01_SOURCE_REGISTRY_PIN_FAILED:'+code);};
@@ -24,13 +24,14 @@ export async function verifyY2M01SourceRegistryContext(options={}){
   const manifest=JSON.parse(manifestBytes),pin=JSON.parse(pinBytes),questions=JSON.parse(questionBytes),
     registry=JSON.parse(registryBytes),bindingPlan=JSON.parse(bindingPlanBytes),integrity=parseIntegrity(integrityBytes);
   if(manifest.moduleId!==MODULE_ID||manifest.sourceRegistryPinEvidence!=='source-registry-pin.json'||
-     manifest.sourceRegistryPinEvidenceSha256!==sha256(pinBytes))fail('BUNDLE_PIN_REFERENCE');
+     manifest.sourceRegistryPinEvidenceSha256!==canonicalLfSha256(pinBytes))fail('BUNDLE_PIN_REFERENCE');
   if(pin.schemaVersion!=='DUDUQ_Y2M01_SOURCE_REGISTRY_PIN_V1'||pin.moduleId!==MODULE_ID||
      pin.status!=='PASS_EXACT_PRISTINE_V26_ONLY'||pin.productionApproved!==false||pin.sourceHashesRewritten!==false)
     fail('PIN_SCHEMA');
-  if(sha256(generationManifestBytes)!==EXPECTED.generationManifestSha256||
-     sha256(generationSemanticBytes)!==EXPECTED.generationSemanticSha256||sha256(bindingPlanBytes)!==EXPECTED.bindingPlanSha256||
-     sha256(questionInventoryBytes)!==EXPECTED.questionInventorySha256)fail('GENERATION_EVIDENCE_HASH');
+  if(canonicalLfSha256(generationManifestBytes)!==EXPECTED.generationManifestSha256||
+     canonicalLfSha256(generationSemanticBytes)!==EXPECTED.generationSemanticSha256||
+     canonicalLfSha256(bindingPlanBytes)!==EXPECTED.bindingPlanSha256||
+     canonicalLfSha256(questionInventoryBytes)!==EXPECTED.questionInventorySha256)fail('GENERATION_EVIDENCE_HASH');
   if(pin.generationManifestSha256!==EXPECTED.generationManifestSha256||pin.generationSemanticSha256!==EXPECTED.generationSemanticSha256||
      pin.bindingPlanSha256!==EXPECTED.bindingPlanSha256||pin.questionInventorySha256!==EXPECTED.questionInventorySha256)
     fail('PIN_GENERATION_LINKS');

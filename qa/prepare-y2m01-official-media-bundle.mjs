@@ -10,7 +10,7 @@ import {validateDuduqRgbaPng} from './validate-duduq-png.mjs';
 import {analyzeAlphaComponents} from './png-alpha-component-audit.mjs';
 import {
   BUNDLE_REL,EXPECTED,MODULE_ID,MODULE_PATH,REGISTRY_PATH,
-  allBindings,deriveOccurrenceGroups,locate,parseIntegrity,sha256,withoutVisualMediaIds
+  allBindings,canonicalLfSha256,deriveOccurrenceGroups,locate,parseIntegrity,sha256,withoutVisualMediaIds
 } from './y2m01-official-media-model.mjs';
 
 const root=process.cwd(),dist=path.join(root,'dist-pages'),bundleDir=path.join(root,BUNDLE_REL);
@@ -27,10 +27,10 @@ async function preserveGenerationFile({reviewPath,generationPath,expectedSha256,
   catch(error){
     if(error.code!=='ENOENT')throw error;
     const current=await readFile(reviewPath);
-    if(sha256(current)!==expectedSha256)throw Error(label+'_HASH_MISMATCH_BEFORE_PRESERVATION');
+    if(canonicalLfSha256(current)!==expectedSha256)throw Error(label+'_HASH_MISMATCH_BEFORE_PRESERVATION');
     generationBytes=current;await writeFile(generationPath,current);
   }
-  if(sha256(generationBytes)!==expectedSha256)throw Error(label+'_PROVENANCE_MISMATCH');
+  if(canonicalLfSha256(generationBytes)!==expectedSha256)throw Error(label+'_PROVENANCE_MISMATCH');
   return generationBytes;
 }
 
@@ -42,7 +42,8 @@ const [bindingPlanBytes,questionInventoryBytes,questionBytes,registryBytes,integ
   readFile(bindingPlanPath),readFile(questionInventoryPath),readFile(path.join(dist,MODULE_PATH)),
   readFile(path.join(dist,REGISTRY_PATH)),readFile(path.join(dist,'.duduq-pages-manifest'))
 ]);
-if(sha256(bindingPlanBytes)!==EXPECTED.bindingPlanSha256||sha256(questionInventoryBytes)!==EXPECTED.questionInventorySha256)
+if(canonicalLfSha256(bindingPlanBytes)!==EXPECTED.bindingPlanSha256||
+   canonicalLfSha256(questionInventoryBytes)!==EXPECTED.questionInventorySha256)
   throw Error('Y2M01_GENERATION_PLANNING_EVIDENCE_MISMATCH');
 if(sha256(questionBytes)!==EXPECTED.cleanV26QuestionSha256||sha256(registryBytes)!==EXPECTED.cleanV26RegistrySha256||
    sha256(integrityBytes)!==EXPECTED.cleanV26ManifestSha256)
@@ -134,7 +135,7 @@ const sourcePin={
   sourceUsageProjectionSha256,sourceMediaIds:sortedSourceIds,occurrenceScopedSplits:splits,
   sourceHashesRewritten:false,productionApproved:false,goldMastersModified:false
 };
-const pinBytes=Buffer.from(JSON.stringify(sourcePin,null,2)+'\n'),pinSha256=sha256(pinBytes);
+const pinBytes=Buffer.from(JSON.stringify(sourcePin,null,2)+'\n'),pinSha256=canonicalLfSha256(pinBytes);
 await writeFile(path.join(bundleDir,'source-registry-pin.json'),pinBytes);
 
 const alphaAssets=[];
@@ -179,7 +180,7 @@ const manifest={...structuredClone(generated),status:'HASH_BOUND_OCCURRENCE_SCOP
   sourceRegistryPinEvidence:'source-registry-pin.json',sourceRegistryPinEvidenceSha256:pinSha256,
   generationManifestEvidence:'generation-batch-manifest.json',generationManifestSha256:EXPECTED.generationManifestSha256,
   generationSemanticEvidence:'generation-semantic-evidence.json',generationSemanticSha256:EXPECTED.generationSemanticSha256,
-  alphaComponentAudit:'alpha-component-audit.json',alphaComponentAuditSha256:sha256(alphaBytes),
+  alphaComponentAudit:'alpha-component-audit.json',alphaComponentAuditSha256:canonicalLfSha256(alphaBytes),
   sourceQuestionContractSha256:EXPECTED.cleanV26QuestionSha256,
   sourceQuestionInvariantSha256:EXPECTED.cleanV26QuestionInvariantSha256,
   assets:reviewAssets,integrated:false,productionApproved:false,approvalFlagsChanged:false};
@@ -208,7 +209,7 @@ const semantic={
   provider:'Codex built-in image_gen',reviewAuthority:'CODEX_DELEGATED_BY_OWNER_REQUEST',
   evidenceBoundary:'Codex technical/visual review for an isolated compiled QA overlay. Human homologation and production approval remain pending.',
   generationSemanticEvidence:'generation-semantic-evidence.json',generationSemanticEvidenceSha256:EXPECTED.generationSemanticSha256,
-  alphaComponentAudit:'alpha-component-audit.json',alphaComponentAuditSha256:sha256(alphaBytes),
+  alphaComponentAudit:'alpha-component-audit.json',alphaComponentAuditSha256:canonicalLfSha256(alphaBytes),
   sourceQuestionContractSha256:EXPECTED.cleanV26QuestionSha256,
   sourceQuestionInvariantSha256:EXPECTED.cleanV26QuestionInvariantSha256,
   sourceRegistrySha256:EXPECTED.cleanV26RegistrySha256,reviewedQuestionCount:EXPECTED.questions,

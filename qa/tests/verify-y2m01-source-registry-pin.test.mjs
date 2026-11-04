@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
-import {sha256} from '../y2m01-official-media-model.mjs';
+import {canonicalLfSha256,sha256} from '../y2m01-official-media-model.mjs';
 import {verifyY2M01SourceRegistryContext} from '../verify-y2m01-source-registry-pin.mjs';
 
 const root=process.cwd(),dist=path.join(root,'dist-pages'),
@@ -16,6 +16,14 @@ function repin(integrityBytes,relative,bytes){
   assert.notEqual(index,-1,'manifest entry '+relative);lines[index]=relative+' '+sha256(bytes);
   return Buffer.from(lines.join('\n')+'\n');
 }
+
+test('canonical evidence hashes accept LF or CRLF bytes but reject changed JSON',()=>{
+  const lf=Buffer.from('{\n  "status": "PASS"\n}\n');
+  const crlf=Buffer.from('{\r\n  "status": "PASS"\r\n}\r\n');
+  const changed=Buffer.from('{\n  "status": "FAIL"\n}\n');
+  assert.equal(canonicalLfSha256(lf),canonicalLfSha256(crlf));
+  assert.notEqual(canonicalLfSha256(lf),canonicalLfSha256(changed));
+});
 
 test('accepts only the exact pristine V26 Y2M01 source context',async()=>{
   const result=await verifyY2M01SourceRegistryContext({root,dist});

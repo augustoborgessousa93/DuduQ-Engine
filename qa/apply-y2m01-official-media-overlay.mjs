@@ -6,7 +6,7 @@ import {pathToFileURL} from 'node:url';
 import {verifyY2M01SourceRegistryContext} from './verify-y2m01-source-registry-pin.mjs';
 import {
   BUNDLE_REL,EXPECTED,MODULE_ID,MODULE_PATH,REGISTRY_PATH,
-  allBindings,collectVisualUsages,locate,parseIntegrity,sha256,structuralDiff,withoutVisualMediaIds
+  allBindings,canonicalLfSha256,collectVisualUsages,locate,parseIntegrity,sha256,structuralDiff,withoutVisualMediaIds
 } from './y2m01-official-media-model.mjs';
 
 const root=process.cwd(),dist=path.join(root,'dist-pages'),bundleDir=path.join(root,BUNDLE_REL),
@@ -30,7 +30,7 @@ if(evidence.schemaVersion!=='DUDUQ_Y2M01_NATIVE_MEDIA_SEMANTIC_EVIDENCE_V2'||
    evidence.renderedReview?.status!=='PASSED_BY_CODEX_DELEGATED_VISUAL_REVIEW'||
    evidence.candidateAssets?.length!==EXPECTED.reviewAssets||evidence.productionReleaseCertified!==false||
    evidence.humanHomologationClaimed!==false)throw Error('Y2M01_SEMANTIC_EVIDENCE_STALE_OR_INCOMPLETE');
-if(manifest.sourceRegistryPinEvidenceSha256!==sha256(pinBytes)||
+if(manifest.sourceRegistryPinEvidenceSha256!==canonicalLfSha256(pinBytes)||
    JSON.stringify(manifest.occurrenceScopedSplits)!==JSON.stringify(pin.occurrenceScopedSplits))
   throw Error('Y2M01_SOURCE_PIN_OR_SPLIT_REFERENCE_MISMATCH');
 const sourceRegistryGate=await verifyY2M01SourceRegistryContext({root,questionBytes:qBytes,registryBytes:regBytes,integrityBytes});

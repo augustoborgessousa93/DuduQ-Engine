@@ -26,6 +26,7 @@ export const EXPECTED={
 };
 
 export const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
+export const canonicalLfSha256=bytes=>sha256(Buffer.from(bytes.toString('utf8').replace(/\r\n/g,'\n')));
 export const normalize=value=>String(value??'').normalize('NFKC').trim().replace(/\s+/g,' ').toLocaleLowerCase('en-US');
 
 export function withoutVisualMediaIds(node){

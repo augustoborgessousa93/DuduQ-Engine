@@ -23,6 +23,10 @@ on:
       - "qa/y1m04-official-media-browser-qa.mjs"
       - "qa/y1m06-official-media-model.mjs"
       - "qa/y1m05-official-media-browser-qa.mjs"
+      - "qa/target-shooter-confirmation-gate.mjs"
+      - "qa/tests/target-shooter-confirmation-gate.test.mjs"
+      - "qa/runtime-png-coverage-gate.mjs"
+      - "qa/tests/runtime-png-coverage-gate.test.mjs"
       - "qa/tests/verify-y1m04-official-media-overlay.mjs"
       - "qa/tests/verify-y1m05-official-media-overlay.mjs"
       - "qa/apply-y1m06-official-media-overlay.mjs"
@@ -194,6 +198,8 @@ jobs:
           node qa/verify-y2m01-source-registry-pin.mjs
           node --test qa/tests/verify-y2m01-source-registry-pin.test.mjs
           node --test qa/tests/png-alpha-component-audit.test.mjs
+          node --test qa/tests/duduq-exact-semantic-match.test.mjs qa/tests/duduq-media-binding-usage-guard.test.mjs
+          node --test qa/tests/target-shooter-confirmation-gate.test.mjs qa/tests/runtime-png-coverage-gate.test.mjs
 
       - name: Start isolated review-only HTTP server
         shell: bash
@@ -215,7 +221,7 @@ jobs:
           node qa/apply-y2m01-official-media-overlay.mjs --apply
           node qa/tests/verify-y2m01-official-media-overlay.mjs
           node qa/verify-y2m01-official-media-build.mjs
-          git diff --exit-code -- content/english functions/play/english core
+          git diff --exit-code -- content/english functions/play/english core runtime/gold-masters
           echo "NO_SOURCE_QUESTION_NO_PRODUCTION_NO_GOLD_MASTER_CHANGE"
 
       - name: Exercise all Y2M01 routes and native mouse and touch gameplay
@@ -432,6 +438,7 @@ jobs:
 
       - name: Reproduce Y1M04 candidate integration and all 20 Chromium question routes
         run: |
+          node --test qa/tests/target-shooter-confirmation-gate.test.mjs
           node qa/apply-y1m04-official-media-overlay.mjs --apply
           node qa/tests/verify-y1m04-official-media-overlay.mjs
           node qa/y1m04-official-media-browser-qa.mjs

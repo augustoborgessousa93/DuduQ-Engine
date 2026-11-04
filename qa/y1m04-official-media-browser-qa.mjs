@@ -3,6 +3,7 @@ import {chromium} from 'playwright';
 import {createHash} from 'node:crypto';
 import {mkdir,readFile,writeFile,stat} from 'node:fs/promises';
 import path from 'node:path';
+import {CONFIRMATION_DECISIONS,confirmationDecision} from './target-shooter-confirmation-gate.mjs';
 
 const root=process.cwd();
 const base=(process.env.BASE_URL||'http://127.0.0.1:4175').replace(/\/+$/,'');
@@ -93,31 +94,32 @@ async function confirmWithPointerRetry(page,answerAlt,expectedState,label,events
   if(alreadyResolved)events?.push({label:label+'-auto-resolved',input:'observed visible feedback without a second click'});
   else {
     const beforeConfirm=await readAction();
-    events?.push({label:label+'-before-confirm',...beforeConfirm,input:'read-only visible DOM observation'});
-    if(beforeConfirm.targetState!==expectedState){
-      if(beforeConfirm.interactionState==='AWAITING_CONTINUE'||
-        (beforeConfirm.actionVisible&&/continuar/i.test(beforeConfirm.actionText)))
-        throw Error('QA_CONFIRM_ACTION_ALREADY_CONTINUE:'+JSON.stringify(beforeConfirm));
-      if(beforeConfirm.actionVisible){
-        if(!/confirmar/i.test(beforeConfirm.actionText))
-          throw Error('QA_CONFIRM_ACTION_UNEXPECTED_LABEL:'+JSON.stringify(beforeConfirm));
-        await pointerClick(page,page.locator('.feedback-action'),label,events);
-      }else events?.push({label:label+'-awaiting-auto-resolution',input:'no click on hidden action'});
-    }
+    const decision=confirmationDecision(beforeConfirm,expectedState);
+    events?.push({label:label+'-before-confirm',...beforeConfirm,decision,input:'read-only visible DOM observation'});
+    if(decision===CONFIRMATION_DECISIONS.rejectContinue)
+      throw Error('QA_CONFIRM_ACTION_ALREADY_CONTINUE:'+JSON.stringify(beforeConfirm));
+    if(decision===CONFIRMATION_DECISIONS.rejectUnexpected)
+      throw Error('QA_CONFIRM_ACTION_UNEXPECTED_LABEL:'+JSON.stringify(beforeConfirm));
+    if(decision===CONFIRMATION_DECISIONS.click)
+      await pointerClick(page,page.locator('.feedback-action'),label,events);
+    if(decision===CONFIRMATION_DECISIONS.wait)
+      events?.push({label:label+'-awaiting-auto-resolution',input:'no click on hidden action'});
   }
   try{await waitOutcome(5000);}
   catch(error){
     const current=await state();
     if(current==='selected'){
       const retryAction=await readAction();
-      if(retryAction.interactionState==='AWAITING_CONTINUE'||
-        (retryAction.actionVisible&&/continuar/i.test(retryAction.actionText)))
+      const decision=confirmationDecision(retryAction,expectedState);
+      events?.push({label:label+'-retry-decision',...retryAction,decision,input:'read-only visible DOM observation'});
+      if(decision===CONFIRMATION_DECISIONS.rejectContinue)
         throw Error('QA_RETRY_ACTION_ALREADY_CONTINUE:'+JSON.stringify(retryAction));
-      if(!retryAction.actionVisible)
+      if(decision===CONFIRMATION_DECISIONS.wait)
         throw Error('QA_NO_VISIBLE_CONFIRM_OR_FEEDBACK:'+JSON.stringify(retryAction));
-      if(!/confirmar/i.test(retryAction.actionText))
+      if(decision===CONFIRMATION_DECISIONS.rejectUnexpected)
         throw Error('QA_RETRY_ACTION_UNEXPECTED_LABEL:'+JSON.stringify(retryAction));
-      await pointerClick(page,page.locator('.feedback-action'),label+'-pointer-retry',events);
+      if(decision===CONFIRMATION_DECISIONS.click)
+        await pointerClick(page,page.locator('.feedback-action'),label+'-pointer-retry',events);
     }else events?.push({label:label+'-processing',observedState:current,input:'no additional click while gameplay resolves'});
     await waitOutcome(15000);
   }
