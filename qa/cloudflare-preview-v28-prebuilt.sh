@@ -59,6 +59,26 @@ for(const id of ['Y1M01-Q001','Y1M03-Q001','Y1M06-Q003']){
    reason:held.get(x.mediaId)?.reason||null
   }))}));
 }
+const allColorRefs=[];
+for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
+ const mm=String(m).padStart(2,'0'),moduleId='Y'+y+'M'+mm;
+ const doc=JSON.parse(readFileSync(releaseRoot+'/content/english/year-'+y+'/module-'+mm+'/questions.json','utf8'));
+ for(const item of doc.items){
+  const visit=(node,path)=>{
+   if(!node||typeof node!=='object')return;
+   if(Array.isArray(node)){node.forEach((x,i)=>visit(x,path+'['+i+']'));return}
+   for(const [k,v] of Object.entries(node)){
+    if(['assetId','mediaId'].includes(k)&&['IMG-Y1M03-Q001-BLACK','IMG-Y1M03-Q001-WHITE','IMG-Y1M03-Q001-RED'].includes(v)){
+     allColorRefs.push({questionId:item.item_id,location:path+'.'+k,mediaId:v,semanticTarget:node.semanticTarget||null,
+       label:node.label||node.text||null,concept:node.concept||null,media:registry.get(v)?.urlOrPath||null});
+    }
+    if(v&&typeof v==='object')visit(v,path+'.'+k);
+   }
+  };
+  visit(item,'question');
+ }
+}
+console.log('DUDUQ_SHARED_COLOR_GRAPH='+JSON.stringify(allColorRefs));
 DUDUQ_SCENE_DIAGNOSTIC
 DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs --apply
 node --input-type=module <<'NODE'
