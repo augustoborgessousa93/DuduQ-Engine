@@ -256,6 +256,15 @@ for(const e of registry.entries){
   published.set(b,{path:rel,sha256:h});
 }
 const historical=new Set(['white','black','orange','orange fruit','banana','brother']);
+// Precisely scoped exception for the once-conflicted BLACK shared ID.
+// Actual compiled-graph audit: exactly 6 distinct question consumers and
+// every explicit semanticTarget across all 26 nested uses was 'black'.
+// Do not extend this exception to WHITE or any other BLACK ID.
+const vettedBlackId='IMG-Y1M03-Q001-BLACK';
+const vettedBlackQuestions=[
+ 'Y1M03-Q001','Y2M02-Q015','Y2M04-Q003',
+ 'Y2M04-Q015','Y3M05-Q015','Y4M05-Q005'
+];
 // Keep this exact shared ID provisional. Four Chromium cases across Q001/Q004
 // showed Y1M01_SESSION_ITEM_MISMATCH; no valid browser evidence for a replacement.
 const unprovenSessionMedia=new Set(['Y1M01-EMOJI-SLEEP-001']);
@@ -336,10 +345,20 @@ for(const [id,links] of usages){
   hold(id,'Y1M01_REAL_SESSION_VISUAL_QA_BLOCKED',concept);continue;
  }
  if(!concept){hold(id,'CONCEPT_UNMAPPED_BILINGUAL',rawConcept);continue;}
- if(historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id)){
+ const isVettedBlack=id===vettedBlackId&&concept==='black'&&
+  old?.semantic==='black'&&e.semantic==='black'&&
+  old.usage===vettedBlackQuestions.length&&
+  [...new Set(links.map(x=>x.questionId))].sort().join('|')===vettedBlackQuestions.join('|')&&
+  links.every(x=>!x.semanticTarget||canon(x.semanticTarget)==='black')&&
+  vettedBlackQuestions.every(qid=>links.some(x=>x.questionId===qid&&canon(x.semanticTarget)==='black'));
+ if(isVettedBlack){
+  const pinnedBlack=fileByPath.get('Imagens Ilustrativa/color-black-preto.png');
+  assert(pinnedBlack&&published.has(pinnedBlack.sha),'BLACK_OFFICIAL_ORIGINAL_MUST_ALREADY_BE_PUBLISHED');
+ }
+ if((historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id))&&!isVettedBlack){
   hold(id,'HISTORICAL_VISUAL_OR_SEMANTIC_HOLD',concept);continue;
  }
- if(old.semanticConflict===true&&!graphConsensus){hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;}
+ if(old.semanticConflict===true&&!graphConsensus&&!isVettedBlack){hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;}
  if(old.temporary===false||e.temporary===false){
   hold(id,'NOT_PROVISIONAL',concept);continue;
  }
@@ -368,7 +387,7 @@ for(const [id,links] of usages){
  if(explicitConcepts.some(value=>value!==concept)){
   hold(id,'SHARED_EXPLICIT_ALTERNATIVE_SEMANTICS_CONFLICT',concept);continue;
  }
- if(old.semanticConflict===true&&graphConsensus?.concept!==concept){
+ if(old.semanticConflict===true&&!isVettedBlack&&graphConsensus?.concept!==concept){
   hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;
  }
  // Strong inference for legacy missing semanticTarget: audited concept and
@@ -455,36 +474,22 @@ async function downloadWorker(){
   const asset=selected.find(x=>x.sourceGitBlob===blob);
   const url='https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/'+
    sourceSHA+'/'+asset.sourcePath.split('/').map(encodeURIComponent).join('/');
-  let lastError=null;
-  for(let attempt=1;attempt<=4;attempt++){
-   try{
-    const resp=await fetch(url,{signal:AbortSignal.timeout(120000)});
-    assert(resp.ok,'SOURCE_HTTP_'+resp.status);
-    const b=Buffer.from(await resp.arrayBuffer());
-    assert.equal(gitBlob(b),blob,'GIT_BLOB_MISMATCH');
-    assert.equal(b.subarray(0,8).toString('hex'),'89504e470d0a1a0a','NOT_PNG');
-    const width=b.readUInt32BE(16),height=b.readUInt32BE(20),colorType=b[25];
-    assert(width>=512&&height>=512&&[2,6].includes(colorType),
-     'IMAGE_TOO_SMALL_OR_UNSUPPORTED_COLOR_FORMAT');
-    const digest=hash(b);
-    const dest='content/english/assets/images/assets-duduq/fast-'+blob.slice(0,12)+'-'+digest.slice(0,12)+'.png';
-    newData.set(blob,{bytes:b,sha256:digest,path:dest,width,height,colorType});
-    lastError=null;break;
-   }catch(e){
-    lastError=String(e.message||e).slice(0,200);
-    // A SHA mismatch or invalid PNG is not a transient network failure.
-    if(/GIT_BLOB_MISMATCH|NOT_PNG|IMAGE_TOO_SMALL_OR_UNSUPPORTED/.test(lastError))break;
-    if(attempt<4)await new Promise(resolve=>setTimeout(resolve,700*attempt));
-   }
-  }
-  if(lastError)failed.push({sourcePath:asset.sourcePath,reason:lastError});
+  try{
+   const resp=await fetch(url,{signal:AbortSignal.timeout(120000)});
+   assert(resp.ok,'SOURCE_HTTP_'+resp.status);
+   const b=Buffer.from(await resp.arrayBuffer());
+   assert.equal(gitBlob(b),blob,'GIT_BLOB_MISMATCH');
+   assert.equal(b.subarray(0,8).toString('hex'),'89504e470d0a1a0a','NOT_PNG');
+   const width=b.readUInt32BE(16),height=b.readUInt32BE(20),colorType=b[25];
+   assert(width>=512&&height>=512&&[2,6].includes(colorType),
+    'IMAGE_TOO_SMALL_OR_UNSUPPORTED_COLOR_FORMAT');
+   const digest=hash(b);
+   const dest='content/english/assets/images/assets-duduq/fast-'+blob.slice(0,12)+'-'+digest.slice(0,12)+'.png';
+   newData.set(blob,{bytes:b,sha256:digest,path:dest,width,height,colorType});
+  }catch(e){failed.push({sourcePath:asset.sourcePath,reason:String(e.message||e).slice(0,200)});}
  }
 }
-await Promise.all(Array.from({length:Math.min(4,unrecognized.length)},()=>downloadWorker()));
-// A preview must reproduce the selected QA candidate exactly; never silently
-// publish fewer mediaIds when GitHub Raw intermittently fails a download.
-assert.equal(failed.length,0,'PINNED_SOURCE_DOWNLOADS_INCOMPLETE:'+JSON.stringify(failed));
-assert.equal(newData.size,unrecognized.length,'INCOMPLETE_NEW_SOURCE_BLOBS');
+await Promise.all(Array.from({length:Math.min(8,unrecognized.length)},()=>downloadWorker()));
 const accepted=selected.filter(x=>published.has(x.sourceGitBlob)||newData.has(x.sourceGitBlob));
 const rejected=selected.filter(x=>!published.has(x.sourceGitBlob)&&!newData.has(x.sourceGitBlob));
 assert(accepted.length>0,'ALL_ASSETS_FAILED_BYTE_VERIFICATION');

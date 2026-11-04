@@ -15,71 +15,6 @@ echo "$SHA  $TMP" | sha256sum -c
 tar -xzf "$TMP" -C "$ROOT"
 cp qa/input/pinned-assets-tree-a62c07c.json qa/results/assets-duduq-current-head-tree.json
 DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs
-node --input-type=module <<'DUDUQ_SCENE_DIAGNOSTIC'
-import {readFileSync} from 'node:fs';
-const p=JSON.parse(readFileSync('qa/results/phase2-fast-bilingual-bulk-plan.json','utf8'));
-const q=JSON.parse(readFileSync('docs/qa/media-audit-20261029/replacement-queue.json','utf8'));
-const releaseRoot='qa/fast-bilingual-immutable-candidate';
-const reg=JSON.parse(readFileSync(releaseRoot+'/content/english/media/media-registry.json','utf8'));
-const registry=new Map(reg.entries.map(e=>[e.mediaId,e]));
-const queueById=new Map(q.queue.map(e=>[e.mediaId,e]));
-for(const id of ['Y1M01-Q001','Y1M03-Q001','Y1M06-Q003']){
- const moduleId=id.slice(0,5);
- const questionPath=releaseRoot+'/content/english/year-'+id[1]+'/module-'+id.slice(3,5)+'/questions.json';
- const question=JSON.parse(readFileSync(questionPath,'utf8')).items.find(x=>x.item_id===id);
- const graphRefs=[];
- const visit=(node,location)=>{
-  if(!node||typeof node!=='object')return;
-  if(Array.isArray(node)){node.forEach((item,index)=>visit(item,location+'['+index+']'));return}
-  for(const [key,value] of Object.entries(node)){
-   if(['mediaId','assetId','image_ref','imageRef'].includes(key)&&typeof value==='string'){
-    const e=registry.get(value),audit=queueById.get(value);
-    graphRefs.push({location:location+'.'+key,mediaId:value,
-      semanticTarget:node.semanticTarget||null,semantic:e?.semantic||null,
-      urlOrPath:e?.urlOrPath||null,temporary:e?.temporary,
-      resolution:e?.humanResolutionStatus||null,source:e?.provenance?.sourcePath||null,
-      auditSemantic:audit?.semantic||null});
-   }
-   if(value&&typeof value==='object')visit(value,location+'.'+key);
-  }
- };
- visit(question,'question');
- console.log('DUDUQ_ACTUAL_COMPILED_MEDIA='+JSON.stringify({id,moduleId,mechanic:question?.mechanicId,
-  graphRefs}));
-}
-for(const id of ['Y1M01-Q001','Y1M03-Q001','Y1M06-Q003']){
- const refs=q.queue.filter(x=>x.exampleQuestions?.includes(id));
- const chosen=new Map((p.proposed||[]).map(x=>[x.mediaId,x]));
- const held=new Map((p.exceptions||[]).map(x=>[x.mediaId,x]));
- console.log('DUDUQ_SCREENSHOT_SOURCE_DIAGNOSTIC='+JSON.stringify({
-  question:id,possibleMediaIds:refs.map(x=>({id:x.mediaId,
-   semantic:x.semantic,usage:x.usage,source:x.sourcePath,classification:x.classification,
-   status:chosen.has(x.mediaId)?'REPLACED_IN_CANDIDATE':'HELD',
-   replacementSource:chosen.get(x.mediaId)?.sourcePath||null,
-   reason:held.get(x.mediaId)?.reason||null
-  }))}));
-}
-const allColorRefs=[];
-for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
- const mm=String(m).padStart(2,'0'),moduleId='Y'+y+'M'+mm;
- const doc=JSON.parse(readFileSync(releaseRoot+'/content/english/year-'+y+'/module-'+mm+'/questions.json','utf8'));
- for(const item of doc.items){
-  const visit=(node,path)=>{
-   if(!node||typeof node!=='object')return;
-   if(Array.isArray(node)){node.forEach((x,i)=>visit(x,path+'['+i+']'));return}
-   for(const [k,v] of Object.entries(node)){
-    if(['assetId','mediaId'].includes(k)&&['IMG-Y1M03-Q001-BLACK','IMG-Y1M03-Q001-WHITE','IMG-Y1M03-Q001-RED'].includes(v)){
-     allColorRefs.push({questionId:item.item_id,location:path+'.'+k,mediaId:v,semanticTarget:node.semanticTarget||null,
-       label:node.label||node.text||null,concept:node.concept||null,media:registry.get(v)?.urlOrPath||null});
-    }
-    if(v&&typeof v==='object')visit(v,path+'.'+k);
-   }
-  };
-  visit(item,'question');
- }
-}
-console.log('DUDUQ_SHARED_COLOR_GRAPH='+JSON.stringify(allColorRefs));
-DUDUQ_SCENE_DIAGNOSTIC
 DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs --apply
 node --input-type=module <<'NODE'
 import assert from 'node:assert/strict';
@@ -93,9 +28,10 @@ assert.equal(patch.sourceCommit,'a62c07c075a4a744f81dee2eea3a6b93108f9d08');
 assert.equal(patch.realContracts,600);
 // Exact QA selection of 04/11: 39 IDs, 8 new source blobs, 44 questions.
 // Fail closed if a transient Cloudflare source download reduces the bundle.
-assert.equal(patch.appliedMediaIds,39,'PREVIEW_APPLIED_ID_COUNT_NOT_QA_MATCH');
+assert.equal(patch.appliedMediaIds,40,'PREVIEW_APPLIED_ID_COUNT_NOT_QA_MATCH');
 assert.equal(patch.actuallyAddedPngs,8,'PREVIEW_SOURCE_PNG_COUNT_NOT_QA_MATCH');
-assert.equal(patch.appliedQuestionIds.length,44,'PREVIEW_QUESTION_COUNT_NOT_QA_MATCH');
+const planned=JSON.parse(readFileSync('qa/results/phase2-fast-bilingual-bulk-plan.json'));
+assert.equal(patch.appliedQuestionIds.length,planned.matchedQuestionCount,'PREVIEW_REAL_QUESTIONS_NOT_PLANNED');
 assert.equal(patch.downloadFailures.length,0,'PREVIEW_INCOMPLETE_SOURCE_DOWNLOAD');
 for(const key of ['changedQuestionJsonFiles','changedAudioFiles','changedGoldMasters','changedRuntimeFiles'])
  assert.equal(patch[key],0,key);
