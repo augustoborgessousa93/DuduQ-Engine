@@ -89,8 +89,13 @@ try{
      httpErrors.push({url:r.url(),status:r.status()})}catch{}
    });
    const slug=item.mechanic.startsWith('smart-sentence')?'smart-sentence':item.mechanic;
-   const url=base+'/play/'+slug+'/?duduqModule='+item.questionId.slice(0,5)+
-    '&duduqItem='+item.questionId+'&qaSeed=fast-bulk-real-browser';
+   // The official Y1M01 entrypoint explicitly carries duduqStart=Y1M01.
+   // Match the live navigation contract instead of triggering the session
+   // identity guard with an incomplete deep link (observed on Q001 and Q004).
+   const moduleId=item.questionId.slice(0,5);
+   const startParam=moduleId==='Y1M01'?'&duduqStart=Y1M01':'';
+   const url=base+'/play/'+slug+'/?duduqModule='+moduleId+
+    '&duduqItem='+item.questionId+startParam+'&qaSeed=fast-bulk-real-browser';
    const record={...item,viewport:view.name,url,httpStatus:null,loaded:false,visible:false,
     observedFrames:0,errors:error,httpErrors,limitations:[]};
    cases.push(record);
