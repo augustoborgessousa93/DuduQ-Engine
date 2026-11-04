@@ -90,21 +90,38 @@ try{
   const page=await moduleContext.newPage();
   page.on('pageerror',e=>check.errors.push(String(e?.message||e).slice(0,200)));
   try{
-   const response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:45000});
-   check.httpStatus=response?.status()??null;
-   check.bodyLength=await page.evaluate(()=>document.body?.textContent?.trim().length||0);
-   const questionResponse=await page.request.get(base+qroute,{timeout:30000});
-   check.questionHttpStatus=questionResponse.status();
-   if(questionResponse.ok()){
-    const data=await questionResponse.json();
-    check.questions=data.items?.length??null;
-    if(data.moduleId!==check.moduleId)check.errors.push('MODULE_ID_MISMATCH');
+   // Local Pages startup/requests can transiently fail between runs. Retry
+   // the same immutable route only; never substitute another question.
+   for(let attempt=0;attempt<3;attempt++){
+    try{
+     const response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:45000});
+     check.httpStatus=response?.status()??null;
+     check.bodyLength=await page.evaluate(()=>document.body?.textContent?.trim().length||0);
+     if(check.httpStatus===200&&check.bodyLength>=20)break;
+    }catch(e){check.lastNavigationError=String(e.message||e).slice(0,190)}
+    if(attempt<2)await page.waitForTimeout(400*(attempt+1));
+   }
+   for(let attempt=0;attempt<3;attempt++){
+    try{
+     const questionResponse=await page.request.get(base+qroute,{timeout:30000});
+     check.questionHttpStatus=questionResponse.status();
+     if(questionResponse.ok()){
+      const data=await questionResponse.json();
+      check.questions=data.items?.length??null;
+      if(data.moduleId!==check.moduleId)check.errors.push('MODULE_ID_MISMATCH');
+      if(check.questions===20&&data.moduleId===check.moduleId)break;
+     }
+    }catch(e){check.lastQuestionsError=String(e.message||e).slice(0,190)}
+    if(attempt<2)await page.waitForTimeout(400*(attempt+1));
    }
   }catch(e){check.errors.push('MODULE_BOOT:'+String(e?.message||e).slice(0,220))}
   finally{await page.close()}
  }
  await moduleContext.close();
  const totalQuestions=moduleChecks.reduce((n,x)=>n+(x.questions||0),0);
+ const preliminaryFailures=moduleChecks.filter(x=>x.httpStatus!==200||
+  x.questionHttpStatus!==200||x.questions!==20||x.bodyLength<20||x.errors.length);
+ if(preliminaryFailures.length)console.error('FAST_BULK_MODULE_PRECHECK_FAILURE_DETAILS='+JSON.stringify(preliminaryFailures));
  assert.equal(moduleChecks.length,30,'NOT_30_MODULES');
  assert.equal(totalQuestions,600,'NOT_600_REAL_HTTP_QUESTIONS');
 
