@@ -295,6 +295,16 @@ const auditedSceneSources=new Map([
 ]);
 function vettedScene(id,links,old,e){
  const rule=auditedSceneSources.get(id);if(!rule)return null;
+ console.log('DUDUQ_SCENE_GUARD_DIAGNOSTIC='+JSON.stringify({id,
+  expectedQuestions:rule.questions,
+  realQuestions:[...new Set(links.map(x=>x.questionId))].sort(),
+  queueUsage:old?.usage,temporary:e?.temporary,queueTemporary:old?.temporary,
+  classification:old?.classification,registrySemantic:e?.semantic,queueSemantic:old?.semantic,
+  oldLabels:old?.labels,expectedLabels:rule.labels,
+  oldMustInclude:old?.mustInclude,expectedMustInclude:rule.mustInclude,
+  oldMustNotInclude:old?.mustNotInclude,expectedMustNotInclude:rule.mustNotInclude,
+  semanticTargets:[...new Set(links.map(x=>x.semanticTarget).filter(Boolean))],
+  allLabels:[...new Set(links.flatMap(x=>x.contextLabels||[]).filter(Boolean))]}));
  const got=[...new Set(links.map(x=>x.questionId))].sort();
  if(got.join('|')!==rule.questions.join('|')||old?.usage!==rule.questions.length||
     e?.temporary!==true||old?.temporary===false||old?.classification!=='PROVISIONAL'||
