@@ -1,0 +1,2045 @@
+{
+  "schemaVersion": "DUDUQ_MEDIA_BINDING_PLAN_V1",
+  "createdAt": "2026-11-04T17:47:01.640Z",
+  "moduleId": "Y3M03",
+  "mode": "CANDIDATE_ONLY_NOT_APPLIED",
+  "questionSource": "dist-pages/content/english/year-3/module-03/questions.json",
+  "questionSourceSha256": "66af094d150b6731774a567ae15581bd663dfa2842f247d4899644f1404a21ea",
+  "pendingMediaIdCount": 29,
+  "candidateConceptCount": 16,
+  "totalVisualUsageRecords": 74,
+  "distinctOccurrenceScopedBindings": 66,
+  "coverage": {
+    "pendingMediaIds": 29,
+    "candidateBoundMediaIds": 29,
+    "uncoveredMediaIds": [],
+    "occurrenceScopedCandidateIds": 66,
+    "exactSemanticConcepts": 16
+  },
+  "bindings": [
+    {
+      "mediaId": "IMG-V11-2B-08FFAC2848B99BD1",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y3M03",
+        "Y5M01"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-08ffac2848b99bd1.svg",
+        "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-MIA.png",
+      "candidateSha256": "453e497d9f61292b94dbf25945c46580e98cad6836e7923a87f365747be999c4",
+      "semanticTarget": "mia",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q010",
+          "mediaId": "IMG-V11-2B-08FFAC2848B99BD1",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "Mia",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q010-T3"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-08FFAC2848B99BD1",
+          "questionId": "Y3M03-Q010",
+          "semanticTarget": "mia",
+          "plannedMediaId": "IMG-Y3M03-Q010-CTX-D8BA0EDB874D",
+          "contractPaths": [
+            "targets[2]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-0e55ae94bcf4cc3e.svg",
+        "sha256": "f8eddb8c910ea496cc2e2b431e855e37d67447d4da763ac91f8f00c7130bc7d3",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-BROTHER.png",
+      "candidateSha256": "f0edf17ac932976cd1244cdd9f05e88e69fa84edb47f54b00586e461f0b4f293",
+      "semanticTarget": "brother",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D4"
+        },
+        {
+          "questionId": "Y3M03-Q003",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "brother",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q003-O1"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D5"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "questionId": "Y3M03-Q001",
+          "semanticTarget": "brother",
+          "plannedMediaId": "IMG-Y3M03-Q001-CTX-9A97A48A261F",
+          "contractPaths": [
+            "bubbleDistractorPool[3]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "questionId": "Y3M03-Q003",
+          "semanticTarget": "brother",
+          "plannedMediaId": "IMG-Y3M03-Q003-CTX-3D9EFC353262",
+          "contractPaths": [
+            "options[0]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "questionId": "Y3M03-Q006",
+          "semanticTarget": "brother",
+          "plannedMediaId": "IMG-Y3M03-Q006-CTX-04CBAE4929F7",
+          "contractPaths": [
+            "bubbleDistractorPool[4]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-243b96c39d99caf8.svg",
+        "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-MOTHER.png",
+      "candidateSha256": "98dd64f1bbad289e1c8452b3050e0cfab61a866639199d2aed102c39db53c288",
+      "semanticTarget": "mother",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D5"
+        },
+        {
+          "questionId": "Y3M03-Q003",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "mother",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q003-O2"
+        },
+        {
+          "questionId": "Y3M03-Q008",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M03-Q014",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractPath": "targets[2]",
+          "role": "option",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q014-T3"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "questionId": "Y3M03-Q001",
+          "semanticTarget": "mother",
+          "plannedMediaId": "IMG-Y3M03-Q001-CTX-E0B46175A8B1",
+          "contractPaths": [
+            "bubbleDistractorPool[4]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "questionId": "Y3M03-Q003",
+          "semanticTarget": "mother",
+          "plannedMediaId": "IMG-Y3M03-Q003-CTX-CC72675B2302",
+          "contractPaths": [
+            "options[1]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "questionId": "Y3M03-Q008",
+          "semanticTarget": "mother",
+          "plannedMediaId": "IMG-Y3M03-Q008-CTX-360B2BA07DF1",
+          "contractPaths": [
+            "mediaBindings[0]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "questionId": "Y3M03-Q014",
+          "semanticTarget": "mother",
+          "plannedMediaId": "IMG-Y3M03-Q014-CTX-5CBE16854745",
+          "contractPaths": [
+            "targets[2]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-2680df6be58f4b7e.svg",
+        "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-SISTER.png",
+      "candidateSha256": "47202566b4bc3953cd795f9e3a73747191d8990bf6f6bf1f50794e2dfe443bf9",
+      "semanticTarget": "sister",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "sister",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R5"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "sister",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R5"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+          "questionId": "Y3M03-Q012",
+          "semanticTarget": "sister",
+          "plannedMediaId": "IMG-Y3M03-Q012-CTX-BFA84B1EB650",
+          "contractPaths": [
+            "pairs[4].b"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+          "questionId": "Y3M03-Q015",
+          "semanticTarget": "sister",
+          "plannedMediaId": "IMG-Y3M03-Q015-CTX-E79C6822855B",
+          "contractPaths": [
+            "pairs[4].b"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y3M03",
+        "Y5M03",
+        "Y5M06"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-2ecdf43bca9f3c65.svg",
+        "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-SHE.png",
+      "candidateSha256": "01ecf4f95a490bb55af540eaba46de8137b46a2ff852bab5c4e47fd1afa6e4c8",
+      "semanticTarget": "she",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q001-O2"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D1"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q006-O1"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q006-O1"
+        },
+        {
+          "questionId": "Y3M03-Q011",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q011-O2"
+        },
+        {
+          "questionId": "Y3M03-Q016",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q016-O1"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "questionId": "Y3M03-Q001",
+          "semanticTarget": "she",
+          "plannedMediaId": "IMG-Y3M03-Q001-CTX-C16872C9102E",
+          "contractPaths": [
+            "bubbleDistractorPool[0]",
+            "options[1]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "questionId": "Y3M03-Q006",
+          "semanticTarget": "she",
+          "plannedMediaId": "IMG-Y3M03-Q006-CTX-7140158BF913",
+          "contractPaths": [
+            "options[0]",
+            "targetsToFind[0]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "questionId": "Y3M03-Q011",
+          "semanticTarget": "she",
+          "plannedMediaId": "IMG-Y3M03-Q011-CTX-F7095EDE993E",
+          "contractPaths": [
+            "options[1]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "questionId": "Y3M03-Q016",
+          "semanticTarget": "she",
+          "plannedMediaId": "IMG-Y3M03-Q016-CTX-3840E9E58147",
+          "contractPaths": [
+            "options[0]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-3527CF12E6C57BF5",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y3M03",
+        "Y5M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-3527cf12e6c57bf5.svg",
+        "sha256": "bf100ea884b3b1e72604730b39f6cab31a57a9018c2fba3a205b0fc3233866f5",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-THEY.png",
+      "candidateSha256": "de07aac01359257a36cbcaca9ac1214507b42670eb79e5d67ad9cfc874b2de7a",
+      "semanticTarget": "they",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q009",
+          "mediaId": "IMG-V11-2B-3527CF12E6C57BF5",
+          "contractPath": "pairs[2].b",
+          "role": "option",
+          "semanticTarget": "they",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q009-R3"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-3527CF12E6C57BF5",
+          "questionId": "Y3M03-Q009",
+          "semanticTarget": "they",
+          "plannedMediaId": "IMG-Y3M03-Q009-CTX-EE008C89AABD",
+          "contractPaths": [
+            "pairs[2].b"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-363CA1C39A2A0FE6",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y3M03",
+        "Y5M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-363ca1c39a2a0fe6.svg",
+        "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-SHE.png",
+      "candidateSha256": "01ecf4f95a490bb55af540eaba46de8137b46a2ff852bab5c4e47fd1afa6e4c8",
+      "semanticTarget": "she",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q014",
+          "mediaId": "IMG-V11-2B-363CA1C39A2A0FE6",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "she",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q014-T1"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-363CA1C39A2A0FE6",
+          "questionId": "Y3M03-Q014",
+          "semanticTarget": "she",
+          "plannedMediaId": "IMG-Y3M03-Q014-CTX-2D2853E641EB",
+          "contractPaths": [
+            "targets[0]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-40A6ADFB20D21B5C",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-40a6adfb20d21b5c.svg",
+        "sha256": "e07f6183b5c92ad38d96d4c68455a92b1b6048964de9a4f04cfc774de3ace759",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-GRANDFATHER.png",
+      "candidateSha256": "2a70dece6f55080a8e407f69ee9850316b7919fff438a608645f34975fd90058",
+      "semanticTarget": "grandfather",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q018",
+          "mediaId": "IMG-V11-2B-40A6ADFB20D21B5C",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "grandfather",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-40A6ADFB20D21B5C",
+          "questionId": "Y3M03-Q018",
+          "semanticTarget": "grandfather",
+          "plannedMediaId": "IMG-Y3M03-Q018-CTX-4B657358DD61",
+          "contractPaths": [
+            "mediaBindings[0]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-496D1E3286303401",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-496d1e3286303401.svg",
+        "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-SISTER.png",
+      "candidateSha256": "47202566b4bc3953cd795f9e3a73747191d8990bf6f6bf1f50794e2dfe443bf9",
+      "semanticTarget": "sister",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q004",
+          "mediaId": "IMG-V11-2B-496D1E3286303401",
+          "contractPath": "pairs[0].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "sister",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-496D1E3286303401",
+          "questionId": "Y3M03-Q004",
+          "semanticTarget": "sister",
+          "plannedMediaId": "IMG-Y3M03-Q004-CTX-66EA2E4D6227",
+          "contractPaths": [
+            "pairs[0].cards[1]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-53C70478BC6A8DA7",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y3M03",
+        "Y5M06"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-53c70478bc6a8da7.svg",
+        "sha256": "f8eddb8c910ea496cc2e2b431e855e37d67447d4da763ac91f8f00c7130bc7d3",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-HE.png",
+      "candidateSha256": "1c89ac5b8a741e1cf1c38bb4ca98c852fbda69460180360a696e0affb06598ef",
+      "semanticTarget": "he",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-V11-2B-53C70478BC6A8DA7",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "he",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R3"
+        },
+        {
+          "questionId": "Y3M03-Q009",
+          "mediaId": "IMG-V11-2B-53C70478BC6A8DA7",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "he",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q009-R1"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-53C70478BC6A8DA7",
+          "questionId": "Y3M03-Q005",
+          "semanticTarget": "he",
+          "plannedMediaId": "IMG-Y3M03-Q005-CTX-C9A33668D7D9",
+          "contractPaths": [
+            "pairs[2].b"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-53C70478BC6A8DA7",
+          "questionId": "Y3M03-Q009",
+          "semanticTarget": "he",
+          "plannedMediaId": "IMG-Y3M03-Q009-CTX-5F724A7BDECB",
+          "contractPaths": [
+            "pairs[0].b"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-6acc979a1c714f7f.svg",
+        "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-SISTER.png",
+      "candidateSha256": "47202566b4bc3953cd795f9e3a73747191d8990bf6f6bf1f50794e2dfe443bf9",
+      "semanticTarget": "sister",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q003",
+          "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "sister",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q003-O4"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+          "questionId": "Y3M03-Q003",
+          "semanticTarget": "sister",
+          "plannedMediaId": "IMG-Y3M03-Q003-CTX-49A5CF7CE716",
+          "contractPaths": [
+            "options[3]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-72DD748C89819898",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-72dd748c89819898.svg",
+        "sha256": "f8eddb8c910ea496cc2e2b431e855e37d67447d4da763ac91f8f00c7130bc7d3",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-BROTHER.png",
+      "candidateSha256": "f0edf17ac932976cd1244cdd9f05e88e69fa84edb47f54b00586e461f0b4f293",
+      "semanticTarget": "brother",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q004",
+          "mediaId": "IMG-V11-2B-72DD748C89819898",
+          "contractPath": "pairs[3].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-72DD748C89819898",
+          "questionId": "Y3M03-Q004",
+          "semanticTarget": "brother",
+          "plannedMediaId": "IMG-Y3M03-Q004-CTX-4A436237B6FC",
+          "contractPaths": [
+            "pairs[3].cards[1]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y3M03",
+        "Y5M03",
+        "Y5M06"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-8c61f006f08947db.svg",
+        "sha256": "f8eddb8c910ea496cc2e2b431e855e37d67447d4da763ac91f8f00c7130bc7d3",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-HE.png",
+      "candidateSha256": "1c89ac5b8a741e1cf1c38bb4ca98c852fbda69460180360a696e0affb06598ef",
+      "semanticTarget": "he",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "he",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q001-O1"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "he",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q001-O1"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "he",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D4"
+        },
+        {
+          "questionId": "Y3M03-Q011",
+          "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "he",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q011-O1"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "questionId": "Y3M03-Q001",
+          "semanticTarget": "he",
+          "plannedMediaId": "IMG-Y3M03-Q001-CTX-F47C3B5EF288",
+          "contractPaths": [
+            "options[0]",
+            "targetsToFind[0]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "questionId": "Y3M03-Q006",
+          "semanticTarget": "he",
+          "plannedMediaId": "IMG-Y3M03-Q006-CTX-F2C4124BECF2",
+          "contractPaths": [
+            "bubbleDistractorPool[3]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "questionId": "Y3M03-Q011",
+          "semanticTarget": "he",
+          "plannedMediaId": "IMG-Y3M03-Q011-CTX-BF2803BD6574",
+          "contractPaths": [
+            "options[0]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-9C574AA05B2196A8",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y3M03",
+        "Y5M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-9c574aa05b2196a8.svg",
+        "sha256": "f8eddb8c910ea496cc2e2b431e855e37d67447d4da763ac91f8f00c7130bc7d3",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-HE.png",
+      "candidateSha256": "1c89ac5b8a741e1cf1c38bb4ca98c852fbda69460180360a696e0affb06598ef",
+      "semanticTarget": "he",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q014",
+          "mediaId": "IMG-V11-2B-9C574AA05B2196A8",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "he",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q014-T2"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-9C574AA05B2196A8",
+          "questionId": "Y3M03-Q014",
+          "semanticTarget": "he",
+          "plannedMediaId": "IMG-Y3M03-Q014-CTX-AC64FEC69CD6",
+          "contractPaths": [
+            "targets[1]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-9fffccd19b67697a.svg",
+        "sha256": "e07f6183b5c92ad38d96d4c68455a92b1b6048964de9a4f04cfc774de3ace759",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-GRANDFATHER.png",
+      "candidateSha256": "2a70dece6f55080a8e407f69ee9850316b7919fff438a608645f34975fd90058",
+      "semanticTarget": "grandfather",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandfather",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R2"
+        },
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandfather",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R1"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+          "questionId": "Y3M03-Q005",
+          "semanticTarget": "grandfather",
+          "plannedMediaId": "IMG-Y3M03-Q005-CTX-12A932212588",
+          "contractPaths": [
+            "pairs[1].b"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+          "questionId": "Y3M03-Q012",
+          "semanticTarget": "grandfather",
+          "plannedMediaId": "IMG-Y3M03-Q012-CTX-800B3042AA19",
+          "contractPaths": [
+            "pairs[0].b"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-B55FEA574FE04262",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y3M03",
+        "Y5M06"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-b55fea574fe04262.svg",
+        "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-SHE.png",
+      "candidateSha256": "01ecf4f95a490bb55af540eaba46de8137b46a2ff852bab5c4e47fd1afa6e4c8",
+      "semanticTarget": "she",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-V11-2B-B55FEA574FE04262",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "she",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R4"
+        },
+        {
+          "questionId": "Y3M03-Q009",
+          "mediaId": "IMG-V11-2B-B55FEA574FE04262",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "she",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q009-R2"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-B55FEA574FE04262",
+          "questionId": "Y3M03-Q005",
+          "semanticTarget": "she",
+          "plannedMediaId": "IMG-Y3M03-Q005-CTX-B7073DB56928",
+          "contractPaths": [
+            "pairs[3].b"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-B55FEA574FE04262",
+          "questionId": "Y3M03-Q009",
+          "semanticTarget": "she",
+          "plannedMediaId": "IMG-Y3M03-Q009-CTX-528D6F3CC1D3",
+          "contractPaths": [
+            "pairs[1].b"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-D0E7A61F4C82CFF8",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y3M03",
+        "Y5M01"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-d0e7a61f4c82cff8.svg",
+        "sha256": "f8eddb8c910ea496cc2e2b431e855e37d67447d4da763ac91f8f00c7130bc7d3",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-LEO.png",
+      "candidateSha256": "703ef0a0674cb315697e0c0fdb26e4715f8334893019f62d774c5dd01f0b39d4",
+      "semanticTarget": "leo",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q010",
+          "mediaId": "IMG-V11-2B-D0E7A61F4C82CFF8",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "Leo",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q010-T4"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-D0E7A61F4C82CFF8",
+          "questionId": "Y3M03-Q010",
+          "semanticTarget": "leo",
+          "plannedMediaId": "IMG-Y3M03-Q010-CTX-13A87F4615A1",
+          "contractPaths": [
+            "targets[3]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-d2b2759de5619c8a.svg",
+        "sha256": "351edb13913cfc06e2018872dba10c4468f0eecff1dafb7db3083f4106e39204",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-FATHER.png",
+      "candidateSha256": "7ae7af1c89c49e2f0ae612617f60c3bd52a9d2119ae5d9a73376d52b078f5b2a",
+      "semanticTarget": "father",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "father",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R3"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "father",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R3"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+          "questionId": "Y3M03-Q012",
+          "semanticTarget": "father",
+          "plannedMediaId": "IMG-Y3M03-Q012-CTX-A2DAD8FBAFF0",
+          "contractPaths": [
+            "pairs[2].b"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+          "questionId": "Y3M03-Q015",
+          "semanticTarget": "father",
+          "plannedMediaId": "IMG-Y3M03-Q015-CTX-EE2CDC889715",
+          "contractPaths": [
+            "pairs[2].b"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-e1b1a5b8aabb306d.svg",
+        "sha256": "f8eddb8c910ea496cc2e2b431e855e37d67447d4da763ac91f8f00c7130bc7d3",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-BROTHER.png",
+      "candidateSha256": "f0edf17ac932976cd1244cdd9f05e88e69fa84edb47f54b00586e461f0b4f293",
+      "semanticTarget": "brother",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R4"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R4"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+          "questionId": "Y3M03-Q012",
+          "semanticTarget": "brother",
+          "plannedMediaId": "IMG-Y3M03-Q012-CTX-F0A22D41A1F0",
+          "contractPaths": [
+            "pairs[3].b"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+          "questionId": "Y3M03-Q015",
+          "semanticTarget": "brother",
+          "plannedMediaId": "IMG-Y3M03-Q015-CTX-27906DCB58DE",
+          "contractPaths": [
+            "pairs[3].b"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-e79fa90d33a3754b.svg",
+        "sha256": "351edb13913cfc06e2018872dba10c4468f0eecff1dafb7db3083f4106e39204",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-FATHER.png",
+      "candidateSha256": "7ae7af1c89c49e2f0ae612617f60c3bd52a9d2119ae5d9a73376d52b078f5b2a",
+      "semanticTarget": "father",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q003",
+          "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "father",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q003-O3"
+        },
+        {
+          "questionId": "Y3M03-Q014",
+          "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+          "contractPath": "targets[3]",
+          "role": "option",
+          "semanticTarget": "father",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q014-T4"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-E79FA90D33A3754B",
+          "questionId": "Y3M03-Q003",
+          "semanticTarget": "father",
+          "plannedMediaId": "IMG-Y3M03-Q003-CTX-57D73B0A892B",
+          "contractPaths": [
+            "options[2]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-E79FA90D33A3754B",
+          "questionId": "Y3M03-Q014",
+          "semanticTarget": "father",
+          "plannedMediaId": "IMG-Y3M03-Q014-CTX-EC293EA300BE",
+          "contractPaths": [
+            "targets[3]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-EB195E7418543F4E",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-eb195e7418543f4e.svg",
+        "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-MOTHER.png",
+      "candidateSha256": "98dd64f1bbad289e1c8452b3050e0cfab61a866639199d2aed102c39db53c288",
+      "semanticTarget": "mother",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q004",
+          "mediaId": "IMG-V11-2B-EB195E7418543F4E",
+          "contractPath": "pairs[1].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-EB195E7418543F4E",
+          "questionId": "Y3M03-Q004",
+          "semanticTarget": "mother",
+          "plannedMediaId": "IMG-Y3M03-Q004-CTX-BF4DCEB477F0",
+          "contractPaths": [
+            "pairs[1].cards[1]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-F3663EB03B9FA720",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-f3663eb03b9fa720.svg",
+        "sha256": "351edb13913cfc06e2018872dba10c4468f0eecff1dafb7db3083f4106e39204",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-FATHER.png",
+      "candidateSha256": "7ae7af1c89c49e2f0ae612617f60c3bd52a9d2119ae5d9a73376d52b078f5b2a",
+      "semanticTarget": "father",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q004",
+          "mediaId": "IMG-V11-2B-F3663EB03B9FA720",
+          "contractPath": "pairs[2].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "father",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-F3663EB03B9FA720",
+          "questionId": "Y3M03-Q004",
+          "semanticTarget": "father",
+          "plannedMediaId": "IMG-Y3M03-Q004-CTX-A13E7F16B5BC",
+          "contractPaths": [
+            "pairs[2].cards[1]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-F8F1532BA0C59828",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-f8f1532ba0c59828.svg",
+        "sha256": "3f37a7ebe2188130308c82a8e2165706757364756608a128b214c06227b55c97",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-MOTHER.png",
+      "candidateSha256": "98dd64f1bbad289e1c8452b3050e0cfab61a866639199d2aed102c39db53c288",
+      "semanticTarget": "mother",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-F8F1532BA0C59828",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R2"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-F8F1532BA0C59828",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R2"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-F8F1532BA0C59828",
+          "questionId": "Y3M03-Q012",
+          "semanticTarget": "mother",
+          "plannedMediaId": "IMG-Y3M03-Q012-CTX-6443EDEFB78A",
+          "contractPaths": [
+            "pairs[1].b"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-F8F1532BA0C59828",
+          "questionId": "Y3M03-Q015",
+          "semanticTarget": "mother",
+          "plannedMediaId": "IMG-Y3M03-Q015-CTX-4BFCDDD224C0",
+          "contractPaths": [
+            "pairs[1].b"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y2M03",
+        "Y3M03",
+        "Y5M03"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/v11-2b/img-v11-2b-ff1c87306e179abe.svg",
+        "sha256": "67f963929dfb8a41863c389be3d9fa2c1ca4356a75b553d42097f68c5739abbb",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-GRANDMOTHER.png",
+      "candidateSha256": "38d22c25034f0e878b259945c1a21fc444d02a5fca45865701a5044c91317d4d",
+      "semanticTarget": "grandmother",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandmother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R1"
+        },
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandmother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R6"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandmother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R6"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "questionId": "Y3M03-Q005",
+          "semanticTarget": "grandmother",
+          "plannedMediaId": "IMG-Y3M03-Q005-CTX-479E14B630F5",
+          "contractPaths": [
+            "pairs[0].b"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "questionId": "Y3M03-Q012",
+          "semanticTarget": "grandmother",
+          "plannedMediaId": "IMG-Y3M03-Q012-CTX-15618ABEAE6C",
+          "contractPaths": [
+            "pairs[5].b"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "questionId": "Y3M03-Q015",
+          "semanticTarget": "grandmother",
+          "plannedMediaId": "IMG-Y3M03-Q015-CTX-CF9BB34D6781",
+          "contractPaths": [
+            "pairs[5].b"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-Y1M02-Q002-EIGHT",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y1M02",
+        "Y2M02",
+        "Y3M01",
+        "Y3M02",
+        "Y3M03",
+        "Y3M05",
+        "Y4M04",
+        "Y5M04"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/year-1/provisional-semantic-v1/img-y1m02-q002-eight.svg",
+        "sha256": "6ae8c02486d64612da1bff929ad90d4432ef60f6a43313afe654146d762e16df",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-EIGHT.png",
+      "candidateSha256": "f1f51c261a1662616fcdc24eff0cab7761aa886c48189ed48adee1c81129bf23",
+      "semanticTarget": "eight",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q001-O3"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D2"
+        },
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "pairs[4].b",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R5"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[1]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q006-O2"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D1"
+        },
+        {
+          "questionId": "Y3M03-Q007",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[0]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q007-O1"
+        },
+        {
+          "questionId": "Y3M03-Q011",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q011-O3"
+        },
+        {
+          "questionId": "Y3M03-Q016",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[1]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q016-O2"
+        },
+        {
+          "questionId": "Y3M03-Q017",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "pairs[2].b",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q017-R3"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-Y1M02-Q002-EIGHT",
+          "questionId": "Y3M03-Q001",
+          "semanticTarget": "eight",
+          "plannedMediaId": "IMG-Y3M03-Q001-CTX-77041980337E",
+          "contractPaths": [
+            "bubbleDistractorPool[1]",
+            "options[2]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q002-EIGHT",
+          "questionId": "Y3M03-Q005",
+          "semanticTarget": "eight",
+          "plannedMediaId": "IMG-Y3M03-Q005-CTX-A69C43A64BF6",
+          "contractPaths": [
+            "pairs[4].b"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q002-EIGHT",
+          "questionId": "Y3M03-Q006",
+          "semanticTarget": "eight",
+          "plannedMediaId": "IMG-Y3M03-Q006-CTX-A8D830D62AA1",
+          "contractPaths": [
+            "bubbleDistractorPool[0]",
+            "options[1]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q002-EIGHT",
+          "questionId": "Y3M03-Q007",
+          "semanticTarget": "eight",
+          "plannedMediaId": "IMG-Y3M03-Q007-CTX-8B93D835CFE8",
+          "contractPaths": [
+            "options[0]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q002-EIGHT",
+          "questionId": "Y3M03-Q011",
+          "semanticTarget": "eight",
+          "plannedMediaId": "IMG-Y3M03-Q011-CTX-434A00A0224F",
+          "contractPaths": [
+            "options[2]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q002-EIGHT",
+          "questionId": "Y3M03-Q016",
+          "semanticTarget": "eight",
+          "plannedMediaId": "IMG-Y3M03-Q016-CTX-B647EE07C630",
+          "contractPaths": [
+            "options[1]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q002-EIGHT",
+          "questionId": "Y3M03-Q017",
+          "semanticTarget": "eight",
+          "plannedMediaId": "IMG-Y3M03-Q017-CTX-CBA9998FDFC7",
+          "contractPaths": [
+            "pairs[2].b"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-Y1M02-Q002-SEVEN",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y1M02",
+        "Y3M03",
+        "Y3M05",
+        "Y4M04"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/year-1/provisional-semantic-v1/img-y1m02-q002-seven.svg",
+        "sha256": "adcf4d1016203671f0d4c1a073422d11dc0ea05552555f78c61f71824631a924",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-SEVEN.png",
+      "candidateSha256": "b675fb761c6054b737cf35ba6b9d36e9fe50ed7a317ae07e4a3dc30000272667",
+      "semanticTarget": "seven",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q007",
+          "mediaId": "IMG-Y1M02-Q002-SEVEN",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "seven",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q007-O4"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-Y1M02-Q002-SEVEN",
+          "questionId": "Y3M03-Q007",
+          "semanticTarget": "seven",
+          "plannedMediaId": "IMG-Y3M03-Q007-CTX-C689D9D1509F",
+          "contractPaths": [
+            "options[3]"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-Y1M02-Q007-NINE",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y1M02",
+        "Y3M01",
+        "Y3M02",
+        "Y3M03",
+        "Y4M04",
+        "Y5M04"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/year-1/provisional-semantic-v1/img-y1m02-q007-nine.svg",
+        "sha256": "840ab518cd8a64fcfa6644d065f1ac71c90051884bb9a77e594b5ab8637d2f61",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-NINE.png",
+      "candidateSha256": "a49f122a9e0967699c4602ce5cd294ad228dff16bd644e9d906b26e9d87eae5c",
+      "semanticTarget": "nine",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q001-O4"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D3"
+        },
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "pairs[5].b",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R6"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q006-O3"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D2"
+        },
+        {
+          "questionId": "Y3M03-Q007",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[1]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q007-O2"
+        },
+        {
+          "questionId": "Y3M03-Q010",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "targets[0]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q010-T1"
+        },
+        {
+          "questionId": "Y3M03-Q011",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q011-O4"
+        },
+        {
+          "questionId": "Y3M03-Q016",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q016-O3"
+        },
+        {
+          "questionId": "Y3M03-Q017",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "pairs[0].b",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q017-R1"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-Y1M02-Q007-NINE",
+          "questionId": "Y3M03-Q001",
+          "semanticTarget": "nine",
+          "plannedMediaId": "IMG-Y3M03-Q001-CTX-5DE3664094AF",
+          "contractPaths": [
+            "bubbleDistractorPool[2]",
+            "options[3]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q007-NINE",
+          "questionId": "Y3M03-Q005",
+          "semanticTarget": "nine",
+          "plannedMediaId": "IMG-Y3M03-Q005-CTX-6722A8E5064D",
+          "contractPaths": [
+            "pairs[5].b"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q007-NINE",
+          "questionId": "Y3M03-Q006",
+          "semanticTarget": "nine",
+          "plannedMediaId": "IMG-Y3M03-Q006-CTX-AE88C2930C51",
+          "contractPaths": [
+            "bubbleDistractorPool[1]",
+            "options[2]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q007-NINE",
+          "questionId": "Y3M03-Q007",
+          "semanticTarget": "nine",
+          "plannedMediaId": "IMG-Y3M03-Q007-CTX-4C5828743B8F",
+          "contractPaths": [
+            "options[1]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q007-NINE",
+          "questionId": "Y3M03-Q010",
+          "semanticTarget": "nine",
+          "plannedMediaId": "IMG-Y3M03-Q010-CTX-F878319F1ABC",
+          "contractPaths": [
+            "targets[0]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q007-NINE",
+          "questionId": "Y3M03-Q011",
+          "semanticTarget": "nine",
+          "plannedMediaId": "IMG-Y3M03-Q011-CTX-AE0AD9E7C379",
+          "contractPaths": [
+            "options[3]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q007-NINE",
+          "questionId": "Y3M03-Q016",
+          "semanticTarget": "nine",
+          "plannedMediaId": "IMG-Y3M03-Q016-CTX-3F115D971CFC",
+          "contractPaths": [
+            "options[2]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q007-NINE",
+          "questionId": "Y3M03-Q017",
+          "semanticTarget": "nine",
+          "plannedMediaId": "IMG-Y3M03-Q017-CTX-147D446ECFB7",
+          "contractPaths": [
+            "pairs[0].b"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "IMG-Y1M02-Q007-TEN",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y1M02",
+        "Y3M01",
+        "Y3M02",
+        "Y3M03",
+        "Y4M04",
+        "Y5M04"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/year-1/provisional-semantic-v1/img-y1m02-q007-ten.svg",
+        "sha256": "fd38ddb4e91f239b645341a137dfc017b1ee00541be5c7d054303583b5e2c796",
+        "format": "SVG",
+        "refinementStatus": "IMAGE_REFINEMENT_PENDING"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-TEN.png",
+      "candidateSha256": "2fd76a2d23ed7d7f835876bd92de3f079943ea10b3829ed8c880970f2e9b8d3b",
+      "semanticTarget": "ten",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q006-O4"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D3"
+        },
+        {
+          "questionId": "Y3M03-Q007",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q007-O3"
+        },
+        {
+          "questionId": "Y3M03-Q010",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "targets[1]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q010-T2"
+        },
+        {
+          "questionId": "Y3M03-Q016",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q016-O4"
+        },
+        {
+          "questionId": "Y3M03-Q017",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "pairs[1].b",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q017-R2"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "IMG-Y1M02-Q007-TEN",
+          "questionId": "Y3M03-Q006",
+          "semanticTarget": "ten",
+          "plannedMediaId": "IMG-Y3M03-Q006-CTX-CA8314557D95",
+          "contractPaths": [
+            "bubbleDistractorPool[2]",
+            "options[3]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q007-TEN",
+          "questionId": "Y3M03-Q007",
+          "semanticTarget": "ten",
+          "plannedMediaId": "IMG-Y3M03-Q007-CTX-401804EF6DDB",
+          "contractPaths": [
+            "options[2]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q007-TEN",
+          "questionId": "Y3M03-Q010",
+          "semanticTarget": "ten",
+          "plannedMediaId": "IMG-Y3M03-Q010-CTX-FA546FAD187D",
+          "contractPaths": [
+            "targets[1]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q007-TEN",
+          "questionId": "Y3M03-Q016",
+          "semanticTarget": "ten",
+          "plannedMediaId": "IMG-Y3M03-Q016-CTX-C45D289AB357",
+          "contractPaths": [
+            "options[3]"
+          ]
+        },
+        {
+          "sourceMediaId": "IMG-Y1M02-Q007-TEN",
+          "questionId": "Y3M03-Q017",
+          "semanticTarget": "ten",
+          "plannedMediaId": "IMG-Y3M03-Q017-CTX-F39951C3172E",
+          "contractPaths": [
+            "pairs[1].b"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    },
+    {
+      "mediaId": "Y1M01-EMOJI-BEN-001",
+      "canonicalLedgerStatus": "PROVISIONAL",
+      "registryStatus": "APPROVED",
+      "crossModuleShared": true,
+      "allReferencedModules": [
+        "Y1M01",
+        "Y3M01",
+        "Y3M03",
+        "Y5M01"
+      ],
+      "currentSourceAsset": {
+        "kind": "image",
+        "urlOrPath": "content/english/assets/images/year-1/module-01/temporary/y1m01-emoji-ben-001.svg",
+        "sha256": "115da21e5d2e90c6e16c8707519bf8c36039e141d8eb9a19107b4287c24d23a4",
+        "format": "SVG",
+        "refinementStatus": "TEMPORARY_REPLACE_LATER"
+      },
+      "candidateFile": "images/DUDUQ-Y3M03-BEN.png",
+      "candidateSha256": "bcdbbaa2720afcdc0b8a2c459996088782bc14bf20453a046df6bd6327cf5ffc",
+      "semanticTarget": "ben",
+      "questionUsages": [
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "Y1M01-EMOJI-BEN-001",
+          "contractPath": "pairs[0].b",
+          "role": "CONTENT",
+          "semanticTarget": "ben",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R1"
+        }
+      ],
+      "occurrenceScopedBindings": [
+        {
+          "sourceMediaId": "Y1M01-EMOJI-BEN-001",
+          "questionId": "Y3M03-Q015",
+          "semanticTarget": "ben",
+          "plannedMediaId": "IMG-Y3M03-Q015-CTX-97020BCD05E8",
+          "contractPaths": [
+            "pairs[0].b"
+          ]
+        }
+      ],
+      "integrationInstruction": "Generation lane only: do not mutate this registry ID. Independent integration must review every exact occurrence before any context-scoped overlay or reuse decision."
+    }
+  ],
+  "applicationStatus": "NOT_APPLIED",
+  "integrationStatus": "PENDING_INDEPENDENT_INTEGRATION_LANE",
+  "productionStatus": "NOT_APPROVED"
+}

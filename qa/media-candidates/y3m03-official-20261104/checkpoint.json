@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "DUDUQ_TWO_LANE_GENERATION_CHECKPOINT_V1",
+  "createdAt": "2026-11-04T17:47:01.640Z",
+  "updatedAt": "2026-11-04T17:47:01.640Z",
+  "status": "Y3M03_GENERATION_CANDIDATES_COMPLETE_BY_VERIFIED_REUSE",
+  "projectStatus": "INCOMPLETE",
+  "lane": "generation",
+  "moduleId": "Y3M03",
+  "unattendedStateObserved": {
+    "runs": 67,
+    "status": "IN_PROGRESS",
+    "activeLane": "generation",
+    "activeModule": "Y3M03",
+    "lastLane": "integration",
+    "lastGeneratedModule": "Y3M02",
+    "lastIntegratedModule": "Y2M01",
+    "pendingBefore": 1055,
+    "pendingAfterPreviousRun": 1055,
+    "consecutiveNoProgress": 13,
+    "observedUpdatedAt": "2026-11-04T17:33:13.180Z"
+  },
+  "sourceAudit": {
+    "questions": 20,
+    "pendingMediaIds": 29,
+    "semanticConcepts": 16,
+    "globalPendingMediaIds": 1055,
+    "questionSourceSha256": "66af094d150b6731774a567ae15581bd663dfa2842f247d4899644f1404a21ea",
+    "registrySha256": "ce8b74d3087e513622ff1efc9a999536c98744578d1989b0222b427b33f9d1c2"
+  },
+  "candidateAssets": 16,
+  "newlyGeneratedAssets": 0,
+  "reusedVerifiedNativeOriginalAssets": 16,
+  "generatorAttempts": {
+    "failedModerationNoFile": 2,
+    "quotaOrLimitBlock": false,
+    "blockedGenerator": false
+  },
+  "coverage": {
+    "sourcePendingMediaIds": 29,
+    "coveredSourceMediaIds": 29,
+    "occurrenceScopedBindingPlans": 66,
+    "missingConcepts": []
+  },
+  "writeBoundary": "qa/media-candidates/y3m03-official-20261104",
+  "questionsModified": false,
+  "registryModified": false,
+  "runtimeModified": false,
+  "goldMastersModified": false,
+  "approvalFlagsModified": false,
+  "productionModified": false,
+  "mediaOverlaysApplied": false,
+  "existingReferencedAssetsRemoved": false,
+  "humanApprovalClaimed": false,
+  "productionApproved": false,
+  "integrated": false,
+  "deployed": false,
+  "candidateBundleCommit": null,
+  "reviewBranch": "automation/duduq-media-source-only-fix-20261029",
+  "nextAction": "SCHEDULER_SELECT_OTHER_LANE",
+  "completionClaim": "MODULE_CANDIDATE_SCOPE_ONLY_PROJECT_REMAINS_INCOMPLETE"
+}

@@ -1,0 +1,1567 @@
+{
+  "schemaVersion": "DUDUQ_MEDIA_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-11-04T17:47:01.640Z",
+  "moduleId": "Y3M03",
+  "evidenceBoundary": "Codex generation-lane technical and visual semantic precheck only. Candidate is not integrated, human-homologated, production-approved, merged, or deployed.",
+  "reviewedQuestionCount": 20,
+  "exactSemanticConceptCount": 16,
+  "logicalVisualUsageRecords": 74,
+  "sourceMediaIdsReviewed": 29,
+  "occurrenceScopedBindingPlans": 66,
+  "assets": [
+    {
+      "assetKey": "Y3M03-CANDIDATE-BEN",
+      "concept": "ben",
+      "file": "images/DUDUQ-Y3M03-BEN.png",
+      "sha256": "bcdbbaa2720afcdc0b8a2c459996088782bc14bf20453a046df6bd6327cf5ffc",
+      "expectedObjectCount": 1,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly one established DUDUQ character Ben is isolated in his verified red-hair and green-shirt design; no text or extra person appears.",
+      "pedagogicalFit": "The established character identity is the exact named visual target Ben required by Q015.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q015"
+      ],
+      "sourceMediaIds": [
+        "Y1M01-EMOJI-BEN-001"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "Y1M01-EMOJI-BEN-001",
+          "contractPath": "pairs[0].b",
+          "role": "CONTENT",
+          "semanticTarget": "ben",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R1"
+        }
+      ],
+      "technicalQc": {
+        "concept": "ben",
+        "file": "images/DUDUQ-Y3M03-BEN.png",
+        "sha256": "bcdbbaa2720afcdc0b8a2c459996088782bc14bf20453a046df6bd6327cf5ffc",
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1915691,
+        "opaquePixels": 416447,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 427503,
+        "componentCount": 6,
+        "largestComponentCoverage": 0.9999883,
+        "secondaryComponentCount": 5,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 508,
+          "y": 41,
+          "width": 541,
+          "height": 1441
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.3304295,
+        "transparentMargins": {
+          "left": 508,
+          "top": 41,
+          "right": 487,
+          "bottom": 54
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-BROTHER",
+      "concept": "brother",
+      "file": "images/DUDUQ-Y3M03-BROTHER.png",
+      "sha256": "f0edf17ac932976cd1244cdd9f05e88e69fa84edb47f54b00586e461f0b4f293",
+      "expectedObjectCount": 1,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly one school-age boy character is isolated; no parent, grandparent, text, prop, or extra person is present.",
+      "pedagogicalFit": "Child age and presentation support the family vocabulary word brother.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q001",
+        "Y3M03-Q003",
+        "Y3M03-Q004",
+        "Y3M03-Q006",
+        "Y3M03-Q012",
+        "Y3M03-Q015"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-0E55AE94BCF4CC3E",
+        "IMG-V11-2B-72DD748C89819898",
+        "IMG-V11-2B-E1B1A5B8AABB306D"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D4"
+        },
+        {
+          "questionId": "Y3M03-Q003",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "brother",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q003-O1"
+        },
+        {
+          "questionId": "Y3M03-Q004",
+          "mediaId": "IMG-V11-2B-72DD748C89819898",
+          "contractPath": "pairs[3].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D5"
+        },
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R4"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R4"
+        }
+      ],
+      "technicalQc": {
+        "concept": "brother",
+        "file": "images/DUDUQ-Y3M03-BROTHER.png",
+        "sha256": "f0edf17ac932976cd1244cdd9f05e88e69fa84edb47f54b00586e461f0b4f293",
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 983325,
+        "opaquePixels": 561263,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 571137,
+        "componentCount": 4,
+        "largestComponentCoverage": 0.999993,
+        "secondaryComponentCount": 3,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 288,
+          "y": 10,
+          "width": 683,
+          "height": 1244
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.54031374,
+        "transparentMargins": {
+          "left": 288,
+          "top": 10,
+          "right": 283,
+          "bottom": 0
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-EIGHT",
+      "concept": "eight",
+      "file": "images/DUDUQ-Y3M03-EIGHT.png",
+      "sha256": "f1f51c261a1662616fcdc24eff0cab7761aa886c48189ed48adee1c81129bf23",
+      "expectedObjectCount": 8,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly eight separated glossy red apples are visible and individually countable; no numeral, text, or extra countable object appears.",
+      "pedagogicalFit": "The count of eight concrete objects teaches the quantity word eight without answer text.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q001",
+        "Y3M03-Q005",
+        "Y3M03-Q006",
+        "Y3M03-Q007",
+        "Y3M03-Q011",
+        "Y3M03-Q016",
+        "Y3M03-Q017"
+      ],
+      "sourceMediaIds": [
+        "IMG-Y1M02-Q002-EIGHT"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q001-O3"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D2"
+        },
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "pairs[4].b",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R5"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[1]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q006-O2"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D1"
+        },
+        {
+          "questionId": "Y3M03-Q007",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[0]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q007-O1"
+        },
+        {
+          "questionId": "Y3M03-Q011",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q011-O3"
+        },
+        {
+          "questionId": "Y3M03-Q016",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[1]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q016-O2"
+        },
+        {
+          "questionId": "Y3M03-Q017",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "pairs[2].b",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q017-R3"
+        }
+      ],
+      "technicalQc": {
+        "concept": "eight",
+        "file": "images/DUDUQ-Y3M03-EIGHT.png",
+        "sha256": "f1f51c261a1662616fcdc24eff0cab7761aa886c48189ed48adee1c81129bf23",
+        "width": 1774,
+        "height": 1536,
+        "transparentPixels": 1860986,
+        "opaquePixels": 829203,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 841250,
+        "componentCount": 8,
+        "largestComponentCoverage": 0.12519108,
+        "secondaryComponentCount": 7,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 69,
+          "y": 385,
+          "width": 1633,
+          "height": 746
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.44707479,
+        "transparentMargins": {
+          "left": 69,
+          "top": 385,
+          "right": 72,
+          "bottom": 405
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-FATHER",
+      "concept": "father",
+      "file": "images/DUDUQ-Y3M03-FATHER.png",
+      "sha256": "7ae7af1c89c49e2f0ae612617f60c3bd52a9d2119ae5d9a73376d52b078f5b2a",
+      "expectedObjectCount": 1,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly one mature father character is isolated; no child, mother, grandparent, text, prop, or extra person is present.",
+      "pedagogicalFit": "Distinct adult-parent age and presentation support the exact family word father.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q003",
+        "Y3M03-Q004",
+        "Y3M03-Q012",
+        "Y3M03-Q014",
+        "Y3M03-Q015"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-D2B2759DE5619C8A",
+        "IMG-V11-2B-E79FA90D33A3754B",
+        "IMG-V11-2B-F3663EB03B9FA720"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q003",
+          "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "father",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q003-O3"
+        },
+        {
+          "questionId": "Y3M03-Q004",
+          "mediaId": "IMG-V11-2B-F3663EB03B9FA720",
+          "contractPath": "pairs[2].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "father",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "father",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R3"
+        },
+        {
+          "questionId": "Y3M03-Q014",
+          "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+          "contractPath": "targets[3]",
+          "role": "option",
+          "semanticTarget": "father",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q014-T4"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "father",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R3"
+        }
+      ],
+      "technicalQc": {
+        "concept": "father",
+        "file": "images/DUDUQ-Y3M03-FATHER.png",
+        "sha256": "7ae7af1c89c49e2f0ae612617f60c3bd52a9d2119ae5d9a73376d52b078f5b2a",
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 895768,
+        "opaquePixels": 654522,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 660950,
+        "componentCount": 1,
+        "largestComponentCoverage": 1,
+        "secondaryComponentCount": 0,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 240,
+          "y": 4,
+          "width": 851,
+          "height": 1250
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.67646371,
+        "transparentMargins": {
+          "left": 240,
+          "top": 4,
+          "right": 163,
+          "bottom": 0
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-GRANDFATHER",
+      "concept": "grandfather",
+      "file": "images/DUDUQ-Y3M03-GRANDFATHER.png",
+      "sha256": "2a70dece6f55080a8e407f69ee9850316b7919fff438a608645f34975fd90058",
+      "expectedObjectCount": 1,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly one clearly elderly grandfather character is isolated with age cues and no text, prop, or extra person.",
+      "pedagogicalFit": "Older-adult age cues distinguish grandfather from father and brother.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q005",
+        "Y3M03-Q012",
+        "Y3M03-Q018"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-40A6ADFB20D21B5C",
+        "IMG-V11-2B-9FFFCCD19B67697A"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandfather",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R2"
+        },
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandfather",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R1"
+        },
+        {
+          "questionId": "Y3M03-Q018",
+          "mediaId": "IMG-V11-2B-40A6ADFB20D21B5C",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "grandfather",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "technicalQc": {
+        "concept": "grandfather",
+        "file": "images/DUDUQ-Y3M03-GRANDFATHER.png",
+        "sha256": "2a70dece6f55080a8e407f69ee9850316b7919fff438a608645f34975fd90058",
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 1001747,
+        "opaquePixels": 553765,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 559118,
+        "componentCount": 1,
+        "largestComponentCoverage": 1,
+        "secondaryComponentCount": 0,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 274,
+          "y": 18,
+          "width": 709,
+          "height": 1236
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.55727509,
+        "transparentMargins": {
+          "left": 274,
+          "top": 18,
+          "right": 271,
+          "bottom": 0
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-GRANDMOTHER",
+      "concept": "grandmother",
+      "file": "images/DUDUQ-Y3M03-GRANDMOTHER.png",
+      "sha256": "38d22c25034f0e878b259945c1a21fc444d02a5fca45865701a5044c91317d4d",
+      "expectedObjectCount": 1,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly one clearly elderly grandmother character is isolated with age cues and no text, prop, or extra person.",
+      "pedagogicalFit": "Older-adult age cues distinguish grandmother from mother and sister.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q005",
+        "Y3M03-Q012",
+        "Y3M03-Q015"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-FF1C87306E179ABE"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandmother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R1"
+        },
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandmother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R6"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandmother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R6"
+        }
+      ],
+      "technicalQc": {
+        "concept": "grandmother",
+        "file": "images/DUDUQ-Y3M03-GRANDMOTHER.png",
+        "sha256": "38d22c25034f0e878b259945c1a21fc444d02a5fca45865701a5044c91317d4d",
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 1072788,
+        "opaquePixels": 479881,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 486216,
+        "componentCount": 2,
+        "largestComponentCoverage": 0.99999794,
+        "secondaryComponentCount": 1,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 358,
+          "y": 5,
+          "width": 550,
+          "height": 1249
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.4368477,
+        "transparentMargins": {
+          "left": 358,
+          "top": 5,
+          "right": 346,
+          "bottom": 0
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-HE",
+      "concept": "he",
+      "file": "images/DUDUQ-Y3M03-HE.png",
+      "sha256": "1c89ac5b8a741e1cf1c38bb4ca98c852fbda69460180360a696e0affb06598ef",
+      "expectedObjectCount": 1,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly one generic adult man is isolated; no family-role prop, name label, text, or extra person appears.",
+      "pedagogicalFit": "A single male referent supports the subject pronoun he while remaining a different character and hash from father, brother, Leo, and Ben.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q001",
+        "Y3M03-Q005",
+        "Y3M03-Q006",
+        "Y3M03-Q009",
+        "Y3M03-Q011",
+        "Y3M03-Q014"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-53C70478BC6A8DA7",
+        "IMG-V11-2B-8C61F006F08947DB",
+        "IMG-V11-2B-9C574AA05B2196A8"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "he",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q001-O1"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "he",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q001-O1"
+        },
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-V11-2B-53C70478BC6A8DA7",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "he",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R3"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "he",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D4"
+        },
+        {
+          "questionId": "Y3M03-Q009",
+          "mediaId": "IMG-V11-2B-53C70478BC6A8DA7",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "he",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q009-R1"
+        },
+        {
+          "questionId": "Y3M03-Q011",
+          "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "he",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q011-O1"
+        },
+        {
+          "questionId": "Y3M03-Q014",
+          "mediaId": "IMG-V11-2B-9C574AA05B2196A8",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "he",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q014-T2"
+        }
+      ],
+      "technicalQc": {
+        "concept": "he",
+        "file": "images/DUDUQ-Y3M03-HE.png",
+        "sha256": "1c89ac5b8a741e1cf1c38bb4ca98c852fbda69460180360a696e0affb06598ef",
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1888738,
+        "opaquePixels": 449662,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 456256,
+        "componentCount": 1,
+        "largestComponentCoverage": 1,
+        "secondaryComponentCount": 0,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 470,
+          "y": 16,
+          "width": 625,
+          "height": 1488
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.39418538,
+        "transparentMargins": {
+          "left": 470,
+          "top": 16,
+          "right": 441,
+          "bottom": 32
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-LEO",
+      "concept": "leo",
+      "file": "images/DUDUQ-Y3M03-LEO.png",
+      "sha256": "703ef0a0674cb315697e0c0fdb26e4715f8334893019f62d774c5dd01f0b39d4",
+      "expectedObjectCount": 1,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly one established DUDUQ character Leo is isolated in his verified blue design; no text or extra person appears.",
+      "pedagogicalFit": "The established character identity is the exact named visual target Leo.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q010"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-D0E7A61F4C82CFF8"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q010",
+          "mediaId": "IMG-V11-2B-D0E7A61F4C82CFF8",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "Leo",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q010-T4"
+        }
+      ],
+      "technicalQc": {
+        "concept": "leo",
+        "file": "images/DUDUQ-Y3M03-LEO.png",
+        "sha256": "703ef0a0674cb315697e0c0fdb26e4715f8334893019f62d774c5dd01f0b39d4",
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1907544,
+        "opaquePixels": 427382,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 437298,
+        "componentCount": 1,
+        "largestComponentCoverage": 1,
+        "secondaryComponentCount": 0,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 514,
+          "y": 43,
+          "width": 529,
+          "height": 1452
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.32556661,
+        "transparentMargins": {
+          "left": 514,
+          "top": 43,
+          "right": 493,
+          "bottom": 41
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-MIA",
+      "concept": "mia",
+      "file": "images/DUDUQ-Y3M03-MIA.png",
+      "sha256": "453e497d9f61292b94dbf25945c46580e98cad6836e7923a87f365747be999c4",
+      "expectedObjectCount": 1,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly one established DUDUQ character Mia is isolated in her verified coral-and-teal design; no text or extra person appears.",
+      "pedagogicalFit": "The established character identity is the exact named visual target Mia.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q010"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-08FFAC2848B99BD1"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q010",
+          "mediaId": "IMG-V11-2B-08FFAC2848B99BD1",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "Mia",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q010-T3"
+        }
+      ],
+      "technicalQc": {
+        "concept": "mia",
+        "file": "images/DUDUQ-Y3M03-MIA.png",
+        "sha256": "453e497d9f61292b94dbf25945c46580e98cad6836e7923a87f365747be999c4",
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1943154,
+        "opaquePixels": 391047,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 401546,
+        "componentCount": 24,
+        "largestComponentCoverage": 0.99977836,
+        "secondaryComponentCount": 23,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 520,
+          "y": 54,
+          "width": 520,
+          "height": 1424
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.31385634,
+        "transparentMargins": {
+          "left": 520,
+          "top": 54,
+          "right": 496,
+          "bottom": 58
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-MOTHER",
+      "concept": "mother",
+      "file": "images/DUDUQ-Y3M03-MOTHER.png",
+      "sha256": "98dd64f1bbad289e1c8452b3050e0cfab61a866639199d2aed102c39db53c288",
+      "expectedObjectCount": 1,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly one mature mother character is isolated; no child, father, grandparent, text, prop, or extra person is present.",
+      "pedagogicalFit": "Distinct adult-parent age and presentation support the exact family word mother.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q001",
+        "Y3M03-Q003",
+        "Y3M03-Q004",
+        "Y3M03-Q008",
+        "Y3M03-Q012",
+        "Y3M03-Q014",
+        "Y3M03-Q015"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-243B96C39D99CAF8",
+        "IMG-V11-2B-EB195E7418543F4E",
+        "IMG-V11-2B-F8F1532BA0C59828"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D5"
+        },
+        {
+          "questionId": "Y3M03-Q003",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "mother",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q003-O2"
+        },
+        {
+          "questionId": "Y3M03-Q004",
+          "mediaId": "IMG-V11-2B-EB195E7418543F4E",
+          "contractPath": "pairs[1].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M03-Q008",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-F8F1532BA0C59828",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R2"
+        },
+        {
+          "questionId": "Y3M03-Q014",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractPath": "targets[2]",
+          "role": "option",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q014-T3"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-F8F1532BA0C59828",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R2"
+        }
+      ],
+      "technicalQc": {
+        "concept": "mother",
+        "file": "images/DUDUQ-Y3M03-MOTHER.png",
+        "sha256": "98dd64f1bbad289e1c8452b3050e0cfab61a866639199d2aed102c39db53c288",
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 846866,
+        "opaquePixels": 696674,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 709904,
+        "componentCount": 6,
+        "largestComponentCoverage": 0.99998873,
+        "secondaryComponentCount": 5,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 227,
+          "y": 3,
+          "width": 807,
+          "height": 1251
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.6420011,
+        "transparentMargins": {
+          "left": 227,
+          "top": 3,
+          "right": 220,
+          "bottom": 0
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-NINE",
+      "concept": "nine",
+      "file": "images/DUDUQ-Y3M03-NINE.png",
+      "sha256": "a49f122a9e0967699c4602ce5cd294ad228dff16bd644e9d906b26e9d87eae5c",
+      "expectedObjectCount": 9,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly nine separated glossy red apples are visible and individually countable; no numeral, text, or extra countable object appears.",
+      "pedagogicalFit": "The count of nine concrete objects teaches the quantity word nine without answer text.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q001",
+        "Y3M03-Q005",
+        "Y3M03-Q006",
+        "Y3M03-Q007",
+        "Y3M03-Q010",
+        "Y3M03-Q011",
+        "Y3M03-Q016",
+        "Y3M03-Q017"
+      ],
+      "sourceMediaIds": [
+        "IMG-Y1M02-Q007-NINE"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q001-O4"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D3"
+        },
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "pairs[5].b",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R6"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q006-O3"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D2"
+        },
+        {
+          "questionId": "Y3M03-Q007",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[1]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q007-O2"
+        },
+        {
+          "questionId": "Y3M03-Q010",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "targets[0]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q010-T1"
+        },
+        {
+          "questionId": "Y3M03-Q011",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q011-O4"
+        },
+        {
+          "questionId": "Y3M03-Q016",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q016-O3"
+        },
+        {
+          "questionId": "Y3M03-Q017",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "pairs[0].b",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q017-R1"
+        }
+      ],
+      "technicalQc": {
+        "concept": "nine",
+        "file": "images/DUDUQ-Y3M03-NINE.png",
+        "sha256": "a49f122a9e0967699c4602ce5cd294ad228dff16bd644e9d906b26e9d87eae5c",
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1452180,
+        "opaquePixels": 867775,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 881347,
+        "componentCount": 9,
+        "largestComponentCoverage": 0.1124767,
+        "secondaryComponentCount": 8,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 202,
+          "y": 235,
+          "width": 1137,
+          "height": 1085
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.52288691,
+        "transparentMargins": {
+          "left": 202,
+          "top": 235,
+          "right": 197,
+          "bottom": 216
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-SEVEN",
+      "concept": "seven",
+      "file": "images/DUDUQ-Y3M03-SEVEN.png",
+      "sha256": "b675fb761c6054b737cf35ba6b9d36e9fe50ed7a317ae07e4a3dc30000272667",
+      "expectedObjectCount": 7,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly seven separated glossy red apples are visible and individually countable; no numeral, text, or extra countable object appears.",
+      "pedagogicalFit": "The count of seven concrete objects teaches the quantity word seven without answer text.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q007"
+      ],
+      "sourceMediaIds": [
+        "IMG-Y1M02-Q002-SEVEN"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q007",
+          "mediaId": "IMG-Y1M02-Q002-SEVEN",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "seven",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q007-O4"
+        }
+      ],
+      "technicalQc": {
+        "concept": "seven",
+        "file": "images/DUDUQ-Y3M03-SEVEN.png",
+        "sha256": "b675fb761c6054b737cf35ba6b9d36e9fe50ed7a317ae07e4a3dc30000272667",
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1489321,
+        "opaquePixels": 833500,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 846081,
+        "componentCount": 6,
+        "largestComponentCoverage": 0.2728013,
+        "secondaryComponentCount": 5,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 142,
+          "y": 182,
+          "width": 1244,
+          "height": 1176
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.6200765,
+        "transparentMargins": {
+          "left": 142,
+          "top": 182,
+          "right": 150,
+          "bottom": 178
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-SHE",
+      "concept": "she",
+      "file": "images/DUDUQ-Y3M03-SHE.png",
+      "sha256": "01ecf4f95a490bb55af540eaba46de8137b46a2ff852bab5c4e47fd1afa6e4c8",
+      "expectedObjectCount": 1,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly one generic adult woman is isolated; no family-role prop, name label, text, or extra person appears.",
+      "pedagogicalFit": "A single female referent supports the subject pronoun she while remaining a different character and hash from mother, sister, and Mia.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q001",
+        "Y3M03-Q005",
+        "Y3M03-Q006",
+        "Y3M03-Q009",
+        "Y3M03-Q011",
+        "Y3M03-Q014",
+        "Y3M03-Q016"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-2ECDF43BCA9F3C65",
+        "IMG-V11-2B-363CA1C39A2A0FE6",
+        "IMG-V11-2B-B55FEA574FE04262"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q001-O2"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D1"
+        },
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-V11-2B-B55FEA574FE04262",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "she",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R4"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q006-O1"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q006-O1"
+        },
+        {
+          "questionId": "Y3M03-Q009",
+          "mediaId": "IMG-V11-2B-B55FEA574FE04262",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "she",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q009-R2"
+        },
+        {
+          "questionId": "Y3M03-Q011",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q011-O2"
+        },
+        {
+          "questionId": "Y3M03-Q014",
+          "mediaId": "IMG-V11-2B-363CA1C39A2A0FE6",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "she",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q014-T1"
+        },
+        {
+          "questionId": "Y3M03-Q016",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q016-O1"
+        }
+      ],
+      "technicalQc": {
+        "concept": "she",
+        "file": "images/DUDUQ-Y3M03-SHE.png",
+        "sha256": "01ecf4f95a490bb55af540eaba46de8137b46a2ff852bab5c4e47fd1afa6e4c8",
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1938129,
+        "opaquePixels": 398799,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 408305,
+        "componentCount": 2,
+        "largestComponentCoverage": 0.99999755,
+        "secondaryComponentCount": 1,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 554,
+          "y": 19,
+          "width": 428,
+          "height": 1490
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.27030097,
+        "transparentMargins": {
+          "left": 554,
+          "top": 19,
+          "right": 554,
+          "bottom": 27
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-SISTER",
+      "concept": "sister",
+      "file": "images/DUDUQ-Y3M03-SISTER.png",
+      "sha256": "47202566b4bc3953cd795f9e3a73747191d8990bf6f6bf1f50794e2dfe443bf9",
+      "expectedObjectCount": 1,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly one school-age girl character is isolated; no parent, grandparent, text, prop, or extra person is present.",
+      "pedagogicalFit": "Child age and presentation support the family vocabulary word sister.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q003",
+        "Y3M03-Q004",
+        "Y3M03-Q012",
+        "Y3M03-Q015"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-2680DF6BE58F4B7E",
+        "IMG-V11-2B-496D1E3286303401",
+        "IMG-V11-2B-6ACC979A1C714F7F"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q003",
+          "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "sister",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q003-O4"
+        },
+        {
+          "questionId": "Y3M03-Q004",
+          "mediaId": "IMG-V11-2B-496D1E3286303401",
+          "contractPath": "pairs[0].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "sister",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "sister",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R5"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "sister",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R5"
+        }
+      ],
+      "technicalQc": {
+        "concept": "sister",
+        "file": "images/DUDUQ-Y3M03-SISTER.png",
+        "sha256": "47202566b4bc3953cd795f9e3a73747191d8990bf6f6bf1f50794e2dfe443bf9",
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 830012,
+        "opaquePixels": 699542,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 719436,
+        "componentCount": 27,
+        "largestComponentCoverage": 0.99955382,
+        "secondaryComponentCount": 26,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 246,
+          "y": 17,
+          "width": 758,
+          "height": 1237
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.5962712,
+        "transparentMargins": {
+          "left": 246,
+          "top": 17,
+          "right": 250,
+          "bottom": 0
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-TEN",
+      "concept": "ten",
+      "file": "images/DUDUQ-Y3M03-TEN.png",
+      "sha256": "2fd76a2d23ed7d7f835876bd92de3f079943ea10b3829ed8c880970f2e9b8d3b",
+      "expectedObjectCount": 10,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly ten separated glossy red apples are visible and individually countable; no numeral, text, or extra countable object appears.",
+      "pedagogicalFit": "The count of ten concrete objects teaches the quantity word ten without answer text.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q006",
+        "Y3M03-Q007",
+        "Y3M03-Q010",
+        "Y3M03-Q016",
+        "Y3M03-Q017"
+      ],
+      "sourceMediaIds": [
+        "IMG-Y1M02-Q007-TEN"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q006-O4"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D3"
+        },
+        {
+          "questionId": "Y3M03-Q007",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q007-O3"
+        },
+        {
+          "questionId": "Y3M03-Q010",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "targets[1]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q010-T2"
+        },
+        {
+          "questionId": "Y3M03-Q016",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q016-O4"
+        },
+        {
+          "questionId": "Y3M03-Q017",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "pairs[1].b",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q017-R2"
+        }
+      ],
+      "technicalQc": {
+        "concept": "ten",
+        "file": "images/DUDUQ-Y3M03-TEN.png",
+        "sha256": "2fd76a2d23ed7d7f835876bd92de3f079943ea10b3829ed8c880970f2e9b8d3b",
+        "width": 1983,
+        "height": 1536,
+        "transparentPixels": 2165351,
+        "opaquePixels": 840501,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 854815,
+        "componentCount": 10,
+        "largestComponentCoverage": 0.10062879,
+        "secondaryComponentCount": 9,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 46,
+          "y": 433,
+          "width": 1884,
+          "height": 667
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.4125654,
+        "transparentMargins": {
+          "left": 46,
+          "top": 433,
+          "right": 53,
+          "bottom": 436
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    },
+    {
+      "assetKey": "Y3M03-CANDIDATE-THEY",
+      "concept": "they",
+      "file": "images/DUDUQ-Y3M03-THEY.png",
+      "sha256": "de07aac01359257a36cbcaca9ac1214507b42670eb79e5d67ad9cfc874b2de7a",
+      "expectedObjectCount": 4,
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Four distinct children form one readable plural group; no text, label, prop, or extra distractor appears.",
+      "pedagogicalFit": "A plural group of people directly supports the subject pronoun they.",
+      "wrongDistractorsAbsent": true,
+      "questionIds": [
+        "Y3M03-Q009"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-3527CF12E6C57BF5"
+      ],
+      "contractEvidence": [
+        {
+          "questionId": "Y3M03-Q009",
+          "mediaId": "IMG-V11-2B-3527CF12E6C57BF5",
+          "contractPath": "pairs[2].b",
+          "role": "option",
+          "semanticTarget": "they",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q009-R3"
+        }
+      ],
+      "technicalQc": {
+        "concept": "they",
+        "file": "images/DUDUQ-Y3M03-THEY.png",
+        "sha256": "de07aac01359257a36cbcaca9ac1214507b42670eb79e5d67ad9cfc874b2de7a",
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1466366,
+        "opaquePixels": 820693,
+        "valid": true,
+        "alphaThreshold": 64,
+        "visiblePixels": 849965,
+        "componentCount": 11,
+        "largestComponentCoverage": 0.26222609,
+        "secondaryComponentCount": 10,
+        "microOpaqueIslandCount": 0,
+        "subjectBoundingBox": {
+          "x": 38,
+          "y": 296,
+          "width": 1469,
+          "height": 966
+        },
+        "subjectBoundingBoxCanvasCoverage": 0.60147349,
+        "transparentMargins": {
+          "left": 38,
+          "top": 296,
+          "right": 29,
+          "bottom": 274
+        },
+        "realAlpha": true
+      },
+      "provenanceClass": "VERIFIED_PREEXISTING_CODEX_NATIVE_ORIGINAL_REUSE",
+      "generatedThisInvocation": false
+    }
+  ],
+  "missingConcepts": [],
+  "approvalGranted": false,
+  "humanHomologationClaimed": false,
+  "answerKeysModified": false,
+  "questionContractsModified": false,
+  "mechanicsModified": false,
+  "registryModified": false,
+  "goldMastersModified": false,
+  "productionModified": false
+}

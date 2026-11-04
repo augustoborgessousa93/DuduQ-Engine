@@ -20,7 +20,10 @@ const configurations={
     incorrectAlt:'Leo',correctAlt:'Mia',screenshots:['Y2M01-Q009','Y2M01-Q014','Y2M01-Q018']},
   Y2M06:{modulePath:'year-2/module-06',bundle:'y2m06-official-20261102',slug:'y2m06',schemaVersion:'DUDUQ_Y2M06_OFFICIAL_MEDIA_BROWSER_QA_V1',
     sourcePendingIds:56,postSplitIds:94,usageRecords:106,uniquePngs:29,runtimePaths:29,requireEveryQuestionMedia:true,gameplayQuestionId:'Y2M06-Q004',
-    incorrectAlt:'eye',correctAlt:'mouth',screenshots:['Y2M06-Q004','Y2M06-Q015','Y2M06-Q016']}
+    incorrectAlt:'eye',correctAlt:'mouth',screenshots:['Y2M06-Q004','Y2M06-Q015','Y2M06-Q016']},
+  Y3M03:{modulePath:'year-3/module-03',bundle:'y3m03-official-20261104',slug:'y3m03',schemaVersion:'DUDUQ_Y3M03_OFFICIAL_MEDIA_BROWSER_QA_V1',
+    sourcePendingIds:29,postSplitIds:66,usageRecords:74,uniquePngs:16,runtimePaths:16,requireEveryQuestionMedia:false,gameplayQuestionId:'Y3M03-Q003',
+    incorrectAlt:'father',correctAlt:'brother',screenshots:['Y3M03-Q003','Y3M03-Q012','Y3M03-Q018']}
 };
 const qa=configuration(moduleId);
 function configuration(id){const value=configurations[id];if(!value)throw Error('UNSUPPORTED_MEDIA_BROWSER_QA_MODULE:'+id);return value;}
@@ -48,7 +51,7 @@ if(qa.requireEveryQuestionMedia&&[...expectedPathsByQuestion.values()].some(path
 
 await mkdir(out,{recursive:true});
 const views={desktop:{width:1366,height:768},tablet:{width:768,height:1024},mobile:{width:390,height:844}};
-const routeFor=(q,seed='20261030')=>'/play/'+(q.mechanicId==='smart-sentence-complete'?'smart-sentence':q.mechanicId)+`/?duduqModule=${moduleId}&duduqItem=${q.item_id}&qaSeed=${seed}`;
+const routeFor=(q,seed='20261030')=>'/play/'+(q.mechanicId.startsWith('smart-sentence-')?'smart-sentence':q.mechanicId)+`/?duduqModule=${moduleId}&duduqItem=${q.item_id}&qaSeed=${seed}`;
 const report={schemaVersion:qa.schemaVersion,createdAt:new Date().toISOString(),
   status:'RUNNING',base,moduleId,actualBrowser:'PLAYWRIGHT_CHROMIUM',nativePointerInput:true,nativeTouchInput:true,
   sourcePendingIds:qa.sourcePendingIds,postSplitIds:qa.postSplitIds,usageRecords:qa.usageRecords,uniquePngHashes:qa.uniquePngs,runtimePngPaths:qa.runtimePaths,
