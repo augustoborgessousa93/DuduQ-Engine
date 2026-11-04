@@ -148,6 +148,10 @@ NODE
 DUDUQ_QA_ONLY=1 node --check qa/patch-y1m01-q001-hello-focus.mjs
 DUDUQ_QA_ONLY=1 node qa/patch-y1m01-q001-hello-focus.mjs
 test -s qa/results/y1m01-q001-focused-preview.json
+node --check qa/patch-y1m01-daypart-q003-q004.mjs
+DUDUQ_QA_ONLY=1 node qa/patch-y1m01-daypart-q003-q004.mjs
+node qa/verify-approved-q001-lock.mjs
+test -s qa/results/y1m01-daypart-q003-q004.json
 mkdir -p dist-pages
 cp -a "$ROOT"/. dist-pages/
 echo "READY_FOR_MANUAL_QA_PREVIEW_DEPLOYMENT"
