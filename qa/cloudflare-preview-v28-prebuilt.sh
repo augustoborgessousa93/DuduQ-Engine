@@ -15,6 +15,23 @@ echo "$SHA  $TMP" | sha256sum -c
 tar -xzf "$TMP" -C "$ROOT"
 cp qa/input/pinned-assets-tree-a62c07c.json qa/results/assets-duduq-current-head-tree.json
 DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs
+node --input-type=module <<'DUDUQ_SCENE_DIAGNOSTIC'
+import {readFileSync} from 'node:fs';
+const p=JSON.parse(readFileSync('qa/results/phase2-fast-bilingual-bulk-plan.json','utf8'));
+const q=JSON.parse(readFileSync('docs/qa/media-audit-20261029/replacement-queue.json','utf8'));
+for(const id of ['Y1M01-Q001','Y1M03-Q001','Y1M06-Q003']){
+ const refs=q.queue.filter(x=>x.exampleQuestions?.includes(id));
+ const chosen=new Map((p.proposed||[]).map(x=>[x.mediaId,x]));
+ const held=new Map((p.exceptions||[]).map(x=>[x.mediaId,x]));
+ console.log('DUDUQ_SCREENSHOT_SOURCE_DIAGNOSTIC='+JSON.stringify({
+  question:id,possibleMediaIds:refs.map(x=>({id:x.mediaId,
+   semantic:x.semantic,usage:x.usage,source:x.sourcePath,classification:x.classification,
+   status:chosen.has(x.mediaId)?'REPLACED_IN_CANDIDATE':'HELD',
+   replacementSource:chosen.get(x.mediaId)?.sourcePath||null,
+   reason:held.get(x.mediaId)?.reason||null
+  }))}));
+}
+DUDUQ_SCENE_DIAGNOSTIC
 DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs --apply
 node --input-type=module <<'NODE'
 import assert from 'node:assert/strict';
