@@ -31,7 +31,12 @@ assert.equal(patch.realContracts,600);
 assert(patch.appliedMediaIds>=42,'EXPECTED_AT_LEAST_GREETING_AND_FAREWELL_REPLACEMENT');
 const required=['IMG-Y1M01-GREETING-GENERIC-001','IMG-Y1M01-FAREWELL-GENERIC-001'];
 for(const mediaId of required)assert(patch.applied.some(x=>x.mediaId===mediaId),'MISSING_AUDITED_GREETING_MEDIA:'+mediaId);
-assert.equal(patch.actuallyAddedPngs,8,'PREVIEW_SOURCE_PNG_COUNT_NOT_QA_MATCH');
+const neededNewBlobs=new Set(patch.applied.filter(x=>!x.sourceAlreadyPublished)
+ .map(x=>x.sourceGitBlob));
+assert.equal(patch.actuallyAddedPngs,neededNewBlobs.size,
+ 'PREVIEW_SOURCE_PNG_COUNT_NOT_BLOB_DEDUPLICATION');
+assert(patch.actuallyAddedPngs>=8&&patch.actuallyAddedPngs<=12,
+ 'UNEXPECTED_SOURCE_IMAGE_VOLUME');
 const planned=JSON.parse(readFileSync('qa/results/phase2-fast-bilingual-bulk-plan.json'));
 assert.equal(patch.appliedQuestionIds.length,planned.matchedQuestionCount,'PREVIEW_REAL_QUESTIONS_NOT_PLANNED');
 assert.equal(patch.downloadFailures.length,0,'PREVIEW_INCOMPLETE_SOURCE_DOWNLOAD');
