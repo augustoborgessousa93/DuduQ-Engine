@@ -1,0 +1,213 @@
+{
+  "schemaVersion": "DUDUQ_CODEX_TWO_LANE_INTEGRATION_CHECKPOINT_V1",
+  "createdAt": "2026-11-04T16:52:03.2043787Z",
+  "status": "BLOCKED_QA_MOBILE_TARGET_CONTAINMENT",
+  "projectStatus": "INCOMPLETE",
+  "lane": "integration",
+  "moduleId": "Y2M01",
+  "schedulerInput": {
+    "lastAuditedGlobalPendingMediaIds": 1055,
+    "globalPendingReductionClaimedThisInvocation": 0,
+    "projectComplete": false
+  },
+  "scope": {
+    "isolatedReviewWorktree": true,
+    "existingGeneratedCandidatesOnly": true,
+    "nextModuleImagesGenerated": 0,
+    "sourceQuestionFilesModified": false,
+    "answerKeysChanged": 0,
+    "mechanicsChanged": 0,
+    "goldMastersModified": false,
+    "productionMerged": false,
+    "productionDeployed": false,
+    "humanApprovalForged": false,
+    "originalDirtyWorkspaceModified": false
+  },
+  "git": {
+    "reviewBranch": "automation/duduq-media-source-only-fix-20261029",
+    "qaHardeningCommit": "2595100ca6139c8790d37092e55b8c480a895e09",
+    "crossPlatformPinCommit": "b06a7c8a1b4c0e79fc470afaf517d0d8361236bc",
+    "pushedForReviewOnly": true,
+    "forcePushUsed": false
+  },
+  "candidateBundle": {
+    "questions": 20,
+    "sourceMediaIds": 29,
+    "postSplitMediaIds": 57,
+    "questionUsageRecords": 93,
+    "occurrenceScopedSplitRecords": 93,
+    "reviewAssets": 43,
+    "runtimePngPaths": 43,
+    "uniquePngs": 28,
+    "productionApproved": false,
+    "batchManifest": "qa/media-candidates/y2m01-official-20261031/batch-manifest.json",
+    "batchManifestCanonicalLfSha256": "7dbfab9d67e4d84743cede077fabf627259658d9af886e75710f467e4c6ee278",
+    "verifiedUniquePngSha256": [
+      "07c6ce053a07929e5cfc6e471ee71eb335d164734ea8db25a22cfd71512efe13",
+      "08d736fd08de8cc95671e740f5f0906aceecda8c9adecf64b89180e0b7d91e41",
+      "0f56a9e46f98091832198163ef21c678d68cb1f81a292a4de3fb01a00b3bde6f",
+      "1c50e519210fe46d7c002cd547a7200bc3b257c2f975f9897b4f7d1890d920ac",
+      "20a113d2284985e5efbe6b2d44fac75e89cfe81db8565f863d584335215f4e1d",
+      "3a8f1f8fb4c5b84e834a9f654d2acdc1337dfc69fe4c654098ba75c3f0de28b7",
+      "403ee54ef4152532d8ad1bed47fc16fdfe98d712d95fcd4dc9816d25a9a7eab4",
+      "453e497d9f61292b94dbf25945c46580e98cad6836e7923a87f365747be999c4",
+      "45a0be67a1decff6ca5568884f271d1fd5b90faa9dcb5ca876e455d10eb9d38e",
+      "699a56752b3917251bfec5453216ec14dbc4a562476c56d4eabf4be59c5cff75",
+      "703ef0a0674cb315697e0c0fdb26e4715f8334893019f62d774c5dd01f0b39d4",
+      "798c6c1de8ac19eb081c367a35c99768eb399008b2db2b8921e4ea48bcd03201",
+      "7cad2d24197ec5dbb65a4161dbf6277f03da7b2a56ab4259bccee9adf539c646",
+      "8b44ec2275e9e8d0b2009b12e19f54f1d13abb3a1d10679f5366fdab8d2cd1c6",
+      "8b71947d742140dbb5da17de8cfcba88763cebad499069b700dfcb5f40b6546b",
+      "8c41ac0773b391f8343b048d04cb40be76ce19d6dc9f59d42672badcc599a2a0",
+      "8e1eb51c1d698809f19a6ec7a38d3843ac2512bb0c76c232ee5be009d7642475",
+      "b134b4a2268ad5ca6104377e52eddbeafb0ffac0b7e921124cbbb8d21bc84793",
+      "b1f340b1cabc2466b1a632db7d85abff1f8f95198fba11b1c209ad8750bacc65",
+      "b9f56cfe20b2393486c20300c75266e7ec8687b1907f4a6b0894d0ea775c80d6",
+      "bcdbbaa2720afcdc0b8a2c459996088782bc14bf20453a046df6bd6327cf5ffc",
+      "bf1734e4a6995b269356db2421fde3050f1712ce0ff3755fced4e990ad5e9991",
+      "c106081f6e8b230577b66ed0b9e4583e708e86aeb182e7bbf010fb761f132e2b",
+      "d1f21b3416a1d36eca41085525a9ab2e724a75e629d2cdc5d01629a9ce19b585",
+      "d5283a2a9e7518791f4553c872e795b7c045cda1003ef060c87cce311f4da54d",
+      "d645c5ee4e1fd6db47f253fb4254a6b0bb567dd1fc266628b26629432add80cf",
+      "e4d3f90b4c9c2c8a0abb08f534beb1f24eab519725fc65487f7d667a9302a247",
+      "eb342dbfd6e55f8f2cb35eeefebf8d1a5a53f3f62405f0e37499f946bc21d972"
+    ]
+  },
+  "sourcePins": {
+    "cleanV26ManifestSha256": "5993aaceaff272626c863aef07e1b33a909ca7f9fcc41d2d40890baa6c08b822",
+    "cleanV26RegistrySha256": "aa615a3ed307b0e8cae6abf6901a1582c22ab59aa7f95c6339a635ca7d35fc89",
+    "cleanV26QuestionSha256": "257776f3d2a896a929db2233d3d238ba2f2881d652cdab0be82dae5c3519f432",
+    "cleanV26QuestionInvariantSha256": "b7cc44db6fdc6b597a963e01f59b1e6706f1a51031be282ae3b97e1529d97233",
+    "sourceRegistryEntryProjectionSha256": "1e0da9c8dff58ea947277ed1174eca3cf5bc1c2689cd650684577af2dabfab21",
+    "sourceUsageProjectionSha256": "fcde2ff3ad3315ed475e2a23773cf80cd3f7b6d34d5cd6429a23a46fa7fe904e",
+    "sourceHashesRewritten": false
+  },
+  "isolatedCompiledGame": {
+    "compiledManifestSha256": "9d266c763c13f1dc3780c8f50308a36bddfed50c790acf8202b2585d0a0dec87",
+    "compiledManifestEntries": 2716,
+    "modulesPreserved": 30,
+    "activitiesPreserved": 600,
+    "buildReport": "qa/results/y2m01-review-build.json",
+    "buildReportRawSha256": "5ca2ae9685b8fb1de94db131e779ce798dc5d00a41e70836f249bc9fdf90c667"
+  },
+  "qa": {
+    "localSemanticAndRegressionTests": {
+      "status": "PASS",
+      "tests": 27,
+      "includes": [
+        "source registry pin positive and mutation-negative cases",
+        "exact semantic match and occurrence usage guard",
+        "PNG alpha component audit",
+        "Target Shooter stale confirmation race gate",
+        "runtime PNG hash coverage gate",
+        "cross-platform official V23/V24 text asset bytes"
+      ]
+    },
+    "lfCheckoutReproduction": {
+      "status": "PASS",
+      "preFixManifestSha256": "941fe9abf5537d4c509b3249e6d5cc04e61b5276975274bf2e473fc4a8e21764",
+      "preFixFailure": "Y2M01_PREPARATION_REQUIRES_EXACT_CLEAN_V26",
+      "postFixManifestSha256": "5993aaceaff272626c863aef07e1b33a909ca7f9fcc41d2d40890baa6c08b822",
+      "hashAlternativesAccepted": false,
+      "fix": "Normalize the two official V23/V24 text overlay assets to their already-pinned CRLF bytes before hashing."
+    },
+    "localBrowserReplay": {
+      "status": "FAIL_MOBILE_CONTAINMENT_ONLY",
+      "reportAbsolutePath": "C:/Users/augus/Downloads/workspace/.codex-worktrees/duduq-image-closure/.duduq/review-worktrees/y2m01-integration-20261104/qa/results/y2m01-official-media-browser/report.json",
+      "reportSha256": "d776916b0ffd91de567e0d98a7b7a6f1f996e2d680e287f0b27044097fb119e2",
+      "routesPassed": 20,
+      "routesTotal": 20,
+      "runtimePngTransportsPassed": 43,
+      "runtimePngTransportsTotal": 43,
+      "uniquePngHashesVisuallyObserved": 28,
+      "uniquePngHashesExpected": 28,
+      "transportOnlyOccurrenceAliasesWithVisuallyObservedIdenticalHash": 4,
+      "missingVisualHashes": 0,
+      "desktopMouseIncorrectAndCorrectFeedback": "PASS",
+      "tabletTouchIncorrectAndCorrectFeedback": "PASS",
+      "mobileTouchIncorrectAndCorrectFeedback": "PASS",
+      "zeroIframes": true,
+      "pageErrors": 0,
+      "httpFailures": 0,
+      "requestFailures": 0,
+      "videoSha256": "e41164a81ab9e7bb5beefdd6512c86b887af8b8ade3c3069cb7a2e69f4e66f10",
+      "mobileScreenshotSha256": "dc5cb46910c56dd09a52a2c011e38f9d8af922c18b03311db552845ffc58647b"
+    },
+    "linuxIndependentReplay": {
+      "workflowRunId": 41870834509,
+      "workflowRunUrl": "https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/41870834509",
+      "workflowConclusion": "failure",
+      "jobId": 126717111540,
+      "jobUrl": "https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/41870834509/job/126717111540",
+      "headSha": "b06a7c8a1b4c0e79fc470afaf517d0d8361236bc",
+      "cleanV26Build": "PASS",
+      "hashPinnedBundleAndSemanticTests": "PASS",
+      "reviewServer": "PASS",
+      "overlayStaticVerification": "PASS",
+      "realBrowserGameplay": "FAIL",
+      "artifactId": 13344986303,
+      "artifactName": "duduq-independent-y2m01-overlay-qa-41870834509",
+      "artifactBytes": 9220356,
+      "artifactExpired": false
+    }
+  },
+  "investigations": {
+    "y1m04TargetShooterQ002ConfirmationRace": {
+      "status": "PASS_WITH_FAIL_CLOSED_GATE",
+      "browserReportSha256": "17ea9ef333fc5060a04527c239e109638fd42b0f0a1b8b0d87eef9f8952e7b54",
+      "routesPassed": 20,
+      "runtimePngTransportsPassed": 18,
+      "nativeMouseGameplay": "PASS",
+      "incorrectVisibleState": "AWAITING_RETRY",
+      "correctVisibleState": "AWAITING_CONTINUE",
+      "observedRace": [
+        "The target became incorrect while the previous CONTINUAR feedback was still visible.",
+        "The target became correct while the previous TENTAR DE NOVO feedback was still visible."
+      ],
+      "gateBehavior": "Never clicks stale CONTINUAR after the expected target outcome is already visible; before outcome it permits only exact visible CONFIRMAR."
+    },
+    "y1m05SourceRegistryPin": {
+      "status": "PASS_WITHOUT_REWRITING_SOURCE_HASHES",
+      "cleanV26RegistrySha256": "aa615a3ed307b0e8cae6abf6901a1582c22ab59aa7f95c6339a635ca7d35fc89",
+      "legacyReviewedRegistrySha256": "c56f3ecc5dd608228ccb6d7ba5237ed8da5676cd4fa6f655a9eeb27ce268400c",
+      "sourceRegistryEntryProjectionSha256": "89904f133cba19a8777a40bfe69539def84663953ac5be9522dd1106139609e8",
+      "sourceUsageProjectionSha256": "9378f156a72e8547f02b3c18f6163517fc3d9c004bb565b10795fc62d6334361",
+      "sourceEntries": 101,
+      "registryEntriesOutsideY1M04": 1076,
+      "registryEntriesOutsideY1M04Sha256": "e1e444bdffaf308d38bcb22bd0a950468c6c95c3bd88bf2ecb7d4b35b6c0af92",
+      "negativeAndPositiveTestsPassed": 4
+    }
+  },
+  "blockers": [
+    {
+      "code": "Y2M01_MOBILE_TARGET_CONTAINMENT",
+      "questionId": "Y2M01-Q009",
+      "mechanicId": "target-shooter",
+      "viewport": "390x844",
+      "target": "Leo",
+      "targetRect": {
+        "x": 361.3,
+        "width": 46.5,
+        "right": 407.8
+      },
+      "viewportRight": 390,
+      "clippedByPixels": 17.8,
+      "fullyContainedOfficialImages": 3,
+      "officialImages": 4,
+      "horizontalScrollOverflow": 0,
+      "feedbackTransitionsStillPassed": true
+    },
+    {
+      "code": "INDEPENDENT_HUMAN_HOMOLOGATION_NOT_RECORDED",
+      "productionApproval": false
+    }
+  ],
+  "continuation": {
+    "nextIntegrationTarget": "Y2M01_RESUME",
+    "advanceToNextModule": false,
+    "independentGenerationQueueMayContinue": true,
+    "schedulerOwnsNextLanePlanning": true,
+    "manualContinueRequired": false,
+    "projectComplete": false
+  }
+}
