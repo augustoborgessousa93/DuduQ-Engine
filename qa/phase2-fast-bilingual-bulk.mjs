@@ -85,6 +85,18 @@ const canonicalExact=s=>{
  const concepts=byAlias.get(k);
  return concepts?.size===1?[...concepts][0]:null;
 };
+const resolveExactLabel=input=>{
+ const concept=canonicalExact(input);
+ if(concept)return {concept,source:null,confidence:'BILINGUAL_ALIAS'};
+ const exact=literalByName.get(norm(input));
+ if(exact?.size===1)return {concept:norm(input),source:exact.values().next().value,confidence:'EXACT_FULL_CAPTION'};
+ return null;
+};
+// Keep multilingual exactness and reject ambiguous names such as "orange".
+assert.equal(resolveExactLabel('cachorro')?.concept,'dog');
+assert.equal(resolveExactLabel('school bag')?.concept,'backpack');
+assert.equal(resolveExactLabel('orange'),null,'AMBIGUOUS_COLOR_OR_FRUIT_MUST_STAY_HELD');
+
 const noisePhrases=['school object','body part','classroom command','daily routine','person',
  'pet','animal','color','colour','cor','fruta','fruit','greeting','routine',
  'number','numeral','month','weather','illustration','imagem','icon','3d'];
@@ -178,17 +190,31 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
  questionHashes.set(rel,hash(bytes));
  for(const question of doc.items){
   const id=question.item_id;assert(!allQ.has(id));allQ.add(id);
-  function traverse(node){
+  const choiceKey=/^(?:options?|opcoes?|choices?|answers?|respostas?|alternatives?|distractors?|targets?|bubbles?|cards?|pairs?)$/i;
+  const labelKey=/^(?:semanticTarget|semantic|concept|targetConcept|answerConcept|optionSemantic|label|text|value|alt|caption|title|word|name)$/i;
+  function directLabels(node,inChoice){
+   return Object.entries(node).filter(([k,v])=>typeof v==='string'&&labelKey.test(k)&&
+    (inChoice||/^(?:semanticTarget|semantic|concept|targetConcept|answerConcept|optionSemantic)$/i.test(k)))
+    .map(([,v])=>v.trim()).filter(Boolean);
+  }
+  function traverse(node,inChoice=false,inheritedLabels=[]){
    if(!node||typeof node!=='object')return;
    if(!Array.isArray(node)){
+    const labels=directLabels(node,inChoice);
+    const scopedLabels=inChoice?[...new Set([...inheritedLabels,...labels])]:labels;
     const ids=[...new Set(['assetId','mediaId','image_ref','imageRef'].map(k=>node[k])
      .filter(v=>typeof v==='string'&&entryIndex.has(v)))];
     for(const mediaId of ids){
      if(!usages.has(mediaId))usages.set(mediaId,[]);
-     usages.get(mediaId).push({questionId:id,semanticTarget:norm(node.semanticTarget)});
+     usages.get(mediaId).push({questionId:id,semanticTarget:norm(node.semanticTarget),contextLabels:scopedLabels});
     }
+    for(const [key,child] of Object.entries(node))if(child&&typeof child==='object'){
+     const childChoice=inChoice||choiceKey.test(key);
+     traverse(child,childChoice,childChoice?[...new Set([...inheritedLabels,...labels])]:inheritedLabels);
+    }
+    return;
    }
-   for(const child of Object.values(node))if(child&&typeof child==='object')traverse(child);
+   for(const child of node)if(child&&typeof child==='object')traverse(child,inChoice,inheritedLabels);
   }
   traverse(question);
  }
@@ -228,30 +254,45 @@ for(const [id,links] of usages){
   if(opts.length===1&&!old?.semantic)concept=opts[0];
  }
 
- // Only all-occurrence unanimous, explicitly encoded semantics can recover
- // an otherwise unmapped catalog concept. Partial/shared IDs remain blocked.
- if(!concept&&links.length>0&&links.every(x=>Boolean(x.semanticTarget))){
-  const realTargets=[...new Set(links.map(x=>canonicalExact(x.semanticTarget)))];
-  const audited=(old?.optionSemanticTargets||[]).filter(Boolean).map(canonicalExact);
-  if(realTargets.length===1&&realTargets[0]&&
-   audited.every(x=>x===realTargets[0])&&
-   (!e.semantic||canonicalExact(e.semantic)===realTargets[0])&&
-   old?.semanticConflict!==true)concept=realTargets[0];
- }
+ // Resolve media from the exact option context in the real compiled graph.
+ // Every actual occurrence of a shared mediaId must independently yield one
+ // concept, and all occurrences must agree. This can supersede stale queue
+ // conflict flags, but never an actual disagreement in the question graph.
+ const perOccurrence=links.map(link=>{
+  const found=[];
+  const explicit=resolveExactLabel(link.semanticTarget);
+  if(explicit)found.push(explicit);
+  for(const label of link.contextLabels||[]){const resolved=resolveExactLabel(label);if(resolved)found.push(resolved);}
+  const unique=new Map(found.map(x=>[x.concept+'::'+(x.source?.sha||''),x]));
+  const concepts=new Set([...unique.values()].map(x=>x.concept));
+  return concepts.size===1?{concept:[...concepts][0],sources:[...unique.values()].filter(x=>x.source)}:null;
+ });
+ const contextConcepts=new Set(perOccurrence.filter(Boolean).map(x=>x.concept));
+ const graphConsensus=perOccurrence.length===links.length&&perOccurrence.every(Boolean)&&contextConcepts.size===1
+  ?{concept:[...contextConcepts][0],source:(()=>{
+    const sources=perOccurrence.flatMap(x=>x.sources||[]);
+    const unique=new Map(sources.map(x=>[x.source?.sha,x.source]));
+    return unique.size===1?[...unique.values()][0]:null;
+   })()}:null;
+ const contextDerived=!concept&&Boolean(graphConsensus);
+ if(contextDerived)concept=graphConsensus.concept;
 
  if(!old||old.classification!=='PROVISIONAL'){hold(id,'AUDITED_QUEUE_ENTRY_MISSING',concept);continue;}
  if(!concept){hold(id,'CONCEPT_UNMAPPED_BILINGUAL',rawConcept);continue;}
  if(historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id)){
   hold(id,'HISTORICAL_VISUAL_OR_SEMANTIC_HOLD',concept);continue;
  }
- if(old.semanticConflict===true){hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;}
+ if(old.semanticConflict===true&&!graphConsensus){hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;}
  if(old.temporary===false||e.temporary===false){
   hold(id,'NOT_PROVISIONAL',concept);continue;
  }
  if((old.mustInclude||[]).length||(old.mustNotInclude||[]).length){
   hold(id,'VISUAL_SCENE_CONSTRAINT_REQUIRES_REVIEW',concept);continue;
  }
- const asset=sourceSelection.get(concept)|| (literalSource&&{...literalSource,priority:'UNIQUE_FULL_BILINGUAL_CAPTION'});
+ const asset=sourceSelection.get(concept)||
+  (graphConsensus?.concept===concept&&graphConsensus.source?
+   {...graphConsensus.source,priority:'QUESTION_GRAPH_CONTEXT'}:null)||
+  (literalSource&&{...literalSource,priority:'UNIQUE_FULL_BILINGUAL_CAPTION'});
  if(!asset){hold(id,'NO_UNAMBIGUOUS_SOURCE_FOR_CONCEPT',concept);continue;}
  const realQuestionIds=[...new Set(links.map(x=>x.questionId))].sort();
  if(old.usage!==realQuestionIds.length){
@@ -264,10 +305,13 @@ for(const [id,links] of usages){
  if(e.semantic&&registryConcept&&registryConcept!==concept){
   hold(id,'REGISTRY_SEMANTIC_CONFLICT',concept);continue;
  }
- const explicit=[...links.map(x=>x.semanticTarget),
-  ...(old.optionSemanticTargets||[])].filter(Boolean);
- if(explicit.some(s=>(canonicalExact(s)||norm(s))!==concept)){
+ const explicit=[...links.map(x=>x.semanticTarget),...(old.optionSemanticTargets||[])].filter(Boolean);
+ const explicitConcepts=explicit.map(resolveExactLabel).filter(Boolean).map(x=>x.concept);
+ if(explicitConcepts.some(value=>value!==concept)){
   hold(id,'SHARED_EXPLICIT_ALTERNATIVE_SEMANTICS_CONFLICT',concept);continue;
+ }
+ if(old.semanticConflict===true&&graphConsensus?.concept!==concept){
+  hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;
  }
  // Strong inference for legacy missing semanticTarget: audited concept and
  // queue must agree across ALL referenced questions. This isn't a human signoff.
@@ -322,6 +366,7 @@ const report={schemaVersion:'DUDUQ_PHASE2_3DAY_BILINGUAL_BULK_V1',
  matchedFromCuratedPin:selected.filter(x=>x.sourcePriority==='PINNED_CURATED').length,
  matchedFromBilingualFilename:selected.filter(x=>x.sourcePriority==='UNIQUE_PLAIN_BILINGUAL').length,
  matchedFromFullSceneCaption:selected.filter(x=>x.sourcePriority==='UNIQUE_FULL_BILINGUAL_CAPTION').length,
+ matchedFromQuestionGraphContext:selected.filter(x=>x.sourcePriority==='QUESTION_GRAPH_CONTEXT').length,
  heldCount:held.length,heldReasons:counts,
   heldConceptClusters,heldDistinctConceptClusters:heldConceptClusters.length,
   nextReviewPriority:heldConceptClusters.slice(0,35),
