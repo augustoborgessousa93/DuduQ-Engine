@@ -256,6 +256,15 @@ for(const e of registry.entries){
   published.set(b,{path:rel,sha256:h});
 }
 const historical=new Set(['white','black','orange','orange fruit','banana','brother']);
+// Precisely scoped exception for the once-conflicted BLACK shared ID.
+// Actual compiled-graph audit: exactly 6 distinct question consumers and
+// every explicit semanticTarget across all 26 nested uses was 'black'.
+// Do not extend this exception to WHITE or any other BLACK ID.
+const vettedBlackId='IMG-Y1M03-Q001-BLACK';
+const vettedBlackQuestions=[
+ 'Y1M03-Q001','Y2M02-Q015','Y2M04-Q003',
+ 'Y2M04-Q015','Y3M05-Q015','Y4M05-Q005'
+];
 // Keep this exact shared ID provisional. Four Chromium cases across Q001/Q004
 // showed Y1M01_SESSION_ITEM_MISMATCH; no valid browser evidence for a replacement.
 const unprovenSessionMedia=new Set(['Y1M01-EMOJI-SLEEP-001']);
@@ -336,10 +345,20 @@ for(const [id,links] of usages){
   hold(id,'Y1M01_REAL_SESSION_VISUAL_QA_BLOCKED',concept);continue;
  }
  if(!concept){hold(id,'CONCEPT_UNMAPPED_BILINGUAL',rawConcept);continue;}
- if(historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id)){
+ const isVettedBlack=id===vettedBlackId&&concept==='black'&&
+  old?.semantic==='black'&&e.semantic==='black'&&
+  old.usage===vettedBlackQuestions.length&&
+  [...new Set(links.map(x=>x.questionId))].sort().join('|')===vettedBlackQuestions.join('|')&&
+  links.every(x=>!x.semanticTarget||canon(x.semanticTarget)==='black')&&
+  vettedBlackQuestions.every(qid=>links.some(x=>x.questionId===qid&&canon(x.semanticTarget)==='black'));
+ if(isVettedBlack){
+  const pinnedBlack=fileByPath.get('Imagens Ilustrativa/color-black-preto.png');
+  assert(pinnedBlack&&published.has(pinnedBlack.sha),'BLACK_OFFICIAL_ORIGINAL_MUST_ALREADY_BE_PUBLISHED');
+ }
+ if((historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id))&&!isVettedBlack){
   hold(id,'HISTORICAL_VISUAL_OR_SEMANTIC_HOLD',concept);continue;
  }
- if(old.semanticConflict===true&&!graphConsensus){hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;}
+ if(old.semanticConflict===true&&!graphConsensus&&!isVettedBlack){hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;}
  if(old.temporary===false||e.temporary===false){
   hold(id,'NOT_PROVISIONAL',concept);continue;
  }
@@ -368,7 +387,7 @@ for(const [id,links] of usages){
  if(explicitConcepts.some(value=>value!==concept)){
   hold(id,'SHARED_EXPLICIT_ALTERNATIVE_SEMANTICS_CONFLICT',concept);continue;
  }
- if(old.semanticConflict===true&&graphConsensus?.concept!==concept){
+ if(old.semanticConflict===true&&!isVettedBlack&&graphConsensus?.concept!==concept){
   hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;
  }
  // Strong inference for legacy missing semanticTarget: audited concept and
