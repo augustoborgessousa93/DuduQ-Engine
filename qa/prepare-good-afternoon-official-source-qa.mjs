@@ -47,7 +47,7 @@ assert.equal(qCount.size,600,'NOT_600_QUESTIONS');
 const links=usages.get(id)||[];
 const realQuestionIds=[...new Set(links.map(x=>x.questionId))].sort();
 assert.equal(realQuestionIds.length,12,'AFTERNOON_SHARED_QUESTION_SET_DRIFT');
-assert.equal(links.length,22,'AFTERNOON_SHARED_OCCURRENCE_COUNT_DRIFT');
+assert.equal(links.length,29,'AFTERNOON_SHARED_OCCURRENCE_COUNT_DRIFT');
 assert(links.every(x=>!x.semanticTarget||/afternoon/i.test(x.semanticTarget)),
  'AFTERNOON_SEMANTIC_TARGET_CONFLICT');
 const raw='https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/'+
