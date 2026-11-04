@@ -132,7 +132,7 @@ await writeFile(path.join(dist,'.duduq-pages-manifest'),nextManifestBytes);
 for(const [f,h] of questionHashes)assert.equal(sha(await readFile(path.join(dist,f))),h,'QUESTION_MODIFIED_BY_OVERLAY');
 for(const [f,bytes]of newFiles)assert.equal(sha(await readFile(path.join(dist,f))),sha(bytes));
 assert.equal(sha(await readFile(path.join(dist,registryRel))),sha(nextRegBytes));
-assert.equal(sha(await readFile(path.join(dist,'.duduq-pages-manifest')),sha(nextManifestBytes));
+assert.equal(sha(await readFile(path.join(dist,'.duduq-pages-manifest'))),sha(nextManifestBytes));
 const res={
  schemaVersion:'DUDUQ_PHASE2_CONSOLIDATED_5PNGS_10IDS_QA_V1',
  status:'ISOLATED_QA_CONSOLIDATED_NO_DEPLOY',
