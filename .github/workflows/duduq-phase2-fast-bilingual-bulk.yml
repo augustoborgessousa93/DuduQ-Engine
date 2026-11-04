@@ -5,6 +5,7 @@ on:
     branches:
       - qa/duduq-phase2-fast-bilingual-bulk-20261104
       - qa/duduq-greetings-q001-focus-20261104
+      - qa/duduq-phase2-next-safe-batch-20261104
     paths:
       - .github/workflows/duduq-phase2-fast-bilingual-bulk.yml
       - qa/phase2-fast-bilingual-bulk.mjs
@@ -12,6 +13,7 @@ on:
       - qa/verify-fast-bilingual-browser.mjs
       - qa/patch-y1m01-q001-hello-focus.mjs
       - qa/verify-y1m01-q001-focus-browser.mjs
+      - qa/verify-approved-q001-lock.mjs
 
 permissions:
   contents: read
@@ -142,6 +144,12 @@ jobs:
           node --check qa/patch-y1m01-q001-hello-focus.mjs
           node qa/patch-y1m01-q001-hello-focus.mjs
           test -s qa/results/y1m01-q001-focused-preview.json
+      - name: Lock approved Greetings Q001 before any additional media integrations
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/verify-approved-q001-lock.mjs
+          node qa/verify-approved-q001-lock.mjs
       - name: Directed REAL Chromium proof of affected media in isolated local Pages (no deploy)
         shell: bash
         env:
