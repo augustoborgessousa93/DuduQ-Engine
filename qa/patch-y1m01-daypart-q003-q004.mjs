@@ -52,8 +52,8 @@ for(const s of scenes){
  assert(!existing.has(s.newId),'NEW_ID_ALREADY_USED:'+s.newId);
 }
 const expected={
- 'Y1M01-Q003':{letter:'D',answer:'good morning',prompt:'Good morning!'},
- 'Y1M01-Q004':{letter:'B',answer:'good afternoon',prompt:'Good afternoon!'}
+ 'Y1M01-Q003':{letter:'D',answer:'morning',prompt:'Good morning!'},
+ 'Y1M01-Q004':{letter:'B',answer:'afternoon',prompt:'Good afternoon!'}
 };
 for(const [qid,e] of Object.entries(expected)){
  const q=byQuestion.get(qid);assert(q,'QUESTION_MISSING:'+qid);
