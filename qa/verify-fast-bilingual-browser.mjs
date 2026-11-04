@@ -129,6 +129,7 @@ const summary={schemaVersion:'DUDUQ_FAST_BULK_BROWSER_V1',status:failures.length
  certifiedGameplay:false,pedagogicalQAApproved:false,productionDeployed:false,
  releaseApproved:false,cases};
 await writeFile('qa/results/phase2-fast-bulk-browser.json',JSON.stringify(summary,null,2)+'\n');
+if(failures.length)console.error('FAST_BULK_BROWSER_FAILURE_DETAILS='+JSON.stringify(failures.map(x=>({questionId:x.questionId,mediaId:x.mediaId,sourceGitBlob:x.sourceGitBlob,sourcePath:x.assetPath,mechanic:x.mechanic,viewport:x.viewport,httpStatus:x.httpStatus,loaded:x.loaded,visible:x.visible,observedFrames:x.observedFrames,errors:x.errors,httpErrors:x.httpErrors,limitations:x.limitations,screenshot:x.screenshot}))));
 console.log('FAST_BULK_BROWSER_QA='+JSON.stringify({status:summary.status,
  sourceBlobs:summary.sourceBlobs,samples:summary.uniqueSourceMechanicSamples,
  cases:summary.browserCases,failures:summary.failedCases}));
