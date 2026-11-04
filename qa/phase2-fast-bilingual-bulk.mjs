@@ -95,7 +95,9 @@ const resolveExactLabel=input=>{
 // Keep multilingual exactness and reject ambiguous names such as "orange".
 assert.equal(resolveExactLabel('cachorro')?.concept,'dog');
 assert.equal(resolveExactLabel('school bag')?.concept,'backpack');
-assert.equal(resolveExactLabel('orange'),null,'AMBIGUOUS_COLOR_OR_FRUIT_MUST_STAY_HELD');
+assert.equal(resolveExactLabel('orange')?.concept,'orange');
+assert.notEqual(canonicalExact('orange fruit'),canonicalExact('orange'),
+ 'FRUIT_CONTEXT_MUST_NOT_COLLAPSE_TO_COLOR');
 
 const noisePhrases=['school object','body part','classroom command','daily routine','person',
  'pet','animal','color','colour','cor','fruta','fruit','greeting','routine',
