@@ -142,6 +142,10 @@ console.log('PHASE2_PINNED_BUILD_VERIFIED='+JSON.stringify({
  mediaIds:patch.appliedMediaIds,affectedQuestions:patch.appliedQuestionIds.length,
  assets:manifest.size,contracts:questions,orangeSplit:true,sleepTrial,productionDeployed:false}));
 NODE
+# Targeted student-facing Q001 amendment only; immutable source PNG bytes.
+DUDUQ_QA_ONLY=1 node --check qa/patch-y1m01-q001-hello-focus.mjs
+DUDUQ_QA_ONLY=1 node qa/patch-y1m01-q001-hello-focus.mjs
+test -s qa/results/y1m01-q001-focused-preview.json
 mkdir -p dist-pages
 cp -a "$ROOT"/. dist-pages/
 echo "READY_FOR_MANUAL_QA_PREVIEW_DEPLOYMENT"
