@@ -59,15 +59,31 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
 }
 assert.equal(questionIds.size,600);
 const forbidden=new Set(['white','orange','banana','pencil case','pencil','hands','feet','one','two','three','four','five','six','seven','eight','nine','ten']);
-const classes={eligible:[],requiresReview:[],alreadyOfficial:[],noSource:[],notInCurrentRegistry:[]};
-let currentReferenced=0, SVGCount=0;
+const classes={eligible:[],requiresReview:[],nonProvisionalOrOfficial:[],noSource:[],notInCurrentRegistry:[]};
+let currentReferenced=0, SVGCount=0, provisionalPNGCount=0, otherUnclassified=0;
 for(const [id,occ] of usage){
  currentReferenced++;
  const current=media.get(id),historic=oldQueue.get(id);
  if(!current){classes.notInCurrentRegistry.push({mediaId:id,occurrences:occ.length});continue;}
- const svg=typeof current.urlOrPath==='string'&&current.urlOrPath.toLowerCase().endsWith('.svg');
- if(!svg){classes.alreadyOfficial.push({mediaId:id,semantic:current.semantic,currentPath:current.urlOrPath});continue;}
- SVGCount++;
+ const sourcePath=String(current.urlOrPath||'');
+ const lowerPath=sourcePath.toLowerCase();
+ const svg=lowerPath.endsWith('.svg');
+ // Critical: many OFFICIAL-LOOKING PNG extensions are still temporary media
+ // (year-x/module-y/temporary, provisional or registry temporary=true).
+ // The PNG extension NEVER proves pedagogical approval or source provenance.
+ const png=lowerPath.endsWith('.png');
+ const explicitlyProvisional=(current.temporary===true
+   || /\/temporary\/|\/provisional[\/-]|\/fallback[\/-]/.test(lowerPath)
+   || /IMAGE_REFINEMENT_PENDING|REPLACE_LATER/i.test(String(current.integrationStatus||'')));
+ const provisionalPNG=png&&explicitlyProvisional;
+ if(!svg&&!provisionalPNG){
+  classes.nonProvisionalOrOfficial.push({mediaId:id,semantic:current.semantic,
+    currentPath:sourcePath,temporary:current.temporary??null,
+    provenance:current.provenance??null,integrationStatus:current.integrationStatus??null});
+  if(!png)otherUnclassified++;
+  continue;
+ }
+ if(svg)SVGCount++;if(provisionalPNG)provisionalPNGCount++;
  const semantic=norm(current.semantic||historic?.semantic||'');
  const imgs=stemIndex.get(semantic)||[];
  const errs=[];
@@ -120,12 +136,12 @@ const groups=[...sourceGroups.values()].map(x=>({...x,questionIds:[...x.question
 const report={schemaVersion:'DUDUQ_BULK_EXACT_SOURCE_CURRENT_600_CONTRACTS_V1',
  sourceCommit:source.sourceCommit,canonicalProductionDeployment:'709a2477-4cfe-4330-b633-7293a35dc1ee',
  contracts:600,registryEntries:reg.entries.length,sourceFiles:source.fileCount,
- referencedIMGIds:currentReferenced,svgMediaIds:SVGCount,
+ referencedIMGIds:currentReferenced,svgMediaIds:SVGCount,provisionalPngMediaIds:provisionalPNGCount,nonPngOrSvgUnclassified:otherUnclassified,
  sourceSHA256NotYetComputed:true,pngByteQARequired:true,pedagogicalApproval:'PENDING',
  phase2AlreadyIntegratedIds:qaAlready.size,eligibleUniqueSourceBlobs:groups.length,eligibleMediaIds:classes.eligible.length,
  eligibleAffectedQuestionCount:new Set(classes.eligible.flatMap(x=>x.questionIds)).size,
  summary:{eligible:classes.eligible.length,review:classes.requiresReview.length,
-  noSource:classes.noSource.length,alreadyOfficial:classes.alreadyOfficial.length,
+  noSource:classes.noSource.length,nonProvisionalOrOfficial:classes.nonProvisionalOrOfficial.length,
   missingRegistry:classes.notInCurrentRegistry.length},
  sourceGroups:groups,mediaIdEvidence:classes,productionDeployAuthorizedByQA:false};
 await mkdir('qa/results/bulk',{recursive:true});
