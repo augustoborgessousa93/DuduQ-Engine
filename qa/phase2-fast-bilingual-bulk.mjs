@@ -31,6 +31,29 @@ assert(inventory.length>=400&&inventory.length<550,'UNEXPECTED_SOURCE_IMAGE_COUN
 const fileByPath=new Map(inventory.map(x=>[x.path,x]));
 assert.equal(fileByPath.size,inventory.length,'SOURCE_DUPLICATE_PATH');
 
+/* For lessons with full sentence/scenario concepts, the source filename can
+ * itself be the exact semantic answer. E.g. 'I like apples.png', 'Two schools
+ * — Duas escolas.png', or 'Red boat - barco vermelho.png'. Compare complete
+ * bilingual caption segments only, NEVER substrings like 'park' in 'drawing
+ * in the park'. Verify unique Git blob to disallow arbitrary file selection.
+ */
+const literalByName=new Map();
+function literalIndex(key,asset){
+ if(!key)return;
+ if(!literalByName.has(key))literalByName.set(key,new Map());
+ literalByName.get(key).set(asset.sha,asset);
+}
+for(const asset of inventory){
+ const stem=asset.path.split('/').at(-1).replace(/\.png$/i,'');
+ const parts=[stem,...stem.split(/\s+[—–-]\s+/g)];
+ for(const part of parts){
+  const key=String(part).normalize('NFKD').replace(/[\u0300-\u036f]/g,'')
+   .toLowerCase().replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
+  literalIndex(key,asset);
+ }
+}
+
+
 const norm=x=>String(x??'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'')
  .toLowerCase().replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
 const hash=b=>createHash('sha256').update(b).digest('hex');
@@ -191,6 +214,14 @@ for(const [id,links] of usages){
  if(e.kind!=='image'||!e.urlOrPath?.endsWith('.svg'))continue;
  const rawConcept=old?.semantic||e.semantic;
  let concept=canonicalExact(rawConcept);
+ let literalSource=null;
+ if(!concept&&rawConcept){
+  const literal=literalByName.get(norm(rawConcept));
+  if(literal?.size===1){
+   concept=norm(rawConcept);
+   literalSource=literal.values().next().value;
+  }
+ }
  if(!concept){
   const opts=[...new Set((old?.optionSemanticTargets||[])
    .map(canonicalExact).filter(Boolean))];
@@ -208,7 +239,7 @@ for(const [id,links] of usages){
  if((old.mustInclude||[]).length||(old.mustNotInclude||[]).length){
   hold(id,'VISUAL_SCENE_CONSTRAINT_REQUIRES_REVIEW',concept);continue;
  }
- const asset=sourceSelection.get(concept);
+ const asset=sourceSelection.get(concept)|| (literalSource&&{...literalSource,priority:'UNIQUE_FULL_BILINGUAL_CAPTION'});
  if(!asset){hold(id,'NO_UNAMBIGUOUS_SOURCE_FOR_CONCEPT',concept);continue;}
  const realQuestionIds=[...new Set(links.map(x=>x.questionId))].sort();
  if(old.usage!==realQuestionIds.length){
@@ -217,13 +248,13 @@ for(const [id,links] of usages){
  if((old.exampleQuestions||[]).some(q=>!realQuestionIds.includes(q))){
   hold(id,'QUEUED_QUESTION_OUTSIDE_REAL_GRAPH',concept);continue;
  }
- const registryConcept=canonicalExact(e.semantic);
+ const registryConcept=canonicalExact(e.semantic)||(e.semantic?norm(e.semantic):null);
  if(e.semantic&&registryConcept&&registryConcept!==concept){
   hold(id,'REGISTRY_SEMANTIC_CONFLICT',concept);continue;
  }
  const explicit=[...links.map(x=>x.semanticTarget),
   ...(old.optionSemanticTargets||[])].filter(Boolean);
- if(explicit.some(s=>canonicalExact(s)!==concept)){
+ if(explicit.some(s=>(canonicalExact(s)||norm(s))!==concept)){
   hold(id,'SHARED_EXPLICIT_ALTERNATIVE_SEMANTICS_CONFLICT',concept);continue;
  }
  // Strong inference for legacy missing semanticTarget: audited concept and
@@ -253,6 +284,7 @@ const report={schemaVersion:'DUDUQ_PHASE2_3DAY_BILINGUAL_BULK_V1',
  distinctPngAlreadyInProduction:[...proposedPngs.values()].filter(x=>x.alreadyPublished).length,
  matchedFromCuratedPin:selected.filter(x=>x.sourcePriority==='PINNED_CURATED').length,
  matchedFromBilingualFilename:selected.filter(x=>x.sourcePriority==='UNIQUE_PLAIN_BILINGUAL').length,
+ matchedFromFullSceneCaption:selected.filter(x=>x.sourcePriority==='UNIQUE_FULL_BILINGUAL_CAPTION').length,
  heldCount:held.length,heldReasons:counts,
  humanReviewStillRequired:true,productionDeployed:false,releaseApproved:false,
  affectedQuestionIds:affected,proposed:selected,exceptions:held};
@@ -264,6 +296,7 @@ console.log('FAST_BILINGUAL_PLAN='+JSON.stringify({
  modules:report.matchedModules.length,sourceBlobs:report.matchedDistinctPngBlobs,
  prepublishedBlobs:report.distinctPngAlreadyInProduction,
  pinned:report.matchedFromCuratedPin,autoBilingual:report.matchedFromBilingualFilename,
+ fullSceneCaption:report.matchedFromFullSceneCaption,
  held:report.heldCount,topHeld:Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,8)}));
 if(!apply)process.exit(0);
 assert(selected.length>0,'ZERO_SELECTED_NO_BULK_CANDIDATE');
