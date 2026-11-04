@@ -192,7 +192,7 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
  questionHashes.set(rel,hash(bytes));
  for(const question of doc.items){
   const id=question.item_id;assert(!allQ.has(id));allQ.add(id);
-  const choiceKey=/^(?:options?|opcoes?|choices?|answers?|respostas?|alternatives?|distractors?|targets?|bubbles?|cards?|pairs?)$/i;
+  const choiceKey=/(?:option|opcao|choice|answer|resposta|alternative|distractor|target|bubble|card|pair|match)/i;
   const labelKey=/^(?:semanticTarget|semantic|concept|targetConcept|answerConcept|optionSemantic|label|text|value|alt|caption|title|word|name)$/i;
   function directLabels(node,inChoice){
    return Object.entries(node).filter(([k,v])=>typeof v==='string'&&labelKey.test(k)&&
@@ -202,10 +202,12 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
   function traverse(node,inChoice=false,inheritedLabels=[]){
    if(!node||typeof node!=='object')return;
    if(!Array.isArray(node)){
-    const labels=directLabels(node,inChoice);
-    const scopedLabels=inChoice?[...new Set([...inheritedLabels,...labels])]:labels;
     const ids=[...new Set(['assetId','mediaId','image_ref','imageRef'].map(k=>node[k])
      .filter(v=>typeof v==='string'&&entryIndex.has(v)))];
+    // Media-bearing options can carry their label locally even when a legacy
+    // runtime uses a nonstandard ancestor key instead of "options"/"choices".
+    const labels=directLabels(node,inChoice||ids.length>0);
+    const scopedLabels=inChoice?[...new Set([...inheritedLabels,...labels])]:labels;
     for(const mediaId of ids){
      if(!usages.has(mediaId))usages.set(mediaId,[]);
      usages.get(mediaId).push({questionId:id,semanticTarget:norm(node.semanticTarget),contextLabels:scopedLabels});
@@ -383,6 +385,7 @@ console.log('FAST_BILINGUAL_PLAN='+JSON.stringify({
  prepublishedBlobs:report.distinctPngAlreadyInProduction,
  pinned:report.matchedFromCuratedPin,autoBilingual:report.matchedFromBilingualFilename,
  fullSceneCaption:report.matchedFromFullSceneCaption,
+ questionContext:report.matchedFromQuestionGraphContext,
  held:report.heldCount,topHeld:Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,8)}));
 if(!apply)process.exit(0);
 assert(selected.length>0,'ZERO_SELECTED_NO_BULK_CANDIDATE');
