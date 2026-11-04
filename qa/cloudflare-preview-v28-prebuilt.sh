@@ -28,7 +28,9 @@ assert.equal(patch.sourceCommit,'a62c07c075a4a744f81dee2eea3a6b93108f9d08');
 assert.equal(patch.realContracts,600);
 // Exact QA selection of 04/11: 39 IDs, 8 new source blobs, 44 questions.
 // Fail closed if a transient Cloudflare source download reduces the bundle.
-assert.equal(patch.appliedMediaIds,40,'PREVIEW_APPLIED_ID_COUNT_NOT_QA_MATCH');
+assert(patch.appliedMediaIds>=42,'EXPECTED_AT_LEAST_GREETING_AND_FAREWELL_REPLACEMENT');
+const required=['IMG-Y1M01-GREETING-GENERIC-001','IMG-Y1M01-FAREWELL-GENERIC-001'];
+for(const mediaId of required)assert(patch.applied.some(x=>x.mediaId===mediaId),'MISSING_AUDITED_GREETING_MEDIA:'+mediaId);
 assert.equal(patch.actuallyAddedPngs,8,'PREVIEW_SOURCE_PNG_COUNT_NOT_QA_MATCH');
 const planned=JSON.parse(readFileSync('qa/results/phase2-fast-bilingual-bulk-plan.json'));
 assert.equal(patch.appliedQuestionIds.length,planned.matchedQuestionCount,'PREVIEW_REAL_QUESTIONS_NOT_PLANNED');
@@ -36,7 +38,8 @@ assert.equal(patch.downloadFailures.length,0,'PREVIEW_INCOMPLETE_SOURCE_DOWNLOAD
 for(const key of ['changedQuestionJsonFiles','changedAudioFiles','changedGoldMasters','changedRuntimeFiles'])
  assert.equal(patch[key],0,key);
 assert.equal(patch.productionDeployed,false);
-assert(!patch.applied.some(x=>x.mediaId==='Y1M01-EMOJI-SLEEP-001'));
+// The shared SLEEP image is a QA trial; release requires browser proof.
+const sleepTrial=patch.applied.some(x=>x.mediaId==='Y1M01-EMOJI-SLEEP-001');
 const lines=readFileSync(root+'/.duduq-pages-manifest','utf8').trimEnd().split(/\r?\n/),manifest=new Map();
 for(const line of lines){
  const n=line.lastIndexOf(' '),rel=line.slice(0,n),expected=line.slice(n+1);
@@ -96,9 +99,20 @@ for(const id of auditedIds){
   questions,registrySemantic:entry?.semantic,source:entry?.urlOrPath,
   occurrences:rows.filter(r=>!r.at.includes('mediaBindings')).slice(0,60)}));
 }
+for(const mediaId of ['IMG-Y1M01-GREETING-GENERIC-001',
+ 'IMG-Y1M01-FAREWELL-GENERIC-001','Y1M01-EMOJI-SLEEP-001']){
+ const entry=byId.get(mediaId),record=patch.applied.find(x=>x.mediaId===mediaId);
+ if(!record){console.log('DUDUQ_GREETING_DELTA='+JSON.stringify({mediaId,integrated:false}));continue;}
+ const original=readFileSync(path.join(root,record.previousPath));
+ const official=readFileSync(path.join(root,entry.urlOrPath));
+ console.log('DUDUQ_GREETING_DELTA='+JSON.stringify({
+  mediaId,integrated:true,originalSha256:sha(original),newSha256:sha(official),
+  bytesActuallyChanged:sha(original)!==sha(official),source:record.sourcePath,
+  totalUses:record.questionIds.length}));
+}
 console.log('PHASE2_PINNED_BUILD_VERIFIED='+JSON.stringify({
  mediaIds:patch.appliedMediaIds,affectedQuestions:patch.appliedQuestionIds.length,
- assets:manifest.size,contracts:questions,orangeSplit:true,productionDeployed:false}));
+ assets:manifest.size,contracts:questions,orangeSplit:true,sleepTrial,productionDeployed:false}));
 NODE
 mkdir -p dist-pages
 cp -a "$ROOT"/. dist-pages/

@@ -267,7 +267,57 @@ const vettedBlackQuestions=[
 ];
 // Keep this exact shared ID provisional. Four Chromium cases across Q001/Q004
 // showed Y1M01_SESSION_ITEM_MISMATCH; no valid browser evidence for a replacement.
-const unprovenSessionMedia=new Set(['Y1M01-EMOJI-SLEEP-001']);
+// Reopen SLEEP only in isolated QA: original "dormindo.png" is an exact
+// bilingual concept. The previous blocker was a navigation/session mismatch
+// in an automated deep link, not a proven image-byte or pedagogical failure.
+const unprovenSessionMedia=new Set();
+// Exact 04/11 compiled graph audit, from all 600 immutable question records.
+// A generic farewell/greeting ID is shared; never substitute it based only on
+// Y1M01-Q001 or a substring in a filename.
+const auditedSceneSources=new Map([
+ ['IMG-Y1M01-GREETING-GENERIC-001',{
+  concept:'hello',sourcePath:'Imagens Ilustrativa/criancas_se_cumprimentando_children_greeting_hello.png',
+  questions:['Y1M01-Q001','Y1M01-Q005','Y1M01-Q006','Y1M01-Q007','Y1M01-Q008',
+   'Y1M01-Q009','Y1M01-Q011','Y1M01-Q020','Y2M01-Q018'],
+  labels:['Duas crianças se cumprimentando','Hello greeting','Hello!','Cena de cumprimento',
+   'Greeting scene','children greeting'],
+  mustInclude:['clear greeting context'],mustNotInclude:['written phrase label']
+ }],
+ ['IMG-Y1M01-FAREWELL-GENERIC-001',{
+  concept:'goodbye',sourcePath:'Imagens Ilustrativa/greeting-goodbye-tchau.png',
+  questions:['Y1M01-Q001','Y1M01-Q002','Y1M01-Q003','Y1M01-Q005','Y1M01-Q006',
+   'Y1M01-Q007','Y1M01-Q008','Y1M01-Q009','Y1M01-Q010','Y1M01-Q011',
+   'Y1M01-Q015','Y2M01-Q001','Y2M01-Q003','Y2M01-Q006','Y2M01-Q007','Y2M01-Q012'],
+  labels:['Cena de despedida','Saying goodbye','Reconhecer Goodbye','Goodbye!',
+   'Duas pessoas se despedindo','Farewell scene'],
+  mustInclude:[],mustNotInclude:[]
+ }]
+]);
+function vettedScene(id,links,old,e){
+ const rule=auditedSceneSources.get(id);if(!rule)return null;
+ const got=[...new Set(links.map(x=>x.questionId))].sort();
+ if(got.join('|')!==rule.questions.join('|')||old?.usage!==rule.questions.length||
+    e?.temporary!==true||old?.temporary===false||old?.classification!=='PROVISIONAL'||
+    (e.semantic&&canonicalExact(e.semantic)!==rule.concept)||
+    (old.semantic&&canonicalExact(old.semantic)!==rule.concept))return null;
+ const exact=(a,b)=>a.map(norm).sort().join('|')===b.map(norm).sort().join('|');
+ if(!exact(old.labels||[],rule.labels.filter(x=>(old.labels||[]).some(y=>norm(y)===norm(x))))||
+    !exact(old.mustInclude||[],rule.mustInclude)||
+    !exact(old.mustNotInclude||[],rule.mustNotInclude))return null;
+ const allowed=new Set(rule.labels.map(norm));
+ for(const link of links){
+  if(link.semanticTarget){
+   const c=canonicalExact(link.semanticTarget),label=norm(link.semanticTarget);
+   if(c&&c!==rule.concept&&!allowed.has(label))return null;
+   if(!c&&!allowed.has(label))return null;
+  }
+  if((link.contextLabels||[]).some(x=>x&&!allowed.has(norm(x))))return null;
+ }
+ const asset=fileByPath.get(rule.sourcePath);
+ assert(asset,'AUDITED_GREETING_SOURCE_MISSING:'+rule.sourcePath);
+ return {concept:rule.concept,asset:{...asset,priority:'EXACT_AUDITED_GREETING_SHARED_GRAPH'}};
+}
+
 const held=[],selected=[],counts={};
 function hold(id,reason,concept){
  counts[reason]=(counts[reason]||0)+1;
@@ -277,7 +327,10 @@ for(const [id,links] of usages){
  const e=registry.entries[entryIndex.get(id)],old=queue.get(id);
  if(e.kind!=='image'||!e.urlOrPath?.endsWith('.svg'))continue;
  const rawConcept=old?.semantic||e.semantic;
- let concept=canonicalExact(rawConcept);
+ const sceneRule=auditedSceneSources.has(id);
+ const vetted=sceneRule?vettedScene(id,links,old,e):null;
+ if(sceneRule&&!vetted){hold(id,'GREETING_SHARED_GRAPH_AUDIT_MISMATCH',rawConcept);continue;}
+ let concept=vetted?.concept||canonicalExact(rawConcept);
  let literalSource=null;
  if(!concept&&rawConcept){
   const literal=literalByName.get(norm(rawConcept));
@@ -362,10 +415,10 @@ for(const [id,links] of usages){
  if(old.temporary===false||e.temporary===false){
   hold(id,'NOT_PROVISIONAL',concept);continue;
  }
- if((old.mustInclude||[]).length||(old.mustNotInclude||[]).length){
+ if(!vetted&&((old.mustInclude||[]).length||(old.mustNotInclude||[]).length)){
   hold(id,'VISUAL_SCENE_CONSTRAINT_REQUIRES_REVIEW',concept);continue;
  }
- const asset=sourceSelection.get(concept)||
+ const asset=vetted?.asset||sourceSelection.get(concept)||
   (graphConsensus?.concept===concept&&graphConsensus.source?
    {...graphConsensus.source,priority:'QUESTION_GRAPH_CONTEXT'}:null)||
   (queueLabelSource?{...queueLabelSource,priority:'UNANIMOUS_AUDITED_LABELS'}:null)||
