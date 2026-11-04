@@ -926,7 +926,9 @@ jobs:
           gh run download 41747240378 -R "$GITHUB_REPOSITORY" --name duduq-phase2-bulk-originals-41747240378 --dir qa/results/bulk
           gh run download 41745805317 -R "$GITHUB_REPOSITORY" --name duduq-phase2-combined-5png-10ids-41745805317 --dir qa/results/consolidated
           gh run download 41747537551 -R "$GITHUB_REPOSITORY" --name duduq-phase2-bulk-originals-directed-visual-41747537551 --dir qa/results/bulk/previous
-          cp qa/results/bulk/previous/report.json qa/results/bulk/previous-visual-report.json
+          REPORT="$(find qa/results/bulk/previous -type f -name report.json | head -n 1)"
+          test -n "$REPORT" && test -s "$REPORT"
+          cp "$REPORT" qa/results/bulk/previous-visual-report.json
           test -s qa/results/bulk/integration-evidence.json
           test -s qa/results/bulk/previous-visual-report.json
       - name: Recreate validated large QA overlay without updating any live resource
