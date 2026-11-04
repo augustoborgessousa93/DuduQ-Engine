@@ -26,6 +26,17 @@ for(const id of ['IMG-Y1M01-GREETING-GENERIC-001','IMG-Y1M01-FAREWELL-GENERIC-00
   hold:hold?{reason:hold.reason,concept:hold.concept}:null}));
 }
 DUDUQ_GREETING_BLOCK_DIAG
+node --input-type=module <<'Q001_EXACT'
+import {readFileSync} from 'node:fs';
+const root='qa/fast-bilingual-immutable-candidate';
+const doc=JSON.parse(readFileSync(root+'/content/english/year-1/module-01/questions.json','utf8'));
+const q=doc.items.find(x=>x.item_id==='Y1M01-Q001');
+const registry=JSON.parse(readFileSync(root+'/content/english/media/media-registry.json','utf8'));
+const map=new Map(registry.entries.map(x=>[x.mediaId,x]));
+const ids=['IMG-Y1M01-GREETING-GENERIC-001','IMG-Y1M01-FAREWELL-GENERIC-001','Y1M01-EMOJI-SLEEP-001','Y1M01-EMOJI-FOOD-001'];
+console.log('Q001_ORIGINAL_EXACT='+JSON.stringify(q));
+console.log('Q001_REGISTRY='+JSON.stringify(ids.map(id=>({id,registry:map.get(id)}))));
+Q001_EXACT
 DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs --apply
 node --input-type=module <<'NODE'
 import assert from 'node:assert/strict';
