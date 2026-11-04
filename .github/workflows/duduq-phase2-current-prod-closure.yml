@@ -1,0 +1,88 @@
+name: DUDUQ Phase 2 - Reconcile CURRENT Orange production media truth (READ ONLY)
+
+on:
+  push:
+    branches:
+      - qa/duduq-phase2-prod-closure-20261104
+    paths:
+      - qa/audit-phase2-current-orange-prod-closure.mjs
+      - .github/workflows/duduq-phase2-current-prod-closure.yml
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: duduq-phase2-current-prod-closure
+  cancel-in-progress: true
+
+jobs:
+  reconcile:
+    name: Verify published 2891-file release and quantify actual remaining provisional images
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify actual current production id and pinned GitHub release asset SHA
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p qa/production-orange-immutable qa/results /tmp/duduq-prod-meta
+          test "$(gh api repos/$GITHUB_REPOSITORY/commits/acccef36c8a3029d98e5efef1923b0b6fdad36e1 --jq .sha)" = acccef36c8a3029d98e5efef1923b0b6fdad36e1
+          curl -fLSs --retry 3 --retry-delay 2 \
+            --connect-timeout 25 --max-time 360 \
+            "https://github.com/augustoborgessousa93/DuduQ-Engine/releases/download/duduq-phase2-orange-fruit-color-corrected-20261103/duduq-phase2-orange-fruit-color-corrected.tar.gz" \
+            -o /tmp/duduq-prod-meta/orange-current.tar.gz
+          printf '%s  %s\n' \
+            cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800 \
+            /tmp/duduq-prod-meta/orange-current.tar.gz | sha256sum -c
+          tar -xzf /tmp/duduq-prod-meta/orange-current.tar.gz -C qa/production-orange-immutable
+          echo "CURRENT_ORANGE_RELEASE_PINNED_SHA_OK"
+      - name: Recover real 153-ID source audit metadata only, not its old 127 baseline
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          gh run download 41682938356 -R "$GITHUB_REPOSITORY" \
+            --name duduq-phase2-batch-source-integration-qa-only \
+            --dir /tmp/duduq-prod-meta
+          test -s /tmp/duduq-prod-meta/phase2-batch-source-integration.json
+          cp /tmp/duduq-prod-meta/phase2-batch-source-integration.json \
+            qa/results/phase2-source-153-qa-original.json
+          node --check qa/audit-phase2-current-orange-prod-closure.mjs
+          node qa/audit-phase2-current-orange-prod-closure.mjs
+      - name: Confirm actual CDN registry hash equals immutable release registry
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          curl -fLSs --retry 2 --connect-timeout 15 --max-time 50 \
+            "https://duduq-engine-13a.pages.dev/content/english/media/media-registry.json" \
+            -o /tmp/duduq-prod-meta/cdn-registry.json
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {createHash} from 'node:crypto';
+          import {readFileSync} from 'node:fs';
+          const h=b=>createHash('sha256').update(b).digest('hex');
+          const archive=readFileSync('qa/production-orange-immutable/content/english/media/media-registry.json');
+          const cdn=readFileSync('/tmp/duduq-prod-meta/cdn-registry.json');
+          assert.equal(h(cdn),h(archive),'LIVE_CDN_REGISTRY_NOT_ORANGE_CANONICAL');
+          const r=JSON.parse(readFileSync('qa/results/phase2-prod-current-source-closure.json'));
+          assert.equal(r.verifiedModules,30);
+          assert.equal(r.verifiedQuestionContracts,600);
+          assert.equal(r.packageHashesVerified,2891);
+          assert.equal(r.claimBoundaries.productionDeployedByThisWorkflow,false);
+          console.log('CURRENT_LIVE_CDN_REGISTRY_SAME_SHA_AS_PINNED_ORANGE_RELEASE='+h(cdn));
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-current-orange-production-media-reconciliation
+          retention-days: 90
+          if-no-files-found: warn
+          path: qa/results/phase2-prod-current-source-closure.json
