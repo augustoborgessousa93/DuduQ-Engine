@@ -14,7 +14,7 @@ export const aliases={
   book:['book','books','livro','livros'],notebook:['notebook','notebooks','caderno','cadernos'],school:['school','escola'],
   red:['red','vermelho','vermelha','vermelhos','vermelhas'],blue:['blue','azul'],green:['green','verde'],yellow:['yellow','amarelo','amarela'],
   orange:['orange','laranja'],orange_fruit:['orange fruit','laranja fruta'],purple:['purple','roxo','roxa'],black:['black','preto','preta'],white:['white','branco','branca'],
-  hello:['hello','oi','ola'],goodbye:['goodbye','bye','tchau','adeus'],
+  hello:['hello','oi','ola'],goodbye:['goodbye','goodbyes','bye','tchau','adeus','farewell','farewells','saying goodbye','saying farewell','despedida','se despedindo','duas pessoas se despedindo','cena de despedida','recognize goodbye','reconhecer goodbye'],
   boy:['boy','menino','garoto'],girl:['girl','menina','garota'],head:['head','cabeca'],hand:['hand','mao'],hands:['hands','maos'],
   leg:['leg','perna'],legs:['legs','pernas'],eye:['eye','olho'],eyes:['eyes','olhos'],ear:['ear','orelha'],ears:['ears','orelhas'],
   shirt:['shirt','camisa'],jacket:['jacket','jaqueta'],cap:['cap','bone'],hat:['hat','chapeu'],glasses:['glasses','oculos'],

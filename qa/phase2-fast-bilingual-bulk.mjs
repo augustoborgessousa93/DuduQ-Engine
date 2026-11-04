@@ -92,12 +92,34 @@ const resolveExactLabel=input=>{
  if(exact?.size===1)return {concept:norm(input),source:exact.values().next().value,confidence:'EXACT_FULL_CAPTION'};
  return null;
 };
+const resolveLabelConsensus=labels=>{
+ const values=[...new Set((Array.isArray(labels)?labels:[])
+  .map(value=>String(value??'').trim()).filter(Boolean))];
+ if(!values.length)return null;
+ const resolved=values.map(resolveExactLabel);
+ if(resolved.some(value=>!value))return null;
+ const concepts=new Set(resolved.map(value=>value.concept));
+ if(concepts.size!==1)return null;
+ const sources=new Map(resolved.filter(value=>value.source)
+  .map(value=>[value.source.sha,value.source]));
+ return {concept:[...concepts][0],source:sources.size===1?[...sources.values()][0]:null};
+};
 // Keep multilingual exactness and reject ambiguous names such as "orange".
 assert.equal(resolveExactLabel('cachorro')?.concept,'dog');
 assert.equal(resolveExactLabel('school bag')?.concept,'backpack');
 assert.equal(resolveExactLabel('orange')?.concept,'orange');
 assert.notEqual(canonicalExact('orange fruit'),canonicalExact('orange'),
  'FRUIT_CONTEXT_MUST_NOT_COLLAPSE_TO_COLOR');
+assert.equal(resolveExactLabel('farewell')?.concept,'goodbye');
+assert.equal(resolveExactLabel('Saying goodbye')?.concept,'goodbye');
+assert.equal(resolveLabelConsensus([
+ 'Cena de despedida','Saying goodbye','Reconhecer Goodbye','Goodbye!',
+ 'Duas pessoas se despedindo'
+])?.concept,'goodbye','UNANIMOUS_QUEUE_LABELS_SHOULD_RESOLVE_FAREWELL');
+assert.equal(resolveLabelConsensus(['Goodbye!','Good morning']),null,
+ 'CONFLICTING_QUEUE_LABELS_MUST_REMAIN_UNRESOLVED');
+assert.equal(resolveLabelConsensus(['Good morning, my name is Leo']),null,
+ 'FULL_DIALOGUE_MUST_NOT_COLLAPSE_TO_GREETING');
 
 const noisePhrases=['school object','body part','classroom command','daily routine','person',
  'pet','animal','color','colour','cor','fruta','fruit','greeting','routine',
@@ -257,6 +279,14 @@ for(const [id,links] of usages){
    .map(canonicalExact).filter(Boolean))];
   if(opts.length===1&&!old?.semantic)concept=opts[0];
  }
+ let queueLabelSource=null;
+ // Only use the audited label set as fallback when the semantic field itself
+ // is absent. Every nonempty label must resolve exactly to the same concept;
+ // mixed, descriptive or partially unknown sets remain held for review.
+ if(!concept&&!rawConcept){
+  const consensus=resolveLabelConsensus(old?.labels);
+  if(consensus){concept=consensus.concept;queueLabelSource=consensus.source;}
+ }
 
  // Resolve media from the exact option context in the real compiled graph.
  // Every actual occurrence of a shared mediaId must independently yield one
@@ -305,6 +335,7 @@ for(const [id,links] of usages){
  const asset=sourceSelection.get(concept)||
   (graphConsensus?.concept===concept&&graphConsensus.source?
    {...graphConsensus.source,priority:'QUESTION_GRAPH_CONTEXT'}:null)||
+  (queueLabelSource&&{...queueLabelSource,priority:'UNANIMOUS_AUDITED_LABELS'}:null)||
   (literalSource&&{...literalSource,priority:'UNIQUE_FULL_BILINGUAL_CAPTION'});
  if(!asset){hold(id,'NO_UNAMBIGUOUS_SOURCE_FOR_CONCEPT',concept);continue;}
  const realQuestionIds=[...new Set(links.map(x=>x.questionId))].sort();
@@ -395,7 +426,9 @@ console.log('FAST_BILINGUAL_PLAN='+JSON.stringify({
  pinned:report.matchedFromCuratedPin,autoBilingual:report.matchedFromBilingualFilename,
  fullSceneCaption:report.matchedFromFullSceneCaption,
  questionContext:report.matchedFromQuestionGraphContext,
- held:report.heldCount,topHeld:Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,8)}));
+ held:report.heldCount,topHeld:Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,8),
+ topUnmappedClusters:heldConceptClusters.filter(x=>x.reason==='CONCEPT_UNMAPPED_BILINGUAL')
+  .slice(0,8).map(({concept,mediaIdCount,questionCount,modules})=>({concept,mediaIdCount,questionCount,modules}))}));
 if(!apply)process.exit(0);
 assert(selected.length>0,'ZERO_SELECTED_NO_BULK_CANDIDATE');
 const unrecognized=[...new Set(selected.filter(x=>!published.has(x.sourceGitBlob))
