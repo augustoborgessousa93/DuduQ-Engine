@@ -1,0 +1,1678 @@
+{
+  "schemaVersion": "DUDUQ_MEDIA_QUESTION_INVENTORY_V1",
+  "createdAt": "2026-11-04T17:47:01.640Z",
+  "moduleId": "Y3M03",
+  "source": "dist-pages/content/english/year-3/module-03/questions.json",
+  "sourceSha256": "66af094d150b6731774a567ae15581bd663dfa2842f247d4899644f1404a21ea",
+  "registrySource": "dist-pages/content/english/media/media-registry.json",
+  "registrySha256": "ce8b74d3087e513622ff1efc9a999536c98744578d1989b0222b427b33f9d1c2",
+  "scope": "READ_ONLY_CONTRACT_AND_SEMANTIC_TARGET_INVENTORY_BEFORE_CANDIDATE_BINDING",
+  "questionCount": 20,
+  "contractResolution": {
+    "activities": 20,
+    "questionsWithVisualMedia": 16,
+    "questionsWithoutVisualMedia": 4,
+    "visibleMediaUsageRecords": 74,
+    "distinctOccurrenceScopedBindings": 66,
+    "distinctSourceMediaIds": 29,
+    "exactSemanticConcepts": 16
+  },
+  "canonicalSemanticTargets": [
+    "ben",
+    "brother",
+    "eight",
+    "father",
+    "grandfather",
+    "grandmother",
+    "he",
+    "leo",
+    "mia",
+    "mother",
+    "nine",
+    "seven",
+    "she",
+    "sister",
+    "ten",
+    "they"
+  ],
+  "generationPlan": {
+    "nativeGenerationOutputsThisInvocation": 0,
+    "verifiedReusableOriginalConcepts": [
+      "ben",
+      "brother",
+      "eight",
+      "father",
+      "grandfather",
+      "grandmother",
+      "he",
+      "leo",
+      "mia",
+      "mother",
+      "nine",
+      "seven",
+      "she",
+      "sister",
+      "ten",
+      "they"
+    ],
+    "totalCandidateConcepts": 16,
+    "reason": "All actual Y3M03 semantics have exact, hash-verified native Codex originals; duplicate generation is prohibited.",
+    "productionApproved": false,
+    "integrationApplied": false
+  },
+  "questions": [
+    {
+      "questionId": "Y3M03-Q001",
+      "sequencePosition": 1,
+      "topicEn": "Family: He and She",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "supportInstructionPt": "Ouça e estoure a bolha correspondente.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "he",
+        "titlePt": "Ouça e estoure a bolha correspondente.",
+        "instructionEn": "Listen and pop the matching bubble.",
+        "instructionPt": "Ouça e estoure a bolha correspondente.",
+        "instructionAudioEnId": "AUD-Y1M01-INSTRUCTION-V2-EN-002",
+        "instructionAudioPtId": "AUD-Y1M01-INSTRUCTION-V2-PT-002",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "teaching: Describe fictional relatives by name, relation and age. Focus: he.",
+      "answerKey": "Y3M03-Q001-O1",
+      "semanticTargets": [
+        "brother",
+        "eight",
+        "he",
+        "mother",
+        "nine",
+        "she"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0E55AE94BCF4CC3E",
+        "IMG-V11-2B-243B96C39D99CAF8",
+        "IMG-V11-2B-2ECDF43BCA9F3C65",
+        "IMG-V11-2B-8C61F006F08947DB",
+        "IMG-Y1M02-Q002-EIGHT",
+        "IMG-Y1M02-Q007-NINE"
+      ],
+      "visibleMediaUsageCount": 10,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "he",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q001-O1"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q001-O2"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q001-O3"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q001-O4"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "he",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q001-O1"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D1"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D2"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D3"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D4"
+        },
+        {
+          "questionId": "Y3M03-Q001",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q001-D5"
+        }
+      ],
+      "questionContractSha256": "13a52bc80338ce849464a2afa55576d9a28379065a469bda240020ac37c39624",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q002",
+      "sequencePosition": 2,
+      "topicEn": "Family: He and She",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "primaryInstructionEn": "Sort each item: close family or grandparents.",
+      "supportInstructionPt": "Separe cada item: close family ou grandparents.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "mother, father, brother, sister, grandmother, grandfather",
+        "titlePt": "Separe cada item: close family ou grandparents.",
+        "instructionEn": "Sort each item: close family or grandparents.",
+        "instructionPt": "Separe cada item: close family ou grandparents.",
+        "instructionAudioEnId": "AUD-V11-2B-039FD32210FFE777",
+        "instructionAudioPtId": "AUD-V11-2B-EE6A64946A937002",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "teaching: Describe fictional relatives by name, relation and age. Focus: family.",
+      "answerKey": {
+        "Y3M03-Q002-I1": "close-family",
+        "Y3M03-Q002-I2": "close-family",
+        "Y3M03-Q002-I3": "close-family",
+        "Y3M03-Q002-I4": "close-family",
+        "Y3M03-Q002-I5": "grandparents",
+        "Y3M03-Q002-I6": "grandparents"
+      },
+      "semanticTargets": [],
+      "referencedMediaIds": [],
+      "visibleMediaUsageCount": 0,
+      "visualUsages": [],
+      "questionContractSha256": "5ea65cd282a63ff15130fb531e134dcd6ed77c9c01fd64eacc1e08eddb770b02",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q003",
+      "sequencePosition": 3,
+      "topicEn": "Family: He and She",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "supportInstructionPt": "Ouça e acerte a opção correspondente.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "brother",
+        "titlePt": "Ouça e acerte a opção correspondente.",
+        "instructionEn": "Listen and shoot the matching choice.",
+        "instructionPt": "Ouça e acerte a opção correspondente.",
+        "instructionAudioEnId": "AUD-V11-2B-35BDE6812E4A18CB",
+        "instructionAudioPtId": "AUD-V11-2B-1C56E4C0E84B3FED",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "guided practice: Describe fictional relatives by name, relation and age. Focus: family description.",
+      "answerKey": "Y3M03-Q003-O1",
+      "semanticTargets": [
+        "brother",
+        "father",
+        "mother",
+        "sister"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0E55AE94BCF4CC3E",
+        "IMG-V11-2B-243B96C39D99CAF8",
+        "IMG-V11-2B-6ACC979A1C714F7F",
+        "IMG-V11-2B-E79FA90D33A3754B"
+      ],
+      "visibleMediaUsageCount": 4,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q003",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "brother",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q003-O1"
+        },
+        {
+          "questionId": "Y3M03-Q003",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "mother",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q003-O2"
+        },
+        {
+          "questionId": "Y3M03-Q003",
+          "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "father",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q003-O3"
+        },
+        {
+          "questionId": "Y3M03-Q003",
+          "mediaId": "IMG-V11-2B-6ACC979A1C714F7F",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "sister",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q003-O4"
+        }
+      ],
+      "questionContractSha256": "978efbe9d874b406050e7487ccd8dca1bc3db757a7d0cf98b333aab489fd47d2",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q004",
+      "sequencePosition": 4,
+      "topicEn": "Family: He and She",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_IMAGE",
+      "primaryInstructionEn": "Find the matching pairs.",
+      "supportInstructionPt": "Encontre os pares correspondentes.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "sister, mother, father, brother",
+        "titlePt": "Encontre os pares correspondentes.",
+        "instructionEn": "Find the matching pairs.",
+        "instructionPt": "Encontre os pares correspondentes.",
+        "instructionAudioEnId": "AUD-V11-2B-812FA8577C67771A",
+        "instructionAudioPtId": "AUD-V11-2B-B8B838DB4D36AE23",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "Pairs short he/she family descriptions to clear fictional people; gender cues must be explicit and non-stereotyped. Curricular target: mother; father; brother; sister.",
+      "answerKey": [
+        "Y3M03-Q004-P1",
+        "Y3M03-Q004-P2",
+        "Y3M03-Q004-P3",
+        "Y3M03-Q004-P4"
+      ],
+      "semanticTargets": [
+        "brother",
+        "father",
+        "mother",
+        "sister"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-496D1E3286303401",
+        "IMG-V11-2B-72DD748C89819898",
+        "IMG-V11-2B-EB195E7418543F4E",
+        "IMG-V11-2B-F3663EB03B9FA720"
+      ],
+      "visibleMediaUsageCount": 4,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q004",
+          "mediaId": "IMG-V11-2B-496D1E3286303401",
+          "contractPath": "pairs[0].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "sister",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M03-Q004",
+          "mediaId": "IMG-V11-2B-EB195E7418543F4E",
+          "contractPath": "pairs[1].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M03-Q004",
+          "mediaId": "IMG-V11-2B-F3663EB03B9FA720",
+          "contractPath": "pairs[2].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "father",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M03-Q004",
+          "mediaId": "IMG-V11-2B-72DD748C89819898",
+          "contractPath": "pairs[3].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "questionContractSha256": "2d58dfbfd593464a403eccf6ff46bffc5a08983561f52e51d0a541b460dc848f",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q005",
+      "sequencePosition": 5,
+      "topicEn": "Family: He and She",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "grandmother, grandfather, he, she, eight, nine",
+        "titlePt": "Combine cada item com seu par.",
+        "instructionEn": "Match each item to its pair.",
+        "instructionPt": "Combine cada item com seu par.",
+        "instructionAudioEnId": "AUD-V11-2B-C63DB5835B054742",
+        "instructionAudioPtId": "AUD-V11-2B-365CBCA41E6B663B",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "guided practice: Describe fictional relatives by name, relation and age. Focus: introduce.",
+      "answerKey": {
+        "Y3M03-Q005-L1": "Y3M03-Q005-R1",
+        "Y3M03-Q005-L2": "Y3M03-Q005-R2",
+        "Y3M03-Q005-L3": "Y3M03-Q005-R3",
+        "Y3M03-Q005-L4": "Y3M03-Q005-R4",
+        "Y3M03-Q005-L5": "Y3M03-Q005-R5",
+        "Y3M03-Q005-L6": "Y3M03-Q005-R6"
+      },
+      "semanticTargets": [
+        "eight",
+        "grandfather",
+        "grandmother",
+        "he",
+        "nine",
+        "she"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-53C70478BC6A8DA7",
+        "IMG-V11-2B-9FFFCCD19B67697A",
+        "IMG-V11-2B-B55FEA574FE04262",
+        "IMG-V11-2B-FF1C87306E179ABE",
+        "IMG-Y1M02-Q002-EIGHT",
+        "IMG-Y1M02-Q007-NINE"
+      ],
+      "visibleMediaUsageCount": 6,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandmother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R1"
+        },
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandfather",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R2"
+        },
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-V11-2B-53C70478BC6A8DA7",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "he",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R3"
+        },
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-V11-2B-B55FEA574FE04262",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "she",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R4"
+        },
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "pairs[4].b",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R5"
+        },
+        {
+          "questionId": "Y3M03-Q005",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "pairs[5].b",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q005-R6"
+        }
+      ],
+      "questionContractSha256": "e7b8bea7812185acd6396a8ce4c379a183511b37c7e267f8d4dd5985eee01feb",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q006",
+      "sequencePosition": 6,
+      "topicEn": "Family: He and She",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "supportInstructionPt": "Ouça e estoure a bolha correspondente.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "she",
+        "titlePt": "Ouça e estoure a bolha correspondente.",
+        "instructionEn": "Listen and pop the matching bubble.",
+        "instructionPt": "Ouça e estoure a bolha correspondente.",
+        "instructionAudioEnId": "AUD-Y1M01-INSTRUCTION-V2-EN-002",
+        "instructionAudioPtId": "AUD-Y1M01-INSTRUCTION-V2-PT-002",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "guided practice: Describe fictional relatives by name, relation and age. Focus: she.",
+      "answerKey": "Y3M03-Q006-O1",
+      "semanticTargets": [
+        "brother",
+        "eight",
+        "he",
+        "nine",
+        "she",
+        "ten"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-0E55AE94BCF4CC3E",
+        "IMG-V11-2B-2ECDF43BCA9F3C65",
+        "IMG-V11-2B-8C61F006F08947DB",
+        "IMG-Y1M02-Q002-EIGHT",
+        "IMG-Y1M02-Q007-NINE",
+        "IMG-Y1M02-Q007-TEN"
+      ],
+      "visibleMediaUsageCount": 10,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q006-O1"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[1]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q006-O2"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q006-O3"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q006-O4"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q006-O1"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D1"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D2"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D3"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "he",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D4"
+        },
+        {
+          "questionId": "Y3M03-Q006",
+          "mediaId": "IMG-V11-2B-0E55AE94BCF4CC3E",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q006-D5"
+        }
+      ],
+      "questionContractSha256": "f2daa07cf84755c60435be9a10c5902e8245f9d7d11b8beec06abf6512f98106",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q007",
+      "sequencePosition": 7,
+      "topicEn": "Family: He and She",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "supportInstructionPt": "Ouça e acerte a opção correspondente.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "eight",
+        "titlePt": "Ouça e acerte a opção correspondente.",
+        "instructionEn": "Listen and shoot the matching choice.",
+        "instructionPt": "Ouça e acerte a opção correspondente.",
+        "instructionAudioEnId": "AUD-V11-2B-35BDE6812E4A18CB",
+        "instructionAudioPtId": "AUD-V11-2B-1C56E4C0E84B3FED",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "recognition: Describe fictional relatives by name, relation and age. Focus: age.",
+      "answerKey": "Y3M03-Q007-O1",
+      "semanticTargets": [
+        "eight",
+        "nine",
+        "seven",
+        "ten"
+      ],
+      "referencedMediaIds": [
+        "IMG-Y1M02-Q002-EIGHT",
+        "IMG-Y1M02-Q002-SEVEN",
+        "IMG-Y1M02-Q007-NINE",
+        "IMG-Y1M02-Q007-TEN"
+      ],
+      "visibleMediaUsageCount": 4,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q007",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[0]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q007-O1"
+        },
+        {
+          "questionId": "Y3M03-Q007",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[1]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q007-O2"
+        },
+        {
+          "questionId": "Y3M03-Q007",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q007-O3"
+        },
+        {
+          "questionId": "Y3M03-Q007",
+          "mediaId": "IMG-Y1M02-Q002-SEVEN",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "seven",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q007-O4"
+        }
+      ],
+      "questionContractSha256": "360ae14d884c80716a6be0db0f7143830f6b5a59513385e885e6c97f9a76b764",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q008",
+      "sequencePosition": 8,
+      "topicEn": "Family: He and She",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "primaryInstructionEn": "Look at the picture and complete the sentence.",
+      "supportInstructionPt": "De acordo com a imagem, complete a frase.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "She is my mother.",
+        "titlePt": "Complete a frase.",
+        "instructionEn": "Look at the picture and complete the sentence.",
+        "instructionPt": "De acordo com a imagem, complete a frase.",
+        "instructionAudioEnId": "AUD-V11-3V-R2-SSC-INSTR-EN-5A0775A0E41DA2",
+        "instructionAudioPtId": "AUD-V11-3U-SSC-INSTR-PT-58C42F1AA918CB",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2",
+        "instructionAudioStatus": "READY"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "recognition: Describe fictional relatives by name, relation and age. Focus: family description.",
+      "answerKey": "mother",
+      "semanticTargets": [
+        "mother"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-243B96C39D99CAF8"
+      ],
+      "visibleMediaUsageCount": 1,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q008",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "questionContractSha256": "209d69beac5eb0e8053628792f0b4a1c0b9f75d6c3e8a3c62b1a1440d0ee5e3b",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q009",
+      "sequencePosition": 9,
+      "topicEn": "Family: He and She",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "he, she",
+        "titlePt": "Combine cada item com seu par.",
+        "instructionEn": "Match each item to its pair.",
+        "instructionPt": "Combine cada item com seu par.",
+        "instructionAudioEnId": "AUD-V11-2B-C63DB5835B054742",
+        "instructionAudioPtId": "AUD-V11-2B-365CBCA41E6B663B",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "recognition: Describe fictional relatives by name, relation and age. Focus: He/She's my....",
+      "answerKey": {
+        "Y3M03-Q009-L1": "Y3M03-Q009-R1",
+        "Y3M03-Q009-L2": "Y3M03-Q009-R2"
+      },
+      "semanticTargets": [
+        "he",
+        "she",
+        "they"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-3527CF12E6C57BF5",
+        "IMG-V11-2B-53C70478BC6A8DA7",
+        "IMG-V11-2B-B55FEA574FE04262"
+      ],
+      "visibleMediaUsageCount": 3,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q009",
+          "mediaId": "IMG-V11-2B-53C70478BC6A8DA7",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "he",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q009-R1"
+        },
+        {
+          "questionId": "Y3M03-Q009",
+          "mediaId": "IMG-V11-2B-B55FEA574FE04262",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "she",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q009-R2"
+        },
+        {
+          "questionId": "Y3M03-Q009",
+          "mediaId": "IMG-V11-2B-3527CF12E6C57BF5",
+          "contractPath": "pairs[2].b",
+          "role": "option",
+          "semanticTarget": "they",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q009-R3"
+        }
+      ],
+      "questionContractSha256": "9325d170ec9df68f1c027495e388455349865e6a0b97452da7fa2d4ae51c2dd1",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q010",
+      "sequencePosition": 10,
+      "topicEn": "Family: He and She",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "supportInstructionPt": "Combine cada áudio com sua imagem.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "nine, ten, Mia, Leo",
+        "titlePt": "Combine cada áudio com sua imagem.",
+        "instructionEn": "Match each audio to its picture.",
+        "instructionPt": "Combine cada áudio com sua imagem.",
+        "instructionAudioEnId": "AUD-V11-2B-AF5B2496D071C5DC",
+        "instructionAudioPtId": "AUD-V11-2B-F63F32B7CAC606A2",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "comprehension: Describe fictional relatives by name, relation and age. Focus: identify.",
+      "answerKey": {
+        "Y3M03-Q010-I1": "Y3M03-Q010-T1",
+        "Y3M03-Q010-I2": "Y3M03-Q010-T2",
+        "Y3M03-Q010-I3": "Y3M03-Q010-T3",
+        "Y3M03-Q010-I4": "Y3M03-Q010-T4"
+      },
+      "semanticTargets": [
+        "leo",
+        "mia",
+        "nine",
+        "ten"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-08FFAC2848B99BD1",
+        "IMG-V11-2B-D0E7A61F4C82CFF8",
+        "IMG-Y1M02-Q007-NINE",
+        "IMG-Y1M02-Q007-TEN"
+      ],
+      "visibleMediaUsageCount": 4,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q010",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "targets[0]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q010-T1"
+        },
+        {
+          "questionId": "Y3M03-Q010",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "targets[1]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q010-T2"
+        },
+        {
+          "questionId": "Y3M03-Q010",
+          "mediaId": "IMG-V11-2B-08FFAC2848B99BD1",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "Mia",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q010-T3"
+        },
+        {
+          "questionId": "Y3M03-Q010",
+          "mediaId": "IMG-V11-2B-D0E7A61F4C82CFF8",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "Leo",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q010-T4"
+        }
+      ],
+      "questionContractSha256": "6d3c3a6ed50237ddaafd31136df18dd9142fc0b0830f4f28efa62cdb14315fac",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q011",
+      "sequencePosition": 11,
+      "topicEn": "Family: He and She",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "supportInstructionPt": "Ouça e acerte a opção correspondente.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "he",
+        "titlePt": "Ouça e acerte a opção correspondente.",
+        "instructionEn": "Listen and shoot the matching choice.",
+        "instructionPt": "Ouça e acerte a opção correspondente.",
+        "instructionAudioEnId": "AUD-V11-2B-35BDE6812E4A18CB",
+        "instructionAudioPtId": "AUD-V11-2B-1C56E4C0E84B3FED",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "comprehension: Describe fictional relatives by name, relation and age. Focus: he.",
+      "answerKey": "Y3M03-Q011-O1",
+      "semanticTargets": [
+        "eight",
+        "he",
+        "nine",
+        "she"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-2ECDF43BCA9F3C65",
+        "IMG-V11-2B-8C61F006F08947DB",
+        "IMG-Y1M02-Q002-EIGHT",
+        "IMG-Y1M02-Q007-NINE"
+      ],
+      "visibleMediaUsageCount": 4,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q011",
+          "mediaId": "IMG-V11-2B-8C61F006F08947DB",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "he",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q011-O1"
+        },
+        {
+          "questionId": "Y3M03-Q011",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q011-O2"
+        },
+        {
+          "questionId": "Y3M03-Q011",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q011-O3"
+        },
+        {
+          "questionId": "Y3M03-Q011",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q011-O4"
+        }
+      ],
+      "questionContractSha256": "3299dc5189307c442b49d724d0f4f207d6f015f2afa0ef348cf0a388fb128a0e",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q012",
+      "sequencePosition": 12,
+      "topicEn": "Family: He and She",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "grandfather, mother, father, brother, sister, grandmother",
+        "titlePt": "Combine cada item com seu par.",
+        "instructionEn": "Match each item to its pair.",
+        "instructionPt": "Combine cada item com seu par.",
+        "instructionAudioEnId": "AUD-V11-2B-C63DB5835B054742",
+        "instructionAudioPtId": "AUD-V11-2B-365CBCA41E6B663B",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "comprehension: Describe fictional relatives by name, relation and age. Focus: family.",
+      "answerKey": {
+        "Y3M03-Q012-L1": "Y3M03-Q012-R1",
+        "Y3M03-Q012-L2": "Y3M03-Q012-R2",
+        "Y3M03-Q012-L3": "Y3M03-Q012-R3",
+        "Y3M03-Q012-L4": "Y3M03-Q012-R4",
+        "Y3M03-Q012-L5": "Y3M03-Q012-R5",
+        "Y3M03-Q012-L6": "Y3M03-Q012-R6"
+      },
+      "semanticTargets": [
+        "brother",
+        "father",
+        "grandfather",
+        "grandmother",
+        "mother",
+        "sister"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-2680DF6BE58F4B7E",
+        "IMG-V11-2B-9FFFCCD19B67697A",
+        "IMG-V11-2B-D2B2759DE5619C8A",
+        "IMG-V11-2B-E1B1A5B8AABB306D",
+        "IMG-V11-2B-F8F1532BA0C59828",
+        "IMG-V11-2B-FF1C87306E179ABE"
+      ],
+      "visibleMediaUsageCount": 6,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-9FFFCCD19B67697A",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandfather",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R1"
+        },
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-F8F1532BA0C59828",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R2"
+        },
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "father",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R3"
+        },
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R4"
+        },
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "sister",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R5"
+        },
+        {
+          "questionId": "Y3M03-Q012",
+          "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandmother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q012-R6"
+        }
+      ],
+      "questionContractSha256": "824de9b54a5dac19b88101d1c6497f955266120257dbe5f6397b25f2c40966af",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q013",
+      "sequencePosition": 13,
+      "topicEn": "Family: He and She",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_TEXT",
+      "primaryInstructionEn": "Find the matching pairs.",
+      "supportInstructionPt": "Encontre os pares correspondentes.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "he, she",
+        "titlePt": "Encontre os pares correspondentes.",
+        "instructionEn": "Find the matching pairs.",
+        "instructionPt": "Encontre os pares correspondentes.",
+        "instructionAudioEnId": "AUD-V11-2B-812FA8577C67771A",
+        "instructionAudioPtId": "AUD-V11-2B-B8B838DB4D36AE23",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "A two-pair sound-form check supports the new he/she chunks after referents are established; not a standalone grammar test. Curricular target: he; she.",
+      "answerKey": [
+        "Y3M03-Q013-P1",
+        "Y3M03-Q013-P2"
+      ],
+      "semanticTargets": [],
+      "referencedMediaIds": [],
+      "visibleMediaUsageCount": 0,
+      "visualUsages": [],
+      "questionContractSha256": "6436c6cd6d822f043bf6f63d85e743febd3253c7d0de50f21b7d6d27d1cbacb7",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q014",
+      "sequencePosition": 14,
+      "topicEn": "Family: He and She",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "supportInstructionPt": "Combine cada áudio com sua imagem.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "she, he",
+        "titlePt": "Combine cada áudio com sua imagem.",
+        "instructionEn": "Match each audio to its picture.",
+        "instructionPt": "Combine cada áudio com sua imagem.",
+        "instructionAudioEnId": "AUD-V11-2B-AF5B2496D071C5DC",
+        "instructionAudioPtId": "AUD-V11-2B-F63F32B7CAC606A2",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "listening: Describe fictional relatives by name, relation and age. Focus: He/She is ... years old.",
+      "answerKey": {
+        "Y3M03-Q014-I1": "Y3M03-Q014-T1",
+        "Y3M03-Q014-I2": "Y3M03-Q014-T2",
+        "Y3M03-Q014-I3": "Y3M03-Q014-T3",
+        "Y3M03-Q014-I4": "Y3M03-Q014-T4"
+      },
+      "semanticTargets": [
+        "father",
+        "he",
+        "mother",
+        "she"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-243B96C39D99CAF8",
+        "IMG-V11-2B-363CA1C39A2A0FE6",
+        "IMG-V11-2B-9C574AA05B2196A8",
+        "IMG-V11-2B-E79FA90D33A3754B"
+      ],
+      "visibleMediaUsageCount": 4,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q014",
+          "mediaId": "IMG-V11-2B-363CA1C39A2A0FE6",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "she",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q014-T1"
+        },
+        {
+          "questionId": "Y3M03-Q014",
+          "mediaId": "IMG-V11-2B-9C574AA05B2196A8",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "he",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q014-T2"
+        },
+        {
+          "questionId": "Y3M03-Q014",
+          "mediaId": "IMG-V11-2B-243B96C39D99CAF8",
+          "contractPath": "targets[2]",
+          "role": "option",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q014-T3"
+        },
+        {
+          "questionId": "Y3M03-Q014",
+          "mediaId": "IMG-V11-2B-E79FA90D33A3754B",
+          "contractPath": "targets[3]",
+          "role": "option",
+          "semanticTarget": "father",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q014-T4"
+        }
+      ],
+      "questionContractSha256": "f97ef4561b5f0c62a6246cbee48614f31a4f8a41af09555f90dcfd3e4b0598ef",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q015",
+      "sequencePosition": 15,
+      "topicEn": "Family: He and She",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "Ben, mother, father, brother, sister, grandmother",
+        "titlePt": "Combine cada item com seu par.",
+        "instructionEn": "Match each item to its pair.",
+        "instructionPt": "Combine cada item com seu par.",
+        "instructionAudioEnId": "AUD-V11-2B-C63DB5835B054742",
+        "instructionAudioPtId": "AUD-V11-2B-365CBCA41E6B663B",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "retrieval: Describe fictional relatives by name, relation and age. Focus: describe.",
+      "answerKey": {
+        "Y3M03-Q015-L1": "Y3M03-Q015-R1",
+        "Y3M03-Q015-L2": "Y3M03-Q015-R2",
+        "Y3M03-Q015-L3": "Y3M03-Q015-R3",
+        "Y3M03-Q015-L4": "Y3M03-Q015-R4",
+        "Y3M03-Q015-L5": "Y3M03-Q015-R5",
+        "Y3M03-Q015-L6": "Y3M03-Q015-R6"
+      },
+      "semanticTargets": [
+        "ben",
+        "brother",
+        "father",
+        "grandmother",
+        "mother",
+        "sister"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-2680DF6BE58F4B7E",
+        "IMG-V11-2B-D2B2759DE5619C8A",
+        "IMG-V11-2B-E1B1A5B8AABB306D",
+        "IMG-V11-2B-F8F1532BA0C59828",
+        "IMG-V11-2B-FF1C87306E179ABE",
+        "Y1M01-EMOJI-BEN-001"
+      ],
+      "visibleMediaUsageCount": 6,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "Y1M01-EMOJI-BEN-001",
+          "contractPath": "pairs[0].b",
+          "role": "CONTENT",
+          "semanticTarget": "ben",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R1"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-F8F1532BA0C59828",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "mother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R2"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-D2B2759DE5619C8A",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "father",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R3"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-E1B1A5B8AABB306D",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "brother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R4"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-2680DF6BE58F4B7E",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "sister",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R5"
+        },
+        {
+          "questionId": "Y3M03-Q015",
+          "mediaId": "IMG-V11-2B-FF1C87306E179ABE",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "grandmother",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q015-R6"
+        }
+      ],
+      "questionContractSha256": "0e33702a5ab84d88512be6a8d9162c9ff292c39cab97082f01921eeb519809ee",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q016",
+      "sequencePosition": 16,
+      "topicEn": "Family: He and She",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "supportInstructionPt": "Ouça e acerte a opção correspondente.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "she",
+        "titlePt": "Ouça e acerte a opção correspondente.",
+        "instructionEn": "Listen and shoot the matching choice.",
+        "instructionPt": "Ouça e acerte a opção correspondente.",
+        "instructionAudioEnId": "AUD-V11-2B-35BDE6812E4A18CB",
+        "instructionAudioPtId": "AUD-V11-2B-1C56E4C0E84B3FED",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "retrieval: Describe fictional relatives by name, relation and age. Focus: she.",
+      "answerKey": "Y3M03-Q016-O1",
+      "semanticTargets": [
+        "eight",
+        "nine",
+        "she",
+        "ten"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-2ECDF43BCA9F3C65",
+        "IMG-Y1M02-Q002-EIGHT",
+        "IMG-Y1M02-Q007-NINE",
+        "IMG-Y1M02-Q007-TEN"
+      ],
+      "visibleMediaUsageCount": 4,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q016",
+          "mediaId": "IMG-V11-2B-2ECDF43BCA9F3C65",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "she",
+          "correct": true,
+          "optionOrCardId": "Y3M03-Q016-O1"
+        },
+        {
+          "questionId": "Y3M03-Q016",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "options[1]",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q016-O2"
+        },
+        {
+          "questionId": "Y3M03-Q016",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q016-O3"
+        },
+        {
+          "questionId": "Y3M03-Q016",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": false,
+          "optionOrCardId": "Y3M03-Q016-O4"
+        }
+      ],
+      "questionContractSha256": "96511985f6d198b8b341ee4ca9105fd2a664f058bb39f6898d07af17cbbcb49a",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q017",
+      "sequencePosition": 17,
+      "topicEn": "Family: He and She",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "nine, ten, eight",
+        "titlePt": "Combine cada item com seu par.",
+        "instructionEn": "Match each item to its pair.",
+        "instructionPt": "Combine cada item com seu par.",
+        "instructionAudioEnId": "AUD-V11-2B-C63DB5835B054742",
+        "instructionAudioPtId": "AUD-V11-2B-365CBCA41E6B663B",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "review: Describe fictional relatives by name, relation and age. Focus: age.",
+      "answerKey": {
+        "Y3M03-Q017-L1": "Y3M03-Q017-R1",
+        "Y3M03-Q017-L2": "Y3M03-Q017-R2",
+        "Y3M03-Q017-L3": "Y3M03-Q017-R3"
+      },
+      "semanticTargets": [
+        "eight",
+        "nine",
+        "ten"
+      ],
+      "referencedMediaIds": [
+        "IMG-Y1M02-Q002-EIGHT",
+        "IMG-Y1M02-Q007-NINE",
+        "IMG-Y1M02-Q007-TEN"
+      ],
+      "visibleMediaUsageCount": 3,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q017",
+          "mediaId": "IMG-Y1M02-Q007-NINE",
+          "contractPath": "pairs[0].b",
+          "role": "CONTENT",
+          "semanticTarget": "nine",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q017-R1"
+        },
+        {
+          "questionId": "Y3M03-Q017",
+          "mediaId": "IMG-Y1M02-Q007-TEN",
+          "contractPath": "pairs[1].b",
+          "role": "CONTENT",
+          "semanticTarget": "ten",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q017-R2"
+        },
+        {
+          "questionId": "Y3M03-Q017",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "pairs[2].b",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": null,
+          "optionOrCardId": "Y3M03-Q017-R3"
+        }
+      ],
+      "questionContractSha256": "8e227914b6a60ccd8a5f99a34cd002ed804bd8b0d2d223e54800709bb232c23b",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q018",
+      "sequencePosition": 18,
+      "topicEn": "Family: He and She",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "primaryInstructionEn": "Look at the picture and complete the sentence.",
+      "supportInstructionPt": "De acordo com a imagem, complete a frase.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "This is my grandfather.",
+        "titlePt": "Complete a frase.",
+        "instructionEn": "Look at the picture and complete the sentence.",
+        "instructionPt": "De acordo com a imagem, complete a frase.",
+        "instructionAudioEnId": "AUD-V11-3V-R2-SSC-INSTR-EN-5A0775A0E41DA2",
+        "instructionAudioPtId": "AUD-V11-3U-SSC-INSTR-PT-58C42F1AA918CB",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2",
+        "instructionAudioStatus": "READY"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "review: Describe fictional relatives by name, relation and age. Focus: family description.",
+      "answerKey": "grandfather",
+      "semanticTargets": [
+        "grandfather"
+      ],
+      "referencedMediaIds": [
+        "IMG-V11-2B-40A6ADFB20D21B5C"
+      ],
+      "visibleMediaUsageCount": 1,
+      "visualUsages": [
+        {
+          "questionId": "Y3M03-Q018",
+          "mediaId": "IMG-V11-2B-40A6ADFB20D21B5C",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "grandfather",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "questionContractSha256": "d2543cfe7e5a015f501fdc6fc94b9f2cc94bb7c8aa75a2a155b8e8deedccea87",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q019",
+      "sequencePosition": 19,
+      "topicEn": "Family: He and She",
+      "mechanicId": "smart-sentence-order",
+      "mechanicMode": "order",
+      "primaryInstructionEn": "Put the words in order.",
+      "supportInstructionPt": "Coloque as palavras na ordem correta.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "She is my mother.",
+        "titlePt": "Coloque as palavras na ordem correta.",
+        "instructionEn": "Put the words in order.",
+        "instructionPt": "Coloque as palavras na ordem correta.",
+        "instructionAudioEnId": "AUD-V11-2B-7EE175DC3C619B79",
+        "instructionAudioPtId": "AUD-V11-2B-1539EAB0EF5E9B67",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "consolidation: Describe fictional relatives by name, relation and age. Focus: This is my....",
+      "answerKey": [
+        "She",
+        "is",
+        "my",
+        "mother."
+      ],
+      "semanticTargets": [],
+      "referencedMediaIds": [],
+      "visibleMediaUsageCount": 0,
+      "visualUsages": [],
+      "questionContractSha256": "771011a07a4c04e3522053f6ca3ded0b651ff050a11012df780554678325090c",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    },
+    {
+      "questionId": "Y3M03-Q020",
+      "sequencePosition": 20,
+      "topicEn": "Family: He and She",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "primaryInstructionEn": "Sort each item: close family or grandparents.",
+      "supportInstructionPt": "Separe cada item: close family ou grandparents.",
+      "instruction": {
+        "version": "1.2",
+        "titleEn": "mother, father, brother, sister, grandmother, grandfather",
+        "titlePt": "Separe cada item: close family ou grandparents.",
+        "instructionEn": "Sort each item: close family or grandparents.",
+        "instructionPt": "Separe cada item: close family ou grandparents.",
+        "instructionAudioEnId": "AUD-V11-2B-039FD32210FFE777",
+        "instructionAudioPtId": "AUD-V11-2B-EE6A64946A937002",
+        "audioOrder": [
+          "en",
+          "pt"
+        ],
+        "languageEn": "English",
+        "languagePt": "pt-BR",
+        "standard": "DUDUQ_ENGLISH_MASTER_INSTRUCTION_STANDARD_V1_2"
+      },
+      "targetSkill": "Identify referent in short description.",
+      "curricularObjective": "Describe fictional relatives by name, relation and age.",
+      "learningTarget": "consolidation: Describe fictional relatives by name, relation and age. Focus: introduce.",
+      "answerKey": {
+        "Y3M03-Q020-I1": "close-family",
+        "Y3M03-Q020-I2": "close-family",
+        "Y3M03-Q020-I3": "close-family",
+        "Y3M03-Q020-I4": "close-family",
+        "Y3M03-Q020-I5": "grandparents",
+        "Y3M03-Q020-I6": "grandparents"
+      },
+      "semanticTargets": [],
+      "referencedMediaIds": [],
+      "visibleMediaUsageCount": 0,
+      "visualUsages": [],
+      "questionContractSha256": "6be44eb6b9d30260671d25961404894f4226546672f4c400359d679d8c8d0f1f",
+      "contractSource": "content/english/production/v11-1b/deterministic-activity-contracts.json"
+    }
+  ]
+}

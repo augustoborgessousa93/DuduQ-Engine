@@ -12,10 +12,17 @@ export function collectQuestionMediaUsages(question, usages=new Map()){
  function walk(node){
   if(!node||typeof node!=='object')return;
   if(!Array.isArray(node)){
+   const directSemantic=normalize(node.semanticTarget),nestedSemantic=normalize(node.media?.semanticTarget);
    const ids=[...new Set(['assetId','mediaId','image_ref','imageRef'].map(k=>node[k]).filter(v=>typeof v==='string'&&v.startsWith('IMG-')))];
+   const nestedIds=new Set(['assetId','mediaId','image_ref','imageRef'].map(k=>node.media?.[k])
+    .filter(v=>typeof v==='string'&&v.startsWith('IMG-')));
+   const aliasesNestedMedia=ids.some(id=>nestedIds.has(id));
+   if(aliasesNestedMedia&&directSemantic&&nestedSemantic&&directSemantic!==nestedSemantic)
+    throw Error('MEDIA_ALIAS_SEMANTIC_CONFLICT:'+qid+':'+directSemantic+':'+nestedSemantic);
+   const semanticTarget=directSemantic||(aliasesNestedMedia?nestedSemantic:'');
    for(const id of ids){
     if(!usages.has(id))usages.set(id,[]);
-    usages.get(id).push({questionId:qid,moduleId,semanticTarget:normalize(node.semanticTarget)});
+    usages.get(id).push({questionId:qid,moduleId,semanticTarget});
    }
   }
   for(const v of Object.values(node))if(v&&typeof v==='object')walk(v);

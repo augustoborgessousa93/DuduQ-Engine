@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "DUDUQ_Y3M03_SOURCE_REGISTRY_REBASE_V1",
+  "createdAt": "2026-11-04",
+  "moduleId": "Y3M03",
+  "status": "PASS_EXACT_GENERATION_CONTEXT_TO_PRISTINE_V26",
+  "reason": "The generation lane reviewed an exact composed QA registry. Independent replay may start from pristine V26 only because the whole hashes, all 29 source entries, all 74 logical usages, and the immutable Y3M03 question contract are independently pinned.",
+  "generationSourceRegistryPin": "source-registry-pin.json",
+  "generationSourceRegistryPinSha256": "3f50887e34129194233a234740f25ecfd86d126db009695727066041ad8fd84a",
+  "generationRegistrySha256": "ce8b74d3087e513622ff1efc9a999536c98744578d1989b0222b427b33f9d1c2",
+  "generationRegistryEntries": 1235,
+  "generationCompiledManifestSha256": "fa3464d4d16b0d3d2802545a8b32af648dd113628039b3aee67f938aef697c46",
+  "cleanV26RegistrySha256": "aa615a3ed307b0e8cae6abf6901a1582c22ab59aa7f95c6339a635ca7d35fc89",
+  "cleanV26RegistryEntries": 1159,
+  "cleanV26CompiledManifestSha256": "5993aaceaff272626c863aef07e1b33a909ca7f9fcc41d2d40890baa6c08b822",
+  "sourceQuestionSha256": "66af094d150b6731774a567ae15581bd663dfa2842f247d4899644f1404a21ea",
+  "sourceQuestionInvariantSha256": "b4ef7c698c6fa46f8b792e31cd82c2c9f2522f89241941a5d6cc3b3b79cfadb2",
+  "sourceRegistryEntryProjectionSha256": "aaa645770822e222c23112ab775e434a43bbe4c493452b022b2370563b0b3c22",
+  "logicalUsageProjectionSha256": "88616f95ede9254e7064e3f70126288b4ee690541e424ee595af6e004f884c30",
+  "sourceRegistryEntryCount": 29,
+  "logicalVisualUsageRecords": 74,
+  "rawReferenceFields": 340,
+  "finalOccurrenceScopedIds": 66,
+  "acceptedRegistryContexts": [
+    "GENERATION_AUDITED_COMPOSED_REGISTRY_EXACT_WHOLE_HASH",
+    "PRISTINE_V26_EXACT_WHOLE_REGISTRY_AND_MANIFEST_PIN"
+  ],
+  "sourceHashesRewritten": false,
+  "questionsModified": false,
+  "registryModified": false,
+  "goldMastersModified": false,
+  "productionApproved": false
+}

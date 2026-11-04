@@ -48,6 +48,25 @@ test('accept exact meaning in nested targets and bubble distractor pools',()=>{
  assert.equal(guard(u,pencil,'Y1M04-Q003','pencil').usages,1);
  assert.equal(guard(u,pen,'Y1M04-Q005','pen').usages,1);
 });
+test('infer an outer alias semantic only from its exact nested media object',()=>{
+ const id='IMG-Y2M03-Q005-CTX-FAMILY',u=new Map();
+ collectQuestionMediaUsages({item_id:'Y2M03-Q005',pairs:[{b:{assetId:id,
+   media:{assetId:id,mediaId:id,semanticTarget:'grandmother'}}}]},u);
+ const result=guard(u,id,'Y2M03-Q005','grandmother');
+ assert.equal(result.usages,2);
+ assert.equal(result.distinctQuestions,1);
+});
+test('reject conflicting direct and nested alias semantics',()=>{
+ const id='IMG-Y2M03-Q005-CTX-FAMILY',u=new Map();
+ assert.throws(()=>collectQuestionMediaUsages({item_id:'Y2M03-Q005',pairs:[{b:{assetId:id,
+   semanticTarget:'father',media:{mediaId:id,semanticTarget:'mother'}}}]},u),/MEDIA_ALIAS_SEMANTIC_CONFLICT/);
+});
+test('allow a semantic wrapper around a distinct nested media ID',()=>{
+ const id='IMG-Y2M01-Q018-NAME-QUESTION-SCENE-V1',u=new Map();
+ collectQuestionMediaUsages({item_id:'Y2M01-Q018',options:[{semanticTarget:'name-question scene',
+   media:{assetId:id,semanticTarget:"one child asks another child's name"}}]},u);
+ assert.equal(guard(u,id,'Y2M01-Q018',"one child asks another child's name").usages,1);
+});
 test('reject same generic media ID used outside Y1M04 even when words match',()=>{
  const id='IMG-Q001-ERASER',u=new Map();
  collectQuestionMediaUsages(q('Y1M04-Q001',id,'eraser'),u);

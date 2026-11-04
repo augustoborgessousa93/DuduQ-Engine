@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "DUDUQ_CODEX_IMAGE_GENERATION_RECEIPTS_V1",
+  "createdAt": "2026-11-04T17:47:01.640Z",
+  "moduleId": "Y3M03",
+  "provider": "OpenAI Codex native image generation",
+  "tool": "image_gen.imagegen",
+  "status": "NO_NEW_GENERATION_OUTPUT_REQUIRED_AFTER_COMPLETE_VERIFIED_REUSE_AUDIT",
+  "assets": [
+    {
+      "concept": "ben",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-BEN.png",
+      "sha256": "bcdbbaa2720afcdc0b8a2c459996088782bc14bf20453a046df6bd6327cf5ffc",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-BEN-ORIGINAL.png",
+      "originalSha256": "ec263e1cf6a55cc4f48a5b04f288f42aac1263b391bb45b1c2c22a2fd8b6a831"
+    },
+    {
+      "concept": "brother",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-BROTHER.png",
+      "sha256": "f0edf17ac932976cd1244cdd9f05e88e69fa84edb47f54b00586e461f0b4f293",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-BROTHER-ORIGINAL.png",
+      "originalSha256": "f0edf17ac932976cd1244cdd9f05e88e69fa84edb47f54b00586e461f0b4f293"
+    },
+    {
+      "concept": "eight",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-EIGHT.png",
+      "sha256": "f1f51c261a1662616fcdc24eff0cab7761aa886c48189ed48adee1c81129bf23",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-EIGHT-ORIGINAL.png",
+      "originalSha256": "63fb7f3eb46635f62903a2790c7fdf3353433a0c738e1cd19b0f683455e19fe2"
+    },
+    {
+      "concept": "father",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-FATHER.png",
+      "sha256": "7ae7af1c89c49e2f0ae612617f60c3bd52a9d2119ae5d9a73376d52b078f5b2a",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-FATHER-ORIGINAL.png",
+      "originalSha256": "7ae7af1c89c49e2f0ae612617f60c3bd52a9d2119ae5d9a73376d52b078f5b2a"
+    },
+    {
+      "concept": "grandfather",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-GRANDFATHER.png",
+      "sha256": "2a70dece6f55080a8e407f69ee9850316b7919fff438a608645f34975fd90058",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-GRANDFATHER-ORIGINAL.png",
+      "originalSha256": "2a70dece6f55080a8e407f69ee9850316b7919fff438a608645f34975fd90058"
+    },
+    {
+      "concept": "grandmother",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-GRANDMOTHER.png",
+      "sha256": "38d22c25034f0e878b259945c1a21fc444d02a5fca45865701a5044c91317d4d",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-GRANDMOTHER-ORIGINAL.png",
+      "originalSha256": "38d22c25034f0e878b259945c1a21fc444d02a5fca45865701a5044c91317d4d"
+    },
+    {
+      "concept": "he",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-HE.png",
+      "sha256": "1c89ac5b8a741e1cf1c38bb4ca98c852fbda69460180360a696e0affb06598ef",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-HE-ORIGINAL.png",
+      "originalSha256": "3398cf5b09d4a35cd59aca04660007c634c238518ba3a1b9369def8a4b967ed3"
+    },
+    {
+      "concept": "leo",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-LEO.png",
+      "sha256": "703ef0a0674cb315697e0c0fdb26e4715f8334893019f62d774c5dd01f0b39d4",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-LEO-ORIGINAL.png",
+      "originalSha256": "7f89807c3cebf1657628bab246d2546f1efa2cb011ba0fcbf716e112fe946e04"
+    },
+    {
+      "concept": "mia",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-MIA.png",
+      "sha256": "453e497d9f61292b94dbf25945c46580e98cad6836e7923a87f365747be999c4",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-MIA-ORIGINAL.png",
+      "originalSha256": "4365ab9a20b22e5635071ff8848bfacad536c27346a8e747dc193b4db9939920"
+    },
+    {
+      "concept": "mother",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-MOTHER.png",
+      "sha256": "98dd64f1bbad289e1c8452b3050e0cfab61a866639199d2aed102c39db53c288",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-MOTHER-ORIGINAL.png",
+      "originalSha256": "98dd64f1bbad289e1c8452b3050e0cfab61a866639199d2aed102c39db53c288"
+    },
+    {
+      "concept": "nine",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-NINE.png",
+      "sha256": "a49f122a9e0967699c4602ce5cd294ad228dff16bd644e9d906b26e9d87eae5c",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-NINE-ORIGINAL.png",
+      "originalSha256": "d606b31ad47da7e85f5294252146a6d682429f45f2db551f6b588bd4147ca23a"
+    },
+    {
+      "concept": "seven",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-SEVEN.png",
+      "sha256": "b675fb761c6054b737cf35ba6b9d36e9fe50ed7a317ae07e4a3dc30000272667",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-SEVEN-ORIGINAL.png",
+      "originalSha256": "cf8eaa0b36b46893e4b8ef2962f2ac42c5e806ef81d4426f907484fc0c3270cb"
+    },
+    {
+      "concept": "she",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-SHE.png",
+      "sha256": "01ecf4f95a490bb55af540eaba46de8137b46a2ff852bab5c4e47fd1afa6e4c8",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-SHE-ORIGINAL.png",
+      "originalSha256": "17888b6e5ec28b05f1b9dcb2f2c87bb8f28183de44babccb649016f1fb49963b"
+    },
+    {
+      "concept": "sister",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-SISTER.png",
+      "sha256": "47202566b4bc3953cd795f9e3a73747191d8990bf6f6bf1f50794e2dfe443bf9",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-SISTER-ORIGINAL.png",
+      "originalSha256": "47202566b4bc3953cd795f9e3a73747191d8990bf6f6bf1f50794e2dfe443bf9"
+    },
+    {
+      "concept": "ten",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-TEN.png",
+      "sha256": "2fd76a2d23ed7d7f835876bd92de3f079943ea10b3829ed8c880970f2e9b8d3b",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-TEN-ORIGINAL.png",
+      "originalSha256": "018be7f295443648fb6138b8f8aafedc3bd700badf550740a4a10ee819f1453f"
+    },
+    {
+      "concept": "they",
+      "disposition": "REUSED_VERIFIED_NATIVE_ORIGINAL",
+      "candidateFile": "images/DUDUQ-Y3M03-THEY.png",
+      "sha256": "de07aac01359257a36cbcaca9ac1214507b42670eb79e5d67ad9cfc874b2de7a",
+      "originalCopy": "provenance/reused-originals/DUDUQ-Y3M03-THEY-ORIGINAL.png",
+      "originalSha256": "4945091b171c9ae729f5c908794484fd245a0b2f8a3a9ebed21c576b1c6bc105"
+    }
+  ],
+  "failedAttempts": [
+    {
+      "attempt": 1,
+      "concept": "he",
+      "provider": "OpenAI Codex image_gen.imagegen",
+      "transparentBackgroundRequested": true,
+      "promptSummary": "One generic male referent for the English pronoun he, premium child-friendly rounded 3D concept cutout, one subject filling a transparent square canvas, no text or distractors.",
+      "verbatimPromptPersisted": false,
+      "outcome": "FAILED_OUTPUT_MODERATION_NO_FILE",
+      "generatorErrorCode": "moderation_blocked",
+      "moderationCategory": "other",
+      "requestId": "9792c1fc-2496-4fc0-8235-da0296d9c54c",
+      "candidateProduced": false,
+      "fileProduced": false
+    },
+    {
+      "attempt": 2,
+      "concept": "he",
+      "provider": "OpenAI Codex image_gen.imagegen",
+      "transparentBackgroundRequested": true,
+      "promptSummary": "Simplified single school-age boy referent for the English pronoun he, premium rounded 3D transparent concept cutout, no text or distractors.",
+      "verbatimPromptPersisted": false,
+      "outcome": "FAILED_INPUT_MODERATION_NO_FILE",
+      "generatorErrorCode": "moderation_blocked",
+      "moderationCategory": "sexual",
+      "requestId": "b6708991-fee9-463b-9cee-f358af1f1d45",
+      "candidateProduced": false,
+      "fileProduced": false
+    }
+  ],
+  "blockedGenerator": false,
+  "blocker": null,
+  "productionApproved": false,
+  "integrationApplied": false
+}
