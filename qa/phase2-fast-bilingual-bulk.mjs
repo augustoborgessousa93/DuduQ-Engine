@@ -270,7 +270,7 @@ const vettedBlackQuestions=[
 // Reopen SLEEP only in isolated QA: original "dormindo.png" is an exact
 // bilingual concept. The previous blocker was a navigation/session mismatch
 // in an automated deep link, not a proven image-byte or pedagogical failure.
-const unprovenSessionMedia=new Set();
+const unprovenSessionMedia=new Set(['Y1M01-EMOJI-SLEEP-001']);
 // Exact 04/11 compiled graph audit, from all 600 immutable question records.
 // A generic farewell/greeting ID is shared; never substitute it based only on
 // Y1M01-Q001 or a substring in a filename.
@@ -325,7 +325,13 @@ function hold(id,reason,concept){
 }
 for(const [id,links] of usages){
  const e=registry.entries[entryIndex.get(id)],old=queue.get(id);
- if(e.kind!=='image'||!e.urlOrPath?.endsWith('.svg'))continue;
+ // Legacy source already contains a few APPROVED temporary PNGs. Only
+ // permit the two audited shared scene IDs here; never bulk replace arbitrary
+ // published/original PNGs merely because they are in the inventory.
+ const vettedLegacyTemporaryPng=auditedSceneSources.has(id)&&
+  e.kind==='image'&&e.temporary===true&&
+  e.urlOrPath?.includes('/temporary/')&&e.urlOrPath?.endsWith('.png');
+ if(e.kind!=='image'||!(e.urlOrPath?.endsWith('.svg')||vettedLegacyTemporaryPng))continue;
  const rawConcept=old?.semantic||e.semantic;
  const sceneRule=auditedSceneSources.has(id);
  const vetted=sceneRule?vettedScene(id,links,old,e):null;
