@@ -227,6 +227,18 @@ for(const [id,links] of usages){
    .map(canonicalExact).filter(Boolean))];
   if(opts.length===1&&!old?.semantic)concept=opts[0];
  }
+
+ // Only all-occurrence unanimous, explicitly encoded semantics can recover
+ // an otherwise unmapped catalog concept. Partial/shared IDs remain blocked.
+ if(!concept&&links.length>0&&links.every(x=>Boolean(x.semanticTarget))){
+  const realTargets=[...new Set(links.map(x=>canonicalExact(x.semanticTarget)))];
+  const audited=(old?.optionSemanticTargets||[]).filter(Boolean).map(canonicalExact);
+  if(realTargets.length===1&&realTargets[0]&&
+   audited.every(x=>x===realTargets[0])&&
+   (!e.semantic||canonicalExact(e.semantic)===realTargets[0])&&
+   old?.semanticConflict!==true)concept=realTargets[0];
+ }
+
  if(!old||old.classification!=='PROVISIONAL'){hold(id,'AUDITED_QUEUE_ENTRY_MISSING',concept);continue;}
  if(!concept){hold(id,'CONCEPT_UNMAPPED_BILINGUAL',rawConcept);continue;}
  if(historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id)){
@@ -266,6 +278,31 @@ for(const [id,links] of usages){
   sourceAlreadyPublished:published.has(asset.sha)});
 }
 selected.sort((a,b)=>a.mediaId.localeCompare(b.mediaId));
+
+ // Impact-ranked concept clusters: one editorial decision can unblock
+ // multiple identical semantic uses without per-question busywork.
+const heldClusterMap=new Map();
+for(const item of held){
+ const conceptKey=norm(item.concept)||'(no audited concept)';
+ const key=item.reason+'::'+conceptKey;
+ if(!heldClusterMap.has(key))heldClusterMap.set(key,{
+  reason:item.reason,concept:conceptKey,mediaIds:[],questionIds:new Set(),
+  modules:new Set(),explicitOccurrences:0});
+ const g=heldClusterMap.get(key);g.mediaIds.push(item.mediaId);
+ for(const u of usages.get(item.mediaId)||[]){
+  g.questionIds.add(u.questionId);g.modules.add(u.questionId.slice(0,5));
+  if(u.semanticTarget)g.explicitOccurrences++;
+ }
+}
+const heldConceptClusters=[...heldClusterMap.values()].map(g=>({
+ reason:g.reason,concept:g.concept,mediaIdCount:g.mediaIds.length,
+ questionCount:g.questionIds.size,moduleCount:g.modules.size,
+ explicitOccurrenceCount:g.explicitOccurrences,mediaIds:g.mediaIds.sort(),
+ questionIds:[...g.questionIds].sort(),modules:[...g.modules].sort()
+})).sort((a,b)=>b.questionCount-a.questionCount||
+ b.mediaIdCount-a.mediaIdCount||a.reason.localeCompare(b.reason)||
+ a.concept.localeCompare(b.concept));
+
 const proposedPngs=new Map(selected.map(x=>[x.sourceGitBlob,
  {sourcePath:x.sourcePath,sourceGitBlob:x.sourceGitBlob,alreadyPublished:x.sourceAlreadyPublished}]));
 const affected=[...new Set(selected.flatMap(x=>x.questionIds))].sort();
@@ -286,6 +323,8 @@ const report={schemaVersion:'DUDUQ_PHASE2_3DAY_BILINGUAL_BULK_V1',
  matchedFromBilingualFilename:selected.filter(x=>x.sourcePriority==='UNIQUE_PLAIN_BILINGUAL').length,
  matchedFromFullSceneCaption:selected.filter(x=>x.sourcePriority==='UNIQUE_FULL_BILINGUAL_CAPTION').length,
  heldCount:held.length,heldReasons:counts,
+  heldConceptClusters,heldDistinctConceptClusters:heldConceptClusters.length,
+  nextReviewPriority:heldConceptClusters.slice(0,35),
  humanReviewStillRequired:true,productionDeployed:false,releaseApproved:false,
  affectedQuestionIds:affected,proposed:selected,exceptions:held};
 await mkdir('qa/results',{recursive:true});
