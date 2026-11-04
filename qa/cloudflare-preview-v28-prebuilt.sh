@@ -15,6 +15,17 @@ echo "$SHA  $TMP" | sha256sum -c
 tar -xzf "$TMP" -C "$ROOT"
 cp qa/input/pinned-assets-tree-a62c07c.json qa/results/assets-duduq-current-head-tree.json
 DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs
+node --input-type=module <<'DUDUQ_GREETING_BLOCK_DIAG'
+import {readFileSync} from 'node:fs';
+const x=JSON.parse(readFileSync('qa/results/phase2-fast-bilingual-bulk-plan.json','utf8'));
+for(const id of ['IMG-Y1M01-GREETING-GENERIC-001','IMG-Y1M01-FAREWELL-GENERIC-001','Y1M01-EMOJI-SLEEP-001']){
+ const chosen=(x.proposed||[]).find(y=>y.mediaId===id);
+ const hold=(x.exceptions||[]).find(y=>y.mediaId===id);
+ console.log('DUDUQ_GREETING_PLAN_DETAIL='+JSON.stringify({id,
+  selected:chosen?{concept:chosen.concept,source:chosen.sourcePath,questionIds:chosen.questionIds}:null,
+  hold:hold?{reason:hold.reason,concept:hold.concept}:null}));
+}
+DUDUQ_GREETING_BLOCK_DIAG
 DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs --apply
 node --input-type=module <<'NODE'
 import assert from 'node:assert/strict';
