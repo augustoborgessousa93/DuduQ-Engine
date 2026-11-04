@@ -281,6 +281,15 @@ for(const [id,links] of usages){
  const contextDerived=!concept&&Boolean(graphConsensus);
  if(contextDerived)concept=graphConsensus.concept;
 
+ // Fail closed when any independently resolved option context contradicts
+ // the queue/registry concept. A missing graphConsensus is NOT evidence of
+ // agreement: a shared ID may have conflicting real option labels.
+ if(concept&&[...contextConcepts].some(c=>c!==concept)){
+  hold(id,'REAL_OPTION_CONTEXT_DISAGREES_WITH_AUDITED_CONCEPT',concept);continue;
+ }
+ if(contextConcepts.size>1){
+  hold(id,'SHARED_REAL_OPTION_CONTEXT_CONFLICT',concept);continue;
+ }
  if(!old||old.classification!=='PROVISIONAL'){hold(id,'AUDITED_QUEUE_ENTRY_MISSING',concept);continue;}
  if(!concept){hold(id,'CONCEPT_UNMAPPED_BILINGUAL',rawConcept);continue;}
  if(historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id)){
