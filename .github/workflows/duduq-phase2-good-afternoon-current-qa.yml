@@ -1,0 +1,110 @@
+name: DUDUQ Phase 2 - Good Afternoon NEW SOURCE vs current production (QA ONLY)
+
+on:
+  push:
+    branches:
+      - qa/duduq-phase2-prod-closure-20261104
+    paths:
+      - .github/workflows/duduq-phase2-good-afternoon-current-qa.yml
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: duduq-phase2-good-afternoon-current-qa
+  cancel-in-progress: true
+
+jobs:
+  directed-afternoon:
+    name: Official new Good Afternoon on exact Orange production / 12 questions / 2 viewports
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+      BASE_URL: http://127.0.0.1:4175
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Restore exact current production archive with immutable SHA-256
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p /tmp/duduq-afternoon qa/good-afternoon-source-candidate qa/results
+          curl -fLSs --retry 3 --retry-delay 2 --connect-timeout 25 --max-time 360 \
+            "https://github.com/augustoborgessousa93/DuduQ-Engine/releases/download/duduq-phase2-orange-fruit-color-corrected-20261103/duduq-phase2-orange-fruit-color-corrected.tar.gz" \
+            -o /tmp/duduq-afternoon/current-orange.tar.gz
+          printf '%s  %s\n' cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800 \
+            /tmp/duduq-afternoon/current-orange.tar.gz | sha256sum -c
+          tar -xzf /tmp/duduq-afternoon/current-orange.tar.gz -C qa/good-afternoon-source-candidate
+      - name: Apply the updated real Good Afternoon binary in QA only
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/prepare-good-afternoon-official-source-qa.mjs
+          node qa/prepare-good-afternoon-official-source-qa.mjs
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const base='qa/good-afternoon-source-candidate/';
+          const hash=b=>createHash('sha256').update(b).digest('hex');
+          const r=JSON.parse(readFileSync('qa/results/phase2-current-good-afternoon-qa.json','utf8'));
+          assert.equal(r.affectedQuestions,12);assert.equal(r.realOccurrences,22);
+          const manifest=readFileSync(base+'.duduq-pages-manifest','utf8').trimEnd().split(/\r?\n/);
+          assert.equal(manifest.length,2892);
+          for(const l of manifest){
+           const i=l.lastIndexOf(' ');assert(i>0);
+           const name=l.slice(0,i),expected=l.slice(i+1);
+           assert(!name.startsWith('/')&&!name.includes('..'));
+           assert.equal(hash(readFileSync(base+name)),expected,'MANIFEST_MISMATCH:'+name);
+          }
+          assert.equal(r.questionContractsUnchanged,600);
+          assert.equal(r.productionDeployed,false);
+          console.log('OFFICIAL_AFTERNOON_QA_ARTIFACT_SHA_ALL_2892_PASS');
+          NODE
+      - name: Real Chromium check all 12 affected question contexts at mobile and desktop
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev qa/good-afternoon-source-candidate \
+            --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 > /tmp/duduq-good-afternoon-pages.log 2>&1 &
+          echo $! >/tmp/duduq-good-afternoon-pages.pid
+          for i in {1..60}; do
+            if curl -fsS "$BASE_URL/" > /dev/null; then break; fi
+            kill -0 "$(cat /tmp/duduq-good-afternoon-pages.pid)" 2>/dev/null || {
+              cat /tmp/duduq-good-afternoon-pages.log; exit 1;
+            }
+            sleep 2
+          done
+          node --check qa/verify-good-afternoon-official-source-browser.mjs
+          node qa/verify-good-afternoon-official-source-browser.mjs
+      - name: Persist exact QA-only new Good Afternoon candidate
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          tar -czf qa/results/duduq-phase2-good-afternoon-current-qa.tar.gz \
+            -C qa/good-afternoon-source-candidate .
+          (cd qa/results && sha256sum duduq-phase2-good-afternoon-current-qa.tar.gz \
+            > duduq-phase2-good-afternoon-current-qa.sha256)
+          echo "OFFICIAL_NEW_GOOD_AFTERNOON_CANDIDATE_PERSISTED_NO_PRODUCTION"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-phase2-good-afternoon-current-production-safe-qa
+          retention-days: 90
+          if-no-files-found: warn
+          compression-level: 0
+          path: |
+            qa/results/phase2-current-good-afternoon-qa.json
+            qa/results/phase2-current-good-afternoon-browser.json
+            qa/results/phase2-current-good-afternoon-views/*.png
+            qa/results/duduq-phase2-good-afternoon-current-qa.tar.gz
+            qa/results/duduq-phase2-good-afternoon-current-qa.sha256
