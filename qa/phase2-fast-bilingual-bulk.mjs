@@ -448,6 +448,18 @@ for(const [id,links] of usages){
    (x.contextLabels||[]).every(label=>!resolveExactLabel(label)||
     resolveExactLabel(label).concept==='black'))&&
   !(old.mustInclude||[]).length&&!(old.mustNotInclude||[]).length;
+ if(expectedColorQuestion){
+  console.log('DUDUQ_BLACK_SWATCH_GATE='+JSON.stringify({
+   id,concept,expectedColorQuestion,
+   actualColorQuestions,registrySemantic:e.semantic,
+   queuedSemantic:old?.semantic,queueUsage:old?.usage,
+   temporary:e.temporary,registryKind:e.kind,
+   classification:old?.classification,semanticConflict:old?.semanticConflict,
+   labels:old?.labels,optionSemanticTargets:old?.optionSemanticTargets,
+   mustInclude:old?.mustInclude,mustNotInclude:old?.mustNotInclude,
+   linkTargets:links.map(x=>({q:x.questionId,target:x.semanticTarget,labels:x.contextLabels})),
+   approved:isVettedBlackSwatch}));
+ }
  const isVettedBlackAny=isVettedBlack||isVettedBlackSwatch;
  if(isVettedBlackAny){
   const pinnedBlack=fileByPath.get('Imagens Ilustrativa/color-black-preto.png');
