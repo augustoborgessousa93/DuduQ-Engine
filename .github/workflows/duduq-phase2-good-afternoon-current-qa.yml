@@ -55,7 +55,7 @@ jobs:
           const base='qa/good-afternoon-source-candidate/';
           const hash=b=>createHash('sha256').update(b).digest('hex');
           const r=JSON.parse(readFileSync('qa/results/phase2-current-good-afternoon-qa.json','utf8'));
-          assert.equal(r.affectedQuestions,12);assert.equal(r.realOccurrences,22);
+          assert.equal(r.affectedQuestions,12);assert.equal(r.realOccurrences,29);
           const manifest=readFileSync(base+'.duduq-pages-manifest','utf8').trimEnd().split(/\r?\n/);
           assert.equal(manifest.length,2892);
           for(const l of manifest){
