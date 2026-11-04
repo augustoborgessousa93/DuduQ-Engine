@@ -265,6 +265,19 @@ const vettedBlackQuestions=[
  'Y1M03-Q001','Y2M02-Q015','Y2M04-Q003',
  'Y2M04-Q015','Y3M05-Q015','Y4M05-Q005'
 ];
+// Isolated, single-question BLACK color swatches, each from actual Y1M03
+// contract inventory. No cross-module or noun-adjective inferences allowed.
+const vettedBlackY1M03=new Map([
+ ['IMG-Q005-BLACK','Y1M03-Q005'],
+ ['IMG-Q015-BLACK','Y1M03-Q015'],
+ ['IMG-Y1M03-Q004-BLACK','Y1M03-Q004'],
+ ['IMG-Y1M03-Q005-BLACK','Y1M03-Q005'],
+ ['IMG-Y1M03-Q009-BLACK','Y1M03-Q009'],
+ ['IMG-Y1M03-Q010-BLACK','Y1M03-Q010'],
+ ['IMG-Y1M03-Q011-BLACK','Y1M03-Q011'],
+ ['IMG-Y1M03-Q013-BLACK','Y1M03-Q013'],
+ ['IMG-Y1M03-Q016-BLACK','Y1M03-Q016']
+]);
 // Keep this exact shared ID provisional. Four Chromium cases across Q001/Q004
 // showed Y1M01_SESSION_ITEM_MISMATCH; no valid browser evidence for a replacement.
 // Reopen SLEEP only in isolated QA: original "dormindo.png" is an exact
@@ -421,11 +434,28 @@ for(const [id,links] of usages){
   [...new Set(links.map(x=>x.questionId))].sort().join('|')===vettedBlackQuestions.join('|')&&
   links.every(x=>!x.semanticTarget||canon(x.semanticTarget)==='black')&&
   vettedBlackQuestions.every(qid=>links.some(x=>x.questionId===qid&&canon(x.semanticTarget)==='black'));
- if(isVettedBlack){
+ const expectedColorQuestion=vettedBlackY1M03.get(id);
+ const actualColorQuestions=[...new Set(links.map(x=>x.questionId))];
+ const isVettedBlackSwatch=Boolean(expectedColorQuestion)&&concept==='black'&&
+  old?.semantic==='black'&&e.semantic==='black'&&
+  old.classification==='PROVISIONAL'&&old.semanticConflict===false&&
+  old.usage===1&&actualColorQuestions.length===1&&
+  actualColorQuestions[0]===expectedColorQuestion&&
+  (old.exampleQuestions||[]).every(q=>q===expectedColorQuestion)&&
+  (old.labels||[]).every(label=>canonicalExact(label)==='black')&&
+  (old.optionSemanticTargets||[]).every(label=>canonicalExact(label)==='black')&&
+  links.every(x=>(!x.semanticTarget||canonicalExact(x.semanticTarget)==='black')&&
+   (x.contextLabels||[]).every(label=>!resolveExactLabel(label)||
+    resolveExactLabel(label).concept==='black'))&&
+  !(old.mustInclude||[]).length&&!(old.mustNotInclude||[]).length;
+ const isVettedBlackAny=isVettedBlack||isVettedBlackSwatch;
+ if(isVettedBlackAny){
   const pinnedBlack=fileByPath.get('Imagens Ilustrativa/color-black-preto.png');
   assert(pinnedBlack&&published.has(pinnedBlack.sha),'BLACK_OFFICIAL_ORIGINAL_MUST_ALREADY_BE_PUBLISHED');
+  assert.equal(sourceSelection.get('black')?.sha,pinnedBlack.sha,
+   'BLACK_CURATED_SOURCE_DRIFT');
  }
- if((historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id))&&!isVettedBlack){
+ if((historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id))&&!isVettedBlackAny){
   hold(id,'HISTORICAL_VISUAL_OR_SEMANTIC_HOLD',concept);continue;
  }
  if(old.semanticConflict===true&&!graphConsensus&&!isVettedBlack&&!vetted){hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;}
