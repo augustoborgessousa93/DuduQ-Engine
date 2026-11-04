@@ -73,6 +73,18 @@ function parseFilename(p){
  const tokens=norm(filename).split(' ').filter(Boolean);
  const detected=[],unknown=[];
  for(let i=0;i<tokens.length;){
+  // Interpret folder-like bilingual filename prefixes as metadata rather
+  // than as the answer "school"/"body"/"color" itself.
+  if(i===0){
+   const prefixes=[
+    ['school','object'],['body','part','touch'],['body','part'],
+    ['classroom','command'],['daily','routine'],['person'],
+    ['pet'],['animal'],['greeting'],['routine'],['number'],
+    ['numeral'],['color'],['colour'],['cor'],['weather'],['fruit']
+   ];
+   const metadata=prefixes.find(p=>p.every((word,j)=>tokens[j]===word));
+   if(metadata){i+=metadata.length;continue;}
+  }
   const word=tokens[i];let matched=null;
   for(const a of aliasEntries){
    if(a.words.length<=tokens.length-i&&a.words.every((w,j)=>tokens[i+j]===w)){
