@@ -52,22 +52,13 @@ for(const item of report.applied){
    mediaId:item.mediaId,sourceGitBlob:item.sourceGitBlob,assetPath:reg.urlOrPath});
  }
 }
-// Y1M01-Q001 is a known non-addressable session fixture: two prior real browser
-// attempts returned Y1M01_SESSION_ITEM_MISMATCH (mobile + desktop).
-// Do not silently call that broken fixture an image failure or a passing test.
-// Test ANOTHER real occurrence of the same source/blob and mechanic when one
-// exists; retain explicit coverage gap for Q001 and never certify gameplay.
+// Retest the actual official Q001 URL including duduqStart; earlier QA
+// selected Q004 as a substitute, which is not necessarily a valid session
+// deep link. This is an experiment: a mismatch still FAILS the gate.
 const sessionFixtureGaps=[];
 for(const [key,items] of sampleCandidates){
- const first=items[0];
- const alternate=first.questionId==='Y1M01-Q001'?
-  items.find(x=>!x.questionId.startsWith('Y1M01'))||
-  items.find(x=>x.questionId!=='Y1M01-Q001'):null;
- const chosen=alternate||first;
+ const chosen=items.find(x=>x.questionId==='Y1M01-Q001')||items[0];
  sample.set(key,chosen);
- if(alternate)sessionFixtureGaps.push({questionId:'Y1M01-Q001',
-  selectedAlternative:chosen.questionId,sourceGitBlob:chosen.sourceGitBlob,
-  mechanic:chosen.mechanic,reason:'EXACT_ITEM_BROWSER_SESSION_MISMATCH_UNRESOLVED'});
 }
 const blobs=new Set(report.applied.map(x=>x.sourceGitBlob));
 assert(sample.size>=blobs.size,'SOURCE_BLOB_WITHOUT_BROWSER_SAMPLE');
