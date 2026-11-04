@@ -152,6 +152,16 @@ node --check qa/patch-y1m01-daypart-q003-q004.mjs
 DUDUQ_QA_ONLY=1 node qa/patch-y1m01-daypart-q003-q004.mjs
 node qa/verify-approved-q001-lock.mjs
 test -s qa/results/y1m01-daypart-q003-q004.json
+node --check qa/audit-year1-module01-compiled.mjs
+DUDUQ_QA_ONLY=1 node qa/audit-year1-module01-compiled.mjs
+node --check qa/render-y1m01-review.mjs
+DUDUQ_QA_ONLY=1 node qa/render-y1m01-review.mjs
+test -s qa/results/y1m01-real-module-audit.md
+test -s qa/results/y1m01-review.html
 mkdir -p dist-pages
 cp -a "$ROOT"/. dist-pages/
+# Read-only QA dashboard is available on PREVIEW ONLY; never merge into production.
+mkdir -p dist-pages/qa/y1m01
+cp qa/results/y1m01-review.html dist-pages/qa/y1m01/index.html
+cp qa/results/y1m01-real-module-audit.json dist-pages/qa/y1m01/audit.json
 echo "READY_FOR_MANUAL_QA_PREVIEW_DEPLOYMENT"
