@@ -79,8 +79,19 @@ for(const [id,occ] of usage){
  if(current.semantic&&norm(current.semantic)!==semantic)errs.push('CURRENT_REGISTRY_CONCEPT_MISMATCH');
  if(historic?.semanticConflict)errs.push('HISTORICAL_CONCEPT_CONFLICT');
  if(!occ.length)errs.push('MISSING_ALL_OCCURRENCES');
- if(occ.some(x=>!x.semantic))errs.push('IMPLICIT_OPTION_SEMANTIC');
- if(occ.some(x=>x.semantic&&x.semantic!==semantic))errs.push('EXPLICIT_Q_SEMANTIC_CONFLICT');
+ // DUDUQ stores duplicate question-level mediaIds mirrors without a
+ // semanticTarget. Do not mistake these metadata mirrors for a conflicting
+ // option. Each affected question must have at least one explicit semantic
+ // reference to the SAME ID before the source can qualify.
+ const questionUses=new Map();
+ for(const use of occ){
+   const arr=questionUses.get(use.qid)||[];
+   arr.push(use);questionUses.set(use.qid,arr);
+ }
+ const anyQuestionMissingExplicit=[...questionUses.values()].some(group=>!group.some(x=>!!x.semantic));
+ if(anyQuestionMissingExplicit)errs.push('QUESTION_HAS_NO_EXPLICIT_SEMANTIC_REFERENCE');
+ if([...questionUses.values()].some(group=>group.some(x=>x.semantic&&x.semantic!==semantic)))
+   errs.push('EXPLICIT_Q_SEMANTIC_CONFLICT');
  const blobs=[...new Set(imgs.map(x=>x.gitBlobSha))];
  if(imgs.length===0)errs.push('NO_EXACT_SOURCE');
  if(blobs.length>1)errs.push('MULTIPLE_DISTINCT_SOURCE_VARIANTS');
@@ -119,7 +130,10 @@ const report={schemaVersion:'DUDUQ_BULK_EXACT_SOURCE_CURRENT_600_CONTRACTS_V1',
  sourceGroups:groups,mediaIdEvidence:classes,productionDeployAuthorizedByQA:false};
 await mkdir('qa/results/bulk',{recursive:true});
 await writeFile('qa/results/bulk/current-exact-source-coverage.json',JSON.stringify(report,null,2)+'\n');
+const reasonCounts={};
+for(const row of classes.requiresReview)for(const reason of row.reasons)
+  reasonCounts[reason]=(reasonCounts[reason]||0)+1;
 console.log(JSON.stringify({status:'BULK_EXACT_SOURCE_DISCOVERY_QA_ONLY',summary:report.summary,
  eligibleMediaIds:report.eligibleMediaIds,uniqueSourceBlobs:report.eligibleUniqueSourceBlobs,
- affectedQuestions:report.eligibleAffectedQuestionCount,
- top:groups.slice(0,10).map(x=>({semantic:x.semantic,mediaIds:x.mediaIds.length,questions:x.questionIds.length}))}));
+ affectedQuestions:report.eligibleAffectedQuestionCount,reasonCounts,
+ top:groups.slice(0,15).map(x=>({semantic:x.semantic,mediaIds:x.mediaIds.length,questions:x.questionIds.length}))}));
