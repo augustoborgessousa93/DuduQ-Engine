@@ -26,6 +26,12 @@ const patch=JSON.parse(readFileSync('qa/results/phase2-fast-bilingual-bulk-appli
 const sha=b=>createHash('sha256').update(b).digest('hex');
 assert.equal(patch.sourceCommit,'a62c07c075a4a744f81dee2eea3a6b93108f9d08');
 assert.equal(patch.realContracts,600);
+// Exact QA selection of 04/11: 39 IDs, 8 new source blobs, 44 questions.
+// Fail closed if a transient Cloudflare source download reduces the bundle.
+assert.equal(patch.appliedMediaIds,39,'PREVIEW_APPLIED_ID_COUNT_NOT_QA_MATCH');
+assert.equal(patch.actuallyAddedPngs,8,'PREVIEW_SOURCE_PNG_COUNT_NOT_QA_MATCH');
+assert.equal(patch.appliedQuestionIds.length,44,'PREVIEW_QUESTION_COUNT_NOT_QA_MATCH');
+assert.equal(patch.downloadFailures.length,0,'PREVIEW_INCOMPLETE_SOURCE_DOWNLOAD');
 for(const key of ['changedQuestionJsonFiles','changedAudioFiles','changedGoldMasters','changedRuntimeFiles'])
  assert.equal(patch[key],0,key);
 assert.equal(patch.productionDeployed,false);

@@ -455,22 +455,36 @@ async function downloadWorker(){
   const asset=selected.find(x=>x.sourceGitBlob===blob);
   const url='https://raw.githubusercontent.com/augustoborgessousa93/Assets-DuduQ/'+
    sourceSHA+'/'+asset.sourcePath.split('/').map(encodeURIComponent).join('/');
-  try{
-   const resp=await fetch(url,{signal:AbortSignal.timeout(120000)});
-   assert(resp.ok,'SOURCE_HTTP_'+resp.status);
-   const b=Buffer.from(await resp.arrayBuffer());
-   assert.equal(gitBlob(b),blob,'GIT_BLOB_MISMATCH');
-   assert.equal(b.subarray(0,8).toString('hex'),'89504e470d0a1a0a','NOT_PNG');
-   const width=b.readUInt32BE(16),height=b.readUInt32BE(20),colorType=b[25];
-   assert(width>=512&&height>=512&&[2,6].includes(colorType),
-    'IMAGE_TOO_SMALL_OR_UNSUPPORTED_COLOR_FORMAT');
-   const digest=hash(b);
-   const dest='content/english/assets/images/assets-duduq/fast-'+blob.slice(0,12)+'-'+digest.slice(0,12)+'.png';
-   newData.set(blob,{bytes:b,sha256:digest,path:dest,width,height,colorType});
-  }catch(e){failed.push({sourcePath:asset.sourcePath,reason:String(e.message||e).slice(0,200)});}
+  let lastError=null;
+  for(let attempt=1;attempt<=4;attempt++){
+   try{
+    const resp=await fetch(url,{signal:AbortSignal.timeout(120000)});
+    assert(resp.ok,'SOURCE_HTTP_'+resp.status);
+    const b=Buffer.from(await resp.arrayBuffer());
+    assert.equal(gitBlob(b),blob,'GIT_BLOB_MISMATCH');
+    assert.equal(b.subarray(0,8).toString('hex'),'89504e470d0a1a0a','NOT_PNG');
+    const width=b.readUInt32BE(16),height=b.readUInt32BE(20),colorType=b[25];
+    assert(width>=512&&height>=512&&[2,6].includes(colorType),
+     'IMAGE_TOO_SMALL_OR_UNSUPPORTED_COLOR_FORMAT');
+    const digest=hash(b);
+    const dest='content/english/assets/images/assets-duduq/fast-'+blob.slice(0,12)+'-'+digest.slice(0,12)+'.png';
+    newData.set(blob,{bytes:b,sha256:digest,path:dest,width,height,colorType});
+    lastError=null;break;
+   }catch(e){
+    lastError=String(e.message||e).slice(0,200);
+    // A SHA mismatch or invalid PNG is not a transient network failure.
+    if(/GIT_BLOB_MISMATCH|NOT_PNG|IMAGE_TOO_SMALL_OR_UNSUPPORTED/.test(lastError))break;
+    if(attempt<4)await new Promise(resolve=>setTimeout(resolve,700*attempt));
+   }
+  }
+  if(lastError)failed.push({sourcePath:asset.sourcePath,reason:lastError});
  }
 }
-await Promise.all(Array.from({length:Math.min(8,unrecognized.length)},()=>downloadWorker()));
+await Promise.all(Array.from({length:Math.min(4,unrecognized.length)},()=>downloadWorker()));
+// A preview must reproduce the selected QA candidate exactly; never silently
+// publish fewer mediaIds when GitHub Raw intermittently fails a download.
+assert.equal(failed.length,0,'PINNED_SOURCE_DOWNLOADS_INCOMPLETE:'+JSON.stringify(failed));
+assert.equal(newData.size,unrecognized.length,'INCOMPLETE_NEW_SOURCE_BLOBS');
 const accepted=selected.filter(x=>published.has(x.sourceGitBlob)||newData.has(x.sourceGitBlob));
 const rejected=selected.filter(x=>!published.has(x.sourceGitBlob)&&!newData.has(x.sourceGitBlob));
 assert(accepted.length>0,'ALL_ASSETS_FAILED_BYTE_VERIFICATION');
