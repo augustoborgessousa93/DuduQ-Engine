@@ -4,11 +4,14 @@ on:
   push:
     branches:
       - qa/duduq-phase2-fast-bilingual-bulk-20261104
+      - qa/duduq-greetings-q001-focus-20261104
     paths:
       - .github/workflows/duduq-phase2-fast-bilingual-bulk.yml
       - qa/phase2-fast-bilingual-bulk.mjs
       - qa/phase2-fast-bilingual-aliases.mjs
       - qa/verify-fast-bilingual-browser.mjs
+      - qa/patch-y1m01-q001-hello-focus.mjs
+      - qa/verify-y1m01-q001-focus-browser.mjs
 
 permissions:
   contents: read
@@ -132,6 +135,13 @@ jobs:
           writeFileSync('qa/results/phase2-fast-bulk-verification.json',JSON.stringify(summary,null,2)+'\n');
           console.log('BULK_QA_PASS='+JSON.stringify(summary));
           NODE
+      - name: Apply surgical Q001 visual-only change AFTER full 600 contract integrity verification
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/patch-y1m01-q001-hello-focus.mjs
+          node qa/patch-y1m01-q001-hello-focus.mjs
+          test -s qa/results/y1m01-q001-focused-preview.json
       - name: Directed REAL Chromium proof of affected media in isolated local Pages (no deploy)
         shell: bash
         env:
@@ -150,7 +160,8 @@ jobs:
           done
           if [ "$READY" -ne 1 ]; then cat /tmp/fast-bulk-browser-pages.log; exit 1; fi
           node --check qa/verify-fast-bilingual-browser.mjs
-          node qa/verify-fast-bilingual-browser.mjs
+          node --check qa/verify-y1m01-q001-focus-browser.mjs
+          node qa/verify-y1m01-q001-focus-browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -158,6 +169,8 @@ jobs:
           path: |
             qa/results/phase2-fast-bulk-browser.json
             qa/results/phase2-fast-bulk-browser/*.png
+            qa/results/y1m01-q001-browser.json
+            qa/results/y1m01-q001-browser/*.png
           retention-days: 90
           if-no-files-found: warn
           compression-level: 6
@@ -169,6 +182,7 @@ jobs:
             qa/results/phase2-fast-bilingual-bulk-plan.json
             qa/results/phase2-fast-bilingual-bulk-applied.json
             qa/results/phase2-fast-bulk-verification.json
+            qa/results/y1m01-q001-focused-preview.json
           retention-days: 90
           if-no-files-found: warn
           compression-level: 6
