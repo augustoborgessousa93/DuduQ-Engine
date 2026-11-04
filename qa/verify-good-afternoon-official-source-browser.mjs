@@ -13,7 +13,7 @@ const root=path.resolve('qa/good-afternoon-source-candidate');
 const base=(process.env.BASE_URL||'http://127.0.0.1:4175').replace(/\/+$/,'');
 const meta=JSON.parse(await readFile('qa/results/phase2-current-good-afternoon-qa.json','utf8'));
 const hash=b=>createHash('sha256').update(b).digest('hex');
-assert.equal(meta.affectedQuestions,12);assert.equal(meta.realOccurrences,22);
+assert.equal(meta.affectedQuestions,12);assert.equal(meta.realOccurrences,29);
 assert.equal(meta.questionContractsUnchanged,600);assert.equal(meta.productionDeployed,false);
 const sourceResponse=await fetch(base+'/'+meta.newPath,{signal:AbortSignal.timeout(20000)});
 assert.equal(sourceResponse.status,200,'SOURCE_ASSET_HTTP');
