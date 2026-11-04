@@ -14,6 +14,7 @@ on:
       - "qa/phase2-y4m03-seasons-batch.mjs"
       - "qa/phase2-y4m03-seasons-browser-qa.mjs"
       - "qa/phase2-y4m03-bubble-iframe-pointer-qa.mjs"
+      - "qa/phase2-consolidate-orange-source-deltas.mjs"
       - "qa/tests/verify-assets-duduq-crosswalk.mjs"
       - "qa/tests/verify-30-route-browser-smoke.mjs"
       - "qa/prepare-assets-duduq-reuse.mjs"
@@ -475,7 +476,7 @@ jobs:
 
   y4m03-bubble-inner-iframe-real-pointer:
     name: Bubble Pop Q006 native bubble pointerdown and source image visibility (NO deploy)
-    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha != 'd3b05a40c845ab1d74143cdd0330f912d8440a5c' && github.sha != 'b8e5ff2f4bf1573a7b731c331779f2427b08b374' && github.sha != 'b4016fb56501848edee3778f2799bf3367ffec12' && github.sha != '8b4cee86baeea4b33b45753ed7dc947b6f7bbaed' && github.sha != '1358eff07f83ccb31ce6fdfcad653f42805ca907' && github.sha != 'bf4976d9a28b6b23566a75722d1ef9af8713e2ce' }}
+    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha == 'b0104ee1516262ec274a6817b099d2dbcd5fd48f' }}
     runs-on: ubuntu-latest
     timeout-minutes: 28
     env:
@@ -532,6 +533,70 @@ jobs:
           path: |
             qa/results/y4m03-iframe-pointer/
             /tmp/duduq-iframe-qa.log
+
+  phase2-consolidate-two-proven-deltas:
+    name: Consolidate 5 original PNGs / 10 media IDs on real Orange baseline (NO deploy)
+    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha != 'b0104ee1516262ec274a6817b099d2dbcd5fd48f' && github.sha != 'd3b05a40c845ab1d74143cdd0330f912d8440a5c' && github.sha != 'b8e5ff2f4bf1573a7b731c331779f2427b08b374' && github.sha != 'b4016fb56501848edee3778f2799bf3367ffec12' && github.sha != '8b4cee86baeea4b33b45753ed7dc947b6f7bbaed' && github.sha != '1358eff07f83ccb31ce6fdfcad653f42805ca907' && github.sha != 'bf4976d9a28b6b23566a75722d1ef9af8713e2ce' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    permissions:
+      actions: read
+      contents: read
+    env:
+      DUDUQ_QA_ONLY: "1"
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            qa/phase2-consolidate-orange-source-deltas.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Reuse both independently proven image overlays; never regenerate or repeat source QA
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p qa/results/pets qa/results/seasons qa/work/pets qa/work/seasons
+          gh run download 41732259527 -R "$GITHUB_REPOSITORY" --name duduq-phase2-y1m06-two-pets-qa-41732259527 --dir qa/results/pets
+          gh run download 41736151817 -R "$GITHUB_REPOSITORY" --name duduq-y4m03-seasons-8ids-qa-41736151817 --dir qa/results/seasons
+          test -s qa/results/pets/y1m06-fish-bird-evidence.json
+          test -s qa/results/seasons/y4m03-seasons-evidence.json
+          tar -xzf qa/results/pets/y1m06-fish-bird-delta-only.tar.gz -C qa/work/pets
+          tar -xzf qa/results/seasons/y4m03-seasons-delta-only.tar.gz -C qa/work/seasons
+      - name: Restore canonical Orange package with immutable SHA-256
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          T="$RUNNER_TEMP/orange-production.tar.gz"
+          curl -fLSs --retry 3 --connect-timeout 20 --max-time 480             "https://github.com/$GITHUB_REPOSITORY/releases/download/duduq-phase2-orange-fruit-color-corrected-20261103/duduq-phase2-orange-fruit-color-corrected.tar.gz" -o "$T"
+          echo "cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800  $T" | sha256sum --check --status
+          mkdir -p dist-pages
+          tar -xzf "$T" -C dist-pages
+      - name: Transactional 5-PNG / 10-ID candidate with all 600 original contract hashes verified
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/phase2-consolidate-orange-source-deltas.mjs
+          node qa/phase2-consolidate-orange-source-deltas.mjs
+          (
+            cd dist-pages
+            tar -czf ../qa/results/consolidated/delta-5png-10ids-no-deploy.tar.gz               .duduq-pages-manifest content/english/media/media-registry.json               content/english/assets/images/assets-duduq/pet-bird-passaro-*.png               content/english/assets/images/assets-duduq/pet-fish-peixe-*.png               content/english/assets/images/assets-duduq/original-season-*.png
+          )
+      - name: Archive only QA delta/evidence, not deploy credentials or entire Pages package
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-phase2-combined-5png-10ids-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/consolidated/evidence.json
+            qa/results/consolidated/delta-5png-10ids-no-deploy.tar.gz
 
   isolated-v26-media-reuse:
     if: ${{ github.ref_name != 'qa/duduq-phase2-crosswalk-head-20261103' }}
