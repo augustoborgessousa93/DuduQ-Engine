@@ -18,7 +18,7 @@ DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs
 node --input-type=module <<'DUDUQ_GREETING_BLOCK_DIAG'
 import {readFileSync} from 'node:fs';
 const x=JSON.parse(readFileSync('qa/results/phase2-fast-bilingual-bulk-plan.json','utf8'));
-for(const id of ['IMG-Y1M01-GREETING-GENERIC-001','IMG-Y1M01-FAREWELL-GENERIC-001','Y1M01-EMOJI-SLEEP-001']){
+for(const id of ['IMG-Y1M01-GREETING-GENERIC-001','IMG-Y1M01-FAREWELL-GENERIC-001','Y1M01-EMOJI-SLEEP-001','Y1M01-EMOJI-FOOD-001']){
  const chosen=(x.proposed||[]).find(y=>y.mediaId===id);
  const hold=(x.exceptions||[]).find(y=>y.mediaId===id);
  console.log('DUDUQ_GREETING_PLAN_DETAIL='+JSON.stringify({id,
@@ -39,8 +39,8 @@ assert.equal(patch.sourceCommit,'a62c07c075a4a744f81dee2eea3a6b93108f9d08');
 assert.equal(patch.realContracts,600);
 // Exact QA selection of 04/11: 39 IDs, 8 new source blobs, 44 questions.
 // Fail closed if a transient Cloudflare source download reduces the bundle.
-assert.equal(patch.appliedMediaIds,42,'PREVIEW_SHOULD_INCLUDE_EXACT_TWO_AUDITED_GREETING_MEDIA');
-const required=['IMG-Y1M01-GREETING-GENERIC-001','IMG-Y1M01-FAREWELL-GENERIC-001'];
+assert.equal(patch.appliedMediaIds,44,'PREVIEW_EXPECTED_TWO_GREETING_PLUS_SLEEP_AND_SNACK_TRIALS');
+const required=['IMG-Y1M01-GREETING-GENERIC-001','IMG-Y1M01-FAREWELL-GENERIC-001','Y1M01-EMOJI-SLEEP-001','Y1M01-EMOJI-FOOD-001'];
 for(const mediaId of required)assert(patch.applied.some(x=>x.mediaId===mediaId),'MISSING_AUDITED_GREETING_MEDIA:'+mediaId);
 const neededNewBlobs=new Set(patch.applied.filter(x=>!x.sourceAlreadyPublished)
  .map(x=>x.sourceGitBlob));
@@ -55,8 +55,8 @@ for(const key of ['changedQuestionJsonFiles','changedAudioFiles','changedGoldMas
  assert.equal(patch[key],0,key);
 assert.equal(patch.productionDeployed,false);
 // The shared SLEEP image is a QA trial; release requires browser proof.
-assert(!patch.applied.some(x=>x.mediaId==='Y1M01-EMOJI-SLEEP-001'),'UNRESOLVED_SLEEP_SESSION_MUST_REMAIN_HELD');
-const sleepTrial=false;
+const sleepTrial=patch.applied.some(x=>x.mediaId==='Y1M01-EMOJI-SLEEP-001');
+assert(sleepTrial,'SLEEP_EXACT_SOURCE_QA_TRIAL_EXPECTED');
 const lines=readFileSync(root+'/.duduq-pages-manifest','utf8').trimEnd().split(/\r?\n/),manifest=new Map();
 for(const line of lines){
  const n=line.lastIndexOf(' '),rel=line.slice(0,n),expected=line.slice(n+1);

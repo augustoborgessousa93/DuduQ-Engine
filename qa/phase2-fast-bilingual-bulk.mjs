@@ -270,7 +270,8 @@ const vettedBlackQuestions=[
 // Reopen SLEEP only in isolated QA: original "dormindo.png" is an exact
 // bilingual concept. The previous blocker was a navigation/session mismatch
 // in an automated deep link, not a proven image-byte or pedagogical failure.
-const unprovenSessionMedia=new Set(['Y1M01-EMOJI-SLEEP-001']);
+// Re-test exact official 'dormindo.png' on the real Y1M01-Q001 entrypoint.
+const unprovenSessionMedia=new Set();
 // Exact 04/11 compiled graph audit, from all 600 immutable question records.
 // A generic farewell/greeting ID is shared; never substitute it based only on
 // Y1M01-Q001 or a substring in a filename.
@@ -332,11 +333,21 @@ for(const [id,links] of usages){
   e.kind==='image'&&e.temporary===true&&
   e.urlOrPath?.includes('/temporary/')&&e.urlOrPath?.endsWith('.png');
  if(e.kind!=='image'||!(e.urlOrPath?.endsWith('.svg')||vettedLegacyTemporaryPng))continue;
+ // Single-use distractor originally requested a child having a snack, but
+ // currently points at a generic SVG/fruit. Trial the original 'Comendo.png'
+ // in QA only; never approve its pedagogical suitability automatically.
+ const snackTrial=id==='Y1M01-EMOJI-FOOD-001'&&e.semantic==='food'&&
+  e.temporary===true&&old?.classification==='PROVISIONAL'&&
+  old?.usage===1&&links.length>0&&
+  links.every(x=>x.questionId==='Y1M01-Q001')&&
+  (old.labels||[]).length===1&&norm(old.labels[0])==='crianca fazendo um lanche';
+ const snackSource=snackTrial?fileByPath.get('Imagens Ilustrativa/Comendo.png'):null;
+ if(snackTrial)assert(snackSource,'SNACK_ORIGINAL_MISSING');
  const rawConcept=old?.semantic||e.semantic;
  const sceneRule=auditedSceneSources.has(id);
  const vetted=sceneRule?vettedScene(id,links,old,e):null;
  if(sceneRule&&!vetted){hold(id,'GREETING_SHARED_GRAPH_AUDIT_MISMATCH',rawConcept);continue;}
- let concept=vetted?.concept||canonicalExact(rawConcept);
+ let concept=vetted?.concept||(snackTrial?'food':null)||canonicalExact(rawConcept);
  let literalSource=null;
  if(!concept&&rawConcept){
   const literal=literalByName.get(norm(rawConcept));
@@ -424,7 +435,7 @@ for(const [id,links] of usages){
  if(!vetted&&((old.mustInclude||[]).length||(old.mustNotInclude||[]).length)){
   hold(id,'VISUAL_SCENE_CONSTRAINT_REQUIRES_REVIEW',concept);continue;
  }
- const asset=vetted?.asset||sourceSelection.get(concept)||
+ const asset=vetted?.asset||(snackSource?{...snackSource,priority:'TARGETED_EATING_SCENE_QA_REVIEW_PENDING'}:null)||sourceSelection.get(concept)||
   (graphConsensus?.concept===concept&&graphConsensus.source?
    {...graphConsensus.source,priority:'QUESTION_GRAPH_CONTEXT'}:null)||
   (queueLabelSource?{...queueLabelSource,priority:'UNANIMOUS_AUDITED_LABELS'}:null)||
