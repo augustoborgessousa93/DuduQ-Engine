@@ -278,6 +278,15 @@ const vettedBlackY1M03=new Map([
  ['IMG-Y1M03-Q013-BLACK','Y1M03-Q013'],
  ['IMG-Y1M03-Q016-BLACK','Y1M03-Q016']
 ]);
+for(const [mediaId,expectedQuestion] of vettedBlackY1M03){
+ const entry=registry.entries[entryIndex.get(mediaId)],links=usages.get(mediaId)||[];
+ console.log('DUDUQ_BLACK_ACTIVE_AUDIT='+JSON.stringify({mediaId,expectedQuestion,
+  inRegistry:Boolean(entry),kind:entry?.kind,urlOrPath:entry?.urlOrPath,
+  semantic:entry?.semantic,temporary:entry?.temporary,
+  graphOccurrences:links.length,
+  realQuestions:[...new Set(links.map(x=>x.questionId))],
+  targets:[...new Set(links.map(x=>x.semanticTarget).filter(Boolean))]}));
+}
 // Keep this exact shared ID provisional. Four Chromium cases across Q001/Q004
 // showed Y1M01_SESSION_ITEM_MISMATCH; no valid browser evidence for a replacement.
 // Reopen SLEEP only in isolated QA: original "dormindo.png" is an exact
