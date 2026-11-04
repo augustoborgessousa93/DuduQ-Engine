@@ -166,7 +166,13 @@ try{
     record.pageUrl=page.url();
     record.screenshot=outDir+'/'+item.questionId+'-'+item.sourceGitBlob.slice(0,8)+
      '-'+item.mechanic.replace(/[^a-z0-9-]/gi,'_')+'-'+view.name+'.png';
-    await page.screenshot({path:record.screenshot,fullPage:false,timeout:15000});
+    // Screenshot capture waits on fonts even when image visibility was
+    // already confirmed. Preserve the gap without falsely failing loaded PNG.
+    try{await page.screenshot({path:record.screenshot,fullPage:false,timeout:20000});}
+    catch(e){
+     record.screenshotCaptureError=String(e.message||e).slice(0,320);
+     record.screenshot=null;
+    }
    }catch(e){record.limitations.push('BROWSER_EXCEPTION:'+String(e.message||e).slice(0,350))}
    finally{await page.close()}
   }
@@ -183,7 +189,10 @@ const summary={schemaVersion:'DUDUQ_FAST_BULK_BROWSER_V1',status:(failures.lengt
  mediaIds:report.appliedMediaIds,uniqueSourceMechanicSamples:sample.size,
  browserCases:cases.length,failedCases:failures.length,
  moduleRoutesChecked:moduleChecks.length,moduleRouteFailures:moduleFailures.length,
- moduleChecks,knownUnverifiedSessionFixtures:sessionFixtureGaps,
+ moduleChecks,missingScreenshotCases:cases.filter(x=>x.screenshotCaptureError)
+  .map(x=>({questionId:x.questionId,mechanic:x.mechanic,viewport:x.viewport,
+   imageLoaded:x.loaded,imageVisible:x.visible,error:x.screenshotCaptureError})),
+ knownUnverifiedSessionFixtures:sessionFixtureGaps,
  certifiedGameplay:false,pedagogicalQAApproved:false,productionDeployed:false,
  releaseApproved:false,cases};
 await writeFile('qa/results/phase2-fast-bulk-browser.json',JSON.stringify(summary,null,2)+'\n');
