@@ -335,7 +335,7 @@ for(const [id,links] of usages){
  const asset=sourceSelection.get(concept)||
   (graphConsensus?.concept===concept&&graphConsensus.source?
    {...graphConsensus.source,priority:'QUESTION_GRAPH_CONTEXT'}:null)||
-  (queueLabelSource&&{...queueLabelSource,priority:'UNANIMOUS_AUDITED_LABELS'}:null)||
+  (queueLabelSource?{...queueLabelSource,priority:'UNANIMOUS_AUDITED_LABELS'}:null)||
   (literalSource&&{...literalSource,priority:'UNIQUE_FULL_BILINGUAL_CAPTION'});
  if(!asset){hold(id,'NO_UNAMBIGUOUS_SOURCE_FOR_CONCEPT',concept);continue;}
  const realQuestionIds=[...new Set(links.map(x=>x.questionId))].sort();
