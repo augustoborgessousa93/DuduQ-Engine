@@ -280,7 +280,7 @@ const auditedSceneSources=new Map([
   questions:['Y1M01-Q001','Y1M01-Q005','Y1M01-Q006','Y1M01-Q007','Y1M01-Q008',
    'Y1M01-Q009','Y1M01-Q011','Y1M01-Q020','Y2M01-Q018'],
   labels:['Duas crianças se cumprimentando','Hello greeting','Hello!','Cena de cumprimento',
-   'Greeting scene','children greeting'],
+   'Greeting scene','children greeting','greeting'],
   mustInclude:['clear greeting context'],mustNotInclude:['written phrase label']
  }],
  ['IMG-Y1M01-FAREWELL-GENERIC-001',{
@@ -289,7 +289,7 @@ const auditedSceneSources=new Map([
    'Y1M01-Q007','Y1M01-Q008','Y1M01-Q009','Y1M01-Q010','Y1M01-Q011',
    'Y1M01-Q015','Y2M01-Q001','Y2M01-Q003','Y2M01-Q006','Y2M01-Q007','Y2M01-Q012'],
   labels:['Cena de despedida','Saying goodbye','Reconhecer Goodbye','Goodbye!',
-   'Duas pessoas se despedindo','Farewell scene'],
+   'Duas pessoas se despedindo','Farewell scene','farewell'],
   mustInclude:[],mustNotInclude:[]
  }]
 ]);
@@ -417,7 +417,7 @@ for(const [id,links] of usages){
  if((historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id))&&!isVettedBlack){
   hold(id,'HISTORICAL_VISUAL_OR_SEMANTIC_HOLD',concept);continue;
  }
- if(old.semanticConflict===true&&!graphConsensus&&!isVettedBlack){hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;}
+ if(old.semanticConflict===true&&!graphConsensus&&!isVettedBlack&&!vetted){hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;}
  if(old.temporary===false||e.temporary===false){
   hold(id,'NOT_PROVISIONAL',concept);continue;
  }
@@ -446,7 +446,7 @@ for(const [id,links] of usages){
  if(explicitConcepts.some(value=>value!==concept)){
   hold(id,'SHARED_EXPLICIT_ALTERNATIVE_SEMANTICS_CONFLICT',concept);continue;
  }
- if(old.semanticConflict===true&&!isVettedBlack&&graphConsensus?.concept!==concept){
+ if(old.semanticConflict===true&&!isVettedBlack&&!vetted&&graphConsensus?.concept!==concept){
   hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;
  }
  // Strong inference for legacy missing semanticTarget: audited concept and
