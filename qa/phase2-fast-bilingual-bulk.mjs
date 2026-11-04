@@ -299,8 +299,16 @@ for(const [id,links] of usages){
   for(const label of link.contextLabels||[]){const resolved=resolveExactLabel(label);if(resolved)found.push(resolved);}
   const unique=new Map(found.map(x=>[x.concept+'::'+(x.source?.sha||''),x]));
   const concepts=new Set([...unique.values()].map(x=>x.concept));
+  // A real option carrying two different exact labels is an explicit conflict,
+  // not missing evidence. Never let other shared-ID occurrences hide it.
+  if(concepts.size>1)return {conflict:true,concepts:[...concepts].sort()};
   return concepts.size===1?{concept:[...concepts][0],sources:[...unique.values()].filter(x=>x.source)}:null;
  });
+ const conflictedOccurrences=perOccurrence.filter(x=>x?.conflict);
+ if(conflictedOccurrences.length){
+  hold(id,'REAL_OPTION_LABELS_CONFLICT_WITHIN_OCCURRENCE',rawConcept);
+  continue;
+ }
  const contextConcepts=new Set(perOccurrence.filter(Boolean).map(x=>x.concept));
  const graphConsensus=perOccurrence.length===links.length&&perOccurrence.every(Boolean)&&contextConcepts.size===1
   ?{concept:[...contextConcepts][0],source:(()=>{
