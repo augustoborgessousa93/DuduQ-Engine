@@ -8,6 +8,7 @@ on:
       - .github/workflows/duduq-phase2-fast-bilingual-bulk.yml
       - qa/phase2-fast-bilingual-bulk.mjs
       - qa/phase2-fast-bilingual-aliases.mjs
+      - qa/verify-fast-bilingual-browser.mjs
 
 permissions:
   contents: read
@@ -131,6 +132,46 @@ jobs:
           writeFileSync('qa/results/phase2-fast-bulk-verification.json',JSON.stringify(summary,null,2)+'\n');
           console.log('BULK_QA_PASS='+JSON.stringify(summary));
           NODE
+      - name: Directed REAL Chromium proof of affected media in isolated local Pages (no deploy)
+        shell: bash
+        env:
+          BASE_URL: http://127.0.0.1:4175
+        run: |
+          set -Eeuo pipefail
+          npm install --no-save playwright@1.55.0 wrangler@latest
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev qa/fast-bilingual-immutable-candidate --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 >/tmp/fast-bulk-browser-pages.log 2>&1 &
+          SERVER_PID=$!
+          READY=0
+          for i in {1..90}; do
+            if curl -fsS "$BASE_URL/" >/dev/null; then READY=1; break; fi
+            if ! kill -0 "$SERVER_PID" 2>/dev/null; then cat /tmp/fast-bulk-browser-pages.log; exit 1; fi
+            sleep 2
+          done
+          if [ "$READY" -ne 1 ]; then cat /tmp/fast-bulk-browser-pages.log; exit 1; fi
+          node --check qa/verify-fast-bilingual-browser.mjs
+          node qa/verify-fast-bilingual-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-fast-bilingual-real-browser-evidence
+          path: |
+            qa/results/phase2-fast-bulk-browser.json
+            qa/results/phase2-fast-bulk-browser/*.png
+          retention-days: 90
+          if-no-files-found: warn
+          compression-level: 6
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-fast-bilingual-lightweight-semantic-holds
+          path: |
+            qa/results/phase2-fast-bilingual-bulk-plan.json
+            qa/results/phase2-fast-bilingual-bulk-applied.json
+            qa/results/phase2-fast-bulk-verification.json
+          retention-days: 90
+          if-no-files-found: warn
+          compression-level: 6
       - name: Archive ONE revised candidate only, SHA256; no release, commit or deploy
         shell: bash
         run: |
