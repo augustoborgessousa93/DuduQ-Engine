@@ -1,0 +1,43 @@
+name: DUDUQ — Forensic QA on real 30-module media
+on:
+  push:
+    branches:
+      - integration/assets-duduq-resume-20261030
+    paths:
+      - "qa/audit-assets-duduq-forensic.mjs"
+      - ".github/workflows/duduq-assets-duduq-forensic.yml"
+permissions:
+  contents: write
+jobs:
+  forensic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      CI: "true"
+      CF_PAGES_BRANCH: integration/assets-duduq-resume-20261030
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build EXACT preview including both already-staged image batches
+        run: bash qa/build-v26-topic-first-paint-qa.sh
+      - name: Compare real questions, references, media paths, and missing semantics
+        run: |
+          node --check qa/audit-assets-duduq-forensic.mjs
+          node qa/audit-assets-duduq-forensic.mjs
+      - name: Preserve evidence in review branch, not production
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f qa/results/assets-duduq-forensic.json
+          if ! git diff --cached --quiet; then
+            git commit -m "qa(media): preserve forensic question-by-question media evidence"
+            git push origin HEAD:integration/assets-duduq-resume-20261030
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-semantic-forensic-evidence
+          path: qa/results/assets-duduq-forensic.json
+          retention-days: 21
