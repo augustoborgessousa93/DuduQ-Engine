@@ -39,7 +39,7 @@ assert.equal(patch.sourceCommit,'a62c07c075a4a744f81dee2eea3a6b93108f9d08');
 assert.equal(patch.realContracts,600);
 // Exact QA selection of 04/11: 39 IDs, 8 new source blobs, 44 questions.
 // Fail closed if a transient Cloudflare source download reduces the bundle.
-assert(patch.appliedMediaIds>=42,'EXPECTED_AT_LEAST_GREETING_AND_FAREWELL_REPLACEMENT');
+assert.equal(patch.appliedMediaIds,42,'PREVIEW_SHOULD_INCLUDE_EXACT_TWO_AUDITED_GREETING_MEDIA');
 const required=['IMG-Y1M01-GREETING-GENERIC-001','IMG-Y1M01-FAREWELL-GENERIC-001'];
 for(const mediaId of required)assert(patch.applied.some(x=>x.mediaId===mediaId),'MISSING_AUDITED_GREETING_MEDIA:'+mediaId);
 const neededNewBlobs=new Set(patch.applied.filter(x=>!x.sourceAlreadyPublished)
@@ -55,7 +55,8 @@ for(const key of ['changedQuestionJsonFiles','changedAudioFiles','changedGoldMas
  assert.equal(patch[key],0,key);
 assert.equal(patch.productionDeployed,false);
 // The shared SLEEP image is a QA trial; release requires browser proof.
-const sleepTrial=patch.applied.some(x=>x.mediaId==='Y1M01-EMOJI-SLEEP-001');
+assert(!patch.applied.some(x=>x.mediaId==='Y1M01-EMOJI-SLEEP-001'),'UNRESOLVED_SLEEP_SESSION_MUST_REMAIN_HELD');
+const sleepTrial=false;
 const lines=readFileSync(root+'/.duduq-pages-manifest','utf8').trimEnd().split(/\r?\n/),manifest=new Map();
 for(const line of lines){
  const n=line.lastIndexOf(' '),rel=line.slice(0,n),expected=line.slice(n+1);
