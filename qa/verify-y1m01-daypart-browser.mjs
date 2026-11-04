@@ -59,8 +59,11 @@ try{
     shaVerified:sha(bytes)===e.sha256,browserDecoded:false};
    if(response.ok()&&verified.shaVerified){
     verified.browserDecoded=await page.evaluate(u=>new Promise(resolve=>{
-      const img=new Image();img.onload=()=>resolve(img.naturalWidth>0&&img.naturalHeight>0);
-      img.onerror=()=>resolve(false);img.src=u;
+      const img=new Image();let finished=false;
+      const end=ok=>{if(finished)return;finished=true;clearTimeout(timer);resolve(ok);};
+      const timer=setTimeout(()=>end(false),8000);
+      img.onload=()=>end(img.naturalWidth>0&&img.naturalHeight>0);
+      img.onerror=()=>end(false);img.src=u;
     }),url);
    }
    transport.push(verified);
@@ -74,10 +77,10 @@ try{
    const tab=await ctx.newPage();
    tab.on('pageerror',err=>outcome.errors.push(String(err.message||err).slice(0,220)));
    try{
-    const resp=await tab.goto(url,{waitUntil:'domcontentloaded',timeout:45000});
+    const resp=await tab.goto(url,{waitUntil:'domcontentloaded',timeout:15000});
     outcome.htmlStatus=resp?.status()??null;
     const paths=ids.map(id=>byId.get(id).urlOrPath.replace(/^\/+/,''));
-    const expires=Date.now()+10000;
+    const expires=Date.now()+6000;
     while(Date.now()<expires){
      let images=[];
      for(const frame of tab.frames()){
