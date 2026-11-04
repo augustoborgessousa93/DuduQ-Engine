@@ -67,6 +67,35 @@ for(const item of patch.applied){
  assert.equal(entry?.provenance?.sourceCommit,patch.sourceCommit);
  assert.equal(entry?.sha256,manifest.get(entry.urlOrPath));
 }
+const auditedIds=['IMG-Y1M01-GREETING-GENERIC-001','IMG-Y1M01-FAREWELL-GENERIC-001','Y1M01-EMOJI-FOOD-001'];
+const mediaRows=Object.fromEntries(auditedIds.map(id=>[id,[]]));
+for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
+ const mm=String(m).padStart(2,'0');
+ const doc=JSON.parse(readFileSync(root+'/content/english/year-'+y+'/module-'+mm+'/questions.json'));
+ for(const question of doc.items){
+  const walk=(node,where,context={})=>{
+   if(!node||typeof node!=='object')return;
+   if(Array.isArray(node)){node.forEach((item,i)=>walk(item,where+'['+i+']',context));return}
+   const labels=Object.fromEntries(Object.entries(node).filter(([k,v])=>
+    /^(semanticTarget|label|text|alt|caption|concept|optionSemantic|value|description)$/i.test(k)&&typeof v==='string'));
+   const inherited={...context,...labels};
+   for(const [k,v] of Object.entries(node)){
+    if(['mediaId','assetId','image_ref','imageRef'].includes(k)&&auditedIds.includes(v)){
+     mediaRows[v].push({questionId:question.item_id,at:where+'.'+k,labels:inherited,
+      questionAudio:question.audio?.transcript||question.audio_transcript||null});
+    }
+    if(v&&typeof v==='object')walk(v,where+'.'+k,inherited);
+   }
+  };
+  walk(question,'question');
+ }
+}
+for(const id of auditedIds){
+ const rows=mediaRows[id],entry=byId.get(id),questions=[...new Set(rows.map(r=>r.questionId))];
+ console.log('DUDUQ_GREETING_ALL_OCCURRENCES='+JSON.stringify({mediaId:id,count:questions.length,
+  questions,registrySemantic:entry?.semantic,source:entry?.urlOrPath,
+  occurrences:rows.filter(r=>!r.at.includes('mediaBindings')).slice(0,60)}));
+}
 console.log('PHASE2_PINNED_BUILD_VERIFIED='+JSON.stringify({
  mediaIds:patch.appliedMediaIds,affectedQuestions:patch.appliedQuestionIds.length,
  assets:manifest.size,contracts:questions,orangeSplit:true,productionDeployed:false}));
