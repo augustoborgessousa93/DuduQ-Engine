@@ -36,7 +36,7 @@ for(const id of report.appliedQuestionIds){
 }
 // One true question per distinct original blob x mechanic; this prevents
 // inflating "tested" by repeating duplicate mediaId aliases.
-const sample=new Map(),mediaPaths=new Map();
+const sampleCandidates=new Map(),sample=new Map(),mediaPaths=new Map();
 for(const item of report.applied){
  const reg=byId.get(item.mediaId);
  assert(reg?.provenance?.sourceGitBlob===item.sourceGitBlob,'REGISTRY_PROVENANCE:'+item.mediaId);
@@ -47,9 +47,27 @@ for(const item of report.applied){
   const q=getDoc(questionId)?.items?.find(x=>x.item_id===questionId);
   assert(q?.mechanicId,'COMPILED_MECHANIC_MISSING:'+questionId);
   const key=item.sourceGitBlob+'::'+q.mechanicId;
-  if(!sample.has(key))sample.set(key,{questionId,mechanic:q.mechanicId,
+  if(!sampleCandidates.has(key))sampleCandidates.set(key,[]);
+  sampleCandidates.get(key).push({questionId,mechanic:q.mechanicId,
    mediaId:item.mediaId,sourceGitBlob:item.sourceGitBlob,assetPath:reg.urlOrPath});
  }
+}
+// Y1M01-Q001 is a known non-addressable session fixture: two prior real browser
+// attempts returned Y1M01_SESSION_ITEM_MISMATCH (mobile + desktop).
+// Do not silently call that broken fixture an image failure or a passing test.
+// Test ANOTHER real occurrence of the same source/blob and mechanic when one
+// exists; retain explicit coverage gap for Q001 and never certify gameplay.
+const sessionFixtureGaps=[];
+for(const [key,items] of sampleCandidates){
+ const first=items[0];
+ const alternate=first.questionId==='Y1M01-Q001'?
+  items.find(x=>!x.questionId.startsWith('Y1M01'))||
+  items.find(x=>x.questionId!=='Y1M01-Q001'):null;
+ const chosen=alternate||first;
+ sample.set(key,chosen);
+ if(alternate)sessionFixtureGaps.push({questionId:'Y1M01-Q001',
+  selectedAlternative:chosen.questionId,sourceGitBlob:chosen.sourceGitBlob,
+  mechanic:chosen.mechanic,reason:'EXACT_ITEM_BROWSER_SESSION_MISMATCH_UNRESOLVED'});
 }
 const blobs=new Set(report.applied.map(x=>x.sourceGitBlob));
 assert(sample.size>=blobs.size,'SOURCE_BLOB_WITHOUT_BROWSER_SAMPLE');
@@ -126,10 +144,12 @@ const summary={schemaVersion:'DUDUQ_FAST_BULK_BROWSER_V1',status:failures.length
  sourceCommit:report.sourceCommit,sourceBlobs:blobs.size,
  mediaIds:report.appliedMediaIds,uniqueSourceMechanicSamples:sample.size,
  browserCases:cases.length,failedCases:failures.length,
+ knownUnverifiedSessionFixtures:sessionFixtureGaps,
  certifiedGameplay:false,pedagogicalQAApproved:false,productionDeployed:false,
  releaseApproved:false,cases};
 await writeFile('qa/results/phase2-fast-bulk-browser.json',JSON.stringify(summary,null,2)+'\n');
 if(failures.length)console.error('FAST_BULK_BROWSER_FAILURE_DETAILS='+JSON.stringify(failures.map(x=>({questionId:x.questionId,mediaId:x.mediaId,sourceGitBlob:x.sourceGitBlob,sourcePath:x.assetPath,mechanic:x.mechanic,viewport:x.viewport,httpStatus:x.httpStatus,loaded:x.loaded,visible:x.visible,observedFrames:x.observedFrames,errors:x.errors,httpErrors:x.httpErrors,limitations:x.limitations,screenshot:x.screenshot}))));
+if(sessionFixtureGaps.length)console.warn('FAST_BULK_BROWSER_SESSION_GAPS='+JSON.stringify(sessionFixtureGaps));
 console.log('FAST_BULK_BROWSER_QA='+JSON.stringify({status:summary.status,
  sourceBlobs:summary.sourceBlobs,samples:summary.uniqueSourceMechanicSamples,
  cases:summary.browserCases,failures:summary.failedCases}));
