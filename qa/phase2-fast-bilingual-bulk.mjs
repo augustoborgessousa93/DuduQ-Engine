@@ -256,6 +256,9 @@ for(const e of registry.entries){
   published.set(b,{path:rel,sha256:h});
 }
 const historical=new Set(['white','black','orange','orange fruit','banana','brother']);
+// Keep this exact shared ID provisional. Four Chromium cases across Q001/Q004
+// showed Y1M01_SESSION_ITEM_MISMATCH; no valid browser evidence for a replacement.
+const unprovenSessionMedia=new Set(['Y1M01-EMOJI-SLEEP-001']);
 const held=[],selected=[],counts={};
 function hold(id,reason,concept){
  counts[reason]=(counts[reason]||0)+1;
@@ -329,6 +332,9 @@ for(const [id,links] of usages){
   hold(id,'SHARED_REAL_OPTION_CONTEXT_CONFLICT',concept);continue;
  }
  if(!old||old.classification!=='PROVISIONAL'){hold(id,'AUDITED_QUEUE_ENTRY_MISSING',concept);continue;}
+ if(unprovenSessionMedia.has(id)){
+  hold(id,'Y1M01_REAL_SESSION_VISUAL_QA_BLOCKED',concept);continue;
+ }
  if(!concept){hold(id,'CONCEPT_UNMAPPED_BILINGUAL',rawConcept);continue;}
  if(historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id)){
   hold(id,'HISTORICAL_VISUAL_OR_SEMANTIC_HOLD',concept);continue;

@@ -75,8 +75,39 @@ assert(sample.size<=150,'EXCESSIVE_BROWSER_SAMPLE_REQUIRES_EXPLICIT_REVIEW');
 const outDir='qa/results/phase2-fast-bulk-browser';
 await mkdir(outDir,{recursive:true});
 const browser=await chromium.launch({headless:true});
-const cases=[];
+const cases=[],moduleChecks=[];
 try{
+ // Independent real HTTP and entrypoint checks for all 30 modules and 600
+ // compiled question contracts; not a claim of 600 interactive gameplays.
+ const moduleContext=await browser.newContext({viewport:{width:1280,height:800},reducedMotion:'reduce'});
+ for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
+  const mm=String(module).padStart(2,'0');
+  const route='/play/english/year-'+year+'/module-'+mm+'/';
+  const qroute='/content/english/year-'+year+'/module-'+mm+'/questions.json';
+  const check={moduleId:'Y'+year+'M'+mm,route,httpStatus:null,questionHttpStatus:null,
+   questions:null,bodyLength:0,errors:[]};
+  moduleChecks.push(check);
+  const page=await moduleContext.newPage();
+  page.on('pageerror',e=>check.errors.push(String(e?.message||e).slice(0,200)));
+  try{
+   const response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:45000});
+   check.httpStatus=response?.status()??null;
+   check.bodyLength=await page.evaluate(()=>document.body?.textContent?.trim().length||0);
+   const questionResponse=await page.request.get(base+qroute,{timeout:30000});
+   check.questionHttpStatus=questionResponse.status();
+   if(questionResponse.ok()){
+    const data=await questionResponse.json();
+    check.questions=data.items?.length??null;
+    if(data.moduleId!==check.moduleId)check.errors.push('MODULE_ID_MISMATCH');
+   }
+  }catch(e){check.errors.push('MODULE_BOOT:'+String(e?.message||e).slice(0,220))}
+  finally{await page.close()}
+ }
+ await moduleContext.close();
+ const totalQuestions=moduleChecks.reduce((n,x)=>n+(x.questions||0),0);
+ assert.equal(moduleChecks.length,30,'NOT_30_MODULES');
+ assert.equal(totalQuestions,600,'NOT_600_REAL_HTTP_QUESTIONS');
+
  for(const view of [{name:'mobile',width:390,height:844},{name:'desktop',width:1280,height:800}]){
   const context=await browser.newContext({viewport:{width:view.width,height:view.height},
    deviceScaleFactor:1,reducedMotion:'reduce'});
@@ -144,18 +175,24 @@ try{
 }finally{await browser.close()}
 const failures=cases.filter(x=>x.httpStatus!==200||!x.loaded||!x.visible||
  x.errors.length>0||x.httpErrors.length>0||x.limitations.some(x=>x.startsWith('BROWSER_EXCEPTION')));
-const summary={schemaVersion:'DUDUQ_FAST_BULK_BROWSER_V1',status:failures.length?
+const moduleFailures=moduleChecks.filter(x=>x.httpStatus!==200||x.questionHttpStatus!==200||
+ x.questions!==20||x.bodyLength<20||x.errors.length>0);
+const summary={schemaVersion:'DUDUQ_FAST_BULK_BROWSER_V1',status:(failures.length||moduleFailures.length)?
  'BROWSER_EVIDENCE_BLOCKED':'BROWSER_LOAD_AND_VISIBILITY_PASS_QA_ONLY',
  sourceCommit:report.sourceCommit,sourceBlobs:blobs.size,
  mediaIds:report.appliedMediaIds,uniqueSourceMechanicSamples:sample.size,
  browserCases:cases.length,failedCases:failures.length,
- knownUnverifiedSessionFixtures:sessionFixtureGaps,
+ moduleRoutesChecked:moduleChecks.length,moduleRouteFailures:moduleFailures.length,
+ moduleChecks,knownUnverifiedSessionFixtures:sessionFixtureGaps,
  certifiedGameplay:false,pedagogicalQAApproved:false,productionDeployed:false,
  releaseApproved:false,cases};
 await writeFile('qa/results/phase2-fast-bulk-browser.json',JSON.stringify(summary,null,2)+'\n');
 if(failures.length)console.error('FAST_BULK_BROWSER_FAILURE_DETAILS='+JSON.stringify(failures.map(x=>({questionId:x.questionId,mediaId:x.mediaId,sourceGitBlob:x.sourceGitBlob,sourcePath:x.assetPath,mechanic:x.mechanic,viewport:x.viewport,httpStatus:x.httpStatus,loaded:x.loaded,visible:x.visible,observedFrames:x.observedFrames,errors:x.errors,httpErrors:x.httpErrors,limitations:x.limitations,screenshot:x.screenshot}))));
 if(sessionFixtureGaps.length)console.warn('FAST_BULK_BROWSER_SESSION_GAPS='+JSON.stringify(sessionFixtureGaps));
+console.log('FAST_BULK_MODULE_BOOT_QA='+JSON.stringify({routes:moduleChecks.length,
+ questions:moduleChecks.reduce((n,x)=>n+(x.questions||0),0),failures:moduleFailures.length}));
+if(moduleFailures.length)console.error('FAST_BULK_MODULE_BOOT_FAILURES='+JSON.stringify(moduleFailures));
 console.log('FAST_BULK_BROWSER_QA='+JSON.stringify({status:summary.status,
  sourceBlobs:summary.sourceBlobs,samples:summary.uniqueSourceMechanicSamples,
  cases:summary.browserCases,failures:summary.failedCases}));
-assert.equal(failures.length,0,'DIRECTED_BROWSER_VISIBILITY_FAILURES_REVIEW_EVIDENCE');
+assert.equal(failures.length+moduleFailures.length,0,'DIRECTED_VISIBILITY_OR_30_MODULE_BOOT_FAILURES');
