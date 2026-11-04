@@ -474,7 +474,7 @@ jobs:
             /tmp/duduq-seasons-pages.log
 
   y4m03-bubble-inner-iframe-real-pointer:
-    name: Bubble Pop Q006 real mouse/touch inside nested iframe (no production deploy)
+    name: Bubble Pop Q006 native bubble pointerdown and source image visibility (NO deploy)
     if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha != 'd3b05a40c845ab1d74143cdd0330f912d8440a5c' && github.sha != 'b8e5ff2f4bf1573a7b731c331779f2427b08b374' && github.sha != 'b4016fb56501848edee3778f2799bf3367ffec12' && github.sha != '8b4cee86baeea4b33b45753ed7dc947b6f7bbaed' && github.sha != '1358eff07f83ccb31ce6fdfcad653f42805ca907' && github.sha != 'bf4976d9a28b6b23566a75722d1ef9af8713e2ce' }}
     runs-on: ubuntu-latest
     timeout-minutes: 28

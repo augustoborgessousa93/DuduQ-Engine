@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Real pointer/touch + nested iframe source-image QA for Y4M03-Q006 Bubble Pop.
+ * Real pointer/touch on native Bubble Pop playable controls (not historical iframe).
  * Uses the existing audited 3-source-PNG/8-binding overlay (no regeneration).
  * No production deployment, no source/gameplay changes, no pedagogical approval.
  */
@@ -61,7 +61,7 @@ async function inspect(page){
         for(const img of allImgs){
           let url; try{url=new URL(img.currentSrc||img.src).pathname.replace(/^\/+/,'');}catch{continue;}
           if(!assets.includes(url))continue;
-          const rect=img.getBoundingClientRect(),css=getComputedStyle(img),parent=img.closest('.duduq-bp-bubble');
+          const rect=img.getBoundingClientRect(),css=getComputedStyle(img),parent=img.closest('button.bubble-pop-playable');
           const inViewport=rect.right>0&&rect.bottom>0&&rect.left<innerWidth&&rect.top<innerHeight;
           const visible=img.complete&&img.naturalWidth>0&&rect.width>8&&rect.height>8&&
             css.visibility!=='hidden'&&css.display!=='none'&&Number(css.opacity)>0&&inViewport;
@@ -70,11 +70,11 @@ async function inspect(page){
              insideBubbleButton:!!parent,
              buttonDisabled:parent?.disabled??null});
         }
-        return {url:location.href,rootFound:!!document.querySelector('.duduq-bp-root'),
-          bubbleCount:document.querySelectorAll('button.duduq-bp-bubble').length,
-          wrongCount:document.querySelectorAll('.duduq-bp-bubble-shell[data-wrong="true"]').length,
-          poppedCount:document.querySelectorAll('.duduq-bp-bubble-shell[data-popped="true"]').length,
-          recordedClicks:Array.isArray(window.__duduqQaClicks)?window.__duduqQaClicks:[],
+        return {url:location.href,rootFound:!!document.querySelector('.bubble-pop-screen'),
+          bubbleCount:document.querySelectorAll('button.bubble-pop-playable').length,
+          wrongCount:document.querySelectorAll('.feedback-ribbon[data-feedback="incorrect"]:not([hidden])').length,
+          poppedCount:document.querySelectorAll('.bubble-pop-visual[data-frame="ring"]').length,
+          recordedClicks:Array.isArray(window.__duduqQaPointerEvents)?window.__duduqQaPointerEvents:[],
           images:icons};
       },paths);
       out.push({...data,frameUrl:frame.url()});
@@ -87,33 +87,41 @@ async function actualPointer(page,mode){
   for(let attempt=0;attempt<8;attempt++){
     for(const fr of page.frames()){
       let count=0;
-      try{count=await fr.locator('button.duduq-bp-bubble:not(:disabled)').count();}catch{continue;}
+      try{count=await fr.locator('button.bubble-pop-playable:not(:disabled)').count();}catch{continue;}
       if(!count)continue;
       await fr.evaluate(()=>{
-        if(!Array.isArray(window.__duduqQaClicks)){
-          window.__duduqQaClicks=[];
-          document.addEventListener('click',e=>{
-            const btn=e.target?.closest?.('button.duduq-bp-bubble');
-            if(btn)window.__duduqQaClicks.push({aria:btn.getAttribute('aria-label'),
-                realBrowserEvent:true,time:Date.now()});
+        if(!Array.isArray(window.__duduqQaPointerEvents)){
+          window.__duduqQaPointerEvents=[];
+          document.addEventListener('pointerdown',e=>{
+            const btn=e.target?.closest?.('button.bubble-pop-playable');
+            if(btn)window.__duduqQaPointerEvents.push({
+              bubbleId:btn.dataset.bubbleId,aria:btn.getAttribute('aria-label'),
+              pointerType:e.pointerType,isTrusted:e.isTrusted,time:Date.now()});
           },true);
         }
       });
       for(let i=0;i<Math.min(count,10);i++){
-        const button=fr.locator('button.duduq-bp-bubble:not(:disabled)').nth(i);
+        const button=fr.locator('button.bubble-pop-playable:not(:disabled)').nth(i);
         try{
           const b=await button.boundingBox();
           if(!b||b.width<16||b.height<16)continue;
           const x=b.x+b.width/2,y=b.y+b.height/2,vp=page.viewportSize();
           if(x<10||y<10||x>vp.width-10||y>vp.height-10)continue;
-          const before=await fr.evaluate(()=>window.__duduqQaClicks.length);
+          const before=await fr.evaluate(()=>window.__duduqQaPointerEvents.length);
           if(mode==='touch')await page.touchscreen.tap(x,y);
           else {await page.mouse.move(x,y,{steps:2});await page.mouse.down();await page.mouse.up();}
           await page.waitForTimeout(150);
-          const after=await fr.evaluate(()=>window.__duduqQaClicks.length);
+          const reaction=await fr.evaluate(()=>({
+            pointerEvents:window.__duduqQaPointerEvents.length,
+            poppingRings:document.querySelectorAll('.bubble-pop-visual[data-frame="ring"]').length,
+            disabledButtons:document.querySelectorAll('button.bubble-pop-playable:disabled').length
+          }));
+          const after=reaction.pointerEvents;
+          const engineReacted=reaction.poppingRings>0&&reaction.disabledButtons>0;
           results.push({mode,attempt,frameUrl:fr.url(),x:Math.round(x),y:Math.round(y),
-            observedDOMClick:after>before,events:await fr.evaluate(()=>window.__duduqQaClicks.slice(-3))});
-          if(after>before)return{confirmed:true,results};
+            observedPointerDown:after>before,engineReacted,reaction,
+            events:await fr.evaluate(()=>window.__duduqQaPointerEvents.slice(-3))});
+          if(after>before&&engineReacted)return{confirmed:true,results};
         }catch(e){results.push({mode,attempt,error:String(e).slice(0,180)});}
       }
     }
@@ -158,22 +166,22 @@ try{
       seen.set(img.path,{...img,frameUrl:f.frameUrl,afterClick:true});
     await page.screenshot({path:'qa/results/y4m03-iframe-pointer/'+view.name+'-after-click.png',fullPage:true});
     const missing=paths.filter(p=>!seen.has(p));
-    const inNestedFrame=paths.filter(p=>seen.get(p)?.insideBubbleButton);
+    const inActiveNativeBubble=paths.filter(p=>seen.get(p)?.insideBubbleButton);
     const insufficientDensity=[...seen.values()].filter(x=>x.density<2).map(x=>({path:x.path,density:x.density}));
-    const pass=missing.length===0&&inNestedFrame.length===paths.length&&
+    const pass=missing.length===0&&inActiveNativeBubble.length===paths.length&&
       insufficientDensity.length===0&&action.confirmed&&errors.length===0;
     if(!pass)success=false;
     report.viewports.push({view:view.name,input:view.input,route,http:response.status(),pass,
       iframeUrls:[...frameKinds],frameCount:page.frames().length,
-      observedOriginalImages:[...seen.values()],missing,inNestedFrame,insufficientDensity,
+      observedOriginalImages:[...seen.values()],missing,inActiveNativeBubble,insufficientDensity,
       action,afterInteraction:after.map(f=>({frameUrl:f.frameUrl,bubbleCount:f.bubbleCount,
         wrongCount:f.wrongCount,poppedCount:f.poppedCount,
         recordedClicks:f.recordedClicks})),samples,errors});
     await ctx.close();
   }
 }finally{await browser.close();}
-report.status=success?'PASS_REAL_MOUSE_TOUCH_AND_NESTED_BUBBLE_IMAGES_PEDAGOGICAL_REVIEW_PENDING':
-  'INCOMPLETE_IFRAME_OR_REAL_POINTER_VISIBILITY_QA_NOT_APPROVED';
+report.status=success?'PASS_NATIVE_BUBBLE_POINTERDOWN_AND_BOTH_SEASONS_VISIBLE_PEDAGOGICAL_REVIEW_PENDING':
+  'INCOMPLETE_NATIVE_BUBBLE_POINTER_QA_NOT_APPROVED';
 await writeFile('qa/results/y4m03-iframe-pointer/report.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({status:report.status,checks:report.viewports.map(v=>({
  view:v.view,pass:v.pass,observed:v.observedOriginalImages.map(x=>({path:x.path,frame:x.frameUrl,
