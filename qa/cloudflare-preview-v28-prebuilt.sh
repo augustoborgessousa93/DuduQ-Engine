@@ -14,6 +14,8 @@ curl -fLSs --retry 3 --retry-delay 3 --connect-timeout 20 --max-time 360 \
 echo "$SHA  $TMP" | sha256sum -c
 tar -xzf "$TMP" -C "$ROOT"
 cp qa/input/pinned-assets-tree-a62c07c.json qa/results/assets-duduq-current-head-tree.json
+node --check qa/inspect-daypart-compiled-usage.mjs
+DUDUQ_QA_ONLY=1 node qa/inspect-daypart-compiled-usage.mjs
 DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs
 node --input-type=module <<'DUDUQ_GREETING_BLOCK_DIAG'
 import {readFileSync} from 'node:fs';
