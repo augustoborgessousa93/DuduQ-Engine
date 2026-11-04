@@ -15,6 +15,7 @@ on:
       - "qa/phase2-y4m03-seasons-browser-qa.mjs"
       - "qa/phase2-y4m03-bubble-iframe-pointer-qa.mjs"
       - "qa/phase2-consolidate-orange-source-deltas.mjs"
+      - "qa/phase2-consolidated-real-browser-qa.mjs"
       - "qa/tests/verify-assets-duduq-crosswalk.mjs"
       - "qa/tests/verify-30-route-browser-smoke.mjs"
       - "qa/prepare-assets-duduq-reuse.mjs"
@@ -536,7 +537,7 @@ jobs:
 
   phase2-consolidate-two-proven-deltas:
     name: Consolidate 5 original PNGs / 10 media IDs on real Orange baseline (NO deploy)
-    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha != 'b0104ee1516262ec274a6817b099d2dbcd5fd48f' && github.sha != 'd3b05a40c845ab1d74143cdd0330f912d8440a5c' && github.sha != 'b8e5ff2f4bf1573a7b731c331779f2427b08b374' && github.sha != 'b4016fb56501848edee3778f2799bf3367ffec12' && github.sha != '8b4cee86baeea4b33b45753ed7dc947b6f7bbaed' && github.sha != '1358eff07f83ccb31ce6fdfcad653f42805ca907' && github.sha != 'bf4976d9a28b6b23566a75722d1ef9af8713e2ce' }}
+    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha == '87bc5dc050cb157817aabfb02e0500b98ed06ad8' }}
     runs-on: ubuntu-latest
     timeout-minutes: 28
     permissions:
@@ -597,6 +598,71 @@ jobs:
           path: |
             qa/results/consolidated/evidence.json
             qa/results/consolidated/delta-5png-10ids-no-deploy.tar.gz
+
+  phase2-combined-real-gameplay-browser:
+    name: 5PNG/10-ID combined Orange candidate - 5 questions x desktop/mobile (NO deploy)
+    if: ${{ github.ref_name == 'qa/duduq-phase2-crosswalk-head-20261103' && github.sha != '87bc5dc050cb157817aabfb02e0500b98ed06ad8' && github.sha != 'b0104ee1516262ec274a6817b099d2dbcd5fd48f' && github.sha != 'd3b05a40c845ab1d74143cdd0330f912d8440a5c' && github.sha != 'b8e5ff2f4bf1573a7b731c331779f2427b08b374' && github.sha != 'b4016fb56501848edee3778f2799bf3367ffec12' && github.sha != '8b4cee86baeea4b33b45753ed7dc947b6f7bbaed' && github.sha != '1358eff07f83ccb31ce6fdfcad653f42805ca907' && github.sha != 'bf4976d9a28b6b23566a75722d1ef9af8713e2ce' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 36
+    permissions:
+      actions: read
+      contents: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      DUDUQ_QA_ONLY: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            qa/phase2-consolidated-real-browser-qa.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Reuse successful immutable combined candidate; do not regenerate
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p qa/results/consolidated
+          gh run download 41745805317 -R "$GITHUB_REPOSITORY" --name duduq-phase2-combined-5png-10ids-41745805317 --dir qa/results/consolidated
+          test -s qa/results/consolidated/evidence.json
+          test -s qa/results/consolidated/delta-5png-10ids-no-deploy.tar.gz
+      - name: Restore exact Orange base and verified source-media delta
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          T="$RUNNER_TEMP/orange-prod.tar.gz"
+          curl -fLSs --retry 3 --connect-timeout 20 --max-time 480             "https://github.com/$GITHUB_REPOSITORY/releases/download/duduq-phase2-orange-fruit-color-corrected-20261103/duduq-phase2-orange-fruit-color-corrected.tar.gz" -o "$T"
+          echo "cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800  $T" | sha256sum --check --status
+          mkdir -p dist-pages
+          tar -xzf "$T" -C dist-pages
+          tar -xzf qa/results/consolidated/delta-5png-10ids-no-deploy.tar.gz -C dist-pages
+      - name: Validate 10 new image bindings on 5 actual questions and two screen sizes
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/phase2-consolidated-real-browser-qa.mjs
+          npm install --no-save --no-audit --no-fund playwright@1.55.0 wrangler@4
+          npx playwright install --with-deps chromium
+          npx wrangler pages dev dist-pages --ip 127.0.0.1 --port 4175 --compatibility-date 2026-10-30 >/tmp/duduq-phase2-combined.log 2>&1 &
+          for i in $(seq 1 50); do
+            if curl -fsS -o /dev/null http://127.0.0.1:4175/play/bubble-pop/; then break; fi
+            sleep 2
+          done
+          node qa/phase2-consolidated-real-browser-qa.mjs
+      - name: Preserve screenshots and exact checks even if a case fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-phase2-combined-browser-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/consolidated/browser/
+            /tmp/duduq-phase2-combined.log
 
   isolated-v26-media-reuse:
     if: ${{ github.ref_name != 'qa/duduq-phase2-crosswalk-head-20261103' }}
