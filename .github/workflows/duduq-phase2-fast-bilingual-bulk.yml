@@ -7,6 +7,7 @@ on:
       - qa/duduq-greetings-q001-focus-20261104
       - qa/duduq-phase2-next-safe-batch-20261104
       - qa/duduq-year1-module01-closure-20261104
+      - qa/duduq-y1m01-distractor-diversity-20261104
     paths:
       - .github/workflows/duduq-phase2-fast-bilingual-bulk.yml
       - qa/phase2-fast-bilingual-bulk.mjs
@@ -19,6 +20,8 @@ on:
       - qa/verify-y1m01-daypart-browser.mjs
       - qa/audit-year1-module01-compiled.mjs
       - qa/render-y1m01-review.mjs
+      - qa/apply-y1m01-variety.mjs
+      - qa/y1m01-curated-variety-plan.json
       - qa/cloudflare-preview-v28-prebuilt.sh
 
 permissions:
@@ -162,6 +165,9 @@ jobs:
           set -Eeuo pipefail
           node --check qa/patch-y1m01-daypart-q003-q004.mjs
           node qa/patch-y1m01-daypart-q003-q004.mjs
+          node --check qa/apply-y1m01-variety.mjs
+          node qa/apply-y1m01-variety.mjs
+          test -s qa/results/y1m01-curated-variety.json
           node qa/verify-approved-q001-lock.mjs
           test -s qa/results/y1m01-daypart-q003-q004.json
       - name: Compile 20-question Y1M01 closure scorecard and enforce no missing media assets
@@ -221,6 +227,7 @@ jobs:
             qa/results/y1m01-q001-focused-preview.json
             qa/results/y1m01-daypart-q003-q004.json
             qa/results/y1m01-real-module-audit.json
+            qa/results/y1m01-curated-variety.json
             qa/results/y1m01-real-module-audit.md
             qa/results/y1m01-review.html
           retention-days: 90
