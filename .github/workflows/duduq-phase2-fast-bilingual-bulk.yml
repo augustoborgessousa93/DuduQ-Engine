@@ -24,6 +24,7 @@ on:
       - qa/apply-y1m01-variety.mjs
       - qa/y1m01-curated-variety-plan.json
       - qa/patch-y1m01-q003-daypart-variety.mjs
+      - qa/audit-y1m01-runtime-lineage.mjs
       - qa/cloudflare-preview-v28-prebuilt.sh
 
 permissions:
@@ -186,6 +187,13 @@ jobs:
           test -s qa/results/y1m01-review.html
           test -s qa/results/y1m01-real-module-audit.json
           test -s qa/results/y1m01-real-module-audit.md
+      - name: Detect whether the module actually consumes audited 20-question JSON
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/audit-y1m01-runtime-lineage.mjs
+          node qa/audit-y1m01-runtime-lineage.mjs
+          test -s qa/results/y1m01-runtime-lineage.json
       - name: Directed REAL Chromium proof of affected media in isolated local Pages (no deploy)
         shell: bash
         env:
@@ -234,6 +242,7 @@ jobs:
             qa/results/y1m01-real-module-audit.json
             qa/results/y1m01-curated-variety.json
             qa/results/y1m01-q003-varied-dayparts.json
+            qa/results/y1m01-runtime-lineage.json
             qa/results/y1m01-real-module-audit.md
             qa/results/y1m01-review.html
           retention-days: 90
