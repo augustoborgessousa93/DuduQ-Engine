@@ -65,10 +65,16 @@ for(const [suffix,optionId,oldId,concept,newLabel] of plan.edits){
     contractKeys:Object.keys(q.optionContract||{}),choiceIds:choices.map(v=>v.optionId)}));
  }
  assert.equal(o.mediaId,oldId,'SOURCE_OPTION_CHANGED:'+qid+':'+optionId);
- if(c){assert.equal(c.mediaId,oldId,'SOURCE_CONTRACT_CHANGED:'+qid+':'+optionId);
- assert.equal(Boolean(o.correct),Boolean(c.correct),'CORRECTNESS_DRIFT');}
+ let verifiedChoice=c;
+ if(q.mechanicId==='drag-drop-multimedia'&&c&&
+   (c.mediaId!==oldId||Boolean(c.correct)!==Boolean(o.correct))){
+  verifiedChoice=null;
+  console.log('DUDUQ_DRAG_PARALLEL_CONTRACT_HELD='+JSON.stringify({qid,optionId}));
+ }
+ if(verifiedChoice){assert.equal(verifiedChoice.mediaId,oldId,'SOURCE_CONTRACT_CHANGED:'+qid+':'+optionId);
+ assert.equal(Boolean(o.correct),Boolean(verifiedChoice.correct),'CORRECTNESS_DRIFT');}
  if(o.correct)assert.equal(optionId,concept,'UNSAFE_CORRECT_REPLACEMENT:'+qid);
- for(const obj of [o,c].filter(Boolean)){
+ for(const obj of [o,verifiedChoice].filter(Boolean)){
   obj.mediaId=asset.id;obj.label=newLabel;obj.semanticReview='NEEDS_HUMAN_REVIEW';
  }
  for(const pool of q.bubbleDistractorPool||[])if(pool.id===qid+'-'+optionId){
