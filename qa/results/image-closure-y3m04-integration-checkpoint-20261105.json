@@ -1,9 +1,10 @@
 {
   "schemaVersion": "DUDUQ_CODEX_IMAGE_INTEGRATION_CHECKPOINT_V1",
   "createdAt": "2026-11-05T15:35:42.5169617-03:00",
+  "updatedAt": "2026-11-05T16:06:01.5136672-03:00",
   "lane": "integration",
   "moduleId": "Y3M04",
-  "status": "Y3M04_CANDIDATE_INTEGRATION_QA_PASS_PENDING_INDEPENDENT_LINUX_AND_HUMAN_HOMOLOGATION",
+  "status": "Y3M04_CANDIDATE_INTEGRATION_QA_PASS_LINUX_REPLAY_GREEN_PENDING_HUMAN_HOMOLOGATION",
   "projectStatus": "INCOMPLETE",
   "projectComplete": false,
   "productionMerged": false,
@@ -99,8 +100,53 @@
   "knownGateInvestigation": "qa/results/y3m04-known-gates-investigation-20261105.json",
   "independentLinux": {
     "workflow": ".github/workflows/duduq-y3m04-independent-overlay-qa.yml",
-    "status": "PENDING_AFTER_REVIEW_PUSH",
-    "url": null
+    "status": "SUCCESS",
+    "runId": 42089652211,
+    "runNumber": 2,
+    "runAttempt": 1,
+    "headSha": "74603a4c162ebfc7e4a64e067c0684857dff7963",
+    "createdAt": "2026-11-05T19:00:10Z",
+    "completedAt": "2026-11-05T19:04:59Z",
+    "url": "https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/42089652211",
+    "jobs": [
+      {
+        "id": 127464043639,
+        "name": "Rebuild and replay Y3M04 candidate overlay on Linux",
+        "conclusion": "success",
+        "completedAt": "2026-11-05T19:04:58Z",
+        "url": "https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/42089652211/job/127464043639"
+      },
+      {
+        "id": 127464042864,
+        "name": "Recheck Y1M04 Q002 timing and Y1M05 source pin on Linux",
+        "conclusion": "success",
+        "completedAt": "2026-11-05T19:03:32Z",
+        "url": "https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/42089652211/job/127464042864"
+      }
+    ],
+    "artifacts": [
+      {
+        "id": 13445395912,
+        "name": "duduq-independent-y3m04-overlay-qa-42089652211",
+        "sha256": "497f25ea8961cfe1fb8a553189fa31d33fe95f1ac6c39aba567ee088f0fc95e8",
+        "sizeBytes": 11804557,
+        "expiresAt": "2026-11-26T19:04:52Z"
+      },
+      {
+        "id": 13445595466,
+        "name": "duduq-y1m04-y1m05-gate-investigation-42089652211",
+        "sha256": "9ee947cfe22b7e2b08c58a5ae81913d8980a4629ab50ee9d9dbde74f03ef44b4",
+        "sizeBytes": 8330542,
+        "expiresAt": "2026-11-26T19:03:26Z"
+      }
+    ],
+    "priorFailedReplay": {
+      "runId": 42087855794,
+      "url": "https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/42087855794",
+      "knownGateJobConclusion": "success",
+      "y3m04JobConclusion": "failure",
+      "finding": "The shared browser harness did not register Y3M04 on the remote review branch, so it exited before the first browser request. Commit 74603a4c registered Y3M04 and preserved the existing gates; the succeeding run above is the independent integrated replay."
+    }
   },
   "closure": {
     "lastAuditedGlobalPendingMediaIds": 1055,
@@ -116,7 +162,6 @@
     "reasonIncomplete": "Candidate technical QA is not owner homologation, registry promotion, production release, or 30-module closure."
   },
   "blockers": [
-    "Independent Linux replay has not yet completed.",
     "Human pedagogical and visual homologation has not been granted.",
     "Candidate metadata remains provisional and was not promoted to production.",
     "The project still has the canonical audited global backlog of 1055 pending media IDs."

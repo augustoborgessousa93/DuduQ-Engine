@@ -1,7 +1,8 @@
 {
   "schemaVersion": "DUDUQ_Y3M04_KNOWN_GATES_INVESTIGATION_V1",
   "createdAt": "2026-11-05T15:35:42.5169617-03:00",
-  "status": "PASS_LOCAL_REPRODUCTION_PENDING_INDEPENDENT_LINUX_REPLAY",
+  "updatedAt": "2026-11-05T16:06:01.5136672-03:00",
+  "status": "PASS_LOCAL_AND_INDEPENDENT_LINUX_REPLAY",
   "workspaceHead": "d9717457226c65493bdd94d22c1e9baf4b4a9409",
   "disposableWorktree": true,
   "productionModified": false,
@@ -62,7 +63,18 @@
   "linuxReplay": {
     "workflow": ".github/workflows/duduq-y3m04-independent-overlay-qa.yml",
     "job": "investigate-existing-y1m04-y1m05-gates",
-    "status": "PENDING_AFTER_REVIEW_PUSH",
-    "url": null
+    "status": "SUCCESS",
+    "runId": 42089652211,
+    "headSha": "74603a4c162ebfc7e4a64e067c0684857dff7963",
+    "jobId": 127464042864,
+    "completedAt": "2026-11-05T19:03:32Z",
+    "url": "https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/42089652211/job/127464042864",
+    "artifact": {
+      "id": 13445595466,
+      "name": "duduq-y1m04-y1m05-gate-investigation-42089652211",
+      "sha256": "9ee947cfe22b7e2b08c58a5ae81913d8980a4629ab50ee9d9dbde74f03ef44b4",
+      "sizeBytes": 8330542,
+      "expiresAt": "2026-11-26T19:03:26Z"
+    }
   }
 }
