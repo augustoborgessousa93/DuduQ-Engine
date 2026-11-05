@@ -1,7 +1,7 @@
 {
   "schemaVersion": "DUDUQ_CODEX_IMAGE_INTEGRATION_CHECKPOINT_V1",
   "createdAt": "2026-11-05T15:35:42.5169617-03:00",
-  "updatedAt": "2026-11-05T16:06:01.5136672-03:00",
+  "updatedAt": "2026-11-05T20:24:48.7896401-03:00",
   "lane": "integration",
   "moduleId": "Y3M04",
   "status": "Y3M04_CANDIDATE_INTEGRATION_QA_PASS_LINUX_REPLAY_GREEN_PENDING_HUMAN_HOMOLOGATION",
@@ -148,6 +148,27 @@
       "finding": "The shared browser harness did not register Y3M04 on the remote review branch, so it exited before the first browser request. Commit 74603a4c registered Y3M04 and preserved the existing gates; the succeeding run above is the independent integrated replay."
     }
   },
+  "reviewPullRequest": {
+    "number": 118,
+    "url": "https://github.com/augustoborgessousa93/DuduQ-Engine/pull/118",
+    "headShaAtObservation": "a45011a48b8c659e313e1e6506647b97ee6620a8",
+    "observedAt": "2026-11-05T20:24:48.7896401-03:00",
+    "status": "OPEN_UNSTABLE",
+    "y3m04IndependentReplay": "PASS",
+    "blockingCheck": {
+      "workflow": "Systemic Foundation Audit",
+      "runId": 42090868400,
+      "url": "https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/42090868400",
+      "job": "year1-loader-compat",
+      "jobId": 127468217136,
+      "jobUrl": "https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/42090868400/job/127468217136",
+      "failedStep": "Revalidate Canary R147 proportional runtime sentinels",
+      "conclusion": "failure",
+      "exitCode": 1,
+      "scopeAssessment": "The dedicated Y3M04 replay and the Y1M04/Y1M05 known-gate replay are green; this separate systemic PR check remains a review blocker and was not bypassed or weakened.",
+      "windowsLocalReplay": "BLOCKED_PLAYWRIGHT_CHROMIUM_SPAWN_EPERM_USE_LINUX_EVIDENCE"
+    }
+  },
   "closure": {
     "lastAuditedGlobalPendingMediaIds": 1055,
     "globalPendingCountChangedByCandidateOverlay": false,
@@ -162,6 +183,7 @@
     "reasonIncomplete": "Candidate technical QA is not owner homologation, registry promotion, production release, or 30-module closure."
   },
   "blockers": [
+    "PR #118 remains OPEN_UNSTABLE because Systemic Foundation Audit / year1-loader-compat failed at Revalidate Canary R147 proportional runtime sentinels (run 42090868400, job 127468217136); the gate was not weakened.",
     "Human pedagogical and visual homologation has not been granted.",
     "Candidate metadata remains provisional and was not promoted to production.",
     "The project still has the canonical audited global backlog of 1055 pending media IDs."
