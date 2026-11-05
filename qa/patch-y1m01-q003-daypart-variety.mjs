@@ -51,7 +51,7 @@ const sources=[
  {optionId:'night',role:'option_b',legacy:'opcao_b',semantic:'night',
   old:'IMG-Y1M01-Q003-Q004-NIGHT-OFFICIAL-20261104',
   name:'boy_noite_night_bedtime_rotina_de_sono.png',
-  sha:'b06361382e3ecbe0d49927f9a9ea4665396',
+  sha:'b06361382e3ecbe0d49927f4d295bbb94a08e35f',
   label:'Criança em rotina noturna'},
  {optionId:'farewell',role:'option_c',legacy:'opcao_c',semantic:'sleep',
   old:'IMG-Y1M01-VARIETY-BOOKCASE-20261104',
