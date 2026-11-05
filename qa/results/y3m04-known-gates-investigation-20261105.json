@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "DUDUQ_Y3M04_KNOWN_GATES_INVESTIGATION_V1",
+  "createdAt": "2026-11-05T15:35:42.5169617-03:00",
+  "status": "PASS_LOCAL_REPRODUCTION_PENDING_INDEPENDENT_LINUX_REPLAY",
+  "workspaceHead": "d9717457226c65493bdd94d22c1e9baf4b4a9409",
+  "disposableWorktree": true,
+  "productionModified": false,
+  "sourceHashesRewritten": false,
+  "gatesWeakened": false,
+  "goldMastersModified": false,
+  "y1m04Q002ConfirmContinueRace": {
+    "historicalFailureReportSha256": "daae075f336a7280f2de3097e8a735f921c09e849c561f01e83008fa1e1469ec",
+    "historicalFailureCreatedAt": "2026-11-02T15:38:33.381Z",
+    "reproducedIntermediateState": {
+      "targetState": "correct",
+      "interactionState": "READY",
+      "staleActionText": "TENTAR DE NOVO",
+      "actionVisible": false,
+      "ribbonHidden": true,
+      "staleFeedback": "incorrect"
+    },
+    "finding": "The target state can settle before the shared feedback ribbon. The current harness records this hidden stale label, never clicks it, and waits for visible correct feedback plus AWAITING_CONTINUE.",
+    "cleanV26ManifestSha256": "5993aaceaff272626c863aef07e1b33a909ca7f9fcc41d2d40890baa6c08b822",
+    "y1m04CandidateManifestSha256": "126cb797ce4972fafd7f071d3ab0722e3d3d2cd60259d567f4e5c533b30530a0",
+    "stressRuns": 3,
+    "stressPasses": 3,
+    "routesPerRun": 20,
+    "transportPngsPerRun": 18,
+    "nativePointerGameplayPerRun": true,
+    "reportSha256": [
+      "32949759657f641840bee3ba0a152850143ccdd88be5caf031b0c812acf225d4",
+      "e3248233e5ee4a5ed2c0f68503f2da18c74c2072f36d3e311fd4d1a63169fc65",
+      "14d779b07c2b416932abf7bff609883b2905236af6c3ef4414dd48971be204d0"
+    ],
+    "finalTraceSha256": "818b7b4f6bd686aec3eb0e500c07003bc0a75f1faab5809e35fd096cfaa3bc14",
+    "finalVideoSha256": "d3de992022e484181f2a961b29232f0f8ad2ad916686f66c835f218f9f6083f3",
+    "finalStates": {
+      "incorrect": "AWAITING_RETRY",
+      "correct": "AWAITING_CONTINUE"
+    }
+  },
+  "y1m05SourceRegistryPin": {
+    "status": "PASS",
+    "context": "PRISTINE_V26_EXACT_WHOLE_REGISTRY_PIN",
+    "actualRegistrySha256": "aa615a3ed307b0e8cae6abf6901a1582c22ab59aa7f95c6339a635ca7d35fc89",
+    "cleanV26RegistrySha256": "aa615a3ed307b0e8cae6abf6901a1582c22ab59aa7f95c6339a635ca7d35fc89",
+    "legacyReviewedRegistrySha256": "c56f3ecc5dd608228ccb6d7ba5237ed8da5676cd4fa6f655a9eeb27ce268400c",
+    "sourceRegistryEntryProjectionSha256": "89904f133cba19a8777a40bfe69539def84663953ac5be9522dd1106139609e8",
+    "sourceUsageProjectionSha256": "9378f156a72e8547f02b3c18f6163517fc3d9c004bb565b10795fc62d6334361",
+    "sourceEntries": 101,
+    "tamperTests": {
+      "total": 4,
+      "passed": 4,
+      "rejectsRepinnedMutationOutsideY1M04": true,
+      "rejectsRepinnedY1M05SemanticMutation": true
+    },
+    "sourceHashesRewritten": false,
+    "answerKeysChanged": 0,
+    "mechanicsChanged": 0,
+    "goldMastersModified": false
+  },
+  "linuxReplay": {
+    "workflow": ".github/workflows/duduq-y3m04-independent-overlay-qa.yml",
+    "job": "investigate-existing-y1m04-y1m05-gates",
+    "status": "PENDING_AFTER_REVIEW_PUSH",
+    "url": null
+  }
+}
