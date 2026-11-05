@@ -120,6 +120,11 @@ try{
     }
     const body=(await tab.locator('body').innerText({timeout:3000}).catch(()=>''))||'';
     outcome.sessionMismatch=/Y1M01_SESSION_ITEM_MISMATCH|SESSION_ITEM_MISMATCH/.test(body);
+    outcome.visitedUrl=tab.url();
+    if(outcome.visibleDaypartImages<2){
+     outcome.bodyExcerpt=body.slice(0,800);
+     outcome.frameUrls=tab.frames().map(frame=>frame.url()).slice(0,8);
+    }
    }catch(e){outcome.navigationError=String(e.message||e).slice(0,300)}
    finally{await tab.close()}
   }
@@ -131,7 +136,8 @@ mkdirSync('qa/results',{recursive:true});
 const problems=transport.filter(x=>x.status!==200||!x.shaVerified||!x.browserDecoded);
 const gaps=pages.filter(x=>x.visibleDaypartImages<2||x.sessionMismatch||x.errors.length);
 const report={schemaVersion:'DUDUQ_DAYPART_Q003_Q004_REAL_BROWSER_V1',
- status:problems.length?'OFFICIAL_PNG_TRANSPORT_FAILED':'PNG_TRANSPORT_AND_DECODE_PASS',
+ status:problems.length?'OFFICIAL_PNG_TRANSPORT_FAILED':
+  gaps.length?'REAL_SESSION_VISIBILITY_BLOCKED':'DAYPART_REAL_SESSION_VISIBILITY_PASS',
  productionDeployed:false,qaOnly:true,pedagogicalReview:'PENDING',
  contractsPreserved:true,technicalTransportTests:transport.length,
  technicalTransportFailures:problems.length,realSessionVisualGaps:gaps,
@@ -143,4 +149,10 @@ console.log('DUDUQ_DAYPART_BROWSER='+JSON.stringify({status:report.status,
  realSessionCases:pages.length,visibleCases:pages.filter(x=>x.visibleDaypartImages>=2).length,
  realSessionVisualGaps:gaps.map(x=>({questionId:x.questionId,viewport:x.viewport,
   sessionMismatch:x.sessionMismatch,visible:x.visibleDaypartImages}))}));
+if(gaps.length)console.error('DUDUQ_DAYPART_REAL_SESSION_BLOCKERS='+JSON.stringify(gaps.map(x=>({
+ questionId:x.questionId,viewport:x.viewport,visible:x.visibleDaypartImages,
+ visitedUrl:x.visitedUrl,bodyExcerpt:x.bodyExcerpt,frameUrls:x.frameUrls,
+ errors:x.errors,navigationError:x.navigationError,sessionMismatch:x.sessionMismatch
+}))));
 assert.equal(problems.length,0,'DAYPART_ORIGINAL_PNG_TRANSPORT_FAILED');
+assert.equal(gaps.length,0,'DAYPART_REAL_SESSION_VISIBILITY_NOT_PROVEN');
