@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "DUDUQ_Y3M04_SOURCE_REGISTRY_REBASE_V1",
+  "createdAt": "2026-11-05",
+  "moduleId": "Y3M04",
+  "status": "PASS_EXACT_GENERATION_CONTEXT_TO_PRISTINE_V26",
+  "reason": "The generation lane reviewed the exact Y3M03-composed QA registry. Independent Y3M04 replay may start from pristine V26 only because the whole registry hashes, compiler manifests, all 36 source-entry projections, all 71 logical visual usages, and the immutable Y3M04 question contract are pinned without rewriting the generation hashes.",
+  "generationSourceRegistryPin": "source-registry-pin.json",
+  "generationSourceRegistryPinSha256": "169da7d23487d0a7ef0d6df71daed48c9e7c29ae03b174c0bd6fe782b28825c2",
+  "generationRegistrySha256": "f11c12fe929379947e7d4f76736f8f73bc6320618bf01265bfb48a4e18ef5e30",
+  "generationRegistryEntries": 1225,
+  "generationCompiledManifestSha256": "c66f6db5dd24f322966ee6c9868449bac34fcf87b3e96ff1b766b4f9eeee71ab",
+  "cleanV26RegistrySha256": "aa615a3ed307b0e8cae6abf6901a1582c22ab59aa7f95c6339a635ca7d35fc89",
+  "cleanV26RegistryEntries": 1159,
+  "cleanV26CompiledManifestSha256": "5993aaceaff272626c863aef07e1b33a909ca7f9fcc41d2d40890baa6c08b822",
+  "sourceQuestionSha256": "9b188f3def974c6fd3629a9c912f45aa9508180692febbf56f112187fa2d2ba7",
+  "sourceQuestionInvariantSha256": "2125ae6dc1d7d5057bee34859d0898ef96ea1c235ff08eb8dd5e5c5b86934886",
+  "sourceRegistryEntryProjectionSha256": "d9619f2878b00423209ac859f992e0d4106bc7d6b6b7f313971006d736d3cf02",
+  "logicalUsageProjectionSha256": "28393eb2bf73a57844d8641b3282eb8dfa52854dfce033d2696e4a12ab5ce048",
+  "sourceRegistryEntryCount": 36,
+  "logicalVisualUsageRecords": 71,
+  "rawReferenceFields": 337,
+  "finalOccurrenceScopedIds": 67,
+  "acceptedRegistryContexts": [
+    "GENERATION_AUDITED_Y3M03_OVERLAY_REGISTRY_EXACT_WHOLE_HASH",
+    "PRISTINE_V26_EXACT_WHOLE_REGISTRY_AND_MANIFEST_PIN"
+  ],
+  "sourceHashesRewritten": false,
+  "questionsModified": false,
+  "registryModified": false,
+  "goldMastersModified": false,
+  "productionApproved": false
+}

@@ -130,7 +130,7 @@ jobs:
         run: |
           node qa/apply-y2m06-official-media-overlay.mjs --apply
           node --check qa/apply-target-shooter-mobile-containment-qa.mjs
-          node qa/apply-target-shooter-mobile-containment-qa.mjs --apply
+          DUDUQ_QA_ONLY=1 node qa/apply-target-shooter-mobile-containment-qa.mjs --apply
           echo "Y2M06_QA_PATCH_ONLY_NO_GOLD_MASTER_OR_SOURCE_MODIFICATION"
           node qa/tests/verify-y2m06-official-media-overlay.mjs
           node qa/verify-y2m06-official-media-build.mjs
@@ -321,7 +321,7 @@ jobs:
       - name: Apply scoped mobile geometry fix ONLY to ephemeral Y1M06 compiled QA preview
         run: |
           node --check qa/apply-target-shooter-mobile-containment-qa.mjs
-          node qa/apply-target-shooter-mobile-containment-qa.mjs --apply
+          DUDUQ_QA_ONLY=1 node qa/apply-target-shooter-mobile-containment-qa.mjs --apply
           echo "Y1M06_QA_PATCH_ONLY_NO_GOLD_MASTER_OR_SOURCE_MODIFICATION"
 
       - name: Start isolated review-only HTTP server
@@ -418,7 +418,7 @@ jobs:
       - name: Apply scoped mobile geometry fix ONLY to ephemeral compiled QA preview
         run: |
           node --check qa/apply-target-shooter-mobile-containment-qa.mjs
-          node qa/apply-target-shooter-mobile-containment-qa.mjs --apply
+          DUDUQ_QA_ONLY=1 node qa/apply-target-shooter-mobile-containment-qa.mjs --apply
           echo "QA_PATCH_ONLY_NO_GOLD_MASTER_OR_SOURCE_MODIFICATION"
 
       - name: Verify Y1M05 pristine V26 registry rebase without rewriting legacy evidence
