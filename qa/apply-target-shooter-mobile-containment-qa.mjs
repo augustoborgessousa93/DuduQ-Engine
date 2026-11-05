@@ -30,7 +30,7 @@ if(!/<\/head>/i.test(html)||html.includes(marker))
 
 // This exact QA stylesheet is also used by the independent Chromium evidence.
 const cssPath=path.join(root,'qa/overlays/target-shooter-mobile-hitbox-reflow-v2.css');
-const css=await readFile(cssPath,'utf8');
+const css=(await readFile(cssPath,'utf8')).replace(/\r\n|\r/g,'\n');
 if(!css.includes('target-shooter-target--dog')||!css.includes('target-shooter-target--fish'))
   throw Error('INVALID_SHARED_QA_CSS');
 const style=`<style ${marker}>\n${css}\n</style>\n`;
