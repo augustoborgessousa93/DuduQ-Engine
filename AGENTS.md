@@ -1,5 +1,8 @@
 # DUDUQ Sync
 
+> **ATUALIZAÇÃO PREVALENTE DO PROPRIETÁRIO — 31/10/2026:** O Codex **NÃO PODE GERAR NOVAS IMAGENS** para DUDUQ English. Missão 1 = inventariar e reaproveitar semanticamente todo o acervo atual de `augustoborgessousa93/Assets-DuduQ/Imagens Ilustrativa`, homologar alterações nos 30 módulos/600 questões e publicar os links oficiais APENAS com gates reais PASS e rollback. O proprietário criará futuras imagens no ChatGPT e fará upload ao repositório; o Codex atuará como **integrador/QA/publicador**, nunca como gerador. As seções antigas abaixo que determinavam geração nativa, fila Generator, execução de prompts de imagens ou proibição do usuário criar artes foram **revogadas**. Não iniciar geração mesmo se uma ferramenta estiver disponível. A Missão 1 pode encerrar com backlog provisório após deploy autorizado; PROJECT_COMPLETE exige zero provisórias referenciadas, zero não homologadas, 30/30 módulos e QA completa. O agendador local deve operar somente a fila de integração. Esta mudança NÃO autoriza ignorar a homologação ou apagar temporárias em uso.
+
+
 ## Mandatory Penpot preflight
 
 Before every Penpot operation—live read, compilation, `Atualize o Core`, mutation, reverse, or production certification—run `scripts/duduq-penpot-bootstrap.mjs`. It must report 4400, 4401, and 4402 healthy, `PLUGIN_CONNECTED`, and `LIVE_PENPOT_DOCUMENT_READ` as `PASS`. Restart missing project-local services automatically through this bootstrap; never substitute a cached graph for a failed live read and never require a user to launch Git Bash.
@@ -49,3 +52,33 @@ When the user says **“Atualize o Core”**:
 - REA findings are research input, not authority to change DUDUQ. Penpot remains visual authority; Codex implements only when authorized; preserve approved mechanics, Gold Masters, runtime architecture, and production flows.
 - Any prototype inspired by research must be isolated, reversible, and separately tested. Human homologation is required before integration into production.
 - If REA/MCP is missing or unavailable, report that limit and continue with authorized documentation/visual observation where suitable; do not block unrelated development.
+
+
+## DUDUQ — imagens oficiais com Codex
+
+O proprietário atribuiu ao **Codex** a execução completa das imagens oficiais do DUDUQ English: pesquisar as questões reais, gerar PNGs individuais transparentes com o gerador de imagens oficialmente disponível no Codex, importar os arquivos, substituir provisórias, testar 30 módulos/600 atividades, fazer QA e preparar publicação segura.
+
+**Leia `docs/qa/DUDUQ_CODEX_IMAGE_AUTOMATION.md` e cumpra seu contrato antes de alterar qualquer imagem, registro de mídias ou pipeline de geração.** Preserve integralmente as regras acima sobre Penpot, Gold Masters e homologação. Não transfira ao usuário tarefas manuais de geração no ChatGPT, download de imagens, cópia para o workspace ou comandos "CONTINUE". Não assuma acesso a APIs pagas, permissões ou ferramentas que a sessão não possui. Se geração nativa ou origem de arquivos estiver bloqueada, registre o impedimento, avance em trabalho independente e não declare integração ou conclusão falsas.
+
+O arquivo de instruções no GitHub **não inicia por si só uma sessão do Codex**. Execução de geração real deve ser verificada pelos PNGs gerados no workspace e pelos manifests, hashes, testes e commits.
+
+
+### Regra de encerramento: 30 módulos completos ou tarefa em andamento
+
+**EXIGÊNCIA EXPRESSA DO RESPONSÁVEL:** o Codex **não pode declarar missão concluída, encerrar o backlog ou abandonar a execução** enquanto existir **qualquer imagem provisória, não homologada ou referência quebrada em qualquer um dos 30 módulos/600 atividades**. Fazer o trabalho por lotes, mas não declarar um lote concluído como conclusão geral. Usar inventário canônico atualizado em cada rodada e verificar **todos os módulos**; meta final: `30/30` módulos sem pendência, `600/600` atividades íntegras, `provisionalOrBlockedReferencedIds=0`, `nonTemporaryUnverifiedReferencedIds=0` e QA pedagógica/visual e publicação verificadas.
+
+**Encerramento de uma sessão não é conclusão do projeto.** Se o tempo/limite do Codex terminar, gravar checkpoint e fila persistentes, preparar retomada pela infraestrutura oficialmente disponível e registrar `INCOMPLETE`/bloqueio específico. Um cron que só repete a mesma falha não conta como progresso. Não prometer execução contínua quando falta agente, credencial, integração, capacidade de geração ou aprovação humana; preservar a segurança e executar o trabalho independente possível. Não pedir "CONTINUE" nem transformar o usuário em operador manual.
+
+**Somente dar status `PROJECT_COMPLETE` com evidência rastreável** para todos os módulos e mídias; a validação técnica de PNG isolado não equivale a substituição no jogo ou homologação. Todo deploy/remoção exige os gates existentes e rollback, sem falsificar aprovações.
+
+
+### Execução autônoma com PC ligado — bootstrap obrigatório
+
+**O responsável deixará o Windows ligado por vários dias e não responderá comandos.** Leia imediatamente `docs/qa/DUDUQ_CODEX_UNATTENDED_WINDOWS.md` e, no worktree isolado correto, instale e **COMPROVE** a tarefa Windows persistente usando `qa/duduq-codex-unattended.mjs`. Não confundir documentação e agendamento GitHub com processo local ativo. Configurar uma única vez a continuidade por Task Scheduler, autenticação Codex CLI, lock, logs e checkpoint. Testar ao menos um `codex exec` real e verificar capacidade de geração de imagem nativa **antes de declarar automação funcionando**. Sem `--yolo`, sem desativar segurança PowerShell, sem custos/API novos, sem manipular workspace original.
+
+Use ciclos por módulo: gerar imagens faltantes (não só os 17 PNGs de QA), corrigir media IDs por contexto, integrar assets legítimos no jogo, executar build+browser+respostas, salvar hash/commit no PR e partir para o próximo módulo. Se qualquer permissão/imagem/API bloquear, preservar segurança, registrar bloqueio específico e avançar no trabalho independente. O Task Scheduler não é certificado como ativo até sua instalação e primeira execução terem sido observadas no Windows.
+
+
+### Operação em duas filas: imagens DUDUQ
+
+O responsável aprovou **duas filas independentes** para a atualização das imagens oficiais de 30 módulos. Ler `docs/qa/DUDUQ_CODEX_TWO_LANE_AUTOPILOT.md` e `qa/duduq-two-lane-plan.mjs`. A fila `generation` deve continuar gerando PNGs de módulos seguintes (com hashes, origem, revisão semântica) enquanto a `integration` enfrenta bloqueios de browser/CI nos módulos anteriores. Não confundir "filas independentes" com autorizar dois agentes escrevendo simultaneamente no mesmo checkout: a implantação inicial intercala as invocações pelo agendador Windows com lock único. A fila `generation` NÃO altera runtime/gabaritos/registro; a fila `integration` usa assets pré-existentes e valida realmente os jogos. Não bloquear geração inteira pela falha Y1M04/Y1M05; não liberar produção nem marcar homologação sem QA independente. Garantir que Codex Windows efetivamente tenha recebido o script novo; um commit no GitHub não atualiza o worktree local automaticamente.

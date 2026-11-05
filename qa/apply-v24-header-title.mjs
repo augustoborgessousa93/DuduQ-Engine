@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import { createHash } from "node:crypto";
+import { officialCrlfTextBytes } from "./official-text-asset-bytes.mjs";
 
 const digest = data => createHash("sha256").update(data).digest("hex");
 const manifestFile = "dist-pages/.duduq-pages-manifest";
@@ -37,7 +38,7 @@ for (const path of targets) {
 }
 const asset = "core/duduq-header-title-fit-v24.js";
 if (entries.has(asset)) throw Error("V24_FILE_ALREADY_EXISTS");
-const script = readFileSync("qa/overlays/v24/" + asset);
+const script = officialCrlfTextBytes(readFileSync("qa/overlays/v24/" + asset));
 for (const token of ['data-duduq-title-fit', 'aria-label', 'title', 'Choices Around Me']) {
   if (token === 'Choices Around Me') continue; // Actual topic is dynamic; no hard-coded curriculum content.
   if (!script.toString("utf8").includes(token)) throw Error("V24_INCOMPLETE_SCRIPT:" + token);

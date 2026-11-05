@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "DUDUQ_Y2M06_SOURCE_REGISTRY_PIN_V1",
+  "createdAt": "2026-11-02T19:46:07.533Z",
+  "moduleId": "Y2M06",
+  "activeQuestionSource": "dist-pages/content/english/year-2/module-06/questions.json",
+  "activeQuestionSourceSha256": "b3199e7be552ca42ce01138eacf96967cd245be79557cace8d39e3a3fcc0cc62",
+  "registrySource": "dist-pages/content/english/media/media-registry.json",
+  "registrySha256": "ce8b74d3087e513622ff1efc9a999536c98744578d1989b0222b427b33f9d1c2",
+  "registryEntryCount": 1235,
+  "canonicalLedger": "qa/results/media-module-closure.json",
+  "canonicalLedgerSha256": "3c3d6a19632b488651d20d373ffd0a70819896a6d1b8246bb2adb7a3f9a5b837",
+  "canonicalInventory": "qa/results/media-closure-inventory.json",
+  "canonicalInventorySha256": "2698f45a895236722b341abcfaffd7518a7d3cbfab22ddaddf95a94b0c676dc5",
+  "globalStateAtAudit": {
+    "modules": 30,
+    "activities": 600,
+    "completedModules": 1,
+    "distinctPendingMediaIds": 1055
+  },
+  "moduleStateAtAudit": {
+    "referencedMediaIds": 56,
+    "provisionalOrBlockedReferencedIds": 56,
+    "unverifiedReferencedIds": 0,
+    "verifiedReferencedIds": 0,
+    "brokenReferencedIds": 0,
+    "complete": false
+  },
+  "sourceMediaIds": [
+    "IMG-Q009-BIG",
+    "IMG-V11-2B-06480218CC9BB101",
+    "IMG-V11-2B-0C2E37014FB8B5AF",
+    "IMG-V11-2B-0D4D258A62F7709C",
+    "IMG-V11-2B-178C9BC5F16D0575",
+    "IMG-V11-2B-1BD9271CB0107E95",
+    "IMG-V11-2B-1EABF9E8AAAB576B",
+    "IMG-V11-2B-20F90DE290CFA9E8",
+    "IMG-V11-2B-249393BE62012CB7",
+    "IMG-V11-2B-26139F65B6D3AAFA",
+    "IMG-V11-2B-2C6DC2C54EF9FE82",
+    "IMG-V11-2B-30690D3C168DA49E",
+    "IMG-V11-2B-3496550C7BE55739",
+    "IMG-V11-2B-372152A8B0B3430F",
+    "IMG-V11-2B-3C181EF0580BB69B",
+    "IMG-V11-2B-3E8B870AE9E69B6A",
+    "IMG-V11-2B-42E0B7F7C0CBAA69",
+    "IMG-V11-2B-47E739917EEB3083",
+    "IMG-V11-2B-48ABF3A913FF63A0",
+    "IMG-V11-2B-4E8C7B72B1EE887C",
+    "IMG-V11-2B-53B01C40B9C5E915",
+    "IMG-V11-2B-54E44F386CF7B470",
+    "IMG-V11-2B-554E165910572343",
+    "IMG-V11-2B-5596327D2C423D85",
+    "IMG-V11-2B-59314A55011BCD3F",
+    "IMG-V11-2B-64F65B6254CDA0AF",
+    "IMG-V11-2B-689B471440B0B576",
+    "IMG-V11-2B-6C28CE93AFE4F8BB",
+    "IMG-V11-2B-74052139C0D44F03",
+    "IMG-V11-2B-7948E91B1FE60FC8",
+    "IMG-V11-2B-7C7AC57571396DE1",
+    "IMG-V11-2B-7E8EB0BB1DCBBF01",
+    "IMG-V11-2B-857902711A3A0499",
+    "IMG-V11-2B-8C45DA566BF3CD91",
+    "IMG-V11-2B-938708DB14D30D4B",
+    "IMG-V11-2B-A0A8A7AAF4DD84D8",
+    "IMG-V11-2B-A210FFD1BF96DDB4",
+    "IMG-V11-2B-AD538F3601F0D40A",
+    "IMG-V11-2B-B23C054704E6158D",
+    "IMG-V11-2B-B4BC475E5A5F026F",
+    "IMG-V11-2B-BC3B9081178AE7A4",
+    "IMG-V11-2B-BE4D9E25DFED3EBE",
+    "IMG-V11-2B-C806365B55CB438A",
+    "IMG-V11-2B-D1344634366B33A5",
+    "IMG-V11-2B-D633F5E3AD9165C8",
+    "IMG-V11-2B-EAAF1FABD1844321",
+    "IMG-V11-2B-EB9A765F1CD87AC2",
+    "IMG-V11-2B-F08A6487F6240A45",
+    "IMG-V11-2B-F3FAB54D046C94A0",
+    "IMG-V11-2B-FA6FB43D25AF5A2C",
+    "IMG-Y1M03-Q001-ORANGE",
+    "IMG-Y1M05-Q001-ARMS",
+    "IMG-Y1M05-Q001-HANDS",
+    "IMG-Y1M05-Q001-HEAD",
+    "IMG-Y1M05-Q001-LEGS",
+    "IMG-Y1M05-Q003-FEET"
+  ],
+  "sourceRegistryEntryProjectionSha256": "6f6fd68e79af7946404c07b8b46b817bb510b51d1b6e355f4cd6ffc7b2940270",
+  "sourceQuestionContractHashes": [
+    {
+      "questionId": "Y2M06-Q001",
+      "sha256": "331afcc2ff919adda7d93c5c59cbfe7e12f24225a77e64be214427a5e0effef9"
+    },
+    {
+      "questionId": "Y2M06-Q002",
+      "sha256": "44ccac63a998c1cd7cb46bf3ec0b8fcd3c1b57268b188fca605471831744a2c1"
+    },
+    {
+      "questionId": "Y2M06-Q003",
+      "sha256": "db4052cafece10e12b54e80cda8fd9ecde9393382536cb9144c6b0834f5e21c9"
+    },
+    {
+      "questionId": "Y2M06-Q004",
+      "sha256": "f574be44f420c107dff42dcd54037614c3d47037d899250f71062b812fe2839a"
+    },
+    {
+      "questionId": "Y2M06-Q005",
+      "sha256": "6999233dc9bc1adfc3fb43b9e346649dd69a57594ea52923a7fcd1d0a1c7751a"
+    },
+    {
+      "questionId": "Y2M06-Q006",
+      "sha256": "8a0f49209261cde70ea0e5b2b86a21367013c24fbd5576a7f41ee64e5e3d17b9"
+    },
+    {
+      "questionId": "Y2M06-Q007",
+      "sha256": "2abb46761389ec4c87780c61208900ba0105a5fc9664321227a468b7d99d9b6f"
+    },
+    {
+      "questionId": "Y2M06-Q008",
+      "sha256": "9686ba53c98db4e71a1dabe2b8857c45e8ef5adde56432b48ab27f8fddc3fec6"
+    },
+    {
+      "questionId": "Y2M06-Q009",
+      "sha256": "0963f453a3a1a671e3bb8ace9c9e66f955384572e0024bededdc96ce360ac6a8"
+    },
+    {
+      "questionId": "Y2M06-Q010",
+      "sha256": "80975620ed035c7fdd537b1bb7eaac83f089e97b123b39c2b57efa427d22f055"
+    },
+    {
+      "questionId": "Y2M06-Q011",
+      "sha256": "7b58c076b87d4bbed145d330a2dd067db129c453a9ac4c1b2a5d3ed98e7be9dc"
+    },
+    {
+      "questionId": "Y2M06-Q012",
+      "sha256": "9ead74193afb75840c4fd401ad2d999ce9b9e741b5b6cf34398142c943cf28d1"
+    },
+    {
+      "questionId": "Y2M06-Q013",
+      "sha256": "7fac05fafc43177e345237205393dd69918502e24a34cbe6138e80d13073571e"
+    },
+    {
+      "questionId": "Y2M06-Q014",
+      "sha256": "2d7c251375d814a06959953b652730841ff46959eef148fca6a8c798241cacde"
+    },
+    {
+      "questionId": "Y2M06-Q015",
+      "sha256": "ebb8239b539d1d4eaae5c66fb2f1002a8f6c9d8b3238af10f201cdb1cf68ee08"
+    },
+    {
+      "questionId": "Y2M06-Q016",
+      "sha256": "9af16db6ff343d0d6f227dedcc07175ad09ce9c4eb232bb2c562c34cb5262cd1"
+    },
+    {
+      "questionId": "Y2M06-Q017",
+      "sha256": "3253a1cef86dec3526fc3677bf218b8b1db88c92de15ad431f52dac2e9c62324"
+    },
+    {
+      "questionId": "Y2M06-Q018",
+      "sha256": "00ef3e2e262bf736820a54f8afce203579fc235eeda99319e03ad53ad48bf5f5"
+    },
+    {
+      "questionId": "Y2M06-Q019",
+      "sha256": "85f33a5069fae95dd3ec2c98c42a18ad715d68ae2eb4e62387da24fd3754dc97"
+    },
+    {
+      "questionId": "Y2M06-Q020",
+      "sha256": "1c9f714f690071629cda56b0d888f7a7e8297156104de670a22a6add81d54d0e"
+    }
+  ],
+  "sourceHashesRewritten": false,
+  "questionsModified": false,
+  "registryModified": false,
+  "productionApproved": false
+}

@@ -1,6 +1,7 @@
 import {readFileSync, writeFileSync, mkdirSync} from 'node:fs';
 import {dirname} from 'node:path';
 import {createHash} from 'node:crypto';
+import {officialCrlfTextBytes} from './official-text-asset-bytes.mjs';
 
 const SHA = bytes => createHash('sha256').update(bytes).digest('hex');
 const officialBase = 'E159D916FD824BE98BC276B67180F8B07797D03927A092C3C9137D000E377F8C';
@@ -40,7 +41,7 @@ for (const path of targets) {
 
 const asset = 'core/duduq-ebc-attribution-watermark.js';
 if (entries.has(asset)) throw Error('V23_ATTRIBUTION_EXISTS');
-const script = readFileSync('qa/overlays/v23/' + asset);
+const script = officialCrlfTextBytes(readFileSync('qa/overlays/v23/' + asset));
 if (!script.toString().includes('https://brasilcultural.com.br/')) throw Error('V23_URL_NOT_OFFICIAL');
 if (!script.toString().includes('Editora Brasil Cultural')) throw Error('V23_COPY_INCORRECT');
 mkdirSync(dirname('dist-pages/' + asset), { recursive: true });

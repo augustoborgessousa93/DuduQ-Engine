@@ -1,0 +1,951 @@
+{
+  "schemaVersion": "DUDUQ_Y2M06_INTEGRATION_ALPHA_COMPONENT_AUDIT_V1",
+  "moduleId": "Y2M06",
+  "mode": "READ_ONLY_NO_IMAGE_MUTATION",
+  "createdAt": "2026-11-02",
+  "alphaThreshold": 64,
+  "assetCount": 29,
+  "status": "PASS_ZERO_MICRO_OPAQUE_ISLANDS",
+  "assets": [
+    {
+      "assetKey": "Y2M06-CANDIDATE-EYE",
+      "file": "images/DUDUQ-Y2M06-EYE.png",
+      "sha256": "5365ac311e695049de110b1329d1fd43ed070308455bc9986c02aa707b20c385",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 755449,
+      "componentCount": 1,
+      "largestComponentPixels": 755449,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 75,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 755449,
+          "maxAlpha": 255,
+          "meanAlpha": 252.13,
+          "bbox": {
+            "x": 39,
+            "y": 212,
+            "width": 1190,
+            "height": 869
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-EAR",
+      "file": "images/DUDUQ-Y2M06-EAR.png",
+      "sha256": "7edc349b604f319d61bbbbeecc520f49c94555a6e68f7910c16d00148c692696",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 634939,
+      "componentCount": 1,
+      "largestComponentPixels": 634939,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 63,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 634939,
+          "maxAlpha": 255,
+          "meanAlpha": 252.37,
+          "bbox": {
+            "x": 272,
+            "y": 45,
+            "width": 766,
+            "height": 1147
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-NOSE",
+      "file": "images/DUDUQ-Y2M06-NOSE.png",
+      "sha256": "a5b24b766b8dfd4dd4cc1a513bfde063146f71f8da6bfacfa253acda2d991aa6",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 683770,
+      "componentCount": 1,
+      "largestComponentPixels": 683770,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 68,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 683770,
+          "maxAlpha": 255,
+          "meanAlpha": 252.23,
+          "bbox": {
+            "x": 135,
+            "y": 45,
+            "width": 1011,
+            "height": 1147
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MOUTH",
+      "file": "images/DUDUQ-Y2M06-MOUTH.png",
+      "sha256": "7a9f6de2d160a55352dc6fc31a37a4cf2c12e85272aeadce052cbb7c3b42db7c",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 666683,
+      "componentCount": 1,
+      "largestComponentPixels": 666683,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 66,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 666683,
+          "maxAlpha": 255,
+          "meanAlpha": 252.42,
+          "bbox": {
+            "x": 17,
+            "y": 278,
+            "width": 1220,
+            "height": 745
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-ORANGE-FRUIT",
+      "file": "images/DUDUQ-Y2M06-ORANGE-FRUIT.png",
+      "sha256": "e3e755f38c2efb6c8637bc9f9def0bd706e0f5cf6821b3efdab454666ecaee77",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 887894,
+      "componentCount": 1,
+      "largestComponentPixels": 887894,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 88,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 887894,
+          "maxAlpha": 255,
+          "meanAlpha": 252.13,
+          "bbox": {
+            "x": 72,
+            "y": 64,
+            "width": 1115,
+            "height": 1129
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-GRAPE",
+      "file": "images/DUDUQ-Y2M06-GRAPE.png",
+      "sha256": "535d16680693e2ff3c8e20ce085b6e6976382f62fb795e28fc9c30eedc5789f6",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 749751,
+      "componentCount": 1,
+      "largestComponentPixels": 749751,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 74,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 749751,
+          "maxAlpha": 255,
+          "meanAlpha": 251.82,
+          "bbox": {
+            "x": 137,
+            "y": 18,
+            "width": 1046,
+            "height": 1211
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-PAPAYA",
+      "file": "images/DUDUQ-Y2M06-PAPAYA.png",
+      "sha256": "5908f5addad74506639b2d9211ee30852ea3dba7934d109b1edae4a90f26e748",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 889278,
+      "componentCount": 1,
+      "largestComponentPixels": 889278,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 88,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 889278,
+          "maxAlpha": 255,
+          "meanAlpha": 252.01,
+          "bbox": {
+            "x": 60,
+            "y": 51,
+            "width": 1133,
+            "height": 1151
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-MELON",
+      "file": "images/DUDUQ-Y2M06-MELON.png",
+      "sha256": "0388cc1982c09a48f96152330b2ced86d41a0b0c6b6dadc4b21ca4a589278d4c",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 981005,
+      "componentCount": 1,
+      "largestComponentPixels": 981005,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 98,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 981005,
+          "maxAlpha": 255,
+          "meanAlpha": 251.82,
+          "bbox": {
+            "x": 62,
+            "y": 51,
+            "width": 1136,
+            "height": 1171
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-PEAR",
+      "file": "images/DUDUQ-Y2M06-PEAR.png",
+      "sha256": "9ba03aac4d3d8383a8bb2fe038f23668f02cc4b68aeb99d0148915485087fd3b",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 718471,
+      "componentCount": 1,
+      "largestComponentPixels": 718471,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 71,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 718471,
+          "maxAlpha": 255,
+          "meanAlpha": 252,
+          "bbox": {
+            "x": 200,
+            "y": 8,
+            "width": 915,
+            "height": 1238
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-KNEE",
+      "file": "images/DUDUQ-Y2M06-KNEE.png",
+      "sha256": "0a511e0fa3fcd711f9c5a4a8ee3a7a039368335c99f64ee00fcd8ff85e082190",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 644089,
+      "componentCount": 1,
+      "largestComponentPixels": 644089,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 64,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 644089,
+          "maxAlpha": 255,
+          "meanAlpha": 252.16,
+          "bbox": {
+            "x": 11,
+            "y": 18,
+            "width": 1029,
+            "height": 1220
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-SHOULDERS",
+      "file": "images/DUDUQ-Y2M06-SHOULDERS.png",
+      "sha256": "328568e477aad5245d21245022411a99bc4043c375bef856d42a9c044c31e3dd",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 853938,
+      "componentCount": 1,
+      "largestComponentPixels": 853938,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 85,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 853938,
+          "maxAlpha": 255,
+          "meanAlpha": 252.36,
+          "bbox": {
+            "x": 4,
+            "y": 224,
+            "width": 1245,
+            "height": 922
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-FINGER",
+      "file": "images/DUDUQ-Y2M06-FINGER.png",
+      "sha256": "cac3cda6743a446e1bea24be538fa3a530d76d2679bf3a70cf0a147257296732",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 413365,
+      "componentCount": 1,
+      "largestComponentPixels": 413365,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 41,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 413365,
+          "maxAlpha": 255,
+          "meanAlpha": 252.03,
+          "bbox": {
+            "x": 342,
+            "y": 31,
+            "width": 617,
+            "height": 1210
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-BANANA",
+      "file": "images/DUDUQ-Y2M06-BANANA.png",
+      "sha256": "184fbc78aa409e71a4d6f0242082c84c9c6c573ca900037670489e84814c010e",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 511356,
+      "componentCount": 1,
+      "largestComponentPixels": 511356,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 51,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 511356,
+          "maxAlpha": 255,
+          "meanAlpha": 252.1,
+          "bbox": {
+            "x": 27,
+            "y": 54,
+            "width": 1205,
+            "height": 1123
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-APPLE",
+      "file": "images/DUDUQ-Y2M06-APPLE.png",
+      "sha256": "979dccae9a68c40ae43693c8d99dbe3362c02827b518a820cf704270b2389805",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 949618,
+      "componentCount": 1,
+      "largestComponentPixels": 949618,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 94,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 949618,
+          "maxAlpha": 255,
+          "meanAlpha": 252.02,
+          "bbox": {
+            "x": 98,
+            "y": 30,
+            "width": 1121,
+            "height": 1193
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-CARROT",
+      "file": "images/DUDUQ-Y2M06-CARROT.png",
+      "sha256": "1522fa92079f8412040ba7a206533bb4bd4cd6bf5ed0f62cdd449e2e254bc0a5",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 397491,
+      "componentCount": 1,
+      "largestComponentPixels": 397491,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 39,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 397491,
+          "maxAlpha": 255,
+          "meanAlpha": 248.66,
+          "bbox": {
+            "x": 48,
+            "y": 11,
+            "width": 1171,
+            "height": 1208
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-TOMATO",
+      "file": "images/DUDUQ-Y2M06-TOMATO.png",
+      "sha256": "972ecec72f6689630fc7e9a5636262b44955d84ca4226a78f8ae262faa0c08eb",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 986880,
+      "componentCount": 1,
+      "largestComponentPixels": 986880,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 98,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 986880,
+          "maxAlpha": 255,
+          "meanAlpha": 252.32,
+          "bbox": {
+            "x": 37,
+            "y": 27,
+            "width": 1184,
+            "height": 1196
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-POTATO",
+      "file": "images/DUDUQ-Y2M06-POTATO.png",
+      "sha256": "40c273a8cab7b5b202cbb511692cc413a4e7963c10b2527f010eace4a6168627",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 828734,
+      "componentCount": 1,
+      "largestComponentPixels": 828734,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 82,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 828734,
+          "maxAlpha": 255,
+          "meanAlpha": 252.03,
+          "bbox": {
+            "x": 24,
+            "y": 144,
+            "width": 1211,
+            "height": 965
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-FEET",
+      "file": "images/DUDUQ-Y2M06-FEET.png",
+      "sha256": "162628c4587183735ac0a6841d70c6830142278cb25599fb8f63f1a6e1c56fa0",
+      "width": 1536,
+      "height": 1536,
+      "alphaThreshold": 64,
+      "visiblePixels": 724538,
+      "componentCount": 1,
+      "largestComponentPixels": 724538,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 72,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 724538,
+          "maxAlpha": 255,
+          "meanAlpha": 251.97,
+          "bbox": {
+            "x": 170,
+            "y": 314,
+            "width": 1210,
+            "height": 953
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-HEAD",
+      "file": "images/DUDUQ-Y2M06-HEAD.png",
+      "sha256": "3cfe7135cc6e3f44a5e3a9f84475e4da902bfe5a1948605e6b822ca434764c8c",
+      "width": 1536,
+      "height": 1536,
+      "alphaThreshold": 64,
+      "visiblePixels": 762964,
+      "componentCount": 6,
+      "largestComponentPixels": 762953,
+      "largestComponentCoverage": 0.99998558,
+      "secondaryComponentCount": 5,
+      "microOpaqueIslandPixelLimit": 76,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 762953,
+          "maxAlpha": 255,
+          "meanAlpha": 251.25,
+          "bbox": {
+            "x": 309,
+            "y": 173,
+            "width": 951,
+            "height": 1186
+          }
+        },
+        {
+          "pixels": 5,
+          "maxAlpha": 82,
+          "meanAlpha": 72.4,
+          "bbox": {
+            "x": 1016,
+            "y": 318,
+            "width": 2,
+            "height": 4
+          }
+        },
+        {
+          "pixels": 2,
+          "maxAlpha": 65,
+          "meanAlpha": 64.5,
+          "bbox": {
+            "x": 1017,
+            "y": 324,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "pixels": 2,
+          "maxAlpha": 75,
+          "meanAlpha": 74.5,
+          "bbox": {
+            "x": 1015,
+            "y": 337,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "pixels": 1,
+          "maxAlpha": 67,
+          "meanAlpha": 67,
+          "bbox": {
+            "x": 1015,
+            "y": 309,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "pixels": 1,
+          "maxAlpha": 64,
+          "meanAlpha": 64,
+          "bbox": {
+            "x": 1016,
+            "y": 316,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-HANDS",
+      "file": "images/DUDUQ-Y2M06-HANDS.png",
+      "sha256": "c56ae4711b50d5ee41d46253f168e1e46ab09321123d22c085ef6db175364828",
+      "width": 1792,
+      "height": 1536,
+      "alphaThreshold": 64,
+      "visiblePixels": 590437,
+      "componentCount": 2,
+      "largestComponentPixels": 295329,
+      "largestComponentCoverage": 0.50018715,
+      "secondaryComponentCount": 1,
+      "microOpaqueIslandPixelLimit": 59,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 295329,
+          "maxAlpha": 254,
+          "meanAlpha": 251.43,
+          "bbox": {
+            "x": 919,
+            "y": 336,
+            "width": 701,
+            "height": 870
+          }
+        },
+        {
+          "pixels": 295108,
+          "maxAlpha": 254,
+          "meanAlpha": 251.43,
+          "bbox": {
+            "x": 174,
+            "y": 336,
+            "width": 701,
+            "height": 869
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-LEGS",
+      "file": "images/DUDUQ-Y2M06-LEGS.png",
+      "sha256": "688b7842435f0fa02797da3d8433edb88dff09f79373e2f2f7de89365933674a",
+      "width": 1536,
+      "height": 1536,
+      "alphaThreshold": 64,
+      "visiblePixels": 416243,
+      "componentCount": 1,
+      "largestComponentPixels": 416243,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 41,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 416243,
+          "maxAlpha": 255,
+          "meanAlpha": 251.53,
+          "bbox": {
+            "x": 438,
+            "y": 195,
+            "width": 673,
+            "height": 1168
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-ARMS",
+      "file": "images/DUDUQ-Y2M06-ARMS.png",
+      "sha256": "ba4d3cfa789b050c22e752afde0868726b7cf37e806063bd25ec902b007c8acb",
+      "width": 1536,
+      "height": 1536,
+      "alphaThreshold": 64,
+      "visiblePixels": 477314,
+      "componentCount": 4,
+      "largestComponentPixels": 477311,
+      "largestComponentCoverage": 0.99999371,
+      "secondaryComponentCount": 3,
+      "microOpaqueIslandPixelLimit": 47,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 477311,
+          "maxAlpha": 255,
+          "meanAlpha": 250.24,
+          "bbox": {
+            "x": 162,
+            "y": 330,
+            "width": 1214,
+            "height": 938
+          }
+        },
+        {
+          "pixels": 1,
+          "maxAlpha": 73,
+          "meanAlpha": 73,
+          "bbox": {
+            "x": 801,
+            "y": 333,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "pixels": 1,
+          "maxAlpha": 65,
+          "meanAlpha": 65,
+          "bbox": {
+            "x": 808,
+            "y": 334,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "pixels": 1,
+          "maxAlpha": 65,
+          "meanAlpha": 65,
+          "bbox": {
+            "x": 529,
+            "y": 522,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-BIG-APPLE",
+      "file": "images/DUDUQ-Y2M06-BIG-APPLE.png",
+      "sha256": "5160d5c1cbfe1f11852d402c7cfef37f203df5d4ff73b6a6695c8a90ffdc2407",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 1067882,
+      "componentCount": 1,
+      "largestComponentPixels": 1067882,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 106,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 1067882,
+          "maxAlpha": 255,
+          "meanAlpha": 252.09,
+          "bbox": {
+            "x": 44,
+            "y": 26,
+            "width": 1167,
+            "height": 1196
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-BIG-MELON",
+      "file": "images/DUDUQ-Y2M06-BIG-MELON.png",
+      "sha256": "7821f89e13fa78ca45a2b175da24085326a23afef90657b3e947aa9bd6e7c9ca",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 1077840,
+      "componentCount": 1,
+      "largestComponentPixels": 1077840,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 107,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 1077840,
+          "maxAlpha": 255,
+          "meanAlpha": 251.68,
+          "bbox": {
+            "x": 33,
+            "y": 25,
+            "width": 1189,
+            "height": 1208
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-BIG-BANANA",
+      "file": "images/DUDUQ-Y2M06-BIG-BANANA.png",
+      "sha256": "6b2cbba74949d1126b2d28463f6199b2a93e419264909fbb53f3e570ea7816ec",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 622120,
+      "componentCount": 1,
+      "largestComponentPixels": 622120,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 62,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 622120,
+          "maxAlpha": 255,
+          "meanAlpha": 252.3,
+          "bbox": {
+            "x": 20,
+            "y": 15,
+            "width": 1225,
+            "height": 1228
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-SMALL-GRAPE",
+      "file": "images/DUDUQ-Y2M06-SMALL-GRAPE.png",
+      "sha256": "faa908a67e0f6cfa12c28ade9ab032be1aae5db9f94e7b83808e8b4b2658a2dc",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 179731,
+      "componentCount": 1,
+      "largestComponentPixels": 179731,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 32,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 179731,
+          "maxAlpha": 255,
+          "meanAlpha": 251.42,
+          "bbox": {
+            "x": 399,
+            "y": 351,
+            "width": 470,
+            "height": 534
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-SMALL-PEAR",
+      "file": "images/DUDUQ-Y2M06-SMALL-PEAR.png",
+      "sha256": "f3415f7bdec104248b321c8721070273c8624e90a236a48fd416b460b305c8d7",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 177929,
+      "componentCount": 1,
+      "largestComponentPixels": 177929,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 32,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 177929,
+          "maxAlpha": 255,
+          "meanAlpha": 251.76,
+          "bbox": {
+            "x": 404,
+            "y": 308,
+            "width": 447,
+            "height": 647
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-SMALL-CARROT",
+      "file": "images/DUDUQ-Y2M06-SMALL-CARROT.png",
+      "sha256": "ae6d205b6c8eadca35f27158f3112f2376ffebb3690759d6aed55e47c241ddaf",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 108135,
+      "componentCount": 1,
+      "largestComponentPixels": 108135,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 32,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 108135,
+          "maxAlpha": 255,
+          "meanAlpha": 248.72,
+          "bbox": {
+            "x": 436,
+            "y": 284,
+            "width": 383,
+            "height": 659
+          }
+        }
+      ]
+    },
+    {
+      "assetKey": "Y2M06-CANDIDATE-BIG",
+      "file": "images/DUDUQ-Y2M06-BIG.png",
+      "sha256": "71ef4290fd60783cc62684b21d498c6ecd41b6cbc35ce08eccf2e9d4fd159291",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 1076633,
+      "componentCount": 1,
+      "largestComponentPixels": 1076633,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 107,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 1076633,
+          "maxAlpha": 255,
+          "meanAlpha": 252.4,
+          "bbox": {
+            "x": 53,
+            "y": 93,
+            "width": 1150,
+            "height": 1079
+          }
+        }
+      ]
+    }
+  ]
+}

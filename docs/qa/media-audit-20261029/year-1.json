@@ -1,0 +1,4692 @@
+{
+  "audit": "DUDUQ_MEDIA_REFERENCES_20261029_V2_INCLUDES_ASSETID",
+  "sourceRepo": "augustoborgessousa93/duduq-fit-qa-private",
+  "sourcePath": "dist-pages/content/english/year-{year}/module-{mm}/questions.json",
+  "year": 1,
+  "modules": [
+    {
+      "moduleId": "Y1M01",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y1M01-Q001",
+          "mechanic": "target-shooter",
+          "learningTarget": "Reconhecer Hello por escuta e imagem",
+          "instructionPt": "Ouça e escolha a cena correta.",
+          "audioTranscript": "Hello!",
+          "visualRequirement": "scene:greeting; two_children:waving; no_text; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "hello",
+          "imageRef": "IMG-Y1M01-GREETING-GENERIC-001",
+          "mediaIds": [
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y1M01-GREETING-GENERIC-001",
+            "Y1M01-EMOJI-FOOD-001",
+            "Y1M01-EMOJI-SLEEP-001"
+          ],
+          "options": [
+            {
+              "optionId": "farewell",
+              "label": "Cena de despedida",
+              "answerKey": "farewell",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-FAREWELL-GENERIC-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "sleep",
+              "label": "Criança dormindo",
+              "answerKey": "sleep",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-SLEEP-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "hello",
+              "label": "Duas crianças se cumprimentando",
+              "answerKey": "hello",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-GREETING-GENERIC-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "snack",
+              "label": "Criança fazendo um lanche",
+              "answerKey": "snack",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-FOOD-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q002",
+          "mechanic": "bubble-pop",
+          "learningTarget": "Reconhecer Hi",
+          "instructionPt": "Ouça e escolha.",
+          "audioTranscript": "Hi!",
+          "visualRequirement": "scene:greeting_close_friend; child:waving; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "informal-greeting",
+          "imageRef": "IMG-Y1M01-GREETING-INFORMAL-001",
+          "mediaIds": [
+            "IMG-Y1M01-BOY-GIRL-001",
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y1M01-GREETING-AFTERNOON-001",
+            "IMG-Y1M01-GREETING-INFORMAL-001",
+            "IMG-Y1M01-GREETING-MORNING-001",
+            "IMG-Y1M01-INTRODUCTION-MIA-001",
+            "IMG-Y1M01-NAME-QUESTION-001"
+          ],
+          "options": [
+            {
+              "optionId": "informal-greeting",
+              "label": "Reconhecer Hi",
+              "answerKey": "informal-greeting",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-GREETING-INFORMAL-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "distractor-1",
+              "label": "Good morning greeting",
+              "answerKey": "distractor-1",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-GREETING-MORNING-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-2",
+              "label": "Good afternoon greeting",
+              "answerKey": "distractor-2",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-GREETING-AFTERNOON-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-3",
+              "label": "Saying goodbye",
+              "answerKey": "distractor-3",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-FAREWELL-GENERIC-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-4",
+              "label": "Asking someone's name",
+              "answerKey": "distractor-4",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-NAME-QUESTION-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-5",
+              "label": "Introducing yourself",
+              "answerKey": "distractor-5",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-INTRODUCTION-MIA-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-6",
+              "label": "Boy or girl",
+              "answerKey": "distractor-6",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-BOY-GIRL-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q003",
+          "mechanic": "target-shooter",
+          "learningTarget": "Reconhecer Good morning",
+          "instructionPt": "Ouça e escolha a manhã.",
+          "audioTranscript": "Good morning!",
+          "visualRequirement": "scene:school_arrival; time:morning; sun_low; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "morning",
+          "imageRef": "IMG-Y1M01-GREETING-MORNING-001",
+          "mediaIds": [
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y1M01-GREETING-AFTERNOON-001",
+            "IMG-Y1M01-GREETING-MORNING-001",
+            "Y1M01-EMOJI-NIGHT-001"
+          ],
+          "options": [
+            {
+              "optionId": "afternoon",
+              "label": "Cena de tarde",
+              "answerKey": "afternoon",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-GREETING-AFTERNOON-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "night",
+              "label": "Cena noturna",
+              "answerKey": "night",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-NIGHT-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "farewell",
+              "label": "Cena de despedida",
+              "answerKey": "farewell",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-FAREWELL-GENERIC-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "morning",
+              "label": "Chegada à escola pela manhã",
+              "answerKey": "morning",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-GREETING-MORNING-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q004",
+          "mechanic": "target-shooter",
+          "learningTarget": "Reconhecer Good afternoon",
+          "instructionPt": "Ouça e escolha a tarde.",
+          "audioTranscript": "Good afternoon!",
+          "visualRequirement": "scene:school; time:afternoon; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "afternoon",
+          "imageRef": "IMG-Y1M01-GREETING-AFTERNOON-001",
+          "mediaIds": [
+            "IMG-Y1M01-GREETING-AFTERNOON-001",
+            "IMG-Y1M01-GREETING-MORNING-001",
+            "Y1M01-EMOJI-NIGHT-001",
+            "Y1M01-EMOJI-SLEEP-001"
+          ],
+          "options": [
+            {
+              "optionId": "morning",
+              "label": "Cena de manhã",
+              "answerKey": "morning",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-GREETING-MORNING-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "afternoon",
+              "label": "Cena de tarde",
+              "answerKey": "afternoon",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-GREETING-AFTERNOON-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "night",
+              "label": "Cena noturna",
+              "answerKey": "night",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-NIGHT-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "sleep",
+              "label": "Criança dormindo",
+              "answerKey": "sleep",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-SLEEP-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q005",
+          "mechanic": "bubble-pop",
+          "learningTarget": "Reconhecer Goodbye",
+          "instructionPt": "Ouça e escolha a despedida.",
+          "audioTranscript": "Goodbye!",
+          "visualRequirement": "scene:farewell; child:leaving; waving; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "farewell",
+          "imageRef": "IMG-Y1M01-FAREWELL-GENERIC-001",
+          "mediaIds": [
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y1M01-GREETING-AFTERNOON-001",
+            "IMG-Y1M01-GREETING-GENERIC-001",
+            "IMG-Y1M01-GREETING-INFORMAL-001",
+            "IMG-Y1M01-GREETING-MORNING-001",
+            "IMG-Y1M01-INTRODUCTION-MIA-001",
+            "IMG-Y1M01-NAME-QUESTION-001"
+          ],
+          "options": [
+            {
+              "optionId": "farewell",
+              "label": "Reconhecer Goodbye",
+              "answerKey": "farewell",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-FAREWELL-GENERIC-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "distractor-1",
+              "label": "Hello greeting",
+              "answerKey": "distractor-1",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-GREETING-GENERIC-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-2",
+              "label": "Good afternoon greeting",
+              "answerKey": "distractor-2",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-GREETING-AFTERNOON-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-3",
+              "label": "Good morning greeting",
+              "answerKey": "distractor-3",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-GREETING-MORNING-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-4",
+              "label": "Asking someone's name",
+              "answerKey": "distractor-4",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-NAME-QUESTION-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-5",
+              "label": "Introducing yourself",
+              "answerKey": "distractor-5",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-INTRODUCTION-MIA-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-6",
+              "label": "Hi greeting",
+              "answerKey": "distractor-6",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-GREETING-INFORMAL-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q006",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "Recognize and associate four familiar greetings with the social or time-of-day scene where each is used.",
+          "instructionPt": "Ouça e arraste para a cena correta.",
+          "audioTranscript": "Hello! / Good morning! / Good afternoon! / Goodbye!",
+          "visualRequirement": "scene:school_gate; time:morning; two_children; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "hello+morning+afternoon+farewell",
+          "imageRef": "IMG-Y1M01-GREETING-MORNING-001",
+          "mediaIds": [
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y1M01-GREETING-AFTERNOON-001",
+            "IMG-Y1M01-GREETING-GENERIC-001",
+            "IMG-Y1M01-GREETING-MORNING-001"
+          ],
+          "options": [
+            {
+              "optionId": "hello",
+              "label": "Hello!",
+              "answerKey": "hello",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-GREETING-GENERIC-001",
+              "semanticTarget": "hello greeting",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "morning",
+              "label": "Good morning!",
+              "answerKey": "morning",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-GREETING-MORNING-001",
+              "semanticTarget": "morning greeting",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "afternoon",
+              "label": "Good afternoon!",
+              "answerKey": "afternoon",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-GREETING-AFTERNOON-001",
+              "semanticTarget": "afternoon greeting",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "farewell",
+              "label": "Goodbye!",
+              "answerKey": "farewell",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-FAREWELL-GENERIC-001",
+              "semanticTarget": "farewell",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q007",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "Recognize the greeting, name question, modeled name response, and farewell in a short social exchange.",
+          "instructionPt": "Ouça e arraste para a cena correta.",
+          "audioTranscript": "Hello! / Good morning! / Good afternoon! / Goodbye!",
+          "visualRequirement": "scene:school_playground; time:afternoon; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "hello+name-question+ana+ana-farewell",
+          "imageRef": "IMG-Y1M01-GREETING-AFTERNOON-001",
+          "mediaIds": [
+            "IMG-Y1M01-FAREWELL-ANA-001",
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y1M01-GREETING-AFTERNOON-001",
+            "IMG-Y1M01-GREETING-GENERIC-001",
+            "IMG-Y1M01-GREETING-INFORMAL-001",
+            "IMG-Y1M01-GREETING-MORNING-001",
+            "IMG-Y1M01-NAME-QUESTION-001",
+            "IMG-Y1M01-NAME-TAGS-001"
+          ],
+          "options": [
+            {
+              "optionId": "hello",
+              "label": "Hello!",
+              "answerKey": "hello",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-GREETING-INFORMAL-001",
+              "semanticTarget": "hello greeting",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "name-question",
+              "label": "What's your name?",
+              "answerKey": "name-question",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-NAME-QUESTION-001",
+              "semanticTarget": "asking a name",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "ana",
+              "label": "My name is Ana.",
+              "answerKey": "ana",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+              "semanticTarget": "Ana introduction",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "ana-farewell",
+              "label": "Goodbye, Ana.",
+              "answerKey": "ana-farewell",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-FAREWELL-ANA-001",
+              "semanticTarget": "Ana farewell",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q008",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "Recognize the receptive words boy and girl in character-identification contexts and retrieve the modeled names Leo and Ana.",
+          "instructionPt": "Ouça e arraste para a cena correta.",
+          "audioTranscript": "Hello! / Good morning! / Good afternoon! / Goodbye!",
+          "visualRequirement": "scene:school_exit; child:leaving; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "boy+girl+leo+ana",
+          "imageRef": "IMG-Y1M01-FAREWELL-GENERIC-001",
+          "mediaIds": [
+            "IMG-Y1M01-BOY-GIRL-001",
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y1M01-GREETING-AFTERNOON-001",
+            "IMG-Y1M01-GREETING-GENERIC-001",
+            "IMG-Y1M01-GREETING-MORNING-001",
+            "IMG-Y1M01-NAME-TAGS-001"
+          ],
+          "options": [
+            {
+              "optionId": "boy",
+              "label": "Boy.",
+              "answerKey": "boy",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-BOY-GIRL-001",
+              "semanticTarget": "boy",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "girl",
+              "label": "Girl.",
+              "answerKey": "girl",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-BOY-GIRL-001",
+              "semanticTarget": "girl",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "leo",
+              "label": "My name is Leo.",
+              "answerKey": "leo",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+              "semanticTarget": "Leo introduction",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "ana",
+              "label": "My name is Ana.",
+              "answerKey": "ana",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+              "semanticTarget": "Ana introduction",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q009",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "Interpret four short spoken social exchanges by identifying a greeting, a name exchange, a morning context, or a farewell scene.",
+          "instructionPt": "Arraste cada áudio para a cena que combina.",
+          "audioTranscript": "Hello! / Good morning! / Good afternoon! / Goodbye!",
+          "visualRequirement": "four_scenes:hello+morning+afternoon+farewell; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "hello-dialogue+mia-exchange+leo-morning+ana-farewell",
+          "imageRef": "IMG-Y1M01-GREETING-TIME-CONTRAST-001",
+          "mediaIds": [
+            "IMG-Y1M01-DIALOGUE-HELLO-HI-001",
+            "IMG-Y1M01-FAREWELL-ANA-001",
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y1M01-GREETING-AFTERNOON-001",
+            "IMG-Y1M01-GREETING-GENERIC-001",
+            "IMG-Y1M01-GREETING-MORNING-001",
+            "IMG-Y1M01-GREETING-TIME-CONTRAST-001",
+            "IMG-Y1M01-INTRODUCTION-MIA-001"
+          ],
+          "options": [
+            {
+              "optionId": "hello-dialogue",
+              "label": "Hello! Hi!",
+              "answerKey": "hello-dialogue",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-DIALOGUE-HELLO-HI-001",
+              "semanticTarget": "greeting dialogue",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "mia-exchange",
+              "label": "What's your name? My name is Mia.",
+              "answerKey": "mia-exchange",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-INTRODUCTION-MIA-001",
+              "semanticTarget": "Mia name exchange",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "leo-morning",
+              "label": "Good morning, my name is Leo.",
+              "answerKey": "leo-morning",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-GREETING-MORNING-001",
+              "semanticTarget": "Leo morning introduction",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "ana-farewell",
+              "label": "Goodbye, Ana.",
+              "answerKey": "ana-farewell",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-FAREWELL-ANA-001",
+              "semanticTarget": "Ana farewell",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q010",
+          "mechanic": "target-shooter",
+          "learningTarget": "Compreender mini-diálogo de cumprimento",
+          "instructionPt": "Ouça e acerte a cena que corresponde ao diálogo.",
+          "audioTranscript": "A: Hello! B: Hi!",
+          "visualRequirement": "scene:two_children_greeting; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "greeting",
+          "imageRef": "IMG-Y1M01-DIALOGUE-HELLO-HI-001",
+          "mediaIds": [
+            "IMG-Y1M01-DIALOGUE-HELLO-HI-001",
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "Y1M01-EMOJI-BALL-001",
+            "Y1M01-EMOJI-SLEEP-001"
+          ],
+          "options": [
+            {
+              "optionId": "farewell",
+              "label": "Cena de despedida",
+              "answerKey": "farewell",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-FAREWELL-GENERIC-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "sleep",
+              "label": "Criança dormindo",
+              "answerKey": "sleep",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-SLEEP-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "greeting",
+              "label": "Duas crianças conversando e se cumprimentando",
+              "answerKey": "greeting",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-DIALOGUE-HELLO-HI-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "play",
+              "label": "Criança brincando com bola",
+              "answerKey": "play",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-BALL-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q011",
+          "mechanic": "target-shooter",
+          "learningTarget": "Reconhecer a pergunta What's your name?",
+          "instructionPt": "Ouça. Qual personagem está perguntando o nome?",
+          "audioTranscript": "What's your name?",
+          "visualRequirement": "scene:two_children; one_speaking_question; speech_icon_question; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "question",
+          "imageRef": "IMG-Y1M01-NAME-QUESTION-001",
+          "mediaIds": [
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y1M01-GREETING-GENERIC-001",
+            "IMG-Y1M01-NAME-QUESTION-001",
+            "Y1M01-EMOJI-OBJECTS-001"
+          ],
+          "options": [
+            {
+              "optionId": "farewell",
+              "label": "Cena de despedida",
+              "answerKey": "farewell",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-FAREWELL-GENERIC-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "question",
+              "label": "Personagem fazendo uma pergunta",
+              "answerKey": "question",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-NAME-QUESTION-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "greeting",
+              "label": "Cena de cumprimento",
+              "answerKey": "greeting",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-GREETING-GENERIC-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "counting",
+              "label": "Contagem de objetos",
+              "answerKey": "counting",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-OBJECTS-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q012",
+          "mechanic": "target-shooter",
+          "learningTarget": "Reconhecer My name is... como resposta",
+          "instructionPt": "Ouça e escolha quem está se apresentando.",
+          "audioTranscript": "My name is Leo.",
+          "visualRequirement": "characters:3; one_named_leo; name_tag:LEO; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "leo",
+          "imageRef": "IMG-Y1M01-NAME-LEO-001",
+          "mediaIds": [
+            "IMG-Y1M01-NAME-LEO-001",
+            "IMG-Y1M01-NAME-TAGS-001",
+            "Y1M01-EMOJI-BEN-001"
+          ],
+          "options": [
+            {
+              "optionId": "mia",
+              "label": "Mia",
+              "answerKey": "mia",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "ana",
+              "label": "Ana",
+              "answerKey": "ana",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "ben",
+              "label": "Ben",
+              "answerKey": "ben",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-BEN-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "leo",
+              "label": "Leo",
+              "answerKey": "leo",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q013",
+          "mechanic": "target-shooter",
+          "learningTarget": "Compreender pergunta e resposta de nome",
+          "instructionPt": "Encontre a criança que responde à pergunta.",
+          "audioTranscript": "A: What's your name? B: My name is Mia.",
+          "visualRequirement": "characters:3; name_tags:MIA+LEO+ANA; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "mia",
+          "imageRef": "IMG-Y1M01-NAME-MIA-001",
+          "mediaIds": [
+            "IMG-Y1M01-NAME-MIA-001",
+            "IMG-Y1M01-NAME-TAGS-001",
+            "Y1M01-EMOJI-BEN-001"
+          ],
+          "options": [
+            {
+              "optionId": "ana",
+              "label": "Ana",
+              "answerKey": "ana",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "leo",
+              "label": "Leo",
+              "answerKey": "leo",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "ben",
+              "label": "Ben",
+              "answerKey": "ben",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-BEN-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "mia",
+              "label": "Mia",
+              "answerKey": "mia",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q014",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "Retrieve four modeled spoken name introductions by matching each speaker to the corresponding name badge.",
+          "instructionPt": "Arraste o áudio para o crachá certo.",
+          "audioTranscript": "My name is Ana. / My name is Mia. / My name is Leo. / My name is Ben.",
+          "visualRequirement": "name_tags:ANA+MIA+LEO+BEN; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "ana+mia+leo+ben",
+          "imageRef": "IMG-Y1M01-NAME-TAGS-001",
+          "mediaIds": [
+            "IMG-Y1M01-NAME-TAGS-001",
+            "Y1M01-EMOJI-BEN-001"
+          ],
+          "options": [
+            {
+              "optionId": "ana",
+              "label": "My name is Ana.",
+              "answerKey": "ana",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+              "semanticTarget": "ana introduction",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "mia",
+              "label": "My name is Mia.",
+              "answerKey": "mia",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+              "semanticTarget": "mia introduction",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "leo",
+              "label": "My name is Leo.",
+              "answerKey": "leo",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+              "semanticTarget": "leo introduction",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "ben",
+              "label": "My name is Ben.",
+              "answerKey": "ben",
+              "correct": true,
+              "mediaId": "Y1M01-EMOJI-BEN-001",
+              "semanticTarget": "ben introduction",
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q015",
+          "mechanic": "target-shooter",
+          "learningTarget": "Identificar par pergunta-resposta",
+          "instructionPt": "Ouça e acerte a cena que corresponde ao diálogo.",
+          "audioTranscript": "1: What's your name? 2: My name is Ben.",
+          "visualRequirement": "audio_cards:question+answer; visual:two_children; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "conversation",
+          "imageRef": "IMG-Y1M01-NAME-QUESTION-ANSWER-001",
+          "mediaIds": [
+            "IMG-Y1M01-FAREWELL-GENERIC-001",
+            "IMG-Y1M01-GREETING-INFORMAL-001",
+            "IMG-Y1M01-NAME-QUESTION-ANSWER-001",
+            "Y1M01-EMOJI-THINKING-001"
+          ],
+          "options": [
+            {
+              "optionId": "farewell",
+              "label": "Duas pessoas se despedindo",
+              "answerKey": "farewell",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-FAREWELL-GENERIC-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "greeting",
+              "label": "Duas pessoas se cumprimentando",
+              "answerKey": "greeting",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-GREETING-INFORMAL-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "solo",
+              "label": "Uma pessoa sozinha",
+              "answerKey": "solo",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-THINKING-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "conversation",
+              "label": "Duas crianças em uma conversa",
+              "answerKey": "conversation",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-NAME-QUESTION-ANSWER-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q016",
+          "mechanic": "target-shooter",
+          "learningTarget": "Reconhecer boy por áudio",
+          "instructionPt": "Ouça e escolha.",
+          "audioTranscript": "Boy.",
+          "visualRequirement": "characters:boy+girl+adult; diverse; neutral_clothing; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "boy",
+          "imageRef": "IMG-Y1M01-BOY-GIRL-001",
+          "mediaIds": [
+            "IMG-Y1M01-BOY-GIRL-001",
+            "Y1M01-EMOJI-ADULT-MAN-001",
+            "Y1M01-EMOJI-ADULT-WOMAN-001"
+          ],
+          "options": [
+            {
+              "optionId": "girl",
+              "label": "Menina",
+              "answerKey": "girl",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-BOY-GIRL-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "boy",
+              "label": "Menino",
+              "answerKey": "boy",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-BOY-GIRL-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "adult-man",
+              "label": "Pessoa adulta",
+              "answerKey": "adult-man",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-ADULT-MAN-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "adult-woman",
+              "label": "Pessoa adulta",
+              "answerKey": "adult-woman",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-ADULT-WOMAN-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q017",
+          "mechanic": "target-shooter",
+          "learningTarget": "Reconhecer girl por áudio",
+          "instructionPt": "Ouça e escolha.",
+          "audioTranscript": "Girl.",
+          "visualRequirement": "characters:girl+boy+adult; diverse; neutral_clothing; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "girl",
+          "imageRef": "IMG-Y1M01-BOY-GIRL-001",
+          "mediaIds": [
+            "IMG-Y1M01-BOY-GIRL-001",
+            "Y1M01-EMOJI-ADULT-MAN-001",
+            "Y1M01-EMOJI-ADULT-WOMAN-001"
+          ],
+          "options": [
+            {
+              "optionId": "boy",
+              "label": "Menino",
+              "answerKey": "boy",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-BOY-GIRL-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "adult-man",
+              "label": "Pessoa adulta",
+              "answerKey": "adult-man",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-ADULT-MAN-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "girl",
+              "label": "Menina",
+              "answerKey": "girl",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-BOY-GIRL-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "adult-woman",
+              "label": "Pessoa adulta",
+              "answerKey": "adult-woman",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-ADULT-WOMAN-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q018",
+          "mechanic": "target-shooter",
+          "learningTarget": "Integrar greeting + name + girl",
+          "instructionPt": "Ouça e escolha a personagem.",
+          "audioTranscript": "Hello! My name is Mia.",
+          "visualRequirement": "characters:3; one_girl_named_mia; name_tags; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "mia",
+          "imageRef": "IMG-Y1M01-INTRODUCTION-MIA-001",
+          "mediaIds": [
+            "IMG-Y1M01-INTRODUCTION-MIA-001",
+            "IMG-Y1M01-NAME-LEO-001",
+            "IMG-Y1M01-NAME-TAGS-001",
+            "Y1M01-EMOJI-BEN-001"
+          ],
+          "options": [
+            {
+              "optionId": "ana",
+              "label": "Ana",
+              "answerKey": "ana",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-NAME-TAGS-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "leo",
+              "label": "Leo",
+              "answerKey": "leo",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-NAME-LEO-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "ben",
+              "label": "Ben",
+              "answerKey": "ben",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-BEN-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "mia",
+              "label": "Mia",
+              "answerKey": "mia",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-INTRODUCTION-MIA-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q019",
+          "mechanic": "target-shooter",
+          "learningTarget": "Integrar good morning + name + boy",
+          "instructionPt": "Ouça e escolha a cena.",
+          "audioTranscript": "Good morning! My name is Leo.",
+          "visualRequirement": "scenes:morning_leo + afternoon_mia + farewell_ana; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "leo-morning",
+          "imageRef": "IMG-Y1M01-INTRODUCTION-LEO-MORNING-001",
+          "mediaIds": [
+            "IMG-Y1M01-FAREWELL-ANA-001",
+            "IMG-Y1M01-INTRODUCTION-LEO-MORNING-001",
+            "IMG-Y1M01-INTRODUCTION-MIA-001",
+            "Y1M01-EMOJI-SLEEP-001"
+          ],
+          "options": [
+            {
+              "optionId": "leo-morning",
+              "label": "Leo chegando pela manhã",
+              "answerKey": "leo-morning",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-INTRODUCTION-LEO-MORNING-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "mia-afternoon",
+              "label": "Mia à tarde",
+              "answerKey": "mia-afternoon",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-INTRODUCTION-MIA-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "ana-farewell",
+              "label": "Ana indo embora",
+              "answerKey": "ana-farewell",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-FAREWELL-ANA-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "sleep",
+              "label": "Criança dormindo",
+              "answerKey": "sleep",
+              "correct": false,
+              "mediaId": "Y1M01-EMOJI-SLEEP-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M01-Q020",
+          "mechanic": "bubble-pop",
+          "learningTarget": "Revisar despedida + nome em contexto",
+          "instructionPt": "Ouça e estoure a cena correspondente ao áudio.",
+          "audioTranscript": "Goodbye, Ana!",
+          "visualRequirement": "characters:3; ana_leaving; others_staying; approved=true",
+          "semanticReview": "NEEDS_HUMAN_REVIEW",
+          "correctAnswer": "ana-leaving",
+          "imageRef": "IMG-Y1M01-FAREWELL-ANA-001",
+          "mediaIds": [
+            "IMG-Y1M01-FAREWELL-ANA-001",
+            "IMG-Y1M01-GREETING-AFTERNOON-001",
+            "IMG-Y1M01-GREETING-GENERIC-001",
+            "IMG-Y1M01-GREETING-INFORMAL-001",
+            "IMG-Y1M01-GREETING-MORNING-001",
+            "IMG-Y1M01-INTRODUCTION-LEO-MORNING-001",
+            "IMG-Y1M01-NAME-QUESTION-001"
+          ],
+          "options": [
+            {
+              "optionId": "ana-leaving",
+              "label": "Revisar despedida + nome em contexto",
+              "answerKey": "ana-leaving",
+              "correct": true,
+              "mediaId": "IMG-Y1M01-FAREWELL-ANA-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "distractor-1",
+              "label": "Good morning greeting",
+              "answerKey": "distractor-1",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-GREETING-MORNING-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-2",
+              "label": "Hi greeting",
+              "answerKey": "distractor-2",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-GREETING-INFORMAL-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-3",
+              "label": "Good afternoon greeting",
+              "answerKey": "distractor-3",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-GREETING-AFTERNOON-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-4",
+              "label": "Leo introducing himself",
+              "answerKey": "distractor-4",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-INTRODUCTION-LEO-MORNING-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-5",
+              "label": "Asking someone's name",
+              "answerKey": "distractor-5",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-NAME-QUESTION-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            },
+            {
+              "optionId": "distractor-6",
+              "label": "Hello greeting",
+              "answerKey": "distractor-6",
+              "correct": false,
+              "mediaId": "IMG-Y1M01-GREETING-GENERIC-001",
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": "NEEDS_HUMAN_REVIEW"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleId": "Y1M02",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y1M02-Q001",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Count and connect number words to small quantities. Focus: one-ten in batches.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M02-Q001-A1": "Y1M02-Q001-T1",
+            "Y1M02-Q001-A2": "Y1M02-Q001-T2",
+            "Y1M02-Q001-A3": "Y1M02-Q001-T3",
+            "Y1M02-Q001-A4": "Y1M02-Q001-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q001-ONE",
+            "IMG-Y1M02-Q001-FOUR",
+            "IMG-Y1M02-Q001-ONE",
+            "IMG-Y1M02-Q001-THREE",
+            "IMG-Y1M02-Q001-TWO"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q002",
+          "mechanic": "bubble-pop",
+          "learningTarget": "teaching: Count and connect number words to small quantities. Focus: cumulative one-ten recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "one",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q002-ONE",
+            "IMG-Y1M02-Q002-EIGHT",
+            "IMG-Y1M02-Q002-FIVE",
+            "IMG-Y1M02-Q002-FOUR",
+            "IMG-Y1M02-Q002-ONE",
+            "IMG-Y1M02-Q002-SEVEN",
+            "IMG-Y1M02-Q002-SIX",
+            "IMG-Y1M02-Q002-THREE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q003",
+          "mechanic": "drag-drop",
+          "learningTarget": "guided practice: Count and connect number words to small quantities. Focus: one-ten quantity recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M02-Q003-I1": "one-to-five",
+            "Y1M02-Q003-I2": "one-to-five",
+            "Y1M02-Q003-I3": "one-to-five",
+            "Y1M02-Q003-I4": "one-to-five",
+            "Y1M02-Q003-I5": "one-to-five",
+            "Y1M02-Q003-I6": "six-to-ten",
+            "Y1M02-Q003-I7": "six-to-ten",
+            "Y1M02-Q003-I8": "six-to-ten",
+            "Y1M02-Q003-I9": "six-to-ten",
+            "Y1M02-Q003-I10": "six-to-ten"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q003-THREE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q004",
+          "mechanic": "memory-quest",
+          "learningTarget": "First staged batch connects spoken number names to concrete quantity with high oral/visual support. Curricular target: one; two; three; four; five.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y1M02-Q004-one",
+            "Y1M02-Q004-two",
+            "Y1M02-Q004-three",
+            "Y1M02-Q004-four",
+            "Y1M02-Q004-five"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q004-FOUR",
+            "IMG-Y1M02-Q004-FIVE",
+            "IMG-Y1M02-Q004-FOUR",
+            "IMG-Y1M02-Q004-ONE",
+            "IMG-Y1M02-Q004-THREE",
+            "IMG-Y1M02-Q004-TWO"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q005",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "guided practice: Count and connect number words to small quantities. Focus: count.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M02-Q005-A1": "Y1M02-Q005-T1",
+            "Y1M02-Q005-A2": "Y1M02-Q005-T2",
+            "Y1M02-Q005-A3": "Y1M02-Q005-T3",
+            "Y1M02-Q005-A4": "Y1M02-Q005-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q005-FIVE",
+            "IMG-Y1M02-Q005-FIVE",
+            "IMG-Y1M02-Q005-FOUR",
+            "IMG-Y1M02-Q005-SIX",
+            "IMG-Y1M02-Q005-THREE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q006",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Count and connect number words to small quantities. Focus: one-ten in batches.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M02-Q006-A1": "Y1M02-Q006-B1",
+            "Y1M02-Q006-A2": "Y1M02-Q006-B2",
+            "Y1M02-Q006-A3": "Y1M02-Q006-B3",
+            "Y1M02-Q006-A4": "Y1M02-Q006-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q006-SIX",
+            "IMG-Y1M02-Q006-FIVE",
+            "IMG-Y1M02-Q006-FOUR",
+            "IMG-Y1M02-Q006-SIX",
+            "IMG-Y1M02-Q006-THREE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q007",
+          "mechanic": "bubble-pop",
+          "learningTarget": "recognition: Count and connect number words to small quantities. Focus: cumulative one-ten recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "four",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q007-FOUR",
+            "IMG-Y1M02-Q007-EIGHT",
+            "IMG-Y1M02-Q007-FOUR",
+            "IMG-Y1M02-Q007-NINE",
+            "IMG-Y1M02-Q007-ONE",
+            "IMG-Y1M02-Q007-TEN",
+            "IMG-Y1M02-Q007-THREE",
+            "IMG-Y1M02-Q007-TWO"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Count and connect number words to small quantities. Focus: one-ten quantity recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "four",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q004-FOUR"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M02-Q008-four",
+              "label": "four",
+              "answerKey": "four",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M02-Q008-five",
+              "label": "five",
+              "answerKey": "five",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M02-Q008-six",
+              "label": "six",
+              "answerKey": "six",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M02-Q008-seven",
+              "label": "seven",
+              "answerKey": "seven",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q009",
+          "mechanic": "drag-drop",
+          "learningTarget": "recognition: Count and connect number words to small quantities. Focus: number-to-quantity.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M02-Q009-I1": "one-to-five",
+            "Y1M02-Q009-I2": "one-to-five",
+            "Y1M02-Q009-I3": "one-to-five",
+            "Y1M02-Q009-I4": "one-to-five",
+            "Y1M02-Q009-I5": "one-to-five",
+            "Y1M02-Q009-I6": "six-to-ten",
+            "Y1M02-Q009-I7": "six-to-ten",
+            "Y1M02-Q009-I8": "six-to-ten",
+            "Y1M02-Q009-I9": "six-to-ten",
+            "Y1M02-Q009-I10": "six-to-ten"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q009-NINE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q010",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Count and connect number words to small quantities. Focus: ask/identify quantity.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M02-Q010-A1": "Y1M02-Q010-B1",
+            "Y1M02-Q010-A2": "Y1M02-Q010-B2",
+            "Y1M02-Q010-A3": "Y1M02-Q010-B3",
+            "Y1M02-Q010-A4": "Y1M02-Q010-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q010-TEN",
+            "IMG-Y1M02-Q010-EIGHT",
+            "IMG-Y1M02-Q010-FIVE",
+            "IMG-Y1M02-Q010-SEVEN",
+            "IMG-Y1M02-Q010-SIX"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q011",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Count and connect number words to small quantities. Focus: one-ten in batches.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M02-Q011-A1": "Y1M02-Q011-T1",
+            "Y1M02-Q011-A2": "Y1M02-Q011-T2",
+            "Y1M02-Q011-A3": "Y1M02-Q011-T3",
+            "Y1M02-Q011-A4": "Y1M02-Q011-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q011-ONE",
+            "IMG-Y1M02-Q011-EIGHT",
+            "IMG-Y1M02-Q011-NINE",
+            "IMG-Y1M02-Q011-SEVEN",
+            "IMG-Y1M02-Q011-SIX"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q012",
+          "mechanic": "target-shooter",
+          "learningTarget": "comprehension: Count and connect number words to small quantities. Focus: cumulative one-ten recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "six",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q012-SIX",
+            "IMG-Y1M02-Q012-EIGHT",
+            "IMG-Y1M02-Q012-NINE",
+            "IMG-Y1M02-Q012-SEVEN",
+            "IMG-Y1M02-Q012-SIX"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M02-Q012-O1",
+              "label": "six",
+              "answerKey": "six",
+              "mediaId": "IMG-Y1M02-Q012-SIX",
+              "semanticTarget": "six",
+              "mustInclude": "six",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M02-Q012-O2",
+              "label": "seven",
+              "answerKey": "seven",
+              "mediaId": "IMG-Y1M02-Q012-SEVEN",
+              "semanticTarget": "seven",
+              "mustInclude": "seven",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M02-Q012-O3",
+              "label": "eight",
+              "answerKey": "eight",
+              "mediaId": "IMG-Y1M02-Q012-EIGHT",
+              "semanticTarget": "eight",
+              "mustInclude": "eight",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M02-Q012-O4",
+              "label": "nine",
+              "answerKey": "nine",
+              "mediaId": "IMG-Y1M02-Q012-NINE",
+              "semanticTarget": "nine",
+              "mustInclude": "nine",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q013",
+          "mechanic": "memory-quest",
+          "learningTarget": "Second non-overlapping batch supports cumulative recognition after staged exposure; it is not a shuffled repeat of batch one. Curricular target: six; seven; eight; nine; ten.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y1M02-Q013-six",
+            "Y1M02-Q013-seven",
+            "Y1M02-Q013-eight",
+            "Y1M02-Q013-nine",
+            "Y1M02-Q013-ten"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q013-THREE",
+            "IMG-Y1M02-Q013-EIGHT",
+            "IMG-Y1M02-Q013-NINE",
+            "IMG-Y1M02-Q013-SEVEN",
+            "IMG-Y1M02-Q013-SIX",
+            "IMG-Y1M02-Q013-TEN"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q014",
+          "mechanic": "bubble-pop",
+          "learningTarget": "listening: Count and connect number words to small quantities. Focus: How many? + number/object chunk.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "seven",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q014-SEVEN",
+            "IMG-Y1M02-Q014-EIGHT",
+            "IMG-Y1M02-Q014-FIVE",
+            "IMG-Y1M02-Q014-NINE",
+            "IMG-Y1M02-Q014-ONE",
+            "IMG-Y1M02-Q014-SEVEN",
+            "IMG-Y1M02-Q014-SIX",
+            "IMG-Y1M02-Q014-TEN"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q015",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "retrieval: Count and connect number words to small quantities. Focus: count.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M02-Q015-A1": "Y1M02-Q015-T1",
+            "Y1M02-Q015-A2": "Y1M02-Q015-T2",
+            "Y1M02-Q015-A3": "Y1M02-Q015-T3",
+            "Y1M02-Q015-A4": "Y1M02-Q015-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q015-FIVE",
+            "IMG-Y1M02-Q015-EIGHT",
+            "IMG-Y1M02-Q015-NINE",
+            "IMG-Y1M02-Q015-ONE",
+            "IMG-Y1M02-Q015-TEN"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q016",
+          "mechanic": "matching",
+          "learningTarget": "retrieval: Count and connect number words to small quantities. Focus: one-ten in batches.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M02-Q016-A1": "Y1M02-Q016-B1",
+            "Y1M02-Q016-A2": "Y1M02-Q016-B2",
+            "Y1M02-Q016-A3": "Y1M02-Q016-B3",
+            "Y1M02-Q016-A4": "Y1M02-Q016-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q016-SIX",
+            "IMG-Y1M02-Q016-EIGHT",
+            "IMG-Y1M02-Q016-NINE",
+            "IMG-Y1M02-Q016-ONE",
+            "IMG-Y1M02-Q016-TEN"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q017",
+          "mechanic": "target-shooter",
+          "learningTarget": "review: Count and connect number words to small quantities. Focus: cumulative one-ten recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "nine",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q017-NINE",
+            "IMG-Y1M02-Q017-NINE",
+            "IMG-Y1M02-Q017-ONE",
+            "IMG-Y1M02-Q017-TEN",
+            "IMG-Y1M02-Q017-TWO"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M02-Q017-O1",
+              "label": "nine",
+              "answerKey": "nine",
+              "mediaId": "IMG-Y1M02-Q017-NINE",
+              "semanticTarget": "nine",
+              "mustInclude": "nine",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M02-Q017-O2",
+              "label": "ten",
+              "answerKey": "ten",
+              "mediaId": "IMG-Y1M02-Q017-TEN",
+              "semanticTarget": "ten",
+              "mustInclude": "ten",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M02-Q017-O3",
+              "label": "one",
+              "answerKey": "one",
+              "mediaId": "IMG-Y1M02-Q017-ONE",
+              "semanticTarget": "one",
+              "mustInclude": "one",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M02-Q017-O4",
+              "label": "two",
+              "answerKey": "two",
+              "mediaId": "IMG-Y1M02-Q017-TWO",
+              "semanticTarget": "two",
+              "mustInclude": "two",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Count and connect number words to small quantities. Focus: one-ten quantity recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "nine",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M02-Q007-NINE"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M02-Q018-nine",
+              "label": "nine",
+              "answerKey": "nine",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M02-Q018-ten",
+              "label": "ten",
+              "answerKey": "ten",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M02-Q018-one",
+              "label": "one",
+              "answerKey": "one",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M02-Q018-two",
+              "label": "two",
+              "answerKey": "two",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M02-Q019",
+          "mechanic": "drag-drop",
+          "learningTarget": "consolidation: Count and connect number words to small quantities. Focus: number-to-quantity.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M02-Q019-I1": "one-to-five",
+            "Y1M02-Q019-I2": "one-to-five",
+            "Y1M02-Q019-I3": "one-to-five",
+            "Y1M02-Q019-I4": "one-to-five",
+            "Y1M02-Q019-I5": "one-to-five",
+            "Y1M02-Q019-I6": "six-to-ten",
+            "Y1M02-Q019-I7": "six-to-ten",
+            "Y1M02-Q019-I8": "six-to-ten",
+            "Y1M02-Q019-I9": "six-to-ten",
+            "Y1M02-Q019-I10": "six-to-ten"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q019-NINE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M02-Q020",
+          "mechanic": "bubble-pop",
+          "learningTarget": "consolidation: Count and connect number words to small quantities. Focus: ask/identify quantity.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "ten",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q020-TEN",
+            "IMG-Y1M02-Q020-FIVE",
+            "IMG-Y1M02-Q020-FOUR",
+            "IMG-Y1M02-Q020-SEVEN",
+            "IMG-Y1M02-Q020-SIX",
+            "IMG-Y1M02-Q020-TEN",
+            "IMG-Y1M02-Q020-THREE",
+            "IMG-Y1M02-Q020-TWO"
+          ],
+          "options": []
+        }
+      ]
+    },
+    {
+      "moduleId": "Y1M03",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y1M03-Q001",
+          "mechanic": "bubble-pop",
+          "learningTarget": "teaching: Connect color words to visible attributes and describe familiar objects. Focus: red.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "red",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q001-RED",
+            "IMG-Y1M03-Q001-BLACK",
+            "IMG-Y1M03-Q001-BLUE",
+            "IMG-Y1M03-Q001-GREEN",
+            "IMG-Y1M03-Q001-ORANGE",
+            "IMG-Y1M03-Q001-RED",
+            "IMG-Y1M03-Q001-WHITE",
+            "IMG-Y1M03-Q001-YELLOW"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M03-Q002",
+          "mechanic": "drag-drop",
+          "learningTarget": "teaching: Connect color words to visible attributes and describe familiar objects. Focus: orange.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M03-Q002-I1": "active-colors",
+            "Y1M03-Q002-I2": "active-colors",
+            "Y1M03-Q002-I3": "active-colors",
+            "Y1M03-Q002-I4": "active-colors",
+            "Y1M03-Q002-I5": "active-colors",
+            "Y1M03-Q002-I6": "active-colors",
+            "Y1M03-Q002-I7": "additional-colors",
+            "Y1M03-Q002-I8": "additional-colors"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q002-BLUE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M03-Q003",
+          "mechanic": "memory-quest",
+          "learningTarget": "Spoken core colors map directly to visible color attributes; receptive colors stay receptive. Curricular target: red; blue; yellow; green.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y1M03-Q003-red",
+            "Y1M03-Q003-blue",
+            "Y1M03-Q003-yellow",
+            "Y1M03-Q003-green"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q003-YELLOW",
+            "IMG-Y1M03-Q003-BLUE",
+            "IMG-Y1M03-Q003-GREEN",
+            "IMG-Y1M03-Q003-RED",
+            "IMG-Y1M03-Q003-YELLOW"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M03-Q004",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "guided practice: Connect color words to visible attributes and describe familiar objects. Focus: It's [color] / color + object (guided chunk).",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M03-Q004-A1": "Y1M03-Q004-T1",
+            "Y1M03-Q004-A2": "Y1M03-Q004-T2",
+            "Y1M03-Q004-A3": "Y1M03-Q004-T3",
+            "Y1M03-Q004-A4": "Y1M03-Q004-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q004-GREEN",
+            "IMG-Y1M03-Q004-BLACK",
+            "IMG-Y1M03-Q004-BLUE",
+            "IMG-Y1M03-Q004-GREEN",
+            "IMG-Y1M03-Q004-YELLOW"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M03-Q005",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Connect color words to visible attributes and describe familiar objects. Focus: identify color.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M03-Q005-A1": "Y1M03-Q005-B1",
+            "Y1M03-Q005-A2": "Y1M03-Q005-B2",
+            "Y1M03-Q005-A3": "Y1M03-Q005-B3",
+            "Y1M03-Q005-A4": "Y1M03-Q005-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q005-BLACK",
+            "IMG-Y1M03-Q005-BLACK",
+            "IMG-Y1M03-Q005-GREEN",
+            "IMG-Y1M03-Q005-WHITE",
+            "IMG-Y1M03-Q005-YELLOW"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M03-Q006",
+          "mechanic": "bubble-pop",
+          "learningTarget": "guided practice: Connect color words to visible attributes and describe familiar objects. Focus: blue.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "blue",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q006-BLUE",
+            "IMG-Y1M03-Q006-BLUE",
+            "IMG-Y1M03-Q006-BROWN",
+            "IMG-Y1M03-Q006-GRAY",
+            "IMG-Y1M03-Q006-ORANGE",
+            "IMG-Y1M03-Q006-PURPLE",
+            "IMG-Y1M03-Q006-RED",
+            "IMG-Y1M03-Q006-YELLOW"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M03-Q007",
+          "mechanic": "target-shooter",
+          "learningTarget": "recognition: Connect color words to visible attributes and describe familiar objects. Focus: purple.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "purple",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q007-PURPLE",
+            "IMG-Y1M03-Q007-BROWN",
+            "IMG-Y1M03-Q007-GRAY",
+            "IMG-Y1M03-Q007-PURPLE",
+            "IMG-Y1M03-Q007-RED"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M03-Q007-O1",
+              "label": "purple",
+              "answerKey": "purple",
+              "mediaId": "IMG-Y1M03-Q007-PURPLE",
+              "semanticTarget": "purple",
+              "mustInclude": "purple",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q007-O2",
+              "label": "gray",
+              "answerKey": "gray",
+              "mediaId": "IMG-Y1M03-Q007-GRAY",
+              "semanticTarget": "gray",
+              "mustInclude": "gray",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q007-O3",
+              "label": "brown",
+              "answerKey": "brown",
+              "mediaId": "IMG-Y1M03-Q007-BROWN",
+              "semanticTarget": "brown",
+              "mustInclude": "brown",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q007-O4",
+              "label": "red",
+              "answerKey": "red",
+              "mediaId": "IMG-Y1M03-Q007-RED",
+              "semanticTarget": "red",
+              "mustInclude": "red",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M03-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Connect color words to visible attributes and describe familiar objects. Focus: six active colors at Y1 exit.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "green",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M03-Q001-GREEN"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M03-Q008-green",
+              "label": "green",
+              "answerKey": "green",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q008-black",
+              "label": "black",
+              "answerKey": "black",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q008-white",
+              "label": "white",
+              "answerKey": "white",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q008-orange",
+              "label": "orange",
+              "answerKey": "orange",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M03-Q009",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Connect color words to visible attributes and describe familiar objects. Focus: color attribute chunk.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M03-Q009-A1": "Y1M03-Q009-B1",
+            "Y1M03-Q009-A2": "Y1M03-Q009-B2",
+            "Y1M03-Q009-A3": "Y1M03-Q009-B3",
+            "Y1M03-Q009-A4": "Y1M03-Q009-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q009-GRAY",
+            "IMG-Y1M03-Q009-BLACK",
+            "IMG-Y1M03-Q009-ORANGE",
+            "IMG-Y1M03-Q009-PURPLE",
+            "IMG-Y1M03-Q009-WHITE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M03-Q010",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Connect color words to visible attributes and describe familiar objects. Focus: describe object.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M03-Q010-A1": "Y1M03-Q010-T1",
+            "Y1M03-Q010-A2": "Y1M03-Q010-T2",
+            "Y1M03-Q010-A3": "Y1M03-Q010-T3",
+            "Y1M03-Q010-A4": "Y1M03-Q010-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q010-BROWN",
+            "IMG-Y1M03-Q010-BLACK",
+            "IMG-Y1M03-Q010-ORANGE",
+            "IMG-Y1M03-Q010-PURPLE",
+            "IMG-Y1M03-Q010-WHITE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M03-Q011",
+          "mechanic": "target-shooter",
+          "learningTarget": "comprehension: Connect color words to visible attributes and describe familiar objects. Focus: yellow.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "yellow",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q011-YELLOW",
+            "IMG-Y1M03-Q011-BLACK",
+            "IMG-Y1M03-Q011-GREEN",
+            "IMG-Y1M03-Q011-WHITE",
+            "IMG-Y1M03-Q011-YELLOW"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M03-Q011-O1",
+              "label": "yellow",
+              "answerKey": "yellow",
+              "mediaId": "IMG-Y1M03-Q011-YELLOW",
+              "semanticTarget": "yellow",
+              "mustInclude": "yellow",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q011-O2",
+              "label": "green",
+              "answerKey": "green",
+              "mediaId": "IMG-Y1M03-Q011-GREEN",
+              "semanticTarget": "green",
+              "mustInclude": "green",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q011-O3",
+              "label": "black",
+              "answerKey": "black",
+              "mediaId": "IMG-Y1M03-Q011-BLACK",
+              "semanticTarget": "black",
+              "mustInclude": "black",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q011-O4",
+              "label": "white",
+              "answerKey": "white",
+              "mediaId": "IMG-Y1M03-Q011-WHITE",
+              "semanticTarget": "white",
+              "mustInclude": "white",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M03-Q012",
+          "mechanic": "memory-quest",
+          "learningTarget": "Spaced retrieval in a changed representation/phase; source targets remain constrained to V3 and prior modules. Preserve active/receptive color distinction and avoid color stereotypes. Curricular target: orange; purple; gray; brown.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y1M03-Q012-orange",
+            "Y1M03-Q012-purple",
+            "Y1M03-Q012-gray",
+            "Y1M03-Q012-brown"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q012-BLUE",
+            "IMG-Y1M03-Q012-BROWN",
+            "IMG-Y1M03-Q012-GRAY",
+            "IMG-Y1M03-Q012-ORANGE",
+            "IMG-Y1M03-Q012-PURPLE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M03-Q013",
+          "mechanic": "bubble-pop",
+          "learningTarget": "listening: Connect color words to visible attributes and describe familiar objects. Focus: six active colors at Y1 exit.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "orange",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q013-ORANGE",
+            "IMG-Y1M03-Q013-BLACK",
+            "IMG-Y1M03-Q013-BROWN",
+            "IMG-Y1M03-Q013-GRAY",
+            "IMG-Y1M03-Q013-GREEN",
+            "IMG-Y1M03-Q013-ORANGE",
+            "IMG-Y1M03-Q013-PURPLE",
+            "IMG-Y1M03-Q013-WHITE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M03-Q014",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "listening: Connect color words to visible attributes and describe familiar objects. Focus: It's [color] / color + object (guided chunk).",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M03-Q014-A1": "Y1M03-Q014-T1",
+            "Y1M03-Q014-A2": "Y1M03-Q014-T2",
+            "Y1M03-Q014-A3": "Y1M03-Q014-T3",
+            "Y1M03-Q014-A4": "Y1M03-Q014-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q014-GREEN",
+            "IMG-Y1M03-Q014-BROWN",
+            "IMG-Y1M03-Q014-GRAY",
+            "IMG-Y1M03-Q014-ORANGE",
+            "IMG-Y1M03-Q014-PURPLE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M03-Q015",
+          "mechanic": "matching",
+          "learningTarget": "retrieval: Connect color words to visible attributes and describe familiar objects. Focus: identify color.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M03-Q015-A1": "Y1M03-Q015-B1",
+            "Y1M03-Q015-A2": "Y1M03-Q015-B2",
+            "Y1M03-Q015-A3": "Y1M03-Q015-B3",
+            "Y1M03-Q015-A4": "Y1M03-Q015-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q015-BLACK",
+            "IMG-Y1M03-Q015-BROWN",
+            "IMG-Y1M03-Q015-GRAY",
+            "IMG-Y1M03-Q015-PURPLE",
+            "IMG-Y1M03-Q015-RED"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M03-Q016",
+          "mechanic": "target-shooter",
+          "learningTarget": "retrieval: Connect color words to visible attributes and describe familiar objects. Focus: green.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "green",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q016-GREEN",
+            "IMG-Y1M03-Q016-BLACK",
+            "IMG-Y1M03-Q016-GREEN",
+            "IMG-Y1M03-Q016-ORANGE",
+            "IMG-Y1M03-Q016-WHITE"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M03-Q016-O1",
+              "label": "green",
+              "answerKey": "green",
+              "mediaId": "IMG-Y1M03-Q016-GREEN",
+              "semanticTarget": "green",
+              "mustInclude": "green",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q016-O2",
+              "label": "black",
+              "answerKey": "black",
+              "mediaId": "IMG-Y1M03-Q016-BLACK",
+              "semanticTarget": "black",
+              "mustInclude": "black",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q016-O3",
+              "label": "white",
+              "answerKey": "white",
+              "mediaId": "IMG-Y1M03-Q016-WHITE",
+              "semanticTarget": "white",
+              "mustInclude": "white",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q016-O4",
+              "label": "orange",
+              "answerKey": "orange",
+              "mediaId": "IMG-Y1M03-Q016-ORANGE",
+              "semanticTarget": "orange",
+              "mustInclude": "orange",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M03-Q017",
+          "mechanic": "matching",
+          "learningTarget": "review: Connect color words to visible attributes and describe familiar objects. Focus: brown.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M03-Q017-A1": "Y1M03-Q017-B1",
+            "Y1M03-Q017-A2": "Y1M03-Q017-B2",
+            "Y1M03-Q017-A3": "Y1M03-Q017-B3",
+            "Y1M03-Q017-A4": "Y1M03-Q017-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q017-ORANGE",
+            "IMG-Y1M03-Q017-BLUE",
+            "IMG-Y1M03-Q017-BROWN",
+            "IMG-Y1M03-Q017-GRAY",
+            "IMG-Y1M03-Q017-RED"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M03-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Connect color words to visible attributes and describe familiar objects. Focus: six active colors at Y1 exit.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "gray",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M03-Q006-GRAY"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M03-Q018-gray",
+              "label": "gray",
+              "answerKey": "gray",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q018-brown",
+              "label": "brown",
+              "answerKey": "brown",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q018-red",
+              "label": "red",
+              "answerKey": "red",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M03-Q018-blue",
+              "label": "blue",
+              "answerKey": "blue",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M03-Q019",
+          "mechanic": "drag-drop",
+          "learningTarget": "consolidation: Connect color words to visible attributes and describe familiar objects. Focus: color attribute chunk.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M03-Q019-I1": "active-colors",
+            "Y1M03-Q019-I2": "active-colors",
+            "Y1M03-Q019-I3": "active-colors",
+            "Y1M03-Q019-I4": "active-colors",
+            "Y1M03-Q019-I5": "active-colors",
+            "Y1M03-Q019-I6": "active-colors",
+            "Y1M03-Q019-I7": "additional-colors",
+            "Y1M03-Q019-I8": "additional-colors"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q019-GRAY"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M03-Q020",
+          "mechanic": "drag-drop",
+          "learningTarget": "consolidation: Connect color words to visible attributes and describe familiar objects. Focus: describe object.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M03-Q020-I1": "active-colors",
+            "Y1M03-Q020-I2": "active-colors",
+            "Y1M03-Q020-I3": "active-colors",
+            "Y1M03-Q020-I4": "active-colors",
+            "Y1M03-Q020-I5": "active-colors",
+            "Y1M03-Q020-I6": "active-colors",
+            "Y1M03-Q020-I7": "additional-colors",
+            "Y1M03-Q020-I8": "additional-colors"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q020-BROWN"
+          ],
+          "options": []
+        }
+      ]
+    },
+    {
+      "moduleId": "Y1M04",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y1M04-Q001",
+          "mechanic": "drag-drop",
+          "learningTarget": "teaching: Identify school objects and locate one using short chunks. Focus: eraser.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M04-Q001-I1": "use-to-write",
+            "Y1M04-Q001-I2": "use-to-write",
+            "Y1M04-Q001-I3": "carry-or-store",
+            "Y1M04-Q001-I4": "use-to-write",
+            "Y1M04-Q001-I5": "use-to-write",
+            "Y1M04-Q001-I6": "use-to-write",
+            "Y1M04-Q001-I7": "carry-or-store"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q001-ERASER"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M04-Q002",
+          "mechanic": "target-shooter",
+          "learningTarget": "teaching: Identify school objects and locate one using short chunks. Focus: six active colors.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "red",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q002-RED",
+            "IMG-Y1M04-Q002-BLUE",
+            "IMG-Y1M04-Q002-GREEN",
+            "IMG-Y1M04-Q002-RED",
+            "IMG-Y1M04-Q002-YELLOW"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M04-Q002-O1",
+              "label": "red",
+              "answerKey": "red",
+              "mediaId": "IMG-Y1M04-Q002-RED",
+              "semanticTarget": "red",
+              "mustInclude": "red",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q002-O2",
+              "label": "blue",
+              "answerKey": "blue",
+              "mediaId": "IMG-Y1M04-Q002-BLUE",
+              "semanticTarget": "blue",
+              "mustInclude": "blue",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q002-O3",
+              "label": "yellow",
+              "answerKey": "yellow",
+              "mediaId": "IMG-Y1M04-Q002-YELLOW",
+              "semanticTarget": "yellow",
+              "mustInclude": "yellow",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q002-O4",
+              "label": "green",
+              "answerKey": "green",
+              "mediaId": "IMG-Y1M04-Q002-GREEN",
+              "semanticTarget": "green",
+              "mustInclude": "green",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q003",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "guided practice: Identify school objects and locate one using short chunks. Focus: school-object recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M04-Q003-A1": "Y1M04-Q003-T1",
+            "Y1M04-Q003-A2": "Y1M04-Q003-T2",
+            "Y1M04-Q003-A3": "Y1M04-Q003-T3",
+            "Y1M04-Q003-A4": "Y1M04-Q003-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q003-PENCIL-CASE",
+            "IMG-Y1M04-Q003-CRAYON",
+            "IMG-Y1M04-Q003-ERASER",
+            "IMG-Y1M04-Q003-PENCIL",
+            "IMG-Y1M04-Q003-PENCIL-CASE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M04-Q004",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Identify school objects and locate one using short chunks. Focus: Where is my...? / Here it is! (modeled exchange).",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M04-Q004-A1": "Y1M04-Q004-B1",
+            "Y1M04-Q004-A2": "Y1M04-Q004-B2",
+            "Y1M04-Q004-A3": "Y1M04-Q004-B3",
+            "Y1M04-Q004-A4": "Y1M04-Q004-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q004-CRAYON",
+            "IMG-Y1M04-Q004-CRAYON",
+            "IMG-Y1M04-Q004-PENCIL",
+            "IMG-Y1M04-Q004-PENCIL-CASE",
+            "IMG-Y1M04-Q004-RULER"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M04-Q005",
+          "mechanic": "bubble-pop",
+          "learningTarget": "guided practice: Identify school objects and locate one using short chunks. Focus: identify.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "pencil",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q005-PENCIL",
+            "IMG-Y1M04-Q005-BACKPACK",
+            "IMG-Y1M04-Q005-CRAYON",
+            "IMG-Y1M04-Q005-ERASER",
+            "IMG-Y1M04-Q005-PEN",
+            "IMG-Y1M04-Q005-PENCIL",
+            "IMG-Y1M04-Q005-PENCIL-CASE",
+            "IMG-Y1M04-Q005-RULER"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M04-Q006",
+          "mechanic": "memory-quest",
+          "learningTarget": "Audio-to-object pairing supports the introduced concrete noun set with color/quantity scaffolds. Curricular target: eraser; pencil; pencil case; crayon.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y1M04-Q006-eraser",
+            "Y1M04-Q006-pencil",
+            "Y1M04-Q006-pencil-case",
+            "Y1M04-Q006-crayon"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q006-PEN",
+            "IMG-Y1M04-Q006-CRAYON",
+            "IMG-Y1M04-Q006-ERASER",
+            "IMG-Y1M04-Q006-PENCIL",
+            "IMG-Y1M04-Q006-PENCIL-CASE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M04-Q007",
+          "mechanic": "drag-drop",
+          "learningTarget": "recognition: Identify school objects and locate one using short chunks. Focus: numbers one-ten.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M04-Q007-I1": "one-to-five",
+            "Y1M04-Q007-I2": "one-to-five",
+            "Y1M04-Q007-I3": "one-to-five",
+            "Y1M04-Q007-I4": "one-to-five",
+            "Y1M04-Q007-I5": "one-to-five",
+            "Y1M04-Q007-I6": "six-to-ten",
+            "Y1M04-Q007-I7": "six-to-ten",
+            "Y1M04-Q007-I8": "six-to-ten",
+            "Y1M04-Q007-I9": "six-to-ten",
+            "Y1M04-Q007-I10": "six-to-ten"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q007-BACKPACK"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M04-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Identify school objects and locate one using short chunks. Focus: school-object recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "pencil-case",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M04-Q003-PENCIL-CASE"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M04-Q008-pencil-case",
+              "label": "pencil case",
+              "answerKey": "pencil-case",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q008-crayon",
+              "label": "crayon",
+              "answerKey": "crayon",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q008-ruler",
+              "label": "ruler",
+              "answerKey": "ruler",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q008-pen",
+              "label": "pen",
+              "answerKey": "pen",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q009",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "recognition: Identify school objects and locate one using short chunks. Focus: It's a....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M04-Q009-A1": "Y1M04-Q009-T1",
+            "Y1M04-Q009-A2": "Y1M04-Q009-T2",
+            "Y1M04-Q009-A3": "Y1M04-Q009-T3",
+            "Y1M04-Q009-A4": "Y1M04-Q009-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q009-PENCIL",
+            "IMG-Y1M04-Q009-CRAYON",
+            "IMG-Y1M04-Q009-PEN",
+            "IMG-Y1M04-Q009-PENCIL-CASE",
+            "IMG-Y1M04-Q009-RULER"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M04-Q010",
+          "mechanic": "target-shooter",
+          "learningTarget": "comprehension: Identify school objects and locate one using short chunks. Focus: describe.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "crayon",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q010-CRAYON",
+            "IMG-Y1M04-Q010-BACKPACK",
+            "IMG-Y1M04-Q010-CRAYON",
+            "IMG-Y1M04-Q010-PEN",
+            "IMG-Y1M04-Q010-RULER"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M04-Q010-O1",
+              "label": "crayon",
+              "answerKey": "crayon",
+              "mediaId": "IMG-Y1M04-Q010-CRAYON",
+              "semanticTarget": "crayon",
+              "mustInclude": "crayon",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q010-O2",
+              "label": "ruler",
+              "answerKey": "ruler",
+              "mediaId": "IMG-Y1M04-Q010-RULER",
+              "semanticTarget": "ruler",
+              "mustInclude": "ruler",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q010-O3",
+              "label": "pen",
+              "answerKey": "pen",
+              "mediaId": "IMG-Y1M04-Q010-PEN",
+              "semanticTarget": "pen",
+              "mustInclude": "pen",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q010-O4",
+              "label": "backpack",
+              "answerKey": "backpack",
+              "mediaId": "IMG-Y1M04-Q010-BACKPACK",
+              "semanticTarget": "backpack",
+              "mustInclude": "backpack",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q011",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Identify school objects and locate one using short chunks. Focus: pencil case.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M04-Q011-A1": "Y1M04-Q011-B1",
+            "Y1M04-Q011-A2": "Y1M04-Q011-B2",
+            "Y1M04-Q011-A3": "Y1M04-Q011-B3",
+            "Y1M04-Q011-A4": "Y1M04-Q011-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q011-CRAYON",
+            "IMG-Y1M04-Q011-BACKPACK",
+            "IMG-Y1M04-Q011-CRAYON",
+            "IMG-Y1M04-Q011-PEN",
+            "IMG-Y1M04-Q011-RULER"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M04-Q012",
+          "mechanic": "bubble-pop",
+          "learningTarget": "comprehension: Identify school objects and locate one using short chunks. Focus: six active colors.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "green",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q012-GREEN",
+            "IMG-Y1M04-Q012-BLACK",
+            "IMG-Y1M04-Q012-BLUE",
+            "IMG-Y1M04-Q012-GREEN",
+            "IMG-Y1M04-Q012-RED",
+            "IMG-Y1M04-Q012-WHITE",
+            "IMG-Y1M04-Q012-YELLOW"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M04-Q013",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "listening: Identify school objects and locate one using short chunks. Focus: school-object recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M04-Q013-A1": "Y1M04-Q013-T1",
+            "Y1M04-Q013-A2": "Y1M04-Q013-T2",
+            "Y1M04-Q013-A3": "Y1M04-Q013-T3",
+            "Y1M04-Q013-A4": "Y1M04-Q013-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q013-PEN",
+            "IMG-Y1M04-Q013-BACKPACK",
+            "IMG-Y1M04-Q013-ERASER",
+            "IMG-Y1M04-Q013-PEN",
+            "IMG-Y1M04-Q013-RULER"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M04-Q014",
+          "mechanic": "matching",
+          "learningTarget": "listening: Identify school objects and locate one using short chunks. Focus: color/object.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M04-Q014-A1": "Y1M04-Q014-B1",
+            "Y1M04-Q014-A2": "Y1M04-Q014-B2",
+            "Y1M04-Q014-A3": "Y1M04-Q014-B3",
+            "Y1M04-Q014-A4": "Y1M04-Q014-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q014-BACKPACK",
+            "IMG-Y1M04-Q014-BLACK",
+            "IMG-Y1M04-Q014-GREEN",
+            "IMG-Y1M04-Q014-RED",
+            "IMG-Y1M04-Q014-WHITE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M04-Q015",
+          "mechanic": "target-shooter",
+          "learningTarget": "retrieval: Identify school objects and locate one using short chunks. Focus: ask/answer location.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "ruler",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q015-RULER",
+            "IMG-Y1M04-Q015-BACKPACK",
+            "IMG-Y1M04-Q015-ERASER",
+            "IMG-Y1M04-Q015-PEN",
+            "IMG-Y1M04-Q015-RULER"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M04-Q015-O1",
+              "label": "ruler",
+              "answerKey": "ruler",
+              "mediaId": "IMG-Y1M04-Q015-RULER",
+              "semanticTarget": "ruler",
+              "mustInclude": "ruler",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q015-O2",
+              "label": "pen",
+              "answerKey": "pen",
+              "mediaId": "IMG-Y1M04-Q015-PEN",
+              "semanticTarget": "pen",
+              "mustInclude": "pen",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q015-O3",
+              "label": "backpack",
+              "answerKey": "backpack",
+              "mediaId": "IMG-Y1M04-Q015-BACKPACK",
+              "semanticTarget": "backpack",
+              "mustInclude": "backpack",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q015-O4",
+              "label": "eraser",
+              "answerKey": "eraser",
+              "mediaId": "IMG-Y1M04-Q015-ERASER",
+              "semanticTarget": "eraser",
+              "mustInclude": "eraser",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q016",
+          "mechanic": "memory-quest",
+          "learningTarget": "Retrieves number-to-quantity learning from Y1M02 in a changed school-object context; colors and quantities remain supports, not new English targets. Curricular target: one; two; three; four.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y1M04-Q016-one",
+            "Y1M04-Q016-two",
+            "Y1M04-Q016-three",
+            "Y1M04-Q016-four"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q016-PENCIL",
+            "IMG-Y1M04-Q016-FOUR",
+            "IMG-Y1M04-Q016-ONE",
+            "IMG-Y1M04-Q016-THREE",
+            "IMG-Y1M04-Q016-TWO"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M04-Q017",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "review: Identify school objects and locate one using short chunks. Focus: numbers one-ten.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M04-Q017-A1": "Y1M04-Q017-T1",
+            "Y1M04-Q017-A2": "Y1M04-Q017-T2",
+            "Y1M04-Q017-A3": "Y1M04-Q017-T3",
+            "Y1M04-Q017-A4": "Y1M04-Q017-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q017-PENCIL-CASE",
+            "IMG-Y1M04-Q017-BACKPACK",
+            "IMG-Y1M04-Q017-ERASER",
+            "IMG-Y1M04-Q017-PEN",
+            "IMG-Y1M04-Q017-PENCIL"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M04-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Identify school objects and locate one using short chunks. Focus: school-object recognition.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "pen",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M04-Q005-PEN"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M04-Q018-pen",
+              "label": "pen",
+              "answerKey": "pen",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q018-backpack",
+              "label": "backpack",
+              "answerKey": "backpack",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q018-eraser",
+              "label": "eraser",
+              "answerKey": "eraser",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q018-pencil",
+              "label": "pencil",
+              "answerKey": "pencil",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M04-Q019",
+          "mechanic": "drag-drop",
+          "learningTarget": "consolidation: Identify school objects and locate one using short chunks. Focus: quantity.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M04-Q019-I1": "one-to-five",
+            "Y1M04-Q019-I2": "one-to-five",
+            "Y1M04-Q019-I3": "one-to-five",
+            "Y1M04-Q019-I4": "one-to-five",
+            "Y1M04-Q019-I5": "one-to-five",
+            "Y1M04-Q019-I6": "six-to-ten",
+            "Y1M04-Q019-I7": "six-to-ten",
+            "Y1M04-Q019-I8": "six-to-ten",
+            "Y1M04-Q019-I9": "six-to-ten",
+            "Y1M04-Q019-I10": "six-to-ten"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q019-RULER"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M04-Q020",
+          "mechanic": "target-shooter",
+          "learningTarget": "consolidation: Identify school objects and locate one using short chunks. Focus: identify.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "backpack",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q020-BACKPACK",
+            "IMG-Y1M04-Q020-BACKPACK",
+            "IMG-Y1M04-Q020-ERASER",
+            "IMG-Y1M04-Q020-PENCIL",
+            "IMG-Y1M04-Q020-PENCIL-CASE"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M04-Q020-O1",
+              "label": "backpack",
+              "answerKey": "backpack",
+              "mediaId": "IMG-Y1M04-Q020-BACKPACK",
+              "semanticTarget": "backpack",
+              "mustInclude": "backpack",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q020-O2",
+              "label": "eraser",
+              "answerKey": "eraser",
+              "mediaId": "IMG-Y1M04-Q020-ERASER",
+              "semanticTarget": "eraser",
+              "mustInclude": "eraser",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q020-O3",
+              "label": "pencil",
+              "answerKey": "pencil",
+              "mediaId": "IMG-Y1M04-Q020-PENCIL",
+              "semanticTarget": "pencil",
+              "mustInclude": "pencil",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M04-Q020-O4",
+              "label": "pencil case",
+              "answerKey": "pencil-case",
+              "mediaId": "IMG-Y1M04-Q020-PENCIL-CASE",
+              "semanticTarget": "pencil case",
+              "mustInclude": "pencil case",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleId": "Y1M05",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y1M05-Q001",
+          "mechanic": "target-shooter",
+          "learningTarget": "teaching: Understand classroom commands and identify body parts. Focus: head.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "head",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q001-HEAD",
+            "IMG-Y1M05-Q001-ARMS",
+            "IMG-Y1M05-Q001-HANDS",
+            "IMG-Y1M05-Q001-HEAD",
+            "IMG-Y1M05-Q001-LEGS"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M05-Q001-O1",
+              "label": "head",
+              "answerKey": "head",
+              "mediaId": "IMG-Y1M05-Q001-HEAD",
+              "semanticTarget": "head",
+              "mustInclude": "head",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M05-Q001-O2",
+              "label": "hands",
+              "answerKey": "hands",
+              "mediaId": "IMG-Y1M05-Q001-HANDS",
+              "semanticTarget": "hands",
+              "mustInclude": "hands",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M05-Q001-O3",
+              "label": "legs",
+              "answerKey": "legs",
+              "mediaId": "IMG-Y1M05-Q001-LEGS",
+              "semanticTarget": "legs",
+              "mustInclude": "legs",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M05-Q001-O4",
+              "label": "arms",
+              "answerKey": "arms",
+              "mediaId": "IMG-Y1M05-Q001-ARMS",
+              "semanticTarget": "arms",
+              "mustInclude": "arms",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M05-Q002",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Understand classroom commands and identify body parts. Focus: silence please.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M05-Q002-A1": "Y1M05-Q002-T1",
+            "Y1M05-Q002-A2": "Y1M05-Q002-T2",
+            "Y1M05-Q002-A3": "Y1M05-Q002-T3",
+            "Y1M05-Q002-A4": "Y1M05-Q002-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q002-HANDS",
+            "IMG-Y1M05-Q002-ARMS",
+            "IMG-Y1M05-Q002-HANDS",
+            "IMG-Y1M05-Q002-HEAD",
+            "IMG-Y1M05-Q002-LEGS"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q003",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Understand classroom commands and identify body parts. Focus: familiar command comprehension.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M05-Q003-A1": "Y1M05-Q003-B1",
+            "Y1M05-Q003-A2": "Y1M05-Q003-B2",
+            "Y1M05-Q003-A3": "Y1M05-Q003-B3",
+            "Y1M05-Q003-A4": "Y1M05-Q003-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q003-LEGS",
+            "IMG-Y1M05-Q003-ARMS",
+            "IMG-Y1M05-Q003-FEET",
+            "IMG-Y1M05-Q003-HANDS",
+            "IMG-Y1M05-Q003-LEGS"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q004",
+          "mechanic": "bubble-pop",
+          "learningTarget": "guided practice: Understand classroom commands and identify body parts. Focus: Touch your....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "hands",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q004-HANDS",
+            "IMG-Y1M05-Q004-COME-IN",
+            "IMG-Y1M05-Q004-FEET",
+            "IMG-Y1M05-Q004-HANDS",
+            "IMG-Y1M05-Q004-SILENCE-PLEASE",
+            "IMG-Y1M05-Q004-SIT-DOWN",
+            "IMG-Y1M05-Q004-STAND-UP",
+            "IMG-Y1M05-Q004-THANK-YOU"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q005",
+          "mechanic": "memory-quest",
+          "learningTarget": "Short semantic retrieval of already-taught body words; follows direct movement practice and supplements rather than replaces accessible action response. Curricular target: head; hands; legs; arms; feet.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y1M05-Q005-head",
+            "Y1M05-Q005-hands",
+            "Y1M05-Q005-legs",
+            "Y1M05-Q005-arms",
+            "Y1M05-Q005-feet"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q005-FEET",
+            "IMG-Y1M05-Q005-ARMS",
+            "IMG-Y1M05-Q005-FEET",
+            "IMG-Y1M05-Q005-HANDS",
+            "IMG-Y1M05-Q005-HEAD",
+            "IMG-Y1M05-Q005-LEGS"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q006",
+          "mechanic": "drag-drop",
+          "learningTarget": "guided practice: Understand classroom commands and identify body parts. Focus: hands.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M05-Q006-I1": "body-parts",
+            "Y1M05-Q006-I2": "body-parts",
+            "Y1M05-Q006-I3": "body-parts",
+            "Y1M05-Q006-I4": "body-parts",
+            "Y1M05-Q006-I5": "body-parts",
+            "Y1M05-Q006-I6": "actions",
+            "Y1M05-Q006-I7": "actions",
+            "Y1M05-Q006-I8": "actions"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q006-SIT-DOWN"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q007",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Understand classroom commands and identify body parts. Focus: please.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M05-Q007-A1": "Y1M05-Q007-B1",
+            "Y1M05-Q007-A2": "Y1M05-Q007-B2",
+            "Y1M05-Q007-A3": "Y1M05-Q007-B3",
+            "Y1M05-Q007-A4": "Y1M05-Q007-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q007-STAND-UP",
+            "IMG-Y1M05-Q007-ARMS",
+            "IMG-Y1M05-Q007-FEET",
+            "IMG-Y1M05-Q007-SIT-DOWN",
+            "IMG-Y1M05-Q007-STAND-UP"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q008",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Understand classroom commands and identify body parts. Focus: familiar command comprehension.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M05-Q008-A1": "Y1M05-Q008-B1",
+            "Y1M05-Q008-A2": "Y1M05-Q008-B2",
+            "Y1M05-Q008-A3": "Y1M05-Q008-B3",
+            "Y1M05-Q008-A4": "Y1M05-Q008-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q008-COME-IN",
+            "IMG-Y1M05-Q008-ARMS",
+            "IMG-Y1M05-Q008-FEET",
+            "IMG-Y1M05-Q008-SIT-DOWN",
+            "IMG-Y1M05-Q008-STAND-UP"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q009",
+          "mechanic": "target-shooter",
+          "learningTarget": "recognition: Understand classroom commands and identify body parts. Focus: imperatives as action chunks.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "feet",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q009-FEET",
+            "IMG-Y1M05-Q009-COME-IN",
+            "IMG-Y1M05-Q009-FEET",
+            "IMG-Y1M05-Q009-SIT-DOWN",
+            "IMG-Y1M05-Q009-STAND-UP"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M05-Q009-O1",
+              "label": "feet",
+              "answerKey": "feet",
+              "mediaId": "IMG-Y1M05-Q009-FEET",
+              "semanticTarget": "feet",
+              "mustInclude": "feet",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M05-Q009-O2",
+              "label": "sit down",
+              "answerKey": "sit-down",
+              "mediaId": "IMG-Y1M05-Q009-SIT-DOWN",
+              "semanticTarget": "sit down",
+              "mustInclude": "sit down",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M05-Q009-O3",
+              "label": "stand up",
+              "answerKey": "stand-up",
+              "mediaId": "IMG-Y1M05-Q009-STAND-UP",
+              "semanticTarget": "stand up",
+              "mustInclude": "stand up",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M05-Q009-O4",
+              "label": "come in",
+              "answerKey": "come-in",
+              "mediaId": "IMG-Y1M05-Q009-COME-IN",
+              "semanticTarget": "come in",
+              "mustInclude": "come in",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M05-Q010",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Understand classroom commands and identify body parts. Focus: identify body.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M05-Q010-A1": "Y1M05-Q010-B1",
+            "Y1M05-Q010-A2": "Y1M05-Q010-B2",
+            "Y1M05-Q010-A3": "Y1M05-Q010-B3",
+            "Y1M05-Q010-A4": "Y1M05-Q010-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q010-THANK-YOU",
+            "IMG-Y1M05-Q010-COME-IN",
+            "IMG-Y1M05-Q010-FEET",
+            "IMG-Y1M05-Q010-SIT-DOWN",
+            "IMG-Y1M05-Q010-STAND-UP"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q011",
+          "mechanic": "bubble-pop",
+          "learningTarget": "comprehension: Understand classroom commands and identify body parts. Focus: legs.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "legs",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q011-LEGS",
+            "IMG-Y1M05-Q011-ARMS",
+            "IMG-Y1M05-Q011-COME-IN",
+            "IMG-Y1M05-Q011-FEET",
+            "IMG-Y1M05-Q011-HANDS",
+            "IMG-Y1M05-Q011-LEGS",
+            "IMG-Y1M05-Q011-SIT-DOWN",
+            "IMG-Y1M05-Q011-STAND-UP"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q012",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Understand classroom commands and identify body parts. Focus: thank you.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M05-Q012-A1": "Y1M05-Q012-T1",
+            "Y1M05-Q012-A2": "Y1M05-Q012-T2",
+            "Y1M05-Q012-A3": "Y1M05-Q012-T3",
+            "Y1M05-Q012-A4": "Y1M05-Q012-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q012-HANDS",
+            "IMG-Y1M05-Q012-COME-IN",
+            "IMG-Y1M05-Q012-SILENCE-PLEASE",
+            "IMG-Y1M05-Q012-SIT-DOWN",
+            "IMG-Y1M05-Q012-STAND-UP"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q013",
+          "mechanic": "matching",
+          "learningTarget": "listening: Understand classroom commands and identify body parts. Focus: familiar command comprehension.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M05-Q013-A1": "Y1M05-Q013-B1",
+            "Y1M05-Q013-A2": "Y1M05-Q013-B2",
+            "Y1M05-Q013-A3": "Y1M05-Q013-B3",
+            "Y1M05-Q013-A4": "Y1M05-Q013-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q013-LEGS",
+            "IMG-Y1M05-Q013-COME-IN",
+            "IMG-Y1M05-Q013-SILENCE-PLEASE",
+            "IMG-Y1M05-Q013-STAND-UP",
+            "IMG-Y1M05-Q013-THANK-YOU"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q014",
+          "mechanic": "target-shooter",
+          "learningTarget": "listening: Understand classroom commands and identify body parts. Focus: listen-and-act.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "stand-up",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q014-STAND-UP",
+            "IMG-Y1M05-Q014-COME-IN",
+            "IMG-Y1M05-Q014-SILENCE-PLEASE",
+            "IMG-Y1M05-Q014-STAND-UP",
+            "IMG-Y1M05-Q014-THANK-YOU"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M05-Q014-O1",
+              "label": "stand up",
+              "answerKey": "stand-up",
+              "mediaId": "IMG-Y1M05-Q014-STAND-UP",
+              "semanticTarget": "stand up",
+              "mustInclude": "stand up",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M05-Q014-O2",
+              "label": "come in",
+              "answerKey": "come-in",
+              "mediaId": "IMG-Y1M05-Q014-COME-IN",
+              "semanticTarget": "come in",
+              "mustInclude": "come in",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M05-Q014-O3",
+              "label": "silence, please",
+              "answerKey": "silence-please",
+              "mediaId": "IMG-Y1M05-Q014-SILENCE-PLEASE",
+              "semanticTarget": "silence, please",
+              "mustInclude": "silence, please",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M05-Q014-O4",
+              "label": "thank you",
+              "answerKey": "thank-you",
+              "mediaId": "IMG-Y1M05-Q014-THANK-YOU",
+              "semanticTarget": "thank you",
+              "mustInclude": "thank you",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M05-Q015",
+          "mechanic": "memory-quest",
+          "learningTarget": "Audio-to-action-scene discrimination consolidates commands only after direct enactment; the card task does not substitute for the module’s primary accessible movement evidence. Curricular target: sit down; stand up; come in.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y1M05-Q015-sit-down",
+            "Y1M05-Q015-stand-up",
+            "Y1M05-Q015-come-in"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q015-FEET",
+            "IMG-Y1M05-Q015-COME-IN",
+            "IMG-Y1M05-Q015-SIT-DOWN",
+            "IMG-Y1M05-Q015-STAND-UP"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q016",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "retrieval: Understand classroom commands and identify body parts. Focus: arms.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M05-Q016-A1": "Y1M05-Q016-T1",
+            "Y1M05-Q016-A2": "Y1M05-Q016-T2",
+            "Y1M05-Q016-A3": "Y1M05-Q016-T3",
+            "Y1M05-Q016-A4": "Y1M05-Q016-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q016-SIT-DOWN",
+            "IMG-Y1M05-Q016-COME-IN",
+            "IMG-Y1M05-Q016-HEAD",
+            "IMG-Y1M05-Q016-SILENCE-PLEASE",
+            "IMG-Y1M05-Q016-THANK-YOU"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q017",
+          "mechanic": "bubble-pop",
+          "learningTarget": "review: Understand classroom commands and identify body parts. Focus: silence please.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "silence-please",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q017-SILENCE-PLEASE",
+            "IMG-Y1M05-Q017-ARMS",
+            "IMG-Y1M05-Q017-COME-IN",
+            "IMG-Y1M05-Q017-HANDS",
+            "IMG-Y1M05-Q017-HEAD",
+            "IMG-Y1M05-Q017-LEGS",
+            "IMG-Y1M05-Q017-SILENCE-PLEASE",
+            "IMG-Y1M05-Q017-THANK-YOU"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q018",
+          "mechanic": "matching",
+          "learningTarget": "review: Understand classroom commands and identify body parts. Focus: familiar command comprehension.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M05-Q018-A1": "Y1M05-Q018-B1",
+            "Y1M05-Q018-A2": "Y1M05-Q018-B2",
+            "Y1M05-Q018-A3": "Y1M05-Q018-B3",
+            "Y1M05-Q018-A4": "Y1M05-Q018-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q018-COME-IN",
+            "IMG-Y1M05-Q018-HANDS",
+            "IMG-Y1M05-Q018-HEAD",
+            "IMG-Y1M05-Q018-SILENCE-PLEASE",
+            "IMG-Y1M05-Q018-THANK-YOU"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q019",
+          "mechanic": "drag-drop",
+          "learningTarget": "consolidation: Understand classroom commands and identify body parts. Focus: Touch your....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M05-Q019-I1": "body-parts",
+            "Y1M05-Q019-I2": "body-parts",
+            "Y1M05-Q019-I3": "body-parts",
+            "Y1M05-Q019-I4": "body-parts",
+            "Y1M05-Q019-I5": "body-parts",
+            "Y1M05-Q019-I6": "actions",
+            "Y1M05-Q019-I7": "actions",
+            "Y1M05-Q019-I8": "actions"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q019-SILENCE-PLEASE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M05-Q020",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "consolidation: Understand classroom commands and identify body parts. Focus: identify body.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M05-Q020-A1": "Y1M05-Q020-T1",
+            "Y1M05-Q020-A2": "Y1M05-Q020-T2",
+            "Y1M05-Q020-A3": "Y1M05-Q020-T3",
+            "Y1M05-Q020-A4": "Y1M05-Q020-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q020-THANK-YOU",
+            "IMG-Y1M05-Q020-HANDS",
+            "IMG-Y1M05-Q020-HEAD",
+            "IMG-Y1M05-Q020-LEGS",
+            "IMG-Y1M05-Q020-THANK-YOU"
+          ],
+          "options": []
+        }
+      ]
+    },
+    {
+      "moduleId": "Y1M06",
+      "questionCount": 20,
+      "questions": [
+        {
+          "questionId": "Y1M06-Q001",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "teaching: Name familiar pets and describe color/size/possession in chunks. Focus: dog.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M06-Q001-A1": "Y1M06-Q001-T1",
+            "Y1M06-Q001-A2": "Y1M06-Q001-T2",
+            "Y1M06-Q001-A3": "Y1M06-Q001-T3",
+            "Y1M06-Q001-A4": "Y1M06-Q001-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q001-DOG",
+            "IMG-Y1M06-Q001-CAT",
+            "IMG-Y1M06-Q001-DOG",
+            "IMG-Y1M06-Q001-FISH",
+            "IMG-Y1M06-Q001-RABBIT"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q002",
+          "mechanic": "matching",
+          "learningTarget": "teaching: Name familiar pets and describe color/size/possession in chunks. Focus: hamster.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M06-Q002-A1": "Y1M06-Q002-B1",
+            "Y1M06-Q002-A2": "Y1M06-Q002-B2",
+            "Y1M06-Q002-A3": "Y1M06-Q002-B3",
+            "Y1M06-Q002-A4": "Y1M06-Q002-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q002-CAT",
+            "IMG-Y1M06-Q002-CAT",
+            "IMG-Y1M06-Q002-DOG",
+            "IMG-Y1M06-Q002-FISH",
+            "IMG-Y1M06-Q002-RABBIT"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q003",
+          "mechanic": "bubble-pop",
+          "learningTarget": "guided practice: Name familiar pets and describe color/size/possession in chunks. Focus: colors.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "yellow-fish",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q003-YELLOW-FISH",
+            "IMG-Y1M06-Q003-BLUE-TURTLE",
+            "IMG-Y1M06-Q003-GREEN-RABBIT",
+            "IMG-Y1M06-Q003-GREEN-SPIDER",
+            "IMG-Y1M06-Q003-RED-BIRD",
+            "IMG-Y1M06-Q003-RED-DOG",
+            "IMG-Y1M06-Q003-YELLOW-FISH",
+            "IMG-Y1M06-Q003-YELLOW-HAMSTER"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q004",
+          "mechanic": "target-shooter",
+          "learningTarget": "guided practice: Name familiar pets and describe color/size/possession in chunks. Focus: six active pets.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "cat",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q004-CAT",
+            "IMG-Y1M06-Q004-BIRD",
+            "IMG-Y1M06-Q004-CAT",
+            "IMG-Y1M06-Q004-FISH",
+            "IMG-Y1M06-Q004-RABBIT"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M06-Q004-O1",
+              "label": "cat",
+              "answerKey": "cat",
+              "mediaId": "IMG-Y1M06-Q004-CAT",
+              "semanticTarget": "cat",
+              "mustInclude": "cat",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M06-Q004-O2",
+              "label": "fish",
+              "answerKey": "fish",
+              "mediaId": "IMG-Y1M06-Q004-FISH",
+              "semanticTarget": "fish",
+              "mustInclude": "fish",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M06-Q004-O3",
+              "label": "rabbit",
+              "answerKey": "rabbit",
+              "mediaId": "IMG-Y1M06-Q004-RABBIT",
+              "semanticTarget": "rabbit",
+              "mustInclude": "rabbit",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M06-Q004-O4",
+              "label": "bird",
+              "answerKey": "bird",
+              "mediaId": "IMG-Y1M06-Q004-BIRD",
+              "semanticTarget": "bird",
+              "mustInclude": "bird",
+              "mustNotInclude": "unrelated object, written answer cue, or extra countable targets",
+              "answerLeakRisk": "LOW_WITH_CONTEXT",
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M06-Q005",
+          "mechanic": "memory-quest",
+          "learningTarget": "First active-pet sound-to-image retrieval with familiar visual referents. Curricular target: dog; cat; fish; rabbit.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y1M06-Q005-dog",
+            "Y1M06-Q005-cat",
+            "Y1M06-Q005-fish",
+            "Y1M06-Q005-rabbit"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q005-BIRD",
+            "IMG-Y1M06-Q005-CAT",
+            "IMG-Y1M06-Q005-DOG",
+            "IMG-Y1M06-Q005-FISH",
+            "IMG-Y1M06-Q005-RABBIT"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q006",
+          "mechanic": "matching",
+          "learningTarget": "guided practice: Name familiar pets and describe color/size/possession in chunks. Focus: identify.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M06-Q006-A1": "Y1M06-Q006-B1",
+            "Y1M06-Q006-A2": "Y1M06-Q006-B2",
+            "Y1M06-Q006-A3": "Y1M06-Q006-B3",
+            "Y1M06-Q006-A4": "Y1M06-Q006-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q006-TURTLE",
+            "IMG-Y1M06-Q006-BIRD",
+            "IMG-Y1M06-Q006-FISH",
+            "IMG-Y1M06-Q006-RABBIT",
+            "IMG-Y1M06-Q006-TURTLE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q007",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "recognition: Name familiar pets and describe color/size/possession in chunks. Focus: cat.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M06-Q007-A1": "Y1M06-Q007-T1",
+            "Y1M06-Q007-A2": "Y1M06-Q007-T2",
+            "Y1M06-Q007-A3": "Y1M06-Q007-T3",
+            "Y1M06-Q007-A4": "Y1M06-Q007-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q007-HAMSTER",
+            "IMG-Y1M06-Q007-BIRD",
+            "IMG-Y1M06-Q007-HAMSTER",
+            "IMG-Y1M06-Q007-RABBIT",
+            "IMG-Y1M06-Q007-TURTLE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q008",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "recognition: Name familiar pets and describe color/size/possession in chunks. Focus: spider.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "spider",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q008-SPIDER"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M06-Q008-spider",
+              "label": "spider",
+              "answerKey": "spider",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M06-Q008-big",
+              "label": "big",
+              "answerKey": "big",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M06-Q008-small",
+              "label": "small",
+              "answerKey": "small",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M06-Q008-dog",
+              "label": "dog",
+              "answerKey": "dog",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M06-Q009",
+          "mechanic": "matching",
+          "learningTarget": "recognition: Name familiar pets and describe color/size/possession in chunks. Focus: numbers.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M06-Q009-A1": "Y1M06-Q009-B1",
+            "Y1M06-Q009-A2": "Y1M06-Q009-B2",
+            "Y1M06-Q009-A3": "Y1M06-Q009-B3",
+            "Y1M06-Q009-A4": "Y1M06-Q009-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q009-BIG",
+            "IMG-Y1M06-Q009-BIRD",
+            "IMG-Y1M06-Q009-HAMSTER",
+            "IMG-Y1M06-Q009-SPIDER",
+            "IMG-Y1M06-Q009-TURTLE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mechanic": "bubble-pop",
+          "learningTarget": "comprehension: Name familiar pets and describe color/size/possession in chunks. Focus: six active pets.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "bird",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q010-BIRD",
+            "IMG-Y1M06-Q010-BIRD",
+            "IMG-Y1M06-Q010-CAT",
+            "IMG-Y1M06-Q010-DOG",
+            "IMG-Y1M06-Q010-FISH",
+            "IMG-Y1M06-Q010-HAMSTER",
+            "IMG-Y1M06-Q010-RABBIT",
+            "IMG-Y1M06-Q010-TURTLE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q011",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "comprehension: Name familiar pets and describe color/size/possession in chunks. Focus: I have a....",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M06-Q011-A1": "Y1M06-Q011-T1",
+            "Y1M06-Q011-A2": "Y1M06-Q011-T2",
+            "Y1M06-Q011-A3": "Y1M06-Q011-T3",
+            "Y1M06-Q011-A4": "Y1M06-Q011-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q011-DOG",
+            "IMG-Y1M06-Q011-BIG",
+            "IMG-Y1M06-Q011-HAMSTER",
+            "IMG-Y1M06-Q011-SPIDER",
+            "IMG-Y1M06-Q011-TURTLE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q012",
+          "mechanic": "matching",
+          "learningTarget": "comprehension: Name familiar pets and describe color/size/possession in chunks. Focus: possess.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M06-Q012-A1": "Y1M06-Q012-B1",
+            "Y1M06-Q012-A2": "Y1M06-Q012-B2",
+            "Y1M06-Q012-A3": "Y1M06-Q012-B3",
+            "Y1M06-Q012-A4": "Y1M06-Q012-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q012-CAT",
+            "IMG-Y1M06-Q012-BIG",
+            "IMG-Y1M06-Q012-HAMSTER",
+            "IMG-Y1M06-Q012-SPIDER",
+            "IMG-Y1M06-Q012-TURTLE"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q013",
+          "mechanic": "memory-quest",
+          "learningTarget": "Changes the semantic focus from animal identity to previously taught color attributes; avoid color/animal stereotypes and preserve color vocabulary status. Curricular target: red; blue; yellow; green.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": [
+            "Y1M06-Q013-red",
+            "Y1M06-Q013-blue",
+            "Y1M06-Q013-yellow",
+            "Y1M06-Q013-green"
+          ],
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q013-FISH",
+            "IMG-Y1M06-Q013-BLUE",
+            "IMG-Y1M06-Q013-GREEN",
+            "IMG-Y1M06-Q013-RED",
+            "IMG-Y1M06-Q013-YELLOW"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q014",
+          "mechanic": "matching",
+          "learningTarget": "listening: Name familiar pets and describe color/size/possession in chunks. Focus: hamster.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M06-Q014-A1": "Y1M06-Q014-B1",
+            "Y1M06-Q014-A2": "Y1M06-Q014-B2",
+            "Y1M06-Q014-A3": "Y1M06-Q014-B3",
+            "Y1M06-Q014-A4": "Y1M06-Q014-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q014-RABBIT",
+            "IMG-Y1M06-Q014-BIG",
+            "IMG-Y1M06-Q014-HAMSTER",
+            "IMG-Y1M06-Q014-SMALL",
+            "IMG-Y1M06-Q014-SPIDER"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q015",
+          "mechanic": "drag-drop-multimedia",
+          "learningTarget": "retrieval: Name familiar pets and describe color/size/possession in chunks. Focus: colors.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M06-Q015-A1": "Y1M06-Q015-T1",
+            "Y1M06-Q015-A2": "Y1M06-Q015-T2",
+            "Y1M06-Q015-A3": "Y1M06-Q015-T3",
+            "Y1M06-Q015-A4": "Y1M06-Q015-T4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q015-BIRD",
+            "IMG-Y1M06-Q015-BLUE",
+            "IMG-Y1M06-Q015-GREEN",
+            "IMG-Y1M06-Q015-RED",
+            "IMG-Y1M06-Q015-YELLOW"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mechanic": "bubble-pop",
+          "learningTarget": "retrieval: Name familiar pets and describe color/size/possession in chunks. Focus: six active pets.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "spider",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q016-SPIDER",
+            "IMG-Y1M06-Q016-BIG",
+            "IMG-Y1M06-Q016-CAT",
+            "IMG-Y1M06-Q016-DOG",
+            "IMG-Y1M06-Q016-FISH",
+            "IMG-Y1M06-Q016-HAMSTER",
+            "IMG-Y1M06-Q016-SMALL",
+            "IMG-Y1M06-Q016-SPIDER"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q017",
+          "mechanic": "drag-drop",
+          "learningTarget": "review: Name familiar pets and describe color/size/possession in chunks. Focus: big/small + animal.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M06-Q017-I1": "big",
+            "Y1M06-Q017-I2": "small",
+            "Y1M06-Q017-I3": "small",
+            "Y1M06-Q017-I4": "small",
+            "Y1M06-Q017-I5": "small",
+            "Y1M06-Q017-I6": "small"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q017-HAMSTER"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q018",
+          "mechanic": "smart-sentence-complete",
+          "learningTarget": "review: Name familiar pets and describe color/size/possession in chunks. Focus: describe.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": "big",
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Y1M06-Q018-BIG-SPIDER"
+          ],
+          "options": [
+            {
+              "optionId": "Y1M06-Q018-big",
+              "label": "big",
+              "answerKey": "big",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M06-Q018-small",
+              "label": "small",
+              "answerKey": "small",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M06-Q018-dog",
+              "label": "dog",
+              "answerKey": "dog",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            },
+            {
+              "optionId": "Y1M06-Q018-cat",
+              "label": "cat",
+              "answerKey": "cat",
+              "mediaId": null,
+              "semanticTarget": null,
+              "mustInclude": null,
+              "mustNotInclude": null,
+              "answerLeakRisk": null,
+              "semanticReview": null
+            }
+          ]
+        },
+        {
+          "questionId": "Y1M06-Q019",
+          "mechanic": "drag-drop",
+          "learningTarget": "consolidation: Name familiar pets and describe color/size/possession in chunks. Focus: rabbit.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M06-Q019-I1": "big",
+            "Y1M06-Q019-I2": "small",
+            "Y1M06-Q019-I3": "small",
+            "Y1M06-Q019-I4": "small",
+            "Y1M06-Q019-I5": "small",
+            "Y1M06-Q019-I6": "small"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q019-BIG"
+          ],
+          "options": []
+        },
+        {
+          "questionId": "Y1M06-Q020",
+          "mechanic": "matching",
+          "learningTarget": "consolidation: Name familiar pets and describe color/size/possession in chunks. Focus: spider.",
+          "instructionPt": null,
+          "audioTranscript": null,
+          "visualRequirement": null,
+          "semanticReview": null,
+          "correctAnswer": {
+            "Y1M06-Q020-A1": "Y1M06-Q020-B1",
+            "Y1M06-Q020-A2": "Y1M06-Q020-B2",
+            "Y1M06-Q020-A3": "Y1M06-Q020-B3",
+            "Y1M06-Q020-A4": "Y1M06-Q020-B4"
+          },
+          "imageRef": null,
+          "mediaIds": [
+            "IMG-Q020-SMALL",
+            "IMG-Y1M06-Q020-CAT",
+            "IMG-Y1M06-Q020-DOG",
+            "IMG-Y1M06-Q020-FISH",
+            "IMG-Y1M06-Q020-SMALL"
+          ],
+          "options": []
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

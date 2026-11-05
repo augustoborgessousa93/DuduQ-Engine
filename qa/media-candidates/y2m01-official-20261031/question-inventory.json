@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "DUDUQ_MEDIA_QUESTION_INVENTORY_V1",
+  "createdAt": "2026-10-31T19:21:56.1401776Z",
+  "moduleId": "Y2M01",
+  "questionCount": 20,
+  "source": {
+    "path": "dist-pages/content/english/year-2/module-01/questions.json",
+    "sha256": "257776f3d2a896a929db2233d3d238ba2f2881d652cdab0be82dae5c3519f432",
+    "planningAuthority": "CURRICULAR_MASTER_V3"
+  },
+  "scope": "Read-only inventory made before candidate generation. No question contract, answer key, mechanic, registry, runtime, or Gold Master was changed.",
+  "questions": [
+    {
+      "questionId": "Y2M01-Q001",
+      "mechanicId": "matching",
+      "phase": "TEACHING",
+      "instruction": "Match each phrase to its picture.",
+      "semanticTargets": ["Hello!", "Good morning!", "Good night.", "Goodbye!"],
+      "referencedMediaIds": ["IMG-Y1M01-GREETING-INFORMAL-001", "IMG-Y1M01-GREETING-MORNING-001", "Y1M01-EMOJI-NIGHT-001", "IMG-Y1M01-FAREWELL-GENERIC-001"]
+    },
+    {
+      "questionId": "Y2M01-Q002",
+      "mechanicId": "drag-drop-multimedia",
+      "phase": "TEACHING",
+      "instruction": "Drag each audio to its letter.",
+      "semanticTargets": ["A", "B", "C", "D"],
+      "referencedMediaIds": ["MEDIA-LETTER-A", "MEDIA-LETTER-B", "MEDIA-LETTER-C", "MEDIA-LETTER-D"]
+    },
+    {
+      "questionId": "Y2M01-Q003",
+      "mechanicId": "bubble-pop",
+      "phase": "GUIDED_PRACTICE",
+      "instruction": "Pop the matching farewell bubble.",
+      "correctSemanticTarget": "Goodbye!",
+      "distractorSemanticTargets": ["Hello!", "Good morning!", "Good afternoon!", "Night", "Leo"],
+      "referencedMediaIds": ["IMG-Y1M01-FAREWELL-GENERIC-001", "IMG-Y1M01-GREETING-INFORMAL-001", "IMG-Y1M01-GREETING-MORNING-001", "IMG-Y1M01-GREETING-AFTERNOON-001", "Y1M01-EMOJI-NIGHT-001", "IMG-Y1M01-NAME-LEO-001"]
+    },
+    {
+      "questionId": "Y2M01-Q004",
+      "mechanicId": "drag-drop",
+      "phase": "GUIDED_PRACTICE",
+      "instruction": "Listen and sort: A–C or D–E.",
+      "semanticTargets": ["A", "B", "C", "D", "E"],
+      "referencedMediaIds": []
+    },
+    {
+      "questionId": "Y2M01-Q005",
+      "mechanicId": "memory-quest",
+      "phase": "RECOGNITION",
+      "instruction": "Listen and find each letter pair.",
+      "semanticTargets": ["A", "B", "C", "D", "E"],
+      "referencedMediaIds": []
+    },
+    {
+      "questionId": "Y2M01-Q006",
+      "mechanicId": "drag-drop-multimedia",
+      "phase": "GUIDED_PRACTICE",
+      "instruction": "Drag each audio to a picture.",
+      "semanticTargets": ["Hello!", "Good morning!", "Good afternoon!", "Goodbye!"],
+      "referencedMediaIds": ["IMG-Y1M01-GREETING-INFORMAL-001", "IMG-Y1M01-GREETING-MORNING-001", "IMG-Y1M01-GREETING-AFTERNOON-001", "IMG-Y1M01-FAREWELL-GENERIC-001"]
+    },
+    {
+      "questionId": "Y2M01-Q007",
+      "mechanicId": "matching",
+      "phase": "RECOGNITION",
+      "instruction": "Match each phrase to its picture.",
+      "semanticTargets": ["See you.", "Goodbye!", "Good morning!", "Good night."],
+      "referencedMediaIds": ["IMG-Y2M01-SEE-YOU-001", "IMG-Y1M01-FAREWELL-GENERIC-001", "IMG-Y1M01-GREETING-MORNING-001", "Y1M01-EMOJI-NIGHT-001"]
+    },
+    {
+      "questionId": "Y2M01-Q008",
+      "mechanicId": "smart-sentence-complete",
+      "phase": "RECOGNITION",
+      "instruction": "Complete the letter sequence.",
+      "semanticTargets": ["alphabetic letter sequence"],
+      "referencedMediaIds": []
+    },
+    {
+      "questionId": "Y2M01-Q009",
+      "mechanicId": "target-shooter",
+      "phase": "RECOGNITION",
+      "instruction": "Listen and shoot the matching name.",
+      "semanticTargets": ["Leo", "Mia", "Ana", "Ben"],
+      "referencedMediaIds": ["IMG-Y1M01-NAME-LEO-001", "IMG-Y1M01-NAME-MIA-001", "IMG-Y1M01-NAME-TAGS-001", "IMG-Y1M01-NAME-QUESTION-ANSWER-001"]
+    },
+    {
+      "questionId": "Y2M01-Q010",
+      "mechanicId": "drag-drop",
+      "phase": "COMPREHENSION",
+      "instruction": "Listen and sort: A–E or F–J.",
+      "semanticTargets": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+      "referencedMediaIds": []
+    },
+    {
+      "questionId": "Y2M01-Q011",
+      "mechanicId": "memory-quest",
+      "phase": "COMPREHENSION",
+      "instruction": "Listen and find each letter pair.",
+      "semanticTargets": ["K", "L", "M", "N"],
+      "referencedMediaIds": []
+    },
+    {
+      "questionId": "Y2M01-Q012",
+      "mechanicId": "drag-drop-multimedia",
+      "phase": "COMPREHENSION",
+      "instruction": "Drag each audio to its farewell picture.",
+      "semanticTargets": ["Goodbye!", "Good night.", "See you.", "Goodbye, Ana!"],
+      "referencedMediaIds": ["IMG-Y1M01-FAREWELL-GENERIC-001", "Y1M01-EMOJI-NIGHT-001", "IMG-Y2M01-SEE-YOU-001", "IMG-Y1M01-FAREWELL-ANA-001"]
+    },
+    {
+      "questionId": "Y2M01-Q013",
+      "mechanicId": "target-shooter",
+      "phase": "LISTENING",
+      "instruction": "Listen and shoot the matching farewell.",
+      "correctSemanticTarget": "Good night",
+      "optionSemanticTargets": ["Good morning", "Good afternoon", "Good night", "Hello"],
+      "referencedMediaIds": ["IMG-Y1M01-GREETING-MORNING-001", "IMG-Y1M01-GREETING-AFTERNOON-001", "Y1M01-EMOJI-NIGHT-001", "IMG-Y1M01-GREETING-INFORMAL-001"]
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "mechanicId": "drag-drop-multimedia",
+      "phase": "LISTENING",
+      "instruction": "Drag each audio to its letter.",
+      "semanticTargets": ["O", "P", "Q", "R"],
+      "referencedMediaIds": ["MEDIA-LETTER-O", "MEDIA-LETTER-P", "MEDIA-LETTER-Q", "MEDIA-LETTER-R"]
+    },
+    {
+      "questionId": "Y2M01-Q015",
+      "mechanicId": "memory-quest",
+      "phase": "RETRIEVAL",
+      "instruction": "Listen and find each letter pair.",
+      "semanticTargets": ["F", "G", "H", "I", "J"],
+      "referencedMediaIds": []
+    },
+    {
+      "questionId": "Y2M01-Q016",
+      "mechanicId": "drag-drop-multimedia",
+      "phase": "RETRIEVAL",
+      "instruction": "Drag each audio to its letter.",
+      "semanticTargets": ["S", "T", "U", "V"],
+      "referencedMediaIds": ["MEDIA-LETTER-S", "MEDIA-LETTER-T", "MEDIA-LETTER-U", "MEDIA-LETTER-V"]
+    },
+    {
+      "questionId": "Y2M01-Q017",
+      "mechanicId": "matching",
+      "phase": "REVIEW",
+      "instruction": "Match each name to the person.",
+      "semanticTargets": ["My name is Leo.", "My name is Mia.", "My name is Ana."],
+      "referencedMediaIds": ["IMG-Y1M01-NAME-LEO-001", "IMG-Y1M01-NAME-MIA-001", "IMG-Y1M01-NAME-TAGS-001"]
+    },
+    {
+      "questionId": "Y2M01-Q018",
+      "mechanicId": "target-shooter",
+      "phase": "REVIEW",
+      "instruction": "Listen and shoot the matching scene.",
+      "correctSemanticTarget": "one child asks another child's name / What's your name?",
+      "distractorSemanticTargets": ["children greeting", "two people saying see you", "bedtime / good night"],
+      "referencedMediaIds": ["IMG-Y2M01-Q018-NAME-QUESTION-SCENE-V1", "IMG-Y1M01-GREETING-GENERIC-001", "IMG-Y2M01-SEE-YOU-001", "Y1M01-EMOJI-NIGHT-001"]
+    },
+    {
+      "questionId": "Y2M01-Q019",
+      "mechanicId": "drag-drop",
+      "phase": "CONSOLIDATION",
+      "instruction": "Listen: greeting or farewell?",
+      "semanticTargets": ["greeting", "farewell"],
+      "referencedMediaIds": []
+    },
+    {
+      "questionId": "Y2M01-Q020",
+      "mechanicId": "drag-drop-multimedia",
+      "phase": "CONSOLIDATION",
+      "instruction": "Drag each audio to its letter.",
+      "semanticTargets": ["W", "X", "Y", "Z"],
+      "referencedMediaIds": ["MEDIA-LETTER-W", "MEDIA-LETTER-X", "MEDIA-LETTER-Y", "MEDIA-LETTER-Z"]
+    }
+  ]
+}

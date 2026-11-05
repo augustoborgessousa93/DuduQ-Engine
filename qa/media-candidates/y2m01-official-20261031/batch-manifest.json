@@ -1,0 +1,1828 @@
+{
+  "schemaVersion": "DUDUQ_CHATGPT_MEDIA_BINDINGS_V1",
+  "createdAt": "2026-10-31T19:21:56.1401776Z",
+  "moduleId": "Y2M01",
+  "source": "Codex built-in native image generation plus verified native-original reuse",
+  "provider": "Codex built-in image_gen",
+  "status": "HASH_BOUND_OCCURRENCE_SCOPED_REVIEW_BUNDLE_READY_FOR_QA_OVERLAY",
+  "questionSource": "dist-pages/content/english/year-2/module-01/questions.json",
+  "questionSourceSha256": "257776f3d2a896a929db2233d3d238ba2f2881d652cdab0be82dae5c3519f432",
+  "originalAuditedPendingIds": 29,
+  "finalBindingIds": 57,
+  "totalQuestionUsageRecords": 93,
+  "questionContractsReviewed": 20,
+  "preservesAnswerKeysAndMechanics": true,
+  "productionApproved": false,
+  "integrated": false,
+  "approvalFlagsChanged": false,
+  "assets": [
+    {
+      "assetKey": "Y2M01-CANDIDATE-ANA-SEM-0A0CE0CBAB",
+      "file": "images/DUDUQ-Y2M01-ANA.png",
+      "semanticTarget": "My name is Ana.",
+      "sha256": "0f56a9e46f98091832198163ef21c678d68cb1f81a292a4de3fb01a00b3bde6f",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q017-CTX-63E13DA12AEB",
+          "questionId": "Y2M01-Q017",
+          "splitFromMediaId": "IMG-Y1M01-NAME-TAGS-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Ana",
+      "sourceMediaIds": [
+        "IMG-Y1M01-NAME-TAGS-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-ANA-SEM-DE395D8A8A",
+      "file": "images/DUDUQ-Y2M01-ANA.png",
+      "semanticTarget": "Ana",
+      "sha256": "0f56a9e46f98091832198163ef21c678d68cb1f81a292a4de3fb01a00b3bde6f",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q009-CTX-EDA7E6374913",
+          "questionId": "Y2M01-Q009",
+          "splitFromMediaId": "IMG-Y1M01-NAME-TAGS-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Ana",
+      "sourceMediaIds": [
+        "IMG-Y1M01-NAME-TAGS-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-BEN-SEM-2362103D26",
+      "file": "images/DUDUQ-Y2M01-BEN.png",
+      "semanticTarget": "Ben",
+      "sha256": "bcdbbaa2720afcdc0b8a2c459996088782bc14bf20453a046df6bd6327cf5ffc",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q009-CTX-D93C331A31DC",
+          "questionId": "Y2M01-Q009",
+          "splitFromMediaId": "IMG-Y1M01-NAME-QUESTION-ANSWER-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Ben",
+      "sourceMediaIds": [
+        "IMG-Y1M01-NAME-QUESTION-ANSWER-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-AFTERNOON-SEM-47B7090270",
+      "file": "images/DUDUQ-Y2M01-GOOD-AFTERNOON.png",
+      "semanticTarget": "Good afternoon!",
+      "sha256": "1c50e519210fe46d7c002cd547a7200bc3b257c2f975f9897b4f7d1890d920ac",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q003-CTX-B20A82308495",
+          "questionId": "Y2M01-Q003",
+          "splitFromMediaId": "IMG-Y1M01-GREETING-AFTERNOON-001"
+        },
+        {
+          "mediaId": "IMG-Y2M01-Q006-CTX-7353D3A03C06",
+          "questionId": "Y2M01-Q006",
+          "splitFromMediaId": "IMG-Y1M01-GREETING-AFTERNOON-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Good afternoon",
+      "sourceMediaIds": [
+        "IMG-Y1M01-GREETING-AFTERNOON-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-AFTERNOON-SEM-57304608A4",
+      "file": "images/DUDUQ-Y2M01-GOOD-AFTERNOON.png",
+      "semanticTarget": "Good afternoon",
+      "sha256": "1c50e519210fe46d7c002cd547a7200bc3b257c2f975f9897b4f7d1890d920ac",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q013-CTX-C34739F5A6E9",
+          "questionId": "Y2M01-Q013",
+          "splitFromMediaId": "IMG-Y1M01-GREETING-AFTERNOON-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Good afternoon",
+      "sourceMediaIds": [
+        "IMG-Y1M01-GREETING-AFTERNOON-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-MORNING-SEM-0DEFBC083D",
+      "file": "images/DUDUQ-Y2M01-GOOD-MORNING.png",
+      "semanticTarget": "Good morning!",
+      "sha256": "e4d3f90b4c9c2c8a0abb08f534beb1f24eab519725fc65487f7d667a9302a247",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q001-CTX-485267600BE1",
+          "questionId": "Y2M01-Q001",
+          "splitFromMediaId": "IMG-Y1M01-GREETING-MORNING-001"
+        },
+        {
+          "mediaId": "IMG-Y2M01-Q003-CTX-90A2ACCFA283",
+          "questionId": "Y2M01-Q003",
+          "splitFromMediaId": "IMG-Y1M01-GREETING-MORNING-001"
+        },
+        {
+          "mediaId": "IMG-Y2M01-Q006-CTX-C131B2238DBC",
+          "questionId": "Y2M01-Q006",
+          "splitFromMediaId": "IMG-Y1M01-GREETING-MORNING-001"
+        },
+        {
+          "mediaId": "IMG-Y2M01-Q007-CTX-17E8CB23059D",
+          "questionId": "Y2M01-Q007",
+          "splitFromMediaId": "IMG-Y1M01-GREETING-MORNING-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Good morning",
+      "sourceMediaIds": [
+        "IMG-Y1M01-GREETING-MORNING-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-MORNING-SEM-BAFCA01206",
+      "file": "images/DUDUQ-Y2M01-GOOD-MORNING.png",
+      "semanticTarget": "Good morning",
+      "sha256": "e4d3f90b4c9c2c8a0abb08f534beb1f24eab519725fc65487f7d667a9302a247",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q013-CTX-6C109746AAC2",
+          "questionId": "Y2M01-Q013",
+          "splitFromMediaId": "IMG-Y1M01-GREETING-MORNING-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Good morning",
+      "sourceMediaIds": [
+        "IMG-Y1M01-GREETING-MORNING-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-NIGHT-SEM-6363A9406A",
+      "file": "images/DUDUQ-Y2M01-GOOD-NIGHT.png",
+      "semanticTarget": "Good night",
+      "sha256": "b134b4a2268ad5ca6104377e52eddbeafb0ffac0b7e921124cbbb8d21bc84793",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q013-CTX-248432045878",
+          "questionId": "Y2M01-Q013",
+          "splitFromMediaId": "Y1M01-EMOJI-NIGHT-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Good night / bedtime",
+      "sourceMediaIds": [
+        "Y1M01-EMOJI-NIGHT-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-NIGHT-SEM-91BB77183A",
+      "file": "images/DUDUQ-Y2M01-GOOD-NIGHT.png",
+      "semanticTarget": "Good night.",
+      "sha256": "b134b4a2268ad5ca6104377e52eddbeafb0ffac0b7e921124cbbb8d21bc84793",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q001-CTX-B8D656FAFC29",
+          "questionId": "Y2M01-Q001",
+          "splitFromMediaId": "Y1M01-EMOJI-NIGHT-001"
+        },
+        {
+          "mediaId": "IMG-Y2M01-Q007-CTX-EC5219515A86",
+          "questionId": "Y2M01-Q007",
+          "splitFromMediaId": "Y1M01-EMOJI-NIGHT-001"
+        },
+        {
+          "mediaId": "IMG-Y2M01-Q012-CTX-5E062ABCDD61",
+          "questionId": "Y2M01-Q012",
+          "splitFromMediaId": "Y1M01-EMOJI-NIGHT-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Good night / bedtime",
+      "sourceMediaIds": [
+        "Y1M01-EMOJI-NIGHT-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-NIGHT-SEM-9AF2D20246",
+      "file": "images/DUDUQ-Y2M01-GOOD-NIGHT.png",
+      "semanticTarget": "good-night context",
+      "sha256": "b134b4a2268ad5ca6104377e52eddbeafb0ffac0b7e921124cbbb8d21bc84793",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q018-CTX-391882292DEA",
+          "questionId": "Y2M01-Q018",
+          "splitFromMediaId": "Y1M01-EMOJI-NIGHT-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Good night / bedtime",
+      "sourceMediaIds": [
+        "Y1M01-EMOJI-NIGHT-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-NIGHT-SEM-A33A6AA431",
+      "file": "images/DUDUQ-Y2M01-GOOD-NIGHT.png",
+      "semanticTarget": "Night",
+      "sha256": "b134b4a2268ad5ca6104377e52eddbeafb0ffac0b7e921124cbbb8d21bc84793",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q003-CTX-2362BF4A3678",
+          "questionId": "Y2M01-Q003",
+          "splitFromMediaId": "Y1M01-EMOJI-NIGHT-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Good night / bedtime",
+      "sourceMediaIds": [
+        "Y1M01-EMOJI-NIGHT-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-NIGHT-SEM-C463A1D069",
+      "file": "images/DUDUQ-Y2M01-GOOD-NIGHT.png",
+      "semanticTarget": "bedtime / good night",
+      "sha256": "b134b4a2268ad5ca6104377e52eddbeafb0ffac0b7e921124cbbb8d21bc84793",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q018-CTX-D1B6FEEED000",
+          "questionId": "Y2M01-Q018",
+          "splitFromMediaId": "Y1M01-EMOJI-NIGHT-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Good night / bedtime",
+      "sourceMediaIds": [
+        "Y1M01-EMOJI-NIGHT-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOODBYE-SEM-0F8A5A004B",
+      "file": "images/DUDUQ-Y2M01-GOODBYE.png",
+      "semanticTarget": "Goodbye, Ana!",
+      "sha256": "8e1eb51c1d698809f19a6ec7a38d3843ac2512bb0c76c232ee5be009d7642475",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q012-CTX-A55A9DCE56D7",
+          "questionId": "Y2M01-Q012",
+          "splitFromMediaId": "IMG-Y1M01-FAREWELL-ANA-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Goodbye / Goodbye, Ana",
+      "sourceMediaIds": [
+        "IMG-Y1M01-FAREWELL-ANA-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOODBYE-SEM-9072E97653",
+      "file": "images/DUDUQ-Y2M01-GOODBYE.png",
+      "semanticTarget": "Goodbye!",
+      "sha256": "8e1eb51c1d698809f19a6ec7a38d3843ac2512bb0c76c232ee5be009d7642475",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q001-CTX-E3BF6D0A7785",
+          "questionId": "Y2M01-Q001",
+          "splitFromMediaId": "IMG-Y1M01-FAREWELL-GENERIC-001"
+        },
+        {
+          "mediaId": "IMG-Y2M01-Q003-CTX-C7C2D66E343E",
+          "questionId": "Y2M01-Q003",
+          "splitFromMediaId": "IMG-Y1M01-FAREWELL-GENERIC-001"
+        },
+        {
+          "mediaId": "IMG-Y2M01-Q006-CTX-62B8D65C5AA2",
+          "questionId": "Y2M01-Q006",
+          "splitFromMediaId": "IMG-Y1M01-FAREWELL-GENERIC-001"
+        },
+        {
+          "mediaId": "IMG-Y2M01-Q007-CTX-212C9553D40E",
+          "questionId": "Y2M01-Q007",
+          "splitFromMediaId": "IMG-Y1M01-FAREWELL-GENERIC-001"
+        },
+        {
+          "mediaId": "IMG-Y2M01-Q012-CTX-B6FCC91BD1BD",
+          "questionId": "Y2M01-Q012",
+          "splitFromMediaId": "IMG-Y1M01-FAREWELL-GENERIC-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Goodbye / Goodbye, Ana",
+      "sourceMediaIds": [
+        "IMG-Y1M01-FAREWELL-GENERIC-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GREETING-GENERIC-SEM-163BF75731",
+      "file": "images/DUDUQ-Y2M01-GREETING-GENERIC.png",
+      "semanticTarget": "greeting",
+      "sha256": "07c6ce053a07929e5cfc6e471ee71eb335d164734ea8db25a22cfd71512efe13",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q018-CTX-7ACE03D40361",
+          "questionId": "Y2M01-Q018",
+          "splitFromMediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "children greeting",
+      "sourceMediaIds": [
+        "IMG-Y1M01-GREETING-GENERIC-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GREETING-GENERIC-SEM-B404655538",
+      "file": "images/DUDUQ-Y2M01-GREETING-GENERIC.png",
+      "semanticTarget": "children greeting",
+      "sha256": "07c6ce053a07929e5cfc6e471ee71eb335d164734ea8db25a22cfd71512efe13",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q018-CTX-E7EDFF8F7248",
+          "questionId": "Y2M01-Q018",
+          "splitFromMediaId": "IMG-Y1M01-GREETING-GENERIC-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "children greeting",
+      "sourceMediaIds": [
+        "IMG-Y1M01-GREETING-GENERIC-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GREETING-INFORMAL-SEM-B39F2E44CF",
+      "file": "images/DUDUQ-Y2M01-GREETING-INFORMAL.png",
+      "semanticTarget": "Hello!",
+      "sha256": "b1f340b1cabc2466b1a632db7d85abff1f8f95198fba11b1c209ad8750bacc65",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q001-CTX-E6B5DFD5490C",
+          "questionId": "Y2M01-Q001",
+          "splitFromMediaId": "IMG-Y1M01-GREETING-INFORMAL-001"
+        },
+        {
+          "mediaId": "IMG-Y2M01-Q003-CTX-4C7DA319347A",
+          "questionId": "Y2M01-Q003",
+          "splitFromMediaId": "IMG-Y1M01-GREETING-INFORMAL-001"
+        },
+        {
+          "mediaId": "IMG-Y2M01-Q006-CTX-C78A1E9346FC",
+          "questionId": "Y2M01-Q006",
+          "splitFromMediaId": "IMG-Y1M01-GREETING-INFORMAL-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Hello",
+      "sourceMediaIds": [
+        "IMG-Y1M01-GREETING-INFORMAL-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GREETING-INFORMAL-SEM-EACFCB3D80",
+      "file": "images/DUDUQ-Y2M01-GREETING-INFORMAL.png",
+      "semanticTarget": "Hello",
+      "sha256": "b1f340b1cabc2466b1a632db7d85abff1f8f95198fba11b1c209ad8750bacc65",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q013-CTX-7706A55DDC36",
+          "questionId": "Y2M01-Q013",
+          "splitFromMediaId": "IMG-Y1M01-GREETING-INFORMAL-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Hello",
+      "sourceMediaIds": [
+        "IMG-Y1M01-GREETING-INFORMAL-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LEO-SEM-5F3214E06A",
+      "file": "images/DUDUQ-Y2M01-LEO.png",
+      "semanticTarget": "Leo",
+      "sha256": "703ef0a0674cb315697e0c0fdb26e4715f8334893019f62d774c5dd01f0b39d4",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q003-CTX-DF2A706961F8",
+          "questionId": "Y2M01-Q003",
+          "splitFromMediaId": "IMG-Y1M01-NAME-LEO-001"
+        },
+        {
+          "mediaId": "IMG-Y2M01-Q009-CTX-DEA0021F79C4",
+          "questionId": "Y2M01-Q009",
+          "splitFromMediaId": "IMG-Y1M01-NAME-LEO-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Leo",
+      "sourceMediaIds": [
+        "IMG-Y1M01-NAME-LEO-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LEO-SEM-F26BAC67C2",
+      "file": "images/DUDUQ-Y2M01-LEO.png",
+      "semanticTarget": "My name is Leo.",
+      "sha256": "703ef0a0674cb315697e0c0fdb26e4715f8334893019f62d774c5dd01f0b39d4",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q017-CTX-2734BE5908B9",
+          "questionId": "Y2M01-Q017",
+          "splitFromMediaId": "IMG-Y1M01-NAME-LEO-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Leo",
+      "sourceMediaIds": [
+        "IMG-Y1M01-NAME-LEO-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-A-SEM-71C00ED1E6",
+      "file": "images/DUDUQ-Y2M01-LETTER-A.png",
+      "semanticTarget": "A",
+      "sha256": "45a0be67a1decff6ca5568884f271d1fd5b90faa9dcb5ca876e455d10eb9d38e",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q002-CTX-6D15E7FE5019",
+          "questionId": "Y2M01-Q002",
+          "splitFromMediaId": "MEDIA-LETTER-A"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase A",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-A"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-B-SEM-6A89BE635E",
+      "file": "images/DUDUQ-Y2M01-LETTER-B.png",
+      "semanticTarget": "B",
+      "sha256": "c106081f6e8b230577b66ed0b9e4583e708e86aeb182e7bbf010fb761f132e2b",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q002-CTX-BCD7B40FF58F",
+          "questionId": "Y2M01-Q002",
+          "splitFromMediaId": "MEDIA-LETTER-B"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase B",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-B"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-C-SEM-050EE592A5",
+      "file": "images/DUDUQ-Y2M01-LETTER-C.png",
+      "semanticTarget": "C",
+      "sha256": "8b71947d742140dbb5da17de8cfcba88763cebad499069b700dfcb5f40b6546b",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q002-CTX-EB23D5B84940",
+          "questionId": "Y2M01-Q002",
+          "splitFromMediaId": "MEDIA-LETTER-C"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase C",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-C"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-D-SEM-41DA74AA8A",
+      "file": "images/DUDUQ-Y2M01-LETTER-D.png",
+      "semanticTarget": "D",
+      "sha256": "699a56752b3917251bfec5453216ec14dbc4a562476c56d4eabf4be59c5cff75",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q002-CTX-0DA513E4F9AB",
+          "questionId": "Y2M01-Q002",
+          "splitFromMediaId": "MEDIA-LETTER-D"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase D",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-D"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-O-SEM-86129C1F1E",
+      "file": "images/DUDUQ-Y2M01-LETTER-O.png",
+      "semanticTarget": "O",
+      "sha256": "d5283a2a9e7518791f4553c872e795b7c045cda1003ef060c87cce311f4da54d",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q014-CTX-1040362DDAAB",
+          "questionId": "Y2M01-Q014",
+          "splitFromMediaId": "MEDIA-LETTER-O"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase O",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-O"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-P-SEM-A227026E0C",
+      "file": "images/DUDUQ-Y2M01-LETTER-P.png",
+      "semanticTarget": "P",
+      "sha256": "7cad2d24197ec5dbb65a4161dbf6277f03da7b2a56ab4259bccee9adf539c646",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q014-CTX-71B5260D713A",
+          "questionId": "Y2M01-Q014",
+          "splitFromMediaId": "MEDIA-LETTER-P"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase P",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-P"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-Q-SEM-D9AD3FBA28",
+      "file": "images/DUDUQ-Y2M01-LETTER-Q.png",
+      "semanticTarget": "Q",
+      "sha256": "d645c5ee4e1fd6db47f253fb4254a6b0bb567dd1fc266628b26629432add80cf",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q014-CTX-7D6E12041383",
+          "questionId": "Y2M01-Q014",
+          "splitFromMediaId": "MEDIA-LETTER-Q"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase Q",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-Q"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-R-SEM-DC8B34CF5D",
+      "file": "images/DUDUQ-Y2M01-LETTER-R.png",
+      "semanticTarget": "R",
+      "sha256": "403ee54ef4152532d8ad1bed47fc16fdfe98d712d95fcd4dc9816d25a9a7eab4",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q014-CTX-DE3153251323",
+          "questionId": "Y2M01-Q014",
+          "splitFromMediaId": "MEDIA-LETTER-R"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase R",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-R"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-S-SEM-33544C6AA8",
+      "file": "images/DUDUQ-Y2M01-LETTER-S.png",
+      "semanticTarget": "S",
+      "sha256": "bf1734e4a6995b269356db2421fde3050f1712ce0ff3755fced4e990ad5e9991",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q016-CTX-87B78C5D0967",
+          "questionId": "Y2M01-Q016",
+          "splitFromMediaId": "MEDIA-LETTER-S"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase S",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-S"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-T-SEM-EF1C1F2B7B",
+      "file": "images/DUDUQ-Y2M01-LETTER-T.png",
+      "semanticTarget": "T",
+      "sha256": "b9f56cfe20b2393486c20300c75266e7ec8687b1907f4a6b0894d0ea775c80d6",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q016-CTX-0872DDFA64DD",
+          "questionId": "Y2M01-Q016",
+          "splitFromMediaId": "MEDIA-LETTER-T"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase T",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-T"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-U-SEM-E9DAE8E579",
+      "file": "images/DUDUQ-Y2M01-LETTER-U.png",
+      "semanticTarget": "U",
+      "sha256": "8c41ac0773b391f8343b048d04cb40be76ce19d6dc9f59d42672badcc599a2a0",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q016-CTX-8025B5416F3A",
+          "questionId": "Y2M01-Q016",
+          "splitFromMediaId": "MEDIA-LETTER-U"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase U",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-U"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-V-SEM-CDCB57C5A3",
+      "file": "images/DUDUQ-Y2M01-LETTER-V.png",
+      "semanticTarget": "V",
+      "sha256": "798c6c1de8ac19eb081c367a35c99768eb399008b2db2b8921e4ea48bcd03201",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q016-CTX-3F2252670B01",
+          "questionId": "Y2M01-Q016",
+          "splitFromMediaId": "MEDIA-LETTER-V"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase V",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-V"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-W-SEM-5620E2FF70",
+      "file": "images/DUDUQ-Y2M01-LETTER-W.png",
+      "semanticTarget": "W",
+      "sha256": "8b44ec2275e9e8d0b2009b12e19f54f1d13abb3a1d10679f5366fdab8d2cd1c6",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q020-CTX-54A67F038F93",
+          "questionId": "Y2M01-Q020",
+          "splitFromMediaId": "MEDIA-LETTER-W"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase W",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-W"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-X-SEM-E54FC634CB",
+      "file": "images/DUDUQ-Y2M01-LETTER-X.png",
+      "semanticTarget": "X",
+      "sha256": "08d736fd08de8cc95671e740f5f0906aceecda8c9adecf64b89180e0b7d91e41",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q020-CTX-260BB50EE375",
+          "questionId": "Y2M01-Q020",
+          "splitFromMediaId": "MEDIA-LETTER-X"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase X",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-X"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-Y-SEM-61874C0D04",
+      "file": "images/DUDUQ-Y2M01-LETTER-Y.png",
+      "semanticTarget": "Y",
+      "sha256": "eb342dbfd6e55f8f2cb35eeefebf8d1a5a53f3f62405f0e37499f946bc21d972",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q020-CTX-1DD5B68D1837",
+          "questionId": "Y2M01-Q020",
+          "splitFromMediaId": "MEDIA-LETTER-Y"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase Y",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-Y"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-Z-SEM-74C6E9C017",
+      "file": "images/DUDUQ-Y2M01-LETTER-Z.png",
+      "semanticTarget": "Z",
+      "sha256": "20a113d2284985e5efbe6b2d44fac75e89cfe81db8565f863d584335215f4e1d",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q020-CTX-BB49C21D9E37",
+          "questionId": "Y2M01-Q020",
+          "splitFromMediaId": "MEDIA-LETTER-Z"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "uppercase Z",
+      "sourceMediaIds": [
+        "MEDIA-LETTER-Z"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-MIA-SEM-3EB1E41223",
+      "file": "images/DUDUQ-Y2M01-MIA.png",
+      "semanticTarget": "My name is Mia.",
+      "sha256": "453e497d9f61292b94dbf25945c46580e98cad6836e7923a87f365747be999c4",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q017-CTX-484493A138D7",
+          "questionId": "Y2M01-Q017",
+          "splitFromMediaId": "IMG-Y1M01-NAME-MIA-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Mia",
+      "sourceMediaIds": [
+        "IMG-Y1M01-NAME-MIA-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-MIA-SEM-8D8A59BD0D",
+      "file": "images/DUDUQ-Y2M01-MIA.png",
+      "semanticTarget": "Mia",
+      "sha256": "453e497d9f61292b94dbf25945c46580e98cad6836e7923a87f365747be999c4",
+      "pixelWidth": 1536,
+      "pixelHeight": 1536,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q009-CTX-FABAF319119C",
+          "questionId": "Y2M01-Q009",
+          "splitFromMediaId": "IMG-Y1M01-NAME-MIA-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "Mia",
+      "sourceMediaIds": [
+        "IMG-Y1M01-NAME-MIA-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-SEE-YOU-SEM-186E05FCF8",
+      "file": "images/DUDUQ-Y2M01-SEE-YOU.png",
+      "semanticTarget": "See you.",
+      "sha256": "d1f21b3416a1d36eca41085525a9ab2e724a75e629d2cdc5d01629a9ce19b585",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q007-CTX-98CBF76A809A",
+          "questionId": "Y2M01-Q007",
+          "splitFromMediaId": "IMG-Y2M01-SEE-YOU-001"
+        },
+        {
+          "mediaId": "IMG-Y2M01-Q012-CTX-35BA44B20DC3",
+          "questionId": "Y2M01-Q012",
+          "splitFromMediaId": "IMG-Y2M01-SEE-YOU-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "See you / farewell",
+      "sourceMediaIds": [
+        "IMG-Y2M01-SEE-YOU-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-SEE-YOU-SEM-64D206F277",
+      "file": "images/DUDUQ-Y2M01-SEE-YOU.png",
+      "semanticTarget": "farewell",
+      "sha256": "d1f21b3416a1d36eca41085525a9ab2e724a75e629d2cdc5d01629a9ce19b585",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q018-CTX-100A4FF8D282",
+          "questionId": "Y2M01-Q018",
+          "splitFromMediaId": "IMG-Y2M01-SEE-YOU-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "See you / farewell",
+      "sourceMediaIds": [
+        "IMG-Y2M01-SEE-YOU-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-SEE-YOU-SEM-7B8E78ECA3",
+      "file": "images/DUDUQ-Y2M01-SEE-YOU.png",
+      "semanticTarget": "two people saying see you",
+      "sha256": "d1f21b3416a1d36eca41085525a9ab2e724a75e629d2cdc5d01629a9ce19b585",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q018-CTX-0A5AEF625D64",
+          "questionId": "Y2M01-Q018",
+          "splitFromMediaId": "IMG-Y2M01-SEE-YOU-001"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "See you / farewell",
+      "sourceMediaIds": [
+        "IMG-Y2M01-SEE-YOU-001"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-WHATS-YOUR-NAME-SEM-03086AC4B0",
+      "file": "images/DUDUQ-Y2M01-WHATS-YOUR-NAME.png",
+      "semanticTarget": "one child asks another child's name",
+      "sha256": "3a8f1f8fb4c5b84e834a9f654d2acdc1337dfc69fe4c654098ba75c3f0de28b7",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q018-CTX-E1330FDD54E0",
+          "questionId": "Y2M01-Q018",
+          "splitFromMediaId": "IMG-Y2M01-Q018-NAME-QUESTION-SCENE-V1"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "What's your name? social question",
+      "sourceMediaIds": [
+        "IMG-Y2M01-Q018-NAME-QUESTION-SCENE-V1"
+      ]
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-WHATS-YOUR-NAME-SEM-B3C0AB87D0",
+      "file": "images/DUDUQ-Y2M01-WHATS-YOUR-NAME.png",
+      "semanticTarget": "What's your name?",
+      "sha256": "3a8f1f8fb4c5b84e834a9f654d2acdc1337dfc69fe4c654098ba75c3f0de28b7",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y2m01-official-20261031/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y2M01-Q018-CTX-F61F22DF7405",
+          "questionId": "Y2M01-Q018",
+          "splitFromMediaId": "IMG-Y2M01-Q018-NAME-QUESTION-SCENE-V1"
+        }
+      ],
+      "provenance": {
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "evidenceFile": "generation-provenance.json"
+      },
+      "visualSemanticTarget": "What's your name? social question",
+      "sourceMediaIds": [
+        "IMG-Y2M01-Q018-NAME-QUESTION-SCENE-V1"
+      ]
+    }
+  ],
+  "occurrenceScopedSplits": [
+    {
+      "questionId": "Y2M01-Q001",
+      "field": "pairs[0].b.media.assetId",
+      "from": "IMG-Y1M01-GREETING-INFORMAL-001",
+      "to": "IMG-Y2M01-Q001-CTX-E6B5DFD5490C",
+      "semanticTarget": "Hello!"
+    },
+    {
+      "questionId": "Y2M01-Q001",
+      "field": "pairs[1].b.media.assetId",
+      "from": "IMG-Y1M01-GREETING-MORNING-001",
+      "to": "IMG-Y2M01-Q001-CTX-485267600BE1",
+      "semanticTarget": "Good morning!"
+    },
+    {
+      "questionId": "Y2M01-Q001",
+      "field": "pairs[2].b.media.assetId",
+      "from": "Y1M01-EMOJI-NIGHT-001",
+      "to": "IMG-Y2M01-Q001-CTX-B8D656FAFC29",
+      "semanticTarget": "Good night."
+    },
+    {
+      "questionId": "Y2M01-Q001",
+      "field": "pairs[3].b.media.assetId",
+      "from": "IMG-Y1M01-FAREWELL-GENERIC-001",
+      "to": "IMG-Y2M01-Q001-CTX-E3BF6D0A7785",
+      "semanticTarget": "Goodbye!"
+    },
+    {
+      "questionId": "Y2M01-Q002",
+      "field": "mediaBindings[0].assetId",
+      "from": "MEDIA-LETTER-A",
+      "to": "IMG-Y2M01-Q002-CTX-6D15E7FE5019",
+      "semanticTarget": "A"
+    },
+    {
+      "questionId": "Y2M01-Q002",
+      "field": "mediaBindings[1].assetId",
+      "from": "MEDIA-LETTER-B",
+      "to": "IMG-Y2M01-Q002-CTX-BCD7B40FF58F",
+      "semanticTarget": "B"
+    },
+    {
+      "questionId": "Y2M01-Q002",
+      "field": "mediaBindings[2].assetId",
+      "from": "MEDIA-LETTER-C",
+      "to": "IMG-Y2M01-Q002-CTX-EB23D5B84940",
+      "semanticTarget": "C"
+    },
+    {
+      "questionId": "Y2M01-Q002",
+      "field": "mediaBindings[3].assetId",
+      "from": "MEDIA-LETTER-D",
+      "to": "IMG-Y2M01-Q002-CTX-0DA513E4F9AB",
+      "semanticTarget": "D"
+    },
+    {
+      "questionId": "Y2M01-Q002",
+      "field": "targets[0].media.assetId",
+      "from": "MEDIA-LETTER-A",
+      "to": "IMG-Y2M01-Q002-CTX-6D15E7FE5019",
+      "semanticTarget": "A"
+    },
+    {
+      "questionId": "Y2M01-Q002",
+      "field": "targets[1].media.assetId",
+      "from": "MEDIA-LETTER-B",
+      "to": "IMG-Y2M01-Q002-CTX-BCD7B40FF58F",
+      "semanticTarget": "B"
+    },
+    {
+      "questionId": "Y2M01-Q002",
+      "field": "targets[2].media.assetId",
+      "from": "MEDIA-LETTER-C",
+      "to": "IMG-Y2M01-Q002-CTX-EB23D5B84940",
+      "semanticTarget": "C"
+    },
+    {
+      "questionId": "Y2M01-Q002",
+      "field": "targets[3].media.assetId",
+      "from": "MEDIA-LETTER-D",
+      "to": "IMG-Y2M01-Q002-CTX-0DA513E4F9AB",
+      "semanticTarget": "D"
+    },
+    {
+      "questionId": "Y2M01-Q003",
+      "field": "bubbleDistractorPool[0].media.assetId",
+      "from": "IMG-Y1M01-GREETING-INFORMAL-001",
+      "to": "IMG-Y2M01-Q003-CTX-4C7DA319347A",
+      "semanticTarget": "Hello!"
+    },
+    {
+      "questionId": "Y2M01-Q003",
+      "field": "bubbleDistractorPool[1].media.assetId",
+      "from": "IMG-Y1M01-GREETING-MORNING-001",
+      "to": "IMG-Y2M01-Q003-CTX-90A2ACCFA283",
+      "semanticTarget": "Good morning!"
+    },
+    {
+      "questionId": "Y2M01-Q003",
+      "field": "bubbleDistractorPool[2].media.assetId",
+      "from": "IMG-Y1M01-GREETING-AFTERNOON-001",
+      "to": "IMG-Y2M01-Q003-CTX-B20A82308495",
+      "semanticTarget": "Good afternoon!"
+    },
+    {
+      "questionId": "Y2M01-Q003",
+      "field": "bubbleDistractorPool[3].media.assetId",
+      "from": "Y1M01-EMOJI-NIGHT-001",
+      "to": "IMG-Y2M01-Q003-CTX-2362BF4A3678",
+      "semanticTarget": "Night"
+    },
+    {
+      "questionId": "Y2M01-Q003",
+      "field": "bubbleDistractorPool[4].media.assetId",
+      "from": "IMG-Y1M01-NAME-LEO-001",
+      "to": "IMG-Y2M01-Q003-CTX-DF2A706961F8",
+      "semanticTarget": "Leo"
+    },
+    {
+      "questionId": "Y2M01-Q003",
+      "field": "targetsToFind[0].media.assetId",
+      "from": "IMG-Y1M01-FAREWELL-GENERIC-001",
+      "to": "IMG-Y2M01-Q003-CTX-C7C2D66E343E",
+      "semanticTarget": "Goodbye!"
+    },
+    {
+      "questionId": "Y2M01-Q006",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-Y1M01-GREETING-INFORMAL-001",
+      "to": "IMG-Y2M01-Q006-CTX-C78A1E9346FC",
+      "semanticTarget": "Hello!"
+    },
+    {
+      "questionId": "Y2M01-Q006",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-Y1M01-GREETING-MORNING-001",
+      "to": "IMG-Y2M01-Q006-CTX-C131B2238DBC",
+      "semanticTarget": "Good morning!"
+    },
+    {
+      "questionId": "Y2M01-Q006",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-Y1M01-GREETING-AFTERNOON-001",
+      "to": "IMG-Y2M01-Q006-CTX-7353D3A03C06",
+      "semanticTarget": "Good afternoon!"
+    },
+    {
+      "questionId": "Y2M01-Q006",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-Y1M01-FAREWELL-GENERIC-001",
+      "to": "IMG-Y2M01-Q006-CTX-62B8D65C5AA2",
+      "semanticTarget": "Goodbye!"
+    },
+    {
+      "questionId": "Y2M01-Q006",
+      "field": "targets[0].media.assetId",
+      "from": "IMG-Y1M01-GREETING-INFORMAL-001",
+      "to": "IMG-Y2M01-Q006-CTX-C78A1E9346FC",
+      "semanticTarget": "Hello!"
+    },
+    {
+      "questionId": "Y2M01-Q006",
+      "field": "targets[1].media.assetId",
+      "from": "IMG-Y1M01-GREETING-MORNING-001",
+      "to": "IMG-Y2M01-Q006-CTX-C131B2238DBC",
+      "semanticTarget": "Good morning!"
+    },
+    {
+      "questionId": "Y2M01-Q006",
+      "field": "targets[2].media.assetId",
+      "from": "IMG-Y1M01-GREETING-AFTERNOON-001",
+      "to": "IMG-Y2M01-Q006-CTX-7353D3A03C06",
+      "semanticTarget": "Good afternoon!"
+    },
+    {
+      "questionId": "Y2M01-Q006",
+      "field": "targets[3].media.assetId",
+      "from": "IMG-Y1M01-FAREWELL-GENERIC-001",
+      "to": "IMG-Y2M01-Q006-CTX-62B8D65C5AA2",
+      "semanticTarget": "Goodbye!"
+    },
+    {
+      "questionId": "Y2M01-Q007",
+      "field": "pairs[0].b.media.assetId",
+      "from": "IMG-Y2M01-SEE-YOU-001",
+      "to": "IMG-Y2M01-Q007-CTX-98CBF76A809A",
+      "semanticTarget": "See you."
+    },
+    {
+      "questionId": "Y2M01-Q007",
+      "field": "pairs[1].b.media.assetId",
+      "from": "IMG-Y1M01-FAREWELL-GENERIC-001",
+      "to": "IMG-Y2M01-Q007-CTX-212C9553D40E",
+      "semanticTarget": "Goodbye!"
+    },
+    {
+      "questionId": "Y2M01-Q007",
+      "field": "pairs[2].b.media.assetId",
+      "from": "IMG-Y1M01-GREETING-MORNING-001",
+      "to": "IMG-Y2M01-Q007-CTX-17E8CB23059D",
+      "semanticTarget": "Good morning!"
+    },
+    {
+      "questionId": "Y2M01-Q007",
+      "field": "pairs[3].b.media.assetId",
+      "from": "Y1M01-EMOJI-NIGHT-001",
+      "to": "IMG-Y2M01-Q007-CTX-EC5219515A86",
+      "semanticTarget": "Good night."
+    },
+    {
+      "questionId": "Y2M01-Q009",
+      "field": "options[0].media.assetId",
+      "from": "IMG-Y1M01-NAME-LEO-001",
+      "to": "IMG-Y2M01-Q009-CTX-DEA0021F79C4",
+      "semanticTarget": "Leo"
+    },
+    {
+      "questionId": "Y2M01-Q009",
+      "field": "options[1].media.assetId",
+      "from": "IMG-Y1M01-NAME-MIA-001",
+      "to": "IMG-Y2M01-Q009-CTX-FABAF319119C",
+      "semanticTarget": "Mia"
+    },
+    {
+      "questionId": "Y2M01-Q009",
+      "field": "options[2].media.assetId",
+      "from": "IMG-Y1M01-NAME-TAGS-001",
+      "to": "IMG-Y2M01-Q009-CTX-EDA7E6374913",
+      "semanticTarget": "Ana"
+    },
+    {
+      "questionId": "Y2M01-Q009",
+      "field": "options[3].media.assetId",
+      "from": "IMG-Y1M01-NAME-QUESTION-ANSWER-001",
+      "to": "IMG-Y2M01-Q009-CTX-D93C331A31DC",
+      "semanticTarget": "Ben"
+    },
+    {
+      "questionId": "Y2M01-Q012",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-Y1M01-FAREWELL-GENERIC-001",
+      "to": "IMG-Y2M01-Q012-CTX-B6FCC91BD1BD",
+      "semanticTarget": "Goodbye!"
+    },
+    {
+      "questionId": "Y2M01-Q012",
+      "field": "mediaBindings[1].assetId",
+      "from": "Y1M01-EMOJI-NIGHT-001",
+      "to": "IMG-Y2M01-Q012-CTX-5E062ABCDD61",
+      "semanticTarget": "Good night."
+    },
+    {
+      "questionId": "Y2M01-Q012",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-Y2M01-SEE-YOU-001",
+      "to": "IMG-Y2M01-Q012-CTX-35BA44B20DC3",
+      "semanticTarget": "See you."
+    },
+    {
+      "questionId": "Y2M01-Q012",
+      "field": "mediaBindings[3].assetId",
+      "from": "IMG-Y1M01-FAREWELL-ANA-001",
+      "to": "IMG-Y2M01-Q012-CTX-A55A9DCE56D7",
+      "semanticTarget": "Goodbye, Ana!"
+    },
+    {
+      "questionId": "Y2M01-Q012",
+      "field": "targets[0].media.assetId",
+      "from": "IMG-Y1M01-FAREWELL-GENERIC-001",
+      "to": "IMG-Y2M01-Q012-CTX-B6FCC91BD1BD",
+      "semanticTarget": "Goodbye!"
+    },
+    {
+      "questionId": "Y2M01-Q012",
+      "field": "targets[1].media.assetId",
+      "from": "Y1M01-EMOJI-NIGHT-001",
+      "to": "IMG-Y2M01-Q012-CTX-5E062ABCDD61",
+      "semanticTarget": "Good night."
+    },
+    {
+      "questionId": "Y2M01-Q012",
+      "field": "targets[2].media.assetId",
+      "from": "IMG-Y2M01-SEE-YOU-001",
+      "to": "IMG-Y2M01-Q012-CTX-35BA44B20DC3",
+      "semanticTarget": "See you."
+    },
+    {
+      "questionId": "Y2M01-Q012",
+      "field": "targets[3].media.assetId",
+      "from": "IMG-Y1M01-FAREWELL-ANA-001",
+      "to": "IMG-Y2M01-Q012-CTX-A55A9DCE56D7",
+      "semanticTarget": "Goodbye, Ana!"
+    },
+    {
+      "questionId": "Y2M01-Q013",
+      "field": "options[0].media.assetId",
+      "from": "IMG-Y1M01-GREETING-MORNING-001",
+      "to": "IMG-Y2M01-Q013-CTX-6C109746AAC2",
+      "semanticTarget": "Good morning"
+    },
+    {
+      "questionId": "Y2M01-Q013",
+      "field": "options[1].media.assetId",
+      "from": "IMG-Y1M01-GREETING-AFTERNOON-001",
+      "to": "IMG-Y2M01-Q013-CTX-C34739F5A6E9",
+      "semanticTarget": "Good afternoon"
+    },
+    {
+      "questionId": "Y2M01-Q013",
+      "field": "options[2].media.assetId",
+      "from": "Y1M01-EMOJI-NIGHT-001",
+      "to": "IMG-Y2M01-Q013-CTX-248432045878",
+      "semanticTarget": "Good night"
+    },
+    {
+      "questionId": "Y2M01-Q013",
+      "field": "options[3].media.assetId",
+      "from": "IMG-Y1M01-GREETING-INFORMAL-001",
+      "to": "IMG-Y2M01-Q013-CTX-7706A55DDC36",
+      "semanticTarget": "Hello"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "mediaBindings[0].assetId",
+      "from": "MEDIA-LETTER-O",
+      "to": "IMG-Y2M01-Q014-CTX-1040362DDAAB",
+      "semanticTarget": "O"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "mediaBindings[0].mediaId",
+      "from": "MEDIA-LETTER-O",
+      "to": "IMG-Y2M01-Q014-CTX-1040362DDAAB",
+      "semanticTarget": "O"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "mediaBindings[1].assetId",
+      "from": "MEDIA-LETTER-P",
+      "to": "IMG-Y2M01-Q014-CTX-71B5260D713A",
+      "semanticTarget": "P"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "mediaBindings[1].mediaId",
+      "from": "MEDIA-LETTER-P",
+      "to": "IMG-Y2M01-Q014-CTX-71B5260D713A",
+      "semanticTarget": "P"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "mediaBindings[2].assetId",
+      "from": "MEDIA-LETTER-Q",
+      "to": "IMG-Y2M01-Q014-CTX-7D6E12041383",
+      "semanticTarget": "Q"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "mediaBindings[2].mediaId",
+      "from": "MEDIA-LETTER-Q",
+      "to": "IMG-Y2M01-Q014-CTX-7D6E12041383",
+      "semanticTarget": "Q"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "mediaBindings[3].assetId",
+      "from": "MEDIA-LETTER-R",
+      "to": "IMG-Y2M01-Q014-CTX-DE3153251323",
+      "semanticTarget": "R"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "mediaBindings[3].mediaId",
+      "from": "MEDIA-LETTER-R",
+      "to": "IMG-Y2M01-Q014-CTX-DE3153251323",
+      "semanticTarget": "R"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "pairs[0].b.media.assetId",
+      "from": "MEDIA-LETTER-O",
+      "to": "IMG-Y2M01-Q014-CTX-1040362DDAAB",
+      "semanticTarget": "O"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "pairs[1].b.media.assetId",
+      "from": "MEDIA-LETTER-P",
+      "to": "IMG-Y2M01-Q014-CTX-71B5260D713A",
+      "semanticTarget": "P"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "pairs[2].b.media.assetId",
+      "from": "MEDIA-LETTER-Q",
+      "to": "IMG-Y2M01-Q014-CTX-7D6E12041383",
+      "semanticTarget": "Q"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "pairs[3].b.media.assetId",
+      "from": "MEDIA-LETTER-R",
+      "to": "IMG-Y2M01-Q014-CTX-DE3153251323",
+      "semanticTarget": "R"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "targets[0].media.assetId",
+      "from": "MEDIA-LETTER-O",
+      "to": "IMG-Y2M01-Q014-CTX-1040362DDAAB",
+      "semanticTarget": "O"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "targets[0].media.mediaId",
+      "from": "MEDIA-LETTER-O",
+      "to": "IMG-Y2M01-Q014-CTX-1040362DDAAB",
+      "semanticTarget": "O"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "targets[1].media.assetId",
+      "from": "MEDIA-LETTER-P",
+      "to": "IMG-Y2M01-Q014-CTX-71B5260D713A",
+      "semanticTarget": "P"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "targets[1].media.mediaId",
+      "from": "MEDIA-LETTER-P",
+      "to": "IMG-Y2M01-Q014-CTX-71B5260D713A",
+      "semanticTarget": "P"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "targets[2].media.assetId",
+      "from": "MEDIA-LETTER-Q",
+      "to": "IMG-Y2M01-Q014-CTX-7D6E12041383",
+      "semanticTarget": "Q"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "targets[2].media.mediaId",
+      "from": "MEDIA-LETTER-Q",
+      "to": "IMG-Y2M01-Q014-CTX-7D6E12041383",
+      "semanticTarget": "Q"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "targets[3].media.assetId",
+      "from": "MEDIA-LETTER-R",
+      "to": "IMG-Y2M01-Q014-CTX-DE3153251323",
+      "semanticTarget": "R"
+    },
+    {
+      "questionId": "Y2M01-Q014",
+      "field": "targets[3].media.mediaId",
+      "from": "MEDIA-LETTER-R",
+      "to": "IMG-Y2M01-Q014-CTX-DE3153251323",
+      "semanticTarget": "R"
+    },
+    {
+      "questionId": "Y2M01-Q016",
+      "field": "mediaBindings[0].assetId",
+      "from": "MEDIA-LETTER-S",
+      "to": "IMG-Y2M01-Q016-CTX-87B78C5D0967",
+      "semanticTarget": "S"
+    },
+    {
+      "questionId": "Y2M01-Q016",
+      "field": "mediaBindings[1].assetId",
+      "from": "MEDIA-LETTER-T",
+      "to": "IMG-Y2M01-Q016-CTX-0872DDFA64DD",
+      "semanticTarget": "T"
+    },
+    {
+      "questionId": "Y2M01-Q016",
+      "field": "mediaBindings[2].assetId",
+      "from": "MEDIA-LETTER-U",
+      "to": "IMG-Y2M01-Q016-CTX-8025B5416F3A",
+      "semanticTarget": "U"
+    },
+    {
+      "questionId": "Y2M01-Q016",
+      "field": "mediaBindings[3].assetId",
+      "from": "MEDIA-LETTER-V",
+      "to": "IMG-Y2M01-Q016-CTX-3F2252670B01",
+      "semanticTarget": "V"
+    },
+    {
+      "questionId": "Y2M01-Q016",
+      "field": "targets[0].media.assetId",
+      "from": "MEDIA-LETTER-S",
+      "to": "IMG-Y2M01-Q016-CTX-87B78C5D0967",
+      "semanticTarget": "S"
+    },
+    {
+      "questionId": "Y2M01-Q016",
+      "field": "targets[1].media.assetId",
+      "from": "MEDIA-LETTER-T",
+      "to": "IMG-Y2M01-Q016-CTX-0872DDFA64DD",
+      "semanticTarget": "T"
+    },
+    {
+      "questionId": "Y2M01-Q016",
+      "field": "targets[2].media.assetId",
+      "from": "MEDIA-LETTER-U",
+      "to": "IMG-Y2M01-Q016-CTX-8025B5416F3A",
+      "semanticTarget": "U"
+    },
+    {
+      "questionId": "Y2M01-Q016",
+      "field": "targets[3].media.assetId",
+      "from": "MEDIA-LETTER-V",
+      "to": "IMG-Y2M01-Q016-CTX-3F2252670B01",
+      "semanticTarget": "V"
+    },
+    {
+      "questionId": "Y2M01-Q017",
+      "field": "pairs[0].b.media.assetId",
+      "from": "IMG-Y1M01-NAME-LEO-001",
+      "to": "IMG-Y2M01-Q017-CTX-2734BE5908B9",
+      "semanticTarget": "My name is Leo."
+    },
+    {
+      "questionId": "Y2M01-Q017",
+      "field": "pairs[1].b.media.assetId",
+      "from": "IMG-Y1M01-NAME-MIA-001",
+      "to": "IMG-Y2M01-Q017-CTX-484493A138D7",
+      "semanticTarget": "My name is Mia."
+    },
+    {
+      "questionId": "Y2M01-Q017",
+      "field": "pairs[2].b.media.assetId",
+      "from": "IMG-Y1M01-NAME-TAGS-001",
+      "to": "IMG-Y2M01-Q017-CTX-63E13DA12AEB",
+      "semanticTarget": "My name is Ana."
+    },
+    {
+      "questionId": "Y2M01-Q018",
+      "field": "mediaBindings[0].assetId",
+      "from": "IMG-Y2M01-Q018-NAME-QUESTION-SCENE-V1",
+      "to": "IMG-Y2M01-Q018-CTX-F61F22DF7405",
+      "semanticTarget": "What's your name?"
+    },
+    {
+      "questionId": "Y2M01-Q018",
+      "field": "mediaBindings[1].assetId",
+      "from": "IMG-Y1M01-GREETING-GENERIC-001",
+      "to": "IMG-Y2M01-Q018-CTX-7ACE03D40361",
+      "semanticTarget": "greeting"
+    },
+    {
+      "questionId": "Y2M01-Q018",
+      "field": "mediaBindings[2].assetId",
+      "from": "IMG-Y2M01-SEE-YOU-001",
+      "to": "IMG-Y2M01-Q018-CTX-100A4FF8D282",
+      "semanticTarget": "farewell"
+    },
+    {
+      "questionId": "Y2M01-Q018",
+      "field": "mediaBindings[3].assetId",
+      "from": "Y1M01-EMOJI-NIGHT-001",
+      "to": "IMG-Y2M01-Q018-CTX-391882292DEA",
+      "semanticTarget": "good-night context"
+    },
+    {
+      "questionId": "Y2M01-Q018",
+      "field": "options[0].media.assetId",
+      "from": "IMG-Y2M01-Q018-NAME-QUESTION-SCENE-V1",
+      "to": "IMG-Y2M01-Q018-CTX-E1330FDD54E0",
+      "semanticTarget": "one child asks another child's name"
+    },
+    {
+      "questionId": "Y2M01-Q018",
+      "field": "options[1].media.assetId",
+      "from": "IMG-Y1M01-GREETING-GENERIC-001",
+      "to": "IMG-Y2M01-Q018-CTX-E7EDFF8F7248",
+      "semanticTarget": "children greeting"
+    },
+    {
+      "questionId": "Y2M01-Q018",
+      "field": "options[2].media.assetId",
+      "from": "IMG-Y2M01-SEE-YOU-001",
+      "to": "IMG-Y2M01-Q018-CTX-0A5AEF625D64",
+      "semanticTarget": "two people saying see you"
+    },
+    {
+      "questionId": "Y2M01-Q018",
+      "field": "options[3].media.assetId",
+      "from": "Y1M01-EMOJI-NIGHT-001",
+      "to": "IMG-Y2M01-Q018-CTX-D1B6FEEED000",
+      "semanticTarget": "bedtime / good night"
+    },
+    {
+      "questionId": "Y2M01-Q020",
+      "field": "mediaBindings[0].assetId",
+      "from": "MEDIA-LETTER-W",
+      "to": "IMG-Y2M01-Q020-CTX-54A67F038F93",
+      "semanticTarget": "W"
+    },
+    {
+      "questionId": "Y2M01-Q020",
+      "field": "mediaBindings[1].assetId",
+      "from": "MEDIA-LETTER-X",
+      "to": "IMG-Y2M01-Q020-CTX-260BB50EE375",
+      "semanticTarget": "X"
+    },
+    {
+      "questionId": "Y2M01-Q020",
+      "field": "mediaBindings[2].assetId",
+      "from": "MEDIA-LETTER-Y",
+      "to": "IMG-Y2M01-Q020-CTX-1DD5B68D1837",
+      "semanticTarget": "Y"
+    },
+    {
+      "questionId": "Y2M01-Q020",
+      "field": "mediaBindings[3].assetId",
+      "from": "MEDIA-LETTER-Z",
+      "to": "IMG-Y2M01-Q020-CTX-BB49C21D9E37",
+      "semanticTarget": "Z"
+    },
+    {
+      "questionId": "Y2M01-Q020",
+      "field": "targets[0].media.assetId",
+      "from": "MEDIA-LETTER-W",
+      "to": "IMG-Y2M01-Q020-CTX-54A67F038F93",
+      "semanticTarget": "W"
+    },
+    {
+      "questionId": "Y2M01-Q020",
+      "field": "targets[1].media.assetId",
+      "from": "MEDIA-LETTER-X",
+      "to": "IMG-Y2M01-Q020-CTX-260BB50EE375",
+      "semanticTarget": "X"
+    },
+    {
+      "questionId": "Y2M01-Q020",
+      "field": "targets[2].media.assetId",
+      "from": "MEDIA-LETTER-Y",
+      "to": "IMG-Y2M01-Q020-CTX-1DD5B68D1837",
+      "semanticTarget": "Y"
+    },
+    {
+      "questionId": "Y2M01-Q020",
+      "field": "targets[3].media.assetId",
+      "from": "MEDIA-LETTER-Z",
+      "to": "IMG-Y2M01-Q020-CTX-BB49C21D9E37",
+      "semanticTarget": "Z"
+    }
+  ],
+  "sourceRegistryPinEvidence": "source-registry-pin.json",
+  "sourceRegistryPinEvidenceSha256": "00bd92a1c892ec950b170f0cb4bc77d0ebf08a57a7c66d1d51a6ec0e93214866",
+  "generationManifestEvidence": "generation-batch-manifest.json",
+  "generationManifestSha256": "aee8df3a6f77df0e9a15a8397a441c4684fa70c926ecd912460f2a43cf62d139",
+  "generationSemanticEvidence": "generation-semantic-evidence.json",
+  "generationSemanticSha256": "28ec96efed2f58b90333f735fb0b1671f7460e38ee6f78eb8b92034503f21fdf",
+  "alphaComponentAudit": "alpha-component-audit.json",
+  "alphaComponentAuditSha256": "5eb016eb067de88aba20e3b123725b5ba0a2e5f84b2ff42a2f040841fe188f9d",
+  "sourceQuestionContractSha256": "257776f3d2a896a929db2233d3d238ba2f2881d652cdab0be82dae5c3519f432",
+  "sourceQuestionInvariantSha256": "b7cc44db6fdc6b597a963e01f59b1e6706f1a51031be282ae3b97e1529d97233"
+}

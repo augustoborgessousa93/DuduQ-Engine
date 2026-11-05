@@ -1,0 +1,1433 @@
+{
+  "schemaVersion": "DUDUQ_CHATGPT_MEDIA_BINDINGS_V1",
+  "createdAt": "2026-10-30",
+  "moduleId": "Y1M06",
+  "source": "Codex native OpenAI image generation plus verified native-original reuse",
+  "provider": "Codex built-in image_gen",
+  "status": "HASH_BOUND_GENERATION_CANDIDATES_READY_FOR_INDEPENDENT_REVIEW_NOT_INTEGRATED",
+  "questionSource": "dist-pages/content/english/year-1/module-06/questions.json",
+  "questionSourceSha256": "31d4cc0be48882dfd405cca0f8cb2b708c6f6d3d201fab71ad94e757e771e4b5",
+  "originalAuditedPendingIds": 93,
+  "finalBindingIds": 93,
+  "totalQuestionUsageRecords": 93,
+  "questionContractsReviewed": 20,
+  "preservesAnswerKeysAndMechanics": true,
+  "productionApproved": false,
+  "integrated": false,
+  "approvalFlagsChanged": false,
+  "assets": [
+    {
+      "assetKey": "Y1M06-CANDIDATE-BIG",
+      "file": "images/DUDUQ-Y1M06-BIG.png",
+      "semanticTarget": "big",
+      "sha256": "71ef4290fd60783cc62684b21d498c6ecd41b6cbc35ce08eccf2e9d4fd159291",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q009",
+          "mediaId": "IMG-Q009-BIG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q009"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "big"
+        },
+        {
+          "questionId": "Y1M06-Q011",
+          "mediaId": "IMG-Y1M06-Q011-BIG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q011"
+          ],
+          "contractPath": "targets[3].media",
+          "contractSemanticTarget": "big"
+        },
+        {
+          "questionId": "Y1M06-Q012",
+          "mediaId": "IMG-Y1M06-Q012-BIG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q012"
+          ],
+          "contractPath": "pairs[3].b.media",
+          "contractSemanticTarget": "big"
+        },
+        {
+          "questionId": "Y1M06-Q014",
+          "mediaId": "IMG-Y1M06-Q014-BIG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q014"
+          ],
+          "contractPath": "pairs[2].b.media",
+          "contractSemanticTarget": "big"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Y1M06-Q016-BIG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q016"
+          ],
+          "contractPath": "bubbleDistractorPool[1].media",
+          "contractSemanticTarget": "big"
+        },
+        {
+          "questionId": "Y1M06-Q019",
+          "mediaId": "IMG-Q019-BIG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q019"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "big"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable visual teaching the size word \"big\" without using an animal\nSubject: exactly one smooth rounded toy cube in neutral medium gray, with no markings, shown very large\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered single cube occupying about 82% of the canvas with a transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one object; neutral gray only, not a red, blue, yellow or green color-vocabulary object; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/BIG-ORIGINAL.png",
+        "originalSha256": "7aabd44b08f905fec40685e1e7463887b9357daa2eb5f60d61bf02dcfcfa7c8e",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-BIG-SPIDER",
+      "file": "images/DUDUQ-Y1M06-BIG-SPIDER.png",
+      "semanticTarget": "big spider",
+      "sha256": "57eb92db864178aef6a274b2820bfb6e3e20055326029fc20e3f26c16db00a32",
+      "pixelWidth": 1536,
+      "pixelHeight": 1024,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q018",
+          "mediaId": "IMG-Y1M06-Q018-BIG-SPIDER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q018"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "big"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: compositing\nPrimary request: show \"a big spider\" for the sentence-completion image clue\nReference: Image 1 is the exact approved friendly dark charcoal-gray spider with exactly eight legs\nComposition: preserve the spider and enlarge it to occupy about 78% of the canvas; keep the full spider inside the frame with at least 7% transparent margin\nScale reference: add exactly one tiny plain light-gray rounded cube at lower-right, no larger than 10% of the canvas\nConstraints: exactly one spider plus one small neutral cube; preserve exactly eight complete separated legs; no web; no insects; no extra animals; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbol; no logo; no watermark; genuinely transparent background",
+        "originalFile": "provenance/originals/BIG-SPIDER-ORIGINAL.png",
+        "originalSha256": "9db2070353168f46c3debf3afaf1e5ea2e121846ed2074be1b9902d6390e3cc7",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 2,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-BIRD",
+      "file": "images/DUDUQ-Y1M06-BIRD.png",
+      "semanticTarget": "bird",
+      "sha256": "f5ed701122220ae38f1d1527f9349c6d3e0310182365530546e49957e4ee24f7",
+      "pixelWidth": 1312,
+      "pixelHeight": 1199,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q004",
+          "mediaId": "IMG-Y1M06-Q004-BIRD",
+          "verifiedQuestionIds": [
+            "Y1M06-Q004"
+          ],
+          "contractPath": "options[3].media",
+          "contractSemanticTarget": "bird"
+        },
+        {
+          "questionId": "Y1M06-Q005",
+          "mediaId": "IMG-Q005-BIRD",
+          "verifiedQuestionIds": [
+            "Y1M06-Q005"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "bird"
+        },
+        {
+          "questionId": "Y1M06-Q006",
+          "mediaId": "IMG-Y1M06-Q006-BIRD",
+          "verifiedQuestionIds": [
+            "Y1M06-Q006"
+          ],
+          "contractPath": "pairs[2].b.media",
+          "contractSemanticTarget": "bird"
+        },
+        {
+          "questionId": "Y1M06-Q007",
+          "mediaId": "IMG-Y1M06-Q007-BIRD",
+          "verifiedQuestionIds": [
+            "Y1M06-Q007"
+          ],
+          "contractPath": "targets[1].media",
+          "contractSemanticTarget": "bird"
+        },
+        {
+          "questionId": "Y1M06-Q009",
+          "mediaId": "IMG-Y1M06-Q009-BIRD",
+          "verifiedQuestionIds": [
+            "Y1M06-Q009"
+          ],
+          "contractPath": "pairs[0].b.media",
+          "contractSemanticTarget": "bird"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Y1M06-Q010-BIRD",
+          "verifiedQuestionIds": [
+            "Y1M06-Q010"
+          ],
+          "contractPath": "targetsToFind[0].media",
+          "contractSemanticTarget": "bird"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Q010-BIRD",
+          "verifiedQuestionIds": [
+            "Y1M06-Q010"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "bird"
+        },
+        {
+          "questionId": "Y1M06-Q015",
+          "mediaId": "IMG-Q015-BIRD",
+          "verifiedQuestionIds": [
+            "Y1M06-Q015"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "bird"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable friendly pet bird\nSubject: one small cheerful blue-and-yellow songbird standing in three-quarter pose, with a clear beak, two eyes, two folded wings, two feet and a complete tail\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered whole bird filling about 75–82% of the canvas with at least 10% transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one bird; no branch; no cage; no nest; no egg; no other animals; no props; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/BIRD-ORIGINAL.png",
+        "originalSha256": "39b2947e5373de4e60e6493d541c5f5dcc9425df20f9fecfa7adaea89b5c626a",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-BLUE",
+      "file": "images/DUDUQ-Y1M06-BLUE.png",
+      "semanticTarget": "blue",
+      "sha256": "0978e94bcd22a928f3ccb50d5c7c0fabd8cf5bc80b24a522edd87381914e60a0",
+      "pixelWidth": 1312,
+      "pixelHeight": 1199,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q013",
+          "mediaId": "IMG-Y1M06-Q013-BLUE",
+          "verifiedQuestionIds": [
+            "Y1M06-Q013"
+          ],
+          "contractPath": "pairs[1].cards[1].media",
+          "contractSemanticTarget": "blue"
+        },
+        {
+          "questionId": "Y1M06-Q015",
+          "mediaId": "IMG-Y1M06-Q015-BLUE",
+          "verifiedQuestionIds": [
+            "Y1M06-Q015"
+          ],
+          "contractPath": "targets[3].media",
+          "contractSemanticTarget": "blue"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: precise-object-edit\nPrimary request: change only the red sphere to saturated primary blue\nReference: Image 1 is the exact smooth rounded toy sphere used by the color set\nChange: replace the red material with uniform vivid primary blue while retaining subtle studio highlights\nPreserve: the exact sphere, size, position, shape, lighting, framing and alpha silhouette\nConstraints: one sphere only; no red, yellow or green material; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/BLUE-ORIGINAL.png",
+        "originalSha256": "7311583037946a294df7af2737839a4b44d57f1dcb0fe94ff94b8e13b0c76ef3",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-BLUE-TURTLE",
+      "file": "images/DUDUQ-Y1M06-BLUE-TURTLE.png",
+      "semanticTarget": "blue turtle",
+      "sha256": "0050915f675b777b496e14a94c1773a6ce2e0de35bdc29453cf09efac26d2093",
+      "pixelWidth": 1536,
+      "pixelHeight": 1024,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Y1M06-Q003-BLUE-TURTLE",
+          "verifiedQuestionIds": [
+            "Y1M06-Q003"
+          ],
+          "contractPath": "bubbleDistractorPool[2].media",
+          "contractSemanticTarget": "blue turtle"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: precise-object-edit\nPrimary request: recolor the turtle saturated primary blue and remove any halo\nReference: Image 1 is the exact friendly turtle\nChange: make the head, legs, tail and shell vivid blue with slightly darker blue outlines\nPreserve: the turtle identity, pose, domed shell, anatomy, silhouette, framing and transparent alpha background\nConstraints: blue must be dominant; no green or brown dominant material; no added object; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/BLUE-TURTLE-ORIGINAL.png",
+        "originalSha256": "567dedb39bc7ad265611892e7f797e4f9dddfac65f468d0a8c345e5917d8ff31",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-CAT",
+      "file": "images/DUDUQ-Y1M06-CAT.png",
+      "semanticTarget": "cat",
+      "sha256": "ae313d94c808584864a1906fce902181520749654223235966db4ad8e9cffcca",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q001",
+          "mediaId": "IMG-Y1M06-Q001-CAT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q001"
+          ],
+          "contractPath": "targets[1].media",
+          "contractSemanticTarget": "cat"
+        },
+        {
+          "questionId": "Y1M06-Q002",
+          "mediaId": "IMG-Y1M06-Q002-CAT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q002"
+          ],
+          "contractPath": "pairs[1].b.media",
+          "contractSemanticTarget": "cat"
+        },
+        {
+          "questionId": "Y1M06-Q002",
+          "mediaId": "IMG-Q002-CAT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q002"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "cat"
+        },
+        {
+          "questionId": "Y1M06-Q004",
+          "mediaId": "IMG-Y1M06-Q004-CAT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q004"
+          ],
+          "contractPath": "options[0].media",
+          "contractSemanticTarget": "cat"
+        },
+        {
+          "questionId": "Y1M06-Q004",
+          "mediaId": "IMG-Q004-CAT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q004"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "cat"
+        },
+        {
+          "questionId": "Y1M06-Q005",
+          "mediaId": "IMG-Y1M06-Q005-CAT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q005"
+          ],
+          "contractPath": "pairs[1].cards[1].media",
+          "contractSemanticTarget": "cat"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Y1M06-Q010-CAT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q010"
+          ],
+          "contractPath": "bubbleDistractorPool[1].media",
+          "contractSemanticTarget": "cat"
+        },
+        {
+          "questionId": "Y1M06-Q012",
+          "mediaId": "IMG-Q012-CAT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q012"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "cat"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Y1M06-Q016-CAT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q016"
+          ],
+          "contractPath": "bubbleDistractorPool[4].media",
+          "contractSemanticTarget": "cat"
+        },
+        {
+          "questionId": "Y1M06-Q020",
+          "mediaId": "IMG-Y1M06-Q020-CAT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q020"
+          ],
+          "contractPath": "pairs[2].b.media",
+          "contractSemanticTarget": "cat"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "REUSED_VERIFIED_NATIVE_ORIGINAL_20261029",
+        "prompt": "One friendly orange domestic cat, recognizable ears, whiskers, tail and paws, three-quarter view. Premium polished 3D cartoon for children ages 6–11. Square transparent PNG, whole cat silhouette fully visible. No other animals, props, text, watermark, collage, grid or opaque background.",
+        "originalFile": "provenance/originals/CAT-ORIGINAL.png",
+        "originalSha256": "3f0818fc4a1920a70e464ac89e941686e27c309bfc9732989d143053bb769e38",
+        "reusedFrom": "qa/media-inbox/codex-local-20261029/001-CAT-CANDIDATE.png",
+        "sourceManifest": "qa/media-candidates/y1m04-official-20261030/provenance/CANDIDATE_BATCH_MANIFEST-20261029.json",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-DOG",
+      "file": "images/DUDUQ-Y1M06-DOG.png",
+      "semanticTarget": "dog",
+      "sha256": "67cdfd3584dc1f864ccdb51a45fdfbecf6ce0e0b77cb29c790942004a653846e",
+      "pixelWidth": 1312,
+      "pixelHeight": 1199,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q001",
+          "mediaId": "IMG-Y1M06-Q001-DOG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q001"
+          ],
+          "contractPath": "targets[0].media",
+          "contractSemanticTarget": "dog"
+        },
+        {
+          "questionId": "Y1M06-Q001",
+          "mediaId": "IMG-Q001-DOG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q001"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "dog"
+        },
+        {
+          "questionId": "Y1M06-Q002",
+          "mediaId": "IMG-Y1M06-Q002-DOG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q002"
+          ],
+          "contractPath": "pairs[0].b.media",
+          "contractSemanticTarget": "dog"
+        },
+        {
+          "questionId": "Y1M06-Q005",
+          "mediaId": "IMG-Y1M06-Q005-DOG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q005"
+          ],
+          "contractPath": "pairs[0].cards[1].media",
+          "contractSemanticTarget": "dog"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Y1M06-Q010-DOG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q010"
+          ],
+          "contractPath": "bubbleDistractorPool[0].media",
+          "contractSemanticTarget": "dog"
+        },
+        {
+          "questionId": "Y1M06-Q011",
+          "mediaId": "IMG-Q011-DOG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q011"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "dog"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Y1M06-Q016-DOG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q016"
+          ],
+          "contractPath": "bubbleDistractorPool[3].media",
+          "contractSemanticTarget": "dog"
+        },
+        {
+          "questionId": "Y1M06-Q020",
+          "mediaId": "IMG-Y1M06-Q020-DOG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q020"
+          ],
+          "contractPath": "pairs[1].b.media",
+          "contractSemanticTarget": "dog"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable friendly domestic dog\nSubject: one cheerful golden-brown puppy in a natural standing three-quarter pose, with clearly visible floppy ears, muzzle, four paws and wagging tail\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered single subject, whole dog fully visible, filling about 78–84% of the canvas while retaining at least 8% transparent safe margin on every side\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one dog; no collar tag; no clothes; no other animals; no toy; no bowl; no bone; no props; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/DOG-ORIGINAL.png",
+        "originalSha256": "1cfbd399562a35f3b930dec27cd0443d6002a633dec06955c73c4cabd239988b",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-FISH",
+      "file": "images/DUDUQ-Y1M06-FISH.png",
+      "semanticTarget": "fish",
+      "sha256": "5f161f9aef0d5de5141fc9bf423527bb0fce91540aa27e48287f9f74c37d2b23",
+      "pixelWidth": 1536,
+      "pixelHeight": 1024,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q001",
+          "mediaId": "IMG-Y1M06-Q001-FISH",
+          "verifiedQuestionIds": [
+            "Y1M06-Q001"
+          ],
+          "contractPath": "targets[2].media",
+          "contractSemanticTarget": "fish"
+        },
+        {
+          "questionId": "Y1M06-Q002",
+          "mediaId": "IMG-Y1M06-Q002-FISH",
+          "verifiedQuestionIds": [
+            "Y1M06-Q002"
+          ],
+          "contractPath": "pairs[2].b.media",
+          "contractSemanticTarget": "fish"
+        },
+        {
+          "questionId": "Y1M06-Q004",
+          "mediaId": "IMG-Y1M06-Q004-FISH",
+          "verifiedQuestionIds": [
+            "Y1M06-Q004"
+          ],
+          "contractPath": "options[1].media",
+          "contractSemanticTarget": "fish"
+        },
+        {
+          "questionId": "Y1M06-Q005",
+          "mediaId": "IMG-Y1M06-Q005-FISH",
+          "verifiedQuestionIds": [
+            "Y1M06-Q005"
+          ],
+          "contractPath": "pairs[2].cards[1].media",
+          "contractSemanticTarget": "fish"
+        },
+        {
+          "questionId": "Y1M06-Q006",
+          "mediaId": "IMG-Y1M06-Q006-FISH",
+          "verifiedQuestionIds": [
+            "Y1M06-Q006"
+          ],
+          "contractPath": "pairs[0].b.media",
+          "contractSemanticTarget": "fish"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Y1M06-Q010-FISH",
+          "verifiedQuestionIds": [
+            "Y1M06-Q010"
+          ],
+          "contractPath": "bubbleDistractorPool[2].media",
+          "contractSemanticTarget": "fish"
+        },
+        {
+          "questionId": "Y1M06-Q013",
+          "mediaId": "IMG-Q013-FISH",
+          "verifiedQuestionIds": [
+            "Y1M06-Q013"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "fish"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Y1M06-Q016-FISH",
+          "verifiedQuestionIds": [
+            "Y1M06-Q016"
+          ],
+          "contractPath": "bubbleDistractorPool[5].media",
+          "contractSemanticTarget": "fish"
+        },
+        {
+          "questionId": "Y1M06-Q020",
+          "mediaId": "IMG-Y1M06-Q020-FISH",
+          "verifiedQuestionIds": [
+            "Y1M06-Q020"
+          ],
+          "contractPath": "pairs[3].b.media",
+          "contractSemanticTarget": "fish"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable friendly pet fish\nSubject: one orange-and-gold freshwater fish in clean side view, with one body, two eyes naturally placed, clear fins, scales and a complete flowing tail\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered whole fish filling about 76–82% of the canvas with at least 10% transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one fish; no aquarium; no bowl; no water; no bubbles; no plants; no other fish; no props; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/FISH-ORIGINAL.png",
+        "originalSha256": "db90baca459c9a40cd9bf65ee13e7e8f0eb2b9ca0bf008c3f7296c5b288b6ebf",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-GREEN",
+      "file": "images/DUDUQ-Y1M06-GREEN.png",
+      "semanticTarget": "green",
+      "sha256": "a806672a42a3fae0334b846d7173fd14c42ff034b398b79df2a8911f5911a8ee",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q013",
+          "mediaId": "IMG-Y1M06-Q013-GREEN",
+          "verifiedQuestionIds": [
+            "Y1M06-Q013"
+          ],
+          "contractPath": "pairs[3].cards[1].media",
+          "contractSemanticTarget": "green"
+        },
+        {
+          "questionId": "Y1M06-Q015",
+          "mediaId": "IMG-Y1M06-Q015-GREEN",
+          "verifiedQuestionIds": [
+            "Y1M06-Q015"
+          ],
+          "contractPath": "targets[1].media",
+          "contractSemanticTarget": "green"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: precise-object-edit\nPrimary request: change only the red sphere to saturated grass green\nReference: Image 1 is the exact smooth rounded toy sphere used by the color set\nChange: replace the red material with uniform vivid grass green while retaining subtle studio highlights\nPreserve: the exact sphere, size, position, shape, lighting, framing and alpha silhouette\nConstraints: one sphere only; no red, blue or yellow material; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/GREEN-ORIGINAL.png",
+        "originalSha256": "58597f817242de204327263d17937b248d1f009f42d9022afd55dc4c49b2e3a3",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-GREEN-RABBIT",
+      "file": "images/DUDUQ-Y1M06-GREEN-RABBIT.png",
+      "semanticTarget": "green rabbit",
+      "sha256": "1c281d00fc4ae637c18f6fee5a0a62a683c79db6128fe64f9a29b3daeba27159",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Y1M06-Q003-GREEN-RABBIT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q003"
+          ],
+          "contractPath": "bubbleDistractorPool[0].media",
+          "contractSemanticTarget": "green rabbit"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: precise-object-edit\nPrimary request: recolor only the rabbit fur saturated clear grass green\nReference: Image 1 is the exact friendly rabbit\nChange: make the brown fur vivid green while preserving neutral eye, nose and inner-ear details\nPreserve: the exact rabbit identity, pose, anatomy, silhouette, framing and transparent alpha background\nConstraints: one rabbit only; no other animal; no prop; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/GREEN-RABBIT-ORIGINAL.png",
+        "originalSha256": "72abffbc354c61a68b219f5c0a3136130862078526c4a80b1b3ae0c3bb89cd68",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-GREEN-SPIDER",
+      "file": "images/DUDUQ-Y1M06-GREEN-SPIDER.png",
+      "semanticTarget": "green spider",
+      "sha256": "161c65f0afe4b78307501975f6d8c44fcd3b61acaadc74b99824247cd8529ac5",
+      "pixelWidth": 1536,
+      "pixelHeight": 1024,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Y1M06-Q003-GREEN-SPIDER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q003"
+          ],
+          "contractPath": "bubbleDistractorPool[4].media",
+          "contractSemanticTarget": "green spider"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: precise-object-edit\nPrimary request: recolor the spider saturated primary green and remove any halo\nReference: Image 1 is the exact friendly spider\nChange: make the body and exactly eight legs vivid green\nPreserve: the spider identity, non-scary anatomy, exactly eight complete separated legs, silhouette, framing and transparent alpha background\nConstraints: one spider only; no web; no insect; no added object; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/GREEN-SPIDER-ORIGINAL.png",
+        "originalSha256": "ac4bf5d110d0749741121eebed3b61bf881adbb2d6918ad5d4e84627b166108b",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-HAMSTER",
+      "file": "images/DUDUQ-Y1M06-HAMSTER.png",
+      "semanticTarget": "hamster",
+      "sha256": "47b773f80615dd7e621c4c9e878b8f3eed6dbe75c6532665352a8fce92528418",
+      "pixelWidth": 1303,
+      "pixelHeight": 1207,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q007",
+          "mediaId": "IMG-Y1M06-Q007-HAMSTER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q007"
+          ],
+          "contractPath": "targets[3].media",
+          "contractSemanticTarget": "hamster"
+        },
+        {
+          "questionId": "Y1M06-Q007",
+          "mediaId": "IMG-Q007-HAMSTER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q007"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "hamster"
+        },
+        {
+          "questionId": "Y1M06-Q009",
+          "mediaId": "IMG-Y1M06-Q009-HAMSTER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q009"
+          ],
+          "contractPath": "pairs[2].b.media",
+          "contractSemanticTarget": "hamster"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Y1M06-Q010-HAMSTER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q010"
+          ],
+          "contractPath": "bubbleDistractorPool[5].media",
+          "contractSemanticTarget": "hamster"
+        },
+        {
+          "questionId": "Y1M06-Q011",
+          "mediaId": "IMG-Y1M06-Q011-HAMSTER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q011"
+          ],
+          "contractPath": "targets[1].media",
+          "contractSemanticTarget": "hamster"
+        },
+        {
+          "questionId": "Y1M06-Q012",
+          "mediaId": "IMG-Y1M06-Q012-HAMSTER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q012"
+          ],
+          "contractPath": "pairs[1].b.media",
+          "contractSemanticTarget": "hamster"
+        },
+        {
+          "questionId": "Y1M06-Q014",
+          "mediaId": "IMG-Y1M06-Q014-HAMSTER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q014"
+          ],
+          "contractPath": "pairs[0].b.media",
+          "contractSemanticTarget": "hamster"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Y1M06-Q016-HAMSTER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q016"
+          ],
+          "contractPath": "bubbleDistractorPool[0].media",
+          "contractSemanticTarget": "hamster"
+        },
+        {
+          "questionId": "Y1M06-Q017",
+          "mediaId": "IMG-Q017-HAMSTER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q017"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "hamster"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable friendly pet hamster\nSubject: one golden-brown-and-white hamster sitting upright, with round ears, muzzle, whiskers, two front paws and two hind feet\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered whole hamster filling about 76–82% of the canvas with at least 10% transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one hamster; no food; no wheel; no cage; no bedding; no other animal; no props; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/HAMSTER-ORIGINAL.png",
+        "originalSha256": "36712ec604ef7ad094dc265b0d5641e53a8692e3738508f262e86ae76bcbd01b",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-RABBIT",
+      "file": "images/DUDUQ-Y1M06-RABBIT.png",
+      "semanticTarget": "rabbit",
+      "sha256": "6e14f5b48e75c1f00f32e81bf312c2569897caedb3a8b6acd859023892eb3f4e",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q001",
+          "mediaId": "IMG-Y1M06-Q001-RABBIT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q001"
+          ],
+          "contractPath": "targets[3].media",
+          "contractSemanticTarget": "rabbit"
+        },
+        {
+          "questionId": "Y1M06-Q002",
+          "mediaId": "IMG-Y1M06-Q002-RABBIT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q002"
+          ],
+          "contractPath": "pairs[3].b.media",
+          "contractSemanticTarget": "rabbit"
+        },
+        {
+          "questionId": "Y1M06-Q004",
+          "mediaId": "IMG-Y1M06-Q004-RABBIT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q004"
+          ],
+          "contractPath": "options[2].media",
+          "contractSemanticTarget": "rabbit"
+        },
+        {
+          "questionId": "Y1M06-Q005",
+          "mediaId": "IMG-Y1M06-Q005-RABBIT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q005"
+          ],
+          "contractPath": "pairs[3].cards[1].media",
+          "contractSemanticTarget": "rabbit"
+        },
+        {
+          "questionId": "Y1M06-Q006",
+          "mediaId": "IMG-Y1M06-Q006-RABBIT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q006"
+          ],
+          "contractPath": "pairs[1].b.media",
+          "contractSemanticTarget": "rabbit"
+        },
+        {
+          "questionId": "Y1M06-Q007",
+          "mediaId": "IMG-Y1M06-Q007-RABBIT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q007"
+          ],
+          "contractPath": "targets[0].media",
+          "contractSemanticTarget": "rabbit"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Y1M06-Q010-RABBIT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q010"
+          ],
+          "contractPath": "bubbleDistractorPool[3].media",
+          "contractSemanticTarget": "rabbit"
+        },
+        {
+          "questionId": "Y1M06-Q014",
+          "mediaId": "IMG-Q014-RABBIT",
+          "verifiedQuestionIds": [
+            "Y1M06-Q014"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "rabbit"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "REUSED_VERIFIED_NATIVE_ORIGINAL_20261029",
+        "prompt": "One friendly small brown rabbit with long upright ears, clearly visible paws and tail, three-quarter view. Premium polished 3D cartoon for children ages 6–11. Square transparent PNG, fully visible and centered. No other animals, props, text, watermark, collage, grid or opaque background.",
+        "originalFile": "provenance/originals/RABBIT-ORIGINAL.png",
+        "originalSha256": "68109e015c89991527ca9d8096b8260757daeeb152bd19fbb45becac823f0669",
+        "reusedFrom": "qa/media-inbox/codex-local-20261029/010-RABBIT-CANDIDATE.png",
+        "sourceManifest": "qa/media-candidates/y1m04-official-20261030/provenance/CANDIDATE_BATCH_MANIFEST-20261029.json",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-RED",
+      "file": "images/DUDUQ-Y1M06-RED.png",
+      "semanticTarget": "red",
+      "sha256": "7109b53486fed140809537a0fd05c1ed49707677c49cf67e62e874bff1067632",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q013",
+          "mediaId": "IMG-Y1M06-Q013-RED",
+          "verifiedQuestionIds": [
+            "Y1M06-Q013"
+          ],
+          "contractPath": "pairs[0].cards[1].media",
+          "contractSemanticTarget": "red"
+        },
+        {
+          "questionId": "Y1M06-Q015",
+          "mediaId": "IMG-Y1M06-Q015-RED",
+          "verifiedQuestionIds": [
+            "Y1M06-Q015"
+          ],
+          "contractPath": "targets[2].media",
+          "contractSemanticTarget": "red"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable pure red color object\nSubject: exactly one smooth rounded toy sphere uniformly primary red with subtle studio highlights\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered sphere filling about 72% of the canvas with generous transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one sphere; no face; no pattern; no letters; no numbers; no symbols; no other objects; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/RED-ORIGINAL.png",
+        "originalSha256": "08e30ec5135613242c2e013960657059d71cca1c8feea4fe58263ba52de2fb48",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-RED-BIRD",
+      "file": "images/DUDUQ-Y1M06-RED-BIRD.png",
+      "semanticTarget": "red bird",
+      "sha256": "bcc4de422e6179289ef51c74a9997c7ff7e7e9990c5357877484844ca392fa4b",
+      "pixelWidth": 1312,
+      "pixelHeight": 1199,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Y1M06-Q003-RED-BIRD",
+          "verifiedQuestionIds": [
+            "Y1M06-Q003"
+          ],
+          "contractPath": "bubbleDistractorPool[1].media",
+          "contractSemanticTarget": "red bird"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: precise-object-edit\nPrimary request: recolor the bird feathers saturated primary red\nReference: Image 1 is the exact friendly bird\nChange: make the blue and yellow feather areas vivid red while preserving neutral eyes, beak and feet\nPreserve: the bird identity, pose, anatomy, silhouette, framing and transparent alpha background\nConstraints: one bird only; no branch; no cage; no nest; no added object; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/RED-BIRD-ORIGINAL.png",
+        "originalSha256": "8c3d4b3efb616c4cd684a5125f561890778d8d9c72b73cc300314256cd30b41b",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-RED-DOG",
+      "file": "images/DUDUQ-Y1M06-RED-DOG.png",
+      "semanticTarget": "red dog",
+      "sha256": "c196273284ea49ace27590cfc36a13d3cd082864cb6247d3259ddee404b84cc9",
+      "pixelWidth": 1312,
+      "pixelHeight": 1199,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Y1M06-Q003-RED-DOG",
+          "verifiedQuestionIds": [
+            "Y1M06-Q003"
+          ],
+          "contractPath": "bubbleDistractorPool[5].media",
+          "contractSemanticTarget": "red dog"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: precise-object-edit\nPrimary request: recolor the dog fur saturated primary red\nReference: Image 1 is the exact friendly dog\nChange: make the golden-brown and cream fur vivid red while preserving neutral eye, nose and mouth details\nPreserve: the exact dog identity, pose, anatomy, silhouette, framing and transparent alpha background\nConstraints: one dog only; no other animal; no prop; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/RED-DOG-ORIGINAL.png",
+        "originalSha256": "c6243c596da044dbf6e7976f38a9f370fe5c2a44e8863aff5c2432adf7a72109",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-SMALL",
+      "file": "images/DUDUQ-Y1M06-SMALL.png",
+      "semanticTarget": "small",
+      "sha256": "1fc7d977aa858df0350df3394bc145f3669f830fd827efb6c1ab6f9ba2b1b7f6",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q014",
+          "mediaId": "IMG-Y1M06-Q014-SMALL",
+          "verifiedQuestionIds": [
+            "Y1M06-Q014"
+          ],
+          "contractPath": "pairs[3].b.media",
+          "contractSemanticTarget": "small"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Y1M06-Q016-SMALL",
+          "verifiedQuestionIds": [
+            "Y1M06-Q016"
+          ],
+          "contractPath": "bubbleDistractorPool[2].media",
+          "contractSemanticTarget": "small"
+        },
+        {
+          "questionId": "Y1M06-Q020",
+          "mediaId": "IMG-Y1M06-Q020-SMALL",
+          "verifiedQuestionIds": [
+            "Y1M06-Q020"
+          ],
+          "contractPath": "pairs[0].b.media",
+          "contractSemanticTarget": "small"
+        },
+        {
+          "questionId": "Y1M06-Q020",
+          "mediaId": "IMG-Q020-SMALL",
+          "verifiedQuestionIds": [
+            "Y1M06-Q020"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "small"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: precise-object-edit\nPrimary request: teach the size word \"small\" by making the exact same neutral gray cube much smaller\nReference: Image 1 is the exact big neutral gray cube\nChange: the exact same smooth rounded neutral medium-gray toy cube as the big reference should occupy about 30% of the canvas, leaving large transparent margins\nPreserve: the material, neutral gray color, viewpoint, lighting, shape and alpha silhouette of the reference cube\nConstraints: exactly one gray cube; do not recolor it; no red, blue, yellow or green material; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/SMALL-ORIGINAL.png",
+        "originalSha256": "8b07c45e2ff21c581cdf286c1f945fe69a241d866e5c570bb450352b7431a97d",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-SPIDER",
+      "file": "images/DUDUQ-Y1M06-SPIDER.png",
+      "semanticTarget": "spider",
+      "sha256": "dad58d7bba5260f7ed7655e26d86c8545dc3306e1fc18ec792e801f3ece5e886",
+      "pixelWidth": 1536,
+      "pixelHeight": 1024,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q008",
+          "mediaId": "IMG-Q008-SPIDER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q008"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "spider"
+        },
+        {
+          "questionId": "Y1M06-Q009",
+          "mediaId": "IMG-Y1M06-Q009-SPIDER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q009"
+          ],
+          "contractPath": "pairs[3].b.media",
+          "contractSemanticTarget": "spider"
+        },
+        {
+          "questionId": "Y1M06-Q011",
+          "mediaId": "IMG-Y1M06-Q011-SPIDER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q011"
+          ],
+          "contractPath": "targets[2].media",
+          "contractSemanticTarget": "spider"
+        },
+        {
+          "questionId": "Y1M06-Q012",
+          "mediaId": "IMG-Y1M06-Q012-SPIDER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q012"
+          ],
+          "contractPath": "pairs[2].b.media",
+          "contractSemanticTarget": "spider"
+        },
+        {
+          "questionId": "Y1M06-Q014",
+          "mediaId": "IMG-Y1M06-Q014-SPIDER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q014"
+          ],
+          "contractPath": "pairs[1].b.media",
+          "contractSemanticTarget": "spider"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Y1M06-Q016-SPIDER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q016"
+          ],
+          "contractPath": "targetsToFind[0].media",
+          "contractSemanticTarget": "spider"
+        },
+        {
+          "questionId": "Y1M06-Q016",
+          "mediaId": "IMG-Q016-SPIDER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q016"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "spider"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable friendly spider\nSubject: one non-scary dark charcoal-gray spider in an elevated three-quarter view, with exactly eight complete clearly separated legs, one abdomen, a smaller head and two main eyes\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered whole spider filling about 74–80% of the canvas with at least 10% transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one spider and exactly eight legs; no web; no insects; no other animals; no props; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/SPIDER-ORIGINAL.png",
+        "originalSha256": "66cd8db172a008824cf73368a331b8f6614ebbee30042447a50c3dfe8d933558",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-TURTLE",
+      "file": "images/DUDUQ-Y1M06-TURTLE.png",
+      "semanticTarget": "turtle",
+      "sha256": "74a0dc4ba34d02139984dd2aaea501ff625c6ee9e583bd69c004ab0ab5d73326",
+      "pixelWidth": 1536,
+      "pixelHeight": 1024,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q006",
+          "mediaId": "IMG-Y1M06-Q006-TURTLE",
+          "verifiedQuestionIds": [
+            "Y1M06-Q006"
+          ],
+          "contractPath": "pairs[3].b.media",
+          "contractSemanticTarget": "turtle"
+        },
+        {
+          "questionId": "Y1M06-Q006",
+          "mediaId": "IMG-Q006-TURTLE",
+          "verifiedQuestionIds": [
+            "Y1M06-Q006"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "turtle"
+        },
+        {
+          "questionId": "Y1M06-Q007",
+          "mediaId": "IMG-Y1M06-Q007-TURTLE",
+          "verifiedQuestionIds": [
+            "Y1M06-Q007"
+          ],
+          "contractPath": "targets[2].media",
+          "contractSemanticTarget": "turtle"
+        },
+        {
+          "questionId": "Y1M06-Q009",
+          "mediaId": "IMG-Y1M06-Q009-TURTLE",
+          "verifiedQuestionIds": [
+            "Y1M06-Q009"
+          ],
+          "contractPath": "pairs[1].b.media",
+          "contractSemanticTarget": "turtle"
+        },
+        {
+          "questionId": "Y1M06-Q010",
+          "mediaId": "IMG-Y1M06-Q010-TURTLE",
+          "verifiedQuestionIds": [
+            "Y1M06-Q010"
+          ],
+          "contractPath": "bubbleDistractorPool[4].media",
+          "contractSemanticTarget": "turtle"
+        },
+        {
+          "questionId": "Y1M06-Q011",
+          "mediaId": "IMG-Y1M06-Q011-TURTLE",
+          "verifiedQuestionIds": [
+            "Y1M06-Q011"
+          ],
+          "contractPath": "targets[0].media",
+          "contractSemanticTarget": "turtle"
+        },
+        {
+          "questionId": "Y1M06-Q012",
+          "mediaId": "IMG-Y1M06-Q012-TURTLE",
+          "verifiedQuestionIds": [
+            "Y1M06-Q012"
+          ],
+          "contractPath": "pairs[0].b.media",
+          "contractSemanticTarget": "turtle"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable friendly pet turtle\nSubject: one cheerful small green land turtle in three-quarter side view, with a clear domed patterned shell, head, four short legs and a tiny tail\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered whole turtle filling about 76–82% of the canvas with at least 10% transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: exactly one turtle; no water; no aquarium; no pond; no plants; no rock; no other animals; no props; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/TURTLE-ORIGINAL.png",
+        "originalSha256": "f032b8c2d982cd7c8d13586d983e50e51781968d0e3ae4a5483edd9069407d2a",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-YELLOW",
+      "file": "images/DUDUQ-Y1M06-YELLOW.png",
+      "semanticTarget": "yellow",
+      "sha256": "ca91d91266a27f2b9d25af7a743502f22768ddd35c528575914e97aa259d75e8",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q013",
+          "mediaId": "IMG-Y1M06-Q013-YELLOW",
+          "verifiedQuestionIds": [
+            "Y1M06-Q013"
+          ],
+          "contractPath": "pairs[2].cards[1].media",
+          "contractSemanticTarget": "yellow"
+        },
+        {
+          "questionId": "Y1M06-Q015",
+          "mediaId": "IMG-Y1M06-Q015-YELLOW",
+          "verifiedQuestionIds": [
+            "Y1M06-Q015"
+          ],
+          "contractPath": "targets[0].media",
+          "contractSemanticTarget": "yellow"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: precise-object-edit\nPrimary request: change only the red sphere to saturated primary yellow\nReference: Image 1 is the exact smooth rounded toy sphere used by the color set\nChange: replace the red material with uniform vivid primary yellow while retaining subtle studio highlights\nPreserve: the exact sphere, size, position, shape, lighting, framing and alpha silhouette\nConstraints: one sphere only; no red, blue or green material; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/YELLOW-ORIGINAL.png",
+        "originalSha256": "1f4d2d855992ea3dea039235370707e15f1c0c045f3d41821680e9a9916b05d8",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-YELLOW-FISH",
+      "file": "images/DUDUQ-Y1M06-YELLOW-FISH.png",
+      "semanticTarget": "yellow fish",
+      "sha256": "03a4d66b177b98e93f1dcde9fdfb3e42d9491e6f3f641ef7c83143ab2837418f",
+      "pixelWidth": 1536,
+      "pixelHeight": 1024,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Y1M06-Q003-YELLOW-FISH",
+          "verifiedQuestionIds": [
+            "Y1M06-Q003"
+          ],
+          "contractPath": "targetsToFind[0].media",
+          "contractSemanticTarget": "yellow fish"
+        },
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Q003-YELLOW-FISH",
+          "verifiedQuestionIds": [
+            "Y1M06-Q003"
+          ],
+          "contractPath": "mediaBindings[0]",
+          "contractSemanticTarget": "yellow fish"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational vocabulary-card image for children ages 6–11\nPrimary request: one unmistakable bright yellow fish teaching the phrase \"yellow fish\"\nSubject: one lemon-yellow freshwater fish in clean side view, with one body, two eyes naturally placed, clear fins, scales and a complete tail; yellow is the dominant color\nStyle/medium: premium polished rounded 3D children's animation render, crisp clean silhouette, high-quality soft materials\nComposition/framing: centered whole fish filling about 76–82% of the canvas with at least 10% transparent safe margin\nLighting/mood: soft bright studio lighting, cheerful and welcoming\nConstraints: primary yellow, not orange, red, green or blue; exactly one fish; no aquarium; no bowl; no water; no bubbles; no plants; no other fish; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/YELLOW-FISH-ORIGINAL.png",
+        "originalSha256": "c701478274a32f314dd913ddc7edbc8d913d8c50e519151769af3ca6185a90e3",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-YELLOW-HAMSTER",
+      "file": "images/DUDUQ-Y1M06-YELLOW-HAMSTER.png",
+      "semanticTarget": "yellow hamster",
+      "sha256": "1e16e58420f90bf15ce115f0f7fef2b8c4974ecde1b89aaf5872d118719b01c2",
+      "pixelWidth": 1303,
+      "pixelHeight": 1207,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "reviewEvidence": "qa/media-candidates/y1m06-official-20261030/semantic-evidence.json",
+      "bindings": [
+        {
+          "questionId": "Y1M06-Q003",
+          "mediaId": "IMG-Y1M06-Q003-YELLOW-HAMSTER",
+          "verifiedQuestionIds": [
+            "Y1M06-Q003"
+          ],
+          "contractPath": "bubbleDistractorPool[3].media",
+          "contractSemanticTarget": "yellow hamster"
+        }
+      ],
+      "provenance": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "generationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+        "prompt": "Use case: precise-object-edit\nPrimary request: recolor the hamster fur saturated primary yellow\nReference: Image 1 is the exact friendly hamster\nChange: make the golden-brown and white fur bright yellow while preserving neutral eye, nose, mouth and whisker details\nPreserve: the exact hamster identity, pose, anatomy, silhouette, framing and transparent alpha background\nConstraints: one hamster only; no cage; no wheel; no food; no prop; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff",
+        "originalFile": "provenance/originals/YELLOW-HAMSTER-ORIGINAL.png",
+        "originalSha256": "275ee8ab31f2dd9d65eaa830ac027b7841c77467be83ba135af1b485ea1e01bb",
+        "alphaNormalization": {
+          "script": "qa/normalize-transparent-png-alpha.mjs",
+          "semanticPixelsChanged": false,
+          "expectedCoreComponents": 1,
+          "operation": "remove detached low-alpha background pixels; retain opaque subject plus 3px antialias edge; add transparent safe-margin padding"
+        }
+      }
+    }
+  ]
+}

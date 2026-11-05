@@ -145,10 +145,31 @@ assert(forbiddenFutureCopies.length === 0, `Future Core release copied manual as
 report.knownDebt.coreReleasesWithManualAssetCatalog = duplicatedAssetCatalogReleases;
 report.guards.push("future-core-must-not-copy-manual-asset-catalog");
 
-// 6) Years 3-5 must not be added before the systemic foundation is promoted.
-for (const year of [3, 4, 5]) {
-  assert(!(await exists(`content/english/year-${year}`)), `Year ${year} was added before systemic foundation gate was retired.`);
+// 6) The old staged-authoring gate is retired: all five year directories are
+// part of the current product. Verify the actual source-module structure so
+// this audit cannot reject Years 3-5 or silently accept incomplete year trees.
+let curricularModules = 0;
+for (let year = 1; year <= 5; year += 1) {
+  const yearRoot = `content/english/year-${year}`;
+  assert(await exists(yearRoot), `Current curriculum year is missing: Y${year}`);
+  const moduleNames = (await fs.readdir(path.join(ROOT, yearRoot), { withFileTypes: true }))
+    .filter((entry) => entry.isDirectory() && /^module-\d{2}$/.test(entry.name))
+    .map((entry) => entry.name)
+    .sort();
+  assert(moduleNames.length === 6, `Current curriculum year must contain six modules: Y${year} (${moduleNames.length})`);
+  for (let module = 1; module <= 6; module += 1) {
+    const moduleName = `module-${String(module).padStart(2, "0")}`;
+    const moduleId = `Y${year}M${String(module).padStart(2, "0")}`;
+    const moduleRoot = `${yearRoot}/${moduleName}`;
+    assert(moduleNames.includes(moduleName), `Current curriculum module is missing: ${moduleId}`);
+    assert(await exists(`${moduleRoot}/index.html`), `Current curriculum entrypoint is missing: ${moduleId}`);
+    const moduleFiles = await fs.readdir(path.join(ROOT, moduleRoot), { withFileTypes: true });
+    assert(moduleFiles.some((entry) => entry.isFile() && entry.name.endsWith(".js")), `Current curriculum module has no runtime content file: ${moduleId}`);
+    curricularModules += 1;
+  }
 }
-report.guards.push("years3-5-blocked-during-foundation");
+assert(curricularModules === 30, "Current curriculum must contain exactly 30 source modules.");
+report.curriculum = { sourceModules: curricularModules, years: 5, modulesPerYear: 6, compiledActivityContracts: "verified by release/media QA, not this source architecture audit" };
+report.guards.push("complete-current-five-year-30-module-source-tree");
 
 console.log(JSON.stringify(report, null, 2));

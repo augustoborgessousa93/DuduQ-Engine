@@ -1,0 +1,202 @@
+name: DUDUQ - Y3M03 Independent Candidate Overlay QA
+
+on:
+  push:
+    branches:
+      - automation/duduq-media-source-only-fix-20261029
+    paths:
+      - ".github/workflows/duduq-y3m03-independent-overlay-qa.yml"
+      - "qa/media-candidates/y3m03-official-20261104/**"
+      - "qa/y3m03-official-media-*.mjs"
+      - "qa/prepare-y3m03-official-media-integration.mjs"
+      - "qa/apply-y3m03-official-media-overlay.mjs"
+      - "qa/verify-y3m03-source-registry-rebase.mjs"
+      - "qa/tests/verify-y3m03-*.mjs"
+      - "qa/media-binding-usage-guard.mjs"
+      - "qa/tests/duduq-media-binding-usage-guard.test.mjs"
+      - "qa/y1m05-official-media-browser-qa.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duduq-y3m03-independent-overlay-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  reproduce-y3m03-review-overlay:
+    name: Rebuild and replay Y3M03 candidate overlay on Linux
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      CI: "true"
+      BASE_URL: http://127.0.0.1:4175
+    steps:
+      - name: Checkout isolated review branch without write credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Remove stale Y3M03 QA output from this ephemeral runner
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          rm -rf -- qa/results/y3m03-official-media-browser
+          rm -f -- qa/results/y3m03-official-media-binding-plan.json qa/results/y3m03-overlay-application.json
+          rm -f -- qa/results/y3m03-review-build.json qa/results/y3m03-review-media-closure-inventory.json
+          rm -f -- qa/results/y3m03-review-module-closure.json
+          echo "STALE_Y3M03_QA_EVIDENCE_CLEARED_FROM_EPHEMERAL_CHECKOUT"
+
+      - name: Install Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install independent Chromium QA dependencies
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Build clean V26 from immutable source
+        run: bash qa/build-v26-topic-first-paint-qa.sh
+
+      - name: Rebase without rewriting source hashes and verify semantic guards
+        run: |
+          node qa/prepare-y3m03-official-media-integration.mjs
+          node qa/verify-y3m03-source-registry-rebase.mjs
+          node --test qa/tests/verify-y3m03-source-registry-rebase.test.mjs
+          node --test qa/tests/png-alpha-component-audit.test.mjs
+          node --test qa/tests/duduq-exact-semantic-match.test.mjs qa/tests/duduq-media-binding-usage-guard.test.mjs
+
+      - name: Start isolated review-only HTTP server
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages > /tmp/duduq-y3m03-overlay-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then
+              echo "ISOLATED_Y3M03_QA_HTTP_READY"
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/duduq-y3m03-overlay-http.log
+          exit 1
+
+      - name: Apply and statically verify the occurrence-scoped Y3M03 candidate overlay
+        run: |
+          node qa/apply-y3m03-official-media-overlay.mjs --apply
+          node qa/tests/verify-y3m03-official-media-overlay.mjs
+          node qa/verify-y3m03-official-media-build.mjs
+          git diff --exit-code -- content/english functions/play/english core runtime/gold-masters
+          echo "NO_SOURCE_QUESTION_NO_PRODUCTION_NO_GOLD_MASTER_CHANGE"
+
+      - name: Exercise all routes plus desktop mouse and tablet/mobile touch feedback
+        run: node qa/y3m03-official-media-browser-qa.mjs
+
+      - name: Audit the isolated overlay without promoting candidate metadata
+        run: |
+          node qa/audit-media-completion.mjs dist-pages --output=qa/results/y3m03-review-media-closure-inventory.json
+          node qa/check-media-module-closure.mjs --input=qa/results/y3m03-review-media-closure-inventory.json --output=qa/results/y3m03-review-module-closure.json
+          node --input-type=module -e '
+            import assert from "node:assert/strict";
+            import {readFileSync} from "node:fs";
+            const inv=JSON.parse(readFileSync("qa/results/y3m03-review-media-closure-inventory.json"));
+            const closure=JSON.parse(readFileSync("qa/results/y3m03-review-module-closure.json"));
+            assert.equal(inv.modules,30);assert.equal(inv.activities,600);
+            assert.equal(closure.modules,30);assert.equal(closure.activities,600);
+            assert.equal(inv.finalCompletionPassed,false);assert.equal(closure.status,"INCOMPLETE");
+            console.log(JSON.stringify({status:"PASS_CANDIDATE_ONLY",modules:30,activities:600,projectComplete:false,productionDeployed:false}));
+          '
+
+      - name: Retain independent Y3M03 reports, trace, video and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-independent-y3m03-overlay-qa-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/y3m03-official-media-binding-plan.json
+            qa/results/y3m03-overlay-application.json
+            qa/results/y3m03-review-build.json
+            qa/results/y3m03-review-media-closure-inventory.json
+            qa/results/y3m03-review-module-closure.json
+            qa/results/y3m03-official-media-browser/**
+            qa/media-candidates/y3m03-official-20261104/integration-semantic-evidence.json
+            qa/media-candidates/y3m03-official-20261104/source-registry-rebase.json
+            /tmp/duduq-y3m03-overlay-http.log
+
+      - name: Explicit Y3M03 release boundary
+        if: always()
+        run: |
+          echo "Only ephemeral runner dist-pages is modified. No finalization, merge, release, production deploy or deletion."
+          echo "A red browser step remains a blocker; technical evidence never becomes owner approval."
+
+  investigate-existing-y1m04-y1m05-gates:
+    name: Recheck Y1M04 Q002 timing and Y1M05 source pin on Linux
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      CI: "true"
+      BASE_URL: http://127.0.0.1:4176
+    steps:
+      - name: Checkout isolated review branch without write credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install Node.js and Chromium
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install independent Chromium QA dependencies
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Build exact pristine V26
+        run: bash qa/build-v26-topic-first-paint-qa.sh
+
+      - name: Prove the Y1M05 pin accepts V26 and rejects repinned mutations
+        run: |
+          node qa/verify-y1m05-source-registry-rebase.mjs
+          node --test qa/tests/verify-y1m05-source-registry-rebase.test.mjs
+
+      - name: Start isolated gate-investigation server
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 -m http.server 4176 --bind 127.0.0.1 --directory dist-pages > /tmp/duduq-known-gates-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4176/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-known-gates-http.log
+          exit 1
+
+      - name: Replay Y1M04 Q002 with guarded native pointer timing
+        run: |
+          rm -rf -- qa/results/y1m04-official-media-browser
+          node qa/apply-y1m04-official-media-overlay.mjs --apply
+          node qa/tests/verify-y1m04-official-media-overlay.mjs
+          node qa/y1m04-official-media-browser-qa.mjs
+
+      - name: Retain known-gate investigation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-y1m04-y1m05-gate-investigation-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/y1m04-official-media-browser/**
+            /tmp/duduq-known-gates-http.log
+
+      - name: Explicit known-gate boundary
+        if: always()
+        run: |
+          echo "No gate was weakened and no source hash was rewritten."
+          echo "No finalization, production approval, merge, deploy or deletion is performed."

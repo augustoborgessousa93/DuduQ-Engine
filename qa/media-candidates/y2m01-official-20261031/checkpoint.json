@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "DUDUQ_CODEX_IMAGE_GENERATION_CHECKPOINT_V1",
+  "createdAt": "2026-10-31T19:21:56.1401776Z",
+  "lane": "generation",
+  "moduleId": "Y2M01",
+  "status": "GENERATION_CANDIDATES_COMPLETE_PROJECT_INCOMPLETE",
+  "idempotencyKey": "e1bf6b5a62201dbd60f45605b88a6551b12c76c710544350fa4cfcf81355a607",
+  "sourceState": {
+    "questionSource": "dist-pages/content/english/year-2/module-01/questions.json",
+    "questionSourceSha256": "257776f3d2a896a929db2233d3d238ba2f2881d652cdab0be82dae5c3519f432",
+    "mediaModuleClosureSha256": "3c3d6a19632b488651d20d373ffd0a70819896a6d1b8246bb2adb7a3f9a5b837",
+    "mediaClosureInventorySha256": "2698f45a895236722b341abcfaffd7518a7d3cbfab22ddaddf95a94b0c676dc5",
+    "previousLocalCheckpoint": "qa/media-candidates/y1m06-official-20261030/checkpoint.json",
+    "previousLocalCheckpointSha256": "fa51d8c20abb6e91f05f14a0d7e2704a9b5fae3a9e4e77625e4fbb148f7421da",
+    "lastAuditedGlobalPendingMediaIds": 1055,
+    "modulePendingMediaIdsBeforeIntegration": 29
+  },
+  "inventory": {
+    "actualQuestionCount": 20,
+    "questionContractsReviewed": 20,
+    "pendingMediaIdCount": 29,
+    "uniqueCandidateConceptCount": 28,
+    "questionUsageRecordCount": 53,
+    "questionInventoryFile": "question-inventory.json",
+    "bindingPlanFile": "binding-plan.json"
+  },
+  "generation": {
+    "generator": "Codex built-in image_gen",
+    "generatorStatus": "AVAILABLE_AND_COMPLETED",
+    "blockedGenerator": false,
+    "nativeGeneratedConceptCount": 18,
+    "nativeGeneratedConcepts": ["See you", "What's your name?", "A", "B", "C", "D", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
+    "verifiedOriginalReuseCount": 10,
+    "verifiedOriginalReuseConcepts": ["children greeting", "Hello", "Good morning", "Good afternoon", "Goodbye", "Good night", "Ana", "Ben", "Leo", "Mia"],
+    "generationProvenanceFile": "generation-provenance.json",
+    "originalFilesPreserved": 28,
+    "candidatePngFiles": 28
+  },
+  "validation": {
+    "structurallyValidatedPngs": 28,
+    "structurallyInvalidPngs": 0,
+    "realAlphaValidated": true,
+    "minimumResolutionValidated": true,
+    "semanticModelPrecheckPassed": 28,
+    "humanHomologationStatus": "PENDING",
+    "pngValidationFile": "png-validation.json",
+    "semanticEvidenceFile": "semantic-evidence.json",
+    "batchManifestFile": "batch-manifest.json",
+    "batchManifestSha256": "aee8df3a6f77df0e9a15a8397a441c4684fa70c926ecd912460f2a43cf62d139",
+    "assetFingerprintSha256": "10f78328fe9c9405c4ec8054462b19b157b6e647e6eec894d5350430d9c2a634",
+    "verifiedBindingIds": 29,
+    "invalidAssets": []
+  },
+  "twoLaneVerification": {
+    "file": "two-lane-verification.json",
+    "sha256": "f2089bae4cbdcd87328c5991cc89e473c4811534c81baafd99c0492ca21e23aa",
+    "moduleStage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA",
+    "needsGeneration": false,
+    "needsIntegrationOrQA": true,
+    "generatedEvidenceOnly": true,
+    "productionApproved": false,
+    "globalPendingMediaIdsAfterCandidateStaging": 1055,
+    "globalPendingReductionClaimed": 0,
+    "finished": false,
+    "independentQaGreen": false
+  },
+  "integrityGuards": {
+    "candidateWritesRestrictedTo": "qa/media-candidates/y2m01-official-20261031/",
+    "questionJsonModified": false,
+    "runtimeModified": false,
+    "registryModified": false,
+    "mediaOverlayApplied": false,
+    "approvalFlagsChanged": false,
+    "existingReferencedAssetsRemoved": false,
+    "goldMastersModified": false,
+    "productionModified": false,
+    "productionMergeOrDeployRun": false,
+    "secondCodexProcessStarted": false,
+    "apiOrSubscriptionPurchaseMade": false,
+    "originalDirtyWorkspaceModified": false
+  },
+  "evidenceHashes": {
+    "question-inventory.json": "e096a4c33c532afc5eff2df7903de25b44ce2e2f605f113b5324991f2ac6460e",
+    "binding-plan.json": "3037c930c73579e38989aa635c867755170c7a0f10b6c14503dc872ae443bbe2",
+    "semantic-evidence.json": "28ec96efed2f58b90333f735fb0b1671f7460e38ee6f78eb8b92034503f21fdf",
+    "generation-provenance.json": "95c016ce9dbe574c1b5e0c45c1f130e5dc8c20f41d4ea952036f6dc667cd5a67",
+    "png-validation.json": "dc49909c11df4d2aba034747510fac5861820e427d1a7f91147c2c97bb64d094"
+  },
+  "git": {
+    "branch": "automation/duduq-media-source-only-fix-20261029",
+    "commitStatusAtCheckpointWrite": "PENDING_SAFE_PATH_SCOPED_COMMIT",
+    "pushStatusAtCheckpointWrite": "PENDING"
+  },
+  "projectComplete": false,
+  "projectStatus": "INCOMPLETE",
+  "projectCompletionReason": "Candidate staging for one module does not integrate media, clear the 1055-ID global ledger, prove 30/30 modules and 600/600 activities, complete independent QA, or authorize release."
+}

@@ -1,0 +1,271 @@
+{
+  "schemaVersion": "DUDUQ_Y1M05_NATIVE_MEDIA_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-10-30",
+  "moduleId": "Y1M05",
+  "provider": "Codex built-in image_gen",
+  "sourceQuestionContractSha256": "7ceb00996bfe518fb92a61d9a34fa8ed7b0da0718a111d108ef04dba84ddbdd3",
+  "sourceRegistrySha256": "c56f3ecc5dd608228ccb6d7ba5237ed8da5676cd4fa6f655a9eeb27ce268400c",
+  "sourceQuestionInvariantSha256": "c5a715570f4ddf49209ec8020a538aba809811ad755498b13039511af8f53b0a",
+  "reviewedQuestionCount": 20,
+  "auditedPendingIds": 101,
+  "postSplitIds": 101,
+  "usageRecords": 101,
+  "splitReview": {
+    "status": "APPROVED_OCCURRENCE_SCOPED_SPLITS",
+    "count": 5,
+    "splits": [
+      {
+        "questionId": "Y1M05-Q001",
+        "field": "options[0].media.assetId",
+        "from": "IMG-Y1M05-Q001-HEAD",
+        "to": "IMG-Y1M05-Q001-O1-HEAD",
+        "semanticTarget": "head"
+      },
+      {
+        "questionId": "Y1M05-Q001",
+        "field": "options[1].media.assetId",
+        "from": "IMG-Y1M05-Q001-HANDS",
+        "to": "IMG-Y1M05-Q001-O2-HANDS",
+        "semanticTarget": "hands"
+      },
+      {
+        "questionId": "Y1M05-Q001",
+        "field": "options[2].media.assetId",
+        "from": "IMG-Y1M05-Q001-LEGS",
+        "to": "IMG-Y1M05-Q001-O3-LEGS",
+        "semanticTarget": "legs"
+      },
+      {
+        "questionId": "Y1M05-Q001",
+        "field": "options[3].media.assetId",
+        "from": "IMG-Y1M05-Q001-ARMS",
+        "to": "IMG-Y1M05-Q001-O4-ARMS",
+        "semanticTarget": "arms"
+      },
+      {
+        "questionId": "Y1M05-Q003",
+        "field": "pairs[3].b.media.assetId",
+        "from": "IMG-Y1M05-Q003-FEET",
+        "to": "IMG-Y1M05-Q003-B4-FEET",
+        "semanticTarget": "feet"
+      }
+    ],
+    "reason": "Five media IDs are also referenced by Y2M06-Q015. New IDs are assigned only to the exact Y1M05 option/pair occurrences so Y2M06 remains provisional and untouched."
+  },
+  "renderedReview": {
+    "status": "PASSED_BY_CODEX_DELEGATED_VISUAL_REVIEW",
+    "criteria": [
+      "correct concept in all 101 usages",
+      "no cutoff",
+      "non-empty subject",
+      "no unrelated object",
+      "no embedded text",
+      "transparent background",
+      "small-card readability"
+    ]
+  },
+  "candidateAssets": [
+    {
+      "assetKey": "Y1M05-OFFICIAL-HEAD",
+      "concept": "head",
+      "file": "images/DUDUQ-Y1M05-HEAD.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "3cfe7135cc6e3f44a5e3a9f84475e4da902bfe5a1948605e6b822ca434764c8c",
+      "sourceSha256": "02f4b0a096e8433efdfb5f3f210ead571ec74c84cba41dc05cead6db6f318068",
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 776480,
+        "alphaClearPixels": 1582816,
+        "subjectBoundsCoverage": 0.4821,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_FULL_SUBJECT_NO_CUTOFF_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-HANDS",
+      "concept": "hands",
+      "file": "images/DUDUQ-Y1M05-HANDS.png",
+      "width": 1792,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "c56ae4711b50d5ee41d46253f168e1e46ab09321123d22c085ef6db175364828",
+      "sourceSha256": "99322110b54172bfe1b10cba62bd0cba6eff628ab20dd5a5a1c62c18bd5079d3",
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 611528,
+        "alphaClearPixels": 2140984,
+        "subjectBoundsCoverage": 0.4607,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_FULL_SUBJECT_NO_CUTOFF_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-ARMS",
+      "concept": "arms",
+      "file": "images/DUDUQ-Y1M05-ARMS.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "ba4d3cfa789b050c22e752afde0868726b7cf37e806063bd25ec902b007c8acb",
+      "sourceSha256": "a2f604b8b4a7068f48f0ce0ac362bf05c509795624c466ab9fe38237a2d3c560",
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 494558,
+        "alphaClearPixels": 1864738,
+        "subjectBoundsCoverage": 0.4862,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_FULL_SUBJECT_NO_CUTOFF_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-LEGS",
+      "concept": "legs",
+      "file": "images/DUDUQ-Y1M05-LEGS.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "688b7842435f0fa02797da3d8433edb88dff09f79373e2f2f7de89365933674a",
+      "sourceSha256": "e3c4115d78b4917321bfcfcee22c2b66bce6e7b7a71ec2304664e7d017db56a6",
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 426041,
+        "alphaClearPixels": 1933255,
+        "subjectBoundsCoverage": 0.3379,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_FULL_SUBJECT_NO_CUTOFF_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-FEET",
+      "concept": "feet",
+      "file": "images/DUDUQ-Y1M05-FEET.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "162628c4587183735ac0a6841d70c6830142278cb25599fb8f63f1a6e1c56fa0",
+      "sourceSha256": "8ca6d7e7c6cac005aa7d1f1895bf83d9f667bae3a36f1a9a1f1ccf3e1340c16c",
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 738758,
+        "alphaClearPixels": 1620538,
+        "subjectBoundsCoverage": 0.4927,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_FULL_SUBJECT_NO_CUTOFF_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SIT-DOWN",
+      "concept": "sit down",
+      "file": "images/DUDUQ-Y1M05-SIT-DOWN.png",
+      "width": 1536,
+      "height": 1792,
+      "format": "PNG_RGBA",
+      "sha256": "8c7edde7833d27e747e73dba64028c1b1a3fe35c27b01f957622416d239670ac",
+      "sourceSha256": "5ec6fe61c58477f6b6ff4c275e9ea0d3871d32aca6adbea9fb3481b64b6cf9c8",
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 581721,
+        "alphaClearPixels": 2170791,
+        "subjectBoundsCoverage": 0.4188,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_FULL_SUBJECT_NO_CUTOFF_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-STAND-UP",
+      "concept": "stand up",
+      "file": "images/DUDUQ-Y1M05-STAND-UP.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "ecb312a233096d2c7424f161f38bfeb69478b78cda1ea50e817d400de0b4dc67",
+      "sourceSha256": "793f12590fbb69d0de47eb2d25ff0b4a6923da32933434fa3568fe91131df8d0",
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 383728,
+        "alphaClearPixels": 1975568,
+        "subjectBoundsCoverage": 0.3713,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_FULL_SUBJECT_NO_CUTOFF_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-COME-IN",
+      "concept": "come in",
+      "file": "images/DUDUQ-Y1M05-COME-IN.png",
+      "width": 1536,
+      "height": 1792,
+      "format": "PNG_RGBA",
+      "sha256": "7c975b666b9416daee5a73468fb57a83a5ec50aa2222a8a35e94f20cc65faad2",
+      "sourceSha256": "9d8617cfdae99c85b09f318bfe4dd79c9d98b9503b0feac7ccde67dacd44eeba",
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 617229,
+        "alphaClearPixels": 2135283,
+        "subjectBoundsCoverage": 0.357,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_FULL_SUBJECT_NO_CUTOFF_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-SILENCE-PLEASE",
+      "concept": "silence, please",
+      "file": "images/DUDUQ-Y1M05-SILENCE-PLEASE.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA",
+      "sha256": "bf694ec13a017859f7fa6ba7080952cec3d46fcf9b4e060827889dd50ada951f",
+      "sourceSha256": "c7a761561edc0dd0f976acdbf1c91c8f9d7f6e215e5a90b259c26c04cc70f385",
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 615509,
+        "alphaClearPixels": 1743787,
+        "subjectBoundsCoverage": 0.3507,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_FULL_SUBJECT_NO_CUTOFF_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    },
+    {
+      "assetKey": "Y1M05-OFFICIAL-THANK-YOU",
+      "concept": "thank you",
+      "file": "images/DUDUQ-Y1M05-THANK-YOU.png",
+      "width": 1536,
+      "height": 1792,
+      "format": "PNG_RGBA",
+      "sha256": "37028ba73596681aad007d6421bc87af96de1f619032aa31a953d2d16b6c678d",
+      "sourceSha256": "4c9dd9d0fcdc7f400e83d791446156e9b9a73bf6b5e5f3956d08468fd09a7495",
+      "semanticPrecheck": "PASSED",
+      "technicalQc": {
+        "valid": true,
+        "transparent": true,
+        "alphaVisiblePixels": 434176,
+        "alphaClearPixels": 2318336,
+        "subjectBoundsCoverage": 0.2966,
+        "subjectScaleQc": "PASS"
+      },
+      "visualReview": "PASSED_FULL_SUBJECT_NO_CUTOFF_NO_TEXT_NO_DISTRACTOR_TRANSPARENT"
+    }
+  ],
+  "productionReleaseCertified": false,
+  "goldMastersModified": false
+}

@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "DUDUQ_CODEX_IMAGE_GENERATION_RECEIPTS_V1",
+  "createdAt": "2026-11-02T19:46:07.533Z",
+  "moduleId": "Y2M06",
+  "provider": "Codex built-in image_gen",
+  "tool": "image_gen.imagegen",
+  "assets": [
+    {
+      "concept": "eye",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-EYE-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-be77ba84-baf5-4c5d-906b-ac4870b03a4e.png",
+      "originalSha256": "5365ac311e695049de110b1329d1fd43ed070308455bc9986c02aa707b20c385",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "ear",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-EAR-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-60f97ea7-25b3-46be-b50a-4adb368c1ac7.png",
+      "originalSha256": "7edc349b604f319d61bbbbeecc520f49c94555a6e68f7910c16d00148c692696",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "nose",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-NOSE-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-21b16a70-ae89-463e-90e4-51c58a792eca.png",
+      "originalSha256": "a5b24b766b8dfd4dd4cc1a513bfde063146f71f8da6bfacfa253acda2d991aa6",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "mouth",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-MOUTH-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-6b88bcee-b785-45a5-8443-c4eaeb7fcf33.png",
+      "originalSha256": "7a9f6de2d160a55352dc6fc31a37a4cf2c12e85272aeadce052cbb7c3b42db7c",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "orange",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-ORANGE-FRUIT-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-5e0630f0-f21d-4719-8077-60d259f1d3b3.png",
+      "originalSha256": "e3e755f38c2efb6c8637bc9f9def0bd706e0f5cf6821b3efdab454666ecaee77",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "grape",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-GRAPE-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-2b676701-ebb3-426b-a09e-176f3aa3dcf3.png",
+      "originalSha256": "535d16680693e2ff3c8e20ce085b6e6976382f62fb795e28fc9c30eedc5789f6",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "papaya",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-PAPAYA-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-de8f2291-9cc5-498f-8cf9-4b2652a74fae.png",
+      "originalSha256": "5908f5addad74506639b2d9211ee30852ea3dba7934d109b1edae4a90f26e748",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "melon",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-MELON-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-a3275597-76d6-4b63-ab40-05099bd50039.png",
+      "originalSha256": "0388cc1982c09a48f96152330b2ced86d41a0b0c6b6dadc4b21ca4a589278d4c",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "pear",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-PEAR-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-6651c16a-0888-42cd-9532-cf3140306dc3.png",
+      "originalSha256": "9ba03aac4d3d8383a8bb2fe038f23668f02cc4b68aeb99d0148915485087fd3b",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "knee",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-KNEE-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-05d97121-e293-495b-ab19-5ce6cc3765d0.png",
+      "originalSha256": "0a511e0fa3fcd711f9c5a4a8ee3a7a039368335c99f64ee00fcd8ff85e082190",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "shoulders",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-SHOULDERS-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-e4070f5b-b77e-461b-b8e3-e1ffe7d60ef1.png",
+      "originalSha256": "328568e477aad5245d21245022411a99bc4043c375bef856d42a9c044c31e3dd",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "finger",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-FINGER-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-ba79441a-1cca-4c6e-8cac-e3a48ff55bff.png",
+      "originalSha256": "cac3cda6743a446e1bea24be538fa3a530d76d2679bf3a70cf0a147257296732",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "banana",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-BANANA-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-44c328c4-5f12-4dd0-b3ef-82bb1aaa28ae.png",
+      "originalSha256": "184fbc78aa409e71a4d6f0242082c84c9c6c573ca900037670489e84814c010e",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "apple",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-APPLE-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-43169505-b9fe-4d9f-a891-1c7db79d862e.png",
+      "originalSha256": "979dccae9a68c40ae43693c8d99dbe3362c02827b518a820cf704270b2389805",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "carrot",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-CARROT-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-54103984-1b56-450d-9cdb-069dcf45f401.png",
+      "originalSha256": "1522fa92079f8412040ba7a206533bb4bd4cd6bf5ed0f62cdd449e2e254bc0a5",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "tomato",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-TOMATO-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-23cc2526-d9ee-4a3b-a831-288b0568aef7.png",
+      "originalSha256": "972ecec72f6689630fc7e9a5636262b44955d84ca4226a78f8ae262faa0c08eb",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "potato",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-POTATO-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-b74458d5-2c11-4d25-8578-705c17e96987.png",
+      "originalSha256": "40c273a8cab7b5b202cbb511692cc413a4e7963c10b2527f010eace4a6168627",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "big apple",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-BIG-APPLE-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-ed1cbb90-44d2-432d-8892-162b39c019a2.png",
+      "originalSha256": "5160d5c1cbfe1f11852d402c7cfef37f203df5d4ff73b6a6695c8a90ffdc2407",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "big melon",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-BIG-MELON-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-5808bdde-09e2-42d3-a766-b49af9d08760.png",
+      "originalSha256": "7821f89e13fa78ca45a2b175da24085326a23afef90657b3e947aa9bd6e7c9ca",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "big banana",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-BIG-BANANA-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-20c7df84-add4-46cf-8809-fd7fa3c8b675.png",
+      "originalSha256": "6b2cbba74949d1126b2d28463f6199b2a93e419264909fbb53f3e570ea7816ec",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "small grape",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-SMALL-GRAPE-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-a7bf6c81-fd76-4a15-819a-62b2fdfcaa74.png",
+      "originalSha256": "faa908a67e0f6cfa12c28ade9ab032be1aae5db9f94e7b83808e8b4b2658a2dc",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "small pear",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-SMALL-PEAR-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-1ffc22ed-dc47-4977-823f-54750e6a5018.png",
+      "originalSha256": "f3415f7bdec104248b321c8721070273c8624e90a236a48fd416b460b305c8d7",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    },
+    {
+      "concept": "small carrot",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y2M06-SMALL-CARROT-ORIGINAL.png",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a19dc7-17d8-7853-94c9-2fef445346bd/exec-4f39209a-d2e8-42ec-95b1-ffec39e91ef7.png",
+      "originalSha256": "ae6d205b6c8eadca35f27158f3112f2376ffebb3690759d6aed55e47c241ddaf",
+      "toolResultOutputHint": "Generated image preserved from the Codex built-in image generator output.",
+      "transparentBackgroundRequested": true
+    }
+  ],
+  "failedAttempts": [],
+  "blockedGenerator": false,
+  "blocker": null,
+  "productionApproved": false,
+  "integrationApplied": false
+}

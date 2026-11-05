@@ -23,7 +23,8 @@ for(const path of replaced){
  if(!entry)throw Error('V22_EXPECTED_RUNTIME_FILE_MISSING:'+path);
  const current=readFileSync('dist-pages/'+path);
  if(SHA(current)!==entry.sha)throw Error('V22_APPROVED_FILE_SHA_MISMATCH:'+path);
- const update=readFileSync('qa/overlays/v22/'+path);
+ // Keep QA overlay bytes stable across Windows core.autocrlf and Linux CI.
+ const update=Buffer.from(readFileSync('qa/overlays/v22/'+path,'utf8').replace(/\r\n/g,'\n'),'utf8');
  if(update.equals(current))throw Error('V22_NO_ACTUAL_CHANGE:'+path);
  mkdirSync(dirname('dist-pages/'+path),{recursive:true});
  writeFileSync('dist-pages/'+path,update);
@@ -32,7 +33,7 @@ for(const path of replaced){
 }
 const newPath='core/matching/duduq-matching-runtime-v22.js';
 if(entries.has(newPath))throw Error('V22_NEW_RUNTIME_ALREADY_EXISTS');
-const program=readFileSync('qa/overlays/v22/'+newPath);
+const program=Buffer.from(readFileSync('qa/overlays/v22/'+newPath,'utf8').replace(/\r\n/g,'\n'),'utf8');
 const goldPath='dist-pages/runtime/gold-masters/matching/src/app.js';
 const gold=readFileSync(goldPath);
 const approvedGold=entries.get('runtime/gold-masters/matching/src/app.js');

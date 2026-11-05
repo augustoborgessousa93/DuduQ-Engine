@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "DUDUQ_MODEL_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-10-29",
+  "reviewScope": "MODEL_VISUAL_PRECHECK_AND_TECHNICAL_QA",
+  "source": "Cloudflare Workers AI FLUX.2 Klein 4B, one 1920x1920 JPEG from free quota; rembg on GitHub Linux",
+  "candidateAssets": [
+    {
+      "assetKey": "CF-Y1M04-ERASER-V3",
+      "sourceKvKey": "duduq-3d-eraser-v3-klein4b-20261029",
+      "sourceJpegSha256": "b4c09926644ea26dbec8d999dab7a8f1116713e68e2e9f966325d662808bd64c",
+      "pngSha256": "46414e32d26b7b139a30a13e5862ba9a43d1d64d779c0ae728b57db54e5493be",
+      "concept": "eraser",
+      "technicalQa": "PASSED",
+      "semanticPrecheck": "REJECTED",
+      "pedagogicalQa": "NOT_APPROVED",
+      "reasons": [
+        "Image resembles a pink U-shaped magnetic clip or sleeve, not an unmistakable school eraser.",
+        "At approximately 40-56 px card size, the shape becomes an ambiguous pink-white symbol.",
+        "Native resolution, alpha and hash cannot compensate for failure to recognize the educational concept."
+      ],
+      "artifactRun": "https://github.com/augustoborgessousa93/DuduQ-Engine/actions/runs/40952133185",
+      "disposition": "QUARANTINED_IN_GITHUB_ACTIONS_ARTIFACT_ONLY_NOT_INTEGRATED",
+      "releaseDecision": "DO_NOT_IMPORT_OR_PUBLISH"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "DUDUQ_NATIVE_IMAGE_CANDIDATE_V1",
+  "createdAt": "2026-10-29",
+  "source": "Codex built-in image_gen tool",
+  "status": "CANDIDATE_ONLY_PEDAGOGICAL_REVIEW_PENDING",
+  "productionSafe": false,
+  "assetKey": "NEXT-Y1-BACKPACK",
+  "concept": "backpack",
+  "questionIds": [
+    "Y1M04-Q010",
+    "Y1M04-Q015",
+    "Y1M04-Q020"
+  ],
+  "mediaIds": [
+    "IMG-Y1M04-Q010-BACKPACK",
+    "IMG-Y1M04-Q015-BACKPACK",
+    "IMG-Y1M04-Q020-BACKPACK"
+  ],
+  "candidateFile": "NEXT-Y1-BACKPACK-CANDIDATE.png",
+  "sha256": "737a1973f855f725aecf07d4f39b83fe82cf9e585a6fdde63b4fc638c64cba71",
+  "bytes": 1532435,
+  "image": {
+    "format": "PNG",
+    "width": 1254,
+    "height": 1254,
+    "bitDepth": 8,
+    "colorType": "RGBA",
+    "alphaMin": 0,
+    "alphaMax": 255,
+    "realTransparency": true,
+    "visibleAlphaBoundsThreshold32": [
+      213,
+      131,
+      1059,
+      1101
+    ],
+    "visibleObjectPercentOfCanvas": {
+      "width": 67.5,
+      "height": 77.4
+    }
+  },
+  "prompt": "Use case: stylized-concept. Asset type: reusable single-object educational game illustration for children ages 6–11. Primary request: one unmistakable blue school backpack with two visible shoulder straps, a top carry handle, zipper and front pocket. Style/medium: polished premium rounded 3D cartoon product illustration, clear friendly school-item silhouette, saturated natural blue fabric, crisp detail. Composition/framing: square transparent canvas; fit the whole backpack comfortably within the central 70% of the canvas height and central 76% of its width, leaving visibly generous clear transparent margin on every side; do not crop or touch the canvas edges. Constraints: only the backpack, with no contents visible; no books, pencils, crayons, ruler, eraser, text, logos, watermark, collage, grid or opaque background.",
+  "semanticChecks": {
+    "singleBackpack": "VISUAL_PRECHECK_PASS",
+    "noDistractorObjects": "VISUAL_PRECHECK_PASS",
+    "transparentPng": "PASS",
+    "renderedInGame": "NOT_TESTED",
+    "pedagogicalReview": "PENDING",
+    "officialIntegration": "NOT_PERFORMED"
+  },
+  "note": "Candidate was generated from the exact concept plan on the isolated PR #118 branch. It is not an official media-registry entry and must not replace any game reference until hash-bound visual/game QA and pedagogical review pass."
+}

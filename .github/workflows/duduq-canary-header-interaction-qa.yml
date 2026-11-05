@@ -1,0 +1,69 @@
+name: DUDUQ - Canary Header Functional Candidate QA
+
+on:
+  push:
+    branches:
+      - automation/duduq-media-source-only-fix-20261029
+    paths:
+      - ".github/workflows/duduq-canary-header-interaction-qa.yml"
+      - "qa/overlays/canary-r147-tablet-header-fit-v1.css"
+      - "test/systemic/canary-r147-core-1.0.12-smoke.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duduq-canary-header-functional-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  strict-interactive-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      CI: "true"
+      BASE_URL: http://127.0.0.1:4173
+      DUDUQ_QA_HEADER_FIT_CSS: qa/overlays/canary-r147-tablet-header-fit-v1.css
+    steps:
+      - name: Checkout isolated review branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install actual Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Protect canonical test syntax
+        run: |
+          node --check test/systemic/canary-r147-core-1.0.12-smoke.mjs
+          test -s "$DUDUQ_QA_HEADER_FIT_CSS"
+
+      - name: Serve pristine static Canary source
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-canary-header-interaction-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-canary-header-interaction-http.log
+          exit 1
+
+      - name: Verify Canary M01 and M03 target geometry, wrong/correct interactions and transitions
+        run: |
+          node test/systemic/canary-r147-core-1.0.12-smoke.mjs
+
+      - name: Assert no changed immutable release or source files
+        if: always()
+        run: |
+          git diff --exit-code -- engine/releases core content/english
+          echo "QA_CANDIDATE_ONLY_NO_MERGE_NO_DEPLOY_NO_FAKE_RELEASE_PASS"

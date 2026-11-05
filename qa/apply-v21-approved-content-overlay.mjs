@@ -27,7 +27,10 @@ for(const name of changed){
  if(!old)throw Error('BASE_ASSET_NOT_FOUND:'+name);
  const previous=readFileSync('dist-pages/'+name);
  if(hash(previous)!==old.sha)throw Error('BASE_ASSET_SHA_MISMATCH:'+name);
- const update=readFileSync('qa/overlays/v21/'+name);
+  // Git checks out text overlays with CRLF on Windows when core.autocrlf is
+  // enabled. Normalize only line endings so the frozen V21 artifact manifest
+  // is byte-identical across Windows and Linux runners.
+  const update=Buffer.from(readFileSync('qa/overlays/v21/'+name,'utf8').replace(/\r\n/g,'\n'),'utf8');
  if(update.equals(previous))throw Error('OVERLAY_HAS_NO_DIFF:'+name);
  writeFileSync('dist-pages/'+name,update);
  old.sha=hash(update);

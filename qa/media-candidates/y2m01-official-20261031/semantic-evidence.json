@@ -1,0 +1,1020 @@
+{
+  "schemaVersion": "DUDUQ_Y2M01_NATIVE_MEDIA_SEMANTIC_EVIDENCE_V2",
+  "createdAt": "2026-10-31",
+  "moduleId": "Y2M01",
+  "provider": "Codex built-in image_gen",
+  "reviewAuthority": "CODEX_DELEGATED_BY_OWNER_REQUEST",
+  "evidenceBoundary": "Codex technical/visual review for an isolated compiled QA overlay. Human homologation and production approval remain pending.",
+  "generationSemanticEvidence": "generation-semantic-evidence.json",
+  "generationSemanticEvidenceSha256": "28ec96efed2f58b90333f735fb0b1671f7460e38ee6f78eb8b92034503f21fdf",
+  "alphaComponentAudit": "alpha-component-audit.json",
+  "alphaComponentAuditSha256": "5eb016eb067de88aba20e3b123725b5ba0a2e5f84b2ff42a2f040841fe188f9d",
+  "sourceQuestionContractSha256": "257776f3d2a896a929db2233d3d238ba2f2881d652cdab0be82dae5c3519f432",
+  "sourceQuestionInvariantSha256": "b7cc44db6fdc6b597a963e01f59b1e6706f1a51031be282ae3b97e1529d97233",
+  "sourceRegistrySha256": "aa615a3ed307b0e8cae6abf6901a1582c22ab59aa7f95c6339a635ca7d35fc89",
+  "reviewedQuestionCount": 20,
+  "auditedPendingIds": 29,
+  "postSplitIds": 57,
+  "usageRecords": 93,
+  "splitReview": {
+    "status": "PASS_EXACT_QUESTION_AND_SEMANTIC_CONTEXT_SPLITS",
+    "count": 93,
+    "reason": "Every visual field receives a question/context-scoped IMG ID. Shared Y1M01, reusable letter and Y2M01 source IDs remain unchanged outside the exact audited occurrences."
+  },
+  "renderedReview": {
+    "status": "PASSED_BY_CODEX_DELEGATED_VISUAL_REVIEW",
+    "criteria": [
+      "all 28 hash-pinned PNGs visually match their reviewed Y2M01 concepts",
+      "all exact semantic variants are bound only to the matching question context",
+      "transparent cutouts are legible with no written answer, watermark or unrelated distractor",
+      "64-alpha connected-component audit found zero micro opaque pixel islands"
+    ]
+  },
+  "candidateAssets": [
+    {
+      "assetKey": "Y2M01-CANDIDATE-ANA-SEM-0A0CE0CBAB",
+      "concept": "My name is Ana.",
+      "visualConcept": "Ana",
+      "file": "images/DUDUQ-Y2M01-ANA.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "0f56a9e46f98091832198163ef21c678d68cb1f81a292a4de3fb01a00b3bde6f",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "The canonical Ana character portrait is visually distinct and consistent with the existing Y1M01 name set.",
+      "wrongDistractorsAbsent": [
+        "other person",
+        "name text",
+        "extra character"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-ANA-SEM-DE395D8A8A",
+      "concept": "Ana",
+      "visualConcept": "Ana",
+      "file": "images/DUDUQ-Y2M01-ANA.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "0f56a9e46f98091832198163ef21c678d68cb1f81a292a4de3fb01a00b3bde6f",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "The canonical Ana character portrait is visually distinct and consistent with the existing Y1M01 name set.",
+      "wrongDistractorsAbsent": [
+        "other person",
+        "name text",
+        "extra character"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-BEN-SEM-2362103D26",
+      "concept": "Ben",
+      "visualConcept": "Ben",
+      "file": "images/DUDUQ-Y2M01-BEN.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "bcdbbaa2720afcdc0b8a2c459996088782bc14bf20453a046df6bd6327cf5ffc",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "The canonical Ben character portrait is visually distinct and consistent with the existing Y1M01 name set.",
+      "wrongDistractorsAbsent": [
+        "other person",
+        "name text",
+        "extra character"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-AFTERNOON-SEM-47B7090270",
+      "concept": "Good afternoon!",
+      "visualConcept": "Good afternoon",
+      "file": "images/DUDUQ-Y2M01-GOOD-AFTERNOON.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "1c50e519210fe46d7c002cd547a7200bc3b257c2f975f9897b4f7d1890d920ac",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Mia waves in a warm daylight/afternoon context; verified reuse of the Y1M01 native original and visually distinct from morning and night.",
+      "wrongDistractorsAbsent": [
+        "night cue",
+        "bedtime",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-AFTERNOON-SEM-57304608A4",
+      "concept": "Good afternoon",
+      "visualConcept": "Good afternoon",
+      "file": "images/DUDUQ-Y2M01-GOOD-AFTERNOON.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "1c50e519210fe46d7c002cd547a7200bc3b257c2f975f9897b4f7d1890d920ac",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Mia waves in a warm daylight/afternoon context; verified reuse of the Y1M01 native original and visually distinct from morning and night.",
+      "wrongDistractorsAbsent": [
+        "night cue",
+        "bedtime",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-MORNING-SEM-0DEFBC083D",
+      "concept": "Good morning!",
+      "visualConcept": "Good morning",
+      "file": "images/DUDUQ-Y2M01-GOOD-MORNING.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "e4d3f90b4c9c2c8a0abb08f534beb1f24eab519725fc65487f7d667a9302a247",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Leo waves in a bright morning context with a clear rising-sun/daybreak cue; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": [
+        "night cue",
+        "afternoon cue",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-MORNING-SEM-BAFCA01206",
+      "concept": "Good morning",
+      "visualConcept": "Good morning",
+      "file": "images/DUDUQ-Y2M01-GOOD-MORNING.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "e4d3f90b4c9c2c8a0abb08f534beb1f24eab519725fc65487f7d667a9302a247",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Leo waves in a bright morning context with a clear rising-sun/daybreak cue; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": [
+        "night cue",
+        "afternoon cue",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-NIGHT-SEM-6363A9406A",
+      "concept": "Good night",
+      "visualConcept": "Good night / bedtime",
+      "file": "images/DUDUQ-Y2M01-GOOD-NIGHT.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "b134b4a2268ad5ca6104377e52eddbeafb0ffac0b7e921124cbbb8d21bc84793",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "A sleeping child with night cues unmistakably communicates bedtime/good night; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": [
+        "morning",
+        "afternoon",
+        "greeting wave",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-NIGHT-SEM-91BB77183A",
+      "concept": "Good night.",
+      "visualConcept": "Good night / bedtime",
+      "file": "images/DUDUQ-Y2M01-GOOD-NIGHT.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "b134b4a2268ad5ca6104377e52eddbeafb0ffac0b7e921124cbbb8d21bc84793",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "A sleeping child with night cues unmistakably communicates bedtime/good night; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": [
+        "morning",
+        "afternoon",
+        "greeting wave",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-NIGHT-SEM-9AF2D20246",
+      "concept": "good-night context",
+      "visualConcept": "Good night / bedtime",
+      "file": "images/DUDUQ-Y2M01-GOOD-NIGHT.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "b134b4a2268ad5ca6104377e52eddbeafb0ffac0b7e921124cbbb8d21bc84793",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "A sleeping child with night cues unmistakably communicates bedtime/good night; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": [
+        "morning",
+        "afternoon",
+        "greeting wave",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-NIGHT-SEM-A33A6AA431",
+      "concept": "Night",
+      "visualConcept": "Good night / bedtime",
+      "file": "images/DUDUQ-Y2M01-GOOD-NIGHT.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "b134b4a2268ad5ca6104377e52eddbeafb0ffac0b7e921124cbbb8d21bc84793",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "A sleeping child with night cues unmistakably communicates bedtime/good night; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": [
+        "morning",
+        "afternoon",
+        "greeting wave",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOOD-NIGHT-SEM-C463A1D069",
+      "concept": "bedtime / good night",
+      "visualConcept": "Good night / bedtime",
+      "file": "images/DUDUQ-Y2M01-GOOD-NIGHT.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "b134b4a2268ad5ca6104377e52eddbeafb0ffac0b7e921124cbbb8d21bc84793",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "A sleeping child with night cues unmistakably communicates bedtime/good night; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": [
+        "morning",
+        "afternoon",
+        "greeting wave",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOODBYE-SEM-0F8A5A004B",
+      "concept": "Goodbye, Ana!",
+      "visualConcept": "Goodbye / Goodbye, Ana",
+      "file": "images/DUDUQ-Y2M01-GOODBYE.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "8e1eb51c1d698809f19a6ec7a38d3843ac2512bb0c76c232ee5be009d7642475",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Ana gives a clear farewell wave with a friendly departing pose; the same grounded farewell concept supports the generic and named bindings without duplicating artwork.",
+      "wrongDistractorsAbsent": [
+        "name question",
+        "bedtime",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GOODBYE-SEM-9072E97653",
+      "concept": "Goodbye!",
+      "visualConcept": "Goodbye / Goodbye, Ana",
+      "file": "images/DUDUQ-Y2M01-GOODBYE.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "8e1eb51c1d698809f19a6ec7a38d3843ac2512bb0c76c232ee5be009d7642475",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Ana gives a clear farewell wave with a friendly departing pose; the same grounded farewell concept supports the generic and named bindings without duplicating artwork.",
+      "wrongDistractorsAbsent": [
+        "name question",
+        "bedtime",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GREETING-GENERIC-SEM-163BF75731",
+      "concept": "greeting",
+      "visualConcept": "children greeting",
+      "file": "images/DUDUQ-Y2M01-GREETING-GENERIC.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "07c6ce053a07929e5cfc6e471ee71eb335d164734ea8db25a22cfd71512efe13",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Two friendly children face one another and wave; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": [
+        "parting movement",
+        "bedtime",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GREETING-GENERIC-SEM-B404655538",
+      "concept": "children greeting",
+      "visualConcept": "children greeting",
+      "file": "images/DUDUQ-Y2M01-GREETING-GENERIC.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "07c6ce053a07929e5cfc6e471ee71eb335d164734ea8db25a22cfd71512efe13",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Two friendly children face one another and wave; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": [
+        "parting movement",
+        "bedtime",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GREETING-INFORMAL-SEM-B39F2E44CF",
+      "concept": "Hello!",
+      "visualConcept": "Hello",
+      "file": "images/DUDUQ-Y2M01-GREETING-INFORMAL.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "b1f340b1cabc2466b1a632db7d85abff1f8f95198fba11b1c209ad8750bacc65",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One cheerful child gives an unmistakable informal wave; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": [
+        "farewell context",
+        "time-of-day cue",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-GREETING-INFORMAL-SEM-EACFCB3D80",
+      "concept": "Hello",
+      "visualConcept": "Hello",
+      "file": "images/DUDUQ-Y2M01-GREETING-INFORMAL.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "b1f340b1cabc2466b1a632db7d85abff1f8f95198fba11b1c209ad8750bacc65",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One cheerful child gives an unmistakable informal wave; verified reuse of the Y1M01 native original.",
+      "wrongDistractorsAbsent": [
+        "farewell context",
+        "time-of-day cue",
+        "written label"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LEO-SEM-5F3214E06A",
+      "concept": "Leo",
+      "visualConcept": "Leo",
+      "file": "images/DUDUQ-Y2M01-LEO.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "703ef0a0674cb315697e0c0fdb26e4715f8334893019f62d774c5dd01f0b39d4",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "The canonical Leo character portrait is visually distinct and consistent with the existing Y1M01 name set.",
+      "wrongDistractorsAbsent": [
+        "other person",
+        "name text",
+        "extra character"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LEO-SEM-F26BAC67C2",
+      "concept": "My name is Leo.",
+      "visualConcept": "Leo",
+      "file": "images/DUDUQ-Y2M01-LEO.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "703ef0a0674cb315697e0c0fdb26e4715f8334893019f62d774c5dd01f0b39d4",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "The canonical Leo character portrait is visually distinct and consistent with the existing Y1M01 name set.",
+      "wrongDistractorsAbsent": [
+        "other person",
+        "name text",
+        "extra character"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-A-SEM-71C00ED1E6",
+      "concept": "A",
+      "visualConcept": "uppercase A",
+      "file": "images/DUDUQ-Y2M01-LETTER-A.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "45a0be67a1decff6ca5568884f271d1fd5b90faa9dcb5ca876e455d10eb9d38e",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One unambiguous uppercase A with two diagonal stems, crossbar, and single counter; no additional glyph.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-B-SEM-6A89BE635E",
+      "concept": "B",
+      "visualConcept": "uppercase B",
+      "file": "images/DUDUQ-Y2M01-LETTER-B.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "c106081f6e8b230577b66ed0b9e4583e708e86aeb182e7bbf010fb761f132e2b",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One unambiguous uppercase B with a vertical stem and two bowls; no additional glyph.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-C-SEM-050EE592A5",
+      "concept": "C",
+      "visualConcept": "uppercase C",
+      "file": "images/DUDUQ-Y2M01-LETTER-C.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "8b71947d742140dbb5da17de8cfcba88763cebad499069b700dfcb5f40b6546b",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One unambiguous open uppercase C; it is not an O and contains no additional glyph.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-D-SEM-41DA74AA8A",
+      "concept": "D",
+      "visualConcept": "uppercase D",
+      "file": "images/DUDUQ-Y2M01-LETTER-D.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "699a56752b3917251bfec5453216ec14dbc4a562476c56d4eabf4be59c5cff75",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One unambiguous uppercase D with a vertical stem and one rounded bowl; no additional glyph.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-O-SEM-86129C1F1E",
+      "concept": "O",
+      "visualConcept": "uppercase O",
+      "file": "images/DUDUQ-Y2M01-LETTER-O.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "d5283a2a9e7518791f4553c872e795b7c045cda1003ef060c87cce311f4da54d",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One closed oval uppercase O with one counter and no tail; it is visually distinct from Q.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-P-SEM-A227026E0C",
+      "concept": "P",
+      "visualConcept": "uppercase P",
+      "file": "images/DUDUQ-Y2M01-LETTER-P.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "7cad2d24197ec5dbb65a4161dbf6277f03da7b2a56ab4259bccee9adf539c646",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One uppercase P with a stem and upper bowl only; no lower bowl or diagonal leg.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-Q-SEM-D9AD3FBA28",
+      "concept": "Q",
+      "visualConcept": "uppercase Q",
+      "file": "images/DUDUQ-Y2M01-LETTER-Q.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "d645c5ee4e1fd6db47f253fb4254a6b0bb567dd1fc266628b26629432add80cf",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One closed uppercase Q with a clear short lower-right tail; visually distinct from O.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-R-SEM-DC8B34CF5D",
+      "concept": "R",
+      "visualConcept": "uppercase R",
+      "file": "images/DUDUQ-Y2M01-LETTER-R.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "403ee54ef4152532d8ad1bed47fc16fdfe98d712d95fcd4dc9816d25a9a7eab4",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One uppercase R with stem, upper bowl, and diagonal leg; visually distinct from P.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-S-SEM-33544C6AA8",
+      "concept": "S",
+      "visualConcept": "uppercase S",
+      "file": "images/DUDUQ-Y2M01-LETTER-S.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "bf1734e4a6995b269356db2421fde3050f1712ce0ff3755fced4e990ad5e9991",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One classic uppercase S formed by two smooth opposing curves; no additional glyph.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-T-SEM-EF1C1F2B7B",
+      "concept": "T",
+      "visualConcept": "uppercase T",
+      "file": "images/DUDUQ-Y2M01-LETTER-T.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "b9f56cfe20b2393486c20300c75266e7ec8687b1907f4a6b0894d0ea775c80d6",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One uppercase T with a wide top bar and centered vertical stem; no additional glyph.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-U-SEM-E9DAE8E579",
+      "concept": "U",
+      "visualConcept": "uppercase U",
+      "file": "images/DUDUQ-Y2M01-LETTER-U.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "8c41ac0773b391f8343b048d04cb40be76ce19d6dc9f59d42672badcc599a2a0",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One uppercase U with open top and rounded bottom; no additional glyph.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-V-SEM-CDCB57C5A3",
+      "concept": "V",
+      "visualConcept": "uppercase V",
+      "file": "images/DUDUQ-Y2M01-LETTER-V.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "798c6c1de8ac19eb081c367a35c99768eb399008b2db2b8921e4ea48bcd03201",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One uppercase V with two diagonal stems meeting at the bottom; visually distinct from U and Y.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-W-SEM-5620E2FF70",
+      "concept": "W",
+      "visualConcept": "uppercase W",
+      "file": "images/DUDUQ-Y2M01-LETTER-W.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "8b44ec2275e9e8d0b2009b12e19f54f1d13abb3a1d10679f5366fdab8d2cd1c6",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One upright uppercase W with a clear double-V structure; it is not an M.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-X-SEM-E54FC634CB",
+      "concept": "X",
+      "visualConcept": "uppercase X",
+      "file": "images/DUDUQ-Y2M01-LETTER-X.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "08d736fd08de8cc95671e740f5f0906aceecda8c9adecf64b89180e0b7d91e41",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One uppercase X formed by two diagonal strokes crossing at center; no additional glyph.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-Y-SEM-61874C0D04",
+      "concept": "Y",
+      "visualConcept": "uppercase Y",
+      "file": "images/DUDUQ-Y2M01-LETTER-Y.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "eb342dbfd6e55f8f2cb35eeefebf8d1a5a53f3f62405f0e37499f946bc21d972",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One uppercase Y with two upper arms and one lower vertical stem; visually distinct from V.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-LETTER-Z-SEM-74C6E9C017",
+      "concept": "Z",
+      "visualConcept": "uppercase Z",
+      "file": "images/DUDUQ-Y2M01-LETTER-Z.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "20a113d2284985e5efbe6b2d44fac75e89cfe81db8565f863d584335215f4e1d",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "One uppercase Z with top and bottom bars joined by a descending diagonal; no additional glyph.",
+      "wrongDistractorsAbsent": [],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-MIA-SEM-3EB1E41223",
+      "concept": "My name is Mia.",
+      "visualConcept": "Mia",
+      "file": "images/DUDUQ-Y2M01-MIA.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "453e497d9f61292b94dbf25945c46580e98cad6836e7923a87f365747be999c4",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "The canonical Mia character portrait is visually distinct and consistent with the existing Y1M01 name set.",
+      "wrongDistractorsAbsent": [
+        "other person",
+        "name text",
+        "extra character"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-MIA-SEM-8D8A59BD0D",
+      "concept": "Mia",
+      "visualConcept": "Mia",
+      "file": "images/DUDUQ-Y2M01-MIA.png",
+      "width": 1536,
+      "height": 1536,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "453e497d9f61292b94dbf25945c46580e98cad6836e7923a87f365747be999c4",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "The canonical Mia character portrait is visually distinct and consistent with the existing Y1M01 name set.",
+      "wrongDistractorsAbsent": [
+        "other person",
+        "name text",
+        "extra character"
+      ],
+      "technicalQc": {
+        "width": 1536,
+        "height": 1536,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-SEE-YOU-SEM-186E05FCF8",
+      "concept": "See you.",
+      "visualConcept": "See you / farewell",
+      "file": "images/DUDUQ-Y2M01-SEE-YOU.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "d1f21b3416a1d36eca41085525a9ab2e724a75e629d2cdc5d01629a9ce19b585",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly two children move in opposite directions while looking back and waving to each other; the gesture and separation clearly encode a friendly temporary farewell.",
+      "wrongDistractorsAbsent": [
+        "greeting-only pose",
+        "name exchange",
+        "bedtime",
+        "text"
+      ],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-SEE-YOU-SEM-64D206F277",
+      "concept": "farewell",
+      "visualConcept": "See you / farewell",
+      "file": "images/DUDUQ-Y2M01-SEE-YOU.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "d1f21b3416a1d36eca41085525a9ab2e724a75e629d2cdc5d01629a9ce19b585",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly two children move in opposite directions while looking back and waving to each other; the gesture and separation clearly encode a friendly temporary farewell.",
+      "wrongDistractorsAbsent": [
+        "greeting-only pose",
+        "name exchange",
+        "bedtime",
+        "text"
+      ],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-SEE-YOU-SEM-7B8E78ECA3",
+      "concept": "two people saying see you",
+      "visualConcept": "See you / farewell",
+      "file": "images/DUDUQ-Y2M01-SEE-YOU.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "d1f21b3416a1d36eca41085525a9ab2e724a75e629d2cdc5d01629a9ce19b585",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly two children move in opposite directions while looking back and waving to each other; the gesture and separation clearly encode a friendly temporary farewell.",
+      "wrongDistractorsAbsent": [
+        "greeting-only pose",
+        "name exchange",
+        "bedtime",
+        "text"
+      ],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-WHATS-YOUR-NAME-SEM-03086AC4B0",
+      "concept": "one child asks another child's name",
+      "visualConcept": "What's your name? social question",
+      "file": "images/DUDUQ-Y2M01-WHATS-YOUR-NAME.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "3a8f1f8fb4c5b84e834a9f654d2acdc1337dfc69fe4c654098ba75c3f0de28b7",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly two children face each other; the left child uses an open-palms questioning gesture and the right child points to their own chest, creating a clear name-question exchange without written words.",
+      "wrongDistractorsAbsent": [
+        "farewell",
+        "generic greeting",
+        "bedtime",
+        "name tag",
+        "question-mark text"
+      ],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    },
+    {
+      "assetKey": "Y2M01-CANDIDATE-WHATS-YOUR-NAME-SEM-B3C0AB87D0",
+      "concept": "What's your name?",
+      "visualConcept": "What's your name? social question",
+      "file": "images/DUDUQ-Y2M01-WHATS-YOUR-NAME.png",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG_RGBA8_NONINTERLACED",
+      "sha256": "3a8f1f8fb4c5b84e834a9f654d2acdc1337dfc69fe4c654098ba75c3f0de28b7",
+      "semanticPrecheck": "PASSED",
+      "visualObservation": "Exactly two children face each other; the left child uses an open-palms questioning gesture and the right child points to their own chest, creating a clear name-question exchange without written words.",
+      "wrongDistractorsAbsent": [
+        "farewell",
+        "generic greeting",
+        "bedtime",
+        "name tag",
+        "question-mark text"
+      ],
+      "technicalQc": {
+        "width": 1254,
+        "height": 1254,
+        "alphaThreshold": 64,
+        "microOpaqueIslandCount": 0
+      },
+      "visualReview": "PASSED_CONCEPT_LEGIBLE_TRANSPARENT_NO_TEXT_OR_WATERMARK"
+    }
+  ],
+  "productionReleaseCertified": false,
+  "humanHomologationClaimed": false,
+  "answerKeysModified": false,
+  "mechanicsModified": false,
+  "goldMastersModified": false
+}

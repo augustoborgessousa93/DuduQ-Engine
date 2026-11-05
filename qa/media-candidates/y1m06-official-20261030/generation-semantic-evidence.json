@@ -1,0 +1,509 @@
+{
+  "schemaVersion": "DUDUQ_Y1M06_SEMANTIC_EVIDENCE_V1",
+  "createdOn": "2026-10-30",
+  "moduleId": "Y1M06",
+  "evidenceClass": "CODEX_MODEL_PRECHECK_ONLY",
+  "humanHomologationClaimed": false,
+  "productionApprovalClaimed": false,
+  "integrationClaimed": false,
+  "visualInspection": {
+    "performed": true,
+    "scope": "All 22 final normalized candidate PNGs were visually inspected for the requested concept, transparent cutout presentation, subject completeness and absence of wrong distractors.",
+    "structuralAlphaEvidence": "png-validation.json"
+  },
+  "assetCount": 22,
+  "questionCount": 20,
+  "bindingCount": 93,
+  "everyQuestionCovered": true,
+  "assets": [
+    {
+      "assetKey": "Y1M06-CANDIDATE-BIG",
+      "semanticTarget": "big",
+      "file": "images/DUDUQ-Y1M06-BIG.png",
+      "sha256": "71ef4290fd60783cc62684b21d498c6ecd41b6cbc35ce08eccf2e9d4fd159291",
+      "questionIds": [
+        "Y1M06-Q009",
+        "Y1M06-Q011",
+        "Y1M06-Q012",
+        "Y1M06-Q014",
+        "Y1M06-Q016",
+        "Y1M06-Q019"
+      ],
+      "mediaIds": [
+        "IMG-Q009-BIG",
+        "IMG-Q019-BIG",
+        "IMG-Y1M06-Q011-BIG",
+        "IMG-Y1M06-Q012-BIG",
+        "IMG-Y1M06-Q014-BIG",
+        "IMG-Y1M06-Q016-BIG"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "One neutral gray rounded cube occupies most of the canvas; scale clearly communicates big without introducing an animal or lexical color distractor.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-BIG-SPIDER",
+      "semanticTarget": "big spider",
+      "file": "images/DUDUQ-Y1M06-BIG-SPIDER.png",
+      "sha256": "57eb92db864178aef6a274b2820bfb6e3e20055326029fc20e3f26c16db00a32",
+      "questionIds": [
+        "Y1M06-Q018"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q018-BIG-SPIDER"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "One friendly dark spider with exactly eight visible legs is dominant; one tiny neutral gray cube supplies the required scale reference for Q018 and no answer text is present.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-BIRD",
+      "semanticTarget": "bird",
+      "file": "images/DUDUQ-Y1M06-BIRD.png",
+      "sha256": "f5ed701122220ae38f1d1527f9349c6d3e0310182365530546e49957e4ee24f7",
+      "questionIds": [
+        "Y1M06-Q004",
+        "Y1M06-Q005",
+        "Y1M06-Q006",
+        "Y1M06-Q007",
+        "Y1M06-Q009",
+        "Y1M06-Q010",
+        "Y1M06-Q015"
+      ],
+      "mediaIds": [
+        "IMG-Q005-BIRD",
+        "IMG-Q010-BIRD",
+        "IMG-Q015-BIRD",
+        "IMG-Y1M06-Q004-BIRD",
+        "IMG-Y1M06-Q006-BIRD",
+        "IMG-Y1M06-Q007-BIRD",
+        "IMG-Y1M06-Q009-BIRD",
+        "IMG-Y1M06-Q010-BIRD"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single recognizable pet bird with beak, wings, feet and tail; no branch, nest, cage or competing object.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-BLUE",
+      "semanticTarget": "blue",
+      "file": "images/DUDUQ-Y1M06-BLUE.png",
+      "sha256": "0978e94bcd22a928f3ccb50d5c7c0fabd8cf5bc80b24a522edd87381914e60a0",
+      "questionIds": [
+        "Y1M06-Q013",
+        "Y1M06-Q015"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q013-BLUE",
+        "IMG-Y1M06-Q015-BLUE"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "One uniformly saturated blue sphere, consistent with the four-color object set and free of symbols or competing colors.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-BLUE-TURTLE",
+      "semanticTarget": "blue turtle",
+      "file": "images/DUDUQ-Y1M06-BLUE-TURTLE.png",
+      "sha256": "0050915f675b777b496e14a94c1773a6ce2e0de35bdc29453cf09efac26d2093",
+      "questionIds": [
+        "Y1M06-Q003"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q003-BLUE-TURTLE"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single clearly blue turtle with recognizable shell, head and four legs; green/brown do not dominate and no extra object is present.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-CAT",
+      "semanticTarget": "cat",
+      "file": "images/DUDUQ-Y1M06-CAT.png",
+      "sha256": "ae313d94c808584864a1906fce902181520749654223235966db4ad8e9cffcca",
+      "questionIds": [
+        "Y1M06-Q001",
+        "Y1M06-Q002",
+        "Y1M06-Q004",
+        "Y1M06-Q005",
+        "Y1M06-Q010",
+        "Y1M06-Q012",
+        "Y1M06-Q016",
+        "Y1M06-Q020"
+      ],
+      "mediaIds": [
+        "IMG-Q002-CAT",
+        "IMG-Q004-CAT",
+        "IMG-Q012-CAT",
+        "IMG-Y1M06-Q001-CAT",
+        "IMG-Y1M06-Q002-CAT",
+        "IMG-Y1M06-Q004-CAT",
+        "IMG-Y1M06-Q005-CAT",
+        "IMG-Y1M06-Q010-CAT",
+        "IMG-Y1M06-Q016-CAT",
+        "IMG-Y1M06-Q020-CAT"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single orange domestic cat with ears, whiskers, paws and tail; reused only after original generator provenance and hash verification.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-DOG",
+      "semanticTarget": "dog",
+      "file": "images/DUDUQ-Y1M06-DOG.png",
+      "sha256": "67cdfd3584dc1f864ccdb51a45fdfbecf6ce0e0b77cb29c790942004a653846e",
+      "questionIds": [
+        "Y1M06-Q001",
+        "Y1M06-Q002",
+        "Y1M06-Q005",
+        "Y1M06-Q010",
+        "Y1M06-Q011",
+        "Y1M06-Q016",
+        "Y1M06-Q020"
+      ],
+      "mediaIds": [
+        "IMG-Q001-DOG",
+        "IMG-Q011-DOG",
+        "IMG-Y1M06-Q001-DOG",
+        "IMG-Y1M06-Q002-DOG",
+        "IMG-Y1M06-Q005-DOG",
+        "IMG-Y1M06-Q010-DOG",
+        "IMG-Y1M06-Q016-DOG",
+        "IMG-Y1M06-Q020-DOG"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single recognizable friendly dog with muzzle, ears, four paws and tail; no animal or prop distractor.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-FISH",
+      "semanticTarget": "fish",
+      "file": "images/DUDUQ-Y1M06-FISH.png",
+      "sha256": "5f161f9aef0d5de5141fc9bf423527bb0fce91540aa27e48287f9f74c37d2b23",
+      "questionIds": [
+        "Y1M06-Q001",
+        "Y1M06-Q002",
+        "Y1M06-Q004",
+        "Y1M06-Q005",
+        "Y1M06-Q006",
+        "Y1M06-Q010",
+        "Y1M06-Q013",
+        "Y1M06-Q016",
+        "Y1M06-Q020"
+      ],
+      "mediaIds": [
+        "IMG-Q013-FISH",
+        "IMG-Y1M06-Q001-FISH",
+        "IMG-Y1M06-Q002-FISH",
+        "IMG-Y1M06-Q004-FISH",
+        "IMG-Y1M06-Q005-FISH",
+        "IMG-Y1M06-Q006-FISH",
+        "IMG-Y1M06-Q010-FISH",
+        "IMG-Y1M06-Q016-FISH",
+        "IMG-Y1M06-Q020-FISH"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single complete orange-gold fish in side view with fins and tail; no aquarium, water, bubbles or additional fish.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-GREEN",
+      "semanticTarget": "green",
+      "file": "images/DUDUQ-Y1M06-GREEN.png",
+      "sha256": "a806672a42a3fae0334b846d7173fd14c42ff034b398b79df2a8911f5911a8ee",
+      "questionIds": [
+        "Y1M06-Q013",
+        "Y1M06-Q015"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q013-GREEN",
+        "IMG-Y1M06-Q015-GREEN"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "One uniformly saturated green sphere, consistent with the four-color object set and free of symbols or competing colors.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-GREEN-RABBIT",
+      "semanticTarget": "green rabbit",
+      "file": "images/DUDUQ-Y1M06-GREEN-RABBIT.png",
+      "sha256": "1c281d00fc4ae637c18f6fee5a0a62a683c79db6128fe64f9a29b3daeba27159",
+      "questionIds": [
+        "Y1M06-Q003"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q003-GREEN-RABBIT"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single rabbit remains anatomically recognizable while its fur is clearly green; no added animal or prop.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-GREEN-SPIDER",
+      "semanticTarget": "green spider",
+      "file": "images/DUDUQ-Y1M06-GREEN-SPIDER.png",
+      "sha256": "161c65f0afe4b78307501975f6d8c44fcd3b61acaadc74b99824247cd8529ac5",
+      "questionIds": [
+        "Y1M06-Q003"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q003-GREEN-SPIDER"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single friendly green spider with exactly eight visible legs; no web, insect or competing object.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-HAMSTER",
+      "semanticTarget": "hamster",
+      "file": "images/DUDUQ-Y1M06-HAMSTER.png",
+      "sha256": "47b773f80615dd7e621c4c9e878b8f3eed6dbe75c6532665352a8fce92528418",
+      "questionIds": [
+        "Y1M06-Q007",
+        "Y1M06-Q009",
+        "Y1M06-Q010",
+        "Y1M06-Q011",
+        "Y1M06-Q012",
+        "Y1M06-Q014",
+        "Y1M06-Q016",
+        "Y1M06-Q017"
+      ],
+      "mediaIds": [
+        "IMG-Q007-HAMSTER",
+        "IMG-Q017-HAMSTER",
+        "IMG-Y1M06-Q007-HAMSTER",
+        "IMG-Y1M06-Q009-HAMSTER",
+        "IMG-Y1M06-Q010-HAMSTER",
+        "IMG-Y1M06-Q011-HAMSTER",
+        "IMG-Y1M06-Q012-HAMSTER",
+        "IMG-Y1M06-Q014-HAMSTER",
+        "IMG-Y1M06-Q016-HAMSTER"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single recognizable hamster with rounded ears, muzzle, whiskers and paws; no cage, wheel, food or second subject.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-RABBIT",
+      "semanticTarget": "rabbit",
+      "file": "images/DUDUQ-Y1M06-RABBIT.png",
+      "sha256": "6e14f5b48e75c1f00f32e81bf312c2569897caedb3a8b6acd859023892eb3f4e",
+      "questionIds": [
+        "Y1M06-Q001",
+        "Y1M06-Q002",
+        "Y1M06-Q004",
+        "Y1M06-Q005",
+        "Y1M06-Q006",
+        "Y1M06-Q007",
+        "Y1M06-Q010",
+        "Y1M06-Q014"
+      ],
+      "mediaIds": [
+        "IMG-Q014-RABBIT",
+        "IMG-Y1M06-Q001-RABBIT",
+        "IMG-Y1M06-Q002-RABBIT",
+        "IMG-Y1M06-Q004-RABBIT",
+        "IMG-Y1M06-Q005-RABBIT",
+        "IMG-Y1M06-Q006-RABBIT",
+        "IMG-Y1M06-Q007-RABBIT",
+        "IMG-Y1M06-Q010-RABBIT"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single brown rabbit with long ears, paws and tail; reused only after original generator provenance and hash verification.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-RED",
+      "semanticTarget": "red",
+      "file": "images/DUDUQ-Y1M06-RED.png",
+      "sha256": "7109b53486fed140809537a0fd05c1ed49707677c49cf67e62e874bff1067632",
+      "questionIds": [
+        "Y1M06-Q013",
+        "Y1M06-Q015"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q013-RED",
+        "IMG-Y1M06-Q015-RED"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "One uniformly saturated red sphere, consistent with the four-color object set and free of symbols or competing objects.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-RED-BIRD",
+      "semanticTarget": "red bird",
+      "file": "images/DUDUQ-Y1M06-RED-BIRD.png",
+      "sha256": "bcc4de422e6179289ef51c74a9997c7ff7e7e9990c5357877484844ca392fa4b",
+      "questionIds": [
+        "Y1M06-Q003"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q003-RED-BIRD"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single recognizable bird whose plumage is clearly red; eyes, beak and feet remain legible and no prop was added.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-RED-DOG",
+      "semanticTarget": "red dog",
+      "file": "images/DUDUQ-Y1M06-RED-DOG.png",
+      "sha256": "c196273284ea49ace27590cfc36a13d3cd082864cb6247d3259ddee404b84cc9",
+      "questionIds": [
+        "Y1M06-Q003"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q003-RED-DOG"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single recognizable dog whose fur is clearly red; anatomy and silhouette remain intact and no distractor was added.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-SMALL",
+      "semanticTarget": "small",
+      "file": "images/DUDUQ-Y1M06-SMALL.png",
+      "sha256": "1fc7d977aa858df0350df3394bc145f3669f830fd827efb6c1ab6f9ba2b1b7f6",
+      "questionIds": [
+        "Y1M06-Q014",
+        "Y1M06-Q016",
+        "Y1M06-Q020"
+      ],
+      "mediaIds": [
+        "IMG-Q020-SMALL",
+        "IMG-Y1M06-Q014-SMALL",
+        "IMG-Y1M06-Q016-SMALL",
+        "IMG-Y1M06-Q020-SMALL"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "The same neutral gray cube family as BIG occupies only about one-third of the canvas, making the size contrast unambiguous without a color or animal distractor.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-SPIDER",
+      "semanticTarget": "spider",
+      "file": "images/DUDUQ-Y1M06-SPIDER.png",
+      "sha256": "dad58d7bba5260f7ed7655e26d86c8545dc3306e1fc18ec792e801f3ece5e886",
+      "questionIds": [
+        "Y1M06-Q008",
+        "Y1M06-Q009",
+        "Y1M06-Q011",
+        "Y1M06-Q012",
+        "Y1M06-Q014",
+        "Y1M06-Q016"
+      ],
+      "mediaIds": [
+        "IMG-Q008-SPIDER",
+        "IMG-Q016-SPIDER",
+        "IMG-Y1M06-Q009-SPIDER",
+        "IMG-Y1M06-Q011-SPIDER",
+        "IMG-Y1M06-Q012-SPIDER",
+        "IMG-Y1M06-Q014-SPIDER",
+        "IMG-Y1M06-Q016-SPIDER"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single non-scary charcoal spider with exactly eight clearly separated legs; no web, insect or additional subject.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-TURTLE",
+      "semanticTarget": "turtle",
+      "file": "images/DUDUQ-Y1M06-TURTLE.png",
+      "sha256": "74a0dc4ba34d02139984dd2aaea501ff625c6ee9e583bd69c004ab0ab5d73326",
+      "questionIds": [
+        "Y1M06-Q006",
+        "Y1M06-Q007",
+        "Y1M06-Q009",
+        "Y1M06-Q010",
+        "Y1M06-Q011",
+        "Y1M06-Q012"
+      ],
+      "mediaIds": [
+        "IMG-Q006-TURTLE",
+        "IMG-Y1M06-Q006-TURTLE",
+        "IMG-Y1M06-Q007-TURTLE",
+        "IMG-Y1M06-Q009-TURTLE",
+        "IMG-Y1M06-Q010-TURTLE",
+        "IMG-Y1M06-Q011-TURTLE",
+        "IMG-Y1M06-Q012-TURTLE"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single recognizable green turtle with domed shell, head and four legs; no pond, water, plant or other subject.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-YELLOW",
+      "semanticTarget": "yellow",
+      "file": "images/DUDUQ-Y1M06-YELLOW.png",
+      "sha256": "ca91d91266a27f2b9d25af7a743502f22768ddd35c528575914e97aa259d75e8",
+      "questionIds": [
+        "Y1M06-Q013",
+        "Y1M06-Q015"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q013-YELLOW",
+        "IMG-Y1M06-Q015-YELLOW"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "One uniformly saturated yellow sphere, consistent with the four-color object set and free of symbols or competing colors.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-YELLOW-FISH",
+      "semanticTarget": "yellow fish",
+      "file": "images/DUDUQ-Y1M06-YELLOW-FISH.png",
+      "sha256": "03a4d66b177b98e93f1dcde9fdfb3e42d9491e6f3f641ef7c83143ab2837418f",
+      "questionIds": [
+        "Y1M06-Q003"
+      ],
+      "mediaIds": [
+        "IMG-Q003-YELLOW-FISH",
+        "IMG-Y1M06-Q003-YELLOW-FISH"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single complete fish whose dominant body color is bright yellow; no aquarium, water or second fish.",
+      "wrongDistractorsObserved": false
+    },
+    {
+      "assetKey": "Y1M06-CANDIDATE-YELLOW-HAMSTER",
+      "semanticTarget": "yellow hamster",
+      "file": "images/DUDUQ-Y1M06-YELLOW-HAMSTER.png",
+      "sha256": "1e16e58420f90bf15ce115f0f7fef2b8c4974ecde1b89aaf5872d118719b01c2",
+      "questionIds": [
+        "Y1M06-Q003"
+      ],
+      "mediaIds": [
+        "IMG-Y1M06-Q003-YELLOW-HAMSTER"
+      ],
+      "manualModelPrecheck": "PASS",
+      "evidence": "Single recognizable hamster whose fur is clearly yellow; neutral facial details remain legible and no prop is present.",
+      "wrongDistractorsObserved": false
+    }
+  ],
+  "specialContractFindings": [
+    {
+      "scope": "standalone mediaBindings",
+      "finding": "Several source contracts contain referenced mediaBindings whose semantic target is not duplicated in that question's visible option/pair/target collection. All referenced IDs remain covered as requested, but candidate generation does not claim that those fields render or that the source contract should be changed."
+    },
+    {
+      "questionId": "Y1M06-Q018",
+      "mediaId": "IMG-Y1M06-Q018-BIG-SPIDER",
+      "finding": "The contract requires a visibly large spider with a small neutral scale reference; it is intentionally bound to BIG-SPIDER instead of the generic BIG cube."
+    },
+    {
+      "concepts": [
+        "BIG",
+        "SMALL"
+      ],
+      "finding": "The same neutral-gray rounded cube family is used at materially different canvas scales, preventing animal or red/blue/yellow/green vocabulary leakage."
+    },
+    {
+      "concepts": [
+        "SPIDER",
+        "GREEN-SPIDER",
+        "BIG-SPIDER"
+      ],
+      "finding": "Each spider candidate visibly retains exactly eight separated legs and no web or insect distractor."
+    }
+  ]
+}

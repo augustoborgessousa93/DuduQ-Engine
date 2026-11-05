@@ -1,0 +1,75 @@
+name: DUDUQ - Canary Tablet Header Fit QA
+
+on:
+  push:
+    branches:
+      - automation/duduq-media-source-only-fix-20261029
+    paths:
+      - "qa/canary-tablet-header-fit-probe.mjs"
+      - ".github/workflows/duduq-canary-tablet-header-fit-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duduq-canary-tablet-header-fit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  real-tablet-geometry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      BASE_URL: http://127.0.0.1:4173
+      CI: "true"
+    steps:
+      - name: Checkout isolated review branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install Node.js 22 and Chromium
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install native Playwright browser
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Verify experimental probe syntax
+        run: node --check qa/canary-tablet-header-fit-probe.mjs
+
+      - name: Start baseline review server
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/duduq-header-probe-http.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-header-probe-http.log
+          exit 1
+
+      - name: Measure actual R147 Canary M01 and M03 responsive geometry
+        run: node qa/canary-tablet-header-fit-probe.mjs
+
+      - name: Preserve failed/successful browser geometry and viewport screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-canary-tablet-header-fit-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          path: |
+            qa/results/canary-tablet-header-fit/**
+            /tmp/duduq-header-probe-http.log
+
+      - name: Forbid changes to Gold Masters and official release
+        if: always()
+        run: |
+          git diff --exit-code -- engine/releases content/english core
+          echo "This is a candidate CSS injected only into ephemeral Chromium. No release, no deploy, no media approval."
