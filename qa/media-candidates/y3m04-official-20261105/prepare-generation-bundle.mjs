@@ -437,6 +437,7 @@ const checkpoint={
   questionsModified:false,registryModified:false,runtimeModified:false,goldMastersModified:false,approvalFlagsModified:false,
   productionModified:false,mediaOverlaysApplied:false,existingReferencedAssetsRemoved:false,humanApprovalClaimed:false,
   productionApproved:false,integrated:false,deployed:false,candidateBundleCommit:priorCheckpoint?.candidateBundleCommit??null,
+  candidateReviewPushBranch:priorCheckpoint?.candidateReviewPushBranch??null,
   reviewBranch:'automation/duduq-media-source-only-fix-20261029',nextAction:'SCHEDULER_SELECT_OTHER_LANE',
   completionClaim:'MODULE_CANDIDATE_SCOPE_ONLY_PROJECT_REMAINS_INCOMPLETE'
 };
