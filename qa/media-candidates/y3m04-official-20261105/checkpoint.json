@@ -42,7 +42,8 @@
   "productionApproved": false,
   "integrated": false,
   "deployed": false,
-  "candidateBundleCommit": null,
+  "candidateBundleCommit": "5e18a6fa76e1f9da5f107747a51b312572b7a1b6",
+  "candidateReviewPushBranch": "automation/duduq-y3m04-generation-20261105",
   "reviewBranch": "automation/duduq-media-source-only-fix-20261029",
   "nextAction": "SCHEDULER_SELECT_OTHER_LANE",
   "completionClaim": "MODULE_CANDIDATE_SCOPE_ONLY_PROJECT_REMAINS_INCOMPLETE"
