@@ -26,6 +26,7 @@ on:
       - qa/y1m01-curated-variety-plan.json
       - qa/patch-y1m01-q003-daypart-variety.mjs
       - qa/verify-y1m01-real-entrypoint-browser.mjs
+      - qa/verify-y1m01-sequence-browser.mjs
       - qa/cloudflare-preview-v28-prebuilt.sh
 
 permissions:
@@ -212,6 +213,8 @@ jobs:
           node qa/verify-y1m01-daypart-browser.mjs
           node --check qa/verify-y1m01-real-entrypoint-browser.mjs
           node qa/verify-y1m01-real-entrypoint-browser.mjs
+          node --check qa/verify-y1m01-sequence-browser.mjs
+          node qa/verify-y1m01-sequence-browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -224,6 +227,8 @@ jobs:
             qa/results/y1m01-daypart-q003-q004-browser.json
             qa/results/y1m01-real-entrypoint-browser.json
             qa/results/y1m01-real-entrypoint/*.png
+            qa/results/y1m01-real-sequence.json
+            qa/results/y1m01-real-sequence/*.png
           retention-days: 90
           if-no-files-found: warn
           compression-level: 6
