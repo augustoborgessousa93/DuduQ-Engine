@@ -59,7 +59,11 @@ for(const [suffix,optionId,oldId,concept,newLabel] of plan.edits){
  const choices=q.optionContract?.choices||[];
  const c=choices.find(x=>x.optionId===optionId);
  assert(o,'OPTION_NOT_FOUND:'+qid+':'+optionId);
- if(choices.length)assert(c,'CHOICE_NOT_FOUND:'+qid+':'+optionId);
+ if(choices.length&&!c){
+  assert.equal(q.mechanicId,'drag-drop-multimedia','CHOICE_NOT_FOUND:'+qid+':'+optionId);
+  console.log('DUDUQ_DRAG_OPTION_CONTRACT_VARIANT='+JSON.stringify({qid,optionId,
+    contractKeys:Object.keys(q.optionContract||{}),choiceIds:choices.map(v=>v.optionId)}));
+ }
  assert.equal(o.mediaId,oldId,'SOURCE_OPTION_CHANGED:'+qid+':'+optionId);
  if(c){assert.equal(c.mediaId,oldId,'SOURCE_CONTRACT_CHANGED:'+qid+':'+optionId);
  assert.equal(Boolean(o.correct),Boolean(c.correct),'CORRECTNESS_DRIFT');}
