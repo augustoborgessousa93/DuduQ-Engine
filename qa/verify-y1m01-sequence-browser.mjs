@@ -200,17 +200,54 @@ try{
     record.blocker='NEXT_AFTER_Q001_NOT_Q002';
     continue;
    }
-   // Bubble Pop correct option: select only current legitimate correct
-   // answer "informal-greeting"; never click a distractor.
-   let selectable=page.locator('[aria-label*="informal-greeting"],[data-option-id="informal-greeting"],[data-answer-key="informal-greeting"]');
-   let clicked=false;
-   if(await selectable.count()){
-    await selectable.first().click({timeout:3500});
-    clicked=true;
-   }else{
-    // Discover labels in DOM and report them; avoid guessing semantics.
-    record.blocker='Q002_CORRECT_BUBBLE_SELECTOR_NOT_IDENTIFIED';
+   // Bubble Pop moves its bubbles into the arena after a spawn animation.
+   // It may NOT expose an optionId aria-label; use the exact registry PNG
+   // corresponding to the correct "informal-greeting" option, never guess.
+   const q2=questions.items.find(q=>q.item_id==='Y1M01-Q002');
+   const correct=q2?.options?.find(o=>o.correct);
+   assert.equal(correct?.optionId,'informal-greeting','Q002_CORRECT_OPTION_CHANGED');
+   const targetPath=m.get(correct.mediaId)?.urlOrPath?.replace(/^\\/+/, '');
+   assert(targetPath,'Q002_REGISTRY_MEDIA_MISSING');
+   async function locateBubble(){
+    return page.evaluate(path=>{
+     const images=[...document.images].filter(img=>{
+      try{return decodeURIComponent(new URL(img.currentSrc||img.src,document.baseURI).pathname)
+       .replace(/^\\+/,'')===path}catch{return false}
+     });
+     return images.map(img=>{
+      const r=img.getBoundingClientRect(),parent=img.closest('[data-bubble-id],.bubble,.bubble-pop-bubble,[role="button"]')||img.parentElement;
+      const p=parent?.getBoundingClientRect(),s=getComputedStyle(parent||img);
+      const visible=img.complete&&img.naturalWidth>0&&r.width>16&&r.height>16&&
+       r.right>8&&r.bottom>8&&r.left<innerWidth-8&&r.top<innerHeight-8&&
+       s.display!=='none'&&s.visibility!=='hidden';
+      return {loaded:img.complete&&img.naturalWidth>0,visible,
+       center:[Math.max(12,Math.min(innerWidth-12,r.left+r.width/2)),
+        Math.max(12,Math.min(innerHeight-12,r.top+r.height/2))],
+       parentClass:typeof parent?.className==='string'?parent.className:'',disabled:Boolean(parent?.hasAttribute('inert')||
+        parent?.getAttribute('aria-disabled')==='true')};
+     });
+    },targetPath).catch(()=>[]);
    }
+   let candidates=[],clicked=false,audioReplayed=false;
+   const expires=Date.now()+24000;
+   while(Date.now()<expires){
+    candidates=await locateBubble();
+    const hit=candidates.find(x=>x.visible&&!x.disabled);
+    if(hit){
+     await page.mouse.click(hit.center[0],hit.center[1]).catch(()=>{});
+     clicked=true;break;
+    }
+    if(!audioReplayed&&Date.now()>expires-15000){
+     const audio=page.getByRole('button',{name:/play instruction|reproduzir|ouvir|audio|áudio/i}).first();
+     if(await audio.count()){
+      await audio.click({timeout:3000}).catch(()=>{});
+      record.actions.push('Q002_AUDIO_REPLAY');
+     }
+     audioReplayed=true;
+    }
+    await page.waitForTimeout(420);
+   }
+   record.bubbleCandidates=candidates;
    record.actions.push('Q002_CORRECT_CLICK='+clicked);
    await capture(page,record,'q002-after-action');
    if(!clicked)continue;
