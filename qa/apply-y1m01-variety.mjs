@@ -109,7 +109,9 @@ for(const q of qDoc.items){
   'DUPLICATE_PICTURE_IN_ONE_QUESTION:'+q.item_id);
  if(!changed.has(q.item_id))assert.deepEqual(q,old,'OTHER_QUESTION_CHANGED');
  if(q.options.filter(o=>o.correct).length===1){
-  const values=q.options.map(o=>[o.optionId,o.label,o.mediaId].join(' ').toLowerCase());
+  // optionId is an immutable contract key and can say 'farewell' even after its
+  // distractor image has been replaced; inspect only currently rendered semantics.
+  const values=q.options.map(o=>[o.label,o.mediaId].join(' ').toLowerCase());
   const hasHello=values.some(x=>/\bhello\b|\bhi\b|greeting-generic|greeting-informal/.test(x));
   const hasGoodbye=values.some(x=>/goodbye|farewell/.test(x));
   assert(!(hasHello&&hasGoodbye),'HELLO_AND_GOODBYE_AS_COMPETING_CHOICES:'+q.item_id);
