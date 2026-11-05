@@ -56,13 +56,15 @@ for(const [suffix,optionId,oldId,concept,newLabel] of plan.edits){
  const qid='Y1M01-'+suffix,q=qMap.get(qid),asset=bank.get(concept);
  assert(q&&asset,'PLAN_REFERENCE_MISSING:'+qid);
  const o=q.options?.find(x=>x.optionId===optionId);
- const c=q.optionContract?.choices?.find(x=>x.optionId===optionId);
- assert(o&&c,'OPTION_NOT_FOUND:'+qid+':'+optionId);
+ const choices=q.optionContract?.choices||[];
+ const c=choices.find(x=>x.optionId===optionId);
+ assert(o,'OPTION_NOT_FOUND:'+qid+':'+optionId);
+ if(choices.length)assert(c,'CHOICE_NOT_FOUND:'+qid+':'+optionId);
  assert.equal(o.mediaId,oldId,'SOURCE_OPTION_CHANGED:'+qid+':'+optionId);
- assert.equal(c.mediaId,oldId,'SOURCE_CONTRACT_CHANGED:'+qid+':'+optionId);
- assert.equal(Boolean(o.correct),Boolean(c.correct),'CORRECTNESS_DRIFT');
+ if(c){assert.equal(c.mediaId,oldId,'SOURCE_CONTRACT_CHANGED:'+qid+':'+optionId);
+ assert.equal(Boolean(o.correct),Boolean(c.correct),'CORRECTNESS_DRIFT');}
  if(o.correct)assert.equal(optionId,concept,'UNSAFE_CORRECT_REPLACEMENT:'+qid);
- for(const obj of [o,c]){
+ for(const obj of [o,c].filter(Boolean)){
   obj.mediaId=asset.id;obj.label=newLabel;obj.semanticReview='NEEDS_HUMAN_REVIEW';
  }
  for(const pool of q.bubbleDistractorPool||[])if(pool.id===qid+'-'+optionId){
@@ -91,8 +93,8 @@ for(const q of qDoc.items){
  assert.deepEqual(q.stimulusContract,old.stimulusContract,'STIMULUS_DRIFT');
  assert.deepEqual(q.options.map(x=>[x.optionId,x.correct]),
   old.options.map(x=>[x.optionId,x.correct]),'OPTION_IDS_CHANGED');
- assert.deepEqual(q.optionContract.choices.map(x=>[x.optionId,x.correct]),
-  old.optionContract.choices.map(x=>[x.optionId,x.correct]),'CHOICE_CONTRACT_CHANGED');
+ assert.deepEqual((q.optionContract?.choices||[]).map(x=>[x.optionId,x.correct]),
+  (old.optionContract?.choices||[]).map(x=>[x.optionId,x.correct]),'CHOICE_CONTRACT_CHANGED');
  assert.equal(new Set(q.options.map(x=>x.mediaId)).size,q.options.length,
   'DUPLICATE_PICTURE_IN_ONE_QUESTION:'+q.item_id);
  if(!changed.has(q.item_id))assert.deepEqual(q,old,'OTHER_QUESTION_CHANGED');
