@@ -7,7 +7,7 @@ import {isExactPedagogicalConcept} from '../scripts/duduq-exact-semantic-match.m
 import {
   BUNDLE_REL,EXPECTED,MODULE_ID,MODULE_PATH,REGISTRY_PATH,
   allBindings,bindingKey,buildReviewManifest,deriveOccurrenceGroups,locate,nodeContainsMediaId,
-  parseIntegrity,sha256,withoutVisualMediaIds
+  canonicalLfSha256,parseIntegrity,sha256,withoutVisualMediaIds
 } from './y3m04-official-media-model.mjs';
 
 const fail=code=>{throw Error('Y3M04_SOURCE_REGISTRY_REBASE_FAILED:'+code);};
@@ -30,13 +30,13 @@ export async function verifyY3M04SourceRegistryContext(options={}){
     options.registryBytes||readFile(path.join(dist,REGISTRY_PATH)),
     options.integrityBytes||readFile(path.join(dist,'.duduq-pages-manifest'))
   ]);
-  if(sha256(generationManifestBytes)!==EXPECTED.generationManifestSha256||
-     sha256(semanticBytes)!==EXPECTED.generationSemanticSha256||
-     sha256(bindingPlanBytes)!==EXPECTED.bindingPlanSha256||
-     sha256(questionInventoryBytes)!==EXPECTED.questionInventorySha256||
-     sha256(sourcePinBytes)!==EXPECTED.sourcePinSha256||
-     sha256(alphaAuditBytes)!==EXPECTED.alphaAuditSha256||
-     sha256(pngValidationBytes)!==EXPECTED.pngValidationSha256)fail('GENERATION_EVIDENCE_HASH');
+  if(canonicalLfSha256(generationManifestBytes)!==EXPECTED.generationManifestSha256||
+     canonicalLfSha256(semanticBytes)!==EXPECTED.generationSemanticSha256||
+     canonicalLfSha256(bindingPlanBytes)!==EXPECTED.bindingPlanSha256||
+     canonicalLfSha256(questionInventoryBytes)!==EXPECTED.questionInventorySha256||
+     canonicalLfSha256(sourcePinBytes)!==EXPECTED.sourcePinSha256||
+     canonicalLfSha256(alphaAuditBytes)!==EXPECTED.alphaAuditSha256||
+     canonicalLfSha256(pngValidationBytes)!==EXPECTED.pngValidationSha256)fail('GENERATION_EVIDENCE_HASH');
 
   const generationManifest=JSON.parse(generationManifestBytes),semantic=JSON.parse(semanticBytes),
     bindingPlan=JSON.parse(bindingPlanBytes),questionInventory=JSON.parse(questionInventoryBytes),
@@ -75,7 +75,7 @@ export async function verifyY3M04SourceRegistryContext(options={}){
     fail('GENERATION_SOURCE_PIN_SHAPE');
 
   let manifest;
-  if(sha256(manifestBytes)===EXPECTED.candidateManifestSha256){
+  if(canonicalLfSha256(manifestBytes)===EXPECTED.candidateManifestSha256){
     manifest=JSON.parse(manifestBytes);
     if(manifest.schemaVersion!=='DUDUQ_Y3M04_CANDIDATE_BATCH_V1'||
        JSON.stringify(manifest.assets)!==JSON.stringify(generationManifest.assets))
@@ -86,7 +86,8 @@ export async function verifyY3M04SourceRegistryContext(options={}){
       readFile(path.join(bundleDir,'integration-semantic-evidence.json'))
     ]);
     const expectedReview=buildReviewManifest(generationManifest,{
-      sourceRegistryRebaseSha256:sha256(reviewRebaseBytes),integrationSemanticSha256:sha256(integrationSemanticBytes)
+      sourceRegistryRebaseSha256:canonicalLfSha256(reviewRebaseBytes),
+      integrationSemanticSha256:canonicalLfSha256(integrationSemanticBytes)
     });
     manifest=JSON.parse(manifestBytes);
     if(JSON.stringify(manifest)!==JSON.stringify(expectedReview))fail('REVIEW_MANIFEST_NOT_EXACT_GENERATION_DERIVATIVE');
@@ -173,7 +174,7 @@ export async function verifyY3M04SourceRegistryContext(options={}){
   let rebase=null,rebaseSha256=null;
   if(requireRebase){
     const rebaseBytes=await readFile(path.join(bundleDir,'source-registry-rebase.json'));
-    rebaseSha256=sha256(rebaseBytes);rebase=JSON.parse(rebaseBytes);
+    rebaseSha256=canonicalLfSha256(rebaseBytes);rebase=JSON.parse(rebaseBytes);
     if(rebase.schemaVersion!=='DUDUQ_Y3M04_SOURCE_REGISTRY_REBASE_V1'||rebase.moduleId!==MODULE_ID||
        rebase.status!=='PASS_EXACT_GENERATION_CONTEXT_TO_PRISTINE_V26'||
        rebase.generationSourceRegistryPinSha256!==EXPECTED.sourcePinSha256||

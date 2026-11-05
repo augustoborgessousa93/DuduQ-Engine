@@ -7,7 +7,7 @@ import {verifyY3M04SourceRegistryContext} from './verify-y3m04-source-registry-r
 import {
   BUNDLE_REL,EXPECTED,MODULE_ID,MODULE_PATH,REGISTRY_PATH,
   allBindings,bindingKey,collectReferenceFields,deriveOccurrenceGroups,locate,
-  parseIntegrity,sha256,structuralDiff,withoutVisualMediaIds
+  canonicalLfSha256,parseIntegrity,sha256,structuralDiff,withoutVisualMediaIds
 } from './y3m04-official-media-model.mjs';
 
 const root=process.cwd(),dist=path.join(root,'dist-pages'),bundleDir=path.join(root,BUNDLE_REL),
@@ -32,7 +32,8 @@ if(evidence.schemaVersion!=='DUDUQ_Y3M04_INTEGRATION_SEMANTIC_EVIDENCE_V1'||
    evidence.sourceQuestionInvariantSha256!==EXPECTED.sourceQuestionInvariantSha256||
    evidence.renderedReview?.status!=='PASSED_BY_CODEX_DELEGATED_VISUAL_REVIEW'||
    evidence.candidateAssets?.length!==EXPECTED.reviewAssets||evidence.productionReleaseCertified!==false||
-   evidence.humanHomologationClaimed!==false||evidence.sourceRegistryRebaseSha256!==sha256(rebaseBytes))
+   evidence.humanHomologationClaimed!==false||
+   evidence.sourceRegistryRebaseSha256!==canonicalLfSha256(rebaseBytes))
   throw Error('Y3M04_INTEGRATION_SEMANTIC_EVIDENCE_STALE');
 const sourceRegistryGate=await verifyY3M04SourceRegistryContext({root,questionBytes:qBytes,registryBytes:regBytes,integrityBytes});
 

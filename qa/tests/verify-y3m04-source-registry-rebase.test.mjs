@@ -2,13 +2,21 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
-import {BUNDLE_REL,EXPECTED,sha256} from '../y3m04-official-media-model.mjs';
+import {BUNDLE_REL,EXPECTED,canonicalLfSha256,sha256} from '../y3m04-official-media-model.mjs';
 import {verifyY3M04SourceRegistryContext} from '../verify-y3m04-source-registry-rebase.mjs';
 
 const root=process.cwd(),dist=path.join(root,'dist-pages'),
   registryPath=path.join(dist,'content/english/media/media-registry.json'),
   questionPath=path.join(dist,'content/english/year-3/module-04/questions.json'),
   integrityPath=path.join(dist,'.duduq-pages-manifest');
+
+test('canonical Y3M04 evidence hashes accept LF or CRLF but reject changed JSON',()=>{
+  const lf=Buffer.from('{\n  "moduleId": "Y3M04"\n}\n');
+  const crlf=Buffer.from(lf.toString('utf8').replace(/\n/g,'\r\n'));
+  const changed=Buffer.from('{\n  "moduleId": "Y3M05"\n}\n');
+  assert.equal(canonicalLfSha256(lf),canonicalLfSha256(crlf));
+  assert.notEqual(canonicalLfSha256(lf),canonicalLfSha256(changed));
+});
 
 function repin(integrityBytes,relative,bytes){
   const lines=integrityBytes.toString('utf8').trimEnd().split(/\r?\n/),
@@ -30,7 +38,7 @@ test('accepts only an explicitly pinned Y3M04 source context',async()=>{
     readFile(path.join(root,BUNDLE_REL,'generation-batch-manifest.json')),
     readFile(path.join(root,BUNDLE_REL,'batch-manifest.json'))
   ]);
-  assert.equal(sha256(generationBytes),EXPECTED.generationManifestSha256);
+  assert.equal(canonicalLfSha256(generationBytes),EXPECTED.generationManifestSha256);
   const review=JSON.parse(reviewBytes);
   assert.equal(review.generationManifestSha256,EXPECTED.generationManifestSha256);
   assert(review.assets.every(asset=>asset.reviewEvidence===BUNDLE_REL+'/integration-semantic-evidence.json'));

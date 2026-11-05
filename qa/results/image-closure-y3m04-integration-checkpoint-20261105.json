@@ -61,7 +61,8 @@
     "DUDUQ-Y3M04-VIDEO-GAME.png": "322a877027f7bbe467ffa5436980ad92b9e2622287c95f8cde925b0728135c10"
   },
   "localQa": {
-    "semanticAndTamperTests": "PASS_19_OF_19",
+    "semanticAndTamperTests": "PASS_22_OF_22",
+    "windowsCrLfEvidenceHashGate": "PASS_CANONICAL_LF_WITHOUT_REPINNING",
     "staticOverlayGate": "PASS",
     "buildGate": "PASS",
     "compiledManifestSha256": "9d183541798372f5e31d7d0d22f4f79c19f79e7a0ed78933ae228ad09cdc6c9e",

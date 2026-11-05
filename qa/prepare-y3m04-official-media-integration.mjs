@@ -7,7 +7,7 @@ import {analyzeAlphaComponents} from './png-alpha-component-audit.mjs';
 import {verifyY3M04SourceRegistryContext} from './verify-y3m04-source-registry-rebase.mjs';
 import {
   BUNDLE_REL,EXPECTED,MODULE_ID,MODULE_PATH,
-  allBindings,bindingKey,buildReviewManifest,deriveOccurrenceGroups,sha256
+  allBindings,bindingKey,buildReviewManifest,canonicalLfSha256,deriveOccurrenceGroups,sha256
 } from './y3m04-official-media-model.mjs';
 
 const root=process.cwd(),dist=path.join(root,'dist-pages'),bundleDir=path.join(root,BUNDLE_REL);
@@ -18,10 +18,10 @@ const [generationManifestBytes,semanticBytes,bindingPlanBytes,sourcePinBytes,que
   readFile(path.join(bundleDir,'source-registry-pin.json')),
   readFile(path.join(dist,MODULE_PATH))
 ]);
-if(sha256(generationManifestBytes)!==EXPECTED.generationManifestSha256||
-   sha256(semanticBytes)!==EXPECTED.generationSemanticSha256||
-   sha256(bindingPlanBytes)!==EXPECTED.bindingPlanSha256||
-   sha256(sourcePinBytes)!==EXPECTED.sourcePinSha256)
+if(canonicalLfSha256(generationManifestBytes)!==EXPECTED.generationManifestSha256||
+   canonicalLfSha256(semanticBytes)!==EXPECTED.generationSemanticSha256||
+   canonicalLfSha256(bindingPlanBytes)!==EXPECTED.bindingPlanSha256||
+   canonicalLfSha256(sourcePinBytes)!==EXPECTED.sourcePinSha256)
   throw Error('Y3M04_GENERATION_EVIDENCE_HASH_MISMATCH');
 const generationManifest=JSON.parse(generationManifestBytes),generationSemantic=JSON.parse(semanticBytes),
   sourcePin=JSON.parse(sourcePinBytes),questions=JSON.parse(questionBytes);
@@ -85,7 +85,7 @@ const integrationSemantic={
   generationSemanticSha256:EXPECTED.generationSemanticSha256,
   generationBindingPlanSha256:EXPECTED.bindingPlanSha256,
   sourceRegistryPinSha256:EXPECTED.sourcePinSha256,
-  sourceRegistryRebaseSha256:sha256(rebaseBytes),
+  sourceRegistryRebaseSha256:canonicalLfSha256(rebaseBytes),
   sourceQuestionSha256:EXPECTED.sourceQuestionSha256,
   sourceQuestionInvariantSha256:EXPECTED.sourceQuestionInvariantSha256,
   reviewedQuestionCount:EXPECTED.questions,auditedSourceIds:EXPECTED.sourceIds,
@@ -107,8 +107,8 @@ const integrationSemantic={
 };
 const integrationSemanticBytes=Buffer.from(JSON.stringify(integrationSemantic,null,2)+'\n');
 await writeFile(path.join(bundleDir,'integration-semantic-evidence.json'),integrationSemanticBytes);
-const reviewManifest=buildReviewManifest(generationManifest,{sourceRegistryRebaseSha256:sha256(rebaseBytes),
-  integrationSemanticSha256:sha256(integrationSemanticBytes)});
+const reviewManifest=buildReviewManifest(generationManifest,{sourceRegistryRebaseSha256:canonicalLfSha256(rebaseBytes),
+  integrationSemanticSha256:canonicalLfSha256(integrationSemanticBytes)});
 await writeFile(path.join(bundleDir,'batch-manifest.json'),JSON.stringify(reviewManifest,null,2)+'\n');
 
 const occurrenceScopedSplits=bindings.map(binding=>{
@@ -123,7 +123,7 @@ if(occurrenceScopedSplits.length!==EXPECTED.finalIds||records.length!==EXPECTED.
 const plan={schemaVersion:'DUDUQ_Y3M04_OFFICIAL_MEDIA_BINDING_PLAN_V1',createdAt:new Date().toISOString(),
   moduleId:MODULE_ID,status:'PASS',sourceContext:sourceGate.context,
   sourceQuestionSha256:EXPECTED.sourceQuestionSha256,sourceQuestionInvariantSha256:EXPECTED.sourceQuestionInvariantSha256,
-  sourceRegistryRebaseSha256:sha256(rebaseBytes),inputMediaIds:EXPECTED.sourceIds,outputMediaIds:EXPECTED.finalIds,
+  sourceRegistryRebaseSha256:canonicalLfSha256(rebaseBytes),inputMediaIds:EXPECTED.sourceIds,outputMediaIds:EXPECTED.finalIds,
   logicalUsageRecords:EXPECTED.logicalUsageRecords,rawReferenceFields:EXPECTED.rawReferenceFields,
   reviewAssets:EXPECTED.reviewAssets,uniquePngs:EXPECTED.uniquePngs,occurrenceScopedSplits,
   answerKeysModified:false,mechanicsModified:false,goldMastersModified:false,productionApproved:false};
