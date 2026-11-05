@@ -156,6 +156,7 @@ node --check qa/audit-year1-module01-compiled.mjs
 DUDUQ_QA_ONLY=1 node qa/audit-year1-module01-compiled.mjs
 node --check qa/render-y1m01-review.mjs
 DUDUQ_QA_ONLY=1 node qa/render-y1m01-review.mjs
+node qa/audit-y1m01-visual-alternatives.mjs
 test -s qa/results/y1m01-real-module-audit.md
 test -s qa/results/y1m01-review.html
 mkdir -p dist-pages
