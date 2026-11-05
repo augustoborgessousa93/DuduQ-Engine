@@ -158,6 +158,8 @@ node qa/verify-approved-q001-lock.mjs
 test -s qa/results/y1m01-daypart-q003-q004.json
 node --check qa/audit-year1-module01-compiled.mjs
 DUDUQ_QA_ONLY=1 node qa/audit-year1-module01-compiled.mjs
+node --check qa/audit-y1m01-runtime-lineage.mjs
+DUDUQ_QA_ONLY=1 node qa/audit-y1m01-runtime-lineage.mjs
 node --check qa/render-y1m01-review.mjs
 DUDUQ_QA_ONLY=1 node qa/render-y1m01-review.mjs
 node qa/audit-y1m01-visual-alternatives.mjs
@@ -169,4 +171,5 @@ cp -a "$ROOT"/. dist-pages/
 mkdir -p dist-pages/qa/y1m01
 cp qa/results/y1m01-review.html dist-pages/qa/y1m01/index.html
 cp qa/results/y1m01-real-module-audit.json dist-pages/qa/y1m01/audit.json
+cp qa/results/y1m01-runtime-lineage.json dist-pages/qa/y1m01/runtime-lineage.json
 echo "READY_FOR_MANUAL_QA_PREVIEW_DEPLOYMENT"
