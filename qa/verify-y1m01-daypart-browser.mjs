@@ -15,11 +15,22 @@ assert(['localhost','127.0.0.1'].includes(new URL(base).hostname));
 const registry=JSON.parse(readFileSync(root+'content/english/media/media-registry.json'));
 const byId=new Map(registry.entries.map(e=>[e.mediaId,e]));
 const doc=JSON.parse(readFileSync(root+'content/english/year-1/module-01/questions.json'));
-const ids=[
+const originalDayparts=[
  'IMG-Y1M01-Q003-Q004-MORNING-OFFICIAL-20261104',
  'IMG-Y1M01-Q003-Q004-AFTERNOON-OFFICIAL-20261104',
  'IMG-Y1M01-Q003-Q004-NIGHT-OFFICIAL-20261104'
 ];
+const alternateDayparts=[
+ 'IMG-Y1M01-Q003-ALTERNATE-AFTERNOON-AFTERNOON-20261105',
+ 'IMG-Y1M01-Q003-ALTERNATE-NIGHT-NIGHT-20261105',
+ 'IMG-Y1M01-Q003-ALTERNATE-SLEEP-FAREWELL-20261105',
+ 'IMG-Y1M01-Q003-ALTERNATE-MORNING-MORNING-20261105'
+];
+const perQuestion={
+ 'Y1M01-Q003':alternateDayparts,
+ 'Y1M01-Q004':originalDayparts
+};
+const ids=[...originalDayparts,...alternateDayparts];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 for(const id of ids){
  const e=byId.get(id);assert(e,'OFFICIAL_DAYPART_ENTRY_MISSING:'+id);
@@ -38,7 +49,9 @@ for(const [qid,x] of Object.entries(expected)){
  assert.equal(item.resposta,x.letter);
  assert.equal(item.optionContract?.correctOptionId,x.correct);
  const data=JSON.stringify(item);
- assert(ids.every(id=>data.includes(id)),'ONE_DAYPART_SOURCE_MISSING:'+qid);
+ assert(perQuestion[qid].every(id=>data.includes(id)),'EXPECTED_DAYPART_SOURCE_MISSING:'+qid);
+ assert(!perQuestion[qid==='Y1M01-Q003'?'Y1M01-Q004':'Y1M01-Q003']
+  .some(id=>data.includes(id)),'NEIGHBOR_DAYPART_IMAGES_REPEATED:'+qid);
  assert.equal(item.options.filter(o=>o.correct).length,1,'INVALID_CORRECT_OPTION:'+qid);
 }
 const q1=doc.items.find(q=>q.item_id==='Y1M01-Q001');
@@ -79,7 +92,7 @@ try{
    try{
     const resp=await tab.goto(url,{waitUntil:'domcontentloaded',timeout:15000});
     outcome.htmlStatus=resp?.status()??null;
-    const paths=ids.map(id=>byId.get(id).urlOrPath.replace(/^\/+/,''));
+    const paths=perQuestion[qid].map(id=>byId.get(id).urlOrPath.replace(/^\/+/,''));
     const expires=Date.now()+6000;
     while(Date.now()<expires){
      let images=[];
