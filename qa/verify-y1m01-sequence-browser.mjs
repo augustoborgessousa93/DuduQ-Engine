@@ -206,13 +206,13 @@ try{
    const q2=questions.items.find(q=>q.item_id==='Y1M01-Q002');
    const correct=q2?.options?.find(o=>o.correct);
    assert.equal(correct?.optionId,'informal-greeting','Q002_CORRECT_OPTION_CHANGED');
-   const targetPath=m.get(correct.mediaId)?.urlOrPath?.replace(/^\\/+/, '');
+   const targetPath=String(m.get(correct.mediaId)?.urlOrPath||'').replace(new RegExp('^/+'),'');
    assert(targetPath,'Q002_REGISTRY_MEDIA_MISSING');
    async function locateBubble(){
     return page.evaluate(path=>{
      const images=[...document.images].filter(img=>{
       try{return decodeURIComponent(new URL(img.currentSrc||img.src,document.baseURI).pathname)
-       .replace(/^\\+/,'')===path}catch{return false}
+       .replace(new RegExp('^/+'),'')===path}catch{return false}
      });
      return images.map(img=>{
       const r=img.getBoundingClientRect(),parent=img.closest('[data-bubble-id],.bubble,.bubble-pop-bubble,[role="button"]')||img.parentElement;
