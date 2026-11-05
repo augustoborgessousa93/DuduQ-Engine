@@ -1,0 +1,1258 @@
+{
+  "schemaVersion": "DUDUQ_Y3M04_PNG_VALIDATION_V1",
+  "createdAt": "2026-11-05T13:10:43.150Z",
+  "moduleId": "Y3M04",
+  "validator": "qa/validate-duduq-png.mjs",
+  "assetCount": 30,
+  "allPass": true,
+  "assets": [
+    {
+      "concept": "ball",
+      "file": "images/DUDUQ-Y3M04-BALL.png",
+      "sha256": "cb3401fc2675683294302a0e80c2924d70cf03e032138ff3b08c453115bd6f5c",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 575841,
+      "opaquePixels": 981480,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 64,
+          "y": 71,
+          "width": 1129,
+          "height": 1117
+        },
+        "canvasCoverage": 0.80195877,
+        "widthFill": 0.90031898,
+        "heightFill": 0.8907496,
+        "margins": {
+          "left": 64,
+          "top": 71,
+          "right": 61,
+          "bottom": 66
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-BALL-SOURCE-ORIGINAL.png",
+      "originalSha256": "cb3401fc2675683294302a0e80c2924d70cf03e032138ff3b08c453115bd6f5c",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 575841,
+        "opaquePixels": 981480,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "blue",
+      "file": "images/DUDUQ-Y3M04-BLUE.png",
+      "sha256": "af47ea2a8ce91f4544b3626157f7e64bb64498b981014a42383ff2798029a584",
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 649570,
+      "opaquePixels": 912236,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 103,
+          "y": 94,
+          "width": 1086,
+          "height": 1056
+        },
+        "canvasCoverage": 0.72919552,
+        "widthFill": 0.84382284,
+        "heightFill": 0.86415712,
+        "margins": {
+          "left": 103,
+          "top": 94,
+          "right": 98,
+          "bottom": 72
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-sources/DUDUQ-Y3M04-BLUE-SOURCE.png",
+      "originalSha256": "af47ea2a8ce91f4544b3626157f7e64bb64498b981014a42383ff2798029a584",
+      "originalTechnical": {
+        "width": 1287,
+        "height": 1222,
+        "transparentPixels": 649570,
+        "opaquePixels": 912236,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "brown",
+      "file": "images/DUDUQ-Y3M04-BROWN.png",
+      "sha256": "21b68caf46fe4984d6109b7e3f015c6824e7a4ebc43a8ebe9fdea2e509a42d48",
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 639981,
+      "opaquePixels": 917082,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 101,
+          "y": 92,
+          "width": 1089,
+          "height": 1059
+        },
+        "canvasCoverage": 0.73328717,
+        "widthFill": 0.84615385,
+        "heightFill": 0.86661211,
+        "margins": {
+          "left": 101,
+          "top": 92,
+          "right": 97,
+          "bottom": 71
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-BROWN-SOURCE-ORIGINAL.png",
+      "originalSha256": "21b68caf46fe4984d6109b7e3f015c6824e7a4ebc43a8ebe9fdea2e509a42d48",
+      "originalTechnical": {
+        "width": 1287,
+        "height": 1222,
+        "transparentPixels": 639981,
+        "opaquePixels": 917082,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "doll",
+      "file": "images/DUDUQ-Y3M04-DOLL.png",
+      "sha256": "ba2aecca9a80491ecdde06c4fc5988ebe612752f6707e25586d3c12c545030f5",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 777915,
+      "opaquePixels": 739324,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 94,
+          "y": 28,
+          "width": 1060,
+          "height": 1202
+        },
+        "canvasCoverage": 0.81024295,
+        "widthFill": 0.84529506,
+        "heightFill": 0.9585327,
+        "margins": {
+          "left": 94,
+          "top": 28,
+          "right": 100,
+          "bottom": 24
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-DOLL-SOURCE-ORIGINAL.png",
+      "originalSha256": "ba2aecca9a80491ecdde06c4fc5988ebe612752f6707e25586d3c12c545030f5",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 777915,
+        "opaquePixels": 739324,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "five",
+      "file": "images/DUDUQ-Y3M04-FIVE.png",
+      "sha256": "b12f817867e3fa002e1468cadbfdda80932b8965ae74e1255db41016f9b57eee",
+      "width": 1536,
+      "height": 1536,
+      "transparentPixels": 1594400,
+      "opaquePixels": 735818,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 36,
+          "y": 308,
+          "width": 1458,
+          "height": 923
+        },
+        "canvasCoverage": 0.57039642,
+        "widthFill": 0.94921875,
+        "heightFill": 0.60091146,
+        "margins": {
+          "left": 36,
+          "top": 308,
+          "right": 42,
+          "bottom": 305
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-FIVE-SOURCE-ORIGINAL.png",
+      "originalSha256": "3f7bfb852d53dd43ed1aa0e9051ff4f9f6cd36971da3470467d61b525b3eb4a5",
+      "originalTechnical": {
+        "width": 1536,
+        "height": 1024,
+        "transparentPixels": 800787,
+        "opaquePixels": 735818,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "four",
+      "file": "images/DUDUQ-Y3M04-FOUR.png",
+      "sha256": "d7e0f1fd9f5b565a62b75b0dcf8f07fb257096a33947c6ec6ee1fadd87c61505",
+      "width": 1536,
+      "height": 1536,
+      "transparentPixels": 1533449,
+      "opaquePixels": 797370,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 208,
+          "y": 211,
+          "width": 1148,
+          "height": 1104
+        },
+        "canvasCoverage": 0.53719076,
+        "widthFill": 0.74739583,
+        "heightFill": 0.71875,
+        "margins": {
+          "left": 208,
+          "top": 211,
+          "right": 180,
+          "bottom": 221
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-FOUR-SOURCE-ORIGINAL.png",
+      "originalSha256": "eb9a66a2a51d34c01bb660918d1a30a43e80b92f539bb06bed8b8976ea4b148a",
+      "originalTechnical": {
+        "width": 1305,
+        "height": 1206,
+        "transparentPixels": 732489,
+        "opaquePixels": 797370,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "gray",
+      "file": "images/DUDUQ-Y3M04-GRAY.png",
+      "sha256": "a495b16ffedf658cee6e8e4c9c48f2ba051d6d5d664317c9a7545b1956c8e904",
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 641541,
+      "opaquePixels": 917704,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 102,
+          "y": 94,
+          "width": 1088,
+          "height": 1058
+        },
+        "canvasCoverage": 0.73192202,
+        "widthFill": 0.84537685,
+        "heightFill": 0.86579378,
+        "margins": {
+          "left": 102,
+          "top": 94,
+          "right": 97,
+          "bottom": 70
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-GRAY-SOURCE-ORIGINAL.png",
+      "originalSha256": "a495b16ffedf658cee6e8e4c9c48f2ba051d6d5d664317c9a7545b1956c8e904",
+      "originalTechnical": {
+        "width": 1287,
+        "height": 1222,
+        "transparentPixels": 641541,
+        "opaquePixels": 917704,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "i do not like carrots",
+      "file": "images/DUDUQ-Y3M04-I-DO-NOT-LIKE-CARROTS.png",
+      "sha256": "78e59be1986c13e2b05ed24395c0b1d64b0d3b8534480ecc8fa59f30d4fe369b",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 732746,
+      "opaquePixels": 796920,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 63,
+          "y": 15,
+          "width": 1188,
+          "height": 1239
+        },
+        "canvasCoverage": 0.93603626,
+        "widthFill": 0.94736842,
+        "heightFill": 0.98803828,
+        "margins": {
+          "left": 63,
+          "top": 15,
+          "right": 3,
+          "bottom": 0
+        },
+        "touchesCanvasEdge": true
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M04-I-DO-NOT-LIKE-CARROTS-ORIGINAL.png",
+      "originalSha256": "78388c078332f783871cc81e74d11a85dbe4fe23a42fa174ff6cd70b73cf0c02",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 693542,
+        "opaquePixels": 796920,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 1,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "78388c078332f783871cc81e74d11a85dbe4fe23a42fa174ff6cd70b73cf0c02",
+        "outputSha256": "78e59be1986c13e2b05ed24395c0b1d64b0d3b8534480ecc8fa59f30d4fe369b"
+      }
+    },
+    {
+      "concept": "i like apples",
+      "file": "images/DUDUQ-Y3M04-I-LIKE-APPLES.png",
+      "sha256": "b378dc8a885e07048273a3393518f5a33fd2e4e9051ae359527e9ca34347a8b6",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 796102,
+      "opaquePixels": 758709,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 96,
+          "y": 4,
+          "width": 1057,
+          "height": 1250
+        },
+        "canvasCoverage": 0.84021403,
+        "widthFill": 0.84290271,
+        "heightFill": 0.99681021,
+        "margins": {
+          "left": 96,
+          "top": 4,
+          "right": 101,
+          "bottom": 0
+        },
+        "touchesCanvasEdge": true
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M04-I-LIKE-APPLES-ORIGINAL.png",
+      "originalSha256": "237a9a78c14882f779275363fba34fce64936b67b25c49cb82cf203ecda5d6c0",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 783759,
+        "opaquePixels": 758709,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 1,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "237a9a78c14882f779275363fba34fce64936b67b25c49cb82cf203ecda5d6c0",
+        "outputSha256": "b378dc8a885e07048273a3393518f5a33fd2e4e9051ae359527e9ca34347a8b6"
+      }
+    },
+    {
+      "concept": "i like papaya",
+      "file": "images/DUDUQ-Y3M04-I-LIKE-PAPAYA.png",
+      "sha256": "e26d040391bd80af05431960976ae994d8828bb7b33d74663f81a248f50cb4cc",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 681677,
+      "opaquePixels": 867700,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 76,
+          "y": 3,
+          "width": 1087,
+          "height": 1251
+        },
+        "canvasCoverage": 0.86475241,
+        "widthFill": 0.86682616,
+        "heightFill": 0.99760766,
+        "margins": {
+          "left": 76,
+          "top": 3,
+          "right": 91,
+          "bottom": 0
+        },
+        "touchesCanvasEdge": true
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M04-I-LIKE-PAPAYA-ORIGINAL.png",
+      "originalSha256": "003aab0a731307d93a8207cb0ce4b74e94aa1bd6bf996c3be5cab606b301d9d8",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 669262,
+        "opaquePixels": 867700,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 1,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "003aab0a731307d93a8207cb0ce4b74e94aa1bd6bf996c3be5cab606b301d9d8",
+        "outputSha256": "e26d040391bd80af05431960976ae994d8828bb7b33d74663f81a248f50cb4cc"
+      }
+    },
+    {
+      "concept": "i prefer grapes",
+      "file": "images/DUDUQ-Y3M04-I-PREFER-GRAPES.png",
+      "sha256": "0f16d25eccf0648830dd8b5de9bd02f3d7fb78abdff205bd8e3fc9a1cd285ca5",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 852710,
+      "opaquePixels": 695678,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 167,
+          "y": 8,
+          "width": 879,
+          "height": 1246
+        },
+        "canvasCoverage": 0.69648512,
+        "widthFill": 0.70095694,
+        "heightFill": 0.99362041,
+        "margins": {
+          "left": 167,
+          "top": 8,
+          "right": 208,
+          "bottom": 0
+        },
+        "touchesCanvasEdge": true
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M04-I-PREFER-GRAPES-ORIGINAL.png",
+      "originalSha256": "8b576b1791215e65b3367907118b0a2bf4cd89393df1816c8ef9a617980c13b5",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 840064,
+        "opaquePixels": 695678,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 1,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "8b576b1791215e65b3367907118b0a2bf4cd89393df1816c8ef9a617980c13b5",
+        "outputSha256": "0f16d25eccf0648830dd8b5de9bd02f3d7fb78abdff205bd8e3fc9a1cd285ca5"
+      }
+    },
+    {
+      "concept": "kite",
+      "file": "images/DUDUQ-Y3M04-KITE.png",
+      "sha256": "71a71d4d087d5df23298faddc260247f2402624d68f8ab02039d96ce5fabdd95",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1199022,
+      "opaquePixels": 333620,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 209,
+          "y": 35,
+          "width": 835,
+          "height": 1177
+        },
+        "canvasCoverage": 0.62498251,
+        "widthFill": 0.66586922,
+        "heightFill": 0.93859649,
+        "margins": {
+          "left": 209,
+          "top": 35,
+          "right": 210,
+          "bottom": 42
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-KITE-SOURCE-ORIGINAL.png",
+      "originalSha256": "71a71d4d087d5df23298faddc260247f2402624d68f8ab02039d96ce5fabdd95",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 1199022,
+        "opaquePixels": 333620,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "one",
+      "file": "images/DUDUQ-Y3M04-ONE.png",
+      "sha256": "e65ad687b4d68c317b065a9fce4a7d3dfbd7cffbe45835899dd9826ccaf4d8f5",
+      "width": 1536,
+      "height": 1536,
+      "transparentPixels": 1567932,
+      "opaquePixels": 777087,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 274,
+          "y": 219,
+          "width": 988,
+          "height": 1086
+        },
+        "canvasCoverage": 0.45478312,
+        "widthFill": 0.64322917,
+        "heightFill": 0.70703125,
+        "margins": {
+          "left": 274,
+          "top": 219,
+          "right": 274,
+          "bottom": 231
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-ONE-SOURCE-ORIGINAL.png",
+      "originalSha256": "db5c25dc3d048532af972dba45f58faf2158093beae6f3fb48ae3041f5900eec",
+      "originalTechnical": {
+        "width": 1312,
+        "height": 1199,
+        "transparentPixels": 777056,
+        "opaquePixels": 777087,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "one cow",
+      "file": "images/DUDUQ-Y3M04-ONE-COW.png",
+      "sha256": "0ad0545529cf89545de40bb0ae674a33adff1e30bbfe6836a4b74203d96e5f7a",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 885355,
+      "opaquePixels": 656979,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 50,
+          "y": 22,
+          "width": 1190,
+          "height": 1201
+        },
+        "canvasCoverage": 0.90885562,
+        "widthFill": 0.94896332,
+        "heightFill": 0.95773525,
+        "margins": {
+          "left": 50,
+          "top": 22,
+          "right": 14,
+          "bottom": 31
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-ONE-COW-SOURCE-ORIGINAL.png",
+      "originalSha256": "3060f70b3175c3ad7e2cee33e64570f8f2bc68529e077c26d27a856da67d6a3d",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 864545,
+        "opaquePixels": 656979,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 1,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "3060f70b3175c3ad7e2cee33e64570f8f2bc68529e077c26d27a856da67d6a3d",
+        "outputSha256": "0ad0545529cf89545de40bb0ae674a33adff1e30bbfe6836a4b74203d96e5f7a"
+      }
+    },
+    {
+      "concept": "one duck",
+      "file": "images/DUDUQ-Y3M04-ONE-DUCK.png",
+      "sha256": "f58826fc4040cf6fafa1501d9f66b74fecd4cb829352e0eac520cb15a0e63895",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1045686,
+      "opaquePixels": 504865,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 179,
+          "y": 21,
+          "width": 876,
+          "height": 1220
+        },
+        "canvasCoverage": 0.67962425,
+        "widthFill": 0.69856459,
+        "heightFill": 0.97288676,
+        "margins": {
+          "left": 179,
+          "top": 21,
+          "right": 199,
+          "bottom": 13
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-ONE-DUCK-SOURCE-ORIGINAL.png",
+      "originalSha256": "111b511643821de01dd1bd8f9923e36b1db492882294c0eb1ffcd303a18105f5",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 1029778,
+        "opaquePixels": 504865,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 1,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "111b511643821de01dd1bd8f9923e36b1db492882294c0eb1ffcd303a18105f5",
+        "outputSha256": "f58826fc4040cf6fafa1501d9f66b74fecd4cb829352e0eac520cb15a0e63895"
+      }
+    },
+    {
+      "concept": "one fish",
+      "file": "images/DUDUQ-Y3M04-ONE-FISH.png",
+      "sha256": "5f161f9aef0d5de5141fc9bf423527bb0fce91540aa27e48287f9f74c37d2b23",
+      "width": 1536,
+      "height": 1024,
+      "transparentPixels": 919997,
+      "opaquePixels": 629464,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 95,
+          "y": 68,
+          "width": 1325,
+          "height": 862
+        },
+        "canvasCoverage": 0.72615941,
+        "widthFill": 0.86263021,
+        "heightFill": 0.84179688,
+        "margins": {
+          "left": 95,
+          "top": 68,
+          "right": 116,
+          "bottom": 94
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-ONE-FISH-SOURCE-ORIGINAL.png",
+      "originalSha256": "db90baca459c9a40cd9bf65ee13e7e8f0eb2b9ca0bf008c3f7296c5b288b6ebf",
+      "originalTechnical": {
+        "width": 1536,
+        "height": 1024,
+        "transparentPixels": 901763,
+        "opaquePixels": 629464,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "one horse",
+      "file": "images/DUDUQ-Y3M04-ONE-HORSE.png",
+      "sha256": "e3e4a4ff774f3e299156f00b8ae9433b66ac86c336b13fdce15114ff3c6f7ec2",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 966678,
+      "opaquePixels": 579492,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 79,
+          "y": 12,
+          "width": 1097,
+          "height": 1224
+        },
+        "canvasCoverage": 0.85387239,
+        "widthFill": 0.87480064,
+        "heightFill": 0.97607656,
+        "margins": {
+          "left": 79,
+          "top": 12,
+          "right": 78,
+          "bottom": 18
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M04-ONE-HORSE-ORIGINAL.png",
+      "originalSha256": "a560135ca837f0810991829180292b589868853d44122a9ae398447a206c9a42",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 956593,
+        "opaquePixels": 579492,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 1,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "a560135ca837f0810991829180292b589868853d44122a9ae398447a206c9a42",
+        "outputSha256": "e3e4a4ff774f3e299156f00b8ae9433b66ac86c336b13fdce15114ff3c6f7ec2"
+      }
+    },
+    {
+      "concept": "one turtle",
+      "file": "images/DUDUQ-Y3M04-ONE-TURTLE.png",
+      "sha256": "74a0dc4ba34d02139984dd2aaea501ff625c6ee9e583bd69c004ab0ab5d73326",
+      "width": 1536,
+      "height": 1024,
+      "transparentPixels": 837838,
+      "opaquePixels": 715188,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 126,
+          "y": 116,
+          "width": 1285,
+          "height": 827
+        },
+        "canvasCoverage": 0.67564329,
+        "widthFill": 0.83658854,
+        "heightFill": 0.80761719,
+        "margins": {
+          "left": 126,
+          "top": 116,
+          "right": 125,
+          "bottom": 81
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-ONE-TURTLE-SOURCE-ORIGINAL.png",
+      "originalSha256": "f032b8c2d982cd7c8d13586d983e50e51781968d0e3ae4a5483edd9069407d2a",
+      "originalTechnical": {
+        "width": 1536,
+        "height": 1024,
+        "transparentPixels": 832075,
+        "opaquePixels": 715188,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "plane",
+      "file": "images/DUDUQ-Y3M04-PLANE.png",
+      "sha256": "7ef7be8b9770d70527768016bcd48b66dae179fb1ccf366d5d120688a1cf2092",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 960106,
+      "opaquePixels": 588018,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 26,
+          "y": 223,
+          "width": 1212,
+          "height": 842
+        },
+        "canvasCoverage": 0.64896255,
+        "widthFill": 0.96650718,
+        "heightFill": 0.67145136,
+        "margins": {
+          "left": 26,
+          "top": 223,
+          "right": 16,
+          "bottom": 189
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-PLANE-SOURCE-ORIGINAL.png",
+      "originalSha256": "7ef7be8b9770d70527768016bcd48b66dae179fb1ccf366d5d120688a1cf2092",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 960106,
+        "opaquePixels": 588018,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "red",
+      "file": "images/DUDUQ-Y3M04-RED.png",
+      "sha256": "484622d91bc0cba9e422a3fcfe990e5ea3c97297b0a97f3e084cb5a92022c3eb",
+      "width": 1265,
+      "height": 1243,
+      "transparentPixels": 704170,
+      "opaquePixels": 857303,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 108,
+          "y": 106,
+          "width": 1050,
+          "height": 1033
+        },
+        "canvasCoverage": 0.68980759,
+        "widthFill": 0.83003953,
+        "heightFill": 0.8310539,
+        "margins": {
+          "left": 108,
+          "top": 106,
+          "right": 107,
+          "bottom": 104
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-sources/DUDUQ-Y3M04-RED-SOURCE.png",
+      "originalSha256": "484622d91bc0cba9e422a3fcfe990e5ea3c97297b0a97f3e084cb5a92022c3eb",
+      "originalTechnical": {
+        "width": 1265,
+        "height": 1243,
+        "transparentPixels": 704170,
+        "opaquePixels": 857303,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "teddy bear",
+      "file": "images/DUDUQ-Y3M04-TEDDY-BEAR.png",
+      "sha256": "7f3a83c5f00d81423b4875fb329b40fab5f910b1add1db472d98f3c1b03b7a21",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 638846,
+      "opaquePixels": 874959,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 103,
+          "y": 38,
+          "width": 1071,
+          "height": 1176
+        },
+        "canvasCoverage": 0.8009432,
+        "widthFill": 0.85406699,
+        "heightFill": 0.93779904,
+        "margins": {
+          "left": 103,
+          "top": 38,
+          "right": 80,
+          "bottom": 40
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-TEDDY-BEAR-SOURCE-ORIGINAL.png",
+      "originalSha256": "7f3a83c5f00d81423b4875fb329b40fab5f910b1add1db472d98f3c1b03b7a21",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 638846,
+        "opaquePixels": 874959,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "three",
+      "file": "images/DUDUQ-Y3M04-THREE.png",
+      "sha256": "346c0cd7a52c9c2685187551e1fcb6a71721f2c53639e37f2a06fdb857939398",
+      "width": 2172,
+      "height": 1536,
+      "transparentPixels": 2369018,
+      "opaquePixels": 942557,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 57,
+          "y": 420,
+          "width": 2096,
+          "height": 675
+        },
+        "canvasCoverage": 0.42407631,
+        "widthFill": 0.96500921,
+        "heightFill": 0.43945313,
+        "margins": {
+          "left": 57,
+          "top": 420,
+          "right": 19,
+          "bottom": 441
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-THREE-SOURCE-ORIGINAL.png",
+      "originalSha256": "f7d841143ad970661a842e33385aae4cc765860834b4e0cfc85761079da4ad4b",
+      "originalTechnical": {
+        "width": 2172,
+        "height": 724,
+        "transparentPixels": 600265,
+        "opaquePixels": 942557,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "three fish",
+      "file": "images/DUDUQ-Y3M04-THREE-FISH.png",
+      "sha256": "d08e1d6ffccacceed37816a10acf44c49ef140441231a801b6b67730cd0c90e1",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1029134,
+      "opaquePixels": 518868,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 24,
+          "y": 127,
+          "width": 1206,
+          "height": 948
+        },
+        "canvasCoverage": 0.72704379,
+        "widthFill": 0.96172249,
+        "heightFill": 0.75598086,
+        "margins": {
+          "left": 24,
+          "top": 127,
+          "right": 24,
+          "bottom": 179
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M04-THREE-FISH-ORIGINAL.png",
+      "originalSha256": "a6cd17508faf7913bfd5666e5dfdbe55f322bd608ffff8855a4d071312cbbfe6",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 1007568,
+        "opaquePixels": 518868,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 3,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "a6cd17508faf7913bfd5666e5dfdbe55f322bd608ffff8855a4d071312cbbfe6",
+        "outputSha256": "d08e1d6ffccacceed37816a10acf44c49ef140441231a801b6b67730cd0c90e1"
+      }
+    },
+    {
+      "concept": "three horses",
+      "file": "images/DUDUQ-Y3M04-THREE-HORSES.png",
+      "sha256": "d7881281422930763c767bcb3ff593b3d359fc6652ee8a2f3a954510218e2b61",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 969375,
+      "opaquePixels": 566472,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 12,
+          "y": 51,
+          "width": 1205,
+          "height": 1081
+        },
+        "canvasCoverage": 0.82835723,
+        "widthFill": 0.96092504,
+        "heightFill": 0.86204147,
+        "margins": {
+          "left": 12,
+          "top": 51,
+          "right": 37,
+          "bottom": 122
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M04-THREE-HORSES-ORIGINAL.png",
+      "originalSha256": "8e6b2d651c2861ef2d94063c59595c57c6a18dd5299044c558e7b1f18fa0456f",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 931414,
+        "opaquePixels": 566472,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 3,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "8e6b2d651c2861ef2d94063c59595c57c6a18dd5299044c558e7b1f18fa0456f",
+        "outputSha256": "d7881281422930763c767bcb3ff593b3d359fc6652ee8a2f3a954510218e2b61"
+      }
+    },
+    {
+      "concept": "three turtles",
+      "file": "images/DUDUQ-Y3M04-THREE-TURTLES.png",
+      "sha256": "57e903fdb1353144a8ef3cc381345c7acf83054929f3ba279023f229be95afef",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1058644,
+      "opaquePixels": 492899,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 41,
+          "y": 120,
+          "width": 1176,
+          "height": 996
+        },
+        "canvasCoverage": 0.74485474,
+        "widthFill": 0.93779904,
+        "heightFill": 0.79425837,
+        "margins": {
+          "left": 41,
+          "top": 120,
+          "right": 37,
+          "bottom": 138
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M04-THREE-TURTLES-ORIGINAL.png",
+      "originalSha256": "fdb77794d3854a658c4da6a0c7b1901869d765507290b68faeb6d13bb993972a",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 1033876,
+        "opaquePixels": 492899,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 3,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "fdb77794d3854a658c4da6a0c7b1901869d765507290b68faeb6d13bb993972a",
+        "outputSha256": "57e903fdb1353144a8ef3cc381345c7acf83054929f3ba279023f229be95afef"
+      }
+    },
+    {
+      "concept": "train",
+      "file": "images/DUDUQ-Y3M04-TRAIN.png",
+      "sha256": "9eaaa0f2ca054fe0deb40a5c402dd88382e471b390c2de734c0c7e3a6a74b2d6",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 696396,
+      "opaquePixels": 848963,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 27,
+          "y": 161,
+          "width": 1201,
+          "height": 951
+        },
+        "canvasCoverage": 0.72632075,
+        "widthFill": 0.95773525,
+        "heightFill": 0.75837321,
+        "margins": {
+          "left": 27,
+          "top": 161,
+          "right": 26,
+          "bottom": 142
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-TRAIN-SOURCE-ORIGINAL.png",
+      "originalSha256": "9eaaa0f2ca054fe0deb40a5c402dd88382e471b390c2de734c0c7e3a6a74b2d6",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 696396,
+        "opaquePixels": 848963,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "two",
+      "file": "images/DUDUQ-Y3M04-TWO.png",
+      "sha256": "f81a55d609c8318622a798e554f19e564fd23690bf5a117a1418a06a934a74df",
+      "width": 1774,
+      "height": 1536,
+      "transparentPixels": 2037241,
+      "opaquePixels": 668853,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 168,
+          "y": 409,
+          "width": 1438,
+          "height": 711
+        },
+        "canvasCoverage": 0.37521799,
+        "widthFill": 0.81059752,
+        "heightFill": 0.46289063,
+        "margins": {
+          "left": 168,
+          "top": 409,
+          "right": 168,
+          "bottom": 416
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-TWO-SOURCE-ORIGINAL.png",
+      "originalSha256": "fe388324cd87df4ccab5791ffdb4e6b9e1dbe86306d4c44ffcdb24f2deb6fe6a",
+      "originalTechnical": {
+        "width": 1774,
+        "height": 887,
+        "transparentPixels": 877454,
+        "opaquePixels": 668853,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "two cows",
+      "file": "images/DUDUQ-Y3M04-TWO-COWS.png",
+      "sha256": "89669349f77edc6cec765a822414e49e0d3680a8acd19bed3c79020fac124ef4",
+      "width": 1263,
+      "height": 1246,
+      "transparentPixels": 969494,
+      "opaquePixels": 565665,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 15,
+          "y": 180,
+          "width": 1231,
+          "height": 871
+        },
+        "canvasCoverage": 0.68132577,
+        "widthFill": 0.9746635,
+        "heightFill": 0.69903692,
+        "margins": {
+          "left": 15,
+          "top": 180,
+          "right": 17,
+          "bottom": 195
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M04-TWO-COWS-ORIGINAL.png",
+      "originalSha256": "b3532b752ad6756d90fe81d7f0882bcbb94085d92e678f21fe0f5849f3d083b0",
+      "originalTechnical": {
+        "width": 1263,
+        "height": 1246,
+        "transparentPixels": 950187,
+        "opaquePixels": 565665,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 2,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "b3532b752ad6756d90fe81d7f0882bcbb94085d92e678f21fe0f5849f3d083b0",
+        "outputSha256": "89669349f77edc6cec765a822414e49e0d3680a8acd19bed3c79020fac124ef4"
+      }
+    },
+    {
+      "concept": "two ducks",
+      "file": "images/DUDUQ-Y3M04-TWO-DUCKS.png",
+      "sha256": "dc8cd5ad49c62c31d5123bc4d080566194c7ad2b07110594d978d7ec5662e4a3",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 953353,
+      "opaquePixels": 585519,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 51,
+          "y": 128,
+          "width": 1144,
+          "height": 1021
+        },
+        "canvasCoverage": 0.742774,
+        "widthFill": 0.9122807,
+        "heightFill": 0.81419458,
+        "margins": {
+          "left": 51,
+          "top": 128,
+          "right": 59,
+          "bottom": 105
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M04-TWO-DUCKS-ORIGINAL.png",
+      "originalSha256": "2ef3308338dda98c1c9acee29b27156d92090ba71bd3e13c99026d1cbb42bf17",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 870659,
+        "opaquePixels": 585519,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 2,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "2ef3308338dda98c1c9acee29b27156d92090ba71bd3e13c99026d1cbb42bf17",
+        "outputSha256": "dc8cd5ad49c62c31d5123bc4d080566194c7ad2b07110594d978d7ec5662e4a3"
+      }
+    },
+    {
+      "concept": "video game",
+      "file": "images/DUDUQ-Y3M04-VIDEO-GAME.png",
+      "sha256": "322a877027f7bbe467ffa5436980ad92b9e2622287c95f8cde925b0728135c10",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 859966,
+      "opaquePixels": 699295,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 19,
+          "y": 251,
+          "width": 1222,
+          "height": 746
+        },
+        "canvasCoverage": 0.57971556,
+        "widthFill": 0.97448166,
+        "heightFill": 0.59489633,
+        "margins": {
+          "left": 19,
+          "top": 251,
+          "right": 13,
+          "bottom": 257
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M04-VIDEO-GAME-SOURCE-ORIGINAL.png",
+      "originalSha256": "322a877027f7bbe467ffa5436980ad92b9e2622287c95f8cde925b0728135c10",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 859966,
+        "opaquePixels": 699295,
+        "valid": true
+      },
+      "normalization": null
+    }
+  ]
+}

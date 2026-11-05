@@ -1,0 +1,559 @@
+{
+  "schemaVersion": "DUDUQ_Y3M04_NATIVE_GENERATION_RECEIPTS_V1",
+  "createdAt": "2026-11-05T13:10:43.150Z",
+  "moduleId": "Y3M04",
+  "provider": "OpenAI Codex native image generation",
+  "tool": "image_gen.imagegen",
+  "nativeGeneratedAssets": [
+    {
+      "concept": "i do not like carrots",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-6e314faa-aa13-497b-9576-90c7c89a23b9.png",
+      "sha256": "78388c078332f783871cc81e74d11a85dbe4fe23a42fa174ff6cd70b73cf0c02",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y3M04-I-DO-NOT-LIKE-CARROTS-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-I-DO-NOT-LIKE-CARROTS.png",
+      "candidateSha256": "78e59be1986c13e2b05ed24395c0b1d64b0d3b8534480ecc8fa59f30d4fe369b",
+      "prompt": "Use case: stylized-concept\nAsset type: educational English phrase-matching game image\nPrimary request: clearly illustrate the meaning \"I do not like carrots\" without written words\nSubject: one friendly cartoon student shown from the waist up with a clear but gentle displeased expression, turning the face away while holding one complete orange carrot at arm's length and politely pushing it away with the other open hand\nStyle/medium: premium polished rounded 3D children's animation render, expressive but natural, crisp clean silhouette\nComposition/framing: student and carrot centered, filling most of a square canvas with a small transparent safety margin; carrot large and unmistakable; rejection gesture clearly visible\nLighting/mood: soft bright studio lighting, safe and non-frightening\nConstraints: only one student and exactly one carrot; no other food or vegetables; no table, room, scenery, props, speech bubble, red X, heart, check mark, or symbol; no vomiting or illness; genuinely transparent background; no floor or cast shadow; no text, letters, logo, watermark, collage, grid, or frame; no cutoff"
+    },
+    {
+      "concept": "i like apples",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-056a088c-54c2-4882-bf1c-7c9fc8ee7f80.png",
+      "sha256": "237a9a78c14882f779275363fba34fce64936b67b25c49cb82cf203ecda5d6c0",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y3M04-I-LIKE-APPLES-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-I-LIKE-APPLES.png",
+      "candidateSha256": "b378dc8a885e07048273a3393518f5a33fd2e4e9051ae359527e9ca34347a8b6",
+      "prompt": "Use case: stylized-concept\nAsset type: educational English phrase-matching game image\nPrimary request: clearly illustrate the meaning \"I like apples\" without written words\nSubject: one friendly cartoon student shown from the waist up, smiling warmly while holding exactly three shiny red apples close to the chest; a gentle thumbs-up clearly communicates liking the apples\nStyle/medium: premium polished rounded 3D children's animation render, expressive but natural, crisp clean silhouette\nComposition/framing: student and three apples centered, filling most of a square canvas with a small transparent safety margin; apples large and easy to count and recognize\nLighting/mood: soft bright studio lighting, cheerful and positive\nConstraints: exactly one student and exactly three red apples; no other fruit or food; no basket, table, room, scenery, props, speech bubble, heart icon, or symbol; genuinely transparent background; no floor or cast shadow; no text, letters, logo, watermark, collage, grid, or frame; no cutoff"
+    },
+    {
+      "concept": "i like papaya",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-b2b506be-b370-4763-9d7b-12f286372a45.png",
+      "sha256": "003aab0a731307d93a8207cb0ce4b74e94aa1bd6bf996c3be5cab606b301d9d8",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y3M04-I-LIKE-PAPAYA-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-I-LIKE-PAPAYA.png",
+      "candidateSha256": "e26d040391bd80af05431960976ae994d8828bb7b33d74663f81a248f50cb4cc",
+      "prompt": "Use case: stylized-concept\nAsset type: educational English phrase-matching game image\nPrimary request: clearly illustrate the meaning \"I like papaya\" without written words\nSubject: one friendly cartoon student shown from the waist up, smiling warmly while holding one ripe papaya cut lengthwise so its orange flesh and black seeds are unmistakable; the student's happy expression and gentle thumbs-up clearly communicate liking the papaya\nStyle/medium: premium polished rounded 3D children's animation render, expressive but natural, crisp clean silhouette\nComposition/framing: student and papaya centered, filling most of a square canvas with a small transparent safety margin; papaya large and easy to recognize\nLighting/mood: soft bright studio lighting, cheerful and positive\nConstraints: only one student and papaya; no other fruit or food; no table, room, scenery, props, speech bubble, heart icon, or symbol; genuinely transparent background; no floor or cast shadow; no text, letters, logo, watermark, collage, grid, or frame; no cutoff"
+    },
+    {
+      "concept": "i prefer grapes",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-ceae5abe-b9d2-4909-9894-31eaefeaf288.png",
+      "sha256": "8b576b1791215e65b3367907118b0a2bf4cd89393df1816c8ef9a617980c13b5",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y3M04-I-PREFER-GRAPES-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-I-PREFER-GRAPES.png",
+      "candidateSha256": "0f16d25eccf0648830dd8b5de9bd02f3d7fb78abdff205bd8e3fc9a1cd285ca5",
+      "prompt": "Use case: stylized-concept\nAsset type: educational English phrase-matching game image\nPrimary request: clearly illustrate the meaning \"I prefer grapes\" without written words\nSubject: one friendly cartoon student shown from the waist up, smiling confidently while choosing and presenting one large bunch of purple grapes forward with both hands; the focused choosing gesture and proud expression communicate that grapes are the student's preferred choice\nStyle/medium: premium polished rounded 3D children's animation render, expressive but natural, crisp clean silhouette\nComposition/framing: student and grape bunch centered, filling most of a square canvas with a small transparent safety margin; grapes large and unmistakable\nLighting/mood: soft bright studio lighting, cheerful and positive\nConstraints: only one student and one bunch of purple grapes; no other fruit or food; no table, room, scenery, props, speech bubble, heart icon, check mark, or symbol; genuinely transparent background; no floor or cast shadow; no text, letters, logo, watermark, collage, grid, or frame; no cutoff"
+    },
+    {
+      "concept": "one horse",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-db87c3b3-efb5-4dbb-b6d7-dd46a2627fb4.png",
+      "sha256": "a560135ca837f0810991829180292b589868853d44122a9ae398447a206c9a42",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y3M04-ONE-HORSE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-ONE-HORSE.png",
+      "candidateSha256": "e3e4a4ff774f3e299156f00b8ae9433b66ac86c336b13fdce15114ff3c6f7ec2",
+      "prompt": "Use case: stylized-concept\nAsset type: educational vocabulary game icon\nPrimary request: one unmistakable horse\nSubject: exactly one complete friendly stylized chestnut horse, standing calmly in side view, with dark mane and tail\nStyle/medium: premium smooth 3D toy-like render with simplified rounded forms and a crisp silhouette\nComposition/framing: one centered whole horse, fully visible, filling most of a square canvas with a small transparent margin\nLighting/mood: soft neutral studio lighting\nConstraints: one horse only; no person, rider, equipment, scenery, stable, fence, ground, or other object; transparent background; no shadow, text, logo, watermark, collage, grid, or frame"
+    },
+    {
+      "concept": "three fish",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-b1a17f8f-7813-4451-9b0b-d6a7a7a6eccf.png",
+      "sha256": "a6cd17508faf7913bfd5666e5dfdbe55f322bd608ffff8855a4d071312cbbfe6",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y3M04-THREE-FISH-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-THREE-FISH.png",
+      "candidateSha256": "d08e1d6ffccacceed37816a10acf44c49ef140441231a801b6b67730cd0c90e1",
+      "prompt": "Use case: stylized-concept\nAsset type: educational counting game image\nPrimary request: exactly three cheerful orange fish, isolated\nSubject: three complete matching orange-and-gold freshwater fish in side view, each clearly separate and easy to count\nStyle/medium: premium polished rounded 3D animation render, child-friendly, crisp clean silhouettes\nComposition/framing: exactly three fish arranged in a compact shallow arc, all fully visible, no overlap, filling most of a square canvas with a small transparent safety margin\nLighting/mood: soft bright studio lighting\nConstraints: exactly three fish; no fourth fish; no aquarium, bowl, water, bubbles, plants, props, or other animals; genuinely transparent background; no floor or cast shadow; no text, numeral, logo, watermark, collage, grid, or frame"
+    },
+    {
+      "concept": "three horses",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-fcf0ece1-4043-4763-8105-6709ac0926ce.png",
+      "sha256": "8e6b2d651c2861ef2d94063c59595c57c6a18dd5299044c558e7b1f18fa0456f",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y3M04-THREE-HORSES-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-THREE-HORSES.png",
+      "candidateSha256": "d7881281422930763c767bcb3ff593b3d359fc6652ee8a2f3a954510218e2b61",
+      "prompt": "Use case: stylized-concept\nAsset type: educational counting game icon\nPrimary request: exactly three unmistakable horses\nSubject: exactly three complete matching friendly stylized chestnut horses with dark manes and tails, all clearly separate and easy to count\nStyle/medium: premium smooth 3D toy-like render with simplified rounded forms and crisp silhouettes\nComposition/framing: three whole horses in a compact shallow arc, all fully visible, no overlap, filling most of a square canvas with a small transparent margin\nLighting/mood: soft neutral studio lighting\nConstraints: exactly three horses; no fourth horse; no people, riders, equipment, scenery, stable, fence, ground, or other objects; transparent background; no shadow, text, logo, watermark, collage, grid, or frame"
+    },
+    {
+      "concept": "three turtles",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-c2dfe809-6d22-4496-959d-026558927ce7.png",
+      "sha256": "fdb77794d3854a658c4da6a0c7b1901869d765507290b68faeb6d13bb993972a",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y3M04-THREE-TURTLES-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-THREE-TURTLES.png",
+      "candidateSha256": "57e903fdb1353144a8ef3cc381345c7acf83054929f3ba279023f229be95afef",
+      "prompt": "Use case: stylized-concept\nAsset type: educational counting game image\nPrimary request: exactly three cheerful green turtles, isolated\nSubject: three complete matching green land turtles, each with one patterned shell, one head, four short legs and a tiny tail, each clearly separate and easy to count\nStyle/medium: premium polished rounded 3D animation render, child-friendly, crisp clean silhouettes\nComposition/framing: exactly three turtles arranged in a compact shallow arc, all fully visible, no overlap, filling most of a square canvas with a small transparent safety margin\nLighting/mood: soft bright studio lighting\nConstraints: exactly three turtles; no fourth turtle; no eggs, water, pond, aquarium, plants, rocks, props, or other animals; genuinely transparent background; no floor or cast shadow; no text, numeral, logo, watermark, collage, grid, or frame"
+    },
+    {
+      "concept": "two cows",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-980990d3-21cc-4a59-ace7-931ac15312f5.png",
+      "sha256": "b3532b752ad6756d90fe81d7f0882bcbb94085d92e678f21fe0f5849f3d083b0",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y3M04-TWO-COWS-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-TWO-COWS.png",
+      "candidateSha256": "89669349f77edc6cec765a822414e49e0d3680a8acd19bed3c79020fac124ef4",
+      "prompt": "Use case: stylized-concept\nAsset type: educational counting game image\nPrimary request: exactly two friendly black-and-white farm cows, isolated\nSubject: two complete matching dairy cows, each with a clear head, body, four legs, hooves and tail, individually countable\nStyle/medium: premium polished rounded 3D animation render, child-friendly, crisp clean silhouettes, soft realistic fur\nComposition/framing: exactly two cows standing side by side with clear separation, both fully visible, filling most of a square canvas with a small transparent safety margin\nLighting/mood: soft bright studio lighting\nConstraints: exactly two cows; no third cow; no calves, milk containers, barn, fence, grass, props, or other animals; no overlap hiding either cow; genuinely transparent background; no floor or cast shadow; no text, numeral, logo, watermark, collage, grid, or frame"
+    },
+    {
+      "concept": "two ducks",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-a147ac7a-a9c9-4e54-ac89-81dc1ae39237.png",
+      "sha256": "2ef3308338dda98c1c9acee29b27156d92090ba71bd3e13c99026d1cbb42bf17",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y3M04-TWO-DUCKS-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-TWO-DUCKS.png",
+      "candidateSha256": "dc8cd5ad49c62c31d5123bc4d080566194c7ad2b07110594d978d7ec5662e4a3",
+      "prompt": "Use case: stylized-concept\nAsset type: educational counting game image\nPrimary request: exactly two friendly farm ducks, isolated\nSubject: two complete matching yellow-and-white domestic ducks with orange bills and webbed feet, individually countable\nStyle/medium: premium polished rounded 3D animation render, child-friendly, crisp clean silhouettes, soft feather detail\nComposition/framing: exactly two ducks standing side by side with clear separation, both fully visible, filling most of a square canvas with a small transparent safety margin\nLighting/mood: soft bright studio lighting\nConstraints: exactly two ducks; no third duck; no ducklings, eggs, nest, pond, water, grass, props, or other animals; no overlap hiding either duck; genuinely transparent background; no floor or cast shadow; no text, numeral, logo, watermark, collage, grid, or frame"
+    }
+  ],
+  "verifiedReusedAssets": [
+    {
+      "concept": "ball",
+      "source": {
+        "provider": "OpenAI Codex image_gen.imagegen",
+        "tool": "real enabled Codex native image generator",
+        "sourceBatch": "qa/media-candidates/y2m04-official-20261102",
+        "sourceFile": "qa/media-candidates/y2m04-official-20261102/images/DUDUQ-Y2M04-BALL.png",
+        "sourceSha256": "cb3401fc2675683294302a0e80c2924d70cf03e032138ff3b08c453115bd6f5c",
+        "sourceManifest": "qa/media-candidates/y2m04-official-20261102/batch-manifest.json",
+        "sourceManifestSha256": "17333175db61524e4ffee84d3baae92b4f3f49488f504ef147dc40b10d2f334a",
+        "sourceGenerationProvenance": "qa/media-candidates/y2m04-official-20261102/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "cc5b38588f5c1ab21e6bcc80727d6f4fd966a898f48e331cacad4a410f2c87ba",
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-BALL-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-BALL.png",
+      "candidateSha256": "cb3401fc2675683294302a0e80c2924d70cf03e032138ff3b08c453115bd6f5c"
+    },
+    {
+      "concept": "blue",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y1m04-official-20261030",
+        "sourceFile": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-BLUE.png",
+        "sourceSha256": "af47ea2a8ce91f4544b3626157f7e64bb64498b981014a42383ff2798029a584",
+        "sourceManifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+        "sourceManifestSha256": "db4f9c2785145ee84fa62136398dfa871317ca4bae845f07204d3242d772c92f",
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-sources/DUDUQ-Y3M04-BLUE-SOURCE.png",
+      "candidate": "images/DUDUQ-Y3M04-BLUE.png",
+      "candidateSha256": "af47ea2a8ce91f4544b3626157f7e64bb64498b981014a42383ff2798029a584"
+    },
+    {
+      "concept": "brown",
+      "source": {
+        "provider": "OpenAI Codex image_gen.imagegen",
+        "tool": "real enabled Codex native image generator",
+        "sourceBatch": "qa/media-candidates/y2m04-official-20261102",
+        "sourceFile": "qa/media-candidates/y2m04-official-20261102/images/DUDUQ-Y2M04-BROWN.png",
+        "sourceSha256": "21b68caf46fe4984d6109b7e3f015c6824e7a4ebc43a8ebe9fdea2e509a42d48",
+        "sourceManifest": "qa/media-candidates/y2m04-official-20261102/batch-manifest.json",
+        "sourceManifestSha256": "17333175db61524e4ffee84d3baae92b4f3f49488f504ef147dc40b10d2f334a",
+        "sourceGenerationProvenance": "qa/media-candidates/y2m04-official-20261102/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "cc5b38588f5c1ab21e6bcc80727d6f4fd966a898f48e331cacad4a410f2c87ba",
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-BROWN-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-BROWN.png",
+      "candidateSha256": "21b68caf46fe4984d6109b7e3f015c6824e7a4ebc43a8ebe9fdea2e509a42d48"
+    },
+    {
+      "concept": "doll",
+      "source": {
+        "provider": "OpenAI Codex image_gen.imagegen",
+        "tool": "real enabled Codex native image generator",
+        "sourceBatch": "qa/media-candidates/y2m04-official-20261102",
+        "sourceFile": "qa/media-candidates/y2m04-official-20261102/images/DUDUQ-Y2M04-DOLL.png",
+        "sourceSha256": "ba2aecca9a80491ecdde06c4fc5988ebe612752f6707e25586d3c12c545030f5",
+        "sourceManifest": "qa/media-candidates/y2m04-official-20261102/batch-manifest.json",
+        "sourceManifestSha256": "17333175db61524e4ffee84d3baae92b4f3f49488f504ef147dc40b10d2f334a",
+        "sourceGenerationProvenance": "qa/media-candidates/y2m04-official-20261102/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "cc5b38588f5c1ab21e6bcc80727d6f4fd966a898f48e331cacad4a410f2c87ba",
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-DOLL-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-DOLL.png",
+      "candidateSha256": "ba2aecca9a80491ecdde06c4fc5988ebe612752f6707e25586d3c12c545030f5"
+    },
+    {
+      "concept": "five",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y1m02-official-20261030",
+        "sourceFile": "qa/media-candidates/y1m02-official-20261030/images/DUDUQ-Y1M02-FIVE.png",
+        "sourceSha256": "b12f817867e3fa002e1468cadbfdda80932b8965ae74e1255db41016f9b57eee",
+        "sourceManifest": "qa/media-candidates/y1m02-official-20261030/batch-manifest.json",
+        "sourceManifestSha256": "f0392f0895579c33acba100258a3369eebf52664cfd6a1a84c5de17cc710e8f1",
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-FIVE-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-FIVE.png",
+      "candidateSha256": "b12f817867e3fa002e1468cadbfdda80932b8965ae74e1255db41016f9b57eee"
+    },
+    {
+      "concept": "four",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y1m02-official-20261030",
+        "sourceFile": "qa/media-candidates/y1m02-official-20261030/images/DUDUQ-Y1M02-FOUR.png",
+        "sourceSha256": "d7e0f1fd9f5b565a62b75b0dcf8f07fb257096a33947c6ec6ee1fadd87c61505",
+        "sourceManifest": "qa/media-candidates/y1m02-official-20261030/batch-manifest.json",
+        "sourceManifestSha256": "f0392f0895579c33acba100258a3369eebf52664cfd6a1a84c5de17cc710e8f1",
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-FOUR-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-FOUR.png",
+      "candidateSha256": "d7e0f1fd9f5b565a62b75b0dcf8f07fb257096a33947c6ec6ee1fadd87c61505"
+    },
+    {
+      "concept": "gray",
+      "source": {
+        "provider": "OpenAI Codex image_gen.imagegen",
+        "tool": "real enabled Codex native image generator",
+        "sourceBatch": "qa/media-candidates/y2m04-official-20261102",
+        "sourceFile": "qa/media-candidates/y2m04-official-20261102/images/DUDUQ-Y2M04-GRAY.png",
+        "sourceSha256": "a495b16ffedf658cee6e8e4c9c48f2ba051d6d5d664317c9a7545b1956c8e904",
+        "sourceManifest": "qa/media-candidates/y2m04-official-20261102/batch-manifest.json",
+        "sourceManifestSha256": "17333175db61524e4ffee84d3baae92b4f3f49488f504ef147dc40b10d2f334a",
+        "sourceGenerationProvenance": "qa/media-candidates/y2m04-official-20261102/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "cc5b38588f5c1ab21e6bcc80727d6f4fd966a898f48e331cacad4a410f2c87ba",
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-GRAY-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-GRAY.png",
+      "candidateSha256": "a495b16ffedf658cee6e8e4c9c48f2ba051d6d5d664317c9a7545b1956c8e904"
+    },
+    {
+      "concept": "kite",
+      "source": {
+        "provider": "OpenAI Codex image_gen.imagegen",
+        "tool": "real enabled Codex native image generator",
+        "sourceBatch": "qa/media-candidates/y2m04-official-20261102",
+        "sourceFile": "qa/media-candidates/y2m04-official-20261102/images/DUDUQ-Y2M04-KITE.png",
+        "sourceSha256": "71a71d4d087d5df23298faddc260247f2402624d68f8ab02039d96ce5fabdd95",
+        "sourceManifest": "qa/media-candidates/y2m04-official-20261102/batch-manifest.json",
+        "sourceManifestSha256": "17333175db61524e4ffee84d3baae92b4f3f49488f504ef147dc40b10d2f334a",
+        "sourceGenerationProvenance": "qa/media-candidates/y2m04-official-20261102/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "cc5b38588f5c1ab21e6bcc80727d6f4fd966a898f48e331cacad4a410f2c87ba",
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-KITE-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-KITE.png",
+      "candidateSha256": "71a71d4d087d5df23298faddc260247f2402624d68f8ab02039d96ce5fabdd95"
+    },
+    {
+      "concept": "one",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y1m02-official-20261030",
+        "sourceFile": "qa/media-candidates/y1m02-official-20261030/images/DUDUQ-Y1M02-ONE.png",
+        "sourceSha256": "e65ad687b4d68c317b065a9fce4a7d3dfbd7cffbe45835899dd9826ccaf4d8f5",
+        "sourceManifest": "qa/media-candidates/y1m02-official-20261030/batch-manifest.json",
+        "sourceManifestSha256": "f0392f0895579c33acba100258a3369eebf52664cfd6a1a84c5de17cc710e8f1",
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-ONE-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-ONE.png",
+      "candidateSha256": "e65ad687b4d68c317b065a9fce4a7d3dfbd7cffbe45835899dd9826ccaf4d8f5"
+    },
+    {
+      "concept": "one cow",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m05-official-20261102",
+        "sourceFile": "qa/media-candidates/y2m05-official-20261102/provenance/originals/DUDUQ-Y2M05-COW-ORIGINAL.png",
+        "sourceSha256": "3060f70b3175c3ad7e2cee33e64570f8f2bc68529e077c26d27a856da67d6a3d",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "sourceEvidence": "qa/media-candidates/y2m05-official-20261102/prepare-generation-bundle.mjs",
+        "sourceEvidenceSha256": "62f9f2fd891ee14ba0499f5d678601e06671e94c3ca54f9d1eca0ff1a945a08a",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19c76-d064-7353-bff6-6c06504c50b9/exec-c2e197d9-c726-4617-9919-a6df1846b7af.png",
+        "nativeExactHashVerified": true
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-ONE-COW-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-ONE-COW.png",
+      "candidateSha256": "0ad0545529cf89545de40bb0ae674a33adff1e30bbfe6836a4b74203d96e5f7a"
+    },
+    {
+      "concept": "one duck",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m05-official-20261102",
+        "sourceFile": "qa/media-candidates/y2m05-official-20261102/provenance/originals/DUDUQ-Y2M05-DUCK-ORIGINAL.png",
+        "sourceSha256": "111b511643821de01dd1bd8f9923e36b1db492882294c0eb1ffcd303a18105f5",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "sourceEvidence": "qa/media-candidates/y2m05-official-20261102/prepare-generation-bundle.mjs",
+        "sourceEvidenceSha256": "62f9f2fd891ee14ba0499f5d678601e06671e94c3ca54f9d1eca0ff1a945a08a",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19c76-d064-7353-bff6-6c06504c50b9/exec-4873dd25-0335-4217-a9c5-841a4fdb92dd.png",
+        "nativeExactHashVerified": true
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-ONE-DUCK-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-ONE-DUCK.png",
+      "candidateSha256": "f58826fc4040cf6fafa1501d9f66b74fecd4cb829352e0eac520cb15a0e63895"
+    },
+    {
+      "concept": "one fish",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y1m06-official-20261030",
+        "sourceFile": "qa/media-candidates/y1m06-official-20261030/images/DUDUQ-Y1M06-FISH.png",
+        "sourceSha256": "5f161f9aef0d5de5141fc9bf423527bb0fce91540aa27e48287f9f74c37d2b23",
+        "sourceManifest": "qa/media-candidates/y1m06-official-20261030/batch-manifest.json",
+        "sourceManifestSha256": "3f9e41ef3d00594856cddf29a732ff58f98792a9d60ed9b6260d9164513a03e1",
+        "sourceGenerationProvenance": "qa/media-candidates/y1m06-official-20261030/provenance/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "ae1704c589cd3995c6b8197be05c25bc8ce8c6e485571d7980e6d5fcfd749759",
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-ONE-FISH-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-ONE-FISH.png",
+      "candidateSha256": "5f161f9aef0d5de5141fc9bf423527bb0fce91540aa27e48287f9f74c37d2b23"
+    },
+    {
+      "concept": "one turtle",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y1m06-official-20261030",
+        "sourceFile": "qa/media-candidates/y1m06-official-20261030/images/DUDUQ-Y1M06-TURTLE.png",
+        "sourceSha256": "74a0dc4ba34d02139984dd2aaea501ff625c6ee9e583bd69c004ab0ab5d73326",
+        "sourceManifest": "qa/media-candidates/y1m06-official-20261030/batch-manifest.json",
+        "sourceManifestSha256": "3f9e41ef3d00594856cddf29a732ff58f98792a9d60ed9b6260d9164513a03e1",
+        "sourceGenerationProvenance": "qa/media-candidates/y1m06-official-20261030/provenance/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "ae1704c589cd3995c6b8197be05c25bc8ce8c6e485571d7980e6d5fcfd749759",
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-ONE-TURTLE-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-ONE-TURTLE.png",
+      "candidateSha256": "74a0dc4ba34d02139984dd2aaea501ff625c6ee9e583bd69c004ab0ab5d73326"
+    },
+    {
+      "concept": "plane",
+      "source": {
+        "provider": "OpenAI Codex image_gen.imagegen",
+        "tool": "real enabled Codex native image generator",
+        "sourceBatch": "qa/media-candidates/y2m04-official-20261102",
+        "sourceFile": "qa/media-candidates/y2m04-official-20261102/images/DUDUQ-Y2M04-PLANE.png",
+        "sourceSha256": "7ef7be8b9770d70527768016bcd48b66dae179fb1ccf366d5d120688a1cf2092",
+        "sourceManifest": "qa/media-candidates/y2m04-official-20261102/batch-manifest.json",
+        "sourceManifestSha256": "17333175db61524e4ffee84d3baae92b4f3f49488f504ef147dc40b10d2f334a",
+        "sourceGenerationProvenance": "qa/media-candidates/y2m04-official-20261102/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "cc5b38588f5c1ab21e6bcc80727d6f4fd966a898f48e331cacad4a410f2c87ba",
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-PLANE-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-PLANE.png",
+      "candidateSha256": "7ef7be8b9770d70527768016bcd48b66dae179fb1ccf366d5d120688a1cf2092"
+    },
+    {
+      "concept": "red",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y1m04-official-20261030",
+        "sourceFile": "qa/media-candidates/y1m04-official-20261030/images/DUDUQ-Y1M04-RED.png",
+        "sourceSha256": "484622d91bc0cba9e422a3fcfe990e5ea3c97297b0a97f3e084cb5a92022c3eb",
+        "sourceManifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+        "sourceManifestSha256": "db4f9c2785145ee84fa62136398dfa871317ca4bae845f07204d3242d772c92f",
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-sources/DUDUQ-Y3M04-RED-SOURCE.png",
+      "candidate": "images/DUDUQ-Y3M04-RED.png",
+      "candidateSha256": "484622d91bc0cba9e422a3fcfe990e5ea3c97297b0a97f3e084cb5a92022c3eb"
+    },
+    {
+      "concept": "teddy bear",
+      "source": {
+        "provider": "OpenAI Codex image_gen.imagegen",
+        "tool": "real enabled Codex native image generator",
+        "sourceBatch": "qa/media-candidates/y2m04-official-20261102",
+        "sourceFile": "qa/media-candidates/y2m04-official-20261102/images/DUDUQ-Y2M04-TEDDY-BEAR.png",
+        "sourceSha256": "7f3a83c5f00d81423b4875fb329b40fab5f910b1add1db472d98f3c1b03b7a21",
+        "sourceManifest": "qa/media-candidates/y2m04-official-20261102/batch-manifest.json",
+        "sourceManifestSha256": "17333175db61524e4ffee84d3baae92b4f3f49488f504ef147dc40b10d2f334a",
+        "sourceGenerationProvenance": "qa/media-candidates/y2m04-official-20261102/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "cc5b38588f5c1ab21e6bcc80727d6f4fd966a898f48e331cacad4a410f2c87ba",
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-TEDDY-BEAR-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-TEDDY-BEAR.png",
+      "candidateSha256": "7f3a83c5f00d81423b4875fb329b40fab5f910b1add1db472d98f3c1b03b7a21"
+    },
+    {
+      "concept": "three",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y1m02-official-20261030",
+        "sourceFile": "qa/media-candidates/y1m02-official-20261030/images/DUDUQ-Y1M02-THREE.png",
+        "sourceSha256": "346c0cd7a52c9c2685187551e1fcb6a71721f2c53639e37f2a06fdb857939398",
+        "sourceManifest": "qa/media-candidates/y1m02-official-20261030/batch-manifest.json",
+        "sourceManifestSha256": "f0392f0895579c33acba100258a3369eebf52664cfd6a1a84c5de17cc710e8f1",
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-THREE-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-THREE.png",
+      "candidateSha256": "346c0cd7a52c9c2685187551e1fcb6a71721f2c53639e37f2a06fdb857939398"
+    },
+    {
+      "concept": "train",
+      "source": {
+        "provider": "OpenAI Codex image_gen.imagegen",
+        "tool": "real enabled Codex native image generator",
+        "sourceBatch": "qa/media-candidates/y2m04-official-20261102",
+        "sourceFile": "qa/media-candidates/y2m04-official-20261102/images/DUDUQ-Y2M04-TRAIN.png",
+        "sourceSha256": "9eaaa0f2ca054fe0deb40a5c402dd88382e471b390c2de734c0c7e3a6a74b2d6",
+        "sourceManifest": "qa/media-candidates/y2m04-official-20261102/batch-manifest.json",
+        "sourceManifestSha256": "17333175db61524e4ffee84d3baae92b4f3f49488f504ef147dc40b10d2f334a",
+        "sourceGenerationProvenance": "qa/media-candidates/y2m04-official-20261102/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "cc5b38588f5c1ab21e6bcc80727d6f4fd966a898f48e331cacad4a410f2c87ba",
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-TRAIN-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-TRAIN.png",
+      "candidateSha256": "9eaaa0f2ca054fe0deb40a5c402dd88382e471b390c2de734c0c7e3a6a74b2d6"
+    },
+    {
+      "concept": "two",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y1m02-official-20261030",
+        "sourceFile": "qa/media-candidates/y1m02-official-20261030/images/DUDUQ-Y1M02-TWO.png",
+        "sourceSha256": "f81a55d609c8318622a798e554f19e564fd23690bf5a117a1418a06a934a74df",
+        "sourceManifest": "qa/media-candidates/y1m02-official-20261030/batch-manifest.json",
+        "sourceManifestSha256": "f0392f0895579c33acba100258a3369eebf52664cfd6a1a84c5de17cc710e8f1",
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-TWO-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-TWO.png",
+      "candidateSha256": "f81a55d609c8318622a798e554f19e564fd23690bf5a117a1418a06a934a74df"
+    },
+    {
+      "concept": "video game",
+      "source": {
+        "provider": "OpenAI Codex image_gen.imagegen",
+        "tool": "real enabled Codex native image generator",
+        "sourceBatch": "qa/media-candidates/y2m04-official-20261102",
+        "sourceFile": "qa/media-candidates/y2m04-official-20261102/images/DUDUQ-Y2M04-VIDEO-GAME.png",
+        "sourceSha256": "322a877027f7bbe467ffa5436980ad92b9e2622287c95f8cde925b0728135c10",
+        "sourceManifest": "qa/media-candidates/y2m04-official-20261102/batch-manifest.json",
+        "sourceManifestSha256": "17333175db61524e4ffee84d3baae92b4f3f49488f504ef147dc40b10d2f334a",
+        "sourceGenerationProvenance": "qa/media-candidates/y2m04-official-20261102/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "cc5b38588f5c1ab21e6bcc80727d6f4fd966a898f48e331cacad4a410f2c87ba",
+        "sourceEvidence": null,
+        "sourceEvidenceSha256": null,
+        "nativeOutputPath": null,
+        "nativeExactHashVerified": false
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y3M04-VIDEO-GAME-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y3M04-VIDEO-GAME.png",
+      "candidateSha256": "322a877027f7bbe467ffa5436980ad92b9e2622287c95f8cde925b0728135c10"
+    }
+  ],
+  "failedAttempts": [
+    {
+      "conceptScope": [
+        "one horse",
+        "three turtles"
+      ],
+      "requestId": "cd4d066a-2606-4251-9f3f-0259e118e398",
+      "code": "moderation_blocked",
+      "stage": "output",
+      "fileCreated": false,
+      "recovered": true,
+      "note": "Parallel preflight returned no attributable asset; both concepts were later generated successfully through individual calls."
+    },
+    {
+      "conceptScope": [
+        "one horse"
+      ],
+      "requestId": "5848aaed-d978-4931-b188-ef9f412b18d4",
+      "code": "moderation_blocked",
+      "stage": "output",
+      "fileCreated": false,
+      "recovered": true,
+      "note": "A simpler toy-like prompt later produced the accepted one-horse candidate."
+    },
+    {
+      "conceptScope": [
+        "three horses"
+      ],
+      "requestId": "45f559f8-c1b0-4770-8618-f22aee52f6f8",
+      "code": "moderation_blocked",
+      "stage": "output",
+      "fileCreated": false,
+      "recovered": true,
+      "note": "A simpler toy-like prompt later produced the accepted three-horses candidate."
+    }
+  ],
+  "generatorLimitReached": false,
+  "blockedGenerator": false
+}
