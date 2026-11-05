@@ -133,6 +133,37 @@ try{
     record.blocker='FAILED_TO_ENTER_REAL_Q001';
     continue;
    }
+   const correctEl=page.locator('article[aria-label="Alvo hello"]');
+   const gate=async()=>{
+    if(!await correctEl.count())return false;
+    return await correctEl.evaluate(el=>!el.hasAttribute('inert')&&
+     el.getAttribute('aria-disabled')!=='true'&&
+     !el.classList.contains('duduq-interaction-locked')).catch(()=>false);
+   };
+   let unlocked=await poll(page,gate,9000);
+   if(!unlocked){
+    record.actions.push('Q001_INTERACTION_GATE_LOCKED_AFTER_9S');
+    const audio=page.getByRole('button',{name:/play instruction|reproduzir|ouvir|áudio|audio/i}).first();
+    if(await audio.count()&&await audio.isVisible()){
+     await audio.click({timeout:4500}).catch(e=>
+      record.actions.push('Q001_AUDIO_CLICK_ERROR:'+String(e).slice(0,180)));
+     record.actions.push('Q001_AUDIO_INSTRUCTION_REPLAY_CLICK');
+     unlocked=await poll(page,gate,12000);
+    }else record.actions.push('Q001_AUDIO_BUTTON_MISSING');
+   }
+   record.actions.push('Q001_INTERACTION_UNLOCKED='+unlocked);
+   if(!unlocked){
+    record.blocker='Q001_PEDAGOGICAL_AUDIO_INTERACTION_GATE_STILL_LOCKED';
+    record.q001LockedDom=await correctEl.evaluate(el=>({
+      outerHTML:el.outerHTML.slice(0,1300),
+      inert:el.hasAttribute('inert'),
+      ariaDisabled:el.getAttribute('aria-disabled'),
+      className:el.className,
+      state:el.getAttribute('data-gameplay-state')
+    })).catch(()=>null);
+    await capture(page,record,'q001-locked-after-audio');
+    continue;
+   }
    let shot=await correctTarget(page,'hello');
    record.actions.push('Q001:'+JSON.stringify(shot));
    if(shot.clicked){
