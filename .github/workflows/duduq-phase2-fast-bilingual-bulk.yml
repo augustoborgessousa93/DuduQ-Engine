@@ -9,6 +9,7 @@ on:
       - qa/duduq-year1-module01-closure-20261104
       - qa/duduq-y1m01-distractor-diversity-20261104
       - qa/duduq-y1m01-daypart-variation-20261105
+      - qa/duduq-y1m01-real-entrypoint-proof-20261105
     paths:
       - .github/workflows/duduq-phase2-fast-bilingual-bulk.yml
       - qa/phase2-fast-bilingual-bulk.mjs
@@ -24,6 +25,7 @@ on:
       - qa/apply-y1m01-variety.mjs
       - qa/y1m01-curated-variety-plan.json
       - qa/patch-y1m01-q003-daypart-variety.mjs
+      - qa/verify-y1m01-real-entrypoint-browser.mjs
       - qa/cloudflare-preview-v28-prebuilt.sh
 
 permissions:
@@ -208,6 +210,8 @@ jobs:
           node qa/verify-y1m01-q001-focus-browser.mjs
           node --check qa/verify-y1m01-daypart-browser.mjs
           node qa/verify-y1m01-daypart-browser.mjs
+          node --check qa/verify-y1m01-real-entrypoint-browser.mjs
+          node qa/verify-y1m01-real-entrypoint-browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -218,6 +222,8 @@ jobs:
             qa/results/y1m01-q001-browser.json
             qa/results/y1m01-q001-browser/*.png
             qa/results/y1m01-daypart-q003-q004-browser.json
+            qa/results/y1m01-real-entrypoint-browser.json
+            qa/results/y1m01-real-entrypoint/*.png
           retention-days: 90
           if-no-files-found: warn
           compression-level: 6
