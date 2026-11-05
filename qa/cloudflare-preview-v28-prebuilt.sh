@@ -151,6 +151,9 @@ test -s qa/results/y1m01-q001-focused-preview.json
 node --check qa/patch-y1m01-daypart-q003-q004.mjs
 DUDUQ_QA_ONLY=1 node qa/patch-y1m01-daypart-q003-q004.mjs
 DUDUQ_QA_ONLY=1 node qa/apply-y1m01-variety.mjs
+node --check qa/patch-y1m01-q003-daypart-variety.mjs
+DUDUQ_QA_ONLY=1 node qa/patch-y1m01-q003-daypart-variety.mjs
+test -s qa/results/y1m01-q003-varied-dayparts.json
 node qa/verify-approved-q001-lock.mjs
 test -s qa/results/y1m01-daypart-q003-q004.json
 node --check qa/audit-year1-module01-compiled.mjs
