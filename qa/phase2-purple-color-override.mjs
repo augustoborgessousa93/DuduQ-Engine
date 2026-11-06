@@ -101,7 +101,7 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
   function scan(v){
    if(!v||typeof v!=='object')return;
    if(Array.isArray(v)){for(const x of v)scan(x);return;}
-   if(typeof v.mediaId==='string'&&ids.has(v.mediaId))involved.add(v.mediaId);
+   for(const key of ['mediaId','assetId','image_ref','imageRef'])if(typeof v[key]==='string'&&ids.has(v[key]))involved.add(v[key]);
    for(const value of Object.values(v))if(value&&typeof value==='object')scan(value);
   }
   scan(item);
