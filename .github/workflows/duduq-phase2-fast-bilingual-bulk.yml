@@ -1,9 +1,9 @@
-name: DUDUQ - BULK bilingual 488 originals x 600 questions (one-pass QA only)
+name: DUDUQ - Unblocked media visual review (QA only)
 
 on:
   push:
     branches:
-      - qa/duduq-phase2-fast-bilingual-bulk-20261104
+      - qa/duduq-phase2-unlock-visual-review-20261106
     paths:
       - .github/workflows/duduq-phase2-fast-bilingual-bulk.yml
       - qa/phase2-fast-bilingual-bulk.mjs
@@ -15,7 +15,7 @@ permissions:
   actions: read
 
 concurrency:
-  group: duduq-fast-bilingual-bulk-single-candidate
+  group: duduq-unblocked-review-single
   cancel-in-progress: true
 
 jobs:
@@ -26,6 +26,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       DUDUQ_QA_ONLY: "1"
+      DUDUQ_VISUAL_REVIEW: "1"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -188,7 +189,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: duduq-fast-bilingual-real-browser-evidence
+          name: duduq-unblocked-review-browser
           path: |
             qa/results/phase2-fast-bulk-browser.json
             qa/results/phase2-fast-bulk-browser/*.png
@@ -198,7 +199,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: duduq-fast-bilingual-lightweight-semantic-holds
+          name: duduq-unblocked-review-semantic
           path: |
             qa/results/phase2-reconciled-live-production-04nov.json
             qa/results/phase2-source-delta-20261106.json
@@ -219,7 +220,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: duduq-fast-bilingual-600-question-bulk-qa
+          name: duduq-unblocked-review-qa-package
           path: |
             qa/results/phase2-reconciled-live-production-04nov.json
             qa/results/phase2-source-delta-20261106.json

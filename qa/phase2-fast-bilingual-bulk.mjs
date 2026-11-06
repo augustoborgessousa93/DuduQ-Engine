@@ -17,6 +17,7 @@ import path from 'node:path';
 import {aliases,extraAliases} from './phase2-fast-bilingual-aliases.mjs';
 
 assert.equal(process.env.DUDUQ_QA_ONLY,'1','QA_ONLY_REQUIRED');
+const visualReview=process.env.DUDUQ_VISUAL_REVIEW==='1';
 const apply=process.argv.includes('--apply');
 const root=path.resolve(process.env.DUDUQ_QA_DIST||'qa/fast-bilingual-immutable-candidate');
 assert(root.startsWith(path.resolve('qa')+path.sep),'DISPOSABLE_QA_ROOT_ONLY');
@@ -425,7 +426,9 @@ for(const [id,links] of usages){
   const pinnedBlack=fileByPath.get('Imagens Ilustrativa/color-black-preto.png');
   assert(pinnedBlack&&published.has(pinnedBlack.sha),'BLACK_OFFICIAL_ORIGINAL_MUST_ALREADY_BE_PUBLISHED');
  }
- if((historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id))&&!isVettedBlack){
+ const pinnedTrial=visualReview&&pinByConcept.has(concept)&&
+ fileByPath.has(pinByConcept.get(concept))&&concept!=='orange'&&concept!=='orange fruit';
+ if((historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id))&&!isVettedBlack&&!pinnedTrial){
   hold(id,'HISTORICAL_VISUAL_OR_SEMANTIC_HOLD',concept);continue;
  }
  if(old.semanticConflict===true&&!graphConsensus&&!isVettedBlack&&!vetted){hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;}
@@ -443,7 +446,7 @@ for(const [id,links] of usages){
  if(!asset){hold(id,'NO_UNAMBIGUOUS_SOURCE_FOR_CONCEPT',concept);continue;}
  // Trial eating-scene image was explicitly marked for human review; keep
  // the currently published placeholder until the semantic framing is signed off.
- if(asset.priority==='TARGETED_EATING_SCENE_QA_REVIEW_PENDING'){
+ if(asset.priority==='TARGETED_EATING_SCENE_QA_REVIEW_PENDING'&&!visualReview){
   hold(id,'EATING_SCENE_PEDAGOGICAL_REVIEW_PENDING',concept);continue;
  }
  const realQuestionIds=[...new Set(links.map(x=>x.questionId))].sort();
@@ -469,10 +472,10 @@ for(const [id,links] of usages){
  // in animated Bubble Pop, plus 4 Q016 session-guard failures. Do not
  // release media used by these mechanics merely because an image loads.
  // Shared IDs are held in their ENTIRETY when any consumer is unverified.
- if(links.some(x=>x.mechanicId==='bubble-pop')){
+ if(!visualReview&&links.some(x=>x.mechanicId==='bubble-pop')){
   hold(id,'BUBBLE_POP_DYNAMIC_VISIBILITY_QA_PENDING',concept);continue;
  }
- if(links.some(x=>x.questionId==='Y1M01-Q016'&&x.mechanicId==='target-shooter')){
+ if(!visualReview&&links.some(x=>x.questionId==='Y1M01-Q016'&&x.mechanicId==='target-shooter')){
   hold(id,'Y1M01_SESSION_ITEM_MISMATCH_QA_PENDING',concept);continue;
  }
  // Strong inference for legacy missing semanticTarget: audited concept and

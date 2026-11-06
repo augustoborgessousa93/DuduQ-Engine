@@ -10,6 +10,7 @@ import path from 'node:path';
 import {chromium} from 'playwright';
 
 assert.equal(process.env.DUDUQ_QA_ONLY,'1','DUDUQ_QA_ONLY_REQUIRED');
+const visualReview=process.env.DUDUQ_VISUAL_REVIEW==='1';
 const dist=path.resolve('qa/fast-bilingual-immutable-candidate');
 const report=JSON.parse(await readFile('qa/results/phase2-fast-bilingual-bulk-applied.json','utf8'));
 assert.equal(report.realContracts,600,'CONTRACT_COUNT_CHANGED');
@@ -65,13 +66,24 @@ const candidates=[...sampleCandidates.entries()].map(([key,items])=>({
 for(const x of candidates)sample.set(x.key,x.item);
 const blobs=new Set(report.applied.map(x=>x.sourceGitBlob));
 const mechanics=new Set(candidates.map(x=>x.item.mechanic));
+if(visualReview)for(const entry of report.applied){
+ for(const questionId of entry.questionIds||[]){
+  if(!['Y1M01-Q001','Y1M01-Q003'].includes(questionId))continue;
+  const question=getDoc(questionId)?.items?.find(q=>q.item_id===questionId);
+  const reg=byId.get(entry.mediaId);
+  if(!question||!reg)continue;
+  sample.set(entry.sourceGitBlob+'::'+question.mechanicId+'::'+questionId,{
+   questionId,mechanic:question.mechanicId,mediaId:entry.mediaId,
+   sourceGitBlob:entry.sourceGitBlob,assetPath:reg.urlOrPath});
+ }
+}
 const notBrowserSampled=candidates.filter(x=>!sample.has(x.key)).map(x=>x.key);
 assert.equal(notBrowserSampled.length,0,'SOURCE_MECHANIC_COVERAGE_NOT_COMPLETE');
 assert.equal(new Set([...sample.values()].map(x=>x.sourceGitBlob)).size,blobs.size,
  'NOT_ALL_DISTINCT_SOURCE_BLOBS_REPRESENTED');
 assert.equal(new Set([...sample.values()].map(x=>x.mechanic)).size,mechanics.size,
  'NOT_ALL_MECHANICS_REPRESENTED');
-assert(sample.size<=220,'BROWSER_SAMPLE_EXCESSIVE');
+assert(sample.size<=360,'BROWSER_SAMPLE_EXCESSIVE');
 console.log('REAL_BROWSER_SAMPLING='+JSON.stringify({
  sourceBlobs:blobs.size,distinctMechanics:mechanics.size,
  sampledPairs:sample.size,unverifiedPairs:0,
@@ -205,7 +217,7 @@ const failures=cases.filter(x=>x.httpStatus!==200||!x.loaded||!x.visible||
  x.errors.length>0||x.httpErrors.length>0||x.limitations.some(x=>x.startsWith('BROWSER_EXCEPTION')));
 const moduleFailures=moduleChecks.filter(x=>x.httpStatus!==200||x.questionHttpStatus!==200||
  x.questions!==20||x.bodyLength<20||x.errors.length>0);
-const summary={schemaVersion:'DUDUQ_FAST_BULK_BROWSER_V1',status:(failures.length||moduleFailures.length)?
+const summary={schemaVersion:'DUDUQ_FAST_BULK_BROWSER_V1',visualReviewMode:visualReview,status:(failures.length||moduleFailures.length)?
  'BROWSER_EVIDENCE_BLOCKED':'BROWSER_LOAD_AND_VISIBILITY_PASS_QA_ONLY',
  sourceCommit:report.sourceCommit,sourceBlobs:blobs.size,
  sampledSourceMechanicPairs:sample.size,sourceMechanicPairsAvailable:candidates.length,
@@ -229,4 +241,13 @@ if(moduleFailures.length)console.error('FAST_BULK_MODULE_BOOT_FAILURES='+JSON.st
 console.log('FAST_BULK_BROWSER_QA='+JSON.stringify({status:summary.status,
  sourceBlobs:summary.sourceBlobs,samples:summary.uniqueSourceMechanicSamples,
  cases:summary.browserCases,failures:summary.failedCases}));
-assert.equal(failures.length+moduleFailures.length,0,'DIRECTED_VISIBILITY_OR_30_MODULE_BOOT_FAILURES');
+if(visualReview){
+ const expected=failures.filter(x=>x.mechanic==='bubble-pop'||
+  (x.questionId==='Y1M01-Q016'&&x.mechanic==='target-shooter'));
+ const unexpected=failures.filter(x=>!expected.includes(x));
+ console.log('BROWSER_VISUAL_REVIEW_PENDING='+JSON.stringify({
+  expectedAnimatedOrSessionIssues:expected.length,unexpectedFailures:unexpected.length,
+  cases:cases.length,modules:moduleChecks.length,pedagogicalApproval:false,
+  productionDeployed:false}));
+ assert.equal(unexpected.length+moduleFailures.length,0,'REVIEW_UNEXPECTED_GAMEPLAY_FAILURES');
+}else{assert.equal(failures.length+moduleFailures.length,0,'DIRECTED_VISIBILITY_OR_30_MODULE_BOOT_FAILURES');}
