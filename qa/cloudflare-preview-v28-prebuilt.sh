@@ -15,10 +15,7 @@ curl -fLSs --retry 3 --retry-delay 2 --max-time 360 \
 echo "cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800  $TAR" | sha256sum -c
 tar -xzf "$TAR" -C "$ROOT"
 node qa/reconcile-duduq-live-04nov.mjs
-curl -fLSs --retry 3 --retry-delay 3 --max-time 120 \
- -H 'Accept: application/vnd.github+json' \
- "https://api.github.com/repos/augustoborgessousa93/Assets-DuduQ/git/trees/db68bc43eafd33e8b4a287604f6f94a1e9d7df02?recursive=1" \
- -o qa/results/visual-review-source-tree.json
+cp qa/fixtures/phase2-official-source-tree-db68bc43.json qa/results/visual-review-source-tree.json
 node --input-type=module <<'NODE'
 import {readFileSync,writeFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
@@ -139,5 +136,34 @@ assert(manifest.includes(imgRel+' '+'9ff04eb4f5f169a5b0737c4b607a287f8cb0163381a
  'MANIFEST_IMAGE_MISMATCH');
 assert(!existsSync(base+'media-review/purple.html'),'REVIEW_PAGE_MUST_NOT_BE_IN_PRODUCTION');
 console.log('DUDUQ_PURPLE_PRODUCTION_QA_ARTIFACT_VERIFIED=11_COLOR_MEDIA');
+NODE
+node --check qa/phase2-gray-memory-fast-feedback.mjs
+DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/phase2-gray-memory-fast-feedback.mjs --release
+node --input-type=module --check < dist-pages/play/memory-quest/memory-quest.js
+node --input-type=module <<'NODE'
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {existsSync,readFileSync} from 'node:fs';
+const hash=buf=>createHash('sha256').update(buf).digest('hex');
+const base='dist-pages/';
+const registry='content/english/media/media-registry.json';
+const memory='play/memory-quest/memory-quest.js';
+const gray='content/english/assets/images/assets-duduq/fast-64a278da3c63-db611390d77d.png';
+const expect=new Map([
+ [registry,'9d2aa04d5230c1b6419284a4e222cca7abf43bde2d72b971eaa0ce0a713c93fa'],
+ [memory,'1af7a78dd707ae87d8fc1c98350673a47324ff39dfba5b9120fac70957388ec3'],
+ [gray,'db611390d77dff45da09ac8206b7b9a90d546df378e217223fb97a5980821680']
+]);
+const manifest=readFileSync(base+'.duduq-pages-manifest','utf8');
+for(const [name,digest] of expect){
+ assert.equal(hash(readFileSync(base+name)),digest,'PRODUCTION_BYTES_DIFFER_FROM_QA:'+name);
+ assert(manifest.includes(name+' '+digest),'PRODUCTION_MANIFEST_MISMATCH:'+name);
+}
+assert(!existsSync(base+'media-review/gray.html'),'QA_REPORT_LEAKED_IN_PRODUCTION');
+const reg=JSON.parse(readFileSync(base+registry));
+const grayIDs=reg.entries.filter(e=>e.semantic==='gray'&&/GRAY/.test(e.mediaId));
+assert.equal(grayIDs.length,9,'GRAY_ID_COUNT_CHANGED');
+assert(grayIDs.every(e=>e.provenance?.sourcePath==='Imagens Ilustrativa/Color_Cinza_Grey.png'));
+console.log('DUDUQ_GRAY_MEMORY_RELEASE_PINNED_QA_PASS=9_GRAY_AND_FAST_ACTION_BUTTONS');
 NODE
 echo "DUDUQ_RELEASE_ARTIFACT_269_BINDINGS_97_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
