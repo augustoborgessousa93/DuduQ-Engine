@@ -54,7 +54,7 @@
   },
   "reviewPersistence": {
     "candidateBundleCommit": "9854c008cd79ea87af8d0e20586724d41c9ec64a",
-    "candidateCheckpointCommit": null,
+    "candidateCheckpointCommit": "0c5213edd8d6a6655f2c745d74346356556e3d0d",
     "reviewBranch": "automation/duduq-y4m01-generation-20261106",
     "remotePushStatus": "PUSHED",
     "remotePushReason": null

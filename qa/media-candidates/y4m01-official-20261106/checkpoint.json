@@ -1,7 +1,7 @@
 {
   "schemaVersion": "DUDUQ_TWO_LANE_GENERATION_CHECKPOINT_V1",
   "createdAt": "2026-11-06T09:13:52.327Z",
-  "updatedAt": "2026-11-06T09:26:52.3473472Z",
+  "updatedAt": "2026-11-06T09:27:58.7161716Z",
   "status": "Y4M01_GENERATION_CANDIDATES_COMPLETE",
   "projectStatus": "INCOMPLETE",
   "lane": "generation",
@@ -50,7 +50,7 @@
   "deployed": false,
   "candidateBundleCommit": "9854c008cd79ea87af8d0e20586724d41c9ec64a",
   "candidateReviewPushBranch": "automation/duduq-y4m01-generation-20261106",
-  "candidateCheckpointCommit": null,
+  "candidateCheckpointCommit": "0c5213edd8d6a6655f2c745d74346356556e3d0d",
   "remotePushStatus": "PUSHED",
   "remotePushBlocker": null,
   "reviewBranch": "automation/duduq-y4m01-generation-20261106",
