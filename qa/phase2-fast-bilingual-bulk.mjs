@@ -441,6 +441,11 @@ for(const [id,links] of usages){
   (queueLabelSource?{...queueLabelSource,priority:'UNANIMOUS_AUDITED_LABELS'}:null)||
   (literalSource&&{...literalSource,priority:'UNIQUE_FULL_BILINGUAL_CAPTION'});
  if(!asset){hold(id,'NO_UNAMBIGUOUS_SOURCE_FOR_CONCEPT',concept);continue;}
+ // Trial eating-scene image was explicitly marked for human review; keep
+ // the currently published placeholder until the semantic framing is signed off.
+ if(asset.priority==='TARGETED_EATING_SCENE_QA_REVIEW_PENDING'){
+  hold(id,'EATING_SCENE_PEDAGOGICAL_REVIEW_PENDING',concept);continue;
+ }
  const realQuestionIds=[...new Set(links.map(x=>x.questionId))].sort();
  if(old.usage!==realQuestionIds.length){
   hold(id,'QUEUE_VS_REAL_QUESTION_COUNT_CONFLICT',concept);continue;

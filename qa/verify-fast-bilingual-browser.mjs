@@ -56,37 +56,26 @@ for(const item of report.applied){
 // selected Q004 as a substitute, which is not necessarily a valid session
 // deep link. This is an experiment: a mismatch still FAILS the gate.
 const sessionFixtureGaps=[];
-// Preserve one browser proof for EVERY distinct source blob, then add one
-// representative of each mechanic. Do not repeat identical PNG/mechanic
-// combinations across questions; all 600 contracts and every registry image
-// have already passed separate non-browser integrity checks.
+// Verify EVERY distinct original PNG x mechanic pairing, not a subset.
+// A pair can appear in multiple questions; explicit shared-ID semantic checks
+// in the engine cover every use while this gate checks actual visibility.
 const candidates=[...sampleCandidates.entries()].map(([key,items])=>({
  key,item:items.find(x=>x.questionId==='Y1M01-Q001')||items[0]
 })).sort((a,b)=>a.key.localeCompare(b.key));
+for(const x of candidates)sample.set(x.key,x.item);
 const blobs=new Set(report.applied.map(x=>x.sourceGitBlob));
-for(const blob of [...blobs].sort()){
- const options=candidates.filter(x=>x.item.sourceGitBlob===blob);
- assert(options.length>0,'BROWSER_COVERAGE_MISSING_SOURCE_BLOB:'+blob);
- const chosen=options.find(x=>x.item.questionId==='Y1M01-Q001')||options[0];
- sample.set(chosen.key,chosen.item);
-}
 const mechanics=new Set(candidates.map(x=>x.item.mechanic));
-for(const mechanic of [...mechanics].sort()){
- if([...sample.values()].some(x=>x.mechanic===mechanic))continue;
- const chosen=candidates.find(x=>x.item.mechanic===mechanic);
- assert(chosen,'BROWSER_COVERAGE_MISSING_MECHANIC:'+mechanic);
- sample.set(chosen.key,chosen.item);
-}
 const notBrowserSampled=candidates.filter(x=>!sample.has(x.key)).map(x=>x.key);
+assert.equal(notBrowserSampled.length,0,'SOURCE_MECHANIC_COVERAGE_NOT_COMPLETE');
 assert.equal(new Set([...sample.values()].map(x=>x.sourceGitBlob)).size,blobs.size,
  'NOT_ALL_DISTINCT_SOURCE_BLOBS_REPRESENTED');
 assert.equal(new Set([...sample.values()].map(x=>x.mechanic)).size,mechanics.size,
  'NOT_ALL_MECHANICS_REPRESENTED');
-assert(sample.size<=135,'BROWSER_SAMPLE_BUDGET_EXCEEDED');
+assert(sample.size<=220,'BROWSER_SAMPLE_EXCESSIVE');
 console.log('REAL_BROWSER_SAMPLING='+JSON.stringify({
  sourceBlobs:blobs.size,distinctMechanics:mechanics.size,
- sampledPairs:sample.size,unverifiedPairs:notBrowserSampled.length,
- note:'Sampled media visibility only; not all gameplay certified'
+ sampledPairs:sample.size,unverifiedPairs:0,
+ note:'All unique source PNG x mechanic pairs; not all interactive gameplay'
 }));
 const outDir='qa/results/phase2-fast-bulk-browser';
 await mkdir(outDir,{recursive:true});
