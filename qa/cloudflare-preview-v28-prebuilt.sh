@@ -23,6 +23,7 @@ printf '%s  %s\n' \
  cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800 "$TMP" | sha256sum -c
 tar -xzf "$TMP" -C "$ROOT"
 DUDUQ_QA_ONLY=1 node qa/reconcile-duduq-live-04nov.mjs
+cp "$ROOT/.duduq-pages-manifest" qa/results/phase2-published-base-manifest.txt
 curl -fLSs --retry 3 --retry-delay 2 --connect-timeout 20 --max-time 90 \
  -H 'Accept: application/vnd.github+json' \
  "https://api.github.com/repos/augustoborgessousa93/Assets-DuduQ/git/trees/$SOURCE_SHA?recursive=1" \
@@ -67,7 +68,10 @@ assert.equal(report.releaseApproved,false,'HUMAN_PEDAGOGICAL_SIGNOFF_NOT_CLAIMED
 const registryBytes=readFileSync(root+'content/english/media/media-registry.json');
 const manifestBytes=readFileSync(root+'.duduq-pages-manifest');
 assert.equal(sha(registryBytes),process.env.QA_REGISTRY_SHA,'REGISTRY_DIFFERS_FROM_GREEN_QA');
-assert.equal(sha(manifestBytes),process.env.QA_MANIFEST_SHA,'MANIFEST_DIFFERS_FROM_GREEN_QA');
+// Promise workers can append new PNG manifest lines in different orders.
+// Compare path->hash mapping and pin approved registry sha, not line ordering.
+assert.equal(sha(manifestBytes),report.manifestSHA256After,
+ 'MANIFEST_BYTES_CHANGED_AFTER_APPLICATION');
 const reg=JSON.parse(registryBytes),byId=new Map(reg.entries.map(x=>[x.mediaId,x]));
 assert.equal(byId.size,reg.entries.length,'DUPLICATE_MEDIA_ID');
 const fruit=byId.get('IMG-ASSETS-DUDUQ-ORANGE-FRUIT-PHASE2');
@@ -82,6 +86,40 @@ for(const line of manifestBytes.toString('utf8').trimEnd().split(/\r?\n/)){
  files.set(p,expected);count++;
 }
 assert.equal(count,2899+Number(process.env.EXPECTED_NEW_PNGS),'FILE_COUNT_CHANGED');
+
+const baseBytes=readFileSync('qa/results/phase2-published-base-manifest.txt');
+assert.equal(sha(baseBytes),baseline.publishedManifestSHA256,'BASE_MANIFEST_BYTES_NOT_PINNED');
+const oldMap=new Map();
+for(const row of baseBytes.toString('utf8').trimEnd().split(/\r?\n/)){
+ const i=row.lastIndexOf(' ');assert(i>0,'BASE_ROW_BAD');
+ const key=row.slice(0,i),digest=row.slice(i+1);
+ assert(!oldMap.has(key),'BASE_DUPLICATE');oldMap.set(key,digest);
+}
+assert.equal(oldMap.size,2899,'BASE_MANIFEST_COUNT_MISMATCH');
+for(const [key,h] of oldMap){
+ assert(files.has(key),'PUBLISHED_PATH_REMOVED:'+key);
+ if(key==='content/english/media/media-registry.json')
+  assert.equal(files.get(key),process.env.QA_REGISTRY_SHA,'REGISTRY_SHA_MANIFEST_CONFLICT');
+ else assert.equal(files.get(key),h,'PUBLISHED_FILE_MUTATED:'+key);
+}
+const newPaths=[...files.keys()].filter(p=>!oldMap.has(p));
+assert.equal(newPaths.length,Number(process.env.EXPECTED_NEW_PNGS),'UNEXPECTED_FILE_COUNT');
+const expectedNew=new Map();
+for(const x of report.applied){
+ const e=byId.get(x.mediaId);assert(e,'MISSING_MEDIA:'+x.mediaId);
+ if(!oldMap.has(e.urlOrPath)){
+  const prior=expectedNew.get(e.urlOrPath);
+  if(prior)assert.equal(prior,e.sha256,'DUPLICATE_ASSET_DIFFERENT_HASH');
+  expectedNew.set(e.urlOrPath,e.sha256);
+ }
+}
+assert.equal(expectedNew.size,Number(process.env.EXPECTED_NEW_PNGS),'NEW_IMAGE_SET_CHANGED');
+for(const p of newPaths){
+ assert(/^content\/english\/assets\/images\/assets-duduq\/fast-[0-9a-f-]+\.png$/.test(p),
+  'NEW_NON_PNG:'+p);
+ assert.equal(files.get(p),expectedNew.get(p),'NEW_ASSET_NOT_PINNED_BY_REGISTRY:'+p);
+}
+
 for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
  const path='content/english/year-'+year+'/module-'+String(module).padStart(2,'0')+'/questions.json';
  const data=JSON.parse(readFileSync(root+path));
@@ -94,7 +132,7 @@ for(const m of report.applied){
  assert.equal(v.humanResolutionStatus,'PEDAGOGICAL_QA_PENDING',
  'NO_FALSE_PEDAGOGICAL_APPROVAL');
 }
-console.log('RELEASE_BUILD_CONTENT_IDENTICAL_TO_GREEN_QA='+JSON.stringify({
+console.log('RELEASE_BUILD_MANIFEST_MAP_IDENTICAL_TO_GREEN_QA='+JSON.stringify({
  newMedia:report.appliedMediaIds,newPngs:report.actuallyAddedPngs,
  allStaticFiles:count,contracts:600,baselineLinksPreserved:39,
  runtimeChanged:false,productionActionYet:false
