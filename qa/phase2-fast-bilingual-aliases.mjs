@@ -133,4 +133,7 @@ export const extraAliases={
  'adult man':['adult man','homem adulto'],
  'adult woman':['adult woman','mulher adulta'],
  'tv':['tv','television','televisao','televisão'],
+ '23':['23','twenty three','twenty-three','vinte e tres','vinte e três'],
+ '24':['24','twenty four','twenty-four','vinte e quatro'],
+ '25':['25','twenty five','twenty-five','vinte e cinco'],
 };

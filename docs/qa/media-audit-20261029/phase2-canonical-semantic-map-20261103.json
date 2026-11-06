@@ -3,6 +3,9 @@
   "sourceCommit": "a51e0958d0c68941701b8373ccf30acf88aaf7d0",
   "policy": "Exact alternative concept, source file pinned; reject historical white/banana/black; do not infer compound scenes or morphologically different words.",
   "pins": {
+    "23": "Imagens Ilustrativa/twenty-three.png",
+    "24": "Imagens Ilustrativa/twenty-four.png",
+    "25": "Imagens Ilustrativa/twenty-five.png",
     "dog": "Imagens Ilustrativa/pet-dog-cachorro.png",
     "cat": "Imagens Ilustrativa/pet-cat-gato.png",
     "bird": "Imagens Ilustrativa/pet-bird-passaro.png",
