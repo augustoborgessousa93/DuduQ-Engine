@@ -116,4 +116,28 @@ node --check qa/duduq-media-clarity-audit.mjs
 DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/duduq-media-clarity-audit.mjs
 cp -a "$ROOT"/. dist-pages/
 DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/duduq-media-clarity-audit.mjs --production-media-fit
+node --check qa/phase2-purple-color-override.mjs
+DUDUQ_QA_ONLY=1 node qa/phase2-purple-color-override.mjs --release
+node --input-type=module <<'NODE'
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {existsSync,readFileSync} from 'node:fs';
+const base='dist-pages/';
+const hash=b=>createHash('sha256').update(b).digest('hex');
+const regRel='content/english/media/media-registry.json';
+const imgRel='content/english/assets/images/assets-duduq/fast-aafd4cfb4960-9ff04eb4f5f1.png';
+const actualRegistry=readFileSync(base+regRel);
+assert.equal(hash(actualRegistry),
+ 'd9c4c31c4764c5a8a42cc99be0b29259a128ae1971d32855af89067304465dab',
+ 'REGISTRY_MUST_MATCH_APPROVED_PURPLE_QA_PREVIEW');
+assert.equal(hash(readFileSync(base+imgRel)),
+ '9ff04eb4f5f169a5b0737c4b607a287f8cb0163381a88f583bda7b22994c1d03',
+ 'PURPLE_IMAGE_BYTES_MUST_MATCH_GITHUB_SOURCE');
+const manifest=readFileSync(base+'.duduq-pages-manifest','utf8');
+assert(manifest.includes(regRel+' '+hash(actualRegistry)),'MANIFEST_REGISTRY_MISMATCH');
+assert(manifest.includes(imgRel+' '+'9ff04eb4f5f169a5b0737c4b607a287f8cb0163381a88f583bda7b22994c1d03'),
+ 'MANIFEST_IMAGE_MISMATCH');
+assert(!existsSync(base+'media-review/purple.html'),'REVIEW_PAGE_MUST_NOT_BE_IN_PRODUCTION');
+console.log('DUDUQ_PURPLE_PRODUCTION_QA_ARTIFACT_VERIFIED=11_COLOR_MEDIA');
+NODE
 echo "DUDUQ_RELEASE_ARTIFACT_269_BINDINGS_97_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
