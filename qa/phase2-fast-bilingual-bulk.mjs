@@ -17,6 +17,7 @@ import path from 'node:path';
 import {aliases,extraAliases} from './phase2-fast-bilingual-aliases.mjs';
 
 assert.equal(process.env.DUDUQ_QA_ONLY,'1','QA_ONLY_REQUIRED');
+const visualReview=process.env.DUDUQ_VISUAL_REVIEW==='1';
 const apply=process.argv.includes('--apply');
 const root=path.resolve(process.env.DUDUQ_QA_DIST||'qa/fast-bilingual-immutable-candidate');
 assert(root.startsWith(path.resolve('qa')+path.sep),'DISPOSABLE_QA_ROOT_ONLY');
@@ -285,7 +286,7 @@ const auditedSceneSources=new Map([
   mustInclude:['clear greeting context'],mustNotInclude:['written phrase label']
  }],
  ['IMG-Y1M01-FAREWELL-GENERIC-001',{
-  concept:'goodbye',sourcePath:'Imagens Ilustrativa/greeting-goodbye-tchau.png',
+  concept:'goodbye',sourcePath:'Imagens Ilustrativa/two_people_waving_goodbye_see_you.png',
   questions:['Y1M01-Q001','Y1M01-Q002','Y1M01-Q003','Y1M01-Q005','Y1M01-Q006',
    'Y1M01-Q007','Y1M01-Q008','Y1M01-Q009','Y1M01-Q010','Y1M01-Q011',
    'Y1M01-Q015','Y2M01-Q001','Y2M01-Q003','Y2M01-Q006','Y2M01-Q007','Y2M01-Q012'],
@@ -343,6 +344,16 @@ for(const [id,links] of usages){
   (old.labels||[]).length===1&&norm(old.labels[0])==='crianca fazendo um lanche';
  const snackSource=snackTrial?fileByPath.get('Imagens Ilustrativa/Comendo.png'):null;
  if(snackTrial)assert(snackSource,'SNACK_ORIGINAL_MISSING');
+ // The 8 shared NIGHT ID consumers are an audited Good Night/bedtime
+ // scene. A plain dark sky does not fully convey the learning target.
+ // Only this exact shared ID may equate 'Good night' with nighttime.
+ const vettedNight=visualReview&&id==='Y1M01-EMOJI-NIGHT-001'&&
+  old?.semantic==='night'&&e.semantic==='night'&&
+  old?.usage===8&&old.classification==='PROVISIONAL'&&
+  (old.optionSemanticTargets||[]).includes('Good night')&&
+  (old.optionSemanticTargets||[]).includes('bedtime / good night')&&
+  old.mustInclude?.includes('clear bedtime context')&&
+  fileByPath.has('Imagens Ilustrativa/boy_noite_night_bedtime_rotina_de_sono.png');
  const rawConcept=old?.semantic||e.semantic;
  const sceneRule=auditedSceneSources.has(id);
  const vetted=sceneRule?vettedScene(id,links,old,e):null;
@@ -377,8 +388,13 @@ for(const [id,links] of usages){
  const perOccurrence=links.map(link=>{
   const found=[];
   const explicit=resolveExactLabel(link.semanticTarget);
-  if(explicit)found.push(explicit);
-  for(const label of link.contextLabels||[]){const resolved=resolveExactLabel(label);if(resolved)found.push(resolved);}
+  if(explicit)found.push(vettedNight&&explicit.concept==='good night'
+   ?{...explicit,concept:'night'}:explicit);
+  for(const label of link.contextLabels||[]){
+   const resolved=resolveExactLabel(label);
+   if(resolved)found.push(vettedNight&&resolved.concept==='good night'
+    ?{...resolved,concept:'night'}:resolved);
+  }
   const unique=new Map(found.map(x=>[x.concept+'::'+(x.source?.sha||''),x]));
   const concepts=new Set([...unique.values()].map(x=>x.concept));
   // A real option carrying two different exact labels is an explicit conflict,
@@ -425,14 +441,16 @@ for(const [id,links] of usages){
   const pinnedBlack=fileByPath.get('Imagens Ilustrativa/color-black-preto.png');
   assert(pinnedBlack&&published.has(pinnedBlack.sha),'BLACK_OFFICIAL_ORIGINAL_MUST_ALREADY_BE_PUBLISHED');
  }
- if((historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id))&&!isVettedBlack){
+ const pinnedTrial=visualReview&&pinByConcept.has(concept)&&
+ fileByPath.has(pinByConcept.get(concept))&&concept!=='orange'&&concept!=='orange fruit';
+ if((historical.has(concept)||/(?:^|[-_])(WHITE|BLACK|BANANA|ORANGE)(?:$|[-_])/i.test(id))&&!isVettedBlack&&!pinnedTrial){
   hold(id,'HISTORICAL_VISUAL_OR_SEMANTIC_HOLD',concept);continue;
  }
- if(old.semanticConflict===true&&!graphConsensus&&!isVettedBlack&&!vetted){hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;}
+ if(old.semanticConflict===true&&!graphConsensus&&!isVettedBlack&&!vetted&&!vettedNight){hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;}
  if(old.temporary===false||e.temporary===false){
   hold(id,'NOT_PROVISIONAL',concept);continue;
  }
- if(!vetted&&((old.mustInclude||[]).length||(old.mustNotInclude||[]).length)){
+ if(!vetted&&!vettedNight&&((old.mustInclude||[]).length||(old.mustNotInclude||[]).length)){
   hold(id,'VISUAL_SCENE_CONSTRAINT_REQUIRES_REVIEW',concept);continue;
  }
  const asset=vetted?.asset||(snackSource?{...snackSource,priority:'TARGETED_EATING_SCENE_QA_REVIEW_PENDING'}:null)||sourceSelection.get(concept)||
@@ -443,7 +461,7 @@ for(const [id,links] of usages){
  if(!asset){hold(id,'NO_UNAMBIGUOUS_SOURCE_FOR_CONCEPT',concept);continue;}
  // Trial eating-scene image was explicitly marked for human review; keep
  // the currently published placeholder until the semantic framing is signed off.
- if(asset.priority==='TARGETED_EATING_SCENE_QA_REVIEW_PENDING'){
+ if(asset.priority==='TARGETED_EATING_SCENE_QA_REVIEW_PENDING'&&!visualReview){
   hold(id,'EATING_SCENE_PEDAGOGICAL_REVIEW_PENDING',concept);continue;
  }
  const realQuestionIds=[...new Set(links.map(x=>x.questionId))].sort();
@@ -458,21 +476,21 @@ for(const [id,links] of usages){
   hold(id,'REGISTRY_SEMANTIC_CONFLICT',concept);continue;
  }
  const explicit=[...links.map(x=>x.semanticTarget),...(old.optionSemanticTargets||[])].filter(Boolean);
- const explicitConcepts=explicit.map(resolveExactLabel).filter(Boolean).map(x=>x.concept);
+ const explicitConcepts=explicit.map(resolveExactLabel).filter(Boolean).map(x=>vettedNight&&x.concept==='good night'?'night':x.concept);
  if(explicitConcepts.some(value=>value!==concept)){
   hold(id,'SHARED_EXPLICIT_ALTERNATIVE_SEMANTICS_CONFLICT',concept);continue;
  }
- if(old.semanticConflict===true&&!isVettedBlack&&!vetted&&graphConsensus?.concept!==concept){
+ if(old.semanticConflict===true&&!isVettedBlack&&!vetted&&!vettedNight&&graphConsensus?.concept!==concept){
   hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;
  }
  // The previous real Chromium run (#42267477400) reported 48 visibility failures
  // in animated Bubble Pop, plus 4 Q016 session-guard failures. Do not
  // release media used by these mechanics merely because an image loads.
  // Shared IDs are held in their ENTIRETY when any consumer is unverified.
- if(links.some(x=>x.mechanicId==='bubble-pop')){
+ if(!visualReview&&links.some(x=>x.mechanicId==='bubble-pop')){
   hold(id,'BUBBLE_POP_DYNAMIC_VISIBILITY_QA_PENDING',concept);continue;
  }
- if(links.some(x=>x.questionId==='Y1M01-Q016'&&x.mechanicId==='target-shooter')){
+ if(!visualReview&&links.some(x=>x.questionId==='Y1M01-Q016'&&x.mechanicId==='target-shooter')){
   hold(id,'Y1M01_SESSION_ITEM_MISMATCH_QA_PENDING',concept);continue;
  }
  // Strong inference for legacy missing semanticTarget: audited concept and
