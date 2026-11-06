@@ -15,10 +15,7 @@ curl -fLSs --retry 3 --retry-delay 2 --max-time 360 \
 echo "cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800  $TAR" | sha256sum -c
 tar -xzf "$TAR" -C "$ROOT"
 node qa/reconcile-duduq-live-04nov.mjs
-curl -fLSs --retry 3 --retry-delay 3 --max-time 120 \
- -H 'Accept: application/vnd.github+json' \
- "https://api.github.com/repos/augustoborgessousa93/Assets-DuduQ/git/trees/db68bc43eafd33e8b4a287604f6f94a1e9d7df02?recursive=1" \
- -o qa/results/visual-review-source-tree.json
+cp qa/fixtures/phase2-official-source-tree-db68bc43.json qa/results/visual-review-source-tree.json
 node --input-type=module <<'NODE'
 import {readFileSync,writeFileSync} from 'node:fs';
 import assert from 'node:assert/strict';
