@@ -43,7 +43,11 @@ const byId=new Map(reg.entries.map(x=>[x.mediaId,x]));
 assert.equal(byId.size,reg.entries.length,'DUPLICATE_MEDIA_ID');
 assert.equal(report.realContracts,600);
 assert.equal(report.downloadFailures.length,0,'PNG_DOWNLOAD_FAILED');
-assert(report.appliedMediaIds>=137,'REVIEW_LOST_PUBLISHED_COVERAGE');
+for(const [concept,file] of Object.entries({'23':'twenty-three.png','24':'twenty-four.png','25':'twenty-five.png'})){
+ const matches=report.applied.filter(x=>x.concept===concept&&x.sourcePath==='Imagens Ilustrativa/'+file);
+ assert(matches.length>0,'MISSING_EXACT_NUMERAL:'+concept);
+}
+assert(report.appliedMediaIds>=259,'NUMERALS_23_24_25_NOT_ADDED');
 for(const f of ['changedQuestionJsonFiles','changedGoldMasters','changedAudioFiles','changedRuntimeFiles'])
  assert.equal(report[f],0,'CURRICULUM_OR_RUNTIME_CHANGED:'+f);
 const manifest=new Map();
@@ -60,7 +64,7 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
  const q=JSON.parse(readFileSync(root+p));
  assert.equal(q.items?.length,20,'QUESTION_COUNT:'+p);
 }
-const published=await fetch('https://2be243d0.duduq-engine-13a.pages.dev/content/english/media/media-registry.json',
+const published=await fetch('https://bbf98e06.duduq-engine-13a.pages.dev/content/english/media/media-registry.json',
  {signal:AbortSignal.timeout(90000)});
 assert(published.ok,'LIVE_06NOV_REGISTRY_UNAVAILABLE');
 const previous=JSON.parse(await published.text());
@@ -73,7 +77,7 @@ for(const e of previous.entries){
  assert.equal(now.urlOrPath,e.urlOrPath,'PUBLISHED_MEDIA_PATH_REGRESSED:'+e.mediaId);
  preserved++;
 }
-assert(preserved>=137,'PUBLISHED_MEDIA_BASELINE_NOT_PRESERVED');
+assert(preserved>=256,'CURRENT_256_PUBLISHED_MEDIA_REGRESSION');
 const keyIds=['Y1M01-EMOJI-NIGHT-001','Y1M01-EMOJI-SLEEP-001',
  'IMG-Y1M01-GREETING-GENERIC-001','IMG-Y1M01-FAREWELL-GENERIC-001'];
 const firstModule=keyIds.map(mediaId=>({
