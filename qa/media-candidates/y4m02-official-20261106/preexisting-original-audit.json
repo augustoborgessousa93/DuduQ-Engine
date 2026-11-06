@@ -1,0 +1,586 @@
+{
+  "schemaVersion": "DUDUQ_Y4M02_PREEXISTING_ORIGINAL_AUDIT_V1",
+  "createdAt": "2026-11-06T15:07:26.406Z",
+  "moduleId": "Y4M02",
+  "searchedBeforeGeneration": true,
+  "verifiedReusableAssetCount": 16,
+  "assets": [
+    {
+      "concept": "a",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m01-official-20261031",
+        "sourceFile": "qa/media-candidates/y2m01-official-20261031/images/DUDUQ-Y2M01-LETTER-A.png",
+        "sourceSha256": "45a0be67a1decff6ca5568884f271d1fd5b90faa9dcb5ca876e455d10eb9d38e",
+        "sourceOriginal": "qa/media-candidates/y2m01-official-20261031/provenance/originals/DUDUQ-Y2M01-LETTER-A-ORIGINAL.png",
+        "sourceOriginalSha256": "45a0be67a1decff6ca5568884f271d1fd5b90faa9dcb5ca876e455d10eb9d38e",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y2m01-official-20261031/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "95c016ce9dbe574c1b5e0c45c1f130e5dc8c20f41d4ea952036f6dc667cd5a67",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19358-2070-7d40-adf4-ca83e871348d/exec-9fc64420-aabd-4804-80c9-e2f11c6659d9.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/10/31/rollout-2026-10-31T16-03-08-01a19358-2070-7d40-adf4-ca83e871348d.jsonl",
+          "generatorCallId": "exec-9fc64420-aabd-4804-80c9-e2f11c6659d9",
+          "stableGenerationRecordSha256": "9d48a546f95b525bccadd568b3ca498eb84f1fefd01c1557ffaac26242f552ed",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-LETTER-A-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "45a0be67a1decff6ca5568884f271d1fd5b90faa9dcb5ca876e455d10eb9d38e",
+      "candidateFile": "images/DUDUQ-Y4M02-LETTER-A.png",
+      "candidateSha256": "45a0be67a1decff6ca5568884f271d1fd5b90faa9dcb5ca876e455d10eb9d38e",
+      "technical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 773277,
+        "opaquePixels": 776398,
+        "valid": true
+      },
+      "alphaComponentCount": 1,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "b",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m01-official-20261031",
+        "sourceFile": "qa/media-candidates/y2m01-official-20261031/images/DUDUQ-Y2M01-LETTER-B.png",
+        "sourceSha256": "c106081f6e8b230577b66ed0b9e4583e708e86aeb182e7bbf010fb761f132e2b",
+        "sourceOriginal": "qa/media-candidates/y2m01-official-20261031/provenance/originals/DUDUQ-Y2M01-LETTER-B-ORIGINAL.png",
+        "sourceOriginalSha256": "c106081f6e8b230577b66ed0b9e4583e708e86aeb182e7bbf010fb761f132e2b",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y2m01-official-20261031/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "95c016ce9dbe574c1b5e0c45c1f130e5dc8c20f41d4ea952036f6dc667cd5a67",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19358-2070-7d40-adf4-ca83e871348d/exec-606f67b5-b378-4a5d-b7ff-35ec06bc5bba.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/10/31/rollout-2026-10-31T16-03-08-01a19358-2070-7d40-adf4-ca83e871348d.jsonl",
+          "generatorCallId": "exec-606f67b5-b378-4a5d-b7ff-35ec06bc5bba",
+          "stableGenerationRecordSha256": "05fd1daa461007b5fa1bcefec0316b6c037d47ec8ffa0fee6e2ab1f1347c324d",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-LETTER-B-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "c106081f6e8b230577b66ed0b9e4583e708e86aeb182e7bbf010fb761f132e2b",
+      "candidateFile": "images/DUDUQ-Y4M02-LETTER-B.png",
+      "candidateSha256": "c106081f6e8b230577b66ed0b9e4583e708e86aeb182e7bbf010fb761f132e2b",
+      "technical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 584069,
+        "opaquePixels": 960330,
+        "valid": true
+      },
+      "alphaComponentCount": 1,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "blue square",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m02-official-20261101",
+        "sourceFile": "qa/media-candidates/y2m02-official-20261101/images/DUDUQ-Y2M02-BLUE-SQUARE.png",
+        "sourceSha256": "e0557e82d4b8e6992645877b0b36bd7475d6d73ea507c0e9bc02646a1c4140c0",
+        "sourceOriginal": "qa/media-candidates/y2m02-official-20261101/provenance/originals/DUDUQ-Y2M02-BLUE-SQUARE-ORIGINAL.png",
+        "sourceOriginalSha256": "d8e7db8ddada171c5309d6d60ffc7cf9c42871800311a14e434498059fd6d313",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19787-767d-79c1-be42-7692772bdcc2/exec-e443f7f2-d3dc-47c0-8412-da42be9ae24c.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/01/rollout-2026-11-01T11-33-19-01a19787-767d-79c1-be42-7692772bdcc2.jsonl",
+          "generatorCallId": "exec-e443f7f2-d3dc-47c0-8412-da42be9ae24c",
+          "stableGenerationRecordSha256": "8dcea22ec59c8766bd3a496f40d4f7ec088a3a81bf7863ac16b34b870589ccf4",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-BLUE-SQUARE-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "d8e7db8ddada171c5309d6d60ffc7cf9c42871800311a14e434498059fd6d313",
+      "candidateFile": "images/DUDUQ-Y4M02-BLUE-SQUARE.png",
+      "candidateSha256": "e0557e82d4b8e6992645877b0b36bd7475d6d73ea507c0e9bc02646a1c4140c0",
+      "technical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 604471,
+        "opaquePixels": 959792,
+        "valid": true
+      },
+      "alphaComponentCount": 1,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "c",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m01-official-20261031",
+        "sourceFile": "qa/media-candidates/y2m01-official-20261031/images/DUDUQ-Y2M01-LETTER-C.png",
+        "sourceSha256": "8b71947d742140dbb5da17de8cfcba88763cebad499069b700dfcb5f40b6546b",
+        "sourceOriginal": "qa/media-candidates/y2m01-official-20261031/provenance/originals/DUDUQ-Y2M01-LETTER-C-ORIGINAL.png",
+        "sourceOriginalSha256": "8b71947d742140dbb5da17de8cfcba88763cebad499069b700dfcb5f40b6546b",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y2m01-official-20261031/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "95c016ce9dbe574c1b5e0c45c1f130e5dc8c20f41d4ea952036f6dc667cd5a67",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19358-2070-7d40-adf4-ca83e871348d/exec-ac6b1a11-ece6-4d61-83ee-3b093403a1c0.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/10/31/rollout-2026-10-31T16-03-08-01a19358-2070-7d40-adf4-ca83e871348d.jsonl",
+          "generatorCallId": "exec-ac6b1a11-ece6-4d61-83ee-3b093403a1c0",
+          "stableGenerationRecordSha256": "8538d98a7793867a1f8cd247153a96e0b651a2f2a3938ca66c4aa61327c4371c",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-LETTER-C-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "8b71947d742140dbb5da17de8cfcba88763cebad499069b700dfcb5f40b6546b",
+      "candidateFile": "images/DUDUQ-Y4M02-LETTER-C.png",
+      "candidateSha256": "8b71947d742140dbb5da17de8cfcba88763cebad499069b700dfcb5f40b6546b",
+      "technical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 774447,
+        "opaquePixels": 774781,
+        "valid": true
+      },
+      "alphaComponentCount": 1,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "d",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m01-official-20261031",
+        "sourceFile": "qa/media-candidates/y2m01-official-20261031/images/DUDUQ-Y2M01-LETTER-D.png",
+        "sourceSha256": "699a56752b3917251bfec5453216ec14dbc4a562476c56d4eabf4be59c5cff75",
+        "sourceOriginal": "qa/media-candidates/y2m01-official-20261031/provenance/originals/DUDUQ-Y2M01-LETTER-D-ORIGINAL.png",
+        "sourceOriginalSha256": "699a56752b3917251bfec5453216ec14dbc4a562476c56d4eabf4be59c5cff75",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y2m01-official-20261031/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "95c016ce9dbe574c1b5e0c45c1f130e5dc8c20f41d4ea952036f6dc667cd5a67",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19358-2070-7d40-adf4-ca83e871348d/exec-5650de39-167d-4914-943c-b27fc28a68c2.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/10/31/rollout-2026-10-31T16-03-08-01a19358-2070-7d40-adf4-ca83e871348d.jsonl",
+          "generatorCallId": "exec-5650de39-167d-4914-943c-b27fc28a68c2",
+          "stableGenerationRecordSha256": "5a101c32fd73540d5740a51c5f2e79a990a0f777f4cbf68b7b2d1664cc93fd14",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-LETTER-D-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "699a56752b3917251bfec5453216ec14dbc4a562476c56d4eabf4be59c5cff75",
+      "candidateFile": "images/DUDUQ-Y4M02-LETTER-D.png",
+      "candidateSha256": "699a56752b3917251bfec5453216ec14dbc4a562476c56d4eabf4be59c5cff75",
+      "technical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 623580,
+        "opaquePixels": 916049,
+        "valid": true
+      },
+      "alphaComponentCount": 1,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "green circle",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m02-official-20261101",
+        "sourceFile": "qa/media-candidates/y2m02-official-20261101/images/DUDUQ-Y2M02-GREEN-CIRCLE.png",
+        "sourceSha256": "e4325fad369dea23796a2775e1688046f3ef54fc19b0de050571dbea814b3217",
+        "sourceOriginal": "qa/media-candidates/y2m02-official-20261101/provenance/originals/DUDUQ-Y2M02-GREEN-CIRCLE-ORIGINAL.png",
+        "sourceOriginalSha256": "37da36167baddeb9013585ece95a20f7dfa91ccc738d67309cdbc349e129a32f",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19787-767d-79c1-be42-7692772bdcc2/exec-17c8fc60-4173-4e6b-b9fe-e034950282f0.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/01/rollout-2026-11-01T11-33-19-01a19787-767d-79c1-be42-7692772bdcc2.jsonl",
+          "generatorCallId": "exec-17c8fc60-4173-4e6b-b9fe-e034950282f0",
+          "stableGenerationRecordSha256": "f0cef42f45f49989ab73e677345dabb65f82d2a4d0eb4ae04fecfe6b910d1772",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-GREEN-CIRCLE-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "37da36167baddeb9013585ece95a20f7dfa91ccc738d67309cdbc349e129a32f",
+      "candidateFile": "images/DUDUQ-Y4M02-GREEN-CIRCLE.png",
+      "candidateSha256": "e4325fad369dea23796a2775e1688046f3ef54fc19b0de050571dbea814b3217",
+      "technical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 677300,
+        "opaquePixels": 883348,
+        "valid": true
+      },
+      "alphaComponentCount": 1,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "i do not like carrots",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m04-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m04-official-20261105/images/DUDUQ-Y3M04-I-DO-NOT-LIKE-CARROTS.png",
+        "sourceSha256": "78e59be1986c13e2b05ed24395c0b1d64b0d3b8534480ecc8fa59f30d4fe369b",
+        "sourceOriginal": "qa/media-candidates/y3m04-official-20261105/provenance/originals/DUDUQ-Y3M04-I-DO-NOT-LIKE-CARROTS-ORIGINAL.png",
+        "sourceOriginalSha256": "78388c078332f783871cc81e74d11a85dbe4fe23a42fa174ff6cd70b73cf0c02",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m04-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "e7c4e564ccb19207a72ae84e8a6ce188a3b8d3398f5bdecb14d2814736da039d",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-6e314faa-aa13-497b-9576-90c7c89a23b9.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-I-DO-NOT-LIKE-CARROTS-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "78388c078332f783871cc81e74d11a85dbe4fe23a42fa174ff6cd70b73cf0c02",
+      "candidateFile": "images/DUDUQ-Y4M02-I-DO-NOT-LIKE-CARROTS.png",
+      "candidateSha256": "78e59be1986c13e2b05ed24395c0b1d64b0d3b8534480ecc8fa59f30d4fe369b",
+      "technical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 732746,
+        "opaquePixels": 796920,
+        "valid": true
+      },
+      "alphaComponentCount": 19,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "i like apples",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m04-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m04-official-20261105/images/DUDUQ-Y3M04-I-LIKE-APPLES.png",
+        "sourceSha256": "b378dc8a885e07048273a3393518f5a33fd2e4e9051ae359527e9ca34347a8b6",
+        "sourceOriginal": "qa/media-candidates/y3m04-official-20261105/provenance/originals/DUDUQ-Y3M04-I-LIKE-APPLES-ORIGINAL.png",
+        "sourceOriginalSha256": "237a9a78c14882f779275363fba34fce64936b67b25c49cb82cf203ecda5d6c0",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m04-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "e7c4e564ccb19207a72ae84e8a6ce188a3b8d3398f5bdecb14d2814736da039d",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-056a088c-54c2-4882-bf1c-7c9fc8ee7f80.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-I-LIKE-APPLES-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "237a9a78c14882f779275363fba34fce64936b67b25c49cb82cf203ecda5d6c0",
+      "candidateFile": "images/DUDUQ-Y4M02-I-LIKE-APPLES.png",
+      "candidateSha256": "b378dc8a885e07048273a3393518f5a33fd2e4e9051ae359527e9ca34347a8b6",
+      "technical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 796102,
+        "opaquePixels": 758709,
+        "valid": true
+      },
+      "alphaComponentCount": 1,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "i like papaya",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m04-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m04-official-20261105/images/DUDUQ-Y3M04-I-LIKE-PAPAYA.png",
+        "sourceSha256": "e26d040391bd80af05431960976ae994d8828bb7b33d74663f81a248f50cb4cc",
+        "sourceOriginal": "qa/media-candidates/y3m04-official-20261105/provenance/originals/DUDUQ-Y3M04-I-LIKE-PAPAYA-ORIGINAL.png",
+        "sourceOriginalSha256": "003aab0a731307d93a8207cb0ce4b74e94aa1bd6bf996c3be5cab606b301d9d8",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m04-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "e7c4e564ccb19207a72ae84e8a6ce188a3b8d3398f5bdecb14d2814736da039d",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-b2b506be-b370-4763-9d7b-12f286372a45.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-I-LIKE-PAPAYA-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "003aab0a731307d93a8207cb0ce4b74e94aa1bd6bf996c3be5cab606b301d9d8",
+      "candidateFile": "images/DUDUQ-Y4M02-I-LIKE-PAPAYA.png",
+      "candidateSha256": "e26d040391bd80af05431960976ae994d8828bb7b33d74663f81a248f50cb4cc",
+      "technical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 681677,
+        "opaquePixels": 867700,
+        "valid": true
+      },
+      "alphaComponentCount": 2,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "i prefer grapes",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m04-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m04-official-20261105/images/DUDUQ-Y3M04-I-PREFER-GRAPES.png",
+        "sourceSha256": "0f16d25eccf0648830dd8b5de9bd02f3d7fb78abdff205bd8e3fc9a1cd285ca5",
+        "sourceOriginal": "qa/media-candidates/y3m04-official-20261105/provenance/originals/DUDUQ-Y3M04-I-PREFER-GRAPES-ORIGINAL.png",
+        "sourceOriginalSha256": "8b576b1791215e65b3367907118b0a2bf4cd89393df1816c8ef9a617980c13b5",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m04-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "e7c4e564ccb19207a72ae84e8a6ce188a3b8d3398f5bdecb14d2814736da039d",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-ceae5abe-b9d2-4909-9894-31eaefeaf288.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-I-PREFER-GRAPES-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "8b576b1791215e65b3367907118b0a2bf4cd89393df1816c8ef9a617980c13b5",
+      "candidateFile": "images/DUDUQ-Y4M02-I-PREFER-GRAPES.png",
+      "candidateSha256": "0f16d25eccf0648830dd8b5de9bd02f3d7fb78abdff205bd8e3fc9a1cd285ca5",
+      "technical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 852710,
+        "opaquePixels": 695678,
+        "valid": true
+      },
+      "alphaComponentCount": 3,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "nine minus five equals four",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m05-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m05-official-20261105/images/DUDUQ-Y3M05-NINE-MINUS-FIVE-EQUALS-FOUR.png",
+        "sourceSha256": "8e90c7afe1fbc9c1bd55470adc657b76f69833ff579a4abe67a4c24d3964c0a1",
+        "sourceOriginal": "qa/media-candidates/y3m05-official-20261105/provenance/originals/DUDUQ-Y3M05-NINE-MINUS-FIVE-EQUALS-FOUR-ORIGINAL.png",
+        "sourceOriginalSha256": "3c7ec33d8018ea18b51d290f0a83fad1c4137359374342d1a956e259c4670c82",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m05-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "852618cb057e8f4278e574b5044787e231ac0c77db7005d3264513229f70246c",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-4c29824c-4864-4add-82cc-6e46a567b567.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-NINE-MINUS-FIVE-EQUALS-FOUR-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "3c7ec33d8018ea18b51d290f0a83fad1c4137359374342d1a956e259c4670c82",
+      "candidateFile": "images/DUDUQ-Y4M02-NINE-MINUS-FIVE-EQUALS-FOUR.png",
+      "candidateSha256": "8e90c7afe1fbc9c1bd55470adc657b76f69833ff579a4abe67a4c24d3964c0a1",
+      "technical": {
+        "width": 2172,
+        "height": 1024,
+        "transparentPixels": 1537770,
+        "opaquePixels": 649514,
+        "valid": true
+      },
+      "alphaComponentCount": 6,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "red triangle",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m02-official-20261101",
+        "sourceFile": "qa/media-candidates/y2m02-official-20261101/images/DUDUQ-Y2M02-RED-TRIANGLE.png",
+        "sourceSha256": "5ed4fb31bb2f1c1797b062c99f835c1e4a77f6f9ab6058ff703eb949bec04fb4",
+        "sourceOriginal": "qa/media-candidates/y2m02-official-20261101/provenance/originals/DUDUQ-Y2M02-RED-TRIANGLE-ORIGINAL.png",
+        "sourceOriginalSha256": "a2d3c84a95eee00b97a5685f90a5ccec106f3cef595c0c61559f08080fe98e45",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19787-767d-79c1-be42-7692772bdcc2/exec-ad270d91-ea70-4469-a3ad-7d834822f6a1.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/01/rollout-2026-11-01T11-33-19-01a19787-767d-79c1-be42-7692772bdcc2.jsonl",
+          "generatorCallId": "exec-ad270d91-ea70-4469-a3ad-7d834822f6a1",
+          "stableGenerationRecordSha256": "ab8f95177898d5f10581ed527dc759cf2bd9a6e078ac8aeaba20d358e8ebd752",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-RED-TRIANGLE-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "a2d3c84a95eee00b97a5685f90a5ccec106f3cef595c0c61559f08080fe98e45",
+      "candidateFile": "images/DUDUQ-Y4M02-RED-TRIANGLE.png",
+      "candidateSha256": "5ed4fb31bb2f1c1797b062c99f835c1e4a77f6f9ab6058ff703eb949bec04fb4",
+      "technical": {
+        "width": 1333,
+        "height": 1180,
+        "transparentPixels": 879002,
+        "opaquePixels": 684193,
+        "valid": true
+      },
+      "alphaComponentCount": 1,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "six minus two equals four",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m05-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m05-official-20261105/images/DUDUQ-Y3M05-SIX-MINUS-TWO-EQUALS-FOUR.png",
+        "sourceSha256": "96aa1db791e1f383952547a0e7fde89c18256bbbc275474601a7f0afcea8c849",
+        "sourceOriginal": "qa/media-candidates/y3m05-official-20261105/provenance/originals/DUDUQ-Y3M05-SIX-MINUS-TWO-EQUALS-FOUR-ORIGINAL.png",
+        "sourceOriginalSha256": "c04df3bdf031a0b39287919527d3cb77fae744a2a16a0b9061e396a790652327",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m05-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "852618cb057e8f4278e574b5044787e231ac0c77db7005d3264513229f70246c",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-243d535b-68ef-422a-b702-0fe3aa529d56.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-SIX-MINUS-TWO-EQUALS-FOUR-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "c04df3bdf031a0b39287919527d3cb77fae744a2a16a0b9061e396a790652327",
+      "candidateFile": "images/DUDUQ-Y4M02-SIX-MINUS-TWO-EQUALS-FOUR.png",
+      "candidateSha256": "96aa1db791e1f383952547a0e7fde89c18256bbbc275474601a7f0afcea8c849",
+      "technical": {
+        "width": 2172,
+        "height": 1024,
+        "transparentPixels": 1527557,
+        "opaquePixels": 667393,
+        "valid": true
+      },
+      "alphaComponentCount": 6,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "three plus four equals seven",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m05-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m05-official-20261105/images/DUDUQ-Y3M05-THREE-PLUS-FOUR-EQUALS-SEVEN.png",
+        "sourceSha256": "def1d12aec14a94dc931c80f1128d56c44a18aa16e0b0912ac05e9f56025abec",
+        "sourceOriginal": "qa/media-candidates/y3m05-official-20261105/provenance/originals/DUDUQ-Y3M05-THREE-PLUS-FOUR-EQUALS-SEVEN-ORIGINAL.png",
+        "sourceOriginalSha256": "f26c70418e149e0478eea2f34bc6b3c7bbfe660755f5e5fec742a23a9d8aa04c",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m05-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "852618cb057e8f4278e574b5044787e231ac0c77db7005d3264513229f70246c",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-6c378283-1ef9-4d5e-b0e0-98fbd94b1225.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-THREE-PLUS-FOUR-EQUALS-SEVEN-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "f26c70418e149e0478eea2f34bc6b3c7bbfe660755f5e5fec742a23a9d8aa04c",
+      "candidateFile": "images/DUDUQ-Y4M02-THREE-PLUS-FOUR-EQUALS-SEVEN.png",
+      "candidateSha256": "def1d12aec14a94dc931c80f1128d56c44a18aa16e0b0912ac05e9f56025abec",
+      "technical": {
+        "width": 2172,
+        "height": 1024,
+        "transparentPixels": 1523364,
+        "opaquePixels": 669938,
+        "valid": true
+      },
+      "alphaComponentCount": 6,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "two plus three equals five",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m05-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m05-official-20261105/images/DUDUQ-Y3M05-TWO-PLUS-THREE-EQUALS-FIVE.png",
+        "sourceSha256": "ce5c6aa028b3a430aaf613acc46f0f22549466af91d66ae734dbd1094ea3f831",
+        "sourceOriginal": "qa/media-candidates/y3m05-official-20261105/provenance/originals/DUDUQ-Y3M05-TWO-PLUS-THREE-EQUALS-FIVE-ORIGINAL.png",
+        "sourceOriginalSha256": "539664c1209be97e3a76208befcc496c8da64fac8fa185562e0caaa644a76f2f",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m05-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "852618cb057e8f4278e574b5044787e231ac0c77db7005d3264513229f70246c",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-cb74c0e5-d9e9-4aed-b02b-00d698c9de4c.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-TWO-PLUS-THREE-EQUALS-FIVE-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "539664c1209be97e3a76208befcc496c8da64fac8fa185562e0caaa644a76f2f",
+      "candidateFile": "images/DUDUQ-Y4M02-TWO-PLUS-THREE-EQUALS-FIVE.png",
+      "candidateSha256": "ce5c6aa028b3a430aaf613acc46f0f22549466af91d66ae734dbd1094ea3f831",
+      "technical": {
+        "width": 2172,
+        "height": 1024,
+        "transparentPixels": 1405633,
+        "opaquePixels": 780864,
+        "valid": true
+      },
+      "alphaComponentCount": 6,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    },
+    {
+      "concept": "yellow rectangle",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m02-official-20261101",
+        "sourceFile": "qa/media-candidates/y2m02-official-20261101/images/DUDUQ-Y2M02-YELLOW-RECTANGLE.png",
+        "sourceSha256": "65cd909c32a1e676b71d39d46d39ebf34f65c939519612cc69c130b55190c648",
+        "sourceOriginal": "qa/media-candidates/y2m02-official-20261101/provenance/originals/DUDUQ-Y2M02-YELLOW-RECTANGLE-ORIGINAL.png",
+        "sourceOriginalSha256": "dd679cf6fea37601f6c929c3cc8ec0c3acda214a9856c48d13234d9821e0780d",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19787-767d-79c1-be42-7692772bdcc2/exec-924bf7ea-6d75-48ff-b0ff-5588af9a8365.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/01/rollout-2026-11-01T11-33-19-01a19787-767d-79c1-be42-7692772bdcc2.jsonl",
+          "generatorCallId": "exec-924bf7ea-6d75-48ff-b0ff-5588af9a8365",
+          "stableGenerationRecordSha256": "99923581cfd9bed4e9eb515357635c91a9e74203b4a15c4dbbe6a70922a52c64",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-YELLOW-RECTANGLE-SOURCE-ORIGINAL.png",
+      "preservedSourceSha256": "dd679cf6fea37601f6c929c3cc8ec0c3acda214a9856c48d13234d9821e0780d",
+      "candidateFile": "images/DUDUQ-Y4M02-YELLOW-RECTANGLE.png",
+      "candidateSha256": "65cd909c32a1e676b71d39d46d39ebf34f65c939519612cc69c130b55190c648",
+      "technical": {
+        "width": 1573,
+        "height": 1024,
+        "transparentPixels": 736713,
+        "opaquePixels": 863605,
+        "valid": true
+      },
+      "alphaComponentCount": 1,
+      "microOpaqueIslandCount": 0,
+      "reusable": true
+    }
+  ],
+  "decision": "REUSE_16_EXACT_VERIFIED_PREEXISTING_ORIGINALS_AND_STAGE_6_MISSING_NATIVE_GENERATED_ORIGINALS_WITHOUT_DUPLICATE_GENERATION"
+}

@@ -1,0 +1,532 @@
+{
+  "schemaVersion": "DUDUQ_Y4M02_NATIVE_GENERATION_RECEIPTS_V1",
+  "createdAt": "2026-11-06T15:07:26.406Z",
+  "moduleId": "Y4M02",
+  "provider": "OpenAI Codex native image generation",
+  "tool": "image_gen.imagegen",
+  "nativeGeneratedAssets": [
+    {
+      "concept": "art",
+      "generatorCallId": "exec-b466d0c6-96bd-45e7-959b-7a681f875644",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b155-3c73-7423-894d-cc590dc5bac5/exec-b466d0c6-96bd-45e7-959b-7a681f875644.png",
+      "sha256": "1e472cc18685ff86d63b94e0fa0ed771d944ea0ec21885c6b96c088d8c12f403",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y4M02-ART-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-ART.png",
+      "candidateSha256": "1e472cc18685ff86d63b94e0fa0ed771d944ea0ec21885c6b96c088d8c12f403",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational school-subject concept PNG for children ages 8–10\nPrimary request: one unmistakable visual teaching the school subject “Art” in the active Y4M02 contract, replacing a temporary emoji while remaining distinct from English, Geography, Mathematics, Science, History, and food/shape assets\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one compact connected art-class emblem: a warm honey-colored wooden painter’s palette with five large glossy paint daubs in red, yellow, blue, green, and purple, plus exactly two clean round paintbrushes crossing through and touching the palette; the palette and brushes form one connected silhouette\nStyle/medium: premium polished rounded 3D children’s animation render, tactile high-quality materials, crisp readable silhouette\nComposition/framing: centered front three-quarter view; the complete connected emblem fills about 80% of a square canvas with an 8–10% transparent safe margin on every side; palette, thumb hole, all five paint colors, brush handles, ferrules, and bristles fully visible\nLighting/mood: soft bright studio lighting, creative, cheerful, clear, educational\nConstraints: one connected art emblem; exactly one palette, exactly five paint daubs, exactly two brushes; actual alpha transparency; recognizable at small game-card size; no baked-in answer word\nAvoid: words, letters, numerals, framed painting, canvas, easel, people, loose crayons, detached paint splashes, globe, map, book, speech bubbles, abacus, equations, microscope, flasks, column, hourglass, extra brushes, extra palettes, floor, cast shadow, glow, halo, frame around canvas, collage, grid, watermark, logo, cropped edges",
+      "sessionEvidence": {
+        "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T11-48-36-01a1b155-3c73-7423-894d-cc590dc5bac5.jsonl",
+        "generatorCallId": "exec-b466d0c6-96bd-45e7-959b-7a681f875644",
+        "stableGenerationRecordSha256": "4f3567b72147a71e5fcbc20cda2b0e143d6be931b5a195b62b048b904ff601ed",
+        "generationStatus": "completed",
+        "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+      }
+    },
+    {
+      "concept": "english",
+      "generatorCallId": "exec-39fabced-35ab-4d58-b8dc-0d90836268f0",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b155-3c73-7423-894d-cc590dc5bac5/exec-39fabced-35ab-4d58-b8dc-0d90836268f0.png",
+      "sha256": "850e9b0fd0061baeca2dcc722d4ff6babacf2ff18de73b369ae2b770f52261bd",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y4M02-ENGLISH-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-ENGLISH.png",
+      "candidateSha256": "850e9b0fd0061baeca2dcc722d4ff6babacf2ff18de73b369ae2b770f52261bd",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational school-subject concept PNG for children ages 8–10\nPrimary request: one unmistakable visual teaching the school subject “English” in the active Y4M02 contract, distinct from Geography, Mathematics, Science, History, Art, and the separate A–D letter choices\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one compact connected classroom-language emblem: a polished open royal-blue book with two rounded speech bubbles physically emerging from and touching the pages, one coral and one teal; each speech bubble contains only three short raised blank conversation lines, never alphabet glyphs\nStyle/medium: premium polished rounded 3D children’s animation render, tactile high-quality materials, crisp readable silhouette\nComposition/framing: centered front three-quarter view; the complete connected emblem fills about 80% of a square canvas with an 8–10% transparent safe margin on every side; all page and bubble edges fully visible\nLighting/mood: soft bright studio lighting, cheerful, clear, educational\nConstraints: one connected subject emblem; actual alpha transparency; visually communicates language/reading and conversation; no baked-in answer word\nAvoid: the word English, any words, letters, alphabet blocks, numerals, flags, country symbols, globe, map, compass, calculator, equations, microscope, flask, historical monument, palette, paintbrush, people, extra books, detached decorations, floor, cast shadow, glow, halo, frame, collage, grid, watermark, logo, cropped edges",
+      "sessionEvidence": {
+        "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T11-48-36-01a1b155-3c73-7423-894d-cc590dc5bac5.jsonl",
+        "generatorCallId": "exec-39fabced-35ab-4d58-b8dc-0d90836268f0",
+        "stableGenerationRecordSha256": "a2c9e83d124161bff26a78f21c9aeb77fbebaeeba3e7ab9ae81d59a9603877ca",
+        "generationStatus": "completed",
+        "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+      }
+    },
+    {
+      "concept": "geography",
+      "generatorCallId": "exec-9062daaf-694c-49a1-8950-bf8c39277bc4",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b155-3c73-7423-894d-cc590dc5bac5/exec-9062daaf-694c-49a1-8950-bf8c39277bc4.png",
+      "sha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y4M02-GEOGRAPHY-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "candidateSha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational school-subject concept PNG for children ages 8–10\nPrimary request: one unmistakable visual teaching the school subject “Geography” in the active Y4M02 contract, distinct from English, Mathematics, Science, History, Art, and preference/shape assets\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one compact connected geography study emblem: a bright blue-and-green terrestrial globe on a rounded navy stand, with a small folded map and a golden compass visibly overlapping and touching the stand at the front; the globe shows only simplified continent silhouettes, no labels or borders\nStyle/medium: premium polished rounded 3D children’s animation render, tactile high-quality materials, crisp readable silhouette\nComposition/framing: centered front three-quarter view; the complete connected emblem fills about 80% of a square canvas with an 8–10% transparent safe margin on every side; globe, map, compass, and stand fully visible\nLighting/mood: soft bright studio lighting, cheerful, clear, educational\nConstraints: one connected geography emblem; actual alpha transparency; recognizable at small game-card size; no baked-in answer word\nAvoid: words, letters, numerals, place names, flags, political borders, route marks, open language book, speech bubbles, calculator, equations, microscope, flasks, historical monument, scroll, palette, paintbrush, people, extra globes, detached decorations, floor, cast shadow, glow, halo, frame, collage, grid, watermark, logo, cropped edges",
+      "sessionEvidence": {
+        "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T11-48-36-01a1b155-3c73-7423-894d-cc590dc5bac5.jsonl",
+        "generatorCallId": "exec-9062daaf-694c-49a1-8950-bf8c39277bc4",
+        "stableGenerationRecordSha256": "af773e23b8da1ad4dc4ba9f354cc8f3235f08a219ae79c0655be6b6c4a8bbe2e",
+        "generationStatus": "completed",
+        "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+      }
+    },
+    {
+      "concept": "history",
+      "generatorCallId": "exec-a1a6e6cd-8b8e-4767-93de-1163b283934e",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b155-3c73-7423-894d-cc590dc5bac5/exec-a1a6e6cd-8b8e-4767-93de-1163b283934e.png",
+      "sha256": "65d289b1680f0381118c429e49f3c87cbe66af45c9424a04c279b99c6f70f675",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y4M02-HISTORY-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-HISTORY.png",
+      "candidateSha256": "65d289b1680f0381118c429e49f3c87cbe66af45c9424a04c279b99c6f70f675",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational school-subject concept PNG for children ages 8–10\nPrimary request: one unmistakable visual teaching the school subject “History” in the active Y4M02 contract, distinct from English, Geography, Mathematics, Science, Art, and unrelated food/shape assets\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one compact connected history-study emblem: a thick open burgundy-and-gold antique book as the base, with one small golden hourglass standing securely on one page and one ivory classical column relief rising from and touching the other page; all pieces overlap into a single classroom emblem\nStyle/medium: premium polished rounded 3D children’s animation render, tactile high-quality materials, friendly rather than museum-realistic, crisp readable silhouette\nComposition/framing: centered front three-quarter view; the complete connected emblem fills about 80% of a square canvas with an 8–10% transparent safe margin on every side; book, hourglass, sand chambers, and column fully visible\nLighting/mood: soft bright studio lighting, curious, warm, clear, educational\nConstraints: one connected history emblem; actual alpha transparency; recognizable at small game-card size; no baked-in answer word and no specific culture presented as the whole of history\nAvoid: words, letters, dates, numerals, flags, weapons, war scenes, crowns, people, globe, map, compass, speech bubbles, modern language book, abacus, equations, microscope, flasks, paint palette, paintbrush, extra monuments, detached decorations, floor, cast shadow, glow, halo, frame around canvas, collage, grid, watermark, logo, cropped edges",
+      "sessionEvidence": {
+        "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T11-48-36-01a1b155-3c73-7423-894d-cc590dc5bac5.jsonl",
+        "generatorCallId": "exec-a1a6e6cd-8b8e-4767-93de-1163b283934e",
+        "stableGenerationRecordSha256": "c0e40002b45eba7f4a05b5d06d6e4feae23fd25cf99b130e881ea2236201b298",
+        "generationStatus": "completed",
+        "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+      }
+    },
+    {
+      "concept": "mathematics",
+      "generatorCallId": "exec-7005a78b-2e8c-4d48-b6d9-6f1b8013f9e5",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b155-3c73-7423-894d-cc590dc5bac5/exec-7005a78b-2e8c-4d48-b6d9-6f1b8013f9e5.png",
+      "sha256": "2c8ed7171f0f10ce7b77aa492c2364e4dbd0ef3de5d0fe4ed78e2a225de0d841",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y4M02-MATHEMATICS-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-MATHEMATICS.png",
+      "candidateSha256": "2c8ed7171f0f10ce7b77aa492c2364e4dbd0ef3de5d0fe4ed78e2a225de0d841",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational school-subject concept PNG for children ages 8–10\nPrimary request: one unmistakable visual teaching the school subject “Mathematics” in the active Y4M02 contract, distinct from English, Geography, Science, History, Art, and the four separate equation-answer assets\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one compact connected mathematics study emblem: a rounded cobalt-blue classroom abacus on a sturdy integrated base, with five horizontal rails and clearly separated colorful counting beads; a small warm-yellow plus sign and green equals sign are embossed into the same base as mathematical cues\nStyle/medium: premium polished rounded 3D children’s animation render, tactile toy-like high-quality materials, crisp readable silhouette\nComposition/framing: centered front three-quarter view; the complete connected abacus emblem fills about 80% of a square canvas with an 8–10% transparent safe margin on every side; frame, all rails, beads, and base fully visible\nLighting/mood: soft bright studio lighting, cheerful, clear, educational\nConstraints: one connected mathematics emblem; actual alpha transparency; no complete arithmetic statement and no baked-in answer word; recognizable at small game-card size\nAvoid: numerals, written equations, words, letters, calculator screen, globe, map, speech bubbles, open language book, microscope, flasks, historical monument, scroll, palette, paintbrush, people, extra detached symbols, floor, cast shadow, glow, halo, frame around canvas, collage, grid, watermark, logo, cropped edges",
+      "sessionEvidence": {
+        "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T11-48-36-01a1b155-3c73-7423-894d-cc590dc5bac5.jsonl",
+        "generatorCallId": "exec-7005a78b-2e8c-4d48-b6d9-6f1b8013f9e5",
+        "stableGenerationRecordSha256": "958d21151289c7ec4122d8af512d673035e50a561952c8b305c9e5fc0f3ba445",
+        "generationStatus": "completed",
+        "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+      }
+    },
+    {
+      "concept": "science",
+      "generatorCallId": "exec-6d1871bf-c08f-4c62-8f47-0e4ade6c388c",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b155-3c73-7423-894d-cc590dc5bac5/exec-6d1871bf-c08f-4c62-8f47-0e4ade6c388c.png",
+      "sha256": "4db85d8cf2b5dd47ea2ec7669860d59275b3d6c19f2cfd7718b05fc949750cbb",
+      "preservedOriginal": "provenance/originals/DUDUQ-Y4M02-SCIENCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-SCIENCE.png",
+      "candidateSha256": "4db85d8cf2b5dd47ea2ec7669860d59275b3d6c19f2cfd7718b05fc949750cbb",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational school-subject concept PNG for children ages 8–10\nPrimary request: one unmistakable visual teaching the school subject “Science” in the active Y4M02 contract, distinct from English, Geography, Mathematics, History, Art, and food/shape assets\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one compact connected science laboratory emblem: a rounded teal-and-cobalt classroom microscope mounted on a broad navy base, with one transparent round flask containing bright green liquid and one small transparent test tube containing blue liquid secured in molded holders on that same base; no loose pieces\nStyle/medium: premium polished rounded 3D children’s animation render, tactile high-quality materials, crisp readable silhouette\nComposition/framing: centered front three-quarter view; the complete connected emblem fills about 80% of a square canvas with an 8–10% transparent safe margin on every side; microscope, base, flask, liquid, and tube fully visible\nLighting/mood: soft bright studio lighting, curious, cheerful, clear, educational\nConstraints: one connected science emblem; actual alpha transparency; recognizable at small game-card size; no baked-in answer word\nAvoid: words, letters, numerals, chemical formulas, warning symbols, smoke, explosion, globe, map, open language book, speech bubbles, abacus, equations, historical monument, scroll, palette, paintbrush, people, detached glassware, extra flasks, floor, cast shadow, glow, halo, frame around canvas, collage, grid, watermark, logo, cropped edges",
+      "sessionEvidence": {
+        "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T11-48-36-01a1b155-3c73-7423-894d-cc590dc5bac5.jsonl",
+        "generatorCallId": "exec-6d1871bf-c08f-4c62-8f47-0e4ade6c388c",
+        "stableGenerationRecordSha256": "e05b698f0aae7f04856644f44ae0f95b76bb729226d023f7d874b3c35af9f25f",
+        "generationStatus": "completed",
+        "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+      }
+    }
+  ],
+  "verifiedReusedAssets": [
+    {
+      "concept": "a",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m01-official-20261031",
+        "sourceFile": "qa/media-candidates/y2m01-official-20261031/images/DUDUQ-Y2M01-LETTER-A.png",
+        "sourceSha256": "45a0be67a1decff6ca5568884f271d1fd5b90faa9dcb5ca876e455d10eb9d38e",
+        "sourceOriginal": "qa/media-candidates/y2m01-official-20261031/provenance/originals/DUDUQ-Y2M01-LETTER-A-ORIGINAL.png",
+        "sourceOriginalSha256": "45a0be67a1decff6ca5568884f271d1fd5b90faa9dcb5ca876e455d10eb9d38e",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y2m01-official-20261031/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "95c016ce9dbe574c1b5e0c45c1f130e5dc8c20f41d4ea952036f6dc667cd5a67",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19358-2070-7d40-adf4-ca83e871348d/exec-9fc64420-aabd-4804-80c9-e2f11c6659d9.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/10/31/rollout-2026-10-31T16-03-08-01a19358-2070-7d40-adf4-ca83e871348d.jsonl",
+          "generatorCallId": "exec-9fc64420-aabd-4804-80c9-e2f11c6659d9",
+          "stableGenerationRecordSha256": "9d48a546f95b525bccadd568b3ca498eb84f1fefd01c1557ffaac26242f552ed",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-LETTER-A-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-LETTER-A.png",
+      "candidateSha256": "45a0be67a1decff6ca5568884f271d1fd5b90faa9dcb5ca876e455d10eb9d38e",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational game letter target for Year 2 children\nPrimary request: exactly one uppercase Latin letter \"A\" as a premium chunky 3D toy letter\nSubject: the single glyph A only, unmistakably readable, with a clear triangular counter\nStyle/medium: polished rounded children's 3D render; cobalt-blue front face, bright cyan beveled rim, warm coral-orange side depth; smooth soft-touch plastic\nComposition/framing: straight-on with only a very slight three-quarter depth view; centered; the letter fills about 82% of a square canvas; all edges fully visible with a safe transparent margin\nLighting/mood: soft bright studio highlights, cheerful, high contrast and easy to recognize on a small screen\nText (verbatim): \"A\"\nConstraints: genuinely transparent alpha background; exact uppercase A only; one glyph; no lowercase letter, no other letters, numbers, words, icons, objects, faces, limbs, base, floor, cast shadow, frame, logo, or watermark\nAvoid: wrong glyph, stylized shape that could read as another letter, alphabet set, duplicate letter, extra decorative marks"
+    },
+    {
+      "concept": "b",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m01-official-20261031",
+        "sourceFile": "qa/media-candidates/y2m01-official-20261031/images/DUDUQ-Y2M01-LETTER-B.png",
+        "sourceSha256": "c106081f6e8b230577b66ed0b9e4583e708e86aeb182e7bbf010fb761f132e2b",
+        "sourceOriginal": "qa/media-candidates/y2m01-official-20261031/provenance/originals/DUDUQ-Y2M01-LETTER-B-ORIGINAL.png",
+        "sourceOriginalSha256": "c106081f6e8b230577b66ed0b9e4583e708e86aeb182e7bbf010fb761f132e2b",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y2m01-official-20261031/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "95c016ce9dbe574c1b5e0c45c1f130e5dc8c20f41d4ea952036f6dc667cd5a67",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19358-2070-7d40-adf4-ca83e871348d/exec-606f67b5-b378-4a5d-b7ff-35ec06bc5bba.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/10/31/rollout-2026-10-31T16-03-08-01a19358-2070-7d40-adf4-ca83e871348d.jsonl",
+          "generatorCallId": "exec-606f67b5-b378-4a5d-b7ff-35ec06bc5bba",
+          "stableGenerationRecordSha256": "05fd1daa461007b5fa1bcefec0316b6c037d47ec8ffa0fee6e2ab1f1347c324d",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-LETTER-B-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-LETTER-B.png",
+      "candidateSha256": "c106081f6e8b230577b66ed0b9e4583e708e86aeb182e7bbf010fb761f132e2b",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational game letter target for Year 2 children\nPrimary request: exactly one uppercase Latin letter \"B\" as a premium chunky 3D toy letter\nInput images: Image 1 is the exact approved material, palette, lighting, bevel, camera, and framing reference; preserve that design language while rendering the requested new glyph\nSubject: the single glyph B only, unmistakably readable as uppercase B\nStyle/medium: polished rounded children's 3D render matching Image 1; cobalt-blue front face, bright cyan beveled rim, warm coral-orange side depth; smooth soft-touch plastic\nComposition/framing: straight-on with only a very slight three-quarter depth view; centered; the letter fills about 82% of a square canvas; all edges fully visible with a safe transparent margin\nLighting/mood: same soft bright studio highlights as Image 1, cheerful, high contrast and easy to recognize on a small screen\nText (verbatim): \"B\"\nConstraints: genuinely transparent alpha background; exact uppercase B only; one glyph; no A from the reference, no lowercase letter, no other letters, numbers, words, icons, objects, faces, limbs, base, floor, cast shadow, frame, logo, or watermark\nAvoid: wrong glyph, ambiguous shape, alphabet set, duplicate letter, extra decorative marks"
+    },
+    {
+      "concept": "blue square",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m02-official-20261101",
+        "sourceFile": "qa/media-candidates/y2m02-official-20261101/images/DUDUQ-Y2M02-BLUE-SQUARE.png",
+        "sourceSha256": "e0557e82d4b8e6992645877b0b36bd7475d6d73ea507c0e9bc02646a1c4140c0",
+        "sourceOriginal": "qa/media-candidates/y2m02-official-20261101/provenance/originals/DUDUQ-Y2M02-BLUE-SQUARE-ORIGINAL.png",
+        "sourceOriginalSha256": "d8e7db8ddada171c5309d6d60ffc7cf9c42871800311a14e434498059fd6d313",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19787-767d-79c1-be42-7692772bdcc2/exec-e443f7f2-d3dc-47c0-8412-da42be9ae24c.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/01/rollout-2026-11-01T11-33-19-01a19787-767d-79c1-be42-7692772bdcc2.jsonl",
+          "generatorCallId": "exec-e443f7f2-d3dc-47c0-8412-da42be9ae24c",
+          "stableGenerationRecordSha256": "8dcea22ec59c8766bd3a496f40d4f7ec088a3a81bf7863ac16b34b870589ccf4",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-BLUE-SQUARE-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-BLUE-SQUARE.png",
+      "candidateSha256": "e0557e82d4b8e6992645877b0b36bd7475d6d73ea507c0e9bc02646a1c4140c0",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational color-plus-shape card PNG for children ages 6–11\nPrimary request: recolor only the reference square to vivid saturated primary blue\nInput images: Image 1 is the exact approved square geometry\nPreserve: the exact four-equal-sided square silhouette, proportions, bevel, viewpoint, lighting, framing, scale, and transparent alpha edges\nConstraints: exactly one blue square; all visible square material must read blue; no other color patch; no other shape; no face; no pattern; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no numeral; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff\nAvoid: cyan, purple, red, yellow, green, rectangle wider than tall, circle, star"
+    },
+    {
+      "concept": "c",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m01-official-20261031",
+        "sourceFile": "qa/media-candidates/y2m01-official-20261031/images/DUDUQ-Y2M01-LETTER-C.png",
+        "sourceSha256": "8b71947d742140dbb5da17de8cfcba88763cebad499069b700dfcb5f40b6546b",
+        "sourceOriginal": "qa/media-candidates/y2m01-official-20261031/provenance/originals/DUDUQ-Y2M01-LETTER-C-ORIGINAL.png",
+        "sourceOriginalSha256": "8b71947d742140dbb5da17de8cfcba88763cebad499069b700dfcb5f40b6546b",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y2m01-official-20261031/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "95c016ce9dbe574c1b5e0c45c1f130e5dc8c20f41d4ea952036f6dc667cd5a67",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19358-2070-7d40-adf4-ca83e871348d/exec-ac6b1a11-ece6-4d61-83ee-3b093403a1c0.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/10/31/rollout-2026-10-31T16-03-08-01a19358-2070-7d40-adf4-ca83e871348d.jsonl",
+          "generatorCallId": "exec-ac6b1a11-ece6-4d61-83ee-3b093403a1c0",
+          "stableGenerationRecordSha256": "8538d98a7793867a1f8cd247153a96e0b651a2f2a3938ca66c4aa61327c4371c",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-LETTER-C-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-LETTER-C.png",
+      "candidateSha256": "8b71947d742140dbb5da17de8cfcba88763cebad499069b700dfcb5f40b6546b",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational game letter target for Year 2 children\nPrimary request: exactly one uppercase Latin letter \"C\" as a premium chunky 3D toy letter\nInput images: Image 1 is the exact approved material, palette, lighting, bevel, camera, and framing reference; preserve that design language while rendering the requested new glyph\nSubject: the single glyph C only, unmistakably readable as uppercase C\nStyle/medium: polished rounded children's 3D render matching Image 1; cobalt-blue front face, bright cyan beveled rim, warm coral-orange side depth; smooth soft-touch plastic\nComposition/framing: straight-on with only a very slight three-quarter depth view; centered; the letter fills about 82% of a square canvas; all edges fully visible with a safe transparent margin\nLighting/mood: same soft bright studio highlights as Image 1, cheerful, high contrast and easy to recognize on a small screen\nText (verbatim): \"C\"\nConstraints: genuinely transparent alpha background; exact uppercase C only; one glyph; no A from the reference, no lowercase letter, no other letters, numbers, words, icons, objects, faces, limbs, base, floor, cast shadow, frame, logo, or watermark\nAvoid: wrong glyph, ambiguous shape, alphabet set, duplicate letter, extra decorative marks"
+    },
+    {
+      "concept": "d",
+      "source": {
+        "provider": "Codex built-in image_gen",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m01-official-20261031",
+        "sourceFile": "qa/media-candidates/y2m01-official-20261031/images/DUDUQ-Y2M01-LETTER-D.png",
+        "sourceSha256": "699a56752b3917251bfec5453216ec14dbc4a562476c56d4eabf4be59c5cff75",
+        "sourceOriginal": "qa/media-candidates/y2m01-official-20261031/provenance/originals/DUDUQ-Y2M01-LETTER-D-ORIGINAL.png",
+        "sourceOriginalSha256": "699a56752b3917251bfec5453216ec14dbc4a562476c56d4eabf4be59c5cff75",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y2m01-official-20261031/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "95c016ce9dbe574c1b5e0c45c1f130e5dc8c20f41d4ea952036f6dc667cd5a67",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19358-2070-7d40-adf4-ca83e871348d/exec-5650de39-167d-4914-943c-b27fc28a68c2.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/10/31/rollout-2026-10-31T16-03-08-01a19358-2070-7d40-adf4-ca83e871348d.jsonl",
+          "generatorCallId": "exec-5650de39-167d-4914-943c-b27fc28a68c2",
+          "stableGenerationRecordSha256": "5a101c32fd73540d5740a51c5f2e79a990a0f777f4cbf68b7b2d1664cc93fd14",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-LETTER-D-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-LETTER-D.png",
+      "candidateSha256": "699a56752b3917251bfec5453216ec14dbc4a562476c56d4eabf4be59c5cff75",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational game letter target for Year 2 children\nPrimary request: exactly one uppercase Latin letter \"D\" as a premium chunky 3D toy letter\nInput images: Image 1 is the exact approved material, palette, lighting, bevel, camera, and framing reference; preserve that design language while rendering the requested new glyph\nSubject: the single glyph D only, unmistakably readable as uppercase D\nStyle/medium: polished rounded children's 3D render matching Image 1; cobalt-blue front face, bright cyan beveled rim, warm coral-orange side depth; smooth soft-touch plastic\nComposition/framing: straight-on with only a very slight three-quarter depth view; centered; the letter fills about 82% of a square canvas; all edges fully visible with a safe transparent margin\nLighting/mood: same soft bright studio highlights as Image 1, cheerful, high contrast and easy to recognize on a small screen\nText (verbatim): \"D\"\nConstraints: genuinely transparent alpha background; exact uppercase D only; one glyph; no A from the reference, no lowercase letter, no other letters, numbers, words, icons, objects, faces, limbs, base, floor, cast shadow, frame, logo, or watermark\nAvoid: wrong glyph, ambiguous shape, alphabet set, duplicate letter, extra decorative marks"
+    },
+    {
+      "concept": "green circle",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m02-official-20261101",
+        "sourceFile": "qa/media-candidates/y2m02-official-20261101/images/DUDUQ-Y2M02-GREEN-CIRCLE.png",
+        "sourceSha256": "e4325fad369dea23796a2775e1688046f3ef54fc19b0de050571dbea814b3217",
+        "sourceOriginal": "qa/media-candidates/y2m02-official-20261101/provenance/originals/DUDUQ-Y2M02-GREEN-CIRCLE-ORIGINAL.png",
+        "sourceOriginalSha256": "37da36167baddeb9013585ece95a20f7dfa91ccc738d67309cdbc349e129a32f",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19787-767d-79c1-be42-7692772bdcc2/exec-17c8fc60-4173-4e6b-b9fe-e034950282f0.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/01/rollout-2026-11-01T11-33-19-01a19787-767d-79c1-be42-7692772bdcc2.jsonl",
+          "generatorCallId": "exec-17c8fc60-4173-4e6b-b9fe-e034950282f0",
+          "stableGenerationRecordSha256": "f0cef42f45f49989ab73e677345dabb65f82d2a4d0eb4ae04fecfe6b910d1772",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-GREEN-CIRCLE-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-GREEN-CIRCLE.png",
+      "candidateSha256": "e4325fad369dea23796a2775e1688046f3ef54fc19b0de050571dbea814b3217",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational color-plus-shape card PNG for children ages 6–11\nPrimary request: recolor only the reference flat circle to vivid saturated grass green\nInput images: Image 1 is the exact approved flat circular geometry\nPreserve: the exact perfectly round flat-disk silhouette, proportions, bevel, viewpoint, lighting, framing, scale, and transparent alpha edges\nConstraints: exactly one green circle; all visible circle material must read green; no blue cast; no other shape; no face; no pattern; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no numeral; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff\nAvoid: blue, teal, yellow, oval, sphere, ball, square, triangle, star"
+    },
+    {
+      "concept": "i do not like carrots",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m04-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m04-official-20261105/images/DUDUQ-Y3M04-I-DO-NOT-LIKE-CARROTS.png",
+        "sourceSha256": "78e59be1986c13e2b05ed24395c0b1d64b0d3b8534480ecc8fa59f30d4fe369b",
+        "sourceOriginal": "qa/media-candidates/y3m04-official-20261105/provenance/originals/DUDUQ-Y3M04-I-DO-NOT-LIKE-CARROTS-ORIGINAL.png",
+        "sourceOriginalSha256": "78388c078332f783871cc81e74d11a85dbe4fe23a42fa174ff6cd70b73cf0c02",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m04-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "e7c4e564ccb19207a72ae84e8a6ce188a3b8d3398f5bdecb14d2814736da039d",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-6e314faa-aa13-497b-9576-90c7c89a23b9.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-I-DO-NOT-LIKE-CARROTS-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-I-DO-NOT-LIKE-CARROTS.png",
+      "candidateSha256": "78e59be1986c13e2b05ed24395c0b1d64b0d3b8534480ecc8fa59f30d4fe369b",
+      "prompt": "Use case: stylized-concept\nAsset type: educational English phrase-matching game image\nPrimary request: clearly illustrate the meaning \"I do not like carrots\" without written words\nSubject: one friendly cartoon student shown from the waist up with a clear but gentle displeased expression, turning the face away while holding one complete orange carrot at arm's length and politely pushing it away with the other open hand\nStyle/medium: premium polished rounded 3D children's animation render, expressive but natural, crisp clean silhouette\nComposition/framing: student and carrot centered, filling most of a square canvas with a small transparent safety margin; carrot large and unmistakable; rejection gesture clearly visible\nLighting/mood: soft bright studio lighting, safe and non-frightening\nConstraints: only one student and exactly one carrot; no other food or vegetables; no table, room, scenery, props, speech bubble, red X, heart, check mark, or symbol; no vomiting or illness; genuinely transparent background; no floor or cast shadow; no text, letters, logo, watermark, collage, grid, or frame; no cutoff"
+    },
+    {
+      "concept": "i like apples",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m04-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m04-official-20261105/images/DUDUQ-Y3M04-I-LIKE-APPLES.png",
+        "sourceSha256": "b378dc8a885e07048273a3393518f5a33fd2e4e9051ae359527e9ca34347a8b6",
+        "sourceOriginal": "qa/media-candidates/y3m04-official-20261105/provenance/originals/DUDUQ-Y3M04-I-LIKE-APPLES-ORIGINAL.png",
+        "sourceOriginalSha256": "237a9a78c14882f779275363fba34fce64936b67b25c49cb82cf203ecda5d6c0",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m04-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "e7c4e564ccb19207a72ae84e8a6ce188a3b8d3398f5bdecb14d2814736da039d",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-056a088c-54c2-4882-bf1c-7c9fc8ee7f80.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-I-LIKE-APPLES-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-I-LIKE-APPLES.png",
+      "candidateSha256": "b378dc8a885e07048273a3393518f5a33fd2e4e9051ae359527e9ca34347a8b6",
+      "prompt": "Use case: stylized-concept\nAsset type: educational English phrase-matching game image\nPrimary request: clearly illustrate the meaning \"I like apples\" without written words\nSubject: one friendly cartoon student shown from the waist up, smiling warmly while holding exactly three shiny red apples close to the chest; a gentle thumbs-up clearly communicates liking the apples\nStyle/medium: premium polished rounded 3D children's animation render, expressive but natural, crisp clean silhouette\nComposition/framing: student and three apples centered, filling most of a square canvas with a small transparent safety margin; apples large and easy to count and recognize\nLighting/mood: soft bright studio lighting, cheerful and positive\nConstraints: exactly one student and exactly three red apples; no other fruit or food; no basket, table, room, scenery, props, speech bubble, heart icon, or symbol; genuinely transparent background; no floor or cast shadow; no text, letters, logo, watermark, collage, grid, or frame; no cutoff"
+    },
+    {
+      "concept": "i like papaya",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m04-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m04-official-20261105/images/DUDUQ-Y3M04-I-LIKE-PAPAYA.png",
+        "sourceSha256": "e26d040391bd80af05431960976ae994d8828bb7b33d74663f81a248f50cb4cc",
+        "sourceOriginal": "qa/media-candidates/y3m04-official-20261105/provenance/originals/DUDUQ-Y3M04-I-LIKE-PAPAYA-ORIGINAL.png",
+        "sourceOriginalSha256": "003aab0a731307d93a8207cb0ce4b74e94aa1bd6bf996c3be5cab606b301d9d8",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m04-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "e7c4e564ccb19207a72ae84e8a6ce188a3b8d3398f5bdecb14d2814736da039d",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-b2b506be-b370-4763-9d7b-12f286372a45.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-I-LIKE-PAPAYA-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-I-LIKE-PAPAYA.png",
+      "candidateSha256": "e26d040391bd80af05431960976ae994d8828bb7b33d74663f81a248f50cb4cc",
+      "prompt": "Use case: stylized-concept\nAsset type: educational English phrase-matching game image\nPrimary request: clearly illustrate the meaning \"I like papaya\" without written words\nSubject: one friendly cartoon student shown from the waist up, smiling warmly while holding one ripe papaya cut lengthwise so its orange flesh and black seeds are unmistakable; the student's happy expression and gentle thumbs-up clearly communicate liking the papaya\nStyle/medium: premium polished rounded 3D children's animation render, expressive but natural, crisp clean silhouette\nComposition/framing: student and papaya centered, filling most of a square canvas with a small transparent safety margin; papaya large and easy to recognize\nLighting/mood: soft bright studio lighting, cheerful and positive\nConstraints: only one student and papaya; no other fruit or food; no table, room, scenery, props, speech bubble, heart icon, or symbol; genuinely transparent background; no floor or cast shadow; no text, letters, logo, watermark, collage, grid, or frame; no cutoff"
+    },
+    {
+      "concept": "i prefer grapes",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m04-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m04-official-20261105/images/DUDUQ-Y3M04-I-PREFER-GRAPES.png",
+        "sourceSha256": "0f16d25eccf0648830dd8b5de9bd02f3d7fb78abdff205bd8e3fc9a1cd285ca5",
+        "sourceOriginal": "qa/media-candidates/y3m04-official-20261105/provenance/originals/DUDUQ-Y3M04-I-PREFER-GRAPES-ORIGINAL.png",
+        "sourceOriginalSha256": "8b576b1791215e65b3367907118b0a2bf4cd89393df1816c8ef9a617980c13b5",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m04-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "e7c4e564ccb19207a72ae84e8a6ce188a3b8d3398f5bdecb14d2814736da039d",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1abbc-a7ce-7352-886c-2d644aef5301/exec-ceae5abe-b9d2-4909-9894-31eaefeaf288.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-I-PREFER-GRAPES-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-I-PREFER-GRAPES.png",
+      "candidateSha256": "0f16d25eccf0648830dd8b5de9bd02f3d7fb78abdff205bd8e3fc9a1cd285ca5",
+      "prompt": "Use case: stylized-concept\nAsset type: educational English phrase-matching game image\nPrimary request: clearly illustrate the meaning \"I prefer grapes\" without written words\nSubject: one friendly cartoon student shown from the waist up, smiling confidently while choosing and presenting one large bunch of purple grapes forward with both hands; the focused choosing gesture and proud expression communicate that grapes are the student's preferred choice\nStyle/medium: premium polished rounded 3D children's animation render, expressive but natural, crisp clean silhouette\nComposition/framing: student and grape bunch centered, filling most of a square canvas with a small transparent safety margin; grapes large and unmistakable\nLighting/mood: soft bright studio lighting, cheerful and positive\nConstraints: only one student and one bunch of purple grapes; no other fruit or food; no table, room, scenery, props, speech bubble, heart icon, check mark, or symbol; genuinely transparent background; no floor or cast shadow; no text, letters, logo, watermark, collage, grid, or frame; no cutoff"
+    },
+    {
+      "concept": "nine minus five equals four",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m05-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m05-official-20261105/images/DUDUQ-Y3M05-NINE-MINUS-FIVE-EQUALS-FOUR.png",
+        "sourceSha256": "8e90c7afe1fbc9c1bd55470adc657b76f69833ff579a4abe67a4c24d3964c0a1",
+        "sourceOriginal": "qa/media-candidates/y3m05-official-20261105/provenance/originals/DUDUQ-Y3M05-NINE-MINUS-FIVE-EQUALS-FOUR-ORIGINAL.png",
+        "sourceOriginalSha256": "3c7ec33d8018ea18b51d290f0a83fad1c4137359374342d1a956e259c4670c82",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m05-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "852618cb057e8f4278e574b5044787e231ac0c77db7005d3264513229f70246c",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-4c29824c-4864-4add-82cc-6e46a567b567.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-NINE-MINUS-FIVE-EQUALS-FOUR-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-NINE-MINUS-FIVE-EQUALS-FOUR.png",
+      "candidateSha256": "8e90c7afe1fbc9c1bd55470adc657b76f69833ff579a4abe67a4c24d3964c0a1",
+      "prompt": "Use case: scientific-educational\nAsset type: DUDUQ English visual answer asset for children ages 7–10\nPrimary request: render the exact arithmetic equation \"9 − 5 = 4\" as five separate premium 3D toy-like tokens on one horizontal baseline\nSubject: the exact sequence digit 9, horizontal minus sign −, digit 5, equals sign =, digit 4, in that exact order\nStyle/medium: bold rounded sans-serif token forms, glossy colorful plastic, highly legible at small size, polished child-friendly 3D animation render\nComposition/framing: centered horizontal sequence, evenly spaced, filling most of a wide transparent canvas while every token remains fully visible\nLighting/mood: soft bright studio lighting with highlights contained on each token\nText/symbols verbatim: 9 − 5 = 4\nConstraints: genuinely transparent alpha background; exactly the five requested tokens in the exact order; numerals must be exact; one horizontal minus and one equals sign; no plus, words, extra digits, extra operators, decorative objects, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge"
+    },
+    {
+      "concept": "red triangle",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m02-official-20261101",
+        "sourceFile": "qa/media-candidates/y2m02-official-20261101/images/DUDUQ-Y2M02-RED-TRIANGLE.png",
+        "sourceSha256": "5ed4fb31bb2f1c1797b062c99f835c1e4a77f6f9ab6058ff703eb949bec04fb4",
+        "sourceOriginal": "qa/media-candidates/y2m02-official-20261101/provenance/originals/DUDUQ-Y2M02-RED-TRIANGLE-ORIGINAL.png",
+        "sourceOriginalSha256": "a2d3c84a95eee00b97a5685f90a5ccec106f3cef595c0c61559f08080fe98e45",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19787-767d-79c1-be42-7692772bdcc2/exec-ad270d91-ea70-4469-a3ad-7d834822f6a1.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/01/rollout-2026-11-01T11-33-19-01a19787-767d-79c1-be42-7692772bdcc2.jsonl",
+          "generatorCallId": "exec-ad270d91-ea70-4469-a3ad-7d834822f6a1",
+          "stableGenerationRecordSha256": "ab8f95177898d5f10581ed527dc759cf2bd9a6e078ac8aeaba20d358e8ebd752",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-RED-TRIANGLE-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-RED-TRIANGLE.png",
+      "candidateSha256": "5ed4fb31bb2f1c1797b062c99f835c1e4a77f6f9ab6058ff703eb949bec04fb4",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational color-plus-shape card PNG for children ages 6–11\nPrimary request: recolor only the reference triangle to vivid saturated primary red\nInput images: Image 1 is the exact approved triangle geometry\nPreserve: the exact three-sided triangle silhouette, proportions, bevel, viewpoint, lighting, framing, scale, and transparent alpha edges\nConstraints: exactly one red triangle; all visible triangle material must read red; no other color patch; no other shape; no face; no pattern; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no numeral; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff\nAvoid: orange, pink, blue, yellow, green, square, circle, star"
+    },
+    {
+      "concept": "six minus two equals four",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m05-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m05-official-20261105/images/DUDUQ-Y3M05-SIX-MINUS-TWO-EQUALS-FOUR.png",
+        "sourceSha256": "96aa1db791e1f383952547a0e7fde89c18256bbbc275474601a7f0afcea8c849",
+        "sourceOriginal": "qa/media-candidates/y3m05-official-20261105/provenance/originals/DUDUQ-Y3M05-SIX-MINUS-TWO-EQUALS-FOUR-ORIGINAL.png",
+        "sourceOriginalSha256": "c04df3bdf031a0b39287919527d3cb77fae744a2a16a0b9061e396a790652327",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m05-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "852618cb057e8f4278e574b5044787e231ac0c77db7005d3264513229f70246c",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-243d535b-68ef-422a-b702-0fe3aa529d56.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-SIX-MINUS-TWO-EQUALS-FOUR-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-SIX-MINUS-TWO-EQUALS-FOUR.png",
+      "candidateSha256": "96aa1db791e1f383952547a0e7fde89c18256bbbc275474601a7f0afcea8c849",
+      "prompt": "Use case: scientific-educational\nAsset type: DUDUQ English visual answer asset for children ages 7–10\nPrimary request: render the exact arithmetic equation \"6 − 2 = 4\" as five separate premium 3D toy-like tokens on one horizontal baseline\nSubject: the exact sequence digit 6, horizontal minus sign −, digit 2, equals sign =, digit 4, in that exact order\nStyle/medium: bold rounded sans-serif token forms, glossy colorful plastic, highly legible at small size, polished child-friendly 3D animation render\nComposition/framing: centered horizontal sequence, evenly spaced, filling most of a wide transparent canvas while every token remains fully visible\nLighting/mood: soft bright studio lighting with highlights contained on each token\nText/symbols verbatim: 6 − 2 = 4\nConstraints: genuinely transparent alpha background; exactly the five requested tokens in the exact order; numerals must be exact; one horizontal minus and one equals sign; no plus, words, extra digits, extra operators, decorative objects, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge"
+    },
+    {
+      "concept": "three plus four equals seven",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m05-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m05-official-20261105/images/DUDUQ-Y3M05-THREE-PLUS-FOUR-EQUALS-SEVEN.png",
+        "sourceSha256": "def1d12aec14a94dc931c80f1128d56c44a18aa16e0b0912ac05e9f56025abec",
+        "sourceOriginal": "qa/media-candidates/y3m05-official-20261105/provenance/originals/DUDUQ-Y3M05-THREE-PLUS-FOUR-EQUALS-SEVEN-ORIGINAL.png",
+        "sourceOriginalSha256": "f26c70418e149e0478eea2f34bc6b3c7bbfe660755f5e5fec742a23a9d8aa04c",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m05-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "852618cb057e8f4278e574b5044787e231ac0c77db7005d3264513229f70246c",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-6c378283-1ef9-4d5e-b0e0-98fbd94b1225.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-THREE-PLUS-FOUR-EQUALS-SEVEN-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-THREE-PLUS-FOUR-EQUALS-SEVEN.png",
+      "candidateSha256": "def1d12aec14a94dc931c80f1128d56c44a18aa16e0b0912ac05e9f56025abec",
+      "prompt": "Use case: scientific-educational\nAsset type: DUDUQ English visual answer asset for children ages 7–10\nPrimary request: render the exact arithmetic equation \"3 + 4 = 7\" as five separate premium 3D toy-like tokens on one horizontal baseline\nSubject: the exact sequence digit 3, plus sign +, digit 4, equals sign =, digit 7, in that exact order\nStyle/medium: bold rounded sans-serif token forms, glossy colorful plastic, highly legible at small size, polished child-friendly 3D animation render\nComposition/framing: centered horizontal sequence, evenly spaced, filling most of a wide transparent canvas while every token remains fully visible\nLighting/mood: soft bright studio lighting with highlights contained on each token\nText/symbols verbatim: 3 + 4 = 7\nConstraints: genuinely transparent alpha background; exactly the five requested tokens in the exact order; numerals must be exact; one plus and one equals sign; no words, extra digits, extra operators, decorative objects, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge"
+    },
+    {
+      "concept": "two plus three equals five",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y3m05-official-20261105",
+        "sourceFile": "qa/media-candidates/y3m05-official-20261105/images/DUDUQ-Y3M05-TWO-PLUS-THREE-EQUALS-FIVE.png",
+        "sourceSha256": "ce5c6aa028b3a430aaf613acc46f0f22549466af91d66ae734dbd1094ea3f831",
+        "sourceOriginal": "qa/media-candidates/y3m05-official-20261105/provenance/originals/DUDUQ-Y3M05-TWO-PLUS-THREE-EQUALS-FIVE-ORIGINAL.png",
+        "sourceOriginalSha256": "539664c1209be97e3a76208befcc496c8da64fac8fa185562e0caaa644a76f2f",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": "qa/media-candidates/y3m05-official-20261105/generation-provenance.json",
+        "sourceGenerationProvenanceSha256": "852618cb057e8f4278e574b5044787e231ac0c77db7005d3264513229f70246c",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-cb74c0e5-d9e9-4aed-b02b-00d698c9de4c.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": null
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-TWO-PLUS-THREE-EQUALS-FIVE-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-TWO-PLUS-THREE-EQUALS-FIVE.png",
+      "candidateSha256": "ce5c6aa028b3a430aaf613acc46f0f22549466af91d66ae734dbd1094ea3f831",
+      "prompt": "Use case: scientific-educational\nAsset type: DUDUQ English visual answer asset for children ages 7–10\nPrimary request: render the exact arithmetic equation \"2 + 3 = 5\" as five separate premium 3D toy-like tokens on one horizontal baseline\nSubject: the exact sequence digit 2, plus sign +, digit 3, equals sign =, digit 5, in that exact order\nStyle/medium: bold rounded sans-serif token forms, glossy colorful plastic, highly legible at small size, polished child-friendly 3D animation render\nComposition/framing: centered horizontal sequence, evenly spaced, filling most of a wide transparent canvas while every token remains fully visible\nLighting/mood: soft bright studio lighting with highlights contained on each token\nText/symbols verbatim: 2 + 3 = 5\nConstraints: genuinely transparent alpha background; exactly the five requested tokens in the exact order; numerals must be exact; one plus and one equals sign; no words, extra digits, extra operators, decorative objects, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge"
+    },
+    {
+      "concept": "yellow rectangle",
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "sourceBatch": "qa/media-candidates/y2m02-official-20261101",
+        "sourceFile": "qa/media-candidates/y2m02-official-20261101/images/DUDUQ-Y2M02-YELLOW-RECTANGLE.png",
+        "sourceSha256": "65cd909c32a1e676b71d39d46d39ebf34f65c939519612cc69c130b55190c648",
+        "sourceOriginal": "qa/media-candidates/y2m02-official-20261101/provenance/originals/DUDUQ-Y2M02-YELLOW-RECTANGLE-ORIGINAL.png",
+        "sourceOriginalSha256": "dd679cf6fea37601f6c929c3cc8ec0c3acda214a9856c48d13234d9821e0780d",
+        "sourceManifest": null,
+        "sourceManifestSha256": null,
+        "sourceGenerationProvenance": null,
+        "sourceGenerationProvenanceSha256": null,
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a19787-767d-79c1-be42-7692772bdcc2/exec-924bf7ea-6d75-48ff-b0ff-5588af9a8365.png",
+        "nativeExactOriginalHashVerified": true,
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/01/rollout-2026-11-01T11-33-19-01a19787-767d-79c1-be42-7692772bdcc2.jsonl",
+          "generatorCallId": "exec-924bf7ea-6d75-48ff-b0ff-5588af9a8365",
+          "stableGenerationRecordSha256": "99923581cfd9bed4e9eb515357635c91a9e74203b4a15c4dbbe6a70922a52c64",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      },
+      "preservedSource": "provenance/reused-originals/DUDUQ-Y4M02-YELLOW-RECTANGLE-SOURCE-ORIGINAL.png",
+      "candidate": "images/DUDUQ-Y4M02-YELLOW-RECTANGLE.png",
+      "candidateSha256": "65cd909c32a1e676b71d39d46d39ebf34f65c939519612cc69c130b55190c648",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational color-plus-shape card PNG for children ages 6–11\nPrimary request: recolor only the reference horizontal rectangle to vivid saturated primary yellow\nInput images: Image 1 is the exact approved rectangle geometry\nPreserve: the exact wider-than-tall rectangle silhouette, proportions, bevel, viewpoint, lighting, framing, scale, and transparent alpha edges\nConstraints: exactly one yellow rectangle; all visible rectangle material must read yellow; no orange or green cast; no other shape; no face; no pattern; genuinely transparent background; no floor; no cast shadow; no glow; no halo; no text; no numeral; no letters; no symbols; no logo; no watermark; no collage; no grid; no frame; no cutoff\nAvoid: orange, lime, square, circle, triangle, star"
+    }
+  ],
+  "failedAttempts": [],
+  "generatorLimitReached": false,
+  "blockedGenerator": false
+}

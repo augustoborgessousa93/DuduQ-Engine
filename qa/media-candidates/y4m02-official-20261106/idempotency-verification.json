@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "DUDUQ_Y4M02_IDEMPOTENCY_VERIFICATION_V1",
+  "createdAt": "2026-11-06T15:07:26.406Z",
+  "moduleId": "Y4M02",
+  "lane": "generation",
+  "command": "node qa/media-candidates/y4m02-official-20261106/assemble-generation-input.mjs && node qa/media-candidates/y4m02-official-20261106/prepare-generation-bundle.mjs",
+  "status": "IDEMPOTENT_PASS",
+  "fileCountBefore": 64,
+  "fileCountAfter": 64,
+  "changed": []
+}

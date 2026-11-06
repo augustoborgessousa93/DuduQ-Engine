@@ -1,0 +1,1469 @@
+{
+  "schemaVersion": "DUDUQ_Y4M02_QUESTION_INVENTORY_V1",
+  "createdAt": "2026-11-06T15:07:26.406Z",
+  "moduleId": "Y4M02",
+  "lane": "generation",
+  "candidateOnly": true,
+  "sourceQuestionFile": "dist-pages/content/english/year-4/module-02/questions.json",
+  "sourceQuestionSha256": "ad303063d8044abdd86d9d71bef5b8a3bc93ad7a18eaa27a4d2dd56cbf7d3f77",
+  "questionCount": 20,
+  "allSemanticTargetCount": 22,
+  "allSemanticTargets": [
+    "a",
+    "art",
+    "b",
+    "blue square",
+    "c",
+    "d",
+    "english",
+    "geography",
+    "green circle",
+    "history",
+    "i do not like carrots",
+    "i like apples",
+    "i like papaya",
+    "i prefer grapes",
+    "mathematics",
+    "nine minus five equals four",
+    "red triangle",
+    "science",
+    "six minus two equals four",
+    "three plus four equals seven",
+    "two plus three equals five",
+    "yellow rectangle"
+  ],
+  "visualSemanticTargetCount": 22,
+  "visualSemanticTargets": [
+    "a",
+    "art",
+    "b",
+    "blue square",
+    "c",
+    "d",
+    "english",
+    "geography",
+    "green circle",
+    "history",
+    "i do not like carrots",
+    "i like apples",
+    "i like papaya",
+    "i prefer grapes",
+    "mathematics",
+    "nine minus five equals four",
+    "red triangle",
+    "science",
+    "six minus two equals four",
+    "three plus four equals seven",
+    "two plus three equals five",
+    "yellow rectangle"
+  ],
+  "nonVisualOnlySemanticTargets": [],
+  "sourcePendingMediaIdCount": 39,
+  "sourcePendingMediaIds": [
+    "IMG-V11-2B-0B255AF22079ACF0",
+    "IMG-V11-2B-1651BBDF0637DE4E",
+    "IMG-V11-2B-20C32A7B846CD05A",
+    "IMG-V11-2B-24AE191AA3634A76",
+    "IMG-V11-2B-2662DECD66839419",
+    "IMG-V11-2B-34691F7FF392D134",
+    "IMG-V11-2B-3679D098470A87AF",
+    "IMG-V11-2B-48CA6C8720A28B20",
+    "IMG-V11-2B-4B72C84EB092340A",
+    "IMG-V11-2B-504674DEDCB9FDCE",
+    "IMG-V11-2B-5A685792F5F3892E",
+    "IMG-V11-2B-5D2F313F53720CE9",
+    "IMG-V11-2B-5FC56902AD57463A",
+    "IMG-V11-2B-6067E6DE84C0E5C7",
+    "IMG-V11-2B-61A2BC233D5DC6FA",
+    "IMG-V11-2B-6FFE58151EAD0CA0",
+    "IMG-V11-2B-7CEF9891D59562FE",
+    "IMG-V11-2B-8050E659DDF0AE39",
+    "IMG-V11-2B-8402FF71A9476919",
+    "IMG-V11-2B-8A1539773070D30D",
+    "IMG-V11-2B-925D0D65A4C27655",
+    "IMG-V11-2B-9308452ECEE535F7",
+    "IMG-V11-2B-97050C4338A5B73F",
+    "IMG-V11-2B-9C61EBB04E4F0405",
+    "IMG-V11-2B-B53AD4A3B76BCB34",
+    "IMG-V11-2B-BC972A558AE93D79",
+    "IMG-V11-2B-C1BC182FD8E80824",
+    "IMG-V11-2B-C71E27A94D5A8AF0",
+    "IMG-V11-2B-C8365730261BA43A",
+    "IMG-V11-2B-CC82E066C948B4A2",
+    "IMG-V11-2B-CF361B72DB38F24E",
+    "IMG-V11-2B-D12AE70F693DD028",
+    "IMG-V11-2B-D479ABE00CDCCB74",
+    "IMG-V11-2B-D74453328D45A91B",
+    "IMG-V11-2B-F2B1512D42DAD7B2",
+    "IMG-V11-2B-F30886117165DA8E",
+    "IMG-V11-2B-F6B814EBB2AA67CB",
+    "IMG-V11-2B-FA3CBDF0A99332B9",
+    "Y1M01-EMOJI-ART-001"
+  ],
+  "visualUsageCount": 94,
+  "occurrenceScopedBindingGroupCount": 78,
+  "questions": [
+    {
+      "questionId": "Y4M02-Q001",
+      "sequencePosition": 1,
+      "topicEn": "School Life",
+      "taskType": "Drag each delivered stimulus to its one-to-one semantic visual.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "teaching: Identify/read school subjects and state a favorite. Focus: English.",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "supportInstructionPt": "Combine cada áudio com sua imagem.",
+      "answerKey": {
+        "Y4M02-Q001-I1": "Y4M02-Q001-T1",
+        "Y4M02-Q001-I2": "Y4M02-Q001-T2",
+        "Y4M02-Q001-I3": "Y4M02-Q001-T3",
+        "Y4M02-Q001-I4": "Y4M02-Q001-T4"
+      },
+      "semanticTargets": [
+        "english",
+        "geography",
+        "mathematics",
+        "science"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q001",
+          "mediaId": "IMG-V11-2B-7CEF9891D59562FE",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "english",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q001-T1"
+        },
+        {
+          "questionId": "Y4M02-Q001",
+          "mediaId": "IMG-V11-2B-4B72C84EB092340A",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "geography",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q001-T2"
+        },
+        {
+          "questionId": "Y4M02-Q001",
+          "mediaId": "IMG-V11-2B-C8365730261BA43A",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "mathematics",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q001-T3"
+        },
+        {
+          "questionId": "Y4M02-Q001",
+          "mediaId": "IMG-V11-2B-CC82E066C948B4A2",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "science",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q001-T4"
+        }
+      ],
+      "sourceQuestionContractSha256": "05b9cb314f4291c480c2978ff1f30cf9f394daf76b4d6e4dd199e1405202a6f2"
+    },
+    {
+      "questionId": "Y4M02-Q002",
+      "sequencePosition": 2,
+      "topicEn": "School Life",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "teaching: Identify/read school subjects and state a favorite. Focus: alphabet/spelling.",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "supportInstructionPt": "Ouça e estoure a bolha correspondente.",
+      "answerKey": "Y4M02-Q002-O1",
+      "semanticTargets": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "english",
+        "geography"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q002",
+          "mediaId": "IMG-V11-2B-B53AD4A3B76BCB34",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "b",
+          "correct": true,
+          "optionOrCardId": "Y4M02-Q002-O1"
+        },
+        {
+          "questionId": "Y4M02-Q002",
+          "mediaId": "IMG-V11-2B-34691F7FF392D134",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "a",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q002-O2"
+        },
+        {
+          "questionId": "Y4M02-Q002",
+          "mediaId": "IMG-V11-2B-5FC56902AD57463A",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "c",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q002-O3"
+        },
+        {
+          "questionId": "Y4M02-Q002",
+          "mediaId": "IMG-V11-2B-5A685792F5F3892E",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "d",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q002-O4"
+        },
+        {
+          "questionId": "Y4M02-Q002",
+          "mediaId": "IMG-V11-2B-B53AD4A3B76BCB34",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "b",
+          "correct": true,
+          "optionOrCardId": "Y4M02-Q002-O1"
+        },
+        {
+          "questionId": "Y4M02-Q002",
+          "mediaId": "IMG-V11-2B-34691F7FF392D134",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "a",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q002-D1"
+        },
+        {
+          "questionId": "Y4M02-Q002",
+          "mediaId": "IMG-V11-2B-5FC56902AD57463A",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "c",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q002-D2"
+        },
+        {
+          "questionId": "Y4M02-Q002",
+          "mediaId": "IMG-V11-2B-5A685792F5F3892E",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "d",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q002-D3"
+        },
+        {
+          "questionId": "Y4M02-Q002",
+          "mediaId": "IMG-V11-2B-7CEF9891D59562FE",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "english",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q002-D4"
+        },
+        {
+          "questionId": "Y4M02-Q002",
+          "mediaId": "IMG-V11-2B-4B72C84EB092340A",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "geography",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q002-D5"
+        }
+      ],
+      "sourceQuestionContractSha256": "e632d25148a1d8dea68e06401dd61383958283f3181186d69341607d3dad1872"
+    },
+    {
+      "questionId": "Y4M02-Q003",
+      "sequencePosition": 3,
+      "topicEn": "School Life",
+      "taskType": "Classify each source-backed item into a named semantic category.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "guided practice: Identify/read school subjects and state a favorite. Focus: six subject labels.",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "primaryInstructionEn": "Sort each item: language and arts or other subjects.",
+      "supportInstructionPt": "Separe cada item: language and arts ou other subjects.",
+      "answerKey": {
+        "Y4M02-Q003-I1": "language-arts",
+        "Y4M02-Q003-I2": "language-arts",
+        "Y4M02-Q003-I3": "OTHER-SUBJECTS",
+        "Y4M02-Q003-I4": "OTHER-SUBJECTS",
+        "Y4M02-Q003-I5": "OTHER-SUBJECTS",
+        "Y4M02-Q003-I6": "OTHER-SUBJECTS"
+      },
+      "semanticTargets": [
+        "art",
+        "english",
+        "geography",
+        "history",
+        "mathematics",
+        "science"
+      ],
+      "visualUsages": [],
+      "sourceQuestionContractSha256": "1e554991a5b444ef13f9eaf08df5d5aee82a943a61f01562e5daca7c8643700c"
+    },
+    {
+      "questionId": "Y4M02-Q004",
+      "sequencePosition": 4,
+      "topicEn": "School Life",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "guided practice: Identify/read school subjects and state a favorite. Focus: one favorite-subject response.",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "supportInstructionPt": "Ouça e acerte a opção correspondente.",
+      "answerKey": "Y4M02-Q004-O1",
+      "semanticTargets": [
+        "english",
+        "geography",
+        "mathematics",
+        "science"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q004",
+          "mediaId": "IMG-V11-2B-2662DECD66839419",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "science",
+          "correct": true,
+          "optionOrCardId": "Y4M02-Q004-O1"
+        },
+        {
+          "questionId": "Y4M02-Q004",
+          "mediaId": "IMG-V11-2B-925D0D65A4C27655",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "english",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q004-O2"
+        },
+        {
+          "questionId": "Y4M02-Q004",
+          "mediaId": "IMG-V11-2B-9C61EBB04E4F0405",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "geography",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q004-O3"
+        },
+        {
+          "questionId": "Y4M02-Q004",
+          "mediaId": "IMG-V11-2B-F6B814EBB2AA67CB",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "mathematics",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q004-O4"
+        }
+      ],
+      "sourceQuestionContractSha256": "2798853c0c99027aa263a7bc0595f3707d005fa939d5670e988a4210bd7e1fe7"
+    },
+    {
+      "questionId": "Y4M02-Q005",
+      "sequencePosition": 5,
+      "topicEn": "School Life",
+      "taskType": "Reveal two cards and pair by semantic identity in TEXT_IMAGE.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "Written subject labels map to school-context images using only the six V3 items. Curricular target: English; Geography; Mathematics; Science; History; Art.",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "TEXT_IMAGE",
+      "primaryInstructionEn": "Find the matching pairs.",
+      "supportInstructionPt": "Encontre os pares correspondentes.",
+      "answerKey": [
+        "Y4M02-Q005-P1",
+        "Y4M02-Q005-P2",
+        "Y4M02-Q005-P3",
+        "Y4M02-Q005-P4",
+        "Y4M02-Q005-P5",
+        "Y4M02-Q005-P6"
+      ],
+      "semanticTargets": [
+        "art",
+        "english",
+        "geography",
+        "history",
+        "mathematics",
+        "science"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q005",
+          "mediaId": "IMG-V11-2B-1651BBDF0637DE4E",
+          "contractPath": "pairs[0].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "history",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M02-Q005",
+          "mediaId": "Y1M01-EMOJI-ART-001",
+          "contractPath": "pairs[1].cards[1]",
+          "role": "CONTENT",
+          "semanticTarget": "art",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M02-Q005",
+          "mediaId": "IMG-V11-2B-3679D098470A87AF",
+          "contractPath": "pairs[2].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "english",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M02-Q005",
+          "mediaId": "IMG-V11-2B-F30886117165DA8E",
+          "contractPath": "pairs[3].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "geography",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M02-Q005",
+          "mediaId": "IMG-V11-2B-BC972A558AE93D79",
+          "contractPath": "pairs[4].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "mathematics",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M02-Q005",
+          "mediaId": "IMG-V11-2B-61A2BC233D5DC6FA",
+          "contractPath": "pairs[5].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "science",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "sourceQuestionContractSha256": "6adefd7b526abf9d04ef3309796ec629a2a5c1cdb631d9d0ec92a490acfd7ad6"
+    },
+    {
+      "questionId": "Y4M02-Q006",
+      "sequencePosition": 6,
+      "topicEn": "School Life",
+      "taskType": "Connect related source-backed semantic items.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "guided practice: Identify/read school subjects and state a favorite. Focus: Geography.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "answerKey": {
+        "Y4M02-Q006-L1": "Y4M02-Q006-R1",
+        "Y4M02-Q006-L2": "Y4M02-Q006-R2",
+        "Y4M02-Q006-L3": "Y4M02-Q006-R3",
+        "Y4M02-Q006-L4": "Y4M02-Q006-R4",
+        "Y4M02-Q006-L5": "Y4M02-Q006-R5"
+      },
+      "semanticTargets": [
+        "art",
+        "geography",
+        "history",
+        "mathematics",
+        "science"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q006",
+          "mediaId": "IMG-V11-2B-FA3CBDF0A99332B9",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "geography",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q006-R1"
+        },
+        {
+          "questionId": "Y4M02-Q006",
+          "mediaId": "IMG-V11-2B-CF361B72DB38F24E",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "mathematics",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q006-R2"
+        },
+        {
+          "questionId": "Y4M02-Q006",
+          "mediaId": "IMG-V11-2B-D12AE70F693DD028",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "science",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q006-R3"
+        },
+        {
+          "questionId": "Y4M02-Q006",
+          "mediaId": "IMG-V11-2B-24AE191AA3634A76",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "history",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q006-R4"
+        },
+        {
+          "questionId": "Y4M02-Q006",
+          "mediaId": "Y1M01-EMOJI-ART-001",
+          "contractPath": "pairs[4].b",
+          "role": "CONTENT",
+          "semanticTarget": "art",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q006-R5"
+        }
+      ],
+      "sourceQuestionContractSha256": "1172f27595dbedd94011e2bf7aa380870bc7f415688d148b2ff05a345f2e85e6"
+    },
+    {
+      "questionId": "Y4M02-Q007",
+      "sequencePosition": 7,
+      "topicEn": "School Life",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "recognition: Identify/read school subjects and state a favorite. Focus: school objects.",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "supportInstructionPt": "Ouça e estoure a bolha correspondente.",
+      "answerKey": "Y4M02-Q007-O1",
+      "semanticTargets": [
+        "a",
+        "b",
+        "english",
+        "geography",
+        "mathematics",
+        "science"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q007",
+          "mediaId": "IMG-V11-2B-925D0D65A4C27655",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "english",
+          "correct": true,
+          "optionOrCardId": "Y4M02-Q007-O1"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "mediaId": "IMG-V11-2B-9C61EBB04E4F0405",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "geography",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q007-O2"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "mediaId": "IMG-V11-2B-F6B814EBB2AA67CB",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "mathematics",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q007-O3"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "mediaId": "IMG-V11-2B-2662DECD66839419",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "science",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q007-O4"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "mediaId": "IMG-V11-2B-925D0D65A4C27655",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "english",
+          "correct": true,
+          "optionOrCardId": "Y4M02-Q007-O1"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "mediaId": "IMG-V11-2B-9C61EBB04E4F0405",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "geography",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q007-D1"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "mediaId": "IMG-V11-2B-F6B814EBB2AA67CB",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "mathematics",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q007-D2"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "mediaId": "IMG-V11-2B-2662DECD66839419",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "science",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q007-D3"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "mediaId": "IMG-V11-2B-B53AD4A3B76BCB34",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "b",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q007-D4"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "mediaId": "IMG-V11-2B-34691F7FF392D134",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "a",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q007-D5"
+        }
+      ],
+      "sourceQuestionContractSha256": "f93dd6655d6a66a40c9782d74e7d27dc76300a2ecaab0628c8f22bf8e3fb2a08"
+    },
+    {
+      "questionId": "Y4M02-Q008",
+      "sequencePosition": 8,
+      "topicEn": "School Life",
+      "taskType": "Select the source-backed word/chunk completing the familiar structure.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "recognition: Identify/read school subjects and state a favorite. Focus: six subject labels.",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "primaryInstructionEn": "Look at the picture and complete the sentence.",
+      "supportInstructionPt": "De acordo com a imagem, complete a frase.",
+      "answerKey": "Geography",
+      "semanticTargets": [
+        "geography"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q008",
+          "mediaId": "IMG-V11-2B-4B72C84EB092340A",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "geography",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "sourceQuestionContractSha256": "62900d06ffcc141c165dcac1d7c42798c7df24a4e17cc36ceb178fbe968728bd"
+    },
+    {
+      "questionId": "Y4M02-Q009",
+      "sequencePosition": 9,
+      "topicEn": "School Life",
+      "taskType": "Match each familiar subject label to its corresponding classroom-context image.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "recognition: Match familiar written school-subject labels to their classroom context. Focus: six subject labels.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "answerKey": {
+        "Y4M02-Q009-L1": "Y4M02-Q009-R1",
+        "Y4M02-Q009-L2": "Y4M02-Q009-R2",
+        "Y4M02-Q009-L3": "Y4M02-Q009-R3",
+        "Y4M02-Q009-L4": "Y4M02-Q009-R4",
+        "Y4M02-Q009-L5": "Y4M02-Q009-R5",
+        "Y4M02-Q009-L6": "Y4M02-Q009-R6"
+      },
+      "semanticTargets": [
+        "art",
+        "english",
+        "geography",
+        "history",
+        "mathematics",
+        "science"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q009",
+          "mediaId": "IMG-V11-2B-CF361B72DB38F24E",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "mathematics",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q009-R1"
+        },
+        {
+          "questionId": "Y4M02-Q009",
+          "mediaId": "IMG-V11-2B-D12AE70F693DD028",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "science",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q009-R2"
+        },
+        {
+          "questionId": "Y4M02-Q009",
+          "mediaId": "IMG-V11-2B-24AE191AA3634A76",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "history",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q009-R3"
+        },
+        {
+          "questionId": "Y4M02-Q009",
+          "mediaId": "Y1M01-EMOJI-ART-001",
+          "contractPath": "pairs[3].b",
+          "role": "CONTENT",
+          "semanticTarget": "art",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q009-R4"
+        },
+        {
+          "questionId": "Y4M02-Q009",
+          "mediaId": "IMG-V11-2B-0B255AF22079ACF0",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "english",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q009-R5"
+        },
+        {
+          "questionId": "Y4M02-Q009",
+          "mediaId": "IMG-V11-2B-FA3CBDF0A99332B9",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "geography",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q009-R6"
+        }
+      ],
+      "sourceQuestionContractSha256": "4b33b4cb3f88a75f2da47e1917eae07a54c93a42d07904889eccb5ab1dae4c10"
+    },
+    {
+      "questionId": "Y4M02-Q010",
+      "sequencePosition": 10,
+      "topicEn": "School Life",
+      "taskType": "Connect related source-backed semantic items.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "comprehension: Identify/read school subjects and state a favorite. Focus: express preference.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "answerKey": {
+        "Y4M02-Q010-L1": "Y4M02-Q010-R1",
+        "Y4M02-Q010-L2": "Y4M02-Q010-R2",
+        "Y4M02-Q010-L3": "Y4M02-Q010-R3",
+        "Y4M02-Q010-L4": "Y4M02-Q010-R4"
+      },
+      "semanticTargets": [
+        "i do not like carrots",
+        "i like apples",
+        "i like papaya",
+        "i prefer grapes"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q010",
+          "mediaId": "IMG-V11-2B-F2B1512D42DAD7B2",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "i prefer grapes",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q010-R1"
+        },
+        {
+          "questionId": "Y4M02-Q010",
+          "mediaId": "IMG-V11-2B-20C32A7B846CD05A",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "i do not like carrots",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q010-R2"
+        },
+        {
+          "questionId": "Y4M02-Q010",
+          "mediaId": "IMG-V11-2B-8050E659DDF0AE39",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "i like papaya",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q010-R3"
+        },
+        {
+          "questionId": "Y4M02-Q010",
+          "mediaId": "IMG-V11-2B-9308452ECEE535F7",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "i like apples",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q010-R4"
+        }
+      ],
+      "sourceQuestionContractSha256": "9425146987cf6be793b9c8732978da5a12f15ebd467560f1a429db199866b1a2"
+    },
+    {
+      "questionId": "Y4M02-Q011",
+      "sequencePosition": 11,
+      "topicEn": "School Life",
+      "taskType": "Drag each delivered stimulus to its one-to-one semantic visual.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "comprehension: Identify/read school subjects and state a favorite. Focus: Mathematics.",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "supportInstructionPt": "Combine cada áudio com sua imagem.",
+      "answerKey": {
+        "Y4M02-Q011-I1": "Y4M02-Q011-T1",
+        "Y4M02-Q011-I2": "Y4M02-Q011-T2",
+        "Y4M02-Q011-I3": "Y4M02-Q011-T3",
+        "Y4M02-Q011-I4": "Y4M02-Q011-T4"
+      },
+      "semanticTargets": [
+        "nine minus five equals four",
+        "six minus two equals four",
+        "three plus four equals seven",
+        "two plus three equals five"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q011",
+          "mediaId": "IMG-V11-2B-C1BC182FD8E80824",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "three plus four equals seven",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q011-T1"
+        },
+        {
+          "questionId": "Y4M02-Q011",
+          "mediaId": "IMG-V11-2B-D74453328D45A91B",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "nine minus five equals four",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q011-T2"
+        },
+        {
+          "questionId": "Y4M02-Q011",
+          "mediaId": "IMG-V11-2B-D479ABE00CDCCB74",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "two plus three equals five",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q011-T3"
+        },
+        {
+          "questionId": "Y4M02-Q011",
+          "mediaId": "IMG-V11-2B-6FFE58151EAD0CA0",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "six minus two equals four",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q011-T4"
+        }
+      ],
+      "sourceQuestionContractSha256": "6803539f72701acdbaf36f1fed217c5db67542c36d15cc4dad67af2424ced8ac"
+    },
+    {
+      "questionId": "Y4M02-Q012",
+      "sequencePosition": 12,
+      "topicEn": "School Life",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "comprehension: Identify/read school subjects and state a favorite. Focus: favorite pattern.",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "supportInstructionPt": "Ouça e acerte a opção correspondente.",
+      "answerKey": "Y4M02-Q012-O1",
+      "semanticTargets": [
+        "art",
+        "english",
+        "geography",
+        "mathematics"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q012",
+          "mediaId": "Y1M01-EMOJI-ART-001",
+          "contractPath": "options[0]",
+          "role": "CONTENT",
+          "semanticTarget": "art",
+          "correct": true,
+          "optionOrCardId": "Y4M02-Q012-O1"
+        },
+        {
+          "questionId": "Y4M02-Q012",
+          "mediaId": "IMG-V11-2B-925D0D65A4C27655",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "english",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q012-O2"
+        },
+        {
+          "questionId": "Y4M02-Q012",
+          "mediaId": "IMG-V11-2B-9C61EBB04E4F0405",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "geography",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q012-O3"
+        },
+        {
+          "questionId": "Y4M02-Q012",
+          "mediaId": "IMG-V11-2B-F6B814EBB2AA67CB",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "mathematics",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q012-O4"
+        }
+      ],
+      "sourceQuestionContractSha256": "84fef13001946ccf6dabd09f91e390cbcef0965dee39b3d85f4cc707e12f4a16"
+    },
+    {
+      "questionId": "Y4M02-Q013",
+      "sequencePosition": 13,
+      "topicEn": "School Life",
+      "taskType": "Connect related source-backed semantic items.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "listening: Identify/read school subjects and state a favorite. Focus: six subject labels.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "answerKey": {
+        "Y4M02-Q013-L1": "Y4M02-Q013-R1",
+        "Y4M02-Q013-L2": "Y4M02-Q013-R2",
+        "Y4M02-Q013-L3": "Y4M02-Q013-R3",
+        "Y4M02-Q013-L4": "Y4M02-Q013-R4",
+        "Y4M02-Q013-L5": "Y4M02-Q013-R5",
+        "Y4M02-Q013-L6": "Y4M02-Q013-R6"
+      },
+      "semanticTargets": [
+        "art",
+        "english",
+        "geography",
+        "history",
+        "mathematics",
+        "science"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q013",
+          "mediaId": "IMG-V11-2B-0B255AF22079ACF0",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "english",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q013-R1"
+        },
+        {
+          "questionId": "Y4M02-Q013",
+          "mediaId": "IMG-V11-2B-FA3CBDF0A99332B9",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "geography",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q013-R2"
+        },
+        {
+          "questionId": "Y4M02-Q013",
+          "mediaId": "IMG-V11-2B-CF361B72DB38F24E",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "mathematics",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q013-R3"
+        },
+        {
+          "questionId": "Y4M02-Q013",
+          "mediaId": "IMG-V11-2B-D12AE70F693DD028",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "science",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q013-R4"
+        },
+        {
+          "questionId": "Y4M02-Q013",
+          "mediaId": "IMG-V11-2B-24AE191AA3634A76",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "history",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q013-R5"
+        },
+        {
+          "questionId": "Y4M02-Q013",
+          "mediaId": "Y1M01-EMOJI-ART-001",
+          "contractPath": "pairs[5].b",
+          "role": "CONTENT",
+          "semanticTarget": "art",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q013-R6"
+        }
+      ],
+      "sourceQuestionContractSha256": "fa84c956d256d74c46d6df6cfba480f6a02c4ddce05a2d21e407956d74ca9ef8"
+    },
+    {
+      "questionId": "Y4M02-Q014",
+      "sequencePosition": 14,
+      "topicEn": "School Life",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "listening: Identify/read school subjects and state a favorite. Focus: What's this?.",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "supportInstructionPt": "Ouça e estoure a bolha correspondente.",
+      "answerKey": "Y4M02-Q014-O1",
+      "semanticTargets": [
+        "blue square",
+        "english",
+        "geography",
+        "green circle",
+        "red triangle",
+        "yellow rectangle"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q014",
+          "mediaId": "IMG-V11-2B-8A1539773070D30D",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "blue square",
+          "correct": true,
+          "optionOrCardId": "Y4M02-Q014-O1"
+        },
+        {
+          "questionId": "Y4M02-Q014",
+          "mediaId": "IMG-V11-2B-504674DEDCB9FDCE",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "red triangle",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q014-O2"
+        },
+        {
+          "questionId": "Y4M02-Q014",
+          "mediaId": "IMG-V11-2B-C71E27A94D5A8AF0",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "yellow rectangle",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q014-O3"
+        },
+        {
+          "questionId": "Y4M02-Q014",
+          "mediaId": "IMG-V11-2B-6067E6DE84C0E5C7",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "green circle",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q014-O4"
+        },
+        {
+          "questionId": "Y4M02-Q014",
+          "mediaId": "IMG-V11-2B-8A1539773070D30D",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "blue square",
+          "correct": true,
+          "optionOrCardId": "Y4M02-Q014-O1"
+        },
+        {
+          "questionId": "Y4M02-Q014",
+          "mediaId": "IMG-V11-2B-504674DEDCB9FDCE",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "red triangle",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q014-D1"
+        },
+        {
+          "questionId": "Y4M02-Q014",
+          "mediaId": "IMG-V11-2B-C71E27A94D5A8AF0",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "yellow rectangle",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q014-D2"
+        },
+        {
+          "questionId": "Y4M02-Q014",
+          "mediaId": "IMG-V11-2B-6067E6DE84C0E5C7",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "green circle",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q014-D3"
+        },
+        {
+          "questionId": "Y4M02-Q014",
+          "mediaId": "IMG-V11-2B-7CEF9891D59562FE",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "english",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q014-D4"
+        },
+        {
+          "questionId": "Y4M02-Q014",
+          "mediaId": "IMG-V11-2B-4B72C84EB092340A",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "geography",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q014-D5"
+        }
+      ],
+      "sourceQuestionContractSha256": "de9e2792613f295040bb8e18fa40ed212a0f18ec3053adcd087ce3917428b8ce"
+    },
+    {
+      "questionId": "Y4M02-Q015",
+      "sequencePosition": 15,
+      "topicEn": "School Life",
+      "taskType": "Reveal two cards and pair by semantic identity in AUDIO_TEXT.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "Moves familiar subject labels from image-supported reading to sound-form retrieval without inventing a school timetable. Curricular target: English; Geography; Mathematics; Science; History; Art.",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_TEXT",
+      "primaryInstructionEn": "Find the matching pairs.",
+      "supportInstructionPt": "Encontre os pares correspondentes.",
+      "answerKey": [
+        "Y4M02-Q015-P1",
+        "Y4M02-Q015-P2",
+        "Y4M02-Q015-P3",
+        "Y4M02-Q015-P4",
+        "Y4M02-Q015-P5",
+        "Y4M02-Q015-P6"
+      ],
+      "semanticTargets": [
+        "art",
+        "english",
+        "geography",
+        "history",
+        "mathematics",
+        "science"
+      ],
+      "visualUsages": [],
+      "sourceQuestionContractSha256": "64add17fa2055cf450281675e4f19b7c1a9aafc13f2431ee16b8aa173dc9bbaf"
+    },
+    {
+      "questionId": "Y4M02-Q016",
+      "sequencePosition": 16,
+      "topicEn": "School Life",
+      "taskType": "Connect related source-backed semantic items.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "retrieval: Identify/read school subjects and state a favorite. Focus: Science.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "answerKey": {
+        "Y4M02-Q016-L1": "Y4M02-Q016-R1",
+        "Y4M02-Q016-L2": "Y4M02-Q016-R2",
+        "Y4M02-Q016-L3": "Y4M02-Q016-R3",
+        "Y4M02-Q016-L4": "Y4M02-Q016-R4",
+        "Y4M02-Q016-L5": "Y4M02-Q016-R5"
+      },
+      "semanticTargets": [
+        "art",
+        "english",
+        "geography",
+        "history",
+        "science"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q016",
+          "mediaId": "IMG-V11-2B-D12AE70F693DD028",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "science",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q016-R1"
+        },
+        {
+          "questionId": "Y4M02-Q016",
+          "mediaId": "IMG-V11-2B-24AE191AA3634A76",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "history",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q016-R2"
+        },
+        {
+          "questionId": "Y4M02-Q016",
+          "mediaId": "Y1M01-EMOJI-ART-001",
+          "contractPath": "pairs[2].b",
+          "role": "CONTENT",
+          "semanticTarget": "art",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q016-R3"
+        },
+        {
+          "questionId": "Y4M02-Q016",
+          "mediaId": "IMG-V11-2B-0B255AF22079ACF0",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "english",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q016-R4"
+        },
+        {
+          "questionId": "Y4M02-Q016",
+          "mediaId": "IMG-V11-2B-FA3CBDF0A99332B9",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "geography",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q016-R5"
+        }
+      ],
+      "sourceQuestionContractSha256": "4eb26e30928af6019f14d00a4a417254eea58b9a8ca08777b02ddd32b102f347"
+    },
+    {
+      "questionId": "Y4M02-Q017",
+      "sequencePosition": 17,
+      "topicEn": "School Life",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "review: Identify/read school subjects and state a favorite. Focus: alphabet/spelling.",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "supportInstructionPt": "Ouça e acerte a opção correspondente.",
+      "answerKey": "Y4M02-Q017-O1",
+      "semanticTargets": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q017",
+          "mediaId": "IMG-V11-2B-34691F7FF392D134",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "a",
+          "correct": true,
+          "optionOrCardId": "Y4M02-Q017-O1"
+        },
+        {
+          "questionId": "Y4M02-Q017",
+          "mediaId": "IMG-V11-2B-B53AD4A3B76BCB34",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "b",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q017-O2"
+        },
+        {
+          "questionId": "Y4M02-Q017",
+          "mediaId": "IMG-V11-2B-5FC56902AD57463A",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "c",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q017-O3"
+        },
+        {
+          "questionId": "Y4M02-Q017",
+          "mediaId": "IMG-V11-2B-5A685792F5F3892E",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "d",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q017-O4"
+        }
+      ],
+      "sourceQuestionContractSha256": "e9fda819bc3371885e760841fa9c4b841b570cb32082fff30bfe0d2554e35434"
+    },
+    {
+      "questionId": "Y4M02-Q018",
+      "sequencePosition": 18,
+      "topicEn": "School Life",
+      "taskType": "Select the source-backed word/chunk completing the familiar structure.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "review: Identify/read school subjects and state a favorite. Focus: six subject labels.",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "primaryInstructionEn": "Look at the picture and complete the sentence.",
+      "supportInstructionPt": "De acordo com a imagem, complete a frase.",
+      "answerKey": "Art",
+      "semanticTargets": [
+        "art"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q018",
+          "mediaId": "Y1M01-EMOJI-ART-001",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "art",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "sourceQuestionContractSha256": "dca04f635933026d7c42b56be68a1ba9b67ecad792065ab933d3435e35a243e9"
+    },
+    {
+      "questionId": "Y4M02-Q019",
+      "sequencePosition": 19,
+      "topicEn": "School Life",
+      "taskType": "Arrange familiar source-backed chunks in the modeled order.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "consolidation: Identify/read school subjects and state a favorite. Focus: This is a/an....",
+      "mechanicId": "smart-sentence-order",
+      "mechanicMode": "order",
+      "primaryInstructionEn": "Put the words in order.",
+      "supportInstructionPt": "Coloque as palavras na ordem correta.",
+      "answerKey": [
+        "My",
+        "favorite",
+        "subject",
+        "is",
+        "English"
+      ],
+      "semanticTargets": [],
+      "visualUsages": [],
+      "sourceQuestionContractSha256": "dcbd0bd11ab340c35a176f5c8570f7002c092975362ee1a34971aa21e483bc0e"
+    },
+    {
+      "questionId": "Y4M02-Q020",
+      "sequencePosition": 20,
+      "topicEn": "School Life",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify subject from short spoken clue.",
+      "learningTarget": "consolidation: Identify/read school subjects and state a favorite. Focus: express preference.",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "supportInstructionPt": "Ouça e estoure a bolha correspondente.",
+      "answerKey": "Y4M02-Q020-O1",
+      "semanticTargets": [
+        "english",
+        "geography",
+        "i do not like carrots",
+        "i like apples",
+        "i like papaya",
+        "i prefer grapes"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M02-Q020",
+          "mediaId": "IMG-V11-2B-8402FF71A9476919",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "i like papaya",
+          "correct": true,
+          "optionOrCardId": "Y4M02-Q020-O1"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "i like apples",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q020-O2"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "i prefer grapes",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q020-O3"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "i do not like carrots",
+          "correct": false,
+          "optionOrCardId": "Y4M02-Q020-O4"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "mediaId": "IMG-V11-2B-8402FF71A9476919",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "i like papaya",
+          "correct": true,
+          "optionOrCardId": "Y4M02-Q020-O1"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "i like apples",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q020-D1"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "i prefer grapes",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q020-D2"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "i do not like carrots",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q020-D3"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "mediaId": "IMG-V11-2B-7CEF9891D59562FE",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "english",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q020-D4"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "mediaId": "IMG-V11-2B-4B72C84EB092340A",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "geography",
+          "correct": null,
+          "optionOrCardId": "Y4M02-Q020-D5"
+        }
+      ],
+      "sourceQuestionContractSha256": "4b8d5946f9b6317c1513a71a78551111648be5c746c0b9bea576525f6ae8a723"
+    }
+  ],
+  "questionContractsModified": false,
+  "answersModified": false
+}

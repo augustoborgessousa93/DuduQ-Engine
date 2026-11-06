@@ -1,0 +1,1497 @@
+{
+  "schemaVersion": "DUDUQ_Y4M02_OCCURRENCE_SCOPED_BINDING_PLAN_V1",
+  "createdAt": "2026-11-06T15:07:26.406Z",
+  "moduleId": "Y4M02",
+  "lane": "generation",
+  "mode": "PLAN_ONLY_NO_SOURCE_OR_REGISTRY_MUTATION",
+  "sourceQuestionFile": "dist-pages/content/english/year-4/module-02/questions.json",
+  "sourceQuestionSha256": "ad303063d8044abdd86d9d71bef5b8a3bc93ad7a18eaa27a4d2dd56cbf7d3f77",
+  "sourcePendingMediaIdCount": 39,
+  "coveredSourceMediaIdCount": 39,
+  "occurrenceScopedBindingCount": 78,
+  "questionContractsReviewed": 20,
+  "bindings": [
+    {
+      "sourceMediaId": "IMG-V11-2B-4B72C84EB092340A",
+      "questionId": "Y4M02-Q001",
+      "semanticTarget": "geography",
+      "plannedMediaId": "IMG-Y4M02-Q001-CTX-BC828774CBC5",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q001-T2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "candidateSha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "sourceQuestionContractSha256": "05b9cb314f4291c480c2978ff1f30cf9f394daf76b4d6e4dd199e1405202a6f2",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-7CEF9891D59562FE",
+      "questionId": "Y4M02-Q001",
+      "semanticTarget": "english",
+      "plannedMediaId": "IMG-Y4M02-Q001-CTX-36D07B3CBAEB",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q001-T1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ENGLISH.png",
+      "candidateSha256": "850e9b0fd0061baeca2dcc722d4ff6babacf2ff18de73b369ae2b770f52261bd",
+      "sourceQuestionContractSha256": "05b9cb314f4291c480c2978ff1f30cf9f394daf76b4d6e4dd199e1405202a6f2",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-C8365730261BA43A",
+      "questionId": "Y4M02-Q001",
+      "semanticTarget": "mathematics",
+      "plannedMediaId": "IMG-Y4M02-Q001-CTX-F2952A5A30A3",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q001-T3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-MATHEMATICS.png",
+      "candidateSha256": "2c8ed7171f0f10ce7b77aa492c2364e4dbd0ef3de5d0fe4ed78e2a225de0d841",
+      "sourceQuestionContractSha256": "05b9cb314f4291c480c2978ff1f30cf9f394daf76b4d6e4dd199e1405202a6f2",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-CC82E066C948B4A2",
+      "questionId": "Y4M02-Q001",
+      "semanticTarget": "science",
+      "plannedMediaId": "IMG-Y4M02-Q001-CTX-39957E91CBB8",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q001-T4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-SCIENCE.png",
+      "candidateSha256": "4db85d8cf2b5dd47ea2ec7669860d59275b3d6c19f2cfd7718b05fc949750cbb",
+      "sourceQuestionContractSha256": "05b9cb314f4291c480c2978ff1f30cf9f394daf76b4d6e4dd199e1405202a6f2",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-34691F7FF392D134",
+      "questionId": "Y4M02-Q002",
+      "semanticTarget": "a",
+      "plannedMediaId": "IMG-Y4M02-Q002-CTX-34762CA5B2CC",
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q002-D1",
+        "Y4M02-Q002-O2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-LETTER-A.png",
+      "candidateSha256": "45a0be67a1decff6ca5568884f271d1fd5b90faa9dcb5ca876e455d10eb9d38e",
+      "sourceQuestionContractSha256": "e632d25148a1d8dea68e06401dd61383958283f3181186d69341607d3dad1872",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-4B72C84EB092340A",
+      "questionId": "Y4M02-Q002",
+      "semanticTarget": "geography",
+      "plannedMediaId": "IMG-Y4M02-Q002-CTX-14382908959B",
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M02-Q002-D5"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "candidateSha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "sourceQuestionContractSha256": "e632d25148a1d8dea68e06401dd61383958283f3181186d69341607d3dad1872",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-5A685792F5F3892E",
+      "questionId": "Y4M02-Q002",
+      "semanticTarget": "d",
+      "plannedMediaId": "IMG-Y4M02-Q002-CTX-0225FC74ED3D",
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q002-D3",
+        "Y4M02-Q002-O4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-LETTER-D.png",
+      "candidateSha256": "699a56752b3917251bfec5453216ec14dbc4a562476c56d4eabf4be59c5cff75",
+      "sourceQuestionContractSha256": "e632d25148a1d8dea68e06401dd61383958283f3181186d69341607d3dad1872",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-5FC56902AD57463A",
+      "questionId": "Y4M02-Q002",
+      "semanticTarget": "c",
+      "plannedMediaId": "IMG-Y4M02-Q002-CTX-CB59121A5285",
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q002-D2",
+        "Y4M02-Q002-O3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-LETTER-C.png",
+      "candidateSha256": "8b71947d742140dbb5da17de8cfcba88763cebad499069b700dfcb5f40b6546b",
+      "sourceQuestionContractSha256": "e632d25148a1d8dea68e06401dd61383958283f3181186d69341607d3dad1872",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-7CEF9891D59562FE",
+      "questionId": "Y4M02-Q002",
+      "semanticTarget": "english",
+      "plannedMediaId": "IMG-Y4M02-Q002-CTX-DBFA1EBED192",
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M02-Q002-D4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ENGLISH.png",
+      "candidateSha256": "850e9b0fd0061baeca2dcc722d4ff6babacf2ff18de73b369ae2b770f52261bd",
+      "sourceQuestionContractSha256": "e632d25148a1d8dea68e06401dd61383958283f3181186d69341607d3dad1872",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-B53AD4A3B76BCB34",
+      "questionId": "Y4M02-Q002",
+      "semanticTarget": "b",
+      "plannedMediaId": "IMG-Y4M02-Q002-CTX-4CEB6AAE1A94",
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q002-O1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-LETTER-B.png",
+      "candidateSha256": "c106081f6e8b230577b66ed0b9e4583e708e86aeb182e7bbf010fb761f132e2b",
+      "sourceQuestionContractSha256": "e632d25148a1d8dea68e06401dd61383958283f3181186d69341607d3dad1872",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-2662DECD66839419",
+      "questionId": "Y4M02-Q004",
+      "semanticTarget": "science",
+      "plannedMediaId": "IMG-Y4M02-Q004-CTX-87092103E8AC",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q004-O1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-SCIENCE.png",
+      "candidateSha256": "4db85d8cf2b5dd47ea2ec7669860d59275b3d6c19f2cfd7718b05fc949750cbb",
+      "sourceQuestionContractSha256": "2798853c0c99027aa263a7bc0595f3707d005fa939d5670e988a4210bd7e1fe7",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-925D0D65A4C27655",
+      "questionId": "Y4M02-Q004",
+      "semanticTarget": "english",
+      "plannedMediaId": "IMG-Y4M02-Q004-CTX-E319F8EDB06F",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q004-O2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ENGLISH.png",
+      "candidateSha256": "850e9b0fd0061baeca2dcc722d4ff6babacf2ff18de73b369ae2b770f52261bd",
+      "sourceQuestionContractSha256": "2798853c0c99027aa263a7bc0595f3707d005fa939d5670e988a4210bd7e1fe7",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-9C61EBB04E4F0405",
+      "questionId": "Y4M02-Q004",
+      "semanticTarget": "geography",
+      "plannedMediaId": "IMG-Y4M02-Q004-CTX-940BCA8E1640",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q004-O3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "candidateSha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "sourceQuestionContractSha256": "2798853c0c99027aa263a7bc0595f3707d005fa939d5670e988a4210bd7e1fe7",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-F6B814EBB2AA67CB",
+      "questionId": "Y4M02-Q004",
+      "semanticTarget": "mathematics",
+      "plannedMediaId": "IMG-Y4M02-Q004-CTX-D90DFABE73A2",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q004-O4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-MATHEMATICS.png",
+      "candidateSha256": "2c8ed7171f0f10ce7b77aa492c2364e4dbd0ef3de5d0fe4ed78e2a225de0d841",
+      "sourceQuestionContractSha256": "2798853c0c99027aa263a7bc0595f3707d005fa939d5670e988a4210bd7e1fe7",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-1651BBDF0637DE4E",
+      "questionId": "Y4M02-Q005",
+      "semanticTarget": "history",
+      "plannedMediaId": "IMG-Y4M02-Q005-CTX-6A0E5CC9C4E5",
+      "contractPaths": [
+        "pairs[0].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": [],
+      "candidateFile": "images/DUDUQ-Y4M02-HISTORY.png",
+      "candidateSha256": "65d289b1680f0381118c429e49f3c87cbe66af45c9424a04c279b99c6f70f675",
+      "sourceQuestionContractSha256": "6adefd7b526abf9d04ef3309796ec629a2a5c1cdb631d9d0ec92a490acfd7ad6",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-3679D098470A87AF",
+      "questionId": "Y4M02-Q005",
+      "semanticTarget": "english",
+      "plannedMediaId": "IMG-Y4M02-Q005-CTX-C5D580121150",
+      "contractPaths": [
+        "pairs[2].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": [],
+      "candidateFile": "images/DUDUQ-Y4M02-ENGLISH.png",
+      "candidateSha256": "850e9b0fd0061baeca2dcc722d4ff6babacf2ff18de73b369ae2b770f52261bd",
+      "sourceQuestionContractSha256": "6adefd7b526abf9d04ef3309796ec629a2a5c1cdb631d9d0ec92a490acfd7ad6",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-61A2BC233D5DC6FA",
+      "questionId": "Y4M02-Q005",
+      "semanticTarget": "science",
+      "plannedMediaId": "IMG-Y4M02-Q005-CTX-3DD29944CDE6",
+      "contractPaths": [
+        "pairs[5].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": [],
+      "candidateFile": "images/DUDUQ-Y4M02-SCIENCE.png",
+      "candidateSha256": "4db85d8cf2b5dd47ea2ec7669860d59275b3d6c19f2cfd7718b05fc949750cbb",
+      "sourceQuestionContractSha256": "6adefd7b526abf9d04ef3309796ec629a2a5c1cdb631d9d0ec92a490acfd7ad6",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-BC972A558AE93D79",
+      "questionId": "Y4M02-Q005",
+      "semanticTarget": "mathematics",
+      "plannedMediaId": "IMG-Y4M02-Q005-CTX-3468804F81F6",
+      "contractPaths": [
+        "pairs[4].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": [],
+      "candidateFile": "images/DUDUQ-Y4M02-MATHEMATICS.png",
+      "candidateSha256": "2c8ed7171f0f10ce7b77aa492c2364e4dbd0ef3de5d0fe4ed78e2a225de0d841",
+      "sourceQuestionContractSha256": "6adefd7b526abf9d04ef3309796ec629a2a5c1cdb631d9d0ec92a490acfd7ad6",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-F30886117165DA8E",
+      "questionId": "Y4M02-Q005",
+      "semanticTarget": "geography",
+      "plannedMediaId": "IMG-Y4M02-Q005-CTX-C337785AE513",
+      "contractPaths": [
+        "pairs[3].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": [],
+      "candidateFile": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "candidateSha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "sourceQuestionContractSha256": "6adefd7b526abf9d04ef3309796ec629a2a5c1cdb631d9d0ec92a490acfd7ad6",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "Y1M01-EMOJI-ART-001",
+      "questionId": "Y4M02-Q005",
+      "semanticTarget": "art",
+      "plannedMediaId": "IMG-Y4M02-Q005-CTX-59C1534D94C2",
+      "contractPaths": [
+        "pairs[1].cards[1]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [],
+      "candidateFile": "images/DUDUQ-Y4M02-ART.png",
+      "candidateSha256": "1e472cc18685ff86d63b94e0fa0ed771d944ea0ec21885c6b96c088d8c12f403",
+      "sourceQuestionContractSha256": "6adefd7b526abf9d04ef3309796ec629a2a5c1cdb631d9d0ec92a490acfd7ad6",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-24AE191AA3634A76",
+      "questionId": "Y4M02-Q006",
+      "semanticTarget": "history",
+      "plannedMediaId": "IMG-Y4M02-Q006-CTX-4BCCF86DE4E9",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q006-R4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-HISTORY.png",
+      "candidateSha256": "65d289b1680f0381118c429e49f3c87cbe66af45c9424a04c279b99c6f70f675",
+      "sourceQuestionContractSha256": "1172f27595dbedd94011e2bf7aa380870bc7f415688d148b2ff05a345f2e85e6",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-CF361B72DB38F24E",
+      "questionId": "Y4M02-Q006",
+      "semanticTarget": "mathematics",
+      "plannedMediaId": "IMG-Y4M02-Q006-CTX-03612EEC8066",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q006-R2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-MATHEMATICS.png",
+      "candidateSha256": "2c8ed7171f0f10ce7b77aa492c2364e4dbd0ef3de5d0fe4ed78e2a225de0d841",
+      "sourceQuestionContractSha256": "1172f27595dbedd94011e2bf7aa380870bc7f415688d148b2ff05a345f2e85e6",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-D12AE70F693DD028",
+      "questionId": "Y4M02-Q006",
+      "semanticTarget": "science",
+      "plannedMediaId": "IMG-Y4M02-Q006-CTX-7D6B59FF5065",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q006-R3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-SCIENCE.png",
+      "candidateSha256": "4db85d8cf2b5dd47ea2ec7669860d59275b3d6c19f2cfd7718b05fc949750cbb",
+      "sourceQuestionContractSha256": "1172f27595dbedd94011e2bf7aa380870bc7f415688d148b2ff05a345f2e85e6",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-FA3CBDF0A99332B9",
+      "questionId": "Y4M02-Q006",
+      "semanticTarget": "geography",
+      "plannedMediaId": "IMG-Y4M02-Q006-CTX-1E0B60427643",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q006-R1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "candidateSha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "sourceQuestionContractSha256": "1172f27595dbedd94011e2bf7aa380870bc7f415688d148b2ff05a345f2e85e6",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "Y1M01-EMOJI-ART-001",
+      "questionId": "Y4M02-Q006",
+      "semanticTarget": "art",
+      "plannedMediaId": "IMG-Y4M02-Q006-CTX-882D4F90B2CB",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q006-R5"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ART.png",
+      "candidateSha256": "1e472cc18685ff86d63b94e0fa0ed771d944ea0ec21885c6b96c088d8c12f403",
+      "sourceQuestionContractSha256": "1172f27595dbedd94011e2bf7aa380870bc7f415688d148b2ff05a345f2e85e6",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-2662DECD66839419",
+      "questionId": "Y4M02-Q007",
+      "semanticTarget": "science",
+      "plannedMediaId": "IMG-Y4M02-Q007-CTX-74E4920D9D39",
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q007-D3",
+        "Y4M02-Q007-O4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-SCIENCE.png",
+      "candidateSha256": "4db85d8cf2b5dd47ea2ec7669860d59275b3d6c19f2cfd7718b05fc949750cbb",
+      "sourceQuestionContractSha256": "f93dd6655d6a66a40c9782d74e7d27dc76300a2ecaab0628c8f22bf8e3fb2a08",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-34691F7FF392D134",
+      "questionId": "Y4M02-Q007",
+      "semanticTarget": "a",
+      "plannedMediaId": "IMG-Y4M02-Q007-CTX-7FBB41C36E87",
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M02-Q007-D5"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-LETTER-A.png",
+      "candidateSha256": "45a0be67a1decff6ca5568884f271d1fd5b90faa9dcb5ca876e455d10eb9d38e",
+      "sourceQuestionContractSha256": "f93dd6655d6a66a40c9782d74e7d27dc76300a2ecaab0628c8f22bf8e3fb2a08",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-925D0D65A4C27655",
+      "questionId": "Y4M02-Q007",
+      "semanticTarget": "english",
+      "plannedMediaId": "IMG-Y4M02-Q007-CTX-2B377E3AE2A2",
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q007-O1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ENGLISH.png",
+      "candidateSha256": "850e9b0fd0061baeca2dcc722d4ff6babacf2ff18de73b369ae2b770f52261bd",
+      "sourceQuestionContractSha256": "f93dd6655d6a66a40c9782d74e7d27dc76300a2ecaab0628c8f22bf8e3fb2a08",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-9C61EBB04E4F0405",
+      "questionId": "Y4M02-Q007",
+      "semanticTarget": "geography",
+      "plannedMediaId": "IMG-Y4M02-Q007-CTX-DC87E13F59D3",
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q007-D1",
+        "Y4M02-Q007-O2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "candidateSha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "sourceQuestionContractSha256": "f93dd6655d6a66a40c9782d74e7d27dc76300a2ecaab0628c8f22bf8e3fb2a08",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-B53AD4A3B76BCB34",
+      "questionId": "Y4M02-Q007",
+      "semanticTarget": "b",
+      "plannedMediaId": "IMG-Y4M02-Q007-CTX-5D32F98F8251",
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M02-Q007-D4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-LETTER-B.png",
+      "candidateSha256": "c106081f6e8b230577b66ed0b9e4583e708e86aeb182e7bbf010fb761f132e2b",
+      "sourceQuestionContractSha256": "f93dd6655d6a66a40c9782d74e7d27dc76300a2ecaab0628c8f22bf8e3fb2a08",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-F6B814EBB2AA67CB",
+      "questionId": "Y4M02-Q007",
+      "semanticTarget": "mathematics",
+      "plannedMediaId": "IMG-Y4M02-Q007-CTX-20B34B0152A3",
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q007-D2",
+        "Y4M02-Q007-O3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-MATHEMATICS.png",
+      "candidateSha256": "2c8ed7171f0f10ce7b77aa492c2364e4dbd0ef3de5d0fe4ed78e2a225de0d841",
+      "sourceQuestionContractSha256": "f93dd6655d6a66a40c9782d74e7d27dc76300a2ecaab0628c8f22bf8e3fb2a08",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-4B72C84EB092340A",
+      "questionId": "Y4M02-Q008",
+      "semanticTarget": "geography",
+      "plannedMediaId": "IMG-Y4M02-Q008-CTX-09FDA4735ABB",
+      "contractPaths": [
+        "mediaBindings[0]"
+      ],
+      "roles": [
+        "SUPPORTING_IMAGE"
+      ],
+      "optionOrCardIds": [],
+      "candidateFile": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "candidateSha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "sourceQuestionContractSha256": "62900d06ffcc141c165dcac1d7c42798c7df24a4e17cc36ceb178fbe968728bd",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-0B255AF22079ACF0",
+      "questionId": "Y4M02-Q009",
+      "semanticTarget": "english",
+      "plannedMediaId": "IMG-Y4M02-Q009-CTX-950C28394534",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q009-R5"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ENGLISH.png",
+      "candidateSha256": "850e9b0fd0061baeca2dcc722d4ff6babacf2ff18de73b369ae2b770f52261bd",
+      "sourceQuestionContractSha256": "4b33b4cb3f88a75f2da47e1917eae07a54c93a42d07904889eccb5ab1dae4c10",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-24AE191AA3634A76",
+      "questionId": "Y4M02-Q009",
+      "semanticTarget": "history",
+      "plannedMediaId": "IMG-Y4M02-Q009-CTX-7B3C2B0F7953",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q009-R3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-HISTORY.png",
+      "candidateSha256": "65d289b1680f0381118c429e49f3c87cbe66af45c9424a04c279b99c6f70f675",
+      "sourceQuestionContractSha256": "4b33b4cb3f88a75f2da47e1917eae07a54c93a42d07904889eccb5ab1dae4c10",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-CF361B72DB38F24E",
+      "questionId": "Y4M02-Q009",
+      "semanticTarget": "mathematics",
+      "plannedMediaId": "IMG-Y4M02-Q009-CTX-9192B96C0B9D",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q009-R1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-MATHEMATICS.png",
+      "candidateSha256": "2c8ed7171f0f10ce7b77aa492c2364e4dbd0ef3de5d0fe4ed78e2a225de0d841",
+      "sourceQuestionContractSha256": "4b33b4cb3f88a75f2da47e1917eae07a54c93a42d07904889eccb5ab1dae4c10",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-D12AE70F693DD028",
+      "questionId": "Y4M02-Q009",
+      "semanticTarget": "science",
+      "plannedMediaId": "IMG-Y4M02-Q009-CTX-CFA9DBDF655D",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q009-R2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-SCIENCE.png",
+      "candidateSha256": "4db85d8cf2b5dd47ea2ec7669860d59275b3d6c19f2cfd7718b05fc949750cbb",
+      "sourceQuestionContractSha256": "4b33b4cb3f88a75f2da47e1917eae07a54c93a42d07904889eccb5ab1dae4c10",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-FA3CBDF0A99332B9",
+      "questionId": "Y4M02-Q009",
+      "semanticTarget": "geography",
+      "plannedMediaId": "IMG-Y4M02-Q009-CTX-FCA699A68215",
+      "contractPaths": [
+        "pairs[5].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q009-R6"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "candidateSha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "sourceQuestionContractSha256": "4b33b4cb3f88a75f2da47e1917eae07a54c93a42d07904889eccb5ab1dae4c10",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "Y1M01-EMOJI-ART-001",
+      "questionId": "Y4M02-Q009",
+      "semanticTarget": "art",
+      "plannedMediaId": "IMG-Y4M02-Q009-CTX-C7697E150A5C",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q009-R4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ART.png",
+      "candidateSha256": "1e472cc18685ff86d63b94e0fa0ed771d944ea0ec21885c6b96c088d8c12f403",
+      "sourceQuestionContractSha256": "4b33b4cb3f88a75f2da47e1917eae07a54c93a42d07904889eccb5ab1dae4c10",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-20C32A7B846CD05A",
+      "questionId": "Y4M02-Q010",
+      "semanticTarget": "i do not like carrots",
+      "plannedMediaId": "IMG-Y4M02-Q010-CTX-F1D581D66F38",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q010-R2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-I-DO-NOT-LIKE-CARROTS.png",
+      "candidateSha256": "78e59be1986c13e2b05ed24395c0b1d64b0d3b8534480ecc8fa59f30d4fe369b",
+      "sourceQuestionContractSha256": "9425146987cf6be793b9c8732978da5a12f15ebd467560f1a429db199866b1a2",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-8050E659DDF0AE39",
+      "questionId": "Y4M02-Q010",
+      "semanticTarget": "i like papaya",
+      "plannedMediaId": "IMG-Y4M02-Q010-CTX-A2E58D9E292B",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q010-R3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-I-LIKE-PAPAYA.png",
+      "candidateSha256": "e26d040391bd80af05431960976ae994d8828bb7b33d74663f81a248f50cb4cc",
+      "sourceQuestionContractSha256": "9425146987cf6be793b9c8732978da5a12f15ebd467560f1a429db199866b1a2",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-9308452ECEE535F7",
+      "questionId": "Y4M02-Q010",
+      "semanticTarget": "i like apples",
+      "plannedMediaId": "IMG-Y4M02-Q010-CTX-8A4E2AFF0872",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q010-R4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-I-LIKE-APPLES.png",
+      "candidateSha256": "b378dc8a885e07048273a3393518f5a33fd2e4e9051ae359527e9ca34347a8b6",
+      "sourceQuestionContractSha256": "9425146987cf6be793b9c8732978da5a12f15ebd467560f1a429db199866b1a2",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-F2B1512D42DAD7B2",
+      "questionId": "Y4M02-Q010",
+      "semanticTarget": "i prefer grapes",
+      "plannedMediaId": "IMG-Y4M02-Q010-CTX-7418DAD98042",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q010-R1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-I-PREFER-GRAPES.png",
+      "candidateSha256": "0f16d25eccf0648830dd8b5de9bd02f3d7fb78abdff205bd8e3fc9a1cd285ca5",
+      "sourceQuestionContractSha256": "9425146987cf6be793b9c8732978da5a12f15ebd467560f1a429db199866b1a2",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-6FFE58151EAD0CA0",
+      "questionId": "Y4M02-Q011",
+      "semanticTarget": "six minus two equals four",
+      "plannedMediaId": "IMG-Y4M02-Q011-CTX-BE68C1FCFC73",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q011-T4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-SIX-MINUS-TWO-EQUALS-FOUR.png",
+      "candidateSha256": "96aa1db791e1f383952547a0e7fde89c18256bbbc275474601a7f0afcea8c849",
+      "sourceQuestionContractSha256": "6803539f72701acdbaf36f1fed217c5db67542c36d15cc4dad67af2424ced8ac",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-C1BC182FD8E80824",
+      "questionId": "Y4M02-Q011",
+      "semanticTarget": "three plus four equals seven",
+      "plannedMediaId": "IMG-Y4M02-Q011-CTX-7AC2289E0F53",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q011-T1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-THREE-PLUS-FOUR-EQUALS-SEVEN.png",
+      "candidateSha256": "def1d12aec14a94dc931c80f1128d56c44a18aa16e0b0912ac05e9f56025abec",
+      "sourceQuestionContractSha256": "6803539f72701acdbaf36f1fed217c5db67542c36d15cc4dad67af2424ced8ac",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-D479ABE00CDCCB74",
+      "questionId": "Y4M02-Q011",
+      "semanticTarget": "two plus three equals five",
+      "plannedMediaId": "IMG-Y4M02-Q011-CTX-8C6C13AF4B84",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q011-T3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-TWO-PLUS-THREE-EQUALS-FIVE.png",
+      "candidateSha256": "ce5c6aa028b3a430aaf613acc46f0f22549466af91d66ae734dbd1094ea3f831",
+      "sourceQuestionContractSha256": "6803539f72701acdbaf36f1fed217c5db67542c36d15cc4dad67af2424ced8ac",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-D74453328D45A91B",
+      "questionId": "Y4M02-Q011",
+      "semanticTarget": "nine minus five equals four",
+      "plannedMediaId": "IMG-Y4M02-Q011-CTX-EE7CD051ACF0",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q011-T2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-NINE-MINUS-FIVE-EQUALS-FOUR.png",
+      "candidateSha256": "8e90c7afe1fbc9c1bd55470adc657b76f69833ff579a4abe67a4c24d3964c0a1",
+      "sourceQuestionContractSha256": "6803539f72701acdbaf36f1fed217c5db67542c36d15cc4dad67af2424ced8ac",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-925D0D65A4C27655",
+      "questionId": "Y4M02-Q012",
+      "semanticTarget": "english",
+      "plannedMediaId": "IMG-Y4M02-Q012-CTX-5438BB0B6415",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q012-O2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ENGLISH.png",
+      "candidateSha256": "850e9b0fd0061baeca2dcc722d4ff6babacf2ff18de73b369ae2b770f52261bd",
+      "sourceQuestionContractSha256": "84fef13001946ccf6dabd09f91e390cbcef0965dee39b3d85f4cc707e12f4a16",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-9C61EBB04E4F0405",
+      "questionId": "Y4M02-Q012",
+      "semanticTarget": "geography",
+      "plannedMediaId": "IMG-Y4M02-Q012-CTX-190543054705",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q012-O3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "candidateSha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "sourceQuestionContractSha256": "84fef13001946ccf6dabd09f91e390cbcef0965dee39b3d85f4cc707e12f4a16",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-F6B814EBB2AA67CB",
+      "questionId": "Y4M02-Q012",
+      "semanticTarget": "mathematics",
+      "plannedMediaId": "IMG-Y4M02-Q012-CTX-378615B0745F",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q012-O4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-MATHEMATICS.png",
+      "candidateSha256": "2c8ed7171f0f10ce7b77aa492c2364e4dbd0ef3de5d0fe4ed78e2a225de0d841",
+      "sourceQuestionContractSha256": "84fef13001946ccf6dabd09f91e390cbcef0965dee39b3d85f4cc707e12f4a16",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "Y1M01-EMOJI-ART-001",
+      "questionId": "Y4M02-Q012",
+      "semanticTarget": "art",
+      "plannedMediaId": "IMG-Y4M02-Q012-CTX-E0BA9B5C9996",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q012-O1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ART.png",
+      "candidateSha256": "1e472cc18685ff86d63b94e0fa0ed771d944ea0ec21885c6b96c088d8c12f403",
+      "sourceQuestionContractSha256": "84fef13001946ccf6dabd09f91e390cbcef0965dee39b3d85f4cc707e12f4a16",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-0B255AF22079ACF0",
+      "questionId": "Y4M02-Q013",
+      "semanticTarget": "english",
+      "plannedMediaId": "IMG-Y4M02-Q013-CTX-B9DD312F73A9",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q013-R1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ENGLISH.png",
+      "candidateSha256": "850e9b0fd0061baeca2dcc722d4ff6babacf2ff18de73b369ae2b770f52261bd",
+      "sourceQuestionContractSha256": "fa84c956d256d74c46d6df6cfba480f6a02c4ddce05a2d21e407956d74ca9ef8",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-24AE191AA3634A76",
+      "questionId": "Y4M02-Q013",
+      "semanticTarget": "history",
+      "plannedMediaId": "IMG-Y4M02-Q013-CTX-15BF69829694",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q013-R5"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-HISTORY.png",
+      "candidateSha256": "65d289b1680f0381118c429e49f3c87cbe66af45c9424a04c279b99c6f70f675",
+      "sourceQuestionContractSha256": "fa84c956d256d74c46d6df6cfba480f6a02c4ddce05a2d21e407956d74ca9ef8",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-CF361B72DB38F24E",
+      "questionId": "Y4M02-Q013",
+      "semanticTarget": "mathematics",
+      "plannedMediaId": "IMG-Y4M02-Q013-CTX-9994FA69E167",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q013-R3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-MATHEMATICS.png",
+      "candidateSha256": "2c8ed7171f0f10ce7b77aa492c2364e4dbd0ef3de5d0fe4ed78e2a225de0d841",
+      "sourceQuestionContractSha256": "fa84c956d256d74c46d6df6cfba480f6a02c4ddce05a2d21e407956d74ca9ef8",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-D12AE70F693DD028",
+      "questionId": "Y4M02-Q013",
+      "semanticTarget": "science",
+      "plannedMediaId": "IMG-Y4M02-Q013-CTX-FB8E6A7BE39F",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q013-R4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-SCIENCE.png",
+      "candidateSha256": "4db85d8cf2b5dd47ea2ec7669860d59275b3d6c19f2cfd7718b05fc949750cbb",
+      "sourceQuestionContractSha256": "fa84c956d256d74c46d6df6cfba480f6a02c4ddce05a2d21e407956d74ca9ef8",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-FA3CBDF0A99332B9",
+      "questionId": "Y4M02-Q013",
+      "semanticTarget": "geography",
+      "plannedMediaId": "IMG-Y4M02-Q013-CTX-DC765C676AAC",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q013-R2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "candidateSha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "sourceQuestionContractSha256": "fa84c956d256d74c46d6df6cfba480f6a02c4ddce05a2d21e407956d74ca9ef8",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "Y1M01-EMOJI-ART-001",
+      "questionId": "Y4M02-Q013",
+      "semanticTarget": "art",
+      "plannedMediaId": "IMG-Y4M02-Q013-CTX-0BC28DD9EF4B",
+      "contractPaths": [
+        "pairs[5].b"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q013-R6"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ART.png",
+      "candidateSha256": "1e472cc18685ff86d63b94e0fa0ed771d944ea0ec21885c6b96c088d8c12f403",
+      "sourceQuestionContractSha256": "fa84c956d256d74c46d6df6cfba480f6a02c4ddce05a2d21e407956d74ca9ef8",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-4B72C84EB092340A",
+      "questionId": "Y4M02-Q014",
+      "semanticTarget": "geography",
+      "plannedMediaId": "IMG-Y4M02-Q014-CTX-A3AABDAC8A5A",
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M02-Q014-D5"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "candidateSha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "sourceQuestionContractSha256": "de9e2792613f295040bb8e18fa40ed212a0f18ec3053adcd087ce3917428b8ce",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-504674DEDCB9FDCE",
+      "questionId": "Y4M02-Q014",
+      "semanticTarget": "red triangle",
+      "plannedMediaId": "IMG-Y4M02-Q014-CTX-8EB08DF3ADEB",
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q014-D1",
+        "Y4M02-Q014-O2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-RED-TRIANGLE.png",
+      "candidateSha256": "5ed4fb31bb2f1c1797b062c99f835c1e4a77f6f9ab6058ff703eb949bec04fb4",
+      "sourceQuestionContractSha256": "de9e2792613f295040bb8e18fa40ed212a0f18ec3053adcd087ce3917428b8ce",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-6067E6DE84C0E5C7",
+      "questionId": "Y4M02-Q014",
+      "semanticTarget": "green circle",
+      "plannedMediaId": "IMG-Y4M02-Q014-CTX-B52D363814FA",
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q014-D3",
+        "Y4M02-Q014-O4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-GREEN-CIRCLE.png",
+      "candidateSha256": "e4325fad369dea23796a2775e1688046f3ef54fc19b0de050571dbea814b3217",
+      "sourceQuestionContractSha256": "de9e2792613f295040bb8e18fa40ed212a0f18ec3053adcd087ce3917428b8ce",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-7CEF9891D59562FE",
+      "questionId": "Y4M02-Q014",
+      "semanticTarget": "english",
+      "plannedMediaId": "IMG-Y4M02-Q014-CTX-7AE2818E5C21",
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M02-Q014-D4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ENGLISH.png",
+      "candidateSha256": "850e9b0fd0061baeca2dcc722d4ff6babacf2ff18de73b369ae2b770f52261bd",
+      "sourceQuestionContractSha256": "de9e2792613f295040bb8e18fa40ed212a0f18ec3053adcd087ce3917428b8ce",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-8A1539773070D30D",
+      "questionId": "Y4M02-Q014",
+      "semanticTarget": "blue square",
+      "plannedMediaId": "IMG-Y4M02-Q014-CTX-3E249D10F79C",
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q014-O1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-BLUE-SQUARE.png",
+      "candidateSha256": "e0557e82d4b8e6992645877b0b36bd7475d6d73ea507c0e9bc02646a1c4140c0",
+      "sourceQuestionContractSha256": "de9e2792613f295040bb8e18fa40ed212a0f18ec3053adcd087ce3917428b8ce",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-C71E27A94D5A8AF0",
+      "questionId": "Y4M02-Q014",
+      "semanticTarget": "yellow rectangle",
+      "plannedMediaId": "IMG-Y4M02-Q014-CTX-F1A96F2F315A",
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q014-D2",
+        "Y4M02-Q014-O3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-YELLOW-RECTANGLE.png",
+      "candidateSha256": "65cd909c32a1e676b71d39d46d39ebf34f65c939519612cc69c130b55190c648",
+      "sourceQuestionContractSha256": "de9e2792613f295040bb8e18fa40ed212a0f18ec3053adcd087ce3917428b8ce",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-0B255AF22079ACF0",
+      "questionId": "Y4M02-Q016",
+      "semanticTarget": "english",
+      "plannedMediaId": "IMG-Y4M02-Q016-CTX-5C3E2061333F",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q016-R4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ENGLISH.png",
+      "candidateSha256": "850e9b0fd0061baeca2dcc722d4ff6babacf2ff18de73b369ae2b770f52261bd",
+      "sourceQuestionContractSha256": "4eb26e30928af6019f14d00a4a417254eea58b9a8ca08777b02ddd32b102f347",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-24AE191AA3634A76",
+      "questionId": "Y4M02-Q016",
+      "semanticTarget": "history",
+      "plannedMediaId": "IMG-Y4M02-Q016-CTX-9D353DAACFF8",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q016-R2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-HISTORY.png",
+      "candidateSha256": "65d289b1680f0381118c429e49f3c87cbe66af45c9424a04c279b99c6f70f675",
+      "sourceQuestionContractSha256": "4eb26e30928af6019f14d00a4a417254eea58b9a8ca08777b02ddd32b102f347",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-D12AE70F693DD028",
+      "questionId": "Y4M02-Q016",
+      "semanticTarget": "science",
+      "plannedMediaId": "IMG-Y4M02-Q016-CTX-E432C50D8B58",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q016-R1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-SCIENCE.png",
+      "candidateSha256": "4db85d8cf2b5dd47ea2ec7669860d59275b3d6c19f2cfd7718b05fc949750cbb",
+      "sourceQuestionContractSha256": "4eb26e30928af6019f14d00a4a417254eea58b9a8ca08777b02ddd32b102f347",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-FA3CBDF0A99332B9",
+      "questionId": "Y4M02-Q016",
+      "semanticTarget": "geography",
+      "plannedMediaId": "IMG-Y4M02-Q016-CTX-0C1B87ACC69E",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q016-R5"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "candidateSha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "sourceQuestionContractSha256": "4eb26e30928af6019f14d00a4a417254eea58b9a8ca08777b02ddd32b102f347",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "Y1M01-EMOJI-ART-001",
+      "questionId": "Y4M02-Q016",
+      "semanticTarget": "art",
+      "plannedMediaId": "IMG-Y4M02-Q016-CTX-E8A7C217128F",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q016-R3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ART.png",
+      "candidateSha256": "1e472cc18685ff86d63b94e0fa0ed771d944ea0ec21885c6b96c088d8c12f403",
+      "sourceQuestionContractSha256": "4eb26e30928af6019f14d00a4a417254eea58b9a8ca08777b02ddd32b102f347",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-34691F7FF392D134",
+      "questionId": "Y4M02-Q017",
+      "semanticTarget": "a",
+      "plannedMediaId": "IMG-Y4M02-Q017-CTX-AF6CEF7CCAD9",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q017-O1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-LETTER-A.png",
+      "candidateSha256": "45a0be67a1decff6ca5568884f271d1fd5b90faa9dcb5ca876e455d10eb9d38e",
+      "sourceQuestionContractSha256": "e9fda819bc3371885e760841fa9c4b841b570cb32082fff30bfe0d2554e35434",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-5A685792F5F3892E",
+      "questionId": "Y4M02-Q017",
+      "semanticTarget": "d",
+      "plannedMediaId": "IMG-Y4M02-Q017-CTX-F43658329499",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q017-O4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-LETTER-D.png",
+      "candidateSha256": "699a56752b3917251bfec5453216ec14dbc4a562476c56d4eabf4be59c5cff75",
+      "sourceQuestionContractSha256": "e9fda819bc3371885e760841fa9c4b841b570cb32082fff30bfe0d2554e35434",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-5FC56902AD57463A",
+      "questionId": "Y4M02-Q017",
+      "semanticTarget": "c",
+      "plannedMediaId": "IMG-Y4M02-Q017-CTX-9FE74BB9194D",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q017-O3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-LETTER-C.png",
+      "candidateSha256": "8b71947d742140dbb5da17de8cfcba88763cebad499069b700dfcb5f40b6546b",
+      "sourceQuestionContractSha256": "e9fda819bc3371885e760841fa9c4b841b570cb32082fff30bfe0d2554e35434",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-B53AD4A3B76BCB34",
+      "questionId": "Y4M02-Q017",
+      "semanticTarget": "b",
+      "plannedMediaId": "IMG-Y4M02-Q017-CTX-C3B16A2FCC7F",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q017-O2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-LETTER-B.png",
+      "candidateSha256": "c106081f6e8b230577b66ed0b9e4583e708e86aeb182e7bbf010fb761f132e2b",
+      "sourceQuestionContractSha256": "e9fda819bc3371885e760841fa9c4b841b570cb32082fff30bfe0d2554e35434",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "Y1M01-EMOJI-ART-001",
+      "questionId": "Y4M02-Q018",
+      "semanticTarget": "art",
+      "plannedMediaId": "IMG-Y4M02-Q018-CTX-252A04625C1A",
+      "contractPaths": [
+        "mediaBindings[0]"
+      ],
+      "roles": [
+        "SUPPORTING_IMAGE"
+      ],
+      "optionOrCardIds": [],
+      "candidateFile": "images/DUDUQ-Y4M02-ART.png",
+      "candidateSha256": "1e472cc18685ff86d63b94e0fa0ed771d944ea0ec21885c6b96c088d8c12f403",
+      "sourceQuestionContractSha256": "dca04f635933026d7c42b56be68a1ba9b67ecad792065ab933d3435e35a243e9",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-48CA6C8720A28B20",
+      "questionId": "Y4M02-Q020",
+      "semanticTarget": "i do not like carrots",
+      "plannedMediaId": "IMG-Y4M02-Q020-CTX-C8C804D7EBEF",
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q020-D3",
+        "Y4M02-Q020-O4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-I-DO-NOT-LIKE-CARROTS.png",
+      "candidateSha256": "78e59be1986c13e2b05ed24395c0b1d64b0d3b8534480ecc8fa59f30d4fe369b",
+      "sourceQuestionContractSha256": "4b8d5946f9b6317c1513a71a78551111648be5c746c0b9bea576525f6ae8a723",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-4B72C84EB092340A",
+      "questionId": "Y4M02-Q020",
+      "semanticTarget": "geography",
+      "plannedMediaId": "IMG-Y4M02-Q020-CTX-61C76B76FB1E",
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M02-Q020-D5"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "candidateSha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "sourceQuestionContractSha256": "4b8d5946f9b6317c1513a71a78551111648be5c746c0b9bea576525f6ae8a723",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-5D2F313F53720CE9",
+      "questionId": "Y4M02-Q020",
+      "semanticTarget": "i prefer grapes",
+      "plannedMediaId": "IMG-Y4M02-Q020-CTX-206D6E2C3D3B",
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q020-D2",
+        "Y4M02-Q020-O3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-I-PREFER-GRAPES.png",
+      "candidateSha256": "0f16d25eccf0648830dd8b5de9bd02f3d7fb78abdff205bd8e3fc9a1cd285ca5",
+      "sourceQuestionContractSha256": "4b8d5946f9b6317c1513a71a78551111648be5c746c0b9bea576525f6ae8a723",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-7CEF9891D59562FE",
+      "questionId": "Y4M02-Q020",
+      "semanticTarget": "english",
+      "plannedMediaId": "IMG-Y4M02-Q020-CTX-7C1C6D7320DE",
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M02-Q020-D4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-ENGLISH.png",
+      "candidateSha256": "850e9b0fd0061baeca2dcc722d4ff6babacf2ff18de73b369ae2b770f52261bd",
+      "sourceQuestionContractSha256": "4b8d5946f9b6317c1513a71a78551111648be5c746c0b9bea576525f6ae8a723",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-8402FF71A9476919",
+      "questionId": "Y4M02-Q020",
+      "semanticTarget": "i like papaya",
+      "plannedMediaId": "IMG-Y4M02-Q020-CTX-13878EDD9FDF",
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q020-O1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-I-LIKE-PAPAYA.png",
+      "candidateSha256": "e26d040391bd80af05431960976ae994d8828bb7b33d74663f81a248f50cb4cc",
+      "sourceQuestionContractSha256": "4b8d5946f9b6317c1513a71a78551111648be5c746c0b9bea576525f6ae8a723",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-97050C4338A5B73F",
+      "questionId": "Y4M02-Q020",
+      "semanticTarget": "i like apples",
+      "plannedMediaId": "IMG-Y4M02-Q020-CTX-E53F2E34B48F",
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M02-Q020-D1",
+        "Y4M02-Q020-O2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M02-I-LIKE-APPLES.png",
+      "candidateSha256": "b378dc8a885e07048273a3393518f5a33fd2e4e9051ae359527e9ca34347a8b6",
+      "sourceQuestionContractSha256": "4b8d5946f9b6317c1513a71a78551111648be5c746c0b9bea576525f6ae8a723",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    }
+  ],
+  "questionContractsModified": false,
+  "registryModified": false,
+  "overlayApplied": false,
+  "productionApproved": false
+}

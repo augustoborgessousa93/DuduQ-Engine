@@ -1,0 +1,1066 @@
+{
+  "schemaVersion": "DUDUQ_Y4M02_GENERATION_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-11-06T15:07:26.406Z",
+  "moduleId": "Y4M02",
+  "lane": "generation",
+  "sourceQuestionFile": "dist-pages/content/english/year-4/module-02/questions.json",
+  "sourceQuestionSha256": "ad303063d8044abdd86d9d71bef5b8a3bc93ad7a18eaa27a4d2dd56cbf7d3f77",
+  "questionContractsReviewed": 20,
+  "semanticConceptsReviewed": 22,
+  "modelVisualReviewOnly": true,
+  "humanApprovalClaimed": false,
+  "assets": [
+    {
+      "assetKey": "Y4M02-CANDIDATE-LETTER-A",
+      "concept": "a",
+      "file": "images/DUDUQ-Y4M02-LETTER-A.png",
+      "sha256": "45a0be67a1decff6ca5568884f271d1fd5b90faa9dcb5ca876e455d10eb9d38e",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one premium uppercase A glyph is isolated and unmistakable; no other letter, word, numeral, icon, or object is present.",
+      "pedagogicalFit": "Exact reusable uppercase A target for the Y4M02 letter-choice questions.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q002",
+          "sourceMediaId": "IMG-V11-2B-34691F7FF392D134",
+          "plannedMediaId": "IMG-Y4M02-Q002-CTX-34762CA5B2CC",
+          "contractPaths": [
+            "bubbleDistractorPool[0]",
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "e632d25148a1d8dea68e06401dd61383958283f3181186d69341607d3dad1872"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "sourceMediaId": "IMG-V11-2B-34691F7FF392D134",
+          "plannedMediaId": "IMG-Y4M02-Q007-CTX-7FBB41C36E87",
+          "contractPaths": [
+            "bubbleDistractorPool[4]"
+          ],
+          "sourceQuestionContractSha256": "f93dd6655d6a66a40c9782d74e7d27dc76300a2ecaab0628c8f22bf8e3fb2a08"
+        },
+        {
+          "questionId": "Y4M02-Q017",
+          "sourceMediaId": "IMG-V11-2B-34691F7FF392D134",
+          "plannedMediaId": "IMG-Y4M02-Q017-CTX-AF6CEF7CCAD9",
+          "contractPaths": [
+            "options[0]"
+          ],
+          "sourceQuestionContractSha256": "e9fda819bc3371885e760841fa9c4b841b570cb32082fff30bfe0d2554e35434"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-ART",
+      "concept": "art",
+      "file": "images/DUDUQ-Y4M02-ART.png",
+      "sha256": "1e472cc18685ff86d63b94e0fa0ed771d944ea0ec21885c6b96c088d8c12f403",
+      "expectedObjectCount": 1,
+      "visualObservation": "One wooden painter palette has exactly five colored paint daubs and exactly two crossing brushes, all forming one connected silhouette; no canvas, text, or unrelated subject cue appears.",
+      "pedagogicalFit": "Exact child-friendly art-class tool emblem for Art, replacing the provisional emoji concept without introducing a distractor.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q005",
+          "sourceMediaId": "Y1M01-EMOJI-ART-001",
+          "plannedMediaId": "IMG-Y4M02-Q005-CTX-59C1534D94C2",
+          "contractPaths": [
+            "pairs[1].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "6adefd7b526abf9d04ef3309796ec629a2a5c1cdb631d9d0ec92a490acfd7ad6"
+        },
+        {
+          "questionId": "Y4M02-Q006",
+          "sourceMediaId": "Y1M01-EMOJI-ART-001",
+          "plannedMediaId": "IMG-Y4M02-Q006-CTX-882D4F90B2CB",
+          "contractPaths": [
+            "pairs[4].b"
+          ],
+          "sourceQuestionContractSha256": "1172f27595dbedd94011e2bf7aa380870bc7f415688d148b2ff05a345f2e85e6"
+        },
+        {
+          "questionId": "Y4M02-Q009",
+          "sourceMediaId": "Y1M01-EMOJI-ART-001",
+          "plannedMediaId": "IMG-Y4M02-Q009-CTX-C7697E150A5C",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "sourceQuestionContractSha256": "4b33b4cb3f88a75f2da47e1917eae07a54c93a42d07904889eccb5ab1dae4c10"
+        },
+        {
+          "questionId": "Y4M02-Q012",
+          "sourceMediaId": "Y1M01-EMOJI-ART-001",
+          "plannedMediaId": "IMG-Y4M02-Q012-CTX-E0BA9B5C9996",
+          "contractPaths": [
+            "options[0]"
+          ],
+          "sourceQuestionContractSha256": "84fef13001946ccf6dabd09f91e390cbcef0965dee39b3d85f4cc707e12f4a16"
+        },
+        {
+          "questionId": "Y4M02-Q013",
+          "sourceMediaId": "Y1M01-EMOJI-ART-001",
+          "plannedMediaId": "IMG-Y4M02-Q013-CTX-0BC28DD9EF4B",
+          "contractPaths": [
+            "pairs[5].b"
+          ],
+          "sourceQuestionContractSha256": "fa84c956d256d74c46d6df6cfba480f6a02c4ddce05a2d21e407956d74ca9ef8"
+        },
+        {
+          "questionId": "Y4M02-Q016",
+          "sourceMediaId": "Y1M01-EMOJI-ART-001",
+          "plannedMediaId": "IMG-Y4M02-Q016-CTX-E8A7C217128F",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "sourceQuestionContractSha256": "4eb26e30928af6019f14d00a4a417254eea58b9a8ca08777b02ddd32b102f347"
+        },
+        {
+          "questionId": "Y4M02-Q018",
+          "sourceMediaId": "Y1M01-EMOJI-ART-001",
+          "plannedMediaId": "IMG-Y4M02-Q018-CTX-252A04625C1A",
+          "contractPaths": [
+            "mediaBindings[0]"
+          ],
+          "sourceQuestionContractSha256": "dca04f635933026d7c42b56be68a1ba9b67ecad792065ab933d3435e35a243e9"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-LETTER-B",
+      "concept": "b",
+      "file": "images/DUDUQ-Y4M02-LETTER-B.png",
+      "sha256": "c106081f6e8b230577b66ed0b9e4583e708e86aeb182e7bbf010fb761f132e2b",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one premium uppercase B glyph is isolated and unmistakable; no other letter, word, numeral, icon, or object is present.",
+      "pedagogicalFit": "Exact reusable uppercase B target for the Y4M02 letter-choice questions.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q002",
+          "sourceMediaId": "IMG-V11-2B-B53AD4A3B76BCB34",
+          "plannedMediaId": "IMG-Y4M02-Q002-CTX-4CEB6AAE1A94",
+          "contractPaths": [
+            "options[0]",
+            "targetsToFind[0]"
+          ],
+          "sourceQuestionContractSha256": "e632d25148a1d8dea68e06401dd61383958283f3181186d69341607d3dad1872"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "sourceMediaId": "IMG-V11-2B-B53AD4A3B76BCB34",
+          "plannedMediaId": "IMG-Y4M02-Q007-CTX-5D32F98F8251",
+          "contractPaths": [
+            "bubbleDistractorPool[3]"
+          ],
+          "sourceQuestionContractSha256": "f93dd6655d6a66a40c9782d74e7d27dc76300a2ecaab0628c8f22bf8e3fb2a08"
+        },
+        {
+          "questionId": "Y4M02-Q017",
+          "sourceMediaId": "IMG-V11-2B-B53AD4A3B76BCB34",
+          "plannedMediaId": "IMG-Y4M02-Q017-CTX-C3B16A2FCC7F",
+          "contractPaths": [
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "e9fda819bc3371885e760841fa9c4b841b570cb32082fff30bfe0d2554e35434"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-BLUE-SQUARE",
+      "concept": "blue square",
+      "file": "images/DUDUQ-Y4M02-BLUE-SQUARE.png",
+      "sha256": "e0557e82d4b8e6992645877b0b36bd7475d6d73ea507c0e9bc02646a1c4140c0",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one vivid blue beveled square is isolated; four sides are equal and no other shape is present.",
+      "pedagogicalFit": "Exact combined color-and-shape concept blue square.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q014",
+          "sourceMediaId": "IMG-V11-2B-8A1539773070D30D",
+          "plannedMediaId": "IMG-Y4M02-Q014-CTX-3E249D10F79C",
+          "contractPaths": [
+            "options[0]",
+            "targetsToFind[0]"
+          ],
+          "sourceQuestionContractSha256": "de9e2792613f295040bb8e18fa40ed212a0f18ec3053adcd087ce3917428b8ce"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-LETTER-C",
+      "concept": "c",
+      "file": "images/DUDUQ-Y4M02-LETTER-C.png",
+      "sha256": "8b71947d742140dbb5da17de8cfcba88763cebad499069b700dfcb5f40b6546b",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one premium uppercase C glyph is isolated and unmistakable; no other letter, word, numeral, icon, or object is present.",
+      "pedagogicalFit": "Exact reusable uppercase C target for the Y4M02 letter-choice questions.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q002",
+          "sourceMediaId": "IMG-V11-2B-5FC56902AD57463A",
+          "plannedMediaId": "IMG-Y4M02-Q002-CTX-CB59121A5285",
+          "contractPaths": [
+            "bubbleDistractorPool[1]",
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "e632d25148a1d8dea68e06401dd61383958283f3181186d69341607d3dad1872"
+        },
+        {
+          "questionId": "Y4M02-Q017",
+          "sourceMediaId": "IMG-V11-2B-5FC56902AD57463A",
+          "plannedMediaId": "IMG-Y4M02-Q017-CTX-9FE74BB9194D",
+          "contractPaths": [
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "e9fda819bc3371885e760841fa9c4b841b570cb32082fff30bfe0d2554e35434"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-LETTER-D",
+      "concept": "d",
+      "file": "images/DUDUQ-Y4M02-LETTER-D.png",
+      "sha256": "699a56752b3917251bfec5453216ec14dbc4a562476c56d4eabf4be59c5cff75",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one premium uppercase D glyph is isolated and unmistakable; no other letter, word, numeral, icon, or object is present.",
+      "pedagogicalFit": "Exact reusable uppercase D target for the Y4M02 letter-choice questions.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q002",
+          "sourceMediaId": "IMG-V11-2B-5A685792F5F3892E",
+          "plannedMediaId": "IMG-Y4M02-Q002-CTX-0225FC74ED3D",
+          "contractPaths": [
+            "bubbleDistractorPool[2]",
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "e632d25148a1d8dea68e06401dd61383958283f3181186d69341607d3dad1872"
+        },
+        {
+          "questionId": "Y4M02-Q017",
+          "sourceMediaId": "IMG-V11-2B-5A685792F5F3892E",
+          "plannedMediaId": "IMG-Y4M02-Q017-CTX-F43658329499",
+          "contractPaths": [
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "e9fda819bc3371885e760841fa9c4b841b570cb32082fff30bfe0d2554e35434"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-ENGLISH",
+      "concept": "english",
+      "file": "images/DUDUQ-Y4M02-ENGLISH.png",
+      "sha256": "850e9b0fd0061baeca2dcc722d4ff6babacf2ff18de73b369ae2b770f52261bd",
+      "expectedObjectCount": 1,
+      "visualObservation": "One open royal-blue book forms a connected emblem with two attached speech bubbles containing blank conversation lines; no words, alphabet glyphs, flags, or unrelated subject cues are visible.",
+      "pedagogicalFit": "Unmistakable text-free language, reading, and conversation cue for the school subject English, distinct from the A–D letter targets.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q001",
+          "sourceMediaId": "IMG-V11-2B-7CEF9891D59562FE",
+          "plannedMediaId": "IMG-Y4M02-Q001-CTX-36D07B3CBAEB",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "sourceQuestionContractSha256": "05b9cb314f4291c480c2978ff1f30cf9f394daf76b4d6e4dd199e1405202a6f2"
+        },
+        {
+          "questionId": "Y4M02-Q002",
+          "sourceMediaId": "IMG-V11-2B-7CEF9891D59562FE",
+          "plannedMediaId": "IMG-Y4M02-Q002-CTX-DBFA1EBED192",
+          "contractPaths": [
+            "bubbleDistractorPool[3]"
+          ],
+          "sourceQuestionContractSha256": "e632d25148a1d8dea68e06401dd61383958283f3181186d69341607d3dad1872"
+        },
+        {
+          "questionId": "Y4M02-Q004",
+          "sourceMediaId": "IMG-V11-2B-925D0D65A4C27655",
+          "plannedMediaId": "IMG-Y4M02-Q004-CTX-E319F8EDB06F",
+          "contractPaths": [
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "2798853c0c99027aa263a7bc0595f3707d005fa939d5670e988a4210bd7e1fe7"
+        },
+        {
+          "questionId": "Y4M02-Q005",
+          "sourceMediaId": "IMG-V11-2B-3679D098470A87AF",
+          "plannedMediaId": "IMG-Y4M02-Q005-CTX-C5D580121150",
+          "contractPaths": [
+            "pairs[2].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "6adefd7b526abf9d04ef3309796ec629a2a5c1cdb631d9d0ec92a490acfd7ad6"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "sourceMediaId": "IMG-V11-2B-925D0D65A4C27655",
+          "plannedMediaId": "IMG-Y4M02-Q007-CTX-2B377E3AE2A2",
+          "contractPaths": [
+            "options[0]",
+            "targetsToFind[0]"
+          ],
+          "sourceQuestionContractSha256": "f93dd6655d6a66a40c9782d74e7d27dc76300a2ecaab0628c8f22bf8e3fb2a08"
+        },
+        {
+          "questionId": "Y4M02-Q009",
+          "sourceMediaId": "IMG-V11-2B-0B255AF22079ACF0",
+          "plannedMediaId": "IMG-Y4M02-Q009-CTX-950C28394534",
+          "contractPaths": [
+            "pairs[4].b"
+          ],
+          "sourceQuestionContractSha256": "4b33b4cb3f88a75f2da47e1917eae07a54c93a42d07904889eccb5ab1dae4c10"
+        },
+        {
+          "questionId": "Y4M02-Q012",
+          "sourceMediaId": "IMG-V11-2B-925D0D65A4C27655",
+          "plannedMediaId": "IMG-Y4M02-Q012-CTX-5438BB0B6415",
+          "contractPaths": [
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "84fef13001946ccf6dabd09f91e390cbcef0965dee39b3d85f4cc707e12f4a16"
+        },
+        {
+          "questionId": "Y4M02-Q013",
+          "sourceMediaId": "IMG-V11-2B-0B255AF22079ACF0",
+          "plannedMediaId": "IMG-Y4M02-Q013-CTX-B9DD312F73A9",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "sourceQuestionContractSha256": "fa84c956d256d74c46d6df6cfba480f6a02c4ddce05a2d21e407956d74ca9ef8"
+        },
+        {
+          "questionId": "Y4M02-Q014",
+          "sourceMediaId": "IMG-V11-2B-7CEF9891D59562FE",
+          "plannedMediaId": "IMG-Y4M02-Q014-CTX-7AE2818E5C21",
+          "contractPaths": [
+            "bubbleDistractorPool[3]"
+          ],
+          "sourceQuestionContractSha256": "de9e2792613f295040bb8e18fa40ed212a0f18ec3053adcd087ce3917428b8ce"
+        },
+        {
+          "questionId": "Y4M02-Q016",
+          "sourceMediaId": "IMG-V11-2B-0B255AF22079ACF0",
+          "plannedMediaId": "IMG-Y4M02-Q016-CTX-5C3E2061333F",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "sourceQuestionContractSha256": "4eb26e30928af6019f14d00a4a417254eea58b9a8ca08777b02ddd32b102f347"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "sourceMediaId": "IMG-V11-2B-7CEF9891D59562FE",
+          "plannedMediaId": "IMG-Y4M02-Q020-CTX-7C1C6D7320DE",
+          "contractPaths": [
+            "bubbleDistractorPool[3]"
+          ],
+          "sourceQuestionContractSha256": "4b8d5946f9b6317c1513a71a78551111648be5c746c0b9bea576525f6ae8a723"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-GEOGRAPHY",
+      "concept": "geography",
+      "file": "images/DUDUQ-Y4M02-GEOGRAPHY.png",
+      "sha256": "6ff21c8b5d245c3dae717f7c60702c84714748d0adf43f2b4598d13c5ae5b9ab",
+      "expectedObjectCount": 1,
+      "visualObservation": "One connected geography emblem shows a blue-and-green globe on its stand with an overlapping folded map and compass; there are no labels, flags, borders, or unrelated subject cues.",
+      "pedagogicalFit": "Clear small-card visual for Geography through globe, map, and compass study tools without baked-in answer text.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q001",
+          "sourceMediaId": "IMG-V11-2B-4B72C84EB092340A",
+          "plannedMediaId": "IMG-Y4M02-Q001-CTX-BC828774CBC5",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "sourceQuestionContractSha256": "05b9cb314f4291c480c2978ff1f30cf9f394daf76b4d6e4dd199e1405202a6f2"
+        },
+        {
+          "questionId": "Y4M02-Q002",
+          "sourceMediaId": "IMG-V11-2B-4B72C84EB092340A",
+          "plannedMediaId": "IMG-Y4M02-Q002-CTX-14382908959B",
+          "contractPaths": [
+            "bubbleDistractorPool[4]"
+          ],
+          "sourceQuestionContractSha256": "e632d25148a1d8dea68e06401dd61383958283f3181186d69341607d3dad1872"
+        },
+        {
+          "questionId": "Y4M02-Q004",
+          "sourceMediaId": "IMG-V11-2B-9C61EBB04E4F0405",
+          "plannedMediaId": "IMG-Y4M02-Q004-CTX-940BCA8E1640",
+          "contractPaths": [
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "2798853c0c99027aa263a7bc0595f3707d005fa939d5670e988a4210bd7e1fe7"
+        },
+        {
+          "questionId": "Y4M02-Q005",
+          "sourceMediaId": "IMG-V11-2B-F30886117165DA8E",
+          "plannedMediaId": "IMG-Y4M02-Q005-CTX-C337785AE513",
+          "contractPaths": [
+            "pairs[3].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "6adefd7b526abf9d04ef3309796ec629a2a5c1cdb631d9d0ec92a490acfd7ad6"
+        },
+        {
+          "questionId": "Y4M02-Q006",
+          "sourceMediaId": "IMG-V11-2B-FA3CBDF0A99332B9",
+          "plannedMediaId": "IMG-Y4M02-Q006-CTX-1E0B60427643",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "sourceQuestionContractSha256": "1172f27595dbedd94011e2bf7aa380870bc7f415688d148b2ff05a345f2e85e6"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "sourceMediaId": "IMG-V11-2B-9C61EBB04E4F0405",
+          "plannedMediaId": "IMG-Y4M02-Q007-CTX-DC87E13F59D3",
+          "contractPaths": [
+            "bubbleDistractorPool[0]",
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "f93dd6655d6a66a40c9782d74e7d27dc76300a2ecaab0628c8f22bf8e3fb2a08"
+        },
+        {
+          "questionId": "Y4M02-Q008",
+          "sourceMediaId": "IMG-V11-2B-4B72C84EB092340A",
+          "plannedMediaId": "IMG-Y4M02-Q008-CTX-09FDA4735ABB",
+          "contractPaths": [
+            "mediaBindings[0]"
+          ],
+          "sourceQuestionContractSha256": "62900d06ffcc141c165dcac1d7c42798c7df24a4e17cc36ceb178fbe968728bd"
+        },
+        {
+          "questionId": "Y4M02-Q009",
+          "sourceMediaId": "IMG-V11-2B-FA3CBDF0A99332B9",
+          "plannedMediaId": "IMG-Y4M02-Q009-CTX-FCA699A68215",
+          "contractPaths": [
+            "pairs[5].b"
+          ],
+          "sourceQuestionContractSha256": "4b33b4cb3f88a75f2da47e1917eae07a54c93a42d07904889eccb5ab1dae4c10"
+        },
+        {
+          "questionId": "Y4M02-Q012",
+          "sourceMediaId": "IMG-V11-2B-9C61EBB04E4F0405",
+          "plannedMediaId": "IMG-Y4M02-Q012-CTX-190543054705",
+          "contractPaths": [
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "84fef13001946ccf6dabd09f91e390cbcef0965dee39b3d85f4cc707e12f4a16"
+        },
+        {
+          "questionId": "Y4M02-Q013",
+          "sourceMediaId": "IMG-V11-2B-FA3CBDF0A99332B9",
+          "plannedMediaId": "IMG-Y4M02-Q013-CTX-DC765C676AAC",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "sourceQuestionContractSha256": "fa84c956d256d74c46d6df6cfba480f6a02c4ddce05a2d21e407956d74ca9ef8"
+        },
+        {
+          "questionId": "Y4M02-Q014",
+          "sourceMediaId": "IMG-V11-2B-4B72C84EB092340A",
+          "plannedMediaId": "IMG-Y4M02-Q014-CTX-A3AABDAC8A5A",
+          "contractPaths": [
+            "bubbleDistractorPool[4]"
+          ],
+          "sourceQuestionContractSha256": "de9e2792613f295040bb8e18fa40ed212a0f18ec3053adcd087ce3917428b8ce"
+        },
+        {
+          "questionId": "Y4M02-Q016",
+          "sourceMediaId": "IMG-V11-2B-FA3CBDF0A99332B9",
+          "plannedMediaId": "IMG-Y4M02-Q016-CTX-0C1B87ACC69E",
+          "contractPaths": [
+            "pairs[4].b"
+          ],
+          "sourceQuestionContractSha256": "4eb26e30928af6019f14d00a4a417254eea58b9a8ca08777b02ddd32b102f347"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "sourceMediaId": "IMG-V11-2B-4B72C84EB092340A",
+          "plannedMediaId": "IMG-Y4M02-Q020-CTX-61C76B76FB1E",
+          "contractPaths": [
+            "bubbleDistractorPool[4]"
+          ],
+          "sourceQuestionContractSha256": "4b8d5946f9b6317c1513a71a78551111648be5c746c0b9bea576525f6ae8a723"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-GREEN-CIRCLE",
+      "concept": "green circle",
+      "file": "images/DUDUQ-Y4M02-GREEN-CIRCLE.png",
+      "sha256": "e4325fad369dea23796a2775e1688046f3ef54fc19b0de050571dbea814b3217",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one vivid green flat beveled circle is isolated; it is round rather than spherical and no other shape is present.",
+      "pedagogicalFit": "Exact combined color-and-shape concept green circle.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q014",
+          "sourceMediaId": "IMG-V11-2B-6067E6DE84C0E5C7",
+          "plannedMediaId": "IMG-Y4M02-Q014-CTX-B52D363814FA",
+          "contractPaths": [
+            "bubbleDistractorPool[2]",
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "de9e2792613f295040bb8e18fa40ed212a0f18ec3053adcd087ce3917428b8ce"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-HISTORY",
+      "concept": "history",
+      "file": "images/DUDUQ-Y4M02-HISTORY.png",
+      "sha256": "65d289b1680f0381118c429e49f3c87cbe66af45c9424a04c279b99c6f70f675",
+      "expectedObjectCount": 1,
+      "visualObservation": "One connected history-study emblem contains an open burgundy-and-gold antique book, a golden hourglass, and an ivory classical-column relief; no dates, flags, weapons, or people appear.",
+      "pedagogicalFit": "Broad, friendly past-and-time study cue for History without presenting one culture or conflict as the whole subject.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q005",
+          "sourceMediaId": "IMG-V11-2B-1651BBDF0637DE4E",
+          "plannedMediaId": "IMG-Y4M02-Q005-CTX-6A0E5CC9C4E5",
+          "contractPaths": [
+            "pairs[0].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "6adefd7b526abf9d04ef3309796ec629a2a5c1cdb631d9d0ec92a490acfd7ad6"
+        },
+        {
+          "questionId": "Y4M02-Q006",
+          "sourceMediaId": "IMG-V11-2B-24AE191AA3634A76",
+          "plannedMediaId": "IMG-Y4M02-Q006-CTX-4BCCF86DE4E9",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "sourceQuestionContractSha256": "1172f27595dbedd94011e2bf7aa380870bc7f415688d148b2ff05a345f2e85e6"
+        },
+        {
+          "questionId": "Y4M02-Q009",
+          "sourceMediaId": "IMG-V11-2B-24AE191AA3634A76",
+          "plannedMediaId": "IMG-Y4M02-Q009-CTX-7B3C2B0F7953",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "sourceQuestionContractSha256": "4b33b4cb3f88a75f2da47e1917eae07a54c93a42d07904889eccb5ab1dae4c10"
+        },
+        {
+          "questionId": "Y4M02-Q013",
+          "sourceMediaId": "IMG-V11-2B-24AE191AA3634A76",
+          "plannedMediaId": "IMG-Y4M02-Q013-CTX-15BF69829694",
+          "contractPaths": [
+            "pairs[4].b"
+          ],
+          "sourceQuestionContractSha256": "fa84c956d256d74c46d6df6cfba480f6a02c4ddce05a2d21e407956d74ca9ef8"
+        },
+        {
+          "questionId": "Y4M02-Q016",
+          "sourceMediaId": "IMG-V11-2B-24AE191AA3634A76",
+          "plannedMediaId": "IMG-Y4M02-Q016-CTX-9D353DAACFF8",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "sourceQuestionContractSha256": "4eb26e30928af6019f14d00a4a417254eea58b9a8ca08777b02ddd32b102f347"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-I-DO-NOT-LIKE-CARROTS",
+      "concept": "i do not like carrots",
+      "file": "images/DUDUQ-Y4M02-I-DO-NOT-LIKE-CARROTS.png",
+      "sha256": "78e59be1986c13e2b05ed24395c0b1d64b0d3b8534480ecc8fa59f30d4fe369b",
+      "expectedObjectCount": 1,
+      "visualObservation": "A student clearly and gently rejects one unmistakable carrot by turning away and raising an open stop hand; no other food is present.",
+      "pedagogicalFit": "Direct non-text visual support for the exact negative preference phrase I do not like carrots.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q010",
+          "sourceMediaId": "IMG-V11-2B-20C32A7B846CD05A",
+          "plannedMediaId": "IMG-Y4M02-Q010-CTX-F1D581D66F38",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "sourceQuestionContractSha256": "9425146987cf6be793b9c8732978da5a12f15ebd467560f1a429db199866b1a2"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "sourceMediaId": "IMG-V11-2B-48CA6C8720A28B20",
+          "plannedMediaId": "IMG-Y4M02-Q020-CTX-C8C804D7EBEF",
+          "contractPaths": [
+            "bubbleDistractorPool[2]",
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "4b8d5946f9b6317c1513a71a78551111648be5c746c0b9bea576525f6ae8a723"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-I-LIKE-APPLES",
+      "concept": "i like apples",
+      "file": "images/DUDUQ-Y4M02-I-LIKE-APPLES.png",
+      "sha256": "b378dc8a885e07048273a3393518f5a33fd2e4e9051ae359527e9ca34347a8b6",
+      "expectedObjectCount": 3,
+      "visualObservation": "A smiling student gives a thumbs-up while holding exactly three unmistakable red apples; no other food is present.",
+      "pedagogicalFit": "Direct non-text visual support for the exact preference phrase I like apples.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q010",
+          "sourceMediaId": "IMG-V11-2B-9308452ECEE535F7",
+          "plannedMediaId": "IMG-Y4M02-Q010-CTX-8A4E2AFF0872",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "sourceQuestionContractSha256": "9425146987cf6be793b9c8732978da5a12f15ebd467560f1a429db199866b1a2"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "sourceMediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "plannedMediaId": "IMG-Y4M02-Q020-CTX-E53F2E34B48F",
+          "contractPaths": [
+            "bubbleDistractorPool[0]",
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "4b8d5946f9b6317c1513a71a78551111648be5c746c0b9bea576525f6ae8a723"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-I-LIKE-PAPAYA",
+      "concept": "i like papaya",
+      "file": "images/DUDUQ-Y4M02-I-LIKE-PAPAYA.png",
+      "sha256": "e26d040391bd80af05431960976ae994d8828bb7b33d74663f81a248f50cb4cc",
+      "expectedObjectCount": null,
+      "visualObservation": "A smiling student gives a thumbs-up while holding an unmistakable cut papaya; no other food is present.",
+      "pedagogicalFit": "Direct non-text visual support for the exact preference phrase I like papaya.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q010",
+          "sourceMediaId": "IMG-V11-2B-8050E659DDF0AE39",
+          "plannedMediaId": "IMG-Y4M02-Q010-CTX-A2E58D9E292B",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "sourceQuestionContractSha256": "9425146987cf6be793b9c8732978da5a12f15ebd467560f1a429db199866b1a2"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "sourceMediaId": "IMG-V11-2B-8402FF71A9476919",
+          "plannedMediaId": "IMG-Y4M02-Q020-CTX-13878EDD9FDF",
+          "contractPaths": [
+            "options[0]",
+            "targetsToFind[0]"
+          ],
+          "sourceQuestionContractSha256": "4b8d5946f9b6317c1513a71a78551111648be5c746c0b9bea576525f6ae8a723"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-I-PREFER-GRAPES",
+      "concept": "i prefer grapes",
+      "file": "images/DUDUQ-Y4M02-I-PREFER-GRAPES.png",
+      "sha256": "0f16d25eccf0648830dd8b5de9bd02f3d7fb78abdff205bd8e3fc9a1cd285ca5",
+      "expectedObjectCount": null,
+      "visualObservation": "A smiling student confidently presents one large bunch of purple grapes as the selected choice; no competing food is present.",
+      "pedagogicalFit": "Direct non-text visual support for the exact preference phrase I prefer grapes.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q010",
+          "sourceMediaId": "IMG-V11-2B-F2B1512D42DAD7B2",
+          "plannedMediaId": "IMG-Y4M02-Q010-CTX-7418DAD98042",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "sourceQuestionContractSha256": "9425146987cf6be793b9c8732978da5a12f15ebd467560f1a429db199866b1a2"
+        },
+        {
+          "questionId": "Y4M02-Q020",
+          "sourceMediaId": "IMG-V11-2B-5D2F313F53720CE9",
+          "plannedMediaId": "IMG-Y4M02-Q020-CTX-206D6E2C3D3B",
+          "contractPaths": [
+            "bubbleDistractorPool[1]",
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "4b8d5946f9b6317c1513a71a78551111648be5c746c0b9bea576525f6ae8a723"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-MATHEMATICS",
+      "concept": "mathematics",
+      "file": "images/DUDUQ-Y4M02-MATHEMATICS.png",
+      "sha256": "2c8ed7171f0f10ce7b77aa492c2364e4dbd0ef3de5d0fe4ed78e2a225de0d841",
+      "expectedObjectCount": 1,
+      "visualObservation": "One connected classroom abacus with five rails and colorful beads is visible; a plus and equals cue are embossed in the base, with no numerals or complete equation.",
+      "pedagogicalFit": "Unmistakable general Mathematics study emblem that remains distinct from the four exact equation-answer assets.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q001",
+          "sourceMediaId": "IMG-V11-2B-C8365730261BA43A",
+          "plannedMediaId": "IMG-Y4M02-Q001-CTX-F2952A5A30A3",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "sourceQuestionContractSha256": "05b9cb314f4291c480c2978ff1f30cf9f394daf76b4d6e4dd199e1405202a6f2"
+        },
+        {
+          "questionId": "Y4M02-Q004",
+          "sourceMediaId": "IMG-V11-2B-F6B814EBB2AA67CB",
+          "plannedMediaId": "IMG-Y4M02-Q004-CTX-D90DFABE73A2",
+          "contractPaths": [
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "2798853c0c99027aa263a7bc0595f3707d005fa939d5670e988a4210bd7e1fe7"
+        },
+        {
+          "questionId": "Y4M02-Q005",
+          "sourceMediaId": "IMG-V11-2B-BC972A558AE93D79",
+          "plannedMediaId": "IMG-Y4M02-Q005-CTX-3468804F81F6",
+          "contractPaths": [
+            "pairs[4].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "6adefd7b526abf9d04ef3309796ec629a2a5c1cdb631d9d0ec92a490acfd7ad6"
+        },
+        {
+          "questionId": "Y4M02-Q006",
+          "sourceMediaId": "IMG-V11-2B-CF361B72DB38F24E",
+          "plannedMediaId": "IMG-Y4M02-Q006-CTX-03612EEC8066",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "sourceQuestionContractSha256": "1172f27595dbedd94011e2bf7aa380870bc7f415688d148b2ff05a345f2e85e6"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "sourceMediaId": "IMG-V11-2B-F6B814EBB2AA67CB",
+          "plannedMediaId": "IMG-Y4M02-Q007-CTX-20B34B0152A3",
+          "contractPaths": [
+            "bubbleDistractorPool[1]",
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "f93dd6655d6a66a40c9782d74e7d27dc76300a2ecaab0628c8f22bf8e3fb2a08"
+        },
+        {
+          "questionId": "Y4M02-Q009",
+          "sourceMediaId": "IMG-V11-2B-CF361B72DB38F24E",
+          "plannedMediaId": "IMG-Y4M02-Q009-CTX-9192B96C0B9D",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "sourceQuestionContractSha256": "4b33b4cb3f88a75f2da47e1917eae07a54c93a42d07904889eccb5ab1dae4c10"
+        },
+        {
+          "questionId": "Y4M02-Q012",
+          "sourceMediaId": "IMG-V11-2B-F6B814EBB2AA67CB",
+          "plannedMediaId": "IMG-Y4M02-Q012-CTX-378615B0745F",
+          "contractPaths": [
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "84fef13001946ccf6dabd09f91e390cbcef0965dee39b3d85f4cc707e12f4a16"
+        },
+        {
+          "questionId": "Y4M02-Q013",
+          "sourceMediaId": "IMG-V11-2B-CF361B72DB38F24E",
+          "plannedMediaId": "IMG-Y4M02-Q013-CTX-9994FA69E167",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "sourceQuestionContractSha256": "fa84c956d256d74c46d6df6cfba480f6a02c4ddce05a2d21e407956d74ca9ef8"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-NINE-MINUS-FIVE-EQUALS-FOUR",
+      "concept": "nine minus five equals four",
+      "file": "images/DUDUQ-Y4M02-NINE-MINUS-FIVE-EQUALS-FOUR.png",
+      "sha256": "8e90c7afe1fbc9c1bd55470adc657b76f69833ff579a4abe67a4c24d3964c0a1",
+      "expectedObjectCount": 5,
+      "visualObservation": "The exact token sequence 9 − 5 = 4 is visible in order, with no extra digit, operator or distractor.",
+      "pedagogicalFit": "Exact visual answer support for the source-backed arithmetic phrase nine minus five equals four.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q011",
+          "sourceMediaId": "IMG-V11-2B-D74453328D45A91B",
+          "plannedMediaId": "IMG-Y4M02-Q011-CTX-EE7CD051ACF0",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "sourceQuestionContractSha256": "6803539f72701acdbaf36f1fed217c5db67542c36d15cc4dad67af2424ced8ac"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-RED-TRIANGLE",
+      "concept": "red triangle",
+      "file": "images/DUDUQ-Y4M02-RED-TRIANGLE.png",
+      "sha256": "5ed4fb31bb2f1c1797b062c99f835c1e4a77f6f9ab6058ff703eb949bec04fb4",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one vivid red beveled triangle with three sides is isolated; no other shape is present.",
+      "pedagogicalFit": "Exact combined color-and-shape concept red triangle.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q014",
+          "sourceMediaId": "IMG-V11-2B-504674DEDCB9FDCE",
+          "plannedMediaId": "IMG-Y4M02-Q014-CTX-8EB08DF3ADEB",
+          "contractPaths": [
+            "bubbleDistractorPool[0]",
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "de9e2792613f295040bb8e18fa40ed212a0f18ec3053adcd087ce3917428b8ce"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-SCIENCE",
+      "concept": "science",
+      "file": "images/DUDUQ-Y4M02-SCIENCE.png",
+      "sha256": "4db85d8cf2b5dd47ea2ec7669860d59275b3d6c19f2cfd7718b05fc949750cbb",
+      "expectedObjectCount": 1,
+      "visualObservation": "One connected laboratory emblem combines a microscope, one green-liquid flask, and one blue-liquid test tube secured to the same base; no warning, formula, or unrelated cue appears.",
+      "pedagogicalFit": "Clear laboratory-equipment visual for the school subject Science at small game-card scale.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q001",
+          "sourceMediaId": "IMG-V11-2B-CC82E066C948B4A2",
+          "plannedMediaId": "IMG-Y4M02-Q001-CTX-39957E91CBB8",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "sourceQuestionContractSha256": "05b9cb314f4291c480c2978ff1f30cf9f394daf76b4d6e4dd199e1405202a6f2"
+        },
+        {
+          "questionId": "Y4M02-Q004",
+          "sourceMediaId": "IMG-V11-2B-2662DECD66839419",
+          "plannedMediaId": "IMG-Y4M02-Q004-CTX-87092103E8AC",
+          "contractPaths": [
+            "options[0]"
+          ],
+          "sourceQuestionContractSha256": "2798853c0c99027aa263a7bc0595f3707d005fa939d5670e988a4210bd7e1fe7"
+        },
+        {
+          "questionId": "Y4M02-Q005",
+          "sourceMediaId": "IMG-V11-2B-61A2BC233D5DC6FA",
+          "plannedMediaId": "IMG-Y4M02-Q005-CTX-3DD29944CDE6",
+          "contractPaths": [
+            "pairs[5].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "6adefd7b526abf9d04ef3309796ec629a2a5c1cdb631d9d0ec92a490acfd7ad6"
+        },
+        {
+          "questionId": "Y4M02-Q006",
+          "sourceMediaId": "IMG-V11-2B-D12AE70F693DD028",
+          "plannedMediaId": "IMG-Y4M02-Q006-CTX-7D6B59FF5065",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "sourceQuestionContractSha256": "1172f27595dbedd94011e2bf7aa380870bc7f415688d148b2ff05a345f2e85e6"
+        },
+        {
+          "questionId": "Y4M02-Q007",
+          "sourceMediaId": "IMG-V11-2B-2662DECD66839419",
+          "plannedMediaId": "IMG-Y4M02-Q007-CTX-74E4920D9D39",
+          "contractPaths": [
+            "bubbleDistractorPool[2]",
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "f93dd6655d6a66a40c9782d74e7d27dc76300a2ecaab0628c8f22bf8e3fb2a08"
+        },
+        {
+          "questionId": "Y4M02-Q009",
+          "sourceMediaId": "IMG-V11-2B-D12AE70F693DD028",
+          "plannedMediaId": "IMG-Y4M02-Q009-CTX-CFA9DBDF655D",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "sourceQuestionContractSha256": "4b33b4cb3f88a75f2da47e1917eae07a54c93a42d07904889eccb5ab1dae4c10"
+        },
+        {
+          "questionId": "Y4M02-Q013",
+          "sourceMediaId": "IMG-V11-2B-D12AE70F693DD028",
+          "plannedMediaId": "IMG-Y4M02-Q013-CTX-FB8E6A7BE39F",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "sourceQuestionContractSha256": "fa84c956d256d74c46d6df6cfba480f6a02c4ddce05a2d21e407956d74ca9ef8"
+        },
+        {
+          "questionId": "Y4M02-Q016",
+          "sourceMediaId": "IMG-V11-2B-D12AE70F693DD028",
+          "plannedMediaId": "IMG-Y4M02-Q016-CTX-E432C50D8B58",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "sourceQuestionContractSha256": "4eb26e30928af6019f14d00a4a417254eea58b9a8ca08777b02ddd32b102f347"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-SIX-MINUS-TWO-EQUALS-FOUR",
+      "concept": "six minus two equals four",
+      "file": "images/DUDUQ-Y4M02-SIX-MINUS-TWO-EQUALS-FOUR.png",
+      "sha256": "96aa1db791e1f383952547a0e7fde89c18256bbbc275474601a7f0afcea8c849",
+      "expectedObjectCount": 5,
+      "visualObservation": "The exact token sequence 6 − 2 = 4 is visible in order, with no extra digit, operator or distractor.",
+      "pedagogicalFit": "Exact visual answer support for the source-backed arithmetic phrase six minus two equals four.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q011",
+          "sourceMediaId": "IMG-V11-2B-6FFE58151EAD0CA0",
+          "plannedMediaId": "IMG-Y4M02-Q011-CTX-BE68C1FCFC73",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "sourceQuestionContractSha256": "6803539f72701acdbaf36f1fed217c5db67542c36d15cc4dad67af2424ced8ac"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-THREE-PLUS-FOUR-EQUALS-SEVEN",
+      "concept": "three plus four equals seven",
+      "file": "images/DUDUQ-Y4M02-THREE-PLUS-FOUR-EQUALS-SEVEN.png",
+      "sha256": "def1d12aec14a94dc931c80f1128d56c44a18aa16e0b0912ac05e9f56025abec",
+      "expectedObjectCount": 5,
+      "visualObservation": "The exact token sequence 3 + 4 = 7 is visible in order, with no extra digit, operator or distractor.",
+      "pedagogicalFit": "Exact visual answer support for the source-backed arithmetic phrase three plus four equals seven.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q011",
+          "sourceMediaId": "IMG-V11-2B-C1BC182FD8E80824",
+          "plannedMediaId": "IMG-Y4M02-Q011-CTX-7AC2289E0F53",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "sourceQuestionContractSha256": "6803539f72701acdbaf36f1fed217c5db67542c36d15cc4dad67af2424ced8ac"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-TWO-PLUS-THREE-EQUALS-FIVE",
+      "concept": "two plus three equals five",
+      "file": "images/DUDUQ-Y4M02-TWO-PLUS-THREE-EQUALS-FIVE.png",
+      "sha256": "ce5c6aa028b3a430aaf613acc46f0f22549466af91d66ae734dbd1094ea3f831",
+      "expectedObjectCount": 5,
+      "visualObservation": "The exact token sequence 2 + 3 = 5 is visible in order, with no extra digit, operator or distractor.",
+      "pedagogicalFit": "Exact visual answer support for the source-backed arithmetic phrase two plus three equals five.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q011",
+          "sourceMediaId": "IMG-V11-2B-D479ABE00CDCCB74",
+          "plannedMediaId": "IMG-Y4M02-Q011-CTX-8C6C13AF4B84",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "sourceQuestionContractSha256": "6803539f72701acdbaf36f1fed217c5db67542c36d15cc4dad67af2424ced8ac"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M02-CANDIDATE-YELLOW-RECTANGLE",
+      "concept": "yellow rectangle",
+      "file": "images/DUDUQ-Y4M02-YELLOW-RECTANGLE.png",
+      "sha256": "65cd909c32a1e676b71d39d46d39ebf34f65c939519612cc69c130b55190c648",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one vivid yellow wider-than-tall beveled rectangle is isolated; no other shape is present.",
+      "pedagogicalFit": "Exact combined color-and-shape concept yellow rectangle.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M02-Q014",
+          "sourceMediaId": "IMG-V11-2B-C71E27A94D5A8AF0",
+          "plannedMediaId": "IMG-Y4M02-Q014-CTX-F1A96F2F315A",
+          "contractPaths": [
+            "bubbleDistractorPool[1]",
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "de9e2792613f295040bb8e18fa40ed212a0f18ec3053adcd087ce3917428b8ce"
+        }
+      ]
+    }
+  ],
+  "rejectedAttempts": [],
+  "candidateOnly": true,
+  "productionApproved": false,
+  "integrated": false
+}
