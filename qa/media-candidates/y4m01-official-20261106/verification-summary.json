@@ -53,10 +53,10 @@
     "candidateIsOfficialIntegratedMedia": false
   },
   "reviewPersistence": {
-    "candidateBundleCommit": null,
+    "candidateBundleCommit": "9854c008cd79ea87af8d0e20586724d41c9ec64a",
     "candidateCheckpointCommit": null,
     "reviewBranch": "automation/duduq-y4m01-generation-20261106",
-    "remotePushStatus": "NOT_ATTEMPTED",
+    "remotePushStatus": "PUSHED",
     "remotePushReason": null
   },
   "releaseApproved": false,
