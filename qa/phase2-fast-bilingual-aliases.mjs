@@ -136,4 +136,13 @@ export const extraAliases={
  '23':['23','twenty three','twenty-three','vinte e tres','vinte e três'],
  '24':['24','twenty four','twenty-four','vinte e quatro'],
  '25':['25','twenty five','twenty-five','vinte e cinco'],
+ '21':["21","twenty one","twenty-one","vinte e um"],
+ '22':["22","twenty two","twenty-two","vinte e dois"],
+ 'a':["a"],
+ 'b':["b"],
+ 'c':["c"],
+ 'd':["d"],
+ 'trousers':["trousers","pants","pants/trousers","calça","calças"],
+ 'there are two pillows':["there are two pillows","there are two pillows.","há dois travesseiros"],
+ 'there is a plate':["there is a plate","there is a plate.","há um prato"],
 };

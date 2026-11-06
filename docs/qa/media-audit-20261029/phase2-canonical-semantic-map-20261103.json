@@ -3,6 +3,8 @@
   "sourceCommit": "a51e0958d0c68941701b8373ccf30acf88aaf7d0",
   "policy": "Exact alternative concept, source file pinned; reject historical white/banana/black; do not infer compound scenes or morphologically different words.",
   "pins": {
+    "21": "Imagens Ilustrativa/twenty-one.png",
+    "22": "Imagens Ilustrativa/twenty-two.png",
     "23": "Imagens Ilustrativa/twenty-three.png",
     "24": "Imagens Ilustrativa/twenty-four.png",
     "25": "Imagens Ilustrativa/twenty-five.png",
@@ -160,6 +162,13 @@
     "medium": "Imagens Ilustrativa/Dress - Size medium.png",
     "knee": "Imagens Ilustrativa/body-part-touch-knees-tocar-joelhos.png",
     "park": "Imagens Ilustrativa/Drawing in the park — Desenhando no parque.png",
-    "art": "Imagens Ilustrativa/routine-draw-desenhar.png"
+    "art": "Imagens Ilustrativa/routine-draw-desenhar.png",
+    "a": "Imagens Ilustrativa/Letra A - EI.png",
+    "b": "Imagens Ilustrativa/Letra B - BI.png",
+    "c": "Imagens Ilustrativa/Letra C - SI.png",
+    "d": "Imagens Ilustrativa/Letra D - DI.png",
+    "trousers": "Imagens Ilustrativa/pants.png",
+    "there are two pillows": "Imagens Ilustrativa/Two green pillows on the sofa.png",
+    "there is a plate": "Imagens Ilustrativa/One white plate in the kitchen.png"
   }
 }
