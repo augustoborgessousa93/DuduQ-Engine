@@ -56,13 +56,38 @@ for(const item of report.applied){
 // selected Q004 as a substitute, which is not necessarily a valid session
 // deep link. This is an experiment: a mismatch still FAILS the gate.
 const sessionFixtureGaps=[];
-for(const [key,items] of sampleCandidates){
- const chosen=items.find(x=>x.questionId==='Y1M01-Q001')||items[0];
- sample.set(key,chosen);
-}
+// Preserve one browser proof for EVERY distinct source blob, then add one
+// representative of each mechanic. Do not repeat identical PNG/mechanic
+// combinations across questions; all 600 contracts and every registry image
+// have already passed separate non-browser integrity checks.
+const candidates=[...sampleCandidates.entries()].map(([key,items])=>({
+ key,item:items.find(x=>x.questionId==='Y1M01-Q001')||items[0]
+})).sort((a,b)=>a.key.localeCompare(b.key));
 const blobs=new Set(report.applied.map(x=>x.sourceGitBlob));
-assert(sample.size>=blobs.size,'SOURCE_BLOB_WITHOUT_BROWSER_SAMPLE');
-assert(sample.size<=150,'EXCESSIVE_BROWSER_SAMPLE_REQUIRES_EXPLICIT_REVIEW');
+for(const blob of [...blobs].sort()){
+ const options=candidates.filter(x=>x.item.sourceGitBlob===blob);
+ assert(options.length>0,'BROWSER_COVERAGE_MISSING_SOURCE_BLOB:'+blob);
+ const chosen=options.find(x=>x.item.questionId==='Y1M01-Q001')||options[0];
+ sample.set(chosen.key,chosen.item);
+}
+const mechanics=new Set(candidates.map(x=>x.item.mechanic));
+for(const mechanic of [...mechanics].sort()){
+ if([...sample.values()].some(x=>x.mechanic===mechanic))continue;
+ const chosen=candidates.find(x=>x.item.mechanic===mechanic);
+ assert(chosen,'BROWSER_COVERAGE_MISSING_MECHANIC:'+mechanic);
+ sample.set(chosen.key,chosen.item);
+}
+const notBrowserSampled=candidates.filter(x=>!sample.has(x.key)).map(x=>x.key);
+assert.equal(new Set([...sample.values()].map(x=>x.sourceGitBlob)).size,blobs.size,
+ 'NOT_ALL_DISTINCT_SOURCE_BLOBS_REPRESENTED');
+assert.equal(new Set([...sample.values()].map(x=>x.mechanic)).size,mechanics.size,
+ 'NOT_ALL_MECHANICS_REPRESENTED');
+assert(sample.size<=135,'BROWSER_SAMPLE_BUDGET_EXCEEDED');
+console.log('REAL_BROWSER_SAMPLING='+JSON.stringify({
+ sourceBlobs:blobs.size,distinctMechanics:mechanics.size,
+ sampledPairs:sample.size,unverifiedPairs:notBrowserSampled.length,
+ note:'Sampled media visibility only; not all gameplay certified'
+}));
 const outDir='qa/results/phase2-fast-bulk-browser';
 await mkdir(outDir,{recursive:true});
 const browser=await chromium.launch({headless:true});
@@ -141,7 +166,7 @@ try{
    try{
     const response=await page.goto(url,{waitUntil:'domcontentloaded',timeout:45000});
     record.httpStatus=response?.status()??null;
-    const deadline=Date.now()+(item.mechanic==='bubble-pop'?25000:15000);
+    const deadline=Date.now()+(item.mechanic==='bubble-pop'?12000:9000);
     do{
      const frames=page.frames();
      record.observedFrames=Math.max(record.observedFrames,frames.length);
@@ -194,6 +219,9 @@ const moduleFailures=moduleChecks.filter(x=>x.httpStatus!==200||x.questionHttpSt
 const summary={schemaVersion:'DUDUQ_FAST_BULK_BROWSER_V1',status:(failures.length||moduleFailures.length)?
  'BROWSER_EVIDENCE_BLOCKED':'BROWSER_LOAD_AND_VISIBILITY_PASS_QA_ONLY',
  sourceCommit:report.sourceCommit,sourceBlobs:blobs.size,
+ sampledSourceMechanicPairs:sample.size,sourceMechanicPairsAvailable:candidates.length,
+ notBrowserSampledSourceMechanicPairs:notBrowserSampled,
+ browserSamplingPolicy:'EVERY_SOURCE_BLOB_AND_MECHANIC_AT_LEAST_ONCE',
  mediaIds:report.appliedMediaIds,uniqueSourceMechanicSamples:sample.size,
  browserCases:cases.length,failedCases:failures.length,
  moduleRoutesChecked:moduleChecks.length,moduleRouteFailures:moduleFailures.length,
