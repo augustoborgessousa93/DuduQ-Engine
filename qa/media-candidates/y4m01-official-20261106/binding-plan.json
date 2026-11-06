@@ -1,0 +1,1400 @@
+{
+  "schemaVersion": "DUDUQ_Y4M01_OCCURRENCE_SCOPED_BINDING_PLAN_V1",
+  "createdAt": "2026-11-06T09:13:52.327Z",
+  "moduleId": "Y4M01",
+  "lane": "generation",
+  "mode": "PLAN_ONLY_NO_SOURCE_OR_REGISTRY_MUTATION",
+  "sourceQuestionFile": "dist-pages/content/english/year-4/module-01/questions.json",
+  "sourceQuestionSha256": "d2aafa73457f6ba67703f743d8a2c57eec2a16f2e862ab6ada85d9e9dbac147a",
+  "sourcePendingMediaIdCount": 33,
+  "coveredSourceMediaIdCount": 33,
+  "occurrenceScopedBindingCount": 73,
+  "questionContractsReviewed": 20,
+  "bindings": [
+    {
+      "sourceMediaId": "IMG-V11-2B-02174158FE88B58B",
+      "questionId": "Y4M01-Q001",
+      "semanticTarget": "wednesday",
+      "plannedMediaId": "IMG-Y4M01-Q001-CTX-A30EA1F607EA",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q001-R3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-WEDNESDAY.png",
+      "candidateSha256": "9085f32f3da7e561b836255fdfea7fd6999d1af16779faad0e086e974ee00aca",
+      "sourceQuestionContractSha256": "9b72c96941fabe5cf5d4b246289c98debee8498f0a0929a19705af3018730d75",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-1BB63E5A46562D1C",
+      "questionId": "Y4M01-Q001",
+      "semanticTarget": "friday",
+      "plannedMediaId": "IMG-Y4M01-Q001-CTX-66A8E6310134",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q001-R5"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-FRIDAY.png",
+      "candidateSha256": "ce52241e9cc7a5db0ef65b63d83f12c988e183ebae811a50f20ec254cb872b45",
+      "sourceQuestionContractSha256": "9b72c96941fabe5cf5d4b246289c98debee8498f0a0929a19705af3018730d75",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-51F07C81B93BA436",
+      "questionId": "Y4M01-Q001",
+      "semanticTarget": "monday",
+      "plannedMediaId": "IMG-Y4M01-Q001-CTX-B49B4954F346",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q001-R1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-MONDAY.png",
+      "candidateSha256": "11e9ef012d25ee183d0e4b97517ce6a6332043bf25d5ea408042ede9ff0bd89b",
+      "sourceQuestionContractSha256": "9b72c96941fabe5cf5d4b246289c98debee8498f0a0929a19705af3018730d75",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+      "questionId": "Y4M01-Q001",
+      "semanticTarget": "saturday",
+      "plannedMediaId": "IMG-Y4M01-Q001-CTX-5622AC13735A",
+      "contractPaths": [
+        "pairs[5].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q001-R6"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-SATURDAY.png",
+      "candidateSha256": "8a9564e3c69795167107397e66326a74af349fb165f6236ca56f0645a66a2ee1",
+      "sourceQuestionContractSha256": "9b72c96941fabe5cf5d4b246289c98debee8498f0a0929a19705af3018730d75",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-9B9E6D10506466D3",
+      "questionId": "Y4M01-Q001",
+      "semanticTarget": "thursday",
+      "plannedMediaId": "IMG-Y4M01-Q001-CTX-84F02B93FD82",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q001-R4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-THURSDAY.png",
+      "candidateSha256": "82210b210af311a41a67575c156e77cadb9caf4e28628669a8064964d431f440",
+      "sourceQuestionContractSha256": "9b72c96941fabe5cf5d4b246289c98debee8498f0a0929a19705af3018730d75",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-F81B3734A9EA4226",
+      "questionId": "Y4M01-Q001",
+      "semanticTarget": "tuesday",
+      "plannedMediaId": "IMG-Y4M01-Q001-CTX-166B4C6CAEDE",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q001-R2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-TUESDAY.png",
+      "candidateSha256": "4d586aaecf2c49c9197d91fcb8581f9d8d7344f547698ccabef30f1cf5ac065f",
+      "sourceQuestionContractSha256": "9b72c96941fabe5cf5d4b246289c98debee8498f0a0929a19705af3018730d75",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-037A8C192583A82D",
+      "questionId": "Y4M01-Q002",
+      "semanticTarget": "wednesday",
+      "plannedMediaId": "IMG-Y4M01-Q002-CTX-426B5ADE4342",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q002-T2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-WEDNESDAY.png",
+      "candidateSha256": "9085f32f3da7e561b836255fdfea7fd6999d1af16779faad0e086e974ee00aca",
+      "sourceQuestionContractSha256": "6f90efd7e4c8b9d50d921652e66a73f7619695f2732f61f391e1dea45f993000",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-0C5EFBCFF3B72AB5",
+      "questionId": "Y4M01-Q002",
+      "semanticTarget": "tuesday",
+      "plannedMediaId": "IMG-Y4M01-Q002-CTX-48603FBD11ED",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q002-T1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-TUESDAY.png",
+      "candidateSha256": "4d586aaecf2c49c9197d91fcb8581f9d8d7344f547698ccabef30f1cf5ac065f",
+      "sourceQuestionContractSha256": "6f90efd7e4c8b9d50d921652e66a73f7619695f2732f61f391e1dea45f993000",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-71ACB4E3ADFBDACD",
+      "questionId": "Y4M01-Q002",
+      "semanticTarget": "friday",
+      "plannedMediaId": "IMG-Y4M01-Q002-CTX-A62FA9260B6C",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q002-T4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-FRIDAY.png",
+      "candidateSha256": "ce52241e9cc7a5db0ef65b63d83f12c988e183ebae811a50f20ec254cb872b45",
+      "sourceQuestionContractSha256": "6f90efd7e4c8b9d50d921652e66a73f7619695f2732f61f391e1dea45f993000",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-92A2587B6E53B997",
+      "questionId": "Y4M01-Q002",
+      "semanticTarget": "thursday",
+      "plannedMediaId": "IMG-Y4M01-Q002-CTX-955DB5613D0F",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q002-T3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-THURSDAY.png",
+      "candidateSha256": "82210b210af311a41a67575c156e77cadb9caf4e28628669a8064964d431f440",
+      "sourceQuestionContractSha256": "6f90efd7e4c8b9d50d921652e66a73f7619695f2732f61f391e1dea45f993000",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-1BB63E5A46562D1C",
+      "questionId": "Y4M01-Q003",
+      "semanticTarget": "friday",
+      "plannedMediaId": "IMG-Y4M01-Q003-CTX-15244380E58C",
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M01-Q003-D4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-FRIDAY.png",
+      "candidateSha256": "ce52241e9cc7a5db0ef65b63d83f12c988e183ebae811a50f20ec254cb872b45",
+      "sourceQuestionContractSha256": "7f4ff9ac20286d336c9152ecf5a1f4ae723ba4a0f37fbc8a9c54dc1a842dcfbf",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-3027B4C1C2E03558",
+      "questionId": "Y4M01-Q003",
+      "semanticTarget": "thursday",
+      "plannedMediaId": "IMG-Y4M01-Q003-CTX-977516FCACBD",
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q003-D3",
+        "Y4M01-Q003-O4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-THURSDAY.png",
+      "candidateSha256": "82210b210af311a41a67575c156e77cadb9caf4e28628669a8064964d431f440",
+      "sourceQuestionContractSha256": "7f4ff9ac20286d336c9152ecf5a1f4ae723ba4a0f37fbc8a9c54dc1a842dcfbf",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+      "questionId": "Y4M01-Q003",
+      "semanticTarget": "saturday",
+      "plannedMediaId": "IMG-Y4M01-Q003-CTX-8BCC29BB58B0",
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M01-Q003-D5"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-SATURDAY.png",
+      "candidateSha256": "8a9564e3c69795167107397e66326a74af349fb165f6236ca56f0645a66a2ee1",
+      "sourceQuestionContractSha256": "7f4ff9ac20286d336c9152ecf5a1f4ae723ba4a0f37fbc8a9c54dc1a842dcfbf",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-903CE8E0616D5239",
+      "questionId": "Y4M01-Q003",
+      "semanticTarget": "monday",
+      "plannedMediaId": "IMG-Y4M01-Q003-CTX-A851B5BFFC97",
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q003-D1",
+        "Y4M01-Q003-O2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-MONDAY.png",
+      "candidateSha256": "11e9ef012d25ee183d0e4b97517ce6a6332043bf25d5ea408042ede9ff0bd89b",
+      "sourceQuestionContractSha256": "7f4ff9ac20286d336c9152ecf5a1f4ae723ba4a0f37fbc8a9c54dc1a842dcfbf",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-98438188D7DB405E",
+      "questionId": "Y4M01-Q003",
+      "semanticTarget": "tuesday",
+      "plannedMediaId": "IMG-Y4M01-Q003-CTX-B34D3BFFA100",
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q003-D2",
+        "Y4M01-Q003-O3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-TUESDAY.png",
+      "candidateSha256": "4d586aaecf2c49c9197d91fcb8581f9d8d7344f547698ccabef30f1cf5ac065f",
+      "sourceQuestionContractSha256": "7f4ff9ac20286d336c9152ecf5a1f4ae723ba4a0f37fbc8a9c54dc1a842dcfbf",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-D8AB8014378C4168",
+      "questionId": "Y4M01-Q003",
+      "semanticTarget": "wednesday",
+      "plannedMediaId": "IMG-Y4M01-Q003-CTX-BC05C4446EC0",
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q003-O1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-WEDNESDAY.png",
+      "candidateSha256": "9085f32f3da7e561b836255fdfea7fd6999d1af16779faad0e086e974ee00aca",
+      "sourceQuestionContractSha256": "7f4ff9ac20286d336c9152ecf5a1f4ae723ba4a0f37fbc8a9c54dc1a842dcfbf",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-24AE8FD158FDB6BF",
+      "questionId": "Y4M01-Q004",
+      "semanticTarget": "monday",
+      "plannedMediaId": "IMG-Y4M01-Q004-CTX-3EB1D4F6DE88",
+      "contractPaths": [
+        "pairs[1].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": [],
+      "candidateFile": "images/DUDUQ-Y4M01-MONDAY.png",
+      "candidateSha256": "11e9ef012d25ee183d0e4b97517ce6a6332043bf25d5ea408042ede9ff0bd89b",
+      "sourceQuestionContractSha256": "6e01fb4def49bb49e770d39c4931d8368511857b8b6c17f86863f1ab0205c430",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-874482C576DC9DD7",
+      "questionId": "Y4M01-Q004",
+      "semanticTarget": "thursday",
+      "plannedMediaId": "IMG-Y4M01-Q004-CTX-C0C87A23FAD7",
+      "contractPaths": [
+        "pairs[0].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": [],
+      "candidateFile": "images/DUDUQ-Y4M01-THURSDAY.png",
+      "candidateSha256": "82210b210af311a41a67575c156e77cadb9caf4e28628669a8064964d431f440",
+      "sourceQuestionContractSha256": "6e01fb4def49bb49e770d39c4931d8368511857b8b6c17f86863f1ab0205c430",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-9AAB100095051D64",
+      "questionId": "Y4M01-Q004",
+      "semanticTarget": "tuesday",
+      "plannedMediaId": "IMG-Y4M01-Q004-CTX-B17BD9A1F1CF",
+      "contractPaths": [
+        "pairs[2].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": [],
+      "candidateFile": "images/DUDUQ-Y4M01-TUESDAY.png",
+      "candidateSha256": "4d586aaecf2c49c9197d91fcb8581f9d8d7344f547698ccabef30f1cf5ac065f",
+      "sourceQuestionContractSha256": "6e01fb4def49bb49e770d39c4931d8368511857b8b6c17f86863f1ab0205c430",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-ECBAE24445C899B2",
+      "questionId": "Y4M01-Q004",
+      "semanticTarget": "wednesday",
+      "plannedMediaId": "IMG-Y4M01-Q004-CTX-950906DAD505",
+      "contractPaths": [
+        "pairs[3].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": [],
+      "candidateFile": "images/DUDUQ-Y4M01-WEDNESDAY.png",
+      "candidateSha256": "9085f32f3da7e561b836255fdfea7fd6999d1af16779faad0e086e974ee00aca",
+      "sourceQuestionContractSha256": "6e01fb4def49bb49e770d39c4931d8368511857b8b6c17f86863f1ab0205c430",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-7DC045FB1CE9540B",
+      "questionId": "Y4M01-Q005",
+      "semanticTarget": "friday",
+      "plannedMediaId": "IMG-Y4M01-Q005-CTX-0BEC9DBB105E",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q005-O1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-FRIDAY.png",
+      "candidateSha256": "ce52241e9cc7a5db0ef65b63d83f12c988e183ebae811a50f20ec254cb872b45",
+      "sourceQuestionContractSha256": "8d4dd39ddc5d34b67f06c7d4b867395239bd90e145fcf9aa39c6136bdeadc4eb",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-903CE8E0616D5239",
+      "questionId": "Y4M01-Q005",
+      "semanticTarget": "monday",
+      "plannedMediaId": "IMG-Y4M01-Q005-CTX-3EF498BB6284",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q005-O2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-MONDAY.png",
+      "candidateSha256": "11e9ef012d25ee183d0e4b97517ce6a6332043bf25d5ea408042ede9ff0bd89b",
+      "sourceQuestionContractSha256": "8d4dd39ddc5d34b67f06c7d4b867395239bd90e145fcf9aa39c6136bdeadc4eb",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-98438188D7DB405E",
+      "questionId": "Y4M01-Q005",
+      "semanticTarget": "tuesday",
+      "plannedMediaId": "IMG-Y4M01-Q005-CTX-BE0D7C8A7072",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q005-O3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-TUESDAY.png",
+      "candidateSha256": "4d586aaecf2c49c9197d91fcb8581f9d8d7344f547698ccabef30f1cf5ac065f",
+      "sourceQuestionContractSha256": "8d4dd39ddc5d34b67f06c7d4b867395239bd90e145fcf9aa39c6136bdeadc4eb",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-D8AB8014378C4168",
+      "questionId": "Y4M01-Q005",
+      "semanticTarget": "wednesday",
+      "plannedMediaId": "IMG-Y4M01-Q005-CTX-9DA878FF3B99",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q005-O4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-WEDNESDAY.png",
+      "candidateSha256": "9085f32f3da7e561b836255fdfea7fd6999d1af16779faad0e086e974ee00aca",
+      "sourceQuestionContractSha256": "8d4dd39ddc5d34b67f06c7d4b867395239bd90e145fcf9aa39c6136bdeadc4eb",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-035DABE1791AD949",
+      "questionId": "Y4M01-Q006",
+      "semanticTarget": "monday",
+      "plannedMediaId": "IMG-Y4M01-Q006-CTX-4F357D6E8925",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q006-T3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-MONDAY.png",
+      "candidateSha256": "11e9ef012d25ee183d0e4b97517ce6a6332043bf25d5ea408042ede9ff0bd89b",
+      "sourceQuestionContractSha256": "8e56d0b0295a02a9eb81cb623ea563d14c784378d0cee0626fb6859548849e48",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-0C5EFBCFF3B72AB5",
+      "questionId": "Y4M01-Q006",
+      "semanticTarget": "tuesday",
+      "plannedMediaId": "IMG-Y4M01-Q006-CTX-012A40C5ECE8",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q006-T4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-TUESDAY.png",
+      "candidateSha256": "4d586aaecf2c49c9197d91fcb8581f9d8d7344f547698ccabef30f1cf5ac065f",
+      "sourceQuestionContractSha256": "8e56d0b0295a02a9eb81cb623ea563d14c784378d0cee0626fb6859548849e48",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-5000D4791C83AE56",
+      "questionId": "Y4M01-Q006",
+      "semanticTarget": "sunday",
+      "plannedMediaId": "IMG-Y4M01-Q006-CTX-8ABAA8FD9FC1",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q006-T2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-SUNDAY.png",
+      "candidateSha256": "78c28d7af1112337fdb9a9662e62e6d00b2e118c34d2e3f5e420f08807c23a75",
+      "sourceQuestionContractSha256": "8e56d0b0295a02a9eb81cb623ea563d14c784378d0cee0626fb6859548849e48",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-D5342DA12F205C1A",
+      "questionId": "Y4M01-Q006",
+      "semanticTarget": "saturday",
+      "plannedMediaId": "IMG-Y4M01-Q006-CTX-8A26E9650FD7",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q006-T1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-SATURDAY.png",
+      "candidateSha256": "8a9564e3c69795167107397e66326a74af349fb165f6236ca56f0645a66a2ee1",
+      "sourceQuestionContractSha256": "8e56d0b0295a02a9eb81cb623ea563d14c784378d0cee0626fb6859548849e48",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-1389F64FD9E1215A",
+      "questionId": "Y4M01-Q007",
+      "semanticTarget": "birthday",
+      "plannedMediaId": "IMG-Y4M01-Q007-CTX-294CB21DF22F",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q007-R1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-BIRTHDAY.png",
+      "candidateSha256": "18de82b327912293a2066112a6b003076ab54e531732e518df0ebfe1b9133ca0",
+      "sourceQuestionContractSha256": "59da06a5c3c9b00893754b42399726629169a4d2535260d6c1c3fe570bf9a3a2",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-24EA15B949714E84",
+      "questionId": "Y4M01-Q007",
+      "semanticTarget": "age",
+      "plannedMediaId": "IMG-Y4M01-Q007-CTX-F0B52FF4EE27",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q007-R5"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-AGE.png",
+      "candidateSha256": "f18a37d29a9fcd57d157880d706ed7aab9dd426a07c590c3b9ab016149bd9569",
+      "sourceQuestionContractSha256": "59da06a5c3c9b00893754b42399726629169a4d2535260d6c1c3fe570bf9a3a2",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-2585704D6AB32376",
+      "questionId": "Y4M01-Q007",
+      "semanticTarget": "best friend",
+      "plannedMediaId": "IMG-Y4M01-Q007-CTX-D3E3F46A72E1",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q007-R3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-BEST-FRIEND.png",
+      "candidateSha256": "638ccca43fe727ee5b961d883bbc982d5fe67b873d6d60285f67941b8ef99c1c",
+      "sourceQuestionContractSha256": "59da06a5c3c9b00893754b42399726629169a4d2535260d6c1c3fe570bf9a3a2",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-51F07C81B93BA436",
+      "questionId": "Y4M01-Q007",
+      "semanticTarget": "monday",
+      "plannedMediaId": "IMG-Y4M01-Q007-CTX-8FF1BA6563C2",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q007-R4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-MONDAY.png",
+      "candidateSha256": "11e9ef012d25ee183d0e4b97517ce6a6332043bf25d5ea408042ede9ff0bd89b",
+      "sourceQuestionContractSha256": "59da06a5c3c9b00893754b42399726629169a4d2535260d6c1c3fe570bf9a3a2",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-EAD80736870B5584",
+      "questionId": "Y4M01-Q007",
+      "semanticTarget": "favorite",
+      "plannedMediaId": "IMG-Y4M01-Q007-CTX-5DC19E25E346",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q007-R2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-FAVORITE.png",
+      "candidateSha256": "1b195bc8f55a66f34823e41efeb04d393f5b62aaa09cea864520dbf53e62742e",
+      "sourceQuestionContractSha256": "59da06a5c3c9b00893754b42399726629169a4d2535260d6c1c3fe570bf9a3a2",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-51F07C81B93BA436",
+      "questionId": "Y4M01-Q008",
+      "semanticTarget": "monday",
+      "plannedMediaId": "IMG-Y4M01-Q008-CTX-912DBE829F3E",
+      "contractPaths": [
+        "mediaBindings[0]"
+      ],
+      "roles": [
+        "SUPPORTING_IMAGE"
+      ],
+      "optionOrCardIds": [],
+      "candidateFile": "images/DUDUQ-Y4M01-MONDAY.png",
+      "candidateSha256": "11e9ef012d25ee183d0e4b97517ce6a6332043bf25d5ea408042ede9ff0bd89b",
+      "sourceQuestionContractSha256": "f0f5be4971cfa066196654d3e266936feae8d344ef6e22e3d2bb458673bf25db",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-903CE8E0616D5239",
+      "questionId": "Y4M01-Q009",
+      "semanticTarget": "monday",
+      "plannedMediaId": "IMG-Y4M01-Q009-CTX-4E1A4318744C",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q009-O2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-MONDAY.png",
+      "candidateSha256": "11e9ef012d25ee183d0e4b97517ce6a6332043bf25d5ea408042ede9ff0bd89b",
+      "sourceQuestionContractSha256": "37ea39aa0573197660e6d5171da2fd6149d2016178105b865378bceddd3e1d53",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-98438188D7DB405E",
+      "questionId": "Y4M01-Q009",
+      "semanticTarget": "tuesday",
+      "plannedMediaId": "IMG-Y4M01-Q009-CTX-2280FCE09DE7",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q009-O3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-TUESDAY.png",
+      "candidateSha256": "4d586aaecf2c49c9197d91fcb8581f9d8d7344f547698ccabef30f1cf5ac065f",
+      "sourceQuestionContractSha256": "37ea39aa0573197660e6d5171da2fd6149d2016178105b865378bceddd3e1d53",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-D8AB8014378C4168",
+      "questionId": "Y4M01-Q009",
+      "semanticTarget": "wednesday",
+      "plannedMediaId": "IMG-Y4M01-Q009-CTX-2BF729B9FA1A",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q009-O4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-WEDNESDAY.png",
+      "candidateSha256": "9085f32f3da7e561b836255fdfea7fd6999d1af16779faad0e086e974ee00aca",
+      "sourceQuestionContractSha256": "37ea39aa0573197660e6d5171da2fd6149d2016178105b865378bceddd3e1d53",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-E5F5D9640ED65EA5",
+      "questionId": "Y4M01-Q009",
+      "semanticTarget": "birthday",
+      "plannedMediaId": "IMG-Y4M01-Q009-CTX-88B6AEDA0992",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q009-O1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-BIRTHDAY.png",
+      "candidateSha256": "18de82b327912293a2066112a6b003076ab54e531732e518df0ebfe1b9133ca0",
+      "sourceQuestionContractSha256": "37ea39aa0573197660e6d5171da2fd6149d2016178105b865378bceddd3e1d53",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-1BB63E5A46562D1C",
+      "questionId": "Y4M01-Q011",
+      "semanticTarget": "friday",
+      "plannedMediaId": "IMG-Y4M01-Q011-CTX-D663B7DC99E1",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q011-R2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-FRIDAY.png",
+      "candidateSha256": "ce52241e9cc7a5db0ef65b63d83f12c988e183ebae811a50f20ec254cb872b45",
+      "sourceQuestionContractSha256": "95cbebff8346c74055c2c2aa8752f8307ad445e18421d4151f7423b415d6e97c",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-51F07C81B93BA436",
+      "questionId": "Y4M01-Q011",
+      "semanticTarget": "monday",
+      "plannedMediaId": "IMG-Y4M01-Q011-CTX-26913B3298C7",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q011-R5"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-MONDAY.png",
+      "candidateSha256": "11e9ef012d25ee183d0e4b97517ce6a6332043bf25d5ea408042ede9ff0bd89b",
+      "sourceQuestionContractSha256": "95cbebff8346c74055c2c2aa8752f8307ad445e18421d4151f7423b415d6e97c",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+      "questionId": "Y4M01-Q011",
+      "semanticTarget": "saturday",
+      "plannedMediaId": "IMG-Y4M01-Q011-CTX-5E9998BDCE93",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q011-R3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-SATURDAY.png",
+      "candidateSha256": "8a9564e3c69795167107397e66326a74af349fb165f6236ca56f0645a66a2ee1",
+      "sourceQuestionContractSha256": "95cbebff8346c74055c2c2aa8752f8307ad445e18421d4151f7423b415d6e97c",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-8FECB556425AE3C6",
+      "questionId": "Y4M01-Q011",
+      "semanticTarget": "sunday",
+      "plannedMediaId": "IMG-Y4M01-Q011-CTX-EA90A3AF36A7",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q011-R4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-SUNDAY.png",
+      "candidateSha256": "78c28d7af1112337fdb9a9662e62e6d00b2e118c34d2e3f5e420f08807c23a75",
+      "sourceQuestionContractSha256": "95cbebff8346c74055c2c2aa8752f8307ad445e18421d4151f7423b415d6e97c",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-9B9E6D10506466D3",
+      "questionId": "Y4M01-Q011",
+      "semanticTarget": "thursday",
+      "plannedMediaId": "IMG-Y4M01-Q011-CTX-D036139DE113",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q011-R1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-THURSDAY.png",
+      "candidateSha256": "82210b210af311a41a67575c156e77cadb9caf4e28628669a8064964d431f440",
+      "sourceQuestionContractSha256": "95cbebff8346c74055c2c2aa8752f8307ad445e18421d4151f7423b415d6e97c",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-F81B3734A9EA4226",
+      "questionId": "Y4M01-Q011",
+      "semanticTarget": "tuesday",
+      "plannedMediaId": "IMG-Y4M01-Q011-CTX-D2B951E6F8F7",
+      "contractPaths": [
+        "pairs[5].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q011-R6"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-TUESDAY.png",
+      "candidateSha256": "4d586aaecf2c49c9197d91fcb8581f9d8d7344f547698ccabef30f1cf5ac065f",
+      "sourceQuestionContractSha256": "95cbebff8346c74055c2c2aa8752f8307ad445e18421d4151f7423b415d6e97c",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-035DABE1791AD949",
+      "questionId": "Y4M01-Q012",
+      "semanticTarget": "monday",
+      "plannedMediaId": "IMG-Y4M01-Q012-CTX-5369F5A6E0EA",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q012-T3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-MONDAY.png",
+      "candidateSha256": "11e9ef012d25ee183d0e4b97517ce6a6332043bf25d5ea408042ede9ff0bd89b",
+      "sourceQuestionContractSha256": "fafd417e41384fc5b177c9d92fefca3e00190d6f4c82a702427877a42ddc085d",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-0C5EFBCFF3B72AB5",
+      "questionId": "Y4M01-Q012",
+      "semanticTarget": "tuesday",
+      "plannedMediaId": "IMG-Y4M01-Q012-CTX-4E894BE966C7",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q012-T4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-TUESDAY.png",
+      "candidateSha256": "4d586aaecf2c49c9197d91fcb8581f9d8d7344f547698ccabef30f1cf5ac065f",
+      "sourceQuestionContractSha256": "fafd417e41384fc5b177c9d92fefca3e00190d6f4c82a702427877a42ddc085d",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-DD7EA966CFB7CFEC",
+      "questionId": "Y4M01-Q012",
+      "semanticTarget": "favorite",
+      "plannedMediaId": "IMG-Y4M01-Q012-CTX-017EA367C1E7",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q012-T1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-FAVORITE.png",
+      "candidateSha256": "1b195bc8f55a66f34823e41efeb04d393f5b62aaa09cea864520dbf53e62742e",
+      "sourceQuestionContractSha256": "fafd417e41384fc5b177c9d92fefca3e00190d6f4c82a702427877a42ddc085d",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-EC10D9EEC0A5D08E",
+      "questionId": "Y4M01-Q012",
+      "semanticTarget": "best friend",
+      "plannedMediaId": "IMG-Y4M01-Q012-CTX-2C70676F4718",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q012-T2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-BEST-FRIEND.png",
+      "candidateSha256": "638ccca43fe727ee5b961d883bbc982d5fe67b873d6d60285f67941b8ef99c1c",
+      "sourceQuestionContractSha256": "fafd417e41384fc5b177c9d92fefca3e00190d6f4c82a702427877a42ddc085d",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-903CE8E0616D5239",
+      "questionId": "Y4M01-Q013",
+      "semanticTarget": "monday",
+      "plannedMediaId": "IMG-Y4M01-Q013-CTX-E0011E08632D",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q013-O2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-MONDAY.png",
+      "candidateSha256": "11e9ef012d25ee183d0e4b97517ce6a6332043bf25d5ea408042ede9ff0bd89b",
+      "sourceQuestionContractSha256": "268342edf24c1a474ef462abde48e2177a8e2093542c10c9c1dcb872519b3849",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-98438188D7DB405E",
+      "questionId": "Y4M01-Q013",
+      "semanticTarget": "tuesday",
+      "plannedMediaId": "IMG-Y4M01-Q013-CTX-A0DFE41769F4",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q013-O3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-TUESDAY.png",
+      "candidateSha256": "4d586aaecf2c49c9197d91fcb8581f9d8d7344f547698ccabef30f1cf5ac065f",
+      "sourceQuestionContractSha256": "268342edf24c1a474ef462abde48e2177a8e2093542c10c9c1dcb872519b3849",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-C0C9F76D0988A785",
+      "questionId": "Y4M01-Q013",
+      "semanticTarget": "saturday",
+      "plannedMediaId": "IMG-Y4M01-Q013-CTX-C75980BC582C",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q013-O1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-SATURDAY.png",
+      "candidateSha256": "8a9564e3c69795167107397e66326a74af349fb165f6236ca56f0645a66a2ee1",
+      "sourceQuestionContractSha256": "268342edf24c1a474ef462abde48e2177a8e2093542c10c9c1dcb872519b3849",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-D8AB8014378C4168",
+      "questionId": "Y4M01-Q013",
+      "semanticTarget": "wednesday",
+      "plannedMediaId": "IMG-Y4M01-Q013-CTX-67163492B614",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q013-O4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-WEDNESDAY.png",
+      "candidateSha256": "9085f32f3da7e561b836255fdfea7fd6999d1af16779faad0e086e974ee00aca",
+      "sourceQuestionContractSha256": "268342edf24c1a474ef462abde48e2177a8e2093542c10c9c1dcb872519b3849",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-1BB63E5A46562D1C",
+      "questionId": "Y4M01-Q015",
+      "semanticTarget": "friday",
+      "plannedMediaId": "IMG-Y4M01-Q015-CTX-01DC93F09E07",
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M01-Q015-D4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-FRIDAY.png",
+      "candidateSha256": "ce52241e9cc7a5db0ef65b63d83f12c988e183ebae811a50f20ec254cb872b45",
+      "sourceQuestionContractSha256": "e382fcb21755a263e213e4da33f174918ec60ea1bba7f9c49e69825e3c53bf2e",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-3027B4C1C2E03558",
+      "questionId": "Y4M01-Q015",
+      "semanticTarget": "thursday",
+      "plannedMediaId": "IMG-Y4M01-Q015-CTX-6A6555D4E115",
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q015-D3",
+        "Y4M01-Q015-O4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-THURSDAY.png",
+      "candidateSha256": "82210b210af311a41a67575c156e77cadb9caf4e28628669a8064964d431f440",
+      "sourceQuestionContractSha256": "e382fcb21755a263e213e4da33f174918ec60ea1bba7f9c49e69825e3c53bf2e",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+      "questionId": "Y4M01-Q015",
+      "semanticTarget": "saturday",
+      "plannedMediaId": "IMG-Y4M01-Q015-CTX-E30AC5D06013",
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M01-Q015-D5"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-SATURDAY.png",
+      "candidateSha256": "8a9564e3c69795167107397e66326a74af349fb165f6236ca56f0645a66a2ee1",
+      "sourceQuestionContractSha256": "e382fcb21755a263e213e4da33f174918ec60ea1bba7f9c49e69825e3c53bf2e",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-903CE8E0616D5239",
+      "questionId": "Y4M01-Q015",
+      "semanticTarget": "monday",
+      "plannedMediaId": "IMG-Y4M01-Q015-CTX-128651E05AE7",
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q015-O1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-MONDAY.png",
+      "candidateSha256": "11e9ef012d25ee183d0e4b97517ce6a6332043bf25d5ea408042ede9ff0bd89b",
+      "sourceQuestionContractSha256": "e382fcb21755a263e213e4da33f174918ec60ea1bba7f9c49e69825e3c53bf2e",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-98438188D7DB405E",
+      "questionId": "Y4M01-Q015",
+      "semanticTarget": "tuesday",
+      "plannedMediaId": "IMG-Y4M01-Q015-CTX-DFCAD25D4CEC",
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q015-D1",
+        "Y4M01-Q015-O2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-TUESDAY.png",
+      "candidateSha256": "4d586aaecf2c49c9197d91fcb8581f9d8d7344f547698ccabef30f1cf5ac065f",
+      "sourceQuestionContractSha256": "e382fcb21755a263e213e4da33f174918ec60ea1bba7f9c49e69825e3c53bf2e",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-D8AB8014378C4168",
+      "questionId": "Y4M01-Q015",
+      "semanticTarget": "wednesday",
+      "plannedMediaId": "IMG-Y4M01-Q015-CTX-F2B0DF1BAE58",
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q015-D2",
+        "Y4M01-Q015-O3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-WEDNESDAY.png",
+      "candidateSha256": "9085f32f3da7e561b836255fdfea7fd6999d1af16779faad0e086e974ee00aca",
+      "sourceQuestionContractSha256": "e382fcb21755a263e213e4da33f174918ec60ea1bba7f9c49e69825e3c53bf2e",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-037A8C192583A82D",
+      "questionId": "Y4M01-Q016",
+      "semanticTarget": "wednesday",
+      "plannedMediaId": "IMG-Y4M01-Q016-CTX-4C41C60DE5D3",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q016-T2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-WEDNESDAY.png",
+      "candidateSha256": "9085f32f3da7e561b836255fdfea7fd6999d1af16779faad0e086e974ee00aca",
+      "sourceQuestionContractSha256": "e20b615342557dac68c9083d2053250482c036f36b69eb524cfab154cf5bcfdb",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-0C5EFBCFF3B72AB5",
+      "questionId": "Y4M01-Q016",
+      "semanticTarget": "tuesday",
+      "plannedMediaId": "IMG-Y4M01-Q016-CTX-232C78AFE10D",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q016-T1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-TUESDAY.png",
+      "candidateSha256": "4d586aaecf2c49c9197d91fcb8581f9d8d7344f547698ccabef30f1cf5ac065f",
+      "sourceQuestionContractSha256": "e20b615342557dac68c9083d2053250482c036f36b69eb524cfab154cf5bcfdb",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-71ACB4E3ADFBDACD",
+      "questionId": "Y4M01-Q016",
+      "semanticTarget": "friday",
+      "plannedMediaId": "IMG-Y4M01-Q016-CTX-DB7579D7F9D9",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q016-T4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-FRIDAY.png",
+      "candidateSha256": "ce52241e9cc7a5db0ef65b63d83f12c988e183ebae811a50f20ec254cb872b45",
+      "sourceQuestionContractSha256": "e20b615342557dac68c9083d2053250482c036f36b69eb524cfab154cf5bcfdb",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-92A2587B6E53B997",
+      "questionId": "Y4M01-Q016",
+      "semanticTarget": "thursday",
+      "plannedMediaId": "IMG-Y4M01-Q016-CTX-46C293BC981D",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q016-T3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-THURSDAY.png",
+      "candidateSha256": "82210b210af311a41a67575c156e77cadb9caf4e28628669a8064964d431f440",
+      "sourceQuestionContractSha256": "e20b615342557dac68c9083d2053250482c036f36b69eb524cfab154cf5bcfdb",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-1389F64FD9E1215A",
+      "questionId": "Y4M01-Q017",
+      "semanticTarget": "birthday",
+      "plannedMediaId": "IMG-Y4M01-Q017-CTX-191766446DBD",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q017-R4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-BIRTHDAY.png",
+      "candidateSha256": "18de82b327912293a2066112a6b003076ab54e531732e518df0ebfe1b9133ca0",
+      "sourceQuestionContractSha256": "2f82414135c116c26b4cb74b16f835337cab4d7af707cda1cb57e19e80a03a1e",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-24EA15B949714E84",
+      "questionId": "Y4M01-Q017",
+      "semanticTarget": "age",
+      "plannedMediaId": "IMG-Y4M01-Q017-CTX-1736C22ED625",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q017-R3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-AGE.png",
+      "candidateSha256": "f18a37d29a9fcd57d157880d706ed7aab9dd426a07c590c3b9ab016149bd9569",
+      "sourceQuestionContractSha256": "2f82414135c116c26b4cb74b16f835337cab4d7af707cda1cb57e19e80a03a1e",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-2585704D6AB32376",
+      "questionId": "Y4M01-Q017",
+      "semanticTarget": "best friend",
+      "plannedMediaId": "IMG-Y4M01-Q017-CTX-D26083B256E2",
+      "contractPaths": [
+        "pairs[5].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q017-R6"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-BEST-FRIEND.png",
+      "candidateSha256": "638ccca43fe727ee5b961d883bbc982d5fe67b873d6d60285f67941b8ef99c1c",
+      "sourceQuestionContractSha256": "2f82414135c116c26b4cb74b16f835337cab4d7af707cda1cb57e19e80a03a1e",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+      "questionId": "Y4M01-Q017",
+      "semanticTarget": "saturday",
+      "plannedMediaId": "IMG-Y4M01-Q017-CTX-AC0EFD37EDE2",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q017-R1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-SATURDAY.png",
+      "candidateSha256": "8a9564e3c69795167107397e66326a74af349fb165f6236ca56f0645a66a2ee1",
+      "sourceQuestionContractSha256": "2f82414135c116c26b4cb74b16f835337cab4d7af707cda1cb57e19e80a03a1e",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-8FECB556425AE3C6",
+      "questionId": "Y4M01-Q017",
+      "semanticTarget": "sunday",
+      "plannedMediaId": "IMG-Y4M01-Q017-CTX-3950451F59E3",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q017-R2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-SUNDAY.png",
+      "candidateSha256": "78c28d7af1112337fdb9a9662e62e6d00b2e118c34d2e3f5e420f08807c23a75",
+      "sourceQuestionContractSha256": "2f82414135c116c26b4cb74b16f835337cab4d7af707cda1cb57e19e80a03a1e",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-EAD80736870B5584",
+      "questionId": "Y4M01-Q017",
+      "semanticTarget": "favorite",
+      "plannedMediaId": "IMG-Y4M01-Q017-CTX-6365C82FD301",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q017-R5"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-FAVORITE.png",
+      "candidateSha256": "1b195bc8f55a66f34823e41efeb04d393f5b62aaa09cea864520dbf53e62742e",
+      "sourceQuestionContractSha256": "2f82414135c116c26b4cb74b16f835337cab4d7af707cda1cb57e19e80a03a1e",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-9B9E6D10506466D3",
+      "questionId": "Y4M01-Q018",
+      "semanticTarget": "thursday",
+      "plannedMediaId": "IMG-Y4M01-Q018-CTX-8BFAE5A54251",
+      "contractPaths": [
+        "mediaBindings[0]"
+      ],
+      "roles": [
+        "SUPPORTING_IMAGE"
+      ],
+      "optionOrCardIds": [],
+      "candidateFile": "images/DUDUQ-Y4M01-THURSDAY.png",
+      "candidateSha256": "82210b210af311a41a67575c156e77cadb9caf4e28628669a8064964d431f440",
+      "sourceQuestionContractSha256": "65f3f372dd04ea133627071d74e54adb45fbfc7a3d8f97cee81a48bee0a932fe",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-16B25DA2B15F3CBD",
+      "questionId": "Y4M01-Q020",
+      "semanticTarget": "age",
+      "plannedMediaId": "IMG-Y4M01-Q020-CTX-95FB5C049094",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q020-T2"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-AGE.png",
+      "candidateSha256": "f18a37d29a9fcd57d157880d706ed7aab9dd426a07c590c3b9ab016149bd9569",
+      "sourceQuestionContractSha256": "5b9850b98c0ab9fb792976cdf74895726082cfcf80c64235375685ec6b11ba18",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-7C7462127E434210",
+      "questionId": "Y4M01-Q020",
+      "semanticTarget": "birthday",
+      "plannedMediaId": "IMG-Y4M01-Q020-CTX-CAE7BD388C59",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q020-T3"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-BIRTHDAY.png",
+      "candidateSha256": "18de82b327912293a2066112a6b003076ab54e531732e518df0ebfe1b9133ca0",
+      "sourceQuestionContractSha256": "5b9850b98c0ab9fb792976cdf74895726082cfcf80c64235375685ec6b11ba18",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-DD7EA966CFB7CFEC",
+      "questionId": "Y4M01-Q020",
+      "semanticTarget": "favorite",
+      "plannedMediaId": "IMG-Y4M01-Q020-CTX-C62A557039EA",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q020-T4"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-FAVORITE.png",
+      "candidateSha256": "1b195bc8f55a66f34823e41efeb04d393f5b62aaa09cea864520dbf53e62742e",
+      "sourceQuestionContractSha256": "5b9850b98c0ab9fb792976cdf74895726082cfcf80c64235375685ec6b11ba18",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-EC10D9EEC0A5D08E",
+      "questionId": "Y4M01-Q020",
+      "semanticTarget": "best friend",
+      "plannedMediaId": "IMG-Y4M01-Q020-CTX-F2B28ABF70D8",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M01-Q020-T1"
+      ],
+      "candidateFile": "images/DUDUQ-Y4M01-BEST-FRIEND.png",
+      "candidateSha256": "638ccca43fe727ee5b961d883bbc982d5fe67b873d6d60285f67941b8ef99c1c",
+      "sourceQuestionContractSha256": "5b9850b98c0ab9fb792976cdf74895726082cfcf80c64235375685ec6b11ba18",
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    }
+  ],
+  "questionContractsModified": false,
+  "registryModified": false,
+  "overlayApplied": false,
+  "productionApproved": false
+}

@@ -1,0 +1,1329 @@
+{
+  "schemaVersion": "DUDUQ_Y4M01_QUESTION_INVENTORY_V1",
+  "createdAt": "2026-11-06T09:13:52.327Z",
+  "moduleId": "Y4M01",
+  "lane": "generation",
+  "candidateOnly": true,
+  "sourceQuestionFile": "dist-pages/content/english/year-4/module-01/questions.json",
+  "sourceQuestionSha256": "d2aafa73457f6ba67703f743d8a2c57eec2a16f2e862ab6ada85d9e9dbac147a",
+  "questionCount": 20,
+  "allSemanticTargetCount": 12,
+  "allSemanticTargets": [
+    "age",
+    "best friend",
+    "birthday",
+    "favorite",
+    "friday",
+    "monday",
+    "name",
+    "saturday",
+    "sunday",
+    "thursday",
+    "tuesday",
+    "wednesday"
+  ],
+  "visualSemanticTargetCount": 11,
+  "visualSemanticTargets": [
+    "age",
+    "best friend",
+    "birthday",
+    "favorite",
+    "friday",
+    "monday",
+    "saturday",
+    "sunday",
+    "thursday",
+    "tuesday",
+    "wednesday"
+  ],
+  "nonVisualOnlySemanticTargets": [
+    "name"
+  ],
+  "sourcePendingMediaIdCount": 33,
+  "sourcePendingMediaIds": [
+    "IMG-V11-2B-02174158FE88B58B",
+    "IMG-V11-2B-035DABE1791AD949",
+    "IMG-V11-2B-037A8C192583A82D",
+    "IMG-V11-2B-0C5EFBCFF3B72AB5",
+    "IMG-V11-2B-1389F64FD9E1215A",
+    "IMG-V11-2B-16B25DA2B15F3CBD",
+    "IMG-V11-2B-1BB63E5A46562D1C",
+    "IMG-V11-2B-24AE8FD158FDB6BF",
+    "IMG-V11-2B-24EA15B949714E84",
+    "IMG-V11-2B-2585704D6AB32376",
+    "IMG-V11-2B-3027B4C1C2E03558",
+    "IMG-V11-2B-5000D4791C83AE56",
+    "IMG-V11-2B-51F07C81B93BA436",
+    "IMG-V11-2B-71ACB4E3ADFBDACD",
+    "IMG-V11-2B-71BBB7F3EB57C988",
+    "IMG-V11-2B-7C7462127E434210",
+    "IMG-V11-2B-7DC045FB1CE9540B",
+    "IMG-V11-2B-874482C576DC9DD7",
+    "IMG-V11-2B-8FECB556425AE3C6",
+    "IMG-V11-2B-903CE8E0616D5239",
+    "IMG-V11-2B-92A2587B6E53B997",
+    "IMG-V11-2B-98438188D7DB405E",
+    "IMG-V11-2B-9AAB100095051D64",
+    "IMG-V11-2B-9B9E6D10506466D3",
+    "IMG-V11-2B-C0C9F76D0988A785",
+    "IMG-V11-2B-D5342DA12F205C1A",
+    "IMG-V11-2B-D8AB8014378C4168",
+    "IMG-V11-2B-DD7EA966CFB7CFEC",
+    "IMG-V11-2B-E5F5D9640ED65EA5",
+    "IMG-V11-2B-EAD80736870B5584",
+    "IMG-V11-2B-EC10D9EEC0A5D08E",
+    "IMG-V11-2B-ECBAE24445C899B2",
+    "IMG-V11-2B-F81B3734A9EA4226"
+  ],
+  "visualUsageCount": 81,
+  "occurrenceScopedBindingGroupCount": 73,
+  "questions": [
+    {
+      "questionId": "Y4M01-Q001",
+      "sequencePosition": 1,
+      "topicEn": "My Week and Profile",
+      "taskType": "Connect related source-backed semantic items.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "teaching: Identify weekdays and organize selected fictional profile facts. Focus: Monday-Sunday in sequence.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "answerKey": {
+        "Y4M01-Q001-L1": "Y4M01-Q001-R1",
+        "Y4M01-Q001-L2": "Y4M01-Q001-R2",
+        "Y4M01-Q001-L3": "Y4M01-Q001-R3",
+        "Y4M01-Q001-L4": "Y4M01-Q001-R4",
+        "Y4M01-Q001-L5": "Y4M01-Q001-R5",
+        "Y4M01-Q001-L6": "Y4M01-Q001-R6"
+      },
+      "semanticTargets": [
+        "friday",
+        "monday",
+        "saturday",
+        "thursday",
+        "tuesday",
+        "wednesday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q001",
+          "mediaId": "IMG-V11-2B-51F07C81B93BA436",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "monday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q001-R1"
+        },
+        {
+          "questionId": "Y4M01-Q001",
+          "mediaId": "IMG-V11-2B-F81B3734A9EA4226",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "tuesday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q001-R2"
+        },
+        {
+          "questionId": "Y4M01-Q001",
+          "mediaId": "IMG-V11-2B-02174158FE88B58B",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "wednesday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q001-R3"
+        },
+        {
+          "questionId": "Y4M01-Q001",
+          "mediaId": "IMG-V11-2B-9B9E6D10506466D3",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "thursday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q001-R4"
+        },
+        {
+          "questionId": "Y4M01-Q001",
+          "mediaId": "IMG-V11-2B-1BB63E5A46562D1C",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "friday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q001-R5"
+        },
+        {
+          "questionId": "Y4M01-Q001",
+          "mediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "saturday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q001-R6"
+        }
+      ],
+      "sourceQuestionContractSha256": "9b72c96941fabe5cf5d4b246289c98debee8498f0a0929a19705af3018730d75"
+    },
+    {
+      "questionId": "Y4M01-Q002",
+      "sequencePosition": 2,
+      "topicEn": "My Week and Profile",
+      "taskType": "Drag each delivered stimulus to its one-to-one semantic visual.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "teaching: Identify weekdays and organize selected fictional profile facts. Focus: name.",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "supportInstructionPt": "Combine cada áudio com sua imagem.",
+      "answerKey": {
+        "Y4M01-Q002-I1": "Y4M01-Q002-T1",
+        "Y4M01-Q002-I2": "Y4M01-Q002-T2",
+        "Y4M01-Q002-I3": "Y4M01-Q002-T3",
+        "Y4M01-Q002-I4": "Y4M01-Q002-T4"
+      },
+      "semanticTargets": [
+        "friday",
+        "thursday",
+        "tuesday",
+        "wednesday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q002",
+          "mediaId": "IMG-V11-2B-0C5EFBCFF3B72AB5",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "tuesday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q002-T1"
+        },
+        {
+          "questionId": "Y4M01-Q002",
+          "mediaId": "IMG-V11-2B-037A8C192583A82D",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "wednesday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q002-T2"
+        },
+        {
+          "questionId": "Y4M01-Q002",
+          "mediaId": "IMG-V11-2B-92A2587B6E53B997",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "thursday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q002-T3"
+        },
+        {
+          "questionId": "Y4M01-Q002",
+          "mediaId": "IMG-V11-2B-71ACB4E3ADFBDACD",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "friday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q002-T4"
+        }
+      ],
+      "sourceQuestionContractSha256": "6f90efd7e4c8b9d50d921652e66a73f7619695f2732f61f391e1dea45f993000"
+    },
+    {
+      "questionId": "Y4M01-Q003",
+      "sequencePosition": 3,
+      "topicEn": "My Week and Profile",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "guided practice: Identify weekdays and organize selected fictional profile facts. Focus: weekday identification.",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "supportInstructionPt": "Ouça e estoure a bolha correspondente.",
+      "answerKey": "Y4M01-Q003-O1",
+      "semanticTargets": [
+        "friday",
+        "monday",
+        "saturday",
+        "thursday",
+        "tuesday",
+        "wednesday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q003",
+          "mediaId": "IMG-V11-2B-D8AB8014378C4168",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "wednesday",
+          "correct": true,
+          "optionOrCardId": "Y4M01-Q003-O1"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "mediaId": "IMG-V11-2B-903CE8E0616D5239",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "monday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q003-O2"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "mediaId": "IMG-V11-2B-98438188D7DB405E",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "tuesday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q003-O3"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "mediaId": "IMG-V11-2B-3027B4C1C2E03558",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "thursday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q003-O4"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "mediaId": "IMG-V11-2B-D8AB8014378C4168",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "wednesday",
+          "correct": true,
+          "optionOrCardId": "Y4M01-Q003-O1"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "mediaId": "IMG-V11-2B-903CE8E0616D5239",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "monday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q003-D1"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "mediaId": "IMG-V11-2B-98438188D7DB405E",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "tuesday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q003-D2"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "mediaId": "IMG-V11-2B-3027B4C1C2E03558",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "thursday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q003-D3"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "mediaId": "IMG-V11-2B-1BB63E5A46562D1C",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "friday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q003-D4"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "mediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "saturday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q003-D5"
+        }
+      ],
+      "sourceQuestionContractSha256": "7f4ff9ac20286d336c9152ecf5a1f4ae723ba4a0f37fbc8a9c54dc1a842dcfbf"
+    },
+    {
+      "questionId": "Y4M01-Q004",
+      "sequencePosition": 4,
+      "topicEn": "My Week and Profile",
+      "taskType": "Reveal two cards and pair by semantic identity in TEXT_IMAGE.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "Written weekday labels map to the calendar context, directly supporting V3 primary reading without claiming independent writing. Curricular target: Monday; Tuesday; Wednesday; Thursday.",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "TEXT_IMAGE",
+      "primaryInstructionEn": "Find the matching pairs.",
+      "supportInstructionPt": "Encontre os pares correspondentes.",
+      "answerKey": [
+        "Y4M01-Q004-P1",
+        "Y4M01-Q004-P2",
+        "Y4M01-Q004-P3",
+        "Y4M01-Q004-P4"
+      ],
+      "semanticTargets": [
+        "monday",
+        "thursday",
+        "tuesday",
+        "wednesday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q004",
+          "mediaId": "IMG-V11-2B-874482C576DC9DD7",
+          "contractPath": "pairs[0].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "thursday",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M01-Q004",
+          "mediaId": "IMG-V11-2B-24AE8FD158FDB6BF",
+          "contractPath": "pairs[1].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "monday",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M01-Q004",
+          "mediaId": "IMG-V11-2B-9AAB100095051D64",
+          "contractPath": "pairs[2].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "tuesday",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M01-Q004",
+          "mediaId": "IMG-V11-2B-ECBAE24445C899B2",
+          "contractPath": "pairs[3].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "wednesday",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "sourceQuestionContractSha256": "6e01fb4def49bb49e770d39c4931d8368511857b8b6c17f86863f1ab0205c430"
+    },
+    {
+      "questionId": "Y4M01-Q005",
+      "sequencePosition": 5,
+      "topicEn": "My Week and Profile",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "guided practice: Identify weekdays and organize selected fictional profile facts. Focus: ask/state day.",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "supportInstructionPt": "Ouça e acerte a opção correspondente.",
+      "answerKey": "Y4M01-Q005-O1",
+      "semanticTargets": [
+        "friday",
+        "monday",
+        "tuesday",
+        "wednesday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q005",
+          "mediaId": "IMG-V11-2B-7DC045FB1CE9540B",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "friday",
+          "correct": true,
+          "optionOrCardId": "Y4M01-Q005-O1"
+        },
+        {
+          "questionId": "Y4M01-Q005",
+          "mediaId": "IMG-V11-2B-903CE8E0616D5239",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "monday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q005-O2"
+        },
+        {
+          "questionId": "Y4M01-Q005",
+          "mediaId": "IMG-V11-2B-98438188D7DB405E",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "tuesday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q005-O3"
+        },
+        {
+          "questionId": "Y4M01-Q005",
+          "mediaId": "IMG-V11-2B-D8AB8014378C4168",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "wednesday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q005-O4"
+        }
+      ],
+      "sourceQuestionContractSha256": "8d4dd39ddc5d34b67f06c7d4b867395239bd90e145fcf9aa39c6136bdeadc4eb"
+    },
+    {
+      "questionId": "Y4M01-Q006",
+      "sequencePosition": 6,
+      "topicEn": "My Week and Profile",
+      "taskType": "Drag each delivered stimulus to its one-to-one semantic visual.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "guided practice: Identify weekdays and organize selected fictional profile facts. Focus: Monday-Sunday in sequence.",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "supportInstructionPt": "Combine cada áudio com sua imagem.",
+      "answerKey": {
+        "Y4M01-Q006-I1": "Y4M01-Q006-T1",
+        "Y4M01-Q006-I2": "Y4M01-Q006-T2",
+        "Y4M01-Q006-I3": "Y4M01-Q006-T3",
+        "Y4M01-Q006-I4": "Y4M01-Q006-T4"
+      },
+      "semanticTargets": [
+        "monday",
+        "saturday",
+        "sunday",
+        "tuesday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q006",
+          "mediaId": "IMG-V11-2B-D5342DA12F205C1A",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "saturday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q006-T1"
+        },
+        {
+          "questionId": "Y4M01-Q006",
+          "mediaId": "IMG-V11-2B-5000D4791C83AE56",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "sunday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q006-T2"
+        },
+        {
+          "questionId": "Y4M01-Q006",
+          "mediaId": "IMG-V11-2B-035DABE1791AD949",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "monday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q006-T3"
+        },
+        {
+          "questionId": "Y4M01-Q006",
+          "mediaId": "IMG-V11-2B-0C5EFBCFF3B72AB5",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "tuesday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q006-T4"
+        }
+      ],
+      "sourceQuestionContractSha256": "8e56d0b0295a02a9eb81cb623ea563d14c784378d0cee0626fb6859548849e48"
+    },
+    {
+      "questionId": "Y4M01-Q007",
+      "sequencePosition": 7,
+      "topicEn": "My Week and Profile",
+      "taskType": "Connect related source-backed semantic items.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "recognition: Identify weekdays and organize selected fictional profile facts. Focus: age.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "answerKey": {
+        "Y4M01-Q007-L1": "Y4M01-Q007-R1",
+        "Y4M01-Q007-L2": "Y4M01-Q007-R2",
+        "Y4M01-Q007-L3": "Y4M01-Q007-R3",
+        "Y4M01-Q007-L4": "Y4M01-Q007-R4",
+        "Y4M01-Q007-L5": "Y4M01-Q007-R5"
+      },
+      "semanticTargets": [
+        "age",
+        "best friend",
+        "birthday",
+        "favorite",
+        "monday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q007",
+          "mediaId": "IMG-V11-2B-1389F64FD9E1215A",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "birthday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q007-R1"
+        },
+        {
+          "questionId": "Y4M01-Q007",
+          "mediaId": "IMG-V11-2B-EAD80736870B5584",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "favorite",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q007-R2"
+        },
+        {
+          "questionId": "Y4M01-Q007",
+          "mediaId": "IMG-V11-2B-2585704D6AB32376",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "best friend",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q007-R3"
+        },
+        {
+          "questionId": "Y4M01-Q007",
+          "mediaId": "IMG-V11-2B-51F07C81B93BA436",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "monday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q007-R4"
+        },
+        {
+          "questionId": "Y4M01-Q007",
+          "mediaId": "IMG-V11-2B-24EA15B949714E84",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "age",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q007-R5"
+        }
+      ],
+      "sourceQuestionContractSha256": "59da06a5c3c9b00893754b42399726629169a4d2535260d6c1c3fe570bf9a3a2"
+    },
+    {
+      "questionId": "Y4M01-Q008",
+      "sequencePosition": 8,
+      "topicEn": "My Week and Profile",
+      "taskType": "Select the source-backed word/chunk completing the familiar structure.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "recognition: Complete the familiar weekday statement with the correct day. Focus: Today is...",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "primaryInstructionEn": "Look at the picture and complete the sentence.",
+      "supportInstructionPt": "De acordo com a imagem, complete a frase.",
+      "answerKey": "Monday",
+      "semanticTargets": [
+        "monday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q008",
+          "mediaId": "IMG-V11-2B-51F07C81B93BA436",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "monday",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "sourceQuestionContractSha256": "f0f5be4971cfa066196654d3e266936feae8d344ef6e22e3d2bb458673bf25db"
+    },
+    {
+      "questionId": "Y4M01-Q009",
+      "sequencePosition": 9,
+      "topicEn": "My Week and Profile",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "recognition: Identify weekdays and organize selected fictional profile facts. Focus: My name is....",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "supportInstructionPt": "Ouça e acerte a opção correspondente.",
+      "answerKey": "Y4M01-Q009-O1",
+      "semanticTargets": [
+        "birthday",
+        "monday",
+        "tuesday",
+        "wednesday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q009",
+          "mediaId": "IMG-V11-2B-E5F5D9640ED65EA5",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "birthday",
+          "correct": true,
+          "optionOrCardId": "Y4M01-Q009-O1"
+        },
+        {
+          "questionId": "Y4M01-Q009",
+          "mediaId": "IMG-V11-2B-903CE8E0616D5239",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "monday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q009-O2"
+        },
+        {
+          "questionId": "Y4M01-Q009",
+          "mediaId": "IMG-V11-2B-98438188D7DB405E",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "tuesday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q009-O3"
+        },
+        {
+          "questionId": "Y4M01-Q009",
+          "mediaId": "IMG-V11-2B-D8AB8014378C4168",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "wednesday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q009-O4"
+        }
+      ],
+      "sourceQuestionContractSha256": "37ea39aa0573197660e6d5171da2fd6149d2016178105b865378bceddd3e1d53"
+    },
+    {
+      "questionId": "Y4M01-Q010",
+      "sequencePosition": 10,
+      "topicEn": "My Week and Profile",
+      "taskType": "Classify each source-backed item into a named semantic category.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "comprehension: Identify weekdays and organize selected fictional profile facts. Focus: share fictional profile.",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "primaryInstructionEn": "Sort each item: days of the week or profile details.",
+      "supportInstructionPt": "Separe cada item: days of the week ou profile details.",
+      "answerKey": {
+        "Y4M01-Q010-I1": "days",
+        "Y4M01-Q010-I2": "days",
+        "Y4M01-Q010-I3": "days",
+        "Y4M01-Q010-I4": "days",
+        "Y4M01-Q010-I5": "profile",
+        "Y4M01-Q010-I6": "profile",
+        "Y4M01-Q010-I7": "profile",
+        "Y4M01-Q010-I8": "profile"
+      },
+      "semanticTargets": [
+        "age",
+        "best friend",
+        "birthday",
+        "favorite",
+        "friday",
+        "monday",
+        "saturday",
+        "wednesday"
+      ],
+      "visualUsages": [],
+      "sourceQuestionContractSha256": "dc3262a79c6c9b480d63ac33924ced15606307df16aa598686bc5a1c5373ce6c"
+    },
+    {
+      "questionId": "Y4M01-Q011",
+      "sequencePosition": 11,
+      "topicEn": "My Week and Profile",
+      "taskType": "Connect related source-backed semantic items.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "comprehension: Identify weekdays and organize selected fictional profile facts. Focus: Monday-Sunday in sequence.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "answerKey": {
+        "Y4M01-Q011-L1": "Y4M01-Q011-R1",
+        "Y4M01-Q011-L2": "Y4M01-Q011-R2",
+        "Y4M01-Q011-L3": "Y4M01-Q011-R3",
+        "Y4M01-Q011-L4": "Y4M01-Q011-R4",
+        "Y4M01-Q011-L5": "Y4M01-Q011-R5",
+        "Y4M01-Q011-L6": "Y4M01-Q011-R6"
+      },
+      "semanticTargets": [
+        "friday",
+        "monday",
+        "saturday",
+        "sunday",
+        "thursday",
+        "tuesday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q011",
+          "mediaId": "IMG-V11-2B-9B9E6D10506466D3",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "thursday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q011-R1"
+        },
+        {
+          "questionId": "Y4M01-Q011",
+          "mediaId": "IMG-V11-2B-1BB63E5A46562D1C",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "friday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q011-R2"
+        },
+        {
+          "questionId": "Y4M01-Q011",
+          "mediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "saturday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q011-R3"
+        },
+        {
+          "questionId": "Y4M01-Q011",
+          "mediaId": "IMG-V11-2B-8FECB556425AE3C6",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "sunday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q011-R4"
+        },
+        {
+          "questionId": "Y4M01-Q011",
+          "mediaId": "IMG-V11-2B-51F07C81B93BA436",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "monday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q011-R5"
+        },
+        {
+          "questionId": "Y4M01-Q011",
+          "mediaId": "IMG-V11-2B-F81B3734A9EA4226",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "tuesday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q011-R6"
+        }
+      ],
+      "sourceQuestionContractSha256": "95cbebff8346c74055c2c2aa8752f8307ad445e18421d4151f7423b415d6e97c"
+    },
+    {
+      "questionId": "Y4M01-Q012",
+      "sequencePosition": 12,
+      "topicEn": "My Week and Profile",
+      "taskType": "Drag each delivered stimulus to its one-to-one semantic visual.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "comprehension: Identify weekdays and organize selected fictional profile facts. Focus: birthday.",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "supportInstructionPt": "Combine cada áudio com sua imagem.",
+      "answerKey": {
+        "Y4M01-Q012-I1": "Y4M01-Q012-T1",
+        "Y4M01-Q012-I2": "Y4M01-Q012-T2",
+        "Y4M01-Q012-I3": "Y4M01-Q012-T3",
+        "Y4M01-Q012-I4": "Y4M01-Q012-T4"
+      },
+      "semanticTargets": [
+        "best friend",
+        "favorite",
+        "monday",
+        "tuesday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q012",
+          "mediaId": "IMG-V11-2B-DD7EA966CFB7CFEC",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "favorite",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q012-T1"
+        },
+        {
+          "questionId": "Y4M01-Q012",
+          "mediaId": "IMG-V11-2B-EC10D9EEC0A5D08E",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "best friend",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q012-T2"
+        },
+        {
+          "questionId": "Y4M01-Q012",
+          "mediaId": "IMG-V11-2B-035DABE1791AD949",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "monday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q012-T3"
+        },
+        {
+          "questionId": "Y4M01-Q012",
+          "mediaId": "IMG-V11-2B-0C5EFBCFF3B72AB5",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "tuesday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q012-T4"
+        }
+      ],
+      "sourceQuestionContractSha256": "fafd417e41384fc5b177c9d92fefca3e00190d6f4c82a702427877a42ddc085d"
+    },
+    {
+      "questionId": "Y4M01-Q013",
+      "sequencePosition": 13,
+      "topicEn": "My Week and Profile",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "listening: Identify weekdays and organize selected fictional profile facts. Focus: weekday identification.",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "supportInstructionPt": "Ouça e acerte a opção correspondente.",
+      "answerKey": "Y4M01-Q013-O1",
+      "semanticTargets": [
+        "monday",
+        "saturday",
+        "tuesday",
+        "wednesday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q013",
+          "mediaId": "IMG-V11-2B-C0C9F76D0988A785",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "saturday",
+          "correct": true,
+          "optionOrCardId": "Y4M01-Q013-O1"
+        },
+        {
+          "questionId": "Y4M01-Q013",
+          "mediaId": "IMG-V11-2B-903CE8E0616D5239",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "monday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q013-O2"
+        },
+        {
+          "questionId": "Y4M01-Q013",
+          "mediaId": "IMG-V11-2B-98438188D7DB405E",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "tuesday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q013-O3"
+        },
+        {
+          "questionId": "Y4M01-Q013",
+          "mediaId": "IMG-V11-2B-D8AB8014378C4168",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "wednesday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q013-O4"
+        }
+      ],
+      "sourceQuestionContractSha256": "268342edf24c1a474ef462abde48e2177a8e2093542c10c9c1dcb872519b3849"
+    },
+    {
+      "questionId": "Y4M01-Q014",
+      "sequencePosition": 14,
+      "topicEn": "My Week and Profile",
+      "taskType": "Reveal two cards and pair by semantic identity in AUDIO_TEXT.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "Sound-form mapping retrieves profile language from Y3M01 in a changed calendar/profile context; fictional information only. Curricular target: name; age; birthday; favorite.",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_TEXT",
+      "primaryInstructionEn": "Find the matching pairs.",
+      "supportInstructionPt": "Encontre os pares correspondentes.",
+      "answerKey": [
+        "Y4M01-Q014-P1",
+        "Y4M01-Q014-P2",
+        "Y4M01-Q014-P3",
+        "Y4M01-Q014-P4"
+      ],
+      "semanticTargets": [
+        "age",
+        "birthday",
+        "favorite",
+        "name"
+      ],
+      "visualUsages": [],
+      "sourceQuestionContractSha256": "41368d02fec262f0f12390e559a8706e2a533963701448025a43c9d2a759cabb"
+    },
+    {
+      "questionId": "Y4M01-Q015",
+      "sequencePosition": 15,
+      "topicEn": "My Week and Profile",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "retrieval: Identify weekdays and organize selected fictional profile facts. Focus: ask/state day.",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "supportInstructionPt": "Ouça e estoure a bolha correspondente.",
+      "answerKey": "Y4M01-Q015-O1",
+      "semanticTargets": [
+        "friday",
+        "monday",
+        "saturday",
+        "thursday",
+        "tuesday",
+        "wednesday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q015",
+          "mediaId": "IMG-V11-2B-903CE8E0616D5239",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "monday",
+          "correct": true,
+          "optionOrCardId": "Y4M01-Q015-O1"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "mediaId": "IMG-V11-2B-98438188D7DB405E",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "tuesday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q015-O2"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "mediaId": "IMG-V11-2B-D8AB8014378C4168",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "wednesday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q015-O3"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "mediaId": "IMG-V11-2B-3027B4C1C2E03558",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "thursday",
+          "correct": false,
+          "optionOrCardId": "Y4M01-Q015-O4"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "mediaId": "IMG-V11-2B-903CE8E0616D5239",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "monday",
+          "correct": true,
+          "optionOrCardId": "Y4M01-Q015-O1"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "mediaId": "IMG-V11-2B-98438188D7DB405E",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "tuesday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q015-D1"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "mediaId": "IMG-V11-2B-D8AB8014378C4168",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "wednesday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q015-D2"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "mediaId": "IMG-V11-2B-3027B4C1C2E03558",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "thursday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q015-D3"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "mediaId": "IMG-V11-2B-1BB63E5A46562D1C",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "friday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q015-D4"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "mediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "saturday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q015-D5"
+        }
+      ],
+      "sourceQuestionContractSha256": "e382fcb21755a263e213e4da33f174918ec60ea1bba7f9c49e69825e3c53bf2e"
+    },
+    {
+      "questionId": "Y4M01-Q016",
+      "sequencePosition": 16,
+      "topicEn": "My Week and Profile",
+      "taskType": "Drag each delivered stimulus to its one-to-one semantic visual.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "retrieval: Identify weekdays and organize selected fictional profile facts. Focus: Monday-Sunday in sequence.",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "supportInstructionPt": "Combine cada áudio com sua imagem.",
+      "answerKey": {
+        "Y4M01-Q016-I1": "Y4M01-Q016-T1",
+        "Y4M01-Q016-I2": "Y4M01-Q016-T2",
+        "Y4M01-Q016-I3": "Y4M01-Q016-T3",
+        "Y4M01-Q016-I4": "Y4M01-Q016-T4"
+      },
+      "semanticTargets": [
+        "friday",
+        "thursday",
+        "tuesday",
+        "wednesday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q016",
+          "mediaId": "IMG-V11-2B-0C5EFBCFF3B72AB5",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "tuesday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q016-T1"
+        },
+        {
+          "questionId": "Y4M01-Q016",
+          "mediaId": "IMG-V11-2B-037A8C192583A82D",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "wednesday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q016-T2"
+        },
+        {
+          "questionId": "Y4M01-Q016",
+          "mediaId": "IMG-V11-2B-92A2587B6E53B997",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "thursday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q016-T3"
+        },
+        {
+          "questionId": "Y4M01-Q016",
+          "mediaId": "IMG-V11-2B-71ACB4E3ADFBDACD",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "friday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q016-T4"
+        }
+      ],
+      "sourceQuestionContractSha256": "e20b615342557dac68c9083d2053250482c036f36b69eb524cfab154cf5bcfdb"
+    },
+    {
+      "questionId": "Y4M01-Q017",
+      "sequencePosition": 17,
+      "topicEn": "My Week and Profile",
+      "taskType": "Connect related source-backed semantic items.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "review: Identify weekdays and organize selected fictional profile facts. Focus: favorites.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "answerKey": {
+        "Y4M01-Q017-L1": "Y4M01-Q017-R1",
+        "Y4M01-Q017-L2": "Y4M01-Q017-R2",
+        "Y4M01-Q017-L3": "Y4M01-Q017-R3",
+        "Y4M01-Q017-L4": "Y4M01-Q017-R4",
+        "Y4M01-Q017-L5": "Y4M01-Q017-R5",
+        "Y4M01-Q017-L6": "Y4M01-Q017-R6"
+      },
+      "semanticTargets": [
+        "age",
+        "best friend",
+        "birthday",
+        "favorite",
+        "saturday",
+        "sunday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q017",
+          "mediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "saturday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q017-R1"
+        },
+        {
+          "questionId": "Y4M01-Q017",
+          "mediaId": "IMG-V11-2B-8FECB556425AE3C6",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "sunday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q017-R2"
+        },
+        {
+          "questionId": "Y4M01-Q017",
+          "mediaId": "IMG-V11-2B-24EA15B949714E84",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "age",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q017-R3"
+        },
+        {
+          "questionId": "Y4M01-Q017",
+          "mediaId": "IMG-V11-2B-1389F64FD9E1215A",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "birthday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q017-R4"
+        },
+        {
+          "questionId": "Y4M01-Q017",
+          "mediaId": "IMG-V11-2B-EAD80736870B5584",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "favorite",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q017-R5"
+        },
+        {
+          "questionId": "Y4M01-Q017",
+          "mediaId": "IMG-V11-2B-2585704D6AB32376",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "best friend",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q017-R6"
+        }
+      ],
+      "sourceQuestionContractSha256": "2f82414135c116c26b4cb74b16f835337cab4d7af707cda1cb57e19e80a03a1e"
+    },
+    {
+      "questionId": "Y4M01-Q018",
+      "sequencePosition": 18,
+      "topicEn": "My Week and Profile",
+      "taskType": "Select the source-backed word/chunk completing the familiar structure.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "review: Identify weekdays and organize selected fictional profile facts. Focus: weekday identification.",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "primaryInstructionEn": "Look at the picture and complete the sentence.",
+      "supportInstructionPt": "De acordo com a imagem, complete a frase.",
+      "answerKey": "Thursday",
+      "semanticTargets": [
+        "thursday"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q018",
+          "mediaId": "IMG-V11-2B-9B9E6D10506466D3",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "thursday",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "sourceQuestionContractSha256": "65f3f372dd04ea133627071d74e54adb45fbfc7a3d8f97cee81a48bee0a932fe"
+    },
+    {
+      "questionId": "Y4M01-Q019",
+      "sequencePosition": 19,
+      "topicEn": "My Week and Profile",
+      "taskType": "Arrange familiar source-backed chunks in the modeled order.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "consolidation: Identify weekdays and organize selected fictional profile facts. Focus: calendar/profile exchange.",
+      "mechanicId": "smart-sentence-order",
+      "mechanicMode": "order",
+      "primaryInstructionEn": "Put the words in order.",
+      "supportInstructionPt": "Coloque as palavras na ordem correta.",
+      "answerKey": [
+        "Today",
+        "is",
+        "Monday."
+      ],
+      "semanticTargets": [],
+      "visualUsages": [],
+      "sourceQuestionContractSha256": "9808731a1adcb247a43cad6beb91ac18d4a265798c51045b419e53809e575d4e"
+    },
+    {
+      "questionId": "Y4M01-Q020",
+      "sequencePosition": 20,
+      "topicEn": "My Week and Profile",
+      "taskType": "Drag each delivered stimulus to its one-to-one semantic visual.",
+      "targetSkill": "Identify weekday in short calendar exchange.",
+      "learningTarget": "consolidation: Identify weekdays and organize selected fictional profile facts. Focus: share fictional profile.",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "supportInstructionPt": "Combine cada áudio com sua imagem.",
+      "answerKey": {
+        "Y4M01-Q020-I1": "Y4M01-Q020-T1",
+        "Y4M01-Q020-I2": "Y4M01-Q020-T2",
+        "Y4M01-Q020-I3": "Y4M01-Q020-T3",
+        "Y4M01-Q020-I4": "Y4M01-Q020-T4"
+      },
+      "semanticTargets": [
+        "age",
+        "best friend",
+        "birthday",
+        "favorite"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M01-Q020",
+          "mediaId": "IMG-V11-2B-EC10D9EEC0A5D08E",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "best friend",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q020-T1"
+        },
+        {
+          "questionId": "Y4M01-Q020",
+          "mediaId": "IMG-V11-2B-16B25DA2B15F3CBD",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "age",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q020-T2"
+        },
+        {
+          "questionId": "Y4M01-Q020",
+          "mediaId": "IMG-V11-2B-7C7462127E434210",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "birthday",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q020-T3"
+        },
+        {
+          "questionId": "Y4M01-Q020",
+          "mediaId": "IMG-V11-2B-DD7EA966CFB7CFEC",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "favorite",
+          "correct": null,
+          "optionOrCardId": "Y4M01-Q020-T4"
+        }
+      ],
+      "sourceQuestionContractSha256": "5b9850b98c0ab9fb792976cdf74895726082cfcf80c64235375685ec6b11ba18"
+    }
+  ],
+  "questionContractsModified": false,
+  "answersModified": false
+}

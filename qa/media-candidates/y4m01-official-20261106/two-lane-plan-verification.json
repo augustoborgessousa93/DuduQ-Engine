@@ -1,0 +1,473 @@
+{
+  "schemaVersion": "DUDUQ_MEDIA_TWO_LANE_PLAN_V1",
+  "mode": "READ_ONLY_PLANNING_NO_AUTOMATIC_APPROVAL",
+  "moduleCount": 30,
+  "activityCount": 600,
+  "sourceLedger": "qa/results/media-module-closure.json",
+  "localClosureModules": 1,
+  "globallyPendingMediaIds": 1055,
+  "producer": {
+    "nextModule": "Y1M03",
+    "queuedModules": 16,
+    "role": "ONLY_GENERATE_VALIDATE_STAGE_HASH_BOUND_PNG_CANDIDATES",
+    "mustNeverEdit": [
+      "answers",
+      "question contracts",
+      "Gold Masters",
+      "runtime",
+      "production",
+      "approval flags"
+    ]
+  },
+  "integrator": {
+    "nextModule": "Y1M04",
+    "queuedModules": 14,
+    "role": "ONLY_REVIEW_INTEGRATE_QA_CANDIDATES_IN_ISOLATED_REVIEW",
+    "deployAllowed": false,
+    "independentLinuxQARequired": true
+  },
+  "candidateAssetCount": 293,
+  "independentQaGreen": false,
+  "finished": false,
+  "caveat": "Separate persistent queues; a single Codex runner may interleave roles without simultaneous shared-worktree writes. A QA failure must not block the generator.",
+  "modules": [
+    {
+      "moduleId": "Y1M01",
+      "pendingMediaReferences": 25,
+      "localComplete": false,
+      "candidate": {
+        "moduleId": "Y1M01",
+        "manifest": "qa/media-candidates/y1m01-official-20261030/batch-manifest.json",
+        "manifestSha256": "07264a5d5f4acfd38fa748fb133bbf85ce94e3735a1c364c3fc7e218a0f0fe32",
+        "assetFingerprintSha256": "5dd67eb5dc263217a112d0de07f86241296cb7d7a90ef94dc112c5e98a287da0",
+        "assetCount": 29,
+        "validAssetCount": 29,
+        "verifiedBindingIds": 29,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    },
+    {
+      "moduleId": "Y1M02",
+      "pendingMediaReferences": 92,
+      "localComplete": false,
+      "candidate": {
+        "moduleId": "Y1M02",
+        "manifest": "qa/media-candidates/y1m02-official-20261030/batch-manifest.json",
+        "manifestSha256": "f0392f0895579c33acba100258a3369eebf52664cfd6a1a84c5de17cc710e8f1",
+        "assetFingerprintSha256": "56b0f934c7346cac20bf9a5e2151955d34d47121c7e2696fb1fa5e0c367d10dd",
+        "assetCount": 10,
+        "validAssetCount": 10,
+        "verifiedBindingIds": 93,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    },
+    {
+      "moduleId": "Y1M03",
+      "pendingMediaReferences": 87,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y1M04",
+      "pendingMediaReferences": 0,
+      "localComplete": true,
+      "candidate": {
+        "moduleId": "Y1M04",
+        "manifest": "qa/media-candidates/y1m04-official-20261030/batch-manifest.json",
+        "manifestSha256": "db4f9c2785145ee84fa62136398dfa871317ca4bae845f07204d3242d772c92f",
+        "assetFingerprintSha256": "331285d1d0675368f765192822331d5654dd5417d91cdea5504bf765654e722a",
+        "assetCount": 18,
+        "validAssetCount": 18,
+        "verifiedBindingIds": 84,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    },
+    {
+      "moduleId": "Y1M05",
+      "pendingMediaReferences": 101,
+      "localComplete": false,
+      "candidate": {
+        "moduleId": "Y1M05",
+        "manifest": "qa/media-candidates/y1m05-official-20261030/batch-manifest.json",
+        "manifestSha256": "a1fb983cd41132cfe851d0a84af8b08aec11796ee373c19e50b3352606ee1f56",
+        "assetFingerprintSha256": "40b76f6e0bbc30e874c32478755fda381226cd09fb52281a73c6de859ca99abe",
+        "assetCount": 10,
+        "validAssetCount": 10,
+        "verifiedBindingIds": 101,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    },
+    {
+      "moduleId": "Y1M06",
+      "pendingMediaReferences": 93,
+      "localComplete": false,
+      "candidate": {
+        "moduleId": "Y1M06",
+        "manifest": "qa/media-candidates/y1m06-official-20261030/batch-manifest.json",
+        "manifestSha256": "3f9e41ef3d00594856cddf29a732ff58f98792a9d60ed9b6260d9164513a03e1",
+        "assetFingerprintSha256": "ec1a0aa6c5b54b4b7c480a8c9c74c9ccdbdbc1ad29bc6049cfcf82032ab39ec4",
+        "assetCount": 22,
+        "validAssetCount": 22,
+        "verifiedBindingIds": 93,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    },
+    {
+      "moduleId": "Y2M01",
+      "pendingMediaReferences": 29,
+      "localComplete": false,
+      "candidate": {
+        "moduleId": "Y2M01",
+        "manifest": "qa/media-candidates/y2m01-official-20261031/batch-manifest.json",
+        "manifestSha256": "7dbfab9d67e4d84743cede077fabf627259658d9af886e75710f467e4c6ee278",
+        "assetFingerprintSha256": "8179276b8649b231d166f864b441250b41bf4d488826d816a4f867b115a1023f",
+        "assetCount": 43,
+        "validAssetCount": 43,
+        "verifiedBindingIds": 57,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    },
+    {
+      "moduleId": "Y2M02",
+      "pendingMediaReferences": 47,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y2M03",
+      "pendingMediaReferences": 22,
+      "localComplete": false,
+      "candidate": {
+        "moduleId": "Y2M03",
+        "manifest": "qa/media-candidates/y2m03-official-20261101/batch-manifest.json",
+        "manifestSha256": "ee105801089727f00909f60f18a2967ed686fd9d2d43385240e8038032c9475e",
+        "assetFingerprintSha256": "bcb76743c4e9f13b9f1bbdd27da564d6459704d4aab21c41b992a1c452386acc",
+        "assetCount": 6,
+        "validAssetCount": 6,
+        "verifiedBindingIds": 76,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    },
+    {
+      "moduleId": "Y2M04",
+      "pendingMediaReferences": 38,
+      "localComplete": false,
+      "candidate": {
+        "moduleId": "Y2M04",
+        "manifest": "qa/media-candidates/y2m04-official-20261102/batch-manifest.json",
+        "manifestSha256": "17333175db61524e4ffee84d3baae92b4f3f49488f504ef147dc40b10d2f334a",
+        "assetFingerprintSha256": "61dc7b71c2f13c79f943dd4c588b15957c2bf6729069069ade23fe1c27242e92",
+        "assetCount": 23,
+        "validAssetCount": 23,
+        "verifiedBindingIds": 72,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    },
+    {
+      "moduleId": "Y2M05",
+      "pendingMediaReferences": 44,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y2M06",
+      "pendingMediaReferences": 56,
+      "localComplete": false,
+      "candidate": {
+        "moduleId": "Y2M06",
+        "manifest": "qa/media-candidates/y2m06-official-20261102/batch-manifest.json",
+        "manifestSha256": "7bd9ae25c57c72cb7aae085daf047b9e57a0a927b580999634b4f4530c9bc416",
+        "assetFingerprintSha256": "22f5b02a57fdcb3aeafdadab045e76a89941b0e6c81350c9d619ceb1c93afc94",
+        "assetCount": 29,
+        "validAssetCount": 29,
+        "verifiedBindingIds": 94,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    },
+    {
+      "moduleId": "Y3M01",
+      "pendingMediaReferences": 35,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y3M02",
+      "pendingMediaReferences": 35,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y3M03",
+      "pendingMediaReferences": 29,
+      "localComplete": false,
+      "candidate": {
+        "moduleId": "Y3M03",
+        "manifest": "qa/media-candidates/y3m03-official-20261104/batch-manifest.json",
+        "manifestSha256": "500498fa115ba3cf48141e604deb2ed6c8b20e6fd5c020fcf196529a59706b3a",
+        "assetFingerprintSha256": "cd262f65251041507ea3c9f5e242948bbad10864cd67a389cd22f290d8a90aca",
+        "assetCount": 16,
+        "validAssetCount": 16,
+        "verifiedBindingIds": 66,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    },
+    {
+      "moduleId": "Y3M04",
+      "pendingMediaReferences": 36,
+      "localComplete": false,
+      "candidate": {
+        "moduleId": "Y3M04",
+        "manifest": "qa/media-candidates/y3m04-official-20261105/batch-manifest.json",
+        "manifestSha256": "591952400ce16a66ab0c17556cfb8b2499c59c7e78330d29be0df38a6d96dd71",
+        "assetFingerprintSha256": "6f766c7219919981aa17d9b6037bf6e27c330651ba707d1de4ae8c8d7d8c6104",
+        "assetCount": 30,
+        "validAssetCount": 30,
+        "verifiedBindingIds": 67,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    },
+    {
+      "moduleId": "Y3M05",
+      "pendingMediaReferences": 46,
+      "localComplete": false,
+      "candidate": {
+        "moduleId": "Y3M05",
+        "manifest": "qa/media-candidates/y3m05-official-20261105/batch-manifest.json",
+        "manifestSha256": "3a9df111fd048e804fb21dd6feca77c025245914799ed2c0a95ec626eabe12b2",
+        "assetFingerprintSha256": "910f1bbf4c0cdf7cc7cd9531a297ea78811dfd0d7a413241bd0190d11903c335",
+        "assetCount": 26,
+        "validAssetCount": 26,
+        "verifiedBindingIds": 74,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    },
+    {
+      "moduleId": "Y3M06",
+      "pendingMediaReferences": 48,
+      "localComplete": false,
+      "candidate": {
+        "moduleId": "Y3M06",
+        "manifest": "qa/media-candidates/y3m06-official-20261106/batch-manifest.json",
+        "manifestSha256": "8e9ce50c9df9f277a06be8981ca59767defe6bb4e57b4aafd519bcc24bdc6325",
+        "assetFingerprintSha256": "ed086021db92189b5eb22071eb057a7202b90ede645cfb8eb051eb74b324dcbd",
+        "assetCount": 20,
+        "validAssetCount": 20,
+        "verifiedBindingIds": 80,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    },
+    {
+      "moduleId": "Y4M01",
+      "pendingMediaReferences": 33,
+      "localComplete": false,
+      "candidate": {
+        "moduleId": "Y4M01",
+        "manifest": "qa/media-candidates/y4m01-official-20261106/batch-manifest.json",
+        "manifestSha256": "4c52eed505d655f025b3ba805032e5a022e6dd6700cc0854e79226a9812d825e",
+        "assetFingerprintSha256": "7c0e762bef8589ce6f7b020e95a35332a7ecd35ca50a23575e2e1aaf9f58b2ec",
+        "assetCount": 11,
+        "validAssetCount": 11,
+        "verifiedBindingIds": 73,
+        "invalidAssets": [],
+        "questionContractsReviewed": 20,
+        "productionApproved": false,
+        "generatedEvidenceOnly": true
+      },
+      "needsGeneration": false,
+      "needsIntegrationOrQA": true,
+      "stage": "CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"
+    },
+    {
+      "moduleId": "Y4M02",
+      "pendingMediaReferences": 39,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y4M03",
+      "pendingMediaReferences": 43,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y4M04",
+      "pendingMediaReferences": 26,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y4M05",
+      "pendingMediaReferences": 54,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y4M06",
+      "pendingMediaReferences": 41,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y5M01",
+      "pendingMediaReferences": 33,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y5M02",
+      "pendingMediaReferences": 32,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y5M03",
+      "pendingMediaReferences": 33,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y5M04",
+      "pendingMediaReferences": 44,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y5M05",
+      "pendingMediaReferences": 46,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    },
+    {
+      "moduleId": "Y5M06",
+      "pendingMediaReferences": 46,
+      "localComplete": false,
+      "candidate": null,
+      "needsGeneration": true,
+      "needsIntegrationOrQA": false,
+      "stage": "NEEDS_IMAGES"
+    }
+  ]
+}

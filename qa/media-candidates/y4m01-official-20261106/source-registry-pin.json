@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "DUDUQ_Y4M01_SOURCE_REGISTRY_PIN_V1",
+  "createdAt": "2026-11-06T09:13:52.327Z",
+  "moduleId": "Y4M01",
+  "activeQuestionSource": "dist-pages/content/english/year-4/module-01/questions.json",
+  "activeQuestionSourceSha256": "d2aafa73457f6ba67703f743d8a2c57eec2a16f2e862ab6ada85d9e9dbac147a",
+  "registrySource": "dist-pages/content/english/media/media-registry.json",
+  "registrySha256": "f11c12fe929379947e7d4f76736f8f73bc6320618bf01265bfb48a4e18ef5e30",
+  "registryEntryCount": 1225,
+  "canonicalLedger": "qa/results/media-module-closure.json",
+  "canonicalLedgerSha256": "3c3d6a19632b488651d20d373ffd0a70819896a6d1b8246bb2adb7a3f9a5b837",
+  "canonicalInventory": "qa/results/media-closure-inventory.json",
+  "canonicalInventorySha256": "2698f45a895236722b341abcfaffd7518a7d3cbfab22ddaddf95a94b0c676dc5",
+  "generationInput": "qa/media-candidates/y4m01-official-20261106/generation-input.json",
+  "generationInputSha256": "54219b3fbb7ecfec6acd42953b9e8b4c3d5b10aaae88ac18df7ebdf24550d890",
+  "globalStateAtAudit": {
+    "modules": 30,
+    "activities": 600,
+    "completedModules": 1,
+    "pendingModules": 29,
+    "distinctPendingMediaIds": 1055,
+    "distinctVerifiedMediaIds": 84
+  },
+  "moduleStateAtAudit": {
+    "moduleId": "Y4M01",
+    "expectedActivities": 20,
+    "referencedMediaIds": 33,
+    "provisionalOrBlockedReferencedIds": 33,
+    "unverifiedReferencedIds": 0,
+    "verifiedReferencedIds": 0,
+    "brokenReferencedIds": 0,
+    "blockers": [
+      {
+        "mediaId": "IMG-V11-2B-02174158FE88B58B",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-035DABE1791AD949",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-037A8C192583A82D",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-0C5EFBCFF3B72AB5",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-1389F64FD9E1215A",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-16B25DA2B15F3CBD",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-1BB63E5A46562D1C",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-24AE8FD158FDB6BF",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-24EA15B949714E84",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-2585704D6AB32376",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-3027B4C1C2E03558",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-5000D4791C83AE56",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-51F07C81B93BA436",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-71ACB4E3ADFBDACD",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-7C7462127E434210",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-7DC045FB1CE9540B",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-874482C576DC9DD7",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-8FECB556425AE3C6",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-903CE8E0616D5239",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-92A2587B6E53B997",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-98438188D7DB405E",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-9AAB100095051D64",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-9B9E6D10506466D3",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-C0C9F76D0988A785",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-D5342DA12F205C1A",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-D8AB8014378C4168",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-DD7EA966CFB7CFEC",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-E5F5D9640ED65EA5",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-EAD80736870B5584",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-EC10D9EEC0A5D08E",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-ECBAE24445C899B2",
+        "status": "PROVISIONAL"
+      },
+      {
+        "mediaId": "IMG-V11-2B-F81B3734A9EA4226",
+        "status": "PROVISIONAL"
+      }
+    ],
+    "complete": false
+  },
+  "sourceMediaIds": [
+    "IMG-V11-2B-02174158FE88B58B",
+    "IMG-V11-2B-035DABE1791AD949",
+    "IMG-V11-2B-037A8C192583A82D",
+    "IMG-V11-2B-0C5EFBCFF3B72AB5",
+    "IMG-V11-2B-1389F64FD9E1215A",
+    "IMG-V11-2B-16B25DA2B15F3CBD",
+    "IMG-V11-2B-1BB63E5A46562D1C",
+    "IMG-V11-2B-24AE8FD158FDB6BF",
+    "IMG-V11-2B-24EA15B949714E84",
+    "IMG-V11-2B-2585704D6AB32376",
+    "IMG-V11-2B-3027B4C1C2E03558",
+    "IMG-V11-2B-5000D4791C83AE56",
+    "IMG-V11-2B-51F07C81B93BA436",
+    "IMG-V11-2B-71ACB4E3ADFBDACD",
+    "IMG-V11-2B-71BBB7F3EB57C988",
+    "IMG-V11-2B-7C7462127E434210",
+    "IMG-V11-2B-7DC045FB1CE9540B",
+    "IMG-V11-2B-874482C576DC9DD7",
+    "IMG-V11-2B-8FECB556425AE3C6",
+    "IMG-V11-2B-903CE8E0616D5239",
+    "IMG-V11-2B-92A2587B6E53B997",
+    "IMG-V11-2B-98438188D7DB405E",
+    "IMG-V11-2B-9AAB100095051D64",
+    "IMG-V11-2B-9B9E6D10506466D3",
+    "IMG-V11-2B-C0C9F76D0988A785",
+    "IMG-V11-2B-D5342DA12F205C1A",
+    "IMG-V11-2B-D8AB8014378C4168",
+    "IMG-V11-2B-DD7EA966CFB7CFEC",
+    "IMG-V11-2B-E5F5D9640ED65EA5",
+    "IMG-V11-2B-EAD80736870B5584",
+    "IMG-V11-2B-EC10D9EEC0A5D08E",
+    "IMG-V11-2B-ECBAE24445C899B2",
+    "IMG-V11-2B-F81B3734A9EA4226"
+  ],
+  "sourceRegistryEntryProjectionSha256": "ab98e0f7cd100eac48a3045ebeac7e871608a48e0da66314adac958b524d39c7",
+  "sourceQuestionContractHashes": [
+    {
+      "questionId": "Y4M01-Q001",
+      "sha256": "9b72c96941fabe5cf5d4b246289c98debee8498f0a0929a19705af3018730d75"
+    },
+    {
+      "questionId": "Y4M01-Q002",
+      "sha256": "6f90efd7e4c8b9d50d921652e66a73f7619695f2732f61f391e1dea45f993000"
+    },
+    {
+      "questionId": "Y4M01-Q003",
+      "sha256": "7f4ff9ac20286d336c9152ecf5a1f4ae723ba4a0f37fbc8a9c54dc1a842dcfbf"
+    },
+    {
+      "questionId": "Y4M01-Q004",
+      "sha256": "6e01fb4def49bb49e770d39c4931d8368511857b8b6c17f86863f1ab0205c430"
+    },
+    {
+      "questionId": "Y4M01-Q005",
+      "sha256": "8d4dd39ddc5d34b67f06c7d4b867395239bd90e145fcf9aa39c6136bdeadc4eb"
+    },
+    {
+      "questionId": "Y4M01-Q006",
+      "sha256": "8e56d0b0295a02a9eb81cb623ea563d14c784378d0cee0626fb6859548849e48"
+    },
+    {
+      "questionId": "Y4M01-Q007",
+      "sha256": "59da06a5c3c9b00893754b42399726629169a4d2535260d6c1c3fe570bf9a3a2"
+    },
+    {
+      "questionId": "Y4M01-Q008",
+      "sha256": "f0f5be4971cfa066196654d3e266936feae8d344ef6e22e3d2bb458673bf25db"
+    },
+    {
+      "questionId": "Y4M01-Q009",
+      "sha256": "37ea39aa0573197660e6d5171da2fd6149d2016178105b865378bceddd3e1d53"
+    },
+    {
+      "questionId": "Y4M01-Q010",
+      "sha256": "dc3262a79c6c9b480d63ac33924ced15606307df16aa598686bc5a1c5373ce6c"
+    },
+    {
+      "questionId": "Y4M01-Q011",
+      "sha256": "95cbebff8346c74055c2c2aa8752f8307ad445e18421d4151f7423b415d6e97c"
+    },
+    {
+      "questionId": "Y4M01-Q012",
+      "sha256": "fafd417e41384fc5b177c9d92fefca3e00190d6f4c82a702427877a42ddc085d"
+    },
+    {
+      "questionId": "Y4M01-Q013",
+      "sha256": "268342edf24c1a474ef462abde48e2177a8e2093542c10c9c1dcb872519b3849"
+    },
+    {
+      "questionId": "Y4M01-Q014",
+      "sha256": "41368d02fec262f0f12390e559a8706e2a533963701448025a43c9d2a759cabb"
+    },
+    {
+      "questionId": "Y4M01-Q015",
+      "sha256": "e382fcb21755a263e213e4da33f174918ec60ea1bba7f9c49e69825e3c53bf2e"
+    },
+    {
+      "questionId": "Y4M01-Q016",
+      "sha256": "e20b615342557dac68c9083d2053250482c036f36b69eb524cfab154cf5bcfdb"
+    },
+    {
+      "questionId": "Y4M01-Q017",
+      "sha256": "2f82414135c116c26b4cb74b16f835337cab4d7af707cda1cb57e19e80a03a1e"
+    },
+    {
+      "questionId": "Y4M01-Q018",
+      "sha256": "65f3f372dd04ea133627071d74e54adb45fbfc7a3d8f97cee81a48bee0a932fe"
+    },
+    {
+      "questionId": "Y4M01-Q019",
+      "sha256": "9808731a1adcb247a43cad6beb91ac18d4a265798c51045b419e53809e575d4e"
+    },
+    {
+      "questionId": "Y4M01-Q020",
+      "sha256": "5b9850b98c0ab9fb792976cdf74895726082cfcf80c64235375685ec6b11ba18"
+    }
+  ],
+  "sourceHashesRewritten": false,
+  "questionsModified": false,
+  "registryModified": false,
+  "productionApproved": false
+}

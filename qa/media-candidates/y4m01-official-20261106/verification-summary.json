@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "DUDUQ_Y4M01_GENERATION_VERIFICATION_SUMMARY_V1",
+  "createdAt": "2026-11-06T09:13:52.327Z",
+  "moduleId": "Y4M01",
+  "lane": "generation",
+  "status": "PASS_CANDIDATE_SCOPE_ONLY",
+  "projectStatus": "INCOMPLETE",
+  "scope": {
+    "questionsInventoried": 20,
+    "visualUsagesInventoried": 81,
+    "allSemanticTargets": 12,
+    "nonVisualOnlySemanticTargets": ["name"],
+    "sourcePendingMediaIds": 33,
+    "coveredSourcePendingMediaIds": 33,
+    "visualConcepts": 11,
+    "occurrenceScopedBindingPlans": 73,
+    "nativeGeneratedCandidates": 11,
+    "verifiedReusedCandidates": 0,
+    "semanticRejectedAttempts": 1,
+    "globalPendingMediaIdsAtAudit": 1055
+  },
+  "hashes": {
+    "generationInputSha256": "54219b3fbb7ecfec6acd42953b9e8b4c3d5b10aaae88ac18df7ebdf24550d890",
+    "builderSha256": "80628ced8fe7bfad75375c1921ba8502532c968bff243e06c419465e5be4ff8b",
+    "batchManifestSha256": "4c52eed505d655f025b3ba805032e5a022e6dd6700cc0854e79226a9812d825e",
+    "generationProvenanceSha256": "31ea70965fa5c78e8124ce850db904272613975c5247a0662d6583f877f39be7",
+    "questionInventorySha256": "60e9a9035cde1b148df89b4e8ea51ae2f6113eda0816dc85e373028103ff8dda",
+    "bindingPlanSha256": "853bfe316303aefbbcf0fec126c44a9a930fb32ba559c4c81e7e51c0df9a3d1b"
+  },
+  "checks": [
+    {"check":"reproducible bundle builder","result":"PASS"},
+    {"check":"second-run idempotency across 39 files","result":"PASS","changedFiles":0},
+    {"check":"real RGBA PNG decode, minimum 1024x1024, transparency and opaque subject","result":"PASS","assets":11},
+    {"check":"unique SHA-256 candidate content","result":"PASS","uniqueHashes":11},
+    {"check":"alpha micro-island audit","result":"PASS","assetsWithMicroOpaqueIslands":0},
+    {"check":"model semantic and wrong-distractor visual review","result":"PASS","assets":11,"humanApprovalClaimed":false},
+    {"check":"two-lane planner Y4M01 candidate validation","result":"PASS","validAssets":11,"invalidAssets":0,"verifiedBindingIds":73,"stage":"CANDIDATES_READY_NEED_INDEPENDENT_INTEGRATION_QA"},
+    {"check":"qa/tests/duduq-two-lane-plan.test.mjs","result":"PASS","tests":7,"passed":7,"failed":0,"note":"Initial sandbox runner could not spawn its child process (EPERM); the authorized non-production rerun passed."},
+    {"check":"node --check prepare-generation-bundle.mjs and verify-idempotency.mjs","result":"PASS"},
+    {"check":"git diff --check candidate batch","result":"PASS"}
+  ],
+  "safety": {
+    "questionsModified": false,
+    "answersModified": false,
+    "registryModified": false,
+    "runtimeModified": false,
+    "goldMastersModified": false,
+    "approvalFlagsModified": false,
+    "mediaOverlayApplied": false,
+    "productionMergeOrDeploy": false,
+    "existingReferencedAssetsRemoved": false,
+    "secondCodexProcessStarted": false,
+    "candidateIsOfficialIntegratedMedia": false
+  },
+  "reviewPersistence": {
+    "candidateBundleCommit": null,
+    "candidateCheckpointCommit": null,
+    "reviewBranch": "automation/duduq-y4m01-generation-20261106",
+    "remotePushStatus": "NOT_ATTEMPTED",
+    "remotePushReason": null
+  },
+  "releaseApproved": false,
+  "productionApproved": false,
+  "integrated": false,
+  "deployed": false,
+  "nextAction": "SCHEDULER_SELECT_OTHER_LANE"
+}

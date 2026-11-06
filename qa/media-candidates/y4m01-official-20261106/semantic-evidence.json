@@ -1,0 +1,858 @@
+{
+  "schemaVersion": "DUDUQ_Y4M01_GENERATION_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-11-06T09:13:52.327Z",
+  "moduleId": "Y4M01",
+  "lane": "generation",
+  "sourceQuestionFile": "dist-pages/content/english/year-4/module-01/questions.json",
+  "sourceQuestionSha256": "d2aafa73457f6ba67703f743d8a2c57eec2a16f2e862ab6ada85d9e9dbac147a",
+  "questionContractsReviewed": 20,
+  "semanticConceptsReviewed": 11,
+  "modelVisualReviewOnly": true,
+  "humanApprovalClaimed": false,
+  "assets": [
+    {
+      "assetKey": "Y4M01-CANDIDATE-AGE",
+      "concept": "age",
+      "file": "images/DUDUQ-Y4M01-AGE.png",
+      "sha256": "f18a37d29a9fcd57d157880d706ed7aab9dd426a07c590c3b9ab016149bd9569",
+      "expectedObjectCount": 1,
+      "visualObservation": "One blue circular age-counter token shows one child bust and exactly five cream beads; no birthday or friendship cues are present.",
+      "pedagogicalFit": "Premium 3D realization of the active source contract's five-marker age badge, deliberately distinct from birthday, favorite, and best friend.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M01-Q007",
+          "sourceMediaId": "IMG-V11-2B-24EA15B949714E84",
+          "plannedMediaId": "IMG-Y4M01-Q007-CTX-F0B52FF4EE27",
+          "contractPaths": [
+            "pairs[4].b"
+          ],
+          "sourceQuestionContractSha256": "59da06a5c3c9b00893754b42399726629169a4d2535260d6c1c3fe570bf9a3a2"
+        },
+        {
+          "questionId": "Y4M01-Q017",
+          "sourceMediaId": "IMG-V11-2B-24EA15B949714E84",
+          "plannedMediaId": "IMG-Y4M01-Q017-CTX-1736C22ED625",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "sourceQuestionContractSha256": "2f82414135c116c26b4cb74b16f835337cab4d7af707cda1cb57e19e80a03a1e"
+        },
+        {
+          "questionId": "Y4M01-Q020",
+          "sourceMediaId": "IMG-V11-2B-16B25DA2B15F3CBD",
+          "plannedMediaId": "IMG-Y4M01-Q020-CTX-95FB5C049094",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "sourceQuestionContractSha256": "5b9850b98c0ab9fb792976cdf74895726082cfcf80c64235375685ec6b11ba18"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M01-CANDIDATE-BEST-FRIEND",
+      "concept": "best friend",
+      "file": "images/DUDUQ-Y4M01-BEST-FRIEND.png",
+      "sha256": "638ccca43fe727ee5b961d883bbc982d5fe67b873d6d60285f67941b8ef99c1c",
+      "expectedObjectCount": 2,
+      "visualObservation": "Exactly two school-age friends stand shoulder-to-shoulder in a mutual embrace; both complete figures have transparent margin on every side.",
+      "pedagogicalFit": "Exact social relationship cue for best friend, with no family, teacher, romance, or party distractor.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M01-Q007",
+          "sourceMediaId": "IMG-V11-2B-2585704D6AB32376",
+          "plannedMediaId": "IMG-Y4M01-Q007-CTX-D3E3F46A72E1",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "sourceQuestionContractSha256": "59da06a5c3c9b00893754b42399726629169a4d2535260d6c1c3fe570bf9a3a2"
+        },
+        {
+          "questionId": "Y4M01-Q012",
+          "sourceMediaId": "IMG-V11-2B-EC10D9EEC0A5D08E",
+          "plannedMediaId": "IMG-Y4M01-Q012-CTX-2C70676F4718",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "sourceQuestionContractSha256": "fafd417e41384fc5b177c9d92fefca3e00190d6f4c82a702427877a42ddc085d"
+        },
+        {
+          "questionId": "Y4M01-Q017",
+          "sourceMediaId": "IMG-V11-2B-2585704D6AB32376",
+          "plannedMediaId": "IMG-Y4M01-Q017-CTX-D26083B256E2",
+          "contractPaths": [
+            "pairs[5].b"
+          ],
+          "sourceQuestionContractSha256": "2f82414135c116c26b4cb74b16f835337cab4d7af707cda1cb57e19e80a03a1e"
+        },
+        {
+          "questionId": "Y4M01-Q020",
+          "sourceMediaId": "IMG-V11-2B-EC10D9EEC0A5D08E",
+          "plannedMediaId": "IMG-Y4M01-Q020-CTX-F2B28ABF70D8",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "sourceQuestionContractSha256": "5b9850b98c0ab9fb792976cdf74895726082cfcf80c64235375685ec6b11ba18"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M01-CANDIDATE-BIRTHDAY",
+      "concept": "birthday",
+      "file": "images/DUDUQ-Y4M01-BIRTHDAY.png",
+      "sha256": "18de82b327912293a2066112a6b003076ab54e531732e518df0ebfe1b9133ca0",
+      "expectedObjectCount": 1,
+      "visualObservation": "One complete colorful cake with exactly three attached lit candles is visible; there are no profile-counter, favorite, or friendship cues.",
+      "pedagogicalFit": "Exact celebratory object for the personal-profile concept birthday.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M01-Q007",
+          "sourceMediaId": "IMG-V11-2B-1389F64FD9E1215A",
+          "plannedMediaId": "IMG-Y4M01-Q007-CTX-294CB21DF22F",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "sourceQuestionContractSha256": "59da06a5c3c9b00893754b42399726629169a4d2535260d6c1c3fe570bf9a3a2"
+        },
+        {
+          "questionId": "Y4M01-Q009",
+          "sourceMediaId": "IMG-V11-2B-E5F5D9640ED65EA5",
+          "plannedMediaId": "IMG-Y4M01-Q009-CTX-88B6AEDA0992",
+          "contractPaths": [
+            "options[0]"
+          ],
+          "sourceQuestionContractSha256": "37ea39aa0573197660e6d5171da2fd6149d2016178105b865378bceddd3e1d53"
+        },
+        {
+          "questionId": "Y4M01-Q017",
+          "sourceMediaId": "IMG-V11-2B-1389F64FD9E1215A",
+          "plannedMediaId": "IMG-Y4M01-Q017-CTX-191766446DBD",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "sourceQuestionContractSha256": "2f82414135c116c26b4cb74b16f835337cab4d7af707cda1cb57e19e80a03a1e"
+        },
+        {
+          "questionId": "Y4M01-Q020",
+          "sourceMediaId": "IMG-V11-2B-7C7462127E434210",
+          "plannedMediaId": "IMG-Y4M01-Q020-CTX-CAE7BD388C59",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "sourceQuestionContractSha256": "5b9850b98c0ab9fb792976cdf74895726082cfcf80c64235375685ec6b11ba18"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M01-CANDIDATE-FAVORITE",
+      "concept": "favorite",
+      "file": "images/DUDUQ-Y4M01-FAVORITE.png",
+      "sha256": "1b195bc8f55a66f34823e41efeb04d393f5b62aaa09cea864520dbf53e62742e",
+      "expectedObjectCount": 1,
+      "visualObservation": "One coral heart-shaped badge with one embossed gold star is visible as a single connected object.",
+      "pedagogicalFit": "Clear favorite/preferred badge cue, grounded in the source heart visual and distinct from the other profile concepts.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M01-Q007",
+          "sourceMediaId": "IMG-V11-2B-EAD80736870B5584",
+          "plannedMediaId": "IMG-Y4M01-Q007-CTX-5DC19E25E346",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "sourceQuestionContractSha256": "59da06a5c3c9b00893754b42399726629169a4d2535260d6c1c3fe570bf9a3a2"
+        },
+        {
+          "questionId": "Y4M01-Q012",
+          "sourceMediaId": "IMG-V11-2B-DD7EA966CFB7CFEC",
+          "plannedMediaId": "IMG-Y4M01-Q012-CTX-017EA367C1E7",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "sourceQuestionContractSha256": "fafd417e41384fc5b177c9d92fefca3e00190d6f4c82a702427877a42ddc085d"
+        },
+        {
+          "questionId": "Y4M01-Q017",
+          "sourceMediaId": "IMG-V11-2B-EAD80736870B5584",
+          "plannedMediaId": "IMG-Y4M01-Q017-CTX-6365C82FD301",
+          "contractPaths": [
+            "pairs[4].b"
+          ],
+          "sourceQuestionContractSha256": "2f82414135c116c26b4cb74b16f835337cab4d7af707cda1cb57e19e80a03a1e"
+        },
+        {
+          "questionId": "Y4M01-Q020",
+          "sourceMediaId": "IMG-V11-2B-DD7EA966CFB7CFEC",
+          "plannedMediaId": "IMG-Y4M01-Q020-CTX-C62A557039EA",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "sourceQuestionContractSha256": "5b9850b98c0ab9fb792976cdf74895726082cfcf80c64235375685ec6b11ba18"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M01-CANDIDATE-FRIDAY",
+      "concept": "friday",
+      "file": "images/DUDUQ-Y4M01-FRIDAY.png",
+      "sha256": "ce52241e9cc7a5db0ef65b63d83f12c988e183ebae811a50f20ec254cb872b45",
+      "expectedObjectCount": 1,
+      "visualObservation": "The same seven-slot weekly planner is preserved; only the fifth slot is warm yellow.",
+      "pedagogicalFit": "Exact text-free calendar-position visual for Friday as position 5 in the contract's Monday-to-Sunday sequence.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M01-Q001",
+          "sourceMediaId": "IMG-V11-2B-1BB63E5A46562D1C",
+          "plannedMediaId": "IMG-Y4M01-Q001-CTX-66A8E6310134",
+          "contractPaths": [
+            "pairs[4].b"
+          ],
+          "sourceQuestionContractSha256": "9b72c96941fabe5cf5d4b246289c98debee8498f0a0929a19705af3018730d75"
+        },
+        {
+          "questionId": "Y4M01-Q002",
+          "sourceMediaId": "IMG-V11-2B-71ACB4E3ADFBDACD",
+          "plannedMediaId": "IMG-Y4M01-Q002-CTX-A62FA9260B6C",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "sourceQuestionContractSha256": "6f90efd7e4c8b9d50d921652e66a73f7619695f2732f61f391e1dea45f993000"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "sourceMediaId": "IMG-V11-2B-1BB63E5A46562D1C",
+          "plannedMediaId": "IMG-Y4M01-Q003-CTX-15244380E58C",
+          "contractPaths": [
+            "bubbleDistractorPool[3]"
+          ],
+          "sourceQuestionContractSha256": "7f4ff9ac20286d336c9152ecf5a1f4ae723ba4a0f37fbc8a9c54dc1a842dcfbf"
+        },
+        {
+          "questionId": "Y4M01-Q005",
+          "sourceMediaId": "IMG-V11-2B-7DC045FB1CE9540B",
+          "plannedMediaId": "IMG-Y4M01-Q005-CTX-0BEC9DBB105E",
+          "contractPaths": [
+            "options[0]"
+          ],
+          "sourceQuestionContractSha256": "8d4dd39ddc5d34b67f06c7d4b867395239bd90e145fcf9aa39c6136bdeadc4eb"
+        },
+        {
+          "questionId": "Y4M01-Q011",
+          "sourceMediaId": "IMG-V11-2B-1BB63E5A46562D1C",
+          "plannedMediaId": "IMG-Y4M01-Q011-CTX-D663B7DC99E1",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "sourceQuestionContractSha256": "95cbebff8346c74055c2c2aa8752f8307ad445e18421d4151f7423b415d6e97c"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "sourceMediaId": "IMG-V11-2B-1BB63E5A46562D1C",
+          "plannedMediaId": "IMG-Y4M01-Q015-CTX-01DC93F09E07",
+          "contractPaths": [
+            "bubbleDistractorPool[3]"
+          ],
+          "sourceQuestionContractSha256": "e382fcb21755a263e213e4da33f174918ec60ea1bba7f9c49e69825e3c53bf2e"
+        },
+        {
+          "questionId": "Y4M01-Q016",
+          "sourceMediaId": "IMG-V11-2B-71ACB4E3ADFBDACD",
+          "plannedMediaId": "IMG-Y4M01-Q016-CTX-DB7579D7F9D9",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "sourceQuestionContractSha256": "e20b615342557dac68c9083d2053250482c036f36b69eb524cfab154cf5bcfdb"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M01-CANDIDATE-MONDAY",
+      "concept": "monday",
+      "file": "images/DUDUQ-Y4M01-MONDAY.png",
+      "sha256": "11e9ef012d25ee183d0e4b97517ce6a6332043bf25d5ea408042ede9ff0bd89b",
+      "expectedObjectCount": 1,
+      "visualObservation": "One complete blue weekly planner has exactly seven blank slots and seven rings; only the first slot is warm yellow.",
+      "pedagogicalFit": "Exact text-free calendar-position visual for Monday as position 1 in the contract's Monday-to-Sunday sequence.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M01-Q001",
+          "sourceMediaId": "IMG-V11-2B-51F07C81B93BA436",
+          "plannedMediaId": "IMG-Y4M01-Q001-CTX-B49B4954F346",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "sourceQuestionContractSha256": "9b72c96941fabe5cf5d4b246289c98debee8498f0a0929a19705af3018730d75"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "sourceMediaId": "IMG-V11-2B-903CE8E0616D5239",
+          "plannedMediaId": "IMG-Y4M01-Q003-CTX-A851B5BFFC97",
+          "contractPaths": [
+            "bubbleDistractorPool[0]",
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "7f4ff9ac20286d336c9152ecf5a1f4ae723ba4a0f37fbc8a9c54dc1a842dcfbf"
+        },
+        {
+          "questionId": "Y4M01-Q004",
+          "sourceMediaId": "IMG-V11-2B-24AE8FD158FDB6BF",
+          "plannedMediaId": "IMG-Y4M01-Q004-CTX-3EB1D4F6DE88",
+          "contractPaths": [
+            "pairs[1].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "6e01fb4def49bb49e770d39c4931d8368511857b8b6c17f86863f1ab0205c430"
+        },
+        {
+          "questionId": "Y4M01-Q005",
+          "sourceMediaId": "IMG-V11-2B-903CE8E0616D5239",
+          "plannedMediaId": "IMG-Y4M01-Q005-CTX-3EF498BB6284",
+          "contractPaths": [
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "8d4dd39ddc5d34b67f06c7d4b867395239bd90e145fcf9aa39c6136bdeadc4eb"
+        },
+        {
+          "questionId": "Y4M01-Q006",
+          "sourceMediaId": "IMG-V11-2B-035DABE1791AD949",
+          "plannedMediaId": "IMG-Y4M01-Q006-CTX-4F357D6E8925",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "sourceQuestionContractSha256": "8e56d0b0295a02a9eb81cb623ea563d14c784378d0cee0626fb6859548849e48"
+        },
+        {
+          "questionId": "Y4M01-Q007",
+          "sourceMediaId": "IMG-V11-2B-51F07C81B93BA436",
+          "plannedMediaId": "IMG-Y4M01-Q007-CTX-8FF1BA6563C2",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "sourceQuestionContractSha256": "59da06a5c3c9b00893754b42399726629169a4d2535260d6c1c3fe570bf9a3a2"
+        },
+        {
+          "questionId": "Y4M01-Q008",
+          "sourceMediaId": "IMG-V11-2B-51F07C81B93BA436",
+          "plannedMediaId": "IMG-Y4M01-Q008-CTX-912DBE829F3E",
+          "contractPaths": [
+            "mediaBindings[0]"
+          ],
+          "sourceQuestionContractSha256": "f0f5be4971cfa066196654d3e266936feae8d344ef6e22e3d2bb458673bf25db"
+        },
+        {
+          "questionId": "Y4M01-Q009",
+          "sourceMediaId": "IMG-V11-2B-903CE8E0616D5239",
+          "plannedMediaId": "IMG-Y4M01-Q009-CTX-4E1A4318744C",
+          "contractPaths": [
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "37ea39aa0573197660e6d5171da2fd6149d2016178105b865378bceddd3e1d53"
+        },
+        {
+          "questionId": "Y4M01-Q011",
+          "sourceMediaId": "IMG-V11-2B-51F07C81B93BA436",
+          "plannedMediaId": "IMG-Y4M01-Q011-CTX-26913B3298C7",
+          "contractPaths": [
+            "pairs[4].b"
+          ],
+          "sourceQuestionContractSha256": "95cbebff8346c74055c2c2aa8752f8307ad445e18421d4151f7423b415d6e97c"
+        },
+        {
+          "questionId": "Y4M01-Q012",
+          "sourceMediaId": "IMG-V11-2B-035DABE1791AD949",
+          "plannedMediaId": "IMG-Y4M01-Q012-CTX-5369F5A6E0EA",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "sourceQuestionContractSha256": "fafd417e41384fc5b177c9d92fefca3e00190d6f4c82a702427877a42ddc085d"
+        },
+        {
+          "questionId": "Y4M01-Q013",
+          "sourceMediaId": "IMG-V11-2B-903CE8E0616D5239",
+          "plannedMediaId": "IMG-Y4M01-Q013-CTX-E0011E08632D",
+          "contractPaths": [
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "268342edf24c1a474ef462abde48e2177a8e2093542c10c9c1dcb872519b3849"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "sourceMediaId": "IMG-V11-2B-903CE8E0616D5239",
+          "plannedMediaId": "IMG-Y4M01-Q015-CTX-128651E05AE7",
+          "contractPaths": [
+            "options[0]",
+            "targetsToFind[0]"
+          ],
+          "sourceQuestionContractSha256": "e382fcb21755a263e213e4da33f174918ec60ea1bba7f9c49e69825e3c53bf2e"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M01-CANDIDATE-SATURDAY",
+      "concept": "saturday",
+      "file": "images/DUDUQ-Y4M01-SATURDAY.png",
+      "sha256": "8a9564e3c69795167107397e66326a74af349fb165f6236ca56f0645a66a2ee1",
+      "expectedObjectCount": 1,
+      "visualObservation": "The same seven-slot weekly planner is preserved; only the sixth slot is warm yellow.",
+      "pedagogicalFit": "Exact text-free calendar-position visual for Saturday as position 6 in the contract's Monday-to-Sunday sequence.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M01-Q001",
+          "sourceMediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+          "plannedMediaId": "IMG-Y4M01-Q001-CTX-5622AC13735A",
+          "contractPaths": [
+            "pairs[5].b"
+          ],
+          "sourceQuestionContractSha256": "9b72c96941fabe5cf5d4b246289c98debee8498f0a0929a19705af3018730d75"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "sourceMediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+          "plannedMediaId": "IMG-Y4M01-Q003-CTX-8BCC29BB58B0",
+          "contractPaths": [
+            "bubbleDistractorPool[4]"
+          ],
+          "sourceQuestionContractSha256": "7f4ff9ac20286d336c9152ecf5a1f4ae723ba4a0f37fbc8a9c54dc1a842dcfbf"
+        },
+        {
+          "questionId": "Y4M01-Q006",
+          "sourceMediaId": "IMG-V11-2B-D5342DA12F205C1A",
+          "plannedMediaId": "IMG-Y4M01-Q006-CTX-8A26E9650FD7",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "sourceQuestionContractSha256": "8e56d0b0295a02a9eb81cb623ea563d14c784378d0cee0626fb6859548849e48"
+        },
+        {
+          "questionId": "Y4M01-Q011",
+          "sourceMediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+          "plannedMediaId": "IMG-Y4M01-Q011-CTX-5E9998BDCE93",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "sourceQuestionContractSha256": "95cbebff8346c74055c2c2aa8752f8307ad445e18421d4151f7423b415d6e97c"
+        },
+        {
+          "questionId": "Y4M01-Q013",
+          "sourceMediaId": "IMG-V11-2B-C0C9F76D0988A785",
+          "plannedMediaId": "IMG-Y4M01-Q013-CTX-C75980BC582C",
+          "contractPaths": [
+            "options[0]"
+          ],
+          "sourceQuestionContractSha256": "268342edf24c1a474ef462abde48e2177a8e2093542c10c9c1dcb872519b3849"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "sourceMediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+          "plannedMediaId": "IMG-Y4M01-Q015-CTX-E30AC5D06013",
+          "contractPaths": [
+            "bubbleDistractorPool[4]"
+          ],
+          "sourceQuestionContractSha256": "e382fcb21755a263e213e4da33f174918ec60ea1bba7f9c49e69825e3c53bf2e"
+        },
+        {
+          "questionId": "Y4M01-Q017",
+          "sourceMediaId": "IMG-V11-2B-71BBB7F3EB57C988",
+          "plannedMediaId": "IMG-Y4M01-Q017-CTX-AC0EFD37EDE2",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "sourceQuestionContractSha256": "2f82414135c116c26b4cb74b16f835337cab4d7af707cda1cb57e19e80a03a1e"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M01-CANDIDATE-SUNDAY",
+      "concept": "sunday",
+      "file": "images/DUDUQ-Y4M01-SUNDAY.png",
+      "sha256": "78c28d7af1112337fdb9a9662e62e6d00b2e118c34d2e3f5e420f08807c23a75",
+      "expectedObjectCount": 1,
+      "visualObservation": "The same seven-slot weekly planner is preserved; only the seventh slot is warm yellow.",
+      "pedagogicalFit": "Exact text-free calendar-position visual for Sunday as position 7 in the contract's Monday-to-Sunday sequence.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M01-Q006",
+          "sourceMediaId": "IMG-V11-2B-5000D4791C83AE56",
+          "plannedMediaId": "IMG-Y4M01-Q006-CTX-8ABAA8FD9FC1",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "sourceQuestionContractSha256": "8e56d0b0295a02a9eb81cb623ea563d14c784378d0cee0626fb6859548849e48"
+        },
+        {
+          "questionId": "Y4M01-Q011",
+          "sourceMediaId": "IMG-V11-2B-8FECB556425AE3C6",
+          "plannedMediaId": "IMG-Y4M01-Q011-CTX-EA90A3AF36A7",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "sourceQuestionContractSha256": "95cbebff8346c74055c2c2aa8752f8307ad445e18421d4151f7423b415d6e97c"
+        },
+        {
+          "questionId": "Y4M01-Q017",
+          "sourceMediaId": "IMG-V11-2B-8FECB556425AE3C6",
+          "plannedMediaId": "IMG-Y4M01-Q017-CTX-3950451F59E3",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "sourceQuestionContractSha256": "2f82414135c116c26b4cb74b16f835337cab4d7af707cda1cb57e19e80a03a1e"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M01-CANDIDATE-THURSDAY",
+      "concept": "thursday",
+      "file": "images/DUDUQ-Y4M01-THURSDAY.png",
+      "sha256": "82210b210af311a41a67575c156e77cadb9caf4e28628669a8064964d431f440",
+      "expectedObjectCount": 1,
+      "visualObservation": "The same seven-slot weekly planner is preserved; only the fourth slot is warm yellow.",
+      "pedagogicalFit": "Exact text-free calendar-position visual for Thursday as position 4 in the contract's Monday-to-Sunday sequence.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M01-Q001",
+          "sourceMediaId": "IMG-V11-2B-9B9E6D10506466D3",
+          "plannedMediaId": "IMG-Y4M01-Q001-CTX-84F02B93FD82",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "sourceQuestionContractSha256": "9b72c96941fabe5cf5d4b246289c98debee8498f0a0929a19705af3018730d75"
+        },
+        {
+          "questionId": "Y4M01-Q002",
+          "sourceMediaId": "IMG-V11-2B-92A2587B6E53B997",
+          "plannedMediaId": "IMG-Y4M01-Q002-CTX-955DB5613D0F",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "sourceQuestionContractSha256": "6f90efd7e4c8b9d50d921652e66a73f7619695f2732f61f391e1dea45f993000"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "sourceMediaId": "IMG-V11-2B-3027B4C1C2E03558",
+          "plannedMediaId": "IMG-Y4M01-Q003-CTX-977516FCACBD",
+          "contractPaths": [
+            "bubbleDistractorPool[2]",
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "7f4ff9ac20286d336c9152ecf5a1f4ae723ba4a0f37fbc8a9c54dc1a842dcfbf"
+        },
+        {
+          "questionId": "Y4M01-Q004",
+          "sourceMediaId": "IMG-V11-2B-874482C576DC9DD7",
+          "plannedMediaId": "IMG-Y4M01-Q004-CTX-C0C87A23FAD7",
+          "contractPaths": [
+            "pairs[0].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "6e01fb4def49bb49e770d39c4931d8368511857b8b6c17f86863f1ab0205c430"
+        },
+        {
+          "questionId": "Y4M01-Q011",
+          "sourceMediaId": "IMG-V11-2B-9B9E6D10506466D3",
+          "plannedMediaId": "IMG-Y4M01-Q011-CTX-D036139DE113",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "sourceQuestionContractSha256": "95cbebff8346c74055c2c2aa8752f8307ad445e18421d4151f7423b415d6e97c"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "sourceMediaId": "IMG-V11-2B-3027B4C1C2E03558",
+          "plannedMediaId": "IMG-Y4M01-Q015-CTX-6A6555D4E115",
+          "contractPaths": [
+            "bubbleDistractorPool[2]",
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "e382fcb21755a263e213e4da33f174918ec60ea1bba7f9c49e69825e3c53bf2e"
+        },
+        {
+          "questionId": "Y4M01-Q016",
+          "sourceMediaId": "IMG-V11-2B-92A2587B6E53B997",
+          "plannedMediaId": "IMG-Y4M01-Q016-CTX-46C293BC981D",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "sourceQuestionContractSha256": "e20b615342557dac68c9083d2053250482c036f36b69eb524cfab154cf5bcfdb"
+        },
+        {
+          "questionId": "Y4M01-Q018",
+          "sourceMediaId": "IMG-V11-2B-9B9E6D10506466D3",
+          "plannedMediaId": "IMG-Y4M01-Q018-CTX-8BFAE5A54251",
+          "contractPaths": [
+            "mediaBindings[0]"
+          ],
+          "sourceQuestionContractSha256": "65f3f372dd04ea133627071d74e54adb45fbfc7a3d8f97cee81a48bee0a932fe"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M01-CANDIDATE-TUESDAY",
+      "concept": "tuesday",
+      "file": "images/DUDUQ-Y4M01-TUESDAY.png",
+      "sha256": "4d586aaecf2c49c9197d91fcb8581f9d8d7344f547698ccabef30f1cf5ac065f",
+      "expectedObjectCount": 1,
+      "visualObservation": "The same seven-slot weekly planner is preserved; only the second slot is warm yellow.",
+      "pedagogicalFit": "Exact text-free calendar-position visual for Tuesday as position 2 in the contract's Monday-to-Sunday sequence.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M01-Q001",
+          "sourceMediaId": "IMG-V11-2B-F81B3734A9EA4226",
+          "plannedMediaId": "IMG-Y4M01-Q001-CTX-166B4C6CAEDE",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "sourceQuestionContractSha256": "9b72c96941fabe5cf5d4b246289c98debee8498f0a0929a19705af3018730d75"
+        },
+        {
+          "questionId": "Y4M01-Q002",
+          "sourceMediaId": "IMG-V11-2B-0C5EFBCFF3B72AB5",
+          "plannedMediaId": "IMG-Y4M01-Q002-CTX-48603FBD11ED",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "sourceQuestionContractSha256": "6f90efd7e4c8b9d50d921652e66a73f7619695f2732f61f391e1dea45f993000"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "sourceMediaId": "IMG-V11-2B-98438188D7DB405E",
+          "plannedMediaId": "IMG-Y4M01-Q003-CTX-B34D3BFFA100",
+          "contractPaths": [
+            "bubbleDistractorPool[1]",
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "7f4ff9ac20286d336c9152ecf5a1f4ae723ba4a0f37fbc8a9c54dc1a842dcfbf"
+        },
+        {
+          "questionId": "Y4M01-Q004",
+          "sourceMediaId": "IMG-V11-2B-9AAB100095051D64",
+          "plannedMediaId": "IMG-Y4M01-Q004-CTX-B17BD9A1F1CF",
+          "contractPaths": [
+            "pairs[2].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "6e01fb4def49bb49e770d39c4931d8368511857b8b6c17f86863f1ab0205c430"
+        },
+        {
+          "questionId": "Y4M01-Q005",
+          "sourceMediaId": "IMG-V11-2B-98438188D7DB405E",
+          "plannedMediaId": "IMG-Y4M01-Q005-CTX-BE0D7C8A7072",
+          "contractPaths": [
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "8d4dd39ddc5d34b67f06c7d4b867395239bd90e145fcf9aa39c6136bdeadc4eb"
+        },
+        {
+          "questionId": "Y4M01-Q006",
+          "sourceMediaId": "IMG-V11-2B-0C5EFBCFF3B72AB5",
+          "plannedMediaId": "IMG-Y4M01-Q006-CTX-012A40C5ECE8",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "sourceQuestionContractSha256": "8e56d0b0295a02a9eb81cb623ea563d14c784378d0cee0626fb6859548849e48"
+        },
+        {
+          "questionId": "Y4M01-Q009",
+          "sourceMediaId": "IMG-V11-2B-98438188D7DB405E",
+          "plannedMediaId": "IMG-Y4M01-Q009-CTX-2280FCE09DE7",
+          "contractPaths": [
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "37ea39aa0573197660e6d5171da2fd6149d2016178105b865378bceddd3e1d53"
+        },
+        {
+          "questionId": "Y4M01-Q011",
+          "sourceMediaId": "IMG-V11-2B-F81B3734A9EA4226",
+          "plannedMediaId": "IMG-Y4M01-Q011-CTX-D2B951E6F8F7",
+          "contractPaths": [
+            "pairs[5].b"
+          ],
+          "sourceQuestionContractSha256": "95cbebff8346c74055c2c2aa8752f8307ad445e18421d4151f7423b415d6e97c"
+        },
+        {
+          "questionId": "Y4M01-Q012",
+          "sourceMediaId": "IMG-V11-2B-0C5EFBCFF3B72AB5",
+          "plannedMediaId": "IMG-Y4M01-Q012-CTX-4E894BE966C7",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "sourceQuestionContractSha256": "fafd417e41384fc5b177c9d92fefca3e00190d6f4c82a702427877a42ddc085d"
+        },
+        {
+          "questionId": "Y4M01-Q013",
+          "sourceMediaId": "IMG-V11-2B-98438188D7DB405E",
+          "plannedMediaId": "IMG-Y4M01-Q013-CTX-A0DFE41769F4",
+          "contractPaths": [
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "268342edf24c1a474ef462abde48e2177a8e2093542c10c9c1dcb872519b3849"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "sourceMediaId": "IMG-V11-2B-98438188D7DB405E",
+          "plannedMediaId": "IMG-Y4M01-Q015-CTX-DFCAD25D4CEC",
+          "contractPaths": [
+            "bubbleDistractorPool[0]",
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "e382fcb21755a263e213e4da33f174918ec60ea1bba7f9c49e69825e3c53bf2e"
+        },
+        {
+          "questionId": "Y4M01-Q016",
+          "sourceMediaId": "IMG-V11-2B-0C5EFBCFF3B72AB5",
+          "plannedMediaId": "IMG-Y4M01-Q016-CTX-232C78AFE10D",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "sourceQuestionContractSha256": "e20b615342557dac68c9083d2053250482c036f36b69eb524cfab154cf5bcfdb"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y4M01-CANDIDATE-WEDNESDAY",
+      "concept": "wednesday",
+      "file": "images/DUDUQ-Y4M01-WEDNESDAY.png",
+      "sha256": "9085f32f3da7e561b836255fdfea7fd6999d1af16779faad0e086e974ee00aca",
+      "expectedObjectCount": 1,
+      "visualObservation": "The same seven-slot weekly planner is preserved; only the third slot is warm yellow.",
+      "pedagogicalFit": "Exact text-free calendar-position visual for Wednesday as position 3 in the contract's Monday-to-Sunday sequence.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y4M01-Q001",
+          "sourceMediaId": "IMG-V11-2B-02174158FE88B58B",
+          "plannedMediaId": "IMG-Y4M01-Q001-CTX-A30EA1F607EA",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "sourceQuestionContractSha256": "9b72c96941fabe5cf5d4b246289c98debee8498f0a0929a19705af3018730d75"
+        },
+        {
+          "questionId": "Y4M01-Q002",
+          "sourceMediaId": "IMG-V11-2B-037A8C192583A82D",
+          "plannedMediaId": "IMG-Y4M01-Q002-CTX-426B5ADE4342",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "sourceQuestionContractSha256": "6f90efd7e4c8b9d50d921652e66a73f7619695f2732f61f391e1dea45f993000"
+        },
+        {
+          "questionId": "Y4M01-Q003",
+          "sourceMediaId": "IMG-V11-2B-D8AB8014378C4168",
+          "plannedMediaId": "IMG-Y4M01-Q003-CTX-BC05C4446EC0",
+          "contractPaths": [
+            "options[0]",
+            "targetsToFind[0]"
+          ],
+          "sourceQuestionContractSha256": "7f4ff9ac20286d336c9152ecf5a1f4ae723ba4a0f37fbc8a9c54dc1a842dcfbf"
+        },
+        {
+          "questionId": "Y4M01-Q004",
+          "sourceMediaId": "IMG-V11-2B-ECBAE24445C899B2",
+          "plannedMediaId": "IMG-Y4M01-Q004-CTX-950906DAD505",
+          "contractPaths": [
+            "pairs[3].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "6e01fb4def49bb49e770d39c4931d8368511857b8b6c17f86863f1ab0205c430"
+        },
+        {
+          "questionId": "Y4M01-Q005",
+          "sourceMediaId": "IMG-V11-2B-D8AB8014378C4168",
+          "plannedMediaId": "IMG-Y4M01-Q005-CTX-9DA878FF3B99",
+          "contractPaths": [
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "8d4dd39ddc5d34b67f06c7d4b867395239bd90e145fcf9aa39c6136bdeadc4eb"
+        },
+        {
+          "questionId": "Y4M01-Q009",
+          "sourceMediaId": "IMG-V11-2B-D8AB8014378C4168",
+          "plannedMediaId": "IMG-Y4M01-Q009-CTX-2BF729B9FA1A",
+          "contractPaths": [
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "37ea39aa0573197660e6d5171da2fd6149d2016178105b865378bceddd3e1d53"
+        },
+        {
+          "questionId": "Y4M01-Q013",
+          "sourceMediaId": "IMG-V11-2B-D8AB8014378C4168",
+          "plannedMediaId": "IMG-Y4M01-Q013-CTX-67163492B614",
+          "contractPaths": [
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "268342edf24c1a474ef462abde48e2177a8e2093542c10c9c1dcb872519b3849"
+        },
+        {
+          "questionId": "Y4M01-Q015",
+          "sourceMediaId": "IMG-V11-2B-D8AB8014378C4168",
+          "plannedMediaId": "IMG-Y4M01-Q015-CTX-F2B0DF1BAE58",
+          "contractPaths": [
+            "bubbleDistractorPool[1]",
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "e382fcb21755a263e213e4da33f174918ec60ea1bba7f9c49e69825e3c53bf2e"
+        },
+        {
+          "questionId": "Y4M01-Q016",
+          "sourceMediaId": "IMG-V11-2B-037A8C192583A82D",
+          "plannedMediaId": "IMG-Y4M01-Q016-CTX-4C41C60DE5D3",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "sourceQuestionContractSha256": "e20b615342557dac68c9083d2053250482c036f36b69eb524cfab154cf5bcfdb"
+        }
+      ]
+    }
+  ],
+  "rejectedAttempts": [
+    {
+      "concept": "best friend",
+      "generatorCallId": "exec-a89684da-3ad6-4171-a86e-cd1bae39b8be",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-a89684da-3ad6-4171-a86e-cd1bae39b8be.png",
+      "sha256": "36412fddb5141dc82842b2080cb375ce2ea89819b18ad85b6a7828ba8120deab",
+      "reason": "FRAMING_REJECTED_CANVAS_EDGE_CONTACT",
+      "replacementGeneratorCallId": "exec-18912f5e-03fc-46a8-920d-e40a02f1804c",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational personal-profile concept PNG for children ages 8–10\nPrimary request: one unmistakable visual teaching \"best friend\"\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly two school-age children shown from waist up, standing shoulder-to-shoulder with one arm around each other's shoulders, both smiling warmly toward the viewer; the pair forms one close connected friendship composition; use clearly different hair, clothing colors, and skin tones without stereotypes\nStyle/medium: premium polished rounded 3D children's animation render, high-quality soft materials, crisp readable silhouette\nComposition/framing: centered close composition; both complete heads, torsos, and friendship embrace fill about 82% of the square canvas with an 8–10% transparent safe margin\nLighting/mood: soft bright studio lighting, warm, safe, joyful, and inclusive\nConstraints: exactly two children, one clear mutual friendship embrace, actual alpha transparency; visually distinct from age counter, birthday cake, favorite badge, and weekday planner\nAvoid: third person, adult, family group, teacher, romance, kissing, hearts, stars, cake, candles, gifts, counting beads, calendars, hand signs, extra arms, extra hands or fingers, words, letters, numerals, names, labels, logos, watermark, floor, cast shadow, glow, halo, frame, collage, grid, cropped heads"
+    }
+  ],
+  "candidateOnly": true,
+  "productionApproved": false,
+  "integrated": false
+}

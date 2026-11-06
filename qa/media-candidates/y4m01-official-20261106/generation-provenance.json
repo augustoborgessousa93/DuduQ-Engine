@@ -1,0 +1,425 @@
+{
+  "schemaVersion": "DUDUQ_Y4M01_GENERATION_PROVENANCE_V1",
+  "createdAt": "2026-11-06T09:13:52.327Z",
+  "moduleId": "Y4M01",
+  "lane": "generation",
+  "provider": "OpenAI Codex native image generation",
+  "tool": "image_gen.imagegen",
+  "apiPurchaseOrExternalCredentialUsed": false,
+  "nativeGeneratedAssetCount": 11,
+  "verifiedReuseAssetCount": 0,
+  "originalGenerationProvenancePreserved": true,
+  "assets": [
+    {
+      "concept": "age",
+      "slug": "AGE",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "provider": "OpenAI Codex native image generation",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational personal-profile concept PNG for children ages 8–10\nPrimary request: one unmistakable child-friendly age counter teaching the profile concept \"age\", grounded in the current source visual's five-marker age badge\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one connected round blue 3D age-counter token, with a friendly generic child's bust embossed clearly in the upper half and exactly five large ivory counting beads in one horizontal row across the lower half; the beads represent completed years without using a numeral\nStyle/medium: premium polished rounded 3D children's animation render, tactile toy-like materials, crisp readable silhouette\nComposition/framing: centered front three-quarter view; the complete circular token fills about 80% of the square canvas with an 8–10% transparent safe margin; child bust and all five beads are fully visible and easy to count\nLighting/mood: soft bright studio lighting, friendly and educational\nConstraints: exactly one connected age-counter token, exactly one child bust, exactly five beads, actual alpha transparency; visually distinct from birthday, favorite, friendship, and the seven-slot weekday planner\nAvoid: birthday cake, candles, gifts, balloons, party hats, hearts, stars, two people, hand gestures, clocks, calendars, rulers, height chart, words, letters, numerals, labels, logos, watermark, floor, cast shadow, glow, halo, frame, collage, grid, cropped edges",
+      "promptRecordStatus": "VERBATIM_GENERATION_PROMPT_PRESERVED",
+      "transparentBackgroundRequested": true,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-68c97026-dc5e-4151-abae-840b1074c8b3.png",
+      "originalFile": "provenance/originals/DUDUQ-Y4M01-AGE-ORIGINAL.png",
+      "originalSha256": "8dc1af61d99c848e394afb071487d5561d62048b56b2f61137279ec4f873bd07",
+      "candidateFile": "images/DUDUQ-Y4M01-AGE.png",
+      "candidateSha256": "f18a37d29a9fcd57d157880d706ed7aab9dd426a07c590c3b9ab016149bd9569",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "retain expected opaque subject components plus antialias edge; remove detached alpha artifacts; preserve source original"
+      },
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-68c97026-dc5e-4151-abae-840b1074c8b3.png",
+        "nativeOutputSha256": "8dc1af61d99c848e394afb071487d5561d62048b56b2f61137279ec4f873bd07",
+        "generationInput": "qa/media-candidates/y4m01-official-20261106/generation-input.json",
+        "generationInputSha256": "54219b3fbb7ecfec6acd42953b9e8b4c3d5b10aaae88ac18df7ebdf24550d890",
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T05-48-18-01a1b00b-6085-7c10-90df-39c03fb6bf63.jsonl",
+          "generatorCallId": "exec-68c97026-dc5e-4151-abae-840b1074c8b3",
+          "stableGenerationRecordSha256": "63e95dbb9d14abb12a3a30cd1430965b5e7829e248199d6ce3b78eab4ef687b7",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      }
+    },
+    {
+      "concept": "best friend",
+      "slug": "BEST-FRIEND",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "provider": "OpenAI Codex native image generation",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: precise-object-edit\nAsset type: corrected DUDUQ English \"best friend\" concept PNG\nInput images: Image 1 is the otherwise approved two-child friendship render\nPrimary request: change only the framing and edge completeness\nRequired edit: scale the complete two-child friendship composition down enough to create a clean 9–11% genuinely transparent margin on every side; reconstruct the lower torso and sleeve edges naturally so no hair, hand, arm, clothing, or body pixel touches or is cut by any canvas edge\nInvariants: preserve exactly two children, their identities, faces, hair, clothing colors, mutual arms-around-shoulders pose, expressions, premium rounded 3D style, lighting, transparent background, and semantic meaning\nComposition/framing: centered waist-up pair, complete silhouette, subject still fills roughly 78–80% of the square canvas\nConstraints: actual alpha transparency; no new objects or people\nAvoid: cropped heads, cropped hair, cropped hands, cropped sleeves, cropped torsos, edge contact, third person, extra limbs, hearts, stars, cake, text, logos, floor, cast shadow, glow, halo, frame, collage, watermark",
+      "promptRecordStatus": "VERBATIM_GENERATION_PROMPT_PRESERVED",
+      "transparentBackgroundRequested": true,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-18912f5e-03fc-46a8-920d-e40a02f1804c.png",
+      "originalFile": "provenance/originals/DUDUQ-Y4M01-BEST-FRIEND-ORIGINAL.png",
+      "originalSha256": "284727a2361a6ec42bc7ac03ee46a429b6d1fbe7d331625299119c788d33184b",
+      "candidateFile": "images/DUDUQ-Y4M01-BEST-FRIEND.png",
+      "candidateSha256": "638ccca43fe727ee5b961d883bbc982d5fe67b873d6d60285f67941b8ef99c1c",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "retain expected opaque subject components plus antialias edge; remove detached alpha artifacts; preserve source original"
+      },
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-18912f5e-03fc-46a8-920d-e40a02f1804c.png",
+        "nativeOutputSha256": "284727a2361a6ec42bc7ac03ee46a429b6d1fbe7d331625299119c788d33184b",
+        "generationInput": "qa/media-candidates/y4m01-official-20261106/generation-input.json",
+        "generationInputSha256": "54219b3fbb7ecfec6acd42953b9e8b4c3d5b10aaae88ac18df7ebdf24550d890",
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T05-48-18-01a1b00b-6085-7c10-90df-39c03fb6bf63.jsonl",
+          "generatorCallId": "exec-18912f5e-03fc-46a8-920d-e40a02f1804c",
+          "stableGenerationRecordSha256": "a17c9b182628a02618cbd620f2af96940190eeb29ef8bbcb1ed89aec855b84e6",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      }
+    },
+    {
+      "concept": "birthday",
+      "slug": "BIRTHDAY",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "provider": "OpenAI Codex native image generation",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational personal-profile concept PNG for children ages 8–10\nPrimary request: one unmistakable visual teaching the personal-profile concept \"birthday\"\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one cheerful round birthday cake with colorful frosting, a neat scalloped icing edge, and exactly three short lit candles firmly attached on top; the cake, plate, and candles form one connected subject\nStyle/medium: premium polished rounded 3D children's animation render, soft tactile materials, crisp readable silhouette\nComposition/framing: centered front three-quarter view; the complete cake fills about 80% of the square canvas with an 8–10% transparent safe margin; all candles and flame tips are fully visible\nLighting/mood: soft bright studio lighting, celebratory and child-friendly\nConstraints: exactly one cake and exactly three candles; actual alpha transparency; clearly a birthday celebration object, visually distinct from age, favorite, friendship, and weekday planner\nAvoid: people, hearts, stars, friend pairs, age counter beads, calendar, gifts, balloons, party text, words, letters, numerals, names, labels, logos, watermark, extra cakes, detached confetti, floor, cast shadow, glow, halo, frame, collage, grid, cropped edges",
+      "promptRecordStatus": "VERBATIM_GENERATION_PROMPT_PRESERVED",
+      "transparentBackgroundRequested": true,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-a4107e16-b8e5-43a4-85ed-e8d89c99a9b2.png",
+      "originalFile": "provenance/originals/DUDUQ-Y4M01-BIRTHDAY-ORIGINAL.png",
+      "originalSha256": "c3236c5c02611f390ccad0940d19e65ee2351433bc2f5f785b83460627de6cde",
+      "candidateFile": "images/DUDUQ-Y4M01-BIRTHDAY.png",
+      "candidateSha256": "18de82b327912293a2066112a6b003076ab54e531732e518df0ebfe1b9133ca0",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "retain expected opaque subject components plus antialias edge; remove detached alpha artifacts; preserve source original"
+      },
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-a4107e16-b8e5-43a4-85ed-e8d89c99a9b2.png",
+        "nativeOutputSha256": "c3236c5c02611f390ccad0940d19e65ee2351433bc2f5f785b83460627de6cde",
+        "generationInput": "qa/media-candidates/y4m01-official-20261106/generation-input.json",
+        "generationInputSha256": "54219b3fbb7ecfec6acd42953b9e8b4c3d5b10aaae88ac18df7ebdf24550d890",
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T05-48-18-01a1b00b-6085-7c10-90df-39c03fb6bf63.jsonl",
+          "generatorCallId": "exec-a4107e16-b8e5-43a4-85ed-e8d89c99a9b2",
+          "stableGenerationRecordSha256": "27704ddc9205442b82231289d740550153beb89cdf8f4141a75a7fed699e9545",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      }
+    },
+    {
+      "concept": "favorite",
+      "slug": "FAVORITE",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "provider": "OpenAI Codex native image generation",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational personal-profile concept PNG for children ages 8–10\nPrimary request: one unmistakable visual teaching the personal-profile concept \"favorite\"\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one plump glossy coral-red 3D heart-shaped favorite badge, with one small warm-gold star embossed into its center as part of the same connected object; no separate pieces\nStyle/medium: premium polished rounded 3D children's animation render, soft tactile toy-like material, crisp readable silhouette\nComposition/framing: centered front three-quarter view; the complete heart badge fills about 78% of the square canvas with an 8–10% transparent safe margin\nLighting/mood: soft bright studio lighting, warm and positive\nConstraints: exactly one connected heart badge with exactly one embossed star; actual alpha transparency; visually distinct from birthday cake, age counter, two friends, and weekday planner\nAvoid: people, friend pairs, cakes, candles, gifts, balloons, calendar, counting beads, extra hearts, extra stars, detached decorations, hand gestures, words, letters, numerals, labels, logos, watermark, floor, cast shadow, glow, halo, frame, collage, grid, cropped edges",
+      "promptRecordStatus": "VERBATIM_GENERATION_PROMPT_PRESERVED",
+      "transparentBackgroundRequested": true,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-455209b3-bcc5-4ca1-a0a1-ab9cf73eb26e.png",
+      "originalFile": "provenance/originals/DUDUQ-Y4M01-FAVORITE-ORIGINAL.png",
+      "originalSha256": "041426c6dec21cbb936fe1b5e8aebbbfa68e32f5ab7e74da8499ac4265d0bb20",
+      "candidateFile": "images/DUDUQ-Y4M01-FAVORITE.png",
+      "candidateSha256": "1b195bc8f55a66f34823e41efeb04d393f5b62aaa09cea864520dbf53e62742e",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "retain expected opaque subject components plus antialias edge; remove detached alpha artifacts; preserve source original"
+      },
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-455209b3-bcc5-4ca1-a0a1-ab9cf73eb26e.png",
+        "nativeOutputSha256": "041426c6dec21cbb936fe1b5e8aebbbfa68e32f5ab7e74da8499ac4265d0bb20",
+        "generationInput": "qa/media-candidates/y4m01-official-20261106/generation-input.json",
+        "generationInputSha256": "54219b3fbb7ecfec6acd42953b9e8b4c3d5b10aaae88ac18df7ebdf24550d890",
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T05-48-18-01a1b00b-6085-7c10-90df-39c03fb6bf63.jsonl",
+          "generatorCallId": "exec-455209b3-bcc5-4ca1-a0a1-ab9cf73eb26e",
+          "stableGenerationRecordSha256": "c91bca29f0ed65444196ff98c6bb4df9bda3371c941c6d1f8bf5e660eb4cb561",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      }
+    },
+    {
+      "concept": "friday",
+      "slug": "FRIDAY",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "provider": "OpenAI Codex native image generation",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational weekday concept PNG for children ages 8–10\nInput images: Image 1 is the approved Monday base weekly-planner design\nPrimary request: change only the active day position so this teaches Friday, the fifth position in the curriculum's Monday-to-Sunday sequence\nRequired edit: make slot 1 pale blue-gray like the inactive slots; make slot 5 the only raised warm golden-yellow active slot\nInvariants: preserve the exact same single planner, transparent canvas, dimensions, framing, camera angle, blue body, seven binding rings, exactly seven rounded slots, spacing, materials, lighting, edge completeness, and safe margin\nConstraints: exactly seven slots; highlighted position 5 of 7 only; actual alpha transparency; no baked-in answer text\nAvoid: changing any other slot or geometry; words, letters, weekday names, numerals, labels, icons, pictograms, extra slots, missing slots, multiple highlighted slots, people, scenes, floor, cast shadow, glow, halo, frame, collage, watermark, logo",
+      "promptRecordStatus": "VERBATIM_GENERATION_PROMPT_PRESERVED",
+      "transparentBackgroundRequested": true,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-ba7d0511-f7cb-4e6d-a875-1f43778373d4.png",
+      "originalFile": "provenance/originals/DUDUQ-Y4M01-FRIDAY-ORIGINAL.png",
+      "originalSha256": "06e17d5311fe9faffb2881591d835f15bb5241a0eacf487f9a573de468b4208c",
+      "candidateFile": "images/DUDUQ-Y4M01-FRIDAY.png",
+      "candidateSha256": "ce52241e9cc7a5db0ef65b63d83f12c988e183ebae811a50f20ec254cb872b45",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "retain expected opaque subject components plus antialias edge; remove detached alpha artifacts; preserve source original"
+      },
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-ba7d0511-f7cb-4e6d-a875-1f43778373d4.png",
+        "nativeOutputSha256": "06e17d5311fe9faffb2881591d835f15bb5241a0eacf487f9a573de468b4208c",
+        "generationInput": "qa/media-candidates/y4m01-official-20261106/generation-input.json",
+        "generationInputSha256": "54219b3fbb7ecfec6acd42953b9e8b4c3d5b10aaae88ac18df7ebdf24550d890",
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T05-48-18-01a1b00b-6085-7c10-90df-39c03fb6bf63.jsonl",
+          "generatorCallId": "exec-ba7d0511-f7cb-4e6d-a875-1f43778373d4",
+          "stableGenerationRecordSha256": "afa4660b7558f7b8ef5bc10860b10fb71494b715797329fdad94231704e8298c",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      }
+    },
+    {
+      "concept": "monday",
+      "slug": "MONDAY",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "provider": "OpenAI Codex native image generation",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational weekday concept PNG for children ages 8–10\nPrimary request: one unmistakable visual teaching Monday as the first position in the curriculum's Monday-to-Sunday week sequence\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one compact premium 3D weekly planner card containing exactly seven tall rounded blank day slots arranged in one straight left-to-right row; the first slot is the only active slot, raised and warm golden yellow; the remaining six slots are identical pale blue-gray; include seven small neutral binding pegs aligned above the slots as part of the same planner\nStyle/medium: premium polished rounded 3D children's animation render, soft tactile materials, crisp silhouette\nComposition/framing: front three-quarter view, centered; the complete planner fills about 82% of the square canvas while preserving an 8–10% transparent safe margin; all seven slots are large, fully visible, evenly spaced, and easy to count\nLighting/mood: soft bright studio lighting, cheerful and clear\nConstraints: exactly seven slots; highlighted position 1 of 7 only; one connected planner subject; actual alpha transparency; no baked-in answer text\nAvoid: words, letters, weekday names, numerals, labels, icons, pictograms, stars, hearts, check marks, arrows, clocks, people, school scenes, extra slots, missing slots, duplicate highlighted slots, collage, grid of separate cards, floor, cast shadow, glow, halo, frame, watermark, logo, cropped edges",
+      "promptRecordStatus": "VERBATIM_GENERATION_PROMPT_PRESERVED",
+      "transparentBackgroundRequested": true,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-e9dcffa0-94b0-406f-98c0-5359a25df22b.png",
+      "originalFile": "provenance/originals/DUDUQ-Y4M01-MONDAY-ORIGINAL.png",
+      "originalSha256": "f69133f008d93e5bf60565d3321583a8a7c8ae35911e4bdbc3aa12c5e051116b",
+      "candidateFile": "images/DUDUQ-Y4M01-MONDAY.png",
+      "candidateSha256": "11e9ef012d25ee183d0e4b97517ce6a6332043bf25d5ea408042ede9ff0bd89b",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "retain expected opaque subject components plus antialias edge; remove detached alpha artifacts; preserve source original"
+      },
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-e9dcffa0-94b0-406f-98c0-5359a25df22b.png",
+        "nativeOutputSha256": "f69133f008d93e5bf60565d3321583a8a7c8ae35911e4bdbc3aa12c5e051116b",
+        "generationInput": "qa/media-candidates/y4m01-official-20261106/generation-input.json",
+        "generationInputSha256": "54219b3fbb7ecfec6acd42953b9e8b4c3d5b10aaae88ac18df7ebdf24550d890",
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T05-48-18-01a1b00b-6085-7c10-90df-39c03fb6bf63.jsonl",
+          "generatorCallId": "exec-e9dcffa0-94b0-406f-98c0-5359a25df22b",
+          "stableGenerationRecordSha256": "910ccec2a7f04dc41880aecb2be7225210793c52e6a81307390fe7b409241867",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      }
+    },
+    {
+      "concept": "saturday",
+      "slug": "SATURDAY",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "provider": "OpenAI Codex native image generation",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational weekday concept PNG for children ages 8–10\nInput images: Image 1 is the approved Monday base weekly-planner design\nPrimary request: change only the active day position so this teaches Saturday, the sixth position in the curriculum's Monday-to-Sunday sequence\nRequired edit: make slot 1 pale blue-gray like the inactive slots; make slot 6 the only raised warm golden-yellow active slot\nInvariants: preserve the exact same single planner, transparent canvas, dimensions, framing, camera angle, blue body, seven binding rings, exactly seven rounded slots, spacing, materials, lighting, edge completeness, and safe margin\nConstraints: exactly seven slots; highlighted position 6 of 7 only; actual alpha transparency; no baked-in answer text\nAvoid: changing any other slot or geometry; words, letters, weekday names, numerals, labels, icons, pictograms, extra slots, missing slots, multiple highlighted slots, people, scenes, floor, cast shadow, glow, halo, frame, collage, watermark, logo",
+      "promptRecordStatus": "VERBATIM_GENERATION_PROMPT_PRESERVED",
+      "transparentBackgroundRequested": true,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-76f960dd-469b-4096-853d-1f6f8ab92f2c.png",
+      "originalFile": "provenance/originals/DUDUQ-Y4M01-SATURDAY-ORIGINAL.png",
+      "originalSha256": "b392813a839cd930648989a3effea59302dc2ad45228d566d5c6007248eac8b5",
+      "candidateFile": "images/DUDUQ-Y4M01-SATURDAY.png",
+      "candidateSha256": "8a9564e3c69795167107397e66326a74af349fb165f6236ca56f0645a66a2ee1",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "retain expected opaque subject components plus antialias edge; remove detached alpha artifacts; preserve source original"
+      },
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-76f960dd-469b-4096-853d-1f6f8ab92f2c.png",
+        "nativeOutputSha256": "b392813a839cd930648989a3effea59302dc2ad45228d566d5c6007248eac8b5",
+        "generationInput": "qa/media-candidates/y4m01-official-20261106/generation-input.json",
+        "generationInputSha256": "54219b3fbb7ecfec6acd42953b9e8b4c3d5b10aaae88ac18df7ebdf24550d890",
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T05-48-18-01a1b00b-6085-7c10-90df-39c03fb6bf63.jsonl",
+          "generatorCallId": "exec-76f960dd-469b-4096-853d-1f6f8ab92f2c",
+          "stableGenerationRecordSha256": "5d52ebf97f14702655f630743cbfa653220f3a4c080eb82c88fe5a1f213fec7b",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      }
+    },
+    {
+      "concept": "sunday",
+      "slug": "SUNDAY",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "provider": "OpenAI Codex native image generation",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational weekday concept PNG for children ages 8–10\nInput images: Image 1 is the approved Monday base weekly-planner design\nPrimary request: change only the active day position so this teaches Sunday, the seventh position in the curriculum's Monday-to-Sunday sequence\nRequired edit: make slot 1 pale blue-gray like the inactive slots; make slot 7 the only raised warm golden-yellow active slot\nInvariants: preserve the exact same single planner, transparent canvas, dimensions, framing, camera angle, blue body, seven binding rings, exactly seven rounded slots, spacing, materials, lighting, edge completeness, and safe margin\nConstraints: exactly seven slots; highlighted position 7 of 7 only; actual alpha transparency; no baked-in answer text\nAvoid: changing any other slot or geometry; words, letters, weekday names, numerals, labels, icons, pictograms, extra slots, missing slots, multiple highlighted slots, people, scenes, floor, cast shadow, glow, halo, frame, collage, watermark, logo",
+      "promptRecordStatus": "VERBATIM_GENERATION_PROMPT_PRESERVED",
+      "transparentBackgroundRequested": true,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-1de59d99-7303-4341-95c5-9678d2d519f0.png",
+      "originalFile": "provenance/originals/DUDUQ-Y4M01-SUNDAY-ORIGINAL.png",
+      "originalSha256": "b031c37c5bba690f8e3116c92d5936af5be07d69baff950f2101187919b759b6",
+      "candidateFile": "images/DUDUQ-Y4M01-SUNDAY.png",
+      "candidateSha256": "78c28d7af1112337fdb9a9662e62e6d00b2e118c34d2e3f5e420f08807c23a75",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "retain expected opaque subject components plus antialias edge; remove detached alpha artifacts; preserve source original"
+      },
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-1de59d99-7303-4341-95c5-9678d2d519f0.png",
+        "nativeOutputSha256": "b031c37c5bba690f8e3116c92d5936af5be07d69baff950f2101187919b759b6",
+        "generationInput": "qa/media-candidates/y4m01-official-20261106/generation-input.json",
+        "generationInputSha256": "54219b3fbb7ecfec6acd42953b9e8b4c3d5b10aaae88ac18df7ebdf24550d890",
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T05-48-18-01a1b00b-6085-7c10-90df-39c03fb6bf63.jsonl",
+          "generatorCallId": "exec-1de59d99-7303-4341-95c5-9678d2d519f0",
+          "stableGenerationRecordSha256": "a595e8be7a34836afb022ec903427679bcbb08c721c0f8f38cf5e938ecbff2cb",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      }
+    },
+    {
+      "concept": "thursday",
+      "slug": "THURSDAY",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "provider": "OpenAI Codex native image generation",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational weekday concept PNG for children ages 8–10\nInput images: Image 1 is the approved Monday base weekly-planner design\nPrimary request: change only the active day position so this teaches Thursday, the fourth position in the curriculum's Monday-to-Sunday sequence\nRequired edit: make slot 1 pale blue-gray like the inactive slots; make slot 4 the only raised warm golden-yellow active slot\nInvariants: preserve the exact same single planner, transparent canvas, dimensions, framing, camera angle, blue body, seven binding rings, exactly seven rounded slots, spacing, materials, lighting, edge completeness, and safe margin\nConstraints: exactly seven slots; highlighted position 4 of 7 only; actual alpha transparency; no baked-in answer text\nAvoid: changing any other slot or geometry; words, letters, weekday names, numerals, labels, icons, pictograms, extra slots, missing slots, multiple highlighted slots, people, scenes, floor, cast shadow, glow, halo, frame, collage, watermark, logo",
+      "promptRecordStatus": "VERBATIM_GENERATION_PROMPT_PRESERVED",
+      "transparentBackgroundRequested": true,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-2b79146c-3994-4e49-a4c1-e44579fa6240.png",
+      "originalFile": "provenance/originals/DUDUQ-Y4M01-THURSDAY-ORIGINAL.png",
+      "originalSha256": "1b4989cb459d0cf2aec38c7ebb1816b68147e2622f51facaace0d35a96f1e7f4",
+      "candidateFile": "images/DUDUQ-Y4M01-THURSDAY.png",
+      "candidateSha256": "82210b210af311a41a67575c156e77cadb9caf4e28628669a8064964d431f440",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "retain expected opaque subject components plus antialias edge; remove detached alpha artifacts; preserve source original"
+      },
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-2b79146c-3994-4e49-a4c1-e44579fa6240.png",
+        "nativeOutputSha256": "1b4989cb459d0cf2aec38c7ebb1816b68147e2622f51facaace0d35a96f1e7f4",
+        "generationInput": "qa/media-candidates/y4m01-official-20261106/generation-input.json",
+        "generationInputSha256": "54219b3fbb7ecfec6acd42953b9e8b4c3d5b10aaae88ac18df7ebdf24550d890",
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T05-48-18-01a1b00b-6085-7c10-90df-39c03fb6bf63.jsonl",
+          "generatorCallId": "exec-2b79146c-3994-4e49-a4c1-e44579fa6240",
+          "stableGenerationRecordSha256": "64e55ce82d6223ca63c4465cdb2f84b43fce280a554d783a75d3d5ef05a525ed",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      }
+    },
+    {
+      "concept": "tuesday",
+      "slug": "TUESDAY",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "provider": "OpenAI Codex native image generation",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational weekday concept PNG for children ages 8–10\nInput images: Image 1 is the approved Monday base weekly-planner design\nPrimary request: change only the active day position so this teaches Tuesday, the second position in the curriculum's Monday-to-Sunday sequence\nRequired edit: make slot 1 pale blue-gray like the inactive slots; make slot 2 the only raised warm golden-yellow active slot\nInvariants: preserve the exact same single planner, transparent canvas, dimensions, framing, camera angle, blue body, seven binding rings, exactly seven rounded slots, spacing, materials, lighting, edge completeness, and safe margin\nConstraints: exactly seven slots; highlighted position 2 of 7 only; actual alpha transparency; no baked-in answer text\nAvoid: changing any other slot or geometry; words, letters, weekday names, numerals, labels, icons, pictograms, extra slots, missing slots, multiple highlighted slots, people, scenes, floor, cast shadow, glow, halo, frame, collage, watermark, logo",
+      "promptRecordStatus": "VERBATIM_GENERATION_PROMPT_PRESERVED",
+      "transparentBackgroundRequested": true,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-180f66be-2803-477b-ae08-617be9f2bcee.png",
+      "originalFile": "provenance/originals/DUDUQ-Y4M01-TUESDAY-ORIGINAL.png",
+      "originalSha256": "919675040bd697ab589cc0dfd0f3a08ca3c4569b1faf6f3c6148167961e69aab",
+      "candidateFile": "images/DUDUQ-Y4M01-TUESDAY.png",
+      "candidateSha256": "4d586aaecf2c49c9197d91fcb8581f9d8d7344f547698ccabef30f1cf5ac065f",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "retain expected opaque subject components plus antialias edge; remove detached alpha artifacts; preserve source original"
+      },
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-180f66be-2803-477b-ae08-617be9f2bcee.png",
+        "nativeOutputSha256": "919675040bd697ab589cc0dfd0f3a08ca3c4569b1faf6f3c6148167961e69aab",
+        "generationInput": "qa/media-candidates/y4m01-official-20261106/generation-input.json",
+        "generationInputSha256": "54219b3fbb7ecfec6acd42953b9e8b4c3d5b10aaae88ac18df7ebdf24550d890",
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T05-48-18-01a1b00b-6085-7c10-90df-39c03fb6bf63.jsonl",
+          "generatorCallId": "exec-180f66be-2803-477b-ae08-617be9f2bcee",
+          "stableGenerationRecordSha256": "37c053e23d13fd619f2dfff69e2ad5f0591ad753706fd80bdbe023b34c54d084",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      }
+    },
+    {
+      "concept": "wednesday",
+      "slug": "WEDNESDAY",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "provider": "OpenAI Codex native image generation",
+      "tool": "image_gen.imagegen",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational weekday concept PNG for children ages 8–10\nInput images: Image 1 is the approved Monday base weekly-planner design\nPrimary request: change only the active day position so this teaches Wednesday, the third position in the curriculum's Monday-to-Sunday sequence\nRequired edit: make slot 1 pale blue-gray like the inactive slots; make slot 3 the only raised warm golden-yellow active slot\nInvariants: preserve the exact same single planner, transparent canvas, dimensions, framing, camera angle, blue body, seven binding rings, exactly seven rounded slots, spacing, materials, lighting, edge completeness, and safe margin\nConstraints: exactly seven slots; highlighted position 3 of 7 only; actual alpha transparency; no baked-in answer text\nAvoid: changing any other slot or geometry; words, letters, weekday names, numerals, labels, icons, pictograms, extra slots, missing slots, multiple highlighted slots, people, scenes, floor, cast shadow, glow, halo, frame, collage, watermark, logo",
+      "promptRecordStatus": "VERBATIM_GENERATION_PROMPT_PRESERVED",
+      "transparentBackgroundRequested": true,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-b173a526-1eda-4212-8f80-5d6f4c5dc9f8.png",
+      "originalFile": "provenance/originals/DUDUQ-Y4M01-WEDNESDAY-ORIGINAL.png",
+      "originalSha256": "5ad5934e495ea83d26d425524aca9c0d552b5c04d12ffca2aecdf3f7710d0c3e",
+      "candidateFile": "images/DUDUQ-Y4M01-WEDNESDAY.png",
+      "candidateSha256": "9085f32f3da7e561b836255fdfea7fd6999d1af16779faad0e086e974ee00aca",
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "retain expected opaque subject components plus antialias edge; remove detached alpha artifacts; preserve source original"
+      },
+      "source": {
+        "provider": "OpenAI Codex native image generation",
+        "tool": "image_gen.imagegen",
+        "nativeOutputPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-b173a526-1eda-4212-8f80-5d6f4c5dc9f8.png",
+        "nativeOutputSha256": "5ad5934e495ea83d26d425524aca9c0d552b5c04d12ffca2aecdf3f7710d0c3e",
+        "generationInput": "qa/media-candidates/y4m01-official-20261106/generation-input.json",
+        "generationInputSha256": "54219b3fbb7ecfec6acd42953b9e8b4c3d5b10aaae88ac18df7ebdf24550d890",
+        "sessionEvidence": {
+          "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T05-48-18-01a1b00b-6085-7c10-90df-39c03fb6bf63.jsonl",
+          "generatorCallId": "exec-b173a526-1eda-4212-8f80-5d6f4c5dc9f8",
+          "stableGenerationRecordSha256": "d2022e357a2cf42b909b7df461ccd47ae61834959aa2f1b98a12f73c7183a6fc",
+          "generationStatus": "completed",
+          "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+        }
+      }
+    }
+  ],
+  "failedAttempts": [
+    {
+      "concept": "best friend",
+      "generatorCallId": "exec-a89684da-3ad6-4171-a86e-cd1bae39b8be",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b00b-6085-7c10-90df-39c03fb6bf63/exec-a89684da-3ad6-4171-a86e-cd1bae39b8be.png",
+      "sha256": "36412fddb5141dc82842b2080cb375ce2ea89819b18ad85b6a7828ba8120deab",
+      "reason": "FRAMING_REJECTED_CANVAS_EDGE_CONTACT",
+      "replacementGeneratorCallId": "exec-18912f5e-03fc-46a8-920d-e40a02f1804c",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational personal-profile concept PNG for children ages 8–10\nPrimary request: one unmistakable visual teaching \"best friend\"\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly two school-age children shown from waist up, standing shoulder-to-shoulder with one arm around each other's shoulders, both smiling warmly toward the viewer; the pair forms one close connected friendship composition; use clearly different hair, clothing colors, and skin tones without stereotypes\nStyle/medium: premium polished rounded 3D children's animation render, high-quality soft materials, crisp readable silhouette\nComposition/framing: centered close composition; both complete heads, torsos, and friendship embrace fill about 82% of the square canvas with an 8–10% transparent safe margin\nLighting/mood: soft bright studio lighting, warm, safe, joyful, and inclusive\nConstraints: exactly two children, one clear mutual friendship embrace, actual alpha transparency; visually distinct from age counter, birthday cake, favorite badge, and weekday planner\nAvoid: third person, adult, family group, teacher, romance, kissing, hearts, stars, cake, candles, gifts, counting beads, calendars, hand signs, extra arms, extra hands or fingers, words, letters, numerals, names, labels, logos, watermark, floor, cast shadow, glow, halo, frame, collage, grid, cropped heads"
+    }
+  ],
+  "productionApproved": false,
+  "humanApprovalClaimed": false,
+  "integrated": false,
+  "deployed": false
+}
