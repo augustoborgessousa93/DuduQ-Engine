@@ -1,0 +1,429 @@
+{
+  "schemaVersion": "DUDUQ_Y4M03_GENERATION_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-11-06T20:01:29.963Z",
+  "moduleId": "Y4M03",
+  "lane": "generation",
+  "reviewAuthority": "MODEL_SEMANTIC_PRECHECK_ONLY_NO_HUMAN_APPROVAL",
+  "assetCount": 17,
+  "assets": [
+    {
+      "assetKey": "Y4M03-CANDIDATE-APRIL",
+      "semanticTarget": "april",
+      "visualObservation": "One connected blue year-wheel has exactly twelve rim beads and one ivory center hub; only ordinal position 4 (3 o’clock) is enlarged and warm gold, while the other eleven beads are smaller sky blue.",
+      "pedagogicalFit": "The april asset preserves the source-backed twelve-position month dial and distinguishes month ordinal 4 without words, letters, numerals, dates or seasonal assumptions.",
+      "sourceQuestionIds": [
+        "Y4M03-Q001",
+        "Y4M03-Q003",
+        "Y4M03-Q004",
+        "Y4M03-Q013",
+        "Y4M03-Q017"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-56C61319B5EF40CF",
+        "IMG-V11-2B-749AC74243F46A8D",
+        "IMG-V11-2B-AB542D436FC85665",
+        "IMG-V11-2B-DE1C201E2F9D7993"
+      ],
+      "questionLevelUsageCount": 5,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "TWELVE_POSITION_ORDINAL_DIAL_NO_WORDS_NUMERALS_DATES_OR_CLIMATE_ASSUMPTION",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-AUGUST",
+      "semanticTarget": "august",
+      "visualObservation": "One connected blue year-wheel has exactly twelve rim beads and one ivory center hub; only ordinal position 8 (8 o’clock) is enlarged and warm gold, while the other eleven beads are smaller sky blue.",
+      "pedagogicalFit": "The august asset preserves the source-backed twelve-position month dial and distinguishes month ordinal 8 without words, letters, numerals, dates or seasonal assumptions.",
+      "sourceQuestionIds": [
+        "Y4M03-Q005",
+        "Y4M03-Q008"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-A1F9AD7F0C2B077C"
+      ],
+      "questionLevelUsageCount": 2,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "TWELVE_POSITION_ORDINAL_DIAL_NO_WORDS_NUMERALS_DATES_OR_CLIMATE_ASSUMPTION",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-AUTUMN",
+      "semanticTarget": "autumn",
+      "visualObservation": "One deciduous tree has a connected amber-orange-red canopy, brown trunk and attached leaf carpet on one compact earth base; no airborne leaf or unrelated object is present.",
+      "pedagogicalFit": "Exact text-free autumn vocabulary cue, intentionally distinct from the separate single falling-leaf asset.",
+      "sourceQuestionIds": [
+        "Y4M03-Q006",
+        "Y4M03-Q011",
+        "Y4M03-Q014",
+        "Y4M03-Q015",
+        "Y4M03-Q016"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-82E782E5BBD88C23",
+        "IMG-V11-2B-B47AC22E66692DB9",
+        "IMG-V11-2B-C1FD9166A9409B19"
+      ],
+      "questionLevelUsageCount": 5,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "CONVENTIONAL_ENGLISH_VOCABULARY_CUE_NOT_A_UNIVERSAL_CLIMATE_CLAIM",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-DECEMBER",
+      "semanticTarget": "december",
+      "visualObservation": "One connected blue year-wheel has exactly twelve rim beads and one ivory center hub; only ordinal position 12 (12 o’clock) is enlarged and warm gold, while the other eleven beads are smaller sky blue.",
+      "pedagogicalFit": "The december asset preserves the source-backed twelve-position month dial and distinguishes month ordinal 12 without words, letters, numerals, dates or seasonal assumptions.",
+      "sourceQuestionIds": [
+        "Y4M03-Q009",
+        "Y4M03-Q010"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-503D7AE71EE38AD4",
+        "IMG-V11-2B-DD5F7E1C49B54786"
+      ],
+      "questionLevelUsageCount": 2,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "TWELVE_POSITION_ORDINAL_DIAL_NO_WORDS_NUMERALS_DATES_OR_CLIMATE_ASSUMPTION",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-FALL",
+      "semanticTarget": "fall",
+      "visualObservation": "Exactly one red-orange maple leaf with one complete curled brown stem appears in a dynamic diagonal falling tilt; no tree, second leaf or unrelated object is present.",
+      "pedagogicalFit": "Exact text-free fall vocabulary cue, visually distinct from the full autumn-tree asset while preserving the synonym relationship.",
+      "sourceQuestionIds": [
+        "Y4M03-Q006",
+        "Y4M03-Q011",
+        "Y4M03-Q014",
+        "Y4M03-Q015",
+        "Y4M03-Q016"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-05A5652BE97B359E",
+        "IMG-V11-2B-46C759715E33A813",
+        "IMG-V11-2B-A8407B32EBD2465B"
+      ],
+      "questionLevelUsageCount": 5,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "CONVENTIONAL_ENGLISH_VOCABULARY_CUE_NOT_A_UNIVERSAL_CLIMATE_CLAIM",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-FEBRUARY",
+      "semanticTarget": "february",
+      "visualObservation": "One connected blue year-wheel has exactly twelve rim beads and one ivory center hub; only ordinal position 2 (2 o’clock) is enlarged and warm gold, while the other eleven beads are smaller sky blue.",
+      "pedagogicalFit": "The february asset preserves the source-backed twelve-position month dial and distinguishes month ordinal 2 without words, letters, numerals, dates or seasonal assumptions.",
+      "sourceQuestionIds": [
+        "Y4M03-Q001",
+        "Y4M03-Q003",
+        "Y4M03-Q006",
+        "Y4M03-Q007",
+        "Y4M03-Q013",
+        "Y4M03-Q015",
+        "Y4M03-Q017"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-7F9A5E8DC3F03D40",
+        "IMG-V11-2B-C778AE6D3532895F",
+        "IMG-V11-2B-F36A542977FFFABD"
+      ],
+      "questionLevelUsageCount": 7,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "TWELVE_POSITION_ORDINAL_DIAL_NO_WORDS_NUMERALS_DATES_OR_CLIMATE_ASSUMPTION",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-JANUARY",
+      "semanticTarget": "january",
+      "visualObservation": "One connected blue year-wheel has exactly twelve rim beads and one ivory center hub; only ordinal position 1 (12 o’clock) is enlarged and warm gold, while the other eleven beads are smaller sky blue.",
+      "pedagogicalFit": "The january asset preserves the source-backed twelve-position month dial and distinguishes month ordinal 1 without words, letters, numerals, dates or seasonal assumptions.",
+      "sourceQuestionIds": [
+        "Y4M03-Q001",
+        "Y4M03-Q003",
+        "Y4M03-Q006",
+        "Y4M03-Q007",
+        "Y4M03-Q013",
+        "Y4M03-Q015",
+        "Y4M03-Q017",
+        "Y4M03-Q018"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-5B7C9682B340445E",
+        "IMG-V11-2B-904F9A2444802FC6",
+        "IMG-V11-2B-A77A1E744EA6919B"
+      ],
+      "questionLevelUsageCount": 8,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "TWELVE_POSITION_ORDINAL_DIAL_NO_WORDS_NUMERALS_DATES_OR_CLIMATE_ASSUMPTION",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-JULY",
+      "semanticTarget": "july",
+      "visualObservation": "One connected blue year-wheel has exactly twelve rim beads and one ivory center hub; only ordinal position 7 (6 o’clock) is enlarged and warm gold, while the other eleven beads are smaller sky blue.",
+      "pedagogicalFit": "The july asset preserves the source-backed twelve-position month dial and distinguishes month ordinal 7 without words, letters, numerals, dates or seasonal assumptions.",
+      "sourceQuestionIds": [
+        "Y4M03-Q004",
+        "Y4M03-Q005",
+        "Y4M03-Q007"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-26A528ACC06EB249",
+        "IMG-V11-2B-33FB993626EFE833",
+        "IMG-V11-2B-6B832DF36E5E9290"
+      ],
+      "questionLevelUsageCount": 3,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "TWELVE_POSITION_ORDINAL_DIAL_NO_WORDS_NUMERALS_DATES_OR_CLIMATE_ASSUMPTION",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-JUNE",
+      "semanticTarget": "june",
+      "visualObservation": "One connected blue year-wheel has exactly twelve rim beads and one ivory center hub; only ordinal position 6 (6 o’clock) is enlarged and warm gold, while the other eleven beads are smaller sky blue.",
+      "pedagogicalFit": "The june asset preserves the source-backed twelve-position month dial and distinguishes month ordinal 6 without words, letters, numerals, dates or seasonal assumptions.",
+      "sourceQuestionIds": [
+        "Y4M03-Q001",
+        "Y4M03-Q004",
+        "Y4M03-Q005"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-054CD7A333F1E441",
+        "IMG-V11-2B-D812A5E34B881005"
+      ],
+      "questionLevelUsageCount": 3,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "TWELVE_POSITION_ORDINAL_DIAL_NO_WORDS_NUMERALS_DATES_OR_CLIMATE_ASSUMPTION",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-MARCH",
+      "semanticTarget": "march",
+      "visualObservation": "One connected blue year-wheel has exactly twelve rim beads and one ivory center hub; only ordinal position 3 (3 o’clock) is enlarged and warm gold, while the other eleven beads are smaller sky blue.",
+      "pedagogicalFit": "The march asset preserves the source-backed twelve-position month dial and distinguishes month ordinal 3 without words, letters, numerals, dates or seasonal assumptions.",
+      "sourceQuestionIds": [
+        "Y4M03-Q001",
+        "Y4M03-Q003",
+        "Y4M03-Q007",
+        "Y4M03-Q013",
+        "Y4M03-Q015",
+        "Y4M03-Q017"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-01B39210E1570613",
+        "IMG-V11-2B-26BD691DE7A92741",
+        "IMG-V11-2B-D30CB86ECE2F3133"
+      ],
+      "questionLevelUsageCount": 6,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "TWELVE_POSITION_ORDINAL_DIAL_NO_WORDS_NUMERALS_DATES_OR_CLIMATE_ASSUMPTION",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-MAY",
+      "semanticTarget": "may",
+      "visualObservation": "One connected blue year-wheel has exactly twelve rim beads and one ivory center hub; only ordinal position 5 (5 o’clock) is enlarged and warm gold, while the other eleven beads are smaller sky blue.",
+      "pedagogicalFit": "The may asset preserves the source-backed twelve-position month dial and distinguishes month ordinal 5 without words, letters, numerals, dates or seasonal assumptions.",
+      "sourceQuestionIds": [
+        "Y4M03-Q001",
+        "Y4M03-Q004",
+        "Y4M03-Q005",
+        "Y4M03-Q013",
+        "Y4M03-Q017"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-61D5CBD6222B215F",
+        "IMG-V11-2B-8E78DA1203B3356D"
+      ],
+      "questionLevelUsageCount": 5,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "TWELVE_POSITION_ORDINAL_DIAL_NO_WORDS_NUMERALS_DATES_OR_CLIMATE_ASSUMPTION",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-NOVEMBER",
+      "semanticTarget": "november",
+      "visualObservation": "One connected blue year-wheel has exactly twelve rim beads and one ivory center hub; only ordinal position 11 (11 o’clock) is enlarged and warm gold, while the other eleven beads are smaller sky blue.",
+      "pedagogicalFit": "The november asset preserves the source-backed twelve-position month dial and distinguishes month ordinal 11 without words, letters, numerals, dates or seasonal assumptions.",
+      "sourceQuestionIds": [
+        "Y4M03-Q009",
+        "Y4M03-Q010"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-5AF60E3CDAAC8F49",
+        "IMG-V11-2B-BAAE81918DA30B2E"
+      ],
+      "questionLevelUsageCount": 2,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "TWELVE_POSITION_ORDINAL_DIAL_NO_WORDS_NUMERALS_DATES_OR_CLIMATE_ASSUMPTION",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-OCTOBER",
+      "semanticTarget": "october",
+      "visualObservation": "One connected blue year-wheel has exactly twelve rim beads and one ivory center hub; only ordinal position 10 (9 o’clock) is enlarged and warm gold, while the other eleven beads are smaller sky blue.",
+      "pedagogicalFit": "The october asset preserves the source-backed twelve-position month dial and distinguishes month ordinal 10 without words, letters, numerals, dates or seasonal assumptions.",
+      "sourceQuestionIds": [
+        "Y4M03-Q005",
+        "Y4M03-Q009",
+        "Y4M03-Q010"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-1EE8D044F6334CE2",
+        "IMG-V11-2B-69864A95CAB2E249"
+      ],
+      "questionLevelUsageCount": 3,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "TWELVE_POSITION_ORDINAL_DIAL_NO_WORDS_NUMERALS_DATES_OR_CLIMATE_ASSUMPTION",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-SEPTEMBER",
+      "semanticTarget": "september",
+      "visualObservation": "One connected blue year-wheel has exactly twelve rim beads and one ivory center hub; only ordinal position 9 (9 o’clock) is enlarged and warm gold, while the other eleven beads are smaller sky blue.",
+      "pedagogicalFit": "The september asset preserves the source-backed twelve-position month dial and distinguishes month ordinal 9 without words, letters, numerals, dates or seasonal assumptions.",
+      "sourceQuestionIds": [
+        "Y4M03-Q005",
+        "Y4M03-Q009"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-4CB297CF314C740C"
+      ],
+      "questionLevelUsageCount": 2,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "TWELVE_POSITION_ORDINAL_DIAL_NO_WORDS_NUMERALS_DATES_OR_CLIMATE_ASSUMPTION",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-SPRING",
+      "semanticTarget": "spring",
+      "visualObservation": "One connected fresh-green plant cluster has exactly three large pink flowers with yellow centers, leaves, stems and a grassy base; no seasonally conflicting object is present.",
+      "pedagogicalFit": "Exact text-free spring vocabulary cue, distinct from summer, autumn, fall and winter.",
+      "sourceQuestionIds": [
+        "Y4M03-Q006",
+        "Y4M03-Q009",
+        "Y4M03-Q010",
+        "Y4M03-Q013",
+        "Y4M03-Q016"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-EF645B1ADACEDB69",
+        "IMG-V11-2B-F32FCC70EC5FA01C",
+        "IMG-V11-2B-FEEB88C925580917"
+      ],
+      "questionLevelUsageCount": 5,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "CONVENTIONAL_ENGLISH_VOCABULARY_CUE_NOT_A_UNIVERSAL_CLIMATE_CLAIM",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-SUMMER",
+      "semanticTarget": "summer",
+      "visualObservation": "One connected golden sun token has one circular center and exactly twelve attached rounded rays; it has no face and no other object.",
+      "pedagogicalFit": "Exact text-free summer vocabulary cue using the source-backed warm-sun concept.",
+      "sourceQuestionIds": [
+        "Y4M03-Q006",
+        "Y4M03-Q009",
+        "Y4M03-Q011",
+        "Y4M03-Q014",
+        "Y4M03-Q016"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-033A780DFB6944EE",
+        "IMG-V11-2B-C0AA3950B05EEC35",
+        "IMG-V11-2B-D19DF2C30C83811A"
+      ],
+      "questionLevelUsageCount": 5,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "CONVENTIONAL_ENGLISH_VOCABULARY_CUE_NOT_A_UNIVERSAL_CLIMATE_CLAIM",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    },
+    {
+      "assetKey": "Y4M03-CANDIDATE-WINTER",
+      "semanticTarget": "winter",
+      "visualObservation": "One compact evergreen tree has three deep-green tiers, clean white snow caps, one brown trunk and one connected snow mound; no holiday decoration or unrelated object is present.",
+      "pedagogicalFit": "Exact text-free winter vocabulary cue using the source-backed snow concept.",
+      "sourceQuestionIds": [
+        "Y4M03-Q011",
+        "Y4M03-Q014",
+        "Y4M03-Q015",
+        "Y4M03-Q017"
+      ],
+      "sourceMediaIds": [
+        "IMG-V11-2B-024C0D990F353FC0",
+        "IMG-V11-2B-02BF78748FF20FDF",
+        "IMG-V11-2B-07B3D6634BA3FE98"
+      ],
+      "questionLevelUsageCount": 4,
+      "wrongDistractorReview": "NO_UNRELATED_OR_SEMANTICALLY_CONFLICTING_CONTENT_OBSERVED",
+      "calendarPolicy": "CONVENTIONAL_ENGLISH_VOCABULARY_CUE_NOT_A_UNIVERSAL_CLIMATE_CLAIM",
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanApprovalClaimed": false,
+      "productionApproved": false
+    }
+  ],
+  "rejectedAttempts": [
+    {
+      "concept": "january",
+      "file": "provenance/rejected-originals/DUDUQ-Y4M03-JANUARY-ATTEMPT-1-REJECTED.png",
+      "sha256": "43d0b092f8cdc19cf35e7bc730463eb92d05b853bf3494db3d64daa01a605711",
+      "rejectionReason": "ALPHA_FRAMING_REJECTED_SHORT_MARGIN_AND_DETACHED_BLUE_SPECKS",
+      "acceptedAsCandidate": false
+    },
+    {
+      "concept": "march",
+      "file": "provenance/rejected-originals/DUDUQ-Y4M03-MARCH-ATTEMPT-1-REJECTED.png",
+      "sha256": "e6ebd773c5e1d00250e3951807ae4214e71a742e552645aa06d2004ad235d27d",
+      "rejectionReason": "SEMANTIC_REJECTED_HIGHLIGHT_REPEATED_FEBRUARY_POSITION",
+      "acceptedAsCandidate": false
+    },
+    {
+      "concept": "spring",
+      "file": "provenance/rejected-originals/DUDUQ-Y4M03-SPRING-ATTEMPT-1-REJECTED.png",
+      "sha256": "3e291f3aa68fc1980c59d99981b854966056e8b26f4012d4e9f3c69e3375ce3a",
+      "rejectionReason": "ALPHA_REJECTED_WIDE_COLORED_HALO",
+      "acceptedAsCandidate": false
+    },
+    {
+      "concept": "summer",
+      "file": "provenance/rejected-originals/DUDUQ-Y4M03-SUMMER-ATTEMPT-1-REJECTED.png",
+      "sha256": "7dfe1887b0a3b4f3779ff4a1922748564fd98f68c0f7a5192061fd7fc99b531b",
+      "rejectionReason": "ALPHA_REJECTED_DETACHED_GOLD_RED_SPECKS",
+      "acceptedAsCandidate": false
+    }
+  ],
+  "humanApprovalClaimed": false,
+  "productionApproved": false
+}

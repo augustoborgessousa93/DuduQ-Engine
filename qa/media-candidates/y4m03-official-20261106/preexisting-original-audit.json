@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "DUDUQ_Y4M03_PREEXISTING_ORIGINAL_AUDIT_V1",
+  "createdAt": "2026-11-06T20:01:29.963Z",
+  "moduleId": "Y4M03",
+  "conceptsSearched": [
+    "april",
+    "august",
+    "autumn",
+    "december",
+    "fall",
+    "february",
+    "january",
+    "july",
+    "june",
+    "march",
+    "may",
+    "november",
+    "october",
+    "september",
+    "spring",
+    "summer",
+    "winter"
+  ],
+  "candidateManifestDirectoriesSearched": true,
+  "verifiedExactOriginalMatches": [],
+  "verifiedReuseCount": 0,
+  "generationRequiredCount": 17,
+  "registrySourceSummary": {
+    "sourceMediaIds": 43,
+    "provisionalSvgSources": 43,
+    "eligibleOriginalPngSources": 0
+  },
+  "decision": "NO_VERIFIED_PREEXISTING_ORIGINAL_PNG_FOR_THE_17_VISUAL_CONCEPTS_GENERATE_ALL_WITH_CODEX_NATIVE_IMAGE_TOOL"
+}

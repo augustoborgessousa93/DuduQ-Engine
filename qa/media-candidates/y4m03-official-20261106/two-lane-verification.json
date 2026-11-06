@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "DUDUQ_TWO_LANE_GENERATION_WRITE_BOUNDARY_V1",
+  "createdAt": "2026-11-06T20:01:29.963Z",
+  "moduleId": "Y4M03",
+  "lane": "generation",
+  "allowedWrites": [
+    "qa/media-candidates/y4m03-official-20261106/**"
+  ],
+  "forbiddenWrites": [
+    "content/**",
+    "dist-pages/content/**",
+    "core/**",
+    "runtime/**",
+    "production/**"
+  ],
+  "candidateOnly": true,
+  "registryMutation": false,
+  "questionMutation": false,
+  "overlayApplication": false,
+  "approvalMutation": false,
+  "productionMergeOrDeploy": false,
+  "existingAssetRemoval": false,
+  "secondCodexProcessStarted": false,
+  "schedulerSerializationPreserved": true,
+  "independentIntegrationRequired": true
+}

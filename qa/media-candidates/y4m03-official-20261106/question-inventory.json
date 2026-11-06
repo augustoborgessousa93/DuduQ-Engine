@@ -1,0 +1,1305 @@
+{
+  "schemaVersion": "DUDUQ_Y4M03_QUESTION_INVENTORY_V1",
+  "createdAt": "2026-11-06T20:01:29.963Z",
+  "moduleId": "Y4M03",
+  "sourceQuestionFile": "dist-pages/content/english/year-4/module-03/questions.json",
+  "sourceQuestionSha256": "8eacc2fbff7c1b1ca339c357d2f3beada22faf51fcd6574d07cfc1ad795c41f6",
+  "questionCount": 20,
+  "visualUsageCount": 84,
+  "sourceMediaIdCount": 43,
+  "sourceMediaIds": [
+    "IMG-V11-2B-01B39210E1570613",
+    "IMG-V11-2B-024C0D990F353FC0",
+    "IMG-V11-2B-02BF78748FF20FDF",
+    "IMG-V11-2B-033A780DFB6944EE",
+    "IMG-V11-2B-054CD7A333F1E441",
+    "IMG-V11-2B-05A5652BE97B359E",
+    "IMG-V11-2B-07B3D6634BA3FE98",
+    "IMG-V11-2B-1EE8D044F6334CE2",
+    "IMG-V11-2B-26A528ACC06EB249",
+    "IMG-V11-2B-26BD691DE7A92741",
+    "IMG-V11-2B-33FB993626EFE833",
+    "IMG-V11-2B-46C759715E33A813",
+    "IMG-V11-2B-4CB297CF314C740C",
+    "IMG-V11-2B-503D7AE71EE38AD4",
+    "IMG-V11-2B-56C61319B5EF40CF",
+    "IMG-V11-2B-5AF60E3CDAAC8F49",
+    "IMG-V11-2B-5B7C9682B340445E",
+    "IMG-V11-2B-61D5CBD6222B215F",
+    "IMG-V11-2B-69864A95CAB2E249",
+    "IMG-V11-2B-6B832DF36E5E9290",
+    "IMG-V11-2B-749AC74243F46A8D",
+    "IMG-V11-2B-7F9A5E8DC3F03D40",
+    "IMG-V11-2B-82E782E5BBD88C23",
+    "IMG-V11-2B-8E78DA1203B3356D",
+    "IMG-V11-2B-904F9A2444802FC6",
+    "IMG-V11-2B-A1F9AD7F0C2B077C",
+    "IMG-V11-2B-A77A1E744EA6919B",
+    "IMG-V11-2B-A8407B32EBD2465B",
+    "IMG-V11-2B-AB542D436FC85665",
+    "IMG-V11-2B-B47AC22E66692DB9",
+    "IMG-V11-2B-BAAE81918DA30B2E",
+    "IMG-V11-2B-C0AA3950B05EEC35",
+    "IMG-V11-2B-C1FD9166A9409B19",
+    "IMG-V11-2B-C778AE6D3532895F",
+    "IMG-V11-2B-D19DF2C30C83811A",
+    "IMG-V11-2B-D30CB86ECE2F3133",
+    "IMG-V11-2B-D812A5E34B881005",
+    "IMG-V11-2B-DD5F7E1C49B54786",
+    "IMG-V11-2B-DE1C201E2F9D7993",
+    "IMG-V11-2B-EF645B1ADACEDB69",
+    "IMG-V11-2B-F32FCC70EC5FA01C",
+    "IMG-V11-2B-F36A542977FFFABD",
+    "IMG-V11-2B-FEEB88C925580917"
+  ],
+  "visualConceptCount": 17,
+  "visualConcepts": [
+    "april",
+    "august",
+    "autumn",
+    "december",
+    "fall",
+    "february",
+    "january",
+    "july",
+    "june",
+    "march",
+    "may",
+    "november",
+    "october",
+    "september",
+    "spring",
+    "summer",
+    "winter"
+  ],
+  "allSemanticTargetCount": 24,
+  "allSemanticTargets": [
+    "april",
+    "august",
+    "autumn",
+    "autumn/fall",
+    "brother",
+    "december",
+    "fall",
+    "father",
+    "february",
+    "grandfather",
+    "grandmother",
+    "january",
+    "july",
+    "june",
+    "march",
+    "may",
+    "mother",
+    "november",
+    "october",
+    "september",
+    "sister",
+    "spring",
+    "summer",
+    "winter"
+  ],
+  "nonVisualOnlySemanticTargets": [
+    "autumn/fall",
+    "brother",
+    "father",
+    "grandfather",
+    "grandmother",
+    "mother",
+    "sister"
+  ],
+  "occurrenceScopedBindingPlanCount": 72,
+  "questions": [
+    {
+      "questionId": "Y4M03-Q001",
+      "sourceSha256": "e6b1ca0b13138379fb9f78abe46480cf953138bb64c63dc4137befe5a74c4347",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "titleEn": "January",
+      "instructionEn": "Listen and pop the matching bubble.",
+      "stimulusTarget": "January",
+      "answerKey": "Y4M03-Q001-O1",
+      "allSemanticTargets": [
+        "april",
+        "february",
+        "january",
+        "june",
+        "march",
+        "may"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q001",
+          "mediaId": "IMG-V11-2B-5B7C9682B340445E",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "january",
+          "correct": true,
+          "optionOrCardId": "Y4M03-Q001-O1"
+        },
+        {
+          "questionId": "Y4M03-Q001",
+          "mediaId": "IMG-V11-2B-C778AE6D3532895F",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "february",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q001-O2"
+        },
+        {
+          "questionId": "Y4M03-Q001",
+          "mediaId": "IMG-V11-2B-26BD691DE7A92741",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "march",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q001-O3"
+        },
+        {
+          "questionId": "Y4M03-Q001",
+          "mediaId": "IMG-V11-2B-AB542D436FC85665",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "april",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q001-O4"
+        },
+        {
+          "questionId": "Y4M03-Q001",
+          "mediaId": "IMG-V11-2B-5B7C9682B340445E",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "january",
+          "correct": true,
+          "optionOrCardId": "Y4M03-Q001-O1"
+        },
+        {
+          "questionId": "Y4M03-Q001",
+          "mediaId": "IMG-V11-2B-C778AE6D3532895F",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "february",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q001-D1"
+        },
+        {
+          "questionId": "Y4M03-Q001",
+          "mediaId": "IMG-V11-2B-26BD691DE7A92741",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "march",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q001-D2"
+        },
+        {
+          "questionId": "Y4M03-Q001",
+          "mediaId": "IMG-V11-2B-AB542D436FC85665",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "april",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q001-D3"
+        },
+        {
+          "questionId": "Y4M03-Q001",
+          "mediaId": "IMG-V11-2B-61D5CBD6222B215F",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "may",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q001-D4"
+        },
+        {
+          "questionId": "Y4M03-Q001",
+          "mediaId": "IMG-V11-2B-D812A5E34B881005",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "june",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q001-D5"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q002",
+      "sourceSha256": "7a1603386ed873f2f9787374730695dd90d93aff85f216407a477037e4e547c7",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "titleEn": "mother, father, brother, sister, grandmother, grandfather",
+      "instructionEn": "Sort each item: close family or grandparents.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M03-Q002-I1": "close-family",
+        "Y4M03-Q002-I2": "close-family",
+        "Y4M03-Q002-I3": "close-family",
+        "Y4M03-Q002-I4": "close-family",
+        "Y4M03-Q002-I5": "grandparents",
+        "Y4M03-Q002-I6": "grandparents"
+      },
+      "allSemanticTargets": [
+        "brother",
+        "father",
+        "grandfather",
+        "grandmother",
+        "mother",
+        "sister"
+      ],
+      "visualUsages": []
+    },
+    {
+      "questionId": "Y4M03-Q003",
+      "sourceSha256": "b0a13496205b7a6f61cd54e9bee53805ad986157067d89f3fcc7e6b3a2ca5fb5",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "TEXT_IMAGE",
+      "titleEn": "March, April, January, February",
+      "instructionEn": "Find the matching pairs.",
+      "stimulusTarget": null,
+      "answerKey": [
+        "Y4M03-Q003-P1",
+        "Y4M03-Q003-P2",
+        "Y4M03-Q003-P3",
+        "Y4M03-Q003-P4"
+      ],
+      "allSemanticTargets": [
+        "april",
+        "february",
+        "january",
+        "march"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q003",
+          "mediaId": "IMG-V11-2B-D30CB86ECE2F3133",
+          "contractPath": "pairs[0].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "march",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M03-Q003",
+          "mediaId": "IMG-V11-2B-749AC74243F46A8D",
+          "contractPath": "pairs[1].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "april",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M03-Q003",
+          "mediaId": "IMG-V11-2B-A77A1E744EA6919B",
+          "contractPath": "pairs[2].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "january",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M03-Q003",
+          "mediaId": "IMG-V11-2B-7F9A5E8DC3F03D40",
+          "contractPath": "pairs[3].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "february",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q004",
+      "sourceSha256": "fbc9f94ec173048e3f4c7aabf006ad2ab9bb6685c515e6c43f1ba532f6328f8a",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "titleEn": "April, May, June, July",
+      "instructionEn": "Match each audio to its picture.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M03-Q004-I1": "Y4M03-Q004-T1",
+        "Y4M03-Q004-I2": "Y4M03-Q004-T2",
+        "Y4M03-Q004-I3": "Y4M03-Q004-T3",
+        "Y4M03-Q004-I4": "Y4M03-Q004-T4"
+      },
+      "allSemanticTargets": [
+        "april",
+        "july",
+        "june",
+        "may"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q004",
+          "mediaId": "IMG-V11-2B-DE1C201E2F9D7993",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "april",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q004-T1"
+        },
+        {
+          "questionId": "Y4M03-Q004",
+          "mediaId": "IMG-V11-2B-61D5CBD6222B215F",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "may",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q004-T2"
+        },
+        {
+          "questionId": "Y4M03-Q004",
+          "mediaId": "IMG-V11-2B-D812A5E34B881005",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "june",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q004-T3"
+        },
+        {
+          "questionId": "Y4M03-Q004",
+          "mediaId": "IMG-V11-2B-6B832DF36E5E9290",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "july",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q004-T4"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q005",
+      "sourceSha256": "a5f1c6690326d916134158e6a6f39f0d40ae450b59a58a5d352f4803725ad705",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "titleEn": "May, June, July, August, September, October",
+      "instructionEn": "Match each item to its pair.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M03-Q005-L1": "Y4M03-Q005-R1",
+        "Y4M03-Q005-L2": "Y4M03-Q005-R2",
+        "Y4M03-Q005-L3": "Y4M03-Q005-R3",
+        "Y4M03-Q005-L4": "Y4M03-Q005-R4",
+        "Y4M03-Q005-L5": "Y4M03-Q005-R5",
+        "Y4M03-Q005-L6": "Y4M03-Q005-R6"
+      },
+      "allSemanticTargets": [
+        "august",
+        "july",
+        "june",
+        "may",
+        "october",
+        "september"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q005",
+          "mediaId": "IMG-V11-2B-8E78DA1203B3356D",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "may",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q005-R1"
+        },
+        {
+          "questionId": "Y4M03-Q005",
+          "mediaId": "IMG-V11-2B-054CD7A333F1E441",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "june",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q005-R2"
+        },
+        {
+          "questionId": "Y4M03-Q005",
+          "mediaId": "IMG-V11-2B-33FB993626EFE833",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "july",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q005-R3"
+        },
+        {
+          "questionId": "Y4M03-Q005",
+          "mediaId": "IMG-V11-2B-A1F9AD7F0C2B077C",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "august",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q005-R4"
+        },
+        {
+          "questionId": "Y4M03-Q005",
+          "mediaId": "IMG-V11-2B-4CB297CF314C740C",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "september",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q005-R5"
+        },
+        {
+          "questionId": "Y4M03-Q005",
+          "mediaId": "IMG-V11-2B-69864A95CAB2E249",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "october",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q005-R6"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q006",
+      "sourceSha256": "985d8ecf1ee5eeef9e6680823dc87dd3565a955e17cd696011889652f46afe41",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "titleEn": "spring",
+      "instructionEn": "Listen and pop the matching bubble.",
+      "stimulusTarget": "spring",
+      "answerKey": "Y4M03-Q006-O1",
+      "allSemanticTargets": [
+        "autumn",
+        "fall",
+        "february",
+        "january",
+        "spring",
+        "summer"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q006",
+          "mediaId": "IMG-V11-2B-F32FCC70EC5FA01C",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "spring",
+          "correct": true,
+          "optionOrCardId": "Y4M03-Q006-O1"
+        },
+        {
+          "questionId": "Y4M03-Q006",
+          "mediaId": "IMG-V11-2B-D19DF2C30C83811A",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "summer",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q006-O2"
+        },
+        {
+          "questionId": "Y4M03-Q006",
+          "mediaId": "IMG-V11-2B-82E782E5BBD88C23",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "autumn",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q006-O3"
+        },
+        {
+          "questionId": "Y4M03-Q006",
+          "mediaId": "IMG-V11-2B-A8407B32EBD2465B",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "fall",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q006-O4"
+        },
+        {
+          "questionId": "Y4M03-Q006",
+          "mediaId": "IMG-V11-2B-F32FCC70EC5FA01C",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "spring",
+          "correct": true,
+          "optionOrCardId": "Y4M03-Q006-O1"
+        },
+        {
+          "questionId": "Y4M03-Q006",
+          "mediaId": "IMG-V11-2B-D19DF2C30C83811A",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "summer",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q006-D1"
+        },
+        {
+          "questionId": "Y4M03-Q006",
+          "mediaId": "IMG-V11-2B-82E782E5BBD88C23",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "autumn",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q006-D2"
+        },
+        {
+          "questionId": "Y4M03-Q006",
+          "mediaId": "IMG-V11-2B-A8407B32EBD2465B",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "fall",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q006-D3"
+        },
+        {
+          "questionId": "Y4M03-Q006",
+          "mediaId": "IMG-V11-2B-5B7C9682B340445E",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "january",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q006-D4"
+        },
+        {
+          "questionId": "Y4M03-Q006",
+          "mediaId": "IMG-V11-2B-C778AE6D3532895F",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "february",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q006-D5"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q007",
+      "sourceSha256": "c46cc643928197900ce9f792ed4c5dacbade0ef80d3fd454797a17b598e6c39f",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "titleEn": "July",
+      "instructionEn": "Listen and shoot the matching choice.",
+      "stimulusTarget": "July",
+      "answerKey": "Y4M03-Q007-O1",
+      "allSemanticTargets": [
+        "february",
+        "january",
+        "july",
+        "march"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q007",
+          "mediaId": "IMG-V11-2B-26A528ACC06EB249",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "july",
+          "correct": true,
+          "optionOrCardId": "Y4M03-Q007-O1"
+        },
+        {
+          "questionId": "Y4M03-Q007",
+          "mediaId": "IMG-V11-2B-5B7C9682B340445E",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "january",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q007-O2"
+        },
+        {
+          "questionId": "Y4M03-Q007",
+          "mediaId": "IMG-V11-2B-C778AE6D3532895F",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "february",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q007-O3"
+        },
+        {
+          "questionId": "Y4M03-Q007",
+          "mediaId": "IMG-V11-2B-26BD691DE7A92741",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "march",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q007-O4"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q008",
+      "sourceSha256": "b24790e942717ecc6cff791dcb9443c446f680fef3c75b3581c56bca28ce9aff",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "titleEn": "My birthday is in August.",
+      "instructionEn": "Look at the picture and complete the sentence.",
+      "stimulusTarget": null,
+      "answerKey": "August",
+      "allSemanticTargets": [
+        "august"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q008",
+          "mediaId": "IMG-V11-2B-A1F9AD7F0C2B077C",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "august",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q009",
+      "sourceSha256": "bffb2c23cdcca0aeeec8767a8443d4c45d24d70a488263656a73e294d770c6a5",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "titleEn": "September, October, November, December, spring, summer",
+      "instructionEn": "Match each item to its pair.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M03-Q009-L1": "Y4M03-Q009-R1",
+        "Y4M03-Q009-L2": "Y4M03-Q009-R2",
+        "Y4M03-Q009-L3": "Y4M03-Q009-R3",
+        "Y4M03-Q009-L4": "Y4M03-Q009-R4",
+        "Y4M03-Q009-L5": "Y4M03-Q009-R5",
+        "Y4M03-Q009-L6": "Y4M03-Q009-R6"
+      },
+      "allSemanticTargets": [
+        "december",
+        "november",
+        "october",
+        "september",
+        "spring",
+        "summer"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q009",
+          "mediaId": "IMG-V11-2B-4CB297CF314C740C",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "september",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q009-R1"
+        },
+        {
+          "questionId": "Y4M03-Q009",
+          "mediaId": "IMG-V11-2B-69864A95CAB2E249",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "october",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q009-R2"
+        },
+        {
+          "questionId": "Y4M03-Q009",
+          "mediaId": "IMG-V11-2B-5AF60E3CDAAC8F49",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "november",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q009-R3"
+        },
+        {
+          "questionId": "Y4M03-Q009",
+          "mediaId": "IMG-V11-2B-DD5F7E1C49B54786",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "december",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q009-R4"
+        },
+        {
+          "questionId": "Y4M03-Q009",
+          "mediaId": "IMG-V11-2B-EF645B1ADACEDB69",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "spring",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q009-R5"
+        },
+        {
+          "questionId": "Y4M03-Q009",
+          "mediaId": "IMG-V11-2B-033A780DFB6944EE",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "summer",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q009-R6"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q010",
+      "sourceSha256": "fe1ecd6a2c911fce84502339ff7f3ba43a82df4505f658b335f4a6f5ae53f074",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "titleEn": "October, November, December, spring",
+      "instructionEn": "Match each audio to its picture.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M03-Q010-I1": "Y4M03-Q010-T1",
+        "Y4M03-Q010-I2": "Y4M03-Q010-T2",
+        "Y4M03-Q010-I3": "Y4M03-Q010-T3",
+        "Y4M03-Q010-I4": "Y4M03-Q010-T4"
+      },
+      "allSemanticTargets": [
+        "december",
+        "november",
+        "october",
+        "spring"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q010",
+          "mediaId": "IMG-V11-2B-1EE8D044F6334CE2",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "october",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q010-T1"
+        },
+        {
+          "questionId": "Y4M03-Q010",
+          "mediaId": "IMG-V11-2B-BAAE81918DA30B2E",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "november",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q010-T2"
+        },
+        {
+          "questionId": "Y4M03-Q010",
+          "mediaId": "IMG-V11-2B-503D7AE71EE38AD4",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "december",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q010-T3"
+        },
+        {
+          "questionId": "Y4M03-Q010",
+          "mediaId": "IMG-V11-2B-FEEB88C925580917",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "spring",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q010-T4"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q011",
+      "sourceSha256": "1d2875aae5f1e4054116c00c11bf7c0a68fc2a8af79a3e9868a7a602b0750ba5",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "titleEn": "summer",
+      "instructionEn": "Listen and shoot the matching choice.",
+      "stimulusTarget": "summer",
+      "answerKey": "Y4M03-Q011-O1",
+      "allSemanticTargets": [
+        "autumn",
+        "fall",
+        "summer",
+        "winter"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q011",
+          "mediaId": "IMG-V11-2B-D19DF2C30C83811A",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "summer",
+          "correct": true,
+          "optionOrCardId": "Y4M03-Q011-O1"
+        },
+        {
+          "questionId": "Y4M03-Q011",
+          "mediaId": "IMG-V11-2B-82E782E5BBD88C23",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "autumn",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q011-O2"
+        },
+        {
+          "questionId": "Y4M03-Q011",
+          "mediaId": "IMG-V11-2B-A8407B32EBD2465B",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "fall",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q011-O3"
+        },
+        {
+          "questionId": "Y4M03-Q011",
+          "mediaId": "IMG-V11-2B-02BF78748FF20FDF",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "winter",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q011-O4"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q012",
+      "sourceSha256": "2073dcf6e2d3eebab44df2e08b44daff50580c4130db696188db15f7170c2a11",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_TEXT",
+      "titleEn": "winter, spring, summer, autumn/fall",
+      "instructionEn": "Find the matching pairs.",
+      "stimulusTarget": null,
+      "answerKey": [
+        "Y4M03-Q012-P1",
+        "Y4M03-Q012-P2",
+        "Y4M03-Q012-P3",
+        "Y4M03-Q012-P4"
+      ],
+      "allSemanticTargets": [
+        "autumn/fall",
+        "spring",
+        "summer",
+        "winter"
+      ],
+      "visualUsages": []
+    },
+    {
+      "questionId": "Y4M03-Q013",
+      "sourceSha256": "cea9d47551661ed55f82da44443f492a731d095d0258776fbaf71c4a0c5f5f89",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "titleEn": "spring",
+      "instructionEn": "Listen and pop the matching bubble.",
+      "stimulusTarget": "spring",
+      "answerKey": "Y4M03-Q013-O1",
+      "allSemanticTargets": [
+        "april",
+        "february",
+        "january",
+        "march",
+        "may",
+        "spring"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q013",
+          "mediaId": "IMG-V11-2B-F32FCC70EC5FA01C",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "spring",
+          "correct": true,
+          "optionOrCardId": "Y4M03-Q013-O1"
+        },
+        {
+          "questionId": "Y4M03-Q013",
+          "mediaId": "IMG-V11-2B-5B7C9682B340445E",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "january",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q013-O2"
+        },
+        {
+          "questionId": "Y4M03-Q013",
+          "mediaId": "IMG-V11-2B-C778AE6D3532895F",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "february",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q013-O3"
+        },
+        {
+          "questionId": "Y4M03-Q013",
+          "mediaId": "IMG-V11-2B-26BD691DE7A92741",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "march",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q013-O4"
+        },
+        {
+          "questionId": "Y4M03-Q013",
+          "mediaId": "IMG-V11-2B-F32FCC70EC5FA01C",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "spring",
+          "correct": true,
+          "optionOrCardId": "Y4M03-Q013-O1"
+        },
+        {
+          "questionId": "Y4M03-Q013",
+          "mediaId": "IMG-V11-2B-5B7C9682B340445E",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "january",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q013-D1"
+        },
+        {
+          "questionId": "Y4M03-Q013",
+          "mediaId": "IMG-V11-2B-C778AE6D3532895F",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "february",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q013-D2"
+        },
+        {
+          "questionId": "Y4M03-Q013",
+          "mediaId": "IMG-V11-2B-26BD691DE7A92741",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "march",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q013-D3"
+        },
+        {
+          "questionId": "Y4M03-Q013",
+          "mediaId": "IMG-V11-2B-AB542D436FC85665",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "april",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q013-D4"
+        },
+        {
+          "questionId": "Y4M03-Q013",
+          "mediaId": "IMG-V11-2B-61D5CBD6222B215F",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "may",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q013-D5"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q014",
+      "sourceSha256": "b3c1a83731b05d5a81c57319396ad9dbd560e5070b5fa86a95b3dce330921607",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "titleEn": "summer, autumn, fall, winter",
+      "instructionEn": "Match each audio to its picture.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M03-Q014-I1": "Y4M03-Q014-T1",
+        "Y4M03-Q014-I2": "Y4M03-Q014-T2",
+        "Y4M03-Q014-I3": "Y4M03-Q014-T3",
+        "Y4M03-Q014-I4": "Y4M03-Q014-T4"
+      },
+      "allSemanticTargets": [
+        "autumn",
+        "fall",
+        "summer",
+        "winter"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q014",
+          "mediaId": "IMG-V11-2B-C0AA3950B05EEC35",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "summer",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q014-T1"
+        },
+        {
+          "questionId": "Y4M03-Q014",
+          "mediaId": "IMG-V11-2B-B47AC22E66692DB9",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "autumn",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q014-T2"
+        },
+        {
+          "questionId": "Y4M03-Q014",
+          "mediaId": "IMG-V11-2B-46C759715E33A813",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "fall",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q014-T3"
+        },
+        {
+          "questionId": "Y4M03-Q014",
+          "mediaId": "IMG-V11-2B-07B3D6634BA3FE98",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "winter",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q014-T4"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q015",
+      "sourceSha256": "a8b30194dd9b3d1b2abce2f9fc4ceeb3b188f3e946b2354fe75cf44c1d7b0dbe",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "titleEn": "autumn, fall, winter, January, February, March",
+      "instructionEn": "Match each item to its pair.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M03-Q015-L1": "Y4M03-Q015-R1",
+        "Y4M03-Q015-L2": "Y4M03-Q015-R2",
+        "Y4M03-Q015-L3": "Y4M03-Q015-R3",
+        "Y4M03-Q015-L4": "Y4M03-Q015-R4",
+        "Y4M03-Q015-L5": "Y4M03-Q015-R5",
+        "Y4M03-Q015-L6": "Y4M03-Q015-R6"
+      },
+      "allSemanticTargets": [
+        "autumn",
+        "fall",
+        "february",
+        "january",
+        "march",
+        "winter"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q015",
+          "mediaId": "IMG-V11-2B-C1FD9166A9409B19",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "autumn",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q015-R1"
+        },
+        {
+          "questionId": "Y4M03-Q015",
+          "mediaId": "IMG-V11-2B-05A5652BE97B359E",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "fall",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q015-R2"
+        },
+        {
+          "questionId": "Y4M03-Q015",
+          "mediaId": "IMG-V11-2B-024C0D990F353FC0",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "winter",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q015-R3"
+        },
+        {
+          "questionId": "Y4M03-Q015",
+          "mediaId": "IMG-V11-2B-904F9A2444802FC6",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "january",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q015-R4"
+        },
+        {
+          "questionId": "Y4M03-Q015",
+          "mediaId": "IMG-V11-2B-F36A542977FFFABD",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "february",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q015-R5"
+        },
+        {
+          "questionId": "Y4M03-Q015",
+          "mediaId": "IMG-V11-2B-01B39210E1570613",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "march",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q015-R6"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q016",
+      "sourceSha256": "697a4f0e738775fd8951cf67e1dd30319488d9f4b1ea8c8e936667b4f8dfc99f",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "titleEn": "fall",
+      "instructionEn": "Listen and shoot the matching choice.",
+      "stimulusTarget": "fall",
+      "answerKey": "Y4M03-Q016-O1",
+      "allSemanticTargets": [
+        "autumn",
+        "fall",
+        "spring",
+        "summer"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q016",
+          "mediaId": "IMG-V11-2B-A8407B32EBD2465B",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "fall",
+          "correct": true,
+          "optionOrCardId": "Y4M03-Q016-O1"
+        },
+        {
+          "questionId": "Y4M03-Q016",
+          "mediaId": "IMG-V11-2B-F32FCC70EC5FA01C",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "spring",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q016-O2"
+        },
+        {
+          "questionId": "Y4M03-Q016",
+          "mediaId": "IMG-V11-2B-D19DF2C30C83811A",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "summer",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q016-O3"
+        },
+        {
+          "questionId": "Y4M03-Q016",
+          "mediaId": "IMG-V11-2B-82E782E5BBD88C23",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "autumn",
+          "correct": false,
+          "optionOrCardId": "Y4M03-Q016-O4"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q017",
+      "sourceSha256": "03a34b35cea3d3145e71c555ae470244d06096a19b183288ee37e5d54674e9ee",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "titleEn": "winter, January, February, March, April, May",
+      "instructionEn": "Match each item to its pair.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M03-Q017-L1": "Y4M03-Q017-R1",
+        "Y4M03-Q017-L2": "Y4M03-Q017-R2",
+        "Y4M03-Q017-L3": "Y4M03-Q017-R3",
+        "Y4M03-Q017-L4": "Y4M03-Q017-R4",
+        "Y4M03-Q017-L5": "Y4M03-Q017-R5",
+        "Y4M03-Q017-L6": "Y4M03-Q017-R6"
+      },
+      "allSemanticTargets": [
+        "april",
+        "february",
+        "january",
+        "march",
+        "may",
+        "winter"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q017",
+          "mediaId": "IMG-V11-2B-024C0D990F353FC0",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "winter",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q017-R1"
+        },
+        {
+          "questionId": "Y4M03-Q017",
+          "mediaId": "IMG-V11-2B-904F9A2444802FC6",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "january",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q017-R2"
+        },
+        {
+          "questionId": "Y4M03-Q017",
+          "mediaId": "IMG-V11-2B-F36A542977FFFABD",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "february",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q017-R3"
+        },
+        {
+          "questionId": "Y4M03-Q017",
+          "mediaId": "IMG-V11-2B-01B39210E1570613",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "march",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q017-R4"
+        },
+        {
+          "questionId": "Y4M03-Q017",
+          "mediaId": "IMG-V11-2B-56C61319B5EF40CF",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "april",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q017-R5"
+        },
+        {
+          "questionId": "Y4M03-Q017",
+          "mediaId": "IMG-V11-2B-8E78DA1203B3356D",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "may",
+          "correct": null,
+          "optionOrCardId": "Y4M03-Q017-R6"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q018",
+      "sourceSha256": "bbd7b82a2b0bfb074385d289f71706fb03852088d207a89789c7a589883223ea",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "titleEn": "My birthday is in January.",
+      "instructionEn": "Look at the picture and complete the sentence.",
+      "stimulusTarget": null,
+      "answerKey": "January",
+      "allSemanticTargets": [
+        "january"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M03-Q018",
+          "mediaId": "IMG-V11-2B-5B7C9682B340445E",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "january",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M03-Q019",
+      "sourceSha256": "a1098396dcec165a565eb4fff8bb8baa26b2a7376ab3154611da2270090f9a68",
+      "mechanicId": "smart-sentence-order",
+      "mechanicMode": "order",
+      "titleEn": "It is February.",
+      "instructionEn": "Put the words in order.",
+      "stimulusTarget": null,
+      "answerKey": [
+        "It",
+        "is",
+        "February"
+      ],
+      "allSemanticTargets": [],
+      "visualUsages": []
+    },
+    {
+      "questionId": "Y4M03-Q020",
+      "sourceSha256": "7a686d53ad2ec7e1722bb9c03d128439113dd859f6d9833d41d3f3af26de997d",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "titleEn": "mother, father, brother, sister, grandmother, grandfather",
+      "instructionEn": "Sort each item: close family or grandparents.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M03-Q020-I1": "close-family",
+        "Y4M03-Q020-I2": "close-family",
+        "Y4M03-Q020-I3": "close-family",
+        "Y4M03-Q020-I4": "close-family",
+        "Y4M03-Q020-I5": "grandparents",
+        "Y4M03-Q020-I6": "grandparents"
+      },
+      "allSemanticTargets": [
+        "brother",
+        "father",
+        "grandfather",
+        "grandmother",
+        "mother",
+        "sister"
+      ],
+      "visualUsages": []
+    }
+  ],
+  "sourceContractsModified": false
+}

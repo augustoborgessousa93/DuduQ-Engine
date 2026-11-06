@@ -1,0 +1,248 @@
+{
+  "schemaVersion": "DUDUQ_Y4M03_NATIVE_GENERATION_BATCH_V1",
+  "createdAt": "2026-11-06T20:01:29.963Z",
+  "moduleId": "Y4M03",
+  "lane": "generation",
+  "provider": "OpenAI Codex native image generation",
+  "tool": "image_gen.imagegen",
+  "generatedAssets": 17,
+  "reusedAssets": 0,
+  "rejectedAttempts": [
+    {
+      "concept": "january",
+      "slug": "JANUARY-ATTEMPT-1",
+      "file": "provenance/rejected-originals/DUDUQ-Y4M03-JANUARY-ATTEMPT-1-REJECTED.png",
+      "sha256": "43d0b092f8cdc19cf35e7bc730463eb92d05b853bf3494db3d64daa01a605711",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "rejectionReason": "ALPHA_FRAMING_REJECTED_SHORT_MARGIN_AND_DETACHED_BLUE_SPECKS",
+      "generatorCallId": "exec-3dc91d57-072f-4992-a9a4-08f135513cf8",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational month concept PNG for children ages 8–10\nPrimary request: one unmistakable premium 3D year-wheel teaching the calendar month “January”, grounded in the source contract’s twelve-position month dial\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one connected circular blue year-wheel token with exactly twelve large raised month beads evenly spaced around its rim like a clock; the January bead at the very top, 12 o’clock position, is larger and warm golden yellow; the other exactly eleven beads are equal-size sky blue; one simple ivory center hub\nStyle/medium: premium polished rounded 3D children’s animation render, tactile toy-like materials, crisp readable silhouette\nComposition/framing: centered front three-quarter view; complete wheel fills about 82% of a square canvas with an 8–10% transparent safe margin; all twelve beads fully visible and easy to count\nLighting/mood: soft bright studio lighting, friendly, precise, educational\nConstraints: exactly one wheel, exactly twelve rim beads total, only the top January bead highlighted, actual alpha transparency, no duplicate or missing bead\nAvoid: words, month names, letters, numerals, dates, hands, clock needles, extra dots, extra rings, seasonal scenery, people, animals, logos, watermark, floor, cast shadow, glow, halo, frame, collage, grid, cropped edges",
+      "sessionEvidence": {
+        "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T16-33-36-01a1b25a-2630-7050-9efd-638b69dbdd9b.jsonl",
+        "generatorCallId": "exec-3dc91d57-072f-4992-a9a4-08f135513cf8",
+        "stableGenerationRecordSha256": "8529e8246ad30cb6a7998f8878bb183fa6674584ca02d7b7612bbe7a6c03a5fe",
+        "generationStatus": "completed",
+        "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+      },
+      "acceptedAsCandidate": false
+    },
+    {
+      "concept": "march",
+      "slug": "MARCH-ATTEMPT-1",
+      "file": "provenance/rejected-originals/DUDUQ-Y4M03-MARCH-ATTEMPT-1-REJECTED.png",
+      "sha256": "e6ebd773c5e1d00250e3951807ae4214e71a742e552645aa06d2004ad235d27d",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "rejectionReason": "SEMANTIC_REJECTED_HIGHLIGHT_REPEATED_FEBRUARY_POSITION",
+      "generatorCallId": "exec-e04efcde-a96e-4114-a2b3-3f7dca7672c2",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational month concept PNG for children ages 8–10\nInput images: Image 1 is the approved-layout twelve-bead January year-wheel\nPrimary request: change only which one of the exactly twelve rim beads is enlarged and warm golden yellow\nInvariants: preserve exactly one circular blue wheel, exactly twelve rim beads total, one ivory center hub, the wheel geometry, all bead positions, transparent margin, materials, lighting, camera, and premium rounded 3D style; preserve actual alpha transparency and a complete uncropped silhouette\nRequired cleanup: no detached colored specks or fragments outside the wheel\nAvoid: missing or extra beads, more than one gold bead, words, letters, numerals, dates, clock hands, seasonal scenery, people, logos, watermark, floor, cast shadow, glow, halo, frame, collage\nTarget concept: “March”\nRequired edit: Move both the enlarged size and gold highlight from the top January bead to the second bead clockwise from the top, at the upper-right roughly 2 o’clock position. Restore the top bead to the same smaller sky-blue size and color as the ten other unselected beads.\nConstraints: exactly one enlarged gold bead at the specified March position and exactly eleven smaller sky-blue beads.",
+      "sessionEvidence": {
+        "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T16-33-36-01a1b25a-2630-7050-9efd-638b69dbdd9b.jsonl",
+        "generatorCallId": "exec-e04efcde-a96e-4114-a2b3-3f7dca7672c2",
+        "stableGenerationRecordSha256": "555a934139c7d36017d851242bf148bb06e4df334513c747507c6d5c60415254",
+        "generationStatus": "completed",
+        "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+      },
+      "acceptedAsCandidate": false
+    },
+    {
+      "concept": "spring",
+      "slug": "SPRING-ATTEMPT-1",
+      "file": "provenance/rejected-originals/DUDUQ-Y4M03-SPRING-ATTEMPT-1-REJECTED.png",
+      "sha256": "3e291f3aa68fc1980c59d99981b854966056e8b26f4012d4e9f3c69e3375ce3a",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "rejectionReason": "ALPHA_REJECTED_WIDE_COLORED_HALO",
+      "generatorCallId": "exec-e5ccb7f6-7f46-46de-8a4f-6225a53ca84a",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational “spring” concept PNG for children ages 8–10\nPrimary request: one unmistakable premium 3D spring-vocabulary emblem, grounded in the source contract’s fresh flowers cue\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one connected flowering cluster growing from one compact rounded fresh-green grassy base; exactly three large open pink flowers with warm-yellow centers, several fresh green leaves, and no other objects\nStyle/medium: premium polished rounded 3D children’s animation render, tactile toy-like materials, crisp readable silhouette\nComposition/framing: centered front three-quarter view; complete connected cluster fills about 78–82% of the square canvas with a clean 9–10% transparent safe margin\nLighting/mood: soft bright studio lighting, fresh, friendly, educational\nContext: a conventional visual cue for the English vocabulary word “spring”, not a claim that every region has the same climate\nConstraints: exactly one connected plant cluster, exactly three flowers, actual alpha transparency\nAvoid: text, letters, labels, calendar, months, sun, snow, autumn leaves, fruits, animals, people, flower pot, extra flowers, loose detached petals, logos, watermark, floor, cast shadow, glow, halo, frame, collage, cropped edges",
+      "sessionEvidence": {
+        "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T16-33-36-01a1b25a-2630-7050-9efd-638b69dbdd9b.jsonl",
+        "generatorCallId": "exec-e5ccb7f6-7f46-46de-8a4f-6225a53ca84a",
+        "stableGenerationRecordSha256": "e112031787060fcfcacdda25f1d1ca03e469c82bc195aa9469ac377679d15c4b",
+        "generationStatus": "completed",
+        "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+      },
+      "acceptedAsCandidate": false
+    },
+    {
+      "concept": "summer",
+      "slug": "SUMMER-ATTEMPT-1",
+      "file": "provenance/rejected-originals/DUDUQ-Y4M03-SUMMER-ATTEMPT-1-REJECTED.png",
+      "sha256": "7dfe1887b0a3b4f3779ff4a1922748564fd98f68c0f7a5192061fd7fc99b531b",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "rejectionReason": "ALPHA_REJECTED_DETACHED_GOLD_RED_SPECKS",
+      "generatorCallId": "exec-ec9df50b-1e46-4837-834e-8dbfbb2f47f1",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational “summer” concept PNG for children ages 8–10\nPrimary request: one unmistakable premium 3D summer-vocabulary emblem, grounded in the source contract’s warm sun cue\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one connected cheerful golden sun token with one smooth circular center and exactly twelve short rounded rays attached evenly around it; no face and no other object\nStyle/medium: premium polished rounded 3D children’s animation render, tactile toy-like materials, crisp readable silhouette\nComposition/framing: centered front view; complete sun fills about 78–82% of the square canvas with a clean 9–10% transparent safe margin; all twelve rays fully visible\nLighting/mood: soft bright studio lighting, warm, friendly, educational\nContext: a conventional visual cue for the English vocabulary word “summer”, not a claim that every region has the same climate\nConstraints: exactly one sun, exactly twelve attached rays, actual alpha transparency\nAvoid: face, eyes, mouth, text, letters, labels, calendar, months, beach, umbrella, ocean, flowers, leaves, snow, clouds, people, animals, logos, watermark, floor, cast shadow, glow, halo, frame, collage, cropped edges",
+      "sessionEvidence": {
+        "transcript": "C:/Users/augus/.codex/sessions/2026/11/06/rollout-2026-11-06T16-33-36-01a1b25a-2630-7050-9efd-638b69dbdd9b.jsonl",
+        "generatorCallId": "exec-ec9df50b-1e46-4837-834e-8dbfbb2f47f1",
+        "stableGenerationRecordSha256": "c7f0b5b7234d9bf6db1b72c51564a1e3547b1e16df841b725c68c8f91aec6a1e",
+        "generationStatus": "completed",
+        "promptEvidence": "VERBATIM_REVISED_PROMPT_PRESENT_IN_CODEX_SESSION"
+      },
+      "acceptedAsCandidate": false
+    }
+  ],
+  "generatorLimitReached": false,
+  "blockedGenerator": false,
+  "assets": [
+    {
+      "concept": "april",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-APRIL-ORIGINAL.png",
+      "originalSha256": "9be38bebeacc5c92e4990c10e26a17ca655a75ae2125480bc21c455f3ffc2aff",
+      "candidateFile": "images/DUDUQ-Y4M03-APRIL.png",
+      "candidateSha256": "405273cd333265ddaebac4a5c778ed0b6a5144a1ed2c2da4bf5f542735b49004",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational month concept PNG for children ages 8–10\nInput images: Image 1 is the approved-layout twelve-bead January year-wheel\nPrimary request: change only which one of the exactly twelve rim beads is enlarged and warm golden yellow\nInvariants: preserve exactly one circular blue wheel, exactly twelve rim beads total, one ivory center hub, the wheel geometry, all bead positions, transparent margin, materials, lighting, camera, and premium rounded 3D style; preserve actual alpha transparency and a complete uncropped silhouette\nRequired cleanup: no detached colored specks or fragments outside the wheel\nAvoid: missing or extra beads, more than one gold bead, words, letters, numerals, dates, clock hands, seasonal scenery, people, logos, watermark, floor, cast shadow, glow, halo, frame, collage\nTarget concept: “April”\nRequired edit: Move both the enlarged size and gold highlight from the top January bead to the third bead clockwise from the top, at the exact right-side 3 o’clock position. Restore the top bead to the same smaller sky-blue size and color as the ten other unselected beads.\nConstraints: exactly one enlarged gold bead at the specified April position and exactly eleven smaller sky-blue beads.",
+      "generatorCallId": "exec-455b8161-7284-4ba5-a503-ee26900d98c1"
+    },
+    {
+      "concept": "august",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-AUGUST-ORIGINAL.png",
+      "originalSha256": "9d9d2c325d8a898ae4c6b8404f86b568031ad52520e7a4f62dabdc23667fb1e4",
+      "candidateFile": "images/DUDUQ-Y4M03-AUGUST.png",
+      "candidateSha256": "21501880b55a7cfe3ff614d35533e69f43afff669c2a7fc2abdc70d3986bbfeb",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational month concept PNG for children ages 8–10\nInput images: Image 1 is the approved-layout twelve-bead January year-wheel\nPrimary request: move both the enlarged size and warm-gold highlight from the top bead to exactly one specified bead\nInvariants: preserve exactly one circular blue wheel, exactly twelve rim beads total, exactly one enlarged gold bead, exactly eleven smaller sky-blue beads, one ivory center hub, all bead positions, transparent margin, materials, lighting, camera, and premium rounded 3D style; complete uncropped silhouette\nRequired cleanup: no detached colored specks or fragments outside the wheel\nAvoid: missing or extra beads, multiple gold beads, words, letters, numerals, dates, clock hands, seasonal scenery, people, logos, watermark, floor, cast shadow, glow, halo, frame, collage\nTarget concept: “August”\nRequired edit: The selected gold bead is the first bead clockwise after the exact bottom 6 o’clock bead, at the lower-left roughly 7 o’clock position. The top bead and every other bead are smaller sky blue.\nConstraints: exactly one enlarged gold bead at the specified August position.",
+      "generatorCallId": "exec-c511c573-fb3e-45ca-a21e-1f30af3d0338"
+    },
+    {
+      "concept": "autumn",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-AUTUMN-ORIGINAL.png",
+      "originalSha256": "008eeda581c84afd5a60833175965b5e4eea80cfe4b7c0e42ca5d7c8524ecfcc",
+      "candidateFile": "images/DUDUQ-Y4M03-AUTUMN.png",
+      "candidateSha256": "d9084e3a7547f97c3fff8db23c62dcbdabf410324ab074524c566341587608d4",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational “autumn” concept PNG for children ages 8–10\nPrimary request: one unmistakable premium 3D autumn-vocabulary emblem, grounded in the source contract’s amber foliage cue and visually distinct from the separate “fall” leaf asset\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one compact deciduous tree with a rounded canopy of attached amber, orange, and muted red leaves, one warm-brown trunk, and one small connected oval earth base with a neat attached carpet of leaves; no loose airborne leaves\nStyle/medium: premium polished rounded 3D children’s animation render, tactile toy-like materials, crisp readable silhouette\nComposition/framing: centered front three-quarter view; complete tree and connected base fill about 78–82% of the square canvas with a clean 9–10% transparent safe margin\nLighting/mood: soft bright studio lighting, warm, friendly, educational\nContext: a conventional visual cue for the English vocabulary word “autumn”, not a claim that every region has the same climate\nConstraints: exactly one tree composition, all foliage attached, actual alpha transparency\nAvoid: single isolated maple leaf, falling motion, loose leaves, fruit, pumpkins, acorns, animals, people, text, letters, labels, calendar, months, flowers, sun, snow, evergreen tree, logos, watermark, floor, cast shadow, glow, halo, frame, collage, cropped edges",
+      "generatorCallId": "exec-83a1e517-f852-401d-bde2-8fb46678ea2f"
+    },
+    {
+      "concept": "december",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-DECEMBER-ORIGINAL.png",
+      "originalSha256": "3840d2569a67c7f1c20c978c7c046dbae196b0d0ce9bba5c728e81ef1a033a8e",
+      "candidateFile": "images/DUDUQ-Y4M03-DECEMBER.png",
+      "candidateSha256": "c2d339a4ca01b063ab69ade0d778ab89f3cb2d8862b0e008845428b08a59f1ab",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational month concept PNG for children ages 8–10\nInput images: Image 1 is the approved-layout twelve-bead January year-wheel\nPrimary request: move both the enlarged size and warm-gold highlight from the top bead to exactly one specified bead\nInvariants: preserve exactly one circular blue wheel, exactly twelve rim beads total, exactly one enlarged gold bead, exactly eleven smaller sky-blue beads, one ivory center hub, all bead positions, transparent margin, materials, lighting, camera, and premium rounded 3D style; complete uncropped silhouette\nRequired cleanup: no detached colored specks or fragments outside the wheel\nAvoid: missing or extra beads, multiple gold beads, words, letters, numerals, dates, clock hands, seasonal scenery, people, logos, watermark, floor, cast shadow, glow, halo, frame, collage\nTarget concept: “December”\nRequired edit: The selected gold bead is the second bead above the exact left-side 9 o’clock bead, at the upper-left roughly 11 o’clock position, immediately before the top bead. The top bead and every other bead are smaller sky blue.\nConstraints: exactly one enlarged gold bead at the specified December position.",
+      "generatorCallId": "exec-dca681aa-a9a4-4d15-99b6-90481cbc2546"
+    },
+    {
+      "concept": "fall",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-FALL-ORIGINAL.png",
+      "originalSha256": "5b724ab0799b892c5ec9781bdeb3c7a95951478c2e5f9b36bfcf06ebf1a54535",
+      "candidateFile": "images/DUDUQ-Y4M03-FALL.png",
+      "candidateSha256": "be3769fdcd51f7f3e9b59320cea6f45c5edbb81d1d06044515939f97f418c113",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational “fall” concept PNG for children ages 8–10\nPrimary request: one unmistakable premium 3D fall-vocabulary emblem, visually distinct from the separate full autumn-tree asset\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one large isolated red-orange maple leaf with one complete curled brown stem, shown in a dynamic diagonal falling tilt; the leaf itself is the only object\nStyle/medium: premium polished rounded 3D children’s animation render, tactile toy-like material, crisp readable silhouette\nComposition/framing: centered diagonal close-up; complete leaf fills about 78–82% of the square canvas with a clean 9–10% transparent safe margin; every leaf tip and the entire stem are visible\nLighting/mood: soft bright studio lighting, warm, friendly, educational\nContext: a conventional visual cue for the English vocabulary synonym “fall”, distinct in artwork from “autumn” without claiming regional climate\nConstraints: exactly one leaf, exactly one attached stem, actual alpha transparency\nAvoid: tree, branch, leaf pile, second leaf, loose fragments, motion lines, text, letters, labels, calendar, months, flowers, sun, snow, people, animals, logos, watermark, floor, cast shadow, glow, halo, frame, collage, cropped edges",
+      "generatorCallId": "exec-9089c3d5-ebab-43ff-b6c7-09de2bc79e2d"
+    },
+    {
+      "concept": "february",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-FEBRUARY-ORIGINAL.png",
+      "originalSha256": "63e9f07e3d85bb3c40914665dd426c88e36ac5d1474581342d20886feb85e829",
+      "candidateFile": "images/DUDUQ-Y4M03-FEBRUARY.png",
+      "candidateSha256": "809720c6bff935e61d0f80a4203e4e83693d2970cef0f6eb7038e09f3414ef99",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational month concept PNG for children ages 8–10\nInput images: Image 1 is the approved-layout twelve-bead January year-wheel\nPrimary request: change only which one of the exactly twelve rim beads is enlarged and warm golden yellow\nInvariants: preserve exactly one circular blue wheel, exactly twelve rim beads total, one ivory center hub, the wheel geometry, all bead positions, transparent margin, materials, lighting, camera, and premium rounded 3D style; preserve actual alpha transparency and a complete uncropped silhouette\nRequired cleanup: no detached colored specks or fragments outside the wheel\nAvoid: missing or extra beads, more than one gold bead, words, letters, numerals, dates, clock hands, seasonal scenery, people, logos, watermark, floor, cast shadow, glow, halo, frame, collage\nTarget concept: “February”\nRequired edit: Move both the enlarged size and gold highlight from the top January bead to the first bead clockwise from the top, at the upper-right roughly 1 o’clock position. Restore the top bead to the same smaller sky-blue size and color as the ten other unselected beads.\nConstraints: exactly one enlarged gold bead at the specified February position and exactly eleven smaller sky-blue beads.",
+      "generatorCallId": "exec-88771f5b-7a3c-4912-8a3c-d571e0d02ed2"
+    },
+    {
+      "concept": "january",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-JANUARY-ORIGINAL.png",
+      "originalSha256": "8522412ecf1098c5e5088aa4012adc199863e3a13a54a04106d2a4c0a238add9",
+      "candidateFile": "images/DUDUQ-Y4M03-JANUARY.png",
+      "candidateSha256": "c4bd2fc32a19a56bbe2f97cf23edbc7fe52e19370495a581e9c92a7ba4fef2a4",
+      "prompt": "Use case: precise-object-edit\nAsset type: corrected DUDUQ English January month concept PNG\nInput images: Image 1 is the generated twelve-bead January year-wheel\nPrimary request: change only framing and edge cleanliness\nRequired edit: uniformly scale the complete wheel down so its full circular silhouette fills about 80% of the square canvas and has a clean 9–10% genuinely transparent margin on every side; remove every detached blue/cyan speck, stray pixel, fragment, or halo outside the wheel\nInvariants: preserve exactly one circular blue wheel; preserve exactly twelve rim beads total; preserve the single larger warm-gold bead at the top 12 o’clock January position; preserve exactly eleven equal sky-blue rim beads, one ivory center hub, materials, colors, lighting, orientation, and premium rounded 3D style\nConstraints: actual alpha transparency; complete uncropped silhouette; no other changes\nAvoid: missing or extra beads, moved highlight, words, letters, numerals, dates, clock hands, seasonal scenery, people, logos, watermark, floor, cast shadow, detached pixels, glow, halo, frame, collage",
+      "generatorCallId": "exec-a17c098c-1dac-4fe6-8dfe-293c239b6828"
+    },
+    {
+      "concept": "july",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-JULY-ORIGINAL.png",
+      "originalSha256": "7e09844019b90a1fae29b8b3b518f02b2066a8272b08206590ca462bf93de468",
+      "candidateFile": "images/DUDUQ-Y4M03-JULY.png",
+      "candidateSha256": "1e871b54a75aa9f38b06f327fd141895647923c8a2aee4c54126b2f6031d107f",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational month concept PNG for children ages 8–10\nInput images: Image 1 is the approved-layout twelve-bead January year-wheel\nPrimary request: move both the enlarged size and warm-gold highlight from the top bead to exactly one specified bead\nInvariants: preserve exactly one circular blue wheel, exactly twelve rim beads total, exactly one enlarged gold bead, exactly eleven smaller sky-blue beads, one ivory center hub, all bead positions, transparent margin, materials, lighting, camera, and premium rounded 3D style; complete uncropped silhouette\nRequired cleanup: no detached colored specks or fragments outside the wheel\nAvoid: missing or extra beads, multiple gold beads, words, letters, numerals, dates, clock hands, seasonal scenery, people, logos, watermark, floor, cast shadow, glow, halo, frame, collage\nTarget concept: “July”\nRequired edit: The selected gold bead is the exact bottom 6 o’clock bead. The top bead and every other bead are smaller sky blue.\nConstraints: exactly one enlarged gold bead at the specified July position.",
+      "generatorCallId": "exec-16d51b89-4ff7-453d-8988-ef0531e61e51"
+    },
+    {
+      "concept": "june",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-JUNE-ORIGINAL.png",
+      "originalSha256": "69cf69e99ebd2f3363cf05816ded8bc5aed527bd7a02c037fd928cdcbc46fe16",
+      "candidateFile": "images/DUDUQ-Y4M03-JUNE.png",
+      "candidateSha256": "4048a3cf8d9a49ffa0c0fd8eb5620384f7e8f1ddb628629cd131a0a04aed7081",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational month concept PNG for children ages 8–10\nInput images: Image 1 is the approved-layout twelve-bead January year-wheel\nPrimary request: move both the enlarged size and warm-gold highlight from the top bead to exactly one specified bead\nInvariants: preserve exactly one circular blue wheel, exactly twelve rim beads total, exactly one enlarged gold bead, exactly eleven smaller sky-blue beads, one ivory center hub, all bead positions, transparent margin, materials, lighting, camera, and premium rounded 3D style; complete uncropped silhouette\nRequired cleanup: no detached colored specks or fragments outside the wheel\nAvoid: missing or extra beads, multiple gold beads, words, letters, numerals, dates, clock hands, seasonal scenery, people, logos, watermark, floor, cast shadow, glow, halo, frame, collage\nTarget concept: “June”\nRequired edit: The selected gold bead is the second bead below the exact right-side 3 o’clock bead, at the lower-right roughly 5 o’clock position, immediately above the bottom bead. The top bead and every other bead are smaller sky blue.\nConstraints: exactly one enlarged gold bead at the specified June position.",
+      "generatorCallId": "exec-62b02670-c7a0-4629-b26c-425efbf424f9"
+    },
+    {
+      "concept": "march",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-MARCH-ORIGINAL.png",
+      "originalSha256": "3234a2f53208f333a3c332f79e82b825ced582ffae6104f6f65f8d9c11060fb5",
+      "candidateFile": "images/DUDUQ-Y4M03-MARCH.png",
+      "candidateSha256": "d8826342b282e057515e4eea8bf02da7a0ea5aea27cfda0699e49899a5263a4c",
+      "prompt": "Use case: precise-object-edit\nAsset type: corrected DUDUQ English “March” month concept PNG\nInput images: Image 1 is the approved-layout twelve-bead January year-wheel\nPrimary request: move the enlarged warm-gold highlight to the March bead only\nRequired edit: in this exact wheel, keep the top 12 o’clock bead blue and small. Keep the upper-right bead nearest the top blue and small. Enlarge and recolor ONLY the next bead clockwise—the middle-right bead directly above the rightmost 3 o’clock bead, approximately 76% of canvas width and 38% of canvas height—warm golden yellow. This is the second bead clockwise after the top bead and represents March.\nInvariants: exactly one circular blue wheel, exactly twelve rim beads total, exactly one enlarged gold bead, exactly eleven smaller sky-blue beads, one ivory center hub; preserve geometry, positions, transparent margin, materials, lighting, camera, premium rounded 3D style, and complete uncropped silhouette\nConstraints: actual alpha transparency; no detached colored specks outside the wheel\nAvoid: highlighting the first upper-right bead, highlighting the rightmost 3 o’clock bead, missing or extra beads, multiple gold beads, words, letters, numerals, dates, clock hands, seasonal scenery, people, logos, watermark, floor, cast shadow, glow, halo, frame, collage",
+      "generatorCallId": "exec-36a55d21-ce29-4b9f-ade1-b910cd2185a1"
+    },
+    {
+      "concept": "may",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-MAY-ORIGINAL.png",
+      "originalSha256": "5462150e7dac735af75063d2a3ed6744e7b8d6c8fb9c4232ce966f58b335b80d",
+      "candidateFile": "images/DUDUQ-Y4M03-MAY.png",
+      "candidateSha256": "38fa7f0f8b2927ab8e6eddbe3f2065955d142db6b22146886211a15253698397",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational month concept PNG for children ages 8–10\nInput images: Image 1 is the approved-layout twelve-bead January year-wheel\nPrimary request: move both the enlarged size and warm-gold highlight from the top bead to exactly one specified bead\nInvariants: preserve exactly one circular blue wheel, exactly twelve rim beads total, exactly one enlarged gold bead, exactly eleven smaller sky-blue beads, one ivory center hub, all bead positions, transparent margin, materials, lighting, camera, and premium rounded 3D style; complete uncropped silhouette\nRequired cleanup: no detached colored specks or fragments outside the wheel\nAvoid: missing or extra beads, multiple gold beads, words, letters, numerals, dates, clock hands, seasonal scenery, people, logos, watermark, floor, cast shadow, glow, halo, frame, collage\nTarget concept: “May”\nRequired edit: The selected gold bead is the first bead below the exact right-side 3 o’clock bead, at the lower-right roughly 4 o’clock position. The top bead and every other bead are smaller sky blue.\nConstraints: exactly one enlarged gold bead at the specified May position.",
+      "generatorCallId": "exec-febdc948-1aaa-4ba2-a2fe-b6ed61196c8e"
+    },
+    {
+      "concept": "november",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-NOVEMBER-ORIGINAL.png",
+      "originalSha256": "0a8a160dafb3311badb1e3d7271dba32eae85e59b2316aaf2c983d767306c459",
+      "candidateFile": "images/DUDUQ-Y4M03-NOVEMBER.png",
+      "candidateSha256": "d591d2511c716f8f22b84d5bf6408c60c7c059111b2d5623f78ccfc3f0683e27",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational month concept PNG for children ages 8–10\nInput images: Image 1 is the approved-layout twelve-bead January year-wheel\nPrimary request: move both the enlarged size and warm-gold highlight from the top bead to exactly one specified bead\nInvariants: preserve exactly one circular blue wheel, exactly twelve rim beads total, exactly one enlarged gold bead, exactly eleven smaller sky-blue beads, one ivory center hub, all bead positions, transparent margin, materials, lighting, camera, and premium rounded 3D style; complete uncropped silhouette\nRequired cleanup: no detached colored specks or fragments outside the wheel\nAvoid: missing or extra beads, multiple gold beads, words, letters, numerals, dates, clock hands, seasonal scenery, people, logos, watermark, floor, cast shadow, glow, halo, frame, collage\nTarget concept: “November”\nRequired edit: The selected gold bead is the first bead above the exact left-side 9 o’clock bead, at the upper-left roughly 10 o’clock position. The top bead and every other bead are smaller sky blue.\nConstraints: exactly one enlarged gold bead at the specified November position.",
+      "generatorCallId": "exec-951e53f3-ddb4-4e77-bcdc-f03cc99ee05e"
+    },
+    {
+      "concept": "october",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-OCTOBER-ORIGINAL.png",
+      "originalSha256": "f1fcabceb258e7ea04d9a0c1d0ac4f931b4497812565009af8acd6e652f044f8",
+      "candidateFile": "images/DUDUQ-Y4M03-OCTOBER.png",
+      "candidateSha256": "f29f549ee0eec3ef904ab94b83fc4f24c24bdef0dbeebcb7598887eabd32f6da",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational month concept PNG for children ages 8–10\nInput images: Image 1 is the approved-layout twelve-bead January year-wheel\nPrimary request: move both the enlarged size and warm-gold highlight from the top bead to exactly one specified bead\nInvariants: preserve exactly one circular blue wheel, exactly twelve rim beads total, exactly one enlarged gold bead, exactly eleven smaller sky-blue beads, one ivory center hub, all bead positions, transparent margin, materials, lighting, camera, and premium rounded 3D style; complete uncropped silhouette\nRequired cleanup: no detached colored specks or fragments outside the wheel\nAvoid: missing or extra beads, multiple gold beads, words, letters, numerals, dates, clock hands, seasonal scenery, people, logos, watermark, floor, cast shadow, glow, halo, frame, collage\nTarget concept: “October”\nRequired edit: The selected gold bead is the exact left-side 9 o’clock bead. The top bead and every other bead are smaller sky blue.\nConstraints: exactly one enlarged gold bead at the specified October position.",
+      "generatorCallId": "exec-82d1b41c-fcd2-4bdf-b3d9-199e8d6f9b90"
+    },
+    {
+      "concept": "september",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-SEPTEMBER-ORIGINAL.png",
+      "originalSha256": "461dc2d0c4b082c336150ac141f08bb1d5d3ef45bf1d7be9a80d818caee6e4d5",
+      "candidateFile": "images/DUDUQ-Y4M03-SEPTEMBER.png",
+      "candidateSha256": "82f06be46f0650b8edd8c4de6f769439189615635927853fed862746d89d0b9f",
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational month concept PNG for children ages 8–10\nInput images: Image 1 is the approved-layout twelve-bead January year-wheel\nPrimary request: move both the enlarged size and warm-gold highlight from the top bead to exactly one specified bead\nInvariants: preserve exactly one circular blue wheel, exactly twelve rim beads total, exactly one enlarged gold bead, exactly eleven smaller sky-blue beads, one ivory center hub, all bead positions, transparent margin, materials, lighting, camera, and premium rounded 3D style; complete uncropped silhouette\nRequired cleanup: no detached colored specks or fragments outside the wheel\nAvoid: missing or extra beads, multiple gold beads, words, letters, numerals, dates, clock hands, seasonal scenery, people, logos, watermark, floor, cast shadow, glow, halo, frame, collage\nTarget concept: “September”\nRequired edit: The selected gold bead is the second bead clockwise after the exact bottom 6 o’clock bead, at the lower-left roughly 8 o’clock position, immediately below the exact left-side bead. The top bead and every other bead are smaller sky blue.\nConstraints: exactly one enlarged gold bead at the specified September position.",
+      "generatorCallId": "exec-a13d7e5f-549d-409d-89c4-18de29441d95"
+    },
+    {
+      "concept": "spring",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-SPRING-ORIGINAL.png",
+      "originalSha256": "e15814f9ec07a44229f4cdaf6219bef00bc9624214aea6157431676ef2e756a6",
+      "candidateFile": "images/DUDUQ-Y4M03-SPRING.png",
+      "candidateSha256": "f04346c1b430001efdee6a10285ebeda875178078e2b4852c165eb90ff01c862",
+      "prompt": "Use case: precise-object-edit\nAsset type: corrected DUDUQ English “spring” concept PNG\nInput images: Image 1 is the generated three-flower spring cluster\nPrimary request: change only framing and transparency cleanliness\nRequired edit: remove the entire pale pink/gray haze, cloudy wash, colored halo, glow, and every detached pixel surrounding the flower cluster; uniformly scale the complete connected flower-and-grass subject down so it fills about 80% of the square canvas with a clean 9–10% genuinely transparent margin on every side\nInvariants: preserve exactly three pink flowers, their yellow centers, all connected green stems and leaves, one connected grassy base, colors, lighting, shapes, premium rounded 3D style, and semantic meaning\nConstraints: background must be pure alpha transparency outside the clean subject silhouette; complete uncropped subject\nAvoid: haze, aura, colored background, halo, glow, detached petals, new flowers, missing flowers, text, logos, floor, cast shadow, frame, collage",
+      "generatorCallId": "exec-5b316cf3-eb96-46d0-b196-034d799e69fd"
+    },
+    {
+      "concept": "summer",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-SUMMER-ORIGINAL.png",
+      "originalSha256": "e575f012182afb6b9bd4d09a63cb53b9599e2644dde0a868c7e86e0c34c68b44",
+      "candidateFile": "images/DUDUQ-Y4M03-SUMMER.png",
+      "candidateSha256": "4925b315dc34863069beca638860691a53e047f8a82688989c88f7cfadb7088d",
+      "prompt": "Use case: precise-object-edit\nAsset type: corrected DUDUQ English “summer” concept PNG\nInput images: Image 1 is the generated twelve-ray golden sun\nPrimary request: change only framing and transparency cleanliness\nRequired edit: remove every detached yellow, orange, red, or dark speck, particle, fragment, halo, and glow outside the sun; uniformly scale the complete sun down so it fills about 80% of the square canvas with a clean 9–10% genuinely transparent margin on every side\nInvariants: preserve exactly one golden circular sun, exactly twelve attached rounded rays, no face, colors, lighting, geometry, premium rounded 3D style, and semantic meaning\nConstraints: background must be pure alpha transparency outside the clean sun silhouette; all twelve rays complete and uncropped\nAvoid: missing or extra rays, detached particles, colored background, halo, glow, face, text, logos, floor, cast shadow, frame, collage",
+      "generatorCallId": "exec-7920d343-8b3d-4925-8e97-928bf6ad98cb"
+    },
+    {
+      "concept": "winter",
+      "originalFile": "provenance/originals/DUDUQ-Y4M03-WINTER-ORIGINAL.png",
+      "originalSha256": "e0f7df3a0ed051950f1a4cfcf45099714fd72d55dd75e7403b8e1392f72293b1",
+      "candidateFile": "images/DUDUQ-Y4M03-WINTER.png",
+      "candidateSha256": "a91041fe61a702de69d745fe9c8d7315ec234597966e407dd54da417fefe7194",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational “winter” concept PNG for children ages 8–10\nPrimary request: one unmistakable premium 3D winter-vocabulary emblem, grounded in the source contract’s snow cue\nScene/backdrop: genuinely transparent background, no environment or ground plane\nSubject: exactly one compact evergreen tree with rounded deep-green tiers, one warm-brown trunk, clean white snow caps resting on every tier, and one small connected white snow mound at its base; no other object\nStyle/medium: premium polished rounded 3D children’s animation render, tactile toy-like materials, crisp readable silhouette\nComposition/framing: centered front three-quarter view; complete tree and connected mound fill about 78–82% of the square canvas with a clean 9–10% transparent safe margin\nLighting/mood: soft bright studio lighting, cool, friendly, educational\nContext: a conventional visual cue for the English vocabulary word “winter”, not a claim that every region has snow\nConstraints: exactly one connected tree composition, actual alpha transparency\nAvoid: second tree, snowflakes, loose snowballs, gifts, ornaments, holiday lights, star, text, letters, labels, calendar, months, flowers, autumn leaves, sun, people, animals, logos, watermark, floor, cast shadow, glow, halo, frame, collage, cropped edges",
+      "generatorCallId": "exec-f0893378-0240-4cd8-a7a9-424b4fdcff88"
+    }
+  ],
+  "productionApproved": false,
+  "integrated": false,
+  "deployed": false
+}
