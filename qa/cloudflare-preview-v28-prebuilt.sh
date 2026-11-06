@@ -42,18 +42,26 @@ const report=JSON.parse(readFileSync('qa/results/phase2-fast-bilingual-bulk-appl
 const reg=JSON.parse(readFileSync(root+'content/english/media/media-registry.json'));
 const byId=new Map(reg.entries.map(x=>[x.mediaId,x]));
 assert.equal(sha(readFileSync(root+'content/english/media/media-registry.json')),
- '8ab5dd2c238a96355c604b25be189422c6be45900715d389f7d89e34fa337d85',
+ '1f62cb7bec76fd386fdbaae65d3f7f9f89eb489c8d3f6bdbb3f8f9a6a0a04db8',
  'RELEASE_REGISTRY_DIFFERS_FROM_SUCCESSFUL_VISUAL_PREVIEW');
 assert.equal(byId.size,reg.entries.length,'DUPLICATE_MEDIA_ID');
 assert.equal(report.realContracts,600);
 assert.equal(report.downloadFailures.length,0,'PNG_DOWNLOAD_FAILED');
+const exactNewMedia=new Map([["IMG-V11-2B-F2653D7AC92E1719","twenty-one.png"],["IMG-V11-2B-9E2DFCFD8850D6B3","twenty-two.png"],["IMG-V11-2B-34691F7FF392D134","Letra A - EI.png"],["IMG-V11-2B-B53AD4A3B76BCB34","Letra B - BI.png"],["IMG-V11-2B-5FC56902AD57463A","Letra C - SI.png"],["IMG-V11-2B-5A685792F5F3892E","Letra D - DI.png"],["IMG-V11-2B-500B7CA70EE94EA9","pants.png"],["IMG-V11-2B-37D4A49BBE547EF2","pants.png"],["IMG-V11-2B-DF1ED31F1CA904F3","Two green pillows on the sofa.png"],["IMG-V11-2B-AD8C3930F382C54F","One white plate in the kitchen.png"]]);
+for(const [id,filename] of exactNewMedia){
+ const hit=report.applied.find(x=>x.mediaId===id);
+ assert(hit,'RELEASE_EXACT_ID_NOT_PRESENT:'+id);
+ assert.equal(hit.sourcePath,'Imagens Ilustrativa/'+filename,
+  'RELEASE_EXACT_SEMANTIC_SOURCE_MISMATCH:'+id);
+}
+
 for(const [concept,file] of Object.entries({'23':'twenty-three.png','24':'twenty-four.png','25':'twenty-five.png'})){
  const matches=report.applied.filter(x=>x.concept===concept&&x.sourcePath==='Imagens Ilustrativa/'+file);
  assert.equal(matches.length,1,'NUMERAL_NOT_LINKED_TO_OFFICIAL_SOURCE:'+concept);
 }
-assert.equal(report.appliedMediaIds,259,'RELEASE_MEDIA_COUNT_CHANGED');
-assert.equal(report.actuallyAddedPngs,91,'RELEASE_PNG_SET_CHANGED');
-assert.equal(report.heldCount,153,'RELEASE_BLOCKED_SET_CHANGED');
+assert.equal(report.appliedMediaIds,269,'RELEASE_MEDIA_COUNT_CHANGED');
+assert.equal(report.actuallyAddedPngs,97,'RELEASE_PNG_SET_CHANGED');
+assert.equal(report.heldCount,143,'RELEASE_BLOCKED_SET_CHANGED');
 for(const f of ['changedQuestionJsonFiles','changedGoldMasters','changedAudioFiles','changedRuntimeFiles'])
  assert.equal(report[f],0,'CURRICULUM_OR_RUNTIME_CHANGED:'+f);
 const manifest=new Map();
@@ -70,7 +78,7 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
  const q=JSON.parse(readFileSync(root+p));
  assert.equal(q.items?.length,20,'QUESTION_COUNT:'+p);
 }
-const published=await fetch('https://bbf98e06.duduq-engine-13a.pages.dev/content/english/media/media-registry.json',
+const published=await fetch('https://495c9848.duduq-engine-13a.pages.dev/content/english/media/media-registry.json',
  {signal:AbortSignal.timeout(90000)});
 assert(published.ok,'LIVE_06NOV_REGISTRY_UNAVAILABLE');
 const previous=JSON.parse(await published.text());
@@ -83,7 +91,7 @@ for(const e of previous.entries){
  assert.equal(now.urlOrPath,e.urlOrPath,'PUBLISHED_MEDIA_PATH_REGRESSED:'+e.mediaId);
  preserved++;
 }
-assert(preserved>=256,'CURRENT_256_PUBLISHED_MEDIA_REGRESSION');
+assert(preserved>=259,'CURRENT_259_PUBLISHED_MEDIA_REGRESSION');
 const keyIds=['Y1M01-EMOJI-NIGHT-001','Y1M01-EMOJI-SLEEP-001',
  'IMG-Y1M01-GREETING-GENERIC-001','IMG-Y1M01-FAREWELL-GENERIC-001'];
 const firstModule=keyIds.map(mediaId=>({
@@ -108,4 +116,4 @@ node --check qa/duduq-media-clarity-audit.mjs
 DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/duduq-media-clarity-audit.mjs
 cp -a "$ROOT"/. dist-pages/
 DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/duduq-media-clarity-audit.mjs --production-media-fit
-echo "DUDUQ_RELEASE_ARTIFACT_259_BINDINGS_91_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
+echo "DUDUQ_RELEASE_ARTIFACT_269_BINDINGS_97_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
