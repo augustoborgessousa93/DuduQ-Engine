@@ -1,23 +1,19 @@
 #!/usr/bin/env bash
 # Phase 2 media release: rehydrate exact current production, then integrate
 # only previously QA-reviewed candidates. This file is a RELEASE gate, not QA.
-# The two pinned SHA256 placeholders MUST be replaced with proven QA hashes
-# before initiating a manual Cloudflare Pages deployment.
+# SHA256 fingerprints are pinned to successful full-coverage QA run #42274846580,
+# which checked all 143 source/engine pairs in two viewports (286 cases).
 set -Eeuo pipefail
 ROOT="qa/fast-bilingual-immutable-candidate"
 SOURCE_SHA="db68bc43eafd33e8b4a287604f6f94a1e9d7df02"
-QA_REGISTRY_SHA="__PIN_VERIFIED_REGISTRY_SHA256__"
-QA_MANIFEST_SHA="__PIN_VERIFIED_MANIFEST_SHA256__"
-EXPECTED_NEW_MEDIA_IDS="__PIN_VERIFIED_MEDIA_COUNT__"
-EXPECTED_NEW_PNGS="__PIN_VERIFIED_IMAGE_COUNT__"
-if [[ "${CF_PAGES_BRANCH:-}" == "staging/duduq-phase2-media-reviewed-20261106" ]]; then
-  PREVIEW_ONLY=1
-else
-  PREVIEW_ONLY=0
-  case "$QA_REGISTRY_SHA$QA_MANIFEST_SHA$EXPECTED_NEW_MEDIA_IDS$EXPECTED_NEW_PNGS" in
-    *"__PIN_"*) echo "RELEASE_NOT_PINNED_TO_QA_EVIDENCE" >&2; exit 42;;
-  esac
-fi
+QA_REGISTRY_SHA="66a636ae3944e04c680d631dec32d43716918d6463e6c12d5fea7a6acefc604a"
+QA_MANIFEST_SHA="ba0e46f5432bd976e9b439e5ea3028b139b53f808d8ec20e352658cfb145e28f"
+EXPECTED_NEW_MEDIA_IDS="137"
+EXPECTED_NEW_PNGS="59"
+# Fail closed on any unpinned or accidentally modified QA baseline.
+case "$QA_REGISTRY_SHA$QA_MANIFEST_SHA$EXPECTED_NEW_MEDIA_IDS$EXPECTED_NEW_PNGS" in
+  *"__PIN_"*) echo "RELEASE_NOT_PINNED_TO_QA_EVIDENCE" >&2; exit 42;;
+esac
 mkdir -p "$ROOT" qa/results dist-pages
 TMP="$(mktemp -t duduq-prod-release-XXXXXX.tar.gz)"
 trap 'rm -f "$TMP"' EXIT
@@ -44,15 +40,6 @@ writeFileSync('qa/results/assets-duduq-current-head-tree.json',
 NODE
 DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs
 DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs --apply
-if [[ "$PREVIEW_ONLY" == 1 ]]; then
-  # Staging runs with a coherent self-verified manifest before the final
-  # independent QA hashes are available. The production branch CANNOT bypass
-  # the external pinned hashes.
-  QA_REGISTRY_SHA="$(node -p "JSON.parse(require('fs').readFileSync('qa/results/phase2-fast-bilingual-bulk-applied.json')).registrySHA256After")"
-  QA_MANIFEST_SHA="$(node -p "JSON.parse(require('fs').readFileSync('qa/results/phase2-fast-bilingual-bulk-applied.json')).manifestSHA256After")"
-  EXPECTED_NEW_MEDIA_IDS="$(node -p "JSON.parse(require('fs').readFileSync('qa/results/phase2-fast-bilingual-bulk-applied.json')).appliedMediaIds")"
-  EXPECTED_NEW_PNGS="$(node -p "JSON.parse(require('fs').readFileSync('qa/results/phase2-fast-bilingual-bulk-applied.json')).actuallyAddedPngs")"
-fi
 QA_REGISTRY_SHA="$QA_REGISTRY_SHA" QA_MANIFEST_SHA="$QA_MANIFEST_SHA" \
  EXPECTED_NEW_MEDIA_IDS="$EXPECTED_NEW_MEDIA_IDS" EXPECTED_NEW_PNGS="$EXPECTED_NEW_PNGS" \
  node --input-type=module <<'NODE'
