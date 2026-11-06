@@ -80,7 +80,7 @@ const firstModule=keyIds.map(mediaId=>({
  mediaId,source:report.applied.find(x=>x.mediaId===mediaId)?.sourcePath||null,
  currentPath:byId.get(mediaId)?.urlOrPath||null
 }));
-assert(firstModule.some(x=>x.mediaId==='Y1M01-EMOJI-NIGHT-001'&&x.source?.endsWith('Noite.png')),
+assert(firstModule.some(x=>x.mediaId==='Y1M01-EMOJI-NIGHT-001'&&x.source?.endsWith('boy_noite_night_bedtime_rotina_de_sono.png')),
  'Y1M01_Q003_NIGHT_NOT_RESTORED');
 const result={schema:'DUDUQ_MEDIA_BROAD_VISUAL_REVIEW_V1',
  sourceImages:488,reviewOnly:true,pedagogicalApproved:false,

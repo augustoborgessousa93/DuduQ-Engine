@@ -113,6 +113,7 @@ export const extraAliases={
  'cold':['cold','resfriado','resfriada'],
  'teddy bear':['teddy bear','urso de pelucia','urso de pelúcia'],
  'video game':['video game','videogame'],
+ 'two plus three equals five':['two plus three equals five','2 plus 3 equals 5','2 + 3 = 5','dois mais tres igual a cinco','dois mais três igual a cinco'],
  'night':['night','noite'],
  'ball':['ball','bola'],
  'under':['under','embaixo','debaixo'],
