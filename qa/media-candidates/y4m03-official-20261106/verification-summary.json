@@ -128,14 +128,14 @@
   },
   "reviewPersistence": {
     "candidateBundleCommit": "1fcd4291fe7a1bab784174376f638f6ccb857d90",
-    "candidateCheckpointCommit": null,
+    "candidateCheckpointCommit": "908ff84bfe8bdebf4a47d249e07e51f6fa952f73",
     "reviewBranch": "automation/duduq-y4m03-generation-20261106",
-    "remotePushStatus": "READY_TO_PUSH",
+    "remotePushStatus": "PUSHED",
     "remotePushReason": null
   },
   "releaseApproved": false,
   "productionApproved": false,
   "integrated": false,
   "deployed": false,
-  "nextAction": "PUSH_SAFE_CANDIDATE_CHECKPOINT_THEN_SCHEDULER_SELECT_OTHER_LANE"
+  "nextAction": "SCHEDULER_SELECT_OTHER_LANE"
 }
