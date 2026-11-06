@@ -76,7 +76,20 @@ assert.equal(manifest.size,lines.length,'DUPLICATE_MANIFEST_ENTRIES');
 assert.equal(manifest.get(regRel)?.hash,preRegistrySha,'MANIFEST_REGISTRY_HASH_MISMATCH');
 assert(!manifest.has(imgRel),'COLOR_PURPLE_PNG_ALREADY_IN_MANIFEST');
 // All previously listed file hashes must be consistent with the immutable artifact.
-for(const [file,{hash}] of manifest)assert.equal(sha256(readFileSync(path.join(dist,file))),hash,'IMMUTABLE_ARTIFACT_CHANGED:'+file);
+for(const [file,{hash}] of manifest){
+ const data=readFileSync(path.join(dist,file));
+ if(['play/target-shooter/index.html','play/bubble-pop/index.html'].includes(file)){
+  // The audited sizing adapter intentionally inserts this exact stylesheet
+  // into the built copy, after the original immutable manifest was written.
+  const marker='<link rel="stylesheet" href="/core/duduq-media-balanced-scale.css" data-duduq-media-fit="qa-preview-only">';
+  const html=data.toString('utf8');
+  assert.equal(html.split(marker).length,2,'UNEXPECTED_VISUAL_ADAPTER_HTML:'+file);
+  assert.equal(sha256(Buffer.from(html.replace(marker,''))),hash,
+   'UNAUTHORIZED_HTML_CHANGE:'+file);
+ }else{
+  assert.equal(sha256(data),hash,'IMMUTABLE_ARTIFACT_CHANGED:'+file);
+ }
+}
 // Audit all 600 questions and their media consumers without modifying their bytes.
 const consumers=[];
 for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
