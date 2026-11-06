@@ -202,7 +202,7 @@ for(let i=0;i<manifestLines.length;i++){
  assert(/^[0-9a-f]{64}$/.test(h)&&!manifest.has(p),'BAD_MANIFEST_HASH_OR_DUPLICATE');
  manifest.set(p,{sha:h,index:i});
 }
-assert.equal(manifestLines.length,2891,'NOT_CURRENT_ORANGE_PRODUCTION');
+assert.equal(manifestLines.length,2899,'NOT_RECONCILED_04NOV_PRODUCTION');
 assert.equal(manifest.get(regRel)?.sha,hash(regBytes),'REGISTRY_BASE_SHA_MISMATCH');
 
 const usages=new Map(),questionHashes=new Map(),allQ=new Set();
@@ -232,7 +232,7 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
     const scopedLabels=inChoice?[...new Set([...inheritedLabels,...labels])]:labels;
     for(const mediaId of ids){
      if(!usages.has(mediaId))usages.set(mediaId,[]);
-     usages.get(mediaId).push({questionId:id,semanticTarget:norm(node.semanticTarget),contextLabels:scopedLabels});
+     usages.get(mediaId).push({questionId:id,mechanicId:question.mechanicId,semanticTarget:norm(node.semanticTarget),contextLabels:scopedLabels});
     }
     for(const [key,child] of Object.entries(node))if(child&&typeof child==='object'){
      const childChoice=inChoice||choiceKey.test(key);
@@ -460,6 +460,16 @@ for(const [id,links] of usages){
  if(old.semanticConflict===true&&!isVettedBlack&&!vetted&&graphConsensus?.concept!==concept){
   hold(id,'CONFLICTING_AUDITED_SEMANTICS',concept);continue;
  }
+ // The previous real Chromium run (#42267477400) reported 48 visibility failures
+ // in animated Bubble Pop, plus 4 Q016 session-guard failures. Do not
+ // release media used by these mechanics merely because an image loads.
+ // Shared IDs are held in their ENTIRETY when any consumer is unverified.
+ if(links.some(x=>x.mechanicId==='bubble-pop')){
+  hold(id,'BUBBLE_POP_DYNAMIC_VISIBILITY_QA_PENDING',concept);continue;
+ }
+ if(links.some(x=>x.questionId==='Y1M01-Q016'&&x.mechanicId==='target-shooter')){
+  hold(id,'Y1M01_SESSION_ITEM_MISMATCH_QA_PENDING',concept);continue;
+ }
  // Strong inference for legacy missing semanticTarget: audited concept and
  // queue must agree across ALL referenced questions. This isn't a human signoff.
  selected.push({mediaId:id,concept,sourcePath:asset.path,sourceGitBlob:asset.sha,
@@ -503,7 +513,7 @@ const report={schemaVersion:'DUDUQ_PHASE2_3DAY_BILINGUAL_BULK_V1',
  imagesInSource:inventory.length,distinctSourceBlobs:new Set(inventory.map(x=>x.sha)).size,
  sourceExactPlainConcepts:sourceCandidates.size,
  curatedConcepts:pinByConcept.size,sourceResolvedConcepts:sourceSelection.size,
- sourceAmbiguity:ambiguousSources.slice(0,65),realContracts:600,baseManifestFiles:2891,
+ sourceAmbiguity:ambiguousSources.slice(0,65),realContracts:600,baseManifestFiles:2899,
  registrySHA256Before:hash(regBytes),manifestSHA256Before:hash(manBytes),
  provisionalSvgCandidates:held.length+selected.length,
  matchedMediaIds:selected.length,matchedQuestionCount:affected.length,

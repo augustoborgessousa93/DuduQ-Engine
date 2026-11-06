@@ -33,7 +33,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Restore immutable 03-Nov QA base (NOT certified as 04-Nov production)
+      - name: Restore immutable 03-Nov package to isolated QA root
         shell: bash
         run: |
           set -Eeuo pipefail
@@ -46,6 +46,12 @@ jobs:
             /tmp/fast-bilingual/current-production.tar.gz | sha256sum -c
           tar -xzf /tmp/fast-bilingual/current-production.tar.gz -C qa/fast-bilingual-immutable-candidate
           echo IMMUTABLE_03NOV_QA_BASE_VERIFIED_04NOV_PARITY_UNCERTIFIED
+      - name: Reconcile against exact 04-Nov deployed production (39 pins, 8 PNGs, 600 contracts)
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          node --check qa/reconcile-duduq-live-04nov.mjs
+          DUDUQ_QA_ONLY=1 node qa/reconcile-duduq-live-04nov.mjs
       - name: Index ALL original PNG filenames at immutable Assets-DuduQ HEAD (no full clone)
         shell: bash
         run: |
@@ -194,6 +200,7 @@ jobs:
         with:
           name: duduq-fast-bilingual-lightweight-semantic-holds
           path: |
+            qa/results/phase2-reconciled-live-production-04nov.json
             qa/results/phase2-source-delta-20261106.json
             qa/results/phase2-fast-bilingual-bulk-plan.json
             qa/results/phase2-fast-bilingual-bulk-applied.json
@@ -214,6 +221,7 @@ jobs:
         with:
           name: duduq-fast-bilingual-600-question-bulk-qa
           path: |
+            qa/results/phase2-reconciled-live-production-04nov.json
             qa/results/phase2-source-delta-20261106.json
             qa/results/phase2-fast-bilingual-bulk-plan.json
             qa/results/phase2-fast-bilingual-bulk-applied.json
