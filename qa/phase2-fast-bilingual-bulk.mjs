@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * DUDUQ FAST BULK: 417 original bilingual PNGs -> real 600-question graph.
+ * DUDUQ FAST BULK: 488 original bilingual PNGs -> real 600-question graph.
  * Source: GitHub Assets-DuduQ immutable Git tree SHA, never AI-generated.
  *
  * PLAN (read-only): DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs
@@ -22,7 +22,7 @@ const root=path.resolve(process.env.DUDUQ_QA_DIST||'qa/fast-bilingual-immutable-
 assert(root.startsWith(path.resolve('qa')+path.sep),'DISPOSABLE_QA_ROOT_ONLY');
 assert(root.endsWith('qa/fast-bilingual-immutable-candidate'),'CANDIDATE_ROOT_NOT_APPROVED');
 const tree=JSON.parse(await readFile('qa/results/assets-duduq-current-head-tree.json','utf8'));
-const sourceSHA='a62c07c075a4a744f81dee2eea3a6b93108f9d08';
+const sourceSHA='db68bc43eafd33e8b4a287604f6f94a1e9d7df02';
 assert.equal(tree.sha,sourceSHA,'SOURCE_COMMIT_HEAD_CHANGED');
 assert.equal(tree.truncated,false,'INCOMPLETE_GITHUB_TREE');
 const inventory=tree.tree.filter(x=>x.type==='blob'&&

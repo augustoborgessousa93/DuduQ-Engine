@@ -1,4 +1,4 @@
-name: DUDUQ - BULK bilingual 417 originals x 600 questions (one-pass QA only)
+name: DUDUQ - BULK bilingual 488 originals x 600 questions (one-pass QA only)
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Restore ONLY current live release, verify known exact 2891-file tar SHA
+      - name: Restore immutable 03-Nov QA base (NOT certified as 04-Nov production)
         shell: bash
         run: |
           set -Eeuo pipefail
@@ -45,18 +45,18 @@ jobs:
             cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800 \
             /tmp/fast-bilingual/current-production.tar.gz | sha256sum -c
           tar -xzf /tmp/fast-bilingual/current-production.tar.gz -C qa/fast-bilingual-immutable-candidate
-          echo CURRENT_REAL_PRODUCTION_BASELINE_HASH_VERIFIED
+          echo IMMUTABLE_03NOV_QA_BASE_VERIFIED_04NOV_PARITY_UNCERTIFIED
       - name: Index ALL original PNG filenames at immutable Assets-DuduQ HEAD (no full clone)
         shell: bash
         run: |
           set -Eeuo pipefail
-          ASSET_SHA=a62c07c075a4a744f81dee2eea3a6b93108f9d08
+          ASSET_SHA=db68bc43eafd33e8b4a287604f6f94a1e9d7df02
           gh api "repos/augustoborgessousa93/Assets-DuduQ/git/trees/$ASSET_SHA?recursive=1" \
             > /tmp/fast-bilingual/assets-tree.json
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
           import {readFileSync,writeFileSync} from 'node:fs';
-          const sha='a62c07c075a4a744f81dee2eea3a6b93108f9d08';
+          const sha='db68bc43eafd33e8b4a287604f6f94a1e9d7df02';
           const tree=JSON.parse(readFileSync('/tmp/fast-bilingual/assets-tree.json'));
           assert.equal(tree.truncated,false);
           const pngs=tree.tree.filter(x=>x.type==='blob'&&x.path.startsWith('Imagens Ilustrativa/')&&/\.png$/i.test(x.path));
@@ -64,6 +64,34 @@ jobs:
           writeFileSync('qa/results/assets-duduq-current-head-tree.json',
            JSON.stringify({sha,tree:tree.tree,truncated:tree.truncated},null,2)+'\n');
           console.log('SOURCE_PNG_ENTRIES='+pngs.length+' UNIQUE_BLOBS='+new Set(pngs.map(x=>x.sha)).size);
+          NODE
+      - name: Audit delta from old 417 PNGs to new 488 PNGs, by Git blob
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          gh api "repos/augustoborgessousa93/Assets-DuduQ/git/trees/a62c07c075a4a744f81dee2eea3a6b93108f9d08?recursive=1" > /tmp/fast-bilingual/old-assets-tree.json
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,writeFileSync} from 'node:fs';
+          const earlier=JSON.parse(readFileSync('/tmp/fast-bilingual/old-assets-tree.json'));
+          const current=JSON.parse(readFileSync('qa/results/assets-duduq-current-head-tree.json'));
+          assert.equal(earlier.truncated,false);
+          assert.equal(current.sha,'db68bc43eafd33e8b4a287604f6f94a1e9d7df02');
+          const isP=x=>x.type==='blob'&&x.path.startsWith('Imagens Ilustrativa/')&&/\.png$/i.test(x.path);
+          const prior=new Map(earlier.tree.filter(isP).map(x=>[x.path,x.sha]));
+          const now=current.tree.filter(isP);
+          const added=now.filter(x=>!prior.has(x.path));
+          const modified=now.filter(x=>prior.has(x.path)&&prior.get(x.path)!==x.sha);
+          assert.equal(prior.size,417);
+          assert.equal(now.length,488);
+          assert.equal(added.length,71);
+          assert.equal(modified.length,0);
+          const summary={oldSourceCommit:'a62c07c075a4a744f81dee2eea3a6b93108f9d08',newSourceCommit:current.sha,oldPngs:417,
+            newPngs:488,addedPngs:71,modifiedExistingPngs:0,
+            additions:added.map(x=>({sourcePath:x.path,sourceGitBlob:x.sha,size:x.size})),
+            qaOnly:true,pedagogicalApproval:false,productionDeployed:false};
+          writeFileSync('qa/results/phase2-source-delta-20261106.json',JSON.stringify(summary,null,2)+'\n');
+          console.log('NEW_IMMUTABLE_SOURCE_DELTA='+JSON.stringify({newPngs:488,added:71,modified:0}));
           NODE
       - name: ONE PASS semantic crosswalk and automatic SAFE bulk reuse in disposable QA
         shell: bash
@@ -166,6 +194,7 @@ jobs:
         with:
           name: duduq-fast-bilingual-lightweight-semantic-holds
           path: |
+            qa/results/phase2-source-delta-20261106.json
             qa/results/phase2-fast-bilingual-bulk-plan.json
             qa/results/phase2-fast-bilingual-bulk-applied.json
             qa/results/phase2-fast-bulk-verification.json
@@ -185,6 +214,7 @@ jobs:
         with:
           name: duduq-fast-bilingual-600-question-bulk-qa
           path: |
+            qa/results/phase2-source-delta-20261106.json
             qa/results/phase2-fast-bilingual-bulk-plan.json
             qa/results/phase2-fast-bilingual-bulk-applied.json
             qa/results/phase2-fast-bulk-verification.json
