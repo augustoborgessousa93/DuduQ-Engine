@@ -473,7 +473,7 @@ const receipts={
 const priorCheckpointPath=path.join(batchDir,'checkpoint.json');
 const priorCheckpoint=await exists(priorCheckpointPath)?JSON.parse(await readFile(priorCheckpointPath,'utf8')):null;
 const checkpoint={
-  schemaVersion:'DUDUQ_TWO_LANE_GENERATION_CHECKPOINT_V1',createdAt,updatedAt:createdAt,
+  schemaVersion:'DUDUQ_TWO_LANE_GENERATION_CHECKPOINT_V1',createdAt,updatedAt:priorCheckpoint?.updatedAt??createdAt,
   status:'Y4M02_GENERATION_CANDIDATES_COMPLETE',projectStatus:'INCOMPLETE',lane:'generation',moduleId,
   sourceAudit:{questions:20,pendingMediaIds:sourceMediaIds.length,visualUsages:usages.length,semanticConcepts:prepared.length,
     allSemanticTargets:allSemanticTargets.length,nonVisualOnlySemanticTargets:nonVisualOnly,
