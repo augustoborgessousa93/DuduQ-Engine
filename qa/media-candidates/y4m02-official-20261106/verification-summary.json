@@ -56,7 +56,7 @@
     "candidateIsOfficialIntegratedMedia": false
   },
   "reviewPersistence": {
-    "candidateBundleCommit": null,
+    "candidateBundleCommit": "90eb4bc89213be0cf692fbdd51fc11dc01fdf411",
     "candidateCheckpointCommit": null,
     "reviewBranch": "automation/duduq-y4m02-generation-20261106",
     "remotePushStatus": "NOT_ATTEMPTED",
