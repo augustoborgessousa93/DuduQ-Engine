@@ -88,7 +88,12 @@ for(const p of pngs){
  assert(b.readUInt32BE(16)>=512&&b.readUInt32BE(20)>=512,'PNG_TOO_SMALL:'+p);
  imgs.set(p,b);
 }
-const publishedManifestBytes=await getPublicFile(man,true);
+let publishedManifestBytes=await getPublicFile(man,true);
+// Some Pages setups rewrite hidden-file URLs to index.html with HTTP 200.
+// Treat that as unavailable, not as a live manifest or successful byte proof.
+if(publishedManifestBytes&&!/^content\/|^\./.test(publishedManifestBytes.toString('utf8',0,90).trimStart())){
+ publishedManifestBytes=null;
+}
 let newManifestBytes,mode;
 if(publishedManifestBytes){
  const live=lines(publishedManifestBytes);
