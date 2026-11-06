@@ -139,5 +139,8 @@ console.log('DUDUQ_PURPLE_PRODUCTION_QA_ARTIFACT_VERIFIED=11_COLOR_MEDIA');
 NODE
 node --check qa/phase2-gray-memory-fast-feedback.mjs
 DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/phase2-gray-memory-fast-feedback.mjs --preview
+node --input-type=module --check < dist-pages/play/memory-quest/memory-quest.js
+grep -q 'DUDUQ_MQ_FAST_FEEDBACK_20261106' dist-pages/play/memory-quest/memory-quest.js
+echo 'MEMORY_QUEST_RUNTIME_JS_SYNTAX_PASS'
 echo "DUDUQ_RELEASE_ARTIFACT_269_BINDINGS_97_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
 echo "DUDUQ_GRAY_MEMORY_PREVIEW_ONLY"
