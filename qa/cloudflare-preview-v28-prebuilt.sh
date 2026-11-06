@@ -2,7 +2,7 @@
 # DUDUQ official media release, exact match to verified 06-Nov staging build.
 # Images remain flagged PEDAGOGICAL_QA_PENDING; no answer-key/Gold Master edits.
 set -Eeuo pipefail
-if [[ "$CF_PAGES_BRANCH" != "release/duduq-phase2-orange-fruit-20261103" ]]; then
+if [[ "$CF_PAGES_BRANCH" != "staging/duduq-grey-memory-feedback-20261106" ]]; then
  echo "DUDUQ_PRODUCTION_RELEASE_BRANCH_ONLY" >&2; exit 43
 fi
 export DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1
@@ -140,4 +140,7 @@ assert(manifest.includes(imgRel+' '+'9ff04eb4f5f169a5b0737c4b607a287f8cb0163381a
 assert(!existsSync(base+'media-review/purple.html'),'REVIEW_PAGE_MUST_NOT_BE_IN_PRODUCTION');
 console.log('DUDUQ_PURPLE_PRODUCTION_QA_ARTIFACT_VERIFIED=11_COLOR_MEDIA');
 NODE
+node --check qa/phase2-gray-memory-fast-feedback.mjs
+DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/phase2-gray-memory-fast-feedback.mjs --preview
 echo "DUDUQ_RELEASE_ARTIFACT_269_BINDINGS_97_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
+echo "DUDUQ_GRAY_MEMORY_PREVIEW_ONLY"
