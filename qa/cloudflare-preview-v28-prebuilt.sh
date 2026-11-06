@@ -1,142 +1,98 @@
 #!/usr/bin/env bash
-# Phase 2 media release: rehydrate exact current production, then integrate
-# only previously QA-reviewed candidates. This file is a RELEASE gate, not QA.
-# SHA256 fingerprints are pinned to successful full-coverage QA run #42274846580,
-# which checked all 143 source/engine pairs in two viewports (286 cases).
+# REVIEW ONLY; never publish this artifact as production.
 set -Eeuo pipefail
+if [[ "$CF_PAGES_BRANCH" != "staging/duduq-phase2-visual-review-20261106" ]]; then
+ echo "VISUAL_REVIEW_BRANCH_ONLY" >&2; exit 43
+fi
+export DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1
 ROOT="qa/fast-bilingual-immutable-candidate"
-SOURCE_SHA="db68bc43eafd33e8b4a287604f6f94a1e9d7df02"
-QA_REGISTRY_SHA="66a636ae3944e04c680d631dec32d43716918d6463e6c12d5fea7a6acefc604a"
-QA_MANIFEST_SHA="ba0e46f5432bd976e9b439e5ea3028b139b53f808d8ec20e352658cfb145e28f"
-EXPECTED_NEW_MEDIA_IDS="137"
-EXPECTED_NEW_PNGS="59"
-# Fail closed on any unpinned or accidentally modified QA baseline.
-case "$QA_REGISTRY_SHA$QA_MANIFEST_SHA$EXPECTED_NEW_MEDIA_IDS$EXPECTED_NEW_PNGS" in
-  *"__PIN_"*) echo "RELEASE_NOT_PINNED_TO_QA_EVIDENCE" >&2; exit 42;;
-esac
 mkdir -p "$ROOT" qa/results dist-pages
-TMP="$(mktemp -t duduq-prod-release-XXXXXX.tar.gz)"
-trap 'rm -f "$TMP"' EXIT
-curl -fLSs --retry 3 --retry-delay 2 --connect-timeout 20 --max-time 360 \
- "https://github.com/augustoborgessousa93/DuduQ-Engine/releases/download/duduq-phase2-orange-fruit-color-corrected-20261103/duduq-phase2-orange-fruit-color-corrected.tar.gz" -o "$TMP"
-printf '%s  %s\n' \
- cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800 "$TMP" | sha256sum -c
-tar -xzf "$TMP" -C "$ROOT"
-DUDUQ_QA_ONLY=1 node qa/reconcile-duduq-live-04nov.mjs
-cp "$ROOT/.duduq-pages-manifest" qa/results/phase2-published-base-manifest.txt
-curl -fLSs --retry 3 --retry-delay 2 --connect-timeout 20 --max-time 90 \
+TAR="$(mktemp -t duduq-review-XXXXXXXX.tar.gz)"
+trap 'rm -f "$TAR"' EXIT
+curl -fLSs --retry 3 --retry-delay 2 --max-time 360 \
+ "https://github.com/augustoborgessousa93/DuduQ-Engine/releases/download/duduq-phase2-orange-fruit-color-corrected-20261103/duduq-phase2-orange-fruit-color-corrected.tar.gz" -o "$TAR"
+echo "cf049f8c7a5f3d02696f7997b6dd1e31ec7b28942f6c77b96af656e72b5a1800  $TAR" | sha256sum -c
+tar -xzf "$TAR" -C "$ROOT"
+node qa/reconcile-duduq-live-04nov.mjs
+curl -fLSs --retry 3 --retry-delay 3 --max-time 120 \
  -H 'Accept: application/vnd.github+json' \
- "https://api.github.com/repos/augustoborgessousa93/Assets-DuduQ/git/trees/$SOURCE_SHA?recursive=1" \
- -o qa/results/assets-duduq-current-head-tree.json.tmp
+ "https://api.github.com/repos/augustoborgessousa93/Assets-DuduQ/git/trees/db68bc43eafd33e8b4a287604f6f94a1e9d7df02?recursive=1" \
+ -o qa/results/visual-review-source-tree.json
+node --input-type=module <<'NODE'
+import {readFileSync,writeFileSync} from 'node:fs';
+import assert from 'node:assert/strict';
+const tree=JSON.parse(readFileSync('qa/results/visual-review-source-tree.json'));
+assert.equal(tree.sha,'db68bc43eafd33e8b4a287604f6f94a1e9d7df02');
+assert.equal(tree.truncated,false);
+const pngs=tree.tree.filter(x=>x.type==='blob'&&x.path.startsWith('Imagens Ilustrativa/')&&/\.png$/i.test(x.path));
+assert.equal(pngs.length,488);
+writeFileSync('qa/results/assets-duduq-current-head-tree.json',
+ JSON.stringify({sha:tree.sha,tree:tree.tree,truncated:tree.truncated},null,2)+'\n');
+NODE
+node qa/phase2-fast-bilingual-bulk.mjs
+node qa/phase2-fast-bilingual-bulk.mjs --apply
 node --input-type=module <<'NODE'
 import assert from 'node:assert/strict';
-import {readFileSync,writeFileSync} from 'node:fs';
-const t=JSON.parse(readFileSync('qa/results/assets-duduq-current-head-tree.json.tmp'));
-assert.equal(t.sha,'db68bc43eafd33e8b4a287604f6f94a1e9d7df02','SOURCE_SNAPSHOT_MOVED');
-assert.equal(t.truncated,false,'SOURCE_INDEX_TRUNCATED');
-const source=t.tree.filter(x=>x.type==='blob'&&x.path.startsWith('Imagens Ilustrativa/')&&/\.png$/i.test(x.path));
-assert.equal(source.length,488,'SOURCE_IMAGE_COUNT_CHANGED');
-writeFileSync('qa/results/assets-duduq-current-head-tree.json',
- JSON.stringify({sha:t.sha,tree:t.tree,truncated:t.truncated},null,2)+'\n');
-NODE
-DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs
-DUDUQ_QA_ONLY=1 node qa/phase2-fast-bilingual-bulk.mjs --apply
-QA_REGISTRY_SHA="$QA_REGISTRY_SHA" QA_MANIFEST_SHA="$QA_MANIFEST_SHA" \
- EXPECTED_NEW_MEDIA_IDS="$EXPECTED_NEW_MEDIA_IDS" EXPECTED_NEW_PNGS="$EXPECTED_NEW_PNGS" \
- node --input-type=module <<'NODE'
-import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
+import {readFileSync,writeFileSync} from 'node:fs';
 const root='qa/fast-bilingual-immutable-candidate/';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const report=JSON.parse(readFileSync('qa/results/phase2-fast-bilingual-bulk-applied.json'));
-const baseline=JSON.parse(readFileSync('qa/results/phase2-reconciled-live-production-04nov.json'));
-assert.equal(baseline.result,'PUBLISHED_MANIFEST_BYTES_VERIFIED','PRODUCTION_BYTES_NOT_PROVEN');
-assert.equal(baseline.changedMediaIds,39,'PUBLISHED_LINKS_NOT_PRESERVED');
-assert.equal(report.sourceCommit,'db68bc43eafd33e8b4a287604f6f94a1e9d7df02');
-assert.equal(report.registrySHA256Before,baseline.productionRegistrySHA256,
- 'OLD_PUBLISHED_REGISTRY_NOT_PRESERVED');
-assert.equal(report.manifestSHA256Before,baseline.publishedManifestSHA256,
- 'OLD_PUBLISHED_MANIFEST_NOT_PRESERVED');
-assert.equal(report.realContracts,600,'CONTRACTS_NOT_600');
-assert.equal(report.appliedMediaIds,Number(process.env.EXPECTED_NEW_MEDIA_IDS),'QA_BINDINGS_COUNT_CHANGED');
-assert.equal(report.actuallyAddedPngs,Number(process.env.EXPECTED_NEW_PNGS),'QA_IMAGE_COUNT_CHANGED');
-assert.equal(report.downloadFailures.length,0,'SOURCE_DOWNLOAD_FAILURES');
-for(const k of ['changedQuestionJsonFiles','changedGoldMasters','changedAudioFiles','changedRuntimeFiles'])assert.equal(report[k],0,k);
-assert.equal(report.productionDeployed,false,'PROCESS_MUST_HAVE_NO_SIDE_EFFECT_DEPLOY');
-assert.equal(report.releaseApproved,false,'HUMAN_PEDAGOGICAL_SIGNOFF_NOT_CLAIMED');
-const registryBytes=readFileSync(root+'content/english/media/media-registry.json');
-const manifestBytes=readFileSync(root+'.duduq-pages-manifest');
-assert.equal(sha(registryBytes),process.env.QA_REGISTRY_SHA,'REGISTRY_DIFFERS_FROM_GREEN_QA');
-// Promise workers can append new PNG manifest lines in different orders.
-// Compare path->hash mapping and pin approved registry sha, not line ordering.
-assert.equal(sha(manifestBytes),report.manifestSHA256After,
- 'MANIFEST_BYTES_CHANGED_AFTER_APPLICATION');
-const reg=JSON.parse(registryBytes),byId=new Map(reg.entries.map(x=>[x.mediaId,x]));
+const reg=JSON.parse(readFileSync(root+'content/english/media/media-registry.json'));
+const byId=new Map(reg.entries.map(x=>[x.mediaId,x]));
 assert.equal(byId.size,reg.entries.length,'DUPLICATE_MEDIA_ID');
-const fruit=byId.get('IMG-ASSETS-DUDUQ-ORANGE-FRUIT-PHASE2');
-const color=byId.get('IMG-Y1M03-Q001-ORANGE');
-assert(fruit&&color&&fruit.urlOrPath!==color.urlOrPath,'ORANGE_FRUIT_COLOR_COLLAPSE');
-let count=0; const files=new Map();
-for(const line of manifestBytes.toString('utf8').trimEnd().split(/\r?\n/)){
- const i=line.lastIndexOf(' ');assert(i>0,'MALFORMED_MANIFEST');
- const p=line.slice(0,i),expected=line.slice(i+1);
- assert(!p.startsWith('/')&&!p.includes('..')&&!files.has(p),'INVALID_PATH');
- assert.equal(sha(readFileSync(root+p)),expected,'MISMATCH:'+p);
- files.set(p,expected);count++;
+assert.equal(report.realContracts,600);
+assert.equal(report.downloadFailures.length,0,'PNG_DOWNLOAD_FAILED');
+assert(report.appliedMediaIds>=137,'REVIEW_LOST_PUBLISHED_COVERAGE');
+for(const f of ['changedQuestionJsonFiles','changedGoldMasters','changedAudioFiles','changedRuntimeFiles'])
+ assert.equal(report[f],0,'CURRICULUM_OR_RUNTIME_CHANGED:'+f);
+const manifest=new Map();
+for(const s of readFileSync(root+'.duduq-pages-manifest','utf8').trimEnd().split(/\r?\n/)){
+ const i=s.lastIndexOf(' ');assert(i>0);
+ const p=s.slice(0,i),h=s.slice(i+1);
+ assert(/^[a-f0-9]{64}$/.test(h)&&!p.startsWith('/')&&!p.includes('..')&&!manifest.has(p));
+ assert.equal(sha(readFileSync(root+p)),h,'HASH_CHANGED:'+p);
+ manifest.set(p,h);
 }
-assert.equal(count,2899+Number(process.env.EXPECTED_NEW_PNGS),'FILE_COUNT_CHANGED');
-
-const baseBytes=readFileSync('qa/results/phase2-published-base-manifest.txt');
-assert.equal(sha(baseBytes),baseline.publishedManifestSHA256,'BASE_MANIFEST_BYTES_NOT_PINNED');
-const oldMap=new Map();
-for(const row of baseBytes.toString('utf8').trimEnd().split(/\r?\n/)){
- const i=row.lastIndexOf(' ');assert(i>0,'BASE_ROW_BAD');
- const key=row.slice(0,i),digest=row.slice(i+1);
- assert(!oldMap.has(key),'BASE_DUPLICATE');oldMap.set(key,digest);
+assert.equal(manifest.size,2899+report.actuallyAddedPngs,'FILE_COUNT_INVALID');
+for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
+ const p='content/english/year-'+y+'/module-'+String(m).padStart(2,'0')+'/questions.json';
+ const q=JSON.parse(readFileSync(root+p));
+ assert.equal(q.items?.length,20,'QUESTION_COUNT:'+p);
 }
-assert.equal(oldMap.size,2899,'BASE_MANIFEST_COUNT_MISMATCH');
-for(const [key,h] of oldMap){
- assert(files.has(key),'PUBLISHED_PATH_REMOVED:'+key);
- if(key==='content/english/media/media-registry.json')
-  assert.equal(files.get(key),process.env.QA_REGISTRY_SHA,'REGISTRY_SHA_MANIFEST_CONFLICT');
- else assert.equal(files.get(key),h,'PUBLISHED_FILE_MUTATED:'+key);
+const published=await fetch('https://2be243d0.duduq-engine-13a.pages.dev/content/english/media/media-registry.json',
+ {signal:AbortSignal.timeout(90000)});
+assert(published.ok,'LIVE_06NOV_REGISTRY_UNAVAILABLE');
+const previous=JSON.parse(await published.text());
+let preserved=0;
+for(const e of previous.entries){
+ if(e.provenance?.sourceCommit!=='db68bc43eafd33e8b4a287604f6f94a1e9d7df02')continue;
+ const now=byId.get(e.mediaId);
+ assert(now,'PREVIOUS_MEDIA_MISSING:'+e.mediaId);
+ assert.equal(now.sha256,e.sha256,'PUBLISHED_MEDIA_BYTES_REGRESSED:'+e.mediaId);
+ assert.equal(now.urlOrPath,e.urlOrPath,'PUBLISHED_MEDIA_PATH_REGRESSED:'+e.mediaId);
+ preserved++;
 }
-const newPaths=[...files.keys()].filter(p=>!oldMap.has(p));
-assert.equal(newPaths.length,Number(process.env.EXPECTED_NEW_PNGS),'UNEXPECTED_FILE_COUNT');
-const expectedNew=new Map();
-for(const x of report.applied){
- const e=byId.get(x.mediaId);assert(e,'MISSING_MEDIA:'+x.mediaId);
- if(!oldMap.has(e.urlOrPath)){
-  const prior=expectedNew.get(e.urlOrPath);
-  if(prior)assert.equal(prior,e.sha256,'DUPLICATE_ASSET_DIFFERENT_HASH');
-  expectedNew.set(e.urlOrPath,e.sha256);
- }
-}
-assert.equal(expectedNew.size,Number(process.env.EXPECTED_NEW_PNGS),'NEW_IMAGE_SET_CHANGED');
-for(const p of newPaths){
- assert(/^content\/english\/assets\/images\/assets-duduq\/fast-[0-9a-f-]+\.png$/.test(p),
-  'NEW_NON_PNG:'+p);
- assert.equal(files.get(p),expectedNew.get(p),'NEW_ASSET_NOT_PINNED_BY_REGISTRY:'+p);
-}
-
-for(let year=1;year<=5;year++)for(let module=1;module<=6;module++){
- const path='content/english/year-'+year+'/module-'+String(module).padStart(2,'0')+'/questions.json';
- const data=JSON.parse(readFileSync(root+path));
- assert.equal(data.items.length,20,'NOT_20_ITEMS:'+path);
-}
-for(const m of report.applied){
- const v=byId.get(m.mediaId);assert(v,'MISSING_MEDIA:'+m.mediaId);
- assert.equal(v.provenance?.sourceGitBlob,m.sourceGitBlob,'WRONG_SOURCE:'+m.mediaId);
- assert.equal(v.sha256,files.get(v.urlOrPath),'WRONG_PNG_HASH:'+m.mediaId);
- assert.equal(v.humanResolutionStatus,'PEDAGOGICAL_QA_PENDING',
- 'NO_FALSE_PEDAGOGICAL_APPROVAL');
-}
-console.log('RELEASE_BUILD_MANIFEST_MAP_IDENTICAL_TO_GREEN_QA='+JSON.stringify({
- newMedia:report.appliedMediaIds,newPngs:report.actuallyAddedPngs,
- allStaticFiles:count,contracts:600,baselineLinksPreserved:39,
- runtimeChanged:false,productionActionYet:false
+assert(preserved>=137,'PUBLISHED_MEDIA_BASELINE_NOT_PRESERVED');
+const keyIds=['Y1M01-EMOJI-NIGHT-001','Y1M01-EMOJI-SLEEP-001',
+ 'IMG-Y1M01-GREETING-GENERIC-001','IMG-Y1M01-FAREWELL-GENERIC-001'];
+const firstModule=keyIds.map(mediaId=>({
+ mediaId,source:report.applied.find(x=>x.mediaId===mediaId)?.sourcePath||null,
+ currentPath:byId.get(mediaId)?.urlOrPath||null
 }));
+assert(firstModule.some(x=>x.mediaId==='Y1M01-EMOJI-NIGHT-001'&&x.source?.endsWith('Noite.png')),
+ 'Y1M01_Q003_NIGHT_NOT_RESTORED');
+const result={schema:'DUDUQ_MEDIA_BROAD_VISUAL_REVIEW_V1',
+ sourceImages:488,reviewOnly:true,pedagogicalApproved:false,
+ matchedMediaIds:report.appliedMediaIds,affectedQuestions:report.appliedQuestionIds.length,
+ addedPngs:report.actuallyAddedPngs,held:report.heldCount,
+ publishedMediaPreserved:preserved,contracts:600,
+ firstModule,unresolved:report.exceptions,productionDeployed:false};
+writeFileSync('qa/results/visual-review-outcome.json',JSON.stringify(result,null,2)+'\n');
+console.log('VISUAL_REVIEW_PREVIEW_READY='+JSON.stringify({
+ media:result.matchedMediaIds,questions:result.affectedQuestions,
+ addedPngs:result.addedPngs,holds:result.held,
+ preservedLinks:preserved,module1:firstModule,approved:false}));
 NODE
 cp -a "$ROOT"/. dist-pages/
-echo "PINNED_QA_ARTIFACT_READY_FOR_PAGES_UPLOAD"
+echo "VISUAL_REVIEW_BUILD_NOT_PRODUCTION_APPROVAL"
