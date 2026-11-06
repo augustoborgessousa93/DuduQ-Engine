@@ -286,7 +286,7 @@ const auditedSceneSources=new Map([
   mustInclude:['clear greeting context'],mustNotInclude:['written phrase label']
  }],
  ['IMG-Y1M01-FAREWELL-GENERIC-001',{
-  concept:'goodbye',sourcePath:'Imagens Ilustrativa/greeting-goodbye-tchau.png',
+  concept:'goodbye',sourcePath:'Imagens Ilustrativa/two_people_waving_goodbye_see_you.png',
   questions:['Y1M01-Q001','Y1M01-Q002','Y1M01-Q003','Y1M01-Q005','Y1M01-Q006',
    'Y1M01-Q007','Y1M01-Q008','Y1M01-Q009','Y1M01-Q010','Y1M01-Q011',
    'Y1M01-Q015','Y2M01-Q001','Y2M01-Q003','Y2M01-Q006','Y2M01-Q007','Y2M01-Q012'],

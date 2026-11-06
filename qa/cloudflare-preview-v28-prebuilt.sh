@@ -94,5 +94,8 @@ console.log('VISUAL_REVIEW_PREVIEW_READY='+JSON.stringify({
  addedPngs:result.addedPngs,holds:result.held,
  preservedLinks:preserved,module1:firstModule,approved:false}));
 NODE
+node --check qa/duduq-media-clarity-audit.mjs
+DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/duduq-media-clarity-audit.mjs
 cp -a "$ROOT"/. dist-pages/
+DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/duduq-media-clarity-audit.mjs --decorate-preview
 echo "VISUAL_REVIEW_BUILD_NOT_PRODUCTION_APPROVAL"
