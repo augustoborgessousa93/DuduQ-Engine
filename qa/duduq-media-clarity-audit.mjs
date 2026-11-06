@@ -137,7 +137,8 @@ const page='<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta 
  '<div class="grid" id="cards">'+catalog.map(card).join('')+'</div>'+
  '<script>document.getElementById("filter").addEventListener("input",e=>{const q=e.target.value.toLowerCase();for(const card of document.querySelectorAll("#cards article")){card.hidden=!card.textContent.toLowerCase().includes(q)}});</script></body></html>';
 writeFileSync('qa/results/duduq-media-clarity-review.html',page);
-if(process.argv.includes('--decorate-preview')){
+const productionFit=process.argv.includes('--production-media-fit');
+if(productionFit||process.argv.includes('--decorate-preview')){
  assert(existsSync(dist),'PREVIEW_DIST_MISSING');
  const css='.target-shooter-target__animal{scale:1.08;object-fit:contain}\n'+
  '.bubble-pop-screen img[src*="/content/english/assets/images/assets-duduq/"]{scale:1.04;object-fit:contain}\n'+
@@ -154,9 +155,11 @@ if(process.argv.includes('--decorate-preview')){
   html=html.replace('</head>',link+'</head>');
   writeFileSync(file,html);
  }
- const dest=path.join(dist,'media-review');mkdirSync(dest,{recursive:true});
- writeFileSync(path.join(dest,'index.html'),page);
- writeFileSync(path.join(dest,'audit.json'),JSON.stringify(audit,null,2)+'\n');
+ if(!productionFit){
+  const dest=path.join(dist,'media-review');mkdirSync(dest,{recursive:true});
+  writeFileSync(path.join(dest,'index.html'),page);
+  writeFileSync(path.join(dest,'audit.json'),JSON.stringify(audit,null,2)+'\n');
+ }
 }
 console.log('MEDIA_CLARITY_QA='+JSON.stringify({
  mappedMediaIds:audit.mappedMediaIds,distinctOriginals:catalog.length,
